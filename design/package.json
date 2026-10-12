@@ -1,0 +1,15 @@
+{
+  "name": "moyeora-camping-design",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "디자인 시안 빌드: 아이콘 스프라이트(Lucide·Tabler)와 Pretendard 서브셋을 HTML에 인라인한다.",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "@tabler/icons": "3.49.0",
+    "lucide-static": "1.55.0",
+    "pretendard": "1.3.9"
+  }
+}
