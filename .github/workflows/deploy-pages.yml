@@ -1,0 +1,57 @@
+name: Deploy to Cloudflare Pages
+
+# main에 반영되거나 매일 데이터 동기화 시각 뒤에 정적 사이트와 캘린더 구독 피드를 배포한다.
+# CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID Secret이 없으면 조립까지만 하고 배포는 건너뛴다.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "design/mockup-v2/**"
+      - "pipeline/**"
+      - "scripts/assemble-site.mjs"
+      - ".github/workflows/deploy-pages.yml"
+  schedule:
+    # 매일 03:47 KST (18:47 UTC) — 예약 규칙에서 다가오는 일정을 다시 계산
+    - cron: "47 18 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Assemble and deploy
+    runs-on: ubuntu-latest
+    env:
+      PROJECT: ${{ vars.CF_PAGES_PROJECT || 'moyeora' }}
+      HAS_CF: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build calendar feeds
+        working-directory: pipeline
+        run: |
+          npm run validate
+          npm run ics -- 120
+      - run: node scripts/assemble-site.mjs
+      - name: Skip notice
+        if: env.HAS_CF != 'true'
+        run: echo "Cloudflare Secret이 없어 배포를 건너뜁니다. docs/OWNER_TODO.md 3단계를 참고하세요."
+      - name: Ensure Pages project exists
+        if: env.HAS_CF == 'true'
+        run: npx --yes wrangler@4.92.0 pages project create "$PROJECT" --production-branch=main || true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Deploy
+        if: env.HAS_CF == 'true'
+        run: npx --yes wrangler@4.92.0 pages deploy site --project-name="$PROJECT" --branch=main --commit-dirty=true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
