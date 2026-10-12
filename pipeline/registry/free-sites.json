@@ -1,0 +1,42 @@
+{
+  "$comment": "무료 캠프 사이트. 조건 3가지(이용료 무료·취사 허용·화장실)를 항목별로 근거와 함께 기록한다. 값이 확인되지 않으면 null로 두고 추정하지 않는다. 블로그·유튜브·커뮤니티 지도는 discovery(후보 발견) 근거로만 쓰고 사실 근거(evidence)로 쓰지 않는다.",
+  "version": 1,
+  "updated_at": "2026-10-12",
+  "criteria": {
+    "fee": "운영 기관 공식 안내(공고·보도자료·누리집)에 이용료 무료가 명시되어야 한다. 한시 무료는 free_from/free_until을 적는다.",
+    "cooking": "운영 기관이 취사(버너·화로 등)를 허용한다고 명시해야 한다. 공원·하천·해수욕장·자연공원은 조례·법령상 금지구역이 많으므로 ‘금지 아님’을 허용으로 간주하지 않는다.",
+    "toilet": "현장 화장실(운영 기관 안내 또는 고캠핑 부대시설) 또는 공중화장실 데이터상 도보 300m 이내 화장실이 있어야 한다."
+  },
+  "discovery_sources": [
+    { "id": "pblfclt-open", "title": "행정안전부 전국공공시설개방정보표준데이터(유료사용여부·부대시설·위경도)", "url": "https://www.data.go.kr/data/15013117/standard.do", "tier": "A", "use": "유료사용여부=N 이면서 야영·캠핑 유형인 공공시설을 후보로 수집" },
+    { "id": "gocamping-registry", "title": "한국관광공사 전국 야영장 등록 현황(부대시설·화로대)", "url": "https://www.data.go.kr/data/15037499/fileData.do", "tier": "A", "use": "지자체 운영 야영장의 화장실·개수대·화로대 보유 확인(요금 항목 없음)" },
+    { "id": "public-toilet", "title": "행정안전부 공중화장실정보(개방시간, 2025-02부터 좌표 미제공 → 주소 지오코딩)", "url": "https://www.data.go.kr/", "tier": "A", "use": "현장 화장실이 없는 후보의 300m 이내 공중화장실 확인" },
+    { "id": "gov-notice", "title": "시·군청 공지·보도자료", "url": "https://www.korea.kr/", "tier": "B", "use": "무료 운영·취사 허용·운영 기간의 공식 근거" },
+    { "id": "community", "title": "오지캠핑지도·캠핑 카페·유튜브(후보 발견용)", "url": "https://www.5gcamp.com/", "tier": "E", "use": "후보 발견만. 사실 근거로 쓰지 않고 공식 확인 작업을 만든다" }
+  ],
+  "sites": [
+    {
+      "id": "hwaseong-gungpyeong-osolro",
+      "name": "궁평오솔로캠핑장",
+      "region": "경기 화성",
+      "address": "경기 화성시 서신면 궁평리 일대(상세 주소 확인 필요)",
+      "operator": "화성시(관광진흥과)",
+      "site_count": 54,
+      "fee": { "free": true, "free_from": "2026-10-01", "free_until": "2026-10-31", "note": "정식 개장 전 임시 운영 기간 한 달 무료" },
+      "cooking": { "allowed": null, "note": "공식 안내 확인 필요" },
+      "toilet": { "onsite": null, "nearest_m": null, "note": "공식 안내 확인 필요" },
+      "sink": null,
+      "reservation": { "method": "예약제", "where": "화성시 통합예약시스템·네이버 예약", "opens": "2026-10-05T09:00:00+09:00" },
+      "evidence": [
+        { "field": "fee", "url": "https://www.dailyn.net/news/article.html?no=115800", "title": "데일리엔뉴스 2026-10-02 ‘화성시, 궁평오솔로캠핑장 임시 개장…10월 한 달 무료’", "checked_at": "2026-10-12", "tier": "C" },
+        { "field": "reservation", "url": "https://www.dailyn.net/news/article.html?no=115800", "title": "같은 기사(예약 10.5 09:00, 화성시 통합예약·네이버)", "checked_at": "2026-10-12", "tier": "C" }
+      ],
+      "status": "NEEDS_REVIEW"
+    }
+  ],
+  "candidates": [
+    { "name": "원주 법천소공원 노지캠핑장", "region": "강원 원주", "claim": "무료·취사·화장실·개수대, 2026-05-03 개방", "found_in": "https://www.youtube.com/watch?v=49f1zxBz_n4", "tier": "E", "next": "원주시청 공원녹지과 공지로 확인" },
+    { "name": "화천 평화의댐 오토캠핑장", "region": "강원 화천", "claim": "커뮤니티 글에 ‘선착순 무료’. 화천군 직영, 화장실·개수대·샤워실 보유 보도", "found_in": "https://m.cafe.daum.net/beautiful5060/NNns/1182", "tier": "E", "next": "화천군 공지로 현재 요금 확인(보도는 유료 여부 미언급)" },
+    { "name": "서귀포 돈내코야영장", "region": "제주 서귀포", "claim": "커뮤니티 글에 ‘이용료 무료, 화장실·개수대·샤워장’", "found_in": "https://m.cafe.daum.net/beautiful5060/NNns/1182", "tier": "E", "next": "서귀포시 공지로 현재 요금·취사 규정 확인" }
+  ]
+}
