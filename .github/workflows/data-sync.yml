@@ -5,6 +5,11 @@ on:
     # 매일 03:17 KST (18:17 UTC)
     - cron: "17 18 * * *"
   workflow_dispatch:
+  # 같은 저장소의 PR에서도 실행해 인증키·수집기를 병합 전에 확인한다(포크 PR에는 Secret이 전달되지 않음).
+  pull_request:
+    paths:
+      - "pipeline/**"
+      - ".github/workflows/data-sync.yml"
 
 permissions:
   contents: read
@@ -28,6 +33,10 @@ jobs:
       - run: npm run validate
       - run: npm run calendar -- 120
       - run: npm run ics -- 120
+      - name: Check data.go.kr key (never prints the key)
+        run: npm run check:keys
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
       - name: Sync GoCamping (skips when the key secret is not set)
         run: npm run sync:gocamping
         env:

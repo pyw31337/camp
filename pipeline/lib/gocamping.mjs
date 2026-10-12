@@ -3,6 +3,11 @@
 
 export const GOCAMPING_BASE = "https://apis.data.go.kr/B551011/GoCamping";
 
+/** data.go.kr 키는 Encoding(%xx 포함)·Decoding(+,/,= 포함) 두 형태로 발급된다. 어느 쪽을 넣어도 한 번만 인코딩되게 한다. */
+export function serviceKeyParam(key) {
+  return /%[0-9A-Fa-f]{2}/.test(key) ? key : encodeURIComponent(key);
+}
+
 const OPERATOR = {
   지자체: "LOCAL_GOVERNMENT",
   국립공원: "NATIONAL_PARK",
@@ -104,8 +109,7 @@ export async function fetchAllCampgrounds({ serviceKey, fetchImpl = fetch, pageS
   for (let page = 1; page <= maxPages && all.length < total; page++) {
     const url = new URL(`${GOCAMPING_BASE}/basedList`);
     url.search = new URLSearchParams({ numOfRows: String(pageSize), pageNo: String(page), MobileOS: "ETC", MobileApp: appName, _type: "json" }).toString();
-    // serviceKey는 이미 인코딩된 키로 발급되는 경우가 많아 그대로 덧붙인다.
-    const res = await fetchImpl(`${url}&serviceKey=${serviceKey}`);
+    const res = await fetchImpl(`${url}&serviceKey=${serviceKeyParam(serviceKey)}`);
     if (!res.ok) throw new Error(`고캠핑 API HTTP ${res.status} (page ${page})`);
     const { items, totalCount } = extractItems(await res.json());
     total = totalCount;
