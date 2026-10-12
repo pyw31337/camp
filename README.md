@@ -1,4 +1,4 @@
-# 캠핑 찾기
+# 모여라 캠핑
 
 전국 공영·민간 캠핑장의 시설 사양, 판매 상품, 예약 방식, 예약 가능 상태, 날씨와 여행 정보를 출처·확인 시각과 함께 비교하는 서비스다.
 
@@ -7,7 +7,9 @@
 - [`docs/캠핑장_통합검색_예약_서비스_기획_설계.md`](docs/캠핑장_통합검색_예약_서비스_기획_설계.md): 기준 원천, 예약 정책, 상품 분류, API와 운영 설계
 - [`docs/캠핑장_미디어_지도_투어_연동_설계.md`](docs/캠핑장_미디어_지도_투어_연동_설계.md): 사진·소셜·날씨·지도·관광 연동의 권리와 갱신 원칙
 - [`db/001_initial_schema.sql`](db/001_initial_schema.sql): PostgreSQL 16+ 초기 데이터 모델
-- [`camping-atlas/`](camping-atlas): 비공개 Sites 프로토타입
+- [`camping-atlas/`](camping-atlas): 공개 Sites 프로토타입
+- [공개 프로토타입](https://moyeora-camping.magicsiren32.chatgpt.site): 모여라 캠핑 화면
+- [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md): 여행 검색 UX, 색상, 이미지, 반응형 기준
 
 ## 협업 시작하기
 

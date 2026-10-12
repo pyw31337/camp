@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "캠핑 찾기 | 전국 캠핑장 정보 허브",
+  title: "모여라 캠핑 | 전국 캠핑장 정보 허브",
   description: "전국 캠핑장 정보·예약 방식·여행 판단 정보를 출처와 수집 시각으로 비교하는 서비스 프로토타입",
   other: {
     "codex-preview": "development",
