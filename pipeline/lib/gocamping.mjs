@@ -1,12 +1,10 @@
 // 한국관광공사 고캠핑 정보 조회서비스(data.go.kr 15101933) 수집·정규화.
 // 필드명은 공개 활용 사례에서 쓰이는 응답 키 기준이며, 인증키 발급 후 실제 응답으로 고정한다(docs/RESEARCH_DATA_TO_UX.md 6장).
 
-export const GOCAMPING_BASE = "https://apis.data.go.kr/B551011/GoCamping";
+import { fetchDataGoKr, serviceKeyParam } from "./datagokr.mjs";
 
-/** data.go.kr 키는 Encoding(%xx 포함)·Decoding(+,/,= 포함) 두 형태로 발급된다. 어느 쪽을 넣어도 한 번만 인코딩되게 한다. */
-export function serviceKeyParam(key) {
-  return /%[0-9A-Fa-f]{2}/.test(key) ? key : encodeURIComponent(key);
-}
+export { serviceKeyParam };
+export const GOCAMPING_BASE = "https://apis.data.go.kr/B551011/GoCamping";
 
 const OPERATOR = {
   지자체: "LOCAL_GOVERNMENT",
@@ -109,7 +107,7 @@ export async function fetchAllCampgrounds({ serviceKey, fetchImpl = fetch, pageS
   for (let page = 1; page <= maxPages && all.length < total; page++) {
     const url = new URL(`${GOCAMPING_BASE}/basedList`);
     url.search = new URLSearchParams({ numOfRows: String(pageSize), pageNo: String(page), MobileOS: "ETC", MobileApp: appName, _type: "json" }).toString();
-    const res = await fetchImpl(`${url}&serviceKey=${serviceKeyParam(serviceKey)}`);
+    const { res } = await fetchDataGoKr(url.toString(), serviceKey, { fetchImpl });
     if (!res.ok) throw new Error(`고캠핑 API HTTP ${res.status} (page ${page})`);
     const { items, totalCount } = extractItems(await res.json());
     total = totalCount;
