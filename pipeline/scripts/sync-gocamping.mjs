@@ -13,7 +13,17 @@ if (!serviceKey) {
 
 const outDir = fileURLToPath(new URL("../out/", import.meta.url));
 const fetchedAt = toKstIso(nowInKst());
-const items = await fetchAllCampgrounds({ serviceKey });
+let items;
+try {
+  items = await fetchAllCampgrounds({ serviceKey });
+} catch (e) {
+  if (e.code === "DATA_GO_KR_UNREACHABLE") {
+    // 키 문제가 아니라 망 문제(해외 IP 차단 등). 작업 전체를 실패시키지 않고 경고로 남긴다.
+    console.log(`::warning title=data.go.kr 연결 불가::${e.message}`);
+    process.exit(0);
+  }
+  throw e;
+}
 const campgrounds = items.map((it) => normalizeCampground(it, fetchedAt));
 const ids = new Set();
 for (const c of campgrounds) {

@@ -1,6 +1,6 @@
 // 공공데이터포털 인증키로 활용신청한 서비스가 실제로 호출되는지 확인한다. 키 값은 출력하지 않는다.
 // 사용: DATA_GO_KR_SERVICE_KEY=... node scripts/check-data-go-kr.mjs
-import { serviceKeyParam } from "../lib/gocamping.mjs";
+import { fetchDataGoKr } from "../lib/datagokr.mjs";
 import { nowInKst } from "../lib/kst.mjs";
 
 const key = process.env.DATA_GO_KR_SERVICE_KEY;
@@ -38,7 +38,8 @@ function diagnose(status, text) {
 let failed = 0;
 for (const c of checks) {
   try {
-    const res = await fetch(`${c.url}&serviceKey=${serviceKeyParam(key)}`, { signal: AbortSignal.timeout(20000) });
+    const { res, protocol } = await fetchDataGoKr(c.url, key);
+    if (protocol === "http") console.log(`  (HTTPS 연결이 막혀 HTTP로 호출함)`);
     const text = await res.text();
     const problem = diagnose(res.status, text);
     if (problem) failed += 1;
