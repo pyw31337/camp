@@ -27,6 +27,7 @@ jobs:
           node-version: 22
       - run: npm run validate
       - run: npm run calendar -- 120
+      - run: npm run ics -- 120
       - name: Sync GoCamping (skips when the key secret is not set)
         run: npm run sync:gocamping
         env:

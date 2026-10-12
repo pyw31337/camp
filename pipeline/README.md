@@ -7,6 +7,7 @@
 | `registry/booking-rules.json` | 예약 제공자와 오픈 규칙. **사람이 공식 원문을 확인해 PR로 수정**한다. 규칙마다 `source.url`·`checked_at`·`tier`가 필수이고, E 등급(제보·블로그)은 등록할 수 없다. |
 | `lib/booking-windows.mjs` | 규칙 → 캘린더 이벤트 계산, 레지스트리 검증 |
 | `lib/gocamping.mjs` | 고캠핑 API 전체 페이지 수집, 상품 유형·사이트 규격·바닥 정규화 |
+| `lib/ics.mjs` | 캘린더 구독 피드(`out/ics/all.ics`, `provider-*.ics`) 생성. 하루 전·10분 전 알림 포함, 시각 미확정 일정은 종일 일정 |
 | `lib/kst.mjs` | 실행 환경 시간대와 무관한 KST 계산 |
 | `scripts/*` | `npm run validate`, `npm run calendar -- [일수] [기준일]`, `npm run sync:gocamping` |
 
@@ -15,6 +16,7 @@ cd pipeline
 npm test
 npm run validate
 npm run calendar -- 90 2026-10-12   # out/open-calendar.json
+npm run ics -- 120 2026-10-12       # out/ics/*.ics
 DATA_GO_KR_SERVICE_KEY=... npm run sync:gocamping   # out/campgrounds.json
 ```
 
