@@ -11,6 +11,7 @@
     "validate": "node scripts/validate-registry.mjs",
     "calendar": "node scripts/build-open-calendar.mjs",
     "sync:gocamping": "node scripts/sync-gocamping.mjs",
-    "ics": "node scripts/build-ics.mjs"
+    "ics": "node scripts/build-ics.mjs",
+    "check:keys": "node scripts/check-data-go-kr.mjs"
   }
 }

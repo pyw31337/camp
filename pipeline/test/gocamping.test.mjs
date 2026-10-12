@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { extractItems, fetchAllCampgrounds, normalizeCampground, parseGoCampingTime, summarize } from "../lib/gocamping.mjs";
+import { extractItems, fetchAllCampgrounds, normalizeCampground, parseGoCampingTime, serviceKeyParam, summarize } from "../lib/gocamping.mjs";
 
 // 공개 활용 사례의 응답 키를 따른 가상 표본(실제 시설 아님).
 const sample = {
@@ -60,4 +60,9 @@ test("페이지를 모두 받고 누락이 있으면 실패한다", async () => 
 test("요약 통계", () => {
   const s = summarize([normalizeCampground(sample, "x")]);
   assert.deepEqual(s, { total: 1, by_product_kind: { AUTO_PITCH: 1, GLAMPING: 1 }, by_operator: { PRIVATE: 1 }, with_site_sizes: 1 });
+});
+
+test("인증키는 Encoding·Decoding 어느 형태든 한 번만 인코딩된다", () => {
+  assert.equal(serviceKeyParam("abc%2Bdef%3D%3D"), "abc%2Bdef%3D%3D");
+  assert.equal(serviceKeyParam("abc+def/=="), "abc%2Bdef%2F%3D%3D");
 });
