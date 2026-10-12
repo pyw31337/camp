@@ -1,0 +1,130 @@
+{
+  "$comment": "예약 제공자와 예약 오픈 규칙. 사람이 공식 원문을 확인해 PR로 등록한다. tier: A 공식 API·예약시스템 공지, B 운영자 공식 페이지·FAQ, C 언론·지자체 공고 등 공식 원문 재확인 필요, D 운영자 입력, E 제보(규칙 근거로 등록 금지).",
+  "version": 1,
+  "updated_at": "2026-10-12",
+  "providers": [
+    {
+      "id": "knps",
+      "name": "국립공원공단 예약시스템",
+      "official_url": "https://reservation.knps.or.kr/",
+      "operator_type": "NATIONAL_PARK",
+      "integration": "OFFICIAL_REDIRECT",
+      "also_sold_via": ["카카오 예약", "NH올원뱅크"],
+      "notes": "공지 일부(연간 예약 일정표)가 이미지라 사람이 옮겨 적고 확인일을 갱신한다. 시설별 공사·용수 제한 판매중지 공지가 수시로 올라온다."
+    },
+    {
+      "id": "foresttrip",
+      "name": "숲나들e (자연휴양림 통합예약)",
+      "official_url": "https://www.foresttrip.go.kr/",
+      "operator_type": "NATURAL_RECREATION_FOREST",
+      "integration": "OFFICIAL_REDIRECT",
+      "notes": "국립·공립·사립 휴양림이 같은 포털을 쓰지만 시설별 위약금·감면·적용 대상이 다르다. 규칙의 적용 범위를 반드시 적는다."
+    },
+    {
+      "id": "seoul-yeyak",
+      "name": "서울시 공공서비스예약",
+      "official_url": "https://yeyak.seoul.go.kr/",
+      "operator_type": "LOCAL_GOVERNMENT",
+      "integration": "OPEN_API",
+      "notes": "서울 열린데이터광장 공공서비스예약 OpenAPI가 서비스별 접수 시작·종료 일시와 상태를 제공한다."
+    }
+  ],
+  "rules": [
+    {
+      "id": "knps-campground-lottery",
+      "provider_id": "knps",
+      "label": "국립공원 야영장 추첨 접수",
+      "summary": "이용하려는 달의 2개월 전 1일부터 5일 오전까지 신청, 5일 오후 결과 발표. 취소로 생긴 잔여 자리는 예약시스템에서 실시간 선착순.",
+      "applies_to": "국립공원 야영장 전체(보도 기준 44~47곳, 수치 재확인 필요)",
+      "schedule": {
+        "kind": "MONTHLY_LOTTERY",
+        "apply_start_day": 1,
+        "apply_start_time": null,
+        "apply_end_day": 5,
+        "apply_end_time": null,
+        "apply_end_note": "5일 오전까지",
+        "result_day": 5,
+        "result_time": null,
+        "result_note": "오후 발표",
+        "stay_month_offset": 2
+      },
+      "source": {
+        "url": "https://www.kukinews.com/article/view/kuk202607100055",
+        "title": "쿠키뉴스 2026-07 보도(국립공원공단 전면 추첨제 안내 인용). 공식 연간 예약 일정표(이미지 공지)로 재확인 필요",
+        "checked_at": "2026-10-12",
+        "tier": "C"
+      }
+    },
+    {
+      "id": "foresttrip-national-weekday-fcfs",
+      "provider_id": "foresttrip",
+      "label": "국립자연휴양림 비수기 주중 선착순 오픈",
+      "summary": "국립 자연휴양림 비수기 주중(일~목 숙박)은 이용일 6주 전 수요일 09:00부터 선착순.",
+      "applies_to": "국립 자연휴양림(공립·사립 휴양림은 시설 공지 확인)",
+      "schedule": {
+        "kind": "WEEKLY_OPEN",
+        "weekday": 3,
+        "time": "09:00",
+        "lead_weeks": 6,
+        "stay_day_types": ["SUN", "MON", "TUE", "WED", "THU"]
+      },
+      "source": {
+        "url": "https://www.foresttrip.go.kr/pot/cc/fa/selectFaqBbrssListView.do?bbrssMsterId=BBRSSMSTER_00000002&ctgryCd=&hmpgId=FRIP&nowPage=1&srwrd=%EC%A3%BC%EC%A4%91&twbbsId=",
+        "title": "숲나들e 자주 묻는 질문 — 주중 예약",
+        "checked_at": "2026-10-12",
+        "tier": "B"
+      }
+    },
+    {
+      "id": "foresttrip-national-weekend-lottery",
+      "provider_id": "foresttrip",
+      "label": "국립자연휴양림 주말·공휴일 추첨 신청",
+      "summary": "비수기 주말(금·토 숙박)과 공휴일 전날은 매월 추첨. 추첨 뒤 미결제분은 선착순으로 다시 열린다. 신청·발표 일자는 공지 재확인 필요.",
+      "applies_to": "국립 자연휴양림",
+      "schedule": {
+        "kind": "MONTHLY_LOTTERY",
+        "apply_start_day": 4,
+        "apply_start_time": "09:00",
+        "apply_end_day": 9,
+        "apply_end_time": "18:00",
+        "result_day": 10,
+        "result_time": null,
+        "stay_month_offset": 1
+      },
+      "source": {
+        "url": "https://www.foresttrip.go.kr/pot/cc/fa/selectFaqBbrssListView.do?bbrssMsterId=BBRSSMSTER_00000002&ctgryCd=&hmpgId=FRIP&nowPage=1&srwrd=%EC%A3%BC%EC%A4%91&twbbsId=",
+        "title": "숲나들e 자주 묻는 질문 — 주말 추첨·미결제분 전환 절차(일자는 공지 재확인 필요)",
+        "checked_at": "2026-10-12",
+        "tier": "C"
+      }
+    },
+    {
+      "id": "foresttrip-national-weekend-reopen",
+      "provider_id": "foresttrip",
+      "label": "국립자연휴양림 주말 미결제분 선착순",
+      "summary": "추첨 당첨 후 결제되지 않은 객실·야영데크를 선착순으로 다시 연다.",
+      "applies_to": "국립 자연휴양림",
+      "schedule": { "kind": "MONTHLY_REOPEN", "day": 15, "time": "09:00", "stay_month_offset": 1 },
+      "source": {
+        "url": "https://www.foresttrip.go.kr/pot/cc/fa/selectFaqBbrssListView.do?bbrssMsterId=BBRSSMSTER_00000002&ctgryCd=&hmpgId=FRIP&nowPage=1&srwrd=%EC%A3%BC%EC%A4%91&twbbsId=",
+        "title": "숲나들e 자주 묻는 질문 — 미결제분 전환(일자는 공지 재확인 필요)",
+        "checked_at": "2026-10-12",
+        "tier": "C"
+      }
+    },
+    {
+      "id": "seoul-yeyak-camping-window",
+      "provider_id": "seoul-yeyak",
+      "label": "서울시 공영 캠핑장 접수 기간",
+      "summary": "서비스별 접수 시작·종료 일시를 공공서비스예약 OpenAPI에서 받아 표시한다. 규칙 계산 대신 API 값을 쓴다.",
+      "applies_to": "서울시·자치구 운영 캠핑장",
+      "schedule": { "kind": "API_WINDOW" },
+      "source": {
+        "url": "https://data.seoul.go.kr/",
+        "title": "서울 열린데이터광장 — 서울시 공공서비스예약 정보 OpenAPI",
+        "checked_at": "2026-10-12",
+        "tier": "A"
+      }
+    }
+  ]
+}
