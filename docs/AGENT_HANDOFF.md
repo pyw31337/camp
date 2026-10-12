@@ -9,7 +9,9 @@
 - 배포: 공개 Sites 버전이 `https://moyeora-camping.magicsiren32.chatgpt.site`에 배포되어 있다.
 - 기준 설계: 전국 등록 야영장은 한국관광공사 고캠핑 API를 기준 모수로 삼고, 실제 재고·가격은 공식 예약 채널에서 별도 확인한다.
 - 데이터 모델: PostgreSQL 16+용 초기 스키마가 `db/001_initial_schema.sql`에 있다. 시설·구역·상품·재고·요금·예약 정책·원천 증빙·미디어 권리를 분리한다.
-- 디자인: 시안 v1이 `design/mockup/index.html`에 있다(정적 HTML, 이미지 `design/mockup/assets/`). 사용자 검토 대기. 공유용 사본은 claude.ai Artifact(비공개 링크, 소유자가 공유 설정)로 게시했다.
+- 디자인: **시안 v2**가 기준이다. 원본 `design/mockup-v2/src.html` → `design/build.mjs`가 Lucide·Tabler 스프라이트와 Pretendard 서브셋을 인라인해 `index.html` 생성. 사용자 검토 대기. v1은 `design/mockup/`에 참고용으로 남김.
+- 운영 전제: 무료 운영, 로그인 보류. 알림은 `.ics` 구독, 관심 목록은 브라우저 저장. 소유자 작업은 `docs/OWNER_TODO.md`.
+- 배포: `deploy-pages.yml`이 시안 + ics를 `site/`로 조립해 Cloudflare Pages에 배포한다. Secret이 없으면 조립만 하고 건너뛴다.
 - 파이프라인: `pipeline/`에 고캠핑 수집·정규화, 예약 규칙 레지스트리, 예약 오픈 캘린더 계산기와 테스트가 있다. `data-sync.yml`이 매일 실행되며 키가 없으면 고캠핑 단계는 건너뛴다.
 - 웹: `camping-atlas/`는 공개 Sites 프로젝트 `appgprj_6acc7a065b548191bc002202bbc24d3b`에 연결되어 있으며, 현재 공개 주소는 `https://moyeora-camping.magicsiren32.chatgpt.site`다.
 
@@ -22,6 +24,10 @@
 | 협업 | `AGENTS.md`, 프로젝트 계획, 인수인계, GitHub 비공개 원격 저장소 생성 | `gh auth status`, 원격 저장소 생성 성공 |
 | 협업 검수 | GitHub PR 템플릿과 웹 품질 검사 워크플로 추가 | PR 및 `main` 푸시에서 웹 변경 시 설치·린트·빌드 실행. 최신 실행 [`38237199381`](https://github.com/pyw31337/camp/actions/runs/38237199381) 통과 |
 | 웹 | 브랜드를 ‘모여라 캠핑’으로 변경하고 공개 Sites 버전 2를 배포. 오토캠핑·카라반·글램핑 콘셉트 이미지와 여행 검색형 UI를 추가 | `npm run lint`, `npm run build`, 320px/1440px 브라우저 검수 및 공개 URL 확인 완료 |
+| 핵심 기능·UX | 핵심 기능 3개와 무학습 원칙, 레퍼런스 5개 분석을 `docs/CORE_FEATURES_UX.md`로 작성 | 레퍼런스는 헤드리스 브라우저로 원본 이미지를 확인(Dribbble는 일반 요청을 차단) |
+| 디자인 시안 v2 | Pretendard·Lucide/Tabler·초록 4계열 팔레트로 홈(탭 검색)·찾기(지도 띠 D-day 핀)·상세(사이트 맵 툴팁·예약 카드)·캘린더(구독)·바텀시트(날짜 범위·인원 스테퍼·장비) 구현 | `npm run build` 아이콘 73개·폰트 98KB. Playwright 320/390/820/1440px·라이트/다크 4화면 가로 넘침 0·오류 0. `#detail` 앵커 스크롤, 빈 토스트 노출, 320px 조건 바 넘침을 수정 |
+| 알림(무료) | `pipeline/lib/ics.mjs`, `npm run ics` → `out/ics/all.ics`, `provider-*.ics`(하루 전·10분 전 알림, 시각 미확정은 종일) | `npm test` 18/18 통과(RFC 5545 골격·CRLF·75옥텟 접기·UID 안정성) |
+| 배포 | `scripts/assemble-site.mjs`, `.github/workflows/deploy-pages.yml`(Cloudflare Pages, Secret 없으면 건너뜀) | 로컬 조립 성공(`site/`는 gitignore). 실제 배포는 Secret 등록 후 확인 필요 |
 | 조사 | 데이터 원천별 제공 가능 정보와 핵심 베네핏 4가지를 `docs/RESEARCH_DATA_TO_UX.md`로 정리. 행안부 야영장업 인허가 API(숨은 캠핑장 발견), 서울 공공서비스예약 API(접수기간), 국립공원 전면 추첨제 전환을 새로 반영 | 원문 링크 확인. 국립공원 추첨 대상 수(44/47)·숲나들e 주말 추첨 일자는 공식 원문 재확인 필요로 표시 |
 | 아키텍처 | GitHub Actions 중심 + Cloudflare(Workers/Pages/R2)·Supabase 제안을 `docs/ARCHITECTURE.md`로 작성 | 결정 대기 항목을 PROJECT_PLAN에 반영 |
 | 디자인 시안 v1 | 홈·검색·상세·오픈 캘린더 4화면 인터랙티브 시안(`design/mockup/`), 토큰을 DESIGN_SYSTEM에 기록 | Playwright로 320/390/1280px·라이트/다크 4화면 가로 넘침 0, 콘솔 오류 0. 검색 카드 이미지 넘침·지도 라벨 겹침 1회 수정 |
@@ -31,7 +37,7 @@
 
 ## 다음 작업
 
-0. **사용자 시안 검토 반영 → `camping-atlas/` 이식.** 이식 시 시안의 예시 캠핑장 데이터 대신 `pipeline/out/open-calendar.json`과 고캠핑 정규화 결과를 사용한다. 시안의 이벤트 생성 JS는 레지스트리 계산기와 같은 규칙을 단순화한 것이므로 이식 후 삭제한다.
+0. **사용자 시안 v2 검토 반영 → `camping-atlas/` 이식.** 아이콘은 `lucide-react`·`@tabler/icons-react`, 폰트는 `pretendard` 패키지로 옮긴다. 이식 시 시안의 예시 캠핑장 데이터 대신 `pipeline/out/open-calendar.json`과 고캠핑 정규화 결과를 사용한다. 시안의 이벤트 생성 JS는 레지스트리 계산기와 같은 규칙을 단순화한 것이므로 이식 후 삭제한다.
 0-1. data.go.kr 키를 Secret에 넣은 뒤 `data-sync` 수동 실행 → 실제 응답 필드명과 `lib/gocamping.mjs` 매핑 대조, 다른 점은 테스트 표본과 함께 수정.
 0-2. 레지스트리의 C 등급 규칙(국립공원 추첨, 숲나들e 주말 추첨·재오픈)을 공식 공지 원문으로 확인해 시각·일자 확정 후 B/A로 승격.
 

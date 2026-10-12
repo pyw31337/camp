@@ -2,7 +2,7 @@
 
 > 최종 갱신: 2026-10-12 KST<br>
 > 제품명: 모여라 캠핑<br>
-> 상태: 데이터→UX 조사 완료, 디자인 시안 v1 검토 대기, 수집 파이프라인 착수
+> 상태: 핵심 기능 3개 확정, 디자인 시안 v2 검토 대기, 무료 운영 구조·배포 워크플로 준비
 
 ## 제품 목표
 
@@ -15,6 +15,16 @@
 3. 수집 시각, 원천 URL, 신뢰도, 만료 시각을 값과 함께 보관한다.
 4. 공식 시설 정보, 이용자·소셜 콘텐츠, 추천·검색 결과를 서로 대체하지 않는다.
 5. 사진은 사용권이 명시된 공식 자산 또는 플랫폼 임베드로만 노출한다.
+
+## 운영 전제 (2026-10-12 소유자 결정)
+
+- 가급적 **무료로 구축·운영**한다([아키텍처](./ARCHITECTURE.md)).
+- **로그인은 나중에** 도입 여부를 결정한다. 그 전까지 관심 목록은 브라우저 저장, 알림은 캘린더 구독(.ics).
+- 폰트 Pretendard, 아이콘 Lucide·Tabler, 브랜드 초록 계열, 색 수 최소화.
+
+## 핵심 기능 3개 (v2)
+
+[CORE_FEATURES_UX.md](./CORE_FEATURES_UX.md): ① 놓치지 않기(예약 오픈 캘린더·구독 알림) ② 맞는 곳 찾기(조건+내 장비 적합) ③ 바로 예약하기(예약 가이드·사이트 맵).
 
 ## 핵심 베네핏 (2026-10-12 확정 제안)
 
@@ -38,12 +48,13 @@
 
 ## 현 단계의 우선순위
 
-1. **디자인 시안 v1 검토** (`design/mockup/`) → 승인 후 `camping-atlas/` 앱에 이식
-2. data.go.kr 인증키 발급 → GitHub Secret `DATA_GO_KR_SERVICE_KEY` 등록 → `data-sync.yml`로 고캠핑 응답 필드 고정 (파서: `pipeline/lib/gocamping.mjs`, 완료)
-3. 예약 규칙 레지스트리 확충 (`pipeline/registry/booking-rules.json`, 국립공원·숲나들e·서울 등록 완료): C 등급 규칙을 공식 원문으로 A/B 승격, 지자체·민간 상위 30곳 추가
-4. 행안부 야영장업 인허가 데이터 수집기와 고캠핑 교차검증(숨은 캠핑장 후보 큐)
-5. 호스팅을 GitHub Actions → Cloudflare 배포로 이전([아키텍처 제안](./ARCHITECTURE.md))
-6. 오픈 알림(Web Push)과 저장목록을 위한 DB(Supabase) 도입
+1. **디자인 시안 v2 검토** (`design/mockup-v2/`) → 승인 후 `camping-atlas/` 앱에 이식
+2. 소유자 작업 [OWNER_TODO.md](./OWNER_TODO.md) 진행(키 발급·Cloudflare 토큰) → `deploy-pages.yml`로 외부 주소 개설
+3. data.go.kr 인증키 발급 → GitHub Secret `DATA_GO_KR_SERVICE_KEY` 등록 → `data-sync.yml`로 고캠핑 응답 필드 고정 (파서: `pipeline/lib/gocamping.mjs`, 완료)
+4. 예약 규칙 레지스트리 확충 (`pipeline/registry/booking-rules.json`, 국립공원·숲나들e·서울 등록 완료): C 등급 규칙을 공식 원문으로 A/B 승격, 지자체·민간 상위 30곳 추가
+5. 행안부 야영장업 인허가 데이터 수집기와 고캠핑 교차검증(숨은 캠핑장 후보 큐)
+6. 관심 캠핑장 묶음 .ics 피드(Worker), 카카오 지도·길찾기 연동
+7. 로그인·웹 푸시는 사용자 반응을 본 뒤 결정
 
 ## 수용 기준
 
@@ -56,10 +67,10 @@
 
 ## 결정 대기
 
-- 디자인 시안 v1 승인 또는 수정 방향
-- 호스팅 이전(Cloudflare 계정·API 토큰)과 ChatGPT Sites 배포 유지 여부
-- 길찾기 공급자: NAVER Directions 5(유료, 톨비 포함) vs 카카오모빌리티
-- Supabase 도입 시점(저장목록·알림 착수 시)
+- 디자인 시안 v2 승인 또는 수정 방향
+- 저장소 공개 여부(Actions 무료 한도)
+- 카카오모빌리티 길찾기 무료 한도 확인 후 캐시 정책
+- (확정) 호스팅 Cloudflare Pages, 길찾기 카카오 우선, 로그인·DB 보류
 
 - 사업자 등록·예약 중개·결제대행의 법적 역할과 약관/환불 책임 범위
 - API 키·계약·쿼터·상업적 재사용 조건의 소유 주체

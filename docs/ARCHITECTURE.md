@@ -1,72 +1,72 @@
-# 아키텍처 제안 — GitHub 중심 + 꼭 필요한 외부 서비스
+# 아키텍처 — 무료 운영 우선, GitHub 중심
 
-> 작성일: 2026-10-12 KST<br>
-> 상태: **제안** (결정 대기 항목은 `docs/PROJECT_PLAN.md`의 결정 대기에 반영)
+> 갱신일: 2026-10-12 KST (v2: 무료 운영·로그인 없음 전제로 개정)<br>
+> 소유자 작업 목록: [OWNER_TODO.md](./OWNER_TODO.md)
 
-## 1. 결론 요약
+## 1. 결론
 
-GitHub Actions로 개발·검사·데이터 수집·배포를 돌리는 방식은 이 서비스에 잘 맞는다. 캠핑장 기준 데이터와 예약 규칙은 **하루~한 달 단위로 바뀌는 데이터**라서, 스케줄 Action이 수집하고 정적 JSON으로 빌드해 배포하는 구조로 초기 서비스를 충분히 운영할 수 있다.
+로그인 없이 시작하면 **서버도 DB도 없이** 핵심 기능 3개를 모두 무료로 운영할 수 있다.
 
-다만 아래 네 가지는 GitHub만으로 안전하게 처리할 수 없어 외부 서비스가 필요하다.
+| 기능 | 어떻게 무료로 | 쓰는 서비스 |
+| --- | --- | --- |
+| 캠핑장 데이터 수집 | GitHub Actions 예약 실행(매일)이 공공 API를 호출하고 정적 JSON을 만든다 | GitHub Actions, data.go.kr |
+| 검색·상세 화면 | 정적 사이트 + 브라우저 안에서 필터링 | Cloudflare Pages |
+| 관심 캠핑장 | 브라우저 저장소(localStorage). 기기 간 동기화는 로그인 도입 시 | – |
+| **예약 오픈 알림** | `.ics` 캘린더 구독 피드를 정적 파일로 배포 → 사용자의 캘린더 앱이 하루 전·10분 전 알림 | Cloudflare Pages (정적 파일) |
+| 지도 | 카카오 지도 JavaScript SDK(도메인 제한 키) | Kakao Developers |
+| 이동시간·통행료 | 키를 숨기는 작은 서버 함수 + 10분 캐시 | Cloudflare Workers 무료 한도, 카카오모빌리티 |
+| 날씨 | Actions가 캠핑장 격자별 예보를 3시간마다 받아 정적 JSON으로 배포(사용자 수와 무관하게 호출량 고정) | 기상청 API, Cloudflare Pages |
 
-| 필요 | 왜 GitHub만으로 안 되는가 | 제안 | 비용(초기) |
-| --- | --- | --- | --- |
-| **API 키를 숨기는 서버 함수** | 길찾기(톨비)·검색 API는 비밀키가 필요해 브라우저에 넣을 수 없다. Pages는 정적 호스팅뿐이다. | **Cloudflare Workers** (현재 프로토타입도 Workers 기반 vinext) | 무료 10만 요청/일 |
-| **사용자 데이터·지리 검색 DB** | 저장목록·알림 구독·운영자 입력은 쓰기 DB가 필요하다. 기존 스키마는 PostgreSQL 16 전제다. | **Supabase**(PostgreSQL + PostGIS + Auth) — 기존 `db/001_initial_schema.sql`을 거의 그대로 사용 | 무료 플랜 → Pro $25/월 |
-| **예약 오픈 알림 발송** | Actions cron은 지연(수 분~수십 분)이 있어 “09:00 오픈” 알림에 부정확하다. | Cloudflare Workers Cron Triggers(분 단위) + Web Push, 이후 카카오 알림톡(솔라피 등 발송대행) | Web Push 무료, 알림톡 건당 과금 |
-| **이미지 저장·리사이즈** | 운영자 사진 원본을 Git에 넣으면 저장소가 비대해진다. | **Cloudflare R2** + Images 변환 | R2 10GB 무료 |
+GitHub Pages 대신 Cloudflare Pages를 쓰는 이유: 저장소가 비공개면 GitHub Pages가 유료이고, 길찾기 키를 숨기는 서버 함수(Workers)가 같은 곳에 있어야 하기 때문이다. 배포는 GitHub Actions가 한다(`deploy-pages.yml`).
 
-호스팅은 **Cloudflare Pages(또는 Workers Assets)를 GitHub Actions로 배포**하는 것을 권한다. 저장소가 비공개라 GitHub Pages는 유료 플랜(Pro 이상)이 필요하고, 어차피 Workers가 필요하므로 한 곳에 모으는 편이 단순하다.
-
-> 현재 공개 주소(`moyeora-camping.magicsiren32.chatgpt.site`)는 ChatGPT Sites에 배포돼 있어 GitHub 푸시로 갱신되지 않는다. GitHub Actions 배포로 옮기면 PR마다 미리보기 URL도 자동으로 생긴다.
-
-## 2. 단계별 구조
-
-### 1단계 — 지금 바로 (키만 있으면 됨)
+## 2. 구조
 
 ```mermaid
 flowchart LR
   subgraph GH[GitHub]
-    A1[Actions cron\n매일 03:00] -->|고캠핑·인허가 API| P[pipeline/\n수집·정규화·교차검증]
-    R[pipeline/registry/\n예약 규칙 YAML·JSON\nPR로 사람 검수] --> P
-    P --> D[data/generated/*.json\n지역별 샤드·오픈 캘린더]
-    D --> B[웹 빌드]
+    R[pipeline/registry\n예약 규칙 PR 검수] --> P
+    A[Actions cron 매일] --> P[pipeline\n수집·정규화·일정 계산]
+    P --> O[out/\ncampgrounds.json\nopen-calendar.json\nics/*.ics]
+    O --> S[scripts/assemble-site.mjs]
   end
-  B -->|deploy| CF[Cloudflare Pages\n정적 사이트]
-  U[사용자] --> CF
+  D[(data.go.kr\n고캠핑·인허가·기상청·TourAPI)] --> P
+  S -->|deploy-pages.yml| CF[Cloudflare Pages\n정적 사이트·ics 피드]
+  U[사용자 브라우저] --> CF
+  U -->|캘린더 구독| CAL[구글·애플 캘린더\n알림]
+  CAL --> CF
+  U -->|길찾기| W[Cloudflare Worker\n키 보호·캐시] --> K[카카오모빌리티]
 ```
 
-- `pipeline/`의 Node 스크립트가 고캠핑 전체 목록을 받고 상품 유형·사이트 규격을 정규화한다.
-- 예약 규칙은 `pipeline/registry/`의 파일로 관리하고 **PR 리뷰를 사람 검수 단계로 쓴다**. 규칙마다 원문 URL·확인일·신뢰 등급이 필수다(없으면 테스트 실패).
-- 오픈 캘린더 이벤트는 규칙에서 계산해 JSON으로 만든다.
-- 생성 데이터는 Git 커밋 대신 Actions 아티팩트/배포 산출물로 두는 것을 기본으로 한다(저장소 비대화 방지). 변경 이력이 필요한 레지스트리만 Git에 둔다.
+## 3. 무료 한도와 사용량 추정 (2026-10 기준, 각 서비스 공지로 재확인 필요)
 
-### 2단계 — 사용자 기능
+| 서비스 | 무료 범위(요약) | 예상 사용량 | 여유 |
+| --- | --- | --- | --- |
+| GitHub Actions | 공개 저장소 무제한 / 비공개 월 2,000분 | 동기화·배포 하루 3~5분 → 월 150분 | 충분 |
+| Cloudflare Pages | 정적 요청·대역폭 무제한, 월 500회 빌드 | 하루 1~3회 배포 | 충분 |
+| Cloudflare Workers | 하루 10만 요청 | 길찾기만, 캐시 후 수백~수천 | 충분 |
+| data.go.kr | 무료, 개발계정 1,000~10,000건/일, 활용사례 등록 시 증량 | 고캠핑 전체 적재 5~6회 호출/일 | 충분. 날씨는 격자 단위 묶음 호출로 관리 |
+| 카카오 지도·로컬 | 일 호출 한도 내 무료 | 지도 로드 = 사용자 수 | 서비스 성장 시 점검 |
+| 카카오모빌리티 길찾기 | 무료 호출 한도 확인 필요 | 캐시 적중 후 수백/일 | 한도 확인 후 캐시 TTL 조정 |
 
-- Cloudflare Worker: `/api/route`(길찾기·톨비 프록시, 응답 캐시 10분), `/api/weather`(기상청 응답 캐시 1~3시간), `/api/search`(필요 시).
-- Supabase: 저장목록, 알림 구독, 운영자 계정. Row Level Security로 사용자 데이터 분리.
-- Worker Cron(매 분): 다가오는 오픈 이벤트 → Web Push 발송.
+비용이 생기는 시점: 사용자가 많아져 카카오 한도를 넘을 때, 로그인·기기 간 동기화·푸시 알림을 도입할 때(그때도 Cloudflare D1/KV 무료 한도로 시작 가능), 자체 도메인을 살 때.
 
-### 3단계 — 운영자·예약 연동
+## 4. 로그인 없이 알림을 주는 방법
 
-- 운영자 포털(Supabase Auth + 사업자 인증), 사진 업로드(R2), 상품·요금·오픈 규칙 입력.
-- 제휴 예약 API 어댑터는 Worker 또는 별도 큐(Cloudflare Queues)로 처리.
-- 검색량이 커지면 PostGIS + 검색 인덱스(Typesense/Meilisearch Cloud 또는 OpenSearch)로 확장.
+1. **캘린더 구독(지금)**: `ics/provider-knps.ics`처럼 예약처별·캠핑장별 피드를 정적 파일로 배포한다. 사용자가 주소를 캘린더 앱에 한 번 추가하면 이후 일정 변경도 자동 반영되고, 알림은 캘린더 앱이 보낸다. 서버·개인정보 저장이 없다.
+2. **관심 캠핑장 묶음 피드(다음)**: 관심 목록 ID를 주소에 담아(`/ics/mine.ics?c=a,b,c`) Worker가 즉석에서 합친 피드를 돌려준다. 저장하는 개인정보가 없다.
+3. **웹 푸시(로그인 검토 시)**: 브라우저 푸시 구독을 Workers KV에 저장하고 Worker Cron이 발송. 이때 개인정보 처리방침이 필요하다.
 
-## 3. GitHub Actions 워크플로 구성
+## 5. 워크플로
 
 | 워크플로 | 트리거 | 하는 일 |
 | --- | --- | --- |
-| `web-quality.yml` (기존) | PR, main 푸시 | 웹 설치·린트·빌드 |
-| `pipeline-quality.yml` (신규) | PR, main 푸시 | 파이프라인 단위 테스트, 레지스트리 검증(출처·확인일 필수) |
-| `data-sync.yml` (신규) | 매일 cron + 수동 | 고캠핑·인허가 동기화, 오픈 캘린더 계산, 결과를 아티팩트로 업로드. 키가 없으면 레지스트리 기반 계산만 수행 |
-| `deploy.yml` (결정 후) | main 푸시, data-sync 완료 | Cloudflare Pages 배포, PR 미리보기 |
+| `web-quality.yml` | PR, main | `camping-atlas` 린트·빌드 |
+| `pipeline-quality.yml` | PR, main | 파이프라인 테스트, 규칙 검증, 캘린더·ics 생성 확인 |
+| `data-sync.yml` | 매일 03:17 KST, 수동 | 고캠핑 동기화(키 있을 때), 캘린더·ics 생성, 결과 아티팩트 |
+| `deploy-pages.yml` | main 반영, 매일 03:47 KST, 수동 | ics 생성 → `site/` 조립 → Cloudflare Pages 배포(Secret 없으면 건너뜀) |
 
-필요한 GitHub Secrets(이름만, 값은 저장소에 넣지 않음): `DATA_GO_KR_SERVICE_KEY`, `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, 이후 `NCP_MAPS_CLIENT_ID/SECRET` 또는 `KAKAO_REST_KEY`, `SUPABASE_*`.
+## 6. 사이트 소스 전환 계획
 
-## 4. 사용자가 결정할 것
-
-1. Cloudflare 계정 생성 및 API 토큰 발급 동의 (호스팅 이전)
-2. data.go.kr 인증키 발급(고캠핑, 인허가, 기상청, 에어코리아, 천문연, TourAPI) — 개인 계정으로 가능
-3. 길찾기 공급자: NAVER Cloud Directions 5(톨비 응답 포함, 유료) vs 카카오모빌리티(무료 쿼터 있음)
-4. Supabase 도입 시점(저장목록·알림 기능 착수 시)
+- 지금: `design/mockup-v2`(정적 시안) + `ics` 피드를 배포해 외부 주소를 먼저 만든다.
+- 다음: 시안 승인 후 `camping-atlas` 앱(Next/vinext)에 이식하고 정적 내보내기 또는 Pages Functions로 배포한다. 이식 시 예시 데이터를 `pipeline/out/*.json`으로 교체한다.
+- 현재 ChatGPT Sites 배포(`moyeora-camping.magicsiren32.chatgpt.site`)는 GitHub와 연동되지 않으므로 Cloudflare 주소가 생기면 대표 주소를 옮긴다.

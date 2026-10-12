@@ -2,7 +2,7 @@
 
 > 최종 갱신: 2026-10-12 KST<br>
 > 적용 범위: 검색·결과·상세·여행 계획 화면<br>
-> 현재 기준: **디자인 시안 v1** (`design/mockup/index.html`, 승인 대기). 승인되면 아래 ‘시각 토큰(v0)’을 v1 토큰으로 교체한다.
+> 현재 기준: **디자인 시안 v2** (`design/mockup-v2/`, 승인 대기). v1(`design/mockup/`)과 v0(현재 앱 토큰)은 참고용으로 남긴다.
 
 ## 조사에서 채택한 원칙
 
@@ -17,7 +17,48 @@
 
 참고: [Airbnb UX 사례](https://design.google/library/airbnb-invites-you-in), [Booking.com 검색 사용 사례](https://developers.booking.com/demand/docs/accommodations/search-examples), [Google의 반응형 패턴 가이드](https://design.google/library/introducing-resizer).
 
-## 디자인 시안 v1 (2026-10-12)
+## 디자인 시안 v2 (2026-10-12, 현재 기준)
+
+핵심 기능 선정과 무학습 원칙은 [CORE_FEATURES_UX.md](./CORE_FEATURES_UX.md), 레퍼런스 분석은 같은 문서 4장을 따른다.
+
+### 소스와 빌드
+- 원본: `design/mockup-v2/src.html` (아이콘은 `#l-이름`=Lucide, `#t-이름`=Tabler outline으로 참조)
+- 빌드: `cd design && npm install && npm run build` → `mockup-v2/index.html`에 쓰인 아이콘만 SVG 스프라이트로, 쓰인 글자만 Pretendard 서브셋(woff2 base64)으로 인라인. 서브셋에는 `pip install fonttools brotli` 필요.
+- 앱 이식 시: `pretendard` npm 패키지(또는 동적 서브셋 CSS)와 `lucide-react`, `@tabler/icons-react`를 쓴다.
+
+### 색 (4계열만)
+
+| 토큰 | 라이트 | 다크 | 의미·용도 |
+| --- | --- | --- | --- |
+| `--green` | `#1F9D5C` | `#3DBB78` | 브랜드·주 행동·선택·적합 표시(레퍼런스 ‘Camping App Exploration’의 숲 초록) |
+| `--green-tint` | `#E5F4EB` | `#14301F` | 선택 배경, 아이콘 받침 |
+| `--forest` | `#173F2E` | `#0F2A1F` | 제목, 어두운 버튼(필터), 구역 키 |
+| `--ember` | `#E8702F` | `#F4945A` | **‘곧 열림’(D-3 이내)과 관심 하트에만** |
+| 중립 | `#17211C` 글자 / `#57635C` 보조 / `#F4F5F2` 바탕 / `#FFFFFF` 면 / `#E1E6E0` 선 | 대응 다크값 | 나머지 전부 |
+
+상태(선착순·추첨·재오픈·상시)는 색 대신 아이콘+단어로 구분한다: 번개(`l-zap`), 티켓(`t-ticket`), 되돌리기(`l-rotate-ccw`).
+
+### 타이포
+Pretendard Variable 한 가지. 제목 800, 본문 400~600, 숫자 `tabular-nums`, 자간 -0.01~-0.045em.
+
+### 형태
+- 반경: 10 / 16 / 24 / 32px. 히어로·갤러리 32, 카드 24, 칸 16.
+- 그림자 2단계만(`--shadow-1` 카드, `--shadow-2` 떠 있는 요소: 검색 카드, 예약 카드, 시트).
+- 사진 위 정보는 유리 칩(반투명 + blur)으로. 카드 사진 모서리의 하트는 ‘노치’ 처리.
+
+### 반응형
+
+| 폭 | 변화 |
+| --- | --- |
+| 1181px+ | 카드 4열, 검색 한 줄(필드 4 + 버튼), 상세 우측 고정 예약 카드 |
+| 961–1180 | 카드 3열, 검색 2×2 + 버튼 |
+| 641–960 | 상단 메뉴 숨김 → 하단 탭 4개, 카드 2열, 지도는 ‘지도 보기’ 버튼, 상세 예약 카드 → 하단 고정 바, 시트는 바텀시트 |
+| 381–640 | 카드 1열, 히어로 수치 칩을 본문 흐름으로, 검색 필드 세로 배치 |
+| 320–380 | 글자·칸 축소, 예약 바의 보조 버튼 숨김, 갤러리 수치 칩 2개 |
+
+검수(2026-10-12, Playwright): 320·390·820·1440px, 라이트·다크, 4화면 가로 넘침 0, 콘솔 오류 0, Pretendard 로드 확인.
+
+## 디자인 시안 v1 (2026-10-12, 이전)
 
 이전 프로토타입은 서비스 설명 위주라 사용자가 무엇을 얻는지 보이지 않았다. v1은 [데이터→UX 조사](./RESEARCH_DATA_TO_UX.md)의 핵심 베네핏 네 가지를 화면 주인공으로 삼는다.
 
