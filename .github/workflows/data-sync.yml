@@ -41,6 +41,16 @@ jobs:
         run: npm run sync:gocamping
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+      - name: Restore geocode cache
+        uses: actions/cache@v4
+        with:
+          path: pipeline/.cache
+          key: geocode-${{ github.run_id }}
+          restore-keys: geocode-
+      - name: Sync public toilets and link to campgrounds
+        run: npm run sync:toilets
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
       - name: Discover free public camp sites (candidates only)
         run: npm run discover:public-free
         env:

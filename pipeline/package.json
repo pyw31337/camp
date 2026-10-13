@@ -13,6 +13,7 @@
     "sync:gocamping": "node scripts/sync-gocamping.mjs",
     "ics": "node scripts/build-ics.mjs",
     "check:keys": "node scripts/check-data-go-kr.mjs",
-    "discover:public-free": "node scripts/discover-public-free.mjs"
+    "discover:public-free": "node scripts/discover-public-free.mjs",
+    "sync:toilets": "node scripts/sync-toilets.mjs"
   }
 }
