@@ -294,10 +294,14 @@ async function replaceNearbyToiletLinks(client, payload, authoritative) {
   for (const [externalId, entry] of Object.entries(payload.campgrounds)) {
     const campgroundId = campgroundIds.get(externalId);
     if (!campgroundId) continue;
-    for (const [index, near] of (entry?.nearest ?? []).entries()) {
+    // 원천에 같은 화장실이 중복 등록되면 한 캠핑장의 목록에 같은 toilet_id가 두 번 나온다 → 처음(가까운) 것만 쓰고 순위를 다시 매긴다.
+    const seen = new Set();
+    for (const near of entry?.nearest ?? []) {
       const toiletId = toiletIds.get(near.toilet_id);
       const distance = nonNegativeInt(near.distance_m);
-      if (toiletId && distance != null) rows.push({ campground_id: campgroundId, public_toilet_id: toiletId, distance_m: distance, rank: index + 1 });
+      if (!toiletId || distance == null || seen.has(toiletId)) continue;
+      seen.add(toiletId);
+      rows.push({ campground_id: campgroundId, public_toilet_id: toiletId, distance_m: distance, rank: seen.size });
     }
   }
   await client.query("DELETE FROM campground_nearby_toilet");

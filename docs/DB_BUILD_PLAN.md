@@ -15,7 +15,7 @@
 | `db/008_campground_licence_source.sql` | LOCALDATA 일반·자동차야영장업 인허가 원천 등록 + `source_usage_policy`(검토 대기). 새 테이블 없음 | 로컬 PostgreSQL 16: 001~008 적용·재실행 |
 | `lib/localdata-campgrounds.mjs`, `scripts/sync-localdata-campgrounds.mjs` | 인허가 정규화(상태·인허가일·폐업일·EPSG:5174 좌표·업종 고유 열 보존) → 고캠핑 1:1 매칭(이름·좌표·도로명·전화). 플래그: `HIDDEN_CANDIDATE`(고캠핑에 없는 영업 중 시설), `LICENSE_CLOSED_BUT_LISTED`(인허가 폐업인데 고캠핑에 운영 중) | 단위 테스트 3 |
 | `lib/postgres-licences.mjs`, `npm run db:import-licences` | Codex의 `campground_candidate`(external_key·matched_campground_id·evidence)에 적재. 0.9 이상만 연결, 사람이 검토한 행은 덮어쓰지 않음, `ingestion_run` 기록 | 통합 테스트(실제 DB) |
-| `lib/postgres-context.mjs` 최소 수정 | **실데이터 중복 키 버그**: 같은 쉼터 두 번 등록·같은 화장실 해시가 한 INSERT에 들어가면 `ON CONFLICT DO UPDATE command cannot affect row a second time`으로 적재 전체가 실패(로컬 재현). 정규화 행을 키별 마지막 행으로 줄이는 두 줄 추가 | `test/postgres-context-duplicates.test.mjs` |
+| `lib/postgres-context.mjs` 최소 수정 | **실데이터 중복 키 버그**: 같은 쉼터 두 번 등록·같은 화장실 해시가 한 INSERT에 들어가면 `ON CONFLICT DO UPDATE command cannot affect row a second time`으로 적재 전체가 실패(로컬 재현). 정규화 행을 키별 마지막 행으로 줄이는 두 줄 추가. 이어서 실데이터 검증 단계가 **주변 화장실 연계의 같은 화장실 중복**(같은 캠핑장 목록에 같은 toilet_id 두 번)도 잡아 같은 방식으로 수정 | `test/postgres-context-duplicates.test.mjs` |
 | `data-sync.yml` | 인허가 수집 단계, 운영 DB 단계에 `db:import-licences`, **그날 실제 파일을 임시 PostgreSQL에 두 번 적재**하는 마지막 단계(고정 표본 검증이 못 잡는 실데이터 문제를 운영 전에 잡음) | CI |
 
 ## 3. Codex 확인 요청

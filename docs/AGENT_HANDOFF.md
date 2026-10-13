@@ -21,7 +21,7 @@
 두 작업이 같은 날 각각 `db/005~007`을 만들어, **main(Codex) 스키마를 기준으로 정렬**했다. 상세: [`docs/DB_BUILD_PLAN.md`](./DB_BUILD_PLAN.md).
 
 1. Claude 쪽 중복 마이그레이션·적재기(005~009, postgres-enrichment, verify-db-load, db-verify.yml)는 제거했다.
-2. **`lib/postgres-context.mjs` 최소 수정(두 줄)**: 실데이터의 중복 키(같은 쉼터 두 번 등록, 같은 화장실 해시)가 한 INSERT에 들어가면 운영 첫 적재가 `ON CONFLICT DO UPDATE command cannot affect row a second time`으로 실패한다(로컬 재현, 회귀 테스트 `test/postgres-context-duplicates.test.mjs`). 키별 마지막 행만 남긴다. 확인 부탁.
+2. **`lib/postgres-context.mjs` 최소 수정(두 줄)**: 실데이터의 중복 키(같은 쉼터 두 번 등록, 같은 화장실 해시)가 한 INSERT에 들어가면 운영 첫 적재가 `ON CONFLICT DO UPDATE command cannot affect row a second time`으로 실패한다(로컬 재현, 회귀 테스트 `test/postgres-context-duplicates.test.mjs`). 키별 마지막 행만 남긴다. 같은 이유로 `replaceNearbyToiletLinks`도 캠핑장별 중복 화장실을 한 번만 넣고 순위를 다시 매긴다(CI 실데이터 단계가 발견). 확인 부탁.
 3. `db/008_campground_licence_source.sql`(인허가 원천 등록, 새 테이블 없음)과 `db:import-licences`(Codex `campground_candidate`에 적재)를 더했다. 다음 Codex 마이그레이션은 009부터.
 4. `data-sync.yml`: 인허가 수집 단계, 운영 단계에 `db:import-licences`, 마지막에 **그날 실제 파일을 임시 PostgreSQL에 두 번 적재**하는 단계를 더했다(고정 표본 검증이 못 잡는 실데이터 문제 대비).
 5. **화면 분담 제안**: Claude는 Cloudflare 미리보기/정식 주소에 실데이터 탐색 화면(`design/explore`)을 배포한다. `camping-atlas`(GitHub Pages)도 같은 데이터(`/data/campgrounds.json`, `/data/meta.json`, 스키마는 `pipeline/lib/explore-data.mjs`)를 그대로 읽을 수 있다. 어느 쪽을 정식 서비스로 할지는 소유자 결정.
