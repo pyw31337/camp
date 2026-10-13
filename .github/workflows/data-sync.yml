@@ -55,6 +55,10 @@ jobs:
         run: npm run sync:toilets
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+      - name: Sync rest areas and drowsy shelters
+        run: npm run sync:rest-stops
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
       - name: Discover free public camp sites (candidates only)
         run: npm run discover:public-free
         env:
