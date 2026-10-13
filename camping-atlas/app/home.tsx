@@ -82,7 +82,7 @@ function formatEvent(event: PipelineEvent): BookingEvent | null {
 export default function Home() {
   const [mode, setMode] = useState<"camp" | "open">("camp");
   const [keyword, setKeyword] = useState("");
-  const [region, setRegion] = useState("전국");
+  const [region] = useState("전국");
   const [tripDate, setTripDate] = useState("");
   const [guests, setGuests] = useState("성인 2 · 차 1");
   const [gear, setGear] = useState("선택 안 함");
@@ -116,9 +116,21 @@ export default function Home() {
   }, [keyword, region, selectedCategory]);
   const toggleSaved = (id: string) => setSaved((current) => { const next = current.includes(id) ? current.filter((item) => item !== id) : [...current, id]; window.localStorage.setItem("moyeora-camping-saved", JSON.stringify(next)); return next; });
   const toggleEvent = (id: string) => setSavedEvents((current) => { const next = current.includes(id) ? current.filter((item) => item !== id) : [...current, id]; window.localStorage.setItem("moyeora-camping-open-alerts", JSON.stringify(next)); return next; });
-  const runSearch = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); scrollTo(mode === "camp" ? "#search" : "#calendar"); };
+  // 캠핑장 찾기는 전국 캠핑장 탐색 화면(explore/)의 검색 결과 페이지로 보낸다. 시범 상품 몇 건만 거르지 않는다.
+  const runSearch = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (mode !== "camp") return scrollTo("#calendar");
+    const params = new URLSearchParams();
+    if (keyword.trim() && keyword.trim() !== "전국") params.set("q", keyword.trim());
+    const gearKind: Record<string, string> = { 카라반: "t=trailer", 차박: "k=AUTO_PITCH" };
+    window.location.assign(`explore/#${[params.toString(), gearKind[gear]].filter(Boolean).join("&")}`);
+  };
   const selectCamp = (camp: Camp) => { setSelectedCamp(camp); window.requestAnimationFrame(() => scrollTo("#camp-detail")); };
-  const selectCategory = (category: string) => { setSelectedCategory(category === selectedCategory ? "전체" : category); scrollTo("#search"); };
+  const CATEGORY_KIND: Record<string, string> = { 오토캠핑: "AUTO_PITCH", 캠핑: "PITCH", 타프존: "TARP_ZONE", 쉘터존: "SHELTER_ZONE", 카라반: "CARAVAN_RENTAL", 글램핑: "GLAMPING", 캠프닉: "CAMPNIC_DAY" };
+  const selectCategory = (category: string) => {
+    if (CATEGORY_KIND[category]) { window.location.assign(`explore/#k=${CATEGORY_KIND[category]}`); return; }
+    setSelectedCategory(category === selectedCategory ? "전체" : category); scrollTo("#search");
+  };
   const dataState = catalog.sources.gocamping.state === "PUBLISHED" ? `고캠핑 ${catalog.counts.gocamping_records?.toLocaleString("ko-KR")}곳 동기화` : catalog.sources.gocamping.state === "PENDING_PERSISTENCE_REVIEW" ? "고캠핑 수집 완료 · 공개 전 권리 검토" : "고캠핑 API 동기화 대기";
 
   return <main className="may-app" id="home">
@@ -155,7 +167,7 @@ export default function Home() {
       </section>
 
       <section className="may-section" id="search">
-        <div className="may-section-head"><div><h2>공식 정보로 확인한 상품</h2><p>{keyword || selectedCategory !== "전체" ? `${results.length}개 조건 일치 상품` : "실제 시설 사진, 사이트 규격, 공식 예약 경로를 함께 봅니다."}</p></div><button type="button" onClick={() => { setKeyword(""); setSelectedCategory("전체"); setRegion("전국"); }}>필터 초기화</button></div>
+        <div className="may-section-head"><div><h2>공식 정보로 확인한 상품</h2><p>{keyword || selectedCategory !== "전체" ? `${results.length}개 조건 일치 상품` : "실제 시설 사진, 사이트 규격, 공식 예약 경로를 함께 봅니다."}</p></div><a className="may-all-link" href="explore/">전국 캠핑장 전체 보기 <ArrowRight size={14} /></a></div>
         <div className="may-camp-grid">{results.map((camp) => { const isSaved = saved.includes(camp.id); return <article className="may-camp-card" key={camp.id}><button type="button" className="may-card-image" onClick={() => selectCamp(camp)} aria-label={`${camp.campground} ${camp.product} 상세 보기`}><img src={camp.image} alt={camp.imageAlt} loading="lazy" referrerPolicy="no-referrer" /><span>운영기관 원문</span></button><button type="button" className={isSaved ? "may-card-save saved" : "may-card-save"} aria-label={`${camp.product} 관심 저장`} aria-pressed={isSaved} onClick={() => toggleSaved(camp.id)}><Heart size={18} fill={isSaved ? "currentColor" : "none"} /></button><div className="may-card-body"><span className="may-provider-tag">{camp.type}</span><button type="button" className="may-card-title" onClick={() => selectCamp(camp)}>{camp.campground}<b>{camp.product}</b></button><p><MapPin size={13} />{camp.region}</p><div className="may-card-details"><span><small>사이트</small><b>{camp.size}</b></span><span><small>인원·가격</small><b>{camp.capacity}</b></span></div><div className="may-card-footer"><a href={camp.reservationUrl} target="_blank" rel="noreferrer">공식 예약 안내 <ExternalLink size={12} /></a><button type="button" onClick={() => selectCamp(camp)}>상세 <ArrowRight size={13} /></button></div></div></article>; })}</div>
         {results.length === 0 && <div className="may-empty"><TentTree size={27} /><b>이 분류의 검증 상품은 아직 공개하지 않았습니다.</b><span>가공된 예시 대신, 공식 원천을 확인한 뒤 이 목록에 추가합니다.</span></div>}
       </section>
