@@ -4,7 +4,6 @@ import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import pg from "pg";
 import { importGoCampingSnapshot } from "../lib/postgres-gocamping.mjs";
 import { importBooking, importFreeRegistry, importLocaldataCampgrounds, importRestStops, importToilets, loadSources } from "../lib/postgres-enrichment.mjs";
 
@@ -58,6 +57,7 @@ const freeRegistry = {
 };
 
 test("PostgreSQL 전체 마이그레이션·적재·멱등·품질 규칙", { skip: !adminUrl && "TEST_DATABASE_URL 없음" }, async () => {
+  const { default: pg } = await import("pg"); // pg가 없는 환경(npm ci 생략)에서도 이 파일을 불러올 수 있게
   const dbName = `camp_it_${process.pid}`;
   const admin = new pg.Client({ connectionString: adminUrl });
   await admin.connect();
