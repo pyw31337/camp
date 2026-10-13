@@ -70,3 +70,32 @@ export function buildWebCatalog({ calendar, campgroundsPayload, publishGoCamping
     campgrounds: canPublish ? rawCampgrounds.map(publicCampground).filter((campground) => campground.external_id && campground.name) : [],
   };
 }
+
+// 고캠핑 공개본은 대용량 기준 시설 카탈로그다. 일시적인 API 실패나 취소된
+// 동기화가 이를 빈 배열로 바꾸면 검색 기능이 즉시 사라진다. 원천의 영구
+// 보존 허가가 취소된 경우에만 호출자가 명시적으로 철회를 허용한다.
+export function preservePublishedGoCampingCatalog({ candidate, existingCatalog, allowWithdrawal = false }) {
+  const existingCampgrounds = Array.isArray(existingCatalog?.campgrounds) ? existingCatalog.campgrounds : [];
+  const existingIsPublished = existingCatalog?.sources?.gocamping?.state === "PUBLISHED" && existingCampgrounds.length > 0;
+  const candidateIsPublished = candidate?.sources?.gocamping?.state === "PUBLISHED";
+
+  if (allowWithdrawal || !existingIsPublished || candidateIsPublished) {
+    return { catalog: candidate, retainedPreviousGoCampingCatalog: false };
+  }
+
+  return {
+    catalog: {
+      ...candidate,
+      counts: {
+        ...candidate.counts,
+        gocamping_records: existingCampgrounds.length,
+      },
+      sources: {
+        ...candidate.sources,
+        gocamping: existingCatalog.sources.gocamping,
+      },
+      campgrounds: existingCampgrounds,
+    },
+    retainedPreviousGoCampingCatalog: true,
+  };
+}

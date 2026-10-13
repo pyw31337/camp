@@ -52,6 +52,9 @@ jobs:
           # 공개 카탈로그에 기준 시설을 내보내려면 공공데이터포털의 보존·재배포 조건을
           # 검토한 뒤 repository variable을 정확히 true로 설정한다.
           PUBLISH_GOCAMPING_CATALOG: ${{ vars.GOCAMPING_CATALOG_PUBLISH_APPROVED }}
+          # 권리 철회처럼 공개 카탈로그를 의도적으로 내릴 때만 별도로 true를 준다.
+          # 일시적 API 실패·취소된 실행은 직전 검증 카탈로그를 유지한다.
+          ALLOW_GOCAMPING_CATALOG_WITHDRAWAL: ${{ vars.ALLOW_GOCAMPING_CATALOG_WITHDRAWAL }}
       - name: Publish refreshed calendar and approved discovery data
         if: github.event_name != 'pull_request'
         working-directory: .
