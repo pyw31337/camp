@@ -30,6 +30,9 @@ export async function overpass(query, { fetchImpl = fetch, timeoutMs = 300000, s
 
 /** 성공 결과를 캐시하고, 공개 Overpass 서버가 모두 실패하면 직전 결과를 쓴다. */
 export async function overpassCached(query, cachePath, options = {}) {
+  // OSM_EXTRACT(주 1회 Geofabrik 파일에서 뽑은 elements)가 있고 select가 주어지면 네트워크 없이 그 결과를 쓴다.
+  const extract = await loadOsmExtract();
+  if (extract && options.select) return { elements: options.select(extract.elements), server: "https://download.geofabrik.de/asia/south-korea.html", stale: false };
   const { readFile, writeFile } = await import("node:fs/promises");
   try {
     const result = await overpass(query, options);
@@ -41,4 +44,15 @@ export async function overpassCached(query, cachePath, options = {}) {
     if (!cached?.elements?.length) throw error;
     return { elements: cached.elements, server: `cache(${cached.fetched_at})`, stale: true, error: error.message };
   }
+}
+
+let extractPromise;
+/** OSM_EXTRACT 환경변수의 파일을 한 번만 읽는다. 없거나 깨졌으면 null */
+export function loadOsmExtract() {
+  extractPromise ??= (async () => {
+    const path = process.env.OSM_EXTRACT;
+    if (!path) return null;
+    try { const { readFile } = await import("node:fs/promises"); const d = JSON.parse(await readFile(path, "utf8")); return Array.isArray(d.elements) && d.elements.length ? d : null; } catch { return null; }
+  })();
+  return extractPromise;
 }
