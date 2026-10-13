@@ -149,11 +149,50 @@ test("kakaoSearch: 헤더·URL·오류 분류", async () => {
 test("pickDue: 캐시 없음 → 오래된 순, 신선한 항목 제외", () => {
   const now = Date.parse("2026-10-13T00:00:00+09:00");
   const camps = [{ id: "a" }, { id: "b" }, { id: "c" }, { id: "d" }];
-  const cache = { a: { fetched_at: "2026-10-10T00:00:00+09:00" }, b: { fetched_at: "2026-09-01T00:00:00+09:00" }, c: { fetched_at: "2026-09-20T00:00:00+09:00" } };
+  const cache = { a: { v: 2, fetched_at: "2026-10-10T00:00:00+09:00" }, b: { v: 2, fetched_at: "2026-09-01T00:00:00+09:00" }, c: { v: 2, fetched_at: "2026-09-20T00:00:00+09:00" } };
   assert.deepEqual(pickDue(camps, cache, 14, now).map((c) => c.id), ["d", "b", "c"]);
 });
 
 test("summarize", () => {
   const s = summarize({ a: { image: [1, 2], vclip: [1], blog: [] }, b: { image: [], vclip: [], cafe: [1] } });
   assert.deepEqual(s, { camps: 2, avg_images: 1, with_video_pct: 50, with_posts_pct: 50 });
+});
+
+import { buildLayout, extractPriceMentions, parseWon, pickDue as pickDue2, SOCIAL_CACHE_VERSION } from "../lib/social-search.mjs";
+
+test("후기 속 요금: 금액·사이트·계절·요일 추출, 부대요금 제외", () => {
+  assert.equal(parseWon("50,000원"), 50000);
+  assert.equal(parseWon("5만 5천원"), 55000);
+  assert.equal(parseWon("5만원"), 50000);
+  const docs = [
+    { title: "별빛캠핑장 후기", snippet: "오토캠핑 A구역 평일 45,000원 주말 성수기 6만원이었어요. 장작 10,000원 별도", url: "https://blog.example/1", src: "캠퍼", date: "2026-09-01" },
+    { title: "별빛캠핑장 글램핑", snippet: "글램핑 1박 12만원, 전기 5,000원 추가", url: "https://blog.example/2", date: "2026-08-01" },
+  ];
+  const m = extractPriceMentions(docs);
+  const wons = m.map((x) => x.won).sort((a, b) => a - b);
+  assert.deepEqual(wons, [45000, 60000, 120000]);
+  const a = m.find((x) => x.won === 45000);
+  assert.equal(a.day, "weekday");
+  assert.match(a.label, /오토|A구역/);
+  assert.equal(m.find((x) => x.won === 60000).season, "peak");
+  assert.equal(m.find((x) => x.won === 120000).label, "글램핑");
+});
+
+test("배치도: 관련 글의 이미지는 확정, 그 외 상위 3장은 추정", () => {
+  const camp = { name: "별빛캠핑장", address: { sigungu: "가평군" } };
+  const raw = {
+    layout_blog: [{ title: "별빛캠핑장 배치도 공유", contents: "사이트 배치도와 명당", url: "https://blog.example/a", blogname: "x" }],
+    layout_image: [
+      { thumbnail_url: "https://t/1", image_url: "https://i/1", doc_url: "https://blog.example/a", display_sitename: "블로그", width: 900, height: 600 },
+      { thumbnail_url: "https://t/2", image_url: "https://i/2", doc_url: "https://other/b", display_sitename: "블로그", width: 800, height: 600 },
+    ],
+  };
+  const l = buildLayout(camp, raw);
+  assert.equal(l.images.length, 2);
+  assert.equal(l.images[0].sure, true);
+  assert.equal(l.images[1].sure, false);
+  assert.equal(l.posts.length, 1);
+  // 이전 버전 캐시는 다시 받는다
+  const due = pickDue2([{ id: "1" }, { id: "2" }], { 1: { v: SOCIAL_CACHE_VERSION, fetched_at: new Date().toISOString() }, 2: { fetched_at: new Date().toISOString() } }, 14);
+  assert.deepEqual(due.map((c) => c.id), ["2"]);
 });
