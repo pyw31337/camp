@@ -34,6 +34,7 @@ const restJson = {
       source: { url: "https://data.ex.co.kr/openapi/locationinfo/locationinfoRest", tier: "A" } },
     { id: "drowsy-abc", kind: "DROWSY_SHELTER", name: "테스트졸음쉼터", lat: 36.5, lng: 127.5, facilities: { toilet: { available: true, fee: "FREE" } }, source: { tier: "A" } },
     { id: "osm-way-9", kind: "REST_AREA", name: "쉼터", lat: 35.5, lng: 128.5, facilities: {}, source: { tier: "B" } },
+    { id: "drowsy-abc", kind: "DROWSY_SHELTER", name: "테스트졸음쉼터(중복 등록)", lat: 36.5, lng: 127.5, facilities: { toilet: { available: true, fee: "FREE" } }, source: { tier: "A" } },
   ],
 };
 const registry = {

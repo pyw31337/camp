@@ -190,18 +190,21 @@ export async function importRestStops(db, json, source) {
   const cols = ["data_source_id", "external_id", "kind", "name", "road_name", "direction", "address", "phone", "brands", "truck_rest", "maintenance",
     "parking_spaces", "latitude", "longitude", "source_url", "source_tier", "attribution", "observed_at", "expires_at", "last_seen_at"];
   const upd = cols.filter((c) => !["data_source_id", "external_id"].includes(c)).map((c) => `${c} = EXCLUDED.${c}`).join(", ");
-  const written = await insertMany(db, "INSERT INTO rest_stop", cols, stops, `ON CONFLICT (data_source_id, external_id) DO UPDATE SET ${upd}, updated_at = now()`);
+  // 원천 파일 안에 같은 ID가 두 번 나오는 경우가 있다(같은 쉼터의 중복 등록 등). 한 INSERT 안의 중복은 PostgreSQL이 거부하므로 마지막 행만 쓴다.
+  const last = (rows, key) => [...new Map(rows.map((r) => [key(r), r])).values()];
+  const stopRows = last(stops, (r) => `${r.data_source_id}|${r.external_id}`);
+  const written = await insertMany(db, "INSERT INTO rest_stop", cols, stopRows, `ON CONFLICT (data_source_id, external_id) DO UPDATE SET ${upd}, updated_at = now()`);
 
   const { rows: ids } = await db.query("SELECT id, data_source_id, external_id FROM rest_stop");
   const idOf = new Map(ids.map((r) => [`${r.data_source_id}|${r.external_id}`, r.id]));
   const withId = (rows) => rows.map((r) => ({ ...r, rest_stop_id: idOf.get(`${r.data_source_id}|${r.external_id}`) })).filter((r) => r.rest_stop_id);
-  const facRows = withId(facilities);
+  const facRows = last(withId(facilities), (r) => `${r.rest_stop_id}|${r.facility}`);
   const facWritten = await insertMany(db, "INSERT INTO rest_stop_facility", ["rest_stop_id", "facility", "available", "fee", "fee_basis", "observed_at", "expires_at"], facRows,
     "ON CONFLICT (rest_stop_id, facility) DO UPDATE SET available = EXCLUDED.available, fee = EXCLUDED.fee, fee_basis = EXCLUDED.fee_basis, observed_at = EXCLUDED.observed_at, expires_at = EXCLUDED.expires_at");
-  const priceRows = withId(prices).filter((r) => [r.gasoline_krw, r.diesel_krw, r.lpg_krw].some((v) => v != null) && /^https?:\/\//.test(r.source_url ?? ""));
+  const priceRows = last(withId(prices), (r) => `${r.rest_stop_id}|${r.observed_at}`).filter((r) => [r.gasoline_krw, r.diesel_krw, r.lpg_krw].some((v) => v != null) && /^https?:\/\//.test(r.source_url ?? ""));
   const priceWritten = await insertMany(db, "INSERT INTO fuel_price_observation", ["rest_stop_id", "station_name", "brand", "gasoline_krw", "diesel_krw", "lpg_krw", "source_url", "observed_at", "expires_at"], priceRows,
     "ON CONFLICT (rest_stop_id, observed_at) DO NOTHING");
-  return { stops_read: (json.stops ?? []).length, stops_written: written, facilities_written: facWritten, fuel_prices_written: priceWritten, skipped };
+  return { stops_read: (json.stops ?? []).length, stops_unique: stopRows.length, stops_written: written, facilities_written: facWritten, fuel_prices_written: priceWritten, skipped };
 }
 
 // ── 예약 규칙·일정 ─────────────────────────────────────────────────────────
@@ -241,7 +244,7 @@ export async function importBooking(db, registry, calendar) {
   const cols = ["event_key", "booking_rule_id", "event_type", "occurs_at", "time_known", "label", "stay_from", "stay_to", "stay_day_types", "note",
     "needs_verification", "source_url", "source_tier", "computed_at", "expires_at"];
   const upd = cols.filter((c) => c !== "event_key").map((c) => `${c} = EXCLUDED.${c}`).join(", ");
-  const written = await insertMany(db, "INSERT INTO booking_event", cols, events, `ON CONFLICT (event_key) DO UPDATE SET ${upd}`);
+  const written = await insertMany(db, "INSERT INTO booking_event", cols, [...new Map(events.map((e) => [e.event_key, e])).values()], `ON CONFLICT (event_key) DO UPDATE SET ${upd}`);
   // 이번 계산 범위 안인데 결과에 없는 미래 일정은 규칙이 바뀐 것이므로 지운다.
   const from = calendar.range?.from ?? at;
   const removed = await db.query("DELETE FROM booking_event WHERE occurs_at >= $1 AND NOT (event_key = ANY($2))", [from, events.map((e) => e.event_key)]);
@@ -335,7 +338,7 @@ export async function importLocaldataCampgrounds(db, json, source) {
     };
   });
   const cols = ["campground_id", "source_code", "external_id", "external_name", "external_address", "latitude", "longitude", "match_score", "match_evidence", "state", "observed_at"];
-  const written = await insertMany(db, "INSERT INTO entity_link", cols, rows, `ON CONFLICT (source_code, external_id) DO UPDATE SET
+  const written = await insertMany(db, "INSERT INTO entity_link", cols, [...new Map(rows.map((r) => [`${r.source_code}|${r.external_id}`, r])).values()], `ON CONFLICT (source_code, external_id) DO UPDATE SET
       external_name = EXCLUDED.external_name, external_address = EXCLUDED.external_address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude,
       match_evidence = EXCLUDED.match_evidence, observed_at = EXCLUDED.observed_at, updated_at = now(),
       campground_id = CASE WHEN entity_link.reviewed_at IS NOT NULL THEN entity_link.campground_id ELSE EXCLUDED.campground_id END,
