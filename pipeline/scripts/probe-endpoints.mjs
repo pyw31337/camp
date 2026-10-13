@@ -6,13 +6,12 @@ const key = process.env.DATA_GO_KR_SERVICE_KEY;
 if (!key) { console.log("키 없음 — 건너뜀"); process.exit(0); }
 const q = "pageNo=1&numOfRows=1&type=json";
 const groups = {
-  "행안부 공중화장실정보": ["public_restroom_info", "public_restrooms", "PublicRestroomInfo", "public_toilet_info"],
-  "행안부 일반야영장업": ["general_campgrounds", "general_campground", "GeneralCampgrounds"],
-  "행안부 자동차야영장업": ["auto_campgrounds", "car_campgrounds", "automobile_campgrounds"],
+  "행안부 공중화장실정보": ["public_restroom", "public_restrooms_info", "restroom_info", "public_toilets", "public_toilet", "toilet_info", "public_restroom_infos", "pblc_restroom_info", "public_rest_rooms"],
+  "행안부 일반야영장업(확인됨)": ["general_campgrounds"],
 };
 for (const [name, slugs] of Object.entries(groups)) {
   for (const slug of slugs) {
-    for (const op of ["info", "getInfo", ""]) {
+    for (const op of ["info"]) {
       const url = `https://apis.data.go.kr/1741000/${slug}${op ? "/" + op : ""}?${q}`;
       try {
         const { res } = await fetchDataGoKr(url, key, { timeoutMs: 15000 });
