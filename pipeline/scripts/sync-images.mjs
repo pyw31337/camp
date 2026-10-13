@@ -18,7 +18,7 @@ import { fileURLToPath } from "node:url";
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
 import { GOCAMPING_BASE } from "../lib/gocamping.mjs";
 import {
-  DEFAULTS, IMAGE_CREDIT, candidateUrls, VARIANTS, desiredImages, downloadImage, hash8, heroIndex, mapLimit, mergeManifest,
+  DEFAULTS, IMAGE_CREDIT, candidateUrls, VARIANTS, desiredImages, downloadImage, hash8, heroIndex, limitManifestPerCamp, mapLimit, mergeManifest,
   orphanFiles, parseImageListResponse, planDownloads, safeCampId, selectImageListTargets, variantPaths,
 } from "../lib/images.mjs";
 
@@ -36,6 +36,8 @@ const PER_CAMP = envNum("IMAGE_MAX_PER_CAMP", DEFAULTS.maxPerCamp);
 const PRUNE = process.env.IMAGE_PRUNE !== "0";
 const MAX_BYTES = envNum("IMAGE_MAX_BYTES", DEFAULTS.maxBytes);
 const BUDGET = envNum("IMAGE_BUDGET_MB", 900) * 1024 * 1024;
+// 0이면 기존 갤러리를 유지한다. 초기 전국 커버리지가 부족할 때만 워크플로가 1로 준다.
+const MAX_STORED_PER_CAMP = envNum("IMAGE_MAX_STORED_PER_CAMP", 0);
 
 /** MEDIA_DIR/camps 아래 파일 [{rel, size}] */
 async function listMedia() {
@@ -64,7 +66,16 @@ const { campgrounds = [] } = await readJson(CAMP_JSON, {});
 await mkdir(MEDIA_DIR, { recursive: true });
 const startedAt = new Date().toISOString();
 const manifestPath = join(MEDIA_DIR, "manifest.json");
-const prev = await readJson(manifestPath, { camps: {} });
+const previousManifest = await readJson(manifestPath, { camps: {} });
+const prev = limitManifestPerCamp(previousManifest, MAX_STORED_PER_CAMP);
+let prePruned = 0;
+if (MAX_STORED_PER_CAMP > 0) {
+  for (const f of orphanFiles(prev, (await listMedia()).map((x) => x.rel))) {
+    await rm(join(MEDIA_DIR, f), { force: true });
+    prePruned++;
+  }
+  if (prePruned) console.log(`전국 사진 커버리지 우선: 시설당 ${MAX_STORED_PER_CAMP}장으로 ${prePruned}개 파일을 정리`);
+}
 const fileExists = (rel) => typeof rel === "string" && existsSync(join(MEDIA_DIR, rel));
 const hasHostedPhoto = (id) => (prev.camps?.[id] ?? []).some((e) => fileExists(e.thumb) && fileExists(e.large));
 
@@ -103,7 +114,10 @@ if (key && LIST_MAX > 0) {
 // 2) 다운로드 계획
 const failuresPath = join(MEDIA_DIR, "failures.json");
 const failures = await readJson(failuresPath, {});
-const desired = desiredImages(campgrounds, cache, { maxPerCamp: PER_CAMP });
+const desired = desiredImages(campgrounds, cache, {
+  maxPerCamp: PER_CAMP,
+  maxTotalPerCamp: MAX_STORED_PER_CAMP,
+});
 const { jobs, pending, alreadyDone } = planDownloads(desired, prev, { fileExists, failures, maxDownloads: MAX_DL });
 console.log(`원하는 사진 ${[...desired.values()].reduce((n, l) => n + l.length, 0)}장(${desired.size}곳), 이미 있음 ${alreadyDone}, 남은 ${pending}, 이번 실행 ${jobs.length}`);
 
@@ -160,11 +174,12 @@ if (jobs.length) {
 }
 
 // 4) 매니페스트·색인
-const manifest = mergeManifest(prev, desired, results, {
+const mergedManifest = mergeManifest(prev, desired, results, {
   now: startedAt,
   preserveUnseen: true,
   refreshedImageListIds: [...refreshedImageListIds],
 });
+const manifest = limitManifestPerCamp(mergedManifest, MAX_STORED_PER_CAMP);
 await writeJsonAtomic(manifestPath, manifest);
 await writeJsonAtomic(join(MEDIA_DIR, "hero.json"), { generated_at: startedAt, credit: IMAGE_CREDIT, thumbs: heroIndex(manifest) });
 // 원하는 목록에서 빠진 원본의 실패 기록은 버린다.
@@ -173,7 +188,7 @@ for (const k of Object.keys(failures)) if (!wanted.has(k)) delete failures[k];
 await writeJsonAtomic(failuresPath, failures);
 
 // 5) 정리(매니페스트가 참조하지 않는 파일)
-let pruned = 0;
+let pruned = prePruned;
 if (PRUNE) {
   const files = (await listMedia()).map((f) => f.rel);
   for (const f of orphanFiles(manifest, files)) { await rm(join(MEDIA_DIR, f), { force: true }); pruned++; }

@@ -48,6 +48,7 @@ pipeline/out/campgrounds.json ──┐
 - 이미 매니페스트에 있고 파일이 있는 원본은 다시 받지 않는다. 같은 바이트면 같은 파일명이라 기존 파일을 덮어쓰지 않는다.
 - 우선순위: **자체 호스팅 사진이 0장인 캠핑장**의 `imageList`를 먼저 조회하고, 그다음 캐시가 없거나 오래된 시설을 조회한다. 다운로드도 사진이 0장인 시설의 대표 사진 → 나머지 대표 사진 → imageList 추가 사진 순이다.
 - 추가 사진은 캐시에 없는 시설도 있으므로 이번 실행에서 `imageList`를 재확인하지 않은 기존 항목은 매니페스트에 유지한다. 해당 시설을 재확인하면 새 목록에 없는 추가 사진과 이전 대표 사진은 정리한다.
+- `media`가 900MB 상한에 닿은 초기 보강 단계에서는 시설당 첫 공식 사진 1장만 남겨 빈 시설을 우선 채운다. 이 정리는 `media` 브랜치에만 적용되고, 전국 커버리지를 확인한 뒤 별도 갤러리 확장 작업에서 늘린다.
 - 실패한 원본은 `failures.json`에 기록하고 7일 동안 재시도하지 않는다.
 
 ### 환경 변수
@@ -60,6 +61,7 @@ pipeline/out/campgrounds.json ──┐
 | `IMAGE_LIST_MAX_CALLS` | 900 | 스크립트의 imageList 호출 상한. Actions의 `media-backfill` 프로필은 공유 일일 한도를 고려해 880으로 지정한다. 캐시 `pipeline/.cache/gocamping-images.json`, 30일 |
 | `IMAGE_MAX_DOWNLOADS` | 1500 | 실행당 다운로드 상한 |
 | `IMAGE_MAX_PER_CAMP` | 6 | imageList 추가 사진 상한 |
+| `IMAGE_MAX_STORED_PER_CAMP` | 0(제한 없음) | `1`이면 기존 갤러리도 시설당 첫 사진 하나로 정리해 저장 공간을 사진 없는 시설에 돌린다. Actions `media-backfill`에서만 1 |
 | `IMAGE_MAX_BYTES` | 8388608 | 원본 1장 상한 |
 | `IMAGE_BUDGET_MB` | 900 | `camps/` 총용량 상한(Pages 1GB 안) |
 | `IMAGE_PRUNE` | 1 | `0`이면 고아 파일을 지우지 않음 |
@@ -176,7 +178,7 @@ pipeline/out/campgrounds.json ──┐
 
 `data-sync.yml`은 고캠핑 기준 목록을 받은 직후 사진을 먼저 동기화한다. 2026-10-13 실행에서 TourAPI 보조 수집이 같은 `data.go.kr` 일일 한도를 소진해 imageList가 0건으로 끝난 사실을 확인했기 때문이다.
 
-- 기본 `auto`: 수·금은 `media-backfill`(imageList 최대 880회, TourAPI 호출 0회), 나머지는 `tour-enrichment`, 일요일은 `free-audit`으로 교차한다.
+- 기본 `auto`: 수·금은 `media-backfill`(imageList 최대 880회, 시설당 1장으로 공간 재균형, TourAPI 호출 0회), 나머지는 `tour-enrichment`, 일요일은 `free-audit`으로 교차한다.
 - 수동 실행은 `sync_profile`에서 `media-backfill`, `tour-enrichment`, `free-audit`을 명시할 수 있다. 초기 사진 보강이 필요하면 `media-backfill`만 실행한다.
 - `tour-enrichment`은 주변 150·요금 소개 220·상품 500 호출 상한으로, 사진 호출은 0으로 둔다. 실제 호출 수와 한도 오류는 Actions 로그에서 확인한다.
 
@@ -193,6 +195,6 @@ pipeline/out/campgrounds.json ──┐
 
 ## 5. 검증
 
-- `cd pipeline && node --test test/images.test.mjs` — 13개 통과(네트워크·sharp 없이): 사진 공백 우선 조회와 재확인 전 사진 보존/재확인 뒤 정리 회귀를 포함.
+- `cd pipeline && node --test test/images.test.mjs` — 14개 통과(네트워크·sharp 없이): 사진 공백 우선 조회, 시설당 첫 사진으로의 공간 재균형, 재확인 전 사진 보존/재확인 뒤 정리 회귀를 포함.
 - 실변환(2026-10-13, `npm i --no-save sharp@0.35.5`, package.json·lock 변경 없음): 고캠핑 c_no=1066 사진 2장. thumb_1000 경유 1000×666 → 16KB/4KB, 9MB 원본(`IMAGE_MAX_BYTES=12000000`) → 1280×853 171KB / 22KB. EXIF 없음 확인, 두 번째 실행에서 다운로드 0건(증분).
 - 기본 8MB 상한에서는 실측 9MB 원본이 건너뛰어진다 → thumb_1000이 없는 사진이 많으면 `IMAGE_MAX_BYTES`를 12MB로 올리는 것을 검토.

@@ -86,25 +86,26 @@ jobs:
           fi
           case "$profile" in
             media-backfill)
-              image_calls=880; nearby_calls=0; fee_calls=0; product_calls=0; collect_tour=false; collect_free=false ;;
+              image_calls=880; max_stored_per_camp=1; nearby_calls=0; fee_calls=0; product_calls=0; collect_tour=false; collect_free=false ;;
             tour-enrichment)
-              image_calls=0; nearby_calls=150; fee_calls=220; product_calls=500; collect_tour=true; collect_free=false ;;
+              image_calls=0; max_stored_per_camp=0; nearby_calls=150; fee_calls=220; product_calls=500; collect_tour=true; collect_free=false ;;
             free-audit)
-              image_calls=0; nearby_calls=100; fee_calls=180; product_calls=420; collect_tour=true; collect_free=true ;;
+              image_calls=0; max_stored_per_camp=0; nearby_calls=100; fee_calls=180; product_calls=420; collect_tour=true; collect_free=true ;;
             verify)
-              image_calls=0; nearby_calls=0; fee_calls=0; product_calls=0; collect_tour=false; collect_free=false ;;
+              image_calls=0; max_stored_per_camp=0; nearby_calls=0; fee_calls=0; product_calls=0; collect_tour=false; collect_free=false ;;
             *) echo "알 수 없는 sync_profile: $profile" >&2; exit 1 ;;
           esac
           {
             echo "profile=$profile"
             echo "image_calls=$image_calls"
+            echo "max_stored_per_camp=$max_stored_per_camp"
             echo "nearby_calls=$nearby_calls"
             echo "fee_calls=$fee_calls"
             echo "product_calls=$product_calls"
             echo "collect_tour=$collect_tour"
             echo "collect_free=$collect_free"
           } >> "$GITHUB_OUTPUT"
-          echo "data.go.kr profile=$profile imageList=$image_calls nearby=$nearby_calls fee=$fee_calls products=$product_calls free_audit=$collect_free"
+          echo "data.go.kr profile=$profile imageList=$image_calls photos_per_camp=$max_stored_per_camp nearby=$nearby_calls fee=$fee_calls products=$product_calls free_audit=$collect_free"
       - name: Sync GoCamping (skips when the key secret is not set)
         run: npm run sync:gocamping
         env:
@@ -150,6 +151,7 @@ jobs:
           MEDIA_DIR: ${{ steps.media.outputs.dir }}
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
           IMAGE_LIST_MAX_CALLS: ${{ steps.source-plan.outputs.image_calls }}
+          IMAGE_MAX_STORED_PER_CAMP: ${{ steps.source-plan.outputs.max_stored_per_camp }}
           IMAGE_MAX_DOWNLOADS: ${{ github.event_name == 'pull_request' && '20' || '1500' }}
           IMAGE_MAX_PER_CAMP: ${{ vars.IMAGE_MAX_PER_CAMP || '6' }}
           IMAGE_MAX_BYTES: '12000000'

@@ -150,7 +150,12 @@ export function selectImageListTargets(campIds, cache, {
  * 캠핑장마다 원하는 원본 목록(순서 = 표시 순서): 대표 사진(firstImageUrl) 다음 imageList 사진 maxPerCamp장.
  * @returns {Map<string, Array<{src_url, source}>>}
  */
-export function desiredImages(campgrounds, imageListCache = {}, { maxPerCamp = DEFAULTS.maxPerCamp } = {}) {
+export function desiredImages(campgrounds, imageListCache = {}, {
+  maxPerCamp = DEFAULTS.maxPerCamp,
+  // 0이면 전체 갤러리를 원한다. 1이면 대표 1장(대표가 없으면 imageList 첫 사진)만
+  // 남겨 초기 전국 커버리지를 먼저 완성한다.
+  maxTotalPerCamp = 0,
+} = {}) {
   const out = new Map();
   for (const c of campgrounds) {
     const id = safeCampId(c?.external_id?.id);
@@ -161,7 +166,7 @@ export function desiredImages(campgrounds, imageListCache = {}, { maxPerCamp = D
     if (hero && isOfficialImageUrl(hero)) { list.push({ src_url: hero, source: "gocamping" }); seen.add(hero); }
     let extra = 0;
     for (const img of imageListCache?.[id]?.images ?? []) {
-      if (extra >= maxPerCamp) break;
+      if (extra >= maxPerCamp || (maxTotalPerCamp > 0 && list.length >= maxTotalPerCamp)) break;
       const u = normalizeSrcUrl(img.imageUrl);
       if (!u || seen.has(u) || !isOfficialImageUrl(u)) continue;
       seen.add(u);
@@ -189,7 +194,8 @@ export function planDownloads(desired, manifest, { fileExists = () => true, fail
     list.forEach((img, i) => {
       if (done.has(img.src_url)) return;
       if (ageDays(failures[img.src_url]?.last_at, now) < failureRetryDays) return;
-      const tier = img.source === "gocamping" ? (hasAny ? 1 : 0) : 2;
+      // 대표 URL이 없는 시설도 imageList의 첫 사진이면 최우선으로 보강한다.
+      const tier = hasAny ? (img.source === "gocamping" ? 1 : 3) : (i === 0 ? 0 : 2);
       jobs.push({ campId: id, ...img, tier, order: i });
     });
   }
@@ -250,6 +256,20 @@ export function orphanFiles(manifest, existingFiles) {
   const keep = new Set();
   for (const entries of Object.values(manifest?.camps ?? {})) for (const e of entries) { keep.add(e.thumb); keep.add(e.large); }
   return existingFiles.filter((f) => f.startsWith("camps/") && f.endsWith(".webp") && !keep.has(f));
+}
+
+/**
+ * 전체 사진 수보다 시설 커버리지를 먼저 늘릴 때 쓰는 비파괴적 매니페스트 뷰.
+ * maxImagesPerCamp가 0이면 제한하지 않는다. 첫 항목은 대표 사진 또는 imageList의
+ * 첫 공식 사진이므로, 1로 제한하면 사진 없는 시설에 저장 공간을 우선 배정할 수 있다.
+ */
+export function limitManifestPerCamp(manifest, maxImagesPerCamp = 0) {
+  const max = Math.floor(Number(maxImagesPerCamp));
+  if (!(max > 0)) return manifest;
+  const camps = Object.fromEntries(Object.entries(manifest?.camps ?? {})
+    .map(([id, entries]) => [id, (entries ?? []).slice(0, max)])
+    .filter(([, entries]) => entries.length));
+  return { ...manifest, camps };
 }
 
 /** 목록 화면용 작은 색인: { [id]: thumb 상대 경로 } (대표 1장). */

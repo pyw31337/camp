@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   candidateUrls, desiredImages, downloadImage, estimateBytes, fitWidth, hash8, heroIndex, isOfficialImageUrl, mapLimit, mergeManifest,
-  normalizeSrcUrl, orphanFiles, parseImageListResponse, planDownloads, safeCampId, selectImageListTargets, variantPaths,
+  limitManifestPerCamp, normalizeSrcUrl, orphanFiles, parseImageListResponse, planDownloads, safeCampId, selectImageListTargets, variantPaths,
 } from "../lib/images.mjs";
 
 // 가상 표본(실제 시설·실제 파일 아님).
@@ -85,6 +85,9 @@ test("원하는 사진 목록: 대표 사진 + imageList(상한·중복·비공�
     { src_url: G("x2"), source: "gocamping-imageList" },
   ]);
   assert.deepEqual(d.get("300"), [{ src_url: G("y1"), source: "gocamping-imageList" }]);
+  const coverageFirst = desiredImages(camps, cache, { maxPerCamp: 2, maxTotalPerCamp: 1 });
+  assert.deepEqual(coverageFirst.get("100"), [{ src_url: G("hero100"), source: "gocamping" }]);
+  assert.deepEqual(coverageFirst.get("300"), [{ src_url: G("y1"), source: "gocamping-imageList" }]);
 });
 
 const entry = (id, src, h, extra = {}) => ({ src_url: src, ...variantPaths(id, h), w: 1280, h: 960, source: "gocamping", credit: "한국관광공사 고캠핑", checked_at: "2026-10-01T00:00:00Z", ...extra });
@@ -111,6 +114,11 @@ test("다운로드 계획: 이미 있는 것 건너뛰기·우선순위·실행�
   const later = planDownloads(desired, manifest, { fileExists: exists, failures, now: Date.parse("2026-10-20T00:00:00Z") });
   assert.ok(later.jobs.some((j) => j.src_url === G("e2")));
   assert.equal(planDownloads(desired, manifest, { maxDownloads: 0 }).jobs.length, 0);
+  const imageOnly = planDownloads(new Map([
+    ["4", [{ src_url: G("only-list"), source: "gocamping-imageList" }]],
+    ["1", [{ src_url: G("later-extra"), source: "gocamping-imageList" }]],
+  ]), manifest, { fileExists: () => true, maxDownloads: 10 });
+  assert.equal(imageOnly.jobs[0].campId, "4");
 });
 
 test("매니페스트 병합: 재사용·새 결과·빠진 캠핑장/원본 제거·순서 유지", () => {
@@ -149,6 +157,17 @@ test("매니페스트: 아직 재조회하지 않은 imageList 사진은 유지�
   const m = mergeManifest(prev, desired, results, { preserveUnseen: true, refreshedImageListIds: ["2"] });
   assert.deepEqual(m.camps["1"].map((x) => x.src_url), [G("h1"), G("old-extra")]);
   assert.deepEqual(m.camps["2"].map((x) => x.src_url), [G("new-hero")]);
+});
+
+test("전국 커버리지 우선일에는 시설당 첫 공식 사진만 남긴다", () => {
+  const manifest = { generated_at: "now", camps: {
+    "1": [entry("1", G("h1"), "aaaaaaaa"), entry("1", G("x1"), "bbbbbbbb")],
+    "2": [entry("2", G("h2"), "cccccccc")],
+  } };
+  const limited = limitManifestPerCamp(manifest, 1);
+  assert.deepEqual(limited.camps["1"].map((x) => x.src_url), [G("h1")]);
+  assert.deepEqual(limited.camps["2"].map((x) => x.src_url), [G("h2")]);
+  assert.equal(limitManifestPerCamp(manifest, 0), manifest);
 });
 
 test("동시성 제한 map", async () => {
