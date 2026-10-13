@@ -51,9 +51,12 @@ jobs:
       - name: Restore geocode cache
         uses: actions/cache@v4
         with:
-          path: pipeline/.cache/geocode-toilets.json
-          key: geocode-v2-${{ github.run_id }}
-          restore-keys: geocode-v2-
+          path: |
+            pipeline/.cache/geocode-toilets.json
+            pipeline/.cache/osm-toilets.json
+            pipeline/.cache/osm-rest-stops.json
+          key: geocode-v3-${{ github.run_id }}
+          restore-keys: geocode-v3-
       - name: Sync public toilets and link to campgrounds
         run: npm run sync:toilets
         env:

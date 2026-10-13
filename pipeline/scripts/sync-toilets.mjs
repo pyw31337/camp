@@ -9,7 +9,7 @@ import { geocodeAll, kakaoGeocode } from "../lib/geocode.mjs";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
 import { linkNearbyToilets } from "../lib/nearby-toilets.mjs";
 import { OVERPASS_QUERY, mergeToiletSources, normalizeOsmToilet } from "../lib/osm-toilets.mjs";
-import { overpass } from "../lib/overpass.mjs";
+import { overpassCached } from "../lib/overpass.mjs";
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
 import { fromStandardApi, geocodeQuery, normalizeToilet } from "../lib/toilets.mjs";
 import { listZip, readZipEntry } from "../lib/zip.mjs";
@@ -29,10 +29,10 @@ const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 /** 응답 본문을 CSV 바이트로: ZIP이면 화장실 파일을 꺼낸다(메모리에서, 캐시에 넣지 않음). */
 async function toCsvBytes(buf, tag) {
   if (buf[0] === 0x50 && buf[1] === 0x4b) {
-    // 시도별 ‘전체’ ZIP에는 모든 업종 파일이 들어 있다. 파일명은 UTF-8 플래그 없이 들어 있어 직접 디코딩한다.
+    // LOCALDATA ZIP 파일명은 UTF-8 플래그 없이 들어 있어 직접 디코딩한다.
     const entries = listZip(buf).filter((e) => /\.csv$/i.test(e.name));
-    if (!zipListLogged) { zipListLogged = true; console.log(`ZIP 안 CSV ${entries.length}개(관련: ${entries.filter((e) => /화장실|야영/.test(e.name)).map((e) => e.name).join(", ") || "없음"})`); }
-    const hit = entries.find((e) => /화장실|restroom|toilet/i.test(e.name));
+    if (!zipListLogged) { zipListLogged = true; console.log(`ZIP 안 CSV ${entries.length}개: ${(entries.length <= 20 ? entries : entries.filter((e) => /화장실|야영/.test(e.name))).map((e) => `${e.name}(${e.size}B)`).join(", ") || "관련 없음"}`); }
+    const hit = entries.find((e) => /화장실|restroom|toilet/i.test(e.name)) ?? (entries.length === 1 ? entries[0] : null);
     if (!hit) throw new Error(`ZIP 안에 화장실 파일이 없음(${entries.length}개 파일)`);
     console.log(`  ${tag}: ${hit.name} (${hit.size.toLocaleString()} bytes)`);
     return readZipEntry(buf, hit);
@@ -41,8 +41,10 @@ async function toCsvBytes(buf, tag) {
 }
 
 /**
- * LOCALDATA 파일 페이지는 시도별 ‘전체 다운로드’ 링크(/file/download-all?orgCode=XXXXXXX_ALL)를 준다.
- * 페이지에서 쿠키·링크를 얻은 뒤 시도별 파일을 모두 받아 행을 합친다.
+ * LOCALDATA 공중화장실 페이지(2026-10-13 CI 확인):
+ * - 주 버튼 “공중화장실정보 파일을 전체 다운로드합니다” → data-download-urls="/file/download/public_restroom_info/info"
+ * - 사이드바의 /file/download-all?orgCode=…_ALL 링크는 인허가 업종 195종 묶음(화장실 없음)이라 쓰지 않는다.
+ * 페이지에서 쿠키·CSRF 토큰을 얻은 뒤 화장실 전용 다운로드 경로를 GET → POST 순으로 호출한다.
  * @returns {Promise<{rows: object[], parts: string[]}>}
  */
 async function downloadAll(pageUrl) {
@@ -52,49 +54,29 @@ async function downloadAll(pageUrl) {
   const buf = Buffer.from(await page.arrayBuffer());
   if (!/html/i.test(page.headers.get("content-type") ?? "")) return { rows: csvToObjects(decodeKoreanText(await toCsvBytes(buf, "single"))), parts: ["single"] };
   const html = buf.toString("utf8");
-  // 페이지 구조 진단: 화장실 전용 다운로드 버튼(onclick/폼/스크립트) 경로를 찾기 위해 로그와 산출물로 남긴다.
-  await writeFile(`${out}localdata-restroom-page.html`, html);
-  const clues = [...new Set([
-    ...[...html.matchAll(/(?:href|action|data-[a-z-]+)=["']([^"']*(?:down|file|restroom|csv|xlsx|zip)[^"']*)["']/gi)].map((m) => m[1]),
-    ...[...html.matchAll(/onclick=["']([^"']+)["']/gi)].map((m) => `onclick:${m[1]}`),
-    ...[...html.matchAll(/(?:url|location\.href|action)\s*[:=]\s*["'`]([^"'`]*(?:down|file)[^"'`]*)["'`]/gi)].map((m) => `js:${m[1]}`),
-  ])].filter((c) => !/download-all\?orgCode=\d+_ALL$/.test(c));
-  const own = clues.filter((c) => !/^\/file\/[a-z_]+\/info$/.test(c) && !/^#file-cat/.test(c));
-  console.log(`LOCALDATA 페이지 단서 ${clues.length}개 중 다른 업종 링크 제외 ${own.length}개: ${own.slice(0, 80).join(" | ")}`);
-  // 버튼 태그는 여러 줄에 걸쳐 있다 → 공백을 접어 속성 전체를 남긴다.
-  for (const m of [...html.matchAll(/<(?:a|button)\b[^>]*download[^>]*>/gi)].slice(0, 25)) console.log(`  태그: ${m[0].replace(/\s+/g, " ").slice(0, 500)}`);
-  console.log(`  data-download-url 값: ${[...new Set([...html.matchAll(/data-download-url=["']([^"']+)["']/gi)].map((m) => m[1]))].join(" | ")}`);
-  console.log(`  data-* 속성 종류: ${[...new Set([...html.matchAll(/\s(data-[a-z-]+)=/gi)].map((m) => m[1]))].join(", ")}`);
-  for (const m of [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map((m) => m[1]).filter((t) => /download/i.test(t)).slice(0, 3)) console.log(`  스크립트: ${m.replace(/\s+/g, " ").slice(0, 1500)}`);
-  for (const src of [...html.matchAll(/<script\b[^>]*src=["']([^"']+)["']/gi)].map((m) => m[1]).filter((u) => !/jquery|bootstrap|cdn|gtag|google/i.test(u)).slice(0, 6)) {
-    try {
-      const js = await (await fetch(new URL(src, pageUrl), { headers: { "User-Agent": UA, Referer: pageUrl, Cookie: cookie }, signal: AbortSignal.timeout(30000) })).text();
-      const bits = [...js.matchAll(/[\s\S]{0,200}download[\s\S]{0,300}/gi)].slice(0, 4).map((m) => m[0].replace(/\s+/g, " "));
-      console.log(`  외부 스크립트 ${src} (${js.length}B): ${bits.join(" ⏐ ").slice(0, 2500)}`);
-    } catch (e) { console.log(`  외부 스크립트 ${src}: ${e.message}`); }
-  }
-  const dataUrl = html.match(/data-download-url=["']([^"']+)["']/i)?.[1];
-  if (dataUrl) console.log(`data-download-url: ${dataUrl}`);
-  const links = [...new Set([...html.matchAll(/\/file\/download-all\?orgCode=([0-9A-Z_]+)/g)].map((m) => m[0]))];
-  if (!links.length) throw new Error(`시도별 다운로드 링크 없음(HTML ${buf.length}B)`);
-  const rows = [];
-  const parts = [];
-  for (const link of links) {
-    const url = new URL(link, pageUrl).toString();
-    try {
-      const res = await fetch(url, { headers: { "User-Agent": UA, Referer: pageUrl, Cookie: cookie }, signal: AbortSignal.timeout(120000) });
-      const b = Buffer.from(await res.arrayBuffer());
-      const type = res.headers.get("content-type") ?? "";
-      if (!res.ok || /html/i.test(type)) { console.log(`  ${link} → HTTP ${res.status} ${type} ${b.length}B`); continue; }
-      const part = csvToObjects(decodeKoreanText(await toCsvBytes(b, link.split("=")[1])));
-      rows.push(...part);
-      parts.push(`${link.split("=")[1]}:${part.length}`);
-    } catch (e) {
-      console.log(`  ${link} → ${e.message}`);
+  const paths = [...new Set([...html.matchAll(/data-download-urls=["']([^"']+)["']/gi)].flatMap((m) => m[1].split(/[,\s]+/)).filter(Boolean))];
+  if (!paths.length) throw new Error(`화장실 다운로드 버튼(data-download-urls)을 찾지 못함(HTML ${buf.length}B)`);
+  const meta = (n) => html.match(new RegExp(`<meta[^>]+name=["']${n}["'][^>]+content=["']([^"']+)["']`, "i"))?.[1];
+  const csrf = meta("_csrf"), csrfHeader = meta("_csrf_header") ?? "X-CSRF-TOKEN";
+  const headers = { "User-Agent": UA, Referer: pageUrl, Cookie: cookie, ...(csrf ? { [csrfHeader]: csrf } : {}) };
+  const tried = [];
+  for (const path of paths) {
+    const url = new URL(path, pageUrl).toString();
+    for (const method of ["GET", "POST"]) {
+      try {
+        const res = await fetch(url, { method, headers: method === "POST" ? { ...headers, "Content-Type": "application/x-www-form-urlencoded", "X-Requested-With": "XMLHttpRequest" } : headers, ...(method === "POST" ? { body: csrf ? `_csrf=${encodeURIComponent(csrf)}` : "" } : {}), signal: AbortSignal.timeout(180000) });
+        const b = Buffer.from(await res.arrayBuffer());
+        const type = res.headers.get("content-type") ?? "";
+        const disp = res.headers.get("content-disposition") ?? "";
+        tried.push(`${method} ${path} → ${res.status} ${type} ${b.length}B ${disp}`.trim());
+        if (!res.ok || /html/i.test(type)) continue;
+        if (/json/i.test(type)) { tried.push(`  JSON: ${b.toString("utf8").slice(0, 300)}`); continue; }
+        const rows = csvToObjects(decodeKoreanText(await toCsvBytes(b, path)));
+        if (rows.length) return { rows, parts: [`${method} ${path}:${rows.length}`] };
+      } catch (e) { tried.push(`${method} ${path} → ${e.message}`); }
     }
   }
-  if (!rows.length) throw new Error(`시도별 파일 ${links.length}개 모두 실패`);
-  return { rows, parts };
+  throw new Error(`화장실 파일 다운로드 실패: ${tried.join(" / ")}`);
 }
 
 let toilets = [];
@@ -130,7 +112,7 @@ if (process.env.DATA_GO_KR_SERVICE_KEY) {
 // 2순위: LOCALDATA 파일(경로가 바뀌어 화장실 파일이 다시 생기면 사용)
 if (!toilets.length) try {
   const { rows, parts } = await downloadAll(SOURCE_URL);
-  console.log(`시도별 파일: ${parts.join(", ")}`);
+  console.log(`화장실 파일: ${parts.join(", ")}`);
   toilets = rows.map(normalizeToilet).filter(Boolean);
   console.log(`행안부 공중화장실 원본 ${rows.length}행 → 정규화 ${toilets.length}곳`);
   if (rows[0]) console.log(`머리글: ${Object.keys(rows[0]).join(", ")}`);
@@ -162,7 +144,8 @@ console.log(`좌표 확보 ${located}/${toilets.length}곳 (${toilets.length ? M
 // OpenStreetMap 보조 원천(좌표 포함). 행안부 항목과 30m 안에서 겹치면 버린다.
 let osmStats = { fetched: 0, added: 0, duplicates: 0 };
 try {
-  const { elements } = await overpass(OVERPASS_QUERY);
+  const { elements, server, stale, error } = await overpassCached(OVERPASS_QUERY, `${cacheDir}osm-toilets.json`);
+  if (stale) warn("Overpass 실패 — 직전 결과 사용", `${server} · ${error}`);
   const osm = elements.map(normalizeOsmToilet).filter(Boolean);
   const m = mergeToiletSources(toilets, osm);
   toilets = m.merged;

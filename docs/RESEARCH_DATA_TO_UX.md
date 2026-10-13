@@ -100,6 +100,7 @@
 
 - `file.localdata.go.kr/file/public_restroom_info/info`의 시도별 `download-all?orgCode=…_ALL` ZIP은 **인허가 업종 195종 묶음**이고 공중화장실 파일은 없다(ZIP 파일명이 UTF-8 플래그 없이 들어 있어 `lib/zip.mjs`로 직접 디코딩해 확인).
 - 대신 묶음 안에 `문화_자동차야영장업.csv`, `문화_일반야영장업.csv`가 있다 → 활용신청 없이 **숨은 캠핑장 후보**를 받을 수 있는 원천(다음 작업).
+- **화장실 전용 다운로드**: 같은 페이지의 주 버튼(“공중화장실정보 파일을 전체 다운로드합니다”)은 `data-download-urls="/file/download/public_restroom_info/info"`다. 페이지 쿠키·CSRF 토큰과 함께 호출한다(`scripts/sync-toilets.mjs`).
 - 화장실은 `전국공중화장실표준데이터` API(`tn_pubr_public_toilet_api`, 졸음쉼터와 같은 표준데이터 경로 규칙)를 1순위로 시도하고, 위도·경도가 있으면 지오코딩 없이 쓴다(`fromStandardApi`).
 
 ### 2.6 가는 길: 휴게소·졸음쉼터 (2026-10-13)

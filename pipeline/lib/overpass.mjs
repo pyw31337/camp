@@ -27,3 +27,21 @@ export async function overpass(query, { fetchImpl = fetch, timeoutMs = 300000, s
   }
   throw new Error(`Overpass 실패: ${errors.join(", ")}`);
 }
+
+/**
+ * 성공한 응답을 파일로 남기고, 모든 서버가 실패하면 직전 성공 응답을 쓴다(공개 서버 504가 잦다).
+ * GitHub Actions 캐시에 `.cache/osm-*.json`이 들어 있어 실행 사이에 유지된다.
+ */
+export async function overpassCached(query, cachePath, opts = {}) {
+  const { readFile, writeFile } = await import("node:fs/promises");
+  try {
+    const r = await overpass(query, opts);
+    await writeFile(cachePath, JSON.stringify({ fetched_at: new Date().toISOString(), elements: r.elements }));
+    return { ...r, stale: false };
+  } catch (e) {
+    let cached = null;
+    try { cached = JSON.parse(await readFile(cachePath, "utf8")); } catch { /* 캐시 없음 */ }
+    if (!cached?.elements?.length) throw e;
+    return { elements: cached.elements, server: `cache(${cached.fetched_at})`, stale: true, error: e.message };
+  }
+}

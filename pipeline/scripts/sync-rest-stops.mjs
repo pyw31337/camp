@@ -4,12 +4,13 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
 import { EX_SOURCE, buildExServiceAreas, fetchExAll } from "../lib/ex-rest-areas.mjs";
-import { overpass } from "../lib/overpass.mjs";
+import { overpassCached } from "../lib/overpass.mjs";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
 import { FACILITY_FEE, enrichWithNearby, mergeStops, normalizeDrowsyShelter, normalizeOsmStop } from "../lib/rest-stops.mjs";
 
 const out = fileURLToPath(new URL("../out/", import.meta.url));
 await mkdir(out, { recursive: true });
+await mkdir(fileURLToPath(new URL("../.cache/", import.meta.url)), { recursive: true });
 const fetchedAt = toKstIso(nowInKst());
 const warn = (title, msg) => console.log(`::warning title=${title}::${msg}`);
 
@@ -52,8 +53,9 @@ try {
 let osm = [];
 try {
   const q = `[out:json][timeout:240];area["ISO3166-1"="KR"][admin_level=2]->.kr;nwr["highway"~"^(services|rest_area)$"](area.kr)->.s;(.s;nwr(around.s:500)["amenity"~"^(fuel|charging_station)$"];);out center tags;`;
-  const { elements: els, server } = await overpass(q);
-  console.log(`Overpass: ${new URL(server).host}`);
+  const { elements: els, server, stale, error } = await overpassCached(q, fileURLToPath(new URL("../.cache/osm-rest-stops.json", import.meta.url)));
+  if (stale) warn("Overpass 실패 — 직전 결과 사용", `${server} · ${error}`);
+  else console.log(`Overpass: ${new URL(server).host}`);
   const pois = els.filter((e) => e.tags?.amenity).map((e) => ({ lat: e.lat ?? e.center?.lat, lng: e.lon ?? e.center?.lon, kind: e.tags.amenity === "fuel" ? "fuel" : "charging" })).filter((p) => Number.isFinite(p.lat));
   osm = enrichWithNearby(els.filter((e) => e.tags?.highway).map(normalizeOsmStop).filter(Boolean), pois);
   console.log(`OpenStreetMap 휴게소 ${osm.filter((s) => s.kind === "SERVICE_AREA").length}곳, 쉼터 ${osm.filter((s) => s.kind !== "SERVICE_AREA").length}곳 (주유·충전 POI ${pois.length}곳으로 보강)`);

@@ -106,3 +106,20 @@ test("한국도로공사 API: 오류 페이지(HTML)를 주는 쪽은 9건씩 �
   assert.equal(got.skipped, 9);
   assert.ok(!got.some((r) => r.i === 105));
 });
+
+test("Overpass: 모든 서버 실패 시 직전 성공 응답(캐시)을 쓰고, 빈 결과는 실패로 본다", async () => {
+  const { overpassCached } = await import("../lib/overpass.mjs");
+  const { mkdtemp, writeFile } = await import("node:fs/promises");
+  const { tmpdir } = await import("node:os");
+  const path = `${await mkdtemp(`${tmpdir()}/ovp-`)}/c.json`;
+  const ok = async () => ({ ok: true, json: async () => ({ elements: [{ id: 1 }] }) });
+  const empty = async () => ({ ok: true, json: async () => ({ elements: [], remark: "runtime error: timeout" }) });
+  const opts = { servers: ["https://a.example/api"], wait: async () => {} };
+  const first = await overpassCached("q", path, { ...opts, fetchImpl: ok });
+  assert.equal(first.stale, false);
+  const second = await overpassCached("q", path, { ...opts, fetchImpl: empty });
+  assert.equal(second.stale, true);
+  assert.deepEqual(second.elements, [{ id: 1 }]);
+  await writeFile(path, "{}");
+  await assert.rejects(overpassCached("q", path, { ...opts, fetchImpl: empty }));
+});
