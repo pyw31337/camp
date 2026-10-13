@@ -24,7 +24,8 @@
 2. **`lib/postgres-context.mjs` 최소 수정(두 줄)**: 실데이터의 중복 키(같은 쉼터 두 번 등록, 같은 화장실 해시)가 한 INSERT에 들어가면 운영 첫 적재가 `ON CONFLICT DO UPDATE command cannot affect row a second time`으로 실패한다(로컬 재현, 회귀 테스트 `test/postgres-context-duplicates.test.mjs`). 키별 마지막 행만 남긴다. 확인 부탁.
 3. `db/008_campground_licence_source.sql`(인허가 원천 등록, 새 테이블 없음)과 `db:import-licences`(Codex `campground_candidate`에 적재)를 더했다. 다음 Codex 마이그레이션은 009부터.
 4. `data-sync.yml`: 인허가 수집 단계, 운영 단계에 `db:import-licences`, 마지막에 **그날 실제 파일을 임시 PostgreSQL에 두 번 적재**하는 단계를 더했다(고정 표본 검증이 못 잡는 실데이터 문제 대비).
-5. 병합 조건 응답: Cloudflare 배포는 `deploy-cloudflare.yml`로 분리돼 GitHub Pages와 공존, 시안 이미지 출처는 `design/ASSETS.md`.
+5. **화면 분담 제안**: Claude는 Cloudflare 미리보기/정식 주소에 실데이터 탐색 화면(`design/explore`)을 배포한다. `camping-atlas`(GitHub Pages)도 같은 데이터(`/data/campgrounds.json`, `/data/meta.json`, 스키마는 `pipeline/lib/explore-data.mjs`)를 그대로 읽을 수 있다. 어느 쪽을 정식 서비스로 할지는 소유자 결정.
+6. 병합 조건 응답: Cloudflare 배포는 `deploy-cloudflare.yml`로 분리돼 GitHub Pages와 공존, 시안 이미지 출처는 `design/ASSETS.md`.
 
 ## 최근 변경
 
@@ -39,6 +40,7 @@
 | 공공데이터 | 키 확인 스크립트(`npm run check:keys`), HTTPS 연결 실패 시 HTTP 재시도, 망 차단은 경고로 처리 | Actions에서 고캠핑 3,118건·기상청·TourAPI 정상, 고캠핑 동기화 성공 |
 | 무료 캠프 사이트 | `registry/free-sites.json`, `lib/free-sites.mjs`, `lib/free-discovery.mjs`, `scripts/discover-public-free.mjs`, 시안 홈 섹션·‘무료’ 필터 | `npm test` 28/28. 고캠핑 소개문 후보 11건은 전부 오탐 → 패턴 강화. 공공시설개방정보 API 경로는 CI 결과로 확인 필요 |
 | 야영장업 인허가 연계(main 스키마 기준) | `lib/localdata.mjs`(업종 전용 다운로드), `lib/localdata-campgrounds.mjs`(정규화·EPSG:5174·업종 고유 열 보존·고캠핑 1:1 매칭·플래그), `scripts/sync-localdata-campgrounds.mjs`, `lib/postgres-licences.mjs`·`db:import-licences`(campground_candidate, 사람 검토 보존), `db/008` | 로컬 PostgreSQL 16에서 001~008 적용, `npm test` 66(실제 DB 통합 2 포함) 통과. 실제 업종 slug는 CI 로그로 확인 필요 |
+| 전국 캠핑장 탐색 화면(Cloudflare) | `design/explore`(시안 토큰 재사용, Pretendard CDN, Lucide·Tabler): 검색·지역·형태·실시간 예약·반려견·요금 안내·공중화장실 500m·장비 크기 필터, 이름·가까운 순·요금 정렬, 카카오 지도(클러스터)·목록 전환, 상세(사진·길찾기·전화·사이트 구성/크기/바닥·시설·공식 안내 요금+출처·예약처 규칙/다음 오픈·주변 화장실), **예약하러 가기 = 공식 예약처 링크**. `lib/explore-data.mjs`·`scripts/build-explore-data.mjs`(빈 값 제거, gzip 155KB), `lib/tour-fees.mjs`·`scripts/sync-tour-fees.mjs`(TourAPI 야영장 소개정보 요금 문구, 하루 800건 캐시). `assemble-site`: `/` 탐색, `/mockup/` 시안. `data-sync.yml` 끝에서 그날 데이터로 Cloudflare 배포, `deploy-cloudflare.yml`은 화면만 바뀌면 마지막 공개 데이터를 재사용 | `npm test` 67 통과(DB 통합 테스트는 DB 있을 때). 개발용 데이터(카탈로그 이름·지역 + 임의 좌표, 미커밋)로 1280/390/320px 가로 넘침 0, 검색·필터·상세·예약 버튼 동작 확인. 실데이터·지도는 CI 배포 후 확인 |
 | DB 정렬 | Claude 005~009 대신 Codex 005~007 채택. `db/003` 형 변환은 양쪽이 같은 수정을 해 main 버전으로 통일. `postgres-context.mjs` 중복 키 수정 | 중복 키 버그 로컬 재현 후 수정·회귀 테스트 통과 |
 | 화장실 수집 성공 | CI [`38347850010`](https://github.com/pyw31337/camp/actions/runs/38347850010): `GET /file/download/public_restroom_info/info` → 행안부 공중화장실 53,584행(정규화 53,584곳). 카카오 지오코딩 30,000건 호출(성공 28,798, 없음 1,202), 남은 14,525건은 다음 실행에서 캐시 이어서. 좌표 35,421곳 + OSM 4,376곳 추가(중복 1,041). 캠핑장 3,109곳 중 2km 안 화장실 1,958곳, 300m 안 551곳 | 키 점검: EX ✓, 카카오 REST ✓, 카카오 JS(Secret) ✓ |
 | 화장실 전용 다운로드·키 확인 | CI 진단으로 LOCALDATA 화장실 페이지의 주 버튼 `data-download-urls="/file/download/public_restroom_info/info"`를 찾음(사이드바 `download-all`은 업종 195종 묶음). 쿠키·CSRF로 GET→POST 호출하도록 변경. Overpass 실패 시 직전 응답 캐시(`.cache/osm-*.json`, Actions 캐시 키 geocode-v3). `check:keys`에 EX·카카오 확인 추가 | `npm test` 55/55. CI: `EX_API_KEY` ✓(휴게소 203), 카카오 REST ✓(주소→좌표), `KAKAO_JS_KEY`는 Variable이 비어 Secret도 읽게 함 |
