@@ -8,6 +8,13 @@
 
 export const KAKAO_SEARCH_BASE = "https://dapi.kakao.com/v2/search";
 export const SEARCH_TYPES = ["blog", "cafe", "image", "vclip"];
+// 추가 검색(같은 API): 시설 배치도 이미지·배치도 글, 요금이 언급된 후기. 캐시 버전이 다르면 다시 받는다.
+export const EXTRA_SEARCHES = [
+  { key: "layout_blog", type: "blog", suffix: "배치도", params: { sort: "accuracy", size: 15 } },
+  { key: "layout_image", type: "image", suffix: "배치도", params: { sort: "accuracy", size: 20 } },
+  { key: "price_blog", type: "blog", suffix: "가격 요금", params: { sort: "recency", size: 25 } },
+];
+export const SOCIAL_CACHE_VERSION = 2;
 export const CAPS = { blog: 8, cafe: 6, image: 24, vclip: 10 };
 // 타입별 1회 호출. blog·cafe는 최신 후기를 보이려고 recency, image·vclip은 엉뚱한 결과를 줄이려고 accuracy.
 export const REQUEST_PLAN = {
@@ -266,10 +273,10 @@ export function isStale(fetchedAt, maxAgeDays, now = Date.now()) {
   return !Number.isFinite(t) || (now - t) / 864e5 > maxAgeDays;
 }
 
-/** 갱신 대상: 캐시 없음 → 가장 오래된 캐시 순 */
+/** 갱신 대상: 캐시 없음·이전 버전(배치도·요금 없음) → 가장 오래된 캐시 순 */
 export function pickDue(camps, cache, maxAgeDays, now = Date.now()) {
   return camps
-    .filter((c) => isStale(cache[c.id]?.fetched_at, maxAgeDays, now))
+    .filter((c) => (cache[c.id]?.v ?? 1) < SOCIAL_CACHE_VERSION || isStale(cache[c.id]?.fetched_at, maxAgeDays, now))
     .sort((a, b) => (Date.parse(cache[a.id]?.fetched_at ?? "") || 0) - (Date.parse(cache[b.id]?.fetched_at ?? "") || 0));
 }
 
@@ -283,4 +290,75 @@ export function summarize(records) {
     with_video_pct: Math.round((vals.filter((r) => r.vclip?.length).length / n) * 1000) / 10,
     with_posts_pct: Math.round((vals.filter((r) => r.blog?.length || r.cafe?.length).length / n) * 1000) / 10,
   };
+}
+
+// ─── 시설 배치도 · 후기 속 요금 ────────────────────────────────────────────
+
+const LAYOUT_WORD = /배치도|배치|안내도|사이트\s*맵|사이트맵|지도/;
+/**
+ * 배치도 후보 이미지: 이름 관련도를 통과한 ‘배치도’ 글에서 나온 이미지를 우선, 그다음 검색 상위 3장(추정 표시).
+ * 이미지는 저장하지 않고 썸네일 주소·원문 링크만 쓴다.
+ */
+export function buildLayout(camp, raw, { others = [] } = {}) {
+  const sigungu = camp?.address?.sigungu;
+  const ctx = { tokens: distinctiveTokens(camp?.name, sigungu), stem: regionStem(sigungu), others };
+  const posts = (raw?.layout_blog ?? []).filter((d) => isRelevant({ title: d?.title, contents: d?.contents, src: d?.blogname }, ctx) && LAYOUT_WORD.test(stripHtml(`${d?.title ?? ""} ${d?.contents ?? ""}`)))
+    .map((d) => normalizeDoc(d, "blog")).filter(Boolean);
+  const postUrls = new Set(posts.map((x) => urlKey(x.url)));
+  const imgs = (raw?.layout_image ?? []).map(normalizeImage).filter((x) => x && !AD.test(x.src ?? ""));
+  const confirmed = imgs.filter((x) => postUrls.has(urlKey(x.url))).map((x) => ({ ...x, sure: true }));
+  const guess = imgs.filter((x) => !postUrls.has(urlKey(x.url)) && (!x.w || x.w >= 400)).slice(0, 3).map((x) => ({ ...x, sure: false }));
+  const images = dedupe([...confirmed, ...guess], (x) => urlKey(x.img ?? x.thumb)).slice(0, 6);
+  return { images, posts: posts.slice(0, 4) };
+}
+
+const SEASON = [["peak", /성수기|극성수기|여름\s*휴가|7월|8월/], ["off", /비수기|평상시/]];
+const DAY = [["weekend", /주말|금요일|토요일|금토|토일|공휴일|휴일/], ["weekday", /평일|주중|일[~-]목|월[~-]목/]];
+const SITE_WORD = /(오토\s*캠핑|오토|일반\s*캠핑|데크|파쇄석|잔디|마사토|글램핑|카라반|캠핑카|트레일러|텐트|사이트|구역|존|[A-Z]\s*구역|[A-Z]\s*존|[A-Z]\d{0,2}\s*사이트)/;
+/** 문자열에서 가장 마지막에 나온 태그(정규식 목록 중) */
+function lastTag(text, tags) {
+  let best = null, at = -1;
+  for (const [tag, re] of tags) for (const m of String(text).matchAll(new RegExp(re.source, "g"))) if (m.index > at) { at = m.index; best = tag; }
+  return best;
+}
+/** "50,000원", "5만원", "5만 5천원", "55,000원~" → 원 단위 숫자 */
+export function parseWon(t) {
+  const s = String(t).replace(/\s+/g, "");
+  let m = s.match(/^(\d{1,3}(?:,\d{3})+|\d{4,7})원$/);
+  if (m) return Number(m[1].replace(/,/g, ""));
+  m = s.match(/^(\d{1,2})만(?:(\d)천)?원$/);
+  if (m) return Number(m[1]) * 10000 + (m[2] ? Number(m[2]) * 1000 : 0);
+  return null;
+}
+/**
+ * 후기·카페 글의 본문 일부에서 1박 요금 언급을 뽑는다(이용자 작성 정보 = 참고용).
+ * 반환: [{won, label(사이트 단어), season, day, quote, url, src, date}] — 1만~50만원 범위, 같은 글·같은 금액은 1건.
+ */
+export function extractPriceMentions(docs) {
+  const out = [];
+  const seen = new Set();
+  const PRICE = /(\d{1,3}(?:,\d{3})+|\d{4,6})\s*원|(\d{1,2})\s*만\s*(?:(\d)\s*천)?\s*원/g;
+  for (const d of docs ?? []) {
+    const text = stripHtml(`${d?.title ?? ""} ${d?.snippet ?? d?.contents ?? ""}`);
+    for (const m of text.matchAll(PRICE)) {
+      const won = parseWon(m[0]);
+      if (!won || won < 10000 || won > 500000) continue;
+      const a = Math.max(0, m.index - 28), b = Math.min(text.length, m.index + m[0].length + 12);
+      const quote = text.slice(a, b).trim();
+      // 주차·장작·전기 등 부대 요금, 할인·적립·쿠폰은 제외
+      const near = text.slice(Math.max(0, m.index - 9), m.index + m[0].length + 3);
+      if (/장작|전기|추가\s*인원|인당|1인|주차|쿠폰|적립|할인|보증금|대여|렌탈|입장료|샤워/.test(near)) continue;
+      // 계절·요일은 금액 바로 앞(같은 문장)의 단어를 우선한다: "평일 45,000원 주말 6만원"
+      const pre = text.slice(Math.max(0, m.index - 22), m.index);
+      const key = `${d?.url}|${won}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push({
+        won, label: quote.match(SITE_WORD)?.[0]?.replace(/\s+/g, " ") ?? null,
+        season: lastTag(pre, SEASON) ?? lastTag(quote, SEASON), day: lastTag(pre, DAY) ?? lastTag(quote, DAY),
+        quote, url: d?.url ?? null, src: d?.src ?? d?.blogname ?? null, date: d?.date ?? d?.datetime ?? null,
+      });
+    }
+  }
+  return out.sort((x, y) => String(y.date ?? "").localeCompare(String(x.date ?? ""))).slice(0, 12);
 }

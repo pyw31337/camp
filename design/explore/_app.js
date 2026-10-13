@@ -11,6 +11,9 @@ const p2 = (n) => String(n).padStart(2, "0");
 const ymd = (s) => { const k = kst(s); return k ? `${k.y}.${p2(k.mo)}.${p2(k.d)}` : ""; };
 const KIND = { AUTO_PITCH: ["오토캠핑", "#l-car"], PITCH: ["일반 캠핑", "#t-tent"], GLAMPING: ["글램핑", "#l-bed-double"], CARAVAN_RENTAL: ["카라반", "#t-caravan"], RV_PITCH: ["개인 카라반", "#t-caravan"], TARP_ZONE: ["타프존", "#t-building-pavilion"], SHELTER_ZONE: ["쉘터존", "#l-warehouse"], CAMPNIC_DAY: ["캠프닉", "#t-grill"] };
 const AREAS = ["전국", "서울·경기", "강원", "충청", "전라", "경상", "제주"];
+// 고캠핑 바닥 코드 → 한글
+const FLOOR = { GRASS: "잔디", CRUSHED_STONE: "파쇄석", DECK: "데크", GRAVEL: "자갈", SOIL: "맨흙·마사토" };
+const floorName = (f) => FLOOR[f] ?? f;
 const OP = { LOCAL_GOVERNMENT: "지자체", PRIVATE: "민간", NATIONAL_PARK: "국립공원", NATURAL_RECREATION_FOREST: "자연휴양림", PUBLIC_LEISURE: "국민여가", UNKNOWN: "" };
 const GEAR = [["", "장비 크기 무관"], ["4x4", "돔텐트 4×4m"], ["5.5x8", "리빙쉘 5.5×8m"], ["6x9.5", "텐트+타프 6×9.5m"], ["8x10", "대형 8×10m"]];
 const PAGE = 40;
@@ -40,6 +43,9 @@ function load() {
   // 홈 검색창·분류 버튼에서 넘어온 검색어(q)·사이트 형태(k)
   if (h.get("q")) state.q = h.get("q");
   if (h.get("k")) state.kinds = new Set(h.get("k").split(","));
+  // 헤더 공통 메뉴에서 넘어온 요청: 관심만 보기(s=1), 내 주변(near=1)
+  if (h.get("s") === "1") state.savedOnly = true;
+  if (h.get("near") === "1") state.nearOnBoot = true;
   if (h.get("t")) state.theme = h.get("t");
   if (h.get("a") && AREAS.includes(h.get("a"))) state.area = h.get("a");
   if (h.get("g")) state.sgg = h.get("g");
@@ -365,6 +371,44 @@ function productsBlock(d) {
   return `<div class="sub"><h4>상품 <span class="num">${list.length}</span>개</h4><div class="products">${list.map(card).join("")}</div>
     <span class="trust">${ic("#l-info", "i-xs")}${esc(d.products_src?.basis ?? "공식 등록 기준가")} · ${d.products_src?.checked_at ? `${ymd(d.products_src.checked_at)} 확인 · ` : ""}${d.products_src?.url ? `<a href="${esc(d.products_src.url)}" target="_blank" rel="noopener">원문</a>` : ""} · 실제 요금·빈자리는 예약처에서 확정</span></div>`;
 }
+// 운영 사이트 목록(고캠핑 공식 등록): 형태별 면수 + 등록된 사이트 크기·바닥
+function siteListBlock(c, d) {
+  const rows = c.kinds.filter(([k]) => KIND[k]);
+  const sizes = c.sizes.map(([w, dd, n]) => `${w}×${dd}m${n ? ` · ${n}면` : ""}`);
+  const floors = c.floors.map(([f, n]) => `${floorName(f)} ${n}면`);
+  if (!rows.length && !sizes.length) return `<p class="note" data-wrap-ok>고캠핑에 사이트 구성이 등록되지 않았습니다. 예약 화면에서 사이트를 확인하세요.</p>`;
+  const total = rows.reduce((n, [, x]) => n + (x || 0), 0);
+  return `<div class="sub"><h4>운영 사이트 <span class="num">${rows.length}</span>종 · 총 <span class="num">${total}</span>면</h4>
+    <div class="site-table" role="table">
+      <div class="st-row st-head" role="row"><span role="columnheader">사이트</span><span role="columnheader">면수</span></div>
+      ${rows.map(([k, n]) => `<div class="st-row" role="row"><span role="cell">${ic(KIND[k][1], "i-sm")}<b>${esc(KIND[k][0])}</b></span><span role="cell" class="num">${n}면</span></div>`).join("")}
+    </div>
+    ${sizes.length ? `<div class="row">${ic("#l-ruler", "i-sm")}<span data-wrap-ok>사이트 크기 ${esc(sizes.join(" / "))}</span></div>` : ""}
+    ${floors.length ? `<div class="row">${ic("#l-layers", "i-sm")}<span data-wrap-ok>바닥 ${esc(floors.join(" · "))}</span></div>` : ""}
+    <span class="trust ok">${ic("#l-shield-check", "i-xs")}한국관광공사 고캠핑 등록 정보 · ${ymd(c.modified_at)} 수정</span></div>`;
+}
+// 이용자 후기에 언급된 1박 요금(참고): 출처 글·작성일과 함께, 계절·요일별로
+function priceMentionsBlock(d) {
+  const list = d?.prices ?? [];
+  if (!list.length) return "";
+  const S = { peak: "성수기", off: "비수기" }, D = { weekend: "주말", weekday: "평일" };
+  const tag = (x) => [S[x.season], D[x.day]].filter(Boolean).join(" ") || "시기 미상";
+  const vals = list.map((x) => x.won);
+  return `<div class="sub"><h4>후기 속 요금 <small class="unv">참고</small></h4>
+    <p class="price-range">이용자 후기 기준 <b class="num">${Math.min(...vals).toLocaleString()}원</b> ~ <b class="num">${Math.max(...vals).toLocaleString()}원</b></p>
+    <div class="mentions">${list.map((x) => `<a class="mention" href="${esc(x.url ?? "#")}" target="_blank" rel="noopener"><span class="m-top"><b class="num">${x.won.toLocaleString()}원</b><em>${esc(tag(x))}</em>${x.label ? `<i>${esc(x.label)}</i>` : ""}</span><q data-wrap-ok>${esc(x.quote)}</q><small>${esc([x.src, x.date && ymd(x.date)].filter(Boolean).join(" · "))}</small></a>`).join("")}</div>
+    <span class="trust">${ic("#l-info", "i-xs")}블로그·카페 글에서 자동 추출 · 작성 시점 요금이라 지금과 다를 수 있음 · 확정 요금은 예약처</span></div>`;
+}
+// 시설 배치도(검색 결과 이미지·원문 링크만, 저장하지 않음)
+function layoutBlock(d) {
+  const l = d?.layout;
+  if (!l?.images?.length && !l?.posts?.length) return "";
+  const https = (u) => String(u ?? "").replace(/^http:/, "https:");
+  return `<div class="sub"><h4>${ic("#l-map", "i-sm")}시설 배치도</h4>
+    ${l.images?.length ? `<div class="layout-grid">${l.images.map((x) => `<a href="${esc(x.url ?? x.img)}" target="_blank" rel="noopener"><img src="${esc(https(x.thumb))}" alt="시설 배치도 후보" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.remove()">${x.sure ? "" : "<em>추정</em>"}</a>`).join("")}</div>` : ""}
+    ${l.posts?.length ? `<div class="layout-posts">${l.posts.map((p) => `<a class="link-row" href="${esc(p.url)}" target="_blank" rel="noopener">${ic("#l-external-link", "i-xs")}${esc(p.title)}</a>`).join("")}</div>` : ""}
+    <span class="trust">${ic("#l-info", "i-xs")}Daum 검색 제공 · 이용자가 올린 배치도로 최신 배치와 다를 수 있음 · ‘추정’은 다른 곳일 수 있어 원문 확인</span></div>`;
+}
 function productCatalogBlock(c) {
   const rows = c.kinds.filter(([k]) => KIND[k]);
   if (!rows.length) return `<div class="sub"><h4>운영 상품 구성</h4><p class="note">고캠핑에 사이트 유형·면수 정보가 등록되지 않았습니다.</p></div>`;
@@ -409,7 +453,7 @@ function detail(c) {
   const d = DETAIL.get(c.id);
   const kinds = c.kinds.filter(([k]) => KIND[k]).map(([k, n]) => `<div class="fact"><small>${KIND[k][0]}</small><b class="num">${n}면</b></div>`).join("");
   const sizes = c.sizes.length ? c.sizes.map(([w, dd, n]) => `${w}×${dd}m${n ? ` ${n}면` : ""}`).join(" · ") : "정보 없음";
-  const floors = c.floors.length ? c.floors.map(([f, n]) => `${f} ${n}`).join(" · ") : "정보 없음";
+  const floors = c.floors.length ? c.floors.map(([f, n]) => `${floorName(f)} ${n}면`).join(" · ") : "정보 없음";
   const target = bookingTarget(c);
   const photos = allPhotos(c, d);
   const hero = photos.length
@@ -451,12 +495,12 @@ function detail(c) {
       ${guideBlock(c, d)}
       <p class="note" data-wrap-ok>빈자리와 최종 요금은 예약처 화면에서 확정됩니다. 모여라 캠핑은 결제를 받지 않고 공식 예약처로 연결합니다.</p>
     </section>
-    <section class="box" id="sec-site"><h3>${ic("#t-tent", "i-sm")}사이트·요금</h3>
-      ${productCatalogBlock(c)}
-      <div class="facts">${kinds || `<div class="fact"><small>구성</small><b>정보 없음</b></div>`}</div>
-      <div class="row">${ic("#l-ruler", "i-sm")}<span data-wrap-ok>${esc(sizes)}</span></div>
-      <div class="row">${ic("#l-layers", "i-sm")}<span data-wrap-ok>바닥 ${esc(floors)}</span></div>
+    <section class="box" id="sec-site"><h3>${ic("#t-tent", "i-sm")}사이트(상품) 목록·요금</h3>
+      ${siteListBlock(c, d)}
       ${productsBlock(d)}
+      ${priceMentionsBlock(d)}
+      ${layoutBlock(d)}
+      ${target ? `<a class="btn btn-primary" href="${esc(target.href)}" ${target.ext ? 'target="_blank" rel="noopener"' : ""}>${ic(target.ext ? "#l-external-link" : "#l-phone", "i-sm")}사이트 고르고 ${target.label}</a><p class="note" data-wrap-ok>모든 사이트가 같은 예약 화면에서 예약됩니다. 사이트별 빈자리·최종 요금은 예약 화면에서 확인하세요.</p>` : ""}
       <div class="sub"><h4>요금</h4>${c.fee ? `<p class="pre" data-wrap-ok>${esc(c.fee.text)}</p><span class="trust">${ic("#l-info", "i-xs")}한국관광공사 등록 안내 · ${ymd(c.fee.checked_at)} 확인 · <a href="${esc(c.fee.url)}" target="_blank" rel="noopener">원문</a></span>` : `<p class="note" data-wrap-ok>공식 원천에 등록된 요금 안내가 없습니다. 예약처에서 확인하세요.</p>`}</div>
     </section>
     <section class="box" id="sec-fac"><h3>${ic("#l-plug-zap", "i-sm")}시설·규칙</h3>
@@ -644,7 +688,7 @@ document.addEventListener("change", (e) => {
 let qTimer;
 document.addEventListener("input", (e) => { if (e.target.id === "q") { clearTimeout(qTimer); qTimer = setTimeout(() => { state.q = e.target.value; rerender(); syncHash(); }, 200); } });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape" && state.open) closeDetail(); });
-const head = () => document.documentElement.style.setProperty("--head", `${$(".top").offsetHeight + $(".bar").offsetHeight}px`);
+const head = () => { const h = $(".gnb")?.offsetHeight ?? 64; document.documentElement.style.setProperty("--top", `${h}px`); document.documentElement.style.setProperty("--head", `${h + $(".bar").offsetHeight}px`); };
 new ResizeObserver(head).observe(document.body);
 
 const BASE_TITLE = document.title;
@@ -665,5 +709,6 @@ async function boot() {
   // 목록 끝에 닿으면 자동으로 더 불러온다(수백 곳도 끊김 없이).
   new IntersectionObserver((es) => { if (es.some((x) => x.isIntersecting) && !$("#moreBtn").hidden) { state.shown += PAGE; renderListOnly(); } }, { rootMargin: "600px" }).observe($("#moreBtn"));
   if (state.open) openDetail(state.open);
+  if (state.nearOnBoot) $("#nearBtn")?.click();
 }
 boot();

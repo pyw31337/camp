@@ -9,6 +9,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
 import {
+  EXTRA_SEARCHES, SOCIAL_CACHE_VERSION, buildLayout, extractPriceMentions, normalizeDoc, isRelevant, distinctiveTokens, regionStem,
   REQUEST_PLAN, SEARCH_TYPES, SOURCE, buildQuery, buildSocialRecord, isStale, kakaoSearch, nameCore, pickDue, summarize,
 } from "../lib/social-search.mjs";
 
@@ -25,7 +26,7 @@ const DROP_AGE_DAYS = envNum("SOCIAL_DROP_AGE_DAYS", 45); // 이보다 오래 �
 const MAX_CALLS = envNum("SOCIAL_MAX_CALLS", 4000);
 const CONCURRENCY = Math.max(1, envNum("SOCIAL_CONCURRENCY", 4));
 const DELAY_MS = envNum("SOCIAL_DELAY_MS", 120);
-const CALLS_PER_CAMP = SEARCH_TYPES.length;
+const CALLS_PER_CAMP = SEARCH_TYPES.length + EXTRA_SEARCHES.length;
 
 try {
   await mkdir(out, { recursive: true });
@@ -81,7 +82,19 @@ async function main() {
             raw[type] = await search(type, query);
             if (DELAY_MS) await sleep(DELAY_MS);
           }
-          cache.campgrounds[c.id] = { fetched_at: fetchedAt, query, ...buildSocialRecord(c, raw, { others: othersOf(c) }) };
+          for (const x of EXTRA_SEARCHES) {
+            if (stopped) throw stopped;
+            calls++;
+            raw[x.key] = await kakaoSearch(x.type, `${query} ${x.suffix}`, x.params, { key });
+            if (DELAY_MS) await sleep(DELAY_MS);
+          }
+          const rec = buildSocialRecord(c, raw, { others: othersOf(c) });
+          const layout = buildLayout(c, raw, { others: othersOf(c) });
+          // 요금 언급: ‘가격 요금’ 검색 결과 중 이름 관련도를 통과한 글 + 일반 후기·카페 글
+          const ctx = { tokens: distinctiveTokens(c.name, c.address?.sigungu), stem: regionStem(c.address?.sigungu), others: othersOf(c) };
+          const priceDocs = (raw.price_blog ?? []).filter((d) => isRelevant({ title: d?.title, contents: d?.contents, src: d?.blogname }, ctx)).map((d) => normalizeDoc(d, "blog")).filter(Boolean);
+          const prices = extractPriceMentions([...priceDocs, ...rec.blog, ...rec.cafe]);
+          cache.campgrounds[c.id] = { v: SOCIAL_CACHE_VERSION, fetched_at: fetchedAt, query, ...rec, layout, prices };
           ok++; streak = 0;
           if (++sinceSave >= 100) { sinceSave = 0; await writeFile(cachePath, JSON.stringify(cache)); }
         } catch (e) {
@@ -105,8 +118,8 @@ async function main() {
   for (const c of camps) {
     const r = cache.campgrounds[c.id];
     if (!r || isStale(r.fetched_at, DROP_AGE_DAYS)) continue;
-    const { fetched_at, blog = [], cafe = [], image = [], vclip = [] } = r;
-    records[c.id] = { fetched_at, blog, cafe, image, vclip };
+    const { fetched_at, blog = [], cafe = [], image = [], vclip = [], layout = null, prices = [] } = r;
+    records[c.id] = { fetched_at, blog, cafe, image, vclip, ...(layout?.images?.length || layout?.posts?.length ? { layout } : {}), ...(prices.length ? { prices } : {}) };
   }
   const stats = summarize(records);
   console.log(`출력 ${stats.camps}곳(${camps.length ? Math.round((stats.camps / camps.length) * 1000) / 10 : 0}%) · 평균 이미지 ${stats.avg_images}장 · 동영상 보유 ${stats.with_video_pct}% · 글 보유 ${stats.with_posts_pct}%`);

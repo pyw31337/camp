@@ -227,12 +227,12 @@ jobs:
           # 초기 전량 보강만 workflow_dispatch 입력값으로 30,000건을 명시한다.
           GEOCODE_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || (github.event_name == 'workflow_dispatch' && inputs.geocode_max_calls) || '2000' }}
       - name: Sync campground social search (Kakao Daum blog/cafe/image/video)
-        # 사람들의 후기·사진·영상(링크와 썸네일 주소만 저장, 이미지 재호스팅 안 함). 다음 검색 한도 일 5만·종류별 3만.
+        # 사람들의 후기·사진·영상(링크와 썸네일 주소만 저장, 이미지 재호스팅 안 함). 다음 검색 한도 일 5만·종류별 3만. 캠핑장당 7회(후기·카페·사진·영상 + 배치도 글·배치도 사진·요금 후기)로 하루 약 1,300곳.
         continue-on-error: true
         run: npm run sync:social
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
-          SOCIAL_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '4000' }}
+          SOCIAL_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '9100' }}
       - name: Sync rest areas and drowsy shelters
         continue-on-error: true
         run: npm run sync:rest-stops

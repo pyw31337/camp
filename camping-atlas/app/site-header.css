@@ -1,0 +1,45 @@
+/* design/site-header.mjs에서 생성 — 직접 고치지 말 것 */
+/* ===== 공통 사이트 헤더(홈·탐색·상세 동일) — 두 화면이 같은 규칙을 쓴다 ===== */
+.gnb { position: sticky; top: 0; z-index: 70; background: rgba(255,255,255,.92); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid #e3e8e2; }
+.gnb-in { box-sizing: border-box; width: 100%; max-width: 1240px; height: 64px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; gap: 24px; }
+.sh-brand { display: inline-flex; align-items: center; gap: 9px; flex: none; color: #173f2e; text-decoration: none; font-size: 1.125rem; font-weight: 900; letter-spacing: -.05em; white-space: nowrap; }
+.sh-brand > span { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: #1f9d5c; color: #fff; }
+.sh-brand svg { width: 20px; height: 20px; }
+.sh-nav { display: flex; align-items: center; gap: 4px; flex: 1; min-width: 0; }
+.sh-nav a { display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 12px; border-radius: 999px; color: #46594f; text-decoration: none; font-size: .9375rem; font-weight: 700; white-space: nowrap; }
+.sh-nav a:hover, .sh-nav a[aria-current="page"] { background: #e8f4ec; color: #17834b; }
+.sh-nav svg, .sh-actions svg { width: 18px; height: 18px; flex: none; }
+.sh-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; flex: none; }
+.sh-fs { display: inline-flex; align-items: center; gap: 4px; height: 38px; padding: 0 12px; border-radius: 999px; border: 1px solid #e3e8e2; background: #fff; color: #17211c; font: inherit; font-size: .9375rem; font-weight: 900; cursor: pointer; white-space: nowrap; }
+.sh-fs small { font-size: .75rem; font-weight: 600; color: #7c8a82; }
+.sh-icon { position: relative; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; border: 1px solid #e3e8e2; background: #fff; color: #17211c; text-decoration: none; cursor: pointer; }
+.sh-icon b { position: absolute; top: -4px; right: -4px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 99px; display: grid; place-items: center; background: #1f9d5c; color: #fff; font-size: .6875rem; font-weight: 800; }
+/* 모바일 하단 탭(홈·탐색 동일) */
+.gnb-tabbar { display: none; }
+@media (max-width: 760px) {
+  .gnb-in { height: 56px; gap: 8px; }
+  .sh-nav { display: none; }
+  .sh-fs small { display: none; }
+  .gnb-tabbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; display: grid; grid-template-columns: repeat(5, 1fr); padding: 6px 4px calc(6px + env(safe-area-inset-bottom)); background: rgba(255,255,255,.96); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid #e3e8e2; }
+  .gnb-tabbar a { display: grid; justify-items: center; gap: 2px; padding: 4px 0; color: #66766d; text-decoration: none; font-size: .75rem; font-weight: 700; white-space: nowrap; }
+  .gnb-tabbar a[aria-current="page"] { color: #17834b; }
+  .gnb-tabbar svg { width: 22px; height: 22px; }
+  body { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+}
+@media (prefers-color-scheme: dark) {
+  .gnb, .gnb-tabbar { background: rgba(21,29,25,.92); border-color: #29342e; }
+  .sh-brand { color: #e6eee9; } .sh-nav a { color: #a3afa8; } .sh-nav a:hover, .sh-nav a[aria-current="page"] { background: #14301f; color: #5cce91; }
+  .sh-fs, .sh-icon { background: #151d19; border-color: #29342e; color: #e6eee9; }
+  .gnb-tabbar a { color: #a3afa8; } .gnb-tabbar a[aria-current="page"] { color: #5cce91; }
+}
+/* 글꼴도 모든 페이지 동일 */
+body, .gnb, .gnb-tabbar, .gnb button { font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif; }
+/* 글자 크기 설정(모든 페이지 공통, 이 기기 저장) */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html[data-fs="s"] { font-size: 93.75%; } html[data-fs="l"] { font-size: 112.5%; } html[data-fs="xl"] { font-size: 125%; }
+/* 가로 넘침 방지: 화면 폭을 넘는 요소가 있어도 페이지가 옆으로 밀리거나 축소되지 않게(iOS 포함) */
+html, body { max-width: 100%; overflow-x: clip; }
+img, video, iframe { max-width: 100%; }
+/* iOS는 16px 미만 입력칸을 누르면 화면을 자동 확대한다 → 입력칸은 항상 16px 이상 */
+input, select, textarea { font-size: max(16px, 1rem) !important; }
+@media (max-width: 1080px) and (min-width: 761px) { .sh-nav a { padding: 0 9px; font-size: .875rem; } .sh-nav a svg { display: none; } .sh-fs small { display: none; } }

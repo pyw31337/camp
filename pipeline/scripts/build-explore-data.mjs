@@ -110,6 +110,8 @@ for (const [id, d] of Object.entries(details)) {
     if (so.cafe?.length) d.cafe = so.cafe;
     if (so.image?.length) d.sns_images = so.image;
     if (so.vclip?.length) d.videos = so.vclip;
+    if (so.layout) d.layout = so.layout;
+    if (so.prices?.length) d.prices = so.prices;
     d.social_checked_at = so.fetched_at ?? null;
     const rec = records.find((r) => r.id === id);
     if (rec) rec.soc = [(so.blog?.length ?? 0) + (so.cafe?.length ?? 0), so.vclip?.length ?? 0, so.image?.length ?? 0];

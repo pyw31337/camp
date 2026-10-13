@@ -5,7 +5,7 @@
 import {
   ArrowRight, BadgeCheck, Bell, CalendarClock, CalendarDays, Car, ChevronRight,
   CircleHelp, Database, ExternalLink, Heart, ImageIcon, Info, MapPin,
-  Search, TentTree, Trees, UsersRound, X,
+  BookOpen, House, LocateFixed, Search, Sparkles, Tent, TentTree, Trees, UsersRound, X,
 } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 
@@ -16,6 +16,9 @@ type Camp = {
   imagePageUrl: string; reservationUrl: string; noticeUrl: string;
   officialUpdate: string; officialUpdateDate: string; observedAt: string;
 };
+type FsKey = "s" | "m" | "l" | "xl";
+const FS_ORDER: FsKey[] = ["s", "m", "l", "xl"];
+const FS_LABEL: Record<FsKey, string> = { s: "작게", m: "보통", l: "크게", xl: "아주 크게" };
 type FeaturedCamp = { id: string; name: string; where: string; line: string | null; ph: string; rt: boolean };
 type FeaturedTheme = { id: string; label: string; desc: string; count: number; camps: FeaturedCamp[] };
 type Featured = { total: number; photo_count: number; themes: FeaturedTheme[] };
@@ -97,6 +100,13 @@ export default function Home() {
   const [upcoming, setUpcoming] = useState(fallbackEvents);
   const [catalog, setCatalog] = useState<Catalog>(fallbackCatalog);
   const [featured, setFeatured] = useState<Featured | null>(null);
+  // 글자 크기(탐색 화면과 같은 저장값 moyeora-fs를 공유)
+  const [fs, setFs] = useState<FsKey>("m");
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => { try { const v = window.localStorage.getItem("moyeora-fs") as FsKey | null; if (v && FS_ORDER.includes(v)) { setFs(v); document.documentElement.dataset.fs = v; } } catch { /* 저장소 없음 */ } });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+  const cycleFs = () => { const next = FS_ORDER[(FS_ORDER.indexOf(fs) + 1) % FS_ORDER.length]; setFs(next); document.documentElement.dataset.fs = next; try { window.localStorage.setItem("moyeora-fs", next); } catch { /* 저장소 없음 */ } };
   // 전국 탐색 데이터에서 뽑은 테마별 사진 캠핑장(매일 Data sync가 갱신)
   useEffect(() => {
     const controller = new AbortController();
@@ -146,11 +156,11 @@ export default function Home() {
   const dataState = catalog.sources.gocamping.state === "PUBLISHED" ? `고캠핑 ${catalog.counts.gocamping_records?.toLocaleString("ko-KR")}곳 동기화` : catalog.sources.gocamping.state === "PENDING_PERSISTENCE_REVIEW" ? "고캠핑 수집 완료 · 공개 전 권리 검토" : "고캠핑 API 동기화 대기";
 
   return <main className="may-app" id="home">
-    <header className="may-topbar">
-      <a className="may-brand" href="#home" aria-label="모여라 캠핑 홈"><span><TentTree size={21} /></span><b>모여라 캠핑</b></a>
-      <nav aria-label="주요 메뉴"><a href="explore/"><Search size={16} />전국 캠핑장 찾기</a><a href="#calendar"><CalendarClock size={16} />예약 오픈 캘린더</a><a href="#saved-camps"><Heart size={16} />관심 캠핑장</a></nav>
-      <div className="may-top-actions"><button type="button" className="may-round-action" onClick={() => scrollTo("#saved-camps")} aria-label="관심 캠핑장"><Heart size={20} /><b>{saved.length}</b></button><button type="button" className="may-round-action" onClick={() => scrollTo("#calendar")} aria-label="예약 오픈 알림"><Bell size={19} /></button></div>
-    </header>
+    <header className="gnb"><div className="gnb-in">
+      <a className="sh-brand" href="./" aria-label="모여라 캠핑 홈"><span><Tent size={20} /></span><b>모여라 캠핑</b></a>
+      <nav className="sh-nav" aria-label="주요 메뉴"><a href="explore/"><Search size={18} />캠핑장 찾기</a><a href="explore/collections/"><Sparkles size={18} />컬렉션</a><a href="explore/guide/"><BookOpen size={18} />예약 가이드</a><a href="#calendar"><Bell size={18} />예약 오픈</a><a href="explore/passport/"><Heart size={18} />관심·패스포트</a></nav>
+      <div className="sh-actions"><button type="button" className="sh-fs" onClick={cycleFs} aria-label="글자 크기 바꾸기">가<small>{FS_LABEL[fs]}</small></button><a className="sh-icon" href="explore/#near=1" aria-label="내 주변 캠핑장"><LocateFixed size={18} /></a></div>
+    </div></header>
 
     <div className="may-shell">
       <section className="may-hero" aria-label="캠핑 탐색">
@@ -201,6 +211,6 @@ export default function Home() {
 
       <section className="may-section may-provider-section" id="providers"><div className="may-section-head"><div><h2>예약처별 예약 방법</h2><p>같은 예약처는 공통 규칙을 묶고, 시설별 예외는 따로 보관합니다.</p></div></div><div className="may-provider-grid"><article><span><Trees size={21} /></span><h3>숲나들e</h3><p>국립·공립·사립 휴양림 통합예약</p><ul><li>주중: 6주 전 수요일 09:00</li><li>주말·공휴일: 월별 추첨</li><li>미결제분: 선착순 전환</li></ul><a href={FORESTTRIP_URL} target="_blank" rel="noreferrer">공식 일정 보기 <ExternalLink size={14} /></a></article><article><span><TentTree size={21} /></span><h3>국립공원공단</h3><p>국립공원 야영장 예약시스템</p><ul><li>이용 2개월 전 추첨 접수</li><li>발표·결제 일정은 회차별 확인</li><li>취소분은 예약처에서 확인</li></ul><a href={KNPS_URL} target="_blank" rel="noreferrer">공식 예약처 <ExternalLink size={14} /></a></article><article><span><CalendarDays size={21} /></span><h3>서울시 공공서비스예약</h3><p>서울시·자치구 공영 캠핑장</p><ul><li>시설별 접수 기간 공개</li><li>OpenAPI 읽기 연동 준비</li><li>감면 조건은 시설별 상이</li></ul><a href={SEOUL_YEYAK_URL} target="_blank" rel="noreferrer">공식 예약처 <ExternalLink size={14} /></a></article></div></section>
     </div>
-    <nav className="may-bottom-nav" aria-label="모바일 주요 탐색"><a href="#home"><TentTree size={18} />홈</a><a href="explore/"><Search size={18} />찾기</a><a href="#calendar"><Bell size={18} />예약오픈</a><a href="#saved-camps"><Heart size={18} />관심</a></nav>
+    <nav className="gnb-tabbar" aria-label="모바일 주요 탐색"><a href="./" aria-current="page"><House size={22} />홈</a><a href="explore/"><Search size={22} />찾기</a><a href="explore/collections/"><Sparkles size={22} />컬렉션</a><a href="#calendar"><Bell size={22} />예약오픈</a><a href="explore/passport/"><Heart size={22} />관심</a></nav>
   </main>;
 }
