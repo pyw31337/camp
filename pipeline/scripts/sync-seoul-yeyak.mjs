@@ -20,6 +20,9 @@ for (const service of SEOUL_SERVICES) {
     console.log(`::warning title=서울 공공예약 ${service}::${error.message}`);
   }
 }
+// 진단: 캠핑 단어가 어디든 들어간 행의 소분류 분포(필터 기준 점검용)
+const near = raw.filter((r) => /캠핑|야영|글램핑|카라반/.test(`${r.MINCLASSNM ?? ""} ${r.SVCNM ?? ""} ${r.PLACENM ?? ""}`));
+console.log(`캠핑 단어 포함 ${near.length}건 · 소분류 ${JSON.stringify(near.reduce((a, r) => ({ ...a, [r.MINCLASSNM ?? "?"]: (a[r.MINCLASSNM ?? "?"] ?? 0) + 1 }), {}))}`);
 const seen = new Set();
 const services = raw.filter(isCampingService).map((row) => normalizeSeoulService(row, checkedAt)).filter((s) => s.id && !seen.has(s.id) && seen.add(s.id));
 const byStatus = services.reduce((acc, s) => ({ ...acc, [s.status ?? "?"]: (acc[s.status ?? "?"] ?? 0) + 1 }), {});

@@ -8,6 +8,9 @@ const row = { SVCID: "S240101000000000001", SVCNM: "난지캠핑장 일반캠핑
 test("서울 공공예약: 캠핑 상품 판별·정규화(시각·좌표·예약 링크)", () => {
   assert.equal(isCampingService(row), true);
   assert.equal(isCampingService({ MINCLASSNM: "테니스장", SVCNM: "테니스" }), false);
+  assert.equal(isCampingService({ MINCLASSNM: "숲체험", SVCNM: "(화,수)신나는 유아 숲체험", PLACENM: "중랑캠핑숲" }), false);
+  assert.equal(isCampingService({ MINCLASSNM: "공원탐방", SVCNM: "중랑캠핑숲 오감체험", PLACENM: "중랑캠핑숲" }), false);
+  assert.equal(isCampingService({ MINCLASSNM: "캠핑장", SVCNM: "가족캠핑장 11월 예약", PLACENM: "중랑캠핑숲" }), true);
   assert.equal(seoulTime("2026-10-01 10:00:00.0"), "2026-10-01T10:00:00+09:00");
   const s = normalizeSeoulService(row, "2026-10-13T00:00:00Z");
   assert.equal(s.status, "접수중");

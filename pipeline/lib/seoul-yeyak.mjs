@@ -45,7 +45,9 @@ export async function fetchSeoulService(key, service, { fetchImpl = fetch, wait 
   return { rows, total: Number.isFinite(total) ? total : rows.length };
 }
 
-export const isCampingService = (row) => CAMP_RE.test(`${row.MINCLASSNM ?? ""} ${row.SVCNM ?? ""} ${row.PLACENM ?? ""}`);
+// 장소명에만 “캠핑”이 들어간 숲체험·교육 프로그램(예: 중랑캠핑숲 유아 숲체험)은 빼고, 소분류나 상품명이 캠핑·야영인 것만 남긴다.
+const PROGRAM_RE = /체험|교실|교육|강좌|탐험|해설|나들이|프로그램|축제|공연/;
+export const isCampingService = (row) => CAMP_RE.test(`${row.MINCLASSNM ?? ""} ${row.SVCNM ?? ""}`) && !(PROGRAM_RE.test(row.SVCNM ?? "") && !CAMP_RE.test(row.MINCLASSNM ?? ""));
 
 export function normalizeSeoulService(row, checkedAt) {
   let lng = Number(row.X), lat = Number(row.Y);
