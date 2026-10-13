@@ -2,6 +2,8 @@
 // 파일 머리글은 판(版)마다 조금씩 달라 정확한 이름 대신 패턴으로 열을 찾는다.
 
 import { createHash } from "node:crypto";
+import { epsg5174ToWgs84 } from "./crs.mjs";
+import { inKorea } from "./geo.mjs";
 
 const pick = (row, patterns) => {
   for (const re of patterns) {
@@ -13,7 +15,13 @@ const pick = (row, patterns) => {
 const sumCols = (row, re) => Object.keys(row).filter((k) => re.test(k.replace(/\s+/g, ""))).reduce((s, k) => s + (Number(String(row[k]).replace(/[^\d]/g, "")) || 0), 0);
 const yes = (v) => (v == null ? null : /^(y|yes|유|있음|설치|o|1|true)$/i.test(String(v).trim()) ? true : /^(n|no|무|없음|미설치|x|0|false)$/i.test(String(v).trim()) ? false : null);
 
+/** 화장실 데이터임을 보증하는 열(칸 수·개방시간 등). 이름+주소만 있는 다른 업종 파일을 걸러낸다. */
+export function isToiletRow(row) {
+  return Object.keys(row).some((k) => /화장실|대변기|소변기|개방시간|기저귀|비상벨/.test(k.replace(/\s+/g, "")));
+}
+
 export function normalizeToilet(row) {
+  if (!isToiletRow(row)) return null;
   const name = pick(row, [/^화장실명$/, /^(사업장명|시설명|명칭)$/, /화장실명/]);
   const road = pick(row, [/소재지도로명주소/, /도로명(전체)?주소/, /^도로명주소$/]);
   const jibun = pick(row, [/소재지지번주소/, /지번(전체)?주소/, /^소재지(전체)?주소$/]);
@@ -24,9 +32,18 @@ export function normalizeToilet(row) {
   const disabled = sumCols(row, /장애인/);
   const child = sumCols(row, /어린이/);
   const id = createHash("sha1").update(`${name}|${road ?? ""}|${jibun ?? ""}`).digest("hex").slice(0, 16);
+  // LOCALDATA 계열 파일의 좌표정보(X)/(Y)는 EPSG:5174. 있으면 지오코딩 없이 쓴다.
+  const tx = Number(pick(row, [/좌표정보\(?X\)?/i, /^X좌표$/]));
+  const ty = Number(pick(row, [/좌표정보\(?Y\)?/i, /^Y좌표$/]));
+  let coord = null;
+  if (tx > 0 && ty > 0) {
+    const [la, ln] = epsg5174ToWgs84(tx, ty);
+    if (inKorea(la, ln)) coord = { lat: Math.round(la * 1e6) / 1e6, lng: Math.round(ln * 1e6) / 1e6, precision: "EPSG5174" };
+  }
   return {
     id,
     name,
+    ...(coord ?? {}),
     road_address: road,
     jibun_address: jibun,
     open_hours: openText,

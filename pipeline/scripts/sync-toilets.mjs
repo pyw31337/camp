@@ -3,13 +3,15 @@
 // 사용: KAKAO_REST_API_KEY=... node scripts/sync-toilets.mjs  (키가 없으면 수집·정규화까지만)
 import { execFileSync } from "node:child_process";
 import { existsSync } from "node:fs";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { csvToObjects, decodeKoreanText } from "../lib/csv.mjs";
 import { geocodeAll, kakaoGeocode } from "../lib/geocode.mjs";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
 import { linkNearbyToilets } from "../lib/nearby-toilets.mjs";
-import { OVERPASS_QUERY, OVERPASS_URL, mergeToiletSources, normalizeOsmToilet } from "../lib/osm-toilets.mjs";
+import { OVERPASS_QUERY, mergeToiletSources, normalizeOsmToilet } from "../lib/osm-toilets.mjs";
+import { overpass } from "../lib/overpass.mjs";
 import { geocodeQuery, normalizeToilet } from "../lib/toilets.mjs";
 
 const SOURCE_URL = process.env.TOILET_SOURCE_URL ?? "https://file.localdata.go.kr/file/public_restroom_info/info";
@@ -21,16 +23,25 @@ await mkdir(cacheDir, { recursive: true });
 const fetchedAt = toKstIso(nowInKst());
 const warn = (title, msg) => console.log(`::warning title=${title}::${msg}`);
 
+let zipListLogged = false;
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36";
 
 /** 응답 본문을 CSV 바이트로: ZIP이면 첫 CSV를 꺼낸다(러너의 unzip). */
 async function toCsvBytes(buf, tag) {
   if (buf[0] === 0x50 && buf[1] === 0x4b) {
-    const zip = `${cacheDir}toilets-${tag}.zip`;
-    await writeFile(zip, buf);
-    const list = execFileSync("unzip", ["-Z1", zip]).toString().split("\n").filter((n) => /\.csv$/i.test(n));
-    if (!list.length) throw new Error("ZIP 안에 CSV가 없음");
-    return execFileSync("unzip", ["-p", zip, list[0]], { maxBuffer: 512 * 1024 * 1024 });
+    // 시도별 ‘전체’ ZIP에는 모든 업종 파일이 들어 있다. 화장실 파일만 고른다(임시 폴더, 캐시에 넣지 않음).
+    const dir = await mkdtemp(`${tmpdir()}/toilets-`);
+    const zip = `${dir}/${tag}.zip`;
+    try {
+      await writeFile(zip, buf);
+      const names = execFileSync("unzip", ["-Z1", zip]).toString().split("\n").filter(Boolean);
+      if (tag.endsWith("_ALL") && !zipListLogged) { zipListLogged = true; console.log(`ZIP 안 파일 ${names.length}개 예: ${names.slice(0, 12).join(" | ")}`); }
+      const pickName = names.find((n) => /화장실|restroom|toilet/i.test(n));
+      if (!pickName) throw new Error(`ZIP 안에 화장실 파일이 없음(${names.length}개 파일)`);
+      return execFileSync("unzip", ["-p", zip, pickName], { maxBuffer: 512 * 1024 * 1024 });
+    } finally {
+      await rm(dir, { recursive: true, force: true });
+    }
   }
   return buf;
 }
@@ -86,7 +97,7 @@ try {
 const cache = existsSync(cachePath) ? JSON.parse(await readFile(cachePath, "utf8")) : {};
 const key = process.env.KAKAO_REST_API_KEY;
 if (key) {
-  const r = await geocodeAll(toilets.map(geocodeQuery), cache, {
+  const r = await geocodeAll(toilets.filter((t) => !Number.isFinite(t.lat)).map(geocodeQuery), cache, {
     geocode: (q) => kakaoGeocode(q, { key }),
     maxCalls: Number(process.env.GEOCODE_MAX_CALLS ?? 30000),
     today: fetchedAt.slice(0, 10),
@@ -98,6 +109,7 @@ if (key) {
 }
 let located = 0;
 for (const t of toilets) {
+  if (Number.isFinite(t.lat)) { located++; continue; }
   const c = cache[geocodeQuery(t)];
   if (c && !c.miss) { t.lat = c.lat; t.lng = c.lng; t.precision = c.precision; located++; }
 }
@@ -105,9 +117,8 @@ console.log(`좌표 확보 ${located}/${toilets.length}곳 (${toilets.length ? M
 // OpenStreetMap 보조 원천(좌표 포함). 행안부 항목과 30m 안에서 겹치면 버린다.
 let osmStats = { fetched: 0, added: 0, duplicates: 0 };
 try {
-  const res = await fetch(OVERPASS_URL, { method: "POST", body: new URLSearchParams({ data: OVERPASS_QUERY }), headers: { "User-Agent": "moyeora-camping-pipeline (github.com/pyw31337/camp)" }, signal: AbortSignal.timeout(240000) });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const osm = ((await res.json()).elements ?? []).map(normalizeOsmToilet).filter(Boolean);
+  const { elements } = await overpass(OVERPASS_QUERY);
+  const osm = elements.map(normalizeOsmToilet).filter(Boolean);
   const m = mergeToiletSources(toilets, osm);
   toilets = m.merged;
   osmStats = { fetched: osm.length, added: m.osm_added, duplicates: m.osm_duplicates };
