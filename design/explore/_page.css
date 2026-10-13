@@ -8,7 +8,7 @@ body { min-height: 100dvh; }
 .top-links a { display: inline-flex; align-items: center; gap: 6px; min-height: 2.25rem; padding: 0 12px; border-radius: 999px; font-weight: 600; font-size: var(--fs-base); color: var(--ink-2); white-space: nowrap; }
 .top-links a:hover { background: var(--surface); color: var(--ink); }
 
-.bar { position: sticky; top: 60px; z-index: 30; background: var(--bg); padding: 12px 0 10px; border-bottom: 1px solid var(--line); }
+.bar { position: sticky; top: var(--top, 64px); z-index: 30; background: var(--bg); padding: 12px 0 10px; border-bottom: 1px solid var(--line); }
 .bar .wrap { display: grid; gap: 10px; }
 .q { display: flex; align-items: center; gap: 10px; min-height: 3rem; padding: 0 14px; border-radius: 999px; background: var(--surface); box-shadow: var(--shadow-1); border: 1px solid var(--line); min-width: 0; }
 .q input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-size: var(--fs-md); }
@@ -372,3 +372,9 @@ details.sub summary h4 { min-width: 0; }
   .near-copy { grid-column: 2; }
   .roadview-head { align-items: flex-start; flex-direction: column; }
 }
+
+/* 공통 헤더 아래 정렬 · 모바일 하단 탭 위로 지도/목록 전환 버튼 */
+@media (max-width: 760px) { .mobile-switch { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); } .map-col { bottom: calc(64px + env(safe-area-inset-bottom, 0px)) !important; } }
+/* 상세 페이지도 공통 헤더(위)·하단 탭(모바일) 사이에 열린다 */
+.sheet { top: var(--top, 64px); z-index: 60; }
+@media (max-width: 760px) { .sheet { bottom: calc(64px + env(safe-area-inset-bottom, 0px)); } }

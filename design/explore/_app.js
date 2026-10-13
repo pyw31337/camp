@@ -40,6 +40,9 @@ function load() {
   // 홈 검색창·분류 버튼에서 넘어온 검색어(q)·사이트 형태(k)
   if (h.get("q")) state.q = h.get("q");
   if (h.get("k")) state.kinds = new Set(h.get("k").split(","));
+  // 헤더 공통 메뉴에서 넘어온 요청: 관심만 보기(s=1), 내 주변(near=1)
+  if (h.get("s") === "1") state.savedOnly = true;
+  if (h.get("near") === "1") state.nearOnBoot = true;
   if (h.get("t")) state.theme = h.get("t");
   if (h.get("a") && AREAS.includes(h.get("a"))) state.area = h.get("a");
   if (h.get("g")) state.sgg = h.get("g");
@@ -634,7 +637,7 @@ document.addEventListener("change", (e) => {
 let qTimer;
 document.addEventListener("input", (e) => { if (e.target.id === "q") { clearTimeout(qTimer); qTimer = setTimeout(() => { state.q = e.target.value; rerender(); syncHash(); }, 200); } });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape" && state.open) closeDetail(); });
-const head = () => document.documentElement.style.setProperty("--head", `${$(".top").offsetHeight + $(".bar").offsetHeight}px`);
+const head = () => { const h = $(".gnb")?.offsetHeight ?? 64; document.documentElement.style.setProperty("--top", `${h}px`); document.documentElement.style.setProperty("--head", `${h + $(".bar").offsetHeight}px`); };
 new ResizeObserver(head).observe(document.body);
 
 const BASE_TITLE = document.title;
@@ -655,5 +658,6 @@ async function boot() {
   // 목록 끝에 닿으면 자동으로 더 불러온다(수백 곳도 끊김 없이).
   new IntersectionObserver((es) => { if (es.some((x) => x.isIntersecting) && !$("#moreBtn").hidden) { state.shown += PAGE; renderListOnly(); } }, { rootMargin: "600px" }).observe($("#moreBtn"));
   if (state.open) openDetail(state.open);
+  if (state.nearOnBoot) $("#nearBtn")?.click();
 }
 boot();
