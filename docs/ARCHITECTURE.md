@@ -15,6 +15,7 @@
 | **예약 오픈 알림** | `.ics` 캘린더 구독 피드를 정적 파일로 배포 → 사용자의 캘린더 앱이 하루 전·10분 전 알림 | Cloudflare Pages (정적 파일) |
 | 지도 | 카카오 지도 JavaScript SDK(도메인 제한 키) | Kakao Developers |
 | 이동시간·통행료 | 키를 숨기는 작은 서버 함수 + 10분 캐시 | Cloudflare Workers 무료 한도, 카카오모빌리티 |
+| 주변 화장실 | 공중화장실 전국 파일/API를 매일 수집 → 카카오 지오코딩(캐시, 새 주소만) → 캠핑장별 가까운 화장실 계산 → 정적 JSON | GitHub Actions(cache), 카카오 로컬 |
 | 날씨 | Actions가 캠핑장 격자별 예보를 3시간마다 받아 정적 JSON으로 배포(사용자 수와 무관하게 호출량 고정) | 기상청 API, Cloudflare Pages |
 
 GitHub Pages 대신 Cloudflare Pages를 쓰는 이유: 저장소가 비공개면 GitHub Pages가 유료이고, 길찾기 키를 숨기는 서버 함수(Workers)가 같은 곳에 있어야 하기 때문이다. 배포는 GitHub Actions가 한다(`deploy-pages.yml`).

@@ -10,7 +10,7 @@
 | 2-1 | 추가 활용신청 2건: 전국공공시설개방정보표준데이터(무료 시설 발견), 행정안전부 공중화장실정보(화장실 거리) | data.go.kr | 같은 키 | 5분 | 무료 | 무료 캠프 사이트 |
 | 3 | Cloudflare 계정·API 토큰 | dash.cloudflare.com | Secret `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` | 15분 | 무료 | 외부 공개 주소 |
 | 4 | PR 병합 | GitHub | – | 5분 | 무료 | 자동 배포 시작 |
-| 5 | 카카오 개발자 앱(지도·길찾기) | developers.kakao.com | Secret `KAKAO_REST_API_KEY`, Variable `KAKAO_JS_KEY` | 15분 | 무료 한도 | 지도·이동시간·통행료 |
+| 5 | 카카오 개발자 앱(지도·길찾기·**화장실 좌표 변환**) | developers.kakao.com | Secret `KAKAO_REST_API_KEY`, Variable `KAKAO_JS_KEY` | 15분 | 무료 한도 | 지도·이동시간·통행료 |
 | 6 | 서울 열린데이터광장 인증키 | data.seoul.go.kr | Secret `SEOUL_OPEN_API_KEY` | 10분 | 무료 | 서울 공영 캠핑장 접수 기간 |
 | 7 | 저장소 공개 여부 결정 | GitHub Settings | – | 1분 | 무료 | Actions 사용량 여유 |
 | 8 | (선택) 도메인 | 도메인 등록업체 | Cloudflare에 연결 | 20분 | 연 1~2만 원 | 없음(`*.pages.dev`로 충분) |
@@ -36,7 +36,11 @@
 - ‘행정안전부_공중화장실정보’ → 활용신청
 - 같은 인증키로 호출되므로 Secret은 그대로 두면 된다.
 
-## 3. Cloudflare (무료 호스팅·서버 함수)
+## 3. Cloudflare (무료 호스팅·서버 함수) — 새 대시보드 기준(2026-10)
+- 토큰: 오른쪽 위 사람 아이콘 → **Profile** → **API Tokens**(또는 `https://dash.cloudflare.com/profile/api-tokens`) → **Create Token** → 맨 아래 **Create Custom Token · Get started** → Permissions: `Account` / `Cloudflare Pages` / `Edit` → Account Resources: `Include` / 내 계정 → Continue → Create.
+- Account ID: 계정 이름 아래 32자리, 또는 Workers & Pages 화면 오른쪽.
+- ‘Enable Agent Lee access’ 패널은 Cloudflare 자체 AI 기능이라 이번 작업과 무관(닫으면 됨).
+
 
 > 이 작업 환경(클라우드 컨테이너)은 사용자 컴퓨터의 브라우저를 조작할 수 없어 대신 진행하지 못했다. 아래 순서대로 하면 10분 안에 끝난다.
 
@@ -58,6 +62,7 @@
 2. 앱 설정 → 플랫폼 → Web → 사이트 도메인에 배포 주소(예: `https://moyeora.pages.dev`)와 `http://localhost:5173` 등록.
 3. 앱 키에서 **JavaScript 키** → Variable `KAKAO_JS_KEY`(브라우저에 노출되는 키라 Secret이 아니어도 된다. 도메인 제한으로 보호), **REST API 키** → Secret `KAKAO_REST_API_KEY`(길찾기는 서버 함수에서만 호출).
 4. 카카오모빌리티 길찾기 API 이용 조건(무료 호출 한도)을 확인해 알려 주면 그에 맞춰 캐시 정책을 정한다.
+5. REST API 키는 전국 공중화장실 52,255곳의 주소를 좌표로 바꾸는 데에도 쓴다(첫 실행에 최대 3만 건, 이후 매일 바뀐 주소만). 앱 설정 → 제품 설정 → 카카오맵/로컬이 켜져 있어야 한다.
 
 ## 6. 서울 열린데이터광장
 - https://data.seoul.go.kr 가입 → 인증키 신청 → Secret `SEOUL_OPEN_API_KEY`.

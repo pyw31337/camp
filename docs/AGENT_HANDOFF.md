@@ -27,6 +27,7 @@
 | v2.1 줄바꿈 | 소유자 피드백: 라벨이 폭 때문에 두 줄이 되는 것 금지, 캐러셀 카드는 한 화면에. 라벨·버튼·칩·제목 nowrap + 좁은 화면 짧은 문구(`.l`/`.s`), 카테고리 모바일 4열 그리드, 조건 바 2×2, 상세 탭 4등분, 오픈 카드 폭을 열 수(4/3/2/1+여백)로 계산하고 PC 좌우 버튼 추가, 화면 이동 시 시트 닫기 버그 수정 | `bash design/checks/run.sh`: 줄바꿈 검사기(텍스트 노드 줄 수) 16개 폭 × 4화면 + 시트 6종: 0건, 말줄임 잘림 0건. 문장 단락만 `data-wrap-ok`로 허용 |
 | 공공데이터 | 키 확인 스크립트(`npm run check:keys`), HTTPS 연결 실패 시 HTTP 재시도, 망 차단은 경고로 처리 | Actions에서 고캠핑 3,118건·기상청·TourAPI 정상, 고캠핑 동기화 성공 |
 | 무료 캠프 사이트 | `registry/free-sites.json`, `lib/free-sites.mjs`, `lib/free-discovery.mjs`, `scripts/discover-public-free.mjs`, 시안 홈 섹션·‘무료’ 필터 | `npm test` 28/28. 고캠핑 소개문 후보 11건은 전부 오탐 → 패턴 강화. 공공시설개방정보 API 경로는 CI 결과로 확인 필요 |
+| 공중화장실 연계 | 전국 공중화장실(행안부, 52,255곳) 수집·정규화(EUC-KR·ZIP·HTML 링크 처리), 카카오 지오코딩+캐시, 캠핑장 반경 2km 거리순 5곳 연계, `db/002_public_toilets.sql`(비파괴, 롤백 SQL 포함), 시안 상세 ‘주변 화장실’ | `npm test` 35/35. CI: 파일 서버가 해외 IP에 403 → API 경로 탐색(`npm run probe`) 추가. 카카오 키 등록 전에는 지오코딩·연계 미실행(경고 표시) |
 | 핵심 기능·UX | 핵심 기능 3개와 무학습 원칙, 레퍼런스 5개 분석을 `docs/CORE_FEATURES_UX.md`로 작성 | 레퍼런스는 헤드리스 브라우저로 원본 이미지를 확인(Dribbble는 일반 요청을 차단) |
 | 디자인 시안 v2 | Pretendard·Lucide/Tabler·초록 4계열 팔레트로 홈(탭 검색)·찾기(지도 띠 D-day 핀)·상세(사이트 맵 툴팁·예약 카드)·캘린더(구독)·바텀시트(날짜 범위·인원 스테퍼·장비) 구현 | `npm run build` 아이콘 73개·폰트 98KB. Playwright 320/390/820/1440px·라이트/다크 4화면 가로 넘침 0·오류 0. `#detail` 앵커 스크롤, 빈 토스트 노출, 320px 조건 바 넘침을 수정 |
 | 알림(무료) | `pipeline/lib/ics.mjs`, `npm run ics` → `out/ics/all.ics`, `provider-*.ics`(하루 전·10분 전 알림, 시각 미확정은 종일) | `npm test` 18/18 통과(RFC 5545 골격·CRLF·75옥텟 접기·UID 안정성) |
