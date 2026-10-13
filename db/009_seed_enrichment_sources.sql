@@ -2,7 +2,7 @@
 -- allows_persistent_storage는 이용허락범위를 원문으로 확인하기 전까지 false로 둔다(OSM은 ODbL로 저장 허용, 출처 표시·동일조건 의무).
 -- 운영 DB 적재기(pipeline/scripts/import-enrichment-postgres.mjs)는 false인 원천을 운영 DB에 쓰지 않는다.
 -- 확인되면 db/004처럼 별도 마이그레이션으로 true로 바꾸고 근거 URL을 license_summary에 남긴다.
--- 롤백: DELETE FROM data_source WHERE code IN ('mois-localdata-restroom','ex-openapi','drowsy-shelter-standard','osm','moyeora-free-registry','moyeora-booking-registry');
+-- 롤백: DELETE FROM data_source WHERE code IN ('mois-localdata-restroom','mois-localdata-campground','ex-openapi','drowsy-shelter-standard','osm','moyeora-free-registry','moyeora-booking-registry');
 
 BEGIN;
 
@@ -14,6 +14,10 @@ INSERT INTO data_source (
     'https://file.localdata.go.kr/file/public_restroom_info/info', 'A',
     'https://www.data.go.kr/data/15012892/standard.do',
     '전국 공중화장실 파일(일 단위 갱신). 좌표는 주소 지오코딩(카카오) 값. 이용허락범위 원문 확인 필요', false, 86400),
+  ('mois-localdata-campground', '일반야영장업·자동차야영장업 인허가(LOCALDATA 파일)', '행정안전부',
+    'https://file.localdata.go.kr/', 'A',
+    'https://www.localdata.go.kr/',
+    '인허가 상태·인허가일·폐업일·소재지·EPSG:5174 좌표. 이용허락범위 원문 확인 필요', false, 86400),
   ('ex-openapi', '고속도로 공공데이터 포털 OpenAPI', '한국도로공사',
     'https://data.ex.co.kr/openapi/', 'A',
     'https://data.ex.co.kr/openapi/basicinfo/openApiInfoM?apiId=0312',

@@ -116,6 +116,10 @@ jobs:
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
           EX_API_KEY: ${{ secrets.EX_API_KEY }}
+      - name: Collect campground licences (LOCALDATA) and match to GoCamping
+        # 키 불필요. 고캠핑에 없는 숨은 캠핑장 후보·폐업 교차 확인·시설 규모 등 인허가 세부 정보.
+        run: npm run sync:localdata-campgrounds
+        continue-on-error: true
       - name: Discover free public camp sites (candidates only)
         continue-on-error: true
         run: npm run discover:public-free

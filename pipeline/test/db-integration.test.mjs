@@ -6,7 +6,7 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import pg from "pg";
 import { importGoCampingSnapshot } from "../lib/postgres-gocamping.mjs";
-import { importBooking, importFreeRegistry, importRestStops, importToilets, loadSources } from "../lib/postgres-enrichment.mjs";
+import { importBooking, importFreeRegistry, importLocaldataCampgrounds, importRestStops, importToilets, loadSources } from "../lib/postgres-enrichment.mjs";
 
 const adminUrl = process.env.TEST_DATABASE_URL;
 const now = new Date().toISOString();
@@ -45,6 +45,12 @@ const future = new Date(Date.now() + 5 * 864e5).toISOString();
 const calendar = { generated_at: now, range: { from: now }, events: [
   { id: "rule-a:LOTTERY_APPLY_START:x", rule_id: "rule-a", type: "LOTTERY_APPLY_START", at: future, time_known: false, label: "접수 시작", needs_verification: true, source: { url: "https://reservation.knps.or.kr/", tier: "B" } },
 ] };
+const licenses = { fetched_at: now, records: [
+  { id: "AUTO:4200000:1", kind: "AUTO", license_no: "1", name: "테스트 캠핑장", status: "OPERATING", road_address: "강원 홍천군 테스트로 900001", lat: 37.7001, lng: 128.1001, extra: { 시설총규모: "1000" },
+    match: { state: "MATCHED", gocamping_id: "900001", score: 0.95, evidence: { name: 1, distance_m: 12 }, flags: [] } },
+  { id: "GENERAL:4200000:2", kind: "GENERAL", license_no: "2", name: "숨은 야영장", status: "OPERATING", road_address: "강원 인제군 숨은로 1", lat: 38.0, lng: 128.3, extra: {},
+    match: { state: "NEW", flags: ["HIDDEN_CANDIDATE"] } },
+] };
 const freeRegistry = {
   sites: [{ id: "free-1", name: "무료 노지", address: "강원 홍천군 어딘가", status: "VERIFIED", fee: { free: true }, cooking: { allowed: false }, toilet: { onsite: null },
     evidence: [{ field: "fee", url: "https://www.example.go.kr/notice/1", tier: "A", checked_at: "2026-10-12" }, { field: "cooking", url: "https://cafe.example.com/1", tier: "E", checked_at: "2026-10-12" }] }],
@@ -72,6 +78,7 @@ test("PostgreSQL 전체 마이그레이션·적재·멱등·품질 규칙", { sk
         rest: await importRestStops(pool, restJson, source),
         booking: await importBooking(pool, registry, calendar),
         free: await importFreeRegistry(pool, freeRegistry, source),
+        lic: await importLocaldataCampgrounds(pool, licenses, source),
       };
     };
     const first = await load();
@@ -90,6 +97,12 @@ test("PostgreSQL 전체 마이그레이션·적재·멱등·품질 규칙", { sk
     assert.equal(a.booking_event, 1);
     assert.equal(a.campground, 3, "고캠핑 2 + 검수 완료 무료 사이트 1");
     assert.equal(a.campground_fact, 1, "E등급 근거(취사)는 사실로 올리지 않는다");
+    const links = (await pool.query("SELECT external_id, state, campground_id IS NOT NULL AS linked FROM entity_link WHERE source_code LIKE 'localdata-%' ORDER BY external_id")).rows;
+    assert.deepEqual(links, [{ external_id: "AUTO:4200000:1", state: "MATCHED", linked: true }, { external_id: "GENERAL:4200000:2", state: "NEW", linked: false }]);
+    // 사람이 검수한 연결은 다음 자동 적재가 덮어쓰지 않는다
+    await pool.query("UPDATE entity_link SET state = 'REJECTED', campground_id = NULL, reviewed_at = now() WHERE external_id = 'AUTO:4200000:1'");
+    await importLocaldataCampgrounds(pool, licenses, await loadSources(pool, { allowUnverified: true }));
+    assert.equal((await pool.query("SELECT state FROM entity_link WHERE external_id = 'AUTO:4200000:1'")).rows[0].state, "REJECTED");
 
     const fact = (await pool.query("SELECT fact_key, state, display_status FROM campground_fact_current")).rows;
     assert.deepEqual(fact, [{ fact_key: "IS_FREE", state: "YES", display_status: "CONFIRMED" }]);

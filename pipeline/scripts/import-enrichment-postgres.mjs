@@ -5,7 +5,7 @@ import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import pg from "pg";
-import { finishRun, importBooking, importFreeRegistry, importRestStops, importToilets, loadSources, startRun } from "../lib/postgres-enrichment.mjs";
+import { finishRun, importBooking, importFreeRegistry, importLocaldataCampgrounds, importRestStops, importToilets, loadSources, startRun } from "../lib/postgres-enrichment.mjs";
 
 const connectionString = process.env.DATABASE_URL;
 if (!connectionString) throw new Error("DATABASE_URL이 필요합니다. 먼저 npm run db:migrate를 실행하세요.");
@@ -47,6 +47,8 @@ try {
   const registry = await readJson("../registry/booking-rules.json");
   const calendar = await readJson("../out/open-calendar.json");
   await step("booking", registry && calendar ? { registry, calendar } : null, (db) => importBooking(db, registry, calendar));
+  const lic = await readJson("../out/localdata-campgrounds.json");
+  await step("localdata-campgrounds", lic, (db) => importLocaldataCampgrounds(db, lic, source));
   const free = await readJson("../registry/free-sites.json");
   await step("free-registry", free, (db) => importFreeRegistry(db, free, source));
   console.log(JSON.stringify({ allow_unverified_licenses: allowUnverified, ...summary }, null, 2));

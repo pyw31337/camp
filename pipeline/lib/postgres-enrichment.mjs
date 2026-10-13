@@ -305,3 +305,41 @@ export async function importFreeRegistry(db, registry, source) {
   }
   return { registry_entries: candidates, promoted_campgrounds: promoted, facts_written: facts };
 }
+
+// ── LOCALDATA 야영장업 인허가 ↔ 고캠핑 연계 ────────────────────────────────
+
+/**
+ * 인허가 레코드를 entity_link로 적재한다. MATCHED만 campground_id를 채우고, 나머지는 검수·숨은 후보로 남긴다.
+ * 이미 사람이 검수(MATCHED/VERIFIED/REJECTED)한 연결은 자동 결과로 덮어쓰지 않는다.
+ * @param {{fetched_at:string, records:object[]}} json out/localdata-campgrounds.json
+ */
+export async function importLocaldataCampgrounds(db, json, source) {
+  const src = source("mois-localdata-campground");
+  if (!src.allows) return { licenses_read: (json.records ?? []).length, licenses_written: 0, skipped: { license: (json.records ?? []).length } };
+  const camp = await gocampingIndex(db);
+  const rows = (json.records ?? []).map((r) => {
+    const campgroundId = r.match?.state === "MATCHED" ? camp.get(String(r.match.gocamping_id)) ?? null : null;
+    return {
+      campground_id: campgroundId,
+      source_code: r.kind === "AUTO" ? "localdata-auto-campground" : "localdata-general-campground",
+      external_id: r.id,
+      external_name: r.name,
+      external_address: r.road_address || r.parcel_address,
+      latitude: r.lat, longitude: r.lng,
+      match_score: r.match?.score ?? 0,
+      match_evidence: JSON.stringify({ ...(r.match?.evidence ?? {}), gocamping_id: r.match?.gocamping_id ?? null, flags: r.match?.flags ?? [],
+        license: { no: r.license_no, status: r.status, status_text: r.status_text, licensed_at: r.licensed_at, closed_at: r.closed_at, suspended: r.suspended, phone: r.phone, updated_at: r.updated_at },
+        extra: r.extra ?? {} }),
+      state: r.match?.state === "MATCHED" && !campgroundId ? "NEEDS_REVIEW" : r.match?.state ?? "NEW",
+      observed_at: json.fetched_at,
+    };
+  });
+  const cols = ["campground_id", "source_code", "external_id", "external_name", "external_address", "latitude", "longitude", "match_score", "match_evidence", "state", "observed_at"];
+  const written = await insertMany(db, "INSERT INTO entity_link", cols, rows, `ON CONFLICT (source_code, external_id) DO UPDATE SET
+      external_name = EXCLUDED.external_name, external_address = EXCLUDED.external_address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude,
+      match_evidence = EXCLUDED.match_evidence, observed_at = EXCLUDED.observed_at, updated_at = now(),
+      campground_id = CASE WHEN entity_link.reviewed_at IS NOT NULL THEN entity_link.campground_id ELSE EXCLUDED.campground_id END,
+      match_score = CASE WHEN entity_link.reviewed_at IS NOT NULL THEN entity_link.match_score ELSE EXCLUDED.match_score END,
+      state = CASE WHEN entity_link.reviewed_at IS NOT NULL THEN entity_link.state ELSE EXCLUDED.state END`);
+  return { licenses_read: rows.length, licenses_written: written, matched: rows.filter((r) => r.state === "MATCHED").length, hidden_candidates: rows.filter((r) => r.state === "NEW").length };
+}

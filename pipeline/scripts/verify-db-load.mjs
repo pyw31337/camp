@@ -32,6 +32,8 @@ try {
   }
   const rest = await readJson("../out/rest-stops.json");
   if (rest) check("휴게소·졸음쉼터 = rest-stops.json", await one("SELECT count(*) n FROM rest_stop"), new Set(rest.stops.map((s) => s.id)).size);
+  const lic = await readJson("../out/localdata-campgrounds.json");
+  if (lic) check("야영장업 인허가 연계 = localdata-campgrounds.json", await one("SELECT count(*) n FROM entity_link WHERE source_code LIKE 'localdata-%'"), new Set(lic.records.map((r) => r.id)).size);
   const cal = await readJson("../out/open-calendar.json");
   if (cal) {
     const rules = new Set((await readJson("../registry/booking-rules.json")).rules.map((r) => r.id));
@@ -56,6 +58,8 @@ try {
     campgrounds_with_nearby_toilet: await one("SELECT count(DISTINCT campground_id) n FROM campground_nearby_toilet"),
     campgrounds_with_toilet_300m: await one("SELECT count(DISTINCT campground_id) n FROM campground_nearby_toilet WHERE distance_m <= 300"),
     rest_stops_with_fuel_price: await one("SELECT count(DISTINCT rest_stop_id) n FROM fuel_price_observation WHERE expires_at > now()"),
+    localdata_matched: await one("SELECT count(*) n FROM entity_link WHERE source_code LIKE 'localdata-%' AND state = 'MATCHED'"),
+    localdata_hidden_candidates: await one("SELECT count(*) n FROM entity_link WHERE source_code LIKE 'localdata-%' AND state = 'NEW'"),
     free_registry_entries: await one("SELECT count(*) n FROM entity_link WHERE source_code = 'moyeora-free-registry'"),
     ingest_runs: await one("SELECT count(*) n FROM ingest_run"),
   };

@@ -21,7 +21,8 @@
     "probe": "node scripts/probe-endpoints.mjs",
     "sync:rest-stops": "node scripts/sync-rest-stops.mjs",
     "db:import-enrichment": "node scripts/import-enrichment-postgres.mjs",
-    "db:verify-load": "node scripts/verify-db-load.mjs"
+    "db:verify-load": "node scripts/verify-db-load.mjs",
+    "sync:localdata-campgrounds": "node scripts/sync-localdata-campgrounds.mjs"
   },
   "dependencies": {
     "pg": "8.23.1"
