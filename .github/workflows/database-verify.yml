@@ -1,0 +1,50 @@
+name: PostgreSQL schema verification
+
+on:
+  pull_request:
+    paths:
+      - "db/**"
+      - "pipeline/**"
+      - ".github/workflows/database-verify.yml"
+  push:
+    branches: [main]
+    paths:
+      - "db/**"
+      - "pipeline/**"
+      - ".github/workflows/database-verify.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: moyeora_verify
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d moyeora_verify"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    defaults:
+      run:
+        working-directory: pipeline
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/moyeora_verify
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run db:migrate
+      - run: npm run db:verify
+      # A second run catches checksum/idempotency mistakes before production sees them.
+      - run: npm run db:migrate
