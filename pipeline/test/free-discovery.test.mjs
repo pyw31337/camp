@@ -10,8 +10,11 @@ test("이용료 무료 표현만 후보로 잡는다", () => {
     item({ contentId: "2", intro: "무료 와이파이와 무료 주차를 제공합니다." }),
     item({ contentId: "3", lineIntro: "강변 무료 야영장" }),
     item({ contentId: "4", intro: "1박 40,000원" }),
+    item({ contentId: "5", intro: "풀장과 히노끼탕 등 공용 시설은 무료로 이용할 수 있습니다." }),
+    item({ contentId: "6", intro: "캠핑장 이용객은 낚시터를 무료로 이용할 수 있다." }),
+    item({ contentId: "7", intro: "군 직영 야영장으로 연중 무료 개방한다." }),
   ]);
-  assert.deepEqual(r.map((x) => x.gocamping_id), ["1", "3"]);
+  assert.deepEqual(r.map((x) => x.gocamping_id).sort(), ["1", "3", "7"]);
   assert.ok(r[0].snippet.includes("무료"));
 });
 

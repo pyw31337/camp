@@ -12,6 +12,7 @@
     "calendar": "node scripts/build-open-calendar.mjs",
     "sync:gocamping": "node scripts/sync-gocamping.mjs",
     "ics": "node scripts/build-ics.mjs",
-    "check:keys": "node scripts/check-data-go-kr.mjs"
+    "check:keys": "node scripts/check-data-go-kr.mjs",
+    "discover:public-free": "node scripts/discover-public-free.mjs"
   }
 }
