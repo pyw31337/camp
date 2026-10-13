@@ -174,6 +174,8 @@ pipeline/out/campgrounds.json ──┐
 
 `actions/checkout@v4` 기본 인증이 남아 있어 별도 토큰이 필요 없다(`contents: read`로 충분). `git archive`라 `.git` 없이 파일만 복사된다.
 
+전국 커버리지 재균형을 처음 실행하기 전의 전체 갤러리는 Git 태그 `media-pre-coverage-20261013`으로 보존했다. 재균형 결과에 문제가 있으면 `media`를 이 태그로 되돌려 복구할 수 있다. 검증이 끝난 뒤에는 저장소 용량을 위해 이 태그를 삭제할지 별도로 결정한다.
+
 ### 공유 API 한도 운영
 
 `data-sync.yml`은 고캠핑 기준 목록을 받은 직후 사진을 먼저 동기화한다. 2026-10-13 실행에서 TourAPI 보조 수집이 같은 `data.go.kr` 일일 한도를 소진해 imageList가 0건으로 끝난 사실을 확인했기 때문이다.
