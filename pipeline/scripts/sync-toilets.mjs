@@ -1,10 +1,8 @@
 // 전국 공중화장실(행정안전부, 일 단위 갱신) 수집 → 정규화 → 주소 지오코딩(캐시) → out/toilets.json
 // → 고캠핑 캠핑장 좌표와 연계(out/campground-toilets.json).
 // 사용: KAKAO_REST_API_KEY=... node scripts/sync-toilets.mjs  (키가 없으면 수집·정규화까지만)
-import { execFileSync } from "node:child_process";
 import { existsSync } from "node:fs";
-import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
-import { tmpdir } from "node:os";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { csvToObjects, decodeKoreanText } from "../lib/csv.mjs";
 import { geocodeAll, kakaoGeocode } from "../lib/geocode.mjs";
@@ -13,6 +11,7 @@ import { linkNearbyToilets } from "../lib/nearby-toilets.mjs";
 import { OVERPASS_QUERY, mergeToiletSources, normalizeOsmToilet } from "../lib/osm-toilets.mjs";
 import { overpass } from "../lib/overpass.mjs";
 import { geocodeQuery, normalizeToilet } from "../lib/toilets.mjs";
+import { listZip, readZipEntry } from "../lib/zip.mjs";
 
 const SOURCE_URL = process.env.TOILET_SOURCE_URL ?? "https://file.localdata.go.kr/file/public_restroom_info/info";
 const out = fileURLToPath(new URL("../out/", import.meta.url));
@@ -26,22 +25,16 @@ const warn = (title, msg) => console.log(`::warning title=${title}::${msg}`);
 let zipListLogged = false;
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36";
 
-/** 응답 본문을 CSV 바이트로: ZIP이면 첫 CSV를 꺼낸다(러너의 unzip). */
+/** 응답 본문을 CSV 바이트로: ZIP이면 화장실 파일을 꺼낸다(메모리에서, 캐시에 넣지 않음). */
 async function toCsvBytes(buf, tag) {
   if (buf[0] === 0x50 && buf[1] === 0x4b) {
-    // 시도별 ‘전체’ ZIP에는 모든 업종 파일이 들어 있다. 화장실 파일만 고른다(임시 폴더, 캐시에 넣지 않음).
-    const dir = await mkdtemp(`${tmpdir()}/toilets-`);
-    const zip = `${dir}/${tag}.zip`;
-    try {
-      await writeFile(zip, buf);
-      const names = execFileSync("unzip", ["-Z1", zip]).toString().split("\n").filter(Boolean);
-      if (tag.endsWith("_ALL") && !zipListLogged) { zipListLogged = true; console.log(`ZIP 안 파일 ${names.length}개 예: ${names.slice(0, 12).join(" | ")}`); }
-      const pickName = names.find((n) => /화장실|restroom|toilet/i.test(n));
-      if (!pickName) throw new Error(`ZIP 안에 화장실 파일이 없음(${names.length}개 파일)`);
-      return execFileSync("unzip", ["-p", zip, pickName], { maxBuffer: 512 * 1024 * 1024 });
-    } finally {
-      await rm(dir, { recursive: true, force: true });
-    }
+    // 시도별 ‘전체’ ZIP에는 모든 업종 파일이 들어 있다. 파일명은 UTF-8 플래그 없이 들어 있어 직접 디코딩한다.
+    const entries = listZip(buf).filter((e) => /\.csv$/i.test(e.name));
+    if (!zipListLogged) { zipListLogged = true; console.log(`ZIP 안 CSV ${entries.length}개: ${entries.map((e) => e.name).join(" | ")}`); }
+    const hit = entries.find((e) => /화장실|restroom|toilet/i.test(e.name));
+    if (!hit) throw new Error(`ZIP 안에 화장실 파일이 없음(${entries.length}개 파일)`);
+    console.log(`  ${tag}: ${hit.name} (${hit.size.toLocaleString()} bytes)`);
+    return readZipEntry(buf, hit);
   }
   return buf;
 }
