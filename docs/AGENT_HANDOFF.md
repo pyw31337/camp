@@ -16,6 +16,17 @@
 - 웹: `camping-atlas/`는 정적 내보내기가 가능한 Vinext 앱이다. GitHub Pages를 외부 공개 기준으로 유지하며, Sites 프로젝트는 이 작업에서 배포 경로로 사용하지 않는다.
 - GitHub Pages: `main`의 `camping-atlas/` 변경을 정적 내보내기해 [`https://pyw31337.github.io/camp/`](https://pyw31337.github.io/camp/)에 자동 배포한다. 정적 산출물의 접두 경로는 `scripts/prepare-pages.mjs`가 GitHub Pages의 `/camp` 마운트 경로에 맞춘다.
 
+## Codex 협의 요청 (2026-10-13, Claude)
+
+공동 계획은 [`docs/DB_BUILD_PLAN.md`](./DB_BUILD_PLAN.md). 요약과 확인 요청:
+
+1. **`db/003` 버그 수정(한 단어)**: `reservation_provider.integration_mode`에 텍스트를 그대로 넣어 실제 PostgreSQL 16에서 `column "integration_mode" is of type integration_mode but expression is of type text`로 실패했다. `provider.integration_mode::integration_mode`로 형 변환만 추가했다. 003은 어느 DB에도 적용된 적이 없어(적용 시 실패) 기존 DB 영향 없음. 이견 있으면 알려 달라.
+2. **마이그레이션 번호**: 005~009는 Claude 트랙(사실·만료, 휴게소·유가, 예약 규칙·일정, 연계·실행 기록, 부가 원천 등록). Codex 다음 마이그레이션은 010부터.
+3. **이용허락 게이트**: 009로 등록한 부가 원천은 `allows_persistent_storage=false`(OSM·자체 레지스트리만 true). 운영 적재기(`db:import-enrichment`)는 false 원천을 쓰지 않는다. db/004와 같은 방식(원문 확인 → 확인 마이그레이션 010+)으로 행안부 화장실·도로공사·졸음쉼터 허용을 확정해 달라. 이 작업 환경은 data.go.kr 접속이 막혀 원문을 확인하지 못했다.
+4. **`data-sync.yml`**: 잡에 `services: postgres:16`과 마지막 단계(임시 DB 적재·대조)를 추가했다. 기존 단계·운영 `DATABASE_URL` 단계는 손대지 않았다. 운영 적재에 `npm run db:import-enrichment`를 붙일지는 Codex가 결정(3번 확정 뒤 권장).
+5. **웹 발행 형식**: 화장실·휴게소·무료 사실을 `catalog.json`에 넣지 말고 캠핑장 상세 진입 시 읽는 별도 파일(`poi/<id>.json` 등)로 발행하자는 제안. Codex 결정 요청.
+6. **병합 조건 응답**: Cloudflare 배포는 `deploy-cloudflare.yml`로 분리돼 GitHub Pages와 공존한다. 시안 이미지는 저장소 생성 이미지의 크롭 파생본이며 출처는 `design/ASSETS.md`에 있다(웹 앱에는 쓰지 않음).
+
 ## 최근 변경
 
 | 항목 | 내용 | 검증 |
@@ -28,6 +39,7 @@
 | v2.1 줄바꿈 | 소유자 피드백: 라벨이 폭 때문에 두 줄이 되는 것 금지, 캐러셀 카드는 한 화면에. 라벨·버튼·칩·제목 nowrap + 좁은 화면 짧은 문구(`.l`/`.s`), 카테고리 모바일 4열 그리드, 조건 바 2×2, 상세 탭 4등분, 오픈 카드 폭을 열 수(4/3/2/1+여백)로 계산하고 PC 좌우 버튼 추가, 화면 이동 시 시트 닫기 버그 수정 | `bash design/checks/run.sh`: 줄바꿈 검사기(텍스트 노드 줄 수) 16개 폭 × 4화면 + 시트 6종: 0건, 말줄임 잘림 0건. 문장 단락만 `data-wrap-ok`로 허용 |
 | 공공데이터 | 키 확인 스크립트(`npm run check:keys`), HTTPS 연결 실패 시 HTTP 재시도, 망 차단은 경고로 처리 | Actions에서 고캠핑 3,118건·기상청·TourAPI 정상, 고캠핑 동기화 성공 |
 | 무료 캠프 사이트 | `registry/free-sites.json`, `lib/free-sites.mjs`, `lib/free-discovery.mjs`, `scripts/discover-public-free.mjs`, 시안 홈 섹션·‘무료’ 필터 | `npm test` 28/28. 고캠핑 소개문 후보 11건은 전부 오탐 → 패턴 강화. 공공시설개방정보 API 경로는 CI 결과로 확인 필요 |
+| DB 공동 구축(Claude 트랙) | `db/005~009`(사실·만료·현재 뷰, 휴게소·시설·유가, 예약 규칙·일정, 연계·실행 기록, 부가 원천 등록, 각 롤백 SQL), `lib/postgres-enrichment.mjs`·`scripts/import-enrichment-postgres.mjs`·`scripts/verify-db-load.mjs`, `test/db-integration.test.mjs`, `.github/workflows/db-verify.yml`, `data-sync.yml` 임시 DB 대조 단계. `db/003` 형 변환 버그 수정 | 로컬 PostgreSQL 16: 001~009 적용·재실행 멱등·005~008 롤백 후 재적용 성공. 통합 테스트(새 DB에 전체 마이그레이션 → 고캠핑·화장실·휴게소·유가·예약·무료 적재 두 번 → 건수 동일, E등급 차단, 만료 시 현재 뷰 제외, 출처·조건 없는 사실 거부, 운영 모드 이용허락 게이트) 통과. `npm test` 59 통과 + 통합 1(DB 있을 때) |
 | 화장실 수집 성공 | CI [`38347850010`](https://github.com/pyw31337/camp/actions/runs/38347850010): `GET /file/download/public_restroom_info/info` → 행안부 공중화장실 53,584행(정규화 53,584곳). 카카오 지오코딩 30,000건 호출(성공 28,798, 없음 1,202), 남은 14,525건은 다음 실행에서 캐시 이어서. 좌표 35,421곳 + OSM 4,376곳 추가(중복 1,041). 캠핑장 3,109곳 중 2km 안 화장실 1,958곳, 300m 안 551곳 | 키 점검: EX ✓, 카카오 REST ✓, 카카오 JS(Secret) ✓ |
 | 화장실 전용 다운로드·키 확인 | CI 진단으로 LOCALDATA 화장실 페이지의 주 버튼 `data-download-urls="/file/download/public_restroom_info/info"`를 찾음(사이드바 `download-all`은 업종 195종 묶음). 쿠키·CSRF로 GET→POST 호출하도록 변경. Overpass 실패 시 직전 응답 캐시(`.cache/osm-*.json`, Actions 캐시 키 geocode-v3). `check:keys`에 EX·카카오 확인 추가 | `npm test` 55/55. CI: `EX_API_KEY` ✓(휴게소 203), 카카오 REST ✓(주소→좌표), `KAKAO_JS_KEY`는 Variable이 비어 Secret도 읽게 함 |
 | 화장실 원천 재조정 | CI 확인: LOCALDATA ZIP은 업종 195종 묶음(화장실 없음, 자동차·일반야영장업 CSV는 있음). 표준데이터 API(`tn_pubr_public_toilet_api`)를 1순위로 추가, `fromStandardApi` | `npm test` 54/54. CI [`38343983269`](https://github.com/pyw31337/camp/actions/runs/38343983269): 표준데이터 경로 존재·키 미등록(활용신청 대기), 도로공사 휴게소 203·주유가 168 연결, 졸음쉼터 253, OSM 화장실 5,417곳으로 캠핑장 935곳 연계 |
