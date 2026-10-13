@@ -59,7 +59,11 @@ async function downloadAll(pageUrl) {
     ...[...html.matchAll(/onclick=["']([^"']+)["']/gi)].map((m) => `onclick:${m[1]}`),
     ...[...html.matchAll(/(?:url|location\.href|action)\s*[:=]\s*["'`]([^"'`]*(?:down|file)[^"'`]*)["'`]/gi)].map((m) => `js:${m[1]}`),
   ])].filter((c) => !/download-all\?orgCode=\d+_ALL$/.test(c));
-  console.log(`LOCALDATA 페이지 단서 ${clues.length}개: ${clues.slice(0, 60).join(" | ")}`);
+  const own = clues.filter((c) => !/^\/file\/[a-z_]+\/info$/.test(c) && !/^#file-cat/.test(c));
+  console.log(`LOCALDATA 페이지 단서 ${clues.length}개 중 다른 업종 링크 제외 ${own.length}개: ${own.slice(0, 80).join(" | ")}`);
+  for (const m of [...html.matchAll(/<(?:a|button|form)[^>]*(?:다운로드|download)[^>]*>/gi)].slice(0, 20)) console.log(`  태그: ${m[0].slice(0, 200)}`);
+  for (const m of [...html.matchAll(/[^\n]{0,120}(?:CSV|csv|xlsx|엑셀)[^\n]{0,120}/g)].slice(0, 15)) console.log(`  문맥: ${m[0].replace(/\s+/g, " ").slice(0, 240)}`);
+  const dataUrl = html.match(/data-download-url=["']([^"']+)["']/i)?.[1];
   if (dataUrl) console.log(`data-download-url: ${dataUrl}`);
   const links = [...new Set([...html.matchAll(/\/file\/download-all\?orgCode=([0-9A-Z_]+)/g)].map((m) => m[0]))];
   if (!links.length) throw new Error(`시도별 다운로드 링크 없음(HTML ${buf.length}B)`);

@@ -39,7 +39,7 @@ jobs:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
           EX_API_KEY: ${{ secrets.EX_API_KEY }}
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
-          KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY }}
+          KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY || secrets.KAKAO_JS_KEY }}
       - name: Sync GoCamping (skips when the key secret is not set)
         run: npm run sync:gocamping
         env:
