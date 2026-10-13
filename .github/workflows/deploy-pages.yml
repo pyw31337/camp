@@ -6,6 +6,11 @@ on:
     paths:
       - "camping-atlas/**"
       - ".github/workflows/deploy-pages.yml"
+  # Data sync가 GITHUB_TOKEN으로 커밋한 데이터는 push 이벤트를 만들지 않으므로, 수집이 끝나면 다시 배포한다.
+  workflow_run:
+    workflows: ["Data sync"]
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
 
 permissions:

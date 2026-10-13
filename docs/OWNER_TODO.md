@@ -9,12 +9,13 @@
 | 2 | ✅ 공공데이터포털 인증키 (2026-10-13 확인: 고캠핑·기상청·TourAPI 정상) | data.go.kr | Secret `DATA_GO_KR_SERVICE_KEY` | 완료 | 무료 | – |
 | 2-1 | 추가 활용신청: **자동차야영장업 조회서비스**(경로 확인됨, 미신청, 선택) · 화장실은 LOCALDATA 파일로 해결돼 표준데이터 신청 불필요 · 완료 확인: 공공시설개방정보, 일반야영장업, **전국졸음쉼터표준데이터(2026-10-13 253곳 수신)** | data.go.kr | 같은 키 | 5분 | 무료 | 숨은 캠핑장 |
 | 2-2 | ✅ 한국도로공사 OpenAPI 인증키 (2026-10-13 CI 확인: 휴게소 203곳) | data.ex.co.kr | Secret `EX_API_KEY` | 완료 | 무료 | – |
-| 3 | ✅ Cloudflare 계정·API 토큰 (2026-10-13 배포 확인: 미리보기 https://preview.moyeora-6pd.pages.dev) | dash.cloudflare.com | Secret `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` | 완료 | 무료 | – |
-| 4 | PR 병합 | GitHub | – | 5분 | 무료 | 자동 배포 시작 |
+| 3 | ~~Cloudflare 계정·API 토큰~~ → **더 이상 쓰지 않음**(2026-10-13 주소를 https://pyw31337.github.io/camp/ 하나로 통일). Secret `CLOUDFLARE_*`는 지워도 되고 남겨도 무해 | – | – | – | – | – |
+| 4 | PR 병합 | GitHub | – | 5분 | 무료 | **병합해야 https://pyw31337.github.io/camp/explore/ 에 전국 캠핑장 지도가 열림** |
+| 5-0 | 카카오 JavaScript SDK 도메인에 `https://pyw31337.github.io` 추가 | developers.kakao.com | 5-3 참고 | 2분 | 무료 | 지도 표시 |
 | 5 | ✅ 카카오 개발자 앱 (2026-10-13 CI 확인: REST 주소→좌표 정상, 화장실 28,798곳 변환. JS 키는 Secret으로 등록돼 그대로 사용) | developers.kakao.com | Secret `KAKAO_REST_API_KEY`, `KAKAO_JS_KEY` | 완료 | 무료 한도 | – |
 | 6 | 서울 열린데이터광장 인증키 | data.seoul.go.kr | Secret `SEOUL_OPEN_API_KEY` | 10분 | 무료 | 서울 공영 캠핑장 접수 기간 |
 | 7 | 저장소 공개 여부 결정 | GitHub Settings | – | 1분 | 무료 | Actions 사용량 여유 |
-| 8 | (선택) 도메인 | 도메인 등록업체 | Cloudflare에 연결 | 20분 | 연 1~2만 원 | 없음(`*.pages.dev`로 충분) |
+| 8 | (선택) 도메인 | 도메인 등록업체 | GitHub Pages 사용자 도메인 | 20분 | 연 1~2만 원 | 없음(`pyw31337.github.io/camp`로 충분) |
 
 ## 1. 시안 v2 검토
 - 링크: https://claude.ai/artifact/57VZAanbcJ8KTBTb4PrtBq (비공개 링크. 다른 사람에게 보여 주려면 페이지의 Share 메뉴에서 공유)
@@ -45,7 +46,11 @@
 3. 마이페이지 → **인증키 관리**에서 키를 복사한다. 키 하나로 이 포털의 모든 OpenAPI가 호출된다.
 4. GitHub → Settings → Secrets and variables → Actions → **New repository secret** → Name `EX_API_KEY`, Secret에 붙여넣기 → Add secret.
 
-## 3. Cloudflare (무료 호스팅) — 2026-10 새 대시보드 기준
+## 3. Cloudflare — 폐기(2026-10-13)
+
+서비스 주소를 GitHub Pages(https://pyw31337.github.io/camp/) 하나로 통일했다. 아래 안내는 기록용이며 더 할 일은 없다.
+
+### (기록) Cloudflare 무료 호스팅 — 2026-10 새 대시보드 기준
 
 ### 3-1. API 토큰 만들기
 1. 주소창에 `https://dash.cloudflare.com/profile/api-tokens` 입력(또는 오른쪽 위 사람 아이콘 → Profile → API Tokens).
@@ -106,8 +111,9 @@
 
 | 사이트 도메인 |
 | --- |
-| `https://moyeora-6pd.pages.dev` |
-| `https://preview.moyeora-6pd.pages.dev` |
+| `https://pyw31337.github.io` (**필수**, 실제 서비스 주소. 경로 `/camp`는 넣지 않음) |
+| `https://moyeora-6pd.pages.dev` (폐기, 지워도 됨) |
+| `https://preview.moyeora-6pd.pages.dev` (폐기, 지워도 됨) |
 | `http://localhost:5173` |
 
 ### 5-4. 키 복사

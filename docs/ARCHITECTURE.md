@@ -1,7 +1,8 @@
 # 아키텍처 — 무료 운영 우선, GitHub 중심
 
 > 갱신일: 2026-10-12 KST (v2: 무료 운영·로그인 없음 전제로 개정)<br>
-> 소유자 작업 목록: [OWNER_TODO.md](./OWNER_TODO.md)
+> 소유자 작업 목록: [OWNER_TODO.md](./OWNER_TODO.md)<br>
+> **2026-10-13 변경**: 공개 주소를 GitHub Pages(https://pyw31337.github.io/camp/) 하나로 통일했다. 아래 표·그림의 Cloudflare Pages는 GitHub Pages로 읽는다(`deploy-cloudflare.yml`·`assemble-site.mjs` 폐기). 키를 숨겨야 하는 길찾기 서버 함수가 필요해지면 그때 Cloudflare Workers만 따로 검토한다.
 
 ## 1. 결론
 
@@ -64,7 +65,7 @@ flowchart LR
 | `web-quality.yml` | PR, main | `camping-atlas` 린트·빌드 |
 | `pipeline-quality.yml` | PR, main | 파이프라인 테스트, 규칙 검증, 캘린더·ics 생성 확인 |
 | `data-sync.yml` | 매일 03:17 KST, 수동 | 고캠핑 동기화(키 있을 때), 캘린더·ics 생성, 결과 아티팩트 |
-| `deploy-cloudflare.yml` | PR(미리보기), main 반영, 매일 03:47 KST, 수동 | ics 생성 → `site/` 조립 → Cloudflare Pages 배포(Secret 없으면 건너뜀) |
+| ~~`deploy-cloudflare.yml`~~ | 폐기(2026-10-13) | 탐색 화면은 `data-sync.yml` → `camping-atlas/public/explore/` 커밋 → `deploy-pages.yml`(workflow_run)로 GitHub Pages 배포 |
 
 ## 6. 사이트 소스 전환 계획
 

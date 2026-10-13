@@ -11,7 +11,7 @@
 - 데이터 모델: PostgreSQL 16+용 초기 스키마가 `db/001_initial_schema.sql`에 있다. 시설·구역·상품·재고·요금·예약 정책·원천 증빙·미디어 권리를 분리한다.
 - 디자인: **시안 v2**가 기준이다. 원본 `design/mockup-v2/src.html` → `design/build.mjs`가 Lucide·Tabler 스프라이트와 Pretendard 서브셋을 인라인해 `index.html` 생성. 사용자 검토 대기. v1은 `design/mockup/`에 참고용으로 남김.
 - 운영 전제: 무료 운영, 로그인 보류. 알림은 `.ics` 구독, 관심 목록은 브라우저 저장. 소유자 작업은 `docs/OWNER_TODO.md`.
-- Cloudflare 미리보기: `deploy-cloudflare.yml`이 시안 + ics를 `site/`로 조립해 Cloudflare Pages 프로젝트 `moyeora`에 배포한다. PR → 미리보기 `https://preview.moyeora-6pd.pages.dev`, main → 정식 `https://moyeora-6pd.pages.dev`(병합 후 첫 배포부터). `moyeora.pages.dev`는 선점돼 Cloudflare가 `-6pd`를 붙였다. Secret이 없으면 조립만 하고 건너뛴다.
+- **주소 통일(2026-10-13, 소유자 요청)**: 서비스 주소는 https://pyw31337.github.io/camp/ 하나다. Cloudflare Pages(`*.moyeora-6pd.pages.dev`)와 `deploy-cloudflare.yml`·`scripts/assemble-site.mjs`는 폐기했다. 전국 캠핑장 탐색 화면은 `/camp/explore/`에 둔다: main의 `data-sync.yml` 마지막 단계가 `scripts/publish-explorer-pages.mjs`로 `camping-atlas/public/explore/`(화면 + `data/campgrounds.json`·`meta.json`)를 만들어 커밋하고, `deploy-pages.yml`은 `workflow_run`(Data sync 완료, main)으로도 실행된다(GITHUB_TOKEN 커밋은 push 워크플로를 깨우지 않기 때문). 홈 상단 ‘전국 캠핑장 찾기’와 하단 ‘찾기’가 `explore/`로 연결된다. 카카오 JS SDK 도메인에 `https://pyw31337.github.io` 등록 필요(소유자).
 - 파이프라인: `pipeline/`에 고캠핑 수집·정규화, 예약 규칙 레지스트리, 예약 오픈 캘린더 계산기와 테스트가 있다. `data-sync.yml`이 매일 실행되며 키가 없으면 고캠핑 단계는 건너뛴다.
 - 웹: `camping-atlas/`는 정적 내보내기가 가능한 Vinext 앱이다. GitHub Pages를 외부 공개 기준으로 유지하며, Sites 프로젝트는 이 작업에서 배포 경로로 사용하지 않는다.
 - GitHub Pages: `main`의 `camping-atlas/` 변경을 정적 내보내기해 [`https://pyw31337.github.io/camp/`](https://pyw31337.github.io/camp/)에 자동 배포한다. 정적 산출물의 접두 경로는 `scripts/prepare-pages.mjs`가 GitHub Pages의 `/camp` 마운트 경로에 맞춘다.
@@ -24,14 +24,15 @@
 2. **`lib/postgres-context.mjs` 최소 수정(두 줄)**: 실데이터의 중복 키(같은 쉼터 두 번 등록, 같은 화장실 해시)가 한 INSERT에 들어가면 운영 첫 적재가 `ON CONFLICT DO UPDATE command cannot affect row a second time`으로 실패한다(로컬 재현, 회귀 테스트 `test/postgres-context-duplicates.test.mjs`). 키별 마지막 행만 남긴다. 같은 이유로 `replaceNearbyToiletLinks`도 캠핑장별 중복 화장실을 한 번만 넣고 순위를 다시 매긴다(CI 실데이터 단계가 발견). 확인 부탁.
 3. `db/008_campground_licence_source.sql`(인허가 원천 등록, 새 테이블 없음)과 `db:import-licences`(Codex `campground_candidate`에 적재)를 더했다. 다음 Codex 마이그레이션은 009부터.
 4. `data-sync.yml`: 인허가 수집 단계, 운영 단계에 `db:import-licences`, 마지막에 **그날 실제 파일을 임시 PostgreSQL에 두 번 적재**하는 단계를 더했다(고정 표본 검증이 못 잡는 실데이터 문제 대비).
-5. **화면 분담 제안**: Claude는 Cloudflare 미리보기/정식 주소에 실데이터 탐색 화면(`design/explore`)을 배포한다. `camping-atlas`(GitHub Pages)도 같은 데이터(`/data/campgrounds.json`, `/data/meta.json`, 스키마는 `pipeline/lib/explore-data.mjs`)를 그대로 읽을 수 있다. 어느 쪽을 정식 서비스로 할지는 소유자 결정.
+5. **화면 분담(소유자 결정으로 갱신)**: 모든 화면이 GitHub Pages 한 주소로 간다. 실데이터 탐색 화면(`design/explore`)은 `/camp/explore/`, 홈·예약 오픈 일정은 `camping-atlas`. Codex 확인 요청: (a) `deploy-pages.yml`에 `workflow_run` 트리거 추가, (b) `app/home.tsx` 상단 ‘캠핑장 찾기’·하단 ‘찾기’ 링크를 `#search` → `explore/`로 바꿈(문구 ‘전국 캠핑장 찾기’), (c) `camping-atlas/public/explore/`는 data-sync 봇이 매일 덮어쓰는 생성물이니 손으로 고치지 말 것(원본은 `design/explore/`).
 6. **카카오 일일 한도 공유 주의**: main과 PR 브랜치의 Data sync가 서로 다른 캐시 키로 같은 화장실 주소를 각각 변환해 카카오 로컬 일일 한도를 함께 소진했다(06:17 실행에서 2,000건 전부 오류). 오류가 “주소 없음”으로 30일 캐시되던 문제는 `lib/geocode.mjs`에서 고쳤다(오류는 캐시하지 않고 20번 연속 오류면 중단). 지오코딩은 main 실행에서만 하고 PR은 캐시만 쓰자는 제안(예: PR에서 `GEOCODE_MAX_CALLS=0`).
-7. 병합 조건 응답: Cloudflare 배포는 `deploy-cloudflare.yml`로 분리돼 GitHub Pages와 공존, 시안 이미지 출처는 `design/ASSETS.md`.
+7. 병합 조건 응답: Cloudflare 배포는 폐기(위 주소 통일), 시안 이미지 출처는 `design/ASSETS.md`.
 
 ## 최근 변경
 
 | 항목 | 내용 | 검증 |
 | --- | --- | --- |
+| 주소 통일 | 소유자 요청으로 GitHub Pages 단일 주소. Cloudflare 워크플로·`assemble-site.mjs` 삭제, `scripts/publish-explorer-pages.mjs` 추가(탐색 화면을 `camping-atlas/public/explore/`로 발행), `data-sync.yml` 마지막 단계가 main에서 커밋·푸시, `deploy-pages.yml`에 `workflow_run`, 홈 링크 `explore/` | `npm test` 72 통과, `camping-atlas` lint 통과·`build:pages` 성공(홈에 `explore/` 링크 2개). 로컬 개발용 데이터로 `dist/client/explore/{index.html,data/}` 생성 확인 후 삭제. tsc 오류 3건(`home.tsx:108`, `vite.config.ts:11`)은 변경 전부터 있던 것. 실제 공개는 PR 병합 후 main Data sync 실행 시 |
 | 기획 | 통합검색·예약, 미디어·지도·여행 연동 설계 작성 | 원천 링크와 정책 구분을 문서 검토 |
 | DB | 25개 테이블과 예약·원천·미디어 관련 enum/인덱스 초안 작성 | SQL 형식 확인; 로컬에 PostgreSQL 실행 파일이 없어 실제 적용은 미실행 |
 | 협업 | `AGENTS.md`, 프로젝트 계획, 인수인계, GitHub 비공개 원격 저장소 생성 | `gh auth status`, 원격 저장소 생성 성공 |

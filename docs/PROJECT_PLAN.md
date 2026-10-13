@@ -2,7 +2,7 @@
 
 > 최종 갱신: 2026-10-13 KST<br>
 > 제품명: 모여라 캠핑<br>
-> 상태: GitHub Pages 공개 파일럿(`camping-atlas/`) + 전국 기준 데이터 파이프라인 구현 · 핵심 기능 3개 확정, 디자인 시안 v2 검토 대기, Cloudflare Pages 미리보기 배포
+> 상태: GitHub Pages 공개 파일럿(`camping-atlas/`) + 전국 기준 데이터 파이프라인 구현 · 핵심 기능 3개 확정, 디자인 시안 v2 검토 대기, 서비스 주소 GitHub Pages(https://pyw31337.github.io/camp/) 하나로 통일, 전국 탐색은 `/camp/explore/`
 
 ## 제품 목표
 
@@ -64,7 +64,7 @@
 **시안·무료 운영 트랙 (claude/upbeat-keller-x75pct)**
 
 1. **디자인 시안 v2 검토** (`design/mockup-v2/`) → 승인 후 `camping-atlas/` 앱에 이식
-2. 소유자 작업 [OWNER_TODO.md](./OWNER_TODO.md) 진행(키 발급·Cloudflare 토큰) → `deploy-cloudflare.yml`로 미리보기 주소 개설(완료: https://preview.moyeora-6pd.pages.dev)
+2. 소유자 작업 [OWNER_TODO.md](./OWNER_TODO.md) 진행(키 발급·Cloudflare 토큰) → (변경) Cloudflare 폐기, https://pyw31337.github.io/camp/explore/ 로 공개(PR 병합 후)
 3. data.go.kr 인증키 발급 → GitHub Secret `DATA_GO_KR_SERVICE_KEY` 등록 → `data-sync.yml`로 고캠핑 응답 필드 고정 (파서: `pipeline/lib/gocamping.mjs`, 완료)
 4. 예약 규칙 레지스트리 확충 (`pipeline/registry/booking-rules.json`, 국립공원·숲나들e·서울 등록 완료): C 등급 규칙을 공식 원문으로 A/B 승격, 지자체·민간 상위 30곳 추가
 5. 행안부 야영장업 인허가 데이터 수집기와 고캠핑 교차검증(숨은 캠핑장 후보 큐)
@@ -88,7 +88,7 @@
 - 디자인 시안 v2 승인 또는 수정 방향
 - 저장소 공개 여부(Actions 무료 한도)
 - 카카오모빌리티 길찾기 무료 한도 확인 후 캐시 정책
-- (확정) 호스팅 Cloudflare Pages, 길찾기 카카오 우선, 로그인·DB 보류
+- (확정·2026-10-13 변경) 호스팅 GitHub Pages 단일 주소(공개 저장소라 무료, 소유자 요청), 길찾기 카카오 우선, 로그인·DB 보류
 
 - 사업자 등록·예약 중개·결제대행의 법적 역할과 약관/환불 책임 범위
 - API 키·계약·쿼터·상업적 재사용 조건의 소유 주체

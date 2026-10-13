@@ -159,20 +159,23 @@ jobs:
             -c "SELECT 'booking_events=' || count(*) FROM booking_rule_event"
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
-      - name: Build explorer data and deploy to Cloudflare Pages
-        # 전국 캠핑장 탐색 화면(design/explore)을 그날 데이터로 배포한다. PR은 미리보기, main은 정식 주소.
-        if: always() && env.HAS_CF == 'true'
+      - name: Publish the campground explorer to GitHub Pages (/camp/explore/)
+        # 전국 캠핑장 탐색 화면을 그날 데이터로 camping-atlas/public/explore/에 쓰고, main이면 커밋해
+        # Deploy GitHub Pages가 https://pyw31337.github.io/camp/explore/ 를 갱신하게 한다. PR에서는 생성까지만 확인한다.
+        if: always()
         run: |
           npm run build:explore
-          npm run ics -- 120
-          cd .. && node scripts/assemble-site.mjs
-          npx --yes wrangler@4.92.0 pages deploy site --project-name="${CF_PAGES_PROJECT:-moyeora}" --branch="$DEPLOY_BRANCH" --commit-dirty=true
+          cd .. && node scripts/publish-explorer-pages.mjs
+          if [ "${{ github.event_name }}" = "pull_request" ] || git diff --quiet -- camping-atlas/public/explore; then
+            echo "탐색 화면 커밋 없음(PR 또는 변경 없음)."; exit 0
+          fi
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add camping-atlas/public/explore
+          git commit -m "chore(data): refresh campground explorer"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push
         env:
-          HAS_CF: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CF_PAGES_PROJECT: ${{ vars.CF_PAGES_PROJECT }}
-          DEPLOY_BRANCH: ${{ github.event_name == 'pull_request' && 'preview' || 'main' }}
           KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY || secrets.KAKAO_JS_KEY }}
       - uses: actions/upload-artifact@v4
         with:
