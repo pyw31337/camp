@@ -4,7 +4,6 @@
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { csvToObjects, decodeKoreanText } from "../lib/csv.mjs";
 import { geocodeAll, kakaoGeocode } from "../lib/geocode.mjs";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
 import { linkNearbyToilets } from "../lib/nearby-toilets.mjs";
@@ -12,7 +11,7 @@ import { OVERPASS_QUERY, mergeToiletSources, normalizeOsmToilet } from "../lib/o
 import { overpassCached } from "../lib/overpass.mjs";
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
 import { fromStandardApi, geocodeQuery, normalizeToilet } from "../lib/toilets.mjs";
-import { listZip, readZipEntry } from "../lib/zip.mjs";
+import { downloadLocaldata } from "../lib/localdata.mjs";
 
 const SOURCE_URL = process.env.TOILET_SOURCE_URL ?? "https://file.localdata.go.kr/file/public_restroom_info/info";
 const out = fileURLToPath(new URL("../out/", import.meta.url));
@@ -22,62 +21,6 @@ await mkdir(out, { recursive: true });
 await mkdir(cacheDir, { recursive: true });
 const fetchedAt = toKstIso(nowInKst());
 const warn = (title, msg) => console.log(`::warning title=${title}::${msg}`);
-
-let zipListLogged = false;
-const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36";
-
-/** 응답 본문을 CSV 바이트로: ZIP이면 화장실 파일을 꺼낸다(메모리에서, 캐시에 넣지 않음). */
-async function toCsvBytes(buf, tag) {
-  if (buf[0] === 0x50 && buf[1] === 0x4b) {
-    // LOCALDATA ZIP 파일명은 UTF-8 플래그 없이 들어 있어 직접 디코딩한다.
-    const entries = listZip(buf).filter((e) => /\.csv$/i.test(e.name));
-    if (!zipListLogged) { zipListLogged = true; console.log(`ZIP 안 CSV ${entries.length}개: ${(entries.length <= 20 ? entries : entries.filter((e) => /화장실|야영/.test(e.name))).map((e) => `${e.name}(${e.size}B)`).join(", ") || "관련 없음"}`); }
-    const hit = entries.find((e) => /화장실|restroom|toilet/i.test(e.name)) ?? (entries.length === 1 ? entries[0] : null);
-    if (!hit) throw new Error(`ZIP 안에 화장실 파일이 없음(${entries.length}개 파일)`);
-    console.log(`  ${tag}: ${hit.name} (${hit.size.toLocaleString()} bytes)`);
-    return readZipEntry(buf, hit);
-  }
-  return buf;
-}
-
-/**
- * LOCALDATA 공중화장실 페이지(2026-10-13 CI 확인):
- * - 주 버튼 “공중화장실정보 파일을 전체 다운로드합니다” → data-download-urls="/file/download/public_restroom_info/info"
- * - 사이드바의 /file/download-all?orgCode=…_ALL 링크는 인허가 업종 195종 묶음(화장실 없음)이라 쓰지 않는다.
- * 페이지에서 쿠키·CSRF 토큰을 얻은 뒤 화장실 전용 다운로드 경로를 GET → POST 순으로 호출한다.
- * @returns {Promise<{rows: object[], parts: string[]}>}
- */
-async function downloadAll(pageUrl) {
-  const page = await fetch(pageUrl, { headers: { "User-Agent": UA, Referer: "https://www.data.go.kr/" }, signal: AbortSignal.timeout(60000) });
-  if (!page.ok) throw new Error(`HTTP ${page.status} ${pageUrl}`);
-  const cookie = (page.headers.getSetCookie?.() ?? []).map((c) => c.split(";")[0]).join("; ");
-  const buf = Buffer.from(await page.arrayBuffer());
-  if (!/html/i.test(page.headers.get("content-type") ?? "")) return { rows: csvToObjects(decodeKoreanText(await toCsvBytes(buf, "single"))), parts: ["single"] };
-  const html = buf.toString("utf8");
-  const paths = [...new Set([...html.matchAll(/data-download-urls=["']([^"']+)["']/gi)].flatMap((m) => m[1].split(/[,\s]+/)).filter(Boolean))];
-  if (!paths.length) throw new Error(`화장실 다운로드 버튼(data-download-urls)을 찾지 못함(HTML ${buf.length}B)`);
-  const meta = (n) => html.match(new RegExp(`<meta[^>]+name=["']${n}["'][^>]+content=["']([^"']+)["']`, "i"))?.[1];
-  const csrf = meta("_csrf"), csrfHeader = meta("_csrf_header") ?? "X-CSRF-TOKEN";
-  const headers = { "User-Agent": UA, Referer: pageUrl, Cookie: cookie, ...(csrf ? { [csrfHeader]: csrf } : {}) };
-  const tried = [];
-  for (const path of paths) {
-    const url = new URL(path, pageUrl).toString();
-    for (const method of ["GET", "POST"]) {
-      try {
-        const res = await fetch(url, { method, headers: method === "POST" ? { ...headers, "Content-Type": "application/x-www-form-urlencoded", "X-Requested-With": "XMLHttpRequest" } : headers, ...(method === "POST" ? { body: csrf ? `_csrf=${encodeURIComponent(csrf)}` : "" } : {}), signal: AbortSignal.timeout(180000) });
-        const b = Buffer.from(await res.arrayBuffer());
-        const type = res.headers.get("content-type") ?? "";
-        const disp = res.headers.get("content-disposition") ?? "";
-        tried.push(`${method} ${path} → ${res.status} ${type} ${b.length}B ${disp}`.trim());
-        if (!res.ok || /html/i.test(type)) continue;
-        if (/json/i.test(type)) { tried.push(`  JSON: ${b.toString("utf8").slice(0, 300)}`); continue; }
-        const rows = csvToObjects(decodeKoreanText(await toCsvBytes(b, path)));
-        if (rows.length) return { rows, parts: [`${method} ${path}:${rows.length}`] };
-      } catch (e) { tried.push(`${method} ${path} → ${e.message}`); }
-    }
-  }
-  throw new Error(`화장실 파일 다운로드 실패: ${tried.join(" / ")}`);
-}
 
 let toilets = [];
 // 1순위: 전국공중화장실표준데이터 API(data.go.kr, 좌표 포함 가능). 2026-10-13 확인: LOCALDATA ‘전체 다운로드’ ZIP은
@@ -111,8 +54,8 @@ if (process.env.DATA_GO_KR_SERVICE_KEY) {
 }
 // 2순위: LOCALDATA 파일(경로가 바뀌어 화장실 파일이 다시 생기면 사용)
 if (!toilets.length) try {
-  const { rows, parts } = await downloadAll(SOURCE_URL);
-  console.log(`화장실 파일: ${parts.join(", ")}`);
+  const { rows, downloadPath } = await downloadLocaldata("public_restroom_info", { pick: (n) => /화장실|restroom|toilet/i.test(n), log: console.log });
+  console.log(`화장실 파일: ${downloadPath} · ${rows.length}행`);
   toilets = rows.map(normalizeToilet).filter(Boolean);
   console.log(`행안부 공중화장실 원본 ${rows.length}행 → 정규화 ${toilets.length}곳`);
   if (rows[0]) console.log(`머리글: ${Object.keys(rows[0]).join(", ")}`);
