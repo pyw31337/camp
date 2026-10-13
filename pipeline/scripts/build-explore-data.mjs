@@ -6,6 +6,7 @@ import { buildCampDetails, buildExploreRecords, buildProviders } from "../lib/ex
 import { themeCatalog } from "../lib/themes.mjs";
 import { buildBookingGuide } from "../lib/booking-intel.mjs";
 import { buildOpenings } from "../lib/openings.mjs";
+import { allocateUnique, dhashFile, photoKey, uniqueBy, uniqueByHash } from "../lib/photo-dedupe.mjs";
 import { SEOUL_DATASET_URL, matchSeoulToCampgrounds } from "../lib/seoul-yeyak.mjs";
 
 const p = (rel) => fileURLToPath(new URL(rel, import.meta.url));
@@ -20,6 +21,26 @@ const social = await read("../out/campground-social.json");
 // 자체 저장 공식 사진(webp, media 브랜치). 없으면 고캠핑 원본 주소를 그대로 쓴다.
 const mediaDir = process.env.MEDIA_DIR;
 const media = mediaDir && existsSync(`${mediaDir}/manifest.json`) ? JSON.parse(await readFile(`${mediaDir}/manifest.json`, "utf8")) : null;
+// 중복 사진 거르기(자체 저장 공식 사진): 같은 파일(이름 키)·같은 장면(dHash ≤ 6)은 하나만, 3곳 이상에 똑같이 붙은 사진(준비중·공통 이미지)은 뺀다.
+const hostedById = new Map();
+if (media) {
+  const hashOf = new Map();
+  for (const entries of Object.values(media.camps ?? {})) for (const e of entries) {
+    if (!e.thumb || hashOf.has(e.thumb) || !existsSync(`${mediaDir}/${e.thumb}`)) continue;
+    try { hashOf.set(e.thumb, await dhashFile(`${mediaDir}/${e.thumb}`)); } catch { /* 깨진 파일은 해시 없이 둔다 */ }
+  }
+  const campsByHash = new Map();
+  for (const [id, entries] of Object.entries(media.camps ?? {})) for (const e of entries) { const h = hashOf.get(e.thumb); if (h) campsByHash.set(h, (campsByHash.get(h) ?? new Set()).add(id)); }
+  const generic = new Set([...campsByHash].filter(([, ids]) => ids.size >= 3).map(([h]) => h));
+  let dropped = 0;
+  for (const [id, entries] of Object.entries(media.camps ?? {})) {
+    const kept = uniqueByHash(uniqueBy(entries, (e) => photoKey(e.src_url)), (e) => hashOf.get(e.thumb)).filter((e) => !generic.has(hashOf.get(e.thumb)));
+    dropped += entries.length - kept.length;
+    hostedById.set(id, kept);
+  }
+  console.log(`공식 사진 중복 정리: 해시 ${hashOf.size}장 · 공통 이미지 ${generic.size}종 · 제외 ${dropped}장`);
+}
+const hostedOf = (id) => hostedById.get(id) ?? media?.camps?.[id] ?? [];
 const registry = await read("../registry/booking-rules.json");
 const platforms = await read("../registry/booking-platforms.json");
 const calendar = await read("../out/open-calendar.json");
@@ -27,7 +48,7 @@ const calendar = await read("../out/open-calendar.json");
 const seoulRaw = await read("../out/seoul-yeyak.json");
 const seoul = seoulRaw ? matchSeoulToCampgrounds(seoulRaw.services ?? [], camps.campgrounds ?? []) : new Map();
 const records = buildExploreRecords(camps, toilets, fees, seoul);
-for (const r of records) { const hero = media?.camps?.[r.id]?.[0]; if (hero?.thumb) r.ph = hero.thumb; }
+for (const r of records) { const hero = hostedOf(r.id)[0]; if (hero?.thumb) r.ph = hero.thumb; }
 const meta = {
   generated_at: new Date().toISOString(),
   count: records.length,
@@ -99,6 +120,9 @@ console.log(`예약 안내 ${guided}곳 · 확정 오픈 일정 ${withOpen}곳`)
 // 고캠핑 imageList(공식 사진) 중 아직 자체 저장하지 않은 것은 원본 주소로 바로 보여 준다(고캠핑 공식 이미지 서버).
 const imageListCache = await read("../.cache/gocamping-images.json") ?? {};
 // 관광공사 객실·사이트 상품(공식 등록 기준가·상품 사진)과 공식 사진
+// 검색 사진 썸네일이 몇 곳에 붙었는지(같은 썸네일이 여러 캠핑장에 붙으면 공통·오매칭 사진)
+const snapCamps = new Map(), usedSnaps = new Set();
+for (const [cid, so] of Object.entries(social?.campgrounds ?? {})) for (const x of so.image ?? []) if (x.thumb) snapCamps.set(x.thumb, (snapCamps.get(x.thumb) ?? new Set()).add(cid));
 for (const [id, d] of Object.entries(details)) {
   const pr = products?.campgrounds?.[id];
   if (pr) {
@@ -111,7 +135,10 @@ for (const [id, d] of Object.entries(details)) {
   if (so) {
     if (so.blog?.length) d.reviews = so.blog;
     if (so.cafe?.length) d.cafe = so.cafe;
-    if (so.image?.length) d.sns_images = so.image;
+    // 검색 사진: 같은 원본(이름 키)은 한 장만, 배치도로 이미 보인 사진과 여러 캠핑장(3곳 이상)에 똑같이 붙은 사진은 뺀다.
+    const layoutKeys = new Set((so.layout?.images ?? []).map((x) => photoKey(x.img ?? x.thumb)));
+    const images = uniqueBy((so.image ?? []).filter((x) => (snapCamps.get(x.thumb)?.size ?? 0) < 3), (x) => photoKey(x.img ?? x.thumb), layoutKeys);
+    if (images.length) d.sns_images = images;
     if (so.vclip?.length) d.videos = so.vclip;
     if (so.layout) d.layout = so.layout;
     if (so.prices?.length) d.prices = so.prices;
@@ -119,17 +146,23 @@ for (const [id, d] of Object.entries(details)) {
     const rec = records.find((r) => r.id === id);
     if (rec) rec.soc = [(so.blog?.length ?? 0) + (so.cafe?.length ?? 0), so.vclip?.length ?? 0, so.image?.length ?? 0];
     // 공식 사진이 없는 곳은 목록 썸네일로 Daum 검색 이미지 썸네일 주소를 쓴다(저장·재호스팅 없음, 화면에 “검색 사진” 표기).
-    const snap = so.image?.find((x) => x.thumb);
+    // 목록 썸네일은 다른 캠핑장과 겹치지 않는 검색 사진만(같은 사진이 두 곳 이상에 붙으면 매칭이 의심스럽다).
+    const snap = images.find((x) => x.thumb && snapCamps.get(x.thumb)?.size === 1 && !usedSnaps.has(x.thumb));
+    if (snap) usedSnaps.add(snap.thumb);
     if (rec && !rec.ph && !rec.img && snap) rec.sn = snap.thumb;
   }
 }
 for (const [id, d] of Object.entries(details)) {
-  const hosted = new Set((media?.camps?.[id] ?? []).map((x) => x.src_url));
-  const remote = (imageListCache[id]?.images ?? []).map((x) => x.imageUrl).filter((u) => u && !hosted.has(u)).slice(0, 40);
+  // 이미 저장한 사진(중복으로 뺀 것 포함)과 이름 키가 같은 원본 주소는 다시 보여 주지 않는다.
+  const seenKeys = new Set((media?.camps?.[id] ?? []).map((x) => photoKey(x.src_url)));
+  const remote = uniqueBy((imageListCache[id]?.images ?? []).map((x) => x.imageUrl).filter(Boolean), photoKey, seenKeys).slice(0, 40);
   if (remote.length) d.photos_remote = remote;
+  // 고캠핑 대표 사진(thumb_720_파일)이 위 사진과 같은 파일이면 화면에서 한 번 더 붙이지 않는다.
+  const img = recById.get(id)?.img;
+  if (img && seenKeys.has(photoKey(img))) d.img_dup = 1;
 }
 for (const [id, d] of Object.entries(details)) {
-  const photos = (media?.camps?.[id] ?? []).filter((x) => x.thumb && x.large).map((x) => ({ t: x.thumb, l: x.large, w: x.w, h: x.h }));
+  const photos = hostedOf(id).filter((x) => x.thumb && x.large).map((x) => ({ t: x.thumb, l: x.large, w: x.w, h: x.h }));
   if (photos.length) d.photos = photos;
 }
 for (const [id, d] of Object.entries(details)) await writeFile(p(`../out/explore/camps/${id}.json`), JSON.stringify(d));
@@ -139,11 +172,15 @@ console.log(`테마 ${meta.themes.map((t) => `${t.label} ${t.count}`).join(" · 
 const score = (r) => (r.booking.methods.some((m) => /실시간/.test(m)) ? 4 : 0) + (r.booking.url ? 3 : 0) + (r.line ? 2 : 0) + (r.kinds.length ? 1 : 0);
 const withPhoto = records.filter((r) => r.ph).sort((a, b) => score(b) - score(a));
 const FEATURED_ORDER = ["valley", "sea", "forest", "kids", "pet", "glamping", "caravan", "autumn", "winter", "lake", "mountain", "public"];
+// 테마 줄마다 다른 캠핑장(같은 사진)이 반복되지 않게 번갈아 나눠 담는다. 같은 사진 파일을 쓰는 곳도 한 번만.
+const featuredThemes = FEATURED_ORDER.map((id) => meta.themes.find((t) => t.id === id)).filter(Boolean);
+const photoOnce = uniqueBy(withPhoto, (r) => r.ph);
+const picked = allocateUnique(featuredThemes.map((t) => ({ id: t.id, candidates: photoOnce.filter((r) => r.th.includes(t.id)) })), 12);
 const featured = {
   generated_at: meta.generated_at, total: records.length, photo_count: records.filter((r) => r.ph || r.img).length,
-  themes: FEATURED_ORDER.map((id) => meta.themes.find((t) => t.id === id)).filter(Boolean).map((t) => ({
+  themes: featuredThemes.map((t) => ({
     id: t.id, label: t.label, desc: t.desc, count: t.count,
-    camps: withPhoto.filter((r) => r.th.includes(t.id)).slice(0, 12).map((r) => ({ id: r.id, name: r.name, where: [r.sido, r.sigungu].filter(Boolean).join(" "), line: r.line ?? null, ph: r.ph, rt: r.booking.methods.some((m) => /실시간/.test(m)) })),
+    camps: (picked.get(t.id) ?? []).map((r) => ({ id: r.id, name: r.name, where: [r.sido, r.sigungu].filter(Boolean).join(" "), line: r.line ?? null, ph: r.ph, rt: r.booking.methods.some((m) => /실시간/.test(m)) })),
   })).filter((t) => t.camps.length),
 };
 await writeFile(p("../out/explore/featured.json"), JSON.stringify(featured));
