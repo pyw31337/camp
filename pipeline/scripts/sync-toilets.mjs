@@ -21,7 +21,7 @@ const fetchedAt = toKstIso(nowInKst());
 const warn = (title, msg) => console.log(`::warning title=${title}::${msg}`);
 
 async function download(url, depth = 0) {
-  const res = await fetch(url, { redirect: "follow", headers: { "User-Agent": "moyeora-camping-pipeline" }, signal: AbortSignal.timeout(120000) });
+  const res = await fetch(url, { redirect: "follow", headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36", Referer: "https://www.data.go.kr/", Accept: "text/csv,application/zip,*/*" }, signal: AbortSignal.timeout(120000) });
   if (!res.ok) throw new Error(`HTTP ${res.status} ${url}`);
   const buf = Buffer.from(await res.arrayBuffer());
   const type = res.headers.get("content-type") ?? "";

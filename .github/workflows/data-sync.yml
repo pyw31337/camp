@@ -41,6 +41,10 @@ jobs:
         run: npm run sync:gocamping
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+      - name: Probe undocumented data.go.kr endpoints
+        run: npm run probe
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
       - name: Restore geocode cache
         uses: actions/cache@v4
         with:
