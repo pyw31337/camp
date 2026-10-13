@@ -322,6 +322,14 @@ h1, h2 { text-wrap: balance; color: var(--heading); }
 .step.on .step-n { background: var(--green); color: var(--on-green); box-shadow: none; }
 .step b { display: block; font-size: 15px; font-weight: 700; padding-top: 5px; }
 .step p { font-size: 14px; color: var(--ink-2); margin-top: 2px; }
+.toilets { display: grid; gap: 8px; }
+.toilet { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 14px; border-radius: var(--r-2); background: var(--surface); }
+.toilet .prov-ic { width: 40px; height: 40px; }
+.toilet-main { display: grid; min-width: 0; }
+.toilet-main b, .toilet-main small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.toilet-main b { font-size: 14.5px; font-weight: 700; }
+.toilet-main small { font-size: 13px; color: var(--ink-2); }
+.toilet-dist { font-size: 15px; font-weight: 800; color: var(--green-press); white-space: nowrap; }
 .nearby { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .near { display: flex; gap: 12px; align-items: center; padding: 12px; background: var(--surface); border-radius: var(--r-2); min-width: 0; }
 .near .prov-ic { width: 42px; height: 42px; }
@@ -794,6 +802,12 @@ const FREE = [
     fee: ["yes", "상시"], cooking: ["unknown", "확인 중"], toilet: ["yes", "120m"],
     note: "선착순 · 여름철 혼잡", src: "고캠핑 소개 · 예시" },
 ];
+// 캠핑장별 주변 공중화장실(예시). 서비스에서는 pipeline/out/campground-toilets.json을 쓴다.
+function toiletsFor(c) {
+  const seed = [...c.id].reduce((a, ch) => a + ch.charCodeAt(0), 0);
+  const names = ["주차장 공중화장실", "마을회관 개방화장실", "계곡 입구 화장실", "체육공원 화장실"];
+  return names.slice(0, 3).map((n, i) => ({ name: n, m: [140, 420, 860][i] + (seed % 7) * 10 * (i + 1), open24: i === 0, hours: "06:00~22:00", disabled: i !== 1, bell: i === 0 }));
+}
 const CHECK_ICON = { fee: "#t-coin-off", cooking: "#l-cooking-pot", toilet: "#l-toilet" };
 const CHECK_NAME = { fee: "무료", cooking: "취사", toilet: "화장실" };
 function freeCard(f) {
@@ -1032,7 +1046,7 @@ function renderDetail() {
             <div class="fact">${ic("#l-plug-zap")}<span><small>전기</small><b>${c.elec ? "사용 가능" : "없음"}</b></span></div>
             <div class="fact">${ic("#l-dog")}<span><small>반려견</small><b>${c.pet ? "동반 가능" : "동반 불가"}</b></span></div>
             <div class="fact">${ic("#l-flame")}<span><small>화로</small><b>${esc(c.fire)}</b></span></div>
-            <div class="fact">${ic("#t-bath")}<span><small>샤워실</small><b class="num">${c.showers ? c.showers + "칸" : "없음"}</b></span></div>
+            <div class="fact">${ic("#l-toilet")}<span><small>가까운 공중화장실</small><b class="num">${toiletsFor(c)[0].m}m</b></span></div>
           </div>
           <div class="weekend">
             <div class="wtile"><small>${ic("#l-cloud-sun", "i-xs")}토 10.17</small><b>${esc(c.wx.sat[0])}</b><span class="num">${c.wx.sat[1]}° / ${c.wx.sat[2]}°</span></div>
@@ -1059,7 +1073,11 @@ function renderDetail() {
           <ol class="steps">${steps.map(([t, d], i) => `<li class="step ${i === curStep ? "on" : ""}"><span class="step-n">${i + 1}</span><div><b>${esc(t)}</b><p>${esc(d)}</p></div></li>`).join("")}</ol>
           ${p ? `<p class="note">${ic("#l-info", "i-sm")}<span data-wrap-ok>${esc(p.name)}를 쓰는 다른 캠핑장도 같은 규칙을 따릅니다. 시설별 예외는 공지를 확인하세요.</span></p>` : ""}
         </section>
-        <section class="d-sec" id="sec-near"><h2>주변과 최근 현장</h2>
+        <section class="d-sec" id="sec-near"><h2>주변 화장실<span class="faint l" style="font-size:13px;font-weight:600">반경 2km · 가까운 순</span></h2>
+          <div class="toilets">${toiletsFor(c).map((t) => `<div class="toilet"><span class="prov-ic">${ic("#l-toilet")}</span><span class="toilet-main"><b>${esc(t.name)}</b><small>${t.open24 ? "24시간" : esc(t.hours)}${t.disabled ? " · 장애인 칸" : ""}${t.bell ? " · 비상벨" : ""}</small></span><span class="toilet-dist num">${t.m < 1000 ? t.m + "m" : (t.m / 1000).toFixed(1) + "km"}</span></div>`).join("")}</div>
+          <p class="faint" style="font-size:12.5px;margin-top:8px" data-wrap-ok>행정안전부 공중화장실정보(전국 52,255곳) · 주소 지오코딩 기준 직선거리라 실제 위치와 다를 수 있어요 · 시안 예시값</p>
+        </section>
+        <section class="d-sec"><h2>주변과 최근 현장</h2>
           <div class="nearby">
             <div class="near"><span class="prov-ic">${ic("#l-shopping-cart")}</span><span><b>하나로마트 ○○점</b><small>차로 8분 · 장보기</small></span></div>
             <div class="near"><span class="prov-ic">${ic("#t-tools-kitchen-2")}</span><span><b>막국수 맛집</b><small>차로 12분 · TourAPI</small></span></div>
