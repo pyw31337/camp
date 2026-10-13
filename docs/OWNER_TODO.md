@@ -36,21 +36,33 @@
 - ‘행정안전부_공중화장실정보’ → 활용신청
 - 같은 인증키로 호출되므로 Secret은 그대로 두면 된다.
 
-## 3. Cloudflare (무료 호스팅·서버 함수) — 새 대시보드 기준(2026-10)
-- 토큰: 오른쪽 위 사람 아이콘 → **Profile** → **API Tokens**(또는 `https://dash.cloudflare.com/profile/api-tokens`) → **Create Token** → 맨 아래 **Create Custom Token · Get started** → Permissions: `Account` / `Cloudflare Pages` / `Edit` → Account Resources: `Include` / 내 계정 → Continue → Create.
-- Account ID: 계정 이름 아래 32자리, 또는 Workers & Pages 화면 오른쪽.
-- ‘Enable Agent Lee access’ 패널은 Cloudflare 자체 AI 기능이라 이번 작업과 무관(닫으면 됨).
+## 3. Cloudflare (무료 호스팅) — 2026-10 새 대시보드 기준
 
+### 3-1. API 토큰 만들기
+1. 주소창에 `https://dash.cloudflare.com/profile/api-tokens` 입력(또는 오른쪽 위 사람 아이콘 → Profile → API Tokens).
+2. **Create Token** → 화면 맨 아래 **Create Custom Token** 옆 **Get started**.
+3. **Create Custom Token** 화면의 칸을 아래처럼 채운다.
 
-> 이 작업 환경(클라우드 컨테이너)은 사용자 컴퓨터의 브라우저를 조작할 수 없어 대신 진행하지 못했다. 아래 순서대로 하면 10분 안에 끝난다.
+| 칸 | 입력값 |
+| --- | --- |
+| Token name | `moyeora-github-deploy` (이름은 자유) |
+| Permissions | 첫 칸 `Account` 그대로 → 두 번째 칸 `Cloudflare Pages` → 세 번째 칸 `Edit` |
+| Account Resources | `Include` 그대로 → `All accounts` 대신 `Pyw213@naver.com's Account` 선택 |
+| Client IP Address Filtering | **비워 둔다** (GitHub 서버 IP가 바뀌어 지정하면 배포가 실패) |
+| TTL | **비워 둔다** (만료 없음) |
 
-1. https://dash.cloudflare.com 가입(무료 플랜).
-2. 우측 상단 프로필 → My Profile → API Tokens → Create Token → **Custom token**:
-   - 권한: Account → Cloudflare Pages → Edit (나중에 Workers를 쓰면 Workers Scripts → Edit 추가)
-   - Account Resources: 내 계정
-3. 생성된 토큰을 Secret `CLOUDFLARE_API_TOKEN`으로 저장.
-4. 대시보드 오른쪽 사이드바(또는 Workers & Pages 개요)의 **Account ID**를 Secret `CLOUDFLARE_ACCOUNT_ID`로 저장.
-5. (선택) 사이트 주소 이름을 바꾸고 싶으면 Settings → Variables → `CF_PAGES_PROJECT`에 원하는 영문 이름(기본 `moyeora` → `https://moyeora.pages.dev`, 이미 쓰는 이름이면 다른 이름을 넣는다).
+4. **Continue to summary** → **Create Token**. 토큰 문자열은 **이 화면에서 한 번만** 보이므로 바로 복사한다.
+5. 오른쪽에 뜨는 ‘Enable Agent Lee access’ 패널은 Cloudflare 자체 AI 기능이라 이번 작업과 무관(닫으면 됨).
+
+### 3-2. Account ID 찾기
+- Cloudflare 대시보드 첫 화면 왼쪽 위 계정 이름 아래, 또는 Workers & Pages 화면 오른쪽의 32자리 값(`219da05e…`로 시작).
+
+### 3-3. GitHub Secret 두 개 등록
+1. https://github.com/pyw31337/camp/settings/secrets/actions 접속(저장소 → Settings → Secrets and variables → Actions).
+2. **New repository secret** → Name `CLOUDFLARE_API_TOKEN`, Secret에 3-1에서 복사한 토큰 → Add secret.
+3. 다시 **New repository secret** → Name `CLOUDFLARE_ACCOUNT_ID`, Secret에 3-2의 Account ID → Add secret.
+4. (선택) 사이트 주소를 바꾸려면 같은 화면의 **Variables** 탭 → `CF_PAGES_PROJECT`에 영문 이름(기본 `moyeora` → `https://moyeora.pages.dev`, 이미 쓰는 이름이면 다른 이름).
+5. 끝나면 “3단계 완료”라고 알려 준다 → 배포 워크플로를 실행해 외부 주소를 확인한다.
 
 ## 4. PR 병합
 - 열려 있는 PR을 검토 후 Merge. main에 반영되면 `Deploy to Cloudflare Pages`가 실행되고, 3단계를 마쳤다면 외부 접속 주소가 생긴다.
