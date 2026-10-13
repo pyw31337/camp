@@ -5,6 +5,12 @@ on:
     # 매일 03:17 KST (18:17 UTC)
     - cron: "17 18 * * *"
   workflow_dispatch:
+    inputs:
+      geocode_max_calls:
+        description: "공중화장실 주소 지오코딩 최대 호출 수 (초기 전량 적재는 30000, 일상 실행은 2000 권장)"
+        required: false
+        default: "2000"
+        type: string
   # 같은 저장소의 PR에서도 실행해 인증키·수집기를 병합 전에 확인한다(포크 PR에는 Secret이 전달되지 않음).
   pull_request:
     paths:
@@ -83,6 +89,9 @@ jobs:
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+          # 예약 실행은 캐시를 조금씩 채워 API 한도·러너 시간을 예측 가능하게 한다.
+          # 최초 전량 적재가 필요할 때만 workflow_dispatch 입력으로 30000을 명시한다.
+          GEOCODE_MAX_CALLS: ${{ github.event_name == 'workflow_dispatch' && inputs.geocode_max_calls || '2000' }}
       - name: Sync rest areas and drowsy shelters
         continue-on-error: true
         run: npm run sync:rest-stops
