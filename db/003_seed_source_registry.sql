@@ -33,7 +33,7 @@ INSERT INTO reservation_provider (
   data_source_id, code, name, provider_type, integration_mode,
   booking_capabilities, contract_status, freshness_sla_seconds
 )
-SELECT source.id, provider.code, provider.name, provider.provider_type, provider.integration_mode,
+SELECT source.id, provider.code, provider.name, provider.provider_type, provider.integration_mode::integration_mode,
   provider.booking_capabilities::jsonb, 'NOT_STARTED', provider.freshness_sla_seconds
 FROM (VALUES
   ('foresttrip', 'foresttrip', '숲나들e', 'PUBLIC_PORTAL', 'OFFICIAL_REDIRECT', '{"policy":true,"opening_schedule":true,"live_inventory":false,"booking":false}', 3600),
