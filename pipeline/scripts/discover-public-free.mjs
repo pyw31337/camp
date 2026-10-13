@@ -24,7 +24,7 @@ for (let page = 1; page <= 60 && all.length < total; page++) {
   }
   const text = await res.text();
   let body;
-  try { body = JSON.parse(text)?.response?.body; } catch { body = null; }
+  try { const j = JSON.parse(text); body = j?.response?.body ?? j?.body; } catch { body = null; }
   if (!body) {
     console.log(`::warning title=공공시설개방정보 응답 확인 필요::HTTP ${res.status} ${text.slice(0, 160).replace(/\s+/g, " ")}`);
     process.exit(0);
