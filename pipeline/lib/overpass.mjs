@@ -5,10 +5,10 @@ export const OVERPASS_SERVERS = [
   "https://overpass.private.coffee/api/interpreter",
 ];
 
-export async function overpass(query, { fetchImpl = fetch, timeoutMs = 300000, servers = OVERPASS_SERVERS, wait = (ms) => new Promise((r) => setTimeout(r, ms)) } = {}) {
+export async function overpass(query, { fetchImpl = fetch, timeoutMs = 300000, servers = OVERPASS_SERVERS, attempts = 2, wait = (ms) => new Promise((r) => setTimeout(r, ms)) } = {}) {
   const errors = [];
   for (const url of servers) {
-    for (let attempt = 0; attempt < 2; attempt++) {
+    for (let attempt = 0; attempt < Math.max(1, attempts); attempt++) {
       try {
         const res = await fetchImpl(url, { method: "POST", body: new URLSearchParams({ data: query }), headers: { "User-Agent": "moyeora-camping-pipeline (github.com/pyw31337/camp)" }, signal: AbortSignal.timeout(timeoutMs) });
         if (res.ok) {

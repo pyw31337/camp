@@ -59,7 +59,11 @@ if (process.env.EX_API_KEY) {
 let osm = [];
 try {
   const q = `[out:json][timeout:240];area["ISO3166-1"="KR"][admin_level=2]->.kr;nwr["highway"~"^(services|rest_area)$"](area.kr)->.s;(.s;nwr(around.s:500)["amenity"~"^(fuel|charging_station)$"];);out center tags;`;
-  const { elements: els, server, stale, error } = await overpassCached(q, fileURLToPath(new URL("../.cache/osm-rest-stops.json", import.meta.url)));
+  const { elements: els, server, stale, error } = await overpassCached(
+    q,
+    fileURLToPath(new URL("../.cache/osm-rest-stops.json", import.meta.url)),
+    { timeoutMs: 15000, attempts: 1 },
+  );
   if (stale) warn("Overpass 실패 — 직전 결과 사용", `${server} · ${error}`);
   else console.log(`Overpass: ${new URL(server).host}`);
   const pois = els.filter((e) => e.tags?.amenity).map((e) => ({ lat: e.lat ?? e.center?.lat, lng: e.lon ?? e.center?.lon, kind: e.tags.amenity === "fuel" ? "fuel" : "charging" })).filter((p) => Number.isFinite(p.lat));

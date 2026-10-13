@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { buildWebCatalog } from "../lib/web-catalog.mjs";
+import { buildWebCatalog, preservePublishedGoCampingCatalog } from "../lib/web-catalog.mjs";
 
 const calendar = { generated_at: "2026-10-13T00:00:00.000Z", registry_version: 1, events: [{ id: "open-1" }] };
 const campgroundsPayload = {
@@ -31,4 +31,25 @@ test("exports a provenance-preserving, media-free discovery record after approva
   assert.equal(catalog.campgrounds[0].name, "검증 캠핑장");
   assert.equal(catalog.campgrounds[0].reservation.has_official_url, true);
   assert.equal("hero_image_url" in catalog.campgrounds[0], false);
+});
+
+test("retains a prior approved catalog when a later source run has no GoCamping payload", () => {
+  const existingCatalog = buildWebCatalog({ calendar, campgroundsPayload, publishGoCamping: true, generatedAt: "2026-10-13T00:00:00.000Z" });
+  const candidate = buildWebCatalog({ calendar, campgroundsPayload: null, publishGoCamping: true, generatedAt: "2026-10-14T00:00:00.000Z" });
+  const result = preservePublishedGoCampingCatalog({ candidate, existingCatalog });
+
+  assert.equal(result.retainedPreviousGoCampingCatalog, true);
+  assert.equal(result.catalog.sources.gocamping.state, "PUBLISHED");
+  assert.equal(result.catalog.counts.gocamping_records, 1);
+  assert.equal(result.catalog.campgrounds[0].external_id, "42");
+});
+
+test("allows an explicit catalogue withdrawal for a revoked source permission", () => {
+  const existingCatalog = buildWebCatalog({ calendar, campgroundsPayload, publishGoCamping: true, generatedAt: "2026-10-13T00:00:00.000Z" });
+  const candidate = buildWebCatalog({ calendar, campgroundsPayload: null, publishGoCamping: false, generatedAt: "2026-10-14T00:00:00.000Z" });
+  const result = preservePublishedGoCampingCatalog({ candidate, existingCatalog, allowWithdrawal: true });
+
+  assert.equal(result.retainedPreviousGoCampingCatalog, false);
+  assert.equal(result.catalog.sources.gocamping.state, "AWAITING_API_SYNC");
+  assert.deepEqual(result.catalog.campgrounds, []);
 });

@@ -145,7 +145,9 @@ console.log(`좌표 확보 ${located}/${toilets.length}곳 (${toilets.length ? M
 // OpenStreetMap 보조 원천(좌표 포함). 행안부 항목과 30m 안에서 겹치면 버린다.
 let osmStats = { fetched: 0, added: 0, duplicates: 0 };
 try {
-  const { elements, server, stale, error } = await overpassCached(OVERPASS_QUERY, `${cacheDir}osm-toilets.json`);
+  // 행안부 전량 파일이 기준 원천이다. OSM은 좌표 보조이므로 첫 캐시 생성 실패가
+  // 전체 수집·DB 적재를 지연시키지 않게 서버당 한 번, 15초만 허용한다.
+  const { elements, server, stale, error } = await overpassCached(OVERPASS_QUERY, `${cacheDir}osm-toilets.json`, { timeoutMs: 15000, attempts: 1 });
   if (stale) warn("Overpass 실패 — 직전 결과 사용", `${server} · ${error}`);
   const osm = elements.map(normalizeOsmToilet).filter(Boolean);
   const m = mergeToiletSources(toilets, osm);
