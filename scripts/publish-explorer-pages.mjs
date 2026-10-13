@@ -5,6 +5,7 @@
 import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { utilityPages } from "../design/explore/utility-pages.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const dataDir = `${root}pipeline/out/explore`;
@@ -36,11 +37,23 @@ ${body}
 </body>
 </html>
 `);
-if (shellOnly) { console.log(`탐색 화면만 갱신: ${out}index.html${kakaoKey ? " · 지도 키 있음" : " · 지도 키 없음"}`); process.exit(0); }
+const writeUtilityPages = async () => {
+  for (const [relative, html] of utilityPages()) {
+    const file = `${out}${relative}`;
+    await mkdir(file.slice(0, file.lastIndexOf("/")), { recursive: true });
+    await writeFile(file, html);
+  }
+};
+if (shellOnly) {
+  await writeUtilityPages();
+  console.log(`탐색 화면·보조 페이지 갱신: ${out}index.html${kakaoKey ? " · 지도 키 있음" : " · 지도 키 없음"}`);
+  process.exit(0);
+}
 await cp(`${dataDir}/campgrounds.json`, `${out}data/campgrounds.json`);
 await cp(`${dataDir}/meta.json`, `${out}data/meta.json`);
 if (existsSync(`${dataDir}/featured.json`)) await cp(`${dataDir}/featured.json`, `${out}data/featured.json`);
 if (existsSync(`${dataDir}/camps`)) await cp(`${dataDir}/camps`, `${out}data/camps`, { recursive: true });
+await writeUtilityPages();
 
 // 공유용 정적 페이지: 캠핑장마다 c/{id}/ 에 오픈그래프·트위터 카드 메타를 넣고, 사람은 탐색 화면 상세로 보낸다.
 // 카카오톡·메신저 미리보기는 자바스크립트를 실행하지 않으므로 메타가 HTML에 들어 있어야 한다.

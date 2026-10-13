@@ -1,4 +1,5 @@
 import { themesOf } from "./themes.mjs";
+import { classifyChannels } from "./booking-intel.mjs";
 
 // 웹 탐색 화면용 데이터: 고캠핑 시설 + 주변 공중화장실 + 공식 안내 요금(TourAPI) + 예약처 규칙·다가오는 오픈 일정.
 // 원칙: 각 값의 출처·확인 시각을 함께 싣는다. 실시간 재고·판매가는 만들지 않는다(예약은 공식 예약처로 연결).
@@ -30,6 +31,16 @@ export function buildExploreRecords(camps, toilets, fees, seoul = new Map()) {
     const near = toilets?.campgrounds?.[id];
     const fee = fees?.records?.[id];
     const bookingUrl = httpUrl(c.reservation?.url);
+    // `resveUrl`은 운영자가 고캠핑에 입력한 값이다. 한 개의 "예약하기" 버튼으로
+    // 단정하지 않고, 홈페이지·전화까지 포함한 대체 경로와 신뢰도를 함께 보낸다.
+    const channels = classifyChannels(c).map((ch) => ({
+      platform_id: ch.platform_id,
+      platform_name: ch.platform_name,
+      url: ch.url,
+      kind: ch.kind,
+      confidence: ch.confidence,
+      evidence: ch.evidence,
+    }));
     return {
       id,
       name: c.name,
@@ -60,13 +71,24 @@ export function buildExploreRecords(camps, toilets, fees, seoul = new Map()) {
       rental: c.rental_equipment ?? [],
       seasons: c.operating_seasons ?? [],
       days: c.operating_days ?? [],
-      booking: { methods: c.reservation?.methods ?? [], url: bookingUrl, provider: providerOf(bookingUrl) },
+      booking: {
+        methods: c.reservation?.methods ?? [],
+        url: bookingUrl,
+        provider: providerOf(bookingUrl),
+        channels,
+        source: {
+          label: "고캠핑 운영자 등록 예약 정보",
+          url: c.gocamping_url ?? null,
+          checked_at: c.source?.fetched_at ?? null,
+          tier: "C",
+        },
+      },
       img: httpUrl(c.hero_image_url),
       line: clip(c.intro?.line, 90),
       th: themesOf(c),
       gc_url: c.gocamping_url ?? null,
       fee: fee?.fee_text ? { text: fee.fee_text, min: fee.fee_range?.min_krw ?? null, max: fee.fee_range?.max_krw ?? null, checked_at: fee.checked_at, url: fee.source_url } : null,
-      nearby_toilets: near ? { within_2km: near.count_2km, within_500m: near.count_500m ?? null, nearest: (near.nearest ?? []).slice(0, 3).map((t) => ({ name: t.name, m: t.distance_m, h24: t.open_24h ?? null, src: t.source ?? "mois" })) } : null,
+      nearby_toilets: near ? { within_2km: near.count_2km, within_500m: near.count_500m ?? null, nearest: (near.nearest ?? []).slice(0, 3).map((t) => ({ name: t.name, m: t.distance_m, lat: t.lat ?? null, lng: t.lng ?? null, h24: t.open_24h ?? null, src: t.source ?? "mois" })) } : null,
       // 서울시 공공예약 원문의 접수 상태(확인 시각·원문 링크 포함). 빈자리 확정값이 아니다.
       seoul: (seoul.get(id) ?? []).slice(0, 8).map((s) => ({ name: s.name, status: s.status, from: s.receipt?.from ?? null, to: s.receipt?.to ?? null, url: s.url, checked_at: s.checked_at })),
       modified_at: c.source?.modified_at ?? null,

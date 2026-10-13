@@ -16,6 +16,9 @@ test("탐색 레코드: 위치·예약처·요금(출처·확인일)·주변 화
   assert.equal(r.lat, 37.123457);
   assert.equal(r.homepage, "http://www.example.com/");
   assert.equal(r.booking.provider, "foresttrip");
+  // example.com은 예약 채널 판단에서 의도적으로 제외한다. 화면에는 홈페이지 원문만 별도로 남는다.
+  assert.deepEqual(r.booking.channels.map((c) => [c.platform_id, c.kind]), [["foresttrip", "online"], ["phone", "phone"]]);
+  assert.equal(r.booking.source.tier, "C");
   assert.deepEqual(r.fee, { text: "오토캠핑 1박 35,000원~45,000원", min: 35000, max: 45000, checked_at: "2026-10-13T09:00:00+09:00", url: "https://korean.visitkorea.or.kr/x" });
   assert.equal(r.nearby_toilets.nearest[0].m, 140);
   assert.equal(areaOf("제주특별자치도"), "제주");
