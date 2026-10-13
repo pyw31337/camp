@@ -15,7 +15,9 @@ permissions:
   contents: write
 
 concurrency:
-  group: data-sync
+  # PR 검증의 장시간 보조 수집이 main의 실제 기준 카탈로그 발행을 막지 않게
+  # ref별로 대기열을 분리한다. 같은 ref 안에서는 순차 실행되어 원본 파일 충돌을 막는다.
+  group: data-sync-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
