@@ -46,6 +46,21 @@ test("공식과 150m 안에서 겹치는 OSM 쉼터는 버린다", () => {
   assert.deepEqual(r.merged.map((s) => s.id), ["a", "o2"]);
 });
 
+test("한국도로공사 휴게소: 코드로 편의시설을, 이름으로 주유 가격을 연결한다", async () => {
+  const { buildExServiceAreas } = await import("../lib/ex-rest-areas.mjs");
+  const [stop] = buildExServiceAreas({
+    location: [{ unitName: "기흥(부산)휴게소", routeName: "경부선", xValue: "127.12", yValue: "37.25", serviceAreaCode: "A00002" }],
+    convenience: [{ serviceAreaCode: "A00002", convenience: "수유실|샤워실|농산물판매장", telNo: "031" }],
+    fuel: [{ serviceAreaName: "기흥(부산)주유소", oilCompany: "AD", lpgYn: "N", gasolinePrice: "1,839원", diselPrice: "1,836원" }],
+    checkedAt: "2026-10-13T09:00:00+09:00",
+  });
+  assert.equal(stop.direction, "부산");
+  assert.deepEqual(stop.facilities.nursing, { available: true, fee: "FREE" });
+  assert.deepEqual(stop.extras, ["농산물판매장"]);
+  assert.deepEqual(stop.fuel.prices_krw_per_l, { gasoline: 1839, diesel: 1836, lpg: null });
+  assert.equal(stop.fuel.brand, "알뜰주유소");
+});
+
 test("경로 주변 시설을 출발지부터 거리순으로", () => {
   // 위도 방향 직선 경로 약 111km
   const path = [[36.0, 127.0], [36.5, 127.0], [37.0, 127.0]];
@@ -83,7 +98,6 @@ test("한국도로공사 휴게소: 좌표·편의시설은 코드로, 주유소
   assert.deepEqual(a.facilities.shower, { available: true, fee: null });
   assert.equal(a.facilities.laundry.available, false);
   assert.deepEqual(a.extras, ["농산물판매장"]);
-  assert.equal(a.truck_rest, true);
   assert.deepEqual(a.fuel.prices_krw_per_l, { gasoline: 1839, diesel: 1836, lpg: null });
   assert.equal(a.fuel.brand, "알뜰주유소");
   assert.equal(a.fuel.checked_at, "2026-10-13T09:00:00+09:00");

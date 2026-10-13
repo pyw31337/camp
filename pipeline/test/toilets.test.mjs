@@ -4,7 +4,7 @@ import { csvToObjects, decodeKoreanText, parseCsv } from "../lib/csv.mjs";
 import { GridIndex, haversineM } from "../lib/geo.mjs";
 import { geocodeAll } from "../lib/geocode.mjs";
 import { linkNearbyToilets } from "../lib/nearby-toilets.mjs";
-import { geocodeQuery, normalizeToilet } from "../lib/toilets.mjs";
+import { fromStandardApi, geocodeQuery, normalizeToilet } from "../lib/toilets.mjs";
 
 test("CSV: BOM, 따옴표 속 쉼표·줄바꿈, CRLF", () => {
   const text = '﻿화장실명,소재지도로명주소,개방시간\r\n"공원, 북측","서울 마포구 ""하늘""로 1","09:00~18:00\n(동절기 단축)"\r\n';
@@ -114,6 +114,19 @@ test("LOCALDATA 좌표정보(X/Y, EPSG:5174)가 있으면 WGS84로 바꿔 쓴다
   const t = normalizeToilet({ "화장실명": "시청앞 화장실", "소재지도로명주소": "서울 중구 세종대로 110", "개방시간": "24시간", "좌표정보(X)": "197836.6", "좌표정보(Y)": "451901.3" });
   assert.ok(Math.abs(t.lat - 37.5693) < 0.001 && Math.abs(t.lng - 126.9763) < 0.001, `${t.lat},${t.lng}`);
   assert.equal(t.precision, "EPSG5174");
+});
+
+test("표준데이터 API 영문 필드를 화장실 정규화 모델과 원천 좌표로 바꾼다", () => {
+  const toilet = fromStandardApi({
+    toiletNm: "표준 화장실", rdnmadr: "서울 중구 세종대로 1", openTime: "24시간", emgBellYn: "Y",
+    disabledMaleWc: "1", disabledFemaleWc: "2", latitude: "37.5665", longitude: "126.9780", referenceDate: "2026-10-13",
+  });
+  assert.equal(toilet.name, "표준 화장실");
+  assert.equal(toilet.open_24h, true);
+  assert.equal(toilet.emergency_bell, true);
+  assert.equal(toilet.disabled_stalls, 3);
+  assert.equal(toilet.precision, "SOURCE");
+  assert.equal(toilet.lat, 37.5665);
 });
 
 test("Overpass: 504면 다음 서버로 넘어간다", async () => {

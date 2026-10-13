@@ -71,20 +71,21 @@ const STD_FIELD = [
   [/^institutionnm$/i, "관리기관명"], [/^phonenumber$/i, "전화번호"], [/^(referencedate|datastddt)$/i, "데이터기준일자"],
   [/^emgbellyn$/i, "비상벨설치여부"], [/^(enterentcctvyn|cctvyn)$/i, "화장실입구CCTV설치유무"], [/^(dipersexchgposi|diaperexchgyn)$/i, "기저귀교환대유무"],
 ];
+
 export function fromStandardApi(item) {
   const row = {};
-  for (const [k, v] of Object.entries(item)) {
-    const hit = STD_FIELD.find(([re]) => re.test(k));
-    if (hit) row[hit[1]] = v ?? "";
-    else if (/disabled/i.test(k)) row[`장애인_${k}`] = v ?? ""; // sumCols(/장애인/)가 합산
-    else if (/child/i.test(k)) row[`어린이_${k}`] = v ?? "";
-    else row[k] = v ?? "";
+  for (const [key, value] of Object.entries(item)) {
+    const hit = STD_FIELD.find(([pattern]) => pattern.test(key));
+    if (hit) row[hit[1]] = value ?? "";
+    else if (/disabled/i.test(key)) row[`장애인_${key}`] = value ?? "";
+    else if (/child/i.test(key)) row[`어린이_${key}`] = value ?? "";
+    else row[key] = value ?? "";
   }
-  const t = normalizeToilet(row);
-  if (!t) return null;
+  const toilet = normalizeToilet(row);
+  if (!toilet) return null;
   const lat = Number(item.latitude), lng = Number(item.longitude);
-  if (!Number.isFinite(t.lat) && inKorea(lat, lng)) Object.assign(t, { lat, lng, precision: "SOURCE" });
-  return t;
+  if (!Number.isFinite(toilet.lat) && inKorea(lat, lng)) Object.assign(toilet, { lat, lng, precision: "SOURCE" });
+  return toilet;
 }
 
 /** 지오코딩 질의용 주소(도로명 우선). 괄호 속 부가 설명은 지운다. */

@@ -24,7 +24,7 @@ jobs:
   sync:
     name: Sync public sources and build open calendar
     runs-on: ubuntu-latest
-    # 그날 수집한 데이터를 실행마다 새로 띄우는 PostgreSQL에 실제로 넣어 대조한다(Claude 담당, docs/DB_BUILD_PLAN.md 6).
+    # 그날 수집한 실제 파일을 실행마다 새로 띄우는 PostgreSQL에 넣어 본다(아래 마지막 단계, 비용 없음).
     services:
       postgres:
         image: postgres:16
@@ -49,27 +49,10 @@ jobs:
         run: npm run check:keys
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
-          EX_API_KEY: ${{ secrets.EX_API_KEY }}
-          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
-          KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY || secrets.KAKAO_JS_KEY }}
       - name: Sync GoCamping (skips when the key secret is not set)
         run: npm run sync:gocamping
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
-      - name: Migrate PostgreSQL and import the GoCamping snapshot
-        # DATABASE_URL은 운영 DB에서만 제공한다. 값이 없을 때 공개 카탈로그
-        # 발행은 계속 가능하지만, DB 적재를 성공한 것으로 표기하지 않는다.
-        if: github.event_name != 'pull_request'
-        run: |
-          if [ -z "$DATABASE_URL" ]; then
-            echo "::notice title=PostgreSQL import skipped::DATABASE_URL secret is not configured."
-            exit 0
-          fi
-          npm run db:migrate
-          npm run db:import-gocamping
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          DATABASE_SSL: ${{ vars.DATABASE_SSL }}
       # 전국 기준 시설·예약 캘린더는 부가 시설 수집 실패와 관계없이 먼저 공개한다.
       - name: Build the read-only GitHub Pages data payload
         run: npm run publish:web-catalog
@@ -102,8 +85,8 @@ jobs:
             pipeline/.cache/geocode-toilets.json
             pipeline/.cache/osm-toilets.json
             pipeline/.cache/osm-rest-stops.json
-          key: geocode-v3-${{ github.run_id }}
-          restore-keys: geocode-v3-
+          key: source-cache-v3-${{ github.run_id }}
+          restore-keys: source-cache-v3-
       - name: Sync public toilets and link to campgrounds
         continue-on-error: true
         run: npm run sync:toilets
@@ -116,29 +99,51 @@ jobs:
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
           EX_API_KEY: ${{ secrets.EX_API_KEY }}
-      - name: Collect campground licences (LOCALDATA) and match to GoCamping
-        # 키 불필요. 고캠핑에 없는 숨은 캠핑장 후보·폐업 교차 확인·시설 규모 등 인허가 세부 정보.
-        run: npm run sync:localdata-campgrounds
-        continue-on-error: true
       - name: Discover free public camp sites (candidates only)
         continue-on-error: true
         run: npm run discover:public-free
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
-      - name: Load today's data into a throwaway PostgreSQL and reconcile
-        # 운영 DB가 없어도 마이그레이션·적재·건수 대조·품질 규칙을 매일 검증한다.
-        # 임시 DB 전용으로 이용허락 미확인 원천도 넣어 본다(운영 DB 적재는 위 단계가 data_source 허용값을 지킨다).
-        if: always()
+      - name: Collect campground licences (LOCALDATA) and match to GoCamping
+        # 키 불필요. 고캠핑에 없는 숨은 캠핑장 후보, 인허가 폐업인데 고캠핑에 남은 곳, 시설 규모 등 인허가 세부 정보.
+        run: npm run sync:localdata-campgrounds
+        continue-on-error: true
+      - name: Migrate PostgreSQL and import the full source snapshot
+        # PR에서는 운영 DB에 절대 쓰지 않는다. PostgreSQL schema verification
+        # workflow가 별도 임시 DB에서 마이그레이션·중복 적재를 검증한다.
+        # DATABASE_URL이 없으면 Pages 데이터 발행은 계속하되 DB 적재 성공으로
+        # 표기하지 않는다.
+        if: github.event_name != 'pull_request'
         run: |
-          if [ ! -f out/campgrounds.json ]; then echo "::notice::고캠핑 결과가 없어 DB 검증을 건너뜁니다."; exit 0; fi
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::notice title=PostgreSQL import skipped::DATABASE_URL secret is not configured."
+            exit 0
+          fi
           npm run db:migrate
           npm run db:import-gocamping
-          npm run db:import-enrichment
-          npm run db:import-enrichment
-          npm run db:verify-load
+          npm run db:import-context
+          npm run db:import-licences
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_SSL: ${{ vars.DATABASE_SSL }}
+      - name: Load today's real files into a throwaway PostgreSQL (twice)
+        # 고정 표본 검증(database-verify.yml)이 못 잡는 실데이터 문제(중복 키·범위 밖 값 등)를 운영 DB 전에 잡는다.
+        if: always()
+        run: |
+          if [ ! -f out/campgrounds.json ]; then echo "::notice::고캠핑 결과가 없어 실데이터 DB 검증을 건너뜁니다."; exit 0; fi
+          npm run db:migrate
+          for pass in 1 2; do
+            npm run db:import-gocamping
+            npm run db:import-context
+            npm run db:import-licences
+          done
+          psql "$DATABASE_URL" -At -c "SELECT 'campgrounds=' || count(*) FROM campground" \
+            -c "SELECT 'toilets=' || count(*) || ' located=' || count(latitude) FROM public_toilet" \
+            -c "SELECT 'road_stops=' || count(*) FROM road_stop" \
+            -c "SELECT 'licence_candidates=' || count(*) || ' matched=' || count(matched_campground_id) FROM campground_candidate WHERE discovery_method = 'LOCALDATA_LICENCE'" \
+            -c "SELECT 'booking_events=' || count(*) FROM booking_rule_event"
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
-          IMPORT_UNVERIFIED_LICENSES: "true"
       - uses: actions/upload-artifact@v4
         with:
           name: pipeline-out

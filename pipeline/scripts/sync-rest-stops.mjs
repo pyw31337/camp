@@ -1,5 +1,5 @@
 // 전국 휴게소·졸음쉼터 수집 → out/rest-stops.json (경로 주변 안내용, 정적 배포)
-// 원천: 한국도로공사 OpenAPI(휴게소 좌표·편의시설·주유 가격), 전국졸음쉼터표준데이터 API, OpenStreetMap(키 불필요).
+// 원천: 한국도로공사 OpenAPI(휴게소·편의시설·주유 가격), 전국졸음쉼터표준데이터 API, OpenStreetMap.
 import { mkdir, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
@@ -34,20 +34,26 @@ if (key) {
   } catch (e) { warn("졸음쉼터 API 호출 실패", e.message); }
 }
 
-// 1-2) 한국도로공사 고속도로 휴게소(공식 좌표·편의시설·주유소 현재가)
-// EX_API_KEY(data.ex.co.kr 발급키)가 없으면 포털 예제 키 `test`로 동작을 확인한다(운영 전 발급키로 교체).
-const exKey = process.env.EX_API_KEY || "test";
-if (!process.env.EX_API_KEY) warn("EX_API_KEY 없음", "한국도로공사 예제 키(test)로 호출합니다. docs/OWNER_TODO.md 2-2단계에서 발급키를 등록하세요.");
-let exCount = 0, exFuel = 0;
-try {
-  const location = await fetchExAll("locationinfo/locationinfoRest", exKey);
-  const convenience = await fetchExAll("business/conveniServiceArea", exKey);
-  const fuel = await fetchExAll("business/curStateStation", exKey);
-  const ex = buildExServiceAreas({ location, convenience, fuel, checkedAt: fetchedAt });
-  exCount = ex.length; exFuel = ex.filter((s) => s.fuel).length;
-  console.log(`한국도로공사 휴게소 ${ex.length}곳(좌표 ${location.length}, 편의시설 ${convenience.length}${convenience.skipped ? `·서버 오류로 ${convenience.skipped}건 누락` : ""}), 주유소 ${fuel.length}곳 중 휴게소와 연결 ${exFuel}곳`);
-  official.push(...ex);
-} catch (e) { warn("한국도로공사 OpenAPI 호출 실패", e.message); }
+// 한국도로공사 공식 휴게소·편의시설·주유 가격. EX_API_KEY 없이는 수집하지 않아
+// 예제 키나 비공식 값을 실서비스 가격으로 저장하지 않는다.
+let exCount = 0;
+let exFuel = 0;
+if (process.env.EX_API_KEY) {
+  try {
+    const [location, convenience, fuel] = await Promise.all([
+      fetchExAll("locationinfo/locationinfoRest", process.env.EX_API_KEY),
+      fetchExAll("business/conveniServiceArea", process.env.EX_API_KEY),
+      fetchExAll("business/curStateStation", process.env.EX_API_KEY),
+    ]);
+    const serviceAreas = buildExServiceAreas({ location, convenience, fuel, checkedAt: fetchedAt });
+    exCount = serviceAreas.length;
+    exFuel = serviceAreas.filter((stop) => stop.fuel).length;
+    official.push(...serviceAreas);
+    console.log(`한국도로공사 휴게소 ${exCount}곳, 주유 가격 연결 ${exFuel}곳`);
+  } catch (error) { warn("한국도로공사 OpenAPI 호출 실패", error.message); }
+} else {
+  warn("EX_API_KEY 없음", "공식 휴게소·주유 가격 수집을 건너뜁니다. OSM·졸음쉼터 데이터만 사용합니다.");
+}
 
 // 2) OpenStreetMap: 휴게소·쉼터 + 주유소·충전소(휴게소 시설 보강용)
 let osm = [];

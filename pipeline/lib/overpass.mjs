@@ -12,10 +12,10 @@ export async function overpass(query, { fetchImpl = fetch, timeoutMs = 300000, s
       try {
         const res = await fetchImpl(url, { method: "POST", body: new URLSearchParams({ data: query }), headers: { "User-Agent": "moyeora-camping-pipeline (github.com/pyw31337/camp)" }, signal: AbortSignal.timeout(timeoutMs) });
         if (res.ok) {
-          const j = await res.json();
-          // 시간 초과·메모리 초과면 200과 함께 빈 elements + remark를 준다 → 실패로 보고 다음 서버로.
-          if (!j.elements?.length) { errors.push(`${new URL(url).host} ${j.remark ? String(j.remark).slice(0, 80) : "빈 결과"}`); continue; }
-          return { elements: j.elements ?? [], server: url };
+          const body = await res.json();
+          // 시간·메모리 초과는 HTTP 200 + 빈 elements + remark로 돌아올 수 있다.
+          if (!body.elements?.length) { errors.push(`${new URL(url).host} ${body.remark ? String(body.remark).slice(0, 80) : "빈 결과"}`); continue; }
+          return { elements: body.elements, server: url };
         }
         errors.push(`${new URL(url).host} HTTP ${res.status}`);
         if (![429, 502, 503, 504].includes(res.status)) break;
@@ -28,20 +28,17 @@ export async function overpass(query, { fetchImpl = fetch, timeoutMs = 300000, s
   throw new Error(`Overpass 실패: ${errors.join(", ")}`);
 }
 
-/**
- * 성공한 응답을 파일로 남기고, 모든 서버가 실패하면 직전 성공 응답을 쓴다(공개 서버 504가 잦다).
- * GitHub Actions 캐시에 `.cache/osm-*.json`이 들어 있어 실행 사이에 유지된다.
- */
-export async function overpassCached(query, cachePath, opts = {}) {
+/** 성공 결과를 캐시하고, 공개 Overpass 서버가 모두 실패하면 직전 결과를 쓴다. */
+export async function overpassCached(query, cachePath, options = {}) {
   const { readFile, writeFile } = await import("node:fs/promises");
   try {
-    const r = await overpass(query, opts);
-    await writeFile(cachePath, JSON.stringify({ fetched_at: new Date().toISOString(), elements: r.elements }));
-    return { ...r, stale: false };
-  } catch (e) {
+    const result = await overpass(query, options);
+    await writeFile(cachePath, JSON.stringify({ fetched_at: new Date().toISOString(), elements: result.elements }));
+    return { ...result, stale: false };
+  } catch (error) {
     let cached = null;
-    try { cached = JSON.parse(await readFile(cachePath, "utf8")); } catch { /* 캐시 없음 */ }
-    if (!cached?.elements?.length) throw e;
-    return { elements: cached.elements, server: `cache(${cached.fetched_at})`, stale: true, error: e.message };
+    try { cached = JSON.parse(await readFile(cachePath, "utf8")); } catch { /* no cache */ }
+    if (!cached?.elements?.length) throw error;
+    return { elements: cached.elements, server: `cache(${cached.fetched_at})`, stale: true, error: error.message };
   }
 }

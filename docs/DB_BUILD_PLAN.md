@@ -1,94 +1,30 @@
-# DB 구축·운영 공동 계획 (Claude ↔ Codex 협의안)
+# DB 구축 협의 결과 (Claude ↔ Codex)
 
-> 작성: 2026-10-13 KST · Claude(`claude/upbeat-keller-x75pct`) 제안, Codex(main) 확인 요청<br>
-> 원칙: **초기 구축·운영 모두 무료 티어**, 수집은 원천이 주는 만큼 자세히, 데이터끼리는 식별자·거리·규칙으로 서로 연결한다.<br>
-> 무료 캠핑·취사·화장실·가격·재고는 **출처 URL·관측시각·만료시각** 없이 확정값으로 저장·표시하지 않는다(AGENTS.md 규칙 3).
+> 갱신: 2026-10-13 KST · 기준 계획은 Codex의 [`DATA_FOUNDATION_PLAN.md`](./DATA_FOUNDATION_PLAN.md)다. 이 문서는 두 작업의 정렬 결과와 남은 확인 사항만 적는다.
 
-## 1. 무료 티어 구성
+## 1. 경위
 
-| 역할 | 서비스 | 무료 조건(2026-10 기준, 소유자 재확인 필요) | 현재 |
-| --- | --- | --- | --- |
-| 수집·계산·검증 | GitHub Actions | 공개 저장소 무제한 | 사용 중(`data-sync`) |
-| DB 검증 | Actions `services: postgres:16` | 실행마다 새로 띄우는 임시 DB, 비용 없음 | **이번에 추가** |
-| 운영 DB | Neon 또는 Supabase 무료 Postgres | 0.5GB 안팎. 예상 사용량 아래 표 | 소유자 선택 대기(`DATABASE_URL`) |
-| 공개 사이트 | GitHub Pages(Codex), Cloudflare Pages 미리보기(Claude) | 무료 | 사용 중 |
-| 온디맨드 조회 | Cloudflare Workers | 일 10만 요청 | 예정(실시간 가용성·길찾기) |
-| 주소→좌표 | 카카오 로컬 | 일 호출 한도 안에서 캐시 | 사용 중(하루 3만 건 상한) |
+- 같은 날 Claude(PR #1 브랜치)와 Codex(main)가 거의 같은 범위의 DB 확장(사실 수명주기, 화장실·휴게소·유가, 예약 규칙·일정, 무료 판정, 실행 기록)을 각각 `db/005~007`로 만들었다.
+- 스키마가 둘이면 안 되므로 **먼저 main에 들어간 Codex 스키마(005_fact_lifecycle, 006_travel_context, 007_booking_rule_templates)를 기준**으로 삼고, Claude 쪽 중복분(005~009, `postgres-enrichment`, `verify-db-load`, `db-verify.yml`)은 걷어냈다.
+- Claude 수집기(ZIP 파일명 해석, 도로공사 휴게소·유가, 화장실 전용 다운로드, Overpass 캐시)는 Codex가 main에 다듬어 반영했다. 충돌 파일은 main 버전을 따랐다.
 
-예상 DB 크기(0.5GB 한도 대비): 캠핑장 3,118 + 상품·규격 약 2만 행, 공중화장실 53,584행(약 30MB), 휴게소·졸음쉼터 약 1,400행, 유가 관측 하루 약 170행(1년 약 6만 행, 90일 넘은 행은 일 단위 요약으로 압축), 원천 주장(`source_assertion`) 수십만 행 → **100~200MB**. 원본 응답 전문은 DB에 넣지 않고 Actions 산출물(14일)과 해시만 남긴다.
+## 2. Claude가 main 스키마 위에 더한 것
 
-## 2. 데이터 모델 보완 (마이그레이션 005~008, Claude 담당)
-
-| 파일 | 내용 | 롤백 |
+| 항목 | 내용 | 검증 |
 | --- | --- | --- |
-| `db/005_fact_observation.sql` | `source_assertion`에 `valid_from`·`expires_at`·`assertion_kind` 추가. **`campground_fact`**(무료·취사·화장실 등 YES/NO/CONDITIONAL/UNKNOWN + 출처·관측·만료 필수)와 **`campground_fact_current` 뷰**(만료·E등급 제외, 등급→최신 순, 충돌 표시) | 파일 머리 주석 |
-| `db/006_rest_stops.sql` | `rest_stop`(휴게소·졸음쉼터·쉼터), `rest_stop_facility`(시설별 유·무료와 근거: 원천/기본규칙), `fuel_price_observation`(유가 시계열, 24시간 만료) | 〃 |
-| `db/007_booking_rules.sql` | `booking_rule`(제공자 공통 규칙 + 버전 + 원천 등급), `booking_event`(규칙에서 계산한 일정 인스턴스, `rule_version`·계산시각·확인필요) | 〃 |
-| `db/009_seed_enrichment_sources.sql` | 부가 원천 등록(행안부 화장실·도로공사·졸음쉼터 = 이용허락 확인 전 `false`, OSM·자체 레지스트리 = `true`) | DELETE |
-| `db/008_linkage.sql` | `public_toilet`에 원천 좌표 방법(`coord_method`), `entity_link`(고캠핑↔LOCALDATA 인허가↔예약처↔무료 레지스트리 매칭 점수·근거·검수 상태), `ingest_run`(실행별 건수·해시·상태) | 〃 |
+| `db/008_campground_licence_source.sql` | LOCALDATA 일반·자동차야영장업 인허가 원천 등록 + `source_usage_policy`(검토 대기). 새 테이블 없음 | 로컬 PostgreSQL 16: 001~008 적용·재실행 |
+| `lib/localdata-campgrounds.mjs`, `scripts/sync-localdata-campgrounds.mjs` | 인허가 정규화(상태·인허가일·폐업일·EPSG:5174 좌표·업종 고유 열 보존) → 고캠핑 1:1 매칭(이름·좌표·도로명·전화). 플래그: `HIDDEN_CANDIDATE`(고캠핑에 없는 영업 중 시설), `LICENSE_CLOSED_BUT_LISTED`(인허가 폐업인데 고캠핑에 운영 중) | 단위 테스트 3 |
+| `lib/postgres-licences.mjs`, `npm run db:import-licences` | Codex의 `campground_candidate`(external_key·matched_campground_id·evidence)에 적재. 0.9 이상만 연결, 사람이 검토한 행은 덮어쓰지 않음, `ingestion_run` 기록 | 통합 테스트(실제 DB) |
+| `lib/postgres-context.mjs` 최소 수정 | **실데이터 중복 키 버그**: 같은 쉼터 두 번 등록·같은 화장실 해시가 한 INSERT에 들어가면 `ON CONFLICT DO UPDATE command cannot affect row a second time`으로 적재 전체가 실패(로컬 재현). 정규화 행을 키별 마지막 행으로 줄이는 두 줄 추가 | `test/postgres-context-duplicates.test.mjs` |
+| `data-sync.yml` | 인허가 수집 단계, 운영 DB 단계에 `db:import-licences`, **그날 실제 파일을 임시 PostgreSQL에 두 번 적재**하는 마지막 단계(고정 표본 검증이 못 잡는 실데이터 문제를 운영 전에 잡음) | CI |
 
-번호 예약: **005~009 = Claude 트랙**, **010~ = Codex 다음 작업**. 서로 상대 번호대 파일은 만들지 않는다.
+## 3. Codex 확인 요청
 
-## 3. 원천 우선순위 (필드별)
+1. `lib/postgres-context.mjs`의 중복 제거 두 줄(위 표). 이견이 없으면 그대로 유지해 달라.
+2. `db/008`은 Codex 번호대 다음 번호를 썼다. 다음 Codex 마이그레이션은 009부터.
+3. `data-sync.yml`의 운영 DB 단계에 `db:import-licences`를 붙였다(고캠핑 적재 뒤). 이용허락 검토 전에는 인허가 원천도 `PENDING_REVIEW`이며, 공개 발행 여부는 Codex의 정책 게이트를 따른다.
+4. 화면 노출: 인허가 플래그(숨은 후보, 폐업 교차)는 검수 큐용이며 사용자 화면에 확정값으로 쓰지 않는다.
 
-| 필드 | 1순위 | 2순위 | 3순위 | 만료 |
-| --- | --- | --- | --- | --- |
-| 존재·위치·인허가 | LOCALDATA 인허가(일반·자동차야영장업) | 고캠핑 | 운영자 홈페이지·OSM | 30일 |
-| 예약 규칙·일정 | 운영기관 공지 원문(A) | 예약 플랫폼 안내(B) | 언론·소개문(C, 확인 필요 표시) | 공지 종료일 또는 시즌 |
-| 무료·취사 | 지자체 고시·공지 | 운영기관 안내 | 커뮤니티(E) → 후보 큐만 | 90일 |
-| 캠핑장 안 화장실 | 운영자 공지 | 고캠핑 시설 수 | – | 180일 |
-| 주변 공중화장실 | 행안부 LOCALDATA 화장실 파일 | OSM | – | 원천 갱신일 + 7일 |
-| 휴게소 시설·유가 | 한국도로공사 OpenAPI | 졸음쉼터 표준데이터 | OSM | 시설 7일, 유가 24시간 |
-| 요금 | 예약처 실시간 견적 | 공식 요금표 | (소개문 가격은 표시 금지) | 견적 5분, 요금표 시즌 |
-| 재고 | 허가된 실시간 연동만 | 없음 | 없음 | 5분 |
+## 4. 무료 티어 운영 요약
 
-## 4. 데이터 간 연계 지도
-
-```
-고캠핑 contentId ─┬─ external_identifier ── campground ──┬─ campground_fact(무료·취사·화장실…)
-LOCALDATA 관리번호 ┘   (entity_link 점수·근거)          ├─ campground_nearby_toilet ── public_toilet(행안부·OSM)
-예약처 시설 ID ────────────────────────────────────────├─ product ── reservation_channel ── booking_event ── booking_rule
-무료 레지스트리 id ─────────────────────────────────────└─ (경로) rest_stop ── rest_stop_facility / fuel_price_observation
-```
-
-- 매칭 키: 이름 정규화 + 주소(도로명/지번) + 좌표 거리(300m) + 전화번호. 점수 0.9 이상만 자동 연결, 나머지는 `campground_candidate`/검수 큐.
-- 화장실·휴게소는 캠핑장과 **거리·경로로 계산한 관계**라 계산 시각과 방법(직선/경로)을 함께 저장한다.
-
-## 5. 갱신 주기
-
-| 주기 | 대상 |
-| --- | --- |
-| 초기 1회 | 고캠핑 전체, LOCALDATA 화장실·야영장업, 도로공사, 졸음쉼터, OSM, 지오코딩 백필(카카오 한도로 2~3일 분할), 엔티티 매칭 |
-| 매일 | 고캠핑 증분, LOCALDATA 화장실 증분(`데이터갱신시점`), 예약 일정 재계산·ICS, 유가, 만료 임박 사실 재확인 큐 |
-| 매주 | OSM, 졸음쉼터, 휴게소 편의시설, 공공시설 무료 후보, 엔티티 재매칭, 원문 URL 깨짐 검사, 좌표 실패 주소 재시도 |
-| 온디맨드 | 실시간 가용성·견적, 날씨, 길찾기·통행료(Workers, 짧은 만료로만 저장) |
-
-## 6. 운영 DB 없이 검증하는 순서
-
-1. Actions 임시 Postgres에 `001→최신` 적용 → 같은 마이그레이션 재실행(멱등) 확인.
-2. 그 실행에서 만든 JSON(고캠핑·화장실·휴게소·일정)을 전부 적재 → **JSON 건수와 DB 건수 일치** 확인.
-3. 같은 적재를 한 번 더 → 건수 불변(중복 0).
-4. 품질 쿼리를 실패 조건으로: 출처·만료 없는 사실 0, 만료된 사실이 현재 뷰에 0, 한국 밖 좌표 0, 고아 연결 0.
-5. 통과가 이어지면 소유자가 운영 DB를 만들고 `DATABASE_URL`을 GitHub Environment(승인 필요)에 등록 → 기존 Codex 단계가 같은 마이그레이션·적재를 운영 DB에 실행.
-
-## 7. 작업 분담(파일 소유권)
-
-| 담당 | 파일·영역 |
-| --- | --- |
-| **Codex** | `camping-atlas/**`(웹), `pipeline/lib/postgres-gocamping.mjs`·`scripts/{migrate-postgres,import-gocamping-postgres,publish-web-catalog}.mjs`, `db/003~004`, GitHub Pages 배포, `catalog.json` 스키마 |
-| **Claude** | `db/005~009`, `pipeline/lib/postgres-{facts,poi,booking,linkage}.mjs`·`scripts/import-*-postgres.mjs`(고캠핑 제외)·`scripts/verify-db-load.mjs`, 수집기(`sync-toilets`·`sync-rest-stops`·LOCALDATA 야영장업), `design/**`, Cloudflare 미리보기 |
-| 공동(수정 전 인수인계에 기록) | `.github/workflows/data-sync.yml`, `docs/AGENT_HANDOFF.md`, `docs/PROJECT_PLAN.md`, `pipeline/package.json` |
-
-## 7-1. 구현 상태 (2026-10-13)
-
-- 005~009, 적재기(`npm run db:import-enrichment`), 대조(`npm run db:verify-load`), 통합 테스트, `db-verify.yml`, `data-sync.yml` 임시 DB 단계 완료.
-- 운영 적재 조건: 소유자 DB 생성 → `DATABASE_URL` → Codex 단계에 `db:import-enrichment` 추가(부가 원천 이용허락 확정 뒤).
-
-- LOCALDATA 일반·자동차야영장업 인허가 수집(`npm run sync:localdata-campgrounds`) → 고캠핑 매칭(이름·좌표·도로명·전화, 1:1) → `entity_link`. 숨은 후보(`HIDDEN_CANDIDATE`), 인허가 폐업인데 고캠핑에 운영 중으로 남은 곳(`LICENSE_CLOSED_BUT_LISTED`)을 표시. 업종 고유 열(시설 규모 등)은 `extra`로 보존.
-
-## 8. Codex 확인 요청
-
-1. `db:migrate`가 파일 전체를 한 번에 실행하므로 005~008도 `BEGIN/COMMIT`으로 감싸 같은 방식에 맞춘다. 이견 있으면 인수인계에 남겨 달라.
-2. `data-sync.yml`에 임시 Postgres 검증 단계를 **잡 끝에 추가**한다(기존 단계 순서는 그대로). 운영 `DATABASE_URL` 단계는 Codex 소유로 유지.
-3. `catalog.json`에 화장실·휴게소·무료 사실을 넣을지, 별도 파일(`poi.json`)로 발행할지 결정 요청. Claude 제안: 별도 파일(캠핑장 상세 진입 시에만 로드, 첫 화면 용량 보호).
-4. 병합 조건 응답: Cloudflare 워크플로는 `deploy-cloudflare.yml`로 분리해 GitHub Pages와 공존, 시안 이미지 출처는 `design/ASSETS.md`(저장소 생성 이미지의 크롭 파생본). 웹 앱에는 이 이미지를 쓰지 않는다.
+수집·계산·검증은 GitHub Actions(공개 저장소 무료), 검증 DB는 실행마다 새로 띄우는 PostgreSQL 컨테이너, 공개는 GitHub Pages/Cloudflare Pages, 운영 DB는 소유자가 Neon 또는 Supabase 무료 Postgres(예상 100~200MB)를 고르면 `DATABASE_URL`만 등록해 시작한다.
