@@ -4,6 +4,8 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const ic = (id, cls = "") => `<svg class="i ${cls}" aria-hidden="true"><use href="${id}"/></svg>`;
+// 가격은 “13만원대”처럼 구간으로만 보여 준다(1만원 미만은 “8천원대”).
+const band = (n) => (n >= 10000 ? `${Math.floor(n / 10000)}만원대` : `${Math.max(1, Math.floor(n / 1000))}천원대`);
 const won = (n) => `${Math.round(n / 1000) * 1000 >= 10000 ? (n / 10000).toFixed(n % 10000 ? 1 : 0) + "만" : n.toLocaleString()}원`;
 // 날짜·시각은 보는 사람의 기기 시간대와 무관하게 한국 시간(KST)으로 보여 준다.
 const kst = (s) => { const d = new Date(s); if (Number.isNaN(+d)) return null; const k = new Date(+d + 9 * 3600e3); return { y: k.getUTCFullYear(), mo: k.getUTCMonth() + 1, d: k.getUTCDate(), wd: k.getUTCDay(), h: k.getUTCHours(), mi: k.getUTCMinutes() }; };
@@ -24,20 +26,11 @@ const sortName = (c) => (c._sort ??= c.name.replace(/^[\s(（［\[]*[^)）］\]]
 // 데이터는 빈 값을 빼고 배포하므로 화면에서 기본값을 채운다.
 const withDefaults = (c) => ({ th: [], kinds: [], sizes: [], floors: [], amenities: [], env: [], themes: [], rental: [], seasons: [], days: [], types: [], seoul: [], ...c, booking: { methods: [], url: null, provider: null, channels: [], source: null, ...(c.booking ?? {}) } });
 
-// 글자 크기 설정(작게·보통·크게·아주 크게): html의 font-size만 바꾸면 rem 단위 글자가 모두 비례해 바뀐다.
-const FS = [["s", "작게"], ["m", "보통"], ["l", "크게"], ["xl", "아주 크게"]];
-function applyFs(v) {
-  const i = Math.max(0, FS.findIndex(([k]) => k === v));
-  document.documentElement.dataset.fs = FS[i][0];
-  const label = document.getElementById("fsLabel"); if (label) label.textContent = FS[i][1];
-  try { localStorage.setItem("moyeora-fs", FS[i][0]); } catch {}
-}
-try { applyFs(localStorage.getItem("moyeora-fs") ?? "m"); } catch { applyFs("m"); }
 const state = { q: "", area: "전국", kinds: new Set(), realtime: false, pet: false, fee: false, toilet: false, savedOnly: false, inView: false, theme: "", sgg: "", gear: "", sort: "best", shown: PAGE, here: null, open: null, saved: new Set(), seen: new Set() };
 let ALL = [], META = null, map = null, clusterer = null, markers = new Map();
 
 function load() {
-  try { const s = JSON.parse(localStorage.getItem("moyeora-explore") ?? "{}"); Object.assign(state, { area: s.area ?? "전국", gear: s.gear ?? "", saved: new Set(Array.isArray(s.saved) ? s.saved : []), seen: new Set(Array.isArray(s.seen) ? s.seen : []) }); } catch {}
+  loadUser();
   const h = new URLSearchParams(location.hash.slice(1));
   if (h.get("c")) state.open = h.get("c");
   // 홈 검색창·분류 버튼에서 넘어온 검색어(q)·사이트 형태(k)
@@ -50,8 +43,18 @@ function load() {
   if (h.get("a") && AREAS.includes(h.get("a"))) state.area = h.get("a");
   if (h.get("g")) state.sgg = h.get("g");
 }
-// 관심 캠핑장은 이 기기 브라우저에만 저장한다(로그인 없음).
-const save = () => { try { localStorage.setItem("moyeora-explore", JSON.stringify({ area: state.area, gear: state.gear, saved: [...state.saved], seen: [...state.seen].slice(-120) })); } catch {} };
+// 관심 캠핑장은 이 기기 브라우저에만, 헤더에서 고른 사용자별로 따로 저장한다(로그인 없음).
+const userKey = () => window.moyeoraUser?.key("moyeora-explore") ?? "moyeora-explore";
+function loadUser() {
+  try { const s = JSON.parse(localStorage.getItem(userKey()) ?? "{}"); Object.assign(state, { area: s.area ?? "전국", gear: s.gear ?? "", saved: new Set(Array.isArray(s.saved) ? s.saved : []), seen: new Set(Array.isArray(s.seen) ? s.seen : []) }); } catch { Object.assign(state, { saved: new Set(), seen: new Set() }); }
+}
+const save = () => { try { localStorage.setItem(userKey(), JSON.stringify({ area: state.area, gear: state.gear, saved: [...state.saved], seen: [...state.seen].slice(-120) })); } catch {} };
+// 헤더 이름 뱃지로 사용자를 바꾸면 그 사람의 관심·최근 본 목록으로 다시 그린다.
+window.addEventListener("moyeora:user", (e) => {
+  loadUser(); state.shown = PAGE; renderChips(); renderList();
+  if (state.open) { const c = ALL.find((x) => x.id === state.open); const panel = $(".sheet-panel"); if (c && panel) { const top = panel.scrollTop; panel.innerHTML = detail(c); panel.scrollTop = top; } }
+  toast(`${e.detail?.name ?? "사용자"}님의 관심 목록으로 바꿨어요`);
+});
 const inBounds = (c) => { if (!state.inView || !map) return true; const b = map.getBounds(); return b.contain(new kakao.maps.LatLng(c.lat, c.lng)); };
 
 const fits = (c) => {
@@ -109,12 +112,12 @@ function card(c) {
   const kinds = c.kinds.map(([k, n]) => KIND[k] ? `<span class="tag">${ic(KIND[k][1], "i-xs")}${KIND[k][0]} <span class="num">${n}</span></span>` : "").join("");
   const km = state.here ? ` · ${dist(state.here, c).toFixed(0)}km` : "";
   return `<button class="card" type="button" data-open="${c.id}" aria-current="${state.open === c.id}">
-    <span class="thumb">${c.ph ? `<img src="../media/${esc(largeLocalPhoto(c.ph))}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">` : ic("#t-tent")}</span>
+    <span class="thumb${!c.ph && !c.img && c.sn ? " snap" : ""}">${c.ph ? `<img src="../media/${esc(largeLocalPhoto(c.ph))}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">` : c.sn ? `<img src="${esc(String(c.sn).replace(/^http:/, "https:"))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentElement.classList.remove('snap');this.remove()"><em class="snap-tag">검색 사진</em>` : ic("#t-tent")}</span>
     <span class="card-body">
       <span class="card-title"><h3>${esc(c.name)}</h3>${state.saved.has(c.id) ? ic("#l-heart", "i-xs saved-mark") : ""}</span>
       <span class="loc">${ic("#l-map-pin", "i-xs")}${esc([c.sido, c.sigungu].filter(Boolean).join(" "))}${km}${OP[c.op] ? ` · ${OP[c.op]}` : ""}</span>
       <span class="tags">${c.booking.next ? `<span class="tag tag-ember">${ic("#l-alarm-clock", "i-xs")}${c.booking.next.time_known ? hm(c.booking.next.at) : md(c.booking.next.at)} 오픈</span>` : ""}${openNow(c) ? `<span class="tag tag-green">${ic("#l-circle-check", "i-xs")}서울 공공예약 접수중</span>` : ""}${isRealtime(c) ? `<span class="tag tag-green">${ic("#l-zap", "i-xs")}온라인 실시간 예약</span>` : ""}${kinds}${petOk(c) ? `<span class="tag">${ic("#l-dog", "i-xs")}반려견</span>` : ""}${c.soc?.[0] ? `<span class="tag">${ic("#l-message-circle", "i-xs")}후기 ${c.soc[0]}</span>` : ""}${c.soc?.[1] ? `<span class="tag">${ic("#l-play", "i-xs")}영상 ${c.soc[1]}</span>` : ""}</span>
-      <span class="price">${c.fee?.min ? `<b>${won(c.fee.min)}~</b><span>공식 안내 요금</span>` : `<span>요금은 예약처에서 확인</span>`}</span>
+      <span class="price">${c.fee?.min ? `<b>${band(c.fee.min)}부터</b><span>공식 안내 요금</span>` : `<span>요금은 예약처에서 확인</span>`}</span>
     </span></button>`;
 }
 
@@ -153,14 +156,8 @@ function renderHub() {
     </section>`;
     return;
   }
-  if (state.q || state.savedOnly) { hub.innerHTML = ""; return; }
-  // 지금 고른 지역 안에서 테마별 개수(0곳 테마는 숨김)
-  const base = ALL.filter((c) => (state.area === "전국" || c.area === state.area) && (!state.sgg || sggKey(c) === state.sgg));
-  const groups = [...new Set(themes.map((x) => x.group))];
-  const tiles = (g) => themes.filter((x) => x.group === g).map((x) => [x, base.filter((c) => c.th.includes(x.id)).length]).filter(([, n]) => n > 0)
-    .map(([x, n]) => `<button class="theme-tile" type="button" data-th="${x.id}"><span class="theme-ic">${ic(THEME_ICON[x.id] ?? "#t-tent")}</span><b>${esc(x.label)}</b><small class="num">${n.toLocaleString()}곳</small></button>`).join("");
-  const body = groups.map((g) => { const h = tiles(g); return h ? `<div class="theme-group"><h3>${esc(g)}</h3><div class="theme-grid">${h}</div></div>` : ""; }).join("");
-  hub.innerHTML = body ? `<section class="hub" aria-label="테마로 찾기"><div class="hub-head"><h2>${esc(scope)} 테마로 찾기</h2><button class="link-btn" type="button" data-hub-toggle aria-expanded="${!state.hubFolded}">${state.hubFolded ? "펼치기" : "접기"}</button></div>${state.hubFolded ? "" : body}</section>` : "";
+  // 테마 둘러보기는 별도 메뉴(테마 → themes/)로 옮겼다. 목록 위에는 고른 테마 머리만 둔다.
+  hub.innerHTML = "";
 }
 const titleOf = (n) => (state.q.trim() ? `‘${state.q.trim()}’ 검색 결과 ${n.toLocaleString()}곳` : `캠핑장 ${n.toLocaleString()}곳`);
 function renderListOnly() {
@@ -393,10 +390,16 @@ function priceMentionsBlock(d) {
   if (!list.length) return "";
   const S = { peak: "성수기", off: "비수기" }, D = { weekend: "주말", weekday: "평일" };
   const tag = (x) => [S[x.season], D[x.day]].filter(Boolean).join(" ") || "시기 미상";
+  // 시기(성수기·비수기 × 주말·평일)별 대표값(중앙값)을 “N만원대”로. 개별 언급도 금액 대신 구간으로만 보여 준다.
+  const groups = new Map();
+  for (const x of list) { const k = tag(x); if (!groups.has(k)) groups.set(k, []); groups.get(k).push(x.won); }
+  const median = (v) => { const a = [...v].sort((p, q) => p - q); return a[Math.floor((a.length - 1) / 2)]; };
   const vals = list.map((x) => x.won);
+  const lo = band(Math.min(...vals)), hi = band(Math.max(...vals));
   return `<div class="sub"><h4>후기 속 요금 <small class="unv">참고</small></h4>
-    <p class="price-range">이용자 후기 기준 <b class="num">${Math.min(...vals).toLocaleString()}원</b> ~ <b class="num">${Math.max(...vals).toLocaleString()}원</b></p>
-    <div class="mentions">${list.map((x) => `<a class="mention" href="${esc(x.url ?? "#")}" target="_blank" rel="noopener"><span class="m-top"><b class="num">${x.won.toLocaleString()}원</b><em>${esc(tag(x))}</em>${x.label ? `<i>${esc(x.label)}</i>` : ""}</span><q data-wrap-ok>${esc(x.quote)}</q><small>${esc([x.src, x.date && ymd(x.date)].filter(Boolean).join(" · "))}</small></a>`).join("")}</div>
+    <p class="price-range">이용자 후기 기준 1박 <b class="num">${lo === hi ? lo : `${lo} ~ ${hi}`}</b></p>
+    <div class="price-bands">${[...groups].map(([k, v]) => `<span><small>${esc(k)}</small><b class="num">${band(median(v))}</b><i>후기 ${v.length}건</i></span>`).join("")}</div>
+    <div class="mentions">${list.map((x) => `<a class="mention" href="${esc(x.url ?? "#")}" target="_blank" rel="noopener"><span class="m-top"><b class="num">${band(x.won)}</b><em>${esc(tag(x))}</em>${x.label ? `<i>${esc(x.label)}</i>` : ""}</span><small>${esc([x.src, x.date && ymd(x.date)].filter(Boolean).join(" · "))} · 원문 보기</small></a>`).join("")}</div>
     <span class="trust">${ic("#l-info", "i-xs")}블로그·카페 글에서 자동 추출 · 작성 시점 요금이라 지금과 다를 수 있음 · 확정 요금은 예약처</span></div>`;
 }
 // 시설 배치도(검색 결과 이미지·원문 링크만, 저장하지 않음)
@@ -606,9 +609,10 @@ async function shareUrl(url, title) {
     await navigator.clipboard.writeText(url); toast("링크를 복사했어요");
   } catch (e) { if (e?.name !== "AbortError") toast("링크를 복사하지 못했어요"); }
 }
-function toast(msg) {
+function toast(msg, ms = 2000) {
+  $$(".toast").forEach((x) => x.remove());
   const el = document.createElement("div"); el.className = "toast"; el.setAttribute("role", "status"); el.textContent = msg;
-  document.body.append(el); setTimeout(() => el.remove(), 2000);
+  document.body.append(el); setTimeout(() => el.remove(), ms);
 }
 function closeDetail({ fromPop = false } = {}) {
   document.title = BASE_TITLE; state.open = null; $("#sheetRoot").innerHTML = ""; document.body.style.overflow = "";
@@ -630,7 +634,7 @@ window.addEventListener("popstate", () => {
 /* ---------- 이벤트 ---------- */
 function rerender(resetPage = true) { if (resetPage) state.shown = PAGE; save(); renderChips(); renderList(); }
 document.addEventListener("click", (e) => {
-  const t = e.target.closest("[data-open],[data-close],[data-save],[data-share],[data-share-theme],[data-jump],[data-near],[data-copy],[data-video],[data-roadview],[data-th],[data-sgg],[data-hub-toggle],#fsBtn,[data-area],[data-kind],[data-toggle],#moreBtn,#viewSwitch,#clearQ,#nearBtn");
+  const t = e.target.closest("[data-open],[data-close],[data-save],[data-share],[data-share-theme],[data-jump],[data-near],[data-copy],[data-video],[data-roadview],[data-th],[data-sgg],[data-area],[data-kind],[data-toggle],#moreBtn,#viewSwitch,#clearQ,#nearBtn");
   if (!t) return;
   if (t.dataset.jump) { const el = document.getElementById(t.dataset.jump); return el?.scrollIntoView({ behavior: "smooth", block: "start" }); }
   if (t.dataset.near) {
@@ -650,17 +654,15 @@ document.addEventListener("click", (e) => {
     const id = t.dataset.save, on = !state.saved.has(id);
     on ? state.saved.add(id) : state.saved.delete(id);
     t.setAttribute("aria-pressed", String(on)); t.innerHTML = `${ic("#l-heart")}${on ? "저장됨" : "관심"}`;
-    toast(on ? "관심 캠핑장에 저장했어요(이 기기)" : "관심에서 뺐어요");
+    toast(on ? `${window.moyeoraUser?.active().name ?? ""}님 관심에 저장했어요`.trim() : "관심에서 뺐어요");
     return rerender(false);
   }
-  if (t.id === "fsBtn") { const i = FS.findIndex(([k]) => k === document.documentElement.dataset.fs); applyFs(FS[(i + 1) % FS.length][0]); toast(`글자 크기: ${FS[(i + 1) % FS.length][1]}`); return head(); }
   if (t.dataset.share) return share(ALL.find((x) => x.id === t.dataset.share));
   if (t.dataset.open) return openDetail(t.dataset.open);
   if (t.hasAttribute("data-close")) return closeDetail();
   if (t.dataset.area) { state.area = t.dataset.area; state.sgg = ""; syncHash(); return rerender(); }
   if (t.dataset.sgg !== undefined) { state.sgg = t.dataset.sgg; syncHash(); return rerender(); }
   if (t.dataset.th !== undefined) { state.theme = t.dataset.th; syncHash(); rerender(); return $(".list-col")?.scrollIntoView({ block: "start", behavior: "smooth" }); }
-  if (t.hasAttribute("data-hub-toggle")) { state.hubFolded = !state.hubFolded; return renderHub(); }
   if (t.hasAttribute("data-share-theme")) return shareUrl(`${location.origin}${location.pathname}${location.hash}`, `${META.themes.find((x) => x.id === state.theme)?.label ?? ""} 캠핑장 · 모여라 캠핑`);
   if (t.dataset.kind) { state.kinds.has(t.dataset.kind) ? state.kinds.delete(t.dataset.kind) : state.kinds.add(t.dataset.kind); return rerender(); }
   if (t.dataset.toggle) { state[t.dataset.toggle] = !state[t.dataset.toggle]; return rerender(); }
@@ -673,15 +675,43 @@ document.addEventListener("click", (e) => {
     if (map) setTimeout(() => map.relayout(), 50);
   }
   if (t.id === "nearBtn") {
-    if (!navigator.geolocation) return;
-    navigator.geolocation.getCurrentPosition((p) => { state.here = { lat: p.coords.latitude, lng: p.coords.longitude }; state.sort = "near"; $("#sort").value = "near"; rerender(); }, () => alert("위치 권한이 없어 가까운 순으로 정렬할 수 없어요."));
+    // 이미 내 주변 순이면 한 번 더 눌러 끈다.
+    if (state.sort === "near" && state.here) { state.sort = "best"; $("#sort").value = "best"; t.setAttribute("aria-pressed", "false"); return rerender(); }
+    return locate(t);
   }
 });
+// 현재 위치: 권한·시간 초과·위치 없음마다 이유를 알려 주고, 찾으면 가까운 순 정렬 + 지도 이동 + 내 위치 표시.
+let hereMarker = null;
+function locate(btn = $("#nearBtn")) {
+  if (!navigator.geolocation) return toast("이 브라우저는 위치 기능을 지원하지 않아요");
+  if (!window.isSecureContext) return toast("보안 연결(https)에서만 위치를 쓸 수 있어요");
+  btn?.classList.add("busy"); btn?.setAttribute("aria-busy", "true");
+  toast("현재 위치를 확인하는 중…");
+  navigator.geolocation.getCurrentPosition((p) => {
+    btn?.classList.remove("busy"); btn?.removeAttribute("aria-busy"); btn?.setAttribute("aria-pressed", "true");
+    state.here = { lat: p.coords.latitude, lng: p.coords.longitude }; state.sort = "near"; $("#sort").value = "near";
+    rerender();
+    if (map) {
+      const at = new kakao.maps.LatLng(state.here.lat, state.here.lng);
+      hereMarker?.setMap(null);
+      hereMarker = new kakao.maps.CustomOverlay({ position: at, content: '<span class="here-dot" title="내 위치"></span>', zIndex: 5 });
+      hereMarker.setMap(map); map.setLevel(9); map.panTo(at);
+    }
+    $(".list-col")?.scrollIntoView({ block: "start", behavior: "smooth" });
+    toast("내 위치에서 가까운 순으로 정렬했어요");
+  }, (err) => {
+    btn?.classList.remove("busy"); btn?.removeAttribute("aria-busy");
+    const msg = err.code === 1 ? "위치 권한이 꺼져 있어요. 주소창의 자물쇠(또는 설정 → 사이트 권한)에서 위치를 허용한 뒤 다시 눌러 주세요."
+      : err.code === 3 ? "위치를 찾는 데 시간이 너무 걸려요. 잠시 뒤 다시 눌러 주세요."
+      : "현재 위치를 찾지 못했어요. 기기의 위치 서비스(GPS)가 켜져 있는지 확인해 주세요.";
+    toast(msg, 5000);
+  }, { enableHighAccuracy: false, timeout: 12000, maximumAge: 300000 });
+}
 document.addEventListener("change", (e) => {
   if (e.target.matches("[data-gear]")) { state.gear = e.target.value; rerender(); }
   if (e.target.id === "sort") {
     state.sort = e.target.value;
-    if (state.sort === "near" && !state.here) { $("#nearBtn").click(); return; }
+    if (state.sort === "near" && !state.here) { locate(); return; }
     rerender();
   }
 });
@@ -709,6 +739,6 @@ async function boot() {
   // 목록 끝에 닿으면 자동으로 더 불러온다(수백 곳도 끊김 없이).
   new IntersectionObserver((es) => { if (es.some((x) => x.isIntersecting) && !$("#moreBtn").hidden) { state.shown += PAGE; renderListOnly(); } }, { rootMargin: "600px" }).observe($("#moreBtn"));
   if (state.open) openDetail(state.open);
-  if (state.nearOnBoot) $("#nearBtn")?.click();
+  if (state.nearOnBoot) locate();
 }
 boot();

@@ -52,6 +52,7 @@ if (shellOnly) {
 await cp(`${dataDir}/campgrounds.json`, `${out}data/campgrounds.json`);
 await cp(`${dataDir}/meta.json`, `${out}data/meta.json`);
 if (existsSync(`${dataDir}/featured.json`)) await cp(`${dataDir}/featured.json`, `${out}data/featured.json`);
+if (existsSync(`${dataDir}/openings.json`)) await cp(`${dataDir}/openings.json`, `${out}data/openings.json`);
 if (existsSync(`${dataDir}/camps`)) await cp(`${dataDir}/camps`, `${out}data/camps`, { recursive: true });
 await writeUtilityPages();
 
