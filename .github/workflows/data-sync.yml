@@ -80,6 +80,9 @@ jobs:
             pipeline/.cache/tour-intro.json
             pipeline/.cache/tour-pois.json
             pipeline/.cache/osm-shops.json
+            pipeline/.cache/tour-stay.json
+            pipeline/.cache/tour-products.json
+            pipeline/.cache/social-search.json
           key: source-cache-v4-${{ github.run_id }}
           restore-keys: |
             source-cache-v4-
@@ -125,6 +128,13 @@ jobs:
           # 캐시는 브랜치별로 분리된다. main 정기 실행은 2,000건씩 이어서 보강하고,
           # 초기 전량 보강만 workflow_dispatch 입력값으로 30,000건을 명시한다.
           GEOCODE_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || (github.event_name == 'workflow_dispatch' && inputs.geocode_max_calls) || '2000' }}
+      - name: Sync campground social search (Kakao Daum blog/cafe/image/video)
+        # 사람들의 후기·사진·영상(링크와 썸네일 주소만 저장, 이미지 재호스팅 안 함). 다음 검색 한도 일 5만·종류별 3만.
+        continue-on-error: true
+        run: npm run sync:social
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          SOCIAL_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '4000' }}
       - name: Sync rest areas and drowsy shelters
         continue-on-error: true
         run: npm run sync:rest-stops
@@ -151,6 +161,15 @@ jobs:
         continue-on-error: true
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+          # TourAPI 하루 한도(~1000)를 요금 안내 250 · 주변 150 · 상품 550으로 나눈다.
+          TOUR_DAILY_CAP: '250'
+      - name: Collect official products & photos (TourAPI stay/campsite) and match to GoCamping
+        # 관광공사 숙박(32)·야영장(28) 객실/사이트 상품·공식 등록 기준가·공식 사진. 하루 상한 안에서 캐시로 나눠 채운다.
+        run: npm run sync:tour-products
+        continue-on-error: true
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+          PRODUCT_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '550' }}
       - name: Collect Seoul public reservation status (camping)
         # 서울시·자치구 공영 캠핑장 예약 상품의 접수 상태·접수 기간(서울 열린데이터광장). 키 없으면 건너뜀.
         run: npm run sync:seoul-yeyak
@@ -186,9 +205,9 @@ jobs:
         env:
           MEDIA_DIR: ${{ steps.media.outputs.dir }}
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
-          IMAGE_LIST_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '500' }}
+          IMAGE_LIST_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '900' }}
           IMAGE_MAX_DOWNLOADS: ${{ github.event_name == 'pull_request' && '20' || '1500' }}
-          IMAGE_MAX_PER_CAMP: ${{ vars.IMAGE_MAX_PER_CAMP || '3' }}
+          IMAGE_MAX_PER_CAMP: ${{ vars.IMAGE_MAX_PER_CAMP || '6' }}
           IMAGE_MAX_BYTES: '12000000'
       - name: Publish the media branch (single commit, force push)
         # 소유자 요청(2026-10-13)으로 공식 사진을 자체 저장한다. 권리자 요청 시 media 브랜치에서 지우고 재배포한다.

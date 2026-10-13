@@ -261,3 +261,34 @@ details.sub summary h4 { min-width: 0; }
 .d-body, .d-cta { max-width: 880px; margin-left: auto; margin-right: auto; width: 100%; }
 .d-cta { border-radius: 0; }
 @media (min-width: 900px) { .d-cta { border-left: 1px solid var(--line); border-right: 1px solid var(--line); } }
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(30%, 9rem), 1fr)); gap: 6px; }
+.photo-grid a { display: block; aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: var(--surface-2); }
+.photo-grid img { width: 100%; height: 100%; object-fit: cover; }
+/* 후기·영상·상품 */
+.review { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; }
+.review > img { width: 4.5rem; height: 4.5rem; border-radius: 10px; object-fit: cover; }
+.review > span { display: grid; gap: 2px; min-width: 0; }
+.video small { font-size: var(--fs-2xs); color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.video em { position: absolute; right: 6px; top: 6px; padding: 2px 7px; border-radius: 999px; background: #ff0033; color: #fff; font-size: var(--fs-2xs); font-style: normal; font-weight: 800; }
+.video.short img { aspect-ratio: 9 / 12; }
+.products { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); gap: 10px; }
+.product { display: grid; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); min-width: 0; }
+.product-photos { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; aspect-ratio: 4 / 3; background: var(--surface-2); }
+.product-photos::-webkit-scrollbar { display: none; }
+.product-photos img { flex: 0 0 100%; width: 100%; height: 100%; object-fit: cover; scroll-snap-align: start; }
+.product-body { display: grid; gap: 6px; padding: 12px; min-width: 0; }
+.product-body > b { font-size: var(--fs-md); font-weight: 800; }
+.product-body > small { font-size: var(--fs-xs); color: var(--ink-3); font-weight: 500; }
+.price-table { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; }
+.price-table dt { font-size: var(--fs-xs); color: var(--ink-3); font-weight: 600; white-space: nowrap; }
+.price-table dd { margin: 0; text-align: right; font-size: var(--fs-base); font-weight: 900; color: var(--ink); white-space: nowrap; }
+.review { display: flex; gap: 10px; align-items: flex-start; }
+.review > img { flex: none; }
+.review > span { flex: 1; }
+/* 영상은 가로로 넘기는 한 줄(쇼츠는 세로형) */
+.videos { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px 4px; scroll-snap-type: x proximity; }
+.videos::-webkit-scrollbar { display: none; }
+.videos .video { flex: 0 0 15rem; scroll-snap-align: start; }
+.videos .video.short { flex-basis: 9rem; }
+.video.short img { aspect-ratio: 9 / 16; }
+.videos .video-frame { flex: 0 0 min(100%, 28rem); }
