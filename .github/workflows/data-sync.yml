@@ -24,6 +24,15 @@ jobs:
   sync:
     name: Sync public sources and build open calendar
     runs-on: ubuntu-latest
+    # 그날 수집한 데이터를 실행마다 새로 띄우는 PostgreSQL에 실제로 넣어 대조한다(Claude 담당, docs/DB_BUILD_PLAN.md 6).
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
     defaults:
       run:
         working-directory: pipeline
@@ -112,6 +121,20 @@ jobs:
         run: npm run discover:public-free
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+      - name: Load today's data into a throwaway PostgreSQL and reconcile
+        # 운영 DB가 없어도 마이그레이션·적재·건수 대조·품질 규칙을 매일 검증한다.
+        # 임시 DB 전용으로 이용허락 미확인 원천도 넣어 본다(운영 DB 적재는 위 단계가 data_source 허용값을 지킨다).
+        if: always()
+        run: |
+          if [ ! -f out/campgrounds.json ]; then echo "::notice::고캠핑 결과가 없어 DB 검증을 건너뜁니다."; exit 0; fi
+          npm run db:migrate
+          npm run db:import-gocamping
+          npm run db:import-enrichment
+          npm run db:import-enrichment
+          npm run db:verify-load
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+          IMPORT_UNVERIFIED_LICENSES: "true"
       - uses: actions/upload-artifact@v4
         with:
           name: pipeline-out

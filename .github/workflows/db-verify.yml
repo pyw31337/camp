@@ -1,0 +1,62 @@
+name: DB verify
+
+# 운영 DB(DATABASE_URL) 없이도 스키마·적재기를 실제 PostgreSQL에서 검증한다.
+# 실행마다 새 PostgreSQL 16 컨테이너를 띄우므로 비용·비밀값이 필요 없다(공개 저장소 Actions 무료).
+on:
+  pull_request:
+    paths:
+      - "db/**"
+      - "pipeline/lib/postgres-*.mjs"
+      - "pipeline/scripts/*postgres*.mjs"
+      - "pipeline/scripts/verify-db-load.mjs"
+      - "pipeline/test/db-integration.test.mjs"
+      - ".github/workflows/db-verify.yml"
+  push:
+    branches: [main]
+    paths:
+      - "db/**"
+      - "pipeline/lib/postgres-*.mjs"
+      - "pipeline/scripts/*postgres*.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Migrate, load twice and check rules
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    defaults:
+      run:
+        working-directory: pipeline
+    env:
+      TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Unit and PostgreSQL integration tests
+        run: npm test
+      - name: Rollback scripts restore the previous schema
+        run: |
+          export PGPASSWORD=postgres
+          psql -h localhost -U postgres -c "CREATE DATABASE rollback_check"
+          DATABASE_URL=postgres://postgres:postgres@localhost:5432/rollback_check npm run db:migrate
+          for f in $(ls ../db/0*.sql | sort -r); do
+            n=$(basename "$f" | cut -c1-3); [ "$n" -lt 5 ] && continue
+            awk '/롤백/{on=1;next} on&&/^--   /{sub(/^--   /,"");print;next} on&&!/^--   /{exit}' "$f" \
+              | psql -h localhost -U postgres -d rollback_check -v ON_ERROR_STOP=1 -q
+            psql -h localhost -U postgres -d rollback_check -qc "DELETE FROM schema_migration WHERE filename = '$(basename "$f")'"
+            echo "rolled back $(basename "$f")"
+          done
+          DATABASE_URL=postgres://postgres:postgres@localhost:5432/rollback_check npm run db:migrate
