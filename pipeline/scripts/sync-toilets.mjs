@@ -21,40 +21,60 @@ await mkdir(cacheDir, { recursive: true });
 const fetchedAt = toKstIso(nowInKst());
 const warn = (title, msg) => console.log(`::warning title=${title}::${msg}`);
 
-async function download(url, depth = 0) {
-  const res = await fetch(url, { redirect: "follow", headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36", Referer: "https://www.data.go.kr/", Accept: "text/csv,application/zip,*/*" }, signal: AbortSignal.timeout(120000) });
-  if (!res.ok) throw new Error(`HTTP ${res.status} ${url}`);
-  const buf = Buffer.from(await res.arrayBuffer());
-  const type = res.headers.get("content-type") ?? "";
-  // ZIP이면 첫 CSV를 꺼낸다(러너의 unzip 사용).
+const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36";
+
+/** 응답 본문을 CSV 바이트로: ZIP이면 첫 CSV를 꺼낸다(러너의 unzip). */
+async function toCsvBytes(buf, tag) {
   if (buf[0] === 0x50 && buf[1] === 0x4b) {
-    const zip = `${cacheDir}toilets.zip`;
+    const zip = `${cacheDir}toilets-${tag}.zip`;
     await writeFile(zip, buf);
     const list = execFileSync("unzip", ["-Z1", zip]).toString().split("\n").filter((n) => /\.csv$/i.test(n));
     if (!list.length) throw new Error("ZIP 안에 CSV가 없음");
     return execFileSync("unzip", ["-p", zip, list[0]], { maxBuffer: 512 * 1024 * 1024 });
   }
-  // 안내 HTML이면 그 안의 CSV/ZIP 링크를 한 번 따라간다.
-  if (/html/i.test(type) && depth === 0) {
-    const html = buf.toString("utf8");
-    const m = html.match(/href=["']([^"']+\.(?:csv|zip)[^"']*)["']/i) || html.match(/(https?:\/\/[^"'\s]+\.(?:csv|zip))/i);
-    if (!m) {
-      // 다운로드가 스크립트로 처리되는 페이지면 단서를 로그에 남긴다.
-      const clues = [...new Set(html.match(/[^<>"'\s]{0,60}(download|fileDown|filedown|\.csv|\.zip|excel|atchFile)[^<>"'\s]{0,80}/gi) ?? [])].slice(0, 25);
-      console.log(`다운로드 단서 ${clues.length}개:\n  ${clues.join("\n  ")}`);
-      const forms = [...html.matchAll(/<form[^>]*>/gi)].map((f) => f[0]).slice(0, 5);
-      if (forms.length) console.log(`form: ${forms.join(" | ")}`);
-      throw new Error(`다운로드 링크를 찾지 못함(HTML ${buf.length}B)`);
-    }
-    return download(new URL(m[1], url).toString(), 1);
-  }
   return buf;
+}
+
+/**
+ * LOCALDATA 파일 페이지는 시도별 ‘전체 다운로드’ 링크(/file/download-all?orgCode=XXXXXXX_ALL)를 준다.
+ * 페이지에서 쿠키·링크를 얻은 뒤 시도별 파일을 모두 받아 행을 합친다.
+ * @returns {Promise<{rows: object[], parts: string[]}>}
+ */
+async function downloadAll(pageUrl) {
+  const page = await fetch(pageUrl, { headers: { "User-Agent": UA, Referer: "https://www.data.go.kr/" }, signal: AbortSignal.timeout(60000) });
+  if (!page.ok) throw new Error(`HTTP ${page.status} ${pageUrl}`);
+  const cookie = (page.headers.getSetCookie?.() ?? []).map((c) => c.split(";")[0]).join("; ");
+  const buf = Buffer.from(await page.arrayBuffer());
+  if (!/html/i.test(page.headers.get("content-type") ?? "")) return { rows: csvToObjects(decodeKoreanText(await toCsvBytes(buf, "single"))), parts: ["single"] };
+  const html = buf.toString("utf8");
+  const dataUrl = html.match(/data-download-url=["']([^"']+)["']/i)?.[1];
+  if (dataUrl) console.log(`data-download-url: ${dataUrl}`);
+  const links = [...new Set([...html.matchAll(/\/file\/download-all\?orgCode=([0-9A-Z_]+)/g)].map((m) => m[0]))];
+  if (!links.length) throw new Error(`시도별 다운로드 링크 없음(HTML ${buf.length}B)`);
+  const rows = [];
+  const parts = [];
+  for (const link of links) {
+    const url = new URL(link, pageUrl).toString();
+    try {
+      const res = await fetch(url, { headers: { "User-Agent": UA, Referer: pageUrl, Cookie: cookie }, signal: AbortSignal.timeout(120000) });
+      const b = Buffer.from(await res.arrayBuffer());
+      const type = res.headers.get("content-type") ?? "";
+      if (!res.ok || /html/i.test(type)) { console.log(`  ${link} → HTTP ${res.status} ${type} ${b.length}B`); continue; }
+      const part = csvToObjects(decodeKoreanText(await toCsvBytes(b, link.split("=")[1])));
+      rows.push(...part);
+      parts.push(`${link.split("=")[1]}:${part.length}`);
+    } catch (e) {
+      console.log(`  ${link} → ${e.message}`);
+    }
+  }
+  if (!rows.length) throw new Error(`시도별 파일 ${links.length}개 모두 실패`);
+  return { rows, parts };
 }
 
 let toilets = [];
 try {
-  const raw = await download(SOURCE_URL);
-  const rows = csvToObjects(decodeKoreanText(raw));
+  const { rows, parts } = await downloadAll(SOURCE_URL);
+  console.log(`시도별 파일: ${parts.join(", ")}`);
   toilets = rows.map(normalizeToilet).filter(Boolean);
   console.log(`행안부 공중화장실 원본 ${rows.length}행 → 정규화 ${toilets.length}곳`);
   if (rows[0]) console.log(`머리글: ${Object.keys(rows[0]).join(", ")}`);
