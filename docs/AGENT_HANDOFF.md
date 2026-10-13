@@ -16,6 +16,12 @@
 - 웹: `camping-atlas/`는 정적 내보내기가 가능한 Vinext 앱이다. GitHub Pages를 외부 공개 기준으로 유지하며, Sites 프로젝트는 이 작업에서 배포 경로로 사용하지 않는다.
 - GitHub Pages: `main`의 `camping-atlas/` 변경을 정적 내보내기해 [`https://pyw31337.github.io/camp/`](https://pyw31337.github.io/camp/)에 자동 배포한다. 정적 산출물의 접두 경로는 `scripts/prepare-pages.mjs`가 GitHub Pages의 `/camp` 마운트 경로에 맞춘다.
 
+## Codex 확인 요청 (2026-10-13 오후, Claude)
+
+1. `deploy-pages.yml`에 `media` 브랜치(공식 사진 webp)를 `dist/client/media`로 펼치는 단계를 더했다. 브랜치가 없으면 건너뛴다.
+2. 갈등 정리 필요: 아래 가평 파일럿 규칙 “대표 이미지를 저장·가공하지 않는다”와 소유자 요청(공식 사진 자체 저장)이 충돌한다. 고캠핑 OpenAPI 이용허락 ‘제한 없음’·공공누리 확인 결과는 `docs/IMAGE_PIPELINE.md`. 비례 축소·webp 변환·메타 제거만 하고 출처 “사진: 한국관광공사 고캠핑”을 표시한다. 중단하려면 저장소 변수 `GOCAMPING_IMAGES_PUBLISH=false`.
+3. 홈(`camping-atlas`) 화면도 글자가 작다는 소유자 피드백이 있다(최소 11px, rem). 탐색 화면은 rem 토큰으로 바꿨으니 홈도 같은 기준으로 맞춰 달라.
+
 ## Codex 협의 요청 (2026-10-13, Claude) — 정렬 완료
 
 두 작업이 같은 날 각각 `db/005~007`을 만들어, **main(Codex) 스키마를 기준으로 정렬**했다. 상세: [`docs/DB_BUILD_PLAN.md`](./DB_BUILD_PLAN.md).
@@ -32,6 +38,7 @@
 
 | 항목 | 내용 | 검증 |
 | --- | --- | --- |
+| 상세 허브·테마·글자 체계·주변·사진 | **글자**: 탐색 화면 글자 크기를 rem 토큰(`--fs-*`, 최소 12px)으로, 굵기·크기 대비 강화, 헤더 ‘가’ 버튼으로 작게/보통/크게/아주 크게(html font-size, 이 기기 저장). **테마**: `lib/themes.mjs`(고캠핑 원천 필드만으로 23개 테마 판정, 레코드 `th`, meta.themes) → 둘러보기 허브(자연·계절·함께·방식·편의 묶음), 권역 → 시군구 2단계, 테마 머리·공유(#t=&a=&g=). **상세**: 목차(기본정보·예약·사이트·요금·시설·주변·사진·후기·댓글), 하단 고정 예약 버튼, 기본 정보 표(주소 복사·전화·홈페이지·운영), 테마 태그, 주변 탭(화장실·마트·편의점·주유·병원·휴게소·관광·맛집·철물), 외부 플랫폼 후기·영상 링크(카카오맵·네이버 지도 별점·리뷰, 블로그, 유튜브, 인스타그램), giscus 댓글(설정 변수 있을 때). 캠핑장별 상세 파일 `explore/data/camps/{id}.json`, 공유용 정적 페이지 `explore/c/{id}/`(오픈그래프·트위터 카드). **수집**: `sync:nearby`(`lib/nearby-context.mjs`: TourAPI 유형별 대량 페이지 7일 캐시, OSM Overpass 타일 14일 캐시, 휴게소·쉼터), `sync:images`(`lib/images.mjs`: 고캠핑 대표·imageList 공식 사진 → sharp webp 480/1280px, 한 커밋짜리 `media` 브랜치, deploy-pages가 `/camp/media/`로 함께 배포, 상세는 `../media/` 사용; 근거·주의는 `docs/IMAGE_PIPELINE.md`). Data sync: 캐시 키 v4, PR은 지오코딩·imageList 0회 | `npm test` 134 통과(DB 포함). 개발용 데이터로 320/375/768/1280px × 글자 보통·아주 크게 × 목록·테마·상세: 화면 밖 넘침·라벨 줄바꿈 0건(`audit` 스크립트). 실제 Overpass·TourAPI·이미지 수집은 이 컨테이너에서 네트워크가 막혀 PR Data sync에서 확인 |
 | 탐색 화면 보강 + 서울 공공예약 | `lib/seoul-yeyak.mjs`·`sync:seoul-yeyak`(서울 열린데이터광장 공공서비스예약 종합 `tvYeyakCOllect`, 실패 시 시설대관·체육시설; 캠핑 상품만, 접수 상태·접수 기간·원문 링크·확인 시각) → 2km·이름 유사도로 고캠핑에 연결(`seoul` 필드). 고캠핑 소개(`intro`·`nearby_facilities`·`programs`·`gocamping_url`) 정규화, 목록엔 한 줄 소개만·긴 소개는 `explore/data/texts.json`(상세 열 때 로드). 화면: 관심(이 기기 저장)·관심 필터·공유(링크 복사)·‘지도에 보이는 곳만’·운영자 소개·서울 접수 상태 배지·고캠핑 원문 링크 | `npm test` 76 통과. 개발용 데이터로 320/390/1280px 가로 넘침 0(상세 패널 포함), 관심 저장·필터·소개 로드 확인. 서울 키(`SEOUL_OPEN_API_KEY`)는 이 컨테이너에서 8088 포트가 막혀 PR의 Data sync 로그로 확인 |
 | 주소 통일 | 소유자 요청으로 GitHub Pages 단일 주소. Cloudflare 워크플로·`assemble-site.mjs` 삭제, `scripts/publish-explorer-pages.mjs` 추가(탐색 화면을 `camping-atlas/public/explore/`로 발행), `data-sync.yml` 마지막 단계가 main에서 커밋·푸시, `deploy-pages.yml`에 `workflow_run`, 홈 링크 `explore/` | `npm test` 72 통과, `camping-atlas` lint 통과·`build:pages` 성공(홈에 `explore/` 링크 2개). 로컬 개발용 데이터로 `dist/client/explore/{index.html,data/}` 생성 확인 후 삭제. tsc 오류 3건(`home.tsx:108`, `vite.config.ts:11`)은 변경 전부터 있던 것. 실제 공개는 PR 병합 후 main Data sync 실행 시 |
 | 기획 | 통합검색·예약, 미디어·지도·여행 연동 설계 작성 | 원천 링크와 정책 구분을 문서 검토 |

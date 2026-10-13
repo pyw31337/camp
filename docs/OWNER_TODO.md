@@ -14,6 +14,9 @@
 | 5-0 | ✅ 카카오 JavaScript SDK 도메인에 `https://pyw31337.github.io` 추가(2026-10-13 완료) | developers.kakao.com | 5-3 참고 | 2분 | 무료 | 지도 표시 |
 | 5 | ✅ 카카오 개발자 앱 (2026-10-13 CI 확인: REST 주소→좌표 정상, 화장실 28,798곳 변환. JS 키는 Secret으로 등록돼 그대로 사용) | developers.kakao.com | Secret `KAKAO_REST_API_KEY`, `KAKAO_JS_KEY` | 완료 | 무료 한도 | – |
 | 6 | ✅ 서울 열린데이터광장 인증키 (2026-10-13 등록, Data sync 로그로 확인) | data.seoul.go.kr | Secret `SEOUL_OPEN_API_KEY` | 완료 | 무료 | – |
+| 6-1 | (댓글) GitHub Discussions 켜기 + giscus 앱 설치 → 값 알려주기 | github.com/pyw31337/camp/settings · giscus.app | 변수 `GISCUS_CONFIG` | 10분 | 무료 | 캠핑장 댓글 |
+| 6-2 | (후기) 네이버 개발자 검색 API 키 | developers.naver.com | Secret `NAVER_CLIENT_ID`, `NAVER_CLIENT_SECRET` | 10분 | 무료(하루 2.5만 회) | 블로그 후기 목록 |
+| 6-3 | (영상) YouTube Data API 키 | console.cloud.google.com | Secret `YOUTUBE_API_KEY` | 15분 | 무료 할당량 | 캠핑장 영상 |
 | 7 | 저장소 공개 여부 결정 | GitHub Settings | – | 1분 | 무료 | Actions 사용량 여유 |
 | 8 | (선택) 도메인 | 도메인 등록업체 | GitHub Pages 사용자 도메인 | 20분 | 연 1~2만 원 | 없음(`pyw31337.github.io/camp`로 충분) |
 

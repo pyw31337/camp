@@ -26,9 +26,12 @@
     "db:import-licences": "node scripts/import-licences-postgres.mjs",
     "sync:tour-fees": "node scripts/sync-tour-fees.mjs",
     "build:explore": "node scripts/build-explore-data.mjs",
-    "sync:seoul-yeyak": "node scripts/sync-seoul-yeyak.mjs"
+    "sync:seoul-yeyak": "node scripts/sync-seoul-yeyak.mjs",
+    "sync:nearby": "node scripts/sync-nearby-context.mjs",
+    "sync:images": "node scripts/sync-images.mjs"
   },
   "dependencies": {
-    "pg": "8.23.1"
+    "pg": "8.23.1",
+    "sharp": "0.35.5"
   }
 }

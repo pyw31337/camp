@@ -1,3 +1,5 @@
+import { themesOf } from "./themes.mjs";
+
 // 웹 탐색 화면용 데이터: 고캠핑 시설 + 주변 공중화장실 + 공식 안내 요금(TourAPI) + 예약처 규칙·다가오는 오픈 일정.
 // 원칙: 각 값의 출처·확인 시각을 함께 싣는다. 실시간 재고·판매가는 만들지 않는다(예약은 공식 예약처로 연결).
 
@@ -61,6 +63,7 @@ export function buildExploreRecords(camps, toilets, fees, seoul = new Map()) {
       booking: { methods: c.reservation?.methods ?? [], url: bookingUrl, provider: providerOf(bookingUrl) },
       img: httpUrl(c.hero_image_url),
       line: clip(c.intro?.line, 90),
+      th: themesOf(c),
       gc_url: c.gocamping_url ?? null,
       fee: fee?.fee_text ? { text: fee.fee_text, min: fee.fee_range?.min_krw ?? null, max: fee.fee_range?.max_krw ?? null, checked_at: fee.checked_at, url: fee.source_url } : null,
       nearby_toilets: near ? { within_2km: near.count_2km, within_500m: near.count_500m ?? null, nearest: (near.nearest ?? []).slice(0, 3).map((t) => ({ name: t.name, m: t.distance_m, h24: t.open_24h ?? null, src: t.source ?? "mois" })) } : null,
@@ -69,6 +72,22 @@ export function buildExploreRecords(camps, toilets, fees, seoul = new Map()) {
       modified_at: c.source?.modified_at ?? null,
     };
   });
+}
+
+const NEARBY_GROUPS = ["tour", "food", "mart", "conv", "fuel", "gear", "medical", "rest"];
+const compactPoi = (p) => Object.fromEntries(Object.entries({ n: p.name, k: p.kind, ty: p.type, m: p.distance_m, lat: p.lat, lng: p.lng, a: p.addr, t: p.tel, u: p.url, img: p.image, h: p.hours, b: p.brand, r: p.road, e: p.emergency || null }).filter(([, v]) => v != null && v !== ""));
+/** 캠핑장별 상세 묶음(상세를 열 때만 내려받는다): 운영자 소개 + 주변 관광·맛집·마트·주유·의료·휴게소 */
+export function buildCampDetails(camps, nearby = null) {
+  const texts = buildExploreTexts(camps);
+  const out = {};
+  for (const c of camps.campgrounds ?? []) {
+    if (!c.location || !c.name) continue;
+    const id = String(c.external_id.id);
+    const near = nearby?.campgrounds?.[id];
+    const n = near ? Object.fromEntries(NEARBY_GROUPS.map((g) => [g, (near[g] ?? []).map(compactPoi)]).filter(([, v]) => v.length)) : null;
+    out[id] = { ...(texts[id] ?? {}), ...(n && Object.keys(n).length ? { nearby: n } : {}) };
+  }
+  return out;
 }
 
 /** 상세를 열 때만 내려받는 긴 소개 문구(목록 데이터 크기를 늘리지 않으려고 분리) */

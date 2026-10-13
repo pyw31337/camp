@@ -91,8 +91,12 @@ jobs:
             pipeline/.cache/osm-toilets.json
             pipeline/.cache/osm-rest-stops.json
             pipeline/.cache/tour-intro.json
-          key: source-cache-v3-${{ github.run_id }}
-          restore-keys: source-cache-v3-
+            pipeline/.cache/tour-pois.json
+            pipeline/.cache/osm-shops.json
+          key: source-cache-v4-${{ github.run_id }}
+          restore-keys: |
+            source-cache-v4-
+            source-cache-v3-
       - name: Sync public toilets and link to campgrounds
         continue-on-error: true
         run: npm run sync:toilets
@@ -108,6 +112,15 @@ jobs:
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
           EX_API_KEY: ${{ secrets.EX_API_KEY }}
+      - name: Collect nearby context (TourAPI tourism/food, OSM marts/fuel/medical, rest stops)
+        # TourAPI는 콘텐츠 유형별 대량 페이지(7일 캐시), Overpass는 0.5° 타일(14일 캐시, 타일 단위로 이어서)로 모은다.
+        run: npm run sync:nearby
+        continue-on-error: true
+        timeout-minutes: 20
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+          NEARBY_TOUR_MAX_CALLS: '150'
+          NEARBY_OSM_TIME_BUDGET_MS: '480000'
       - name: Discover free public camp sites (candidates only)
         continue-on-error: true
         run: npm run discover:public-free
@@ -125,6 +138,52 @@ jobs:
         continue-on-error: true
         env:
           SEOUL_OPEN_API_KEY: ${{ secrets.SEOUL_OPEN_API_KEY }}
+      - name: Restore GoCamping imageList cache
+        uses: actions/cache@v4
+        with:
+          path: pipeline/.cache/gocamping-images.json
+          key: gocamping-images-v1-${{ github.run_id }}
+          restore-keys: gocamping-images-v1-
+      - name: Check out the media branch (orphan, images only)
+        # 공식 사진 webp는 main 이력에 넣지 않고 한 커밋짜리 media 브랜치에 둔다(docs/IMAGE_PIPELINE.md).
+        id: media
+        continue-on-error: true
+        working-directory: .
+        run: |
+          MEDIA_DIR="$RUNNER_TEMP/media"
+          if git ls-remote --exit-code --heads origin media >/dev/null 2>&1; then
+            git fetch --depth=1 origin +media:refs/remotes/origin/media
+            git worktree add -B media "$MEDIA_DIR" origin/media
+          else
+            git worktree add --detach "$MEDIA_DIR"
+            git -C "$MEDIA_DIR" switch --orphan media
+          fi
+          echo "dir=$MEDIA_DIR" >> "$GITHUB_OUTPUT"
+      - name: Sync official campground images (webp)
+        id: images
+        if: steps.media.outcome == 'success'
+        continue-on-error: true
+        run: npm run sync:images
+        env:
+          MEDIA_DIR: ${{ steps.media.outputs.dir }}
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+          IMAGE_LIST_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '500' }}
+          IMAGE_MAX_DOWNLOADS: ${{ github.event_name == 'pull_request' && '20' || '1500' }}
+          IMAGE_MAX_PER_CAMP: ${{ vars.IMAGE_MAX_PER_CAMP || '3' }}
+          IMAGE_MAX_BYTES: '12000000'
+      - name: Publish the media branch (single commit, force push)
+        # 소유자 요청(2026-10-13)으로 공식 사진을 자체 저장한다. 권리자 요청 시 media 브랜치에서 지우고 재배포한다.
+        if: steps.images.outcome == 'success' && github.event_name != 'pull_request' && vars.GOCAMPING_IMAGES_PUBLISH != 'false'
+        working-directory: ${{ steps.media.outputs.dir }}
+        run: |
+          git add -A
+          if git rev-parse -q --verify HEAD >/dev/null && git diff --cached --quiet; then echo "이미지 변경 없음."; exit 0; fi
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          MSG="chore(media): official campground images $(date -u +%Y-%m-%dT%H:%MZ)"
+          if git rev-parse -q --verify HEAD >/dev/null; then git commit -q --amend -m "$MSG"; else git commit -q -m "$MSG"; fi
+          git push --force origin media
+          du -sh --exclude=.git .
       - name: Collect campground licences (LOCALDATA) and match to GoCamping
         # 키 불필요. 고캠핑에 없는 숨은 캠핑장 후보, 인허가 폐업인데 고캠핑에 남은 곳, 시설 규모 등 인허가 세부 정보.
         run: npm run sync:localdata-campgrounds
@@ -184,6 +243,8 @@ jobs:
           git push
         env:
           KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY || secrets.KAKAO_JS_KEY }}
+          MEDIA_DIR: ${{ steps.media.outputs.dir }}
+          GISCUS_CONFIG: ${{ vars.GISCUS_CONFIG }}
       - uses: actions/upload-artifact@v4
         with:
           name: pipeline-out
