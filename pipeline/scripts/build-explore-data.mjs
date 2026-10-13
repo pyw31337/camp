@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import { buildCampDetails, buildExploreRecords, buildProviders } from "../lib/explore-data.mjs";
 import { themeCatalog } from "../lib/themes.mjs";
 import { buildBookingGuide } from "../lib/booking-intel.mjs";
+import { buildOpenings } from "../lib/openings.mjs";
 import { SEOUL_DATASET_URL, matchSeoulToCampgrounds } from "../lib/seoul-yeyak.mjs";
 
 const p = (rel) => fileURLToPath(new URL(rel, import.meta.url));
@@ -72,6 +73,7 @@ const now = new Date();
 const byId = new Map((camps.campgrounds ?? []).map((c) => [String(c.external_id.id), c]));
 const recById = new Map(records.map((r) => [r.id, r]));
 let guided = 0, withOpen = 0;
+const guides = new Map();
 for (const [id, d] of Object.entries(details)) {
   const c = byId.get(id), fee = fees?.records?.[id], rec = recById.get(id);
   if (fee) for (const [k, f] of [["hours", "hours_text"], ["rest_days", "rest_days_text"], ["parking", "parking_fee_text"], ["open_period", "open_period_text"], ["reservation_note", "reservation_text"]]) if (fee[f]) d[k] = fee[f];
@@ -88,6 +90,7 @@ for (const [id, d] of Object.entries(details)) {
       warnings: g.warnings.map((w) => w.message),
     };
     guided++;
+    guides.set(id, { platform: p ? { name: p.name, url: p.official_url } : null, next: g.next_openings });
     const confirmed = g.next_openings.find((n) => !n.needs_verification && n.applies !== "IF_NATIONAL" && n.applies !== "VARIANT") ?? null;
     if (rec && confirmed) { rec.booking.next = { at: confirmed.at, label: confirmed.label, time_known: confirmed.time_known }; withOpen++; }
   } catch (error) { console.log(`::warning title=예약 안내 실패::${id} ${error.message}`); }
@@ -115,6 +118,9 @@ for (const [id, d] of Object.entries(details)) {
     d.social_checked_at = so.fetched_at ?? null;
     const rec = records.find((r) => r.id === id);
     if (rec) rec.soc = [(so.blog?.length ?? 0) + (so.cafe?.length ?? 0), so.vclip?.length ?? 0, so.image?.length ?? 0];
+    // 공식 사진이 없는 곳은 목록 썸네일로 Daum 검색 이미지 썸네일 주소를 쓴다(저장·재호스팅 없음, 화면에 “검색 사진” 표기).
+    const snap = so.image?.find((x) => x.thumb);
+    if (rec && !rec.ph && !rec.img && snap) rec.sn = snap.thumb;
   }
 }
 for (const [id, d] of Object.entries(details)) {
@@ -141,5 +147,9 @@ const featured = {
   })).filter((t) => t.camps.length),
 };
 await writeFile(p("../out/explore/featured.json"), JSON.stringify(featured));
+// 예약 오픈 목록(캠핑장별, 45일 이내): 예약오픈 메뉴·홈의 “이번 주 예약 오픈” 숫자가 이 파일을 쓴다.
+const openings = buildOpenings({ records, guides, now });
+await writeFile(p("../out/explore/openings.json"), JSON.stringify({ generated_at: meta.generated_at, days: 45, items: openings }));
+console.log(`예약 오픈 목록 ${openings.length}건 · 캠핑장 ${new Set(openings.map((o) => o.id)).size}곳`);
 // 목록 파일은 예약 안내(다음 오픈)까지 붙인 뒤에 쓴다.
 await writeFile(p("../out/explore/campgrounds.json"), JSON.stringify(records.map(compact)));
