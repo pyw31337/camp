@@ -37,7 +37,14 @@ async function download(url, depth = 0) {
   if (/html/i.test(type) && depth === 0) {
     const html = buf.toString("utf8");
     const m = html.match(/href=["']([^"']+\.(?:csv|zip)[^"']*)["']/i) || html.match(/(https?:\/\/[^"'\s]+\.(?:csv|zip))/i);
-    if (!m) throw new Error(`다운로드 링크를 찾지 못함(HTML ${buf.length}B)`);
+    if (!m) {
+      // 다운로드가 스크립트로 처리되는 페이지면 단서를 로그에 남긴다.
+      const clues = [...new Set(html.match(/[^<>"'\s]{0,60}(download|fileDown|filedown|\.csv|\.zip|excel|atchFile)[^<>"'\s]{0,80}/gi) ?? [])].slice(0, 25);
+      console.log(`다운로드 단서 ${clues.length}개:\n  ${clues.join("\n  ")}`);
+      const forms = [...html.matchAll(/<form[^>]*>/gi)].map((f) => f[0]).slice(0, 5);
+      if (forms.length) console.log(`form: ${forms.join(" | ")}`);
+      throw new Error(`다운로드 링크를 찾지 못함(HTML ${buf.length}B)`);
+    }
     return download(new URL(m[1], url).toString(), 1);
   }
   return buf;
