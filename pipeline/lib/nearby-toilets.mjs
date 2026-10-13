@@ -33,6 +33,7 @@ export function linkNearbyToilets(campgrounds, toilets, { radiusM = NEARBY_RADIU
         emergency_bell: t.emergency_bell,
         address: t.road_address || t.jibun_address,
         geocode_precision: t.precision ?? null,
+        source: t.source ?? "mois",
       })),
     };
   }

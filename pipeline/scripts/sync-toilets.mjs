@@ -9,6 +9,7 @@ import { csvToObjects, decodeKoreanText } from "../lib/csv.mjs";
 import { geocodeAll, kakaoGeocode } from "../lib/geocode.mjs";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
 import { linkNearbyToilets } from "../lib/nearby-toilets.mjs";
+import { OVERPASS_QUERY, OVERPASS_URL, mergeToiletSources, normalizeOsmToilet } from "../lib/osm-toilets.mjs";
 import { geocodeQuery, normalizeToilet } from "../lib/toilets.mjs";
 
 const SOURCE_URL = process.env.TOILET_SOURCE_URL ?? "https://file.localdata.go.kr/file/public_restroom_info/info";
@@ -50,17 +51,16 @@ async function download(url, depth = 0) {
   return buf;
 }
 
-let raw;
+let toilets = [];
 try {
-  raw = await download(SOURCE_URL);
+  const raw = await download(SOURCE_URL);
+  const rows = csvToObjects(decodeKoreanText(raw));
+  toilets = rows.map(normalizeToilet).filter(Boolean);
+  console.log(`행안부 공중화장실 원본 ${rows.length}행 → 정규화 ${toilets.length}곳`);
+  if (rows[0]) console.log(`머리글: ${Object.keys(rows[0]).join(", ")}`);
 } catch (e) {
-  warn("공중화장실 파일 수집 실패", `${e.message} — 원천: ${SOURCE_URL}`);
-  process.exit(0);
+  warn("행안부 공중화장실 수집 실패", `${e.message} — 원천: ${SOURCE_URL}. OpenStreetMap 원천만으로 계속합니다.`);
 }
-const rows = csvToObjects(decodeKoreanText(raw));
-const toilets = rows.map(normalizeToilet).filter(Boolean);
-console.log(`공중화장실 원본 ${rows.length}행 → 정규화 ${toilets.length}곳`);
-if (rows[0]) console.log(`머리글: ${Object.keys(rows[0]).join(", ")}`);
 
 // 지오코딩(캐시 우선). 키가 없으면 이전 캐시로만 좌표를 채운다.
 const cache = existsSync(cachePath) ? JSON.parse(await readFile(cachePath, "utf8")) : {};
@@ -82,8 +82,24 @@ for (const t of toilets) {
   if (c && !c.miss) { t.lat = c.lat; t.lng = c.lng; t.precision = c.precision; located++; }
 }
 console.log(`좌표 확보 ${located}/${toilets.length}곳 (${toilets.length ? Math.round((located / toilets.length) * 100) : 0}%)`);
+// OpenStreetMap 보조 원천(좌표 포함). 행안부 항목과 30m 안에서 겹치면 버린다.
+let osmStats = { fetched: 0, added: 0, duplicates: 0 };
+try {
+  const res = await fetch(OVERPASS_URL, { method: "POST", body: new URLSearchParams({ data: OVERPASS_QUERY }), headers: { "User-Agent": "moyeora-camping-pipeline (github.com/pyw31337/camp)" }, signal: AbortSignal.timeout(240000) });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const osm = ((await res.json()).elements ?? []).map(normalizeOsmToilet).filter(Boolean);
+  const m = mergeToiletSources(toilets, osm);
+  toilets = m.merged;
+  osmStats = { fetched: osm.length, added: m.osm_added, duplicates: m.osm_duplicates };
+  located += m.osm_added;
+  console.log(`OpenStreetMap 화장실 ${osm.length}곳 → 새로 추가 ${m.osm_added}곳(행안부와 중복 ${m.osm_duplicates}곳)`);
+} catch (e) {
+  warn("OpenStreetMap 화장실 수집 실패", e.message);
+}
+
 await writeFile(`${out}toilets.json`, JSON.stringify({
   source: { title: "행정안전부 공중화장실정보", url: SOURCE_URL, dataset: "https://www.data.go.kr/data/15075531/fileData.do", tier: "A", fetched_at: fetchedAt, coords: "주소 지오코딩(카카오) — 원천 좌표는 2025-02부터 미제공" },
+  sources: { mois: toilets.filter((t) => t.source !== "osm").length, osm: osmStats, osm_attribution: "© OpenStreetMap contributors (ODbL)" },
   count: toilets.length, located, toilets,
 }));
 
