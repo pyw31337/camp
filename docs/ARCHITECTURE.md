@@ -18,7 +18,7 @@
 | 주변 화장실 | 공중화장실 전국 파일/API를 매일 수집 → 카카오 지오코딩(캐시, 새 주소만) → 캠핑장별 가까운 화장실 계산 → 정적 JSON | GitHub Actions(cache), 카카오 로컬 |
 | 날씨 | Actions가 캠핑장 격자별 예보를 3시간마다 받아 정적 JSON으로 배포(사용자 수와 무관하게 호출량 고정) | 기상청 API, Cloudflare Pages |
 
-GitHub Pages 대신 Cloudflare Pages를 쓰는 이유: 저장소가 비공개면 GitHub Pages가 유료이고, 길찾기 키를 숨기는 서버 함수(Workers)가 같은 곳에 있어야 하기 때문이다. 배포는 GitHub Actions가 한다(`deploy-pages.yml`).
+GitHub Pages 대신 Cloudflare Pages를 쓰는 이유: 저장소가 비공개면 GitHub Pages가 유료이고, 길찾기 키를 숨기는 서버 함수(Workers)가 같은 곳에 있어야 하기 때문이다. 배포는 GitHub Actions가 한다(`deploy-cloudflare.yml`). GitHub Pages(`deploy-pages.yml`)는 `camping-atlas/` 파일럿용으로 별도 유지.
 
 ## 2. 구조
 
@@ -31,7 +31,7 @@ flowchart LR
     O --> S[scripts/assemble-site.mjs]
   end
   D[(data.go.kr\n고캠핑·인허가·기상청·TourAPI)] --> P
-  S -->|deploy-pages.yml| CF[Cloudflare Pages\n정적 사이트·ics 피드]
+  S -->|deploy-cloudflare.yml| CF[Cloudflare Pages\n정적 사이트·ics 피드]
   U[사용자 브라우저] --> CF
   U -->|캘린더 구독| CAL[구글·애플 캘린더\n알림]
   CAL --> CF
@@ -64,7 +64,7 @@ flowchart LR
 | `web-quality.yml` | PR, main | `camping-atlas` 린트·빌드 |
 | `pipeline-quality.yml` | PR, main | 파이프라인 테스트, 규칙 검증, 캘린더·ics 생성 확인 |
 | `data-sync.yml` | 매일 03:17 KST, 수동 | 고캠핑 동기화(키 있을 때), 캘린더·ics 생성, 결과 아티팩트 |
-| `deploy-pages.yml` | main 반영, 매일 03:47 KST, 수동 | ics 생성 → `site/` 조립 → Cloudflare Pages 배포(Secret 없으면 건너뜀) |
+| `deploy-cloudflare.yml` | PR(미리보기), main 반영, 매일 03:47 KST, 수동 | ics 생성 → `site/` 조립 → Cloudflare Pages 배포(Secret 없으면 건너뜀) |
 
 ## 6. 사이트 소스 전환 계획
 
