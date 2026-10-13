@@ -22,6 +22,7 @@ const FS_LABEL: Record<FsKey, string> = { s: "작게", m: "보통", l: "크게",
 type FeaturedCamp = { id: string; name: string; where: string; line: string | null; ph: string; rt: boolean };
 type FeaturedTheme = { id: string; label: string; desc: string; count: number; camps: FeaturedCamp[] };
 type Featured = { total: number; photo_count: number; themes: FeaturedTheme[] };
+const largeOfficialPhoto = (path: string) => path.replace(/-t\.webp(?=$|[?#])/, "-l.webp");
 type BookingEvent = {
   id: string; dday: string; action: string; dateTime: string; label: string;
   stay: string; provider: string; sourceUrl: string; checkedAt: string; needsVerification: boolean;
@@ -185,7 +186,7 @@ export default function Home() {
         {featured.themes.map((theme) => <div className="may-theme-row" key={theme.id}>
           <div className="may-section-head"><div><h2>{theme.label}</h2><p>{theme.desc} · 전국 {theme.count.toLocaleString("ko-KR")}곳</p></div><a href={`explore/#t=${theme.id}`}>전체 보기 <ChevronRight size={16} /></a></div>
           <div className="may-photo-rail">{theme.camps.map((camp) => <a className="may-photo-card" key={camp.id} href={`explore/#c=${camp.id}`}>
-            <span className="may-photo-img"><img src={`media/${camp.ph}`} alt={`${camp.name} 공식 사진`} loading="lazy" />{camp.rt && <em>실시간 예약</em>}</span>
+            <span className="may-photo-img"><img src={`media/${largeOfficialPhoto(camp.ph)}`} alt={`${camp.name} 공식 사진`} loading="lazy" decoding="async" />{camp.rt && <em>실시간 예약</em>}</span>
             <b>{camp.name}</b><small><MapPin size={12} />{camp.where}</small>{camp.line && <span className="may-photo-line">{camp.line}</span>}
           </a>)}</div>
         </div>)}

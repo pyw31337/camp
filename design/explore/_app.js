@@ -97,11 +97,16 @@ function filtered({ forMap = false } = {}) {
   return list;
 }
 
+// 목록에서도 480px/저품질 축소본을 늘려 보이지 않도록, 이미 media 브랜치에 함께
+// 발행한 1280px 공식 파생본을 쓴다. 과거 카탈로그의 `ph`도 즉시 호환된다.
+function largeLocalPhoto(path) {
+  return String(path ?? "").replace(/-t\.webp(?=$|[?#])/, "-l.webp");
+}
 function card(c) {
   const kinds = c.kinds.map(([k, n]) => KIND[k] ? `<span class="tag">${ic(KIND[k][1], "i-xs")}${KIND[k][0]} <span class="num">${n}</span></span>` : "").join("");
   const km = state.here ? ` · ${dist(state.here, c).toFixed(0)}km` : "";
   return `<button class="card" type="button" data-open="${c.id}" aria-current="${state.open === c.id}">
-    <span class="thumb">${c.ph ? `<img src="../media/${esc(c.ph)}" alt="" loading="lazy" onerror="this.remove()">` : c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ic("#t-tent")}</span>
+    <span class="thumb">${c.ph ? `<img src="../media/${esc(largeLocalPhoto(c.ph))}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">` : ic("#t-tent")}</span>
     <span class="card-body">
       <span class="card-title"><h3>${esc(c.name)}</h3>${state.saved.has(c.id) ? ic("#l-heart", "i-xs saved-mark") : ""}</span>
       <span class="loc">${ic("#l-map-pin", "i-xs")}${esc([c.sido, c.sigungu].filter(Boolean).join(" "))}${km}${OP[c.op] ? ` · ${OP[c.op]}` : ""}</span>
@@ -301,7 +306,12 @@ function nearBlock(c, d) {
 }
 // 공식 사진: 자체 저장(webp) → 아직 저장 전인 고캠핑 공식 사진(원본 주소) → TourAPI 공식 사진 순서
 function allPhotos(c, d) {
-  const own = (d?.photos?.length ? d.photos : c.ph ? [{ t: c.ph, l: c.ph }] : []).map((p) => ({ t: MEDIA + p.t, l: MEDIA + p.l }));
+  // 공식 목록/갤러리 사진은 large를 그대로 표시한다. t(480px)는 원본 보관·하위 호환용이며
+  // 고밀도 화면에서 확대하지 않는다.
+  const own = (d?.photos?.length ? d.photos : c.ph ? [{ t: c.ph, l: largeLocalPhoto(c.ph) }] : []).map((p) => {
+    const large = p.l ?? largeLocalPhoto(p.t);
+    return { t: MEDIA + large, l: MEDIA + large };
+  });
   const remoteUrls = [...(d?.photos_remote ?? []), ...(d?.tour_photos ?? []).map((x) => x.url ?? x), c.img].filter(Boolean);
   const remote = [...new Set(remoteUrls)].map((u) => ({ t: u, l: u, remote: true }));
   return [...own, ...remote];
@@ -324,15 +334,15 @@ function mediaBlock(c, d) {
   const https = (u) => String(u ?? "").replace(/^http:/, "https:");
   const post = (r, kind) => `<a class="review" href="${esc(r.url)}" target="_blank" rel="noopener">${r.thumb ? `<img src="${esc(https(r.thumb))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ""}<span><b>${esc(r.title)}</b><p data-wrap-ok>${esc(r.snippet ?? "")}</p><small>${esc([kind, r.src, r.date && ymd(r.date)].filter(Boolean).join(" · "))}</small></span></a>`;
   const posts = [...(d?.reviews ?? []).map((r) => post(r, "블로그")), ...(d?.cafe ?? []).map((r) => post(r, "카페"))].join("");
-  const snaps = (d?.sns_images ?? []).map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener" title="${esc(x.src ?? "")}"><img src="${esc(https(x.thumb))}" alt="${esc(c.name)} 관련 사진(${esc(x.src ?? "외부")})" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.remove()"></a>`).join("");
+  const snaps = (d?.sns_images ?? []).map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener" title="${esc(x.src ?? "")}"><img src="${esc(https(x.thumb))}" alt="${esc(c.name)} 관련 사진(${esc(x.src ?? "외부")})" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentElement.remove()"></a>`).join("");
   const vids = d?.videos ?? [];
   const video = (v) => v.yt
-    ? `<button class="video ${v.kind === "short" ? "short" : ""}" type="button" data-video="${esc(v.yt)}" aria-label="${esc(v.title)} 재생"><img src="https://i.ytimg.com/vi/${esc(v.yt)}/hqdefault.jpg" alt="" loading="lazy"><span>${ic("#l-play")}</span>${v.kind === "short" ? "<em>쇼츠</em>" : ""}<b>${esc(v.title)}</b><small>${esc([v.author, v.date && ymd(v.date)].filter(Boolean).join(" · "))}</small></button>`
+    ? `<button class="video ${v.kind === "short" ? "short" : ""}" type="button" data-video="${esc(v.yt)}" aria-label="${esc(v.title)} 재생"><img src="https://i.ytimg.com/vi/${esc(v.yt)}/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/${esc(v.yt)}/hqdefault.jpg" alt="" loading="lazy" decoding="async" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;delete this.dataset.fallback}else{this.remove()}"><span>${ic("#l-play")}</span>${v.kind === "short" ? "<em>쇼츠</em>" : ""}<b>${esc(v.title)}</b><small>${esc([v.author, v.date && ymd(v.date)].filter(Boolean).join(" · "))}</small></button>`
     : `<a class="video" href="${esc(v.url)}" target="_blank" rel="noopener"><img src="${esc(https(v.thumb))}" alt="" loading="lazy" referrerpolicy="no-referrer"><span>${ic("#l-play")}</span><b>${esc(v.title)}</b><small>${esc([v.author, v.date && ymd(v.date)].filter(Boolean).join(" · "))}</small></a>`;
   const src = d?.social_checked_at ? `<span class="trust">${ic("#l-info", "i-xs")}Daum 검색 제공 · ${ymd(d.social_checked_at)} 수집 · 각 원문으로 연결(저작권은 글쓴이에게 있음)</span>` : "";
   return `${grid}
     ${vids.length ? `<div class="sub"><h4>영상·쇼츠 <span class="num">${vids.length}</span></h4><div class="videos">${vids.map(video).join("")}</div></div>` : ""}
-    ${snaps ? `<div class="sub"><h4>방문자 사진 <span class="num">${d.sns_images.length}</span></h4><div class="photo-grid">${snaps}</div></div>` : ""}
+    ${snaps ? `<div class="sub"><h4>방문자 사진 <span class="num">${d.sns_images.length}</span></h4><div class="photo-grid photo-grid-external">${snaps}</div></div>` : ""}
     ${posts ? `<div class="sub"><h4>블로그·카페 후기 <span class="num">${(d.reviews?.length ?? 0) + (d.cafe?.length ?? 0)}</span></h4>${posts}</div>` : ""}
     ${src}
     <div class="link-grid">${links.map(([u, l, i]) => `<a class="link-tile" href="${esc(u)}" target="_blank" rel="noopener">${ic(i, "i-sm")}<span>${esc(l)}</span>${ic("#l-arrow-up-right", "i-xs")}</a>`).join("")}</div>
