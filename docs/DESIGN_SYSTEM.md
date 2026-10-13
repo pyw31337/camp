@@ -7,7 +7,7 @@
 
 여행 예약 화면은 영감용 사진보다 먼저 **여행 조건과 확정 가능성**을 이해시켜야 한다. 에어비앤비의 사례는 하나의 핵심 흐름, 읽기 쉬운 문장 중심 정보 계층, 저장·예약 같은 명확한 행동을 강조한다. Booking.com의 개발 문서는 위치·날짜·인원과 필터를 분리해 실시간 재고·가격을 조회하는 검색 구조를 보여 준다. Google의 반응형 가이드는 화면 폭이 바뀔 때 단순 축소 대신 탐색·필터 컨테이너의 형태를 바꾸도록 권한다.
 
-캠핑 AR·예약 UI 레퍼런스는 몰입감 있는 실제 사진, 부드러운 큰 모서리, 작은 정보 배지, 사진과 일정의 분리된 계층을 보여 준다. 클로드 시안 v2는 그중에서도 **예약 오픈을 첫 번째 콘텐츠로 두고, 검색을 한 장의 큰 히어로 카드 안에 넣으며, 모바일에서 가로 카드와 하단 탐색을 쓰는 구조**가 서비스 목적에 잘 맞았다. 모여라 캠핑은 이 정보 구조를 채택하되, AR·3D 장면처럼 실제 데이터로 뒷받침하지 못하는 효과와 콘셉트 이미지는 넣지 않는다. 대신 공식 사진의 원문, 확인일, 예약의 확정 경계를 같은 화면에서 보여 준다.
+캠핑 AR·예약 UI 레퍼런스는 몰입감 있는 실제 사진, 부드러운 큰 모서리, 작은 정보 배지, 사진과 일정의 분리된 계층을 보여 준다. 클로드 시안 v2는 그중에서도 **예약 오픈을 첫 번째 콘텐츠로 두고, 검색을 한 장의 큰 히어로 카드 안에 넣으며, 모바일에서 가로 카드와 하단 탐색을 쓰는 구조**가 서비스 목적에 잘 맞았다. 현재 공개 화면은 이 시안의 메뉴 순서, 큰 사진 히어로, 우측 통계 배지, 히어로 안의 탭형 검색, 가로 예약 카드, 사진 카드, 모바일 하단 탐색을 기준 레이아웃으로 구현한다. 시안의 콘셉트 이미지와 예시 캠핑장·가격은 사용하지 않는다. 대신 공식 사진의 원문, 확인일, 예약의 확정 경계를 같은 화면에서 보여 준다.
 
 그래서 모여라 캠핑은 다음 순서를 고정한다.
 
@@ -15,6 +15,7 @@
 2. 검색 바로 다음에 검증 상태와 확인일이 있는 예약 오픈 카드를 둔다.
 3. 실제 캠핑장 카드는 사진·형태·규격·정원·공식 예약 안내만 짧게 보여 준다.
 4. 상세에서 상품별 재고·요금·정책을 보여 주고, 날씨·경로·주변 여행은 보조 판단 정보로 분리한다.
+5. 사진·가격·재고가 없는 기준 시설 레코드는 사진 카드로 꾸미지 않고, 데이터 수집 현황과 검증 상태에서만 보여 준다.
 
 참고: [Airbnb UX 사례](https://design.google/library/airbnb-invites-you-in), [Booking.com 검색 사용 사례](https://developers.booking.com/demand/docs/accommodations/search-examples), [Google의 반응형 패턴 가이드](https://design.google/library/introducing-resizer), [Camping AR App](https://dribbble.com/shots/11607072-Camping-AR-App), [Camping App Exploration](https://dribbble.com/shots/27205497-Camping-App-Exploration), [Camping App Design](https://dribbble.com/shots/10165691-Camping-App-Design), [Ski camps booking](https://dribbble.com/shots/22874895-Snowboard-Ski-camps-booking-web-app), [Camping reservation UI](https://dribbble.com/shots/7140824-Camping-reservation-ui).
 

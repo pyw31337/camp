@@ -12,7 +12,7 @@ on:
       - ".github/workflows/data-sync.yml"
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: data-sync
@@ -63,6 +63,25 @@ jobs:
         run: npm run discover:public-free
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+      - name: Build the read-only GitHub Pages data payload
+        run: npm run publish:web-catalog
+        env:
+          # 공개 카탈로그에 기준 시설을 내보내려면 공공데이터포털의 보존·재배포 조건을
+          # 검토한 뒤 repository variable을 정확히 true로 설정한다.
+          PUBLISH_GOCAMPING_CATALOG: ${{ vars.GOCAMPING_CATALOG_PUBLISH_APPROVED }}
+      - name: Publish refreshed calendar and approved discovery data
+        if: github.event_name != 'pull_request'
+        working-directory: .
+        run: |
+          if git diff --quiet -- camping-atlas/public/data; then
+            echo "No public data changes to commit."
+            exit 0
+          fi
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add camping-atlas/public/data
+          git commit -m "chore(data): refresh public camping catalog"
+          git push
       - uses: actions/upload-artifact@v4
         with:
           name: pipeline-out

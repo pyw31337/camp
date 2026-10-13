@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-13T03:49:05.504Z",
+  "publication_scope": "READ_ONLY_DISCOVERY",
+  "counts": {
+    "opening_events": 23,
+    "gocamping_records": null,
+    "official_pilot_products": 4
+  },
+  "sources": {
+    "open_calendar": {
+      "state": "PUBLISHED",
+      "generated_at": "2026-10-13T01:46:16.331Z",
+      "registry_version": 1
+    },
+    "gocamping": {
+      "state": "AWAITING_API_SYNC",
+      "source_url": "https://www.data.go.kr/data/15101933/openapi.do",
+      "fetched_at": null,
+      "persistence_review_required": true
+    }
+  },
+  "campgrounds": []
+}

@@ -10,6 +10,7 @@
     "test": "node --test",
     "validate": "node scripts/validate-registry.mjs",
     "calendar": "node scripts/build-open-calendar.mjs",
+    "publish:web-catalog": "node scripts/publish-web-catalog.mjs",
     "sync:gocamping": "node scripts/sync-gocamping.mjs",
     "ics": "node scripts/build-ics.mjs",
     "check:keys": "node scripts/check-data-go-kr.mjs",
