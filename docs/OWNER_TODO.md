@@ -10,10 +10,10 @@
 | 2-1 | 추가 활용신청: **자동차야영장업 조회서비스**(경로 확인됨, 미신청, 선택) · 화장실은 LOCALDATA 파일로 해결돼 표준데이터 신청 불필요 · 완료 확인: 공공시설개방정보, 일반야영장업, **전국졸음쉼터표준데이터(2026-10-13 253곳 수신)** | data.go.kr | 같은 키 | 5분 | 무료 | 숨은 캠핑장 |
 | 2-2 | ✅ 한국도로공사 OpenAPI 인증키 (2026-10-13 CI 확인: 휴게소 203곳) | data.ex.co.kr | Secret `EX_API_KEY` | 완료 | 무료 | – |
 | 3 | ~~Cloudflare 계정·API 토큰~~ → **더 이상 쓰지 않음**(2026-10-13 주소를 https://pyw31337.github.io/camp/ 하나로 통일). Secret `CLOUDFLARE_*`는 지워도 되고 남겨도 무해 | – | – | – | – | – |
-| 4 | PR 병합 | GitHub | – | 5분 | 무료 | **병합해야 https://pyw31337.github.io/camp/explore/ 에 전국 캠핑장 지도가 열림** |
-| 5-0 | 카카오 JavaScript SDK 도메인에 `https://pyw31337.github.io` 추가 | developers.kakao.com | 5-3 참고 | 2분 | 무료 | 지도 표시 |
+| 4 | ✅ PR 병합(2026-10-13) | GitHub | – | 5분 | 무료 | **병합해야 https://pyw31337.github.io/camp/explore/ 에 전국 캠핑장 지도가 열림** |
+| 5-0 | ✅ 카카오 JavaScript SDK 도메인에 `https://pyw31337.github.io` 추가(2026-10-13 완료) | developers.kakao.com | 5-3 참고 | 2분 | 무료 | 지도 표시 |
 | 5 | ✅ 카카오 개발자 앱 (2026-10-13 CI 확인: REST 주소→좌표 정상, 화장실 28,798곳 변환. JS 키는 Secret으로 등록돼 그대로 사용) | developers.kakao.com | Secret `KAKAO_REST_API_KEY`, `KAKAO_JS_KEY` | 완료 | 무료 한도 | – |
-| 6 | 서울 열린데이터광장 인증키 | data.seoul.go.kr | Secret `SEOUL_OPEN_API_KEY` | 10분 | 무료 | 서울 공영 캠핑장 접수 기간 |
+| 6 | ✅ 서울 열린데이터광장 인증키 (2026-10-13 등록, Data sync 로그로 확인) | data.seoul.go.kr | Secret `SEOUL_OPEN_API_KEY` | 완료 | 무료 | – |
 | 7 | 저장소 공개 여부 결정 | GitHub Settings | – | 1분 | 무료 | Actions 사용량 여유 |
 | 8 | (선택) 도메인 | 도메인 등록업체 | GitHub Pages 사용자 도메인 | 20분 | 연 1~2만 원 | 없음(`pyw31337.github.io/camp`로 충분) |
 

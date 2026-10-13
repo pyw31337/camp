@@ -126,12 +126,12 @@ body { min-height: 100dvh; }
 .d-hero { margin: -60px 0 0; height: 260px; background: var(--surface-2); display: grid; place-items: center; color: var(--ink-3); overflow: hidden; position: relative; }
 .d-hero img { width: 100%; height: 100%; object-fit: cover; }
 .d-hero .credit { position: absolute; right: 10px; bottom: 8px; font-size: 11px; color: #fff; background: rgba(0,0,0,.45); padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
-.d-body { padding: 18px 20px 120px; display: grid; gap: 18px; }
+.d-body { padding: 18px 20px 120px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
 .d-title h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.04em; }
 .d-title p { margin-top: 4px; color: var(--ink-2); font-size: 14px; }
 .d-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .act { display: grid; justify-items: center; gap: 4px; padding: 10px 6px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); font-size: 12px; font-weight: 700; color: var(--ink-2); white-space: nowrap; }
-.box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-2); padding: 16px; display: grid; gap: 10px; }
+.box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-2); padding: 16px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
 .box h3 { font-size: 15px; font-weight: 800; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
 .box-book { border-color: var(--green); }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 50px; padding: 0 20px; border-radius: 14px; font-weight: 800; font-size: 16px; white-space: nowrap; }
@@ -168,9 +168,22 @@ body { min-height: 100dvh; }
   .thumb { width: 96px; height: 96px; }
   .top-links .l-only { display: none; }
 }
+/* 관심·공유·소개 */
+.d-actions { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+button.act { font: inherit; font-size: 12px; cursor: pointer; }
+.act[aria-pressed="true"] { color: var(--forest); border-color: var(--forest); }
+.act[aria-pressed="true"] .i { fill: currentColor; }
+.saved-mark { color: var(--forest); fill: currentColor; flex: none; }
+.d-line { font-weight: 600; color: var(--ink-2); }
+a.row { color: inherit; text-decoration: none; }
+a.row .tag { flex: none; }
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 100; padding: 10px 16px; border-radius: 999px; background: var(--ink, #14231b); color: #fff; font-size: 14px; font-weight: 600; white-space: nowrap; box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+.box-book .btn { width: 100%; }
+.trust { white-space: normal; flex-wrap: wrap; }
+.row span[data-wrap-ok] { white-space: normal; }
 
 </style>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="l-arrow-up-down" viewBox="0 0 24 24"><path d="m21 16-4 4-4-4" /> <path d="M17 20V4" /> <path d="m3 8 4-4 4 4" /> <path d="M7 4v16" /></symbol><symbol id="l-bed-double" viewBox="0 0 24 24"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8" /> <path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4" /> <path d="M12 4v6" /> <path d="M2 18h20" /></symbol><symbol id="l-calendar" viewBox="0 0 24 24"><path d="M8 2v3" /> <path d="M16 2v3" /> <rect x="3" y="3" width="18" height="18" rx="2" /> <path d="M3 9h18" /></symbol><symbol id="l-car" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /> <circle cx="7" cy="17" r="2" /> <path d="M9 17h6" /> <circle cx="17" cy="17" r="2" /></symbol><symbol id="l-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol><symbol id="l-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <line x1="12" x2="12" y1="8" y2="12" /> <line x1="12" x2="12.01" y1="16" y2="16" /></symbol><symbol id="l-circle-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></symbol><symbol id="l-dog" viewBox="0 0 24 24"><path d="M11.25 16.25h1.5L12 17z" /> <path d="M16 14v.5" /> <path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309" /> <path d="M8 14v.5" /> <path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.177-6.53 4-7 1.923-.321 3.651.845 3.651 2.235A7.497 7.497 0 0 1 14 5.277c0-1.39 1.844-2.598 3.767-2.277 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5" /></symbol><symbol id="l-external-link" viewBox="0 0 24 24"><path d="M15 3h6v6" /> <path d="M10 14 21 3" /> <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></symbol><symbol id="l-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" /></symbol><symbol id="l-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 16v-4" /> <path d="M12 8h.01" /></symbol><symbol id="l-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /> <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /> <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></symbol><symbol id="l-list" viewBox="0 0 24 24"><path d="M3 5h.01" /> <path d="M3 12h.01" /> <path d="M3 19h.01" /> <path d="M8 5h13" /> <path d="M8 12h13" /> <path d="M8 19h13" /></symbol><symbol id="l-locate-fixed" viewBox="0 0 24 24"><line x1="2" x2="5" y1="12" y2="12" /> <line x1="19" x2="22" y1="12" y2="12" /> <line x1="12" x2="12" y1="2" y2="5" /> <line x1="12" x2="12" y1="19" y2="22" /> <circle cx="12" cy="12" r="7" /> <circle cx="12" cy="12" r="3" /></symbol><symbol id="l-map" viewBox="0 0 24 24"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /></symbol><symbol id="l-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" /></symbol><symbol id="l-navigation" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11" /></symbol><symbol id="l-phone" viewBox="0 0 24 24"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></symbol><symbol id="l-ruler" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" /> <path d="m14.5 12.5 2-2" /> <path d="m11.5 9.5 2-2" /> <path d="m8.5 6.5 2-2" /> <path d="m17.5 15.5 2-2" /></symbol><symbol id="l-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" /></symbol><symbol id="l-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /></symbol><symbol id="l-toilet" viewBox="0 0 24 24"><path d="M7 12h13a1 1 0 0 1 1 1 5 5 0 0 1-5 5h-.598a.5.5 0 0 0-.424.765l1.544 2.47a.5.5 0 0 1-.424.765H5.402a.5.5 0 0 1-.424-.765L7 18" /> <path d="M8 18a5 5 0 0 1-5-5V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8" /></symbol><symbol id="l-warehouse" viewBox="0 0 24 24"><path d="M18 21V10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v11" /> <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8z" /> <path d="M6 13h12" /> <path d="M6 17h12" /></symbol><symbol id="l-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol><symbol id="l-zap" viewBox="0 0 24 24"><path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" /></symbol><symbol id="t-building-pavilion" viewBox="0 0 24 24"><path d="M3 21h7v-3a2 2 0 0 1 4 0v3h7" /> <path d="M6 21l0 -9" /> <path d="M18 21l0 -9" /> <path d="M6 12h12a3 3 0 0 0 3 -3a9 8 0 0 1 -9 -6a9 8 0 0 1 -9 6a3 3 0 0 0 3 3" /></symbol><symbol id="t-caravan" viewBox="0 0 24 24"><path d="M7 18a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M11 18h7a2 2 0 0 0 2 -2v-7a2 2 0 0 0 -2 -2h-9.5a5.5 5.5 0 0 0 -5.5 5.5v3.5a2 2 0 0 0 2 2h2" /> <path d="M8 7l7 -3l1 3" /> <path d="M13 11.5a.5 .5 0 0 1 .5 -.5h2a.5 .5 0 0 1 .5 .5v2a.5 .5 0 0 1 -.5 .5h-2a.5 .5 0 0 1 -.5 -.5l0 -2" /> <path d="M20 16h2" /></symbol><symbol id="t-coin" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1" /> <path d="M12 7v10" /></symbol><symbol id="t-grill" viewBox="0 0 24 24"><path d="M19 8h-14a6 6 0 0 0 6 6h2a6 6 0 0 0 6 -5.775l0 -.225" /> <path d="M17 20a2 2 0 1 1 0 -4a2 2 0 0 1 0 4" /> <path d="M15 14l1 2" /> <path d="M9 14l-3 6" /> <path d="M15 18h-8" /> <path d="M15 5v-1" /> <path d="M12 5v-1" /> <path d="M9 5v-1" /></symbol><symbol id="t-tent" viewBox="0 0 24 24"><path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" /></symbol><symbol id="t-tent-off" viewBox="0 0 24 24"><path d="M11 14l4 6h5m-2.863 -6.868l-5.137 -9.132l-1.44 2.559m-1.44 2.563l-6.12 10.878h6l4 -6" /> <path d="M3 3l18 18" /></symbol></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="l-arrow-up-down" viewBox="0 0 24 24"><path d="m21 16-4 4-4-4" /> <path d="M17 20V4" /> <path d="m3 8 4-4 4 4" /> <path d="M7 4v16" /></symbol><symbol id="l-bed-double" viewBox="0 0 24 24"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8" /> <path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4" /> <path d="M12 4v6" /> <path d="M2 18h20" /></symbol><symbol id="l-calendar" viewBox="0 0 24 24"><path d="M8 2v3" /> <path d="M16 2v3" /> <rect x="3" y="3" width="18" height="18" rx="2" /> <path d="M3 9h18" /></symbol><symbol id="l-calendar-check" viewBox="0 0 24 24"><path d="M8 2v3" /> <path d="M16 2v3" /> <rect x="3" y="3" width="18" height="18" rx="2" /> <path d="M3 9h18" /> <path d="m9 15 2 2 4-4" /></symbol><symbol id="l-car" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /> <circle cx="7" cy="17" r="2" /> <path d="M9 17h6" /> <circle cx="17" cy="17" r="2" /></symbol><symbol id="l-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol><symbol id="l-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <line x1="12" x2="12" y1="8" y2="12" /> <line x1="12" x2="12.01" y1="16" y2="16" /></symbol><symbol id="l-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m16 9-5.5 5.5L8 12" /></symbol><symbol id="l-circle-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></symbol><symbol id="l-dog" viewBox="0 0 24 24"><path d="M11.25 16.25h1.5L12 17z" /> <path d="M16 14v.5" /> <path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309" /> <path d="M8 14v.5" /> <path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.177-6.53 4-7 1.923-.321 3.651.845 3.651 2.235A7.497 7.497 0 0 1 14 5.277c0-1.39 1.844-2.598 3.767-2.277 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5" /></symbol><symbol id="l-external-link" viewBox="0 0 24 24"><path d="M15 3h6v6" /> <path d="M10 14 21 3" /> <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></symbol><symbol id="l-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" /></symbol><symbol id="l-heart" viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></symbol><symbol id="l-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 16v-4" /> <path d="M12 8h.01" /></symbol><symbol id="l-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /> <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /> <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></symbol><symbol id="l-list" viewBox="0 0 24 24"><path d="M3 5h.01" /> <path d="M3 12h.01" /> <path d="M3 19h.01" /> <path d="M8 5h13" /> <path d="M8 12h13" /> <path d="M8 19h13" /></symbol><symbol id="l-locate-fixed" viewBox="0 0 24 24"><line x1="2" x2="5" y1="12" y2="12" /> <line x1="19" x2="22" y1="12" y2="12" /> <line x1="12" x2="12" y1="2" y2="5" /> <line x1="12" x2="12" y1="19" y2="22" /> <circle cx="12" cy="12" r="7" /> <circle cx="12" cy="12" r="3" /></symbol><symbol id="l-map" viewBox="0 0 24 24"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /></symbol><symbol id="l-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" /></symbol><symbol id="l-message-square-text" viewBox="0 0 24 24"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /> <path d="M7 11h10" /> <path d="M7 15h6" /> <path d="M7 7h8" /></symbol><symbol id="l-navigation" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11" /></symbol><symbol id="l-phone" viewBox="0 0 24 24"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></symbol><symbol id="l-ruler" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" /> <path d="m14.5 12.5 2-2" /> <path d="m11.5 9.5 2-2" /> <path d="m8.5 6.5 2-2" /> <path d="m17.5 15.5 2-2" /></symbol><symbol id="l-scan-search" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2" /> <path d="M17 3h2a2 2 0 0 1 2 2v2" /> <path d="M21 17v2a2 2 0 0 1-2 2h-2" /> <path d="M7 21H5a2 2 0 0 1-2-2v-2" /> <circle cx="12" cy="12" r="3" /> <path d="m16 16-1.9-1.9" /></symbol><symbol id="l-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" /></symbol><symbol id="l-share-2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" /> <circle cx="6" cy="12" r="3" /> <circle cx="18" cy="19" r="3" /> <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /> <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></symbol><symbol id="l-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /></symbol><symbol id="l-sparkles" viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /> <path d="M20 2v4" /> <path d="M22 4h-4" /> <circle cx="4" cy="20" r="2" /></symbol><symbol id="l-toilet" viewBox="0 0 24 24"><path d="M7 12h13a1 1 0 0 1 1 1 5 5 0 0 1-5 5h-.598a.5.5 0 0 0-.424.765l1.544 2.47a.5.5 0 0 1-.424.765H5.402a.5.5 0 0 1-.424-.765L7 18" /> <path d="M8 18a5 5 0 0 1-5-5V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8" /></symbol><symbol id="l-warehouse" viewBox="0 0 24 24"><path d="M18 21V10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v11" /> <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8z" /> <path d="M6 13h12" /> <path d="M6 17h12" /></symbol><symbol id="l-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol><symbol id="l-zap" viewBox="0 0 24 24"><path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" /></symbol><symbol id="t-building-pavilion" viewBox="0 0 24 24"><path d="M3 21h7v-3a2 2 0 0 1 4 0v3h7" /> <path d="M6 21l0 -9" /> <path d="M18 21l0 -9" /> <path d="M6 12h12a3 3 0 0 0 3 -3a9 8 0 0 1 -9 -6a9 8 0 0 1 -9 6a3 3 0 0 0 3 3" /></symbol><symbol id="t-caravan" viewBox="0 0 24 24"><path d="M7 18a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M11 18h7a2 2 0 0 0 2 -2v-7a2 2 0 0 0 -2 -2h-9.5a5.5 5.5 0 0 0 -5.5 5.5v3.5a2 2 0 0 0 2 2h2" /> <path d="M8 7l7 -3l1 3" /> <path d="M13 11.5a.5 .5 0 0 1 .5 -.5h2a.5 .5 0 0 1 .5 .5v2a.5 .5 0 0 1 -.5 .5h-2a.5 .5 0 0 1 -.5 -.5l0 -2" /> <path d="M20 16h2" /></symbol><symbol id="t-coin" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1" /> <path d="M12 7v10" /></symbol><symbol id="t-grill" viewBox="0 0 24 24"><path d="M19 8h-14a6 6 0 0 0 6 6h2a6 6 0 0 0 6 -5.775l0 -.225" /> <path d="M17 20a2 2 0 1 1 0 -4a2 2 0 0 1 0 4" /> <path d="M15 14l1 2" /> <path d="M9 14l-3 6" /> <path d="M15 18h-8" /> <path d="M15 5v-1" /> <path d="M12 5v-1" /> <path d="M9 5v-1" /></symbol><symbol id="t-tent" viewBox="0 0 24 24"><path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" /></symbol><symbol id="t-tent-off" viewBox="0 0 24 24"><path d="M11 14l4 6h5m-2.863 -6.868l-5.137 -9.132l-1.44 2.559m-1.44 2.563l-6.12 10.878h6l4 -6" /> <path d="M3 3l18 18" /></symbol></svg>
 <header class="top"><div class="wrap">
   <a class="logo" href="./"><span class="logo-mark"><svg class="i" aria-hidden="true"><use href="#t-tent"/></svg></span>모여라 캠핑</a>
   <nav class="top-links">
@@ -212,17 +225,19 @@ const PAGE = 30;
 // 이름순 정렬은 “(주)”, “(에드203)” 같은 괄호 접두어와 법인 표기를 빼고 비교한다.
 const sortName = (c) => (c._sort ??= c.name.replace(/^[\s(（［\[]*[^)）］\]]*[)）］\]]\s*/, "").replace(/^(주식회사|㈜|유한회사|농업회사법인)\s*/, "") || c.name);
 // 데이터는 빈 값을 빼고 배포하므로 화면에서 기본값을 채운다.
-const withDefaults = (c) => ({ kinds: [], sizes: [], floors: [], amenities: [], env: [], themes: [], rental: [], seasons: [], days: [], types: [], ...c, booking: { methods: [], url: null, provider: null, ...(c.booking ?? {}) } });
+const withDefaults = (c) => ({ kinds: [], sizes: [], floors: [], amenities: [], env: [], themes: [], rental: [], seasons: [], days: [], types: [], seoul: [], ...c, booking: { methods: [], url: null, provider: null, ...(c.booking ?? {}) } });
 
-const state = { q: "", area: "전국", kinds: new Set(), realtime: false, pet: false, fee: false, toilet: false, gear: "", sort: "best", shown: PAGE, here: null, open: null };
-let ALL = [], META = null, map = null, clusterer = null, markers = new Map();
+const state = { q: "", area: "전국", kinds: new Set(), realtime: false, pet: false, fee: false, toilet: false, savedOnly: false, inView: false, gear: "", sort: "best", shown: PAGE, here: null, open: null, saved: new Set() };
+let ALL = [], META = null, TEXTS = null, map = null, clusterer = null, markers = new Map();
 
 function load() {
-  try { const s = JSON.parse(localStorage.getItem("moyeora-explore") ?? "{}"); Object.assign(state, { area: s.area ?? "전국", gear: s.gear ?? "" }); } catch {}
+  try { const s = JSON.parse(localStorage.getItem("moyeora-explore") ?? "{}"); Object.assign(state, { area: s.area ?? "전국", gear: s.gear ?? "", saved: new Set(Array.isArray(s.saved) ? s.saved : []) }); } catch {}
   const h = new URLSearchParams(location.hash.slice(1));
   if (h.get("c")) state.open = h.get("c");
 }
-const save = () => { try { localStorage.setItem("moyeora-explore", JSON.stringify({ area: state.area, gear: state.gear })); } catch {} };
+// 관심 캠핑장은 이 기기 브라우저에만 저장한다(로그인 없음).
+const save = () => { try { localStorage.setItem("moyeora-explore", JSON.stringify({ area: state.area, gear: state.gear, saved: [...state.saved] })); } catch {} };
+const inBounds = (c) => { if (!state.inView || !map) return true; const b = map.getBounds(); return b.contain(new kakao.maps.LatLng(c.lat, c.lng)); };
 
 const fits = (c) => {
   if (!state.gear) return true;
@@ -232,13 +247,18 @@ const fits = (c) => {
 };
 // 추천순: 바로 예약할 수 있고 정보가 풍부한 곳을 먼저(온라인 실시간 예약 > 예약 링크 > 사진 > 사이트 구성·크기 > 요금 안내 > 주변 화장실)
 const richness = (c) => (c._rich ??= (isRealtime(c) ? 8 : 0) + (c.booking.url ? 6 : c.homepage ? 2 : 0) + (c.img ? 4 : 0) + (c.kinds.length ? 2 : 0) + (c.sizes.length ? 1 : 0) + (c.fee ? 2 : 0) + (c.nearby_toilets ? 1 : 0));
+// 서울시 공공예약 원문 상태가 “접수중”인 상품이 있는 곳(확인 시각은 상세에 표시)
+const openNow = (c) => c.seoul.some((s) => /접수중/.test(s.status ?? ""));
 const isRealtime = (c) => c.booking.methods.some((m) => /실시간/.test(m));
 const petOk = (c) => /가능/.test(c.pets ?? "") && !/불가/.test(c.pets ?? "");
 const dist = (a, b) => { const R = 6371, t = Math.PI / 180, x = (b.lat - a.lat) * t, y = (b.lng - a.lng) * t; const h = Math.sin(x / 2) ** 2 + Math.cos(a.lat * t) * Math.cos(b.lat * t) * Math.sin(y / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); };
 
-function filtered() {
+// 지도 마커는 “지도에 보이는 곳만” 조건을 빼고 그린다(지도를 옮기면 다른 곳도 보이도록).
+function filtered({ forMap = false } = {}) {
   const q = state.q.trim().replace(/\s+/g, "");
   const list = ALL.filter((c) => {
+    if (state.savedOnly && !state.saved.has(c.id)) return false;
+    if (!forMap && !inBounds(c)) return false;
     if (state.area !== "전국" && c.area !== state.area) return false;
     if (q && !`${c.name}${c.sido}${c.sigungu}${c.addr}`.replace(/\s+/g, "").includes(q)) return false;
     if (state.kinds.size && !c.kinds.some(([k]) => state.kinds.has(k))) return false;
@@ -261,9 +281,9 @@ function card(c) {
   return `<button class="card" type="button" data-open="${c.id}" aria-current="${state.open === c.id}">
     <span class="thumb">${c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ic("#t-tent")}</span>
     <span class="card-body">
-      <span class="card-title"><h3>${esc(c.name)}</h3></span>
+      <span class="card-title"><h3>${esc(c.name)}</h3>${state.saved.has(c.id) ? ic("#l-heart", "i-xs saved-mark") : ""}</span>
       <span class="loc">${ic("#l-map-pin", "i-xs")}${esc([c.sido, c.sigungu].filter(Boolean).join(" "))}${km}${OP[c.op] ? ` · ${OP[c.op]}` : ""}</span>
-      <span class="tags">${isRealtime(c) ? `<span class="tag tag-green">${ic("#l-zap", "i-xs")}온라인 실시간 예약</span>` : ""}${kinds}${petOk(c) ? `<span class="tag">${ic("#l-dog", "i-xs")}반려견</span>` : ""}</span>
+      <span class="tags">${openNow(c) ? `<span class="tag tag-green">${ic("#l-circle-check", "i-xs")}서울 공공예약 접수중</span>` : ""}${isRealtime(c) ? `<span class="tag tag-green">${ic("#l-zap", "i-xs")}온라인 실시간 예약</span>` : ""}${kinds}${petOk(c) ? `<span class="tag">${ic("#l-dog", "i-xs")}반려견</span>` : ""}</span>
       <span class="price">${c.fee?.min ? `<b>${won(c.fee.min)}~</b><span>공식 안내 요금</span>` : `<span>요금은 예약처에서 확인</span>`}</span>
     </span></button>`;
 }
@@ -272,6 +292,8 @@ function renderChips() {
   const count = (pred) => ALL.filter(pred).length;
   $("#areaChips").innerHTML = AREAS.map((a) => `<button class="pill" type="button" data-area="${a}" aria-pressed="${state.area === a}">${a}</button>`).join("");
   $("#filterChips").innerHTML = [
+    `<button class="pill" type="button" data-toggle="savedOnly" aria-pressed="${state.savedOnly}">${ic("#l-heart", "i-sm")}관심 <span class="num">${state.saved.size}</span></button>`,
+    map ? `<button class="pill" type="button" data-toggle="inView" aria-pressed="${state.inView}">${ic("#l-scan-search", "i-sm")}지도에 보이는 곳만</button>` : "",
     `<button class="pill" type="button" data-toggle="realtime" aria-pressed="${state.realtime}">${ic("#l-zap", "i-sm")}실시간 예약 <span class="num">${count(isRealtime)}</span></button>`,
     ...Object.entries(KIND).filter(([k]) => k !== "RV_PITCH").map(([k, [l, i]]) => `<button class="pill" type="button" data-kind="${k}" aria-pressed="${state.kinds.has(k)}">${ic(i, "i-sm")}${l}</button>`),
     `<span class="sep"></span>`,
@@ -282,15 +304,22 @@ function renderChips() {
   ].join("");
 }
 
+function renderListOnly() {
+  const list = filtered();
+  $("#resultTitle").textContent = `캠핑장 ${list.length.toLocaleString()}곳`;
+  $("#cards").innerHTML = list.length ? list.slice(0, state.shown).map(card).join("") : emptyBox();
+  $("#moreBtn").hidden = list.length <= state.shown;
+}
+const emptyBox = () => `<div class="empty">${ic("#t-tent-off")}<b>${state.savedOnly && !state.saved.size ? "아직 관심 캠핑장이 없어요" : "조건에 맞는 캠핑장이 없어요"}</b><span data-wrap-ok>${state.savedOnly && !state.saved.size ? "상세 화면의 하트를 누르면 이 기기에 저장돼요." : state.inView ? "지도를 옮기거나 축소해 보세요." : "필터를 줄여 보세요."}</span></div>`;
 function renderList() {
   const list = filtered();
   $("#resultTitle").textContent = `캠핑장 ${list.length.toLocaleString()}곳`;
   $("#resultSub").textContent = META ? `고캠핑 ${ymd(META.sources[0]?.fetched_at)} 기준` : "";
   $("#cards").innerHTML = list.length ? list.slice(0, state.shown).map(card).join("")
-    : `<div class="empty">${ic("#t-tent-off")}<b>조건에 맞는 캠핑장이 없어요</b><span data-wrap-ok>필터를 줄여 보세요.</span></div>`;
+    : emptyBox();
   $("#moreBtn").hidden = list.length <= state.shown;
   $("#moreBtn").innerHTML = `${ic("#l-chevron-down", "i-sm")}더 보기 <span class="num">${Math.min(PAGE, list.length - state.shown)}</span>`;
-  renderMarkers(list);
+  renderMarkers(filtered({ forMap: true }));
 }
 
 /* ---------- 지도(카카오) ---------- */
@@ -304,7 +333,10 @@ function initMap() {
     map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
     clusterer = new kakao.maps.MarkerClusterer({ map, averageCenter: true, minLevel: 8, disableClickZoom: false,
       styles: [{ width: "42px", height: "42px", background: "rgba(31,157,92,.88)", color: "#fff", borderRadius: "50%", textAlign: "center", lineHeight: "42px", fontWeight: "800", fontSize: "13px" }] });
-    renderMarkers(filtered());
+    renderMarkers(filtered({ forMap: true }));
+    renderChips();
+    // 지도를 옮기거나 확대하면 “지도에 보이는 곳만” 목록을 다시 계산한다.
+    kakao.maps.event.addListener(map, "idle", () => { if (state.inView) { state.shown = PAGE; renderListOnly(); } });
   });
   s.onerror = () => { el.innerHTML = `<div class="map-empty"><p data-wrap-ok>지도를 불러오지 못했습니다(도메인 등록 확인). 목록은 그대로 쓸 수 있어요.</p></div>`; };
   document.head.append(s);
@@ -338,18 +370,23 @@ function detail(c) {
   return `<div class="sheet-close"><button class="round" type="button" data-close aria-label="닫기">${ic("#l-x")}</button></div>
   <div class="d-hero">${c.img ? `<img src="${esc(c.img)}" alt="${esc(c.name)} 대표 사진" referrerpolicy="no-referrer"><span class="credit">사진: 고캠핑(운영자 등록)</span>` : ic("#t-tent")}</div>
   <div class="d-body">
-    <div class="d-title"><h2>${esc(c.name)}</h2><p data-wrap-ok>${esc(c.addr ?? "")}</p></div>
+    <div class="d-title"><h2>${esc(c.name)}</h2>${c.line ? `<p class="d-line" data-wrap-ok>${esc(c.line)}</p>` : ""}<p data-wrap-ok>${esc(c.addr ?? "")}</p></div>
     <div class="d-actions">
       <a class="act" href="https://map.kakao.com/link/to/${encodeURIComponent(c.name)},${c.lat},${c.lng}" target="_blank" rel="noopener">${ic("#l-navigation")}길찾기</a>
       ${c.tel ? `<a class="act" href="tel:${esc(c.tel.replace(/[^\d+]/g, ""))}">${ic("#l-phone")}전화</a>` : `<span class="act" aria-disabled="true">${ic("#l-phone")}전화 없음</span>`}
-      ${c.homepage ? `<a class="act" href="${esc(c.homepage)}" target="_blank" rel="noopener">${ic("#l-globe")}홈페이지</a>` : `<span class="act" aria-disabled="true">${ic("#l-globe")}홈페이지 없음</span>`}
+      <button class="act" type="button" data-save="${c.id}" aria-pressed="${state.saved.has(c.id)}">${ic("#l-heart")}${state.saved.has(c.id) ? "저장됨" : "관심"}</button>
+      <button class="act" type="button" data-share="${c.id}">${ic("#l-share-2")}공유</button>
     </div>
     <div class="box box-book">
       <h3>${ic("#l-calendar", "i-sm")}예약</h3>
       <div class="tags">${c.booking.methods.map((m) => `<span class="tag ${/실시간/.test(m) ? "tag-green" : ""}">${esc(m)}</span>`).join("") || `<span class="tag">예약 방법 정보 없음</span>`}</div>
+      ${c.homepage && c.booking.url && c.homepage !== c.booking.url ? `<a class="btn btn-line" href="${esc(c.homepage)}" target="_blank" rel="noopener">${ic("#l-globe", "i-sm")}홈페이지</a>` : ""}
       ${bookUrl ? `<a class="btn btn-primary" href="${esc(bookUrl)}" target="_blank" rel="noopener">${ic("#l-external-link", "i-sm")}예약하러 가기</a>` : c.tel ? `<a class="btn btn-primary" href="tel:${esc(c.tel.replace(/[^\d+]/g, ""))}">${ic("#l-phone", "i-sm")}전화로 예약</a>` : ""}
       <p class="note" data-wrap-ok>빈자리와 최종 요금은 예약처 화면에서 확인됩니다. 모여라 캠핑은 결제를 받지 않고 공식 예약처로 연결합니다.${c.booking.url ? "" : c.homepage ? " (고캠핑에 예약 링크가 없어 홈페이지로 연결)" : c.tel ? " (온라인 예약 링크가 없어 전화 예약)" : " 고캠핑에 예약 링크·홈페이지·전화가 없어 운영자 확인이 필요합니다."}</p>
     </div>
+    ${c.seoul.length ? `<div class="box"><h3>${ic("#l-calendar-check", "i-sm")}서울 공공예약 접수</h3>
+      ${c.seoul.map((s) => `<a class="row" href="${esc(s.url)}" target="_blank" rel="noopener"><span class="tag ${/접수중/.test(s.status ?? "") ? "tag-green" : ""}">${esc(s.status ?? "상태 없음")}</span><span data-wrap-ok>${esc(s.name)}${s.to ? ` · ${ymd(s.to)}까지` : ""}</span>${ic("#l-external-link", "i-xs")}</a>`).join("")}
+      <span class="trust ok">${ic("#l-shield-check", "i-xs")}서울 열린데이터광장 원문 · ${ymd(c.seoul[0].checked_at)} 확인 · 빈자리는 예약 화면에서 확정</span></div>` : ""}
     <div class="box"><h3>${ic("#t-coin", "i-sm")}요금</h3>
       ${c.fee ? `<p class="pre" data-wrap-ok>${esc(c.fee.text)}</p><span class="trust">${ic("#l-info", "i-xs")}한국관광공사 등록 안내 문구 · ${ymd(c.fee.checked_at)} 확인 · <a href="${esc(c.fee.url)}" target="_blank" rel="noopener">원문</a></span>` : `<p class="note" data-wrap-ok>공식 원천에 등록된 요금 안내가 없습니다. 예약처에서 확인하세요.</p>`}
     </div>
@@ -368,10 +405,11 @@ function detail(c) {
       ${c.amenities.length ? `<div class="tags">${c.amenities.map((a) => `<span class="tag">${esc(a)}</span>`).join("")}</div>` : ""}
       ${c.env.length || c.themes.length ? `<p class="note" data-wrap-ok>${esc([...c.env, ...c.themes].join(" · "))}</p>` : ""}
     </div>
+    <div class="box" id="introBox" hidden></div>
     ${providerBlock(c)}
     <div class="box"><h3>${ic("#l-toilet", "i-sm")}주변 공중화장실</h3>${toilets}
       <p class="note" data-wrap-ok>행정안전부 공중화장실정보·OpenStreetMap, 직선거리 기준</p></div>
-    <p class="note" data-wrap-ok>출처: 한국관광공사 고캠핑(${ymd(c.modified_at)} 수정) · 정보가 다르면 운영자 공지가 우선합니다.</p>
+    <p class="note" data-wrap-ok>출처: 한국관광공사 고캠핑(${ymd(c.modified_at)} 수정)${c.gc_url ? ` · <a href="${esc(c.gc_url)}" target="_blank" rel="noopener">고캠핑 원문</a>` : ""} · 정보가 다르면 운영자 공지가 우선합니다.</p>
   </div>`;
 }
 function openDetail(id) {
@@ -383,14 +421,47 @@ function openDetail(id) {
   document.body.style.overflow = "hidden";
   if (map) { map.setLevel(Math.min(map.getLevel(), 7)); map.panTo(new kakao.maps.LatLng(c.lat, c.lng)); }
   $$(".card").forEach((el) => el.setAttribute("aria-current", String(el.dataset.open === id)));
+  loadIntro(c);
+}
+// 긴 소개 문구는 상세를 처음 열 때 한 번만 내려받는다.
+async function loadIntro(c) {
+  try { TEXTS ??= await fetch("data/texts.json").then((r) => (r.ok ? r.json() : {})); } catch { TEXTS = {}; }
+  const t = TEXTS[c.id], box = $("#introBox");
+  if (!t || !box || state.open !== c.id) return;
+  box.innerHTML = `<h3>${ic("#l-message-square-text", "i-sm")}운영자 소개</h3>
+    ${t.intro ? `<p class="pre" data-wrap-ok>${esc(t.intro)}</p>` : ""}
+    ${t.feature ? `<p class="pre" data-wrap-ok>${esc(t.feature)}</p>` : ""}
+    ${t.nearby?.length ? `<div class="tags">${t.nearby.map((n) => `<span class="tag">${esc(n)}</span>`).join("")}</div>` : ""}
+    ${t.programs ? `<div class="row">${ic("#l-sparkles", "i-sm")}<span data-wrap-ok>체험 ${esc(t.programs)}</span></div>` : ""}
+    <p class="note" data-wrap-ok>운영자가 고캠핑에 등록한 문구입니다. 요금·규칙은 예약처 안내가 우선합니다.</p>`;
+  box.hidden = false;
+}
+async function share(c) {
+  const url = `${location.origin}${location.pathname}#c=${c.id}`;
+  try {
+    if (navigator.share) { await navigator.share({ title: c.name, text: `${c.name} · 모여라 캠핑`, url }); return; }
+    await navigator.clipboard.writeText(url); toast("링크를 복사했어요");
+  } catch (e) { if (e?.name !== "AbortError") toast("링크를 복사하지 못했어요"); }
+}
+function toast(msg) {
+  const el = document.createElement("div"); el.className = "toast"; el.setAttribute("role", "status"); el.textContent = msg;
+  document.body.append(el); setTimeout(() => el.remove(), 2000);
 }
 function closeDetail() { state.open = null; $("#sheetRoot").innerHTML = ""; document.body.style.overflow = ""; history.replaceState(null, "", location.pathname); }
 
 /* ---------- 이벤트 ---------- */
 function rerender(resetPage = true) { if (resetPage) state.shown = PAGE; save(); renderChips(); renderList(); }
 document.addEventListener("click", (e) => {
-  const t = e.target.closest("[data-open],[data-close],[data-area],[data-kind],[data-toggle],#moreBtn,#viewSwitch,#clearQ,#nearBtn");
+  const t = e.target.closest("[data-open],[data-close],[data-save],[data-share],[data-area],[data-kind],[data-toggle],#moreBtn,#viewSwitch,#clearQ,#nearBtn");
   if (!t) return;
+  if (t.dataset.save) {
+    const id = t.dataset.save, on = !state.saved.has(id);
+    on ? state.saved.add(id) : state.saved.delete(id);
+    t.setAttribute("aria-pressed", String(on)); t.innerHTML = `${ic("#l-heart")}${on ? "저장됨" : "관심"}`;
+    toast(on ? "관심 캠핑장에 저장했어요(이 기기)" : "관심에서 뺐어요");
+    return rerender(false);
+  }
+  if (t.dataset.share) return share(ALL.find((x) => x.id === t.dataset.share));
   if (t.dataset.open) return openDetail(t.dataset.open);
   if (t.hasAttribute("data-close")) return closeDetail();
   if (t.dataset.area) { state.area = t.dataset.area; return rerender(); }

@@ -79,6 +79,11 @@ export function normalizeCampground(item, fetchedAt) {
     operating_days: list(item.operDeCl),
     reservation: { methods: list(item.resveCl), url: text(item.resveUrl) },
     hero_image_url: text(item.firstImageUrl),
+    // 운영자가 고캠핑에 등록한 소개 문구(광고성 표현이 섞일 수 있어 화면에는 “운영자 소개”로 표시)
+    intro: { line: text(item.lineIntro), text: text(item.intro), feature: text(item.featureNm) },
+    nearby_facilities: list(item.posblFcltyCl),
+    programs: text(item.exprnProgrm),
+    gocamping_url: item.contentId ? `https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=${encodeURIComponent(item.contentId)}` : null,
     source: {
       provider: "gocamping",
       tier: "A",

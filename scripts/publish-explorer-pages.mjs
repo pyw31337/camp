@@ -31,4 +31,5 @@ ${body}
 `);
 await cp(`${dataDir}/campgrounds.json`, `${out}data/campgrounds.json`);
 await cp(`${dataDir}/meta.json`, `${out}data/meta.json`);
+if (existsSync(`${dataDir}/texts.json`)) await cp(`${dataDir}/texts.json`, `${out}data/texts.json`);
 console.log(`camping-atlas/public/explore 발행 준비 완료${kakaoKey ? " · 지도 키 있음" : " · 지도 키 없음"}`);

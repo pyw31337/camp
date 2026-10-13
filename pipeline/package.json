@@ -25,7 +25,8 @@
     "sync:localdata-campgrounds": "node scripts/sync-localdata-campgrounds.mjs",
     "db:import-licences": "node scripts/import-licences-postgres.mjs",
     "sync:tour-fees": "node scripts/sync-tour-fees.mjs",
-    "build:explore": "node scripts/build-explore-data.mjs"
+    "build:explore": "node scripts/build-explore-data.mjs",
+    "sync:seoul-yeyak": "node scripts/sync-seoul-yeyak.mjs"
   },
   "dependencies": {
     "pg": "8.23.1"

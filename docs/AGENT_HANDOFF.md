@@ -32,6 +32,7 @@
 
 | 항목 | 내용 | 검증 |
 | --- | --- | --- |
+| 탐색 화면 보강 + 서울 공공예약 | `lib/seoul-yeyak.mjs`·`sync:seoul-yeyak`(서울 열린데이터광장 공공서비스예약 종합 `tvYeyakCOllect`, 실패 시 시설대관·체육시설; 캠핑 상품만, 접수 상태·접수 기간·원문 링크·확인 시각) → 2km·이름 유사도로 고캠핑에 연결(`seoul` 필드). 고캠핑 소개(`intro`·`nearby_facilities`·`programs`·`gocamping_url`) 정규화, 목록엔 한 줄 소개만·긴 소개는 `explore/data/texts.json`(상세 열 때 로드). 화면: 관심(이 기기 저장)·관심 필터·공유(링크 복사)·‘지도에 보이는 곳만’·운영자 소개·서울 접수 상태 배지·고캠핑 원문 링크 | `npm test` 76 통과. 개발용 데이터로 320/390/1280px 가로 넘침 0(상세 패널 포함), 관심 저장·필터·소개 로드 확인. 서울 키(`SEOUL_OPEN_API_KEY`)는 이 컨테이너에서 8088 포트가 막혀 PR의 Data sync 로그로 확인 |
 | 주소 통일 | 소유자 요청으로 GitHub Pages 단일 주소. Cloudflare 워크플로·`assemble-site.mjs` 삭제, `scripts/publish-explorer-pages.mjs` 추가(탐색 화면을 `camping-atlas/public/explore/`로 발행), `data-sync.yml` 마지막 단계가 main에서 커밋·푸시, `deploy-pages.yml`에 `workflow_run`, 홈 링크 `explore/` | `npm test` 72 통과, `camping-atlas` lint 통과·`build:pages` 성공(홈에 `explore/` 링크 2개). 로컬 개발용 데이터로 `dist/client/explore/{index.html,data/}` 생성 확인 후 삭제. tsc 오류 3건(`home.tsx:108`, `vite.config.ts:11`)은 변경 전부터 있던 것. 실제 공개는 PR 병합 후 main Data sync 실행 시 |
 | 기획 | 통합검색·예약, 미디어·지도·여행 연동 설계 작성 | 원천 링크와 정책 구분을 문서 검토 |
 | DB | 25개 테이블과 예약·원천·미디어 관련 enum/인덱스 초안 작성 | SQL 형식 확인; 로컬에 PostgreSQL 실행 파일이 없어 실제 적용은 미실행 |
