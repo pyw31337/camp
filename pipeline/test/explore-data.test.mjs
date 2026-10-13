@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { areaOf, buildExploreRecords, buildProviders, providerOf } from "../lib/explore-data.mjs";
+import { areaOf, buildExploreRecords, buildExploreTexts, buildProviders, providerOf } from "../lib/explore-data.mjs";
 import { feeRange, matchTour, normalizeTourIntro } from "../lib/tour-fees.mjs";
 
 const camp = { external_id: { id: "7096" }, name: "향남 오토캠핑장", address: { sido: "경기도", sigungu: "화성시", line1: "경기도 화성시 테스트로 1", line2: "" },
@@ -21,6 +21,19 @@ test("탐색 레코드: 위치·예약처·요금(출처·확인일)·주변 화
   assert.equal(areaOf("제주특별자치도"), "제주");
   assert.equal(providerOf("https://yeyak.seoul.go.kr/web/main.do"), "seoul-yeyak");
   assert.equal(providerOf("not a url"), null);
+});
+
+test("소개 문구: 목록엔 한 줄 소개만, 긴 소개는 별도 파일", () => {
+  const withIntro = { ...camp, intro: { line: "  계곡 옆 조용한 캠핑장 ", text: "가".repeat(900), feature: null }, nearby_facilities: ["계곡 물놀이"], gocamping_url: "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7096" };
+  const [r] = buildExploreRecords({ campgrounds: [withIntro] }, null, null);
+  assert.equal(r.line, "계곡 옆 조용한 캠핑장");
+  assert.equal(r.gc_url, withIntro.gocamping_url);
+  const texts = buildExploreTexts({ campgrounds: [withIntro, { ...camp, external_id: { id: "1" } }] });
+  assert.equal(texts["7096"].intro.length, 700);
+  assert.ok(texts["7096"].intro.endsWith("…"));
+  assert.deepEqual(texts["7096"].nearby, ["계곡 물놀이"]);
+  assert.equal("feature" in texts["7096"], false);
+  assert.equal(texts["1"], undefined);
 });
 
 test("예약처별 다가오는 일정", () => {

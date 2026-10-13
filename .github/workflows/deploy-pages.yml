@@ -39,6 +39,18 @@ jobs:
       - run: npm run install:ci
       - run: npm run lint
       - run: npm run build:pages
+      - name: Add self-hosted official images from the media branch
+        # data-sync가 media 브랜치(공식 사진 webp, 한 커밋)를 갱신한다. 있으면 /camp/media/ 로 함께 배포한다.
+        working-directory: .
+        run: |
+          if git ls-remote --exit-code --heads origin media >/dev/null 2>&1; then
+            git fetch --depth=1 origin +media:refs/remotes/origin/media
+            mkdir -p camping-atlas/dist/client/media
+            git archive origin/media | tar -x -C camping-atlas/dist/client/media
+            du -sh camping-atlas/dist/client/media
+          else
+            echo "::notice::media 브랜치가 없어 이미지 없이 배포합니다."
+          fi
       - uses: actions/upload-pages-artifact@v3
         with:
           path: camping-atlas/dist/client

@@ -83,7 +83,9 @@ export function expandRule(rule, from, to) {
     }
     case "MONTHLY_LOTTERY": {
       for (const [y, m] of monthsBetween(from, to)) {
-        const stay = { month: stayMonth(y, m, s.stay_month_offset ?? 1) };
+        // apply_months: 접수가 열리는 달만(예: 국립공원은 짝수 달). 없으면 매월.
+        if (Array.isArray(s.apply_months) && !s.apply_months.includes(m)) continue;
+        const stay = { month: stayMonth(y, m, s.stay_month_offset ?? 1), ...(s.stay_months_span ? { months: s.stay_months_span } : {}) };
         push(baseEvent(rule, EVENT_TYPES.LOTTERY_APPLY_START, at(y, m, s.apply_start_day, s.apply_start_time), { stay, time_known: s.apply_start_time != null }));
         push(baseEvent(rule, EVENT_TYPES.LOTTERY_APPLY_END, at(y, m, s.apply_end_day, s.apply_end_time), { stay, time_known: s.apply_end_time != null, note: s.apply_end_note ?? null }));
         if (s.result_day != null) {

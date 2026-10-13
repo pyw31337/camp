@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       geocode_max_calls:
-        description: "공중화장실 주소 지오코딩 최대 호출 수 (초기 전량 적재는 30000, 일상 실행은 2000 권장)"
+        description: "공중화장실 주소 지오코딩 최대 호출 수 (기본 30000, 카카오 일일 한도 안)"
         required: false
-        default: "2000"
+        default: "30000"
         type: string
   # 같은 저장소의 PR에서도 실행해 인증키·수집기를 병합 전에 확인한다(포크 PR에는 Secret이 전달되지 않음).
   pull_request:
@@ -91,23 +91,36 @@ jobs:
             pipeline/.cache/osm-toilets.json
             pipeline/.cache/osm-rest-stops.json
             pipeline/.cache/tour-intro.json
-          key: source-cache-v3-${{ github.run_id }}
-          restore-keys: source-cache-v3-
+            pipeline/.cache/tour-pois.json
+            pipeline/.cache/osm-shops.json
+          key: source-cache-v4-${{ github.run_id }}
+          restore-keys: |
+            source-cache-v4-
+            source-cache-v3-
       - name: Sync public toilets and link to campgrounds
         continue-on-error: true
         run: npm run sync:toilets
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
-          # 예약 실행은 캐시를 조금씩 채워 API 한도·러너 시간을 예측 가능하게 한다.
-          # 최초 전량 적재가 필요할 때만 workflow_dispatch 입력으로 30000을 명시한다.
-          GEOCODE_MAX_CALLS: ${{ github.event_name == 'workflow_dispatch' && inputs.geocode_max_calls || '2000' }}
+          # 카카오 로컬 일일 한도는 앱 하나에 공유된다. PR 실행은 캐시만 쓰고(0), main 예약·수동 실행이 채운다.
+          # 캐시는 브랜치별로 분리돼 main은 PR 브랜치 캐시를 못 읽으므로, main이 하루 3만 건까지 채운다.
+          GEOCODE_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || (github.event_name == 'workflow_dispatch' && inputs.geocode_max_calls) || '30000' }}
       - name: Sync rest areas and drowsy shelters
         continue-on-error: true
         run: npm run sync:rest-stops
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
           EX_API_KEY: ${{ secrets.EX_API_KEY }}
+      - name: Collect nearby context (TourAPI tourism/food, OSM marts/fuel/medical, rest stops)
+        # TourAPI는 콘텐츠 유형별 대량 페이지(7일 캐시), Overpass는 0.5° 타일(14일 캐시, 타일 단위로 이어서)로 모은다.
+        run: npm run sync:nearby
+        continue-on-error: true
+        timeout-minutes: 20
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+          NEARBY_TOUR_MAX_CALLS: '150'
+          NEARBY_OSM_TIME_BUDGET_MS: '480000'
       - name: Discover free public camp sites (candidates only)
         continue-on-error: true
         run: npm run discover:public-free
@@ -119,6 +132,58 @@ jobs:
         continue-on-error: true
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+      - name: Collect Seoul public reservation status (camping)
+        # 서울시·자치구 공영 캠핑장 예약 상품의 접수 상태·접수 기간(서울 열린데이터광장). 키 없으면 건너뜀.
+        run: npm run sync:seoul-yeyak
+        continue-on-error: true
+        env:
+          SEOUL_OPEN_API_KEY: ${{ secrets.SEOUL_OPEN_API_KEY }}
+      - name: Restore GoCamping imageList cache
+        uses: actions/cache@v4
+        with:
+          path: pipeline/.cache/gocamping-images.json
+          key: gocamping-images-v1-${{ github.run_id }}
+          restore-keys: gocamping-images-v1-
+      - name: Check out the media branch (orphan, images only)
+        # 공식 사진 webp는 main 이력에 넣지 않고 한 커밋짜리 media 브랜치에 둔다(docs/IMAGE_PIPELINE.md).
+        id: media
+        continue-on-error: true
+        working-directory: .
+        run: |
+          MEDIA_DIR="$RUNNER_TEMP/media"
+          if git ls-remote --exit-code --heads origin media >/dev/null 2>&1; then
+            git fetch --depth=1 origin +media:refs/remotes/origin/media
+            git worktree add -B media "$MEDIA_DIR" origin/media
+          else
+            git worktree add --detach "$MEDIA_DIR"
+            git -C "$MEDIA_DIR" switch --orphan media
+          fi
+          echo "dir=$MEDIA_DIR" >> "$GITHUB_OUTPUT"
+      - name: Sync official campground images (webp)
+        id: images
+        if: steps.media.outcome == 'success'
+        continue-on-error: true
+        run: npm run sync:images
+        env:
+          MEDIA_DIR: ${{ steps.media.outputs.dir }}
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+          IMAGE_LIST_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '500' }}
+          IMAGE_MAX_DOWNLOADS: ${{ github.event_name == 'pull_request' && '20' || '1500' }}
+          IMAGE_MAX_PER_CAMP: ${{ vars.IMAGE_MAX_PER_CAMP || '3' }}
+          IMAGE_MAX_BYTES: '12000000'
+      - name: Publish the media branch (single commit, force push)
+        # 소유자 요청(2026-10-13)으로 공식 사진을 자체 저장한다. 권리자 요청 시 media 브랜치에서 지우고 재배포한다.
+        if: steps.images.outcome == 'success' && github.event_name != 'pull_request' && vars.GOCAMPING_IMAGES_PUBLISH != 'false'
+        working-directory: ${{ steps.media.outputs.dir }}
+        run: |
+          git add -A
+          if git rev-parse -q --verify HEAD >/dev/null && git diff --cached --quiet; then echo "이미지 변경 없음."; exit 0; fi
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          MSG="chore(media): official campground images $(date -u +%Y-%m-%dT%H:%MZ)"
+          if git rev-parse -q --verify HEAD >/dev/null; then git commit -q --amend -m "$MSG"; else git commit -q -m "$MSG"; fi
+          git push --force origin media
+          du -sh --exclude=.git .
       - name: Collect campground licences (LOCALDATA) and match to GoCamping
         # 키 불필요. 고캠핑에 없는 숨은 캠핑장 후보, 인허가 폐업인데 고캠핑에 남은 곳, 시설 규모 등 인허가 세부 정보.
         run: npm run sync:localdata-campgrounds
@@ -166,7 +231,8 @@ jobs:
         run: |
           npm run build:explore
           cd .. && node scripts/publish-explorer-pages.mjs
-          if [ "${{ github.event_name }}" = "pull_request" ] || git diff --quiet -- camping-atlas/public/explore; then
+          # 처음 생기는 폴더(추적 안 된 파일)도 변경으로 잡도록 git status를 쓴다.
+          if [ "${{ github.event_name }}" = "pull_request" ] || [ -z "$(git status --porcelain -- camping-atlas/public/explore)" ]; then
             echo "탐색 화면 커밋 없음(PR 또는 변경 없음)."; exit 0
           fi
           git config user.name "moyeora-camping-data-bot"
@@ -177,6 +243,8 @@ jobs:
           git push
         env:
           KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY || secrets.KAKAO_JS_KEY }}
+          MEDIA_DIR: ${{ steps.media.outputs.dir }}
+          GISCUS_CONFIG: ${{ vars.GISCUS_CONFIG }}
       - uses: actions/upload-artifact@v4
         with:
           name: pipeline-out

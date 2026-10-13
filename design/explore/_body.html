@@ -1,6 +1,7 @@
 <header class="top"><div class="wrap">
   <a class="logo" href="./"><span class="logo-mark"><svg class="i" aria-hidden="true"><use href="#t-tent"/></svg></span>모여라 캠핑</a>
   <nav class="top-links">
+    <button class="fs-btn" id="fsBtn" type="button" aria-label="글자 크기 바꾸기">가<small id="fsLabel">보통</small></button>
     <a href="#" id="nearBtn"><svg class="i i-sm" aria-hidden="true"><use href="#l-locate-fixed"/></svg><span class="l-only">내 주변</span></a>
     <a href="../"><svg class="i i-sm" aria-hidden="true"><use href="#l-calendar"/></svg><span class="l-only">예약 오픈 일정</span></a>
   </nav>
@@ -8,12 +9,14 @@
 <div class="bar"><div class="wrap">
   <label class="q"><svg class="i" aria-hidden="true"><use href="#l-search"/></svg><input id="q" type="search" placeholder="캠핑장 이름·지역 검색" autocomplete="off" enterkeyhint="search"><button class="clear" id="clearQ" type="button" aria-label="검색어 지우기"><svg class="i i-sm" aria-hidden="true"><use href="#l-x"/></svg></button></label>
   <div class="chips" id="areaChips"></div>
+  <div class="chips" id="sggChips" hidden></div>
   <div class="chips" id="filterChips"></div>
 </div></div>
 <main class="layout">
   <section class="list-col" aria-label="캠핑장 목록">
     <div class="results-head"><h1 id="resultTitle">캠핑장 불러오는 중</h1><span class="faint" id="resultSub"></span>
       <label class="sort"><svg class="i i-sm" aria-hidden="true"><use href="#l-arrow-up-down"/></svg><select id="sort" aria-label="정렬"><option value="best">추천순</option><option value="name">이름순</option><option value="near">가까운 순</option><option value="fee">요금 낮은 순</option></select></label></div>
+    <div id="hub"></div>
     <div class="cards" id="cards"></div>
     <button class="more-btn" id="moreBtn" type="button" hidden></button>
   </section>
