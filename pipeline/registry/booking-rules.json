@@ -9,7 +9,10 @@
       "official_url": "https://reservation.knps.or.kr/",
       "operator_type": "NATIONAL_PARK",
       "integration": "OFFICIAL_REDIRECT",
-      "also_sold_via": ["카카오 예약", "NH올원뱅크"],
+      "also_sold_via": [
+        "카카오 예약",
+        "NH올원뱅크"
+      ],
       "notes": "공지 일부(연간 예약 일정표)가 이미지라 사람이 옮겨 적고 확인일을 갱신한다. 시설별 공사·용수 제한 판매중지 공지가 수시로 올라온다."
     },
     {
@@ -34,25 +37,34 @@
       "id": "knps-campground-lottery",
       "provider_id": "knps",
       "label": "국립공원 야영장 추첨 접수",
-      "summary": "이용하려는 달의 2개월 전 1일부터 5일 오전까지 신청, 5일 오후 결과 발표. 취소로 생긴 잔여 자리는 예약시스템에서 실시간 선착순.",
-      "applies_to": "국립공원 야영장 전체(보도 기준 44~47곳, 수치 재확인 필요)",
+      "summary": "짝수 달 1일 10:00부터 6일 10:00까지 다음 두 달 이용분 추첨 신청, 6일 16:00 발표, 7일 22:00까지 결제, 남은 자리는 8일 10:00부터 선착순. 1인 월 4건·1회 2박까지.",
+      "applies_to": "국립공원 야영장(국립공원공단 예약시스템)",
       "schedule": {
         "kind": "MONTHLY_LOTTERY",
+        "apply_months": [
+          2,
+          4,
+          6,
+          8,
+          10,
+          12
+        ],
         "apply_start_day": 1,
-        "apply_start_time": null,
-        "apply_end_day": 5,
-        "apply_end_time": null,
-        "apply_end_note": "5일 오전까지",
-        "result_day": 5,
-        "result_time": null,
-        "result_note": "오후 발표",
-        "stay_month_offset": 2
+        "apply_start_time": "10:00",
+        "apply_end_day": 6,
+        "apply_end_time": "10:00",
+        "result_day": 6,
+        "result_time": "16:00",
+        "stay_month_offset": 1,
+        "stay_months_span": 2,
+        "apply_end_note": "6일 10:00 마감",
+        "result_note": "16:00 발표, 7일 22:00까지 결제, 8일 10:00 잔여 선착순"
       },
       "source": {
-        "url": "https://www.kukinews.com/article/view/kuk202607100055",
-        "title": "쿠키뉴스 2026-07 보도(국립공원공단 전면 추첨제 안내 인용). 공식 연간 예약 일정표(이미지 공지)로 재확인 필요",
-        "checked_at": "2026-10-12",
-        "tier": "C"
+        "url": "https://reservation.knps.or.kr/reservation/selectCampLottery.do",
+        "title": "국립공원공단 예약시스템 추첨제 안내(2026.10 회차: 10.01 10:00~10.06 10:00 신청, 11.01~12.31 이용분) · 예약·환불정책 표",
+        "checked_at": "2026-10-13",
+        "tier": "A"
       }
     },
     {
@@ -66,7 +78,13 @@
         "weekday": 3,
         "time": "09:00",
         "lead_weeks": 6,
-        "stay_day_types": ["SUN", "MON", "TUE", "WED", "THU"]
+        "stay_day_types": [
+          "SUN",
+          "MON",
+          "TUE",
+          "WED",
+          "THU"
+        ]
       },
       "source": {
         "url": "https://www.foresttrip.go.kr/pot/cc/fa/selectFaqBbrssListView.do?bbrssMsterId=BBRSSMSTER_00000002&ctgryCd=&hmpgId=FRIP&nowPage=1&srwrd=%EC%A3%BC%EC%A4%91&twbbsId=",
@@ -104,7 +122,12 @@
       "label": "국립자연휴양림 주말 미결제분 선착순",
       "summary": "추첨 당첨 후 결제되지 않은 객실·야영데크를 선착순으로 다시 연다.",
       "applies_to": "국립 자연휴양림",
-      "schedule": { "kind": "MONTHLY_REOPEN", "day": 15, "time": "09:00", "stay_month_offset": 1 },
+      "schedule": {
+        "kind": "MONTHLY_REOPEN",
+        "day": 15,
+        "time": "09:00",
+        "stay_month_offset": 1
+      },
       "source": {
         "url": "https://www.foresttrip.go.kr/pot/cc/fa/selectFaqBbrssListView.do?bbrssMsterId=BBRSSMSTER_00000002&ctgryCd=&hmpgId=FRIP&nowPage=1&srwrd=%EC%A3%BC%EC%A4%91&twbbsId=",
         "title": "숲나들e 자주 묻는 질문 — 미결제분 전환(일자는 공지 재확인 필요)",
@@ -118,7 +141,9 @@
       "label": "서울시 공영 캠핑장 접수 기간",
       "summary": "서비스별 접수 시작·종료 일시를 공공서비스예약 OpenAPI에서 받아 표시한다. 규칙 계산 대신 API 값을 쓴다.",
       "applies_to": "서울시·자치구 운영 캠핑장",
-      "schedule": { "kind": "API_WINDOW" },
+      "schedule": {
+        "kind": "API_WINDOW"
+      },
       "source": {
         "url": "https://data.seoul.go.kr/",
         "title": "서울 열린데이터광장 — 서울시 공공서비스예약 정보 OpenAPI",

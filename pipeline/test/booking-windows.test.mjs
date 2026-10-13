@@ -13,17 +13,18 @@ test("등록된 예약 규칙은 검증을 통과한다", () => {
   assert.deepEqual(validateRegistry(registry), []);
 });
 
-test("국립공원 추첨: 매월 1일 접수, 5일 발표, 2개월 뒤 이용분", () => {
+test("국립공원 추첨: 짝수 달 1일 10:00~6일 10:00 접수, 6일 16:00 발표, 다음 두 달 이용분", () => {
   const ev = expandRule(rule("knps-campground-lottery"), from, to);
   const starts = ev.filter((e) => e.type === "LOTTERY_APPLY_START");
-  assert.deepEqual(starts.map((e) => e.date), ["2026-11-01", "2026-12-01"]);
+  assert.deepEqual(starts.map((e) => e.date), ["2026-12-01"]);
   assert.equal(starts[0].stay.month, "2027-01");
-  assert.equal(starts[0].time_known, false);
-  const result = ev.find((e) => e.type === "LOTTERY_RESULT" && e.date === "2026-11-05");
-  assert.equal(result.note, "오후 발표");
-  // C 등급 근거는 확인 필요로 표시된다.
-  assert.equal(result.needs_verification, true);
-  assert.equal(result.source.tier, "C");
+  assert.equal(starts[0].stay.months, 2);
+  assert.equal(starts[0].time_known, true);
+  const result = ev.find((e) => e.type === "LOTTERY_RESULT" && e.date === "2026-12-06");
+  assert.equal(result.time_known, true);
+  // 공식 원문(A 등급)이라 확인 필요 표시가 없다.
+  assert.equal(result.needs_verification, false);
+  assert.equal(result.source.tier, "A");
 });
 
 test("숲나들e 주중 선착순: 매주 수요일 09:00, 6주 뒤 주를 연다", () => {
