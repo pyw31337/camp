@@ -78,3 +78,25 @@ test("캠핑장별 주변 화장실: 거리순 5곳, 500m·2km 개수, 300m 통�
   assert.equal(byCampground.c2.count_2km, 0);
   assert.deepEqual(stats, { campgrounds: 2, with_toilet_2km: 1, with_toilet_300m: 1 });
 });
+
+import { mergeToiletSources, normalizeOsmToilet } from "../lib/osm-toilets.mjs";
+
+test("OSM 화장실: 좌표·24시간·국외 제외", () => {
+  const t = normalizeOsmToilet({ type: "node", id: 1, lat: 37.55, lon: 126.98, tags: { amenity: "toilets", name: "남산 화장실", opening_hours: "24/7", wheelchair: "yes" } });
+  assert.equal(t.name, "남산 화장실");
+  assert.equal(t.open_24h, true);
+  assert.equal(t.disabled_stalls, 1);
+  assert.equal(normalizeOsmToilet({ type: "node", id: 2, lat: 35.68, lon: 139.76, tags: {} }), null); // 도쿄
+  const w = normalizeOsmToilet({ type: "way", id: 3, center: { lat: 33.5, lon: 126.5 }, tags: {} });
+  assert.equal(w.name, "공중화장실");
+});
+
+test("행안부와 30m 안에서 겹치는 OSM 항목은 버린다", () => {
+  const gov = [{ id: "g1", lat: 37.5, lng: 127 }, { id: "g2", name: "좌표 없음" }];
+  const osm = [{ id: "o1", lat: 37.5001, lng: 127 }, { id: "o2", lat: 37.51, lng: 127 }];
+  const r = mergeToiletSources(gov, osm);
+  assert.equal(r.osm_added, 1);
+  assert.equal(r.osm_duplicates, 1);
+  assert.deepEqual(r.merged.map((t) => t.id), ["g1", "g2", "o2"]);
+  assert.equal(r.merged[0].source, "mois");
+});
