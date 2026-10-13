@@ -8,7 +8,7 @@
 | 1 | 시안 v2 검토·피드백 | Artifact 링크 | 채팅으로 의견 | 15분 | 무료 | 앱 이식 |
 | 2 | ✅ 공공데이터포털 인증키 (2026-10-13 확인: 고캠핑·기상청·TourAPI 정상) | data.go.kr | Secret `DATA_GO_KR_SERVICE_KEY` | 완료 | 무료 | – |
 | 2-1 | 추가 활용신청: **자동차야영장업 조회서비스**(경로 확인됨, 미신청), **전국졸음쉼터표준데이터**(가는 길 안내), **한국도로공사_주유소별 가격,업체 현황**(휴게소 주유 가격), 행정안전부 공중화장실정보 조회서비스 · 완료 확인: 공공시설개방정보, 일반야영장업. 기존: 전국공공시설개방정보표준데이터(무료 시설 발견), 행정안전부 공중화장실정보(화장실 거리) | data.go.kr | 같은 키 | 5분 | 무료 | 무료 캠프 사이트 |
-| 3 | Cloudflare 계정·API 토큰 | dash.cloudflare.com | Secret `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` | 15분 | 무료 | 외부 공개 주소 |
+| 3 | ✅ Cloudflare 계정·API 토큰 (2026-10-13 배포 확인: 미리보기 https://preview.moyeora-6pd.pages.dev) | dash.cloudflare.com | Secret `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` | 완료 | 무료 | – |
 | 4 | PR 병합 | GitHub | – | 5분 | 무료 | 자동 배포 시작 |
 | 5 | 카카오 개발자 앱(지도·길찾기·**화장실 좌표 변환**) | developers.kakao.com | Secret `KAKAO_REST_API_KEY`, Variable `KAKAO_JS_KEY` | 15분 | 무료 한도 | 지도·이동시간·통행료 |
 | 6 | 서울 열린데이터광장 인증키 | data.seoul.go.kr | Secret `SEOUL_OPEN_API_KEY` | 10분 | 무료 | 서울 공영 캠핑장 접수 기간 |
@@ -65,13 +65,13 @@
 5. 끝나면 “3단계 완료”라고 알려 준다 → 배포 워크플로를 실행해 외부 주소를 확인한다.
 
 ## 4. PR 병합
-- 열려 있는 PR을 검토 후 Merge. main에 반영되면 `Deploy to Cloudflare Pages`가 실행되고, 3단계를 마쳤다면 외부 접속 주소가 생긴다.
+- 열려 있는 PR을 검토 후 Merge. 병합 전에는 미리보기 주소(https://preview.moyeora-6pd.pages.dev)만 열리고, 정식 주소 https://moyeora-6pd.pages.dev 는 병합 후 첫 배포부터 열린다(`moyeora.pages.dev`는 다른 사람이 쓰고 있어 Cloudflare가 `-6pd`를 붙였다). main에 반영되면 `Deploy to Cloudflare Pages`가 실행되고, 3단계를 마쳤다면 외부 접속 주소가 생긴다.
 
 ## 5. 카카오 개발자 (지도·길찾기)
 
 > 3단계와 같은 이유로 직접 진행이 필요하다.
 1. https://developers.kakao.com → 내 애플리케이션 → 애플리케이션 추가(이름: 모여라 캠핑).
-2. 앱 설정 → 플랫폼 → Web → 사이트 도메인에 배포 주소(예: `https://moyeora.pages.dev`)와 `http://localhost:5173` 등록.
+2. 앱 설정 → 플랫폼 → Web → 사이트 도메인에 `https://moyeora-6pd.pages.dev`, `https://preview.moyeora-6pd.pages.dev`와 `http://localhost:5173` 등록.
 3. 앱 키에서 **JavaScript 키** → Variable `KAKAO_JS_KEY`(브라우저에 노출되는 키라 Secret이 아니어도 된다. 도메인 제한으로 보호), **REST API 키** → Secret `KAKAO_REST_API_KEY`(길찾기는 서버 함수에서만 호출).
 4. 카카오모빌리티 길찾기 API 이용 조건(무료 호출 한도)을 확인해 알려 주면 그에 맞춰 캐시 정책을 정한다.
 5. REST API 키는 전국 공중화장실 52,255곳의 주소를 좌표로 바꾸는 데에도 쓴다(첫 실행에 최대 3만 건, 이후 매일 바뀐 주소만). 앱 설정 → 제품 설정 → 카카오맵/로컬이 켜져 있어야 한다.

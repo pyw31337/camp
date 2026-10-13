@@ -11,7 +11,7 @@
 - 데이터 모델: PostgreSQL 16+용 초기 스키마가 `db/001_initial_schema.sql`에 있다. 시설·구역·상품·재고·요금·예약 정책·원천 증빙·미디어 권리를 분리한다.
 - 디자인: **시안 v2**가 기준이다. 원본 `design/mockup-v2/src.html` → `design/build.mjs`가 Lucide·Tabler 스프라이트와 Pretendard 서브셋을 인라인해 `index.html` 생성. 사용자 검토 대기. v1은 `design/mockup/`에 참고용으로 남김.
 - 운영 전제: 무료 운영, 로그인 보류. 알림은 `.ics` 구독, 관심 목록은 브라우저 저장. 소유자 작업은 `docs/OWNER_TODO.md`.
-- 배포: `deploy-pages.yml`이 시안 + ics를 `site/`로 조립해 Cloudflare Pages에 배포한다. Secret이 없으면 조립만 하고 건너뛴다.
+- 배포: `deploy-pages.yml`이 시안 + ics를 `site/`로 조립해 Cloudflare Pages 프로젝트 `moyeora`에 배포한다. PR → 미리보기 `https://preview.moyeora-6pd.pages.dev`, main → 정식 `https://moyeora-6pd.pages.dev`(병합 후 첫 배포부터). `moyeora.pages.dev`는 선점돼 Cloudflare가 `-6pd`를 붙였다. Secret이 없으면 조립만 하고 건너뛴다.
 - 파이프라인: `pipeline/`에 고캠핑 수집·정규화, 예약 규칙 레지스트리, 예약 오픈 캘린더 계산기와 테스트가 있다. `data-sync.yml`이 매일 실행되며 키가 없으면 고캠핑 단계는 건너뛴다.
 - 웹: `camping-atlas/`는 공개 Sites 프로젝트 `appgprj_6acc7a065b548191bc002202bbc24d3b`에 연결되어 있으며, 현재 공개 주소는 `https://moyeora-camping.magicsiren32.chatgpt.site`다.
 
@@ -27,6 +27,7 @@
 | v2.1 줄바꿈 | 소유자 피드백: 라벨이 폭 때문에 두 줄이 되는 것 금지, 캐러셀 카드는 한 화면에. 라벨·버튼·칩·제목 nowrap + 좁은 화면 짧은 문구(`.l`/`.s`), 카테고리 모바일 4열 그리드, 조건 바 2×2, 상세 탭 4등분, 오픈 카드 폭을 열 수(4/3/2/1+여백)로 계산하고 PC 좌우 버튼 추가, 화면 이동 시 시트 닫기 버그 수정 | `bash design/checks/run.sh`: 줄바꿈 검사기(텍스트 노드 줄 수) 16개 폭 × 4화면 + 시트 6종: 0건, 말줄임 잘림 0건. 문장 단락만 `data-wrap-ok`로 허용 |
 | 공공데이터 | 키 확인 스크립트(`npm run check:keys`), HTTPS 연결 실패 시 HTTP 재시도, 망 차단은 경고로 처리 | Actions에서 고캠핑 3,118건·기상청·TourAPI 정상, 고캠핑 동기화 성공 |
 | 무료 캠프 사이트 | `registry/free-sites.json`, `lib/free-sites.mjs`, `lib/free-discovery.mjs`, `scripts/discover-public-free.mjs`, 시안 홈 섹션·‘무료’ 필터 | `npm test` 28/28. 고캠핑 소개문 후보 11건은 전부 오탐 → 패턴 강화. 공공시설개방정보 API 경로는 CI 결과로 확인 필요 |
+| 배포 | Cloudflare Secret 등록 후 PR에서도 미리보기 배포하도록 `pull_request` 트리거·`DEPLOY_BRANCH` 추가 | 2026-10-13 실행 [`38328941095`](https://github.com/pyw31337/camp/actions/runs/38328941095) 성공, 16개 파일 업로드. 미리보기 주소 첫 화면·`/ics/all.ics` HTTP 200 확인(새 인증서 발급에 1~2분 걸림) |
 | 휴게소·졸음쉼터 | `lib/rest-stops.mjs`(OSM·졸음쉼터 표준데이터 정규화, 시설별 유·무료 기본값, 공식 우선 병합), `lib/route-stops.mjs`(경로 400m 안 시설을 km 순으로, 120km마다 휴식 제안), `scripts/sync-rest-stops.mjs`, 시안 상세 ‘가는 길’ 탭 | `npm test` 44/44. 줄바꿈·말줄임 검사 0건. 방향(상·하행) 판정과 실제 경로 API는 다음 작업 |
 | 공중화장실 연계 | (CI 실측: OSM 화장실 5,416곳 → 좌표 있는 캠핑장 3,109곳 중 2km 안 935곳, 300m 안 186곳. 행안부 파일은 시도별 `download-all?orgCode=` 경로로 수집하도록 수정) 전국 공중화장실(행안부, 52,255곳) 수집·정규화(EUC-KR·ZIP·HTML 링크 처리), 카카오 지오코딩+캐시, 캠핑장 반경 2km 거리순 5곳 연계, `db/002_public_toilets.sql`(비파괴, 롤백 SQL 포함), 시안 상세 ‘주변 화장실’ | `npm test` 35/35. CI: 파일 서버가 해외 IP에 403 → API 경로 탐색(`npm run probe`) 추가. 카카오 키 등록 전에는 지오코딩·연계 미실행(경고 표시) |
 | 핵심 기능·UX | 핵심 기능 3개와 무학습 원칙, 레퍼런스 5개 분석을 `docs/CORE_FEATURES_UX.md`로 작성 | 레퍼런스는 헤드리스 브라우저로 원본 이미지를 확인(Dribbble는 일반 요청을 차단) |
