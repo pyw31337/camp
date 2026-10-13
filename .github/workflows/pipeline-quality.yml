@@ -26,6 +26,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
+          cache-dependency-path: pipeline/package-lock.json
+      # 사진 중복 거르기 테스트가 package.json의 sharp를 쓴다.
+      - run: npm ci
       - run: npm test
       - run: npm run validate
       - run: npm run calendar -- 90
