@@ -98,9 +98,9 @@ export function normalizeDrowsyShelter(row) {
   };
 }
 
-/** 원천 우선순위: 공식(A) > OSM(B). 같은 종류가 150m 안에서 겹치면 공식 항목을 남긴다. */
+/** 원천 우선순위: 공식(A) > OSM(B). 휴게소 부지가 넓어 휴게소만 500m까지 중복으로 본다. */
 export function mergeStops(official, osm, dedupeM = 150) {
   const idx = new GridIndex(official);
-  const extra = osm.filter((o) => !idx.within(o.lat, o.lng, dedupeM).some((n) => n.point.kind === o.kind || o.kind === "REST_AREA"));
+  const extra = osm.filter((o) => !idx.within(o.lat, o.lng, o.kind === "SERVICE_AREA" ? Math.max(dedupeM, 500) : dedupeM).some((n) => n.point.kind === o.kind || o.kind === "REST_AREA"));
   return { merged: [...official, ...extra], osm_added: extra.length, osm_duplicates: osm.length - extra.length };
 }

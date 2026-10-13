@@ -1,14 +1,16 @@
 // 전국 휴게소·졸음쉼터 수집 → out/rest-stops.json (경로 주변 안내용, 정적 배포)
-// 원천: 전국졸음쉼터표준데이터 API(키·활용신청 시), OpenStreetMap(키 불필요).
+// 원천: 한국도로공사 OpenAPI(휴게소·편의시설·주유 가격), 전국졸음쉼터표준데이터 API, OpenStreetMap.
 import { mkdir, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
-import { overpass } from "../lib/overpass.mjs";
+import { EX_SOURCE, buildExServiceAreas, fetchExAll } from "../lib/ex-rest-areas.mjs";
+import { overpassCached } from "../lib/overpass.mjs";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
 import { FACILITY_FEE, enrichWithNearby, mergeStops, normalizeDrowsyShelter, normalizeOsmStop } from "../lib/rest-stops.mjs";
 
 const out = fileURLToPath(new URL("../out/", import.meta.url));
 await mkdir(out, { recursive: true });
+await mkdir(fileURLToPath(new URL("../.cache/", import.meta.url)), { recursive: true });
 const fetchedAt = toKstIso(nowInKst());
 const warn = (title, msg) => console.log(`::warning title=${title}::${msg}`);
 
@@ -32,12 +34,34 @@ if (key) {
   } catch (e) { warn("졸음쉼터 API 호출 실패", e.message); }
 }
 
+// 한국도로공사 공식 휴게소·편의시설·주유 가격. EX_API_KEY 없이는 수집하지 않아
+// 예제 키나 비공식 값을 실서비스 가격으로 저장하지 않는다.
+let exCount = 0;
+let exFuel = 0;
+if (process.env.EX_API_KEY) {
+  try {
+    const [location, convenience, fuel] = await Promise.all([
+      fetchExAll("locationinfo/locationinfoRest", process.env.EX_API_KEY),
+      fetchExAll("business/conveniServiceArea", process.env.EX_API_KEY),
+      fetchExAll("business/curStateStation", process.env.EX_API_KEY),
+    ]);
+    const serviceAreas = buildExServiceAreas({ location, convenience, fuel, checkedAt: fetchedAt });
+    exCount = serviceAreas.length;
+    exFuel = serviceAreas.filter((stop) => stop.fuel).length;
+    official.push(...serviceAreas);
+    console.log(`한국도로공사 휴게소 ${exCount}곳, 주유 가격 연결 ${exFuel}곳`);
+  } catch (error) { warn("한국도로공사 OpenAPI 호출 실패", error.message); }
+} else {
+  warn("EX_API_KEY 없음", "공식 휴게소·주유 가격 수집을 건너뜁니다. OSM·졸음쉼터 데이터만 사용합니다.");
+}
+
 // 2) OpenStreetMap: 휴게소·쉼터 + 주유소·충전소(휴게소 시설 보강용)
 let osm = [];
 try {
   const q = `[out:json][timeout:240];area["ISO3166-1"="KR"][admin_level=2]->.kr;nwr["highway"~"^(services|rest_area)$"](area.kr)->.s;(.s;nwr(around.s:500)["amenity"~"^(fuel|charging_station)$"];);out center tags;`;
-  const { elements: els, server } = await overpass(q);
-  console.log(`Overpass: ${new URL(server).host}`);
+  const { elements: els, server, stale, error } = await overpassCached(q, fileURLToPath(new URL("../.cache/osm-rest-stops.json", import.meta.url)));
+  if (stale) warn("Overpass 실패 — 직전 결과 사용", `${server} · ${error}`);
+  else console.log(`Overpass: ${new URL(server).host}`);
   const pois = els.filter((e) => e.tags?.amenity).map((e) => ({ lat: e.lat ?? e.center?.lat, lng: e.lon ?? e.center?.lon, kind: e.tags.amenity === "fuel" ? "fuel" : "charging" })).filter((p) => Number.isFinite(p.lat));
   osm = enrichWithNearby(els.filter((e) => e.tags?.highway).map(normalizeOsmStop).filter(Boolean), pois);
   console.log(`OpenStreetMap 휴게소 ${osm.filter((s) => s.kind === "SERVICE_AREA").length}곳, 쉼터 ${osm.filter((s) => s.kind !== "SERVICE_AREA").length}곳 (주유·충전 POI ${pois.length}곳으로 보강)`);
@@ -49,7 +73,9 @@ console.log(`합계 ${merged.length}곳 ${JSON.stringify(byKind)} · OSM 추가 
 await writeFile(`${out}rest-stops.json`, JSON.stringify({
   generated_at: fetchedAt,
   facility_fee_defaults: FACILITY_FEE,
-  notes: "fee: FREE=무료, PAID=유료, null=시설마다 다름(현장·공식 확인). 졸음쉼터는 모두 무료. 주유·충전 가격은 한국도로공사 API 연동 후 표시.",
-  attribution: ["전국졸음쉼터표준데이터(한국도로공사)", "© OpenStreetMap contributors (ODbL)"],
+  notes: "fee: FREE=무료, PAID=유료, null=시설마다 다름(현장·공식 확인). 졸음쉼터는 모두 무료. 주유 가격은 fuel.checked_at 시점의 한국도로공사 공시가.",
+  sources: EX_SOURCE,
+  attribution: ["한국도로공사 고속도로 공공데이터 포털", "전국졸음쉼터표준데이터(한국도로공사)", "© OpenStreetMap contributors (ODbL)"],
+  ex_service_areas: exCount, ex_with_fuel_price: exFuel,
   count: merged.length, by_kind: byKind, stops: merged,
 }));

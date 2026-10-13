@@ -61,6 +61,33 @@ export function normalizeToilet(row) {
   };
 }
 
+/**
+ * 전국공중화장실표준데이터 API(영문 필드) → normalizeToilet이 읽는 한글 머리글로 바꾼다.
+ * 필드명은 표준데이터 명세 기준이며, 모르는 필드는 그대로 둔다. 위도·경도가 있으면 지오코딩 없이 쓴다.
+ */
+const STD_FIELD = [
+  [/^toiletnm$/i, "화장실명"], [/^rdnmadr$/i, "소재지도로명주소"], [/^lnmadr$/i, "소재지지번주소"],
+  [/^(opentime|openhrdetail|opentimedetail)$/i, "개방시간"], [/^toilettype$/i, "구분"], [/^(toiletposstype|ownertype)$/i, "화장실소유구분"],
+  [/^institutionnm$/i, "관리기관명"], [/^phonenumber$/i, "전화번호"], [/^(referencedate|datastddt)$/i, "데이터기준일자"],
+  [/^emgbellyn$/i, "비상벨설치여부"], [/^(enterentcctvyn|cctvyn)$/i, "화장실입구CCTV설치유무"], [/^(dipersexchgposi|diaperexchgyn)$/i, "기저귀교환대유무"],
+];
+
+export function fromStandardApi(item) {
+  const row = {};
+  for (const [key, value] of Object.entries(item)) {
+    const hit = STD_FIELD.find(([pattern]) => pattern.test(key));
+    if (hit) row[hit[1]] = value ?? "";
+    else if (/disabled/i.test(key)) row[`장애인_${key}`] = value ?? "";
+    else if (/child/i.test(key)) row[`어린이_${key}`] = value ?? "";
+    else row[key] = value ?? "";
+  }
+  const toilet = normalizeToilet(row);
+  if (!toilet) return null;
+  const lat = Number(item.latitude), lng = Number(item.longitude);
+  if (!Number.isFinite(toilet.lat) && inKorea(lat, lng)) Object.assign(toilet, { lat, lng, precision: "SOURCE" });
+  return toilet;
+}
+
 /** 지오코딩 질의용 주소(도로명 우선). 괄호 속 부가 설명은 지운다. */
 export function geocodeQuery(t) {
   const base = t.road_address || t.jibun_address || "";
