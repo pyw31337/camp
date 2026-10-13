@@ -41,28 +41,7 @@ jobs:
         run: npm run sync:gocamping
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
-      - name: Probe undocumented data.go.kr endpoints
-        run: npm run probe
-        env:
-          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
-      - name: Restore geocode cache
-        uses: actions/cache@v4
-        with:
-          path: pipeline/.cache/geocode-toilets.json
-          key: geocode-v2-${{ github.run_id }}
-          restore-keys: geocode-v2-
-      - name: Sync public toilets and link to campgrounds
-        run: npm run sync:toilets
-        env:
-          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
-      - name: Sync rest areas and drowsy shelters
-        run: npm run sync:rest-stops
-        env:
-          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
-      - name: Discover free public camp sites (candidates only)
-        run: npm run discover:public-free
-        env:
-          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+      # 전국 기준 시설·예약 캘린더는 부가 시설 수집 실패와 관계없이 먼저 공개한다.
       - name: Build the read-only GitHub Pages data payload
         run: npm run publish:web-catalog
         env:
@@ -82,6 +61,32 @@ jobs:
           git add camping-atlas/public/data
           git commit -m "chore(data): refresh public camping catalog"
           git push
+      - name: Probe undocumented data.go.kr endpoints
+        continue-on-error: true
+        run: npm run probe
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+      - name: Restore geocode cache
+        uses: actions/cache@v4
+        with:
+          path: pipeline/.cache/geocode-toilets.json
+          key: geocode-v2-${{ github.run_id }}
+          restore-keys: geocode-v2-
+      - name: Sync public toilets and link to campgrounds
+        continue-on-error: true
+        run: npm run sync:toilets
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+      - name: Sync rest areas and drowsy shelters
+        continue-on-error: true
+        run: npm run sync:rest-stops
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+      - name: Discover free public camp sites (candidates only)
+        continue-on-error: true
+        run: npm run discover:public-free
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
       - uses: actions/upload-artifact@v4
         with:
           name: pipeline-out
