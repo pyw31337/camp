@@ -1,8 +1,9 @@
 // 전국 휴게소·졸음쉼터 수집 → out/rest-stops.json (경로 주변 안내용, 정적 배포)
-// 원천: 전국졸음쉼터표준데이터 API(키·활용신청 시), OpenStreetMap(키 불필요).
+// 원천: 한국도로공사 OpenAPI(휴게소 좌표·편의시설·주유 가격), 전국졸음쉼터표준데이터 API, OpenStreetMap(키 불필요).
 import { mkdir, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
+import { EX_SOURCE, buildExServiceAreas, fetchExAll } from "../lib/ex-rest-areas.mjs";
 import { overpass } from "../lib/overpass.mjs";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
 import { FACILITY_FEE, enrichWithNearby, mergeStops, normalizeDrowsyShelter, normalizeOsmStop } from "../lib/rest-stops.mjs";
@@ -32,6 +33,21 @@ if (key) {
   } catch (e) { warn("졸음쉼터 API 호출 실패", e.message); }
 }
 
+// 1-2) 한국도로공사 고속도로 휴게소(공식 좌표·편의시설·주유소 현재가)
+// EX_API_KEY(data.ex.co.kr 발급키)가 없으면 포털 예제 키 `test`로 동작을 확인한다(운영 전 발급키로 교체).
+const exKey = process.env.EX_API_KEY || "test";
+if (!process.env.EX_API_KEY) warn("EX_API_KEY 없음", "한국도로공사 예제 키(test)로 호출합니다. docs/OWNER_TODO.md 2-2단계에서 발급키를 등록하세요.");
+let exCount = 0, exFuel = 0;
+try {
+  const location = await fetchExAll("locationinfo/locationinfoRest", exKey);
+  const convenience = await fetchExAll("business/conveniServiceArea", exKey);
+  const fuel = await fetchExAll("business/curStateStation", exKey);
+  const ex = buildExServiceAreas({ location, convenience, fuel, checkedAt: fetchedAt });
+  exCount = ex.length; exFuel = ex.filter((s) => s.fuel).length;
+  console.log(`한국도로공사 휴게소 ${ex.length}곳(좌표 ${location.length}, 편의시설 ${convenience.length}${convenience.skipped ? `·서버 오류로 ${convenience.skipped}건 누락` : ""}), 주유소 ${fuel.length}곳 중 휴게소와 연결 ${exFuel}곳`);
+  official.push(...ex);
+} catch (e) { warn("한국도로공사 OpenAPI 호출 실패", e.message); }
+
 // 2) OpenStreetMap: 휴게소·쉼터 + 주유소·충전소(휴게소 시설 보강용)
 let osm = [];
 try {
@@ -49,7 +65,9 @@ console.log(`합계 ${merged.length}곳 ${JSON.stringify(byKind)} · OSM 추가 
 await writeFile(`${out}rest-stops.json`, JSON.stringify({
   generated_at: fetchedAt,
   facility_fee_defaults: FACILITY_FEE,
-  notes: "fee: FREE=무료, PAID=유료, null=시설마다 다름(현장·공식 확인). 졸음쉼터는 모두 무료. 주유·충전 가격은 한국도로공사 API 연동 후 표시.",
-  attribution: ["전국졸음쉼터표준데이터(한국도로공사)", "© OpenStreetMap contributors (ODbL)"],
+  notes: "fee: FREE=무료, PAID=유료, null=시설마다 다름(현장·공식 확인). 졸음쉼터는 모두 무료. 주유 가격은 fuel.checked_at 시점의 한국도로공사 공시가.",
+  sources: EX_SOURCE,
+  attribution: ["한국도로공사 고속도로 공공데이터 포털", "전국졸음쉼터표준데이터(한국도로공사)", "© OpenStreetMap contributors (ODbL)"],
+  ex_service_areas: exCount, ex_with_fuel_price: exFuel,
   count: merged.length, by_kind: byKind, stops: merged,
 }));

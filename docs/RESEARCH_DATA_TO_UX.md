@@ -100,10 +100,15 @@
 
 | 원천 | 얻는 값 | 접근 | 상태 |
 | --- | --- | --- | --- |
-| [전국졸음쉼터표준데이터](https://www.data.go.kr/data/15028203/standard.do)(한국도로공사) | 졸음쉼터명, 도로·노선·방향, 위도·경도, 주차면수, 화장실 유무, CCTV, 기타 편의시설 | `https://api.data.go.kr/openapi/tn_pubr_public_drowsy_shelter_api`(활용신청) | 수집기 완료, 활용신청 필요 |
+| [전국졸음쉼터표준데이터](https://www.data.go.kr/data/15028203/standard.do)(한국도로공사) | 졸음쉼터명, 도로·노선·방향, 위도·경도, 주차면수, 화장실 유무, CCTV, 기타 편의시설 | `https://api.data.go.kr/openapi/tn_pubr_public_drowsy_shelter_api` | **2026-10-13 CI에서 253곳 수신**(추가 신청 없이 동작) |
 | [행안부 생활안전지도 졸음쉼터](https://data.go.kr/data/15149570/openapi.do) | 고속도로·국도 졸음쉼터, 화장실 유무, CCTV, 기타 편의시설 | LINK형(WMS) | 국도 보강 후보 |
-| [한국도로공사 주유소 가격·업체](https://www.data.go.kr/data/15076636/openapi.do), 고속도로 공공데이터 포털(data.ex.co.kr) | 휴게소 주유소 유종별 실시간 가격, 노선별 휴게시설 | data.go.kr 활용신청 또는 data.ex.co.kr 별도 키 | 다음 단계 |
+| [한국도로공사 고속도로 공공데이터 포털](https://data.ex.co.kr/openapi/basicinfo/openApiInfoM?apiId=0312) `business/curStateStation` | 휴게소 주유소 226곳: 노선·방향, 정유사(AD=알뜰 등), 휘발유·경유·LPG 현재가(“1,864원” 문자열), 전화·주소. **좌표 없음** → 이름(○○주유소↔○○휴게소)으로 휴게소와 연결 | data.ex.co.kr 키(`EX_API_KEY`), 예제 키 `test`로도 응답 | **수집기 완료**(168곳 휴게소와 연결) |
+| 같은 포털 `locationinfo/locationinfoRest` | 휴게소 203곳 좌표(xValue=경도, yValue=위도), 노선, serviceAreaCode | 같은 키 | 수집기 완료 · 공식(A) 휴게소 기준 |
+| 같은 포털 `business/conveniServiceArea` | 휴게소 215곳 편의시설(수유실·샤워실·세탁실·수면실·약국·이발소·농산물판매장·쉼터), 정비소·화물차 휴게소 여부, 입점 브랜드 | 같은 키 | 수집기 완료. **2쪽(99건 단위)이 서버 오류 HTML을 줘** 9건 단위로 다시 받고 실패한 9건만 건너뜀 |
+| 같은 포털 `restinfo/restBestfoodList` | 휴게소별 메뉴·가격 7,255건 | 같은 키 | 후보(대표 메뉴 표시) |
 | OpenStreetMap `highway=services/rest_area`, 주유·충전 POI | 휴게소·쉼터 좌표, 화장실·주유·충전·샤워 태그 | 키 불필요(Overpass) | 수집기 완료 |
+
+**data.ex.co.kr 호출 주의**: 기본 User-Agent는 400(Request Blocked) → 브라우저 UA를 보낸다. 응답이 `code: "SUCCESS"`가 아니거나 HTML이면 재시도 후 작은 쪽으로 나눠 받는다(`pipeline/lib/ex-rest-areas.mjs`). 가격은 `fuel.checked_at`(수집 시각)·`source_url`·등급 A와 함께 저장해 AGENTS 규칙 3을 지킨다.
 
 **유·무료 표시 규칙**: 화장실·수유실·급수대·와이파이·주차·졸음쉼터 = 무료, 주유·전기차 충전·식당·편의점·약국·세탁 = 유료, 샤워실·수면실 = 휴게소마다 달라 원천에 `fee` 정보가 있을 때만 무료/유료를 표시하고 없으면 “확인 필요”.
 

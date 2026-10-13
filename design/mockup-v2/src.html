@@ -334,6 +334,7 @@ h1, h2 { text-wrap: balance; color: var(--heading); }
 .stop.pick .stop-dot { box-shadow: inset 0 0 0 4px var(--green); }
 .stop-body { min-width: 0; display: grid; gap: 6px; }
 .stop-body b { font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 6px; }
+.stop-oil { display: flex; align-items: center; gap: 4px; font-size: 12.5px; color: var(--ink-2); white-space: nowrap; margin-top: -2px; }
 .fac { display: flex; flex-wrap: wrap; gap: 5px; }
 .toilets { display: grid; gap: 8px; }
 .toilet { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 14px; border-radius: var(--r-2); background: var(--surface); }
@@ -827,9 +828,9 @@ const FAC_NAME = { toilet: "화장실", nursing: "수유실", fuel: "주유", ev
 function routeFor(c) {
   const total = Math.max(40, Math.round((parseInt(c.drive[0]) || 1) * 78 + 30));
   const stops = [
-    { name: "덕평자연휴게소 (강릉방향)", km: Math.round(total * 0.22), fac: [["toilet", "FREE"], ["nursing", "FREE"], ["fuel", "PAID"], ["ev", "PAID"], ["food", "PAID"]] },
+    { name: "덕평자연휴게소 (강릉방향)", km: Math.round(total * 0.22), fac: [["toilet", "FREE"], ["nursing", "FREE"], ["fuel", "PAID"], ["ev", "PAID"], ["food", "PAID"]], oil: [1814, 1853] },
     { name: "문막졸음쉼터", km: Math.round(total * 0.46), fac: [["toilet", "FREE"], ["parking", "FREE"]] },
-    { name: "횡성휴게소 (강릉방향)", km: Math.round(total * 0.63), fac: [["toilet", "FREE"], ["fuel", "PAID"], ["food", "PAID"], ["shower", null], ["sleep", null]], pick: true },
+    { name: "횡성휴게소 (강릉방향)", km: Math.round(total * 0.63), fac: [["toilet", "FREE"], ["fuel", "PAID"], ["food", "PAID"], ["shower", null], ["sleep", null]], oil: [1789, 1802], pick: true },
     { name: "평창졸음쉼터", km: Math.round(total * 0.84), fac: [["toilet", "FREE"], ["parking", "FREE"]] },
   ].filter((s) => s.km < total - 5);
   return { km: total, stops };
@@ -1102,8 +1103,8 @@ function renderDetail() {
         </section>
         <section class="d-sec" id="sec-route"><h2>가는 길에 쉬어 갈 곳<span class="faint l" style="font-size:13px;font-weight:600">내 위치 → 캠핑장</span></h2>
           <div class="route-sum"><span>${ic("#l-route", "i-sm")}<b>${esc(c.drive[0])}</b></span><span>${ic("#t-road", "i-sm")}<b class="num">${routeFor(c).km}km</b></span><span>${ic("#t-coin", "i-sm")}통행료 <b class="num">${c.drive[1] ? "₩" + c.drive[1].toLocaleString() : "없음"}</b></span></div>
-          <ol class="stops">${routeFor(c).stops.map((st) => `<li class="stop ${st.pick ? "pick" : ""}"><span class="stop-km num">${st.km}km</span><span class="stop-dot"></span><div class="stop-body"><b>${esc(st.name)}</b><div class="fac">${st.pick ? `<span class="tag tag-dark">${ic("#l-coffee", "i-xs")}여기서 쉬기</span>` : ""}${st.fac.map(([k, fee]) => `<span class="tag ${fee === "FREE" ? "tag-green" : ""}">${ic(FAC_ICON[k], "i-xs")}${FAC_NAME[k]}${fee === "FREE" ? " 무료" : fee === "PAID" ? " 유료" : ""}</span>`).join("")}</div></div></li>`).join("")}</ol>
-          <p class="faint" style="font-size:12.5px;margin-top:8px" data-wrap-ok>졸음쉼터·화장실·수유실은 무료, 주유·충전·식당은 유료. 샤워실·수면실은 휴게소마다 달라 공식 정보로 표시해요 · 전국졸음쉼터표준데이터·OpenStreetMap · 시안 예시값</p>
+          <ol class="stops">${routeFor(c).stops.map((st) => `<li class="stop ${st.pick ? "pick" : ""}"><span class="stop-km num">${st.km}km</span><span class="stop-dot"></span><div class="stop-body"><b>${esc(st.name)}</b>${st.oil ? `<small class="stop-oil num">${ic("#l-fuel", "i-xs")}휘발유 ${st.oil[0].toLocaleString()} · 경유 ${st.oil[1].toLocaleString()}</small>` : ""}<div class="fac">${st.pick ? `<span class="tag tag-dark">${ic("#l-coffee", "i-xs")}여기서 쉬기</span>` : ""}${st.fac.map(([k, fee]) => `<span class="tag ${fee === "FREE" ? "tag-green" : ""}">${ic(FAC_ICON[k], "i-xs")}${FAC_NAME[k]}${fee === "FREE" ? " 무료" : fee === "PAID" ? " 유료" : ""}</span>`).join("")}</div></div></li>`).join("")}</ol>
+          <p class="faint" style="font-size:12.5px;margin-top:8px" data-wrap-ok>졸음쉼터·화장실·수유실은 무료, 주유·충전·식당은 유료. 샤워실·수면실은 휴게소마다 달라 공식 정보로 표시해요 · 기름값(원/L)은 한국도로공사 공시가, 매일 갱신 · 한국도로공사·전국졸음쉼터표준데이터·OpenStreetMap · 시안 예시값</p>
         </section>
         <section class="d-sec" id="sec-near"><h2>주변 화장실<span class="faint l" style="font-size:13px;font-weight:600">반경 2km · 가까운 순</span></h2>
           <div class="toilets">${toiletsFor(c).map((t) => `<div class="toilet"><span class="prov-ic">${ic("#l-toilet")}</span><span class="toilet-main"><b>${esc(t.name)}</b><small>${t.open24 ? "24시간" : esc(t.hours)}${t.disabled ? " · 장애인 칸" : ""}${t.bell ? " · 비상벨" : ""}</small></span><span class="toilet-dist num">${t.m < 1000 ? t.m + "m" : (t.m / 1000).toFixed(1) + "km"}</span></div>`).join("")}</div>

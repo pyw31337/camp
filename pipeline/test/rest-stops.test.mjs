@@ -66,3 +66,43 @@ test("약 2시간(120km)마다 쉬어 갈 곳 제안", () => {
   const marks = suggestBreaks(along, 320);
   assert.deepEqual(marks.map((m) => m.along_km), [115, 240]);
 });
+
+test("한국도로공사 휴게소: 좌표·편의시설은 코드로, 주유소는 이름으로 묶고 가격을 숫자로", async () => {
+  const { buildExServiceAreas } = await import("../lib/ex-rest-areas.mjs");
+  const [a, b] = buildExServiceAreas({
+    location: [
+      { unitName: "기흥(부산)휴게소", routeName: "경부선", xValue: "127.12", yValue: "37.25", serviceAreaCode: "A00002" },
+      { unitName: "목록없음휴게소", routeName: "중부선", xValue: "127.3", yValue: "37.1", serviceAreaCode: "A99999" },
+    ],
+    convenience: [{ serviceAreaCode: "A00002", convenience: "수유실|샤워실|농산물판매장", truckSaYn: "O", maintenanceYn: "X", telNo: "031" }],
+    fuel: [{ serviceAreaName: "기흥(부산)주유소", oilCompany: "AD", lpgYn: "N", gasolinePrice: "1,839원", diselPrice: "1,836원", lpgPrice: "X원" }],
+    checkedAt: "2026-10-13T09:00:00+09:00",
+  });
+  assert.equal(a.direction, "부산");
+  assert.deepEqual(a.facilities.nursing, { available: true, fee: "FREE" });
+  assert.deepEqual(a.facilities.shower, { available: true, fee: null });
+  assert.equal(a.facilities.laundry.available, false);
+  assert.deepEqual(a.extras, ["농산물판매장"]);
+  assert.equal(a.truck_rest, true);
+  assert.deepEqual(a.fuel.prices_krw_per_l, { gasoline: 1839, diesel: 1836, lpg: null });
+  assert.equal(a.fuel.brand, "알뜰주유소");
+  assert.equal(a.fuel.checked_at, "2026-10-13T09:00:00+09:00");
+  assert.equal(b.facilities.nursing.available, null, "편의시설 목록이 없으면 모름");
+  assert.equal(b.fuel, null);
+});
+
+test("한국도로공사 API: 오류 페이지(HTML)를 주는 쪽은 9건씩 다시 받고 실패분만 건너뛴다", async () => {
+  const { fetchExAll } = await import("../lib/ex-rest-areas.mjs");
+  const rows = Array.from({ length: 120 }, (_, i) => ({ i }));
+  const fetchImpl = async (url) => {
+    const u = new URL(url);
+    const size = Number(u.searchParams.get("numOfRows")), page = Number(u.searchParams.get("pageNo"));
+    const from = (page - 1) * size, slice = rows.slice(from, from + size);
+    const bad = slice.some((r) => r.i === 105); // 105번 행이 서버 오류를 일으킨다고 가정
+    return { status: 200, text: async () => bad ? "<!DOCTYPE html><html>" : JSON.stringify({ code: "SUCCESS", count: 120, pageSize: Math.ceil(120 / size), list: slice }) };
+  };
+  const got = await fetchExAll("x", "test", { fetchImpl, pause: 0 });
+  assert.equal(got.length, 111);
+  assert.equal(got.skipped, 9);
+  assert.ok(!got.some((r) => r.i === 105));
+});

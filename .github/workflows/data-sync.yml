@@ -59,6 +59,7 @@ jobs:
         run: npm run sync:rest-stops
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+          EX_API_KEY: ${{ secrets.EX_API_KEY }}
       - name: Discover free public camp sites (candidates only)
         run: npm run discover:public-free
         env:
