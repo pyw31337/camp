@@ -18,6 +18,8 @@
 
 ## Codex 확인 요청 (2026-10-13 오후, Claude)
 
+00. `data-sync.yml` 원자적 발행 단계의 `git pull --rebase -X ours`를 `-X theirs`로 바꿨다. rebase에서 ours는 main 쪽이라, 동시에 돈 이전 실행의 생성물과 겹치면 새 `meta.json`·`campgrounds.json`이 이전 값으로 되돌아가고 `camps/*.json`만 새것으로 섞였다(run 58: 카카오 검색 1,000곳 수집됐으나 공개 meta에 반영 안 됨). 생성물은 최신 실행 결과가 이겨야 한다.
+
 0. 소유자 지시(2026-10-13): Claude는 PR 검사가 통과하면 직접 병합해 자동 배포한다. `app/home.tsx`의 검색 제출·분류 버튼을 탐색 화면(`explore/`)으로 연결했다(시범 상품 목록은 그대로 둠).
 
 1. `deploy-pages.yml`에 `media` 브랜치(공식 사진 webp)를 `dist/client/media`로 펼치는 단계를 더했다. 브랜치가 없으면 건너뛴다.

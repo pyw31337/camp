@@ -280,10 +280,11 @@ jobs:
             echo "공개 데이터 변경 없음."; exit 0
           fi
           git commit -m "chore(data): refresh public camping catalog and explorer"
-          # 오래 실행되는 수집 중 main이 전진할 수 있다. 이 커밋은 생성물만 담으므로
-          # 재배치 충돌은 그 사이 main에 반영된 탐색 화면/데이터(ours)를 우선한다.
-          # 다음 주기에는 최신 main에서 다시 생성하므로 배포를 깨지 않는 것이 우선이다.
-          git pull --rebase -X ours origin "${GITHUB_REF_NAME}"
+          # 오래 실행되는 수집 중 main이 전진할 수 있다. 이 커밋은 생성물만 담는다.
+          # 주의: rebase에서 -X ours는 "main 쪽"을 뜻해, 겹치는 생성물(meta.json 등)이 이전 실행 결과로
+          # 되돌아가고 새 데이터와 섞인다(2026-10-13 후기·영상 반영 누락 원인). 생성물 충돌은
+          # 방금 만든 최신 결과(-X theirs = 재배치되는 이 커밋)를 우선한다.
+          git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"
           git push
         env:
           KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY || secrets.KAKAO_JS_KEY }}
