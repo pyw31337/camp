@@ -3,6 +3,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
+import { overpass } from "../lib/overpass.mjs";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
 import { FACILITY_FEE, enrichWithNearby, mergeStops, normalizeDrowsyShelter, normalizeOsmStop } from "../lib/rest-stops.mjs";
 
@@ -34,10 +35,9 @@ if (key) {
 // 2) OpenStreetMap: 휴게소·쉼터 + 주유소·충전소(휴게소 시설 보강용)
 let osm = [];
 try {
-  const q = `[out:json][timeout:240];area["ISO3166-1"="KR"][admin_level=2]->.kr;(nwr["highway"~"^(services|rest_area)$"](area.kr);nwr["amenity"~"^(fuel|charging_station)$"]["highway"!~"."](area.kr););out center tags;`;
-  const res = await fetch("https://overpass-api.de/api/interpreter", { method: "POST", body: new URLSearchParams({ data: q }), headers: { "User-Agent": "moyeora-camping-pipeline (github.com/pyw31337/camp)" }, signal: AbortSignal.timeout(300000) });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const els = (await res.json()).elements ?? [];
+  const q = `[out:json][timeout:240];area["ISO3166-1"="KR"][admin_level=2]->.kr;nwr["highway"~"^(services|rest_area)$"](area.kr)->.s;(.s;nwr(around.s:500)["amenity"~"^(fuel|charging_station)$"];);out center tags;`;
+  const { elements: els, server } = await overpass(q);
+  console.log(`Overpass: ${new URL(server).host}`);
   const pois = els.filter((e) => e.tags?.amenity).map((e) => ({ lat: e.lat ?? e.center?.lat, lng: e.lon ?? e.center?.lon, kind: e.tags.amenity === "fuel" ? "fuel" : "charging" })).filter((p) => Number.isFinite(p.lat));
   osm = enrichWithNearby(els.filter((e) => e.tags?.highway).map(normalizeOsmStop).filter(Boolean), pois);
   console.log(`OpenStreetMap 휴게소 ${osm.filter((s) => s.kind === "SERVICE_AREA").length}곳, 쉼터 ${osm.filter((s) => s.kind !== "SERVICE_AREA").length}곳 (주유·충전 POI ${pois.length}곳으로 보강)`);

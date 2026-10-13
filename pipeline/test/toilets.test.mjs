@@ -100,3 +100,26 @@ test("행안부와 30m 안에서 겹치는 OSM 항목은 버린다", () => {
   assert.deepEqual(r.merged.map((t) => t.id), ["g1", "g2", "o2"]);
   assert.equal(r.merged[0].source, "mois");
 });
+
+import { isToiletRow } from "../lib/toilets.mjs";
+import { overpass } from "../lib/overpass.mjs";
+
+test("다른 업종 파일(이름·주소만 있음)은 화장실로 받지 않는다", () => {
+  const culture = { "사업장명": "○○문화센터", "도로명주소": "서울 중구 세종대로 1", "문화체육업종명": "공연장", "좌표정보(X)": "198000", "좌표정보(Y)": "452000" };
+  assert.equal(isToiletRow(culture), false);
+  assert.equal(normalizeToilet(culture), null);
+});
+
+test("LOCALDATA 좌표정보(X/Y, EPSG:5174)가 있으면 WGS84로 바꿔 쓴다", () => {
+  const t = normalizeToilet({ "화장실명": "시청앞 화장실", "소재지도로명주소": "서울 중구 세종대로 110", "개방시간": "24시간", "좌표정보(X)": "197836.6", "좌표정보(Y)": "451901.3" });
+  assert.ok(Math.abs(t.lat - 37.5693) < 0.001 && Math.abs(t.lng - 126.9763) < 0.001, `${t.lat},${t.lng}`);
+  assert.equal(t.precision, "EPSG5174");
+});
+
+test("Overpass: 504면 다음 서버로 넘어간다", async () => {
+  const calls = [];
+  const fetchImpl = async (url) => { calls.push(new URL(url).host); return url.includes("a.test") ? { ok: false, status: 504 } : { ok: true, json: async () => ({ elements: [{ id: 1 }] }) }; };
+  const r = await overpass("q", { fetchImpl, servers: ["https://a.test/x", "https://b.test/x"], wait: async () => {} });
+  assert.equal(r.elements.length, 1);
+  assert.deepEqual(calls, ["a.test", "a.test", "b.test"]);
+});
