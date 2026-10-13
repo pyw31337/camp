@@ -96,6 +96,19 @@
 | 보조 원천 | OpenStreetMap `amenity=toilets`(좌표 포함, ODbL, “© OpenStreetMap contributors” 표기). 행안부 항목과 30m 안에서 겹치면 행안부 우선 |
 | 구현 | `pipeline/lib/{csv,toilets,geocode,geo,nearby-toilets}.mjs`, `scripts/sync-toilets.mjs`, `db/002_public_toilets.sql` |
 
+### 2.6 가는 길: 휴게소·졸음쉼터 (2026-10-13)
+
+| 원천 | 얻는 값 | 접근 | 상태 |
+| --- | --- | --- | --- |
+| [전국졸음쉼터표준데이터](https://www.data.go.kr/data/15028203/standard.do)(한국도로공사) | 졸음쉼터명, 도로·노선·방향, 위도·경도, 주차면수, 화장실 유무, CCTV, 기타 편의시설 | `https://api.data.go.kr/openapi/tn_pubr_public_drowsy_shelter_api`(활용신청) | 수집기 완료, 활용신청 필요 |
+| [행안부 생활안전지도 졸음쉼터](https://data.go.kr/data/15149570/openapi.do) | 고속도로·국도 졸음쉼터, 화장실 유무, CCTV, 기타 편의시설 | LINK형(WMS) | 국도 보강 후보 |
+| [한국도로공사 주유소 가격·업체](https://www.data.go.kr/data/15076636/openapi.do), 고속도로 공공데이터 포털(data.ex.co.kr) | 휴게소 주유소 유종별 실시간 가격, 노선별 휴게시설 | data.go.kr 활용신청 또는 data.ex.co.kr 별도 키 | 다음 단계 |
+| OpenStreetMap `highway=services/rest_area`, 주유·충전 POI | 휴게소·쉼터 좌표, 화장실·주유·충전·샤워 태그 | 키 불필요(Overpass) | 수집기 완료 |
+
+**유·무료 표시 규칙**: 화장실·수유실·급수대·와이파이·주차·졸음쉼터 = 무료, 주유·전기차 충전·식당·편의점·약국·세탁 = 유료, 샤워실·수면실 = 휴게소마다 달라 원천에 `fee` 정보가 있을 때만 무료/유료를 표시하고 없으면 “확인 필요”.
+
+**경로 안내**: 경로 폴리라인(카카오모빌리티 길찾기, Worker에서 호출) 400m 안의 시설을 출발지부터 km 순으로 나열하고, 약 120km(2시간)마다 휴게소·졸음쉼터 하나를 ‘여기서 쉬기’로 제안한다. 고속도로 휴게소는 방향별로 따로 있으므로 이름의 ‘(○○방향)’과 진행 방향을 대조해야 한다(방향 판정은 다음 작업). 구현: `pipeline/lib/{rest-stops,route-stops}.mjs`, `scripts/sync-rest-stops.mjs` → `out/rest-stops.json`(정적 배포).
+
 ## 3. 핵심 베네핏 (디자인이 강조할 것)
 
 조사 결과를 사용자 언어로 압축하면 다음 네 가지다. 시안은 이 순서로 화면 위계를 잡는다.

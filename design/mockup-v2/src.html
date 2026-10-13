@@ -93,6 +93,7 @@ h1, h2 { text-wrap: balance; color: var(--heading); }
 .tag { display: inline-flex; align-items: center; gap: 4px; height: 26px; padding: 0 9px; border-radius: 8px; background: var(--surface-2); font-size: 12.5px; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
 .tag-green { background: var(--green-tint); color: var(--green-press); }
 .tag-ember { background: var(--ember-tint); color: var(--ember); }
+.tag-dark { background: var(--forest); color: var(--on-forest); }
 .dday { font-weight: 800; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
 .dday.soon { color: var(--ember); }
 .scroller { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; padding-bottom: 2px; }
@@ -322,6 +323,18 @@ h1, h2 { text-wrap: balance; color: var(--heading); }
 .step.on .step-n { background: var(--green); color: var(--on-green); box-shadow: none; }
 .step b { display: block; font-size: 15px; font-weight: 700; padding-top: 5px; }
 .step p { font-size: 14px; color: var(--ink-2); margin-top: 2px; }
+.route-sum { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.route-sum span { display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 14px; border-radius: 999px; background: var(--surface); font-size: 14px; color: var(--ink-2); white-space: nowrap; }
+.route-sum b { color: var(--ink); font-weight: 750; }
+.stops { display: grid; gap: 0; }
+.stop { display: grid; grid-template-columns: 54px 18px minmax(0, 1fr); gap: 10px; position: relative; padding-bottom: 14px; }
+.stop:not(:last-child)::after { content: ""; position: absolute; left: 71px; top: 18px; bottom: 0; width: 2px; background: var(--line); }
+.stop-km { font-size: 13.5px; font-weight: 750; color: var(--ink-2); text-align: right; padding-top: 1px; white-space: nowrap; }
+.stop-dot { width: 14px; height: 14px; margin-top: 3px; border-radius: 50%; background: var(--surface); box-shadow: inset 0 0 0 3px var(--line); position: relative; z-index: 1; }
+.stop.pick .stop-dot { box-shadow: inset 0 0 0 4px var(--green); }
+.stop-body { min-width: 0; display: grid; gap: 6px; }
+.stop-body b { font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 6px; }
+.fac { display: flex; flex-wrap: wrap; gap: 5px; }
 .toilets { display: grid; gap: 8px; }
 .toilet { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 14px; border-radius: var(--r-2); background: var(--surface); }
 .toilet .prov-ic { width: 40px; height: 40px; }
@@ -808,6 +821,19 @@ function toiletsFor(c) {
   const names = ["주차장 공중화장실", "마을회관 개방화장실", "계곡 입구 화장실", "체육공원 화장실"];
   return names.slice(0, 3).map((n, i) => ({ name: n, m: [140, 420, 860][i] + (seed % 7) * 10 * (i + 1), open24: i === 0, hours: "06:00~22:00", disabled: i !== 1, bell: i === 0 }));
 }
+// 경로 주변 휴게소·졸음쉼터(예시). 서비스에서는 out/rest-stops.json + 카카오모빌리티 경로로 계산(pipeline/lib/route-stops.mjs).
+const FAC_ICON = { toilet: "#l-toilet", nursing: "#l-baby", fuel: "#l-fuel", ev: "#l-plug-zap", food: "#t-tools-kitchen-2", shower: "#l-shower-head", sleep: "#l-bed-double", parking: "#l-square-parking" };
+const FAC_NAME = { toilet: "화장실", nursing: "수유실", fuel: "주유", ev: "충전", food: "식당", shower: "샤워", sleep: "수면실", parking: "주차" };
+function routeFor(c) {
+  const total = Math.max(40, Math.round((parseInt(c.drive[0]) || 1) * 78 + 30));
+  const stops = [
+    { name: "덕평자연휴게소 (강릉방향)", km: Math.round(total * 0.22), fac: [["toilet", "FREE"], ["nursing", "FREE"], ["fuel", "PAID"], ["ev", "PAID"], ["food", "PAID"]] },
+    { name: "문막졸음쉼터", km: Math.round(total * 0.46), fac: [["toilet", "FREE"], ["parking", "FREE"]] },
+    { name: "횡성휴게소 (강릉방향)", km: Math.round(total * 0.63), fac: [["toilet", "FREE"], ["fuel", "PAID"], ["food", "PAID"], ["shower", null], ["sleep", null]], pick: true },
+    { name: "평창졸음쉼터", km: Math.round(total * 0.84), fac: [["toilet", "FREE"], ["parking", "FREE"]] },
+  ].filter((s) => s.km < total - 5);
+  return { km: total, stops };
+}
 const CHECK_ICON = { fee: "#t-coin-off", cooking: "#l-cooking-pot", toilet: "#l-toilet" };
 const CHECK_NAME = { fee: "무료", cooking: "취사", toilet: "화장실" };
 function freeCard(f) {
@@ -1037,6 +1063,7 @@ function renderDetail() {
           <button type="button" role="tab" data-jump="sec-over" aria-selected="true">개요</button>
           <button type="button" role="tab" data-jump="sec-site" aria-selected="false">사이트</button>
           <button type="button" role="tab" data-jump="sec-book" aria-selected="false">예약</button>
+          <button type="button" role="tab" data-jump="sec-route" aria-selected="false">가는 길</button>
           <button type="button" role="tab" data-jump="sec-near" aria-selected="false">주변</button>
         </div>
         <section class="d-sec" id="sec-over"><h2>한눈에 보기</h2>
@@ -1072,6 +1099,11 @@ function renderDetail() {
         <section class="d-sec" id="sec-book"><h2>예약 방법</h2>
           <ol class="steps">${steps.map(([t, d], i) => `<li class="step ${i === curStep ? "on" : ""}"><span class="step-n">${i + 1}</span><div><b>${esc(t)}</b><p>${esc(d)}</p></div></li>`).join("")}</ol>
           ${p ? `<p class="note">${ic("#l-info", "i-sm")}<span data-wrap-ok>${esc(p.name)}를 쓰는 다른 캠핑장도 같은 규칙을 따릅니다. 시설별 예외는 공지를 확인하세요.</span></p>` : ""}
+        </section>
+        <section class="d-sec" id="sec-route"><h2>가는 길에 쉬어 갈 곳<span class="faint l" style="font-size:13px;font-weight:600">내 위치 → 캠핑장</span></h2>
+          <div class="route-sum"><span>${ic("#l-route", "i-sm")}<b>${esc(c.drive[0])}</b></span><span>${ic("#t-road", "i-sm")}<b class="num">${routeFor(c).km}km</b></span><span>${ic("#t-coin", "i-sm")}통행료 <b class="num">${c.drive[1] ? "₩" + c.drive[1].toLocaleString() : "없음"}</b></span></div>
+          <ol class="stops">${routeFor(c).stops.map((st) => `<li class="stop ${st.pick ? "pick" : ""}"><span class="stop-km num">${st.km}km</span><span class="stop-dot"></span><div class="stop-body"><b>${esc(st.name)}</b><div class="fac">${st.pick ? `<span class="tag tag-dark">${ic("#l-coffee", "i-xs")}여기서 쉬기</span>` : ""}${st.fac.map(([k, fee]) => `<span class="tag ${fee === "FREE" ? "tag-green" : ""}">${ic(FAC_ICON[k], "i-xs")}${FAC_NAME[k]}${fee === "FREE" ? " 무료" : fee === "PAID" ? " 유료" : ""}</span>`).join("")}</div></div></li>`).join("")}</ol>
+          <p class="faint" style="font-size:12.5px;margin-top:8px" data-wrap-ok>졸음쉼터·화장실·수유실은 무료, 주유·충전·식당은 유료. 샤워실·수면실은 휴게소마다 달라 공식 정보로 표시해요 · 전국졸음쉼터표준데이터·OpenStreetMap · 시안 예시값</p>
         </section>
         <section class="d-sec" id="sec-near"><h2>주변 화장실<span class="faint l" style="font-size:13px;font-weight:600">반경 2km · 가까운 순</span></h2>
           <div class="toilets">${toiletsFor(c).map((t) => `<div class="toilet"><span class="prov-ic">${ic("#l-toilet")}</span><span class="toilet-main"><b>${esc(t.name)}</b><small>${t.open24 ? "24시간" : esc(t.hours)}${t.disabled ? " · 장애인 칸" : ""}${t.bell ? " · 비상벨" : ""}</small></span><span class="toilet-dist num">${t.m < 1000 ? t.m + "m" : (t.m / 1000).toFixed(1) + "km"}</span></div>`).join("")}</div>
