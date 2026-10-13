@@ -9,7 +9,15 @@ body { min-height: 100dvh; }
 .top-links a:hover { background: var(--surface); color: var(--ink); }
 
 .bar { position: sticky; top: var(--top, 64px); z-index: 30; background: var(--bg); padding: 12px 0 10px; border-bottom: 1px solid var(--line); }
-.bar .wrap { display: grid; gap: 10px; }
+.bar .wrap { display: grid; gap: 10px; max-width: none; padding-inline: clamp(16px, 2.5vw, 40px); }
+.qrow { display: flex; gap: 8px; min-width: 0; }
+.qrow .q { flex: 1; }
+.near-btn { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 3rem; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow-1); color: var(--ink); font-weight: 800; font-size: var(--fs-base); white-space: nowrap; }
+.near-btn[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--on-forest); }
+.near-btn.busy svg { animation: near-spin 1s linear infinite; }
+@keyframes near-spin { to { transform: rotate(360deg); } }
+.here-dot { display: block; width: 18px; height: 18px; border-radius: 50%; background: #2f7fd8; border: 3px solid #fff; box-shadow: 0 0 0 6px rgba(47,127,216,.25), 0 2px 6px rgba(0,0,0,.3); }
+@media (max-width: 420px) { .near-btn { padding: 0 13px; } .near-btn span { display: none; } }
 .q { display: flex; align-items: center; gap: 10px; min-height: 3rem; padding: 0 14px; border-radius: 999px; background: var(--surface); box-shadow: var(--shadow-1); border: 1px solid var(--line); min-width: 0; }
 .q input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-size: var(--fs-md); }
 .q .clear { color: var(--ink-3); display: grid; place-items: center; }
@@ -20,7 +28,10 @@ body { min-height: 100dvh; }
 .pill .num { color: inherit; opacity: .7; font-weight: 700; }
 .sep { width: 1px; background: var(--line); flex: none; margin: 6px 2px; }
 
+/* 캠핑장 찾기는 브라우저 가로폭을 모두 쓴다: 넓을수록 목록 카드가 여러 열로 늘고 지도는 오른쪽에 고정 폭 */
 .layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 0; }
+@media (min-width: 1200px) { .layout { grid-template-columns: minmax(0, 1fr) clamp(420px, 34vw, 720px); } .cards { grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); } }
+@media (min-width: 1200px) { .list-col { padding-inline: clamp(16px, 2.5vw, 40px); } }
 .list-col { padding: 16px var(--gutter) 96px; min-width: 0; }
 .map-col { position: sticky; top: var(--head, 172px); height: calc(100dvh - var(--head, 172px)); border-left: 1px solid var(--line); background: var(--surface-2); }
 #map { width: 100%; height: 100%; }
@@ -404,3 +415,12 @@ details.sub summary h4 { min-width: 0; }
 .layout-grid em { position: absolute; left: 6px; top: 6px; padding: 2px 7px; border-radius: 999px; background: rgba(0,0,0,.6); color: #fff; font-size: var(--fs-2xs); font-style: normal; font-weight: 700; }
 .layout-posts { display: grid; gap: 4px; }
 .layout-posts .link-row { display: flex; gap: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* 후기 속 요금: 시기별 대표 구간(N만원대) */
+.price-bands { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 10px; }
+.price-bands span { display: grid; gap: 1px; min-width: 6.5rem; padding: 8px 12px; border-radius: 12px; background: var(--surface-2); }
+.price-bands small { color: var(--ink-2); font-size: var(--fs-2xs); font-weight: 700; }
+.price-bands b { font-size: var(--fs-md); font-weight: 900; color: var(--ink); }
+.price-bands i { color: var(--ink-3); font-size: var(--fs-2xs); font-style: normal; }
+/* 공식 사진이 없을 때 쓰는 검색 사진 썸네일(Daum 검색 제공) */
+.thumb.snap { position: relative; }
+.snap-tag { position: absolute; left: 4px; bottom: 4px; padding: 1px 6px; border-radius: 999px; background: rgba(0,0,0,.6); color: #fff; font-size: var(--fs-2xs); font-style: normal; font-weight: 700; white-space: nowrap; }

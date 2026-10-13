@@ -5,9 +5,10 @@
 import {
   ArrowRight, BadgeCheck, Bell, CalendarClock, CalendarDays, Car, ChevronRight,
   CircleHelp, Database, ExternalLink, Heart, ImageIcon, Info, MapPin,
-  BookOpen, House, LocateFixed, Search, Sparkles, Tent, TentTree, Trees, UsersRound, X,
+  Search, TentTree, Trees, UsersRound, X,
 } from "lucide-react";
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { SITE_HEADER_HTML, SITE_HEADER_JS, SITE_TABBAR_HTML } from "./site-header.generated";
+import { FormEvent, memo, useEffect, useMemo, useState } from "react";
 
 type CampType = "오토캠핑" | "카라반";
 type Camp = {
@@ -16,22 +17,12 @@ type Camp = {
   imagePageUrl: string; reservationUrl: string; noticeUrl: string;
   officialUpdate: string; officialUpdateDate: string; observedAt: string;
 };
-type FsKey = "s" | "m" | "l" | "xl";
-const FS_ORDER: FsKey[] = ["s", "m", "l", "xl"];
-const FS_LABEL: Record<FsKey, string> = { s: "작게", m: "보통", l: "크게", xl: "아주 크게" };
+// 캠핑장별 예약 오픈(pipeline build:explore → explore/data/openings.json)
+type Opening = { at: string; tk: boolean; id: string; name: string; where: string; ph: string | null; kind: string; label: string; stay: string | null; platform: string | null; url: string | null; src: string | null; unv: boolean };
 type FeaturedCamp = { id: string; name: string; where: string; line: string | null; ph: string; rt: boolean };
 type FeaturedTheme = { id: string; label: string; desc: string; count: number; camps: FeaturedCamp[] };
 type Featured = { total: number; photo_count: number; themes: FeaturedTheme[] };
 const largeOfficialPhoto = (path: string) => path.replace(/-t\.webp(?=$|[?#])/, "-l.webp");
-type BookingEvent = {
-  id: string; dday: string; action: string; dateTime: string; label: string;
-  stay: string; provider: string; sourceUrl: string; checkedAt: string; needsVerification: boolean;
-};
-type PipelineEvent = {
-  id?: string; type?: string; at?: string; date?: string; time_known?: boolean;
-  label?: string; stay?: { from?: string; to?: string; month?: string };
-  source?: { url?: string; checked_at?: string }; needs_verification?: boolean;
-};
 type Catalog = {
   generated_at: string;
   counts: { opening_events: number; gocamping_records: number | null; official_pilot_products: number };
@@ -42,7 +33,6 @@ const FACILITY_URL = "https://www.gpfmc.or.kr/page/selectPage.do?muNo=649";
 const RESERVATION_URL = "https://www.gpfmc.or.kr/page/selectPage.do?muNo=707";
 const NOTICE_URL = "https://www.gpfmc.or.kr/board/facList.do?muGpNo=424&muNo=648&stNo=11";
 const FORESTTRIP_URL = "https://www.foresttrip.go.kr/";
-const FORESTTRIP_RULE_URL = "https://www.foresttrip.go.kr/pot/cc/fa/selectFaqBbrssListView.do?bbrssMsterId=BBRSSMSTER_00000002&ctgryCd=&hmpgId=FRIP&nowPage=1&srwrd=%EC%A3%BC%EC%A4%91&twbbsId=";
 const KNPS_URL = "https://reservation.knps.or.kr/";
 const SEOUL_YEYAK_URL = "https://yeyak.seoul.go.kr/";
 
@@ -51,13 +41,6 @@ const officialProducts: Camp[] = [
   { id: "jarasum-site-b", campground: "자라섬캠핑장", product: "사이트 B", region: "경기 가평", type: "오토캠핑", capacity: "공식 예약 화면에서 확인", size: "데크 4m × 4m 안내", price: "공식 예약 화면에서 확인", image: "https://www.gpfmc.or.kr/file/ckeditor/ckImgSubmit.do?uid=ef2aa11f-0dda-4662-80aa-5140c0c23f40&fileName=ckImgSubmit.jpg", imageAlt: "자라섬캠핑장 사이트 B 데크", imagePageUrl: FACILITY_URL, reservationUrl: RESERVATION_URL, noticeUrl: NOTICE_URL, officialUpdate: "11월 예약 일정 및 이용안내사항", officialUpdateDate: "2026.10.06", observedAt: "2026.10.13" },
   { id: "jarasum-caravan-c", campground: "자라섬캠핑장", product: "카라반 C", region: "경기 가평", type: "카라반", capacity: "객실별 정원 확인", size: "공식 시설 안내 참고", price: "공식 예약 화면에서 확인", image: "https://www.gpfmc.or.kr/file/ckeditor/ckImgSubmit.do?uid=140050b6-09a9-4416-ab12-ac71dc28f202&fileName=tour4_04_02_02_02_01.jpg", imageAlt: "자라섬캠핑장 카라반 C 외부 전경", imagePageUrl: FACILITY_URL, reservationUrl: RESERVATION_URL, noticeUrl: NOTICE_URL, officialUpdate: "11월 예약 일정 및 이용안내사항", officialUpdateDate: "2026.10.06", observedAt: "2026.10.13" },
   { id: "jarasum-caravan-b", campground: "자라섬캠핑장", product: "카라반 B", region: "경기 가평", type: "카라반", capacity: "객실별 정원 확인", size: "공식 시설 안내 참고", price: "공식 예약 화면에서 확인", image: "https://www.gpfmc.or.kr/file/ckeditor/ckImgSubmit.do?uid=68cfcb78-3961-408b-8fb2-d809c07c98a4&fileName=05.jpg", imageAlt: "자라섬캠핑장 카라반 B 내부", imagePageUrl: FACILITY_URL, reservationUrl: RESERVATION_URL, noticeUrl: NOTICE_URL, officialUpdate: "11월 예약 일정 및 이용안내사항", officialUpdateDate: "2026.10.06", observedAt: "2026.10.13" },
-];
-
-const fallbackEvents: BookingEvent[] = [
-  { id: "weekday-open", dday: "D-1", action: "선착순 오픈", dateTime: "10.14(수) · 09:00", label: "국립자연휴양림 주중", stay: "11.23–11.29 주중", provider: "숲나들e", sourceUrl: FORESTTRIP_RULE_URL, checkedAt: "2026.10.12", needsVerification: false },
-  { id: "weekend-reopen", dday: "D-2", action: "잔여분 오픈", dateTime: "10.15(목) · 09:00", label: "숲나들e 주말 잔여분", stay: "11월 주말 이용분", provider: "숲나들e", sourceUrl: FORESTTRIP_RULE_URL, checkedAt: "2026.10.12", needsVerification: true },
-  { id: "next-weekday", dday: "D-8", action: "선착순 오픈", dateTime: "10.21(수) · 09:00", label: "국립자연휴양림 주중", stay: "11.30–12.06 주중", provider: "숲나들e", sourceUrl: FORESTTRIP_RULE_URL, checkedAt: "2026.10.12", needsVerification: false },
-  { id: "knps-lottery", dday: "D-19", action: "추첨 접수", dateTime: "11.01(일) · 시각 미정", label: "국립공원 야영장", stay: "2027년 1월 이용분", provider: "국립공원공단", sourceUrl: KNPS_URL, checkedAt: "2026.10.12", needsVerification: true },
 ];
 
 const fallbackCatalog: Catalog = {
@@ -74,17 +57,8 @@ function kstDate() {
   return `${value("year")}-${value("month")}-${value("day")}`;
 }
 
-function formatEvent(event: PipelineEvent): BookingEvent | null {
-  if (!event.id || !event.date || !event.label || !event.source?.url) return null;
-  const reference = Date.parse(`${kstDate()}T00:00:00+09:00`);
-  const opening = Date.parse(`${event.date}T00:00:00+09:00`);
-  const days = Math.round((opening - reference) / 86_400_000);
-  const dateLabel = new Intl.DateTimeFormat("ko-KR", { timeZone: "Asia/Seoul", month: "numeric", day: "numeric", weekday: "short" }).format(new Date(`${event.date}T00:00:00+09:00`)).replace(/\s/g, "");
-  const time = event.time_known && event.at ? event.at.slice(11, 16) : "시각 미정";
-  const action = event.type === "REOPEN" ? "잔여분 오픈" : event.type?.includes("LOTTERY") ? "추첨 접수" : "선착순 오픈";
-  const stay = event.stay?.from && event.stay?.to ? `${event.stay.from.slice(5).replace("-", ".")}–${event.stay.to.slice(5).replace("-", ".")} 이용분` : event.stay?.month ? `${event.stay.month.replace("-", ".")} 이용분` : "이용 대상은 공식 원문에서 확인";
-  return { id: event.id, dday: days < 0 ? "일정 경과" : `D-${days}`, action, dateTime: `${dateLabel} · ${time}`, label: event.label.replace("비수기 ", ""), stay, provider: event.id.startsWith("foresttrip") ? "숲나들e" : event.id.startsWith("knps") ? "국립공원공단" : "공식 예약처", sourceUrl: event.source.url, checkedAt: event.source.checked_at ?? "확인일 미상", needsVerification: event.needs_verification === true };
-}
+// 공통 헤더·하단 탭: 한 번만 그린다(다시 그리면 스크립트가 채운 이름 뱃지·메뉴가 지워진다).
+const SiteChrome = memo(function SiteChrome({ html }: { html: string }) { return <div className="sh-host" dangerouslySetInnerHTML={{ __html: html }} suppressHydrationWarning />; });
 
 export default function Home() {
   const [mode] = useState<"camp" | "open">("camp");
@@ -95,38 +69,35 @@ export default function Home() {
   const [gear, setGear] = useState("선택 안 함");
   const [selectedCategory, setSelectedCategory] = useState("전체");
   const [saved, setSaved] = useState<string[]>([]);
-  const [savedEvents, setSavedEvents] = useState<string[]>([]);
   const [selectedCamp, setSelectedCamp] = useState<Camp | null>(null);
-  const [upcoming, setUpcoming] = useState(fallbackEvents);
   const [catalog, setCatalog] = useState<Catalog>(fallbackCatalog);
   const [featured, setFeatured] = useState<Featured | null>(null);
-  // 글자 크기(탐색 화면과 같은 저장값 moyeora-fs를 공유)
-  const [fs, setFs] = useState<FsKey>("m");
+  // 공통 헤더(이름 뱃지·설정)는 모든 페이지와 같은 스크립트로 움직인다.
+  useEffect(() => { if (!(window as unknown as { moyeoraUser?: unknown }).moyeoraUser) { const el = document.createElement("script"); el.textContent = SITE_HEADER_JS; document.body.appendChild(el); } }, []);
+  const [openings, setOpenings] = useState<Opening[] | null>(null);
+  const [weekCount, setWeekCount] = useState<number | null>(null);
   useEffect(() => {
-    const frame = window.requestAnimationFrame(() => { try { const v = window.localStorage.getItem("moyeora-fs") as FsKey | null; if (v && FS_ORDER.includes(v)) { setFs(v); document.documentElement.dataset.fs = v; } } catch { /* 저장소 없음 */ } });
-    return () => window.cancelAnimationFrame(frame);
+    const controller = new AbortController();
+    fetch("./explore/data/openings.json", { signal: controller.signal }).then((r) => (r.ok ? r.json() : null)).then((raw) => { const d = raw as { items?: Opening[] } | null; if (!Array.isArray(d?.items)) return; const now = Date.now(); const items = d.items.filter((o) => Date.parse(o.at) >= now - 3_600_000); setOpenings(items); setWeekCount(new Set(items.filter((o) => Date.parse(o.at) <= now + 7 * 86_400_000).map((o) => o.id)).size); }).catch(() => undefined);
+    return () => controller.abort();
   }, []);
-  const cycleFs = () => { const next = FS_ORDER[(FS_ORDER.indexOf(fs) + 1) % FS_ORDER.length]; setFs(next); document.documentElement.dataset.fs = next; try { window.localStorage.setItem("moyeora-fs", next); } catch { /* 저장소 없음 */ } };
   // 전국 탐색 데이터에서 뽑은 테마별 사진 캠핑장(매일 Data sync가 갱신)
   useEffect(() => {
     const controller = new AbortController();
     fetch("./explore/data/featured.json", { signal: controller.signal }).then((r) => (r.ok ? r.json() : null)).then((d) => { if (d?.themes?.length) setFeatured(d as Featured); }).catch(() => undefined);
     return () => controller.abort();
   }, []);
-  const ddayNum = (d: string) => (d === "D-0" ? 0 : Number(d.replace(/[^0-9]/g, "")) || 999);
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
-      try { setSaved(JSON.parse(window.localStorage.getItem("moyeora-camping-saved") ?? "[]")); setSavedEvents(JSON.parse(window.localStorage.getItem("moyeora-camping-open-alerts") ?? "[]")); }
-      catch { setSaved([]); setSavedEvents([]); }
+      try { setSaved(JSON.parse(window.localStorage.getItem("moyeora-camping-saved") ?? "[]")); }
+      catch { setSaved([]); }
     });
     return () => window.cancelAnimationFrame(frame);
   }, []);
   useEffect(() => {
     const controller = new AbortController();
-    Promise.all([fetch("./data/open-calendar.json", { signal: controller.signal }).then((response) => response.ok ? response.json() : null), fetch("./data/catalog.json", { signal: controller.signal }).then((response) => response.ok ? response.json() : null)]).then(([calendar, nextCatalog]) => {
-      const parsedEvents = Array.isArray(calendar?.events) ? calendar.events.map(formatEvent).filter((event): event is BookingEvent => Boolean(event)) : [];
-      if (parsedEvents.length) setUpcoming(parsedEvents);
+    fetch("./data/catalog.json", { signal: controller.signal }).then((response) => response.ok ? response.json() : null).then((nextCatalog) => {
       if (nextCatalog?.counts && nextCatalog?.sources?.gocamping) setCatalog(nextCatalog as Catalog);
     }).catch(() => undefined);
     return () => controller.abort();
@@ -137,7 +108,6 @@ export default function Home() {
     return officialProducts.filter((camp) => (selectedCategory === "전체" || camp.type === selectedCategory) && (region === "전국" || camp.region.includes(region)) && (!query || [camp.campground, camp.product, camp.region, camp.type].some((value) => value.toLowerCase().includes(query))));
   }, [keyword, region, selectedCategory]);
   const toggleSaved = (id: string) => setSaved((current) => { const next = current.includes(id) ? current.filter((item) => item !== id) : [...current, id]; window.localStorage.setItem("moyeora-camping-saved", JSON.stringify(next)); return next; });
-  const toggleEvent = (id: string) => setSavedEvents((current) => { const next = current.includes(id) ? current.filter((item) => item !== id) : [...current, id]; window.localStorage.setItem("moyeora-camping-open-alerts", JSON.stringify(next)); return next; });
   // 캠핑장 찾기는 전국 캠핑장 탐색 화면(explore/)의 검색 결과 페이지로 보낸다. 시범 상품 몇 건만 거르지 않는다.
   const runSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -156,17 +126,13 @@ export default function Home() {
   const dataState = catalog.sources.gocamping.state === "PUBLISHED" ? `고캠핑 ${catalog.counts.gocamping_records?.toLocaleString("ko-KR")}곳 동기화` : catalog.sources.gocamping.state === "PENDING_PERSISTENCE_REVIEW" ? "고캠핑 수집 완료 · 공개 전 권리 검토" : "고캠핑 API 동기화 대기";
 
   return <main className="may-app" id="home">
-    <header className="gnb"><div className="gnb-in">
-      <a className="sh-brand" href="./" aria-label="모여라 캠핑 홈"><span><Tent size={20} /></span><b>모여라 캠핑</b></a>
-      <nav className="sh-nav" aria-label="주요 메뉴"><a href="explore/"><Search size={18} />캠핑장 찾기</a><a href="explore/collections/"><Sparkles size={18} />컬렉션</a><a href="explore/guide/"><BookOpen size={18} />예약 가이드</a><a href="#calendar"><Bell size={18} />예약 오픈</a><a href="explore/passport/"><Heart size={18} />관심·패스포트</a></nav>
-      <div className="sh-actions"><button type="button" className="sh-fs" onClick={cycleFs} aria-label="글자 크기 바꾸기">가<small>{FS_LABEL[fs]}</small></button><a className="sh-icon" href="explore/#near=1" aria-label="내 주변 캠핑장"><LocateFixed size={18} /></a></div>
-    </div></header>
+    <SiteChrome html={SITE_HEADER_HTML} />
 
     <div className="may-shell">
       <section className="may-hero" aria-label="캠핑 탐색">
         <img src={officialProducts[2].image} alt={officialProducts[2].imageAlt} referrerPolicy="no-referrer" /><div className="may-hero-overlay" />
         <div className="may-hero-copy"><h1><span>전국 {featured ? featured.total.toLocaleString("ko-KR") : "3,000"}곳 캠핑장,</span><span>사진 보고 바로 예약</span></h1><p>사이트·시설·주변 정보와 예약 오픈 일정까지<br />한 화면에서 비교하세요.</p></div>
-        <div className="may-hero-stats" aria-label="수집 현황"><div><small><CalendarClock size={14} />이번 주 예약 오픈</small><strong>{upcoming.length}<i>건</i></strong></div><div><small><Database size={14} />공개 비교 상품</small><strong>{catalog.counts.official_pilot_products}<i>개</i></strong></div></div>
+        <div className="may-hero-stats" aria-label="예약 오픈"><a href="explore/openings/"><small><CalendarClock size={14} />이번 주 예약 오픈</small><strong>{weekCount ?? "–"}<i>곳</i></strong></a></div>
         <form className="may-searchbox" onSubmit={runSearch}>
           
           <div className="may-search-card">{mode === "camp" ? <div className="may-search-grid">
@@ -194,9 +160,10 @@ export default function Home() {
       </section>}
 
       <section className="may-section" id="calendar">
-        <div className="may-section-head"><div><h2>곧 열리는 예약</h2><p>오픈이 빠른 순서 · 종을 누르면 이 기기에 저장돼요</p></div><a href={FORESTTRIP_URL} target="_blank" rel="noreferrer">전체 <ChevronRight size={16} /></a></div>
-        <div className="may-open-list">{[...upcoming].sort((a, b) => ddayNum(a.dday) - ddayNum(b.dday)).map((event) => { const isSaved = savedEvents.includes(event.id); return <article className="may-open-card" key={event.id}><div className="may-open-date"><div><strong className={event.dday === "D-0" || event.dday === "D-1" ? "urgent" : ""}>{event.dday}</strong><span className={event.needsVerification ? "review" : ""}>{event.action}</span></div><time>{event.dateTime}</time></div><div className="may-open-title"><span><Trees size={19} /></span><div><h3>{event.label}</h3><p>{event.stay}</p></div></div><div className="may-open-bottom"><a href={event.sourceUrl} target="_blank" rel="noreferrer" className={event.needsVerification ? "checking" : "verified"}>{event.needsVerification ? <CircleHelp size={14} /> : <BadgeCheck size={14} />}{event.needsVerification ? "확인 필요" : `공식 확인 · ${event.checkedAt.slice(5)}`}<ExternalLink size={11} /></a><button type="button" className={isSaved ? "on" : ""} aria-pressed={isSaved} onClick={() => toggleEvent(event.id)}><Bell size={14} />{isSaved ? "저장됨" : "알림"}</button></div></article>; })}</div>
-        <p className="may-disclosure"><Info size={15} />일정은 규칙으로 계산한 읽기 전용 캘린더입니다. 예외·추첨 자격·최종 잔여 자리는 각 공식 예약처에서 확인하세요.</p>
+        <div className="may-section-head"><div><h2>곧 열리는 예약</h2><p>캠핑장별 · 오픈이 빠른 순서</p></div><a href="explore/openings/">전체 일정 <ChevronRight size={16} /></a></div>
+        {openings && openings.length > 0 ? <div className="may-open-list">{openings.slice(0, 16).map((o) => { const d = new Date(Date.parse(o.at) + 9 * 3_600_000); const days = Math.round((Date.parse(o.at.slice(0, 10) + "T00:00:00+09:00") - Date.parse(`${kstDate()}T00:00:00+09:00`)) / 86_400_000); return <article className="may-open-card" key={`${o.id}-${o.at}-${o.kind}`}><div className="may-open-date"><div><strong className={days <= 1 ? "urgent" : ""}>{days <= 0 ? "오늘" : `D-${days}`}</strong><span className={o.unv ? "review" : ""}>{o.kind}</span></div><time>{`${d.getUTCMonth() + 1}.${String(d.getUTCDate()).padStart(2, "0")}(${"일월화수목금토"[d.getUTCDay()]}) · ${o.tk ? `${String(d.getUTCHours()).padStart(2, "0")}:${String(d.getUTCMinutes()).padStart(2, "0")}` : "시각 미정"}`}</time></div><div className="may-open-title"><span><Trees size={19} /></span><div><h3><a href={`explore/#c=${o.id}`}>{o.name}</a></h3><p>{[o.where, o.stay].filter(Boolean).join(" · ")}</p></div></div><div className="may-open-bottom"><span className="may-open-platform">{o.platform ?? "캠핑장 직접 예약"}</span><a href={o.src ?? o.url ?? "explore/openings/"} target="_blank" rel="noreferrer" className={o.unv ? "checking" : "verified"}>{o.unv ? <CircleHelp size={14} /> : <BadgeCheck size={14} />}{o.unv ? "확인 필요" : "공식 원문"}<ExternalLink size={11} /></a></div></article>; })}</div>
+          : <div className="may-empty"><CalendarClock size={27} /><b>{openings ? "앞으로 45일 안에 확인된 캠핑장별 오픈 일정이 없습니다." : "예약 오픈 일정을 불러오는 중입니다."}</b><span>예약처 공통 규칙은 각 캠핑장 상세의 ‘예약’에서 볼 수 있어요.</span></div>}
+        <p className="may-disclosure"><Info size={15} />캠핑장별 예약 규칙과 서울시 공공예약 접수 기간으로 계산한 일정입니다. 최종 잔여 자리는 각 예약처에서 확인하세요.</p>
       </section>
 
       <section className="may-section" id="search">
@@ -211,6 +178,6 @@ export default function Home() {
 
       <section className="may-section may-provider-section" id="providers"><div className="may-section-head"><div><h2>예약처별 예약 방법</h2><p>같은 예약처는 공통 규칙을 묶고, 시설별 예외는 따로 보관합니다.</p></div></div><div className="may-provider-grid"><article><span><Trees size={21} /></span><h3>숲나들e</h3><p>국립·공립·사립 휴양림 통합예약</p><ul><li>주중: 6주 전 수요일 09:00</li><li>주말·공휴일: 월별 추첨</li><li>미결제분: 선착순 전환</li></ul><a href={FORESTTRIP_URL} target="_blank" rel="noreferrer">공식 일정 보기 <ExternalLink size={14} /></a></article><article><span><TentTree size={21} /></span><h3>국립공원공단</h3><p>국립공원 야영장 예약시스템</p><ul><li>이용 2개월 전 추첨 접수</li><li>발표·결제 일정은 회차별 확인</li><li>취소분은 예약처에서 확인</li></ul><a href={KNPS_URL} target="_blank" rel="noreferrer">공식 예약처 <ExternalLink size={14} /></a></article><article><span><CalendarDays size={21} /></span><h3>서울시 공공서비스예약</h3><p>서울시·자치구 공영 캠핑장</p><ul><li>시설별 접수 기간 공개</li><li>OpenAPI 읽기 연동 준비</li><li>감면 조건은 시설별 상이</li></ul><a href={SEOUL_YEYAK_URL} target="_blank" rel="noreferrer">공식 예약처 <ExternalLink size={14} /></a></article></div></section>
     </div>
-    <nav className="gnb-tabbar" aria-label="모바일 주요 탐색"><a href="./" aria-current="page"><House size={22} />홈</a><a href="explore/"><Search size={22} />찾기</a><a href="explore/collections/"><Sparkles size={22} />컬렉션</a><a href="#calendar"><Bell size={22} />예약오픈</a><a href="explore/passport/"><Heart size={22} />관심</a></nav>
+    <SiteChrome html={SITE_TABBAR_HTML} />
   </main>;
 }
