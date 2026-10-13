@@ -6,10 +6,10 @@
 ## 현재 상태
 
 - 저장소: GitHub 공개 저장소 `pyw31337/camp`
-- 배포: 공개 Sites 버전이 `https://moyeora-camping.magicsiren32.chatgpt.site`에 배포되어 있다.
+- 배포: 외부 공개 기본 주소는 [GitHub Pages](https://pyw31337.github.io/camp/)이며, 루트 `main` 푸시로 자동 갱신된다.
 - 기준 설계: 전국 등록 야영장은 한국관광공사 고캠핑 API를 기준 모수로 삼고, 실제 재고·가격은 공식 예약 채널에서 별도 확인한다.
 - 데이터 모델: PostgreSQL 16+용 초기 스키마가 `db/001_initial_schema.sql`에 있다. 시설·구역·상품·재고·요금·예약 정책·원천 증빙·미디어 권리를 분리한다.
-- 웹: `camping-atlas/`는 공개 Sites 프로젝트 `appgprj_6acc7a065b548191bc002202bbc24d3b`에 연결되어 있으며, 현재 공개 주소는 `https://moyeora-camping.magicsiren32.chatgpt.site`다.
+- 웹: `camping-atlas/`는 정적 내보내기가 가능한 Vinext 앱이다. GitHub Pages를 외부 공개 기준으로 유지하며, Sites 프로젝트는 이 작업에서 배포 경로로 사용하지 않는다.
 - GitHub Pages: `main`의 `camping-atlas/` 변경을 정적 내보내기해 [`https://pyw31337.github.io/camp/`](https://pyw31337.github.io/camp/)에 자동 배포한다. 정적 산출물의 접두 경로는 `scripts/prepare-pages.mjs`가 GitHub Pages의 `/camp` 마운트 경로에 맞춘다.
 
 ## 최근 변경
@@ -23,14 +23,16 @@
 | 웹 | 브랜드를 ‘모여라 캠핑’으로 변경하고 공개 Sites 버전 2를 배포. 오토캠핑·카라반·글램핑 콘셉트 이미지와 여행 검색형 UI를 추가 | `npm run lint`, `npm run build`, 320px/1440px 브라우저 검수 및 공개 URL 확인 완료 |
 | 디자인 | 여행 플랫폼 검색 구조와 반응형 원칙을 조사해 초록 계열 토큰·이미지·320px 규칙을 문서화 | `docs/DESIGN_SYSTEM.md`의 원문 링크와 구현 결과 대조 |
 | GitHub Pages 파일럿 | 날짜·인원·형태 검색, 브라우저 저장목록, 상품 상세·공식 예약/사진/공지 링크를 구현. 자라섬캠핑장 4개 실제 상품을 가평군시설관리공단 원문으로 등록 | 로컬 `npm run lint`, `npm run build`, `npm run build:pages` 성공. 공개 배포 [Pages 실행 38331404373](https://github.com/pyw31337/camp/actions/runs/38331404373), [웹 품질 실행 38331404533](https://github.com/pyw31337/camp/actions/runs/38331404533) 통과. 공개 URL에서 검색 1건, 저장, 상세 전환, 320px 가로 넘침 없음, 콘솔 오류 없음 확인 |
+| Claude 작업 연계 | `claude/upbeat-keller-x75pct`의 전국 데이터 파이프라인을 검토하고 호환되는 12개 커밋을 반영했다. GoCamping 동기화·예약 규칙 레지스트리·캘린더/ICS·무료 후보·공중화장실·휴게소·졸음쉼터 수집/연결이 포함된다. | `pipeline`에서 `npm test` 50개 통과, `npm run validate`, `npm run calendar -- 60 2026-10-13`, `npm run ics -- 60 2026-10-13` 성공. 캘린더 23건(확인 필요 14건) 생성. API 키·원천 접근 허가 전에는 운영 데이터로 표시 금지. |
+| 프리미엄 탐색 UI | Dribbble 여행·캠핑 참고 화면의 사진 중심 계층과 예약 UI를 바탕으로 검색·상세·최근 현장 경로 화면을 다시 구성했다. 실제 사진은 자라섬캠핑장 운영기관 시설 원문 4건만 외부 표시한다. | `npm run lint`, `npm run build`, `npm run build:pages`, GitHub Pages 경로 자산 검증 성공. 브라우저에서 오류 0건, “사이트 A” 검색 1건·상세 전환, 320px 문서 가로 넘침 없음 확인. 공개 배포 확인은 이 커밋 푸시 뒤 수행한다. |
 
 ## 다음 작업
 
-1. 기획 문서의 고캠핑 API 신청 절차에 따라 개발 키를 안전한 비밀 관리 환경에 넣고, 샘플 적재기를 만든다. 키를 저장소에 커밋하지 않는다.
-2. DB를 사용할 실행 환경(PostgreSQL 또는 D1 등)을 선택하고, 스키마 호환성·마이그레이션 전략을 검토한다. 현재 SQL은 PostgreSQL 16 전제다.
+1. 고캠핑 API 키를 비밀 관리 환경에 설정하고 `pipeline` 동기화를 실제 기준 데이터로 실행한다. 키를 저장소에 커밋하지 않는다.
+2. DB를 사용할 실행 환경(PostgreSQL 또는 D1 등)을 선택하고 `db/001_initial_schema.sql`, `db/002_public_toilets.sql`의 호환성·이관/롤백 전략을 검토한다. 현재 SQL은 PostgreSQL 16 전제다.
 3. 실제 읽기 API가 생기면 파일럿의 자라섬 정적 레코드를 API 응답으로 교체하고, 상품·미디어·공지·예약 제공자 레지스트리를 전국으로 확대한다.
-4. 배포본은 두 경로를 가진다. Sites 배포는 별도 Sites Git 원격을 갱신·패키징해야 하고, GitHub Pages는 루트 `main` 푸시로 자동 배포된다.
-5. 운영자 공식 소셜 계정은 소유 확인·임베드 권한·게시시각이 모두 확인된 뒤에만 `social_connection`과 `social_item`에 등록한다. 해시태그 수집이나 이미지 저장으로 대체하지 않는다.
+4. 공식 소셜 계정은 소유 확인·임베드 권한·게시시각·캠핑장 매칭이 모두 확인된 뒤에만 `social_connection`과 `social_item`에 등록한다. 해시태그 수집이나 이미지 저장으로 대체하지 않는다.
+5. `claude/upbeat-keller-x75pct`에는 출처/권리 기록 없는 정적 이미지 자산과 GitHub Pages를 Cloudflare Pages로 바꾸는 동명 워크플로가 남아 있다. 원본의 권리 근거와 배포 전략을 별도로 검토하기 전에는 병합하지 않는다.
 
 ## 주의 사항
 
@@ -38,6 +40,7 @@
 - 고캠핑 정적 시설 데이터와 판매 재고 데이터를 합쳐 추정하지 않는다.
 - SNS·검색 플랫폼의 콘텐츠는 각 API/임베드·보존 조건을 지킨다. 무단 이미지 복제 또는 전체 해시태그 수집을 하지 않는다.
 - GitHub Pages 파일럿의 사진은 가평군시설관리공단 공식 시설 안내의 외부 원문 URL을 표시한다. 대표 이미지를 저장·가공·다른 시설에 재사용하지 않는다.
+- 일반 후기·소셜 사진은 카드 대표 이미지나 운영 사실의 근거로 사용하지 않는다. `source_url`, 게시 시각, 확인 시각, 매칭 근거, 임베드·표시 권한을 모두 확보한 뒤 최근 현장 섹션에 원문/임베드로만 표시한다.
 - Sites 생성 응답의 자격증명은 파일이나 문서에 저장하지 않았다. `.openai/hosting.json`에는 프로젝트 ID만 있다.
 
 ## 작업 종료 체크
@@ -45,4 +48,4 @@
 - [x] 관련 기획/스키마/인수인계가 함께 갱신되었는가
 - [x] 테스트·린트·빌드 결과 또는 미실행 이유를 이 문서에 기록했는가
 - [x] 원천·권한·개인정보 영향이 검토되었는가
-- [x] 작은 단위로 커밋하고 원격에 푸시했는가
+- [x] 작은 단위로 커밋하고 원격에 푸시했는가 — 프리미엄 UI·문서 변경을 한 커밋으로 배포

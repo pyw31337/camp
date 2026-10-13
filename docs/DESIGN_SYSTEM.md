@@ -1,11 +1,13 @@
 # 모여라 캠핑 디자인 시스템
 
-> 최종 갱신: 2026-10-12 KST<br>
+> 최종 갱신: 2026-10-13 KST<br>
 > 적용 범위: 검색·결과·상세·여행 계획 화면
 
 ## 조사에서 채택한 원칙
 
 여행 예약 화면은 영감용 사진보다 먼저 **여행 조건과 확정 가능성**을 이해시켜야 한다. 에어비앤비의 사례는 하나의 핵심 흐름, 읽기 쉬운 문장 중심 정보 계층, 저장·예약 같은 명확한 행동을 강조한다. Booking.com의 개발 문서는 위치·날짜·인원과 필터를 분리해 실시간 재고·가격을 조회하는 검색 구조를 보여 준다. Google의 반응형 가이드는 화면 폭이 바뀔 때 단순 축소 대신 탐색·필터 컨테이너의 형태를 바꾸도록 권한다.
+
+캠핑 AR·예약 UI 레퍼런스는 몰입감 있는 실제 사진, 부드러운 큰 모서리, 작은 정보 배지, 사진과 일정의 분리된 계층을 보여 준다. 모여라 캠핑은 이 표현 방식을 빌리되, AR·3D 장면처럼 실제 데이터로 뒷받침하지 못하는 효과는 넣지 않는다. 대신 공식 사진의 원문, 확인일, 예약의 확정 경계를 같은 화면에서 보여 준다.
 
 그래서 모여라 캠핑은 다음 순서를 고정한다.
 
@@ -14,7 +16,7 @@
 3. 카드에서 예약 상태, 원천, 수집 시각, 가격·정원·규격을 사진과 함께 읽는다.
 4. 상세에서 상품별 재고·요금·정책을 보여 주고, 날씨·경로·주변 여행은 보조 판단 정보로 분리한다.
 
-참고: [Airbnb UX 사례](https://design.google/library/airbnb-invites-you-in), [Booking.com 검색 사용 사례](https://developers.booking.com/demand/docs/accommodations/search-examples), [Google의 반응형 패턴 가이드](https://design.google/library/introducing-resizer).
+참고: [Airbnb UX 사례](https://design.google/library/airbnb-invites-you-in), [Booking.com 검색 사용 사례](https://developers.booking.com/demand/docs/accommodations/search-examples), [Google의 반응형 패턴 가이드](https://design.google/library/introducing-resizer), [Camping AR App](https://dribbble.com/shots/11607072-Camping-AR-App), [Camping App Exploration](https://dribbble.com/shots/27205497-Camping-App-Exploration), [Camping App Design](https://dribbble.com/shots/10165691-Camping-App-Design), [Ski camps booking](https://dribbble.com/shots/22874895-Snowboard-Ski-camps-booking-web-app), [Camping reservation UI](https://dribbble.com/shots/7140824-Camping-reservation-ui).
 
 ## 시각 토큰
 
@@ -27,7 +29,7 @@
 | Leaf line | `#D8E3D9` | 구분선, 비활성 테두리 |
 | Clay | `#BA5B3F` | 보조 링크·주의가 필요한 포인트 |
 
-본문은 따뜻한 백색 배경 위 짙은 녹색을 쓴다. 초록색은 행동과 정보 신뢰도를 표현하는 데만 사용하고, 예약 불가·추첨·확인 필요는 상태별 배지로 구분한다.
+본문은 따뜻한 백색 배경 위 짙은 녹색을 쓴다. `#1F9D5C`는 주 행동과 확인된 공식 원문, `#173F2E`는 최근 현장 콘텐츠 영역, 밝은 민트는 선택된 필터에 쓴다. 초록색은 행동과 정보 신뢰도를 표현하는 데만 사용하고, 예약 불가·추첨·확인 필요는 상태별 배지로 구분한다.
 
 ## 이미지 원칙
 
@@ -35,6 +37,7 @@
 - GitHub Pages 파일럿: 운영자 공식 홈페이지가 제공하는 실제 시설 사진을 외부 원문으로 표시하고, 카드마다 원문 링크·운영자·확인일을 표시한다. 원본 파일은 저장하지 않는다.
 - 이미지 카드: 16:9 비율, `object-fit: cover`, 고정된 정원·가격 정보와 시각적으로 분리된 메타데이터를 쓴다.
 - 접근성: 대표 이미지는 대체텍스트를 제공하고, 장식용 카드는 빈 대체텍스트를 사용한다.
+- 현재 화면: 히어로와 상품 카드에는 자라섬캠핑장 운영기관의 시설 안내 원문 이미지만 사용한다. 소셜·후기 사진은 API/임베드 권한, 게시 시각, 캠핑장 매칭이 확인되기 전에는 카드 썸네일로 쓰지 않는다.
 
 ## 반응형 규칙
 
@@ -43,6 +46,6 @@
 | 961px 이상 | 좌측 필터 + 2열 카드, 한 줄 검색바 |
 | 681–960px | 2열 정보 카드, 간결한 검색바, 보조 플로팅 카드 숨김 |
 | 361–680px | 검색 조건을 2열 카드로 재배치, 필터는 바텀시트, 결과 카드는 1열 |
-| 320–360px | 좌우 여백 16px, 브랜드 배지 축소, 검색 버튼 전체 폭, 표의 상태는 다음 줄로 이동 |
+| 320–360px | 좌우 여백 16px, 브랜드 배지 축소, 검색 버튼 전체 폭, 필터는 바텀시트, 긴 보조 문구는 별도 행으로 이동 |
 
 320px 기준으로 페이지의 최소 폭을 보장하고, 고정 폭·긴 버튼·불필요한 강제 줄바꿈을 피한다. 단어가 길어진 표 셀은 줄바꿈을 허용하되 화면 밖으로 넘치지 않게 한다.

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./pilot.css";
+import "./premium.css";
 
 export const dynamic = "force-static";
 
