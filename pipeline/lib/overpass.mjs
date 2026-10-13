@@ -14,7 +14,7 @@ export async function overpass(query, { fetchImpl = fetch, timeoutMs = 300000, s
         if (res.ok) {
           const j = await res.json();
           // 시간 초과·메모리 초과면 200과 함께 빈 elements + remark를 준다 → 실패로 보고 다음 서버로.
-          if (!j.elements?.length && j.remark) { errors.push(`${new URL(url).host} ${String(j.remark).slice(0, 80)}`); continue; }
+          if (!j.elements?.length) { errors.push(`${new URL(url).host} ${j.remark ? String(j.remark).slice(0, 80) : "빈 결과"}`); continue; }
           return { elements: j.elements ?? [], server: url };
         }
         errors.push(`${new URL(url).host} HTTP ${res.status}`);

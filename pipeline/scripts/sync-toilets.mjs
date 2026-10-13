@@ -61,8 +61,18 @@ async function downloadAll(pageUrl) {
   ])].filter((c) => !/download-all\?orgCode=\d+_ALL$/.test(c));
   const own = clues.filter((c) => !/^\/file\/[a-z_]+\/info$/.test(c) && !/^#file-cat/.test(c));
   console.log(`LOCALDATA 페이지 단서 ${clues.length}개 중 다른 업종 링크 제외 ${own.length}개: ${own.slice(0, 80).join(" | ")}`);
-  for (const m of [...html.matchAll(/<(?:a|button|form)[^>]*(?:다운로드|download)[^>]*>/gi)].slice(0, 20)) console.log(`  태그: ${m[0].slice(0, 200)}`);
-  for (const m of [...html.matchAll(/[^\n]{0,120}(?:CSV|csv|xlsx|엑셀)[^\n]{0,120}/g)].slice(0, 15)) console.log(`  문맥: ${m[0].replace(/\s+/g, " ").slice(0, 240)}`);
+  // 버튼 태그는 여러 줄에 걸쳐 있다 → 공백을 접어 속성 전체를 남긴다.
+  for (const m of [...html.matchAll(/<(?:a|button)\b[^>]*download[^>]*>/gi)].slice(0, 25)) console.log(`  태그: ${m[0].replace(/\s+/g, " ").slice(0, 500)}`);
+  console.log(`  data-download-url 값: ${[...new Set([...html.matchAll(/data-download-url=["']([^"']+)["']/gi)].map((m) => m[1]))].join(" | ")}`);
+  console.log(`  data-* 속성 종류: ${[...new Set([...html.matchAll(/\s(data-[a-z-]+)=/gi)].map((m) => m[1]))].join(", ")}`);
+  for (const m of [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map((m) => m[1]).filter((t) => /download/i.test(t)).slice(0, 3)) console.log(`  스크립트: ${m.replace(/\s+/g, " ").slice(0, 1500)}`);
+  for (const src of [...html.matchAll(/<script\b[^>]*src=["']([^"']+)["']/gi)].map((m) => m[1]).filter((u) => !/jquery|bootstrap|cdn|gtag|google/i.test(u)).slice(0, 6)) {
+    try {
+      const js = await (await fetch(new URL(src, pageUrl), { headers: { "User-Agent": UA, Referer: pageUrl, Cookie: cookie }, signal: AbortSignal.timeout(30000) })).text();
+      const bits = [...js.matchAll(/[\s\S]{0,200}download[\s\S]{0,300}/gi)].slice(0, 4).map((m) => m[0].replace(/\s+/g, " "));
+      console.log(`  외부 스크립트 ${src} (${js.length}B): ${bits.join(" ⏐ ").slice(0, 2500)}`);
+    } catch (e) { console.log(`  외부 스크립트 ${src}: ${e.message}`); }
+  }
   const dataUrl = html.match(/data-download-url=["']([^"']+)["']/i)?.[1];
   if (dataUrl) console.log(`data-download-url: ${dataUrl}`);
   const links = [...new Set([...html.matchAll(/\/file\/download-all\?orgCode=([0-9A-Z_]+)/g)].map((m) => m[0]))];
