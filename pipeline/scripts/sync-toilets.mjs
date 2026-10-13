@@ -79,7 +79,8 @@ async function downloadAll(pageUrl) {
 let toilets = [];
 // 1순위: 전국공중화장실표준데이터 API(data.go.kr, 좌표 포함 가능). 2026-10-13 확인: LOCALDATA ‘전체 다운로드’ ZIP은
 // 인허가 업종 195종 묶음이라 화장실 파일이 없다. 표준데이터 API 경로는 졸음쉼터와 같은 tn_pubr_public_*_api 규칙을 따른다.
-const STD_URLS = ["https://api.data.go.kr/openapi/tn_pubr_public_toilet_api", "https://api.data.go.kr/openapi/tn_pubr_public_restroom_api"];
+// 2026-10-13 CI: 경로는 있고 SERVICE_KEY_IS_NOT_REGISTERED → 활용신청만 하면 된다(docs/OWNER_TODO.md 2-1).
+const STD_URLS = ["https://api.data.go.kr/openapi/tn_pubr_public_toilet_api"];
 let stdUrl = null;
 if (process.env.DATA_GO_KR_SERVICE_KEY) {
   for (const base of STD_URLS) {
