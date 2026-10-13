@@ -10,7 +10,8 @@ import { nowInKst, toKstIso } from "../lib/kst.mjs";
 import { linkNearbyToilets } from "../lib/nearby-toilets.mjs";
 import { OVERPASS_QUERY, mergeToiletSources, normalizeOsmToilet } from "../lib/osm-toilets.mjs";
 import { overpass } from "../lib/overpass.mjs";
-import { geocodeQuery, normalizeToilet } from "../lib/toilets.mjs";
+import { fetchDataGoKr } from "../lib/datagokr.mjs";
+import { fromStandardApi, geocodeQuery, normalizeToilet } from "../lib/toilets.mjs";
 import { listZip, readZipEntry } from "../lib/zip.mjs";
 
 const SOURCE_URL = process.env.TOILET_SOURCE_URL ?? "https://file.localdata.go.kr/file/public_restroom_info/info";
@@ -30,7 +31,7 @@ async function toCsvBytes(buf, tag) {
   if (buf[0] === 0x50 && buf[1] === 0x4b) {
     // 시도별 ‘전체’ ZIP에는 모든 업종 파일이 들어 있다. 파일명은 UTF-8 플래그 없이 들어 있어 직접 디코딩한다.
     const entries = listZip(buf).filter((e) => /\.csv$/i.test(e.name));
-    if (!zipListLogged) { zipListLogged = true; console.log(`ZIP 안 CSV ${entries.length}개: ${entries.map((e) => e.name).join(" | ")}`); }
+    if (!zipListLogged) { zipListLogged = true; console.log(`ZIP 안 CSV ${entries.length}개(관련: ${entries.filter((e) => /화장실|야영/.test(e.name)).map((e) => e.name).join(", ") || "없음"})`); }
     const hit = entries.find((e) => /화장실|restroom|toilet/i.test(e.name));
     if (!hit) throw new Error(`ZIP 안에 화장실 파일이 없음(${entries.length}개 파일)`);
     console.log(`  ${tag}: ${hit.name} (${hit.size.toLocaleString()} bytes)`);
@@ -76,7 +77,36 @@ async function downloadAll(pageUrl) {
 }
 
 let toilets = [];
-try {
+// 1순위: 전국공중화장실표준데이터 API(data.go.kr, 좌표 포함 가능). 2026-10-13 확인: LOCALDATA ‘전체 다운로드’ ZIP은
+// 인허가 업종 195종 묶음이라 화장실 파일이 없다. 표준데이터 API 경로는 졸음쉼터와 같은 tn_pubr_public_*_api 규칙을 따른다.
+const STD_URLS = ["https://api.data.go.kr/openapi/tn_pubr_public_toilet_api", "https://api.data.go.kr/openapi/tn_pubr_public_restroom_api"];
+let stdUrl = null;
+if (process.env.DATA_GO_KR_SERVICE_KEY) {
+  for (const base of STD_URLS) {
+    try {
+      const got = [];
+      for (let page = 1; page <= 80; page++) {
+        const { res } = await fetchDataGoKr(`${base}?pageNo=${page}&numOfRows=1000&type=json`, process.env.DATA_GO_KR_SERVICE_KEY, { timeoutMs: 60000 });
+        const text = await res.text();
+        let body = null;
+        try { const j = JSON.parse(text); body = j?.response?.body ?? j?.body; } catch { /* 아래 */ }
+        if (!body) { console.log(`  ${base} p${page} → HTTP ${res.status} ${text.slice(0, 140).replace(/\s+/g, " ")}`); break; }
+        const items = Array.isArray(body.items) ? body.items : body.items?.item ? [].concat(body.items.item) : [];
+        if (page === 1 && items[0]) console.log(`표준데이터 필드: ${Object.keys(items[0]).join(", ")} · 전체 ${body.totalCount}`);
+        got.push(...items);
+        if (items.length < 1000) break;
+      }
+      if (got.length) {
+        toilets = got.map(fromStandardApi).filter(Boolean);
+        stdUrl = base;
+        console.log(`전국공중화장실표준데이터 ${got.length}행 → 정규화 ${toilets.length}곳(원천 좌표 ${toilets.filter((t) => Number.isFinite(t.lat)).length}곳)`);
+        break;
+      }
+    } catch (e) { console.log(`  ${base} → ${e.message}`); }
+  }
+}
+// 2순위: LOCALDATA 파일(경로가 바뀌어 화장실 파일이 다시 생기면 사용)
+if (!toilets.length) try {
   const { rows, parts } = await downloadAll(SOURCE_URL);
   console.log(`시도별 파일: ${parts.join(", ")}`);
   toilets = rows.map(normalizeToilet).filter(Boolean);
@@ -122,7 +152,7 @@ try {
 }
 
 await writeFile(`${out}toilets.json`, JSON.stringify({
-  source: { title: "행정안전부 공중화장실정보", url: SOURCE_URL, dataset: "https://www.data.go.kr/data/15075531/fileData.do", tier: "A", fetched_at: fetchedAt, coords: "주소 지오코딩(카카오) — 원천 좌표는 2025-02부터 미제공" },
+  source: { title: stdUrl ? "전국공중화장실표준데이터" : "행정안전부 공중화장실정보", url: stdUrl ?? SOURCE_URL, dataset: "https://www.data.go.kr/data/15075531/fileData.do", tier: "A", fetched_at: fetchedAt, coords: "주소 지오코딩(카카오) — 원천 좌표는 2025-02부터 미제공" },
   sources: { mois: toilets.filter((t) => t.source !== "osm").length, osm: osmStats, osm_attribution: "© OpenStreetMap contributors (ODbL)" },
   count: toilets.length, located, toilets,
 }));

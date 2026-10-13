@@ -55,6 +55,7 @@ jobs:
         run: npm run sync:toilets
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
       - name: Sync rest areas and drowsy shelters
         run: npm run sync:rest-stops
         env:

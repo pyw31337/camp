@@ -123,3 +123,15 @@ test("Overpass: 504면 다음 서버로 넘어간다", async () => {
   assert.equal(r.elements.length, 1);
   assert.deepEqual(calls, ["a.test", "a.test", "b.test"]);
 });
+
+test("전국공중화장실표준데이터 API(영문 필드) → 정규화, 원천 좌표 사용", async () => {
+  const { fromStandardApi } = await import("../lib/toilets.mjs");
+  const t = fromStandardApi({ toiletType: "공중화장실", toiletNm: "계곡입구 화장실", rdnmadr: "강원특별자치도 홍천군 서석면 1", lnmadr: "", openTime: "24시간", menDisabledToiletBowlNumber: "1", ladiesDisabledToiletBowlNumber: "1", emgBellYn: "Y", latitude: "37.70", longitude: "128.10", referenceDate: "2026-09-30" });
+  assert.equal(t.name, "계곡입구 화장실");
+  assert.equal(t.open_24h, true);
+  assert.equal(t.disabled_stalls, 2);
+  assert.equal(t.emergency_bell, true);
+  assert.equal(t.lat, 37.7);
+  assert.equal(t.precision, "SOURCE");
+  assert.equal(fromStandardApi({ toiletNm: "주소 없음" }), null);
+});

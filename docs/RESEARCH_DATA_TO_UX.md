@@ -96,6 +96,12 @@
 | 보조 원천 | OpenStreetMap `amenity=toilets`(좌표 포함, ODbL, “© OpenStreetMap contributors” 표기). 행안부 항목과 30m 안에서 겹치면 행안부 우선 |
 | 구현 | `pipeline/lib/{csv,toilets,geocode,geo,nearby-toilets}.mjs`, `scripts/sync-toilets.mjs`, `db/002_public_toilets.sql` |
 
+### 2.5.1 LOCALDATA ‘전체 다운로드’ 확인 결과 (2026-10-13)
+
+- `file.localdata.go.kr/file/public_restroom_info/info`의 시도별 `download-all?orgCode=…_ALL` ZIP은 **인허가 업종 195종 묶음**이고 공중화장실 파일은 없다(ZIP 파일명이 UTF-8 플래그 없이 들어 있어 `lib/zip.mjs`로 직접 디코딩해 확인).
+- 대신 묶음 안에 `문화_자동차야영장업.csv`, `문화_일반야영장업.csv`가 있다 → 활용신청 없이 **숨은 캠핑장 후보**를 받을 수 있는 원천(다음 작업).
+- 화장실은 `전국공중화장실표준데이터` API(`tn_pubr_public_toilet_api`, 졸음쉼터와 같은 표준데이터 경로 규칙)를 1순위로 시도하고, 위도·경도가 있으면 지오코딩 없이 쓴다(`fromStandardApi`).
+
 ### 2.6 가는 길: 휴게소·졸음쉼터 (2026-10-13)
 
 | 원천 | 얻는 값 | 접근 | 상태 |
