@@ -79,5 +79,8 @@ for (const [gid, m] of matches) {
   };
 }
 const withFee = Object.values(records).filter((r) => r.fee_text).length;
+// 진단: 소개 정보 칸별로 값이 있는 시설 수(관광공사 원천에 요금 칸이 비어 있는지 확인용)
+const filled = Object.fromEntries(["fee_text", "reservation_text", "hours_text", "parking_fee_text", "rest_days_text", "open_period_text"].map((k) => [k, Object.values(records).filter((r) => r[k]).length]));
+console.log(`소개 정보 칸별 값 있는 시설: ${JSON.stringify(filled)}`);
 console.log(`요금 안내 문구 있는 시설 ${withFee}곳(숫자 범위 추출 ${Object.values(records).filter((r) => r.fee_range).length}곳)`);
 await writeFile(`${out}tour-fees.json`, JSON.stringify({ generated_at: fetchedAt, source: "한국관광공사 TourAPI 4.0(KorService2) 소개정보", tier: "B", notes: "운영자가 등록한 안내 문구. 실제 판매가는 예약처에서 확인.", count: Object.keys(records).length, with_fee_text: withFee, records }));

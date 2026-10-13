@@ -62,7 +62,7 @@ test("지오코딩 캐시: 이미 있는 주소는 묻지 않고, 없음 결과�
 test("지오코딩: 한도 초과면 즉시 멈추고 남은 건수를 알린다", async () => {
   const r = await geocodeAll(["a", "b", "c"], {}, { concurrency: 1, geocode: async () => { const e = new Error("카카오 호출 한도 초과"); e.code = "RATE_LIMIT"; throw e; } });
   assert.equal(r.calls, 1);
-  assert.equal(r.remaining, 2);
+  assert.equal(r.remaining, 3, "오류 난 주소도 다음 실행에서 다시 시도할 대상");
   assert.match(r.stopped, /한도/);
 });
 
@@ -147,4 +147,14 @@ test("전국공중화장실표준데이터 API(영문 필드) → 정규화, 원
   assert.equal(t.lat, 37.7);
   assert.equal(t.precision, "SOURCE");
   assert.equal(fromStandardApi({ toiletNm: "주소 없음" }), null);
+});
+
+test("지오코딩: 오류 응답은 ‘없음’으로 캐시하지 않고, 오류가 이어지면 멈춘다", async () => {
+  const cache = {};
+  const err = Object.assign(new Error("카카오 HTTP 400: limit exceeded"), { code: "HTTP" });
+  const r = await geocodeAll(Array.from({ length: 40 }, (_, i) => `주소 ${i}`), cache, { geocode: async () => { throw err; }, concurrency: 1 });
+  assert.equal(Object.keys(cache).length, 0, "오류 난 주소는 캐시에 없다");
+  assert.equal(r.errors, 20);
+  assert.match(r.stopped, /limit/);
+  assert.equal(r.remaining, 40);
 });

@@ -13,7 +13,8 @@ export async function kakaoGeocode(query, { key, fetchImpl = fetch }) {
   });
   if (res.status === 429) { const e = new Error("카카오 호출 한도 초과"); e.code = "RATE_LIMIT"; throw e; }
   if (res.status === 401 || res.status === 403) { const e = new Error(`카카오 인증 실패(HTTP ${res.status})`); e.code = "AUTH"; throw e; }
-  if (!res.ok) return null;
+  // 200이 아닌 응답(한도 초과·일시 오류 등)은 “주소 없음”이 아니다. 없음으로 캐시하면 30일 동안 다시 묻지 않으므로 오류로 올린다.
+  if (!res.ok) { const e = new Error(`카카오 HTTP ${res.status}: ${(await res.text().catch(() => "")).slice(0, 160)}`); e.code = /limit|quota|exceed/i.test(e.message) ? "RATE_LIMIT" : "HTTP"; throw e; }
   const doc = (await res.json())?.documents?.[0];
   if (!doc) return null;
   const lat = Number(doc.y), lng = Number(doc.x);
@@ -30,7 +31,7 @@ export async function geocodeAll(queries, cache, { geocode, maxCalls = 30000, co
   const stale = (v) => v?.miss && (Date.parse(today) - Date.parse(v.at)) / 864e5 >= missRetryDays;
   const todo = [...new Set(queries.filter((q) => q && (!(q in cache) || stale(cache[q]))))];
   const batch = todo.slice(0, maxCalls);
-  let calls = 0, hits = 0, misses = 0, stopped = null;
+  let calls = 0, hits = 0, misses = 0, errors = 0, streak = 0, firstError = null, stopped = null;
   let i = 0;
   const worker = async () => {
     while (i < batch.length && !stopped) {
@@ -38,12 +39,15 @@ export async function geocodeAll(queries, cache, { geocode, maxCalls = 30000, co
       try {
         calls++;
         const r = await geocode(q);
+        streak = 0;
         if (r) { cache[q] = r; hits++; } else { cache[q] = { miss: true, at: today }; misses++; }
       } catch (e) {
-        if (e.code === "RATE_LIMIT" || e.code === "AUTH") stopped = e;
+        errors++; streak++; firstError ??= e.message;
+        // 오류 난 주소는 캐시에 남기지 않는다(다음 실행에서 다시 시도). 한도·인증 오류이거나 오류가 20번 이어지면 멈춘다.
+        if (e.code === "RATE_LIMIT" || e.code === "AUTH" || streak >= 20) stopped = e;
       }
     }
   };
   await Promise.all(Array.from({ length: Math.min(concurrency, batch.length) }, worker));
-  return { requested: todo.length, calls, hits, misses, remaining: Math.max(0, todo.length - calls), stopped: stopped?.message ?? null };
+  return { requested: todo.length, calls, hits, misses, errors, first_error: firstError, remaining: Math.max(0, todo.length - hits - misses), stopped: stopped?.message ?? null };
 }
