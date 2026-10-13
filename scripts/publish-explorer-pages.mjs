@@ -8,10 +8,13 @@ import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const dataDir = `${root}pipeline/out/explore`;
-if (!existsSync(`${dataDir}/campgrounds.json`)) { console.log("::warning title=탐색 화면 발행 건너뜀::pipeline/out/explore가 없습니다(npm run build:explore 먼저)."); process.exit(0); }
-const out = `${root}camping-atlas/public/explore/`;
-await rm(out, { recursive: true, force: true });
-await mkdir(`${out}data`, { recursive: true });
+// --shell-only <dir>: 데이터는 그대로 두고 화면(index.html)만 최신 디자인으로 다시 쓴다(배포 때 화면 변경을 바로 반영).
+const shellIdx = process.argv.indexOf("--shell-only");
+const shellOnly = shellIdx > 0 ? (process.argv[shellIdx + 1] ?? `${root}camping-atlas/dist/client/explore/`).replace(/\/?$/, "/") : null;
+if (!shellOnly && !existsSync(`${dataDir}/campgrounds.json`)) { console.log("::warning title=탐색 화면 발행 건너뜀::pipeline/out/explore가 없습니다(npm run build:explore 먼저)."); process.exit(0); }
+const out = shellOnly ?? `${root}camping-atlas/public/explore/`;
+if (shellOnly && !existsSync(`${out}data/campgrounds.json`)) { console.log("::notice::탐색 데이터가 아직 없어 화면만 갱신하지 않습니다."); process.exit(0); }
+if (!shellOnly) { await rm(out, { recursive: true, force: true }); await mkdir(`${out}data`, { recursive: true }); }
 const kakaoKey = (process.env.KAKAO_JS_KEY ?? "").replace(/[^A-Za-z0-9]/g, "");
 // 댓글(giscus) 설정: 저장소 변수 GISCUS_CONFIG = {"repo":"pyw31337/camp","repoId":"…","category":"…","categoryId":"…"}
 let giscus = "";
@@ -33,6 +36,7 @@ ${body}
 </body>
 </html>
 `);
+if (shellOnly) { console.log(`탐색 화면만 갱신: ${out}index.html${kakaoKey ? " · 지도 키 있음" : " · 지도 키 없음"}`); process.exit(0); }
 await cp(`${dataDir}/campgrounds.json`, `${out}data/campgrounds.json`);
 await cp(`${dataDir}/meta.json`, `${out}data/meta.json`);
 if (existsSync(`${dataDir}/camps`)) await cp(`${dataDir}/camps`, `${out}data/camps`, { recursive: true });
