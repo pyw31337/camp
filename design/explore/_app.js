@@ -13,7 +13,7 @@ const KIND = { AUTO_PITCH: ["오토캠핑", "#l-car"], PITCH: ["일반 캠핑", 
 const AREAS = ["전국", "서울·경기", "강원", "충청", "전라", "경상", "제주"];
 const OP = { LOCAL_GOVERNMENT: "지자체", PRIVATE: "민간", NATIONAL_PARK: "국립공원", NATURAL_RECREATION_FOREST: "자연휴양림", PUBLIC_LEISURE: "국민여가", UNKNOWN: "" };
 const GEAR = [["", "장비 크기 무관"], ["4x4", "돔텐트 4×4m"], ["5.5x8", "리빙쉘 5.5×8m"], ["6x9.5", "텐트+타프 6×9.5m"], ["8x10", "대형 8×10m"]];
-const PAGE = 30;
+const PAGE = 40;
 // 테마 정의는 파이프라인(lib/themes.mjs)이 meta.themes로 내려준다. 아이콘은 스프라이트에 넣기 위해 여기서 매핑한다.
 const THEME_ICON = { valley: "#l-waves", sea: "#l-sailboat", forest: "#l-trees", lake: "#l-droplets", mountain: "#l-mountain", city: "#l-building-2", summer: "#l-sun", autumn: "#l-leaf", winter: "#l-snowflake", spring: "#l-flower-2", sunrise: "#l-sunrise", kids: "#l-baby", pet: "#l-dog", glamping: "#l-bed-double", caravan: "#t-caravan", auto: "#l-car", trailer: "#t-caravan", fishing: "#l-fish", walk: "#l-footprints", comfort: "#l-plug-zap", wifi: "#l-wifi", public: "#l-landmark", realtime: "#l-zap" };
 // 이름순 정렬은 “(주)”, “(에드203)” 같은 괄호 접두어와 법인 표기를 빼고 비교한다.
@@ -37,6 +37,9 @@ function load() {
   try { const s = JSON.parse(localStorage.getItem("moyeora-explore") ?? "{}"); Object.assign(state, { area: s.area ?? "전국", gear: s.gear ?? "", saved: new Set(Array.isArray(s.saved) ? s.saved : []) }); } catch {}
   const h = new URLSearchParams(location.hash.slice(1));
   if (h.get("c")) state.open = h.get("c");
+  // 홈 검색창·분류 버튼에서 넘어온 검색어(q)·사이트 형태(k)
+  if (h.get("q")) state.q = h.get("q");
+  if (h.get("k")) state.kinds = new Set(h.get("k").split(","));
   if (h.get("t")) state.theme = h.get("t");
   if (h.get("a") && AREAS.includes(h.get("a"))) state.area = h.get("a");
   if (h.get("g")) state.sgg = h.get("g");
@@ -60,20 +63,23 @@ const SIDO_SHORT = [[/^서울/, "서울"], [/^부산/, "부산"], [/^대구/, "�
 const sidoShort = (s) => SIDO_SHORT.find(([re]) => re.test(s ?? ""))?.[1] ?? (s ?? "");
 const sggKey = (c) => (c._sgg ??= `${sidoShort(c.sido)} ${c.sigungu ?? ""}`.trim());
 const sggLabel = (k) => k;
+const haystack = (c) => (c._hay ??= [c.name, c.sido, sidoShort(c.sido), c.sigungu, c.addr, c.line, ...c.th.map((id) => THEME_LABEL[id] ?? ""), ...c.kinds.map(([k]) => KIND[k]?.[0] ?? ""), ...c.amenities, ...c.env, ...c.themes, OP[c.op], ...c.types, ...c.booking.methods].filter(Boolean).join(" ").toLowerCase().replace(/\s+/g, ""));
+const THEME_LABEL = {};
 const isRealtime = (c) => c.booking.methods.some((m) => /실시간/.test(m));
 const petOk = (c) => /가능/.test(c.pets ?? "") && !/불가/.test(c.pets ?? "");
 const dist = (a, b) => { const R = 6371, t = Math.PI / 180, x = (b.lat - a.lat) * t, y = (b.lng - a.lng) * t; const h = Math.sin(x / 2) ** 2 + Math.cos(a.lat * t) * Math.cos(b.lat * t) * Math.sin(y / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); };
 
 // 지도 마커는 “지도에 보이는 곳만” 조건을 빼고 그린다(지도를 옮기면 다른 곳도 보이도록).
 function filtered({ forMap = false } = {}) {
-  const q = state.q.trim().replace(/\s+/g, "");
+  // 검색어는 띄어쓰기로 나눠 모두 포함하는 곳만(이름·지역·주소·한 줄 소개·테마·사이트 형태·시설·입지)
+  const tokens = state.q.trim().toLowerCase().split(/\s+/).filter((t) => t && t !== "전국");
   const list = ALL.filter((c) => {
     if (state.savedOnly && !state.saved.has(c.id)) return false;
     if (!forMap && !inBounds(c)) return false;
     if (state.area !== "전국" && c.area !== state.area) return false;
     if (state.sgg && sggKey(c) !== state.sgg) return false;
     if (state.theme && !c.th.includes(state.theme)) return false;
-    if (q && !`${c.name}${c.sido}${c.sigungu}${c.addr}`.replace(/\s+/g, "").includes(q)) return false;
+    if (tokens.length && !tokens.every((t) => haystack(c).includes(t))) return false;
     if (state.kinds.size && !c.kinds.some(([k]) => state.kinds.has(k))) return false;
     if (state.realtime && !isRealtime(c)) return false;
     if (state.pet && !petOk(c)) return false;
@@ -145,9 +151,10 @@ function renderHub() {
   const body = groups.map((g) => { const h = tiles(g); return h ? `<div class="theme-group"><h3>${esc(g)}</h3><div class="theme-grid">${h}</div></div>` : ""; }).join("");
   hub.innerHTML = body ? `<section class="hub" aria-label="테마로 찾기"><div class="hub-head"><h2>${esc(scope)} 테마로 찾기</h2><button class="link-btn" type="button" data-hub-toggle aria-expanded="${!state.hubFolded}">${state.hubFolded ? "펼치기" : "접기"}</button></div>${state.hubFolded ? "" : body}</section>` : "";
 }
+const titleOf = (n) => (state.q.trim() ? `‘${state.q.trim()}’ 검색 결과 ${n.toLocaleString()}곳` : `캠핑장 ${n.toLocaleString()}곳`);
 function renderListOnly() {
   const list = filtered();
-  $("#resultTitle").textContent = `캠핑장 ${list.length.toLocaleString()}곳`;
+  $("#resultTitle").textContent = titleOf(list.length);
   $("#cards").innerHTML = list.length ? list.slice(0, state.shown).map(card).join("") : emptyBox();
   $("#moreBtn").hidden = list.length <= state.shown;
 }
@@ -155,7 +162,7 @@ const emptyBox = () => `<div class="empty">${ic("#t-tent-off")}<b>${state.savedO
 function renderList() {
   renderHub();
   const list = filtered();
-  $("#resultTitle").textContent = `캠핑장 ${list.length.toLocaleString()}곳`;
+  $("#resultTitle").textContent = titleOf(list.length);
   $("#resultSub").textContent = META ? `고캠핑 ${ymd(META.sources[0]?.fetched_at)} 기준` : "";
   $("#cards").innerHTML = list.length ? list.slice(0, state.shown).map(card).join("")
     : emptyBox();
@@ -305,7 +312,7 @@ function detail(c) {
     ["운영 주체", [OP[c.op], c.types.join("·")].filter(Boolean).join(" · ") || null, ""],
     ["운영 상태", c.status, ""],
   ].filter(([, v]) => v).map(([k, v, a]) => `<div class="info-row"><small>${k}</small><span data-wrap-ok>${esc(v)}</span>${a}</div>`).join("");
-  return `<div class="sheet-close"><button class="round" type="button" data-close aria-label="닫기">${ic("#l-x")}</button></div>
+  return `<div class="sheet-close"><button class="back-btn" type="button" data-close aria-label="목록으로">${ic("#l-arrow-left", "i-sm")}<span>목록</span></button></div>
   <div class="d-hero">${hero}</div>
   <div class="d-body">
     <div class="d-title"><h2>${esc(c.name)}</h2>${c.line ? `<p class="d-line" data-wrap-ok>${esc(c.line)}</p>` : ""}<p data-wrap-ok>${esc([c.sido, c.sigungu].filter(Boolean).join(" "))}${OP[c.op] ? ` · ${OP[c.op]}` : ""}</p>
@@ -364,7 +371,8 @@ function openDetail(id) {
   const c = ALL.find((x) => x.id === id);
   if (!c) return;
   state.open = id;
-  history.replaceState(null, "", `#c=${id}`);
+  // 상세는 별도 페이지처럼: 주소에 남기고(뒤로 가기로 목록 복귀), 화면 맨 위부터 보여 준다.
+  if (new URLSearchParams(location.hash.slice(1)).get("c") !== id) history.pushState({ c: id }, "", `#c=${id}`);
   document.title = `${c.name} · 모여라 캠핑`;
   $("#sheetRoot").innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(c.name)}"><div class="sheet-scrim" data-close></div><div class="sheet-panel">${detail(c)}</div></div>`;
   document.body.style.overflow = "hidden";
@@ -398,6 +406,8 @@ function syncHash() {
   if (state.theme) h.set("t", state.theme);
   if (state.area !== "전국") h.set("a", state.area);
   if (state.sgg) h.set("g", state.sgg);
+  if (state.q.trim()) h.set("q", state.q.trim());
+  if (state.kinds.size) h.set("k", [...state.kinds].join(","));
   history.replaceState(null, "", h.toString() ? `#${h}` : location.pathname);
 }
 const share = (c) => shareUrl(campUrl(c), `${c.name} · 모여라 캠핑`);
@@ -413,7 +423,22 @@ function toast(msg) {
   const el = document.createElement("div"); el.className = "toast"; el.setAttribute("role", "status"); el.textContent = msg;
   document.body.append(el); setTimeout(() => el.remove(), 2000);
 }
-function closeDetail() { document.title = BASE_TITLE; state.open = null; $("#sheetRoot").innerHTML = ""; document.body.style.overflow = ""; history.replaceState(null, "", location.pathname); syncHash(); }
+function closeDetail({ fromPop = false } = {}) {
+  document.title = BASE_TITLE; state.open = null; $("#sheetRoot").innerHTML = ""; document.body.style.overflow = "";
+  if (!fromPop) { if (history.state?.c) history.back(); else { history.replaceState(null, "", location.pathname); syncHash(); } }
+}
+// 주소의 #q=·#k=·#t=·#a=·#g=를 직접 바꾸거나 링크로 들어오면 그 조건으로 다시 그린다.
+window.addEventListener("hashchange", () => {
+  const h = new URLSearchParams(location.hash.slice(1));
+  if (h.get("c")) return;
+  state.q = h.get("q") ?? ""; state.kinds = new Set(h.get("k") ? h.get("k").split(",") : []);
+  state.theme = h.get("t") ?? ""; state.area = AREAS.includes(h.get("a")) ? h.get("a") : "전국"; state.sgg = h.get("g") ?? "";
+  $("#q").value = state.q; rerender();
+});
+window.addEventListener("popstate", () => {
+  const id = new URLSearchParams(location.hash.slice(1)).get("c");
+  if (id && id !== state.open) openDetail(id); else if (!id && state.open) closeDetail({ fromPop: true });
+});
 
 /* ---------- 이벤트 ---------- */
 function rerender(resetPage = true) { if (resetPage) state.shown = PAGE; save(); renderChips(); renderList(); }
@@ -473,7 +498,7 @@ document.addEventListener("change", (e) => {
   }
 });
 let qTimer;
-document.addEventListener("input", (e) => { if (e.target.id === "q") { clearTimeout(qTimer); qTimer = setTimeout(() => { state.q = e.target.value; rerender(); }, 160); } });
+document.addEventListener("input", (e) => { if (e.target.id === "q") { clearTimeout(qTimer); qTimer = setTimeout(() => { state.q = e.target.value; rerender(); syncHash(); }, 200); } });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape" && state.open) closeDetail(); });
 const head = () => document.documentElement.style.setProperty("--head", `${$(".top").offsetHeight + $(".bar").offsetHeight}px`);
 new ResizeObserver(head).observe(document.body);
@@ -486,11 +511,15 @@ async function boot() {
   try {
     const [cg, meta] = await Promise.all([fetch("data/campgrounds.json").then((r) => r.json()), fetch("data/meta.json").then((r) => r.json()).catch(() => null)]);
     ALL = cg.map(withDefaults); META = meta;
+    for (const t of META?.themes ?? []) THEME_LABEL[t.id] = t.label;
   } catch (e) {
     $("#cards").innerHTML = `<div class="empty">${ic("#l-circle-alert")}<b>데이터를 불러오지 못했어요</b><span data-wrap-ok>잠시 후 다시 시도해 주세요.</span></div>`;
     return;
   }
+  if (state.q) $("#q").value = state.q;
   renderChips(); renderList(); head(); initMap();
+  // 목록 끝에 닿으면 자동으로 더 불러온다(수백 곳도 끊김 없이).
+  new IntersectionObserver((es) => { if (es.some((x) => x.isIntersecting) && !$("#moreBtn").hidden) { state.shown += PAGE; renderListOnly(); } }, { rootMargin: "600px" }).observe($("#moreBtn"));
   if (state.open) openDetail(state.open);
 }
 boot();

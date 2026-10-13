@@ -251,3 +251,13 @@ details.sub summary h4 { min-width: 0; }
 .steps { list-style: none; padding-left: 0; counter-reset: step; }
 .steps li { position: relative; padding-left: 2rem; counter-increment: step; }
 .steps li::before { content: counter(step); position: absolute; left: 0; top: .1rem; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--green-tint); color: var(--green-press); font-size: var(--fs-xs); font-weight: 900; display: grid; place-items: center; }
+/* 상세 = 한 페이지: 모든 화면에서 전체 화면, 내용은 가운데 정렬 */
+.sheet { grid-template-columns: minmax(0, 1fr); }
+.sheet-scrim { display: none; }
+.sheet-panel { width: 100%; }
+.sheet-close { position: sticky; top: 0; z-index: 5; display: flex; justify-content: flex-start; padding: 10px 16px; height: auto; background: transparent; pointer-events: none; }
+.back-btn { pointer-events: auto; display: inline-flex; align-items: center; gap: 6px; min-height: 2.5rem; padding: 0 14px 0 10px; border-radius: 999px; border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(8px); box-shadow: var(--shadow-1); font: inherit; font-size: var(--fs-sm); font-weight: 800; color: var(--ink); cursor: pointer; white-space: nowrap; }
+.d-hero { margin-top: -3.75rem; height: clamp(240px, 42vw, 440px); }
+.d-body, .d-cta { max-width: 880px; margin-left: auto; margin-right: auto; width: 100%; }
+.d-cta { border-radius: 0; }
+@media (min-width: 900px) { .d-cta { border-left: 1px solid var(--line); border-right: 1px solid var(--line); } }
