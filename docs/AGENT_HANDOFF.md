@@ -49,15 +49,19 @@
 | Claude 작업 연계 | `claude/upbeat-keller-x75pct`의 전국 데이터 파이프라인을 검토하고 호환되는 12개 커밋을 반영했다. GoCamping 동기화·예약 규칙 레지스트리·캘린더/ICS·무료 후보·공중화장실·휴게소·졸음쉼터 수집/연결이 포함된다. | `pipeline`에서 `npm test` 50개 통과, `npm run validate`, `npm run calendar -- 60 2026-10-13`, `npm run ics -- 60 2026-10-13` 성공. 캘린더 23건(확인 필요 14건) 생성. API 키·원천 접근 허가 전에는 운영 데이터로 표시 금지. |
 | 프리미엄 탐색 UI | Dribbble 여행·캠핑 참고 화면의 사진 중심 계층과 예약 UI를 바탕으로 검색·상세·최근 현장 경로 화면을 다시 구성했다. 실제 사진은 자라섬캠핑장 운영기관 시설 원문 4건만 외부 표시한다. | `npm run lint`, `npm run build`, `npm run build:pages`, GitHub Pages 경로 자산 검증 성공. 브라우저에서 오류 0건, “사이트 A” 검색 1건·상세 전환, 320px 문서 가로 넘침 없음 확인. [Pages 실행 38333884947](https://github.com/pyw31337/camp/actions/runs/38333884947) 통과 및 공개 URL의 새 헤드라인 로드 확인. |
 | UI 재설계 | 클로드 아티팩트 v2를 검토해 히어로 안의 탭형 검색, 예약 오픈 우선 카드, 단순화한 실제 상품 카드, 예약처 규칙, 모바일 하단 탐색으로 전체 정보 구조를 재구성했다. 클로드 시안의 콘셉트 이미지·예시 캠핑장은 가져오지 않았다. | 로컬 `npm run lint`, `npm run build`, `npm run build:pages` 성공. 브라우저에서 “사이트 A” 검색 1건, 상세 열기, 콘솔 오류 0건, 320px 문서 폭 305px/스크롤 폭 305px 확인. [Pages 실행 38335351773](https://github.com/pyw31337/camp/actions/runs/38335351773) 통과, 공개 주소에서 히어로·예약 오픈 카드 4건 로드 확인. |
+| 클로드 시안 기준 UI·공개 데이터 발행 | 사용자 요청에 따라 클로드 아티팩트 v2의 큰 사진 히어로, 탭형 검색, 카테고리 필, 가로 예약 카드, 사진 카드와 모바일 하단 탐색을 기준 레이아웃으로 다시 구현했다. `pipeline/out/open-calendar.json`은 `camping-atlas/public/data/open-calendar.json`으로 발행해 화면이 로드하며, `catalog.json`은 고캠핑 공개 여부·수집 시각·상품 수를 표시한다. `db/003_seed_source_registry.sql`에는 고캠핑·숲나들e·국립공원·서울시·자라섬의 원천/예약처 레지스트리를 추가했다. | `pipeline`: `npm test` 52개, `npm run validate`, `npm run publish:web-catalog` 통과. `camping-atlas`: `npm run lint`, `npm run build`, `npm run build:pages` 통과. 320px에서 문서 폭/스크롤 폭 305px로 일치하고 콘솔 오류 0건이다. [Pages 실행 38343519616](https://github.com/pyw31337/camp/actions/runs/38343519616) 통과 후 공개 URL에서 히어로 1개, 예약 카드 23개, 오류 0건을 확인했다. 고캠핑 키/영구 보존 조건은 아직 없어 `catalog.json`의 고캠핑 상태는 `AWAITING_API_SYNC`; 이 값은 전국 등록 수처럼 표시하지 않는다. |
+| 기준 데이터 실제 동기화 준비 | GitHub Actions 시크릿 `DATA_GO_KR_SERVICE_KEY`가 등록된 것을 확인했고, 실행 38344388514에서 키 검증과 `sync:gocamping`이 성공했다. 고캠핑 공개 보존 근거는 공공데이터포털의 이용허락범위 제한 없음 표기를 원문으로 확인해 `db/004_confirm_gocamping_catalog_license.sql`에 기록했다. 메인 수동 동기화가 PR의 장시간 부가 수집 대기열에 막히지 않도록 `data-sync.yml`의 동시성 그룹을 ref별로 분리했다. | GitHub Actions 실행 기록에서 키 검증·고캠핑 동기화 단계 성공 확인. `db/004`는 PostgreSQL 실행 환경이 없어 적용 전 SQL 검토만 완료했으며, 적용 뒤 `data_source.gocamping.allows_persistent_storage=true`가 되어야 한다. |
+| PostgreSQL 적재기 | `pipeline`에 `db:migrate`와 `db:import-gocamping`을 추가했다. 외부 식별자(`gocamping:contentId`)를 기준으로 시설·별칭·상품 유형/면수·규격 그룹·고캠핑 제공 예약 링크·원천 스냅샷을 멱등 적재한다. 고캠핑의 예약 URL은 운영자 공식 채널로 확정하지 않아 `UNKNOWN` 연결로 보관한다. 가격·정원·실시간 재고·규격의 상품 연결은 원천이 제공하지 않으므로 생성하지 않는다. Actions는 `DATABASE_URL` 비밀값이 있을 때만 고캠핑 동기화 후 마이그레이션/적재를 실행한다. | `pipeline`에서 `npm ci`, `npm test` 54개, `npm run validate` 통과. 로컬에 PostgreSQL 서버와 `DATABASE_URL`이 없어 실제 SQL 적용은 실행하지 못했고, 연결 문자열 없이 마이그레이션 명령이 즉시 중단되는 것을 확인했다. |
 
 ## 다음 작업
 
-1. 고캠핑 API 키를 비밀 관리 환경에 설정하고 `pipeline` 동기화를 실제 기준 데이터로 실행한다. 키를 저장소에 커밋하지 않는다.
-2. DB를 사용할 실행 환경(PostgreSQL 또는 D1 등)을 선택하고 `db/001_initial_schema.sql`, `db/002_public_toilets.sql`의 호환성·이관/롤백 전략을 검토한다. 현재 SQL은 PostgreSQL 16 전제다.
+1. 메인 브랜치의 새 `data-sync.yml`로 고캠핑 동기화를 다시 실행하고, 발행된 `catalog.json`의 레코드 수·원천 시각·스키마를 검토한다. 키를 저장소에 커밋하지 않는다.
+2. DB를 사용할 PostgreSQL 16+ 실행 환경과 `DATABASE_URL` 비밀값을 준비해 다음 데이터 동기화에서 `db/001_initial_schema.sql`부터 `db/004_confirm_gocamping_catalog_license.sql`까지 적용하고 3,118곳을 적재한다. `db/004`의 롤백은 `allows_persistent_storage=false`로 되돌리고 공개 카탈로그에서 해당 원천을 제외하는 방식이다.
 3. 실제 읽기 API가 생기면 파일럿의 자라섬 정적 레코드를 API 응답으로 교체하고, 상품·미디어·공지·예약 제공자 레지스트리를 전국으로 확대한다.
 4. 공식 소셜 계정은 소유 확인·임베드 권한·게시시각·캠핑장 매칭이 모두 확인된 뒤에만 `social_connection`과 `social_item`에 등록한다. 해시태그 수집이나 이미지 저장으로 대체하지 않는다.
 5. (2026-10-13 병합 처리) `claude/upbeat-keller-x75pct`의 Cloudflare 워크플로는 `deploy-cloudflare.yml`로 이름을 바꿔 GitHub Pages(`deploy-pages.yml`)와 공존한다. 시안 이미지는 `camping-atlas/public/images/` 생성 이미지의 크롭 파생본이며 출처를 `design/ASSETS.md`에 기록했다. main에서 원본 PNG를 지운 판단과 맞는지(파생본 유지 vs 교체) 검토가 남아 있다.
 6. 현재 웹의 예약 오픈 카드는 `pipeline/out/open-calendar.json`의 2026-10-13 생성 결과 중 일부를 동일 원천 URL·확인일과 함께 정적으로 옮긴 상태다. 배포 시점의 파이프라인 실행/API 연결 전에는 일반화된 실시간 일정으로 표시하지 않는다.
+7. `data-sync.yml`은 예약 캘린더와 공개 카탈로그를 만든 뒤 변경된 `camping-atlas/public/data/`를 `main`에 커밋하도록 확장했다. 고캠핑 전체 레코드는 공공데이터포털의 보존·재배포 조건을 검토한 뒤 repository variable `GOCAMPING_CATALOG_PUBLISH_APPROVED`를 `true`로 설정해야만 공개한다. 설정 전에는 일정만 갱신하고 기준 시설 카탈로그는 비어 있는 것이 정상이다.
 
 **시안·무료 운영 트랙**
 

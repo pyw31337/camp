@@ -12,10 +12,12 @@ on:
       - ".github/workflows/data-sync.yml"
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
-  group: data-sync
+  # PR 검증의 장시간 보조 수집이 main의 실제 기준 카탈로그 발행을 막지 않게
+  # ref별로 대기열을 분리한다. 같은 ref 안에서는 순차 실행되어 원본 파일 충돌을 막는다.
+  group: data-sync-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -30,6 +32,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - run: npm ci
       - run: npm run validate
       - run: npm run calendar -- 120
       - run: npm run ics -- 120
@@ -44,7 +47,42 @@ jobs:
         run: npm run sync:gocamping
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+      - name: Migrate PostgreSQL and import the GoCamping snapshot
+        # DATABASE_URL은 운영 DB에서만 제공한다. 값이 없을 때 공개 카탈로그
+        # 발행은 계속 가능하지만, DB 적재를 성공한 것으로 표기하지 않는다.
+        if: github.event_name != 'pull_request'
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::notice title=PostgreSQL import skipped::DATABASE_URL secret is not configured."
+            exit 0
+          fi
+          npm run db:migrate
+          npm run db:import-gocamping
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_SSL: ${{ vars.DATABASE_SSL }}
+      # 전국 기준 시설·예약 캘린더는 부가 시설 수집 실패와 관계없이 먼저 공개한다.
+      - name: Build the read-only GitHub Pages data payload
+        run: npm run publish:web-catalog
+        env:
+          # 공개 카탈로그에 기준 시설을 내보내려면 공공데이터포털의 보존·재배포 조건을
+          # 검토한 뒤 repository variable을 정확히 true로 설정한다.
+          PUBLISH_GOCAMPING_CATALOG: ${{ vars.GOCAMPING_CATALOG_PUBLISH_APPROVED }}
+      - name: Publish refreshed calendar and approved discovery data
+        if: github.event_name != 'pull_request'
+        working-directory: .
+        run: |
+          if git diff --quiet -- camping-atlas/public/data; then
+            echo "No public data changes to commit."
+            exit 0
+          fi
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add camping-atlas/public/data
+          git commit -m "chore(data): refresh public camping catalog"
+          git push
       - name: Probe undocumented data.go.kr endpoints
+        continue-on-error: true
         run: npm run probe
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
@@ -58,16 +96,19 @@ jobs:
           key: geocode-v3-${{ github.run_id }}
           restore-keys: geocode-v3-
       - name: Sync public toilets and link to campgrounds
+        continue-on-error: true
         run: npm run sync:toilets
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
       - name: Sync rest areas and drowsy shelters
+        continue-on-error: true
         run: npm run sync:rest-stops
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
           EX_API_KEY: ${{ secrets.EX_API_KEY }}
       - name: Discover free public camp sites (candidates only)
+        continue-on-error: true
         run: npm run discover:public-free
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}

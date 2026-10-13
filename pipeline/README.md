@@ -18,7 +18,11 @@ npm run validate
 npm run calendar -- 90 2026-10-12   # out/open-calendar.json
 npm run ics -- 120 2026-10-12       # out/ics/*.ics
 DATA_GO_KR_SERVICE_KEY=... npm run sync:gocamping   # out/campgrounds.json
+DATABASE_URL=postgres://... npm run db:migrate      # db/001~004 순서 적용
+DATABASE_URL=postgres://... npm run db:import-gocamping # 정규화 스냅샷을 시설·상품·규격·원천 증빙으로 적재
 ```
+
+`db:import-gocamping`은 `out/campgrounds.json`을 입력으로 사용한다. 외부 식별자(`gocamping:contentId`)로 재실행 가능하며, 고캠핑이 제공하지 않는 가격·정원·실시간 재고는 만들지 않는다. 사이트 규격은 API가 어느 상품에 적용되는지 식별하지 않으므로 `고캠핑 · 사이트 규격(분류 미확정)` 아래에 별도로 적재한다. 운영 연결 문자열은 `DATABASE_URL` 비밀값으로만 전달하고 저장소·정적 카탈로그에 쓰지 않는다.
 
 ## 규칙 추가 방법
 

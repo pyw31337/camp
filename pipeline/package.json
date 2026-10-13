@@ -10,12 +10,18 @@
     "test": "node --test",
     "validate": "node scripts/validate-registry.mjs",
     "calendar": "node scripts/build-open-calendar.mjs",
+    "publish:web-catalog": "node scripts/publish-web-catalog.mjs",
     "sync:gocamping": "node scripts/sync-gocamping.mjs",
+    "db:migrate": "node scripts/migrate-postgres.mjs",
+    "db:import-gocamping": "node scripts/import-gocamping-postgres.mjs",
     "ics": "node scripts/build-ics.mjs",
     "check:keys": "node scripts/check-data-go-kr.mjs",
     "discover:public-free": "node scripts/discover-public-free.mjs",
     "sync:toilets": "node scripts/sync-toilets.mjs",
     "probe": "node scripts/probe-endpoints.mjs",
     "sync:rest-stops": "node scripts/sync-rest-stops.mjs"
+  },
+  "dependencies": {
+    "pg": "8.23.1"
   }
 }
