@@ -84,6 +84,8 @@ LOCALDATA 관리번호 ┘   (entity_link 점수·근거)          ├─ campgr
 - 005~009, 적재기(`npm run db:import-enrichment`), 대조(`npm run db:verify-load`), 통합 테스트, `db-verify.yml`, `data-sync.yml` 임시 DB 단계 완료.
 - 운영 적재 조건: 소유자 DB 생성 → `DATABASE_URL` → Codex 단계에 `db:import-enrichment` 추가(부가 원천 이용허락 확정 뒤).
 
+- LOCALDATA 일반·자동차야영장업 인허가 수집(`npm run sync:localdata-campgrounds`) → 고캠핑 매칭(이름·좌표·도로명·전화, 1:1) → `entity_link`. 숨은 후보(`HIDDEN_CANDIDATE`), 인허가 폐업인데 고캠핑에 운영 중으로 남은 곳(`LICENSE_CLOSED_BUT_LISTED`)을 표시. 업종 고유 열(시설 규모 등)은 `extra`로 보존.
+
 ## 8. Codex 확인 요청
 
 1. `db:migrate`가 파일 전체를 한 번에 실행하므로 005~008도 `BEGIN/COMMIT`으로 감싸 같은 방식에 맞춘다. 이견 있으면 인수인계에 남겨 달라.
