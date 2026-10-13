@@ -1,0 +1,76 @@
+// 웹 탐색 화면용 데이터: 고캠핑 시설 + 주변 공중화장실 + 공식 안내 요금(TourAPI) + 예약처 규칙·다가오는 오픈 일정.
+// 원칙: 각 값의 출처·확인 시각을 함께 싣는다. 실시간 재고·판매가는 만들지 않는다(예약은 공식 예약처로 연결).
+
+const AREA = [
+  [/서울|경기|인천/, "서울·경기"], [/강원/, "강원"], [/충청|충북|충남|대전|세종/, "충청"],
+  [/전라|전북|전남|광주/, "전라"], [/경상|경북|경남|부산|대구|울산/, "경상"], [/제주/, "제주"],
+];
+export const areaOf = (sido) => AREA.find(([re]) => re.test(sido ?? ""))?.[1] ?? "기타";
+
+const PROVIDER_BY_HOST = [
+  [/foresttrip\.go\.kr/, "foresttrip"], [/reservation\.knps\.or\.kr|knps\.or\.kr/, "knps"], [/yeyak\.seoul\.go\.kr/, "seoul-yeyak"],
+];
+export function providerOf(url) {
+  try { const host = new URL(url).host; return PROVIDER_BY_HOST.find(([re]) => re.test(host))?.[1] ?? null; } catch { return null; }
+}
+const httpUrl = (u) => { const s = String(u ?? "").trim(); if (!s) return null; const v = /^https?:\/\//i.test(s) ? s : `http://${s}`; try { return new URL(v).toString(); } catch { return null; } };
+
+/**
+ * @param {{campgrounds:object[], fetched_at?:string}} camps out/campgrounds.json
+ * @param {{campgrounds?:Record<string,{count_2km:number,nearest:object[]}>}|null} toilets out/campground-toilets.json
+ * @param {{records?:Record<string,object>}|null} fees out/tour-fees.json
+ */
+export function buildExploreRecords(camps, toilets, fees) {
+  return (camps.campgrounds ?? []).filter((c) => c.location && c.name).map((c) => {
+    const id = String(c.external_id.id);
+    const near = toilets?.campgrounds?.[id];
+    const fee = fees?.records?.[id];
+    const bookingUrl = httpUrl(c.reservation?.url);
+    return {
+      id,
+      name: c.name,
+      sido: c.address?.sido ?? null,
+      sigungu: c.address?.sigungu ?? null,
+      area: areaOf(c.address?.sido),
+      addr: [c.address?.line1, c.address?.line2].filter(Boolean).join(" ") || null,
+      lat: Math.round(c.location.lat * 1e6) / 1e6,
+      lng: Math.round(c.location.lng * 1e6) / 1e6,
+      tel: c.contact?.tel ?? null,
+      homepage: httpUrl(c.contact?.homepage),
+      op: c.operator_type ?? "UNKNOWN",
+      status: c.status_text ?? null,
+      types: c.legal_business_types ?? [],
+      kinds: (c.products ?? []).map((p) => [p.kind, p.site_count]),
+      sizes: (c.site_sizes ?? []).map((s) => [s.width_m, s.depth_m, s.count]),
+      floors: (c.floors ?? []).map((f) => [f.floor, f.count]),
+      amenities: [...(c.amenities ?? []), ...(c.amenities_etc ?? [])],
+      env: c.environment ?? [],
+      themes: c.themes ?? [],
+      pets: c.pets ?? null,
+      fire: c.fire_pit ?? null,
+      trailer: c.trailer_allowed ?? null,
+      caravan: c.caravan_allowed ?? null,
+      toilets: c.toilets || null,
+      showers: c.showers || null,
+      sinks: c.sinks || null,
+      rental: c.rental_equipment ?? [],
+      seasons: c.operating_seasons ?? [],
+      days: c.operating_days ?? [],
+      booking: { methods: c.reservation?.methods ?? [], url: bookingUrl, provider: providerOf(bookingUrl) },
+      img: httpUrl(c.hero_image_url),
+      fee: fee?.fee_text ? { text: fee.fee_text, min: fee.fee_range?.min_krw ?? null, max: fee.fee_range?.max_krw ?? null, checked_at: fee.checked_at, url: fee.source_url } : null,
+      nearby_toilets: near ? { within_2km: near.count_2km, within_500m: near.count_500m ?? null, nearest: (near.nearest ?? []).slice(0, 3).map((t) => ({ name: t.name, m: t.distance_m, h24: t.open_24h ?? null, src: t.source ?? "mois" })) } : null,
+      modified_at: c.source?.modified_at ?? null,
+    };
+  });
+}
+
+/** 예약처(제공자)별 규칙과 다가오는 일정 */
+export function buildProviders(registry, calendar, now = new Date()) {
+  const upcoming = (calendar?.events ?? []).filter((e) => Date.parse(e.at ?? e.date) >= now - 864e5).slice(0, 400);
+  return (registry?.providers ?? []).map((p) => ({
+    id: p.id, name: p.name, url: p.official_url, integration: p.integration, notes: p.notes ?? null,
+    rules: (registry.rules ?? []).filter((r) => r.provider_id === p.id).map((r) => ({ id: r.id, label: r.label, summary: r.summary, source: r.source })),
+    events: upcoming.filter((e) => e.provider_id === p.id).slice(0, 12).map((e) => ({ type: e.type, at: e.at, time_known: e.time_known, label: e.label, stay: e.stay ?? null, needs_verification: e.needs_verification, source: e.source })),
+  }));
+}

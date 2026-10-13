@@ -62,7 +62,7 @@ test("지오코딩 캐시: 이미 있는 주소는 묻지 않고, 없음 결과�
 test("지오코딩: 한도 초과면 즉시 멈추고 남은 건수를 알린다", async () => {
   const r = await geocodeAll(["a", "b", "c"], {}, { concurrency: 1, geocode: async () => { const e = new Error("카카오 호출 한도 초과"); e.code = "RATE_LIMIT"; throw e; } });
   assert.equal(r.calls, 1);
-  assert.equal(r.remaining, 2);
+  assert.equal(r.remaining, 3, "오류 난 주소도 다음 실행에서 다시 시도할 대상");
   assert.match(r.stopped, /한도/);
 });
 
@@ -135,4 +135,26 @@ test("Overpass: 504면 다음 서버로 넘어간다", async () => {
   const r = await overpass("q", { fetchImpl, servers: ["https://a.test/x", "https://b.test/x"], wait: async () => {} });
   assert.equal(r.elements.length, 1);
   assert.deepEqual(calls, ["a.test", "a.test", "b.test"]);
+});
+
+test("전국공중화장실표준데이터 API(영문 필드) → 정규화, 원천 좌표 사용", async () => {
+  const { fromStandardApi } = await import("../lib/toilets.mjs");
+  const t = fromStandardApi({ toiletType: "공중화장실", toiletNm: "계곡입구 화장실", rdnmadr: "강원특별자치도 홍천군 서석면 1", lnmadr: "", openTime: "24시간", menDisabledToiletBowlNumber: "1", ladiesDisabledToiletBowlNumber: "1", emgBellYn: "Y", latitude: "37.70", longitude: "128.10", referenceDate: "2026-09-30" });
+  assert.equal(t.name, "계곡입구 화장실");
+  assert.equal(t.open_24h, true);
+  assert.equal(t.disabled_stalls, 2);
+  assert.equal(t.emergency_bell, true);
+  assert.equal(t.lat, 37.7);
+  assert.equal(t.precision, "SOURCE");
+  assert.equal(fromStandardApi({ toiletNm: "주소 없음" }), null);
+});
+
+test("지오코딩: 오류 응답은 ‘없음’으로 캐시하지 않고, 오류가 이어지면 멈춘다", async () => {
+  const cache = {};
+  const err = Object.assign(new Error("카카오 HTTP 400: limit exceeded"), { code: "HTTP" });
+  const r = await geocodeAll(Array.from({ length: 40 }, (_, i) => `주소 ${i}`), cache, { geocode: async () => { throw err; }, concurrency: 1 });
+  assert.equal(Object.keys(cache).length, 0, "오류 난 주소는 캐시에 없다");
+  assert.equal(r.errors, 20);
+  assert.match(r.stopped, /limit/);
+  assert.equal(r.remaining, 40);
 });

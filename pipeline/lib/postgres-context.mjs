@@ -294,10 +294,14 @@ async function replaceNearbyToiletLinks(client, payload, authoritative) {
   for (const [externalId, entry] of Object.entries(payload.campgrounds)) {
     const campgroundId = campgroundIds.get(externalId);
     if (!campgroundId) continue;
-    for (const [index, near] of (entry?.nearest ?? []).entries()) {
+    // 원천에 같은 화장실이 중복 등록되면 한 캠핑장의 목록에 같은 toilet_id가 두 번 나온다 → 처음(가까운) 것만 쓰고 순위를 다시 매긴다.
+    const seen = new Set();
+    for (const near of entry?.nearest ?? []) {
       const toiletId = toiletIds.get(near.toilet_id);
       const distance = nonNegativeInt(near.distance_m);
-      if (toiletId && distance != null) rows.push({ campground_id: campgroundId, public_toilet_id: toiletId, distance_m: distance, rank: index + 1 });
+      if (!toiletId || distance == null || seen.has(toiletId)) continue;
+      seen.add(toiletId);
+      rows.push({ campground_id: campgroundId, public_toilet_id: toiletId, distance_m: distance, rank: seen.size });
     }
   }
   await client.query("DELETE FROM campground_nearby_toilet");
@@ -381,8 +385,11 @@ export async function importContextData(pool, input) {
     ?? timestamp(input?.restStops?.generated_at)
     ?? timestamp(input?.calendar?.generated_at)
     ?? new Date().toISOString();
-  const toiletRows = (input?.toilets?.toilets ?? []).map((toilet) => normalizeToilet(toilet, sourceIds, observedAt)).filter(Boolean);
-  const stopRows = (input?.restStops?.stops ?? []).map((stop) => normalizeStop(stop, sourceIds, observedAt)).filter(Boolean);
+  // 일일 원천 파일에는 같은 키가 두 번 나오는 행이 있다(같은 쉼터 중복 등록, 같은 이름+주소 화장실). 한 INSERT 안의
+  // 중복 키는 PostgreSQL이 “cannot affect row a second time”으로 거부하므로 키별 마지막 행만 남긴다.
+  const lastByKey = (rows, key) => [...new Map(rows.map((row) => [key(row), row])).values()];
+  const toiletRows = lastByKey((input?.toilets?.toilets ?? []).map((toilet) => normalizeToilet(toilet, sourceIds, observedAt)).filter(Boolean), (row) => row.source_key);
+  const stopRows = lastByKey((input?.restStops?.stops ?? []).map((stop) => normalizeStop(stop, sourceIds, observedAt)).filter(Boolean), (row) => `${row.data_source_id}|${row.source_key}`);
   const officialToiletCount = toiletRows.filter((row) => row.source_code === "mois-public-restroom").length;
   const client = await pool.connect();
   try {

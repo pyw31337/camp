@@ -30,6 +30,15 @@ jobs:
   sync:
     name: Sync public sources and build open calendar
     runs-on: ubuntu-latest
+    # 그날 수집한 실제 파일을 실행마다 새로 띄우는 PostgreSQL에 넣어 본다(아래 마지막 단계, 비용 없음).
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
     defaults:
       run:
         working-directory: pipeline
@@ -81,6 +90,7 @@ jobs:
             pipeline/.cache/geocode-toilets.json
             pipeline/.cache/osm-toilets.json
             pipeline/.cache/osm-rest-stops.json
+            pipeline/.cache/tour-intro.json
           key: source-cache-v3-${{ github.run_id }}
           restore-keys: source-cache-v3-
       - name: Sync public toilets and link to campgrounds
@@ -103,6 +113,16 @@ jobs:
         run: npm run discover:public-free
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+      - name: Collect official fee notes (TourAPI) and match to GoCamping
+        # 관광공사에 운영자가 등록한 안내 요금·예약 안내 문구. 하루 호출 한도 안에서 캐시로 나눠 채운다.
+        run: npm run sync:tour-fees
+        continue-on-error: true
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+      - name: Collect campground licences (LOCALDATA) and match to GoCamping
+        # 키 불필요. 고캠핑에 없는 숨은 캠핑장 후보, 인허가 폐업인데 고캠핑에 남은 곳, 시설 규모 등 인허가 세부 정보.
+        run: npm run sync:localdata-campgrounds
+        continue-on-error: true
       - name: Migrate PostgreSQL and import the full source snapshot
         # PR에서는 운영 DB에 절대 쓰지 않는다. PostgreSQL schema verification
         # workflow가 별도 임시 DB에서 마이그레이션·중복 적재를 검증한다.
@@ -117,9 +137,46 @@ jobs:
           npm run db:migrate
           npm run db:import-gocamping
           npm run db:import-context
+          npm run db:import-licences
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DATABASE_SSL: ${{ vars.DATABASE_SSL }}
+      - name: Load today's real files into a throwaway PostgreSQL (twice)
+        # 고정 표본 검증(database-verify.yml)이 못 잡는 실데이터 문제(중복 키·범위 밖 값 등)를 운영 DB 전에 잡는다.
+        if: always()
+        run: |
+          if [ ! -f out/campgrounds.json ]; then echo "::notice::고캠핑 결과가 없어 실데이터 DB 검증을 건너뜁니다."; exit 0; fi
+          npm run db:migrate
+          for pass in 1 2; do
+            npm run db:import-gocamping
+            npm run db:import-context
+            npm run db:import-licences
+          done
+          psql "$DATABASE_URL" -At -c "SELECT 'campgrounds=' || count(*) FROM campground" \
+            -c "SELECT 'toilets=' || count(*) || ' located=' || count(latitude) FROM public_toilet" \
+            -c "SELECT 'road_stops=' || count(*) FROM road_stop" \
+            -c "SELECT 'licence_candidates=' || count(*) || ' matched=' || count(matched_campground_id) FROM campground_candidate WHERE discovery_method = 'LOCALDATA_LICENCE'" \
+            -c "SELECT 'booking_events=' || count(*) FROM booking_rule_event"
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+      - name: Publish the campground explorer to GitHub Pages (/camp/explore/)
+        # 전국 캠핑장 탐색 화면을 그날 데이터로 camping-atlas/public/explore/에 쓰고, main이면 커밋해
+        # Deploy GitHub Pages가 https://pyw31337.github.io/camp/explore/ 를 갱신하게 한다. PR에서는 생성까지만 확인한다.
+        if: always()
+        run: |
+          npm run build:explore
+          cd .. && node scripts/publish-explorer-pages.mjs
+          if [ "${{ github.event_name }}" = "pull_request" ] || git diff --quiet -- camping-atlas/public/explore; then
+            echo "탐색 화면 커밋 없음(PR 또는 변경 없음)."; exit 0
+          fi
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add camping-atlas/public/explore
+          git commit -m "chore(data): refresh campground explorer"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push
+        env:
+          KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY || secrets.KAKAO_JS_KEY }}
       - uses: actions/upload-artifact@v4
         with:
           name: pipeline-out

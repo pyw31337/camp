@@ -25,7 +25,7 @@ export function linkNearbyToilets(campgrounds, toilets, { radiusM = NEARBY_RADIU
         toilet_id: t.id,
         name: t.name,
         distance_m,
-        distance_note: "주소 지오코딩 기준 직선거리(실제 동선·위치와 다를 수 있음)",
+        distance_note: t.source === "osm" ? "OpenStreetMap 좌표 기준 직선거리" : "주소 지오코딩 기준 직선거리(실제 동선·위치와 다를 수 있음)",
         open_hours: t.open_hours,
         open_24h: t.open_24h,
         disabled_stalls: t.disabled_stalls,

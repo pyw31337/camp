@@ -124,7 +124,7 @@ export default function Home() {
   return <main className="may-app" id="home">
     <header className="may-topbar">
       <a className="may-brand" href="#home" aria-label="모여라 캠핑 홈"><span><TentTree size={21} /></span><b>모여라 캠핑</b></a>
-      <nav aria-label="주요 메뉴"><a href="#search"><Search size={16} />캠핑장 찾기</a><a href="#calendar"><CalendarClock size={16} />예약 오픈 캘린더</a><a href="#saved-camps"><Heart size={16} />관심 캠핑장</a></nav>
+      <nav aria-label="주요 메뉴"><a href="explore/"><Search size={16} />전국 캠핑장 찾기</a><a href="#calendar"><CalendarClock size={16} />예약 오픈 캘린더</a><a href="#saved-camps"><Heart size={16} />관심 캠핑장</a></nav>
       <div className="may-top-actions"><button type="button" className="may-round-action" onClick={() => scrollTo("#saved-camps")} aria-label="관심 캠핑장"><Heart size={20} /><b>{saved.length}</b></button><button type="button" className="may-round-action" onClick={() => scrollTo("#calendar")} aria-label="예약 오픈 알림"><Bell size={19} /></button></div>
     </header>
 
@@ -166,6 +166,6 @@ export default function Home() {
 
       <section className="may-section may-provider-section" id="providers"><div className="may-section-head"><div><h2>예약처별 예약 방법</h2><p>같은 예약처는 공통 규칙을 묶고, 시설별 예외는 따로 보관합니다.</p></div></div><div className="may-provider-grid"><article><span><Trees size={21} /></span><h3>숲나들e</h3><p>국립·공립·사립 휴양림 통합예약</p><ul><li>주중: 6주 전 수요일 09:00</li><li>주말·공휴일: 월별 추첨</li><li>미결제분: 선착순 전환</li></ul><a href={FORESTTRIP_URL} target="_blank" rel="noreferrer">공식 일정 보기 <ExternalLink size={14} /></a></article><article><span><TentTree size={21} /></span><h3>국립공원공단</h3><p>국립공원 야영장 예약시스템</p><ul><li>이용 2개월 전 추첨 접수</li><li>발표·결제 일정은 회차별 확인</li><li>취소분은 예약처에서 확인</li></ul><a href={KNPS_URL} target="_blank" rel="noreferrer">공식 예약처 <ExternalLink size={14} /></a></article><article><span><CalendarDays size={21} /></span><h3>서울시 공공서비스예약</h3><p>서울시·자치구 공영 캠핑장</p><ul><li>시설별 접수 기간 공개</li><li>OpenAPI 읽기 연동 준비</li><li>감면 조건은 시설별 상이</li></ul><a href={SEOUL_YEYAK_URL} target="_blank" rel="noreferrer">공식 예약처 <ExternalLink size={14} /></a></article></div></section>
     </div>
-    <nav className="may-bottom-nav" aria-label="모바일 주요 탐색"><a href="#home"><TentTree size={18} />홈</a><a href="#search"><Search size={18} />찾기</a><a href="#calendar"><Bell size={18} />예약오픈</a><a href="#saved-camps"><Heart size={18} />관심</a></nav>
+    <nav className="may-bottom-nav" aria-label="모바일 주요 탐색"><a href="#home"><TentTree size={18} />홈</a><a href="explore/"><Search size={18} />찾기</a><a href="#calendar"><Bell size={18} />예약오픈</a><a href="#saved-camps"><Heart size={18} />관심</a></nav>
   </main>;
 }

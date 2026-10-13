@@ -1,0 +1,42 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { areaOf, buildExploreRecords, buildProviders, providerOf } from "../lib/explore-data.mjs";
+import { feeRange, matchTour, normalizeTourIntro } from "../lib/tour-fees.mjs";
+
+const camp = { external_id: { id: "7096" }, name: "향남 오토캠핑장", address: { sido: "경기도", sigungu: "화성시", line1: "경기도 화성시 테스트로 1", line2: "" },
+  location: { lat: 37.1234567, lng: 126.7654321 }, contact: { tel: "031-000-0000", homepage: "www.example.com" }, operator_type: "LOCAL_GOVERNMENT",
+  products: [{ kind: "AUTO_PITCH", site_count: 12 }], site_sizes: [{ width_m: 5, depth_m: 8, count: 12 }], floors: [{ floor: "파쇄석", count: 12 }],
+  amenities: ["전기", "온수"], pets: "가능", reservation: { methods: ["온라인실시간예약"], url: "https://www.foresttrip.go.kr/x" }, hero_image_url: "https://gocamping.or.kr/a.jpg" };
+
+test("탐색 레코드: 위치·예약처·요금(출처·확인일)·주변 화장실", () => {
+  const [r] = buildExploreRecords({ campgrounds: [camp, { ...camp, location: null }] },
+    { campgrounds: { 7096: { count_2km: 3, count_500m: 1, nearest: [{ name: "주차장 화장실", distance_m: 140, open_24h: true, source: "mois" }] } } },
+    { records: { 7096: { fee_text: "오토캠핑 1박 35,000원~45,000원", fee_range: { min_krw: 35000, max_krw: 45000 }, checked_at: "2026-10-13T09:00:00+09:00", source_url: "https://korean.visitkorea.or.kr/x" } } });
+  assert.equal(r.area, "서울·경기");
+  assert.equal(r.lat, 37.123457);
+  assert.equal(r.homepage, "http://www.example.com/");
+  assert.equal(r.booking.provider, "foresttrip");
+  assert.deepEqual(r.fee, { text: "오토캠핑 1박 35,000원~45,000원", min: 35000, max: 45000, checked_at: "2026-10-13T09:00:00+09:00", url: "https://korean.visitkorea.or.kr/x" });
+  assert.equal(r.nearby_toilets.nearest[0].m, 140);
+  assert.equal(areaOf("제주특별자치도"), "제주");
+  assert.equal(providerOf("https://yeyak.seoul.go.kr/web/main.do"), "seoul-yeyak");
+  assert.equal(providerOf("not a url"), null);
+});
+
+test("예약처별 다가오는 일정", () => {
+  const ps = buildProviders({ providers: [{ id: "knps", name: "국립공원" }], rules: [{ id: "r", provider_id: "knps", label: "추첨", source: { url: "https://x" } }] },
+    { events: [{ provider_id: "knps", type: "OPEN", at: "2099-01-01T09:00:00+09:00", label: "오픈", source: { url: "https://x" } }, { provider_id: "knps", type: "OPEN", at: "2000-01-01T00:00:00+09:00", label: "지난 일정" }] });
+  assert.equal(ps[0].events.length, 1);
+  assert.equal(ps[0].rules[0].label, "추첨");
+});
+
+test("TourAPI: 요금 문구에서 금액 범위, 이름·좌표 매칭", () => {
+  assert.deepEqual(feeRange("평일 30,000원 / 주말 40000원, 전기 5천원"), { min_krw: 30000, max_krw: 40000 });
+  assert.deepEqual(feeRange("1박 4만원"), { min_krw: 40000, max_krw: 40000 });
+  assert.equal(feeRange("현장 문의"), null);
+  assert.equal(normalizeTourIntro({ usefeeleports: "1박<br>35,000원", reservation: "네이버 예약" }).fee_text, "1박\n35,000원");
+  const m = matchTour([{ id: "g1", name: "향남 오토캠핑장", lat: 37.1, lng: 126.7 }, { id: "g2", name: "다른 캠핑장", lat: 37.1005, lng: 126.7005 }],
+    [{ contentid: "t1", title: "향남오토캠핑장", lat: 37.1003, lng: 126.7002 }]);
+  assert.equal(m.get("g1").contentid, "t1");
+  assert.equal(m.has("g2"), false);
+});

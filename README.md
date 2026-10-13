@@ -11,6 +11,12 @@
 - [공개 프로토타입](https://moyeora-camping.magicsiren32.chatgpt.site): 모여라 캠핑 화면
 - [GitHub Pages](https://pyw31337.github.io/camp/): `main` 푸시로 갱신되는 정적 파일럿
 - [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md): 여행 검색 UX, 색상, 이미지, 반응형 기준
+- [`docs/RESEARCH_DATA_TO_UX.md`](docs/RESEARCH_DATA_TO_UX.md): 데이터 원천별로 보여 줄 수 있는 것과 핵심 베네핏
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): GitHub Actions 중심 구조와 필요한 외부 서비스 제안
+- [`docs/CORE_FEATURES_UX.md`](docs/CORE_FEATURES_UX.md): 핵심 기능 3개와 무학습 UX 원칙, 레퍼런스 분석
+- [`docs/OWNER_TODO.md`](docs/OWNER_TODO.md): 서비스 소유자가 순서대로 할 일(키 발급·배포 설정)
+- [`design/mockup-v2/`](design/mockup-v2): 디자인 시안 v2 (현재 기준, `design/`에서 `npm run build`) · [`design/mockup/`](design/mockup): v1
+- [`pipeline/`](pipeline): 고캠핑 수집·정규화, 예약 규칙 레지스트리, 예약 오픈 캘린더 계산, 캘린더 구독(.ics) 피드
 
 ## 협업 시작하기
 

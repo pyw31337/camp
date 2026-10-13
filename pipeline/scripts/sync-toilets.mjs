@@ -130,7 +130,7 @@ if (key) {
     maxCalls: Number(process.env.GEOCODE_MAX_CALLS ?? 30000),
     today: fetchedAt.slice(0, 10),
   });
-  console.log(`지오코딩: 새 질의 ${r.requested}건 중 호출 ${r.calls}건(성공 ${r.hits}, 없음 ${r.misses}), 남은 ${r.remaining}건${r.stopped ? ` · 중단: ${r.stopped}` : ""}`);
+  console.log(`지오코딩: 새 질의 ${r.requested}건 중 호출 ${r.calls}건(성공 ${r.hits}, 없음 ${r.misses}), 남은 ${r.remaining}건${r.errors ? ` · 오류 ${r.errors}건(캐시 안 함): ${r.first_error}` : ""}${r.stopped ? ` · 중단: ${r.stopped}` : ""}`);
   await writeFile(cachePath, JSON.stringify(cache));
 } else {
   warn("지오코딩 건너뜀", "KAKAO_REST_API_KEY Secret이 없어 캐시에 있는 좌표만 씁니다(docs/OWNER_TODO.md 5단계).");

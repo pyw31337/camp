@@ -1,7 +1,8 @@
 # 모여라 캠핑 디자인 시스템
 
 > 최종 갱신: 2026-10-13 KST<br>
-> 적용 범위: 검색·결과·상세·여행 계획 화면
+> 적용 범위: 검색·결과·상세·여행 계획 화면<br>
+> 현재 기준: **디자인 시안 v2** (`design/mockup-v2/`, 승인 대기). v1(`design/mockup/`)과 v0(현재 앱 토큰)은 참고용으로 남긴다. 시안 이미지 출처는 `design/ASSETS.md`.
 
 ## 조사에서 채택한 원칙
 
@@ -19,7 +20,88 @@
 
 참고: [Airbnb UX 사례](https://design.google/library/airbnb-invites-you-in), [Booking.com 검색 사용 사례](https://developers.booking.com/demand/docs/accommodations/search-examples), [Google의 반응형 패턴 가이드](https://design.google/library/introducing-resizer), [Camping AR App](https://dribbble.com/shots/11607072-Camping-AR-App), [Camping App Exploration](https://dribbble.com/shots/27205497-Camping-App-Exploration), [Camping App Design](https://dribbble.com/shots/10165691-Camping-App-Design), [Ski camps booking](https://dribbble.com/shots/22874895-Snowboard-Ski-camps-booking-web-app), [Camping reservation UI](https://dribbble.com/shots/7140824-Camping-reservation-ui).
 
-## 시각 토큰
+## 디자인 시안 v2 (2026-10-12, 현재 기준)
+
+핵심 기능 선정과 무학습 원칙은 [CORE_FEATURES_UX.md](./CORE_FEATURES_UX.md), 레퍼런스 분석은 같은 문서 4장을 따른다.
+
+### 소스와 빌드
+- 원본: `design/mockup-v2/src.html` (아이콘은 `#l-이름`=Lucide, `#t-이름`=Tabler outline으로 참조)
+- 빌드: `cd design && npm install && npm run build` → `mockup-v2/index.html`에 쓰인 아이콘만 SVG 스프라이트로, 쓰인 글자만 Pretendard 서브셋(woff2 base64)으로 인라인. 서브셋에는 `pip install fonttools brotli` 필요.
+- 앱 이식 시: `pretendard` npm 패키지(또는 동적 서브셋 CSS)와 `lucide-react`, `@tabler/icons-react`를 쓴다.
+
+### 색 (4계열만)
+
+| 토큰 | 라이트 | 다크 | 의미·용도 |
+| --- | --- | --- | --- |
+| `--green` | `#1F9D5C` | `#3DBB78` | 브랜드·주 행동·선택·적합 표시(레퍼런스 ‘Camping App Exploration’의 숲 초록) |
+| `--green-tint` | `#E5F4EB` | `#14301F` | 선택 배경, 아이콘 받침 |
+| `--forest` | `#173F2E` | `#0F2A1F` | 제목, 어두운 버튼(필터), 구역 키 |
+| `--ember` | `#E8702F` | `#F4945A` | **‘곧 열림’(D-3 이내)과 관심 하트에만** |
+| 중립 | `#17211C` 글자 / `#57635C` 보조 / `#F4F5F2` 바탕 / `#FFFFFF` 면 / `#E1E6E0` 선 | 대응 다크값 | 나머지 전부 |
+
+상태(선착순·추첨·재오픈·상시)는 색 대신 아이콘+단어로 구분한다: 번개(`l-zap`), 티켓(`t-ticket`), 되돌리기(`l-rotate-ccw`).
+
+### 타이포
+Pretendard Variable 한 가지. 제목 800, 본문 400~600, 숫자 `tabular-nums`, 자간 -0.01~-0.045em.
+
+### 형태
+- 반경: 10 / 16 / 24 / 32px. 히어로·갤러리 32, 카드 24, 칸 16.
+- 그림자 2단계만(`--shadow-1` 카드, `--shadow-2` 떠 있는 요소: 검색 카드, 예약 카드, 시트).
+- 사진 위 정보는 유리 칩(반투명 + blur)으로. 카드 사진 모서리의 하트는 ‘노치’ 처리.
+
+### 줄바꿈 규칙 (v2.1, 소유자 요구)
+- 라벨·버튼·칩·탭·카드 제목·수치는 **어떤 폭에서도 줄바꿈하지 않는다**. 공간이 부족하면 (1) 짧은 문구로 바꾸고(`<span class="l">캠핑장 찾기</span><span class="s">캠핑장</span>`), (2) 배치를 바꾼다(그리드 전환, 아이콘만 표시). 말줄임(…)은 마지막 안전장치이며 검사에서 0건이어야 한다.
+- 줄바꿈 허용은 문장 단락뿐이며 `data-wrap-ok`로 표시한다.
+- 캐러셀 카드는 항상 화면 안에 한 장이 통째로 들어온다: PC 4열·3열·2열은 정확히 나눠 떨어지게, 모바일은 `100% - 28px`(다음 카드가 살짝 보임). PC에는 좌우 버튼.
+- 검사: 시안 변경 시 `cd design && npm run build && bash checks/run.sh`로 320~1920px 16개 폭의 줄바꿈·말줄임을 확인한다(결과 0건이어야 함).
+
+### 무료 캠프 사이트 카드
+조건 3칸(무료·취사·화장실)을 아이콘 타일로 보여 주고, 확인된 칸만 초록. 확인 중은 물음표 아이콘과 회색. ‘실제 공고’/‘예시’ 태그로 출처 성격을 구분한다.
+
+### 반응형
+
+| 폭 | 변화 |
+| --- | --- |
+| 1181px+ | 카드 4열, 검색 한 줄(필드 4 + 버튼), 상세 우측 고정 예약 카드 |
+| 961–1180 | 카드 3열, 검색 2×2 + 버튼 |
+| 641–960 | 상단 메뉴 숨김 → 하단 탭 4개, 카드 2열, 지도는 ‘지도 보기’ 버튼, 상세 예약 카드 → 하단 고정 바, 시트는 바텀시트 |
+| 381–640 | 카드 1열, 히어로 수치 칩을 본문 흐름으로, 검색 필드 세로 배치 |
+| 320–380 | 글자·칸 축소, 예약 바의 보조 버튼 숨김, 갤러리 수치 칩 2개 |
+
+검수(2026-10-12, Playwright): 320·390·820·1440px, 라이트·다크, 4화면 가로 넘침 0, 콘솔 오류 0, Pretendard 로드 확인.
+
+## 디자인 시안 v1 (2026-10-12, 이전)
+
+이전 프로토타입은 서비스 설명 위주라 사용자가 무엇을 얻는지 보이지 않았다. v1은 [데이터→UX 조사](./RESEARCH_DATA_TO_UX.md)의 핵심 베네핏 네 가지를 화면 주인공으로 삼는다.
+
+| 화면 | 주인공 | 구성 |
+| --- | --- | --- |
+| 홈 | 곧 열리는 예약 | 히어로 검색(지역·날짜·인원·**내 장비**), D-day 오픈 카드 가로 스크롤, 베네핏 4개를 실제 UI 조각으로 시연, 신뢰 등급 A~E 설명 |
+| 검색 | 내 장비 맞는 자리 | 고정 검색 요약, 필터 칩(장비 적합·상품 유형 7종·예약 방식), 결과 카드(상품 수, 적합 사이트 규격, 예약처·다음 오픈 D-day, 주말 날씨·이동·통행료, 출처 배지), 지도(데스크톱 우측 고정, 모바일 토글) |
+| 상세 | 예약 방법 패널 | 우측 고정 패널(예약처·방식·카운트다운·일정 타임라인·알림), 주말 컨디션, 상품 비교표, **사이트 배치 시뮬레이터**(실측 비율로 텐트·타프·차량 배치), 최근 현장, 정보 출처 |
+| 오픈 캘린더 | 한 달력 | 관심/전체 전환, 월간 그리드(모바일은 색 막대), 다가오는 일정 목록과 알림 토글, 확인 필요 배지 |
+
+참고한 구조: Airbnb(사진 중심 결과 카드 + 우측 고정 예약 패널 + 지도 분할), Booking.com(조건 요약 바와 필터 칩), Hipcamp(사이트 단위 정보·현장 조건). 차별점은 가격이 아니라 **예약 오픈 시점과 사이트 규격**을 카드의 1순위 정보로 올린 것이다.
+
+### v1 토큰
+
+| 역할 | 라이트 | 다크 | 사용처 |
+| --- | --- | --- | --- |
+| Accent (Pine) | `#1C7A51` | `#4FC08B` | 주 행동, 적합 표시, 선택 |
+| Forest | `#0E3B2C` | `#0A281D` | 안내 바, 신뢰 섹션 |
+| Background | `#F4F7F2` | `#0B1410` | 페이지 |
+| Surface 2 | `#E9F0E6` | `#192820` | 데모 영역, 보조 면 |
+| Open (Amber) | `#9A5B00` on `#FFF0D4` | `#F2B552` on `#3A2A0D` | 선착순 오픈·카운트다운 |
+| Lottery (Indigo) | `#4A4AC4` on `#EBEBFF` | `#A9AAFF` on `#24244A` | 추첨·접수 |
+| Notice (Rust) | `#A63B25` on `#FCE5DE` | `#FF9077` on `#3D1D16` | 판매제한·강풍 경고 |
+
+글꼴: 제목 Hahmlet(절제해서 사용), 본문 IBM Plex Sans KR, 시각·규격·금액 IBM Plex Mono(`tabular-nums`). 상태 색(오픈·추첨·경고)은 주 색과 분리한다.
+
+### v1 반응형 검수
+
+320·390·1280px, 라이트/다크에서 4개 화면 모두 가로 스크롤 0, 콘솔 오류 0(Playwright, 2026-10-12). 모바일(≤760px)은 상단 메뉴 대신 하단 탭바, 캘린더 이벤트는 색 막대로 축약, 표는 자체 가로 스크롤.
+
+## 시각 토큰(v0, 현재 앱)
 
 | 역할 | 값 | 사용처 |
 | --- | --- | --- |

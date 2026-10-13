@@ -21,7 +21,11 @@
     "discover:public-free": "node scripts/discover-public-free.mjs",
     "sync:toilets": "node scripts/sync-toilets.mjs",
     "probe": "node scripts/probe-endpoints.mjs",
-    "sync:rest-stops": "node scripts/sync-rest-stops.mjs"
+    "sync:rest-stops": "node scripts/sync-rest-stops.mjs",
+    "sync:localdata-campgrounds": "node scripts/sync-localdata-campgrounds.mjs",
+    "db:import-licences": "node scripts/import-licences-postgres.mjs",
+    "sync:tour-fees": "node scripts/sync-tour-fees.mjs",
+    "build:explore": "node scripts/build-explore-data.mjs"
   },
   "dependencies": {
     "pg": "8.23.1"
