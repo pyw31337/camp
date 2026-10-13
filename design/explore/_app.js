@@ -16,7 +16,7 @@ const sortName = (c) => (c._sort ??= c.name.replace(/^[\s(（［\[]*[^)）］\]]
 // 데이터는 빈 값을 빼고 배포하므로 화면에서 기본값을 채운다.
 const withDefaults = (c) => ({ kinds: [], sizes: [], floors: [], amenities: [], env: [], themes: [], rental: [], seasons: [], days: [], types: [], ...c, booking: { methods: [], url: null, provider: null, ...(c.booking ?? {}) } });
 
-const state = { q: "", area: "전국", kinds: new Set(), realtime: false, pet: false, fee: false, toilet: false, gear: "", sort: "name", shown: PAGE, here: null, open: null };
+const state = { q: "", area: "전국", kinds: new Set(), realtime: false, pet: false, fee: false, toilet: false, gear: "", sort: "best", shown: PAGE, here: null, open: null };
 let ALL = [], META = null, map = null, clusterer = null, markers = new Map();
 
 function load() {
@@ -32,6 +32,8 @@ const fits = (c) => {
   const [w, d] = state.gear.split("x").map(Number);
   return c.sizes.some(([sw, sd]) => (sw >= w && sd >= d) || (sw >= d && sd >= w));
 };
+// 추천순: 바로 예약할 수 있고 정보가 풍부한 곳을 먼저(온라인 실시간 예약 > 예약 링크 > 사진 > 사이트 구성·크기 > 요금 안내 > 주변 화장실)
+const richness = (c) => (c._rich ??= (isRealtime(c) ? 8 : 0) + (c.booking.url ? 6 : c.homepage ? 2 : 0) + (c.img ? 4 : 0) + (c.kinds.length ? 2 : 0) + (c.sizes.length ? 1 : 0) + (c.fee ? 2 : 0) + (c.nearby_toilets ? 1 : 0));
 const isRealtime = (c) => c.booking.methods.some((m) => /실시간/.test(m));
 const petOk = (c) => /가능/.test(c.pets ?? "") && !/불가/.test(c.pets ?? "");
 const dist = (a, b) => { const R = 6371, t = Math.PI / 180, x = (b.lat - a.lat) * t, y = (b.lng - a.lng) * t; const h = Math.sin(x / 2) ** 2 + Math.cos(a.lat * t) * Math.cos(b.lat * t) * Math.sin(y / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); };
@@ -50,6 +52,7 @@ function filtered() {
   });
   if (state.sort === "near" && state.here) list.sort((a, b) => dist(state.here, a) - dist(state.here, b));
   else if (state.sort === "fee") list.sort((a, b) => (a.fee?.min ?? 9e9) - (b.fee?.min ?? 9e9));
+  else if (state.sort === "best") list.sort((a, b) => richness(b) - richness(a) || sortName(a).localeCompare(sortName(b), "ko"));
   else list.sort((a, b) => sortName(a).localeCompare(sortName(b), "ko"));
   return list;
 }
@@ -147,7 +150,7 @@ function detail(c) {
       <h3>${ic("#l-calendar", "i-sm")}예약</h3>
       <div class="tags">${c.booking.methods.map((m) => `<span class="tag ${/실시간/.test(m) ? "tag-green" : ""}">${esc(m)}</span>`).join("") || `<span class="tag">예약 방법 정보 없음</span>`}</div>
       ${bookUrl ? `<a class="btn btn-primary" href="${esc(bookUrl)}" target="_blank" rel="noopener">${ic("#l-external-link", "i-sm")}예약하러 가기</a>` : c.tel ? `<a class="btn btn-primary" href="tel:${esc(c.tel.replace(/[^\d+]/g, ""))}">${ic("#l-phone", "i-sm")}전화로 예약</a>` : ""}
-      <p class="note" data-wrap-ok>빈자리와 최종 요금은 예약처 화면에서 확인됩니다. 모여라 캠핑은 결제를 받지 않고 공식 예약처로 연결합니다.${c.booking.url ? "" : " (고캠핑에 예약 링크가 없어 홈페이지로 연결)"}</p>
+      <p class="note" data-wrap-ok>빈자리와 최종 요금은 예약처 화면에서 확인됩니다. 모여라 캠핑은 결제를 받지 않고 공식 예약처로 연결합니다.${c.booking.url ? "" : c.homepage ? " (고캠핑에 예약 링크가 없어 홈페이지로 연결)" : c.tel ? " (온라인 예약 링크가 없어 전화 예약)" : " 고캠핑에 예약 링크·홈페이지·전화가 없어 운영자 확인이 필요합니다."}</p>
     </div>
     <div class="box"><h3>${ic("#t-coin", "i-sm")}요금</h3>
       ${c.fee ? `<p class="pre" data-wrap-ok>${esc(c.fee.text)}</p><span class="trust">${ic("#l-info", "i-xs")}한국관광공사 등록 안내 문구 · ${ymd(c.fee.checked_at)} 확인 · <a href="${esc(c.fee.url)}" target="_blank" rel="noopener">원문</a></span>` : `<p class="note" data-wrap-ok>공식 원천에 등록된 요금 안내가 없습니다. 예약처에서 확인하세요.</p>`}

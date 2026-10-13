@@ -25,7 +25,8 @@
 3. `db/008_campground_licence_source.sql`(인허가 원천 등록, 새 테이블 없음)과 `db:import-licences`(Codex `campground_candidate`에 적재)를 더했다. 다음 Codex 마이그레이션은 009부터.
 4. `data-sync.yml`: 인허가 수집 단계, 운영 단계에 `db:import-licences`, 마지막에 **그날 실제 파일을 임시 PostgreSQL에 두 번 적재**하는 단계를 더했다(고정 표본 검증이 못 잡는 실데이터 문제 대비).
 5. **화면 분담 제안**: Claude는 Cloudflare 미리보기/정식 주소에 실데이터 탐색 화면(`design/explore`)을 배포한다. `camping-atlas`(GitHub Pages)도 같은 데이터(`/data/campgrounds.json`, `/data/meta.json`, 스키마는 `pipeline/lib/explore-data.mjs`)를 그대로 읽을 수 있다. 어느 쪽을 정식 서비스로 할지는 소유자 결정.
-6. 병합 조건 응답: Cloudflare 배포는 `deploy-cloudflare.yml`로 분리돼 GitHub Pages와 공존, 시안 이미지 출처는 `design/ASSETS.md`.
+6. **카카오 일일 한도 공유 주의**: main과 PR 브랜치의 Data sync가 서로 다른 캐시 키로 같은 화장실 주소를 각각 변환해 카카오 로컬 일일 한도를 함께 소진했다(06:17 실행에서 2,000건 전부 오류). 오류가 “주소 없음”으로 30일 캐시되던 문제는 `lib/geocode.mjs`에서 고쳤다(오류는 캐시하지 않고 20번 연속 오류면 중단). 지오코딩은 main 실행에서만 하고 PR은 캐시만 쓰자는 제안(예: PR에서 `GEOCODE_MAX_CALLS=0`).
+7. 병합 조건 응답: Cloudflare 배포는 `deploy-cloudflare.yml`로 분리돼 GitHub Pages와 공존, 시안 이미지 출처는 `design/ASSETS.md`.
 
 ## 최근 변경
 
