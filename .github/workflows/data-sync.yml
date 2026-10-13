@@ -32,6 +32,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - run: npm ci
       - run: npm run validate
       - run: npm run calendar -- 120
       - run: npm run ics -- 120
@@ -43,6 +44,20 @@ jobs:
         run: npm run sync:gocamping
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+      - name: Migrate PostgreSQL and import the GoCamping snapshot
+        # DATABASE_URL은 운영 DB에서만 제공한다. 값이 없을 때 공개 카탈로그
+        # 발행은 계속 가능하지만, DB 적재를 성공한 것으로 표기하지 않는다.
+        if: github.event_name != 'pull_request'
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::notice title=PostgreSQL import skipped::DATABASE_URL secret is not configured."
+            exit 0
+          fi
+          npm run db:migrate
+          npm run db:import-gocamping
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_SSL: ${{ vars.DATABASE_SSL }}
       # 전국 기준 시설·예약 캘린더는 부가 시설 수집 실패와 관계없이 먼저 공개한다.
       - name: Build the read-only GitHub Pages data payload
         run: npm run publish:web-catalog
