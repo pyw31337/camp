@@ -24,7 +24,7 @@
 | 디자인 | 여행 플랫폼 검색 구조와 반응형 원칙을 조사해 초록 계열 토큰·이미지·320px 규칙을 문서화 | `docs/DESIGN_SYSTEM.md`의 원문 링크와 구현 결과 대조 |
 | GitHub Pages 파일럿 | 날짜·인원·형태 검색, 브라우저 저장목록, 상품 상세·공식 예약/사진/공지 링크를 구현. 자라섬캠핑장 4개 실제 상품을 가평군시설관리공단 원문으로 등록 | 로컬 `npm run lint`, `npm run build`, `npm run build:pages` 성공. 공개 배포 [Pages 실행 38331404373](https://github.com/pyw31337/camp/actions/runs/38331404373), [웹 품질 실행 38331404533](https://github.com/pyw31337/camp/actions/runs/38331404533) 통과. 공개 URL에서 검색 1건, 저장, 상세 전환, 320px 가로 넘침 없음, 콘솔 오류 없음 확인 |
 | Claude 작업 연계 | `claude/upbeat-keller-x75pct`의 전국 데이터 파이프라인을 검토하고 호환되는 12개 커밋을 반영했다. GoCamping 동기화·예약 규칙 레지스트리·캘린더/ICS·무료 후보·공중화장실·휴게소·졸음쉼터 수집/연결이 포함된다. | `pipeline`에서 `npm test` 50개 통과, `npm run validate`, `npm run calendar -- 60 2026-10-13`, `npm run ics -- 60 2026-10-13` 성공. 캘린더 23건(확인 필요 14건) 생성. API 키·원천 접근 허가 전에는 운영 데이터로 표시 금지. |
-| 프리미엄 탐색 UI | Dribbble 여행·캠핑 참고 화면의 사진 중심 계층과 예약 UI를 바탕으로 검색·상세·최근 현장 경로 화면을 다시 구성했다. 실제 사진은 자라섬캠핑장 운영기관 시설 원문 4건만 외부 표시한다. | `npm run lint`, `npm run build`, `npm run build:pages`, GitHub Pages 경로 자산 검증 성공. 브라우저에서 오류 0건, “사이트 A” 검색 1건·상세 전환, 320px 문서 가로 넘침 없음 확인. 공개 배포 확인은 이 커밋 푸시 뒤 수행한다. |
+| 프리미엄 탐색 UI | Dribbble 여행·캠핑 참고 화면의 사진 중심 계층과 예약 UI를 바탕으로 검색·상세·최근 현장 경로 화면을 다시 구성했다. 실제 사진은 자라섬캠핑장 운영기관 시설 원문 4건만 외부 표시한다. | `npm run lint`, `npm run build`, `npm run build:pages`, GitHub Pages 경로 자산 검증 성공. 브라우저에서 오류 0건, “사이트 A” 검색 1건·상세 전환, 320px 문서 가로 넘침 없음 확인. [Pages 실행 38333884947](https://github.com/pyw31337/camp/actions/runs/38333884947) 통과 및 공개 URL의 새 헤드라인 로드 확인. |
 
 ## 다음 작업
 
