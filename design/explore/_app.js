@@ -5,7 +5,10 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const ic = (id, cls = "") => `<svg class="i ${cls}" aria-hidden="true"><use href="${id}"/></svg>`;
 const won = (n) => `${Math.round(n / 1000) * 1000 >= 10000 ? (n / 10000).toFixed(n % 10000 ? 1 : 0) + "만" : n.toLocaleString()}원`;
-const ymd = (s) => { const d = new Date(s); return Number.isNaN(+d) ? "" : `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}`; };
+// 날짜·시각은 보는 사람의 기기 시간대와 무관하게 한국 시간(KST)으로 보여 준다.
+const kst = (s) => { const d = new Date(s); if (Number.isNaN(+d)) return null; const k = new Date(+d + 9 * 3600e3); return { y: k.getUTCFullYear(), mo: k.getUTCMonth() + 1, d: k.getUTCDate(), wd: k.getUTCDay(), h: k.getUTCHours(), mi: k.getUTCMinutes() }; };
+const p2 = (n) => String(n).padStart(2, "0");
+const ymd = (s) => { const k = kst(s); return k ? `${k.y}.${p2(k.mo)}.${p2(k.d)}` : ""; };
 const KIND = { AUTO_PITCH: ["오토캠핑", "#l-car"], PITCH: ["일반 캠핑", "#t-tent"], GLAMPING: ["글램핑", "#l-bed-double"], CARAVAN_RENTAL: ["카라반", "#t-caravan"], RV_PITCH: ["개인 카라반", "#t-caravan"], TARP_ZONE: ["타프존", "#t-building-pavilion"], SHELTER_ZONE: ["쉘터존", "#l-warehouse"], CAMPNIC_DAY: ["캠프닉", "#t-grill"] };
 const AREAS = ["전국", "서울·경기", "강원", "충청", "전라", "경상", "제주"];
 const OP = { LOCAL_GOVERNMENT: "지자체", PRIVATE: "민간", NATIONAL_PARK: "국립공원", NATURAL_RECREATION_FOREST: "자연휴양림", PUBLIC_LEISURE: "국민여가", UNKNOWN: "" };
@@ -93,7 +96,7 @@ function card(c) {
     <span class="card-body">
       <span class="card-title"><h3>${esc(c.name)}</h3>${state.saved.has(c.id) ? ic("#l-heart", "i-xs saved-mark") : ""}</span>
       <span class="loc">${ic("#l-map-pin", "i-xs")}${esc([c.sido, c.sigungu].filter(Boolean).join(" "))}${km}${OP[c.op] ? ` · ${OP[c.op]}` : ""}</span>
-      <span class="tags">${openNow(c) ? `<span class="tag tag-green">${ic("#l-circle-check", "i-xs")}서울 공공예약 접수중</span>` : ""}${isRealtime(c) ? `<span class="tag tag-green">${ic("#l-zap", "i-xs")}온라인 실시간 예약</span>` : ""}${kinds}${petOk(c) ? `<span class="tag">${ic("#l-dog", "i-xs")}반려견</span>` : ""}</span>
+      <span class="tags">${c.booking.next ? `<span class="tag tag-ember">${ic("#l-alarm-clock", "i-xs")}${c.booking.next.time_known ? hm(c.booking.next.at) : md(c.booking.next.at)} 오픈</span>` : ""}${openNow(c) ? `<span class="tag tag-green">${ic("#l-circle-check", "i-xs")}서울 공공예약 접수중</span>` : ""}${isRealtime(c) ? `<span class="tag tag-green">${ic("#l-zap", "i-xs")}온라인 실시간 예약</span>` : ""}${kinds}${petOk(c) ? `<span class="tag">${ic("#l-dog", "i-xs")}반려견</span>` : ""}</span>
       <span class="price">${c.fee?.min ? `<b>${won(c.fee.min)}~</b><span>공식 안내 요금</span>` : `<span>요금은 예약처에서 확인</span>`}</span>
     </span></button>`;
 }
@@ -212,26 +215,36 @@ function bookingTarget(c) {
 function providerBlock(c) {
   const p = META?.providers?.find((x) => x.id === c.booking.provider);
   if (!p) return "";
-  const evs = p.events.slice(0, 4).map((e) => { const d = new Date(e.at); return `<time>${d.getMonth() + 1}.${String(d.getDate()).padStart(2, "0")}${e.time_known ? ` ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}` : ""}</time><span data-wrap-ok>${esc(e.label)}${e.needs_verification ? " · 확인 필요" : ""}</span>`; }).join("");
+  const evs = p.events.slice(0, 4).map((e) => { return `<time>${e.time_known ? hm(e.at) : md(e.at)}</time><span data-wrap-ok>${esc(e.label)}${e.needs_verification ? " · 확인 필요" : ""}</span>`; }).join("");
   return `<div class="sub"><h4>${esc(p.name)} 공통 규칙</h4>
     ${p.rules.map((r) => `<p class="pre" data-wrap-ok>${esc(r.summary ?? r.label)}</p>`).join("")}
     ${evs ? `<div class="ev">${evs}</div>` : ""}
     <span class="trust">${ic("#l-info", "i-xs")}예약처 공지 기준 · 시설마다 다를 수 있어요</span></div>`;
 }
+const md = (iso) => { const k = kst(iso); return k ? `${k.mo}.${p2(k.d)}(${"일월화수목금토"[k.wd]})` : ""; };
+const hm = (iso) => { const k = kst(iso); return k ? `${md(iso)} ${p2(k.h)}:${p2(k.mi)}` : ""; };
+const stayText = (st) => (st?.from ? `${md(st.from + "T12:00:00+09:00")}${st.to && st.to !== st.from ? `~${md(st.to + "T12:00:00+09:00")}` : ""} 숙박분` : "");
+const shortName = (n) => String(n ?? "").replace(/\s*\(.*\)\s*$/, "");
+const TIER_LABEL = { A: "공식 원문", B: "공식 기반", C: "운영자 안내", E: "이용자 제보" };
 function guideBlock(c, d) {
   const g = d?.guide;
   if (!g) return `<div class="guide-slot">${providerBlock(c)}</div>`;
-  const next = (g.next_openings ?? []).slice(0, 3).map((t) => `<li><b class="num">${ymd(t)} ${new Date(t).toTimeString().slice(0, 5)}</b></li>`).join("");
+  const p = g.platform;
+  const own = g.open_rules.filter((r) => !r.applies || r.applies === "CONFIRMED");
+  const cond = g.open_rules.filter((r) => r.applies === "IF_NATIONAL" || r.applies === "VARIANT");
+  const rule = (r) => `<div class="rule"><b data-wrap-ok>${esc(r.label)}</b>${r.applies_to ? `<small data-wrap-ok>${esc(r.applies_to)}</small>` : ""}${r.snippet ? `<q data-wrap-ok>${esc(r.snippet)}</q>` : ""}<span class="trust ${["A", "B"].includes(r.tier) ? "ok" : ""}">${ic(["A", "B"].includes(r.tier) ? "#l-shield-check" : "#l-circle-help", "i-xs")}${esc(r.src ?? TIER_LABEL[r.tier] ?? "출처 미상")}${r.checked_at ? ` · ${esc(String(r.checked_at).slice(0, 10))} 확인` : ""}${r.unverified ? " · 확인 필요" : ""}${r.url ? ` · <a href="${esc(r.url)}" target="_blank" rel="noopener">원문</a>` : ""}</span></div>`;
+  const next = g.next.slice(0, 4).map((n) => `<li class="${n.unverified ? "maybe" : ""}"><b class="num">${n.time_known ? hm(n.at) : md(n.at)}</b><span data-wrap-ok>${esc(n.label)}${n.stay ? ` · ${esc(typeof n.stay === "string" ? n.stay : stayText(n.stay))}` : ""}${n.applies === "IF_NATIONAL" ? " · 국립일 때" : ""}${n.unverified ? " · 예상" : ""}</span></li>`).join("");
   return `<div class="guide-slot">
-    ${g.open_rules?.length ? `<div class="sub"><h4>${ic("#l-alarm-clock", "i-sm")}이 캠핑장의 예약 오픈</h4>
-      ${g.open_rules.map((r) => `<p class="pre" data-wrap-ok>${esc(r.label ?? r.snippet)}</p><span class="trust ${["A", "B"].includes(r.tier) ? "ok" : ""}">${ic("#l-quote", "i-xs")}${esc(r.source_label ?? "운영자 안내")} · ${esc(r.checked_at ? ymd(r.checked_at) : "")}</span>`).join("")}
-      ${next ? `<p class="note">다음 오픈 예상</p><ul class="next">${next}</ul>` : ""}</div>` : ""}
-    ${g.steps?.length ? `<div class="sub"><h4>${ic("#l-list-ordered", "i-sm")}${esc(g.platform?.name ?? "예약처")} 예약 방법</h4>
-      <ol class="steps">${g.steps.map((s) => `<li data-wrap-ok>${esc(s)}</li>`).join("")}</ol>
-      ${g.tips?.length ? `<ul class="tips">${g.tips.map((s) => `<li data-wrap-ok>${esc(s)}</li>`).join("")}</ul>` : ""}
-      ${g.platform?.help_url ? `<a class="link-row" href="${esc(g.platform.help_url)}" target="_blank" rel="noopener">${ic("#l-external-link", "i-xs")}예약처 공식 안내</a>` : ""}</div>` : ""}
-    ${(g.warnings ?? []).map((w) => `<p class="note warn" data-wrap-ok>${esc(w)}</p>`).join("")}
-    ${providerBlock(c)}
+    ${next ? `<div class="sub"><h4>${ic("#l-alarm-clock", "i-sm")}다가오는 예약 오픈</h4><ul class="next-list">${next}</ul></div>` : ""}
+    ${own.length ? `<div class="sub"><h4>${ic("#l-calendar-clock", "i-sm")}이 캠핑장의 오픈 규칙</h4>${own.map(rule).join("")}</div>` : ""}
+    ${cond.length ? `<details class="sub"><summary><h4>${ic("#l-git-branch", "i-sm")}${esc(shortName(p?.name) || "예약처")} 오픈 방식</h4></summary>${cond.map(rule).join("")}</details>` : ""}
+    ${g.steps.length ? `<div class="sub"><h4>${ic("#l-list-ordered", "i-sm")}${esc(shortName(p?.name) || "")} 예약 순서</h4>
+      <ol class="steps">${g.steps.map((x) => `<li data-wrap-ok>${esc(x.t)}${x.v ? "" : ` <small class="unv">확인 필요</small>`}</li>`).join("")}</ol></div>` : ""}
+    ${p && (p.payment || p.cancel || p.waitlist || p.account) ? `<div class="sub"><h4>${ic("#l-wallet", "i-sm")}결제·취소·대기</h4><dl class="kv">
+      ${p.account ? `<dt>계정</dt><dd data-wrap-ok>${esc(p.account)}</dd>` : ""}${p.payment ? `<dt>결제 기한</dt><dd data-wrap-ok>${esc(p.payment)}</dd>` : ""}${p.waitlist ? `<dt>대기·취소표</dt><dd data-wrap-ok>${esc(p.waitlist)}</dd>` : ""}${p.cancel ? `<dt>취소 규정</dt><dd data-wrap-ok>${esc(p.cancel)}</dd>` : ""}</dl></div>` : ""}
+    ${p?.tips?.length ? `<ul class="tips">${p.tips.map((t) => `<li data-wrap-ok>${esc(t)}</li>`).join("")}</ul>` : ""}
+    ${p?.help?.length ? `<div class="help-links">${p.help.map((h) => `<a class="mini" href="${esc(h.url)}" ${/^tel:/.test(h.url) ? "" : 'target="_blank" rel="noopener"'}>${esc(h.label)}</a>`).join("")}</div>` : ""}
+    ${g.warnings.map((w) => `<p class="note warn" data-wrap-ok>${ic("#l-triangle-alert", "i-xs")} ${esc(w)}</p>`).join("")}
   </div>`;
 }
 function nearBlock(c, d) {
@@ -284,7 +297,10 @@ function detail(c) {
     ["주소", c.addr, c.addr ? `<button class="mini" type="button" data-copy="${esc(c.addr)}">복사</button>` : ""],
     ["전화", c.tel, c.tel ? `<a class="mini" href="${telHref(c.tel)}">걸기</a>` : ""],
     ["홈페이지", c.homepage ? c.homepage.replace(/^https?:\/\//, "").replace(/\/$/, "") : null, c.homepage ? `<a class="mini" href="${esc(c.homepage)}" target="_blank" rel="noopener">열기</a>` : ""],
-    ["운영 기간", c.seasons.join("·") || null, ""],
+    ["운영 기간", d?.open_period ?? (c.seasons.join("·") || null), ""],
+    ["이용 시간", d?.hours ?? null, ""],
+    ["쉬는 날", d?.rest_days ?? null, ""],
+    ["주차", d?.parking ?? null, ""],
     ["운영 요일", c.days.join("·") || null, ""],
     ["운영 주체", [OP[c.op], c.types.join("·")].filter(Boolean).join(" · ") || null, ""],
     ["운영 상태", c.status, ""],

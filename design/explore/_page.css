@@ -225,3 +225,29 @@ a.row .tag { flex: none; }
 .d-cta .btn-primary { flex: 1; }
 .btn-icon { width: 3.125rem; padding: 0; flex: none; }
 .d-body { padding-bottom: 32px; }
+/* 예약 안내 */
+.rule { display: grid; gap: 4px; padding: 10px 12px; border-radius: 12px; background: var(--surface-2); min-width: 0; }
+.rule b { font-size: var(--fs-base); font-weight: 800; }
+.rule small { font-size: var(--fs-xs); font-weight: 500; color: var(--ink-3); }
+.rule q { font-size: var(--fs-sm); color: var(--ink-2); quotes: "“" "”"; }
+details.sub summary { list-style: none; cursor: pointer; }
+details.sub summary::-webkit-details-marker { display: none; }
+details.sub summary h4::after { content: "펼치기"; margin-left: auto; font-size: var(--fs-xs); font-weight: 700; color: var(--green-press); }
+details.sub[open] summary h4::after { content: "접기"; }
+.next-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.next-list li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: center; padding: 8px 12px; border-radius: 12px; background: var(--ember-tint); }
+.next-list li b { font-size: var(--fs-base); font-weight: 900; color: var(--ember); white-space: nowrap; }
+.next-list li span { font-size: var(--fs-sm); font-weight: 600; color: var(--ink); }
+.next-list li.maybe { background: var(--surface-2); } .next-list li.maybe b { color: var(--ink-2); }
+.unv { font-size: var(--fs-2xs); font-weight: 700; color: var(--ember); }
+.kv { margin: 0; display: grid; grid-template-columns: 5rem minmax(0, 1fr); gap: 6px 10px; }
+.kv dt { font-size: var(--fs-xs); font-weight: 700; color: var(--ink-3); padding-top: 2px; white-space: nowrap; }
+.kv dd { margin: 0; font-size: var(--fs-sm); line-height: 1.6; }
+.help-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag-ember { background: var(--ember-tint); color: var(--ember); font-weight: 700; }
+.steps { list-style: decimal; }
+.tips { list-style: disc; }
+details.sub summary h4 { min-width: 0; }
+.steps { list-style: none; padding-left: 0; counter-reset: step; }
+.steps li { position: relative; padding-left: 2rem; counter-increment: step; }
+.steps li::before { content: counter(step); position: absolute; left: 0; top: .1rem; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--green-tint); color: var(--green-press); font-size: var(--fs-xs); font-weight: 900; display: grid; place-items: center; }

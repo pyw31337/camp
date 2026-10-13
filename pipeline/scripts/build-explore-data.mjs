@@ -4,6 +4,7 @@ import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { buildCampDetails, buildExploreRecords, buildProviders } from "../lib/explore-data.mjs";
 import { themeCatalog } from "../lib/themes.mjs";
+import { buildBookingGuide } from "../lib/booking-intel.mjs";
 import { SEOUL_DATASET_URL, matchSeoulToCampgrounds } from "../lib/seoul-yeyak.mjs";
 
 const p = (rel) => fileURLToPath(new URL(rel, import.meta.url));
@@ -17,6 +18,7 @@ const nearby = await read("../out/campground-nearby.json");
 const mediaDir = process.env.MEDIA_DIR;
 const media = mediaDir && existsSync(`${mediaDir}/manifest.json`) ? JSON.parse(await readFile(`${mediaDir}/manifest.json`, "utf8")) : null;
 const registry = await read("../registry/booking-rules.json");
+const platforms = await read("../registry/booking-platforms.json");
 const calendar = await read("../out/open-calendar.json");
 
 const seoulRaw = await read("../out/seoul-yeyak.json");
@@ -56,12 +58,37 @@ const compact = (v) => {
   if (v && typeof v === "object") return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, compact(x)]).filter(([, x]) => !(x == null || x === "" || (Array.isArray(x) && !x.length))));
   return v;
 };
-await writeFile(p("../out/explore/campgrounds.json"), JSON.stringify(records.map(compact)));
 await writeFile(p("../out/explore/meta.json"), JSON.stringify(meta));
 // 캠핑장별 상세 파일(data/camps/{id}.json). 목록은 가볍게, 상세는 필요할 때만.
 await rm(p("../out/explore/camps/"), { recursive: true, force: true });
 await mkdir(p("../out/explore/camps/"), { recursive: true });
 const details = buildCampDetails(camps, nearby);
+// 캠핑장별 예약 안내: 예약 채널 판별 + 예약처 절차 + 이 캠핑장의 오픈 규칙(운영자 문구·TourAPI 예약 안내·예약처 규칙) + 다음 오픈
+const now = new Date();
+const byId = new Map((camps.campgrounds ?? []).map((c) => [String(c.external_id.id), c]));
+const recById = new Map(records.map((r) => [r.id, r]));
+let guided = 0, withOpen = 0;
+for (const [id, d] of Object.entries(details)) {
+  const c = byId.get(id), fee = fees?.records?.[id], rec = recById.get(id);
+  if (fee) for (const [k, f] of [["hours", "hours_text"], ["rest_days", "rest_days_text"], ["parking", "parking_fee_text"], ["open_period", "open_period_text"], ["reservation_note", "reservation_text"]]) if (fee[f]) d[k] = fee[f];
+  if (!platforms || !c) continue;
+  const extra = fee?.reservation_text ? [{ text: fee.reservation_text, field: "tourapi.reservation", source: { url: fee.source_url, checked_at: fee.checked_at, tier: "C", label: "한국관광공사 TourAPI 예약안내" } }] : [];
+  try {
+    const g = buildBookingGuide(c, platforms, extra, { now });
+    const p = g.platform;
+    d.guide = {
+      platform: p ? { id: p.id, name: p.name, url: p.official_url, help: p.help_urls ?? [], opening: p.opening_summary ?? null, payment: p.payment_deadline?.text ?? null, cancel: p.cancel_policy_location ?? null, waitlist: p.waitlist?.text ?? null, account: p.account?.notes ?? null, tips: (p.tips ?? []).map((t) => t.text ?? t), unverified: Boolean(p.needs_verification) } : null,
+      steps: g.steps.map((s) => ({ t: s.text, v: s.verified })),
+      open_rules: g.open_rules.map((r) => ({ label: r.label, applies: r.applies ?? null, applies_to: r.applies_to ?? null, snippet: r.snippet ?? null, tier: r.source?.tier ?? null, src: r.source?.label ?? null, url: r.source?.url ?? null, checked_at: r.source?.checked_at ?? null, unverified: Boolean(r.needs_verification) })),
+      next: g.next_openings.map((n) => ({ at: n.at, label: n.label, time_known: n.time_known, stay: n.stay ?? null, applies: n.applies ?? null, unverified: Boolean(n.needs_verification) })),
+      warnings: g.warnings.map((w) => w.message),
+    };
+    guided++;
+    const confirmed = g.next_openings.find((n) => !n.needs_verification && n.applies !== "IF_NATIONAL" && n.applies !== "VARIANT") ?? null;
+    if (rec && confirmed) { rec.booking.next = { at: confirmed.at, label: confirmed.label, time_known: confirmed.time_known }; withOpen++; }
+  } catch (error) { console.log(`::warning title=예약 안내 실패::${id} ${error.message}`); }
+}
+console.log(`예약 안내 ${guided}곳 · 확정 오픈 일정 ${withOpen}곳`);
 for (const [id, d] of Object.entries(details)) {
   const photos = (media?.camps?.[id] ?? []).filter((x) => x.thumb && x.large).map((x) => ({ t: x.thumb, l: x.large, w: x.w, h: x.h }));
   if (photos.length) d.photos = photos;
@@ -69,3 +96,5 @@ for (const [id, d] of Object.entries(details)) {
 for (const [id, d] of Object.entries(details)) await writeFile(p(`../out/explore/camps/${id}.json`), JSON.stringify(d));
 console.log(`탐색 데이터 ${records.length}곳 ${JSON.stringify(meta.stats)}`);
 console.log(`테마 ${meta.themes.map((t) => `${t.label} ${t.count}`).join(" · ")}`);
+// 목록 파일은 예약 안내(다음 오픈)까지 붙인 뒤에 쓴다.
+await writeFile(p("../out/explore/campgrounds.json"), JSON.stringify(records.map(compact)));
