@@ -6,7 +6,8 @@
 | # | 할 일 | 어디서 | 넣을 곳 | 소요 | 비용 | 막히는 것 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | 시안 v2 검토·피드백 | Artifact 링크 | 채팅으로 의견 | 15분 | 무료 | 앱 이식 |
-| 2 | 공공데이터포털 인증키 발급·활용신청 | data.go.kr | Secret `DATA_GO_KR_SERVICE_KEY` | 20분 + 승인 대기 | 무료 | 실제 캠핑장 데이터 |
+| 2 | ✅ 공공데이터포털 인증키 (2026-10-13 확인: 고캠핑·기상청·TourAPI 정상) | data.go.kr | Secret `DATA_GO_KR_SERVICE_KEY` | 완료 | 무료 | – |
+| 2-1 | 추가 활용신청 2건: 전국공공시설개방정보표준데이터(무료 시설 발견), 행정안전부 공중화장실정보(화장실 거리) | data.go.kr | 같은 키 | 5분 | 무료 | 무료 캠프 사이트 |
 | 3 | Cloudflare 계정·API 토큰 | dash.cloudflare.com | Secret `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` | 15분 | 무료 | 외부 공개 주소 |
 | 4 | PR 병합 | GitHub | – | 5분 | 무료 | 자동 배포 시작 |
 | 5 | 카카오 개발자 앱(지도·길찾기) | developers.kakao.com | Secret `KAKAO_REST_API_KEY`, Variable `KAKAO_JS_KEY` | 15분 | 무료 한도 | 지도·이동시간·통행료 |
@@ -30,7 +31,15 @@
 4. GitHub 저장소 → Settings → Secrets and variables → Actions → New repository secret → 이름 `DATA_GO_KR_SERVICE_KEY`, 값 붙여넣기.
 5. Actions 탭 → `Data sync` → Run workflow로 한 번 실행해 성공하는지 확인(실패하면 로그 링크만 알려 주면 된다).
 
+## 2-1. 추가 활용신청 (무료 캠프 사이트용)
+- data.go.kr에서 ‘전국공공시설개방정보표준데이터’(15013117) → 오픈 API 탭 → 활용신청
+- ‘행정안전부_공중화장실정보’ → 활용신청
+- 같은 인증키로 호출되므로 Secret은 그대로 두면 된다.
+
 ## 3. Cloudflare (무료 호스팅·서버 함수)
+
+> 이 작업 환경(클라우드 컨테이너)은 사용자 컴퓨터의 브라우저를 조작할 수 없어 대신 진행하지 못했다. 아래 순서대로 하면 10분 안에 끝난다.
+
 1. https://dash.cloudflare.com 가입(무료 플랜).
 2. 우측 상단 프로필 → My Profile → API Tokens → Create Token → **Custom token**:
    - 권한: Account → Cloudflare Pages → Edit (나중에 Workers를 쓰면 Workers Scripts → Edit 추가)
@@ -43,6 +52,8 @@
 - 열려 있는 PR을 검토 후 Merge. main에 반영되면 `Deploy to Cloudflare Pages`가 실행되고, 3단계를 마쳤다면 외부 접속 주소가 생긴다.
 
 ## 5. 카카오 개발자 (지도·길찾기)
+
+> 3단계와 같은 이유로 직접 진행이 필요하다.
 1. https://developers.kakao.com → 내 애플리케이션 → 애플리케이션 추가(이름: 모여라 캠핑).
 2. 앱 설정 → 플랫폼 → Web → 사이트 도메인에 배포 주소(예: `https://moyeora.pages.dev`)와 `http://localhost:5173` 등록.
 3. 앱 키에서 **JavaScript 키** → Variable `KAKAO_JS_KEY`(브라우저에 노출되는 키라 Secret이 아니어도 된다. 도메인 제한으로 보호), **REST API 키** → Secret `KAKAO_REST_API_KEY`(길찾기는 서버 함수에서만 호출).
