@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./pilot.css";
+
+export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "모여라 캠핑 | 전국 캠핑장 정보 허브",

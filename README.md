@@ -9,6 +9,7 @@
 - [`db/001_initial_schema.sql`](db/001_initial_schema.sql): PostgreSQL 16+ 초기 데이터 모델
 - [`camping-atlas/`](camping-atlas): 공개 Sites 프로토타입
 - [공개 프로토타입](https://moyeora-camping.magicsiren32.chatgpt.site): 모여라 캠핑 화면
+- [GitHub Pages](https://pyw31337.github.io/camp/): `main` 푸시로 갱신되는 정적 파일럿
 - [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md): 여행 검색 UX, 색상, 이미지, 반응형 기준
 
 ## 협업 시작하기
@@ -26,3 +27,7 @@ npm run dev
 ```
 
 앱은 현재 데이터 연결 흐름과 화면을 검증하는 프로토타입이다. 화면에 실제 실시간 가격·재고를 표시하려면 각 공식 채널의 허가된 연동과 수집 주기, 신뢰도 판정을 먼저 구현해야 한다.
+
+## GitHub Pages 배포
+
+`main`에 `camping-atlas/` 변경을 푸시하면 GitHub Actions가 `npm run build:pages`를 실행하고 [GitHub Pages](https://pyw31337.github.io/camp/)에 배포한다. 이 빌드는 서버 기능 없이 동작하므로 검색·필터·저장 목록은 브라우저에서 처리하고, 예약 가능 여부는 운영자 공식 예약처로 연결해 확인한다.

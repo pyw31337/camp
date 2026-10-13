@@ -9,6 +9,7 @@ const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
   "00000000-0000-4000-8000-000000000000";
 
 const { d1, r2 } = hostingConfig;
+const isGitHubPages = process.env.GITHUB_PAGES === "true";
 
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
@@ -62,39 +63,43 @@ export default defineConfig(async ({ command }) => {
     },
     plugins: [
       vinext(),
-      sites({ mockAuth: !managedLinux }),
-      connectorPreview(),
-      cloudflare({
-        viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
-        inspectorPort: false,
-        config: {
-          ...localBindingConfig,
-          ...(command === "serve"
-            ? {
-                services: [
-                  {
-                    binding: "CONNECTORS",
-                    service: "sites-connector-preview",
-                    entrypoint: "ConnectorPreview",
-                  },
-                ],
-              }
-            : {}),
-        },
-        ...(command === "serve"
-          ? {
-              auxiliaryWorkers: [
-                {
-                  config: {
-                    name: "sites-connector-preview",
-                    main: "./build/connector-preview-worker.mjs",
-                    compatibility_date: "2026-05-15",
-                  },
-                },
-              ],
-            }
-          : {}),
-      }),
+      ...(!isGitHubPages
+        ? [
+            sites({ mockAuth: !managedLinux }),
+            connectorPreview(),
+            cloudflare({
+              viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
+              inspectorPort: false,
+              config: {
+                ...localBindingConfig,
+                ...(command === "serve"
+                  ? {
+                      services: [
+                        {
+                          binding: "CONNECTORS",
+                          service: "sites-connector-preview",
+                          entrypoint: "ConnectorPreview",
+                        },
+                      ],
+                    }
+                  : {}),
+              },
+              ...(command === "serve"
+                ? {
+                    auxiliaryWorkers: [
+                      {
+                        config: {
+                          name: "sites-connector-preview",
+                          main: "./build/connector-preview-worker.mjs",
+                          compatibility_date: "2026-05-15",
+                        },
+                      },
+                    ],
+                  }
+                : {}),
+            }),
+          ]
+        : []),
     ],
   };
 });
