@@ -1,7 +1,31 @@
 // 공공데이터포털 인증키로 활용신청한 서비스가 실제로 호출되는지 확인한다. 키 값은 출력하지 않는다.
 // 사용: DATA_GO_KR_SERVICE_KEY=... node scripts/check-data-go-kr.mjs
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
+import { fetchExAll } from "../lib/ex-rest-areas.mjs";
+import { kakaoGeocode } from "../lib/geocode.mjs";
 import { nowInKst } from "../lib/kst.mjs";
+
+// 다른 원천 키(값은 출력하지 않음): 한국도로공사 EX_API_KEY, 카카오 REST/JS 키
+async function checkOtherKeys() {
+  let bad = 0;
+  if (process.env.EX_API_KEY) {
+    try {
+      const rows = await fetchExAll("locationinfo/locationinfoRest", process.env.EX_API_KEY);
+      console.log(`✓ 한국도로공사 EX_API_KEY — 휴게소 좌표 ${rows.length}건`);
+    } catch (e) { bad++; console.log(`✗ 한국도로공사 EX_API_KEY — ${e.message}`); }
+  } else console.log("- EX_API_KEY 없음(예제 키로 동작)");
+  if (process.env.KAKAO_REST_API_KEY) {
+    try {
+      const r = await kakaoGeocode("서울특별시 중구 세종대로 110", { key: process.env.KAKAO_REST_API_KEY });
+      if (r) console.log(`✓ 카카오 REST API 키 — 주소→좌표 정상(${r.lat.toFixed(3)}, ${r.lng.toFixed(3)})`);
+      else { bad++; console.log("✗ 카카오 REST API 키 — 응답은 왔지만 결과 없음(카카오맵 사용 설정 확인)"); }
+    } catch (e) { bad++; console.log(`✗ 카카오 REST API 키 — ${e.message}${e.code === "AUTH" ? " · 제품 설정 → 카카오맵 ‘사용 설정 ON’, 허용 IP 비움, REST API 키(Admin 키 아님)인지 확인" : ""}`); }
+  } else console.log("- KAKAO_REST_API_KEY 없음");
+  const js = process.env.KAKAO_JS_KEY;
+  console.log(js ? `✓ 카카오 JavaScript 키 Variable 있음(${js.length}자, 도메인 제한이라 서버에서 호출 검사는 하지 않음)` : "- KAKAO_JS_KEY Variable 없음");
+  return bad;
+}
+const otherBad = await checkOtherKeys();
 
 const key = process.env.DATA_GO_KR_SERVICE_KEY;
 if (!key) {
@@ -52,4 +76,4 @@ for (const c of checks) {
   }
 }
 console.log("행정안전부 일반야영장업 조회서비스는 요청 주소 확인 후 추가 예정(활용신청 상태는 data.go.kr 마이페이지에서 확인).");
-process.exit(failed && process.env.REQUIRE_KEY ? 1 : 0);
+process.exit((failed || otherBad) && process.env.REQUIRE_KEY ? 1 : 0);

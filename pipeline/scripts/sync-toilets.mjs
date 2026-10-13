@@ -52,7 +52,14 @@ async function downloadAll(pageUrl) {
   const buf = Buffer.from(await page.arrayBuffer());
   if (!/html/i.test(page.headers.get("content-type") ?? "")) return { rows: csvToObjects(decodeKoreanText(await toCsvBytes(buf, "single"))), parts: ["single"] };
   const html = buf.toString("utf8");
-  const dataUrl = html.match(/data-download-url=["']([^"']+)["']/i)?.[1];
+  // 페이지 구조 진단: 화장실 전용 다운로드 버튼(onclick/폼/스크립트) 경로를 찾기 위해 로그와 산출물로 남긴다.
+  await writeFile(`${out}localdata-restroom-page.html`, html);
+  const clues = [...new Set([
+    ...[...html.matchAll(/(?:href|action|data-[a-z-]+)=["']([^"']*(?:down|file|restroom|csv|xlsx|zip)[^"']*)["']/gi)].map((m) => m[1]),
+    ...[...html.matchAll(/onclick=["']([^"']+)["']/gi)].map((m) => `onclick:${m[1]}`),
+    ...[...html.matchAll(/(?:url|location\.href|action)\s*[:=]\s*["'`]([^"'`]*(?:down|file)[^"'`]*)["'`]/gi)].map((m) => `js:${m[1]}`),
+  ])].filter((c) => !/download-all\?orgCode=\d+_ALL$/.test(c));
+  console.log(`LOCALDATA 페이지 단서 ${clues.length}개: ${clues.slice(0, 60).join(" | ")}`);
   if (dataUrl) console.log(`data-download-url: ${dataUrl}`);
   const links = [...new Set([...html.matchAll(/\/file\/download-all\?orgCode=([0-9A-Z_]+)/g)].map((m) => m[0]))];
   if (!links.length) throw new Error(`시도별 다운로드 링크 없음(HTML ${buf.length}B)`);
