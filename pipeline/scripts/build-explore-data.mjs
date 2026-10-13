@@ -14,6 +14,8 @@ if (!camps) { console.log("::warning title=탐색 데이터 건너뜀::out/campg
 const toilets = await read("../out/campground-toilets.json");
 const fees = await read("../out/tour-fees.json");
 const nearby = await read("../out/campground-nearby.json");
+const products = await read("../out/campground-products.json");
+const social = await read("../out/campground-social.json");
 // 자체 저장 공식 사진(webp, media 브랜치). 없으면 고캠핑 원본 주소를 그대로 쓴다.
 const mediaDir = process.env.MEDIA_DIR;
 const media = mediaDir && existsSync(`${mediaDir}/manifest.json`) ? JSON.parse(await readFile(`${mediaDir}/manifest.json`, "utf8")) : null;
@@ -47,6 +49,8 @@ const meta = {
     with_intro: records.filter((r) => r.line).length,
     with_seoul_status: records.filter((r) => r.seoul.length).length,
     seoul_services: seoulRaw?.services?.length ?? 0,
+    with_products: Object.keys(products?.campgrounds ?? {}).filter((k) => products.campgrounds[k].products?.length).length,
+    with_social: Object.keys(social?.campgrounds ?? {}).length,
     with_self_hosted_photo: records.filter((r) => r.ph).length,
     with_nearby: nearby ? Object.values(nearby.campgrounds ?? {}).filter((x) => Object.values(x).some((v) => v?.length)).length : 0,
   },
@@ -89,6 +93,33 @@ for (const [id, d] of Object.entries(details)) {
   } catch (error) { console.log(`::warning title=예약 안내 실패::${id} ${error.message}`); }
 }
 console.log(`예약 안내 ${guided}곳 · 확정 오픈 일정 ${withOpen}곳`);
+// 고캠핑 imageList(공식 사진) 중 아직 자체 저장하지 않은 것은 원본 주소로 바로 보여 준다(고캠핑 공식 이미지 서버).
+const imageListCache = await read("../.cache/gocamping-images.json") ?? {};
+// 관광공사 객실·사이트 상품(공식 등록 기준가·상품 사진)과 공식 사진
+for (const [id, d] of Object.entries(details)) {
+  const pr = products?.campgrounds?.[id];
+  if (pr) {
+    if (pr.products?.length) d.products = pr.products.map((x) => ({ name: x.name, size: x.size ?? null, count: x.count ?? null, base: x.base ?? null, max: x.max ?? null, price: x.price ?? null, intro: x.intro ?? null, amenities: x.amenities ?? [], photos: x.photos ?? [] }));
+    if (pr.info?.length) d.tour_info = pr.info;
+    if (pr.photos?.length) d.tour_photos = pr.photos.map((x) => x.url);
+    d.products_src = { url: pr.source_url, checked_at: pr.checked_at, basis: "한국관광공사 TourAPI 공식 등록 기준가(최소 요금)" };
+  }
+  const so = social?.campgrounds?.[id];
+  if (so) {
+    if (so.blog?.length) d.reviews = so.blog;
+    if (so.cafe?.length) d.cafe = so.cafe;
+    if (so.image?.length) d.sns_images = so.image;
+    if (so.vclip?.length) d.videos = so.vclip;
+    d.social_checked_at = so.fetched_at ?? null;
+    const rec = records.find((r) => r.id === id);
+    if (rec) rec.soc = [(so.blog?.length ?? 0) + (so.cafe?.length ?? 0), so.vclip?.length ?? 0, so.image?.length ?? 0];
+  }
+}
+for (const [id, d] of Object.entries(details)) {
+  const hosted = new Set((media?.camps?.[id] ?? []).map((x) => x.src_url));
+  const remote = (imageListCache[id]?.images ?? []).map((x) => x.imageUrl).filter((u) => u && !hosted.has(u)).slice(0, 40);
+  if (remote.length) d.photos_remote = remote;
+}
 for (const [id, d] of Object.entries(details)) {
   const photos = (media?.camps?.[id] ?? []).filter((x) => x.thumb && x.large).map((x) => ({ t: x.thumb, l: x.large, w: x.w, h: x.h }));
   if (photos.length) d.photos = photos;
@@ -96,5 +127,17 @@ for (const [id, d] of Object.entries(details)) {
 for (const [id, d] of Object.entries(details)) await writeFile(p(`../out/explore/camps/${id}.json`), JSON.stringify(d));
 console.log(`탐색 데이터 ${records.length}곳 ${JSON.stringify(meta.stats)}`);
 console.log(`테마 ${meta.themes.map((t) => `${t.label} ${t.count}`).join(" · ")}`);
+// 홈 화면용 추천(테마별 사진 있는 캠핑장): 자체 저장 사진이 있고 예약 정보가 풍부한 곳 우선
+const score = (r) => (r.booking.methods.some((m) => /실시간/.test(m)) ? 4 : 0) + (r.booking.url ? 3 : 0) + (r.line ? 2 : 0) + (r.kinds.length ? 1 : 0);
+const withPhoto = records.filter((r) => r.ph).sort((a, b) => score(b) - score(a));
+const FEATURED_ORDER = ["valley", "sea", "forest", "kids", "pet", "glamping", "caravan", "autumn", "winter", "lake", "mountain", "public"];
+const featured = {
+  generated_at: meta.generated_at, total: records.length, photo_count: records.filter((r) => r.ph || r.img).length,
+  themes: FEATURED_ORDER.map((id) => meta.themes.find((t) => t.id === id)).filter(Boolean).map((t) => ({
+    id: t.id, label: t.label, desc: t.desc, count: t.count,
+    camps: withPhoto.filter((r) => r.th.includes(t.id)).slice(0, 12).map((r) => ({ id: r.id, name: r.name, where: [r.sido, r.sigungu].filter(Boolean).join(" "), line: r.line ?? null, ph: r.ph, rt: r.booking.methods.some((m) => /실시간/.test(m)) })),
+  })).filter((t) => t.camps.length),
+};
+await writeFile(p("../out/explore/featured.json"), JSON.stringify(featured));
 // 목록 파일은 예약 안내(다음 오픈)까지 붙인 뒤에 쓴다.
 await writeFile(p("../out/explore/campgrounds.json"), JSON.stringify(records.map(compact)));

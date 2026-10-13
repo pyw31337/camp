@@ -98,11 +98,11 @@ function card(c) {
   const kinds = c.kinds.map(([k, n]) => KIND[k] ? `<span class="tag">${ic(KIND[k][1], "i-xs")}${KIND[k][0]} <span class="num">${n}</span></span>` : "").join("");
   const km = state.here ? ` · ${dist(state.here, c).toFixed(0)}km` : "";
   return `<button class="card" type="button" data-open="${c.id}" aria-current="${state.open === c.id}">
-    <span class="thumb">${c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ic("#t-tent")}</span>
+    <span class="thumb">${c.ph ? `<img src="../media/${esc(c.ph)}" alt="" loading="lazy" onerror="this.remove()">` : c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ic("#t-tent")}</span>
     <span class="card-body">
       <span class="card-title"><h3>${esc(c.name)}</h3>${state.saved.has(c.id) ? ic("#l-heart", "i-xs saved-mark") : ""}</span>
       <span class="loc">${ic("#l-map-pin", "i-xs")}${esc([c.sido, c.sigungu].filter(Boolean).join(" "))}${km}${OP[c.op] ? ` · ${OP[c.op]}` : ""}</span>
-      <span class="tags">${c.booking.next ? `<span class="tag tag-ember">${ic("#l-alarm-clock", "i-xs")}${c.booking.next.time_known ? hm(c.booking.next.at) : md(c.booking.next.at)} 오픈</span>` : ""}${openNow(c) ? `<span class="tag tag-green">${ic("#l-circle-check", "i-xs")}서울 공공예약 접수중</span>` : ""}${isRealtime(c) ? `<span class="tag tag-green">${ic("#l-zap", "i-xs")}온라인 실시간 예약</span>` : ""}${kinds}${petOk(c) ? `<span class="tag">${ic("#l-dog", "i-xs")}반려견</span>` : ""}</span>
+      <span class="tags">${c.booking.next ? `<span class="tag tag-ember">${ic("#l-alarm-clock", "i-xs")}${c.booking.next.time_known ? hm(c.booking.next.at) : md(c.booking.next.at)} 오픈</span>` : ""}${openNow(c) ? `<span class="tag tag-green">${ic("#l-circle-check", "i-xs")}서울 공공예약 접수중</span>` : ""}${isRealtime(c) ? `<span class="tag tag-green">${ic("#l-zap", "i-xs")}온라인 실시간 예약</span>` : ""}${kinds}${petOk(c) ? `<span class="tag">${ic("#l-dog", "i-xs")}반려견</span>` : ""}${c.soc?.[0] ? `<span class="tag">${ic("#l-message-circle", "i-xs")}후기 ${c.soc[0]}</span>` : ""}${c.soc?.[1] ? `<span class="tag">${ic("#l-play", "i-xs")}영상 ${c.soc[1]}</span>` : ""}</span>
       <span class="price">${c.fee?.min ? `<b>${won(c.fee.min)}~</b><span>공식 안내 요금</span>` : `<span>요금은 예약처에서 확인</span>`}</span>
     </span></button>`;
 }
@@ -208,7 +208,7 @@ const km = (m) => (m < 1000 ? `${Math.round(m / 10) * 10}m` : `${(m / 1000).toFi
 const telHref = (t) => `tel:${String(t).replace(/[^\d+]/g, "")}`;
 const mapLink = (name, lat, lng) => `https://map.kakao.com/link/map/${encodeURIComponent(name)},${lat},${lng}`;
 const routeLink = (name, lat, lng) => `https://map.kakao.com/link/to/${encodeURIComponent(name)},${lat},${lng}`;
-const SECTIONS = [["sec-info", "기본정보"], ["sec-book", "예약"], ["sec-site", "사이트·요금"], ["sec-fac", "시설"], ["sec-near", "주변"], ["sec-media", "사진·후기"], ["sec-talk", "댓글"]];
+const SECTIONS = [["sec-media", "사진·후기"], ["sec-info", "기본정보"], ["sec-book", "예약"], ["sec-site", "상품·요금"], ["sec-fac", "시설"], ["sec-near", "주변"], ["sec-talk", "댓글"]];
 const NEAR_GROUPS = [["toilet", "화장실", "#l-toilet"], ["mart", "마트·장보기", "#l-shopping-cart"], ["conv", "편의점", "#l-store"], ["fuel", "주유소", "#l-fuel"], ["medical", "병원·약국", "#l-cross"], ["rest", "휴게소·졸음쉼터", "#l-coffee"], ["tour", "주변 관광", "#l-camera"], ["food", "맛집", "#l-utensils"], ["gear", "철물·캠핑용품", "#l-wrench"]];
 let DETAIL = new Map();
 const POI_KIND = { supermarket: "마트", convenience: "편의점", butcher: "정육점", greengrocer: "청과·채소", hardware: "철물점", outdoor: "캠핑·아웃도어", fuel: "주유소", pharmacy: "약국", hospital: "병원", SERVICE_AREA: "고속도로 휴게소", REST_AREA: "휴게소", DROWSY_SHELTER: "졸음쉼터" };
@@ -267,7 +267,15 @@ function nearBlock(c, d) {
   }).join("")}</div>`).join("")}
   <p class="note" data-wrap-ok>직선거리 기준 · 한국관광공사 TourAPI, OpenStreetMap(© 기여자, ODbL), 행정안전부 공중화장실정보, 한국도로공사·졸음쉼터 표준데이터</p>`;
 }
+// 공식 사진: 자체 저장(webp) → 아직 저장 전인 고캠핑 공식 사진(원본 주소) → TourAPI 공식 사진 순서
+function allPhotos(c, d) {
+  const own = (d?.photos?.length ? d.photos : c.ph ? [{ t: c.ph, l: c.ph }] : []).map((p) => ({ t: MEDIA + p.t, l: MEDIA + p.l }));
+  const remote = [...(d?.photos_remote ?? []), ...(d?.tour_photos ?? []).map((x) => x.url ?? x)].map((u) => ({ t: u, l: u, remote: true }));
+  return [...own, ...remote];
+}
 function mediaBlock(c, d) {
+  const photos = allPhotos(c, d);
+  const grid = photos.length ? `<div class="sub"><h4>공식 사진 <span class="num">${photos.length}</span>장</h4><div class="photo-grid">${photos.map((p, i) => `<a href="${esc(p.l)}" target="_blank" rel="noopener"><img src="${esc(p.t)}" alt="${esc(c.name)} 사진 ${i + 1}" loading="lazy" ${p.remote ? 'referrerpolicy="no-referrer"' : ""} onerror="this.parentElement.remove()"></a>`).join("")}</div></div>` : "";
   const q = encodeURIComponent(c.name);
   const tag = encodeURIComponent(c.name.replace(/\s+|[()（）]/g, ""));
   const links = [
@@ -277,12 +285,43 @@ function mediaBlock(c, d) {
     ["https://www.youtube.com/results?search_query=" + encodeURIComponent(c.name + " 캠핑"), "유튜브 영상", "#t-brand-youtube"],
     ["https://www.instagram.com/explore/tags/" + tag + "/", "인스타그램 #" + c.name.replace(/\s+/g, ""), "#t-brand-instagram"],
   ];
-  const reviews = (d?.reviews ?? []).slice(0, 5).map((r) => `<a class="review" href="${esc(r.url)}" target="_blank" rel="noopener"><b>${esc(r.title)}</b><p data-wrap-ok>${esc(r.snippet ?? "")}</p><small>${esc([r.author, r.date && ymd(r.date)].filter(Boolean).join(" · "))}</small></a>`).join("");
-  const videos = (d?.videos ?? []).slice(0, 4).map((v) => `<button class="video" type="button" data-video="${esc(v.id)}" aria-label="${esc(v.title)} 재생"><img src="https://i.ytimg.com/vi/${esc(v.id)}/mqdefault.jpg" alt="" loading="lazy"><span>${ic("#l-play")}</span><b>${esc(v.title)}</b></button>`).join("");
-  return `${reviews ? `<div class="sub"><h4>블로그 후기</h4>${reviews}<span class="trust">${ic("#l-info", "i-xs")}네이버 검색 API 결과 · 글쓴이 원문으로 연결</span></div>` : ""}
-    ${videos ? `<div class="sub"><h4>영상</h4><div class="videos">${videos}</div></div>` : ""}
+  // 사람들의 후기·사진·영상(다음 검색): 원문 링크와 썸네일 주소만 쓰고 이미지는 저장하지 않는다.
+  const https = (u) => String(u ?? "").replace(/^http:/, "https:");
+  const post = (r, kind) => `<a class="review" href="${esc(r.url)}" target="_blank" rel="noopener">${r.thumb ? `<img src="${esc(https(r.thumb))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ""}<span><b>${esc(r.title)}</b><p data-wrap-ok>${esc(r.snippet ?? "")}</p><small>${esc([kind, r.src, r.date && ymd(r.date)].filter(Boolean).join(" · "))}</small></span></a>`;
+  const posts = [...(d?.reviews ?? []).map((r) => post(r, "블로그")), ...(d?.cafe ?? []).map((r) => post(r, "카페"))].join("");
+  const snaps = (d?.sns_images ?? []).map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener" title="${esc(x.src ?? "")}"><img src="${esc(https(x.thumb))}" alt="${esc(c.name)} 관련 사진(${esc(x.src ?? "외부")})" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.remove()"></a>`).join("");
+  const vids = d?.videos ?? [];
+  const video = (v) => v.yt
+    ? `<button class="video ${v.kind === "short" ? "short" : ""}" type="button" data-video="${esc(v.yt)}" aria-label="${esc(v.title)} 재생"><img src="https://i.ytimg.com/vi/${esc(v.yt)}/hqdefault.jpg" alt="" loading="lazy"><span>${ic("#l-play")}</span>${v.kind === "short" ? "<em>쇼츠</em>" : ""}<b>${esc(v.title)}</b><small>${esc([v.author, v.date && ymd(v.date)].filter(Boolean).join(" · "))}</small></button>`
+    : `<a class="video" href="${esc(v.url)}" target="_blank" rel="noopener"><img src="${esc(https(v.thumb))}" alt="" loading="lazy" referrerpolicy="no-referrer"><span>${ic("#l-play")}</span><b>${esc(v.title)}</b><small>${esc([v.author, v.date && ymd(v.date)].filter(Boolean).join(" · "))}</small></a>`;
+  const src = d?.social_checked_at ? `<span class="trust">${ic("#l-info", "i-xs")}Daum 검색 제공 · ${ymd(d.social_checked_at)} 수집 · 각 원문으로 연결(저작권은 글쓴이에게 있음)</span>` : "";
+  return `${grid}
+    ${vids.length ? `<div class="sub"><h4>영상·쇼츠 <span class="num">${vids.length}</span></h4><div class="videos">${vids.map(video).join("")}</div></div>` : ""}
+    ${snaps ? `<div class="sub"><h4>방문자 사진 <span class="num">${d.sns_images.length}</span></h4><div class="photo-grid">${snaps}</div></div>` : ""}
+    ${posts ? `<div class="sub"><h4>블로그·카페 후기 <span class="num">${(d.reviews?.length ?? 0) + (d.cafe?.length ?? 0)}</span></h4>${posts}</div>` : ""}
+    ${src}
     <div class="link-grid">${links.map(([u, l, i]) => `<a class="link-tile" href="${esc(u)}" target="_blank" rel="noopener">${ic(i, "i-sm")}<span>${esc(l)}</span>${ic("#l-arrow-up-right", "i-xs")}</a>`).join("")}</div>
     <p class="note" data-wrap-ok>다른 플랫폼의 사진·영상·후기는 각 서비스 화면에서 열립니다(저작권·이용약관 준수). 별점은 카카오맵·네이버 지도에서 확인하세요.</p>`;
+}
+// 관광공사에 등록된 객실·사이트 상품(공식 등록 기준가). 실제 판매가·빈자리는 예약처에서 확정된다.
+function productsBlock(d) {
+  const list = d?.products ?? [];
+  if (!list.length) return "";
+  const won2 = (n) => (n ? `${Number(n).toLocaleString()}원` : null);
+  const card = (p) => {
+    const pr = p.price ?? {};
+    const rows = [["비수기 주중", pr.off_weekday], ["비수기 주말", pr.off_weekend], ["성수기 주중", pr.peak_weekday], ["성수기 주말", pr.peak_weekend]].filter(([, v]) => v);
+    return `<article class="product">
+      ${p.photos?.length ? `<div class="product-photos">${p.photos.map((u) => `<img src="${esc(String(u).replace(/^http:/, "https:"))}" alt="${esc(p.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`).join("")}</div>` : ""}
+      <div class="product-body"><b>${esc(p.name)}</b>
+        <small>${esc([p.size, p.base || p.max ? `기준 ${p.base ?? "-"}명 · 최대 ${p.max ?? "-"}명` : null, p.count ? `${p.count}개` : null].filter(Boolean).join(" · "))}</small>
+        ${rows.length ? `<dl class="price-table">${rows.map(([k, v]) => `<dt>${k}</dt><dd class="num">${won2(v)}~</dd>`).join("")}</dl>` : `<p class="note">요금은 예약처에서 확인</p>`}
+        ${p.amenities?.length ? `<div class="tags">${p.amenities.slice(0, 8).map((a) => `<span class="tag">${esc(a)}</span>`).join("")}</div>` : ""}
+        ${p.intro ? `<p class="pre" data-wrap-ok>${esc(p.intro)}</p>` : ""}
+      </div></article>`;
+  };
+  return `<div class="sub"><h4>상품 <span class="num">${list.length}</span>개</h4><div class="products">${list.map(card).join("")}</div>
+    <span class="trust">${ic("#l-info", "i-xs")}${esc(d.products_src?.basis ?? "공식 등록 기준가")} · ${d.products_src?.checked_at ? `${ymd(d.products_src.checked_at)} 확인 · ` : ""}${d.products_src?.url ? `<a href="${esc(d.products_src.url)}" target="_blank" rel="noopener">원문</a>` : ""} · 실제 요금·빈자리는 예약처에서 확정</span></div>`;
 }
 function talkBlock(c) {
   const g = window.GISCUS;
@@ -295,9 +334,9 @@ function detail(c) {
   const sizes = c.sizes.length ? c.sizes.map(([w, dd, n]) => `${w}×${dd}m${n ? ` ${n}면` : ""}`).join(" · ") : "정보 없음";
   const floors = c.floors.length ? c.floors.map(([f, n]) => `${f} ${n}`).join(" · ") : "정보 없음";
   const target = bookingTarget(c);
-  const photos = d?.photos?.length ? d.photos : c.ph ? [{ t: c.ph, l: c.ph }] : [];
+  const photos = allPhotos(c, d);
   const hero = photos.length
-    ? `<div class="gallery" aria-label="공식 사진">${photos.map((p, i) => `<img src="${MEDIA}${esc(p.l)}" srcset="${MEDIA}${esc(p.t)} 480w, ${MEDIA}${esc(p.l)} 1280w" sizes="(max-width: 720px) 100vw, 560px" alt="${esc(c.name)} 공식 사진 ${i + 1}" ${i ? 'loading="lazy"' : ""}>`).join("")}</div>${photos.length > 1 ? `<span class="count num">${photos.length}장</span>` : ""}<span class="credit">사진: 한국관광공사 고캠핑</span>`
+    ? `<div class="gallery" aria-label="공식 사진">${photos.map((p, i) => p.remote ? `<img src="${esc(p.l)}" alt="${esc(c.name)} 공식 사진 ${i + 1}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : `<img src="${esc(p.l)}" srcset="${esc(p.t)} 480w, ${esc(p.l)} 1280w" sizes="(max-width: 900px) 100vw, 880px" alt="${esc(c.name)} 공식 사진 ${i + 1}" ${i ? 'loading="lazy"' : ""}>`).join("")}</div>${photos.length > 1 ? `<span class="count num">${photos.length}장</span>` : ""}<span class="credit">사진: 한국관광공사 고캠핑</span>`
     : c.img ? `<img src="${esc(c.img)}" alt="${esc(c.name)} 대표 사진" referrerpolicy="no-referrer"><span class="credit">사진: 한국관광공사 고캠핑</span>` : ic("#t-tent");
   const themes = (META?.themes ?? []).filter((t) => c.th.includes(t.id));
   const info = [
@@ -324,6 +363,7 @@ function detail(c) {
       <button class="act" type="button" data-share="${c.id}">${ic("#l-share-2")}공유</button>
     </div>
     <nav class="d-nav" aria-label="상세 목차">${SECTIONS.map(([id, l]) => `<button type="button" data-jump="${id}">${l}</button>`).join("")}</nav>
+    <section class="box" id="sec-media"><h3>${ic("#l-images", "i-sm")}사진·영상·후기</h3><div id="mediaSlot">${mediaBlock(c, d)}</div></section>
     <section class="box" id="sec-info"><h3>${ic("#l-info", "i-sm")}기본 정보</h3>${info || `<p class="note">등록된 기본 정보가 없습니다.</p>`}</section>
     <section class="box box-book" id="sec-book"><h3>${ic("#l-calendar", "i-sm")}예약</h3>
       <div class="tags">${c.booking.methods.map((m) => `<span class="tag ${/실시간/.test(m) ? "tag-green" : ""}">${esc(m)}</span>`).join("") || `<span class="tag">예약 방법 정보 없음</span>`}</div>
@@ -336,6 +376,7 @@ function detail(c) {
       <div class="facts">${kinds || `<div class="fact"><small>구성</small><b>정보 없음</b></div>`}</div>
       <div class="row">${ic("#l-ruler", "i-sm")}<span data-wrap-ok>${esc(sizes)}</span></div>
       <div class="row">${ic("#l-layers", "i-sm")}<span data-wrap-ok>바닥 ${esc(floors)}</span></div>
+      ${productsBlock(d)}
       <div class="sub"><h4>요금</h4>${c.fee ? `<p class="pre" data-wrap-ok>${esc(c.fee.text)}</p><span class="trust">${ic("#l-info", "i-xs")}한국관광공사 등록 안내 · ${ymd(c.fee.checked_at)} 확인 · <a href="${esc(c.fee.url)}" target="_blank" rel="noopener">원문</a></span>` : `<p class="note" data-wrap-ok>공식 원천에 등록된 요금 안내가 없습니다. 예약처에서 확인하세요.</p>`}</div>
     </section>
     <section class="box" id="sec-fac"><h3>${ic("#l-plug-zap", "i-sm")}시설·규칙</h3>
@@ -352,7 +393,6 @@ function detail(c) {
       <div id="introSlot"></div>
     </section>
     <section class="box" id="sec-near"><h3>${ic("#l-map-pinned", "i-sm")}주변 정보</h3><div id="nearSlot">${nearBlock(c, d)}</div></section>
-    <section class="box" id="sec-media"><h3>${ic("#l-images", "i-sm")}사진·영상·후기</h3><div id="mediaSlot">${mediaBlock(c, d)}</div></section>
     <section class="box" id="sec-talk"><h3>${ic("#l-messages-square", "i-sm")}댓글</h3>${talkBlock(c)}</section>
     <p class="note" data-wrap-ok>출처: 한국관광공사 고캠핑(${ymd(c.modified_at)} 수정)${c.gc_url ? ` · <a href="${esc(c.gc_url)}" target="_blank" rel="noopener">고캠핑 원문</a>` : ""} · 정보가 다르면 운영자 공지가 우선합니다.</p>
   </div>

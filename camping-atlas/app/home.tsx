@@ -16,6 +16,9 @@ type Camp = {
   imagePageUrl: string; reservationUrl: string; noticeUrl: string;
   officialUpdate: string; officialUpdateDate: string; observedAt: string;
 };
+type FeaturedCamp = { id: string; name: string; where: string; line: string | null; ph: string; rt: boolean };
+type FeaturedTheme = { id: string; label: string; desc: string; count: number; camps: FeaturedCamp[] };
+type Featured = { total: number; photo_count: number; themes: FeaturedTheme[] };
 type BookingEvent = {
   id: string; dday: string; action: string; dateTime: string; label: string;
   stay: string; provider: string; sourceUrl: string; checkedAt: string; needsVerification: boolean;
@@ -80,7 +83,7 @@ function formatEvent(event: PipelineEvent): BookingEvent | null {
 }
 
 export default function Home() {
-  const [mode, setMode] = useState<"camp" | "open">("camp");
+  const [mode] = useState<"camp" | "open">("camp");
   const [keyword, setKeyword] = useState("");
   const [region] = useState("전국");
   const [tripDate, setTripDate] = useState("");
@@ -92,6 +95,14 @@ export default function Home() {
   const [selectedCamp, setSelectedCamp] = useState<Camp | null>(null);
   const [upcoming, setUpcoming] = useState(fallbackEvents);
   const [catalog, setCatalog] = useState<Catalog>(fallbackCatalog);
+  const [featured, setFeatured] = useState<Featured | null>(null);
+  // 전국 탐색 데이터에서 뽑은 테마별 사진 캠핑장(매일 Data sync가 갱신)
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch("./explore/data/featured.json", { signal: controller.signal }).then((r) => (r.ok ? r.json() : null)).then((d) => { if (d?.themes?.length) setFeatured(d as Featured); }).catch(() => undefined);
+    return () => controller.abort();
+  }, []);
+  const ddayNum = (d: string) => (d === "D-0" ? 0 : Number(d.replace(/[^0-9]/g, "")) || 999);
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -143,10 +154,10 @@ export default function Home() {
     <div className="may-shell">
       <section className="may-hero" aria-label="캠핑 탐색">
         <img src={officialProducts[2].image} alt={officialProducts[2].imageAlt} referrerPolicy="no-referrer" /><div className="may-hero-overlay" />
-        <div className="may-hero-copy"><h1><span>캠핑장 예약,</span><span>열리는 날부터 챙겨요</span></h1><p>예약 방법과 오픈 일정,<br />내 텐트에 맞는 사이트까지 한 번에.</p></div>
+        <div className="may-hero-copy"><h1><span>전국 {featured ? featured.total.toLocaleString("ko-KR") : "3,000"}곳 캠핑장,</span><span>사진 보고 바로 예약</span></h1><p>사이트·시설·주변 정보와 예약 오픈 일정까지<br />한 화면에서 비교하세요.</p></div>
         <div className="may-hero-stats" aria-label="수집 현황"><div><small><CalendarClock size={14} />이번 주 예약 오픈</small><strong>{upcoming.length}<i>건</i></strong></div><div><small><Database size={14} />공개 비교 상품</small><strong>{catalog.counts.official_pilot_products}<i>개</i></strong></div></div>
         <form className="may-searchbox" onSubmit={runSearch}>
-          <div className="may-search-tabs" role="tablist" aria-label="검색 종류"><button type="button" role="tab" aria-selected={mode === "camp"} onClick={() => setMode("camp")}><MapPin size={16} />캠핑장 찾기</button><button type="button" role="tab" aria-selected={mode === "open"} onClick={() => setMode("open")}><Bell size={16} />예약 오픈 일정</button></div>
+          
           <div className="may-search-card">{mode === "camp" ? <div className="may-search-grid">
             <label className="may-search-field may-destination"><MapPin size={19} /><span><small>어디로</small><input value={keyword} onChange={(event) => setKeyword(event.target.value)} placeholder="전국 또는 캠핑장명" aria-label="캠핑장 또는 지역 검색" /></span></label>
             <label className="may-search-field"><CalendarDays size={18} /><span><small>언제</small><input type="date" value={tripDate} onChange={(event) => setTripDate(event.target.value)} aria-label="입실일" /></span></label>
@@ -160,9 +171,20 @@ export default function Home() {
 
       <section className="may-categories" aria-label="캠핑 형태">{categories.map((category) => <button key={category} type="button" className={selectedCategory === category ? "selected" : ""} onClick={() => selectCategory(category)}>{category === "무료" ? <span className="may-free-icon">₩</span> : category === "오토캠핑" || category === "카라반" ? <Car size={17} /> : <TentTree size={17} />}<span>{category}</span></button>)}</section>
 
+      {featured && <section className="may-section may-featured" aria-label="테마별 캠핑장">
+        {featured.themes.map((theme) => <div className="may-theme-row" key={theme.id}>
+          <div className="may-section-head"><div><h2>{theme.label}</h2><p>{theme.desc} · 전국 {theme.count.toLocaleString("ko-KR")}곳</p></div><a href={`explore/#t=${theme.id}`}>전체 보기 <ChevronRight size={16} /></a></div>
+          <div className="may-photo-rail">{theme.camps.map((camp) => <a className="may-photo-card" key={camp.id} href={`explore/#c=${camp.id}`}>
+            <span className="may-photo-img"><img src={`media/${camp.ph}`} alt={`${camp.name} 공식 사진`} loading="lazy" />{camp.rt && <em>실시간 예약</em>}</span>
+            <b>{camp.name}</b><small><MapPin size={12} />{camp.where}</small>{camp.line && <span className="may-photo-line">{camp.line}</span>}
+          </a>)}</div>
+        </div>)}
+        <p className="may-disclosure"><ImageIcon size={15} />사진: 한국관광공사 고캠핑(공식 등록 사진) · 예약 가능 여부와 요금은 각 예약처에서 확인하세요.</p>
+      </section>}
+
       <section className="may-section" id="calendar">
-        <div className="may-section-head"><div><h2>이번 주 열리는 예약</h2><p>종을 누르면 이 기기에 관심 일정으로 저장돼요</p></div><a href={FORESTTRIP_URL} target="_blank" rel="noreferrer">전체 <ChevronRight size={16} /></a></div>
-        <div className="may-open-list">{upcoming.map((event) => { const isSaved = savedEvents.includes(event.id); return <article className="may-open-card" key={event.id}><div className="may-open-date"><div><strong className={event.dday === "D-0" || event.dday === "D-1" ? "urgent" : ""}>{event.dday}</strong><span className={event.needsVerification ? "review" : ""}>{event.action}</span></div><time>{event.dateTime}</time></div><div className="may-open-title"><span><Trees size={19} /></span><div><h3>{event.label}</h3><p>{event.stay}</p></div></div><div className="may-open-bottom"><a href={event.sourceUrl} target="_blank" rel="noreferrer" className={event.needsVerification ? "checking" : "verified"}>{event.needsVerification ? <CircleHelp size={14} /> : <BadgeCheck size={14} />}{event.needsVerification ? "확인 필요" : `공식 확인 · ${event.checkedAt.slice(5)}`}<ExternalLink size={11} /></a><button type="button" className={isSaved ? "on" : ""} aria-pressed={isSaved} onClick={() => toggleEvent(event.id)}><Bell size={14} />{isSaved ? "저장됨" : "알림"}</button></div></article>; })}</div>
+        <div className="may-section-head"><div><h2>곧 열리는 예약</h2><p>오픈이 빠른 순서 · 종을 누르면 이 기기에 저장돼요</p></div><a href={FORESTTRIP_URL} target="_blank" rel="noreferrer">전체 <ChevronRight size={16} /></a></div>
+        <div className="may-open-list">{[...upcoming].sort((a, b) => ddayNum(a.dday) - ddayNum(b.dday)).map((event) => { const isSaved = savedEvents.includes(event.id); return <article className="may-open-card" key={event.id}><div className="may-open-date"><div><strong className={event.dday === "D-0" || event.dday === "D-1" ? "urgent" : ""}>{event.dday}</strong><span className={event.needsVerification ? "review" : ""}>{event.action}</span></div><time>{event.dateTime}</time></div><div className="may-open-title"><span><Trees size={19} /></span><div><h3>{event.label}</h3><p>{event.stay}</p></div></div><div className="may-open-bottom"><a href={event.sourceUrl} target="_blank" rel="noreferrer" className={event.needsVerification ? "checking" : "verified"}>{event.needsVerification ? <CircleHelp size={14} /> : <BadgeCheck size={14} />}{event.needsVerification ? "확인 필요" : `공식 확인 · ${event.checkedAt.slice(5)}`}<ExternalLink size={11} /></a><button type="button" className={isSaved ? "on" : ""} aria-pressed={isSaved} onClick={() => toggleEvent(event.id)}><Bell size={14} />{isSaved ? "저장됨" : "알림"}</button></div></article>; })}</div>
         <p className="may-disclosure"><Info size={15} />일정은 규칙으로 계산한 읽기 전용 캘린더입니다. 예외·추첨 자격·최종 잔여 자리는 각 공식 예약처에서 확인하세요.</p>
       </section>
 
