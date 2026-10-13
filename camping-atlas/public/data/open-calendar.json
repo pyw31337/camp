@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-13T11:49:09.208Z",
+  "generated_at": "2026-10-13T22:34:34.892Z",
   "registry_version": 1,
   "range": {
-    "from": "2026-10-13T00:00:00+09:00",
-    "to": "2027-02-09T23:59:00+09:00"
+    "from": "2026-10-14T00:00:00+09:00",
+    "to": "2027-02-10T23:59:00+09:00"
   },
   "events": [
     {
@@ -983,6 +983,58 @@
         "tier": "C"
       },
       "needs_verification": true
+    },
+    {
+      "id": "foresttrip-national-weekend-lottery:LOTTERY_RESULT:2027-02-10T00:00:00+09:00",
+      "rule_id": "foresttrip-national-weekend-lottery",
+      "provider_id": "foresttrip",
+      "campground_ids": [],
+      "type": "LOTTERY_RESULT",
+      "at": "2027-02-10T00:00:00+09:00",
+      "date": "2027-02-10",
+      "time_known": false,
+      "label": "국립자연휴양림 주말·공휴일 추첨 신청",
+      "stay": {
+        "month": "2027-03"
+      },
+      "note": null,
+      "source": {
+        "url": "https://www.foresttrip.go.kr/pot/cc/fa/selectFaqBbrssListView.do?bbrssMsterId=BBRSSMSTER_00000002&ctgryCd=&hmpgId=FRIP&nowPage=1&srwrd=%EC%A3%BC%EC%A4%91&twbbsId=",
+        "title": "숲나들e 자주 묻는 질문 — 주말 추첨·미결제분 전환 절차(일자는 공지 재확인 필요)",
+        "checked_at": "2026-10-12",
+        "tier": "C"
+      },
+      "needs_verification": true
+    },
+    {
+      "id": "foresttrip-national-weekday-fcfs:OPEN:2027-02-10T09:00:00+09:00",
+      "rule_id": "foresttrip-national-weekday-fcfs",
+      "provider_id": "foresttrip",
+      "campground_ids": [],
+      "type": "OPEN",
+      "at": "2027-02-10T09:00:00+09:00",
+      "date": "2027-02-10",
+      "time_known": true,
+      "label": "국립자연휴양림 비수기 주중 선착순 오픈",
+      "stay": {
+        "from": "2027-03-22",
+        "to": "2027-03-28",
+        "day_types": [
+          "SUN",
+          "MON",
+          "TUE",
+          "WED",
+          "THU"
+        ]
+      },
+      "note": null,
+      "source": {
+        "url": "https://www.foresttrip.go.kr/pot/cc/fa/selectFaqBbrssListView.do?bbrssMsterId=BBRSSMSTER_00000002&ctgryCd=&hmpgId=FRIP&nowPage=1&srwrd=%EC%A3%BC%EC%A4%91&twbbsId=",
+        "title": "숲나들e 자주 묻는 질문 — 주중 예약",
+        "checked_at": "2026-10-12",
+        "tier": "B"
+      },
+      "needs_verification": false
     }
   ],
   "recurring": [
