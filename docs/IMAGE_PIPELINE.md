@@ -26,7 +26,7 @@
 - 영상은 저장하지 않고 **각 플랫폼 공식 임베드(YouTube IFrame 등)로만** 재생한다.
 - 사진을 운영 사실(시설 유무·현재 상태)의 근거로 쓰지 않는다. 다른 캠핑장 대표 이미지로 재사용하지 않는다.
 - 피사체 명예훼손·인격권 침해 용도, 광고 소재·CI/BI 활용 금지. 기관과 특별한 관계·후원이 있는 것처럼 표시하지 않는다.
-- 권리자(운영자·관광공사)가 삭제를 요청하거나 고캠핑에서 사진이 빠지면 다음 실행에서 매니페스트·파일이 함께 정리된다(원하는 목록 기준 병합 + 고아 파일 삭제). 즉시 내려야 하면 `media` 브랜치에서 해당 폴더를 지우고 Pages를 재배포한다.
+- 권리자(운영자·관광공사)가 삭제를 요청하거나 고캠핑에서 사진이 빠지면, 해당 시설의 `imageList`를 **다시 조회한 실행**에서 매니페스트·파일을 함께 정리한다. 30일 캐시 중인 다른 시설의 사진은 다음 재확인 전까지 보존한다. 즉시 내려야 하면 `media` 브랜치에서 해당 폴더를 지우고 Pages를 재배포한다.
 
 ### 남은 확인
 
@@ -37,7 +37,7 @@
 
 ```
 pipeline/out/campgrounds.json ──┐
-고캠핑 imageList(하루 ≤900, 30일 캐시) ─┤→ desiredImages → planDownloads(실행당 ≤1500, 용량 ≤900MB)
+고캠핑 imageList(사진 보강일 ≤880, 30일 캐시) ─┤→ desiredImages → planDownloads(실행당 ≤1500, 용량 ≤900MB)
                                  └→ 다운로드(동시 4, 20초, 1회 재시도, >8MB 건너뜀; thumb_1000 우선)
                                     → sharp: 480px q60(-t) / 1280px q70(-l), 확대 없음, EXIF 제거
                                     → MEDIA_DIR/camps/{id}/{원본 sha256 앞 8자}-t|l.webp
@@ -46,7 +46,8 @@ pipeline/out/campgrounds.json ──┐
 
 - 코드: `pipeline/lib/images.mjs`(순수 함수), `pipeline/scripts/sync-images.mjs`(실행), `pipeline/test/images.test.mjs`.
 - 이미 매니페스트에 있고 파일이 있는 원본은 다시 받지 않는다. 같은 바이트면 같은 파일명이라 기존 파일을 덮어쓰지 않는다.
-- 우선순위: 사진이 0장인 캠핑장의 대표 사진 → 나머지 대표 사진 → imageList 1번째 → 2번째 …(모든 캠핑장에 고르게).
+- 우선순위: **자체 호스팅 사진이 0장인 캠핑장**의 `imageList`를 먼저 조회하고, 그다음 캐시가 없거나 오래된 시설을 조회한다. 다운로드도 사진이 0장인 시설의 대표 사진 → 나머지 대표 사진 → imageList 추가 사진 순이다.
+- 추가 사진은 캐시에 없는 시설도 있으므로 이번 실행에서 `imageList`를 재확인하지 않은 기존 항목은 매니페스트에 유지한다. 해당 시설을 재확인하면 새 목록에 없는 추가 사진과 이전 대표 사진은 정리한다.
 - 실패한 원본은 `failures.json`에 기록하고 7일 동안 재시도하지 않는다.
 
 ### 환경 변수
@@ -56,7 +57,7 @@ pipeline/out/campgrounds.json ──┐
 | `MEDIA_DIR` | `pipeline/out/media` | 출력 루트(워크플로에서는 `media` 브랜치 작업 트리) |
 | `CAMPGROUNDS_JSON` | `pipeline/out/campgrounds.json` | 입력 |
 | `DATA_GO_KR_SERVICE_KEY` | — | 없으면 imageList 생략(대표 사진만) |
-| `IMAGE_LIST_MAX_CALLS` | 900 | 하루 imageList 호출 상한(고캠핑 1,000건 중 basedList 몫을 남김). 캐시 `pipeline/.cache/gocamping-images.json`, 30일 |
+| `IMAGE_LIST_MAX_CALLS` | 900 | 스크립트의 imageList 호출 상한. Actions의 `media-backfill` 프로필은 공유 일일 한도를 고려해 880으로 지정한다. 캐시 `pipeline/.cache/gocamping-images.json`, 30일 |
 | `IMAGE_MAX_DOWNLOADS` | 1500 | 실행당 다운로드 상한 |
 | `IMAGE_MAX_PER_CAMP` | 6 | imageList 추가 사진 상한 |
 | `IMAGE_MAX_BYTES` | 8388608 | 원본 1장 상한 |
@@ -171,6 +172,14 @@ pipeline/out/campgrounds.json ──┐
 
 `actions/checkout@v4` 기본 인증이 남아 있어 별도 토큰이 필요 없다(`contents: read`로 충분). `git archive`라 `.git` 없이 파일만 복사된다.
 
+### 공유 API 한도 운영
+
+`data-sync.yml`은 고캠핑 기준 목록을 받은 직후 사진을 먼저 동기화한다. 2026-10-13 실행에서 TourAPI 보조 수집이 같은 `data.go.kr` 일일 한도를 소진해 imageList가 0건으로 끝난 사실을 확인했기 때문이다.
+
+- 기본 `auto`: 수·금은 `media-backfill`(imageList 최대 880회, TourAPI 호출 0회), 나머지는 `tour-enrichment`, 일요일은 `free-audit`으로 교차한다.
+- 수동 실행은 `sync_profile`에서 `media-backfill`, `tour-enrichment`, `free-audit`을 명시할 수 있다. 초기 사진 보강이 필요하면 `media-backfill`만 실행한다.
+- `tour-enrichment`은 주변 150·요금 소개 220·상품 500 호출 상한으로, 사진 호출은 0으로 둔다. 실제 호출 수와 한도 오류는 Actions 로그에서 확인한다.
+
 ## 4. 용량 추정
 
 | 경우 | 계산 | 합계 |
@@ -184,6 +193,6 @@ pipeline/out/campgrounds.json ──┐
 
 ## 5. 검증
 
-- `cd pipeline && node --test test/images.test.mjs` — 12개 통과(네트워크·sharp 없이).
+- `cd pipeline && node --test test/images.test.mjs` — 13개 통과(네트워크·sharp 없이): 사진 공백 우선 조회와 재확인 전 사진 보존/재확인 뒤 정리 회귀를 포함.
 - 실변환(2026-10-13, `npm i --no-save sharp@0.35.5`, package.json·lock 변경 없음): 고캠핑 c_no=1066 사진 2장. thumb_1000 경유 1000×666 → 16KB/4KB, 9MB 원본(`IMAGE_MAX_BYTES=12000000`) → 1280×853 171KB / 22KB. EXIF 없음 확인, 두 번째 실행에서 다운로드 0건(증분).
 - 기본 8MB 상한에서는 실측 9MB 원본이 건너뛰어진다 → thumb_1000이 없는 사진이 많으면 `IMAGE_MAX_BYTES`를 12MB로 올리는 것을 검토.

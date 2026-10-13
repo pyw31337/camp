@@ -71,6 +71,7 @@ test("imageList 호출 대상: 캐시 없음 먼저, TTL 지난 것, 상한", ()
   };
   assert.deepEqual(selectImageListTargets(["a", "b", "c", "d", "e"], cache, { now, maxCalls: 10, ttlDays: 30 }), ["d", "e", "b", "c"]);
   assert.deepEqual(selectImageListTargets(["a", "b", "c", "d", "e"], cache, { now, maxCalls: 3, ttlDays: 30 }), ["d", "e", "b"]);
+  assert.deepEqual(selectImageListTargets(["a", "b", "c", "d", "e"], cache, { now, maxCalls: 3, ttlDays: 30, priorityIds: ["c"] }), ["c", "d", "e"]);
   assert.deepEqual(selectImageListTargets(["d"], {}, { now, maxCalls: 0 }), []);
 });
 
@@ -133,6 +134,21 @@ test("매니페스트 병합: 재사용·새 결과·빠진 캠핑장/원본 제
   ]);
   assert.deepEqual(orphanFiles(m, ["camps/1/aaaaaaaa-t.webp", "camps/1/00000000-t.webp", "camps/9/99999999-l.webp", "manifest.json"]), ["camps/1/00000000-t.webp", "camps/9/99999999-l.webp"]);
   assert.deepEqual(heroIndex(m), { "1": "camps/1/aaaaaaaa-t.webp", "10": "camps/10/dddddddd-t.webp" });
+});
+
+test("매니페스트: 아직 재조회하지 않은 imageList 사진은 유지하고, 재조회 뒤 빠진 사진만 정리", () => {
+  const prev = { camps: {
+    "1": [entry("1", G("h1"), "aaaaaaaa"), entry("1", G("old-extra"), "bbbbbbbb", { source: "gocamping-imageList" })],
+    "2": [entry("2", G("old-hero"), "cccccccc"), entry("2", G("old-extra"), "dddddddd", { source: "gocamping-imageList" })],
+  } };
+  const desired = new Map([
+    ["1", [{ src_url: G("h1"), source: "gocamping" }]],
+    ["2", [{ src_url: G("new-hero"), source: "gocamping" }]],
+  ]);
+  const results = new Map([[G("new-hero"), entry("2", G("new-hero"), "eeeeeeee")]]);
+  const m = mergeManifest(prev, desired, results, { preserveUnseen: true, refreshedImageListIds: ["2"] });
+  assert.deepEqual(m.camps["1"].map((x) => x.src_url), [G("h1"), G("old-extra")]);
+  assert.deepEqual(m.camps["2"].map((x) => x.src_url), [G("new-hero")]);
 });
 
 test("동시성 제한 map", async () => {

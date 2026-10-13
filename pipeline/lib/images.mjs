@@ -121,14 +121,28 @@ const ageDays = (iso, now) => (iso ? (now - Date.parse(iso)) / 864e5 : Infinity)
 
 /**
  * imageList를 새로 불러야 할 캠핑장 ID(캐시 없음 → 오래된 순), 최대 maxCalls개.
+ * priorityIds에 넣은 ID는 같은 캐시 상태라면 먼저 조회한다. 매니페스트에 사진이
+ * 없는 시설을 먼저 보강할 때 사용한다.
  * cache: { [id]: { fetched_at, images: [...] } }
  */
-export function selectImageListTargets(campIds, cache, { now = Date.now(), maxCalls = DEFAULTS.imageListMaxCalls, ttlDays = DEFAULTS.imageListTtlDays } = {}) {
+export function selectImageListTargets(campIds, cache, {
+  now = Date.now(), maxCalls = DEFAULTS.imageListMaxCalls, ttlDays = DEFAULTS.imageListTtlDays, priorityIds = [],
+} = {}) {
   if (!(maxCalls > 0)) return [];
+  const priority = new Set(priorityIds.map(safeCampId).filter(Boolean));
+  const seen = new Set();
   const stale = campIds
+    .filter((id) => {
+      if (!safeCampId(id) || seen.has(id)) return false;
+      seen.add(id);
+      return true;
+    })
     .map((id) => ({ id, age: ageDays(cache?.[id]?.fetched_at, now) }))
     .filter((x) => !(x.age <= ttlDays));
-  stale.sort((a, b) => b.age - a.age); // Infinity(처음) 먼저, 그다음 오래된 순. sort는 안정적이라 입력 순서 유지.
+  stale.sort((a, b) => {
+    const priorityDiff = Number(priority.has(b.id)) - Number(priority.has(a.id));
+    return priorityDiff || b.age - a.age;
+  }); // 우선 보강 대상 → 캐시 없음 → 오래된 순. 같은 순위는 입력 순서를 유지한다.
   return stale.slice(0, maxCalls).map((x) => x.id);
 }
 
@@ -187,11 +201,23 @@ export function planDownloads(desired, manifest, { fileExists = () => true, fail
  * 매니페스트 병합. desired에 있는 캠핑장·원본만 남기고 desired 순서로 정렬한다.
  * results: Map<src_url, entry>(이번 실행 결과). 이전 매니페스트 항목은 그대로 재사용.
  */
-export function mergeManifest(prev, desired, results, { now = new Date().toISOString(), licenseNote = LICENSE_NOTE } = {}) {
+export function mergeManifest(prev, desired, results, {
+  now = new Date().toISOString(),
+  licenseNote = LICENSE_NOTE,
+  // imageList는 30일 캐시라 한 실행에서 모든 시설의 추가 사진을 알 수 없다. 이 값을
+  // 켜면 이번에 확인하지 않은 기존 공식 사진은 유지하고, 실제로 재조회한 시설에서
+  // 사라진 imageList 항목만 정리한다.
+  preserveUnseen = false,
+  refreshedImageListIds = [],
+} = {}) {
   const prevBySrc = new Map();
   for (const entries of Object.values(prev?.camps ?? {})) for (const e of entries) prevBySrc.set(e.src_url, e);
   const camps = {};
-  for (const [id, list] of desired) {
+  const refreshed = new Set(refreshedImageListIds.map(safeCampId).filter(Boolean));
+  const ids = new Set(desired.keys());
+  if (preserveUnseen) for (const id of Object.keys(prev?.camps ?? {})) ids.add(id);
+  for (const id of ids) {
+    const list = desired.get(id) ?? [];
     const entries = [];
     for (const img of list) {
       const e = results.get(img.src_url) ?? prevBySrc.get(img.src_url);
@@ -200,10 +226,22 @@ export function mergeManifest(prev, desired, results, { now = new Date().toISOSt
       if (!e.thumb?.startsWith(`camps/${id}/`)) continue;
       entries.push({ ...e, source: img.source });
     }
+    if (preserveUnseen) {
+      const desiredUrls = new Set(list.map((img) => img.src_url));
+      const heroRefreshed = list.some((img) => img.source === "gocamping");
+      for (const e of prev?.camps?.[id] ?? []) {
+        if (!e?.src_url || desiredUrls.has(e.src_url) || entries.some((x) => x.src_url === e.src_url)) continue;
+        // 새 대표 사진은 basedList의 현재 값으로 교체하고, 새 imageList를 받은 시설은
+        // 그 목록에서 빠진 추가 사진을 제거한다. 아직 재조회하지 않은 시설만 보존한다.
+        if ((e.source === "gocamping" && heroRefreshed) || (e.source === "gocamping-imageList" && refreshed.has(id))) continue;
+        if (!e.thumb?.startsWith(`camps/${id}/`)) continue;
+        entries.push(e);
+      }
+    }
     if (entries.length) camps[id] = entries;
   }
-  const ids = Object.keys(camps).sort((a, b) => a.localeCompare(b, "en", { numeric: true }));
-  const sorted = Object.fromEntries(ids.map((id) => [id, camps[id]]));
+  const sortedIds = Object.keys(camps).sort((a, b) => a.localeCompare(b, "en", { numeric: true }));
+  const sorted = Object.fromEntries(sortedIds.map((id) => [id, camps[id]]));
   return { generated_at: now, license_note: licenseNote, credit: IMAGE_CREDIT, camps: sorted };
 }
 

@@ -63,12 +63,18 @@ if (!existsSync(CAMP_JSON)) { warn("이미지 동기화 건너뜀", `${CAMP_JSON
 const { campgrounds = [] } = await readJson(CAMP_JSON, {});
 await mkdir(MEDIA_DIR, { recursive: true });
 const startedAt = new Date().toISOString();
+const manifestPath = join(MEDIA_DIR, "manifest.json");
+const prev = await readJson(manifestPath, { camps: {} });
+const fileExists = (rel) => typeof rel === "string" && existsSync(join(MEDIA_DIR, rel));
+const hasHostedPhoto = (id) => (prev.camps?.[id] ?? []).some((e) => fileExists(e.thumb) && fileExists(e.large));
 
 // 1) imageList(캐시 30일, 하루 호출 상한)
 const cache = await readJson(CACHE_PATH, {});
 const ids = campgrounds.map((c) => safeCampId(c?.external_id?.id)).filter(Boolean);
+const photoMissingIds = ids.filter((id) => !hasHostedPhoto(id));
+const refreshedImageListIds = new Set();
 if (key && LIST_MAX > 0) {
-  const targets = selectImageListTargets(ids, cache, { maxCalls: LIST_MAX });
+  const targets = selectImageListTargets(ids, cache, { maxCalls: LIST_MAX, priorityIds: photoMissingIds });
   let calls = 0, failed = 0;
   for (const id of targets) {
     const url = `${GOCAMPING_BASE}/imageList?${new URLSearchParams({ numOfRows: "30", pageNo: "1", MobileOS: "ETC", MobileApp: "moyeora-camping", _type: "json", contentId: id })}`;
@@ -79,6 +85,7 @@ if (key && LIST_MAX > 0) {
       const images = parseImageListResponse(json);
       calls++;
       cache[id] = { fetched_at: new Date().toISOString(), images };
+      refreshedImageListIds.add(id);
     } catch (e) {
       failed++;
       if (e.code === "QUOTA") { warn("고캠핑 imageList 일일 한도", e.message); break; }
@@ -88,18 +95,15 @@ if (key && LIST_MAX > 0) {
     }
   }
   await writeJsonAtomic(CACHE_PATH, cache);
-  console.log(`imageList: 호출 ${calls}건(실패 ${failed}), 대상 ${targets.length}건, 캐시 ${Object.keys(cache).length}곳`);
+  console.log(`imageList: 호출 ${calls}건(실패 ${failed}), 대상 ${targets.length}건, 사진 미보유 우선 ${photoMissingIds.length}곳, 캐시 ${Object.keys(cache).length}곳`);
 } else {
   console.log(`imageList: ${key ? "IMAGE_LIST_MAX_CALLS=0" : "인증키 없음"} → 캐시(${Object.keys(cache).length}곳)만 사용`);
 }
 
 // 2) 다운로드 계획
-const manifestPath = join(MEDIA_DIR, "manifest.json");
 const failuresPath = join(MEDIA_DIR, "failures.json");
-const prev = await readJson(manifestPath, { camps: {} });
 const failures = await readJson(failuresPath, {});
 const desired = desiredImages(campgrounds, cache, { maxPerCamp: PER_CAMP });
-const fileExists = (rel) => typeof rel === "string" && existsSync(join(MEDIA_DIR, rel));
 const { jobs, pending, alreadyDone } = planDownloads(desired, prev, { fileExists, failures, maxDownloads: MAX_DL });
 console.log(`원하는 사진 ${[...desired.values()].reduce((n, l) => n + l.length, 0)}장(${desired.size}곳), 이미 있음 ${alreadyDone}, 남은 ${pending}, 이번 실행 ${jobs.length}`);
 
@@ -156,7 +160,11 @@ if (jobs.length) {
 }
 
 // 4) 매니페스트·색인
-const manifest = mergeManifest(prev, desired, results, { now: startedAt });
+const manifest = mergeManifest(prev, desired, results, {
+  now: startedAt,
+  preserveUnseen: true,
+  refreshedImageListIds: [...refreshedImageListIds],
+});
 await writeJsonAtomic(manifestPath, manifest);
 await writeJsonAtomic(join(MEDIA_DIR, "hero.json"), { generated_at: startedAt, credit: IMAGE_CREDIT, thumbs: heroIndex(manifest) });
 // 원하는 목록에서 빠진 원본의 실패 기록은 버린다.
