@@ -8,7 +8,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
-import { OVERPASS_SERVERS } from "../lib/overpass.mjs";
+import { OVERPASS_SERVERS, loadOsmExtract } from "../lib/overpass.mjs";
 import {
   NEARBY_RULES, OSM_ATTRIBUTION, SOURCES, TOUR_TYPES, buildTiles, computeNearby, dedupeById, isStale,
   normalizeOsmShop, normalizeRestStop, normalizeTourPoi, overpassShopQuery, parseTourBody, tourListUrl,
@@ -98,6 +98,7 @@ function strike(url, fatal = false) {
   strikes.set(url, n);
   if (fatal || n >= 2) deadServers.add(url);
 }
+const extract = await loadOsmExtract();
 const osmCache = await readJson(osmCachePath, { tiles: {} });
 osmCache.tiles ??= {};
 const tiles = buildTiles({ points });
@@ -105,7 +106,7 @@ const staleTiles = tiles.filter((t) => isStale(osmCache.tiles[t.key]?.fetched_at
   .sort((a, b) => (Date.parse(osmCache.tiles[a.key]?.fetched_at ?? 0) || 0) - (Date.parse(osmCache.tiles[b.key]?.fetched_at ?? 0) || 0));
 const started = Date.now();
 let osmOk = 0, osmFail = 0;
-for (const t of staleTiles) {
+for (const t of extract ? [] : staleTiles) {
   if (Date.now() - started > OSM_TIME_BUDGET_MS) { warn("Overpass 시간 예산 소진", `남은 타일 ${staleTiles.length - osmOk - osmFail}개는 다음 실행에서`); break; }
   if (deadServers.size >= OSM_SERVERS.length) { warn("Overpass 서버 모두 응답 없음", "캐시만 사용"); break; }
   try {
@@ -120,9 +121,11 @@ for (const t of staleTiles) {
   }
 }
 if (osmOk) await writeFile(osmCachePath, JSON.stringify(osmCache));
-const usedTiles = tiles.map((t) => osmCache.tiles[t.key]).filter(Boolean);
-const osmPois = dedupeById(usedTiles.flatMap((t) => t.items ?? []));
+// Geofabrik 추출본이 있으면 전국을 한 번에 쓰고, 없으면 Overpass 타일 캐시를 쓴다.
+const usedTiles = extract ? [{ fetched_at: extract.fetched_at }] : tiles.map((t) => osmCache.tiles[t.key]).filter(Boolean);
+const osmPois = extract ? dedupeById(extract.elements.map(normalizeOsmShop)) : dedupeById(usedTiles.flatMap((t) => t.items ?? []));
 const osmDates = usedTiles.map((t) => t.fetched_at).sort();
+if (extract) console.log(`OSM 추출본 사용: ${osmPois.length}곳(${extract.fetched_at})`);
 console.log(`Overpass 타일 ${tiles.length}개 중 캐시 보유 ${usedTiles.length}개(이번 성공 ${osmOk}, 실패 ${osmFail}, 남은 오래된 타일 ${staleTiles.length - osmOk}) · POI ${osmPois.length}건`);
 
 // 3) 휴게소·졸음쉼터

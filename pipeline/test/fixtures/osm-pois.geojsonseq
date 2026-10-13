@@ -1,0 +1,3 @@
+{"type":"Feature","geometry":{"type":"Point","coordinates":[127.1,37.5]},"properties":{"@type":"node","@id":1,"shop":"convenience","name":"GS25 테스트점","brand":"GS25"}}
+{"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[127,37],[127.2,37],[127.2,37.2],[127,37.2]]]},"properties":{"@type":"way","@id":2,"amenity":"toilets","name":"공원 화장실"}}
+not json

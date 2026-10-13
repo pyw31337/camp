@@ -8,6 +8,13 @@ import { overpassCached } from "../lib/overpass.mjs";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
 import { FACILITY_FEE, enrichWithNearby, mergeStops, normalizeDrowsyShelter, normalizeOsmStop } from "../lib/rest-stops.mjs";
 
+// OSM 추출본에서 휴게소·쉼터와 그 500m 안 주유·충전소만 고른다(Overpass 질의와 같은 범위).
+function selectRestStops(els) {
+  const stops = els.filter((e) => /^(services|rest_area)$/.test(e.tags?.highway ?? ""));
+  const near = (a, b) => Math.abs(a.lat - b.lat) < 0.0046 && Math.abs(a.lon - b.lon) < 0.0058;
+  const fuel = els.filter((e) => /^(fuel|charging_station)$/.test(e.tags?.amenity ?? "") && stops.some((s) => near(s, e)));
+  return [...stops, ...fuel];
+}
 const out = fileURLToPath(new URL("../out/", import.meta.url));
 await mkdir(out, { recursive: true });
 await mkdir(fileURLToPath(new URL("../.cache/", import.meta.url)), { recursive: true });
@@ -62,7 +69,7 @@ try {
   const { elements: els, server, stale, error } = await overpassCached(
     q,
     fileURLToPath(new URL("../.cache/osm-rest-stops.json", import.meta.url)),
-    { timeoutMs: 15000, attempts: 1 },
+    { timeoutMs: 15000, attempts: 1, select: selectRestStops },
   );
   if (stale) warn("Overpass 실패 — 직전 결과 사용", `${server} · ${error}`);
   else console.log(`Overpass: ${new URL(server).host}`);

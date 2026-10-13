@@ -97,6 +97,37 @@ jobs:
           restore-keys: |
             source-cache-v4-
             source-cache-v3-
+      - name: Week key for the OSM extract
+        id: osmweek
+        run: echo "week=$(date -u +%G-%V)" >> "$GITHUB_OUTPUT"
+      - name: Restore OSM Korea extract
+        uses: actions/cache@v4
+        with:
+          path: pipeline/.cache/osm-extract.json
+          key: osm-extract-v1-${{ steps.osmweek.outputs.week }}
+          restore-keys: osm-extract-v1-
+      - name: Build OSM extract from Geofabrik (weekly)
+        # 공용 Overpass 서버가 자주 504라, 한국 전체 OSM 파일(Geofabrik)을 주 1회 받아 화장실·마트·편의점·주유·의료·휴게소만 뽑는다.
+        # 이후 단계는 OSM_EXTRACT가 있으면 네트워크 질의 없이 이 추출본을 쓴다.
+        continue-on-error: true
+        timeout-minutes: 15
+        run: |
+          AGE=$(node -e 'try{const d=require("./.cache/osm-extract.json");console.log(Math.floor((Date.now()-Date.parse(d.fetched_at))/864e5))}catch{console.log(999)}')
+          if [ "$AGE" -lt 7 ]; then
+            echo "이번 주 OSM 추출본 사용(${AGE}일 전)"
+          else
+            sudo apt-get install -y -qq osmium-tool >/dev/null
+            curl -fsSL --retry 2 -o "$RUNNER_TEMP/kr.pbf" https://download.geofabrik.de/asia/south-korea-latest.osm.pbf
+            ls -lh "$RUNNER_TEMP/kr.pbf"
+            osmium tags-filter "$RUNNER_TEMP/kr.pbf" \
+              nwr/shop=supermarket,convenience,butcher,greengrocer,hardware,outdoor \
+              nwr/amenity=fuel,pharmacy,hospital,toilets,charging_station \
+              nwr/highway=services,rest_area \
+              -o "$RUNNER_TEMP/pois.pbf" --overwrite
+            osmium export "$RUNNER_TEMP/pois.pbf" -f geojsonseq --attributes type,id -o "$RUNNER_TEMP/pois.geojsonseq" --overwrite
+            node scripts/osm-extract.mjs "$RUNNER_TEMP/pois.geojsonseq" .cache/osm-extract.json
+          fi
+          echo "OSM_EXTRACT=$PWD/.cache/osm-extract.json" >> "$GITHUB_ENV"
       - name: Sync public toilets and link to campgrounds
         continue-on-error: true
         run: npm run sync:toilets
