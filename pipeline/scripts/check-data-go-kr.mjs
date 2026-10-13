@@ -19,6 +19,9 @@ const checks = [
   { name: "기상청 단기예보(초단기실황)", url: `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?pageNo=1&numOfRows=1&dataType=JSON&base_date=${ymd}&base_time=${hh}&nx=60&ny=127` },
   { name: "한국관광공사 TourAPI(국문)", url: `https://apis.data.go.kr/B551011/KorService2/areaBasedList2?numOfRows=1&pageNo=1&${common}` },
 ];
+// 정기 수집에서는 실제 필수 원천(고캠핑)만 빠르게 점검한다. 날씨·TourAPI는
+// 해당 어댑터를 도입할 때 별도 진단으로 확인해, 연결 지연이 전국 시설 적재를 막지 않게 한다.
+const activeChecks = process.env.DATA_GO_KR_CHECK_SCOPE === "ESSENTIAL" ? checks.slice(0, 1) : checks;
 
 function diagnose(status, text) {
   if (/SERVICE_KEY_IS_NOT_REGISTERED|not registered|등록되지 않은/i.test(text)) return "키 미등록: 이 서비스 활용신청이 안 됐거나 승인 대기(신청 직후 1~2시간 걸릴 수 있음)";
@@ -36,7 +39,7 @@ function diagnose(status, text) {
 }
 
 let failed = 0;
-for (const c of checks) {
+for (const c of activeChecks) {
   try {
     const { res, protocol } = await fetchDataGoKr(c.url, key);
     if (protocol === "http") console.log(`  (HTTPS 연결이 막혀 HTTP로 호출함)`);

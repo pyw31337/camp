@@ -40,6 +40,7 @@ jobs:
         run: npm run check:keys
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+          DATA_GO_KR_CHECK_SCOPE: ESSENTIAL
       - name: Sync GoCamping (skips when the key secret is not set)
         run: npm run sync:gocamping
         env:
@@ -64,11 +65,6 @@ jobs:
           git add camping-atlas/public/data
           git commit -m "chore(data): refresh public camping catalog"
           git push
-      - name: Probe undocumented data.go.kr endpoints
-        continue-on-error: true
-        run: npm run probe
-        env:
-          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
       - name: Restore geocode cache
         uses: actions/cache@v4
         with:
