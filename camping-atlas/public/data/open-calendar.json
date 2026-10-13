@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T06:50:29.368Z",
+  "generated_at": "2026-10-13T08:59:58.150Z",
   "registry_version": 1,
   "range": {
     "from": "2026-10-13T00:00:00+09:00",
@@ -119,28 +119,6 @@
       "needs_verification": false
     },
     {
-      "id": "knps-campground-lottery:LOTTERY_APPLY_START:2026-11-01T00:00:00+09:00",
-      "rule_id": "knps-campground-lottery",
-      "provider_id": "knps",
-      "campground_ids": [],
-      "type": "LOTTERY_APPLY_START",
-      "at": "2026-11-01T00:00:00+09:00",
-      "date": "2026-11-01",
-      "time_known": false,
-      "label": "국립공원 야영장 추첨 접수",
-      "stay": {
-        "month": "2027-01"
-      },
-      "note": null,
-      "source": {
-        "url": "https://www.kukinews.com/article/view/kuk202607100055",
-        "title": "쿠키뉴스 2026-07 보도(국립공원공단 전면 추첨제 안내 인용). 공식 연간 예약 일정표(이미지 공지)로 재확인 필요",
-        "checked_at": "2026-10-12",
-        "tier": "C"
-      },
-      "needs_verification": true
-    },
-    {
       "id": "foresttrip-national-weekday-fcfs:OPEN:2026-11-04T09:00:00+09:00",
       "rule_id": "foresttrip-national-weekday-fcfs",
       "provider_id": "foresttrip",
@@ -187,50 +165,6 @@
       "source": {
         "url": "https://www.foresttrip.go.kr/pot/cc/fa/selectFaqBbrssListView.do?bbrssMsterId=BBRSSMSTER_00000002&ctgryCd=&hmpgId=FRIP&nowPage=1&srwrd=%EC%A3%BC%EC%A4%91&twbbsId=",
         "title": "숲나들e 자주 묻는 질문 — 주말 추첨·미결제분 전환 절차(일자는 공지 재확인 필요)",
-        "checked_at": "2026-10-12",
-        "tier": "C"
-      },
-      "needs_verification": true
-    },
-    {
-      "id": "knps-campground-lottery:LOTTERY_APPLY_END:2026-11-05T00:00:00+09:00",
-      "rule_id": "knps-campground-lottery",
-      "provider_id": "knps",
-      "campground_ids": [],
-      "type": "LOTTERY_APPLY_END",
-      "at": "2026-11-05T00:00:00+09:00",
-      "date": "2026-11-05",
-      "time_known": false,
-      "label": "국립공원 야영장 추첨 접수",
-      "stay": {
-        "month": "2027-01"
-      },
-      "note": "5일 오전까지",
-      "source": {
-        "url": "https://www.kukinews.com/article/view/kuk202607100055",
-        "title": "쿠키뉴스 2026-07 보도(국립공원공단 전면 추첨제 안내 인용). 공식 연간 예약 일정표(이미지 공지)로 재확인 필요",
-        "checked_at": "2026-10-12",
-        "tier": "C"
-      },
-      "needs_verification": true
-    },
-    {
-      "id": "knps-campground-lottery:LOTTERY_RESULT:2026-11-05T00:00:00+09:00",
-      "rule_id": "knps-campground-lottery",
-      "provider_id": "knps",
-      "campground_ids": [],
-      "type": "LOTTERY_RESULT",
-      "at": "2026-11-05T00:00:00+09:00",
-      "date": "2026-11-05",
-      "time_known": false,
-      "label": "국립공원 야영장 추첨 접수",
-      "stay": {
-        "month": "2027-01"
-      },
-      "note": "오후 발표",
-      "source": {
-        "url": "https://www.kukinews.com/article/view/kuk202607100055",
-        "title": "쿠키뉴스 2026-07 보도(국립공원공단 전면 추첨제 안내 인용). 공식 연간 예약 일정표(이미지 공지)로 재확인 필요",
         "checked_at": "2026-10-12",
         "tier": "C"
       },
@@ -393,26 +327,27 @@
       "needs_verification": false
     },
     {
-      "id": "knps-campground-lottery:LOTTERY_APPLY_START:2026-12-01T00:00:00+09:00",
+      "id": "knps-campground-lottery:LOTTERY_APPLY_START:2026-12-01T10:00:00+09:00",
       "rule_id": "knps-campground-lottery",
       "provider_id": "knps",
       "campground_ids": [],
       "type": "LOTTERY_APPLY_START",
-      "at": "2026-12-01T00:00:00+09:00",
+      "at": "2026-12-01T10:00:00+09:00",
       "date": "2026-12-01",
-      "time_known": false,
+      "time_known": true,
       "label": "국립공원 야영장 추첨 접수",
       "stay": {
-        "month": "2027-02"
+        "month": "2027-01",
+        "months": 2
       },
       "note": null,
       "source": {
-        "url": "https://www.kukinews.com/article/view/kuk202607100055",
-        "title": "쿠키뉴스 2026-07 보도(국립공원공단 전면 추첨제 안내 인용). 공식 연간 예약 일정표(이미지 공지)로 재확인 필요",
-        "checked_at": "2026-10-12",
-        "tier": "C"
+        "url": "https://reservation.knps.or.kr/reservation/selectCampLottery.do",
+        "title": "국립공원공단 예약시스템 추첨제 안내(2026.10 회차: 10.01 10:00~10.06 10:00 신청, 11.01~12.31 이용분) · 예약·환불정책 표",
+        "checked_at": "2026-10-13",
+        "tier": "A"
       },
-      "needs_verification": true
+      "needs_verification": false
     },
     {
       "id": "foresttrip-national-weekday-fcfs:OPEN:2026-12-02T09:00:00+09:00",
@@ -467,48 +402,50 @@
       "needs_verification": true
     },
     {
-      "id": "knps-campground-lottery:LOTTERY_APPLY_END:2026-12-05T00:00:00+09:00",
+      "id": "knps-campground-lottery:LOTTERY_APPLY_END:2026-12-06T10:00:00+09:00",
       "rule_id": "knps-campground-lottery",
       "provider_id": "knps",
       "campground_ids": [],
       "type": "LOTTERY_APPLY_END",
-      "at": "2026-12-05T00:00:00+09:00",
-      "date": "2026-12-05",
-      "time_known": false,
+      "at": "2026-12-06T10:00:00+09:00",
+      "date": "2026-12-06",
+      "time_known": true,
       "label": "국립공원 야영장 추첨 접수",
       "stay": {
-        "month": "2027-02"
+        "month": "2027-01",
+        "months": 2
       },
-      "note": "5일 오전까지",
+      "note": "6일 10:00 마감",
       "source": {
-        "url": "https://www.kukinews.com/article/view/kuk202607100055",
-        "title": "쿠키뉴스 2026-07 보도(국립공원공단 전면 추첨제 안내 인용). 공식 연간 예약 일정표(이미지 공지)로 재확인 필요",
-        "checked_at": "2026-10-12",
-        "tier": "C"
+        "url": "https://reservation.knps.or.kr/reservation/selectCampLottery.do",
+        "title": "국립공원공단 예약시스템 추첨제 안내(2026.10 회차: 10.01 10:00~10.06 10:00 신청, 11.01~12.31 이용분) · 예약·환불정책 표",
+        "checked_at": "2026-10-13",
+        "tier": "A"
       },
-      "needs_verification": true
+      "needs_verification": false
     },
     {
-      "id": "knps-campground-lottery:LOTTERY_RESULT:2026-12-05T00:00:00+09:00",
+      "id": "knps-campground-lottery:LOTTERY_RESULT:2026-12-06T16:00:00+09:00",
       "rule_id": "knps-campground-lottery",
       "provider_id": "knps",
       "campground_ids": [],
       "type": "LOTTERY_RESULT",
-      "at": "2026-12-05T00:00:00+09:00",
-      "date": "2026-12-05",
-      "time_known": false,
+      "at": "2026-12-06T16:00:00+09:00",
+      "date": "2026-12-06",
+      "time_known": true,
       "label": "국립공원 야영장 추첨 접수",
       "stay": {
-        "month": "2027-02"
+        "month": "2027-01",
+        "months": 2
       },
-      "note": "오후 발표",
+      "note": "16:00 발표, 7일 22:00까지 결제, 8일 10:00 잔여 선착순",
       "source": {
-        "url": "https://www.kukinews.com/article/view/kuk202607100055",
-        "title": "쿠키뉴스 2026-07 보도(국립공원공단 전면 추첨제 안내 인용). 공식 연간 예약 일정표(이미지 공지)로 재확인 필요",
-        "checked_at": "2026-10-12",
-        "tier": "C"
+        "url": "https://reservation.knps.or.kr/reservation/selectCampLottery.do",
+        "title": "국립공원공단 예약시스템 추첨제 안내(2026.10 회차: 10.01 10:00~10.06 10:00 신청, 11.01~12.31 이용분) · 예약·환불정책 표",
+        "checked_at": "2026-10-13",
+        "tier": "A"
       },
-      "needs_verification": true
+      "needs_verification": false
     },
     {
       "id": "foresttrip-national-weekday-fcfs:OPEN:2026-12-09T09:00:00+09:00",
@@ -697,28 +634,6 @@
       "needs_verification": false
     },
     {
-      "id": "knps-campground-lottery:LOTTERY_APPLY_START:2027-01-01T00:00:00+09:00",
-      "rule_id": "knps-campground-lottery",
-      "provider_id": "knps",
-      "campground_ids": [],
-      "type": "LOTTERY_APPLY_START",
-      "at": "2027-01-01T00:00:00+09:00",
-      "date": "2027-01-01",
-      "time_known": false,
-      "label": "국립공원 야영장 추첨 접수",
-      "stay": {
-        "month": "2027-03"
-      },
-      "note": null,
-      "source": {
-        "url": "https://www.kukinews.com/article/view/kuk202607100055",
-        "title": "쿠키뉴스 2026-07 보도(국립공원공단 전면 추첨제 안내 인용). 공식 연간 예약 일정표(이미지 공지)로 재확인 필요",
-        "checked_at": "2026-10-12",
-        "tier": "C"
-      },
-      "needs_verification": true
-    },
-    {
       "id": "foresttrip-national-weekend-lottery:LOTTERY_APPLY_START:2027-01-04T09:00:00+09:00",
       "rule_id": "foresttrip-national-weekend-lottery",
       "provider_id": "foresttrip",
@@ -735,50 +650,6 @@
       "source": {
         "url": "https://www.foresttrip.go.kr/pot/cc/fa/selectFaqBbrssListView.do?bbrssMsterId=BBRSSMSTER_00000002&ctgryCd=&hmpgId=FRIP&nowPage=1&srwrd=%EC%A3%BC%EC%A4%91&twbbsId=",
         "title": "숲나들e 자주 묻는 질문 — 주말 추첨·미결제분 전환 절차(일자는 공지 재확인 필요)",
-        "checked_at": "2026-10-12",
-        "tier": "C"
-      },
-      "needs_verification": true
-    },
-    {
-      "id": "knps-campground-lottery:LOTTERY_APPLY_END:2027-01-05T00:00:00+09:00",
-      "rule_id": "knps-campground-lottery",
-      "provider_id": "knps",
-      "campground_ids": [],
-      "type": "LOTTERY_APPLY_END",
-      "at": "2027-01-05T00:00:00+09:00",
-      "date": "2027-01-05",
-      "time_known": false,
-      "label": "국립공원 야영장 추첨 접수",
-      "stay": {
-        "month": "2027-03"
-      },
-      "note": "5일 오전까지",
-      "source": {
-        "url": "https://www.kukinews.com/article/view/kuk202607100055",
-        "title": "쿠키뉴스 2026-07 보도(국립공원공단 전면 추첨제 안내 인용). 공식 연간 예약 일정표(이미지 공지)로 재확인 필요",
-        "checked_at": "2026-10-12",
-        "tier": "C"
-      },
-      "needs_verification": true
-    },
-    {
-      "id": "knps-campground-lottery:LOTTERY_RESULT:2027-01-05T00:00:00+09:00",
-      "rule_id": "knps-campground-lottery",
-      "provider_id": "knps",
-      "campground_ids": [],
-      "type": "LOTTERY_RESULT",
-      "at": "2027-01-05T00:00:00+09:00",
-      "date": "2027-01-05",
-      "time_known": false,
-      "label": "국립공원 야영장 추첨 접수",
-      "stay": {
-        "month": "2027-03"
-      },
-      "note": "오후 발표",
-      "source": {
-        "url": "https://www.kukinews.com/article/view/kuk202607100055",
-        "title": "쿠키뉴스 2026-07 보도(국립공원공단 전면 추첨제 안내 인용). 공식 연간 예약 일정표(이미지 공지)로 재확인 필요",
         "checked_at": "2026-10-12",
         "tier": "C"
       },
@@ -971,26 +842,27 @@
       "needs_verification": false
     },
     {
-      "id": "knps-campground-lottery:LOTTERY_APPLY_START:2027-02-01T00:00:00+09:00",
+      "id": "knps-campground-lottery:LOTTERY_APPLY_START:2027-02-01T10:00:00+09:00",
       "rule_id": "knps-campground-lottery",
       "provider_id": "knps",
       "campground_ids": [],
       "type": "LOTTERY_APPLY_START",
-      "at": "2027-02-01T00:00:00+09:00",
+      "at": "2027-02-01T10:00:00+09:00",
       "date": "2027-02-01",
-      "time_known": false,
+      "time_known": true,
       "label": "국립공원 야영장 추첨 접수",
       "stay": {
-        "month": "2027-04"
+        "month": "2027-03",
+        "months": 2
       },
       "note": null,
       "source": {
-        "url": "https://www.kukinews.com/article/view/kuk202607100055",
-        "title": "쿠키뉴스 2026-07 보도(국립공원공단 전면 추첨제 안내 인용). 공식 연간 예약 일정표(이미지 공지)로 재확인 필요",
-        "checked_at": "2026-10-12",
-        "tier": "C"
+        "url": "https://reservation.knps.or.kr/reservation/selectCampLottery.do",
+        "title": "국립공원공단 예약시스템 추첨제 안내(2026.10 회차: 10.01 10:00~10.06 10:00 신청, 11.01~12.31 이용분) · 예약·환불정책 표",
+        "checked_at": "2026-10-13",
+        "tier": "A"
       },
-      "needs_verification": true
+      "needs_verification": false
     },
     {
       "id": "foresttrip-national-weekday-fcfs:OPEN:2027-02-03T09:00:00+09:00",
@@ -1045,48 +917,50 @@
       "needs_verification": true
     },
     {
-      "id": "knps-campground-lottery:LOTTERY_APPLY_END:2027-02-05T00:00:00+09:00",
+      "id": "knps-campground-lottery:LOTTERY_APPLY_END:2027-02-06T10:00:00+09:00",
       "rule_id": "knps-campground-lottery",
       "provider_id": "knps",
       "campground_ids": [],
       "type": "LOTTERY_APPLY_END",
-      "at": "2027-02-05T00:00:00+09:00",
-      "date": "2027-02-05",
-      "time_known": false,
+      "at": "2027-02-06T10:00:00+09:00",
+      "date": "2027-02-06",
+      "time_known": true,
       "label": "국립공원 야영장 추첨 접수",
       "stay": {
-        "month": "2027-04"
+        "month": "2027-03",
+        "months": 2
       },
-      "note": "5일 오전까지",
+      "note": "6일 10:00 마감",
       "source": {
-        "url": "https://www.kukinews.com/article/view/kuk202607100055",
-        "title": "쿠키뉴스 2026-07 보도(국립공원공단 전면 추첨제 안내 인용). 공식 연간 예약 일정표(이미지 공지)로 재확인 필요",
-        "checked_at": "2026-10-12",
-        "tier": "C"
+        "url": "https://reservation.knps.or.kr/reservation/selectCampLottery.do",
+        "title": "국립공원공단 예약시스템 추첨제 안내(2026.10 회차: 10.01 10:00~10.06 10:00 신청, 11.01~12.31 이용분) · 예약·환불정책 표",
+        "checked_at": "2026-10-13",
+        "tier": "A"
       },
-      "needs_verification": true
+      "needs_verification": false
     },
     {
-      "id": "knps-campground-lottery:LOTTERY_RESULT:2027-02-05T00:00:00+09:00",
+      "id": "knps-campground-lottery:LOTTERY_RESULT:2027-02-06T16:00:00+09:00",
       "rule_id": "knps-campground-lottery",
       "provider_id": "knps",
       "campground_ids": [],
       "type": "LOTTERY_RESULT",
-      "at": "2027-02-05T00:00:00+09:00",
-      "date": "2027-02-05",
-      "time_known": false,
+      "at": "2027-02-06T16:00:00+09:00",
+      "date": "2027-02-06",
+      "time_known": true,
       "label": "국립공원 야영장 추첨 접수",
       "stay": {
-        "month": "2027-04"
+        "month": "2027-03",
+        "months": 2
       },
-      "note": "오후 발표",
+      "note": "16:00 발표, 7일 22:00까지 결제, 8일 10:00 잔여 선착순",
       "source": {
-        "url": "https://www.kukinews.com/article/view/kuk202607100055",
-        "title": "쿠키뉴스 2026-07 보도(국립공원공단 전면 추첨제 안내 인용). 공식 연간 예약 일정표(이미지 공지)로 재확인 필요",
-        "checked_at": "2026-10-12",
-        "tier": "C"
+        "url": "https://reservation.knps.or.kr/reservation/selectCampLottery.do",
+        "title": "국립공원공단 예약시스템 추첨제 안내(2026.10 회차: 10.01 10:00~10.06 10:00 신청, 11.01~12.31 이용분) · 예약·환불정책 표",
+        "checked_at": "2026-10-13",
+        "tier": "A"
       },
-      "needs_verification": true
+      "needs_verification": false
     },
     {
       "id": "foresttrip-national-weekend-lottery:LOTTERY_APPLY_END:2027-02-09T18:00:00+09:00",
