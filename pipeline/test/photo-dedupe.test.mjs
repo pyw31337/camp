@@ -5,6 +5,8 @@ import { allocateUnique, dhash, hamming, photoKey, uniqueBy, uniqueByHash } from
 
 test("고캠핑 대표 사진(thumb_720_파일)과 imageList(파일)는 같은 키", () => {
   assert.equal(photoKey("https://gocamping.or.kr/upload/camp/1/thumb/thumb_720_ABCjpg.jpg"), photoKey("https://gocamping.or.kr/upload/camp/1/ABCjpg.jpg?x=1"));
+  assert.equal(photoKey("https://x/upload/50%할인%ZZ.jpg"), "50%할인%zz.jpg", "잘못된 % 인코딩에서도 멈추지 않는다");
+  assert.equal(photoKey("https://x/%EC%82%AC%EC%A7%84.JPG"), "사진.jpg");
   const seen = new Set([photoKey("https://a/x/1.jpg")]);
   assert.deepEqual(uniqueBy(["https://b/1.jpg", "https://b/2.jpg", "https://c/2.jpg?type=w966"], photoKey, seen), ["https://b/2.jpg"]);
 });

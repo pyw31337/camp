@@ -7,7 +7,10 @@ import { readFile } from "node:fs/promises";
 /** URL → 파일 이름 키(쿼리 제거, 고캠핑 thumb_N_ 접두어 제거, 소문자) */
 export function photoKey(url) {
   const path = String(url ?? "").split(/[?#]/)[0];
-  const base = decodeURIComponent(path.slice(path.lastIndexOf("/") + 1) || path).toLowerCase();
+  const raw = path.slice(path.lastIndexOf("/") + 1) || path;
+  let base;
+  try { base = decodeURIComponent(raw); } catch { base = raw; } // 잘못된 % 인코딩(예: "50%할인.jpg")은 그대로 비교
+  base = base.toLowerCase();
   return base.replace(/^thumb_\d+_/, "");
 }
 
