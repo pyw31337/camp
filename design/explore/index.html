@@ -17,7 +17,10 @@
   --fs-2xs: .75rem; --fs-xs: .8125rem; --fs-sm: .875rem; --fs-base: .9375rem; --fs-md: 1.0625rem;
   --fs-lg: 1.25rem; --fs-xl: 1.5rem; --fs-2xl: 1.75rem; --fs-3xl: 2.25rem;
 }
-html { font-size: 100%; -webkit-text-size-adjust: 100%; }
+html { font-size: 100%; -webkit-text-size-adjust: 100%; scrollbar-gutter: stable; }
+/* 상세는 문서가 아니라 전용 패널 하나만 세로로 움직인다. */
+html.detail-open,
+body.detail-open { overflow: hidden; overscroll-behavior: none; }
 html[data-fs="s"] { font-size: 93.75%; } html[data-fs="l"] { font-size: 112.5%; } html[data-fs="xl"] { font-size: 125%; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --green: #3dbb78; --green-press: #5cce91; --green-tint: #14301f; --on-green: #04170c;
@@ -148,9 +151,10 @@ body { min-height: 100dvh; }
 .empty { padding: 48px 16px; text-align: center; color: var(--ink-2); display: grid; gap: 8px; justify-items: center; }
 
 /* 상세 시트 */
-.sheet { position: fixed; inset: 0; z-index: 60; display: grid; grid-template-columns: 1fr minmax(0, 560px); }
+.sheet { position: fixed; inset: 0; z-index: 60; display: grid; grid-template-columns: 1fr minmax(0, 560px); min-height: 0; }
 .sheet-scrim { background: var(--scrim); }
-.sheet-panel { background: var(--bg); overflow-y: auto; overscroll-behavior: contain; box-shadow: var(--shadow-2); }
+/* 상세가 열린 동안 세로 스크롤 소유자는 이 패널 하나다. */
+.sheet-panel { min-height: 0; height: 100%; background: var(--bg); overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; box-shadow: var(--shadow-2); }
 .sheet-close { position: sticky; top: 0; z-index: 2; display: flex; justify-content: flex-end; padding: 10px 12px; background: linear-gradient(var(--bg), color-mix(in srgb, var(--bg) 0%, transparent)); }
 .round { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); box-shadow: var(--shadow-1); }
 .d-hero { margin: -60px 0 0; height: 260px; background: var(--surface-2); display: grid; place-items: center; color: var(--ink-3); overflow: hidden; position: relative; }
@@ -1627,6 +1631,11 @@ function introHtml(t) {
     ${t.programs ? `<div class="row">${ic("#l-sparkles", "i-sm")}<span data-wrap-ok>체험 ${esc(t.programs)}</span></div>` : ""}
     <span class="trust">운영자가 고캠핑에 등록한 문구입니다.</span></div>`;
 }
+function setDetailScrollLock(locked) {
+  // documentElement까지 잠가야 Chrome/Safari에서 배경 문서와 상세 패널이 함께 스크롤되지 않는다.
+  document.documentElement.classList.toggle("detail-open", locked);
+  document.body.classList.toggle("detail-open", locked);
+}
 function openDetail(id) {
   const c = ALL.find((x) => x.id === id);
   if (!c) return;
@@ -1638,7 +1647,7 @@ function openDetail(id) {
   document.title = `${c.name} · 모여라 캠핑`;
   $("#sheetRoot").innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(c.name)}"><div class="sheet-scrim" data-close></div><div class="sheet-panel">${detail(c)}</div></div>`;
   tipify($(".sheet-panel"));
-  document.body.style.overflow = "hidden";
+  setDetailScrollLock(true);
   if (map) { map.setLevel(Math.min(map.getLevel(), 7)); map.panTo(new kakao.maps.LatLng(c.lat, c.lng)); }
   $$(".card").forEach((el) => el.setAttribute("aria-current", String(el.dataset.open === id)));
   loadDetail(c);
@@ -1712,7 +1721,7 @@ function toast(msg, ms = 2000) {
 }
 function closeDetail({ fromPop = false } = {}) {
   lbClose(); document.getElementById("tipPop")?.remove();
-  document.title = BASE_TITLE; state.open = null; $("#sheetRoot").innerHTML = ""; document.body.style.overflow = "";
+  document.title = BASE_TITLE; state.open = null; $("#sheetRoot").innerHTML = ""; setDetailScrollLock(false);
   if (!fromPop) { if (history.state?.c) history.back(); else { history.replaceState(null, "", location.pathname); syncHash(); } }
 }
 // 주소의 #q=·#k=·#t=·#a=·#g=를 직접 바꾸거나 링크로 들어오면 그 조건으로 다시 그린다.

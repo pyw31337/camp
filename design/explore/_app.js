@@ -726,6 +726,11 @@ function introHtml(t) {
     ${t.programs ? `<div class="row">${ic("#l-sparkles", "i-sm")}<span data-wrap-ok>체험 ${esc(t.programs)}</span></div>` : ""}
     <span class="trust">운영자가 고캠핑에 등록한 문구입니다.</span></div>`;
 }
+function setDetailScrollLock(locked) {
+  // documentElement까지 잠가야 Chrome/Safari에서 배경 문서와 상세 패널이 함께 스크롤되지 않는다.
+  document.documentElement.classList.toggle("detail-open", locked);
+  document.body.classList.toggle("detail-open", locked);
+}
 function openDetail(id) {
   const c = ALL.find((x) => x.id === id);
   if (!c) return;
@@ -737,7 +742,7 @@ function openDetail(id) {
   document.title = `${c.name} · 모여라 캠핑`;
   $("#sheetRoot").innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(c.name)}"><div class="sheet-scrim" data-close></div><div class="sheet-panel">${detail(c)}</div></div>`;
   tipify($(".sheet-panel"));
-  document.body.style.overflow = "hidden";
+  setDetailScrollLock(true);
   if (map) { map.setLevel(Math.min(map.getLevel(), 7)); map.panTo(new kakao.maps.LatLng(c.lat, c.lng)); }
   $$(".card").forEach((el) => el.setAttribute("aria-current", String(el.dataset.open === id)));
   loadDetail(c);
@@ -811,7 +816,7 @@ function toast(msg, ms = 2000) {
 }
 function closeDetail({ fromPop = false } = {}) {
   lbClose(); document.getElementById("tipPop")?.remove();
-  document.title = BASE_TITLE; state.open = null; $("#sheetRoot").innerHTML = ""; document.body.style.overflow = "";
+  document.title = BASE_TITLE; state.open = null; $("#sheetRoot").innerHTML = ""; setDetailScrollLock(false);
   if (!fromPop) { if (history.state?.c) history.back(); else { history.replaceState(null, "", location.pathname); syncHash(); } }
 }
 // 주소의 #q=·#k=·#t=·#a=·#g=를 직접 바꾸거나 링크로 들어오면 그 조건으로 다시 그린다.

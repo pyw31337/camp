@@ -14,7 +14,10 @@
   --fs-2xs: .75rem; --fs-xs: .8125rem; --fs-sm: .875rem; --fs-base: .9375rem; --fs-md: 1.0625rem;
   --fs-lg: 1.25rem; --fs-xl: 1.5rem; --fs-2xl: 1.75rem; --fs-3xl: 2.25rem;
 }
-html { font-size: 100%; -webkit-text-size-adjust: 100%; }
+html { font-size: 100%; -webkit-text-size-adjust: 100%; scrollbar-gutter: stable; }
+/* 상세는 문서가 아니라 전용 패널 하나만 세로로 움직인다. */
+html.detail-open,
+body.detail-open { overflow: hidden; overscroll-behavior: none; }
 html[data-fs="s"] { font-size: 93.75%; } html[data-fs="l"] { font-size: 112.5%; } html[data-fs="xl"] { font-size: 125%; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --green: #3dbb78; --green-press: #5cce91; --green-tint: #14301f; --on-green: #04170c;

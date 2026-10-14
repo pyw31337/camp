@@ -75,9 +75,10 @@ body { min-height: 100dvh; }
 .empty { padding: 48px 16px; text-align: center; color: var(--ink-2); display: grid; gap: 8px; justify-items: center; }
 
 /* 상세 시트 */
-.sheet { position: fixed; inset: 0; z-index: 60; display: grid; grid-template-columns: 1fr minmax(0, 560px); }
+.sheet { position: fixed; inset: 0; z-index: 60; display: grid; grid-template-columns: 1fr minmax(0, 560px); min-height: 0; }
 .sheet-scrim { background: var(--scrim); }
-.sheet-panel { background: var(--bg); overflow-y: auto; overscroll-behavior: contain; box-shadow: var(--shadow-2); }
+/* 상세가 열린 동안 세로 스크롤 소유자는 이 패널 하나다. */
+.sheet-panel { min-height: 0; height: 100%; background: var(--bg); overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; box-shadow: var(--shadow-2); }
 .sheet-close { position: sticky; top: 0; z-index: 2; display: flex; justify-content: flex-end; padding: 10px 12px; background: linear-gradient(var(--bg), color-mix(in srgb, var(--bg) 0%, transparent)); }
 .round { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); box-shadow: var(--shadow-1); }
 .d-hero { margin: -60px 0 0; height: 260px; background: var(--surface-2); display: grid; place-items: center; color: var(--ink-3); overflow: hidden; position: relative; }
