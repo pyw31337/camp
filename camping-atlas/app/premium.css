@@ -24,7 +24,8 @@
 .may-top-actions { display: flex; align-items: center; gap: 10px; }
 .may-round-action { position: relative; width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 50%; background: #fff; color: var(--may-ink); box-shadow: var(--may-shadow); }
 .may-round-action b { position: absolute; top: -3px; right: -2px; min-width: 17px; height: 17px; padding: 0 4px; display: grid; place-items: center; border-radius: 99px; background: var(--may-green); color: #fff; font-size: 0.6875rem; }
-.may-shell { width: min(1184px, calc(100% - 40px)); margin: 0 auto; padding-bottom: 92px; }
+/* 본문 폭 = 공통 헤더 안쪽 폭(최대 1240px − 좌우 16px): 로고 왼쪽 끝 ~ 설정 버튼 오른쪽 끝 */
+.may-shell { width: min(1208px, calc(100% - 32px)); margin: 0 auto; padding-bottom: 92px; }
 
 .may-hero { position: relative; min-height: 522px; overflow: hidden; isolation: isolate; border-radius: 31px; color: #fff; }
 .may-hero > img, .may-hero-overlay { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -249,7 +250,7 @@
 }
 
 @media (max-width: 360px) {
-  .may-topbar, .may-shell { width: min(100% - 24px, 560px); }
+  .may-topbar, .may-shell { width: min(100% - 32px, 560px); }
   .may-brand { gap: 6px; font-size: 1rem; }
   .may-top-actions { gap: 3px; }
   .may-hero { min-height: 618px; }

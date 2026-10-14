@@ -43,6 +43,7 @@ export function siteTabbar(base, current) {
 // 저장: moyeora-users=[{id,name,c}], moyeora-user=사용 중 id, moyeora-fs=글자 크기.
 // 사용자별 저장 키: window.moyeoraUser.key("moyeora-explore") → 첫 사용자(me)는 기존 키 그대로(이전 관심 목록 유지), 그 외는 "키@id".
 // 사용자를 바꾸면 window에 "moyeora:user" 이벤트를 보낸다(탐색·관심 화면이 다시 그린다).
+// 한글 입력 중 Enter는 조합 확정용이라(isComposing) 추가하지 않는다 — 안 그러면 “영우” 뒤에 남은 “우”가 한 번 더 추가된다. 같은 이름은 새로 만들지 않고 그 사용자로 바꾼다.
 export const SITE_HEADER_JS = `(function(){if(window.moyeoraUser)return;
 var C=["#1f9d5c","#2f7fd8","#e0703a","#8e5bd6","#c99a06","#e05a8a","#139c9c","#6d7b85"],L={s:"작게",m:"보통",l:"크게",xl:"아주 크게"},O=["s","m","l","xl"];
 function g(k,d){try{var v=localStorage.getItem(k);return v==null?d:v}catch(e){return d}}function p(k,v){try{localStorage.setItem(k,v)}catch(e){}}
@@ -59,7 +60,7 @@ if(l)l.innerHTML=u.map(function(x){return '<li>'+av(x)+"<b>"+esc(x.name)+"</b>"+
 var f=document.getElementById("shFs");if(f&&!f.children.length){f.innerHTML=O.map(function(k){return '<button type="button" role="radio" data-fs="'+k+'">'+L[k]+"</button>"}).join("");fs(document.documentElement.dataset.fs)}}
 function use(id){p("moyeora-user",id);draw();window.dispatchEvent(new CustomEvent("moyeora:user",{detail:active()}))}
 function menu(open){var m=document.getElementById("shMenu"),b=document.getElementById("shBadge");if(!m||!b)return;m.hidden=!open;b.setAttribute("aria-expanded",String(open))}
-function add(){var i=document.getElementById("shName"),n=(i&&i.value||"").trim().slice(0,10);if(!n)return i&&i.focus();var u=users();if(u.length>=8){alert("사용자는 8명까지 추가할 수 있어요.");return}var id="u"+Date.now().toString(36);u.push({id:id,name:n,c:C[u.length%C.length]});p("moyeora-users",JSON.stringify(u));i.value="";use(id)}
+function add(){var i=document.getElementById("shName"),n=(i&&i.value||"").trim().slice(0,10);if(!n)return i&&i.focus();var u=users(),same=u.filter(function(x){return x.name===n})[0];if(same){i.value="";use(same.id);return}if(u.length>=8){alert("사용자는 8명까지 추가할 수 있어요.");return}var id="u"+Date.now().toString(36);u.push({id:id,name:n,c:C[u.length%C.length]});p("moyeora-users",JSON.stringify(u));i.value="";use(id)}
 window.moyeoraUser={active:active,list:users,key:function(base){var a=active();return a.id==="me"?base:base+"@"+a.id}};
 document.addEventListener("click",function(e){var t=e.target.closest("#shBadge,#shSet,[data-sh-user],[data-sh-open],[data-sh-del],#shAdd,[data-fs]");
 if(!t){if(!e.target.closest("#shMenu"))menu(false);return}
@@ -70,7 +71,7 @@ if(t.dataset.shUser){menu(false);use(t.dataset.shUser);return}
 if(t.dataset.shDel){var u=users().filter(function(x){return x.id!==t.dataset.shDel});if(!confirm("이 사용자를 지울까요? 이 사용자의 관심 목록도 함께 지워집니다."))return;p("moyeora-users",JSON.stringify(u));try{localStorage.removeItem("moyeora-explore@"+t.dataset.shDel)}catch(x){}if(g("moyeora-user","me")===t.dataset.shDel)use(u[0].id);else draw();return}
 if(t.id==="shAdd"){add();return}
 if(t.dataset.fs&&t.closest("#shFs")){fs(t.dataset.fs);return}});
-document.addEventListener("keydown",function(e){if(e.key==="Escape")menu(false);if(e.key==="Enter"&&e.target.id==="shName"){e.preventDefault();add()}});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")menu(false);if(e.key==="Enter"&&e.target.id==="shName"){e.preventDefault();if(e.isComposing||e.keyCode===229)return;add()}});
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",draw);else draw();})();`;
 export const SITE_HEADER_SCRIPT = `<script>${SITE_HEADER_JS}</script>`;
 export const SITE_HEADER_CSS = `/* ===== 공통 사이트 헤더(홈·탐색·상세 동일) — 두 화면이 같은 규칙을 쓴다 ===== */
