@@ -49,7 +49,17 @@ export async function fetchSeoulService(key, service, { fetchImpl = fetch, wait 
 
 // 장소명에만 “캠핑”이 들어간 숲체험·교육 프로그램(예: 중랑캠핑숲 유아 숲체험)은 빼고, 소분류나 상품명이 캠핑·야영인 것만 남긴다.
 const PROGRAM_RE = /체험|교실|교육|강좌|탐험|해설|나들이|프로그램|축제|공연/;
-export const isCampingService = (row) => CAMP_RE.test(`${row.MINCLASSNM ?? ""} ${row.SVCNM ?? ""}`) && !(PROGRAM_RE.test(row.SVCNM ?? "") && !CAMP_RE.test(row.MINCLASSNM ?? ""));
+// ‘난지캠핑장 옆 야구장’처럼 장소 설명에 캠핑장이 붙은 대관은 숙박 후보가 아니다.
+// 당일 바비큐·피크닉도 날짜 범위는 있어도 텐트 사이트 예약이 아니므로 제외한다.
+const NON_CAMPING_RE = /야구|축구|농구|배드민턴|테니스|족구|배구|풋살|운동장|체육관|체육시설|수영장/;
+const DAY_USE_RE = /바비큐|피크닉|캠프닉|당일\s*(?:이용|대여|체험)|숙박\s*없이/;
+export const isCampingService = (row) => {
+  const name = String(row.SVCNM ?? "");
+  const category = String(row.MINCLASSNM ?? "");
+  if (!CAMP_RE.test(`${category} ${name}`)) return false;
+  if (NON_CAMPING_RE.test(name) || DAY_USE_RE.test(name)) return false;
+  return !(PROGRAM_RE.test(name) && !CAMP_RE.test(category));
+};
 
 export function normalizeSeoulService(row, checkedAt) {
   let lng = Number(row.X), lat = Number(row.Y);
