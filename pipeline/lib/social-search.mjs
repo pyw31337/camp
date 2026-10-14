@@ -101,6 +101,11 @@ export const nameCore = (name, sigungu) => distinctiveTokens(name, sigungu).join
 
 const AD = /(분양|매매|부동산|매물|급매|경매|임대|토지|평당|시세|투자|중개|공인중개)/;
 
+// 캠핑 이야기라는 최소 맥락: 제목·본문 어디에도 이런 말이 없으면(버스·등산·맛집 글에 지명만 겹친 경우) 뺀다.
+const CAMP_CONTEXT = /(캠핑|야영|글램핑|글램|카라반|캠프|텐트|타프|차박|노지|오토캠|데크|파쇄석|불멍|바베큐|바비큐|휴양림|숙박|캠퍼|camp|glamp)/i;
+// 제목이 다른 주제(교통·산행 공지·모집 등)를 가리키면, 제목 자체에 캠핑 이야기가 있을 때만 남긴다.
+const OFF_TOPIC = /(마을버스|시내버스|광역버스|버스노선|노선도|정류장|저상버스|전기버스|산행|등산|일정표|채용|구인|알바|입찰|공고|부고|모집)/;
+const escRe = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 /**
  * 블로그·카페·동영상 결과가 이 캠핑장 이야기인지 판정한다.
  * @param {{title?:string, contents?:string, src?:string}} doc 원본 필드(HTML 포함 가능)
@@ -109,22 +114,56 @@ const AD = /(분양|매매|부동산|매물|급매|경매|임대|토지|평당|�
 export function isRelevant(doc, { tokens, stem = "", others = [] }) {
   const titleRaw = stripHtml(doc?.title);
   if (AD.test(titleRaw)) return false;
-  const title = compact(doc?.title);
-  const text = `${title}|${compact(doc?.contents)}|${compact(doc?.src)}`;
+  const title = compact(doc?.title), body = compact(doc?.contents);
+  const text = `${title}|${body}|${compact(doc?.src)}`;
   const toks = tokens.map((t) => t.toLowerCase().replace(/\s+/g, "")).filter(Boolean);
   if (!toks.length) return false;
   const core = toks.join("");
   const hit = text.includes(core) || (toks.length > 1 && toks.every((t) => t.length < 2 || text.includes(t)) && toks.some((t) => t.length >= 2));
   if (!hit) return false;
-  // 핵심어가 짧으면(“라하”, “자유”) 우연한 일치가 많다 → 지역명이 같이 나오거나 바로 뒤에 캠핑 관련어가 붙어야 한다.
+  if (!CAMP_CONTEXT.test(`${titleRaw} ${stripHtml(doc?.contents)}`)) return false;
+  if (OFF_TOPIC.test(title) && !CAMP_CONTEXT.test(titleRaw)) return false;
+  // 핵심어가 짧으면(“도덕산”, “라하”) 산·마을 이름과 겹친다 → 핵심어 바로 뒤에 캠핑 관련어가 붙어야 한다(“도덕산 캠핑장”).
+  // 제목에서 붙거나, 본문에 캠핑장 이름 그대로 나오거나, 본문에서 붙고 제목에도 핵심어가 있어야 한다. 지역명만 같이 나오는 것으로는 부족하다.
   if (core.length <= 3) {
-    const st = stem.toLowerCase();
-    const near = new RegExp(`${core.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}.{0,4}(캠핑|야영|글램핑|카라반|캠프|camp)`, "i").test(text);
-    if (!near && !(st && text.includes(st))) return false;
+    const near = new RegExp(`${escRe(core)}.{0,4}(캠핑|야영|글램핑|카라반|캠프|camp)`, "i");
+    const tight = new RegExp(`${escRe(core)}.?(캠핑장|야영장|글램핑|오토캠핑|캠프장)`, "i"); // 본문의 “명학산캠핑장 다녀옴”처럼 이름 그대로
+    if (!near.test(title) && !tight.test(body) && !(near.test(body) && title.includes(core))) return false;
   }
   // 제목이 다른 캠핑장을 가리키고 우리 이름은 제목에 없으면(본문에 스쳐 지나간 언급) 뺀다.
   if (!title.includes(core) && others.some((o) => o && o !== core && o.length >= 2 && !core.includes(o) && title.includes(o))) return false;
   return true;
+}
+
+const DETAIL_WORDS = /(사이트|화장실|샤워|개수대|매점|전기|온수|데크|파쇄석|잔디|주차|요금|가격|예약|명당|구역|배치|놀이터|계곡|그늘|뷰)/g;
+/**
+ * 후기 정보량·정확도 점수(0~100). 화면의 ‘정확순’과 ‘추천’ 정렬에 쓴다.
+ * 제목에 이름(+캠핑 관련어)이 있는지, 본문 길이, 사이트·시설 같은 구체어, 썸네일 유무를 본다.
+ */
+export function reviewScore(doc, { tokens }) {
+  const title = compact(doc?.title), body = compact(doc?.snippet ?? doc?.contents);
+  const core = tokens.map((t) => t.toLowerCase().replace(/\s+/g, "")).join("");
+  let q = 0;
+  if (core && title.includes(core)) q += 20;
+  if (core && new RegExp(`${escRe(core)}.{0,6}(캠핑|야영|글램핑|카라반|캠프|camp)`, "i").test(title)) q += 20;
+  else if (CAMP_CONTEXT.test(stripHtml(doc?.title))) q += 8;
+  q += Math.round(Math.min(String(doc?.snippet ?? "").length, 160) / 160 * 23);
+  q += Math.min(new Set(String(doc?.snippet ?? "").match(DETAIL_WORDS) ?? []).size * 4, 20);
+  if (doc?.thumb) q += 10;
+  return Math.min(100, q);
+}
+
+/** 캐시된 후기 레코드(정규화된 제목·요약)에 새 판정 규칙을 다시 적용하고 점수를 붙인다. */
+export function refilterSocial(camp, rec, { others = [] } = {}) {
+  const sigungu = camp?.address?.sigungu;
+  const ctx = { tokens: distinctiveTokens(camp?.name, sigungu), stem: regionStem(sigungu), others };
+  const posts = (list) => (list ?? []).filter((x) => isRelevant({ title: x.title, contents: x.snippet, src: x.src }, ctx)).map((x) => ({ ...x, q: reviewScore(x, ctx) }));
+  return {
+    ...rec,
+    blog: posts(rec?.blog),
+    cafe: posts(rec?.cafe),
+    vclip: (rec?.vclip ?? []).filter((v) => isRelevant({ title: v.title, src: v.author }, ctx)),
+  };
 }
 
 // ─── 정규화 ───────────────────────────────────────────────────────────────
