@@ -607,7 +607,7 @@ if(l)l.innerHTML=u.map(function(x){return '<li>'+av(x)+"<b>"+esc(x.name)+"</b>"+
 var f=document.getElementById("shFs");if(f&&!f.children.length){f.innerHTML=O.map(function(k){return '<button type="button" role="radio" data-fs="'+k+'">'+L[k]+"</button>"}).join("");fs(document.documentElement.dataset.fs)}}
 function use(id){p("moyeora-user",id);draw();window.dispatchEvent(new CustomEvent("moyeora:user",{detail:active()}))}
 function menu(open){var m=document.getElementById("shMenu"),b=document.getElementById("shBadge");if(!m||!b)return;m.hidden=!open;b.setAttribute("aria-expanded",String(open))}
-function add(){var i=document.getElementById("shName"),n=(i&&i.value||"").trim().slice(0,10);if(!n)return i&&i.focus();var u=users();if(u.length>=8){alert("사용자는 8명까지 추가할 수 있어요.");return}var id="u"+Date.now().toString(36);u.push({id:id,name:n,c:C[u.length%C.length]});p("moyeora-users",JSON.stringify(u));i.value="";use(id)}
+function add(){var i=document.getElementById("shName"),n=(i&&i.value||"").trim().slice(0,10);if(!n)return i&&i.focus();var u=users(),same=u.filter(function(x){return x.name===n})[0];if(same){i.value="";use(same.id);return}if(u.length>=8){alert("사용자는 8명까지 추가할 수 있어요.");return}var id="u"+Date.now().toString(36);u.push({id:id,name:n,c:C[u.length%C.length]});p("moyeora-users",JSON.stringify(u));i.value="";use(id)}
 window.moyeoraUser={active:active,list:users,key:function(base){var a=active();return a.id==="me"?base:base+"@"+a.id}};
 document.addEventListener("click",function(e){var t=e.target.closest("#shBadge,#shSet,[data-sh-user],[data-sh-open],[data-sh-del],#shAdd,[data-fs]");
 if(!t){if(!e.target.closest("#shMenu"))menu(false);return}
@@ -618,7 +618,7 @@ if(t.dataset.shUser){menu(false);use(t.dataset.shUser);return}
 if(t.dataset.shDel){var u=users().filter(function(x){return x.id!==t.dataset.shDel});if(!confirm("이 사용자를 지울까요? 이 사용자의 관심 목록도 함께 지워집니다."))return;p("moyeora-users",JSON.stringify(u));try{localStorage.removeItem("moyeora-explore@"+t.dataset.shDel)}catch(x){}if(g("moyeora-user","me")===t.dataset.shDel)use(u[0].id);else draw();return}
 if(t.id==="shAdd"){add();return}
 if(t.dataset.fs&&t.closest("#shFs")){fs(t.dataset.fs);return}});
-document.addEventListener("keydown",function(e){if(e.key==="Escape")menu(false);if(e.key==="Enter"&&e.target.id==="shName"){e.preventDefault();add()}});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")menu(false);if(e.key==="Enter"&&e.target.id==="shName"){e.preventDefault();if(e.isComposing||e.keyCode===229)return;add()}});
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",draw);else draw();})();</script>
 <div class="bar"><div class="wrap">
   <div class="qrow"><label class="q"><svg class="i" aria-hidden="true"><use href="#l-search"/></svg><input id="q" type="search" placeholder="캠핑장 이름·지역 검색" autocomplete="off" enterkeyhint="search"><button class="clear" id="clearQ" type="button" aria-label="검색어 지우기"><svg class="i i-sm" aria-hidden="true"><use href="#l-x"/></svg></button></label><button class="near-btn" id="nearBtn" type="button" aria-pressed="false"><svg class="i i-sm" aria-hidden="true"><use href="#l-locate-fixed"/></svg><span>내 주변</span></button></div>
