@@ -90,7 +90,12 @@ export function buildExploreRecords(camps, toilets, fees, seoul = new Map()) {
       fee: fee?.fee_text ? { text: fee.fee_text, min: fee.fee_range?.min_krw ?? null, max: fee.fee_range?.max_krw ?? null, checked_at: fee.checked_at, url: fee.source_url } : null,
       nearby_toilets: near ? { within_2km: near.count_2km, within_500m: near.count_500m ?? null, nearest: (near.nearest ?? []).slice(0, 3).map((t) => ({ name: t.name, m: t.distance_m, lat: t.lat ?? null, lng: t.lng ?? null, h24: t.open_24h ?? null, src: t.source ?? "mois" })) } : null,
       // 서울시 공공예약 원문의 접수 상태(확인 시각·원문 링크 포함). 빈자리 확정값이 아니다.
-      seoul: (seoul.get(id) ?? []).slice(0, 8).map((s) => ({ name: s.name, status: s.status, from: s.receipt?.from ?? null, to: s.receipt?.to ?? null, url: s.url, checked_at: s.checked_at })),
+      seoul: (seoul.get(id) ?? []).slice(0, 8).map((s) => ({
+        name: s.name, status: s.status,
+        from: s.receipt?.from ?? null, to: s.receipt?.to ?? null,
+        use_from: s.use?.from ?? null, use_to: s.use?.to ?? null,
+        url: s.url, source_url: s.source_url, checked_at: s.checked_at,
+      })),
       modified_at: c.source?.modified_at ?? null,
     };
   });

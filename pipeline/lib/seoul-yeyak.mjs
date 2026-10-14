@@ -8,6 +8,8 @@ export const SEOUL_BASE = "http://openapi.seoul.go.kr:8088";
 export const SEOUL_SERVICES = ["tvYeyakCOllect", "ListPublicReservationInstitution", "ListPublicReservationSport"];
 export const SEOUL_DATASET_URL = "https://data.seoul.go.kr/dataList/OA-20497/S/1/datasetView.do";
 const CAMP_RE = /캠핑|야영|글램핑|카라반|오토캠/;
+const OPEN_STATUS_RE = /접수\s*중|예약\s*가능/;
+const CLOSED_STATUS_RE = /마감|종료|취소|대기/;
 
 const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const str = (v) => { const s = String(v ?? "").trim(); return s ? s : null; };
@@ -78,6 +80,61 @@ export function normalizeSeoulService(row, checkedAt) {
 }
 
 /**
+ * 서울 공공예약 원문이 “접수중”이라고 응답한 경우만 참이다.
+ * 이것은 특정 사이트의 잔여 수량이나 즉시 확정 가능을 뜻하지 않는다.
+ */
+export function isOfficialApplicationOpen(service) {
+  const status = String(service?.status ?? "").replace(/\s+/g, "");
+  return OPEN_STATUS_RE.test(status) && !CLOSED_STATUS_RE.test(status);
+}
+
+/** 원문의 접수 상태와 접수 기간이 모두 현재 시각을 포함하는지 확인한다. */
+export function isReceiptOpen(service, now = new Date()) {
+  if (!isOfficialApplicationOpen(service)) return false;
+  const at = now instanceof Date ? now.getTime() : Date.parse(now);
+  const from = Date.parse(service?.receipt?.from ?? "");
+  const to = Date.parse(service?.receipt?.to ?? "");
+  if (!Number.isFinite(at) || !Number.isFinite(from) || !Number.isFinite(to)) return false;
+  return from <= at && at <= to;
+}
+
+const dateOnly = (value) => String(value ?? "").match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? null;
+const utcDay = (value) => {
+  const day = dateOnly(value);
+  if (!day) return null;
+  const [year, month, date] = day.split("-").map(Number);
+  return Date.UTC(year, month - 1, date);
+};
+const previousDate = (value) => {
+  const day = utcDay(value);
+  return day == null ? null : new Date(day - 86400000).toISOString().slice(0, 10);
+};
+
+/**
+ * 이용 기간이 숙박의 모든 밤을 덮는지 확인한다. 이용 기간이 누락되었거나
+ * 당일 체험처럼 요청한 숙박 전체를 덮지 않으면 후보에 포함하지 않는다.
+ */
+export function serviceCoversStay(service, checkIn, checkOut) {
+  const start = utcDay(service?.use?.from);
+  const end = utcDay(service?.use?.to);
+  const requestedStart = utcDay(checkIn);
+  const requestedLastNight = utcDay(previousDate(checkOut));
+  if ([start, end, requestedStart, requestedLastNight].some((value) => value == null)) return false;
+  return start <= requestedStart && end >= requestedLastNight;
+}
+
+function campgroundCoordinates(campground) {
+  const lat = Number(campground?.location?.lat ?? campground?.lat);
+  const lng = Number(campground?.location?.lng ?? campground?.lng);
+  return Number.isFinite(lat) && Number.isFinite(lng) ? { lat, lng } : null;
+}
+
+function campgroundId(campground) {
+  const id = campground?.external_id?.id ?? campground?.id;
+  return id == null ? null : String(id);
+}
+
+/**
  * 서울 예약 상품 → 고캠핑 캠핑장. 좌표가 있으면 2km 안에서 이름(장소명·상품명) 유사도로, 없으면 이름만으로 고른다.
  * @returns {Map<string, object[]>} 고캠핑 id → 서울 예약 상품 목록
  */
@@ -86,12 +143,14 @@ export function matchSeoulToCampgrounds(services, campgrounds) {
   for (const s of services) {
     let best = null;
     for (const c of campgrounds) {
-      if (!c.location) continue;
-      const d = s.lat != null ? haversineM(s.lat, s.lng, c.location.lat, c.location.lng) : null;
+      const location = campgroundCoordinates(c);
+      const id = campgroundId(c);
+      if (!location || !id) continue;
+      const d = s.lat != null ? haversineM(s.lat, s.lng, location.lat, location.lng) : null;
       if (d != null && d > 2000) continue;
       const name = Math.max(nameSimilarity(s.place, c.name), nameSimilarity(s.name, c.name));
       const score = d == null ? name : name * 0.6 + (d <= 300 ? 0.4 : d <= 1000 ? 0.25 : 0.1);
-      if (score >= (d == null ? 0.8 : 0.5) && (!best || score > best.score)) best = { id: String(c.external_id.id), score };
+      if (score >= (d == null ? 0.8 : 0.5) && (!best || score > best.score)) best = { id, score };
     }
     if (best) { if (!out.has(best.id)) out.set(best.id, []); out.get(best.id).push({ ...s, match_score: Math.round(best.score * 100) / 100 }); }
   }

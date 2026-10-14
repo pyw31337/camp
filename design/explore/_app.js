@@ -1,4 +1,5 @@
-// 모여라 캠핑 · 전국 캠핑장 탐색. 데이터: data/campgrounds.json, data/meta.json (pipeline build:explore)
+// 모여라 캠핑 · 전국 캠핑장 탐색. 데이터: data/campgrounds.json, data/meta.json,
+// data/availability.json(짧은 TTL의 공식 접수 상태, pipeline build:explore)
 const KAKAO_KEY = document.querySelector('meta[name="kakao-js-key"]')?.content ?? "";
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -26,8 +27,8 @@ const sortName = (c) => (c._sort ??= c.name.replace(/^[\s(（［\[]*[^)）］\]]
 // 데이터는 빈 값을 빼고 배포하므로 화면에서 기본값을 채운다.
 const withDefaults = (c) => ({ th: [], kinds: [], sizes: [], floors: [], amenities: [], env: [], themes: [], rental: [], seasons: [], days: [], types: [], seoul: [], ...c, booking: { methods: [], url: null, provider: null, channels: [], source: null, ...(c.booking ?? {}) } });
 
-const state = { q: "", area: "전국", kinds: new Set(), realtime: false, pet: false, fee: false, toilet: false, savedOnly: false, inView: false, theme: "", sgg: "", gear: "", sort: "best", shown: PAGE, here: null, open: null, saved: new Set(), seen: new Set() };
-let ALL = [], META = null, map = null, clusterer = null, markers = new Map();
+const state = { q: "", area: "전국", kinds: new Set(), realtime: false, availabilityOnly: false, checkIn: "", checkOut: "", pet: false, fee: false, toilet: false, savedOnly: false, inView: false, theme: "", sgg: "", gear: "", sort: "best", shown: PAGE, here: null, open: null, saved: new Set(), seen: new Set() };
+let ALL = [], META = null, AVAILABILITY = null, map = null, clusterer = null, markers = new Map();
 
 function load() {
   loadUser();
@@ -42,6 +43,9 @@ function load() {
   if (h.get("t")) state.theme = h.get("t");
   if (h.get("a") && AREAS.includes(h.get("a"))) state.area = h.get("a");
   if (h.get("g")) state.sgg = h.get("g");
+  if (/^\d{4}-\d{2}-\d{2}$/.test(h.get("ci") ?? "")) state.checkIn = h.get("ci");
+  if (/^\d{4}-\d{2}-\d{2}$/.test(h.get("co") ?? "")) state.checkOut = h.get("co");
+  if (h.get("av") === "1") state.availabilityOnly = true;
 }
 // 관심 캠핑장은 이 기기 브라우저에만, 헤더에서 고른 사용자별로 따로 저장한다(로그인 없음).
 const userKey = () => window.moyeoraUser?.key("moyeora-explore") ?? "moyeora-explore";
@@ -51,7 +55,7 @@ function loadUser() {
 const save = () => { try { localStorage.setItem(userKey(), JSON.stringify({ area: state.area, gear: state.gear, saved: [...state.saved], seen: [...state.seen].slice(-120) })); } catch {} };
 // 헤더 이름 뱃지로 사용자를 바꾸면 그 사람의 관심·최근 본 목록으로 다시 그린다.
 window.addEventListener("moyeora:user", (e) => {
-  loadUser(); state.shown = PAGE; renderChips(); renderList();
+  loadUser(); state.shown = PAGE; renderAvailabilityQuery(); renderChips(); renderList();
   if (state.open) { const c = ALL.find((x) => x.id === state.open); const panel = $(".sheet-panel"); if (c && panel) { const top = panel.scrollTop; panel.innerHTML = detail(c); panel.scrollTop = top; } }
   toast(`${e.detail?.name ?? "사용자"}님의 관심 목록으로 바꿨어요`);
 });
@@ -63,10 +67,29 @@ const fits = (c) => {
   const [w, d] = state.gear.split("x").map(Number);
   return c.sizes.some(([sw, sd]) => (sw >= w && sd >= d) || (sw >= d && sd >= w));
 };
-// 추천순: 바로 예약할 수 있고 정보가 풍부한 곳을 먼저(온라인 실시간 예약 > 예약 링크 > 사진 > 사이트 구성·크기 > 요금 안내 > 주변 화장실)
+// 추천순: 온라인 예약 채널·공식 안내가 풍부한 곳을 먼저. 온라인 예약 방식은 빈자리 확정값이 아니다.
 const richness = (c) => (c._rich ??= (isRealtime(c) ? 8 : 0) + (c.booking.url ? 6 : c.homepage ? 2 : 0) + (c.img ? 4 : 0) + (c.kinds.length ? 2 : 0) + (c.sizes.length ? 1 : 0) + (c.fee ? 2 : 0) + (c.nearby_toilets ? 1 : 0));
-// 서울시 공공예약 원문 상태가 “접수중”인 상품이 있는 곳(확인 시각은 상세에 표시)
-const openNow = (c) => c.seoul.some((s) => /접수중/.test(s.status ?? ""));
+const isFreshAvailability = () => {
+  const expires = Date.parse(AVAILABILITY?.expires_at ?? "");
+  return Number.isFinite(expires) && expires >= Date.now() && Array.isArray(AVAILABILITY?.records);
+};
+const dayValue = (value) => /^\d{4}-\d{2}-\d{2}/.test(String(value ?? "")) ? Date.parse(`${String(value).slice(0, 10)}T00:00:00Z`) : NaN;
+const previousDay = (value) => {
+  const at = dayValue(value);
+  return Number.isFinite(at) ? at - 86400000 : NaN;
+};
+// 요청한 숙박의 모든 밤이 공식 원문의 이용 기간 안에 있어야 한다. 원문에 이용 기간이
+// 없거나 당일 체험이면 날짜별 후보로 섞지 않는다.
+const coversStay = (record) => {
+  if (!state.checkIn && !state.checkOut) return true;
+  const from = dayValue(record?.use?.from), to = dayValue(record?.use?.to);
+  const checkIn = dayValue(state.checkIn), lastNight = previousDay(state.checkOut);
+  return [from, to, checkIn, lastNight].every(Number.isFinite) && from <= checkIn && to >= lastNight;
+};
+const officialOpenRecords = (c, { dateMatch = false } = {}) => {
+  if (!isFreshAvailability()) return [];
+  return AVAILABILITY.records.filter((record) => record.campground_id === c.id && record.state === "OFFICIAL_APPLICATION_OPEN" && (!dateMatch || coversStay(record)));
+};
 // 시도 표기(강원도/강원특별자치도 등)가 섞여 있어 짧은 이름으로 묶는다: “강원 평창군”, “경북 경주시”
 const SIDO_SHORT = [[/^서울/, "서울"], [/^부산/, "부산"], [/^대구/, "대구"], [/^인천/, "인천"], [/^광주/, "광주"], [/^대전/, "대전"], [/^울산/, "울산"], [/^세종/, "세종"], [/^경기/, "경기"], [/^강원/, "강원"], [/^충청북|^충북/, "충북"], [/^충청남|^충남/, "충남"], [/^전라북|^전북/, "전북"], [/^전라남|^전남/, "전남"], [/^경상북|^경북/, "경북"], [/^경상남|^경남/, "경남"], [/^제주/, "제주"]];
 const sidoShort = (s) => SIDO_SHORT.find(([re]) => re.test(s ?? ""))?.[1] ?? (s ?? "");
@@ -91,6 +114,9 @@ function filtered({ forMap = false } = {}) {
     if (tokens.length && !tokens.every((t) => haystack(c).includes(t))) return false;
     if (state.kinds.size && !c.kinds.some(([k]) => state.kinds.has(k))) return false;
     if (state.realtime && !isRealtime(c)) return false;
+    // 이 필터는 판매 재고가 아니라, 원천 API가 현재 “접수중”으로 응답한 상품만
+    // 남긴다. 날짜가 있으면 이용 기간이 모든 숙박일을 덮는지도 함께 확인한다.
+    if (state.availabilityOnly && !officialOpenRecords(c, { dateMatch: Boolean(state.checkIn && state.checkOut) }).length) return false;
     if (state.pet && !petOk(c)) return false;
     if (state.fee && !c.fee?.min) return false;
     if (state.toilet && !(c.nearby_toilets?.nearest?.[0]?.m <= 500)) return false;
@@ -111,18 +137,20 @@ function largeLocalPhoto(path) {
 function card(c) {
   const kinds = c.kinds.map(([k, n]) => KIND[k] ? `<span class="tag">${ic(KIND[k][1], "i-xs")}${KIND[k][0]} <span class="num">${n}</span></span>` : "").join("");
   const km = state.here ? ` · ${dist(state.here, c).toFixed(0)}km` : "";
+  const applications = officialOpenRecords(c, { dateMatch: Boolean(state.checkIn && state.checkOut) });
   return `<button class="card" type="button" data-open="${c.id}" aria-current="${state.open === c.id}">
     <span class="thumb${!c.ph && !c.img && c.sn ? " snap" : ""}">${c.ph ? `<img src="../media/${esc(largeLocalPhoto(c.ph))}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">` : c.sn ? `<img src="${esc(String(c.sn).replace(/^http:/, "https:"))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentElement.classList.remove('snap');this.remove()"><em class="snap-tag">검색 사진</em>` : ic("#t-tent")}</span>
     <span class="card-body">
       <span class="card-title"><h3>${esc(c.name)}</h3>${state.saved.has(c.id) ? ic("#l-heart", "i-xs saved-mark") : ""}</span>
       <span class="loc">${ic("#l-map-pin", "i-xs")}${esc([c.sido, c.sigungu].filter(Boolean).join(" "))}${km}${OP[c.op] ? ` · ${OP[c.op]}` : ""}</span>
-      <span class="tags">${c.booking.next ? `<span class="tag tag-ember">${ic("#l-alarm-clock", "i-xs")}${c.booking.next.time_known ? hm(c.booking.next.at) : md(c.booking.next.at)} 오픈</span>` : ""}${openNow(c) ? `<span class="tag tag-green">${ic("#l-circle-check", "i-xs")}서울 공공예약 접수중</span>` : ""}${isRealtime(c) ? `<span class="tag tag-green">${ic("#l-zap", "i-xs")}온라인 실시간 예약</span>` : ""}${kinds}${petOk(c) ? `<span class="tag">${ic("#l-dog", "i-xs")}반려견</span>` : ""}${c.soc?.[0] ? `<span class="tag">${ic("#l-message-circle", "i-xs")}후기 ${c.soc[0]}</span>` : ""}${c.soc?.[1] ? `<span class="tag">${ic("#l-play", "i-xs")}영상 ${c.soc[1]}</span>` : ""}</span>
+      <span class="tags">${c.booking.next ? `<span class="tag tag-ember">${ic("#l-alarm-clock", "i-xs")}${c.booking.next.time_known ? hm(c.booking.next.at) : md(c.booking.next.at)} 오픈</span>` : ""}${applications.length ? `<span class="tag tag-green">${ic("#l-circle-check", "i-xs")}공식 접수 중${state.checkIn && state.checkOut ? " · 날짜 일치" : ""}</span>` : ""}${isRealtime(c) ? `<span class="tag">${ic("#l-zap", "i-xs")}온라인 예약 채널</span>` : ""}${kinds}${petOk(c) ? `<span class="tag">${ic("#l-dog", "i-xs")}반려견</span>` : ""}${c.soc?.[0] ? `<span class="tag">${ic("#l-message-circle", "i-xs")}후기 ${c.soc[0]}</span>` : ""}${c.soc?.[1] ? `<span class="tag">${ic("#l-play", "i-xs")}영상 ${c.soc[1]}</span>` : ""}</span>
       <span class="price">${c.fee?.min ? `<b>${band(c.fee.min)}부터</b><span>공식 안내 요금</span>` : `<span>요금은 예약처에서 확인</span>`}</span>
     </span></button>`;
 }
 
 function renderChips() {
   const count = (pred) => ALL.filter(pred).length;
+  const openCount = () => count((c) => officialOpenRecords(c, { dateMatch: Boolean(state.checkIn && state.checkOut) }).length);
   $("#areaChips").innerHTML = AREAS.map((a) => `<button class="pill" type="button" data-area="${a}" aria-pressed="${state.area === a}">${a}</button>`).join("");
   // 권역을 고르면 그 안의 시군구로 한 단계 더 들어간다(캠핑장 많은 순).
   const sggs = state.area === "전국" ? [] : Object.entries(ALL.filter((c) => c.area === state.area).reduce((m, c) => ({ ...m, [sggKey(c)]: (m[sggKey(c)] ?? 0) + 1 }), {})).sort((a, b) => b[1] - a[1]);
@@ -131,7 +159,8 @@ function renderChips() {
   $("#filterChips").innerHTML = [
     `<button class="pill" type="button" data-toggle="savedOnly" aria-pressed="${state.savedOnly}">${ic("#l-heart", "i-sm")}관심 <span class="num">${state.saved.size}</span></button>`,
     map ? `<button class="pill" type="button" data-toggle="inView" aria-pressed="${state.inView}">${ic("#l-scan-search", "i-sm")}지도에 보이는 곳만</button>` : "",
-    `<button class="pill" type="button" data-toggle="realtime" aria-pressed="${state.realtime}">${ic("#l-zap", "i-sm")}실시간 예약 <span class="num">${count(isRealtime)}</span></button>`,
+    `<button class="pill" type="button" data-toggle="availabilityOnly" aria-pressed="${state.availabilityOnly}" ${isFreshAvailability() ? "" : "disabled"}>${ic("#l-circle-check", "i-sm")}공식 접수 중 <span class="num">${isFreshAvailability() ? openCount() : "-"}</span></button>`,
+    `<button class="pill" type="button" data-toggle="realtime" aria-pressed="${state.realtime}">${ic("#l-zap", "i-sm")}온라인 예약 채널 <span class="num">${count(isRealtime)}</span></button>`,
     ...Object.entries(KIND).filter(([k]) => k !== "RV_PITCH").map(([k, [l, i]]) => `<button class="pill" type="button" data-kind="${k}" aria-pressed="${state.kinds.has(k)}">${ic(i, "i-sm")}${l}</button>`),
     `<span class="sep"></span>`,
     `<button class="pill" type="button" data-toggle="pet" aria-pressed="${state.pet}">${ic("#l-dog", "i-sm")}반려견</button>`,
@@ -139,6 +168,28 @@ function renderChips() {
     `<button class="pill" type="button" data-toggle="toilet" aria-pressed="${state.toilet}">${ic("#l-toilet", "i-sm")}공중화장실 500m</button>`,
     `<label class="pill">${ic("#l-ruler", "i-sm")}<select data-gear aria-label="내 장비 크기">${GEAR.map(([v, l]) => `<option value="${v}" ${state.gear === v ? "selected" : ""}>${l}</option>`).join("")}</select></label>`,
   ].join("");
+}
+
+function renderAvailabilityQuery() {
+  const checkIn = $("#checkIn"), checkOut = $("#checkOut"), clear = $("#availabilityClear"), notice = $("#availabilityNotice");
+  if (!checkIn || !checkOut || !clear || !notice) return;
+  checkIn.value = state.checkIn;
+  checkOut.value = state.checkOut;
+  checkOut.min = state.checkIn || "";
+  clear.hidden = !(state.checkIn || state.checkOut || state.availabilityOnly);
+  const seoul = `<a href="https://yeyak.seoul.go.kr/web/main.do" target="_blank" rel="noopener">서울 공공예약에서 최종 확인</a>`;
+  const nationalPark = `<a href="https://reservation.knps.or.kr/reservation/searchCampRemainSite.do" target="_blank" rel="noopener">국립공원 잔여 현황</a>`;
+  const forest = `<a href="https://www.foresttrip.go.kr/rep/or/fcfsRsrvtMain.do?hmpgId=0116&amp;menuId=001001" target="_blank" rel="noopener">숲나들e 예약</a>`;
+  if (!isFreshAvailability()) {
+    notice.innerHTML = `${ic("#l-info", "i-xs")}<span>공식 접수 상태를 갱신 중입니다. 잔여 수량은 제공 가능한 공식 API·제휴 채널이 연결될 때만 표시합니다. ${nationalPark} · ${forest}</span>`;
+    return;
+  }
+  const isDateQuery = Boolean(state.checkIn && state.checkOut);
+  const records = AVAILABILITY.records.filter((record) => record.state === "OFFICIAL_APPLICATION_OPEN" && (!isDateQuery || coversStay(record)));
+  const camps = new Set(records.map((record) => record.campground_id)).size;
+  const observed = hm(AVAILABILITY.generated_at) || ymd(AVAILABILITY.generated_at);
+  const dateCopy = isDateQuery ? `${state.checkIn.replaceAll("-", ".")} ~ ${state.checkOut.replaceAll("-", ".")} 숙박 기준 ` : "";
+  notice.innerHTML = `${ic("#l-shield-check", "i-xs")}<span><b>${dateCopy}공식 접수 중 ${camps.toLocaleString()}곳 · ${records.length.toLocaleString()}개 상품</b> · 서울시 API ${observed} 확인. 이는 빈자리 수·결제 확정이 아닙니다. ${seoul} · ${nationalPark} · ${forest}</span>`;
 }
 
 /* ---------- 둘러보기: 테마 공간 ---------- */
@@ -159,19 +210,23 @@ function renderHub() {
   // 테마 둘러보기는 별도 메뉴(테마 → themes/)로 옮겼다. 목록 위에는 고른 테마 머리만 둔다.
   hub.innerHTML = "";
 }
-const titleOf = (n) => (state.q.trim() ? `‘${state.q.trim()}’ 검색 결과 ${n.toLocaleString()}곳` : `캠핑장 ${n.toLocaleString()}곳`);
+const titleOf = (n) => state.availabilityOnly
+  ? `${state.checkIn && state.checkOut ? `${state.checkIn.replaceAll("-", ".")} ~ ${state.checkOut.replaceAll("-", ".")} ` : ""}공식 접수 중 ${n.toLocaleString()}곳`
+  : (state.q.trim() ? `‘${state.q.trim()}’ 검색 결과 ${n.toLocaleString()}곳` : `캠핑장 ${n.toLocaleString()}곳`);
 function renderListOnly() {
   const list = filtered();
   $("#resultTitle").textContent = titleOf(list.length);
   $("#cards").innerHTML = list.length ? list.slice(0, state.shown).map(card).join("") : emptyBox();
   $("#moreBtn").hidden = list.length <= state.shown;
 }
-const emptyBox = () => `<div class="empty">${ic("#t-tent-off")}<b>${state.savedOnly && !state.saved.size ? "아직 관심 캠핑장이 없어요" : "조건에 맞는 캠핑장이 없어요"}</b><span data-wrap-ok>${state.savedOnly && !state.saved.size ? "상세 화면의 하트를 누르면 이 기기에 저장돼요." : state.inView ? "지도를 옮기거나 축소해 보세요." : "필터를 줄여 보세요."}</span></div>`;
+const emptyBox = () => `<div class="empty">${ic("#t-tent-off")}<b>${state.savedOnly && !state.saved.size ? "아직 관심 캠핑장이 없어요" : state.availabilityOnly ? "현재 확인 가능한 공식 접수 상태가 없어요" : "조건에 맞는 캠핑장이 없어요"}</b><span data-wrap-ok>${state.savedOnly && !state.saved.size ? "상세 화면의 하트를 누르면 이 기기에 저장돼요." : state.availabilityOnly ? "모든 예약처가 잔여 수량 API를 제공하지는 않습니다. 날짜를 바꾸거나 공식 예약처에서 최종 확인해 보세요." : state.inView ? "지도를 옮기거나 축소해 보세요." : "필터를 줄여 보세요."}</span></div>`;
 function renderList() {
   renderHub();
   const list = filtered();
   $("#resultTitle").textContent = titleOf(list.length);
-  $("#resultSub").textContent = META ? `고캠핑 ${ymd(META.sources[0]?.fetched_at)} 기준` : "";
+  $("#resultSub").textContent = state.availabilityOnly && isFreshAvailability()
+    ? `공식 접수 상태 ${ymd(AVAILABILITY.generated_at)} 확인 · 잔여 수량은 예약처에서 확정`
+    : (META ? `고캠핑 ${ymd(META.sources[0]?.fetched_at)} 기준` : "");
   $("#cards").innerHTML = list.length ? list.slice(0, state.shown).map(card).join("")
     : emptyBox();
   $("#moreBtn").hidden = list.length <= state.shown;
@@ -260,6 +315,18 @@ function providerBlock(c) {
     ${p.rules.map((r) => `<p class="pre" data-wrap-ok>${esc(r.summary ?? r.label)}</p>`).join("")}
     ${evs ? `<div class="ev">${evs}</div>` : ""}
     <span class="trust">${ic("#l-info", "i-xs")}예약처 공지 기준 · 시설마다 다를 수 있어요</span></div>`;
+}
+function officialStatusBlock(c) {
+  const records = officialOpenRecords(c, { dateMatch: Boolean(state.checkIn && state.checkOut) });
+  if (!records.length) return "";
+  const dateRequested = state.checkIn && state.checkOut;
+  const line = (record) => {
+    const use = record.use?.from ? `${String(record.use.from).slice(0, 10).replaceAll("-", ".")}~${String(record.use?.to ?? record.use.from).slice(0, 10).replaceAll("-", ".")}` : "이용 기간 미상";
+    return `<a class="row" href="${esc(record.source_url)}" target="_blank" rel="noopener"><span class="tag tag-green">${esc(record.status_text ?? "접수중")}</span><span data-wrap-ok>${esc(record.product_name)} · ${esc(use)} · 원문 열기${ic("#l-arrow-up-right", "i-xs")}</span></a>`;
+  };
+  const observed = hm(AVAILABILITY?.generated_at) || ymd(AVAILABILITY?.generated_at);
+  const expires = hm(AVAILABILITY?.expires_at) || ymd(AVAILABILITY?.expires_at);
+  return `<div class="sub"><h4>${ic("#l-shield-check", "i-sm")}공식 접수 상태${dateRequested ? " · 선택 날짜 일치" : ""}</h4>${records.map(line).join("")}<span class="trust ok">${ic("#l-info", "i-xs")}${esc(AVAILABILITY?.source?.name ?? "공식 원천")} · ${observed} 확인 · ${expires} 이후 자동 만료 · 잔여 수량·결제 가능 여부는 예약처에서 확정</span></div>`;
 }
 const md = (iso) => { const k = kst(iso); return k ? `${k.mo}.${p2(k.d)}(${"일월화수목금토"[k.wd]})` : ""; };
 const hm = (iso) => { const k = kst(iso); return k ? `${md(iso)} ${p2(k.h)}:${p2(k.mi)}` : ""; };
@@ -497,7 +564,7 @@ function detail(c) {
       <div class="tags">${c.booking.methods.map((m) => `<span class="tag ${/실시간/.test(m) ? "tag-green" : ""}">${esc(m)}</span>`).join("") || `<span class="tag">예약 방법 정보 없음</span>`}</div>
       ${target ? `<a class="btn btn-primary" href="${esc(target.href)}" ${target.ext ? 'target="_blank" rel="noopener"' : ""}>${ic(target.ext ? "#l-external-link" : "#l-phone", "i-sm")}${target.label}</a>` : ""}
       ${bookingPaths(c)}
-      ${c.seoul.length ? `<div class="sub"><h4>서울 공공예약 접수 상태</h4>${c.seoul.map((s) => `<a class="row" href="${esc(s.url)}" target="_blank" rel="noopener"><span class="tag ${/접수중/.test(s.status ?? "") ? "tag-green" : ""}">${esc(s.status ?? "상태 없음")}</span><span data-wrap-ok>${esc(s.name)}${s.to ? ` · ${ymd(s.to)}까지` : ""}</span></a>`).join("")}<span class="trust ok">${ic("#l-shield-check", "i-xs")}서울 열린데이터광장 · ${ymd(c.seoul[0].checked_at)} 확인</span></div>` : ""}
+      ${officialStatusBlock(c)}
       ${guideBlock(c, d)}
       <p class="note" data-wrap-ok>빈자리와 최종 요금은 예약처 화면에서 확정됩니다. 모여라 캠핑은 결제를 받지 않고 공식 예약처로 연결합니다.</p>
     </section>
@@ -601,6 +668,9 @@ function syncHash() {
   if (state.sgg) h.set("g", state.sgg);
   if (state.q.trim()) h.set("q", state.q.trim());
   if (state.kinds.size) h.set("k", [...state.kinds].join(","));
+  if (state.checkIn) h.set("ci", state.checkIn);
+  if (state.checkOut) h.set("co", state.checkOut);
+  if (state.availabilityOnly) h.set("av", "1");
   history.replaceState(null, "", h.toString() ? `#${h}` : location.pathname);
 }
 const share = (c) => shareUrl(campUrl(c), `${c.name} · 모여라 캠핑`);
@@ -627,6 +697,9 @@ window.addEventListener("hashchange", () => {
   if (h.get("c")) return;
   state.q = h.get("q") ?? ""; state.kinds = new Set(h.get("k") ? h.get("k").split(",") : []);
   state.theme = h.get("t") ?? ""; state.area = AREAS.includes(h.get("a")) ? h.get("a") : "전국"; state.sgg = h.get("g") ?? "";
+  state.checkIn = /^\d{4}-\d{2}-\d{2}$/.test(h.get("ci") ?? "") ? h.get("ci") : "";
+  state.checkOut = /^\d{4}-\d{2}-\d{2}$/.test(h.get("co") ?? "") ? h.get("co") : "";
+  state.availabilityOnly = h.get("av") === "1";
   $("#q").value = state.q; rerender();
 });
 window.addEventListener("popstate", () => {
@@ -635,9 +708,9 @@ window.addEventListener("popstate", () => {
 });
 
 /* ---------- 이벤트 ---------- */
-function rerender(resetPage = true) { if (resetPage) state.shown = PAGE; save(); renderChips(); renderList(); }
+function rerender(resetPage = true) { if (resetPage) state.shown = PAGE; save(); renderAvailabilityQuery(); renderChips(); renderList(); }
 document.addEventListener("click", (e) => {
-  const t = e.target.closest("[data-open],[data-close],[data-save],[data-share],[data-share-theme],[data-jump],[data-near],[data-copy],[data-video],[data-roadview],[data-th],[data-sgg],[data-area],[data-kind],[data-toggle],#moreBtn,#viewSwitch,#clearQ,#nearBtn");
+  const t = e.target.closest("[data-open],[data-close],[data-save],[data-share],[data-share-theme],[data-jump],[data-near],[data-copy],[data-video],[data-roadview],[data-th],[data-sgg],[data-area],[data-kind],[data-toggle],#moreBtn,#viewSwitch,#clearQ,#nearBtn,#availabilityRun,#availabilityClear");
   if (!t) return;
   if (t.dataset.jump) { const el = document.getElementById(t.dataset.jump); return el?.scrollIntoView({ behavior: "smooth", block: "start" }); }
   if (t.dataset.near) {
@@ -663,12 +736,20 @@ document.addEventListener("click", (e) => {
   if (t.dataset.share) return share(ALL.find((x) => x.id === t.dataset.share));
   if (t.dataset.open) return openDetail(t.dataset.open);
   if (t.hasAttribute("data-close")) return closeDetail();
+  if (t.id === "availabilityRun") {
+    const checkIn = $("#checkIn").value, checkOut = $("#checkOut").value;
+    if (!checkIn || !checkOut) return toast("입실일과 퇴실일을 모두 골라 주세요");
+    if (!(dayValue(checkIn) < dayValue(checkOut))) return toast("퇴실일은 입실일 다음 날짜여야 해요");
+    state.checkIn = checkIn; state.checkOut = checkOut; state.availabilityOnly = true; syncHash(); rerender();
+    return $(".list-col")?.scrollIntoView({ block: "start", behavior: "smooth" });
+  }
+  if (t.id === "availabilityClear") { state.checkIn = ""; state.checkOut = ""; state.availabilityOnly = false; syncHash(); return rerender(); }
   if (t.dataset.area) { state.area = t.dataset.area; state.sgg = ""; syncHash(); return rerender(); }
   if (t.dataset.sgg !== undefined) { state.sgg = t.dataset.sgg; syncHash(); return rerender(); }
   if (t.dataset.th !== undefined) { state.theme = t.dataset.th; syncHash(); rerender(); return $(".list-col")?.scrollIntoView({ block: "start", behavior: "smooth" }); }
   if (t.hasAttribute("data-share-theme")) return shareUrl(`${location.origin}${location.pathname}${location.hash}`, `${META.themes.find((x) => x.id === state.theme)?.label ?? ""} 캠핑장 · 모여라 캠핑`);
-  if (t.dataset.kind) { state.kinds.has(t.dataset.kind) ? state.kinds.delete(t.dataset.kind) : state.kinds.add(t.dataset.kind); return rerender(); }
-  if (t.dataset.toggle) { state[t.dataset.toggle] = !state[t.dataset.toggle]; return rerender(); }
+  if (t.dataset.kind) { state.kinds.has(t.dataset.kind) ? state.kinds.delete(t.dataset.kind) : state.kinds.add(t.dataset.kind); syncHash(); return rerender(); }
+  if (t.dataset.toggle) { state[t.dataset.toggle] = !state[t.dataset.toggle]; syncHash(); return rerender(); }
   if (t.id === "moreBtn") { state.shown += PAGE; return renderList(); }
   if (t.id === "clearQ") { state.q = ""; $("#q").value = ""; return rerender(); }
   if (t.id === "viewSwitch") {
@@ -730,15 +811,19 @@ async function boot() {
   // 댓글(giscus) 설정은 배포 시 메타 태그로 넣는다. 없으면 댓글 칸에 준비 중 안내.
   try { window.GISCUS = JSON.parse(document.querySelector('meta[name="giscus"]')?.content || "null"); } catch {}
   try {
-    const [cg, meta] = await Promise.all([fetch("data/campgrounds.json").then((r) => r.json()), fetch("data/meta.json").then((r) => r.json()).catch(() => null)]);
-    ALL = cg.map(withDefaults); META = meta;
+    const [cg, meta, availability] = await Promise.all([
+      fetch("data/campgrounds.json").then((r) => r.json()),
+      fetch("data/meta.json").then((r) => r.json()).catch(() => null),
+      fetch("data/availability.json", { cache: "no-store" }).then((r) => r.ok ? r.json() : null).catch(() => null),
+    ]);
+    ALL = cg.map(withDefaults); META = meta; AVAILABILITY = availability;
     for (const t of META?.themes ?? []) THEME_LABEL[t.id] = t.label;
   } catch (e) {
     $("#cards").innerHTML = `<div class="empty">${ic("#l-circle-alert")}<b>데이터를 불러오지 못했어요</b><span data-wrap-ok>잠시 후 다시 시도해 주세요.</span></div>`;
     return;
   }
   if (state.q) $("#q").value = state.q;
-  renderChips(); renderList(); head(); initMap();
+  renderAvailabilityQuery(); renderChips(); renderList(); head(); initMap();
   // 목록 끝에 닿으면 자동으로 더 불러온다(수백 곳도 끊김 없이).
   new IntersectionObserver((es) => { if (es.some((x) => x.isIntersecting) && !$("#moreBtn").hidden) { state.shown += PAGE; renderListOnly(); } }, { rootMargin: "600px" }).observe($("#moreBtn"));
   if (state.open) openDetail(state.open);

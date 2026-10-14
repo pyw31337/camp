@@ -15,6 +15,10 @@ const shellOnly = shellIdx > 0 ? (process.argv[shellIdx + 1] ?? `${root}camping-
 if (!shellOnly && !existsSync(`${dataDir}/campgrounds.json`)) { console.log("::warning title=탐색 화면 발행 건너뜀::pipeline/out/explore가 없습니다(npm run build:explore 먼저)."); process.exit(0); }
 const out = shellOnly ?? `${root}camping-atlas/public/explore/`;
 if (shellOnly && !existsSync(`${out}data/campgrounds.json`)) { console.log("::notice::탐색 데이터가 아직 없어 화면만 갱신하지 않습니다."); process.exit(0); }
+// 공식 접수 상태는 30분마다 독립 갱신된다. 일일 카탈로그 발행이 원천 장애를
+// 이유로 이 짧은 TTL 파일을 지우면 오래된 상태를 보일 수 있으므로, 성공한 새
+// 파일이 없을 땐 이전 파일을 그대로 보존한다(브라우저는 expires_at 이후 무시).
+const previousAvailability = !shellOnly && existsSync(`${out}data/availability.json`) ? await readFile(`${out}data/availability.json`) : null;
 if (!shellOnly) { await rm(out, { recursive: true, force: true }); await mkdir(`${out}data`, { recursive: true }); }
 const kakaoKey = (process.env.KAKAO_JS_KEY ?? "").replace(/[^A-Za-z0-9]/g, "");
 // 댓글(giscus) 설정: 저장소 변수 GISCUS_CONFIG = {"repo":"pyw31337/camp","repoId":"…","category":"…","categoryId":"…"}
@@ -53,6 +57,8 @@ await cp(`${dataDir}/campgrounds.json`, `${out}data/campgrounds.json`);
 await cp(`${dataDir}/meta.json`, `${out}data/meta.json`);
 if (existsSync(`${dataDir}/featured.json`)) await cp(`${dataDir}/featured.json`, `${out}data/featured.json`);
 if (existsSync(`${dataDir}/openings.json`)) await cp(`${dataDir}/openings.json`, `${out}data/openings.json`);
+if (existsSync(`${dataDir}/availability.json`)) await cp(`${dataDir}/availability.json`, `${out}data/availability.json`);
+else if (previousAvailability) await writeFile(`${out}data/availability.json`, previousAvailability);
 if (existsSync(`${dataDir}/camps`)) await cp(`${dataDir}/camps`, `${out}data/camps`, { recursive: true });
 await writeUtilityPages();
 

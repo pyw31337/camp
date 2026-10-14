@@ -322,6 +322,9 @@ jobs:
         if: always()
         run: |
           npm run build:explore
+          # 서울 Open API가 응답한 경우에만 짧은 TTL의 공식 접수 상태를 붙인다.
+          # 원천이 없거나 실패하면 직전 상태 파일을 보존하되, 화면은 expires_at 이후 이를 무시한다.
+          if [ -s out/seoul-yeyak.json ]; then npm run build:availability; else echo "::notice::서울 공공예약 원천이 없어 상태 파일을 새로 만들지 않습니다."; fi
           cd .. && node scripts/publish-explorer-pages.mjs
           # PR은 생성만 검사한다. main은 catalog·explorer를 원자적으로 갱신한다.
           if [ "${{ github.event_name }}" = "pull_request" ]; then

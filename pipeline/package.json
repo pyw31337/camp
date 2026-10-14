@@ -26,6 +26,7 @@
     "db:import-licences": "node scripts/import-licences-postgres.mjs",
     "sync:tour-fees": "node scripts/sync-tour-fees.mjs",
     "build:explore": "node scripts/build-explore-data.mjs",
+    "build:availability": "node scripts/build-availability-read-model.mjs",
     "sync:seoul-yeyak": "node scripts/sync-seoul-yeyak.mjs",
     "sync:nearby": "node scripts/sync-nearby-context.mjs",
     "sync:images": "node scripts/sync-images.mjs",
