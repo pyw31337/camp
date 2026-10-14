@@ -955,8 +955,11 @@ function allPhotos(c, d) {
     const large = p.l ?? largeLocalPhoto(p.t);
     return { t: MEDIA + large, l: MEDIA + large };
   });
-  const remoteUrls = [...(d?.photos_remote ?? []), ...(d?.tour_photos ?? []).map((x) => x.url ?? x), c.img].filter(Boolean);
-  const remote = [...new Set(remoteUrls)].map((u) => ({ t: u, l: u, remote: true }));
+  // 같은 사진이 대표 사진(thumb_720_파일)·갤러리(파일)로 두 번 오지 않게 파일 이름으로 거른다. 저장 사진과 같은 대표 사진은 img_dup.
+  const key = (u) => String(u).split(/[?#]/)[0].split("/").pop().toLowerCase().replace(/^thumb_\d+_/, "");
+  const remoteUrls = [...(d?.photos_remote ?? []), ...(d?.tour_photos ?? []).map((x) => x.url ?? x), d?.img_dup || (own.length && !d) ? null : c.img].filter(Boolean);
+  const seen = new Set();
+  const remote = remoteUrls.filter((u) => !seen.has(key(u)) && seen.add(key(u))).map((u) => ({ t: u, l: u, remote: true }));
   return [...own, ...remote];
 }
 function mediaBlock(c, d) {
