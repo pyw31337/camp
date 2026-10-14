@@ -6,6 +6,7 @@ import { buildCampDetails, buildExploreRecords, buildProviders } from "../lib/ex
 import { themeCatalog } from "../lib/themes.mjs";
 import { buildBookingGuide } from "../lib/booking-intel.mjs";
 import { buildOpenings } from "../lib/openings.mjs";
+import { nameCore, refilterSocial } from "../lib/social-search.mjs";
 import { allocateUnique, dhashFile, photoKey, uniqueBy, uniqueByHash } from "../lib/photo-dedupe.mjs";
 import { SEOUL_DATASET_URL, matchSeoulToCampgrounds } from "../lib/seoul-yeyak.mjs";
 
@@ -120,6 +121,9 @@ console.log(`예약 안내 ${guided}곳 · 확정 오픈 일정 ${withOpen}곳`)
 // 고캠핑 imageList(공식 사진) 중 아직 자체 저장하지 않은 것은 원본 주소로 바로 보여 준다(고캠핑 공식 이미지 서버).
 const imageListCache = await read("../.cache/gocamping-images.json") ?? {};
 // 관광공사 객실·사이트 상품(공식 등록 기준가·상품 사진)과 공식 사진
+// 같은 시군구의 다른 캠핑장 핵심어(후기 제목이 다른 캠핑장을 가리키는지 판정용)
+const coresBySigungu = new Map();
+for (const c of camps.campgrounds ?? []) { const k = `${c.address?.sido ?? ""} ${c.address?.sigungu ?? ""}`; if (!coresBySigungu.has(k)) coresBySigungu.set(k, []); coresBySigungu.get(k).push(nameCore(c.name, c.address?.sigungu)); }
 // 검색 사진 썸네일이 몇 곳에 붙었는지(같은 썸네일이 여러 캠핑장에 붙으면 공통·오매칭 사진)
 const snapCamps = new Map(), usedSnaps = new Set();
 for (const [cid, so] of Object.entries(social?.campgrounds ?? {})) for (const x of so.image ?? []) if (x.thumb) snapCamps.set(x.thumb, (snapCamps.get(x.thumb) ?? new Set()).add(cid));
@@ -131,7 +135,9 @@ for (const [id, d] of Object.entries(details)) {
     if (pr.photos?.length) d.tour_photos = pr.photos.map((x) => x.url);
     d.products_src = { url: pr.source_url, checked_at: pr.checked_at, basis: "한국관광공사 TourAPI 공식 등록 기준가(최소 요금)" };
   }
-  const so = social?.campgrounds?.[id];
+  // 캐시된 후기에도 최신 관련성 규칙을 다시 적용하고(지명만 겹친 버스·산행 글 제거) 정보량 점수(q)를 붙인다.
+  const soRaw = social?.campgrounds?.[id], gc = byId.get(id);
+  const so = soRaw && gc ? refilterSocial(gc, soRaw, { others: coresBySigungu.get(`${gc.address?.sido ?? ""} ${gc.address?.sigungu ?? ""}`) ?? [] }) : soRaw;
   if (so) {
     if (so.blog?.length) d.reviews = so.blog;
     if (so.cafe?.length) d.cafe = so.cafe;

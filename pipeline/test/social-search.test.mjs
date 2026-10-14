@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
-  CAPS, buildQuery, buildSocialRecord, distinctiveTokens, isRelevant, kakaoSearch, nameCore, normalizeDoc,
+  CAPS, buildQuery, buildSocialRecord, distinctiveTokens, isRelevant, refilterSocial, reviewScore, kakaoSearch, nameCore, normalizeDoc,
   normalizeImage, normalizeVclip, pickDue, regionStem, searchUrl, stripHtml, summarize, youtubeId,
 } from "../lib/social-search.mjs";
 
@@ -71,10 +71,30 @@ test("isRelevant: 이름 포함·광고·짧은 이름·다른 캠핑장 제목"
   const short = { tokens: ["라하"], stem: "홍천", others: [] };
   assert.equal(isRelevant({ title: "라하 캠핑 후기" }, short), true);
   assert.equal(isRelevant({ title: "라하 호텔 조식 후기" }, short), false);
-  assert.equal(isRelevant({ title: "홍천 라하 다녀옴" }, short), true);
+  // 지역명이 같이 나오는 것만으로는 부족하다(산·마을 이름과 겹침) → 캠핑 관련어가 붙어야 한다.
+  assert.equal(isRelevant({ title: "홍천 라하 다녀옴" }, short), false);
+  assert.equal(isRelevant({ title: "홍천 라하 캠핑장 다녀옴" }, short), true);
+  // 실제 오검출(광명도덕산캠핑장): 지명만 같은 버스·산행 글
+  const ddk = { tokens: ["도덕산"], stem: "광명", others: [] };
+  assert.equal(isRelevant({ title: "자경마을버스 99번 8019호 KGM커머셜 스마트 9.3 EV", contents: "#전기버스 #99번 버스노선:99 광명 도덕산" }, ddk), false);
+  assert.equal(isRelevant({ title: "★5월2일(토) 도덕산,가학산 힘든산행", contents: "하안동 쪽에 캠핑장을 운영하고 있어" }, ddk), false);
+  assert.equal(isRelevant({ title: "광명 도덕산 캠핑장, 아이 데리고 당일치기" }, ddk), true);
   const multi = { tokens: ["낙힐", "포레스트"], stem: "가평", others: [] };
   assert.equal(isRelevant({ title: "낙힐 더 포레스트 글램핑" }, multi), true);
   assert.equal(isRelevant({ title: "가평 포레스트 캠핑" }, multi), false);
+});
+
+test("reviewScore·refilterSocial: 캐시된 후기에도 새 규칙 적용, 정보량 점수", () => {
+  const camp = { name: "광명도덕산캠핑장", address: { sigungu: "광명시" } };
+  const rec = { blog: [
+    { title: "광명도덕산캠핑장 A구역 명당 소개", snippet: "사이트 간격이 넓고 화장실 샤워장이 가깝다. 전기 사용 가능, 주차는 사이트 옆", thumb: "https://t/1" },
+    { title: "자경마을버스 99번 스마트 EV", snippet: "버스노선 99 광명 도덕산" },
+  ], cafe: [], vclip: [{ title: "광명 도덕산 캠핑장 B구역 데크 리뷰" }, { title: "도덕산 등산 브이로그" }] };
+  const out = refilterSocial(camp, rec);
+  assert.equal(out.blog.length, 1);
+  assert.ok(out.blog[0].q >= 70, `점수 ${out.blog[0].q}`);
+  assert.equal(out.vclip.length, 1);
+  assert.ok(reviewScore({ title: "도덕산 산길 산책", snippet: "가을" }, { tokens: ["도덕산"] }) < out.blog[0].q);
 });
 
 test("normalizeDoc·normalizeImage", () => {
