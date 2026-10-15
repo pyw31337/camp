@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-14T21:51:28.804Z",
+  "generated_at": "2026-10-15T21:29:22.896Z",
   "count": 3116,
   "sources": [
     {
@@ -7,7 +7,7 @@
       "name": "한국관광공사 고캠핑",
       "url": "https://www.data.go.kr/data/15101933/openapi.do",
       "tier": "A",
-      "fetched_at": "2026-10-15T06:41:00+09:00"
+      "fetched_at": "2026-10-16T06:23:00+09:00"
     },
     {
       "id": "pilot-condition-facts",
@@ -21,35 +21,28 @@
       "name": "행정안전부 공중화장실정보 · OpenStreetMap",
       "url": "https://file.localdata.go.kr/file/public_restroom_info/info",
       "tier": "A",
-      "fetched_at": "2026-10-15T06:47:00+09:00"
-    },
-    {
-      "id": "tour-fees",
-      "name": "한국관광공사 TourAPI 소개정보(안내 요금 문구)",
-      "url": "https://www.data.go.kr/data/15101578/openapi.do",
-      "tier": "B",
-      "fetched_at": "2026-10-15T06:49:00+09:00"
+      "fetched_at": "2026-10-16T06:26:00+09:00"
     },
     {
       "id": "seoul-yeyak",
       "name": "서울시 공공서비스예약 정보(접수 상태)",
       "url": "https://data.seoul.go.kr/dataList/OA-20497/S/1/datasetView.do",
       "tier": "A",
-      "fetched_at": "2026-10-14T21:50:07.755Z"
+      "fetched_at": "2026-10-15T21:28:13.113Z"
     },
     {
       "id": "nearby",
       "name": "주변 정보: 한국관광공사 TourAPI · OpenStreetMap(ODbL) · 도로공사/졸음쉼터",
       "url": "https://www.openstreetmap.org/copyright",
       "tier": "B",
-      "fetched_at": "2026-10-15T06:49:00+09:00"
+      "fetched_at": "2026-10-16T06:28:00+09:00"
     },
     {
       "id": "calendar",
       "name": "모여라 캠핑 예약 규칙 레지스트리",
       "url": "https://github.com/pyw31337/camp/blob/main/pipeline/registry/booking-rules.json",
       "tier": "B",
-      "fetched_at": "2026-10-14T21:41:30.033Z"
+      "fetched_at": "2026-10-15T21:23:23.616Z"
     }
   ],
   "providers": [
@@ -219,22 +212,6 @@
         }
       ],
       "events": [
-        {
-          "type": "REOPEN",
-          "at": "2026-10-15T09:00:00+09:00",
-          "time_known": true,
-          "label": "국립자연휴양림 주말 미결제분 선착순",
-          "stay": {
-            "month": "2026-11"
-          },
-          "needs_verification": true,
-          "source": {
-            "url": "https://www.foresttrip.go.kr/pot/cc/fa/selectFaqBbrssListView.do?bbrssMsterId=BBRSSMSTER_00000002&ctgryCd=&hmpgId=FRIP&nowPage=1&srwrd=%EC%A3%BC%EC%A4%91&twbbsId=",
-            "title": "숲나들e 자주 묻는 질문 — 미결제분 전환(일자는 공지 재확인 필요)",
-            "checked_at": "2026-10-12",
-            "tier": "C"
-          }
-        },
         {
           "type": "OPEN",
           "at": "2026-10-21T09:00:00+09:00",
@@ -466,6 +443,22 @@
             "checked_at": "2026-10-12",
             "tier": "B"
           }
+        },
+        {
+          "type": "LOTTERY_APPLY_START",
+          "at": "2026-12-04T09:00:00+09:00",
+          "time_known": true,
+          "label": "국립자연휴양림 주말·공휴일 추첨 신청",
+          "stay": {
+            "month": "2027-01"
+          },
+          "needs_verification": true,
+          "source": {
+            "url": "https://www.foresttrip.go.kr/pot/cc/fa/selectFaqBbrssListView.do?bbrssMsterId=BBRSSMSTER_00000002&ctgryCd=&hmpgId=FRIP&nowPage=1&srwrd=%EC%A3%BC%EC%A4%91&twbbsId=",
+            "title": "숲나들e 자주 묻는 질문 — 주말 추첨·미결제분 전환 절차(일자는 공지 재확인 필요)",
+            "checked_at": "2026-10-12",
+            "tier": "C"
+          }
         }
       ]
     },
@@ -498,7 +491,7 @@
       "label": "계곡 옆",
       "icon": "#l-waves",
       "desc": "계곡을 끼고 있는 캠핑장",
-      "count": 1063
+      "count": 1064
     },
     {
       "id": "sea",
@@ -514,7 +507,7 @@
       "label": "숲속",
       "icon": "#l-trees",
       "desc": "숲 입지, 그늘 많은 사이트",
-      "count": 1029
+      "count": 1034
     },
     {
       "id": "lake",
@@ -618,7 +611,7 @@
       "label": "오토캠핑",
       "icon": "#l-car",
       "desc": "차를 사이트 옆에",
-      "count": 827
+      "count": 832
     },
     {
       "id": "trailer",
@@ -650,7 +643,7 @@
       "label": "편의시설 완비",
       "icon": "#l-plug-zap",
       "desc": "전기·온수·장작·마트",
-      "count": 685
+      "count": 688
     },
     {
       "id": "wifi",
@@ -678,29 +671,30 @@
     }
   ],
   "stats": {
-    "with_booking_url": 1412,
-    "online_realtime": 1693,
+    "with_booking_url": 1417,
+    "online_realtime": 1698,
     "with_fee_text": 0,
-    "with_nearby_toilet": 997,
+    "with_nearby_toilet": 999,
     "with_image": 2344,
-    "with_intro": 1624,
+    "with_intro": 1629,
     "with_seoul_status": 6,
     "seoul_services": 36,
-    "with_products": 5,
+    "with_products": 0,
     "with_social": 3120,
     "with_self_hosted_photo": 2371,
     "with_nearby": 3111,
     "field_conditions": 3116,
     "electricity_registered": 2114,
+    "shelter_setup_registered": 0,
     "site_size_registered": 869,
     "ground_registered": 1583,
-    "naver_booking_channel": 405,
-    "camfit_booking_channel": 209,
+    "naver_booking_channel": 406,
+    "camfit_booking_channel": 211,
     "official_notice_camps": 0,
     "official_notice_items": 0,
-    "shelter_setup_registered": 0,
     "verified_condition_facts": 10,
     "surveyed_condition_facts": 251,
+    "confirmed_condition_facts": 2855,
     "parking_tent_side": 17,
     "parking_cart_required": 17,
     "parking_shared": 1,
@@ -708,12 +702,11 @@
     "firewood_allowed": 85,
     "firewood_prohibited": 110,
     "private_bathroom": 137,
-    "kids_play_features": 2174,
-    "confirmed_condition_facts": 2855
+    "kids_play_features": 2174
   },
-  "updated_at": "2026-10-15T08:29:58.577Z",
+  "updated_at": "2026-10-15T21:29:29.773Z",
   "spec_sheet": {
-    "generated_at": "2026-10-15T09:03:42.676Z",
+    "generated_at": "2026-10-15T21:29:29.910Z",
     "campgrounds_with_spec": 816,
     "roundup_reviews_skipped": 2463,
     "fields": {
