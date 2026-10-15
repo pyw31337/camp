@@ -1,0 +1,131 @@
+/* ==========================================================================
+   탐색 v3 “Moss & Canvas” (2026-10-15) — Taste ‘Camp’ 컬렉션 분석 기반.
+   _base.css·_page.css 뒤에 실린다. 원칙(docs/DESIGN_SYSTEM.md v3):
+   1) 사진이 먼저, 정보는 사진 위 유리 패널·아래 본문으로.
+   2) 탁한 흙·이끼·캔버스 톤 + 밤 숲(night) 대비. 색은 의미에만(이끼=행동/확인, 불씨=곧·주의).
+   3) 알약형 조작, 큰 모서리(20/28/36), 그림자는 2단계.
+   4) 정보량은 해상도와 무관하게 같다. 좁은 화면은 줄이고(축약·가로 스크롤·접기) 지우지 않는다.
+   ========================================================================== */
+
+body { background: var(--mc-canvas); }
+h1, h2 { color: var(--mc-ink); }
+
+/* ---------- 검색 바: 캔버스 유리 + 큰 알약 검색 ---------- */
+.bar { background: color-mix(in srgb, var(--mc-canvas) 90%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid color-mix(in srgb, var(--mc-line) 70%, transparent); }
+.q { min-height: 3.25rem; padding: 0 18px; border-radius: 999px; background: var(--mc-paper); border: 1px solid var(--mc-line); box-shadow: var(--mc-shadow-1); }
+.q:focus-within { border-color: var(--mc-ink-3); box-shadow: 0 0 0 4px color-mix(in srgb, var(--mc-sage) 35%, transparent); }
+.near-btn { min-height: 3.25rem; background: var(--mc-paper); border-color: var(--mc-line); }
+.near-btn[aria-pressed="true"] { background: var(--mc-solid); border-color: var(--mc-solid); color: var(--mc-on-solid); }
+/* 정보 균일: 좁은 화면에서도 ‘내 주변’ 글자를 지우지 않는다(짧게만). */
+@media (max-width: 420px) { .near-btn { padding: 0 12px; } .near-btn span { display: inline; font-size: var(--fs-xs); } }
+
+.pill { min-height: 2.375rem; padding: 0 14px; border-color: var(--mc-line); background: var(--mc-paper); color: var(--mc-ink-2); font-weight: 650; }
+.pill:hover { border-color: var(--mc-ink-3); color: var(--mc-ink); }
+.pill[aria-pressed="true"] { background: var(--mc-solid); border-color: var(--mc-solid); color: var(--mc-on-solid); }
+.pill-sub { background: transparent; }
+
+.availability-query, .setup-query { border-radius: var(--mc-r-2); border-color: var(--mc-line); background: var(--mc-paper); }
+.availability-run { border-radius: 999px; background: var(--mc-solid); color: var(--mc-on-solid); }
+
+/* 밤색(--forest)은 면 색으로만 쓴다. 글자에 쓰면 다크 모드에서 사라지므로 잉크·이끼로 바꾼다. */
+.availability-copy b, .setup-query summary b, .dv-sec > h3, .act[aria-pressed="true"] { color: var(--mc-ink); }
+.saved-mark, .passport-head > span { color: var(--mc-moss); }
+
+/* ---------- 결과 머리: 큰 글자 ---------- */
+.results-head { align-items: flex-end; margin: 4px 0 16px; }
+.results-head h1 { font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem); font-weight: 850; letter-spacing: -0.05em; line-height: 1.1; }
+.sort select { border-radius: 999px; }
+
+/* ---------- 카드: 사진이 위, 유리 배지는 사진 위, 정보는 그대로 아래 ---------- */
+.cards { grid-template-columns: repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr)); gap: 16px; }
+.card { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 0; overflow: hidden; border-radius: var(--mc-r-3); background: var(--mc-paper); border: 1px solid color-mix(in srgb, var(--mc-line) 80%, transparent); box-shadow: var(--mc-shadow-1); transition: transform .18s ease, box-shadow .18s ease, border-color .18s; text-align: left; }
+.card:hover { transform: translateY(-2px); box-shadow: var(--mc-shadow-2); border-color: var(--mc-line); }
+.card[aria-current="true"] { border-color: var(--mc-moss); box-shadow: 0 0 0 2px color-mix(in srgb, var(--mc-moss) 40%, transparent), var(--mc-shadow-2); }
+.card .thumb { width: 100%; height: auto; aspect-ratio: 16 / 10; border-radius: 0; background: linear-gradient(160deg, var(--mc-sand), var(--mc-sand-2)); color: var(--mc-ink-3); }
+.card .thumb img { transition: transform .5s ease; }
+.card:hover .thumb img { transform: scale(1.04); }
+.card .thumb::after { content: ""; position: absolute; inset: auto 0 0; height: 42%; background: linear-gradient(transparent, rgba(12, 16, 11, .38)); pointer-events: none; }
+.card-body { gap: 7px; padding: 14px 16px 16px; }
+.card-title h3 { font-size: 1.125rem; font-weight: 820; letter-spacing: -0.04em; }
+.tags { max-height: none; overflow: visible; }
+.tag { min-height: 1.625rem; padding: 0 9px; background: var(--mc-canvas); color: var(--mc-ink-2); }
+.tag-green { background: var(--mc-moss-tint); color: var(--mc-moss-press); }
+.tag-ember { background: var(--mc-ember-tint); color: var(--mc-ember); }
+.tag-verified { background: var(--mc-solid); color: var(--mc-on-solid); }
+.tag-candidate { background: var(--mc-ember-tint); color: var(--mc-ember); border-color: transparent; }
+.tag-setup.match { background: var(--mc-moss-tint); color: var(--mc-moss-press); }
+.tag-setup.conditional { background: color-mix(in srgb, #c99a06 16%, var(--mc-paper)); color: color-mix(in srgb, #8a5b00 85%, var(--mc-ink)); }
+.tag-setup.mismatch { background: color-mix(in srgb, #c0392b 14%, var(--mc-paper)); color: color-mix(in srgb, #b3322f 85%, var(--mc-ink)); }
+.price b { color: var(--mc-ink); }
+.btn-compare { border-radius: 10px; background: var(--mc-paper); border-color: var(--mc-line); }
+
+/* 사진 위 근거 배지: 밤 유리 알약 + 의미 색 점 */
+.poster-emblems { top: 10px; left: 10px; right: 10px; gap: 6px; }
+.poster-badge { gap: 5px; padding: 4px 10px 4px 8px; background: var(--mc-glass) !important; border: 1px solid var(--mc-glass-line) !important; color: var(--mc-glass-ink) !important; font-size: 11px; font-weight: 750; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: none; }
+.poster-badge svg { color: var(--dot, #fff); }
+.poster-badge.badge-fire { --dot: #ff9b6b; } .poster-badge.badge-power { --dot: #ffd27a; } .poster-badge.badge-parking { --dot: #9fd0ff; }
+.poster-badge.badge-cart { --dot: #c9d6e2; } .poster-badge.badge-bath { --dot: #9fe0d2; } .poster-badge.badge-kids { --dot: #d9c2ff; } .poster-badge.badge-avail { --dot: #b8f0c6; }
+.snap-tag { left: 10px; bottom: 10px; z-index: 1; padding: 2px 8px; background: var(--mc-glass); border: 1px solid var(--mc-glass-line); backdrop-filter: blur(8px); }
+
+/* 허브(테마·추천 묶음) */
+.hub { border-radius: var(--mc-r-3); background: var(--mc-paper); border-color: var(--mc-line); }
+
+/* ---------- 지도 열 ---------- */
+.map-col { background: var(--mc-sand); border-left-color: var(--mc-line); }
+.mobile-switch { border-radius: 999px; background: var(--mc-solid) !important; color: var(--mc-on-solid) !important; box-shadow: var(--mc-shadow-2); }
+
+/* ---------- 상세 시트 ---------- */
+.sheet-panel { background: var(--mc-canvas); }
+.back-btn { border-radius: 999px; background: var(--mc-glass) !important; color: var(--mc-glass-ink) !important; border: 1px solid var(--mc-glass-line); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.dv-hero { border-radius: 0 0 var(--mc-r-3) var(--mc-r-3); }
+@media (min-width: 1081px) { .dv-hero { border-radius: var(--mc-r-3); } }
+/* 제목 카드가 사진 아래쪽을 살짝 덮는다(앱 상세의 시트 느낌). 정보는 그대로. */
+.dv-title { position: relative; z-index: 2; margin: -44px 12px 0; padding: 18px 20px 16px; border-radius: var(--mc-r-3); background: var(--mc-paper); border: 1px solid var(--mc-line); box-shadow: var(--mc-shadow-2); }
+.dv-title h2 { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem); font-weight: 860; letter-spacing: -0.05em; line-height: 1.15; }
+.dv-sec { border-radius: var(--mc-r-3); background: var(--mc-paper); border-color: color-mix(in srgb, var(--mc-line) 85%, transparent); box-shadow: var(--mc-shadow-1); }
+.dv-sec > h3, .dv-sec .dv-sub-head h3 { font-size: var(--fs-lg); font-weight: 850; letter-spacing: -0.04em; }
+.dv-nav button { border-radius: 999px; }
+.dv-actions a, .dv-actions button { border-radius: var(--mc-r-2); }
+.dv-book { background: var(--mc-night) !important; color: var(--mc-on-night); border-color: var(--mc-night) !important; }
+.dv-book h3, .dv-book b, .dv-book strong { color: var(--mc-on-night); }
+.dv-condition { border-radius: var(--mc-r-2); }
+.dv-condition.confirmed { border-color: color-mix(in srgb, var(--mc-moss) 35%, var(--mc-line)); }
+.grade-verified { background: var(--mc-solid); color: var(--mc-on-solid); }
+.grade-confirmed { background: var(--mc-moss-tint); color: var(--mc-moss-press); }
+.grade-surveyed { background: var(--mc-ember-tint); color: var(--mc-ember); }
+.grade-unknown { background: var(--mc-canvas); color: var(--mc-ink-3); }
+.prep-items li, .rv-topics, .dv-tarp-note, .dv-quick-essentials { border-radius: var(--mc-r-2); }
+.rv-topic-bar i { background: var(--mc-moss); }
+
+/* 하단 예약 바: 밤 유리 위 알약 버튼 */
+.d-cta { background: color-mix(in srgb, var(--mc-canvas) 86%, transparent) !important; border-top: 1px solid color-mix(in srgb, var(--mc-line) 70%, transparent); }
+.btn-cta-primary { border-radius: 999px; background: var(--mc-solid); color: var(--mc-on-solid); }
+.btn-cta-primary:hover { background: color-mix(in srgb, var(--mc-solid) 85%, var(--mc-moss)); }
+.btn-cta-primary.camfit, .btn-cta-primary.naver { color: #fff; }
+.btn-cta-primary.search { background: var(--mc-paper); color: var(--mc-ink); border: 1px solid var(--mc-line); }
+.btn-cta-secondary { border-radius: 999px; border-color: var(--mc-line); background: var(--mc-paper); }
+
+/* ---------- 비교 바·모달 ---------- */
+.compare-bar { border-radius: 999px; background: color-mix(in srgb, var(--mc-night) 92%, transparent); }
+.compare-btn { border-radius: 999px; background: var(--mc-sage); color: var(--mc-night); }
+.compare-dialog { border-radius: var(--mc-r-3); }
+.compare-col-head { background: var(--mc-canvas); }
+
+/* ---------- 정보 균일(해상도와 무관하게 같은 정보) ---------- */
+/* 정보 행의 라벨(주소·전화 등)은 좁은 화면에서도 남긴다: 값 위로 쌓는다. */
+@media (max-width: 420px) {
+  .dv-info > div { grid-template-columns: 1.5rem minmax(0, 1fr) auto; }
+  .dv-info small { display: block; grid-column: 2; font-size: var(--fs-2xs); }
+  .fs-btn small { display: inline; }
+}
+/* 사진 넘기기 버튼도 남긴다(스와이프와 함께). */
+@media (max-width: 640px) { .lb-nav { display: grid; width: 2.5rem; height: 2.5rem; } }
+
+/* ---------- 떠 있는 탭 바에 맞춘 하단 여백 ---------- */
+@media (max-width: 760px) {
+  .sheet { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+  .mobile-switch { bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+  .map-col { bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important; }
+  .compare-bar { bottom: calc(92px + env(safe-area-inset-bottom, 0px)); }
+  .dv-title { margin: -36px 10px 0; padding: 16px; }
+}
