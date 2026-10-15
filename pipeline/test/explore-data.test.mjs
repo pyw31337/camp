@@ -34,6 +34,7 @@ test("현장 조건: 고캠핑에 없는 값을 불가로 만들지 않는다", 
   const fields = buildFieldConditions({ ...camp, amenities: ["전기", "장작판매"], fire_pit: "개별", gocamping_url: "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7096" });
   assert.deepEqual(fields.power, { state: "PARTIAL", available: true, limit_w: null });
   assert.deepEqual(fields.parking, { state: "UNKNOWN", tent_side: null, auto_camping_sites: 12 });
+  assert.deepEqual(fields.shelter_setup, { state: "UNKNOWN", tent_count: null, tarp_or_shelter: null, canopy_allowed: null, max_structures: null });
   assert.deepEqual(fields.charcoal, { state: "UNKNOWN", allowed: null });
   assert.deepEqual(fields.firewood, { state: "PARTIAL", sold: true, allowed: null });
   assert.equal(fields.fire_pit.arrangement, "개별");

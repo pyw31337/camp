@@ -64,6 +64,17 @@
 .may-open-search b { overflow: hidden; color: var(--may-ink); font-size: 0.8125rem; text-overflow: ellipsis; white-space: nowrap; }
 .may-hero-source { position: absolute; bottom: 14px; left: 58px; display: inline-flex; align-items: center; gap: 4px; color: rgba(255,255,255,.76); font-size: 0.6875rem; font-weight: 670; }
 
+.may-explorer-direct { margin: 22px 0 0; padding: 20px 22px; display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 22px; align-items: center; border: 1px solid #cce5d5; border-radius: 20px; background: linear-gradient(110deg, #edf8f1, #fff 68%); box-shadow: var(--may-shadow); }
+.may-explorer-direct > div:first-child { min-width: 0; }
+.may-explorer-direct > div:first-child > span { display: inline-flex; align-items: center; gap: 5px; color: var(--may-green-deep); font-size: .6875rem; font-weight: 800; }
+.may-explorer-direct h2 { margin: 5px 0 0; color: var(--may-ink); font-size: 1.125rem; letter-spacing: -.055em; }
+.may-explorer-direct p { max-width: 610px; margin: 6px 0 0; color: #607469; font-size: .75rem; line-height: 1.55; }
+.may-explorer-stats { display: grid; gap: 4px; min-width: 207px; padding-left: 22px; border-left: 1px solid #cfe3d6; }
+.may-explorer-stats b { color: var(--may-green-deep); font-size: 1.375rem; letter-spacing: -.055em; }
+.may-explorer-stats span { color: #63766b; font-size: .6875rem; line-height: 1.5; }
+.may-explorer-direct > a { min-height: 44px; padding: 0 14px; display: inline-flex; align-items: center; justify-content: center; gap: 5px; border-radius: 12px; background: var(--may-green); color: #fff; font-size: .75rem; font-weight: 800; white-space: nowrap; }
+.may-explorer-direct > a:hover { background: var(--may-green-deep); }
+
 .may-categories { margin: 26px 0 67px; display: flex; flex-wrap: wrap; gap: 9px; }
 .may-categories button { min-height: 47px; padding: 0 15px; display: inline-flex; align-items: center; gap: 7px; border: 1px solid transparent; border-radius: 99px; background: #fff; box-shadow: var(--may-shadow); color: #365044; font-size: 0.75rem; font-weight: 790; white-space: nowrap; }
 .may-categories button svg, .may-free-icon { color: var(--may-green); }
@@ -180,6 +191,8 @@
   .may-data-cards { grid-template-columns: repeat(3, 1fr); }
   .may-provider-grid { grid-template-columns: 1fr; }
   .may-provider-grid article { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: 14px; align-items: start; }
+  .may-explorer-direct { grid-template-columns: minmax(0, 1fr) auto; }
+  .may-explorer-direct > a { grid-column: 1 / -1; }
   .may-provider-grid article > span { grid-row: span 2; }
   .may-provider-grid h3 { margin: 0; }
   .may-provider-grid ul, .may-provider-grid a { grid-column: 2 / -1; }
@@ -202,6 +215,10 @@
   .may-hero-stats { position: static; padding: 18px 22px 0; grid-template-columns: minmax(0, 13rem); gap: 7px; }
   .may-hero-stats > div, .may-hero-stats > a { width: auto; min-height: 65px; padding: 10px; border-radius: 13px; }
   .may-hero-stats strong { font-size: 1.25rem; }
+  .may-explorer-direct { margin-top: 14px; padding: 17px; display: grid; grid-template-columns: 1fr; gap: 14px; border-radius: 17px; }
+  .may-explorer-direct h2 { font-size: 1rem; }
+  .may-explorer-stats { min-width: 0; padding: 11px 0 0; border-top: 1px solid #cfe3d6; border-left: 0; }
+  .may-explorer-direct > a { width: 100%; }
   .may-searchbox { right: 12px; bottom: 37px; left: 12px; }
   .may-search-card { padding: 7px; border-radius: 0 17px 17px; }
   .may-search-tabs button { height: 37px; padding: 0 10px; font-size: 0.6875rem; }

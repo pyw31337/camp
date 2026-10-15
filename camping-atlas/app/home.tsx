@@ -22,6 +22,7 @@ type Opening = { at: string; tk: boolean; id: string; name: string; where: strin
 type FeaturedCamp = { id: string; name: string; where: string; line: string | null; ph: string; rt: boolean };
 type FeaturedTheme = { id: string; label: string; desc: string; count: number; camps: FeaturedCamp[] };
 type Featured = { total: number; photo_count: number; themes: FeaturedTheme[] };
+type ExplorerMeta = { count: number; stats?: { electricity_registered?: number; site_size_registered?: number; ground_registered?: number } };
 const largeOfficialPhoto = (path: string) => path.replace(/-t\.webp(?=$|[?#])/, "-l.webp");
 type Catalog = {
   generated_at: string;
@@ -72,6 +73,7 @@ export default function Home() {
   const [selectedCamp, setSelectedCamp] = useState<Camp | null>(null);
   const [catalog, setCatalog] = useState<Catalog>(fallbackCatalog);
   const [featured, setFeatured] = useState<Featured | null>(null);
+  const [explorerMeta, setExplorerMeta] = useState<ExplorerMeta | null>(null);
   // 공통 헤더(이름 뱃지·설정)는 모든 페이지와 같은 스크립트로 움직인다.
   useEffect(() => { if (!(window as unknown as { moyeoraUser?: unknown }).moyeoraUser) { const el = document.createElement("script"); el.textContent = SITE_HEADER_JS; document.body.appendChild(el); } }, []);
   const [openings, setOpenings] = useState<Opening[] | null>(null);
@@ -85,6 +87,15 @@ export default function Home() {
   useEffect(() => {
     const controller = new AbortController();
     fetch("./explore/data/featured.json", { signal: controller.signal }).then((r) => (r.ok ? r.json() : null)).then((d) => { if (d?.themes?.length) setFeatured(d as Featured); }).catch(() => undefined);
+    return () => controller.abort();
+  }, []);
+  // 홈에서도 전국 탐색의 실제 범위와 조건 커버리지를 바로 보인다. 캠핑장별 상세
+  // 데이터는 탐색 화면에서만 불러와 홈 첫 화면을 가볍게 유지한다.
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch("./explore/data/meta.json", { signal: controller.signal }).then((r) => (r.ok ? r.json() : null)).then((d) => {
+      if (typeof d?.count === "number") setExplorerMeta(d as ExplorerMeta);
+    }).catch(() => undefined);
     return () => controller.abort();
   }, []);
 
@@ -144,6 +155,12 @@ export default function Home() {
           </div> : <div className="may-open-search"><div><Bell size={20} /><span><small>예약 오픈 캘린더</small><b>출처와 확인일이 있는 일정만 표시합니다</b></span></div><button className="may-search-go" type="submit"><CalendarClock size={18} /><span>일정 보기</span></button></div>}</div>
         </form>
         <a className="may-hero-source" href={FACILITY_URL} target="_blank" rel="noreferrer"><ImageIcon size={13} />히어로 사진: 자라섬캠핑장 운영기관 원문 <ExternalLink size={12} /></a>
+      </section>
+
+      <section className="may-explorer-direct" aria-label="전국 캠핑장 조건 탐색">
+        <div><span><Database size={15} />전국 캠핑장 데이터</span><h2>캠핑장별 현장 조건을 바로 비교하세요</h2><p>전기·전력 제한, 주차, 바닥, 사이트 규격, 장작·숯불 규정은 캠핑장 상세에서 원천과 함께 확인합니다.</p></div>
+        <div className="may-explorer-stats"><b>{(explorerMeta?.count ?? featured?.total ?? 3111).toLocaleString("ko-KR")}곳</b><span>전기 {explorerMeta?.stats?.electricity_registered?.toLocaleString("ko-KR") ?? "2,088"} · 규격 {explorerMeta?.stats?.site_size_registered?.toLocaleString("ko-KR") ?? "816"} · 바닥 {explorerMeta?.stats?.ground_registered?.toLocaleString("ko-KR") ?? "1,576"}</span></div>
+        <a href="explore/">전국 조건으로 찾기 <ArrowRight size={16} /></a>
       </section>
 
       <section className="may-categories" aria-label="캠핑 형태">{categories.map((category) => <button key={category} type="button" className={selectedCategory === category ? "selected" : ""} onClick={() => selectCategory(category)}>{category === "무료" ? <span className="may-free-icon">₩</span> : category === "오토캠핑" || category === "카라반" ? <Car size={17} /> : <TentTree size={17} />}<span>{category}</span></button>)}</section>

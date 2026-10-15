@@ -56,8 +56,11 @@ export function buildFieldConditions(campground) {
   const checkedAt = campground?.source?.fetched_at ?? campground?.modified_at ?? null;
 
   return {
-    version: 1,
+    version: 2,
     parking: { state: "UNKNOWN", tent_side: null, auto_camping_sites: autoCampingSites },
+    // 고캠핑 표준값에는 1텐트·타프/쉘터·캐노피의 허용 수량이나 규격이 없다.
+    // 캠핑장별 공지 원문이 들어오기 전에는 일반적인 관행을 허용값으로 만들지 않는다.
+    shelter_setup: { state: "UNKNOWN", tent_count: null, tarp_or_shelter: null, canopy_allowed: null, max_structures: null },
     power: { state: electricity ? "PARTIAL" : "UNKNOWN", available: electricity || null, limit_w: null },
     ground: { state: floors.length ? "CONFIRMED" : "UNKNOWN", types: floors },
     charcoal: { state: "UNKNOWN", allowed: null },

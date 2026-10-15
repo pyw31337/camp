@@ -82,6 +82,7 @@ const meta = {
     // 허용은 고캠핑 표준값이 아니므로 확정 수치로 세지 않는다.
     field_conditions: records.length,
     electricity_registered: records.filter((r) => r.field_conditions?.power?.available === true).length,
+    shelter_setup_registered: records.filter((r) => r.field_conditions?.shelter_setup?.state === "CONFIRMED").length,
     site_size_registered: records.filter((r) => r.field_conditions?.site_size?.groups?.length).length,
     ground_registered: records.filter((r) => r.field_conditions?.ground?.types?.length).length,
     naver_booking_channel: records.filter((r) => r.booking.channels.some((channel) => channel.platform_id === "naver")).length,

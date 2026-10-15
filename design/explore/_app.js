@@ -497,6 +497,7 @@ function fieldConditionsBlock(c) {
   const sizeText = sizes.length ? sizes.map(([width, depth, count]) => `${width}×${depth}m${count ? ` · ${count}면` : ""}`).join(" / ") : "확인 필요";
   const rows = [
     [autoSites ? "partial" : "unknown", "#l-car", "텐트 옆 주차", autoSites ? `자동차야영 ${autoSites}면` : "확인 필요", autoSites ? "오토 사이트 보유 정보예요. 텐트 옆 주차 가능 여부는 구역별로 확인하세요." : "고캠핑 표준 항목에 없어요."],
+    ["unknown", "#t-tent", "텐트·타프/캐노피", "확인 필요", "1텐트+타프/쉘터 또는 캐노피 추가 설치는 캠핑장별 규정이 달라요. 추가 설치 수량·3×3m 캐노피 가능 여부를 운영자 공지에서 확인하세요."],
     [electricity ? "partial" : "unknown", "#l-plug-zap", "전기·전력 한도", electricity ? "전기 제공 · W 확인 필요" : "확인 필요", electricity ? "전력 사용 한도(W)는 고캠핑에 등록되지 않아 예약처 규정을 확인해야 해요." : "전기 제공 여부와 W 제한을 운영자 안내에서 확인하세요."],
     [floors.length ? "confirmed" : "unknown", "#t-layers-subtract", "바닥", floorText, floors.length ? "고캠핑에 등록된 바닥재·면수예요." : "바닥재 정보가 등록되지 않았어요."],
     [sizes.length ? "confirmed" : "unknown", "#l-ruler", "사이트 규격", sizeText, sizes.length ? "규격이 어느 상품에 적용되는지는 예약 화면에서 한 번 더 확인하세요." : "사이트별 가로×세로 정보가 등록되지 않았어요."],
@@ -518,9 +519,10 @@ function importantInfoBlock(c) {
   const fallback = [
     f.power?.available === true && !f.power?.limit_w && ["전기 사용", "전기 제공 등록 · 사용 가능 W는 예약처 최신 공지 확인"],
     f.parking?.tent_side == null && ["주차", "텐트 옆 주차 가능 여부는 사이트별 확인"],
+    f.shelter_setup?.state !== "CONFIRMED" && ["텐트·타프/캐노피", "1텐트·타프/쉘터·캐노피 추가 설치 기준은 운영자 공지 확인"],
     f.firewood?.allowed == null && ["화로·장작", "숯·장작·불멍 허용 기준은 운영자 공지 확인"],
-  ].filter(Boolean).slice(0, 2);
-  const typeLabel = { POWER: "전기", RENTAL: "대여", PARKING: "주차", FIRE: "화로·불멍", CHECKIN: "입·퇴실", RULE: "이용 규칙", NOTICE: "운영 안내" };
+  ].filter(Boolean).slice(0, 3);
+  const typeLabel = { POWER: "전기", RENTAL: "대여", PARKING: "주차", SHELTER_SETUP: "텐트·타프", FIRE: "화로·불멍", CHECKIN: "입·퇴실", RULE: "이용 규칙", NOTICE: "운영 안내" };
   const actual = items.sort((a, b) => ({ critical: 0, high: 1, normal: 2 }[a.priority] - ({ critical: 0, high: 1, normal: 2 }[b.priority]))).slice(0, 5);
   return `<section class="dv-sec dv-important" id="sec-important"><div class="dv-sub-head"><h3>${ic("#l-info", "i-sm")}예약 전 중요 정보</h3>${actual.length ? `<span class="dv-important-badge">공식 공지 ${actual.length}건</span>` : `<span class="dv-important-badge muted">공지 원문 연동 전</span>`}</div>
     ${actual.length ? `<div class="dv-important-list">${actual.map((item) => `<article class="${esc(item.priority)}"><span>${esc(typeLabel[item.kind] ?? "운영 안내")}</span><div><b>${esc(item.title)}</b><p data-wrap-ok>${esc(item.summary)}</p><a href="${esc(item.source.url)}" target="_blank" rel="noopener">${esc(item.source.label)} · ${ymd(item.source.checked_at)} 확인${ic("#l-arrow-up-right", "i-xs")}</a></div></article>`).join("")}</div>` : `<div class="dv-important-empty"><b>운영자 공지 원문이 아직 연동되지 않았어요.</b><p data-wrap-ok>전력 W 제한·대여 품목/요금·입퇴실·주차·화로 규정은 예약 화면의 최신 공지가 우선합니다.</p></div>`}
