@@ -55,6 +55,15 @@ Codex 요청 사항을 `pipeline/lib/survey-extractor.mjs` 및 `design/explore/_
 
 ## 최근 변경
 
+### 콘텐츠·예약·시각 배지 협업 경계 (2026-10-15, Codex)
+
+소유자 요청은 “파편화된 정보를 한눈에 판단 가능한 카드로 묶되, 원 플랫폼의 예약/콘텐츠 권리 경계를 넘지 않기”다. 다음 경계를 지킨다.
+
+1. **Codex 완료·소유 화면 범위**: `design/explore/_app.js`, `design/explore/_page.css`의 예약 우선순위·카드 포스터 배지·상세 액션·주변 지도/로드뷰 연결. 실제 등록된 채널만 쓰고 `camfit → naver → 기타 온라인 → 홈페이지 → 전화`로 선택한다. `VERIFIED` 조건만 빨강 불멍·주황 실제 W·파랑 텐트 옆 주차 배지로 표시한다. 주변 장소는 사진 URL과 표시 권한이 있을 때만 썸네일을 렌더링한다.
+2. **Gemini/데이터 담당 다음 범위**: `pipeline/lib/social-search.mjs`, `pipeline/scripts/sync-social.mjs` 및 소셜 읽기 모델. 플랫폼별(블로그·카페·동영상·지도/시설배치도) 그룹, 정확 매칭·본문/사진 정보량·최신성·작년 같은 계절성 점수, URL/이미지/텍스트 중복 제거 키, 임베드 허용 상태를 추가한다. 각 결과에는 `source_url`, `published_at`, `observed_at`, `match_reason`, `display_rights`를 필수로 둔다.
+3. **공동 수용 기준**: 외부 사진은 허용된 원본 썸네일/임베드 또는 공식 자산만 표시하고, 라이트박스는 그 제공자가 허용한 원본 URL만 연다. 반복 후기 요약은 표본 수·기간·갱신 시각·근거 링크가 없으면 발행하지 않는다. `SURVEYED` 추정은 가능/불가 배지나 내 세팅의 확정 판정에 쓰지 않는다.
+4. **다음 통합 순서**: 데이터 담당이 읽기 모델·중복 제거 단위 테스트를 먼저 커밋하고, Codex는 그 필드 계약이 확정된 뒤 `reviewsBlock`/`layoutBlock`의 플랫폼별 카드와 장단점 요약 UI를 연결한다. 생성본(`design/explore/index.html`, `camping-atlas/public/explore/`)은 소스/데이터 변경 뒤에만 재발행한다.
+
 | 항목 | 내용 | 검증 |
 | --- | --- | --- |
 | 전수조사 추출 및 표시 경계 정밀화 (2026-10-15, Gemini) | Codex 협의에 따라 `pipeline/lib/survey-extractor.mjs`의 법정 600W를 `limit_w` 대신 `regulatory_reference_w`로 분리하고, 자동차야영장 업종만으로 텐트 옆 주차를 확정하지 않도록 수정했다. `design/explore/_app.js`에서 `SURVEYED`는 '소개글 기반 후보' 배지로 표시하며, 텐트 옆 주차·장작 불멍·700W+ 필터는 `VERIFIED` 전용으로 게이트를 적용했다. | `node --test test/survey-extractor.test.mjs` 8개 전수 통과, 전체 파이프라인 187개 테스트(185 통과, 0 실패, 2 스킵) 통과. explore 단일 HTML 빌드 및 컴파일 완료. |

@@ -77,8 +77,16 @@ body { min-height: 100dvh; }
 .cards { display: grid; gap: 12px; }
 .card { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 14px; padding: 12px; border-radius: var(--r-2); background: var(--surface); box-shadow: var(--shadow-1); border: 1px solid var(--line); cursor: pointer; text-align: left; width: 100%; }
 .card:hover, .card[aria-current="true"] { border-color: var(--green); }
-.thumb { width: 132px; height: 104px; border-radius: 12px; overflow: hidden; background: var(--surface-2); display: grid; place-items: center; color: var(--ink-3); }
+.thumb { position: relative; width: 132px; height: 104px; border-radius: 12px; overflow: hidden; background: var(--surface-2); display: grid; place-items: center; color: var(--ink-3); }
 .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.poster-badges { position: absolute; z-index: 1; inset: 5px 4px auto; display: flex; justify-content: space-between; gap: 2px; pointer-events: none; }
+.poster-badge { display: grid; place-items: center; align-content: center; gap: 0; width: 2.35rem; height: 2.35rem; padding: 2px; border: 1px solid rgba(255,255,255,.42); border-radius: 50%; color: #fff; box-shadow: 0 3px 10px rgba(13,24,18,.35); text-align: center; line-height: 1.03; text-shadow: 0 1px 2px rgba(0,0,0,.25); backdrop-filter: blur(2px); }
+.poster-badge .i { width: .78rem; height: .78rem; }
+.poster-badge b, .poster-badge small { display: block; color: inherit; font-size: .5rem; font-weight: 850; letter-spacing: -.04em; white-space: nowrap; }
+.poster-badge small { font-size: .46rem; font-weight: 750; }
+.poster-badge.fire { background: linear-gradient(145deg, #e4513f, #ad281e); }
+.poster-badge.power { background: linear-gradient(145deg, #f3a632, #d66912); }
+.poster-badge.parking { background: linear-gradient(145deg, #438ac6, #1c5d98); }
 .card-body { min-width: 0; display: grid; gap: 5px; align-content: start; }
 .card-title { display: flex; align-items: center; gap: 6px; min-width: 0; }
 .card-title h3 { font-size: var(--fs-md); font-weight: 800; letter-spacing: -0.03em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
@@ -150,6 +158,11 @@ body { min-height: 100dvh; }
   .availability-clear { position: absolute; right: 24px; margin-top: -2.15rem; }
   .card { grid-template-columns: 96px minmax(0, 1fr); gap: 10px; padding: 10px; }
   .thumb { width: 96px; height: 96px; }
+  .poster-badges { inset: 4px 3px auto; gap: 1px; }
+  .poster-badge { width: 1.82rem; height: 1.82rem; padding: 1px; }
+  .poster-badge .i { width: .64rem; height: .64rem; }
+  .poster-badge b { font-size: .42rem; }
+  .poster-badge small { font-size: .38rem; }
   .top-links .l-only { display: none; }
 }
 /* 관심·공유·소개 */
@@ -537,6 +550,7 @@ details.sub summary h4 { min-width: 0; }
 .dv-actions > * { display: grid; justify-items: center; gap: 4px; padding: 12px 4px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); font-size: var(--fs-xs); font-weight: 700; color: var(--ink); white-space: nowrap; }
 .dv-actions [aria-pressed="true"] { color: #e0457b; border-color: #f6c5d6; background: #fff3f7; }
 .dv-actions [aria-disabled="true"] { color: var(--ink-3); }
+.dv-actions .dv-phone-action { color: var(--ink-3); background: var(--surface-2); }
 .dv-nav { margin: 0 calc(-1 * var(--pad)); padding: 8px var(--pad); }
 
 /* 예약 카드 */
@@ -551,6 +565,8 @@ details.sub summary h4 { min-width: 0; }
 .dv-dday strong { font-size: var(--fs-lg); font-weight: 850; white-space: nowrap; }
 .dv-dday em { font-style: normal; font-size: var(--fs-xs); color: rgba(255,255,255,.8); }
 .dv-go { flex: 1 1 12rem; min-height: 3.25rem; background: #fff !important; color: var(--forest) !important; font-weight: 850; }
+.dv-book-alt { display: inline-flex; align-items: center; justify-content: center; gap: 5px; align-self: start; min-height: 2.25rem; padding: 0 11px; border: 1px solid rgba(255,255,255,.38); border-radius: 999px; color: #fff; font-size: var(--fs-xs); font-weight: 800; text-decoration: none; }
+.dv-book-alt:hover { background: rgba(255,255,255,.12); }
 .dv-book .dv-chips span { background: rgba(255,255,255,.12); color: #fff; border-color: transparent; }
 .dv-book .dv-chips span.on { background: #fff; color: var(--forest); }
 .dv-book .sub, .dv-book .booking-path, .dv-book .rule, .dv-book .next-list li { color: var(--ink); }

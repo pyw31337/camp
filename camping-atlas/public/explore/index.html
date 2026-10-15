@@ -165,8 +165,16 @@ body { min-height: 100dvh; }
 .cards { display: grid; gap: 12px; }
 .card { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 14px; padding: 12px; border-radius: var(--r-2); background: var(--surface); box-shadow: var(--shadow-1); border: 1px solid var(--line); cursor: pointer; text-align: left; width: 100%; }
 .card:hover, .card[aria-current="true"] { border-color: var(--green); }
-.thumb { width: 132px; height: 104px; border-radius: 12px; overflow: hidden; background: var(--surface-2); display: grid; place-items: center; color: var(--ink-3); }
+.thumb { position: relative; width: 132px; height: 104px; border-radius: 12px; overflow: hidden; background: var(--surface-2); display: grid; place-items: center; color: var(--ink-3); }
 .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.poster-badges { position: absolute; z-index: 1; inset: 5px 4px auto; display: flex; justify-content: space-between; gap: 2px; pointer-events: none; }
+.poster-badge { display: grid; place-items: center; align-content: center; gap: 0; width: 2.35rem; height: 2.35rem; padding: 2px; border: 1px solid rgba(255,255,255,.42); border-radius: 50%; color: #fff; box-shadow: 0 3px 10px rgba(13,24,18,.35); text-align: center; line-height: 1.03; text-shadow: 0 1px 2px rgba(0,0,0,.25); backdrop-filter: blur(2px); }
+.poster-badge .i { width: .78rem; height: .78rem; }
+.poster-badge b, .poster-badge small { display: block; color: inherit; font-size: .5rem; font-weight: 850; letter-spacing: -.04em; white-space: nowrap; }
+.poster-badge small { font-size: .46rem; font-weight: 750; }
+.poster-badge.fire { background: linear-gradient(145deg, #e4513f, #ad281e); }
+.poster-badge.power { background: linear-gradient(145deg, #f3a632, #d66912); }
+.poster-badge.parking { background: linear-gradient(145deg, #438ac6, #1c5d98); }
 .card-body { min-width: 0; display: grid; gap: 5px; align-content: start; }
 .card-title { display: flex; align-items: center; gap: 6px; min-width: 0; }
 .card-title h3 { font-size: var(--fs-md); font-weight: 800; letter-spacing: -0.03em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
@@ -238,6 +246,11 @@ body { min-height: 100dvh; }
   .availability-clear { position: absolute; right: 24px; margin-top: -2.15rem; }
   .card { grid-template-columns: 96px minmax(0, 1fr); gap: 10px; padding: 10px; }
   .thumb { width: 96px; height: 96px; }
+  .poster-badges { inset: 4px 3px auto; gap: 1px; }
+  .poster-badge { width: 1.82rem; height: 1.82rem; padding: 1px; }
+  .poster-badge .i { width: .64rem; height: .64rem; }
+  .poster-badge b { font-size: .42rem; }
+  .poster-badge small { font-size: .38rem; }
   .top-links .l-only { display: none; }
 }
 /* 관심·공유·소개 */
@@ -625,6 +638,7 @@ details.sub summary h4 { min-width: 0; }
 .dv-actions > * { display: grid; justify-items: center; gap: 4px; padding: 12px 4px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); font-size: var(--fs-xs); font-weight: 700; color: var(--ink); white-space: nowrap; }
 .dv-actions [aria-pressed="true"] { color: #e0457b; border-color: #f6c5d6; background: #fff3f7; }
 .dv-actions [aria-disabled="true"] { color: var(--ink-3); }
+.dv-actions .dv-phone-action { color: var(--ink-3); background: var(--surface-2); }
 .dv-nav { margin: 0 calc(-1 * var(--pad)); padding: 8px var(--pad); }
 
 /* 예약 카드 */
@@ -639,6 +653,8 @@ details.sub summary h4 { min-width: 0; }
 .dv-dday strong { font-size: var(--fs-lg); font-weight: 850; white-space: nowrap; }
 .dv-dday em { font-style: normal; font-size: var(--fs-xs); color: rgba(255,255,255,.8); }
 .dv-go { flex: 1 1 12rem; min-height: 3.25rem; background: #fff !important; color: var(--forest) !important; font-weight: 850; }
+.dv-book-alt { display: inline-flex; align-items: center; justify-content: center; gap: 5px; align-self: start; min-height: 2.25rem; padding: 0 11px; border: 1px solid rgba(255,255,255,.38); border-radius: 999px; color: #fff; font-size: var(--fs-xs); font-weight: 800; text-decoration: none; }
+.dv-book-alt:hover { background: rgba(255,255,255,.12); }
 .dv-book .dv-chips span { background: rgba(255,255,255,.12); color: #fff; border-color: transparent; }
 .dv-book .dv-chips span.on { background: #fff; color: var(--forest); }
 .dv-book .sub, .dv-book .booking-path, .dv-book .rule, .dv-book .next-list li { color: var(--ink); }
@@ -1353,8 +1369,17 @@ function card(c) {
     : observations.length
     ? `<span class="tag tag-green">${ic("#l-circle-check", "i-xs")}공식 접수 중${state.checkIn && state.checkOut ? " · 날짜 일치" : ""}</span>`
     : "";
+  const f = c.field_conditions;
+  // 사진 위의 강한 색상 배지는 “소개글 기반 후보”가 아닌, 원문을 대조한 조건만 쓴다.
+  // 법정 참고 600W·오토캠핑 분류·장작 판매 같은 간접 신호를 실제 가능 조건처럼 보이지 않게 한다.
+  const posterBadges = f?.status !== "VERIFIED" ? [] : [
+    f.firewood?.allowed === true && ["fire", "#l-flame", "불멍", "가능"],
+    f.power?.limit_w != null && ["power", "#l-plug-zap", "전기", `${f.power.limit_w}W`],
+    f.parking?.tent_side === true && ["parking", "#l-car", "주차", "텐트 옆"],
+  ].filter(Boolean).slice(0, 3);
+  const poster = posterBadges.length ? `<span class="poster-badges" aria-label="검증된 현장 조건">${posterBadges.map(([kind, icon, label, value]) => `<span class="poster-badge ${kind}">${ic(icon, "i-sm")}<b>${label}</b><small>${value}</small></span>`).join("")}</span>` : "";
   return `<button class="card" type="button" data-open="${c.id}" aria-current="${state.open === c.id}">
-    <span class="thumb${!c.ph && !c.img && c.sn ? " snap" : ""}">${c.ph ? `<img src="../media/${esc(largeLocalPhoto(c.ph))}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">` : c.sn ? `<img src="${esc(String(c.sn).replace(/^http:/, "https:"))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentElement.classList.remove('snap');this.remove()"><em class="snap-tag">검색 사진</em>` : ic("#t-tent")}</span>
+    <span class="thumb${!c.ph && !c.img && c.sn ? " snap" : ""}">${c.ph ? `<img src="../media/${esc(largeLocalPhoto(c.ph))}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">` : c.sn ? `<img src="${esc(String(c.sn).replace(/^http:/, "https:"))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentElement.classList.remove('snap');this.remove()"><em class="snap-tag">검색 사진</em>` : ic("#t-tent")}${poster}</span>
     <span class="card-body">
       <span class="card-title"><h3>${esc(c.name)}</h3><span class="card-actions">${state.saved.has(c.id) ? ic("#l-heart", "i-xs saved-mark") : ""}<button class="btn-compare${state.compare.has(c.id) ? " on" : ""}" type="button" data-compare="${c.id}" aria-label="${state.compare.has(c.id) ? "비교함에서 제거" : "비교함에 담기"}" title="조건 비교함">${ic("#l-columns-2", "i-xs")}</button></span></span>
       <span class="loc">${ic("#l-map-pin", "i-xs")}${esc([c.sido, c.sigungu].filter(Boolean).join(" "))}${km}${OP[c.op] ? ` · ${OP[c.op]}` : ""}</span>
@@ -1828,6 +1853,7 @@ const km = (m) => (m < 1000 ? `${Math.round(m / 10) * 10}m` : `${(m / 1000).toFi
 const telHref = (t) => `tel:${String(t).replace(/[^\d+]/g, "")}`;
 const mapLink = (name, lat, lng) => `https://map.kakao.com/link/map/${encodeURIComponent(name)},${lat},${lng}`;
 const routeLink = (name, lat, lng) => `https://map.kakao.com/link/to/${encodeURIComponent(name)},${lat},${lng}`;
+const roadviewLink = (lat, lng) => `https://map.kakao.com/link/roadview/${lat},${lng}`;
 const naverMapLink = (name) => `https://map.naver.com/p/search/${encodeURIComponent(name)}`;
 const SECTIONS = [["sec-media", "사진·후기"], ["sec-info", "기본정보"], ["sec-book", "예약"], ["sec-site", "상품·요금"], ["sec-fac", "시설"], ["sec-official", "공식 안내"], ["sec-near", "주변"], ["sec-passport", "패스포트"], ["sec-talk", "댓글"]];
 const NEAR_GROUPS = [["toilet", "화장실", "#l-toilet"], ["mart", "마트·장보기", "#l-shopping-cart"], ["conv", "편의점", "#l-store"], ["fuel", "주유소", "#l-fuel"], ["medical", "병원·약국", "#l-cross"], ["rest", "휴게소·졸음쉼터", "#l-coffee"], ["tour", "주변 관광", "#l-camera"], ["food", "맛집", "#l-utensils"], ["gear", "철물·캠핑용품", "#l-wrench"]];
@@ -1836,21 +1862,37 @@ const POI_KIND = { supermarket: "마트", convenience: "편의점", butcher: "�
 
 const BOOK_KIND = { online: "예약 채널", homepage: "공식 홈페이지", phone: "전화 문의", onsite: "현장 문의" };
 const BOOK_TRUST = (n) => n >= .85 ? "연결 근거 높음" : n >= .6 ? "공식 등록 링크" : "확인 필요";
+const BOOKING_PREFERENCE = { camfit: 0, naver: 1 };
+const bookingOrder = (ch) => {
+  if (ch.kind === "online" && BOOKING_PREFERENCE[ch.platform_id] != null) return BOOKING_PREFERENCE[ch.platform_id];
+  if (ch.kind === "online") return 2;
+  if (ch.kind === "homepage") return 3;
+  if (ch.kind === "phone") return 4;
+  return 5;
+};
 function bookingChannels(c) {
   const existing = c.booking?.channels?.filter(Boolean) ?? [];
-  if (existing.length) return existing;
+  // 이미 등록된 업장별 링크만 재정렬한다. 캠핏/네이버의 목록 페이지를 임의로 만들지 않는다.
+  if (existing.length) return [...existing].sort((a, b) => bookingOrder(a) - bookingOrder(b));
   // 이전 발행 데이터와 호환: 채널 배열이 없는 경우에도 링크를 숨기지 않는다.
   return [
     c.booking?.url && { kind: "online", url: c.booking.url, confidence: .6, platform_name: null, evidence: ["reservation.url"] },
     c.homepage && { kind: "homepage", url: c.homepage, confidence: .6, platform_name: "캠핑장 자체 홈페이지", evidence: ["contact.homepage"] },
     c.tel && { kind: "phone", url: telHref(c.tel), confidence: .5, platform_name: null, evidence: ["contact.tel"] },
-  ].filter(Boolean);
+  ].filter(Boolean).sort((a, b) => bookingOrder(a) - bookingOrder(b));
+}
+function bookingCtaLabel(ch) {
+  if (ch.kind === "online" && ch.platform_id === "camfit") return "캠핏에서 예약 확인";
+  if (ch.kind === "online" && ch.platform_id === "naver") return "네이버 예약에서 확인";
+  if (ch.kind === "online") return `${ch.platform_name || "예약처"}에서 예약 확인`;
+  if (ch.kind === "homepage") return "공식 홈페이지 열기";
+  return "전화로 문의";
 }
 function bookingTarget(c) {
   const ch = bookingChannels(c).find((x) => x.url && x.kind === "online") ?? bookingChannels(c).find((x) => x.url && x.kind === "homepage") ?? bookingChannels(c).find((x) => x.url && x.kind === "phone");
   if (!ch) return null;
   const external = !/^tel:/i.test(ch.url);
-  return { href: ch.url, ext: external, channel: ch, label: ch.kind === "online" ? "예약 채널 열기" : ch.kind === "homepage" ? "공식 홈페이지 열기" : "전화로 문의" };
+  return { href: ch.url, ext: external, channel: ch, label: bookingCtaLabel(ch) };
 }
 function bookingPaths(c) {
   const rows = bookingChannels(c);
@@ -1928,7 +1970,7 @@ function nearBlock(c, d) {
     const name = p.n || POI_KIND[p.k] || "주변 시설";
     const meta = [p.ty ?? POI_KIND[p.k] ?? p.k, p.e ? "응급실" : null, p.b, p.h, p.r].filter(Boolean).join(" · ");
     const visual = p.img ? `<img src="${esc(p.img.replace(/^http:/, "https:"))}" alt="${esc(name)} 사진" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('no-photo');this.remove()">` : `<span class="poi-visual">${ic(g === "toilet" ? "#l-toilet" : g === "mart" || g === "conv" ? "#l-shopping-cart" : g === "rest" ? "#l-coffee" : g === "fuel" ? "#l-fuel" : "#l-map-pin")}</span>`;
-    const actions = p.lat ? `<div class="near-actions"><a href="${esc(p.u ?? mapLink(name, p.lat, p.lng))}" target="_blank" rel="noopener">${p.u ? "원문" : "카카오 지도"}${ic("#l-arrow-up-right", "i-xs")}</a><a href="${esc(naverMapLink(name))}" target="_blank" rel="noopener">네이버 지도${ic("#l-arrow-up-right", "i-xs")}</a><button type="button" data-roadview="${p.lat},${p.lng}" data-roadview-name="${esc(name)}">${ic("#l-camera", "i-xs")}카카오 로드뷰</button></div>` : "";
+    const actions = p.lat ? `<div class="near-actions"><a href="${esc(p.u ?? mapLink(name, p.lat, p.lng))}" target="_blank" rel="noopener">${p.u ? "원문" : "카카오 지도"}${ic("#l-arrow-up-right", "i-xs")}</a><a href="${esc(roadviewLink(p.lat, p.lng))}" target="_blank" rel="noopener">${ic("#l-camera", "i-xs")}로드뷰${ic("#l-arrow-up-right", "i-xs")}</a><a href="${esc(naverMapLink(name))}" target="_blank" rel="noopener">네이버 지도${ic("#l-arrow-up-right", "i-xs")}</a><button type="button" data-roadview="${p.lat},${p.lng}" data-roadview-name="${esc(name)}">이 화면에서 보기</button></div>` : "";
     return `<article class="near-card"><div class="near-visual${p.img ? "" : " no-photo"}">${visual}</div><div class="near-copy"><div><b>${esc(name)}</b><small>${esc(meta || "주변 편의 정보")}</small></div>${actions}</div>${p.m != null ? `<strong class="m">${km(p.m)}</strong>` : ""}</article>`;
   }).join("")}</div>`).join("")}
   <div class="roadview-slot" id="roadviewSlot"></div>
@@ -2010,12 +2052,16 @@ function highlightsBlock(c) {
 function bookingCard(c, d, target) {
   const nx = d?.guide?.next?.find((n) => !n.unverified && n.applies !== "IF_NATIONAL") ?? (c.booking.next ? { ...c.booking.next } : null);
   const dday = nx ? Math.ceil((Date.parse(nx.at) - Date.now()) / 864e5) : null;
+  const alternate = target?.channel?.kind === "online"
+    ? bookingChannels(c).find((ch) => ch.kind === "online" && ch.url && ch.url !== target.href)
+    : null;
   return `<section class="dv-sec dv-book" id="sec-book"><h3>예약</h3>
     <div class="dv-book-top">
       ${nx ? `<div class="dv-dday"><b class="num">${dday <= 0 ? "오늘" : `D-${dday}`}</b><span><small>다음 예약 오픈</small><strong class="num">${nx.time_known ? hm(nx.at) : md(nx.at)}</strong><em data-wrap-ok>${esc(nx.label)}</em></span></div>`
         : `<div class="dv-dday none"><span>${ic("#l-calendar")}</span><span><small>예약 방식</small><strong>${esc(c.booking.methods[0] ?? "예약처 문의")}</strong></span></div>`}
       ${target ? `<a class="btn btn-primary dv-go" href="${esc(target.href)}" ${target.ext ? 'target="_blank" rel="noopener"' : ""}>${ic(target.ext ? "#l-external-link" : "#l-phone", "i-sm")}${target.label}</a>` : ""}
     </div>
+    ${alternate ? `<a class="dv-book-alt" href="${esc(alternate.url)}" target="_blank" rel="noopener">${ic("#l-calendar", "i-xs")}${esc(bookingCtaLabel(alternate))}${ic("#l-arrow-up-right", "i-xs")}</a>` : ""}
     ${c.booking.methods.length > 1 ? `<div class="dv-chips">${c.booking.methods.map((m) => `<span class="${/실시간/.test(m) ? "on" : ""}">${esc(m)}</span>`).join("")}</div>` : ""}
     ${officialStatusBlock(c)}
     <details class="dv-more"><summary>예약 경로·오픈 규칙 자세히</summary>${bookingPaths(c)}${guideBlock(c, d)}</details>
@@ -2380,6 +2426,9 @@ function detail(c) {
   const d = DETAIL.get(c.id);
   LB.clear();
   const target = bookingTarget(c);
+  const quickBooking = target?.ext
+    ? `<a href="${esc(target.href)}" target="_blank" rel="noopener">${ic(target.channel.kind === "online" ? "#l-calendar-check" : "#l-globe")}<span>${target.channel.kind === "online" ? "예약" : "홈페이지"}</span></a>`
+    : "";
   const themes = (META?.themes ?? []).filter((t) => c.th.includes(t.id));
   return `<div class="sheet-close"><button class="back-btn" type="button" data-close aria-label="목록으로">${ic("#l-arrow-left", "i-sm")}<span>목록</span></button></div>
   ${heroBlock(c, d)}
@@ -2393,10 +2442,12 @@ function detail(c) {
     ${keyStats(c, d)}
     <div class="dv-actions">
       <a href="${routeLink(c.name, c.lat, c.lng)}" target="_blank" rel="noopener">${ic("#l-navigation")}<span>길찾기</span></a>
-      ${c.tel ? `<a href="${telHref(c.tel)}">${ic("#l-phone")}<span>전화</span></a>` : `<span aria-disabled="true">${ic("#l-phone")}<span>전화 없음</span></span>`}
+      <a href="${roadviewLink(c.lat, c.lng)}" target="_blank" rel="noopener">${ic("#l-camera")}<span>로드뷰</span></a>
+      ${quickBooking}
       <button type="button" data-save="${c.id}" aria-pressed="${state.saved.has(c.id)}">${ic("#l-heart")}<span>${state.saved.has(c.id) ? "저장됨" : "관심"}</span></button>
       <button type="button" data-compare="${c.id}" aria-pressed="${state.compare.has(c.id)}">${ic("#l-columns-2")}<span>${state.compare.has(c.id) ? "비교 중" : "비교함"}</span></button>
       <button type="button" data-share="${c.id}">${ic("#l-share-2")}<span>공유</span></button>
+      ${c.tel ? `<a class="dv-phone-action" href="${telHref(c.tel)}">${ic("#l-phone")}<span>전화</span></a>` : ""}
     </div>
     <nav class="d-nav dv-nav" aria-label="상세 목차">${DV_NAV.filter(([id]) => id !== "sec-setup" || hasSetup()).map(([id, l]) => `<button type="button" data-jump="${id}">${l}</button>`).join("")}</nav>
     ${importantInfoBlock(c)}
