@@ -8,22 +8,36 @@ import { buildAvailabilityReadModel } from "../lib/availability-read-model.mjs";
 const p = (rel) => fileURLToPath(new URL(rel, import.meta.url));
 const readJson = async (path) => JSON.parse(await readFile(path, "utf8"));
 const seoulPath = process.env.SEOUL_YEYAK_PATH ?? p("../out/seoul-yeyak.json");
+const observationsPath = process.env.AVAILABILITY_OBSERVATIONS_PATH ?? p("../registry/pilot-observations.json");
 const defaultCampgroundsPath = p("../out/explore/campgrounds.json");
 const fallbackCampgroundsPath = p("../../camping-atlas/public/explore/data/campgrounds.json");
 const campgroundsPath = process.env.AVAILABILITY_CAMPGROUNDS_PATH ?? (existsSync(defaultCampgroundsPath) ? defaultCampgroundsPath : fallbackCampgroundsPath);
 
-if (!existsSync(seoulPath)) throw new Error(`서울 공공예약 원천이 없습니다: ${seoulPath}`);
 if (!existsSync(campgroundsPath)) throw new Error(`캠핑장 탐색 데이터가 없습니다: ${campgroundsPath}`);
 
-const [seoulPayload, campgrounds] = await Promise.all([readJson(seoulPath), readJson(campgroundsPath)]);
+const [seoulPayload, observationsPayload, campgrounds] = await Promise.all([
+  existsSync(seoulPath) ? readJson(seoulPath) : { services: [] },
+  existsSync(observationsPath) ? readJson(observationsPath) : null,
+  readJson(campgroundsPath),
+]);
+
 const model = buildAvailabilityReadModel({
   seoulPayload,
+  observationsPayload,
   campgrounds: Array.isArray(campgrounds) ? campgrounds : campgrounds.campgrounds,
   generatedAt: new Date().toISOString(),
   ttlMinutes: Number(process.env.AVAILABILITY_STATUS_TTL_MINUTES ?? 75),
+  observationTtlMinutes: Number(process.env.AVAILABILITY_OBSERVATION_TTL_MINUTES ?? 1440),
 });
 
 const out = p("../out/explore/availability.json");
 await mkdir(p("../out/explore/"), { recursive: true });
 await writeFile(out, JSON.stringify(model));
-console.log(`공식 접수 상태 ${model.stats.official_application_open}개 상품 · ${model.stats.campgrounds_with_open_application}곳 · ${model.expires_at} 만료`);
+
+const atlasOut = p("../../camping-atlas/public/explore/data/availability.json");
+if (existsSync(p("../../camping-atlas/public/explore/data/"))) {
+  await writeFile(atlasOut, JSON.stringify(model));
+}
+
+console.log(`공식 접수 ${model.stats.official_application_open}건 · 빈자리 관측 ${model.stats.observed_available}건 · ${model.stats.total_active_campgrounds}곳 활성 · ${model.expires_at} 만료`);
+

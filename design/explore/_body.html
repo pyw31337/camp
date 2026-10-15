@@ -44,5 +44,18 @@
   <aside class="map-col" aria-label="지도"><div id="map"></div></aside>
 </main>
 <button class="mobile-switch" id="viewSwitch" type="button"><svg class="i i-sm" aria-hidden="true"><use href="#l-map"/></svg>지도 보기</button>
+<div class="compare-bar" id="compareBar" hidden>
+  <div class="compare-bar-content">
+    <div class="compare-bar-info">
+      <span class="compare-bar-badge" id="compareCount">비교함 0/3</span>
+      <div class="compare-bar-chips" id="compareThumbs"></div>
+    </div>
+    <div class="compare-bar-actions">
+      <button class="compare-btn" id="openCompareBtn" type="button" disabled><svg class="i i-sm" aria-hidden="true"><use href="#l-columns-2"/></svg><span>조건 1:1 비교</span></button>
+      <button class="compare-clear-btn" id="clearCompareBtn" type="button" aria-label="비교함 비우기" title="전체 비우기"><svg class="i i-xs" aria-hidden="true"><use href="#l-trash-2"/></svg></button>
+    </div>
+  </div>
+</div>
+<div id="compareRoot"></div>
 <div id="sheetRoot"></div>
 <!--SITE_TABBAR-->

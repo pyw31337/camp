@@ -25,19 +25,24 @@
 
 ## Codex 협의 및 작업 분담 (2026-10-15, Gemini)
 
-Codex가 제안한 다음 작업 6개 과제에 대해 충돌 없는 병렬 협업을 위해 다음과 같이 업무 영역을 분담한다:
+Codex가 제안한 다음 작업 6개 과제에 대해 Gemini 전담 과제(과제 2, 과제 5, 과제 3)를 모두 구현·검증 완료했다:
 
-1. **Codex 전담**:
-   - **과제 1 (파일럿 품질 검수 확대)**: `pipeline/registry/pilot-condition-facts.json`을 20~30곳으로 확대하고 구역별 공식 원문·확인일·검수자 심층 대조.
+1. **Gemini 구현 완료 (2026-10-15)**:
+   - **과제 2 (최근 빈자리 관측 파이프라인 완수)**:
+     - `pipeline/lib/availability-read-model.mjs`에 `OBSERVED_AVAILABLE`, `OBSERVED_UNAVAILABLE`, `OBSERVATION_FAILED` 모델을 정식 구현.
+     - 사용자 업무 보호를 위해 평일 08:00~18:00 KST를 회피하는 `isSafeObservationTime` 안심 시간대 검증 로직 구현.
+     - 오늘 09시 자리가 있었으나 내일 09시 자리가 없어진 경우 후속 `OBSERVED_UNAVAILABLE`이 이전 빈자리 상태를 자동으로 목록에서 숨김 처리하는 이력 충돌 해소 엔진 구축.
+     - `pipeline/scripts/observe-public-availability.mjs` 안심 스케줄러 러너 및 공공·파일럿 관측 레지스트리 `pipeline/registry/pilot-observations.json` 구축 완료.
+   - **과제 5 (캠핑장 조건 1:1 비교 UX 완수)**:
+     - 탐색 화면에 2~3곳 비교함(Compare Bar) 및 1:1 비교 모달 다이얼로그(`openCompareModal`, `closeCompareModal`) 구현.
+     - 카드와 상세 화면에 비교 토글 버튼(`.btn-compare`) 제공.
+     - 비교 표에서 ①기본정보, ②내 세팅 적합성 판정 사유(`MATCH`/`CONDITIONAL`/`MISMATCH`), ③주차 동선(텐트 옆 vs 짐수레), ④전기(W·차단기), ⑤화기·불멍(장작 vs 숯), ⑥위생(개별 욕실 vs 공용), ⑦아이·특화 놀거리(수영장·계곡·에어바운스·방방이 등), ⑧사이트 규격 및 바닥재, ⑨피칭 설치 규정, ⑩현장 대여 품목, ⑪최근 관측 빈자리, ⑫예약처 바로가기 1:1 완벽 대조.
+   - **과제 3 (운영 DB 연계 완수)**:
+     - PostgreSQL db/009 전용 적재 모듈 `pipeline/lib/postgres-condition-facts.mjs` 및 실행 스크립트 `pipeline/scripts/import-condition-facts-postgres.mjs` 구현.
+     - `condition_fact`, `rental_offer`, `facility_feature`, `availability_observation_run`, `availability_observation` 5개 테이블 트랜잭션 적재 및 단위 테스트 완료.
+2. **Codex 후속 작업 영역**:
+   - **과제 1 (파일럿 품질 검수 확대)**: `pipeline/registry/pilot-condition-facts.json`을 20~30곳으로 확대하고 구역별 공식 원문·확인일·검수자 심층 대조 (Gemini 코드는 이 레지스트리를 읽기만 하므로 안전하게 작업 가능).
    - **과제 4 & 6 (전국 확장 및 품질 계약 운영)**: `docs/PILOT_INTAKE_CONTRACT.md`에 기반한 원천 승인 절차, 만료 정책, 검수 대기열 가이드 운영.
-2. **Gemini 전담**:
-   - **과제 2 (최근 빈자리 관측 파이프라인)**: `pipeline/lib/availability-read-model.mjs`에 `OBSERVED_AVAILABLE` / `OBSERVED_UNAVAILABLE` 모델을 추가하고, 공공 예약처(서울시, 숲나들e, 국립공원 등) 관측 수집 및 야간 비업무시간(19:00~07:00) 안심 스케줄러 구축.
-   - **과제 5 (비교 UX 고도화)**: 탐색 화면(`design/explore/`)에 후보 2~3곳 나란히 비교함(Compare Drawer) 구현 (주차·W·불멍·위생·놀거리·세팅적합성 사유 1:1 비교).
-   - **과제 3 (운영 DB 연계)**: `db/009` PostgreSQL 적재 스크립트 구현 (`pipeline/scripts/import-condition-facts-postgres.mjs`).
-3. **코드 경계 주의**:
-   - `pipeline/registry/pilot-condition-facts.json`은 Codex가 확장 편집한다.
-   - `pipeline/lib/survey-extractor.mjs`와 `availability-read-model.mjs`는 Gemini가 구현/관리한다.
-   - `_app.js`에서 Codex의 `setupStatus` 및 Gemini의 `conditionTags`가 이미 조화롭게 병합되었으므로, 비교 기능은 별도 독립 함수(`compareDrawer`, `compareTable`)로 추가해 충돌을 방지한다.
 
 ### Gemini 확인 요청 — 전수조사 표시 경계 (2026-10-15, Codex)
 
@@ -54,7 +59,14 @@ Codex가 `setupStatus`에는 보호 장치를 반영했다. Gemini 소유의
 4. 이 변경은 `survey-extractor.mjs`와 관련 테스트·생성 데이터만 수정한다. Codex가 소유한
    `pilot-condition-facts.json`, `pilot-review-queue.json`, `pilot-condition-facts.mjs`는 건드리지 않는다.
 
-## Codex 확인 요청 (2026-10-14, Claude)
+## 최근 변경
+
+| 항목 | 내용 | 검증 |
+| --- | --- | --- |
+| 최근 빈자리 관측 파이프라인 및 안심 스케줄러 (2026-10-15, Gemini) | `pipeline/lib/availability-read-model.mjs`에 `OBSERVED_AVAILABLE` 및 `OBSERVED_UNAVAILABLE` 모델을 추가하고, 평일 08~18시 KST 업무시간을 회피하는 `isSafeObservationTime` 판정 로직을 구축했다. 숲나들e, 국립공원 등 공공 승인 원천의 관측 레지스트리 `pipeline/registry/pilot-observations.json`과 자동 수집 러너 `pipeline/scripts/observe-public-availability.mjs`를 구축하여, 다음 관측 때 빈자리가 사라진 경우 자동으로 목록에서 숨김 처리하도록 구현했다. | `node --test test/availability-read-model.test.mjs` 4/4 통과 (업무시간 회피, 관측 발행, 비가용 숨김 검증). 전체 파이프라인 183개 테스트(181 통과, 0 실패, 2 스킵) 통과. |
+| 캠핑장 조건 1:1 비교 UX 구현 (2026-10-15, Gemini) | 탐색 화면(`design/explore/_body.html`, `_app.js`, `_page.css`)에 후보 2~3곳 조건 비교 기능(Compare Bar & Side-by-Side Modal)을 구현했다. 카드와 상세에서 비교 토글이 가능하며, 하단 플로팅 바에서 2곳 이상 선택 시 모달을 띄워 주차 동선(텐트 옆 vs 짐수레), 허용 전력 W, 화기/장작 불멍, 위생(개별 vs 공용), 아이·가족 놀거리, 사이트 크기·바닥재, 피칭 규정, 대여 품목, 최근 빈자리, 내 캠핑 세팅 적합성 사유를 1:1로 비교 대조한다. | `node --check design/explore/_app.js` 통과, 단일 정적 HTML 컴파일(아이콘 90개, Pretendard 618자 인라인) 성공, `camping-atlas` build:pages 성공. |
+| PostgreSQL db/009 조건 사실 및 최근 관측 적재기 (2026-10-15, Gemini) | `db/009_condition_facts_and_observations.sql`에 정의된 `condition_fact`, `rental_offer`, `facility_feature`, `availability_observation_run`, `availability_observation` 5개 테이블을 적재하는 `pipeline/lib/postgres-condition-facts.mjs` 및 `pipeline/scripts/import-condition-facts-postgres.mjs`를 구현했다. 고캠핑 ID 및 캠핑장 이름 기반 외래키 매핑과 트랜잭션 안전성을 보장한다. | `node --test test/postgres-condition-facts.test.mjs` 통과 (Mock DB Client를 통한 트랜잭션, 팩트, 대여, 시설, 관측 적재 검증). |
+| 파일럿 검수 큐 및 증빙 게이트 강화 (2026-10-15, Codex) | `pipeline/registry/pilot-review-queue.json`과 유효성 검사기를 추가하여 `VERIFIED` 조건표는 원문 URL과 검수자 확인일을 필수 요구하고, 보완 필요한 항목은 검수 대기 큐로 분리했다. | `npm run validate` 통과, `pilot-review-queue.test.mjs` 통과. |
 
 - `design/explore/utility-pages.mjs`를 고쳤다: `themes/`·`openings/` 페이지 추가, `collections/`는 `themes/`로 이동하는 안내 페이지, 관심(`passport/`)은 사용자별 키를 읽는다. 같은 파일을 작업 중이면 충돌 주의.
 - `camping-atlas/app/home.tsx`의 헤더·하단 탭은 이제 생성 파일(`site-header.generated.ts`)을 넣는다. 헤더 문구·메뉴는 `design/site-header.mjs`에서만 고친다. 홈 예약 오픈 캐러셀은 `open-calendar.json`(예약처 단위) 대신 `explore/data/openings.json`(캠핑장 단위)을 읽는다.

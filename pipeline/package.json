@@ -27,6 +27,8 @@
     "sync:tour-fees": "node scripts/sync-tour-fees.mjs",
     "build:explore": "node scripts/build-explore-data.mjs",
     "build:availability": "node scripts/build-availability-read-model.mjs",
+    "observe:availability": "node scripts/observe-public-availability.mjs",
+    "db:import-conditions": "node scripts/import-condition-facts-postgres.mjs",
     "sync:seoul-yeyak": "node scripts/sync-seoul-yeyak.mjs",
     "sync:nearby": "node scripts/sync-nearby-context.mjs",
     "sync:images": "node scripts/sync-images.mjs",
