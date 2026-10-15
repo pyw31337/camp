@@ -329,6 +329,8 @@ jobs:
           # 공개 카탈로그의 현장 조건을 같은 추출 규칙(survey-extractor)으로 다시 계산한다.
           # 이 단계를 빼면 다음 동기화가 전수조사 등급(SURVEYED/CONFIRMED)과 파일럿 VERIFIED 구분을 잃는다.
           node pipeline/scripts/survey-all-campgrounds.mjs
+          # 운영자 공지·공식 소개·후기 요약에서 이용 정보 스펙(입·퇴실, 얼리/레이트, 매너타임, 추가 요금, 할인 등)을 정리한다.
+          node pipeline/scripts/build-spec-sheet.mjs
           # PR은 생성만 검사한다. main은 catalog·explorer를 원자적으로 갱신한다.
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             echo "PR에서는 공개 생성물을 커밋하지 않습니다."; exit 0

@@ -129,3 +129,31 @@ h1, h2 { color: var(--mc-ink); }
   .compare-bar { bottom: calc(92px + env(safe-area-inset-bottom, 0px)); }
   .dv-title { margin: -36px 10px 0; padding: 16px; }
 }
+
+/* ---------- 이용 정보 스펙 시트(다나와식 같은 항목·같은 순서) ---------- */
+.spec-score { margin-left: auto; padding: 3px 10px; border-radius: 999px; background: var(--mc-canvas); font-size: var(--fs-xs); color: var(--mc-ink-2); white-space: nowrap; }
+.spec-score b { color: var(--mc-ink); }
+.spec-lead { margin: 0; font-size: var(--fs-xs); color: var(--mc-ink-2); line-height: 1.55; }
+.spec-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 12px; }
+.spec-group { padding: 14px 16px; border-radius: var(--mc-r-2); background: var(--mc-canvas); }
+.spec-group h4 { margin: 0 0 8px; font-size: var(--fs-xs); font-weight: 800; letter-spacing: .02em; color: var(--mc-ink-3); }
+.spec-group dl { margin: 0; display: grid; gap: 2px; }
+.spec-row { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 10px; padding: 8px 0; border-top: 1px dashed color-mix(in srgb, var(--mc-line) 80%, transparent); }
+.spec-row:first-child { border-top: 0; }
+.spec-row dt { font-size: var(--fs-xs); font-weight: 700; color: var(--mc-ink-2); white-space: nowrap; }
+.spec-row dd { margin: 0; display: grid; gap: 4px; min-width: 0; font-size: var(--fs-sm); }
+.spec-row dd b { font-weight: 800; color: var(--mc-ink); }
+.spec-none { color: var(--mc-ink-3); font-size: var(--fs-xs); }
+.spec-mention { font-size: var(--fs-xs); color: var(--mc-ink-2); line-height: 1.5; }
+.spec-mention i { font-style: normal; color: var(--mc-ink-3); }
+.spec-conflict { margin-left: 4px; padding: 0 6px; border-radius: 999px; background: var(--mc-ember-tint); color: var(--mc-ember); font-style: normal; font-size: 10px; font-weight: 750; white-space: nowrap; }
+.spec-src summary { cursor: pointer; font-size: var(--fs-2xs); font-weight: 700; color: var(--mc-moss); list-style: none; }
+.spec-src summary::-webkit-details-marker { display: none; }
+.spec-src blockquote { margin: 6px 0 0; padding: 8px 10px; border-left: 3px solid var(--mc-sage); border-radius: 0 10px 10px 0; background: var(--mc-paper); font-size: var(--fs-xs); line-height: 1.5; color: var(--mc-ink); }
+.spec-src blockquote small { display: block; margin-top: 4px; color: var(--mc-ink-3); }
+.spec-src blockquote a { text-decoration: underline; }
+.compare-sep th { padding: 14px 12px 6px; text-align: left; font-size: var(--fs-xs); font-weight: 800; letter-spacing: .04em; color: var(--mc-ink-3); background: transparent; }
+.spec-cmp { font-size: var(--fs-xs); }
+.spec-cmp b { display: inline; font-weight: 800; }
+.spec-cmp .spec-mention { display: block; margin-top: 2px; }
+@media (max-width: 420px) { .spec-row { grid-template-columns: 1fr; gap: 2px; } }

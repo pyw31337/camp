@@ -602,6 +602,12 @@ function openCompareModal() {
   }
   const camps = ids.map((id) => ALL.find((c) => c.id === id)).filter(Boolean);
   if (camps.length < 2) return;
+  // 이용 정보 스펙은 상세 파일에 있다. 없는 곳만 받아 온 뒤 다시 그린다.
+  const missing = camps.filter((c) => !DETAIL.has(c.id));
+  if (missing.length) {
+    Promise.all(missing.map((c) => fetch(`data/camps/${c.id}.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})).then((d) => DETAIL.set(c.id, d)))).then(() => openCompareModal());
+    return;
+  }
 
   const rowCampHeader = `<tr>
     <th class="compare-col-head">캠핑장</th>
@@ -655,6 +661,11 @@ function openCompareModal() {
   const rowShelter = condRow("텐트·타프·캐노피", "shelter");
   const rowRentals = condRow("현장 대여", "rental");
 
+  const specRows = SPEC_ORDER.flatMap(([, , rows]) => rows).map(([code, label]) => `<tr>
+    <th class="compare-col-head">${label}</th>
+    ${camps.map((c) => `<td class="spec-cmp">${specCell(DETAIL.get(c.id)?.spec?.fields?.[code], { compact: true })}</td>`).join("")}
+  </tr>`).join("");
+
   const rowAvailability = `<tr>
     <th class="compare-col-head">최근 빈자리 현황</th>
     ${camps.map((c) => {
@@ -695,6 +706,9 @@ function openCompareModal() {
             <tbody>
               ${rowCampHeader}
               ${rowSetupFit}
+              <tr class="compare-sep"><th colspan="${camps.length + 1}">이용 정보 스펙</th></tr>
+              ${specRows}
+              <tr class="compare-sep"><th colspan="${camps.length + 1}">현장 조건</th></tr>
               ${rowParking}
               ${rowPower}
               ${rowFirewood}
@@ -1131,6 +1145,43 @@ function fieldConditionsBlock(c) {
   </div>`;
 }
 
+// 이용 정보 스펙 시트(docs/CAMPGROUND_SPEC_INTEGRATION.md). 모든 캠핑장을 같은 필드·같은 순서로 보여 줘
+// 다나와처럼 나란히 비교할 수 있게 한다. 확정 칸에는 운영자 확인·공식 소개 문장만, 후기는 ‘언급’ 칸에 건수로만.
+const SPEC_ORDER = [
+  ["time", "이용 시간", [["CHECKIN_TIME", "입실"], ["CHECKOUT_TIME", "퇴실"], ["EARLY_CHECKIN", "얼리 체크인"], ["LATE_CHECKOUT", "레이트 체크아웃"]]],
+  ["booking", "예약 규칙", [["MIN_STAY", "연박·최소 숙박"]]],
+  ["fee", "추가 요금", [["EXTRA_PERSON_FEE", "인원 추가"], ["EXTRA_CAR_FEE", "차량 추가"], ["VISITOR_POLICY", "방문객"]]],
+  ["rule", "현장 규칙", [["MANNER_TIME", "매너타임"], ["PET_POLICY", "반려동물"]]],
+  ["promo", "할인·행사·대여", [["DISCOUNT", "할인 대상"], ["PROMOTION", "기간 행사"], ["RENTAL", "대여"]]],
+];
+const SPEC_GRADE = { OPERATOR: ["verified", "운영자 확인"], OFFICIAL_TEXT: ["confirmed", "공식 소개"], MENTION: ["surveyed", "후기 언급"] };
+const specChip = (g) => `<em class="grade grade-${SPEC_GRADE[g]?.[0] ?? "unknown"}">${SPEC_GRADE[g]?.[1] ?? "확인 필요"}</em>`;
+function specCell(f, { compact = false } = {}) {
+  if (!f) return `<span class="spec-none">정보 없음</span>`;
+  const vals = f.values ?? [], ms = f.mentions ?? [];
+  const main = vals.length
+    ? `<b>${vals.map((v) => esc(v.value)).join(" · ")}</b> ${specChip(f.grade)}`
+    : `<span class="spec-none">확인 필요</span>`;
+  const mline = ms.length ? `<span class="spec-mention">${specChip("MENTION")} ${ms.map((m) => `${esc(m.value)}${m.count > 1 ? ` <i class="num">${m.count}건</i>` : ""}`).join(" · ")}${f.conflict ? ` <em class="spec-conflict">후기마다 다름</em>` : ""}</span>` : "";
+  if (compact) return `${main}${mline}`;
+  const quotes = [
+    ...vals.map((v) => ({ q: v.quote, url: v.source?.url, label: v.source?.label, date: v.source?.date })),
+    ...ms.flatMap((m) => m.samples.map((x) => ({ q: x.quote, url: x.url, label: x.label, date: x.date }))),
+  ].slice(0, 4);
+  return `${main}${mline}${quotes.length ? `<details class="spec-src"><summary>원문 문장 ${quotes.length}</summary>${quotes.map((x) => `<blockquote data-wrap-ok>“${esc(x.q)}”<small>${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.label ?? "원문")}</a>` : esc(x.label ?? "")}${x.date ? ` · ${ymd(x.date)}` : ""}</small></blockquote>`).join("")}</details>` : ""}`;
+}
+function specBlock(c, d) {
+  const sp = d?.spec, fields = sp?.fields ?? {};
+  const filled = SPEC_ORDER.flatMap(([, , rows]) => rows).filter(([code]) => fields[code]?.values?.length).length;
+  const total = SPEC_ORDER.reduce((n, [, , rows]) => n + rows.length, 0);
+  return `<section class="dv-sec dv-spec" id="sec-spec"><div class="dv-sub-head"><h3>${ic("#l-list-checks", "i-sm")}이용 정보 스펙</h3><span class="spec-score"><b class="num">${filled}</b>/${total} 확인</span></div>
+    <p class="spec-lead" data-wrap-ok>모든 캠핑장을 같은 항목으로 정리했어요. <b>굵은 값</b>은 운영자·공식 소개 문장에서, ‘후기 언급’은 블로그·카페 글에서 찾은 단서예요(여러 곳을 묶은 글은 뺐어요).</p>
+    <div class="spec-groups">${SPEC_ORDER.map(([g, title, rows]) => `<div class="spec-group"><h4>${title}</h4><dl>${rows.map(([code, label]) => `<div class="spec-row${fields[code]?.values?.length ? " has" : fields[code] ? " hint" : ""}"><dt>${label}</dt><dd>${specCell(fields[code])}</dd></div>`).join("")}</dl></div>`).join("")}</div>
+    <span class="trust">${sp ? `${ymd(sp.generated_at)} 정리 · 후기 ${sp.stats?.reviews_used ?? 0}건 반영 · 묶음 글 ${sp.stats?.roundups_skipped ?? 0}건 제외 · ` : ""}가격·운영 여부는 예약처 최신 공지가 우선입니다</span>
+    <a class="dv-fix-link" href="${esc(correctionUrl(c))}" target="_blank" rel="noopener">${ic("#l-pencil", "i-xs")}이 정보 고치기·운영자 확인 알리기</a>
+  </section>`;
+}
+
 // 예약 전 확인·준비(로드맵 R1·R2·R3). 모르는 조건을 ‘물어볼 질문’으로, 아는 조건을 ‘챙길 것’으로 바꾼다.
 // 질문은 확인 필요/소개글 기반 항목만, 준비물은 등급이 있는 사실만 근거로 쓴다. 근거 없는 일반론은 넣지 않는다.
 const REPO_ISSUES = "https://github.com/pyw31337/camp/issues/new";
@@ -1148,9 +1199,13 @@ function confirmQuestions(c) {
   if (need(v.parking) || v.parking.partial) qs.push(["parking", v.parking.partial ? "텐트 바로 옆에 주차할 수 있는 구역이 어디인가요?" : "차를 텐트 바로 옆에 댈 수 있나요? 아니면 주차 후 짐을 옮겨야 하나요(수레 제공 여부)?"]);
   if (need(v.power) || (state.profilePower && !v.power.watts)) qs.push(["power", `사이트당 전기는 최대 몇 W(몇 A)까지 쓸 수 있나요?${state.profilePower ? ` ${Number(state.profilePower).toLocaleString()}W 정도 쓰려고 해요.` : ""}`]);
   if (need(v.firewood) || v.firewood.designated) qs.push(["firewood", "개인 화로대로 장작 불멍이 가능한가요? 화로대 받침이나 지정 구역 조건이 있나요?"]);
+  const spf = DETAIL.get(c.id)?.spec?.fields ?? {};
+  const known = (code) => spf[code]?.values?.length;
+  if (!known("CHECKIN_TIME") || !known("CHECKOUT_TIME") || spf.CHECKIN_TIME?.conflict) qs.push(["time", "입실·퇴실 시간과 얼리 체크인·레이트 체크아웃 가능 여부·요금이 어떻게 되나요?"]);
+  if (!known("MIN_STAY") && state.checkIn && state.checkOut && (Date.parse(state.checkOut) - Date.parse(state.checkIn)) / 864e5 < 2) qs.push(["minstay", "주말 1박 예약도 가능한가요? 2박 우선 예약이 있나요?"]);
   if (!fixedStay && v.shelter.grade === "UNKNOWN") qs.push(["shelter", "텐트 외에 타프(또는 3×3m 캐노피)를 추가로 칠 수 있나요?"]);
   if (v.kids.grade !== "UNKNOWN" && /수영|물놀이|SWIMMING/.test([...v.kids.amenities, ...v.kids.features].join(" "))) qs.push(["kids", `${stay}물놀이장(수영장)을 운영하나요? 이용료가 따로 있나요?`]);
-  return qs.slice(0, 5);
+  return qs.slice(0, 6);
 }
 function prepItems(c) {
   const v = conditionView(c), out = [];
@@ -1467,7 +1522,7 @@ function infoBlock(c, d) {
   </section>`;
 }
 
-const DV_NAV = [["sec-important", "중요"], ["sec-book", "예약"], ["sec-setup", "내 세팅"], ["sec-prep", "준비"], ["sec-site", "사이트·요금"], ["sec-media", "후기"], ["sec-fac", "시설"], ["sec-near", "주변"], ["sec-info", "정보"], ["sec-talk", "댓글"]];
+const DV_NAV = [["sec-important", "중요"], ["sec-spec", "이용 정보"], ["sec-book", "예약"], ["sec-setup", "내 세팅"], ["sec-prep", "준비"], ["sec-site", "사이트·요금"], ["sec-media", "후기"], ["sec-fac", "시설"], ["sec-near", "주변"], ["sec-info", "정보"], ["sec-talk", "댓글"]];
 function detail(c) {
   const d = DETAIL.get(c.id);
   LB.clear();
@@ -1497,6 +1552,7 @@ function detail(c) {
     </div>
     <nav class="d-nav dv-nav" aria-label="상세 목차">${DV_NAV.filter(([id]) => id !== "sec-setup" || hasSetup()).map(([id, l]) => `<button type="button" data-jump="${id}">${l}</button>`).join("")}</nav>
     ${importantInfoBlock(c)}
+    ${specBlock(c, d)}
     ${bookingCard(c, d, target)}
     ${setupBlock(c)}
     ${prepBlock(c)}

@@ -33,6 +33,8 @@ Codex(토큰 만료)·Gemini 작업이 멈춘 뒤 Claude가 이어받았다. PR:
 4. **로드맵 R1~R5 구현**: 예약 전 확인 질문·준비 체크, 정보 고치기/운영자 조건표 이슈 양식(`.github/ISSUE_TEMPLATE/`), 비교 공유(`#cmp=`). 계획은 `SERVICE_REINVENTION_PLAN.md` 9장.
 5. **디자인 v3 “Moss & Canvas”**(소유자 Taste ‘Camp’ 컬렉션 기반): 토큰 원본 `design/brand-tokens.mjs`(`--mc-*`) → 공통 헤더 CSS에 실려 홈·탐색·보조 페이지가 같은 값을 쓴다. 탐색 덧칠은 `design/explore/_v3.css`(마지막에 로드). 메뉴: 캠핑장 찾기·테마·예약 일정·내 캠핑(주소 동일). 정보 균일 원칙(좁은 화면에서도 숨기지 않음)은 `DESIGN_SYSTEM.md` v3 6절.
 
+6. **이용 정보 스펙(캠핑장의 다나와, 2026-10-15)**: `pipeline/lib/spec-extractor.mjs`가 운영자 공지(OPERATOR)·고캠핑 소개(OFFICIAL_TEXT)·후기 요약(MENTION)의 문장에서 입·퇴실, 얼리/레이트, 매너타임, 연박 규칙, 인원·차량·방문객 요금, 반려동물, 할인 대상, 기간 행사, 대여를 같은 사전으로 꺼낸다. `scripts/build-spec-sheet.mjs`가 `camps/{id}.json`의 `spec`에 쓰고(data-sync 연결), 상세 ‘이용 정보 스펙’·비교표·질문 생성이 읽는다. 후기 언급은 확정 칸에 올리지 않으며 묶음 글은 제외한다. 설계: `docs/CAMPGROUND_SPEC_INTEGRATION.md`. 첫 실행: 816곳 스펙, 묶음 글 2,463건 제외.
+
 **충돌 주의**: `design/explore/_app.js`·`_page.css`·`_v3.css`, `design/site-header.mjs`, `design/explore/utility-pages.mjs`, `camping-atlas/app/premium.css`를 크게 바꿨다. 다른 작업자는 PR 병합 뒤 이 파일을 기준으로 작업한다.
 
 **검증(2026-10-15)**: `pipeline` 테스트 190 통과·0 실패·2 스킵(DB 미연결), `npm run validate` 통과, `node design/build-explore.mjs` 성공, `camping-atlas` `npm run build:pages` 성공·`npm run lint` 오류 0(기존 경고 2). Playwright 1440/390px × 라이트/다크로 목록·상세·비교·비교 공유·질문 복사·홈·내 캠핑·예약 일정 확인, 페이지 오류 0·가로 넘침 0. `design/checks/run.sh`는 v2 시안(`mockup-v2`) 전용이라 실행하지 않았다.
