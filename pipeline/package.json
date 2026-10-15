@@ -33,7 +33,9 @@
     "sync:nearby": "node scripts/sync-nearby-context.mjs",
     "sync:images": "node scripts/sync-images.mjs",
     "sync:tour-products": "node scripts/sync-tour-products.mjs",
-    "sync:social": "node scripts/sync-social.mjs"
+    "sync:social": "node scripts/sync-social.mjs",
+    "survey:conditions": "node scripts/survey-all-campgrounds.mjs",
+    "build:spec": "node scripts/build-spec-sheet.mjs"
   },
   "dependencies": {
     "pg": "8.23.1",

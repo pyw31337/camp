@@ -1,14 +1,15 @@
 :root {
-  --green: #1f9d5c; --green-press: #17834b; --green-tint: #e5f4eb; --on-green: #ffffff;
-  --forest: #173f2e; --on-forest: #f1f6f2; --heading: #173f2e;
-  --ember: #e8702f; --ember-tint: #fdeee4;
-  --ink: #17211c; --ink-2: #57635c; --ink-3: #8a948e;
-  --bg: #f4f5f2; --surface: #ffffff; --surface-2: #eef1ec; --line: #e1e6e0;
-  --glass: rgba(16, 32, 24, .42); --scrim: rgba(10, 20, 15, .45);
-  --shadow-1: 0 1px 2px rgba(23,33,28,.06);
-  --shadow-2: 0 12px 32px -8px rgba(23,33,28,.18);
-  --font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
-  --r-1: 10px; --r-2: 16px; --r-3: 24px; --r-4: 32px;
+  /* v3: 브랜드 토큰(design/brand-tokens.mjs, --mc-*)을 가리키는 별칭. 다크 모드도 --mc-*가 바꾼다. */
+  --green: var(--mc-moss); --green-press: var(--mc-moss-press); --green-tint: var(--mc-moss-tint); --on-green: var(--mc-on-moss);
+  --forest: var(--mc-night); --on-forest: var(--mc-on-night); --heading: var(--mc-ink);
+  --ember: var(--mc-ember); --ember-tint: var(--mc-ember-tint);
+  --ink: var(--mc-ink); --ink-2: var(--mc-ink-2); --ink-3: var(--mc-ink-3);
+  --bg: var(--mc-canvas); --surface: var(--mc-paper); --surface-2: var(--mc-sand); --line: var(--mc-line);
+  --glass: var(--mc-glass); --scrim: var(--mc-scrim);
+  --shadow-1: var(--mc-shadow-1);
+  --shadow-2: var(--mc-shadow-2);
+  --font: var(--mc-font);
+  --r-1: var(--mc-r-1); --r-2: var(--mc-r-2); --r-3: var(--mc-r-3); --r-4: var(--mc-r-4);
   --gutter: clamp(16px, 4vw, 48px);
   /* 글자 크기 토큰(rem). 설정의 글자 크기는 html font-size(%)만 바꾸면 전체가 비례해 커진다. 최소 12px */
   --fs-2xs: .75rem; --fs-xs: .8125rem; --fs-sm: .875rem; --fs-base: .9375rem; --fs-md: 1.0625rem;
@@ -19,24 +20,6 @@ html { font-size: 100%; -webkit-text-size-adjust: 100%; scrollbar-gutter: stable
 html.detail-open,
 body.detail-open { overflow: hidden; overscroll-behavior: none; }
 html[data-fs="s"] { font-size: 93.75%; } html[data-fs="l"] { font-size: 112.5%; } html[data-fs="xl"] { font-size: 125%; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --green: #3dbb78; --green-press: #5cce91; --green-tint: #14301f; --on-green: #04170c;
-  --forest: #0f2a1f; --on-forest: #e6eee9; --heading: #e6eee9;
-  --ember: #f4945a; --ember-tint: #3a2416;
-  --ink: #e6eee9; --ink-2: #a3afa8; --ink-3: #737f78;
-  --bg: #0d1310; --surface: #151d19; --surface-2: #1d2722; --line: #29342e;
-  --glass: rgba(6, 14, 10, .5); --scrim: rgba(0, 0, 0, .6);
-  --shadow-1: 0 1px 2px rgba(0,0,0,.4); --shadow-2: 0 12px 32px -8px rgba(0,0,0,.6);
-  color-scheme: dark; } }
-:root[data-theme="dark"] {
-  --green: #3dbb78; --green-press: #5cce91; --green-tint: #14301f; --on-green: #04170c;
-  --forest: #0f2a1f; --on-forest: #e6eee9; --heading: #e6eee9;
-  --ember: #f4945a; --ember-tint: #3a2416;
-  --ink: #e6eee9; --ink-2: #a3afa8; --ink-3: #737f78;
-  --bg: #0d1310; --surface: #151d19; --surface-2: #1d2722; --line: #29342e;
-  --glass: rgba(6, 14, 10, .5); --scrim: rgba(0, 0, 0, .6);
-  --shadow-1: 0 1px 2px rgba(0,0,0,.4); --shadow-2: 0 12px 32px -8px rgba(0,0,0,.6);
-  color-scheme: dark; }
 
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }

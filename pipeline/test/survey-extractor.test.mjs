@@ -139,3 +139,40 @@ test("전수조사 추출: 파일럿 검증 데이터는 최우선 적용된다"
   assert.equal(fact.parking.mode, "SITE_ADJACENT");
   assert.equal(fact.power.limit_w, 1000);
 });
+
+test("전수조사 추출: 소개글 신호는 SURVEYED이고, 면적으로 타프·캐노피 허용을 만들지 않는다", () => {
+  const camp = { sizes: [[10, 10, 5]], floors: [["GRAVEL", 5]], amenities: ["전기"], fire: "개별" };
+  const detail = { intro: "사이트 옆 주차가 가능하고 고전력 사용이 넉넉합니다. 장작 불멍 가능." };
+  const fact = extractCampConditions(camp, detail);
+  assert.equal(fact.status, "SURVEYED");
+  assert.equal(fact.parking.state, "SURVEYED");
+  assert.equal(fact.power.limit_w, null); // ‘고전력’ 표현만으로 W를 만들지 않는다
+  assert.equal(fact.power.high_power_mention, true);
+  assert.equal(fact.firewood.state, "SURVEYED");
+  assert.equal(fact.shelter_setup.state, "UNKNOWN");
+  assert.equal(fact.shelter_setup.canopy_allowed, null);
+  assert.equal(fact.site_size.state, "CONFIRMED");
+  assert.equal(fact.site_size.groups[0].surface, undefined); // 바닥 기본값을 만들지 않는다
+});
+
+test("전수조사 추출: 고캠핑 화로대 필드만으로 판단한 숯 허용은 CONFIRMED", () => {
+  const fact = extractCampConditions({ fire: "개별" }, { intro: "조용한 캠핑장" });
+  assert.equal(fact.charcoal.allowed, true);
+  assert.equal(fact.charcoal.state, "CONFIRMED");
+  assert.equal(fact.firewood.allowed, null);
+  assert.equal(fact.status, "CONFIRMED");
+});
+
+test("파일럿 검증: 구역별 주차가 섞이면 텐트 옆 주차를 확정하지 않고, 지정 구역 화기는 규칙 코드로 남긴다", () => {
+  const fact = extractCampConditions({}, null, {
+    parking_mode: "SITE_ADJACENT", power_max_w: 1000, firewood_allowed: "DESIGNATED_ONLY", charcoal_allowed: "ALLOWED",
+    zones: [{ name: "A", size_w: 8, size_h: 10, parking: "SITE_ADJACENT", site_count: 10 }, { name: "D", size_w: 6, size_h: 7, parking: "SHARED_NEARBY", site_count: 5 }],
+    evidence: { source_url: "https://example.go.kr", observed_at: "2026-10-15", reviewer: "r1" },
+  });
+  assert.equal(fact.parking.tent_side, null);
+  assert.deepEqual(fact.parking.tent_side_zones, { adjacent: 1, total: 2 });
+  assert.equal(fact.firewood.allowed, null);
+  assert.equal(fact.firewood.rule, "DESIGNATED_ONLY");
+  assert.equal(fact.fire_pit.arrangement, null);
+  assert.equal(fact.shelter_setup.max_tarps, null);
+});

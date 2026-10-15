@@ -23,6 +23,24 @@
 - 전국 조건 전수조사 완료(2026-10-15, Gemini): 관광진흥법 야영장 안전기준 및 고캠핑 공식 등록값·소개글을 바탕으로 전국 3,116곳 전수조사 엔진(`survey-extractor.mjs`)을 구축하고, 텐트 옆 주차 1,288곳, 600W/고전력 2,114곳, 불멍 2,420곳, 위생 1,688곳, 키즈 2,174곳 데이터를 카탈로그와 탐색 UI에 일괄 반영했다.
 - **조건 품질 경계 보강(2026-10-15, Codex)**: 전국 전수 추출의 `SURVEYED` 값은 소개글·시설 분류에서 나온 발견 신호이며, 직접 원문 대조 파일럿의 `VERIFIED`와 등급이 다르다. 내 캠핑 세팅의 전력 W·텐트 옆 주차·장작 불멍은 `VERIFIED` 조건표가 있을 때만 `MATCH`/`MISMATCH`를 낸다. 고캠핑의 구조화된 사이트 규격은 별도 직접 등록값으로 계속 비교할 수 있다. 자세한 계약은 `PILOT_INTAKE_CONTRACT.md` 2.1절이다.
 
+## Claude 단독 인수(2026-10-15 밤) — 먼저 읽을 것
+
+Codex(토큰 만료)·Gemini 작업이 멈춘 뒤 Claude가 이어받았다. PR: https://github.com/pyw31337/camp/pull/15 (브랜치 `claude/zealous-johnson-an2enq`).
+
+1. **가짜 관측 제거**: `pilot-observations.json`의 샘플 6건(카탈로그에 없는 ID·임의 잔여 수량)을 지웠다. `observe-public-availability.mjs`가 매 실행 `observed_at`을 현재 시각으로 덮어쓰던 코드도 없앴다. 읽기 모델은 `source_approval`(APPROVED_LIVE/OBSERVATION)·https `source_url`·`evidence_ref`·실제 `observed_at`·카탈로그 매칭이 없으면 발행하지 않고 `rejected_observations`로 센다. `validate`도 막는다.
+2. **추출 과장 제거**: 소개글 신호는 `SURVEYED`, 고캠핑 구조화 필드만 `CONFIRMED`. ‘고전력’→1000W, 면적→타프·캐노피, 바닥 ‘파쇄석’ 기본값, 파일럿 공통 화로대 문구·max_tarps 기본 1 제거. 재생성 결과 텐트 옆 주차 1,288→17, 장작 불멍 2,420→85(이전 수치는 과장). `data-sync`가 발행 뒤 `survey-all-campgrounds.mjs`를 실행한다.
+3. **화면 단일 계약**: `_app.js`의 `conditionView(c)`만이 조건 값·등급(VERIFIED/CONFIRMED/SURVEYED/UNKNOWN)을 만든다. 배지·카드·필터·비교·상세를 고칠 때 여기만 고친다.
+4. **로드맵 R1~R5 구현**: 예약 전 확인 질문·준비 체크, 정보 고치기/운영자 조건표 이슈 양식(`.github/ISSUE_TEMPLATE/`), 비교 공유(`#cmp=`). 계획은 `SERVICE_REINVENTION_PLAN.md` 9장.
+5. **디자인 v3 “Moss & Canvas”**(소유자 Taste ‘Camp’ 컬렉션 기반): 토큰 원본 `design/brand-tokens.mjs`(`--mc-*`) → 공통 헤더 CSS에 실려 홈·탐색·보조 페이지가 같은 값을 쓴다. 탐색 덧칠은 `design/explore/_v3.css`(마지막에 로드). 메뉴: 캠핑장 찾기·테마·예약 일정·내 캠핑(주소 동일). 정보 균일 원칙(좁은 화면에서도 숨기지 않음)은 `DESIGN_SYSTEM.md` v3 6절.
+
+6. **이용 정보 스펙(캠핑장의 다나와, 2026-10-15)**: `pipeline/lib/spec-extractor.mjs`가 운영자 공지(OPERATOR)·고캠핑 소개(OFFICIAL_TEXT)·후기 요약(MENTION)의 문장에서 입·퇴실, 얼리/레이트, 매너타임, 연박 규칙, 인원·차량·방문객 요금, 반려동물, 할인 대상, 기간 행사, 대여를 같은 사전으로 꺼낸다. `scripts/build-spec-sheet.mjs`가 `camps/{id}.json`의 `spec`에 쓰고(data-sync 연결), 상세 ‘이용 정보 스펙’·비교표·질문 생성이 읽는다. 후기 언급은 확정 칸에 올리지 않으며 묶음 글은 제외한다. 설계: `docs/CAMPGROUND_SPEC_INTEGRATION.md`. 첫 실행: 816곳 스펙, 묶음 글 2,463건 제외.
+
+**충돌 주의**: `design/explore/_app.js`·`_page.css`·`_v3.css`, `design/site-header.mjs`, `design/explore/utility-pages.mjs`, `camping-atlas/app/premium.css`를 크게 바꿨다. 다른 작업자는 PR 병합 뒤 이 파일을 기준으로 작업한다.
+
+**검증(2026-10-15)**: `pipeline` 테스트 190 통과·0 실패·2 스킵(DB 미연결), `npm run validate` 통과, `node design/build-explore.mjs` 성공, `camping-atlas` `npm run build:pages` 성공·`npm run lint` 오류 0(기존 경고 2). Playwright 1440/390px × 라이트/다크로 목록·상세·비교·비교 공유·질문 복사·홈·내 캠핑·예약 일정 확인, 페이지 오류 0·가로 넘침 0. `design/checks/run.sh`는 v2 시안(`mockup-v2`) 전용이라 실행하지 않았다.
+
+**다음 작업**: (a) 파일럿 30곳 원문 대조(R6, 사람 검수), (b) 승인 관측 원천 1곳 확보(R7, 소유자 제휴), (c) 소셜 읽기 모델 `display_rights`(R8), (d) 저장소 라벨 `condition-report`·`operator-sheet` 생성(소유자), (e) v3 덧칠이 안정되면 `_page.css`의 덮어쓴 옛 규칙 정리.
+
 ## Codex 협의 및 작업 분담 (2026-10-15, Gemini)
 
 Codex가 제안한 다음 작업 6개 과제에 대해 Gemini 전담 과제(과제 2, 과제 5, 과제 3)를 모두 구현·검증 완료했다:

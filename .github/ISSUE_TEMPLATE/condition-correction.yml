@@ -1,0 +1,67 @@
+name: 캠핑장 정보 고치기·확인 결과 알리기
+description: 캠핑장 현장 조건(주차·전기·불멍·규격·위생·대여 등)이 틀렸거나, 운영자에게 확인한 답을 알려 주세요.
+title: "[정보 고치기] "
+labels: ["condition-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        알려 주신 내용은 **이용자 제보(E 등급)** 로 검수 대기열에 들어갑니다. 검수자가 공식 원문이나 운영자 확인으로 대조하기 전에는 화면의 값이 바뀌지 않아요.
+        전화번호·이름 같은 개인정보는 적지 마세요. 이 저장소와 이슈는 공개돼 있습니다.
+  - type: input
+    id: campground
+    attributes:
+      label: 캠핑장
+      description: 화면의 ‘정보 고치기’를 눌렀다면 자동으로 채워져요.
+      placeholder: "○○캠핑장 (id: 1234)"
+    validations:
+      required: true
+  - type: dropdown
+    id: field
+    attributes:
+      label: 어떤 항목인가요?
+      multiple: true
+      options:
+        - 주차 동선(텐트 옆 주차·짐수레 이동)
+        - 전기(사이트당 최대 W·차단기)
+        - 장작 불멍·숯·화로대 규정
+        - 텐트·타프·캐노피 설치 규정
+        - 사이트 규격·바닥
+        - 화장실·샤워실·온수
+        - 장비 대여·요금
+        - 아이 시설·물놀이장 운영 기간
+        - 예약 방법·예약처 링크
+        - 기타
+    validations:
+      required: true
+  - type: textarea
+    id: value
+    attributes:
+      label: 확인한 내용
+      description: 구역·사이트 단위로 적어 주세요. 예) "A구역 1~16번은 텐트 옆 주차, B구역 데크는 공용 주차장 후 도보 1분"
+    validations:
+      required: true
+  - type: dropdown
+    id: source_type
+    attributes:
+      label: 어떻게 확인하셨나요?
+      options:
+        - 운영자에게 전화·문자·채팅으로 직접 물어봄
+        - 캠핑장 공식 홈페이지·공지 원문
+        - 예약처(네이버 예약·캠핏 등) 상품 안내 원문
+        - 현장에서 직접 봄
+    validations:
+      required: true
+  - type: input
+    id: source_url
+    attributes:
+      label: 근거 링크(있다면)
+      description: 공지·상품 안내 원문 주소. 사진은 올리지 말고 링크만 적어 주세요.
+      placeholder: "https://"
+  - type: input
+    id: confirmed_on
+    attributes:
+      label: 확인한 날짜
+      placeholder: "2026-10-15"
+    validations:
+      required: true

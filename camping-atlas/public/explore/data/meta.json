@@ -700,15 +700,75 @@
     "official_notice_items": 0,
     "shelter_setup_registered": 0,
     "verified_condition_facts": 10,
-    "surveyed_condition_facts": 3106,
-    "parking_tent_side": 1288,
-    "parking_cart_required": 15,
+    "surveyed_condition_facts": 251,
+    "parking_tent_side": 17,
+    "parking_cart_required": 17,
     "parking_shared": 1,
     "power_high_w": 10,
-    "firewood_allowed": 2420,
-    "firewood_prohibited": 84,
+    "firewood_allowed": 85,
+    "firewood_prohibited": 110,
     "private_bathroom": 137,
-    "kids_play_features": 2174
+    "kids_play_features": 2174,
+    "confirmed_condition_facts": 2855
   },
-  "updated_at": "2026-10-15T07:13:33.661Z"
+  "updated_at": "2026-10-15T08:29:58.577Z",
+  "spec_sheet": {
+    "generated_at": "2026-10-15T09:03:42.676Z",
+    "campgrounds_with_spec": 816,
+    "roundup_reviews_skipped": 2463,
+    "fields": {
+      "CHECKIN_TIME": {
+        "official": 4,
+        "mention": 389
+      },
+      "CHECKOUT_TIME": {
+        "official": 2,
+        "mention": 335
+      },
+      "EARLY_CHECKIN": {
+        "official": 2,
+        "mention": 15
+      },
+      "LATE_CHECKOUT": {
+        "official": 0,
+        "mention": 12
+      },
+      "MANNER_TIME": {
+        "official": 2,
+        "mention": 57
+      },
+      "MIN_STAY": {
+        "official": 1,
+        "mention": 10
+      },
+      "EXTRA_PERSON_FEE": {
+        "official": 2,
+        "mention": 13
+      },
+      "EXTRA_CAR_FEE": {
+        "official": 2,
+        "mention": 4
+      },
+      "VISITOR_POLICY": {
+        "official": 1,
+        "mention": 2
+      },
+      "PET_POLICY": {
+        "official": 148,
+        "mention": 325
+      },
+      "RENTAL": {
+        "official": 0,
+        "mention": 2
+      },
+      "DISCOUNT": {
+        "official": 1,
+        "mention": 11
+      },
+      "PROMOTION": {
+        "official": 0,
+        "mention": 9
+      }
+    }
+  }
 }
