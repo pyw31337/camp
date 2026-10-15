@@ -16,9 +16,40 @@ test("pilot condition facts validation", async () => {
   assert.equal(first.parking_mode, "SITE_ADJACENT");
   assert.equal(first.firewood_allowed, "ALLOWED");
   assert.equal(first.evidence.verification_status, "VERIFIED");
+  assert.equal(first.evidence.source_type, "MANUAL_PRIMARY_PAGE_REVIEW");
+  assert.ok(first.evidence.reviewed_field_codes.includes("POWER_MAX_W"));
+  assert.ok(first.evidence.next_review_due_at);
   assert.ok(first.zones.length > 0);
   assert.ok(first.zones[0].size_w > 0);
   assert.ok(first.zones[0].size_h > 0);
+});
+
+test("VERIFIED pilot entries require reviewer, covered fields, and a recheck date", () => {
+  const incomplete = {
+    pilot_campgrounds: [{
+      id: "missing-evidence",
+      name: "근거가 모자란 캠핑장",
+      region: "경기",
+      parking_mode: "SITE_ADJACENT",
+      power_max_w: 1000,
+      firewood_allowed: "ALLOWED",
+      charcoal_allowed: "ALLOWED",
+      zones: [{ name: "A", size_w: 8, size_h: 8, surface: "GRAVEL", parking: "SITE_ADJACENT", site_count: 1 }],
+      evidence: {
+        source_url: "https://example.test/notice",
+        observed_at: "2026-10-15T09:00:00+09:00",
+        verification_status: "VERIFIED",
+        reviewer: "",
+        reviewed_field_codes: ["PARKING_MODE"],
+        next_review_due_at: "2026-10-14T09:00:00+09:00"
+      }
+    }]
+  };
+  const errors = validatePilotConditionFacts(incomplete);
+  assert.ok(errors.some((e) => e.includes("invalid source_type")));
+  assert.ok(errors.some((e) => e.includes("missing reviewer")));
+  assert.ok(errors.some((e) => e.includes("missing core field coverage")));
+  assert.ok(errors.some((e) => e.includes("must be after observed_at")));
 });
 
 test("detects invalid parking and dimensions", () => {

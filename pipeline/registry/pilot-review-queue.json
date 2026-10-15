@@ -1,0 +1,166 @@
+{
+  "$comment": "파일럿 확대를 위한 사람 검수 대기열이다. 후보 URL은 공식 예약·등록 경로를 찾기 위한 출발점일 뿐이며, 이 파일의 값은 탐색 화면·조건 필터에 발행하지 않는다.",
+  "version": 1,
+  "updated_at": "2026-10-15",
+  "source_approval": {
+    "id": "foresttrip-manual-pilot-review",
+    "approval_status": "MANUAL_REVIEW_ONLY",
+    "policy": "운영자/공식 원문을 사람이 대조하여 파일럿 조건표에 입력할 수 있다. 자동 조회·빈자리 관측·플랫폼 공지 복제는 이 승인에 포함되지 않는다."
+  },
+  "candidates": [
+    {
+      "id": "review-001-seongsusan",
+      "gocamping_id": "101916",
+      "name": "성수산 왕의숲 숲속야영장",
+      "region": "전북특별자치도 임실군",
+      "status": "QUEUED",
+      "source": {
+        "approval_status": "MANUAL_REVIEW_ONLY",
+        "official_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030122",
+        "catalog_url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101916"
+      },
+      "required_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT"],
+      "selection_reason": "전북 권역의 공식 예약 연결 후보; 바닥재 등록값이 있어 구역별 조건 원문 대조 우선"
+    },
+    {
+      "id": "review-002-mubongsan",
+      "gocamping_id": "101890",
+      "name": "무봉산 자연휴양림",
+      "region": "경기도 화성시",
+      "status": "QUEUED",
+      "source": {
+        "approval_status": "MANUAL_REVIEW_ONLY",
+        "official_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030118#none",
+        "catalog_url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101890"
+      },
+      "required_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT"],
+      "selection_reason": "경기 권역의 데크 규격 등록 후보; 주차·전력·화기 원문 검수 필요"
+    },
+    {
+      "id": "review-003-seongbulsan",
+      "gocamping_id": "101955",
+      "name": "성불산자연휴양림 숲속캠핑장",
+      "region": "충청북도 괴산군",
+      "status": "QUEUED",
+      "source": {
+        "approval_status": "MANUAL_REVIEW_ONLY",
+        "official_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030070",
+        "catalog_url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101955"
+      },
+      "required_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT"],
+      "selection_reason": "충북 권역의 데크 사이트 후보; 전력 제한과 화기 규정은 원문 확인 전 미발행"
+    },
+    {
+      "id": "review-004-dutasan",
+      "gocamping_id": "389",
+      "name": "두타산자연휴양림",
+      "region": "강원특별자치도 평창군",
+      "status": "QUEUED",
+      "source": {
+        "approval_status": "MANUAL_REVIEW_ONLY",
+        "official_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243",
+        "catalog_url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=389"
+      },
+      "required_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT"],
+      "selection_reason": "강원 권역 산림형 후보; 계절 화기 규정과 짐 이동 동선 확인 우선"
+    },
+    {
+      "id": "review-005-bonghwang",
+      "gocamping_id": "8149",
+      "name": "봉황자연휴양림 숲속야영장",
+      "region": "충청북도 충주시",
+      "status": "QUEUED",
+      "source": {
+        "approval_status": "MANUAL_REVIEW_ONLY",
+        "official_url": "https://www.foresttrip.go.kr/rep/or/sssn/fcfsRsrvtPssblGoodsDetls.do?hmpgId=ID02030051&menuId=001001",
+        "catalog_url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=8149"
+      },
+      "required_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT"],
+      "selection_reason": "충북 권역의 공식 상품 상세 연결 후보; 상품·구역 범위 분리 검증용"
+    },
+    {
+      "id": "review-006-bulgeunoreum",
+      "gocamping_id": "7895",
+      "name": "붉은오름 자연휴양림 숲속 야영장",
+      "region": "제주특별자치도 서귀포시",
+      "status": "QUEUED",
+      "source": {
+        "approval_status": "MANUAL_REVIEW_ONLY",
+        "official_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030014",
+        "catalog_url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7895"
+      },
+      "required_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT"],
+      "selection_reason": "제주 권역의 데크 규격 후보; 화기·차량 동선이 본토와 다른지 별도 검수"
+    },
+    {
+      "id": "review-007-sinam",
+      "gocamping_id": "101588",
+      "name": "신암저수지 숲속야영장",
+      "region": "경기도 양주시",
+      "status": "QUEUED",
+      "source": {
+        "approval_status": "MANUAL_REVIEW_ONLY",
+        "official_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030123",
+        "catalog_url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101588"
+      },
+      "required_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT"],
+      "selection_reason": "경기 권역의 복수 규격 후보; 데크와 파쇄석을 구역별로 분리 확인"
+    },
+    {
+      "id": "review-008-gongju",
+      "gocamping_id": "315",
+      "name": "공주산림휴양마을",
+      "region": "충청남도 공주시",
+      "status": "QUEUED",
+      "source": {
+        "approval_status": "MANUAL_REVIEW_ONLY",
+        "official_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030011",
+        "catalog_url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=315"
+      },
+      "required_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT"],
+      "selection_reason": "충남 권역의 복수 데크 규격 후보; 1텐트·타프 규정 원문 확인"
+    },
+    {
+      "id": "review-009-jincheon",
+      "gocamping_id": "100878",
+      "name": "생거진천 자연휴양림",
+      "region": "충청북도 진천군",
+      "status": "QUEUED",
+      "source": {
+        "approval_status": "MANUAL_REVIEW_ONLY",
+        "official_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030033",
+        "catalog_url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100878"
+      },
+      "required_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT"],
+      "selection_reason": "충북 권역의 소규모 데크 후보; 정원·위생·전력 조건의 범위 대조"
+    },
+    {
+      "id": "review-010-cheongdo",
+      "gocamping_id": "100411",
+      "name": "청도자연휴양림",
+      "region": "경상북도 청도군",
+      "status": "QUEUED",
+      "source": {
+        "approval_status": "MANUAL_REVIEW_ONLY",
+        "official_url": "https://www.foresttrip.go.kr/rep/or/sssn/fcfsRsrvtPssblGoodsDetls.do?hmpgId=ID02030116&menuId=001001",
+        "catalog_url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100411"
+      },
+      "required_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT"],
+      "selection_reason": "경북 권역의 공식 상품 상세 후보; 오토·데크 구역을 구분해 검수"
+    },
+    {
+      "id": "review-011-taebaek",
+      "gocamping_id": "100615",
+      "name": "태백고원자연휴양림 자동차야영장",
+      "region": "강원특별자치도 태백시",
+      "status": "QUEUED",
+      "source": {
+        "approval_status": "MANUAL_REVIEW_ONLY",
+        "official_url": "https://www.foresttrip.go.kr/rep/or/sssn/fcfsRsrvtPssblGoodsDetls.do?hmpgId=ID02030022&menuId=001001",
+        "catalog_url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100615"
+      },
+      "required_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT"],
+      "selection_reason": "강원 권역 자동차야영장 후보; 오토야영 분류를 텐트 옆 주차 사실로 오인하지 않는 검수 대상"
+    }
+  ]
+}

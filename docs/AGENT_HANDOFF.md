@@ -21,6 +21,7 @@
 - 서비스 재정의(2026-10-15): 제품 기준을 `최근 관측 빈자리 + 캠핑 적합성`으로 재정립했다. 실행 설계·상태명·데이터 사전·원천 정책·클로드/코덱스 협업 규칙은 `docs/SERVICE_REINVENTION_PLAN.md`가 기준이다. 기존 `LIVE_AVAILABLE`과 새 `OBSERVED_AVAILABLE`/`OBSERVED_UNAVAILABLE`을 절대 섞지 않는다. DB/파이프라인 작업은 해당 문서의 파일럿 원천 승인 전에는 마이그레이션하지 않는다.
 - 파일럿 입력 계약(2026-10-15): Codex는 화면·DB 구현과 겹치지 않도록 `docs/PILOT_INTAKE_CONTRACT.md`에 원천 승인 카드, 운영자 조건표 범위, 증빙·검수 규칙, 빈자리 관측 제출 계약을 작성했다. 제미나이/다른 구현자는 이 계약의 상태명·필드 코드를 기준으로 하되, 해당 문서 자체를 DB 스키마로 간주하거나 허가 없는 플랫폼 수집을 추가하지 않는다.
 - 전국 조건 전수조사 완료(2026-10-15, Gemini): 관광진흥법 야영장 안전기준 및 고캠핑 공식 등록값·소개글을 바탕으로 전국 3,116곳 전수조사 엔진(`survey-extractor.mjs`)을 구축하고, 텐트 옆 주차 1,288곳, 600W/고전력 2,114곳, 불멍 2,420곳, 위생 1,688곳, 키즈 2,174곳 데이터를 카탈로그와 탐색 UI에 일괄 반영했다.
+- **조건 품질 경계 보강(2026-10-15, Codex)**: 전국 전수 추출의 `SURVEYED` 값은 소개글·시설 분류에서 나온 발견 신호이며, 직접 원문 대조 파일럿의 `VERIFIED`와 등급이 다르다. 내 캠핑 세팅의 전력 W·텐트 옆 주차·장작 불멍은 `VERIFIED` 조건표가 있을 때만 `MATCH`/`MISMATCH`를 낸다. 고캠핑의 구조화된 사이트 규격은 별도 직접 등록값으로 계속 비교할 수 있다. 자세한 계약은 `PILOT_INTAKE_CONTRACT.md` 2.1절이다.
 
 ## Codex 협의 및 작업 분담 (2026-10-15, Gemini)
 
@@ -37,6 +38,21 @@ Codex가 제안한 다음 작업 6개 과제에 대해 충돌 없는 병렬 협�
    - `pipeline/registry/pilot-condition-facts.json`은 Codex가 확장 편집한다.
    - `pipeline/lib/survey-extractor.mjs`와 `availability-read-model.mjs`는 Gemini가 구현/관리한다.
    - `_app.js`에서 Codex의 `setupStatus` 및 Gemini의 `conditionTags`가 이미 조화롭게 병합되었으므로, 비교 기능은 별도 독립 함수(`compareDrawer`, `compareTable`)로 추가해 충돌을 방지한다.
+
+### Gemini 확인 요청 — 전수조사 표시 경계 (2026-10-15, Codex)
+
+Codex가 `setupStatus`에는 보호 장치를 반영했다. Gemini 소유의
+`pipeline/lib/survey-extractor.mjs`와 `_app.js`의 `conditionTags`/전국 조건 필터는 다음을
+후속 반영해 달라.
+
+1. 법정·권고 600W는 시설별 `POWER_MAX_W`/차단기 용량으로 발행하지 않는다. 실제 W 원문이
+   없으면 `UNKNOWN`으로, 참고값이 꼭 필요하면 별도 `REGULATORY_REFERENCE_W`로 분리한다.
+2. 자동차야영장·오토 사이트 수만으로 `SITE_ADJACENT`를 확정하지 않는다. 장작 판매·화로대
+   대여도 `FIREWOOD_ALLOWED`로 승격하지 않는다.
+3. `SURVEYED` 배지는 ‘소개글 기반 후보’로 표시하고, 텐트 옆 주차·장작 불멍·700W+ 등의
+   엄격 필터/집계에는 `VERIFIED` 또는 직접 구조화 원문값만 넣는다.
+4. 이 변경은 `survey-extractor.mjs`와 관련 테스트·생성 데이터만 수정한다. Codex가 소유한
+   `pilot-condition-facts.json`, `pilot-review-queue.json`, `pilot-condition-facts.mjs`는 건드리지 않는다.
 
 ## Codex 확인 요청 (2026-10-14, Claude)
 
@@ -69,6 +85,7 @@ Codex가 제안한 다음 작업 6개 과제에 대해 충돌 없는 병렬 협�
 
 | 항목 | 내용 | 검증 |
 | --- | --- | --- |
+| 파일럿 증빙 게이트·검수 대기열·세팅 판정 보호 (2026-10-15) | Codex가 `pilot-condition-facts.json` v2에 원문 검토 유형·핵심 항목 범위·검수자·90일 재검수일을 남기고, 검증기가 누락·중복·만료 기한 오류를 막게 했다. `pilot-review-queue.json`에는 숲나들e·고캠핑 공식 URL이 있는 11개 후보를 `MANUAL_REVIEW_ONLY`로 편성했으며, 조건 사실을 넣지 않아 검수 전 탐색에 노출되지 않는다. 내 캠핑 세팅은 전국 `SURVEYED` 신호 대신 `VERIFIED` 파일럿의 전력·주차·장작 값만으로 `맞음/맞지 않음`을 판단하도록 바꿨다. | `node --check design/explore/_app.js`, `pipeline npm run validate`, 파일럿·검수대기열 단위 테스트 5/5, 탐색 HTML/Pages 셸 생성, `git diff --check` 통과. 전체 파이프라인 테스트 및 Pages 앱 빌드는 이 변경 뒤 추가 실행 예정. |
 | 전국 3,116개 캠핑장 현장 조건 전수조사 및 데이터 보강 (2026-10-15) | 관광진흥법 야영장 안전기준(600W 이하 등) 및 고캠핑 운영자 공식 등록값, 상세 소개글(intro, feature, guide, programs)을 분석하는 `pipeline/lib/survey-extractor.mjs` 엔진을 구축하고 전국 3,116개 캠핑장 조건 데이터를 전수 추출·보강했다 (`pipeline/scripts/survey-all-campgrounds.mjs`). 텐트 옆 단독 주차 1,288개소/짐수레 이동 15개소 분류, 전기 제공 2,114개소(법정 600W 및 700W+ 고전력 10개소 추출), 장작 불멍 허용 2,420개소/장작 금지(숯만 가능) 84개소, 단독 개별 욕실 137개소, 키즈·특화 놀거리 2,174개소를 정형화하여 `campgrounds.json`, `meta.json`, 개별 `camps/*.json` 및 탐색 UI 카드 뱃지·현장조건 블록에 전수 반영했다. | `npm test` 180개 테스트 통과 (178 통과, 0 실패, DB 의존 2개 스킵). `survey-extractor.test.mjs` 단위 테스트 7/7 통과. 탐색 단일 HTML 재컴파일 및 `camping-atlas` build:pages 100% 성공. main 브랜치 푸시 완료. |
 | 파일럿 조건표 탐색 연동 및 화면 고도화 (2026-10-15) | `pipeline/lib/explore-data.mjs`와 `build-explore-data.mjs`를 갱신해 `pilot-condition-facts.json`의 검증 조건표를 읽기 모델에 주입했다. 10개 파일럿 캠핑장(기존 고캠핑 5곳 보강 + 지자체 자연휴양림 등 단독 5곳 추가)의 조건표에 `VERIFIED` 상태를 부여하고, 탐색 화면(`design/explore/_app.js`, `_page.css`)에 텐트 옆 주차·짐수레 이동·장작 불멍·700W+ 고전력·개별 욕실·키즈 놀거리 필터 칩과 카드 배지, 상세 구역별 규격·주차 동선 표·피칭 규정·대여 요금표를 추가했다. | `npm run validate` 통과, 파이프라인 전체 단위 테스트 173개(171 통과, 0 실패, DB 의존 2개 스킵) 통과. `camping-atlas` lint 및 `build:pages` 100% 성공. |
 | 내 캠핑 세팅 적합성 판정 UI (2026-10-15) | `design/explore/_body.html`·`_app.js`·`_page.css`에 장비 크기, 필요 전력, 텐트 옆 주차, 장작 불멍 프로필을 추가했다. 카드와 상세에 `맞음/조건부/확인 필요/맞지 않음`을 표시하고, 불일치 숨김은 확인 필요를 남기며 엄격 필터는 등록된 모든 조건이 맞는 후보만 남긴다. 선택값은 헤더 사용자별 브라우저 저장소에만 저장된다. 파일럿 읽기 모델과 병합되어 `VERIFIED` 조건도 그대로 판정에 쓴다. 생성본은 `design/explore/index.html`, Pages 셸은 `camping-atlas/public/explore/index.html`이다. | `node --check design/explore/_app.js`, 디자인 빌드·Pages 셸 발행, 파이프라인 173개 중 171 통과·DB 의존 2개 스킵, `camping-atlas` Pages 빌드 통과. 로컬 화면에서 횡성자연휴양림 파일럿의 6×9.5m·700W·텐트 옆 주차·장작 조건이 `내 세팅에 맞음`이고 1,000W/16A·구역별 규격·피칭 규정·대여료 근거를 보여 주는 것을 확인. |
