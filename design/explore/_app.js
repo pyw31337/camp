@@ -25,9 +25,9 @@ const THEME_ICON = { valley: "#l-waves", sea: "#l-sailboat", forest: "#l-trees",
 // 이름순 정렬은 “(주)”, “(에드203)” 같은 괄호 접두어와 법인 표기를 빼고 비교한다.
 const sortName = (c) => (c._sort ??= c.name.replace(/^[\s(（［\[]*[^)）］\]]*[)）］\]]\s*/, "").replace(/^(주식회사|㈜|유한회사|농업회사법인)\s*/, "") || c.name);
 // 데이터는 빈 값을 빼고 배포하므로 화면에서 기본값을 채운다.
-const withDefaults = (c) => ({ th: [], kinds: [], sizes: [], floors: [], amenities: [], env: [], themes: [], rental: [], seasons: [], days: [], types: [], seoul: [], ...c, booking: { methods: [], url: null, provider: null, channels: [], source: null, ...(c.booking ?? {}) } });
+const withDefaults = (c) => ({ th: [], kinds: [], sizes: [], floors: [], amenities: [], env: [], themes: [], rental: [], seasons: [], days: [], types: [], seoul: [], field_conditions: null, ...c, booking: { methods: [], url: null, provider: null, channels: [], source: null, ...(c.booking ?? {}) } });
 
-const state = { q: "", area: "전국", kinds: new Set(), realtime: false, availabilityOnly: false, checkIn: "", checkOut: "", pet: false, fee: false, toilet: false, savedOnly: false, inView: false, theme: "", sgg: "", gear: "", sort: "best", shown: PAGE, here: null, open: null, saved: new Set(), seen: new Set() };
+const state = { q: "", area: "전국", kinds: new Set(), realtime: false, availabilityOnly: false, checkIn: "", checkOut: "", pet: false, fee: false, toilet: false, power: false, siteSize: false, floor: false, naverBooking: false, camfitBooking: false, savedOnly: false, inView: false, theme: "", sgg: "", gear: "", sort: "best", shown: PAGE, here: null, open: null, saved: new Set(), seen: new Set() };
 let ALL = [], META = null, AVAILABILITY = null, map = null, clusterer = null, markers = new Map();
 
 function load() {
@@ -98,6 +98,10 @@ const sggLabel = (k) => k;
 const haystack = (c) => (c._hay ??= [c.name, c.sido, sidoShort(c.sido), c.sigungu, c.addr, c.line, ...c.th.map((id) => THEME_LABEL[id] ?? ""), ...c.kinds.map(([k]) => KIND[k]?.[0] ?? ""), ...c.amenities, ...c.env, ...c.themes, OP[c.op], ...c.types, ...c.booking.methods].filter(Boolean).join(" ").toLowerCase().replace(/\s+/g, ""));
 const THEME_LABEL = {};
 const isRealtime = (c) => c.booking.methods.some((m) => /실시간/.test(m));
+const hasChannel = (c, id) => c.booking.channels.some((channel) => channel.platform_id === id);
+const hasPower = (c) => c.field_conditions?.power?.available === true || c.amenities.some((amenity) => /전기/.test(amenity));
+const hasSiteSize = (c) => c.field_conditions?.site_size?.groups?.length > 0 || c.sizes.length > 0;
+const hasFloor = (c) => c.field_conditions?.ground?.types?.length > 0 || c.floors.length > 0;
 const petOk = (c) => /가능/.test(c.pets ?? "") && !/불가/.test(c.pets ?? "");
 const dist = (a, b) => { const R = 6371, t = Math.PI / 180, x = (b.lat - a.lat) * t, y = (b.lng - a.lng) * t; const h = Math.sin(x / 2) ** 2 + Math.cos(a.lat * t) * Math.cos(b.lat * t) * Math.sin(y / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); };
 
@@ -120,6 +124,11 @@ function filtered({ forMap = false } = {}) {
     if (state.pet && !petOk(c)) return false;
     if (state.fee && !c.fee?.min) return false;
     if (state.toilet && !(c.nearby_toilets?.nearest?.[0]?.m <= 500)) return false;
+    if (state.power && !hasPower(c)) return false;
+    if (state.siteSize && !hasSiteSize(c)) return false;
+    if (state.floor && !hasFloor(c)) return false;
+    if (state.naverBooking && !hasChannel(c, "naver")) return false;
+    if (state.camfitBooking && !hasChannel(c, "camfit")) return false;
     return fits(c);
   });
   if (state.sort === "near" && state.here) list.sort((a, b) => dist(state.here, a) - dist(state.here, b));
@@ -164,6 +173,11 @@ function renderChips() {
     ...Object.entries(KIND).filter(([k]) => k !== "RV_PITCH").map(([k, [l, i]]) => `<button class="pill" type="button" data-kind="${k}" aria-pressed="${state.kinds.has(k)}">${ic(i, "i-sm")}${l}</button>`),
     `<span class="sep"></span>`,
     `<button class="pill" type="button" data-toggle="pet" aria-pressed="${state.pet}">${ic("#l-dog", "i-sm")}반려견</button>`,
+    `<button class="pill" type="button" data-toggle="power" aria-pressed="${state.power}">${ic("#l-plug-zap", "i-sm")}전기 제공 <span class="num">${count(hasPower)}</span></button>`,
+    `<button class="pill" type="button" data-toggle="siteSize" aria-pressed="${state.siteSize}">${ic("#l-ruler", "i-sm")}규격 등록 <span class="num">${count(hasSiteSize)}</span></button>`,
+    `<button class="pill" type="button" data-toggle="floor" aria-pressed="${state.floor}">${ic("#t-layers-subtract", "i-sm")}바닥 등록 <span class="num">${count(hasFloor)}</span></button>`,
+    `<button class="pill" type="button" data-toggle="naverBooking" aria-pressed="${state.naverBooking}">네이버 예약 <span class="num">${count((c) => hasChannel(c, "naver"))}</span></button>`,
+    `<button class="pill" type="button" data-toggle="camfitBooking" aria-pressed="${state.camfitBooking}">캠핏 <span class="num">${count((c) => hasChannel(c, "camfit"))}</span></button>`,
     `<button class="pill" type="button" data-toggle="fee" aria-pressed="${state.fee}">${ic("#t-coin", "i-sm")}요금 안내 있음</button>`,
     `<button class="pill" type="button" data-toggle="toilet" aria-pressed="${state.toilet}">${ic("#l-toilet", "i-sm")}공중화장실 500m</button>`,
     `<label class="pill">${ic("#l-ruler", "i-sm")}<select data-gear aria-label="내 장비 크기">${GEAR.map(([v, l]) => `<option value="${v}" ${state.gear === v ? "selected" : ""}>${l}</option>`).join("")}</select></label>`,
@@ -468,6 +482,52 @@ function siteListBlock(c) {
     ${c.sizes.length || c.floors.length ? `<div class="dv-chips">${c.sizes.map(([w, dd, n]) => `<span>${ic("#l-ruler", "i-xs")}${w}×${dd}m${n ? ` · ${n}면` : ""}</span>`).join("")}${c.floors.map(([f, n]) => `<span class="fl fl-${esc(f)}">${esc(floorName(f))} ${n}면</span>`).join("")}</div>` : ""}
     <span class="trust ok">한국관광공사 고캠핑 등록 정보 · ${ymd(c.modified_at)} 수정</span>`;
 }
+
+// 이 화면의 조건표는 고캠핑 운영자 등록값을 읽는다. 없는 항목(특히 전력 W,
+// 텐트 옆 주차, 숯/장작 사용 허용)은 추정하지 않고 ‘확인 필요’로 남긴다.
+function fieldConditionsBlock(c) {
+  const f = c.field_conditions ?? {};
+  const autoSites = f.parking?.auto_camping_sites ?? (c.kinds.filter(([kind]) => kind === "AUTO_PITCH").reduce((sum, [, count]) => sum + (Number(count) || 0), 0) || null);
+  const electricity = f.power?.available === true || hasPower(c);
+  const firewoodSale = f.firewood?.sold === true || c.amenities.some((amenity) => /장작\s*판매/.test(amenity));
+  const firePit = f.fire_pit?.arrangement ?? c.fire ?? null;
+  const floors = f.ground?.types?.length ? f.ground.types.map((x) => [x.type, x.count]) : c.floors;
+  const sizes = f.site_size?.groups?.length ? f.site_size.groups.map((x) => [x.width_m, x.depth_m, x.count]) : c.sizes;
+  const floorText = floors.length ? floors.map(([type, count]) => `${floorName(type)}${count ? ` ${count}면` : ""}`).join(" · ") : "확인 필요";
+  const sizeText = sizes.length ? sizes.map(([width, depth, count]) => `${width}×${depth}m${count ? ` · ${count}면` : ""}`).join(" / ") : "확인 필요";
+  const rows = [
+    [autoSites ? "partial" : "unknown", "#l-car", "텐트 옆 주차", autoSites ? `자동차야영 ${autoSites}면` : "확인 필요", autoSites ? "오토 사이트 보유 정보예요. 텐트 옆 주차 가능 여부는 구역별로 확인하세요." : "고캠핑 표준 항목에 없어요."],
+    [electricity ? "partial" : "unknown", "#l-plug-zap", "전기·전력 한도", electricity ? "전기 제공 · W 확인 필요" : "확인 필요", electricity ? "전력 사용 한도(W)는 고캠핑에 등록되지 않아 예약처 규정을 확인해야 해요." : "전기 제공 여부와 W 제한을 운영자 안내에서 확인하세요."],
+    [floors.length ? "confirmed" : "unknown", "#t-layers-subtract", "바닥", floorText, floors.length ? "고캠핑에 등록된 바닥재·면수예요." : "바닥재 정보가 등록되지 않았어요."],
+    [sizes.length ? "confirmed" : "unknown", "#l-ruler", "사이트 규격", sizeText, sizes.length ? "규격이 어느 상품에 적용되는지는 예약 화면에서 한 번 더 확인하세요." : "사이트별 가로×세로 정보가 등록되지 않았어요."],
+    [firewoodSale ? "partial" : "unknown", "#l-flame", "장작", firewoodSale ? "장작 판매 등록" : "확인 필요", firewoodSale ? "장작 판매와 장작 사용 허용은 서로 다른 정보예요." : "장작 판매·사용 가능 여부가 등록되지 않았어요."],
+    [firePit ? "confirmed" : "unknown", "#l-flame", "숯불·불멍", firePit ? `화로대 ${firePit}` : "확인 필요", firePit ? "화로대 배치 정보예요. 숯·장작 사용 허용은 운영자 이용규칙을 확인하세요." : "숯불·불멍 허용 여부가 등록되지 않았어요."],
+  ];
+  const source = f.source ?? { url: c.gc_url, checked_at: c.modified_at, tier: "A" };
+  return `<div class="dv-sub dv-conditions"><h4>현장 조건</h4>
+    <div class="dv-condition-grid">${rows.map(([state, icon, label, value, note]) => `<article class="dv-condition ${state}"><span>${ic(icon)}</span><div><small>${esc(label)}</small><b>${esc(value)}</b><p data-wrap-ok>${esc(note)}</p></div></article>`).join("")}</div>
+    <span class="trust">${source.url ? `<a href="${esc(source.url)}" target="_blank" rel="noopener">한국관광공사 고캠핑 운영자 등록값</a>` : "한국관광공사 고캠핑 운영자 등록값"}${source.checked_at ? ` · ${ymd(source.checked_at)} 확인` : ""} · ‘확인 필요’는 불가가 아닙니다</span>
+  </div>`;
+}
+
+// 상세 상단의 예약 전 핵심 공지. 실제 공지는 원문 링크·확인 시각을 가진 승인
+// 레지스트리에서만 보여 준다. 값이 없는 곳은 임의의 수치 대신 확인할 항목만 안내한다.
+function importantInfoBlock(c) {
+  const items = c.important_info?.items ?? [];
+  const f = c.field_conditions ?? {};
+  const fallback = [
+    f.power?.available === true && !f.power?.limit_w && ["전기 사용", "전기 제공 등록 · 사용 가능 W는 예약처 최신 공지 확인"],
+    f.parking?.tent_side == null && ["주차", "텐트 옆 주차 가능 여부는 사이트별 확인"],
+    f.firewood?.allowed == null && ["화로·장작", "숯·장작·불멍 허용 기준은 운영자 공지 확인"],
+  ].filter(Boolean).slice(0, 2);
+  const typeLabel = { POWER: "전기", RENTAL: "대여", PARKING: "주차", FIRE: "화로·불멍", CHECKIN: "입·퇴실", RULE: "이용 규칙", NOTICE: "운영 안내" };
+  const actual = items.sort((a, b) => ({ critical: 0, high: 1, normal: 2 }[a.priority] - ({ critical: 0, high: 1, normal: 2 }[b.priority]))).slice(0, 5);
+  return `<section class="dv-sec dv-important" id="sec-important"><div class="dv-sub-head"><h3>${ic("#l-info", "i-sm")}예약 전 중요 정보</h3>${actual.length ? `<span class="dv-important-badge">공식 공지 ${actual.length}건</span>` : `<span class="dv-important-badge muted">공지 원문 연동 전</span>`}</div>
+    ${actual.length ? `<div class="dv-important-list">${actual.map((item) => `<article class="${esc(item.priority)}"><span>${esc(typeLabel[item.kind] ?? "운영 안내")}</span><div><b>${esc(item.title)}</b><p data-wrap-ok>${esc(item.summary)}</p><a href="${esc(item.source.url)}" target="_blank" rel="noopener">${esc(item.source.label)} · ${ymd(item.source.checked_at)} 확인${ic("#l-arrow-up-right", "i-xs")}</a></div></article>`).join("")}</div>` : `<div class="dv-important-empty"><b>운영자 공지 원문이 아직 연동되지 않았어요.</b><p data-wrap-ok>전력 W 제한·대여 품목/요금·입퇴실·주차·화로 규정은 예약 화면의 최신 공지가 우선합니다.</p></div>`}
+    ${fallback.length ? `<div class="dv-important-checks">${fallback.map(([label, text]) => `<span><b>${esc(label)}</b>${esc(text)}</span>`).join("")}</div>` : ""}
+    <span class="trust">플랫폼 공지의 자동 복제 대신 운영자 제공·제휴/API로 확인된 항목만 표시합니다</span>
+  </section>`;
+}
 function priceMentionsBlock(d) {
   const list = d?.prices ?? [];
   if (!list.length) return "";
@@ -597,7 +657,7 @@ function infoBlock(c, d) {
   </section>`;
 }
 
-const DV_NAV = [["sec-book", "예약"], ["sec-site", "사이트·요금"], ["sec-media", "후기"], ["sec-fac", "시설"], ["sec-near", "주변"], ["sec-info", "정보"], ["sec-talk", "댓글"]];
+const DV_NAV = [["sec-important", "중요"], ["sec-book", "예약"], ["sec-site", "사이트·요금"], ["sec-media", "후기"], ["sec-fac", "시설"], ["sec-near", "주변"], ["sec-info", "정보"], ["sec-talk", "댓글"]];
 function detail(c) {
   const d = DETAIL.get(c.id);
   LB.clear();
@@ -620,10 +680,12 @@ function detail(c) {
       <button type="button" data-share="${c.id}">${ic("#l-share-2")}<span>공유</span></button>
     </div>
     <nav class="d-nav dv-nav" aria-label="상세 목차">${DV_NAV.map(([id, l]) => `<button type="button" data-jump="${id}">${l}</button>`).join("")}</nav>
+    ${importantInfoBlock(c)}
     ${bookingCard(c, d, target)}
     ${highlightsBlock(c)}
     <section class="dv-sec" id="sec-site"><h3>사이트·요금</h3>
       ${siteListBlock(c)}
+      ${fieldConditionsBlock(c)}
       ${productsBlock(d)}
       ${priceMentionsBlock(d)}
       ${c.fee ? `<details class="dv-more"><summary>공식 요금 안내</summary><p class="pre" data-wrap-ok>${esc(c.fee.text)}</p><span class="trust">한국관광공사 등록 안내 · ${ymd(c.fee.checked_at)} 확인 · <a href="${esc(c.fee.url)}" target="_blank" rel="noopener">원문</a></span></details>` : ""}

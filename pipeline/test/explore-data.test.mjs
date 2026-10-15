@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { areaOf, buildExploreRecords, buildExploreTexts, buildProviders, providerOf } from "../lib/explore-data.mjs";
+import { areaOf, buildExploreRecords, buildExploreTexts, buildFieldConditions, buildImportantInfo, buildProviders, providerOf } from "../lib/explore-data.mjs";
 import { feeRange, matchTour, normalizeTourIntro } from "../lib/tour-fees.mjs";
 
 const camp = { external_id: { id: "7096" }, name: "향남 오토캠핑장", address: { sido: "경기도", sigungu: "화성시", line1: "경기도 화성시 테스트로 1", line2: "" },
@@ -21,9 +21,37 @@ test("탐색 레코드: 위치·예약처·요금(출처·확인일)·주변 화
   assert.equal(r.booking.source.tier, "C");
   assert.deepEqual(r.fee, { text: "오토캠핑 1박 35,000원~45,000원", min: 35000, max: 45000, checked_at: "2026-10-13T09:00:00+09:00", url: "https://korean.visitkorea.or.kr/x" });
   assert.equal(r.nearby_toilets.nearest[0].m, 140);
+  assert.equal(r.field_conditions.power.state, "PARTIAL");
+  assert.equal(r.field_conditions.power.limit_w, null);
+  assert.equal(r.field_conditions.parking.tent_side, null);
+  assert.equal(r.field_conditions.parking.auto_camping_sites, 12);
   assert.equal(areaOf("제주특별자치도"), "제주");
   assert.equal(providerOf("https://yeyak.seoul.go.kr/web/main.do"), "seoul-yeyak");
   assert.equal(providerOf("not a url"), null);
+});
+
+test("현장 조건: 고캠핑에 없는 값을 불가로 만들지 않는다", () => {
+  const fields = buildFieldConditions({ ...camp, amenities: ["전기", "장작판매"], fire_pit: "개별", gocamping_url: "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7096" });
+  assert.deepEqual(fields.power, { state: "PARTIAL", available: true, limit_w: null });
+  assert.deepEqual(fields.parking, { state: "UNKNOWN", tent_side: null, auto_camping_sites: 12 });
+  assert.deepEqual(fields.charcoal, { state: "UNKNOWN", allowed: null });
+  assert.deepEqual(fields.firewood, { state: "PARTIAL", sold: true, allowed: null });
+  assert.equal(fields.fire_pit.arrangement, "개별");
+  assert.equal(fields.site_size.groups[0].width_m, 5);
+  assert.equal(fields.source.tier, "A");
+});
+
+test("중요 공지: 원문 링크와 확인일이 있는 운영자 제공값만 발행한다", () => {
+  const notices = { campgrounds: { 7096: { source: { label: "캠핑장 공식 공지", url: "https://example.com/notice", checked_at: "2026-10-15T09:00:00+09:00", tier: "A" }, items: [
+    { kind: "POWER", priority: "critical", title: "전기 사용", summary: "사이트당 최대 700W입니다." },
+    { kind: "RENTAL", title: "대여", summary: "원문 없는 안내", source: { label: "운영자", checked_at: "2026-10-15" } },
+  ] } } };
+  const info = buildImportantInfo(notices, "7096");
+  assert.equal(info.items.length, 1);
+  assert.equal(info.items[0].priority, "critical");
+  assert.equal(info.items[0].source.url, "https://example.com/notice");
+  const [record] = buildExploreRecords({ campgrounds: [camp] }, null, null, new Map(), notices);
+  assert.equal(record.important_info.items[0].summary, "사이트당 최대 700W입니다.");
 });
 
 test("소개 문구: 목록엔 한 줄 소개만, 긴 소개는 별도 파일", () => {

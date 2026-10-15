@@ -634,6 +634,40 @@ details.sub summary h4 { min-width: 0; }
 .dv-rules .on { background: var(--green-tint); color: var(--green-press); }
 .dv-rules .off { background: #fdecec; color: #b3322f; }
 
+/* 사이트별 현장 조건: 원천에 없는 값은 회색으로 남겨 ‘불가’로 오해하지 않게 한다. */
+.dv-conditions { gap: 10px; }
+.dv-condition-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.dv-condition { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 8px; align-items: start; min-width: 0; padding: 11px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.dv-condition > span { display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 10px; color: var(--ink-3); background: var(--surface-2); }
+.dv-condition div { min-width: 0; }
+.dv-condition small { display: block; font-size: var(--fs-2xs); font-weight: 700; color: var(--ink-3); }
+.dv-condition b { display: block; margin-top: 2px; font-size: var(--fs-sm); font-weight: 800; color: var(--ink); line-height: 1.35; }
+.dv-condition p { margin-top: 4px; font-size: var(--fs-2xs); line-height: 1.45; color: var(--ink-3); }
+.dv-condition.confirmed { border-color: color-mix(in srgb, var(--green) 30%, var(--line)); }
+.dv-condition.confirmed > span { color: var(--green-press); background: var(--green-tint); }
+.dv-condition.partial > span { color: #9a5b00; background: #fff0d4; }
+.dv-condition.unknown { border-style: dashed; }
+.dv-important { gap: 12px; border: 1px solid color-mix(in srgb, var(--green) 28%, var(--line)); background: color-mix(in srgb, var(--green-tint) 42%, var(--surface)); }
+.dv-important > .dv-sub-head h3 { display: flex; align-items: center; gap: 6px; }
+.dv-important-badge { display: inline-flex; align-items: center; min-height: 25px; padding: 3px 8px; border-radius: 999px; color: var(--green-press); background: var(--green-tint); font-size: var(--fs-2xs); font-weight: 800; white-space: nowrap; }
+.dv-important-badge.muted { color: var(--ink-3); background: var(--surface-2); }
+.dv-important-list { display: grid; gap: 8px; }
+.dv-important-list article { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 9px; align-items: start; padding: 10px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.dv-important-list article > span { display: inline-flex; align-items: center; min-height: 22px; padding: 2px 6px; border-radius: 6px; color: var(--ink-2); background: var(--surface-2); font-size: var(--fs-2xs); font-weight: 800; }
+.dv-important-list article.critical > span { color: #9a3900; background: #fff0df; }
+.dv-important-list article.high > span { color: #895600; background: #fff5d8; }
+.dv-important-list article div { min-width: 0; }
+.dv-important-list b { display: block; font-size: var(--fs-sm); color: var(--ink); }
+.dv-important-list p { margin-top: 2px; color: var(--ink-2); font-size: var(--fs-sm); line-height: 1.45; }
+.dv-important-list a { display: inline-flex; align-items: center; gap: 2px; margin-top: 5px; color: var(--green-press); font-size: var(--fs-2xs); font-weight: 750; }
+.dv-important-empty { padding: 11px; border: 1px dashed var(--line); border-radius: 12px; background: var(--surface); }
+.dv-important-empty b { display: block; font-size: var(--fs-sm); color: var(--ink); }
+.dv-important-empty p { margin-top: 4px; color: var(--ink-3); font-size: var(--fs-2xs); line-height: 1.5; }
+.dv-important-checks { display: flex; flex-wrap: wrap; gap: 6px; }
+.dv-important-checks span { padding: 6px 8px; border-radius: 8px; background: var(--surface); color: var(--ink-3); font-size: var(--fs-2xs); }
+.dv-important-checks b { margin-right: 4px; color: var(--ink-2); }
+@media (max-width: 520px) { .dv-condition-grid { grid-template-columns: 1fr; } }
+
 /* 기본 정보 */
 .dv-info { display: grid; gap: 0; }
 .dv-info > div { display: grid; grid-template-columns: 2rem 4.5rem minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 12px 0; border-top: 1px solid var(--line); }
@@ -670,6 +704,7 @@ html.lb-open, html.lb-open body { overflow: hidden; }
 @media (prefers-color-scheme: dark) {
   .dv-actions [aria-pressed="true"] { background: #3a1724; border-color: #6b2a44; }
   .dv-rules .off { background: #3a1716; color: #f19d9a; }
+  .dv-condition.partial > span { color: #f0b65a; background: #3a2a10; }
   .dv-review-meta .k-blog { background: #14301f; color: #5cce91; } .dv-review-meta .k-cafe { background: #3a2a10; color: #f0b65a; } .dv-review-meta .rich { background: #1c2547; color: #9db1ff; }
   .dv-all { background: rgba(21,29,25,.92); color: #e6eee9; }
 }

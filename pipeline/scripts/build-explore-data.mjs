@@ -19,6 +19,8 @@ const fees = await read("../out/tour-fees.json");
 const nearby = await read("../out/campground-nearby.json");
 const products = await read("../out/campground-products.json");
 const social = await read("../out/campground-social.json");
+// 제휴·운영자 제공으로 확인한 공지만 읽는다. 플랫폼 공지 페이지를 자동 수집하지 않는다.
+const notices = await read("../registry/campground-notices.json");
 // 자체 저장 공식 사진(webp, media 브랜치). 없으면 고캠핑 원본 주소를 그대로 쓴다.
 const mediaDir = process.env.MEDIA_DIR;
 const media = mediaDir && existsSync(`${mediaDir}/manifest.json`) ? JSON.parse(await readFile(`${mediaDir}/manifest.json`, "utf8")) : null;
@@ -48,7 +50,7 @@ const calendar = await read("../out/open-calendar.json");
 
 const seoulRaw = await read("../out/seoul-yeyak.json");
 const seoul = seoulRaw ? matchSeoulToCampgrounds(seoulRaw.services ?? [], camps.campgrounds ?? []) : new Map();
-const records = buildExploreRecords(camps, toilets, fees, seoul);
+const records = buildExploreRecords(camps, toilets, fees, seoul, notices);
 for (const r of records) { const hero = hostedOf(r.id)[0]; if (hero?.thumb) r.ph = hero.thumb; }
 const meta = {
   generated_at: new Date().toISOString(),
@@ -76,6 +78,16 @@ const meta = {
     with_social: Object.keys(social?.campgrounds ?? {}).length,
     with_self_hosted_photo: records.filter((r) => r.ph).length,
     with_nearby: nearby ? Object.values(nearby.campgrounds ?? {}).filter((x) => Object.values(x).some((v) => v?.length)).length : 0,
+    // ‘확인 필요’를 포함한 전수 조건 모델. 전력 W·텐트 옆 주차·숯/장작 사용
+    // 허용은 고캠핑 표준값이 아니므로 확정 수치로 세지 않는다.
+    field_conditions: records.length,
+    electricity_registered: records.filter((r) => r.field_conditions?.power?.available === true).length,
+    site_size_registered: records.filter((r) => r.field_conditions?.site_size?.groups?.length).length,
+    ground_registered: records.filter((r) => r.field_conditions?.ground?.types?.length).length,
+    naver_booking_channel: records.filter((r) => r.booking.channels.some((channel) => channel.platform_id === "naver")).length,
+    camfit_booking_channel: records.filter((r) => r.booking.channels.some((channel) => channel.platform_id === "camfit")).length,
+    official_notice_camps: records.filter((r) => r.important_info?.items?.length).length,
+    official_notice_items: records.reduce((sum, r) => sum + (r.important_info?.items?.length ?? 0), 0),
   },
 };
 await mkdir(p("../out/explore/"), { recursive: true });

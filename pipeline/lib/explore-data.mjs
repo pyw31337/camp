@@ -19,13 +19,90 @@ export function providerOf(url) {
 const clip = (s, n) => { const v = String(s ?? "").replace(/\s+/g, " ").trim(); return v ? (v.length > n ? `${v.slice(0, n - 1).trimEnd()}…` : v) : null; };
 const httpUrl = (u) => { const s = String(u ?? "").trim(); if (!s) return null; const v = /^https?:\/\//i.test(s) ? s : `http://${s}`; try { return new URL(v).toString(); } catch { return null; } };
 
+// 고캠핑 원천에는 ‘전기 있음’, 바닥재·규격·화로대 배치·장작 판매 여부까지는
+// 들어오지만, 텐트 옆 주차/전력 W 제한/숯·장작 사용 허용은 표준 필드가 아니다.
+// 비어 있는 값을 ‘불가’로 바꾸지 않고, 화면과 공개 데이터에서 명시적으로
+// UNKNOWN으로 남긴다. 추후 운영자 공식 안내로 보강할 때도 같은 묶음에 합친다.
+const productEntries = (campground) => Array.isArray(campground?.products)
+  ? campground.products.map((p) => [p?.kind, p?.site_count])
+  : Array.isArray(campground?.kinds) ? campground.kinds : [];
+const floorEntries = (campground) => Array.isArray(campground?.floors)
+  ? campground.floors.map((floor) => Array.isArray(floor) ? floor : [floor?.floor, floor?.count])
+  : [];
+const sizeEntries = (campground) => Array.isArray(campground?.site_sizes)
+  ? campground.site_sizes.map((site) => [site?.width_m, site?.depth_m, site?.count])
+  : Array.isArray(campground?.sizes) ? campground.sizes : [];
+
+/**
+ * 현장 조건의 공통 읽기 모델. UNKNOWN은 ‘없음/불가’가 아니라 원천에 값이
+ * 없다는 뜻이다. 조건별 확인 화면을 추가할 때 이 모델을 단일 계약으로 쓴다.
+ */
+export function buildFieldConditions(campground) {
+  const amenities = [...(Array.isArray(campground?.amenities) ? campground.amenities : []), ...(Array.isArray(campground?.amenities_etc) ? campground.amenities_etc : [])];
+  const hasAmenity = (re) => amenities.some((value) => re.test(String(value)));
+  const autoCampingSites = productEntries(campground)
+    .filter(([kind]) => kind === "AUTO_PITCH")
+    .reduce((total, [, count]) => total + (Number(count) || 0), 0) || null;
+  const electricity = hasAmenity(/전기/);
+  const firewoodSale = hasAmenity(/장작\s*판매/);
+  const floors = floorEntries(campground)
+    .filter(([floor]) => floor)
+    .map(([floor, count]) => ({ type: floor, count: Number(count) || null }));
+  const sizes = sizeEntries(campground)
+    .filter(([width, depth]) => Number(width) > 0 && Number(depth) > 0)
+    .map(([width, depth, count]) => ({ width_m: Number(width), depth_m: Number(depth), count: Number(count) || null }));
+  const firePit = String(campground?.fire_pit ?? campground?.fire ?? "").trim() || null;
+  const sourceUrl = campground?.gocamping_url ?? campground?.gc_url ?? null;
+  const checkedAt = campground?.source?.fetched_at ?? campground?.modified_at ?? null;
+
+  return {
+    version: 1,
+    parking: { state: "UNKNOWN", tent_side: null, auto_camping_sites: autoCampingSites },
+    power: { state: electricity ? "PARTIAL" : "UNKNOWN", available: electricity || null, limit_w: null },
+    ground: { state: floors.length ? "CONFIRMED" : "UNKNOWN", types: floors },
+    charcoal: { state: "UNKNOWN", allowed: null },
+    firewood: { state: firewoodSale ? "PARTIAL" : "UNKNOWN", sold: firewoodSale || null, allowed: null },
+    fire_pit: { state: firePit ? "CONFIRMED" : "UNKNOWN", arrangement: firePit },
+    site_size: { state: sizes.length ? "CONFIRMED" : "UNKNOWN", groups: sizes },
+    source: { label: "한국관광공사 고캠핑 운영자 등록 정보", url: sourceUrl, checked_at: checkedAt, tier: "A" },
+  };
+}
+
+// 운영자 또는 예약 플랫폼이 제공한 공지는 별도 승인 레지스트리로 들어온다.
+// 공지 전문을 임의로 수집·복제하지 않고, 예약 판단에 필요한 짧은 요약과 원문
+// 링크·확인 시각만 발행한다. source가 없는 항목은 공개하지 않는다.
+export function buildImportantInfo(notices, campgroundId) {
+  const raw = notices?.campgrounds?.[String(campgroundId)];
+  if (!raw || !Array.isArray(raw.items)) return null;
+  const fallbackSource = raw.source ?? null;
+  const items = raw.items.map((item) => {
+    const source = item?.source ?? fallbackSource;
+    const title = clip(item?.title, 56);
+    const summary = clip(item?.summary, 280);
+    if (!title || !summary || !source?.url || !source?.checked_at) return null;
+    return {
+      kind: String(item.kind ?? "NOTICE").slice(0, 32),
+      priority: ["critical", "high", "normal"].includes(item.priority) ? item.priority : "normal",
+      title,
+      summary,
+      source: {
+        label: clip(source.label, 80) ?? "운영자 공식 공지",
+        url: httpUrl(source.url),
+        checked_at: source.checked_at,
+        tier: source.tier ?? "B",
+      },
+    };
+  }).filter((item) => item?.source.url);
+  return items.length ? { items } : null;
+}
+
 /**
  * @param {{campgrounds:object[], fetched_at?:string}} camps out/campgrounds.json
  * @param {{campgrounds?:Record<string,{count_2km:number,nearest:object[]}>}|null} toilets out/campground-toilets.json
  * @param {{records?:Record<string,object>}|null} fees out/tour-fees.json
  * @param {Map<string, object[]>} [seoul] matchSeoulToCampgrounds 결과(서울 공공예약 상품)
  */
-export function buildExploreRecords(camps, toilets, fees, seoul = new Map()) {
+export function buildExploreRecords(camps, toilets, fees, seoul = new Map(), notices = null) {
   return (camps.campgrounds ?? []).filter((c) => c.location && c.name).map((c) => {
     const id = String(c.external_id.id);
     const near = toilets?.campgrounds?.[id];
@@ -59,6 +136,8 @@ export function buildExploreRecords(camps, toilets, fees, seoul = new Map()) {
       sizes: (c.site_sizes ?? []).map((s) => [s.width_m, s.depth_m, s.count]),
       floors: (c.floors ?? []).map((f) => [f.floor, f.count]),
       amenities: [...(c.amenities ?? []), ...(c.amenities_etc ?? [])],
+      field_conditions: buildFieldConditions(c),
+      important_info: buildImportantInfo(notices, id),
       env: c.environment ?? [],
       themes: c.themes ?? [],
       pets: c.pets ?? null,
