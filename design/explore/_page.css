@@ -708,5 +708,31 @@ html.lb-open, html.lb-open body { overflow: hidden; }
   .dv-review-meta .k-blog { background: #14301f; color: #5cce91; } .dv-review-meta .k-cafe { background: #3a2a10; color: #f0b65a; } .dv-review-meta .rich { background: #1c2547; color: #9db1ff; }
   .dv-all { background: rgba(21,29,25,.92); color: #e6eee9; }
 }
+/* 정밀 검증 조건표 */
+.tag-verified { background: color-mix(in srgb, var(--green) 18%, var(--surface)); color: var(--green-press); border: 1px solid color-mix(in srgb, var(--green) 35%, transparent); font-weight: 800; }
+.dv-conditions.verified { border: 1px solid color-mix(in srgb, var(--green) 35%, var(--line)); border-radius: 16px; padding: 14px; background: color-mix(in srgb, var(--green-tint) 25%, var(--surface)); }
+.dv-verified-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.dv-verified-head h4 { display: flex; align-items: center; gap: 6px; margin: 0; font-size: var(--fs-md); }
+.badge-verified { display: inline-flex; align-items: center; min-height: 24px; padding: 2px 10px; border-radius: 999px; background: var(--green); color: #fff; font-size: var(--fs-2xs); font-weight: 800; }
+.verified-banner { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); margin-bottom: 12px; }
+.verified-banner > svg { color: var(--green); flex-shrink: 0; }
+.verified-banner b { display: block; font-size: var(--fs-xs); color: var(--ink); }
+.verified-banner small { display: block; font-size: var(--fs-2xs); color: var(--ink-3); }
+.dv-condition.verified { border-color: color-mix(in srgb, var(--green) 30%, var(--line)); }
+.dv-condition.verified > span { color: var(--green-press); background: var(--green-tint); }
+.dv-rule-card { padding: 10px 12px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); font-size: var(--fs-xs); line-height: 1.45; margin-top: 10px; }
+.dv-rule-card b { display: inline-flex; align-items: center; gap: 4px; margin-right: 6px; color: var(--ink); }
+.dv-rule-card span { color: var(--ink-2); }
+.dv-table-wrap { margin-top: 12px; }
+.dv-table-wrap h5 { font-size: var(--fs-xs); font-weight: 750; color: var(--ink-2); margin-bottom: 6px; }
+.dv-fact-table { width: 100%; border-collapse: collapse; font-size: var(--fs-xs); background: var(--surface); border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+.dv-fact-table th, .dv-fact-table td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line); }
+.dv-fact-table th { background: var(--surface-2); font-weight: 700; color: var(--ink-3); font-size: var(--fs-2xs); }
+.dv-fact-table tr:last-child td { border-bottom: 0; }
+.dv-features-wrap { margin-top: 12px; }
+.dv-features-wrap h5 { font-size: var(--fs-xs); font-weight: 750; color: var(--ink-2); margin-bottom: 6px; }
+.feat-chip { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: var(--fs-xs); font-weight: 650; color: var(--ink-2); }
+
 /* 왼쪽 위 ‘목록’ 버튼이 떠 있는 폭에서는 목차가 그 뒤에서 시작하도록 비운다 */
 @media (max-width: 1080px) { .dv-nav { padding-left: calc(var(--pad) + 5.5rem); } }
+

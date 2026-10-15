@@ -14,287 +14,682 @@
       "name": "[사립] 횡성자연휴양림 오토캠핑장",
       "region": "강원 횡성",
       "address": "강원특별자치도 횡성군 갑천면 정포로430번길 113",
-      "primary_booking": { "channel": "foresttrip", "url": "https://www.foresttrip.go.kr/" },
+      "primary_booking": {
+        "channel": "foresttrip",
+        "url": "https://www.foresttrip.go.kr/"
+      },
       "parking_mode": "SITE_ADJACENT",
       "power_max_w": 1000,
       "breaker_capacity": "16A",
       "individual_breaker": true,
       "firewood_allowed": "ALLOWED",
       "charcoal_allowed": "ALLOWED",
-      "shelter_setup_rule": { "max_tents": 1, "max_tarps": 1, "canopy_allowed": true, "note": "사이트 경계 내 피칭" },
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 1,
+        "canopy_allowed": true,
+        "note": "사이트 경계 내 피칭"
+      },
       "zones": [
-        { "name": "A구역 (편의동 인접·가족명당)", "size_w": 8.0, "size_h": 10.0, "surface": "GRAVEL", "parking": "SITE_ADJACENT", "site_count": 18 },
-        { "name": "B구역 (계곡 숲속 사이트)", "size_w": 7.0, "size_h": 9.0, "surface": "GRAVEL", "parking": "SITE_ADJACENT", "site_count": 22 },
-        { "name": "D구역 (소나무 데크존)", "size_w": 6.0, "size_h": 7.0, "surface": "DECK", "parking": "SHARED_NEARBY", "site_count": 10 }
+        {
+          "name": "A구역 (편의동 인접·가족명당)",
+          "size_w": 8,
+          "size_h": 10,
+          "surface": "GRAVEL",
+          "parking": "SITE_ADJACENT",
+          "site_count": 18
+        },
+        {
+          "name": "B구역 (계곡 숲속 사이트)",
+          "size_w": 7,
+          "size_h": 9,
+          "surface": "GRAVEL",
+          "parking": "SITE_ADJACENT",
+          "site_count": 22
+        },
+        {
+          "name": "D구역 (소나무 데크존)",
+          "size_w": 6,
+          "size_h": 7,
+          "surface": "DECK",
+          "parking": "SHARED_NEARBY",
+          "site_count": 10
+        }
       ],
-      "sanitary": { "private_bathroom": false, "toilets_count": 8, "showers_count": 6, "hot_water": "24시간", "note": "남2/여2 공용 편의동 2개소, 온수 수압 우수" },
-      "features": ["SWIMMING_POOL", "VALLEY", "FOREST_TRAIL", "WOOD_CRAFT"],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 8,
+        "showers_count": 6,
+        "hot_water": "24시간",
+        "note": "남2/여2 공용 편의동 2개소, 온수 수압 우수"
+      },
+      "features": [
+        "SWIMMING_POOL",
+        "VALLEY",
+        "FOREST_TRAIL",
+        "WOOD_CRAFT"
+      ],
       "rental_offers": [
-        { "item": "화로대+그릴망", "price_krw": 10000, "deposit_krw": 0 },
-        { "item": "릴선(20m)", "price_krw": 5000, "deposit_krw": 5000 }
+        {
+          "item": "화로대+그릴망",
+          "price_krw": 10000,
+          "deposit_krw": 0
+        },
+        {
+          "item": "릴선(20m)",
+          "price_krw": 5000,
+          "deposit_krw": 5000
+        }
       ],
       "evidence": {
         "source_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030018",
         "observed_at": "2026-10-15T09:00:00+09:00",
         "verification_status": "VERIFIED",
         "reviewer": "moyo-pilot-team"
-      }
+      },
+      "gocamping_id": "56",
+      "lat": 37.525537,
+      "lng": 128.093375
     },
     {
       "id": "pilot-002-sureui",
       "name": "[공립] 음성 수레의산자연휴양림 국민여가캠핑장",
       "region": "충북 음성",
       "address": "충청북도 음성군 생극면 차곡리 산47-1",
-      "primary_booking": { "channel": "foresttrip", "url": "https://www.foresttrip.go.kr/" },
+      "primary_booking": {
+        "channel": "foresttrip",
+        "url": "https://www.foresttrip.go.kr/"
+      },
       "parking_mode": "SITE_ADJACENT",
       "power_max_w": 600,
       "breaker_capacity": "10A",
       "individual_breaker": true,
       "firewood_allowed": "ALLOWED",
       "charcoal_allowed": "ALLOWED",
-      "shelter_setup_rule": { "max_tents": 1, "max_tarps": 1, "canopy_allowed": true, "note": "국민여가캠핑존만 장작 허용, 일반 데크 구역 숯만 허용" },
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 1,
+        "canopy_allowed": true,
+        "note": "국민여가캠핑존만 장작 허용, 일반 데크 구역 숯만 허용"
+      },
       "zones": [
-        { "name": "국민여가존 (A1~A16 오토)", "size_w": 7.0, "size_h": 8.0, "surface": "GRAVEL", "parking": "SITE_ADJACENT", "site_count": 16 },
-        { "name": "청소년야영장존 (B1~B14 데크)", "size_w": 6.0, "size_h": 6.0, "surface": "DECK", "parking": "SHARED_NEARBY", "site_count": 14 }
+        {
+          "name": "국민여가존 (A1~A16 오토)",
+          "size_w": 7,
+          "size_h": 8,
+          "surface": "GRAVEL",
+          "parking": "SITE_ADJACENT",
+          "site_count": 16
+        },
+        {
+          "name": "청소년야영장존 (B1~B14 데크)",
+          "size_w": 6,
+          "size_h": 6,
+          "surface": "DECK",
+          "parking": "SHARED_NEARBY",
+          "site_count": 14
+        }
       ],
-      "sanitary": { "private_bathroom": false, "toilets_count": 6, "showers_count": 4, "hot_water": "24시간", "note": "지자체 공립 모범 관리, 청결도 최상" },
-      "features": ["FOREST_TRAIL", "CHILDREN_PLAYGROUND", "STAR_WATCHING"],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 6,
+        "showers_count": 4,
+        "hot_water": "24시간",
+        "note": "지자체 공립 모범 관리, 청결도 최상"
+      },
+      "features": [
+        "FOREST_TRAIL",
+        "CHILDREN_PLAYGROUND",
+        "STAR_WATCHING"
+      ],
       "rental_offers": [],
       "evidence": {
         "source_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032",
         "observed_at": "2026-10-15T09:00:00+09:00",
         "verification_status": "VERIFIED",
         "reviewer": "moyo-pilot-team"
-      }
+      },
+      "lat": 37.07223,
+      "lng": 127.67184
     },
     {
       "id": "pilot-003-duruwell",
       "name": "[공립] 철원 두루웰자연휴양림 야영장",
       "region": "강원 철원",
       "address": "강원특별자치도 철원군 갈말읍 두루웰길 110",
-      "primary_booking": { "channel": "foresttrip", "url": "https://www.foresttrip.go.kr/" },
+      "primary_booking": {
+        "channel": "foresttrip",
+        "url": "https://www.foresttrip.go.kr/"
+      },
       "parking_mode": "SHARED_NEARBY",
       "power_max_w": 600,
       "breaker_capacity": "6A",
       "individual_breaker": false,
       "firewood_allowed": "PROHIBITED",
       "charcoal_allowed": "ALLOWED",
-      "shelter_setup_rule": { "max_tents": 1, "max_tarps": 0, "canopy_allowed": false, "note": "나무데크 화재 예방을 위해 장작 엄격 금지, 숯 바베큐만 가능" },
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 0,
+        "canopy_allowed": false,
+        "note": "나무데크 화재 예방을 위해 장작 엄격 금지, 숯 바베큐만 가능"
+      },
       "zones": [
-        { "name": "숲속야영장 데크 1~10번", "size_w": 5.0, "size_h": 6.0, "surface": "DECK", "parking": "SHARED_NEARBY", "site_count": 10 },
-        { "name": "숲속야영장 데크 11~15번", "size_w": 6.0, "size_h": 7.0, "surface": "DECK", "parking": "SHARED_NEARBY", "site_count": 5 }
+        {
+          "name": "숲속야영장 데크 1~10번",
+          "size_w": 5,
+          "size_h": 6,
+          "surface": "DECK",
+          "parking": "SHARED_NEARBY",
+          "site_count": 10
+        },
+        {
+          "name": "숲속야영장 데크 11~15번",
+          "size_w": 6,
+          "size_h": 7,
+          "surface": "DECK",
+          "parking": "SHARED_NEARBY",
+          "site_count": 5
+        }
       ],
-      "sanitary": { "private_bathroom": false, "toilets_count": 4, "showers_count": 2, "hot_water": "24시간", "note": "신축 휴양림 편의시설 완비" },
-      "features": ["FOREST_TRAIL", "ECO_ADVENTURE", "WOOD_CRAFT"],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 4,
+        "showers_count": 2,
+        "hot_water": "24시간",
+        "note": "신축 휴양림 편의시설 완비"
+      },
+      "features": [
+        "FOREST_TRAIL",
+        "ECO_ADVENTURE",
+        "WOOD_CRAFT"
+      ],
       "rental_offers": [],
       "evidence": {
         "source_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030095",
         "observed_at": "2026-10-15T09:00:00+09:00",
         "verification_status": "VERIFIED",
         "reviewer": "moyo-pilot-team"
-      }
+      },
+      "lat": 38.1633,
+      "lng": 127.3197
     },
     {
       "id": "pilot-004-haengun",
       "name": "[사설] 춘천 행운캠핑장",
       "region": "강원 춘천",
       "address": "강원특별자치도 춘천시 사북면 화악지암길 261",
-      "primary_booking": { "channel": "camfit", "url": "https://www.camfit.co.kr/" },
+      "primary_booking": {
+        "channel": "camfit",
+        "url": "https://www.camfit.co.kr/"
+      },
       "parking_mode": "SITE_ADJACENT",
       "power_max_w": 1000,
       "breaker_capacity": "16A",
       "individual_breaker": true,
       "firewood_allowed": "ALLOWED",
       "charcoal_allowed": "ALLOWED",
-      "shelter_setup_rule": { "max_tents": 1, "max_tarps": 1, "canopy_allowed": true, "note": "대형 리빙쉘 피칭 가능" },
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 1,
+        "canopy_allowed": true,
+        "note": "대형 리빙쉘 피칭 가능"
+      },
       "zones": [
-        { "name": "계곡 파쇄석 A구역", "size_w": 7.5, "size_h": 8.5, "surface": "GRAVEL", "parking": "SITE_ADJACENT", "site_count": 12 },
-        { "name": "숲속 데크 B구역", "size_w": 6.0, "size_h": 7.0, "surface": "DECK", "parking": "SITE_ADJACENT", "site_count": 8 }
+        {
+          "name": "계곡 파쇄석 A구역",
+          "size_w": 7.5,
+          "size_h": 8.5,
+          "surface": "GRAVEL",
+          "parking": "SITE_ADJACENT",
+          "site_count": 12
+        },
+        {
+          "name": "숲속 데크 B구역",
+          "size_w": 6,
+          "size_h": 7,
+          "surface": "DECK",
+          "parking": "SITE_ADJACENT",
+          "site_count": 8
+        }
       ],
-      "sanitary": { "private_bathroom": false, "toilets_count": 4, "showers_count": 4, "hot_water": "24시간", "note": "샤워실 리모델링 완비" },
-      "features": ["VALLEY", "STREAM", "TRAMPOLINE"],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 4,
+        "showers_count": 4,
+        "hot_water": "24시간",
+        "note": "샤워실 리모델링 완비"
+      },
+      "features": [
+        "VALLEY",
+        "STREAM",
+        "TRAMPOLINE"
+      ],
       "rental_offers": [
-        { "item": "장작(10kg)", "price_krw": 12000, "deposit_krw": 0 }
+        {
+          "item": "장작(10kg)",
+          "price_krw": 12000,
+          "deposit_krw": 0
+        }
       ],
       "evidence": {
         "source_url": "https://camfit.co.kr/camp/haengun",
         "observed_at": "2026-10-15T09:00:00+09:00",
         "verification_status": "VERIFIED",
         "reviewer": "moyo-pilot-team"
-      }
+      },
+      "lat": 37.9867,
+      "lng": 127.5732
     },
     {
       "id": "pilot-005-daehoesan",
       "name": "[사설] 포천 대회산캠핑장",
       "region": "경기 포천",
       "address": "경기도 포천시 영북면 대회산길 272-38",
-      "primary_booking": { "channel": "camfit", "url": "https://www.camfit.co.kr/" },
+      "primary_booking": {
+        "channel": "camfit",
+        "url": "https://www.camfit.co.kr/"
+      },
       "parking_mode": "SITE_ADJACENT",
       "power_max_w": 1000,
       "breaker_capacity": "16A",
       "individual_breaker": true,
       "firewood_allowed": "ALLOWED",
       "charcoal_allowed": "ALLOWED",
-      "shelter_setup_rule": { "max_tents": 1, "max_tarps": 1, "canopy_allowed": true, "note": "광폭 8x10m 초대형 사이트" },
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 1,
+        "canopy_allowed": true,
+        "note": "광폭 8x10m 초대형 사이트"
+      },
       "zones": [
-        { "name": "파쇄석 오토 A구역", "size_w": 8.0, "size_h": 10.0, "surface": "GRAVEL", "parking": "SITE_ADJACENT", "site_count": 35 },
-        { "name": "가족 잔디 B구역", "size_w": 8.0, "size_h": 9.0, "surface": "GRASS", "parking": "SITE_ADJACENT", "site_count": 20 }
+        {
+          "name": "파쇄석 오토 A구역",
+          "size_w": 8,
+          "size_h": 10,
+          "surface": "GRAVEL",
+          "parking": "SITE_ADJACENT",
+          "site_count": 35
+        },
+        {
+          "name": "가족 잔디 B구역",
+          "size_w": 8,
+          "size_h": 9,
+          "surface": "GRASS",
+          "parking": "SITE_ADJACENT",
+          "site_count": 20
+        }
       ],
-      "sanitary": { "private_bathroom": true, "toilets_count": 12, "showers_count": 10, "hot_water": "24시간", "note": "일부 단독 개별 화장실/샤워실 옵션 보유" },
-      "features": ["TUBE_SLED", "TRAMPOLINE", "SANDPIT", "SWIMMING_POOL"],
+      "sanitary": {
+        "private_bathroom": true,
+        "toilets_count": 12,
+        "showers_count": 10,
+        "hot_water": "24시간",
+        "note": "일부 단독 개별 화장실/샤워실 옵션 보유"
+      },
+      "features": [
+        "TUBE_SLED",
+        "TRAMPOLINE",
+        "SANDPIT",
+        "SWIMMING_POOL"
+      ],
       "rental_offers": [
-        { "item": "사계절 튜브썰매 이용권", "price_krw": 5000, "deposit_krw": 0 }
+        {
+          "item": "사계절 튜브썰매 이용권",
+          "price_krw": 5000,
+          "deposit_krw": 0
+        }
       ],
       "evidence": {
         "source_url": "https://camfit.co.kr/camp/daehoesan",
         "observed_at": "2026-10-15T09:00:00+09:00",
         "verification_status": "VERIFIED",
         "reviewer": "moyo-pilot-team"
-      }
+      },
+      "gocamping_id": "100585",
+      "lat": 38.066959,
+      "lng": 127.238383
     },
     {
       "id": "pilot-006-yeonin-valley",
       "name": "[사설] 가평 연인산 밸리캠핑장",
       "region": "경기 가평",
       "address": "경기도 가평군 북면 백둔로 463-54",
-      "primary_booking": { "channel": "naver", "url": "https://booking.naver.com/" },
+      "primary_booking": {
+        "channel": "naver",
+        "url": "https://booking.naver.com/"
+      },
       "parking_mode": "SITE_ADJACENT",
       "power_max_w": 1000,
       "breaker_capacity": "16A",
       "individual_breaker": true,
       "firewood_allowed": "ALLOWED",
       "charcoal_allowed": "ALLOWED",
-      "shelter_setup_rule": { "max_tents": 1, "max_tarps": 1, "canopy_allowed": true, "note": "계곡 최인접 명당 사이트" },
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 1,
+        "canopy_allowed": true,
+        "note": "계곡 최인접 명당 사이트"
+      },
       "zones": [
-        { "name": "계곡 파쇄석 V구역", "size_w": 8.0, "size_h": 9.0, "surface": "GRAVEL", "parking": "SITE_ADJACENT", "site_count": 18 },
-        { "name": "숲속 데크 D구역", "size_w": 6.5, "size_h": 7.5, "surface": "DECK", "parking": "SITE_ADJACENT", "site_count": 10 }
+        {
+          "name": "계곡 파쇄석 V구역",
+          "size_w": 8,
+          "size_h": 9,
+          "surface": "GRAVEL",
+          "parking": "SITE_ADJACENT",
+          "site_count": 18
+        },
+        {
+          "name": "숲속 데크 D구역",
+          "size_w": 6.5,
+          "size_h": 7.5,
+          "surface": "DECK",
+          "parking": "SITE_ADJACENT",
+          "site_count": 10
+        }
       ],
-      "sanitary": { "private_bathroom": false, "toilets_count": 6, "showers_count": 4, "hot_water": "24시간", "note": "계곡 물놀이객 전용 탈의실 및 온수 샤워실 구비" },
-      "features": ["VALLEY", "STREAM", "FOREST_TRAIL", "TRAMPOLINE"],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 6,
+        "showers_count": 4,
+        "hot_water": "24시간",
+        "note": "계곡 물놀이객 전용 탈의실 및 온수 샤워실 구비"
+      },
+      "features": [
+        "VALLEY",
+        "STREAM",
+        "FOREST_TRAIL",
+        "TRAMPOLINE"
+      ],
       "rental_offers": [
-        { "item": "튜브 대여", "price_krw": 5000, "deposit_krw": 5000 }
+        {
+          "item": "튜브 대여",
+          "price_krw": 5000,
+          "deposit_krw": 5000
+        }
       ],
       "evidence": {
         "source_url": "https://booking.naver.com/booking/3/bizes/yeoninsan-valley",
         "observed_at": "2026-10-15T09:00:00+09:00",
         "verification_status": "VERIFIED",
         "reviewer": "moyo-pilot-team"
-      }
+      },
+      "gocamping_id": "8042",
+      "lat": 37.9174,
+      "lng": 127.464
     },
     {
       "id": "pilot-007-soeggol",
       "name": "[사설] 파주 쇠꼴마을 캠핑장",
       "region": "경기 파주",
       "address": "경기도 파주시 조리읍 등원로 391번길 40",
-      "primary_booking": { "channel": "naver", "url": "https://booking.naver.com/" },
+      "primary_booking": {
+        "channel": "naver",
+        "url": "https://booking.naver.com/"
+      },
       "parking_mode": "SITE_ADJACENT",
       "power_max_w": 1000,
       "breaker_capacity": "16A",
       "individual_breaker": true,
       "firewood_allowed": "ALLOWED",
       "charcoal_allowed": "ALLOWED",
-      "shelter_setup_rule": { "max_tents": 1, "max_tarps": 1, "canopy_allowed": true, "note": "아이 체험형 농원 테마" },
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 1,
+        "canopy_allowed": true,
+        "note": "아이 체험형 농원 테마"
+      },
       "zones": [
-        { "name": "체험마을 파쇄석 A구역", "size_w": 7.0, "size_h": 8.0, "surface": "GRAVEL", "parking": "SITE_ADJACENT", "site_count": 25 },
-        { "name": "배나무 잔디 B구역", "size_w": 7.0, "size_h": 7.0, "surface": "GRASS", "parking": "SITE_ADJACENT", "site_count": 15 }
+        {
+          "name": "체험마을 파쇄석 A구역",
+          "size_w": 7,
+          "size_h": 8,
+          "surface": "GRAVEL",
+          "parking": "SITE_ADJACENT",
+          "site_count": 25
+        },
+        {
+          "name": "배나무 잔디 B구역",
+          "size_w": 7,
+          "size_h": 7,
+          "surface": "GRASS",
+          "parking": "SITE_ADJACENT",
+          "site_count": 15
+        }
       ],
-      "sanitary": { "private_bathroom": false, "toilets_count": 8, "showers_count": 6, "hot_water": "24시간", "note": "아이 키높이 세면대 구비" },
-      "features": ["ANIMAL_FEEDING", "TRAIN_RIDE", "TRAMPOLINE", "CRAFT_ADVENTURE"],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 8,
+        "showers_count": 6,
+        "hot_water": "24시간",
+        "note": "아이 키높이 세면대 구비"
+      },
+      "features": [
+        "ANIMAL_FEEDING",
+        "TRAIN_RIDE",
+        "TRAMPOLINE",
+        "CRAFT_ADVENTURE"
+      ],
       "rental_offers": [
-        { "item": "동물 먹이 바구니", "price_krw": 3000, "deposit_krw": 0 },
-        { "item": "깡통열차 탑승권", "price_krw": 4000, "deposit_krw": 0 }
+        {
+          "item": "동물 먹이 바구니",
+          "price_krw": 3000,
+          "deposit_krw": 0
+        },
+        {
+          "item": "깡통열차 탑승권",
+          "price_krw": 4000,
+          "deposit_krw": 0
+        }
       ],
       "evidence": {
         "source_url": "https://booking.naver.com/booking/3/bizes/soeggol",
         "observed_at": "2026-10-15T09:00:00+09:00",
         "verification_status": "VERIFIED",
         "reviewer": "moyo-pilot-team"
-      }
+      },
+      "lat": 37.881,
+      "lng": 126.892
     },
     {
       "id": "pilot-008-vivaldi",
       "name": "[사설] 홍천 비발디캠핑파크",
       "region": "강원 홍천",
       "address": "강원특별자치도 홍천군 서면 한치골길 600",
-      "primary_booking": { "channel": "camfit", "url": "https://www.camfit.co.kr/" },
+      "primary_booking": {
+        "channel": "camfit",
+        "url": "https://www.camfit.co.kr/"
+      },
       "parking_mode": "SITE_ADJACENT",
       "power_max_w": 1000,
       "breaker_capacity": "16A",
       "individual_breaker": true,
       "firewood_allowed": "ALLOWED",
       "charcoal_allowed": "ALLOWED",
-      "shelter_setup_rule": { "max_tents": 1, "max_tarps": 1, "canopy_allowed": true, "note": "단독 개별 화장실/샤워실 특화 구역" },
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 1,
+        "canopy_allowed": true,
+        "note": "단독 개별 화장실/샤워실 특화 구역"
+      },
       "zones": [
-        { "name": "프리미엄 개별욕실존", "size_w": 8.5, "size_h": 9.5, "surface": "GRAVEL", "parking": "SITE_ADJACENT", "site_count": 15 },
-        { "name": "일반 오토캠핑존", "size_w": 7.5, "size_h": 8.5, "surface": "GRAVEL", "parking": "SITE_ADJACENT", "site_count": 25 }
+        {
+          "name": "프리미엄 개별욕실존",
+          "size_w": 8.5,
+          "size_h": 9.5,
+          "surface": "GRAVEL",
+          "parking": "SITE_ADJACENT",
+          "site_count": 15
+        },
+        {
+          "name": "일반 오토캠핑존",
+          "size_w": 7.5,
+          "size_h": 8.5,
+          "surface": "GRAVEL",
+          "parking": "SITE_ADJACENT",
+          "site_count": 25
+        }
       ],
-      "sanitary": { "private_bathroom": true, "toilets_count": 15, "showers_count": 15, "hot_water": "24시간", "note": "사이트별 1:1 전용 도어락 개별 화장실/샤워실 완비" },
-      "features": ["SWIMMING_POOL", "AIR_BOUNCE", "TRAMPOLINE"],
+      "sanitary": {
+        "private_bathroom": true,
+        "toilets_count": 15,
+        "showers_count": 15,
+        "hot_water": "24시간",
+        "note": "사이트별 1:1 전용 도어락 개별 화장실/샤워실 완비"
+      },
+      "features": [
+        "SWIMMING_POOL",
+        "AIR_BOUNCE",
+        "TRAMPOLINE"
+      ],
       "rental_offers": [
-        { "item": "릴선 대여", "price_krw": 5000, "deposit_krw": 5000 }
+        {
+          "item": "릴선 대여",
+          "price_krw": 5000,
+          "deposit_krw": 5000
+        }
       ],
       "evidence": {
         "source_url": "https://camfit.co.kr/camp/vivaldipark",
         "observed_at": "2026-10-15T09:00:00+09:00",
         "verification_status": "VERIFIED",
         "reviewer": "moyo-pilot-team"
-      }
+      },
+      "gocamping_id": "100912",
+      "lat": 37.6975,
+      "lng": 127.912
     },
     {
       "id": "pilot-009-ninehills",
       "name": "[사설] 용인 나인힐스캠핑장",
       "region": "경기 용인",
       "address": "경기도 용인시 처인구 원삼면 보개원삼로 1572번길 39",
-      "primary_booking": { "channel": "camfit", "url": "https://www.camfit.co.kr/" },
+      "primary_booking": {
+        "channel": "camfit",
+        "url": "https://www.camfit.co.kr/"
+      },
       "parking_mode": "SITE_ADJACENT",
       "power_max_w": 1000,
       "breaker_capacity": "16A",
       "individual_breaker": true,
       "firewood_allowed": "ALLOWED",
       "charcoal_allowed": "ALLOWED",
-      "shelter_setup_rule": { "max_tents": 1, "max_tarps": 1, "canopy_allowed": true, "note": "키즈 엔터테인먼트 초대형 복합 캠핑장" },
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 1,
+        "canopy_allowed": true,
+        "note": "키즈 엔터테인먼트 초대형 복합 캠핑장"
+      },
       "zones": [
-        { "name": "플레이 오토 A구역", "size_w": 8.0, "size_h": 9.0, "surface": "GRAVEL", "parking": "SITE_ADJACENT", "site_count": 40 },
-        { "name": "데크힐 B구역", "size_w": 7.0, "size_h": 8.0, "surface": "DECK", "parking": "SITE_ADJACENT", "site_count": 20 }
+        {
+          "name": "플레이 오토 A구역",
+          "size_w": 8,
+          "size_h": 9,
+          "surface": "GRAVEL",
+          "parking": "SITE_ADJACENT",
+          "site_count": 40
+        },
+        {
+          "name": "데크힐 B구역",
+          "size_w": 7,
+          "size_h": 8,
+          "surface": "DECK",
+          "parking": "SITE_ADJACENT",
+          "site_count": 20
+        }
       ],
-      "sanitary": { "private_bathroom": false, "toilets_count": 16, "showers_count": 12, "hot_water": "24시간", "note": "대형 편의동 3개소 운영" },
-      "features": ["AIR_BOUNCE", "TRAMPOLINE", "SWIMMING_POOL", "INDOOR_PLAYROOM", "VIKING_RIDE"],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 16,
+        "showers_count": 12,
+        "hot_water": "24시간",
+        "note": "대형 편의동 3개소 운영"
+      },
+      "features": [
+        "AIR_BOUNCE",
+        "TRAMPOLINE",
+        "SWIMMING_POOL",
+        "INDOOR_PLAYROOM",
+        "VIKING_RIDE"
+      ],
       "rental_offers": [
-        { "item": "실내놀이터 이용권", "price_krw": 0, "deposit_krw": 0, "note": "투숙객 무료" }
+        {
+          "item": "실내놀이터 이용권",
+          "price_krw": 0,
+          "deposit_krw": 0,
+          "note": "투숙객 무료"
+        }
       ],
       "evidence": {
         "source_url": "https://camfit.co.kr/camp/ninehills",
         "observed_at": "2026-10-15T09:00:00+09:00",
         "verification_status": "VERIFIED",
         "reviewer": "moyo-pilot-team"
-      }
+      },
+      "lat": 37.135,
+      "lng": 127.172
     },
     {
       "id": "pilot-010-yumyeongsan",
       "name": "[국립] 가평 유명산자연휴양림 야영장",
       "region": "경기 가평",
       "address": "경기도 가평군 설악면 유명산길 79",
-      "primary_booking": { "channel": "foresttrip", "url": "https://www.foresttrip.go.kr/" },
+      "primary_booking": {
+        "channel": "foresttrip",
+        "url": "https://www.foresttrip.go.kr/"
+      },
       "parking_mode": "CART_REQUIRED",
       "power_max_w": 600,
       "breaker_capacity": "6A",
       "individual_breaker": false,
       "firewood_allowed": "PROHIBITED",
       "charcoal_allowed": "PROHIBITED",
-      "shelter_setup_rule": { "max_tents": 1, "max_tarps": 0, "canopy_allowed": false, "note": "국립자연휴양림 전 구역 숯·장작 전면 금지, 가스버너만 취사 허용" },
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 0,
+        "canopy_allowed": false,
+        "note": "국립자연휴양림 전 구역 숯·장작 전면 금지, 가스버너만 취사 허용"
+      },
       "zones": [
-        { "name": "제1야영장 데크", "size_w": 4.0, "size_h": 4.0, "surface": "DECK", "parking": "CART_REQUIRED", "site_count": 30 },
-        { "name": "제2야영장 데크", "size_w": 3.6, "size_h": 3.6, "surface": "DECK", "parking": "CART_REQUIRED", "site_count": 40 }
+        {
+          "name": "제1야영장 데크",
+          "size_w": 4,
+          "size_h": 4,
+          "surface": "DECK",
+          "parking": "CART_REQUIRED",
+          "site_count": 30
+        },
+        {
+          "name": "제2야영장 데크",
+          "size_w": 3.6,
+          "size_h": 3.6,
+          "surface": "DECK",
+          "parking": "CART_REQUIRED",
+          "site_count": 40
+        }
       ],
-      "sanitary": { "private_bathroom": false, "toilets_count": 8, "showers_count": 6, "hot_water": "동전·카드 유료(온수)", "note": "샤워장 온수 코인제 운영" },
-      "features": ["FOREST_TRAIL", "VALLEY", "ECO_ADVENTURE"],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 8,
+        "showers_count": 6,
+        "hot_water": "동전·카드 유료(온수)",
+        "note": "샤워장 온수 코인제 운영"
+      },
+      "features": [
+        "FOREST_TRAIL",
+        "VALLEY",
+        "ECO_ADVENTURE"
+      ],
       "rental_offers": [],
       "evidence": {
         "source_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0101",
         "observed_at": "2026-10-15T09:00:00+09:00",
         "verification_status": "VERIFIED",
         "reviewer": "moyo-pilot-team"
-      }
+      },
+      "gocamping_id": "7194",
+      "lat": 37.5975,
+      "lng": 127.4912
     }
   ]
 }

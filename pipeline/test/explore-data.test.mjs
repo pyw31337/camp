@@ -85,3 +85,77 @@ test("TourAPI: 요금 문구에서 금액 범위, 이름·좌표 매칭", () => 
   assert.equal(m.get("g1").contentid, "t1");
   assert.equal(m.has("g2"), false);
 });
+
+test("파일럿 조건표 연동: 검증된 조건표는 VERIFIED 및 구역별 규격·주차·전력·대여를 갖춘다", () => {
+  const pilotFacts = {
+    pilot_campgrounds: [
+      {
+        id: "pilot-001-hoengseong",
+        gocamping_id: "7096",
+        name: "향남 오토캠핑장 (파일럿)",
+        region: "강원 횡성",
+        parking_mode: "SITE_ADJACENT",
+        power_max_w: 1000,
+        breaker_capacity: "16A",
+        individual_breaker: true,
+        firewood_allowed: "ALLOWED",
+        charcoal_allowed: "ALLOWED",
+        shelter_setup_rule: { max_tents: 1, max_tarps: 1, canopy_allowed: true, note: "피칭 주의" },
+        zones: [
+          { name: "A존", size_w: 8.0, size_h: 10.0, surface: "GRAVEL", parking: "SITE_ADJACENT", site_count: 10 }
+        ],
+        sanitary: { private_bathroom: false, toilets_count: 6, showers_count: 4 },
+        features: ["VALLEY", "SWIMMING_POOL"],
+        rental_offers: [{ item: "화로대", price_krw: 10000, deposit_krw: 0 }],
+        evidence: {
+          source_url: "https://example.com/pilot",
+          observed_at: "2026-10-15T09:00:00+09:00",
+          verification_status: "VERIFIED",
+          reviewer: "moyo-pilot-team"
+        }
+      },
+      {
+        id: "pilot-standalone",
+        name: "[공립] 수레의산자연휴양림 국민여가캠핑장",
+        region: "충북 음성",
+        address: "충청북도 음성군 생극면 차곡리 산47-1",
+        lat: 37.07223,
+        lng: 127.67184,
+        primary_booking: { channel: "foresttrip", url: "https://www.foresttrip.go.kr/" },
+        parking_mode: "SITE_ADJACENT",
+        power_max_w: 600,
+        breaker_capacity: "10A",
+        individual_breaker: true,
+        firewood_allowed: "ALLOWED",
+        charcoal_allowed: "ALLOWED",
+        zones: [{ name: "A", size_w: 7.0, size_h: 8.0, surface: "GRAVEL", parking: "SITE_ADJACENT", site_count: 16 }],
+        features: ["FOREST_TRAIL"],
+        evidence: { source_url: "https://example.com", observed_at: "2026-10-15T09:00:00+09:00", verification_status: "VERIFIED" }
+      }
+    ]
+  };
+
+  const records = buildExploreRecords({ campgrounds: [camp] }, null, null, new Map(), null, pilotFacts);
+  // Matched record (7096)
+  const hoeng = records.find((r) => r.id === "7096");
+  assert.ok(hoeng);
+  assert.equal(hoeng.field_conditions.status, "VERIFIED");
+  assert.equal(hoeng.field_conditions.parking.mode, "SITE_ADJACENT");
+  assert.equal(hoeng.field_conditions.parking.tent_side, true);
+  assert.equal(hoeng.field_conditions.power.limit_w, 1000);
+  assert.equal(hoeng.field_conditions.power.breaker_capacity, "16A");
+  assert.equal(hoeng.field_conditions.firewood.allowed, true);
+  assert.equal(hoeng.field_conditions.site_size.groups[0].width_m, 8.0);
+  assert.equal(hoeng.field_conditions.site_size.groups[0].name, "A존");
+  assert.equal(hoeng.field_conditions.rental_offers[0].item, "화로대");
+  assert.equal(hoeng.field_conditions.source.reviewer, "moyo-pilot-team");
+
+  // Standalone record (pilot-standalone)
+  const sureui = records.find((r) => r.id === "pilot-standalone");
+  assert.ok(sureui);
+  assert.equal(sureui.name, "[공립] 수레의산자연휴양림 국민여가캠핑장");
+  assert.equal(sureui.area, "충청");
+  assert.equal(sureui.field_conditions.status, "VERIFIED");
+  assert.equal(sureui.field_conditions.power.limit_w, 600);
+});
+

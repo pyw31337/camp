@@ -50,13 +50,15 @@ const calendar = await read("../out/open-calendar.json");
 
 const seoulRaw = await read("../out/seoul-yeyak.json");
 const seoul = seoulRaw ? matchSeoulToCampgrounds(seoulRaw.services ?? [], camps.campgrounds ?? []) : new Map();
-const records = buildExploreRecords(camps, toilets, fees, seoul, notices);
+const pilotFacts = await read("../registry/pilot-condition-facts.json");
+const records = buildExploreRecords(camps, toilets, fees, seoul, notices, pilotFacts);
 for (const r of records) { const hero = hostedOf(r.id)[0]; if (hero?.thumb) r.ph = hero.thumb; }
 const meta = {
   generated_at: new Date().toISOString(),
   count: records.length,
   sources: [
     { id: "gocamping", name: "한국관광공사 고캠핑", url: "https://www.data.go.kr/data/15101933/openapi.do", tier: "A", fetched_at: camps.fetched_at ?? null },
+    pilotFacts && { id: "pilot-condition-facts", name: "모여라캠핑 파일럿 조건표 (공식 원문 대조)", url: "https://github.com/pyw31337/camp/blob/main/pipeline/registry/pilot-condition-facts.json", tier: "A", fetched_at: pilotFacts.updated_at ?? null },
     toilets && { id: "toilets", name: "행정안전부 공중화장실정보 · OpenStreetMap", url: "https://file.localdata.go.kr/file/public_restroom_info/info", tier: "A", fetched_at: toilets.generated_at ?? null },
     fees && { id: "tour-fees", name: "한국관광공사 TourAPI 소개정보(안내 요금 문구)", url: "https://www.data.go.kr/data/15101578/openapi.do", tier: "B", fetched_at: fees.generated_at ?? null },
     seoulRaw && { id: "seoul-yeyak", name: "서울시 공공서비스예약 정보(접수 상태)", url: SEOUL_DATASET_URL, tier: "A", fetched_at: seoulRaw.generated_at ?? null },
@@ -89,6 +91,7 @@ const meta = {
     camfit_booking_channel: records.filter((r) => r.booking.channels.some((channel) => channel.platform_id === "camfit")).length,
     official_notice_camps: records.filter((r) => r.important_info?.items?.length).length,
     official_notice_items: records.reduce((sum, r) => sum + (r.important_info?.items?.length ?? 0), 0),
+    verified_condition_facts: records.filter((r) => r.field_conditions?.status === "VERIFIED").length,
   },
 };
 await mkdir(p("../out/explore/"), { recursive: true });

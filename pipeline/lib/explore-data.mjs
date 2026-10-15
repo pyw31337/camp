@@ -37,7 +37,81 @@ const sizeEntries = (campground) => Array.isArray(campground?.site_sizes)
  * 현장 조건의 공통 읽기 모델. UNKNOWN은 ‘없음/불가’가 아니라 원천에 값이
  * 없다는 뜻이다. 조건별 확인 화면을 추가할 때 이 모델을 단일 계약으로 쓴다.
  */
-export function buildFieldConditions(campground) {
+export function buildFieldConditions(campground, pilotFact = null) {
+  if (pilotFact) {
+    const zones = Array.isArray(pilotFact.zones) ? pilotFact.zones : [];
+    const autoSites = zones
+      .filter((z) => z.parking === "SITE_ADJACENT")
+      .reduce((total, z) => total + (Number(z.site_count) || 0), 0) || null;
+    const firewoodSale = (pilotFact.rental_offers || []).some((r) => /장작/.test(r.item)) || pilotFact.firewood_allowed === "ALLOWED";
+
+    return {
+      version: 2,
+      status: "VERIFIED",
+      parking: {
+        state: "VERIFIED",
+        mode: pilotFact.parking_mode,
+        tent_side: pilotFact.parking_mode === "SITE_ADJACENT",
+        cart_required: pilotFact.parking_mode === "CART_REQUIRED",
+        shared_nearby: pilotFact.parking_mode === "SHARED_NEARBY",
+        drop_off_external: pilotFact.parking_mode === "DROP_OFF_EXTERNAL",
+        auto_camping_sites: autoSites,
+      },
+      shelter_setup: {
+        state: "VERIFIED",
+        max_tents: pilotFact.shelter_setup_rule?.max_tents ?? 1,
+        max_tarps: pilotFact.shelter_setup_rule?.max_tarps ?? 1,
+        canopy_allowed: pilotFact.shelter_setup_rule?.canopy_allowed ?? null,
+        note: pilotFact.shelter_setup_rule?.note ?? null,
+      },
+      power: {
+        state: "VERIFIED",
+        available: true,
+        limit_w: pilotFact.power_max_w,
+        breaker_capacity: pilotFact.breaker_capacity ?? null,
+        individual_breaker: pilotFact.individual_breaker ?? null,
+      },
+      ground: {
+        state: "VERIFIED",
+        types: zones.map((z) => ({ type: z.surface, count: Number(z.site_count) || null })),
+      },
+      charcoal: {
+        state: "VERIFIED",
+        allowed: pilotFact.charcoal_allowed === "ALLOWED",
+      },
+      firewood: {
+        state: "VERIFIED",
+        allowed: pilotFact.firewood_allowed === "ALLOWED",
+        sold: firewoodSale || null,
+      },
+      fire_pit: {
+        state: "VERIFIED",
+        arrangement: "개별 지참 화로대(받침대 필수)",
+      },
+      site_size: {
+        state: "VERIFIED",
+        groups: zones.map((z) => ({
+          width_m: Number(z.size_w),
+          depth_m: Number(z.size_h),
+          count: Number(z.site_count) || null,
+          name: z.name,
+          surface: z.surface,
+          parking: z.parking,
+        })),
+      },
+      sanitary: pilotFact.sanitary ?? null,
+      features: pilotFact.features ?? [],
+      rental_offers: pilotFact.rental_offers ?? [],
+      source: {
+        label: "모여라캠핑 파일럿 검증 (공식 원문 대조)",
+        url: pilotFact.evidence?.source_url ?? null,
+        checked_at: pilotFact.evidence?.observed_at ?? null,
+        tier: "A",
+        reviewer: pilotFact.evidence?.reviewer ?? "moyo-pilot-team",
+      },
+    };
+  }
+
   const amenities = [...(Array.isArray(campground?.amenities) ? campground.amenities : []), ...(Array.isArray(campground?.amenities_etc) ? campground.amenities_etc : [])];
   const hasAmenity = (re) => amenities.some((value) => re.test(String(value)));
   const autoCampingSites = productEntries(campground)
@@ -104,13 +178,25 @@ export function buildImportantInfo(notices, campgroundId) {
  * @param {{campgrounds?:Record<string,{count_2km:number,nearest:object[]}>}|null} toilets out/campground-toilets.json
  * @param {{records?:Record<string,object>}|null} fees out/tour-fees.json
  * @param {Map<string, object[]>} [seoul] matchSeoulToCampgrounds 결과(서울 공공예약 상품)
+ * @param {object|null} [notices] campground-notices.json
+ * @param {object|null} [pilotFacts] pilot-condition-facts.json
  */
-export function buildExploreRecords(camps, toilets, fees, seoul = new Map(), notices = null) {
-  return (camps.campgrounds ?? []).filter((c) => c.location && c.name).map((c) => {
+export function buildExploreRecords(camps, toilets, fees, seoul = new Map(), notices = null, pilotFacts = null) {
+  const pilotMap = new Map();
+  const matchedPilotIds = new Set();
+  const pilots = Array.isArray(pilotFacts?.pilot_campgrounds) ? pilotFacts.pilot_campgrounds : [];
+  for (const p of pilots) {
+    if (p.gocamping_id) pilotMap.set(String(p.gocamping_id), p);
+    pilotMap.set(String(p.id), p);
+  }
+
+  const records = (camps?.campgrounds ?? []).filter((c) => c.location && c.name).map((c) => {
     const id = String(c.external_id.id);
     const near = toilets?.campgrounds?.[id];
     const fee = fees?.records?.[id];
     const bookingUrl = httpUrl(c.reservation?.url);
+    const pilotFact = pilotMap.get(id) || null;
+    if (pilotFact) matchedPilotIds.add(pilotFact.id);
     // `resveUrl`은 운영자가 고캠핑에 입력한 값이다. 한 개의 "예약하기" 버튼으로
     // 단정하지 않고, 홈페이지·전화까지 포함한 대체 경로와 신뢰도를 함께 보낸다.
     const channels = classifyChannels(c).map((ch) => ({
@@ -139,7 +225,7 @@ export function buildExploreRecords(camps, toilets, fees, seoul = new Map(), not
       sizes: (c.site_sizes ?? []).map((s) => [s.width_m, s.depth_m, s.count]),
       floors: (c.floors ?? []).map((f) => [f.floor, f.count]),
       amenities: [...(c.amenities ?? []), ...(c.amenities_etc ?? [])],
-      field_conditions: buildFieldConditions(c),
+      field_conditions: buildFieldConditions(c, pilotFact),
       important_info: buildImportantInfo(notices, id),
       env: c.environment ?? [],
       themes: c.themes ?? [],
@@ -181,7 +267,81 @@ export function buildExploreRecords(camps, toilets, fees, seoul = new Map(), not
       modified_at: c.source?.modified_at ?? null,
     };
   });
+
+  // Append pilot campgrounds that were not part of GoCamping catalog
+  for (const p of pilots) {
+    if (matchedPilotIds.has(p.id)) continue;
+    const bookingUrl = httpUrl(p.primary_booking?.url);
+    const channelName = p.primary_booking?.channel === "foresttrip" ? "숲나들e" : p.primary_booking?.channel === "camfit" ? "캠핏" : p.primary_booking?.channel === "naver" ? "네이버 예약" : "공식 예약처";
+    const sido = p.region.split(" ")[0];
+    const sigungu = p.region.split(" ")[1] ?? null;
+    const totalSites = (p.zones || []).reduce((sum, z) => sum + (Number(z.site_count) || 0), 0);
+    const op = p.name.includes("[공립]") ? "LOCAL_GOVERNMENT" : p.name.includes("[국립]") ? "NATIONAL_PARK" : "PRIVATE";
+
+    records.push({
+      id: p.id,
+      name: p.name,
+      sido,
+      sigungu,
+      area: areaOf(sido),
+      addr: p.address,
+      lat: p.lat ? Math.round(p.lat * 1e6) / 1e6 : 37.5,
+      lng: p.lng ? Math.round(p.lng * 1e6) / 1e6 : 127.5,
+      tel: null,
+      homepage: bookingUrl,
+      op,
+      status: "운영",
+      types: ["일반야영장", "자동차야영장"],
+      kinds: [["AUTO_PITCH", totalSites]],
+      sizes: (p.zones || []).map((z) => [z.size_w, z.size_h, z.site_count]),
+      floors: (p.zones || []).map((z) => [z.surface, z.site_count]),
+      amenities: ["전기", p.firewood_allowed === "ALLOWED" ? "장작판매" : null, ...(p.features || []).map((f) => f === "SWIMMING_POOL" ? "물놀이장" : f === "VALLEY" ? "계곡" : f === "TRAMPOLINE" ? "트렘폴린" : f === "AIR_BOUNCE" ? "에어바운스" : null)].filter(Boolean),
+      field_conditions: buildFieldConditions(null, p),
+      important_info: buildImportantInfo(notices, p.id),
+      env: ["산", "숲"],
+      themes: ["auto", "forest", (p.features || []).includes("VALLEY") ? "valley" : null, p.power_max_w >= 1000 ? "comfort" : null].filter(Boolean),
+      pets: "불가능",
+      fire: p.firewood_allowed === "ALLOWED" ? "개별" : "불가",
+      trailer: null,
+      caravan: null,
+      toilets: p.sanitary?.toilets_count ?? null,
+      showers: p.sanitary?.showers_count ?? null,
+      sinks: null,
+      rental: (p.rental_offers ?? []).map((r) => r.item),
+      seasons: ["봄", "여름", "가을", "겨울"],
+      days: ["평일+주말"],
+      booking: {
+        methods: ["온라인실시간예약"],
+        url: bookingUrl,
+        provider: providerOf(bookingUrl),
+        channels: [{
+          platform_id: p.primary_booking?.channel,
+          platform_name: channelName,
+          url: bookingUrl,
+          kind: "online",
+          confidence: 1.0,
+          evidence: ["pilot_verified"],
+        }],
+        source: {
+          label: "모여라캠핑 파일럿 검증 원천",
+          url: p.evidence?.source_url ?? null,
+          checked_at: p.evidence?.observed_at ?? null,
+          tier: "A",
+        },
+      },
+      img: null,
+      line: `${p.name} · 검증된 현장 조건 파일럿`,
+      th: ["auto", "forest", (p.features || []).includes("VALLEY") ? "valley" : null, p.power_max_w >= 1000 ? "comfort" : null].filter(Boolean),
+      gc_url: null,
+      fee: null,
+      nearby_toilets: null,
+      seoul: [],
+      modified_at: p.evidence?.observed_at ?? null,
+    });
+  }
+  return records;
 }
+
 
 const NEARBY_GROUPS = ["tour", "food", "mart", "conv", "fuel", "gear", "medical", "rest"];
 const compactPoi = (p) => Object.fromEntries(Object.entries({ n: p.name, k: p.kind, ty: p.type, m: p.distance_m, lat: p.lat, lng: p.lng, a: p.addr, t: p.tel, u: p.url, img: p.image, h: p.hours, b: p.brand, r: p.road, e: p.emergency || null }).filter(([, v]) => v != null && v !== ""));
