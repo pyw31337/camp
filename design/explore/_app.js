@@ -188,10 +188,10 @@ function filtered({ forMap = false } = {}) {
     if (state.floor && !hasFloor(c)) return false;
     if (state.naverBooking && !hasChannel(c, "naver")) return false;
     if (state.camfitBooking && !hasChannel(c, "camfit")) return false;
-    if (state.parkingSide && c.field_conditions?.parking?.tent_side !== true) return false;
+    if (state.parkingSide && (c.field_conditions?.status !== "VERIFIED" || c.field_conditions?.parking?.tent_side !== true)) return false;
     if (state.parkingCart && c.field_conditions?.parking?.cart_required !== true && c.field_conditions?.parking?.mode !== "CART_REQUIRED") return false;
-    if (state.firewoodAllowed && c.field_conditions?.firewood?.allowed !== true) return false;
-    if (state.powerHigh && !(c.field_conditions?.power?.limit_w >= 700)) return false;
+    if (state.firewoodAllowed && (c.field_conditions?.status !== "VERIFIED" || c.field_conditions?.firewood?.allowed !== true)) return false;
+    if (state.powerHigh && (c.field_conditions?.status !== "VERIFIED" || !(c.field_conditions?.power?.limit_w >= 700))) return false;
     if (state.privateBath && c.field_conditions?.sanitary?.private_bathroom !== true) return false;
     if (state.kidsPlay && !hasKidsPlay(c)) return false;
     return fits(c);
@@ -212,13 +212,17 @@ function card(c) {
   const kinds = c.kinds.map(([k, n]) => KIND[k] ? `<span class="tag">${ic(KIND[k][1], "i-xs")}${KIND[k][0]} <span class="num">${n}</span></span>` : "").join("");
   const km = state.here ? ` · ${dist(state.here, c).toFixed(0)}km` : "";
   const observations = officialOpenRecords(c, { dateMatch: Boolean(state.checkIn && state.checkOut) });
-  const verifiedBadge = c.field_conditions?.status === "VERIFIED" ? `<span class="tag tag-verified">${ic("#l-shield-check", "i-xs")}조건 검증</span>` : "";
+  const verifiedBadge = c.field_conditions?.status === "VERIFIED"
+    ? `<span class="tag tag-verified">${ic("#l-shield-check", "i-xs")}조건 검증</span>`
+    : c.field_conditions?.status === "SURVEYED"
+    ? `<span class="tag tag-candidate">${ic("#l-file-search", "i-xs")}소개글 기반 후보</span>`
+    : "";
   const setup = hasSetup() ? setupStatus(c) : null;
   const setupTag = !setup ? "" : `<span class="tag tag-setup ${setup.overall.toLowerCase()}">${ic(setup.overall === "MATCH" ? "#l-circle-check" : setup.overall === "MISMATCH" ? "#l-circle-x" : "#l-circle-help", "i-xs")}${SETUP_LABEL[setup.overall]}${setup.overall === "UNKNOWN" ? ` ${setup.checks.filter((x) => x.state === "UNKNOWN").length}` : ""}</span>`;
   const conditionTags = [
-    c.field_conditions?.parking?.tent_side ? `<span class="tag">${ic("#l-car", "i-xs")}텐트 옆 주차</span>` : (c.field_conditions?.parking?.cart_required || c.field_conditions?.parking?.mode === "CART_REQUIRED") ? `<span class="tag">${ic("#l-shopping-cart", "i-xs")}짐수레 이동</span>` : "",
-    c.field_conditions?.power?.limit_w ? `<span class="tag">${ic("#l-plug-zap", "i-xs")}${c.field_conditions.power.limit_w}W</span>` : "",
-    c.field_conditions?.firewood?.allowed === true ? `<span class="tag">${ic("#l-flame", "i-xs")}장작 불멍</span>` : c.field_conditions?.firewood?.allowed === false ? `<span class="tag">${ic("#l-ban", "i-xs")}장작 금지</span>` : "",
+    c.field_conditions?.status === "VERIFIED" && c.field_conditions?.parking?.tent_side ? `<span class="tag">${ic("#l-car", "i-xs")}텐트 옆 주차</span>` : (c.field_conditions?.parking?.cart_required || c.field_conditions?.parking?.mode === "CART_REQUIRED") ? `<span class="tag">${ic("#l-shopping-cart", "i-xs")}짐수레 이동</span>` : "",
+    c.field_conditions?.status === "VERIFIED" && c.field_conditions?.power?.limit_w ? `<span class="tag">${ic("#l-plug-zap", "i-xs")}${c.field_conditions.power.limit_w}W</span>` : "",
+    c.field_conditions?.status === "VERIFIED" && c.field_conditions?.firewood?.allowed === true ? `<span class="tag">${ic("#l-flame", "i-xs")}장작 불멍</span>` : c.field_conditions?.firewood?.allowed === false ? `<span class="tag">${ic("#l-ban", "i-xs")}장작 금지</span>` : "",
     c.field_conditions?.sanitary?.private_bathroom === true ? `<span class="tag">${ic("#l-shower-head", "i-xs")}개별 욕실</span>` : "",
   ].filter(Boolean).slice(0, 3).join("");
   const availabilityBadge = observations.some((r) => r.state === "OBSERVED_AVAILABLE")
@@ -248,10 +252,10 @@ function renderChips() {
     `<button class="pill" type="button" data-toggle="savedOnly" aria-pressed="${state.savedOnly}">${ic("#l-heart", "i-sm")}관심 <span class="num">${state.saved.size}</span></button>`,
     map ? `<button class="pill" type="button" data-toggle="inView" aria-pressed="${state.inView}">${ic("#l-scan-search", "i-sm")}지도에 보이는 곳만</button>` : "",
     `<button class="pill" type="button" data-toggle="availabilityOnly" aria-pressed="${state.availabilityOnly}" ${isFreshAvailability() ? "" : "disabled"}>${ic("#l-circle-check", "i-sm")}공식 접수 중 <span class="num">${isFreshAvailability() ? openCount() : "-"}</span></button>`,
-    `<button class="pill" type="button" data-toggle="parkingSide" aria-pressed="${state.parkingSide}">${ic("#l-car", "i-sm")}텐트 옆 주차 <span class="num">${count((c) => c.field_conditions?.parking?.tent_side === true)}</span></button>`,
+    `<button class="pill" type="button" data-toggle="parkingSide" aria-pressed="${state.parkingSide}">${ic("#l-car", "i-sm")}텐트 옆 주차 <span class="num">${count((c) => c.field_conditions?.status === "VERIFIED" && c.field_conditions?.parking?.tent_side === true)}</span></button>`,
     `<button class="pill" type="button" data-toggle="parkingCart" aria-pressed="${state.parkingCart}">짐수레 이동 <span class="num">${count((c) => c.field_conditions?.parking?.cart_required === true || c.field_conditions?.parking?.mode === "CART_REQUIRED")}</span></button>`,
-    `<button class="pill" type="button" data-toggle="firewoodAllowed" aria-pressed="${state.firewoodAllowed}">${ic("#l-flame", "i-sm")}장작 불멍 <span class="num">${count((c) => c.field_conditions?.firewood?.allowed === true)}</span></button>`,
-    `<button class="pill" type="button" data-toggle="powerHigh" aria-pressed="${state.powerHigh}">${ic("#l-zap", "i-sm")}700W+ 고전력 <span class="num">${count((c) => c.field_conditions?.power?.limit_w >= 700)}</span></button>`,
+    `<button class="pill" type="button" data-toggle="firewoodAllowed" aria-pressed="${state.firewoodAllowed}">${ic("#l-flame", "i-sm")}장작 불멍 <span class="num">${count((c) => c.field_conditions?.status === "VERIFIED" && c.field_conditions?.firewood?.allowed === true)}</span></button>`,
+    `<button class="pill" type="button" data-toggle="powerHigh" aria-pressed="${state.powerHigh}">${ic("#l-zap", "i-sm")}700W+ 고전력 <span class="num">${count((c) => c.field_conditions?.status === "VERIFIED" && c.field_conditions?.power?.limit_w >= 700)}</span></button>`,
     `<button class="pill" type="button" data-toggle="privateBath" aria-pressed="${state.privateBath}">${ic("#l-shower-head", "i-sm")}개별 욕실/화장실 <span class="num">${count((c) => c.field_conditions?.sanitary?.private_bathroom === true)}</span></button>`,
     `<button class="pill" type="button" data-toggle="kidsPlay" aria-pressed="${state.kidsPlay}">${ic("#l-baby", "i-sm")}키즈·놀거리 <span class="num">${count(hasKidsPlay)}</span></button>`,
     `<button class="pill" type="button" data-toggle="realtime" aria-pressed="${state.realtime}">${ic("#l-zap", "i-sm")}온라인 예약 채널 <span class="num">${count(isRealtime)}</span></button>`,

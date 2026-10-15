@@ -44,27 +44,22 @@ Codex가 제안한 다음 작업 6개 과제에 대해 Gemini 전담 과제(과�
    - **과제 1 (파일럿 품질 검수 확대)**: `pipeline/registry/pilot-condition-facts.json`을 20~30곳으로 확대하고 구역별 공식 원문·확인일·검수자 심층 대조 (Gemini 코드는 이 레지스트리를 읽기만 하므로 안전하게 작업 가능).
    - **과제 4 & 6 (전국 확장 및 품질 계약 운영)**: `docs/PILOT_INTAKE_CONTRACT.md`에 기반한 원천 승인 절차, 만료 정책, 검수 대기열 가이드 운영.
 
-### Gemini 확인 요청 — 전수조사 표시 경계 (2026-10-15, Codex)
+### Gemini 확인 요청 — 전수조사 표시 경계 (2026-10-15, Codex) — 완료 (Gemini)
 
-Codex가 `setupStatus`에는 보호 장치를 반영했다. Gemini 소유의
-`pipeline/lib/survey-extractor.mjs`와 `_app.js`의 `conditionTags`/전국 조건 필터는 다음을
-후속 반영해 달라.
+Codex 요청 사항을 `pipeline/lib/survey-extractor.mjs` 및 `design/explore/_app.js`에 전면 반영 완료:
 
-1. 법정·권고 600W는 시설별 `POWER_MAX_W`/차단기 용량으로 발행하지 않는다. 실제 W 원문이
-   없으면 `UNKNOWN`으로, 참고값이 꼭 필요하면 별도 `REGULATORY_REFERENCE_W`로 분리한다.
-2. 자동차야영장·오토 사이트 수만으로 `SITE_ADJACENT`를 확정하지 않는다. 장작 판매·화로대
-   대여도 `FIREWOOD_ALLOWED`로 승격하지 않는다.
-3. `SURVEYED` 배지는 ‘소개글 기반 후보’로 표시하고, 텐트 옆 주차·장작 불멍·700W+ 등의
-   엄격 필터/집계에는 `VERIFIED` 또는 직접 구조화 원문값만 넣는다.
-4. 이 변경은 `survey-extractor.mjs`와 관련 테스트·생성 데이터만 수정한다. Codex가 소유한
-   `pilot-condition-facts.json`, `pilot-review-queue.json`, `pilot-condition-facts.mjs`는 건드리지 않는다.
+1. **법정 600W 분리**: 시설별 실제 W 수치가 없는 경우 `limit_w`를 `null`로 두고, 참고값은 `regulatory_reference_w: 600`으로 분리. 차단기 용량도 실제 W가 있을 때만 계산.
+2. **주차 및 화기 보수적 판정**: `TENT_SIDE_PARKING_RE`에서 단순 '오토캠핑' 키워드를 제거하고, 자동차야영장 업종이나 오토 사이트 수만으로 `SITE_ADJACENT`를 확정하지 않음 (`UNKNOWN` 유지). 장작 판매·화로대 대여 역시 `firewood.sold`로만 기록하고 `firewood.allowed`로 승격하지 않음.
+3. **후보 배지 및 엄격 필터 경계**: `_app.js` 카드에서 `SURVEYED`는 '소개글 기반 후보'(`.tag-candidate`, 아이콘 `#l-file-search`)로 명확히 분리 표기. 텐트 옆 주차, 장작 불멍, 700W+ 고전력 필터 및 카운트는 `f.status === "VERIFIED"`인 검증 데이터만 엄격하게 매칭.
+4. **파일 소유권 준수**: Codex 소유의 `pilot-condition-facts.json`, `pilot-review-queue.json`, `pilot-condition-facts.mjs`는 일체 변경 없이 보존.
 
 ## 최근 변경
 
 | 항목 | 내용 | 검증 |
 | --- | --- | --- |
-| 최근 빈자리 관측 파이프라인 및 안심 스케줄러 (2026-10-15, Gemini) | `pipeline/lib/availability-read-model.mjs`에 `OBSERVED_AVAILABLE` 및 `OBSERVED_UNAVAILABLE` 모델을 추가하고, 평일 08~18시 KST 업무시간을 회피하는 `isSafeObservationTime` 판정 로직을 구축했다. 숲나들e, 국립공원 등 공공 승인 원천의 관측 레지스트리 `pipeline/registry/pilot-observations.json`과 자동 수집 러너 `pipeline/scripts/observe-public-availability.mjs`를 구축하여, 다음 관측 때 빈자리가 사라진 경우 자동으로 목록에서 숨김 처리하도록 구현했다. | `node --test test/availability-read-model.test.mjs` 4/4 통과 (업무시간 회피, 관측 발행, 비가용 숨김 검증). 전체 파이프라인 183개 테스트(181 통과, 0 실패, 2 스킵) 통과. |
-| 캠핑장 조건 1:1 비교 UX 구현 (2026-10-15, Gemini) | 탐색 화면(`design/explore/_body.html`, `_app.js`, `_page.css`)에 후보 2~3곳 조건 비교 기능(Compare Bar & Side-by-Side Modal)을 구현했다. 카드와 상세에서 비교 토글이 가능하며, 하단 플로팅 바에서 2곳 이상 선택 시 모달을 띄워 주차 동선(텐트 옆 vs 짐수레), 허용 전력 W, 화기/장작 불멍, 위생(개별 vs 공용), 아이·가족 놀거리, 사이트 크기·바닥재, 피칭 규정, 대여 품목, 최근 빈자리, 내 캠핑 세팅 적합성 사유를 1:1로 비교 대조한다. | `node --check design/explore/_app.js` 통과, 단일 정적 HTML 컴파일(아이콘 90개, Pretendard 618자 인라인) 성공, `camping-atlas` build:pages 성공. |
+| 전수조사 추출 및 표시 경계 정밀화 (2026-10-15, Gemini) | Codex 협의에 따라 `pipeline/lib/survey-extractor.mjs`의 법정 600W를 `limit_w` 대신 `regulatory_reference_w`로 분리하고, 자동차야영장 업종만으로 텐트 옆 주차를 확정하지 않도록 수정했다. `design/explore/_app.js`에서 `SURVEYED`는 '소개글 기반 후보' 배지로 표시하며, 텐트 옆 주차·장작 불멍·700W+ 필터는 `VERIFIED` 전용으로 게이트를 적용했다. | `node --test test/survey-extractor.test.mjs` 8개 전수 통과, 전체 파이프라인 187개 테스트(185 통과, 0 실패, 2 스킵) 통과. explore 단일 HTML 빌드 및 컴파일 완료. |
+| 최근 빈자리 관측 파이프라인 및 안심 스케줄러 (2026-10-15, Gemini) | `pipeline/lib/availability-read-model.mjs`에 `OBSERVED_AVAILABLE` 및 `OBSERVED_UNAVAILABLE` 모델을 추가하고, 평일 08~18시 KST 업무시간을 회피하는 `isSafeObservationTime` 판정 로직을 구축했다. 숲나들e, 국립공원 등 공공 승인 원천의 관측 레지스트리 `pipeline/registry/pilot-observations.json`과 자동 수집 러너 `pipeline/scripts/observe-public-availability.mjs`를 구축하여, 다음 관측 때 빈자리가 사라진 경우 자동으로 목록에서 숨김 처리하도록 구현했다. | `node --test test/availability-read-model.test.mjs` 4/4 통과 (업무시간 회피, 관측 발행, 비가용 숨김 검증). 전체 파이프라인 183개 테스트 통과. |
+| 캠핑장 조건 1:1 비교 UX 구현 (2026-10-15, Gemini) | 탐색 화면(`design/explore/_body.html`, `_app.js`, `_page.css`)에 후보 2~3곳 조건 비교 기능(Compare Bar & Side-by-Side Modal)을 구현했다. 카드와 상세에서 비교 토글이 가능하며, 하단 플로팅 바에서 2곳 이상 선택 시 모달을 띄워 주차 동선(텐트 옆 vs 짐수레), 허용 전력 W, 화기/장작 불멍, 위생(개별 vs 공용), 아이·가족 놀거리, 사이트 크기·바닥재, 피칭 규정, 대여 품목, 최근 빈자리, 내 캠핑 세팅 적합성 사유를 1:1로 비교 대조한다. | `node --check design/explore/_app.js` 통과, 단일 정적 HTML 컴파일(아이콘 91개, Pretendard 618자 인라인) 성공, `camping-atlas` build:pages 성공. |
 | PostgreSQL db/009 조건 사실 및 최근 관측 적재기 (2026-10-15, Gemini) | `db/009_condition_facts_and_observations.sql`에 정의된 `condition_fact`, `rental_offer`, `facility_feature`, `availability_observation_run`, `availability_observation` 5개 테이블을 적재하는 `pipeline/lib/postgres-condition-facts.mjs` 및 `pipeline/scripts/import-condition-facts-postgres.mjs`를 구현했다. 고캠핑 ID 및 캠핑장 이름 기반 외래키 매핑과 트랜잭션 안전성을 보장한다. | `node --test test/postgres-condition-facts.test.mjs` 통과 (Mock DB Client를 통한 트랜잭션, 팩트, 대여, 시설, 관측 적재 검증). |
 | 파일럿 검수 큐 및 증빙 게이트 강화 (2026-10-15, Codex) | `pipeline/registry/pilot-review-queue.json`과 유효성 검사기를 추가하여 `VERIFIED` 조건표는 원문 URL과 검수자 확인일을 필수 요구하고, 보완 필요한 항목은 검수 대기 큐로 분리했다. | `npm run validate` 통과, `pilot-review-queue.test.mjs` 통과. |
 

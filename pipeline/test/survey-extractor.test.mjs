@@ -12,14 +12,15 @@ test("전수조사 추출: 자동차야영장 및 텐트 옆 주차 감지", () 
     showers: 6,
   };
   const detail = {
-    intro: "텐트 바로 옆에 주차가 가능한 편리한 오토캠핑장입니다.",
+    intro: "텐트 바로 옆에 주차가 가능한 편리한 오토캠핑장입니다. 장작 불멍이 가능합니다.",
   };
   const fact = extractCampConditions(camp, detail);
   assert.equal(fact.parking.mode, "SITE_ADJACENT");
   assert.equal(fact.parking.tent_side, true);
   assert.equal(fact.parking.cart_required, false);
   assert.equal(fact.parking.auto_camping_sites, 20);
-  assert.equal(fact.power.limit_w, 600); // 법정 기준
+  assert.equal(fact.power.limit_w, null); // 실제 원문 W가 없으면 limit_w는 null
+  assert.equal(fact.power.regulatory_reference_w, 600); // 법정 참고치
   assert.equal(fact.firewood.allowed, true);
   assert.equal(fact.firewood.sold, true);
   assert.equal(fact.charcoal.allowed, true);
@@ -50,10 +51,28 @@ test("전수조사 추출: 레저 카트 체험은 짐 운반 수레로 오인�
     intro: "가족 단위 캠퍼를 위한 카트장 카트 경기 체험 프로그램을 운영합니다.",
   };
   const fact = extractCampConditions(camp, detail);
-  assert.equal(fact.parking.mode, "SITE_ADJACENT");
-  assert.equal(fact.parking.tent_side, true);
-  assert.equal(fact.parking.cart_required, false);
+  assert.equal(fact.parking.cart_required, null);
+  assert.notEqual(fact.parking.mode, "CART_REQUIRED");
   assert.ok(fact.features.includes("EXPERIENCE"));
+});
+
+test("전수조사 추출: 장작판매·오토캠핑장 업종만으로는 엄격 조건을 확정하지 않는다", () => {
+  const camp = {
+    kinds: [["AUTO_PITCH", 10]],
+    types: ["자동차야영장"],
+    amenities: ["전기", "장작판매"],
+    fire: "개별",
+  };
+  const detail = {
+    intro: "자연 속에서 즐거운 캠핑을 즐기세요.",
+  };
+  const fact = extractCampConditions(camp, detail);
+  assert.equal(fact.parking.mode, "UNKNOWN");
+  assert.equal(fact.parking.tent_side, null);
+  assert.equal(fact.power.limit_w, null);
+  assert.equal(fact.power.regulatory_reference_w, 600);
+  assert.equal(fact.firewood.allowed, null);
+  assert.equal(fact.firewood.sold, true);
 });
 
 test("전수조사 추출: 고전력(1kW, 2kW) 및 정확한 W 수치 추출", () => {
