@@ -863,4 +863,130 @@ html.lb-open, html.lb-open body { overflow: hidden; }
 .compare-btn-link { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 8px; background: var(--green); color: #fff; font-size: var(--fs-2xs); font-weight: 800; text-decoration: none; }
 .compare-btn-link:hover { background: var(--green-press); }
 
+/* ==========================================================================
+   포스터 위 직관적 원형/스탬프 뱃지 (Poster Emblems)
+   ========================================================================== */
+.thumb { position: relative; }
+.poster-emblems { position: absolute; top: 6px; left: 6px; right: 6px; display: flex; flex-wrap: wrap; gap: 4px; z-index: 2; pointer-events: none; }
+.poster-badge { display: inline-flex; align-items: center; gap: 3px; padding: 2.5px 7px; border-radius: 999px; font-size: 10px; font-weight: 850; line-height: 1.1; color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.38); letter-spacing: -0.3px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.poster-badge svg { width: 11px; height: 11px; flex-shrink: 0; }
+.poster-badge.badge-fire { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); border: 1px solid rgba(254, 202, 202, 0.45); }
+.poster-badge.badge-fire-ban { background: rgba(30, 30, 30, 0.85); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.5); }
+.poster-badge.badge-power { background: linear-gradient(135deg, #f97316 0%, #c2410c 100%); border: 1px solid rgba(254, 215, 170, 0.45); }
+.poster-badge.badge-parking { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border: 1px solid rgba(186, 230, 253, 0.45); }
+.poster-badge.badge-cart { background: rgba(40, 50, 60, 0.85); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.4); }
+.poster-badge.badge-bath { background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); border: 1px solid rgba(153, 246, 228, 0.45); }
+.poster-badge.badge-kids { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); border: 1px solid rgba(233, 213, 255, 0.45); }
+.poster-badge.badge-avail { background: linear-gradient(135deg, #10b981 0%, #047857 100%); border: 1px solid rgba(167, 243, 208, 0.45); }
+
+/* ==========================================================================
+   AI 후기 분석 및 장단점 요약 (AI Review Synthesis)
+   ========================================================================== */
+.ai-summary-box { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px; margin-bottom: 16px; display: grid; gap: 14px; box-shadow: var(--shadow-1); }
+.ai-summary-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.ai-summary-head h4 { display: flex; align-items: center; gap: 6px; margin: 0; font-size: var(--fs-md); font-weight: 850; color: var(--ink); }
+.ai-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 999px; background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: #fff; font-size: var(--fs-2xs); font-weight: 800; }
+.ai-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 12px; }
+.ai-section { padding: 14px; border-radius: 14px; display: grid; gap: 8px; }
+.ai-section.pros { background: color-mix(in srgb, var(--green-tint) 55%, var(--surface)); border: 1px solid color-mix(in srgb, var(--green) 25%, transparent); }
+.ai-section.cons { background: color-mix(in srgb, var(--ember-tint) 45%, var(--surface)); border: 1px solid color-mix(in srgb, var(--ember) 25%, transparent); }
+.ai-sec-title { display: flex; align-items: center; gap: 6px; font-size: var(--fs-xs); font-weight: 850; margin: 0; }
+.ai-section.pros .ai-sec-title { color: var(--green-press); }
+.ai-section.cons .ai-sec-title { color: var(--ember); }
+.ai-list { margin: 0; padding-left: 1.1rem; display: grid; gap: 6px; font-size: var(--fs-xs); line-height: 1.55; color: var(--ink); }
+.ai-list li { margin: 0; }
+.ai-keywords { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 4px; }
+.ai-keywords small { font-size: var(--fs-2xs); font-weight: 700; color: var(--ink-3); }
+.ai-kw-chip { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 999px; background: var(--surface-2); color: var(--ink-2); font-size: var(--fs-2xs); font-weight: 700; }
+
+/* ==========================================================================
+   블로그·카페 세로 카드 그리드 (Vertical Review Grid)
+   ========================================================================== */
+.review-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15.5rem), 1fr)); gap: 14px; margin-top: 10px; }
+.review-card-vertical { display: flex; flex-direction: column; border-radius: 16px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: inherit; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; box-shadow: var(--shadow-1); }
+.review-card-vertical:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); border-color: var(--green); }
+.review-card-thumb { position: relative; width: 100%; aspect-ratio: 16 / 10; background: var(--surface-2); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.review-card-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
+.review-card-vertical:hover .review-card-thumb img { transform: scale(1.04); }
+.review-no-thumb { display: grid; place-items: center; width: 100%; height: 100%; background: var(--surface-2); color: var(--ink-3); }
+.review-ai-badge { position: absolute; bottom: 8px; left: 8px; display: inline-flex; align-items: center; gap: 3px; padding: 2px 7px; border-radius: 999px; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(4px); color: #38bdf8; font-size: 10px; font-weight: 850; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+.review-season-badge { position: absolute; top: 8px; right: 8px; display: inline-flex; align-items: center; gap: 3px; padding: 2px 7px; border-radius: 999px; background: rgba(234, 88, 12, 0.9); color: #fff; font-size: 10px; font-weight: 850; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+.review-card-body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.review-card-meta { display: flex; align-items: center; gap: 6px; font-size: var(--fs-2xs); color: var(--ink-3); }
+.review-badge-kind { padding: 1px 6px; border-radius: 4px; font-weight: 800; font-size: 10px; line-height: 1.2; }
+.review-badge-kind.blog { background: #e6f6ec; color: #138a48; }
+.review-badge-kind.cafe { background: #fff1dc; color: #a35c00; }
+.review-src { font-weight: 650; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 7rem; }
+.review-date { margin-left: auto; white-space: nowrap; }
+.review-card-title { font-size: var(--fs-sm); font-weight: 800; line-height: 1.4; margin: 0; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.review-card-snippet { font-size: var(--fs-xs); color: var(--ink-2); line-height: 1.5; margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; flex: 1; }
+
+/* ==========================================================================
+   다른 곳에서 더보기 (Platform Showcase Hub)
+   ========================================================================== */
+.platform-hub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13.5rem), 1fr)); gap: 10px; margin-top: 8px; }
+.platform-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: inherit; transition: all .15s ease; }
+.platform-card:hover { transform: translateY(-2px); border-color: var(--green); box-shadow: var(--shadow-1); }
+.platform-icon { width: 2.5rem; height: 2.5rem; border-radius: 12px; display: grid; place-items: center; flex-shrink: 0; }
+.platform-icon.naver { background: #03c75a; color: #fff; }
+.platform-icon.kakao { background: #fee500; color: #191919; }
+.platform-icon.youtube { background: #ff0000; color: #fff; }
+.platform-icon.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: #fff; }
+.platform-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.platform-info b { font-size: var(--fs-xs); font-weight: 800; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.platform-info small { font-size: 11px; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.platform-card svg.ext { color: var(--ink-3); flex-shrink: 0; }
+
+/* ==========================================================================
+   예약 최우선 하단 고정 CTA 바 (Revamped Bottom CTA)
+   ========================================================================== */
+.d-cta { position: sticky; bottom: 0; z-index: 50; padding: 12px 20px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid var(--line); display: flex; align-items: center; gap: 10px; box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08); }
+.d-cta-actions { display: flex; align-items: center; gap: 8px; width: 100%; }
+.btn-cta-primary { flex: 1; min-height: 3.25rem; border-radius: 14px; background: var(--green); color: #fff; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 850; font-size: var(--fs-md); box-shadow: 0 4px 14px color-mix(in srgb, var(--green) 35%, transparent); transition: background .15s ease, transform .15s ease; border: 0; cursor: pointer; }
+.btn-cta-primary:hover { background: var(--green-press); transform: translateY(-1px); }
+.btn-cta-primary.camfit { background: #2563eb; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35); }
+.btn-cta-primary.camfit:hover { background: #1d4ed8; }
+.btn-cta-primary.naver { background: #03c75a; box-shadow: 0 4px 14px rgba(3, 199, 90, 0.35); }
+.btn-cta-primary.naver:hover { background: #02b150; }
+.btn-cta-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 3.25rem; padding: 0 16px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; font-weight: 750; font-size: var(--fs-sm); white-space: nowrap; transition: background .15s ease; }
+.btn-cta-secondary:hover { background: var(--surface-2); }
+.btn-roadview-direct { display: inline-flex; align-items: center; gap: 4px; padding: 4px 9px; border-radius: 8px; background: #fee500; color: #191919; font-size: var(--fs-2xs); font-weight: 800; text-decoration: none; border: 0; cursor: pointer; }
+.btn-roadview-direct:hover { background: #fada0a; }
+
+/* ==========================================================================
+   사이트 인벤토리 및 자연 환경 상세 (Site Inventory & Nature Grid)
+   ========================================================================== */
+.dv-site-inventory { display: flex; flex-direction: column; gap: 14px; }
+.dv-site-stat-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.dv-stat-chip { display: flex; flex-direction: column; padding: 6px 12px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--line); min-width: 5.5rem; }
+.dv-stat-chip b { font-size: var(--fs-sm); font-weight: 850; color: var(--ink); }
+.dv-stat-chip span { font-size: var(--fs-2xs); color: var(--ink-3); }
+.dv-tarp-note { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line); }
+.dv-tarp-note.ok { background: color-mix(in srgb, var(--green-tint) 60%, var(--surface)); border-color: color-mix(in srgb, var(--green) 30%, transparent); }
+.dv-tarp-note.ok svg { color: var(--green); flex-shrink: 0; margin-top: 2px; }
+.dv-tarp-note.warn { background: color-mix(in srgb, var(--ember-tint) 50%, var(--surface)); border-color: color-mix(in srgb, var(--ember) 30%, transparent); }
+.dv-tarp-note.warn svg { color: var(--ember); flex-shrink: 0; margin-top: 2px; }
+.dv-tarp-note b { font-size: var(--fs-xs); font-weight: 850; color: var(--ink); display: block; margin-bottom: 2px; }
+.dv-tarp-note p { margin: 0; font-size: var(--fs-xs); line-height: 1.5; color: var(--ink-2); }
+
+.dv-nature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 10px; }
+.dv-nature-card { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
+.dv-nature-card span { width: 2.25rem; height: 2.25rem; border-radius: 10px; background: color-mix(in srgb, var(--green-tint) 80%, var(--surface)); color: var(--green); display: grid; place-items: center; flex-shrink: 0; }
+.dv-nature-card div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.dv-nature-card b { font-size: var(--fs-xs); font-weight: 800; color: var(--ink); }
+.dv-nature-card p { font-size: 11px; color: var(--ink-2); margin: 0; }
+
+.dv-quick-essentials { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: 8px; padding: 12px 14px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line); }
+.essential-item { display: flex; align-items: center; gap: 8px; font-size: var(--fs-xs); }
+.essential-item svg { color: var(--green); flex-shrink: 0; }
+.essential-item span { display: flex; gap: 6px; align-items: baseline; color: var(--ink-2); font-size: 12px; }
+.essential-item b { color: var(--ink); font-weight: 800; }
+
+.layout-thumb-btn { position: relative; overflow: hidden; border-radius: 12px; border: 1px solid var(--line); padding: 0; background: var(--surface); cursor: pointer; transition: transform .15s ease; }
+.layout-thumb-btn:hover { transform: scale(1.02); }
+.layout-thumb-btn img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.layout-zoom-hint { position: absolute; bottom: 6px; right: 6px; display: inline-flex; align-items: center; gap: 3px; padding: 2px 6px; border-radius: 6px; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); color: #fff; font-size: 10px; font-weight: 800; }
+
+
+
 

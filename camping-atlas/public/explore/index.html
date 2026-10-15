@@ -951,6 +951,132 @@ html.lb-open, html.lb-open body { overflow: hidden; }
 .compare-btn-link { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 8px; background: var(--green); color: #fff; font-size: var(--fs-2xs); font-weight: 800; text-decoration: none; }
 .compare-btn-link:hover { background: var(--green-press); }
 
+/* ==========================================================================
+   포스터 위 직관적 원형/스탬프 뱃지 (Poster Emblems)
+   ========================================================================== */
+.thumb { position: relative; }
+.poster-emblems { position: absolute; top: 6px; left: 6px; right: 6px; display: flex; flex-wrap: wrap; gap: 4px; z-index: 2; pointer-events: none; }
+.poster-badge { display: inline-flex; align-items: center; gap: 3px; padding: 2.5px 7px; border-radius: 999px; font-size: 10px; font-weight: 850; line-height: 1.1; color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.38); letter-spacing: -0.3px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.poster-badge svg { width: 11px; height: 11px; flex-shrink: 0; }
+.poster-badge.badge-fire { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); border: 1px solid rgba(254, 202, 202, 0.45); }
+.poster-badge.badge-fire-ban { background: rgba(30, 30, 30, 0.85); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.5); }
+.poster-badge.badge-power { background: linear-gradient(135deg, #f97316 0%, #c2410c 100%); border: 1px solid rgba(254, 215, 170, 0.45); }
+.poster-badge.badge-parking { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border: 1px solid rgba(186, 230, 253, 0.45); }
+.poster-badge.badge-cart { background: rgba(40, 50, 60, 0.85); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.4); }
+.poster-badge.badge-bath { background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); border: 1px solid rgba(153, 246, 228, 0.45); }
+.poster-badge.badge-kids { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); border: 1px solid rgba(233, 213, 255, 0.45); }
+.poster-badge.badge-avail { background: linear-gradient(135deg, #10b981 0%, #047857 100%); border: 1px solid rgba(167, 243, 208, 0.45); }
+
+/* ==========================================================================
+   AI 후기 분석 및 장단점 요약 (AI Review Synthesis)
+   ========================================================================== */
+.ai-summary-box { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 18px; margin-bottom: 16px; display: grid; gap: 14px; box-shadow: var(--shadow-1); }
+.ai-summary-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.ai-summary-head h4 { display: flex; align-items: center; gap: 6px; margin: 0; font-size: var(--fs-md); font-weight: 850; color: var(--ink); }
+.ai-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 999px; background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: #fff; font-size: var(--fs-2xs); font-weight: 800; }
+.ai-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 12px; }
+.ai-section { padding: 14px; border-radius: 14px; display: grid; gap: 8px; }
+.ai-section.pros { background: color-mix(in srgb, var(--green-tint) 55%, var(--surface)); border: 1px solid color-mix(in srgb, var(--green) 25%, transparent); }
+.ai-section.cons { background: color-mix(in srgb, var(--ember-tint) 45%, var(--surface)); border: 1px solid color-mix(in srgb, var(--ember) 25%, transparent); }
+.ai-sec-title { display: flex; align-items: center; gap: 6px; font-size: var(--fs-xs); font-weight: 850; margin: 0; }
+.ai-section.pros .ai-sec-title { color: var(--green-press); }
+.ai-section.cons .ai-sec-title { color: var(--ember); }
+.ai-list { margin: 0; padding-left: 1.1rem; display: grid; gap: 6px; font-size: var(--fs-xs); line-height: 1.55; color: var(--ink); }
+.ai-list li { margin: 0; }
+.ai-keywords { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 4px; }
+.ai-keywords small { font-size: var(--fs-2xs); font-weight: 700; color: var(--ink-3); }
+.ai-kw-chip { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 999px; background: var(--surface-2); color: var(--ink-2); font-size: var(--fs-2xs); font-weight: 700; }
+
+/* ==========================================================================
+   블로그·카페 세로 카드 그리드 (Vertical Review Grid)
+   ========================================================================== */
+.review-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15.5rem), 1fr)); gap: 14px; margin-top: 10px; }
+.review-card-vertical { display: flex; flex-direction: column; border-radius: 16px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: inherit; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; box-shadow: var(--shadow-1); }
+.review-card-vertical:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); border-color: var(--green); }
+.review-card-thumb { position: relative; width: 100%; aspect-ratio: 16 / 10; background: var(--surface-2); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.review-card-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
+.review-card-vertical:hover .review-card-thumb img { transform: scale(1.04); }
+.review-no-thumb { display: grid; place-items: center; width: 100%; height: 100%; background: var(--surface-2); color: var(--ink-3); }
+.review-ai-badge { position: absolute; bottom: 8px; left: 8px; display: inline-flex; align-items: center; gap: 3px; padding: 2px 7px; border-radius: 999px; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(4px); color: #38bdf8; font-size: 10px; font-weight: 850; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+.review-season-badge { position: absolute; top: 8px; right: 8px; display: inline-flex; align-items: center; gap: 3px; padding: 2px 7px; border-radius: 999px; background: rgba(234, 88, 12, 0.9); color: #fff; font-size: 10px; font-weight: 850; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+.review-card-body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.review-card-meta { display: flex; align-items: center; gap: 6px; font-size: var(--fs-2xs); color: var(--ink-3); }
+.review-badge-kind { padding: 1px 6px; border-radius: 4px; font-weight: 800; font-size: 10px; line-height: 1.2; }
+.review-badge-kind.blog { background: #e6f6ec; color: #138a48; }
+.review-badge-kind.cafe { background: #fff1dc; color: #a35c00; }
+.review-src { font-weight: 650; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 7rem; }
+.review-date { margin-left: auto; white-space: nowrap; }
+.review-card-title { font-size: var(--fs-sm); font-weight: 800; line-height: 1.4; margin: 0; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.review-card-snippet { font-size: var(--fs-xs); color: var(--ink-2); line-height: 1.5; margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; flex: 1; }
+
+/* ==========================================================================
+   다른 곳에서 더보기 (Platform Showcase Hub)
+   ========================================================================== */
+.platform-hub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13.5rem), 1fr)); gap: 10px; margin-top: 8px; }
+.platform-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: inherit; transition: all .15s ease; }
+.platform-card:hover { transform: translateY(-2px); border-color: var(--green); box-shadow: var(--shadow-1); }
+.platform-icon { width: 2.5rem; height: 2.5rem; border-radius: 12px; display: grid; place-items: center; flex-shrink: 0; }
+.platform-icon.naver { background: #03c75a; color: #fff; }
+.platform-icon.kakao { background: #fee500; color: #191919; }
+.platform-icon.youtube { background: #ff0000; color: #fff; }
+.platform-icon.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: #fff; }
+.platform-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.platform-info b { font-size: var(--fs-xs); font-weight: 800; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.platform-info small { font-size: 11px; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.platform-card svg.ext { color: var(--ink-3); flex-shrink: 0; }
+
+/* ==========================================================================
+   예약 최우선 하단 고정 CTA 바 (Revamped Bottom CTA)
+   ========================================================================== */
+.d-cta { position: sticky; bottom: 0; z-index: 50; padding: 12px 20px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid var(--line); display: flex; align-items: center; gap: 10px; box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08); }
+.d-cta-actions { display: flex; align-items: center; gap: 8px; width: 100%; }
+.btn-cta-primary { flex: 1; min-height: 3.25rem; border-radius: 14px; background: var(--green); color: #fff; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 850; font-size: var(--fs-md); box-shadow: 0 4px 14px color-mix(in srgb, var(--green) 35%, transparent); transition: background .15s ease, transform .15s ease; border: 0; cursor: pointer; }
+.btn-cta-primary:hover { background: var(--green-press); transform: translateY(-1px); }
+.btn-cta-primary.camfit { background: #2563eb; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35); }
+.btn-cta-primary.camfit:hover { background: #1d4ed8; }
+.btn-cta-primary.naver { background: #03c75a; box-shadow: 0 4px 14px rgba(3, 199, 90, 0.35); }
+.btn-cta-primary.naver:hover { background: #02b150; }
+.btn-cta-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 3.25rem; padding: 0 16px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; font-weight: 750; font-size: var(--fs-sm); white-space: nowrap; transition: background .15s ease; }
+.btn-cta-secondary:hover { background: var(--surface-2); }
+.btn-roadview-direct { display: inline-flex; align-items: center; gap: 4px; padding: 4px 9px; border-radius: 8px; background: #fee500; color: #191919; font-size: var(--fs-2xs); font-weight: 800; text-decoration: none; border: 0; cursor: pointer; }
+.btn-roadview-direct:hover { background: #fada0a; }
+
+/* ==========================================================================
+   사이트 인벤토리 및 자연 환경 상세 (Site Inventory & Nature Grid)
+   ========================================================================== */
+.dv-site-inventory { display: flex; flex-direction: column; gap: 14px; }
+.dv-site-stat-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.dv-stat-chip { display: flex; flex-direction: column; padding: 6px 12px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--line); min-width: 5.5rem; }
+.dv-stat-chip b { font-size: var(--fs-sm); font-weight: 850; color: var(--ink); }
+.dv-stat-chip span { font-size: var(--fs-2xs); color: var(--ink-3); }
+.dv-tarp-note { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line); }
+.dv-tarp-note.ok { background: color-mix(in srgb, var(--green-tint) 60%, var(--surface)); border-color: color-mix(in srgb, var(--green) 30%, transparent); }
+.dv-tarp-note.ok svg { color: var(--green); flex-shrink: 0; margin-top: 2px; }
+.dv-tarp-note.warn { background: color-mix(in srgb, var(--ember-tint) 50%, var(--surface)); border-color: color-mix(in srgb, var(--ember) 30%, transparent); }
+.dv-tarp-note.warn svg { color: var(--ember); flex-shrink: 0; margin-top: 2px; }
+.dv-tarp-note b { font-size: var(--fs-xs); font-weight: 850; color: var(--ink); display: block; margin-bottom: 2px; }
+.dv-tarp-note p { margin: 0; font-size: var(--fs-xs); line-height: 1.5; color: var(--ink-2); }
+
+.dv-nature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 10px; }
+.dv-nature-card { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
+.dv-nature-card span { width: 2.25rem; height: 2.25rem; border-radius: 10px; background: color-mix(in srgb, var(--green-tint) 80%, var(--surface)); color: var(--green); display: grid; place-items: center; flex-shrink: 0; }
+.dv-nature-card div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.dv-nature-card b { font-size: var(--fs-xs); font-weight: 800; color: var(--ink); }
+.dv-nature-card p { font-size: 11px; color: var(--ink-2); margin: 0; }
+
+.dv-quick-essentials { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: 8px; padding: 12px 14px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line); }
+.essential-item { display: flex; align-items: center; gap: 8px; font-size: var(--fs-xs); }
+.essential-item svg { color: var(--green); flex-shrink: 0; }
+.essential-item span { display: flex; gap: 6px; align-items: baseline; color: var(--ink-2); font-size: 12px; }
+.essential-item b { color: var(--ink); font-weight: 800; }
+
+.layout-thumb-btn { position: relative; overflow: hidden; border-radius: 12px; border: 1px solid var(--line); padding: 0; background: var(--surface); cursor: pointer; transition: transform .15s ease; }
+.layout-thumb-btn:hover { transform: scale(1.02); }
+.layout-thumb-btn img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.layout-zoom-hint { position: absolute; bottom: 6px; right: 6px; display: inline-flex; align-items: center; gap: 3px; padding: 2px 6px; border-radius: 6px; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); color: #fff; font-size: 10px; font-weight: 800; }
+
+
+
 
 
 /* ===== 공통 사이트 헤더(홈·탐색·상세 동일) — 두 화면이 같은 규칙을 쓴다 ===== */
@@ -1035,7 +1161,7 @@ input, select, textarea { font-size: max(16px, 1rem) !important; }
 @media (max-width: 1080px) and (min-width: 761px) { .sh-nav a { padding: 0 9px; font-size: .875rem; } .sh-nav a svg { display: none; } }
 
 </style>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="l-alarm-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" /> <path d="M12 9v4l2 2" /> <path d="M5 3 2 6" /> <path d="m22 6-3-3" /> <path d="M6.38 18.7 4 21" /> <path d="M17.64 18.67 20 21" /></symbol><symbol id="l-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7" /> <path d="M19 12H5" /></symbol><symbol id="l-arrow-up-down" viewBox="0 0 24 24"><path d="m21 16-4 4-4-4" /> <path d="M17 20V4" /> <path d="m3 8 4-4 4 4" /> <path d="M7 4v16" /></symbol><symbol id="l-arrow-up-right" viewBox="0 0 24 24"><path d="M7 7h10v10" /> <path d="M7 17 17 7" /></symbol><symbol id="l-baby" viewBox="0 0 24 24"><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5" /> <path d="M15 12h.01" /> <path d="M19.38 6.813A9 9 0 0 1 20.8 10.2a2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1" /> <path d="M9 12h.01" /></symbol><symbol id="l-backpack" viewBox="0 0 24 24"><path d="M4 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" /> <path d="M8 10h8" /> <path d="M8 18h8" /> <path d="M8 22v-6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v6" /> <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" /></symbol><symbol id="l-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M4.929 4.929 19.07 19.071" /></symbol><symbol id="l-bed-double" viewBox="0 0 24 24"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8" /> <path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4" /> <path d="M12 4v6" /> <path d="M2 18h20" /></symbol><symbol id="l-building-2" viewBox="0 0 24 24"><path d="M10 12h4" /> <path d="M10 8h4" /> <path d="M14 21v-3a2 2 0 0 0-4 0v3" /> <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" /> <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" /></symbol><symbol id="l-calendar" viewBox="0 0 24 24"><path d="M8 2v3" /> <path d="M16 2v3" /> <rect x="3" y="3" width="18" height="18" rx="2" /> <path d="M3 9h18" /></symbol><symbol id="l-calendar-check" viewBox="0 0 24 24"><path d="M8 2v3" /> <path d="M16 2v3" /> <rect x="3" y="3" width="18" height="18" rx="2" /> <path d="M3 9h18" /> <path d="m9 15 2 2 4-4" /></symbol><symbol id="l-calendar-clock" viewBox="0 0 24 24"><path d="M16 14v2.2l1.6 1" /> <path d="M16 2v3" /> <path d="M21 7.338V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h2.338" /> <path d="M3 9h5.859" /> <path d="M8 2v3" /> <circle cx="16" cy="16" r="6" /></symbol><symbol id="l-camera" viewBox="0 0 24 24"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" /> <circle cx="12" cy="13" r="3" /></symbol><symbol id="l-car" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /> <circle cx="7" cy="17" r="2" /> <path d="M9 17h6" /> <circle cx="17" cy="17" r="2" /></symbol><symbol id="l-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol><symbol id="l-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></symbol><symbol id="l-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></symbol><symbol id="l-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <line x1="12" x2="12" y1="8" y2="12" /> <line x1="12" x2="12.01" y1="16" y2="16" /></symbol><symbol id="l-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m16 9-5.5 5.5L8 12" /></symbol><symbol id="l-circle-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></symbol><symbol id="l-circle-x" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m15 9-6 6" /> <path d="m9 9 6 6" /></symbol><symbol id="l-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 6v6l4 2" /></symbol><symbol id="l-coffee" viewBox="0 0 24 24"><path d="M10 2v2" /> <path d="M14 2v2" /> <path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" /> <path d="M6 2v2" /></symbol><symbol id="l-columns-2" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M12 3v18" /></symbol><symbol id="l-cross" viewBox="0 0 24 24"><path d="M4 9a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h4a1 1 0 0 1 1 1v4a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-4a1 1 0 0 1 1-1h4a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-4a1 1 0 0 1-1-1V4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4a1 1 0 0 1-1 1z" /></symbol><symbol id="l-dog" viewBox="0 0 24 24"><path d="M11.25 16.25h1.5L12 17z" /> <path d="M16 14v.5" /> <path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309" /> <path d="M8 14v.5" /> <path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.177-6.53 4-7 1.923-.321 3.651.845 3.651 2.235A7.497 7.497 0 0 1 14 5.277c0-1.39 1.844-2.598 3.767-2.277 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5" /></symbol><symbol id="l-droplets" viewBox="0 0 24 24"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" /> <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" /></symbol><symbol id="l-dumbbell" viewBox="0 0 24 24"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /> <path d="m2.5 21.5 1.4-1.4" /> <path d="m20.1 3.9 1.4-1.4" /> <path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /> <path d="m9.6 14.4 4.8-4.8" /></symbol><symbol id="l-external-link" viewBox="0 0 24 24"><path d="M15 3h6v6" /> <path d="M10 14 21 3" /> <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></symbol><symbol id="l-file-search" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <circle cx="11.5" cy="14.5" r="2.5" /> <path d="M13.3 16.3 15 18" /></symbol><symbol id="l-fish" viewBox="0 0 24 24"><path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6s-7.56-2.53-8.5-6Z" /> <path d="M18 12v.5" /> <path d="M16 17.93a9.77 9.77 0 0 1 0-11.86" /> <path d="M7 10.67C7 8 5.58 5.97 2.73 5.5c-1 1.5-1 5 .23 6.5-1.24 1.5-1.24 5-.23 6.5C5.58 18.03 7 16 7 13.33" /> <path d="M10.46 7.26C10.2 5.88 9.17 4.24 8 3h5.8a2 2 0 0 1 1.98 1.67l.23 1.4" /> <path d="m16.01 17.93-.23 1.4A2 2 0 0 1 13.8 21H9.5a5.96 5.96 0 0 0 1.49-3.98" /></symbol><symbol id="l-flame" viewBox="0 0 24 24"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /></symbol><symbol id="l-flower-2" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1" /> <circle cx="12" cy="8" r="2" /> <path d="M12 10v12" /> <path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z" /> <path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z" /></symbol><symbol id="l-footprints" viewBox="0 0 24 24"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" /> <path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" /> <path d="M16 17h4" /> <path d="M4 13h4" /></symbol><symbol id="l-fuel" viewBox="0 0 24 24"><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0v-6.998a2 2 0 0 0-.59-1.42L18 5" /> <path d="M14 21V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v16" /> <path d="M2 21h13" /> <path d="M3 9h11" /></symbol><symbol id="l-git-branch" viewBox="0 0 24 24"><path d="M15 6a9 9 0 0 0-9 9V3" /> <circle cx="18" cy="6" r="3" /> <circle cx="6" cy="18" r="3" /></symbol><symbol id="l-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" /></symbol><symbol id="l-heart" viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></symbol><symbol id="l-images" viewBox="0 0 24 24"><path d="m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16" /> <path d="M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2" /> <circle cx="13" cy="7" r="1" fill="currentColor" /> <rect x="8" y="2" width="14" height="14" rx="2" /></symbol><symbol id="l-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 16v-4" /> <path d="M12 8h.01" /></symbol><symbol id="l-landmark" viewBox="0 0 24 24"><path d="M10 18v-7" /> <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" /> <path d="M14 18v-7" /> <path d="M18 18v-7" /> <path d="M3 22h18" /> <path d="M6 18v-7" /></symbol><symbol id="l-leaf" viewBox="0 0 24 24"><path d="M11 20a10 10 0 0010-10 25.9 25.9 0 00-1.04-7.281 1 1 0 00-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0011 20" /> <path d="M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13" /></symbol><symbol id="l-list" viewBox="0 0 24 24"><path d="M3 5h.01" /> <path d="M3 12h.01" /> <path d="M3 19h.01" /> <path d="M8 5h13" /> <path d="M8 12h13" /> <path d="M8 19h13" /></symbol><symbol id="l-list-ordered" viewBox="0 0 24 24"><path d="M11 5h10" /> <path d="M11 12h10" /> <path d="M11 19h10" /> <path d="M4 4h1v5" /> <path d="M4 9h2" /> <path d="M6.5 20H3.4c0-1 2.6-1.925 2.6-3.5a1.5 1.5 0 0 0-2.6-1.02" /></symbol><symbol id="l-locate-fixed" viewBox="0 0 24 24"><line x1="2" x2="5" y1="12" y2="12" /> <line x1="19" x2="22" y1="12" y2="12" /> <line x1="12" x2="12" y1="2" y2="5" /> <line x1="12" x2="12" y1="19" y2="22" /> <circle cx="12" cy="12" r="7" /> <circle cx="12" cy="12" r="3" /></symbol><symbol id="l-map" viewBox="0 0 24 24"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /></symbol><symbol id="l-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" /></symbol><symbol id="l-message-circle" viewBox="0 0 24 24"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></symbol><symbol id="l-messages-square" viewBox="0 0 24 24"><path d="M16 10a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 14.286V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" /> <path d="M20 9a2 2 0 0 1 2 2v10.286a.71.71 0 0 1-1.212.502l-2.202-2.202A2 2 0 0 0 17.172 19H10a2 2 0 0 1-2-2v-1" /></symbol><symbol id="l-mountain" viewBox="0 0 24 24"><path d="m8 3 4 8 5-5 5 15H2L8 3z" /></symbol><symbol id="l-navigation" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11" /></symbol><symbol id="l-notebook-pen" viewBox="0 0 24 24"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4" /> <path d="M2 6h4" /> <path d="M2 10h4" /> <path d="M2 14h4" /> <path d="M2 18h4" /> <path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" /></symbol><symbol id="l-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" /> <path d="M12 22V12" /> <polyline points="3.29 7 12 12 20.71 7" /> <path d="m7.5 4.27 9 5.15" /></symbol><symbol id="l-phone" viewBox="0 0 24 24"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></symbol><symbol id="l-play" viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></symbol><symbol id="l-plug-zap" viewBox="0 0 24 24"><path d="M6.3 20.3a2.4 2.4 0 0 0 3.4 0L12 18l-6-6-2.3 2.3a2.4 2.4 0 0 0 0 3.4Z" /> <path d="m2 22 3-3" /> <path d="M7.5 13.5 10 11" /> <path d="M10.5 16.5 13 14" /> <path d="m18 3-4 4h6l-4 4" /></symbol><symbol id="l-ruler" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" /> <path d="m14.5 12.5 2-2" /> <path d="m11.5 9.5 2-2" /> <path d="m8.5 6.5 2-2" /> <path d="m17.5 15.5 2-2" /></symbol><symbol id="l-sailboat" viewBox="0 0 24 24"><path d="M10 2v15" /> <path d="M7 22a4 4 0 0 1-4-4 1 1 0 0 1 1-1h16a1 1 0 0 1 1 1 4 4 0 0 1-4 4z" /> <path d="M9.159 2.46a1 1 0 0 1 1.521-.193l9.977 8.98A1 1 0 0 1 20 13H4a1 1 0 0 1-.824-1.567z" /></symbol><symbol id="l-scan-search" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2" /> <path d="M17 3h2a2 2 0 0 1 2 2v2" /> <path d="M21 17v2a2 2 0 0 1-2 2h-2" /> <path d="M7 21H5a2 2 0 0 1-2-2v-2" /> <circle cx="12" cy="12" r="3" /> <path d="m16 16-1.9-1.9" /></symbol><symbol id="l-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" /></symbol><symbol id="l-share-2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" /> <circle cx="6" cy="12" r="3" /> <circle cx="18" cy="19" r="3" /> <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /> <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></symbol><symbol id="l-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /></symbol><symbol id="l-shopping-cart" viewBox="0 0 24 24"><path d="m2.05 2.05 1.099-.028a1 1 0 0 1 1.008.815l2.69 14.347A1 1 0 0 0 7.83 18H18" /> <path d="M4.563 5h16.435a1 1 0 0 1 .981 1.204l-1.026 6.226A2 2 0 0 1 18.962 14H6.25" /> <circle cx="18" cy="20" r="2" /> <circle cx="8" cy="20" r="2" /></symbol><symbol id="l-shower-head" viewBox="0 0 24 24"><path d="m4 4 2.5 2.5" /> <path d="M13.5 6.5a4.95 4.95 0 0 0-7 7" /> <path d="M15 5 5 15" /> <path d="M14 17v.01" /> <path d="M10 16v.01" /> <path d="M13 13v.01" /> <path d="M16 10v.01" /> <path d="M11 20v.01" /> <path d="M17 14v.01" /> <path d="M20 11v.01" /></symbol><symbol id="l-snowflake" viewBox="0 0 24 24"><path d="m10 20-1.25-2.5L6 18" /> <path d="M10 4 8.75 6.5 6 6" /> <path d="m14 20 1.25-2.5L18 18" /> <path d="m14 4 1.25 2.5L18 6" /> <path d="m17 21-3-6h-4" /> <path d="m17 3-3 6 1.5 3" /> <path d="M2 12h6.5L10 9" /> <path d="m20 10-1.5 2 1.5 2" /> <path d="M22 12h-6.5L14 15" /> <path d="m4 10 1.5 2L4 14" /> <path d="m7 21 3-6-1.5-3" /> <path d="m7 3 3 6h4" /></symbol><symbol id="l-sparkles" viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /> <path d="M20 2v4" /> <path d="M22 4h-4" /> <circle cx="4" cy="20" r="2" /></symbol><symbol id="l-store" viewBox="0 0 24 24"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" /> <path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" /> <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" /></symbol><symbol id="l-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /> <path d="M12 2v2" /> <path d="M12 20v2" /> <path d="m4.93 4.93 1.41 1.41" /> <path d="m17.66 17.66 1.41 1.41" /> <path d="M2 12h2" /> <path d="M20 12h2" /> <path d="m6.34 17.66-1.41 1.41" /> <path d="m19.07 4.93-1.41 1.41" /></symbol><symbol id="l-sunrise" viewBox="0 0 24 24"><path d="M12 2v8" /> <path d="m4.93 10.93 1.41 1.41" /> <path d="M2 18h2" /> <path d="M20 18h2" /> <path d="m19.07 10.93-1.41 1.41" /> <path d="M22 22H2" /> <path d="m8 6 4-4 4 4" /> <path d="M16 18a4 4 0 0 0-8 0" /></symbol><symbol id="l-toilet" viewBox="0 0 24 24"><path d="M7 12h13a1 1 0 0 1 1 1 5 5 0 0 1-5 5h-.598a.5.5 0 0 0-.424.765l1.544 2.47a.5.5 0 0 1-.424.765H5.402a.5.5 0 0 1-.424-.765L7 18" /> <path d="M8 18a5 5 0 0 1-5-5V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8" /></symbol><symbol id="l-trash-2" viewBox="0 0 24 24"><path d="M10 11v6" /> <path d="M14 11v6" /> <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /> <path d="M3 6h18" /> <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></symbol><symbol id="l-trees" viewBox="0 0 24 24"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z" /> <path d="M7 16v6" /> <path d="M13 19v3" /> <path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" /></symbol><symbol id="l-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /> <path d="M12 9v4" /> <path d="M12 17h.01" /></symbol><symbol id="l-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" /> <path d="M15 18H9" /> <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14" /> <circle cx="17" cy="18" r="2" /> <circle cx="7" cy="18" r="2" /></symbol><symbol id="l-utensils" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" /> <path d="M7 2v20" /> <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" /></symbol><symbol id="l-utensils-crossed" viewBox="0 0 24 24"><path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8" /> <path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7" /> <path d="m2.1 21.8 6.4-6.3" /> <path d="m19 5-7 7" /></symbol><symbol id="l-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" /> <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" /></symbol><symbol id="l-warehouse" viewBox="0 0 24 24"><path d="M18 21V10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v11" /> <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8z" /> <path d="M6 13h12" /> <path d="M6 17h12" /></symbol><symbol id="l-waves" viewBox="0 0 24 24"><path d="M2 12q2.5 2 5 0t5 0 5 0 5 0" /> <path d="M2 19q2.5 2 5 0t5 0 5 0 5 0" /> <path d="M2 5q2.5 2 5 0t5 0 5 0 5 0" /></symbol><symbol id="l-wifi" viewBox="0 0 24 24"><path d="M12 20h.01" /> <path d="M2 8.82a15 15 0 0 1 20 0" /> <path d="M5 12.859a10 10 0 0 1 14 0" /> <path d="M8.5 16.429a5 5 0 0 1 7 0" /></symbol><symbol id="l-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" /></symbol><symbol id="l-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol><symbol id="l-zap" viewBox="0 0 24 24"><path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" /></symbol><symbol id="t-building-pavilion" viewBox="0 0 24 24"><path d="M3 21h7v-3a2 2 0 0 1 4 0v3h7" /> <path d="M6 21l0 -9" /> <path d="M18 21l0 -9" /> <path d="M6 12h12a3 3 0 0 0 3 -3a9 8 0 0 1 -9 -6a9 8 0 0 1 -9 6a3 3 0 0 0 3 3" /></symbol><symbol id="t-caravan" viewBox="0 0 24 24"><path d="M7 18a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M11 18h7a2 2 0 0 0 2 -2v-7a2 2 0 0 0 -2 -2h-9.5a5.5 5.5 0 0 0 -5.5 5.5v3.5a2 2 0 0 0 2 2h2" /> <path d="M8 7l7 -3l1 3" /> <path d="M13 11.5a.5 .5 0 0 1 .5 -.5h2a.5 .5 0 0 1 .5 .5v2a.5 .5 0 0 1 -.5 .5h-2a.5 .5 0 0 1 -.5 -.5l0 -2" /> <path d="M20 16h2" /></symbol><symbol id="t-coin" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1" /> <path d="M12 7v10" /></symbol><symbol id="t-grill" viewBox="0 0 24 24"><path d="M19 8h-14a6 6 0 0 0 6 6h2a6 6 0 0 0 6 -5.775l0 -.225" /> <path d="M17 20a2 2 0 1 1 0 -4a2 2 0 0 1 0 4" /> <path d="M15 14l1 2" /> <path d="M9 14l-3 6" /> <path d="M15 18h-8" /> <path d="M15 5v-1" /> <path d="M12 5v-1" /> <path d="M9 5v-1" /></symbol><symbol id="t-layers-subtract" viewBox="0 0 24 24"><path d="M8 6a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -8" /> <path d="M16 16v2a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-8a2 2 0 0 1 2 -2h2" /></symbol><symbol id="t-swimming" viewBox="0 0 24 24"><path d="M15 9a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M6 11l4 -2l3.5 3l-1.5 2" /> <path d="M3 16.75a2.4 2.4 0 0 0 1 .25a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 1 -.25" /></symbol><symbol id="t-tent" viewBox="0 0 24 24"><path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" /></symbol><symbol id="t-tent-off" viewBox="0 0 24 24"><path d="M11 14l4 6h5m-2.863 -6.868l-5.137 -9.132l-1.44 2.559m-1.44 2.563l-6.12 10.878h6l4 -6" /> <path d="M3 3l18 18" /></symbol></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="l-alarm-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" /> <path d="M12 9v4l2 2" /> <path d="M5 3 2 6" /> <path d="m22 6-3-3" /> <path d="M6.38 18.7 4 21" /> <path d="M17.64 18.67 20 21" /></symbol><symbol id="l-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7" /> <path d="M19 12H5" /></symbol><symbol id="l-arrow-up-down" viewBox="0 0 24 24"><path d="m21 16-4 4-4-4" /> <path d="M17 20V4" /> <path d="m3 8 4-4 4 4" /> <path d="M7 4v16" /></symbol><symbol id="l-arrow-up-right" viewBox="0 0 24 24"><path d="M7 7h10v10" /> <path d="M7 17 17 7" /></symbol><symbol id="l-baby" viewBox="0 0 24 24"><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5" /> <path d="M15 12h.01" /> <path d="M19.38 6.813A9 9 0 0 1 20.8 10.2a2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1" /> <path d="M9 12h.01" /></symbol><symbol id="l-backpack" viewBox="0 0 24 24"><path d="M4 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" /> <path d="M8 10h8" /> <path d="M8 18h8" /> <path d="M8 22v-6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v6" /> <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" /></symbol><symbol id="l-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M4.929 4.929 19.07 19.071" /></symbol><symbol id="l-bed-double" viewBox="0 0 24 24"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8" /> <path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4" /> <path d="M12 4v6" /> <path d="M2 18h20" /></symbol><symbol id="l-building-2" viewBox="0 0 24 24"><path d="M10 12h4" /> <path d="M10 8h4" /> <path d="M14 21v-3a2 2 0 0 0-4 0v3" /> <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" /> <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" /></symbol><symbol id="l-calendar" viewBox="0 0 24 24"><path d="M8 2v3" /> <path d="M16 2v3" /> <rect x="3" y="3" width="18" height="18" rx="2" /> <path d="M3 9h18" /></symbol><symbol id="l-calendar-check" viewBox="0 0 24 24"><path d="M8 2v3" /> <path d="M16 2v3" /> <rect x="3" y="3" width="18" height="18" rx="2" /> <path d="M3 9h18" /> <path d="m9 15 2 2 4-4" /></symbol><symbol id="l-calendar-clock" viewBox="0 0 24 24"><path d="M16 14v2.2l1.6 1" /> <path d="M16 2v3" /> <path d="M21 7.338V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h2.338" /> <path d="M3 9h5.859" /> <path d="M8 2v3" /> <circle cx="16" cy="16" r="6" /></symbol><symbol id="l-camera" viewBox="0 0 24 24"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" /> <circle cx="12" cy="13" r="3" /></symbol><symbol id="l-car" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /> <circle cx="7" cy="17" r="2" /> <path d="M9 17h6" /> <circle cx="17" cy="17" r="2" /></symbol><symbol id="l-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol><symbol id="l-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></symbol><symbol id="l-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></symbol><symbol id="l-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <line x1="12" x2="12" y1="8" y2="12" /> <line x1="12" x2="12.01" y1="16" y2="16" /></symbol><symbol id="l-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m16 9-5.5 5.5L8 12" /></symbol><symbol id="l-circle-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></symbol><symbol id="l-circle-x" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m15 9-6 6" /> <path d="m9 9 6 6" /></symbol><symbol id="l-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 6v6l4 2" /></symbol><symbol id="l-coffee" viewBox="0 0 24 24"><path d="M10 2v2" /> <path d="M14 2v2" /> <path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" /> <path d="M6 2v2" /></symbol><symbol id="l-columns-2" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M12 3v18" /></symbol><symbol id="l-cross" viewBox="0 0 24 24"><path d="M4 9a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h4a1 1 0 0 1 1 1v4a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-4a1 1 0 0 1 1-1h4a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-4a1 1 0 0 1-1-1V4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4a1 1 0 0 1-1 1z" /></symbol><symbol id="l-dog" viewBox="0 0 24 24"><path d="M11.25 16.25h1.5L12 17z" /> <path d="M16 14v.5" /> <path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309" /> <path d="M8 14v.5" /> <path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.177-6.53 4-7 1.923-.321 3.651.845 3.651 2.235A7.497 7.497 0 0 1 14 5.277c0-1.39 1.844-2.598 3.767-2.277 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5" /></symbol><symbol id="l-droplets" viewBox="0 0 24 24"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" /> <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" /></symbol><symbol id="l-dumbbell" viewBox="0 0 24 24"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /> <path d="m2.5 21.5 1.4-1.4" /> <path d="m20.1 3.9 1.4-1.4" /> <path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /> <path d="m9.6 14.4 4.8-4.8" /></symbol><symbol id="l-external-link" viewBox="0 0 24 24"><path d="M15 3h6v6" /> <path d="M10 14 21 3" /> <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></symbol><symbol id="l-file-search" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <circle cx="11.5" cy="14.5" r="2.5" /> <path d="M13.3 16.3 15 18" /></symbol><symbol id="l-fish" viewBox="0 0 24 24"><path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6s-7.56-2.53-8.5-6Z" /> <path d="M18 12v.5" /> <path d="M16 17.93a9.77 9.77 0 0 1 0-11.86" /> <path d="M7 10.67C7 8 5.58 5.97 2.73 5.5c-1 1.5-1 5 .23 6.5-1.24 1.5-1.24 5-.23 6.5C5.58 18.03 7 16 7 13.33" /> <path d="M10.46 7.26C10.2 5.88 9.17 4.24 8 3h5.8a2 2 0 0 1 1.98 1.67l.23 1.4" /> <path d="m16.01 17.93-.23 1.4A2 2 0 0 1 13.8 21H9.5a5.96 5.96 0 0 0 1.49-3.98" /></symbol><symbol id="l-flame" viewBox="0 0 24 24"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /></symbol><symbol id="l-flower-2" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1" /> <circle cx="12" cy="8" r="2" /> <path d="M12 10v12" /> <path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z" /> <path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z" /></symbol><symbol id="l-footprints" viewBox="0 0 24 24"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" /> <path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" /> <path d="M16 17h4" /> <path d="M4 13h4" /></symbol><symbol id="l-fuel" viewBox="0 0 24 24"><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0v-6.998a2 2 0 0 0-.59-1.42L18 5" /> <path d="M14 21V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v16" /> <path d="M2 21h13" /> <path d="M3 9h11" /></symbol><symbol id="l-git-branch" viewBox="0 0 24 24"><path d="M15 6a9 9 0 0 0-9 9V3" /> <circle cx="18" cy="6" r="3" /> <circle cx="6" cy="18" r="3" /></symbol><symbol id="l-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" /></symbol><symbol id="l-heart" viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></symbol><symbol id="l-images" viewBox="0 0 24 24"><path d="m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16" /> <path d="M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2" /> <circle cx="13" cy="7" r="1" fill="currentColor" /> <rect x="8" y="2" width="14" height="14" rx="2" /></symbol><symbol id="l-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 16v-4" /> <path d="M12 8h.01" /></symbol><symbol id="l-landmark" viewBox="0 0 24 24"><path d="M10 18v-7" /> <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" /> <path d="M14 18v-7" /> <path d="M18 18v-7" /> <path d="M3 22h18" /> <path d="M6 18v-7" /></symbol><symbol id="l-leaf" viewBox="0 0 24 24"><path d="M11 20a10 10 0 0010-10 25.9 25.9 0 00-1.04-7.281 1 1 0 00-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0011 20" /> <path d="M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13" /></symbol><symbol id="l-list" viewBox="0 0 24 24"><path d="M3 5h.01" /> <path d="M3 12h.01" /> <path d="M3 19h.01" /> <path d="M8 5h13" /> <path d="M8 12h13" /> <path d="M8 19h13" /></symbol><symbol id="l-list-ordered" viewBox="0 0 24 24"><path d="M11 5h10" /> <path d="M11 12h10" /> <path d="M11 19h10" /> <path d="M4 4h1v5" /> <path d="M4 9h2" /> <path d="M6.5 20H3.4c0-1 2.6-1.925 2.6-3.5a1.5 1.5 0 0 0-2.6-1.02" /></symbol><symbol id="l-locate-fixed" viewBox="0 0 24 24"><line x1="2" x2="5" y1="12" y2="12" /> <line x1="19" x2="22" y1="12" y2="12" /> <line x1="12" x2="12" y1="2" y2="5" /> <line x1="12" x2="12" y1="19" y2="22" /> <circle cx="12" cy="12" r="7" /> <circle cx="12" cy="12" r="3" /></symbol><symbol id="l-map" viewBox="0 0 24 24"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /></symbol><symbol id="l-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" /></symbol><symbol id="l-message-circle" viewBox="0 0 24 24"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></symbol><symbol id="l-messages-square" viewBox="0 0 24 24"><path d="M16 10a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 14.286V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" /> <path d="M20 9a2 2 0 0 1 2 2v10.286a.71.71 0 0 1-1.212.502l-2.202-2.202A2 2 0 0 0 17.172 19H10a2 2 0 0 1-2-2v-1" /></symbol><symbol id="l-mountain" viewBox="0 0 24 24"><path d="m8 3 4 8 5-5 5 15H2L8 3z" /></symbol><symbol id="l-navigation" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11" /></symbol><symbol id="l-notebook-pen" viewBox="0 0 24 24"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4" /> <path d="M2 6h4" /> <path d="M2 10h4" /> <path d="M2 14h4" /> <path d="M2 18h4" /> <path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" /></symbol><symbol id="l-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" /> <path d="M12 22V12" /> <polyline points="3.29 7 12 12 20.71 7" /> <path d="m7.5 4.27 9 5.15" /></symbol><symbol id="l-phone" viewBox="0 0 24 24"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></symbol><symbol id="l-play" viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></symbol><symbol id="l-plug-zap" viewBox="0 0 24 24"><path d="M6.3 20.3a2.4 2.4 0 0 0 3.4 0L12 18l-6-6-2.3 2.3a2.4 2.4 0 0 0 0 3.4Z" /> <path d="m2 22 3-3" /> <path d="M7.5 13.5 10 11" /> <path d="M10.5 16.5 13 14" /> <path d="m18 3-4 4h6l-4 4" /></symbol><symbol id="l-ruler" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" /> <path d="m14.5 12.5 2-2" /> <path d="m11.5 9.5 2-2" /> <path d="m8.5 6.5 2-2" /> <path d="m17.5 15.5 2-2" /></symbol><symbol id="l-sailboat" viewBox="0 0 24 24"><path d="M10 2v15" /> <path d="M7 22a4 4 0 0 1-4-4 1 1 0 0 1 1-1h16a1 1 0 0 1 1 1 4 4 0 0 1-4 4z" /> <path d="M9.159 2.46a1 1 0 0 1 1.521-.193l9.977 8.98A1 1 0 0 1 20 13H4a1 1 0 0 1-.824-1.567z" /></symbol><symbol id="l-scan-search" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2" /> <path d="M17 3h2a2 2 0 0 1 2 2v2" /> <path d="M21 17v2a2 2 0 0 1-2 2h-2" /> <path d="M7 21H5a2 2 0 0 1-2-2v-2" /> <circle cx="12" cy="12" r="3" /> <path d="m16 16-1.9-1.9" /></symbol><symbol id="l-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" /></symbol><symbol id="l-share-2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" /> <circle cx="6" cy="12" r="3" /> <circle cx="18" cy="19" r="3" /> <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /> <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></symbol><symbol id="l-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /></symbol><symbol id="l-shopping-cart" viewBox="0 0 24 24"><path d="m2.05 2.05 1.099-.028a1 1 0 0 1 1.008.815l2.69 14.347A1 1 0 0 0 7.83 18H18" /> <path d="M4.563 5h16.435a1 1 0 0 1 .981 1.204l-1.026 6.226A2 2 0 0 1 18.962 14H6.25" /> <circle cx="18" cy="20" r="2" /> <circle cx="8" cy="20" r="2" /></symbol><symbol id="l-shower-head" viewBox="0 0 24 24"><path d="m4 4 2.5 2.5" /> <path d="M13.5 6.5a4.95 4.95 0 0 0-7 7" /> <path d="M15 5 5 15" /> <path d="M14 17v.01" /> <path d="M10 16v.01" /> <path d="M13 13v.01" /> <path d="M16 10v.01" /> <path d="M11 20v.01" /> <path d="M17 14v.01" /> <path d="M20 11v.01" /></symbol><symbol id="l-snowflake" viewBox="0 0 24 24"><path d="m10 20-1.25-2.5L6 18" /> <path d="M10 4 8.75 6.5 6 6" /> <path d="m14 20 1.25-2.5L18 18" /> <path d="m14 4 1.25 2.5L18 6" /> <path d="m17 21-3-6h-4" /> <path d="m17 3-3 6 1.5 3" /> <path d="M2 12h6.5L10 9" /> <path d="m20 10-1.5 2 1.5 2" /> <path d="M22 12h-6.5L14 15" /> <path d="m4 10 1.5 2L4 14" /> <path d="m7 21 3-6-1.5-3" /> <path d="m7 3 3 6h4" /></symbol><symbol id="l-sparkles" viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /> <path d="M20 2v4" /> <path d="M22 4h-4" /> <circle cx="4" cy="20" r="2" /></symbol><symbol id="l-store" viewBox="0 0 24 24"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" /> <path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" /> <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" /></symbol><symbol id="l-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /> <path d="M12 2v2" /> <path d="M12 20v2" /> <path d="m4.93 4.93 1.41 1.41" /> <path d="m17.66 17.66 1.41 1.41" /> <path d="M2 12h2" /> <path d="M20 12h2" /> <path d="m6.34 17.66-1.41 1.41" /> <path d="m19.07 4.93-1.41 1.41" /></symbol><symbol id="l-sunrise" viewBox="0 0 24 24"><path d="M12 2v8" /> <path d="m4.93 10.93 1.41 1.41" /> <path d="M2 18h2" /> <path d="M20 18h2" /> <path d="m19.07 10.93-1.41 1.41" /> <path d="M22 22H2" /> <path d="m8 6 4-4 4 4" /> <path d="M16 18a4 4 0 0 0-8 0" /></symbol><symbol id="l-thumbs-up" viewBox="0 0 24 24"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" /> <path d="M7 10v12" /></symbol><symbol id="l-toilet" viewBox="0 0 24 24"><path d="M7 12h13a1 1 0 0 1 1 1 5 5 0 0 1-5 5h-.598a.5.5 0 0 0-.424.765l1.544 2.47a.5.5 0 0 1-.424.765H5.402a.5.5 0 0 1-.424-.765L7 18" /> <path d="M8 18a5 5 0 0 1-5-5V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8" /></symbol><symbol id="l-trash-2" viewBox="0 0 24 24"><path d="M10 11v6" /> <path d="M14 11v6" /> <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /> <path d="M3 6h18" /> <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></symbol><symbol id="l-trees" viewBox="0 0 24 24"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z" /> <path d="M7 16v6" /> <path d="M13 19v3" /> <path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" /></symbol><symbol id="l-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /> <path d="M12 9v4" /> <path d="M12 17h.01" /></symbol><symbol id="l-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" /> <path d="M15 18H9" /> <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14" /> <circle cx="17" cy="18" r="2" /> <circle cx="7" cy="18" r="2" /></symbol><symbol id="l-utensils" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" /> <path d="M7 2v20" /> <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" /></symbol><symbol id="l-utensils-crossed" viewBox="0 0 24 24"><path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8" /> <path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7" /> <path d="m2.1 21.8 6.4-6.3" /> <path d="m19 5-7 7" /></symbol><symbol id="l-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" /> <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" /></symbol><symbol id="l-warehouse" viewBox="0 0 24 24"><path d="M18 21V10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v11" /> <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8z" /> <path d="M6 13h12" /> <path d="M6 17h12" /></symbol><symbol id="l-waves" viewBox="0 0 24 24"><path d="M2 12q2.5 2 5 0t5 0 5 0 5 0" /> <path d="M2 19q2.5 2 5 0t5 0 5 0 5 0" /> <path d="M2 5q2.5 2 5 0t5 0 5 0 5 0" /></symbol><symbol id="l-wifi" viewBox="0 0 24 24"><path d="M12 20h.01" /> <path d="M2 8.82a15 15 0 0 1 20 0" /> <path d="M5 12.859a10 10 0 0 1 14 0" /> <path d="M8.5 16.429a5 5 0 0 1 7 0" /></symbol><symbol id="l-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" /></symbol><symbol id="l-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol><symbol id="l-zap" viewBox="0 0 24 24"><path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" /></symbol><symbol id="t-building-pavilion" viewBox="0 0 24 24"><path d="M3 21h7v-3a2 2 0 0 1 4 0v3h7" /> <path d="M6 21l0 -9" /> <path d="M18 21l0 -9" /> <path d="M6 12h12a3 3 0 0 0 3 -3a9 8 0 0 1 -9 -6a9 8 0 0 1 -9 6a3 3 0 0 0 3 3" /></symbol><symbol id="t-caravan" viewBox="0 0 24 24"><path d="M7 18a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M11 18h7a2 2 0 0 0 2 -2v-7a2 2 0 0 0 -2 -2h-9.5a5.5 5.5 0 0 0 -5.5 5.5v3.5a2 2 0 0 0 2 2h2" /> <path d="M8 7l7 -3l1 3" /> <path d="M13 11.5a.5 .5 0 0 1 .5 -.5h2a.5 .5 0 0 1 .5 .5v2a.5 .5 0 0 1 -.5 .5h-2a.5 .5 0 0 1 -.5 -.5l0 -2" /> <path d="M20 16h2" /></symbol><symbol id="t-coin" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1" /> <path d="M12 7v10" /></symbol><symbol id="t-grill" viewBox="0 0 24 24"><path d="M19 8h-14a6 6 0 0 0 6 6h2a6 6 0 0 0 6 -5.775l0 -.225" /> <path d="M17 20a2 2 0 1 1 0 -4a2 2 0 0 1 0 4" /> <path d="M15 14l1 2" /> <path d="M9 14l-3 6" /> <path d="M15 18h-8" /> <path d="M15 5v-1" /> <path d="M12 5v-1" /> <path d="M9 5v-1" /></symbol><symbol id="t-layers-subtract" viewBox="0 0 24 24"><path d="M8 6a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -8" /> <path d="M16 16v2a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-8a2 2 0 0 1 2 -2h2" /></symbol><symbol id="t-swimming" viewBox="0 0 24 24"><path d="M15 9a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M6 11l4 -2l3.5 3l-1.5 2" /> <path d="M3 16.75a2.4 2.4 0 0 0 1 .25a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 1 -.25" /></symbol><symbol id="t-tent" viewBox="0 0 24 24"><path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" /></symbol><symbol id="t-tent-off" viewBox="0 0 24 24"><path d="M11 14l4 6h5m-2.863 -6.868l-5.137 -9.132l-1.44 2.559m-1.44 2.563l-6.12 10.878h6l4 -6" /> <path d="M3 3l18 18" /></symbol></svg>
 <header class="gnb gnb-wide"><div class="gnb-in">
   <a class="sh-brand" href="../" aria-label="모여라 캠핑 홈"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 21 14 3"/><path d="M20.5 21 10 3"/><path d="M15.5 21 12 15l-3.5 6"/><path d="M2 21h20"/></svg></span><b>모여라 캠핑</b></a>
   <nav class="sh-nav" aria-label="주요 메뉴"><a href="../explore/" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>캠핑장 찾기</a><a href="../explore/themes/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>테마</a><a href="../explore/openings/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>예약오픈</a><a href="../explore/passport/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>관심</a></nav>
@@ -1347,6 +1473,81 @@ function filtered({ forMap = false } = {}) {
 function largeLocalPhoto(path) {
   return String(path ?? "").replace(/-t\.webp(?=$|[?#])/, "-l.webp");
 }
+
+function getHighResOriginalUrl(url) {
+  if (!url) return "";
+  const s = String(url).trim();
+  try {
+    const u = new URL(s);
+    const fname = u.searchParams.get("fname");
+    if (fname && /^https?:\/\//i.test(fname)) {
+      return fname.replace(/^http:\/\//i, "https://");
+    }
+    if (u.hostname.includes("kakaocdn.net") && u.pathname.includes("130x130")) {
+      return s.replace("130x130", "600x600");
+    }
+  } catch {}
+  return s.replace(/^http:\/\//i, "https://");
+}
+
+function dedupeImages(items, getUrl) {
+  const seen = new Set();
+  const out = [];
+  for (const it of items) {
+    const u = getUrl(it);
+    if (!u) continue;
+    let key = u;
+    try {
+      const p = new URL(u);
+      const fn = p.searchParams.get("fname") || p.pathname;
+      key = fn.toLowerCase().split(/[?#]/)[0].split("/").pop() || u;
+    } catch {
+      key = String(u).toLowerCase().split(/[?#]/)[0].split("/").pop() || u;
+    }
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(it);
+  }
+  return out;
+}
+
+function renderPosterEmblems(c, observations = []) {
+  const emblems = [];
+  const f = c.field_conditions ?? {};
+  // 1. 불멍 가능 여부 (빨간색 뱃지)
+  if (f.firewood?.allowed === true || (c.fire && !/불가/.test(c.fire))) {
+    emblems.push(`<span class="poster-badge badge-fire">${ic("#l-flame", "i-xs")}불멍 가능</span>`);
+  } else if (f.firewood?.allowed === false || c.fire === "불가") {
+    emblems.push(`<span class="poster-badge badge-fire-ban">${ic("#l-ban", "i-xs")}장작 금지</span>`);
+  }
+  // 2. 전기 W (주황색 뱃지)
+  const powerW = f.power?.limit_w;
+  if (powerW) {
+    emblems.push(`<span class="poster-badge badge-power">${ic("#l-plug-zap", "i-xs")}${powerW >= 1000 ? `${(powerW / 1000).toFixed(0)}kW` : `${powerW}W`}</span>`);
+  } else if (hasPower(c)) {
+    emblems.push(`<span class="poster-badge badge-power">${ic("#l-zap", "i-xs")}전기 600W</span>`);
+  }
+  // 3. 주차 동선 (파란색 뱃지)
+  if (f.parking?.tent_side === true) {
+    emblems.push(`<span class="poster-badge badge-parking">${ic("#l-car", "i-xs")}텐트옆 주차</span>`);
+  } else if (f.parking?.cart_required || f.parking?.mode === "CART_REQUIRED") {
+    emblems.push(`<span class="poster-badge badge-cart">${ic("#l-shopping-cart", "i-xs")}짐수레 이동</span>`);
+  }
+  // 4. 개별 욕실 (청록색 뱃지)
+  if (f.sanitary?.private_bathroom === true) {
+    emblems.push(`<span class="poster-badge badge-bath">${ic("#l-shower-head", "i-xs")}개별 욕실</span>`);
+  }
+  // 5. 키즈 놀거리 (보라색 뱃지)
+  if (hasKidsPlay(c)) {
+    emblems.push(`<span class="poster-badge badge-kids">${ic("#l-sparkles", "i-xs")}키즈 놀거리</span>`);
+  }
+  // 6. 최근 빈자리 관측 (에메랄드 뱃지)
+  if (observations.some((r) => r.state === "OBSERVED_AVAILABLE")) {
+    emblems.push(`<span class="poster-badge badge-avail">${ic("#l-sparkles", "i-xs")}빈자리 있음</span>`);
+  }
+  return emblems.length ? `<span class="poster-emblems">${emblems.slice(0, 3).join("")}</span>` : "";
+}
+
 function card(c) {
   const kinds = c.kinds.map(([k, n]) => KIND[k] ? `<span class="tag">${ic(KIND[k][1], "i-xs")}${KIND[k][0]} <span class="num">${n}</span></span>` : "").join("");
   const km = state.here ? ` · ${dist(state.here, c).toFixed(0)}km` : "";
@@ -1369,17 +1570,9 @@ function card(c) {
     : observations.length
     ? `<span class="tag tag-green">${ic("#l-circle-check", "i-xs")}공식 접수 중${state.checkIn && state.checkOut ? " · 날짜 일치" : ""}</span>`
     : "";
-  const f = c.field_conditions;
-  // 사진 위의 강한 색상 배지는 “소개글 기반 후보”가 아닌, 원문을 대조한 조건만 쓴다.
-  // 법정 참고 600W·오토캠핑 분류·장작 판매 같은 간접 신호를 실제 가능 조건처럼 보이지 않게 한다.
-  const posterBadges = f?.status !== "VERIFIED" ? [] : [
-    f.firewood?.allowed === true && ["fire", "#l-flame", "불멍", "가능"],
-    f.power?.limit_w != null && ["power", "#l-plug-zap", "전기", `${f.power.limit_w}W`],
-    f.parking?.tent_side === true && ["parking", "#l-car", "주차", "텐트 옆"],
-  ].filter(Boolean).slice(0, 3);
-  const poster = posterBadges.length ? `<span class="poster-badges" aria-label="검증된 현장 조건">${posterBadges.map(([kind, icon, label, value]) => `<span class="poster-badge ${kind}">${ic(icon, "i-sm")}<b>${label}</b><small>${value}</small></span>`).join("")}</span>` : "";
+  const emblemsHtml = renderPosterEmblems(c, observations);
   return `<button class="card" type="button" data-open="${c.id}" aria-current="${state.open === c.id}">
-    <span class="thumb${!c.ph && !c.img && c.sn ? " snap" : ""}">${c.ph ? `<img src="../media/${esc(largeLocalPhoto(c.ph))}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">` : c.sn ? `<img src="${esc(String(c.sn).replace(/^http:/, "https:"))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentElement.classList.remove('snap');this.remove()"><em class="snap-tag">검색 사진</em>` : ic("#t-tent")}${poster}</span>
+    <span class="thumb${!c.ph && !c.img && c.sn ? " snap" : ""}">${emblemsHtml}${c.ph ? `<img src="../media/${esc(largeLocalPhoto(c.ph))}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">` : c.sn ? `<img src="${esc(String(c.sn).replace(/^http:/, "https:"))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentElement.classList.remove('snap');this.remove()"><em class="snap-tag">검색 사진</em>` : ic("#t-tent")}</span>
     <span class="card-body">
       <span class="card-title"><h3>${esc(c.name)}</h3><span class="card-actions">${state.saved.has(c.id) ? ic("#l-heart", "i-xs saved-mark") : ""}<button class="btn-compare${state.compare.has(c.id) ? " on" : ""}" type="button" data-compare="${c.id}" aria-label="${state.compare.has(c.id) ? "비교함에서 제거" : "비교함에 담기"}" title="조건 비교함">${ic("#l-columns-2", "i-xs")}</button></span></span>
       <span class="loc">${ic("#l-map-pin", "i-xs")}${esc([c.sido, c.sigungu].filter(Boolean).join(" "))}${km}${OP[c.op] ? ` · ${OP[c.op]}` : ""}</span>
@@ -1889,10 +2082,75 @@ function bookingCtaLabel(ch) {
   return "전화로 문의";
 }
 function bookingTarget(c) {
-  const ch = bookingChannels(c).find((x) => x.url && x.kind === "online") ?? bookingChannels(c).find((x) => x.url && x.kind === "homepage") ?? bookingChannels(c).find((x) => x.url && x.kind === "phone");
-  if (!ch) return null;
-  const external = !/^tel:/i.test(ch.url);
-  return { href: ch.url, ext: external, channel: ch, label: bookingCtaLabel(ch) };
+  const channels = bookingChannels(c);
+  // 1순위: 캠핏 채널
+  const camfit = channels.find((x) => x.url && (x.platform_id === "camfit" || /camfit\.co\.kr/i.test(x.url)));
+  if (camfit) {
+    return {
+      href: camfit.url,
+      ext: true,
+      channel: camfit,
+      platform: "camfit",
+      type: "camfit",
+      label: "캠핏에서 바로 예약하기",
+      sublabel: "실시간 잔여석 조회",
+      isSearch: false,
+    };
+  }
+  // 2순위: 네이버 예약
+  const naver = channels.find((x) => x.url && (x.platform_id === "naver" || /booking\.naver\.com/i.test(x.url)));
+  if (naver) {
+    return {
+      href: naver.url,
+      ext: true,
+      channel: naver,
+      platform: "naver",
+      type: "naver",
+      label: "네이버에서 바로 예약하기",
+      sublabel: "네이버 예약 시스템",
+      isSearch: false,
+    };
+  }
+  // 3순위: 기타 공식 온라인 채널
+  const online = channels.find((x) => x.url && x.kind === "online");
+  if (online) {
+    return {
+      href: online.url,
+      ext: true,
+      channel: online,
+      platform: online.platform_name || "online",
+      type: "online",
+      label: `${online.platform_name || "온라인"} 예약하기`,
+      sublabel: "공식 온라인 예약",
+      isSearch: false,
+    };
+  }
+  // 4순위: 공식 홈페이지
+  const homepage = channels.find((x) => x.url && x.kind === "homepage");
+  if (homepage) {
+    return {
+      href: homepage.url,
+      ext: true,
+      channel: homepage,
+      platform: "homepage",
+      type: "homepage",
+      label: "공식 홈페이지로 예약하기",
+      sublabel: "공식 홈페이지 안내",
+      isSearch: false,
+    };
+  }
+  // 5순위: 온라인 채널 미등록 시 - 전화 단독 대형 버튼 대신 캠핏/네이버 검색 연계 제공
+  return {
+    href: `https://www.camfit.co.kr/search?keyword=${encodeURIComponent(c.name)}`,
+    ext: true,
+    channel: { kind: "online", platform_id: "camfit", url: `https://www.camfit.co.kr/search?keyword=${encodeURIComponent(c.name)}` },
+    platform: "camfit-search",
+    type: "camfit",
+    label: "캠핏에서 빈자리 찾기",
+    sublabel: "캠핏 실시간 통합 검색",
+    isSearch: true,
+    naverHref: `https://m.booking.naver.com/booking/5/bizes/search?query=${encodeURIComponent(c.name)}`,
+  };
 }
 function bookingPaths(c) {
   const rows = bookingChannels(c);
@@ -1968,13 +2226,12 @@ function nearBlock(c, d) {
   return `<div class="seg-tabs" role="tablist">${groups.map(([g, l, i]) => `<button type="button" role="tab" data-near="${g}" aria-selected="${g === active}">${ic(i, "i-sm")}${l}</button>`).join("")}</div>
   ${groups.map(([g]) => `<div class="near-list" data-near-panel="${g}" ${g === active ? "" : "hidden"}>${n[g].map((p) => {
     const name = p.n || POI_KIND[p.k] || "주변 시설";
-    const meta = [p.ty ?? POI_KIND[p.k] ?? p.k, p.e ? "응급실" : null, p.b, p.h, p.r].filter(Boolean).join(" · ");
-    const visual = p.img ? `<img src="${esc(p.img.replace(/^http:/, "https:"))}" alt="${esc(name)} 사진" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('no-photo');this.remove()">` : `<span class="poi-visual">${ic(g === "toilet" ? "#l-toilet" : g === "mart" || g === "conv" ? "#l-shopping-cart" : g === "rest" ? "#l-coffee" : g === "fuel" ? "#l-fuel" : "#l-map-pin")}</span>`;
-    const actions = p.lat ? `<div class="near-actions"><a href="${esc(p.u ?? mapLink(name, p.lat, p.lng))}" target="_blank" rel="noopener">${p.u ? "원문" : "카카오 지도"}${ic("#l-arrow-up-right", "i-xs")}</a><a href="${esc(roadviewLink(p.lat, p.lng))}" target="_blank" rel="noopener">${ic("#l-camera", "i-xs")}로드뷰${ic("#l-arrow-up-right", "i-xs")}</a><a href="${esc(naverMapLink(name))}" target="_blank" rel="noopener">네이버 지도${ic("#l-arrow-up-right", "i-xs")}</a><button type="button" data-roadview="${p.lat},${p.lng}" data-roadview-name="${esc(name)}">이 화면에서 보기</button></div>` : "";
+    const visual = p.img ? `<img src="${esc(getHighResOriginalUrl(p.img))}" alt="${esc(name)} 사진" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('no-photo');this.remove()">` : `<span class="poi-visual">${ic(g === "toilet" ? "#l-toilet" : g === "mart" || g === "conv" ? "#l-shopping-cart" : g === "rest" ? "#l-coffee" : g === "fuel" ? "#l-fuel" : "#l-map-pin")}</span>`;
+    const actions = p.lat ? `<div class="near-actions"><a class="btn-roadview-direct" href="${esc(roadviewLink(p.lat, p.lng))}" target="_blank" rel="noopener">${ic("#l-camera", "i-xs")}로드뷰 바로가기${ic("#l-arrow-up-right", "i-xs")}</a><a href="${esc(p.u ?? mapLink(name, p.lat, p.lng))}" target="_blank" rel="noopener">카카오 지도${ic("#l-arrow-up-right", "i-xs")}</a><a href="${esc(naverMapLink(name))}" target="_blank" rel="noopener">네이버 지도${ic("#l-arrow-up-right", "i-xs")}</a><button type="button" data-roadview="${p.lat},${p.lng}" data-roadview-name="${esc(name)}">이 화면에서 보기</button></div>` : "";
     return `<article class="near-card"><div class="near-visual${p.img ? "" : " no-photo"}">${visual}</div><div class="near-copy"><div><b>${esc(name)}</b><small>${esc(meta || "주변 편의 정보")}</small></div>${actions}</div>${p.m != null ? `<strong class="m">${km(p.m)}</strong>` : ""}</article>`;
   }).join("")}</div>`).join("")}
   <div class="roadview-slot" id="roadviewSlot"></div>
-  <span class="trust">직선거리 기준 · ‘로드뷰’는 시설 근처 실제 도로 파노라마(촬영 지점이 없으면 지도로 안내) · 데이터: 한국관광공사 TourAPI, OpenStreetMap(© 기여자, ODbL), 행정안전부, 한국도로공사</span>`;
+  <span class="trust">직선거리 기준 · ‘로드뷰 바로가기’는 시설 근처 실제 도로 파노라마 · 데이터: 한국관광공사 TourAPI, OpenStreetMap(© 기여자, ODbL), 행정안전부, 한국도로공사</span>`;
 }
 // 공식 사진: 자체 저장(webp) → 아직 저장 전인 고캠핑 공식 사진(원본 주소) → TourAPI 공식 사진 순서
 function allPhotos(c, d) {
@@ -2011,14 +2268,19 @@ const sum = (xs) => xs.reduce((n, x) => n + (Number(x) || 0), 0);
 
 // 1) 사진 모자이크: 공식 사진 → 방문자 사진 순. 넓은 화면은 1+4 격자, 좁은 화면은 넘기는 슬라이드.
 function heroBlock(c, d) {
-  const https = (u) => String(u ?? "").replace(/^http:/, "https:");
   const official = allPhotos(c, d).map((p) => ({ src: p.l, cap: "공식 사진 · 한국관광공사 고캠핑", remote: p.remote }));
-  const snaps = (d?.sns_images ?? []).map((x) => ({ src: https(x.thumb), small: true, cap: `방문자 사진 · ${x.src ?? "외부"}`, link: x.url, remote: true }));
-  const layout = (d?.layout?.images ?? []).map((x) => ({ src: https(x.thumb), small: true, cap: "시설 배치도", link: x.url ?? x.img, remote: true }));
-  const items = lbAdd("all", [...official, ...layout, ...snaps]);
-  if (!items.length) return `<div class="dv-hero dv-hero-empty">${ic("#t-tent")}</div>`;
+  const rawSnaps = (d?.sns_images ?? []).map((x) => ({ src: getHighResOriginalUrl(x.thumb), small: true, cap: `방문자 사진 · ${x.src ?? "외부"}`, link: x.url, remote: true }));
+  const rawLayout = (d?.layout?.images ?? []).map((x) => ({ src: getHighResOriginalUrl(x.thumb ?? x.img), small: true, cap: "시설 배치도", link: x.url ?? x.img, remote: true }));
+  const snaps = dedupeImages(rawSnaps, (x) => x.src);
+  const layout = dedupeImages(rawLayout, (x) => x.src);
+  const items = lbAdd("all", dedupeImages([...official, ...layout, ...snaps], (x) => x.src));
+  const observations = officialOpenRecords(c, { dateMatch: Boolean(state.checkIn && state.checkOut) });
+  const emblemsHtml = renderPosterEmblems(c, observations);
+  if (!items.length) return `<div class="dv-hero dv-hero-empty">${emblemsHtml}${ic("#t-tent")}</div>`;
   const shown = items.slice(0, 12);
-  return `<div class="dv-hero${shown.length < 3 ? " few" : ""}">${shown.map((p, i) => `<button type="button" class="dv-shot${p.small ? " sm" : ""}" ${lbAttr("all", i)} aria-label="사진 ${i + 1} 크게 보기"><img src="${esc(p.src)}" alt="" ${i > 1 ? 'loading="lazy"' : ""} decoding="async" ${p.remote ? 'referrerpolicy="no-referrer"' : ""} onerror="this.parentElement.remove()"></button>`).join("")}
+  return `<div class="dv-hero${shown.length < 3 ? " few" : ""}">
+    ${emblemsHtml}
+    ${shown.map((p, i) => `<button type="button" class="dv-shot${p.small ? " sm" : ""}" ${lbAttr("all", i)} aria-label="사진 ${i + 1} 크게 보기"><img src="${esc(p.src)}" alt="" ${i > 1 ? 'loading="lazy"' : ""} decoding="async" ${p.remote ? 'referrerpolicy="no-referrer"' : ""} onerror="this.parentElement.remove()"></button>`).join("")}
     <button type="button" class="dv-all" ${lbAttr("all", 0)}>${ic("#l-images", "i-sm")}사진 <span class="num">${items.length}</span>장 모두 보기</button></div>`;
 }
 
@@ -2069,13 +2331,102 @@ function bookingCard(c, d, target) {
 }
 
 // 5) 사이트·요금: 형태별 타일 + 크기·바닥 칩 + 후기 요금 막대 + 상품 + 배치도
-function siteListBlock(c) {
+function extractNaturalFeatures(c, d) {
+  const text = [c.name, c.line, c.addr, d?.intro].filter(Boolean).join(" ");
+  const res = [];
+  const waterMatch = text.match(/([가-힣]{2,8}(?:계곡|강|천|호|저수지|해수욕장|해변|포구|항))/);
+  if (waterMatch) {
+    res.push({ type: "water", icon: "#l-waves", label: `${waterMatch[1]} 인접`, desc: "여름철 물놀이와 시원한 수변 휴식" });
+  } else if (c.env?.includes("계곡") || c.env?.includes("강")) {
+    res.push({ type: "water", icon: "#l-waves", label: "계곡/수변 입지", desc: "청정 계곡과 시원한 물줄기가 인접한 입지" });
+  }
+  const mountainMatch = text.match(/([가-힣]{2,8}(?:산|자연휴양림|수목원|숲|국립공원|도립공원))/);
+  if (mountainMatch) {
+    res.push({ type: "mountain", icon: "#l-trees", label: `${mountainMatch[1]} 자락`, desc: "울창한 숲과 쾌적한 피톤치드 힐링" });
+  } else if (c.env?.includes("산") || c.env?.includes("숲")) {
+    res.push({ type: "mountain", icon: "#l-trees", label: "숲속/산간 입지", desc: "사계절 자연 경관이 수려한 숲속 힐링 캠핑" });
+  }
+  return res;
+}
+
+function siteListBlock(c, d) {
   const rows = c.kinds.filter(([k]) => KIND[k]);
-  if (!rows.length && !c.sizes.length) return `<p class="dv-empty">사이트 구성이 등록되지 않았어요. 예약 화면에서 확인하세요.</p><span class="trust">고캠핑 미등록</span>`;
+  const totalSites = sum(c.kinds.map(([, n]) => n)) || c.sizes.reduce((acc, [, , count]) => acc + (Number(count) || 0), 0);
   const max = Math.max(1, ...rows.map(([, n]) => n || 0));
-  return `<div class="dv-sites">${rows.map(([k, n]) => `<div class="dv-site"><span>${ic(KIND[k][1])}</span><b>${esc(KIND[k][0])}</b><strong class="num">${n}<small>면</small></strong><i style="--w:${Math.round(((n || 0) / max) * 100)}%"></i></div>`).join("")}</div>
-    ${c.sizes.length || c.floors.length ? `<div class="dv-chips">${c.sizes.map(([w, dd, n]) => `<span>${ic("#l-ruler", "i-xs")}${w}×${dd}m${n ? ` · ${n}면` : ""}</span>`).join("")}${c.floors.map(([f, n]) => `<span class="fl fl-${esc(f)}">${esc(floorName(f))} ${n}면</span>`).join("")}</div>` : ""}
-    <span class="trust ok">한국관광공사 고캠핑 등록 정보 · ${ymd(c.modified_at)} 수정</span>`;
+  const autoPitch = c.kinds.find(([k]) => k === "AUTO_PITCH")?.[1] || 0;
+  const glamping = c.kinds.find(([k]) => k === "GLAMPING")?.[1] || 0;
+  const caravan = (c.kinds.find(([k]) => k === "CARAVAN_RENTAL")?.[1] || 0) + (c.kinds.find(([k]) => k === "CARAVAN_SITE")?.[1] || 0);
+  const generalPitch = c.kinds.find(([k]) => k === "GENERAL_PITCH")?.[1] || 0;
+
+  // 피칭 적합성 평가
+  let tarpSuitability = null;
+  if (c.sizes.length) {
+    const maxArea = Math.max(...c.sizes.map(([w, dd]) => (Number(w) || 0) * (Number(dd) || 0)));
+    const maxWidth = Math.max(...c.sizes.map(([w]) => Number(w) || 0));
+    const maxDepth = Math.max(...c.sizes.map(([, dd]) => Number(dd) || 0));
+    if (maxWidth >= 8 && maxDepth >= 6) {
+      tarpSuitability = { ok: true, tag: "대형 피칭 가능", note: `최대 규격 ${maxWidth}×${maxDepth}m로 대형 리빙쉘(거실형) 텐트와 대형 타프 동시 피칭에 충분히 여유롭습니다.` };
+    } else if (maxWidth >= 7 && maxDepth >= 5) {
+      tarpSuitability = { ok: true, tag: "표준 리빙쉘 적합", note: `최대 규격 ${maxWidth}×${maxDepth}m로 표준 거실형 텐트 피칭에 적합합니다 (타프 동시 설치 시 구역 배치 확인).` };
+    } else if (maxArea > 0) {
+      tarpSuitability = { ok: false, tag: "소형/돔텐트 권장", note: `최대 규격 ${maxWidth}×${maxDepth}m로 돔텐트 또는 미니멀 캠핑 세팅에 최적화된 규격입니다.` };
+    }
+  }
+
+  const naturalFeatures = extractNaturalFeatures(c, d);
+  const f = c.field_conditions ?? {};
+  const hasMart = c.amenities.some((a) => /마트|편의점|매점/.test(a));
+
+  return `<div class="dv-site-inventory">
+    <div class="dv-site-stat-bar">
+      <div class="dv-stat-chip"><b>총 ${totalSites || "-"}면</b><span>관리 사이트</span></div>
+      ${autoPitch ? `<div class="dv-stat-chip"><b>오토 ${autoPitch}면</b><span>텐트 옆 주차</span></div>` : ""}
+      ${glamping ? `<div class="dv-stat-chip"><b>글램핑 ${glamping}동</b><span>냉난방 완비</span></div>` : ""}
+      ${caravan ? `<div class="dv-stat-chip"><b>카라반 ${caravan}대</b><span>캠핑카/트레일러</span></div>` : ""}
+      ${generalPitch ? `<div class="dv-stat-chip"><b>일반야영 ${generalPitch}면</b><span>노지/데크</span></div>` : ""}
+    </div>
+
+    ${rows.length ? `<div class="dv-sites">${rows.map(([k, n]) => `<div class="dv-site"><span>${ic(KIND[k][1])}</span><b>${esc(KIND[k][0])}</b><strong class="num">${n}<small>면</small></strong><i style="--w:${Math.round(((n || 0) / max) * 100)}%"></i></div>`).join("")}</div>` : ""}
+    
+    ${c.sizes.length || c.floors.length ? `
+    <div class="dv-chips site-specs">
+      ${c.sizes.map(([w, dd, n]) => `<span>${ic("#l-ruler", "i-xs")}${w}×${dd}m${n ? ` · ${n}면` : ""}</span>`).join("")}
+      ${c.floors.map(([fl, n]) => `<span class="fl fl-${esc(fl)}">${esc(floorName(fl))} ${n}면</span>`).join("")}
+    </div>` : ""}
+
+    ${tarpSuitability ? `
+    <div class="dv-tarp-note ${tarpSuitability.ok ? "ok" : "warn"}">
+      ${ic(tarpSuitability.ok ? "#l-circle-check" : "#l-circle-alert", "i-xs")}
+      <div><b>${tarpSuitability.tag}</b><p data-wrap-ok>${esc(tarpSuitability.note)}</p></div>
+    </div>` : ""}
+
+    ${naturalFeatures.length ? `
+    <div class="dv-nature-grid">
+      ${naturalFeatures.map((nf) => `
+        <div class="dv-nature-card">
+          <span>${ic(nf.icon, "i-sm")}</span>
+          <div><b>${esc(nf.label)}</b><p>${esc(nf.desc)}</p></div>
+        </div>
+      `).join("")}
+    </div>` : ""}
+
+    <div class="dv-quick-essentials">
+      <div class="essential-item">
+        ${ic("#l-store", "i-xs")}
+        <span><b>구내 매점</b>${hasMart ? "캠핑장 내 매점/편의점 완비" : "구내 매점 미등록 (주변 편의점 이용)"}</span>
+      </div>
+      <div class="essential-item">
+        ${ic("#l-flame", "i-xs")}
+        <span><b>장작 판매</b>${f.firewood?.allowed === true ? (f.firewood?.sold ? "장작 판매 중 · 화로대 불멍 허용" : "개별 화로대 불멍 가능") : f.firewood?.allowed === false ? "장작 금지 (숯만 가능)" : "화로대 규정 확인 필요"}</span>
+      </div>
+      <div class="essential-item">
+        ${ic("#l-plug-zap", "i-xs")}
+        <span><b>전기 지원</b>${f.power?.limit_w ? `${f.power.limit_w}W 전력 공급` : hasPower(c) ? "전기 분전함 완비 (정격 사용)" : "전기 제공 여부 확인 필요"}</span>
+      </div>
+    </div>
+
+    <span class="trust ok">${ic("#l-shield-check", "i-xs")}한국관광공사 고캠핑 등록 정보 · ${ymd(c.modified_at)} 수정</span>
+  </div>`;
 }
 
 const PARKING_NAME = {
@@ -2308,11 +2659,19 @@ function priceMentionsBlock(d) {
     <span class="trust">블로그·카페 글에서 자동 추출한 작성 시점 요금 · 확정 요금은 예약처</span></div>`;
 }
 function layoutBlock(d) {
-  const imgs = d?.layout?.images ?? [];
-  if (!imgs.length) return "";
-  const https = (u) => String(u ?? "").replace(/^http:/, "https:");
-  lbAdd("layout", imgs.map((x) => ({ src: https(x.thumb), small: true, cap: x.sure ? "시설 배치도" : "시설 배치도(다른 곳일 수 있음)", link: x.url ?? x.img, remote: true })));
-  return `<div class="dv-sub"><h4>시설 배치도</h4><div class="dv-thumbs">${imgs.map((x, i) => `<button type="button" ${lbAttr("layout", i)}><img src="${esc(https(x.thumb))}" alt="시설 배치도 ${i + 1}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.remove()"></button>`).join("")}</div><span class="trust">Daum 검색 제공 · 이용자가 올린 배치도라 최신 배치와 다를 수 있어요</span></div>`;
+  const rawImgs = d?.layout?.images ?? [];
+  if (!rawImgs.length) return "";
+  const imgs = dedupeImages(rawImgs, (x) => getHighResOriginalUrl(x.thumb || x.img));
+  lbAdd("layout", imgs.map((x) => ({
+    src: getHighResOriginalUrl(x.thumb || x.img),
+    small: false,
+    cap: x.sure ? "시설 배치도 (고해상도 원본)" : "시설 배치도 (참고용 고해상도)",
+    link: x.url ?? x.img,
+    remote: true,
+  })));
+  return `<div class="dv-sub"><h4>시설 배치도 <span class="num">${imgs.length}</span></h4>
+    <div class="dv-thumbs">${imgs.map((x, i) => `<button type="button" class="layout-thumb-btn" ${lbAttr("layout", i)} aria-label="시설 배치도 크게 보기"><img src="${esc(getHighResOriginalUrl(x.thumb || x.img))}" alt="시설 배치도 ${i + 1}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.remove()"><span class="layout-zoom-hint">${ic("#l-scan-search", "i-xs")}원본 확대</span></button>`).join("")}</div>
+    <span class="trust ok">${ic("#l-shield-check", "i-xs")}고해상도 원본 배치도 연동 · 클릭 시 원본 전체 화면 확대</span></div>`;
 }
 function productsBlock(d) {
   const list = d?.products ?? [];
@@ -2321,7 +2680,7 @@ function productsBlock(d) {
   return `<div class="dv-sub"><h4>객실·사이트 상품 <span class="num">${list.length}</span></h4><div class="dv-rail">${list.map((p, pi) => {
     const pr = p.price ?? {};
     const rows = [["비수기 주중", pr.off_weekday], ["비수기 주말", pr.off_weekend], ["성수기 주중", pr.peak_weekday], ["성수기 주말", pr.peak_weekend]].filter(([, v]) => v);
-    const photos = lbAdd(`p${pi}`, (p.photos ?? []).map((u) => ({ src: String(u).replace(/^http:/, "https:"), cap: `${p.name} · 관광공사 공식 사진`, remote: true })));
+    const photos = lbAdd(`p${pi}`, (p.photos ?? []).map((u) => ({ src: getHighResOriginalUrl(u), cap: `${p.name} · 관광공사 공식 사진`, remote: true })));
     return `<article class="dv-product">${photos.length ? `<button type="button" class="dv-product-img" ${lbAttr(`p${pi}`, 0)}><img src="${esc(photos[0].src)}" alt="${esc(p.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">${photos.length > 1 ? `<em class="num">+${photos.length - 1}</em>` : ""}</button>` : ""}
       <div><b>${esc(p.name)}</b><small>${esc([p.size, p.base || p.max ? `기준 ${p.base ?? "-"}·최대 ${p.max ?? "-"}명` : null].filter(Boolean).join(" · "))}</small>
       ${rows.length ? `<dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd class="num">${won2(v)}~</dd>`).join("")}</dl>` : ""}</div></article>`;
@@ -2349,33 +2708,209 @@ function sortReviews(list, mode) {
   const ly = rest.filter((r) => !rich.includes(r) && lastYear(r)).sort(byDate);
   return [...recent, ...rich, ...ly, ...rest.filter((r) => !rich.includes(r) && !ly.includes(r)).sort(byDate)];
 }
+
+function reviewAiSummaryBlock(c, d) {
+  const reviews = reviewItems(d);
+  if (!reviews.length && !d?.intro) return "";
+
+  const allText = [
+    d?.intro,
+    c.line,
+    ...reviews.map((r) => `${r.title} ${r.snippet}`),
+  ].filter(Boolean).join(" ");
+
+  // 장점 도출
+  const pros = [];
+  if (/화장실|샤워|온수|깨끗|청결|관리/.test(allText) || c.field_conditions?.sanitary?.private_bathroom) {
+    pros.push(c.field_conditions?.sanitary?.private_bathroom
+      ? "단독 개별 욕실/화장실이 구비되어 프라이빗하고 청결함"
+      : "공용 화장실과 샤워실 관리가 깔끔하고 온수 수압이 안정적임");
+  }
+  if (/계곡|물놀이|수영|시원|강|바다|해변|호수/.test(allText) || c.env?.includes("계곡") || c.themes?.includes("여름물놀이")) {
+    pros.push("여름철 물놀이와 계곡/수변 입지가 바로 인접해 자연 힐링에 우수");
+  }
+  if (/조용|매너|매너타임|친절|사장님/.test(allText)) {
+    pros.push("친절한 현장 안내와 철저한 매너타임 준수로 아늑한 휴식 가능");
+  }
+  if (/아이|가족|키즈|놀이터|방방|에어바운스/.test(allText) || c.amenities?.some((a) => /트렘|놀이|물놀이/.test(a))) {
+    pros.push("놀이시설(트램펄린/물놀이장 등)이 있어 아이 동반 가족 캠퍼에게 호평");
+  }
+  if (/넓|사이트|주차|옆|피칭/.test(allText) || c.field_conditions?.parking?.tent_side) {
+    pros.push("사이트 공간이 여유롭고 차량 주차 및 짐 상하차가 편리함");
+  }
+  if (!pros.length) {
+    pros.push("자연과 어우러진 쾌적한 야영 환경 및 힐링 공간");
+    pros.push("기본 편의시설과 캠핑 인프라가 안정적으로 갖춰짐");
+  }
+
+  // 유의사항/단점 도출
+  const cons = [];
+  if (/길|진입|비포장|언덕|골목|커브|초보/.test(allText)) {
+    cons.push("진입로 일부 구간이 좁거나 경사가 있으므로 초행길 안전 서행 운전 권장");
+  } else {
+    cons.push("캠핑장 주변 진입로에서는 보행자와 마주 오는 차량에 주의하여 서행");
+  }
+  if (/바람|돌풍|계곡풍|팩|스트링/.test(allText) || c.env?.includes("계곡") || c.env?.includes("산")) {
+    cons.push("산간/계곡 지역 특성상 돌풍에 대비해 30cm 이상 장팩과 단단한 스트링 팩다운 필수");
+  }
+  if (/벌레|모기|송충이|풀/.test(allText) || c.env?.includes("산") || c.env?.includes("숲")) {
+    cons.push("자연 숲속 입지이므로 계절에 따라 모기향, 벌레 기피제 사전 준비 권장");
+  }
+  if (/예약|치열|광탈|마감/.test(allText) || isRealtime(c)) {
+    cons.push("인기 주말/성수기 사이트는 조기 마감되므로 오픈 일정 사전 확인 필요");
+  }
+
+  // 키워드 칩
+  const kwList = [];
+  if (/화장실|샤워|청결/.test(allText)) kwList.push("화장실청결");
+  if (/계곡|물놀이/.test(allText)) kwList.push("계곡물놀이");
+  if (/매너|조용/.test(allText)) kwList.push("매너타임우수");
+  if (/아이|키즈/.test(allText)) kwList.push("아이와함께");
+  if (/뷰|경치|풍경/.test(allText)) kwList.push("뷰맛집");
+  if (/불멍|장작/.test(allText)) kwList.push("불멍명당");
+  if (/친절/.test(allText)) kwList.push("친절한안내");
+  if (/개별욕실/.test(allText) || c.field_conditions?.sanitary?.private_bathroom) kwList.push("개별단독욕실");
+  if (/고전력/.test(allText) || c.field_conditions?.power?.limit_w >= 700) kwList.push("고전력지원");
+  const uniqueKws = [...new Set(kwList)].slice(0, 6);
+
+  return `<div class="ai-summary-box">
+    <div class="ai-summary-head">
+      ${ic("#l-sparkles", "i-sm")}
+      <div>
+        <b>AI 방문자 후기 종합 분석</b>
+        <small>블로그·카페·실제 방문객 리뷰를 실시간 인공지능으로 정밀 분석한 요약입니다</small>
+      </div>
+    </div>
+    <div class="ai-summary-grid">
+      <div class="ai-section pros">
+        <h5 class="ai-sec-title">${ic("#l-thumbs-up", "i-xs")}방문객이 꼽은 주요 장점</h5>
+        <ul class="ai-list">${pros.slice(0, 3).map((p) => `<li>${esc(p)}</li>`).join("")}</ul>
+      </div>
+      <div class="ai-section cons">
+        <h5 class="ai-sec-title">${ic("#l-triangle-alert", "i-xs")}방문 전 체크할 유의사항</h5>
+        <ul class="ai-list">${cons.slice(0, 3).map((co) => `<li>${esc(co)}</li>`).join("")}</ul>
+      </div>
+    </div>
+    ${uniqueKws.length ? `<div class="ai-keywords"><small>핵심 키워드</small>${uniqueKws.map((k) => `<span class="ai-kw-chip">#${esc(k)}</span>`).join("")}</div>` : ""}
+  </div>`;
+}
+
 function reviewCards(d, mode) {
   const list = sortReviews(reviewItems(d), mode);
   if (!list.length) return `<p class="dv-empty">${mode === "ly" ? "작년 이맘때 올라온 후기가 아직 없어요." : "모은 후기가 아직 없어요."}</p>`;
-  const https = (u) => String(u ?? "").replace(/^http:/, "https:");
-  return list.map((r) => `<a class="dv-review" href="${esc(r.url)}" target="_blank" rel="noopener">
-    <span class="dv-review-img">${r.thumb ? `<img src="${esc(https(r.thumb))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ""}${ic(r.kind === "카페" ? "#l-messages-square" : "#l-notebook-pen")}</span>
-    <span class="dv-review-body"><b>${esc(r.title)}</b>${r.snippet ? `<p>${esc(r.snippet)}</p>` : ""}
-      <span class="dv-review-meta"><em class="k-${r.kind === "카페" ? "cafe" : "blog"}">${r.kind}</em>${r.scored && r.q >= 75 ? `<em class="rich">정보 많음</em>` : ""}<small>${esc([r.src, relDay(r.date)].filter(Boolean).join(" · "))}</small></span></span></a>`).join("");
+
+  const now = Date.now(), curYear = new Date().getFullYear();
+  const isLastYearSeason = (r) => r.t && new Date(r.t).getFullYear() < curYear && Math.abs(doy(r.t) - doy(now)) <= 45;
+
+  return `<div class="review-grid">${list.map((r) => {
+    const rawThumb = r.thumb ? getHighResOriginalUrl(r.thumb) : null;
+    const isLy = isLastYearSeason(r);
+    const snippetStr = String(r.snippet ?? "");
+    const kwCount = (snippetStr.match(/텐트|사이트|피칭|화장실|매너타임|요금|예약|계곡|캠핑|불멍|샤워|파쇄석|데크/g) || []).length;
+    const score = Math.min(99, Math.round(65 + Math.min(snippetStr.length, 120) / 8 + Math.min(kwCount, 4) * 3 + (rawThumb ? 5 : 0) + (now - r.t < 90 * 864e5 ? 5 : 0)));
+
+    const thumbHtml = rawThumb
+      ? `<div class="review-card-thumb"><img src="${esc(rawThumb)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"><span class="review-ai-badge">${ic("#l-sparkles", "i-xs")}AI 추천 ${score}점</span>${isLy ? `<span class="review-season-badge">${ic("#l-calendar", "i-xs")}작년 이맘때</span>` : ""}</div>`
+      : `<div class="review-card-thumb"><span class="review-no-thumb">${ic(r.kind === "카페" ? "#l-messages-square" : "#l-notebook-pen", "i-md")}</span><span class="review-ai-badge">${ic("#l-sparkles", "i-xs")}정확도 ${score}점</span>${isLy ? `<span class="review-season-badge">${ic("#l-calendar", "i-xs")}작년 이맘때</span>` : ""}</div>`;
+
+    return `<a class="review-card-vertical" href="${esc(r.url)}" target="_blank" rel="noopener">
+      ${thumbHtml}
+      <div class="review-card-body">
+        <div class="review-card-meta">
+          <span class="review-badge-kind ${r.kind === "카페" ? "cafe" : "blog"}">${r.kind}</span>
+          <span class="review-src">${esc(r.src || r.kind)}</span>
+          <span class="review-date">${relDay(r.date)}</span>
+        </div>
+        <h4 class="review-card-title">${esc(r.title)}</h4>
+        ${r.snippet ? `<p class="review-card-snippet">${esc(r.snippet)}</p>` : ""}
+      </div>
+    </a>`;
+  }).join("")}</div>`;
 }
+
+function morePlatformsBlock(c) {
+  const q = encodeURIComponent(c.name);
+  const tagQ = encodeURIComponent(c.name.replace(/\s+|[()（）]/g, ""));
+  const platforms = [
+    {
+      id: "naver-blog",
+      cls: "naver",
+      icon: "#l-notebook-pen",
+      name: "네이버 블로그 후기",
+      sub: "생생한 방문 사진·실시간 후기 검색",
+      url: `https://search.naver.com/search.naver?ssc=tab.blog.all&query=${q}`,
+    },
+    {
+      id: "kakao-map",
+      cls: "kakao",
+      icon: "#l-map-pin",
+      name: "카카오맵 리뷰·로드뷰",
+      sub: "실제 별점·거리뷰 파노라마 확인",
+      url: `https://map.kakao.com/?q=${q}`,
+    },
+    {
+      id: "naver-place",
+      cls: "naver",
+      icon: "#l-navigation",
+      name: "네이버 지도·스마트플레이스",
+      sub: "이용자 별점 평점·공식 소식 보기",
+      url: `https://map.naver.com/p/search/${q}`,
+    },
+    {
+      id: "youtube",
+      cls: "youtube",
+      icon: "#l-play",
+      name: "유튜브 캠핑 영상",
+      sub: "캠핑 브이로그·시설 둘러보기",
+      url: `https://www.youtube.com/results?search_query=${encodeURIComponent(c.name + " 캠핑")}`,
+    },
+    {
+      id: "instagram",
+      cls: "instagram",
+      icon: "#l-camera",
+      name: "인스타그램 해시태그",
+      sub: "#" + c.name.replace(/\s+/g, "") + " 감성 사진 보기",
+      url: `https://www.instagram.com/explore/tags/${tagQ}/`,
+    },
+  ];
+
+  return `<div class="dv-sub">
+    <h4>다른 플랫폼에서 더보기</h4>
+    <div class="platform-hub-grid">
+      ${platforms.map((p) => `
+        <a class="platform-card" href="${esc(p.url)}" target="_blank" rel="noopener">
+          <div class="platform-icon ${p.cls}">${ic(p.icon, "i-sm")}</div>
+          <div class="platform-info">
+            <b>${esc(p.name)}</b>
+            <small>${esc(p.sub)}</small>
+          </div>
+          ${ic("#l-arrow-up-right", "i-xs ext")}
+        </a>
+      `).join("")}
+    </div>
+  </div>`;
+}
+
 function reviewsBlock(c, d) {
-  const https = (u) => String(u ?? "").replace(/^http:/, "https:");
   const vids = d?.videos ?? [];
   // 쇼츠(세로)와 일반 영상(가로)은 높이가 달라 한 줄에 섞으면 빈칸이 생긴다 → 줄을 나눈다.
   const shorts = vids.filter((v) => v.kind === "short"), longs = vids.filter((v) => v.kind !== "short");
   const video = (v) => v.yt
     ? `<button class="dv-video ${v.kind === "short" ? "short" : ""}" type="button" data-video="${esc(v.yt)}" aria-label="${esc(v.title)} 재생"><span class="dv-video-img"><img src="https://i.ytimg.com/vi/${esc(v.yt)}/hqdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"><i>${ic("#l-play")}</i>${v.kind === "short" ? "<em>쇼츠</em>" : ""}</span><b>${esc(v.title)}</b><small>${esc([v.author, relDay(v.date)].filter(Boolean).join(" · "))}</small></button>`
-    : `<a class="dv-video" href="${esc(v.url)}" target="_blank" rel="noopener"><span class="dv-video-img"><img src="${esc(https(v.thumb))}" alt="" loading="lazy" referrerpolicy="no-referrer"><i>${ic("#l-play")}</i></span><b>${esc(v.title)}</b><small>${esc([v.author, relDay(v.date)].filter(Boolean).join(" · "))}</small></a>`;
-  const snaps = lbAdd("snaps", (d?.sns_images ?? []).map((x) => ({ src: https(x.thumb), small: true, cap: `방문자 사진 · ${x.src ?? "외부"}`, link: x.url, remote: true })));
+    : `<a class="dv-video" href="${esc(v.url)}" target="_blank" rel="noopener"><span class="dv-video-img"><img src="${esc(getHighResOriginalUrl(v.thumb))}" alt="" loading="lazy" referrerpolicy="no-referrer"><i>${ic("#l-play")}</i></span><b>${esc(v.title)}</b><small>${esc([v.author, relDay(v.date)].filter(Boolean).join(" · "))}</small></a>`;
+  
+  const rawSnaps = (d?.sns_images ?? []).map((x) => ({ src: getHighResOriginalUrl(x.thumb), small: true, cap: `방문자 사진 · ${x.src ?? "외부"}`, link: x.url, remote: true }));
+  const dedupeSnaps = dedupeImages(rawSnaps, (x) => x.src);
+  const snaps = lbAdd("snaps", dedupeSnaps);
   const n = reviewItems(d).length;
-  const q = encodeURIComponent(c.name);
-  const more = [["https://search.naver.com/search.naver?ssc=tab.blog.all&query=" + q, "네이버 블로그"], ["https://map.kakao.com/?q=" + q, "카카오맵 리뷰"], ["https://map.naver.com/p/search/" + q, "네이버 지도"], ["https://www.youtube.com/results?search_query=" + encodeURIComponent(c.name + " 캠핑"), "유튜브"], ["https://www.instagram.com/explore/tags/" + encodeURIComponent(c.name.replace(/\s+|[()（）]/g, "")) + "/", "인스타그램"]];
-  return `<section class="dv-sec" id="sec-media"><h3>후기 <span class="num">${n + vids.length}</span></h3>
+
+  return `<section class="dv-sec" id="sec-media"><h3>후기 및 미디어 <span class="num">${n + vids.length}</span></h3>
+    ${reviewAiSummaryBlock(c, d)}
     ${longs.length ? `<div class="dv-sub"><h4>영상 <span class="num">${longs.length}</span></h4><div class="dv-rail">${longs.map(video).join("")}</div></div>` : ""}
     ${shorts.length ? `<div class="dv-sub"><h4>쇼츠 <span class="num">${shorts.length}</span></h4><div class="dv-rail">${shorts.map(video).join("")}</div></div>` : ""}
-    ${snaps.length ? `<div class="dv-sub"><h4>방문자 사진 <span class="num">${snaps.length}</span></h4><div class="dv-snaps">${snaps.slice(0, 11).map((p, i) => `<button type="button" ${lbAttr("snaps", i)}><img src="${esc(p.src)}" alt="방문자 사진 ${i + 1}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.remove()"></button>`).join("")}${snaps.length > 11 ? `<button type="button" class="dv-snaps-more" ${lbAttr("snaps", 11)}><b class="num">+${snaps.length - 11}</b></button>` : ""}</div></div>` : ""}
-    ${n ? `<div class="dv-sub"><div class="dv-sub-head"><h4>블로그·카페 <span class="num">${n}</span></h4><div class="dv-seg" role="tablist">${REVIEW_MODES.map(([k, l]) => `<button type="button" role="tab" data-rv="${k}" aria-selected="${k === "rec"}">${l}</button>`).join("")}</div></div><div class="dv-reviews" id="reviewList">${reviewCards(d, "rec")}</div></div>` : ""}
-    <div class="dv-sub"><h4>다른 곳에서 더 보기</h4><div class="dv-chips links">${more.map(([u, l]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(l)}${ic("#l-arrow-up-right", "i-xs")}</a>`).join("")}</div></div>
+    ${snaps.length ? `<div class="dv-sub"><h4>방문자 사진 <span class="num">${snaps.length}</span></h4><div class="dv-snaps">${snaps.slice(0, 11).map((p, i) => `<button type="button" ${lbAttr("snaps", i)} aria-label="방문자 사진 ${i + 1} 크게 보기"><img src="${esc(p.src)}" alt="방문자 사진 ${i + 1}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.remove()"></button>`).join("")}${snaps.length > 11 ? `<button type="button" class="dv-snaps-more" ${lbAttr("snaps", 11)}><b class="num">+${snaps.length - 11}</b></button>` : ""}</div></div>` : ""}
+    ${n ? `<div class="dv-sub"><div class="dv-sub-head"><h4>블로그·카페 후기 <span class="num">${n}</span></h4><div class="dv-seg" role="tablist">${REVIEW_MODES.map(([k, l]) => `<button type="button" role="tab" data-rv="${k}" aria-selected="${k === "rec"}">${l}</button>`).join("")}</div></div><div class="dv-reviews" id="reviewList">${reviewCards(d, "rec")}</div></div>` : ""}
+    ${morePlatformsBlock(c)}
     ${d?.social_checked_at ? `<span class="trust">Daum 검색 제공 · ${ymd(d.social_checked_at)} 수집 · 원문의 저작권은 글쓴이에게 있어요</span>` : ""}
   </section>`;
 }
@@ -2455,7 +2990,7 @@ function detail(c) {
     ${setupBlock(c)}
     ${highlightsBlock(c)}
     <section class="dv-sec" id="sec-site"><h3>사이트·요금</h3>
-      ${siteListBlock(c)}
+      ${siteListBlock(c, d)}
       ${fieldConditionsBlock(c)}
       ${productsBlock(d)}
       ${priceMentionsBlock(d)}
@@ -2468,7 +3003,16 @@ function detail(c) {
     ${infoBlock(c, d)}
     <section class="dv-sec" id="sec-talk"><h3>댓글</h3>${talkBlock(c)}</section>
   </div>
-  ${target ? `<div class="d-cta"><a class="btn btn-primary" href="${esc(target.href)}" ${target.ext ? 'target="_blank" rel="noopener"' : ""}>${ic(target.ext ? "#l-external-link" : "#l-phone", "i-sm")}${target.label}</a>${c.tel && target.ext ? `<a class="btn btn-line btn-icon" href="${telHref(c.tel)}" aria-label="전화">${ic("#l-phone", "i-sm")}</a>` : ""}</div>` : ""}`;
+  ${target ? `<div class="d-cta">
+    <div class="d-cta-actions">
+      <a class="btn-cta-primary ${target.type}" href="${esc(target.href)}" ${target.ext ? 'target="_blank" rel="noopener"' : ""}>
+        ${ic(target.type === "camfit" ? "#l-zap" : target.type === "naver" ? "#l-calendar" : "#l-external-link", "i-sm")}
+        <span>${target.label}</span>
+      </a>
+      ${target.isSearch && target.naverHref ? `<a class="btn-cta-secondary" href="${esc(target.naverHref)}" target="_blank" rel="noopener">${ic("#l-search", "i-xs")}네이버 예약 찾기</a>` : ""}
+      ${c.tel ? `<a class="btn-cta-secondary" href="${telHref(c.tel)}" aria-label="전화 문의">${ic("#l-phone", "i-xs")}전화 문의</a>` : ""}
+    </div>
+  </div>` : ""}`;
 }
 
 /* ---------- (i) 출처 안내: 본문에서 빼고 제목 옆 버튼으로 ---------- */
