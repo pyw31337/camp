@@ -987,3 +987,23 @@ body.detail-open .compare-bar { display: none; }
 
 
 
+
+/* ==========================================================================
+   예약 전 확인·준비 (로드맵 R1·R2): 물어볼 질문 + 근거 등급이 있는 준비물
+   ========================================================================== */
+.prep-qs { margin: 0; padding-left: 1.3rem; display: grid; gap: 8px; font-size: var(--fs-sm); line-height: 1.55; }
+.prep-qs li::marker { color: var(--green); font-weight: 800; }
+.prep-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.prep-actions .btn { white-space: nowrap; }
+.prep-foot { margin: 10px 0 0; font-size: var(--fs-2xs); color: var(--ink-3); line-height: 1.5; }
+.prep-foot a, .dv-fix-link { color: var(--green-press); font-weight: 750; text-decoration: underline; text-underline-offset: 2px; }
+.dv-fix-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; font-size: var(--fs-xs); }
+.prep-items { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 10px; }
+.prep-items li { display: flex; gap: 10px; align-items: flex-start; padding: 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.prep-items li > .i { color: var(--green); flex-shrink: 0; margin-top: 2px; }
+.prep-items b { display: block; font-size: var(--fs-xs); font-weight: 800; }
+.prep-items p { margin: 2px 0 0; font-size: var(--fs-2xs); color: var(--ink-2); line-height: 1.5; }
+.compare-header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.compare-share-btn { display: inline-flex; align-items: center; gap: 4px; min-height: 2.25rem; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-size: var(--fs-xs); font-weight: 750; cursor: pointer; white-space: nowrap; }
+.compare-share-btn:hover { background: var(--surface-2); }
+.dv-fix-links { display: flex; flex-wrap: wrap; gap: 4px 16px; }

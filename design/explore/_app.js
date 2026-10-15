@@ -46,6 +46,8 @@ function load() {
   if (/^\d{4}-\d{2}-\d{2}$/.test(h.get("ci") ?? "")) state.checkIn = h.get("ci");
   if (/^\d{4}-\d{2}-\d{2}$/.test(h.get("co") ?? "")) state.checkOut = h.get("co");
   if (h.get("av") === "1") state.availabilityOnly = true;
+  // 비교 공유 링크(#cmp=id1,id2[,id3]): 가족과 같은 비교표를 본다(로드맵 R5).
+  if (h.get("cmp")) state.compareOnBoot = h.get("cmp").split(",").filter(Boolean).slice(0, 3);
 }
 // 관심 캠핑장은 이 기기 브라우저에만, 헤더에서 고른 사용자별로 따로 저장한다(로그인 없음).
 const userKey = () => window.moyeoraUser?.key("moyeora-explore") ?? "moyeora-explore";
@@ -686,7 +688,7 @@ function openCompareModal() {
             <h3 id="compareTitle">${ic("#l-columns-2", "i-sm")} 캠핑장 조건 1:1 비교</h3>
             <p data-wrap-ok>후보 ${camps.length}곳의 조건을 같은 기준으로 놓았어요. 값 옆 표시는 근거 수준입니다(원문 대조 · 고캠핑 등록값 · 소개글 기반 · 확인 필요).</p>
           </div>
-          <button class="compare-close-btn" type="button" data-close-compare aria-label="비교 닫기">${ic("#l-x", "i-sm")}</button>
+          <div class="compare-header-actions"><button class="compare-share-btn" type="button" data-share-compare>${ic("#l-share-2", "i-xs")}비교 공유</button><button class="compare-close-btn" type="button" data-close-compare aria-label="비교 닫기">${ic("#l-x", "i-sm")}</button></div>
         </div>
         <div class="compare-scroll">
           <table class="compare-table">
@@ -1125,7 +1127,54 @@ function fieldConditionsBlock(c) {
     </tbody></table></div>` : ""}
     ${v.kids.grade !== "UNKNOWN" ? `<div class="dv-features-wrap"><h5>아이·놀거리 ${gradeChip(v.kids.grade)}</h5><div class="dv-chips">${(v.kids.grade === "CONFIRMED" ? v.kids.amenities.map((a) => [null, a]) : v.kids.features.map((x) => [x, FEATURE_NAME[x]])).map(([k, l]) => `<span class="feat-chip">${ic(k ? featIcon(k) : "#l-circle-check", "i-xs")}${esc(l)}</span>`).join("")}</div><p class="dv-cond-foot" data-wrap-ok>${esc(v.kids.note)}</p></div>` : ""}
     <span class="trust">${src.url ? `<a href="${esc(src.url)}" target="_blank" rel="noopener">${esc(src.label ?? "한국관광공사 고캠핑 운영자 등록값")}</a>` : esc(src.label ?? "한국관광공사 고캠핑 운영자 등록값")}${src.checked_at ? ` · ${ymd(src.checked_at)} 확인` : ""} · ‘소개글 기반’은 운영자 소개 문장에서 찾은 단서이고, ‘확인 필요’는 불가가 아닙니다</span>
+    <div class="dv-fix-links"><a class="dv-fix-link" href="${esc(correctionUrl(c))}" target="_blank" rel="noopener">${ic("#l-pencil", "i-xs")}정보 고치기·확인 결과 알리기</a><a class="dv-fix-link" href="${esc(`${REPO_ISSUES}?${new URLSearchParams({ template: "operator-condition-sheet.yml", title: `[운영자 조건표] ${c.name}`, campground: `${c.name} (id: ${c.id})` })}`)}" target="_blank" rel="noopener">${ic("#l-store", "i-xs")}운영자이신가요? 공식 조건표 등록</a></div>
   </div>`;
+}
+
+// 예약 전 확인·준비(로드맵 R1·R2·R3). 모르는 조건을 ‘물어볼 질문’으로, 아는 조건을 ‘챙길 것’으로 바꾼다.
+// 질문은 확인 필요/소개글 기반 항목만, 준비물은 등급이 있는 사실만 근거로 쓴다. 근거 없는 일반론은 넣지 않는다.
+const REPO_ISSUES = "https://github.com/pyw31337/camp/issues/new";
+const correctionUrl = (c, field = "") => `${REPO_ISSUES}?${new URLSearchParams({ template: "condition-correction.yml", title: `[정보 고치기] ${c.name}`, campground: `${c.name} (id: ${c.id})`, field }).toString()}`;
+function confirmQuestions(c) {
+  const v = conditionView(c), qs = [];
+  const need = (d) => d.grade === "UNKNOWN" || d.grade === "SURVEYED";
+  const stay = state.checkIn && state.checkOut ? `${md(state.checkIn)}~${md(state.checkOut)} ` : "";
+  // 글램핑·카라반처럼 텐트를 치지 않는 상품만 있으면 규격·피칭 질문은 하지 않는다.
+  const fixedStay = c.kinds.length && c.kinds.every(([k]) => ["GLAMPING", "CARAVAN_RENTAL", "CAMPNIC_DAY"].includes(k));
+  if (fixedStay) { /* 텐트 설치형이 아님 */ } else if (state.gear) {
+    const gear = setupStatus(c).checks.find((x) => x.key === "gear");
+    if (gear && gear.state !== "MATCH") { const [w, d] = state.gear.split("x"); qs.push(["size", `${w}×${d}m 텐트(또는 리빙쉘)가 들어가는 사이트가 있나요? 있다면 어느 구역인가요?`]); }
+  } else if (need(v.size)) qs.push(["size", "사이트 가로×세로 크기가 구역별로 어떻게 되나요?"]);
+  if (need(v.parking) || v.parking.partial) qs.push(["parking", v.parking.partial ? "텐트 바로 옆에 주차할 수 있는 구역이 어디인가요?" : "차를 텐트 바로 옆에 댈 수 있나요? 아니면 주차 후 짐을 옮겨야 하나요(수레 제공 여부)?"]);
+  if (need(v.power) || (state.profilePower && !v.power.watts)) qs.push(["power", `사이트당 전기는 최대 몇 W(몇 A)까지 쓸 수 있나요?${state.profilePower ? ` ${Number(state.profilePower).toLocaleString()}W 정도 쓰려고 해요.` : ""}`]);
+  if (need(v.firewood) || v.firewood.designated) qs.push(["firewood", "개인 화로대로 장작 불멍이 가능한가요? 화로대 받침이나 지정 구역 조건이 있나요?"]);
+  if (!fixedStay && v.shelter.grade === "UNKNOWN") qs.push(["shelter", "텐트 외에 타프(또는 3×3m 캐노피)를 추가로 칠 수 있나요?"]);
+  if (v.kids.grade !== "UNKNOWN" && /수영|물놀이|SWIMMING/.test([...v.kids.amenities, ...v.kids.features].join(" "))) qs.push(["kids", `${stay}물놀이장(수영장)을 운영하나요? 이용료가 따로 있나요?`]);
+  return qs.slice(0, 5);
+}
+function prepItems(c) {
+  const v = conditionView(c), out = [];
+  if (v.parking.cart) out.push([v.parking.grade, "#l-shopping-cart", "짐을 수레로 옮겨야 해요", "짐을 큰 가방 몇 개로 묶고, 수레 제공 여부를 확인하세요."]);
+  else if (v.parking.tentSide === true && isFact(v.parking.grade)) out.push([v.parking.grade, "#l-car", "차를 텐트 옆에 댈 수 있어요", "짐 정리를 차와 가깝게 계획해도 돼요."]);
+  if (v.power.watts) out.push([v.power.grade, "#l-plug-zap", `전기는 최대 ${v.power.watts.toLocaleString()}W`, "쓸 기기의 소비전력 합이 이 값을 넘지 않게 준비하세요."]);
+  else if (v.power.available) out.push([v.power.grade, "#l-plug-zap", "전기는 있지만 사용 가능 W를 몰라요", "전력이 큰 기기는 W를 확인한 뒤 챙기세요."]);
+  if (isFact(v.firewood.grade) && v.firewood.allowed === false) out.push([v.firewood.grade, "#l-flame", "장작은 쓸 수 없어요", "숯·가스 등 허용된 방식으로 준비하세요."]);
+  const floors = (c.field_conditions?.ground?.types?.map((x) => x.type) ?? c.floors.map(([t]) => t));
+  if (floors.includes("DECK")) out.push([v.floor.grade, "#t-layers-subtract", "데크 사이트가 있어요", "데크용 고정 장비(앵커·스트링 고정구)를 챙기세요."]);
+  if (floors.some((t) => t === "CRUSHED_STONE" || t === "GRAVEL")) out.push([v.floor.grade, "#t-layers-subtract", "파쇄석·자갈 사이트가 있어요", "단단한 단조팩·망치가 편해요."]);
+  return out.slice(0, 5);
+}
+function prepBlock(c) {
+  const qs = confirmQuestions(c), items = prepItems(c);
+  if (!qs.length && !items.length) return "";
+  const text = qs.length ? [`안녕하세요, ${c.name} 예약 전에 여쭤봐요.`, ...qs.map(([, q], i) => `${i + 1}. ${q}`)].join("\n") : "";
+  return `<section class="dv-sec dv-prep" id="sec-prep"><h3>${ic("#l-list-checks", "i-sm")}예약 전 확인·준비</h3>
+    ${qs.length ? `<div class="dv-sub"><h4>사장님께 물어볼 것 <span class="num">${qs.length}</span></h4>
+      <ol class="prep-qs">${qs.map(([, q]) => `<li data-wrap-ok>${esc(q)}</li>`).join("")}</ol>
+      <div class="prep-actions"><button type="button" class="btn btn-line" data-copy-text="${esc(text)}">${ic("#l-copy", "i-sm")}질문 복사</button>${c.tel ? `<a class="btn btn-line" href="${telHref(c.tel)}">${ic("#l-phone", "i-sm")}전화</a>` : ""}</div>
+      <p class="prep-foot" data-wrap-ok>여기 질문은 근거가 아직 없거나 소개글에만 있는 항목이에요. 답을 들으셨다면 <a href="${esc(correctionUrl(c))}" target="_blank" rel="noopener">정보 고치기</a>로 알려 주세요. 검수 뒤 다른 캠퍼에게도 보여요.</p></div>` : ""}
+    ${items.length ? `<div class="dv-sub"><h4>챙기면 좋은 것</h4><ul class="prep-items">${items.map(([g, icon, title, note]) => `<li>${ic(icon, "i-sm")}<div><b>${esc(title)} ${gradeChip(g)}</b><p data-wrap-ok>${esc(note)}</p></div></li>`).join("")}</ul></div>` : ""}
+  </section>`;
 }
 
 // 사용자가 고른 장비·전력·주차·불멍 조건을 이미 확인된 현장 조건과만 비교한다.
@@ -1418,13 +1467,13 @@ function infoBlock(c, d) {
   </section>`;
 }
 
-const DV_NAV = [["sec-important", "중요"], ["sec-book", "예약"], ["sec-setup", "내 세팅"], ["sec-site", "사이트·요금"], ["sec-media", "후기"], ["sec-fac", "시설"], ["sec-near", "주변"], ["sec-info", "정보"], ["sec-talk", "댓글"]];
+const DV_NAV = [["sec-important", "중요"], ["sec-book", "예약"], ["sec-setup", "내 세팅"], ["sec-prep", "준비"], ["sec-site", "사이트·요금"], ["sec-media", "후기"], ["sec-fac", "시설"], ["sec-near", "주변"], ["sec-info", "정보"], ["sec-talk", "댓글"]];
 function detail(c) {
   const d = DETAIL.get(c.id);
   LB.clear();
   const target = bookingTarget(c);
   const quickBooking = target?.ext
-    ? `<a href="${esc(target.href)}" target="_blank" rel="noopener">${ic(target.channel.kind === "online" ? "#l-calendar-check" : "#l-globe")}<span>${target.channel.kind === "online" ? "예약" : "홈페이지"}</span></a>`
+    ? `<a href="${esc(target.href)}" target="_blank" rel="noopener">${ic(target.type === "search" ? "#l-search" : target.type === "homepage" ? "#l-globe" : "#l-calendar-check")}<span>${target.type === "search" ? "검색" : target.type === "homepage" ? "홈페이지" : "예약"}</span></a>`
     : "";
   const themes = (META?.themes ?? []).filter((t) => c.th.includes(t.id));
   return `<div class="sheet-close"><button class="back-btn" type="button" data-close aria-label="목록으로">${ic("#l-arrow-left", "i-sm")}<span>목록</span></button></div>
@@ -1450,6 +1499,7 @@ function detail(c) {
     ${importantInfoBlock(c)}
     ${bookingCard(c, d, target)}
     ${setupBlock(c)}
+    ${prepBlock(c)}
     ${highlightsBlock(c)}
     <section class="dv-sec" id="sec-site"><h3>사이트·요금</h3>
       ${siteListBlock(c)}
@@ -1693,7 +1743,7 @@ document.addEventListener("click", (e) => {
     const list = $("#reviewList"); if (list) list.innerHTML = reviewCards(DETAIL.get(state.open), rv.dataset.rv);
     return;
   }
-  const t = e.target.closest("[data-open],[data-close],[data-save],[data-share],[data-share-theme],[data-jump],[data-near],[data-copy],[data-video],[data-roadview],[data-th],[data-sgg],[data-area],[data-kind],[data-toggle],[data-setup-focus],[data-compare],[data-compare-del],[data-close-compare],#moreBtn,#viewSwitch,#clearQ,#nearBtn,#availabilityRun,#availabilityClear,#openCompareBtn,#clearCompareBtn");
+  const t = e.target.closest("[data-open],[data-close],[data-save],[data-share],[data-share-theme],[data-jump],[data-near],[data-copy],[data-copy-text],[data-video],[data-roadview],[data-th],[data-sgg],[data-area],[data-kind],[data-toggle],[data-setup-focus],[data-compare],[data-compare-del],[data-close-compare],[data-share-compare],#moreBtn,#viewSwitch,#clearQ,#nearBtn,#availabilityRun,#availabilityClear,#openCompareBtn,#clearCompareBtn");
   if (!t) return;
   if (t.dataset.compare) { toggleCompare(t.dataset.compare); return; }
   if (t.dataset.compareDel) { toggleCompare(t.dataset.compareDel); return; }
@@ -1707,6 +1757,8 @@ document.addEventListener("click", (e) => {
     return;
   }
   if (t.dataset.roadview) return mountRoadview(t.dataset.roadview, t.dataset.roadviewName || "주변 시설");
+  if (t.hasAttribute("data-share-compare")) return shareUrl(`${location.origin}${location.pathname}#cmp=${[...state.compare].join(",")}`, "캠핑장 조건 비교 · 모여라 캠핑");
+  if (t.dataset.copyText) { navigator.clipboard?.writeText(t.dataset.copyText).then(() => toast("질문을 복사했어요. 문자·채팅에 붙여 넣으세요"), () => toast("복사하지 못했어요")); return; }
   if (t.dataset.copy) { navigator.clipboard?.writeText(t.dataset.copy).then(() => toast("주소를 복사했어요"), () => toast("복사하지 못했어요")); return; }
   if (t.dataset.video) {
     // 유튜브 공식 임베드(쿠키 최소화 도메인)로만 재생한다.
@@ -1839,5 +1891,9 @@ async function boot() {
   new IntersectionObserver((es) => { if (es.some((x) => x.isIntersecting) && !$("#moreBtn").hidden) { state.shown += PAGE; renderListOnly(); } }, { rootMargin: "600px" }).observe($("#moreBtn"));
   if (state.open) openDetail(state.open);
   if (state.nearOnBoot) locate();
+  if (state.compareOnBoot) {
+    const ids = state.compareOnBoot.filter((id) => ALL.some((c) => c.id === id));
+    if (ids.length >= 2) { state.compare = new Set(ids); save(); renderCompareBar(); openCompareModal(); }
+  }
 }
 boot();
