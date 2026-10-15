@@ -700,15 +700,16 @@
     "official_notice_items": 0,
     "shelter_setup_registered": 0,
     "verified_condition_facts": 10,
-    "surveyed_condition_facts": 3106,
-    "parking_tent_side": 1288,
-    "parking_cart_required": 15,
+    "surveyed_condition_facts": 251,
+    "parking_tent_side": 17,
+    "parking_cart_required": 17,
     "parking_shared": 1,
     "power_high_w": 10,
-    "firewood_allowed": 2420,
-    "firewood_prohibited": 84,
+    "firewood_allowed": 85,
+    "firewood_prohibited": 110,
     "private_bathroom": 137,
-    "kids_play_features": 2174
+    "kids_play_features": 2174,
+    "confirmed_condition_facts": 2855
   },
-  "updated_at": "2026-10-15T07:13:33.661Z"
+  "updated_at": "2026-10-15T08:29:58.577Z"
 }
