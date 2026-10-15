@@ -40,6 +40,7 @@ const stats = {
   total: campgrounds.length,
   verified: 0,
   surveyed: 0,
+  confirmed: 0,
   parking_tent_side: 0,
   parking_cart_required: 0,
   parking_shared: 0,
@@ -90,7 +91,8 @@ for (const camp of campgrounds) {
 
   // 통계 집계
   if (conditions.status === "VERIFIED") stats.verified++;
-  else stats.surveyed++;
+  else if (conditions.status === "SURVEYED") stats.surveyed++;
+  else stats.confirmed++;
 
   if (conditions.parking?.tent_side === true) stats.parking_tent_side++;
   else if (conditions.parking?.cart_required === true || conditions.parking?.mode === "CART_REQUIRED") stats.parking_cart_required++;
@@ -131,6 +133,7 @@ if (existsSync(metaPath)) {
     field_conditions: campgrounds.length,
     verified_condition_facts: stats.verified,
     surveyed_condition_facts: stats.surveyed,
+    confirmed_condition_facts: stats.confirmed,
     parking_tent_side: stats.parking_tent_side,
     parking_cart_required: stats.parking_cart_required,
     parking_shared: stats.parking_shared,
@@ -153,12 +156,13 @@ if (existsSync(metaPath)) {
 console.log("\n=== 전수조사 완료 통계 ===");
 console.log(`- 총 캠핑장 수: ${stats.total.toLocaleString()}개소`);
 console.log(`- 파일럿 정밀 검증: ${stats.verified}개소`);
-console.log(`- 전수 분석 완료: ${stats.surveyed.toLocaleString()}개소`);
+console.log(`- 고캠핑 등록값만(CONFIRMED): ${stats.confirmed.toLocaleString()}개소`);
+console.log(`- 소개글 신호 포함(SURVEYED): ${stats.surveyed.toLocaleString()}개소`);
 console.log(`- 텐트 옆 단독 주차: ${stats.parking_tent_side.toLocaleString()}개소`);
 console.log(`- 짐수레/손수레 이동: ${stats.parking_cart_required}개소`);
 console.log(`- 지정 주차장 도보 이동: ${stats.parking_shared}개소`);
-console.log(`- 전기 제공(600W 법정표준 등): ${stats.power_available.toLocaleString()}개소`);
-console.log(`- 700W+ 고전력 지원: ${stats.power_high_w}개소`);
+console.log(`- 전기 제공 언급: ${stats.power_available.toLocaleString()}개소`);
+console.log(`- 소개글 700W+ 언급(SURVEYED): ${stats.power_high_w}개소`);
 console.log(`- 장작 불멍 허용: ${stats.firewood_allowed.toLocaleString()}개소`);
 console.log(`- 장작 금지 (숯만 가능 등): ${stats.firewood_prohibited}개소`);
 console.log(`- 단독 개별 욕실/화장실: ${stats.private_bathroom}개소`);

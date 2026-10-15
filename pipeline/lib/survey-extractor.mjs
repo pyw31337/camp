@@ -47,6 +47,8 @@ const FEATURE_PATTERNS = [
  * @param {object|null} pilotFact 파일럿 검증 데이터 (존재 시 최우선 반영)
  * @returns {object} 정규화된 field_conditions 객체
  */
+const allowedOf = (code) => code === "ALLOWED" ? true : code === "PROHIBITED" ? false : null;
+
 export function extractCampConditions(camp, detail = null, pilotFact = null) {
   // 1. 파일럿 검증 데이터가 있으면 최우선 적용
   if (pilotFact) {
@@ -54,7 +56,13 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
     const autoSites = zones
       .filter((z) => z.parking === "SITE_ADJACENT")
       .reduce((total, z) => total + (Number(z.site_count) || 0), 0) || null;
-    const firewoodSale = (pilotFact.rental_offers || []).some((r) => /장작/.test(r.item)) || pilotFact.firewood_allowed === "ALLOWED";
+    const firewoodSale = (pilotFact.rental_offers || []).some((r) => /장작/.test(r.item)) || null;
+    // 구역마다 주차 동선이 다를 수 있다. 모든 구역이 사이트 옆 주차일 때만 tent_side=true,
+    // 일부만 그렇다면 null + 구역 수를 남겨 ‘조건부’로 판정하게 한다.
+    const adjacentZones = zones.filter((z) => z.parking === "SITE_ADJACENT").length;
+    const tentSide = zones.length
+      ? adjacentZones === zones.length ? true : adjacentZones > 0 ? null : false
+      : pilotFact.parking_mode === "SITE_ADJACENT" ? true : pilotFact.parking_mode ? false : null;
 
     return {
       version: 2,
@@ -62,7 +70,8 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
       parking: {
         state: "VERIFIED",
         mode: pilotFact.parking_mode,
-        tent_side: pilotFact.parking_mode === "SITE_ADJACENT",
+        tent_side: tentSide,
+        tent_side_zones: zones.length ? { adjacent: adjacentZones, total: zones.length } : null,
         cart_required: pilotFact.parking_mode === "CART_REQUIRED",
         shared_nearby: pilotFact.parking_mode === "SHARED_NEARBY",
         drop_off_external: pilotFact.parking_mode === "DROP_OFF_EXTERNAL",
@@ -70,15 +79,15 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
       },
       shelter_setup: {
         state: "VERIFIED",
-        max_tents: pilotFact.shelter_setup_rule?.max_tents ?? 1,
-        max_tarps: pilotFact.shelter_setup_rule?.max_tarps ?? 1,
+        max_tents: pilotFact.shelter_setup_rule?.max_tents ?? null,
+        max_tarps: pilotFact.shelter_setup_rule?.max_tarps ?? null,
         canopy_allowed: pilotFact.shelter_setup_rule?.canopy_allowed ?? null,
         note: pilotFact.shelter_setup_rule?.note ?? null,
       },
       power: {
         state: "VERIFIED",
-        available: true,
-        limit_w: pilotFact.power_max_w,
+        available: Number(pilotFact.power_max_w) > 0 ? true : null,
+        limit_w: Number(pilotFact.power_max_w) > 0 ? Number(pilotFact.power_max_w) : null,
         breaker_capacity: pilotFact.breaker_capacity ?? null,
         individual_breaker: pilotFact.individual_breaker ?? null,
       },
@@ -88,16 +97,18 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
       },
       charcoal: {
         state: "VERIFIED",
-        allowed: pilotFact.charcoal_allowed === "ALLOWED",
+        allowed: allowedOf(pilotFact.charcoal_allowed),
+        rule: pilotFact.charcoal_allowed ?? null,
       },
       firewood: {
         state: "VERIFIED",
-        allowed: pilotFact.firewood_allowed === "ALLOWED",
-        sold: firewoodSale || null,
+        allowed: allowedOf(pilotFact.firewood_allowed),
+        rule: pilotFact.firewood_allowed ?? null,
+        sold: firewoodSale,
       },
       fire_pit: {
-        state: "VERIFIED",
-        arrangement: "개별 지참 화로대(받침대 필수)",
+        state: pilotFact.fire_pit_arrangement ? "VERIFIED" : "UNKNOWN",
+        arrangement: pilotFact.fire_pit_arrangement ?? null,
       },
       site_size: {
         state: "VERIFIED",
@@ -118,7 +129,9 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
         url: pilotFact.evidence?.source_url ?? null,
         checked_at: pilotFact.evidence?.observed_at ?? null,
         tier: "A",
-        reviewer: pilotFact.evidence?.reviewer ?? "moyo-pilot-team",
+        reviewer: pilotFact.evidence?.reviewer ?? null,
+        next_review_due_at: pilotFact.evidence?.next_review_due_at ?? null,
+        reviewed_field_codes: pilotFact.evidence?.reviewed_field_codes ?? [],
       },
     };
   }
@@ -189,14 +202,14 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
     } else if (wattMatch[2]) {
       limitW = parseInt(wattMatch[2], 10) * 1000;
     }
-  } else if (HIGH_POWER_KEYWORD_RE.test(textCorpus)) {
-    limitW = 1000;
   } else if (mentionsElectricity) {
     // 관광진흥법 시행규칙 별표 7 야영장의 안전·위생기준: 천막 1개소당 600W 이하 법정 기준
     regulatoryReferenceW = 600;
   }
 
-  const powerState = limitW ? "CONFIRMED" : (mentionsElectricity ? "PARTIAL" : "UNKNOWN");
+  // 소개글에서 찾은 W 숫자는 발견 신호(SURVEYED)다. ‘고전력’ 같은 표현만으로 W를 만들지 않는다.
+  const highPowerMention = HIGH_POWER_KEYWORD_RE.test(textCorpus);
+  const powerState = limitW ? "SURVEYED" : (mentionsElectricity ? "PARTIAL" : "UNKNOWN");
 
   // --- [3. 화기 (불멍 / 바베큐 / 숯) 분석] ---
   const fireProhibited = camp?.fire === "불가" || FIRE_PROHIBITED_RE.test(textCorpus);
@@ -208,31 +221,37 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
   let firewoodAllowed = null;
   let charcoalAllowed = null;
   let firePitArrangement = String(camp?.fire_pit ?? camp?.fire ?? "").trim() || null;
+  // 고캠핑 화로대 필드(camp.fire)에서 온 결론은 CONFIRMED, 소개글 문장에서 온 결론은 SURVEYED.
+  let fireFrom = null;
 
   if (camp?.fire === "불가") {
     firewoodAllowed = false;
     charcoalAllowed = false;
     firePitArrangement = "화기 사용 전면 금지";
+    fireFrom = "FIELD";
   } else if (charcoalOnly || (fireProhibited && !firewoodSale)) {
     firewoodAllowed = false;
     charcoalAllowed = true;
     firePitArrangement = "숯만 가능 (장작 금지)";
+    fireFrom = "TEXT";
   } else if (firewoodAllowedText) {
     firewoodAllowed = true;
     charcoalAllowed = true;
-    if (!firePitArrangement) firePitArrangement = "개별 화로대 지참";
+    fireFrom = "TEXT";
   } else if (camp?.fire === "공동취사장") {
     firewoodAllowed = false;
     charcoalAllowed = true;
     firePitArrangement = "공동취사장 내에서만 가능";
+    fireFrom = "FIELD";
   } else if (firePitIndividual) {
     charcoalAllowed = true;
-    if (!firePitArrangement) firePitArrangement = "개별 화로대 사용";
+    fireFrom = "FIELD";
   }
+  const fireState = (known) => !known ? "UNKNOWN" : fireFrom === "FIELD" ? "CONFIRMED" : "SURVEYED";
 
   // --- [4. 위생 시설 분석] ---
-  const hasPrivateBath = (camp?.legal_business_types || camp?.types || []).some(t => /내부화장실|내부샤워실/.test(t)) ||
-    PRIVATE_BATH_RE.test(textCorpus);
+  const privateBathField = (camp?.legal_business_types || camp?.types || []).some(t => /내부화장실|내부샤워실/.test(t));
+  const hasPrivateBath = privateBathField || PRIVATE_BATH_RE.test(textCorpus);
   const is24hHotWater = HOT_WATER_24H_RE.test(textCorpus);
   const hasHotWater = is24hHotWater ? "24시간" : (hasAmenity(/온수/) || /온수/.test(textCorpus) ? "제공" : null);
 
@@ -242,6 +261,7 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
     showers_count: camp?.showers || null,
     sinks_count: camp?.sinks || null,
     private_bathroom: hasPrivateBath,
+    private_bathroom_state: privateBathField ? "CONFIRMED" : hasPrivateBath ? "SURVEYED" : "UNKNOWN",
     hot_water: hasHotWater,
     note: hasPrivateBath ? "단독 개별 화장실/욕실 구비" : (camp?.toilets > 0 ? `공용 화장실 ${camp.toilets}개소 / 샤워실 ${camp.showers ?? 0}개소` : null)
   };
@@ -275,7 +295,8 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
     : (Array.isArray(camp?.sizes) ? camp.sizes : []);
   let sizes = sizeEntries
     .filter(([width, depth]) => Number(width) > 0 && Number(depth) > 0)
-    .map(([width, depth, count]) => ({ width_m: Number(width), depth_m: Number(depth), count: Number(count) || null, surface: floors[0]?.type || "파쇄석", parking: parkingMode }));
+    .map(([width, depth, count]) => ({ width_m: Number(width), depth_m: Number(depth), count: Number(count) || null }));
+  let sizesFrom = sizes.length ? "FIELD" : null;
 
   // 규격이 고캠핑 필드에 없는 경우 텍스트에서 보강
   if (sizes.length === 0) {
@@ -284,14 +305,14 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
       const w = parseFloat(sizeMatch[1]);
       const d = parseFloat(sizeMatch[2]);
       if (w >= 3 && w <= 20 && d >= 3 && d <= 20) {
-        sizes = [{ width_m: w, depth_m: d, count: null, surface: floors[0]?.type || "파쇄석", parking: parkingMode }];
+        sizes = [{ width_m: w, depth_m: d, count: null }];
+        sizesFrom = "TEXT";
       }
     }
   }
 
   // --- [7. 텐트·타프 피칭 규칙] ---
-  const maxSize = sizes.reduce((max, s) => Math.max(max, s.width_m * s.depth_m), 0);
-  const canopyAllowed = maxSize >= 48; // 6x8m 이상이면 3x3m 캐노피 여유 수용 가능
+  // 사이트 면적으로 타프·캐노피 허용을 추정하지 않는다(PILOT_INTAKE_CONTRACT 2.1절).
 
   // --- [8. 장비 대여 품목] ---
   const rentalEquip = Array.isArray(camp?.rental) ? camp.rental : (Array.isArray(camp?.rental_equipment) ? camp.rental_equipment : []);
@@ -307,9 +328,9 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
 
   return {
     version: 2,
-    status: (parkingMode !== "UNKNOWN" || limitW != null || firewoodAllowed != null) ? "SURVEYED" : "CONFIRMED",
+    status: (parkingMode !== "UNKNOWN" || limitW != null || fireFrom === "TEXT" || sizesFrom === "TEXT" || (hasPrivateBath && !privateBathField)) ? "SURVEYED" : "CONFIRMED",
     parking: {
-      state: parkingMode !== "UNKNOWN" ? "CONFIRMED" : "UNKNOWN",
+      state: parkingMode !== "UNKNOWN" ? "SURVEYED" : "UNKNOWN",
       mode: parkingMode,
       tent_side: tentSide,
       cart_required: cartRequired,
@@ -318,11 +339,11 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
       auto_camping_sites: autoPitchSites,
     },
     shelter_setup: {
-      state: sizes.length ? "CONFIRMED" : "UNKNOWN",
-      max_tents: 1,
-      max_tarps: maxSize >= 35 ? 1 : 0,
-      canopy_allowed: canopyAllowed,
-      note: maxSize >= 35 ? "1텐트+1타프 표준 피칭 가능 규격" : (sizes.length ? "소형 데크 규격 내 피칭 권장" : null),
+      state: "UNKNOWN",
+      max_tents: null,
+      max_tarps: null,
+      canopy_allowed: null,
+      note: null,
     },
     power: {
       state: powerState,
@@ -331,26 +352,27 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
       regulatory_reference_w: regulatoryReferenceW,
       breaker_capacity: limitW ? `${Math.round((limitW / 220) * 10) / 10}A` : null,
       statutory_standard: regulatoryReferenceW === 600 && !limitW,
+      high_power_mention: highPowerMention || null,
     },
     ground: {
       state: floors.length ? "CONFIRMED" : "UNKNOWN",
       types: floors,
     },
     charcoal: {
-      state: charcoalAllowed != null ? "CONFIRMED" : "UNKNOWN",
+      state: fireState(charcoalAllowed != null),
       allowed: charcoalAllowed,
     },
     firewood: {
-      state: firewoodAllowed != null ? "CONFIRMED" : (firewoodSale ? "PARTIAL" : "UNKNOWN"),
+      state: firewoodAllowed != null ? fireState(true) : (firewoodSale ? "PARTIAL" : "UNKNOWN"),
       allowed: firewoodAllowed,
       sold: firewoodSale || null,
     },
     fire_pit: {
-      state: firePitArrangement ? "CONFIRMED" : "UNKNOWN",
+      state: fireState(Boolean(firePitArrangement)),
       arrangement: firePitArrangement,
     },
     site_size: {
-      state: sizes.length ? "CONFIRMED" : "UNKNOWN",
+      state: sizesFrom === "FIELD" ? "CONFIRMED" : sizesFrom === "TEXT" ? "SURVEYED" : "UNKNOWN",
       groups: sizes,
     },
     sanitary,
