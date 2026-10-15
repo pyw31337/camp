@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 /**
- * 허용된 공공·파일럿 원천의 빈자리를 안심 시간대(평일 08~18시 KST 회피)에 관측하는 파이프라인.
+ * 승인된 원천이 제출한 빈자리 관측(registry/pilot-observations.json)을 저부하 시간대(평일 08~18시 KST 회피)에
+ * 읽기 모델로 발행한다. 이 스크립트는 예약 사이트를 직접 조회하지 않는다. 커넥터는 원천 승인 카드
+ * (PILOT_INTAKE_CONTRACT 2절)가 APPROVED_LIVE/APPROVED_OBSERVATION일 때만 별도로 추가한다.
  *
  * 사용법:
  *   node pipeline/scripts/observe-public-availability.mjs [--force] [--dry-run]
@@ -54,19 +56,13 @@ const [seoulPayload, observationsPayload, campgrounds] = await Promise.all([
   readJson(campgroundsPath),
 ]);
 
-// 관측 시각 최신화 (실행 시점 반영)
-const updatedObservations = (observationsPayload.observations ?? []).map((obs) => {
-  // 샘플 레지스트리의 미래 관측일 유지
-  return {
-    ...obs,
-    observed_at: now.toISOString(),
-    expires_at: new Date(now.getTime() + 24 * 60 * 60 * 1000).toISOString(),
-  };
-});
+// 관측 시각은 제출된 원본 값을 그대로 쓴다. 실행 시각으로 덮어쓰면 오래된 관측이
+// 방금 확인한 빈자리처럼 보이므로 절대 갱신하지 않는다.
+const submittedObservations = observationsPayload.observations ?? [];
 
 const model = buildAvailabilityReadModel({
   seoulPayload,
-  observationsPayload: updatedObservations,
+  observationsPayload: submittedObservations,
   existingRecords,
   campgrounds: Array.isArray(campgrounds) ? campgrounds : campgrounds.campgrounds,
   generatedAt: now.toISOString(),
@@ -74,6 +70,7 @@ const model = buildAvailabilityReadModel({
   observationTtlMinutes: 1440,
 });
 
+if (model.stats.observations_rejected) console.log(`[제외] 계약 미충족 관측 ${model.stats.observations_rejected}건: ${model.rejected_observations.map((r) => r.reason).join(", ")}`);
 console.log(`[관측 완료] 공식 접수: ${model.stats.official_application_open}건 | 빈자리 관측: ${model.stats.observed_available}건 | 활성 캠핑장: ${model.stats.total_active_campgrounds}곳`);
 
 if (!isDryRun) {

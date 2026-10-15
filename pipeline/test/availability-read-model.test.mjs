@@ -7,6 +7,8 @@ import {
   OFFICIAL_APPLICATION_OPEN,
   OBSERVED_AVAILABLE,
   OBSERVED_UNAVAILABLE,
+  OBSERVATION_FAILED,
+  observationRejectReason,
 } from "../lib/availability-read-model.mjs";
 import { isOfficialApplicationOpen, isReceiptOpen, serviceCoversStay } from "../lib/seoul-yeyak.mjs";
 
@@ -73,7 +75,10 @@ test("최근 관측 읽기 모델: OBSERVED_AVAILABLE 발행 및 후속 OBSERVED
     state: OBSERVED_AVAILABLE,
     observed_at: "2026-10-15T00:00:00Z", // 09:00 KST
     expires_at: "2026-10-16T00:00:00Z",
+    provider: "example-partner",
+    source_approval: "APPROVED_OBSERVATION",
     source_url: "https://example.com/camps/3397",
+    evidence_ref: "partner-run:2026-10-15T00:00Z#A",
     remaining_count: 2,
   };
 
@@ -87,12 +92,15 @@ test("최근 관측 읽기 모델: OBSERVED_AVAILABLE 발행 및 후속 OBSERVED
   assert.equal(model1.stats.observed_available, 1);
   assert.equal(model1.records.length, 1);
   assert.equal(model1.records[0].state, OBSERVED_AVAILABLE);
-  assert.equal(model1.records[0].remaining_count, 2);
+  // 관측 승인 원천의 수량은 실시간 재고가 아니므로 노출하지 않는다.
+  assert.equal(model1.records[0].remaining_count, null);
+  assert.equal(model1.records[0].inventory_verified, false);
   assert.equal(model1.records[0].use.from, "2026-10-18T00:00:00+09:00");
   assert.equal(model1.records[0].use.to, "2026-10-19T00:00:00+09:00");
 
   // 2. 다음 관측(10:00 KST)에서 빈자리가 사라짐 (OBSERVED_UNAVAILABLE)
   const obs2 = {
+    ...obs1,
     campground_id: "3397",
     product_name: "A존 데크",
     target_date: targetDate,
@@ -113,3 +121,46 @@ test("최근 관측 읽기 모델: OBSERVED_AVAILABLE 발행 및 후속 OBSERVED
   assert.equal(model2.stats.observed_unavailable, 1);
 });
 
+
+test("관측 제출 계약: 근거·승인·관측 시각·카탈로그 매칭이 없으면 발행하지 않는다", () => {
+  const base = {
+    campground_id: "3397", product_name: "A존", target_date: "2026-10-18", state: OBSERVED_AVAILABLE,
+    observed_at: "2026-10-15T00:00:00Z", provider: "partner", source_approval: "APPROVED_OBSERVATION",
+    source_url: "https://example.com/a", evidence_ref: "run-1",
+  };
+  const cases = [
+    [{ ...base, observed_at: undefined }, "missing_observed_at"],
+    [{ ...base, source_approval: undefined }, "source_not_approved"],
+    [{ ...base, source_approval: "MANUAL_REVIEW_ONLY" }, "source_not_approved"],
+    [{ ...base, evidence_ref: "" }, "missing_evidence"],
+    [{ ...base, source_url: "http://example.com/a" }, "missing_source_url"],
+    [{ ...base, campground_id: "pilot-001-hoengseong" }, "campground_not_in_catalog"],
+  ];
+  for (const [obs, reason] of cases) {
+    assert.equal(observationRejectReason(obs, { catalogIds: new Set(["3397"]) }), reason);
+  }
+  const model = buildAvailabilityReadModel({
+    observationsPayload: cases.map(([o]) => o),
+    campgrounds: camps,
+    generatedAt: "2026-10-15T10:00:00Z",
+  });
+  assert.equal(model.records.length, 0);
+  assert.equal(model.stats.observations_rejected, cases.length);
+  assert.equal(model.scope, "OFFICIAL_APPLICATION_STATUS");
+});
+
+test("관측 실패는 이전 정상 관측을 지우지 않고, 만료는 기본 TTL을 넘지 않는다", () => {
+  const ok = {
+    campground_id: "3397", product_name: "A존", target_date: "2026-10-18", state: OBSERVED_AVAILABLE,
+    observed_at: "2026-10-15T00:00:00Z", expires_at: "2026-10-20T00:00:00Z", provider: "partner",
+    source_approval: "APPROVED_LIVE", inventory_verified: true, remaining_count: 3,
+    source_url: "https://example.com/a", evidence_ref: "api:req-1",
+  };
+  const failed = { ...ok, state: OBSERVATION_FAILED, observed_at: "2026-10-15T05:00:00Z", remaining_count: null };
+  const model = buildAvailabilityReadModel({ observationsPayload: [ok, failed], campgrounds: camps, generatedAt: "2026-10-15T10:00:00Z" });
+  assert.equal(model.records.length, 1);
+  assert.equal(model.stats.observation_failed, 1);
+  assert.equal(model.records[0].remaining_count, 3);
+  assert.equal(model.records[0].inventory_verified, true);
+  assert.equal(model.records[0].expires_at, "2026-10-16T00:00:00.000Z");
+});
