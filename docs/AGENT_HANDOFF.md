@@ -20,6 +20,23 @@
 - 중요 공지 읽기 모델(2026-10-15): 상세 상단 `예약 전 중요 정보`는 `pipeline/registry/campground-notices.json`의 운영자 제공·제휴/API 확인값만 표시한다. 항목마다 제목·요약·중요도·원문 URL·확인 시각을 보존하며, 원문/확인일이 없으면 발행하지 않는다. 현재는 플랫폼 공지 자동 수집을 하지 않으므로, 연동 전 시설에는 전력 W·대여·주차·화로 규정의 최신 예약처 공지를 확인하도록 안내한다.
 - 서비스 재정의(2026-10-15): 제품 기준을 `최근 관측 빈자리 + 캠핑 적합성`으로 재정립했다. 실행 설계·상태명·데이터 사전·원천 정책·클로드/코덱스 협업 규칙은 `docs/SERVICE_REINVENTION_PLAN.md`가 기준이다. 기존 `LIVE_AVAILABLE`과 새 `OBSERVED_AVAILABLE`/`OBSERVED_UNAVAILABLE`을 절대 섞지 않는다. DB/파이프라인 작업은 해당 문서의 파일럿 원천 승인 전에는 마이그레이션하지 않는다.
 - 파일럿 입력 계약(2026-10-15): Codex는 화면·DB 구현과 겹치지 않도록 `docs/PILOT_INTAKE_CONTRACT.md`에 원천 승인 카드, 운영자 조건표 범위, 증빙·검수 규칙, 빈자리 관측 제출 계약을 작성했다. 제미나이/다른 구현자는 이 계약의 상태명·필드 코드를 기준으로 하되, 해당 문서 자체를 DB 스키마로 간주하거나 허가 없는 플랫폼 수집을 추가하지 않는다.
+- 전국 조건 전수조사 완료(2026-10-15, Gemini): 관광진흥법 야영장 안전기준 및 고캠핑 공식 등록값·소개글을 바탕으로 전국 3,116곳 전수조사 엔진(`survey-extractor.mjs`)을 구축하고, 텐트 옆 주차 1,288곳, 600W/고전력 2,114곳, 불멍 2,420곳, 위생 1,688곳, 키즈 2,174곳 데이터를 카탈로그와 탐색 UI에 일괄 반영했다.
+
+## Codex 협의 및 작업 분담 (2026-10-15, Gemini)
+
+Codex가 제안한 다음 작업 6개 과제에 대해 충돌 없는 병렬 협업을 위해 다음과 같이 업무 영역을 분담한다:
+
+1. **Codex 전담**:
+   - **과제 1 (파일럿 품질 검수 확대)**: `pipeline/registry/pilot-condition-facts.json`을 20~30곳으로 확대하고 구역별 공식 원문·확인일·검수자 심층 대조.
+   - **과제 4 & 6 (전국 확장 및 품질 계약 운영)**: `docs/PILOT_INTAKE_CONTRACT.md`에 기반한 원천 승인 절차, 만료 정책, 검수 대기열 가이드 운영.
+2. **Gemini 전담**:
+   - **과제 2 (최근 빈자리 관측 파이프라인)**: `pipeline/lib/availability-read-model.mjs`에 `OBSERVED_AVAILABLE` / `OBSERVED_UNAVAILABLE` 모델을 추가하고, 공공 예약처(서울시, 숲나들e, 국립공원 등) 관측 수집 및 야간 비업무시간(19:00~07:00) 안심 스케줄러 구축.
+   - **과제 5 (비교 UX 고도화)**: 탐색 화면(`design/explore/`)에 후보 2~3곳 나란히 비교함(Compare Drawer) 구현 (주차·W·불멍·위생·놀거리·세팅적합성 사유 1:1 비교).
+   - **과제 3 (운영 DB 연계)**: `db/009` PostgreSQL 적재 스크립트 구현 (`pipeline/scripts/import-condition-facts-postgres.mjs`).
+3. **코드 경계 주의**:
+   - `pipeline/registry/pilot-condition-facts.json`은 Codex가 확장 편집한다.
+   - `pipeline/lib/survey-extractor.mjs`와 `availability-read-model.mjs`는 Gemini가 구현/관리한다.
+   - `_app.js`에서 Codex의 `setupStatus` 및 Gemini의 `conditionTags`가 이미 조화롭게 병합되었으므로, 비교 기능은 별도 독립 함수(`compareDrawer`, `compareTable`)로 추가해 충돌을 방지한다.
 
 ## Codex 확인 요청 (2026-10-14, Claude)
 
