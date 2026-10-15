@@ -1,5 +1,6 @@
 import { themesOf } from "./themes.mjs";
 import { classifyChannels } from "./booking-intel.mjs";
+import { extractCampConditions } from "./survey-extractor.mjs";
 
 // 웹 탐색 화면용 데이터: 고캠핑 시설 + 주변 공중화장실 + 공식 안내 요금(TourAPI) + 예약처 규칙·다가오는 오픈 일정.
 // 원칙: 각 값의 출처·확인 시각을 함께 싣는다. 실시간 재고·판매가는 만들지 않는다(예약은 공식 예약처로 연결).
@@ -37,79 +38,12 @@ const sizeEntries = (campground) => Array.isArray(campground?.site_sizes)
  * 현장 조건의 공통 읽기 모델. UNKNOWN은 ‘없음/불가’가 아니라 원천에 값이
  * 없다는 뜻이다. 조건별 확인 화면을 추가할 때 이 모델을 단일 계약으로 쓴다.
  */
-export function buildFieldConditions(campground, pilotFact = null) {
+export function buildFieldConditions(campground, pilotFact = null, detail = null, { survey = false } = {}) {
   if (pilotFact) {
-    const zones = Array.isArray(pilotFact.zones) ? pilotFact.zones : [];
-    const autoSites = zones
-      .filter((z) => z.parking === "SITE_ADJACENT")
-      .reduce((total, z) => total + (Number(z.site_count) || 0), 0) || null;
-    const firewoodSale = (pilotFact.rental_offers || []).some((r) => /장작/.test(r.item)) || pilotFact.firewood_allowed === "ALLOWED";
-
-    return {
-      version: 2,
-      status: "VERIFIED",
-      parking: {
-        state: "VERIFIED",
-        mode: pilotFact.parking_mode,
-        tent_side: pilotFact.parking_mode === "SITE_ADJACENT",
-        cart_required: pilotFact.parking_mode === "CART_REQUIRED",
-        shared_nearby: pilotFact.parking_mode === "SHARED_NEARBY",
-        drop_off_external: pilotFact.parking_mode === "DROP_OFF_EXTERNAL",
-        auto_camping_sites: autoSites,
-      },
-      shelter_setup: {
-        state: "VERIFIED",
-        max_tents: pilotFact.shelter_setup_rule?.max_tents ?? 1,
-        max_tarps: pilotFact.shelter_setup_rule?.max_tarps ?? 1,
-        canopy_allowed: pilotFact.shelter_setup_rule?.canopy_allowed ?? null,
-        note: pilotFact.shelter_setup_rule?.note ?? null,
-      },
-      power: {
-        state: "VERIFIED",
-        available: true,
-        limit_w: pilotFact.power_max_w,
-        breaker_capacity: pilotFact.breaker_capacity ?? null,
-        individual_breaker: pilotFact.individual_breaker ?? null,
-      },
-      ground: {
-        state: "VERIFIED",
-        types: zones.map((z) => ({ type: z.surface, count: Number(z.site_count) || null })),
-      },
-      charcoal: {
-        state: "VERIFIED",
-        allowed: pilotFact.charcoal_allowed === "ALLOWED",
-      },
-      firewood: {
-        state: "VERIFIED",
-        allowed: pilotFact.firewood_allowed === "ALLOWED",
-        sold: firewoodSale || null,
-      },
-      fire_pit: {
-        state: "VERIFIED",
-        arrangement: "개별 지참 화로대(받침대 필수)",
-      },
-      site_size: {
-        state: "VERIFIED",
-        groups: zones.map((z) => ({
-          width_m: Number(z.size_w),
-          depth_m: Number(z.size_h),
-          count: Number(z.site_count) || null,
-          name: z.name,
-          surface: z.surface,
-          parking: z.parking,
-        })),
-      },
-      sanitary: pilotFact.sanitary ?? null,
-      features: pilotFact.features ?? [],
-      rental_offers: pilotFact.rental_offers ?? [],
-      source: {
-        label: "모여라캠핑 파일럿 검증 (공식 원문 대조)",
-        url: pilotFact.evidence?.source_url ?? null,
-        checked_at: pilotFact.evidence?.observed_at ?? null,
-        tier: "A",
-        reviewer: pilotFact.evidence?.reviewer ?? "moyo-pilot-team",
-      },
-    };
+    return extractCampConditions(campground, detail, pilotFact);
+  }
+  if (survey) {
+    return extractCampConditions(campground, detail, null);
   }
 
   const amenities = [...(Array.isArray(campground?.amenities) ? campground.amenities : []), ...(Array.isArray(campground?.amenities_etc) ? campground.amenities_etc : [])];
@@ -181,7 +115,7 @@ export function buildImportantInfo(notices, campgroundId) {
  * @param {object|null} [notices] campground-notices.json
  * @param {object|null} [pilotFacts] pilot-condition-facts.json
  */
-export function buildExploreRecords(camps, toilets, fees, seoul = new Map(), notices = null, pilotFacts = null) {
+export function buildExploreRecords(camps, toilets, fees, seoul = new Map(), notices = null, pilotFacts = null, campDetails = null, options = {}) {
   const pilotMap = new Map();
   const matchedPilotIds = new Set();
   const pilots = Array.isArray(pilotFacts?.pilot_campgrounds) ? pilotFacts.pilot_campgrounds : [];
@@ -225,7 +159,7 @@ export function buildExploreRecords(camps, toilets, fees, seoul = new Map(), not
       sizes: (c.site_sizes ?? []).map((s) => [s.width_m, s.depth_m, s.count]),
       floors: (c.floors ?? []).map((f) => [f.floor, f.count]),
       amenities: [...(c.amenities ?? []), ...(c.amenities_etc ?? [])],
-      field_conditions: buildFieldConditions(c, pilotFact),
+      field_conditions: buildFieldConditions(c, pilotFact, campDetails?.[id], options),
       important_info: buildImportantInfo(notices, id),
       env: c.environment ?? [],
       themes: c.themes ?? [],

@@ -1229,20 +1229,20 @@ function card(c) {
   const km = state.here ? ` · ${dist(state.here, c).toFixed(0)}km` : "";
   const applications = officialOpenRecords(c, { dateMatch: Boolean(state.checkIn && state.checkOut) });
   const verifiedBadge = c.field_conditions?.status === "VERIFIED" ? `<span class="tag tag-verified">${ic("#l-shield-check", "i-xs")}조건 검증</span>` : "";
-  const verifiedTags = c.field_conditions?.status === "VERIFIED" ? [
-    c.field_conditions.parking?.tent_side ? `<span class="tag">${ic("#l-car", "i-xs")}텐트 옆 주차</span>` : c.field_conditions.parking?.mode === "CART_REQUIRED" ? `<span class="tag">${ic("#l-shopping-cart", "i-xs")}짐수레 이동</span>` : "",
-    c.field_conditions.power?.limit_w ? `<span class="tag">${ic("#l-plug-zap", "i-xs")}${c.field_conditions.power.limit_w}W</span>` : "",
-    c.field_conditions.firewood?.allowed === true ? `<span class="tag">${ic("#l-flame", "i-xs")}장작 불멍</span>` : c.field_conditions.firewood?.allowed === false ? `<span class="tag">${ic("#l-ban", "i-xs")}장작 금지</span>` : "",
-    c.field_conditions.sanitary?.private_bathroom === true ? `<span class="tag">${ic("#l-shower-head", "i-xs")}개별 욕실</span>` : "",
-  ].filter(Boolean).join("") : "";
   const setup = hasSetup() ? setupStatus(c) : null;
   const setupTag = !setup ? "" : `<span class="tag tag-setup ${setup.overall.toLowerCase()}">${ic(setup.overall === "MATCH" ? "#l-circle-check" : setup.overall === "MISMATCH" ? "#l-circle-x" : "#l-circle-help", "i-xs")}${SETUP_LABEL[setup.overall]}${setup.overall === "UNKNOWN" ? ` ${setup.checks.filter((x) => x.state === "UNKNOWN").length}` : ""}</span>`;
+  const conditionTags = [
+    c.field_conditions?.parking?.tent_side ? `<span class="tag">${ic("#l-car", "i-xs")}텐트 옆 주차</span>` : (c.field_conditions?.parking?.cart_required || c.field_conditions?.parking?.mode === "CART_REQUIRED") ? `<span class="tag">${ic("#l-shopping-cart", "i-xs")}짐수레 이동</span>` : "",
+    c.field_conditions?.power?.limit_w ? `<span class="tag">${ic("#l-plug-zap", "i-xs")}${c.field_conditions.power.limit_w}W</span>` : "",
+    c.field_conditions?.firewood?.allowed === true ? `<span class="tag">${ic("#l-flame", "i-xs")}장작 불멍</span>` : c.field_conditions?.firewood?.allowed === false ? `<span class="tag">${ic("#l-ban", "i-xs")}장작 금지</span>` : "",
+    c.field_conditions?.sanitary?.private_bathroom === true ? `<span class="tag">${ic("#l-shower-head", "i-xs")}개별 욕실</span>` : "",
+  ].filter(Boolean).slice(0, 3).join("");
   return `<button class="card" type="button" data-open="${c.id}" aria-current="${state.open === c.id}">
     <span class="thumb${!c.ph && !c.img && c.sn ? " snap" : ""}">${c.ph ? `<img src="../media/${esc(largeLocalPhoto(c.ph))}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">` : c.sn ? `<img src="${esc(String(c.sn).replace(/^http:/, "https:"))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentElement.classList.remove('snap');this.remove()"><em class="snap-tag">검색 사진</em>` : ic("#t-tent")}</span>
     <span class="card-body">
       <span class="card-title"><h3>${esc(c.name)}</h3>${state.saved.has(c.id) ? ic("#l-heart", "i-xs saved-mark") : ""}</span>
       <span class="loc">${ic("#l-map-pin", "i-xs")}${esc([c.sido, c.sigungu].filter(Boolean).join(" "))}${km}${OP[c.op] ? ` · ${OP[c.op]}` : ""}</span>
-      <span class="tags">${setupTag}${verifiedBadge}${verifiedTags}${c.booking.next ? `<span class="tag tag-ember">${ic("#l-alarm-clock", "i-xs")}${c.booking.next.time_known ? hm(c.booking.next.at) : md(c.booking.next.at)} 오픈</span>` : ""}${applications.length ? `<span class="tag tag-green">${ic("#l-circle-check", "i-xs")}공식 접수 중${state.checkIn && state.checkOut ? " · 날짜 일치" : ""}</span>` : ""}${isRealtime(c) ? `<span class="tag">${ic("#l-zap", "i-xs")}온라인 예약 채널</span>` : ""}${kinds}${petOk(c) ? `<span class="tag">${ic("#l-dog", "i-xs")}반려견</span>` : ""}${c.soc?.[0] ? `<span class="tag">${ic("#l-message-circle", "i-xs")}후기 ${c.soc[0]}</span>` : ""}${c.soc?.[1] ? `<span class="tag">${ic("#l-play", "i-xs")}영상 ${c.soc[1]}</span>` : ""}</span>
+      <span class="tags">${setupTag}${verifiedBadge}${conditionTags}${c.booking.next ? `<span class="tag tag-ember">${ic("#l-alarm-clock", "i-xs")}${c.booking.next.time_known ? hm(c.booking.next.at) : md(c.booking.next.at)} 오픈</span>` : ""}${applications.length ? `<span class="tag tag-green">${ic("#l-circle-check", "i-xs")}공식 접수 중${state.checkIn && state.checkOut ? " · 날짜 일치" : ""}</span>` : ""}${isRealtime(c) ? `<span class="tag">${ic("#l-zap", "i-xs")}온라인 예약 채널</span>` : ""}${kinds}${petOk(c) ? `<span class="tag">${ic("#l-dog", "i-xs")}반려견</span>` : ""}${c.soc?.[0] ? `<span class="tag">${ic("#l-message-circle", "i-xs")}후기 ${c.soc[0]}</span>` : ""}${c.soc?.[1] ? `<span class="tag">${ic("#l-play", "i-xs")}영상 ${c.soc[1]}</span>` : ""}</span>
       <span class="price">${c.fee?.min ? `<b>${band(c.fee.min)}부터</b><span>공식 안내 요금</span>` : `<span>요금은 예약처에서 확인</span>`}</span>
     </span></button>`;
 }
@@ -1729,19 +1729,56 @@ function fieldConditionsBlock(c) {
   const sizes = f.site_size?.groups?.length ? f.site_size.groups.map((x) => [x.width_m, x.depth_m, x.count]) : c.sizes;
   const floorText = floors.length ? floors.map(([type, count]) => `${floorName(type)}${count ? ` ${count}면` : ""}`).join(" · ") : "확인 필요";
   const sizeText = sizes.length ? sizes.map(([width, depth, count]) => `${width}×${depth}m${count ? ` · ${count}면` : ""}`).join(" / ") : "확인 필요";
+  const parkingState = f.parking?.tent_side === true ? "confirmed" : (f.parking?.cart_required || f.parking?.mode === "CART_REQUIRED") ? "confirmed" : autoSites ? "partial" : "unknown";
+  const parkingVal = f.parking?.tent_side === true ? "텐트 옆 단독 주차 가능" : (f.parking?.cart_required || f.parking?.mode === "CART_REQUIRED") ? "짐수레/카트 이동 필요" : autoSites ? `자동차야영 ${autoSites}면` : "확인 필요";
+  const parkingNote = f.parking?.tent_side === true ? "자동차야영 사이트 또는 텐트 바로 옆 차량 주차가 가능해요." : (f.parking?.cart_required || f.parking?.mode === "CART_REQUIRED") ? "차량 진입이 제한되어 주차장에서 카트/손수레로 짐을 이동해야 해요." : autoSites ? "오토 사이트 보유 정보예요. 텐트 옆 주차 가능 여부는 구역별로 확인하세요." : "고캠핑 표준 항목에 없어요.";
+
+  const powerState = f.power?.limit_w ? "confirmed" : electricity ? "partial" : "unknown";
+  const powerVal = f.power?.limit_w ? `${f.power.limit_w}W ${f.power.limit_w >= 700 ? "고전력" : "표준"}` : electricity ? "전기 제공 · W 확인 필요" : "확인 필요";
+  const powerNote = f.power?.limit_w ? (f.power.statutory_standard ? "관광진흥법 야영장 안전기준(600W 이하) 법정 표준이 적용돼요." : "공식 안내에 등록된 사이트당 전력 한도예요.") : electricity ? "전력 사용 한도(W)는 고캠핑에 등록되지 않아 예약처 규정을 확인해야 해요." : "전기 제공 여부와 W 제한을 운영자 안내에서 확인하세요.";
+
+  const firewoodState = f.firewood?.allowed === true ? "confirmed" : f.firewood?.allowed === false ? "confirmed" : firewoodSale ? "partial" : "unknown";
+  const firewoodVal = f.firewood?.allowed === true ? "장작 불멍 허용" : f.firewood?.allowed === false ? "장작 금지 (숯만 가능)" : firewoodSale ? "장작 판매 등록" : "확인 필요";
+  const firewoodNote = f.firewood?.allowed === true ? (firewoodSale ? "개별 화로대에서 장작/모닥불 사용 가능 · 현장 장작 판매" : "개별 화로대에서 장작 불멍 사용이 가능해요.") : f.firewood?.allowed === false ? "산림보호 및 화재 예방을 위해 장작 불멍이 금지되어 있어요." : firewoodSale ? "장작 판매와 장작 사용 허용은 서로 다른 정보예요." : "장작 판매·사용 가능 여부가 등록되지 않았어요.";
+
+  const sanitaryState = f.sanitary?.private_bathroom === true ? "confirmed" : (f.sanitary?.toilets_count ? "confirmed" : "unknown");
+  const sanitaryVal = f.sanitary?.private_bathroom === true ? "단독 개별 욕실/화장실" : (f.sanitary?.toilets_count ? `공용 화장실 ${f.sanitary.toilets_count}개소 · 샤워실 ${f.sanitary.showers_count ?? 0}개소` : "확인 필요");
+  const sanitaryNote = f.sanitary?.private_bathroom === true ? "객실/사이트 전용 단독 화장실과 샤워실이 구비되어 있어요." : (f.sanitary?.hot_water ? `온수: ${f.sanitary.hot_water}` : "위생시설 구비");
+
   const rows = [
-    [autoSites ? "partial" : "unknown", "#l-car", "텐트 옆 주차", autoSites ? `자동차야영 ${autoSites}면` : "확인 필요", autoSites ? "오토 사이트 보유 정보예요. 텐트 옆 주차 가능 여부는 구역별로 확인하세요." : "고캠핑 표준 항목에 없어요."],
-    ["unknown", "#t-tent", "텐트·타프/캐노피", "확인 필요", "1텐트+타프/쉘터 또는 캐노피 추가 설치는 캠핑장별 규정이 달라요. 추가 설치 수량·3×3m 캐노피 가능 여부를 운영자 공지에서 확인하세요."],
-    [electricity ? "partial" : "unknown", "#l-plug-zap", "전기·전력 한도", electricity ? "전기 제공 · W 확인 필요" : "확인 필요", electricity ? "전력 사용 한도(W)는 고캠핑에 등록되지 않아 예약처 규정을 확인해야 해요." : "전기 제공 여부와 W 제한을 운영자 안내에서 확인하세요."],
+    [parkingState, "#l-car", "텐트 옆 주차", parkingVal, parkingNote],
+    [f.shelter_setup?.note ? "confirmed" : "unknown", "#t-tent", "텐트·타프/캐노피", f.shelter_setup?.note ? "1텐트+1타프 피칭" : "확인 필요", f.shelter_setup?.note || "1텐트+타프/쉘터 또는 캐노피 추가 설치는 캠핑장별 규정이 달라요. 추가 설치 수량·3×3m 캐노피 가능 여부를 운영자 공지에서 확인하세요."],
+    [powerState, "#l-plug-zap", "전기·전력 한도", powerVal, powerNote],
     [floors.length ? "confirmed" : "unknown", "#t-layers-subtract", "바닥", floorText, floors.length ? "고캠핑에 등록된 바닥재·면수예요." : "바닥재 정보가 등록되지 않았어요."],
     [sizes.length ? "confirmed" : "unknown", "#l-ruler", "사이트 규격", sizeText, sizes.length ? "규격이 어느 상품에 적용되는지는 예약 화면에서 한 번 더 확인하세요." : "사이트별 가로×세로 정보가 등록되지 않았어요."],
-    [firewoodSale ? "partial" : "unknown", "#l-flame", "장작", firewoodSale ? "장작 판매 등록" : "확인 필요", firewoodSale ? "장작 판매와 장작 사용 허용은 서로 다른 정보예요." : "장작 판매·사용 가능 여부가 등록되지 않았어요."],
+    [firewoodState, "#l-flame", "장작", firewoodVal, firewoodNote],
     [firePit ? "confirmed" : "unknown", "#l-flame", "숯불·불멍", firePit ? `화로대 ${firePit}` : "확인 필요", firePit ? "화로대 배치 정보예요. 숯·장작 사용 허용은 운영자 이용규칙을 확인하세요." : "숯불·불멍 허용 여부가 등록되지 않았어요."],
+    [sanitaryState, "#l-shower-head", "위생 시설", sanitaryVal, sanitaryNote],
   ];
+
+  const featuresHtml = f.features?.length ? `
+    <div class="dv-features-wrap">
+      <h5>주요 시설 및 특화 놀거리</h5>
+      <div class="dv-chips">${f.features.map((feat) => `<span class="feat-chip">${ic(feat === "SWIMMING_POOL" ? "#l-waves" : feat === "VALLEY" ? "#l-waves" : feat === "FOREST_TRAIL" ? "#l-footprints" : feat === "TRAMPOLINE" || feat === "AIR_BOUNCE" ? "#l-sparkles" : "#l-circle-check", "i-xs")}${esc(FEATURE_NAME[feat] || feat)}</span>`).join("")}</div>
+    </div>` : "";
+
+  const rentalHtml = f.rental_offers?.length ? `
+    <div class="dv-table-wrap">
+      <h5>현장 대여 장비</h5>
+      <table class="dv-fact-table">
+        <thead><tr><th>품목</th><th>비고</th></tr></thead>
+        <tbody>
+          ${f.rental_offers.map((r) => `<tr><td><b>${esc(r.item)}</b></td><td>${esc(r.note || "현장 대여 가능")}</td></tr>`).join("")}
+        </tbody>
+      </table>
+    </div>` : "";
+
   const source = f.source ?? { url: c.gc_url, checked_at: c.modified_at, tier: "A" };
   return `<div class="dv-sub dv-conditions"><h4>현장 조건</h4>
     <div class="dv-condition-grid">${rows.map(([state, icon, label, value, note]) => `<article class="dv-condition ${state}"><span>${ic(icon)}</span><div><small>${esc(label)}</small><b>${esc(value)}</b><p data-wrap-ok>${esc(note)}</p></div></article>`).join("")}</div>
-    <span class="trust">${source.url ? `<a href="${esc(source.url)}" target="_blank" rel="noopener">한국관광공사 고캠핑 운영자 등록값</a>` : "한국관광공사 고캠핑 운영자 등록값"}${source.checked_at ? ` · ${ymd(source.checked_at)} 확인` : ""} · ‘확인 필요’는 불가가 아닙니다</span>
+    ${featuresHtml}
+    ${rentalHtml}
+    <span class="trust">${source.url ? `<a href="${esc(source.url)}" target="_blank" rel="noopener">${esc(source.label ?? "한국관광공사 고캠핑 운영자 등록값")}</a>` : esc(source.label ?? "한국관광공사 고캠핑 운영자 등록값")}${source.checked_at ? ` · ${ymd(source.checked_at)} 확인` : ""} · ‘확인 필요’는 불가가 아닙니다</span>
   </div>`;
 }
 

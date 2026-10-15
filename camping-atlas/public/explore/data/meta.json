@@ -690,15 +690,25 @@
     "with_social": 3120,
     "with_self_hosted_photo": 2371,
     "with_nearby": 3111,
-    "field_conditions": 3111,
-    "electricity_registered": 2088,
-    "site_size_registered": 816,
-    "ground_registered": 1576,
+    "field_conditions": 3116,
+    "electricity_registered": 2114,
+    "site_size_registered": 869,
+    "ground_registered": 1583,
     "naver_booking_channel": 405,
     "camfit_booking_channel": 209,
     "official_notice_camps": 0,
     "official_notice_items": 0,
     "shelter_setup_registered": 0,
-    "verified_condition_facts": 10
-  }
+    "verified_condition_facts": 10,
+    "surveyed_condition_facts": 3106,
+    "parking_tent_side": 1288,
+    "parking_cart_required": 15,
+    "parking_shared": 1,
+    "power_high_w": 10,
+    "firewood_allowed": 2420,
+    "firewood_prohibited": 84,
+    "private_bathroom": 137,
+    "kids_play_features": 2174
+  },
+  "updated_at": "2026-10-15T07:13:33.661Z"
 }
