@@ -7,6 +7,8 @@
 {"cid":"18","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"21","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"28","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
+{"cid":"29","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"https://sscamping80.com/info","at":"2026-10-16T06:49:05.551Z","quote":"반려동물 안내 (전 객실 동반 가능)","text":"동반 가능"}
+{"cid":"29","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"https://sscamping80.com/about","at":"2026-10-16T06:49:05.551Z","quote":"※ 하늘창은 카라반 특수소재로 야간에는 잘 보이지 않을 수 있으며, 반려견 동반은 불가합니다.","text":"동반 불가"}
 {"cid":"29","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"31","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"31","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/doi_couple/224339414776","at":"2026-07-07","quote":"[원주 계곡 캠핑장] 반려동물 동반 가능한 \"원주느린숲캠프\" 정보 정리.","text":"동반 가능","n":1}
@@ -17,6 +19,7 @@
 {"cid":"57","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"57","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=57","at":"2026-06-30T00:00:00+09:00","quote":"반려동물 출입이 가능하지만 동행할 경우 사전 예약 시 반드시 고지해야 한다.","text":"동반 가능"}
 {"cid":"61","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
+{"cid":"63","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"https://yellowhill.revrun.kr/guide-info","at":"2026-10-16T06:56:48.062Z","quote":"소형 반려견 동반 가능","text":"동반 가능"}
 {"cid":"63","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"63","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/jonyzoa/224211929419","at":"2026-03-11","quote":"4X6) 냉/난방기, 냉장고, 스마트 tv 모니터 남/여 화장실, 샤워실 O 개수대 파이어 피트 존 관리동(전자레인지, 식기류, 정수기 등) 술, 라면, 햇반 등 판매 기준 인원 4인 최대 12인 소형반려견 동반 가능 #옐로우힐 #단독글램핑 #단독펜…","text":"동반 가능","n":1}
 {"cid":"75","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
@@ -208,6 +211,7 @@
 {"cid":"829","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"833","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"855","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
+{"cid":"860","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"http://xn--pq1by0hgta924f.kr/?page_id=6445","at":"2026-10-16T06:52:11.973Z","quote":"반려동물 입장불가","text":"동반 불가"}
 {"cid":"860","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"866","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"869","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
@@ -224,6 +228,7 @@
 {"cid":"913","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"916","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"917","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
+{"cid":"919","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"http://xn--2u1bp9vj0etlcl8iykiq7c.com/sub06_1.php","at":"2026-10-16T06:58:52.464Z","quote":"애완견 등 반려동물은 입실을 금지 합니다.","text":"동반 불가"}
 {"cid":"919","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"922","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"923","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
@@ -937,6 +942,7 @@
 {"cid":"7152","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7154","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7155","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
+{"cid":"7157","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"https://borisancamp.co.kr/information.html","at":"2026-10-16T06:50:01.650Z","quote":"반려동물은 동반 입장이 불가합니다.","text":"동반 불가"}
 {"cid":"7157","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"7160","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"7167","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
@@ -992,6 +998,7 @@
 {"cid":"7257","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"7264","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7270","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
+{"cid":"7271","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"https://mccamp.cauc.or.kr/node/?menu=020200","at":"2026-10-16T06:49:01.393Z","quote":"캠핑장 시설 내에서는 반려동물을 포함한 일체의 동물의 출입을 금지하며, 동반입장 적발 시 강제퇴실 조치가 이루어질 수 있습니다.","text":"동반 불가"}
 {"cid":"7271","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7272","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"7274","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
@@ -1060,6 +1067,7 @@
 {"cid":"7476","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7483","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"7484","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
+{"cid":"7486","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"https://www.haegancamp.co.kr/main/info","at":"2026-10-16T07:01:31.256Z","quote":"5) 반려동물 강아지 고양이 등등 애완동물 모두 이용불가합니다","text":"동반 불가"}
 {"cid":"7486","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7488","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7490","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
@@ -1145,6 +1153,7 @@
 {"cid":"7749","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"7750","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7751","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
+{"cid":"7752","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"https://rosemoss1glamping.kr/","at":"2026-10-16T06:58:39.924Z","quote":"6호 채송화 (펜션/애견동반가능/개별욕실)","text":"동반 가능"}
 {"cid":"7752","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7755","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7757","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
@@ -1224,7 +1233,7 @@
 {"cid":"7913","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"https://www.ddcsiseol.or.kr/main/content/view/MN02030000.do","at":"2026-10-15T23:29:33.417Z","quote":"(카라반 내부에는 반려동물 입실이 불가합니다.)","text":"동반 불가"}
 {"cid":"7913","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"7916","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
-{"cid":"7925","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"https://www.ccstarlight.com/","at":"2026-10-16T05:48:32.507Z","quote":"반려견 동반가능","text":"동반 가능"}
+{"cid":"7925","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"https://www.ccstarlight.com/","at":"2026-10-16T06:59:29.555Z","quote":"반려견 동반가능","text":"동반 가능"}
 {"cid":"7925","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7926","attr":"PET_FEE","value":10000,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.xn--oi2bjk57hrxi90pg6fs9b.kr/page/reservation/reservation_InformationUse.html","at":"2026-10-16T00:52:40.580Z","quote":"반려견(7kg 이하) 1마리 → 10,000원의 추가비용 발생(현장결제)","text":"1만원"}
 {"cid":"7926","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
@@ -1347,10 +1356,12 @@
 {"cid":"8176","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"8176","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/chowonny_/224436285990","at":"2026-10-09","quote":"애견 동반 가능 (대형견 OK)","text":"동반 가능 (대형견)","n":3}
 {"cid":"8181","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
+{"cid":"8190","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"http://avilatheoasis.com/contents/reserve.html","at":"2026-10-16T07:04:24.671Z","quote":"반려동물 동반 시 입실이 불가하며, 해당 사유로 환불받을 수 없습니다.","text":"동반 불가"}
 {"cid":"8190","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"8194","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=8194","at":"2026-06-30T00:00:00+09:00","quote":"보성 지중해 야영장은 화재 위험으로 화롯대, 장작 등은 사용이 금지되어 있으며 반려견 동반은 가능하다.","text":"동반 가능"}
 {"cid":"8194","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"8195","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
+{"cid":"8196","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"https://pyeongam189.clickn.co.kr/","at":"2026-10-16T06:50:10.284Z","quote":"🐶강아지 동반 가능(오토 캠핑장)","text":"동반 가능"}
 {"cid":"8196","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"8197","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"8198","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
@@ -1742,6 +1753,7 @@
 {"cid":"100538","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/leena-/224298335770","at":"2026-05-27","quote":"0507-1353-8138 애견동반 가능 (대형견 불가) 남편이랑 낭랑이랑 바다있는 동네로 캠핑겸 여행겸 떠나자 !","text":"동반 가능 (대형견)","n":1}
 {"cid":"100539","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"100541","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
+{"cid":"100542","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"https://newparavan.creatorlink.net/%EC%98%88%EC%95%BD%EC%95%88%EB%82%B4-%EB%B0%8F-%EA%B3%B5%EC%A7%80","at":"2026-10-16T07:06:09.074Z","quote":"반려동물 동반 불가","text":"동반 불가"}
 {"cid":"100542","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"100544","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"100545","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
@@ -1923,6 +1935,8 @@
 {"cid":"100711","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"100712","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"100713","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
+{"cid":"100716","attr":"PET_FEE","value":20000,"grade":"OPERATOR","src":"operator_discovered","url":"http://socool2ne.kr/theme/basic/reser1.php","at":"2026-10-16T07:08:16.035Z","quote":"· 숯 2인 기준 2만원, 화롯대 대여 + 장작 + 오로라 2만원, 강아지(10kg미만) 마리당 1만원, 인원 2인 기준(가족 4인까지 가능) 1명 추가 시 2만원.","text":"2만원"}
+{"cid":"100716","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"http://socool2ne.kr/theme/basic/facility.php","at":"2026-10-16T07:08:16.035Z","quote":"반려견과 함께 사용가능한 공간입니다.","text":"동반 가능"}
 {"cid":"100716","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"100716","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://lysjmr1.tistory.com/1","at":"2026-08-31","quote":"예를 들어 포천 쏘쿨이네글램핑은 반려견 10kg 미만만 가능하고 진도견류 입장이 제한되어 있습니다...난방과 화장실 시설을 우선적으로 확인하는 것이 좋습니다.","text":"동반 가능 (10kg 미만)","n":1}
 {"cid":"100717","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
@@ -1966,6 +1980,7 @@
 {"cid":"100756","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"100758","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"100760","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
+{"cid":"100761","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"https://www.lespia.co.kr/reservation.php?id=2","at":"2026-10-16T06:59:48.055Z","quote":"애완견을 비롯한 반려동물의 동반 출입은 절대 불가합니다.","text":"동반 불가"}
 {"cid":"100761","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"100762","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"100763","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
@@ -1979,6 +1994,7 @@
 {"cid":"100773","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"100774","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"100775","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
+{"cid":"100776","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"https://fleur2022.kr/","at":"2026-10-16T07:06:41.282Z","quote":"- 애완견 및 반려동물 동반 시 입실이 불가합니다.","text":"동반 불가"}
 {"cid":"100776","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"100777","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"100778","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
@@ -2013,6 +2029,7 @@
 {"cid":"100802","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"100803","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"https://www.havesol.kr/html/sub1_room1_inside.html","at":"2026-10-15T23:31:22.013Z","quote":"반려동물 동반시 입실이 불가능 합니다.","text":"동반 불가"}
 {"cid":"100803","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
+{"cid":"100804","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"http://daltopoolvilla.kr/reservation.html","at":"2026-10-16T07:00:11.724Z","quote":"[반려묘&반려견 동반가능]","text":"동반 가능"}
 {"cid":"100804","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"100805","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"100807","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
@@ -2162,6 +2179,7 @@
 {"cid":"100941","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"100943","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"100945","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
+{"cid":"100948","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"https://jhpoolvilla.co.kr/reservation.html","at":"2026-10-16T07:02:18.790Z","quote":"※ 애견동반 불가","text":"동반 불가"}
 {"cid":"100948","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"100949","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"100950","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
@@ -2203,6 +2221,7 @@
 {"cid":"100980","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100980","at":"2024-12-02T00:00:00+09:00","quote":"반려동물은 소형견에 한해 동반 입장이 가능하다.","text":"동반 가능 (소형견)"}
 {"cid":"100983","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"100984","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
+{"cid":"100986","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"http://www.dinoglamping.com/reservation.php?id=2","at":"2026-10-16T06:54:05.283Z","quote":"애완견을 비롯한 반려동물의 동반 출입은 절대 불가합니다.","text":"동반 불가"}
 {"cid":"100986","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"100987","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"100987","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100987","at":"2024-12-23T00:00:00+09:00","quote":"2500평의 넓은 부지와 화악산 계곡이 흐르는 최적의 장소에 위치한 쉼 캠핑장 개인샤워실&화장실을 갖춘 애견동반 가능 캠핑장","text":"동반 가능"}
@@ -2467,6 +2486,8 @@
 {"cid":"101207","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"http://camplab-bbq.com/document/intro?location=Y","at":"2026-10-15T23:31:33.225Z","quote":"서울과 접근성 좋은 양주에 위치해 있으며, 각 객실마다 넓은 마당으로 반려동물과 편안하게 이용이 가능합니다.","text":"동반 가능"}
 {"cid":"101207","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"101209","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
+{"cid":"101210","attr":"PET_FEE","value":5000,"grade":"OPERATOR","src":"operator_discovered","url":"https://solhyang.revrun.kr/reserve","at":"2026-10-16T07:02:34.621Z","quote":"반려동물 추가 : 1마리 기준 5,000원","text":"5,000원"}
+{"cid":"101210","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"https://solhyang.revrun.kr/","at":"2026-10-16T07:02:34.621Z","quote":"애견 가능","text":"동반 가능"}
 {"cid":"101210","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101211","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"101212","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--9i1bq8po4ef3d.com/?page_id=6445","at":"2026-10-15T23:33:17.852Z","quote":"• 반려동물 동반이 가능합니다.","text":"동반 가능"}
@@ -2480,6 +2501,7 @@
 {"cid":"101219","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"101220","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"101221","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
+{"cid":"101222","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"http://lavendercamping.com/document/reserv","at":"2026-10-16T07:03:28.194Z","quote":"- 애견동반 불가능하며, 동반시 환불없이 퇴실처리 됩니다.","text":"동반 불가"}
 {"cid":"101222","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"101223","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"101224","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
@@ -2542,6 +2564,7 @@
 {"cid":"101275","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"101276","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101276","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/77sketch77/224428930783","at":"2026-10-02","quote":"반려동물 동반이 가능한 글램핑장이기 때문에 애견동반글램핑을 찾으시는 분들에게는 꼭 추천 드립니다!","text":"동반 가능","n":1}
+{"cid":"101277","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"https://www.thehillglamping.net/%EC%98%88%EC%95%BD%EC%95%88%EB%82%B4","at":"2026-10-16T07:08:31.605Z","quote":"반려동물은 입실이 불가합니다.","text":"동반 불가"}
 {"cid":"101277","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101278","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101279","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
@@ -2636,6 +2659,7 @@
 {"cid":"101360","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"101361","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"101362","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
+{"cid":"101363","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"http://prcamp.webbit.kr/reser.html?id=4","at":"2026-10-16T07:05:31.706Z","quote":"+ 반려동물 출입은 가능하되 1마리이내이며, 이상시 추가부담(패드지참 필수).","text":"동반 가능 (1마리까지)"}
 {"cid":"101363","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101364","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101365","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
@@ -3156,6 +3180,7 @@
 {"cid":"102032","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"102032","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102032","at":"2025-11-20T00:00:00+09:00","quote":"캠핑장은 4단 계단식으로 구성되어있고 애견동반 가능합니다.","text":"동반 가능"}
 {"cid":"102034","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
+{"cid":"102036","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"http://www.xn--h49au9lm9esqk42flulvxl.com/bbs.php?table=camping_product&category=%ED%8C%8C%EC%87%84%EC%84%9D&type=&pg=31","at":"2026-10-16T06:59:03.981Z","quote":"기준인원 : 4명 | 반려동물 : 금지","text":"동반 불가"}
 {"cid":"102038","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102038","at":"2026-07-06T00:00:00+09:00","quote":"반려견 캠퍼를 위해 반려견 동반 가능한 3개싸이트를 운영하고 있으며, 텃밭에서 채소와 과일을 직접 따 먹을 수 있음과 동시에 캠핑장 앞에 흐르는 1급수 계곡에서 수영도 하고 물고기 및 다슬기를 잡을 수 있습니다.","text":"동반 가능"}
 {"cid":"102038","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"102038","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/bsj102688/224296802774","at":"2026-05-26","quote":"충북충주 애견동반가능한 수안보동그라미캠핑장.","text":"동반 가능","n":1}
