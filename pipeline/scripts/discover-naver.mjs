@@ -44,7 +44,8 @@ const prev = existsSync(outPath) ? JSON.parse(readFileSync(outPath, "utf8")) : {
 const store = prev.campgrounds ?? {};
 
 // 경로 확인: 첫 캠핑장으로 경로를 하나씩 시도한다.
-const MAX_CALLS = Math.min(MAX_CALLS_ARG, budget);
+// 한 실행 호출은 요금표 일 최대 제한(25,000건)의 절반도 넘지 않게
+const MAX_CALLS = Math.min(MAX_CALLS_ARG, budget, Math.floor((freeCheck.daily_limit ?? 25000) / 2));
 let calls = 0;
 const persistUsage = () => writeFileSync(usagePath, `${JSON.stringify(recordUsage(usage, calls, { check: freeCheck }), null, 1)}\n`);
 let path = null;

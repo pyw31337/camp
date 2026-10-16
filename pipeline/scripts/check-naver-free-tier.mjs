@@ -16,6 +16,6 @@ if (r.quote) console.log(`근거: “${r.quote}”`);
 console.log(`이번 달(${monthKey()}) 사용 ${used}건 / 우리 상한 ${Number(process.env.NAVER_MONTHLY_CAP || DEFAULT_MONTHLY_CAP)}건 / 무료 한도 ${FREE_QUOTA_MONTHLY}건`);
 if (process.env.GITHUB_STEP_SUMMARY) {
   const { appendFileSync } = await import("node:fs");
-  appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### 네이버 API HUB 무료 감시\n- 판정: **${r.free ? "무료" : "무료 확인 안 됨 — 수집기 자동 중단"}**\n- 사유: ${r.reason}\n- 이번 달 사용: ${used}건\n- 원문: ${r.url}\n`);
+  appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### 네이버 API HUB 무료 감시\n- 판정: **${r.free ? "무료" : "무료 확인 안 됨 — 수집기 자동 중단"}**\n- 사유: ${r.reason}\n- 이번 달 사용: ${used}건\n- 근거: ${r.quote ?? "-"}\n- 원문: ${r.url}\n`);
 }
 process.exit(r.free ? 0 : 1);
