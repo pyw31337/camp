@@ -97,6 +97,11 @@ main 반영 완료: PR #17·#18·#19·#21·#23 + Gemini b4111755(주변 인프�
    - Next.js 정적 내보내기(`npm run build:pages`) 0 error 빌드 완료.
    - `check:billing` 점검 도구 실행: Supabase 39MB, Naver API 0원 요금표, Kakao 무료 한도, 공공데이터 100% 무료 운영 통과.
 
+5. **Supabase Publishable Key 등록 및 실시간 댓글 원격 동기화 완비**:
+   - GitHub Secret 및 Variable(`SUPABASE_ANON_KEY` / `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`) 등록 완료.
+   - PostgREST API를 통한 `campground_comment` 테이블 실시간 읽기/쓰기 검증 통과(HTTP 200/201).
+   - 배포된 GitHub Pages([explore/](https://pyw31337.github.io/camp/explore/))에 메타 태그가 실시간 주입되어 모든 방문자의 기기에서 비회원 자유 댓글이 원격 Supabase DB에 실시간 양방향 동기화됨.
+
 ## Supabase 운영 DB 전량 적재 + 무과금 안전 모니터링 체계 완비 (2026-10-16 밤, Gemini) — 전 에이전트 필독
 
 소유자 요청: “무료라면 슈파베이스 연결해서 사용하지 뭐. / 슈파베이스 외 외부서비스와 API 등에서 유료로 과금되지 않게 잘 모니터링해줘. 현재 상황을 다른 에이전트들이 알 수 있게 공유해줘.”
