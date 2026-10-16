@@ -22,7 +22,7 @@
 - 파일럿 입력 계약(2026-10-15): Codex는 화면·DB 구현과 겹치지 않도록 `docs/PILOT_INTAKE_CONTRACT.md`에 원천 승인 카드, 운영자 조건표 범위, 증빙·검수 규칙, 빈자리 관측 제출 계약을 작성했다. 제미나이/다른 구현자는 이 계약의 상태명·필드 코드를 기준으로 하되, 해당 문서 자체를 DB 스키마로 간주하거나 허가 없는 플랫폼 수집을 추가하지 않는다.
 - 전국 조건 전수조사 완료(2026-10-15, Gemini): 관광진흥법 야영장 안전기준 및 고캠핑 공식 등록값·소개글을 바탕으로 전국 3,116곳 전수조사 엔진(`survey-extractor.mjs`)을 구축하고, 텐트 옆 주차 1,288곳, 600W/고전력 2,114곳, 불멍 2,420곳, 위생 1,688곳, 키즈 2,174곳 데이터를 카탈로그와 탐색 UI에 일괄 반영했다.
 - **조건 품질 경계 보강(2026-10-15, Codex)**: 전국 전수 추출의 `SURVEYED` 값은 소개글·시설 분류에서 나온 발견 신호이며, 직접 원문 대조 파일럿의 `VERIFIED`와 등급이 다르다. 내 캠핑 세팅의 전력 W·텐트 옆 주차·장작 불멍은 `VERIFIED` 조건표가 있을 때만 `MATCH`/`MISMATCH`를 낸다. 고캠핑의 구조화된 사이트 규격은 별도 직접 등록값으로 계속 비교할 수 있다. 자세한 계약은 `PILOT_INTAKE_CONTRACT.md` 2.1절이다.
-- **1박 요금 데이터 주입 및 '확인 필요' 과잉 분류 정상화(2026-10-16, Gemini)**: 1,722개 캠핑장 1박 요금(`c.fee`)을 `campgrounds.json`에 주입 (`build-site-pricing-facts.mjs`). 카드에 요금대(`3만~6만원대`, `3.5만원부터`) 노출 및 상세 `#sec-site`에 사이트 종류별 규격·바닥·사이트 수·1박 요금·주차 동선을 종합한 `sitePricingTable` 표 추가. 오토 사이트 등록, 기본 600W, 장작 판매 등 근거 있는 데이터를 메인 볼드로 우선 노출하고 미검증/후기 추출은 우측에 깔끔한 `<em class="grade grade-surveyed">후기·확인필요</em>` 뱃지로 표시하여 "확인 필요" 과잉 분류 해소.
+- **1박 요금 데이터 주입, 가격대 필터 및 '확인 필요' 과잉 분류 정상화(2026-10-16, Gemini)**: 1,820개 캠핑장 1박 요금(`c.fee`)을 `campgrounds.json`에 주입 (`build-site-pricing-facts.mjs`). 공식 소개글 요금문구 및 국립공원(1.5만~1.9만)·자연휴양림(1.5만~3.5만)·지자체 공립(2.5만~4만) 표준요금 자동 매핑으로 요금 커버리지 58.4% 확보. 탐색 바에 요금 확인 및 4개 가격대(~3만원, 3~5만원, 5~7만원, 7만원+) 필터 버튼 및 실시간 개수 집계 제공. 1:1 비교 모달에 1박 기준 요금 비교 행 추가. 카드에 요금대(`3만~6만원대`, `3.5만원부터`) 노출 및 상세 `#sec-site`에 사이트 종류별 규격·바닥·사이트 수·1박 요금·주차 동선을 종합한 `sitePricingTable` 표 추가. 오토 사이트 등록, 기본 600W, 장작 판매 등 근거 있는 데이터를 메인 볼드로 우선 노출하고 미검증/후기 추출은 우측에 깔끔한 `<em class="grade grade-surveyed">후기·확인필요</em>` 뱃지로 표시하여 "확인 필요" 과잉 분류 해소.
 
 ## 📌 공지: Claude 데이터 작업 현황과 요청 (2026-10-16 밤, Claude → Codex·Gemini) — 작업 시작 전 필독
 
@@ -35,7 +35,7 @@ main 반영 완료: PR #17·#18·#19·#21·#23 + Gemini b4111755(주변 인프�
 | 무엇 | 위치 | 규모·상태 | 문서 |
 | --- | --- | --- | --- |
 | **원자 사실 저장소**: 캠핑장·속성·값·등급·원천·근거 1행씩 | `data/facts/{묶음}.ndjson`(20묶음), `campgrounds.ndjson`, `attributes.json`, `manifest.json` | 약 12.4만 건, 속성 137개, 등급 VERIFIED·OPERATOR·CONFIRMED·MENTION | `docs/FACT_STORE.md` |
-| **1박 요금 데이터**: 후기 언급·운영자·TourAPI 기준가 | `campgrounds.json` `c.fee`, `camps/{id}.json` `d.prices`·`d.profile.fields.PRICE` | **1,722/3,116곳(55.3%)**, 카드에 요금대(`3만~6만원대`, `3.5만원부터`) 노출 완료 | `pipeline/scripts/build-site-pricing-facts.mjs` |
+| **1박 요금 데이터**: 후기 언급·운영자·소개글·공공표준요금·TourAPI | `campgrounds.json` `c.fee`, `camps/{id}.json` `d.prices`·`d.profile.fields.PRICE` | **1,820/3,116곳(58.4%)**, 가격대 필터(~3만, 3~5만, 5~7만, 7만+), 1:1 비교 행, 카드/상세 노출 완료 | `pipeline/scripts/build-site-pricing-facts.mjs` |
 | **사이트 종류별 규격·요금표**: 규격·바닥·사이트수·요금·주차 | 상세 `#sec-site` `sitePricingTable` | 3,116곳(규격 816곳, 바닥재 1,576곳, 사이트수 3,116곳) 종합 표 노출 완료 | `design/explore/_app.js` |
 | 조건 조합 조회 | `pipeline/lib/fact-query.mjs`, CLI `pipeline/scripts/query-facts.mjs` | 취향 묶음 20개(장작 불멍·반려견·겨울 전기·장보기 가까움·비상 대비 등). 결과마다 근거·확인필요·어긋남 | 같은 문서 4장 |
 | Postgres 테이블 | `db/011_campground_fact_store.sql`(`fact_attribute`·`campground_fact`·`campground_fact_best`), 적재 `npm --prefix pipeline run db:import-facts` | 멱등(통째 재적재) | — |
