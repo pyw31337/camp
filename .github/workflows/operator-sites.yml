@@ -24,7 +24,7 @@ concurrency:
 jobs:
   crawl:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 240
     defaults:
       run:
         working-directory: pipeline
@@ -34,9 +34,11 @@ jobs:
         with:
           node-version: 22
       - run: npm ci
+      # 자바스크립트로 그리는 운영자 사이트를 읽기 위한 Chromium(렌더링 폴백)
+      - run: npx playwright install --with-deps chromium
       - run: node --test test/operator-site.test.mjs
       - name: Read operator homepages
-        run: node scripts/crawl-operator-sites.mjs --concurrency 16 --max-age-days "${{ github.event.inputs.max_age_days || '14' }}"
+        run: node scripts/crawl-operator-sites.mjs --concurrency 10 --render --retry-failed --max-age-days "${{ github.event.inputs.max_age_days || '14' }}"
       - name: Commit refreshed snippets
         run: |
           git config user.name "moyeora-camping-data-bot"

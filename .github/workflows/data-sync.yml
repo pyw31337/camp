@@ -335,6 +335,8 @@ jobs:
           node pipeline/scripts/build-spec-sheet.mjs
           # 후기 요약에서 장점·단점 한 줄(건수 포함)을 만들고, 홈 썸네일(featured.json)에 배지·장단점을 붙인다.
           node pipeline/scripts/build-review-digest.mjs
+          # 모든 원천을 18개 항목 프로필로 합치고, 확인된 값만으로 한 줄 요약·분류 태그를 만든다.
+          node pipeline/scripts/build-campground-profiles.mjs
           # PR은 생성만 검사한다. main은 catalog·explorer를 원자적으로 갱신한다.
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             echo "PR에서는 공개 생성물을 커밋하지 않습니다."; exit 0

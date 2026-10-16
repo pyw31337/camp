@@ -782,5 +782,114 @@
     "with_pros": 1054,
     "with_cons": 123,
     "reviews": 6993
+  },
+  "profiles": {
+    "generated_at": "2026-10-16T00:54:43.923Z",
+    "total": 3116,
+    "fields": {
+      "TYPE": {
+        "any": 2288,
+        "facts": 2288
+      },
+      "CHECKIN": {
+        "any": 206,
+        "facts": 150
+      },
+      "CHECKOUT": {
+        "any": 167,
+        "facts": 129
+      },
+      "MANNER": {
+        "any": 11,
+        "facts": 9
+      },
+      "PRICE": {
+        "any": 1611,
+        "facts": 9
+      },
+      "EXTRA_FEE": {
+        "any": 78,
+        "facts": 78
+      },
+      "POWER": {
+        "any": 2118,
+        "facts": 2118
+      },
+      "PARKING": {
+        "any": 26,
+        "facts": 26
+      },
+      "FIRE": {
+        "any": 2423,
+        "facts": 2423
+      },
+      "CAR_CAMPING": {
+        "any": 9,
+        "facts": 9
+      },
+      "PET": {
+        "any": 2631,
+        "facts": 2621
+      },
+      "SITE": {
+        "any": 1647,
+        "facts": 1647
+      },
+      "SANITARY": {
+        "any": 1713,
+        "facts": 1713
+      },
+      "AMENITIES": {
+        "any": 2287,
+        "facts": 2287
+      },
+      "SEASON": {
+        "any": 2471,
+        "facts": 2471
+      },
+      "REFUND": {
+        "any": 23,
+        "facts": 23
+      },
+      "BOOKING": {
+        "any": 2394,
+        "facts": 2394
+      },
+      "REVIEW": {
+        "any": 1098,
+        "facts": 0
+      }
+    },
+    "tags": {
+      "MOUNTAIN": 1236,
+      "GLAMPING": 650,
+      "CARAVAN": 478,
+      "FAMILY": 1648,
+      "WINTER": 1747,
+      "WATER_PLAY": 1256,
+      "FOREST": 1027,
+      "RIVER": 356,
+      "LAKE": 145,
+      "AUTO": 832,
+      "PET_OK": 1140,
+      "VALLEY": 655,
+      "BEACH": 375,
+      "ISLAND": 85,
+      "REVIEW_QUIET": 172,
+      "FIREWOOD": 17,
+      "CITY": 180,
+      "SITE_PARKING": 22,
+      "HIGH_POWER": 11,
+      "CAR_CAMPING": 5,
+      "REVIEW_VIEW": 20,
+      "REVIEW_CLEAN": 3,
+      "REVIEW_HOST": 3
+    },
+    "facts_distribution": {
+      "0-5": 910,
+      "6-9": 2058,
+      "10-13": 147,
+      "14-18": 1
+    }
   }
 }

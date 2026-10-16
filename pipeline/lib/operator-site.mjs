@@ -19,6 +19,9 @@ export const PLATFORM_HOSTS = [
 export function hostOf(url) {
   try { return new URL(/^[a-z]+:\/\//i.test(url) ? url : `http://${url}`).hostname.toLowerCase(); } catch { return null; }
 }
+// 운영이 끝난 홈페이지 빌더(네이버 modoo!는 2025-06-26 종료). 고캠핑 등록 홈페이지가 낡아 남아 있다.
+export const CLOSED_HOSTS = ["modoo.at"];
+export function isClosedHost(url) { const h = hostOf(url); return Boolean(h && CLOSED_HOSTS.some((p) => h === p || h.endsWith(`.${p}`))); }
 export function isOperatorHost(url) {
   const h = hostOf(url);
   if (!h) return false;
@@ -97,7 +100,7 @@ export function guideLinks(html, baseUrl, max = 5) {
 }
 
 // 선택에 쓰이는 문장만 남긴다(전문 저장 금지).
-const RELEVANT = /입실|퇴실|체크\s*인|체크\s*아웃|얼리|레이트|매너\s*타임|소등|전기|전력|와트|\d\s*(?:w|kw)\b|주차|차량|차박|오토\s*캠핑|장작|숯|화로|불멍|직화|반려|애견|인원\s*추가|추가\s*인원|방문객|대여|렌탈|할인|연박|2박|샤워|온수|사이트\s*크기|\d+\s*[x×*]\s*\d+/i;
+const RELEVANT = /입실|퇴실|체크\s*인|체크\s*아웃|얼리|레이트|매너\s*타임|소등|전기|전력|와트|\d\s*(?:w|kw)\b|주차|차량|차박|오토\s*캠핑|장작|숯|화로|불멍|직화|반려|애견|강아지|인원\s*추가|추가\s*인원|방문객|대여|렌탈|할인|연박|2박|샤워|온수|사이트\s*크기|\d+\s*[x×*]\s*\d+|요금|이용료|\d[\d,]*\s*원|1박|성수기|비수기|평일|주말|공휴일|와이파이|wi-?fi|매점|편의점|수영장|물놀이|트램|방방|키즈|놀이터|개수대|화장실|쓰레기|분리수거|운영\s*기간|휴장|동계|난방|환불|취소/i;
 export function relevantSentences(text, limit = 60) {
   const seen = new Set(), out = [];
   for (const s of sentences(text)) {
@@ -172,6 +175,73 @@ export function extractSiteFacts(lines) {
       out[code] = { value: ws[0], max: ws.at(-1), quote: vals.find((v) => v.value === ws[0]).quote };
     } else if (vals.length === 1) out[code] = { value: vals[0].value, quote: vals[0].quote };
     else out[code] = { value: null, conflict: vals.map((v) => ({ value: v.value, quote: v.quote })) };
+  }
+  return out;
+}
+
+// ---------- 상세 사실(v2, 2026-10-16): 요금·편의시설 운영·운영 기간·환불 ----------
+const WON = /(\d{1,3}(?:\s?,\s?\d{3})+|\d{4,6})\s*원|(\d{1,2})\s*만\s*(\d{1,4})?\s*천?\s*원/g;
+const wonOf = (m) => m[1] ? Number(m[1].replace(/[\s,]/g, "")) : Number(m[2]) * 10000 + (m[3] ? Number(m[3]) * (m[3].length <= 1 ? 1000 : 1) : 0);
+const amounts = (s) => [...s.matchAll(WON)].map(wonOf).filter((n) => n > 0);
+// 기본 숙박 요금이 아닌 ‘추가·부대’ 요금 문장
+const EXTRA_FEE = /추가|인원|1\s*인|인당|차량|대당|방문|대여|렌탈|그릴|숯|장작|불멍|모닥불|세트|셋트|바베?큐|바비큐|할인|청소|세탁|배상|보증|위반|부과|전기\s*(료|사용|요금)|시간당|1\s*시간|마리|이불|체험|입장|수수료|환불|취소|위약|쓰레기|충전|샤워|온수|코인|매점|판매|구매|쿠폰|적립|포인트/;
+const NIGHT_CUE = /1\s*박|박\s*당|평일|주말|금요일|토요일|일요일|공휴일|성수기|비수기|극성수기|사이트|텐트|오토|데크|파쇄석|글램핑|카라반|캠핑장|이용\s*요금|이용료|기본\s*요금|객실/;
+const SEASON_LABEL = [["극성수기", /극성수기/], ["성수기", /(?<!비)성수기/], ["비수기", /비수기/], ["주말", /주말|토요일|금요일|공휴일|휴일\s*전날/], ["평일", /평일|일~목|일요일~목요일/]];
+
+const AMENITY_RULES = [
+  ["WIFI", "와이파이", /와이파이|wi-?fi/i, /안\s*됩|불가|없습니다|없어요/],
+  ["STORE", "매점", /매점|편의점/, /없습니다|없어요|운영하지\s*않/],
+  ["POOL", "수영장·물놀이장", /수영장|물놀이장|풀장/, /없습니다|운영하지\s*않|미운영/],
+  ["TRAMPOLINE", "트램펄린", /트램|방방|트렘/, /없습니다/],
+  ["HOT_WATER", "온수", /온수/, /안\s*나|나오지\s*않|없습니다/],
+  ["PLAYGROUND", "놀이터·키즈", /놀이터|키즈\s*(존|카페|룸)|어린이\s*놀이/, /없습니다/],
+  ["PRIVATE_TOILET", "개별 화장실·샤워", /개별\s*(화장실|샤워|욕실)|개인\s*(화장실|샤워)|전용\s*(화장실|샤워)/, /없습니다/],
+  ["DISHWASH", "개수대", /개수대|설거지/, /없습니다/],
+];
+
+/**
+ * 운영자 문장에서 요금·편의시설·운영 기간·환불 규정을 꺼낸다(출처 문장 함께).
+ * - SITE_PRICE: 기본 숙박 요금(1박, 2만~40만원). 추가·부대 요금 문장은 뺀다. 연박 합계(2박 9만5천원 등)도 뺀다.
+ * - FIRE_SET_FEE·BBQ_SET_FEE·ELECTRIC_FEE·PET_FEE: 부대 요금
+ * - AMENITIES: 운영 문장이 있는 편의시설(부정 문장은 제외)
+ * - SEASON: 동계·기간 휴장 / 연중 운영, REFUND: 취소·환불 규정 문장
+ */
+export function extractSiteDetails(lines) {
+  const out = { SITE_PRICE: null, FIRE_SET_FEE: null, BBQ_SET_FEE: null, ELECTRIC_FEE: null, PET_FEE: null, AMENITIES: [], SEASON: null, REFUND: null };
+  const prices = [];
+  const fee = (code, s, re) => { if (out[code] || !re.test(s)) return; const n = amounts(s).find((x) => x >= 1000 && x <= 200000); if (n) out[code] = { amount: n, quote: s }; };
+  for (const s of lines) {
+    if (QUESTION.test(s)) continue;
+    const ams = amounts(s);
+    if (ams.length) {
+      fee("FIRE_SET_FEE", s, /(불멍|모닥불|화롯대|화로대|캠프\s*파이어)[^.]{0,20}(세트|셋트|이용)|장작\s*\d+\s*kg/);
+      fee("BBQ_SET_FEE", s, /(바베?큐|바비큐|숯불|그릴)[^.]{0,20}(세트|셋트|이용\s*요금|이용료)/);
+      fee("ELECTRIC_FEE", s, /전기\s*(사용|요금|료)/);
+      fee("PET_FEE", s, /(반려견|반려동물|애견|강아지)[^.]{0,20}(요금|비용|마리당|1\s*마리)/);
+      // 기본 숙박 요금
+      // “주말 45,000원 (텐트1동 + 차량1대 + 4인)”처럼 괄호 안 구성 설명은 추가 요금 단서로 보지 않는다.
+      const bare = s.replace(/\([^)]*\)/g, " ");
+      // 단, 숯·그릴·장작·얼리 체크인·할인 같은 부대 요금 단서는 괄호 안에 있어도 기본 요금이 아니다.
+      const STRONG_EXTRA = /숯|그릴|장작|화로|불멍|모닥불|바베?큐|바비큐|얼리|레이트|체크\s*인|체크\s*아웃|할인|시간/;
+      if (!EXTRA_FEE.test(bare) && !STRONG_EXTRA.test(s) && !/[2-9]\s*박\s*[^당]?\s*\d/.test(s) && (NIGHT_CUE.test(s) || /^[\s\-·•]*\d[\d,]*\s*원/.test(s))) {
+        for (const n of ams) if (n >= 20000 && n <= 400000) prices.push({ amount: n, label: SEASON_LABEL.find(([, re]) => re.test(s))?.[0] ?? null, quote: s });
+      }
+    }
+    for (const [code, label, re, neg] of AMENITY_RULES) {
+      if (re.test(s) && !neg.test(s) && !out.AMENITIES.some((a) => a.code === code)) {
+        const period = s.match(/(\d{1,2})\s*월\s*(\d{1,2}\s*일)?\s*[~\-–]\s*(\d{1,2})\s*월/);
+        out.AMENITIES.push({ code, label, quote: s, ...(period ? { period: `${period[1]}월~${period[3]}월` } : {}) });
+      }
+    }
+    if (!out.SEASON) {
+      if (/동계\s*(기간\s*)?(휴장|휴업|운영\s*중단)|(\d{1,2})\s*월[^.]{0,12}휴장|휴장\s*기간/.test(s)) out.SEASON = { value: "SEASONAL_CLOSURE", quote: s };
+      else if (/연중\s*무휴|사계절\s*운영|365\s*일\s*운영|동계\s*(캠핑\s*)?운영/.test(s)) out.SEASON = { value: "YEAR_ROUND", quote: s };
+    }
+    if (!out.REFUND && /(취소|환불)[^.]{0,30}(수수료|위약|\d+\s*%|일\s*전)/.test(s)) out.REFUND = { quote: s };
+  }
+  if (prices.length) {
+    const ns = prices.map((p) => p.amount).sort((a, b) => a - b);
+    out.SITE_PRICE = { min: ns[0], max: ns.at(-1), items: prices.slice(0, 8) };
   }
   return out;
 }
