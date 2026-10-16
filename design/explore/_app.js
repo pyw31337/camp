@@ -1602,20 +1602,93 @@ const REVIEW_TOPICS = [
 ];
 function reviewSummaryBlock(c, d) {
   const reviews = reviewItems(d);
-  if (reviews.length < 3) return "";
-  const text = (r) => `${r.title ?? ""} ${r.snippet ?? ""}`;
-  const rows = REVIEW_TOPICS.map(([label, re]) => {
-    const hits = reviews.filter((r) => re.test(text(r))).sort((a, b) => b.t - a.t);
-    return { label, n: hits.length, sample: hits.slice(0, 2) };
-  }).filter((x) => x.n > 0).sort((a, b) => b.n - a.n).slice(0, 6);
-  if (!rows.length) return "";
-  const times = reviews.map((r) => r.t).filter(Boolean);
-  const period = times.length ? `${ymd(new Date(Math.min(...times)).toISOString())} ~ ${ymd(new Date(Math.max(...times)).toISOString())}` : "";
-  return `<div class="rv-topics">
-    <div class="rv-topics-head">${ic("#l-list-checks", "i-sm")}<div><b>후기에서 많이 나온 이야기</b><small>모은 글 ${reviews.length}건${period ? ` · ${period}` : ""} · 제목·요약의 단어를 센 것이라 좋고 나쁨은 원문에서 확인하세요</small></div></div>
-    <ul>${rows.map((x) => `<li><span class="rv-topic-l">${esc(x.label)}</span><span class="rv-topic-bar"><i style="--w:${Math.round((x.n / reviews.length) * 100)}%"></i></span><span class="rv-topic-n num">${x.n}건</span>
-      <span class="rv-topic-src">${x.sample.map((r) => `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(String(r.title ?? "원문").slice(0, 28))}</a>`).join("")}</span></li>`).join("")}</ul>
-  </div>`;
+  const rv = d?.rv || (c.rv ? { n: c.rv.n, pros: c.rv.p, cons: c.rv.c } : null);
+
+  // 1. 장점 및 단점 추출 (d.rv 우선, 없으면 c.rv)
+  const pros = rv?.details?.pros || (rv?.pros || []).map(([topic, count]) => ({ topic, count, samples: [] }));
+  const cons = rv?.details?.cons || (rv?.cons || []).map(([topic, count]) => ({ topic, count, samples: [] }));
+  const issues = rv?.details?.issues || [];
+
+  // 2. 실시간 운영 이슈 & 행사 (스펙 시트 + 중요 공지)
+  const specFields = d?.spec?.fields || {};
+  const promo = specFields.PROMOTION?.values || [];
+  const discount = specFields.DISCOUNT?.values || [];
+  const manner = specFields.MANNER_TIME?.values || [];
+
+  const totalReviews = rv?.n ?? reviews.length;
+  if (!pros.length && !cons.length && !issues.length && !promo.length && !discount.length && !manner.length && reviews.length < 3) return "";
+
+  const aiSummaryHtml = (pros.length || cons.length) ? `
+    <div class="dv-ai-summary">
+      <div class="ai-summary-head">
+        <div class="ai-head-title">
+          <span class="ai-chip">${ic("#l-sparkles", "i-xs")}인공지능 후기 분석</span>
+          <b>방문자 리뷰 장단점 핵심 요약</b>
+          <small>수집 후기 ${totalReviews}건 정밀 분석 · 반복 언급 키워드 기준 (협찬·광고성 글 배제)</small>
+        </div>
+      </div>
+      <div class="ai-summary-grid">
+        <div class="ai-box ai-pro-box">
+          <div class="ai-box-title">
+            <span class="ai-icon pro">${ic("#l-thumbs-up", "i-xs")}</span>
+            <b>방문자가 꼽은 장점 Top</b>
+          </div>
+          ${pros.length ? `
+            <ul class="ai-point-list">
+              ${pros.map((p) => `
+                <li>
+                  <div class="ai-point-main">
+                    <span class="ai-point-tag pro">${esc(p.topic)}</span>
+                    <span class="ai-point-cnt num">${p.count}회 언급</span>
+                  </div>
+                  <div class="ai-point-bar"><i style="--w:${Math.min(100, Math.round((p.count / Math.max(1, totalReviews)) * 100))}%"></i></div>
+                  ${p.samples?.length ? `<div class="ai-point-sample">${p.samples.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">“${esc(String(s.title).slice(0, 24))}…”</a>`).join("")}</div>` : ""}
+                </li>
+              `).join("")}
+            </ul>
+          ` : `<p class="ai-empty-text">장점 키워드 분석 중입니다.</p>`}
+        </div>
+
+        <div class="ai-box ai-con-box">
+          <div class="ai-box-title">
+            <span class="ai-icon con">${ic("#l-thumbs-down", "i-xs")}</span>
+            <b>솔직 방문 팁 & 주의할 점</b>
+          </div>
+          ${cons.length ? `
+            <ul class="ai-point-list">
+              ${cons.map((p) => `
+                <li>
+                  <div class="ai-point-main">
+                    <span class="ai-point-tag con">${esc(p.topic)}</span>
+                    <span class="ai-point-cnt num">${p.count}회 언급</span>
+                  </div>
+                  <div class="ai-point-bar con"><i style="--w:${Math.min(100, Math.round((p.count / Math.max(1, totalReviews)) * 100))}%"></i></div>
+                  ${p.samples?.length ? `<div class="ai-point-sample">${p.samples.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">“${esc(String(s.title).slice(0, 24))}…”</a>`).join("")}</div>` : ""}
+                </li>
+              `).join("")}
+            </ul>
+          ` : `<p class="ai-empty-text ok">${ic("#l-circle-check", "i-xs")}후기에서 반복 지적된 단점·불편이 없습니다.</p>`}
+        </div>
+      </div>
+    </div>
+  ` : "";
+
+  const aiIssuesHtml = (issues.length || promo.length || discount.length || manner.length) ? `
+    <div class="dv-ai-issues">
+      <div class="ai-issues-head">
+        <span class="ai-chip issue">${ic("#l-bell", "i-xs")}실시간 운영·행사 브리핑</span>
+        <b>최근 확인된 주요 공지 및 시즌 이벤트</b>
+      </div>
+      <div class="ai-issues-chips">
+        ${promo.map((x) => `<span class="issue-badge promo">${ic("#l-sparkles", "i-xs")}<b>행사</b>${esc(x.value)}</span>`).join("")}
+        ${discount.map((x) => `<span class="issue-badge discount">${ic("#l-ticket", "i-xs")}<b>할인</b>${esc(x.value)}</span>`).join("")}
+        ${manner.map((x) => `<span class="issue-badge manner">${ic("#l-moon", "i-xs")}<b>매너타임</b>${esc(x.value)}</span>`).join("")}
+        ${issues.map((x) => `<span class="issue-badge issue">${ic("#l-info", "i-xs")}<b>운영이슈</b>${esc(x.issue)} (${x.count}건 언급)</span>`).join("")}
+      </div>
+    </div>
+  ` : "";
+
+  return `${aiIssuesHtml}${aiSummaryHtml}`;
 }
 
 function reviewCards(d, mode) {

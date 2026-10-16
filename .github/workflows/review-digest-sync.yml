@@ -1,0 +1,67 @@
+name: Periodic Review Digest & AI Intelligence Sync
+
+# 전국 3000여개 캠핑장의 블로그·카페 후기 및 영상을 주기적으로 수집하고,
+# 인공지능 분석(장점·단점·운영이슈·시즌이벤트)을 실행해 탐색 화면과 상세에 자동 반영한다.
+on:
+  schedule:
+    # 매주 월요일 04:00 KST (일요일 19:00 UTC)
+    - cron: "0 19 * * 0"
+  workflow_dispatch:
+    inputs:
+      social_max_calls:
+        description: "소셜 검색 최대 호출 수 (기본 9100 = 약 1300곳)"
+        required: false
+        default: "9100"
+        type: string
+      max_age_days:
+        description: "재수집 갱신 기준 일수 (기본 14일)"
+        required: false
+        default: "14"
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: review-digest-sync-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sync-reviews:
+    name: Sync social reviews and build AI digest
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: pipeline
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Sync social reviews & videos (Kakao Daum REST API)
+        continue-on-error: true
+        run: npm run sync:social
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          SOCIAL_MAX_CALLS: ${{ inputs.social_max_calls || '9100' }}
+          SOCIAL_MAX_AGE_DAYS: ${{ inputs.max_age_days || '14' }}
+      - name: Extract spec sheet from operator texts and reviews
+        continue-on-error: true
+        run: npm run build:spec
+      - name: Build AI review digest (Pros & Cons, Events & Issues)
+        run: npm run build:review-digest
+      - name: Rebuild explorer data and publish
+        run: |
+          npm run build:explore
+          cd .. && node scripts/publish-explorer-pages.mjs
+      - name: Commit and push refreshed review intelligence
+        run: |
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add camping-atlas/public/data camping-atlas/public/explore
+          if git diff --cached --quiet; then echo "리뷰 분석 변경 없음."; exit 0; fi
+          git commit -m "chore(reviews): refresh AI review digest, pros/cons, and operating issues"
+          git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"
+          git push

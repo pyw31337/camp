@@ -1046,3 +1046,48 @@ body.detail-open .compare-bar { display: none; }
 .btn-cta-secondary.camfit { border-color: #2563eb; color: #2563eb; background: rgba(37, 99, 235, 0.08); font-weight: 800; }
 .btn-cta-secondary.camfit:hover { background: rgba(37, 99, 235, 0.16); }
 
+/* ==========================================================================
+   AI 장단점 핵심 요약 및 실시간 운영 이슈 알림
+   ========================================================================== */
+.dv-ai-summary { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; background: var(--surface); border-radius: var(--r-2); padding: 18px; border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+.ai-summary-head { display: flex; flex-direction: column; gap: 4px; }
+.ai-chip { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 850; color: var(--green-press); background: var(--green-tint); padding: 4px 10px; border-radius: 999px; width: fit-content; line-height: 1; }
+.ai-chip.issue { color: #d97706; background: #fef3c7; }
+.ai-head-title { display: flex; flex-direction: column; gap: 3px; }
+.ai-head-title b { font-size: var(--fs-md); font-weight: 900; color: var(--ink); }
+.ai-head-title small { font-size: 12px; color: var(--ink-3); }
+.ai-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 4px; }
+.ai-box { background: var(--surface-2); border-radius: var(--r-1); padding: 14px; border: 1px solid var(--line); display: flex; flex-direction: column; gap: 10px; }
+.ai-box.ai-pro-box { border-top: 3px solid var(--green); }
+.ai-box.ai-con-box { border-top: 3px solid #e11d48; }
+.ai-box-title { display: flex; align-items: center; gap: 8px; }
+.ai-box-title b { font-size: var(--fs-sm); font-weight: 850; color: var(--ink); }
+.ai-icon { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; }
+.ai-icon.pro { background: #dcfce7; color: #15803d; }
+.ai-icon.con { background: #ffe4e6; color: #e11d48; }
+.ai-point-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.ai-point-main { display: flex; justify-content: space-between; align-items: center; font-size: var(--fs-xs); }
+.ai-point-tag { font-weight: 800; color: var(--ink); }
+.ai-point-tag.pro { color: #15803d; }
+.ai-point-tag.con { color: #be123c; }
+.ai-point-cnt { font-size: 11px; color: var(--ink-3); }
+.ai-point-bar { height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; }
+.ai-point-bar i { display: block; height: 100%; width: var(--w, 0%); background: var(--green); border-radius: 999px; }
+.ai-point-bar.con i { background: #f43f5e; }
+.ai-point-sample { display: flex; flex-direction: column; gap: 2px; margin-top: 4px; font-size: 11px; }
+.ai-point-sample a { color: var(--ink-3); text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ai-point-sample a:hover { color: var(--ink); text-decoration: underline; }
+.ai-empty-text { font-size: var(--fs-xs); color: var(--ink-3); padding: 8px 0; margin: 0; }
+.ai-empty-text.ok { color: #15803d; display: flex; align-items: center; gap: 6px; font-weight: 700; }
+
+.dv-ai-issues { background: var(--surface); border-radius: var(--r-2); padding: 14px 16px; border: 1px solid #fed7aa; margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px; box-shadow: var(--shadow-sm); }
+.ai-issues-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ai-issues-head b { font-size: var(--fs-sm); font-weight: 850; color: #9a3412; }
+.ai-issues-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.issue-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 5px 12px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); color: var(--ink); font-weight: 700; }
+.issue-badge b { font-size: 10px; padding: 2px 6px; border-radius: 999px; font-weight: 850; }
+.issue-badge.promo b { background: #fef08a; color: #854d0e; }
+.issue-badge.discount b { background: #dcfce7; color: #15803d; }
+.issue-badge.manner b { background: #e0e7ff; color: #3730a3; }
+.issue-badge.issue b { background: #fee2e2; color: #991b1b; }
+

@@ -22,3 +22,18 @@ test("이 캠핑장 글만 세고, 이름 속 단어는 후기 표현으로 보�
   assert.ok(d.cons.some(([t]) => t === "그늘 부족"));
   assert.ok(!d.cons.some(([t]) => t === "바람 셈" || t === "벌레 많음"));
 });
+
+test("후기에서 운영 이슈 및 행사 감지, 원문 샘플 추적", () => {
+  const reviews = [
+    { title: "솔바람캠핑장 여름 휴가", snippet: "수영장 개장해서 아이들이 너무 좋아했어요! 사장님 친절하시고 온수 펑펑 잘 나옵니다.", url: "https://blog.naver.com/test1" },
+    { title: "솔바람캠핑장 가을 방문", snippet: "단풍 시즌이라 뷰가 끝내주네요. 동계 휴장 전에 꼭 가보세요.", url: "https://blog.naver.com/test2" },
+  ];
+  const d = digestReviews("솔바람캠핑장", reviews);
+  assert.equal(d.n, 2);
+  assert.ok(d.details);
+  assert.ok(d.details.issues.some((x) => x.issue === "수영장·물놀이 개장" || x.issue === "동계 휴장·운영 중단" || x.issue === "단풍·벚꽃 시즌"));
+  assert.ok(d.details.pros.some((x) => x.topic === "온수 펑펑" || x.topic === "아이들 놀기 좋음"));
+  const hotWater = d.details.pros.find((x) => x.topic === "온수 펑펑");
+  assert.ok(hotWater?.samples?.length > 0);
+  assert.equal(hotWater.samples[0].url, "https://blog.naver.com/test1");
+});
