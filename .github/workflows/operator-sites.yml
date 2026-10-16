@@ -60,13 +60,16 @@ jobs:
         env:
           NAVER_API_HUB_CLIENT_ID: ${{ secrets.NAVER_API_HUB_CLIENT_ID }}
           NAVER_API_HUB_CLIENT_SECRET: ${{ secrets.NAVER_API_HUB_CLIENT_SECRET }}
+          # 유료 방지: 저장소 변수로 끄기·월 상한 조정(기본 20,000건, 무료 한도 775,000건)
+          NAVER_API_ENABLED: ${{ vars.NAVER_API_ENABLED }}
+          NAVER_MONTHLY_CAP: ${{ vars.NAVER_MONTHLY_CAP }}
       - name: Read operator homepages
         run: node scripts/crawl-operator-sites.mjs --concurrency 10 --render --retry-failed --max-age-days "${{ github.event.inputs.max_age_days || '14' }}"
       - name: Commit refreshed snippets
         run: |
           git config user.name "moyeora-camping-data-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add registry/operator-site-snippets.json; git add registry/kakao-places.json registry/naver-places.json 2>/dev/null || true
+          git add registry/operator-site-snippets.json; git add registry/kakao-places.json registry/naver-places.json registry/naver-usage.json 2>/dev/null || true
           if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
           git commit -m "chore(data): refresh operator homepage snippets"
           git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"

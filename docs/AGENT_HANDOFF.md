@@ -26,6 +26,8 @@
 
 ## 네이버 HUB 지역 검색 연결 + 카카오 발굴 실행 (2026-10-16 밤, Claude)
 
+- **유료 방지(소유자 지시)**: `lib/naver-guard.mjs` — 호출 전 NCP 가이드 “한시적으로 무료” 확인(못 하면 중단), 월 상한 20,000건(`registry/naver-usage.json`), 402·요금 응답 즉시 중단, 변수 `NAVER_API_ENABLED=false` 스위치, 매일 감시 `naver-free-tier-watch.yml`(실패 시 이슈). 네이버를 부르는 코드를 추가할 때는 반드시 이 가드를 거친다.
+
 - 소유자가 `NAVER_API_HUB_CLIENT_ID/SECRET`을 등록했다. `scripts/discover-naver.mjs`가 업장의 네이버 등록 링크·전화를 맞추고(`registry/naver-places.json`), 크롤러는 운영자 링크를 카카오 후보보다 먼저 쓴다. 사실 저장소에 `naver_local` 원천 추가. `operator-sites.yml`에 단계 추가(입력 `naver_max_calls`, 기본 4000).
 - 키 동작 확인용 `api-key-check.yml`(네이버·카카오·관광사진 각 1건 호출, 키 값 미출력).
 - 카카오 발굴은 PR #18 브랜치에서 실행됨(run 38856252147, 발굴 단계 성공). 그 결과 커밋을 이 브랜치로 가져와 반영할 것.

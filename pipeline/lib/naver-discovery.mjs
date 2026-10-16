@@ -5,6 +5,7 @@
 import { isClosedHost, isOperatorHost } from "./operator-site.mjs";
 import { nameSimilarity } from "./kakao-discovery.mjs";
 import { haversineM } from "./geo.mjs";
+import { isBillingError } from "./naver-guard.mjs";
 
 export const NAVER_HUB_BASE = "https://naverapihub.apigw.ntruss.com";
 // 문서마다 경로 표기가 달라 순서대로 시도하고, 처음 성공한 경로를 실행 동안 고정한다.
@@ -65,7 +66,7 @@ export async function naverGet(url, { id, secret, fetchImpl = fetch, timeoutMs =
   if (!res.ok) {
     const e = new Error(`네이버 HUB HTTP ${res.status}: ${text.slice(0, 200)}`);
     e.status = res.status;
-    e.code = res.status === 429 ? "RATE_LIMIT" : res.status === 401 || res.status === 403 ? "AUTH" : res.status === 404 ? "NOT_FOUND" : "HTTP";
+    e.code = isBillingError(res.status, text) ? "BILLING" : res.status === 429 ? "RATE_LIMIT" : res.status === 401 || res.status === 403 ? "AUTH" : res.status === 404 ? "NOT_FOUND" : "HTTP";
     throw e;
   }
   const j = JSON.parse(text);
