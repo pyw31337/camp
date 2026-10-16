@@ -704,9 +704,9 @@
     "private_bathroom": 310,
     "kids_play_features": 2658
   },
-  "updated_at": "2026-10-16T07:14:23.707Z",
+  "updated_at": "2026-10-16T10:37:58.628Z",
   "spec_sheet": {
-    "generated_at": "2026-10-16T07:14:24.407Z",
+    "generated_at": "2026-10-16T10:37:59.736Z",
     "campgrounds_with_spec": 1014,
     "roundup_reviews_skipped": 2463,
     "fields": {
@@ -765,26 +765,26 @@
     }
   },
   "operator_site_facts": {
-    "generated_at": "2026-10-16T07:14:24.189Z",
-    "campgrounds": 108,
-    "w": 45,
-    "pk": 33,
+    "generated_at": "2026-10-16T10:37:59.349Z",
+    "campgrounds": 114,
+    "w": 46,
+    "pk": 39,
     "fire": 33,
     "cc": 16,
-    "conflicts": 0,
+    "conflicts": 1,
     "stale": 0,
     "shared_host": 52,
     "sites_read": 547
   },
   "review_digest": {
-    "generated_at": "2026-10-16T07:16:25.398Z",
+    "generated_at": "2026-10-16T10:38:10.641Z",
     "campgrounds": 1640,
     "with_pros": 1582,
     "with_cons": 164,
     "reviews": 10060
   },
   "profiles": {
-    "generated_at": "2026-10-16T07:16:29.411Z",
+    "generated_at": "2026-10-16T10:38:11.040Z",
     "total": 3116,
     "fields": {
       "TYPE": {
@@ -816,8 +816,8 @@
         "facts": 2268
       },
       "PARKING": {
-        "any": 51,
-        "facts": 51
+        "any": 57,
+        "facts": 57
       },
       "FIRE": {
         "any": 2428,
@@ -876,19 +876,19 @@
       "BEACH": 375,
       "ISLAND": 85,
       "REVIEW_QUIET": 169,
-      "FIREWOOD": 20,
+      "FIREWOOD": 23,
       "CITY": 180,
-      "SITE_PARKING": 32,
+      "SITE_PARKING": 36,
       "CAR_CAMPING": 10,
-      "HIGH_POWER": 15,
+      "HIGH_POWER": 16,
       "REVIEW_VIEW": 20,
       "REVIEW_CLEAN": 3,
       "REVIEW_HOST": 3
     },
     "facts_distribution": {
-      "0-5": 873,
-      "6-9": 1991,
-      "10-13": 246,
+      "0-5": 872,
+      "6-9": 1990,
+      "10-13": 248,
       "14-18": 6
     }
   },
