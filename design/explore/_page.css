@@ -1019,3 +1019,30 @@ body.detail-open .compare-bar { display: none; }
 .compare-share-btn { display: inline-flex; align-items: center; gap: 4px; min-height: 2.25rem; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-size: var(--fs-xs); font-weight: 750; cursor: pointer; white-space: nowrap; }
 .compare-share-btn:hover { background: var(--surface-2); }
 .dv-fix-links { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+
+/* ==========================================================================
+   자연환경 입지 & 부대시설 카드 그리드 (Good Grid)
+   ========================================================================== */
+.dv-good-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)); gap: 10px; margin-top: 10px; }
+.dv-good-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); transition: all .15s ease; cursor: pointer; text-decoration: none; color: inherit; }
+.dv-good-card:hover { transform: translateY(-2px); border-color: var(--green); box-shadow: var(--shadow-1); }
+.dv-good-ic { width: 2.25rem; height: 2.25rem; border-radius: 10px; background: var(--surface-2); display: grid; place-items: center; color: var(--green); flex-shrink: 0; }
+.dv-good-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.dv-good-text b { font-size: var(--fs-xs); font-weight: 850; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dv-good-text small { font-size: 11px; color: var(--ink-3); line-height: 1.35; }
+
+/* ==========================================================================
+   플랫폼 허브 섹션 (Rich Platform Hub)
+   ========================================================================== */
+.platform-sec-card { grid-column: 1 / -1; display: flex; flex-direction: column; align-items: stretch; gap: 10px; }
+.platform-card-header { display: flex; align-items: center; gap: 12px; width: 100%; }
+.platform-ext-btn { display: grid; place-items: center; width: 1.75rem; height: 1.75rem; border-radius: 8px; background: var(--surface-2); color: var(--ink-2); text-decoration: none; }
+.platform-ext-btn:hover { background: var(--green-tint); color: var(--green-press); }
+.platform-inline-vids { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); gap: 10px; width: 100%; }
+.platform-inline-snaps { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+.platform-snap-link { width: 4.5rem; height: 4.5rem; border-radius: 10px; overflow: hidden; flex-shrink: 0; display: block; border: 1px solid var(--line); }
+.platform-snap-link img { width: 100%; height: 100%; object-fit: cover; }
+.platform-icon.cafe { background: #ff9800; color: #fff; }
+.btn-cta-secondary.camfit { border-color: #2563eb; color: #2563eb; background: rgba(37, 99, 235, 0.08); font-weight: 800; }
+.btn-cta-secondary.camfit:hover { background: rgba(37, 99, 235, 0.16); }
+

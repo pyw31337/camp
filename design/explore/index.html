@@ -1080,6 +1080,33 @@ body.detail-open .compare-bar { display: none; }
 .compare-share-btn:hover { background: var(--surface-2); }
 .dv-fix-links { display: flex; flex-wrap: wrap; gap: 4px 16px; }
 
+/* ==========================================================================
+   자연환경 입지 & 부대시설 카드 그리드 (Good Grid)
+   ========================================================================== */
+.dv-good-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)); gap: 10px; margin-top: 10px; }
+.dv-good-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); transition: all .15s ease; cursor: pointer; text-decoration: none; color: inherit; }
+.dv-good-card:hover { transform: translateY(-2px); border-color: var(--green); box-shadow: var(--shadow-1); }
+.dv-good-ic { width: 2.25rem; height: 2.25rem; border-radius: 10px; background: var(--surface-2); display: grid; place-items: center; color: var(--green); flex-shrink: 0; }
+.dv-good-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.dv-good-text b { font-size: var(--fs-xs); font-weight: 850; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dv-good-text small { font-size: 11px; color: var(--ink-3); line-height: 1.35; }
+
+/* ==========================================================================
+   플랫폼 허브 섹션 (Rich Platform Hub)
+   ========================================================================== */
+.platform-sec-card { grid-column: 1 / -1; display: flex; flex-direction: column; align-items: stretch; gap: 10px; }
+.platform-card-header { display: flex; align-items: center; gap: 12px; width: 100%; }
+.platform-ext-btn { display: grid; place-items: center; width: 1.75rem; height: 1.75rem; border-radius: 8px; background: var(--surface-2); color: var(--ink-2); text-decoration: none; }
+.platform-ext-btn:hover { background: var(--green-tint); color: var(--green-press); }
+.platform-inline-vids { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); gap: 10px; width: 100%; }
+.platform-inline-snaps { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+.platform-snap-link { width: 4.5rem; height: 4.5rem; border-radius: 10px; overflow: hidden; flex-shrink: 0; display: block; border: 1px solid var(--line); }
+.platform-snap-link img { width: 100%; height: 100%; object-fit: cover; }
+.platform-icon.cafe { background: #ff9800; color: #fff; }
+.btn-cta-secondary.camfit { border-color: #2563eb; color: #2563eb; background: rgba(37, 99, 235, 0.08); font-weight: 800; }
+.btn-cta-secondary.camfit:hover { background: rgba(37, 99, 235, 0.16); }
+
+
 
 :root {
   /* v4.1 “Ink & Leaf”(2026-10-16): 밝은 화면만. 글자는 잉크/흰 강약, 액센트는 초록 하나, 배지 색은 뜻 하나씩.
@@ -2034,14 +2061,65 @@ function largeLocalPhoto(path) {
 // 외부 사진은 제공자가 준 썸네일 주소 그대로(https로만 바꿔) 쓴다. 썸네일 주소 안의 원본 URL(fname)을
 // 꺼내 블로그 원본을 직접 불러오거나 크기 인자를 바꾸지 않는다(제공자 표시 조건·원저작자 권리).
 function remoteImg(url) {
-  const u = String(url ?? "").trim().replace(/^http:\/\//i, "https://");
-  return u.replace(/\/argon\/\d+x\d+_\d+_[a-z]+\//, "/argon/600x600_85_c/");
+  let u = String(url ?? "").trim().replace(/^http:\/\//i, "https://");
+  if (u.includes("dthumb-phinf.pstatic.net") && u.includes("src=")) {
+    try {
+      const parsed = new URL(u);
+      let inner = parsed.searchParams.get("src");
+      if (inner) {
+        inner = inner.replace(/^["']|["']$/g, "");
+        u = decodeURIComponent(inner);
+      }
+    } catch {}
+  }
+  u = u.replace(/\/argon\/\d+x\d+_\d+_[a-z]+\//, "/argon/600x600_85_c/");
+  if (u.includes("postfiles.pstatic.net") || u.includes("blogthumb.pstatic.net")) {
+    u = u.replace(/\?type=w\d+/, "?type=w773");
+  }
+  return u;
 }
 
 function hiResImg(url) {
-  const u = String(url ?? "").trim().replace(/^http:\/\//i, "https://");
+  let u = String(url ?? "").trim().replace(/^http:\/\//i, "https://");
+  if (u.includes("dthumb-phinf.pstatic.net") && u.includes("src=")) {
+    try {
+      const parsed = new URL(u);
+      let inner = parsed.searchParams.get("src");
+      if (inner) {
+        inner = inner.replace(/^["']|["']$/g, "");
+        u = decodeURIComponent(inner);
+      }
+    } catch {}
+  }
   const gc = u.replace(/\/thumb\/thumb_\d+_/, "/");
-  return gc.replace(/\/argon\/\d+x\d+_\d+_[a-z]+\//, "/argon/0x0_85_c/");
+  let res = gc.replace(/\/argon\/\d+x\d+_\d+_[a-z]+\//, "/argon/0x0_85_c/");
+  if (res.includes("postfiles.pstatic.net") || res.includes("blogthumb.pstatic.net")) {
+    res = res.replace(/\?type=[a-zA-Z0-9_]+/, "?type=w966");
+  }
+  return res;
+}
+
+function canonicalImageKey(url) {
+  if (!url) return null;
+  let str = String(url).trim();
+  if (/%[0-9a-fA-F]{2}/.test(str)) {
+    try { str = decodeURIComponent(decodeURIComponent(str)); } catch {}
+  }
+  const mdaMatch = str.match(/(MDAx[a-zA-Z0-9_.-]+)/);
+  if (mdaMatch) return `naver:${mdaMatch[1]}`;
+  const argonMatch = str.match(/\/argon\/[^/]+\/([a-zA-Z0-9_-]+)/);
+  if (argonMatch) return `argon:${argonMatch[1]}`;
+  const gcMatch = str.match(/\/upload\/camp\/\d+\/(?:thumb\/thumb_\d+_)?([a-zA-Z0-9_.-]+)/);
+  if (gcMatch) return `gc:${gcMatch[1]}`;
+  try {
+    const p = new URL(str.startsWith("http") ? str : `https://${str}`);
+    const fn = (p.searchParams.get("fname") || p.pathname).split("/").filter(Boolean).pop() || "";
+    const cleanFn = fn.toLowerCase().replace(/\.(jpe?g|png|webp|gif)$/, "");
+    if (cleanFn && !/^(image|img|screenshot|thumbnail|photo|사진|배치도|다운로드)$/i.test(cleanFn) && cleanFn.length > 5) {
+      return `fn:${cleanFn}`;
+    }
+  } catch {}
+  return str.split("?")[0].replace(/^https?:\/\//, "");
 }
 
 function dedupeImages(items, getUrl) {
@@ -2050,24 +2128,15 @@ function dedupeImages(items, getUrl) {
   for (const it of items) {
     const u = getUrl(it);
     if (!u) continue;
-    let key = u;
-    try {
-      const p = new URL(u);
-      const argonMatch = p.pathname.match(/\/argon\/[^/]+\/([a-zA-Z0-9_-]+)/);
-      if (argonMatch) {
-        key = argonMatch[1];
-      } else {
-        const fn = p.searchParams.get("fname") || p.pathname;
-        key = fn.toLowerCase().split(/[?#]/)[0].split("/").pop() || u;
-      }
-    } catch {
-      key = String(u).toLowerCase().split(/[?#]/)[0].split("/").pop() || u;
-    }
+    const key = canonicalImageKey(u) || u;
     const rawKey = it?.img || it?.link || it?.url;
-    if (rawKey && seen.has(rawKey)) continue;
+    const rawCanon = rawKey ? canonicalImageKey(rawKey) : null;
     if (seen.has(key)) continue;
+    if (rawKey && seen.has(rawKey)) continue;
+    if (rawCanon && seen.has(rawCanon)) continue;
     seen.add(key);
     if (rawKey) seen.add(rawKey);
+    if (rawCanon) seen.add(rawCanon);
     out.push(it);
   }
   return out;
@@ -2593,6 +2662,12 @@ function bookingCtaLabel(ch) {
 }
 function bookingTarget(c) {
   const channels = bookingChannels(c);
+  const naver = channels.find((x) => x.url && (x.platform_id === "naver" || /booking\.naver\.com/i.test(x.url)));
+  const phone = channels.find((x) => x.url && x.kind === "phone");
+  const defaultNaverHref = naver?.url || `https://search.naver.com/search.naver?query=${encodeURIComponent(c.name + " 예약")}`;
+  const defaultCamfitHref = `https://www.camfit.co.kr/search?keyword=${encodeURIComponent(c.name)}`;
+  const defaultPhoneHref = phone?.url || (c.tel ? telHref(c.tel) : null);
+
   // 1순위: 캠핏 채널
   const camfit = channels.find((x) => x.url && (x.platform_id === "camfit" || /camfit\.co\.kr/i.test(x.url)));
   if (camfit) {
@@ -2604,10 +2679,11 @@ function bookingTarget(c) {
       type: "camfit",
       label: "캠핏 예약",
       isSearch: false,
+      naverHref: defaultNaverHref,
+      phoneHref: defaultPhoneHref,
     };
   }
   // 2순위: 네이버 예약
-  const naver = channels.find((x) => x.url && (x.platform_id === "naver" || /booking\.naver\.com/i.test(x.url)));
   if (naver) {
     return {
       href: naver.url,
@@ -2617,6 +2693,8 @@ function bookingTarget(c) {
       type: "naver",
       label: "네이버 예약",
       isSearch: false,
+      camfitHref: defaultCamfitHref,
+      phoneHref: defaultPhoneHref,
     };
   }
   // 3순위: 기타 공식 온라인 채널
@@ -2628,9 +2706,11 @@ function bookingTarget(c) {
       channel: online,
       platform: online.platform_name || "online",
       type: "online",
-      // 버튼 문구는 줄바꿈하지 않도록 짧게. 긴 채널명은 ‘온라인 예약’으로 줄인다.
       label: (online.platform_name ?? "").length <= 6 ? `${online.platform_name || "온라인"} 예약` : "온라인 예약",
       isSearch: false,
+      naverHref: defaultNaverHref,
+      camfitHref: defaultCamfitHref,
+      phoneHref: defaultPhoneHref,
     };
   }
   // 4순위: 공식 홈페이지
@@ -2644,21 +2724,22 @@ function bookingTarget(c) {
       type: "homepage",
       label: "홈페이지 예약",
       isSearch: false,
+      naverHref: defaultNaverHref,
+      camfitHref: defaultCamfitHref,
+      phoneHref: defaultPhoneHref,
     };
   }
-  // 5순위: 등록된 온라인·홈페이지 경로가 없으면 캠핏 실시간 예약·검색을 1순위 핵심 버튼으로 연결하고,
-  // 네이버 예약을 보조 버튼으로 제공한다. 전화는 특이사항 확인용 보조 경로로 밸런스를 맞춘다.
-  const phone = channels.find((x) => x.url && x.kind === "phone");
+  // 5순위: 기본값 (캠핏 실시간 예약/빈자리 검색 1순위, 네이버 검색 보조)
   return {
-    href: `https://www.camfit.co.kr/search?keyword=${encodeURIComponent(c.name)}`,
+    href: defaultCamfitHref,
     ext: true,
     channel: null,
     platform: "camfit-search",
     type: "camfit",
     label: "캠핏에서 예약·빈자리 찾기",
     isSearch: true,
-    naverHref: `https://search.naver.com/search.naver?query=${encodeURIComponent(c.name + " 예약")}`,
-    phoneHref: phone?.url || (c.tel ? telHref(c.tel) : null),
+    naverHref: defaultNaverHref,
+    phoneHref: defaultPhoneHref,
   };
 }
 
@@ -2799,8 +2880,8 @@ const sum = (xs) => xs.reduce((n, x) => n + (Number(x) || 0), 0);
 // 1) 사진 모자이크: 공식 사진 → 방문자 사진 순. 넓은 화면은 1+4 격자, 좁은 화면은 넘기는 슬라이드.
 function heroBlock(c, d) {
   const official = allPhotos(c, d).map((p) => ({ src: p.l, cap: "공식 사진 · 한국관광공사 고캠핑", remote: p.remote }));
-  const rawSnaps = (d?.sns_images ?? []).map((x) => ({ src: remoteImg(x.thumb), small: true, cap: `방문자 사진 · ${x.src ?? "외부"}`, link: x.url, remote: true }));
-  const rawLayout = (d?.layout?.images ?? []).map((x) => ({ src: remoteImg(x.thumb ?? x.img), small: true, cap: "시설 배치도", link: x.url ?? x.img, remote: true }));
+  const rawSnaps = (d?.sns_images ?? []).map((x) => ({ src: hiResImg(x.img ?? x.thumb), small: true, cap: `방문자 사진 · ${x.src ?? "외부"}`, link: x.url, remote: true }));
+  const rawLayout = (d?.layout?.images ?? []).map((x) => ({ src: hiResImg(x.img ?? x.thumb), small: false, cap: x.sure ? "시설 배치도 (고해상도 원본)" : "시설 배치도", link: x.url ?? x.img, remote: true }));
   const snaps = dedupeImages(rawSnaps, (x) => x.src);
   const layout = dedupeImages(rawLayout, (x) => x.src);
   const items = lbAdd("all", dedupeImages([...official, ...layout, ...snaps], (x) => x.src));
@@ -2813,7 +2894,7 @@ function heroBlock(c, d) {
 
 // 2) 한눈에: 큰 아이콘 타일(사이트 면수 · 반려견 · 화장실/샤워 · 예약 방식 · 후기 · 영상)
 function keyStats(c, d) {
-  const total = sum(c.kinds.map(([, n]) => n));
+  const total = sum(c.kinds.map(([, n]) => n)) || c.specs?.total_sites;
   const reviews = (d?.reviews?.length ?? 0) + (d?.cafe?.length ?? 0) || c.soc?.[0] || 0;
   const tiles = [
     total && ["#t-tent", `${total}면`, "사이트"],
@@ -2826,15 +2907,87 @@ function keyStats(c, d) {
   return `<div class="dv-stats">${tiles.map(([i, v, l]) => `<div><span>${ic(i)}</span><b class="num">${esc(v)}</b><small>${l}</small></div>`).join("")}</div>`;
 }
 
-// 3) 이런 곳이에요: 입지·부대시설을 아이콘 격자로
+function findEnvDetail(c, d) {
+  const textPool = [
+    c.line || "",
+    d?.intro || "",
+    ...(d?.operator_snippets?.map((s) => s.text) || []),
+  ].join(" ");
+
+  let water = null;
+  const valleyMatch = textPool.match(/([가-힣]{2,10}(?:계곡|천|강|내|저수지|호수|해수욕장|해변))/);
+  if (valleyMatch) {
+    water = valleyMatch[1];
+  } else if (d?.nearby?.tour) {
+    const nearWater = d.nearby.tour.find((t) => /계곡|천|강|호|해수욕장|해변/.test(t.n));
+    if (nearWater) water = `${nearWater.n} (${km(nearWater.m)})`;
+  }
+
+  let forest = null;
+  const mountainMatch = textPool.match(/([가-힣]{2,10}(?:산|자연휴양림|수목원|숲|군락지))/);
+  if (mountainMatch) {
+    forest = mountainMatch[1];
+  } else if (d?.nearby?.tour) {
+    const nearMountain = d.nearby.tour.find((t) => /산|휴양림|수목원|숲/.test(t.n));
+    if (nearMountain) forest = `${nearMountain.n} (${km(nearMountain.m)})`;
+  }
+
+  let firewoodPrice = null;
+  const firewoodPriceMatch = textPool.match(/장작\s*(?:판매|세트)?\s*[:=\s]*([0-9]{1,2},?[0-9]{3})\s*원?/);
+  if (firewoodPriceMatch) {
+    firewoodPrice = firewoodPriceMatch[1].replace(/,/g, "") + "원";
+  } else if (d?.field_conditions?.rental_offers?.some((r) => /장작|화로/.test(r.item) && r.price_krw)) {
+    const ro = d.field_conditions.rental_offers.find((r) => /장작|화로/.test(r.item) && r.price_krw);
+    firewoodPrice = won(ro.price_krw);
+  }
+
+  let powerLimit = null;
+  const powerW = c.field_conditions?.power?.limit_w || c.field_conditions?.power?.max_w || c.of?.w?.v;
+  if (powerW) {
+    powerLimit = `${powerW.toLocaleString()}W`;
+  } else if (hasPower(c)) {
+    powerLimit = "법정 600W (고출력 온풍기 주의)";
+  }
+
+  let mart = null;
+  const hasInternalMart = c.amenities?.some((a) => /마트|편의점|매점/.test(a));
+  if (hasInternalMart) {
+    mart = "구내 매점·편의점 운영";
+  } else if (d?.nearby?.conv?.[0] || d?.nearby?.mart?.[0]) {
+    const nearest = d?.nearby?.conv?.[0] || d?.nearby?.mart?.[0];
+    mart = `외부 편의시설: ${nearest.n} (${km(nearest.m)})`;
+  }
+
+  return { water, forest, firewoodPrice, powerLimit, mart };
+}
+
+// 3) 이런 곳이에요: 입지·자연환경·부대시설 디테일
 const AMENITY_ICON = [[/전기/, "#l-plug-zap"], [/무선|와이파이|wifi/i, "#l-wifi"], [/장작/, "#l-flame"], [/온수|샤워/, "#l-shower-head"], [/물놀이|수영/, "#l-waves"], [/운동|족구|풋살|농구|배드민턴/, "#l-dumbbell"], [/마트|편의점|매점/, "#l-store"], [/산책|둘레길|숲길/, "#l-footprints"], [/트렘|트램|방방|에어바운스/, "#l-sparkles"], [/놀이/, "#l-baby"], [/카페|커피/, "#l-coffee"], [/덤프/, "#l-truck"], [/낚시/, "#l-fish"], [/썰매/, "#l-snowflake"], [/바베큐|바비큐/, "#l-utensils-crossed"]];
 const ENV_ICON = { 산: "#l-mountain", 숲: "#l-trees", 계곡: "#l-waves", 강: "#l-droplets", 호수: "#l-droplets", 해변: "#l-sailboat", 섬: "#l-sailboat", 도심: "#l-building-2" };
-function highlightsBlock(c) {
-  const env = c.env.map((e) => [ENV_ICON[e] ?? "#l-map-pin", `${e} 입지`]);
-  const am = c.amenities.filter((a) => a.length <= 12).map((a) => [AMENITY_ICON.find(([re]) => re.test(a))?.[1] ?? "#l-circle-check", a.replace(/\./g, "·")]);
-  const items = [...env, ...am].slice(0, 12);
+
+function highlightsBlock(c, d) {
+  const envDetail = findEnvDetail(c, d);
+  const env = c.env.map((e) => {
+    let sub = `${e} 입지`;
+    if ((e === "산" || e === "숲") && envDetail.forest) sub = `${envDetail.forest} 자락`;
+    else if ((e === "계곡" || e === "강" || e === "호수") && envDetail.water) sub = `${envDetail.water} 수변`;
+    return [ENV_ICON[e] ?? "#l-map-pin", `${e} 입지`, sub, e === "계곡" || e === "강" ? "sec-near" : "sec-site"];
+  });
+  const am = c.amenities.filter((a) => a.length <= 12).map((a) => {
+    let sub = null;
+    if (/장작/.test(a) && envDetail.firewoodPrice) sub = `판매가 ${envDetail.firewoodPrice}`;
+    else if (/전기/.test(a) && envDetail.powerLimit) sub = envDetail.powerLimit;
+    else if (/마트|편의점/.test(a) && envDetail.mart) sub = envDetail.mart;
+    return [AMENITY_ICON.find(([re]) => re.test(a))?.[1] ?? "#l-circle-check", a.replace(/\./g, "·"), sub, "sec-site"];
+  });
+  const items = [...env, ...am].slice(0, 14);
   if (!items.length) return "";
-  return `<section class="dv-sec" id="sec-good"><h3>이런 곳이에요</h3><div class="dv-good">${items.map(([i, l]) => `<div><span>${ic(i)}</span><b>${esc(l)}</b></div>`).join("")}</div></section>`;
+  return `<section class="dv-sec" id="sec-good"><h3>이런 곳이에요</h3>
+    <div class="dv-good-grid">${items.map(([i, l, sub, jump]) => `<div class="dv-good-card" ${jump ? `data-jump="${jump}" role="button" tabindex="0" title="${esc(l)} 상세정보 보기"` : ""}>
+      <span class="dv-good-ic">${ic(i)}</span>
+      <div class="dv-good-text"><b>${esc(l)}</b>${sub ? `<small>${esc(sub)}</small>` : ""}</div>
+    </div>`).join("")}</div>
+  </section>`;
 }
 
 // 4) 예약 카드: 다음 오픈(D-day) + 예약 방식 + 버튼. 자세한 경로·규칙은 접어 둔다.
@@ -2858,23 +3011,30 @@ function bookingCard(c, d, target) {
 }
 
 // 5) 사이트·요금: 형태별 타일 + 크기·바닥 칩 + 후기 요금 막대 + 상품 + 배치도
-function siteListBlock(c) {
+function siteListBlock(c, d) {
   const rows = c.kinds.filter(([k]) => KIND[k]);
-  const totalSites = sum(rows.map(([, n]) => n));
+  const totalSites = sum(rows.map(([, n]) => n)) || c.specs?.total_sites;
   const max = Math.max(1, ...rows.map(([, n]) => n || 0));
   const v = conditionView(c);
-  if (!rows.length && !c.sizes.length && !c.floors.length) return `<p class="dv-empty">사이트 구성이 등록되지 않았어요. 예약 화면에서 확인하세요.</p><span class="trust">고캠핑 미등록</span>`;
-  // 규격은 ‘내 장비가 들어가는가’로만 해석한다. 면적만으로 타프·캐노피 허용을 말하지 않는다.
+  const sp = c.specs || {};
+  const parkingCount = sp.parking_count || c.field_conditions?.parking?.parking_count;
+  const areaM2 = sp.area_m2 || c.field_conditions?.area_m2;
   const gear = hasSetup() && state.gear ? setupStatus(c).checks.find((x) => x.key === "gear") : null;
   const essentials = [["#l-plug-zap", "전기", v.power], ["#l-flame", "장작", v.firewood], ["#l-car", "주차", v.parking]];
+
   return `<div class="dv-site-inventory">
-    ${totalSites ? `<div class="dv-site-stat-bar"><div class="dv-stat-chip"><b>총 ${totalSites}면</b><span>고캠핑 등록</span></div></div>` : ""}
+    <div class="dv-site-stat-bar">
+      ${totalSites ? `<div class="dv-stat-chip"><b>총 ${totalSites}면</b><span>관리 사이트</span></div>` : ""}
+      ${parkingCount ? `<div class="dv-stat-chip"><b>주차 ${parkingCount}대</b><span>차량 수용</span></div>` : ""}
+      ${areaM2 ? `<div class="dv-stat-chip"><b>${Number(areaM2).toLocaleString()}㎡</b><span>부지 면적</span></div>` : ""}
+      ${c.toilets ? `<div class="dv-stat-chip"><b>화장실 ${c.toilets}개</b><span>위생 시설</span></div>` : ""}
+    </div>
     ${rows.length ? `<div class="dv-sites">${rows.map(([k, n]) => `<div class="dv-site"><span>${ic(KIND[k][1])}</span><b>${esc(KIND[k][0])}</b><strong class="num">${n}<small>면</small></strong><i style="--w:${Math.round(((n || 0) / max) * 100)}%"></i></div>`).join("")}</div>` : ""}
     ${c.sizes.length || c.floors.length ? `<div class="dv-chips site-specs">${c.sizes.map(([w, dd, n]) => `<span>${ic("#l-ruler", "i-xs")}${w}×${dd}m${n ? ` · ${n}면` : ""}</span>`).join("")}${c.floors.map(([fl, n]) => `<span class="fl fl-${esc(fl)}">${esc(floorName(fl))} ${n}면</span>`).join("")}</div>` : ""}
     ${gear ? `<div class="dv-tarp-note ${gear.state === "MATCH" ? "ok" : "warn"}">${ic(gear.state === "MATCH" ? "#l-circle-check" : "#l-circle-alert", "i-xs")}<div><b>${esc(gear.label)} · ${SETUP_LABEL[gear.state]}</b><p data-wrap-ok>${esc(gear.text)} 타프·캐노피 추가 설치는 운영 규정을 따로 확인하세요.</p></div></div>`
       : c.sizes.length ? `<button class="dv-tarp-note hint" type="button" data-setup-focus>${ic("#l-backpack", "i-xs")}<div><b>내 텐트가 들어갈까?</b><p data-wrap-ok>‘내 캠핑 세팅’에서 텐트 크기를 고르면 이 규격과 비교해 드려요.</p></div></button>` : ""}
     <div class="dv-quick-essentials">${essentials.map(([icon, label, d]) => `<div class="essential-item">${ic(icon, "i-xs")}<span><b>${label} ${gradeChip(d.grade)}</b>${esc(d.value)}</span></div>`).join("")}</div>
-    <span class="trust ok">한국관광공사 고캠핑 등록 정보 · ${ymd(c.modified_at)} 수정</span>
+    <span class="trust ok">한국관광공사 고캠핑 등록 정보 및 국가표준데이터 · ${ymd(c.modified_at)} 수정</span>
   </div>`;
 }
 
@@ -3188,65 +3348,92 @@ function reviewCards(d, mode) {
   }).join("")}</div>`;
 }
 
-function morePlatformsBlock(c) {
+function morePlatformsBlock(c, d) {
   const q = encodeURIComponent(c.name);
   const tagQ = encodeURIComponent(c.name.replace(/\s+|[()（）]/g, ""));
-  const platforms = [
-    {
-      id: "naver-blog",
-      cls: "naver",
-      icon: "#l-notebook-pen",
-      name: "네이버 블로그 후기",
-      sub: "블로그 검색 결과 열기",
-      url: `https://search.naver.com/search.naver?ssc=tab.blog.all&query=${q}`,
-    },
-    {
-      id: "kakao-map",
-      cls: "kakao",
-      icon: "#l-map-pin",
-      name: "카카오맵 리뷰·로드뷰",
-      sub: "카카오맵 장소·리뷰 열기",
-      url: `https://map.kakao.com/?q=${q}`,
-    },
-    {
-      id: "naver-place",
-      cls: "naver",
-      icon: "#l-navigation",
-      name: "네이버 지도·스마트플레이스",
-      sub: "네이버 지도 장소 열기",
-      url: `https://map.naver.com/p/search/${q}`,
-    },
-    {
-      id: "youtube",
-      cls: "youtube",
-      icon: "#l-play",
-      name: "유튜브 캠핑 영상",
-      sub: "유튜브 검색 결과 열기",
-      url: `https://www.youtube.com/results?search_query=${encodeURIComponent(c.name + " 캠핑")}`,
-    },
-    {
-      id: "instagram",
-      cls: "instagram",
-      icon: "#l-camera",
-      name: "인스타그램 해시태그",
-      sub: "#" + c.name.replace(/\s+/g, "") + " 태그 열기",
-      url: `https://www.instagram.com/explore/tags/${tagQ}/`,
-    },
-  ];
+  const vids = d?.videos ?? [];
+  const topVids = vids.slice(0, 2);
+  const reviews = reviewItems(d);
+  const snaps = (d?.sns_images ?? []).slice(0, 3);
 
-  return `<div class="dv-sub">
+  return `<div class="dv-sub dv-platform-hub">
     <h4>다른 플랫폼에서 더보기</h4>
     <div class="platform-hub-grid">
-      ${platforms.map((p) => `
-        <a class="platform-card" href="${esc(p.url)}" target="_blank" rel="noopener">
-          <div class="platform-icon ${p.cls}">${ic(p.icon, "i-sm")}</div>
+      <!-- 유튜브 섹션 -->
+      <div class="platform-card platform-sec-card youtube">
+        <div class="platform-card-header">
+          <div class="platform-icon youtube">${ic("#l-play", "i-sm")}</div>
           <div class="platform-info">
-            <b>${esc(p.name)}</b>
-            <small>${esc(p.sub)}</small>
+            <b>유튜브 영상·쇼츠</b>
+            <small>${vids.length ? `연동 영상 ${vids.length}건 · 즉시 재생 가능` : "캠핑 영상·쇼츠 탐색"}</small>
           </div>
-          ${ic("#l-arrow-up-right", "i-xs ext")}
-        </a>
-      `).join("")}
+          <a class="platform-ext-btn" href="https://www.youtube.com/results?search_query=${encodeURIComponent(c.name + " 캠핑")}" target="_blank" rel="noopener" title="유튜브에서 더보기">${ic("#l-arrow-up-right", "i-xs")}</a>
+        </div>
+        ${topVids.length ? `<div class="platform-inline-vids">${topVids.map((v) => `
+          <button class="dv-video mini ${v.kind === "short" ? "short" : ""}" type="button" data-video="${esc(v.yt || "")}" aria-label="${esc(v.title)} 재생">
+            <span class="dv-video-img"><img src="${v.yt ? `https://i.ytimg.com/vi/${esc(v.yt)}/hqdefault.jpg` : esc(remoteImg(v.thumb))}" alt="" loading="lazy"><i>${ic("#l-play")}</i></span>
+            <b>${esc(v.title)}</b>
+            <small>${esc([v.author, relDay(v.date)].filter(Boolean).join(" · "))}</small>
+          </button>
+        `).join("")}</div>` : ""}
+      </div>
+
+      <!-- 인스타그램 섹션 -->
+      <div class="platform-card platform-sec-card instagram">
+        <div class="platform-card-header">
+          <div class="platform-icon instagram">${ic("#l-camera", "i-sm")}</div>
+          <div class="platform-info">
+            <b>인스타그램 해시태그</b>
+            <small>#${esc(c.name.replace(/\s+/g, ""))} 피드</small>
+          </div>
+          <a class="platform-ext-btn" href="https://www.instagram.com/explore/tags/${tagQ}/" target="_blank" rel="noopener" title="인스타그램에서 더보기">${ic("#l-arrow-up-right", "i-xs")}</a>
+        </div>
+        ${snaps.length ? `<div class="platform-inline-snaps">${snaps.map((s) => `
+          <a class="platform-snap-link" href="${esc(s.url || `https://www.instagram.com/explore/tags/${tagQ}/`)}" target="_blank" rel="noopener">
+            <img src="${esc(remoteImg(s.thumb))}" alt="인스타그램 사진" loading="lazy">
+          </a>
+        `).join("")}</div>` : ""}
+      </div>
+
+      <!-- 네이버 블로그 섹션 -->
+      <a class="platform-card" href="https://search.naver.com/search.naver?ssc=tab.blog.all&query=${q}" target="_blank" rel="noopener">
+        <div class="platform-icon naver">${ic("#l-notebook-pen", "i-sm")}</div>
+        <div class="platform-info">
+          <b>네이버 블로그 후기</b>
+          <small>${reviews.length ? `모은 글 ${reviews.length}건 · 최신 블로그` : "네이버 블로그 검색 열기"}</small>
+        </div>
+        ${ic("#l-arrow-up-right", "i-xs ext")}
+      </a>
+
+      <!-- 네이버 카페 섹션 -->
+      <a class="platform-card" href="https://section.cafe.naver.com/ca-fe/home/search/articles?q=${q}" target="_blank" rel="noopener">
+        <div class="platform-icon cafe">${ic("#l-coffee", "i-sm")}</div>
+        <div class="platform-info">
+          <b>네이버 카페 질답·후기</b>
+          <small>캠핑 카페 실캠퍼 질답</small>
+        </div>
+        ${ic("#l-arrow-up-right", "i-xs ext")}
+      </a>
+
+      <!-- 카카오맵 리뷰 & 로드뷰 -->
+      <a class="platform-card" href="https://map.kakao.com/?q=${q}" target="_blank" rel="noopener">
+        <div class="platform-icon kakao">${ic("#l-map-pin", "i-sm")}</div>
+        <div class="platform-info">
+          <b>카카오맵 리뷰·로드뷰</b>
+          <small>방문자 평점·거리뷰</small>
+        </div>
+        ${ic("#l-arrow-up-right", "i-xs ext")}
+      </a>
+
+      <!-- 네이버 지도 스마트플레이스 -->
+      <a class="platform-card" href="https://map.naver.com/p/search/${q}" target="_blank" rel="noopener">
+        <div class="platform-icon naver">${ic("#l-navigation", "i-sm")}</div>
+        <div class="platform-info">
+          <b>네이버 지도·플레이스</b>
+          <small>네이버 스마트플레이스</small>
+        </div>
+        ${ic("#l-arrow-up-right", "i-xs ext")}
+      </a>
     </div>
   </div>`;
 }
@@ -3270,7 +3457,7 @@ function reviewsBlock(c, d) {
     ${shorts.length ? `<div class="dv-sub"><h4>쇼츠 <span class="num">${shorts.length}</span></h4><div class="dv-rail">${shorts.map(video).join("")}</div></div>` : ""}
     ${snaps.length ? `<div class="dv-sub"><h4>방문자 사진 <span class="num">${snaps.length}</span></h4><div class="dv-snaps">${snaps.slice(0, 11).map((p, i) => `<button type="button" ${lbAttr("snaps", i)} aria-label="방문자 사진 ${i + 1} 크게 보기"><img src="${esc(p.src)}" alt="방문자 사진 ${i + 1}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.remove()"></button>`).join("")}${snaps.length > 11 ? `<button type="button" class="dv-snaps-more" ${lbAttr("snaps", 11)}><b class="num">+${snaps.length - 11}</b></button>` : ""}</div></div>` : ""}
     ${n ? `<div class="dv-sub"><div class="dv-sub-head"><h4>블로그·카페 후기 <span class="num">${n}</span></h4><div class="dv-seg" role="tablist">${REVIEW_MODES.map(([k, l]) => `<button type="button" role="tab" data-rv="${k}" aria-selected="${k === "rec"}">${l}</button>`).join("")}</div></div><div class="dv-reviews" id="reviewList">${reviewCards(d, "rec")}</div></div>` : ""}
-    ${morePlatformsBlock(c)}
+    ${morePlatformsBlock(c, d)}
     ${d?.social_checked_at ? `<span class="trust">Daum 검색 제공 · ${ymd(d.social_checked_at)} 수집 · 원문의 저작권은 글쓴이에게 있어요</span>` : ""}
   </section>`;
 }
@@ -3372,9 +3559,9 @@ function detail(c) {
     ${bookingCard(c, d, target)}
     ${setupBlock(c)}
     ${prepBlock(c)}
-    ${highlightsBlock(c)}
+    ${highlightsBlock(c, d)}
     <section class="dv-sec" id="sec-site"><h3>사이트·요금</h3>
-      ${siteListBlock(c)}
+      ${siteListBlock(c, d)}
       ${fieldConditionsBlock(c)}
       ${productsBlock(d)}
       ${priceMentionsBlock(d)}
@@ -3395,6 +3582,7 @@ function detail(c) {
         ${target.ext ? ic("#l-arrow-up-right", "i-xs") : ""}
       </a>
       ${target.naverHref ? `<a class="btn-cta-secondary naver" href="${esc(target.naverHref)}" target="_blank" rel="noopener">${ic("#l-calendar", "i-xs")}네이버 예약</a>` : ""}
+      ${target.camfitHref ? `<a class="btn-cta-secondary camfit" href="${esc(target.camfitHref)}" target="_blank" rel="noopener">${ic("#l-zap", "i-xs")}캠핏 검색</a>` : ""}
       ${target.phoneHref || c.tel ? `<a class="btn-cta-secondary phone" href="${esc(target.phoneHref || telHref(c.tel))}" aria-label="전화 문의">${ic("#l-phone", "i-xs")}전화 문의</a>` : ""}
     </div>
   </div>` : ""}`;
