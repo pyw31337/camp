@@ -141,7 +141,7 @@ all('.info-small').forEach((button) => button.addEventListener('click', (event) 
 }));
 document.addEventListener('click', () => all('.info-small').forEach((button) => button.classList.remove('is-tip-open')));
 
-all('[data-booking-cta], .price-link').forEach((button) => button.addEventListener('click', () => showToast('예약처에서 날짜별 요금과 빈자리를 확인해요')));
+all('[data-booking-cta], .price-link').forEach((button) => button.addEventListener('click', () => showToast('검증된 공식 예약 경로에서 날짜별 요금과 빈자리를 확인해요')));
 
 all('.renewal-review-tabs, .nearby-category-tabs, .renewal-comment-types').forEach((group) => {
   all('button', group).forEach((button) => button.addEventListener('click', () => {
@@ -158,7 +158,7 @@ all('[data-roadview-cta]').forEach((button) => button.addEventListener('click', 
 }));
 
 all('[data-copy-address]').forEach((button) => button.addEventListener('click', async () => {
-  const address = '충북 음성군 수레의산로 일대';
+  const address = '충청남도 서산시 팔봉면 진장서낭골길 204';
   try { await navigator.clipboard?.writeText(address); } catch { /* clipboard permission is optional in this prototype */ }
   showToast('주소를 복사했어요');
 }));
