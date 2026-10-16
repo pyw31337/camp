@@ -1,5 +1,5 @@
 // 사실 저장소 → SQLite 파일(node:sqlite). 에이전트가 SQL로 조건을 조합해 볼 때 쓴다.
-// 스키마는 db/010_campground_fact_store.sql(PostgreSQL)과 같은 열 이름을 쓴다.
+// 스키마는 db/011_campground_fact_store.sql(PostgreSQL)과 같은 열 이름을 쓴다.
 import { mkdirSync, rmSync } from "node:fs";
 import { dirname } from "node:path";
 import { DatabaseSync } from "node:sqlite";

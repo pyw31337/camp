@@ -361,7 +361,7 @@ jobs:
           MEDIA_DIR: ${{ steps.media.outputs.dir }}
           GISCUS_CONFIG: ${{ vars.GISCUS_CONFIG }}
       - name: Load the fact store into the throwaway PostgreSQL (twice)
-        # data/facts(원자 사실)가 db/010 제약(확정 등급은 원천 URL 필수 등)을 지키는지 실데이터로 확인한다.
+        # data/facts(원자 사실)가 db/011 제약(확정 등급은 원천 URL 필수 등)을 지키는지 실데이터로 확인한다.
         if: always()
         run: |
           if [ ! -f ../data/facts/manifest.json ]; then echo "::notice::사실 저장소가 없어 건너뜁니다."; exit 0; fi

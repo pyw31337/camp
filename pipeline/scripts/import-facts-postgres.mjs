@@ -1,4 +1,4 @@
-// 사실 저장소(data/facts)를 PostgreSQL(db/010 fact_attribute·campground_fact)에 통째로 다시 적재한다.
+// 사실 저장소(data/facts)를 PostgreSQL(db/011 fact_attribute·campground_fact)에 통째로 다시 적재한다.
 // 한 트랜잭션에서 지우고 넣으므로 두 번 실행해도 같은 결과다. DATABASE_URL이 없으면 건너뛴다.
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";

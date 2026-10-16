@@ -21,7 +21,7 @@
 | `data/facts/attributes.json` | 사전 사본 + 속성별 커버리지(곳 수·등급별 건수) | 예(생성물) |
 | `data/facts/manifest.json` | 생성 시각·행 수·원천/등급별 건수 | 예(생성물) |
 | `pipeline/out/facts.sqlite` | 같은 내용의 SQLite(`npm run facts:sqlite`) | 아니오 |
-| PostgreSQL `fact_attribute`·`campground_fact`·`campground_fact_best` | `db/010`, `npm run db:import-facts` | — |
+| PostgreSQL `fact_attribute`·`campground_fact`·`campground_fact_best` | `db/011`, `npm run db:import-facts` | — |
 
 묶음(group): `stay` 숙박 형태·규모 · `power` 전기 · `fire` 불·화기 · `vehicle` 주차·차량 · `pet` 반려동물 · `price` 요금 · `fee` 추가 요금 · `time` 이용 시간 · `policy` 규칙·환불 · `sanitary` 위생시설 · `site` 사이트 · `amenity` 편의시설 · `env` 입지 · `theme` 계절·여행 테마 · `season` 운영 기간 · `booking` 예약 · `operator` 운영 주체·연락처 · `review` 후기 언급 · `rental` 대여 · `nearby` 주변 생활 인프라(최근접 편의점·상비약·마트·정육점·주유소·약국·동물병원, 직선 m).
 

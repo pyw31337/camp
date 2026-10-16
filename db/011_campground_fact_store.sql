@@ -2,7 +2,7 @@
 -- 사실 1행 = (캠핑장, 속성, 값, 등급, 원천, 원천 URL, 확인 시각, 근거 문장). 같은 속성의 여러 원천·충돌 값을 모두 남긴다.
 -- 기존 condition_fact(db/009, 구역·상품 단위 파일럿 검증값)와 source_assertion(db/001, 원천 단언)은 그대로 둔다.
 -- 이 테이블은 전국 캠핑장 수준의 파생 원장이며 data/facts를 원본으로 매 실행 통째로 다시 적재한다(import-facts-postgres.mjs).
--- 전제: db/001 ~ db/009. 파괴적 변경 없음(새 테이블·뷰만 추가).
+-- 전제: db/001 ~ db/010. 파괴적 변경 없음(새 테이블·뷰만 추가).
 -- 롤백: DROP VIEW IF EXISTS campground_fact_best; DROP TABLE IF EXISTS campground_fact; DROP TABLE IF EXISTS fact_attribute;
 --       (원본은 data/facts에 있으므로 다시 적재하면 복구된다)
 

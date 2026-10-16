@@ -28,3 +28,20 @@
 ## 4. 무료 티어 운영 요약
 
 수집·계산·검증은 GitHub Actions(공개 저장소 무료), 검증 DB는 실행마다 새로 띄우는 PostgreSQL 컨테이너, 공개는 GitHub Pages/Cloudflare Pages, 운영 DB는 소유자가 Neon 또는 Supabase 무료 Postgres(예상 100~200MB)를 고르면 `DATABASE_URL`만 등록해 시작한다.
+
+## 5. Gemini가 main 스키마 위에 더한 것 (2026-10-16)
+
+| 항목 | 내용 | 검증 |
+| --- | --- | --- |
+| `db/009_condition_facts_and_observations.sql` | 현장 조건 팩트(`condition_fact`), 대여품목(`rental_offer`), 시설특화(`facility_feature`), 관측 실행 및 관측 결과(`availability_observation`) 스키마 및 적재기 | `test/postgres-condition-facts.test.mjs` 통과 |
+| `db/010_review_digest_and_ai_intelligence.sql` | AI 장단점 요약(`review_digest`), 소셜 블로그/카페 리뷰 원문(`review_post`), 유튜브 동영상 클립(`video_content`), 운영 이슈/시즌 이벤트(`operating_issue_event`) 통합 마이그레이션 | PostgreSQL 구문 검증 완료 |
+| `pipeline/scripts/build-database.mjs` (`npm run build:db`) | Node.js 22+ 내장 `node:sqlite` 기반 로컬 SQLite DB(`db/moyeora_camping.db`, 32MB) 멱등 빌더. 3,116개 캠핑장, 1,245개 AI 다이제스트, 16,870개 리뷰, 6,732개 영상, 59,834개 사진, 16개 운영이벤트 전량 적재 | `/usr/bin/sqlite3` 쿼리 검증 완료 |
+| `docs/AGENT_HANDOFF.md` | Claude/Codex 에이전트 연계 가이드, CLI 및 SQL 쿼리 레시피, 테이블 통계 공유 | 문서 갱신 완료 |
+
+## 6. Claude & Codex 에이전트 연계 확인 사항
+
+1. **로컬 SQLite 데이터베이스 (`db/moyeora_camping.db`) 즉시 활용**:
+   - Claude 및 Codex가 분석 작업, 추천 모델 튜닝, 추가 필터링 쿼리를 수행할 때 외부 DB 서버 연결 없이 저장소 루트의 `db/moyeora_camping.db`를 즉시 쿼리할 수 있습니다 (`sqlite3 db/moyeora_camping.db "SELECT ..."`).
+   - 데이터가 갱신된 경우 언제든 `npm --prefix pipeline run build:db`를 실행하면 1초 안에 최신 정적 데이터로부터 SQLite DB가 재생성됩니다.
+2. **PostgreSQL 운영 환경 마이그레이션**:
+   - `DATABASE_URL`이 주어지는 서버 환경에서는 `db/001`부터 `db/010_review_digest_and_ai_intelligence.sql`까지 순차 적용하여 동일한 관계형 테이블로 적재할 수 있습니다.

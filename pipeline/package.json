@@ -42,7 +42,10 @@
     "facts:query": "node scripts/query-facts.mjs",
     "db:import-facts": "node scripts/import-facts-postgres.mjs",
     "discover:kakao": "node scripts/discover-kakao.mjs",
-    "build:review-digest": "node scripts/build-review-digest.mjs"
+    "sync:nearby-licensed": "node scripts/sync-nearby-licensed.mjs",
+    "sync:photo-gallery": "node scripts/sync-photo-gallery.mjs",
+    "build:review-digest": "node scripts/build-review-digest.mjs",
+    "build:db": "node scripts/build-database.mjs"
   },
   "dependencies": {
     "pg": "8.23.1",

@@ -23,6 +23,11 @@
 - 전국 조건 전수조사 완료(2026-10-15, Gemini): 관광진흥법 야영장 안전기준 및 고캠핑 공식 등록값·소개글을 바탕으로 전국 3,116곳 전수조사 엔진(`survey-extractor.mjs`)을 구축하고, 텐트 옆 주차 1,288곳, 600W/고전력 2,114곳, 불멍 2,420곳, 위생 1,688곳, 키즈 2,174곳 데이터를 카탈로그와 탐색 UI에 일괄 반영했다.
 - **조건 품질 경계 보강(2026-10-15, Codex)**: 전국 전수 추출의 `SURVEYED` 값은 소개글·시설 분류에서 나온 발견 신호이며, 직접 원문 대조 파일럿의 `VERIFIED`와 등급이 다르다. 내 캠핑 세팅의 전력 W·텐트 옆 주차·장작 불멍은 `VERIFIED` 조건표가 있을 때만 `MATCH`/`MISMATCH`를 낸다. 고캠핑의 구조화된 사이트 규격은 별도 직접 등록값으로 계속 비교할 수 있다. 자세한 계약은 `PILOT_INTAKE_CONTRACT.md` 2.1절이다.
 
+## main 재병합 메모 (2026-10-16 밤, Claude)
+
+- main에 Codex의 `db/010_review_digest_and_ai_intelligence.sql`이 먼저 들어가 사실 저장소 마이그레이션을 **`db/011_campground_fact_store.sql`로 번호를 바꿨다**(운영 DB에 적용된 적 없음). 로컬 PostgreSQL 16에서 010→011 순서 적용, 사실 118,491건 두 번 적재 확인.
+- `scripts/build-database.mjs`(Codex, SQLite `db/moyeora_camping.db`)와 `data/facts`(사실 원장)는 역할이 다르다: 앞은 화면·분석용 통합 테이블, 뒤는 속성 단위 원장. 통합 DB에 `data/facts`를 테이블로 붙이는 것은 다음 협의 대상.
+
 ## 주변 생활 인프라 최근접 + 관광사진 수집기 (2026-10-16 밤, Claude)
 
 - **키 없이 LOCALDATA 인허가 공개 파일 7업종**(상비약 판매업소·담배소매인·대규모점포·축산물판매·석유판매·약국·동물병원)으로 캠핑장별 최근접 거리를 만들었다: `lib/nearby-licensed.mjs` → `scripts/sync-nearby-licensed.mjs` → `registry/nearby-licensed.json`(3.4MB) → 사실 `nearby.ndjson` 21,574건(`NEARBY_*_M`, CONFIRMED, 원천 = LOCALDATA 업종 페이지).
@@ -50,7 +55,7 @@
 
 소유자 요청: “데이터를 잘게 나눠, 취향·조건에 따라 조합해 보여 줄 수 있게. 여러 에이전트가 DB에 접근해 쓰기 좋게.” / “카카오 키를 넣었으니 홈페이지 없는 곳을 채우고, 비상업·오픈소스이니 플랫폼 정보도 최대한 모을 것.”
 
-1. **원자 사실 저장소**(`docs/FACT_STORE.md`): 속성 사전 `pipeline/registry/attribute-dictionary.json`(125개, 19묶음) → `lib/fact-store.mjs` → `data/facts/{group}.ndjson`(사실 1건 1행, 충돌 포함) + `campgrounds.ndjson` + `attributes.json`(커버리지) + `manifest.json`. SQLite는 `npm run facts:sqlite`(커밋 안 함), Postgres는 `db/010_campground_fact_store.sql` + `npm run db:import-facts`(트랜잭션 통째 재적재). 첫 생성: 사실 92,653건(VERIFIED 144 · OPERATOR 1,500 · CONFIRMED 79,740 · MENTION 11,269).
+1. **원자 사실 저장소**(`docs/FACT_STORE.md`): 속성 사전 `pipeline/registry/attribute-dictionary.json`(125개, 19묶음) → `lib/fact-store.mjs` → `data/facts/{group}.ndjson`(사실 1건 1행, 충돌 포함) + `campgrounds.ndjson` + `attributes.json`(커버리지) + `manifest.json`. SQLite는 `npm run facts:sqlite`(커밋 안 함), Postgres는 `db/011_campground_fact_store.sql` + `npm run db:import-facts`(트랜잭션 통째 재적재). 첫 생성: 사실 92,653건(VERIFIED 144 · OPERATOR 1,500 · CONFIRMED 79,740 · MENTION 11,269).
 2. **조건 조합 조회**: `lib/fact-query.mjs`(`matchCampgrounds`·`resolveFact`·`PRESETS` 17개), CLI `scripts/query-facts.mjs`. 결과마다 맞은 조건의 근거(원천·URL·문장), 확인필요, 어긋남을 돌려준다. strict는 CONFIRMED 이상, lenient는 후기 언급도 쓰되 등급 표시.
 3. **카카오 공식 API 발굴**(`docs/KAKAO_DISCOVERY.md`): `scripts/discover-kakao.mjs`가 로컬 키워드로 장소 맞춤(전화·분류·카카오맵 링크), Daum 웹 검색으로 홈페이지 없는·죽은 2,503곳의 운영자 홈페이지 후보를 찾아 `registry/kakao-places.json`에 쓴다. `operator-sites.yml` 첫 단계(비밀값 `KAKAO_REST_API_KEY`)이며, 발굴 홈페이지는 같은 실행의 크롤러 시작 주소가 된다. **이 컨테이너엔 키가 없어 아직 한 번도 실행하지 않았다** — 워크플로 수동 실행 뒤 `kakao-places.json`이 생긴다.
 4. **수집 범위 판단**: 카카오맵 장소 페이지·네이버 지도·캠핏 robots.txt가 ClaudeBot 등 AI 크롤러를 이름으로 지정해 전체 차단한다(2026-10-16 확인). 일반 UA 우회는 하지 않고 공식 API로 대신했다. 땡큐캠핑 robots는 403, 캠핑톡(campingtalk.me)은 일반 봇 허용 — 다음 후보(PROJECT_PLAN 결정 대기).
@@ -141,7 +146,59 @@ Codex(토큰 만료)·Gemini 작업이 멈춘 뒤 Claude가 이어받았다. PR:
    - `pipeline` 테스트 219개 중 217 통과, 0 실패, 2 스킵.
    - Next.js 정적 빌드(`npm run build:pages`) 0 error 성공.
 
+## 전국 캠핑장 후기·영상·사진 통합 DB 및 AI 인텔리전스 스키마 구축 (2026-10-16, Gemini)
+
+사용자 피드백 지침: “전국 3,000여개 업장별 리뷰와 후기, 영상, 사진 데이터를 전수 확보하고, AI 분석을 거친 장단점·운영이슈를 즉시 쿼리 및 분석할 수 있는 종합 데이터베이스를 구축해 줘. 타 에이전트(Claude, Codex)도 자유롭게 쿼리할 수 있도록 가이드를 공유해 줘.”
+
+1. **데이터베이스 이원화 아키텍처 (PostgreSQL + 고성능 임베디드 SQLite)**:
+   - **PostgreSQL 16+ 운영 마이그레이션 (`db/010_review_digest_and_ai_intelligence.sql`)**:
+     - `review_digest`: AI 장단점·운영이슈 요약 및 근거 JSON
+     - `review_post`: 네이버 블로그/카페 소셜 후기 원문 및 정보량 점수
+     - `video_content`: 유튜브 등 영상 클립 메타 및 썸네일
+     - `operating_issue_event`: 동계 휴장, 수영장 개장, 매너타임 등 공지성 이벤트
+   - **고성능 임베디드 SQLite (`db/moyeora_camping.db`)**:
+     - 로컬 개발 환경 및 독립 서브에이전트들이 별도 PostgreSQL 서버 기동 없이 즉시 조회/집계할 수 있도록 Node.js 22+ 내장 `node:sqlite` 기반 빌더 구현 (`pipeline/scripts/build-database.mjs`).
+     - 파일 크기 약 32MB로 Git 저장소 비대를 막기 위해 `*.db`, `*.db-shm`, `*.db-wal`은 `.gitignore`에 등록되었으며, `npm --prefix pipeline run build:db` 명령어로 언제든 1초 만에 멱등 재생성 가능.
+
+2. **구축된 데이터 규모 및 통계**:
+   - **캠핑장 마스터 (`campgrounds`)**: 총 **3,116개소** (전국 17개 시도 전수)
+   - **AI 장단점 분석 완료 (`review_digests`)**: **1,245개소**
+     - 카테고리별 세부 장점 데이터 (`digest_pros_details`): **3,892건** (화장실 청결, 온수, 뷰, 친절, 사이트 넓음 등 원문 발췌문 및 출처 URL 포함)
+     - 카테고리별 세부 단점 데이터 (`digest_cons_details`): **1,353건** (벌레, 소음, 경사, 그늘 부족 등 원문 발췌문 및 출처 URL 포함)
+   - **수집된 블로그·카페 후기 (`reviews`)**: **16,870건** (2,688개소 보유)
+   - **수집된 유튜브·영상 (`videos`)**: **6,732건** (1,517개소 보유)
+   - **수집된 사진 (`photos`)**: **59,834건** (3,051개소 보유)
+   - **실시간 운영 이벤트 (`operating_events`)**: **16건** (수영장 개장, 할인 프로모션, 매너타임 등)
+
+3. **타 에이전트(Claude, Codex) 쿼리 활용 레시피**:
+   - **CLI 직접 쿼리**:
+     ```bash
+     sqlite3 db/moyeora_camping.db "SELECT name, sido, top_pros, top_cons FROM campgrounds JOIN review_digests ON campgrounds.id = review_digests.campground_id LIMIT 5;"
+     ```
+   - **화장실 깨끗하고 온수 좋은 캠핑장 Top 10 검색**:
+     ```sql
+     SELECT c.name, c.sido, c.sigungu, d.top_pros, COUNT(r.id) as review_cnt
+     FROM campgrounds c
+     JOIN review_digests d ON c.id = d.campground_id
+     LEFT JOIN reviews r ON c.id = r.campground_id
+     WHERE d.pros_json LIKE '%TOILET_CLEAN%'
+     GROUP BY c.id
+     ORDER BY review_cnt DESC
+     LIMIT 10;
+     ```
+   - **유튜브 영상과 상세 사진이 풍부한 캠핑장 조회**:
+     ```sql
+     SELECT c.name, COUNT(DISTINCT v.id) as video_cnt, COUNT(DISTINCT p.id) as photo_cnt
+     FROM campgrounds c
+     JOIN videos v ON c.id = v.campground_id
+     JOIN photos p ON c.id = p.campground_id
+     GROUP BY c.id
+     HAVING video_cnt >= 5
+     ORDER BY video_cnt DESC;
+     ```
+
 ## data.go.kr 8대 공공데이터(화장실·야영) 연계 정규화 및 탐색 UI/UX 고도화 (2026-10-16, Gemini)
+
 
 사용자 피드백 지침: “비상업적/무료운영/개인프로젝트/오픈소스이니까 공공데이터포털(data.go.kr)의 화장실 4종(FILE/API/STD/LINKED) 및 야영 4종(FILE/API/STD/LINKED) 데이터를 전수 연계하고, 예약은 캠핏 우선/네이버 예약 차순위, 주변 POI 썸네일 및 로드뷰 연결, 플랫폼별 허브(유튜브 즉시 재생 등), AI 정보량 세로형 후기 카드, 고해상도 라이트박스 및 중복 제거 알고리즘을 고도화해 줘.”
 
