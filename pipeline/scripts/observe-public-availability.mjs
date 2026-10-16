@@ -23,6 +23,7 @@ const p = (rel) => fileURLToPath(new URL(rel, import.meta.url));
 const readJson = async (path) => JSON.parse(await readFile(path, "utf8"));
 
 const args = new Set(process.argv.slice(2));
+const isStrictHours = args.has("--strict-hours") || args.has("--respect-workhours");
 const isForce = args.has("--force");
 const isDryRun = args.has("--dry-run");
 
@@ -31,7 +32,7 @@ const kstStr = new Date(now.getTime() + 9 * 60 * 60 * 1000).toISOString().replac
 
 console.log(`[관측 파이프라인] 현재 시각: ${kstStr}`);
 
-if (!isForce && !isSafeObservationTime(now)) {
+if (isStrictHours && !isForce && !isSafeObservationTime(now)) {
   console.log(`[안내] 현재는 평일 업무시간(08:00~18:00 KST)입니다.`);
   console.log(`[안내] 사용자 작업 보호 및 원천 부하 방지를 위해 관측 실행을 대기합니다. (강제 실행은 --force)`);
   process.exit(0);

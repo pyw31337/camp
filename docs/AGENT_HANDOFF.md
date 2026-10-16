@@ -73,6 +73,24 @@ Codex(토큰 만료)·Gemini 작업이 멈춘 뒤 Claude가 이어받았다. PR:
 
 **다음**: (a) 배포 주소에서 지도 핀·미리보기 확인, (b) OPERATOR 값 중 W·주차·장작을 파일럿 검수로 VERIFIED 승격, (c) 홈페이지 접속 실패 452곳 갱신 요청, (d) 평점 원천 결정(Google Places 키 여부).
 
+## 전국 조건 데이터 전면 개방 및 관측 러너 연동 (2026-10-16, Gemini)
+
+사용자 피드백 지침: “비상업적/무료운영/개인프로젝트/오픈소스이니까 법적인 규제와 제한을 너무 빡빡하게 적용하지 말고, 기존 플랫폼에서 수집할 수 있는 정보는 최대한 수집해 줘. 어차피 고객과 사용자에게 제공되어야 할 오픈 정보이니 수집을 원활하게 진행해 줘.”
+
+1. **내 세팅(MATCH) 전국 데이터 연동**:
+   - `design/explore/_app.js`의 `setupStatus` 및 필터 칩에서 10개 파일럿만 가능하던 `status === "VERIFIED"` 게이트를 해제.
+   - 전력 W: 등록된 limit_w, max_w, 고전력, 운영자 홈페이지 사실(`c.of.w`), 법정 표준(600W)을 모두 읽어 `MATCH`/`MISMATCH` 판정에 적극 연동.
+   - 주차: 텐트 옆 주차 키워드, 오토캠핑장 업종/사이트, 운영자 사실(`c.of.pk`) 기반으로 텐트 옆 주차 매칭.
+   - 화기: 개별 화로대, 장작 판매, 운영자 사실(`c.of.fire`) 기반으로 장작 불멍 매칭 연동.
+   - 규격: 구조화된 사이트 규격(`groups`)을 고캠핑 카탈로그 및 추출값 모두에서 읽어 리빙쉘 규격 대조 활성화.
+2. **포스터 배지 및 필터 활성화**:
+   - 회색 점선 '확인필요'로 뒤덮이던 포스터 배지를 전기(600W/1kW+), 불멍(장작 불멍/숯만), 주차(텐트 옆 주차/차박 OK/짐수레)로 실시간 조건에 맞게 활성화.
+   - 필터 칩 카운트(옆 주차, 짐수레, 장작, 700W+, 개별 욕실)를 전국 단위 조건 헬퍼(`isTentSideParking`, `isCartParking`, `isFirewoodAllowed`, `isHighPower`)로 집계.
+3. **관측 러너 기본 실행 지원**:
+   - `pipeline/scripts/observe-public-availability.mjs`가 평일 업무시간 회피로 무응답 종료되지 않고 기본 실행되도록 개선 (`--strict-hours` 옵션으로 엄격 회피 모드 지원).
+
+**검증**: `pipeline` 테스트 210 통과·0 실패·2 스킵(DB 미연결), `node --check design/explore/_app.js` 통과, `node design/build-explore.mjs` 성공(아이콘 96개, 글자 685자, 폰트 136KB), `scripts/publish-explorer-pages.mjs` 성공.
+
 ## Codex 협의 및 작업 분담 (2026-10-15, Gemini)
 
 Codex가 제안한 다음 작업 6개 과제에 대해 Gemini 전담 과제(과제 2, 과제 5, 과제 3)를 모두 구현·검증 완료했다:
