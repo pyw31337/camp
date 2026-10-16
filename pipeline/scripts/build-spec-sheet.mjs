@@ -13,6 +13,13 @@ const camps = JSON.parse(readFileSync(join(dataDir, "campgrounds.json"), "utf8")
 const noticesPath = join(root, "pipeline/registry/campground-notices.json");
 const notices = existsSync(noticesPath) ? JSON.parse(readFileSync(noticesPath, "utf8")).campgrounds ?? {} : {};
 const now = process.env.SPEC_NOW ?? new Date().toISOString();
+// 운영자 자체 홈페이지 문장(crawl-operator-sites.mjs). 운영자가 스스로 공개한 글이므로 공식 소개와 같은 OFFICIAL_TEXT 등급으로 쓴다.
+const sitesPath = join(root, "pipeline/registry/operator-site-snippets.json");
+const sites = existsSync(sitesPath) ? JSON.parse(readFileSync(sitesPath, "utf8")).campgrounds ?? {} : {};
+// 여러 캠핑장이 함께 쓰는 홈페이지(시·군 통합 예약 등)는 문장이 어느 시설 것인지 알 수 없어 쓰지 않는다.
+const hostOf = (u) => { try { return new URL(/^[a-z]+:\/\//i.test(u) ? u : `http://${u}`).hostname.replace(/^www\./, ""); } catch { return null; } };
+const hostCount = new Map();
+for (const c of camps) { const h = c.homepage && hostOf(c.homepage); if (h) hostCount.set(h, (hostCount.get(h) ?? 0) + 1); }
 
 const count = Object.fromEntries(Object.keys(SPEC_FIELDS).map((k) => [k, { official: 0, mention: 0 }]));
 let withAny = 0, roundups = 0;
@@ -24,6 +31,13 @@ for (const c of camps) {
   for (const item of notices[c.id]?.items ?? []) {
     if (!item?.source?.url || !item?.source?.checked_at) continue; // 원문·확인일 없는 공지는 쓰지 않는다
     docs.push({ text: `${item.title ?? ""}. ${item.summary ?? ""}. ${item.body ?? ""}`, grade: "OPERATOR", source: { kind: "operator_notice", label: item.source.label ?? "운영자 공지", url: item.source.url, date: item.source.checked_at } });
+  }
+  const site = sites[c.id];
+  if (site?.status === "OK" && site.snippets?.length && (hostCount.get(hostOf(c.homepage)) ?? 0) <= 1 && (hostCount.get(hostOf(site.url)) ?? 0) <= 1) {
+    // 쪽(URL)마다 한 문서로 묶어 원문 링크가 정확한 쪽을 가리키게 한다.
+    const byUrl = new Map();
+    for (const sn of site.snippets) byUrl.set(sn.url, `${byUrl.get(sn.url) ?? ""}\n${sn.text}`);
+    for (const [url, text] of byUrl) docs.push({ text, grade: "OFFICIAL_TEXT", source: { kind: "operator_homepage", label: "운영자 홈페이지", url, date: site.checked_at } });
   }
   if (d.intro) docs.push({ text: d.intro, grade: "OFFICIAL_TEXT", source: { kind: "gocamping_intro", label: "고캠핑 운영자 소개글", url: c.gc_url ?? null, date: c.modified_at ?? null } });
   const reviews = [...(d.reviews ?? []), ...(d.cafe ?? [])];

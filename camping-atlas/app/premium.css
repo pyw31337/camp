@@ -343,3 +343,94 @@
 .may-open-bottom button.on { background: var(--mc-solid); border-color: var(--mc-solid); color: var(--mc-on-solid); }
 .may-open-bottom a.verified { color: var(--mc-moss); }
 .may-empty { border-color: var(--mc-sand-2); border-radius: var(--mc-r-3); }
+
+/* ==========================================================================
+   v4.1 “Ink & Leaf” 덧칠(2026-10-16, 소유자: 어두운 배경 싫음 · 유리 대신 흰 그라데이션 · 초록 액센트 · 부드러운 경계).
+   ========================================================================== */
+.may-hero { color: var(--mc-ink); background: var(--mc-canvas); }
+.may-hero > picture { position: absolute; inset: 0; z-index: -2; display: block; overflow: hidden; }
+.may-hero > picture img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
+.may-hero-overlay { background: linear-gradient(90deg, rgba(245,246,244,.94) 0%, rgba(245,246,244,.6) 32%, rgba(245,246,244,0) 58%), linear-gradient(180deg, rgba(245,246,244,0) 55%, rgba(245,246,244,.6) 80%, rgba(245,246,244,.95) 100%); }
+.may-hero-copy { background: none; border: 0; box-shadow: none; }
+.may-hero-copy h1 { color: var(--mc-ink); line-height: .98; letter-spacing: -.07em; }
+.may-hero-copy h1 span:first-child { font-weight: 900; }
+.may-hero-copy h1 span:last-child { font-weight: 200; }
+.may-hero-copy p { color: var(--mc-ink-2); font-weight: 400; }
+.may-hero-stats > div, .may-hero-stats > a { background: #fff; border: 0; color: var(--mc-ink); box-shadow: var(--mc-shadow-2); backdrop-filter: none; }
+.may-hero-stats small { color: var(--mc-ink-2); }
+.may-hero-stats strong { font-weight: 900; color: var(--mc-accent-ink); }
+.may-hero-stats > a:hover { background: var(--mc-accent-tint); }
+.may-hero-source { color: var(--mc-ink-2) !important; background: rgba(255,255,255,.85); border-radius: 999px; padding: 4px 10px; }
+.may-search-card, .may-search-tabs { box-shadow: var(--mc-shadow-2); }
+.may-search-field, .may-open-search > div { background: var(--mc-soft); border: 0; }
+.may-search-go, .may-explorer-direct > a { background: var(--mc-accent); color: #fff; }
+.may-search-go:hover, .may-explorer-direct > a:hover { background: var(--mc-moss-press); }
+.may-search-tabs button[aria-selected="true"] svg, .may-search-field svg { color: var(--mc-accent); }
+.may-categories button { border: 0; background: var(--mc-soft); color: var(--mc-ink); }
+.may-categories button.selected, .may-categories button:hover { background: var(--mc-accent); color: #fff; }
+.may-open-card, .may-provider-grid article, .may-data-cards article, .may-camp-card, .may-explorer-direct { border: 0 !important; box-shadow: var(--mc-shadow-1); }
+.may-section-head h2, .may-data-intro h2 { font-weight: 900; }
+.may-section-head p { font-weight: 300; }
+.may-photo-img em { background: var(--mc-accent); border-radius: 999px; }
+.may-open-date strong { font-weight: 900; color: var(--mc-ink); }
+.may-open-date strong.urgent { color: var(--mc-accent-ink); }
+.may-card-image span, .may-card-save { background: rgba(255,255,255,.92); color: var(--mc-ink); border: 0; }
+.may-open-bottom button { border: 0; background: var(--mc-soft); }
+.may-open-bottom button.on { background: var(--mc-accent); color: #fff; }
+.may-data-section { background: var(--mc-paper); color: var(--mc-ink); border: 0; box-shadow: var(--mc-shadow-1); }
+.may-data-intro p { color: var(--mc-accent-ink); }
+.may-data-intro h2 { color: var(--mc-ink); }
+.may-data-intro span { color: var(--mc-ink-2); }
+.may-data-cards article { background: var(--mc-soft); box-shadow: none; }
+.may-data-cards article > span { background: var(--mc-accent); color: #fff; }
+.may-data-cards article a { color: var(--mc-accent-ink); }
+.may-data-cards small { color: var(--mc-ink-3); }
+.may-data-cards b { color: var(--mc-ink); font-weight: 900; }
+@media (max-width: 760px) {
+  .may-hero > picture img { object-position: 55% 40%; }
+  .may-hero-overlay { background: linear-gradient(180deg, rgba(245,246,244,.94) 0%, rgba(245,246,244,.5) 26%, rgba(245,246,244,0) 42%, rgba(245,246,244,0) 60%, rgba(245,246,244,.85) 78%, var(--mc-canvas) 100%); }
+}
+/* 홈 썸네일: 포스터 배지 + 후기 장단점 한 줄 */
+.may-photo-img .may-badges { position: absolute; left: 8px; right: 8px; bottom: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+.may-badges .pb { display: inline-flex; align-items: center; min-height: 1.5rem; padding: 0 8px; border-radius: 999px; font-size: .6875rem; font-style: normal; font-weight: 800; white-space: nowrap; box-shadow: 0 1px 4px rgba(16,20,20,.14); }
+.may-badges .pb-pw { background: var(--mc-volt); color: var(--mc-ink); }
+.may-badges .pb-fi { background: var(--mc-flame); color: #fff; }
+.may-badges .pb-fo, .may-badges .pb-off { background: #fff; color: var(--mc-ink-2); }
+.may-badges .pb-fo { color: var(--mc-flame); }
+.may-badges .pb-pk { background: var(--mc-ink); color: #fff; }
+.may-rv { display: grid; gap: 2px; margin-top: 4px; font-size: .75rem; }
+.may-rv span { display: flex; align-items: center; gap: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.may-rv .pro { color: var(--mc-ink); } .may-rv .pro svg { color: var(--mc-accent); flex: none; }
+.may-rv .con { color: var(--mc-ink-2); } .may-rv .con svg { color: var(--mc-flame); flex: none; }
+.may-rv em { font-style: normal; color: var(--mc-ink-3); font-weight: 300; }
+/* (i) 말풍선: 출처·기준 문구는 누를 때만 */
+.may-tip { position: relative; display: inline-flex; margin-top: 10px; }
+.may-tip > button { width: 26px; height: 26px; border-radius: 50%; border: 0; background: var(--mc-soft); color: var(--mc-ink-2); display: grid; place-items: center; cursor: pointer; }
+.may-tip-pop { position: absolute; left: 0; top: 32px; z-index: 20; width: min(320px, 80vw); padding: 10px 12px; border-radius: 14px; background: #fff; color: var(--mc-ink); font-size: .8125rem; line-height: 1.55; box-shadow: var(--mc-shadow-2); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.may-photo-card, .may-rv { min-width: 0; }
+.may-rv { overflow: hidden; }
+.may-rv span { min-width: 0; display: block; }
+.may-rv svg { vertical-align: -2px; margin-right: 4px; }
+.may-open-bottom a { position: relative; } /* sr-only가 가로 스크롤 목록 밖으로 새지 않게 */
+
+/* ==========================================================================
+   v4.2(2026-10-16): 실제 한국 캠핑장 사진 히어로 · 글자 자리 딤 85% 이상 · 가로폭 전체 와이드
+   ========================================================================== */
+.may-shell { width: auto; max-width: none; margin: 0 clamp(16px, 3vw, 48px); }
+.may-hero { margin: 0 calc(-1 * clamp(16px, 3vw, 48px)); border-radius: 0; min-height: clamp(560px, 46vw, 720px); }
+.may-hero > picture img { object-position: 70% 55%; }
+.may-hero-overlay { background: linear-gradient(90deg, rgba(245,246,244,.94) 0%, rgba(245,246,244,.88) 42%, rgba(245,246,244,.45) 58%, rgba(245,246,244,0) 74%), linear-gradient(180deg, rgba(245,246,244,0) 62%, rgba(245,246,244,.85) 88%, var(--mc-canvas) 100%); }
+.may-hero-copy { padding-left: clamp(16px, 3vw, 48px); margin-left: 0; }
+.may-searchbox { left: clamp(16px, 3vw, 48px); right: clamp(16px, 3vw, 48px); }
+.may-search-go, .may-explorer-direct > a, .may-categories button { white-space: nowrap; }
+.may-search-go { padding: 0 26px; }
+@media (max-width: 760px) {
+  .may-hero { min-height: 680px; }
+  .may-hero > picture img { object-position: 50% 60%; }
+  .may-hero-overlay { background: linear-gradient(180deg, rgba(245,246,244,.95) 0%, rgba(245,246,244,.88) 40%, rgba(245,246,244,.3) 52%, rgba(245,246,244,0) 58%, rgba(245,246,244,0) 66%, rgba(245,246,244,.6) 74%, var(--mc-canvas) 84%); }
+  .may-hero-copy { padding: 26px 16px 0; }
+}
+.may-hero-tip { position: absolute; right: clamp(16px, 3vw, 48px); top: 12px; z-index: 3; }
+.may-hero-tip .may-tip { margin: 0; }
+.may-hero-tip .may-tip-pop { left: auto; right: 0; }

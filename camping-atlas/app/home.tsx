@@ -6,9 +6,10 @@ import {
   ArrowRight, BadgeCheck, Bell, CalendarClock, CalendarDays, Car, ChevronRight,
   CircleHelp, Database, ExternalLink, Heart, ImageIcon, Info, MapPin,
   Search, TentTree, Trees, UsersRound, X,
+  ThumbsDown, ThumbsUp,
 } from "lucide-react";
 import { SITE_HEADER_HTML, SITE_HEADER_JS, SITE_TABBAR_HTML } from "./site-header.generated";
-import { FormEvent, memo, useEffect, useMemo, useState } from "react";
+import { FormEvent, memo, useEffect, useMemo, useState, type ReactNode } from "react";
 
 type CampType = "오토캠핑" | "카라반";
 type Camp = {
@@ -19,7 +20,8 @@ type Camp = {
 };
 // 캠핑장별 예약 오픈(pipeline build:explore → explore/data/openings.json)
 type Opening = { at: string; tk: boolean; id: string; name: string; where: string; ph: string | null; kind: string; label: string; stay: string | null; platform: string | null; url: string | null; src: string | null; unv: boolean };
-type FeaturedCamp = { id: string; name: string; where: string; line: string | null; ph: string; rt: boolean };
+// rv: 후기 요약 n건에서 센 장점·단점 [주제, 건수][], bd: 출처 있는 포스터 배지 [종류, 글자][] (pipeline/scripts/build-review-digest.mjs)
+type FeaturedCamp = { id: string; name: string; where: string; line: string | null; ph: string; rt: boolean; rv?: { n: number; p: [string, number][]; c: [string, number][] }; bd?: [string, string][] };
 type FeaturedTheme = { id: string; label: string; desc: string; count: number; camps: FeaturedCamp[] };
 type Featured = { total: number; photo_count: number; themes: FeaturedTheme[] };
 type ExplorerMeta = { count: number; stats?: { electricity_registered?: number; site_size_registered?: number; ground_registered?: number } };
@@ -59,6 +61,11 @@ function kstDate() {
 }
 
 // 공통 헤더·하단 탭: 한 번만 그린다(다시 그리면 스크립트가 채운 이름 뱃지·메뉴가 지워진다).
+// 출처·기준 문구는 화면에 늘어놓지 않고 (i)를 눌렀을 때만 말풍선으로 보인다(소유자 요청 2026-10-16).
+function InfoTip({ label, children }: { label: string; children: ReactNode }) {
+  const [open, setOpen] = useState(false);
+  return <span className="may-tip"><button type="button" aria-label={label} aria-expanded={open} onClick={() => setOpen((v) => !v)}><Info size={14} /></button>{open && <span className="may-tip-pop" role="tooltip">{children}</span>}</span>;
+}
 const SiteChrome = memo(function SiteChrome({ html }: { html: string }) { return <div className="sh-host" dangerouslySetInnerHTML={{ __html: html }} suppressHydrationWarning />; });
 
 export default function Home() {
@@ -141,7 +148,7 @@ export default function Home() {
 
     <div className="may-shell">
       <section className="may-hero" aria-label="캠핑 탐색">
-        <img src={officialProducts[2].image} alt={officialProducts[2].imageAlt} referrerPolicy="no-referrer" /><div className="may-hero-overlay" />
+        <picture><source media="(max-width: 760px)" srcSet="images/hero-home-m.webp" /><img src="images/hero-home.webp" alt="해 질 녘 산골짜기 캠핑장에 불 켜진 텐트들" /></picture><div className="may-hero-overlay" /><span className="may-hero-tip"><InfoTip label="사진 출처 보기">사진: 일곱식구 캠핑장(전북 정읍) · 한국관광공사 고캠핑 공식 등록 사진</InfoTip></span>
         <div className="may-hero-copy"><h1><span>전국 {featured ? featured.total.toLocaleString("ko-KR") : "3,000"}곳 캠핑장,</span><span>사진 보고 바로 예약</span></h1><p>사이트·시설·주변 정보와 예약 오픈 일정까지<br />한 화면에서 비교하세요.</p></div>
         <div className="may-hero-stats" aria-label="예약 오픈"><a href="explore/openings/"><small><CalendarClock size={14} />이번 주 예약 오픈</small><strong>{weekCount ?? "–"}<i>곳</i></strong></a></div>
         <form className="may-searchbox" onSubmit={runSearch}>
@@ -154,13 +161,12 @@ export default function Home() {
             <button className="may-search-go" type="submit"><Search size={19} /><span>찾기</span></button>
           </div> : <div className="may-open-search"><div><Bell size={20} /><span><small>예약 오픈 캘린더</small><b>출처와 확인일이 있는 일정만 표시합니다</b></span></div><button className="may-search-go" type="submit"><CalendarClock size={18} /><span>일정 보기</span></button></div>}</div>
         </form>
-        <a className="may-hero-source" href={FACILITY_URL} target="_blank" rel="noreferrer"><ImageIcon size={13} />히어로 사진: 자라섬캠핑장 운영기관 원문 <ExternalLink size={12} /></a>
       </section>
 
       <section className="may-explorer-direct" aria-label="전국 캠핑장 조건 탐색">
         <div><span><Database size={15} />전국 캠핑장 데이터</span><h2>캠핑장별 현장 조건을 바로 비교하세요</h2><p>전기·전력 제한, 주차, 바닥, 사이트 규격, 장작·숯불 규정은 캠핑장 상세에서 원천과 함께 확인합니다.</p></div>
         <div className="may-explorer-stats"><b>{(explorerMeta?.count ?? featured?.total ?? 3111).toLocaleString("ko-KR")}곳</b><span>전기 {explorerMeta?.stats?.electricity_registered?.toLocaleString("ko-KR") ?? "2,088"} · 규격 {explorerMeta?.stats?.site_size_registered?.toLocaleString("ko-KR") ?? "816"} · 바닥 {explorerMeta?.stats?.ground_registered?.toLocaleString("ko-KR") ?? "1,576"}</span></div>
-        <a href="explore/">전국 조건으로 찾기 <ArrowRight size={16} /></a>
+        <a href="explore/">조건으로 찾기 <ArrowRight size={16} /></a>
       </section>
 
       <section className="may-categories" aria-label="캠핑 형태">{categories.map((category) => <button key={category} type="button" className={selectedCategory === category ? "selected" : ""} onClick={() => selectCategory(category)}>{category === "무료" ? <span className="may-free-icon">₩</span> : category === "오토캠핑" || category === "카라반" ? <Car size={17} /> : <TentTree size={17} />}<span>{category}</span></button>)}</section>
@@ -169,23 +175,24 @@ export default function Home() {
         {featured.themes.map((theme) => <div className="may-theme-row" key={theme.id}>
           <div className="may-section-head"><div><h2>{theme.label}</h2><p>{theme.desc} · 전국 {theme.count.toLocaleString("ko-KR")}곳</p></div><a href={`explore/#t=${theme.id}`}>전체 보기 <ChevronRight size={16} /></a></div>
           <div className="may-photo-rail">{theme.camps.map((camp) => <a className="may-photo-card" key={camp.id} href={`explore/#c=${camp.id}`}>
-            <span className="may-photo-img"><img src={`media/${largeOfficialPhoto(camp.ph)}`} alt={`${camp.name} 공식 사진`} loading="lazy" decoding="async" />{camp.rt && <em>실시간 예약</em>}</span>
+            <span className="may-photo-img"><img src={`media/${largeOfficialPhoto(camp.ph)}`} alt={`${camp.name} 공식 사진`} loading="lazy" decoding="async" />{camp.rt && <em>실시간 예약</em>}{camp.bd && <span className="may-badges">{camp.bd.map(([k, l]) => <i key={l} className={`pb pb-${k}`}>{l}</i>)}</span>}</span>
             <b>{camp.name}</b><small><MapPin size={12} />{camp.where}</small>{camp.line && <span className="may-photo-line">{camp.line}</span>}
+            {camp.rv && <span className="may-rv" title={`블로그·카페 후기 요약 ${camp.rv.n}건에서 센 주제예요`}><span className="pro"><ThumbsUp size={13} />{camp.rv.p.length ? camp.rv.p.map(([t, n]) => `${t} ${n}`).join(" · ") : "장점 언급 없음"}</span><span className="con"><ThumbsDown size={13} />{camp.rv.c.length ? camp.rv.c.map(([t, n]) => `${t} ${n}`).join(" · ") : "단점 언급 없음"} <em>· 후기 {camp.rv.n}건</em></span></span>}
           </a>)}</div>
         </div>)}
-        <p className="may-disclosure"><ImageIcon size={15} />사진: 한국관광공사 고캠핑(공식 등록 사진) · 예약 가능 여부와 요금은 각 예약처에서 확인하세요.</p>
+        <InfoTip label="사진 출처 보기">사진: 한국관광공사 고캠핑(공식 등록 사진). 예약 가능 여부와 요금은 각 예약처에서 확인하세요.</InfoTip>
       </section>}
 
       <section className="may-section" id="calendar">
         <div className="may-section-head"><div><h2>곧 열리는 예약</h2><p>캠핑장별 · 오픈이 빠른 순서</p></div><a href="explore/openings/">전체 일정 <ChevronRight size={16} /></a></div>
-        {openings && openings.length > 0 ? <div className="may-open-list">{openings.filter((o, i, all) => all.findIndex((x) => x.id === o.id) === i).slice(0, 16).map((o) => { const d = new Date(Date.parse(o.at) + 9 * 3_600_000); const days = Math.round((Date.parse(o.at.slice(0, 10) + "T00:00:00+09:00") - Date.parse(`${kstDate()}T00:00:00+09:00`)) / 86_400_000); return <article className="may-open-card" key={`${o.id}-${o.at}-${o.kind}`}><div className="may-open-date"><div><strong className={days <= 1 ? "urgent" : ""}>{days <= 0 ? "오늘" : `D-${days}`}</strong><span className={o.unv ? "review" : ""}>{o.kind}</span></div><time>{`${d.getUTCMonth() + 1}.${String(d.getUTCDate()).padStart(2, "0")}(${"일월화수목금토"[d.getUTCDay()]}) · ${o.tk ? `${String(d.getUTCHours()).padStart(2, "0")}:${String(d.getUTCMinutes()).padStart(2, "0")}` : "시각 미정"}`}</time></div><div className="may-open-title"><span><Trees size={19} /></span><div><h3><a href={`explore/#c=${o.id}`}>{o.name}</a></h3><p>{[o.where, o.stay].filter(Boolean).join(" · ")}</p></div></div><div className="may-open-bottom"><span className="may-open-platform">{o.platform ?? "캠핑장 직접 예약"}</span><a href={o.src ?? o.url ?? "explore/openings/"} target="_blank" rel="noreferrer" className={o.unv ? "checking" : "verified"}>{o.unv ? <CircleHelp size={14} /> : <BadgeCheck size={14} />}{o.unv ? "확인 필요" : "공식 원문"}<ExternalLink size={11} /></a></div></article>; })}</div>
+        {openings && openings.length > 0 ? <div className="may-open-list">{openings.filter((o, i, all) => all.findIndex((x) => x.id === o.id) === i).slice(0, 16).map((o) => { const d = new Date(Date.parse(o.at) + 9 * 3_600_000); const days = Math.round((Date.parse(o.at.slice(0, 10) + "T00:00:00+09:00") - Date.parse(`${kstDate()}T00:00:00+09:00`)) / 86_400_000); return <article className="may-open-card" key={`${o.id}-${o.at}-${o.kind}`}><div className="may-open-date"><div><strong className={days <= 1 ? "urgent" : ""}>{days <= 0 ? "오늘" : `D-${days}`}</strong><span className={o.unv ? "review" : ""}>{o.kind}</span></div><time>{`${d.getUTCMonth() + 1}.${String(d.getUTCDate()).padStart(2, "0")}(${"일월화수목금토"[d.getUTCDay()]}) · ${o.tk ? `${String(d.getUTCHours()).padStart(2, "0")}:${String(d.getUTCMinutes()).padStart(2, "0")}` : "시각 미정"}`}</time></div><div className="may-open-title"><span><Trees size={19} /></span><div><h3><a href={`explore/#c=${o.id}`}>{o.name}</a></h3><p>{[o.where, o.stay].filter(Boolean).join(" · ")}</p></div></div><div className="may-open-bottom"><span className="may-open-platform">{o.platform ?? "캠핑장 직접 예약"}</span><a href={o.src ?? o.url ?? "explore/openings/"} target="_blank" rel="noreferrer" className={o.unv ? "checking" : "verified"} title={o.unv ? undefined : "공식 원문 보기"}>{o.unv ? <CircleHelp size={14} /> : <BadgeCheck size={14} />}{o.unv ? "확인 필요" : <span className="sr-only">공식 원문</span>}</a></div></article>; })}</div>
           : <div className="may-empty"><CalendarClock size={27} /><b>{openings ? "앞으로 45일 안에 확인된 캠핑장별 오픈 일정이 없습니다." : "예약 오픈 일정을 불러오는 중입니다."}</b><span>예약처 공통 규칙은 각 캠핑장 상세의 ‘예약’에서 볼 수 있어요.</span></div>}
-        <p className="may-disclosure"><Info size={15} />캠핑장별 예약 규칙과 서울시 공공예약 접수 기간으로 계산한 일정입니다. 최종 잔여 자리는 각 예약처에서 확인하세요.</p>
+        <InfoTip label="일정 기준 보기">캠핑장별 예약 규칙과 서울시 공공예약 접수 기간으로 계산한 일정입니다. 최종 잔여 자리는 각 예약처에서 확인하세요.</InfoTip>
       </section>
 
       <section className="may-section" id="search">
         <div className="may-section-head"><div><h2>공식 정보로 확인한 상품</h2><p>{keyword || selectedCategory !== "전체" ? `${results.length}개 조건 일치 상품` : "실제 시설 사진, 사이트 규격, 공식 예약 경로를 함께 봅니다."}</p></div><a className="may-all-link" href="explore/">전국 캠핑장 전체 보기 <ArrowRight size={14} /></a></div>
-        <div className="may-camp-grid">{results.map((camp) => { const isSaved = saved.includes(camp.id); return <article className="may-camp-card" key={camp.id}><button type="button" className="may-card-image" onClick={() => selectCamp(camp)} aria-label={`${camp.campground} ${camp.product} 상세 보기`}><img src={camp.image} alt={camp.imageAlt} loading="lazy" referrerPolicy="no-referrer" /><span>운영기관 원문</span></button><button type="button" className={isSaved ? "may-card-save saved" : "may-card-save"} aria-label={`${camp.product} 관심 저장`} aria-pressed={isSaved} onClick={() => toggleSaved(camp.id)}><Heart size={18} fill={isSaved ? "currentColor" : "none"} /></button><div className="may-card-body"><span className="may-provider-tag">{camp.type}</span><button type="button" className="may-card-title" onClick={() => selectCamp(camp)}>{camp.campground}<b>{camp.product}</b></button><p><MapPin size={13} />{camp.region}</p><div className="may-card-details"><span><small>사이트</small><b>{camp.size}</b></span><span><small>인원·가격</small><b>{camp.capacity}</b></span></div><div className="may-card-footer"><a href={camp.reservationUrl} target="_blank" rel="noreferrer">공식 예약 안내 <ExternalLink size={12} /></a><button type="button" onClick={() => selectCamp(camp)}>상세 <ArrowRight size={13} /></button></div></div></article>; })}</div>
+        <div className="may-camp-grid">{results.map((camp) => { const isSaved = saved.includes(camp.id); return <article className="may-camp-card" key={camp.id}><button type="button" className="may-card-image" onClick={() => selectCamp(camp)} aria-label={`${camp.campground} ${camp.product} 상세 보기`}><img src={camp.image} alt={camp.imageAlt} loading="lazy" referrerPolicy="no-referrer" /></button><button type="button" className={isSaved ? "may-card-save saved" : "may-card-save"} aria-label={`${camp.product} 관심 저장`} aria-pressed={isSaved} onClick={() => toggleSaved(camp.id)}><Heart size={18} fill={isSaved ? "currentColor" : "none"} /></button><div className="may-card-body"><span className="may-provider-tag">{camp.type}</span><button type="button" className="may-card-title" onClick={() => selectCamp(camp)}>{camp.campground}<b>{camp.product}</b></button><p><MapPin size={13} />{camp.region}</p><div className="may-card-details"><span><small>사이트</small><b>{camp.size}</b></span><span><small>인원·가격</small><b>{camp.capacity}</b></span></div><div className="may-card-footer"><a href={camp.reservationUrl} target="_blank" rel="noreferrer">공식 예약 안내 <ExternalLink size={12} /></a><button type="button" onClick={() => selectCamp(camp)}>상세 <ArrowRight size={13} /></button></div></div></article>; })}</div>
         {results.length === 0 && <div className="may-empty"><TentTree size={27} /><b>이 분류의 검증 상품은 아직 공개하지 않았습니다.</b><span>가공된 예시 대신, 공식 원천을 확인한 뒤 이 목록에 추가합니다.</span></div>}
       </section>
 
