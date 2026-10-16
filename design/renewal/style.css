@@ -387,7 +387,7 @@ em { font-style: normal; color: var(--accent); }
 .rs-price b { font-size: 1.15rem; font-weight: 900; }
 .rs-btns { display: flex; flex-wrap: wrap; gap: 8px; }
 .rs-btns .btn.primary { flex: 1 1 100%; }
-.rs-btns .cmp-label { flex: 1; justify-content: center; height: 48px; }
+.rs-btns .cmp-label, .rs-btns .heart-label { flex: 1; justify-content: center; height: 48px; }
 .rs-btns .btn.ghost { flex: 1; }
 .d-dock { display: none; }
 
@@ -511,11 +511,50 @@ body.map-mode { overflow: hidden; height: 100dvh; }
 /* C 인덱스: 흰 선 상자 조건 + 가로형 카드(사진 왼쪽, 정보 오른쪽) */
 @media (min-width: 860px) {
   [data-v="c"] .grid { --cols: 2; }
-  [data-v="c"] .card { display: grid; grid-template-columns: minmax(0, 46%) minmax(0, 1fr); }
-  [data-v="c"] .card-media .car { aspect-ratio: auto; height: 100%; min-height: 220px; }
-  [data-v="c"] .card-body { align-content: center; padding: 16px 18px; }
+  [data-v="c"] .grid > .card { display: grid; grid-template-columns: minmax(0, 46%) minmax(0, 1fr); }
+  [data-v="c"] .grid > .card .card-media .car { aspect-ratio: auto; height: 100%; min-height: 220px; }
+  [data-v="c"] .grid > .card .card-body { align-content: center; padding: 16px 18px; }
 }
 @media (min-width: 1600px) { [data-v="c"] .grid { --cols: 3; } }
+
+
+/* ── 찜(하트)·테마 줄·사진 없는 곳 (2026-10-16 소유자 피드백) ── */
+.name-row { display: flex; align-items: flex-start; gap: 8px; }
+.name-row .card-name { flex: 1; min-width: 0; }
+.heart { position: relative; z-index: 3; display: inline-grid; place-items: center; flex: none; width: 32px; height: 32px; margin: -4px -6px 0 0; border-radius: 999px; color: #a3aaa6; transition: color .15s, transform .15s; }
+.heart .ic { width: 22px; height: 22px; }
+.heart:hover { color: var(--ink-2); }
+.heart.on { color: var(--flame); }
+.heart.on:active, .heart:active { transform: scale(.9); }
+.heart.heart-label { width: auto; height: 40px; margin: 0; padding: 0 14px; gap: 6px; display: inline-flex; background: var(--soft); color: var(--ink-2); font-weight: 800; font-size: .9rem; }
+.heart.heart-label.on { color: var(--flame); background: #ffeae2; }
+.mi .heart { position: absolute; top: 6px; right: 6px; margin: 0; }
+.d-dock .heart { width: 48px; height: 48px; margin: 0; background: var(--soft); }
+.trows { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(28px, 3.5vw, 44px); min-width: 0; }
+.trow-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.trow-head h3 { font-size: clamp(1.15rem, 1rem + .5vw, 1.4rem); font-weight: 900; letter-spacing: -0.03em; }
+.trow-head h3 i { font-style: normal; font-weight: 400; font-size: .86rem; color: var(--ink-3); margin-left: 4px; }
+.trow-rail { gap: clamp(12px, 1.4vw, 20px); padding: 4px 4px 14px; margin: -4px -4px 0; scroll-snap-type: x proximity; scroll-padding: 4px; }
+.trow-rail > .card { flex: 0 0 clamp(270px, 22vw, 330px); scroll-snap-align: start; }
+.picks { gap: 8px; padding: 0 0 16px; }
+.pick { flex: none; display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px 0 4px; border-radius: 999px; background: var(--paper); box-shadow: var(--shadow); font-weight: 700; font-size: .88rem; white-space: nowrap; color: var(--ink-2); }
+.pick img { width: 36px; height: 36px; border-radius: 999px; object-fit: cover; }
+.pick span { max-width: 12em; overflow: hidden; text-overflow: ellipsis; }
+.pick .ic { width: 16px; height: 16px; color: var(--ink-3); }
+.pick.on { background: var(--ink); color: #fff; }
+.pick.on .ic { color: var(--volt); }
+.nophoto:empty { display: none; }
+.nophoto { margin-top: 32px; }
+.nophoto h4 { font-size: .9rem; color: var(--ink-3); font-weight: 800; margin: 0 0 8px; }
+.nophoto ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 0 24px; }
+.nophoto li { display: flex; align-items: center; gap: 8px; min-height: 48px; border-top: 1px solid var(--line); }
+.nophoto li a { flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 8px; }
+.nophoto li b { font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nophoto li i { font-style: normal; font-size: .84rem; color: var(--ink-3); white-space: nowrap; }
+.nophoto .heart { margin: 0; }
+@media (max-width: 759px) {
+  .trow-rail > .card { flex-basis: 80vw; }
+}
 
 /* ── 모바일 ───────────────────────────────────────── */
 .tabbar { display: none; }

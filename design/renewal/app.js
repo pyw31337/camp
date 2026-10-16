@@ -16,7 +16,7 @@ const store = {
 const S = {
   camps: [], byId: new Map(), photos: {}, cards: {}, openings: new Map(),
   q: "", area: "all", quick: new Set(), theme: null, sort: "rich", shown: 24, mode: "keyword",
-  compare: store.get("mc-compare", []), gear: store.get("mc-gear", { size: "5.5x8", needs: ["park", "fire"] }),
+  saved: store.get("mc-saved", store.get("mc-compare", [])), pick: store.get("mc-pick", []), gear: store.get("mc-gear", { size: "5.5x8", needs: ["park", "fire"] }),
   detailCache: new Map(), homeScroll: 0,
 };
 
@@ -56,7 +56,7 @@ const typeLine = (c) => (c.pf?.s ?? "").split(" · ")[0] || (c.types ?? [])[0] |
 // 등급: v=원문 대조(VERIFIED) · c=공식 등록·운영자 공개 · m=소개·후기 언급. 배지는 v·c만.
 const GR = (s) => (s === "VERIFIED" ? "v" : s === "CONFIRMED" || s === "OPERATOR" ? "c" : s === "SURVEYED" || s === "MENTION" ? "m" : null);
 const GRADE_TXT = { v: "원문 대조", c: "공식 등록", m: "소개·후기 언급" };
-const kw = (w) => (w >= 1000 ? `${+(w / 1000).toFixed(1)}kW` : `${w}W`);
+const kw = (w) => `${fmt(w)}W`; // 소유자: ‘600W’처럼 W로 통일
 const GROUND = { CRUSHED_STONE: "파쇄석", MIXED: "혼합", GRAVEL: "자갈", DECK: "데크", GRASS: "잔디", SAND: "모래", SOIL: "흙", CONCRETE: "콘크리트" };
 const srcOf = (fc, extra) => ({ label: fc?.source?.label, url: fc?.source?.url, at: fc?.source?.checked_at, ...extra });
 
@@ -73,8 +73,10 @@ function facts(c) {
     if (out.park) out.park.src = srcOf(fc);
   }
   // 전기
-  const w = fc.power?.limit_w || (of.w ? Number(of.w.v) : null);
-  if (w) out.power = { v: `최대 ${kw(w)}${fc.power?.breaker_capacity ? ` · ${fc.power.breaker_capacity}` : ""}`, short: kw(w), w, g: fc.power?.limit_w ? GR(fc.power.state) : "c", ok: true, src: fc.power?.limit_w ? srcOf(fc) : { label: "운영자 홈페이지", url: of.w.u, at: of.w.t, quote: of.w.q } };
+  // 운영자 홈페이지에 공개된 W가 소개글 추출값보다 우선한다.
+  const opW = of.w ? Number(of.w.v) : null;
+  const w = opW || fc.power?.limit_w || null;
+  if (w) out.power = { v: `최대 ${kw(w)}${!opW && fc.power?.state === "VERIFIED" && fc.power?.breaker_capacity ? ` · ${fc.power.breaker_capacity}` : ""}`, short: kw(w), w, g: opW ? "c" : GR(fc.power.state), ok: true, src: opW ? { label: "운영자 홈페이지", url: of.w.u, at: of.w.t, quote: of.w.q } : srcOf(fc) };
   else if (fc.power?.available === true) out.power = { v: "있음", short: "전기", g: GR(fc.power.state), ok: true, src: srcOf(fc) };
   else if (fc.power?.available === false) out.power = { v: "없음", short: "전기 없음", g: GR(fc.power.state), ok: false, src: srcOf(fc) };
   // 장작·숯
@@ -107,14 +109,16 @@ function facts(c) {
 }
 const filled = (f) => f && (f.g === "v" || f.g === "c");
 
-// 포스터 배지(채운 것만): 전기=라임 · 불멍=주황 · 주차=블루 · 반려견=잉크
+// 포스터 배지: 값이 ‘가능·있음’이면 붙인다(등급은 카드 줄·상세의 점과 (i)로). 전기=라임 · 불=주황 · 주차=블루 · 반려견=잉크
+// 전기는 W를 알면 ‘600W’, 모르면 ‘전기’.
+const pos = (f) => f && f.g;
 function badges(c, max = 4) {
   const f = facts(c), out = [];
-  if (filled(f.power) && f.power.ok) out.push(`<span class="bdg bdg-volt">${ic("bolt")}${esc(f.power.short)}</span>`);
-  if (filled(f.fire) && f.fire.kind === "FIREWOOD_OK") out.push(`<span class="bdg bdg-flame">${ic("flame")}장작</span>`);
-  else if (filled(f.fire) && f.fire.kind === "CHARCOAL_ONLY") out.push(`<span class="bdg bdg-flame-soft">${ic("flame")}숯만</span>`);
-  if (filled(f.park) && f.park.ok) out.push(`<span class="bdg bdg-cobalt">${ic("car")}${esc(f.park.short)}</span>`);
-  if (filled(f.pet) && f.pet.ok) out.push(`<span class="bdg bdg-ink">${ic("paw")}반려견</span>`);
+  if (pos(f.power) && f.power.ok) out.push(`<span class="bdg bdg-volt">${ic("bolt")}${esc(f.power.short)}</span>`);
+  if (pos(f.fire) && f.fire.kind === "FIREWOOD_OK") out.push(`<span class="bdg bdg-flame">${ic("flame")}장작</span>`);
+  else if (pos(f.fire) && f.fire.kind === "CHARCOAL_ONLY") out.push(`<span class="bdg bdg-flame-soft">${ic("flame")}숯만</span>`);
+  if (pos(f.park) && f.park.ok === true) out.push(`<span class="bdg bdg-cobalt">${ic("car")}텐트 옆</span>`);
+  if (pos(f.pet) && f.pet.ok) out.push(`<span class="bdg bdg-ink">${ic("paw")}반려견</span>`);
   return out.slice(0, max).join("");
 }
 const dot = (g) => (g ? `<i class="gd gd-${g}" title="${GRADE_TXT[g]}"></i>` : "");
@@ -154,7 +158,7 @@ const VERDICT = { ok: ["맞음", "vd-ok"], part: ["조건부", "vd-part"], no: [
 function verdictChip(c) {
   const j = judge(c);
   // 목록에서는 맞는 곳만 알려 준다(‘안 맞음’은 상세의 내 장비 칸에서만).
-  if (!j.verdict || j.verdict === "no") return "";
+  if (j.verdict !== "ok") return "";
   return `<span class="vd ${VERDICT[j.verdict][1]}">${VERDICT[j.verdict][0]} ${j.ok}/${j.total}</span>`;
 }
 function gearLabel() {
@@ -166,10 +170,10 @@ function gearLabel() {
 const AREAS = [["all", "전국"], ["서울·경기", "서울·경기"], ["강원", "강원"], ["충청", "충청"], ["전라", "전라"], ["경상", "경상"], ["제주", "제주"]];
 const AREA_OF = { 서울: "서울·경기", 인천: "서울·경기", 경기: "서울·경기", 강원: "강원", 충북: "충청", 충남: "충청", 대전: "충청", 세종: "충청", 전북: "전라", 전남: "전라", 광주: "전라", 경북: "경상", 경남: "경상", 대구: "경상", 부산: "경상", 울산: "경상", 제주: "제주" };
 const QUICK = {
-  power: { label: "전기", icon: "bolt", cls: "volt", test: (c) => filled(facts(c).power) && facts(c).power.ok },
-  fire: { label: "장작", icon: "flame", cls: "flame", test: (c) => filled(facts(c).fire) && facts(c).fire.kind === "FIREWOOD_OK" },
-  park: { label: "텐트 옆 주차", icon: "car", cls: "cobalt", test: (c) => filled(facts(c).park) && facts(c).park.ok === true },
-  pet: { label: "반려견", icon: "paw", cls: "ink", test: (c) => filled(facts(c).pet) && facts(c).pet.ok },
+  power: { label: "전기", icon: "bolt", cls: "volt", test: (c) => pos(facts(c).power) && facts(c).power.ok },
+  fire: { label: "장작", icon: "flame", cls: "flame", test: (c) => pos(facts(c).fire) && facts(c).fire.kind === "FIREWOOD_OK" },
+  park: { label: "텐트 옆 주차", icon: "car", cls: "cobalt", test: (c) => pos(facts(c).park) && facts(c).park.ok === true },
+  pet: { label: "반려견", icon: "paw", cls: "ink", test: (c) => pos(facts(c).pet) && facts(c).pet.ok },
 };
 const THEMES = [
   ["VALLEY", "계곡", (c) => c.pf?.t?.includes("VALLEY")],
@@ -186,7 +190,7 @@ const THEMES = [
 function matches(c, { useArea = true } = {}) {
   if (useArea && S.area !== "all" && AREA_OF[sidoShort(c.sido)] !== S.area) return false;
   for (const k of S.quick) if (!QUICK[k].test(c)) return false;
-  if (S.theme) { const t = THEMES.find((x) => x[0] === S.theme); if (t && !t[2](c)) return false; }
+  if (S.theme && S.theme !== "ALL") { const t = THEMES.find((x) => x[0] === S.theme); if (t && !t[2](c)) return false; }
   if (S.q) {
     const hay = c._hay ??= `${c.name} ${c.addr} ${c.sido} ${c.sigungu} ${(c.env ?? []).join(" ")} ${(c.types ?? []).join(" ")} ${c.pf?.s ?? ""}`.toLowerCase();
     if (!S.q.toLowerCase().split(/\s+/).filter(Boolean).every((w) => hay.includes(w))) return false;
@@ -236,7 +240,16 @@ function initCarousels(root) {
   for (const car of $$(".car[data-n]", root)) {
     if (car.dataset.init) continue;
     car.dataset.init = 1;
-    const tr = $(".car-track", car), dots = $$(".car-dots i", car);
+    const tr = $(".car-track", car);
+    let dots = $$(".car-dots i", car);
+    // 깨진 사진은 그 장을 빼고, 남는 사진이 없으면 카드를 지운다(빈 썸네일 금지).
+    $$("img", tr).forEach((im) => im.addEventListener("error", () => {
+      im.remove();
+      const left = $$("img", tr).length;
+      const d = $(".car-dots", car);
+      if (d) { d.lastElementChild?.remove(); dots = $$(".car-dots i", car); if (left < 2) d.remove(); }
+      if (!left) (car.closest(".card, .mi") ?? car).remove();
+    }, { once: true }));
     ["pointerenter", "touchstart", "focusin"].forEach((ev) => car.addEventListener(ev, () => hydrate(car), { passive: true, once: true }));
     tr.addEventListener("scroll", () => {
       hydrate(car);
@@ -268,10 +281,11 @@ function rowsHtml(c) {
   const row = (n, label, x) => `<li><span class="rn">${n}</span><span class="rl">${label}</span><span class="rv${x ? "" : " none"}">${x ? esc(x.v) : "–"}</span>${x ? dot(x.g) : ""}</li>`;
   return `<ol class="rows">${row("01", "주차", f.park)}${row("02", "전기", f.power)}${row("03", "장작", f.fire)}</ol>`;
 }
-function inCompare(id) { return S.compare.includes(String(id)); }
-function compareBtn(c, { label = false } = {}) {
-  const on = inCompare(c.id);
-  return `<button class="cmp${on ? " on" : ""}${label ? " cmp-label" : ""}" type="button" data-cmp="${esc(c.id)}" aria-pressed="${on}" aria-label="비교함 ${on ? "빼기" : "담기"}">${ic(on ? "check" : "plus")}${label ? `<span>${on ? "비교 중" : "비교"}</span>` : ""}</button>`;
+// 찜(하트): 카드 이름 오른쪽 회색 선 하트 → 누르면 채운 하트. 찜한 곳은 ‘찜’ 화면에서 3곳씩 나란히 비교한다.
+function isSaved(id) { return S.saved.includes(String(id)); }
+function heartBtn(c, { label = false } = {}) {
+  const on = isSaved(c.id);
+  return `<button class="heart${on ? " on" : ""}${label ? " heart-label" : ""}" type="button" data-save="${esc(c.id)}" aria-pressed="${on}" aria-label="${on ? "찜 해제" : "찜하기"}">${ic(on ? "heart" : "heart-o")}${label ? `<span>찜</span>` : ""}</button>`;
 }
 function card(c, i = 0) {
   const { tag } = nameOf(c), o = openingOf(c);
@@ -279,11 +293,10 @@ function card(c, i = 0) {
     <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="card-media">${carousel(c, { eager: i < 4 })}
       ${o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : ""}
-      ${compareBtn(c)}
       <span class="bdgs">${badges(c, 3)}</span>
     </div>
     <div class="card-body">
-      <h3 class="card-name">${esc(nameOf(c).name)}</h3>
+      <div class="name-row"><h3 class="card-name">${esc(nameOf(c).name)}</h3>${heartBtn(c)}</div>
       <p class="card-meta">${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}${verdictChip(c)}</p>
       ${rowsHtml(c)}
       ${c.fee?.text ? `<p class="card-price"><span>1박</span><b>${esc(c.fee.text)}</b>${dot(GR(c.fee.grade))}</p>` : ""}
@@ -317,20 +330,20 @@ document.addEventListener("click", (e) => {
 });
 addEventListener("scroll", () => { $("#pop").hidden = true; }, { passive: true });
 
-// 비교함 담기
+// 찜 토글
 document.addEventListener("click", (e) => {
-  const b = e.target.closest("[data-cmp]");
+  const b = e.target.closest("[data-save]");
   if (!b) return;
   e.preventDefault(); e.stopPropagation();
-  const id = String(b.dataset.cmp);
-  if (inCompare(id)) S.compare = S.compare.filter((x) => x !== id);
-  else { if (S.compare.length >= 3) { toast("3곳까지 담을 수 있어요"); return; } S.compare.push(id); toast(`비교함 ${S.compare.length}곳`); }
-  store.set("mc-compare", S.compare);
+  const id = String(b.dataset.save);
+  if (isSaved(id)) { S.saved = S.saved.filter((x) => x !== id); S.pick = S.pick.filter((x) => x !== id); }
+  else { S.saved.unshift(id); toast(`찜 ${S.saved.length}곳`); }
+  store.set("mc-saved", S.saved); store.set("mc-pick", S.pick);
   syncCompare();
-  $$(`[data-cmp="${CSS.escape(id)}"]`).forEach((x) => { const on = inCompare(id); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); x.querySelector("use").setAttribute("href", `#i-${on ? "check" : "plus"}`); const t = x.querySelector("span"); if (t) t.textContent = on ? "비교 중" : "비교"; });
+  $$(`[data-save="${CSS.escape(id)}"]`).forEach((x) => { const on = isSaved(id); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); x.setAttribute("aria-label", on ? "찜 해제" : "찜하기"); x.querySelector("use").setAttribute("href", `#i-${on ? "heart" : "heart-o"}`); });
   if (location.hash.startsWith("#/compare")) route();
 });
-function syncCompare() { $$("[data-compare-count]").forEach((x) => { x.textContent = S.compare.length; x.hidden = !S.compare.length; }); }
+function syncCompare() { $$("[data-compare-count]").forEach((x) => { x.textContent = S.saved.length; x.hidden = !S.saved.length; }); }
 
 // ── 내 장비 시트 ─────────────────────────────────────────────
 function renderGear() {
@@ -359,7 +372,7 @@ function themeCover(key) {
 function countOf(test) { return S.camps.reduce((n, c) => n + (test(c) ? 1 : 0), 0); }
 function homeView() {
   usedCovers.clear();
-  const openings = S.camps.map((c) => [c, openingOf(c)]).filter(([, o]) => o).sort((a, b) => a[1].dd - b[1].dd);
+  const openings = S.camps.map((c) => [c, openingOf(c)]).filter(([c, o]) => o && hasPhoto(c)).sort((a, b) => a[1].dd - b[1].dd);
   return `
   <section class="hero" aria-labelledby="hero-t">
     <div class="hero-bg" aria-hidden="true"></div>
@@ -396,7 +409,7 @@ function homeView() {
 
   <section class="results" id="results" aria-labelledby="res-t">
     <div class="res-head">
-      <h2 id="res-t"><b data-res-count>0</b>곳</h2>
+      <h2 id="res-t" data-res-title></h2>
       <div class="res-tools">
         <div class="rail active-chips" data-active></div>
         <label class="sort">${ic("list")}<select data-sort aria-label="정렬">
@@ -406,9 +419,27 @@ function homeView() {
         </select></label>
       </div>
     </div>
+    <div class="trows" data-rows></div>
     <div class="grid" data-grid></div>
+    <div class="nophoto" data-nophoto></div>
     <div class="more-wrap"><button class="btn ghost" type="button" data-more>더 보기</button></div>
     <p class="credit">사진: 한국관광공사 고캠핑 · 정보: 각 원문(i)</p>
+  </section>`;
+}
+// 사진이 없는 곳은 카드로 보이지 않는다(소유자: 사진 없는 썸네일 금지). 이름 검색일 때만 아래 글 목록으로 남긴다.
+const hasPhoto = (c) => photosOf(c).length > 0;
+const themeName = (k) => (k === "ALL" ? "전체" : THEMES.find((t) => t[0] === k)?.[1] ?? "");
+// 둘러보기(검색어·테마 없음): 테마마다 한 줄씩 가로로 넘기는 줄. 테마를 고르거나 검색하면 격자.
+const browsing = () => !S.q && !S.theme;
+function themeRow([k, label, test], list, first, used) {
+  const all = list.filter(test);
+  // 같은 캠핑장이 여러 줄 맨 앞에 반복되지 않게, 앞줄에 나온 곳은 뺀다.
+  const items = all.filter((c) => hasPhoto(c) && !used.has(c.id)).slice(0, 16);
+  items.forEach((c) => used.add(c.id));
+  if (!items.length) return "";
+  return `<section class="trow" aria-label="${esc(label)}">
+    <div class="trow-head"><h3>${esc(label)} <i>${fmt(all.length)}</i></h3><button type="button" class="link" data-theme-all="${k}">모두 ${ic("right")}</button></div>
+    <div class="rail trow-rail">${items.map((c, i) => card(c, first && i < 4 ? i : 9)).join("")}</div>
   </section>`;
 }
 function renderResults({ reset = true } = {}) {
@@ -416,19 +447,33 @@ function renderResults({ reset = true } = {}) {
   if (!grid) return;
   const list = results();
   if (reset) S.shown = 24;
-  $("[data-res-count]").textContent = fmt(list.length);
   const act = [];
   if (S.q) act.push(`<button class="chip on" data-clear="q">“${esc(S.q)}” ${ic("close")}</button>`);
   if (S.area !== "all") act.push(`<button class="chip on" data-clear="area">${esc(S.area)} ${ic("close")}</button>`);
-  if (S.theme) act.push(`<button class="chip on" data-clear="theme">${esc(THEMES.find((t) => t[0] === S.theme)[1])} ${ic("close")}</button>`);
+  if (S.theme) act.push(`<button class="chip on" data-clear="theme">${esc(themeName(S.theme))} ${ic("close")}</button>`);
   for (const k of S.quick) act.push(`<button class="chip on" data-clear="quick:${k}">${esc(QUICK[k].label)} ${ic("close")}</button>`);
   $("[data-active]").innerHTML = act.join("");
-  grid.innerHTML = list.length ? list.slice(0, S.shown).map(card).join("") : `<div class="empty">${ic("search")}<b>맞는 곳이 없어요</b><button class="btn ghost" data-clear="all">조건 지우기</button></div>`;
-  $("[data-more]").hidden = list.length <= S.shown;
+  const rows = $("[data-rows]"), noph = $("[data-nophoto]");
+  if (browsing()) {
+    $("[data-res-title]").innerHTML = `테마별 <b>캠핑장</b>`;
+    const defs = [["ALL", "정보 많은 곳", () => true], ...THEMES];
+    const used = new Set();
+    rows.innerHTML = list.length ? defs.map((d, i) => themeRow(d, list, i === 0, used)).join("") : `<div class="empty">${ic("search")}<b>맞는 곳이 없어요</b><button class="btn ghost" data-clear="all">조건 지우기</button></div>`;
+    grid.innerHTML = ""; noph.innerHTML = "";
+    $("[data-more]").hidden = true;
+    initCarousels(rows);
+    return;
+  }
+  rows.innerHTML = "";
+  const shown = list.filter(hasPhoto), bare = list.filter((c) => !hasPhoto(c));
+  $("[data-res-title]").innerHTML = `${S.theme ? `${esc(themeName(S.theme))} ` : ""}<b>${fmt(list.length)}</b>곳`;
+  grid.innerHTML = shown.length ? shown.slice(0, S.shown).map(card).join("") : bare.length ? "" : `<div class="empty">${ic("search")}<b>맞는 곳이 없어요</b><button class="btn ghost" data-clear="all">조건 지우기</button></div>`;
+  $("[data-more]").hidden = shown.length <= S.shown;
+  noph.innerHTML = S.q && bare.length ? `<h4>사진 없는 곳 ${fmt(bare.length)}</h4><ul>${bare.slice(0, 30).map((c) => `<li><a href="#/c/${encodeURIComponent(c.id)}"><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></a>${heartBtn(c)}</li>`).join("")}</ul>` : "";
   initCarousels(grid);
 }
 function moreResults() {
-  const list = results(), grid = $("[data-grid]");
+  const list = results().filter(hasPhoto), grid = $("[data-grid]");
   const from = S.shown; S.shown += 24;
   grid.insertAdjacentHTML("beforeend", list.slice(from, S.shown).map((c, i) => card(c, from + i)).join(""));
   $("[data-more]").hidden = list.length <= S.shown;
@@ -458,6 +503,8 @@ function homeClicks(e) {
   if (a) { S.area = a.dataset.area; $$("[data-area]").forEach((x) => x.setAttribute("aria-pressed", String(x === a))); renderResults(); return; }
   const t = e.target.closest("[data-theme]");
   if (t) { S.theme = S.theme === t.dataset.theme ? null : t.dataset.theme; $$("[data-theme]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.theme === S.theme))); renderResults(); return; }
+  const all = e.target.closest("[data-theme-all]");
+  if (all) { S.theme = all.dataset.themeAll; render(); $("#results").scrollIntoView({ block: "start" }); return; }
   const q = e.target.closest("[data-quick]");
   if (q) { const k = q.dataset.quick; if (S.quick.has(k)) S.quick.delete(k); else S.quick.add(k); q.setAttribute("aria-pressed", String(S.quick.has(k))); renderResults(); return; }
   const cl = e.target.closest("[data-clear]");
@@ -543,7 +590,7 @@ function reserveCard(c, d) {
     <div class="rs-btns">
       ${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">${esc(short(main.platform_name))} 예약</a>` : ""}
       ${c.tel ? `<a class="btn ghost" href="tel:${esc(c.tel)}">${ic("phone")}전화</a>` : ""}
-      ${compareBtn(c, { label: true })}
+      ${heartBtn(c, { label: true })}
     </div>
   </div>`;
 }
@@ -565,7 +612,7 @@ async function detailView(id) {
   const o = openingOf(c);
   const us = usage(c, d);
   return `<article class="detail" data-id="${esc(c.id)}">
-    <div class="d-bar"><a class="icon-btn" href="#/" data-back aria-label="뒤로">${ic("left")}</a><span class="d-crumb">${esc(region(c))}</span>${compareBtn(c, { label: true })}</div>
+    <div class="d-bar"><a class="icon-btn" href="#/" data-back aria-label="뒤로">${ic("left")}</a><span class="d-crumb">${esc(region(c))}</span>${heartBtn(c, { label: true })}</div>
     <header class="d-head">
       <p class="d-eyebrow">${esc(region(c))}${c.op && OP[c.op] ? ` · ${OP[c.op]}` : tag ? ` · ${esc(tag)}` : ""}${typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
       <h1 class="d-title">${titleHtml(c)}</h1>
@@ -592,7 +639,7 @@ async function detailView(id) {
 }
 function reserveDock(c) {
   const main = [...(c.booking?.channels ?? [])].sort((a, b) => b.confidence - a.confidence).find((x) => x.kind !== "phone");
-  return `${compareBtn(c)}${c.tel ? `<a class="btn ghost" href="tel:${esc(c.tel)}" aria-label="전화">${ic("phone")}</a>` : ""}${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">예약하기</a>` : ""}`;
+  return `${heartBtn(c)}${c.tel ? `<a class="btn ghost" href="tel:${esc(c.tel)}" aria-label="전화">${ic("phone")}</a>` : ""}${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">예약하기</a>` : ""}`;
 }
 function bindDetail() {
   initCarousels($("#view"));
@@ -616,17 +663,21 @@ function openLightbox(c, start) {
 
 // ── 화면: 비교 ───────────────────────────────────────────────
 async function compareView() {
-  const camps = S.compare.map((id) => S.byId.get(id)).filter(Boolean);
-  if (!camps.length) {
-    return `<section class="cmp-page"><div class="sec-head big"><h1>나란히 <em>비교</em></h1></div>
-      <div class="empty">${ic("columns")}<b>카드의 ${ic("plus", "inline")}로 3곳까지 담아요</b><button class="btn primary" type="button" data-sample>예시로 보기</button></div></section>`;
+  const saved = S.saved.map((id) => S.byId.get(id)).filter(Boolean);
+  if (!saved.length) {
+    return `<section class="cmp-page"><div class="sec-head big"><h1>찜한 <em>캠핑장</em></h1></div>
+      <div class="empty">${ic("heart-o")}<b>이름 옆 ${ic("heart-o", "inline")}로 찜하고 나란히 비교해요</b><button class="btn primary" type="button" data-sample>예시로 보기</button></div></section>`;
   }
+  S.pick = S.pick.filter((id) => S.saved.includes(id));
+  if (!S.pick.length) S.pick = saved.slice(0, 3).map((c) => String(c.id));
+  const camps = S.pick.map((id) => S.byId.get(id)).filter(Boolean);
+  const picker = `<div class="rail picks">${saved.map((c) => { const on = S.pick.includes(String(c.id)); return `<button type="button" class="pick${on ? " on" : ""}" data-pick="${esc(c.id)}" aria-pressed="${on}"><img src="${esc(photoUrl(photosOf(c)[0] ?? ""))}" alt="" loading="lazy"><span>${esc(nameOf(c).name)}</span>${ic(on ? "check" : "plus")}</button>`; }).join("")}</div>`;
   const ds = await Promise.all(camps.map((c) => detailOf(c.id)));
   const rowsDef = [
     ["현장 조건", [["주차", (c) => facts(c).park], ["전기", (c) => facts(c).power], ["장작·숯", (c) => facts(c).fire], ["사이트 규격", (c) => facts(c).size], ["바닥", (c) => facts(c).ground], ["위생", (c) => facts(c).sanitary], ["반려동물", (c) => facts(c).pet]]],
     ["시간·요금", [["입실", (c, d) => usage(c, d)[0][1]], ["퇴실", (c, d) => usage(c, d)[1][1]], ["매너타임", (c, d) => usage(c, d)[2][1]], ["요금", (c, d) => usage(c, d)[3][1]]]],
   ];
-  const head = camps.map((c) => `<th scope="col"><a class="ch" href="#/c/${encodeURIComponent(c.id)}"><img src="${esc(photoUrl(photosOf(c)[0] ?? ""))}" alt="" loading="lazy"><span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i>${verdictChip(c)}</span></a><button class="icon-btn ch-x" type="button" data-cmp="${esc(c.id)}" aria-label="빼기">${ic("close")}</button></th>`).join("");
+  const head = camps.map((c) => `<th scope="col"><a class="ch" href="#/c/${encodeURIComponent(c.id)}"><img src="${esc(photoUrl(photosOf(c)[0] ?? ""))}" alt="" loading="lazy"><span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i>${verdictChip(c)}</span></a><button class="icon-btn ch-x" type="button" data-pick="${esc(c.id)}" aria-label="비교에서 빼기">${ic("close")}</button></th>`).join("");
   const opens = camps.map((c) => { const o = openingOf(c); const ch = (c.booking?.channels ?? []).find((x) => x.kind !== "phone"); return `<td class="${o ? "hot" : ""}">${o ? `<b>${esc(o.txt)}</b> · ` : ""}${esc(ch?.platform_name ?? "–")}</td>`; }).join("");
   const body = rowsDef.map(([g, rows]) => `<tr class="grp"><th scope="rowgroup" colspan="${camps.length + 1}">${g}</th></tr>${rows.map(([l, get]) => {
     const vals = camps.map((c, i) => get(c, ds[i]));
@@ -636,7 +687,8 @@ async function compareView() {
   }).join("")}`).join("");
   const acts = camps.map((c) => { const ch = (c.booking?.channels ?? []).find((x) => x.kind !== "phone"); return `<td>${ch ? `<a class="btn primary wide" href="${esc(ch.url)}" target="_blank" rel="noopener">예약</a>` : `<a class="btn ghost wide" href="#/c/${encodeURIComponent(c.id)}">자세히</a>`}</td>`; }).join("");
   return `<section class="cmp-page">
-    <div class="sec-head big"><h1>${camps.length}곳 나란히 <em>비교</em></h1><span class="sec-tools"><span class="sec-note legend">${dot("v")}원문 ${dot("c")}공식 ${dot("m")}언급</span><label class="switch"><input type="checkbox" data-diff checked><span>다른 점만 강조</span></label></span></div>
+    <div class="sec-head big"><h1>찜 ${saved.length} · <em>${camps.length}곳 비교</em></h1><span class="sec-tools"><span class="sec-note legend">${dot("v")}원문 ${dot("c")}공식 ${dot("m")}언급</span><label class="switch"><input type="checkbox" data-diff checked><span>다른 점만 강조</span></label></span></div>
+    ${picker}
     <div class="cmp-scroll"><table class="cmp-table diff-on">
       <thead><tr><th class="corner" scope="col"></th>${head}</tr></thead>
       <tbody><tr class="hotrow"><th scope="row">예약</th>${opens}</tr>${body}<tr class="acts"><th></th>${acts}</tr></tbody>
@@ -646,9 +698,16 @@ async function compareView() {
 function bindCompare() {
   $("[data-diff]")?.addEventListener("change", (e) => $(".cmp-table").classList.toggle("diff-on", e.target.checked));
   $("[data-sample]")?.addEventListener("click", () => {
-    S.compare = S.camps.filter((c) => facts(c).power && facts(c).fire && facts(c).park && photosOf(c).length).sort((a, b) => rich(b) - rich(a)).slice(0, 3).map((c) => String(c.id));
-    store.set("mc-compare", S.compare); syncCompare(); route();
+    S.saved = S.camps.filter((c) => facts(c).power && facts(c).fire && facts(c).park && photosOf(c).length).sort((a, b) => rich(b) - rich(a)).slice(0, 4).map((c) => String(c.id));
+    S.pick = S.saved.slice(0, 3);
+    store.set("mc-saved", S.saved); store.set("mc-pick", S.pick); syncCompare(); route();
   });
+  $$("[data-pick]").forEach((b) => b.addEventListener("click", () => {
+    const id = String(b.dataset.pick);
+    if (S.pick.includes(id)) S.pick = S.pick.filter((x) => x !== id);
+    else { if (S.pick.length >= 3) { toast("3곳까지 나란히 볼 수 있어요"); return; } S.pick.push(id); }
+    store.set("mc-pick", S.pick); route();
+  }));
 }
 
 // ── 화면: 지도 ───────────────────────────────────────────────
@@ -706,7 +765,7 @@ function drawMap() {
     }
   }
   const list = $("[data-mlist]");
-  list.innerHTML = visible.slice(0, 40).map(mapItem).join("") + (visible.length > 40 ? `<p class="map-more">지도를 확대하면 ${fmt(visible.length - 40)}곳 더</p>` : "");
+  list.innerHTML = visible.filter(hasPhoto).slice(0, 40).map(mapItem).join("") + (visible.length > 40 ? `<p class="map-more">지도를 확대하면 ${fmt(visible.length - 40)}곳 더</p>` : "");
   initCarousels(list);
 }
 function mapItem(c) {
@@ -715,7 +774,7 @@ function mapItem(c) {
     <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="mi-ph">${carousel(c)}</div>
     <div class="mi-b"><p class="card-meta">${esc(region(c))}${typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p><h3>${esc(nameOf(c).name)}</h3><span class="bdgs inline">${badges(c, 3)}${verdictChip(c)}</span></div>
-    ${compareBtn(c)}
+    ${heartBtn(c)}
   </article>`;
 }
 function selectPin(c) {
@@ -752,7 +811,7 @@ function bindMap() {
     if (q) { const k = q.dataset.mquick; if (S.quick.has(k)) S.quick.delete(k); else S.quick.add(k); q.setAttribute("aria-pressed", String(S.quick.has(k))); drawMap(); return; }
     if (e.target.closest("[data-peek-x]")) { selected = null; $("[data-peek]").hidden = true; drawMap(); return; }
     const it = e.target.closest(".map-list .mi");
-    if (it && !e.target.closest("[data-cmp]") && innerWidth >= 900 && !e.target.closest(".card-hit")) { const c = S.byId.get(it.dataset.mid); MAP.setView([c.lat, c.lng], Math.max(MAP.getZoom(), 12)); selectPin(c); }
+    if (it && !e.target.closest("[data-save]") && innerWidth >= 900 && !e.target.closest(".card-hit")) { const c = S.byId.get(it.dataset.mid); MAP.setView([c.lat, c.lng], Math.max(MAP.getZoom(), 12)); selectPin(c); }
   };
   v.addEventListener("submit", onSubmit); v.addEventListener("click", onClick);
   cleanup.push(() => { v.removeEventListener("submit", onSubmit); v.removeEventListener("click", onClick); });
@@ -800,7 +859,7 @@ addEventListener("hashchange", route);
   S.photos = photos;
   S.cards = cards?.camps ?? {};
   for (const o of openings.items ?? []) if (!S.openings.has(String(o.id)) || o.kind !== "접수 마감") S.openings.set(String(o.id), o);
-  S.compare = S.compare.filter((id) => S.byId.has(id));
+  S.saved = S.saved.filter((id) => S.byId.has(id));
   syncCompare(); renderGear();
   route();
 })();

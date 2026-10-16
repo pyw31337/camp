@@ -693,20 +693,20 @@
     "official_notice_camps": 0,
     "official_notice_items": 0,
     "verified_condition_facts": 21,
-    "surveyed_condition_facts": 1744,
-    "confirmed_condition_facts": 1351,
+    "surveyed_condition_facts": 1743,
+    "confirmed_condition_facts": 1352,
     "parking_tent_side": 1178,
     "parking_cart_required": 69,
     "parking_shared": 12,
-    "power_high_w": 23,
+    "power_high_w": 30,
     "firewood_allowed": 2448,
     "firewood_prohibited": 171,
     "private_bathroom": 310,
     "kids_play_features": 2658
   },
-  "updated_at": "2026-10-16T10:43:03.864Z",
+  "updated_at": "2026-10-16T13:16:51.300Z",
   "spec_sheet": {
-    "generated_at": "2026-10-16T10:43:04.817Z",
+    "generated_at": "2026-10-16T13:16:52.186Z",
     "campgrounds_with_spec": 1014,
     "roundup_reviews_skipped": 2463,
     "fields": {
@@ -765,7 +765,7 @@
     }
   },
   "operator_site_facts": {
-    "generated_at": "2026-10-16T10:43:04.462Z",
+    "generated_at": "2026-10-16T13:16:51.885Z",
     "campgrounds": 114,
     "w": 46,
     "pk": 39,
@@ -777,14 +777,14 @@
     "sites_read": 547
   },
   "review_digest": {
-    "generated_at": "2026-10-16T10:43:15.194Z",
+    "generated_at": "2026-10-16T13:17:01.536Z",
     "campgrounds": 1640,
     "with_pros": 1582,
     "with_cons": 164,
     "reviews": 10060
   },
   "profiles": {
-    "generated_at": "2026-10-16T10:43:15.568Z",
+    "generated_at": "2026-10-16T13:17:01.874Z",
     "total": 3116,
     "fields": {
       "TYPE": {
