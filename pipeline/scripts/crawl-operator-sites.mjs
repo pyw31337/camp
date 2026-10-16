@@ -18,7 +18,10 @@ const registryPath = join(root, "pipeline/registry/operator-site-snippets.json")
 // 카카오 공식 API로 발굴한 홈페이지(registry/kakao-places.json, discover-kakao.mjs). 고캠핑 등록 사이트가 없거나 죽은 곳에만 쓴다.
 const kakaoPath = join(root, "pipeline/registry/kakao-places.json");
 const kakao = existsSync(kakaoPath) ? JSON.parse(readFileSync(kakaoPath, "utf8")).campgrounds ?? {} : {};
-const discoveredOf = (c) => kakao[c.id]?.homepage?.url ?? null;
+// 네이버 지역 검색에 업장이 등록한 링크(운영자 호스트일 때, registry/naver-places.json)를 웹 검색 후보보다 먼저 쓴다.
+const naverPath = join(root, "pipeline/registry/naver-places.json");
+const naver = existsSync(naverPath) ? JSON.parse(readFileSync(naverPath, "utf8")).campgrounds ?? {} : {};
+const discoveredOf = (c) => (naver[c.id]?.place?.link_is_operator ? naver[c.id].place.link : null) ?? kakao[c.id]?.homepage?.url ?? null;
 const flag = (k) => process.argv.includes(k);
 const arg = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : d; };
 const limit = Number(arg("--limit", 0)) || Infinity;

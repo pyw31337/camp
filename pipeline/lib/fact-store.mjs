@@ -18,6 +18,7 @@ export const SOURCES = {
   gocamping_intro: "고캠핑 운영자 소개글",
   kakao_local: "카카오 로컬(장소 검색 API)",
   kakao_web: "Daum 웹 검색(홈페이지 후보)",
+  naver_local: "네이버 검색 API 지역 검색(업장 등록 정보)",
   review_search: "Daum 블로그·카페 검색 요약",
   localdata: "행정안전부 LOCALDATA 인허가(영업 중 업소)",
 };
@@ -78,7 +79,7 @@ const won = (n) => (n >= 10000 ? `${+(n / 10000).toFixed(1)}만원` : `${n.toLoc
  * @param o  { site(운영자 사이트 수집 결과, 공유 호스트면 null), details(extractSiteDetails 결과), digest(digestReviews 결과), kakao(kakao-places 항목),
  *             nearby({ places: {CONVENIENCE:{m,name,n5},…}, urls: {범주: 원천 URL}, at }) }
  */
-export function factsOf(c, d, { site = null, details = null, digest = null, kakao = null, nearby = null } = {}) {
+export function factsOf(c, d, { site = null, details = null, digest = null, kakao = null, nearby = null, naver = null } = {}) {
   const out = [];
   const cid = String(c.id);
   const push = (attr, value, grade, src, extra = {}) => {
@@ -207,6 +208,13 @@ export function factsOf(c, d, { site = null, details = null, digest = null, kaka
     const at = kakao.checked_at ?? null;
     push("KAKAO_PLACE", kakao.place.url, "CONFIRMED", "kakao_local", { url: kakao.place.url, at, text: kakao.place.category ?? null });
     if (kakao.place.phone && !c.tel) push("PHONE", kakao.place.phone, "CONFIRMED", "kakao_local", { url: kakao.place.url, at });
+  }
+  // ── 네이버 지역 검색(업장이 네이버에 등록한 링크·전화)
+  if (naver?.place) {
+    const at = naver.checked_at ?? null;
+    const searchUrl = `https://search.naver.com/search.naver?query=${encodeURIComponent(naver.query ?? c.name)}`;
+    if (naver.place.link) push("HOMEPAGE", naver.place.link, "CONFIRMED", "naver_local", { url: naver.place.link, at, text: naver.place.category ?? null });
+    if (naver.place.phone) push("PHONE", naver.place.phone, "CONFIRMED", "naver_local", { url: searchUrl, at });
   }
   if (kakao?.homepage?.url) push("HOMEPAGE", kakao.homepage.url, "MENTION", "kakao_web", { url: kakao.homepage.evidence?.[0]?.url ?? kakao.homepage.url, at: kakao.checked_at ?? null, quote: kakao.homepage.evidence?.[0]?.title ?? null });
   return out;

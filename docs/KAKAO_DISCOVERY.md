@@ -20,3 +20,11 @@
 2026-10-16 확인: `place.map.kakao.com`·`map.naver.com`·`camfit.co.kr`의 robots.txt가 **ClaudeBot 등 AI 크롤러를 이름으로 지정해 전체 차단**한다. 소유자가 비상업·오픈소스 전제에서 수집 범위를 넓히라고 했지만, 이름으로 지정된 차단을 일반 UA로 우회하는 것은 하지 않는다. 대신 같은 회사의 **공식 API**(카카오 로컬·Daum 검색)를 쓴다. 카카오맵 장소 페이지의 후기·평점·사진은 읽지 않는다.
 
 robots가 일반 봇을 허용하는 곳(운영자 홈페이지, 일부 소형 예약 사이트)은 기존 규칙(봇 이름 공개·호스트당 1초·문장만 인용)으로 넓혀 간다 — 다음 후보는 `PROJECT_PLAN.md` 결정 대기 참고.
+
+## 네이버 검색 API(NAVER API HUB 지역 검색) — 2026-10-16 추가
+
+- 코드: `pipeline/lib/naver-discovery.mjs`, 실행: `pipeline/scripts/discover-naver.mjs`, 결과: `pipeline/registry/naver-places.json`.
+- 업장이 네이버에 **스스로 등록한** 홈페이지 링크·전화·분류·주소·좌표를 캠핑장마다 1곳 맞춘다(전화 일치 > 이름 + 거리 3km + 분류). 평점·리뷰·사진은 받지 않는다.
+- 등록 링크가 운영자 호스트이면 크롤러 시작 주소로 **카카오 웹 검색 후보보다 먼저** 쓴다. 사실 저장소에는 `HOMEPAGE`·`PHONE`(CONFIRMED, 원천 `naver_local`)으로 들어가 카카오·고캠핑 값과 교차 확인된다.
+- 비용: HUB는 **한시 무료**(검색 카테고리 통합 월 775,000건, 키당 50 RPS, 유료 전환 시 사전 공지 — [NCP 가이드](https://guide.ncloud-docs.com/docs/apihub-overview)). 전수 1회 약 3,100건. 유료 전환 공지가 나오면 `operator-sites` 입력값 `naver_max_calls`를 0으로.
+- 키: 저장소 비밀값 `NAVER_API_HUB_CLIENT_ID`·`NAVER_API_HUB_CLIENT_SECRET`(소유자 등록 완료). 키 동작은 `api-key-check.yml`(push·수동)로 확인한다. 경로는 문서마다 표기가 달라 `/search/v1/local` → `/search/v1/local.json` → `/v1/search/local.json` 순으로 시도한다.

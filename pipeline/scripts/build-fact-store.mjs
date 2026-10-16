@@ -22,6 +22,7 @@ const readJson = (p, d) => (existsSync(p) ? JSON.parse(readFileSync(p, "utf8")) 
 const camps = readJson(join(dataDir, "campgrounds.json"), []);
 const sites = readJson(join(root, "pipeline/registry/operator-site-snippets.json"), {}).campgrounds ?? {};
 const kakao = readJson(join(root, "pipeline/registry/kakao-places.json"), {}).campgrounds ?? {};
+const naverReg = readJson(join(root, "pipeline/registry/naver-places.json"), {}).campgrounds ?? {};
 const nearbyReg = readJson(join(root, "pipeline/registry/nearby-licensed.json"), null);
 // 범주 → 원천 업종 페이지(첫 번째 원천) URL
 const nearbyUrls = Object.fromEntries(NEARBY_CATS.map((c) => [c.code, nearbyReg?.sources?.find((s) => s.slug === c.from[0] && s.page_url)?.page_url ?? "https://www.localdata.go.kr/"]));
@@ -43,7 +44,7 @@ for (const c of camps) {
   const site = s?.status === "OK" && s.snippets?.length && !shared ? s : null;
   const details = site ? extractSiteDetails(site.snippets.map((x) => x.text)) : null;
   const digest = d ? digestReviews(c.name, [...(d.reviews ?? []), ...(d.cafe ?? [])], { min: 1, top: 99 }) : null;
-  facts.push(...factsOf(c, d, { site, details, digest, kakao: kakao[c.id] ?? null, nearby: nearbyOf(c.id) }));
+  facts.push(...factsOf(c, d, { site, details, digest, kakao: kakao[c.id] ?? null, nearby: nearbyOf(c.id), naver: naverReg[c.id] ?? null }));
   registry.push({ cid: String(c.id), name: c.name, sido: c.sido ?? null, sigungu: c.sigungu ?? null, lat: c.lat ?? null, lng: c.lng ?? null, gc_url: c.gc_url ?? null, gc_at: c.modified_at ?? null, kakao_place_id: kakao[c.id]?.place?.id ?? null });
 }
 
