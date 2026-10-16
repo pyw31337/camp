@@ -453,25 +453,25 @@ function renderChips() {
   $("#sggChips").innerHTML = sggs.length ? [`<button class="pill pill-sub" type="button" data-sgg="" aria-pressed="${!state.sgg}">${esc(state.area)} 전체</button>`, ...sggs.map(([k, n]) => `<button class="pill pill-sub" type="button" data-sgg="${esc(k)}" aria-pressed="${state.sgg === k}">${esc(sggLabel(k))} <span class="num">${n}</span></button>`)].join("") : "";
   $("#filterChips").innerHTML = [
     `<button class="pill" type="button" data-toggle="savedOnly" aria-pressed="${state.savedOnly}">${ic("#l-heart", "i-sm")}관심 <span class="num">${state.saved.size}</span></button>`,
-    map ? `<button class="pill" type="button" data-toggle="inView" aria-pressed="${state.inView}">${ic("#l-scan-search", "i-sm")}지도에 보이는 곳만</button>` : "",
-    `<button class="pill" type="button" data-toggle="availabilityOnly" aria-pressed="${state.availabilityOnly}" ${isFreshAvailability() ? "" : "disabled"}>${ic("#l-circle-check", "i-sm")}공식 접수 중 <span class="num">${isFreshAvailability() ? openCount() : "-"}</span></button>`,
-    `<button class="pill" type="button" data-toggle="parkingSide" aria-pressed="${state.parkingSide}">${ic("#l-car", "i-sm")}텐트 옆 주차 <span class="num">${count((c) => c.field_conditions?.status === "VERIFIED" && c.field_conditions?.parking?.tent_side === true)}</span></button>`,
-    `<button class="pill" type="button" data-toggle="parkingCart" aria-pressed="${state.parkingCart}">짐수레 이동 <span class="num">${count((c) => isFact(conditionView(c).parking.grade) && conditionView(c).parking.cart)}</span></button>`,
-    `<button class="pill" type="button" data-toggle="firewoodAllowed" aria-pressed="${state.firewoodAllowed}">${ic("#l-flame", "i-sm")}장작 불멍 <span class="num">${count((c) => c.field_conditions?.status === "VERIFIED" && c.field_conditions?.firewood?.allowed === true)}</span></button>`,
-    `<button class="pill" type="button" data-toggle="powerHigh" aria-pressed="${state.powerHigh}">${ic("#l-zap", "i-sm")}700W+ 고전력 <span class="num">${count((c) => c.field_conditions?.status === "VERIFIED" && c.field_conditions?.power?.limit_w >= 700)}</span></button>`,
-    `<button class="pill" type="button" data-toggle="privateBath" aria-pressed="${state.privateBath}">${ic("#l-shower-head", "i-sm")}개별 욕실/화장실 <span class="num">${count((c) => conditionView(c).sanitary.privateBath && isFact(conditionView(c).sanitary.bathGrade))}</span></button>`,
-    `<button class="pill" type="button" data-toggle="kidsPlay" aria-pressed="${state.kidsPlay}">${ic("#l-baby", "i-sm")}키즈·놀거리 <span class="num">${count(hasKidsPlay)}</span></button>`,
-    `<button class="pill" type="button" data-toggle="realtime" aria-pressed="${state.realtime}">${ic("#l-zap", "i-sm")}온라인 예약 채널 <span class="num">${count(isRealtime)}</span></button>`,
+    map ? `<button class="pill" type="button" data-toggle="inView" aria-pressed="${state.inView}">${ic("#l-scan-search", "i-sm")}이 지역만</button>` : "",
+    `<button class="pill" type="button" data-toggle="availabilityOnly" aria-pressed="${state.availabilityOnly}" ${isFreshAvailability() ? "" : "disabled"}>${ic("#l-circle-check", "i-sm")}접수 중 <span class="num">${isFreshAvailability() ? openCount() : "-"}</span></button>`,
+    `<button class="pill" type="button" data-toggle="parkingSide" aria-pressed="${state.parkingSide}">${ic("#l-car", "i-sm")}옆 주차 <span class="num">${count((c) => c.field_conditions?.status === "VERIFIED" && c.field_conditions?.parking?.tent_side === true)}</span></button>`,
+    `<button class="pill" type="button" data-toggle="parkingCart" aria-pressed="${state.parkingCart}">짐수레 <span class="num">${count((c) => isFact(conditionView(c).parking.grade) && conditionView(c).parking.cart)}</span></button>`,
+    `<button class="pill" type="button" data-toggle="firewoodAllowed" aria-pressed="${state.firewoodAllowed}">${ic("#l-flame", "i-sm")}장작 <span class="num">${count((c) => c.field_conditions?.status === "VERIFIED" && c.field_conditions?.firewood?.allowed === true)}</span></button>`,
+    `<button class="pill" type="button" data-toggle="powerHigh" aria-pressed="${state.powerHigh}">${ic("#l-zap", "i-sm")}700W+ <span class="num">${count((c) => c.field_conditions?.status === "VERIFIED" && c.field_conditions?.power?.limit_w >= 700)}</span></button>`,
+    `<button class="pill" type="button" data-toggle="privateBath" aria-pressed="${state.privateBath}">${ic("#l-shower-head", "i-sm")}개별 욕실 <span class="num">${count((c) => conditionView(c).sanitary.privateBath && isFact(conditionView(c).sanitary.bathGrade))}</span></button>`,
+    `<button class="pill" type="button" data-toggle="kidsPlay" aria-pressed="${state.kidsPlay}">${ic("#l-baby", "i-sm")}키즈 <span class="num">${count(hasKidsPlay)}</span></button>`,
+    `<button class="pill" type="button" data-toggle="realtime" aria-pressed="${state.realtime}">${ic("#l-zap", "i-sm")}온라인 예약 <span class="num">${count(isRealtime)}</span></button>`,
     ...Object.entries(KIND).filter(([k]) => k !== "RV_PITCH").map(([k, [l, i]]) => `<button class="pill" type="button" data-kind="${k}" aria-pressed="${state.kinds.has(k)}">${ic(i, "i-sm")}${l}</button>`),
     `<span class="sep"></span>`,
     `<button class="pill" type="button" data-toggle="pet" aria-pressed="${state.pet}">${ic("#l-dog", "i-sm")}반려견</button>`,
-    `<button class="pill" type="button" data-toggle="power" aria-pressed="${state.power}">${ic("#l-plug-zap", "i-sm")}전기 제공 <span class="num">${count(hasPower)}</span></button>`,
-    `<button class="pill" type="button" data-toggle="siteSize" aria-pressed="${state.siteSize}">${ic("#l-ruler", "i-sm")}규격 등록 <span class="num">${count(hasSiteSize)}</span></button>`,
-    `<button class="pill" type="button" data-toggle="floor" aria-pressed="${state.floor}">${ic("#t-layers-subtract", "i-sm")}바닥 등록 <span class="num">${count(hasFloor)}</span></button>`,
-    `<button class="pill" type="button" data-toggle="naverBooking" aria-pressed="${state.naverBooking}">네이버 예약 <span class="num">${count((c) => hasChannel(c, "naver"))}</span></button>`,
+    `<button class="pill" type="button" data-toggle="power" aria-pressed="${state.power}">${ic("#l-plug-zap", "i-sm")}전기 <span class="num">${count(hasPower)}</span></button>`,
+    `<button class="pill" type="button" data-toggle="siteSize" aria-pressed="${state.siteSize}">${ic("#l-ruler", "i-sm")}규격 <span class="num">${count(hasSiteSize)}</span></button>`,
+    `<button class="pill" type="button" data-toggle="floor" aria-pressed="${state.floor}">${ic("#t-layers-subtract", "i-sm")}바닥 <span class="num">${count(hasFloor)}</span></button>`,
+    `<button class="pill" type="button" data-toggle="naverBooking" aria-pressed="${state.naverBooking}">네이버 <span class="num">${count((c) => hasChannel(c, "naver"))}</span></button>`,
     `<button class="pill" type="button" data-toggle="camfitBooking" aria-pressed="${state.camfitBooking}">캠핏 <span class="num">${count((c) => hasChannel(c, "camfit"))}</span></button>`,
-    `<button class="pill" type="button" data-toggle="fee" aria-pressed="${state.fee}">${ic("#t-coin", "i-sm")}요금 안내 있음</button>`,
-    `<button class="pill" type="button" data-setup-focus aria-pressed="${hasSetup()}">${ic("#l-backpack", "i-sm")}내 세팅${hasSetup() ? " · 사용 중" : ""}</button>`,
+    `<button class="pill" type="button" data-toggle="fee" aria-pressed="${state.fee}">${ic("#t-coin", "i-sm")}요금</button>`,
+    `<button class="pill" type="button" data-setup-focus aria-pressed="${hasSetup()}">${ic("#l-backpack", "i-sm")}내 세팅</button>`,
   ].join("");
 }
 
@@ -874,11 +874,11 @@ function bookingChannels(c) {
   ].filter(Boolean).sort((a, b) => bookingOrder(a) - bookingOrder(b));
 }
 function bookingCtaLabel(ch) {
-  if (ch.kind === "online" && ch.platform_id === "camfit") return "캠핏에서 예약 확인";
-  if (ch.kind === "online" && ch.platform_id === "naver") return "네이버 예약에서 확인";
-  if (ch.kind === "online") return `${ch.platform_name || "예약처"}에서 예약 확인`;
-  if (ch.kind === "homepage") return "공식 홈페이지 열기";
-  return "전화로 문의";
+  if (ch.kind === "online" && ch.platform_id === "camfit") return "캠핏 예약";
+  if (ch.kind === "online" && ch.platform_id === "naver") return "네이버 예약";
+  if (ch.kind === "online") return (ch.platform_name ?? "").length <= 6 ? `${ch.platform_name || "온라인"} 예약` : "온라인 예약";
+  if (ch.kind === "homepage") return "홈페이지";
+  return "전화";
 }
 function bookingTarget(c) {
   const channels = bookingChannels(c);
@@ -891,7 +891,7 @@ function bookingTarget(c) {
       channel: camfit,
       platform: "camfit",
       type: "camfit",
-      label: "캠핏에서 예약하기",
+      label: "캠핏 예약",
       isSearch: false,
     };
   }
@@ -904,7 +904,7 @@ function bookingTarget(c) {
       channel: naver,
       platform: "naver",
       type: "naver",
-      label: "네이버 예약으로 이동",
+      label: "네이버 예약",
       isSearch: false,
     };
   }
@@ -918,7 +918,7 @@ function bookingTarget(c) {
       platform: online.platform_name || "online",
       type: "online",
       // 버튼 문구는 줄바꿈하지 않도록 짧게. 긴 채널명은 ‘온라인 예약’으로 줄인다.
-      label: (online.platform_name ?? "").length <= 6 ? `${online.platform_name || "온라인"} 예약하기` : "온라인 예약하기",
+      label: (online.platform_name ?? "").length <= 6 ? `${online.platform_name || "온라인"} 예약` : "온라인 예약",
       isSearch: false,
     };
   }
@@ -931,14 +931,14 @@ function bookingTarget(c) {
       channel: homepage,
       platform: "homepage",
       type: "homepage",
-      label: "공식 홈페이지로 예약하기",
+      label: "홈페이지 예약",
       isSearch: false,
     };
   }
   // 등록된 온라인·홈페이지 경로가 없으면 예약처를 ‘검색’으로만 안내한다. 이 캠핑장이 해당 플랫폼에
   // 입점했는지 모르므로 ‘예약하기’·‘빈자리’라고 말하지 않는다. 전화가 등록돼 있으면 전화가 확정 경로다.
   const phone = channels.find((x) => x.url && x.kind === "phone");
-  if (phone) return { href: phone.url, ext: false, channel: phone, platform: "phone", type: "phone", label: "전화로 예약 문의", isSearch: false,
+  if (phone) return { href: phone.url, ext: false, channel: phone, platform: "phone", type: "phone", label: "전화 예약", isSearch: false,
     searchHref: `https://www.camfit.co.kr/search?keyword=${encodeURIComponent(c.name)}` };
   return {
     href: `https://www.camfit.co.kr/search?keyword=${encodeURIComponent(c.name)}`,
@@ -946,7 +946,7 @@ function bookingTarget(c) {
     channel: null,
     platform: "camfit-search",
     type: "search",
-    label: "캠핏에서 이름 검색",
+    label: "캠핏 검색",
     isSearch: true,
     naverHref: `https://search.naver.com/search.naver?query=${encodeURIComponent(c.name + " 예약")}`,
   };
@@ -1664,9 +1664,9 @@ function detail(c) {
         ${ic(target.type === "phone" ? "#l-phone" : target.type === "search" ? "#l-search" : target.type === "naver" ? "#l-calendar" : "#l-external-link", "i-sm")}
         <span>${target.label}</span>
       </a>
-      ${target.isSearch && target.naverHref ? `<a class="btn-cta-secondary" href="${esc(target.naverHref)}" target="_blank" rel="noopener">${ic("#l-search", "i-xs")}네이버 검색</a>` : ""}
-      ${target.searchHref ? `<a class="btn-cta-secondary" href="${esc(target.searchHref)}" target="_blank" rel="noopener">${ic("#l-search", "i-xs")}캠핏 검색</a>` : ""}
-      ${c.tel && target.type !== "phone" ? `<a class="btn-cta-secondary" href="${telHref(c.tel)}" aria-label="전화 문의">${ic("#l-phone", "i-xs")}전화 문의</a>` : ""}
+      ${target.isSearch && target.naverHref ? `<a class="btn-cta-secondary" href="${esc(target.naverHref)}" target="_blank" rel="noopener">${ic("#l-search", "i-xs")}네이버</a>` : ""}
+      ${target.searchHref ? `<a class="btn-cta-secondary" href="${esc(target.searchHref)}" target="_blank" rel="noopener">${ic("#l-search", "i-xs")}캠핏</a>` : ""}
+      ${c.tel && target.type !== "phone" ? `<a class="btn-cta-secondary" href="${telHref(c.tel)}" aria-label="전화 문의">${ic("#l-phone", "i-xs")}전화</a>` : ""}
     </div>
   </div>` : ""}`;
 }

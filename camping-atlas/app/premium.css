@@ -413,3 +413,24 @@
 .may-rv span { min-width: 0; display: block; }
 .may-rv svg { vertical-align: -2px; margin-right: 4px; }
 .may-open-bottom a { position: relative; } /* sr-only가 가로 스크롤 목록 밖으로 새지 않게 */
+
+/* ==========================================================================
+   v4.2(2026-10-16): 실제 한국 캠핑장 사진 히어로 · 글자 자리 딤 85% 이상 · 가로폭 전체 와이드
+   ========================================================================== */
+.may-shell { width: auto; max-width: none; margin: 0 clamp(16px, 3vw, 48px); }
+.may-hero { margin: 0 calc(-1 * clamp(16px, 3vw, 48px)); border-radius: 0; min-height: clamp(560px, 46vw, 720px); }
+.may-hero > picture img { object-position: 70% 55%; }
+.may-hero-overlay { background: linear-gradient(90deg, rgba(245,246,244,.94) 0%, rgba(245,246,244,.88) 42%, rgba(245,246,244,.45) 58%, rgba(245,246,244,0) 74%), linear-gradient(180deg, rgba(245,246,244,0) 62%, rgba(245,246,244,.85) 88%, var(--mc-canvas) 100%); }
+.may-hero-copy { padding-left: clamp(16px, 3vw, 48px); margin-left: 0; }
+.may-searchbox { left: clamp(16px, 3vw, 48px); right: clamp(16px, 3vw, 48px); }
+.may-search-go, .may-explorer-direct > a, .may-categories button { white-space: nowrap; }
+.may-search-go { padding: 0 26px; }
+@media (max-width: 760px) {
+  .may-hero { min-height: 680px; }
+  .may-hero > picture img { object-position: 50% 60%; }
+  .may-hero-overlay { background: linear-gradient(180deg, rgba(245,246,244,.95) 0%, rgba(245,246,244,.88) 40%, rgba(245,246,244,.3) 52%, rgba(245,246,244,0) 58%, rgba(245,246,244,0) 66%, rgba(245,246,244,.6) 74%, var(--mc-canvas) 84%); }
+  .may-hero-copy { padding: 26px 16px 0; }
+}
+.may-hero-tip { position: absolute; right: clamp(16px, 3vw, 48px); top: 12px; z-index: 3; }
+.may-hero-tip .may-tip { margin: 0; }
+.may-hero-tip .may-tip-pop { left: auto; right: 0; }

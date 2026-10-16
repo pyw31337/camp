@@ -148,7 +148,7 @@ export default function Home() {
 
     <div className="may-shell">
       <section className="may-hero" aria-label="캠핑 탐색">
-        <picture><source media="(max-width: 760px)" srcSet="images/hero-home-m.webp" /><img src="images/hero-home.webp" alt="해 질 녘 산 능선 위의 텐트" /></picture><div className="may-hero-overlay" />
+        <picture><source media="(max-width: 760px)" srcSet="images/hero-home-m.webp" /><img src="images/hero-home.webp" alt="해 질 녘 산골짜기 캠핑장에 불 켜진 텐트들" /></picture><div className="may-hero-overlay" /><span className="may-hero-tip"><InfoTip label="사진 출처 보기">사진: 일곱식구 캠핑장(전북 정읍) · 한국관광공사 고캠핑 공식 등록 사진</InfoTip></span>
         <div className="may-hero-copy"><h1><span>전국 {featured ? featured.total.toLocaleString("ko-KR") : "3,000"}곳 캠핑장,</span><span>사진 보고 바로 예약</span></h1><p>사이트·시설·주변 정보와 예약 오픈 일정까지<br />한 화면에서 비교하세요.</p></div>
         <div className="may-hero-stats" aria-label="예약 오픈"><a href="explore/openings/"><small><CalendarClock size={14} />이번 주 예약 오픈</small><strong>{weekCount ?? "–"}<i>곳</i></strong></a></div>
         <form className="may-searchbox" onSubmit={runSearch}>
@@ -166,7 +166,7 @@ export default function Home() {
       <section className="may-explorer-direct" aria-label="전국 캠핑장 조건 탐색">
         <div><span><Database size={15} />전국 캠핑장 데이터</span><h2>캠핑장별 현장 조건을 바로 비교하세요</h2><p>전기·전력 제한, 주차, 바닥, 사이트 규격, 장작·숯불 규정은 캠핑장 상세에서 원천과 함께 확인합니다.</p></div>
         <div className="may-explorer-stats"><b>{(explorerMeta?.count ?? featured?.total ?? 3111).toLocaleString("ko-KR")}곳</b><span>전기 {explorerMeta?.stats?.electricity_registered?.toLocaleString("ko-KR") ?? "2,088"} · 규격 {explorerMeta?.stats?.site_size_registered?.toLocaleString("ko-KR") ?? "816"} · 바닥 {explorerMeta?.stats?.ground_registered?.toLocaleString("ko-KR") ?? "1,576"}</span></div>
-        <a href="explore/">전국 조건으로 찾기 <ArrowRight size={16} /></a>
+        <a href="explore/">조건으로 찾기 <ArrowRight size={16} /></a>
       </section>
 
       <section className="may-categories" aria-label="캠핑 형태">{categories.map((category) => <button key={category} type="button" className={selectedCategory === category ? "selected" : ""} onClick={() => selectCategory(category)}>{category === "무료" ? <span className="may-free-icon">₩</span> : category === "오토캠핑" || category === "카라반" ? <Car size={17} /> : <TentTree size={17} />}<span>{category}</span></button>)}</section>

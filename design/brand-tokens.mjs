@@ -14,9 +14,9 @@ export const BRAND_CSS = `
   --mc-solid: #101414; --mc-on-solid: #ffffff;
   --mc-ember: #c2410c; --mc-ember-tint: #fdeee4;
   --mc-sky: #00875a; --mc-sky-tint: #e4f4ea;
-  /* 액센트·배지: 초록=예약·시간·행동, 노랑=전기(잉크 글자), 불꽃=불멍, 잉크=주차·차박 */
+  /* 액센트·배지: 초록=예약·시간·행동, 라임=전기(잉크 글자), 주황=불멍(흰 굵은 글자), 잉크=주차·차박 (소유자 확정 2026-10-16) */
   --mc-accent: #00875a; --mc-accent-ink: #0a6e45; --mc-accent-tint: #e4f4ea; --mc-leaf: #34c27a;
-  --mc-volt: #ffd23f; --mc-flame: #db380b; --mc-cobalt: #00875a;
+  --mc-volt: #c8ff00; --mc-flame: #ff4a1c; --mc-cobalt: #00875a;
   --mc-soft: #eef1ed; --mc-soft-2: #e4e8e3;
   --mc-glass: rgba(255, 255, 255, .9); --mc-glass-line: rgba(255, 255, 255, .9); --mc-glass-ink: #101414;
   --mc-scrim: rgba(16, 20, 20, .4);

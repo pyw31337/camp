@@ -93,7 +93,7 @@ export const SITE_HEADER_SCRIPT = `<script>${SITE_HEADER_JS}</script>`;
 export const SITE_HEADER_CSS = `${BRAND_CSS}
 /* ===== 공통 사이트 헤더 v3(홈·탐색·보조 페이지 동일) — 캔버스 유리 바 + 알약 메뉴, 모바일은 떠 있는 탭 바 ===== */
 .gnb { position: sticky; top: 0; z-index: 70; background: color-mix(in srgb, var(--mc-canvas) 84%, transparent); backdrop-filter: saturate(1.3) blur(14px); -webkit-backdrop-filter: saturate(1.3) blur(14px); border-bottom: 1px solid color-mix(in srgb, var(--mc-line) 70%, transparent); color: var(--mc-ink); }
-.gnb-in { box-sizing: border-box; width: 100%; max-width: 1240px; height: 68px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; gap: 24px; }
+.gnb-in { box-sizing: border-box; width: 100%; max-width: none; height: 68px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 48px); display: flex; align-items: center; gap: 24px; }
 .sh-brand { display: inline-flex; align-items: center; gap: 10px; flex: none; color: var(--mc-ink); text-decoration: none; white-space: nowrap; }
 .sh-brand > span { width: 38px; height: 38px; border-radius: 13px; display: grid; place-items: center; background: var(--mc-accent, #00875a); color: #fff; }
 .sh-brand svg { width: 20px; height: 20px; }

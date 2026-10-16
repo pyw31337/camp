@@ -49,7 +49,7 @@ Codex(토큰 만료)·Gemini 작업이 멈춘 뒤 Claude가 이어받았다. PR:
 2. **포스터 배지**: `_app.js`의 `posterBadges(c)` 하나가 카드·상세·지도 배지를 만든다(전기→불멍→주차·차박 + 시간). 근거는 `badgeTip(c)`의 (i). `conditionView`에 등급 `OPERATOR`(운영자 공개) 추가 — 배지는 되지만 내 세팅 MATCH/MISMATCH에는 쓰지 않는다.
 3. **지도 메뉴·지도 모드**: 메뉴 `지도`=`explore/?view=map`, 찾는 방법 탭(키워드·테마·지도), `setView()`. 핀은 카카오 `CustomOverlay` 알약(`renderMarkers`/`pinLabel`), 누르면 `peek()` 미리보기 카드.
 4. **하단 탭**: 홈·찾기·지도·예약 일정·내 캠핑, 면 아이콘(`site-header.mjs`의 `F`/`fsvg`). 테마는 탭에서 빠지고 PC 메뉴·찾기 탭으로.
-5. **히어로 그림**: `design/hero/generate-hero.mjs`가 SVG 일러스트를 webp 4종으로 굽는다(사진 아님, 출처 표기 불필요). 고칠 땐 이 스크립트를 고치고 다시 실행.
+5. **히어로 사진(v4.2)**: 일러스트 폐기. `design/hero/build-hero.mjs`가 고캠핑 공식 사진(일곱식구 캠핑장 c_no=8114)을 레이아웃별 webp 4종으로 자르고 보정한다. 소유자가 생성 사진을 주면 `node design/hero/build-hero.mjs <파일>`로 교체. 글자 자리 딤 ≥ 80%, 배지 라임·주황 복원, 버튼 1~2단어 한 줄, 가로폭 전체(최대 폭 제거).
 6. **출처 숨김**: 탐색 결과 머리의 기준일, 공식 접수 안내, 내 세팅 설명, 홈의 사진·일정 안내는 (i) 말풍선(`tipBtn`, 홈 `InfoTip`). 테마 페이지 사진 출처도 (i) 펼침.
 7. **운영자 홈페이지 사실**(`docs/OPERATOR_SITE_FACTS.md`): `crawl-operator-sites.mjs`(주 1회 `operator-sites.yml`) → `registry/operator-site-snippets.json` → `build-operator-facts.mjs`(c.of) + `build-spec-sheet.mjs`. 첫 실행 1,110곳 중 339곳 문장, 배지 사실 68곳, 스펙 시트 816→968곳.
 8. **후기 장단점 한 줄**: `pipeline/lib/review-digest.mjs` + `build-review-digest.mjs`(c.rv, featured.json의 rv·bd). 1,098곳(장점 1,054·단점 123). 평점은 수집하지 않음 — 결정 대기(`PROJECT_PLAN.md`).

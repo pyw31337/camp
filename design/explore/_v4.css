@@ -14,10 +14,11 @@ body { background: var(--mc-canvas); }
 
 /* ---------- 상단 히어로: 보정한 넓은 사진, 흰 그라데이션으로 페이지와 이어진다 ---------- */
 .x-hero { position: relative; overflow: hidden; isolation: isolate; min-height: clamp(260px, 30vw, 420px); display: flex; align-items: flex-end; }
-.x-hero::before { content: ""; position: absolute; inset: 0; z-index: -2; background: url("../images/hero-campsite.webp") 60% 96% / cover no-repeat; }
+.x-hero::before { content: ""; position: absolute; inset: 0; z-index: -2; background: url("../images/hero-campsite.webp") 70% 60% / cover no-repeat; }
+/* 글자가 지나가는 자리(PC 왼쪽 45%, 모바일 위 40%)는 바탕색 85% 이상으로 덮어 사진에 묻히지 않게(소유자 요청: 최소 80%). */
 .x-hero::after { content: ""; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(90deg, rgba(245,246,244,.92) 0%, rgba(245,246,244,.55) 34%, rgba(245,246,244,0) 62%),
-              linear-gradient(180deg, rgba(245,246,244,0) 72%, rgba(245,246,244,.75) 90%, var(--mc-canvas) 100%); }
+  background: linear-gradient(90deg, rgba(245,246,244,.94) 0%, rgba(245,246,244,.88) 38%, rgba(245,246,244,.5) 55%, rgba(245,246,244,0) 72%),
+              linear-gradient(180deg, rgba(245,246,244,0) 70%, rgba(245,246,244,.85) 92%, var(--mc-canvas) 100%); }
 .x-hero-in { width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; padding-top: 28px; padding-bottom: 18px; flex-wrap: wrap; }
 .x-hero-title { display: flex; flex-direction: column; line-height: .94; letter-spacing: -0.065em; color: var(--mc-ink); font-size: var(--mc-display); }
 .x-hero-title b { font-weight: 900; }
@@ -27,8 +28,8 @@ body { background: var(--mc-canvas); }
 .x-mode [aria-selected="true"] { background: var(--mc-accent); color: #fff; }
 @media (max-width: 640px) {
   .x-hero { min-height: 300px; }
-  .x-hero::before { background-image: url("../images/hero-campsite-m.webp"); background-position: 50% 97%; }
-  .x-hero::after { background: linear-gradient(180deg, rgba(245,246,244,.92) 0%, rgba(245,246,244,.3) 30%, rgba(245,246,244,0) 46%, rgba(245,246,244,0) 76%, rgba(245,246,244,.8) 92%, var(--mc-canvas) 100%); }
+  .x-hero::before { background-image: url("../images/hero-campsite-m.webp"); background-position: 50% 70%; }
+  .x-hero::after { background: linear-gradient(180deg, rgba(245,246,244,.94) 0%, rgba(245,246,244,.88) 36%, rgba(245,246,244,.3) 50%, rgba(245,246,244,0) 60%, rgba(245,246,244,0) 76%, rgba(245,246,244,.85) 92%, var(--mc-canvas) 100%); }
   .x-hero-in { flex-direction: column; align-items: stretch; height: 300px; justify-content: space-between; padding-top: 18px; }
   .x-mode { width: 100%; }
 }
@@ -94,12 +95,12 @@ body { background: var(--mc-canvas); }
 .poster-badge { display: none !important; }
 
 /* ---------- 상세: 넓은 사진이 흰 그라데이션으로 페이지에 녹고, 그 위에 큰 제목 ---------- */
-.dv-cover { position: relative; max-width: 1180px; margin: -3.75rem auto 0; }
+.dv-cover { position: relative; max-width: none; width: 100%; margin: -3.75rem 0 0; }
 .dv-cover .dv-hero { max-width: none; width: 100%; margin: 0; height: clamp(380px, 52vw, 560px); }
-.dv-cover::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 62%; z-index: 2; pointer-events: none; background: linear-gradient(180deg, rgba(245,246,244,0) 0%, rgba(245,246,244,.82) 55%, var(--mc-canvas) 100%); }
+.dv-cover::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 70%; z-index: 2; pointer-events: none; background: linear-gradient(180deg, rgba(245,246,244,0) 0%, rgba(245,246,244,.6) 25%, rgba(245,246,244,.88) 45%, rgba(245,246,244,.95) 75%, var(--mc-canvas) 100%); }
 .dv-cover .dv-all { top: 16px; bottom: auto; right: 16px; z-index: 3; }
 @media (max-width: 1080px) { .dv-cover .dv-all { top: 12px; bottom: auto; align-self: flex-start; } }
-@media (min-width: 1081px) { .dv-cover { margin-top: 0; width: calc(100% - 48px); } .dv-cover .dv-hero { width: 100%; } }
+@media (min-width: 1081px) { .dv-cover { margin-top: 0; } .dv-cover .dv-hero { width: 100%; border-radius: 0; } }
 .dv-glass { position: absolute; left: 16px; right: 16px; bottom: 6px; z-index: 3; display: grid; gap: 10px; padding: 0; background: none; border: 0; box-shadow: none; pointer-events: none; }
 .dv-glass > * { pointer-events: auto; }
 .dv-glass h2 { display: flex; flex-wrap: wrap; column-gap: .3em; margin: 0; font-size: clamp(2rem, 1.3rem + 2.6vw, 3.5rem); line-height: 1; letter-spacing: -0.06em; color: var(--mc-ink); }
@@ -192,3 +193,24 @@ body { background: var(--mc-canvas); }
 .map-peek .peek-x { background: var(--mc-soft); color: var(--mc-ink); }
 @media (min-width: 901px) { .map-peek { left: 16px; right: auto; width: 420px; bottom: 16px; } }
 .map-fab { position: absolute; right: 12px; top: 12px; z-index: 4; width: 44px; height: 44px; border-radius: 50%; background: #fff; box-shadow: var(--mc-shadow-float); display: grid; place-items: center; color: var(--mc-ink); }
+
+/* ---------- v4.2: 가로폭 전체를 쓰는 와이드 레이아웃(소유자 요청) ---------- */
+:root { --gutter: clamp(16px, 3vw, 48px); }
+.wrap { max-width: none; }
+.x-hero { margin: 0; border-radius: 0; }
+
+/* ---------- v4.2: 버튼·칩 글자는 한 줄, 좌우 여백 16px 이상 ---------- */
+.pill, .near-btn, .availability-run, .x-mode > *, .btn-cta-primary, .btn-cta-secondary, .dv-go, .peek-actions button, .compare-btn { white-space: nowrap; flex-shrink: 0; }
+.pill { min-height: 2.5rem; padding: 0 16px; gap: 6px; font-weight: 700; }
+.pill .num { font-weight: 400; color: var(--mc-ink-3); }
+.pill[aria-pressed="true"] .num { color: rgba(255,255,255,.7); }
+.near-btn { padding: 0 18px; }
+.availability-run { padding: 0 22px; }
+.btn-cta-primary { padding: 0 24px; }
+.btn-cta-secondary { padding: 0 16px; }
+.chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 8px; }
+.chips::-webkit-scrollbar { display: none; }
+h1, h2, h3, .card-title h3, .dv-glass h2 { word-break: keep-all; text-wrap: balance; }
+.x-hero-tip { position: absolute; right: clamp(16px, 3vw, 48px); top: 14px; background: rgba(255,255,255,.85); }
+/* 모바일 ‘지도 보기’ 떠 있는 버튼은 칩을 가린다. 지도는 상단 탭·메뉴로 들어가고, 지도 화면에서만 ‘목록 보기’로 돌아온다. */
+@media (max-width: 900px) { body:not([data-view="map"]) .mobile-switch { display: none !important; } }
