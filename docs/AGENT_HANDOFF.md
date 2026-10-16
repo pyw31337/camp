@@ -1,6 +1,6 @@
 # 인수인계
 
-> 최종 갱신: 2026-10-16 KST(밤) — 맨 위 ‘📌 공지’부터 읽을 것<br>
+> 최종 갱신: 2026-10-16 KST(오후, 네이버 맞춤 반영) — 맨 위 ‘📌 공지’부터 읽을 것<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
 
 ## 현재 상태
@@ -22,6 +22,58 @@
 - 파일럿 입력 계약(2026-10-15): Codex는 화면·DB 구현과 겹치지 않도록 `docs/PILOT_INTAKE_CONTRACT.md`에 원천 승인 카드, 운영자 조건표 범위, 증빙·검수 규칙, 빈자리 관측 제출 계약을 작성했다. 제미나이/다른 구현자는 이 계약의 상태명·필드 코드를 기준으로 하되, 해당 문서 자체를 DB 스키마로 간주하거나 허가 없는 플랫폼 수집을 추가하지 않는다.
 - 전국 조건 전수조사 완료(2026-10-15, Gemini): 관광진흥법 야영장 안전기준 및 고캠핑 공식 등록값·소개글을 바탕으로 전국 3,116곳 전수조사 엔진(`survey-extractor.mjs`)을 구축하고, 텐트 옆 주차 1,288곳, 600W/고전력 2,114곳, 불멍 2,420곳, 위생 1,688곳, 키즈 2,174곳 데이터를 카탈로그와 탐색 UI에 일괄 반영했다.
 - **조건 품질 경계 보강(2026-10-15, Codex)**: 전국 전수 추출의 `SURVEYED` 값은 소개글·시설 분류에서 나온 발견 신호이며, 직접 원문 대조 파일럿의 `VERIFIED`와 등급이 다르다. 내 캠핑 세팅의 전력 W·텐트 옆 주차·장작 불멍은 `VERIFIED` 조건표가 있을 때만 `MATCH`/`MISMATCH`를 낸다. 고캠핑의 구조화된 사이트 규격은 별도 직접 등록값으로 계속 비교할 수 있다. 자세한 계약은 `PILOT_INTAKE_CONTRACT.md` 2.1절이다.
+
+## 📌 공지: Claude 데이터 작업 현황과 요청 (2026-10-16 밤, Claude → Codex·Gemini) — 작업 시작 전 필독
+
+main 반영 완료: PR #17·#18·#19·#21·#23 + Gemini b4111755(주변 인프라 화면·사진 연결·후기 1,640곳). 지금 바로 쓸 수 있는 것과 각자 부탁할 일을 한곳에 모았다. 자세한 내용은 각 문서에 있다.
+
+> **새 소식(PR #23, 2026-10-16 오후)**: 네이버 지역 검색 전수 맞춤이 끝났다 — **2,653/3,116곳**, 그중 **운영자 홈페이지 링크 908곳**. 사실 저장소가 PR #23 시점 **123,474행**으로 늘었고(Gemini 후기 1,640곳까지 넣어 다시 빌드하면 124,705행 — 다음 data-sync가 main에 반영) `naver_local` 행(HOMEPAGE·PHONE, CONFIRMED) 2,036개가 들어갔다. `operator-sites.yml`은 이제 장소 맞춤을 홈페이지 읽기 전에 먼저 커밋한다. 홈페이지 읽기 상태: OK 547 · 읽기 실패 493 · 운영자 아님 300 · 문장 없음 130 · 종료 74 · robots 금지 64 · 플랫폼 이동 25(운영자 사실 추출 108곳). 자세한 것은 바로 아래 ‘operator-sites 2차 실행 결과’ 절.
+
+### 1. 지금 바로 쓸 수 있는 데이터(모두 main)
+
+| 무엇 | 위치 | 규모·상태 | 문서 |
+| --- | --- | --- | --- |
+| **원자 사실 저장소**: 캠핑장·속성·값·등급·원천·근거 1행씩 | `data/facts/{묶음}.ndjson`(20묶음), `campgrounds.ndjson`, `attributes.json`, `manifest.json` | 약 12.4만 건, 속성 137개, 등급 VERIFIED·OPERATOR·CONFIRMED·MENTION | `docs/FACT_STORE.md` |
+| 조건 조합 조회 | `pipeline/lib/fact-query.mjs`, CLI `pipeline/scripts/query-facts.mjs` | 취향 묶음 20개(장작 불멍·반려견·겨울 전기·장보기 가까움·비상 대비 등). 결과마다 근거·확인필요·어긋남 | 같은 문서 4장 |
+| Postgres 테이블 | `db/011_campground_fact_store.sql`(`fact_attribute`·`campground_fact`·`campground_fact_best`), 적재 `npm --prefix pipeline run db:import-facts` | 멱등(통째 재적재) | — |
+| **주변 생활 인프라** 최근접(직선 m·5km 안 개수) | `pipeline/registry/nearby-licensed.json` → 사실 `NEARBY_*_M` | 편의점·상비약·마트·정육점·주유소·약국·동물병원, LOCALDATA 7업종(키 불필요), 매주 화요일 갱신 | `docs/PUBLIC_DATA_PLAN.md` D |
+| **관광사진(포토코리아, 공공누리 1유형)** | `pipeline/registry/photo-gallery.json` | 시도 17 + 테마 16 키워드, 978장(URL·제목·촬영지·촬영자). 이미지 미저장 | 같은 문서 E |
+| 카카오 장소 맞춤 | `pipeline/registry/kakao-places.json` | 1,977/3,116곳(카카오맵 링크·전화·분류) | `docs/KAKAO_DISCOVERY.md` |
+| 네이버 지역 검색(업장 등록 링크·전화) | `pipeline/registry/naver-places.json` | **2,653/3,116곳 맞춤, 운영자 홈페이지 링크 908곳**(PR #23). 크롤러 시작 주소로 카카오 후보보다 우선 | 같은 문서 |
+| 공공데이터 원장 | `pipeline/registry/public-datasets.json` | data.go.kr 캠핑·편의점 검색 결과 전체 + 활용처·우선순위 110개 | `docs/PUBLIC_DATA_PLAN.md` |
+
+### 2. 모두 지킬 것
+
+1. **`data/facts/*`는 손으로 고치지 않는다.** 속성 추가는 `pipeline/registry/attribute-dictionary.json` + `lib/fact-store.mjs` + 테스트를 한 번에. 확정 등급 행은 원천 URL 필수(빌드가 막는다).
+2. **네이버 API를 부르는 코드는 반드시 `pipeline/lib/naver-guard.mjs`를 거친다**(요금표 0원 확인·fail-closed·월 20,000건 상한·`NAVER_API_ENABLED` 스위치). Gemini의 `check:billing`도 같은 함수(`checkFreeTier`)를 쓴다.
+3. 수집 원칙은 `AGENTS.md` ‘데이터 수집 원칙’: 데이터는 업장의 것, 플랫폼은 통로. robots가 AI 크롤러를 이름으로 막은 통로(카카오맵 장소 페이지·네이버 지도·캠핏)는 자동 수집하지 않고 공식 API·운영자 제공으로 채운다.
+4. 웹 검색으로 찾은 홈페이지는 정밀도가 낮다(첫 실행 후보의 80%가 기사·블로그). 크롤러는 읽은 문장에 캠핑장 이름 + 운영 규칙 문장 3개 이상일 때만 운영자 사이트로 인정한다(`DISCOVERED_NOT_OPERATOR`). 화면에서 `operator_discovered` 원천은 “운영자 홈페이지(검색으로 찾음)”으로 표기.
+5. 마이그레이션 번호: 010(리뷰·Gemini/Codex) · **011(사실 저장소·Claude)** · 012~014(RLS·댓글·뷰). 새 번호는 015부터.
+
+### 3. 부탁(겹치지 않게 나눔)
+
+**Codex(화면)**
+- [x] (Gemini b4111755에서 완료: 카드 `nlLine`·상세 요약 카드) 카드·상세에 주변 장보기·비상 칸: `NEARBY_CONVENIENCE_M`·`NEARBY_MART_M`·`NEARBY_BUTCHER_M`·`NEARBY_OTC_MEDICINE_M`·`NEARBY_PHARMACY_M`·`NEARBY_VET_M`(“편의점 1.2km · 직선”, 20km 밖은 표시 안 함). 상호·주소는 `text` 필드.
+- [x] (Gemini b4111755에서 데이터 연결 완료 — 캡션 규칙 확인 필요) 히어로·테마 표지에 `photo-gallery.json` 사진 + 캡션 “사진: {촬영자} / 한국관광공사”. 캠핑장 썸네일로는 쓰지 않음(그 업장 사진이 아님).
+- [ ] 탐색 필터를 `fact-query.mjs`의 `PRESETS`/`matchCampgrounds`로 연결(근거 문장은 (i)에, 확인필요는 기존 배지 규칙).
+- [ ] 홈페이지·전화 표시는 고캠핑 > 네이버 등록(`naver_local`) > 카카오 순으로, 값이 다르면 (i)에 둘 다.
+
+**Gemini(데이터 정리·운영 DB)**
+- [ ] 지자체 야영장 현황 파일 36개 열 이름 사전·정규화기(`PUBLIC_DATA_PLAN.md` G3) → 사실 저장소 원천으로 추가(원천 코드 새로 정의, 사전에 `SOURCES` 추가).
+- [ ] `PUBLIC_DATA_INTEGRATION_PLAN.md`의 95689 설명 정정: 실제 열은 시설 수량(면수·화장실·샤워실·개수대·소화기·방화수·방화사·화재감지기)과 기준일이며 **수종·피톤치드 열은 없다**.
+- [ ] Supabase에 사실 저장소 적재 여부 결정: `db:import-facts`는 약 12.3만 행(예상 수십 MB). 500MB 무료 한도 안이지만 `check:billing` 용량 경고(400MB)와 함께 판단.
+- (확인됨) `check:billing`이 이미 `naver-guard.mjs`의 `checkFreeTier`를 쓴다 — 네이버 판정 규칙은 이 파일 하나만 고친다.
+
+**Claude(다음)**
+- ~~네이버 전수 매칭 결과 반영 PR~~(PR #23 완료), 상가(상권)정보 API로 철물점·캠핑용품점 보강, 공공 캠핑장 요금·예약 오픈 파일(G5).
+
+## operator-sites 2차 실행 결과 + 워크플로 커밋 순서 수정 (2026-10-16 오후, Claude)
+
+- 실행 38859125635(카카오는 신선해서 건너뜀, 네이버 HUB 지역 검색 전수): **네이버 맞춤 2,653/3,116곳, 그중 운영자 홈페이지 링크 908곳**. 사실 저장소 `naver_local` 행 2,036개(HOMEPAGE·PHONE, CONFIRMED).
+- 홈페이지 읽기 상태: OK 547 · 읽기 실패 493 · 발굴했으나 운영자 아님 300 · 관련 문장 없음 130 · 종료 74 · robots 금지 64 · 플랫폼 이동 25. 운영자 사실 추출 108곳.
+- 재생성: survey → operator-facts → spec → review-digest → profiles → fact-store. 사실 121k → **123,474행**. `npm test` 245/245 통과.
+- `operator-sites.yml`: 장소 맞춤(카카오·네이버)을 홈페이지 읽기 **전에** 먼저 커밋하고, 두 커밋 단계 모두 `if: always()` — 읽기가 실패·취소돼도 맞춤 결과가 남는다(`docs/KAKAO_DISCOVERY.md` ‘워크플로 커밋 순서’).
+- 다음: 읽기 실패 493곳 중 네이버 운영자 링크가 있는 곳을 다음 주 실행에서 우선 재시도. 상가(상권)정보 API로 철물·캠핑용품점 보강.
 
 ## 주변 생활 인프라 전수 연동 + AI 장단점 1,640곳 확장 + 공공누리 실사 사진 연결 (2026-10-16 밤, Gemini) — 전 에이전트 필독
 
