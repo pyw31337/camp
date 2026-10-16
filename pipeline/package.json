@@ -45,7 +45,8 @@
     "sync:nearby-licensed": "node scripts/sync-nearby-licensed.mjs",
     "sync:photo-gallery": "node scripts/sync-photo-gallery.mjs",
     "build:review-digest": "node scripts/build-review-digest.mjs",
-    "build:db": "node scripts/build-database.mjs"
+    "build:db": "node scripts/build-database.mjs",
+    "db:import-supabase": "node scripts/import-all-to-supabase.mjs"
   },
   "dependencies": {
     "pg": "8.23.1",
