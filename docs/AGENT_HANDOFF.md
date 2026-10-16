@@ -423,6 +423,14 @@ Codex 요청 사항을 `pipeline/lib/survey-extractor.mjs` 및 `design/explore/_
 탐색, 지도 전환, 상세 전환을 시각 확인했다. **사용자 승인 전에는** `design/explore/` 또는
 `camping-atlas/` 생성 화면에 이식·배포하지 않는다.
 
+### Studio 01 반응형·가격 데이터 연결 보완 (2026-10-16, Codex) — 로컬 검증 완료, 배포 대기
+
+- Studio 시안: 320px에서 메인·상세·지도·비교의 문서 폭과 스크롤 폭이 모두 305px로 일치한다. 비교표만 내부 가로 드래그(스크롤바 숨김)를 유지한다. 헤더는 히어로에서 투명, 스크롤 뒤 유리 배경으로 전환한다.
+- 시안 상세: 입실·퇴실/매너타임/전기/사이트/바닥/위생/추가 인원에 Tabler 라인 아이콘을 붙였고, `i`는 작고 회색의 제목 모서리 보조 정보로 옮겼다. 사이트·요금 표, 별도 영상/사진 묶음, 주변 마트·편의점·공중화장실 카드도 추가했다. 예시 값은 시안 전용이며 운영 데이터로 사용하지 않는다.
+- 가격: `build-campground-profiles.mjs`가 상세 `PRICE`를 원문 URL·게시일·산출 시각이 모두 있는 `pf.p`로 목록에 발행한다. 재생성 결과 3,116곳 중 **1,639곳**(운영자 76, 후기 언급 1,563)이 노출 가능하다. `_app.js`는 공식 요금 우선, 그 외에는 `후기 N만원대`로만 카드·비교에 쓰며 현재 결제 가격처럼 표현하지 않는다.
+- 공공 주변 데이터는 기존 `d.nearby`/`nearby_licensed` 및 카드 `nl`로 유지한다. 실제 상세는 화장실·마트·편의점·주유소·약국·동물병원의 지도/로드뷰 링크 및 허용된 사진이 있을 때만 썸네일을 사용한다.
+- 검증: `node --test pipeline/test/campground-profile.test.mjs` 4/4 통과, `npm --prefix pipeline test` 249 통과·0 실패·DB 미연결 2 스킵, `node design/build-explore.mjs`, `node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public/explore`, JS 문법 검사, `git diff --check` 통과. 이 변경은 아직 커밋·원격 푸시하지 않았고, 시안 승인 전 대규모 운영 디자인 이식은 하지 않는다.
+
 ### 실제 탐색 카드·예약 경로 정리 (2026-10-16, Codex)
 
 사용자 요구를 기존 Gemini/Claude 산출물에 맞춰 실제 탐색 화면에 반영했다. Gemini가 만든 전국 카탈로그·현장 조건/관측 읽기 모델과 Claude의 운영자 사실·정형 스펙·후기 요약·공식 사진 계약은 그대로 사용하고, 이번 작업은 그 정보를 짧고 균일한 선택 화면으로 바꾸는 범위다.

@@ -63,7 +63,8 @@ body { background: var(--mc-canvas); }
 .card-title h3 { font-size: 1.25rem; font-weight: 900; letter-spacing: -0.05em; }
 .card .loc { font-size: var(--fs-xs); font-weight: 300; color: var(--mc-ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .card-foot { display: flex; align-items: baseline; gap: 10px; min-height: 1.25rem; font-size: var(--fs-xs); }
-.card-foot .fee { margin-left: auto; font-weight: 300; color: var(--mc-ink-2); }
+.card-foot .fee { display: inline-flex; align-items: baseline; gap: 4px; margin-left: auto; font-weight: 300; color: var(--mc-ink-2); }
+.card-foot .fee small { color: var(--mc-ink-3); font-size: 9px; font-weight: 700; }
 .card-foot .fee b { font-weight: 900; color: var(--mc-ink); }
 .btn-compare { border: 0 !important; background: var(--mc-soft) !important; border-radius: 999px !important; }
 .btn-compare.on { background: var(--mc-accent) !important; color: #fff !important; }

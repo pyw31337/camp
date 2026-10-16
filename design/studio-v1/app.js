@@ -3,8 +3,18 @@ const all = (selector, root = document) => [...root.querySelectorAll(selector)];
 function setScreen(name) {
   all('.screen').forEach((screen) => screen.classList.toggle('is-active', screen.dataset.screen === name));
   all('[data-screen-target]').forEach((button) => button.classList.toggle('is-active', button.dataset.screenTarget === name && button.closest('.screen-nav')));
+  document.body.classList.toggle('is-hero-header', name === 'explore');
+  document.querySelector('.topbar').classList.toggle('is-scrolled', name !== 'explore');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+const topbar = document.querySelector('.topbar');
+const syncHeader = () => {
+  if (!document.body.classList.contains('is-hero-header')) return;
+  topbar.classList.toggle('is-scrolled', window.scrollY > 12);
+};
+window.addEventListener('scroll', syncHeader, { passive: true });
+syncHeader();
 
 all('[data-screen-target]').forEach((button) => button.addEventListener('click', () => setScreen(button.dataset.screenTarget)));
 

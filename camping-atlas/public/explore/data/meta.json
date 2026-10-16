@@ -784,7 +784,7 @@
     "reviews": 10060
   },
   "profiles": {
-    "generated_at": "2026-10-16T07:16:29.411Z",
+    "generated_at": "2026-10-16T13:37:40.773Z",
     "total": 3116,
     "fields": {
       "TYPE": {
@@ -792,48 +792,48 @@
         "facts": 2288
       },
       "CHECKIN": {
-        "any": 271,
-        "facts": 216
+        "any": 247,
+        "facts": 192
       },
       "CHECKOUT": {
-        "any": 224,
-        "facts": 186
+        "any": 201,
+        "facts": 163
       },
       "MANNER": {
-        "any": 16,
-        "facts": 14
+        "any": 15,
+        "facts": 13
       },
       "PRICE": {
         "any": 1639,
         "facts": 76
       },
       "EXTRA_FEE": {
-        "any": 114,
-        "facts": 114
+        "any": 100,
+        "facts": 100
       },
       "POWER": {
-        "any": 2268,
-        "facts": 2268
+        "any": 2253,
+        "facts": 2253
       },
       "PARKING": {
-        "any": 51,
-        "facts": 51
+        "any": 46,
+        "facts": 46
       },
       "FIRE": {
-        "any": 2428,
-        "facts": 2428
+        "any": 2427,
+        "facts": 2427
       },
       "CAR_CAMPING": {
         "any": 16,
         "facts": 16
       },
       "PET": {
-        "any": 2634,
-        "facts": 2624
+        "any": 2633,
+        "facts": 2623
       },
       "SITE": {
-        "any": 1687,
-        "facts": 1687
+        "any": 1681,
+        "facts": 1681
       },
       "SANITARY": {
         "any": 1735,
@@ -865,7 +865,7 @@
       "GLAMPING": 650,
       "CARAVAN": 478,
       "FAMILY": 1677,
-      "WINTER": 1806,
+      "WINTER": 1799,
       "WATER_PLAY": 1287,
       "FOREST": 1027,
       "RIVER": 356,
@@ -878,18 +878,23 @@
       "REVIEW_QUIET": 169,
       "FIREWOOD": 20,
       "CITY": 180,
-      "SITE_PARKING": 32,
+      "SITE_PARKING": 27,
       "CAR_CAMPING": 10,
-      "HIGH_POWER": 15,
+      "HIGH_POWER": 14,
       "REVIEW_VIEW": 20,
       "REVIEW_CLEAN": 3,
       "REVIEW_HOST": 3
     },
     "facts_distribution": {
-      "0-5": 873,
-      "6-9": 1991,
-      "10-13": 246,
-      "14-18": 6
+      "0-5": 879,
+      "6-9": 1999,
+      "10-13": 233,
+      "14-18": 5
+    },
+    "price": {
+      "published": 1639,
+      "operator": 76,
+      "mention": 1563
     }
   },
   "nearby_licensed": {
