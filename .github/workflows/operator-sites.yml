@@ -14,6 +14,10 @@ on:
         description: "이 일수보다 오래된 확인값만 다시 읽기 (기본 14)"
         required: false
         default: "14"
+      naver_max_calls:
+        description: "네이버 지역 검색 호출 상한 (기본 4000, 유료 전환 시 0)"
+        required: false
+        default: "4000"
       kakao_max_calls:
         description: "카카오 발굴 호출 상한 (기본 8000)"
         required: false
@@ -41,7 +45,7 @@ jobs:
       - run: npm ci
       # 자바스크립트로 그리는 운영자 사이트를 읽기 위한 Chromium(렌더링 폴백)
       - run: npx playwright install --with-deps chromium
-      - run: node --test test/operator-site.test.mjs test/kakao-discovery.test.mjs
+      - run: node --test test/operator-site.test.mjs test/kakao-discovery.test.mjs test/naver-discovery.test.mjs
       # 카카오 공식 API(로컬 키워드·Daum 웹 검색): 장소 맞춤 + 홈페이지 없는·죽은 곳의 운영자 홈페이지 발굴.
       # 30일 지난 곳만 다시 묻는다. 로컬·웹 검색 한도는 소셜 검색(blog·cafe·image·vclip)과 종류가 달라 겹치지 않는다.
       - name: Discover places and homepages (Kakao official API)
@@ -49,13 +53,23 @@ jobs:
         run: node scripts/discover-kakao.mjs --max-calls "${{ github.event.inputs.kakao_max_calls || '8000' }}"
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+      # 네이버 검색 API(NAVER API HUB 지역 검색, 한시 무료): 업장이 네이버에 등록한 홈페이지 링크·전화. 30일 지난 곳만.
+      - name: Match Naver local places (NAVER API HUB)
+        continue-on-error: true
+        run: node scripts/discover-naver.mjs --max-calls "${{ github.event.inputs.naver_max_calls || '4000' }}"
+        env:
+          NAVER_API_HUB_CLIENT_ID: ${{ secrets.NAVER_API_HUB_CLIENT_ID }}
+          NAVER_API_HUB_CLIENT_SECRET: ${{ secrets.NAVER_API_HUB_CLIENT_SECRET }}
+          # 유료 방지: 저장소 변수로 끄기·월 상한 조정(기본 20,000건, 무료 한도 775,000건)
+          NAVER_API_ENABLED: ${{ vars.NAVER_API_ENABLED }}
+          NAVER_MONTHLY_CAP: ${{ vars.NAVER_MONTHLY_CAP }}
       - name: Read operator homepages
         run: node scripts/crawl-operator-sites.mjs --concurrency 10 --render --retry-failed --max-age-days "${{ github.event.inputs.max_age_days || '14' }}"
       - name: Commit refreshed snippets
         run: |
           git config user.name "moyeora-camping-data-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add registry/operator-site-snippets.json registry/kakao-places.json 2>/dev/null || git add registry/operator-site-snippets.json
+          git add registry/operator-site-snippets.json; git add registry/kakao-places.json registry/naver-places.json registry/naver-usage.json 2>/dev/null || true
           if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
           git commit -m "chore(data): refresh operator homepage snippets"
           git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"

@@ -1,0 +1,60 @@
+name: API key check
+
+# 저장소 비밀값으로 등록한 외부 API 키가 실제로 동작하는지 1~2건 호출로 확인한다(데이터는 쓰지 않음).
+# 네이버 HUB 지역 검색 · 카카오 로컬 · data.go.kr 관광사진. 키 값은 출력하지 않는다(길이만).
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/api-key-check.yml"
+      - "pipeline/lib/naver-discovery.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: pipeline
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Naver API HUB local search
+        continue-on-error: true
+        run: node scripts/discover-naver.mjs --probe
+        env:
+          NAVER_API_HUB_CLIENT_ID: ${{ secrets.NAVER_API_HUB_CLIENT_ID }}
+          NAVER_API_HUB_CLIENT_SECRET: ${{ secrets.NAVER_API_HUB_CLIENT_SECRET }}
+          NAVER_API_ENABLED: ${{ vars.NAVER_API_ENABLED }}
+      - name: Kakao local keyword
+        continue-on-error: true
+        run: |
+          node --input-type=module -e '
+          const k = process.env.KAKAO_REST_API_KEY;
+          if (!k) { console.log("KAKAO_REST_API_KEY 없음"); process.exit(1); }
+          const r = await fetch("https://dapi.kakao.com/v2/local/search/keyword.json?query=" + encodeURIComponent("자라섬 캠핑장") + "&size=1", { headers: { Authorization: "KakaoAK " + k } });
+          const j = await r.json().catch(() => ({}));
+          console.log("카카오 로컬", r.status, j.documents?.[0]?.place_name ?? JSON.stringify(j).slice(0, 160));
+          if (!r.ok) process.exit(1);'
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+      - name: data.go.kr tourism photo GW
+        continue-on-error: true
+        run: |
+          node --input-type=module -e '
+          import { fetchDataGoKr } from "./lib/datagokr.mjs";
+          import { gallerySearchUrl, parsePhotoGalleryBody } from "./lib/photo-gallery.mjs";
+          const k = process.env.DATA_GO_KR_SERVICE_KEY;
+          if (!k) { console.log("DATA_GO_KR_SERVICE_KEY 없음"); process.exit(1); }
+          const { res } = await fetchDataGoKr(gallerySearchUrl("캠핑", 1, 1), k);
+          const t = await res.text();
+          try { const { total, items } = parsePhotoGalleryBody(t, res.status); console.log("관광사진", res.status, "전체", total, items[0]?.galTitle ?? ""); }
+          catch (e) { console.log("관광사진 실패", e.message.slice(0, 200)); process.exit(1); }'
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}

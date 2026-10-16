@@ -74,6 +74,19 @@ export function matchPlace(c, docs) {
 
 const strip = (s) => String(s ?? "").replace(/<[^>]+>/g, "").replace(/&[a-z]+;|&#\d+;/g, " ");
 /** 웹 검색 결과 → 호스트별 후보(점수순). 제목·본문 요약에 이름 핵심이 있어야 한다. */
+// 기사·블로그 글·구인·숙박 중개처럼 “캠핑장 소개 글”이지 운영자 사이트가 아닌 주소(2026-10-16 첫 실행에서 후보의 약 80%).
+const ARTICLE_URL = /\/(news|article|articleview|articles|post|posts|blog|wpblog|story|column|press|bodo|jobs?|recruit|zf_user|content\/view|detail\.php|view\.php\?(no|number)=)|articleView\.html|article\.php|\/20\d\d\/\d\d\/|\/(category|tag)\/|%[0-9a-f]{2}%[0-9a-f]{2}%[0-9a-f]{2}.*%[0-9a-f]{2}%[0-9a-f]{2}%[0-9a-f]{2}/i;
+const CONTENT_HOST = /news|times|timez|ilbo|daily|media|press|journal|magazine|tv\b|mbc|kbs|sbs|jtbc|ytn|blog|tistory|wiki|review|trend|keyword|policy|travel|trip|tour|hotel|stay|booking|saramin|catch\.co|jobkorea|ok114|danawa|nate\.com|chosun|joins|donga|hani|khan|segye|nongmin|anewsa|knews|ketv|tjb|issue|info|guide|life|lemon|picjjang|honey|carview|airunwp|apps?\b/i;
+// 후기·안내 글 제목(운영자가 자기 사이트 제목으로 쓰지 않는 말)
+export const ARTICLE_TITLE = /후기|방문기|다녀|다녀온|추천|방법|정리|가이드|총정리|꿀팁|팁|축제|페스타|이벤트|모집|채용|구인|기사|선정|개장|개소|준공|인기|각광|명소|여행|가볼만|비교|순위|best|top\s?\d/i;
+/** 운영자 사이트가 아니라 소개 글·기사로 보이는 주소 */
+export function looksLikeArticle(url) {
+  let u;
+  try { u = new URL(url); } catch { return true; }
+  const h = u.hostname.replace(/^(www|m)\./, "");
+  return ARTICLE_URL.test(u.pathname + u.search) || CONTENT_HOST.test(h);
+}
+
 export function homepageCandidates(c, docs) {
   const key = nameKey(c.name);
   if (key.length < 2) return [];
@@ -81,11 +94,12 @@ export function homepageCandidates(c, docs) {
   for (const d of docs ?? []) {
     const url = d.url;
     const h = hostOf(url)?.replace(/^www\./, "");
-    if (!h || !isOperatorHost(url) || isClosedHost(url) || blockedHost(h)) continue;
+    if (!h || !isOperatorHost(url) || isClosedHost(url) || blockedHost(h) || looksLikeArticle(url)) continue;
     const title = strip(d.title), body = strip(d.contents);
     const inTitle = nameSimilarity(c.name, title) >= 0.8 || nameKey(title).includes(key);
     const inBody = nameKey(body).includes(key);
     if (!inTitle && !inBody) continue;
+    if (ARTICLE_TITLE.test(title)) continue;
     let path = "/";
     try { path = new URL(url).pathname; } catch { /* 그대로 */ }
     const e = byHost.get(h) ?? { host: h, url: null, score: 0, hits: 0, evidence: [] };
@@ -139,3 +153,13 @@ export const webUrl = (c) => {
 
 /** 운영자 홈페이지가 이미 있는 곳(고캠핑 등록 홈페이지나 예약 URL이 운영자 호스트이고 종료 서비스가 아님) */
 export const hasOperatorSite = (c) => [c.homepage, c.booking?.url].some((u) => u && isOperatorHost(u) && !isClosedHost(u));
+
+// 읽어 온 문장이 정말 그 캠핑장 운영자 사이트인지: 이름 핵심이 나오고, 운영 규칙 문장이 2개 이상.
+const RULE_SENTENCE = /입실|퇴실|체크\s*인|체크\s*아웃|매너\s*타임|환불|취소\s*(규정|수수료)|1박|사이트\s*요금|이용\s*요금|예약\s*안내|반려(견|동물)|전기\s*(사용|용량)/;
+export function validatesAsOperatorSite(c, snippets = []) {
+  const key = nameKey(c.name);
+  const texts = snippets.map((s) => (typeof s === "string" ? s : s.text ?? ""));
+  const named = key.length >= 2 && texts.some((t) => nameKey(t).includes(key));
+  const rules = texts.filter((t) => RULE_SENTENCE.test(t)).length;
+  return { ok: named && rules >= 3, named, rules };
+}

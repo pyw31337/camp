@@ -23,6 +23,16 @@
 - 전국 조건 전수조사 완료(2026-10-15, Gemini): 관광진흥법 야영장 안전기준 및 고캠핑 공식 등록값·소개글을 바탕으로 전국 3,116곳 전수조사 엔진(`survey-extractor.mjs`)을 구축하고, 텐트 옆 주차 1,288곳, 600W/고전력 2,114곳, 불멍 2,420곳, 위생 1,688곳, 키즈 2,174곳 데이터를 카탈로그와 탐색 UI에 일괄 반영했다.
 - **조건 품질 경계 보강(2026-10-15, Codex)**: 전국 전수 추출의 `SURVEYED` 값은 소개글·시설 분류에서 나온 발견 신호이며, 직접 원문 대조 파일럿의 `VERIFIED`와 등급이 다르다. 내 캠핑 세팅의 전력 W·텐트 옆 주차·장작 불멍은 `VERIFIED` 조건표가 있을 때만 `MATCH`/`MISMATCH`를 낸다. 고캠핑의 구조화된 사이트 규격은 별도 직접 등록값으로 계속 비교할 수 있다. 자세한 계약은 `PILOT_INTAKE_CONTRACT.md` 2.1절이다.
 
+
+## 네이버 HUB 지역 검색 연결 + 카카오 발굴 실행 (2026-10-16 밤, Claude)
+
+- **유료 방지(소유자 지시)**: `lib/naver-guard.mjs` — 호출 전 NCP 가이드 “한시적으로 무료” 확인(못 하면 중단), 월 상한 20,000건(`registry/naver-usage.json`), 402·요금 응답 즉시 중단, 변수 `NAVER_API_ENABLED=false` 스위치, 매일 감시 `naver-free-tier-watch.yml`(실패 시 이슈). 네이버를 부르는 코드를 추가할 때는 반드시 이 가드를 거친다.
+
+- 소유자가 `NAVER_API_HUB_CLIENT_ID/SECRET`을 등록했다. `scripts/discover-naver.mjs`가 업장의 네이버 등록 링크·전화를 맞추고(`registry/naver-places.json`), 크롤러는 운영자 링크를 카카오 후보보다 먼저 쓴다. 사실 저장소에 `naver_local` 원천 추가. `operator-sites.yml`에 단계 추가(입력 `naver_max_calls`, 기본 4000).
+- 키 동작 확인용 `api-key-check.yml`(네이버·카카오·관광사진 각 1건 호출, 키 값 미출력).
+- 카카오 발굴은 PR #18 브랜치에서 실행됨(run 38856252147, 발굴 단계 성공). 그 결과 커밋을 이 브랜치로 가져와 반영할 것.
+- 검증: 파이프라인 테스트 239 통과(신규 naver-discovery 3).
+
 ## main 재병합 메모 (2026-10-16 밤, Claude)
 
 - main에 Codex의 `db/010_review_digest_and_ai_intelligence.sql`이 먼저 들어가 사실 저장소 마이그레이션을 **`db/011_campground_fact_store.sql`로 번호를 바꿨다**(운영 DB에 적용된 적 없음). 로컬 PostgreSQL 16에서 010→011 순서 적용, 사실 118,491건 두 번 적재 확인.

@@ -230,7 +230,7 @@
 {"cid":"231","attr":"AMENITY_BBQ","value":true,"grade":"CONFIRMED","src":"gocamping","text":"저녁 바비큐·쌈장·야채(리필 가능) 제공 / 조식 라면 제공(이용료에 포함)"}
 {"cid":"231","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"231","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"231","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://dongwolsup.com/skin2/index.php","at":"2026-10-16T01:00:40.627Z","quote":"계곡물놀이장"}
+{"cid":"231","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://dongwolsup.com/skin2/index.php","at":"2026-10-16T05:36:05.411Z","quote":"계곡물놀이장"}
 {"cid":"231","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"231","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"231","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
@@ -285,10 +285,10 @@
 {"cid":"320","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"331","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"331","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"331","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://reserve.gmuc.co.kr/user/main/main.do","at":"2026-10-16T01:11:54.313Z","quote":"다용도 체육관, GX실 그리고 수영장의 각종 프로그램"}
+{"cid":"331","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://reserve.gmuc.co.kr/user/main/main.do","at":"2026-10-16T05:44:43.909Z","quote":"다용도 체육관, GX실 그리고 수영장의 각종 프로그램"}
 {"cid":"331","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"331","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"331","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.gmuc.co.kr/user/conn/campIntro.do","at":"2026-10-16T01:11:54.313Z","quote":"관리사무소, 매점, 쉼터연못, 화장실, 샤워장, 오수처리장, 취수대, 등산로, 약수터, 생태연못"}
+{"cid":"331","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.gmuc.co.kr/user/conn/campIntro.do","at":"2026-10-16T05:44:43.909Z","quote":"관리사무소, 매점, 쉼터연못, 화장실, 샤워장, 오수처리장, 취수대, 등산로, 약수터, 생태연못"}
 {"cid":"331","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"331","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"333","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
@@ -444,15 +444,15 @@
 {"cid":"477","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"480","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"480","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"482","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://herbtown.alltheway.kr/?doc=sub_03","at":"2026-10-16T00:59:21.526Z","quote":"족구장 , 스크린골프(SG), 식당, 황토찜질방, 야외수영장(숙박객 6000원, 일반고객 10,000원), 어린이 놀이방, 트램펄린"}
+{"cid":"482","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://herbtown.alltheway.kr/?doc=sub_03","at":"2026-10-16T05:35:17.633Z","quote":"족구장 , 스크린골프(SG), 식당, 황토찜질방, 야외수영장(숙박객 6000원, 일반고객 10,000원), 어린이 놀이방, 트램펄린"}
 {"cid":"482","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"482","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://herbtown.alltheway.kr/?doc=sub_03","at":"2026-10-16T00:59:21.526Z","quote":"족구장 , 스크린골프(SG), 식당, 황토찜질방, 야외수영장(숙박객 6000원, 일반고객 10,000원), 어린이 놀이방, 트램펄린"}
+{"cid":"482","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://herbtown.alltheway.kr/?doc=sub_03","at":"2026-10-16T05:35:17.633Z","quote":"족구장 , 스크린골프(SG), 식당, 황토찜질방, 야외수영장(숙박객 6000원, 일반고객 10,000원), 어린이 놀이방, 트램펄린"}
 {"cid":"482","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"482","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"482","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"482","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://herbtown.alltheway.kr/?doc=sub_03","at":"2026-10-16T00:59:21.526Z","quote":"상가1층 : 매점, 카페, 식당 남녀 샤워장"}
+{"cid":"482","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://herbtown.alltheway.kr/?doc=sub_03","at":"2026-10-16T05:35:17.633Z","quote":"상가1층 : 매점, 카페, 식당 남녀 샤워장"}
 {"cid":"482","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
-{"cid":"482","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://herbtown.alltheway.kr/?doc=sub_03","at":"2026-10-16T00:59:21.526Z","quote":"족구장 , 스크린골프(SG), 식당, 황토찜질방, 야외수영장(숙박객 6000원, 일반고객 10,000원), 어린이 놀이방, 트램펄린"}
+{"cid":"482","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://herbtown.alltheway.kr/?doc=sub_03","at":"2026-10-16T05:35:17.633Z","quote":"족구장 , 스크린골프(SG), 식당, 황토찜질방, 야외수영장(숙박객 6000원, 일반고객 10,000원), 어린이 놀이방, 트램펄린"}
 {"cid":"482","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"482","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"482","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
@@ -538,7 +538,7 @@
 {"cid":"543","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"543","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"548","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"548","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.nabomresort.com/jangsu/","at":"2026-10-16T01:07:03.025Z","quote":"나봄 리조트 수영장은 100% 알칼리수를 사용하고 있습니다."}
+{"cid":"548","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.nabomresort.com/jangsu/","at":"2026-10-16T05:51:17.783Z","quote":"나봄 리조트 수영장은 100% 알칼리수를 사용하고 있습니다."}
 {"cid":"548","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"548","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"549","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
@@ -843,8 +843,11 @@
 {"cid":"789","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"797","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"797","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"797","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://strm.co.kr/comm/notice.php","at":"2026-10-16T05:49:44.594Z","quote":"2025년 여름시즌 물놀이장 오픈 안내"}
 {"cid":"797","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"797","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"797","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://strm.co.kr/comm/faq.php","at":"2026-10-16T05:49:44.594Z","quote":"일반적인 편의점에서 판매하는 물품 외 캠핑용품 일부, 놀이용품 등이 구비 되어 있습니다."}
+{"cid":"797","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://strm.co.kr/intro/caravan.php","at":"2026-10-16T05:49:44.594Z","quote":"무료와이파이"}
 {"cid":"797","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"800","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"800","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -972,14 +975,14 @@
 {"cid":"917","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"919","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"922","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"923","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1by4vdqp.com/?page_id=67","at":"2026-10-16T01:07:32.985Z","quote":"샤워장 및 개수대 온수 유.무 : 샤워장 모두 온수 사용 가능 합니다."}
+{"cid":"923","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1by4vdqp.com/?page_id=67","at":"2026-10-16T05:40:14.973Z","quote":"샤워장 및 개수대 온수 유.무 : 샤워장 모두 온수 사용 가능 합니다."}
 {"cid":"923","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"923","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"923","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1by4vdqp.com/?page_id=67","at":"2026-10-16T01:07:32.985Z","quote":"어린이 수영장"}
+{"cid":"923","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1by4vdqp.com/?page_id=67","at":"2026-10-16T05:40:14.973Z","quote":"어린이 수영장"}
 {"cid":"923","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"923","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"923","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1by4vdqp.com/?page_id=67","at":"2026-10-16T01:07:32.985Z","quote":"매점 유.무 및 판매물품, 가격표 : 장작(11kg, 10,000원), 라면, 기타(부탄가스 등)"}
-{"cid":"923","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1by4vdqp.com/?ckattempt=1","at":"2026-10-16T01:07:32.985Z","quote":"와이파이 이용가..."}
+{"cid":"923","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1by4vdqp.com/?page_id=67","at":"2026-10-16T05:40:14.973Z","quote":"매점 유.무 및 판매물품, 가격표 : 장작(11kg, 10,000원), 라면, 기타(부탄가스 등)"}
+{"cid":"923","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1by4vdqp.com/?ckattempt=1","at":"2026-10-16T05:40:14.973Z","quote":"와이파이 이용가..."}
 {"cid":"923","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"930","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"930","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
@@ -1126,19 +1129,19 @@
 {"cid":"1066","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"1066","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1066","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"1075","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--hj2b21db3q1a410gxnk.com/sub/menu2_2.php","at":"2026-10-16T01:09:21.507Z","quote":"개수대(1종 주방세제 비치완료)"}
+{"cid":"1075","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--hj2b21db3q1a410gxnk.com/sub/menu2_2.php","at":"2026-10-16T05:42:00.007Z","quote":"개수대(1종 주방세제 비치완료)"}
 {"cid":"1075","attr":"AMENITY_KARAOKE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"오락실기계"}
 {"cid":"1075","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"1075","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1075","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--hj2b21db3q1a410gxnk.com/bbs/board.php?bo_table=notice","at":"2026-10-16T01:09:21.507Z","quote":"이번주 수영장 개장 합니다.."}
+{"cid":"1075","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--hj2b21db3q1a410gxnk.com/bbs/board.php?bo_table=notice","at":"2026-10-16T05:42:00.007Z","quote":"이번주 수영장 개장 합니다.."}
 {"cid":"1075","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"1075","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1075","attr":"AMENITY_SHARED_FRIDGE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"1캠프용 공용냉장고"}
 {"cid":"1075","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"1075","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--hj2b21db3q1a410gxnk.com/sub/menu3_1.php","at":"2026-10-16T01:09:21.507Z","quote":"매점운영"}
+{"cid":"1075","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--hj2b21db3q1a410gxnk.com/sub/menu3_1.php","at":"2026-10-16T05:42:00.007Z","quote":"매점운영"}
 {"cid":"1075","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"1075","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1075","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--hj2b21db3q1a410gxnk.com/sub/menu2_2.php","at":"2026-10-16T01:09:21.507Z","quote":"트램폴린 방방이"}
+{"cid":"1075","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--hj2b21db3q1a410gxnk.com/sub/menu2_2.php","at":"2026-10-16T05:42:00.007Z","quote":"트램폴린 방방이"}
 {"cid":"1075","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1085","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"1085","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1236,9 +1239,9 @@
 {"cid":"1173","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
 {"cid":"1173","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"1173","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1178","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--o39a91ov4fl1fmh040h.com/community/board.asp?bKind=Notice","at":"2026-10-16T01:03:33.474Z","quote":"3 25년 성수기 및 수영장 이용 안내 미소지기 25-10-14 41"}
+{"cid":"1178","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--o39a91ov4fl1fmh040h.com/community/board.asp?bKind=Notice","at":"2026-10-16T05:49:02.234Z","quote":"3 25년 성수기 및 수영장 이용 안내 미소지기 25-10-14 41"}
 {"cid":"1178","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1178","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--o39a91ov4fl1fmh040h.com/community/board.asp?bKind=Notice","at":"2026-10-16T01:03:33.474Z","quote":"1 23년 수영장 및 매점이용시간 안내 미소지기 23-06-30 150"}
+{"cid":"1178","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--o39a91ov4fl1fmh040h.com/community/board.asp?bKind=Notice","at":"2026-10-16T05:49:02.234Z","quote":"1 23년 수영장 및 매점이용시간 안내 미소지기 23-06-30 150"}
 {"cid":"1181","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"1181","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1181","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1261,13 +1264,13 @@
 {"cid":"1194","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1194","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"1194","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1196","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--vk5b9lwhmsf8f8xkusfbqi.kr/sub04_1.php?ckattempt=1","at":"2026-10-16T01:08:44.113Z","quote":"음식물 쓰레기는 개수대 앞에 있는 음식물 쓰레기통에 버려주시기 바랍니다."}
-{"cid":"1196","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--vk5b9lwhmsf8f8xkusfbqi.kr/?ckattempt=1","at":"2026-10-16T01:08:44.113Z","quote":"아이들에게는 120% 행복을 줄 놀이터와"}
+{"cid":"1196","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--vk5b9lwhmsf8f8xkusfbqi.kr/sub04_1.php","at":"2026-10-16T05:41:24.547Z","quote":"음식물 쓰레기는 개수대 앞에 있는 음식물 쓰레기통에 버려주시기 바랍니다."}
+{"cid":"1196","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--vk5b9lwhmsf8f8xkusfbqi.kr/?ckattempt=1","at":"2026-10-16T05:41:24.547Z","quote":"아이들에게는 120% 행복을 줄 놀이터와"}
 {"cid":"1196","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1196","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--vk5b9lwhmsf8f8xkusfbqi.kr/?ckattempt=1","at":"2026-10-16T01:08:44.113Z","quote":"Outdoor Pool 야외수영장"}
+{"cid":"1196","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--vk5b9lwhmsf8f8xkusfbqi.kr/?ckattempt=1","at":"2026-10-16T05:41:24.547Z","quote":"야외수영장"}
 {"cid":"1196","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1196","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--vk5b9lwhmsf8f8xkusfbqi.kr/sub04_1.php?ckattempt=1","at":"2026-10-16T01:08:44.113Z","quote":"편의점 이용 안내"}
-{"cid":"1196","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--vk5b9lwhmsf8f8xkusfbqi.kr/?ckattempt=1","at":"2026-10-16T01:08:44.113Z","quote":"Trampoline & Playground 트램폴린"}
+{"cid":"1196","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--vk5b9lwhmsf8f8xkusfbqi.kr/sub04_1.php","at":"2026-10-16T05:41:24.547Z","quote":"편의점 이용 안내"}
+{"cid":"1196","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--vk5b9lwhmsf8f8xkusfbqi.kr/?ckattempt=1","at":"2026-10-16T05:41:24.547Z","quote":"트램폴린"}
 {"cid":"1196","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1205","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://badaaeglamping.com/theme/basic/reser1.php","at":"2026-10-15T23:30:42.344Z","quote":"시설물은 내 집처럼 사용하시고, 퇴실전 설거지와 분리수거 부탁드립니다."}
 {"cid":"1205","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
@@ -1447,10 +1450,10 @@
 {"cid":"1433","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"1433","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1433","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"1438","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://bibiautocamp.com/contents/reserve.html","at":"2026-10-16T01:01:33.099Z","quote":"애견 놀이터로 잔디밭이 있음"}
+{"cid":"1438","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://bibiautocamp.com/contents/reserve.html","at":"2026-10-16T05:36:40.839Z","quote":"애견 놀이터로 잔디밭이 있음"}
 {"cid":"1438","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"1438","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1438","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://bibiautocamp.com/contents/main.html","at":"2026-10-16T01:01:33.099Z","quote":"야외수영장"}
+{"cid":"1438","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://bibiautocamp.com/contents/main.html","at":"2026-10-16T05:36:40.839Z","quote":"야외수영장"}
 {"cid":"1438","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"1438","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1438","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
@@ -1746,7 +1749,7 @@
 {"cid":"1741","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"1770","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"1770","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1770","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://sol-bat.com/wanee/index.php","at":"2026-10-16T00:59:39.558Z","quote":"수영장방가…"}
+{"cid":"1770","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://sol-bat.com/wanee/index.php","at":"2026-10-16T05:35:32.789Z","quote":"수영장방가…"}
 {"cid":"1770","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"1770","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1770","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
@@ -1938,7 +1941,7 @@
 {"cid":"2022","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"족구장"}
 {"cid":"2022","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"2022","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2031","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.anseong.go.kr/tourPortal/camp/contents.do?mId=0702000000","at":"2026-10-16T01:00:08.872Z","quote":"어린이놀이터"}
+{"cid":"2031","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.anseong.go.kr/tourPortal/camp/contents.do?mId=0702000000","at":"2026-10-16T05:35:47.324Z","quote":"어린이놀이터"}
 {"cid":"2031","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2031","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"2031","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2131,14 +2134,14 @@
 {"cid":"2213","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2216","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"2216","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2216","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.gimpocamping.com/nf_brd/board.php?bo_table=notc","at":"2026-10-16T00:58:50.345Z","quote":"2026년수영장오픈"}
+{"cid":"2216","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.gimpocamping.com/nf_brd/board.php?bo_table=notc","at":"2026-10-16T05:34:50.852Z","quote":"2026년수영장오픈"}
 {"cid":"2216","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"2216","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2216","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
 {"cid":"2216","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"2216","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"2216","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2216","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.gimpocamping.com/contents/main.html","at":"2026-10-16T00:58:50.345Z","quote":"놀이방방체험"}
+{"cid":"2216","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.gimpocamping.com/contents/main.html","at":"2026-10-16T05:34:50.852Z","quote":"놀이방방체험"}
 {"cid":"2216","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"2216","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2216","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
@@ -2351,6 +2354,7 @@
 {"cid":"2482","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2482","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"2483","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2483","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.sangcamp.com/?ckattempt=1","at":"2026-10-16T05:41:54.561Z","quote":"간이수영장"}
 {"cid":"2483","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2483","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"2483","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2426,7 +2430,7 @@
 {"cid":"2538","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"2538","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2538","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"2561","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://indiaround.co.kr/","at":"2026-10-16T00:52:50.841Z","quote":"글램핑과 수영장,"}
+{"cid":"2561","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://indiaround.co.kr/","at":"2026-10-16T05:41:00.531Z","quote":"글램핑과 수영장,"}
 {"cid":"2561","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"2561","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2561","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
@@ -2617,10 +2621,10 @@
 {"cid":"2810","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
 {"cid":"2810","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2810","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"2812","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.jocamp.co.kr/info/info04.php","at":"2026-10-16T01:03:50.074Z","quote":"개수대 12여 개소 이용에 불편함이 없도록 각 site별 분산 배치"}
+{"cid":"2812","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.jocamp.co.kr/info/info04.php","at":"2026-10-16T05:38:05.265Z","quote":"개수대 12여 개소 이용에 불편함이 없도록 각 site별 분산 배치"}
 {"cid":"2812","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"2812","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2812","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.jocamp.co.kr/info/info04.php","at":"2026-10-16T01:03:50.074Z","quote":"매점 1개소 각종 편의용품 구입가능 (종량제봉투, 숯, 묵은지, 고추장 등)"}
+{"cid":"2812","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.jocamp.co.kr/info/info04.php","at":"2026-10-16T05:38:05.265Z","quote":"매점 1개소 각종 편의용품 구입가능 (종량제봉투, 숯, 묵은지, 고추장 등)"}
 {"cid":"2813","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"2813","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2813","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2872,17 +2876,17 @@
 {"cid":"2990","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"2990","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2990","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"2992","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://cbnuo.chungbuk.ac.kr/cbnuo/intro/facility.php","at":"2026-10-16T01:04:20.325Z","quote":"- 캠프지원동(화장실, 샤워실, 개수대)"}
+{"cid":"2992","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://cbnuo.chungbuk.ac.kr/cbnuo/intro/facility.php","at":"2026-10-16T05:38:24.331Z","quote":"- 캠프지원동(화장실, 샤워실, 개수대)"}
 {"cid":"2992","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2992","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://cbnuo.chungbuk.ac.kr/cbnuo/intro/facility.php","at":"2026-10-16T01:04:20.325Z","quote":"- 수영장 운영(여름 시즌 한정)"}
+{"cid":"2992","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://cbnuo.chungbuk.ac.kr/cbnuo/intro/facility.php","at":"2026-10-16T05:38:24.331Z","quote":"- 수영장 운영(여름 시즌 한정)"}
 {"cid":"2992","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"2992","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2992","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"2992","attr":"AMENITY_STARGAZING","value":true,"grade":"CONFIRMED","src":"gocamping","text":"천체망원경 구경 1m"}
-{"cid":"2992","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://cbnuo.chungbuk.ac.kr/cbnuo/intro/facility.php","at":"2026-10-16T01:04:20.325Z","quote":"- 매점 상시 운영"}
+{"cid":"2992","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://cbnuo.chungbuk.ac.kr/cbnuo/intro/facility.php","at":"2026-10-16T05:38:24.331Z","quote":"- 매점 상시 운영"}
 {"cid":"2992","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"2992","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2992","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://cbnuo.chungbuk.ac.kr/cbnuo/intro/facility.php","at":"2026-10-16T01:04:20.325Z","quote":"- Wi-Fi 사용가능"}
+{"cid":"2992","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://cbnuo.chungbuk.ac.kr/cbnuo/intro/facility.php","at":"2026-10-16T05:38:24.331Z","quote":"- Wi-Fi 사용가능"}
 {"cid":"2992","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"2997","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"2997","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2910,16 +2914,17 @@
 {"cid":"3025","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3025","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
 {"cid":"3025","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"3034","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://kalcamping.kr/facility.html?id=d3c7d264-654c-47c3-8f3e-d2ffdaaae64a","at":"2026-10-16T01:00:29.561Z","quote":"- 공용 개수대"}
+{"cid":"3034","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://kalcamping.kr/reservation.html","at":"2026-10-16T05:35:57.166Z","quote":"- 공용 개수대"}
 {"cid":"3034","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"gocamping","text":"화장실 / 개수대 / 온수 샤워실 / 매점"}
 {"cid":"3034","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"3034","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3034","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"3034","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"3034","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://kalcamping.kr/facility.html?id=d3c7d264-654c-47c3-8f3e-d2ffdaaae64a","at":"2026-10-16T01:00:29.561Z","quote":"[매점]"}
+{"cid":"3034","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://kalcamping.kr/reservation.html","at":"2026-10-16T05:35:57.166Z","quote":"[매점]"}
 {"cid":"3034","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"3034","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"3034","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3034","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://kalcamping.kr/reservation.html","at":"2026-10-16T05:35:57.166Z","quote":"- 와이파이 보유"}
 {"cid":"3034","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"3045","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"3045","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3060,6 +3065,7 @@
 {"cid":"3206","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"3206","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3206","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
+{"cid":"3206","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.hongcheon.go.kr/palbong/index.do","at":"2026-10-16T05:38:49.518Z","quote":"음식과 편의점"}
 {"cid":"3206","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3206","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"3209","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3416,12 +3422,12 @@
 {"cid":"3508","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"3508","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3508","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"3511","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://hobancamping.com/contents/facilities.html","at":"2026-10-16T01:06:44.393Z","quote":"- 정육식당, 수영장, 당구장, 자전거전용도로, 자전거대여, 라이브카페(2층), 휴게실, 고기불판 or 에어프라이기 대여, 공동취사장, 개수대, 매점, 낚시가능, 주차장, 샤워장(남/여 구분), 화장실(남/여 구분)"}
-{"cid":"3511","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://hobancamping.com/nf_brd/board.php?bo_table=notc","at":"2026-10-16T01:06:44.393Z","quote":"2025연도 수영장 운영개시일"}
+{"cid":"3511","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://hobancamping.com/contents/facilities.html","at":"2026-10-16T05:39:36.973Z","quote":"- 정육식당, 수영장, 당구장, 자전거전용도로, 자전거대여, 라이브카페(2층), 휴게실, 고기불판 or 에어프라이기 대여, 공동취사장, 개수대, 매점, 낚시가능, 주차장, 샤워장(남/여 구분), 화장실(남/여 구분)"}
+{"cid":"3511","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://hobancamping.com/nf_brd/board.php?bo_table=notc","at":"2026-10-16T05:39:36.973Z","quote":"2025연도 수영장 운영개시일"}
 {"cid":"3511","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3511","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"3511","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://hobancamping.com/contents/facilities.html","at":"2026-10-16T01:06:44.393Z","quote":"- 정육식당, 수영장, 당구장, 자전거전용도로, 자전거대여, 라이브카페(2층), 휴게실, 고기불판 or 에어프라이기 대여, 공동취사장, 개수대, 매점, 낚시가능, 주차장, 샤워장(남/여 구분), 화장실(남/여 구분)"}
-{"cid":"3511","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://hobancamping.com/contents/facilities.html","at":"2026-10-16T01:06:44.393Z","quote":"- 캠핑장 내 전지역 와이파이 오픈"}
+{"cid":"3511","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://hobancamping.com/contents/facilities.html","at":"2026-10-16T05:39:36.973Z","quote":"- 정육식당, 수영장, 당구장, 자전거전용도로, 자전거대여, 라이브카페(2층), 휴게실, 고기불판 or 에어프라이기 대여, 공동취사장, 개수대, 매점, 낚시가능, 주차장, 샤워장(남/여 구분), 화장실(남/여 구분)"}
+{"cid":"3511","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://hobancamping.com/contents/facilities.html","at":"2026-10-16T05:39:36.973Z","quote":"- 캠핑장 내 전지역 와이파이 오픈"}
 {"cid":"3511","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"3518","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"3518","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3516,7 +3522,6 @@
 {"cid":"3601","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"3602","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"3602","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"3602","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.hupark.com/customer/list.html?code=notice","at":"2026-10-16T00:54:32.918Z","quote":"수영장_2026년 여름_종료일 8/30(일)"}
 {"cid":"3602","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"3602","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3602","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
@@ -3722,7 +3727,7 @@
 {"cid":"6967","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6967","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"6967","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"6968","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.danyangcamping.com/bbs/notice","at":"2026-10-16T01:00:51.508Z","quote":"간이매점은당분간 현금구매만가능합니다"}
+{"cid":"6968","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.danyangcamping.com/bbs/notice","at":"2026-10-16T05:36:14.634Z","quote":"간이매점은당분간 현금구매만가능합니다"}
 {"cid":"6970","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6971","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"6971","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3730,7 +3735,7 @@
 {"cid":"6971","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"6971","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"6971","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"6972","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://daecheonbeach.kr/home/company/02","at":"2026-10-16T01:06:44.395Z","quote":"GS편의점 신광장점"}
+{"cid":"6972","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://daecheonbeach.kr/home/company/02","at":"2026-10-16T05:39:39.983Z","quote":"GS편의점 신광장점"}
 {"cid":"6972","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"6972","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6978","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
@@ -3851,10 +3856,10 @@
 {"cid":"7051","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7051","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7053","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7058","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.baekuncamp.co.kr/bbs/board1","at":"2026-10-16T00:54:35.962Z","quote":"수영장 운영계획"}
+{"cid":"7058","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.baekuncamp.co.kr/bbs/board1","at":"2026-10-16T05:42:26.587Z","quote":"수영장 운영계획"}
 {"cid":"7058","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"7058","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7058","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.baekuncamp.co.kr/","at":"2026-10-16T00:54:35.962Z","quote":"카페/매점"}
+{"cid":"7058","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.baekuncamp.co.kr/","at":"2026-10-16T05:42:26.587Z","quote":"카페/매점"}
 {"cid":"7058","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"7058","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7063","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4211,11 +4216,14 @@
 {"cid":"7218","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7218","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"7218","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
+{"cid":"7222","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--oi2bl1go2gxuhprg65i.jdweb.kr/bbs/board.php?bo_table=gallery","at":"2026-10-16T05:45:55.078Z","quote":"어린이수영장"}
 {"cid":"7222","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"7222","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7222","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--oi2bl1go2gxuhprg65i.jdweb.kr/bbs/board.php?bo_table=gallery","at":"2026-10-16T05:45:55.078Z","quote":"생필품 및 간식 등 필요한 품목들이 매점안에 있습니다."}
 {"cid":"7222","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"7222","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"7222","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7222","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--oi2bl1go2gxuhprg65i.jdweb.kr/sub4.php?num=4_1","at":"2026-10-16T05:45:55.078Z","quote":"전 객실 와이파이 설치되어 있습니다."}
 {"cid":"7222","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"7224","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"7224","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4338,7 +4346,7 @@
 {"cid":"7344","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"7348","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7352","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7353","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://cms.wfmc.kr/web/lay1/S1T155C194/contents.do","at":"2026-10-16T01:06:44.389Z","quote":"보물섬물놀이장"}
+{"cid":"7353","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://cms.wfmc.kr/web/lay1/S1T155C194/contents.do","at":"2026-10-16T05:39:31.131Z","quote":"보물섬물놀이장"}
 {"cid":"7353","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7353","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"7353","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4426,10 +4434,10 @@
 {"cid":"7494","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7494","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"7496","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7499","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://wwww.happycamping.co.kr/main/page.html?pid=17","at":"2026-10-16T01:08:54.943Z","quote":"수영장 :: 뷰 좋은 합천호수 해피캠핑장"}
+{"cid":"7499","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://wwww.happycamping.co.kr/main/page.html?pid=17","at":"2026-10-16T05:41:39.670Z","quote":"수영장 :: 뷰 좋은 합천호수 해피캠핑장"}
 {"cid":"7499","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7499","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://wwww.happycamping.co.kr/main/page.html?pid=65","at":"2026-10-16T01:08:54.943Z","quote":"매점 :: 뷰 좋은 합천호수 해피캠핑장"}
-{"cid":"7499","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://wwww.happycamping.co.kr/main/index.html","at":"2026-10-16T01:08:54.943Z","quote":"트램펄린"}
+{"cid":"7499","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://wwww.happycamping.co.kr/main/page.html?pid=65","at":"2026-10-16T05:41:39.670Z","quote":"매점 :: 뷰 좋은 합천호수 해피캠핑장"}
+{"cid":"7499","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://wwww.happycamping.co.kr/main/index.html","at":"2026-10-16T05:41:39.670Z","quote":"트램펄린"}
 {"cid":"7499","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7502","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"7502","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4534,10 +4542,10 @@
 {"cid":"7588","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"7588","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7588","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"7590","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.hopecamping.co.kr/intro/introduce.php","at":"2026-10-16T01:04:10.056Z","quote":"편의시설 전기, 온수 샤워실, 화장실, 다용도실(개수대), 야외 샤워부스, 매점, 개별 화로대"}
+{"cid":"7590","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.hopecamping.co.kr/intro/introduce.php","at":"2026-10-16T05:38:18.083Z","quote":"편의시설 전기, 온수 샤워실, 화장실, 다용도실(개수대), 야외 샤워부스, 매점, 개별 화로대"}
 {"cid":"7590","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"7590","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7590","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.hopecamping.co.kr/intro/introduce.php","at":"2026-10-16T01:04:10.056Z","quote":"편의시설 전기, 온수 샤워실, 화장실, 다용도실(개수대), 야외 샤워부스, 매점, 개별 화로대"}
+{"cid":"7590","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.hopecamping.co.kr/intro/introduce.php","at":"2026-10-16T05:38:18.083Z","quote":"편의시설 전기, 온수 샤워실, 화장실, 다용도실(개수대), 야외 샤워부스, 매점, 개별 화로대"}
 {"cid":"7590","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"7590","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"7590","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4687,8 +4695,10 @@
 {"cid":"7747","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7747","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7747","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
+{"cid":"7748","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://pawscamp.co.kr/notice.php","at":"2026-10-16T05:44:45.682Z","quote":"22 2026년 수영장 오픈 예정공지 🏊 2026-03-01"}
 {"cid":"7748","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"7748","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7748","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://pawscamp.co.kr/notice.php","at":"2026-10-16T05:44:45.682Z","quote":"28 매점 에어컨 설치 완료❄️ 2026-06-30"}
 {"cid":"7748","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"7748","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"7749","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
@@ -4729,7 +4739,7 @@
 {"cid":"7768","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"7768","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7768","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"7768","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://agitcamp.co.kr/page/102/","at":"2026-10-16T01:06:52.896Z","quote":"편의점 음료병 라벨 제거 5단계 체크리스트"}
+{"cid":"7768","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://agitcamp.co.kr/page/102/","at":"2026-10-16T05:51:01.231Z","quote":"편의점 음료병 라벨 제거 5단계 체크리스트"}
 {"cid":"7768","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"7768","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7768","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
@@ -4910,8 +4920,8 @@
 {"cid":"7878","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"7878","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7878","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"7879","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://rev.cuc.or.kr/www/206","at":"2026-10-16T00:59:27.773Z","quote":"부엌 및 개수대, 화장실 등 이용시설은 깨끗하게 사용한다."}
-{"cid":"7879","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://rev.cuc.or.kr/www/121?company_code=CUC12&part_code=02&days=1&date_yyyymm=202502","at":"2026-10-16T00:59:27.773Z","quote":"수영장 근로자종합복지관"}
+{"cid":"7879","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://rev.cuc.or.kr/www/206","at":"2026-10-16T05:35:24.930Z","quote":"부엌 및 개수대, 화장실 등 이용시설은 깨끗하게 사용한다."}
+{"cid":"7879","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://rev.cuc.or.kr/www/121?company_code=CUC12&part_code=02&days=1&date_yyyymm=202502","at":"2026-10-16T05:35:24.930Z","quote":"수영장 근로자종합복지관"}
 {"cid":"7879","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7879","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"7879","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
@@ -4926,10 +4936,10 @@
 {"cid":"7880","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"7883","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"7883","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7883","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://gwp.hana-pnc.co.kr/?ckattempt=1","at":"2026-10-16T01:12:20.431Z","quote":"수영장안내"}
+{"cid":"7883","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://gwp.hana-pnc.co.kr/notice","at":"2026-10-16T05:45:05.964Z","quote":"수영장안내"}
 {"cid":"7883","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7883","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"7883","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://gwp.hana-pnc.co.kr/page_VqJl29?ckattempt=1","at":"2026-10-16T01:12:20.431Z","quote":"* 종량제 봉투 1장당 1천원(매점판매)"}
+{"cid":"7883","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://gwp.hana-pnc.co.kr/page_VqJl29","at":"2026-10-16T05:45:05.964Z","quote":"* 종량제 봉투 1장당 1천원(매점판매)"}
 {"cid":"7883","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"7883","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"7883","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4940,6 +4950,8 @@
 {"cid":"7893","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"7893","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"7893","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7894","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.dhcamp.or.kr/cms/bbs/dk_content.php?ht_id=intro_01","at":"2026-10-16T05:42:53.232Z","quote":"대황강 곳곳에는 자연속의 물놀이장, 어린이 놀이터, 잔디광장, 체험장, 산책로 등이 조성되어 어린이를 동반한 가족 단위 피서객들의 편안한 휴식처가 될 것입니다."}
+{"cid":"7894","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.dhcamp.or.kr/cms/bbs/dk_content.php?ht_id=intro_01","at":"2026-10-16T05:42:53.232Z","quote":"대황강 곳곳에는 자연속의 물놀이장, 어린이 놀이터, 잔디광장, 체험장, 산책로 등이 조성되어 어린이를 동반한 가족 단위 피서객들의 편안한 휴식처가 될 것입니다."}
 {"cid":"7894","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"7894","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7894","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
@@ -5019,12 +5031,9 @@
 {"cid":"7913","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"7916","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"7916","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7916","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://blooming1974.com/?ckattempt=1","at":"2026-10-16T01:10:58.126Z","quote":"Swimming Pool수영장"}
 {"cid":"7916","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"7916","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7916","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"7916","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://blooming1974.com/?ckattempt=1","at":"2026-10-16T01:10:58.126Z","quote":"Minishop매점"}
-{"cid":"7916","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://blooming1974.com/?ckattempt=1","at":"2026-10-16T01:10:58.126Z","quote":"트램폴린"}
 {"cid":"7916","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"7916","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7916","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
@@ -5717,11 +5726,11 @@
 {"cid":"100070","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100070","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"100070","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"100071","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.mintcamping.com/?ckattempt=1","at":"2026-10-16T01:01:44.440Z","quote":"실내놀이터"}
+{"cid":"100071","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.mintcamping.com/?ckattempt=1","at":"2026-10-16T05:36:45.901Z","quote":"실내놀이터"}
 {"cid":"100071","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100071","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.mintcamping.com/?ckattempt=1","at":"2026-10-16T01:01:44.440Z","quote":"실외수영장"}
+{"cid":"100071","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.mintcamping.com/?ckattempt=1","at":"2026-10-16T05:36:45.901Z","quote":"야외수영장 등이 가까이 있어"}
 {"cid":"100071","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100071","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.mintcamping.com/?ckattempt=1","at":"2026-10-16T01:01:44.440Z","quote":"GS편의점"}
+{"cid":"100071","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.mintcamping.com/?ckattempt=1","at":"2026-10-16T05:36:45.901Z","quote":"카페, 편의점, 허브농장, 야채체험장과 가깝습니다."}
 {"cid":"100071","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100071","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100074","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
@@ -5779,6 +5788,7 @@
 {"cid":"100117","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"100117","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"100117","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100126","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://buyeo-suribawi.or.kr/main/main.php","at":"2026-10-16T05:39:50.508Z","quote":"콘센트와 개수대를 제공합니다."}
 {"cid":"100126","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"gocamping","text":"실내개수대"}
 {"cid":"100126","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"100126","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -6096,7 +6106,7 @@
 {"cid":"100268","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100270","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"100270","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100270","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--oy2bp4ffes00a55az72b.com/","at":"2026-10-16T00:58:50.350Z","quote":"가평 오블리비아테수영장&카라반펜션"}
+{"cid":"100270","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--oy2bp4ffes00a55az72b.com/","at":"2026-10-16T05:34:56.298Z","quote":"가평 오블리비아테수영장&카라반펜션"}
 {"cid":"100270","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"100270","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100270","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
@@ -6285,6 +6295,7 @@
 {"cid":"100303","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100303","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"100303","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100303","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--lu1bj5h48bjyp.com/html/sub04.php","at":"2026-10-16T05:55:56.825Z","quote":"wifi, TV, 에어컨, 냉장고, 전기밥솥, 전기주전자, 식기, 냄비 및 후라이팬, 헤어드라이기, 샴프, 린스, 타올 등"}
 {"cid":"100303","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100305","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"카페"}
 {"cid":"100305","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
@@ -6903,7 +6914,7 @@
 {"cid":"100470","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100470","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100471","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100471","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.saesolcamping.co.kr/default/","at":"2026-10-16T00:56:55.467Z","quote":"화장실 비데, 세탁기, 1인샤워실, 매점, 365일 온수제공"}
+{"cid":"100471","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.saesolcamping.co.kr/default/","at":"2026-10-16T05:44:38.414Z","quote":"화장실 비데, 세탁기, 1인샤워실, 매점, 365일 온수제공"}
 {"cid":"100471","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100472","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"100472","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -7038,12 +7049,11 @@
 {"cid":"100504","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"100504","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"100504","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100505","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://towoomaru.com/default/","at":"2026-10-16T01:10:05.777Z","quote":"고한읍 함백산 자락에 위치한 구)삼척탄좌의 폐광시설을 이용한 우리나라 최초의 문화예술광산이자 전 국민의 예술감성을 캐는 예술놀이터로 열린관광지로 조성되어 장애인들도 제약없이 관람 가능하다."}
+{"cid":"100505","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://towoomaru.com/default/","at":"2026-10-16T05:42:32.110Z","quote":"고한읍 함백산 자락에 위치한 구)삼척탄좌의 폐광시설을 이용한 우리나라 최초의 문화예술광산이자 전 국민의 예술감성을 캐는 예술놀이터로 열린관광지로 조성되어 장애인들도 제약없이 관람 가능하다."}
 {"cid":"100505","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100505","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://towoomaru.com/default/bbs/03.php","at":"2026-10-16T01:10:05.777Z","quote":"미니수영장이 준비되어있습니다."}
 {"cid":"100505","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100505","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100505","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://towoomaru.com/default/","at":"2026-10-16T01:10:05.777Z","quote":"와이파이"}
+{"cid":"100505","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://towoomaru.com/default/","at":"2026-10-16T05:42:32.110Z","quote":"와이파이"}
 {"cid":"100505","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100507","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"카페"}
 {"cid":"100507","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
@@ -7076,9 +7086,9 @@
 {"cid":"100517","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100517","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"100517","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"100518","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.sidocamping.kr/","at":"2026-10-16T01:09:12.795Z","quote":"공용개수대"}
+{"cid":"100518","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.sidocamping.kr/","at":"2026-10-16T05:41:53.772Z","quote":"공용개수대"}
 {"cid":"100518","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100518","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.sidocamping.kr/","at":"2026-10-16T01:09:12.795Z","quote":"물놀이장"}
+{"cid":"100518","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.sidocamping.kr/","at":"2026-10-16T05:41:53.772Z","quote":"물놀이장"}
 {"cid":"100518","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100520","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"100520","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -7402,18 +7412,18 @@
 {"cid":"100603","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"100603","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100606","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"카페"}
-{"cid":"100606","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://sannae.kr/","at":"2026-10-16T01:10:17.440Z","quote":"관리동 위치/매점/남여 사워실/화장실/개수대"}
-{"cid":"100606","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://sannae.kr/","at":"2026-10-16T01:10:17.440Z","quote":"관리동 앞 위치/수영장/모래 놀이터/트램폴린(방방장)"}
+{"cid":"100606","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://sannae.kr/","at":"2026-10-16T05:43:03.360Z","quote":"관리동 위치/매점/남여 사워실/화장실/개수대"}
+{"cid":"100606","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://sannae.kr/","at":"2026-10-16T05:43:03.360Z","quote":"관리동 앞 위치/수영장/모래 놀이터/트램폴린(방방장)"}
 {"cid":"100606","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"100606","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100606","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://sannae.kr/","at":"2026-10-16T01:10:17.440Z","quote":"관리동 앞 위치/수영장/모래 놀이터/트램폴린(방방장)"}
+{"cid":"100606","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://sannae.kr/","at":"2026-10-16T05:43:03.360Z","quote":"관리동 앞 위치/수영장/모래 놀이터/트램폴린(방방장)"}
 {"cid":"100606","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"100606","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100606","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"100606","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://sannae.kr/","at":"2026-10-16T01:10:17.440Z","quote":"관리동 위치/매점/남여 사워실/화장실/개수대"}
+{"cid":"100606","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://sannae.kr/","at":"2026-10-16T05:43:03.360Z","quote":"관리동 위치/매점/남여 사워실/화장실/개수대"}
 {"cid":"100606","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"100606","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100606","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://sannae.kr/","at":"2026-10-16T01:10:17.440Z","quote":"관리동 앞 위치/수영장/모래 놀이터/트램폴린(방방장)"}
+{"cid":"100606","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://sannae.kr/","at":"2026-10-16T05:43:03.360Z","quote":"관리동 앞 위치/수영장/모래 놀이터/트램폴린(방방장)"}
 {"cid":"100606","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"100606","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100606","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
@@ -7461,10 +7471,10 @@
 {"cid":"100620","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"100620","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100620","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"100622","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://jjpark.net/kor/sub02/menu_01.html","at":"2026-10-16T01:05:09.500Z","quote":"테이블평상, 전기, 마트 (전자렌지 사용가능), 개수대, 애견운동장"}
+{"cid":"100622","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://jjpark.net/kor/sub02/menu_01.html","at":"2026-10-16T05:39:20.992Z","quote":"테이블평상, 전기, 마트 (전자렌지 사용가능), 개수대, 애견운동장"}
 {"cid":"100622","attr":"AMENITY_PET_RUN","value":true,"grade":"CONFIRMED","src":"gocamping","text":"반려견운동장"}
 {"cid":"100622","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"100622","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://jjpark.net/kor/sub06/menu_01.html","at":"2026-10-16T01:05:09.500Z","quote":"매점 오픈안내"}
+{"cid":"100622","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://jjpark.net/kor/sub06/menu_01.html","at":"2026-10-16T05:39:20.992Z","quote":"매점 오픈안내"}
 {"cid":"100622","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"100622","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100623","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
@@ -7513,7 +7523,7 @@
 {"cid":"100635","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100636","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"카페"}
 {"cid":"100636","attr":"AMENITY_KIDS_ROOM","value":true,"grade":"CONFIRMED","src":"gocamping","text":"어린이 영화관"}
-{"cid":"100636","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://highlark.co.kr/index.html","at":"2026-10-16T00:55:22.026Z","quote":"대형 파노라마 인피니티풀, 키즈풀, 키즈워터플레이플 등 3가지 미온수풀이 사계절 내내 운영하며 다양한 수영장"}
+{"cid":"100636","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://highlark.co.kr/index.html","at":"2026-10-16T05:43:17.040Z","quote":"대형 파노라마 인피니티풀, 키즈풀, 키즈워터플레이플 등 3가지 미온수풀이 사계절 내내 운영하며 다양한 수영장"}
 {"cid":"100636","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"100636","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100636","attr":"AMENITY_SAUNA","value":true,"grade":"CONFIRMED","src":"gocamping","text":"사우나"}
@@ -7527,13 +7537,13 @@
 {"cid":"100639","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"100639","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100640","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"카페"}
-{"cid":"100640","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--oi2bw61auif73f.com/","at":"2026-10-16T01:00:18.056Z","quote":"공용 샤워실 & 화장실 & 개수대"}
+{"cid":"100640","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--oi2bw61auif73f.com/","at":"2026-10-16T05:46:52.859Z","quote":"공용 샤워실 & 화장실 & 개수대"}
 {"cid":"100640","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100640","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--oi2bw61auif73f.com/","at":"2026-10-16T01:00:18.056Z","quote":"여름 수영장"}
+{"cid":"100640","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--oi2bw61auif73f.com/","at":"2026-10-16T05:46:52.859Z","quote":"여름 수영장"}
 {"cid":"100640","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"100640","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100640","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"100640","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--oi2bw61auif73f.com/","at":"2026-10-16T01:00:18.056Z","quote":"포라카이 매점"}
+{"cid":"100640","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--oi2bw61auif73f.com/","at":"2026-10-16T05:46:52.859Z","quote":"포라카이 매점"}
 {"cid":"100640","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"100640","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100641","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"카페"}
@@ -7611,10 +7621,11 @@
 {"cid":"100656","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100657","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"100657","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100657","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b46pgrm22ac17b.com/m/reserve.html?reserve=rv&ckattempt=1","at":"2026-10-16T01:11:17.570Z","quote":"야외수영장"}
+{"cid":"100657","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b46pgrm22ac17b.com/m/reserve.html?reserve=rv&ckattempt=1","at":"2026-10-16T05:55:35.885Z","quote":"야외수영장"}
 {"cid":"100657","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"100657","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100657","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
+{"cid":"100657","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b46pgrm22ac17b.com/m/reserve.html?reserve=gd","at":"2026-10-16T05:55:35.885Z","quote":"[ 매점 이용 안내 ]"}
 {"cid":"100657","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"100657","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100657","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
@@ -7627,7 +7638,7 @@
 {"cid":"100659","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"100659","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100659","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"100661","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://riverwith.co.kr/?page_id=1605&ckattempt=2","at":"2026-10-16T01:11:18.063Z","quote":"퇴실 시 다음 손님을 위한 정리정돈과 설거지, 쓰레기 분리수거는 글램핑을 이용하는 기분 에티켓으로 지켜주시기 바랍니다."}
+{"cid":"100661","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://riverwith.co.kr/?page_id=1605","at":"2026-10-16T05:44:17.038Z","quote":"퇴실 시 다음 손님을 위한 정리정돈과 설거지, 쓰레기 분리수거는 글램핑을 이용하는 기분 에티켓으로 지켜주시기 바랍니다."}
 {"cid":"100661","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"100661","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100662","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
@@ -7840,14 +7851,17 @@
 {"cid":"100710","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"100710","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100710","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
+{"cid":"100711","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://luzern365.kr/special1.html","at":"2026-10-16T05:46:03.551Z","quote":"키즈룸202호(애견x,스파,개별BBQ,불멍, 넷플릭스)"}
 {"cid":"100711","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"100711","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100711","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://luzern365.kr/special1.html","at":"2026-10-16T05:46:03.551Z","quote":"야외 수영장"}
 {"cid":"100711","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"100711","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100711","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"100711","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"100711","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"100711","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100711","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://luzern365.kr/reservation.html","at":"2026-10-16T05:46:03.551Z","quote":"- 와이파이 보유"}
 {"cid":"100711","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100712","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100712","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
@@ -7894,15 +7908,15 @@
 {"cid":"100721","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"100721","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100721","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"100722","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://goglamping.co.kr/sub4.php?num=4_1&ckattempt=1","at":"2026-10-16T01:11:34.751Z","quote":"퇴실 시 비치된 조리도구 그릇 등 청결히 설거지 완료 후 원래 위치에 보관해주세요."}
+{"cid":"100722","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://goglamping.co.kr/sub4.php?num=4_1","at":"2026-10-16T05:44:31.384Z","quote":"퇴실 시 비치된 조리도구 그릇 등 청결히 설거지 완료 후 원래 위치에 보관해주세요."}
 {"cid":"100722","attr":"AMENITY_KARAOKE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"노래방"}
 {"cid":"100722","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100722","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://goglamping.co.kr/?ckattempt=1","at":"2026-10-16T01:11:34.751Z","quote":"깨끗함과 시원함을 주는 대형수영장"}
+{"cid":"100722","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://goglamping.co.kr/?ckattempt=1","at":"2026-10-16T05:44:31.384Z","quote":"깨끗함과 시원함을 주는 대형수영장"}
 {"cid":"100722","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"100722","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100722","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"100722","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100722","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://goglamping.co.kr/sub2.php?num=2_1&ckattempt=1","at":"2026-10-16T01:11:34.751Z","quote":"WIFI"}
+{"cid":"100722","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://goglamping.co.kr/sub2.php?num=2_1","at":"2026-10-16T05:44:31.384Z","quote":"WIFI"}
 {"cid":"100722","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100724","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100725","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
@@ -8027,7 +8041,7 @@
 {"cid":"100752","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"100752","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100752","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"100753","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--sk4bt5i0ylgd44g.kr/facility02.html?id=3","at":"2026-10-16T01:11:42.168Z","quote":"개수대&냉장실"}
+{"cid":"100753","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--sk4bt5i0ylgd44g.kr/facility02.html?id=3","at":"2026-10-16T05:44:38.171Z","quote":"개수대&냉장실"}
 {"cid":"100753","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"100753","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100755","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
@@ -8102,7 +8116,7 @@
 {"cid":"100780","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100780","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100781","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100784","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.gochang.go.kr/reserve/index.gochang?menuCd=DOM_000002402005000000","at":"2026-10-16T01:08:01.982Z","quote":"나들목물놀이장"}
+{"cid":"100784","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.gochang.go.kr/reserve/index.gochang?menuCd=DOM_000002402005000000","at":"2026-10-16T05:40:42.847Z","quote":"나들목물놀이장"}
 {"cid":"100784","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100785","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"카페"}
 {"cid":"100785","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8229,6 +8243,7 @@
 {"cid":"100819","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"100819","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100820","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100820","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://yaho365.co.kr/default/","at":"2026-10-16T05:51:31.614Z","quote":"수영장 개장!!!"}
 {"cid":"100820","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"100820","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100820","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
@@ -8317,7 +8332,7 @@
 {"cid":"100845","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100846","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"100846","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100846","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://bonita-caravan.com/","at":"2026-10-16T00:59:31.016Z","quote":"4계절 온수수영장"}
+{"cid":"100846","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://bonita-caravan.com/","at":"2026-10-16T05:46:30.687Z","quote":"4계절 온수수영장"}
 {"cid":"100846","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"100846","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100846","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
@@ -8605,12 +8620,12 @@
 {"cid":"100930","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"100930","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100930","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"100931","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--83-908ig92a9sz.com/","at":"2026-10-16T01:08:04.443Z","quote":"실외 온수 수영장(자쿠지)"}
+{"cid":"100931","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--83-908ig92a9sz.com/","at":"2026-10-16T05:40:45.719Z","quote":"실외 온수 수영장(자쿠지)"}
 {"cid":"100931","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"100931","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100931","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"100931","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--83-908ig92a9sz.com/include/reservation.php?biz_code=P202305018&tab=2","at":"2026-10-16T01:08:04.443Z","quote":"[매점/유료]"}
-{"cid":"100931","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--83-908ig92a9sz.com/","at":"2026-10-16T01:08:04.443Z","quote":"Wi-Fi"}
+{"cid":"100931","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--83-908ig92a9sz.com/include/reservation.php?biz_code=P202305018&tab=2","at":"2026-10-16T05:40:45.719Z","quote":"[매점/유료]"}
+{"cid":"100931","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--83-908ig92a9sz.com/","at":"2026-10-16T05:40:45.719Z","quote":"Wi-Fi"}
 {"cid":"100931","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100932","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100933","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"카페"}
@@ -8780,12 +8795,16 @@
 {"cid":"100971","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100972","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100973","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100974","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.xn--299akkyo41fo1i40d0uej16e.com/sub5-1.htm","at":"2026-10-16T05:43:23.076Z","quote":"퇴실 시 집기류는 설거지 후 다음 분들을 위해 꼭 정리해 주시기 바랍니다."}
 {"cid":"100974","attr":"AMENITY_KARAOKE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"코인 노래방"}
 {"cid":"100974","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"100974","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100974","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.xn--299akkyo41fo1i40d0uej16e.com/","at":"2026-10-16T05:43:23.076Z","quote":"수영장(상시미온수)"}
 {"cid":"100974","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"100974","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100974","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
+{"cid":"100974","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.xn--299akkyo41fo1i40d0uej16e.com/sub5-1.htm","at":"2026-10-16T05:43:23.076Z","quote":"주류 및 음료, 간식거리, 얼음 등 매점에서 구매 가능 (칫솔세트 외 세면도구는 판매하지 않고 있습니다.)"}
+{"cid":"100974","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.xn--299akkyo41fo1i40d0uej16e.com/sub2-1.htm","at":"2026-10-16T05:43:23.076Z","quote":"-침대(퀸)2set, TV, 에어컨&히터, 취침등, 와이파이, 거울"}
 {"cid":"100974","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100975","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"100975","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8832,7 +8851,7 @@
 {"cid":"100989","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"100989","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100989","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"100990","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.stxresort.com/rooms/room_penthouse/?ckattempt=2","at":"2026-10-16T01:06:44.368Z","quote":"퇴실 시 쓰레기 처리 및 객실 정리 퇴실 전 객실 내 쓰레기는 각 층 전용 수거함에 배출하여 주시기 바라며 주방 설거지 및 기본 정리정돈 후 퇴실 부탁드립니다."}
+{"cid":"100990","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.stxresort.com/rooms/room_penthouse/","at":"2026-10-16T05:38:37.415Z","quote":"퇴실 시 쓰레기 처리 및 객실 정리 퇴실 전 객실 내 쓰레기는 각 층 전용 수거함에 배출하여 주시기 바라며 주방 설거지 및 기본 정리정돈 후 퇴실 부탁드립니다."}
 {"cid":"100990","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100990","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"100990","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
@@ -8903,15 +8922,15 @@
 {"cid":"101011","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101011","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"101011","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"101012","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://spaceyeongdeok.com/reserinfo.php?ckattempt=2","at":"2026-10-16T01:08:06.533Z","quote":"화장실 및 개수대 이동 시 경사로가 있으며 도보 3분 거리입니다."}
-{"cid":"101012","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://spaceyeongdeok.com/?ckattempt=3","at":"2026-10-16T01:08:06.533Z","quote":"애견놀이터"}
+{"cid":"101012","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://spaceyeongdeok.com/reserinfo.php","at":"2026-10-16T05:40:48.346Z","quote":"화장실 및 개수대 이동 시 경사로가 있으며 도보 3분 거리입니다."}
+{"cid":"101012","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://spaceyeongdeok.com/?ckattempt=1","at":"2026-10-16T05:40:48.346Z","quote":"애견놀이터"}
 {"cid":"101012","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"101012","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101012","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://spaceyeongdeok.com/reserinfo_guide.php?ckattempt=2","at":"2026-10-16T01:08:06.533Z","quote":"아니요, 애견 입수시 수영장 여과기 모터에 미세 털이 껴 고장을 일으킬 수 있기에 불가합니다"}
+{"cid":"101012","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://spaceyeongdeok.com/reserinfo_guide.php","at":"2026-10-16T05:40:48.346Z","quote":"아니요, 애견 입수시 수영장 여과기 모터에 미세 털이 껴 고장을 일으킬 수 있기에 불가합니다"}
 {"cid":"101012","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"101012","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101012","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"101012","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://spaceyeongdeok.com/?ckattempt=3","at":"2026-10-16T01:08:06.533Z","quote":"카페&매점"}
+{"cid":"101012","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://spaceyeongdeok.com/?ckattempt=1","at":"2026-10-16T05:40:48.346Z","quote":"카페&매점"}
 {"cid":"101012","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101013","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"101013","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8978,7 +8997,7 @@
 {"cid":"101029","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101030","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101030","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"101031","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://sopoongnresort.com/contents/main.html","at":"2026-10-16T01:02:35.075Z","quote":"야외수영장"}
+{"cid":"101031","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://sopoongnresort.com/contents/main.html","at":"2026-10-16T05:37:25.544Z","quote":"야외수영장"}
 {"cid":"101031","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101033","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101035","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
@@ -9085,8 +9104,12 @@
 {"cid":"101056","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101057","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"101057","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
+{"cid":"101058","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.yyhscamp.co.kr/default/campinfo/charge.php?top=2&amp;sub=2","at":"2026-10-16T05:38:42.365Z","quote":"싱크대 ○ 공용 개수대 공용 개수대 공용 개수대 공용 개수대 공용 개수대 공용 개수대"}
+{"cid":"101058","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.yyhscamp.co.kr/default/intro/01.php?top=1&amp;sub=0","at":"2026-10-16T05:38:42.365Z","quote":"캠핑장 내에는 사계절 수영장, 헬스장, 놀이터, 개인 샤워장 및 화장실, 습식 사우나 및 온탕, 그늘막 및 바람막 설치,"}
+{"cid":"101058","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.yyhscamp.co.kr/default/intro/01.php?top=1&amp;sub=0","at":"2026-10-16T05:38:42.365Z","quote":"캠핑장 내에는 사계절 수영장, 헬스장, 놀이터, 개인 샤워장 및 화장실, 습식 사우나 및 온탕, 그늘막 및 바람막 설치,"}
 {"cid":"101058","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"101058","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101058","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.yyhscamp.co.kr/default/campinfo/caution.php?top=2&amp;sub=0","at":"2026-10-16T05:38:42.365Z","quote":"(적발시 퇴장, 가스경보기 필요시 매점에서 구입 가능)"}
 {"cid":"101058","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101059","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101061","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -9481,7 +9504,7 @@
 {"cid":"101148","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101148","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101149","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101149","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--dw0bo6ac73a4wf.com/room.html?num=1","at":"2026-10-16T01:08:14.295Z","quote":"공용수영장"}
+{"cid":"101149","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--dw0bo6ac73a4wf.com/room.html?num=1","at":"2026-10-16T05:52:07.928Z","quote":"공용수영장"}
 {"cid":"101149","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"101149","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101149","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
@@ -9501,7 +9524,7 @@
 {"cid":"101151","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101151","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101152","attr":"AMENITY_BBQ","value":true,"grade":"CONFIRMED","src":"gocamping","text":"바비큐 시설"}
-{"cid":"101152","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.luxuryraffine.kr/html/index.html","at":"2026-10-16T01:08:14.696Z","quote":"산을 바라보는 야외 수영장에서 즐겁고 편안한 시간을 보낼 수 있습니다."}
+{"cid":"101152","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.luxuryraffine.kr/html/index.html","at":"2026-10-16T05:40:52.834Z","quote":"대형 인피니티풀 미온수수영장"}
 {"cid":"101152","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"101152","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101152","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
@@ -9539,11 +9562,11 @@
 {"cid":"101159","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101160","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"101160","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101161","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.choihue.com/preview","at":"2026-10-16T01:01:24.422Z","quote":"관리동에는 관리실, 공용샤워실, 공용화장실, 개수대, 매점이 위치하고 있으며, 고객의 편리함을 최우선으로 설계되어 있습니다."}
+{"cid":"101161","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.choihue.com/preview","at":"2026-10-16T05:36:36.894Z","quote":"관리동에는 관리실, 공용샤워실, 공용화장실, 개수대, 매점이 위치하고 있으며, 고객의 편리함을 최우선으로 설계되어 있습니다."}
 {"cid":"101161","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"101161","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101161","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"101161","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.choihue.com/preview","at":"2026-10-16T01:01:24.422Z","quote":"관리동에는 관리실, 공용샤워실, 공용화장실, 개수대, 매점이 위치하고 있으며, 고객의 편리함을 최우선으로 설계되어 있습니다."}
+{"cid":"101161","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.choihue.com/preview","at":"2026-10-16T05:36:36.894Z","quote":"관리동에는 관리실, 공용샤워실, 공용화장실, 개수대, 매점이 위치하고 있으며, 고객의 편리함을 최우선으로 설계되어 있습니다."}
 {"cid":"101161","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101161","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"101161","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -9715,7 +9738,7 @@
 {"cid":"101206","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101206","attr":"AMENITY_PRIVATE_BBQ","value":true,"grade":"CONFIRMED","src":"gocamping","text":"개별 바비큐장"}
 {"cid":"101206","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"101206","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bn1bu2ffze55bt2gquibh63ie2vwma012d.com/","at":"2026-10-16T01:04:24.380Z","quote":"Wi-Fi"}
+{"cid":"101206","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bn1bu2ffze55bt2gquibh63ie2vwma012d.com/","at":"2026-10-16T05:49:22.360Z","quote":"Wi-Fi"}
 {"cid":"101206","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101207","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"101207","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
@@ -9921,7 +9944,6 @@
 {"cid":"101251","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"101251","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101251","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"101252","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://campvillage.co.kr/","at":"2026-10-15T23:31:02.811Z","quote":"반려견전용 수영장(OPEN)"}
 {"cid":"101252","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"101252","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101252","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
@@ -10081,10 +10103,10 @@
 {"cid":"101302","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101303","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101303","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101307","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.xn--939ak03az9hh4gz2i.com/","at":"2026-10-16T01:09:42.337Z","quote":"실내개수대"}
-{"cid":"101307","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.xn--939ak03az9hh4gz2i.com/","at":"2026-10-16T01:09:42.337Z","quote":"데크존과 파쇄존, 수영장과 카페&매점까지 편안한 캠핑을 준비했습니다."}
+{"cid":"101307","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.xn--939ak03az9hh4gz2i.com/","at":"2026-10-16T05:42:13.843Z","quote":"실내개수대"}
+{"cid":"101307","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.xn--939ak03az9hh4gz2i.com/","at":"2026-10-16T05:42:13.843Z","quote":"데크존과 파쇄존, 수영장과 카페&매점까지 편안한 캠핑을 준비했습니다."}
 {"cid":"101307","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101307","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.xn--939ak03az9hh4gz2i.com/","at":"2026-10-16T01:09:42.337Z","quote":"데크존과 파쇄존, 수영장과 카페&매점까지 편안한 캠핑을 준비했습니다."}
+{"cid":"101307","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.xn--939ak03az9hh4gz2i.com/","at":"2026-10-16T05:42:13.843Z","quote":"데크존과 파쇄존, 수영장과 카페&매점까지 편안한 캠핑을 준비했습니다."}
 {"cid":"101309","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101309","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"101309","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -10268,7 +10290,7 @@
 {"cid":"101360","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101360","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"101360","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101360","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://lakehillcamp.com/reserve.html?id=reserve,%20%EB%84%A4%EC%9D%B4%EB%B2%84(https://naver.me/5b0GDEUm)","at":"2026-10-16T01:01:04.402Z","quote":"WIFI"}
+{"cid":"101360","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://lakehillcamp.com/reserve.html?id=reserve,%20%EB%84%A4%EC%9D%B4%EB%B2%84(https://naver.me/5b0GDEUm)","at":"2026-10-16T05:36:23.273Z","quote":"WIFI"}
 {"cid":"101360","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101361","attr":"AMENITY_LAUNDRY","value":true,"grade":"CONFIRMED","src":"gocamping","text":"화장실 / 샤워실 / 식수대 / 냉장고 / 전자레인지 / 탈수기"}
 {"cid":"101361","attr":"AMENITY_SHARED_FRIDGE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"화장실 / 샤워실 / 식수대 / 냉장고 / 전자레인지 / 탈수기"}
@@ -10308,11 +10330,11 @@
 {"cid":"101368","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"101368","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101368","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"101369","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--py1bs7t49k1pg.com/","at":"2026-10-16T01:09:24.121Z","quote":"온수풀 수영장"}
+{"cid":"101369","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--py1bs7t49k1pg.com/","at":"2026-10-16T05:42:00.801Z","quote":"온수풀 수영장"}
 {"cid":"101369","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"101369","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101369","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
-{"cid":"101369","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--py1bs7t49k1pg.com/","at":"2026-10-16T01:09:24.121Z","quote":"와이파이존"}
+{"cid":"101369","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--py1bs7t49k1pg.com/","at":"2026-10-16T05:42:00.801Z","quote":"와이파이존"}
 {"cid":"101369","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101370","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://jejudnk.com/","at":"2026-10-15T23:28:54.869Z","quote":"데크마다 전기를 쓸 수 있고, 개수대와 온수 샤워장을 갖췄습니다."}
 {"cid":"101370","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
@@ -10374,10 +10396,10 @@
 {"cid":"101383","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101384","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"카페"}
 {"cid":"101384","attr":"AMENITY_KARAOKE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"노래방"}
-{"cid":"101384","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b14h95dtwuvlp59a.com/contents/main.html","at":"2026-10-16T00:58:50.351Z","quote":"사계절 즐길 수 있는 야외수영장에서 물놀이를 즐기고 밤에는 불멍과 함께 맛있는 바비큐까지,"}
+{"cid":"101384","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b14h95dtwuvlp59a.com/contents/main.html","at":"2026-10-16T05:34:57.674Z","quote":"사계절 즐길 수 있는 야외수영장에서 물놀이를 즐기고 밤에는 불멍과 함께 맛있는 바비큐까지,"}
 {"cid":"101384","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"101384","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101384","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b14h95dtwuvlp59a.com/contents/main.html","at":"2026-10-16T00:58:50.351Z","quote":"+ 매점"}
+{"cid":"101384","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b14h95dtwuvlp59a.com/contents/main.html","at":"2026-10-16T05:34:57.674Z","quote":"+ 매점"}
 {"cid":"101384","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101384","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"101384","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -10546,10 +10568,12 @@
 {"cid":"101425","attr":"AMENITY_BBQ","value":true,"grade":"CONFIRMED","src":"gocamping","text":"개별바비큐시설"}
 {"cid":"101425","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"101425","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101425","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://thestyle-glamping.co.kr/thestyle-glamping","at":"2026-10-16T05:47:00.936Z","quote":"자연 속 야외 수영장에서 즐거운 추억 가져가세요!"}
 {"cid":"101425","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"101425","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101425","attr":"AMENITY_PRIVATE_BBQ","value":true,"grade":"CONFIRMED","src":"gocamping","text":"개별바비큐시설"}
 {"cid":"101425","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
+{"cid":"101425","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://thestyle-glamping.co.kr/thestyle-glamping","at":"2026-10-16T05:47:00.936Z","quote":"펜션에서 직접 운영중인 매점이 있어 필요하신 물품을 편리하게 구매하실 수 있습니다."}
 {"cid":"101425","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101425","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"101425","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -10870,6 +10894,7 @@
 {"cid":"101534","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"카페"}
 {"cid":"101534","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101535","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101536","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--qz2b0zc8k0wgbkr.jdweb.kr/bbs/board.php?bo_table=view","at":"2026-10-16T05:52:30.457Z","quote":"넓고 깨끗한 대형수영장이 준비되어 있습니다."}
 {"cid":"101536","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101538","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"101538","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -11042,6 +11067,7 @@
 {"cid":"101609","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101609","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"101609","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101609","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://pscamp.hana-pnc.co.kr/page_LZol15","at":"2026-10-16T05:52:19.271Z","quote":"전구역 '와이파이' 가능합니다"}
 {"cid":"101609","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101610","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101610","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
@@ -11242,8 +11268,8 @@
 {"cid":"101669","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101669","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101671","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101672","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://dalmadang.com/","at":"2026-10-16T01:04:57.169Z","quote":"야외개수대 외"}
-{"cid":"101672","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://dalmadang.com/pages/","at":"2026-10-16T01:04:57.169Z","quote":"* 풀빌라 이용 고객 한정 무료로 이용 가능합니다.(수영장은 공용)"}
+{"cid":"101672","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://dalmadang.com/","at":"2026-10-16T05:50:20.324Z","quote":"야외개수대 외"}
+{"cid":"101672","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://dalmadang.com/pages/","at":"2026-10-16T05:50:20.324Z","quote":"* 풀빌라 이용 고객 한정 무료로 이용 가능합니다.(수영장은 공용)"}
 {"cid":"101672","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"101672","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101672","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
@@ -11338,8 +11364,8 @@
 {"cid":"101728","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"101728","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101728","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"101729","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://glam365.co.kr/contents/reserve1.html","at":"2026-10-16T00:59:09.008Z","quote":"공용시설(개수대·샤워실·화장실 등)은 깨끗하게 사용해 주세요."}
-{"cid":"101729","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://glam365.co.kr/contents/main.html","at":"2026-10-16T00:59:09.008Z","quote":"글램365은 프라이빗한 공간에서 자연을 느끼며 휴식을 취할 수 있으며 이국적인 풍경의 수영장은 여행의 시작을 더욱 특별하게 만들어줍니다."}
+{"cid":"101729","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://glam365.co.kr/contents/reserve1.html","at":"2026-10-16T05:35:06.467Z","quote":"공용시설(개수대·샤워실·화장실 등)은 깨끗하게 사용해 주세요."}
+{"cid":"101729","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://glam365.co.kr/contents/main.html","at":"2026-10-16T05:35:06.467Z","quote":"이국적인 풍경의 수영장은 여행의 시작을 더욱 특별하게 만들어줍니다."}
 {"cid":"101729","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"101729","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101729","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
@@ -11390,10 +11416,14 @@
 {"cid":"101751","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101753","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101754","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101756","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.stayfun.co.kr/5-2.htm","at":"2026-10-16T05:43:33.824Z","quote":"※ 퇴실 시 집기류는 설거지 후 다음 분들을 위해 꼭 정리해 주시기 바랍니다."}
+{"cid":"101756","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.stayfun.co.kr/1-1.htm","at":"2026-10-16T05:43:33.824Z","quote":"글램핑, 어린이 놀이터, 어린이풀, 성인풀, 바베큐, 불멍을 즐기시면서"}
 {"cid":"101756","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"101756","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101756","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.stayfun.co.kr/5-2.htm","at":"2026-10-16T05:43:33.824Z","quote":"※ 불멍은 매너타임에 맞춰 불을 꺼야 하고, 수영장 이용은 불가하다는 점 알려드립니다."}
 {"cid":"101756","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"101756","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101756","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.stayfun.co.kr/","at":"2026-10-16T05:43:33.824Z","quote":"관리동(매점)"}
 {"cid":"101756","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101756","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101758","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -11421,7 +11451,7 @@
 {"cid":"101763","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"101763","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101764","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"101766","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.glamforet.com/contents/main.html","at":"2026-10-16T00:59:34.229Z","quote":"이국적인 풍경의 수영장은 여행의 시작을 더욱 특별하게 만들어줍니다."}
+{"cid":"101766","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.glamforet.com/contents/main.html","at":"2026-10-16T05:35:28.615Z","quote":"이국적인 풍경의 수영장은 여행의 시작을 더욱 특별하게 만들어줍니다."}
 {"cid":"101766","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101766","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101767","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -11565,7 +11595,7 @@
 {"cid":"101839","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"101839","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101839","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"101840","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.fermatapark.com/","at":"2026-10-16T00:59:16.896Z","quote":"페르마타,펜션,글램핑,단체,수영장,가평,청평 | 기업 워크숍 펜션"}
+{"cid":"101840","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.fermatapark.com/","at":"2026-10-16T05:35:12.742Z","quote":"페르마타,펜션,글램핑,단체,수영장,가평,청평 | 기업 워크숍 펜션"}
 {"cid":"101840","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"101840","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101840","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
@@ -11601,7 +11631,7 @@
 {"cid":"101849","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101849","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101850","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101850","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.gusipo-glamping.com/","at":"2026-10-16T00:59:36.912Z","quote":"🏊 프라이빗 수영장"}
+{"cid":"101850","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.gusipo-glamping.com/","at":"2026-10-16T05:46:36.175Z","quote":"🏊 프라이빗 수영장"}
 {"cid":"101850","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101850","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101850","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
@@ -11752,9 +11782,9 @@
 {"cid":"101930","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101932","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"101932","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101932","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--m01b77bd5fca25p510ashleka172c.com/","at":"2026-10-16T00:59:54.392Z","quote":"수영장 4월 25일 부터"}
+{"cid":"101932","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--m01b77bd5fca25p510ashleka172c.com/","at":"2026-10-16T05:35:39.088Z","quote":"수영장 4월 25일 부터"}
 {"cid":"101932","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101932","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--m01b77bd5fca25p510ashleka172c.com/","at":"2026-10-16T00:59:54.392Z","quote":"와이파이"}
+{"cid":"101932","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--m01b77bd5fca25p510ashleka172c.com/","at":"2026-10-16T05:35:39.088Z","quote":"와이파이"}
 {"cid":"101932","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101933","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101933","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -11766,7 +11796,7 @@
 {"cid":"101937","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"101937","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101937","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"101938","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://campneverland.com/","at":"2026-10-16T00:55:52.779Z","quote":"실내 개수대"}
+{"cid":"101938","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://campneverland.com/","at":"2026-10-16T05:43:36.250Z","quote":"실내 개수대"}
 {"cid":"101938","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101939","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101939","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
@@ -11843,7 +11873,7 @@
 {"cid":"101973","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"101973","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101973","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"101974","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://bcampplace.gp114.net/contents/main.html","at":"2026-10-16T01:02:43.003Z","quote":"매점&관리실&화장실"}
+{"cid":"101974","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://bcampplace.gp114.net/contents/main.html","at":"2026-10-16T05:37:26.750Z","quote":"매점&관리실&화장실"}
 {"cid":"101975","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101976","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101976","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -11859,7 +11889,7 @@
 {"cid":"101977","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
 {"cid":"101977","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101977","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"101978","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.snowpeak.co.kr/campfield","at":"2026-10-16T00:59:58.055Z","quote":"화장실과 샤워실, 개수대를 이용할 수 있는 건물입니다."}
+{"cid":"101978","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.snowpeak.co.kr/campfield","at":"2026-10-16T05:46:45.764Z","quote":"화장실과 샤워실, 개수대를 이용할 수 있는 건물입니다."}
 {"cid":"101978","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101978","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"101978","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -11879,13 +11909,13 @@
 {"cid":"101984","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"101984","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101987","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101988","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.farmstayresort.co.kr/","at":"2026-10-16T01:02:35.740Z","quote":"야외 수영장"}
+{"cid":"101988","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.farmstayresort.co.kr/","at":"2026-10-16T05:37:25.864Z","quote":"야외 수영장"}
 {"cid":"101988","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"101988","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101988","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
-{"cid":"101988","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.farmstayresort.co.kr/about.html","at":"2026-10-16T01:02:35.740Z","quote":"7,000여 평의 공간에 카페, 레스토랑, 편의점, 야외 수영장, 인공 폭포, 양어장 등을 갖추고 있으며,"}
+{"cid":"101988","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.farmstayresort.co.kr/about.html","at":"2026-10-16T05:37:25.864Z","quote":"7,000여 평의 공간에 카페, 레스토랑, 편의점, 야외 수영장, 인공 폭포, 양어장 등을 갖추고 있으며,"}
 {"cid":"101988","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
-{"cid":"101988","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.farmstayresort.co.kr/","at":"2026-10-16T01:02:35.740Z","quote":"와이파이"}
+{"cid":"101988","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.farmstayresort.co.kr/","at":"2026-10-16T05:37:25.864Z","quote":"와이파이"}
 {"cid":"101988","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101990","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101991","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}

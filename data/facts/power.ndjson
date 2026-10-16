@@ -175,7 +175,7 @@
 {"cid":"919","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"922","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"923","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"923","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1by4vdqp.com/?page_id=727","at":"2026-10-16T01:07:32.985Z","quote":"과도한 전기 사용금지 (1사이트당 600W 이상사용금지 야영장 법의거)","text":"최대 600W"}
+{"cid":"923","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1by4vdqp.com/?page_id=727","at":"2026-10-16T05:40:14.973Z","quote":"과도한 전기 사용금지 (1사이트당 600W 이상사용금지 야영장 법의거)","text":"최대 600W"}
 {"cid":"930","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"931","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"936","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -883,7 +883,7 @@
 {"cid":"7879","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7880","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7883","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7883","attr":"POWER_MAX_W","value":1000,"grade":"OPERATOR","src":"operator_homepage","url":"http://gwp.hana-pnc.co.kr/page_FDhn44?ckattempt=1","at":"2026-10-16T01:12:20.431Z","quote":"사이트당 전기사용은 1KW를 초과하여 사용이 불가능합니다.","text":"최대 1000W"}
+{"cid":"7883","attr":"POWER_MAX_W","value":1000,"grade":"OPERATOR","src":"operator_homepage","url":"http://gwp.hana-pnc.co.kr/page_FDhn44","at":"2026-10-16T05:45:05.964Z","quote":"사이트당 전기사용은 1KW를 초과하여 사용이 불가능합니다.","text":"최대 1000W"}
 {"cid":"7886","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7893","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7894","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1352,7 +1352,7 @@
 {"cid":"100603","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100604","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100606","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100606","attr":"POWER_MAX_W","value":1300,"grade":"OPERATOR","src":"operator_homepage","url":"https://sannae.kr/rule","at":"2026-10-16T01:10:17.440Z","quote":"전력: 1300W, 추가 전력 불가","text":"최대 1300W"}
+{"cid":"100606","attr":"POWER_MAX_W","value":1300,"grade":"OPERATOR","src":"operator_homepage","url":"https://sannae.kr/rule","at":"2026-10-16T05:43:03.360Z","quote":"전력: 1300W, 추가 전력 불가","text":"최대 1300W"}
 {"cid":"100607","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100608","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100609","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1839,7 +1839,7 @@
 {"cid":"101230","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101231","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101232","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101232","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bb0bk79aj0j67b2ui.jdweb.kr/sub2.php?num=2_1&ckattempt=1","at":"2026-10-16T01:07:50.659Z","quote":"전기사용 총 용량은 600W이하입니다.","text":"최대 600W"}
+{"cid":"101232","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bb0bk79aj0j67b2ui.jdweb.kr/sub2.php?num=2_1","at":"2026-10-16T05:40:23.879Z","quote":"전기사용 총 용량은 600W이하입니다.","text":"최대 600W"}
 {"cid":"101233","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101234","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101236","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}

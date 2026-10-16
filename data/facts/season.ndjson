@@ -3947,7 +3947,7 @@
 {"cid":"6968","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6968","attr":"OPEN_WINTER","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6968","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"6968","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_homepage","url":"http://www.danyangcamping.com/bbs/notice","at":"2026-10-16T01:00:51.508Z","quote":"2023년 동계 휴장 안내"}
+{"cid":"6968","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_homepage","url":"http://www.danyangcamping.com/bbs/notice","at":"2026-10-16T05:36:14.634Z","quote":"2023년 동계 휴장 안내"}
 {"cid":"6970","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6971","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6971","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
@@ -4599,7 +4599,7 @@
 {"cid":"7353","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7353","attr":"OPEN_WINTER","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7353","attr":"OPERATING_STATUS","value":"PAUSED","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7353","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_homepage","url":"https://cms.wfmc.kr/web/lay1/S1T155C194/contents.do","at":"2026-10-16T01:06:44.389Z","quote":"2024년 7월~8월 휴장"}
+{"cid":"7353","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_homepage","url":"https://cms.wfmc.kr/web/lay1/S1T155C194/contents.do","at":"2026-10-16T05:39:31.131Z","quote":"2024년 7월~8월 휴장"}
 {"cid":"7357","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7359","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7359","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
@@ -4936,7 +4936,7 @@
 {"cid":"7590","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7590","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7590","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7590","attr":"YEAR_ROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.hopecamping.co.kr/intro/introduce.php","at":"2026-10-16T01:04:10.056Z","quote":"운영기간 연중 무휴 (봄"}
+{"cid":"7590","attr":"YEAR_ROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.hopecamping.co.kr/intro/introduce.php","at":"2026-10-16T05:38:18.083Z","quote":"운영기간 연중 무휴 (봄"}
 {"cid":"7591","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7591","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7591","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8902,6 +8902,7 @@
 {"cid":"100711","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100711","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100711","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100711","attr":"YEAR_ROUND","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://luzern365.kr/reservation.html","at":"2026-10-16T05:46:03.551Z","quote":"※ 운영 기간: 사계절 운영"}
 {"cid":"100712","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100712","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100712","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}

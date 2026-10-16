@@ -7,7 +7,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { DISCOVERY_VERSION, hasOperatorSite, homepageCandidates, kakaoGet, localUrl, matchPlace, pickHomepages, webUrl } from "../lib/kakao-discovery.mjs";
+import { DISCOVERY_VERSION, hasOperatorSite, homepageCandidates, kakaoGet, localUrl, looksLikeArticle, ARTICLE_TITLE, matchPlace, pickHomepages, webUrl } from "../lib/kakao-discovery.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const arg = (k, d) => { const i = process.argv.indexOf(`--${k}`); return i > 0 ? process.argv[i + 1] : d; };
@@ -19,7 +19,9 @@ const key = process.env.KAKAO_REST_API_KEY;
 const outPath = join(root, "pipeline/registry/kakao-places.json");
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-if (!key) { console.log("::warning title=카카오 발굴 건너뜀::KAKAO_REST_API_KEY 없음"); process.exit(0); }
+// --repick: API를 부르지 않고 저장된 후보에 현재 거르기 규칙(looksLikeArticle)을 다시 적용해 홈페이지를 다시 고른다.
+const REPICK = process.argv.includes("--repick");
+if (!key && !REPICK) { console.log("::warning title=카카오 발굴 건너뜀::KAKAO_REST_API_KEY 없음"); process.exit(0); }
 
 const camps = JSON.parse(readFileSync(join(root, "camping-atlas/public/explore/data/campgrounds.json"), "utf8"));
 const sitesPath = join(root, "pipeline/registry/operator-site-snippets.json");
@@ -82,6 +84,13 @@ function save() {
   writeFileSync(outPath, `${JSON.stringify(out, null, 1)}\n`);
 }
 
+if (REPICK) {
+  for (const r of Object.values(store)) r.candidates = (r.candidates ?? []).filter((e) => !looksLikeArticle(e.url) && !(e.evidence ?? []).every((x) => ARTICLE_TITLE.test(x.title ?? "")));
+  save();
+  const all = Object.values(store);
+  console.log(`다시 고름: 홈페이지 ${all.filter((r) => r.homepage).length}/${all.filter((r) => r.needs_homepage).length}`);
+  process.exit(0);
+}
 console.log(`카카오 발굴 대상 ${queue.length}곳(홈페이지 찾기 ${queue.filter(needsHomepage).length}) · 호출 상한 ${MAX_CALLS}`);
 await Promise.all(Array.from({ length: CONC }, worker));
 save();
