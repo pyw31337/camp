@@ -56,6 +56,12 @@ jobs:
         run: |
           npm run build:explore
           cd .. && node scripts/publish-explorer-pages.mjs
+      - name: Sync intelligence to Supabase PostgreSQL
+        continue-on-error: true
+        run: npm run db:import-supabase
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_SSL: ${{ secrets.DATABASE_SSL || 'true' }}
       - name: Commit and push refreshed review intelligence
         run: |
           git config user.name "moyeora-camping-data-bot"
