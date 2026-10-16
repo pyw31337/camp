@@ -1,6 +1,6 @@
 # 인수인계
 
-> 최종 갱신: 2026-10-16 KST<br>
+> 최종 갱신: 2026-10-16 KST(저녁)<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
 
 ## 현재 상태
@@ -22,6 +22,22 @@
 - 파일럿 입력 계약(2026-10-15): Codex는 화면·DB 구현과 겹치지 않도록 `docs/PILOT_INTAKE_CONTRACT.md`에 원천 승인 카드, 운영자 조건표 범위, 증빙·검수 규칙, 빈자리 관측 제출 계약을 작성했다. 제미나이/다른 구현자는 이 계약의 상태명·필드 코드를 기준으로 하되, 해당 문서 자체를 DB 스키마로 간주하거나 허가 없는 플랫폼 수집을 추가하지 않는다.
 - 전국 조건 전수조사 완료(2026-10-15, Gemini): 관광진흥법 야영장 안전기준 및 고캠핑 공식 등록값·소개글을 바탕으로 전국 3,116곳 전수조사 엔진(`survey-extractor.mjs`)을 구축하고, 텐트 옆 주차 1,288곳, 600W/고전력 2,114곳, 불멍 2,420곳, 위생 1,688곳, 키즈 2,174곳 데이터를 카탈로그와 탐색 UI에 일괄 반영했다.
 - **조건 품질 경계 보강(2026-10-15, Codex)**: 전국 전수 추출의 `SURVEYED` 값은 소개글·시설 분류에서 나온 발견 신호이며, 직접 원문 대조 파일럿의 `VERIFIED`와 등급이 다르다. 내 캠핑 세팅의 전력 W·텐트 옆 주차·장작 불멍은 `VERIFIED` 조건표가 있을 때만 `MATCH`/`MISMATCH`를 낸다. 고캠핑의 구조화된 사이트 규격은 별도 직접 등록값으로 계속 비교할 수 있다. 자세한 계약은 `PILOT_INTAKE_CONTRACT.md` 2.1절이다.
+
+## 사실 저장소 + 카카오 발굴 (2026-10-16 저녁, Claude) — 데이터 작업자는 먼저 읽을 것
+
+소유자 요청: “데이터를 잘게 나눠, 취향·조건에 따라 조합해 보여 줄 수 있게. 여러 에이전트가 DB에 접근해 쓰기 좋게.” / “카카오 키를 넣었으니 홈페이지 없는 곳을 채우고, 비상업·오픈소스이니 플랫폼 정보도 최대한 모을 것.”
+
+1. **원자 사실 저장소**(`docs/FACT_STORE.md`): 속성 사전 `pipeline/registry/attribute-dictionary.json`(125개, 19묶음) → `lib/fact-store.mjs` → `data/facts/{group}.ndjson`(사실 1건 1행, 충돌 포함) + `campgrounds.ndjson` + `attributes.json`(커버리지) + `manifest.json`. SQLite는 `npm run facts:sqlite`(커밋 안 함), Postgres는 `db/010_campground_fact_store.sql` + `npm run db:import-facts`(트랜잭션 통째 재적재). 첫 생성: 사실 92,653건(VERIFIED 144 · OPERATOR 1,500 · CONFIRMED 79,740 · MENTION 11,269).
+2. **조건 조합 조회**: `lib/fact-query.mjs`(`matchCampgrounds`·`resolveFact`·`PRESETS` 17개), CLI `scripts/query-facts.mjs`. 결과마다 맞은 조건의 근거(원천·URL·문장), 확인필요, 어긋남을 돌려준다. strict는 CONFIRMED 이상, lenient는 후기 언급도 쓰되 등급 표시.
+3. **카카오 공식 API 발굴**(`docs/KAKAO_DISCOVERY.md`): `scripts/discover-kakao.mjs`가 로컬 키워드로 장소 맞춤(전화·분류·카카오맵 링크), Daum 웹 검색으로 홈페이지 없는·죽은 2,503곳의 운영자 홈페이지 후보를 찾아 `registry/kakao-places.json`에 쓴다. `operator-sites.yml` 첫 단계(비밀값 `KAKAO_REST_API_KEY`)이며, 발굴 홈페이지는 같은 실행의 크롤러 시작 주소가 된다. **이 컨테이너엔 키가 없어 아직 한 번도 실행하지 않았다** — 워크플로 수동 실행 뒤 `kakao-places.json`이 생긴다.
+4. **수집 범위 판단**: 카카오맵 장소 페이지·네이버 지도·캠핏 robots.txt가 ClaudeBot 등 AI 크롤러를 이름으로 지정해 전체 차단한다(2026-10-16 확인). 일반 UA 우회는 하지 않고 공식 API로 대신했다. 땡큐캠핑 robots는 403, 캠핑톡(campingtalk.me)은 일반 봇 허용 — 다음 후보(PROJECT_PLAN 결정 대기).
+5. **추출 보정**: spec-extractor가 “반려동물 동반 가능 여부”(제목·질문)를 허용으로 읽던 것을 막고, “A사이트 외 동반 금지”는 `ZONE_ONLY`(지정 구역만)로 분리. `review-digest`는 주제 전체 건수·근거 글 주소(`all`·`samples`)도 돌려준다(화면용 `pros`·`cons`는 그대로).
+
+**검증(2026-10-16)**: `pipeline` 테스트 224 통과·0 실패(+ 신규 kakao-discovery 4·fact-store 5·fact-query 5). 로컬 PostgreSQL 16에서 `db:migrate`(010 적용) → `import-facts-postgres` 두 번 → 92,653행·동일 결과, `campground_fact_best` 조회 확인. SQLite `fact_best` 조합 조회 확인. 워크플로 YAML 구문 확인. 카카오 발굴은 키가 없어 실행 못 함(단위 테스트만). 화면(design/·camping-atlas/app/)은 Codex 작업 영역이라 건드리지 않았다.
+
+**충돌 주의**: `data/facts/`는 생성물이다 — 손으로 고치지 말고 사전·`fact-store.mjs`를 고친다. `spec-extractor.mjs`의 반려동물 규칙, `review-digest.mjs` 반환값을 바꿨다.
+
+**다음 작업**: (a) `Operator homepage facts` 워크플로 수동 실행 → 발굴 결과 확인·오탐 호스트 `NOT_OPERATOR` 보강, (b) 화면(Codex)이 `data/facts` 또는 프로필로 취향 조합 필터 연결, (c) 캠핑톡 등 일반 봇 허용 예약 사이트를 원천 카드로 검토, (d) 운영자 문장 추출 속성 확대(사이트 규격·바닥·매너타임 수치).
 
 ## Vision 01 시안 (2026-10-16)
 
