@@ -246,3 +246,17 @@ h1, h2, h3, .card-title h3, .dv-glass h2 { word-break: keep-all; text-wrap: bala
 .oc-item-del:hover { color: #dc2626; background: #fee2e2; }
 .oc-empty { padding: 24px; text-align: center; color: var(--mc-ink-2); font-size: 0.875rem; background: #fff; border-radius: var(--mc-r-2); border: 1px dashed var(--mc-soft-2); }
 
+/* ---------- 주변 장보기 & 비상 편의 (인허가 기반) ---------- */
+.nl-line { display: flex; align-items: center; gap: 5px; margin-top: 4px; font-size: var(--fs-xs); color: var(--mc-ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nl-line .i { width: 13px; height: 13px; flex: none; color: #0284c7; }
+.dv-nl-overview { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--mc-r-2); padding: 14px 16px; margin-bottom: 16px; }
+.nl-overview-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+.nl-overview-title { display: flex; align-items: center; gap: 6px; font-size: 0.875rem; color: var(--mc-ink); font-weight: 800; }
+.nl-overview-title .i { color: #0284c7; }
+.nl-overview-trust { font-size: 0.6875rem; color: var(--mc-ink-3); background: #f1f5f9; padding: 2px 8px; border-radius: 999px; }
+.nl-chips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+.nl-chip { display: flex; flex-direction: column; background: #fff; border: 1px solid #e2e8f0; border-radius: var(--mc-r-1); padding: 8px 10px; gap: 2px; }
+.nl-chip .nl-lbl { font-size: 0.6875rem; font-weight: 700; color: #64748b; }
+.nl-chip b { font-size: 0.8125rem; font-weight: 700; color: var(--mc-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nl-chip strong { font-size: 0.8125rem; font-weight: 800; color: #0284c7; align-self: flex-end; }
+

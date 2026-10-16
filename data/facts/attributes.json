@@ -2001,6 +2001,134 @@
    }
   },
   {
+   "code": "REVIEW_PRO_VALUE_FOR_MONEY",
+   "group": "review",
+   "label": "후기: 가성비 좋음",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "가성비 좋음",
+   "pref": "‘가성비 좋음’ 평이 중요한가요?",
+   "coverage": {
+    "campgrounds": 65,
+    "by_grade": {
+     "MENTION": 65
+    }
+   }
+  },
+  {
+   "code": "REVIEW_PRO_CLEAN_FACILITY",
+   "group": "review",
+   "label": "후기: 시설 깔끔·쾌적",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "시설 깔끔·쾌적",
+   "pref": "‘시설 깔끔·쾌적’ 평이 중요한가요?",
+   "coverage": {
+    "campgrounds": 318,
+    "by_grade": {
+     "MENTION": 318
+    }
+   }
+  },
+  {
+   "code": "REVIEW_PRO_BBQ_FIRE",
+   "group": "review",
+   "label": "후기: 바베큐·불멍 힐링",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "바베큐·불멍 힐링",
+   "pref": "‘바베큐·불멍 힐링’ 평이 중요한가요?",
+   "coverage": {
+    "campgrounds": 99,
+    "by_grade": {
+     "MENTION": 99
+    }
+   }
+  },
+  {
+   "code": "REVIEW_PRO_ACCESSIBILITY",
+   "group": "review",
+   "label": "후기: 접근성 좋음",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "접근성 좋음",
+   "pref": "‘접근성 좋음’ 평이 중요한가요?",
+   "coverage": {
+    "campgrounds": 188,
+    "by_grade": {
+     "MENTION": 188
+    }
+   }
+  },
+  {
+   "code": "REVIEW_PRO_HEALING_NATURE",
+   "group": "review",
+   "label": "후기: 힐링·자연 감성",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "힐링·자연 감성",
+   "pref": "‘힐링·자연 감성’ 평이 중요한가요?",
+   "coverage": {
+    "campgrounds": 180,
+    "by_grade": {
+     "MENTION": 180
+    }
+   }
+  },
+  {
+   "code": "REVIEW_PRO_PET_FRIENDLY",
+   "group": "review",
+   "label": "후기: 반려견 동반 편함",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "반려견 동반 편함",
+   "pref": "‘반려견 동반 편함’ 평이 중요한가요?",
+   "coverage": {
+    "campgrounds": 526,
+    "by_grade": {
+     "MENTION": 526
+    }
+   }
+  },
+  {
+   "code": "REVIEW_CON_OLD_FACILITY",
+   "group": "review",
+   "label": "후기: 노후된 시설",
+   "type": "count",
+   "unit": "건",
+   "filter": "max",
+   "review_label": "노후된 시설",
+   "pref": "‘노후된 시설’은(는) 피하고 싶나요?",
+   "coverage": {
+    "campgrounds": 6,
+    "by_grade": {
+     "MENTION": 6
+    }
+   }
+  },
+  {
+   "code": "REVIEW_CON_HARD_BOOKING",
+   "group": "review",
+   "label": "후기: 예약 치열",
+   "type": "count",
+   "unit": "건",
+   "filter": "max",
+   "review_label": "예약 치열",
+   "pref": "‘예약 치열’은(는) 피하고 싶나요?",
+   "coverage": {
+    "campgrounds": 34,
+    "by_grade": {
+     "MENTION": 34
+    }
+   }
+  },
+  {
    "code": "REVIEW_COUNT",
    "group": "review",
    "label": "요약에 쓴 후기 수",
@@ -2125,5 +2253,5 @@
    }
   }
  ],
- "generated_at": "2026-10-16T07:14:38.050Z"
+ "generated_at": "2026-10-16T07:16:31.353Z"
 }

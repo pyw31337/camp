@@ -335,6 +335,8 @@ jobs:
           node pipeline/scripts/build-spec-sheet.mjs
           # 후기 요약에서 장점·단점 한 줄(건수 포함)을 만들고, 홈 썸네일(featured.json)에 배지·장단점을 붙인다.
           node pipeline/scripts/build-review-digest.mjs
+          # 주변 인허가 데이터(편의점·마트·정육점·주유소·약국·동물병원)를 카탈로그와 상세에 반영한다.
+          node pipeline/scripts/build-nearby-facts.mjs
           # 모든 원천을 18개 항목 프로필로 합치고, 확인된 값만으로 한 줄 요약·분류 태그를 만든다.
           node pipeline/scripts/build-campground-profiles.mjs
           # 모든 원천을 (캠핑장·속성·값·등급·원천·근거) 원자 사실로 풀어 묶음별 NDJSON(data/facts)으로 쓴다. 여러 에이전트의 공유 원장.
