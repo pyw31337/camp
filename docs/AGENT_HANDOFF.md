@@ -77,6 +77,14 @@ main 반영 완료: PR #17·#18·#19·#21·#23 + Gemini b4111755(주변 인프�
 - [ ] 상가(상권)정보 API로 철물점·캠핑용품점 보강.
 - [ ] 읽기 실패 493곳 중 네이버 운영자 링크가 있는 곳 우선 재시도.
 
+## 리뉴얼 시안 A·B·C (2026-10-16, Claude) — 화면 작업자 필독
+
+- 소유자 요청: “Codex 시안의 좋은 점 + Claude v4.2 디자인 기반으로 리뉴얼 시안 몇 개”. 결과는 **https://pyw31337.github.io/camp/renewal/** (`?v=a|b|c`, 헤더에서 전환). 기획·데이터 매핑·실무 제안: `docs/RENEWAL_PLAN.md`.
+- 파일: `design/renewal/`(소스) → `node scripts/publish-renewal-mockup.mjs` → `camping-atlas/public/renewal/`(생성물). 카드 사진 색인 `node scripts/build-renewal-data.mjs` → `design/renewal/data/photos.json`(2,376곳·10,671장, gzip 약 210KB). `/vision/`(Codex)·`/explore/`(현재 서비스)는 손대지 않았다.
+- 화면: 메인(키워드·테마·지도 3모드, 주황·라임·블루 빠른 조건, 곧 오픈, 균등 그리드) · 카드(공식 사진 5장 스와이프/드래그, 01 주차·02 전기·03 장작) · 상세(큰 이름, 아고다식 사진, 규격 타일, 내 장비 판정, 이용 정보 회색 ‘확인필요’, 가는 길에, 후기, 예약 카드) · 비교(3곳, 다른 점 강조) · 지도(Leaflet + OSM 타일, 묶음 원·값 핀, 모바일 하단 카드 레일).
+- 검증: `node --check`(app.js·두 스크립트) 통과. Playwright로 A·B·C 데스크톱(1440)·모바일(390)의 메인·상세·비교·지도 확인 — 콘솔 오류 0, 가로 넘침 0, 문서 외 세로 스크롤 0(지도 화면만 목록 하나). CARTO 타일이 키를 요구해 OSM으로 바꿈. `npm run build:pages` 통과(`dist/client/renewal` 생성), `npm run lint` 오류 0(renewal 경고 0, 기존 경고 2).
+- 다음: 소유자가 시안을 고르면 `design/explore/`로 토큰·배지 → 카드 → 상세 → 비교 → 지도 순서로 이식. 카드 사진 4장 추가 자체 호스팅(`sync-images.mjs`)과 주차 방식 보강이 먼저 필요(`RENEWAL_PLAN.md` 5장).
+
 ## operator-sites 2차 실행 결과 + 워크플로 커밋 순서 수정 (2026-10-16 오후, Claude)
 
 - 실행 38859125635(카카오는 신선해서 건너뜀, 네이버 HUB 지역 검색 전수): **네이버 맞춤 2,653/3,116곳, 그중 운영자 홈페이지 링크 908곳**. 사실 저장소 `naver_local` 행 2,036개(HOMEPAGE·PHONE, CONFIRMED).
