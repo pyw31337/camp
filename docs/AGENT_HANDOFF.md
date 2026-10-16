@@ -73,6 +73,49 @@ Codex(토큰 만료)·Gemini 작업이 멈춘 뒤 Claude가 이어받았다. PR:
 
 **다음**: (a) 배포 주소에서 지도 핀·미리보기 확인, (b) OPERATOR 값 중 W·주차·장작을 파일럿 검수로 VERIFIED 승격, (c) 홈페이지 접속 실패 452곳 갱신 요청, (d) 평점 원천 결정(Google Places 키 여부).
 
+## data.go.kr 8대 공공데이터(화장실·야영) 연계 정규화 및 탐색 UI/UX 고도화 (2026-10-16, Gemini)
+
+사용자 피드백 지침: “비상업적/무료운영/개인프로젝트/오픈소스이니까 공공데이터포털(data.go.kr)의 화장실 4종(FILE/API/STD/LINKED) 및 야영 4종(FILE/API/STD/LINKED) 데이터를 전수 연계하고, 예약은 캠핏 우선/네이버 예약 차순위, 주변 POI 썸네일 및 로드뷰 연결, 플랫폼별 허브(유튜브 즉시 재생 등), AI 정보량 세로형 후기 카드, 고해상도 라이트박스 및 중복 제거 알고리즘을 고도화해 줘.”
+
+1. **공공데이터포털 8대 유형(야영 4종 + 화장실 4종) 전수 연계 파이프라인**:
+   - **야영장 (FILE, API, STD, LINKED)**:
+     - **STD (전국야영장표준데이터)**: 행안부/문체부 `tn_pubr_public_campg_api` 정규화 (`pipeline/lib/standard-campgrounds.mjs`). 총 사이트 면수, 카라반/글램핑/오토/일반텐트 수량, 부지면적(㎡), 주차가능대수, 화로대 허용 여부 파싱.
+     - **LINKED (한국임업진흥원 전국 캠핑장 95689)**: 산림빅데이터 연계로부터 주요 식생수종(편백, 잣나무 등), 둘레길/등산로, 인접 계곡·수계, 산림환경(`d.nature`) 정규화.
+     - **API (한국관광공사 고캠핑 & 서울 공공예약)**: `gocamping`, TourAPI `detailInfo2`/`detailImage2`, 서울 공공서비스예약 실시간 접수 API 결합.
+     - **FILE (지자체별 인허가 CSV/XLSX)**: `localdata-campgrounds.mjs`를 통한 인허가 대조 및 폐업 여부/안전시설 교차 검증.
+     - **러너 & 빌드 통합**: `pipeline/scripts/sync-standard-campgrounds.mjs` (`npm run sync:standard-campgrounds`)로 표준데이터와 고캠핑 카탈로그 1:1 매칭 (`out/standard-campgrounds.json`), `pipeline/scripts/build-explore-data.mjs`에서 `r.specs`, `d.std_specs`, `d.nature` 주입.
+   - **공중화장실 (FILE, API, STD, LINKED)**:
+     - **STD (전국공중화장실표준데이터)**: 행안부 `tn_pubr_public_toilet_api` 영문·한글 스키마 정규화 (`pipeline/lib/toilets.mjs`).
+     - **API (지자체 개방화장실 REST API)**: 서울 `SearchPublicToiletPOIService`, 경기 데이터드림 `Publtolt`, 부산 등 다양한 API의 좌표 및 컬럼명(`cot_conts_name`, `REFINE_WGS84_LAT` 등) 지원.
+     - **FILE (지자체별 공중화장실 CSV)**: EUC-KR/UTF-8 자동 감지 및 비상벨·CCTV·기저귀 교환대 유무 정규화.
+     - **LINKED (LOCALDATA 연계)**: EPSG:5174 좌표 변환 및 OSM 중복 클러스터링 정리.
+2. **모던 UI/UX 프론트엔드 기능 고도화 (`design/explore/_app.js`, `_page.css`)**:
+   - **예약 CTA 3단계 채널 우선순위**:
+     - 1순위: 캠핏 (`camfit`) → 메인 Primary 버튼.
+     - 2순위: 네이버 예약 (`naver`) → 보조 링크 바로가기.
+     - 3순위: 전화/현장 문의 (온라인 채널 부재 시 폴백).
+   - **주변 POI 썸네일 & 카카오맵 로드뷰 원클릭 연결**:
+     - 마트, 편의점, 주유소, 약국, 병원 등 주변 편의시설 카드에 썸네일 렌더링.
+     - "로드뷰" 버튼 클릭 시 카카오맵 로드뷰(`map.kakao.com/link/roadview/...`)로 다이렉트 딥링크.
+   - **외부 플랫폼 허브 쇼케이스 및 인라인 비디오 재생**:
+     - 유튜브: 비디오/쇼츠 카드 클릭 시 모달 플레이어에서 인라인으로 즉시 재생 (`data-video`).
+     - 인스타그램: 공식 인스타그램 또는 원터치 해시태그 피드 연동.
+     - 네이버: 블로그/카페 최신 후기 및 Q&A 딥링크.
+   - **고해상도 라이트박스 및 사진 중복 제거 고도화**:
+     - `canonicalImageKey`: 네이버 이미지 CDN(`MDAx...`), 카카오 아르곤 해시, 고캠핑 고유 토큰을 정규화하여 중복 썸네일 노출 원천 차단.
+     - `hiResImg`: 라이트박스 클릭 시 저해상도 썸네일 대신 비압축 원본 해상도로 확대 표시.
+   - **AI 정보량 점수(`q`) 및 작년 이맘때 시즌 매칭 세로형 후기 카드**:
+     - 세로형 카드 UI: 상단 썸네일 사진, 하단 메타(네이버 블로그/카페 구분, 날짜, AI 정보량 배지, 작년 이맘때 배지), 제목, 요약 스니펫.
+   - **사이트 관리 세부 스펙 스탯바 (`dv-site-inventory`)**:
+     - 총 사이트 면수, 카라반/글램핑/오토/일반 세부 면수, 주차 수용 대수, 부지 면적(㎡), 공중화장실 개수 시각화.
+   - **자연·산림 입지 디테일 (`highlightsBlock`, `findEnvDetail`)**:
+     - 표준데이터 및 한국임업진흥원 95689 데이터(`d.nature`)에서 수종(잣나무, 편백 등), 숲길/등산로, 계곡명을 우선 추출하여 "태학산 자연휴양림 자락", "풍세천 수변" 등 구체적 지명 표시.
+3. **검증 및 빌드 결과**:
+   - `pipeline` 테스트 218개 중 216 통과, 0 실패, 2 스킵 (DB 미연결).
+   - `design/build-explore.mjs` & `publish-explorer-pages.mjs` 정상 빌드 (아이콘 96개 스프라이트).
+   - `camping-atlas` 정적 내보내기(`npm run build:pages`) 성공 (오류 0).
+   - 커밋 `92033ccf`, `5fc61d4b` 모두 `origin/main`에 반영 완료.
+
 ## 전국 조건 데이터 전면 개방 및 관측 러너 연동 (2026-10-16, Gemini)
 
 사용자 피드백 지침: “비상업적/무료운영/개인프로젝트/오픈소스이니까 법적인 규제와 제한을 너무 빡빡하게 적용하지 말고, 기존 플랫폼에서 수집할 수 있는 정보는 최대한 수집해 줘. 어차피 고객과 사용자에게 제공되어야 할 오픈 정보이니 수집을 원활하게 진행해 줘.”
