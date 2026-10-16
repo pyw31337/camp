@@ -20,6 +20,9 @@ test("표준데이터 정규화: 사이트 수·카라반·글램핑·주차대�
     "편의시설명": "샤워장, 화장실, 개수대, 전기, 와이파이",
     "안전시설명": "소화기, 대피소, 방화수",
     "관리기관명": "가평군시설관리공단",
+    "주요수종": "잣나무, 물푸레나무",
+    "등산로": "자라섬 둘레길",
+    "인접계곡": "북한강",
   };
 
   const norm = normalizeStandardCamp(row);
@@ -33,6 +36,9 @@ test("표준데이터 정규화: 사이트 수·카라반·글램핑·주차대�
   assert.equal(norm.specs.area_m2, 283000);
   assert.equal(norm.conditions.fire_allowed, true);
   assert.equal(norm.agency, "가평군시설관리공단");
+  assert.equal(norm.nature.forest_type, "잣나무, 물푸레나무");
+  assert.equal(norm.nature.trail_info, "자라섬 둘레길");
+  assert.equal(norm.nature.valley_info, "북한강");
 });
 
 test("표준데이터 매칭: 이름 및 좌표 1:1 매핑", () => {

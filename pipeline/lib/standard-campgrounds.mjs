@@ -71,6 +71,11 @@ export function normalizeStandardCamp(row) {
   const safety = clean(pick(row, [/^안전시설명$/, /^안전시설$/, /^소방시설$/]));
   const feeInfo = clean(pick(row, [/^이용요금$/, /^요금안내$/, /^이용료$/]));
 
+  const forestType = clean(pick(row, [/^주요수종$/, /^수종$/, /^식생종류$/, /^임상$/, /^나무종류$/]));
+  const trailInfo = clean(pick(row, [/^등산로$/, /^숲길$/, /^산책로$/, /^연계등산로$/, /^탐방로$/]));
+  const valleyInfo = clean(pick(row, [/^인접계곡$/, /^계곡명$/, /^하천명$/, /^인근수계$/]));
+  const natureIntro = clean(pick(row, [/^자연환경$/, /^입지환경$/, /^주변환경$/, /^산림환경$/]));
+
   return {
     name: clean(name),
     lat: lat && inKorea(lat, lng) ? Math.round(lat * 1e6) / 1e6 : null,
@@ -88,6 +93,12 @@ export function normalizeStandardCamp(row) {
       caravan_sites: caravanSites,
       parking_count: parkingCount,
       area_m2: areaM2,
+    },
+    nature: {
+      forest_type: forestType,
+      trail_info: trailInfo,
+      valley_info: valleyInfo,
+      nature_intro: natureIntro,
     },
     conditions: {
       fire_allowed: fireAllowed,

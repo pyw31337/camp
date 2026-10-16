@@ -2926,22 +2926,26 @@ function findEnvDetail(c, d) {
     ...(d?.operator_snippets?.map((s) => s.text) || []),
   ].join(" ");
 
-  let water = null;
-  const valleyMatch = textPool.match(/([가-힣]{2,10}(?:계곡|천|강|내|저수지|호수|해수욕장|해변))/);
-  if (valleyMatch) {
-    water = valleyMatch[1];
-  } else if (d?.nearby?.tour) {
-    const nearWater = d.nearby.tour.find((t) => /계곡|천|강|호|해수욕장|해변/.test(t.n));
-    if (nearWater) water = `${nearWater.n} (${km(nearWater.m)})`;
+  let water = d?.nature?.valley_info || null;
+  if (!water) {
+    const valleyMatch = textPool.match(/([가-힣]{2,10}(?:계곡|천|강|내|저수지|호수|해수욕장|해변))/);
+    if (valleyMatch) {
+      water = valleyMatch[1];
+    } else if (d?.nearby?.tour) {
+      const nearWater = d.nearby.tour.find((t) => /계곡|천|강|호|해수욕장|해변/.test(t.n));
+      if (nearWater) water = `${nearWater.n} (${km(nearWater.m)})`;
+    }
   }
 
-  let forest = null;
-  const mountainMatch = textPool.match(/([가-힣]{2,10}(?:산|자연휴양림|수목원|숲|군락지))/);
-  if (mountainMatch) {
-    forest = mountainMatch[1];
-  } else if (d?.nearby?.tour) {
-    const nearMountain = d.nearby.tour.find((t) => /산|휴양림|수목원|숲/.test(t.n));
-    if (nearMountain) forest = `${nearMountain.n} (${km(nearMountain.m)})`;
+  let forest = d?.nature?.forest_type || d?.nature?.trail_info || null;
+  if (!forest) {
+    const mountainMatch = textPool.match(/([가-힣]{2,10}(?:산|자연휴양림|수목원|숲|군락지))/);
+    if (mountainMatch) {
+      forest = mountainMatch[1];
+    } else if (d?.nearby?.tour) {
+      const nearMountain = d.nearby.tour.find((t) => /산|휴양림|수목원|숲/.test(t.n));
+      if (nearMountain) forest = `${nearMountain.n} (${km(nearMountain.m)})`;
+    }
   }
 
   let firewoodPrice = null;
