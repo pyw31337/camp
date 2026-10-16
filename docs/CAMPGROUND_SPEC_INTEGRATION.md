@@ -85,3 +85,8 @@
 - 예약 플랫폼 화면·공지 자동 수집, 차단 회피.
 - 후기 문장으로 확정값을 만들거나 “AI 요약” 문장을 지어내기.
 - 원문 이미지 복제·재호스팅.
+
+
+## 추가(2026-10-16): 운영자 홈페이지 문장
+
+`build-spec-sheet.mjs`는 운영자 자체 홈페이지에서 모은 문장(`registry/operator-site-snippets.json`)을 쪽(URL)마다 한 문서로 묶어 `OFFICIAL_TEXT` 등급(`source.kind = "operator_homepage"`)으로 넣는다. 여러 캠핑장이 함께 쓰는 홈페이지는 제외한다. 수집 범위와 규칙은 `docs/OPERATOR_SITE_FACTS.md`. 첫 실행으로 스펙 시트가 816곳 → 968곳, 운영자 문장 기준 입실 150·반려동물 270곳이 됐다.

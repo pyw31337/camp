@@ -1,0 +1,48 @@
+name: Operator homepage facts
+
+# 운영자 자체 홈페이지(고캠핑 등록 홈페이지 중 플랫폼이 아닌 곳)에서 이용 안내 문장을 주 1회 다시 읽는다.
+# robots.txt 준수, 호스트별 1초 간격, 사이트당 최대 6쪽, 전문 저장 금지(문장·URL·확인 시각만).
+# 결과(registry/operator-site-snippets.json)는 data-sync가 배지 사실(build-operator-facts)·스펙 시트에 쓴다.
+on:
+  schedule:
+    # 매주 일요일 03:41 KST
+    - cron: "41 18 * * 6"
+  workflow_dispatch:
+    inputs:
+      max_age_days:
+        description: "이 일수보다 오래된 확인값만 다시 읽기 (기본 14)"
+        required: false
+        default: "14"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: operator-sites-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: pipeline
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: node --test test/operator-site.test.mjs
+      - name: Read operator homepages
+        run: node scripts/crawl-operator-sites.mjs --concurrency 16 --max-age-days "${{ github.event.inputs.max_age_days || '14' }}"
+      - name: Commit refreshed snippets
+        run: |
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add registry/operator-site-snippets.json
+          if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
+          git commit -m "chore(data): refresh operator homepage snippets"
+          git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"
+          git push
