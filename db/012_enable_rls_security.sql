@@ -2,6 +2,8 @@
 -- Supabase 보안 가이드 준수: public 스키마 내 모든 테이블에 RLS(Row Level Security) 활성화
 -- 및 기본 읽기 허용(SELECT) 정책 설정
 
+BEGIN;
+
 DO $$
 DECLARE
     tbl text;
@@ -17,3 +19,5 @@ BEGIN
         EXECUTE format('CREATE POLICY "Public read access" ON public.%I FOR SELECT USING (true);', tbl);
     END LOOP;
 END $$;
+
+COMMIT;

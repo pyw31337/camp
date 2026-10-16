@@ -2,6 +2,8 @@
 -- 일반 캠퍼를 위한 비회원 자유 댓글/방문 후기 게시판 스키마
 -- GitHub 로그인 없이 닉네임과 간편 비밀번호만으로 자유롭게 후기 작성 가능
 
+BEGIN;
+
 CREATE TABLE IF NOT EXISTS public.campground_comment (
   id BIGSERIAL PRIMARY KEY,
   campground_id INT NOT NULL,
@@ -34,3 +36,5 @@ CREATE POLICY "Public insert comments" ON public.campground_comment
 -- 익명(anon) 및 인증 사용자 권한 부여 (PostgREST REST API 허용)
 GRANT SELECT, INSERT ON public.campground_comment TO anon, authenticated;
 GRANT USAGE, SELECT ON SEQUENCE public.campground_comment_id_seq TO anon, authenticated;
+
+COMMIT;
