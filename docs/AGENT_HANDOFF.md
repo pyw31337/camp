@@ -432,6 +432,8 @@ Codex 요청 사항을 `pipeline/lib/survey-extractor.mjs` 및 `design/explore/_
 - 사진 경로: 공개 목록에 로컬 `media/camps/*` 파생 파일이 없는 배포에서도 깨진 썸네일 요청을 만들지 않도록 했다. 고캠핑·TourAPI 원격 사진을 우선하고(목록 2,344곳), 공식 사진이 없는 경우만 장소 사진(664곳)을 쓴다. 둘 다 없으면 이미지 아이콘으로 안전하게 대체한다. 장소 사진을 공식 사진으로 표기하지 않는다.
 - 입력·상태 시스템: 사용자 첨부 레퍼런스의 구조를 Studio에만 적용했다. 가격 범위 슬라이더, 형태 라디오 칩, 누적 조건 체크 칩, 활성 쪽이 명확한 페이지네이션, `찾기 › 권역 › 캠핑장` 경로, 예약 전 3단계 진행 표시를 추가했다. 검색은 짧은 로더, 저장·필터·쪽 이동은 하단 토스트, 근거 `i`는 클릭형 말풍선으로 통일했다. 색은 기존 블루·라임·코럴을 유지한다.
 - 홈 후속 콘텐츠: 소유자 요청으로 Studio의 ‘고르는 기준’과 상세 미리보기 전체를 숨기고, `renewal/?v=a`의 정보 구조를 반영한 `곧 오픈`·`테마별 캠핑장` 컬렉션을 배치했다. 예약 임박 3장, 정보 많은 곳·계곡·호수뷰·반려견 탭, 4장 카드만 남기며 시각 언어는 Studio의 잉크·블루·라임·코럴 토큰을 유지한다.
+- 상세 구조 보정: Studio 상세은 `renewal/?v=a#/c/7879`의 구조를 기준으로 상단 위치·저장, 대형 이름·전력, 1+2 갤러리, 핵심 현황 3칸, 기본 규격, 내 세팅, 사이트·요금, 이용 정보, 가는 길, 사진·영상, 데스크톱 우측 예약 카드 순서로 교체했다. 색·타이포·상태는 Studio의 잉크·블루·라임·코럴 체계를 유지한다. 이 값들은 계속 시안 전용 예시이며 실제 가격·잔여 수·예약 상태를 주장하지 않는다.
+- 이번 보정 검증: `node --check design/studio-v1/app.js`, `git diff --check` 통과. 로컬 `http://localhost:4179/`에서 데스크톱 상세 전환을 확인했고, 320px에서 `scrollWidth === clientWidth === 305`와 상세 내부 화면 밖 요소 0개를 확인했다. 콘솔 오류도 0개였다.
 - 이번 보정 검증: `node --check design/studio-v1/app.js`, `git diff --check` 통과. 로컬 `http://localhost:4179/`의 320px 시안에서 슬라이더·라디오·체크박스의 접근성 역할, 토스트, 상세의 스펙·요금·예약 단계, 새 곧 오픈 스와이프·2열 테마 카드를 확인했다.
 - 검증: `node --test pipeline/test/campground-profile.test.mjs` 4/4 통과, `npm --prefix pipeline test` 249 통과·0 실패·DB 미연결 2 스킵, `node design/build-explore.mjs`, `node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public/explore`, JS 문법 검사, `git diff --check` 통과. 가격 연결은 로컬 커밋 `4e8ea3765`에 포함됐고 원격에는 아직 푸시하지 않았다. 시안 승인 전 대규모 운영 디자인 이식은 하지 않는다.
 
