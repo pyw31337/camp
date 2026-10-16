@@ -704,64 +704,83 @@
     "private_bathroom": 137,
     "kids_play_features": 2174
   },
-  "updated_at": "2026-10-15T21:29:29.773Z",
+  "updated_at": "2026-10-15T23:41:58.964Z",
   "spec_sheet": {
-    "generated_at": "2026-10-15T21:29:29.910Z",
-    "campgrounds_with_spec": 816,
+    "generated_at": "2026-10-15T23:42:09.598Z",
+    "campgrounds_with_spec": 968,
     "roundup_reviews_skipped": 2463,
     "fields": {
       "CHECKIN_TIME": {
-        "official": 4,
+        "official": 150,
         "mention": 389
       },
       "CHECKOUT_TIME": {
-        "official": 2,
+        "official": 129,
         "mention": 335
       },
       "EARLY_CHECKIN": {
-        "official": 2,
+        "official": 20,
         "mention": 15
       },
       "LATE_CHECKOUT": {
-        "official": 0,
+        "official": 10,
         "mention": 12
       },
       "MANNER_TIME": {
-        "official": 2,
+        "official": 9,
         "mention": 57
       },
       "MIN_STAY": {
-        "official": 1,
+        "official": 12,
         "mention": 10
       },
       "EXTRA_PERSON_FEE": {
-        "official": 2,
+        "official": 50,
         "mention": 13
       },
       "EXTRA_CAR_FEE": {
-        "official": 2,
+        "official": 21,
         "mention": 4
       },
       "VISITOR_POLICY": {
-        "official": 1,
+        "official": 15,
         "mention": 2
       },
       "PET_POLICY": {
-        "official": 148,
+        "official": 262,
         "mention": 325
       },
       "RENTAL": {
-        "official": 0,
+        "official": 3,
         "mention": 2
       },
       "DISCOUNT": {
-        "official": 1,
+        "official": 5,
         "mention": 11
       },
       "PROMOTION": {
-        "official": 0,
+        "official": 1,
         "mention": 9
       }
     }
+  },
+  "operator_site_facts": {
+    "generated_at": "2026-10-15T23:41:59.283Z",
+    "campgrounds": 68,
+    "w": 30,
+    "pk": 18,
+    "fire": 22,
+    "cc": 9,
+    "conflicts": 0,
+    "stale": 0,
+    "shared_host": 21,
+    "sites_read": 339
+  },
+  "review_digest": {
+    "generated_at": "2026-10-15T23:54:44.484Z",
+    "campgrounds": 1098,
+    "with_pros": 1054,
+    "with_cons": 123,
+    "reviews": 6993
   }
 }
