@@ -26,6 +26,13 @@ for (const p of pilotFacts.pilot_campgrounds || []) {
 }
 console.log(`- 파일럿 검증 캠핑장: ${pilotMap.size}개 매핑 로드 완료`);
 
+// 1.5 운영자 사이트 스니펫 레지스트리 로드
+const operatorSnippetsPath = join(rootDir, "pipeline/registry/operator-site-snippets.json");
+const operatorSnippets = existsSync(operatorSnippetsPath)
+  ? (JSON.parse(readFileSync(operatorSnippetsPath, "utf8")).campgrounds ?? {})
+  : {};
+console.log(`- 운영자 웹사이트 스니펫: ${Object.keys(operatorSnippets).length}개 캠핑장 로드 완료`);
+
 // 2. campgrounds.json 로드
 const campgroundsPath = join(publicDataDir, "campgrounds.json");
 if (!existsSync(campgroundsPath)) {
@@ -73,6 +80,13 @@ for (const camp of campgrounds) {
     } catch (e) {
       // JSON 파싱 실패 시 건너뜀
     }
+  }
+
+  // 운영자 웹사이트 스니펫 주입
+  const op = operatorSnippets[id];
+  if (op?.status === "OK" && Array.isArray(op.snippets) && op.snippets.length) {
+    detail ??= {};
+    detail.operator_snippets = op.snippets;
   }
 
   // 추출 엔진 실행

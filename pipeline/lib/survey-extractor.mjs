@@ -143,6 +143,14 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
   ];
   const hasAmenity = (re) => amenities.some((val) => re.test(String(val)));
   
+  const operatorSnippets = Array.isArray(detail?.operator_snippets)
+    ? detail.operator_snippets.map((s) => s?.text ?? s).filter(Boolean).join(" ")
+    : "";
+  const reviewSnippets = [
+    ...(Array.isArray(detail?.reviews) ? detail.reviews : []),
+    ...(Array.isArray(detail?.cafe) ? detail.cafe : []),
+  ].map((r) => `${r?.title ?? ""} ${r?.snippet ?? r?.contents ?? ""}`).filter(Boolean).join(" ");
+
   const textCorpus = [
     camp?.name,
     camp?.line,
@@ -151,6 +159,8 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
     detail?.guide,
     detail?.programs,
     detail?.tour_info,
+    operatorSnippets,
+    reviewSnippets,
     ...amenities,
     ...(Array.isArray(camp?.themes) ? camp.themes : []),
     ...(Array.isArray(camp?.environment) ? camp.environment : []),

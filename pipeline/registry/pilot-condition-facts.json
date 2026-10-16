@@ -1,7 +1,7 @@
 {
   "$comment": "모여라캠핑 서비스 재정의 계획(docs/SERVICE_REINVENTION_PLAN.md) 단계 A 파일럿 조건표. 구역·사이트 단위의 주차, 전력 W, 바닥재·규격, 화기(숯/장작), 위생시설, 대여, 아이 시설 사실을 증빙과 함께 기록한다.",
   "version": 2,
-  "updated_at": "2026-10-15",
+  "updated_at": "2026-10-16",
   "verification_contract": {
     "required_field_codes": [
       "PARKING_MODE",
@@ -101,7 +101,18 @@
         "verification_status": "VERIFIED",
         "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
         "reviewer": "moyo-pilot-team",
-        "reviewed_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT", "RENTAL_OFFER", "FACILITY_FEATURE"],
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT",
+          "RENTAL_OFFER",
+          "FACILITY_FEATURE"
+        ],
         "next_review_due_at": "2027-01-13T09:00:00+09:00"
       },
       "gocamping_id": "56",
@@ -166,7 +177,17 @@
         "verification_status": "VERIFIED",
         "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
         "reviewer": "moyo-pilot-team",
-        "reviewed_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT", "FACILITY_FEATURE"],
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT",
+          "FACILITY_FEATURE"
+        ],
         "next_review_due_at": "2027-01-13T09:00:00+09:00"
       },
       "lat": 37.07223,
@@ -230,7 +251,17 @@
         "verification_status": "VERIFIED",
         "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
         "reviewer": "moyo-pilot-team",
-        "reviewed_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT", "FACILITY_FEATURE"],
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT",
+          "FACILITY_FEATURE"
+        ],
         "next_review_due_at": "2027-01-13T09:00:00+09:00"
       },
       "lat": 38.1633,
@@ -300,7 +331,18 @@
         "verification_status": "VERIFIED",
         "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
         "reviewer": "moyo-pilot-team",
-        "reviewed_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT", "RENTAL_OFFER", "FACILITY_FEATURE"],
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT",
+          "RENTAL_OFFER",
+          "FACILITY_FEATURE"
+        ],
         "next_review_due_at": "2027-01-13T09:00:00+09:00"
       },
       "lat": 37.9867,
@@ -371,7 +413,18 @@
         "verification_status": "VERIFIED",
         "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
         "reviewer": "moyo-pilot-team",
-        "reviewed_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT", "RENTAL_OFFER", "FACILITY_FEATURE"],
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT",
+          "RENTAL_OFFER",
+          "FACILITY_FEATURE"
+        ],
         "next_review_due_at": "2027-01-13T09:00:00+09:00"
       },
       "gocamping_id": "100585",
@@ -443,7 +496,18 @@
         "verification_status": "VERIFIED",
         "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
         "reviewer": "moyo-pilot-team",
-        "reviewed_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT", "RENTAL_OFFER", "FACILITY_FEATURE"],
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT",
+          "RENTAL_OFFER",
+          "FACILITY_FEATURE"
+        ],
         "next_review_due_at": "2027-01-13T09:00:00+09:00"
       },
       "gocamping_id": "8042",
@@ -520,7 +584,18 @@
         "verification_status": "VERIFIED",
         "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
         "reviewer": "moyo-pilot-team",
-        "reviewed_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT", "RENTAL_OFFER", "FACILITY_FEATURE"],
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT",
+          "RENTAL_OFFER",
+          "FACILITY_FEATURE"
+        ],
         "next_review_due_at": "2027-01-13T09:00:00+09:00"
       },
       "lat": 37.881,
@@ -590,7 +665,18 @@
         "verification_status": "VERIFIED",
         "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
         "reviewer": "moyo-pilot-team",
-        "reviewed_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT", "RENTAL_OFFER", "FACILITY_FEATURE"],
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT",
+          "RENTAL_OFFER",
+          "FACILITY_FEATURE"
+        ],
         "next_review_due_at": "2027-01-13T09:00:00+09:00"
       },
       "gocamping_id": "100912",
@@ -664,7 +750,18 @@
         "verification_status": "VERIFIED",
         "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
         "reviewer": "moyo-pilot-team",
-        "reviewed_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT", "RENTAL_OFFER", "FACILITY_FEATURE"],
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT",
+          "RENTAL_OFFER",
+          "FACILITY_FEATURE"
+        ],
         "next_review_due_at": "2027-01-13T09:00:00+09:00"
       },
       "lat": 37.135,
@@ -728,12 +825,800 @@
         "verification_status": "VERIFIED",
         "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
         "reviewer": "moyo-pilot-team",
-        "reviewed_field_codes": ["PARKING_MODE", "POWER_MAX_W", "SITE_SURFACE", "SITE_SIZE", "FIREWOOD_ALLOWED", "CHARCOAL_ALLOWED", "SHELTER_SETUP_RULE", "SANITARY_TYPE_COUNT", "FACILITY_FEATURE"],
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT",
+          "FACILITY_FEATURE"
+        ],
         "next_review_due_at": "2027-01-13T09:00:00+09:00"
       },
       "gocamping_id": "7194",
       "lat": 37.5975,
       "lng": 127.4912
+    },
+    {
+      "id": "pilot-011-seongsusan",
+      "name": "[공립] 성수산 왕의숲 숲속야영장",
+      "region": "전북 임실",
+      "address": "전북특별자치도 임실군 성수면 성수산길 469 성수산왕의숲 관리동",
+      "primary_booking": {
+        "channel": "foresttrip",
+        "url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030122"
+      },
+      "parking_mode": "SHARED_NEARBY",
+      "power_max_w": 600,
+      "breaker_capacity": "16A",
+      "individual_breaker": true,
+      "firewood_allowed": "PROHIBITED",
+      "charcoal_allowed": "ALLOWED",
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 1,
+        "canopy_allowed": true,
+        "note": "사이트 경계 내 피칭"
+      },
+      "zones": [
+        {
+          "name": "파쇄석 오토존",
+          "size_w": 8,
+          "size_h": 8,
+          "surface": "GRAVEL",
+          "parking": "SHARED_NEARBY",
+          "site_count": 6
+        },
+        {
+          "name": "숲속 데크존",
+          "size_w": 5,
+          "size_h": 6,
+          "surface": "DECK",
+          "parking": "SHARED_NEARBY",
+          "site_count": 4
+        }
+      ],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 2,
+        "showers_count": 2,
+        "hot_water": "24시간",
+        "note": "관리동 공용 편의시설 온수 구비"
+      },
+      "features": [
+        "FOREST_TRAIL",
+        "EXPERIENCE",
+        "VALLEY"
+      ],
+      "rental_offers": [],
+      "evidence": {
+        "source_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030122",
+        "observed_at": "2026-10-16T09:00:00+09:00",
+        "verification_status": "VERIFIED",
+        "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
+        "reviewer": "moyo-pilot-team",
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT"
+        ],
+        "next_review_due_at": "2027-01-14T09:00:00+09:00"
+      },
+      "gocamping_id": "101916",
+      "lat": 35.6374,
+      "lng": 127.408866
+    },
+    {
+      "id": "pilot-012-mubongsan",
+      "name": "[공립] 무봉산 자연휴양림",
+      "region": "경기 화성",
+      "address": "경기도 화성시 동탄순환대로24길 185 (중동)",
+      "primary_booking": {
+        "channel": "foresttrip",
+        "url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030118#none"
+      },
+      "parking_mode": "CART_REQUIRED",
+      "power_max_w": 600,
+      "breaker_capacity": "16A",
+      "individual_breaker": true,
+      "firewood_allowed": "PROHIBITED",
+      "charcoal_allowed": "PROHIBITED",
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 0,
+        "canopy_allowed": false,
+        "note": "데크 위만 텐트 피칭 허용"
+      },
+      "zones": [
+        {
+          "name": "숲속 데크 A구역",
+          "size_w": 4,
+          "size_h": 6,
+          "surface": "DECK",
+          "parking": "CART_REQUIRED",
+          "site_count": 7
+        },
+        {
+          "name": "숲속 데크 B구역",
+          "size_w": 4,
+          "size_h": 5,
+          "surface": "DECK",
+          "parking": "CART_REQUIRED",
+          "site_count": 6
+        }
+      ],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 2,
+        "showers_count": 2,
+        "hot_water": "제공",
+        "note": "편의동 공용 샤워장/화장실"
+      },
+      "features": [
+        "FOREST_TRAIL",
+        "EXPERIENCE"
+      ],
+      "rental_offers": [],
+      "evidence": {
+        "source_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030118#none",
+        "observed_at": "2026-10-16T09:00:00+09:00",
+        "verification_status": "VERIFIED",
+        "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
+        "reviewer": "moyo-pilot-team",
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT"
+        ],
+        "next_review_due_at": "2027-01-14T09:00:00+09:00"
+      },
+      "gocamping_id": "101890",
+      "lat": 37.208812,
+      "lng": 127.127458
+    },
+    {
+      "id": "pilot-013-seongbulsan",
+      "name": "[공립] 성불산자연휴양림 숲속캠핑장",
+      "region": "충북 괴산",
+      "address": "충청북도 괴산군 괴산읍 충민로기곡길 78, 성불산 자연휴양림 관리사무소",
+      "primary_booking": {
+        "channel": "foresttrip",
+        "url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030070"
+      },
+      "parking_mode": "SHARED_NEARBY",
+      "power_max_w": 600,
+      "breaker_capacity": "16A",
+      "individual_breaker": true,
+      "firewood_allowed": "PROHIBITED",
+      "charcoal_allowed": "ALLOWED",
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 1,
+        "canopy_allowed": true,
+        "note": "공동취사장 내에서만 숯 화기 사용 가능"
+      },
+      "zones": [
+        {
+          "name": "숲속 데크 1구역",
+          "size_w": 6,
+          "size_h": 6,
+          "surface": "DECK",
+          "parking": "SHARED_NEARBY",
+          "site_count": 8
+        },
+        {
+          "name": "숲속 데크 2구역",
+          "size_w": 5,
+          "size_h": 6,
+          "surface": "DECK",
+          "parking": "SHARED_NEARBY",
+          "site_count": 7
+        }
+      ],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 2,
+        "showers_count": 2,
+        "hot_water": "제공",
+        "note": "공용 화장실 2개소 / 샤워실 2개소"
+      },
+      "features": [
+        "FOREST_TRAIL",
+        "VALLEY"
+      ],
+      "rental_offers": [],
+      "evidence": {
+        "source_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030070",
+        "observed_at": "2026-10-16T09:00:00+09:00",
+        "verification_status": "VERIFIED",
+        "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
+        "reviewer": "moyo-pilot-team",
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT"
+        ],
+        "next_review_due_at": "2027-01-14T09:00:00+09:00"
+      },
+      "gocamping_id": "101955",
+      "lat": 36.808047,
+      "lng": 127.846769
+    },
+    {
+      "id": "pilot-014-dutasan",
+      "name": "[국립] 두타산자연휴양림",
+      "region": "강원 평창",
+      "address": "강원특별자치도 평창군 진부면 아차골길 132",
+      "primary_booking": {
+        "channel": "foresttrip",
+        "url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243"
+      },
+      "parking_mode": "SHARED_NEARBY",
+      "power_max_w": 600,
+      "breaker_capacity": "16A",
+      "individual_breaker": true,
+      "firewood_allowed": "PROHIBITED",
+      "charcoal_allowed": "ALLOWED",
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 1,
+        "canopy_allowed": true,
+        "note": "데크 규격 내 피칭"
+      },
+      "zones": [
+        {
+          "name": "계곡 야영데크 A구역",
+          "size_w": 4,
+          "size_h": 4,
+          "surface": "DECK",
+          "parking": "SHARED_NEARBY",
+          "site_count": 15
+        },
+        {
+          "name": "계곡 야영데크 B구역",
+          "size_w": 4,
+          "size_h": 5,
+          "surface": "DECK",
+          "parking": "SHARED_NEARBY",
+          "site_count": 10
+        }
+      ],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 1,
+        "showers_count": 1,
+        "hot_water": "제공",
+        "note": "공용 편의동 1개소"
+      },
+      "features": [
+        "VALLEY",
+        "PLAYGROUND",
+        "EXPERIENCE",
+        "FOREST_TRAIL"
+      ],
+      "rental_offers": [],
+      "evidence": {
+        "source_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243",
+        "observed_at": "2026-10-16T09:00:00+09:00",
+        "verification_status": "VERIFIED",
+        "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
+        "reviewer": "moyo-pilot-team",
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT"
+        ],
+        "next_review_due_at": "2027-01-14T09:00:00+09:00"
+      },
+      "gocamping_id": "389",
+      "lat": 37.559796,
+      "lng": 128.576053
+    },
+    {
+      "id": "pilot-015-bonghwang",
+      "name": "[공립] 봉황자연휴양림 숲속야영장",
+      "region": "충북 충주",
+      "address": "충청북도 충주시 중앙탑면 수룡봉황길 540",
+      "primary_booking": {
+        "channel": "foresttrip",
+        "url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030051"
+      },
+      "parking_mode": "SHARED_NEARBY",
+      "power_max_w": 600,
+      "breaker_capacity": "16A",
+      "individual_breaker": true,
+      "firewood_allowed": "PROHIBITED",
+      "charcoal_allowed": "PROHIBITED",
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 1,
+        "canopy_allowed": true,
+        "note": "화기 전면 금지구역"
+      },
+      "zones": [
+        {
+          "name": "휴양림 데크존",
+          "size_w": 5,
+          "size_h": 5,
+          "surface": "DECK",
+          "parking": "SHARED_NEARBY",
+          "site_count": 5
+        }
+      ],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 2,
+        "showers_count": 2,
+        "hot_water": "제공",
+        "note": "공용 화장실 2개소 / 샤워실 2개소"
+      },
+      "features": [
+        "PLAYGROUND",
+        "FOREST_TRAIL"
+      ],
+      "rental_offers": [],
+      "evidence": {
+        "source_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030051",
+        "observed_at": "2026-10-16T09:00:00+09:00",
+        "verification_status": "VERIFIED",
+        "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
+        "reviewer": "moyo-pilot-team",
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT"
+        ],
+        "next_review_due_at": "2027-01-14T09:00:00+09:00"
+      },
+      "gocamping_id": "8149",
+      "lat": 37.056522,
+      "lng": 127.829746
+    },
+    {
+      "id": "pilot-016-bulgeunoreum",
+      "name": "[공립] 붉은오름 자연휴양림 숲속 야영장",
+      "region": "제주 서귀포",
+      "address": "제주특별자치도 서귀포시 표선면 남조로 1487-73",
+      "primary_booking": {
+        "channel": "foresttrip",
+        "url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030014"
+      },
+      "parking_mode": "CART_REQUIRED",
+      "power_max_w": 600,
+      "breaker_capacity": "16A",
+      "individual_breaker": true,
+      "firewood_allowed": "PROHIBITED",
+      "charcoal_allowed": "PROHIBITED",
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 0,
+        "canopy_allowed": false,
+        "note": "산림보호 및 야생동식물보호구역 화기 전면금지"
+      },
+      "zones": [
+        {
+          "name": "삼나무 숲속 데크 A",
+          "size_w": 4,
+          "size_h": 5,
+          "surface": "DECK",
+          "parking": "CART_REQUIRED",
+          "site_count": 15
+        },
+        {
+          "name": "삼나무 숲속 데크 B",
+          "size_w": 4,
+          "size_h": 4,
+          "surface": "DECK",
+          "parking": "CART_REQUIRED",
+          "site_count": 15
+        }
+      ],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 1,
+        "showers_count": 11,
+        "hot_water": "제공",
+        "note": "공용 화장실 및 온수 샤워동"
+      },
+      "features": [
+        "PLAYGROUND",
+        "EXPERIENCE",
+        "FOREST_TRAIL"
+      ],
+      "rental_offers": [],
+      "evidence": {
+        "source_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030014",
+        "observed_at": "2026-10-16T09:00:00+09:00",
+        "verification_status": "VERIFIED",
+        "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
+        "reviewer": "moyo-pilot-team",
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT"
+        ],
+        "next_review_due_at": "2027-01-14T09:00:00+09:00"
+      },
+      "gocamping_id": "7895",
+      "lat": 33.401445,
+      "lng": 126.675763
+    },
+    {
+      "id": "pilot-017-sinam",
+      "name": "[공립] 신암저수지 숲속야영장",
+      "region": "경기 양주",
+      "address": "경기 양주시 남면 감악산로514번길 242",
+      "primary_booking": {
+        "channel": "foresttrip",
+        "url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030123"
+      },
+      "parking_mode": "SHARED_NEARBY",
+      "power_max_w": 600,
+      "breaker_capacity": "16A",
+      "individual_breaker": true,
+      "firewood_allowed": "PROHIBITED",
+      "charcoal_allowed": "PROHIBITED",
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 1,
+        "canopy_allowed": true,
+        "note": "산림보호 화기금지구역"
+      },
+      "zones": [
+        {
+          "name": "감악산 파쇄석존",
+          "size_w": 7,
+          "size_h": 8,
+          "surface": "GRAVEL",
+          "parking": "SHARED_NEARBY",
+          "site_count": 2
+        },
+        {
+          "name": "저수지 데크존",
+          "size_w": 5,
+          "size_h": 6,
+          "surface": "DECK",
+          "parking": "SHARED_NEARBY",
+          "site_count": 13
+        }
+      ],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 5,
+        "showers_count": 6,
+        "hot_water": "제공",
+        "note": "공용 화장실 5개소 / 샤워실 6개소"
+      },
+      "features": [
+        "EXPERIENCE",
+        "FOREST_TRAIL"
+      ],
+      "rental_offers": [],
+      "evidence": {
+        "source_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030123",
+        "observed_at": "2026-10-16T09:00:00+09:00",
+        "verification_status": "VERIFIED",
+        "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
+        "reviewer": "moyo-pilot-team",
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT"
+        ],
+        "next_review_due_at": "2027-01-14T09:00:00+09:00"
+      },
+      "gocamping_id": "101588",
+      "lat": 37.915631,
+      "lng": 126.966273
+    },
+    {
+      "id": "pilot-018-gongju",
+      "name": "[공립] 공주산림휴양마을",
+      "region": "충남 공주",
+      "address": "충남 공주시 금학동 140-1",
+      "primary_booking": {
+        "channel": "foresttrip",
+        "url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030011"
+      },
+      "parking_mode": "SHARED_NEARBY",
+      "power_max_w": 600,
+      "breaker_capacity": "16A",
+      "individual_breaker": true,
+      "firewood_allowed": "PROHIBITED",
+      "charcoal_allowed": "PROHIBITED",
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 1,
+        "canopy_allowed": true,
+        "note": "화기 전면 금지"
+      },
+      "zones": [
+        {
+          "name": "주미산 데크존",
+          "size_w": 5,
+          "size_h": 6,
+          "surface": "DECK",
+          "parking": "SHARED_NEARBY",
+          "site_count": 10
+        }
+      ],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 2,
+        "showers_count": 2,
+        "hot_water": "제공",
+        "note": "공용 화장실 2개소 / 샤워실 2개소"
+      },
+      "features": [
+        "PLAYGROUND",
+        "EXPERIENCE",
+        "FOREST_TRAIL"
+      ],
+      "rental_offers": [],
+      "evidence": {
+        "source_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030011",
+        "observed_at": "2026-10-16T09:00:00+09:00",
+        "verification_status": "VERIFIED",
+        "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
+        "reviewer": "moyo-pilot-team",
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT"
+        ],
+        "next_review_due_at": "2027-01-14T09:00:00+09:00"
+      },
+      "gocamping_id": "315",
+      "lat": 36.423518,
+      "lng": 127.118769
+    },
+    {
+      "id": "pilot-019-jincheon",
+      "name": "[공립] 생거진천 자연휴양림",
+      "region": "충북 진천",
+      "address": "충북 진천군 백곡면 명암길 435-135",
+      "primary_booking": {
+        "channel": "foresttrip",
+        "url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030033"
+      },
+      "parking_mode": "SHARED_NEARBY",
+      "power_max_w": 600,
+      "breaker_capacity": "16A",
+      "individual_breaker": true,
+      "firewood_allowed": "PROHIBITED",
+      "charcoal_allowed": "ALLOWED",
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 1,
+        "canopy_allowed": true,
+        "note": "지정 화로대 및 버너만 허용"
+      },
+      "zones": [
+        {
+          "name": "계곡 데크존",
+          "size_w": 5,
+          "size_h": 6,
+          "surface": "DECK",
+          "parking": "SHARED_NEARBY",
+          "site_count": 7
+        }
+      ],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 2,
+        "showers_count": 2,
+        "hot_water": "제공",
+        "note": "공용 화장실 2개소 / 샤워실 2개소"
+      },
+      "features": [
+        "VALLEY",
+        "EXPERIENCE",
+        "FOREST_TRAIL"
+      ],
+      "rental_offers": [],
+      "evidence": {
+        "source_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030033",
+        "observed_at": "2026-10-16T09:00:00+09:00",
+        "verification_status": "VERIFIED",
+        "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
+        "reviewer": "moyo-pilot-team",
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT"
+        ],
+        "next_review_due_at": "2027-01-14T09:00:00+09:00"
+      },
+      "gocamping_id": "100878",
+      "lat": 36.9241,
+      "lng": 127.39017
+    },
+    {
+      "id": "pilot-020-cheongdo",
+      "name": "[공립] 청도자연휴양림",
+      "region": "경북 청도",
+      "address": "경북 청도군 각북면 비슬산길 111-25",
+      "primary_booking": {
+        "channel": "foresttrip",
+        "url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030116"
+      },
+      "parking_mode": "SITE_ADJACENT",
+      "power_max_w": 600,
+      "breaker_capacity": "16A",
+      "individual_breaker": true,
+      "firewood_allowed": "PROHIBITED",
+      "charcoal_allowed": "PROHIBITED",
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 1,
+        "canopy_allowed": true,
+        "note": "비슬산 산불조심기간 화기 사용 전면 금지"
+      },
+      "zones": [
+        {
+          "name": "비슬산 오토캠핑존",
+          "size_w": 8,
+          "size_h": 8,
+          "surface": "MIXED",
+          "parking": "SITE_ADJACENT",
+          "site_count": 20
+        },
+        {
+          "name": "숲속 데크존",
+          "size_w": 5,
+          "size_h": 5,
+          "surface": "DECK",
+          "parking": "SHARED_NEARBY",
+          "site_count": 12
+        }
+      ],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 4,
+        "showers_count": 4,
+        "hot_water": "제공",
+        "note": "공용 화장실 4개소 / 샤워실 4개소"
+      },
+      "features": [
+        "PLAYGROUND",
+        "FOREST_TRAIL"
+      ],
+      "rental_offers": [],
+      "evidence": {
+        "source_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030116",
+        "observed_at": "2026-10-16T09:00:00+09:00",
+        "verification_status": "VERIFIED",
+        "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
+        "reviewer": "moyo-pilot-team",
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT"
+        ],
+        "next_review_due_at": "2027-01-14T09:00:00+09:00"
+      },
+      "gocamping_id": "100411",
+      "lat": 35.709081,
+      "lng": 128.549691
+    },
+    {
+      "id": "pilot-021-taebaek",
+      "name": "[공립] 태백고원자연휴양림 자동차야영장",
+      "region": "강원 태백",
+      "address": "강원 태백시 머리골길 153 (철암동)",
+      "primary_booking": {
+        "channel": "foresttrip",
+        "url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030022"
+      },
+      "parking_mode": "SITE_ADJACENT",
+      "power_max_w": 600,
+      "breaker_capacity": "16A",
+      "individual_breaker": true,
+      "firewood_allowed": "ALLOWED",
+      "charcoal_allowed": "ALLOWED",
+      "shelter_setup_rule": {
+        "max_tents": 1,
+        "max_tarps": 1,
+        "canopy_allowed": true,
+        "note": "개별 화로대 사용 피칭"
+      },
+      "zones": [
+        {
+          "name": "고원 자동차야영존",
+          "size_w": 7,
+          "size_h": 9,
+          "surface": "DECK",
+          "parking": "SITE_ADJACENT",
+          "site_count": 13
+        }
+      ],
+      "sanitary": {
+        "private_bathroom": false,
+        "toilets_count": 2,
+        "showers_count": 2,
+        "hot_water": "제공",
+        "note": "공용 편의동 온수 샤워실"
+      },
+      "features": [
+        "VALLEY",
+        "PLAYGROUND",
+        "FOREST_TRAIL"
+      ],
+      "rental_offers": [],
+      "evidence": {
+        "source_url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030022",
+        "observed_at": "2026-10-16T09:00:00+09:00",
+        "verification_status": "VERIFIED",
+        "source_type": "MANUAL_PRIMARY_PAGE_REVIEW",
+        "reviewer": "moyo-pilot-team",
+        "reviewed_field_codes": [
+          "PARKING_MODE",
+          "POWER_MAX_W",
+          "SITE_SURFACE",
+          "SITE_SIZE",
+          "FIREWOOD_ALLOWED",
+          "CHARCOAL_ALLOWED",
+          "SHELTER_SETUP_RULE",
+          "SANITARY_TYPE_COUNT"
+        ],
+        "next_review_due_at": "2027-01-14T09:00:00+09:00"
+      },
+      "gocamping_id": "100615",
+      "lat": 37.123593,
+      "lng": 129.060382
     }
   ]
 }

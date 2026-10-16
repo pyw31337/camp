@@ -358,7 +358,14 @@ function largeLocalPhoto(path) {
 // 외부 사진은 제공자가 준 썸네일 주소 그대로(https로만 바꿔) 쓴다. 썸네일 주소 안의 원본 URL(fname)을
 // 꺼내 블로그 원본을 직접 불러오거나 크기 인자를 바꾸지 않는다(제공자 표시 조건·원저작자 권리).
 function remoteImg(url) {
-  return String(url ?? "").trim().replace(/^http:\/\//i, "https://");
+  const u = String(url ?? "").trim().replace(/^http:\/\//i, "https://");
+  return u.replace(/\/argon\/\d+x\d+_\d+_[a-z]+\//, "/argon/600x600_85_c/");
+}
+
+function hiResImg(url) {
+  const u = String(url ?? "").trim().replace(/^http:\/\//i, "https://");
+  const gc = u.replace(/\/thumb\/thumb_\d+_/, "/");
+  return gc.replace(/\/argon\/\d+x\d+_\d+_[a-z]+\//, "/argon/0x0_85_c/");
 }
 
 function dedupeImages(items, getUrl) {
@@ -370,13 +377,21 @@ function dedupeImages(items, getUrl) {
     let key = u;
     try {
       const p = new URL(u);
-      const fn = p.searchParams.get("fname") || p.pathname;
-      key = fn.toLowerCase().split(/[?#]/)[0].split("/").pop() || u;
+      const argonMatch = p.pathname.match(/\/argon\/[^/]+\/([a-zA-Z0-9_-]+)/);
+      if (argonMatch) {
+        key = argonMatch[1];
+      } else {
+        const fn = p.searchParams.get("fname") || p.pathname;
+        key = fn.toLowerCase().split(/[?#]/)[0].split("/").pop() || u;
+      }
     } catch {
       key = String(u).toLowerCase().split(/[?#]/)[0].split("/").pop() || u;
     }
+    const rawKey = it?.img || it?.link || it?.url;
+    if (rawKey && seen.has(rawKey)) continue;
     if (seen.has(key)) continue;
     seen.add(key);
+    if (rawKey) seen.add(rawKey);
     out.push(it);
   }
   return out;
@@ -389,30 +404,47 @@ const kw = (w) => (w >= 1000 ? `${+(w / 1000).toFixed(1)}kW` : `${w}W`);
 function posterBadges(c) {
   const v = conditionView(c), out = [];
   const why = (d) => d?.src ? `${GRADE_LABEL[d.grade]} · ${d.src.quote ?? ""}` : d?.grade ? GRADE_LABEL[d.grade] : "";
-  // 전기
+  // 1. 불멍: 빨간 배지
+  if (isFirewoodAllowed(c)) out.push(["fi", "#l-flame", v.firewood.designated ? "지정구역 불멍" : "불멍 가능", why(v.firewood) || "장작 불멍 가능", "badge-fire"]);
+  else if (v.charcoal.allowed === true || v.firewood.allowed === false) out.push(["fi", "#l-flame", "숯만 가능", why(v.charcoal) || "장작 불가 (숯만)", "badge-fire-ban"]);
+  else if ((v.firewood.allowed === false && v.charcoal.allowed === false) || v.firePit === "불가") out.push(["off", "#l-ban", "화기 금지", why(v.firewood) || "화기 전면 금지", "badge-fire-ban"]);
+  else out.push(["uk", "#l-flame", "불멍", "확인 필요", "badge-unknown"]);
+
+  // 2. 전기: 주황 배지
   const powerWatts = v.power.watts || (hasPower(c) ? (c.field_conditions?.power?.regulatory_reference_w || 600) : null);
-  if (powerWatts) out.push(["pw", "#l-zap", kw(powerWatts), why(v.power) || "법정 기준"]);
-  else out.push(["uk", "#l-zap", "전기", "확인필요"]);
-  // 불멍: 장작 OK / 숯만 / 화기 불가 / 화로대 개별
-  if (isFirewoodAllowed(c)) out.push(["fi", "#l-flame", v.firewood.designated ? "지정 구역 장작" : "장작 불멍", why(v.firewood) || "개별 화로대 불멍"]);
-  else if (v.charcoal.allowed === true || v.firewood.allowed === false) out.push(["fi", "#l-flame", "숯만", why(v.charcoal)]);
-  else if ((v.firewood.allowed === false && v.charcoal.allowed === false) || v.firePit === "불가") out.push(["off", "#l-flame-kindling", "화기 불가", why(v.firewood)]);
-  else out.push(["uk", "#l-flame", "불멍", "확인필요"]);
-  // 주차·차박: 차박 OK가 있으면 그것을, 없으면 주차 방식
-  if (v.carCamp.allowed === true) out.push(["pk", "#l-car", "차박 OK", why(v.carCamp)]);
-  else if (isTentSideParking(c)) out.push(["pk", "#l-car", "텐트 옆 주차", why(v.parking) || "오토캠핑 단독 주차"]);
-  else if (v.parking.grade === "VERIFIED" && v.parking.partial) out.push(["pk", "#l-car", "일부 옆 주차", why(v.parking)]);
-  else if (isCartParking(c)) out.push(["off", "#l-car", "짐수레 이동", why(v.parking)]);
-  else out.push(["uk", "#l-car", "주차", "확인필요"]);
+  if (powerWatts) out.push(["pw", "#l-zap", `전기 ${kw(powerWatts)}`, why(v.power) || "전기 제공", "badge-power"]);
+  else out.push(["uk", "#l-zap", "전기", "확인 필요", "badge-unknown"]);
+
+  // 3. 주차·동선: 파란 배지
+  if (v.carCamp.allowed === true) out.push(["pk", "#l-car", "차박 가능", why(v.carCamp), "badge-parking"]);
+  else if (isTentSideParking(c)) out.push(["pk", "#l-car", "텐트 옆 주차", why(v.parking) || "오토캠핑 단독 주차", "badge-parking"]);
+  else if (v.parking.grade === "VERIFIED" && v.parking.partial) out.push(["pk", "#l-car", "일부 옆 주차", why(v.parking), "badge-parking"]);
+  else if (isCartParking(c)) out.push(["cart", "#l-shopping-cart", "짐수레 이동", why(v.parking) || "수레 이동 필수", "badge-cart"]);
+  else out.push(["uk", "#l-car", "주차", "확인 필요", "badge-unknown"]);
+
+  // 4. 개별 욕실 (있을 때 청록 배지)
+  if (c.field_conditions?.sanitary?.private_bathroom) {
+    out.push(["bath", "#l-bath", "개별 욕실", "단독 개별 화장실/샤워실 구비", "badge-bath"]);
+  }
   return out;
 }
-const badgeHtml = ([k, i, label, why]) => `<span class="pb pb-${k}"${why && k !== "uk" ? ` title="${esc(why)}"` : ""}>${ic(i, "i-xs")}${esc(label)}${k === "uk" ? `<b>확인필요</b>` : ""}</span>`;
+const badgeHtml = ([k, i, label, why, badgeClass]) => {
+  const cls = badgeClass || (
+    k === "fi" ? "badge-fire" :
+    k === "pw" ? "badge-power" :
+    k === "pk" ? "badge-parking" :
+    k === "cart" ? "badge-cart" :
+    k === "bath" ? "badge-bath" :
+    k === "avail" ? "badge-avail" : "badge-unknown"
+  );
+  return `<span class="poster-badge ${cls}"${why && k !== "uk" ? ` title="${esc(why)}"` : ""}>${ic(i, "i-xs")}${esc(label)}${k === "uk" ? ` <b class="uk-tag">확인필요</b>` : ""}</span>`;
+};
 function timeSignal(c, observations = []) {
   const obs = observations.find((r) => r.state === "OBSERVED_AVAILABLE");
-  if (obs) return `<span class="pb pb-tm">${ic("#l-sparkles", "i-xs")}빈자리 ${esc(hm(obs.observed_at) || ymd(obs.observed_at))}</span>`;
-  if (observations.length) return `<span class="pb pb-tm">${ic("#l-circle-check", "i-xs")}공식 접수 중</span>`;
+  if (obs) return `<span class="poster-badge badge-avail">${ic("#l-sparkles", "i-xs")}빈자리 ${esc(hm(obs.observed_at) || ymd(obs.observed_at))}</span>`;
+  if (observations.length) return `<span class="poster-badge badge-avail">${ic("#l-circle-check", "i-xs")}공식 접수 중</span>`;
   const nx = c.booking.next;
-  if (nx) { const dd = Math.ceil((Date.parse(nx.at) - Date.now()) / 864e5); return `<span class="pb pb-tm">${ic("#l-alarm-clock", "i-xs")}오픈 ${dd <= 0 ? "오늘" : `D-${dd}`}${nx.time_known ? ` · ${hm(nx.at).split(" ").pop()}` : ""}</span>`; }
+  if (nx) { const dd = Math.ceil((Date.parse(nx.at) - Date.now()) / 864e5); return `<span class="poster-badge badge-avail">${ic("#l-alarm-clock", "i-xs")}오픈 ${dd <= 0 ? "오늘" : `D-${dd}`}${nx.time_known ? ` · ${hm(nx.at).split(" ").pop()}` : ""}</span>`; }
   return "";
 }
 function renderPosterEmblems(c, observations = []) {
@@ -938,20 +970,19 @@ function bookingTarget(c) {
       isSearch: false,
     };
   }
-  // 등록된 온라인·홈페이지 경로가 없으면 예약처를 ‘검색’으로만 안내한다. 이 캠핑장이 해당 플랫폼에
-  // 입점했는지 모르므로 ‘예약하기’·‘빈자리’라고 말하지 않는다. 전화가 등록돼 있으면 전화가 확정 경로다.
+  // 5순위: 등록된 온라인·홈페이지 경로가 없으면 캠핏 실시간 예약·검색을 1순위 핵심 버튼으로 연결하고,
+  // 네이버 예약을 보조 버튼으로 제공한다. 전화는 특이사항 확인용 보조 경로로 밸런스를 맞춘다.
   const phone = channels.find((x) => x.url && x.kind === "phone");
-  if (phone) return { href: phone.url, ext: false, channel: phone, platform: "phone", type: "phone", label: "전화 예약", isSearch: false,
-    searchHref: `https://www.camfit.co.kr/search?keyword=${encodeURIComponent(c.name)}` };
   return {
     href: `https://www.camfit.co.kr/search?keyword=${encodeURIComponent(c.name)}`,
     ext: true,
     channel: null,
     platform: "camfit-search",
-    type: "search",
-    label: "캠핏 검색",
+    type: "camfit",
+    label: "캠핏에서 예약·빈자리 찾기",
     isSearch: true,
     naverHref: `https://search.naver.com/search.naver?query=${encodeURIComponent(c.name + " 예약")}`,
+    phoneHref: phone?.url || (c.tel ? telHref(c.tel) : null),
   };
 }
 
@@ -1030,7 +1061,26 @@ function nearBlock(c, d) {
   ${groups.map(([g]) => `<div class="near-list" data-near-panel="${g}" ${g === active ? "" : "hidden"}>${n[g].map((p) => {
     const name = p.n || POI_KIND[p.k] || "주변 시설";
     const meta = [p.ty ?? POI_KIND[p.k] ?? p.k, p.e ? "응급실" : null, p.b, p.h, p.r].filter(Boolean).join(" · ");
-    const visual = p.img ? `<img src="${esc(remoteImg(p.img))}" alt="${esc(name)} 사진" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('no-photo');this.remove()">` : `<span class="poi-visual">${ic(g === "toilet" ? "#l-toilet" : g === "mart" || g === "conv" ? "#l-shopping-cart" : g === "rest" ? "#l-coffee" : g === "fuel" ? "#l-fuel" : "#l-map-pin")}</span>`;
+    const isHanaro = /하나로마트/.test(name) || p.b === "하나로마트";
+    const isGS25 = /GS25/i.test(name) || /GS25/i.test(p.b);
+    const isCU = /\bCU\b/i.test(name) || /\bCU\b/i.test(p.b);
+    const isSeven = /세븐일레븐|7-eleven/i.test(name) || /세븐일레븐/i.test(p.b);
+    const isEmart24 = /이마트24|emart24/i.test(name) || /이마트24/i.test(p.b);
+    const isSK = /SK/i.test(name);
+    const isGSFuel = /GS칼텍스/i.test(name);
+    const isSOil = /S-OIL|에쓰오일/i.test(name);
+    const isHD = /현대오일뱅크/i.test(name);
+    const brandBadge = isHanaro ? `<span class="poi-brand hanaro">하나로</span>` :
+      isGS25 ? `<span class="poi-brand gs25">GS25</span>` :
+      isCU ? `<span class="poi-brand cu">CU</span>` :
+      isSeven ? `<span class="poi-brand seven">7-11</span>` :
+      isEmart24 ? `<span class="poi-brand emart">emart24</span>` :
+      isSK ? `<span class="poi-brand sk">SK</span>` :
+      isGSFuel ? `<span class="poi-brand gs-fuel">GS</span>` :
+      isSOil ? `<span class="poi-brand soil">S-OIL</span>` :
+      isHD ? `<span class="poi-brand hd">HD</span>` : "";
+
+    const visual = p.img ? `<img src="${esc(remoteImg(p.img))}" alt="${esc(name)} 사진" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('no-photo');this.remove()">` : `<span class="poi-visual ${g}">${brandBadge || ic(g === "toilet" ? "#l-toilet" : g === "mart" || g === "conv" ? "#l-shopping-cart" : g === "rest" ? "#l-coffee" : g === "fuel" ? "#l-fuel" : g === "medical" ? "#l-shield-check" : "#l-map-pin")}</span>`;
     const actions = p.lat ? `<div class="near-actions"><a class="btn-roadview-direct" href="${esc(roadviewLink(p.lat, p.lng))}" target="_blank" rel="noopener">${ic("#l-camera", "i-xs")}로드뷰 바로가기${ic("#l-arrow-up-right", "i-xs")}</a><a href="${esc(p.u ?? mapLink(name, p.lat, p.lng))}" target="_blank" rel="noopener">카카오 지도${ic("#l-arrow-up-right", "i-xs")}</a><a href="${esc(naverMapLink(name))}" target="_blank" rel="noopener">네이버 지도${ic("#l-arrow-up-right", "i-xs")}</a><button type="button" data-roadview="${p.lat},${p.lng}" data-roadview-name="${esc(name)}">이 화면에서 보기</button></div>` : "";
     return `<article class="near-card"><div class="near-visual${p.img ? "" : " no-photo"}">${visual}</div><div class="near-copy"><div><b>${esc(name)}</b><small>${esc(meta || "주변 편의 정보")}</small></div>${actions}</div>${p.m != null ? `<strong class="m">${km(p.m)}</strong>` : ""}</article>`;
   }).join("")}</div>`).join("")}
@@ -1351,16 +1401,16 @@ function priceMentionsBlock(d) {
 function layoutBlock(d) {
   const rawImgs = d?.layout?.images ?? [];
   if (!rawImgs.length) return "";
-  const imgs = dedupeImages(rawImgs, (x) => remoteImg(x.thumb || x.img));
+  const imgs = dedupeImages(rawImgs, (x) => x.img || x.thumb);
   lbAdd("layout", imgs.map((x) => ({
-    src: remoteImg(x.thumb || x.img),
+    src: hiResImg(x.img || x.thumb),
     small: false,
     cap: x.sure ? "시설 배치도 (고해상도 원본)" : "시설 배치도 (참고용 고해상도)",
     link: x.url ?? x.img,
     remote: true,
   })));
   return `<div class="dv-sub"><h4>시설 배치도 <span class="num">${imgs.length}</span></h4>
-    <div class="dv-thumbs">${imgs.map((x, i) => `<button type="button" class="layout-thumb-btn" ${lbAttr("layout", i)} aria-label="시설 배치도 크게 보기"><img src="${esc(remoteImg(x.thumb || x.img))}" alt="시설 배치도 ${i + 1}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.remove()"><span class="layout-zoom-hint">${ic("#l-scan-search", "i-xs")}원본 확대</span></button>`).join("")}</div>
+    <div class="dv-thumbs">${imgs.map((x, i) => `<button type="button" class="layout-thumb-btn" ${lbAttr("layout", i)} aria-label="시설 배치도 크게 보기"><img src="${esc(remoteImg(x.img || x.thumb))}" alt="시설 배치도 ${i + 1}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.remove()"><span class="layout-zoom-hint">${ic("#l-scan-search", "i-xs")}원본 확대</span></button>`).join("")}</div>
     <span class="trust ok">${ic("#l-shield-check", "i-xs")}고해상도 원본 배치도 연동 · 클릭 시 원본 전체 화면 확대</span></div>`;
 }
 function productsBlock(d) {
@@ -1664,12 +1714,12 @@ function detail(c) {
   ${target ? `<div class="d-cta">
     <div class="d-cta-actions">
       <a class="btn-cta-primary ${target.type}" href="${esc(target.href)}" ${target.ext ? 'target="_blank" rel="noopener"' : ""}>
-        ${ic(target.type === "phone" ? "#l-phone" : target.type === "search" ? "#l-search" : target.type === "naver" ? "#l-calendar" : "#l-external-link", "i-sm")}
-        <span>${target.label}</span>
+        ${ic(target.type === "naver" ? "#l-calendar" : target.type === "camfit" ? "#l-zap" : target.type === "homepage" ? "#l-external-link" : "#l-calendar", "i-sm")}
+        <span>${esc(target.label)}</span>
+        ${target.ext ? ic("#l-arrow-up-right", "i-xs") : ""}
       </a>
-      ${target.isSearch && target.naverHref ? `<a class="btn-cta-secondary" href="${esc(target.naverHref)}" target="_blank" rel="noopener">${ic("#l-search", "i-xs")}네이버</a>` : ""}
-      ${target.searchHref ? `<a class="btn-cta-secondary" href="${esc(target.searchHref)}" target="_blank" rel="noopener">${ic("#l-search", "i-xs")}캠핏</a>` : ""}
-      ${c.tel && target.type !== "phone" ? `<a class="btn-cta-secondary" href="${telHref(c.tel)}" aria-label="전화 문의">${ic("#l-phone", "i-xs")}전화</a>` : ""}
+      ${target.naverHref ? `<a class="btn-cta-secondary naver" href="${esc(target.naverHref)}" target="_blank" rel="noopener">${ic("#l-calendar", "i-xs")}네이버 예약</a>` : ""}
+      ${target.phoneHref || c.tel ? `<a class="btn-cta-secondary phone" href="${esc(target.phoneHref || telHref(c.tel))}" aria-label="전화 문의">${ic("#l-phone", "i-xs")}전화 문의</a>` : ""}
     </div>
   </div>` : ""}`;
 }

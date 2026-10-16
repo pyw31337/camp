@@ -684,42 +684,42 @@
     "with_self_hosted_photo": 2371,
     "with_nearby": 3111,
     "field_conditions": 3116,
-    "electricity_registered": 2114,
+    "electricity_registered": 2249,
     "shelter_setup_registered": 0,
-    "site_size_registered": 869,
+    "site_size_registered": 938,
     "ground_registered": 1583,
     "naver_booking_channel": 406,
     "camfit_booking_channel": 211,
     "official_notice_camps": 0,
     "official_notice_items": 0,
-    "verified_condition_facts": 10,
-    "surveyed_condition_facts": 251,
-    "confirmed_condition_facts": 2855,
-    "parking_tent_side": 17,
-    "parking_cart_required": 17,
-    "parking_shared": 1,
-    "power_high_w": 10,
-    "firewood_allowed": 85,
-    "firewood_prohibited": 110,
-    "private_bathroom": 137,
-    "kids_play_features": 2174
+    "verified_condition_facts": 21,
+    "surveyed_condition_facts": 881,
+    "confirmed_condition_facts": 2214,
+    "parking_tent_side": 70,
+    "parking_cart_required": 66,
+    "parking_shared": 12,
+    "power_high_w": 21,
+    "firewood_allowed": 497,
+    "firewood_prohibited": 117,
+    "private_bathroom": 299,
+    "kids_play_features": 2649
   },
-  "updated_at": "2026-10-15T23:41:58.964Z",
+  "updated_at": "2026-10-16T02:38:53.931Z",
   "spec_sheet": {
-    "generated_at": "2026-10-15T23:42:09.598Z",
-    "campgrounds_with_spec": 968,
+    "generated_at": "2026-10-16T02:38:58.043Z",
+    "campgrounds_with_spec": 981,
     "roundup_reviews_skipped": 2463,
     "fields": {
       "CHECKIN_TIME": {
-        "official": 150,
+        "official": 160,
         "mention": 389
       },
       "CHECKOUT_TIME": {
-        "official": 129,
+        "official": 138,
         "mention": 335
       },
       "EARLY_CHECKIN": {
-        "official": 20,
+        "official": 22,
         "mention": 15
       },
       "LATE_CHECKOUT": {
@@ -727,31 +727,31 @@
         "mention": 12
       },
       "MANNER_TIME": {
-        "official": 9,
+        "official": 10,
         "mention": 57
       },
       "MIN_STAY": {
-        "official": 12,
+        "official": 13,
         "mention": 10
       },
       "EXTRA_PERSON_FEE": {
-        "official": 50,
+        "official": 53,
         "mention": 13
       },
       "EXTRA_CAR_FEE": {
-        "official": 21,
+        "official": 22,
         "mention": 4
       },
       "VISITOR_POLICY": {
-        "official": 15,
+        "official": 17,
         "mention": 2
       },
       "PET_POLICY": {
-        "official": 262,
+        "official": 270,
         "mention": 325
       },
       "RENTAL": {
-        "official": 3,
+        "official": 4,
         "mention": 2
       },
       "DISCOUNT": {

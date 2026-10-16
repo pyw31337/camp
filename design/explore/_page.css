@@ -863,7 +863,22 @@ body.detail-open .compare-bar { display: none; }
 .poster-badge.badge-bath { background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); border: 1px solid rgba(153, 246, 228, 0.45); }
 .poster-badge.badge-kids { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); border: 1px solid rgba(233, 213, 255, 0.45); }
 .poster-badge.badge-avail { background: linear-gradient(135deg, #10b981 0%, #047857 100%); border: 1px solid rgba(167, 243, 208, 0.45); }
-.poster-badge { white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+.poster-badge.badge-unknown { background: rgba(0, 0, 0, 0.55); color: #cbd5e1; border: 1px dashed rgba(255, 255, 255, 0.35); }
+.poster-badge .uk-tag { font-size: 8px; opacity: 0.8; font-weight: 700; margin-left: 2px; }
+.poi-brand { display: inline-flex; align-items: center; justify-content: center; padding: 2px 5px; border-radius: 4px; font-size: 10px; font-weight: 900; line-height: 1; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
+.poi-brand.hanaro { background: #198754; }
+.poi-brand.gs25 { background: #007bff; }
+.poi-brand.cu { background: #6f42c1; }
+.poi-brand.seven { background: #fd7e14; }
+.poi-brand.emart { background: #d97706; }
+.poi-brand.sk { background: #dc2626; }
+.poi-brand.gs-fuel { background: #0284c7; }
+.poi-brand.soil { background: #f59e0b; color: #1e293b; }
+.poi-brand.hd { background: #059669; }
+.btn-cta-primary.camfit { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #fff; font-weight: 850; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35); }
+.btn-cta-primary.camfit:hover { background: linear-gradient(135deg, #059669 0%, #047857 100%); }
+.btn-cta-secondary.naver { border-color: #03c75a; color: #03c75a; background: rgba(3, 199, 90, 0.08); font-weight: 800; }
+.btn-cta-secondary.naver:hover { background: rgba(3, 199, 90, 0.16); }
 
 /* ==========================================================================
    후기 키워드 모아보기: 주제별 언급 수 + 근거 글 링크 (생성 문장 없음)
