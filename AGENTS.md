@@ -30,6 +30,22 @@
 3. **하드 캡(Hard Cap) 유지**: 소셜 후기 수집 등은 일일 쿼터의 절반 이하(`SOCIAL_MAX_CALLS=9100`)로 제한한다.
 4. **원클릭 점검**: `npm --prefix pipeline run check:billing` 명령으로 전체 외부 서비스 과금 안전 상태를 언제든 확인한다. 상세 규정은 `docs/EXTERNAL_SERVICES_BILLING_SAFETY.md`.
 
+## 운영 DB(Supabase) 및 비회원 자유 댓글·인프라 연동 현황 (2026-10-16, Gemini) — 전 에이전트 필독
+
+1. **Supabase PostgreSQL 17 클라우드 운영 DB 완전 구축**:
+   - 연결 풀러: `aws-0-ap-southeast-2.pooler.supabase.com:5432` (세션 풀러, IPv4 호환). GitHub Secret `DATABASE_URL`, `DATABASE_SSL=true`.
+   - 전체 48개 테이블에 RLS(Row Level Security) 설정 완료, 뷰에 `security_invoker = true` 적용하여 **Supabase Security Advisor 보안 이슈 0건** 달성.
+   - 현재 DB 사용량: **39 MB / 500 MB (사용률 7.84%, 92% 이상 여유)**. 대용량 바이너리 저장 금지, 메타데이터 중심 보존.
+2. **비회원 자유 댓글 게시판 (`campground_comment`) PostgREST 실시간 양방향 연동**:
+   - 일반 캠퍼를 위해 GitHub 로그인 없는 자유 댓글창 배포 완료 ([explore/](https://pyw31337.github.io/camp/explore/)).
+   - 소유자가 `SUPABASE_ANON_KEY` / `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (`sb_publishable_...`) 등록 완료.
+   - 브라우저 클라이언트가 PostgREST(`https://zgnetdxqzsnmzdvoxzbw.supabase.co/rest/v1/campground_comment`)를 통해 실시간으로 작성/조회하며, 4자리 비밀번호로 삭제 가능.
+3. **주변 생활 인프라 7종 최근접 거리 전수 연동**:
+   - 행정안전부 LOCALDATA 인허가 기준 21,574건의 최근접 거리 데이터를 카탈로그(`campgrounds.json`의 `c.nl`) 및 상세(`camps/{id}.json`의 `d.nearby_licensed`)에 전수 주입 (`pipeline/scripts/build-nearby-facts.mjs`).
+   - 카드에 `"편의점 1.0km · 마트 2.2km · 정육점 0.9km"` 노출, 상세 페이지에 로드뷰 1초 바로가기 연동.
+4. **AI 장단점 분석 1,640곳 커버리지 확장**:
+   - 자연어 캠퍼 감성 사전 확장으로 1,640개소 장단점 요약 완료. 로컬 SQLite(`db/moyeora_camping.db`) 및 Supabase PostgreSQL `review_digest`에 동기화 완료.
+
 ## 문서의 역할
 
 - `docs/PROJECT_PLAN.md`: 제품 범위, 단계, 수용 기준, 결정 대기 사항
