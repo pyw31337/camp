@@ -11,6 +11,7 @@ import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { ATTR, DICTIONARY, GRADE_RANK, SOURCES, factsOf, validateFacts } from "../lib/fact-store.mjs";
+import { CATEGORIES as NEARBY_CATS } from "../lib/nearby-licensed.mjs";
 import { extractSiteDetails, hostOf } from "../lib/operator-site.mjs";
 import { digestReviews } from "../lib/review-digest.mjs";
 
@@ -21,6 +22,10 @@ const readJson = (p, d) => (existsSync(p) ? JSON.parse(readFileSync(p, "utf8")) 
 const camps = readJson(join(dataDir, "campgrounds.json"), []);
 const sites = readJson(join(root, "pipeline/registry/operator-site-snippets.json"), {}).campgrounds ?? {};
 const kakao = readJson(join(root, "pipeline/registry/kakao-places.json"), {}).campgrounds ?? {};
+const nearbyReg = readJson(join(root, "pipeline/registry/nearby-licensed.json"), null);
+// 범주 → 원천 업종 페이지(첫 번째 원천) URL
+const nearbyUrls = Object.fromEntries(NEARBY_CATS.map((c) => [c.code, nearbyReg?.sources?.find((s) => s.slug === c.from[0] && s.page_url)?.page_url ?? "https://www.localdata.go.kr/"]));
+const nearbyOf = (id) => (nearbyReg?.campgrounds?.[id] ? { places: nearbyReg.campgrounds[id], urls: nearbyUrls, at: nearbyReg.generated_at } : null);
 
 // 여러 캠핑장이 같이 쓰는 홈페이지 호스트(지자체 통합 예약 등)의 문장은 특정 캠핑장의 사실로 쓰지 않는다.
 const host = (u) => hostOf(u ?? "")?.replace(/^www\./, "") ?? null;
@@ -38,7 +43,7 @@ for (const c of camps) {
   const site = s?.status === "OK" && s.snippets?.length && !shared ? s : null;
   const details = site ? extractSiteDetails(site.snippets.map((x) => x.text)) : null;
   const digest = d ? digestReviews(c.name, [...(d.reviews ?? []), ...(d.cafe ?? [])], { min: 1, top: 99 }) : null;
-  facts.push(...factsOf(c, d, { site, details, digest, kakao: kakao[c.id] ?? null }));
+  facts.push(...factsOf(c, d, { site, details, digest, kakao: kakao[c.id] ?? null, nearby: nearbyOf(c.id) }));
   registry.push({ cid: String(c.id), name: c.name, sido: c.sido ?? null, sigungu: c.sigungu ?? null, lat: c.lat ?? null, lng: c.lng ?? null, gc_url: c.gc_url ?? null, gc_at: c.modified_at ?? null, kakao_place_id: kakao[c.id]?.place?.id ?? null });
 }
 

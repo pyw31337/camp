@@ -123,6 +123,9 @@ export const PRESETS = {
   private_bath: { label: "개별 화장실", conditions: [{ attr: "PRIVATE_BATHROOM", op: "eq", value: true, must: true }] },
   realtime: { label: "온라인 바로 예약", conditions: [{ attr: "BOOKING_REALTIME", op: "eq", value: true }] },
   public: { label: "공공 캠핑장", conditions: [{ attr: "OPERATOR_TYPE", op: "in", value: ["LOCAL_GOVERNMENT", "NATIONAL_PARK", "NATURAL_RECREATION_FOREST", "PUBLIC_LEISURE"], must: true }] },
+  shop_nearby: { label: "장보기 가까움(편의점·마트·정육점 5km 안)", conditions: [{ attr: "NEARBY_CONVENIENCE_M", op: "max", value: 5000, weight: 2 }, { attr: "NEARBY_MART_M", op: "max", value: 5000 }, { attr: "NEARBY_BUTCHER_M", op: "max", value: 5000 }] },
+  safety_net: { label: "비상 대비(상비약 3km·약국 10km 안)", conditions: [{ attr: "NEARBY_OTC_MEDICINE_M", op: "max", value: 3000, must: true }, { attr: "NEARBY_PHARMACY_M", op: "max", value: 10000 }] },
+  pet_safe: { label: "반려견 + 동물병원 15km 안", conditions: [{ attr: "PET_POLICY", op: "in", value: ["ALLOWED", "SMALL_ONLY", "ZONE_ONLY"], must: true }, { attr: "NEARBY_VET_M", op: "max", value: 15000 }] },
   early_checkin: { label: "일찍 입실(13시 이전)", conditions: [{ attr: "CHECKIN_TIME", op: "max", value: "13:00", must: true }] },
 };
 

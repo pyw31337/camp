@@ -19,6 +19,7 @@ export const SOURCES = {
   kakao_local: "카카오 로컬(장소 검색 API)",
   kakao_web: "Daum 웹 검색(홈페이지 후보)",
   review_search: "Daum 블로그·카페 검색 요약",
+  localdata: "행정안전부 LOCALDATA 인허가(영업 중 업소)",
 };
 
 const ENV = { 산: "MOUNTAIN", 숲: "FOREST", 강: "RIVER", 호수: "LAKE", 계곡: "VALLEY", 해변: "BEACH", 섬: "ISLAND", 도심: "CITY" };
@@ -66,6 +67,7 @@ export function hhmm(text) {
   return h <= 24 ? `${String(h).padStart(2, "0")}:${String(min).padStart(2, "0")}` : null;
 }
 
+const NEARBY_ATTR = { CONVENIENCE: "NEARBY_CONVENIENCE_M", OTC_MEDICINE: "NEARBY_OTC_MEDICINE_M", MART: "NEARBY_MART_M", BUTCHER: "NEARBY_BUTCHER_M", FUEL: "NEARBY_FUEL_M", PHARMACY: "NEARBY_PHARMACY_M", VET: "NEARBY_VET_M" };
 const REVIEW_CODE = Object.fromEntries(DICTIONARY.attributes.filter((a) => a.review_label).map((a) => [a.review_label, a.code]));
 const won = (n) => (n >= 10000 ? `${+(n / 10000).toFixed(1)}만원` : `${n.toLocaleString("ko-KR")}원`);
 
@@ -73,9 +75,10 @@ const won = (n) => (n >= 10000 ? `${+(n / 10000).toFixed(1)}만원` : `${n.toLoc
  * 캠핑장 1곳의 원자 사실 목록.
  * @param c  campgrounds.json 항목(고캠핑 등록값 + of 운영자 배지 사실 + field_conditions)
  * @param d  camps/{id}.json(spec·prices·reviews·cafe), 없으면 null
- * @param o  { site(운영자 사이트 수집 결과, 공유 호스트면 null), details(extractSiteDetails 결과), digest(digestReviews 결과), kakao(kakao-places 항목) }
+ * @param o  { site(운영자 사이트 수집 결과, 공유 호스트면 null), details(extractSiteDetails 결과), digest(digestReviews 결과), kakao(kakao-places 항목),
+ *             nearby({ places: {CONVENIENCE:{m,name,n5},…}, urls: {범주: 원천 URL}, at }) }
  */
-export function factsOf(c, d, { site = null, details = null, digest = null, kakao = null } = {}) {
+export function factsOf(c, d, { site = null, details = null, digest = null, kakao = null, nearby = null } = {}) {
   const out = [];
   const cid = String(c.id);
   const push = (attr, value, grade, src, extra = {}) => {
@@ -192,6 +195,12 @@ export function factsOf(c, d, { site = null, details = null, digest = null, kaka
       const s = digest.samples?.[label]?.[0];
       if (code) push(code, n, "MENTION", "review_search", { n, url: s?.url ?? null, at: s?.date ?? null, text: label });
     }
+  }
+  // ── 주변 생활 인프라(LOCALDATA 인허가 최근접, registry/nearby-licensed.json)
+  for (const [code, v] of Object.entries(nearby?.places ?? {})) {
+    const attr = NEARBY_ATTR[code];
+    if (!attr || v?.m == null) continue;
+    push(attr, v.m, "CONFIRMED", "localdata", { url: nearby.urls?.[code] ?? "https://www.localdata.go.kr/", at: nearby.at ?? null, text: `${v.name} ${v.m < 1000 ? `${Math.round(v.m / 10) * 10}m` : `${(v.m / 1000).toFixed(1)}km`}`, count: v.n5 ?? null });
   }
   // ── 카카오 공식 API(장소 맞춤·홈페이지 후보)
   if (kakao?.place) {

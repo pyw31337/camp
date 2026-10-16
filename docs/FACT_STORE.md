@@ -23,7 +23,7 @@
 | `pipeline/out/facts.sqlite` | 같은 내용의 SQLite(`npm run facts:sqlite`) | 아니오 |
 | PostgreSQL `fact_attribute`·`campground_fact`·`campground_fact_best` | `db/010`, `npm run db:import-facts` | — |
 
-묶음(group): `stay` 숙박 형태·규모 · `power` 전기 · `fire` 불·화기 · `vehicle` 주차·차량 · `pet` 반려동물 · `price` 요금 · `fee` 추가 요금 · `time` 이용 시간 · `policy` 규칙·환불 · `sanitary` 위생시설 · `site` 사이트 · `amenity` 편의시설 · `env` 입지 · `theme` 계절·여행 테마 · `season` 운영 기간 · `booking` 예약 · `operator` 운영 주체·연락처 · `review` 후기 언급 · `rental` 대여.
+묶음(group): `stay` 숙박 형태·규모 · `power` 전기 · `fire` 불·화기 · `vehicle` 주차·차량 · `pet` 반려동물 · `price` 요금 · `fee` 추가 요금 · `time` 이용 시간 · `policy` 규칙·환불 · `sanitary` 위생시설 · `site` 사이트 · `amenity` 편의시설 · `env` 입지 · `theme` 계절·여행 테마 · `season` 운영 기간 · `booking` 예약 · `operator` 운영 주체·연락처 · `review` 후기 언급 · `rental` 대여 · `nearby` 주변 생활 인프라(최근접 편의점·상비약·마트·정육점·주유소·약국·동물병원, 직선 m).
 
 필요한 묶음만 읽으면 된다(예: 불멍 조건만 보는 에이전트는 `fire.ndjson` 1.4MB만).
 
@@ -43,7 +43,7 @@
 | --- | --- | --- |
 | `VERIFIED` (4) | 사람이 공식 원문과 대조 | `pilot_verified` |
 | `OPERATOR` (3) | 운영자가 스스로 공개한 문장에서 자동 추출 | `operator_homepage`, `operator_discovered`(카카오 검색으로 찾은 홈페이지) |
-| `CONFIRMED` (2) | 공공 등록값·공식 소개·지도 장소 | `gocamping`, `gocamping_intro`, `kakao_local` |
+| `CONFIRMED` (2) | 공공 등록값·공식 소개·지도 장소·공공 인허가 | `gocamping`, `gocamping_intro`, `kakao_local`, `localdata` |
 | `MENTION` (1) | 후기·검색 언급(건수 n) | `review_search`, `kakao_web`(홈페이지 후보) |
 
 - `MENTION`이 아닌 행은 원천 URL이 반드시 있다(`validateFacts`, Postgres CHECK). AGENTS.md 3번.
@@ -105,4 +105,4 @@ WHERE EXISTS (SELECT 1 FROM fact_best f WHERE f.cid=c.cid AND f.attr='FIRE_RULE'
 
 ## 7. 현재 규모 (2026-10-16 첫 생성)
 
-사실 96,917건 · 3,116곳 · 속성 130개 · VERIFIED 280 · OPERATOR 1,500 · CONFIRMED 83,757 · MENTION 11,380 (main 병합 후 재생성). 카카오 발굴은 첫 워크플로 실행 뒤 채워진다.
+사실 118,491건 · 3,116곳 · 속성 137개(20묶음) · VERIFIED 280 · OPERATOR 1,500 · CONFIRMED 105,331(LOCALDATA 주변 인프라 21,574 포함) · MENTION 11,380. 카카오 발굴은 첫 워크플로 실행 뒤 채워진다.

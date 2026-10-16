@@ -15,7 +15,7 @@
  "grades": {
   "VERIFIED": "사람이 공식 원문과 대조",
   "OPERATOR": "운영자 공개 문장 자동 추출",
-  "CONFIRMED": "고캠핑 등록값·공식 소개·카카오 장소",
+  "CONFIRMED": "고캠핑 등록값·공식 소개·카카오 장소·공공 인허가(LOCALDATA)",
   "MENTION": "후기·검색 언급(건수)"
  },
  "filters": {
@@ -45,7 +45,8 @@
   "booking": "예약",
   "operator": "운영 주체·연락처",
   "review": "후기 언급",
-  "rental": "대여"
+  "rental": "대여",
+  "nearby": "주변 생활 인프라"
  },
  "attributes": [
   {
@@ -1193,6 +1194,74 @@
    "type": "count",
    "unit": "건",
    "filter": "min"
+  },
+  {
+   "code": "NEARBY_CONVENIENCE_M",
+   "group": "nearby",
+   "label": "가장 가까운 편의점",
+   "type": "int",
+   "unit": "m",
+   "filter": "max",
+   "note": "직선거리. text에 상호·거리, count에 5km 안 개수. 20km 안에 없으면 행 없음",
+   "pref": "편의점이 가까워야 하나요?"
+  },
+  {
+   "code": "NEARBY_OTC_MEDICINE_M",
+   "group": "nearby",
+   "label": "가장 가까운 상비약 판매처(24시간 편의점 등)",
+   "type": "int",
+   "unit": "m",
+   "filter": "max",
+   "note": "직선거리. text에 상호·거리, count에 5km 안 개수. 20km 안에 없으면 행 없음",
+   "pref": "아이 동반·밤에 상비약을 살 곳이 필요하나요?"
+  },
+  {
+   "code": "NEARBY_MART_M",
+   "group": "nearby",
+   "label": "가장 가까운 마트·슈퍼·하나로",
+   "type": "int",
+   "unit": "m",
+   "filter": "max",
+   "note": "직선거리. text에 상호·거리, count에 5km 안 개수. 20km 안에 없으면 행 없음",
+   "pref": "현지에서 장을 볼 건가요?"
+  },
+  {
+   "code": "NEARBY_BUTCHER_M",
+   "group": "nearby",
+   "label": "가장 가까운 정육점·축산물 판매",
+   "type": "int",
+   "unit": "m",
+   "filter": "max",
+   "note": "직선거리. text에 상호·거리, count에 5km 안 개수. 20km 안에 없으면 행 없음",
+   "pref": "고기를 현지에서 살 건가요?"
+  },
+  {
+   "code": "NEARBY_FUEL_M",
+   "group": "nearby",
+   "label": "가장 가까운 주유소",
+   "type": "int",
+   "unit": "m",
+   "filter": "max",
+   "note": "직선거리. text에 상호·거리, count에 5km 안 개수. 20km 안에 없으면 행 없음"
+  },
+  {
+   "code": "NEARBY_PHARMACY_M",
+   "group": "nearby",
+   "label": "가장 가까운 약국",
+   "type": "int",
+   "unit": "m",
+   "filter": "max",
+   "note": "직선거리. text에 상호·거리, count에 5km 안 개수. 20km 안에 없으면 행 없음"
+  },
+  {
+   "code": "NEARBY_VET_M",
+   "group": "nearby",
+   "label": "가장 가까운 동물병원",
+   "type": "int",
+   "unit": "m",
+   "filter": "max",
+   "note": "직선거리. text에 상호·거리, count에 5km 안 개수. 20km 안에 없으면 행 없음",
+   "pref": "반려견과 가나요(비상시 동물병원)?"
   }
  ]
 }

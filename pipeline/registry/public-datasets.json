@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-10-16T04:54:38.673Z",
+ "generated_at": "2026-10-16T05:22:19.374879Z",
  "description": "공공데이터포털(data.go.kr) 캠핑·편의점 관련 데이터셋 목록과 우리 서비스 활용 계획. 계획 문서: docs/PUBLIC_DATA_PLAN.md",
  "search": {
   "keywords": [
@@ -9,13 +9,19 @@
   ],
   "counts_2026_10_16": {
    "캠핑": {
-    "FILE": 186,
     "API": 14,
-    "STD": 1,
-    "LINKED": 30
+    "FILE": 186,
+    "LINKED": 30,
+    "STD": 1
+   },
+   "편의점": {
+    "API": 21,
+    "FILE": 200,
+    "LINKED": 68,
+    "STD": 4
    }
   },
-  "note": "캠핑 FILE 1~100위만 목록화. 나머지(파일 101~186위, API·표준·연계 전체, 편의점 검색 결과)는 data.go.kr 접속 차단(연속 요청 후 연결 재설정)으로 미수집 — 재시도 중, 들어오면 추가"
+  "note": "캠핑 FILE 1~100위는 datasets(지자체 현황·공공 캠핑장 운영)로 정리, 101~186위와 편의점 결과 전체는 inventory에 제목·링크로 남김(perPage 100 기준 상위 결과)."
  },
  "priorities": {
   "P0": "이번 단계에 적재",
@@ -1047,7 +1053,2381 @@
    "status": "module_in_main",
    "code": "pipeline/lib/standard-campgrounds.mjs, scripts/sync-standard-campgrounds.mjs (Gemini)",
    "url": "https://www.data.go.kr/tcs/dss/selectDataSetList.do?dType=STD&keyword=%EC%BA%A0%ED%95%91"
+  },
+  {
+   "status": "planned",
+   "id": "15154788",
+   "kind": "API",
+   "title": "행정안전부_문화_자동차야영장업 조회서비스",
+   "org": "행정안전부",
+   "category": "master",
+   "use": "자동차야영장업 인허가 API(파일 15045088과 같은 원천, 증분 조회)",
+   "priority": "P1",
+   "url": "https://www.data.go.kr/data/15154788/openapi.do"
+  },
+  {
+   "status": "planned",
+   "id": "15101930",
+   "kind": "API",
+   "title": "행정안전부_편의점(LOCALDATA 담배·휴게음식 기반 편의점 조회)",
+   "org": "행정안전부",
+   "category": "nearby",
+   "use": "편의점 전용 조회 — 키 활용신청 후 LOCALDATA 체인 상호 판별 결과와 대조",
+   "priority": "P1",
+   "url": "https://www.data.go.kr/data/15101930/openapi.do"
+  },
+  {
+   "status": "planned",
+   "id": "15155031",
+   "kind": "API",
+   "title": "행정안전부_기타_담배소매업 조회서비스",
+   "org": "행정안전부",
+   "category": "nearby",
+   "use": "담배소매인(편의점·슈퍼 대부분). 현재는 같은 원천의 LOCALDATA 공개 파일(tobacco_retailers)을 키 없이 사용 중",
+   "priority": "P1",
+   "url": "https://www.data.go.kr/data/15155031/openapi.do"
+  },
+  {
+   "status": "planned",
+   "id": "15021139",
+   "kind": "STD",
+   "title": "전국야영(캠핑)장표준데이터",
+   "org": "지자체(행정안전부 표준)",
+   "category": "master",
+   "use": "정량 스펙(Gemini standard-campgrounds.mjs)",
+   "priority": "P0",
+   "url": "https://www.data.go.kr/data/15021139/standard.do"
+  },
+  {
+   "status": "planned",
+   "id": "15056912",
+   "kind": "API",
+   "title": "기상청_관광코스별 관광지 상세 날씨 조회서비스",
+   "org": "기상청",
+   "category": "weather",
+   "use": "관광지 지점 예보 → 캠핑장 날씨",
+   "priority": "P2",
+   "url": "https://www.data.go.kr/data/15056912/openapi.do"
+  },
+  {
+   "status": "planned",
+   "id": "15108120",
+   "kind": "API",
+   "title": "충청남도 서천군_서천군캠핑장정보 조회 서비스",
+   "org": "서천군",
+   "category": "local_registry",
+   "use": "지자체 API",
+   "priority": "P2",
+   "url": "https://www.data.go.kr/data/15108120/openapi.do"
+  },
+  {
+   "status": "planned",
+   "id": "15083775",
+   "kind": "API",
+   "title": "전남광주통합특별시_텐트촌 정보",
+   "org": "전남",
+   "category": "master",
+   "use": "텐트촌(노지·무료 후보)",
+   "priority": "P1",
+   "url": "https://www.data.go.kr/data/15083775/openapi.do"
+  },
+  {
+   "status": "planned",
+   "id": "15074720",
+   "kind": "API",
+   "title": "전남광주통합특별시_해수욕장정보 데이터",
+   "org": "전남",
+   "category": "nearby",
+   "use": "해수욕장 야영 가능 여부 → 무료/노지",
+   "priority": "P2",
+   "url": "https://www.data.go.kr/data/15074720/openapi.do"
+  },
+  {
+   "status": "planned",
+   "id": "96398",
+   "kind": "LINKED",
+   "title": "전국야영(캠핑)장표준데이터(연계)",
+   "org": "행정안전부",
+   "category": "master",
+   "use": "표준데이터 연계판",
+   "priority": "P1",
+   "url": "https://www.data.go.kr/data/96398/linkedData.do"
+  },
+  {
+   "status": "planned",
+   "id": "80381",
+   "kind": "LINKED",
+   "title": "캠핑 가능 장소 위치 정보(제주)",
+   "org": "제주특별자치도",
+   "category": "master",
+   "use": "제주 합법 야영·차박 가능지 → free-sites(Gemini 계획)",
+   "priority": "P1",
+   "url": "https://www.data.go.kr/data/80381/linkedData.do"
+  },
+  {
+   "status": "planned",
+   "id": "85413",
+   "kind": "LINKED",
+   "title": "전국캠핑장 기상 정보",
+   "org": "연계",
+   "category": "weather",
+   "use": "캠핑장 단위 기상(형식 확인 필요)",
+   "priority": "P2",
+   "url": "https://www.data.go.kr/data/85413/linkedData.do"
+  },
+  {
+   "status": "planned",
+   "id": "95424",
+   "kind": "LINKED",
+   "title": "전국캠핑장 인접 교통수단 및 정류장",
+   "org": "연계",
+   "category": "nearby",
+   "use": "대중교통으로 가는 캠핑장(뚜벅이 캠핑) — 정류장 거리·노선",
+   "priority": "P1",
+   "url": "https://www.data.go.kr/data/95424/linkedData.do"
+  },
+  {
+   "status": "planned",
+   "id": "94292",
+   "kind": "LINKED",
+   "title": "반려견동반 출입가능한 장소정보데이터",
+   "org": "연계",
+   "category": "nearby",
+   "use": "반려견 동반 가능 장소 교차 확인(PET_POLICY 보조)",
+   "priority": "P1",
+   "url": "https://www.data.go.kr/data/94292/linkedData.do"
+  },
+  {
+   "status": "planned",
+   "id": "94268",
+   "kind": "LINKED",
+   "title": "캠핑/차박 이용자 특성 및 차량 특성",
+   "org": "연계",
+   "category": "research",
+   "use": "이용자 페르소나·필터 우선순위 근거",
+   "priority": "P2",
+   "url": "https://www.data.go.kr/data/94268/linkedData.do"
+  },
+  {
+   "status": "planned",
+   "id": "96178",
+   "kind": "LINKED",
+   "title": "지역별 축제캠핑상품",
+   "org": "연계",
+   "category": "operations",
+   "use": "축제 연계 캠핑 상품 → 테마 컬렉션",
+   "priority": "P2",
+   "url": "https://www.data.go.kr/data/96178/linkedData.do"
+  },
+  {
+   "status": "planned",
+   "id": "98936",
+   "kind": "LINKED",
+   "title": "공간화-전국 야영장 등록현황",
+   "org": "연계",
+   "category": "master",
+   "use": "등록 현황 공간 데이터",
+   "priority": "P2",
+   "url": "https://www.data.go.kr/data/98936/linkedData.do"
+  },
+  {
+   "status": "planned",
+   "id": "15095562",
+   "kind": "FILE",
+   "title": "경상북도_슈퍼마켓,편의점공간정보",
+   "org": "경상북도",
+   "category": "nearby",
+   "use": "경북 슈퍼·편의점 좌표(교차 확인)",
+   "priority": "P2",
+   "url": "https://www.data.go.kr/data/15095562/fileData.do"
+  },
+  {
+   "status": "planned",
+   "id": "15150468",
+   "kind": "API",
+   "title": "한국석유공사_주유소 상세정보(ID) 오픈 API",
+   "org": "한국석유공사",
+   "category": "nearby",
+   "use": "주유소 상세(세차·편의점 병설·LPG) — LOCALDATA 주유소 보강",
+   "priority": "P2",
+   "url": "https://www.data.go.kr/data/15150468/openapi.do"
+  },
+  {
+   "status": "planned",
+   "id": "15076642",
+   "kind": "API",
+   "title": "한국도로공사_휴게소 브랜드 매장현황 조회 서비스",
+   "org": "한국도로공사",
+   "category": "route",
+   "use": "가는 길 휴게소 매장(편의점·식당)",
+   "priority": "P2",
+   "url": "https://www.data.go.kr/data/15076642/openapi.do"
+  },
+  {
+   "status": "planned",
+   "id": "85049",
+   "kind": "LINKED",
+   "title": "2021년 산촌마을 주변 편의시설 개수",
+   "org": "연계",
+   "category": "research",
+   "use": "산촌 편의시설 밀도(참고)",
+   "priority": "P2",
+   "url": "https://www.data.go.kr/data/85049/linkedData.do"
+  },
+  {
+   "status": "in_use",
+   "id": "LOCALDATA-nearby",
+   "kind": "FILE",
+   "title": "LOCALDATA 인허가 공개 파일 7업종(상비약·담배소매·대규모점포·축산물판매·석유판매·약국·동물병원)",
+   "org": "행정안전부",
+   "category": "nearby",
+   "use": "캠핑장별 최근접 편의점·상비약·마트·정육점·주유소·약국·동물병원(직선 m, 5km 안 개수) → 사실 NEARBY_*",
+   "priority": "P0",
+   "url": "https://www.localdata.go.kr/",
+   "code": "pipeline/lib/nearby-licensed.mjs, scripts/sync-nearby-licensed.mjs"
   }
  ],
- "related_plan": "docs/PUBLIC_DATA_INTEGRATION_PLAN.md (Gemini) — 표준·연계·사진·노지 수집 설계. 이 원장은 그 문서와 함께 쓰는 데이터셋별 활용·우선순위 목록이다."
+ "related_plan": "docs/PUBLIC_DATA_INTEGRATION_PLAN.md (Gemini) — 표준·연계·사진·노지 수집 설계. 이 원장은 그 문서와 함께 쓰는 데이터셋별 활용·우선순위 목록이다.",
+ "inventory": {
+  "캠핑": {
+   "API": [
+    {
+     "id": "15101933",
+     "title": "한국관광공사_고캠핑정보 조회서비스_GW",
+     "url": "https://www.data.go.kr/data/15101933/openapi.do"
+    },
+    {
+     "id": "15032704",
+     "title": "경기도 광명시_야영(캠핑)장 현황(개방표준)",
+     "url": "https://www.data.go.kr/data/15032704/openapi.do"
+    },
+    {
+     "id": "15056912",
+     "title": "기상청_관광코스별 관광지 상세 날씨 조회서비스",
+     "url": "https://www.data.go.kr/data/15056912/openapi.do"
+    },
+    {
+     "id": "15032737",
+     "title": "경기도 광명시_캠핑장 현황",
+     "url": "https://www.data.go.kr/data/15032737/openapi.do"
+    },
+    {
+     "id": "15109390",
+     "title": "경상북도 경주시_오토캠핑,야영장 현황",
+     "url": "https://www.data.go.kr/data/15109390/openapi.do"
+    },
+    {
+     "id": "15108120",
+     "title": "충청남도 서천군_서천군캠핑장정보 조회 서비스",
+     "url": "https://www.data.go.kr/data/15108120/openapi.do"
+    },
+    {
+     "id": "15157808",
+     "title": "경상북도 영천시_캠핑장현황",
+     "url": "https://www.data.go.kr/data/15157808/openapi.do"
+    },
+    {
+     "id": "15083775",
+     "title": "전남광주통합특별시_텐트촌 정보",
+     "url": "https://www.data.go.kr/data/15083775/openapi.do"
+    },
+    {
+     "id": "15057306",
+     "title": "경기도_유원시설업체 현황(기타)",
+     "url": "https://www.data.go.kr/data/15057306/openapi.do"
+    },
+    {
+     "id": "15155149",
+     "title": "행정안전부_문화_일반야영장업 조회서비스",
+     "url": "https://www.data.go.kr/data/15155149/openapi.do"
+    },
+    {
+     "id": "15154788",
+     "title": "행정안전부_문화_자동차야영장업 조회서비스",
+     "url": "https://www.data.go.kr/data/15154788/openapi.do"
+    },
+    {
+     "id": "15098025",
+     "title": "울산광역시_휴양림_현황",
+     "url": "https://www.data.go.kr/data/15098025/openapi.do"
+    },
+    {
+     "id": "15074720",
+     "title": "전남광주통합특별시_해수욕장정보 데이터",
+     "url": "https://www.data.go.kr/data/15074720/openapi.do"
+    },
+    {
+     "id": "15109321",
+     "title": "재단법인전라남도관광재단_전라남도 해안가마을 관광자원 정보 데이터",
+     "url": "https://www.data.go.kr/data/15109321/openapi.do"
+    }
+   ],
+   "FILE": [
+    {
+     "id": "15071753",
+     "title": "서울특별시_일반야영장업 인허가 정보",
+     "url": "https://www.data.go.kr/data/15071753/fileData.do"
+    },
+    {
+     "id": "15151719",
+     "title": "문경관광진흥공단_국민여가캠핑장 시설별 월간 이용객 현황",
+     "url": "https://www.data.go.kr/data/15151719/fileData.do"
+    },
+    {
+     "id": "15091998",
+     "title": "산림청 국립자연휴양림관리소_국립자연휴양림 바비큐 이용불가 기간 목록",
+     "url": "https://www.data.go.kr/data/15091998/fileData.do"
+    },
+    {
+     "id": "15063299",
+     "title": "천안도시공사_시설현황",
+     "url": "https://www.data.go.kr/data/15063299/fileData.do"
+    },
+    {
+     "id": "15113383",
+     "title": "산림청 국립자연휴양림관리소_숲나들e 휴양림할인정책정보",
+     "url": "https://www.data.go.kr/data/15113383/fileData.do"
+    },
+    {
+     "id": "15046567",
+     "title": "서울특별시_한강공원 이용객 현황 통계",
+     "url": "https://www.data.go.kr/data/15046567/fileData.do"
+    },
+    {
+     "id": "15115844",
+     "title": "대구광역시 수성구_진밭골야영장 밤사진",
+     "url": "https://www.data.go.kr/data/15115844/fileData.do"
+    },
+    {
+     "id": "15075296",
+     "title": "동해시시설관리공단_망상리조트 체크인",
+     "url": "https://www.data.go.kr/data/15075296/fileData.do"
+    },
+    {
+     "id": "15040874",
+     "title": "전북특별자치도 장수군_휴양림 부대시설 현황",
+     "url": "https://www.data.go.kr/data/15040874/fileData.do"
+    },
+    {
+     "id": "15108371",
+     "title": "대구광역시 북구_함지공원_항공촬영 이미지데이터",
+     "url": "https://www.data.go.kr/data/15108371/fileData.do"
+    },
+    {
+     "id": "15003469",
+     "title": "국립공원공단_국립공원 야영장 공간데이터",
+     "url": "https://www.data.go.kr/data/15003469/fileData.do"
+    },
+    {
+     "id": "15108365",
+     "title": "대구광역시 북구_별별상상이야기관_항공촬영 이미지데이터",
+     "url": "https://www.data.go.kr/data/15108365/fileData.do"
+    },
+    {
+     "id": "15044515",
+     "title": "양주시시설관리공단_시설물 현황 정보",
+     "url": "https://www.data.go.kr/data/15044515/fileData.do"
+    },
+    {
+     "id": "15122144",
+     "title": "전남광주통합특별시_해수욕장 동영상 갤러리",
+     "url": "https://www.data.go.kr/data/15122144/fileData.do"
+    },
+    {
+     "id": "15103184",
+     "title": "대구광역시 북구_관광지도",
+     "url": "https://www.data.go.kr/data/15103184/fileData.do"
+    },
+    {
+     "id": "15004412",
+     "title": "안동시시설관리공단 휴양시설현황",
+     "url": "https://www.data.go.kr/data/15004412/fileData.do"
+    },
+    {
+     "id": "15112320",
+     "title": "경기도 연천군_주요관광지 입장객 현황",
+     "url": "https://www.data.go.kr/data/15112320/fileData.do"
+    },
+    {
+     "id": "15055382",
+     "title": "서울특별시 강북구_대형폐기물 품목별 부과기준",
+     "url": "https://www.data.go.kr/data/15055382/fileData.do"
+    },
+    {
+     "id": "15052675",
+     "title": "산림청 국립자연휴양림관리소_주요 시설유형별 이용 연령대 분석",
+     "url": "https://www.data.go.kr/data/15052675/fileData.do"
+    },
+    {
+     "id": "15043549",
+     "title": "제주특별자치도_휴양림이용객현황",
+     "url": "https://www.data.go.kr/data/15043549/fileData.do"
+    },
+    {
+     "id": "3079973",
+     "title": "전북특별자치도 정읍시_주요 관광지점 입장객 현황",
+     "url": "https://www.data.go.kr/data/3079973/fileData.do"
+    },
+    {
+     "id": "15114455",
+     "title": "서울특별시_한강공원 월별 이용객 현황",
+     "url": "https://www.data.go.kr/data/15114455/fileData.do"
+    },
+    {
+     "id": "15149445",
+     "title": "한국관광공사_캠핑카 오수수집시설(덤프스테이션) 지도",
+     "url": "https://www.data.go.kr/data/15149445/fileData.do"
+    },
+    {
+     "id": "2151150",
+     "title": "국립공원공단_국립공원 야영장",
+     "url": "https://www.data.go.kr/data/2151150/fileData.do"
+    },
+    {
+     "id": "15041556",
+     "title": "전북특별자치도 장수군_숙박업소 현황",
+     "url": "https://www.data.go.kr/data/15041556/fileData.do"
+    },
+    {
+     "id": "15049951",
+     "title": "대구광역시_캠프장시설정보",
+     "url": "https://www.data.go.kr/data/15049951/fileData.do"
+    },
+    {
+     "id": "15136412",
+     "title": "경기도_경기공유서비스 캠핌장 시설",
+     "url": "https://www.data.go.kr/data/15136412/fileData.do"
+    },
+    {
+     "id": "15122002",
+     "title": "경기도 광명시_주요관광지 입장객수 현황",
+     "url": "https://www.data.go.kr/data/15122002/fileData.do"
+    },
+    {
+     "id": "15040840",
+     "title": "전북특별자치도 장수군_주요관광지 입장객 정보",
+     "url": "https://www.data.go.kr/data/15040840/fileData.do"
+    },
+    {
+     "id": "15099509",
+     "title": "안산도시공사_안산시 공영유료주차장 캠핑카 주차면 현황 정보",
+     "url": "https://www.data.go.kr/data/15099509/fileData.do"
+    },
+    {
+     "id": "15013091",
+     "title": "시흥도시공사_관리 공원정보",
+     "url": "https://www.data.go.kr/data/15013091/fileData.do"
+    },
+    {
+     "id": "15140815",
+     "title": "서울특별시 은평구_일반야영장업 인허가 정보",
+     "url": "https://www.data.go.kr/data/15140815/fileData.do"
+    },
+    {
+     "id": "15089889",
+     "title": "충청남도 금산군_금산 10경(서대산 산꽃세상)",
+     "url": "https://www.data.go.kr/data/15089889/fileData.do"
+    },
+    {
+     "id": "15124237",
+     "title": "전남광주통합특별시 무안군_무안황토갯벌랜드_관광시설정보",
+     "url": "https://www.data.go.kr/data/15124237/fileData.do"
+    },
+    {
+     "id": "15140919",
+     "title": "서울특별시 광진구_일반야영장업 인허가 정보",
+     "url": "https://www.data.go.kr/data/15140919/fileData.do"
+    },
+    {
+     "id": "15118566",
+     "title": "전남광주통합특별시_시민의숲 야영장 이용객 현황",
+     "url": "https://www.data.go.kr/data/15118566/fileData.do"
+    },
+    {
+     "id": "15118190",
+     "title": "서울특별시 성동구_일반야영장업 인허가 정보",
+     "url": "https://www.data.go.kr/data/15118190/fileData.do"
+    },
+    {
+     "id": "15064419",
+     "title": "산림청 국립자연휴양림관리소_국립자연휴양림 시설관련 정보",
+     "url": "https://www.data.go.kr/data/15064419/fileData.do"
+    },
+    {
+     "id": "15085973",
+     "title": "경상남도 하동군_관광객이용시설업 현황",
+     "url": "https://www.data.go.kr/data/15085973/fileData.do"
+    },
+    {
+     "id": "15076381",
+     "title": "이천시시설관리공단_할인율 정보",
+     "url": "https://www.data.go.kr/data/15076381/fileData.do"
+    },
+    {
+     "id": "15127517",
+     "title": "강원특별자치도 태백시_등록야영장 현황",
+     "url": "https://www.data.go.kr/data/15127517/fileData.do"
+    },
+    {
+     "id": "15116638",
+     "title": "전남광주통합특별시 남구_물품공유센터 물품 목록",
+     "url": "https://www.data.go.kr/data/15116638/fileData.do"
+    },
+    {
+     "id": "15093670",
+     "title": "전남광주통합특별시 여수시_국동365열린도서관도서정보",
+     "url": "https://www.data.go.kr/data/15093670/fileData.do"
+    },
+    {
+     "id": "15067532",
+     "title": "경기도 포천시_공공시설온라인예약현황",
+     "url": "https://www.data.go.kr/data/15067532/fileData.do"
+    },
+    {
+     "id": "15088709",
+     "title": "경상북도 의성군_숙박시설현황",
+     "url": "https://www.data.go.kr/data/15088709/fileData.do"
+    },
+    {
+     "id": "15116740",
+     "title": "서울특별시 구로구_일반야영장업 인허가 정보",
+     "url": "https://www.data.go.kr/data/15116740/fileData.do"
+    },
+    {
+     "id": "15093578",
+     "title": "전남광주통합특별시 여수시_국동365열린도서관도서대출이력정보",
+     "url": "https://www.data.go.kr/data/15093578/fileData.do"
+    },
+    {
+     "id": "15141662",
+     "title": "정선군시설관리공단_야영장 음수대 수질검사 결과",
+     "url": "https://www.data.go.kr/data/15141662/fileData.do"
+    },
+    {
+     "id": "15127103",
+     "title": "여주도시공사_홈페이지 운영현황",
+     "url": "https://www.data.go.kr/data/15127103/fileData.do"
+    },
+    {
+     "id": "15106702",
+     "title": "영천시시설관리공단_운영시설현황",
+     "url": "https://www.data.go.kr/data/15106702/fileData.do"
+    },
+    {
+     "id": "15116739",
+     "title": "서울특별시 구로구_자동차야영장업 인허가 정보",
+     "url": "https://www.data.go.kr/data/15116739/fileData.do"
+    },
+    {
+     "id": "15103504",
+     "title": "경상남도 양산시_야영장업 현황",
+     "url": "https://www.data.go.kr/data/15103504/fileData.do"
+    },
+    {
+     "id": "15075189",
+     "title": "제주특별자치도_무장애여행정보_39-이호테우해변",
+     "url": "https://www.data.go.kr/data/15075189/fileData.do"
+    },
+    {
+     "id": "15122145",
+     "title": "전남광주통합특별시_해수욕장 소개",
+     "url": "https://www.data.go.kr/data/15122145/fileData.do"
+    },
+    {
+     "id": "15129162",
+     "title": "경상북도 상주시_숙박정보",
+     "url": "https://www.data.go.kr/data/15129162/fileData.do"
+    },
+    {
+     "id": "15075196",
+     "title": "제주특별자치도_무장애여행정보_46-서귀포자연휴양림",
+     "url": "https://www.data.go.kr/data/15075196/fileData.do"
+    },
+    {
+     "id": "15154935",
+     "title": "전남광주통합특별시 화순군_대표홈페이지_쉴거리현황",
+     "url": "https://www.data.go.kr/data/15154935/fileData.do"
+    },
+    {
+     "id": "15109320",
+     "title": "재단법인전라남도관광재단_전라남도 해안가마을 관광자원 정보데이터",
+     "url": "https://www.data.go.kr/data/15109320/fileData.do"
+    },
+    {
+     "id": "15141895",
+     "title": "정선군시설관리공단_주요 관광지 3개년 이용객 현황",
+     "url": "https://www.data.go.kr/data/15141895/fileData.do"
+    },
+    {
+     "id": "15113937",
+     "title": "이천시시설관리공단_이천농업테마공원 숙박시설 운영 실적",
+     "url": "https://www.data.go.kr/data/15113937/fileData.do"
+    },
+    {
+     "id": "15162986",
+     "title": "독립기념관_캠핑장 예약정보",
+     "url": "https://www.data.go.kr/data/15162986/fileData.do"
+    },
+    {
+     "id": "15075765",
+     "title": "제주특별자치도_무장애여행관광지주변정보-46-서귀포자연휴양림",
+     "url": "https://www.data.go.kr/data/15075765/fileData.do"
+    },
+    {
+     "id": "15141970",
+     "title": "서울특별시 마포구_일반야영장업 인허가 정보",
+     "url": "https://www.data.go.kr/data/15141970/fileData.do"
+    },
+    {
+     "id": "15147251",
+     "title": "서울특별시 강북구_일반야영장업 인허가 정보",
+     "url": "https://www.data.go.kr/data/15147251/fileData.do"
+    },
+    {
+     "id": "15126893",
+     "title": "평창군시설관리공단_시설별주차장현황",
+     "url": "https://www.data.go.kr/data/15126893/fileData.do"
+    },
+    {
+     "id": "15126685",
+     "title": "동해시시설관리공단_망상리조트 홈페이지 이용현황",
+     "url": "https://www.data.go.kr/data/15126685/fileData.do"
+    },
+    {
+     "id": "15111373",
+     "title": "한국철도공사_시군구단위 거주 철도이용객 발매처별 선호레저 정보",
+     "url": "https://www.data.go.kr/data/15111373/fileData.do"
+    },
+    {
+     "id": "15128993",
+     "title": "경상북도 봉화군_관내 숙박업 현황",
+     "url": "https://www.data.go.kr/data/15128993/fileData.do"
+    },
+    {
+     "id": "15149436",
+     "title": "한국관광공사_친환경 공공 우수야영장 소개정보",
+     "url": "https://www.data.go.kr/data/15149436/fileData.do"
+    },
+    {
+     "id": "15134888",
+     "title": "서울특별시_한강공원_힌강이용안내",
+     "url": "https://www.data.go.kr/data/15134888/fileData.do"
+    },
+    {
+     "id": "15126692",
+     "title": "강원특별자치도 정선군_야영장",
+     "url": "https://www.data.go.kr/data/15126692/fileData.do"
+    },
+    {
+     "id": "15141672",
+     "title": "정선군시설관리공단_자동심장충격기(AED) 설치 현황",
+     "url": "https://www.data.go.kr/data/15141672/fileData.do"
+    },
+    {
+     "id": "15115487",
+     "title": "서울특별시 중랑구_자동차야영장업 인허가 정보",
+     "url": "https://www.data.go.kr/data/15115487/fileData.do"
+    },
+    {
+     "id": "15141896",
+     "title": "정선군시설관리공단_시설별 주차장 현황",
+     "url": "https://www.data.go.kr/data/15141896/fileData.do"
+    },
+    {
+     "id": "15134291",
+     "title": "시흥도시공사_공감비공감현황",
+     "url": "https://www.data.go.kr/data/15134291/fileData.do"
+    },
+    {
+     "id": "15154359",
+     "title": "울산광역시 중구_야영휴양시설 통합운영체계_게시판",
+     "url": "https://www.data.go.kr/data/15154359/fileData.do"
+    },
+    {
+     "id": "15141981",
+     "title": "서울특별시 마포구_시설대관 공공서비스예약 정보",
+     "url": "https://www.data.go.kr/data/15141981/fileData.do"
+    },
+    {
+     "id": "15104852",
+     "title": "국립공원공단_덕유산 덕유대 야영장 물레방아 소리",
+     "url": "https://www.data.go.kr/data/15104852/fileData.do"
+    },
+    {
+     "id": "15154915",
+     "title": "충청북도_나드리_관광자원 목록",
+     "url": "https://www.data.go.kr/data/15154915/fileData.do"
+    },
+    {
+     "id": "15156133",
+     "title": "당진도시공사_CCTV운영현황",
+     "url": "https://www.data.go.kr/data/15156133/fileData.do"
+    },
+    {
+     "id": "15152438",
+     "title": "충청남도교육청_행복교육통합누리집_대차정보",
+     "url": "https://www.data.go.kr/data/15152438/fileData.do"
+    },
+    {
+     "id": "15165126",
+     "title": "국립공원공단_예약시설상세정보",
+     "url": "https://www.data.go.kr/data/15165126/fileData.do"
+    },
+    {
+     "id": "15164748",
+     "title": "경기도 하남시_야영장 현황",
+     "url": "https://www.data.go.kr/data/15164748/fileData.do"
+    },
+    {
+     "id": "15161670",
+     "title": "충청남도 예산군_대표누리집 숙박업소",
+     "url": "https://www.data.go.kr/data/15161670/fileData.do"
+    },
+    {
+     "id": "15168882",
+     "title": "전남광주통합특별시 광산구_공유센터 물품목록",
+     "url": "https://www.data.go.kr/data/15168882/fileData.do"
+    },
+    {
+     "id": "15169540",
+     "title": "대구광역시교육청_대구미래교육연구원_대구교육정보서비스_예약프로그램현황",
+     "url": "https://www.data.go.kr/data/15169540/fileData.do"
+    }
+   ],
+   "LINKED": [
+    {
+     "id": "75653",
+     "title": "야영(캠핑)장 시설 현황",
+     "url": "https://www.data.go.kr/data/75653/linkedData.do"
+    },
+    {
+     "id": "75873",
+     "title": "자동차 야영(캠핑)장 현황",
+     "url": "https://www.data.go.kr/data/75873/linkedData.do"
+    },
+    {
+     "id": "74175",
+     "title": "경기공유서비스_캠핑장",
+     "url": "https://www.data.go.kr/data/74175/linkedData.do"
+    },
+    {
+     "id": "1429",
+     "title": "한국문화정보원_전국 문화 여가 활동 시설(캠핑)",
+     "url": "https://www.data.go.kr/data/1429/linkedData.do"
+    },
+    {
+     "id": "256167",
+     "title": "캠핑 장 현황",
+     "url": "https://www.data.go.kr/data/256167/linkedData.do"
+    },
+    {
+     "id": "92171",
+     "title": "캠핑 밀키트 소셜 분석 데이터",
+     "url": "https://www.data.go.kr/data/92171/linkedData.do"
+    },
+    {
+     "id": "80381",
+     "title": "캠핑 가능 장소 위치 정보",
+     "url": "https://www.data.go.kr/data/80381/linkedData.do"
+    },
+    {
+     "id": "237157",
+     "title": "농촌지역캠핑선호도 변화",
+     "url": "https://www.data.go.kr/data/237157/linkedData.do"
+    },
+    {
+     "id": "237004",
+     "title": "농촌지역캠핑관광 일정",
+     "url": "https://www.data.go.kr/data/237004/linkedData.do"
+    },
+    {
+     "id": "237116",
+     "title": "농촌지역캠핑횟수 및 일정",
+     "url": "https://www.data.go.kr/data/237116/linkedData.do"
+    },
+    {
+     "id": "237092",
+     "title": "농촌관광 활동 선호도_농촌지역 캠핑",
+     "url": "https://www.data.go.kr/data/237092/linkedData.do"
+    },
+    {
+     "id": "96398",
+     "title": "전국야영(캠핑)장표준데이터",
+     "url": "https://www.data.go.kr/data/96398/linkedData.do"
+    },
+    {
+     "id": "237102",
+     "title": "농촌지역 관계활동 지역_농촌체험/농촌숙박/농촌지역 맛집 방문/캠핑/둘레길 걷기",
+     "url": "https://www.data.go.kr/data/237102/linkedData.do"
+    },
+    {
+     "id": "85413",
+     "title": "전국캠핑장 기상 정보",
+     "url": "https://www.data.go.kr/data/85413/linkedData.do"
+    },
+    {
+     "id": "91624",
+     "title": "전국 문화 여가 활동 시설(캠핑) 데이터",
+     "url": "https://www.data.go.kr/data/91624/linkedData.do"
+    },
+    {
+     "id": "92170",
+     "title": "캠핑 밀키트 인기검색어 분석 데이터",
+     "url": "https://www.data.go.kr/data/92170/linkedData.do"
+    },
+    {
+     "id": "94268",
+     "title": "캠핑 /차박 이용자 특성 및 차량 특성",
+     "url": "https://www.data.go.kr/data/94268/linkedData.do"
+    },
+    {
+     "id": "95689",
+     "title": "전국캠핑장 위치 및 부가정보",
+     "url": "https://www.data.go.kr/data/95689/linkedData.do"
+    },
+    {
+     "id": "96178",
+     "title": "지역별 축제캠핑상품",
+     "url": "https://www.data.go.kr/data/96178/linkedData.do"
+    },
+    {
+     "id": "74174",
+     "title": "경기공유서비스_캠핌장_시설",
+     "url": "https://www.data.go.kr/data/74174/linkedData.do"
+    },
+    {
+     "id": "95424",
+     "title": "전국캠핑장 인접 교통수단 및 정류장",
+     "url": "https://www.data.go.kr/data/95424/linkedData.do"
+    },
+    {
+     "id": "75781",
+     "title": "유원시설업체 현황(기타)",
+     "url": "https://www.data.go.kr/data/75781/linkedData.do"
+    },
+    {
+     "id": "74373",
+     "title": "경기도 레저스포츠 시설 현황",
+     "url": "https://www.data.go.kr/data/74373/linkedData.do"
+    },
+    {
+     "id": "74372",
+     "title": "경기도 레저스포츠 시설",
+     "url": "https://www.data.go.kr/data/74372/linkedData.do"
+    },
+    {
+     "id": "98936",
+     "title": "공간화-전국 야영장 등록현황",
+     "url": "https://www.data.go.kr/data/98936/linkedData.do"
+    },
+    {
+     "id": "85094",
+     "title": "숙박업 월별펜션테마별 예약비중 데이터",
+     "url": "https://www.data.go.kr/data/85094/linkedData.do"
+    },
+    {
+     "id": "85690",
+     "title": "스포츠레저용품 구입방법 및 구입채널",
+     "url": "https://www.data.go.kr/data/85690/linkedData.do"
+    },
+    {
+     "id": "85689",
+     "title": "스포츠레저용품 구입자 특성",
+     "url": "https://www.data.go.kr/data/85689/linkedData.do"
+    },
+    {
+     "id": "85584",
+     "title": "구입 스포츠 레저 용품 종류",
+     "url": "https://www.data.go.kr/data/85584/linkedData.do"
+    },
+    {
+     "id": "94292",
+     "title": "반려견동반 출입가능한 장소정보데이터",
+     "url": "https://www.data.go.kr/data/94292/linkedData.do"
+    }
+   ],
+   "STD": [
+    {
+     "id": "15021139",
+     "title": "전국야영(캠핑)장표준데이터",
+     "url": "https://www.data.go.kr/data/15021139/standard.do"
+    }
+   ]
+  },
+  "편의점": {
+   "API": [
+    {
+     "id": "15101930",
+     "title": "행정안전부_ 편의점",
+     "url": "https://www.data.go.kr/data/15101930/openapi.do"
+    },
+    {
+     "id": "15058694",
+     "title": "경기도_휴게음식점(편의점) 현황",
+     "url": "https://www.data.go.kr/data/15058694/openapi.do"
+    },
+    {
+     "id": "15155031",
+     "title": "행정안전부_기타_담배소매업 조회서비스",
+     "url": "https://www.data.go.kr/data/15155031/openapi.do"
+    },
+    {
+     "id": "15056754",
+     "title": "경기도_안전 상비의약품 판매업소 현황",
+     "url": "https://www.data.go.kr/data/15056754/openapi.do"
+    },
+    {
+     "id": "15154791",
+     "title": "행정안전부_건강_안전상비의약품 판매업소 조회서비스",
+     "url": "https://www.data.go.kr/data/15154791/openapi.do"
+    },
+    {
+     "id": "15108173",
+     "title": "대전광역시 서구_종량제봉투지정판매소현황",
+     "url": "https://www.data.go.kr/data/15108173/openapi.do"
+    },
+    {
+     "id": "15059293",
+     "title": "경기도_쓰레기종량제 봉투판매업체 현황",
+     "url": "https://www.data.go.kr/data/15059293/openapi.do"
+    },
+    {
+     "id": "15097208",
+     "title": "식품의약품안전처_안전상비의약품 정보",
+     "url": "https://www.data.go.kr/data/15097208/openapi.do"
+    },
+    {
+     "id": "15057362",
+     "title": "경기도_휴게음식점(키즈카페) 현황",
+     "url": "https://www.data.go.kr/data/15057362/openapi.do"
+    },
+    {
+     "id": "15108189",
+     "title": "대전광역시 서구_휴게음식점현황",
+     "url": "https://www.data.go.kr/data/15108189/openapi.do"
+    },
+    {
+     "id": "15108161",
+     "title": "대전광역시 서구_안전상비의약품판매업현황",
+     "url": "https://www.data.go.kr/data/15108161/openapi.do"
+    },
+    {
+     "id": "15109168",
+     "title": "대구광역시_아동급식카드가맹점정보조회서비스",
+     "url": "https://www.data.go.kr/data/15109168/openapi.do"
+    },
+    {
+     "id": "15076642",
+     "title": "한국도로공사_휴게소 브랜드 매장현황 조회 서비스",
+     "url": "https://www.data.go.kr/data/15076642/openapi.do"
+    },
+    {
+     "id": "15063256",
+     "title": "서울특별시 동작구_안전상비의약품 판매업소 인허가 정보",
+     "url": "https://www.data.go.kr/data/15063256/openapi.do"
+    },
+    {
+     "id": "15133016",
+     "title": "한국석유관리원_수소충전소_부대시설",
+     "url": "https://www.data.go.kr/data/15133016/openapi.do"
+    },
+    {
+     "id": "15103306",
+     "title": "전북특별자치도_아동 급식카드 가맹점 정보",
+     "url": "https://www.data.go.kr/data/15103306/openapi.do"
+    },
+    {
+     "id": "15095948",
+     "title": "대구광역시 북구_종량제봉투판매업소현황 생산시설",
+     "url": "https://www.data.go.kr/data/15095948/openapi.do"
+    },
+    {
+     "id": "15150468",
+     "title": "한국석유공사_주유소 상세정보(ID) 오픈 API",
+     "url": "https://www.data.go.kr/data/15150468/openapi.do"
+    },
+    {
+     "id": "15057741",
+     "title": "경기도_의료법인 부대사업시설 현황",
+     "url": "https://www.data.go.kr/data/15057741/openapi.do"
+    },
+    {
+     "id": "15149530",
+     "title": "행정안전부_생활안전지도 안전비상벨 위치정보",
+     "url": "https://www.data.go.kr/data/15149530/openapi.do"
+    },
+    {
+     "id": "15163516",
+     "title": "부산광역시_주유소 기본정보 조회서비스",
+     "url": "https://www.data.go.kr/data/15163516/openapi.do"
+    }
+   ],
+   "FILE": [
+    {
+     "id": "3073324",
+     "title": "서울특별시 도봉구_편의점(담배 소매) 현황",
+     "url": "https://www.data.go.kr/data/3073324/fileData.do"
+    },
+    {
+     "id": "15095562",
+     "title": "경상북도_슈퍼마켓,편의점공간정보",
+     "url": "https://www.data.go.kr/data/15095562/fileData.do"
+    },
+    {
+     "id": "15113231",
+     "title": "전북특별자치도 전주시_ 편의점",
+     "url": "https://www.data.go.kr/data/15113231/fileData.do"
+    },
+    {
+     "id": "15151666",
+     "title": "코레일유통(주)_편의점및 전문점 매장 위치 정보",
+     "url": "https://www.data.go.kr/data/15151666/fileData.do"
+    },
+    {
+     "id": "15061360",
+     "title": "산업통상부_주요 유통업체 전년동월대비 매출증가율 추이",
+     "url": "https://www.data.go.kr/data/15061360/fileData.do"
+    },
+    {
+     "id": "15124548",
+     "title": "한국장애인고용공단_발달장애인훈련센터 직무체험편의점의류매장 마스터하기",
+     "url": "https://www.data.go.kr/data/15124548/fileData.do"
+    },
+    {
+     "id": "15071829",
+     "title": "서울특별시_휴게음식점 인허가 정보",
+     "url": "https://www.data.go.kr/data/15071829/fileData.do"
+    },
+    {
+     "id": "15045191",
+     "title": "부산광역시_부산진구_쓰레기종량제봉투 판매업소",
+     "url": "https://www.data.go.kr/data/15045191/fileData.do"
+    },
+    {
+     "id": "15045034",
+     "title": "행정안전부_건강_안전상비의약품 판매업소",
+     "url": "https://www.data.go.kr/data/15045034/fileData.do"
+    },
+    {
+     "id": "15123185",
+     "title": "한국장애인고용공단_누구나 알기쉬운 발달장애인 직업정보편의점정리원",
+     "url": "https://www.data.go.kr/data/15123185/fileData.do"
+    },
+    {
+     "id": "15054272",
+     "title": "전남광주통합특별시 영암군_휴게음식점",
+     "url": "https://www.data.go.kr/data/15054272/fileData.do"
+    },
+    {
+     "id": "15146458",
+     "title": "서울특별시_최근 일주일간편의점음식점 단체급식을 이용한 식사 통계",
+     "url": "https://www.data.go.kr/data/15146458/fileData.do"
+    },
+    {
+     "id": "15045104",
+     "title": "행정안전부_기타_담배소매업",
+     "url": "https://www.data.go.kr/data/15045104/fileData.do"
+    },
+    {
+     "id": "15094978",
+     "title": "인천광역시 부평구_종량제봉투 판매정보",
+     "url": "https://www.data.go.kr/data/15094978/fileData.do"
+    },
+    {
+     "id": "15071325",
+     "title": "인천광역시 미추홀구_안전상비의약품 판매업소 현황",
+     "url": "https://www.data.go.kr/data/15071325/fileData.do"
+    },
+    {
+     "id": "3038720",
+     "title": "경기도_구리시_어린이기호식품판매업소 현황",
+     "url": "https://www.data.go.kr/data/3038720/fileData.do"
+    },
+    {
+     "id": "15055318",
+     "title": "경기도 안양시_안전상비의약품판매업소",
+     "url": "https://www.data.go.kr/data/15055318/fileData.do"
+    },
+    {
+     "id": "15035334",
+     "title": "충청남도_금산군_담배소매인지정현황",
+     "url": "https://www.data.go.kr/data/15035334/fileData.do"
+    },
+    {
+     "id": "15152851",
+     "title": "코레일유통(주)_편의점운영 모집 공고",
+     "url": "https://www.data.go.kr/data/15152851/fileData.do"
+    },
+    {
+     "id": "15035677",
+     "title": "전남광주통합특별시_남구_담배소매인 지정 현황",
+     "url": "https://www.data.go.kr/data/15035677/fileData.do"
+    },
+    {
+     "id": "3073807",
+     "title": "경기도 성남시_종량제봉투판매소현황",
+     "url": "https://www.data.go.kr/data/3073807/fileData.do"
+    },
+    {
+     "id": "15152860",
+     "title": "코레일유통(주)_스마트편의점미디어 정보",
+     "url": "https://www.data.go.kr/data/15152860/fileData.do"
+    },
+    {
+     "id": "15092430",
+     "title": "한국건강증진개발원_오프라인 담배판매 모니터링 현황",
+     "url": "https://www.data.go.kr/data/15092430/fileData.do"
+    },
+    {
+     "id": "15004911",
+     "title": "경기도 성남시 담배소매인현황",
+     "url": "https://www.data.go.kr/data/15004911/fileData.do"
+    },
+    {
+     "id": "15102187",
+     "title": "전북특별자치도 전주시_안전상비의약품판매업소",
+     "url": "https://www.data.go.kr/data/15102187/fileData.do"
+    },
+    {
+     "id": "15035574",
+     "title": "전북특별자치도 남원시_담배소매인현황",
+     "url": "https://www.data.go.kr/data/15035574/fileData.do"
+    },
+    {
+     "id": "15051599",
+     "title": "인천광역시 미추홀구_담배소매인 지정현황",
+     "url": "https://www.data.go.kr/data/15051599/fileData.do"
+    },
+    {
+     "id": "15035631",
+     "title": "전남광주통합특별시 담양군_담배소매인 지정 현황",
+     "url": "https://www.data.go.kr/data/15035631/fileData.do"
+    },
+    {
+     "id": "15060552",
+     "title": "인천교통공사_역구내 편의시설 계약현황",
+     "url": "https://www.data.go.kr/data/15060552/fileData.do"
+    },
+    {
+     "id": "3081018",
+     "title": "대전광역시 동구 안전상비의약품 판매업 현황",
+     "url": "https://www.data.go.kr/data/3081018/fileData.do"
+    },
+    {
+     "id": "15113407",
+     "title": "전북특별자치도 전주시_휴게음식점",
+     "url": "https://www.data.go.kr/data/15113407/fileData.do"
+    },
+    {
+     "id": "15100076",
+     "title": "제주특별자치도_아동급식카드가맹점현황",
+     "url": "https://www.data.go.kr/data/15100076/fileData.do"
+    },
+    {
+     "id": "15028110",
+     "title": "서울특별시 도봉구 담배소매인 지정현황",
+     "url": "https://www.data.go.kr/data/15028110/fileData.do"
+    },
+    {
+     "id": "15095436",
+     "title": "인천광역시 영종구_결식아동 급식지원 지정업체 현황",
+     "url": "https://www.data.go.kr/data/15095436/fileData.do"
+    },
+    {
+     "id": "15035515",
+     "title": "부산광역시 수영구_담배소매인 지정 현황",
+     "url": "https://www.data.go.kr/data/15035515/fileData.do"
+    },
+    {
+     "id": "15072860",
+     "title": "대전광역시 중구_안전상비의약품판매업_현황",
+     "url": "https://www.data.go.kr/data/15072860/fileData.do"
+    },
+    {
+     "id": "15047930",
+     "title": "전북특별자치도 정읍시_휴게음식점 현황",
+     "url": "https://www.data.go.kr/data/15047930/fileData.do"
+    },
+    {
+     "id": "15021325",
+     "title": "경상남도 창원시 담배소매인 지정현황",
+     "url": "https://www.data.go.kr/data/15021325/fileData.do"
+    },
+    {
+     "id": "15028112",
+     "title": "서울특별시 도봉구 여성안심지킴이집 지정현황",
+     "url": "https://www.data.go.kr/data/15028112/fileData.do"
+    },
+    {
+     "id": "3079528",
+     "title": "경기도 안양시_담배소매인 지정 정보",
+     "url": "https://www.data.go.kr/data/3079528/fileData.do"
+    },
+    {
+     "id": "15127496",
+     "title": "경기도 연천군_안전상비의약품 판매업 현황",
+     "url": "https://www.data.go.kr/data/15127496/fileData.do"
+    },
+    {
+     "id": "3081092",
+     "title": "서울특별시 금천구_담배소매인 지정현황",
+     "url": "https://www.data.go.kr/data/3081092/fileData.do"
+    },
+    {
+     "id": "15113651",
+     "title": "전남광주통합특별시 남구_아동급식카드 가맹점",
+     "url": "https://www.data.go.kr/data/15113651/fileData.do"
+    },
+    {
+     "id": "15119799",
+     "title": "한국공항공사_양양공항 층별 입점업체 현황",
+     "url": "https://www.data.go.kr/data/15119799/fileData.do"
+    },
+    {
+     "id": "15039506",
+     "title": "인천광역시 연수구_안전상비 의약품 판매업소 현황",
+     "url": "https://www.data.go.kr/data/15039506/fileData.do"
+    },
+    {
+     "id": "15048949",
+     "title": "국세청_100대 생활업종 신규사업자 현황(업종별 월별)",
+     "url": "https://www.data.go.kr/data/15048949/fileData.do"
+    },
+    {
+     "id": "15135815",
+     "title": "서울특별시_서울시 휴게음식점 인허가 정보",
+     "url": "https://www.data.go.kr/data/15135815/fileData.do"
+    },
+    {
+     "id": "15054008",
+     "title": "대구광역시_안전상비의약품 판매업소현황",
+     "url": "https://www.data.go.kr/data/15054008/fileData.do"
+    },
+    {
+     "id": "15102593",
+     "title": "인천광역시 부평구_안전상비의약품 판매업 현황",
+     "url": "https://www.data.go.kr/data/15102593/fileData.do"
+    },
+    {
+     "id": "15118981",
+     "title": "한국공항공사_김해공항 층별 입점업체 현황",
+     "url": "https://www.data.go.kr/data/15118981/fileData.do"
+    },
+    {
+     "id": "15034900",
+     "title": "경기도 김포시_안전상비의약품판매업소",
+     "url": "https://www.data.go.kr/data/15034900/fileData.do"
+    },
+    {
+     "id": "15021402",
+     "title": "경기도 양평군_담배소매인지정현황",
+     "url": "https://www.data.go.kr/data/15021402/fileData.do"
+    },
+    {
+     "id": "15053224",
+     "title": "전북특별자치도 임실군_담배소매인지정",
+     "url": "https://www.data.go.kr/data/15053224/fileData.do"
+    },
+    {
+     "id": "15109950",
+     "title": "대구광역시_아동급식카드가맹점정보",
+     "url": "https://www.data.go.kr/data/15109950/fileData.do"
+    },
+    {
+     "id": "3084453",
+     "title": "수원도시공사 종량제봉투 판매소 현황",
+     "url": "https://www.data.go.kr/data/3084453/fileData.do"
+    },
+    {
+     "id": "15035540",
+     "title": "경상남도_거창군_담배소매인 지정 현황",
+     "url": "https://www.data.go.kr/data/15035540/fileData.do"
+    },
+    {
+     "id": "15051111",
+     "title": "산업통상부_주요 유통업체 식품군 연도별 전년동기대비 성장률",
+     "url": "https://www.data.go.kr/data/15051111/fileData.do"
+    },
+    {
+     "id": "15118613",
+     "title": "한국공항공사_김포공항 층별 입점업체 현황",
+     "url": "https://www.data.go.kr/data/15118613/fileData.do"
+    },
+    {
+     "id": "15119335",
+     "title": "한국공항공사_제주공항 층별 입점업체 현황",
+     "url": "https://www.data.go.kr/data/15119335/fileData.do"
+    },
+    {
+     "id": "15119624",
+     "title": "한국공항공사_청주공항 층별 입점업체 현황",
+     "url": "https://www.data.go.kr/data/15119624/fileData.do"
+    },
+    {
+     "id": "15113123",
+     "title": "서울특별시 강남구_종량제봉투 판매소",
+     "url": "https://www.data.go.kr/data/15113123/fileData.do"
+    },
+    {
+     "id": "15094293",
+     "title": "서울특별시 서초구_안전상비의약품 판매업소 인허가 정보",
+     "url": "https://www.data.go.kr/data/15094293/fileData.do"
+    },
+    {
+     "id": "15077399",
+     "title": "인천광역시 미추홀구_대형폐기물 스티커 판매소",
+     "url": "https://www.data.go.kr/data/15077399/fileData.do"
+    },
+    {
+     "id": "15100147",
+     "title": "대전광역시_아동급식카드 가맹점",
+     "url": "https://www.data.go.kr/data/15100147/fileData.do"
+    },
+    {
+     "id": "15044403",
+     "title": "경상북도문화관광공사_보문관광단지 입주업체 현황(기타상가)",
+     "url": "https://www.data.go.kr/data/15044403/fileData.do"
+    },
+    {
+     "id": "15115029",
+     "title": "서울특별시 강남구_안전상비의약품 판매업소 인허가 정보",
+     "url": "https://www.data.go.kr/data/15115029/fileData.do"
+    },
+    {
+     "id": "3060635",
+     "title": "강원특별자치도 원주시_담배소매인 지정 정보",
+     "url": "https://www.data.go.kr/data/3060635/fileData.do"
+    },
+    {
+     "id": "15095182",
+     "title": "서울특별시 영등포구_안전상비의약품 판매업소 인허가 정보",
+     "url": "https://www.data.go.kr/data/15095182/fileData.do"
+    },
+    {
+     "id": "15048947",
+     "title": "국세청_100대 생활업종 신규사업자 현황(업종별 연령별)",
+     "url": "https://www.data.go.kr/data/15048947/fileData.do"
+    },
+    {
+     "id": "15114903",
+     "title": "대전광역시 서구_어린이기호식품 판매업소 현황",
+     "url": "https://www.data.go.kr/data/15114903/fileData.do"
+    },
+    {
+     "id": "15069264",
+     "title": "경상남도_휴게음식점 현황",
+     "url": "https://www.data.go.kr/data/15069264/fileData.do"
+    },
+    {
+     "id": "15140250",
+     "title": "경기도 양평군_휴게음식점",
+     "url": "https://www.data.go.kr/data/15140250/fileData.do"
+    },
+    {
+     "id": "15120424",
+     "title": "강원특별자치도 강릉시_버스카드충전소",
+     "url": "https://www.data.go.kr/data/15120424/fileData.do"
+    },
+    {
+     "id": "15168114",
+     "title": "코레일유통(주)_역사내편의점취급상품 목록",
+     "url": "https://www.data.go.kr/data/15168114/fileData.do"
+    },
+    {
+     "id": "15113116",
+     "title": "서울특별시 성북구_규격봉투 판매소 현황",
+     "url": "https://www.data.go.kr/data/15113116/fileData.do"
+    },
+    {
+     "id": "15089799",
+     "title": "서울올림픽기념국민체육진흥공단_올림픽공원 편의시설 정보",
+     "url": "https://www.data.go.kr/data/15089799/fileData.do"
+    },
+    {
+     "id": "3072776",
+     "title": "서울특별시 은평구_안전상비약판매업소 현황",
+     "url": "https://www.data.go.kr/data/3072776/fileData.do"
+    },
+    {
+     "id": "15127422",
+     "title": "대구광역시 달성군_휴게음식점 현황",
+     "url": "https://www.data.go.kr/data/15127422/fileData.do"
+    },
+    {
+     "id": "15119815",
+     "title": "한국공항공사_여수공항 층별 입점업체 현황",
+     "url": "https://www.data.go.kr/data/15119815/fileData.do"
+    },
+    {
+     "id": "15116538",
+     "title": "인천광역시 미추홀구_황색봉투 및 PP마대 판매소 현황",
+     "url": "https://www.data.go.kr/data/15116538/fileData.do"
+    },
+    {
+     "id": "15119801",
+     "title": "한국공항공사_광주공항 층별 입점업체 현황",
+     "url": "https://www.data.go.kr/data/15119801/fileData.do"
+    },
+    {
+     "id": "15119823",
+     "title": "한국공항공사_사천공항 층별 입점업체 현황",
+     "url": "https://www.data.go.kr/data/15119823/fileData.do"
+    },
+    {
+     "id": "15168116",
+     "title": "코레일유통(주)_편의점상품 분류체계",
+     "url": "https://www.data.go.kr/data/15168116/fileData.do"
+    },
+    {
+     "id": "15119804",
+     "title": "한국공항공사_울산공항 층별 입점업체 현황",
+     "url": "https://www.data.go.kr/data/15119804/fileData.do"
+    },
+    {
+     "id": "15136247",
+     "title": "대구광역시 달서구_안전상비약품판매업소",
+     "url": "https://www.data.go.kr/data/15136247/fileData.do"
+    },
+    {
+     "id": "15119792",
+     "title": "한국공항공사_무안공항 층별 입점업체 현황",
+     "url": "https://www.data.go.kr/data/15119792/fileData.do"
+    },
+    {
+     "id": "15077400",
+     "title": "인천광역시 미추홀구_쓰레기종량제봉투 판매소 현황",
+     "url": "https://www.data.go.kr/data/15077400/fileData.do"
+    },
+    {
+     "id": "15105047",
+     "title": "한국문화진흥주식회사_부대시설_무인그늘집",
+     "url": "https://www.data.go.kr/data/15105047/fileData.do"
+    },
+    {
+     "id": "15119829",
+     "title": "한국공항공사_군산공항 층별 입점업체 현황",
+     "url": "https://www.data.go.kr/data/15119829/fileData.do"
+    },
+    {
+     "id": "15103407",
+     "title": "대구광역시 서구_안전상비의약품판매업소 현황",
+     "url": "https://www.data.go.kr/data/15103407/fileData.do"
+    },
+    {
+     "id": "15119836",
+     "title": "한국공항공사_원주공항 층별 입점업체 현황",
+     "url": "https://www.data.go.kr/data/15119836/fileData.do"
+    },
+    {
+     "id": "15119825",
+     "title": "한국공항공사_포항경주공항 층별 입점업체 현황",
+     "url": "https://www.data.go.kr/data/15119825/fileData.do"
+    },
+    {
+     "id": "15142994",
+     "title": "전남광주통합특별시 남구_안전상비의약품 판매업소",
+     "url": "https://www.data.go.kr/data/15142994/fileData.do"
+    },
+    {
+     "id": "15119349",
+     "title": "한국공항공사_대구공항 층별 입점업체 현황",
+     "url": "https://www.data.go.kr/data/15119349/fileData.do"
+    },
+    {
+     "id": "15115370",
+     "title": "서울특별시 중랑구_안전상비의약품 판매업소 인허가 정보",
+     "url": "https://www.data.go.kr/data/15115370/fileData.do"
+    },
+    {
+     "id": "15071453",
+     "title": "서울특별시_여성안심지킴이집 정보",
+     "url": "https://www.data.go.kr/data/15071453/fileData.do"
+    },
+    {
+     "id": "15094378",
+     "title": "부산광역시 수영구_개인 카페 및 프랜차이즈 카페 현황",
+     "url": "https://www.data.go.kr/data/15094378/fileData.do"
+    },
+    {
+     "id": "3038721",
+     "title": "경기도_구리시_담배판매처 현황",
+     "url": "https://www.data.go.kr/data/3038721/fileData.do"
+    },
+    {
+     "id": "15123585",
+     "title": "경상북도 경산시_안전상비의약품",
+     "url": "https://www.data.go.kr/data/15123585/fileData.do"
+    },
+    {
+     "id": "15127461",
+     "title": "대구광역시 달성군_담배소매인 지정현황",
+     "url": "https://www.data.go.kr/data/15127461/fileData.do"
+    },
+    {
+     "id": "15160113",
+     "title": "부산광역시 부산진구_담배소매인 지정현황",
+     "url": "https://www.data.go.kr/data/15160113/fileData.do"
+    },
+    {
+     "id": "15122301",
+     "title": "전남광주통합특별시 남구_청사 입점 업체",
+     "url": "https://www.data.go.kr/data/15122301/fileData.do"
+    },
+    {
+     "id": "15021215",
+     "title": "경상남도_사천시_담배소매인지정현황",
+     "url": "https://www.data.go.kr/data/15021215/fileData.do"
+    },
+    {
+     "id": "15122845",
+     "title": "과학기술정보통신부 국립중앙과학관_식음시설정보",
+     "url": "https://www.data.go.kr/data/15122845/fileData.do"
+    },
+    {
+     "id": "15105682",
+     "title": "경기도 포천시_휴게음식점 현황",
+     "url": "https://www.data.go.kr/data/15105682/fileData.do"
+    },
+    {
+     "id": "15063702",
+     "title": "부산광역시_빅데이터플랫폼_국세청100대업소현황",
+     "url": "https://www.data.go.kr/data/15063702/fileData.do"
+    },
+    {
+     "id": "15069102",
+     "title": "전남광주통합특별시 동구_종량제봉투 판매업소 정보",
+     "url": "https://www.data.go.kr/data/15069102/fileData.do"
+    },
+    {
+     "id": "15035317",
+     "title": "충청남도 예산군_담배소매인 지정현황",
+     "url": "https://www.data.go.kr/data/15035317/fileData.do"
+    },
+    {
+     "id": "15060553",
+     "title": "인천교통공사_역구내 임대점포 계약현황",
+     "url": "https://www.data.go.kr/data/15060553/fileData.do"
+    },
+    {
+     "id": "15068798",
+     "title": "인천광역시 서해구_안전상비 의약품 판매업소",
+     "url": "https://www.data.go.kr/data/15068798/fileData.do"
+    },
+    {
+     "id": "3076417",
+     "title": "부산광역시 어린이 식품안전보호구역 지정 관리 현황",
+     "url": "https://www.data.go.kr/data/3076417/fileData.do"
+    },
+    {
+     "id": "15115934",
+     "title": "서울교통공사_9호선2_3단계 지하상가임대정보",
+     "url": "https://www.data.go.kr/data/15115934/fileData.do"
+    },
+    {
+     "id": "3057656",
+     "title": "부산교통공사_도시철도 임대시설물 현황",
+     "url": "https://www.data.go.kr/data/3057656/fileData.do"
+    },
+    {
+     "id": "15021283",
+     "title": "인천광역시 부평구_담배소매인 지정 현황",
+     "url": "https://www.data.go.kr/data/15021283/fileData.do"
+    },
+    {
+     "id": "3078756",
+     "title": "부산광역시_사상구_일반 및 휴게음식점 현황",
+     "url": "https://www.data.go.kr/data/3078756/fileData.do"
+    },
+    {
+     "id": "15142257",
+     "title": "서울특별시 마포구_안전상비의약품 판매업소 인허가 정보",
+     "url": "https://www.data.go.kr/data/15142257/fileData.do"
+    },
+    {
+     "id": "15037949",
+     "title": "경상남도 의령군 안전상비의약품판매업소",
+     "url": "https://www.data.go.kr/data/15037949/fileData.do"
+    },
+    {
+     "id": "15113011",
+     "title": "서울특별시 동작구_종량제봉투 판매소 현황",
+     "url": "https://www.data.go.kr/data/15113011/fileData.do"
+    },
+    {
+     "id": "15121354",
+     "title": "국세청_100대 생활밀접업종 신규 사업자 현황_연령_업종",
+     "url": "https://www.data.go.kr/data/15121354/fileData.do"
+    },
+    {
+     "id": "15140768",
+     "title": "서울특별시 은평구_안전상비의약품 판매업소 인허가 정보",
+     "url": "https://www.data.go.kr/data/15140768/fileData.do"
+    },
+    {
+     "id": "15024794",
+     "title": "경상남도 의령군_담배소매인지정현황",
+     "url": "https://www.data.go.kr/data/15024794/fileData.do"
+    },
+    {
+     "id": "3079317",
+     "title": "경상남도 거제시_안전상비의약품판매점현황",
+     "url": "https://www.data.go.kr/data/3079317/fileData.do"
+    },
+    {
+     "id": "3080253",
+     "title": "전남광주통합특별시 구례군_의약업소현황",
+     "url": "https://www.data.go.kr/data/3080253/fileData.do"
+    },
+    {
+     "id": "15030285",
+     "title": "경상북도_김천시_식품유통전문판매업 현황",
+     "url": "https://www.data.go.kr/data/15030285/fileData.do"
+    },
+    {
+     "id": "15133760",
+     "title": "인천광역시 영종구_쓰레기종량제봉투 지정판매소",
+     "url": "https://www.data.go.kr/data/15133760/fileData.do"
+    },
+    {
+     "id": "15065784",
+     "title": "경찰청_아동안전지킴이집 사업장 유형별 현황",
+     "url": "https://www.data.go.kr/data/15065784/fileData.do"
+    },
+    {
+     "id": "3055605",
+     "title": "부산광역시 금정구_담배소매업소목록",
+     "url": "https://www.data.go.kr/data/3055605/fileData.do"
+    },
+    {
+     "id": "2241343",
+     "title": "경기도 안산시_안전상비의약품판매업소",
+     "url": "https://www.data.go.kr/data/2241343/fileData.do"
+    },
+    {
+     "id": "15093871",
+     "title": "부산광역시 사상구_종량제봉투판매정보",
+     "url": "https://www.data.go.kr/data/15093871/fileData.do"
+    },
+    {
+     "id": "15116060",
+     "title": "서울특별시 종로구_안전상비의약품 판매업소 인허가 정보",
+     "url": "https://www.data.go.kr/data/15116060/fileData.do"
+    },
+    {
+     "id": "15063703",
+     "title": "부산광역시_빅데이터플랫폼_국세청업소순위",
+     "url": "https://www.data.go.kr/data/15063703/fileData.do"
+    },
+    {
+     "id": "15086146",
+     "title": "서울특별시 은평구_종량제봉투판매소",
+     "url": "https://www.data.go.kr/data/15086146/fileData.do"
+    },
+    {
+     "id": "15084137",
+     "title": "인천광역시 부평구_기타식품판매업 현황",
+     "url": "https://www.data.go.kr/data/15084137/fileData.do"
+    },
+    {
+     "id": "15006763",
+     "title": "서울특별시 은평구_담배소매인지정 현황",
+     "url": "https://www.data.go.kr/data/15006763/fileData.do"
+    },
+    {
+     "id": "15068245",
+     "title": "충청북도 증평군_종량제봉투판매소",
+     "url": "https://www.data.go.kr/data/15068245/fileData.do"
+    },
+    {
+     "id": "15133570",
+     "title": "서울특별시_기후동행쉼터",
+     "url": "https://www.data.go.kr/data/15133570/fileData.do"
+    },
+    {
+     "id": "15021822",
+     "title": "전남광주통합특별시 함평군_담배소매인 지정 현황",
+     "url": "https://www.data.go.kr/data/15021822/fileData.do"
+    },
+    {
+     "id": "15037895",
+     "title": "서울특별시 서초구 결식우려아동 급식지원제도 이용 현황",
+     "url": "https://www.data.go.kr/data/15037895/fileData.do"
+    },
+    {
+     "id": "15109369",
+     "title": "제주관광공사_마을편의시설",
+     "url": "https://www.data.go.kr/data/15109369/fileData.do"
+    },
+    {
+     "id": "15134299",
+     "title": "경상남도 진주시_안전상비의약품 판매업소 현황",
+     "url": "https://www.data.go.kr/data/15134299/fileData.do"
+    },
+    {
+     "id": "15146905",
+     "title": "교육부 국립국제교육원_한국유학종합시스템_대학편의시설정보",
+     "url": "https://www.data.go.kr/data/15146905/fileData.do"
+    },
+    {
+     "id": "15126515",
+     "title": "한국조폐공사_구례군 지역사랑상품권 소비금액 상세정보",
+     "url": "https://www.data.go.kr/data/15126515/fileData.do"
+    },
+    {
+     "id": "15159484",
+     "title": "경기도 남양주시_안전상비의약품 판매업 현황",
+     "url": "https://www.data.go.kr/data/15159484/fileData.do"
+    },
+    {
+     "id": "15141788",
+     "title": "서울특별시 용산구_안전상비의약품 판매업소 인허가 정보",
+     "url": "https://www.data.go.kr/data/15141788/fileData.do"
+    },
+    {
+     "id": "3077186",
+     "title": "경기도 연천군_식품판매업 정보",
+     "url": "https://www.data.go.kr/data/3077186/fileData.do"
+    },
+    {
+     "id": "15114518",
+     "title": "세종특별자치시시설관리공단_종량제봉투판매소",
+     "url": "https://www.data.go.kr/data/15114518/fileData.do"
+    },
+    {
+     "id": "15084584",
+     "title": "대전광역시 서구_안전상비의약품 판매업 현황",
+     "url": "https://www.data.go.kr/data/15084584/fileData.do"
+    },
+    {
+     "id": "15084561",
+     "title": "대구광역시 서구_쓰레기종량제봉투 지정판매소 현황",
+     "url": "https://www.data.go.kr/data/15084561/fileData.do"
+    },
+    {
+     "id": "15103408",
+     "title": "대구광역시 서구_의료기기판매업소 및 수리업소 현황",
+     "url": "https://www.data.go.kr/data/15103408/fileData.do"
+    },
+    {
+     "id": "15091287",
+     "title": "경상남도 남해군_안전상비의약품판매업소",
+     "url": "https://www.data.go.kr/data/15091287/fileData.do"
+    },
+    {
+     "id": "15159953",
+     "title": "서울특별시 서초구_휴게음식점 현황",
+     "url": "https://www.data.go.kr/data/15159953/fileData.do"
+    },
+    {
+     "id": "15121349",
+     "title": "국세청_100대 생활밀접업종 신규 사업자 현황_월_업종",
+     "url": "https://www.data.go.kr/data/15121349/fileData.do"
+    },
+    {
+     "id": "15085022",
+     "title": "서울특별시_청소년 음주 통계",
+     "url": "https://www.data.go.kr/data/15085022/fileData.do"
+    },
+    {
+     "id": "15071640",
+     "title": "서울특별시_안전상비의약품 판매업소 인허가 정보",
+     "url": "https://www.data.go.kr/data/15071640/fileData.do"
+    },
+    {
+     "id": "15089318",
+     "title": "경상남도_식품접객업소 현황",
+     "url": "https://www.data.go.kr/data/15089318/fileData.do"
+    },
+    {
+     "id": "15160092",
+     "title": "인천광역시 옹진군_휴게음식점 현황",
+     "url": "https://www.data.go.kr/data/15160092/fileData.do"
+    },
+    {
+     "id": "15086640",
+     "title": "서울특별시 마포구_전동보장구 급속충전기 설치현황",
+     "url": "https://www.data.go.kr/data/15086640/fileData.do"
+    },
+    {
+     "id": "15099801",
+     "title": "충청남도 금산군_휴게음식점",
+     "url": "https://www.data.go.kr/data/15099801/fileData.do"
+    },
+    {
+     "id": "15101940",
+     "title": "전북특별자치도 무주군_지역화폐업종별이용현황",
+     "url": "https://www.data.go.kr/data/15101940/fileData.do"
+    },
+    {
+     "id": "15140736",
+     "title": "서울특별시 강북구_안전상비 의약품 판매업 현황",
+     "url": "https://www.data.go.kr/data/15140736/fileData.do"
+    },
+    {
+     "id": "15095139",
+     "title": "서울특별시 영등포구_복합유통게임제공업 인허가 정보",
+     "url": "https://www.data.go.kr/data/15095139/fileData.do"
+    },
+    {
+     "id": "15141249",
+     "title": "서울특별시 금천구_담배소매업 인허가 정보",
+     "url": "https://www.data.go.kr/data/15141249/fileData.do"
+    },
+    {
+     "id": "15084071",
+     "title": "서울특별시 서대문구_안전상비의약품 판매업소 정보",
+     "url": "https://www.data.go.kr/data/15084071/fileData.do"
+    },
+    {
+     "id": "15140685",
+     "title": "서울특별시 은평구_담배소매업 인허가 정보",
+     "url": "https://www.data.go.kr/data/15140685/fileData.do"
+    },
+    {
+     "id": "15111376",
+     "title": "한국철도공사_시군구단위 거주 철도이용객 발매처별 소비업종 정보",
+     "url": "https://www.data.go.kr/data/15111376/fileData.do"
+    },
+    {
+     "id": "15121345",
+     "title": "국세청_100대 생활밀접업종 신규 사업자 현황_지역_업종",
+     "url": "https://www.data.go.kr/data/15121345/fileData.do"
+    },
+    {
+     "id": "15141596",
+     "title": "인천광역시 부평구_오피스텔 현황",
+     "url": "https://www.data.go.kr/data/15141596/fileData.do"
+    },
+    {
+     "id": "15100770",
+     "title": "한국산업안전보건공단_안전보건미디어자료(특고종사자 (가맹본부) 기술자료 OPS)",
+     "url": "https://www.data.go.kr/data/15100770/fileData.do"
+    },
+    {
+     "id": "15097440",
+     "title": "제주특별자치도_향기마을용흥리_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097440/fileData.do"
+    },
+    {
+     "id": "15102595",
+     "title": "인천광역시 부평구_어린이기호식품 우수판매업소 현황",
+     "url": "https://www.data.go.kr/data/15102595/fileData.do"
+    },
+    {
+     "id": "15097408",
+     "title": "제주특별자치도_세천포구_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097408/fileData.do"
+    },
+    {
+     "id": "15097404",
+     "title": "제주특별자치도_산이물공원_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097404/fileData.do"
+    },
+    {
+     "id": "15105125",
+     "title": "경기도 포천시_코로나19 자가진단키트 판매소현황",
+     "url": "https://www.data.go.kr/data/15105125/fileData.do"
+    },
+    {
+     "id": "15097393",
+     "title": "제주특별자치도_난미밭담길_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097393/fileData.do"
+    },
+    {
+     "id": "15097436",
+     "title": "제주특별자치도_하모해수욕장_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097436/fileData.do"
+    },
+    {
+     "id": "15097396",
+     "title": "제주특별자치도_도두봉공원산책로_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097396/fileData.do"
+    },
+    {
+     "id": "15097422",
+     "title": "제주특별자치도_제주올레길1코스(휠체어구간)종달리_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097422/fileData.do"
+    },
+    {
+     "id": "15097434",
+     "title": "제주특별자치도_퍼시픽마리나요트공원_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097434/fileData.do"
+    },
+    {
+     "id": "15097416",
+     "title": "제주특별자치도_월대천(외도물길20리)_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097416/fileData.do"
+    },
+    {
+     "id": "15097401",
+     "title": "제주특별자치도_법화사_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097401/fileData.do"
+    },
+    {
+     "id": "15097419",
+     "title": "제주특별자치도_이중섭거리_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097419/fileData.do"
+    },
+    {
+     "id": "15097435",
+     "title": "제주특별자치도_표선해수욕장_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097435/fileData.do"
+    },
+    {
+     "id": "15097385",
+     "title": "제주특별자치도_곤을동환해장성_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097385/fileData.do"
+    },
+    {
+     "id": "15097406",
+     "title": "제주특별자치도_상가리퐁낭마을길_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097406/fileData.do"
+    },
+    {
+     "id": "15097420",
+     "title": "제주특별자치도_이호테우해변과내도동알작지_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097420/fileData.do"
+    },
+    {
+     "id": "15097388",
+     "title": "제주특별자치도_귀덕해안길_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097388/fileData.do"
+    },
+    {
+     "id": "15097423",
+     "title": "제주특별자치도_제주올레길14코스(휠체어구간)금능리_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097423/fileData.do"
+    },
+    {
+     "id": "15097398",
+     "title": "제주특별자치도_동광마을길_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097398/fileData.do"
+    },
+    {
+     "id": "15097437",
+     "title": "제주특별자치도_한수리방파제길_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097437/fileData.do"
+    },
+    {
+     "id": "15097407",
+     "title": "제주특별자치도_선흘리동백마을_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097407/fileData.do"
+    },
+    {
+     "id": "15097421",
+     "title": "제주특별자치도_일과리해안도로_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097421/fileData.do"
+    },
+    {
+     "id": "15097413",
+     "title": "제주특별자치도_신흥리방파제와환해장성_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097413/fileData.do"
+    },
+    {
+     "id": "15097410",
+     "title": "제주특별자치도_수원리해안탐방로_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097410/fileData.do"
+    },
+    {
+     "id": "15097395",
+     "title": "제주특별자치도_대문없는마을상명정낭마을_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097395/fileData.do"
+    },
+    {
+     "id": "15097397",
+     "title": "제주특별자치도_돔베낭길(올레7코스)_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097397/fileData.do"
+    },
+    {
+     "id": "15097424",
+     "title": "제주특별자치도_종달항과해안길_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097424/fileData.do"
+    },
+    {
+     "id": "15097394",
+     "title": "제주특별자치도_농업생태원_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097394/fileData.do"
+    },
+    {
+     "id": "15097409",
+     "title": "제주특별자치도_수산저수지와물메둑길_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097409/fileData.do"
+    },
+    {
+     "id": "15097418",
+     "title": "제주특별자치도_위미동백나무군락_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097418/fileData.do"
+    },
+    {
+     "id": "15097389",
+     "title": "제주특별자치도_금악리골목식당투어_무장애주변관광지",
+     "url": "https://www.data.go.kr/data/15097389/fileData.do"
+    }
+   ],
+   "LINKED": [
+    {
+     "id": "76374",
+     "title": "휴게음식점(편의점) 현황",
+     "url": "https://www.data.go.kr/data/76374/linkedData.do"
+    },
+    {
+     "id": "98538",
+     "title": "편의점 수요와 폐점 예측",
+     "url": "https://www.data.go.kr/data/98538/linkedData.do"
+    },
+    {
+     "id": "112398",
+     "title": "편의점 매출 동향(품목별)",
+     "url": "https://www.data.go.kr/data/112398/linkedData.do"
+    },
+    {
+     "id": "73440",
+     "title": "서울시 도봉구편의점(담배 소매) 현황",
+     "url": "https://www.data.go.kr/data/73440/linkedData.do"
+    },
+    {
+     "id": "232056",
+     "title": "PB제품 제조 위탁한 금액 - 편의점",
+     "url": "https://www.data.go.kr/data/232056/linkedData.do"
+    },
+    {
+     "id": "232061",
+     "title": "PB제품 제조 위탁한 수급사업자 수 - 편의점",
+     "url": "https://www.data.go.kr/data/232061/linkedData.do"
+    },
+    {
+     "id": "81075",
+     "title": "권역특성별편의점이용트렌드",
+     "url": "https://www.data.go.kr/data/81075/linkedData.do"
+    },
+    {
+     "id": "192486",
+     "title": "최근편의점, 슈퍼마켓 등에서 술을 구매하려고 할 때 판매자의 반응(2008)",
+     "url": "https://www.data.go.kr/data/192486/linkedData.do"
+    },
+    {
+     "id": "80912",
+     "title": "길단위편의점수",
+     "url": "https://www.data.go.kr/data/80912/linkedData.do"
+    },
+    {
+     "id": "81200",
+     "title": "전국편의점품목단위 농식품 소비데이터",
+     "url": "https://www.data.go.kr/data/81200/linkedData.do"
+    },
+    {
+     "id": "81149",
+     "title": "연령대별 식품 유형 소비량 데이터 (편의점집계)",
+     "url": "https://www.data.go.kr/data/81149/linkedData.do"
+    },
+    {
+     "id": "81196",
+     "title": "광역지역편의점품목단위 농식품 소비데이터",
+     "url": "https://www.data.go.kr/data/81196/linkedData.do"
+    },
+    {
+     "id": "94468",
+     "title": "GS25편의점구매 영수증 분석 리포트",
+     "url": "https://www.data.go.kr/data/94468/linkedData.do"
+    },
+    {
+     "id": "92146",
+     "title": "편의점 POS 데이터 기반 동시구매상품 분석데이터",
+     "url": "https://www.data.go.kr/data/92146/linkedData.do"
+    },
+    {
+     "id": "84472",
+     "title": "행정동별편의점분야 소비인구",
+     "url": "https://www.data.go.kr/data/84472/linkedData.do"
+    },
+    {
+     "id": "81310",
+     "title": "수도권지역 구단위편의점품목단위 농식품 소비데이터",
+     "url": "https://www.data.go.kr/data/81310/linkedData.do"
+    },
+    {
+     "id": "80982",
+     "title": "전국 시군구별편의점'제로'음식 판매동향데이터",
+     "url": "https://www.data.go.kr/data/80982/linkedData.do"
+    },
+    {
+     "id": "99820",
+     "title": "지능정보 서비스 상용화_매장이나편의점에서 인공지능이 탑재된 점원이나 로봇 서비스를 이용한다",
+     "url": "https://www.data.go.kr/data/99820/linkedData.do"
+    },
+    {
+     "id": "81022",
+     "title": "서울 주요시군구별(강남,종로,마포)편의점제로음식 판매동향 데이터",
+     "url": "https://www.data.go.kr/data/81022/linkedData.do"
+    },
+    {
+     "id": "75661",
+     "title": "안전 상비의약품 판매업소 현황",
+     "url": "https://www.data.go.kr/data/75661/linkedData.do"
+    },
+    {
+     "id": "75647",
+     "title": "아동복지급식정보(제공표준)",
+     "url": "https://www.data.go.kr/data/75647/linkedData.do"
+    },
+    {
+     "id": "75640",
+     "title": "쓰레기종량제 봉투판매업체 현황",
+     "url": "https://www.data.go.kr/data/75640/linkedData.do"
+    },
+    {
+     "id": "75706",
+     "title": "여성안심지킴이집(제공표준)",
+     "url": "https://www.data.go.kr/data/75706/linkedData.do"
+    },
+    {
+     "id": "76372",
+     "title": "휴게음식점(철도역구내) 현황",
+     "url": "https://www.data.go.kr/data/76372/linkedData.do"
+    },
+    {
+     "id": "275270",
+     "title": "Retail Spotlight Report 2026년 8월",
+     "url": "https://www.data.go.kr/data/275270/linkedData.do"
+    },
+    {
+     "id": "85049",
+     "title": "2021년 산촌마을 주변 편의시설 개수",
+     "url": "https://www.data.go.kr/data/85049/linkedData.do"
+    },
+    {
+     "id": "75606",
+     "title": "식품자동판매기업_인허가",
+     "url": "https://www.data.go.kr/data/75606/linkedData.do"
+    },
+    {
+     "id": "75980",
+     "title": "즉석판매제조가공업_인허가",
+     "url": "https://www.data.go.kr/data/75980/linkedData.do"
+    },
+    {
+     "id": "95371",
+     "title": "[할인] Retail Spotlight Report 2024년 8월",
+     "url": "https://www.data.go.kr/data/95371/linkedData.do"
+    },
+    {
+     "id": "80907",
+     "title": "유통 업종 카드소비트랜드 데이터",
+     "url": "https://www.data.go.kr/data/80907/linkedData.do"
+    },
+    {
+     "id": "76364",
+     "title": "휴게음식점(기타) 현황_인허가",
+     "url": "https://www.data.go.kr/data/76364/linkedData.do"
+    },
+    {
+     "id": "74396",
+     "title": "경기도 아동안전지킴이집 현황",
+     "url": "https://www.data.go.kr/data/74396/linkedData.do"
+    },
+    {
+     "id": "75662",
+     "title": "안전비상벨 위치 현황(제공표준)",
+     "url": "https://www.data.go.kr/data/75662/linkedData.do"
+    },
+    {
+     "id": "80415",
+     "title": "안전상비의약품판매업소 정보",
+     "url": "https://www.data.go.kr/data/80415/linkedData.do"
+    },
+    {
+     "id": "81099",
+     "title": "커피 온라인/오프라인 판매 데이터",
+     "url": "https://www.data.go.kr/data/81099/linkedData.do"
+    },
+    {
+     "id": "2452",
+     "title": "휴게소 브랜드 매장현황 조회 서비스",
+     "url": "https://www.data.go.kr/data/2452/linkedData.do"
+    },
+    {
+     "id": "74785",
+     "title": "경기도_카드업종소분류_지역화폐 업종구분별 매출",
+     "url": "https://www.data.go.kr/data/74785/linkedData.do"
+    },
+    {
+     "id": "80974",
+     "title": "영수증 이미지 데이터",
+     "url": "https://www.data.go.kr/data/80974/linkedData.do"
+    },
+    {
+     "id": "75814",
+     "title": "의료법인 부대사업시설 현황",
+     "url": "https://www.data.go.kr/data/75814/linkedData.do"
+    },
+    {
+     "id": "80965",
+     "title": "식품 카테고리 유통채널별 매출액",
+     "url": "https://www.data.go.kr/data/80965/linkedData.do"
+    },
+    {
+     "id": "93223",
+     "title": "Super Category Report 2023년 10월",
+     "url": "https://www.data.go.kr/data/93223/linkedData.do"
+    },
+    {
+     "id": "81147",
+     "title": "연령대별 식품 유형 소비량 데이터 (원천)",
+     "url": "https://www.data.go.kr/data/81147/linkedData.do"
+    },
+    {
+     "id": "81227",
+     "title": "전국 단위 메뉴 통계 기반 농식품 소비데이터",
+     "url": "https://www.data.go.kr/data/81227/linkedData.do"
+    },
+    {
+     "id": "95885",
+     "title": "임농산물 품목별POS판매물량 추이분석정보",
+     "url": "https://www.data.go.kr/data/95885/linkedData.do"
+    },
+    {
+     "id": "95993",
+     "title": "임농산물 품목별 POS 판매금액 조사분석정보",
+     "url": "https://www.data.go.kr/data/95993/linkedData.do"
+    },
+    {
+     "id": "94199",
+     "title": "식품유통산업 2023년 식품유통연감 개별 시장 보고서",
+     "url": "https://www.data.go.kr/data/94199/linkedData.do"
+    },
+    {
+     "id": "92175",
+     "title": "식품유통산업 2022년 식품유통연감 개별 시장 보고서",
+     "url": "https://www.data.go.kr/data/92175/linkedData.do"
+    },
+    {
+     "id": "95349",
+     "title": "[쌈장/된장] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95349/linkedData.do"
+    },
+    {
+     "id": "95347",
+     "title": "[김] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95347/linkedData.do"
+    },
+    {
+     "id": "95351",
+     "title": "[아이스크림] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95351/linkedData.do"
+    },
+    {
+     "id": "95356",
+     "title": "[기타소스류] Super Category Report 2024년 04월",
+     "url": "https://www.data.go.kr/data/95356/linkedData.do"
+    },
+    {
+     "id": "95357",
+     "title": "[비스켓/스낵] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95357/linkedData.do"
+    },
+    {
+     "id": "95366",
+     "title": "[우유] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95366/linkedData.do"
+    },
+    {
+     "id": "95365",
+     "title": "[캔디] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95365/linkedData.do"
+    },
+    {
+     "id": "95350",
+     "title": "[고추장] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95350/linkedData.do"
+    },
+    {
+     "id": "95353",
+     "title": "[카레/짜장] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95353/linkedData.do"
+    },
+    {
+     "id": "95364",
+     "title": "[커피음료] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95364/linkedData.do"
+    },
+    {
+     "id": "95345",
+     "title": "[만두] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95345/linkedData.do"
+    },
+    {
+     "id": "95358",
+     "title": "[국/탕/찌개] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95358/linkedData.do"
+    },
+    {
+     "id": "95363",
+     "title": "[생수] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95363/linkedData.do"
+    },
+    {
+     "id": "95342",
+     "title": "[햄/소시지] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95342/linkedData.do"
+    },
+    {
+     "id": "95344",
+     "title": "[탄산음료] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95344/linkedData.do"
+    },
+    {
+     "id": "95346",
+     "title": "[과채음료] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95346/linkedData.do"
+    },
+    {
+     "id": "95367",
+     "title": "[초콜릿] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95367/linkedData.do"
+    },
+    {
+     "id": "95355",
+     "title": "[죽/스프] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95355/linkedData.do"
+    },
+    {
+     "id": "95360",
+     "title": "[간장] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95360/linkedData.do"
+    },
+    {
+     "id": "95361",
+     "title": "[면류] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95361/linkedData.do"
+    },
+    {
+     "id": "95368",
+     "title": "[발효유] Super Category Report 2023년 12월",
+     "url": "https://www.data.go.kr/data/95368/linkedData.do"
+    }
+   ],
+   "STD": [
+    {
+     "id": "15034530",
+     "title": "전국아동복지급식정보표준데이터",
+     "url": "https://www.data.go.kr/data/15034530/standard.do"
+    },
+    {
+     "id": "15034535",
+     "title": "전국안심지킴이집표준데이터",
+     "url": "https://www.data.go.kr/data/15034535/standard.do"
+    },
+    {
+     "id": "15096289",
+     "title": "전국안전상비의약품판매업소표준데이터",
+     "url": "https://www.data.go.kr/data/15096289/standard.do"
+    },
+    {
+     "id": "15028206",
+     "title": "전국안전비상벨위치표준데이터",
+     "url": "https://www.data.go.kr/data/15028206/standard.do"
+    }
+   ]
+  }
+ }
 }

@@ -1,0 +1,49 @@
+name: Public data weekly (nearby amenities · tourism photos)
+
+# (1) 행정안전부 LOCALDATA 인허가 공개 파일(키 불필요)로 캠핑장별 최근접 편의점·상비약·마트·정육점·주유소·약국·동물병원
+# (2) 한국관광공사 관광사진 GW(포토코리아, 공공누리 1유형) 지역·테마 사진 목록(URL·출처만, 이미지 미저장)
+# 결과(registry/nearby-licensed.json, registry/photo-gallery.json)는 data-sync의 build-fact-store가 사실(NEARBY_*)로 쓴다.
+on:
+  schedule:
+    # 매주 화요일 05:17 KST
+    - cron: "17 20 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: public-data-weekly-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: pipeline
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: node --test test/nearby-licensed.test.mjs
+      - name: Nearest amenities from LOCALDATA licences
+        continue-on-error: true
+        run: node scripts/sync-nearby-licensed.mjs
+      - name: Tourism photos (PhotoKorea GW)
+        continue-on-error: true
+        run: node scripts/sync-photo-gallery.mjs
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+      - name: Commit refreshed registries
+        run: |
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add registry/nearby-licensed.json registry/photo-gallery.json 2>/dev/null || git add registry/nearby-licensed.json
+          if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
+          git commit -m "chore(data): refresh nearby amenities and tourism photos"
+          git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"
+          git push
