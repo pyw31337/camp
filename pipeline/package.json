@@ -35,7 +35,12 @@
     "sync:tour-products": "node scripts/sync-tour-products.mjs",
     "sync:social": "node scripts/sync-social.mjs",
     "survey:conditions": "node scripts/survey-all-campgrounds.mjs",
-    "build:spec": "node scripts/build-spec-sheet.mjs"
+    "build:spec": "node scripts/build-spec-sheet.mjs",
+    "build:facts": "node scripts/build-fact-store.mjs",
+    "facts:sqlite": "node scripts/build-fact-store.mjs --sqlite",
+    "facts:query": "node scripts/query-facts.mjs",
+    "db:import-facts": "node scripts/import-facts-postgres.mjs",
+    "discover:kakao": "node scripts/discover-kakao.mjs"
   },
   "dependencies": {
     "pg": "8.23.1",

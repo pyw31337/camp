@@ -354,16 +354,17 @@
    "enum": {
     "ALLOWED": "동반 가능",
     "SMALL_ONLY": "소형견만",
+    "ZONE_ONLY": "지정 구역만",
     "NOT_ALLOWED": "동반 불가"
    },
    "pref": "반려견과 함께 가나요? 크기는?",
    "filter": "in",
    "coverage": {
-    "campgrounds": 2673,
+    "campgrounds": 2669,
     "by_grade": {
-     "CONFIRMED": 2754,
-     "OPERATOR": 169,
-     "MENTION": 327
+     "CONFIRMED": 2755,
+     "OPERATOR": 163,
+     "MENTION": 293
     }
    }
   },
@@ -1931,5 +1932,5 @@
    }
   }
  ],
- "generated_at": "2026-10-16T04:26:46.193Z"
+ "generated_at": "2026-10-16T04:29:56.448Z"
 }

@@ -235,6 +235,7 @@
    "enum": {
     "ALLOWED": "동반 가능",
     "SMALL_ONLY": "소형견만",
+    "ZONE_ONLY": "지정 구역만",
     "NOT_ALLOWED": "동반 불가"
    },
    "pref": "반려견과 함께 가나요? 크기는?",

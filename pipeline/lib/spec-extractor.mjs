@@ -107,7 +107,12 @@ export function extractFromSentence(s, { year = new Date().getFullYear() } = {})
   const vis = s.match(/(?:방문객|외부\s*방문(?:객|자)?)\s*(?:의|은|는|분)?\s*(?:입장|출입|방문|요금|이용료|1인|인당|불가|금지|제한|받지)[^.]{0,30}/);
   if (vis) { const f = feeOrRule(vis[0]); if (f && f.text !== "가능(요금 미기재)") out.push({ code: "VISITOR_POLICY", value: f.fee != null ? `1인 ${f.text}` : f.text === "불가" ? "방문객 불가" : f.text, norm: f.text }); }
   const pet = s.match(/(반려견|반려동물|애견|강아지)[^.]{0,30}?(동반\s*)?(가능|불가|금지|입장\s*불가)/);
-  if (pet) {
+  // “반려동물 동반 가능 여부”(안내 제목·질문)는 규칙이 아니다. “A사이트 외 애완견 동반 금지”는 지정 구역만 허용이다.
+  const petAsk = pet && /^\s*(여부|하나요|한가요|인가요|\?)/.test(s.slice(pet.index + pet[0].length));
+  const petZone = pet && /([A-Za-z가-힣0-9]+\s*(사이트|구역|존|동)\s*(외|이외|제외)|(전용|지정)\s*(사이트|구역|존))/.test(s);
+  if (pet && !petAsk && petZone) {
+    out.push({ code: "PET_POLICY", value: "지정 구역만 동반", norm: "ZONE_ONLY" });
+  } else if (pet && !petAsk) {
     const allowed = /가능/.test(pet[3]);
     const size = s.match(/(소형견|중형견|대형견|\d{1,2}\s*kg\s*(?:이하|미만))/);
     const limit = s.match(/(\d)\s*마리/);

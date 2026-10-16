@@ -205,6 +205,7 @@ export function factsOf(c, d, { site = null, details = null, digest = null, kaka
 
 function petCode(v) {
   const s = String(v ?? "");
+  if (/지정 구역/.test(s)) return "ZONE_ONLY";
   if (/불가|금지|안\s*됩/.test(s)) return "NOT_ALLOWED";
   if (/소형/.test(s)) return "SMALL_ONLY";
   return /가능|동반/.test(s) ? "ALLOWED" : null;

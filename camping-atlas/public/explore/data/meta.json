@@ -706,8 +706,8 @@
   },
   "updated_at": "2026-10-16T01:16:44.963Z",
   "spec_sheet": {
-    "generated_at": "2026-10-16T01:16:45.840Z",
-    "campgrounds_with_spec": 1002,
+    "generated_at": "2026-10-16T04:29:49.168Z",
+    "campgrounds_with_spec": 975,
     "roundup_reviews_skipped": 2463,
     "fields": {
       "CHECKIN_TIME": {
@@ -747,8 +747,8 @@
         "mention": 2
       },
       "PET_POLICY": {
-        "official": 287,
-        "mention": 325
+        "official": 282,
+        "mention": 290
       },
       "RENTAL": {
         "official": 5,
@@ -784,7 +784,7 @@
     "reviews": 6993
   },
   "profiles": {
-    "generated_at": "2026-10-16T01:16:51.555Z",
+    "generated_at": "2026-10-16T04:29:53.200Z",
     "total": 3116,
     "fields": {
       "TYPE": {
@@ -871,7 +871,7 @@
       "RIVER": 356,
       "LAKE": 145,
       "AUTO": 832,
-      "PET_OK": 1142,
+      "PET_OK": 1136,
       "VALLEY": 655,
       "BEACH": 375,
       "ISLAND": 85,
