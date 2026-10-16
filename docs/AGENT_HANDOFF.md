@@ -35,6 +35,8 @@ main 반영 완료: PR #17·#18·#19·#21·#23 + Gemini b4111755(주변 인프�
 | 무엇 | 위치 | 규모·상태 | 문서 |
 | --- | --- | --- | --- |
 | **원자 사실 저장소**: 캠핑장·속성·값·등급·원천·근거 1행씩 | `data/facts/{묶음}.ndjson`(20묶음), `campgrounds.ndjson`, `attributes.json`, `manifest.json` | 약 12.4만 건, 속성 137개, 등급 VERIFIED·OPERATOR·CONFIRMED·MENTION | `docs/FACT_STORE.md` |
+| **1박 요금 데이터**: 후기 언급·운영자·TourAPI 기준가 | `campgrounds.json` `c.fee`, `camps/{id}.json` `d.prices`·`d.profile.fields.PRICE` | **1,722/3,116곳(55.3%)**, 카드에 요금대(`3만~6만원대`, `3.5만원부터`) 노출 완료 | `pipeline/scripts/build-site-pricing-facts.mjs` |
+| **사이트 종류별 규격·요금표**: 규격·바닥·사이트수·요금·주차 | 상세 `#sec-site` `sitePricingTable` | 3,116곳(규격 816곳, 바닥재 1,576곳, 사이트수 3,116곳) 종합 표 노출 완료 | `design/explore/_app.js` |
 | 조건 조합 조회 | `pipeline/lib/fact-query.mjs`, CLI `pipeline/scripts/query-facts.mjs` | 취향 묶음 20개(장작 불멍·반려견·겨울 전기·장보기 가까움·비상 대비 등). 결과마다 근거·확인필요·어긋남 | 같은 문서 4장 |
 | Postgres 테이블 | `db/011_campground_fact_store.sql`(`fact_attribute`·`campground_fact`·`campground_fact_best`), 적재 `npm --prefix pipeline run db:import-facts` | 멱등(통째 재적재) | — |
 | **주변 생활 인프라** 최근접(직선 m·5km 안 개수) | `pipeline/registry/nearby-licensed.json` → 사실 `NEARBY_*_M` | 편의점·상비약·마트·정육점·주유소·약국·동물병원, LOCALDATA 7업종(키 불필요), 매주 화요일 갱신 | `docs/PUBLIC_DATA_PLAN.md` D |
@@ -56,17 +58,24 @@ main 반영 완료: PR #17·#18·#19·#21·#23 + Gemini b4111755(주변 인프�
 **Codex(화면)**
 - [x] (Gemini b4111755에서 완료: 카드 `nlLine`·상세 요약 카드) 카드·상세에 주변 장보기·비상 칸: `NEARBY_CONVENIENCE_M`·`NEARBY_MART_M`·`NEARBY_BUTCHER_M`·`NEARBY_OTC_MEDICINE_M`·`NEARBY_PHARMACY_M`·`NEARBY_VET_M`(“편의점 1.2km · 직선”, 20km 밖은 표시 안 함). 상호·주소는 `text` 필드.
 - [x] (Gemini b4111755에서 데이터 연결 완료 — 캡션 규칙 확인 필요) 히어로·테마 표지에 `photo-gallery.json` 사진 + 캡션 “사진: {촬영자} / 한국관광공사”. 캠핑장 썸네일로는 쓰지 않음(그 업장 사진이 아님).
+- [x] (Gemini 398a2c45 완료) 카드 목록에 1,722곳 1박 요금 대역(`c.fee`) 실시간 노출 및 상세 `#sec-site` 사이트 종류별 규격·바닥·요금 통합 표(`sitePricingTable`) 신설.
+- [x] (Gemini 398a2c45 완료) '확인 필요' 과잉 분류 해소: 고캠핑 등록 오토/전기(600W)/장작 데이터 메인 노출 및 후기 추출 데이터 `후기·확인필요` 뱃지 분리. 카드 포스터 위의 회색 점선 확인필요 배지 정리.
+- [ ] 탐색 상단 필터바에 **'1박 요금대 필터'** 추가 (`~3만원`, `3~5만원`, `5~7만원`, `7만원 이상`).
+- [ ] 비교함(Compare) 사이트 규격 및 요금 비교 컬럼 추가.
 - [ ] 탐색 필터를 `fact-query.mjs`의 `PRESETS`/`matchCampgrounds`로 연결(근거 문장은 (i)에, 확인필요는 기존 배지 규칙).
 - [ ] 홈페이지·전화 표시는 고캠핑 > 네이버 등록(`naver_local`) > 카카오 순으로, 값이 다르면 (i)에 둘 다.
 
 **Gemini(데이터 정리·운영 DB)**
-- [ ] 지자체 야영장 현황 파일 36개 열 이름 사전·정규화기(`PUBLIC_DATA_PLAN.md` G3) → 사실 저장소 원천으로 추가(원천 코드 새로 정의, 사전에 `SOURCES` 추가).
-- [ ] `PUBLIC_DATA_INTEGRATION_PLAN.md`의 95689 설명 정정: 실제 열은 시설 수량(면수·화장실·샤워실·개수대·소화기·방화수·방화사·화재감지기)과 기준일이며 **수종·피톤치드 열은 없다**.
-- [ ] Supabase에 사실 저장소 적재 여부 결정: `db:import-facts`는 약 12.3만 행(예상 수십 MB). 500MB 무료 한도 안이지만 `check:billing` 용량 경고(400MB)와 함께 판단.
-- (확인됨) `check:billing`이 이미 `naver-guard.mjs`의 `checkFreeTier`를 쓴다 — 네이버 판정 규칙은 이 파일 하나만 고친다.
+- [x] 1박 요금 집계 스크립트(`pipeline/scripts/build-site-pricing-facts.mjs`) 신설 및 정기 워크플로(`data-sync.yml`, `review-digest-sync.yml`) 연동 완료.
+- [ ] 요금 미보유 캠핑장(1,394개소) 중 공영/국립/지자체 야영장 공공 표준 요금제 자동 매핑.
+- [ ] 사이트별 요금·크기·인원 1:1 정밀 매핑 고도화 (TourAPI `detailInfo2` 숙박 상품과 고캠핑 구역 정보 매칭).
+- [ ] 지자체 야영장 현황 파일 36개 열 이름 사전·정규화기(`PUBLIC_DATA_PLAN.md` G3) → 사실 저장소 원천으로 추가.
+- [ ] Supabase에 사실 저장소 적재 여부 결정: `db:import-facts`는 약 12.3만 행.
 
 **Claude(다음)**
-- ~~네이버 전수 매칭 결과 반영 PR~~(PR #23 완료), 상가(상권)정보 API로 철물점·캠핑용품점 보강, 공공 캠핑장 요금·예약 오픈 파일(G5).
+- [ ] 공공 캠핑장 요금·예약 오픈 파일(G5) 및 국립공원·휴양림 표준요금제 사실 저장소(`data/facts/`) 적재.
+- [ ] 상가(상권)정보 API로 철물점·캠핑용품점 보강.
+- [ ] 읽기 실패 493곳 중 네이버 운영자 링크가 있는 곳 우선 재시도.
 
 ## operator-sites 2차 실행 결과 + 워크플로 커밋 순서 수정 (2026-10-16 오후, Claude)
 
