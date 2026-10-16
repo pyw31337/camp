@@ -1157,9 +1157,33 @@ function allPhotos(c, d) {
   return [...own, ...remote];
 }
 function talkBlock(c) {
-  const g = window.GISCUS;
-  if (!g?.repoId) return `<p class="dv-empty">댓글 기능을 준비하고 있어요.</p>`;
-  return `<div class="giscus" data-camp="${c.id}"></div><span class="trust">GitHub 계정으로 댓글을 남길 수 있어요(무료). 개인정보·전화번호는 적지 마세요.</span>`;
+  return `
+    <div class="open-comments" data-camp="${c.id}" id="ocBlock_${c.id}">
+      <div class="oc-trust-bar">
+        <span>✨ <b>자유 댓글 & 생생 후기</b>: 로그인 없이 닉네임과 비밀번호만으로 솔직한 후기를 남길 수 있어요.</span>
+      </div>
+      <form class="oc-form" id="ocForm_${c.id}" onsubmit="return handleCommentSubmit(event, ${c.id})">
+        <div class="oc-tag-selector">
+          <span class="oc-tag-label">후기 구분:</span>
+          <label class="oc-tag-pill active" onclick="selectCommentTag(this)"><input type="radio" name="ocTag_${c.id}" value="방문후기" checked hidden> #방문후기</label>
+          <label class="oc-tag-pill" onclick="selectCommentTag(this)"><input type="radio" name="ocTag_${c.id}" value="명당자리" hidden> #명당자리</label>
+          <label class="oc-tag-pill" onclick="selectCommentTag(this)"><input type="radio" name="ocTag_${c.id}" value="시설꿀팁" hidden> #시설꿀팁</label>
+          <label class="oc-tag-pill" onclick="selectCommentTag(this)"><input type="radio" name="ocTag_${c.id}" value="궁금해요" hidden> #궁금해요</label>
+        </div>
+        <div class="oc-input-row">
+          <input type="text" id="ocNick_${c.id}" class="oc-input" placeholder="닉네임 (예: 감성캠퍼)" maxlength="20" required>
+          <input type="password" id="ocPw_${c.id}" class="oc-input" placeholder="비밀번호 4자리 (삭제 시 필요)" maxlength="10" required>
+        </div>
+        <div class="oc-text-row">
+          <textarea id="ocContent_${c.id}" class="oc-textarea" rows="2" placeholder="캠핑장 방문 소감이나 다른 캠퍼들에게 도움이 될 명당/편의시설 꿀팁을 자유롭게 남겨주세요!" maxlength="500" required></textarea>
+          <button type="submit" class="oc-submit-btn" id="ocBtn_${c.id}">후기 등록하기</button>
+        </div>
+      </form>
+      <div class="oc-list-container" id="ocList_${c.id}">
+        <div class="oc-loading" style="padding:16px;text-align:center;color:var(--mc-ink-3);font-size:0.875rem;">댓글 불러오는 중...</div>
+      </div>
+    </div>
+  `;
 }
 /* ---------- 상세 v2: 사진 중심 · 섹션마다 다른 시각 요소 · 출처는 (i)로 숨김 ---------- */
 // 라이트박스 묶음(그룹 → 사진 목록). 상세를 그릴 때마다 다시 채운다.
@@ -2082,15 +2106,208 @@ async function loadDetail(c) {
   const slot = $("#introSlot"); if (slot) slot.innerHTML = introHtml(DETAIL.get(c.id));
   tipify($(".sheet-panel"));
   loadNearbyRoadviewThumbs($(".sheet-panel"));
-  mountGiscus(c);
+  mountOpenComments(c);
 }
-function mountGiscus(c) {
-  const g = window.GISCUS, el = $(".giscus");
-  if (!g?.repoId || !el || el.dataset.mounted) return;
-  el.dataset.mounted = "1";
-  const s = document.createElement("script");
-  Object.entries({ src: "https://giscus.app/client.js", "data-repo": g.repo, "data-repo-id": g.repoId, "data-category": g.category, "data-category-id": g.categoryId, "data-mapping": "specific", "data-term": `camp-${c.id} ${c.name}`, "data-strict": "1", "data-reactions-enabled": "1", "data-input-position": "top", "data-theme": "preferred_color_scheme", "data-lang": "ko", "data-loading": "lazy", crossorigin: "anonymous" }).forEach(([k, v]) => s.setAttribute(k, v));
-  s.async = true; el.append(s);
+window.selectCommentTag = function(labelEl) {
+  const container = labelEl.closest('.oc-tag-selector');
+  if (!container) return;
+  container.querySelectorAll('.oc-tag-pill').forEach(el => el.classList.remove('active'));
+  labelEl.classList.add('active');
+  const radio = labelEl.querySelector('input[type="radio"]');
+  if (radio) radio.checked = true;
+};
+
+function formatCommentTime(ts) {
+  if (!ts) return "";
+  const d = new Date(ts);
+  const now = new Date();
+  const diffSec = Math.floor((now - d) / 1000);
+  if (diffSec < 60) return "방금 전";
+  if (diffSec < 3600) return `${Math.floor(diffSec / 60)}분 전`;
+  if (diffSec < 86400) return `${Math.floor(diffSec / 3600)}시간 전`;
+  if (diffSec < 86400 * 7) return `${Math.floor(diffSec / 86400)}일 전`;
+  return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}`;
+}
+
+function getLocalComments(campId) {
+  try {
+    return JSON.parse(localStorage.getItem(`moyeora_comments_${campId}`) || "[]");
+  } catch {
+    return [];
+  }
+}
+
+function saveLocalComment(campId, comment) {
+  try {
+    const list = getLocalComments(campId);
+    list.unshift(comment);
+    localStorage.setItem(`moyeora_comments_${campId}`, JSON.stringify(list.slice(0, 50)));
+  } catch {}
+}
+
+async function loadCampComments(campId) {
+  const container = document.getElementById(`ocList_${campId}`);
+  if (!container) return;
+
+  let comments = [];
+  const sbUrl = window.SUPABASE_URL || "https://zgnetdxqzsnmzdvoxzbw.supabase.co";
+  const sbKey = window.SUPABASE_ANON_KEY;
+
+  if (sbKey) {
+    try {
+      const res = await fetch(`${sbUrl}/rest/v1/campground_comment?campground_id=eq.${campId}&is_deleted=eq.false&order=created_at.desc&limit=50`, {
+        headers: {
+          "apikey": sbKey,
+          "Authorization": `Bearer ${sbKey}`
+        }
+      });
+      if (res.ok) {
+        comments = await res.json();
+      }
+    } catch (e) {
+      console.warn("Remote comments fetch fallback:", e);
+    }
+  }
+
+  // 로컬 저장 댓글 병합 (새로 등록한 댓글 즉각 노출)
+  const local = getLocalComments(campId);
+  const seenIds = new Set(comments.map(c => String(c.id)));
+  for (const l of local) {
+    if (!seenIds.has(String(l.id))) {
+      comments.push(l);
+    }
+  }
+  comments.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+  if (!comments.length) {
+    container.innerHTML = `<div class="oc-empty">아직 등록된 후기가 없습니다.<br>첫 번째 방문 후기나 꿀팁을 남겨보세요! 😊</div>`;
+    return;
+  }
+
+  container.innerHTML = comments.map(c => `
+    <div class="oc-item" id="comment_${c.id}">
+      <div class="oc-item-head">
+        <div class="oc-item-meta">
+          <span class="oc-item-nick">${esc(c.nickname || "캠퍼")}</span>
+          <span class="oc-item-tag">#${esc(c.tag || "방문후기")}</span>
+          <span class="oc-item-time">${formatCommentTime(c.created_at)}</span>
+        </div>
+        <button type="button" class="oc-item-del" onclick="handleCommentDelete(${campId}, '${c.id}', '${esc(c.password_hash || "")}')">삭제</button>
+      </div>
+      <div class="oc-item-body">${esc(c.content || "")}</div>
+    </div>
+  `).join("");
+}
+
+window.handleCommentSubmit = async function(e, campId) {
+  e.preventDefault();
+  const nickInput = document.getElementById(`ocNick_${campId}`);
+  const pwInput = document.getElementById(`ocPw_${campId}`);
+  const contentInput = document.getElementById(`ocContent_${campId}`);
+  const btn = document.getElementById(`ocBtn_${campId}`);
+  const form = document.getElementById(`ocForm_${campId}`);
+  
+  const nickname = (nickInput?.value || "").trim();
+  const password = (pwInput?.value || "").trim();
+  const content = (contentInput?.value || "").trim();
+  const tagRadio = form?.querySelector(`input[name="ocTag_${campId}"]:checked`);
+  const tag = tagRadio?.value || "방문후기";
+
+  if (!nickname || !password || !content) {
+    alert("닉네임, 비밀번호, 후기 내용을 모두 입력해 주세요.");
+    return false;
+  }
+
+  if (btn) { btn.disabled = true; btn.innerText = "등록 중..."; }
+
+  const commentObj = {
+    id: "local_" + Date.now(),
+    campground_id: campId,
+    nickname,
+    content,
+    tag,
+    password_hash: password,
+    created_at: new Date().toISOString()
+  };
+
+  const sbUrl = window.SUPABASE_URL || "https://zgnetdxqzsnmzdvoxzbw.supabase.co";
+  const sbKey = window.SUPABASE_ANON_KEY;
+
+  if (sbKey) {
+    try {
+      const res = await fetch(`${sbUrl}/rest/v1/campground_comment`, {
+        method: "POST",
+        headers: {
+          "apikey": sbKey,
+          "Authorization": `Bearer ${sbKey}`,
+          "Content-Type": "application/json",
+          "Prefer": "return=representation"
+        },
+        body: JSON.stringify({
+          campground_id: campId,
+          nickname,
+          content,
+          tag,
+          password_hash: password
+        })
+      });
+      if (res.ok) {
+        const returned = await res.json();
+        if (returned && returned[0]) {
+          commentObj.id = returned[0].id;
+        }
+      }
+    } catch (err) {
+      console.warn("Supabase comment submit warning:", err);
+    }
+  }
+
+  saveLocalComment(campId, commentObj);
+
+  if (contentInput) contentInput.value = "";
+  if (btn) { btn.disabled = false; btn.innerText = "후기 등록하기"; }
+
+  await loadCampComments(campId);
+  return false;
+};
+
+window.handleCommentDelete = async function(campId, commentId, storedPw) {
+  const enteredPw = prompt("댓글 작성 시 입력했던 비밀번호를 입력하세요:");
+  if (enteredPw === null) return;
+  if (!enteredPw || enteredPw.trim() !== String(storedPw).trim()) {
+    alert("비밀번호가 일치하지 않습니다.");
+    return;
+  }
+
+  const sbUrl = window.SUPABASE_URL || "https://zgnetdxqzsnmzdvoxzbw.supabase.co";
+  const sbKey = window.SUPABASE_ANON_KEY;
+  if (sbKey && !String(commentId).startsWith("local_")) {
+    try {
+      await fetch(`${sbUrl}/rest/v1/campground_comment?id=eq.${commentId}`, {
+        method: "PATCH",
+        headers: {
+          "apikey": sbKey,
+          "Authorization": `Bearer ${sbKey}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ is_deleted: true })
+      });
+    } catch (e) {
+      console.warn("Remote delete err:", e);
+    }
+  }
+
+  try {
+    const list = getLocalComments(campId).filter(c => String(c.id) !== String(commentId));
+    localStorage.setItem(`moyeora_comments_${campId}`, JSON.stringify(list));
+  } catch {}
+
+  alert("댓글이 삭제되었습니다.");
+  await loadCampComments(campId);
+};
+
+function mountOpenComments(c) {
+  loadCampComments(c.id);
 }
 function mountRoadview(value, name) {
   const slot = $("#roadviewSlot");
@@ -2358,8 +2575,8 @@ new ResizeObserver(head).observe(document.body);
 const BASE_TITLE = document.title;
 async function boot() {
   load();
-  // 댓글(giscus) 설정은 배포 시 메타 태그로 넣는다. 없으면 댓글 칸에 준비 중 안내.
-  try { window.GISCUS = JSON.parse(document.querySelector('meta[name="giscus"]')?.content || "null"); } catch {}
+  window.SUPABASE_URL = document.querySelector('meta[name="supabase-url"]')?.content || "https://zgnetdxqzsnmzdvoxzbw.supabase.co";
+  window.SUPABASE_ANON_KEY = document.querySelector('meta[name="supabase-anon-key"]')?.content || "";
   try {
     const [cg, meta, availability] = await Promise.all([
       fetch("data/campgrounds.json").then((r) => r.json()),

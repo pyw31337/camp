@@ -215,3 +215,34 @@ h1, h2, h3, .card-title h3, .dv-glass h2 { word-break: keep-all; text-wrap: bala
 .x-hero-tip { position: absolute; right: clamp(16px, 3vw, 48px); top: 14px; background: rgba(255,255,255,.85); }
 /* 모바일 ‘지도 보기’ 떠 있는 버튼은 칩을 가린다. 지도는 상단 탭·메뉴로 들어가고, 지도 화면에서만 ‘목록 보기’로 돌아온다. */
 @media (max-width: 900px) { body:not([data-view="map"]) .mobile-switch { display: none !important; } }
+
+/* ---------- 캠퍼 자유 댓글창 (Open Camper Comment Board) ---------- */
+.open-comments { display: flex; flex-direction: column; gap: 16px; margin-top: 12px; }
+.oc-trust-bar { display: flex; align-items: center; gap: 6px; font-size: 0.8125rem; color: #166534; background: #f0fdf4; border: 1px solid #bbf7d0; padding: 10px 14px; border-radius: var(--mc-r-2); line-height: 1.4; }
+.oc-form { background: #fff; border: 1px solid var(--mc-soft-2); border-radius: var(--mc-r-3); padding: 16px; box-shadow: var(--mc-shadow-1); display: flex; flex-direction: column; gap: 12px; }
+.oc-tag-selector { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 0.8125rem; font-weight: 700; color: var(--mc-ink-2); }
+.oc-tag-pill { display: inline-flex; align-items: center; cursor: pointer; padding: 4px 12px; border-radius: 999px; background: var(--mc-soft); color: var(--mc-ink-2); font-weight: 600; font-size: 0.8125rem; transition: all 0.2s; user-select: none; }
+.oc-tag-pill:hover { background: var(--mc-soft-2); }
+.oc-tag-pill.active { background: var(--mc-accent); color: #fff; font-weight: 700; }
+.oc-input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 480px) { .oc-input-row { grid-template-columns: 1fr; } }
+.oc-input { padding: 10px 14px; border: 1px solid var(--mc-soft-2); border-radius: var(--mc-r-1); font-size: 0.875rem; background: var(--mc-soft); color: var(--mc-ink); font-family: inherit; }
+.oc-input:focus { outline: none; background: #fff; border-color: var(--mc-accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--mc-accent) 20%, transparent); }
+.oc-text-row { display: flex; flex-direction: column; gap: 10px; }
+.oc-textarea { padding: 12px 14px; border: 1px solid var(--mc-soft-2); border-radius: var(--mc-r-1); font-size: 0.875rem; background: var(--mc-soft); color: var(--mc-ink); font-family: inherit; resize: vertical; min-height: 72px; line-height: 1.5; }
+.oc-textarea:focus { outline: none; background: #fff; border-color: var(--mc-accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--mc-accent) 20%, transparent); }
+.oc-submit-btn { align-self: flex-end; display: inline-flex; align-items: center; justify-content: center; min-height: 2.375rem; padding: 0 20px; border-radius: 999px; background: var(--mc-accent); color: #fff; font-weight: 800; font-size: 0.875rem; border: none; cursor: pointer; transition: opacity 0.2s; }
+.oc-submit-btn:hover { opacity: 0.9; }
+.oc-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.oc-list-container { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+.oc-item { background: #fff; border-radius: var(--mc-r-2); border: 1px solid var(--mc-soft-2); padding: 14px; display: flex; flex-direction: column; gap: 6px; box-shadow: var(--mc-shadow-1); }
+.oc-item-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.oc-item-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.oc-item-nick { font-weight: 800; font-size: 0.9375rem; color: var(--mc-ink); }
+.oc-item-tag { font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: #ecfdf5; color: #047857; }
+.oc-item-time { font-size: 0.75rem; color: var(--mc-ink-3); }
+.oc-item-body { font-size: 0.875rem; color: var(--mc-ink); line-height: 1.5; word-break: break-word; white-space: pre-wrap; }
+.oc-item-del { font-size: 0.75rem; color: var(--mc-ink-3); background: none; border: none; cursor: pointer; padding: 2px 6px; border-radius: 4px; }
+.oc-item-del:hover { color: #dc2626; background: #fee2e2; }
+.oc-empty { padding: 24px; text-align: center; color: var(--mc-ink-2); font-size: 0.875rem; background: #fff; border-radius: var(--mc-r-2); border: 1px dashed var(--mc-soft-2); }
+

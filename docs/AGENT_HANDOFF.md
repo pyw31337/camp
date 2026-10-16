@@ -52,8 +52,7 @@
 3. **실 서비스 배포 및 기능 검증 완료**:
    - 배포 URL: [https://pyw31337.github.io/camp/](https://pyw31337.github.io/camp/) (GitHub Pages 배포 성공 완료).
    - 홈 화면: AI 분석 추천 캠핑장 동적 카드 및 전국 지도 탐색 CTA 전면 반영.
-   - 지도 화면: 카카오 지도 SDK 정상 로드 및 카카오 검색 API KA 헤더 이슈 해결.
-   - 댓글 기능: GitHub Discussions(`pyw31337/camp`) 기반 Giscus 댓글 모듈 활성화.
+   - 댓글 기능: GitHub 로그인 종속의 Giscus 대신, 일반 캠퍼를 위한 **비회원 자유 댓글·생생 후기 게시판(Supabase `campground_comment` + 로컬 캐시 하이브리드)** 구축 완료. 닉네임, 간편 비밀번호, 태그(#방문후기, #명당자리, #시설꿀팁, #궁금해요)로 자유롭게 등록/삭제 가능.
 
 ## 네이버 HUB 지역 검색 연결 + 카카오 발굴 실행 (2026-10-16 밤, Claude)
 

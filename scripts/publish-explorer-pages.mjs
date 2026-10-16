@@ -21,9 +21,8 @@ if (shellOnly && !existsSync(`${out}data/campgrounds.json`)) { console.log("::no
 const previousAvailability = !shellOnly && existsSync(`${out}data/availability.json`) ? await readFile(`${out}data/availability.json`) : null;
 if (!shellOnly) { await rm(out, { recursive: true, force: true }); await mkdir(`${out}data`, { recursive: true }); }
 const kakaoKey = (process.env.KAKAO_JS_KEY ?? "").replace(/[^A-Za-z0-9]/g, "");
-// 댓글(giscus) 설정: 저장소 변수 GISCUS_CONFIG = {"repo":"pyw31337/camp","repoId":"…","category":"…","categoryId":"…"}
-let giscus = "";
-try { const g = JSON.parse(process.env.GISCUS_CONFIG || "null"); if (g?.repoId && g?.categoryId) giscus = JSON.stringify({ repo: g.repo, repoId: g.repoId, category: g.category, categoryId: g.categoryId }).replace(/"/g, "&quot;"); } catch {}
+const supabaseUrl = process.env.SUPABASE_URL || "https://zgnetdxqzsnmzdvoxzbw.supabase.co";
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_PUBLISHABLE_KEY || "";
 const body = await readFile(`${root}design/explore/index.html`, "utf8");
 await writeFile(`${out}index.html`, `<!doctype html>
 <html lang="ko">
@@ -33,7 +32,8 @@ await writeFile(`${out}index.html`, `<!doctype html>
 <meta name="description" content="전국 캠핑장을 지도와 목록으로 찾고, 사이트 크기·시설·주변 화장실을 비교해 공식 예약처로 바로 예약하세요.">
 <meta name="theme-color" content="#1f9d5c">
 <meta name="kakao-js-key" content="${kakaoKey}">
-<meta name="giscus" content="${giscus}">
+<meta name="supabase-url" content="${supabaseUrl}">
+<meta name="supabase-anon-key" content="${supabaseAnonKey}">
 <link rel="icon" href="../favicon.svg">
 </head>
 <body>
