@@ -40,11 +40,25 @@ process.exit(0);
 async function main() {
   const fetchedAt = toKstIso(nowInKst());
   const campPath = `${out}campgrounds.json`;
-  if (!existsSync(campPath)) { warn("소셜 검색 건너뜀", "out/campgrounds.json 없음(sync:gocamping 먼저)"); return; }
-  const { campgrounds = [] } = await readJson(campPath, {});
-  const camps = campgrounds
-    .map((c) => ({ id: String(c?.external_id?.id ?? ""), name: c?.name, address: c?.address ?? {} }))
-    .filter((c) => c.id && c.name);
+  let camps = [];
+  if (existsSync(campPath)) {
+    const { campgrounds = [] } = await readJson(campPath, {});
+    camps = campgrounds
+      .map((c) => ({ id: String(c?.external_id?.id ?? ""), name: c?.name, address: c?.address ?? {} }))
+      .filter((c) => c.id && c.name);
+  } else {
+    const fallbackPath = fileURLToPath(new URL("../../camping-atlas/public/explore/data/campgrounds.json", import.meta.url));
+    if (existsSync(fallbackPath)) {
+      const raw = await readJson(fallbackPath, []);
+      const list = Array.isArray(raw) ? raw : (raw.campgrounds ?? []);
+      camps = list.map((c) => ({
+        id: String(c?.id ?? ""),
+        name: c?.name,
+        address: { sido: c?.sido, sigungu: c?.sigungu }
+      })).filter((c) => c.id && c.name);
+    }
+  }
+  if (!camps.length) { warn("소셜 검색 건너뜀", "캠핑장 카탈로그 없음(sync:gocamping 또는 explore 데이터 필요)"); return; }
 
   // 같은 시군구 다른 캠핑장 핵심어(제목이 다른 곳을 가리키는 글 거르기)
   const coresBySigungu = new Map();

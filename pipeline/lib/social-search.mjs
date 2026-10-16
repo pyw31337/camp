@@ -290,7 +290,11 @@ export function searchUrl(type, query, { sort = "accuracy", size = 10, page = 1 
 /** 카카오 검색 1회 → documents 배열. 한도 초과는 code=RATE_LIMIT, 인증 실패는 code=AUTH로 throw. */
 export async function kakaoSearch(type, query, params, { key, fetchImpl = fetch, timeoutMs = 10000 }) {
   const res = await fetchImpl(searchUrl(type, query, params), {
-    headers: { Authorization: `KakaoAK ${key}` },
+    headers: {
+      Authorization: `KakaoAK ${key}`,
+      KA: "sdk/1.0 os/javascript lang/ko res/1920x1080 device/web_pc origin/https://pyw31337.github.io",
+      Origin: "https://pyw31337.github.io",
+    },
     signal: AbortSignal.timeout(timeoutMs),
   });
   if (!res.ok) {

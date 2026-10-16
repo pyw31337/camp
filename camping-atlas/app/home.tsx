@@ -125,6 +125,22 @@ export default function Home() {
     const query = keyword.trim().toLowerCase();
     return officialProducts.filter((camp) => (selectedCategory === "전체" || camp.type === selectedCategory) && (region === "전국" || camp.region.includes(region)) && (!query || [camp.campground, camp.product, camp.region, camp.type].some((value) => value.toLowerCase().includes(query))));
   }, [keyword, region, selectedCategory]);
+
+  const featuredCards = useMemo(() => {
+    if (!featured?.themes?.length) return [];
+    const set = new Set<string>();
+    const list: FeaturedCamp[] = [];
+    for (const theme of featured.themes) {
+      for (const camp of theme.camps) {
+        if (!set.has(camp.id)) {
+          set.add(camp.id);
+          list.push(camp);
+          if (list.length >= 8) return list;
+        }
+      }
+    }
+    return list;
+  }, [featured]);
   const toggleSaved = (id: string) => setSaved((current) => { const next = current.includes(id) ? current.filter((item) => item !== id) : [...current, id]; window.localStorage.setItem("moyeora-camping-saved", JSON.stringify(next)); return next; });
   // 캠핑장 찾기는 전국 캠핑장 탐색 화면(explore/)의 검색 결과 페이지로 보낸다. 시범 상품 몇 건만 거르지 않는다.
   const runSearch = (event: FormEvent<HTMLFormElement>) => {
@@ -149,7 +165,7 @@ export default function Home() {
     <div className="may-shell">
       <section className="may-hero" aria-label="캠핑 탐색">
         <picture><source media="(max-width: 760px)" srcSet="images/hero-home-m.webp" /><img src="images/hero-home.webp" alt="해 질 녘 산골짜기 캠핑장에 불 켜진 텐트들" /></picture><div className="may-hero-overlay" /><span className="may-hero-tip"><InfoTip label="사진 출처 보기">사진: 일곱식구 캠핑장(전북 정읍) · 한국관광공사 고캠핑 공식 등록 사진</InfoTip></span>
-        <div className="may-hero-copy"><h1><span>전국 {featured ? featured.total.toLocaleString("ko-KR") : "3,000"}곳 캠핑장,</span><span>사진 보고 바로 예약</span></h1><p>사이트·시설·주변 정보와 예약 오픈 일정까지<br />한 화면에서 비교하세요.</p></div>
+        <div className="may-hero-copy"><h1><span>전국 {featured ? featured.total.toLocaleString("ko-KR") : "3,116"}곳 캠핑장,</span><span>사진 보고 바로 예약</span></h1><p>사이트·시설·주변 정보와 AI 장단점 분석, 예약 오픈 일정까지<br />한 화면에서 비교하세요.</p></div>
         <div className="may-hero-stats" aria-label="예약 오픈"><a href="explore/openings/"><small><CalendarClock size={14} />이번 주 예약 오픈</small><strong>{weekCount ?? "–"}<i>곳</i></strong></a></div>
         <form className="may-searchbox" onSubmit={runSearch}>
           
@@ -164,9 +180,12 @@ export default function Home() {
       </section>
 
       <section className="may-explorer-direct" aria-label="전국 캠핑장 조건 탐색">
-        <div><span><Database size={15} />전국 캠핑장 데이터</span><h2>캠핑장별 현장 조건을 바로 비교하세요</h2><p>전기·전력 제한, 주차, 바닥, 사이트 규격, 장작·숯불 규정은 캠핑장 상세에서 원천과 함께 확인합니다.</p></div>
-        <div className="may-explorer-stats"><b>{(explorerMeta?.count ?? featured?.total ?? 3111).toLocaleString("ko-KR")}곳</b><span>전기 {explorerMeta?.stats?.electricity_registered?.toLocaleString("ko-KR") ?? "2,088"} · 규격 {explorerMeta?.stats?.site_size_registered?.toLocaleString("ko-KR") ?? "816"} · 바닥 {explorerMeta?.stats?.ground_registered?.toLocaleString("ko-KR") ?? "1,576"}</span></div>
-        <a href="explore/">조건으로 찾기 <ArrowRight size={16} /></a>
+        <div><span><Database size={15} />전국 3,116곳 캠핑장 AI 인텔리전스 DB 구축 완료</span><h2>전국 캠핑장 탐색 & 실시간 AI 분석</h2><p>화장실 청결도·소음·온수·주차 장단점(1,245곳)과 실시간 매너타임·할인 이벤트, 주변 화장실·마트 로드뷰를 바로 확인하세요.</p></div>
+        <div className="may-explorer-stats"><b>{(explorerMeta?.count ?? featured?.total ?? 3116).toLocaleString("ko-KR")}곳</b><span>후기 16,870건 · 영상 6,732건 · 사진 59,834건</span></div>
+        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
+          <a href="explore/">전국 캠핑장 찾기 <ArrowRight size={16} /></a>
+          <a href="explore/?view=map" style={{ background: "#253b30", color: "#fff", padding: "10px 18px", borderRadius: "12px", textDecoration: "none", fontWeight: 700, fontSize: "0.875rem" }}>카카오 지도로 보기</a>
+        </div>
       </section>
 
       <section className="may-categories" aria-label="캠핑 형태">{categories.map((category) => <button key={category} type="button" className={selectedCategory === category ? "selected" : ""} onClick={() => selectCategory(category)}>{category === "무료" ? <span className="may-free-icon">₩</span> : category === "오토캠핑" || category === "카라반" ? <Car size={17} /> : <TentTree size={17} />}<span>{category}</span></button>)}</section>
@@ -191,9 +210,72 @@ export default function Home() {
       </section>
 
       <section className="may-section" id="search">
-        <div className="may-section-head"><div><h2>공식 정보로 확인한 상품</h2><p>{keyword || selectedCategory !== "전체" ? `${results.length}개 조건 일치 상품` : "실제 시설 사진, 사이트 규격, 공식 예약 경로를 함께 봅니다."}</p></div><a className="may-all-link" href="explore/">전국 캠핑장 전체 보기 <ArrowRight size={14} /></a></div>
-        <div className="may-camp-grid">{results.map((camp) => { const isSaved = saved.includes(camp.id); return <article className="may-camp-card" key={camp.id}><button type="button" className="may-card-image" onClick={() => selectCamp(camp)} aria-label={`${camp.campground} ${camp.product} 상세 보기`}><img src={camp.image} alt={camp.imageAlt} loading="lazy" referrerPolicy="no-referrer" /></button><button type="button" className={isSaved ? "may-card-save saved" : "may-card-save"} aria-label={`${camp.product} 관심 저장`} aria-pressed={isSaved} onClick={() => toggleSaved(camp.id)}><Heart size={18} fill={isSaved ? "currentColor" : "none"} /></button><div className="may-card-body"><span className="may-provider-tag">{camp.type}</span><button type="button" className="may-card-title" onClick={() => selectCamp(camp)}>{camp.campground}<b>{camp.product}</b></button><p><MapPin size={13} />{camp.region}</p><div className="may-card-details"><span><small>사이트</small><b>{camp.size}</b></span><span><small>인원·가격</small><b>{camp.capacity}</b></span></div><div className="may-card-footer"><a href={camp.reservationUrl} target="_blank" rel="noreferrer">공식 예약 안내 <ExternalLink size={12} /></a><button type="button" onClick={() => selectCamp(camp)}>상세 <ArrowRight size={13} /></button></div></div></article>; })}</div>
-        {results.length === 0 && <div className="may-empty"><TentTree size={27} /><b>이 분류의 검증 상품은 아직 공개하지 않았습니다.</b><span>가공된 예시 대신, 공식 원천을 확인한 뒤 이 목록에 추가합니다.</span></div>}
+        <div className="may-section-head">
+          <div>
+            <h2>AI 분석 추천 캠핑장</h2>
+            <p>방문자 후기 장단점 분석과 실시간 운영 이슈를 대조한 추천 캠핑장입니다.</p>
+          </div>
+          <a className="may-all-link" href="explore/">전국 캠핑장 전체 보기 <ArrowRight size={14} /></a>
+        </div>
+        {featuredCards.length > 0 ? (
+          <div className="may-camp-grid">
+            {featuredCards.map((camp) => (
+              <article className="may-camp-card" key={camp.id}>
+                <a className="may-card-image" href={`explore/#c=${camp.id}`} aria-label={`${camp.name} 상세 보기`}>
+                  <img src={`media/${largeOfficialPhoto(camp.ph)}`} alt={`${camp.name} 공식 사진`} loading="lazy" />
+                  {camp.bd && <span className="may-badges">{camp.bd.map(([k, l]) => <i key={l} className={`pb pb-${k}`}>{l}</i>)}</span>}
+                </a>
+                <div className="may-card-body">
+                  <span className="may-provider-tag">{camp.where}</span>
+                  <a className="may-card-title" href={`explore/#c=${camp.id}`}>
+                    <b>{camp.name}</b>
+                  </a>
+                  {camp.line && <p><MapPin size={13} />{camp.line}</p>}
+                  {camp.rv && (
+                    <div className="may-rv" style={{ marginTop: "6px" }}>
+                      <span className="pro"><ThumbsUp size={12} />{camp.rv.p.length ? camp.rv.p.map(([t, n]) => `${t} ${n}`).join(" · ") : "장점 추천"}</span>
+                      {camp.rv.c.length > 0 && <span className="con" style={{ marginLeft: "4px" }}><ThumbsDown size={12} />{camp.rv.c.map(([t, n]) => `${t} ${n}`).join(" · ")}</span>}
+                    </div>
+                  )}
+                  <div className="may-card-footer" style={{ marginTop: "10px" }}>
+                    <a href={`explore/#c=${camp.id}`}>AI 상세 & 조건 확인 <ArrowRight size={13} /></a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="may-camp-grid">
+            {results.map((camp) => {
+              const isSaved = saved.includes(camp.id);
+              return (
+                <article className="may-camp-card" key={camp.id}>
+                  <button type="button" className="may-card-image" onClick={() => selectCamp(camp)} aria-label={`${camp.campground} ${camp.product} 상세 보기`}>
+                    <img src={camp.image} alt={camp.imageAlt} loading="lazy" referrerPolicy="no-referrer" />
+                  </button>
+                  <button type="button" className={isSaved ? "may-card-save saved" : "may-card-save"} aria-label={`${camp.product} 관심 저장`} aria-pressed={isSaved} onClick={() => toggleSaved(camp.id)}>
+                    <Heart size={18} fill={isSaved ? "currentColor" : "none"} />
+                  </button>
+                  <div className="may-card-body">
+                    <span className="may-provider-tag">{camp.type}</span>
+                    <button type="button" className="may-card-title" onClick={() => selectCamp(camp)}>
+                      {camp.campground}<b>{camp.product}</b>
+                    </button>
+                    <p><MapPin size={13} />{camp.region}</p>
+                    <div className="may-card-details">
+                      <span><small>사이트</small><b>{camp.size}</b></span>
+                      <span><small>인원·가격</small><b>{camp.capacity}</b></span>
+                    </div>
+                    <div className="may-card-footer">
+                      <a href={camp.reservationUrl} target="_blank" rel="noreferrer">공식 예약 안내 <ExternalLink size={12} /></a>
+                      <button type="button" onClick={() => selectCamp(camp)}>상세 <ArrowRight size={13} /></button>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        )}
       </section>
 
       {selectedCamp && <section className="may-detail" id="camp-detail" aria-label={`${selectedCamp.product} 상세 정보`}><button className="may-detail-close" type="button" onClick={() => setSelectedCamp(null)} aria-label="상세 닫기"><X size={18} /></button><div className="may-detail-image"><img src={selectedCamp.image} alt={selectedCamp.imageAlt} referrerPolicy="no-referrer" /><a href={selectedCamp.imagePageUrl} target="_blank" rel="noreferrer"><ImageIcon size={14} />사진 원문 <ExternalLink size={13} /></a></div><div className="may-detail-copy"><p><BadgeCheck size={15} />공식 원문과 매칭된 상품</p><h2>{selectedCamp.campground}<span>{selectedCamp.product}</span></h2><div className="may-detail-facts"><span><small>사이트 규격</small><b>{selectedCamp.size}</b></span><span><small>요금·정원</small><b>{selectedCamp.price}</b></span></div><ol><li><i>1</i><span><b>공식 예약처에서 날짜·인원을 입력</b><small>이 서비스는 재고를 추정해 예약 가능으로 표시하지 않습니다.</small></span></li><li><i>2</i><span><b>상품별 정원과 가격 확인</b><small>{selectedCamp.capacity}</small></span></li><li><i>3</i><span><b>최근 공지 확인</b><small>{selectedCamp.officialUpdate} · {selectedCamp.officialUpdateDate}</small></span></li></ol><div className="may-detail-actions"><a href={selectedCamp.noticeUrl} target="_blank" rel="noreferrer">최근 공지</a><a href={selectedCamp.reservationUrl} target="_blank" rel="noreferrer">공식 예약 안내 <ExternalLink size={15} /></a></div></div></section>}
