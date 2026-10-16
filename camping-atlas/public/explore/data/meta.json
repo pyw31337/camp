@@ -777,14 +777,14 @@
     "sites_read": 547
   },
   "review_digest": {
-    "generated_at": "2026-10-16T07:14:33.016Z",
-    "campgrounds": 1245,
-    "with_pros": 1108,
-    "with_cons": 125,
-    "reviews": 7849
+    "generated_at": "2026-10-16T07:16:25.398Z",
+    "campgrounds": 1640,
+    "with_pros": 1582,
+    "with_cons": 164,
+    "reviews": 10060
   },
   "profiles": {
-    "generated_at": "2026-10-16T07:14:33.362Z",
+    "generated_at": "2026-10-16T07:16:29.411Z",
     "total": 3116,
     "fields": {
       "TYPE": {
@@ -856,7 +856,7 @@
         "facts": 2394
       },
       "REVIEW": {
-        "any": 1245,
+        "any": 1640,
         "facts": 0
       }
     },
@@ -875,8 +875,8 @@
       "VALLEY": 655,
       "BEACH": 375,
       "ISLAND": 85,
-      "REVIEW_QUIET": 172,
-      "FIREWOOD": 23,
+      "REVIEW_QUIET": 169,
+      "FIREWOOD": 20,
       "CITY": 180,
       "SITE_PARKING": 32,
       "CAR_CAMPING": 10,
@@ -891,5 +891,10 @@
       "10-13": 246,
       "14-18": 6
     }
+  },
+  "nearby_licensed": {
+    "generated_at": "2026-10-16T07:15:14.743Z",
+    "campgrounds": 3116,
+    "details": 3111
   }
 }

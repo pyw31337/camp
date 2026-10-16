@@ -504,6 +504,17 @@ function rvLine(c) {
     <span class="con">${ic("#l-thumbs-down", "i-xs")}${rv.c.length ? fmt(rv.c) : `<em>단점 언급 없음</em>`}<em>· 후기 ${rv.n}건</em></span>
   </span>`;
 }
+function nlLine(c) {
+  const nl = c.nl;
+  if (!nl) return "";
+  const parts = [];
+  if (nl.c != null) parts.push(`편의점 ${km(nl.c)}`);
+  if (nl.m != null) parts.push(`마트 ${km(nl.m)}`);
+  if (nl.b != null && nl.b <= 5000) parts.push(`정육점 ${km(nl.b)}`);
+  if (nl.f != null && nl.f <= 5000) parts.push(`주유소 ${km(nl.f)}`);
+  if (!parts.length) return "";
+  return `<span class="nl-line" title="행정안전부 인허가 등록 기준 최근접 거리">${ic("#l-store", "i-xs")}<span>${esc(parts.slice(0, 3).join(" · "))}</span></span>`;
+}
 function card(c) {
   const km = state.here ? ` · ${dist(state.here, c).toFixed(0)}km` : "";
   const observations = officialOpenRecords(c, { dateMatch: Boolean(state.checkIn && state.checkOut) });
@@ -516,6 +527,7 @@ function card(c) {
       <span class="card-title"><h3>${esc(c.name)}</h3><span class="card-actions">${state.saved.has(c.id) ? ic("#l-heart", "i-xs saved-mark") : ""}<span role="button" tabindex="0" class="btn-compare${state.compare.has(c.id) ? " on" : ""}" data-compare="${c.id}" aria-label="${state.compare.has(c.id) ? "비교함에서 제거" : "비교함에 담기"}" title="조건 비교함">${ic("#l-columns-2", "i-xs")}</span></span></span>
       <span class="loc">${esc([sidoShort(c.sido), c.sigungu].filter(Boolean).join(" "))}${km}${kinds ? ` · ${esc(kinds)}` : ""}</span>
       <span class="card-foot">${setupTag}${c.fee?.min ? `<span class="fee"><b>${band(c.fee.min)}</b>부터</span>` : ""}</span>
+      ${nlLine(c)}
       ${rvLine(c)}
     </span></button>`;
 }
@@ -925,9 +937,9 @@ const routeLink = (name, lat, lng) => `https://map.kakao.com/link/to/${encodeURI
 const roadviewLink = (lat, lng) => `https://map.kakao.com/link/roadview/${lat},${lng}`;
 const naverMapLink = (name) => `https://map.naver.com/p/search/${encodeURIComponent(name)}`;
 const SECTIONS = [["sec-media", "사진·후기"], ["sec-info", "기본정보"], ["sec-book", "예약"], ["sec-site", "상품·요금"], ["sec-fac", "시설"], ["sec-official", "공식 안내"], ["sec-near", "주변"], ["sec-passport", "패스포트"], ["sec-talk", "댓글"]];
-const NEAR_GROUPS = [["toilet", "화장실", "#l-toilet"], ["mart", "마트·장보기", "#l-shopping-cart"], ["conv", "편의점", "#l-store"], ["fuel", "주유소", "#l-fuel"], ["medical", "병원·약국", "#l-cross"], ["rest", "휴게소·졸음쉼터", "#l-coffee"], ["tour", "주변 관광", "#l-camera"], ["food", "맛집", "#l-utensils"], ["gear", "철물·캠핑용품", "#l-wrench"]];
+const NEAR_GROUPS = [["toilet", "화장실", "#l-toilet"], ["mart", "마트·장보기", "#l-shopping-cart"], ["conv", "편의점", "#l-store"], ["fuel", "주유소", "#l-fuel"], ["medical", "병원·약국", "#l-cross"], ["vet", "동물병원", "#l-dog"], ["rest", "휴게소·졸음쉼터", "#l-coffee"], ["tour", "주변 관광", "#l-camera"], ["food", "맛집", "#l-utensils"], ["gear", "철물·캠핑용품", "#l-wrench"]];
 let DETAIL = new Map();
-const POI_KIND = { supermarket: "마트", convenience: "편의점", butcher: "정육점", greengrocer: "청과·채소", hardware: "철물점", outdoor: "캠핑·아웃도어", fuel: "주유소", pharmacy: "약국", hospital: "병원", SERVICE_AREA: "고속도로 휴게소", REST_AREA: "휴게소", DROWSY_SHELTER: "졸음쉼터" };
+const POI_KIND = { supermarket: "마트", convenience: "편의점", butcher: "정육점", greengrocer: "청과·채소", hardware: "철물점", outdoor: "캠핑·아웃도어", fuel: "주유소", pharmacy: "약국", hospital: "병원", vet: "동물병원", SERVICE_AREA: "고속도로 휴게소", REST_AREA: "휴게소", DROWSY_SHELTER: "졸음쉼터" };
 
 const BOOK_KIND = { online: "예약 채널", homepage: "공식 홈페이지", phone: "전화 문의", onsite: "현장 문의" };
 const BOOK_TRUST = (n) => n >= .85 ? "연결 근거 높음" : n >= .6 ? "공식 등록 링크" : "확인 필요";
@@ -1109,9 +1121,25 @@ function nearBlock(c, d) {
   const n = { ...(d?.nearby ?? {}) };
   if (c.nearby_toilets?.nearest?.length) n.toilet = c.nearby_toilets.nearest.map((t) => ({ n: t.name, m: t.m, lat: t.lat, lng: t.lng, k: t.h24 ? "24시간 개방" : "공중화장실" }));
   const groups = NEAR_GROUPS.filter(([g]) => n[g]?.length);
-  if (!groups.length) return `<p class="dv-empty">주변 정보를 모으는 중이에요. 지도 앱에서 확인하세요.</p>`;
-  const active = groups[0][0];
-  return `<div class="seg-tabs" role="tablist">${groups.map(([g, l, i]) => `<button type="button" role="tab" data-near="${g}" aria-selected="${g === active}">${ic(i, "i-sm")}${l}</button>`).join("")}</div>
+  const nl = c.nl || d?.nearby_licensed;
+  const nlOverview = nl ? `
+    <div class="dv-nl-overview">
+      <div class="nl-overview-head">
+        <span class="nl-overview-title">${ic("#l-store", "i-xs")}<b>주변 장보기 & 비상 편의</b></span>
+        <small class="nl-overview-trust">행정안전부 인허가 기준</small>
+      </div>
+      <div class="nl-chips-grid">
+        ${nl.c != null ? `<div class="nl-chip"><span class="nl-lbl">편의점</span><b title="${esc(nl.cn || '')}">${esc(nl.cn || '편의점')}</b><strong>${km(nl.c)}</strong></div>` : ''}
+        ${nl.m != null ? `<div class="nl-chip"><span class="nl-lbl">마트</span><b title="${esc(nl.mn || '')}">${esc(nl.mn || '마트')}</b><strong>${km(nl.m)}</strong></div>` : ''}
+        ${nl.b != null ? `<div class="nl-chip"><span class="nl-lbl">정육점</span><b title="${esc(nl.bn || '')}">${esc(nl.bn || '정육·축산')}</b><strong>${km(nl.b)}</strong></div>` : ''}
+        ${nl.f != null ? `<div class="nl-chip"><span class="nl-lbl">주유소</span><b title="${esc(nl.fn || '')}">${esc(nl.fn || '주유소')}</b><strong>${km(nl.f)}</strong></div>` : ''}
+        ${nl.p != null ? `<div class="nl-chip"><span class="nl-lbl">약국</span><b title="${esc(nl.pn || '')}">${esc(nl.pn || '약국')}</b><strong>${km(nl.p)}</strong></div>` : ''}
+        ${nl.v != null ? `<div class="nl-chip"><span class="nl-lbl">동물병원</span><b>반려동물</b><strong>${km(nl.v)}</strong></div>` : ''}
+      </div>
+    </div>` : '';
+  if (!groups.length && !nlOverview) return `<p class="dv-empty">주변 정보를 모으는 중이에요. 지도 앱에서 확인하세요.</p>`;
+  const active = groups.length ? groups[0][0] : null;
+  return `${nlOverview}${groups.length ? `<div class="seg-tabs" role="tablist">${groups.map(([g, l, i]) => `<button type="button" role="tab" data-near="${g}" aria-selected="${g === active}">${ic(i, "i-sm")}${l}</button>`).join("")}</div>` : ''}
   ${groups.map(([g]) => `<div class="near-list" data-near-panel="${g}" ${g === active ? "" : "hidden"}>${n[g].map((p) => {
     const name = p.n || POI_KIND[p.k] || "주변 시설";
     const meta = [p.ty ?? POI_KIND[p.k] ?? p.k, p.e ? "응급실" : null, p.b, p.h, p.r].filter(Boolean).join(" · ");

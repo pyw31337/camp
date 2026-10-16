@@ -59,6 +59,8 @@ if (existsSync(`${dataDir}/featured.json`)) await cp(`${dataDir}/featured.json`,
 if (existsSync(`${dataDir}/openings.json`)) await cp(`${dataDir}/openings.json`, `${out}data/openings.json`);
 if (existsSync(`${dataDir}/availability.json`)) await cp(`${dataDir}/availability.json`, `${out}data/availability.json`);
 else if (previousAvailability) await writeFile(`${out}data/availability.json`, previousAvailability);
+const galleryReg = `${root}pipeline/registry/photo-gallery.json`;
+if (existsSync(galleryReg)) await cp(galleryReg, `${out}data/photo-gallery.json`);
 if (existsSync(`${dataDir}/camps`)) await cp(`${dataDir}/camps`, `${out}data/camps`, { recursive: true });
 await writeUtilityPages();
 

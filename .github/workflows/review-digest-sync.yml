@@ -52,6 +52,8 @@ jobs:
         run: npm run build:spec
       - name: Build AI review digest (Pros & Cons, Events & Issues)
         run: npm run build:review-digest
+      - name: Inject licensed nearby infrastructure facts
+        run: npm run build:nearby-facts
       - name: Rebuild explorer data and publish
         run: |
           npm run build:explore
