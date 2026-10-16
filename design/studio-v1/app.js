@@ -111,6 +111,17 @@ all('.pagination button:not(.page-arrow)').forEach((button) => button.addEventLi
   showToast(`${button.textContent.trim()}페이지 결과예요`);
 }));
 
+all('.theme-tabs button').forEach((button) => button.addEventListener('click', () => {
+  all('.theme-tabs button').forEach((tab) => {
+    const active = tab === button;
+    tab.classList.toggle('is-active', active);
+    tab.setAttribute('aria-selected', String(active));
+  });
+  showToast(`‘${button.textContent.trim()}’ 테마를 골랐어요`);
+}));
+
+all('.collection-link').forEach((button) => button.addEventListener('click', () => showToast('전체 목록은 실제 탐색 화면에서 이어집니다')));
+
 document.querySelector('.search-button')?.addEventListener('click', (buttonEvent) => {
   const button = buttonEvent.currentTarget;
   button.classList.add('is-loading');
