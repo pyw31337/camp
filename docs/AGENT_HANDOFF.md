@@ -77,6 +77,14 @@ main 반영 완료: PR #17·#18·#19·#21·#23 + Gemini b4111755(주변 인프�
 - [ ] 상가(상권)정보 API로 철물점·캠핑용품점 보강.
 - [ ] 읽기 실패 493곳 중 네이버 운영자 링크가 있는 곳 우선 재시도.
 
+## 체감 개선 1차 + 리뉴얼 디자인 보정 (2026-10-16 저녁, Claude)
+
+- **카드 사진 자체 호스팅**: `pipeline/scripts/sync-card-photos.mjs` + `.github/workflows/card-photos.yml`(Data sync와 같은 대기열). media 브랜치 `cards/`에 캠핑장당 최대 4장 480px webp(장당 약 21KB, 전체 약 175MB). 리뉴얼 시안은 `../media/cards/index.json`이 있으면 그 사진을, 없으면 고캠핑 원본을 쓴다. 문서: `docs/IMAGE_PIPELINE.md` 마지막 절.
+- **운영자 문장 추출 보강**(`pipeline/lib/operator-site.mjs`): “사이트 바로 앞 개별 주차”, “사이트별 개별 주차”, “캠핑장 내 주차 불가”, “짐을 내린 후 주차장으로 이동”, 충전기 금지 문장의 W. 결과: 운영자 주차 28→39곳, 전력 W 39→46곳. 테스트 추가(`npm test` 250/250).
+- **리뉴얼 디자인 보정**(소유자: 색 배지가 너무 튐): 빠른 조건은 색 윗선만, 배지는 흰 알약 + 색 아이콘 원, 타일 아이콘 옅은 색 면, 찾기 패널 한 상자, 카드 1박 요금 한 줄(Gemini `c.fee`, 후기 언급 ○), 카드의 ‘안 맞음’ 제거, 카드 배지 최대 3개.
+- 재생성: survey → operator-facts → spec → review-digest → profiles → fact-store.
+- PR 운영: 소유자 지시로 Claude PR은 CI 통과·충돌 없음이면 바로 머지한다.
+
 ## 리뉴얼 시안 A·B·C (2026-10-16, Claude) — 화면 작업자 필독
 
 - 소유자 요청: “Codex 시안의 좋은 점 + Claude v4.2 디자인 기반으로 리뉴얼 시안 몇 개”. 결과는 **https://pyw31337.github.io/camp/renewal/** (`?v=a|b|c`, 헤더에서 전환). 기획·데이터 매핑·실무 제안: `docs/RENEWAL_PLAN.md`.

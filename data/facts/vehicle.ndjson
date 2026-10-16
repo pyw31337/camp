@@ -14,6 +14,7 @@
 {"cid":"28","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"28","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"29","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"29","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"https://sscamping80.com/about","at":"2026-10-16T06:49:05.551Z","quote":"사이트 바로 앞 개별 주차가 가능합니다."}
 {"cid":"29","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"31","attr":"CARAVAN_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"31","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -31,6 +32,7 @@
 {"cid":"61","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"61","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"63","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"63","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_discovered","url":"https://yellowhill.revrun.kr/guide-info","at":"2026-10-16T06:56:48.062Z","quote":"주차장과 캠핑 공간이 약 30m 분리되어 있어, 장비 하차 후 차량은 주차장에 주차해 주세요."}
 {"cid":"63","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"75","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"75","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -367,6 +369,7 @@
 {"cid":"869","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"869","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"873","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"873","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--989a5bx9vuzab11ae0htwlp5nruo17c.kr/?page_id=1256","at":"2026-10-15T23:31:13.761Z","quote":"사이트별 개별 주차가 가능합니다."}
 {"cid":"873","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"874","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"874","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -421,6 +424,7 @@
 {"cid":"977","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"977","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"978","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"978","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--2o2b21q82j1vg6a.kr/main","at":"2026-10-15T23:28:31.718Z","quote":"짐을 내린후 주차장으로 이동조치됩니다."}
 {"cid":"978","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"987","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"987","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -689,6 +693,7 @@
 {"cid":"1705","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1705","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1709","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1709","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://pinestream.co.kr/","at":"2026-10-15T23:28:30.686Z","quote":"A동은 계곡 바로위에 위치하며, 텐트 앞에 차를 주차할 수 있는 오토캠핑장입니다."}
 {"cid":"1709","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1715","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1715","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -3096,6 +3101,7 @@
 {"cid":"100582","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100582","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100583","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100583","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://andocamping.nammyeon.kr/","at":"2026-10-15T23:28:02.633Z","quote":"사이트별 주차 가능"}
 {"cid":"100583","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100584","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100584","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
