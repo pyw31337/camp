@@ -66,3 +66,32 @@ test("주차·차박: 구역 한정·부정·맥락 없는 문장은 버리고, 
   assert.equal(mixed.PARKING.value, null);
   assert.equal(mixed.PARKING.conflict.length, 2);
 });
+
+test("상세 사실: 기본 요금은 부대 요금과 분리하고, 편의시설·운영 기간·환불을 문장과 함께 꺼낸다", async () => {
+  const { extractSiteDetails } = await import("../lib/operator-site.mjs");
+  const d = extractSiteDetails([
+    "주말 45,000원 (텐트1동 + 차량1대 + 4인)",
+    "평일 35,000원",
+    "추가 차량은 1대당 10,000원",
+    "- 무통장입금시 : 2박 95,000원",
+    "- 모닥불 세트(화롯대, 고체연료, 장작 10kg) 25,000원",
+    "- 바비큐 시설(숯불, 석쇠) 이용요금 : 25,000원",
+    "- 반려견 동반 요금 : 1마리당 30,000원",
+    "전기 사용 시(1사이트당) 3,000원",
+    "수영장은 7월~8월 운영합니다",
+    "와이파이는 안 됩니다",
+    "동계 기간(12월~2월)은 휴장합니다",
+    "이용일 3일 전 취소 시 50% 수수료가 발생합니다",
+  ]);
+  assert.equal(d.SITE_PRICE.min, 35000);
+  assert.equal(d.SITE_PRICE.max, 45000);
+  assert.deepEqual(d.SITE_PRICE.items.map((x) => x.label), ["주말", "평일"]);
+  assert.equal(d.FIRE_SET_FEE.amount, 25000);
+  assert.equal(d.BBQ_SET_FEE.amount, 25000);
+  assert.equal(d.PET_FEE.amount, 30000);
+  assert.equal(d.ELECTRIC_FEE.amount, 3000);
+  assert.deepEqual(d.AMENITIES.map((a) => a.code), ["POOL"]);
+  assert.equal(d.AMENITIES[0].period, "7월~8월");
+  assert.equal(d.SEASON.value, "SEASONAL_CLOSURE");
+  assert.ok(d.REFUND.quote.includes("취소"));
+});
