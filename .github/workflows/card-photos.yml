@@ -1,0 +1,67 @@
+name: Card photos
+
+# 카드 사진 레일(/camp/renewal/)용 추가 공식 사진을 작은 webp로 media 브랜치 cards/ 에 굽는다.
+# Data sync와 같은 대기열(data-sync-refs/heads/main)을 써서 media 브랜치 강제 푸시가 서로 덮지 않게 한다.
+on:
+  workflow_dispatch:
+    inputs:
+      max_downloads:
+        description: "실행당 다운로드 상한"
+        required: false
+        default: "4000"
+  schedule:
+    - cron: "37 21 * * *"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: data-sync-refs/heads/main
+  cancel-in-progress: false
+
+jobs:
+  cards:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    defaults:
+      run:
+        working-directory: pipeline
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Check out the media branch
+        id: media
+        working-directory: .
+        run: |
+          MEDIA_DIR="$RUNNER_TEMP/media"
+          git fetch --depth=1 origin +media:refs/remotes/origin/media
+          git worktree add -B media "$MEDIA_DIR" origin/media
+          echo "dir=$MEDIA_DIR" >> "$GITHUB_OUTPUT"
+          du -sh --exclude=.git "$MEDIA_DIR"
+      - name: Bake card photos (webp 480px)
+        run: node scripts/sync-card-photos.mjs
+        env:
+          MEDIA_DIR: ${{ steps.media.outputs.dir }}
+          CARD_MAX_DOWNLOADS: ${{ github.event.inputs.max_downloads || '4000' }}
+      - name: Publish the media branch (single commit, force push)
+        if: vars.GOCAMPING_IMAGES_PUBLISH != 'false'
+        working-directory: ${{ steps.media.outputs.dir }}
+        run: |
+          git add -A
+          if git diff --cached --quiet; then echo "카드 사진 변경 없음."; echo "changed=false" >> "$GITHUB_ENV"; exit 0; fi
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q --amend -m "chore(media): official campground images $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push --force origin media
+          du -sh --exclude=.git .
+          echo "changed=true" >> "$GITHUB_ENV"
+      - name: Redeploy Pages with the new photos
+        if: env.changed == 'true'
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run deploy-pages.yml --ref main

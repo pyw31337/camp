@@ -14,7 +14,7 @@ const store = {
 };
 
 const S = {
-  camps: [], byId: new Map(), photos: {}, openings: new Map(),
+  camps: [], byId: new Map(), photos: {}, cards: {}, openings: new Map(),
   q: "", area: "all", quick: new Set(), theme: null, sort: "rich", shown: 24, mode: "keyword",
   compare: store.get("mc-compare", []), gear: store.get("mc-gear", { size: "5.5x8", needs: ["park", "fire"] }),
   detailCache: new Map(), homeScroll: 0,
@@ -153,7 +153,8 @@ function judge(c) {
 const VERDICT = { ok: ["맞음", "vd-ok"], part: ["조건부", "vd-part"], no: ["안 맞음", "vd-no"] };
 function verdictChip(c) {
   const j = judge(c);
-  if (!j.verdict) return "";
+  // 목록에서는 맞는 곳만 알려 준다(‘안 맞음’은 상세의 내 장비 칸에서만).
+  if (!j.verdict || j.verdict === "no") return "";
   return `<span class="vd ${VERDICT[j.verdict][1]}">${VERDICT[j.verdict][0]} ${j.ok}/${j.total}</span>`;
 }
 function gearLabel() {
@@ -203,8 +204,12 @@ function results() {
 
 // ── 사진 ─────────────────────────────────────────────────────
 const photoUrl = (u) => (u.startsWith("media/") ? `../${u}` : u);
+// 카드 사진: 첫 장은 자체 호스팅 대표 사진, 나머지는 카드용 webp(media/cards, sync-card-photos.mjs)가 있으면 그것을,
+// 아직 없으면 고캠핑 원본 URL(photos.json)을 쓴다.
 function photosOf(c) {
   const p = S.photos[c.id];
+  const own = S.cards[c.id];
+  if (own?.length) return [...(p?.length ? [p[0]] : c.ph ? [`media/${c.ph}`] : []), ...own.map((x) => `media/${x}`)].slice(0, 5);
   if (p?.length) return p;
   if (c.ph) return [`media/${c.ph}`];
   if (c.img) return [c.img];
@@ -275,12 +280,13 @@ function card(c, i = 0) {
     <div class="card-media">${carousel(c, { eager: i < 4 })}
       ${o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : ""}
       ${compareBtn(c)}
-      <span class="bdgs">${badges(c)}</span>
+      <span class="bdgs">${badges(c, 3)}</span>
     </div>
     <div class="card-body">
       <h3 class="card-name">${esc(nameOf(c).name)}</h3>
       <p class="card-meta">${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}${verdictChip(c)}</p>
       ${rowsHtml(c)}
+      ${c.fee?.text ? `<p class="card-price"><span>1박</span><b>${esc(c.fee.text)}</b>${dot(GR(c.fee.grade))}</p>` : ""}
     </div>
   </article>`;
 }
@@ -359,6 +365,7 @@ function homeView() {
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-in">
       <h1 id="hero-t"><span class="h1-a">이번 주말,</span> <span class="h1-b">어디로 <em>갈까?</em></span></h1>
+      <div class="finder">
       <div class="modes" role="tablist" aria-label="찾는 방법">
         ${[["keyword", "search", "키워드"], ["theme", "spark", "테마"], ["map", "map", "지도"]].map(([k, i, l]) => `<button type="button" role="tab" class="mode" data-mode="${k}" aria-selected="${S.mode === k}">${ic(i)}<span>${l}</span></button>`).join("")}
       </div>
@@ -372,6 +379,7 @@ function homeView() {
       </div>
       <div class="mode-panel" ${S.mode === "theme" ? "" : "hidden"} data-panel="theme">
         <div class="rail themes" aria-label="테마">${THEMES.map(([k, l, t]) => `<button type="button" class="theme" data-theme="${k}" aria-pressed="${S.theme === k}"><img src="${esc(themeCover(k))}" alt="" loading="lazy" decoding="async"><span><b>${l}</b><i>${fmt(countOf(t))}</i></span></button>`).join("")}</div>
+      </div>
       </div>
     </div>
     <figure class="hero-photo" aria-hidden="true"><img src="../images/hero-home.webp" alt="" decoding="async"></figure>
@@ -781,14 +789,16 @@ addEventListener("hashchange", route);
 // ── 시작 ─────────────────────────────────────────────────────
 (async function boot() {
   $("#view").innerHTML = `<div class="loading"></div>`;
-  const [camps, photos, openings] = await Promise.all([
+  const [camps, photos, openings, cards] = await Promise.all([
     fetch(`${DATA}campgrounds.json`).then((r) => r.json()),
     fetch("./data/photos.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
     fetch(`${DATA}openings.json`).then((r) => (r.ok ? r.json() : { items: [] })).catch(() => ({ items: [] })),
+    fetch("../media/cards/index.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
   ]);
   S.camps = camps.filter((c) => c.status !== "폐업");
   S.byId = new Map(S.camps.map((c) => [String(c.id), c]));
   S.photos = photos;
+  S.cards = cards?.camps ?? {};
   for (const o of openings.items ?? []) if (!S.openings.has(String(o.id)) || o.kind !== "접수 마감") S.openings.set(String(o.id), o);
   S.compare = S.compare.filter((id) => S.byId.has(id));
   syncCompare(); renderGear();

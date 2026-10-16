@@ -95,3 +95,14 @@ test("상세 사실: 기본 요금은 부대 요금과 분리하고, 편의시�
   assert.equal(d.SEASON.value, "SEASONAL_CLOSURE");
   assert.ok(d.REFUND.quote.includes("취소"));
 });
+
+test("주차·전력 문장 보강(2026-10-16): 앞/옆 개별 주차·사이트별 주차·캠핑장 내 주차 불가·충전기 금지 문장의 W", () => {
+  assert.equal(v(["사이트 바로 앞 개별 주차가 가능합니다."]).PARKING, "SITE_SIDE");
+  assert.equal(v(["본인의 캠핑사이트 바로 옆으로 자차 주차가 가능합니다.(오토캠핑 가능)"]).PARKING, "SITE_SIDE");
+  assert.equal(v(["사이트별 개별 주차가 가능합니다."]).PARKING, "SITE_SIDE");
+  assert.equal(v(["캠핑장 내에는 주차가 불가능하며, 캠핑장 구역 반대편의 꽃밭주차장을 이용해주시기 바랍니다."]).PARKING, "EXTERNAL");
+  assert.equal(v(["짐을 내린후 주차장으로 이동조치됩니다."]).PARKING, "EXTERNAL");
+  assert.equal(v(["사이트 내 주차가능 여부는 별도 문의바랍니다."]).PARKING, undefined);
+  assert.equal(v(["캠핑장 전력은 1,100w까지이며, 에어컨, 전기차 충전기등 고전력기기의 사용은 금지되어 있습니다."]).POWER_W, 1100);
+  assert.equal(v(["전기차 충전기 1,000W 설치"]).POWER_W, undefined);
+});
