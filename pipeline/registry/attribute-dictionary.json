@@ -1,0 +1,1147 @@
+{
+ "version": 1,
+ "description": "캠핑장 원자 사실(fact)의 속성 사전. 사실 1행 = (캠핑장, 속성, 값, 등급, 원천, 확인 시각, 근거 문장). docs/FACT_STORE.md",
+ "types": {
+  "bool": "true/false",
+  "int": "정수(unit)",
+  "count": "개수(unit)",
+  "krw": "원 단위 정수",
+  "time": "HH:MM",
+  "enum": "enum 키 중 하나",
+  "text": "원문 요약 문자열",
+  "url": "URL",
+  "code": "열린 코드값(목록은 note)"
+ },
+ "grades": {
+  "VERIFIED": "사람이 공식 원문과 대조",
+  "OPERATOR": "운영자 공개 문장 자동 추출",
+  "CONFIRMED": "고캠핑 등록값·공식 소개·카카오 장소",
+  "MENTION": "후기·검색 언급(건수)"
+ },
+ "filters": {
+  "eq": "값이 같음",
+  "min": "값 ≥ 조건",
+  "max": "값 ≤ 조건",
+  "range": "범위",
+  "in": "enum 중 하나",
+  "has": "값이 있음"
+ },
+ "groups": {
+  "stay": "숙박 형태·규모",
+  "power": "전기",
+  "fire": "불·화기",
+  "vehicle": "주차·차량",
+  "pet": "반려동물",
+  "price": "요금",
+  "fee": "추가 요금",
+  "time": "이용 시간",
+  "policy": "규칙·환불",
+  "sanitary": "위생시설",
+  "site": "사이트",
+  "amenity": "편의시설",
+  "env": "입지·자연환경",
+  "theme": "계절·여행 테마",
+  "season": "운영 기간",
+  "booking": "예약",
+  "operator": "운영 주체·연락처",
+  "review": "후기 언급",
+  "rental": "대여"
+ },
+ "attributes": [
+  {
+   "code": "STAY_AUTO_SITES",
+   "group": "stay",
+   "label": "오토캠핑 사이트 수",
+   "type": "count",
+   "unit": "면",
+   "pref": "오토캠핑을(를) 원하나요?",
+   "filter": "min"
+  },
+  {
+   "code": "STAY_GENERAL_SITES",
+   "group": "stay",
+   "label": "일반 야영 사이트 수",
+   "type": "count",
+   "unit": "면",
+   "pref": "일반 야영을(를) 원하나요?",
+   "filter": "min"
+  },
+  {
+   "code": "STAY_GLAMPING_SITES",
+   "group": "stay",
+   "label": "글램핑 사이트 수",
+   "type": "count",
+   "unit": "면",
+   "pref": "글램핑을(를) 원하나요?",
+   "filter": "min"
+  },
+  {
+   "code": "STAY_CARAVAN_SITES",
+   "group": "stay",
+   "label": "카라반 사이트 수",
+   "type": "count",
+   "unit": "면",
+   "pref": "카라반을(를) 원하나요?",
+   "filter": "min"
+  },
+  {
+   "code": "STAY_CAMPNIC_SITES",
+   "group": "stay",
+   "label": "캠프닉(당일) 사이트 수",
+   "type": "count",
+   "unit": "면",
+   "pref": "캠프닉(당일)을(를) 원하나요?",
+   "filter": "min"
+  },
+  {
+   "code": "SITE_TOTAL",
+   "group": "stay",
+   "label": "전체 사이트 수",
+   "type": "count",
+   "unit": "면",
+   "pref": "작고 한적한 곳(사이트 적음)을 선호하나요?",
+   "filter": "range"
+  },
+  {
+   "code": "POWER_AVAILABLE",
+   "group": "power",
+   "label": "전기 사용 가능",
+   "type": "bool",
+   "pref": "전기가 꼭 필요하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "POWER_MAX_W",
+   "group": "power",
+   "label": "전기 최대 허용",
+   "type": "int",
+   "unit": "W",
+   "pref": "전기장판·히터 등 몇 W가 필요하나요?",
+   "filter": "min"
+  },
+  {
+   "code": "POWER_FEE",
+   "group": "power",
+   "label": "전기 사용료",
+   "type": "krw",
+   "unit": "원",
+   "filter": "max"
+  },
+  {
+   "code": "FIRE_RULE",
+   "group": "fire",
+   "label": "개인 화기 규칙",
+   "type": "enum",
+   "enum": {
+    "FIREWOOD_OK": "장작 가능",
+    "CHARCOAL_ONLY": "숯만 가능",
+    "NO_FIRE": "개인 화기 불가"
+   },
+   "pref": "장작 불멍을 하고 싶나요?",
+   "filter": "in"
+  },
+  {
+   "code": "FIREWOOD_ALLOWED",
+   "group": "fire",
+   "label": "장작 사용 허용",
+   "type": "bool",
+   "filter": "eq"
+  },
+  {
+   "code": "CHARCOAL_ALLOWED",
+   "group": "fire",
+   "label": "숯 사용 허용",
+   "type": "bool",
+   "filter": "eq"
+  },
+  {
+   "code": "FIRE_PIT",
+   "group": "fire",
+   "label": "화로대 방식(고캠핑)",
+   "type": "enum",
+   "enum": {
+    "INDIVIDUAL": "개별",
+    "SHARED": "공동취사장",
+    "NONE": "불가"
+   },
+   "filter": "in"
+  },
+  {
+   "code": "FIREWOOD_SOLD",
+   "group": "fire",
+   "label": "장작 판매",
+   "type": "bool",
+   "filter": "eq"
+  },
+  {
+   "code": "FIRE_SET_FEE",
+   "group": "fire",
+   "label": "불멍 세트 요금",
+   "type": "krw",
+   "unit": "원",
+   "filter": "max"
+  },
+  {
+   "code": "BBQ_SET_FEE",
+   "group": "fire",
+   "label": "바비큐(숯·그릴) 세트 요금",
+   "type": "krw",
+   "unit": "원",
+   "filter": "max"
+  },
+  {
+   "code": "PARKING_MODE",
+   "group": "vehicle",
+   "label": "주차 방식",
+   "type": "enum",
+   "enum": {
+    "SITE_SIDE": "사이트 옆 주차",
+    "EXTERNAL": "외부 주차장",
+    "SHARED_NEARBY": "가까운 공용 주차",
+    "CART_REQUIRED": "수레 운반"
+   },
+   "pref": "차를 텐트 옆에 대야 하나요?",
+   "filter": "in"
+  },
+  {
+   "code": "CAR_CAMPING",
+   "group": "vehicle",
+   "label": "차박 가능",
+   "type": "bool",
+   "pref": "차박을 하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "TRAILER_ALLOWED",
+   "group": "vehicle",
+   "label": "개인 트레일러 입장",
+   "type": "bool",
+   "pref": "트레일러를 끌고 가나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "CARAVAN_ALLOWED",
+   "group": "vehicle",
+   "label": "개인 카라반 입장",
+   "type": "bool",
+   "pref": "개인 카라반으로 가나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "PET_POLICY",
+   "group": "pet",
+   "label": "반려동물 동반",
+   "type": "enum",
+   "enum": {
+    "ALLOWED": "동반 가능",
+    "SMALL_ONLY": "소형견만",
+    "NOT_ALLOWED": "동반 불가"
+   },
+   "pref": "반려견과 함께 가나요? 크기는?",
+   "filter": "in"
+  },
+  {
+   "code": "PET_FEE",
+   "group": "pet",
+   "label": "반려동물 추가 요금",
+   "type": "krw",
+   "unit": "원",
+   "filter": "max"
+  },
+  {
+   "code": "PRICE_NIGHT",
+   "group": "price",
+   "label": "1박 사이트 요금(운영자 공개)",
+   "type": "krw",
+   "unit": "원",
+   "pref": "1박 예산은 얼마인가요?",
+   "filter": "max",
+   "note": "항목별 1행. 성수기·평일 구분은 period/label"
+  },
+  {
+   "code": "PRICE_MENTION",
+   "group": "price",
+   "label": "후기에 나온 요금",
+   "type": "krw",
+   "unit": "원",
+   "filter": "max",
+   "note": "MENTION 전용. 확정값으로 쓰지 않는다"
+  },
+  {
+   "code": "EXTRA_PERSON_FEE",
+   "group": "fee",
+   "label": "인원 추가 요금",
+   "type": "text",
+   "filter": "has"
+  },
+  {
+   "code": "EXTRA_CAR_FEE",
+   "group": "fee",
+   "label": "차량 추가 요금",
+   "type": "text",
+   "filter": "has"
+  },
+  {
+   "code": "VISITOR_POLICY",
+   "group": "fee",
+   "label": "방문객 규칙·요금",
+   "type": "text",
+   "filter": "has"
+  },
+  {
+   "code": "DISCOUNT",
+   "group": "fee",
+   "label": "할인 대상",
+   "type": "text",
+   "filter": "has"
+  },
+  {
+   "code": "PROMOTION",
+   "group": "fee",
+   "label": "기간 행사",
+   "type": "text",
+   "filter": "has"
+  },
+  {
+   "code": "CHECKIN_TIME",
+   "group": "time",
+   "label": "입실 시각",
+   "type": "time",
+   "pref": "일찍 들어가고 싶나요?",
+   "filter": "max"
+  },
+  {
+   "code": "CHECKOUT_TIME",
+   "group": "time",
+   "label": "퇴실 시각",
+   "type": "time",
+   "pref": "늦게 나오고 싶나요?",
+   "filter": "min"
+  },
+  {
+   "code": "EARLY_CHECKIN",
+   "group": "time",
+   "label": "얼리 체크인",
+   "type": "text",
+   "filter": "has"
+  },
+  {
+   "code": "LATE_CHECKOUT",
+   "group": "time",
+   "label": "레이트 체크아웃",
+   "type": "text",
+   "filter": "has"
+  },
+  {
+   "code": "MANNER_TIME",
+   "group": "time",
+   "label": "매너타임",
+   "type": "text",
+   "filter": "has"
+  },
+  {
+   "code": "MIN_STAY",
+   "group": "time",
+   "label": "연박·최소 숙박",
+   "type": "text",
+   "filter": "has"
+  },
+  {
+   "code": "REFUND_POLICY",
+   "group": "policy",
+   "label": "취소·환불 규정",
+   "type": "text",
+   "filter": "has"
+  },
+  {
+   "code": "TOILET_COUNT",
+   "group": "sanitary",
+   "label": "화장실 수",
+   "type": "count",
+   "unit": "개",
+   "filter": "min"
+  },
+  {
+   "code": "SHOWER_COUNT",
+   "group": "sanitary",
+   "label": "샤워실 수",
+   "type": "count",
+   "unit": "개",
+   "filter": "min"
+  },
+  {
+   "code": "HOT_WATER",
+   "group": "sanitary",
+   "label": "온수",
+   "type": "bool",
+   "pref": "온수 샤워가 필요하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "PRIVATE_BATHROOM",
+   "group": "sanitary",
+   "label": "개별 화장실·샤워실",
+   "type": "bool",
+   "pref": "개별 화장실이 있는 곳을 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "SITE_SURFACE",
+   "group": "site",
+   "label": "사이트 바닥",
+   "type": "enum",
+   "enum": {
+    "GRAVEL": "파쇄석",
+    "DECK": "데크",
+    "GRASS": "잔디",
+    "SAND": "모래",
+    "SOIL": "흙"
+   },
+   "pref": "선호하는 바닥은?",
+   "filter": "in",
+   "multi": true
+  },
+  {
+   "code": "SITE_SIZE",
+   "group": "site",
+   "label": "사이트 규격",
+   "type": "text",
+   "filter": "has"
+  },
+  {
+   "code": "AMENITY_WIFI",
+   "group": "amenity",
+   "label": "와이파이",
+   "type": "bool",
+   "pref": "와이파이이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_STORE",
+   "group": "amenity",
+   "label": "매점·편의점",
+   "type": "bool",
+   "pref": "매점·편의점이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_POOL",
+   "group": "amenity",
+   "label": "수영장·물놀이장",
+   "type": "bool",
+   "pref": "수영장·물놀이장이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_PLAYGROUND",
+   "group": "amenity",
+   "label": "놀이터",
+   "type": "bool",
+   "pref": "놀이터이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_TRAMPOLINE",
+   "group": "amenity",
+   "label": "트램펄린·에어바운스",
+   "type": "bool",
+   "pref": "트램펄린·에어바운스이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_SPORTS",
+   "group": "amenity",
+   "label": "운동장·운동시설",
+   "type": "bool",
+   "pref": "운동장·운동시설이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_TRAIL",
+   "group": "amenity",
+   "label": "산책로",
+   "type": "bool",
+   "pref": "산책로이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_CAFE",
+   "group": "amenity",
+   "label": "카페",
+   "type": "bool",
+   "pref": "카페이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_RESTAURANT",
+   "group": "amenity",
+   "label": "식당",
+   "type": "bool",
+   "pref": "식당이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_DUMP_STATION",
+   "group": "amenity",
+   "label": "덤프스테이션",
+   "type": "bool",
+   "pref": "덤프스테이션이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_SLED",
+   "group": "amenity",
+   "label": "썰매장",
+   "type": "bool",
+   "pref": "썰매장이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_SAUNA",
+   "group": "amenity",
+   "label": "사우나·찜질방",
+   "type": "bool",
+   "pref": "사우나·찜질방이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_PET_RUN",
+   "group": "amenity",
+   "label": "반려견 놀이터·운동장",
+   "type": "bool",
+   "pref": "반려견 놀이터·운동장이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_EV_CHARGER",
+   "group": "amenity",
+   "label": "전기차 충전",
+   "type": "bool",
+   "pref": "전기차 충전이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_DISHWASH",
+   "group": "amenity",
+   "label": "개수대·설거지",
+   "type": "bool",
+   "pref": "개수대·설거지이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_BBQ",
+   "group": "amenity",
+   "label": "바비큐장",
+   "type": "bool",
+   "pref": "바비큐장이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_FISHING",
+   "group": "amenity",
+   "label": "낚시",
+   "type": "bool",
+   "pref": "낚시이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_KIDS_ROOM",
+   "group": "amenity",
+   "label": "키즈룸·실내 놀이방",
+   "type": "bool",
+   "pref": "키즈룸·실내 놀이방이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_FARM",
+   "group": "amenity",
+   "label": "텃밭·농장 체험",
+   "type": "bool",
+   "pref": "텃밭·농장 체험이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_ANIMAL",
+   "group": "amenity",
+   "label": "동물 체험",
+   "type": "bool",
+   "pref": "동물 체험이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_LIBRARY",
+   "group": "amenity",
+   "label": "도서·북카페",
+   "type": "bool",
+   "pref": "도서·북카페이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_KARAOKE",
+   "group": "amenity",
+   "label": "노래방·오락실",
+   "type": "bool",
+   "pref": "노래방·오락실이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_SHARED_FRIDGE",
+   "group": "amenity",
+   "label": "공용 냉장고·전자레인지",
+   "type": "bool",
+   "pref": "공용 냉장고·전자레인지이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_LAUNDRY",
+   "group": "amenity",
+   "label": "세탁·탈수기",
+   "type": "bool",
+   "pref": "세탁·탈수기이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_PRIVATE_BBQ",
+   "group": "amenity",
+   "label": "개별 바비큐",
+   "type": "bool",
+   "pref": "개별 바비큐이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_WATER_LEISURE",
+   "group": "amenity",
+   "label": "수상레저·카약",
+   "type": "bool",
+   "pref": "수상레저·카약이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "AMENITY_STARGAZING",
+   "group": "amenity",
+   "label": "천문대·별 관측",
+   "type": "bool",
+   "pref": "천문대·별 관측이(가) 있으면 좋겠나요?",
+   "filter": "eq",
+   "period": true
+  },
+  {
+   "code": "ENV_MOUNTAIN",
+   "group": "env",
+   "label": "산",
+   "type": "bool",
+   "pref": "산 근처를 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "ENV_FOREST",
+   "group": "env",
+   "label": "숲",
+   "type": "bool",
+   "pref": "숲 근처를 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "ENV_RIVER",
+   "group": "env",
+   "label": "강",
+   "type": "bool",
+   "pref": "강 근처를 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "ENV_LAKE",
+   "group": "env",
+   "label": "호수",
+   "type": "bool",
+   "pref": "호수 근처를 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "ENV_VALLEY",
+   "group": "env",
+   "label": "계곡",
+   "type": "bool",
+   "pref": "계곡 근처를 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "ENV_BEACH",
+   "group": "env",
+   "label": "바다·해변",
+   "type": "bool",
+   "pref": "바다·해변 근처를 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "ENV_ISLAND",
+   "group": "env",
+   "label": "섬",
+   "type": "bool",
+   "pref": "섬 근처를 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "ENV_CITY",
+   "group": "env",
+   "label": "도심 근교",
+   "type": "bool",
+   "pref": "도심 근교 근처를 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "THEME_SUMMER_WATER",
+   "group": "theme",
+   "label": "여름 물놀이",
+   "type": "bool",
+   "pref": "여름 물놀이 여행을 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "THEME_FISHING",
+   "group": "theme",
+   "label": "낚시",
+   "type": "bool",
+   "pref": "낚시 여행을 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "THEME_SPRING_FLOWER",
+   "group": "theme",
+   "label": "봄꽃",
+   "type": "bool",
+   "pref": "봄꽃 여행을 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "THEME_AUTUMN_LEAVES",
+   "group": "theme",
+   "label": "가을 단풍",
+   "type": "bool",
+   "pref": "가을 단풍 여행을 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "THEME_WINTER_SNOW",
+   "group": "theme",
+   "label": "겨울 눈꽃",
+   "type": "bool",
+   "pref": "겨울 눈꽃 여행을 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "THEME_WALKING",
+   "group": "theme",
+   "label": "걷기길",
+   "type": "bool",
+   "pref": "걷기길 여행을 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "THEME_SUNSET",
+   "group": "theme",
+   "label": "일몰",
+   "type": "bool",
+   "pref": "일몰 여행을 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "THEME_SUNRISE",
+   "group": "theme",
+   "label": "일출",
+   "type": "bool",
+   "pref": "일출 여행을 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "THEME_SKI",
+   "group": "theme",
+   "label": "스키",
+   "type": "bool",
+   "pref": "스키 여행을 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "THEME_ACTIVITY",
+   "group": "theme",
+   "label": "액티비티",
+   "type": "bool",
+   "pref": "액티비티 여행을 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "THEME_WATER_LEISURE",
+   "group": "theme",
+   "label": "수상레저",
+   "type": "bool",
+   "pref": "수상레저 여행을 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "THEME_AIR_LEISURE",
+   "group": "theme",
+   "label": "항공레저",
+   "type": "bool",
+   "pref": "항공레저 여행을 원하나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "OPEN_SPRING",
+   "group": "season",
+   "label": "봄 운영",
+   "type": "bool",
+   "filter": "eq"
+  },
+  {
+   "code": "OPEN_SUMMER",
+   "group": "season",
+   "label": "여름 운영",
+   "type": "bool",
+   "filter": "eq"
+  },
+  {
+   "code": "OPEN_AUTUMN",
+   "group": "season",
+   "label": "가을 운영",
+   "type": "bool",
+   "filter": "eq"
+  },
+  {
+   "code": "OPEN_WINTER",
+   "group": "season",
+   "label": "겨울 운영",
+   "type": "bool",
+   "filter": "eq"
+  },
+  {
+   "code": "OPEN_DAYS",
+   "group": "season",
+   "label": "운영 요일",
+   "type": "enum",
+   "enum": {
+    "ALL": "평일+주말",
+    "WEEKEND": "주말만"
+   },
+   "filter": "in"
+  },
+  {
+   "code": "SEASONAL_CLOSURE",
+   "group": "season",
+   "label": "기간 휴장(운영자 공지)",
+   "type": "text",
+   "filter": "has"
+  },
+  {
+   "code": "YEAR_ROUND",
+   "group": "season",
+   "label": "연중 운영(운영자 공지)",
+   "type": "bool",
+   "filter": "eq"
+  },
+  {
+   "code": "OPERATING_STATUS",
+   "group": "season",
+   "label": "운영 상태",
+   "type": "enum",
+   "enum": {
+    "OPEN": "운영",
+    "PAUSED": "휴장"
+   },
+   "filter": "in"
+  },
+  {
+   "code": "BOOKING_CHANNEL",
+   "group": "booking",
+   "label": "예약 채널",
+   "type": "code",
+   "filter": "in",
+   "multi": true,
+   "note": "value=플랫폼 코드(homepage·phone·onsite·naver·camfit·thankqcamping·foresttrip·knps·public-site 등), text=플랫폼 이름"
+  },
+  {
+   "code": "BOOKING_REALTIME",
+   "group": "booking",
+   "label": "온라인 실시간 예약",
+   "type": "bool",
+   "pref": "온라인으로 바로 예약하고 싶나요?",
+   "filter": "eq"
+  },
+  {
+   "code": "OPERATOR_TYPE",
+   "group": "operator",
+   "label": "운영 주체",
+   "type": "enum",
+   "enum": {
+    "PRIVATE": "민간",
+    "LOCAL_GOVERNMENT": "지자체",
+    "NATIONAL_PARK": "국립공원",
+    "NATURAL_RECREATION_FOREST": "자연휴양림",
+    "PUBLIC_LEISURE": "공공 레저",
+    "UNKNOWN": "미상"
+   },
+   "pref": "공공 캠핑장을 선호하나요?",
+   "filter": "in"
+  },
+  {
+   "code": "PHONE",
+   "group": "operator",
+   "label": "전화",
+   "type": "text"
+  },
+  {
+   "code": "HOMEPAGE",
+   "group": "operator",
+   "label": "홈페이지",
+   "type": "url"
+  },
+  {
+   "code": "KAKAO_PLACE",
+   "group": "operator",
+   "label": "카카오맵 장소",
+   "type": "url",
+   "note": "value=place_url, value_text=분류"
+  },
+  {
+   "code": "RENTAL_ITEM",
+   "group": "rental",
+   "label": "대여 물품",
+   "type": "text",
+   "filter": "has",
+   "note": "가격은 value_num"
+  },
+  {
+   "code": "REVIEW_PRO_CLEAN_TOILET",
+   "group": "review",
+   "label": "후기: 화장실·샤워장 깨끗",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "화장실·샤워장 깨끗",
+   "pref": "‘화장실·샤워장 깨끗’ 평이 중요한가요?"
+  },
+  {
+   "code": "REVIEW_PRO_WIDE_SITE",
+   "group": "review",
+   "label": "후기: 사이트 넓음",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "사이트 넓음",
+   "pref": "‘사이트 넓음’ 평이 중요한가요?"
+  },
+  {
+   "code": "REVIEW_PRO_VIEW",
+   "group": "review",
+   "label": "후기: 뷰·경치 좋음",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "뷰·경치 좋음",
+   "pref": "‘뷰·경치 좋음’ 평이 중요한가요?"
+  },
+  {
+   "code": "REVIEW_PRO_STARS",
+   "group": "review",
+   "label": "후기: 별 보기 좋음",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "별 보기 좋음",
+   "pref": "‘별 보기 좋음’ 평이 중요한가요?"
+  },
+  {
+   "code": "REVIEW_PRO_KIND_HOST",
+   "group": "review",
+   "label": "후기: 사장님 친절",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "사장님 친절",
+   "pref": "‘사장님 친절’ 평이 중요한가요?"
+  },
+  {
+   "code": "REVIEW_PRO_KIDS",
+   "group": "review",
+   "label": "후기: 아이들 놀기 좋음",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "아이들 놀기 좋음",
+   "pref": "‘아이들 놀기 좋음’ 평이 중요한가요?"
+  },
+  {
+   "code": "REVIEW_PRO_QUIET",
+   "group": "review",
+   "label": "후기: 조용·한적",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "조용·한적",
+   "pref": "‘조용·한적’ 평이 중요한가요?"
+  },
+  {
+   "code": "REVIEW_PRO_WATER",
+   "group": "review",
+   "label": "후기: 계곡·물놀이 좋음",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "계곡·물놀이 좋음",
+   "pref": "‘계곡·물놀이 좋음’ 평이 중요한가요?"
+  },
+  {
+   "code": "REVIEW_PRO_SHADE",
+   "group": "review",
+   "label": "후기: 그늘 많음",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "그늘 많음",
+   "pref": "‘그늘 많음’ 평이 중요한가요?"
+  },
+  {
+   "code": "REVIEW_PRO_WELL_KEPT",
+   "group": "review",
+   "label": "후기: 관리 잘됨",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "관리 잘됨",
+   "pref": "‘관리 잘됨’ 평이 중요한가요?"
+  },
+  {
+   "code": "REVIEW_CON_BUGS",
+   "group": "review",
+   "label": "후기: 벌레 많음",
+   "type": "count",
+   "unit": "건",
+   "filter": "max",
+   "review_label": "벌레 많음",
+   "pref": "‘벌레 많음’은(는) 피하고 싶나요?"
+  },
+  {
+   "code": "REVIEW_CON_SLOPE",
+   "group": "review",
+   "label": "후기: 경사 있음",
+   "type": "count",
+   "unit": "건",
+   "filter": "max",
+   "review_label": "경사 있음",
+   "pref": "‘경사 있음’은(는) 피하고 싶나요?"
+  },
+  {
+   "code": "REVIEW_CON_NOISE",
+   "group": "review",
+   "label": "후기: 소음·매너",
+   "type": "count",
+   "unit": "건",
+   "filter": "max",
+   "review_label": "소음·매너",
+   "pref": "‘소음·매너’은(는) 피하고 싶나요?"
+  },
+  {
+   "code": "REVIEW_CON_TOILET",
+   "group": "review",
+   "label": "후기: 화장실 멀거나 불편",
+   "type": "count",
+   "unit": "건",
+   "filter": "max",
+   "review_label": "화장실 멀거나 불편",
+   "pref": "‘화장실 멀거나 불편’은(는) 피하고 싶나요?"
+  },
+  {
+   "code": "REVIEW_CON_NO_SHADE",
+   "group": "review",
+   "label": "후기: 그늘 부족",
+   "type": "count",
+   "unit": "건",
+   "filter": "max",
+   "review_label": "그늘 부족",
+   "pref": "‘그늘 부족’은(는) 피하고 싶나요?"
+  },
+  {
+   "code": "REVIEW_CON_NARROW_SITE",
+   "group": "review",
+   "label": "후기: 사이트 좁음",
+   "type": "count",
+   "unit": "건",
+   "filter": "max",
+   "review_label": "사이트 좁음",
+   "pref": "‘사이트 좁음’은(는) 피하고 싶나요?"
+  },
+  {
+   "code": "REVIEW_CON_PRICE",
+   "group": "review",
+   "label": "후기: 가격 부담",
+   "type": "count",
+   "unit": "건",
+   "filter": "max",
+   "review_label": "가격 부담",
+   "pref": "‘가격 부담’은(는) 피하고 싶나요?"
+  },
+  {
+   "code": "REVIEW_CON_ROUGH_ROAD",
+   "group": "review",
+   "label": "후기: 진입로 험함",
+   "type": "count",
+   "unit": "건",
+   "filter": "max",
+   "review_label": "진입로 험함",
+   "pref": "‘진입로 험함’은(는) 피하고 싶나요?"
+  },
+  {
+   "code": "REVIEW_CON_WEAK_HOT_WATER",
+   "group": "review",
+   "label": "후기: 온수 약함",
+   "type": "count",
+   "unit": "건",
+   "filter": "max",
+   "review_label": "온수 약함",
+   "pref": "‘온수 약함’은(는) 피하고 싶나요?"
+  },
+  {
+   "code": "REVIEW_CON_WIND",
+   "group": "review",
+   "label": "후기: 바람 셈",
+   "type": "count",
+   "unit": "건",
+   "filter": "max",
+   "review_label": "바람 셈",
+   "pref": "‘바람 셈’은(는) 피하고 싶나요?"
+  },
+  {
+   "code": "REVIEW_COUNT",
+   "group": "review",
+   "label": "요약에 쓴 후기 수",
+   "type": "count",
+   "unit": "건",
+   "filter": "min"
+  }
+ ]
+}

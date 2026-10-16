@@ -53,15 +53,18 @@ export function topicsOf(text) {
 export function digestReviews(name, reviews = [], { min = 1, top = 2 } = {}) {
   const own = reviews.filter((r) => attributable(r, name));
   if (!own.length) return null;
-  const pro = new Map(), con = new Map();
+  const pro = new Map(), con = new Map(), samples = {};
   for (const r of own) {
     // 캠핑장 이름 속 단어(“솔바람”의 바람 등)를 후기 표현으로 세지 않게 이름을 지운다.
     const text = `${r.title ?? ""}. ${r.snippet ?? ""}`.split(String(name ?? "").trim()).join(" ");
     const { pros, cons } = topicsOf(text.replace(new RegExp(String(name ?? "").replace(/[^가-힣A-Za-z0-9]+/g, "|").replace(/^\||\|$/g, "").split("|").filter((t) => t.length >= 2).join("|") || "$^", "g"), " "));
     for (const p of pros) pro.set(p, (pro.get(p) ?? 0) + 1);
     for (const c of cons) con.set(c, (con.get(c) ?? 0) + 1);
+    for (const t of [...pros, ...cons]) if (r.url && (samples[t] ??= []).length < 3) samples[t].push({ url: r.url, date: r.date ?? null });
   }
   const pick = (m) => [...m.entries()].filter(([, n]) => n >= min).sort((a, b) => b[1] - a[1]).slice(0, top);
-  const out = { n: own.length, pros: pick(pro), cons: pick(con) };
-  return out.pros.length || out.cons.length ? out : { n: own.length, pros: [], cons: [] };
+  // all·samples: 사실 저장소(fact-store)가 주제별 건수와 근거 글 주소를 원자 사실로 쓴다(화면 요약은 pros·cons만).
+  const all = { pros: [...pro], cons: [...con] };
+  const out = { n: own.length, pros: pick(pro), cons: pick(con), all, samples };
+  return out.pros.length || out.cons.length ? out : { n: own.length, pros: [], cons: [], all, samples };
 }
