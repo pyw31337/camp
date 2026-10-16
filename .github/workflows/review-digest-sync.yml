@@ -57,6 +57,7 @@ jobs:
       - name: Rebuild explorer data and publish
         run: |
           npm run build:explore
+          npm run build:pricing-facts
           cd .. && node scripts/publish-explorer-pages.mjs
       - name: Sync intelligence to Supabase PostgreSQL
         continue-on-error: true
