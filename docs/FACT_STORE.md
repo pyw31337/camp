@@ -105,4 +105,4 @@ WHERE EXISTS (SELECT 1 FROM fact_best f WHERE f.cid=c.cid AND f.attr='FIRE_RULE'
 
 ## 7. 현재 규모 (2026-10-16 첫 생성)
 
-사실 92,653건 · 3,116곳 · 속성 125개 · VERIFIED 144 · OPERATOR 1,500 · CONFIRMED 79,740 · MENTION 11,269. 카카오 발굴은 첫 워크플로 실행 뒤 채워진다.
+사실 96,917건 · 3,116곳 · 속성 130개 · VERIFIED 280 · OPERATOR 1,500 · CONFIRMED 83,757 · MENTION 11,380 (main 병합 후 재생성). 카카오 발굴은 첫 워크플로 실행 뒤 채워진다.

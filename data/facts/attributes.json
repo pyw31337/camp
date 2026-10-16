@@ -140,10 +140,10 @@
    "pref": "전기가 꼭 필요하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 2114,
+    "campgrounds": 2253,
     "by_grade": {
-     "CONFIRMED": 2104,
-     "VERIFIED": 10
+     "CONFIRMED": 2232,
+     "VERIFIED": 21
     }
    }
   },
@@ -156,10 +156,10 @@
    "pref": "전기장판·히터 등 몇 W가 필요하나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 48,
+    "campgrounds": 59,
     "by_grade": {
      "OPERATOR": 38,
-     "VERIFIED": 10
+     "VERIFIED": 21
     }
    }
   },
@@ -203,10 +203,10 @@
    "type": "bool",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 195,
+    "campgrounds": 2614,
     "by_grade": {
-     "CONFIRMED": 185,
-     "VERIFIED": 10
+     "CONFIRMED": 2593,
+     "VERIFIED": 21
     }
    }
   },
@@ -217,10 +217,10 @@
    "type": "bool",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 2459,
+    "campgrounds": 2614,
     "by_grade": {
-     "CONFIRMED": 2449,
-     "VERIFIED": 10
+     "CONFIRMED": 2593,
+     "VERIFIED": 21
     }
    }
   },
@@ -249,9 +249,9 @@
    "type": "bool",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 1602,
+    "campgrounds": 1671,
     "by_grade": {
-     "CONFIRMED": 1602
+     "CONFIRMED": 1671
     }
    }
   },
@@ -297,10 +297,10 @@
    "pref": "차를 텐트 옆에 대야 하나요?",
    "filter": "in",
    "coverage": {
-    "campgrounds": 37,
+    "campgrounds": 48,
     "by_grade": {
      "OPERATOR": 27,
-     "VERIFIED": 10
+     "VERIFIED": 21
     }
    }
   },
@@ -599,10 +599,10 @@
    "unit": "개",
    "filter": "min",
    "coverage": {
-    "campgrounds": 1676,
+    "campgrounds": 1679,
     "by_grade": {
-     "CONFIRMED": 1666,
-     "VERIFIED": 10
+     "CONFIRMED": 1658,
+     "VERIFIED": 21
     }
    }
   },
@@ -614,10 +614,10 @@
    "unit": "개",
    "filter": "min",
    "coverage": {
-    "campgrounds": 1638,
+    "campgrounds": 1641,
     "by_grade": {
-     "CONFIRMED": 1628,
-     "VERIFIED": 10
+     "CONFIRMED": 1620,
+     "VERIFIED": 21
     }
    }
   },
@@ -629,11 +629,11 @@
    "pref": "온수 샤워가 필요하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 1966,
+    "campgrounds": 2075,
     "by_grade": {
-     "CONFIRMED": 1939,
+     "CONFIRMED": 2054,
      "OPERATOR": 93,
-     "VERIFIED": 10
+     "VERIFIED": 21
     }
    }
   },
@@ -645,9 +645,9 @@
    "pref": "개별 화장실이 있는 곳을 원하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 156,
+    "campgrounds": 306,
     "by_grade": {
-     "CONFIRMED": 135,
+     "CONFIRMED": 300,
      "OPERATOR": 20,
      "VERIFIED": 2
     }
@@ -671,8 +671,8 @@
    "coverage": {
     "campgrounds": 912,
     "by_grade": {
-     "CONFIRMED": 1063,
-     "VERIFIED": 17
+     "CONFIRMED": 1052,
+     "VERIFIED": 30
     }
    }
   },
@@ -683,10 +683,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 869,
+    "campgrounds": 943,
     "by_grade": {
-     "CONFIRMED": 1423,
-     "VERIFIED": 21
+     "CONFIRMED": 1483,
+     "VERIFIED": 39
     }
    }
   },
@@ -731,9 +731,9 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 1282,
+    "campgrounds": 1594,
     "by_grade": {
-     "CONFIRMED": 2418,
+     "CONFIRMED": 2758,
      "OPERATOR": 111,
      "VERIFIED": 4
     }
@@ -748,10 +748,11 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 976,
+    "campgrounds": 1230,
     "by_grade": {
-     "CONFIRMED": 1832,
-     "OPERATOR": 21
+     "CONFIRMED": 2091,
+     "OPERATOR": 21,
+     "VERIFIED": 6
     }
    }
   },
@@ -764,9 +765,9 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 517,
+    "campgrounds": 583,
     "by_grade": {
-     "CONFIRMED": 985,
+     "CONFIRMED": 1056,
      "OPERATOR": 13,
      "VERIFIED": 6
     }
@@ -796,10 +797,10 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 867,
+    "campgrounds": 1163,
     "by_grade": {
-     "CONFIRMED": 1602,
-     "VERIFIED": 5
+     "CONFIRMED": 1887,
+     "VERIFIED": 16
     }
    }
   },
@@ -1758,6 +1759,54 @@
    }
   },
   {
+   "code": "REVIEW_PRO_EASY_PARKING",
+   "group": "review",
+   "label": "후기: 주차 편함·옆 주차",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "주차 편함·옆 주차",
+   "pref": "‘주차 편함·옆 주차’ 평이 중요한가요?",
+   "coverage": {
+    "campgrounds": 84,
+    "by_grade": {
+     "MENTION": 84
+    }
+   }
+  },
+  {
+   "code": "REVIEW_PRO_HOT_WATER",
+   "group": "review",
+   "label": "후기: 온수 펑펑",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "온수 펑펑",
+   "pref": "‘온수 펑펑’ 평이 중요한가요?",
+   "coverage": {
+    "campgrounds": 13,
+    "by_grade": {
+     "MENTION": 13
+    }
+   }
+  },
+  {
+   "code": "REVIEW_PRO_STORE",
+   "group": "review",
+   "label": "후기: 매점·편의 완비",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "매점·편의 완비",
+   "pref": "‘매점·편의 완비’ 평이 중요한가요?",
+   "coverage": {
+    "campgrounds": 12,
+    "by_grade": {
+     "MENTION": 12
+    }
+   }
+  },
+  {
    "code": "REVIEW_CON_BUGS",
    "group": "review",
    "label": "후기: 벌레 많음",
@@ -1918,6 +1967,36 @@
    }
   },
   {
+   "code": "REVIEW_CON_PARKING",
+   "group": "review",
+   "label": "후기: 주차 불편·짐 옮김",
+   "type": "count",
+   "unit": "건",
+   "filter": "max",
+   "review_label": "주차 불편·짐 옮김",
+   "pref": "‘주차 불편·짐 옮김’은(는) 피하고 싶나요?",
+   "coverage": {
+    "campgrounds": 2,
+    "by_grade": {
+     "MENTION": 2
+    }
+   }
+  },
+  {
+   "code": "REVIEW_CON_POWER",
+   "group": "review",
+   "label": "후기: 전기 차단·부족",
+   "type": "count",
+   "unit": "건",
+   "filter": "max",
+   "review_label": "전기 차단·부족",
+   "pref": "‘전기 차단·부족’은(는) 피하고 싶나요?",
+   "coverage": {
+    "campgrounds": 0,
+    "by_grade": {}
+   }
+  },
+  {
    "code": "REVIEW_COUNT",
    "group": "review",
    "label": "요약에 쓴 후기 수",
@@ -1932,5 +2011,5 @@
    }
   }
  ],
- "generated_at": "2026-10-16T04:29:56.448Z"
+ "generated_at": "2026-10-16T05:13:02.808Z"
 }

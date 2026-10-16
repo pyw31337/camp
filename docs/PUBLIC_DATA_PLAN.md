@@ -4,6 +4,13 @@
 > 목록 원장: `pipeline/registry/public-datasets.json` (88개, 데이터셋마다 활용처·우선순위·채울 속성).<br>
 > 모든 에이전트(Claude·Codex·Gemini) 공통 기준. 데이터는 사실 저장소(`docs/FACT_STORE.md`)로 들어가고, 화면은 거기서 읽는다.
 
+## 0. 다른 문서와의 관계 (main 병합 후)
+
+Gemini가 같은 날 `docs/PUBLIC_DATA_INTEGRATION_PLAN.md`와 모듈 `pipeline/lib/photo-gallery.mjs`(포토코리아 15101914)·`pipeline/lib/standard-campgrounds.mjs`(표준데이터·연계 95689)를 main에 넣었다. **중복 구현하지 않는다.**
+- 표준데이터·임업진흥원·포토코리아 **수집기**: Gemini 모듈이 기준. 이 문서의 E(사진)·A 일부는 그 모듈의 결과를 사실 저장소(`data/facts`)에 넣는 연결만 남는다.
+- 이 문서가 새로 맡는 것: **D 편의점·상비약·정육점 최근접 거리**, **B 공공 캠핑장 요금·예약 오픈·휴장**, **C 붐빔 지수**, 지자체 파일 36개 정규화(G3), 데이터셋 원장(`public-datasets.json`).
+- 정정: 95689(산림빅데이터거래소 PTP008901)의 실제 열은 시설 수량(면수·화장실·샤워실·개수대·소화기·방화수·방화사·화재감지기)과 기준일·인허가일이다. **수종·피톤치드·숲길 열은 없다**(2026-10-16 상세 페이지 확인). 숲 설명은 고캠핑 입지·TourAPI 주변 정보로 만든다.
+
 ## 1. 조사 결과 요약
 
 | 검색 | 파일 | API | 표준 | 연계 | 비고 |
@@ -87,7 +94,8 @@
 
 | 단계 | 내용 | 담당 제안 | 산출물 |
 | --- | --- | --- | --- |
-| G1 | 이 문서·목록 원장 | Claude (완료) | `public-datasets.json`, 이 문서 |
+| G1 | 이 문서·목록 원장 | Claude (완료) |
+| G1b | 표준데이터·95689·포토코리아 수집 모듈 | Gemini (main에 있음) | `standard-campgrounds.mjs`, `photo-gallery.mjs` | `public-datasets.json`, 이 문서 |
 | G2 | 인허가 3종 대조 + 편의점·상비약 최근접 거리 + 포토코리아 사진 수집기 | Claude(파이프라인) | `sync-*.mjs`, `data/facts/nearby.ndjson`·`safety.ndjson` |
 | G3 | 지자체 파일 36개 열 이름 사전·정규화기, 다운로드 URL 확인(파일마다 다름) | Gemini 제안(반복 정리 작업) | `registry/local-campground-columns.json`, 정규화 결과 |
 | G4 | 화면: 카드 “편의점 n km·상비약”, 상세 “안전”, 히어로·테마 표지에 포토코리아 사진(출처 캡션), 붐빔 한 줄 | Codex(디자인·화면) | `design/`·`camping-atlas/app/` |

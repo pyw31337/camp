@@ -23,6 +23,7 @@
     "probe": "node scripts/probe-endpoints.mjs",
     "sync:rest-stops": "node scripts/sync-rest-stops.mjs",
     "sync:localdata-campgrounds": "node scripts/sync-localdata-campgrounds.mjs",
+    "sync:standard-campgrounds": "node scripts/sync-standard-campgrounds.mjs",
     "db:import-licences": "node scripts/import-licences-postgres.mjs",
     "sync:tour-fees": "node scripts/sync-tour-fees.mjs",
     "build:explore": "node scripts/build-explore-data.mjs",
@@ -40,7 +41,8 @@
     "facts:sqlite": "node scripts/build-fact-store.mjs --sqlite",
     "facts:query": "node scripts/query-facts.mjs",
     "db:import-facts": "node scripts/import-facts-postgres.mjs",
-    "discover:kakao": "node scripts/discover-kakao.mjs"
+    "discover:kakao": "node scripts/discover-kakao.mjs",
+    "build:review-digest": "node scripts/build-review-digest.mjs"
   },
   "dependencies": {
     "pg": "8.23.1",

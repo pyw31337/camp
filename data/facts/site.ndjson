@@ -1,6 +1,7 @@
 {"cid":"4","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":13}
 {"cid":"4","attr":"SITE_SIZE","value":"6×7m","grade":"CONFIRMED","src":"gocamping","count":11}
 {"cid":"4","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"11","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"11","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"21","attr":"SITE_SIZE","value":"6×6m","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"21","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -23,6 +24,7 @@
 {"cid":"57","attr":"SITE_SIZE","value":"4×8m","grade":"CONFIRMED","src":"gocamping","count":13}
 {"cid":"57","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"61","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"63","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"75","attr":"SITE_SIZE","value":"3×3m","grade":"CONFIRMED","src":"gocamping","count":6}
 {"cid":"75","attr":"SITE_SIZE","value":"3×6m","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"75","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -30,6 +32,7 @@
 {"cid":"77","attr":"SITE_SIZE","value":"3×5m","grade":"CONFIRMED","src":"gocamping","count":66}
 {"cid":"77","attr":"SITE_SIZE","value":"4×7m","grade":"CONFIRMED","src":"gocamping","count":71}
 {"cid":"77","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"81","attr":"SITE_SIZE","value":"8.5×8.5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"85","attr":"SITE_SIZE","value":"3×6m","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"85","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"85","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
@@ -83,9 +86,8 @@
 {"cid":"301","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"306","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":16}
 {"cid":"306","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"315","attr":"SITE_SIZE","value":"5×3m","grade":"CONFIRMED","src":"gocamping","count":10}
-{"cid":"315","attr":"SITE_SIZE","value":"6×4m","grade":"CONFIRMED","src":"gocamping","count":10}
-{"cid":"315","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"315","attr":"SITE_SIZE","value":"5×6m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030011","at":"2026-10-16T09:00:00+09:00","text":"주미산 데크존","count":10}
+{"cid":"315","attr":"SITE_SURFACE","value":"DECK","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030011","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"320","attr":"SITE_SIZE","value":"3×3m","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"320","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping","count":6}
 {"cid":"320","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -116,7 +118,9 @@
 {"cid":"385","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"387","attr":"SITE_SIZE","value":"6×4m","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"387","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"389","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"389","attr":"SITE_SIZE","value":"4×4m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243","at":"2026-10-16T09:00:00+09:00","text":"계곡 야영데크 A구역","count":15}
+{"cid":"389","attr":"SITE_SIZE","value":"4×5m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243","at":"2026-10-16T09:00:00+09:00","text":"계곡 야영데크 B구역","count":10}
+{"cid":"389","attr":"SITE_SURFACE","value":"DECK","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"398","attr":"SITE_SIZE","value":"3×3m","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"398","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"400","attr":"SITE_SIZE","value":"2×3m","grade":"CONFIRMED","src":"gocamping","count":27}
@@ -265,6 +269,7 @@
 {"cid":"913","attr":"SITE_SIZE","value":"7×9m","grade":"CONFIRMED","src":"gocamping","count":30}
 {"cid":"913","attr":"SITE_SIZE","value":"9×11m","grade":"CONFIRMED","src":"gocamping","count":30}
 {"cid":"917","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping","count":20}
+{"cid":"923","attr":"SITE_SIZE","value":"8×12m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"936","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"936","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"936","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
@@ -335,6 +340,8 @@
 {"cid":"1181","attr":"SITE_SIZE","value":"3×3m","grade":"CONFIRMED","src":"gocamping","count":30}
 {"cid":"1181","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1181","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1194","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1196","attr":"SITE_SIZE","value":"5.5×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1220","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"1222","attr":"SITE_SIZE","value":"6×7m","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"1222","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"gocamping","count":10}
@@ -358,6 +365,7 @@
 {"cid":"1264","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1264","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1266","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1287","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1293","attr":"SITE_SIZE","value":"3×4m","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"1293","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1303","attr":"SITE_SIZE","value":"9×10m","grade":"CONFIRMED","src":"gocamping","count":31}
@@ -859,6 +867,7 @@
 {"cid":"3205","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3206","attr":"SITE_SIZE","value":"3×4m","grade":"CONFIRMED","src":"gocamping","count":33}
 {"cid":"3206","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3210","attr":"SITE_SIZE","value":"6×5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3210","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3222","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping","count":25}
 {"cid":"3222","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":25}
@@ -885,6 +894,7 @@
 {"cid":"3326","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping","count":100}
 {"cid":"3330","attr":"SITE_SIZE","value":"6×6m","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"3330","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3333","attr":"SITE_SIZE","value":"7×8.5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3345","attr":"SITE_SIZE","value":"6×7m","grade":"CONFIRMED","src":"gocamping","count":35}
 {"cid":"3345","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3348","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -1021,12 +1031,14 @@
 {"cid":"6857","attr":"SITE_SIZE","value":"6×7m","grade":"CONFIRMED","src":"gocamping","count":17}
 {"cid":"6865","attr":"SITE_SIZE","value":"4×4m","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"6865","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"6942","attr":"SITE_SIZE","value":"8×12m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6943","attr":"SITE_SIZE","value":"6×6m","grade":"CONFIRMED","src":"gocamping","count":50}
 {"cid":"6944","attr":"SITE_SIZE","value":"4×5m","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"6944","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"6944","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6946","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":28}
 {"cid":"6946","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"6948","attr":"SITE_SIZE","value":"8×10m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6953","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"gocamping","count":40}
 {"cid":"6953","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6959","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping","count":39}
@@ -1140,6 +1152,7 @@
 {"cid":"7195","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7200","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7200","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7204","attr":"SITE_SIZE","value":"7.5×8.5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7204","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7206","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7207","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -1164,6 +1177,8 @@
 {"cid":"7257","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7272","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7272","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7315","attr":"SITE_SIZE","value":"8×5m","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7344","attr":"SITE_SIZE","value":"3.6×3.6m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7344","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7353","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7401","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping","count":15}
@@ -1191,6 +1206,7 @@
 {"cid":"7567","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7573","attr":"SITE_SIZE","value":"3×4m","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"7573","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7583","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7583","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7584","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7590","attr":"SITE_SIZE","value":"6×4m","grade":"CONFIRMED","src":"gocamping","count":5}
@@ -1219,6 +1235,7 @@
 {"cid":"7693","attr":"SITE_SIZE","value":"7×5m","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"7693","attr":"SITE_SIZE","value":"8×7m","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"7693","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7731","attr":"SITE_SIZE","value":"6×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7735","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7741","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7742","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":5}
@@ -1261,6 +1278,7 @@
 {"cid":"7846","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7848","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7853","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7854","attr":"SITE_SIZE","value":"5.5×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7856","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7857","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7862","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -1273,9 +1291,9 @@
 {"cid":"7879","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7883","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7893","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7895","attr":"SITE_SIZE","value":"4×4m","grade":"CONFIRMED","src":"gocamping","count":9}
-{"cid":"7895","attr":"SITE_SIZE","value":"5×4m","grade":"CONFIRMED","src":"gocamping","count":11}
-{"cid":"7895","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7895","attr":"SITE_SIZE","value":"4×4m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030014","at":"2026-10-16T09:00:00+09:00","text":"삼나무 숲속 데크 B","count":15}
+{"cid":"7895","attr":"SITE_SIZE","value":"4×5m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030014","at":"2026-10-16T09:00:00+09:00","text":"삼나무 숲속 데크 A","count":15}
+{"cid":"7895","attr":"SITE_SURFACE","value":"DECK","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030014","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"7896","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7908","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7910","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -1283,9 +1301,11 @@
 {"cid":"7913","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":12}
 {"cid":"7913","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7925","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7929","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7930","attr":"SITE_SIZE","value":"15×15m","grade":"CONFIRMED","src":"gocamping","count":32}
 {"cid":"7930","attr":"SITE_SIZE","value":"20×15m","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"7930","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7931","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7932","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7935","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7942","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":16}
@@ -1369,10 +1389,14 @@
 {"cid":"8138","attr":"SITE_SIZE","value":"9×9m","grade":"CONFIRMED","src":"gocamping","count":4}
 {"cid":"8138","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8145","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":5}
-{"cid":"8149","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"8149","attr":"SITE_SIZE","value":"5×5m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030051","at":"2026-10-16T09:00:00+09:00","text":"휴양림 데크존","count":5}
+{"cid":"8149","attr":"SITE_SURFACE","value":"DECK","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030051","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"8158","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8159","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"8165","attr":"SITE_SIZE","value":"8.5×15m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8167","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"8170","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"8196","attr":"SITE_SIZE","value":"11×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8196","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8198","attr":"SITE_SIZE","value":"6×6m","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"8198","attr":"SITE_SIZE","value":"9×9m","grade":"CONFIRMED","src":"gocamping","count":48}
@@ -1396,6 +1420,7 @@
 {"cid":"100046","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":11}
 {"cid":"100082","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100084","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100117","attr":"SITE_SIZE","value":"3×3m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100117","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100126","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"100126","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"gocamping","count":10}
@@ -1436,6 +1461,7 @@
 {"cid":"100263","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100265","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100267","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100274","attr":"SITE_SIZE","value":"7.5×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100276","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100280","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100281","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -1451,6 +1477,7 @@
 {"cid":"100298","attr":"SITE_SIZE","value":"7×13m","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"100298","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"100298","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100300","attr":"SITE_SIZE","value":"7×7.5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100300","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100303","attr":"SITE_SIZE","value":"8×6m","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"100303","attr":"SITE_SIZE","value":"8×6m","grade":"CONFIRMED","src":"gocamping","count":7}
@@ -1479,6 +1506,7 @@
 {"cid":"100343","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100346","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100349","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100350","attr":"SITE_SIZE","value":"10×5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100351","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100353","attr":"SITE_SIZE","value":"7×10m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100356","attr":"SITE_SIZE","value":"3×6m","grade":"CONFIRMED","src":"gocamping","count":5}
@@ -1518,7 +1546,9 @@
 {"cid":"100407","attr":"SITE_SIZE","value":"4×7m","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"100407","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100407","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100411","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100411","attr":"SITE_SIZE","value":"5×5m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030116","at":"2026-10-16T09:00:00+09:00","text":"숲속 데크존","count":12}
+{"cid":"100411","attr":"SITE_SIZE","value":"8×8m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030116","at":"2026-10-16T09:00:00+09:00","text":"비슬산 오토캠핑존","count":20}
+{"cid":"100411","attr":"SITE_SURFACE","value":"DECK","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030116","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"100421","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100422","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100422","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
@@ -1531,6 +1561,7 @@
 {"cid":"100428","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100434","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100450","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100456","attr":"SITE_SIZE","value":"4×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100456","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100457","attr":"SITE_SIZE","value":"7×9m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100461","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -1570,6 +1601,7 @@
 {"cid":"100539","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100543","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100544","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100547","attr":"SITE_SIZE","value":"13×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100554","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"100555","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100556","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -1580,6 +1612,7 @@
 {"cid":"100572","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100577","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"100579","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100583","attr":"SITE_SIZE","value":"6×4m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100583","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100585","attr":"SITE_SIZE","value":"8×10m","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/daehoesan","at":"2026-10-15T09:00:00+09:00","text":"파쇄석 오토 A구역","count":35}
 {"cid":"100585","attr":"SITE_SIZE","value":"8×9m","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/daehoesan","at":"2026-10-15T09:00:00+09:00","text":"가족 잔디 B구역","count":20}
@@ -1594,12 +1627,14 @@
 {"cid":"100606","attr":"SITE_SIZE","value":"13×9m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100609","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100612","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100615","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100615","attr":"SITE_SIZE","value":"7×9m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030022","at":"2026-10-16T09:00:00+09:00","text":"고원 자동차야영존","count":13}
+{"cid":"100615","attr":"SITE_SURFACE","value":"DECK","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030022","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"100618","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100620","attr":"SITE_SIZE","value":"5×8m","grade":"CONFIRMED","src":"gocamping","count":12}
 {"cid":"100620","attr":"SITE_SIZE","value":"6×11m","grade":"CONFIRMED","src":"gocamping","count":40}
 {"cid":"100620","attr":"SITE_SIZE","value":"9×13m","grade":"CONFIRMED","src":"gocamping","count":11}
 {"cid":"100620","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100622","attr":"SITE_SIZE","value":"3×5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100624","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100624","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100630","attr":"SITE_SIZE","value":"800×900m","grade":"CONFIRMED","src":"gocamping","count":69}
@@ -1613,16 +1648,20 @@
 {"cid":"100649","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100649","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100649","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100652","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100661","attr":"SITE_SIZE","value":"5×9m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100676","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100677","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100680","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100700","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100701","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100704","attr":"SITE_SIZE","value":"10×6m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100705","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100709","attr":"SITE_SIZE","value":"8×9m","grade":"CONFIRMED","src":"gocamping","count":30}
 {"cid":"100711","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100719","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100724","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100730","attr":"SITE_SIZE","value":"12×10m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100730","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100735","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100736","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -1680,9 +1719,11 @@
 {"cid":"100857","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100861","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100861","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100864","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100865","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100877","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100878","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100878","attr":"SITE_SIZE","value":"5×6m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030033","at":"2026-10-16T09:00:00+09:00","text":"계곡 데크존","count":7}
+{"cid":"100878","attr":"SITE_SURFACE","value":"DECK","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030033","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"100879","attr":"SITE_SIZE","value":"6×9m","grade":"CONFIRMED","src":"gocamping","count":19}
 {"cid":"100879","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"100879","attr":"SITE_SIZE","value":"8×9m","grade":"CONFIRMED","src":"gocamping","count":12}
@@ -1703,10 +1744,13 @@
 {"cid":"100912","attr":"SITE_SURFACE","value":"GRAVEL","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/vivaldipark","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"100914","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100918","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100920","attr":"SITE_SIZE","value":"4×4m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100920","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100923","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100926","attr":"SITE_SIZE","value":"800×800m","grade":"CONFIRMED","src":"gocamping","count":14}
 {"cid":"100932","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100937","attr":"SITE_SIZE","value":"5.2×9m","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100941","attr":"SITE_SIZE","value":"6×10m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100949","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100952","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100953","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -1731,11 +1775,13 @@
 {"cid":"100993","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100993","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100993","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101003","attr":"SITE_SIZE","value":"8×6m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101003","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101006","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101008","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101015","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101015","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101026","attr":"SITE_SIZE","value":"6×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101028","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101029","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101035","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -1758,6 +1804,7 @@
 {"cid":"101062","attr":"SITE_SIZE","value":"4×8m","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"101062","attr":"SITE_SIZE","value":"5×10m","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"101062","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101063","attr":"SITE_SIZE","value":"4×5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101063","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101068","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101070","attr":"SITE_SIZE","value":"5×5m","grade":"CONFIRMED","src":"gocamping","count":1}
@@ -1784,6 +1831,7 @@
 {"cid":"101117","attr":"SITE_SIZE","value":"7×6m","grade":"CONFIRMED","src":"gocamping","count":7}
 {"cid":"101117","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"101118","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101123","attr":"SITE_SIZE","value":"9×9m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101127","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101136","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101137","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -1803,8 +1851,10 @@
 {"cid":"101164","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101164","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101165","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101168","attr":"SITE_SIZE","value":"10×15m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101168","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101175","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101176","attr":"SITE_SIZE","value":"13×11m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101176","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101176","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101179","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -1888,6 +1938,8 @@
 {"cid":"101297","attr":"SITE_SIZE","value":"3×6m","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"101297","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101297","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101305","attr":"SITE_SIZE","value":"5×8m","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101307","attr":"SITE_SIZE","value":"6×6m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101309","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101309","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101311","attr":"SITE_SIZE","value":"3×5m","grade":"CONFIRMED","src":"gocamping","count":5}
@@ -1931,6 +1983,7 @@
 {"cid":"101368","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping","count":6}
 {"cid":"101368","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"101368","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101369","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101370","attr":"SITE_SIZE","value":"5×4m","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"101370","attr":"SITE_SIZE","value":"5×5m","grade":"CONFIRMED","src":"gocamping","count":14}
 {"cid":"101374","attr":"SITE_SIZE","value":"12×9m","grade":"CONFIRMED","src":"gocamping","count":10}
@@ -1964,6 +2017,7 @@
 {"cid":"101403","attr":"SITE_SIZE","value":"5×8m","grade":"CONFIRMED","src":"gocamping","count":21}
 {"cid":"101403","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101404","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101405","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101408","attr":"SITE_SIZE","value":"4×5m","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"101410","attr":"SITE_SIZE","value":"4×4m","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"101410","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -2003,6 +2057,7 @@
 {"cid":"101450","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":4}
 {"cid":"101450","attr":"SITE_SIZE","value":"6×7m","grade":"CONFIRMED","src":"gocamping","count":4}
 {"cid":"101450","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101451","attr":"SITE_SIZE","value":"6×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101455","attr":"SITE_SIZE","value":"7×12m","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"101459","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101460","attr":"SITE_SIZE","value":"2×7m","grade":"CONFIRMED","src":"gocamping","count":10}
@@ -2013,8 +2068,10 @@
 {"cid":"101462","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101462","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101463","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101465","attr":"SITE_SIZE","value":"7×12m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101465","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101465","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101466","attr":"SITE_SIZE","value":"6.6×12.1m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101468","attr":"SITE_SIZE","value":"8×9m","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"101470","attr":"SITE_SIZE","value":"5×4m","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"101470","attr":"SITE_SIZE","value":"6×3m","grade":"CONFIRMED","src":"gocamping","count":1}
@@ -2029,6 +2086,7 @@
 {"cid":"101493","attr":"SITE_SIZE","value":"4×8m","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"101493","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"101493","attr":"SITE_SIZE","value":"6×6m","grade":"CONFIRMED","src":"gocamping","count":15}
+{"cid":"101498","attr":"SITE_SIZE","value":"3.6×3.6m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101499","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"101499","attr":"SITE_SIZE","value":"8×9m","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"101499","attr":"SITE_SIZE","value":"9×7m","grade":"CONFIRMED","src":"gocamping","count":1}
@@ -2038,6 +2096,7 @@
 {"cid":"101513","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping","count":6}
 {"cid":"101514","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101514","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101517","attr":"SITE_SIZE","value":"9×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101518","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101520","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101520","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
@@ -2052,18 +2111,22 @@
 {"cid":"101543","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101550","attr":"SITE_SIZE","value":"3×5m","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"101550","attr":"SITE_SIZE","value":"6×9m","grade":"CONFIRMED","src":"gocamping","count":2}
+{"cid":"101553","attr":"SITE_SIZE","value":"8.5×6.5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101559","attr":"SITE_SIZE","value":"13×20m","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"101559","attr":"SITE_SIZE","value":"13×7m","grade":"CONFIRMED","src":"gocamping","count":13}
 {"cid":"101563","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"101563","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101566","attr":"SITE_SIZE","value":"5×12m","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"101566","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101570","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101583","attr":"SITE_SIZE","value":"4×7m","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"101583","attr":"SITE_SIZE","value":"5×10m","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"101584","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping","count":5}
-{"cid":"101588","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping","count":13}
-{"cid":"101588","attr":"SITE_SIZE","value":"8×9m","grade":"CONFIRMED","src":"gocamping","count":2}
-{"cid":"101588","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101585","attr":"SITE_SIZE","value":"8×9m","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101588","attr":"SITE_SIZE","value":"5×6m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030123","at":"2026-10-16T09:00:00+09:00","text":"저수지 데크존","count":13}
+{"cid":"101588","attr":"SITE_SIZE","value":"7×8m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030123","at":"2026-10-16T09:00:00+09:00","text":"감악산 파쇄석존","count":2}
+{"cid":"101588","attr":"SITE_SURFACE","value":"DECK","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030123","at":"2026-10-16T09:00:00+09:00"}
+{"cid":"101588","attr":"SITE_SURFACE","value":"GRAVEL","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030123","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"101589","attr":"SITE_SIZE","value":"4×5m","grade":"CONFIRMED","src":"gocamping","count":32}
 {"cid":"101589","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101591","attr":"SITE_SIZE","value":"2×7m","grade":"CONFIRMED","src":"gocamping","count":13}
@@ -2157,6 +2220,7 @@
 {"cid":"101731","attr":"SITE_SIZE","value":"8×7m","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"101731","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101732","attr":"SITE_SIZE","value":"3.3×5.5m","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101736","attr":"SITE_SIZE","value":"9×5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101737","attr":"SITE_SIZE","value":"17×4m","grade":"CONFIRMED","src":"gocamping","count":4}
 {"cid":"101739","attr":"SITE_SIZE","value":"8×6m","grade":"CONFIRMED","src":"gocamping","count":17}
 {"cid":"101741","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":10}
@@ -2165,6 +2229,7 @@
 {"cid":"101743","attr":"SITE_SIZE","value":"5×5m","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"101743","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping","count":4}
 {"cid":"101743","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101745","attr":"SITE_SIZE","value":"6×5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101747","attr":"SITE_SIZE","value":"4×7m","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"101747","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101750","attr":"SITE_SIZE","value":"500×1000m","grade":"CONFIRMED","src":"gocamping","count":2}
@@ -2187,6 +2252,7 @@
 {"cid":"101767","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"101767","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101769","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":5}
+{"cid":"101770","attr":"SITE_SIZE","value":"9×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101770","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101772","attr":"SITE_SIZE","value":"14×9m","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"101772","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":13}
@@ -2264,6 +2330,7 @@
 {"cid":"101858","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"101858","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"101858","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101863","attr":"SITE_SIZE","value":"7×10m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101867","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping","count":30}
 {"cid":"101867","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101876","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping","count":2}
@@ -2284,8 +2351,9 @@
 {"cid":"101889","attr":"SITE_SIZE","value":"4×9m","grade":"CONFIRMED","src":"gocamping","count":6}
 {"cid":"101889","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101889","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101890","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":13}
-{"cid":"101890","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101890","attr":"SITE_SIZE","value":"4×5m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030118#none","at":"2026-10-16T09:00:00+09:00","text":"숲속 데크 B구역","count":6}
+{"cid":"101890","attr":"SITE_SIZE","value":"4×6m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030118#none","at":"2026-10-16T09:00:00+09:00","text":"숲속 데크 A구역","count":7}
+{"cid":"101890","attr":"SITE_SURFACE","value":"DECK","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030118#none","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"101891","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101894","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"101898","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping","count":2}
@@ -2299,7 +2367,10 @@
 {"cid":"101911","attr":"SITE_SIZE","value":"5×5m","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"101911","attr":"SITE_SIZE","value":"6×5m","grade":"CONFIRMED","src":"gocamping","count":14}
 {"cid":"101911","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101916","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101916","attr":"SITE_SIZE","value":"5×6m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030122","at":"2026-10-16T09:00:00+09:00","text":"숲속 데크존","count":4}
+{"cid":"101916","attr":"SITE_SIZE","value":"8×8m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030122","at":"2026-10-16T09:00:00+09:00","text":"파쇄석 오토존","count":6}
+{"cid":"101916","attr":"SITE_SURFACE","value":"DECK","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030122","at":"2026-10-16T09:00:00+09:00"}
+{"cid":"101916","attr":"SITE_SURFACE","value":"GRAVEL","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030122","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"101917","attr":"SITE_SIZE","value":"9×8m","grade":"CONFIRMED","src":"gocamping","count":11}
 {"cid":"101920","attr":"SITE_SIZE","value":"9×8m","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"101920","attr":"SITE_SIZE","value":"9×9m","grade":"CONFIRMED","src":"gocamping","count":2}
@@ -2325,8 +2396,9 @@
 {"cid":"101950","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101952","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"101952","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101955","attr":"SITE_SIZE","value":"6×6m","grade":"CONFIRMED","src":"gocamping","count":15}
-{"cid":"101955","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101955","attr":"SITE_SIZE","value":"5×6m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030070","at":"2026-10-16T09:00:00+09:00","text":"숲속 데크 2구역","count":7}
+{"cid":"101955","attr":"SITE_SIZE","value":"6×6m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030070","at":"2026-10-16T09:00:00+09:00","text":"숲속 데크 1구역","count":8}
+{"cid":"101955","attr":"SITE_SURFACE","value":"DECK","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030070","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"101956","attr":"SITE_SIZE","value":"10×17m","grade":"CONFIRMED","src":"gocamping","count":4}
 {"cid":"101956","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":7}
 {"cid":"101956","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
@@ -2367,6 +2439,7 @@
 {"cid":"102007","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102008","attr":"SITE_SIZE","value":"10×12m","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"102008","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102010","attr":"SITE_SIZE","value":"7×13m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102011","attr":"SITE_SIZE","value":"6×9m","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"102013","attr":"SITE_SIZE","value":"8×6m","grade":"CONFIRMED","src":"gocamping","count":6}
 {"cid":"102013","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":4}
@@ -2405,6 +2478,7 @@
 {"cid":"102073","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"102073","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102074","attr":"SITE_SIZE","value":"10×9m","grade":"CONFIRMED","src":"gocamping","count":22}
+{"cid":"102082","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102089","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"102089","attr":"SITE_SIZE","value":"6×7m","grade":"CONFIRMED","src":"gocamping","count":13}
 {"cid":"102089","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -2425,6 +2499,7 @@
 {"cid":"102115","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"102115","attr":"SITE_SIZE","value":"4×8m","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"102115","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102119","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102125","attr":"SITE_SIZE","value":"11×13m","grade":"CONFIRMED","src":"gocamping","count":18}
 {"cid":"102125","attr":"SITE_SIZE","value":"6×10m","grade":"CONFIRMED","src":"gocamping","count":4}
 {"cid":"102126","attr":"SITE_SIZE","value":"6×4m","grade":"CONFIRMED","src":"gocamping","count":7}
@@ -2438,6 +2513,7 @@
 {"cid":"102138","attr":"SITE_SIZE","value":"13×6m","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"102138","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":24}
 {"cid":"102138","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102142","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102145","attr":"SITE_SIZE","value":"3×6m","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"102145","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"102145","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -2451,6 +2527,7 @@
 {"cid":"102149","attr":"SITE_SIZE","value":"9×6m","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"102156","attr":"SITE_SIZE","value":"7×11m","grade":"CONFIRMED","src":"gocamping","count":14}
 {"cid":"102156","attr":"SITE_SIZE","value":"8×10m","grade":"CONFIRMED","src":"gocamping","count":9}
+{"cid":"102157","attr":"SITE_SIZE","value":"5×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102166","attr":"SITE_SIZE","value":"5×9m","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"102166","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102170","attr":"SITE_SIZE","value":"10×8m","grade":"CONFIRMED","src":"gocamping","count":5}
@@ -2474,6 +2551,7 @@
 {"cid":"102209","attr":"SITE_SIZE","value":"3×5m","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"102209","attr":"SITE_SIZE","value":"3×8m","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"102218","attr":"SITE_SIZE","value":"8×9m","grade":"CONFIRMED","src":"gocamping","count":18}
+{"cid":"102222","attr":"SITE_SIZE","value":"8×6m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102229","attr":"SITE_SIZE","value":"12×8m","grade":"CONFIRMED","src":"gocamping","count":36}
 {"cid":"102229","attr":"SITE_SIZE","value":"5×8m","grade":"CONFIRMED","src":"gocamping","count":70}
 {"cid":"102229","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -2490,6 +2568,8 @@
 {"cid":"102285","attr":"SITE_SIZE","value":"10×7m","grade":"CONFIRMED","src":"gocamping","count":33}
 {"cid":"102303","attr":"SITE_SIZE","value":"4×5m","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"102303","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102310","attr":"SITE_SIZE","value":"4×5m","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102315","attr":"SITE_SIZE","value":"8×8.5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102316","attr":"SITE_SIZE","value":"3×4m","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"102316","attr":"SITE_SIZE","value":"3×8m","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"102316","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping","count":6}

@@ -82,17 +82,18 @@ body { background: var(--mc-canvas); }
 /* 포스터 배지: 사진 아래쪽에 3칸, 시간 신호는 왼쪽 위 */
 .poster-emblems { position: absolute; top: auto; left: 10px; right: 10px; bottom: 10px; z-index: 2; display: flex; flex-wrap: wrap; gap: 5px; }
 .poster-time { position: absolute; top: 10px; left: 10px; z-index: 2; display: flex; }
-.pb { display: inline-flex; align-items: center; gap: 4px; min-height: 1.75rem; padding: 0 10px; border-radius: 999px; font-size: .75rem; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; line-height: 1; box-shadow: 0 1px 4px rgba(16,20,20,.12); }
-.pb .i { width: 13px; height: 13px; stroke-width: 2.4; }
-.pb-pw { background: var(--mc-volt); color: var(--mc-ink); }
-.pb-fi { background: var(--mc-flame); color: #fff; }
-.pb-fo { background: #fff; color: var(--mc-flame); }
-.pb-pk { background: var(--mc-ink); color: #fff; }
+.pb, .poster-badge { display: inline-flex; align-items: center; gap: 4px; min-height: 1.75rem; padding: 0 10px; border-radius: 999px; font-size: .75rem; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; line-height: 1; box-shadow: 0 1px 4px rgba(16,20,20,.12); }
+.pb .i, .poster-badge .i { width: 13px; height: 13px; stroke-width: 2.4; }
+.pb-pw, .poster-badge.badge-power { background: var(--mc-volt); color: var(--mc-ink); }
+.pb-fi, .poster-badge.badge-fire { background: var(--mc-flame); color: #fff; }
+.pb-fo, .poster-badge.badge-fire-ban { background: #fff; color: var(--mc-flame); }
+.pb-pk, .poster-badge.badge-parking { background: var(--mc-ink); color: #fff; }
+.pb-cart, .poster-badge.badge-cart { background: #3b82f6; color: #fff; }
+.pb-bath, .poster-badge.badge-bath { background: #0d9488; color: #fff; }
 .pb-off { background: #fff; color: var(--mc-ink-2); }
-.pb-tm { background: var(--mc-accent); color: #fff; }
-.pb-uk { background: rgba(255, 255, 255, .92); color: var(--mc-ink-3); font-weight: 700; }
-.pb-uk b { margin-left: 2px; padding: 2px 5px; border-radius: 999px; background: var(--mc-soft); color: var(--mc-ink-2); font-size: .625rem; font-weight: 800; }
-.poster-badge { display: none !important; }
+.pb-tm, .poster-badge.badge-avail { background: var(--mc-accent); color: #fff; }
+.pb-uk, .poster-badge.badge-unknown { background: rgba(255, 255, 255, .92); color: var(--mc-ink-3); font-weight: 700; }
+.pb-uk b, .poster-badge .uk-tag { margin-left: 2px; padding: 2px 5px; border-radius: 999px; background: var(--mc-soft); color: var(--mc-ink-2); font-size: .625rem; font-weight: 800; }
 
 /* ---------- 상세: 넓은 사진이 흰 그라데이션으로 페이지에 녹고, 그 위에 큰 제목 ---------- */
 .dv-cover { position: relative; max-width: none; width: 100%; margin: -3.75rem 0 0; }

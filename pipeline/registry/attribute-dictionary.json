@@ -1037,6 +1037,36 @@
    "pref": "‘관리 잘됨’ 평이 중요한가요?"
   },
   {
+   "code": "REVIEW_PRO_EASY_PARKING",
+   "group": "review",
+   "label": "후기: 주차 편함·옆 주차",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "주차 편함·옆 주차",
+   "pref": "‘주차 편함·옆 주차’ 평이 중요한가요?"
+  },
+  {
+   "code": "REVIEW_PRO_HOT_WATER",
+   "group": "review",
+   "label": "후기: 온수 펑펑",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "온수 펑펑",
+   "pref": "‘온수 펑펑’ 평이 중요한가요?"
+  },
+  {
+   "code": "REVIEW_PRO_STORE",
+   "group": "review",
+   "label": "후기: 매점·편의 완비",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "매점·편의 완비",
+   "pref": "‘매점·편의 완비’ 평이 중요한가요?"
+  },
+  {
    "code": "REVIEW_CON_BUGS",
    "group": "review",
    "label": "후기: 벌레 많음",
@@ -1135,6 +1165,26 @@
    "filter": "max",
    "review_label": "바람 셈",
    "pref": "‘바람 셈’은(는) 피하고 싶나요?"
+  },
+  {
+   "code": "REVIEW_CON_PARKING",
+   "group": "review",
+   "label": "후기: 주차 불편·짐 옮김",
+   "type": "count",
+   "unit": "건",
+   "filter": "max",
+   "review_label": "주차 불편·짐 옮김",
+   "pref": "‘주차 불편·짐 옮김’은(는) 피하고 싶나요?"
+  },
+  {
+   "code": "REVIEW_CON_POWER",
+   "group": "review",
+   "label": "후기: 전기 차단·부족",
+   "type": "count",
+   "unit": "건",
+   "filter": "max",
+   "review_label": "전기 차단·부족",
+   "pref": "‘전기 차단·부족’은(는) 피하고 싶나요?"
   },
   {
    "code": "REVIEW_COUNT",

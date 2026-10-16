@@ -111,7 +111,7 @@
    "url": "https://www.data.go.kr/data/15111395/fileData.do"
   },
   {
-   "status": "planned",
+   "status": "module_in_main",
    "id": "95689",
    "kind": "LINKED",
    "title": "전국 캠핑장 위치 및 부가정보(산림빅데이터거래소 PTP008901)",
@@ -129,10 +129,11 @@
     "SAFETY_FIRE_SAND",
     "SAFETY_FIRE_SENSOR"
    ],
-   "note": "외부 거래소(bigdata-forest.kr) 무료 CSV, 회원 다운로드"
+   "note": "외부 거래소(bigdata-forest.kr) 무료 CSV, 회원 다운로드 · 실제 열 목록(2026-10-16 확인): 캠핑장ID·명·구분·위경도·주소·일반/자동차/글램핑/카라반 수·화장실/샤워실/개수대/소화기/방화수/방화사/화재감지기 수·기타부대시설·기준일시·인허가일시. 수종·피톤치드 열은 없다.",
+   "code": "pipeline/lib/standard-campgrounds.mjs (Gemini)"
   },
   {
-   "status": "planned",
+   "status": "module_in_main",
    "id": "15101914",
    "kind": "API",
    "title": "한국관광공사_관광사진 정보_GW(포토코리아)",
@@ -142,7 +143,8 @@
    "priority": "P0",
    "url": "https://www.data.go.kr/data/15101914/openapi.do",
    "license": "공공누리 1유형(출처표시)",
-   "traffic": "개발 1,000/일"
+   "traffic": "개발 1,000/일",
+   "code": "pipeline/lib/photo-gallery.mjs (Gemini, 2026-10-16)"
   },
   {
    "status": "planned",
@@ -1033,6 +1035,19 @@
    "use": "표준데이터판(열 확인 후 사용)",
    "priority": "P2",
    "url": "https://www.data.go.kr/data/15096289/standard.do"
+  },
+  {
+   "id": "STD-campground",
+   "kind": "STD",
+   "title": "전국야영(캠핑)장표준데이터",
+   "org": "행정안전부·지자체",
+   "category": "master",
+   "use": "사이트 총수·카라반/글램핑 수·주차대수·부지면적·화로대 → 정량 스펙",
+   "priority": "P0",
+   "status": "module_in_main",
+   "code": "pipeline/lib/standard-campgrounds.mjs, scripts/sync-standard-campgrounds.mjs (Gemini)",
+   "url": "https://www.data.go.kr/tcs/dss/selectDataSetList.do?dType=STD&keyword=%EC%BA%A0%ED%95%91"
   }
- ]
+ ],
+ "related_plan": "docs/PUBLIC_DATA_INTEGRATION_PLAN.md (Gemini) — 표준·연계·사진·노지 수집 설계. 이 원장은 그 문서와 함께 쓰는 데이터셋별 활용·우선순위 목록이다."
 }

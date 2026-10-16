@@ -63,3 +63,9 @@ test("검증은 사전에 없는 속성·원천 없는 확정값을 잡는다", 
     { cid: "1", attr: "POWER_MAX_W", value: 600, grade: "OPERATOR", src: "operator_homepage", url: null }]);
   assert.equal(errs.length, 2);
 });
+
+test("후기 장단점 주제는 모두 사전 속성에 대응한다(review-digest 어휘가 늘면 사전도 늘린다)", async () => {
+  const { PROS, CONS } = await import("../lib/review-digest.mjs");
+  const labels = new Set(DICTIONARY.attributes.filter((a) => a.review_label).map((a) => a.review_label));
+  for (const [l] of [...PROS, ...CONS]) assert.ok(labels.has(l), `사전에 없는 후기 주제: ${l}`);
+});

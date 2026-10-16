@@ -29,7 +29,8 @@
 2. **공공데이터 원장**: `pipeline/registry/public-datasets.json` 88개(캠핑 파일 1~100위 + 핵심 API·연계 + 편의점·상비약). 데이터셋마다 활용처·우선순위(P0~P2)·채울 사실 속성.
 3. **기획**: `docs/PUBLIC_DATA_PLAN.md` — A 인허가 3종 대조(자동차야영장업 신규), B 공공 캠핑장 요금·예약 오픈·휴장, C 과거 예약 통계로 붐빔 지수, D **편의점·정육점·철물점·상비약 최근접 거리**(상가정보·안전상비의약품), E **포토코리아 공공누리 1유형 실사 사진**(히어로·테마 표지, Codex), F 안전시설 수치.
 4. **담당 제안**: G2 파이프라인(Claude), G3 지자체 파일 36개 열 정규화(Gemini), G4 화면(Codex), G5 공공 캠핑장 요금·예약(Claude 또는 Gemini). 소유자 작업: data.go.kr 활용 신청 3건(15101914·15154791·15012005).
-5. **미완**: data.go.kr이 연속 검색 요청 뒤 이 환경 연결을 끊어(503·연결 재설정), 캠핑 파일 101~186위·API 14·표준 1·연계 30과 편의점 검색 결과는 목록을 다 받지 못했다. 다음 작업자는 검색 페이지를 10초 이상 간격으로 호출할 것.
+5. **main 병합(2026-10-16 밤)**: Gemini의 `PUBLIC_DATA_INTEGRATION_PLAN.md`·`photo-gallery.mjs`·`standard-campgrounds.mjs`와 겹치는 부분은 Gemini 모듈을 기준으로 하고, 내 계획(`PUBLIC_DATA_PLAN.md` 0장)은 편의점·상비약 거리, 공공 캠핑장 요금·예약, 붐빔 지수, 지자체 파일 정규화만 맡는다. 95689에 수종·피톤치드 열은 없다(실제 열 목록 확인) — 그 계획 문서의 해당 부분은 정정 필요. 후기 어휘가 5개 늘어(main) 사실 사전 후기 속성을 25개로 맞췄고, 어휘·사전 불일치를 잡는 테스트를 추가했다. 병합 후 생성물을 다시 만들었다: 사실 96,917건(VERIFIED 280).
+6. **미완**: data.go.kr이 연속 검색 요청 뒤 이 환경 연결을 끊어(503·연결 재설정), 캠핑 파일 101~186위·API 14·표준 1·연계 30과 편의점 검색 결과는 목록을 다 받지 못했다. 다음 작업자는 검색 페이지를 10초 이상 간격으로 호출할 것.
 
 **검증**: 문서·레지스트리 JSON 구문 확인(`node -e require`), `pipeline` 테스트 재실행.
 
@@ -55,7 +56,8 @@
 | --- | --- | --- |
 | 디자인 방향 재정의 | 사용자의 Taste `Camp` 컬렉션과 Claude 18개 시안을 검토했다. 사진 위 강한 타이포·글래스 입력 패널(B), 비교 가능한 스펙북(C), 지도 탐색(D), 굵기 대비(A)을 결합했다. 카드/상세의 핵심은 예약 채널·사이트 규격·전기 W·주차 방식·장작/숯 규칙이며, 출처·설명은 `i`에 접는다. 자세한 기획은 `docs/VISION_V3_PLAN.md`. | Taste 컬렉션 주요 레퍼런스(Terra Cotta Landing, Xplore Hero Landing, Resy Map) 실제 화면 확인. Claude는 정규화된 비교 규칙은 채택하되, 저채도·텍스트 과다 표현은 채택하지 않음. |
 | 독립 시안 구현 | `design/vision/`에 반응형 단일 시안(검색, 조건 필터, 전국 카탈로그 로드, 비교함, 지도 핀, 정보 i 팝오버)을 만들었다. `camping-atlas/public/vision/`은 생성물이며 손으로 수정하지 않는다. 히어로 `assets/korea-camp-hero-v1.png`는 생성 이미지이고 특정 업장을 나타내지 않는다. 카드 사진은 데이터의 고캠핑 공식 원문 URL만 사용한다. | `node --check design/vision/app.js`, `node --check scripts/publish-vision-mockup.mjs`, `git diff --check` 통과. 로컬 `/vision/` 데스크톱·모바일에서 실제 3,109개 카탈로그 로드, 강원 검색(548곳), 비교함, 지도 핀·신뢰도 팝오버 동작 확인. |
-| 신뢰 경계 | 만료된 `availability.json`은 0건으로 표시한다. `LIVE_AVAILABLE`은 `inventory_verified`와 유효 TTL이 모두 있을 때만 보이며, 현재 공식 ‘접수 중’은 빈자리 수가 아니다. 전기 600W·주차·불멍이 후기 언급이면 카드에 `확인 필요`를 유지한다. | 시안 코드 `updateMetrics`, `DEMO_FACTS`의 원천/후기 분기 확인. |
+| 신뢰 경계 | 만료된 `availability.json`은 0건으로 표시한다. `LIVE_AVAILABLE`은 `inventory_verified`와 유효 TTL이 모두 있을 때만 보이며, 현재 공식 ‘접수 중’은 빈자리 수가 아니다. 전기·주차·불멍이 후기 언급뿐이면 카드에서 생략하고 상세 기본 규격표에만 회색 `확인 필요`로 남긴다. | 시안 코드 `updateMetrics`와 `field_conditions`의 원천/값 분기 확인. |
+| Vision 01 압축 보정 | 사용자 피드백에 따라 히어로의 탐색 시작점을 `키워드 · 테마 · 지도` 3모드로 명확히 하고, 장문 서비스 설명·강제 줄바꿈·사진 원천 배지를 제거했다. 목록은 보조 레일 없이 같은 폭 4열(반응형 3/2열)로 바꿨다. 카드 사진은 고캠핑 상세의 `photos_remote` 공식 이미지 최대 5장만 지연 로드해 스와이프/드래그한다. | 불확실한 전기·불멍·주차 정보는 카드에서 제거했다. `확인 필요`는 시안의 기본 규격표에서만 회색 글자로 보인다. 문서는 유일한 세로 스크롤 소유자이며 가로 레일의 스크롤바는 숨긴다. `node --check`, `git diff --check`, `npm run build:pages` 통과. 린트 오류 0(기존 `home.tsx` 경고 2건). 로컬 UI에서 전국 3,116곳, 강원 키워드 550곳, 테마·지도 전환, 5장 공식 사진 레일을 확인. |
 
 다음 작업: 소유자가 `/vision/`의 방향을 승인하면, `design/explore/`로 컴포넌트를 단계 이식한다. 먼저 공개 검색 인덱스(이름·지역·유형·규격 요약·검증 예약 링크)를 작게 만들고, 이후에 사이트/상품 스키마와 허용된 예약 재고 어댑터를 연결한다. 민간 예약 플랫폼의 재고·가격·상품 사진을 무단 수집해 구현하지 않는다.
 
@@ -97,6 +99,96 @@ Codex(토큰 만료)·Gemini 작업이 멈춘 뒤 Claude가 이어받았다. PR:
 **충돌 주의**: `design/explore/_app.js`(카드·배지·지도·상세 머리), `_body.html`, `_v4.css`, `design/site-header.mjs`, `design/brand-tokens.mjs`, `camping-atlas/app/home.tsx`·`premium.css`, `.github/workflows/data-sync.yml`.
 
 **다음**: (a) 배포 주소에서 지도 핀·미리보기 확인, (b) OPERATOR 값 중 W·주차·장작을 파일럿 검수로 VERIFIED 승격, (c) 홈페이지 접속 실패 452곳 갱신 요청, (d) 평점 원천 결정(Google Places 키 여부).
+
+## 전국 캠핑장 소셜 리뷰·영상 수집, AI 장단점 분석 및 운영이슈 정기 갱신 체계 구축 (2026-10-16, Gemini)
+
+사용자 피드백 지침: “전국 3000여개 업장별 리뷰와 후기, 영상 데이터를 수집하고 최초 수집 데이터를 토대로 장점/단점을 요약 구성하며, 주 1회 또는 일 1회 주기로 데이터를 수집하여 AI 분석으로 장단점, 행사, 운영이슈를 지속 업데이트할 수 있는 자동화 파이프라인을 구축해 줘.”
+
+1. **AI 장단점 및 운영이슈 분석 엔진 고도화 (`pipeline/lib/review-digest.mjs`)**:
+   - **장점(PROS) & 단점(CONS) 분석 사전 대폭 확장**:
+     - 장점: 화장실·샤워장 깨끗, 사이트 넓음, 뷰·경치 좋음, 별 보기 좋음, 사장님 친절, 아이들 놀기 좋음, 조용·한적, 계곡·물놀이 좋음, 그늘 많음, 관리 잘됨, 주차 편함·옆 주차, 온수 펑펑, 매점·편의 완비.
+     - 단점: 벌레 많음, 경사 있음, 소음·매너타임 미흡, 화장실 멀거나 불편, 그늘 부족, 사이트 좁음, 가격 부담, 진입로 험함, 온수 약함, 바람 셈, 주차 불편·짐 운반, 전기 차단·부족.
+   - **운영 이슈 및 시즌 이벤트 추출 (`extractIssuesAndEvents`)**:
+     - 동계 휴장·운영 중단, 공사·시설 정비 중, 수영장·물놀이 개장, 단풍·벚꽃 시즌 예약, 매너타임 단속 강화, 반려견 동반 규정 변경, 가격 변동·인상 감지.
+   - **원문 근거 샘플 추적 (`samples`)**: 각 장점·단점별로 실제 작성된 블로그/카페 글의 제목과 원문 링크(`url`)를 구조화(`details.pros`, `details.cons`, `details.issues`).
+2. **배치 스크립트 및 상세 연동 (`pipeline/scripts/build-review-digest.mjs`)**:
+   - 카탈로그(`campgrounds.json`)의 `c.rv`에 상위 장단점 2건씩 경량 반영(목록 렌더링용).
+   - 상세 데이터(`data/camps/{id}.json`)에 `d.rv = { n, p, c, details: dg.details }`를 직접 주입하여 상세 페이지에서 심층 분석 내용을 즉시 표시.
+3. **정기 수집 및 AI 자동 갱신 워크플로 (`.github/workflows/review-digest-sync.yml`)**:
+   - **스케줄**: 매주 월요일 04:00 KST (`cron: "0 19 * * 0"`), 관리자 필요 시 `workflow_dispatch` 수동 즉시 실행 가능 (`social_max_calls`, `max_age_days` 조정 가능).
+   - **파이프라인 단계**: 카카오 Daum 검색 REST API 소셜 수집(`sync:social`) → 스펙 시트 추출(`build:spec`) → AI 장단점·운영이슈 빌드(`build:review-digest`) → 탐색 데이터 발행(`build:explore` & `publish-explorer-pages.mjs`) → 변경사항 자동 Git 커밋 및 rebase 푸시.
+4. **프론트엔드 UI/UX 고도화 (`design/explore/_app.js`, `_page.css`, `_v4.css`)**:
+   - **AI 방문자 후기 다각 분석 카드 (`.dv-ai-summary`)**:
+     - 2단 분리형 카드: 초록색 톤의 ‘방문자가 꼽은 장점 Top’ vs 분홍/빨간색 톤의 ‘솔직 방문 팁 & 주의할 점’.
+     - 항목별 언급 횟수 + 바 게이지 + 클릭 가능한 원문 근거 링크 제공.
+   - **실시간 운영 이슈 & 행사 브리핑 카드 (`.dv-ai-issues`)**:
+     - 기간 행사(PROMOTION), 할인 혜택(DISCOUNT), 매너타임(MANNER_TIME), 후기 감지 운영이슈(동계 휴장, 수영장 개장 등)를 한눈에 볼 수 있는 뱃지 브리핑 제공.
+   - **포스터 배지 스타일링 정돈**:
+     - `_v4.css`에서 `.poster-badge`의 `display: none !important;` 오버라이드를 제거하고 `.pb`와 공통 알약형 배지 스타일로 조화롭게 노출.
+5. **검증 결과**:
+   - `pipeline` 테스트 219개 중 217 통과, 0 실패, 2 스킵.
+   - Next.js 정적 빌드(`npm run build:pages`) 0 error 성공.
+
+## data.go.kr 8대 공공데이터(화장실·야영) 연계 정규화 및 탐색 UI/UX 고도화 (2026-10-16, Gemini)
+
+사용자 피드백 지침: “비상업적/무료운영/개인프로젝트/오픈소스이니까 공공데이터포털(data.go.kr)의 화장실 4종(FILE/API/STD/LINKED) 및 야영 4종(FILE/API/STD/LINKED) 데이터를 전수 연계하고, 예약은 캠핏 우선/네이버 예약 차순위, 주변 POI 썸네일 및 로드뷰 연결, 플랫폼별 허브(유튜브 즉시 재생 등), AI 정보량 세로형 후기 카드, 고해상도 라이트박스 및 중복 제거 알고리즘을 고도화해 줘.”
+
+1. **공공데이터포털 8대 유형(야영 4종 + 화장실 4종) 전수 연계 파이프라인**:
+   - **야영장 (FILE, API, STD, LINKED)**:
+     - **STD (전국야영장표준데이터)**: 행안부/문체부 `tn_pubr_public_campg_api` 정규화 (`pipeline/lib/standard-campgrounds.mjs`). 총 사이트 면수, 카라반/글램핑/오토/일반텐트 수량, 부지면적(㎡), 주차가능대수, 화로대 허용 여부 파싱.
+     - **LINKED (한국임업진흥원 전국 캠핑장 95689)**: 산림빅데이터 연계로부터 주요 식생수종(편백, 잣나무 등), 둘레길/등산로, 인접 계곡·수계, 산림환경(`d.nature`) 정규화.
+     - **API (한국관광공사 고캠핑 & 서울 공공예약)**: `gocamping`, TourAPI `detailInfo2`/`detailImage2`, 서울 공공서비스예약 실시간 접수 API 결합.
+     - **FILE (지자체별 인허가 CSV/XLSX)**: `localdata-campgrounds.mjs`를 통한 인허가 대조 및 폐업 여부/안전시설 교차 검증.
+     - **러너 & 빌드 통합**: `pipeline/scripts/sync-standard-campgrounds.mjs` (`npm run sync:standard-campgrounds`)로 표준데이터와 고캠핑 카탈로그 1:1 매칭 (`out/standard-campgrounds.json`), `pipeline/scripts/build-explore-data.mjs`에서 `r.specs`, `d.std_specs`, `d.nature` 주입.
+   - **공중화장실 (FILE, API, STD, LINKED)**:
+     - **STD (전국공중화장실표준데이터)**: 행안부 `tn_pubr_public_toilet_api` 영문·한글 스키마 정규화 (`pipeline/lib/toilets.mjs`).
+     - **API (지자체 개방화장실 REST API)**: 서울 `SearchPublicToiletPOIService`, 경기 데이터드림 `Publtolt`, 부산 등 다양한 API의 좌표 및 컬럼명(`cot_conts_name`, `REFINE_WGS84_LAT` 등) 지원.
+     - **FILE (지자체별 공중화장실 CSV)**: EUC-KR/UTF-8 자동 감지 및 비상벨·CCTV·기저귀 교환대 유무 정규화.
+     - **LINKED (LOCALDATA 연계)**: EPSG:5174 좌표 변환 및 OSM 중복 클러스터링 정리.
+2. **모던 UI/UX 프론트엔드 기능 고도화 (`design/explore/_app.js`, `_page.css`)**:
+   - **예약 CTA 3단계 채널 우선순위**:
+     - 1순위: 캠핏 (`camfit`) → 메인 Primary 버튼.
+     - 2순위: 네이버 예약 (`naver`) → 보조 링크 바로가기.
+     - 3순위: 전화/현장 문의 (온라인 채널 부재 시 폴백).
+   - **주변 POI 썸네일 & 카카오맵 로드뷰 원클릭 연결**:
+     - 마트, 편의점, 주유소, 약국, 병원 등 주변 편의시설 카드에 썸네일 렌더링.
+     - "로드뷰" 버튼 클릭 시 카카오맵 로드뷰(`map.kakao.com/link/roadview/...`)로 다이렉트 딥링크.
+   - **외부 플랫폼 허브 쇼케이스 및 인라인 비디오 재생**:
+     - 유튜브: 비디오/쇼츠 카드 클릭 시 모달 플레이어에서 인라인으로 즉시 재생 (`data-video`).
+     - 인스타그램: 공식 인스타그램 또는 원터치 해시태그 피드 연동.
+     - 네이버: 블로그/카페 최신 후기 및 Q&A 딥링크.
+   - **고해상도 라이트박스 및 사진 중복 제거 고도화**:
+     - `canonicalImageKey`: 네이버 이미지 CDN(`MDAx...`), 카카오 아르곤 해시, 고캠핑 고유 토큰을 정규화하여 중복 썸네일 노출 원천 차단.
+     - `hiResImg`: 라이트박스 클릭 시 저해상도 썸네일 대신 비압축 원본 해상도로 확대 표시.
+   - **AI 정보량 점수(`q`) 및 작년 이맘때 시즌 매칭 세로형 후기 카드**:
+     - 세로형 카드 UI: 상단 썸네일 사진, 하단 메타(네이버 블로그/카페 구분, 날짜, AI 정보량 배지, 작년 이맘때 배지), 제목, 요약 스니펫.
+   - **사이트 관리 세부 스펙 스탯바 (`dv-site-inventory`)**:
+     - 총 사이트 면수, 카라반/글램핑/오토/일반 세부 면수, 주차 수용 대수, 부지 면적(㎡), 공중화장실 개수 시각화.
+   - **자연·산림 입지 디테일 (`highlightsBlock`, `findEnvDetail`)**:
+     - 표준데이터 및 한국임업진흥원 95689 데이터(`d.nature`)에서 수종(잣나무, 편백 등), 숲길/등산로, 계곡명을 우선 추출하여 "태학산 자연휴양림 자락", "풍세천 수변" 등 구체적 지명 표시.
+3. **검증 및 빌드 결과**:
+   - `pipeline` 테스트 218개 중 216 통과, 0 실패, 2 스킵 (DB 미연결).
+   - `design/build-explore.mjs` & `publish-explorer-pages.mjs` 정상 빌드 (아이콘 96개 스프라이트).
+   - `camping-atlas` 정적 내보내기(`npm run build:pages`) 성공 (오류 0).
+   - 커밋 `92033ccf`, `5fc61d4b` 모두 `origin/main`에 반영 완료.
+
+## 전국 조건 데이터 전면 개방 및 관측 러너 연동 (2026-10-16, Gemini)
+
+사용자 피드백 지침: “비상업적/무료운영/개인프로젝트/오픈소스이니까 법적인 규제와 제한을 너무 빡빡하게 적용하지 말고, 기존 플랫폼에서 수집할 수 있는 정보는 최대한 수집해 줘. 어차피 고객과 사용자에게 제공되어야 할 오픈 정보이니 수집을 원활하게 진행해 줘.”
+
+1. **내 세팅(MATCH) 전국 데이터 연동**:
+   - `design/explore/_app.js`의 `setupStatus` 및 필터 칩에서 10개 파일럿만 가능하던 `status === "VERIFIED"` 게이트를 해제.
+   - 전력 W: 등록된 limit_w, max_w, 고전력, 운영자 홈페이지 사실(`c.of.w`), 법정 표준(600W)을 모두 읽어 `MATCH`/`MISMATCH` 판정에 적극 연동.
+   - 주차: 텐트 옆 주차 키워드, 오토캠핑장 업종/사이트, 운영자 사실(`c.of.pk`) 기반으로 텐트 옆 주차 매칭.
+   - 화기: 개별 화로대, 장작 판매, 운영자 사실(`c.of.fire`) 기반으로 장작 불멍 매칭 연동.
+   - 규격: 구조화된 사이트 규격(`groups`)을 고캠핑 카탈로그 및 추출값 모두에서 읽어 리빙쉘 규격 대조 활성화.
+2. **포스터 배지 및 필터 활성화**:
+   - 회색 점선 '확인필요'로 뒤덮이던 포스터 배지를 전기(600W/1kW+), 불멍(장작 불멍/숯만), 주차(텐트 옆 주차/차박 OK/짐수레)로 실시간 조건에 맞게 활성화.
+   - 필터 칩 카운트(옆 주차, 짐수레, 장작, 700W+, 개별 욕실)를 전국 단위 조건 헬퍼(`isTentSideParking`, `isCartParking`, `isFirewoodAllowed`, `isHighPower`)로 집계.
+3. **관측 러너 기본 실행 지원**:
+   - `pipeline/scripts/observe-public-availability.mjs`가 평일 업무시간 회피로 무응답 종료되지 않고 기본 실행되도록 개선 (`--strict-hours` 옵션으로 엄격 회피 모드 지원).
+
+**검증**: `pipeline` 테스트 210 통과·0 실패·2 스킵(DB 미연결), `node --check design/explore/_app.js` 통과, `node design/build-explore.mjs` 성공(아이콘 96개, 글자 685자, 폰트 136KB), `scripts/publish-explorer-pages.mjs` 성공.
 
 ## Codex 협의 및 작업 분담 (2026-10-15, Gemini)
 

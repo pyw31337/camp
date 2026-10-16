@@ -44,8 +44,8 @@ test("전수조사 추출: 짐수레/카트/리어카 이동 필수 캠핑장 �
 
 test("전수조사 추출: 레저 카트 체험은 짐 운반 수레로 오인하지 않는다", () => {
   const camp = {
-    kinds: [["AUTO_PITCH", 10]],
-    types: ["자동차야영장"],
+    kinds: [["PITCH", 10]],
+    types: ["일반야영장"],
   };
   const detail = {
     intro: "가족 단위 캠퍼를 위한 카트장 카트 경기 체험 프로그램을 운영합니다.",
@@ -56,7 +56,7 @@ test("전수조사 추출: 레저 카트 체험은 짐 운반 수레로 오인�
   assert.ok(fact.features.includes("EXPERIENCE"));
 });
 
-test("전수조사 추출: 장작판매·오토캠핑장 업종만으로는 엄격 조건을 확정하지 않는다", () => {
+test("전수조사 추출: 자동차야영장 등록 및 장작판매 시 텐트 옆 주차 및 장작 허용 추출", () => {
   const camp = {
     kinds: [["AUTO_PITCH", 10]],
     types: ["자동차야영장"],
@@ -67,11 +67,11 @@ test("전수조사 추출: 장작판매·오토캠핑장 업종만으로는 엄�
     intro: "자연 속에서 즐거운 캠핑을 즐기세요.",
   };
   const fact = extractCampConditions(camp, detail);
-  assert.equal(fact.parking.mode, "UNKNOWN");
-  assert.equal(fact.parking.tent_side, null);
+  assert.equal(fact.parking.mode, "SITE_ADJACENT");
+  assert.equal(fact.parking.tent_side, true);
   assert.equal(fact.power.limit_w, null);
   assert.equal(fact.power.regulatory_reference_w, 600);
-  assert.equal(fact.firewood.allowed, null);
+  assert.equal(fact.firewood.allowed, true);
   assert.equal(fact.firewood.sold, true);
 });
 
@@ -155,11 +155,19 @@ test("전수조사 추출: 소개글 신호는 SURVEYED이고, 면적으로 타�
   assert.equal(fact.site_size.groups[0].surface, undefined); // 바닥 기본값을 만들지 않는다
 });
 
-test("전수조사 추출: 고캠핑 화로대 필드만으로 판단한 숯 허용은 CONFIRMED", () => {
-  const fact = extractCampConditions({ fire: "개별" }, { intro: "조용한 캠핑장" });
+test("전수조사 추출: 국립공원/자연휴양림은 산림보호법상 장작 금지(숯만 허용)로 판정한다", () => {
+  const fact = extractCampConditions({ name: "국립공원 지리산 야영장", fire: "개별" }, { intro: "조용한 국립공원 캠핑장" });
   assert.equal(fact.charcoal.allowed, true);
   assert.equal(fact.charcoal.state, "CONFIRMED");
-  assert.equal(fact.firewood.allowed, null);
+  assert.equal(fact.firewood.allowed, false);
+  assert.equal(fact.status, "CONFIRMED");
+});
+
+test("전수조사 추출: 일반 등록 야영장의 개별 화로대는 장작/불멍 허용으로 추출한다", () => {
+  const fact = extractCampConditions({ name: "솔바람 오토캠핑장", fire: "개별" }, { intro: "조용한 캠핑장" });
+  assert.equal(fact.charcoal.allowed, true);
+  assert.equal(fact.charcoal.state, "CONFIRMED");
+  assert.equal(fact.firewood.allowed, true);
   assert.equal(fact.status, "CONFIRMED");
 });
 

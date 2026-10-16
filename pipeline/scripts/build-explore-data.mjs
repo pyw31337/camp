@@ -51,13 +51,20 @@ const calendar = await read("../out/open-calendar.json");
 const seoulRaw = await read("../out/seoul-yeyak.json");
 const seoul = seoulRaw ? matchSeoulToCampgrounds(seoulRaw.services ?? [], camps.campgrounds ?? []) : new Map();
 const pilotFacts = await read("../registry/pilot-condition-facts.json");
+const stdCampgrounds = await read("../out/standard-campgrounds.json");
 const records = buildExploreRecords(camps, toilets, fees, seoul, notices, pilotFacts);
-for (const r of records) { const hero = hostedOf(r.id)[0]; if (hero?.thumb) r.ph = hero.thumb; }
+for (const r of records) {
+  const hero = hostedOf(r.id)[0];
+  if (hero?.thumb) r.ph = hero.thumb;
+  const std = stdCampgrounds?.records?.[r.id];
+  if (std?.specs) r.specs = std.specs;
+}
 const meta = {
   generated_at: new Date().toISOString(),
   count: records.length,
   sources: [
     { id: "gocamping", name: "한국관광공사 고캠핑", url: "https://www.data.go.kr/data/15101933/openapi.do", tier: "A", fetched_at: camps.fetched_at ?? null },
+    stdCampgrounds && { id: "standard-campgrounds", name: "행정안전부 전국야영(캠핑)장표준데이터 · 산림빅데이터", url: "https://www.data.go.kr/data/15101914/openapi.do", tier: "A", fetched_at: stdCampgrounds.fetched_at ?? null },
     pilotFacts && { id: "pilot-condition-facts", name: "모여라캠핑 파일럿 조건표 (공식 원문 대조)", url: "https://github.com/pyw31337/camp/blob/main/pipeline/registry/pilot-condition-facts.json", tier: "A", fetched_at: pilotFacts.updated_at ?? null },
     toilets && { id: "toilets", name: "행정안전부 공중화장실정보 · OpenStreetMap", url: "https://file.localdata.go.kr/file/public_restroom_info/info", tier: "A", fetched_at: toilets.generated_at ?? null },
     fees && { id: "tour-fees", name: "한국관광공사 TourAPI 소개정보(안내 요금 문구)", url: "https://www.data.go.kr/data/15101578/openapi.do", tier: "B", fetched_at: fees.generated_at ?? null },
@@ -114,6 +121,11 @@ let guided = 0, withOpen = 0;
 const guides = new Map();
 for (const [id, d] of Object.entries(details)) {
   const c = byId.get(id), fee = fees?.records?.[id], rec = recById.get(id);
+  const std = stdCampgrounds?.records?.[id];
+  if (std) {
+    if (std.specs) d.std_specs = std.specs;
+    if (std.nature && Object.values(std.nature).some(Boolean)) d.nature = std.nature;
+  }
   if (fee) for (const [k, f] of [["hours", "hours_text"], ["rest_days", "rest_days_text"], ["parking", "parking_fee_text"], ["open_period", "open_period_text"], ["reservation_note", "reservation_text"]]) if (fee[f]) d[k] = fee[f];
   if (!platforms || !c) continue;
   const extra = fee?.reservation_text ? [{ text: fee.reservation_text, field: "tourapi.reservation", source: { url: fee.source_url, checked_at: fee.checked_at, tier: "C", label: "한국관광공사 TourAPI 예약안내" } }] : [];
