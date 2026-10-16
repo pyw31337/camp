@@ -33,8 +33,17 @@ DROP POLICY IF EXISTS "Public insert comments" ON public.campground_comment;
 CREATE POLICY "Public insert comments" ON public.campground_comment 
   FOR INSERT WITH CHECK (true);
 
--- 익명(anon) 및 인증 사용자 권한 부여 (PostgREST REST API 허용)
-GRANT SELECT, INSERT ON public.campground_comment TO anon, authenticated;
-GRANT USAGE, SELECT ON SEQUENCE public.campground_comment_id_seq TO anon, authenticated;
+-- 익명(anon) 및 인증 사용자 권한 부여 (Supabase 등 해당 역할이 있을 때만 조건부 적용)
+DO $$
+BEGIN
+  IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'anon') THEN
+    GRANT SELECT, INSERT ON public.campground_comment TO anon;
+    GRANT USAGE, SELECT ON SEQUENCE public.campground_comment_id_seq TO anon;
+  END IF;
+  IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'authenticated') THEN
+    GRANT SELECT, INSERT ON public.campground_comment TO authenticated;
+    GRANT USAGE, SELECT ON SEQUENCE public.campground_comment_id_seq TO authenticated;
+  END IF;
+END $$;
 
 COMMIT;
