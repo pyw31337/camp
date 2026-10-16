@@ -112,10 +112,15 @@ export function digestReviews(name, reviews = [], { min = 1, top = 4 } = {}) {
   const pCompat = prosList.map((x) => [x.topic, x.count]);
   const cCompat = consList.map((x) => [x.topic, x.count]);
 
+  // all·samples: 사실 저장소(fact-store)가 주제별 전체 건수와 근거 글 주소를 원자 사실로 쓴다(화면 요약은 pros·cons만).
+  const samples = {};
+  for (const [t, list] of [...proSamples, ...conSamples]) samples[t] = list.filter((x) => x.url).map(({ url, date }) => ({ url, date }));
   return {
     n: own.length,
     pros: pCompat,
     cons: cCompat,
+    all: { pros: [...pro], cons: [...con] },
+    samples,
     details: {
       pros: prosList,
       cons: consList,

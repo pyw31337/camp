@@ -337,13 +337,15 @@ jobs:
           node pipeline/scripts/build-review-digest.mjs
           # 모든 원천을 18개 항목 프로필로 합치고, 확인된 값만으로 한 줄 요약·분류 태그를 만든다.
           node pipeline/scripts/build-campground-profiles.mjs
+          # 모든 원천을 (캠핑장·속성·값·등급·원천·근거) 원자 사실로 풀어 묶음별 NDJSON(data/facts)으로 쓴다. 여러 에이전트의 공유 원장.
+          node pipeline/scripts/build-fact-store.mjs
           # PR은 생성만 검사한다. main은 catalog·explorer를 원자적으로 갱신한다.
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             echo "PR에서는 공개 생성물을 커밋하지 않습니다."; exit 0
           fi
           git config user.name "moyeora-camping-data-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add camping-atlas/public/data camping-atlas/public/explore
+          git add camping-atlas/public/data camping-atlas/public/explore data/facts
           if git diff --cached --quiet; then
             echo "공개 데이터 변경 없음."; exit 0
           fi
@@ -358,6 +360,17 @@ jobs:
           KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY || secrets.KAKAO_JS_KEY }}
           MEDIA_DIR: ${{ steps.media.outputs.dir }}
           GISCUS_CONFIG: ${{ vars.GISCUS_CONFIG }}
+      - name: Load the fact store into the throwaway PostgreSQL (twice)
+        # data/facts(원자 사실)가 db/011 제약(확정 등급은 원천 URL 필수 등)을 지키는지 실데이터로 확인한다.
+        if: always()
+        run: |
+          if [ ! -f ../data/facts/manifest.json ]; then echo "::notice::사실 저장소가 없어 건너뜁니다."; exit 0; fi
+          npm run db:migrate
+          node scripts/import-facts-postgres.mjs
+          node scripts/import-facts-postgres.mjs
+          psql "$DATABASE_URL" -At -c "SELECT 'facts=' || count(*) || ' campgrounds=' || count(DISTINCT external_campground_id) FROM campground_fact"
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
       - uses: actions/upload-artifact@v4
         with:
           name: pipeline-out

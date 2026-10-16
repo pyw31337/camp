@@ -5,12 +5,14 @@ on:
     paths:
       - "db/**"
       - "pipeline/**"
+      - "data/facts/**"
       - ".github/workflows/database-verify.yml"
   push:
     branches: [main]
     paths:
       - "db/**"
       - "pipeline/**"
+      - "data/facts/**"
       - ".github/workflows/database-verify.yml"
 
 permissions:
@@ -48,3 +50,6 @@ jobs:
       - run: npm run db:verify
       # A second run catches checksum/idempotency mistakes before production sees them.
       - run: npm run db:migrate
+      # 사실 저장소(data/facts, db/011)를 두 번 적재해 제약·멱등성을 확인한다.
+      - run: npm run db:import-facts
+      - run: npm run db:import-facts

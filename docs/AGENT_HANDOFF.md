@@ -1,6 +1,6 @@
 # 인수인계
 
-> 최종 갱신: 2026-10-16 KST<br>
+> 최종 갱신: 2026-10-16 KST(저녁)<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
 
 ## 현재 상태
@@ -22,6 +22,50 @@
 - 파일럿 입력 계약(2026-10-15): Codex는 화면·DB 구현과 겹치지 않도록 `docs/PILOT_INTAKE_CONTRACT.md`에 원천 승인 카드, 운영자 조건표 범위, 증빙·검수 규칙, 빈자리 관측 제출 계약을 작성했다. 제미나이/다른 구현자는 이 계약의 상태명·필드 코드를 기준으로 하되, 해당 문서 자체를 DB 스키마로 간주하거나 허가 없는 플랫폼 수집을 추가하지 않는다.
 - 전국 조건 전수조사 완료(2026-10-15, Gemini): 관광진흥법 야영장 안전기준 및 고캠핑 공식 등록값·소개글을 바탕으로 전국 3,116곳 전수조사 엔진(`survey-extractor.mjs`)을 구축하고, 텐트 옆 주차 1,288곳, 600W/고전력 2,114곳, 불멍 2,420곳, 위생 1,688곳, 키즈 2,174곳 데이터를 카탈로그와 탐색 UI에 일괄 반영했다.
 - **조건 품질 경계 보강(2026-10-15, Codex)**: 전국 전수 추출의 `SURVEYED` 값은 소개글·시설 분류에서 나온 발견 신호이며, 직접 원문 대조 파일럿의 `VERIFIED`와 등급이 다르다. 내 캠핑 세팅의 전력 W·텐트 옆 주차·장작 불멍은 `VERIFIED` 조건표가 있을 때만 `MATCH`/`MISMATCH`를 낸다. 고캠핑의 구조화된 사이트 규격은 별도 직접 등록값으로 계속 비교할 수 있다. 자세한 계약은 `PILOT_INTAKE_CONTRACT.md` 2.1절이다.
+
+## main 재병합 메모 (2026-10-16 밤, Claude)
+
+- main에 Codex의 `db/010_review_digest_and_ai_intelligence.sql`이 먼저 들어가 사실 저장소 마이그레이션을 **`db/011_campground_fact_store.sql`로 번호를 바꿨다**(운영 DB에 적용된 적 없음). 로컬 PostgreSQL 16에서 010→011 순서 적용, 사실 118,491건 두 번 적재 확인.
+- `scripts/build-database.mjs`(Codex, SQLite `db/moyeora_camping.db`)와 `data/facts`(사실 원장)는 역할이 다르다: 앞은 화면·분석용 통합 테이블, 뒤는 속성 단위 원장. 통합 DB에 `data/facts`를 테이블로 붙이는 것은 다음 협의 대상.
+
+## 주변 생활 인프라 최근접 + 관광사진 수집기 (2026-10-16 밤, Claude)
+
+- **키 없이 LOCALDATA 인허가 공개 파일 7업종**(상비약 판매업소·담배소매인·대규모점포·축산물판매·석유판매·약국·동물병원)으로 캠핑장별 최근접 거리를 만들었다: `lib/nearby-licensed.mjs` → `scripts/sync-nearby-licensed.mjs` → `registry/nearby-licensed.json`(3.4MB) → 사실 `nearby.ndjson` 21,574건(`NEARBY_*_M`, CONFIRMED, 원천 = LOCALDATA 업종 페이지).
+  - 중앙값(직선): 편의점 2.2km · 상비약 3.4km · 마트 1.6km · 정육점 2.2km · 주유소 2.6km · 약국 4.6km · 동물병원 6.5km. 3km 안 편의점 1,886곳.
+  - 편의점은 상비약·담배 업소 중 체인 상호(CU·GS25·세븐일레븐·이마트24·미니스톱 등)로 판별. 영업시간은 원천에 없다.
+- **관광사진 GW 실행기** `scripts/sync-photo-gallery.mjs`(Gemini `lib/photo-gallery.mjs` 사용): 시도 17 + 테마 16 키워드 × 30장 → `registry/photo-gallery.json`(URL·촬영자·촬영지만). 키가 컨테이너에 없어 아직 실행 전 — 워크플로에서 첫 실행.
+- 주간 워크플로 `public-data-weekly.yml`(화 05:17 KST, 수동 실행 가능). 조회 묶음 `shop_nearby`·`safety_net`·`pet_safe` 추가.
+- **Codex 화면 제안**: 카드에 “편의점 1.2km”, 상세 ‘주변 장보기·비상’ 칸(편의점·마트·정육점·상비약·약국·동물병원, 직선 표시), 히어로·테마 표지에 `photo-gallery.json` 사진 + “사진: 촬영자 / 한국관광공사” 캡션.
+- 남은 것: 상가(상권)정보 API(15012005)로 철물점·캠핑용품점 보강, 승인된 키로 상비약 API(15154791) 대조(선택).
+
+**검증**: 파이프라인 테스트 236 통과·0 실패(신규 nearby-licensed 4). LOCALDATA 7업종 실제 다운로드(약 3분, 429 대비 간격·재시도), 사실 저장소 재생성 118,491건, 조합 조회 확인.
+
+## 공공데이터 확장 기획 + 수집 원칙 공유 (2026-10-16 밤, Claude) — Codex·Gemini 필독
+
+1. **수집 원칙(공통)**: `AGENTS.md`에 ‘데이터 수집 원칙’ 절을 추가했다. 서비스 성격(무료·공익·개인·비상업·오픈소스, 업장 공개 정보)과 확장 수집 관점, 그리고 모든 에이전트가 같은 선을 쓰도록 “기술적 차단(로그인·CAPTCHA·AI 크롤러를 이름으로 막은 robots)은 넘지 않고 공식 API·운영자 제공·제보로 채운다”를 적었다. AGENTS 4번 규칙도 이에 맞게 고쳤다.
+2. **공공데이터 원장**: `pipeline/registry/public-datasets.json` 88개(캠핑 파일 1~100위 + 핵심 API·연계 + 편의점·상비약). 데이터셋마다 활용처·우선순위(P0~P2)·채울 사실 속성.
+3. **기획**: `docs/PUBLIC_DATA_PLAN.md` — A 인허가 3종 대조(자동차야영장업 신규), B 공공 캠핑장 요금·예약 오픈·휴장, C 과거 예약 통계로 붐빔 지수, D **편의점·정육점·철물점·상비약 최근접 거리**(상가정보·안전상비의약품), E **포토코리아 공공누리 1유형 실사 사진**(히어로·테마 표지, Codex), F 안전시설 수치.
+4. **담당 제안**: G2 파이프라인(Claude), G3 지자체 파일 36개 열 정규화(Gemini), G4 화면(Codex), G5 공공 캠핑장 요금·예약(Claude 또는 Gemini). 소유자 작업: data.go.kr 활용 신청 3건(15101914·15154791·15012005).
+5. **main 병합(2026-10-16 밤)**: Gemini의 `PUBLIC_DATA_INTEGRATION_PLAN.md`·`photo-gallery.mjs`·`standard-campgrounds.mjs`와 겹치는 부분은 Gemini 모듈을 기준으로 하고, 내 계획(`PUBLIC_DATA_PLAN.md` 0장)은 편의점·상비약 거리, 공공 캠핑장 요금·예약, 붐빔 지수, 지자체 파일 정규화만 맡는다. 95689에 수종·피톤치드 열은 없다(실제 열 목록 확인) — 그 계획 문서의 해당 부분은 정정 필요. 후기 어휘가 5개 늘어(main) 사실 사전 후기 속성을 25개로 맞췄고, 어휘·사전 불일치를 잡는 테스트를 추가했다. 병합 후 생성물을 다시 만들었다: 사실 96,917건(VERIFIED 280).
+6. **미완**: data.go.kr이 연속 검색 요청 뒤 이 환경 연결을 끊어(503·연결 재설정), 캠핑 파일 101~186위·API 14·표준 1·연계 30과 편의점 검색 결과는 목록을 다 받지 못했다. 다음 작업자는 검색 페이지를 10초 이상 간격으로 호출할 것.
+
+**검증**: 문서·레지스트리 JSON 구문 확인(`node -e require`), `pipeline` 테스트 재실행.
+
+## 사실 저장소 + 카카오 발굴 (2026-10-16 저녁, Claude) — 데이터 작업자는 먼저 읽을 것
+
+소유자 요청: “데이터를 잘게 나눠, 취향·조건에 따라 조합해 보여 줄 수 있게. 여러 에이전트가 DB에 접근해 쓰기 좋게.” / “카카오 키를 넣었으니 홈페이지 없는 곳을 채우고, 비상업·오픈소스이니 플랫폼 정보도 최대한 모을 것.”
+
+1. **원자 사실 저장소**(`docs/FACT_STORE.md`): 속성 사전 `pipeline/registry/attribute-dictionary.json`(125개, 19묶음) → `lib/fact-store.mjs` → `data/facts/{group}.ndjson`(사실 1건 1행, 충돌 포함) + `campgrounds.ndjson` + `attributes.json`(커버리지) + `manifest.json`. SQLite는 `npm run facts:sqlite`(커밋 안 함), Postgres는 `db/011_campground_fact_store.sql` + `npm run db:import-facts`(트랜잭션 통째 재적재). 첫 생성: 사실 92,653건(VERIFIED 144 · OPERATOR 1,500 · CONFIRMED 79,740 · MENTION 11,269).
+2. **조건 조합 조회**: `lib/fact-query.mjs`(`matchCampgrounds`·`resolveFact`·`PRESETS` 17개), CLI `scripts/query-facts.mjs`. 결과마다 맞은 조건의 근거(원천·URL·문장), 확인필요, 어긋남을 돌려준다. strict는 CONFIRMED 이상, lenient는 후기 언급도 쓰되 등급 표시.
+3. **카카오 공식 API 발굴**(`docs/KAKAO_DISCOVERY.md`): `scripts/discover-kakao.mjs`가 로컬 키워드로 장소 맞춤(전화·분류·카카오맵 링크), Daum 웹 검색으로 홈페이지 없는·죽은 2,503곳의 운영자 홈페이지 후보를 찾아 `registry/kakao-places.json`에 쓴다. `operator-sites.yml` 첫 단계(비밀값 `KAKAO_REST_API_KEY`)이며, 발굴 홈페이지는 같은 실행의 크롤러 시작 주소가 된다. **이 컨테이너엔 키가 없어 아직 한 번도 실행하지 않았다** — 워크플로 수동 실행 뒤 `kakao-places.json`이 생긴다.
+4. **수집 범위 판단**: 카카오맵 장소 페이지·네이버 지도·캠핏 robots.txt가 ClaudeBot 등 AI 크롤러를 이름으로 지정해 전체 차단한다(2026-10-16 확인). 일반 UA 우회는 하지 않고 공식 API로 대신했다. 땡큐캠핑 robots는 403, 캠핑톡(campingtalk.me)은 일반 봇 허용 — 다음 후보(PROJECT_PLAN 결정 대기).
+5. **추출 보정**: spec-extractor가 “반려동물 동반 가능 여부”(제목·질문)를 허용으로 읽던 것을 막고, “A사이트 외 동반 금지”는 `ZONE_ONLY`(지정 구역만)로 분리. `review-digest`는 주제 전체 건수·근거 글 주소(`all`·`samples`)도 돌려준다(화면용 `pros`·`cons`는 그대로).
+
+**검증(2026-10-16)**: `pipeline` 테스트 224 통과·0 실패(+ 신규 kakao-discovery 4·fact-store 5·fact-query 5). 로컬 PostgreSQL 16에서 `db:migrate`(010 적용) → `import-facts-postgres` 두 번 → 92,653행·동일 결과, `campground_fact_best` 조회 확인. SQLite `fact_best` 조합 조회 확인. 워크플로 YAML 구문 확인. 카카오 발굴은 키가 없어 실행 못 함(단위 테스트만). 화면(design/·camping-atlas/app/)은 Codex 작업 영역이라 건드리지 않았다.
+
+**충돌 주의**: `data/facts/`는 생성물이다 — 손으로 고치지 말고 사전·`fact-store.mjs`를 고친다. `spec-extractor.mjs`의 반려동물 규칙, `review-digest.mjs` 반환값을 바꿨다.
+
+**다음 작업**: (a) `Operator homepage facts` 워크플로 수동 실행 → 발굴 결과 확인·오탐 호스트 `NOT_OPERATOR` 보강, (b) 화면(Codex)이 `data/facts` 또는 프로필로 취향 조합 필터 연결, (c) 캠핑톡 등 일반 봇 허용 예약 사이트를 원천 카드로 검토, (d) 운영자 문장 추출 속성 확대(사이트 규격·바닥·매너타임 수치).
 
 ## Vision 01 시안 (2026-10-16)
 

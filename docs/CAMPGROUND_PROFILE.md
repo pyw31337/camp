@@ -2,7 +2,8 @@
 
 > 목적: 전국 3,116곳 각각을 **같은 18개 항목**으로 정리해, 다른 플랫폼을 오가지 않고 비교·판단할 수 있게 한다.<br>
 > 코드: `pipeline/lib/campground-profile.mjs`, 실행: `pipeline/scripts/build-campground-profiles.mjs`(data-sync 마지막 가공 단계).<br>
-> 화면 연결은 디자인 작업자(Codex)가 이 읽기 모델을 가져다 쓴다. 이 문서는 데이터 계약이다.
+> 화면 연결은 디자인 작업자(Codex)가 이 읽기 모델을 가져다 쓴다. 이 문서는 데이터 계약이다.<br>
+> 취향·조건 조합(필터·추천)은 이 요약이 아니라 원자 사실 저장소 `data/facts`(`docs/FACT_STORE.md`, 125개 속성)를 쓴다.
 
 ## 1. 원천과 등급
 
