@@ -35,7 +35,7 @@
 | `AMENITIES` | 편의시설(운영 기간 포함, 예: 수영장(7월~8월)) | 고캠핑 + 운영자 |
 | `SEASON` | 연중 운영 / 기간 휴장 / 사계절 | 운영자 → 고캠핑 |
 | `REFUND` | 취소·환불 규정 있음(원문 문장) | 운영자 |
-| `BOOKING` | 예약 채널 | 고캠핑 등록 예약 정보 |
+| `BOOKING` | 예약 채널 | 고캠핑 등록 예약 정보. CTA는 `booking.primary`의 한 경로만 사용(캠핏 → 네이버 → 땡큐캠핑 → 기타 온라인 → 홈페이지 → 전화) |
 | `REVIEW` | 후기 장단점 | 후기 요약(`build-review-digest.mjs`) |
 
 ## 3. 한 줄 요약
@@ -58,6 +58,8 @@
 - `camps/{id}.json` → `profile = { version, generated_at, fields{코드: {value, grade, source, …}}, tags[{code,label,why}], summary, score{known, facts, total} }`
 - `campgrounds.json` → `pf = { s: 요약, t: [태그 코드], k: 확인 항목 수 }` (목록·필터용, 가볍게)
 - `meta.json` → `profiles = { fields{코드:{any, facts}}, tags{코드:수}, facts_distribution }`
+
+예약 채널 원본은 `booking.channels`에 남기고, 공개 화면의 단일 예약 행동은 `booking.primary`만 읽는다. 이 선택은 예약 가능·가격·상품 정보를 의미하지 않으며, URL·원천·확인 시각은 기존 채널 근거를 따른다.
 
 ## 6. 하지 않는 것
 

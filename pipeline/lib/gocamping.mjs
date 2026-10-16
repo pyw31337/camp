@@ -26,6 +26,15 @@ const list = (v) => String(v ?? "").split(",").map((s) => s.trim()).filter(Boole
 const num = (v) => { const n = Number(v); return Number.isFinite(n) && n !== 0 ? n : null; };
 const text = (v) => { const s = String(v ?? "").trim(); return s || null; };
 
+// 고캠핑의 siteMg 규격은 보통 m 값이지만, 일부 등록값은 700·800처럼 cm 단위로
+// 들어온다. 같은 물리량을 화면에서 700m로 보이지 않게 m로 표준화한다.
+export function normalizeSiteDimension(v) {
+  const n = Number(String(v ?? "").replace(/[^\d.-]/g, ""));
+  if (!Number.isFinite(n) || n <= 0) return 0;
+  const meters = n >= 100 && n <= 3000 ? n / 100 : n;
+  return Math.round(meters * 100) / 100;
+}
+
 /** "20240105123000" 또는 "2024-01-05 12:30:00" → KST ISO */
 export function parseGoCampingTime(v) {
   const digits = String(v ?? "").replace(/\D/g, "");
@@ -41,7 +50,7 @@ export function normalizeCampground(item, fetchedAt) {
   const kindCandidates = TEXT_HINTS.filter(([re, kind]) => re.test(intro) && !known.has(kind)).map(([, kind]) => kind);
 
   const siteSizes = [1, 2, 3]
-    .map((i) => ({ width_m: int(item[`siteMg${i}Width`]), depth_m: int(item[`siteMg${i}Vrticl`]), count: int(item[`siteMg${i}Co`]) }))
+    .map((i) => ({ width_m: normalizeSiteDimension(item[`siteMg${i}Width`]), depth_m: normalizeSiteDimension(item[`siteMg${i}Vrticl`]), count: int(item[`siteMg${i}Co`]) }))
     .filter((s) => s.width_m > 0 && s.depth_m > 0)
     .map((s) => ({ ...s, area_m2: s.width_m * s.depth_m, measurement_source: "GOCAMPING", applies_to: "SITE_GROUP" }));
 

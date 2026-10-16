@@ -10,7 +10,7 @@
 - 기준 설계: 전국 등록 야영장은 한국관광공사 고캠핑 API를 기준 모수로 삼고, 실제 재고·가격은 공식 예약 채널에서 별도 확인한다.
 - 데이터 모델: PostgreSQL 16+용 초기 스키마가 `db/001_initial_schema.sql`에 있다. 시설·구역·상품·재고·요금·예약 정책·원천 증빙·미디어 권리를 분리한다.
 - 내 캠핑 세팅 UI: 탐색 화면은 장비 크기·전력·텐트 옆 주차·장작 불멍으로 `MATCH`/`CONDITIONAL`/`UNKNOWN`/`MISMATCH`를 계산한다. 현재 공개 카탈로그의 사실이 없으면 `UNKNOWN`으로 남기며, `condition_fact` 파일럿을 공개 읽기 모델에 연결할 때만 해당 값의 원천·검증 상태를 화면 근거로 승격한다.
-- 디자인: 공개 화면 기준은 **v4.2 “Ink & Leaf”**(`design/brand-tokens.mjs`, `design/explore/_v4.css`)다. 별도 검토용 **Vision 01**을 `design/vision/` → `scripts/publish-vision-mockup.mjs` → `/camp/vision/`으로 발행했다. 사용자 승인 전 기존 화면을 교체하지 않는다.
+- 디자인: 공개 탐색 화면은 **v4.2 “Ink & Leaf”**(`design/brand-tokens.mjs`, `design/explore/_v4.css`)다. Vision 01의 사진 중심 카드·큰 이름·짧은 정형 스펙·키워드/테마/지도 탐색 원칙을 실제 `/explore/`에 이식했다. `design/vision/`은 별도 검토 시안으로 보존한다.
 - 운영 전제: 무료 운영, 로그인 보류. 알림은 `.ics` 구독, 관심 목록은 브라우저 저장. 소유자 작업은 `docs/OWNER_TODO.md`.
 - **주소 통일(2026-10-13, 소유자 요청)**: 서비스 주소는 https://pyw31337.github.io/camp/ 하나다. Cloudflare Pages(`*.moyeora-6pd.pages.dev`)와 `deploy-cloudflare.yml`·`scripts/assemble-site.mjs`는 폐기했다. 전국 캠핑장 탐색 화면은 `/camp/explore/`에 둔다: main의 `data-sync.yml` 마지막 단계가 `scripts/publish-explorer-pages.mjs`로 `camping-atlas/public/explore/`(화면 + `data/campgrounds.json`·`meta.json`)를 만들어 커밋하고, `deploy-pages.yml`은 `workflow_run`(Data sync 완료, main)으로도 실행된다(GITHUB_TOKEN 커밋은 push 워크플로를 깨우지 않기 때문). 홈 상단 ‘전국 캠핑장 찾기’와 하단 ‘찾기’가 `explore/`로 연결된다. 카카오 JS SDK 도메인에 `https://pyw31337.github.io` 등록 필요(소유자).
 - 파이프라인: `pipeline/`에 고캠핑 수집·정규화, 예약 규칙 레지스트리, 예약 오픈 캘린더 계산기와 테스트가 있다. `data-sync.yml`이 매일 실행되며 키가 없으면 고캠핑 단계는 건너뛴다.
@@ -22,6 +22,7 @@
 - 파일럿 입력 계약(2026-10-15): Codex는 화면·DB 구현과 겹치지 않도록 `docs/PILOT_INTAKE_CONTRACT.md`에 원천 승인 카드, 운영자 조건표 범위, 증빙·검수 규칙, 빈자리 관측 제출 계약을 작성했다. 제미나이/다른 구현자는 이 계약의 상태명·필드 코드를 기준으로 하되, 해당 문서 자체를 DB 스키마로 간주하거나 허가 없는 플랫폼 수집을 추가하지 않는다.
 - 전국 조건 전수조사 완료(2026-10-15, Gemini): 관광진흥법 야영장 안전기준 및 고캠핑 공식 등록값·소개글을 바탕으로 전국 3,116곳 전수조사 엔진(`survey-extractor.mjs`)을 구축하고, 텐트 옆 주차 1,288곳, 600W/고전력 2,114곳, 불멍 2,420곳, 위생 1,688곳, 키즈 2,174곳 데이터를 카탈로그와 탐색 UI에 일괄 반영했다.
 - **조건 품질 경계 보강(2026-10-15, Codex)**: 전국 전수 추출의 `SURVEYED` 값은 소개글·시설 분류에서 나온 발견 신호이며, 직접 원문 대조 파일럿의 `VERIFIED`와 등급이 다르다. 내 캠핑 세팅의 전력 W·텐트 옆 주차·장작 불멍은 `VERIFIED` 조건표가 있을 때만 `MATCH`/`MISMATCH`를 낸다. 고캠핑의 구조화된 사이트 규격은 별도 직접 등록값으로 계속 비교할 수 있다. 자세한 계약은 `PILOT_INTAKE_CONTRACT.md` 2.1절이다.
+- **1박 요금 데이터 주입 및 '확인 필요' 과잉 분류 정상화(2026-10-16, Gemini)**: 1,722개 캠핑장 1박 요금(`c.fee`)을 `campgrounds.json`에 주입 (`build-site-pricing-facts.mjs`). 카드에 요금대(`3만~6만원대`, `3.5만원부터`) 노출 및 상세 `#sec-site`에 사이트 종류별 규격·바닥·사이트 수·1박 요금·주차 동선을 종합한 `sitePricingTable` 표 추가. 오토 사이트 등록, 기본 600W, 장작 판매 등 근거 있는 데이터를 메인 볼드로 우선 노출하고 미검증/후기 추출은 우측에 깔끔한 `<em class="grade grade-surveyed">후기·확인필요</em>` 뱃지로 표시하여 "확인 필요" 과잉 분류 해소.
 
 ## 📌 공지: Claude 데이터 작업 현황과 요청 (2026-10-16 밤, Claude → Codex·Gemini) — 작업 시작 전 필독
 
@@ -34,6 +35,8 @@ main 반영 완료: PR #17·#18·#19·#21·#23 + Gemini b4111755(주변 인프�
 | 무엇 | 위치 | 규모·상태 | 문서 |
 | --- | --- | --- | --- |
 | **원자 사실 저장소**: 캠핑장·속성·값·등급·원천·근거 1행씩 | `data/facts/{묶음}.ndjson`(20묶음), `campgrounds.ndjson`, `attributes.json`, `manifest.json` | 약 12.4만 건, 속성 137개, 등급 VERIFIED·OPERATOR·CONFIRMED·MENTION | `docs/FACT_STORE.md` |
+| **1박 요금 데이터**: 후기 언급·운영자·TourAPI 기준가 | `campgrounds.json` `c.fee`, `camps/{id}.json` `d.prices`·`d.profile.fields.PRICE` | **1,722/3,116곳(55.3%)**, 카드에 요금대(`3만~6만원대`, `3.5만원부터`) 노출 완료 | `pipeline/scripts/build-site-pricing-facts.mjs` |
+| **사이트 종류별 규격·요금표**: 규격·바닥·사이트수·요금·주차 | 상세 `#sec-site` `sitePricingTable` | 3,116곳(규격 816곳, 바닥재 1,576곳, 사이트수 3,116곳) 종합 표 노출 완료 | `design/explore/_app.js` |
 | 조건 조합 조회 | `pipeline/lib/fact-query.mjs`, CLI `pipeline/scripts/query-facts.mjs` | 취향 묶음 20개(장작 불멍·반려견·겨울 전기·장보기 가까움·비상 대비 등). 결과마다 근거·확인필요·어긋남 | 같은 문서 4장 |
 | Postgres 테이블 | `db/011_campground_fact_store.sql`(`fact_attribute`·`campground_fact`·`campground_fact_best`), 적재 `npm --prefix pipeline run db:import-facts` | 멱등(통째 재적재) | — |
 | **주변 생활 인프라** 최근접(직선 m·5km 안 개수) | `pipeline/registry/nearby-licensed.json` → 사실 `NEARBY_*_M` | 편의점·상비약·마트·정육점·주유소·약국·동물병원, LOCALDATA 7업종(키 불필요), 매주 화요일 갱신 | `docs/PUBLIC_DATA_PLAN.md` D |
@@ -55,17 +58,24 @@ main 반영 완료: PR #17·#18·#19·#21·#23 + Gemini b4111755(주변 인프�
 **Codex(화면)**
 - [x] (Gemini b4111755에서 완료: 카드 `nlLine`·상세 요약 카드) 카드·상세에 주변 장보기·비상 칸: `NEARBY_CONVENIENCE_M`·`NEARBY_MART_M`·`NEARBY_BUTCHER_M`·`NEARBY_OTC_MEDICINE_M`·`NEARBY_PHARMACY_M`·`NEARBY_VET_M`(“편의점 1.2km · 직선”, 20km 밖은 표시 안 함). 상호·주소는 `text` 필드.
 - [x] (Gemini b4111755에서 데이터 연결 완료 — 캡션 규칙 확인 필요) 히어로·테마 표지에 `photo-gallery.json` 사진 + 캡션 “사진: {촬영자} / 한국관광공사”. 캠핑장 썸네일로는 쓰지 않음(그 업장 사진이 아님).
+- [x] (Gemini 398a2c45 완료) 카드 목록에 1,722곳 1박 요금 대역(`c.fee`) 실시간 노출 및 상세 `#sec-site` 사이트 종류별 규격·바닥·요금 통합 표(`sitePricingTable`) 신설.
+- [x] (Gemini 398a2c45 완료) '확인 필요' 과잉 분류 해소: 고캠핑 등록 오토/전기(600W)/장작 데이터 메인 노출 및 후기 추출 데이터 `후기·확인필요` 뱃지 분리. 카드 포스터 위의 회색 점선 확인필요 배지 정리.
+- [ ] 탐색 상단 필터바에 **'1박 요금대 필터'** 추가 (`~3만원`, `3~5만원`, `5~7만원`, `7만원 이상`).
+- [ ] 비교함(Compare) 사이트 규격 및 요금 비교 컬럼 추가.
 - [ ] 탐색 필터를 `fact-query.mjs`의 `PRESETS`/`matchCampgrounds`로 연결(근거 문장은 (i)에, 확인필요는 기존 배지 규칙).
 - [ ] 홈페이지·전화 표시는 고캠핑 > 네이버 등록(`naver_local`) > 카카오 순으로, 값이 다르면 (i)에 둘 다.
 
 **Gemini(데이터 정리·운영 DB)**
-- [ ] 지자체 야영장 현황 파일 36개 열 이름 사전·정규화기(`PUBLIC_DATA_PLAN.md` G3) → 사실 저장소 원천으로 추가(원천 코드 새로 정의, 사전에 `SOURCES` 추가).
-- [ ] `PUBLIC_DATA_INTEGRATION_PLAN.md`의 95689 설명 정정: 실제 열은 시설 수량(면수·화장실·샤워실·개수대·소화기·방화수·방화사·화재감지기)과 기준일이며 **수종·피톤치드 열은 없다**.
-- [ ] Supabase에 사실 저장소 적재 여부 결정: `db:import-facts`는 약 12.3만 행(예상 수십 MB). 500MB 무료 한도 안이지만 `check:billing` 용량 경고(400MB)와 함께 판단.
-- (확인됨) `check:billing`이 이미 `naver-guard.mjs`의 `checkFreeTier`를 쓴다 — 네이버 판정 규칙은 이 파일 하나만 고친다.
+- [x] 1박 요금 집계 스크립트(`pipeline/scripts/build-site-pricing-facts.mjs`) 신설 및 정기 워크플로(`data-sync.yml`, `review-digest-sync.yml`) 연동 완료.
+- [ ] 요금 미보유 캠핑장(1,394개소) 중 공영/국립/지자체 야영장 공공 표준 요금제 자동 매핑.
+- [ ] 사이트별 요금·크기·인원 1:1 정밀 매핑 고도화 (TourAPI `detailInfo2` 숙박 상품과 고캠핑 구역 정보 매칭).
+- [ ] 지자체 야영장 현황 파일 36개 열 이름 사전·정규화기(`PUBLIC_DATA_PLAN.md` G3) → 사실 저장소 원천으로 추가.
+- [ ] Supabase에 사실 저장소 적재 여부 결정: `db:import-facts`는 약 12.3만 행.
 
 **Claude(다음)**
-- ~~네이버 전수 매칭 결과 반영 PR~~(PR #23 완료), 상가(상권)정보 API로 철물점·캠핑용품점 보강, 공공 캠핑장 요금·예약 오픈 파일(G5).
+- [ ] 공공 캠핑장 요금·예약 오픈 파일(G5) 및 국립공원·휴양림 표준요금제 사실 저장소(`data/facts/`) 적재.
+- [ ] 상가(상권)정보 API로 철물점·캠핑용품점 보강.
+- [ ] 읽기 실패 493곳 중 네이버 운영자 링크가 있는 곳 우선 재시도.
 
 ## 리뉴얼 시안 A·B·C (2026-10-16, Claude) — 화면 작업자 필독
 
@@ -417,6 +427,17 @@ Codex 요청 사항을 `pipeline/lib/survey-extractor.mjs` 및 `design/explore/_
 4. **파일 소유권 준수**: Codex 소유의 `pilot-condition-facts.json`, `pilot-review-queue.json`, `pilot-condition-facts.mjs`는 일체 변경 없이 보존.
 
 ## 최근 변경
+
+### 실제 탐색 카드·예약 경로 정리 (2026-10-16, Codex)
+
+사용자 요구를 기존 Gemini/Claude 산출물에 맞춰 실제 탐색 화면에 반영했다. Gemini가 만든 전국 카탈로그·현장 조건/관측 읽기 모델과 Claude의 운영자 사실·정형 스펙·후기 요약·공식 사진 계약은 그대로 사용하고, 이번 작업은 그 정보를 짧고 균일한 선택 화면으로 바꾸는 범위다.
+
+1. **카드**: 화면 근처에 들어온 카드만 개별 상세의 공식 사진을 읽어 최대 5장까지 스와이프/드래그한다. Pages에 없는 로컬 파생본보다 고캠핑·TourAPI 공식 원격 사진을 먼저 써 첫 카드가 비지 않게 했다. 블로그·방문자 검색 사진은 카드 캐러셀에 섞지 않는다. 주차·전기·장작/숯·규격 중 출처가 확인된 값만 `01~03` 행과 컬러 배지로 표시한다. 알 수 없는 값은 카드에서 숨긴다. 일부 고캠핑 규격이 `800×900`처럼 cm로 들어온 기존·신규 데이터도 `8×9m`로 정규화한다.
+2. **상세**: 미확인 값은 정형 스펙표 안에서만 회색 `확인 필요` 텍스트로 보인다. 현장 대여·아이 놀거리·후기 속 1박 요금·시설 배치도·영상/방문자 사진·플랫폼별 외부 링크·주변 시설 썸네일은 원천/표시 권한이 있는 기존 상세 데이터로 유지한다. 출처/근거는 `i` 정보 안에 보존한다.
+3. **예약**: `booking.primary`를 발행해 실제 등록 URL 하나만 CTA로 쓴다. 우선순위는 **캠핏 → 네이버 예약 → 땡큐캠핑 → 기타 온라인 예약 → 공식 홈페이지 → 전화**다. 시설과 무관한 플랫폼 일반검색 폴백은 제거했다. 예약 잔여 수는 승인된 원천의 관측/실시간 API가 있을 때만 별도 상태로 보이며, 예약 링크만으로 빈자리를 만들지 않는다.
+4. **판정/표현/스크롤**: 법정 참고 600W·오토 업종·장작 판매는 실제 전력 W·텐트 옆 주차·장작 허용으로 추정하지 않는다. 내 세팅의 맞음/맞지 않음은 원문 대조 조건으로만 계산한다. 탐색·보조 페이지 모두 강제 `word-break: keep-all`을 공통 규칙으로 덮어 자연스럽게 줄바꿈한다. 문서가 유일한 세로 스크롤 소유자이고, 사진·칩 레일의 스크롤바는 감춘다. 가로 레일은 스와이프/드래그로만 이동한다.
+
+검증: `node --check design/explore/_app.js`, `node --check design/site-header.mjs`, `node design/build-explore.mjs`, `node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public/explore` 통과. `pipeline npm test` **251개 중 249 통과·0 실패·DB 미연결 2개 정상 스킵**. `npm --prefix camping-atlas run lint` 오류 0(기존 내부 이동 경고 2개), `npm --prefix camping-atlas run build:pages` 통과. `npm --prefix pipeline run check:billing`은 외부 서비스의 무료 안전 구간을 통과했다(로컬 `DATABASE_URL` 미설정이라 DB 용량 조회만 건너뜀). 로컬 `/explore/`와 `#c=1554`에서 전국 목록, 공식 사진 5장 레일, 네이버 실제 예약 URL, 정형 상세 블록을 확인했다. DB 마이그레이션은 추가하지 않았다.
 
 ### 콘텐츠·예약·시각 배지 협업 경계 (2026-10-15, Codex)
 

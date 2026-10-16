@@ -38,8 +38,30 @@ function largestSite(camp) {
   return size[0] + '×' + size[1] + 'm' + (size[2] ? ' · ' + size[2] + '면' : '');
 }
 
+function bookingPlatform(channel) {
+  if (channel?.platform_id) return channel.platform_id;
+  const url = channel?.url ?? '';
+  if (/camfit\.co\.kr/i.test(url)) return 'camfit';
+  if (/booking\.naver\.com/i.test(url)) return 'naver';
+  if (/thankqcamping\.com/i.test(url)) return 'thankqcamping';
+  return null;
+}
+
+function primaryBooking(camp) {
+  const published = camp.booking?.primary;
+  if (published?.url) return published;
+  const rank = { camfit: 0, naver: 10, thankqcamping: 20 };
+  return [...(camp.booking?.channels ?? [])]
+    .filter(channel => channel?.url)
+    .sort((a, b) => {
+      const aRank = a.kind === 'online' ? (rank[bookingPlatform(a)] ?? 30) : a.kind === 'homepage' ? 40 : a.kind === 'phone' ? 50 : 60;
+      const bRank = b.kind === 'online' ? (rank[bookingPlatform(b)] ?? 30) : b.kind === 'homepage' ? 40 : b.kind === 'phone' ? 50 : 60;
+      return aRank - bRank;
+    })[0] ?? null;
+}
+
 function reservationLabel(camp) {
-  const channel = camp.booking?.channels?.find(item => item.kind === 'online' || item.kind === 'homepage') ?? camp.booking?.channels?.[0];
+  const channel = primaryBooking(camp);
   return channel?.platform_name?.replace('캠핑장 자체 홈페이지', '공식 홈페이지') ?? null;
 }
 
@@ -99,14 +121,18 @@ function specHtml(camp) {
 }
 
 function cardHtml(camp, index) {
-  const bookingUrl = camp.booking?.url || camp.homepage || camp.gc_url;
+  const booking = primaryBooking(camp);
+  const bookingUrl = booking?.url ?? null;
   const reservation = reservationLabel(camp);
+  const action = bookingUrl
+    ? '<a href="' + safe(bookingUrl) + '" target="_blank" rel="noopener noreferrer">예약 <span>↗</span></a>'
+    : '<a href="../explore/#c=' + encodeURIComponent(camp.id) + '">상세 <span>↗</span></a>';
   return '<article class="camp-card" data-id="' + safe(camp.id) + '">' +
     galleryHtml(camp, [camp.img].filter(Boolean), index) +
     '<div class="camp-card-body"><div class="camp-meta"><span>' + safe(compactArea(camp)) + '</span>' + (reservation ? '<span>' + safe(reservation) + '</span>' : '') + '</div>' +
     '<a class="camp-name" href="../explore/#c=' + encodeURIComponent(camp.id) + '" title="' + safe(camp.name) + ' 상세 보기">' + safe(camp.name) + '</a>' +
     '<div class="spec-lines">' + (specHtml(camp) || '<div class="spec-line"><span>형태</span><strong>' + safe(kindLabel(camp)) + '</strong></div>') + '</div>' +
-    '<div class="card-actions"><a href="' + safe(bookingUrl || camp.gc_url || '#') + '" target="_blank" rel="noopener noreferrer">예약 <span>↗</span></a>' +
+    '<div class="card-actions">' + action +
     '<button class="info-button" type="button" aria-expanded="false" aria-label="' + safe(camp.name) + ' 정보 기준"><i>i</i><span class="info-popover">' + safe(sourceText(camp)) + '</span></button></div></div></article>';
 }
 

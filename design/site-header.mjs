@@ -123,7 +123,7 @@ export const SITE_HEADER_CSS = `${BRAND_CSS}
 .sh-dlg-head { display: flex; align-items: center; justify-content: space-between; }
 .sh-dlg h2 { margin: 0; font-size: 1.25rem; font-weight: 900; letter-spacing: -.03em; }
 .sh-dlg h3 { margin: 0 0 4px; font-size: 1rem; font-weight: 800; }
-.sh-dlg section > p { margin: 0 0 10px; color: var(--mc-ink-2); font-size: .8125rem; line-height: 1.5; word-break: keep-all; }
+.sh-dlg section > p { margin: 0 0 10px; color: var(--mc-ink-2); font-size: .8125rem; line-height: 1.5; word-break: normal; }
 .sh-ulist { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 6px; }
 .sh-ulist li { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 6px 10px; border-radius: 16px; background: var(--mc-canvas); font-weight: 700; }
 .sh-ulist b { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -161,6 +161,8 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 html[data-fs="s"] { font-size: 93.75%; } html[data-fs="l"] { font-size: 112.5%; } html[data-fs="xl"] { font-size: 125%; }
 /* 가로 넘침 방지: 화면 폭을 넘는 요소가 있어도 페이지가 옆으로 밀리거나 축소되지 않게(iOS 포함) */
 html, body { max-width: 100%; overflow-x: clip; }
+/* 보조 정적 페이지의 오래된 개별 규칙도 이 공통 규칙으로 덮는다. 강제 단어 단위 줄바꿈은 한글 제목과 짧은 스펙 행을 불필요하게 잘랐다. */
+body, .orow p { word-break: normal; overflow-wrap: break-word; }
 img, video, iframe { max-width: 100%; }
 /* iOS는 16px 미만 입력칸을 누르면 화면을 자동 확대한다 → 입력칸은 항상 16px 이상 */
 input, select, textarea { font-size: max(16px, 1rem) !important; }

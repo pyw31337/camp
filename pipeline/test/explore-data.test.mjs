@@ -18,6 +18,7 @@ test("탐색 레코드: 위치·예약처·요금(출처·확인일)·주변 화
   assert.equal(r.booking.provider, "foresttrip");
   // example.com은 예약 채널 판단에서 의도적으로 제외한다. 화면에는 홈페이지 원문만 별도로 남는다.
   assert.deepEqual(r.booking.channels.map((c) => [c.platform_id, c.kind]), [["foresttrip", "online"], ["phone", "phone"]]);
+  assert.equal(r.booking.primary.platform_id, "foresttrip");
   assert.equal(r.booking.source.tier, "C");
   assert.deepEqual(r.fee, { text: "오토캠핑 1박 35,000원~45,000원", min: 35000, max: 45000, checked_at: "2026-10-13T09:00:00+09:00", url: "https://korean.visitkorea.or.kr/x" });
   assert.equal(r.nearby_toilets.nearest[0].m, 140);
@@ -30,6 +31,18 @@ test("탐색 레코드: 위치·예약처·요금(출처·확인일)·주변 화
   assert.equal(providerOf("not a url"), null);
 });
 
+test("탐색 레코드: 등록된 다중 예약 경로는 우선순위 1개를 함께 발행한다", () => {
+  const multi = {
+    ...camp,
+    reservation: { methods: ["온라인실시간예약"], url: "https://booking.naver.com/booking/3/bizes/1" },
+    contact: { ...camp.contact, homepage: "https://www.camfit.co.kr/camp/1" },
+  };
+  const [r] = buildExploreRecords({ campgrounds: [multi] });
+  assert.deepEqual(r.booking.channels.map((c) => c.platform_id), ["camfit", "naver", "phone"]);
+  assert.equal(r.booking.primary.platform_id, "camfit");
+  assert.equal(r.booking.primary.url, "https://www.camfit.co.kr/camp/1");
+});
+
 test("현장 조건: 고캠핑에 없는 값을 불가로 만들지 않는다", () => {
   const fields = buildFieldConditions({ ...camp, amenities: ["전기", "장작판매"], fire_pit: "개별", gocamping_url: "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7096" });
   assert.deepEqual(fields.power, { state: "PARTIAL", available: true, limit_w: null });
@@ -40,6 +53,11 @@ test("현장 조건: 고캠핑에 없는 값을 불가로 만들지 않는다", 
   assert.equal(fields.fire_pit.arrangement, "개별");
   assert.equal(fields.site_size.groups[0].width_m, 5);
   assert.equal(fields.source.tier, "A");
+});
+
+test("기존 카탈로그의 cm 단위 사이트 규격도 m 단위로 발행한다", () => {
+  const fields = buildFieldConditions({ ...camp, site_sizes: [{ width_m: 800, depth_m: 900, count: 12 }] });
+  assert.deepEqual(fields.site_size.groups, [{ width_m: 8, depth_m: 9, count: 12 }]);
 });
 
 test("중요 공지: 원문 링크와 확인일이 있는 운영자 제공값만 발행한다", () => {

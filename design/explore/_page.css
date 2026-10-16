@@ -91,6 +91,7 @@ body { min-height: 100dvh; }
 .tag-setup.conditional { background: #fff3d7; color: #8a5b00; }
 .tag-setup.unknown { background: var(--surface-2); color: var(--ink-2); }
 .tag-setup.mismatch { background: #fdecec; color: #b3322f; }
+.plain-unknown { color: var(--ink-3); font-style: normal; font-weight: 600; font-size: var(--fs-2xs); }
 .price { display: flex; align-items: baseline; gap: 6px; font-size: var(--fs-sm); color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 .price b { font-size: var(--fs-md); color: var(--ink); font-weight: 800; }
 .more-btn { margin: 16px auto 0; display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 2.875rem; width: 100%; max-width: 320px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-weight: 700; white-space: nowrap; }
@@ -776,6 +777,13 @@ html.lb-open, html.lb-open body { overflow: hidden; }
 .dv-features-wrap { margin-top: 12px; }
 .dv-features-wrap h5 { font-size: var(--fs-xs); font-weight: 750; color: var(--ink-2); margin-bottom: 6px; }
 .feat-chip { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: var(--fs-xs); font-weight: 650; color: var(--ink-2); }
+.text-price { font-weight: 800; color: var(--green-press, #1b7340); }
+.dv-pricing-box { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-top: 12px; }
+.dv-pricing-box-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.dv-pricing-box-head h5 { margin: 0; font-size: var(--fs-xs); font-weight: 750; color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
+.dv-pricing-main { display: flex; align-items: baseline; gap: 8px; font-size: var(--fs-lg); font-weight: 800; color: var(--ink); }
+.dv-pricing-main small { font-size: var(--fs-2xs); color: var(--ink-3); font-weight: 500; }
+.dv-pricing-foot { margin-top: 6px; font-size: var(--fs-2xs); color: var(--ink-3); line-height: 1.4; }
 
 /* 왼쪽 위 ‘목록’ 버튼이 떠 있는 폭에서는 목차가 그 뒤에서 시작하도록 비운다 */
 @media (max-width: 1080px) { .dv-nav { padding-left: calc(var(--pad) + 5.5rem); } }
