@@ -10,6 +10,10 @@
   "discovery_sources": [
     { "id": "pblfclt-open", "title": "행정안전부 전국공공시설개방정보표준데이터(유료사용여부·부대시설·위경도)", "url": "https://www.data.go.kr/data/15013117/standard.do", "tier": "A", "use": "유료사용여부=N 이면서 야영·캠핑 유형인 공공시설을 후보로 수집" },
     { "id": "gocamping-registry", "title": "한국관광공사 전국 야영장 등록 현황(부대시설·화로대)", "url": "https://www.data.go.kr/data/15037499/fileData.do", "tier": "A", "use": "지자체 운영 야영장의 화장실·개수대·화로대 보유 확인(요금 항목 없음)" },
+    { "id": "gocamping-gw", "title": "한국관광공사_고캠핑 정보 조회서비스_GW", "url": "https://www.data.go.kr/data/15101933/openapi.do", "tier": "A", "use": "전국 등록 야영장 인허가 정보 및 시설 현황 최신 GW 연동" },
+    { "id": "photo-gallery-gw", "title": "한국관광공사_관광사진 정보_GW", "url": "https://www.data.go.kr/data/15101914/openapi.do", "tier": "A", "use": "포토코리아 10만여 장 공공누리 제1유형 고화질 캠핑·관광·자연 사진 연동" },
+    { "id": "gg-noji-camping", "title": "경기도_노지야영(캠핑) 정보서비스", "url": "https://www.data.go.kr/", "tier": "B", "use": "경기도 지자체 관리 무료 노지 야영장 및 차박 가능지 발굴" },
+    { "id": "regional-autocamp", "title": "지자체 오토캠핑 사이트 정보(경주시·동해시·서천군·문경시·단양군)", "url": "https://www.data.go.kr/", "tier": "B", "use": "지자체 직영 국민여가캠핑장 및 오토캠핑장 사이트별 정밀 규격·배치 정보 수집" },
     { "id": "public-toilet", "title": "행정안전부 공중화장실정보(개방시간, 2025-02부터 좌표 미제공 → 주소 지오코딩)", "url": "https://www.data.go.kr/", "tier": "A", "use": "현장 화장실이 없는 후보의 300m 이내 공중화장실 확인" },
     { "id": "gov-notice", "title": "시·군청 공지·보도자료", "url": "https://www.korea.kr/", "tier": "B", "use": "무료 운영·취사 허용·운영 기간의 공식 근거" },
     { "id": "community", "title": "오지캠핑지도·캠핑 카페·유튜브(후보 발견용)", "url": "https://www.5gcamp.com/", "tier": "E", "use": "후보 발견만. 사실 근거로 쓰지 않고 공식 확인 작업을 만든다" }
