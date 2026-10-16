@@ -2996,24 +2996,21 @@ function nearBlock(c, d) {
   <div class="roadview-slot" id="roadviewSlot"></div>
   <span class="trust">직선거리 기준 · ‘로드뷰 바로가기’는 시설 근처 실제 도로 파노라마 · 데이터: 한국관광공사 TourAPI, OpenStreetMap(© 기여자, ODbL), 행정안전부, 한국도로공사</span>`;
 }
-// 공식 사진: 현재 Pages에 없는 로컬 파생본보다 고캠핑·TourAPI의 공식 원본을 먼저 쓴다.
-// 그래야 사진 동기화가 늦거나 생략된 배포에서도 첫 카드가 빈 썸네일이 되지 않는다.
+// 사진은 배포물에 실제로 존재하는 URL만 쓴다. 과거 `photos`는 로컬 webp 파생본을
+// 가리키지만 Pages에 해당 미디어 번들이 없을 수 있어, 존재하지 않는 이미지를
+// 갤러리에 섞지 않는다. 고캠핑/TourAPI 사진을 우선하고, 없을 때만 장소 사진을 쓴다.
 function allPhotos(c, d) {
-  // 로컬 파생본은 저장되어 있는 배포에서만 보조로 쓸 수 있게 마지막에 둔다.
-  const own = (d?.photos?.length ? d.photos : c.ph ? [{ t: c.ph, l: largeLocalPhoto(c.ph) }] : []).map((p) => {
-    const large = p.l ?? largeLocalPhoto(p.t);
-    return { t: MEDIA + large, l: MEDIA + large };
-  });
   // 같은 사진이 대표(thumb_720)·갤러리에 중복되지 않도록 파일 이름으로 거른다.
   const key = (u) => String(u).split(/[?#]/)[0].split("/").pop().toLowerCase().replace(/^thumb_\d+_/, "");
-  const remoteUrls = [c.img, ...(d?.photos_remote ?? []), ...(d?.tour_photos ?? []).map((x) => x.url ?? x)].filter(Boolean);
+  const officialUrls = [c.img, ...(d?.tour_photos ?? []).map((x) => x.url ?? x), ...(d?.photos_remote ?? [])].filter(Boolean);
+  const fallbackPlacePhoto = !officialUrls.length && c.sn ? [c.sn] : [];
   const seen = new Set();
-  const unique = (items) => items.filter((item) => {
+  const unique = (items, source) => items.map((url) => ({ t: url, l: url, remote: true, source })).filter((item) => {
     const k = key(item.l);
     if (!k || seen.has(k)) return false;
     seen.add(k); return true;
   });
-  return [...unique(remoteUrls.map((url) => ({ t: url, l: url, remote: true }))), ...unique(own)];
+  return [...unique(officialUrls, "official"), ...unique(fallbackPlacePhoto, "place")];
 }
 function talkBlock(c) {
   return `
@@ -3059,7 +3056,7 @@ const sum = (xs) => xs.reduce((n, x) => n + (Number(x) || 0), 0);
 
 // 1) 사진 모자이크: 공식 사진 → 방문자 사진 순. 넓은 화면은 1+4 격자, 좁은 화면은 넘기는 슬라이드.
 function heroBlock(c, d) {
-  const official = allPhotos(c, d).map((p) => ({ src: p.l, cap: "공식 사진 · 한국관광공사 고캠핑", remote: p.remote }));
+  const official = allPhotos(c, d).map((p) => ({ src: p.l, cap: p.source === "place" ? "장소 사진" : "공식 사진 · 한국관광공사 고캠핑", remote: p.remote }));
   const rawSnaps = (d?.sns_images ?? []).map((x) => ({ src: hiResImg(x.img ?? x.thumb), small: true, cap: `방문자 사진 · ${x.src ?? "외부"}`, link: x.url, remote: true }));
   const rawLayout = (d?.layout?.images ?? []).map((x) => ({ src: hiResImg(x.img ?? x.thumb), small: false, cap: x.sure ? "시설 배치도 (고해상도 원본)" : "시설 배치도", link: x.url ?? x.img, remote: true }));
   const snaps = dedupeImages(rawSnaps, (x) => x.src);
