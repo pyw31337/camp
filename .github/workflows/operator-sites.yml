@@ -1,6 +1,7 @@
 name: Operator homepage facts
 
-# 운영자 자체 홈페이지(고캠핑 등록 홈페이지 중 플랫폼이 아닌 곳)에서 이용 안내 문장을 주 1회 다시 읽는다.
+# (0) 카카오 공식 API로 홈페이지가 없거나 죽은 곳의 운영자 홈페이지를 찾고,
+# 운영자 자체 홈페이지(고캠핑 등록 홈페이지 중 플랫폼이 아닌 곳 + 발굴 홈페이지)에서 이용 안내 문장을 주 1회 다시 읽는다.
 # robots.txt 준수, 호스트별 1초 간격, 사이트당 최대 6쪽, 전문 저장 금지(문장·URL·확인 시각만).
 # 결과(registry/operator-site-snippets.json)는 data-sync가 배지 사실(build-operator-facts)·스펙 시트에 쓴다.
 on:
@@ -13,6 +14,10 @@ on:
         description: "이 일수보다 오래된 확인값만 다시 읽기 (기본 14)"
         required: false
         default: "14"
+      kakao_max_calls:
+        description: "카카오 발굴 호출 상한 (기본 8000)"
+        required: false
+        default: "8000"
 
 permissions:
   contents: write
@@ -36,14 +41,21 @@ jobs:
       - run: npm ci
       # 자바스크립트로 그리는 운영자 사이트를 읽기 위한 Chromium(렌더링 폴백)
       - run: npx playwright install --with-deps chromium
-      - run: node --test test/operator-site.test.mjs
+      - run: node --test test/operator-site.test.mjs test/kakao-discovery.test.mjs
+      # 카카오 공식 API(로컬 키워드·Daum 웹 검색): 장소 맞춤 + 홈페이지 없는·죽은 곳의 운영자 홈페이지 발굴.
+      # 30일 지난 곳만 다시 묻는다. 로컬·웹 검색 한도는 소셜 검색(blog·cafe·image·vclip)과 종류가 달라 겹치지 않는다.
+      - name: Discover places and homepages (Kakao official API)
+        continue-on-error: true
+        run: node scripts/discover-kakao.mjs --max-calls "${{ github.event.inputs.kakao_max_calls || '8000' }}"
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
       - name: Read operator homepages
         run: node scripts/crawl-operator-sites.mjs --concurrency 10 --render --retry-failed --max-age-days "${{ github.event.inputs.max_age_days || '14' }}"
       - name: Commit refreshed snippets
         run: |
           git config user.name "moyeora-camping-data-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add registry/operator-site-snippets.json
+          git add registry/operator-site-snippets.json registry/kakao-places.json 2>/dev/null || git add registry/operator-site-snippets.json
           if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
           git commit -m "chore(data): refresh operator homepage snippets"
           git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"

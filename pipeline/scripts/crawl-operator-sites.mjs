@@ -15,6 +15,10 @@ import { guideLinks, htmlToText, isClosedHost, isOperatorHost, parseRobots, rele
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const camps = JSON.parse(readFileSync(join(root, "camping-atlas/public/explore/data/campgrounds.json"), "utf8"));
 const registryPath = join(root, "pipeline/registry/operator-site-snippets.json");
+// 카카오 공식 API로 발굴한 홈페이지(registry/kakao-places.json, discover-kakao.mjs). 고캠핑 등록 사이트가 없거나 죽은 곳에만 쓴다.
+const kakaoPath = join(root, "pipeline/registry/kakao-places.json");
+const kakao = existsSync(kakaoPath) ? JSON.parse(readFileSync(kakaoPath, "utf8")).campgrounds ?? {} : {};
+const discoveredOf = (c) => kakao[c.id]?.homepage?.url ?? null;
 const flag = (k) => process.argv.includes(k);
 const arg = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : d; };
 const limit = Number(arg("--limit", 0)) || Infinity;
@@ -150,7 +154,7 @@ const snippetsOf = (pages) => {
 
 async function crawlOne(c) {
   const checked_at = new Date().toISOString();
-  const starts = [c.homepage, c.booking?.url].filter((u) => u && isOperatorHost(u) && !isClosedHost(u));
+  const starts = startsOf(c);
   const uniq = [...new Map(starts.map((u) => [new URL(withProto(u)).hostname.replace(/^www\./, ""), u])).values()];
   if (!uniq.length) return { status: isClosedHost(c.homepage ?? "") ? "SERVICE_CLOSED" : "NO_OPERATOR_SITE", url: c.homepage ?? null, checked_at };
   const all = [], urls = [], errors = [];
@@ -171,20 +175,30 @@ async function crawlOne(c) {
     for (const s of snippetsOf(r.pages)) if (!all.some((x) => x.text === s.text)) all.push(s);
   }
   if (!urls.length) return { status: errors.includes("ROBOTS_DISALLOWED") ? "ROBOTS_DISALLOWED" : errors.some((e) => /platform_redirect/.test(e)) ? "REDIRECTED_TO_PLATFORM" : "FETCH_FAILED", url: withProto(uniq[0]), checked_at, error: errors.join(",") || null };
-  return { status: all.length ? "OK" : "NO_RELEVANT_TEXT", url: urls[0], checked_at, rendered: renderedAny || undefined, pages: urls, snippets: all.slice(0, 160) };
+  const discovered = Boolean(discoveredOf(c) && uniq.includes(discoveredOf(c))) || undefined;
+  return { status: all.length ? "OK" : "NO_RELEVANT_TEXT", url: urls[0], checked_at, rendered: renderedAny || undefined, discovered, pages: urls, snippets: all.slice(0, 160) };
 }
 
 const fresh = (r) => r?.checked_at && Date.now() - Date.parse(r.checked_at) < maxAgeDays * 864e5;
 // 이전 실패·빈 결과·문장이 적은 곳은 --retry-failed로 다시 읽는다(ENOTFOUND도 www 유무 변형으로 살아날 수 있다).
 const retryable = (r) => RETRY_FAILED && r && (r.status === "NO_RELEVANT_TEXT" || r.status === "FETCH_FAILED" || r.status === "ERROR" || (r.status === "OK" && (r.snippets?.length ?? 0) < 8));
-const hasSite = (c) => [c.homepage, c.booking?.url].some((u) => u && isOperatorHost(u));
+// 시작 주소: 고캠핑 등록 홈페이지·예약 URL(운영자 호스트) + 카카오 발굴 홈페이지(등록 사이트가 없거나 지난 실행에서 죽은 곳)
+function startsOf(c) {
+  const own = [c.homepage, c.booking?.url].filter((u) => u && isOperatorHost(u) && !isClosedHost(u));
+  const dead = ["FETCH_FAILED", "SERVICE_CLOSED", "NO_OPERATOR_SITE"].includes(prev.campgrounds[c.id]?.status);
+  const found = discoveredOf(c);
+  return found && (!own.length || dead) ? [...own, found] : own;
+}
+const hasSite = (c) => startsOf(c).length > 0;
+// 죽은 사이트였는데 새로 발굴된 홈페이지가 생긴 곳은 확인 주기와 무관하게 바로 읽는다.
+const newlyFound = (c) => { const r = prev.campgrounds[c.id]; return Boolean(discoveredOf(c) && r && r.status !== "OK" && !r.discovered && startsOf(c).includes(discoveredOf(c))); };
 const doneSince = (r) => SINCE && (r?.last_attempt?.at ?? r?.checked_at ?? "") >= SINCE;
-const targets = camps.filter((c) => hasSite(c) && (!only || only.has(String(c.id))) && !doneSince(prev.campgrounds[c.id]) && (only || !fresh(prev.campgrounds[c.id]) || retryable(prev.campgrounds[c.id]))).slice(0, limit);
+const targets = camps.filter((c) => hasSite(c) && (!only || only.has(String(c.id))) && !doneSince(prev.campgrounds[c.id]) && (only || !fresh(prev.campgrounds[c.id]) || retryable(prev.campgrounds[c.id]) || newlyFound(c))).slice(0, limit);
 console.log(`운영자 사이트 대상 ${targets.length}곳 (동시 ${concurrency}${RENDER ? " · 렌더링 폴백" : ""})`);
 let done = 0;
 const stat = {};
 const byHost = new Map();
-for (const c of targets) { const h = new URL(withProto(c.homepage && isOperatorHost(c.homepage) ? c.homepage : c.booking.url)).hostname; (byHost.get(h) ?? byHost.set(h, []).get(h)).push(c); }
+for (const c of targets) { const h = new URL(withProto(startsOf(c)[0])).hostname; (byHost.get(h) ?? byHost.set(h, []).get(h)).push(c); }
 const hosts = [...byHost.values()];
 async function worker() {
   while (hosts.length) {
