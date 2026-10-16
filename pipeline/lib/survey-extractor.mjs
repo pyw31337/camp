@@ -4,6 +4,8 @@
  * 공식 소개글(intro, feature, guide, programs)을 바탕으로 정형화된 사실 데이터를 추출한다.
  */
 
+import { normalizeSiteDimension } from "./gocamping.mjs";
+
 // 주차 동선 판별 정규식
 // 주의: 고카트/카트체험 등 놀거리와 짐 운반용 수레를 엄격히 분리
 const CART_TRANSPORT_RE = /(?:짐\s*을?\s*(?:싣고|가지고|옮|운반)|손수레|짐수레|리어카|카트로\s*짐|수레를\s*이용|수레로\s*짐|모노레일.*짐|차량\s*진입\s*(?:불가|금지)|주차장.*수레|주차\s*후\s*도보\s*(?:이동|진입)|도보\s*이동\s*사이트|카트.*(?:야영장|사이트|이동).*옮)/;
@@ -326,7 +328,7 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
     : (Array.isArray(camp?.sizes) ? camp.sizes : []);
   let sizes = sizeEntries
     .filter(([width, depth]) => Number(width) > 0 && Number(depth) > 0)
-    .map(([width, depth, count]) => ({ width_m: Number(width), depth_m: Number(depth), count: Number(count) || null }));
+    .map(([width, depth, count]) => ({ width_m: normalizeSiteDimension(width), depth_m: normalizeSiteDimension(depth), count: Number(count) || null }));
   let sizesFrom = sizes.length ? "FIELD" : null;
 
   // 규격이 고캠핑 필드에 없는 경우 텍스트에서 보강

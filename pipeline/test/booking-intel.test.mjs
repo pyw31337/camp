@@ -2,8 +2,9 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import {
-  buildBookingGuide, classifyChannels, extractOpenRules, extractPlatformMentions, forestScope,
+  BOOKING_CHANNEL_PRIORITY, buildBookingGuide, classifyChannels, extractOpenRules, extractPlatformMentions, forestScope,
   nextOpenings, normalizeUrl, parseKoreanTime, parseTargetPeriod, platformOfUrl, splitSentences,
+  selectBookingChannel, sortBookingChannels,
 } from "../lib/booking-intel.mjs";
 
 const registry = JSON.parse(await readFile(new URL("../registry/booking-platforms.json", import.meta.url), "utf8"));
@@ -100,6 +101,22 @@ test("classifyChannels: 네이버 지도 링크는 예약 화면이 아닐 수 �
   const [c] = classifyChannels({ reservation: { url: "https://map.naver.com/p/entry/place/1234" } }, registry);
   assert.equal(c.platform_id, "naver");
   assert.equal(c.confidence, 0.6);
+});
+
+test("예약 전환 우선순위: 캠핏 → 네이버 → 땡큐캠핑 → 기타 온라인 → 홈페이지 → 전화", () => {
+  assert.deepEqual(BOOKING_CHANNEL_PRIORITY, { camfit: 0, naver: 10, thankqcamping: 20 });
+  const channels = [
+    { platform_id: "public-site", kind: "online", url: "https://reserve.example.kr/camp" },
+    { platform_id: "thankqcamping", kind: "online", url: "https://www.thankqcamping.com/camp/1" },
+    { platform_id: "naver", kind: "online", url: "https://booking.naver.com/booking/3/bizes/1" },
+    { platform_id: "camfit", kind: "online", url: "https://www.camfit.co.kr/camp/1" },
+    { platform_id: "homepage", kind: "homepage", url: "https://camp.example.kr" },
+    { platform_id: "phone", kind: "phone", url: "tel:01000000000" },
+  ];
+  assert.deepEqual(sortBookingChannels(channels).map((x) => x.platform_id), ["camfit", "naver", "thankqcamping", "public-site", "homepage", "phone"]);
+  assert.equal(selectBookingChannel(channels).platform_id, "camfit");
+  // 플랫폼 이름만 언급되고 URL이 없으면 실제 연결이 있는 다음 경로를 고른다.
+  assert.equal(selectBookingChannel([{ platform_id: "camfit", kind: "online", url: null }, channels[1]]).platform_id, "thankqcamping");
 });
 
 // ───────────── 시각·기간 파서 ─────────────

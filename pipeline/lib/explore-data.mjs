@@ -1,6 +1,7 @@
 import { themesOf } from "./themes.mjs";
-import { classifyChannels } from "./booking-intel.mjs";
+import { classifyChannels, selectBookingChannel } from "./booking-intel.mjs";
 import { extractCampConditions } from "./survey-extractor.mjs";
+import { normalizeSiteDimension } from "./gocamping.mjs";
 
 // 웹 탐색 화면용 데이터: 고캠핑 시설 + 주변 공중화장실 + 공식 안내 요금(TourAPI) + 예약처 규칙·다가오는 오픈 일정.
 // 원칙: 각 값의 출처·확인 시각을 함께 싣는다. 실시간 재고·판매가는 만들지 않는다(예약은 공식 예약처로 연결).
@@ -58,7 +59,7 @@ export function buildFieldConditions(campground, pilotFact = null, detail = null
     .map(([floor, count]) => ({ type: floor, count: Number(count) || null }));
   const sizes = sizeEntries(campground)
     .filter(([width, depth]) => Number(width) > 0 && Number(depth) > 0)
-    .map(([width, depth, count]) => ({ width_m: Number(width), depth_m: Number(depth), count: Number(count) || null }));
+    .map(([width, depth, count]) => ({ width_m: normalizeSiteDimension(width), depth_m: normalizeSiteDimension(depth), count: Number(count) || null }));
   const firePit = String(campground?.fire_pit ?? campground?.fire ?? "").trim() || null;
   const sourceUrl = campground?.gocamping_url ?? campground?.gc_url ?? null;
   const checkedAt = campground?.source?.fetched_at ?? campground?.modified_at ?? null;
@@ -141,6 +142,7 @@ export function buildExploreRecords(camps, toilets, fees, seoul = new Map(), not
       confidence: ch.confidence,
       evidence: ch.evidence,
     }));
+    const primaryChannel = selectBookingChannel(channels);
     return {
       id,
       name: c.name,
@@ -178,6 +180,9 @@ export function buildExploreRecords(camps, toilets, fees, seoul = new Map(), not
         url: bookingUrl,
         provider: providerOf(bookingUrl),
         channels,
+        // 모든 등록 경로는 보존하되, 화면 CTA는 이 한 경로만 사용한다.
+        // 캠핏 → 네이버 예약 → 땡큐캠핑 → 기타 온라인 → 홈페이지 → 전화 순서다.
+        primary: primaryChannel,
         source: {
           label: "고캠핑 운영자 등록 예약 정보",
           url: c.gocamping_url ?? null,
@@ -212,6 +217,14 @@ export function buildExploreRecords(camps, toilets, fees, seoul = new Map(), not
     const totalSites = (p.zones || []).reduce((sum, z) => sum + (Number(z.site_count) || 0), 0);
     const op = p.name.includes("[공립]") ? "LOCAL_GOVERNMENT" : p.name.includes("[국립]") ? "NATIONAL_PARK" : "PRIVATE";
 
+    const pilotChannels = [{
+      platform_id: p.primary_booking?.channel,
+      platform_name: channelName,
+      url: bookingUrl,
+      kind: "online",
+      confidence: 1.0,
+      evidence: ["pilot_verified"],
+    }];
     records.push({
       id: p.id,
       name: p.name,
@@ -248,14 +261,8 @@ export function buildExploreRecords(camps, toilets, fees, seoul = new Map(), not
         methods: ["온라인실시간예약"],
         url: bookingUrl,
         provider: providerOf(bookingUrl),
-        channels: [{
-          platform_id: p.primary_booking?.channel,
-          platform_name: channelName,
-          url: bookingUrl,
-          kind: "online",
-          confidence: 1.0,
-          evidence: ["pilot_verified"],
-        }],
+        channels: pilotChannels,
+        primary: selectBookingChannel(pilotChannels),
         source: {
           label: "모여라캠핑 파일럿 검증 원천",
           url: p.evidence?.source_url ?? null,

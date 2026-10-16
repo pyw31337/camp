@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { extractItems, fetchAllCampgrounds, normalizeCampground, parseGoCampingTime, serviceKeyParam, summarize } from "../lib/gocamping.mjs";
+import { extractItems, fetchAllCampgrounds, normalizeCampground, normalizeSiteDimension, parseGoCampingTime, serviceKeyParam, summarize } from "../lib/gocamping.mjs";
 
 // 공개 활용 사례의 응답 키를 따른 가상 표본(실제 시설 아님).
 const sample = {
@@ -28,6 +28,12 @@ test("상품 유형·사이트 규격·바닥을 구조화한다", () => {
   assert.equal(c.caravan_allowed, true);
   assert.equal(c.source.modified_at, "2026-10-10T09:30:00+09:00");
   assert.equal(c.source.tier, "A");
+});
+
+test("사이트 규격의 cm 등록값과 소수 m 값을 같은 m 단위로 정규화한다", () => {
+  assert.equal(normalizeSiteDimension("800"), 8);
+  assert.equal(normalizeSiteDimension("7.5"), 7.5);
+  assert.equal(normalizeSiteDimension("800cm"), 8);
 });
 
 test("빈 좌표와 알 수 없는 운영 주체를 추정하지 않는다", () => {

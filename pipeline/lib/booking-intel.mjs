@@ -49,6 +49,38 @@ export function platformOfUrl(url, registry = DEFAULT_REGISTRY) {
 const platformById = (registry, id) => (registry?.platforms ?? []).find((p) => p.id === id) ?? null;
 const SELF_IDS = new Set(["homepage", "public-site", "phone", "onsite"]);
 
+// 이 서비스의 예약 전환 원칙. 채널을 새로 만들거나 일반 검색 결과로 보내지 않고,
+// 해당 업장에 실제 등록된 URL 중 하나만 고른다. 예약 플랫폼의 상품·가격·재고를
+// 읽는 규칙과는 독립적인, 사용자 이동용 우선순위다.
+export const BOOKING_CHANNEL_PRIORITY = Object.freeze({
+  camfit: 0,
+  naver: 10,
+  thankqcamping: 20,
+});
+
+/** 예약 채널의 화면 노출·CTA 우선순위. 숫자가 작을수록 먼저 선택한다. */
+export function bookingChannelPriority(channel) {
+  const ch = channel ?? {};
+  if (ch.kind === "online") return BOOKING_CHANNEL_PRIORITY[ch.platform_id] ?? 30;
+  if (ch.kind === "homepage") return 40;
+  if (ch.kind === "phone") return 50;
+  if (ch.kind === "onsite") return 60;
+  return 70;
+}
+
+/** 같은 우선순위에서는 원천에 먼저 등록된 순서를 보존한다. */
+export function sortBookingChannels(channels = []) {
+  return [...channels]
+    .map((channel, index) => ({ channel, index }))
+    .sort((a, b) => bookingChannelPriority(a.channel) - bookingChannelPriority(b.channel) || a.index - b.index)
+    .map(({ channel }) => channel);
+}
+
+/** 실제 URL이 있는 최우선 예약/문의 경로. URL 없는 플랫폼 언급은 선택하지 않는다. */
+export function selectBookingChannel(channels = []) {
+  return sortBookingChannels(channels).find((channel) => channel?.url) ?? null;
+}
+
 /** 네이버 지도·플레이스 링크는 예약 화면이 아닐 수 있다 → confidence를 낮춘다 */
 function urlConfidence(platformId, url) {
   if (platformId === "naver") return /booking/i.test(url) ? 0.9 : 0.6;
@@ -103,7 +135,9 @@ export function classifyChannels(campground, registry = DEFAULT_REGISTRY) {
   if (methods.some((m) => /현장/.test(m))) push({ platform_id: "onsite", url: null, kind: "onsite", evidence: ["methods:현장"], confidence: 0.8 }, 6);
   if (tel && !out.some((ch) => ch.kind === "phone")) push({ platform_id: "phone", url: `tel:${tel.replace(/[^\d+]/g, "")}`, kind: "phone", evidence: ["contact.tel(문의)"], confidence: 0.5 }, 5);
 
-  return out.sort((a, b) => a.rank - b.rank).map(({ rank, ...ch }) => ch);
+  // 원천에 나온 순서는 보존하되, 사용자가 누를 첫 경로는 전환 우선순위로 정렬한다.
+  // 예: 고캠핑 예약 URL이 네이버이고 홈페이지가 캠핏이어도 캠핏을 먼저 쓴다.
+  return sortBookingChannels(out.sort((a, b) => a.rank - b.rank).map(({ rank, ...ch }) => ch));
 }
 
 // ───────────────────────── 문구 정규화·분할 ─────────────────────────
@@ -474,11 +508,9 @@ export function buildBookingGuide(campground, platformsRegistry = DEFAULT_REGIST
     channels.push({ platform_id: men.platform_id, platform_name: platformById(reg, men.platform_id)?.name ?? null, url: men.url ?? null, kind: "online", evidence: [`text:${men.field ?? "extra"}`], confidence: 0.4, snippet: men.snippet });
   }
 
-  const primary = channels.find((ch) => ch.kind === "online" && ch.platform_id && ch.url)
-    ?? channels.find((ch) => ch.kind === "online" && ch.platform_id)
-    ?? channels.find((ch) => ch.kind === "homepage")
-    ?? channels.find((ch) => ch.kind === "phone")
-    ?? channels[0] ?? null;
+  const primary = selectBookingChannel(channels)
+    ?? sortBookingChannels(channels).find((ch) => ch.kind === "online" && ch.platform_id)
+    ?? sortBookingChannels(channels)[0] ?? null;
   const platformId = primary ? (primary.platform_id ?? (primary.kind === "homepage" ? "homepage" : null)) : null;
   const platform = platformById(reg, platformId);
 
@@ -535,6 +567,7 @@ export function buildBookingGuide(campground, platformsRegistry = DEFAULT_REGIST
     version: 1,
     generated_at: toKstIso(nowInKst(now.getTime())),
     channels,
+    primary_channel: primary,
     platform: pickPlatform(platform),
     steps,
     open_rules,

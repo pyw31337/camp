@@ -10,7 +10,7 @@
 - 기준 설계: 전국 등록 야영장은 한국관광공사 고캠핑 API를 기준 모수로 삼고, 실제 재고·가격은 공식 예약 채널에서 별도 확인한다.
 - 데이터 모델: PostgreSQL 16+용 초기 스키마가 `db/001_initial_schema.sql`에 있다. 시설·구역·상품·재고·요금·예약 정책·원천 증빙·미디어 권리를 분리한다.
 - 내 캠핑 세팅 UI: 탐색 화면은 장비 크기·전력·텐트 옆 주차·장작 불멍으로 `MATCH`/`CONDITIONAL`/`UNKNOWN`/`MISMATCH`를 계산한다. 현재 공개 카탈로그의 사실이 없으면 `UNKNOWN`으로 남기며, `condition_fact` 파일럿을 공개 읽기 모델에 연결할 때만 해당 값의 원천·검증 상태를 화면 근거로 승격한다.
-- 디자인: 공개 화면 기준은 **v4.2 “Ink & Leaf”**(`design/brand-tokens.mjs`, `design/explore/_v4.css`)다. 별도 검토용 **Vision 01**을 `design/vision/` → `scripts/publish-vision-mockup.mjs` → `/camp/vision/`으로 발행했다. 사용자 승인 전 기존 화면을 교체하지 않는다.
+- 디자인: 공개 탐색 화면은 **v4.2 “Ink & Leaf”**(`design/brand-tokens.mjs`, `design/explore/_v4.css`)다. Vision 01의 사진 중심 카드·큰 이름·짧은 정형 스펙·키워드/테마/지도 탐색 원칙을 실제 `/explore/`에 이식했다. `design/vision/`은 별도 검토 시안으로 보존한다.
 - 운영 전제: 무료 운영, 로그인 보류. 알림은 `.ics` 구독, 관심 목록은 브라우저 저장. 소유자 작업은 `docs/OWNER_TODO.md`.
 - **주소 통일(2026-10-13, 소유자 요청)**: 서비스 주소는 https://pyw31337.github.io/camp/ 하나다. Cloudflare Pages(`*.moyeora-6pd.pages.dev`)와 `deploy-cloudflare.yml`·`scripts/assemble-site.mjs`는 폐기했다. 전국 캠핑장 탐색 화면은 `/camp/explore/`에 둔다: main의 `data-sync.yml` 마지막 단계가 `scripts/publish-explorer-pages.mjs`로 `camping-atlas/public/explore/`(화면 + `data/campgrounds.json`·`meta.json`)를 만들어 커밋하고, `deploy-pages.yml`은 `workflow_run`(Data sync 완료, main)으로도 실행된다(GITHUB_TOKEN 커밋은 push 워크플로를 깨우지 않기 때문). 홈 상단 ‘전국 캠핑장 찾기’와 하단 ‘찾기’가 `explore/`로 연결된다. 카카오 JS SDK 도메인에 `https://pyw31337.github.io` 등록 필요(소유자).
 - 파이프라인: `pipeline/`에 고캠핑 수집·정규화, 예약 규칙 레지스트리, 예약 오픈 캘린더 계산기와 테스트가 있다. `data-sync.yml`이 매일 실행되며 키가 없으면 고캠핑 단계는 건너뛴다.
@@ -409,6 +409,17 @@ Codex 요청 사항을 `pipeline/lib/survey-extractor.mjs` 및 `design/explore/_
 4. **파일 소유권 준수**: Codex 소유의 `pilot-condition-facts.json`, `pilot-review-queue.json`, `pilot-condition-facts.mjs`는 일체 변경 없이 보존.
 
 ## 최근 변경
+
+### 실제 탐색 카드·예약 경로 정리 (2026-10-16, Codex)
+
+사용자 요구를 기존 Gemini/Claude 산출물에 맞춰 실제 탐색 화면에 반영했다. Gemini가 만든 전국 카탈로그·현장 조건/관측 읽기 모델과 Claude의 운영자 사실·정형 스펙·후기 요약·공식 사진 계약은 그대로 사용하고, 이번 작업은 그 정보를 짧고 균일한 선택 화면으로 바꾸는 범위다.
+
+1. **카드**: 화면 근처에 들어온 카드만 개별 상세의 공식 사진을 읽어 최대 5장까지 스와이프/드래그한다. Pages에 없는 로컬 파생본보다 고캠핑·TourAPI 공식 원격 사진을 먼저 써 첫 카드가 비지 않게 했다. 블로그·방문자 검색 사진은 카드 캐러셀에 섞지 않는다. 주차·전기·장작/숯·규격 중 출처가 확인된 값만 `01~03` 행과 컬러 배지로 표시한다. 알 수 없는 값은 카드에서 숨긴다. 일부 고캠핑 규격이 `800×900`처럼 cm로 들어온 기존·신규 데이터도 `8×9m`로 정규화한다.
+2. **상세**: 미확인 값은 정형 스펙표 안에서만 회색 `확인 필요` 텍스트로 보인다. 현장 대여·아이 놀거리·후기 속 1박 요금·시설 배치도·영상/방문자 사진·플랫폼별 외부 링크·주변 시설 썸네일은 원천/표시 권한이 있는 기존 상세 데이터로 유지한다. 출처/근거는 `i` 정보 안에 보존한다.
+3. **예약**: `booking.primary`를 발행해 실제 등록 URL 하나만 CTA로 쓴다. 우선순위는 **캠핏 → 네이버 예약 → 땡큐캠핑 → 기타 온라인 예약 → 공식 홈페이지 → 전화**다. 시설과 무관한 플랫폼 일반검색 폴백은 제거했다. 예약 잔여 수는 승인된 원천의 관측/실시간 API가 있을 때만 별도 상태로 보이며, 예약 링크만으로 빈자리를 만들지 않는다.
+4. **판정/표현/스크롤**: 법정 참고 600W·오토 업종·장작 판매는 실제 전력 W·텐트 옆 주차·장작 허용으로 추정하지 않는다. 내 세팅의 맞음/맞지 않음은 원문 대조 조건으로만 계산한다. 탐색·보조 페이지 모두 강제 `word-break: keep-all`을 공통 규칙으로 덮어 자연스럽게 줄바꿈한다. 문서가 유일한 세로 스크롤 소유자이고, 사진·칩 레일의 스크롤바는 감춘다. 가로 레일은 스와이프/드래그로만 이동한다.
+
+검증: `node --check design/explore/_app.js`, `node --check design/site-header.mjs`, `node design/build-explore.mjs`, `node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public/explore` 통과. `pipeline npm test` **251개 중 249 통과·0 실패·DB 미연결 2개 정상 스킵**. `npm --prefix camping-atlas run lint` 오류 0(기존 내부 이동 경고 2개), `npm --prefix camping-atlas run build:pages` 통과. `npm --prefix pipeline run check:billing`은 외부 서비스의 무료 안전 구간을 통과했다(로컬 `DATABASE_URL` 미설정이라 DB 용량 조회만 건너뜀). 로컬 `/explore/`와 `#c=1554`에서 전국 목록, 공식 사진 5장 레일, 네이버 실제 예약 URL, 정형 상세 블록을 확인했다. DB 마이그레이션은 추가하지 않았다.
 
 ### 콘텐츠·예약·시각 배지 협업 경계 (2026-10-15, Codex)
 
