@@ -63,13 +63,28 @@ jobs:
           # 유료 방지: 저장소 변수로 끄기·월 상한 조정(기본 20,000건, 무료 한도 775,000건)
           NAVER_API_ENABLED: ${{ vars.NAVER_API_ENABLED }}
           NAVER_MONTHLY_CAP: ${{ vars.NAVER_MONTHLY_CAP }}
-      - name: Read operator homepages
-        run: node scripts/crawl-operator-sites.mjs --concurrency 10 --render --retry-failed --max-age-days "${{ github.event.inputs.max_age_days || '14' }}"
-      - name: Commit refreshed snippets
+      # 장소 맞춤 결과는 홈페이지 읽기(수십 분~수 시간)를 기다리지 않고 바로 커밋한다.
+      # 읽기가 실패·취소돼도 카카오·네이버 매칭 결과는 남는다.
+      - name: Commit place matches (Kakao · Naver) now
+        if: always()
         run: |
           git config user.name "moyeora-camping-data-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add registry/operator-site-snippets.json; git add registry/kakao-places.json registry/naver-places.json registry/naver-usage.json 2>/dev/null || true
+          for f in registry/kakao-places.json registry/naver-places.json registry/naver-usage.json; do if [ -f "$f" ]; then git add "$f"; fi; done
+          if git diff --cached --quiet; then echo "장소 맞춤 변경 없음."; exit 0; fi
+          git commit -m "chore(data): refresh Kakao·Naver place matches"
+          git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"
+          git push
+      - name: Read operator homepages
+        run: node scripts/crawl-operator-sites.mjs --concurrency 10 --render --retry-failed --max-age-days "${{ github.event.inputs.max_age_days || '14' }}"
+      - name: Commit refreshed snippets
+        # 읽기가 중간에 실패·취소돼도 그때까지 저장된 문장은 남긴다(크롤러는 25곳마다 파일에 저장).
+        if: always()
+        run: |
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add registry/operator-site-snippets.json
+          for f in registry/kakao-places.json registry/naver-places.json registry/naver-usage.json; do if [ -f "$f" ]; then git add "$f"; fi; done
           if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
           git commit -m "chore(data): refresh operator homepage snippets"
           git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"
