@@ -184,3 +184,10 @@ test("파일럿 검증: 구역별 주차가 섞이면 텐트 옆 주차를 확�
   assert.equal(fact.fire_pit.arrangement, null);
   assert.equal(fact.shelter_setup.max_tarps, null);
 });
+
+test("전수조사 추출: 천 단위 쉼표 W(1,100w)를 100W로 잘못 읽지 않는다", () => {
+  const f1 = extractCampConditions({ amenities: ["전기"] }, { intro: "캠핑장 전력은 1,100w까지이며 고전력기기 사용은 금지됩니다." });
+  assert.equal(f1.power.limit_w, 1100);
+  const f2 = extractCampConditions({ amenities: ["전기"] }, { intro: "전기요(최대180W이하) 2장까지 사용 가능합니다." });
+  assert.equal(f2.power.limit_w, null);
+});
