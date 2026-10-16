@@ -675,7 +675,7 @@ function drawMap() {
   const visible = inView.filter((c) => strict.contains([c.lat, c.lng])).sort((a, b2) => rich(b2) - rich(a));
   $("[data-mcount]").textContent = fmt(visible.length);
   mapLayer.clearLayers();
-  const cell = z >= 12 ? 0 : 54, buckets = new Map();
+  const cell = z >= 12 ? 0 : z >= 10 ? 60 : 90, buckets = new Map();
   for (const c of inView) {
     const p = MAP.latLngToLayerPoint([c.lat, c.lng]);
     const k = cell ? `${Math.floor(p.x / cell)}:${Math.floor(p.y / cell)}` : c.id;
