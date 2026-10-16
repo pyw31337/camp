@@ -22,7 +22,7 @@ const previousAvailability = !shellOnly && existsSync(`${out}data/availability.j
 if (!shellOnly) { await rm(out, { recursive: true, force: true }); await mkdir(`${out}data`, { recursive: true }); }
 const kakaoKey = (process.env.KAKAO_JS_KEY ?? "").replace(/[^A-Za-z0-9]/g, "");
 const supabaseUrl = process.env.SUPABASE_URL || "https://zgnetdxqzsnmzdvoxzbw.supabase.co";
-const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_PUBLISHABLE_KEY || "";
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || "";
 const body = await readFile(`${root}design/explore/index.html`, "utf8");
 await writeFile(`${out}index.html`, `<!doctype html>
 <html lang="ko">
