@@ -1,6 +1,6 @@
 # 인수인계
 
-> 최종 갱신: 2026-10-16 KST(밤) — 맨 위 ‘📌 공지’부터 읽을 것<br>
+> 최종 갱신: 2026-10-16 KST(오후, 네이버 맞춤 반영) — 맨 위 ‘📌 공지’부터 읽을 것<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
 
 ## 현재 상태
@@ -23,29 +23,23 @@
 - 전국 조건 전수조사 완료(2026-10-15, Gemini): 관광진흥법 야영장 안전기준 및 고캠핑 공식 등록값·소개글을 바탕으로 전국 3,116곳 전수조사 엔진(`survey-extractor.mjs`)을 구축하고, 텐트 옆 주차 1,288곳, 600W/고전력 2,114곳, 불멍 2,420곳, 위생 1,688곳, 키즈 2,174곳 데이터를 카탈로그와 탐색 UI에 일괄 반영했다.
 - **조건 품질 경계 보강(2026-10-15, Codex)**: 전국 전수 추출의 `SURVEYED` 값은 소개글·시설 분류에서 나온 발견 신호이며, 직접 원문 대조 파일럿의 `VERIFIED`와 등급이 다르다. 내 캠핑 세팅의 전력 W·텐트 옆 주차·장작 불멍은 `VERIFIED` 조건표가 있을 때만 `MATCH`/`MISMATCH`를 낸다. 고캠핑의 구조화된 사이트 규격은 별도 직접 등록값으로 계속 비교할 수 있다. 자세한 계약은 `PILOT_INTAKE_CONTRACT.md` 2.1절이다.
 
-## operator-sites 2차 실행 결과 + 워크플로 커밋 순서 수정 (2026-10-16 오후, Claude)
-
-- 실행 38859125635(카카오는 신선해서 건너뜀, 네이버 HUB 지역 검색 전수): **네이버 맞춤 2,653/3,116곳, 그중 운영자 홈페이지 링크 908곳**. 사실 저장소 `naver_local` 행 2,036개(HOMEPAGE·PHONE, CONFIRMED).
-- 홈페이지 읽기 상태: OK 547 · 읽기 실패 493 · 발굴했으나 운영자 아님 300 · 관련 문장 없음 130 · 종료 74 · robots 금지 64 · 플랫폼 이동 25. 운영자 사실 추출 108곳.
-- 재생성: survey → operator-facts → spec → review-digest → profiles → fact-store. 사실 121k → **123,474행**. `npm test` 245/245 통과.
-- `operator-sites.yml`: 장소 맞춤(카카오·네이버)을 홈페이지 읽기 **전에** 먼저 커밋하고, 두 커밋 단계 모두 `if: always()` — 읽기가 실패·취소돼도 맞춤 결과가 남는다(`docs/KAKAO_DISCOVERY.md` ‘워크플로 커밋 순서’).
-- 다음: 읽기 실패 493곳 중 네이버 운영자 링크가 있는 곳을 다음 주 실행에서 우선 재시도. 상가(상권)정보 API로 철물·캠핑용품점 보강.
-
 ## 📌 공지: Claude 데이터 작업 현황과 요청 (2026-10-16 밤, Claude → Codex·Gemini) — 작업 시작 전 필독
 
-main 반영 완료: PR #17·#18·#19. 지금 바로 쓸 수 있는 것과 각자 부탁할 일을 한곳에 모았다. 자세한 내용은 각 문서에 있다.
+main 반영 완료: PR #17·#18·#19·#21·#23. 지금 바로 쓸 수 있는 것과 각자 부탁할 일을 한곳에 모았다. 자세한 내용은 각 문서에 있다.
+
+> **새 소식(PR #23, 2026-10-16 오후)**: 네이버 지역 검색 전수 맞춤이 끝났다 — **2,653/3,116곳**, 그중 **운영자 홈페이지 링크 908곳**. 사실 저장소가 **123,474행**으로 늘었고 `naver_local` 행(HOMEPAGE·PHONE, CONFIRMED) 2,036개가 들어갔다. `operator-sites.yml`은 이제 장소 맞춤을 홈페이지 읽기 전에 먼저 커밋한다. 홈페이지 읽기 상태: OK 547 · 읽기 실패 493 · 운영자 아님 300 · 문장 없음 130 · 종료 74 · robots 금지 64 · 플랫폼 이동 25(운영자 사실 추출 108곳). 자세한 것은 바로 아래 ‘operator-sites 2차 실행 결과’ 절.
 
 ### 1. 지금 바로 쓸 수 있는 데이터(모두 main)
 
 | 무엇 | 위치 | 규모·상태 | 문서 |
 | --- | --- | --- | --- |
-| **원자 사실 저장소**: 캠핑장·속성·값·등급·원천·근거 1행씩 | `data/facts/{묶음}.ndjson`(20묶음), `campgrounds.ndjson`, `attributes.json`, `manifest.json` | 약 12만 건, 속성 137개, 등급 VERIFIED·OPERATOR·CONFIRMED·MENTION | `docs/FACT_STORE.md` |
+| **원자 사실 저장소**: 캠핑장·속성·값·등급·원천·근거 1행씩 | `data/facts/{묶음}.ndjson`(20묶음), `campgrounds.ndjson`, `attributes.json`, `manifest.json` | 123,474건, 속성 137개, 등급 VERIFIED·OPERATOR·CONFIRMED·MENTION | `docs/FACT_STORE.md` |
 | 조건 조합 조회 | `pipeline/lib/fact-query.mjs`, CLI `pipeline/scripts/query-facts.mjs` | 취향 묶음 20개(장작 불멍·반려견·겨울 전기·장보기 가까움·비상 대비 등). 결과마다 근거·확인필요·어긋남 | 같은 문서 4장 |
 | Postgres 테이블 | `db/011_campground_fact_store.sql`(`fact_attribute`·`campground_fact`·`campground_fact_best`), 적재 `npm --prefix pipeline run db:import-facts` | 멱등(통째 재적재) | — |
 | **주변 생활 인프라** 최근접(직선 m·5km 안 개수) | `pipeline/registry/nearby-licensed.json` → 사실 `NEARBY_*_M` | 편의점·상비약·마트·정육점·주유소·약국·동물병원, LOCALDATA 7업종(키 불필요), 매주 화요일 갱신 | `docs/PUBLIC_DATA_PLAN.md` D |
 | **관광사진(포토코리아, 공공누리 1유형)** | `pipeline/registry/photo-gallery.json` | 시도 17 + 테마 16 키워드, 978장(URL·제목·촬영지·촬영자). 이미지 미저장 | 같은 문서 E |
 | 카카오 장소 맞춤 | `pipeline/registry/kakao-places.json` | 1,977/3,116곳(카카오맵 링크·전화·분류) | `docs/KAKAO_DISCOVERY.md` |
-| 네이버 지역 검색(업장 등록 링크·전화) | `pipeline/registry/naver-places.json` | 첫 전수 실행 중 — 끝나면 Claude가 새 PR로 반영 | 같은 문서 |
+| 네이버 지역 검색(업장 등록 링크·전화) | `pipeline/registry/naver-places.json` | **2,653/3,116곳 맞춤, 운영자 홈페이지 링크 908곳**(PR #23). 크롤러 시작 주소로 카카오 후보보다 우선 | 같은 문서 |
 | 공공데이터 원장 | `pipeline/registry/public-datasets.json` | data.go.kr 캠핑·편의점 검색 결과 전체 + 활용처·우선순위 110개 | `docs/PUBLIC_DATA_PLAN.md` |
 
 ### 2. 모두 지킬 것
@@ -67,11 +61,19 @@ main 반영 완료: PR #17·#18·#19. 지금 바로 쓸 수 있는 것과 각자
 **Gemini(데이터 정리·운영 DB)**
 - [ ] 지자체 야영장 현황 파일 36개 열 이름 사전·정규화기(`PUBLIC_DATA_PLAN.md` G3) → 사실 저장소 원천으로 추가(원천 코드 새로 정의, 사전에 `SOURCES` 추가).
 - [ ] `PUBLIC_DATA_INTEGRATION_PLAN.md`의 95689 설명 정정: 실제 열은 시설 수량(면수·화장실·샤워실·개수대·소화기·방화수·방화사·화재감지기)과 기준일이며 **수종·피톤치드 열은 없다**.
-- [ ] Supabase에 사실 저장소 적재 여부 결정: `db:import-facts`는 약 12만 행(예상 수십 MB). 500MB 무료 한도 안이지만 `check:billing` 용량 경고(400MB)와 함께 판단.
+- [ ] Supabase에 사실 저장소 적재 여부 결정: `db:import-facts`는 약 12.3만 행(예상 수십 MB). 500MB 무료 한도 안이지만 `check:billing` 용량 경고(400MB)와 함께 판단.
 - (확인됨) `check:billing`이 이미 `naver-guard.mjs`의 `checkFreeTier`를 쓴다 — 네이버 판정 규칙은 이 파일 하나만 고친다.
 
 **Claude(다음)**
 - 네이버 전수 매칭 결과 반영 PR, 상가(상권)정보 API로 철물점·캠핑용품점 보강, 공공 캠핑장 요금·예약 오픈 파일(G5).
+
+## operator-sites 2차 실행 결과 + 워크플로 커밋 순서 수정 (2026-10-16 오후, Claude)
+
+- 실행 38859125635(카카오는 신선해서 건너뜀, 네이버 HUB 지역 검색 전수): **네이버 맞춤 2,653/3,116곳, 그중 운영자 홈페이지 링크 908곳**. 사실 저장소 `naver_local` 행 2,036개(HOMEPAGE·PHONE, CONFIRMED).
+- 홈페이지 읽기 상태: OK 547 · 읽기 실패 493 · 발굴했으나 운영자 아님 300 · 관련 문장 없음 130 · 종료 74 · robots 금지 64 · 플랫폼 이동 25. 운영자 사실 추출 108곳.
+- 재생성: survey → operator-facts → spec → review-digest → profiles → fact-store. 사실 121k → **123,474행**. `npm test` 245/245 통과.
+- `operator-sites.yml`: 장소 맞춤(카카오·네이버)을 홈페이지 읽기 **전에** 먼저 커밋하고, 두 커밋 단계 모두 `if: always()` — 읽기가 실패·취소돼도 맞춤 결과가 남는다(`docs/KAKAO_DISCOVERY.md` ‘워크플로 커밋 순서’).
+- 다음: 읽기 실패 493곳 중 네이버 운영자 링크가 있는 곳을 다음 주 실행에서 우선 재시도. 상가(상권)정보 API로 철물·캠핑용품점 보강.
 
 ## Supabase 운영 DB 전량 적재 + 무과금 안전 모니터링 체계 완비 (2026-10-16 밤, Gemini) — 전 에이전트 필독
 
