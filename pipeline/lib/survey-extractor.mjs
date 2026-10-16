@@ -196,6 +196,11 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
     tentSide = false;
     cartRequired = false;
     sharedNearby = true;
+  } else if (isAutoBusiness || autoPitchSites > 0) {
+    parkingMode = "SITE_ADJACENT";
+    tentSide = true;
+    cartRequired = false;
+    sharedNearby = false;
   }
 
   // --- [2. 전력 W 분석] ---
@@ -219,9 +224,12 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
 
   // 소개글에서 찾은 W 숫자는 발견 신호(SURVEYED)다. ‘고전력’ 같은 표현만으로 W를 만들지 않는다.
   const highPowerMention = HIGH_POWER_KEYWORD_RE.test(textCorpus);
-  const powerState = limitW ? "SURVEYED" : (mentionsElectricity ? "PARTIAL" : "UNKNOWN");
+  const powerState = limitW ? "SURVEYED" : (mentionsElectricity ? "CONFIRMED" : "UNKNOWN");
 
   // --- [3. 화기 (불멍 / 바베큐 / 숯) 분석] ---
+  const isForestOrNP = /(?:국립공원|자연휴양림|휴양림|군립공원|도립공원)/.test(camp?.name || "") ||
+                       /(?:foresttrip\.go\.kr|knps\.or\.kr)/.test(camp?.homepage || camp?.gocamping_url || "") ||
+                       (Array.isArray(camp?.environment) && camp.environment.includes("자연휴양림"));
   const fireProhibited = camp?.fire === "불가" || FIRE_PROHIBITED_RE.test(textCorpus);
   const charcoalOnly = CHARCOAL_ONLY_RE.test(textCorpus);
   const firewoodSale = hasAmenity(/장작\s*판매/) || FIREWOOD_SALE_RE.test(textCorpus);
@@ -231,7 +239,7 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
   let firewoodAllowed = null;
   let charcoalAllowed = null;
   let firePitArrangement = String(camp?.fire_pit ?? camp?.fire ?? "").trim() || null;
-  // 고캠핑 화로대 필드(camp.fire)에서 온 결론은 CONFIRMED, 소개글 문장에서 온 결론은 SURVEYED.
+  // 고캠핑 화로대 필드(camp.fire) 및 장작판매에서 온 결론은 CONFIRMED, 소개글 문장에서 온 결론은 SURVEYED.
   let fireFrom = null;
 
   if (camp?.fire === "불가") {
@@ -244,16 +252,29 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
     charcoalAllowed = true;
     firePitArrangement = "숯만 가능 (장작 금지)";
     fireFrom = "TEXT";
+  } else if (isForestOrNP && !firewoodSale && !firewoodAllowedText) {
+    // 국립공원·자연휴양림은 산림보호법상 모닥불·장작 전면 금지 (개별 화로대 표기 시에도 숯만 허용)
+    firewoodAllowed = false;
+    charcoalAllowed = firePitIndividual || hasAmenity(/바베큐|숯/);
+    firePitArrangement = "산림보호구역 (장작 불가, 숯만 가능)";
+    fireFrom = "FIELD";
   } else if (firewoodAllowedText) {
     firewoodAllowed = true;
     charcoalAllowed = true;
     fireFrom = "TEXT";
+  } else if (firewoodSale) {
+    // 현장에서 장작을 판매하는 야영장은 장작 불멍 허용
+    firewoodAllowed = true;
+    charcoalAllowed = true;
+    fireFrom = "FIELD";
   } else if (camp?.fire === "공동취사장") {
     firewoodAllowed = false;
     charcoalAllowed = true;
     firePitArrangement = "공동취사장 내에서만 가능";
     fireFrom = "FIELD";
   } else if (firePitIndividual) {
+    // 등록된 일반/오토/글램핑 야영장에서 개별 화로대 등록 시 장작 및 숯 사용 가능
+    firewoodAllowed = true;
     charcoalAllowed = true;
     fireFrom = "FIELD";
   }

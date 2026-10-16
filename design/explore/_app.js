@@ -1082,7 +1082,7 @@ function nearBlock(c, d) {
 
     const visual = p.img ? `<img src="${esc(remoteImg(p.img))}" alt="${esc(name)} 사진" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentElement.classList.add('no-photo');this.remove()">` : `<span class="poi-visual ${g}">${brandBadge || ic(g === "toilet" ? "#l-toilet" : g === "mart" || g === "conv" ? "#l-shopping-cart" : g === "rest" ? "#l-coffee" : g === "fuel" ? "#l-fuel" : g === "medical" ? "#l-shield-check" : "#l-map-pin")}</span>`;
     const actions = p.lat ? `<div class="near-actions"><a class="btn-roadview-direct" href="${esc(roadviewLink(p.lat, p.lng))}" target="_blank" rel="noopener">${ic("#l-camera", "i-xs")}로드뷰 바로가기${ic("#l-arrow-up-right", "i-xs")}</a><a href="${esc(p.u ?? mapLink(name, p.lat, p.lng))}" target="_blank" rel="noopener">카카오 지도${ic("#l-arrow-up-right", "i-xs")}</a><a href="${esc(naverMapLink(name))}" target="_blank" rel="noopener">네이버 지도${ic("#l-arrow-up-right", "i-xs")}</a><button type="button" data-roadview="${p.lat},${p.lng}" data-roadview-name="${esc(name)}">이 화면에서 보기</button></div>` : "";
-    return `<article class="near-card"><div class="near-visual${p.img ? "" : " no-photo"}">${visual}</div><div class="near-copy"><div><b>${esc(name)}</b><small>${esc(meta || "주변 편의 정보")}</small></div>${actions}</div>${p.m != null ? `<strong class="m">${km(p.m)}</strong>` : ""}</article>`;
+    return `<article class="near-card"><div class="near-visual${p.img ? "" : " no-photo"}" ${p.lat ? `data-rv-thumb="${p.lat},${p.lng}" data-roadview="${p.lat},${p.lng}" data-roadview-name="${esc(name)}" title="클릭 시 로드뷰 보기"` : ""}>${visual}</div><div class="near-copy"><div><b>${esc(name)}</b><small>${esc(meta || "주변 편의 정보")}</small></div>${actions}</div>${p.m != null ? `<strong class="m">${km(p.m)}</strong>` : ""}</article>`;
   }).join("")}</div>`).join("")}
   <div class="roadview-slot" id="roadviewSlot"></div>
   <span class="trust">직선거리 기준 · ‘로드뷰 바로가기’는 시설 근처 실제 도로 파노라마 · 데이터: 한국관광공사 TourAPI, OpenStreetMap(© 기여자, ODbL), 행정안전부, 한국도로공사</span>`;
@@ -1843,6 +1843,7 @@ async function loadDetail(c) {
   }
   const slot = $("#introSlot"); if (slot) slot.innerHTML = introHtml(DETAIL.get(c.id));
   tipify($(".sheet-panel"));
+  loadNearbyRoadviewThumbs($(".sheet-panel"));
   mountGiscus(c);
 }
 function mountGiscus(c) {
@@ -1868,8 +1869,44 @@ function mountRoadview(value, name) {
   const client = new kakao.maps.RoadviewClient();
   // Kakao 공식 예제와 같이 가까운 파노라마만 찾는다. 촬영 지점이 없으면 억지로 다른 장소를 보여 주지 않는다.
   client.getNearestPanoId(position, 100, (panoId) => {
-    if (panoId) { roadview.setPanoId(panoId, position); return; }
+    if (panoId) {
+      roadview.setPanoId(panoId, position);
+      slot.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      return;
+    }
     slot.innerHTML = `<div class="roadview-empty"><b>${esc(name)} 근처의 로드뷰가 없습니다.</b><p data-wrap-ok>도로 촬영 지점은 장소마다 다릅니다. 지도로 위치와 진입로를 확인하세요.</p>${fallback}</div>`;
+    slot.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+}
+function loadNearbyRoadviewThumbs(container) {
+  if (!window.kakao?.maps?.RoadviewClient) return;
+  const client = new kakao.maps.RoadviewClient();
+  const thumbs = (container || document).querySelectorAll("[data-rv-thumb]:not([data-rv-loaded])");
+  thumbs.forEach((el) => {
+    el.setAttribute("data-rv-loaded", "1");
+    const [lat, lng] = (el.dataset.rvThumb || "").split(",").map(Number);
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+    const pos = new kakao.maps.LatLng(lat, lng);
+    client.getNearestPanoId(pos, 100, (panoId) => {
+      if (panoId) {
+        const img = document.createElement("img");
+        img.src = `https://map2.daum.net/map/mapservice?service=openroadview&panoId=${panoId}&IW=320&IH=200&MX=${lng}&MY=${lat}&CRS=WGS84&SCALE=2.5`;
+        img.alt = el.dataset.roadviewName ? `${el.dataset.roadviewName} 로드뷰` : "주변 로드뷰";
+        img.loading = "lazy";
+        img.className = "rv-thumb-img";
+        img.onerror = () => { img.remove(); };
+        img.onload = () => {
+          el.classList.remove("no-photo");
+          el.classList.add("has-rv-thumb");
+          el.innerHTML = "";
+          el.appendChild(img);
+          const badge = document.createElement("span");
+          badge.className = "rv-indicator";
+          badge.innerHTML = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>로드뷰`;
+          el.appendChild(badge);
+        };
+      }
+    });
   });
 }
 // 탐색 상태(테마·권역·시군구)를 주소에 남겨 그대로 공유할 수 있게 한다.
@@ -1951,6 +1988,7 @@ document.addEventListener("click", (e) => {
   if (t.dataset.near) {
     $$("[data-near]").forEach((b) => b.setAttribute("aria-selected", String(b === t)));
     $$("[data-near-panel]").forEach((p) => { p.hidden = p.dataset.nearPanel !== t.dataset.near; });
+    loadNearbyRoadviewThumbs();
     return;
   }
   if (t.dataset.roadview) return mountRoadview(t.dataset.roadview, t.dataset.roadviewName || "주변 시설");
