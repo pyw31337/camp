@@ -14,7 +14,7 @@ import { guideLinks, htmlToText, isClosedHost, isOperatorHost, parseRobots, rele
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const camps = JSON.parse(readFileSync(join(root, "camping-atlas/public/explore/data/campgrounds.json"), "utf8"));
-const outPath = join(root, "pipeline/registry/operator-site-snippets.json");
+const registryPath = join(root, "pipeline/registry/operator-site-snippets.json");
 const flag = (k) => process.argv.includes(k);
 const arg = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : d; };
 const limit = Number(arg("--limit", 0)) || Infinity;
@@ -23,11 +23,15 @@ const concurrency = Number(arg("--concurrency", 12));
 const maxAgeDays = Number(arg("--max-age-days", 14));
 const RENDER = flag("--render");
 const RETRY_FAILED = flag("--retry-failed");
+// --out: 긴 수집 중에는 레지스트리 대신 다른 파일에 써 두고, 끝난 뒤 옮긴다(작업 트리가 계속 바뀌지 않게).
+const outPath = resolve(arg("--out", registryPath));
+// --since: 이 시각 이후 이미 다시 읽은 곳은 건너뛴다(중단된 수집 이어 하기).
+const SINCE = arg("--since", "");
 const MAX_PAGES = 8;
 const UA = "MoyeoraCampBot/1.0 (+https://github.com/pyw31337/camp; operator-published facts only)";
 const BROWSER_UA = `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0 Safari/537.36 ${UA}`;
 
-const prev = existsSync(outPath) ? JSON.parse(readFileSync(outPath, "utf8")) : { campgrounds: {} };
+const prev = existsSync(outPath) ? JSON.parse(readFileSync(outPath, "utf8")) : existsSync(registryPath) ? JSON.parse(readFileSync(registryPath, "utf8")) : { campgrounds: {} };
 const result = { ...prev, campgrounds: { ...prev.campgrounds } };
 
 function decode(buf, ctype) {
@@ -174,7 +178,8 @@ const fresh = (r) => r?.checked_at && Date.now() - Date.parse(r.checked_at) < ma
 // 이전 실패·빈 결과·문장이 적은 곳은 --retry-failed로 다시 읽는다(ENOTFOUND도 www 유무 변형으로 살아날 수 있다).
 const retryable = (r) => RETRY_FAILED && r && (r.status === "NO_RELEVANT_TEXT" || r.status === "FETCH_FAILED" || r.status === "ERROR" || (r.status === "OK" && (r.snippets?.length ?? 0) < 8));
 const hasSite = (c) => [c.homepage, c.booking?.url].some((u) => u && isOperatorHost(u));
-const targets = camps.filter((c) => hasSite(c) && (!only || only.has(String(c.id))) && (only || !fresh(prev.campgrounds[c.id]) || retryable(prev.campgrounds[c.id]))).slice(0, limit);
+const doneSince = (r) => SINCE && (r?.last_attempt?.at ?? r?.checked_at ?? "") >= SINCE;
+const targets = camps.filter((c) => hasSite(c) && (!only || only.has(String(c.id))) && !doneSince(prev.campgrounds[c.id]) && (only || !fresh(prev.campgrounds[c.id]) || retryable(prev.campgrounds[c.id]))).slice(0, limit);
 console.log(`운영자 사이트 대상 ${targets.length}곳 (동시 ${concurrency}${RENDER ? " · 렌더링 폴백" : ""})`);
 let done = 0;
 const stat = {};

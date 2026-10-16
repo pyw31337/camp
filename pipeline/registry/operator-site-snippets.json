@@ -971,10 +971,10 @@
   },
   "357": {
    "name": "구리 토평 가족캠핑장",
-   "status": "FETCH_FAILED",
+   "status": "ROBOTS_DISALLOWED",
    "url": "https://guriuc.or.kr/cmsManage/contents.do?cmsSeq=101",
-   "checked_at": "2026-10-15T23:28:48.884Z",
-   "error": "timeout"
+   "checked_at": "2026-10-16T00:57:27.897Z",
+   "error": "503,ROBOTS_DISALLOWED"
   },
   "362": {
    "name": "구미캠핑장",
@@ -1052,8 +1052,8 @@
    "name": "무주구천동카라반",
    "status": "FETCH_FAILED",
    "url": "http://mj9000.com/",
-   "checked_at": "2026-10-15T23:28:45.149Z",
-   "error": 403
+   "checked_at": "2026-10-16T00:57:19.472Z",
+   "error": "403"
   },
   "383": {
    "name": "국림검마산자연휴양림",
@@ -1421,6 +1421,13 @@
     }
    ]
   },
+  "468": {
+   "name": "금방아 민박 캠핑장",
+   "status": "FETCH_FAILED",
+   "url": "http://www.kumbanga.com/",
+   "checked_at": "2026-10-16T00:56:50.154Z",
+   "error": "ENOTFOUND"
+  },
   "477": {
    "name": "금오도 야영장",
    "status": "OK",
@@ -1569,7 +1576,7 @@
    "name": "김삿갓계곡캠핑장",
    "status": "FETCH_FAILED",
    "url": "http://xn--739a4mzcp0ep60c3ojnjmt5m.kr/",
-   "checked_at": "2026-10-15T23:28:43.201Z",
+   "checked_at": "2026-10-16T00:57:13.543Z",
    "error": "ENOTFOUND"
   },
   "504": {
@@ -1876,7 +1883,7 @@
    "name": "봉산극기체험센터캠핑장",
    "status": "FETCH_FAILED",
    "url": "http://www.bongsan.kr/html/sub.php?menu=page&menu_id=16",
-   "checked_at": "2026-10-15T23:29:01.389Z",
+   "checked_at": "2026-10-16T00:58:06.509Z",
    "error": "ENOTFOUND"
   },
   "628": {
@@ -2424,6 +2431,18 @@
    "checked_at": "2026-10-15T23:30:48.573Z",
    "error": "ENOTFOUND"
   },
+  "800": {
+   "name": "덕동계곡오토캠핑장",
+   "status": "NO_RELEVANT_TEXT",
+   "url": "http://r6.camperstory.com/?1908",
+   "checked_at": "2026-10-16T00:57:51.720Z",
+   "pages": [
+    "http://r6.camperstory.com/?1908",
+    "http://r6.camperstory.com/top.html",
+    "http://r6.camperstory.com/main.hbb"
+   ],
+   "snippets": []
+  },
   "805": {
    "name": "덕산국민여가캠핑장",
    "status": "NO_RELEVANT_TEXT",
@@ -2445,20 +2464,36 @@
    "name": "덕유산700휠링캠프",
    "status": "FETCH_FAILED",
    "url": "http://www.mujuneverland.com/",
-   "checked_at": "2026-10-15T23:28:52.535Z",
-   "error": "ENOTFOUND"
+   "checked_at": "2026-10-16T00:57:52.464Z",
+   "error": "ENOTFOUND,ENOTFOUND"
   },
   "818": {
    "name": "덕풍계곡마을야영장",
    "status": "OK",
    "url": "https://invil.org/",
-   "checked_at": "2026-10-15T23:28:41.374Z",
+   "checked_at": "2026-10-16T00:57:06.779Z",
    "pages": [
     "https://invil.org/",
     "https://invil.org/best-museums",
     "https://invil.org/about"
    ],
    "snippets": [
+    {
+     "text": "평소에는 성인 4,000원의 입장료가 있으니 방문하실 때 참고하시면 좋아요.",
+     "url": "https://invil.org/"
+    },
+    {
+     "text": "이번 주말, 혹은 다음 휴가에는 오늘 소개해 드린 곳들로 떠나 나만의 특별한 이야기를 만들어보는 건 어떠세요?",
+     "url": "https://invil.org/"
+    },
+    {
+     "text": "바쁜 일상 속에서도 하루, 혹은 주말을 이용하면 아주 의미 있는 문화 탐방을 할 수 있어요.",
+     "url": "https://invil.org/best-museums"
+    },
+    {
+     "text": "관람 시간은 평일(월, 화, 목, 금, 일)은 오전 10시부터 오후 6시까지예요.",
+     "url": "https://invil.org/best-museums"
+    },
     {
      "text": "전시 주요 내용으로는 현재 ‘새 나라 새 미술: 조선 전기 미술 대전’과 ‘마나 모아나'(오세아니아 예술) 같은 특별전이 진행 중이에요.",
      "url": "https://invil.org/best-museums"
@@ -2936,9 +2971,9 @@
   "944": {
    "name": "또올래캠핑장",
    "status": "FETCH_FAILED",
-   "url": "http://ddoolleh.itpage.kr/",
-   "checked_at": "2026-10-15T23:28:30.373Z",
-   "error": 404
+   "url": "http://ddoolleh.itpage.kr/?no=7",
+   "checked_at": "2026-10-16T00:56:40.544Z",
+   "error": "404"
   },
   "953": {
    "name": "라온 글램핑",
@@ -3171,6 +3206,13 @@
     "http://www.riverhills.kr/"
    ],
    "snippets": []
+  },
+  "1023": {
+   "name": "화천마음이머무는곳",
+   "status": "FETCH_FAILED",
+   "url": "http://campinggo.kr/html/new_fcal.php?seq=108",
+   "checked_at": "2026-10-16T00:56:42.618Z",
+   "error": "ENOTFOUND"
   },
   "1025": {
    "name": "휴식관광농원캠핑장",
@@ -4837,9 +4879,9 @@
   "1234": {
    "name": "밤별2 캠핑장",
    "status": "FETCH_FAILED",
-   "url": "http://www.bambyul.co.kr/",
-   "checked_at": "2026-10-15T23:28:42.702Z",
-   "error": 503
+   "url": "http://www.bambyul.co.kr/default/app/app_online.php",
+   "checked_at": "2026-10-16T00:57:10.938Z",
+   "error": "503"
   },
   "1246": {
    "name": "방화동가족휴가촌 자동차야영장",
@@ -5323,7 +5365,7 @@
    "name": "진안고원 숲 펜션&캠핑장",
    "status": "FETCH_FAILED",
    "url": "http://xn--hu1bo4emykn4s.com/sh_page/page13.php",
-   "checked_at": "2026-10-15T23:28:30.533Z",
+   "checked_at": "2026-10-16T00:56:45.294Z",
    "error": "ENOTFOUND"
   },
   "1356": {
@@ -5419,7 +5461,7 @@
    "name": "보보스캇 캠핑장",
    "status": "FETCH_FAILED",
    "url": "http://www.boboscot.com/",
-   "checked_at": "2026-10-15T23:28:44.386Z",
+   "checked_at": "2026-10-16T00:57:15.933Z",
    "error": "ENOTFOUND"
   },
   "1370": {
@@ -5443,7 +5485,7 @@
    "name": "부연동 스카이케빈 캠핑장",
    "status": "FETCH_FAILED",
    "url": "http://www.buyundong-skycabin-camp.com/",
-   "checked_at": "2026-10-15T23:29:02.363Z",
+   "checked_at": "2026-10-16T00:58:06.518Z",
    "error": "ENOTFOUND"
   },
   "1433": {
@@ -5685,14 +5727,14 @@
    "name": "산여울캠핑장",
    "status": "FETCH_FAILED",
    "url": "http://www.sanyaiul.com/",
-   "checked_at": "2026-10-15T23:28:36.967Z",
-   "error": "ENOTFOUND"
+   "checked_at": "2026-10-16T00:56:57.696Z",
+   "error": "ENOTFOUND,ENOTFOUND"
   },
   "1528": {
    "name": "산정호수글램핑",
    "status": "NO_RELEVANT_TEXT",
    "url": "http://sjglamping.com/main.htm",
-   "checked_at": "2026-10-15T23:28:49.153Z",
+   "checked_at": "2026-10-16T00:57:28.599Z",
    "pages": [
     "http://sjglamping.com/main.htm",
     "http://sjglamping.com/facility-01.htm"
@@ -6730,8 +6772,8 @@
    "name": "수산아카데미 캠핑장",
    "status": "FETCH_FAILED",
    "url": "http://susanac.eplus-m.kr/",
-   "checked_at": "2026-10-15T23:28:25.834Z",
-   "error": "timeout"
+   "checked_at": "2026-10-16T00:56:21.933Z",
+   "error": "timeout,EAI_AGAIN"
   },
   "1833": {
    "name": "수승대야영장",
@@ -6974,10 +7016,10 @@
   "1876": {
    "name": "쉬리마을 농어촌 관광 휴양단지 야영장",
    "status": "NO_RELEVANT_TEXT",
-   "url": "http://swiripark.com/",
-   "checked_at": "2026-10-15T23:29:02.713Z",
+   "url": "https://www.swiripark.com/index.php",
+   "checked_at": "2026-10-16T00:58:08.556Z",
    "pages": [
-    "http://swiripark.com/"
+    "https://www.swiripark.com/index.php"
    ],
    "snippets": []
   },
@@ -7386,7 +7428,7 @@
    "name": "한별마을 야영장",
    "status": "FETCH_FAILED",
    "url": "http://hanbyul.net/",
-   "checked_at": "2026-10-15T23:28:47.906Z",
+   "checked_at": "2026-10-16T00:57:24.896Z",
    "error": "UND_ERR_CONNECT_TIMEOUT"
   },
   "2110": {
@@ -7508,7 +7550,7 @@
    "name": "여울애꽃물들인",
    "status": "FETCH_FAILED",
    "url": "http://www.aincamp.com/",
-   "checked_at": "2026-10-15T23:28:29.661Z",
+   "checked_at": "2026-10-16T00:56:36.303Z",
    "error": "ENOTFOUND"
   },
   "2177": {
@@ -9183,7 +9225,7 @@
    "name": "우니메이카홍천본점",
    "status": "FETCH_FAILED",
    "url": "http://www.woony.co.kr/",
-   "checked_at": "2026-10-15T23:28:33.131Z",
+   "checked_at": "2026-10-16T00:56:52.624Z",
    "error": "ENOTFOUND"
   },
   "2445": {
@@ -9381,7 +9423,7 @@
    "name": "가평아일렛 위크팜 글램핑",
    "status": "FETCH_FAILED",
    "url": "http://www.xn--9n3bn67a.com/",
-   "checked_at": "2026-10-15T23:29:03.381Z",
+   "checked_at": "2026-10-16T00:58:11.178Z",
    "error": "ENOTFOUND"
   },
   "2519": {
@@ -10110,9 +10152,9 @@
   "2700": {
    "name": "정양레포츠공원 오토캠핑장",
    "status": "FETCH_FAILED",
-   "url": "https://hcjypark.com/",
-   "checked_at": "2026-10-15T23:28:52.947Z",
-   "error": 403
+   "url": "https://hcjypark.com/yeyak",
+   "checked_at": "2026-10-16T00:57:53.338Z",
+   "error": "403"
   },
   "2703": {
    "name": "정읍시 국민여가캠핑장",
@@ -11127,10 +11169,11 @@
   "2954": {
    "name": "청풍 월드니스 글램핑",
    "status": "NO_RELEVANT_TEXT",
-   "url": "http://www.cpwn.kr/",
-   "checked_at": "2026-10-15T23:28:36.083Z",
+   "url": "http://www.cpwn.kr/VIS_bbs/board.php?bo_table=s8_1",
+   "checked_at": "2026-10-16T00:56:55.191Z",
    "pages": [
-    "http://www.cpwn.kr/"
+    "http://www.cpwn.kr/VIS_bbs/board.php?bo_table=s8_1",
+    "http://www.cpwn.kr/skin/board/pension_reservation_card/reservation_check.php?bo_table=s8_1"
    ],
    "snippets": []
   },
@@ -12110,6 +12153,13 @@
    "checked_at": "2026-10-16T00:52:35.227Z",
    "error": "403,404"
   },
+  "3264": {
+   "name": "포안캠핑",
+   "status": "FETCH_FAILED",
+   "url": "http://forahn.com/r/rev_make.php?pen_code=a9443&s_group_num=0",
+   "checked_at": "2026-10-16T00:57:46.034Z",
+   "error": "ENOTFOUND"
+  },
   "3271": {
    "name": "포천 비둘기낭 캠핑장",
    "status": "OK",
@@ -12929,7 +12979,7 @@
    "name": "하얀여울",
    "status": "FETCH_FAILED",
    "url": "http://xn--2i0b43dowiuref8bnux/%ED%95%98%EC%97%B0%EC%97%AC%EC%9A%B8%EA%BF%88%EB%82%98%EB%AC%B4",
-   "checked_at": "2026-10-15T23:28:38.394Z",
+   "checked_at": "2026-10-16T00:57:00.998Z",
    "error": "ENOTFOUND"
   },
   "3370": {
@@ -13587,7 +13637,7 @@
    "name": "행복숲체험원 오토캠핑장",
    "status": "FETCH_FAILED",
    "url": "http://hf.cj100.net/camping.asp",
-   "checked_at": "2026-10-15T23:28:54.624Z",
+   "checked_at": "2026-10-16T00:57:59.662Z",
    "error": "ENOTFOUND"
   },
   "3487": {
@@ -13638,7 +13688,7 @@
    "name": "호수캠핑장",
    "status": "FETCH_FAILED",
    "url": "http://xn--9p4bo5hfvg1nh66a.com/",
-   "checked_at": "2026-10-15T23:28:40.324Z",
+   "checked_at": "2026-10-16T00:57:04.225Z",
    "error": "ENOTFOUND"
   },
   "3551": {
@@ -13812,13 +13862,58 @@
   },
   "3587": {
    "name": "횡성군 병지방 오토캠핑장",
-   "status": "NO_RELEVANT_TEXT",
-   "url": "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/",
-   "checked_at": "2026-10-15T23:28:21.569Z",
+   "status": "OK",
+   "url": "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/index.php?ckattempt=1",
+   "checked_at": "2026-10-16T00:56:12.467Z",
+   "rendered": true,
    "pages": [
-    "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/"
+    "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/index.php?ckattempt=1",
+    "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/homepage.php?homefile=introduce_03.html&ckattempt=1",
+    "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/homepage.php?homefile=introduce_01.html",
+    "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/homepage.php?homefile=include_oeroom.html&ckattempt=1",
+    "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/homepage.php?homefile=guide_01.html",
+    "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/m_board.php?ps_db=notice",
+    "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/m_login.php?ckattempt=1&url=%2Fmall%2Fm_mypage.php",
+    "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/homepage.php?homefile=introduce_02.html"
    ],
-   "snippets": []
+   "snippets": [
+    {
+     "text": "병지방 오토 캠핑장| 강원도 횡성군 갑천면 어답산로 516 병지방오토캠핑장 관리소| 고객상담전화 : 033-343-7639",
+     "url": "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/index.php?ckattempt=1"
+    },
+    {
+     "text": "병지방 오토 캠핑장 관리소",
+     "url": "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/homepage.php?homefile=introduce_03.html&ckattempt=1"
+    },
+    {
+     "text": "강원도 횡성군 갑천면 어답산로 516 병지방오토캠핑장 관리소",
+     "url": "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/homepage.php?homefile=introduce_03.html&ckattempt=1"
+    },
+    {
+     "text": "매주 화요일은 정기 휴장입니다.",
+     "url": "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/homepage.php?homefile=include_oeroom.html&ckattempt=1"
+    },
+    {
+     "text": "(타인에게 양도·매매 불가하며, 입실 시 본인 확인을 요청할 수 있습니다.)",
+     "url": "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/homepage.php?homefile=include_oeroom.html&ckattempt=1"
+    },
+    {
+     "text": "온라인으로 '예약 신청'을 완료하신 후, 이용 당일 현장에 방문하셔서 결제(카드 또는 현금)를 진행하셔야 최종 입실이 확정됩니다.",
+     "url": "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/homepage.php?homefile=include_oeroom.html&ckattempt=1"
+    },
+    {
+     "text": "입실 시간은 14:00부터이며, 퇴실 시간은 익일 12:00까지 입니다.",
+     "url": "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/homepage.php?homefile=include_oeroom.html&ckattempt=1"
+    },
+    {
+     "text": "추가 방문은 1개 사이트당 최대 2명까지 가능하며, 인당 5,000원의 추가 요금이 발생합니다.",
+     "url": "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/homepage.php?homefile=include_oeroom.html&ckattempt=1"
+    },
+    {
+     "text": "쾌적한 환경 관리를 위해 캠핑장 내 애완견(반려동물) 동반 입장은 절대 불가합니다.",
+     "url": "http://xn--vh3b1l64u9pb68d9xkusfbqi.kr/mall/homepage.php?homefile=include_oeroom.html&ckattempt=1"
+    }
+   ]
   },
   "3597": {
    "name": "휴가를 부탁해 캠핑장",
@@ -14093,10 +14188,10 @@
   "6744": {
    "name": "그린오토캠핑장",
    "status": "NO_RELEVANT_TEXT",
-   "url": "http://greenautocamp.co.kr/",
-   "checked_at": "2026-10-15T23:28:53.255Z",
+   "url": "http://greenautocamp.co.kr/skin/ilc010/GreenYeyak/IlcYeyak.html",
+   "checked_at": "2026-10-16T00:57:55.731Z",
    "pages": [
-    "http://greenautocamp.co.kr/"
+    "http://greenautocamp.co.kr/skin/ilc010/GreenYeyak/IlcYeyak.html"
    ],
    "snippets": []
   },
@@ -14128,7 +14223,14 @@
    "name": "더좋은 펜션 캠핑장",
    "status": "FETCH_FAILED",
    "url": "http://thegoodcamping.co.kr/",
-   "checked_at": "2026-10-15T23:28:45.281Z",
+   "checked_at": "2026-10-16T00:57:20.063Z",
+   "error": "ENOTFOUND"
+  },
+  "6790": {
+   "name": "마실 캠핑장",
+   "status": "FETCH_FAILED",
+   "url": "http://campinggo.kr/html/new_fcal.php?seq=126",
+   "checked_at": "2026-10-16T00:56:38.350Z",
    "error": "ENOTFOUND"
   },
   "6799": {
@@ -15630,7 +15732,7 @@
    "name": "라루체글램핑 모험을 시작하다",
    "status": "NO_RELEVANT_TEXT",
    "url": "http://xn--bj0bw3p2d5oy1ojml4yeh0v16igwgsvf.com/",
-   "checked_at": "2026-10-15T23:28:32.567Z",
+   "checked_at": "2026-10-16T00:56:52.205Z",
    "pages": [
     "http://xn--bj0bw3p2d5oy1ojml4yeh0v16igwgsvf.com/"
    ],
@@ -16491,7 +16593,7 @@
    "name": "포시즌",
    "status": "NO_RELEVANT_TEXT",
    "url": "http://xn--oi2bl1go2gxuhprg65i.jdweb.kr/",
-   "checked_at": "2026-10-15T23:29:05.074Z",
+   "checked_at": "2026-10-16T00:58:14.036Z",
    "pages": [
     "http://xn--oi2bl1go2gxuhprg65i.jdweb.kr/"
    ],
@@ -16862,8 +16964,8 @@
   "7256": {
    "name": "위천수변 테마공원",
    "status": "FETCH_FAILED",
-   "url": "http://wcpark.gunwi.go.kr/",
-   "checked_at": "2026-10-15T23:28:24.341Z",
+   "url": "http://wcpark.gunwi.go.kr/page/reservation",
+   "checked_at": "2026-10-16T00:56:21.639Z",
    "error": "timeout"
   },
   "7257": {
@@ -18117,8 +18219,8 @@
    "name": "삿갓펜션 캠핑장",
    "status": "FETCH_FAILED",
    "url": "http://www.satgatpension.com/",
-   "checked_at": "2026-10-15T23:28:44.991Z",
-   "error": 403
+   "checked_at": "2026-10-16T00:57:17.994Z",
+   "error": "403"
   },
   "7621": {
    "name": "우리두리글램핑장",
@@ -18131,7 +18233,7 @@
    "name": "동해글램핑장",
    "status": "FETCH_FAILED",
    "url": "http://www.junoglamping.co.kr/juno/room_list.php?juno_id=8",
-   "checked_at": "2026-10-15T23:28:53.652Z",
+   "checked_at": "2026-10-16T00:57:58.355Z",
    "error": "ENOTFOUND"
   },
   "7642": {
@@ -18377,7 +18479,7 @@
    "name": "자연과함께 펜션캠핑장",
    "status": "FETCH_FAILED",
    "url": "http://xn--vb0b88ay04bspbm06a/",
-   "checked_at": "2026-10-15T23:28:52.237Z",
+   "checked_at": "2026-10-16T00:57:51.201Z",
    "error": "ENOTFOUND"
   },
   "7726": {
@@ -18740,10 +18842,10 @@
   "7748": {
    "name": "KEROAIN CAMP",
    "status": "NO_RELEVANT_TEXT",
-   "url": "https://pawscamp.co.kr/",
-   "checked_at": "2026-10-15T23:28:41.349Z",
+   "url": "https://pawscamp.co.kr/reservation.php",
+   "checked_at": "2026-10-16T00:57:04.517Z",
    "pages": [
-    "https://pawscamp.co.kr/"
+    "https://pawscamp.co.kr/reservation.php"
    ],
    "snippets": []
   },
@@ -19059,7 +19161,7 @@
    "name": "(유)금강 두승산 글램핑",
    "status": "FETCH_FAILED",
    "url": "http://www.xn--939ak0bwa745dloek2qgoddr5c.com/",
-   "checked_at": "2026-10-15T23:28:45.405Z",
+   "checked_at": "2026-10-16T00:57:22.625Z",
    "error": "ENOTFOUND"
   },
   "7789": {
@@ -19172,7 +19274,7 @@
    "name": "뚜뚜키즈풀빌라&글램핑",
    "status": "FETCH_FAILED",
    "url": "http://www.gp-valley.co.kr/",
-   "checked_at": "2026-10-15T23:29:05.097Z",
+   "checked_at": "2026-10-16T00:58:16.290Z",
    "error": "ENOTFOUND"
   },
   "7814": {
@@ -19323,7 +19425,7 @@
    "name": "다그린 캠핑장",
    "status": "NO_RELEVANT_TEXT",
    "url": "http://www.pcamp.kr/",
-   "checked_at": "2026-10-15T23:28:45.432Z",
+   "checked_at": "2026-10-16T00:57:22.773Z",
    "pages": [
     "http://www.pcamp.kr/"
    ],
@@ -19347,7 +19449,7 @@
    "name": "쉼 캠프",
    "status": "FETCH_FAILED",
    "url": "http://xn--oy2b25ch5a95vjxixnk/",
-   "checked_at": "2026-10-15T23:28:28.441Z",
+   "checked_at": "2026-10-16T00:56:28.499Z",
    "error": "ENOTFOUND"
   },
   "7878": {
@@ -19497,9 +19599,9 @@
   "7908": {
    "name": "아라미르글램핑",
    "status": "FETCH_FAILED",
-   "url": "http://www.aramirresort.com/",
-   "checked_at": "2026-10-15T23:29:06.774Z",
-   "error": 403
+   "url": "http://www.aramirresort.com/reserve.html?reserve=rv",
+   "checked_at": "2026-10-16T00:58:17.807Z",
+   "error": "403"
   },
   "7909": {
    "name": "보성강 용정권역 어울마당 야영장",
@@ -20274,18 +20376,32 @@
    "name": "성주선바위캠핑장",
    "status": "OK",
    "url": "https://www.sj.go.kr/tour/page.do?con_uid=8912&cmd=2&mnu_uid=3791",
-   "checked_at": "2026-10-15T23:28:48.484Z",
+   "checked_at": "2026-10-16T00:57:24.937Z",
    "pages": [
     "https://www.sj.go.kr/tour/page.do?con_uid=8912&cmd=2&mnu_uid=3791",
     "https://www.sj.go.kr/tour/page.do?mnu_uid=3772&",
     "https://www.sj.go.kr/tour/page.do?mnu_uid=3739&amp;",
     "https://www.sj.go.kr/tour/page.do?mnu_uid=3820&amp;",
     "https://www.sj.go.kr/tour/page.do?mnu_uid=3745&amp;",
-    "https://www.sj.go.kr/tour/page.do?mnu_uid=3747&code_uid=271"
+    "https://www.sj.go.kr/tour/page.do?mnu_uid=3747&code_uid=271",
+    "https://www.sj.go.kr/tour/page.do?mnu_uid=3748&code_uid=273",
+    "https://www.sj.go.kr/tour/page.do?mnu_uid=3749&code_uid=272"
    ],
    "snippets": [
     {
+     "text": "성주 1박2일 코스",
+     "url": "https://www.sj.go.kr/tour/page.do?con_uid=8912&cmd=2&mnu_uid=3791"
+    },
+    {
+     "text": "웰컴키즈존",
+     "url": "https://www.sj.go.kr/tour/page.do?con_uid=8912&cmd=2&mnu_uid=3791"
+    },
+    {
      "text": "반려동물 동반출입 음식점",
+     "url": "https://www.sj.go.kr/tour/page.do?con_uid=8912&cmd=2&mnu_uid=3791"
+    },
+    {
+     "text": "관광지 공공wifi 정보",
      "url": "https://www.sj.go.kr/tour/page.do?con_uid=8912&cmd=2&mnu_uid=3791"
     }
    ]
@@ -20294,7 +20410,7 @@
    "name": "럭셔리 안성(M) 글램핑장",
    "status": "FETCH_FAILED",
    "url": "http://010-5312-9190/",
-   "checked_at": "2026-10-15T23:29:06.862Z",
+   "checked_at": "2026-10-16T00:58:18.867Z",
    "error": "ENOTFOUND"
   },
   "7956": {
@@ -21989,13 +22105,9 @@
   },
   "8080": {
    "name": "평창하늘캠핑장",
-   "status": "NO_RELEVANT_TEXT",
+   "status": "SERVICE_CLOSED",
    "url": "https://waterstar.modoo.at/",
-   "checked_at": "2026-10-15T23:28:47.105Z",
-   "pages": [
-    "https://waterstar.modoo.at/"
-   ],
-   "snippets": []
+   "checked_at": "2026-10-16T00:57:22.787Z"
   },
   "8087": {
    "name": "팔공산 야영장",
@@ -22340,7 +22452,7 @@
    "name": "(주)크리스월드더레지던스",
    "status": "NO_RELEVANT_TEXT",
    "url": "http://html.designclick.co.kr/servicestop.html",
-   "checked_at": "2026-10-15T23:28:31.200Z",
+   "checked_at": "2026-10-16T00:56:46.221Z",
    "pages": [
     "http://html.designclick.co.kr/servicestop.html"
    ],
@@ -22793,13 +22905,9 @@
   },
   "100070": {
    "name": "신두57글램핑&빌리지",
-   "status": "NO_RELEVANT_TEXT",
+   "status": "SERVICE_CLOSED",
    "url": "https://sindu57camping.modoo.at/",
-   "checked_at": "2026-10-15T23:28:31.547Z",
-   "pages": [
-    "https://sindu57camping.modoo.at/"
-   ],
-   "snippets": []
+   "checked_at": "2026-10-16T00:56:48.551Z"
   },
   "100071": {
    "name": "(주)더그린포천 농업회사법인(민트글램핑)",
@@ -22940,7 +23048,7 @@
    "name": "숲속의아침",
    "status": "FETCH_FAILED",
    "url": "https://blog.never.com/sungminlee9",
-   "checked_at": "2026-10-15T23:28:29.434Z",
+   "checked_at": "2026-10-16T00:56:30.527Z",
    "error": "ENOTFOUND"
   },
   "100133": {
@@ -23444,7 +23552,7 @@
    "name": "우니메이카 당진점",
    "status": "FETCH_FAILED",
    "url": "http://glcamping.kr/",
-   "checked_at": "2026-10-15T23:28:34.899Z",
+   "checked_at": "2026-10-16T00:56:55.120Z",
    "error": "ENOTFOUND"
   },
   "100240": {
@@ -24754,8 +24862,8 @@
    "name": "7BLOCK(세븐블럭)",
    "status": "FETCH_FAILED",
    "url": "http://www.7block.net/page/sub0101",
-   "checked_at": "2026-10-15T23:28:49.343Z",
-   "error": 404
+   "checked_at": "2026-10-16T00:57:33.117Z",
+   "error": "404"
   },
   "100323": {
    "name": "달사랑 캠핑장",
@@ -26295,13 +26403,40 @@
   },
   "100471": {
    "name": "새솔캠핑장&펜션",
-   "status": "NO_RELEVANT_TEXT",
-   "url": "http://www.saesolcamping.co.kr/",
-   "checked_at": "2026-10-15T23:28:36.723Z",
+   "status": "OK",
+   "url": "http://www.saesolcamping.co.kr/default/",
+   "checked_at": "2026-10-16T00:56:55.467Z",
+   "rendered": true,
    "pages": [
-    "http://www.saesolcamping.co.kr/"
+    "http://www.saesolcamping.co.kr/default/",
+    "http://www.saesolcamping.co.kr/default/introduce/s01.php?topmenu=1&amp;submenu=1",
+    "http://www.saesolcamping.co.kr/default/introduce/s02.php?topmenu=1&amp;submenu=2",
+    "http://www.saesolcamping.co.kr/default/community/s01.php?topmenu=5&amp;submenu=1",
+    "http://www.saesolcamping.co.kr/default/user/agreement.php?topmenu=user&amp;submenu=1",
+    "http://www.saesolcamping.co.kr/default/user/privacy.php?topmenu=user&amp;submenu=2"
    ],
-   "snippets": []
+   "snippets": [
+    {
+     "text": "화장실 비데, 세탁기, 1인샤워실, 매점, 365일 온수제공",
+     "url": "http://www.saesolcamping.co.kr/default/"
+    },
+    {
+     "text": "궁금하신 점은 전화로 문의해 주세요!",
+     "url": "http://www.saesolcamping.co.kr/default/"
+    },
+    {
+     "text": "캠핑장 비성수기 요금 할인합니다",
+     "url": "http://www.saesolcamping.co.kr/default/"
+    },
+    {
+     "text": "공지 캠핑장 비성수기 요금 할인합니다 관리자 2023-05-08 770",
+     "url": "http://www.saesolcamping.co.kr/default/community/s01.php?topmenu=5&amp;submenu=1"
+    },
+    {
+     "text": "(1) 이 약관에 명시되지 않은 사항은 전기통신사업법 등 대한민국의 관계법령과 상관습에 따릅니다.",
+     "url": "http://www.saesolcamping.co.kr/default/user/agreement.php?topmenu=user&amp;submenu=1"
+    }
+   ]
   },
   "100474": {
    "name": "산중계곡캠핑장",
@@ -26599,13 +26734,9 @@
   },
   "100499": {
    "name": "반달곰이 살던 숲",
-   "status": "NO_RELEVANT_TEXT",
+   "status": "SERVICE_CLOSED",
    "url": "https://halfmooncamp.modoo.at/",
-   "checked_at": "2026-10-15T23:28:49.882Z",
-   "pages": [
-    "https://halfmooncamp.modoo.at/"
-   ],
-   "snippets": []
+   "checked_at": "2026-10-16T00:57:43.545Z"
   },
   "100500": {
    "name": "그리고 캠핑장",
@@ -28946,7 +29077,7 @@
    "name": "윈드밸리 야영장",
    "status": "FETCH_FAILED",
    "url": "http://windvalley88.com/",
-   "checked_at": "2026-10-15T23:28:25.952Z",
+   "checked_at": "2026-10-16T00:56:22.119Z",
    "error": "UND_ERR_CONNECT_TIMEOUT"
   },
   "100722": {
@@ -29775,6 +29906,13 @@
     "https://forest41928.modoo.at/"
    ],
    "snippets": []
+  },
+  "100764": {
+   "name": "산우물 북 캠핑장",
+   "status": "FETCH_FAILED",
+   "url": "https://url.kr/vi26ts",
+   "checked_at": "2026-10-16T00:57:52.697Z",
+   "error": "403"
   },
   "100766": {
    "name": "테토양평캠핑장",
@@ -31706,13 +31844,10 @@
   },
   "100938": {
    "name": "아람말 캠핑장",
-   "status": "NO_RELEVANT_TEXT",
-   "url": "https://arammal.modoo.at/",
-   "checked_at": "2026-10-15T23:28:51.498Z",
-   "pages": [
-    "https://arammal.modoo.at/"
-   ],
-   "snippets": []
+   "status": "FETCH_FAILED",
+   "url": "https://r.camperstory.com/?4425",
+   "checked_at": "2026-10-16T00:57:49.586Z",
+   "error": "503"
   },
   "100940": {
    "name": "하크베리빌 글램핑 리조트",
@@ -33460,8 +33595,8 @@
    "name": "양주잼잼 글램핑&카라반",
    "status": "FETCH_FAILED",
    "url": "https://yangjujamjam.com/",
-   "checked_at": "2026-10-15T23:28:50.027Z",
-   "error": 403
+   "checked_at": "2026-10-16T00:57:44.345Z",
+   "error": "403"
   },
   "101058": {
    "name": "양양한스오토캠핑장",
@@ -34276,7 +34411,7 @@
    "name": "양명힐링캠프",
    "status": "FETCH_FAILED",
    "url": "https://blog.naver..com/moktan88/",
-   "checked_at": "2026-10-15T23:28:53.393Z",
+   "checked_at": "2026-10-16T00:57:57.478Z",
    "error": "ENOTFOUND"
   },
   "101121": {
@@ -35592,13 +35727,9 @@
   },
   "101227": {
    "name": "스테이 그린",
-   "status": "NO_RELEVANT_TEXT",
+   "status": "SERVICE_CLOSED",
    "url": "https://staygreen71.modoo.at/",
-   "checked_at": "2026-10-15T23:28:52.420Z",
-   "pages": [
-    "https://staygreen71.modoo.at/"
-   ],
-   "snippets": []
+   "checked_at": "2026-10-16T00:57:51.896Z"
   },
   "101228": {
    "name": "북분솔밭캠핑장",
@@ -36264,6 +36395,13 @@
     }
    ]
   },
+  "101278": {
+   "name": "포천 서울근교 글램핑 조이풀",
+   "status": "FETCH_FAILED",
+   "url": "http://%EC%9D%B8%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8%20DM:%20@joypool/",
+   "checked_at": "2026-10-16T00:56:49.350Z",
+   "error": "Request cannot be constructed from a URL that includes credentials: http://%EC%9D%B8%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8%20DM:%20@joypool/"
+  },
   "101279": {
    "name": "메타쉐콰이어 오토 캠핑장",
    "status": "OK",
@@ -36665,6 +36803,84 @@
    "checked_at": "2026-10-15T23:33:01.235Z",
    "error": 403
   },
+  "101325": {
+   "name": "가화 2372 카라반글램핑",
+   "status": "OK",
+   "url": "http://www.hayata.co.kr/",
+   "checked_at": "2026-10-16T00:57:59.551Z",
+   "pages": [
+    "http://www.hayata.co.kr/",
+    "http://www.hayata.co.kr/about.html?id=location",
+    "http://www.hayata.co.kr/about.html",
+    "http://www.hayata.co.kr/facilitys.html",
+    "http://www.hayata.co.kr/facility.html?id=1",
+    "http://www.hayata.co.kr/facility.html?id=2",
+    "http://www.hayata.co.kr/facility.html?id=3",
+    "http://www.hayata.co.kr/facility.html?id=4"
+   ],
+   "snippets": [
+    {
+     "text": "하야타키즈풀빌라",
+     "url": "http://www.hayata.co.kr/"
+    },
+    {
+     "text": "거품키즈풀빌라",
+     "url": "http://www.hayata.co.kr/"
+    },
+    {
+     "text": "스포츠키즈풀빌라",
+     "url": "http://www.hayata.co.kr/"
+    },
+    {
+     "text": "나린키즈풀빌라",
+     "url": "http://www.hayata.co.kr/"
+    },
+    {
+     "text": "단미키즈풀빌라",
+     "url": "http://www.hayata.co.kr/"
+    },
+    {
+     "text": "아토키즈풀빌라",
+     "url": "http://www.hayata.co.kr/"
+    },
+    {
+     "text": "미온수 키즈풀",
+     "url": "http://www.hayata.co.kr/"
+    },
+    {
+     "text": "인피니티 수영장",
+     "url": "http://www.hayata.co.kr/"
+    },
+    {
+     "text": "개별 전기그릴",
+     "url": "http://www.hayata.co.kr/"
+    },
+    {
+     "text": "무인매점",
+     "url": "http://www.hayata.co.kr/"
+    },
+    {
+     "text": "키즈 물품 완비",
+     "url": "http://www.hayata.co.kr/"
+    },
+    {
+     "text": "전기그릴",
+     "url": "http://www.hayata.co.kr/"
+    },
+    {
+     "text": "WiFi",
+     "url": "http://www.hayata.co.kr/"
+    },
+    {
+     "text": "하야타 키즈풀빌라",
+     "url": "http://www.hayata.co.kr/"
+    },
+    {
+     "text": "경기 가평군 북면 가화로 2372-24",
+     "url": "http://www.hayata.co.kr/"
+    }
+   ]
+  },
   "101332": {
    "name": "봉포레이크 글램핑 오토캠핑장",
    "status": "OK",
@@ -36797,8 +37013,8 @@
    "name": "80포레스트카라반캠프",
    "status": "FETCH_FAILED",
    "url": "http://forestcaravanpark.net/",
-   "checked_at": "2026-10-15T23:28:47.152Z",
-   "error": 403
+   "checked_at": "2026-10-16T00:57:23.229Z",
+   "error": "403"
   },
   "101344": {
    "name": "별천지 캠핑장",
@@ -37375,8 +37591,8 @@
    "name": "이유캠핑",
    "status": "FETCH_FAILED",
    "url": "http://www.xn--2r5b1f27r1nh.com/",
-   "checked_at": "2026-10-15T23:28:47.662Z",
-   "error": 403
+   "checked_at": "2026-10-16T00:57:23.328Z",
+   "error": "403"
   },
   "101384": {
    "name": "인더풀 글램핑",
@@ -37414,18 +37630,25 @@
   },
   "101400": {
    "name": "숲내음에 머물다",
-   "status": "NO_RELEVANT_TEXT",
+   "status": "OK",
    "url": "http://xn--ok0bv8sh3jqvbj5oxnkzqa.com/",
-   "checked_at": "2026-10-15T23:28:12.155Z",
+   "checked_at": "2026-10-16T00:55:42.978Z",
    "pages": [
     "http://xn--ok0bv8sh3jqvbj5oxnkzqa.com/",
     "http://xn--ok0bv8sh3jqvbj5oxnkzqa.com/bbs/board.php?bo_table=yb_camp01&wr_id=1",
     "http://xn--ok0bv8sh3jqvbj5oxnkzqa.com/bbs/board.php?bo_table=yb_info01&wr_id=1",
     "http://xn--ok0bv8sh3jqvbj5oxnkzqa.com/bbs/board.php?bo_table=yb_board01",
     "http://xn--ok0bv8sh3jqvbj5oxnkzqa.com/bbs/board.php?bo_table=yb_map01&wr_id=1",
-    "http://xn--ok0bv8sh3jqvbj5oxnkzqa.com/bbs/board.php?bo_table=yb_introduction01&wr_id=1"
+    "http://xn--ok0bv8sh3jqvbj5oxnkzqa.com/bbs/board.php?bo_table=yb_introduction01&wr_id=1",
+    "http://xn--ok0bv8sh3jqvbj5oxnkzqa.com/bbs/board.php?bo_table=yb_introduction02",
+    "http://xn--ok0bv8sh3jqvbj5oxnkzqa.com/bbs/board.php?bo_table=yb_camp02&wr_id=1"
    ],
-   "snippets": []
+   "snippets": [
+    {
+     "text": "에어컨 이용시 1박당 1만원 추가 비용 있습니다 .",
+     "url": "http://xn--ok0bv8sh3jqvbj5oxnkzqa.com/bbs/board.php?bo_table=yb_camp01&wr_id=1"
+    }
+   ]
   },
   "101411": {
    "name": "고릴라캠핑 in 속리산",
@@ -38061,26 +38284,23 @@
   "101472": {
    "name": "위고고 제천점",
    "status": "OK",
-   "url": "https://wegogo-jc.nowgo.kr/main/intro",
-   "checked_at": "2026-10-15T23:28:49.886Z",
+   "url": "https://wegogo-jc.nowgo.kr/deploy",
+   "checked_at": "2026-10-16T00:57:43.827Z",
    "pages": [
-    "https://wegogo-jc.nowgo.kr/main/intro",
-    "https://wegogo-jc.nowgo.kr/main/sub0401",
-    "https://wegogo-jc.nowgo.kr/main/sub0301",
-    "https://wegogo-jc.nowgo.kr/main/sub0201"
+    "https://wegogo-jc.nowgo.kr/deploy"
    ],
    "snippets": [
     {
-     "text": "퀸사이즈 침대, 어메니티 제공, 수영장 2개, 카페, 놀이터, 공용주차장",
-     "url": "https://wegogo-jc.nowgo.kr/main/sub0201"
+     "text": "2026.10.16(금)~2026.10.17(토) 1박",
+     "url": "https://wegogo-jc.nowgo.kr/deploy"
     },
     {
-     "text": "체크아웃",
-     "url": "https://wegogo-jc.nowgo.kr/main/sub0201"
+     "text": "입실일자",
+     "url": "https://wegogo-jc.nowgo.kr/deploy"
     },
     {
-     "text": "11:00AM (22:00PM 이후 체크인은 문자주세요.)",
-     "url": "https://wegogo-jc.nowgo.kr/main/sub0201"
+     "text": "퇴실일자",
+     "url": "https://wegogo-jc.nowgo.kr/deploy"
     }
    ]
   },
@@ -38592,9 +38812,9 @@
   "101513": {
    "name": "포림관광농원",
    "status": "FETCH_FAILED",
-   "url": "https://eden797.com/",
-   "checked_at": "2026-10-15T23:28:29.469Z",
-   "error": 503
+   "url": "https://eden797.com/Reservation",
+   "checked_at": "2026-10-16T00:56:35.947Z",
+   "error": "503"
   },
   "101514": {
    "name": "두물머리 IC 캠핑장",
@@ -40144,6 +40364,62 @@
    "checked_at": "2026-10-16T00:55:47.540Z",
    "error": "403"
   },
+  "101739": {
+   "name": "선감 캠핑장",
+   "status": "OK",
+   "url": "https://cms.seantour.com/GK001/reservation-of-accommodation.do?mode=view&articleNo=1101&article.offset=0&articleLimit=10",
+   "checked_at": "2026-10-16T00:58:00.634Z",
+   "pages": [
+    "https://cms.seantour.com/GK001/reservation-of-accommodation.do?mode=view&articleNo=1101&article.offset=0&articleLimit=10",
+    "https://cms.seantour.com/GK001/introduction-to-the-village.do",
+    "https://cms.seantour.com/GK001/guidelines-on-major-facilities.do",
+    "https://cms.seantour.com/GK001/directions.do",
+    "https://cms.seantour.com/GK001/sample02.do",
+    "https://cms.seantour.com/GK001/water-stain-information.do"
+   ],
+   "snippets": [
+    {
+     "text": "주차여부",
+     "url": "https://cms.seantour.com/GK001/reservation-of-accommodation.do?mode=view&articleNo=1101&article.offset=0&articleLimit=10"
+    },
+    {
+     "text": "짐을 옮길시 주차장에 주차 후 리어카로 옮겨주세요",
+     "url": "https://cms.seantour.com/GK001/reservation-of-accommodation.do?mode=view&articleNo=1101&article.offset=0&articleLimit=10"
+    },
+    {
+     "text": "이용요금",
+     "url": "https://cms.seantour.com/GK001/reservation-of-accommodation.do?mode=view&articleNo=1101&article.offset=0&articleLimit=10"
+    },
+    {
+     "text": "텐트사이트 (8*6) 55,000원~65,000원",
+     "url": "https://cms.seantour.com/GK001/reservation-of-accommodation.do?mode=view&articleNo=1101&article.offset=0&articleLimit=10"
+    },
+    {
+     "text": "카라반사이트 (12*8) 70,000원~80,000",
+     "url": "https://cms.seantour.com/GK001/reservation-of-accommodation.do?mode=view&articleNo=1101&article.offset=0&articleLimit=10"
+    },
+    {
+     "text": "입실/퇴실시간",
+     "url": "https://cms.seantour.com/GK001/reservation-of-accommodation.do?mode=view&articleNo=1101&article.offset=0&articleLimit=10"
+    },
+    {
+     "text": "입실 : 2시",
+     "url": "https://cms.seantour.com/GK001/reservation-of-accommodation.do?mode=view&articleNo=1101&article.offset=0&articleLimit=10"
+    },
+    {
+     "text": "퇴실 : 11시",
+     "url": "https://cms.seantour.com/GK001/reservation-of-accommodation.do?mode=view&articleNo=1101&article.offset=0&articleLimit=10"
+    },
+    {
+     "text": "주말이면 많은 관광객들로 붐비며, 대부도 가는 길목에 있는 선감도는 높은 산 위에 있는",
+     "url": "https://cms.seantour.com/GK001/introduction-to-the-village.do"
+    },
+    {
+     "text": "⊙ 기타 마을정보 - 가구수(어가) : 65가구 140명 - 주요시설물 : 팔각정, 벤치, 야외화장실 - 주요 특산물 : 바지락, 낙지, 숭어, 소라,",
+     "url": "https://cms.seantour.com/GK001/introduction-to-the-village.do"
+    }
+   ]
+  },
   "101747": {
    "name": "서진이네 오토캠핑장",
    "status": "OK",
@@ -40277,18 +40553,130 @@
   },
   "101759": {
    "name": "캠핑요기야",
-   "status": "NO_RELEVANT_TEXT",
+   "status": "OK",
    "url": "https://xn--ok0bv55b7xa.com/",
-   "checked_at": "2026-10-15T23:28:22.100Z",
+   "checked_at": "2026-10-16T00:56:14.082Z",
+   "rendered": true,
    "pages": [
     "https://xn--ok0bv55b7xa.com/",
     "https://xn--ok0bv55b7xa.com/board/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/",
+    "https://xn--ok0bv55b7xa.com/include/sub_page_02.html",
+    "https://xn--ok0bv55b7xa.com/include/sub_page_05.html",
     "https://xn--ok0bv55b7xa.com/board/%EA%B0%A4%EB%9F%AC%EB%A6%AC/8/",
-    "https://veritas-hub.cafe24.com/challenge?auth=b4qW-_gJfgaU9eNbmWVaqRqWQqckNUNQu5hG9nsBXh7PIMiTjzcvxpP0qqcwuPIzZxAnwUqxmV44bfbbh3T0PX09bSxCmzC82WmCN2nqXMCFRHpuwC6bzT9Bx77_h7bkA-FLTgcEeux8nJ-Lqrj7wZUwX5uXLjwbj5u8Fm0IOcfZG_lawE8A_8e6uoh8BgkxbQ&url=aHR0cHM6Ly94bi0tb2swYnY1NWI3eGEuY29tL2JvYXJkL2ZyZWUvd3JpdGUuaHRtbD9ib2FyZF9ubz0x",
-    "https://xn--ok0bv55b7xa.com/board/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/?board_no=1&page=1",
-    "https://xn--ok0bv55b7xa.com/board/gallery/list.html?&board_no=8"
+    "https://xn--ok0bv55b7xa.com/include/sub_page_01.html",
+    "https://xn--ok0bv55b7xa.com/include/sub_page_03.html",
+    "https://xn--ok0bv55b7xa.com/include/sub_page_04.html"
    ],
-   "snippets": []
+   "snippets": [
+    {
+     "text": "밤엔 불멍과 별빛 아래에서 진짜 휴식을 느껴보세요",
+     "url": "https://xn--ok0bv55b7xa.com/"
+    },
+    {
+     "text": "✅ 예약확정은 입금 순서대로 진행이 되고 있으므로 입금이 늦을 경우 예약이 취소 될 수 있습니다✅",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "보호자를 동반하지 않은 미성년자의 입실은 불가능 합니다.",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "반려동물 동반 입실은 불가하며, 적발 시 환불 없이 퇴실 조치됩니다.",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "퇴실 시에 설거지 및 쓰레기 분리수거를 부탁드립니다.",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "수영장 이용시 구명조끼 필수, 어린이 및 노약자는 보호자에 보호가 꼭 필요 안전사고 주의 부탁드립니다.",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "조용한 휴식을 위해 밤 10시부터~아침 7까지는 매너타임 입니다.",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "방문객은 꼭 사전통보(추가 2명 가능)해 주시고 추가요금발생 됩니다.",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "(추가인원 1인 1만원",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "무단방문객 적발시 강제퇴실 조치 환불이 불가합니다)",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "고용량 전기제품 사용금지 (600W 이하 사용가능) “평상 전기사용 금지” (사이트 전기 리더선이용 무단사용 절대금지)",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "불을 피울때 지정된 장소 및 화로대 이용 부탁드립니다.(천막 및 맨바닥 절대금지)",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "객실 요금 안내",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "구분 평일 (일~금) 주말 (토요일) 성수기",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "C,D Site (2인기준/최대4인) 100,000원 130,000원 200,000원",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "A Site (4인기준/최대6인) 150,000원 200,000원 250,000원",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "타프존 (4인기준) 80,000원 80,000원 80,000원",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "* 최대인원 초과를 하지 않을 시 따로 추가요금이 부과되지 않습니다.",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "* 전사이트는 차량은 1대 이용이 가능하며 차량 추가시 20,000원 추가됩니다.",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "* 타프존의 경우, 방수소재의 타프를 사용하므로 우천시 당일취소는 불가합니다.",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "입실시간은 오후2시, 퇴실 시간은 오전11시 입니다.",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "매너타임 밤 10시부터~아침 7까지는 매너타임 입니다.",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "귀중품 분실 시 책임지지 않으므로 외출 시 수영장 옆에 비치 되어있는 개인물품보관함을 이용하시는걸 추천드립니다.",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "환불 규정",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "올바른 예약 문화 정착을 위해 아래와 같이 환불 기준을 운영하고 있사오니 확인 부탁드립니다.",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "100% 환불 90% 환불 70% 환불 50% 환불 30% 환불 10% 환불 환불 불가",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_05.html"
+    },
+    {
+     "text": "계곡의 시원함과 감성 가득한 캠핑 공간, 아이들과 함께 즐길 수 있는 수영장과 편안한 휴식 공간까지 준비되어 있어 가족, 연인, 친구 누구와 함께 와도 특별한 추억을 만들 수 있습니다.",
+     "url": "https://xn--ok0bv55b7xa.com/include/sub_page_01.html"
+    }
+   ]
   },
   "101761": {
    "name": "비비드 글램핑",
@@ -41001,10 +41389,10 @@
   "101795": {
    "name": "사기리134",
    "status": "NO_RELEVANT_TEXT",
-   "url": "http://sagiri134.com/",
-   "checked_at": "2026-10-15T23:28:55.697Z",
+   "url": "http://sagiri134.com/reserinfo.php",
+   "checked_at": "2026-10-16T00:58:00.731Z",
    "pages": [
-    "http://sagiri134.com/"
+    "http://sagiri134.com/reserinfo.php"
    ],
    "snippets": []
   },
@@ -41560,13 +41948,175 @@
   },
   "101857": {
    "name": "기린 캠프랜드",
-   "status": "NO_RELEVANT_TEXT",
-   "url": "http://kylinvillaresort.com/camping.html",
-   "checked_at": "2026-10-15T23:28:15.135Z",
+   "status": "OK",
+   "url": "http://kylinvillaresort.com/camping.html?ckattempt=1",
+   "checked_at": "2026-10-16T00:55:51.048Z",
+   "rendered": true,
    "pages": [
-    "http://kylinvillaresort.com/camping.html"
+    "http://kylinvillaresort.com/camping.html?ckattempt=1",
+    "http://kylinvillaresort.com/table.html?table=notice&ckattempt=1",
+    "http://kylinvillaresort.com/location.html?ckattempt=3",
+    "http://kylinvillaresort.com/facility_preview.html?ckattempt=3",
+    "http://kylinvillaresort.com/facility01.html?ckattempt=3",
+    "http://kylinvillaresort.com/facility02.html?ckattempt=3",
+    "http://kylinvillaresort.com/facility03.html?ckattempt=3",
+    "http://kylinvillaresort.com/facility04.html?ckattempt=3",
+    "https://be4.wingsbooking.com/KYN1"
    ],
-   "snippets": []
+   "snippets": [
+    {
+     "text": "포레스트 데크(중형): 8 X 6M",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "사이트의 전력 사용량 : 1,100W",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "야외 수영장 무료 이용",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "(수영장 이용 규정을 준수해 주시기 바랍니다.)",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "각 데크별 기준인원 초과시 인원추가비용이 발생합니다.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "추가비용은 1인 1박당 성인 10,000원, 아동(5~13세) 5,000원, 5세 미만 무료이나 최대 인원에는 포함됩니다.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "각 데크별 최대인원을 초과하는 경우 입실이 불가 합니다.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "(*평일 한정 예외, 부모, 다자녀)",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "다른 이용객의 편의를 위해 오후 9시 이후부터 체크인이 불가합니다.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "체크아웃 시간 연장을 원할 경우 1시간당 10,000원이 부과됩니다.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "이용 중 발생하는 쓰레기는 지정된 장소에 분리수거하여 주십시오.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "기상악화로 인한 비행기/배 결항시 증빙서류를 보내주시면 전액 환불하여 드립니다.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "고객의 안전을 위해 캠핑카 및 차량 진입이 불가합니다.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "개인 차량은 짐을 하차한 후에 주차장에 주차해 주십시오.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "차량이동 시 서행해 주시고 안전사고에 유의해주세요.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "천재지변 또는 기상악화로 피난이 필요한 경우에는 관리자의 지시에 따라 주시기 바랍니다.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "유아 동반 시 수영장, 샤워실 등 부대시설에서 안전사고가 발생하지 않도록 각별한 주의를 부탁드립니다.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "데크 내에서 절대 금연 및 숯불(데크 앞 마당 이용 가능) 사용을 금하며, 폭죽 및 불꽃놀이 금지입니다.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "캠핑장 내에서는 다른 고객의 편안한 이용을 위해 반려동물과 산책은 불가하며, 반려동물로 인한 민원 발생 시 퇴실 조치됩니다.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "캠핑장비 대여 안내",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "※ 편리한 캠핑을 위해 리셉션(프런트)에서 캠핑 장비를 대여하여 이용할 수 있습니다.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "대여 장비는 본인이 직접 설치해야 하며, 정비 후 반납해야 합니다.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "대여용품 분실 및 파손 시 동일 신제품 구매 비용이 청구됩니다.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "미반납 방치 시 수거 비용 100,000원이 청구됩니다.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "세척 등 정비 미흡 시 정비 비용 100,000원이 청구됩니다.",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "* 캠핑장비 대여 목록 : 텐트 4인용/6인용, IGT테이블, 캠핑테이블, 캠핑의자, 침낭, 조리도구, 랜턴",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "환불규정",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "기준일 환불 금액",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "체크인 7일 전까지 총 결제금액의 100% 환불",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "체크인 3일 전까지 총 결제금액의 50% 환불",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "체크인 2일 전까지 총 결제금액 환불 불가",
+     "url": "http://kylinvillaresort.com/camping.html?ckattempt=1"
+    },
+    {
+     "text": "반려동물 투숙 이용 규정 및 이용 요금안내",
+     "url": "http://kylinvillaresort.com/table.html?table=notice&ckattempt=1"
+    },
+    {
+     "text": "체크아웃",
+     "url": "https://be4.wingsbooking.com/KYN1"
+    },
+    {
+     "text": "체크인 시간",
+     "url": "https://be4.wingsbooking.com/KYN1"
+    },
+    {
+     "text": "체크아웃 시간",
+     "url": "https://be4.wingsbooking.com/KYN1"
+    },
+    {
+     "text": "프로모션 코드 할인 받기",
+     "url": "https://be4.wingsbooking.com/KYN1"
+    },
+    {
+     "text": "할인코드",
+     "url": "https://be4.wingsbooking.com/KYN1"
+    },
+    {
+     "text": "숙소에서 제공한 할인코드를 입력하세요.",
+     "url": "https://be4.wingsbooking.com/KYN1"
+    }
+   ]
   },
   "101861": {
    "name": "영주시 여우골 야영장",
@@ -42405,13 +42955,196 @@
   },
   "102006": {
    "name": "팜파스농원",
-   "status": "NO_RELEVANT_TEXT",
-   "url": "http://www.whitecamp.co.kr/",
-   "checked_at": "2026-10-15T23:28:56.977Z",
+   "status": "OK",
+   "url": "http://www.whitecamp.co.kr/?ckattempt=1",
+   "checked_at": "2026-10-16T00:58:02.722Z",
+   "rendered": true,
    "pages": [
-    "http://www.whitecamp.co.kr/"
+    "http://www.whitecamp.co.kr/?ckattempt=1",
+    "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
    ],
-   "snippets": []
+   "snippets": [
+    {
+     "text": "객실요금, 취소환불 및 예약시",
+     "url": "http://www.whitecamp.co.kr/?ckattempt=1"
+    },
+    {
+     "text": "백로주 캠핑앤파크 요금 및 이용안내 입니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "요금안내",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "객실사진 사이트명 사이즈 형태 인원 비수기 성수기",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "여름성수기 : 실시간달력 참조",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "입장시 가동 관리사무실에서 체크인 하세요.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "(종량제 쓰레기봉투 수령)",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "저녁10시부터 익일 오전7시 매너 타임이며 저녁 11시에는 전원 소등 및 취침 준비해 주세요.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "방문객은 입장 불가합니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "(당일 최대 인원을 초과하는 인원 입장시 예약을 취소 하겠습니다.)",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "카라반, 캠핑카, 폴딩트레일러, 루프탑, 차박형 차량은 이용이 가능합니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "A사이트외 애완견 동반 출입금지 (당일 취소 간주, 환불 불가)",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "이용요금은 실시간달력 확인 후 예약하시기 바랍니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "예약 후 입금은 12시간내 입금하셔야 되며 미입금시 예약이 취소됩니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "예약 인원 초과시 입장 거절 및 예약 취소됩니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "A사이트 외 애완견 동반 출입 금지(당일 취소 간주, 환불 불가)",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "카라반, 캠핑카, 폴딩트레일러, 루프탑, 차박형 차량은 이용 가능합니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "여름성수기 기간 : 실시간달력 참조",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "캠팡장 입장시 예약자 확인을 위해 반드시 캠핑장 관리사무실을 경유하며,관리자의 안내에 따라 주시기 바랍니다.(신분증, 할인관련 서류 지참)",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "화장실/샤워실 남,녀 분리 사용",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "내부 또는 외부 개수대 공동 사용",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "모든 사이트 텐트 옆 바로 주차(차량1대 기준) 가능하고 타프 설치 가능",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "관리사무실에서 종량제 쓰레기 봉투, 장작 구매 가능",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "저녁10시부터 익일 오전7시까지 매너타임이며, 저녁11시에는 전원 소등 및 취침 바랍니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "깨끗한 환경을 위해 음식물과 쓰레기는 분리 수거하여 지정된 장소에 버립니다.(종량제 쓰레기 봉투&분리수거 봉투는 관리사무실에서 수령 하시면 됩니다.)",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "화로를 이용한 숯과 장작 재는 소각 확인 후 지정된 장소에 버리고 세척 바랍니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "이용객의 방문객 또는 방문 차량은 입장이 허용되지 않습니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "[반려동물 출입 안내]",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "A사이트 외 애완견 동반 출입 금지(당일 취소 간주, 환불 불가) 반려동물(개, 고양이) 한해 10kg이하만 출입 가능합니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "광견병 및 5차 접종 완료된 반려견만 이용 가능합니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "전염성 질병이 있는 반려견과 짖거나 공경성이 있을 경우 입장(출입) 제한합니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "반려동물의 배설물은 즉시 치워야 하며 배변 패드를 지참 바랍니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "반려동물로 인한 사고 발생시 보호자가 모든 책임을 부담합니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "[전기 사용 제한]",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "캠핑장 내 전기 사용 제한은 사이트당 총600W 이하로 사용(법적 제한)하셔야 합니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "전기포트·인덕션·전자레인지·전기밥솥·전기그릴·전기스토브·전기난로·에어컨 등 600W 이상 제품은 사용이 금지되며, KC인증 제품 사용 바랍니다.(과도한 전기 사용 자제)",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "전기 릴선은 완전히 풀어서 사용하며 콘센트의 문어발 사용을 제한합니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "장작, 숯 사용시 화로대를 이용하며 사용 후 지정된 장소에 버려야 합니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "데크 위에서는 화로대 사용을 금지하고 텐트 내에서는 화기 용품 사용을 금지합니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "[취소시 환불기준]",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "취소수수료(%) 환불없음 30% 50% 60% 70% 80% 90% 100%",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "기준 취소수수료(%)",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "당일 환불불가",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "그 외 이용 요금의 10% 공제 후 환불",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    },
+    {
+     "text": "전체 금액을 기준으로 책정된 공제 금액을 입금액에 적용하여 환불됩니다.",
+     "url": "http://www.whitecamp.co.kr/guide.html?ckattempt=1"
+    }
+   ]
   },
   "102014": {
    "name": "카라카리조트",
@@ -42484,9 +43217,9 @@
   "102015": {
    "name": "메종드글램",
    "status": "FETCH_FAILED",
-   "url": "https://maisondeglam.co.kr/",
-   "checked_at": "2026-10-15T23:28:58.178Z",
-   "error": 403
+   "url": "https://maisondeglam.co.kr/res",
+   "checked_at": "2026-10-16T00:58:04.497Z",
+   "error": "403"
   },
   "102031": {
    "name": "대운산 하늘숲 야영장",
@@ -42687,6 +43420,13 @@
     "https://www.coveiseverywhere.com/shopinfo/contact.html?cate_no=60"
    ],
    "snippets": []
+  },
+  "102074": {
+   "name": "공룡자연 팜핑장",
+   "status": "FETCH_FAILED",
+   "url": "https://new.smartplace.never.com/bizes/booking/1602568",
+   "checked_at": "2026-10-16T00:57:23.587Z",
+   "error": "ENOTFOUND"
   },
   "102104": {
    "name": "경상북도교육청 영주소백산오토캠핑장",
@@ -43160,6 +43900,70 @@
    "url": "https://xn--bj0b46pu8mgtar8oi6oiub.kr/",
    "checked_at": "2026-10-16T00:49:45.472Z",
    "error": "403"
+  },
+  "102170": {
+   "name": "쉼오지캠프캠핑장",
+   "status": "OK",
+   "url": "http://www.swimozicamp.com/",
+   "checked_at": "2026-10-16T00:57:13.101Z",
+   "pages": [
+    "http://www.swimozicamp.com/",
+    "http://www.swimozicamp.com/board/bbs/board.php?bo_table=notice",
+    "http://www.swimozicamp.com/html/camp.html",
+    "http://www.swimozicamp.com/html/map.html",
+    "http://www.swimozicamp.com/html/outer.html",
+    "http://www.swimozicamp.com/board/bbs/board.php?bo_table=gallery"
+   ],
+   "snippets": [
+    {
+     "text": "15×10m",
+     "url": "http://www.swimozicamp.com/"
+    },
+    {
+     "text": "12×8m",
+     "url": "http://www.swimozicamp.com/"
+    },
+    {
+     "text": "10×7m",
+     "url": "http://www.swimozicamp.com/"
+    },
+    {
+     "text": "- 그대로 들어 오셔서 쉼오지캠프 이정표를 따라 겨속 직진하셔서 주차장으로 오시면 됩니다",
+     "url": "http://www.swimozicamp.com/html/map.html"
+    },
+    {
+     "text": "사이트명 : 해 면적 : 15×10(m)",
+     "url": "http://www.swimozicamp.com/html/outer.html"
+    },
+    {
+     "text": "사이트명 : 달 면적 : 15×10(m)",
+     "url": "http://www.swimozicamp.com/html/outer.html"
+    },
+    {
+     "text": "사이트명 : 별 면적 : 15×10(m)",
+     "url": "http://www.swimozicamp.com/html/outer.html"
+    },
+    {
+     "text": "사이트명 : 빛 면적 : 12×8(m)",
+     "url": "http://www.swimozicamp.com/html/outer.html"
+    },
+    {
+     "text": "사이트명 : 강 면적 : 12×8(m)",
+     "url": "http://www.swimozicamp.com/html/outer.html"
+    },
+    {
+     "text": "사이트명 : 산 면적 : 12×8(m)",
+     "url": "http://www.swimozicamp.com/html/outer.html"
+    },
+    {
+     "text": "사이트명 : 들 면적 : 12×8(m)",
+     "url": "http://www.swimozicamp.com/html/outer.html"
+    },
+    {
+     "text": "사이트명 : 숲 면적 : 10×7(m)",
+     "url": "http://www.swimozicamp.com/html/outer.html"
+    }
+   ]
   },
   "102206": {
    "name": "오차드블리스",
@@ -43689,6 +44493,6 @@
    "error": "403"
   }
  },
- "generated_at": "2026-10-16T00:56:27.683Z",
+ "generated_at": "2026-10-16T00:58:20.083Z",
  "policy": "운영자 자체 홈페이지·예약 페이지만, robots.txt 준수, 봇 이름 공개, 문장(≤140자)·원문 URL·확인 시각만 저장. 플랫폼 페이지는 수집하지 않음."
 }
