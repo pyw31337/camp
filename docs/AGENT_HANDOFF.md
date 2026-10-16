@@ -10,7 +10,7 @@
 - 기준 설계: 전국 등록 야영장은 한국관광공사 고캠핑 API를 기준 모수로 삼고, 실제 재고·가격은 공식 예약 채널에서 별도 확인한다.
 - 데이터 모델: PostgreSQL 16+용 초기 스키마가 `db/001_initial_schema.sql`에 있다. 시설·구역·상품·재고·요금·예약 정책·원천 증빙·미디어 권리를 분리한다.
 - 내 캠핑 세팅 UI: 탐색 화면은 장비 크기·전력·텐트 옆 주차·장작 불멍으로 `MATCH`/`CONDITIONAL`/`UNKNOWN`/`MISMATCH`를 계산한다. 현재 공개 카탈로그의 사실이 없으면 `UNKNOWN`으로 남기며, `condition_fact` 파일럿을 공개 읽기 모델에 연결할 때만 해당 값의 원천·검증 상태를 화면 근거로 승격한다.
-- 디자인: **시안 v2**가 기준이다. 원본 `design/mockup-v2/src.html` → `design/build.mjs`가 Lucide·Tabler 스프라이트와 Pretendard 서브셋을 인라인해 `index.html` 생성. 사용자 검토 대기. v1은 `design/mockup/`에 참고용으로 남김.
+- 디자인: 공개 화면 기준은 **v4.2 “Ink & Leaf”**(`design/brand-tokens.mjs`, `design/explore/_v4.css`)다. 별도 검토용 **Vision 01**을 `design/vision/` → `scripts/publish-vision-mockup.mjs` → `/camp/vision/`으로 발행했다. 사용자 승인 전 기존 화면을 교체하지 않는다.
 - 운영 전제: 무료 운영, 로그인 보류. 알림은 `.ics` 구독, 관심 목록은 브라우저 저장. 소유자 작업은 `docs/OWNER_TODO.md`.
 - **주소 통일(2026-10-13, 소유자 요청)**: 서비스 주소는 https://pyw31337.github.io/camp/ 하나다. Cloudflare Pages(`*.moyeora-6pd.pages.dev`)와 `deploy-cloudflare.yml`·`scripts/assemble-site.mjs`는 폐기했다. 전국 캠핑장 탐색 화면은 `/camp/explore/`에 둔다: main의 `data-sync.yml` 마지막 단계가 `scripts/publish-explorer-pages.mjs`로 `camping-atlas/public/explore/`(화면 + `data/campgrounds.json`·`meta.json`)를 만들어 커밋하고, `deploy-pages.yml`은 `workflow_run`(Data sync 완료, main)으로도 실행된다(GITHUB_TOKEN 커밋은 push 워크플로를 깨우지 않기 때문). 홈 상단 ‘전국 캠핑장 찾기’와 하단 ‘찾기’가 `explore/`로 연결된다. 카카오 JS SDK 도메인에 `https://pyw31337.github.io` 등록 필요(소유자).
 - 파이프라인: `pipeline/`에 고캠핑 수집·정규화, 예약 규칙 레지스트리, 예약 오픈 캘린더 계산기와 테스트가 있다. `data-sync.yml`이 매일 실행되며 키가 없으면 고캠핑 단계는 건너뛴다.
@@ -22,6 +22,16 @@
 - 파일럿 입력 계약(2026-10-15): Codex는 화면·DB 구현과 겹치지 않도록 `docs/PILOT_INTAKE_CONTRACT.md`에 원천 승인 카드, 운영자 조건표 범위, 증빙·검수 규칙, 빈자리 관측 제출 계약을 작성했다. 제미나이/다른 구현자는 이 계약의 상태명·필드 코드를 기준으로 하되, 해당 문서 자체를 DB 스키마로 간주하거나 허가 없는 플랫폼 수집을 추가하지 않는다.
 - 전국 조건 전수조사 완료(2026-10-15, Gemini): 관광진흥법 야영장 안전기준 및 고캠핑 공식 등록값·소개글을 바탕으로 전국 3,116곳 전수조사 엔진(`survey-extractor.mjs`)을 구축하고, 텐트 옆 주차 1,288곳, 600W/고전력 2,114곳, 불멍 2,420곳, 위생 1,688곳, 키즈 2,174곳 데이터를 카탈로그와 탐색 UI에 일괄 반영했다.
 - **조건 품질 경계 보강(2026-10-15, Codex)**: 전국 전수 추출의 `SURVEYED` 값은 소개글·시설 분류에서 나온 발견 신호이며, 직접 원문 대조 파일럿의 `VERIFIED`와 등급이 다르다. 내 캠핑 세팅의 전력 W·텐트 옆 주차·장작 불멍은 `VERIFIED` 조건표가 있을 때만 `MATCH`/`MISMATCH`를 낸다. 고캠핑의 구조화된 사이트 규격은 별도 직접 등록값으로 계속 비교할 수 있다. 자세한 계약은 `PILOT_INTAKE_CONTRACT.md` 2.1절이다.
+
+## Vision 01 시안 (2026-10-16)
+
+| 작업 | 내용 | 검증 |
+| --- | --- | --- |
+| 디자인 방향 재정의 | 사용자의 Taste `Camp` 컬렉션과 Claude 18개 시안을 검토했다. 사진 위 강한 타이포·글래스 입력 패널(B), 비교 가능한 스펙북(C), 지도 탐색(D), 굵기 대비(A)을 결합했다. 카드/상세의 핵심은 예약 채널·사이트 규격·전기 W·주차 방식·장작/숯 규칙이며, 출처·설명은 `i`에 접는다. 자세한 기획은 `docs/VISION_V3_PLAN.md`. | Taste 컬렉션 주요 레퍼런스(Terra Cotta Landing, Xplore Hero Landing, Resy Map) 실제 화면 확인. Claude는 정규화된 비교 규칙은 채택하되, 저채도·텍스트 과다 표현은 채택하지 않음. |
+| 독립 시안 구현 | `design/vision/`에 반응형 단일 시안(검색, 조건 필터, 전국 카탈로그 로드, 비교함, 지도 핀, 정보 i 팝오버)을 만들었다. `camping-atlas/public/vision/`은 생성물이며 손으로 수정하지 않는다. 히어로 `assets/korea-camp-hero-v1.png`는 생성 이미지이고 특정 업장을 나타내지 않는다. 카드 사진은 데이터의 고캠핑 공식 원문 URL만 사용한다. | `node --check design/vision/app.js`, `node --check scripts/publish-vision-mockup.mjs`, `git diff --check` 통과. 로컬 `/vision/` 데스크톱·모바일에서 실제 3,109개 카탈로그 로드, 강원 검색(548곳), 비교함, 지도 핀·신뢰도 팝오버 동작 확인. |
+| 신뢰 경계 | 만료된 `availability.json`은 0건으로 표시한다. `LIVE_AVAILABLE`은 `inventory_verified`와 유효 TTL이 모두 있을 때만 보이며, 현재 공식 ‘접수 중’은 빈자리 수가 아니다. 전기 600W·주차·불멍이 후기 언급이면 카드에 `확인 필요`를 유지한다. | 시안 코드 `updateMetrics`, `DEMO_FACTS`의 원천/후기 분기 확인. |
+
+다음 작업: 소유자가 `/vision/`의 방향을 승인하면, `design/explore/`로 컴포넌트를 단계 이식한다. 먼저 공개 검색 인덱스(이름·지역·유형·규격 요약·검증 예약 링크)를 작게 만들고, 이후에 사이트/상품 스키마와 허용된 예약 재고 어댑터를 연결한다. 민간 예약 플랫폼의 재고·가격·상품 사진을 무단 수집해 구현하지 않는다.
 
 ## Claude 단독 인수(2026-10-15 밤) — 먼저 읽을 것
 

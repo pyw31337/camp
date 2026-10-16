@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="모여라캠핑 탐색·비교·지도 경험 시안" />
+    <title>모여라캠핑 — 탐색 경험 시안</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#results">탐색 결과로 건너뛰기</a>
+    <div class="page-noise" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="모여라캠핑 홈">
+        <span class="brand-mark">M</span>
+        <span>모여라캠핑</span>
+      </a>
+      <nav aria-label="주요 메뉴">
+        <a class="active" href="#results">캠핑장 찾기</a>
+        <a href="#themes">테마</a>
+        <a href="#map-search">지도</a>
+        <a href="#compare">비교</a>
+        <a href="#reservation">예약 현황</a>
+      </nav>
+      <button class="header-action" type="button" data-toast="내 캠핑 프로필은 다음 단계에서 연결됩니다.">내 캠핑 <span>↗</span></button>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img class="hero-image" src="./assets/korea-camp-hero-v1.png" alt="산과 단풍숲을 배경으로 텐트와 카라반이 있는 해질녘 국내 캠핑장 이미지" />
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-orb orb-one" aria-hidden="true"></div>
+        <div class="hero-orb orb-two" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> CAMP DECISION SYSTEM / VISION 01</p>
+          <h1 id="hero-title"><em>이번 주말,</em><br />빈자리를 찾는<br /><strong>가장 좋은 방식.</strong></h1>
+          <p class="hero-intro">예약 가능 여부는 확인된 것만, 캠핑의 조건은 사이트 단위로.<br />사진으로 끌리고, 데이터로 결정합니다.</p>
+          <div class="hero-proof">
+            <span><b id="camp-count">3,109</b> 전국 캠핑장</span>
+            <span><b id="open-count">—</b> 공식 접수 현황</span>
+            <button class="info-button inverse" type="button" aria-expanded="false" aria-label="현황 산정 방식"><i>i</i><span class="info-popover">현황은 원천 URL·확인 시각·유효 시간이 있는 공식 또는 계약 데이터만 별도로 표시합니다. 접수 중은 빈자리와 다릅니다.</span></button>
+          </div>
+        </div>
+
+        <form class="search-panel" id="search-form" novalidate>
+          <div class="search-panel-top">
+            <span class="search-kicker"><i></i> 예약 탐색기</span>
+            <span class="search-truth">확정값만 전면 노출 <button class="info-button" type="button" aria-expanded="false" aria-label="신뢰도 설명"><i>i</i><span class="info-popover">실시간 잔여는 날짜·인원·상품·수량을 공식 원천이 준 경우에만 ‘예약 가능’으로 표시합니다.</span></button></span>
+          </div>
+          <label class="search-field main-field">
+            <span>어디로</span>
+            <input id="search-query" name="q" type="search" autocomplete="off" placeholder="강원 · 계곡 · 캠핑장 이름" />
+          </label>
+          <label class="search-field">
+            <span>언제</span>
+            <input name="date" type="text" value="이번 주말" aria-label="여행 날짜" />
+          </label>
+          <label class="search-field">
+            <span>누구와</span>
+            <input name="party" type="text" value="성인 2 · 차 1" aria-label="여행 인원" />
+          </label>
+          <label class="search-field equipment-field">
+            <span>내 장비</span>
+            <input name="gear" type="text" value="전기 600W · 불멍" aria-label="캠핑 장비 조건" />
+          </label>
+          <button class="search-submit" type="submit"><span>조건으로 찾기</span><b>→</b></button>
+        </form>
+        <div class="hero-footnote">예약 조건을 넣으면 <strong>실시간 확인 · 예약 채널 · 사이트 규격</strong> 순으로 결과를 정리합니다.</div>
+      </section>
+
+      <section class="pulse-strip" id="reservation" aria-label="예약 데이터 현황">
+        <p><span class="pulse-dot"></span> 지금 볼 수 있는 예약 정보</p>
+        <div class="pulse-items">
+          <div><b id="live-count">—</b><span>실시간 잔여 확인</span></div>
+          <div><b id="official-count">—</b><span>공식 예약 채널</span></div>
+          <div><b id="spec-count">—</b><span>사이트 규격 보유</span></div>
+          <a href="#results">신뢰도 기준 보기 <span>↗</span></a>
+        </div>
+      </section>
+
+      <section class="explore-section" id="results" aria-labelledby="results-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow ink"><span></span> SEARCH THAT EXPLAINS ITSELF</p>
+            <h2 id="results-heading">사진으로 먼저 고르고,<br /><strong>필요한 것만 크게 확인.</strong></h2>
+          </div>
+          <p class="section-lead">전국 캠핑장을 같은 읽는 순서로 바꿉니다. 사진 다음에는 ‘예약 경로’, ‘사이트 규격’, ‘현장 조건’만 남깁니다. 출처·근거는 <b>i</b> 안에 접어 둡니다.</p>
+        </div>
+
+        <div class="mode-tabs" role="tablist" aria-label="탐색 방식">
+          <button class="mode-tab active" id="keyword-tab" data-mode="list" role="tab" aria-selected="true" aria-controls="cards-view"><span>⌕</span> 키워드</button>
+          <button class="mode-tab" data-mode="theme" role="tab" aria-selected="false"><span>✦</span> 테마</button>
+          <button class="mode-tab" data-mode="map" role="tab" aria-selected="false"><span>⌖</span> 지도에서 찾기</button>
+          <span class="mode-rule"></span>
+          <button class="compare-button" id="compare-button" type="button" data-toast="비교함에 캠핑장을 2~3곳 담으면 차이만 모아 볼 수 있습니다.">나란히 비교 <b id="compare-count">0</b></button>
+        </div>
+
+        <div class="filter-row" aria-label="빠른 조건">
+          <button class="filter-chip active" type="button" data-filter="all">전체 <span id="result-count">3,109</span></button>
+          <button class="filter-chip" type="button" data-filter="강원">강원</button>
+          <button class="filter-chip" type="button" data-filter="서울·경기">서울·경기</button>
+          <button class="filter-chip" type="button" data-filter="충청">충청</button>
+          <button class="filter-chip" type="button" data-filter="전기">전기</button>
+          <button class="filter-chip" type="button" data-filter="장작판매">장작 판매</button>
+          <button class="filter-chip" type="button" data-filter="AUTO_PITCH">오토캠핑</button>
+          <span class="filter-spacer"></span>
+          <label class="sort-control">정렬 <select id="sort-select" aria-label="정렬 기준"><option value="complete">정보가 풍부한 순</option><option value="name">이름순</option><option value="area">지역순</option></select></label>
+        </div>
+
+        <div class="explore-layout">
+          <aside class="decision-rail" aria-label="선택 기준">
+            <p class="rail-label">DECISION<br />ORDER</p>
+            <ol>
+              <li><b>01</b><span>공식 예약<br />경로</span></li>
+              <li><b>02</b><span>사이트<br />규격</span></li>
+              <li><b>03</b><span>전기 · 주차<br />불멍</span></li>
+              <li><b>04</b><span>가는 길<br />주변정보</span></li>
+            </ol>
+          </aside>
+          <div class="camp-grid" id="cards-view" aria-live="polite"></div>
+          <div class="empty-state" id="empty-state" hidden><span>⌕</span><h3>맞는 캠핑장을 찾지 못했어요.</h3><p>지역 또는 조건을 하나만 남기고 다시 찾아보세요.</p><button type="button" id="reset-filters">조건 초기화</button></div>
+        </div>
+        <button class="more-results" id="more-results" type="button">더 많은 캠핑장 보기 <span>+</span></button>
+      </section>
+
+      <section class="map-section" id="map-search" aria-labelledby="map-heading">
+        <div class="map-copy">
+          <p class="eyebrow"><span></span> MAP IS A SEARCH MODE, NOT A DECORATION</p>
+          <h2 id="map-heading">지도에서,<br />조건이 맞는 곳만<br /><strong>점등합니다.</strong></h2>
+          <p>지역 안의 모든 점을 같은 색으로 찍지 않습니다. 예약 채널, 사이트 규모, 내 장비 조건이 모인 곳부터 전면에 꺼냅니다.</p>
+          <div class="map-legend">
+            <span><i class="marker verified"></i> 공식 예약 경로</span>
+            <span><i class="marker spec"></i> 사이트 규격 보유</span>
+            <span><i class="marker unknown"></i> 확인 필요</span>
+          </div>
+          <a href="#results" class="map-link">조건 다시 고르기 <span>↗</span></a>
+        </div>
+        <div class="map-canvas" id="map-canvas" aria-label="대한민국 캠핑장 지도 시안">
+          <div class="map-grid-lines" aria-hidden="true"></div>
+          <div class="map-water-label water-one">EAST SEA</div><div class="map-water-label water-two">YELLOW SEA</div>
+          <div class="map-region region-seoul">서울·경기</div><div class="map-region region-gangwon">강원</div><div class="map-region region-chungcheong">충청</div><div class="map-region region-gyeongsang">경상</div><div class="map-region region-jeolla">전라</div>
+          <div class="map-detail-card" id="map-detail-card"><span>선택한 캠핑장</span><b>지도의 핀을 눌러 보세요.</b><small>사이트 규격 · 예약 채널 · 현장 조건</small></div>
+        </div>
+      </section>
+
+      <section class="system-section" id="themes" aria-labelledby="system-heading">
+        <div class="system-title">
+          <p class="eyebrow ink"><span></span> NOT ANOTHER CAMPING DIRECTORY</p>
+          <h2 id="system-heading">예약 플랫폼과는<br /><strong>다른 역할을 합니다.</strong></h2>
+        </div>
+        <div class="system-cards">
+          <article class="system-card coral-card"><p>01</p><h3>모든 캠핑장을<br />같은 문법으로</h3><span>시설 단위가 아니라, 사이트·상품·규칙 단위로 정렬합니다.</span></article>
+          <article class="system-card lime-card"><p>02</p><h3>‘가능’과<br />‘추정’을 분리</h3><span>재고·가격·오픈 정보는 원천과 유효 시각이 있을 때만 확정값입니다.</span></article>
+          <article class="system-card blue-card"><p>03</p><h3>가는 길까지<br />한 번에</h3><span>쉼터·마트·공영화장실·관광지를 출발 동선에 맞춰 연결합니다.</span></article>
+        </div>
+      </section>
+
+      <section class="compare-section" id="compare" aria-labelledby="compare-heading">
+        <div class="compare-top">
+          <div><p class="eyebrow"><span></span> THE SPEC BOOK</p><h2 id="compare-heading">업장마다 다른 말을,<br /><strong>같은 표로 읽습니다.</strong></h2></div>
+          <p>세부 페이지는 ‘분위기 소개’보다 판단을 앞세웁니다. 값이 확인되지 않으면 빈칸으로 꾸미지 않고, <b>확인 필요</b>로 남깁니다.</p>
+        </div>
+        <div class="spec-table" role="table" aria-label="통일된 캠핑장 스펙 표 예시">
+          <div class="spec-head" role="row"><span role="columnheader">확인 항목</span><span role="columnheader">표기 규칙</span><span role="columnheader">카드에서 먼저 보는 값</span></div>
+          <div class="spec-row" role="row"><span role="cell">전기</span><span role="cell"><b class="truth-dot strong"></b> 허용 W · 차단 기준</span><span role="cell"><em>600W</em> 또는 <i>W 확인 필요</i></span></div>
+          <div class="spec-row" role="row"><span role="cell">주차</span><span role="cell"><b class="truth-dot medium"></b> 사이트 옆 / 외부 주차</span><span role="cell"><em>사이트 옆</em> · 도보 거리</span></div>
+          <div class="spec-row" role="row"><span role="cell">불멍</span><span role="cell"><b class="truth-dot strong"></b> 장작 / 숯 / 지정 화로대</span><span role="cell"><em>장작 가능</em> · 숯만</span></div>
+          <div class="spec-row" role="row"><span role="cell">사이트</span><span role="cell"><b class="truth-dot strong"></b> 가로 × 세로 · 바닥 · 면수</span><span role="cell"><em>10×10m</em> · 파쇄석</span></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span class="brand"><span class="brand-mark">M</span> 모여라캠핑</span>
+      <p>VISION 01 · 실제 예약 판단을 위한 캠핑 탐색 시스템</p>
+      <a href="../explore/">현재 서비스 보기 <span>↗</span></a>
+    </footer>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
