@@ -23,6 +23,37 @@
 - 전국 조건 전수조사 완료(2026-10-15, Gemini): 관광진흥법 야영장 안전기준 및 고캠핑 공식 등록값·소개글을 바탕으로 전국 3,116곳 전수조사 엔진(`survey-extractor.mjs`)을 구축하고, 텐트 옆 주차 1,288곳, 600W/고전력 2,114곳, 불멍 2,420곳, 위생 1,688곳, 키즈 2,174곳 데이터를 카탈로그와 탐색 UI에 일괄 반영했다.
 - **조건 품질 경계 보강(2026-10-15, Codex)**: 전국 전수 추출의 `SURVEYED` 값은 소개글·시설 분류에서 나온 발견 신호이며, 직접 원문 대조 파일럿의 `VERIFIED`와 등급이 다르다. 내 캠핑 세팅의 전력 W·텐트 옆 주차·장작 불멍은 `VERIFIED` 조건표가 있을 때만 `MATCH`/`MISMATCH`를 낸다. 고캠핑의 구조화된 사이트 규격은 별도 직접 등록값으로 계속 비교할 수 있다. 자세한 계약은 `PILOT_INTAKE_CONTRACT.md` 2.1절이다.
 
+## Supabase 운영 DB 전량 적재 + 무과금 안전 모니터링 체계 완비 (2026-10-16 밤, Gemini) — 전 에이전트 필독
+
+소유자 요청: “무료라면 슈파베이스 연결해서 사용하지 뭐. / 슈파베이스 외 외부서비스와 API 등에서 유료로 과금되지 않게 잘 모니터링해줘. 현재 상황을 다른 에이전트들이 알 수 있게 공유해줘.”
+
+1. **Supabase PostgreSQL 17 클라우드 운영 DB 완전 구축**:
+   - 연결 풀러: `aws-0-ap-southeast-2.pooler.supabase.com:5432` (세션 풀러, IPv4 호환), SSL 암호화 적용.
+   - GitHub Actions 환경 변수 `DATABASE_URL`, `DATABASE_SSL=true` 등록 완료.
+   - 전체 11개 스키마 마이그레이션 (`db/001` ~ `db/011`) 49개 테이블 생성 완료.
+   - `scripts/import-all-to-supabase.mjs` 일괄 적재 완료:
+     - **3,116개** 캠핑장 마스터 (`campground`, `external_identifier`)
+     - **1,245개** AI 분석 리뷰 다이제스트 (`review_digest`)
+     - **16,870건** 네이버 블로그/카페 후기 원문 (`review_post`)
+     - **6,732건** 유튜브 영상 클립 메타 (`video_content`)
+     - **17건** 실시간 운영 이슈 & 행사 이벤트 (`operating_issue_event`)
+   - **DB 용량 상태**: 현재 500MB 무료 한도 중 **29 MB (약 5.8%)**만 사용하여 90% 이상의 여유 공간 확보. 대용량 바이너리/이미지 파일을 직접 적재하지 않고 URL 메타만 유지하여 용량을 최소화함.
+   - 정기 수집 워크플로(`.github/workflows/review-digest-sync.yml`)에 `npm run db:import-supabase` 단계를 포함시켜 향후 주간 수집 시에도 운영 DB에 실시간 자동 동기화됨.
+
+2. **외부 서비스 및 API 무과금 안전 운영 지침 (Zero-Cost Policy)**:
+   - 전담 문서 신설: `docs/EXTERNAL_SERVICES_BILLING_SAFETY.md`
+   - **점검 도구**: `npm --prefix pipeline run check:billing` (Supabase DB 용량 400MB 초과 경고, NAVER API HUB 공식 요금표 0원 검증, 카카오 호출 한도, 공공데이터 무료 상태를 일괄 점검).
+   - `.github/workflows/api-key-check.yml`에 `npm run check:billing` 스텝을 추가하여 워크플로 실행 시마다 비용 안전성을 자동 검증.
+   - **과금 방지 3대 규칙**:
+     1. 유료 결제 수단(신용카드/유료 청구 프로필) 절대 미등록.
+     2. 한시 무료 API는 호출 전 fail-closed 방식으로 요금표 0원 실시간 검증 (`naver-guard.mjs`).
+     3. 외부 호출 수집 스크립트는 무료 쿼터의 절반 이하 하드 캡(`SOCIAL_MAX_CALLS=9100`) 엄수.
+
+3. **실 서비스 배포 및 기능 검증 완료**:
+   - 배포 URL: [https://pyw31337.github.io/camp/](https://pyw31337.github.io/camp/) (GitHub Pages 배포 성공 완료).
+   - 홈 화면: AI 분석 추천 캠핑장 동적 카드 및 전국 지도 탐색 CTA 전면 반영.
+   - 지도 화면: 카카오 지도 SDK 정상 로드 및 카카오 검색 API KA 헤더 이슈 해결.
+   - 댓글 기능: GitHub Discussions(`pyw31337/camp`) 기반 Giscus 댓글 모듈 활성화.
 
 ## 네이버 HUB 지역 검색 연결 + 카카오 발굴 실행 (2026-10-16 밤, Claude)
 

@@ -46,7 +46,8 @@
     "sync:photo-gallery": "node scripts/sync-photo-gallery.mjs",
     "build:review-digest": "node scripts/build-review-digest.mjs",
     "build:db": "node scripts/build-database.mjs",
-    "db:import-supabase": "node scripts/import-all-to-supabase.mjs"
+    "db:import-supabase": "node scripts/import-all-to-supabase.mjs",
+    "check:billing": "node scripts/check-external-services-billing.mjs"
   },
   "dependencies": {
     "pg": "8.23.1",

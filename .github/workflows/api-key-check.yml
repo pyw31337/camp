@@ -58,3 +58,8 @@ jobs:
           catch (e) { console.log("관광사진 실패", e.message.slice(0, 200)); process.exit(1); }'
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+      - name: Check external services & API billing safety
+        run: npm run check:billing
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
