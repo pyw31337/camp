@@ -635,3 +635,19 @@ body.map-mode { overflow: hidden; height: 100dvh; }
   .ch { flex-direction: column; align-items: flex-start; }
   .sec-head.big { flex-wrap: wrap; }
 }
+
+/* 1박 요금대 필터 & 사이트 규격/요금 표 */
+.fee-filter { width: 100%; max-width: 1400px; margin: 0 auto; padding: 4px var(--side-pad, 20px) 14px; }
+.fee-bands { display: flex; align-items: center; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+.fee-bands::-webkit-scrollbar { display: none; }
+.fee-band-lbl { font-size: .84rem; font-weight: 800; color: var(--ink-2); margin-right: 4px; white-space: nowrap; }
+.fee-chip { height: 34px; padding: 0 14px; font-size: .86rem; border-radius: 999px; }
+.fee-chip i { font-size: .78rem; opacity: .7; font-weight: 500; margin-left: 2px; font-style: normal; }
+[data-v="b"] .fee-chip, [data-v="c"] .fee-chip { border: 1px solid var(--line); }
+
+.table-wrap { overflow-x: auto; margin-top: 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--paper); }
+.site-table { width: 100%; border-collapse: collapse; font-size: .88rem; text-align: left; }
+.site-table th, .site-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.site-table th { background: var(--soft); font-weight: 700; color: var(--ink-2); white-space: nowrap; }
+.site-table td.text-price { font-weight: 800; color: #237b42; }
+

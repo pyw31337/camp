@@ -7,6 +7,11 @@ const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[m]);
 const fmt = (n) => Number(n).toLocaleString("ko-KR");
+const band = (n) => {
+  if (n == null) return "-";
+  const m = Math.floor(n / 10000);
+  return m < 1 ? `${Math.round(n / 1000)}천원` : `${m}만원`;
+};
 const ic = (id, cls = "") => `<svg class="ic ${cls}" aria-hidden="true"><use href="#i-${id}"/></svg>`;
 const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
@@ -15,8 +20,8 @@ const store = {
 
 const S = {
   camps: [], byId: new Map(), photos: {}, cards: {}, openings: new Map(),
-  q: "", area: "all", quick: new Set(), theme: null, sort: "rich", shown: 24, mode: "keyword",
-  saved: store.get("mc-saved", store.get("mc-compare", [])), pick: store.get("mc-pick", []), gear: store.get("mc-gear", { size: "5.5x8", needs: ["park", "fire"] }),
+  q: "", area: "all", quick: new Set(), theme: null, feeBand: store.get("mc-feeband", ""), sort: "rich", shown: 24, mode: "keyword",
+  saved: store.get("mc-saved", store.get("mc-compare", [])), pick: store.get("mc-pick", []), compare: store.get("mc-compare", []), gear: store.get("mc-gear", { size: "5.5x8", needs: ["park", "fire"] }),
   detailCache: new Map(), homeScroll: 0,
 };
 
@@ -190,6 +195,10 @@ const THEMES = [
 function matches(c, { useArea = true } = {}) {
   if (useArea && S.area !== "all" && AREA_OF[sidoShort(c.sido)] !== S.area) return false;
   for (const k of S.quick) if (!QUICK[k].test(c)) return false;
+  if (S.feeBand === "u3" && !(c.fee?.min && c.fee.min <= 30000)) return false;
+  if (S.feeBand === "3to5" && !(c.fee?.min && c.fee.min <= 50000 && (c.fee.max == null || c.fee.max >= 30000))) return false;
+  if (S.feeBand === "5to7" && !(c.fee?.min && c.fee.min <= 70000 && (c.fee.max == null || c.fee.max >= 50000))) return false;
+  if (S.feeBand === "o7" && !(c.fee && (c.fee.min >= 70000 || (c.fee.max && c.fee.max >= 70000)))) return false;
   if (S.theme && S.theme !== "ALL") { const t = THEMES.find((x) => x[0] === S.theme); if (t && !t[2](c)) return false; }
   if (S.q) {
     const hay = c._hay ??= `${c.name} ${c.addr} ${c.sido} ${c.sigungu} ${(c.env ?? []).join(" ")} ${(c.types ?? []).join(" ")} ${c.pf?.s ?? ""}`.toLowerCase();
@@ -299,7 +308,7 @@ function card(c, i = 0) {
       <div class="name-row"><h3 class="card-name">${esc(nameOf(c).name)}</h3>${heartBtn(c)}</div>
       <p class="card-meta">${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}${verdictChip(c)}</p>
       ${rowsHtml(c)}
-      ${c.fee?.text ? `<p class="card-price"><span>1박</span><b>${esc(c.fee.text)}</b>${dot(GR(c.fee.grade))}</p>` : ""}
+      ${c.fee?.text ? `<p class="card-price"><span>1박</span><b>${esc(c.fee.text)}</b>${dot(GR(c.fee.grade))}</p>` : c.fee?.min ? `<p class="card-price"><span>1박</span><b>${band(c.fee.min)}부터</b>${dot(GR(c.fee.grade))}</p>` : ""}
     </div>
   </article>`;
 }
@@ -402,6 +411,17 @@ function homeView() {
     ${Object.entries(QUICK).map(([k, q]) => `<button type="button" class="qk qk-${q.cls}" data-quick="${k}" aria-pressed="${S.quick.has(k)}"><span class="qk-ic">${ic(q.icon)}</span><b>${q.label}</b><i>${fmt(countOf(q.test))}곳</i></button>`).join("")}
   </section>
 
+  <section class="fee-filter" aria-label="1박 요금대">
+    <div class="rail fee-bands">
+      <span class="fee-band-lbl">1박 요금</span>
+      <button type="button" class="chip fee-chip" data-fee-band="" aria-pressed="${!S.feeBand}">전체</button>
+      <button type="button" class="chip fee-chip" data-fee-band="u3" aria-pressed="${S.feeBand === 'u3'}">~3만원 <i>${fmt(countOf((c) => Boolean(c.fee?.min && c.fee.min <= 30000)))}</i></button>
+      <button type="button" class="chip fee-chip" data-fee-band="3to5" aria-pressed="${S.feeBand === '3to5'}">3~5만원 <i>${fmt(countOf((c) => Boolean(c.fee?.min && c.fee.min <= 50000 && (c.fee.max == null || c.fee.max >= 30000))))}</i></button>
+      <button type="button" class="chip fee-chip" data-fee-band="5to7" aria-pressed="${S.feeBand === '5to7'}">5~7만원 <i>${fmt(countOf((c) => Boolean(c.fee?.min && c.fee.min <= 70000 && (c.fee.max == null || c.fee.max >= 50000))))}</i></button>
+      <button type="button" class="chip fee-chip" data-fee-band="o7" aria-pressed="${S.feeBand === 'o7'}">7만원+ <i>${fmt(countOf((c) => Boolean(c.fee && (c.fee.min >= 70000 || (c.fee.max && c.fee.max >= 70000)))))}</i></button>
+    </div>
+  </section>
+
   ${openings.length ? `<section class="opens" aria-labelledby="op-t">
     <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2></div>
     <div class="rail opens-rail">${openings.map(([c, o]) => `<a class="open-card" href="#/c/${encodeURIComponent(c.id)}"><img src="${esc(photoUrl(photosOf(c)[0] ?? ""))}" alt="" loading="lazy" decoding="async"><span class="open-dd">${esc(o.txt)}</span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))} · ${esc(o.platform ?? "")}</i></a>`).join("")}</div>
@@ -451,6 +471,10 @@ function renderResults({ reset = true } = {}) {
   if (S.q) act.push(`<button class="chip on" data-clear="q">“${esc(S.q)}” ${ic("close")}</button>`);
   if (S.area !== "all") act.push(`<button class="chip on" data-clear="area">${esc(S.area)} ${ic("close")}</button>`);
   if (S.theme) act.push(`<button class="chip on" data-clear="theme">${esc(themeName(S.theme))} ${ic("close")}</button>`);
+  if (S.feeBand) {
+    const fbLabel = { u3: "~3만원", "3to5": "3~5만원", "5to7": "5~7만원", o7: "7만원+" }[S.feeBand] ?? S.feeBand;
+    act.push(`<button class="chip on" data-clear="feeBand">${esc(fbLabel)} ${ic("close")}</button>`);
+  }
   for (const k of S.quick) act.push(`<button class="chip on" data-clear="quick:${k}">${esc(QUICK[k].label)} ${ic("close")}</button>`);
   $("[data-active]").innerHTML = act.join("");
   const rows = $("[data-rows]"), noph = $("[data-nophoto]");
@@ -505,14 +529,23 @@ function homeClicks(e) {
   if (t) { S.theme = S.theme === t.dataset.theme ? null : t.dataset.theme; $$("[data-theme]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.theme === S.theme))); renderResults(); return; }
   const all = e.target.closest("[data-theme-all]");
   if (all) { S.theme = all.dataset.themeAll; render(); $("#results").scrollIntoView({ block: "start" }); return; }
+  const fb = e.target.closest("[data-fee-band]");
+  if (fb) {
+    S.feeBand = S.feeBand === fb.dataset.feeBand ? "" : fb.dataset.feeBand;
+    store.set("mc-feeband", S.feeBand);
+    $$("[data-fee-band]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.feeBand === S.feeBand)));
+    renderResults();
+    return;
+  }
   const q = e.target.closest("[data-quick]");
   if (q) { const k = q.dataset.quick; if (S.quick.has(k)) S.quick.delete(k); else S.quick.add(k); q.setAttribute("aria-pressed", String(S.quick.has(k))); renderResults(); return; }
   const cl = e.target.closest("[data-clear]");
   if (cl) {
     const k = cl.dataset.clear;
     if (k === "q") S.q = ""; else if (k === "area") S.area = "all"; else if (k === "theme") S.theme = null;
+    else if (k === "feeBand") { S.feeBand = ""; store.set("mc-feeband", ""); $$("[data-fee-band]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.feeBand === ""))); }
     else if (k.startsWith("quick:")) S.quick.delete(k.slice(6));
-    else { S.q = ""; S.area = "all"; S.theme = null; S.quick.clear(); }
+    else { S.q = ""; S.area = "all"; S.theme = null; S.quick.clear(); S.feeBand = ""; store.set("mc-feeband", ""); $$("[data-fee-band]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.feeBand === ""))); }
     const keep = scrollY; render(); scrollTo(0, keep);
     return;
   }
@@ -542,13 +575,31 @@ function usage(c, d) {
     ["입실", profFact(PF(d, "CHECKIN")) ?? specFact(d, "CHECKIN_TIME")],
     ["퇴실", profFact(PF(d, "CHECKOUT")) ?? specFact(d, "CHECKOUT_TIME")],
     ["매너타임", profFact(PF(d, "MANNER")) ?? specFact(d, "MANNER_TIME")],
-    ["요금", profFact(PF(d, "PRICE"))],
+    ["요금", profFact(PF(d, "PRICE")) ?? (c.fee ? { v: c.fee.text || (c.fee.min ? `${band(c.fee.min)}부터` : null), g: GR(c.fee.grade) || "c", src: { label: c.fee.basis, url: c.fee.url, at: c.fee.checked_at } } : null)],
     ["추가 요금", profFact(PF(d, "EXTRA_FEE")) ?? specFact(d, "EXTRA_PERSON_FEE")],
     ["환불", profFact(PF(d, "REFUND"))],
     ["운영", profFact(PF(d, "SEASON"))],
     ["반려동물", f.pet ?? profFact(PF(d, "PET"))],
     ["대여", (d?.field_conditions ?? c.field_conditions)?.rental_offers?.length ? { v: (d?.field_conditions ?? c.field_conditions).rental_offers.map((r) => r.item).slice(0, 5).join(" · "), g: "c", src: srcOf(c.field_conditions) } : null],
   ];
+}
+function sitePricingHtml(c, d) {
+  const feeInfo = c.fee;
+  const groups = c.field_conditions?.site_size?.groups ?? [];
+  const prods = d?.products ?? [];
+  if (!feeInfo && !groups.length && !prods.length) return "";
+  let rows = "";
+  if (prods.length) {
+    rows = prods.map((p) => `<tr><td><b>${esc(p.name)}</b></td><td>${esc(p.size || "-")}</td><td>${esc(p.base ? `기준 ${p.base}인` : "-")}</td><td class="text-price">${p.price ? fmt(p.price) + "원" : "예약처 확인"}</td></tr>`).join("");
+  } else if (groups.length) {
+    rows = groups.map((g) => `<tr><td><b>${esc(g.name || "일반 사이트")}</b></td><td>${g.width_m && g.depth_m ? `${g.width_m}×${g.depth_m}m` : "-"}</td><td>${g.count ? `${g.count}면` : "-"}</td><td class="text-price">${feeInfo?.text ? esc(feeInfo.text) : (feeInfo?.min ? `${band(feeInfo.min)}대` : "예약처 확인")}</td></tr>`).join("");
+  } else if (feeInfo) {
+    rows = `<tr><td><b>1박 기준 요금</b></td><td>-</td><td>-</td><td class="text-price">${feeInfo.text ? esc(feeInfo.text) : (feeInfo.min ? `${band(feeInfo.min)}부터` : "-")}</td></tr>`;
+  }
+  return `<section class="d-sec">
+    <div class="sec-head"><h2>사이트 규격 및 1박 요금</h2>${feeInfo?.basis ? `<span class="sec-note">${esc(feeInfo.basis)}</span>` : ""}</div>
+    <div class="table-wrap"><table class="site-table"><thead><tr><th>구분</th><th>규격</th><th>규모</th><th>1박 요금</th></tr></thead><tbody>${rows}</tbody></table></div>
+  </section>`;
 }
 function specTiles(c) {
   const f = facts(c);
@@ -581,7 +632,7 @@ function reserveCard(c, d) {
   const ch = [...(c.booking?.channels ?? [])].sort((a, b) => b.confidence - a.confidence);
   const main = ch.find((x) => x.kind !== "phone") ?? null;
   const o = openingOf(c) ?? (S.openings.get(String(c.id)) ?? null);
-  const price = profFact(PF(d, "PRICE"));
+  const price = profFact(PF(d, "PRICE")) ?? (c.fee ? { v: c.fee.text || (c.fee.min ? `${band(c.fee.min)}부터` : null), g: GR(c.fee.grade) || "c", src: { label: c.fee.basis, url: c.fee.url, at: c.fee.checked_at } } : null);
   const short = (n) => String(n ?? "").replace(/ 예약시스템| 공공서비스예약|\(.*\)/g, "").trim();
   return `<div class="reserve">
     <div class="rs-top"><span>${esc(main ? short(main.platform_name) : "예약")}</span>${o ? `<span class="rs-dd">${esc(o.txt ?? o.kind)}</span>` : ""}</div>
@@ -628,6 +679,7 @@ async function detailView(id) {
       <div class="d-main">
         <section class="d-sec"><div class="sec-head"><h2>기본 규격</h2><span class="sec-note legend">${dot("v")}원문 ${dot("c")}공식 ${dot("m")}언급</span></div><div class="tiles">${specTiles(c)}</div></section>
         <section class="d-sec"><div class="sec-head"><h2>내 장비</h2><button class="link" type="button" data-open="gear">${esc(gearLabel())} ${ic("right")}</button></div>${gearTiles(c)}</section>
+        ${sitePricingHtml(c, d)}
         <section class="d-sec"><div class="sec-head"><h2>이용 정보</h2></div><dl class="uses">${us.map(([l, x]) => `<div class="use${x ? "" : " unk"}"><dt>${l}</dt><dd>${x ? `${esc(x.v)}${dot(x.g)}${srcTip(x, l)}` : "확인필요"}</dd></div>`).join("")}</dl></section>
         ${nearbyHtml(c) ? `<section class="d-sec"><div class="sec-head"><h2>가는 길에</h2><span class="sec-note">직선거리 ${tip("<b>주변 생활 인프라</b><span>행정안전부 지방행정 인허가(LOCALDATA) 영업 중 업소까지의 직선거리입니다.</span>")}</span></div>${nearbyHtml(c)}</section>` : ""}
         ${reviewHtml(d, c)}
