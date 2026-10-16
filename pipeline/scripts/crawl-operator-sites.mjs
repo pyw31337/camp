@@ -10,6 +10,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { validatesAsOperatorSite } from "../lib/kakao-discovery.mjs";
 import { guideLinks, htmlToText, isClosedHost, isOperatorHost, parseRobots, relevantSentences, robotsAllows } from "../lib/operator-site.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
@@ -179,6 +180,11 @@ async function crawlOne(c) {
   }
   if (!urls.length) return { status: errors.includes("ROBOTS_DISALLOWED") ? "ROBOTS_DISALLOWED" : errors.some((e) => /platform_redirect/.test(e)) ? "REDIRECTED_TO_PLATFORM" : "FETCH_FAILED", url: withProto(uniq[0]), checked_at, error: errors.join(",") || null };
   const discovered = Boolean(discoveredOf(c) && uniq.includes(discoveredOf(c))) || undefined;
+  // 발굴 주소만으로 읽은 곳은 정말 이 캠핑장 운영자 사이트인지 확인한다(기사·소개 글이면 문장을 버린다).
+  if (discovered && uniq.length === 1 && all.length) {
+    const v = validatesAsOperatorSite(c, all);
+    if (!v.ok) return { status: "DISCOVERED_NOT_OPERATOR", url: urls[0], checked_at, discovered, check: v };
+  }
   return { status: all.length ? "OK" : "NO_RELEVANT_TEXT", url: urls[0], checked_at, rendered: renderedAny || undefined, discovered, pages: urls, snippets: all.slice(0, 160) };
 }
 

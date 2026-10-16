@@ -5321,8 +5321,10 @@
 {"cid":"100656","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"100656","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100656","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100657","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b46pgrm22ac17b.com/m/reserve.html?reserve=gd","at":"2026-10-16T05:55:35.885Z","quote":"· 숯불,불판 이용 요금 : 2만원","text":"2만원"}
 {"cid":"100657","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100657","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"100657","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b46pgrm22ac17b.com/m/reserve.html?reserve=gd","at":"2026-10-16T05:55:35.885Z","quote":"불멍이용 요금 : 2만원","text":"2만원"}
 {"cid":"100657","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100657","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100659","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -5476,6 +5478,7 @@
 {"cid":"100710","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100711","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100711","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"100711","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_discovered","url":"https://luzern365.kr/special1.html","at":"2026-10-16T05:46:03.551Z","quote":"캠핑사랑 1호(애견O,불멍가능,넷플릭스)"}
 {"cid":"100711","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100711","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100712","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}

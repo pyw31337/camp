@@ -44,3 +44,14 @@ test("여러 캠핑장에 공통으로 나오는 호스트는 홈페이지로 �
   assert.equal(picked.b, null);
   assert.equal(picked.c.host, "c-camp.kr");
 });
+
+test("기사·블로그·구인 주소와 후기 제목은 홈페이지 후보에서 뺀다", async () => {
+  const { looksLikeArticle, ARTICLE_TITLE, validatesAsOperatorSite } = await import("../lib/kakao-discovery.mjs");
+  for (const u of ["http://www.todaygg.co.kr/news/articleView.html?idxno=1", "https://www.saramin.co.kr/zf_user/jobs/view?rec_idx=1", "https://giveinfos.com/2025%eb%85%84-9%ec%9b%94-%ed%99%94", "https://www.honeylife.kr/2026/04/x.html"]) assert.ok(looksLikeArticle(u), u);
+  for (const u of ["https://strm.co.kr/comm/notice.php", "http://hanbyul.net/camping/", "http://moochangpo.com/bbs/board.php?bo_table=notice&wr_id=75"]) assert.ok(!looksLikeArticle(u), u);
+  assert.ok(ARTICLE_TITLE.test("통고산 자연휴양림 방문 후기 및 예약 방법"));
+  assert.ok(!ARTICLE_TITLE.test("무창포오토캠핑장"));
+  const c = { name: "별빛오토캠핑장" };
+  assert.equal(validatesAsOperatorSite(c, ["별빛오토캠핑장 이용 안내", "입실 14:00 퇴실 12:00", "매너타임 22시", "취소 수수료 안내"]).ok, true);
+  assert.equal(validatesAsOperatorSite(c, ["별빛캠핑장이 인기다", "주말 1박 5만원"]).ok, false);
+});

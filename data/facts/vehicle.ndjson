@@ -878,6 +878,7 @@
 {"cid":"2280","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2282","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2282","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2288","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://rsvt.co.kr:1447/rsvt_web_jw/index.html?p_id=ypccamp","at":"2026-10-16T05:47:04.969Z","quote":"A구역은 차박 가능합니다."}
 {"cid":"2288","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2288","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2304","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -1199,7 +1200,9 @@
 {"cid":"3203","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3205","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3205","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3206","attr":"CAR_CAMPING","value":false,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.hongcheon.go.kr/palbong/contents.do?key=1173","at":"2026-10-16T05:38:49.518Z","quote":"차박(車泊) 금지"}
 {"cid":"3206","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3206","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"https://www.hongcheon.go.kr/palbong/contents.do?key=1172","at":"2026-10-16T05:38:49.518Z","quote":"차량은 관광지내 주차장에 주차하시고 도보로 산행안내센터까지 이동해 주시기 바랍니다."}
 {"cid":"3206","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3209","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3209","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -5180,7 +5183,6 @@
 {"cid":"101738","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101738","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101739","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101739","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"https://cms.seantour.com/GK001/reservation-of-accommodation.do?mode=view&articleNo=1101&article.offset=0&articleLimit=10","at":"2026-10-16T00:58:00.634Z","quote":"짐을 옮길시 주차장에 주차 후 리어카로 옮겨주세요"}
 {"cid":"101739","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101740","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101740","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}

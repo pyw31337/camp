@@ -28,3 +28,10 @@ robots가 일반 봇을 허용하는 곳(운영자 홈페이지, 일부 소형 �
 - 등록 링크가 운영자 호스트이면 크롤러 시작 주소로 **카카오 웹 검색 후보보다 먼저** 쓴다. 사실 저장소에는 `HOMEPAGE`·`PHONE`(CONFIRMED, 원천 `naver_local`)으로 들어가 카카오·고캠핑 값과 교차 확인된다.
 - 비용: HUB는 **한시 무료**(검색 카테고리 통합 월 775,000건, 키당 50 RPS, 유료 전환 시 사전 공지 — [NCP 가이드](https://guide.ncloud-docs.com/docs/apihub-overview)). 전수 1회 약 3,100건. 유료 전환 공지가 나오면 `operator-sites` 입력값 `naver_max_calls`를 0으로.
 - 키: 저장소 비밀값 `NAVER_API_HUB_CLIENT_ID`·`NAVER_API_HUB_CLIENT_SECRET`(소유자 등록 완료). 키 동작은 `api-key-check.yml`(push·수동)로 확인한다. 경로는 문서마다 표기가 달라 `/search/v1/local` → `/search/v1/local.json` → `/v1/search/local.json` 순으로 시도한다.
+
+## 첫 실행 결과와 거르기 강화 (2026-10-16)
+
+- 카카오 장소 맞춤 **1,977/3,116곳**. Daum 웹 검색 홈페이지 후보 206곳 중 약 80%가 기사·블로그 글·구인·숙박 중개였다.
+- 거르기 3단: ① 주소 규칙(`looksLikeArticle`: /news·articleView·블로그 글 주소·언론·여행·숙박 중개 호스트), ② 검색 제목 규칙(`ARTICLE_TITLE`: 후기·방법·추천·축제·모집·개장 등), ③ **읽은 문장 검증**(`validatesAsOperatorSite`: 캠핑장 이름 + 운영 규칙 문장 3개 이상 — 아니면 `DISCOVERED_NOT_OPERATOR`로 문장 폐기).
+- `discover-kakao.mjs --repick`은 API 호출 없이 저장된 후보에 현재 규칙을 다시 적용한다. 재적용 후 후보 71곳, 이미 읽은 발굴 사이트 141곳 중 124곳 폐기·6곳 유지.
+- 결론: 웹 검색 발굴은 정밀도가 낮다. **업장이 직접 등록한 네이버 지역 검색 링크를 우선**하고, 웹 검색 후보는 문장 검증을 통과할 때만 쓴다.
