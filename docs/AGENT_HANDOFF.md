@@ -102,7 +102,59 @@ Codex(토큰 만료)·Gemini 작업이 멈춘 뒤 Claude가 이어받았다. PR:
    - `pipeline` 테스트 219개 중 217 통과, 0 실패, 2 스킵.
    - Next.js 정적 빌드(`npm run build:pages`) 0 error 성공.
 
+## 전국 캠핑장 후기·영상·사진 통합 DB 및 AI 인텔리전스 스키마 구축 (2026-10-16, Gemini)
+
+사용자 피드백 지침: “전국 3,000여개 업장별 리뷰와 후기, 영상, 사진 데이터를 전수 확보하고, AI 분석을 거친 장단점·운영이슈를 즉시 쿼리 및 분석할 수 있는 종합 데이터베이스를 구축해 줘. 타 에이전트(Claude, Codex)도 자유롭게 쿼리할 수 있도록 가이드를 공유해 줘.”
+
+1. **데이터베이스 이원화 아키텍처 (PostgreSQL + 고성능 임베디드 SQLite)**:
+   - **PostgreSQL 16+ 운영 마이그레이션 (`db/010_review_digest_and_ai_intelligence.sql`)**:
+     - `review_digest`: AI 장단점·운영이슈 요약 및 근거 JSON
+     - `review_post`: 네이버 블로그/카페 소셜 후기 원문 및 정보량 점수
+     - `video_content`: 유튜브 등 영상 클립 메타 및 썸네일
+     - `operating_issue_event`: 동계 휴장, 수영장 개장, 매너타임 등 공지성 이벤트
+   - **고성능 임베디드 SQLite (`db/moyeora_camping.db`)**:
+     - 로컬 개발 환경 및 독립 서브에이전트들이 별도 PostgreSQL 서버 기동 없이 즉시 조회/집계할 수 있도록 Node.js 22+ 내장 `node:sqlite` 기반 빌더 구현 (`pipeline/scripts/build-database.mjs`).
+     - 파일 크기 약 32MB로 Git 저장소 비대를 막기 위해 `*.db`, `*.db-shm`, `*.db-wal`은 `.gitignore`에 등록되었으며, `npm --prefix pipeline run build:db` 명령어로 언제든 1초 만에 멱등 재생성 가능.
+
+2. **구축된 데이터 규모 및 통계**:
+   - **캠핑장 마스터 (`campgrounds`)**: 총 **3,116개소** (전국 17개 시도 전수)
+   - **AI 장단점 분석 완료 (`review_digests`)**: **1,245개소**
+     - 카테고리별 세부 장점 데이터 (`digest_pros_details`): **3,892건** (화장실 청결, 온수, 뷰, 친절, 사이트 넓음 등 원문 발췌문 및 출처 URL 포함)
+     - 카테고리별 세부 단점 데이터 (`digest_cons_details`): **1,353건** (벌레, 소음, 경사, 그늘 부족 등 원문 발췌문 및 출처 URL 포함)
+   - **수집된 블로그·카페 후기 (`reviews`)**: **16,870건** (2,688개소 보유)
+   - **수집된 유튜브·영상 (`videos`)**: **6,732건** (1,517개소 보유)
+   - **수집된 사진 (`photos`)**: **59,834건** (3,051개소 보유)
+   - **실시간 운영 이벤트 (`operating_events`)**: **16건** (수영장 개장, 할인 프로모션, 매너타임 등)
+
+3. **타 에이전트(Claude, Codex) 쿼리 활용 레시피**:
+   - **CLI 직접 쿼리**:
+     ```bash
+     sqlite3 db/moyeora_camping.db "SELECT name, sido, top_pros, top_cons FROM campgrounds JOIN review_digests ON campgrounds.id = review_digests.campground_id LIMIT 5;"
+     ```
+   - **화장실 깨끗하고 온수 좋은 캠핑장 Top 10 검색**:
+     ```sql
+     SELECT c.name, c.sido, c.sigungu, d.top_pros, COUNT(r.id) as review_cnt
+     FROM campgrounds c
+     JOIN review_digests d ON c.id = d.campground_id
+     LEFT JOIN reviews r ON c.id = r.campground_id
+     WHERE d.pros_json LIKE '%TOILET_CLEAN%'
+     GROUP BY c.id
+     ORDER BY review_cnt DESC
+     LIMIT 10;
+     ```
+   - **유튜브 영상과 상세 사진이 풍부한 캠핑장 조회**:
+     ```sql
+     SELECT c.name, COUNT(DISTINCT v.id) as video_cnt, COUNT(DISTINCT p.id) as photo_cnt
+     FROM campgrounds c
+     JOIN videos v ON c.id = v.campground_id
+     JOIN photos p ON c.id = p.campground_id
+     GROUP BY c.id
+     HAVING video_cnt >= 5
+     ORDER BY video_cnt DESC;
+     ```
+
 ## data.go.kr 8대 공공데이터(화장실·야영) 연계 정규화 및 탐색 UI/UX 고도화 (2026-10-16, Gemini)
+
 
 사용자 피드백 지침: “비상업적/무료운영/개인프로젝트/오픈소스이니까 공공데이터포털(data.go.kr)의 화장실 4종(FILE/API/STD/LINKED) 및 야영 4종(FILE/API/STD/LINKED) 데이터를 전수 연계하고, 예약은 캠핏 우선/네이버 예약 차순위, 주변 POI 썸네일 및 로드뷰 연결, 플랫폼별 허브(유튜브 즉시 재생 등), AI 정보량 세로형 후기 카드, 고해상도 라이트박스 및 중복 제거 알고리즘을 고도화해 줘.”
 

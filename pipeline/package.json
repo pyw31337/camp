@@ -37,7 +37,8 @@
     "sync:social": "node scripts/sync-social.mjs",
     "survey:conditions": "node scripts/survey-all-campgrounds.mjs",
     "build:spec": "node scripts/build-spec-sheet.mjs",
-    "build:review-digest": "node scripts/build-review-digest.mjs"
+    "build:review-digest": "node scripts/build-review-digest.mjs",
+    "build:db": "node scripts/build-database.mjs"
   },
   "dependencies": {
     "pg": "8.23.1",
