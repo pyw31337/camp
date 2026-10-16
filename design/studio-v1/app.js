@@ -142,3 +142,51 @@ all('.info-small').forEach((button) => button.addEventListener('click', (event) 
 document.addEventListener('click', () => all('.info-small').forEach((button) => button.classList.remove('is-tip-open')));
 
 all('[data-booking-cta], .price-link').forEach((button) => button.addEventListener('click', () => showToast('예약처에서 날짜별 요금과 빈자리를 확인해요')));
+
+all('.renewal-review-tabs, .nearby-category-tabs, .renewal-comment-types').forEach((group) => {
+  all('button', group).forEach((button) => button.addEventListener('click', () => {
+    all('button', group).forEach((item) => {
+      const active = item === button;
+      item.classList.toggle('is-active', active);
+      if (item.getAttribute('role') === 'tab') item.setAttribute('aria-selected', String(active));
+    });
+  }));
+});
+
+all('[data-roadview-cta]').forEach((button) => button.addEventListener('click', () => {
+  showToast('실서비스에서는 확인된 장소 좌표로 로드뷰를 열어요');
+}));
+
+all('[data-copy-address]').forEach((button) => button.addEventListener('click', async () => {
+  const address = '충북 음성군 수레의산로 일대';
+  try { await navigator.clipboard?.writeText(address); } catch { /* clipboard permission is optional in this prototype */ }
+  showToast('주소를 복사했어요');
+}));
+
+all('[data-comment-form]').forEach((form) => form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const nickname = form.elements.nickname?.value.trim() || '캠퍼';
+  const text = form.elements.comment?.value.trim();
+  if (!text) {
+    showToast('한마디를 입력해 주세요');
+    return;
+  }
+  const list = document.querySelector('[data-comment-list]');
+  const count = document.querySelector('[data-comment-count]');
+  const empty = list?.querySelector('.renewal-comment-empty');
+  empty?.remove();
+  const item = document.createElement('article');
+  item.className = 'renewal-comment';
+  const author = document.createElement('b');
+  author.textContent = nickname;
+  const time = document.createElement('time');
+  time.textContent = '방금';
+  const body = document.createElement('p');
+  body.textContent = text;
+  item.append(author, time, body);
+  list?.prepend(item);
+  const total = list?.querySelectorAll('.renewal-comment').length || 0;
+  if (count) count.textContent = `${total}개`;
+  form.reset();
+  showToast('시안에 한마디를 추가했어요');
+}));
