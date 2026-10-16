@@ -747,12 +747,6 @@ html.lb-open, html.lb-open body { overflow: hidden; }
 .lb-cap { padding: 12px 16px calc(16px + env(safe-area-inset-bottom)); text-align: center; font-size: var(--fs-xs); color: rgba(255,255,255,.75); }
 .lb-cap a { color: #8fe0b3; }
 @media (max-width: 640px) { .lb-nav { display: none; } }
-@media (prefers-color-scheme: dark) {
-  .dv-actions [aria-pressed="true"] { background: #3a1724; border-color: #6b2a44; }
-  .dv-rules .off { background: #3a1716; color: #f19d9a; }
-  .dv-condition.partial > span { color: #f0b65a; background: #3a2a10; }
-  .dv-review-meta .k-blog { background: #14301f; color: #5cce91; } .dv-review-meta .k-cafe { background: #3a2a10; color: #f0b65a; } .dv-review-meta .rich { background: #1c2547; color: #9db1ff; }
-  .dv-all { background: rgba(21,29,25,.92); color: #e6eee9; }
 }
 /* 정밀 검증 조건표 */
 .tag-verified { background: color-mix(in srgb, var(--green) 18%, var(--surface)); color: var(--green-press); border: 1px solid color-mix(in srgb, var(--green) 35%, transparent); font-weight: 800; }

@@ -12,13 +12,27 @@ const I = {
   settings: '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>',
   x: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
   plus: '<path d="M5 12h14"/><path d="M12 5v14"/>',
+  map: '<path d="M14.1 5.1 9.9 3 3.6 5.1A1 1 0 0 0 3 6v13.2a1 1 0 0 0 1.3.9l5.6-1.9 4.2 2.1 6.3-2.1a1 1 0 0 0 .6-.9V4.8a1 1 0 0 0-1.3-.9z"/><path d="M9.9 3v15.2"/><path d="M14.1 5.1v15.2"/>',
   locate: '<line x1="2" x2="5" y1="12" y2="12"/><line x1="19" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="5"/><line x1="12" x2="12" y1="19" y2="22"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="3"/>',
 };
+// 하단 탭 전용 면(채운) 아이콘: 작은 화면에서 선 아이콘보다 잘 보인다(소유자 요청 2026-10-16).
+const F = {
+  house: '<path d="M11.3 3.3a1 1 0 0 1 1.4 0l8 7.4a1 1 0 0 1-.7 1.7h-1V20a1 1 0 0 1-1 1h-4v-5h-4v5H6a1 1 0 0 1-1-1v-7.6H4a1 1 0 0 1-.7-1.7z"/>',
+  search: '<path fill-rule="evenodd" d="M10.5 3a7.5 7.5 0 0 1 5.96 12.05l4.25 4.24a1 1 0 0 1-1.42 1.42l-4.24-4.25A7.5 7.5 0 1 1 10.5 3zm0 2.6a4.9 4.9 0 1 0 0 9.8 4.9 4.9 0 0 0 0-9.8z"/>',
+  map: '<path d="M9 3.6 3.6 5.4a1 1 0 0 0-.6.9v13.3a.8.8 0 0 0 1.1.8L9 18.6zm1.5 0v15l4 1.9V5.5zm5.5 1.9v15l4.4-1.5a1 1 0 0 0 .6-.9V4.8a.8.8 0 0 0-1.1-.8z"/>',
+  bell: '<path d="M12 2.5a6 6 0 0 0-6 6v3.6l-1.7 3a1 1 0 0 0 .9 1.5h13.6a1 1 0 0 0 .9-1.5l-1.7-3V8.5a6 6 0 0 0-6-6zM9.5 18.6a2.5 2.5 0 0 0 5 0z"/>',
+  heart: '<path d="M12 20.6s-8.5-5-8.5-11.2A4.7 4.7 0 0 1 12 6.6a4.7 4.7 0 0 1 8.5 2.8c0 6.2-8.5 11.2-8.5 11.2z"/>',
+  sparkles: '<path d="M11 2.5 13 8l5.5 2-5.5 2-2 5.5L9 12 3.5 10 9 8zm7.5 11 1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z"/>',
+};
+const fsvg = (k) => `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${F[k] ?? I[k]}</svg>`;
 const svg = (k) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[k]}</svg>`;
 // 메뉴(모든 페이지 같은 순서·문구). 홈 React 헤더도 이 문자열을 그대로 넣는다.
 export const MENU = [
   { id: "explore", label: "캠핑장 찾기", tab: "찾기", href: "explore/", icon: "search" },
-  { id: "themes", label: "테마", tab: "테마", href: "explore/themes/", icon: "sparkles" },
+  // v4: 키워드·테마 말고 지도로도 찾는다. 같은 탐색 화면을 지도 배치로 연다(정보는 같다).
+  { id: "map", label: "지도", tab: "지도", href: "explore/?view=map", icon: "map" },
+  // 모바일 하단 탭은 다섯 칸을 넘기지 않는다. 테마는 찾기 화면의 ‘테마’ 탭과 PC 메뉴로 들어간다.
+  { id: "themes", label: "테마", tab: "테마", href: "explore/themes/", icon: "sparkles", noTab: true },
   { id: "open", label: "예약 일정", tab: "예약 일정", href: "explore/openings/", icon: "bell" },
   // v3 사이트맵: ‘관심’을 ‘내 캠핑’으로 넓혀 관심·최근 본·비교함·내 세팅을 한곳에 모은다(주소는 그대로).
   { id: "passport", label: "내 캠핑", tab: "내 캠핑", href: "explore/passport/", icon: "heart" },
@@ -38,8 +52,8 @@ export function siteHeader(base, current, { wide = false } = {}) {
 </form></dialog>`;
 }
 export function siteTabbar(base, current) {
-  const tabs = [{ id: "home", tab: "홈", href: "", icon: "house" }, ...MENU];
-  return `<nav class="gnb-tabbar" aria-label="모바일 주요 탐색">${tabs.map((m) => `<a href="${base}${m.href}"${m.id === current ? ' aria-current="page"' : ""}>${svg(m.icon)}${m.tab}</a>`).join("")}</nav>`;
+  const tabs = [{ id: "home", tab: "홈", href: "", icon: "house" }, ...MENU.filter((m) => !m.noTab)];
+  return `<nav class="gnb-tabbar" aria-label="모바일 주요 탐색">${tabs.map((m) => `<a href="${base}${m.href}"${m.id === current ? ' aria-current="page"' : ""}>${fsvg(m.icon)}<span>${m.tab}</span></a>`).join("")}</nav>`;
 }
 // 사용자(로그인 없음)·글자 크기. 모든 페이지가 같은 스크립트를 쓴다.
 // 저장: moyeora-users=[{id,name,c}], moyeora-user=사용 중 id, moyeora-fs=글자 크기.
@@ -81,18 +95,18 @@ export const SITE_HEADER_CSS = `${BRAND_CSS}
 .gnb { position: sticky; top: 0; z-index: 70; background: color-mix(in srgb, var(--mc-canvas) 84%, transparent); backdrop-filter: saturate(1.3) blur(14px); -webkit-backdrop-filter: saturate(1.3) blur(14px); border-bottom: 1px solid color-mix(in srgb, var(--mc-line) 70%, transparent); color: var(--mc-ink); }
 .gnb-in { box-sizing: border-box; width: 100%; max-width: 1240px; height: 68px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; gap: 24px; }
 .sh-brand { display: inline-flex; align-items: center; gap: 10px; flex: none; color: var(--mc-ink); text-decoration: none; white-space: nowrap; }
-.sh-brand > span { width: 38px; height: 38px; border-radius: 13px; display: grid; place-items: center; background: var(--mc-night); color: var(--mc-on-night); box-shadow: inset 0 0 0 1px rgba(255,255,255,.06); }
+.sh-brand > span { width: 38px; height: 38px; border-radius: 13px; display: grid; place-items: center; background: var(--mc-accent, #00875a); color: #fff; }
 .sh-brand svg { width: 20px; height: 20px; }
 .sh-brand b { display: grid; font-size: 1.125rem; font-weight: 850; letter-spacing: -.05em; line-height: 1.05; }
 .sh-brand small { font-size: .5625rem; font-weight: 700; letter-spacing: .22em; color: var(--mc-ink-3); }
 .sh-nav { display: flex; align-items: center; gap: 6px; flex: 1; min-width: 0; }
-.sh-nav a { display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 15px; border-radius: 999px; border: 1px solid var(--mc-line); color: var(--mc-ink-2); text-decoration: none; font-size: .875rem; font-weight: 700; white-space: nowrap; transition: background .15s, color .15s, border-color .15s; }
+.sh-nav a { display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 15px; border-radius: 999px; border: 0; background: var(--mc-soft, #eef1ed); color: var(--mc-ink-2); text-decoration: none; font-size: .875rem; font-weight: 700; white-space: nowrap; transition: background .15s, color .15s, border-color .15s; }
 .sh-nav a:hover { border-color: var(--mc-ink-3); color: var(--mc-ink); }
-.sh-nav a[aria-current="page"] { background: var(--mc-solid); border-color: var(--mc-solid); color: var(--mc-on-solid); }
+.sh-nav a[aria-current="page"] { background: var(--mc-accent, #00875a); color: #fff; }
 .sh-nav svg, .sh-actions svg { width: 17px; height: 17px; flex: none; }
 .sh-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; flex: none; }
 .sh-user { position: relative; }
-.sh-badge { display: inline-flex; align-items: center; gap: 7px; height: 40px; max-width: 9.5rem; padding: 0 13px 0 4px; border-radius: 999px; border: 1px solid var(--mc-line); background: var(--mc-paper); color: var(--mc-ink); font: inherit; font-size: .875rem; font-weight: 800; cursor: pointer; white-space: nowrap; }
+.sh-badge { display: inline-flex; align-items: center; gap: 7px; height: 40px; max-width: 9.5rem; padding: 0 13px 0 4px; border-radius: 999px; border: 0; background: var(--mc-soft, #eef1ed); color: var(--mc-ink); font: inherit; font-size: .875rem; font-weight: 800; cursor: pointer; white-space: nowrap; }
 .sh-badge b { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 .sh-av { flex: none; width: 30px; height: 30px; border-radius: 50%; display: inline-grid; place-items: center; background: var(--mc-moss); color: #fff; font-style: normal; font-size: .8125rem; font-weight: 900; line-height: 1; }
 .sh-av.sh-plus { background: var(--mc-sand); color: var(--mc-ink-2); font-size: 1.1rem; }
@@ -123,7 +137,7 @@ export const SITE_HEADER_CSS = `${BRAND_CSS}
 .sh-seg { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 16px; background: var(--mc-canvas); }
 .sh-seg button { min-height: 40px; padding: 0 4px; border: 0; border-radius: 12px; background: none; color: var(--mc-ink-2); font: inherit; font-size: .875rem; font-weight: 800; cursor: pointer; white-space: nowrap; }
 .sh-seg button[aria-checked="true"] { background: var(--mc-paper); color: var(--mc-moss); box-shadow: var(--mc-shadow-1); }
-.sh-icon { position: relative; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--mc-line); background: var(--mc-paper); color: var(--mc-ink); text-decoration: none; cursor: pointer; }
+.sh-icon { position: relative; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; border: 0; background: var(--mc-soft, #eef1ed); color: var(--mc-ink); text-decoration: none; cursor: pointer; }
 .sh-icon b { position: absolute; top: -4px; right: -4px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 99px; display: grid; place-items: center; background: var(--mc-ember); color: #fff; font-size: .6875rem; font-weight: 800; }
 .gnb-wide .gnb-in { max-width: none; padding: 0 clamp(16px, 2.5vw, 40px); }
 /* 모바일: 위쪽 메뉴 대신 떠 있는 밤색 유리 탭 바(같은 메뉴 + 홈). 라벨은 항상 보인다. */
@@ -133,13 +147,13 @@ export const SITE_HEADER_CSS = `${BRAND_CSS}
   .sh-nav { display: none; }
   .sh-brand small { display: none; }
   .sh-badge { max-width: 6.5rem; padding-right: 10px; }
-  .gnb-tabbar { position: fixed; left: 10px; right: 10px; bottom: calc(8px + env(safe-area-inset-bottom)); z-index: 70; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 6px; border-radius: 26px; background: color-mix(in srgb, var(--mc-night) 90%, transparent); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 14px 36px -12px rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.08); }
-  .gnb-tabbar a { display: grid; justify-items: center; gap: 2px; padding: 6px 0 5px; border-radius: 20px; color: color-mix(in srgb, var(--mc-on-night) 62%, transparent); text-decoration: none; font-size: .6875rem; font-weight: 700; white-space: nowrap; letter-spacing: -.03em; }
-  .gnb-tabbar a[aria-current="page"] { color: var(--mc-night); background: var(--mc-sage); }
-  .gnb-tabbar svg { width: 21px; height: 21px; }
+  .gnb-tabbar { position: fixed; left: 10px; right: 10px; bottom: calc(8px + env(safe-area-inset-bottom)); z-index: 70; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 6px; border-radius: 26px; background: rgba(255,255,255,.86); backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3); box-shadow: 0 8px 28px rgba(16,20,20,.14); border: 0; }
+  .gnb-tabbar a { display: grid; justify-items: center; gap: 3px; padding: 7px 0 6px; border-radius: 20px; color: var(--mc-ink-3); text-decoration: none; font-size: .78rem; font-weight: 700; white-space: nowrap; letter-spacing: -.02em; }
+  .gnb-tabbar a[aria-current="page"] { color: var(--mc-accent-ink, #0a6e45); background: var(--mc-accent-tint, #e4f4ea); font-weight: 900; }
+  .gnb-tabbar svg { width: 24px; height: 24px; }
   body { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
 }
-@media (max-width: 360px) { .sh-brand b { font-size: 1rem; } .gnb-tabbar a { font-size: .625rem; } }
+@media (max-width: 360px) { .sh-brand b { font-size: 1rem; } .gnb-tabbar a { font-size: .72rem; } }
 /* 글꼴도 모든 페이지 동일 */
 body, .gnb, .gnb-tabbar, .gnb button, .sh-dlg { font-family: var(--mc-font); }
 /* 글자 크기 설정(모든 페이지 공통, 이 기기 저장) */

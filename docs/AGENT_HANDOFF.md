@@ -1,6 +1,6 @@
 # 인수인계
 
-> 최종 갱신: 2026-10-15 KST<br>
+> 최종 갱신: 2026-10-16 KST<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
 
 ## 현재 상태
@@ -40,6 +40,27 @@ Codex(토큰 만료)·Gemini 작업이 멈춘 뒤 Claude가 이어받았다. PR:
 **검증(2026-10-15)**: `pipeline` 테스트 190 통과·0 실패·2 스킵(DB 미연결), `npm run validate` 통과, `node design/build-explore.mjs` 성공, `camping-atlas` `npm run build:pages` 성공·`npm run lint` 오류 0(기존 경고 2). Playwright 1440/390px × 라이트/다크로 목록·상세·비교·비교 공유·질문 복사·홈·내 캠핑·예약 일정 확인, 페이지 오류 0·가로 넘침 0. `design/checks/run.sh`는 v2 시안(`mockup-v2`) 전용이라 실행하지 않았다.
 
 **다음 작업**: (a) 파일럿 30곳 원문 대조(R6, 사람 검수), (b) 승인 관측 원천 1곳 확보(R7, 소유자 제휴), (c) 소셜 읽기 모델 `display_rights`(R8), (d) 저장소 라벨 `condition-report`·`operator-sheet` 생성(소유자), (e) v3 덧칠이 안정되면 `_page.css`의 덮어쓴 옛 규칙 정리.
+
+## v4.1 디자인 재정의 + 운영자 홈페이지 사실·후기 장단점 (2026-10-16, Claude)
+
+소유자 피드백: “색만 바뀌었다 → 정보 기획부터 다시, 여러 콘셉트로”, 이후 “C 스펙북 + B 넓은 사진 + A 굵기 대비 + D 지도”, “어두운 배경 금지 · Pretendard만”, “파랑 대신 초록, 경계는 부드럽게, 유리 대신 흰 그라데이션”, “히어로는 사진을 찾지 말고 만들 것”, “출처·설명은 (i)로만”, “확인필요를 줄이도록 실제 업장 정보를 모을 것”.
+
+1. **디자인 v4.1 “Ink & Leaf”**: 기준 문서 `DESIGN_SYSTEM.md` 첫 장. 토큰은 `design/brand-tokens.mjs`(밝은 화면만, 다크 모드 블록 삭제), 탐색 덧칠 `design/explore/_v4.css`(v3 뒤), 홈 덧칠 `camping-atlas/app/premium.css` 끝. 시안 캔버스(A~E)는 Claude Design 비공개 아티팩트.
+2. **포스터 배지**: `_app.js`의 `posterBadges(c)` 하나가 카드·상세·지도 배지를 만든다(전기→불멍→주차·차박 + 시간). 근거는 `badgeTip(c)`의 (i). `conditionView`에 등급 `OPERATOR`(운영자 공개) 추가 — 배지는 되지만 내 세팅 MATCH/MISMATCH에는 쓰지 않는다.
+3. **지도 메뉴·지도 모드**: 메뉴 `지도`=`explore/?view=map`, 찾는 방법 탭(키워드·테마·지도), `setView()`. 핀은 카카오 `CustomOverlay` 알약(`renderMarkers`/`pinLabel`), 누르면 `peek()` 미리보기 카드.
+4. **하단 탭**: 홈·찾기·지도·예약 일정·내 캠핑, 면 아이콘(`site-header.mjs`의 `F`/`fsvg`). 테마는 탭에서 빠지고 PC 메뉴·찾기 탭으로.
+5. **히어로 그림**: `design/hero/generate-hero.mjs`가 SVG 일러스트를 webp 4종으로 굽는다(사진 아님, 출처 표기 불필요). 고칠 땐 이 스크립트를 고치고 다시 실행.
+6. **출처 숨김**: 탐색 결과 머리의 기준일, 공식 접수 안내, 내 세팅 설명, 홈의 사진·일정 안내는 (i) 말풍선(`tipBtn`, 홈 `InfoTip`). 테마 페이지 사진 출처도 (i) 펼침.
+7. **운영자 홈페이지 사실**(`docs/OPERATOR_SITE_FACTS.md`): `crawl-operator-sites.mjs`(주 1회 `operator-sites.yml`) → `registry/operator-site-snippets.json` → `build-operator-facts.mjs`(c.of) + `build-spec-sheet.mjs`. 첫 실행 1,110곳 중 339곳 문장, 배지 사실 68곳, 스펙 시트 816→968곳.
+8. **후기 장단점 한 줄**: `pipeline/lib/review-digest.mjs` + `build-review-digest.mjs`(c.rv, featured.json의 rv·bd). 1,098곳(장점 1,054·단점 123). 평점은 수집하지 않음 — 결정 대기(`PROJECT_PLAN.md`).
+
+**data-sync 순서(바뀜)**: publish → survey-all-campgrounds → **build-operator-facts** → build-spec-sheet → **build-review-digest** → 커밋.
+
+**검증(2026-10-16)**: `pipeline` 테스트 205 통과·0 실패·2 스킵(DB 미연결), 새 테스트 `operator-site.test.mjs`(7)·`review-digest.test.mjs`(2) 포함. `npm run validate` 통과. `node design/build-explore.mjs` 성공. `camping-atlas` `npm run build:pages` 성공, `eslint app` 오류 0(기존 경고 2). `tsc --noEmit`은 기존 오류 3건(home.tsx `catalog.sources` 타입, vite.config.ts d1/r2)만 남음 — 이번 변경과 무관. Playwright 1440/390px 홈·탐색·상세·말풍선·지도 모드 가로 넘침 0, 페이지 오류 0. 카카오 지도 핀은 로컬 도메인 미등록으로 확인 못 함(배포 후 확인 필요).
+
+**충돌 주의**: `design/explore/_app.js`(카드·배지·지도·상세 머리), `_body.html`, `_v4.css`, `design/site-header.mjs`, `design/brand-tokens.mjs`, `camping-atlas/app/home.tsx`·`premium.css`, `.github/workflows/data-sync.yml`.
+
+**다음**: (a) 배포 주소에서 지도 핀·미리보기 확인, (b) OPERATOR 값 중 W·주차·장작을 파일럿 검수로 VERIFIED 승격, (c) 홈페이지 접속 실패 452곳 갱신 요청, (d) 평점 원천 결정(Google Places 키 여부).
 
 ## Codex 협의 및 작업 분담 (2026-10-15, Gemini)
 

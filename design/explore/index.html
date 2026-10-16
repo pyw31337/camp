@@ -1,5 +1,5 @@
 <title>모여라 캠핑 · 전국 캠핑장 찾기</title>
-<meta name="theme-color" content="#f3efe7" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f120e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f5f6f4">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 :root {
@@ -807,12 +807,6 @@ html.lb-open, html.lb-open body { overflow: hidden; }
 .lb-cap { padding: 12px 16px calc(16px + env(safe-area-inset-bottom)); text-align: center; font-size: var(--fs-xs); color: rgba(255,255,255,.75); }
 .lb-cap a { color: #8fe0b3; }
 @media (max-width: 640px) { .lb-nav { display: none; } }
-@media (prefers-color-scheme: dark) {
-  .dv-actions [aria-pressed="true"] { background: #3a1724; border-color: #6b2a44; }
-  .dv-rules .off { background: #3a1716; color: #f19d9a; }
-  .dv-condition.partial > span { color: #f0b65a; background: #3a2a10; }
-  .dv-review-meta .k-blog { background: #14301f; color: #5cce91; } .dv-review-meta .k-cafe { background: #3a2a10; color: #f0b65a; } .dv-review-meta .rich { background: #1c2547; color: #9db1ff; }
-  .dv-all { background: rgba(21,29,25,.92); color: #e6eee9; }
 }
 /* 정밀 검증 조건표 */
 .tag-verified { background: color-mix(in srgb, var(--green) 18%, var(--surface)); color: var(--green-press); border: 1px solid color-mix(in srgb, var(--green) 35%, transparent); font-weight: 800; }
@@ -1070,55 +1064,47 @@ body.detail-open .compare-bar { display: none; }
 
 
 :root {
-  --mc-canvas: #f3efe7; --mc-paper: #fffcf6; --mc-sand: #e9e2d5; --mc-sand-2: #ddd4c4; --mc-line: #dcd3c4;
-  --mc-ink: #1a1d18; --mc-ink-2: #555b51; --mc-ink-3: #6b6e64;
-  --mc-moss: #3e5d3a; --mc-moss-press: #2f4a2c; --mc-moss-tint: #e2e9db; --mc-on-moss: #ffffff;
-  --mc-sage: #98bfa2; --mc-night: #151b14; --mc-on-night: #ede6d9;
-  /* 채운 주 버튼·선택 상태: 라이트는 밤 숲, 다크는 세이지(어두운 바탕에서도 보이게) */
-  --mc-solid: #151b14; --mc-on-solid: #ede6d9;
-  --mc-ember: #c4561f; --mc-ember-tint: #f6e2d4;
-  --mc-sky: #4d7391; --mc-sky-tint: #e1ebf1;
-  --mc-glass: rgba(21, 27, 20, .46); --mc-glass-line: rgba(255, 252, 246, .22); --mc-glass-ink: #fffcf6;
-  --mc-scrim: rgba(12, 16, 11, .5);
-  --mc-shadow-1: 0 1px 2px rgba(26, 29, 24, .06), 0 2px 8px -4px rgba(26, 29, 24, .08);
-  --mc-shadow-2: 0 18px 40px -16px rgba(26, 29, 24, .28);
-  --mc-r-1: 12px; --mc-r-2: 20px; --mc-r-3: 28px; --mc-r-4: 36px;
+  /* v4.1 “Ink & Leaf”(2026-10-16): 밝은 화면만. 글자는 잉크/흰 강약, 액센트는 초록 하나, 배지 색은 뜻 하나씩.
+     경계는 선보다 면·그림자로 부드럽게(소유자: 검정·흰색만 있어 심심하고 테두리가 딱딱함). */
+  color-scheme: light;
+  --mc-canvas: #f5f6f4; --mc-paper: #ffffff; --mc-sand: #eff1ee; --mc-sand-2: #e6e9e5; --mc-line: #e8ebe7;
+  --mc-ink: #101414; --mc-ink-2: #4b5350; --mc-ink-3: #69716d;
+  /* 이름은 v3 그대로: moss = 액센트(초록), solid = 선택·주 버튼(잉크) */
+  --mc-moss: #00875a; --mc-moss-press: #006c48; --mc-moss-tint: #e4f4ea; --mc-on-moss: #ffffff;
+  --mc-sage: #7fcf9f; --mc-night: #101414; --mc-on-night: #ffffff;
+  --mc-solid: #101414; --mc-on-solid: #ffffff;
+  --mc-ember: #c2410c; --mc-ember-tint: #fdeee4;
+  --mc-sky: #00875a; --mc-sky-tint: #e4f4ea;
+  /* 액센트·배지: 초록=예약·시간·행동, 노랑=전기(잉크 글자), 불꽃=불멍, 잉크=주차·차박 */
+  --mc-accent: #00875a; --mc-accent-ink: #0a6e45; --mc-accent-tint: #e4f4ea; --mc-leaf: #34c27a;
+  --mc-volt: #ffd23f; --mc-flame: #db380b; --mc-cobalt: #00875a;
+  --mc-soft: #eef1ed; --mc-soft-2: #e4e8e3;
+  --mc-glass: rgba(255, 255, 255, .9); --mc-glass-line: rgba(255, 255, 255, .9); --mc-glass-ink: #101414;
+  --mc-scrim: rgba(16, 20, 20, .4);
+  --mc-shadow-1: 0 1px 2px rgba(16, 20, 20, .04), 0 4px 16px rgba(16, 20, 20, .06);
+  --mc-shadow-2: 0 8px 28px rgba(16, 20, 20, .12);
+  --mc-shadow-float: 0 2px 10px rgba(16, 20, 20, .14);
+  --mc-r-1: 12px; --mc-r-2: 16px; --mc-r-3: 22px; --mc-r-4: 28px;
   --mc-font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
-  --mc-display: clamp(1.75rem, 1.2rem + 2.6vw, 3.25rem);
+  --mc-display: clamp(2rem, 1.2rem + 3.4vw, 4.5rem);
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --mc-canvas: #0f120e; --mc-paper: #171b16; --mc-sand: #20261e; --mc-sand-2: #2a3127; --mc-line: #2e352b;
-  --mc-ink: #ede6d9; --mc-ink-2: #b5ae9f; --mc-ink-3: #8e9085;
-  --mc-moss: #9cc4a4; --mc-moss-press: #b9d8bf; --mc-moss-tint: #1f2c1e; --mc-on-moss: #0f1a10;
-  --mc-night: #0a0d09; --mc-solid: #b9d8bf; --mc-on-solid: #0f1a10; --mc-ember: #ee8a55; --mc-ember-tint: #3a2416; --mc-sky: #8fb4cf; --mc-sky-tint: #1c2731;
-  --mc-glass: rgba(10, 13, 9, .55); --mc-scrim: rgba(0, 0, 0, .62);
-  --mc-shadow-1: 0 1px 2px rgba(0, 0, 0, .4); --mc-shadow-2: 0 18px 40px -16px rgba(0, 0, 0, .7);
-  color-scheme: dark; } }
-:root[data-theme="dark"] {
-  --mc-canvas: #0f120e; --mc-paper: #171b16; --mc-sand: #20261e; --mc-sand-2: #2a3127; --mc-line: #2e352b;
-  --mc-ink: #ede6d9; --mc-ink-2: #b5ae9f; --mc-ink-3: #8e9085;
-  --mc-moss: #9cc4a4; --mc-moss-press: #b9d8bf; --mc-moss-tint: #1f2c1e; --mc-on-moss: #0f1a10;
-  --mc-night: #0a0d09; --mc-solid: #b9d8bf; --mc-on-solid: #0f1a10; --mc-ember: #ee8a55; --mc-ember-tint: #3a2416; --mc-sky: #8fb4cf; --mc-sky-tint: #1c2731;
-  --mc-glass: rgba(10, 13, 9, .55); --mc-scrim: rgba(0, 0, 0, .62);
-  --mc-shadow-1: 0 1px 2px rgba(0, 0, 0, .4); --mc-shadow-2: 0 18px 40px -16px rgba(0, 0, 0, .7);
-  color-scheme: dark; }
 
 /* ===== 공통 사이트 헤더 v3(홈·탐색·보조 페이지 동일) — 캔버스 유리 바 + 알약 메뉴, 모바일은 떠 있는 탭 바 ===== */
 .gnb { position: sticky; top: 0; z-index: 70; background: color-mix(in srgb, var(--mc-canvas) 84%, transparent); backdrop-filter: saturate(1.3) blur(14px); -webkit-backdrop-filter: saturate(1.3) blur(14px); border-bottom: 1px solid color-mix(in srgb, var(--mc-line) 70%, transparent); color: var(--mc-ink); }
 .gnb-in { box-sizing: border-box; width: 100%; max-width: 1240px; height: 68px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; gap: 24px; }
 .sh-brand { display: inline-flex; align-items: center; gap: 10px; flex: none; color: var(--mc-ink); text-decoration: none; white-space: nowrap; }
-.sh-brand > span { width: 38px; height: 38px; border-radius: 13px; display: grid; place-items: center; background: var(--mc-night); color: var(--mc-on-night); box-shadow: inset 0 0 0 1px rgba(255,255,255,.06); }
+.sh-brand > span { width: 38px; height: 38px; border-radius: 13px; display: grid; place-items: center; background: var(--mc-accent, #00875a); color: #fff; }
 .sh-brand svg { width: 20px; height: 20px; }
 .sh-brand b { display: grid; font-size: 1.125rem; font-weight: 850; letter-spacing: -.05em; line-height: 1.05; }
 .sh-brand small { font-size: .5625rem; font-weight: 700; letter-spacing: .22em; color: var(--mc-ink-3); }
 .sh-nav { display: flex; align-items: center; gap: 6px; flex: 1; min-width: 0; }
-.sh-nav a { display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 15px; border-radius: 999px; border: 1px solid var(--mc-line); color: var(--mc-ink-2); text-decoration: none; font-size: .875rem; font-weight: 700; white-space: nowrap; transition: background .15s, color .15s, border-color .15s; }
+.sh-nav a { display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 15px; border-radius: 999px; border: 0; background: var(--mc-soft, #eef1ed); color: var(--mc-ink-2); text-decoration: none; font-size: .875rem; font-weight: 700; white-space: nowrap; transition: background .15s, color .15s, border-color .15s; }
 .sh-nav a:hover { border-color: var(--mc-ink-3); color: var(--mc-ink); }
-.sh-nav a[aria-current="page"] { background: var(--mc-solid); border-color: var(--mc-solid); color: var(--mc-on-solid); }
+.sh-nav a[aria-current="page"] { background: var(--mc-accent, #00875a); color: #fff; }
 .sh-nav svg, .sh-actions svg { width: 17px; height: 17px; flex: none; }
 .sh-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; flex: none; }
 .sh-user { position: relative; }
-.sh-badge { display: inline-flex; align-items: center; gap: 7px; height: 40px; max-width: 9.5rem; padding: 0 13px 0 4px; border-radius: 999px; border: 1px solid var(--mc-line); background: var(--mc-paper); color: var(--mc-ink); font: inherit; font-size: .875rem; font-weight: 800; cursor: pointer; white-space: nowrap; }
+.sh-badge { display: inline-flex; align-items: center; gap: 7px; height: 40px; max-width: 9.5rem; padding: 0 13px 0 4px; border-radius: 999px; border: 0; background: var(--mc-soft, #eef1ed); color: var(--mc-ink); font: inherit; font-size: .875rem; font-weight: 800; cursor: pointer; white-space: nowrap; }
 .sh-badge b { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 .sh-av { flex: none; width: 30px; height: 30px; border-radius: 50%; display: inline-grid; place-items: center; background: var(--mc-moss); color: #fff; font-style: normal; font-size: .8125rem; font-weight: 900; line-height: 1; }
 .sh-av.sh-plus { background: var(--mc-sand); color: var(--mc-ink-2); font-size: 1.1rem; }
@@ -1149,7 +1135,7 @@ body.detail-open .compare-bar { display: none; }
 .sh-seg { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 16px; background: var(--mc-canvas); }
 .sh-seg button { min-height: 40px; padding: 0 4px; border: 0; border-radius: 12px; background: none; color: var(--mc-ink-2); font: inherit; font-size: .875rem; font-weight: 800; cursor: pointer; white-space: nowrap; }
 .sh-seg button[aria-checked="true"] { background: var(--mc-paper); color: var(--mc-moss); box-shadow: var(--mc-shadow-1); }
-.sh-icon { position: relative; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--mc-line); background: var(--mc-paper); color: var(--mc-ink); text-decoration: none; cursor: pointer; }
+.sh-icon { position: relative; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; border: 0; background: var(--mc-soft, #eef1ed); color: var(--mc-ink); text-decoration: none; cursor: pointer; }
 .sh-icon b { position: absolute; top: -4px; right: -4px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 99px; display: grid; place-items: center; background: var(--mc-ember); color: #fff; font-size: .6875rem; font-weight: 800; }
 .gnb-wide .gnb-in { max-width: none; padding: 0 clamp(16px, 2.5vw, 40px); }
 /* 모바일: 위쪽 메뉴 대신 떠 있는 밤색 유리 탭 바(같은 메뉴 + 홈). 라벨은 항상 보인다. */
@@ -1159,13 +1145,13 @@ body.detail-open .compare-bar { display: none; }
   .sh-nav { display: none; }
   .sh-brand small { display: none; }
   .sh-badge { max-width: 6.5rem; padding-right: 10px; }
-  .gnb-tabbar { position: fixed; left: 10px; right: 10px; bottom: calc(8px + env(safe-area-inset-bottom)); z-index: 70; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 6px; border-radius: 26px; background: color-mix(in srgb, var(--mc-night) 90%, transparent); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 14px 36px -12px rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.08); }
-  .gnb-tabbar a { display: grid; justify-items: center; gap: 2px; padding: 6px 0 5px; border-radius: 20px; color: color-mix(in srgb, var(--mc-on-night) 62%, transparent); text-decoration: none; font-size: .6875rem; font-weight: 700; white-space: nowrap; letter-spacing: -.03em; }
-  .gnb-tabbar a[aria-current="page"] { color: var(--mc-night); background: var(--mc-sage); }
-  .gnb-tabbar svg { width: 21px; height: 21px; }
+  .gnb-tabbar { position: fixed; left: 10px; right: 10px; bottom: calc(8px + env(safe-area-inset-bottom)); z-index: 70; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 6px; border-radius: 26px; background: rgba(255,255,255,.86); backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3); box-shadow: 0 8px 28px rgba(16,20,20,.14); border: 0; }
+  .gnb-tabbar a { display: grid; justify-items: center; gap: 3px; padding: 7px 0 6px; border-radius: 20px; color: var(--mc-ink-3); text-decoration: none; font-size: .78rem; font-weight: 700; white-space: nowrap; letter-spacing: -.02em; }
+  .gnb-tabbar a[aria-current="page"] { color: var(--mc-accent-ink, #0a6e45); background: var(--mc-accent-tint, #e4f4ea); font-weight: 900; }
+  .gnb-tabbar svg { width: 24px; height: 24px; }
   body { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
 }
-@media (max-width: 360px) { .sh-brand b { font-size: 1rem; } .gnb-tabbar a { font-size: .625rem; } }
+@media (max-width: 360px) { .sh-brand b { font-size: 1rem; } .gnb-tabbar a { font-size: .72rem; } }
 /* 글꼴도 모든 페이지 동일 */
 body, .gnb, .gnb-tabbar, .gnb button, .sh-dlg { font-family: var(--mc-font); }
 /* 글자 크기 설정(모든 페이지 공통, 이 기기 저장) */
@@ -1338,11 +1324,206 @@ h1, h2 { color: var(--mc-ink); }
 .spec-cmp .spec-mention { display: block; margin-top: 2px; }
 @media (max-width: 420px) { .spec-row { grid-template-columns: 1fr; gap: 2px; } }
 
+/* ==========================================================================
+   탐색 v4.1 “Ink & Leaf” (2026-10-16) — 소유자 선택: C 스펙북 기반 + B 넓은 사진 히어로 + A 굵기 대비 + D 지도 찾기.
+   _v3.css 뒤에 실린다. 원칙(docs/DESIGN_SYSTEM.md v4):
+   1) 밝은 화면만. 어두운 면은 쓰지 않는다.
+   2) 글자는 잉크/흰 강약(900 ↔ 200–300). 액센트는 초록 하나(예약·시간·행동).
+   3) 배지 색은 뜻 하나씩: 노랑=전기, 불꽃=불멍, 잉크=주차·차박, 초록=시간.
+   4) 사진과 페이지 경계는 흐림·유리 대신 흰 그라데이션으로 자연스럽게.
+   5) 경계는 선보다 면(연한 회녹색)과 그림자로 부드럽게. 조작 요소는 알약형.
+   6) 출처·설명 문구는 (i) 안으로. 화면에는 값만 크게.
+   7) 지도는 Uber Base 패턴: 떠 있는 흰 검색 알약·회색 칩·그림자 카드·검정 핀 알약.
+   ========================================================================== */
+
+body { background: var(--mc-canvas); }
+
+/* ---------- 상단 히어로: 보정한 넓은 사진, 흰 그라데이션으로 페이지와 이어진다 ---------- */
+.x-hero { position: relative; overflow: hidden; isolation: isolate; min-height: clamp(260px, 30vw, 420px); display: flex; align-items: flex-end; }
+.x-hero::before { content: ""; position: absolute; inset: 0; z-index: -2; background: url("../images/hero-campsite.webp") 60% 96% / cover no-repeat; }
+.x-hero::after { content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(90deg, rgba(245,246,244,.92) 0%, rgba(245,246,244,.55) 34%, rgba(245,246,244,0) 62%),
+              linear-gradient(180deg, rgba(245,246,244,0) 72%, rgba(245,246,244,.75) 90%, var(--mc-canvas) 100%); }
+.x-hero-in { width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; padding-top: 28px; padding-bottom: 18px; flex-wrap: wrap; }
+.x-hero-title { display: flex; flex-direction: column; line-height: .94; letter-spacing: -0.065em; color: var(--mc-ink); font-size: var(--mc-display); }
+.x-hero-title b { font-weight: 900; }
+.x-hero-title span { font-weight: 200; }
+.x-mode { display: inline-grid; grid-auto-flow: column; grid-auto-columns: minmax(5.5rem, 1fr); padding: 4px; border-radius: 999px; background: #fff; box-shadow: var(--mc-shadow-2); }
+.x-mode > * { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 2.5rem; padding: 0 16px; border-radius: 999px; font-size: var(--fs-sm); font-weight: 700; color: var(--mc-ink-2); white-space: nowrap; }
+.x-mode [aria-selected="true"] { background: var(--mc-accent); color: #fff; }
+@media (max-width: 640px) {
+  .x-hero { min-height: 300px; }
+  .x-hero::before { background-image: url("../images/hero-campsite-m.webp"); background-position: 50% 97%; }
+  .x-hero::after { background: linear-gradient(180deg, rgba(245,246,244,.92) 0%, rgba(245,246,244,.3) 30%, rgba(245,246,244,0) 46%, rgba(245,246,244,0) 76%, rgba(245,246,244,.8) 92%, var(--mc-canvas) 100%); }
+  .x-hero-in { flex-direction: column; align-items: stretch; height: 300px; justify-content: space-between; padding-top: 18px; }
+  .x-mode { width: 100%; }
+}
+
+/* ---------- 검색 바·칩: 테두리 대신 면 ---------- */
+.bar { background: color-mix(in srgb, var(--mc-canvas) 94%, transparent); border-bottom: 0; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.q { border-radius: 999px; border: 0; background: #fff; box-shadow: var(--mc-shadow-1); }
+.q:focus-within { box-shadow: 0 0 0 3px color-mix(in srgb, var(--mc-accent) 28%, transparent), var(--mc-shadow-1); }
+.near-btn { border: 0; border-radius: 999px; background: #fff; box-shadow: var(--mc-shadow-1); }
+.availability-query, .setup-query { border: 0; border-radius: var(--mc-r-3); background: #fff; box-shadow: var(--mc-shadow-1); }
+.availability-query input, .availability-query label { border-color: transparent !important; background: var(--mc-soft) !important; border-radius: var(--mc-r-1) !important; }
+.availability-run { border-radius: 999px; background: var(--mc-accent); color: #fff; }
+.pill { border: 0; border-radius: 999px; background: var(--mc-soft); color: var(--mc-ink); }
+.pill:hover { background: var(--mc-soft-2); color: var(--mc-ink); }
+.pill[aria-pressed="true"], .near-btn[aria-pressed="true"] { background: var(--mc-ink); color: #fff; }
+.sort select { border: 0; background: #fff; box-shadow: var(--mc-shadow-1); }
+
+/* 결과 머리: 숫자는 900, 설명은 300 */
+.results-head h1 { font-weight: 900; letter-spacing: -0.055em; }
+.results-head .faint { font-weight: 300; }
+
+/* ---------- 카드: 테두리 없는 그림자 카드 · 포스터(사진+배지) · 이름·지역·판정 · 후기 장단점 한 줄 ---------- */
+.card { border: 0 !important; border-radius: var(--mc-r-3); box-shadow: var(--mc-shadow-1); }
+.card:hover { box-shadow: var(--mc-shadow-2); }
+.card[aria-current="true"] { box-shadow: 0 0 0 2.5px var(--mc-accent), var(--mc-shadow-2); }
+.card .thumb { aspect-ratio: 4 / 3; }
+.card .thumb::after { height: 46%; background: linear-gradient(transparent, rgba(16, 20, 20, .26)); }
+.card-body { gap: 4px; padding: 12px 14px 14px; }
+.card-title h3 { font-size: 1.25rem; font-weight: 900; letter-spacing: -0.05em; }
+.card .loc { font-size: var(--fs-xs); font-weight: 300; color: var(--mc-ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-foot { display: flex; align-items: baseline; gap: 10px; min-height: 1.25rem; font-size: var(--fs-xs); }
+.card-foot .fee { margin-left: auto; font-weight: 300; color: var(--mc-ink-2); }
+.card-foot .fee b { font-weight: 900; color: var(--mc-ink); }
+.btn-compare { border: 0 !important; background: var(--mc-soft) !important; border-radius: 999px !important; }
+.btn-compare.on { background: var(--mc-accent) !important; color: #fff !important; }
+.verdict { font-weight: 900; letter-spacing: -0.02em; }
+.verdict.v-match { color: var(--mc-accent-ink); }
+.verdict.v-conditional { color: var(--mc-ink); }
+.verdict.v-mismatch { color: var(--mc-flame); }
+.verdict.v-unknown { color: var(--mc-ink-3); font-weight: 700; }
+/* 후기 장단점 한 줄(후기 요약 n건에서 센 것) */
+.rv-line { display: grid; gap: 3px; margin-top: 6px; padding-top: 8px; border-top: 1px solid var(--mc-soft); font-size: var(--fs-xs); }
+.rv-line span { display: flex; align-items: center; gap: 6px; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rv-line .i { width: 14px; height: 14px; flex: none; }
+.rv-line .pro { color: var(--mc-ink); } .rv-line .pro .i { color: var(--mc-accent); }
+.rv-line .con { color: var(--mc-ink-2); } .rv-line .con .i { color: var(--mc-flame); }
+.rv-line em { font-style: normal; font-weight: 300; color: var(--mc-ink-3); }
+.rv-line b { font-weight: 800; }
+
+/* 포스터 배지: 사진 아래쪽에 3칸, 시간 신호는 왼쪽 위 */
+.poster-emblems { position: absolute; top: auto; left: 10px; right: 10px; bottom: 10px; z-index: 2; display: flex; flex-wrap: wrap; gap: 5px; }
+.poster-time { position: absolute; top: 10px; left: 10px; z-index: 2; display: flex; }
+.pb { display: inline-flex; align-items: center; gap: 4px; min-height: 1.75rem; padding: 0 10px; border-radius: 999px; font-size: .75rem; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; line-height: 1; box-shadow: 0 1px 4px rgba(16,20,20,.12); }
+.pb .i { width: 13px; height: 13px; stroke-width: 2.4; }
+.pb-pw { background: var(--mc-volt); color: var(--mc-ink); }
+.pb-fi { background: var(--mc-flame); color: #fff; }
+.pb-fo { background: #fff; color: var(--mc-flame); }
+.pb-pk { background: var(--mc-ink); color: #fff; }
+.pb-off { background: #fff; color: var(--mc-ink-2); }
+.pb-tm { background: var(--mc-accent); color: #fff; }
+.pb-uk { background: rgba(255, 255, 255, .92); color: var(--mc-ink-3); font-weight: 700; }
+.pb-uk b { margin-left: 2px; padding: 2px 5px; border-radius: 999px; background: var(--mc-soft); color: var(--mc-ink-2); font-size: .625rem; font-weight: 800; }
+.poster-badge { display: none !important; }
+
+/* ---------- 상세: 넓은 사진이 흰 그라데이션으로 페이지에 녹고, 그 위에 큰 제목 ---------- */
+.dv-cover { position: relative; max-width: 1180px; margin: -3.75rem auto 0; }
+.dv-cover .dv-hero { max-width: none; width: 100%; margin: 0; height: clamp(380px, 52vw, 560px); }
+.dv-cover::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 62%; z-index: 2; pointer-events: none; background: linear-gradient(180deg, rgba(245,246,244,0) 0%, rgba(245,246,244,.82) 55%, var(--mc-canvas) 100%); }
+.dv-cover .dv-all { top: 16px; bottom: auto; right: 16px; z-index: 3; }
+@media (max-width: 1080px) { .dv-cover .dv-all { top: 12px; bottom: auto; align-self: flex-start; } }
+@media (min-width: 1081px) { .dv-cover { margin-top: 0; width: calc(100% - 48px); } .dv-cover .dv-hero { width: 100%; } }
+.dv-glass { position: absolute; left: 16px; right: 16px; bottom: 6px; z-index: 3; display: grid; gap: 10px; padding: 0; background: none; border: 0; box-shadow: none; pointer-events: none; }
+.dv-glass > * { pointer-events: auto; }
+.dv-glass h2 { display: flex; flex-wrap: wrap; column-gap: .3em; margin: 0; font-size: clamp(2rem, 1.3rem + 2.6vw, 3.5rem); line-height: 1; letter-spacing: -0.06em; color: var(--mc-ink); }
+.dv-glass h2 b { font-weight: 900; }
+.dv-glass h2 span { font-weight: 200; }
+.dv-glass-loc { margin: 0; font-size: var(--fs-sm); font-weight: 400; color: var(--mc-ink-2); }
+.dv-glass-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.dv-glass-badges .pb { min-height: 2rem; padding: 0 12px; font-size: .8125rem; }
+.dv-glass-badges .pb-uk, .dv-glass-badges .pb-off, .dv-glass-badges .pb-fo { background: #fff; }
+@media (min-width: 1081px) { .dv-glass { left: 28px; right: 28px; bottom: 12px; } }
+.dv-title { margin: 14px 12px 0; border: 0 !important; box-shadow: var(--mc-shadow-1); }
+.dv-title .dv-loc { display: none; }
+@media (max-width: 760px) { .dv-title { margin: 12px 10px 0; } }
+
+/* 섹션: 테두리 없는 흰 카드 + 그림자, 제목 굵기 대비 */
+.dv-sec { border: 0 !important; box-shadow: var(--mc-shadow-1); }
+.dv-sec > h3, .dv-sec .dv-sub-head h3 { font-weight: 900; letter-spacing: -0.05em; }
+.dv-condition, .spec-group, .dv-stats > div, .dv-actions a, .dv-actions button, .dv-good > div { border: 0 !important; background: var(--mc-soft) !important; }
+.dv-nav button { border: 0; background: var(--mc-soft); }
+.dv-themes button, .dv-chips span { border: 0; background: var(--mc-accent-tint); color: var(--mc-accent-ink); }
+.dv-book { background: var(--mc-accent-tint) !important; border: 0 !important; color: var(--mc-ink); }
+.dv-book h3, .dv-book b, .dv-book strong { color: var(--mc-ink); }
+.dv-book small, .dv-book em { color: var(--mc-ink-2); }
+.dv-book .dv-dday b { font-weight: 900; letter-spacing: -0.05em; color: var(--mc-accent-ink); }
+.dv-book .btn-primary, .dv-book .dv-go { background: var(--mc-accent) !important; color: #fff !important; border: 0 !important; border-radius: 999px !important; font-weight: 900; }
+
+/* 등급 칩: 면 색으로만 */
+.grade { border: 0 !important; border-radius: 999px; }
+.grade-verified { background: var(--mc-ink); color: #fff; }
+.grade-confirmed { background: var(--mc-accent-tint); color: var(--mc-accent-ink); }
+.grade-surveyed { background: var(--mc-ember-tint); color: var(--mc-ember); }
+.grade-unknown { background: var(--mc-soft-2); color: var(--mc-ink-2); font-weight: 800; }
+.dv-condition b, .spec-row dd b { font-weight: 900; letter-spacing: -0.03em; }
+
+/* (i) 버튼과 출처 말풍선: 선 없이 그림자 */
+.tip { width: 1.5rem; height: 1.5rem; border-radius: 50%; border: 0; color: var(--mc-ink-2); display: inline-grid; place-items: center; flex: none; background: var(--mc-soft); }
+.tip .i { width: 12px; height: 12px; stroke-width: 2.4; }
+.dv-glass-badges .tip { width: 2rem; height: 2rem; background: #fff; box-shadow: 0 1px 4px rgba(16,20,20,.12); }
+.tip-pop { border: 0; border-radius: var(--mc-r-2); background: #fff; color: var(--mc-ink); box-shadow: var(--mc-shadow-2); }
+.tip-pop p { margin: 0 0 6px; font-size: var(--fs-xs); line-height: 1.55; }
+.tip-pop p:last-child { margin: 0; color: var(--mc-ink-3); }
+.tip-pop a { color: var(--mc-accent-ink); text-decoration: underline; }
+
+/* 설명 문구 줄이기: 출처·안내는 (i)로 */
+.availability-copy small, .setup-query summary small:empty { display: none; }
+.availability-notice { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-xs); }
+.availability-notice b { font-weight: 900; }
+.setup-help { display: none; }
+@media (max-width: 640px) {
+  .availability-query { grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px; }
+  .availability-copy, .availability-notice { grid-column: 1 / -1; }
+  .availability-run { grid-column: 1 / -1; min-height: 2.75rem; }
+}
+
+/* 하단 예약 바·비교 바: 흰 면 + 초록 알약 */
+.d-cta { border-top: 0 !important; box-shadow: 0 -6px 20px rgba(16,20,20,.06); }
+.btn-cta-primary { border-radius: 999px; background: var(--mc-accent); color: #fff; }
+.btn-cta-primary:hover { background: var(--mc-moss-press); }
+.btn-cta-secondary { border: 0 !important; background: var(--mc-soft) !important; }
+.compare-bar { background: #fff !important; border: 0; color: var(--mc-ink); box-shadow: var(--mc-shadow-2); }
+.compare-bar * { color: inherit; }
+.compare-btn { background: var(--mc-accent) !important; color: #fff !important; }
+.compare-btn * { color: #fff; }
+.mobile-switch { background: #fff !important; color: var(--mc-ink) !important; box-shadow: var(--mc-shadow-2) !important; }
+
+/* ---------- 지도 찾기(Uber Base 패턴) ---------- */
+.map-col { background: #eef0ec; border-left: 0 !important; }
+@media (min-width: 901px) {
+  body[data-view="map"] .layout { grid-template-columns: clamp(360px, 30vw, 440px) minmax(0, 1fr); }
+  body[data-view="map"] .cards { grid-template-columns: minmax(0, 1fr); }
+  body[data-view="map"] .x-hero { display: none; }
+}
+@media (max-width: 900px) { body[data-view="map"] .x-hero { display: none; } }
+/* 핀: 검정 알약(값 하나) + 꼬리. 고른 핀은 초록 */
+.mpin { position: relative; display: inline-flex; align-items: center; gap: 4px; padding: 6px 10px; border-radius: 999px; background: var(--mc-ink); color: #fff; font: 800 12px/1 var(--mc-font); letter-spacing: -.01em; white-space: nowrap; box-shadow: var(--mc-shadow-float); cursor: pointer; transform: translateY(-6px); }
+.mpin::after { content: ""; position: absolute; left: 50%; bottom: -4px; width: 9px; height: 9px; background: inherit; transform: translateX(-50%) rotate(45deg); border-radius: 2px; z-index: -1; }
+.mpin i { width: 8px; height: 8px; border-radius: 50%; background: var(--dot, transparent); }
+.mpin.uk { background: #fff; color: var(--mc-ink-2); }
+.mpin.on { background: var(--mc-accent); color: #fff; }
+/* 지도 미리보기 카드(핀을 누르면 아래에서 올라온다) */
+.map-peek { position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 5; display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 12px; padding: 12px; border-radius: var(--mc-r-3); background: #fff; box-shadow: var(--mc-shadow-2); }
+.map-peek img, .map-peek .ph { width: 96px; height: 96px; border-radius: var(--mc-r-2); object-fit: cover; background: var(--mc-soft); }
+.map-peek > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.map-peek b { font-size: 1.0625rem; font-weight: 900; letter-spacing: -0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.map-peek small { color: var(--mc-ink-2); font-weight: 300; }
+.map-peek .peek-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.map-peek .peek-actions { display: flex; gap: 6px; margin-top: 8px; }
+.map-peek .peek-actions button { min-height: 2.5rem; padding: 0 16px; border-radius: 999px; font-weight: 800; font-size: var(--fs-sm); }
+.map-peek .peek-go { background: var(--mc-accent); color: #fff; }
+.map-peek .peek-x { background: var(--mc-soft); color: var(--mc-ink); }
+@media (min-width: 901px) { .map-peek { left: 16px; right: auto; width: 420px; bottom: 16px; } }
+.map-fab { position: absolute; right: 12px; top: 12px; z-index: 4; width: 44px; height: 44px; border-radius: 50%; background: #fff; box-shadow: var(--mc-shadow-float); display: grid; place-items: center; color: var(--mc-ink); }
+
 </style>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="l-alarm-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" /> <path d="M12 9v4l2 2" /> <path d="M5 3 2 6" /> <path d="m22 6-3-3" /> <path d="M6.38 18.7 4 21" /> <path d="M17.64 18.67 20 21" /></symbol><symbol id="l-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7" /> <path d="M19 12H5" /></symbol><symbol id="l-arrow-up-down" viewBox="0 0 24 24"><path d="m21 16-4 4-4-4" /> <path d="M17 20V4" /> <path d="m3 8 4-4 4 4" /> <path d="M7 4v16" /></symbol><symbol id="l-arrow-up-right" viewBox="0 0 24 24"><path d="M7 7h10v10" /> <path d="M7 17 17 7" /></symbol><symbol id="l-baby" viewBox="0 0 24 24"><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5" /> <path d="M15 12h.01" /> <path d="M19.38 6.813A9 9 0 0 1 20.8 10.2a2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1" /> <path d="M9 12h.01" /></symbol><symbol id="l-backpack" viewBox="0 0 24 24"><path d="M4 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" /> <path d="M8 10h8" /> <path d="M8 18h8" /> <path d="M8 22v-6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v6" /> <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" /></symbol><symbol id="l-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M4.929 4.929 19.07 19.071" /></symbol><symbol id="l-bed-double" viewBox="0 0 24 24"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8" /> <path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4" /> <path d="M12 4v6" /> <path d="M2 18h20" /></symbol><symbol id="l-building-2" viewBox="0 0 24 24"><path d="M10 12h4" /> <path d="M10 8h4" /> <path d="M14 21v-3a2 2 0 0 0-4 0v3" /> <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" /> <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" /></symbol><symbol id="l-calendar" viewBox="0 0 24 24"><path d="M8 2v3" /> <path d="M16 2v3" /> <rect x="3" y="3" width="18" height="18" rx="2" /> <path d="M3 9h18" /></symbol><symbol id="l-calendar-check" viewBox="0 0 24 24"><path d="M8 2v3" /> <path d="M16 2v3" /> <rect x="3" y="3" width="18" height="18" rx="2" /> <path d="M3 9h18" /> <path d="m9 15 2 2 4-4" /></symbol><symbol id="l-calendar-clock" viewBox="0 0 24 24"><path d="M16 14v2.2l1.6 1" /> <path d="M16 2v3" /> <path d="M21 7.338V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h2.338" /> <path d="M3 9h5.859" /> <path d="M8 2v3" /> <circle cx="16" cy="16" r="6" /></symbol><symbol id="l-camera" viewBox="0 0 24 24"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" /> <circle cx="12" cy="13" r="3" /></symbol><symbol id="l-car" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /> <circle cx="7" cy="17" r="2" /> <path d="M9 17h6" /> <circle cx="17" cy="17" r="2" /></symbol><symbol id="l-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol><symbol id="l-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></symbol><symbol id="l-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></symbol><symbol id="l-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <line x1="12" x2="12" y1="8" y2="12" /> <line x1="12" x2="12.01" y1="16" y2="16" /></symbol><symbol id="l-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m16 9-5.5 5.5L8 12" /></symbol><symbol id="l-circle-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></symbol><symbol id="l-circle-x" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m15 9-6 6" /> <path d="m9 9 6 6" /></symbol><symbol id="l-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 6v6l4 2" /></symbol><symbol id="l-coffee" viewBox="0 0 24 24"><path d="M10 2v2" /> <path d="M14 2v2" /> <path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" /> <path d="M6 2v2" /></symbol><symbol id="l-columns-2" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M12 3v18" /></symbol><symbol id="l-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /> <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></symbol><symbol id="l-cross" viewBox="0 0 24 24"><path d="M4 9a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h4a1 1 0 0 1 1 1v4a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-4a1 1 0 0 1 1-1h4a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-4a1 1 0 0 1-1-1V4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4a1 1 0 0 1-1 1z" /></symbol><symbol id="l-dog" viewBox="0 0 24 24"><path d="M11.25 16.25h1.5L12 17z" /> <path d="M16 14v.5" /> <path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309" /> <path d="M8 14v.5" /> <path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.177-6.53 4-7 1.923-.321 3.651.845 3.651 2.235A7.497 7.497 0 0 1 14 5.277c0-1.39 1.844-2.598 3.767-2.277 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5" /></symbol><symbol id="l-droplets" viewBox="0 0 24 24"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" /> <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" /></symbol><symbol id="l-dumbbell" viewBox="0 0 24 24"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /> <path d="m2.5 21.5 1.4-1.4" /> <path d="m20.1 3.9 1.4-1.4" /> <path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /> <path d="m9.6 14.4 4.8-4.8" /></symbol><symbol id="l-external-link" viewBox="0 0 24 24"><path d="M15 3h6v6" /> <path d="M10 14 21 3" /> <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></symbol><symbol id="l-file-search" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <circle cx="11.5" cy="14.5" r="2.5" /> <path d="M13.3 16.3 15 18" /></symbol><symbol id="l-file-text" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /></symbol><symbol id="l-fish" viewBox="0 0 24 24"><path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6s-7.56-2.53-8.5-6Z" /> <path d="M18 12v.5" /> <path d="M16 17.93a9.77 9.77 0 0 1 0-11.86" /> <path d="M7 10.67C7 8 5.58 5.97 2.73 5.5c-1 1.5-1 5 .23 6.5-1.24 1.5-1.24 5-.23 6.5C5.58 18.03 7 16 7 13.33" /> <path d="M10.46 7.26C10.2 5.88 9.17 4.24 8 3h5.8a2 2 0 0 1 1.98 1.67l.23 1.4" /> <path d="m16.01 17.93-.23 1.4A2 2 0 0 1 13.8 21H9.5a5.96 5.96 0 0 0 1.49-3.98" /></symbol><symbol id="l-flame" viewBox="0 0 24 24"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /></symbol><symbol id="l-flower-2" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1" /> <circle cx="12" cy="8" r="2" /> <path d="M12 10v12" /> <path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z" /> <path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z" /></symbol><symbol id="l-footprints" viewBox="0 0 24 24"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" /> <path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" /> <path d="M16 17h4" /> <path d="M4 13h4" /></symbol><symbol id="l-fuel" viewBox="0 0 24 24"><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0v-6.998a2 2 0 0 0-.59-1.42L18 5" /> <path d="M14 21V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v16" /> <path d="M2 21h13" /> <path d="M3 9h11" /></symbol><symbol id="l-git-branch" viewBox="0 0 24 24"><path d="M15 6a9 9 0 0 0-9 9V3" /> <circle cx="18" cy="6" r="3" /> <circle cx="6" cy="18" r="3" /></symbol><symbol id="l-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" /></symbol><symbol id="l-heart" viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></symbol><symbol id="l-images" viewBox="0 0 24 24"><path d="m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16" /> <path d="M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2" /> <circle cx="13" cy="7" r="1" fill="currentColor" /> <rect x="8" y="2" width="14" height="14" rx="2" /></symbol><symbol id="l-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 16v-4" /> <path d="M12 8h.01" /></symbol><symbol id="l-landmark" viewBox="0 0 24 24"><path d="M10 18v-7" /> <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" /> <path d="M14 18v-7" /> <path d="M18 18v-7" /> <path d="M3 22h18" /> <path d="M6 18v-7" /></symbol><symbol id="l-leaf" viewBox="0 0 24 24"><path d="M11 20a10 10 0 0010-10 25.9 25.9 0 00-1.04-7.281 1 1 0 00-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0011 20" /> <path d="M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13" /></symbol><symbol id="l-list" viewBox="0 0 24 24"><path d="M3 5h.01" /> <path d="M3 12h.01" /> <path d="M3 19h.01" /> <path d="M8 5h13" /> <path d="M8 12h13" /> <path d="M8 19h13" /></symbol><symbol id="l-list-checks" viewBox="0 0 24 24"><path d="M13 5h8" /> <path d="M13 12h8" /> <path d="M13 19h8" /> <path d="m3 17 2 2 4-4" /> <path d="m3 7 2 2 4-4" /></symbol><symbol id="l-list-ordered" viewBox="0 0 24 24"><path d="M11 5h10" /> <path d="M11 12h10" /> <path d="M11 19h10" /> <path d="M4 4h1v5" /> <path d="M4 9h2" /> <path d="M6.5 20H3.4c0-1 2.6-1.925 2.6-3.5a1.5 1.5 0 0 0-2.6-1.02" /></symbol><symbol id="l-locate-fixed" viewBox="0 0 24 24"><line x1="2" x2="5" y1="12" y2="12" /> <line x1="19" x2="22" y1="12" y2="12" /> <line x1="12" x2="12" y1="2" y2="5" /> <line x1="12" x2="12" y1="19" y2="22" /> <circle cx="12" cy="12" r="7" /> <circle cx="12" cy="12" r="3" /></symbol><symbol id="l-map" viewBox="0 0 24 24"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /></symbol><symbol id="l-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" /></symbol><symbol id="l-message-circle" viewBox="0 0 24 24"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></symbol><symbol id="l-messages-square" viewBox="0 0 24 24"><path d="M16 10a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 14.286V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" /> <path d="M20 9a2 2 0 0 1 2 2v10.286a.71.71 0 0 1-1.212.502l-2.202-2.202A2 2 0 0 0 17.172 19H10a2 2 0 0 1-2-2v-1" /></symbol><symbol id="l-mountain" viewBox="0 0 24 24"><path d="m8 3 4 8 5-5 5 15H2L8 3z" /></symbol><symbol id="l-navigation" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11" /></symbol><symbol id="l-notebook-pen" viewBox="0 0 24 24"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4" /> <path d="M2 6h4" /> <path d="M2 10h4" /> <path d="M2 14h4" /> <path d="M2 18h4" /> <path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" /></symbol><symbol id="l-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" /> <path d="M12 22V12" /> <polyline points="3.29 7 12 12 20.71 7" /> <path d="m7.5 4.27 9 5.15" /></symbol><symbol id="l-pencil" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /> <path d="m15 5 4 4" /></symbol><symbol id="l-phone" viewBox="0 0 24 24"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></symbol><symbol id="l-play" viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></symbol><symbol id="l-plug-zap" viewBox="0 0 24 24"><path d="M6.3 20.3a2.4 2.4 0 0 0 3.4 0L12 18l-6-6-2.3 2.3a2.4 2.4 0 0 0 0 3.4Z" /> <path d="m2 22 3-3" /> <path d="M7.5 13.5 10 11" /> <path d="M10.5 16.5 13 14" /> <path d="m18 3-4 4h6l-4 4" /></symbol><symbol id="l-ruler" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" /> <path d="m14.5 12.5 2-2" /> <path d="m11.5 9.5 2-2" /> <path d="m8.5 6.5 2-2" /> <path d="m17.5 15.5 2-2" /></symbol><symbol id="l-sailboat" viewBox="0 0 24 24"><path d="M10 2v15" /> <path d="M7 22a4 4 0 0 1-4-4 1 1 0 0 1 1-1h16a1 1 0 0 1 1 1 4 4 0 0 1-4 4z" /> <path d="M9.159 2.46a1 1 0 0 1 1.521-.193l9.977 8.98A1 1 0 0 1 20 13H4a1 1 0 0 1-.824-1.567z" /></symbol><symbol id="l-scan-search" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2" /> <path d="M17 3h2a2 2 0 0 1 2 2v2" /> <path d="M21 17v2a2 2 0 0 1-2 2h-2" /> <path d="M7 21H5a2 2 0 0 1-2-2v-2" /> <circle cx="12" cy="12" r="3" /> <path d="m16 16-1.9-1.9" /></symbol><symbol id="l-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" /></symbol><symbol id="l-share-2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" /> <circle cx="6" cy="12" r="3" /> <circle cx="18" cy="19" r="3" /> <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /> <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></symbol><symbol id="l-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /></symbol><symbol id="l-shopping-cart" viewBox="0 0 24 24"><path d="m2.05 2.05 1.099-.028a1 1 0 0 1 1.008.815l2.69 14.347A1 1 0 0 0 7.83 18H18" /> <path d="M4.563 5h16.435a1 1 0 0 1 .981 1.204l-1.026 6.226A2 2 0 0 1 18.962 14H6.25" /> <circle cx="18" cy="20" r="2" /> <circle cx="8" cy="20" r="2" /></symbol><symbol id="l-shower-head" viewBox="0 0 24 24"><path d="m4 4 2.5 2.5" /> <path d="M13.5 6.5a4.95 4.95 0 0 0-7 7" /> <path d="M15 5 5 15" /> <path d="M14 17v.01" /> <path d="M10 16v.01" /> <path d="M13 13v.01" /> <path d="M16 10v.01" /> <path d="M11 20v.01" /> <path d="M17 14v.01" /> <path d="M20 11v.01" /></symbol><symbol id="l-snowflake" viewBox="0 0 24 24"><path d="m10 20-1.25-2.5L6 18" /> <path d="M10 4 8.75 6.5 6 6" /> <path d="m14 20 1.25-2.5L18 18" /> <path d="m14 4 1.25 2.5L18 6" /> <path d="m17 21-3-6h-4" /> <path d="m17 3-3 6 1.5 3" /> <path d="M2 12h6.5L10 9" /> <path d="m20 10-1.5 2 1.5 2" /> <path d="M22 12h-6.5L14 15" /> <path d="m4 10 1.5 2L4 14" /> <path d="m7 21 3-6-1.5-3" /> <path d="m7 3 3 6h4" /></symbol><symbol id="l-sparkles" viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /> <path d="M20 2v4" /> <path d="M22 4h-4" /> <circle cx="4" cy="20" r="2" /></symbol><symbol id="l-store" viewBox="0 0 24 24"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" /> <path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" /> <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" /></symbol><symbol id="l-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /> <path d="M12 2v2" /> <path d="M12 20v2" /> <path d="m4.93 4.93 1.41 1.41" /> <path d="m17.66 17.66 1.41 1.41" /> <path d="M2 12h2" /> <path d="M20 12h2" /> <path d="m6.34 17.66-1.41 1.41" /> <path d="m19.07 4.93-1.41 1.41" /></symbol><symbol id="l-sunrise" viewBox="0 0 24 24"><path d="M12 2v8" /> <path d="m4.93 10.93 1.41 1.41" /> <path d="M2 18h2" /> <path d="M20 18h2" /> <path d="m19.07 10.93-1.41 1.41" /> <path d="M22 22H2" /> <path d="m8 6 4-4 4 4" /> <path d="M16 18a4 4 0 0 0-8 0" /></symbol><symbol id="l-toilet" viewBox="0 0 24 24"><path d="M7 12h13a1 1 0 0 1 1 1 5 5 0 0 1-5 5h-.598a.5.5 0 0 0-.424.765l1.544 2.47a.5.5 0 0 1-.424.765H5.402a.5.5 0 0 1-.424-.765L7 18" /> <path d="M8 18a5 5 0 0 1-5-5V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8" /></symbol><symbol id="l-trash-2" viewBox="0 0 24 24"><path d="M10 11v6" /> <path d="M14 11v6" /> <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /> <path d="M3 6h18" /> <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></symbol><symbol id="l-trees" viewBox="0 0 24 24"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z" /> <path d="M7 16v6" /> <path d="M13 19v3" /> <path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" /></symbol><symbol id="l-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /> <path d="M12 9v4" /> <path d="M12 17h.01" /></symbol><symbol id="l-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" /> <path d="M15 18H9" /> <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14" /> <circle cx="17" cy="18" r="2" /> <circle cx="7" cy="18" r="2" /></symbol><symbol id="l-utensils" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" /> <path d="M7 2v20" /> <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" /></symbol><symbol id="l-utensils-crossed" viewBox="0 0 24 24"><path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8" /> <path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7" /> <path d="m2.1 21.8 6.4-6.3" /> <path d="m19 5-7 7" /></symbol><symbol id="l-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" /> <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" /></symbol><symbol id="l-warehouse" viewBox="0 0 24 24"><path d="M18 21V10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v11" /> <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8z" /> <path d="M6 13h12" /> <path d="M6 17h12" /></symbol><symbol id="l-waves" viewBox="0 0 24 24"><path d="M2 12q2.5 2 5 0t5 0 5 0 5 0" /> <path d="M2 19q2.5 2 5 0t5 0 5 0 5 0" /> <path d="M2 5q2.5 2 5 0t5 0 5 0 5 0" /></symbol><symbol id="l-wifi" viewBox="0 0 24 24"><path d="M12 20h.01" /> <path d="M2 8.82a15 15 0 0 1 20 0" /> <path d="M5 12.859a10 10 0 0 1 14 0" /> <path d="M8.5 16.429a5 5 0 0 1 7 0" /></symbol><symbol id="l-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" /></symbol><symbol id="l-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol><symbol id="l-zap" viewBox="0 0 24 24"><path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" /></symbol><symbol id="t-building-pavilion" viewBox="0 0 24 24"><path d="M3 21h7v-3a2 2 0 0 1 4 0v3h7" /> <path d="M6 21l0 -9" /> <path d="M18 21l0 -9" /> <path d="M6 12h12a3 3 0 0 0 3 -3a9 8 0 0 1 -9 -6a9 8 0 0 1 -9 6a3 3 0 0 0 3 3" /></symbol><symbol id="t-caravan" viewBox="0 0 24 24"><path d="M7 18a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M11 18h7a2 2 0 0 0 2 -2v-7a2 2 0 0 0 -2 -2h-9.5a5.5 5.5 0 0 0 -5.5 5.5v3.5a2 2 0 0 0 2 2h2" /> <path d="M8 7l7 -3l1 3" /> <path d="M13 11.5a.5 .5 0 0 1 .5 -.5h2a.5 .5 0 0 1 .5 .5v2a.5 .5 0 0 1 -.5 .5h-2a.5 .5 0 0 1 -.5 -.5l0 -2" /> <path d="M20 16h2" /></symbol><symbol id="t-coin" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1" /> <path d="M12 7v10" /></symbol><symbol id="t-grill" viewBox="0 0 24 24"><path d="M19 8h-14a6 6 0 0 0 6 6h2a6 6 0 0 0 6 -5.775l0 -.225" /> <path d="M17 20a2 2 0 1 1 0 -4a2 2 0 0 1 0 4" /> <path d="M15 14l1 2" /> <path d="M9 14l-3 6" /> <path d="M15 18h-8" /> <path d="M15 5v-1" /> <path d="M12 5v-1" /> <path d="M9 5v-1" /></symbol><symbol id="t-layers-subtract" viewBox="0 0 24 24"><path d="M8 6a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -8" /> <path d="M16 16v2a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-8a2 2 0 0 1 2 -2h2" /></symbol><symbol id="t-tent" viewBox="0 0 24 24"><path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" /></symbol><symbol id="t-tent-off" viewBox="0 0 24 24"><path d="M11 14l4 6h5m-2.863 -6.868l-5.137 -9.132l-1.44 2.559m-1.44 2.563l-6.12 10.878h6l4 -6" /> <path d="M3 3l18 18" /></symbol></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="l-alarm-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" /> <path d="M12 9v4l2 2" /> <path d="M5 3 2 6" /> <path d="m22 6-3-3" /> <path d="M6.38 18.7 4 21" /> <path d="M17.64 18.67 20 21" /></symbol><symbol id="l-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7" /> <path d="M19 12H5" /></symbol><symbol id="l-arrow-up-down" viewBox="0 0 24 24"><path d="m21 16-4 4-4-4" /> <path d="M17 20V4" /> <path d="m3 8 4-4 4 4" /> <path d="M7 4v16" /></symbol><symbol id="l-arrow-up-right" viewBox="0 0 24 24"><path d="M7 7h10v10" /> <path d="M7 17 17 7" /></symbol><symbol id="l-baby" viewBox="0 0 24 24"><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5" /> <path d="M15 12h.01" /> <path d="M19.38 6.813A9 9 0 0 1 20.8 10.2a2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1" /> <path d="M9 12h.01" /></symbol><symbol id="l-backpack" viewBox="0 0 24 24"><path d="M4 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" /> <path d="M8 10h8" /> <path d="M8 18h8" /> <path d="M8 22v-6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v6" /> <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" /></symbol><symbol id="l-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M4.929 4.929 19.07 19.071" /></symbol><symbol id="l-bed-double" viewBox="0 0 24 24"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8" /> <path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4" /> <path d="M12 4v6" /> <path d="M2 18h20" /></symbol><symbol id="l-building-2" viewBox="0 0 24 24"><path d="M10 12h4" /> <path d="M10 8h4" /> <path d="M14 21v-3a2 2 0 0 0-4 0v3" /> <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" /> <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" /></symbol><symbol id="l-calendar" viewBox="0 0 24 24"><path d="M8 2v3" /> <path d="M16 2v3" /> <rect x="3" y="3" width="18" height="18" rx="2" /> <path d="M3 9h18" /></symbol><symbol id="l-calendar-check" viewBox="0 0 24 24"><path d="M8 2v3" /> <path d="M16 2v3" /> <rect x="3" y="3" width="18" height="18" rx="2" /> <path d="M3 9h18" /> <path d="m9 15 2 2 4-4" /></symbol><symbol id="l-calendar-clock" viewBox="0 0 24 24"><path d="M16 14v2.2l1.6 1" /> <path d="M16 2v3" /> <path d="M21 7.338V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h2.338" /> <path d="M3 9h5.859" /> <path d="M8 2v3" /> <circle cx="16" cy="16" r="6" /></symbol><symbol id="l-camera" viewBox="0 0 24 24"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" /> <circle cx="12" cy="13" r="3" /></symbol><symbol id="l-car" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /> <circle cx="7" cy="17" r="2" /> <path d="M9 17h6" /> <circle cx="17" cy="17" r="2" /></symbol><symbol id="l-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol><symbol id="l-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></symbol><symbol id="l-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></symbol><symbol id="l-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <line x1="12" x2="12" y1="8" y2="12" /> <line x1="12" x2="12.01" y1="16" y2="16" /></symbol><symbol id="l-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m16 9-5.5 5.5L8 12" /></symbol><symbol id="l-circle-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></symbol><symbol id="l-circle-x" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m15 9-6 6" /> <path d="m9 9 6 6" /></symbol><symbol id="l-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 6v6l4 2" /></symbol><symbol id="l-coffee" viewBox="0 0 24 24"><path d="M10 2v2" /> <path d="M14 2v2" /> <path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" /> <path d="M6 2v2" /></symbol><symbol id="l-columns-2" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M12 3v18" /></symbol><symbol id="l-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /> <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></symbol><symbol id="l-cross" viewBox="0 0 24 24"><path d="M4 9a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h4a1 1 0 0 1 1 1v4a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-4a1 1 0 0 1 1-1h4a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-4a1 1 0 0 1-1-1V4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4a1 1 0 0 1-1 1z" /></symbol><symbol id="l-dog" viewBox="0 0 24 24"><path d="M11.25 16.25h1.5L12 17z" /> <path d="M16 14v.5" /> <path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309" /> <path d="M8 14v.5" /> <path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.177-6.53 4-7 1.923-.321 3.651.845 3.651 2.235A7.497 7.497 0 0 1 14 5.277c0-1.39 1.844-2.598 3.767-2.277 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5" /></symbol><symbol id="l-droplets" viewBox="0 0 24 24"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" /> <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" /></symbol><symbol id="l-dumbbell" viewBox="0 0 24 24"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /> <path d="m2.5 21.5 1.4-1.4" /> <path d="m20.1 3.9 1.4-1.4" /> <path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /> <path d="m9.6 14.4 4.8-4.8" /></symbol><symbol id="l-external-link" viewBox="0 0 24 24"><path d="M15 3h6v6" /> <path d="M10 14 21 3" /> <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></symbol><symbol id="l-file-text" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /></symbol><symbol id="l-fish" viewBox="0 0 24 24"><path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6s-7.56-2.53-8.5-6Z" /> <path d="M18 12v.5" /> <path d="M16 17.93a9.77 9.77 0 0 1 0-11.86" /> <path d="M7 10.67C7 8 5.58 5.97 2.73 5.5c-1 1.5-1 5 .23 6.5-1.24 1.5-1.24 5-.23 6.5C5.58 18.03 7 16 7 13.33" /> <path d="M10.46 7.26C10.2 5.88 9.17 4.24 8 3h5.8a2 2 0 0 1 1.98 1.67l.23 1.4" /> <path d="m16.01 17.93-.23 1.4A2 2 0 0 1 13.8 21H9.5a5.96 5.96 0 0 0 1.49-3.98" /></symbol><symbol id="l-flame" viewBox="0 0 24 24"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /></symbol><symbol id="l-flame-kindling" viewBox="0 0 24 24"><path d="M12 2c1 3 2.5 3.5 3.5 4.5A5 5 0 0 1 17 10a5 5 0 1 1-10 0c0-.3 0-.6.1-.9a2 2 0 1 0 3.3-2C8 4.5 11 2 12 2Z" /> <path d="m5 22 14-4" /> <path d="m5 18 14 4" /></symbol><symbol id="l-flower-2" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1" /> <circle cx="12" cy="8" r="2" /> <path d="M12 10v12" /> <path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z" /> <path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z" /></symbol><symbol id="l-footprints" viewBox="0 0 24 24"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" /> <path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" /> <path d="M16 17h4" /> <path d="M4 13h4" /></symbol><symbol id="l-fuel" viewBox="0 0 24 24"><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0v-6.998a2 2 0 0 0-.59-1.42L18 5" /> <path d="M14 21V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v16" /> <path d="M2 21h13" /> <path d="M3 9h11" /></symbol><symbol id="l-git-branch" viewBox="0 0 24 24"><path d="M15 6a9 9 0 0 0-9 9V3" /> <circle cx="18" cy="6" r="3" /> <circle cx="6" cy="18" r="3" /></symbol><symbol id="l-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" /></symbol><symbol id="l-heart" viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></symbol><symbol id="l-images" viewBox="0 0 24 24"><path d="m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16" /> <path d="M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2" /> <circle cx="13" cy="7" r="1" fill="currentColor" /> <rect x="8" y="2" width="14" height="14" rx="2" /></symbol><symbol id="l-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 16v-4" /> <path d="M12 8h.01" /></symbol><symbol id="l-landmark" viewBox="0 0 24 24"><path d="M10 18v-7" /> <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" /> <path d="M14 18v-7" /> <path d="M18 18v-7" /> <path d="M3 22h18" /> <path d="M6 18v-7" /></symbol><symbol id="l-leaf" viewBox="0 0 24 24"><path d="M11 20a10 10 0 0010-10 25.9 25.9 0 00-1.04-7.281 1 1 0 00-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0011 20" /> <path d="M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13" /></symbol><symbol id="l-list" viewBox="0 0 24 24"><path d="M3 5h.01" /> <path d="M3 12h.01" /> <path d="M3 19h.01" /> <path d="M8 5h13" /> <path d="M8 12h13" /> <path d="M8 19h13" /></symbol><symbol id="l-list-checks" viewBox="0 0 24 24"><path d="M13 5h8" /> <path d="M13 12h8" /> <path d="M13 19h8" /> <path d="m3 17 2 2 4-4" /> <path d="m3 7 2 2 4-4" /></symbol><symbol id="l-list-ordered" viewBox="0 0 24 24"><path d="M11 5h10" /> <path d="M11 12h10" /> <path d="M11 19h10" /> <path d="M4 4h1v5" /> <path d="M4 9h2" /> <path d="M6.5 20H3.4c0-1 2.6-1.925 2.6-3.5a1.5 1.5 0 0 0-2.6-1.02" /></symbol><symbol id="l-locate-fixed" viewBox="0 0 24 24"><line x1="2" x2="5" y1="12" y2="12" /> <line x1="19" x2="22" y1="12" y2="12" /> <line x1="12" x2="12" y1="2" y2="5" /> <line x1="12" x2="12" y1="19" y2="22" /> <circle cx="12" cy="12" r="7" /> <circle cx="12" cy="12" r="3" /></symbol><symbol id="l-map" viewBox="0 0 24 24"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /> <path d="M15 5.764v15" /> <path d="M9 3.236v15" /></symbol><symbol id="l-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" /></symbol><symbol id="l-message-circle" viewBox="0 0 24 24"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></symbol><symbol id="l-messages-square" viewBox="0 0 24 24"><path d="M16 10a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 14.286V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" /> <path d="M20 9a2 2 0 0 1 2 2v10.286a.71.71 0 0 1-1.212.502l-2.202-2.202A2 2 0 0 0 17.172 19H10a2 2 0 0 1-2-2v-1" /></symbol><symbol id="l-mountain" viewBox="0 0 24 24"><path d="m8 3 4 8 5-5 5 15H2L8 3z" /></symbol><symbol id="l-navigation" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11" /></symbol><symbol id="l-notebook-pen" viewBox="0 0 24 24"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4" /> <path d="M2 6h4" /> <path d="M2 10h4" /> <path d="M2 14h4" /> <path d="M2 18h4" /> <path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" /></symbol><symbol id="l-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" /> <path d="M12 22V12" /> <polyline points="3.29 7 12 12 20.71 7" /> <path d="m7.5 4.27 9 5.15" /></symbol><symbol id="l-pencil" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /> <path d="m15 5 4 4" /></symbol><symbol id="l-phone" viewBox="0 0 24 24"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></symbol><symbol id="l-play" viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></symbol><symbol id="l-plug-zap" viewBox="0 0 24 24"><path d="M6.3 20.3a2.4 2.4 0 0 0 3.4 0L12 18l-6-6-2.3 2.3a2.4 2.4 0 0 0 0 3.4Z" /> <path d="m2 22 3-3" /> <path d="M7.5 13.5 10 11" /> <path d="M10.5 16.5 13 14" /> <path d="m18 3-4 4h6l-4 4" /></symbol><symbol id="l-ruler" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" /> <path d="m14.5 12.5 2-2" /> <path d="m11.5 9.5 2-2" /> <path d="m8.5 6.5 2-2" /> <path d="m17.5 15.5 2-2" /></symbol><symbol id="l-sailboat" viewBox="0 0 24 24"><path d="M10 2v15" /> <path d="M7 22a4 4 0 0 1-4-4 1 1 0 0 1 1-1h16a1 1 0 0 1 1 1 4 4 0 0 1-4 4z" /> <path d="M9.159 2.46a1 1 0 0 1 1.521-.193l9.977 8.98A1 1 0 0 1 20 13H4a1 1 0 0 1-.824-1.567z" /></symbol><symbol id="l-scan-search" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2" /> <path d="M17 3h2a2 2 0 0 1 2 2v2" /> <path d="M21 17v2a2 2 0 0 1-2 2h-2" /> <path d="M7 21H5a2 2 0 0 1-2-2v-2" /> <circle cx="12" cy="12" r="3" /> <path d="m16 16-1.9-1.9" /></symbol><symbol id="l-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" /></symbol><symbol id="l-share-2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" /> <circle cx="6" cy="12" r="3" /> <circle cx="18" cy="19" r="3" /> <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /> <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></symbol><symbol id="l-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /></symbol><symbol id="l-shopping-cart" viewBox="0 0 24 24"><path d="m2.05 2.05 1.099-.028a1 1 0 0 1 1.008.815l2.69 14.347A1 1 0 0 0 7.83 18H18" /> <path d="M4.563 5h16.435a1 1 0 0 1 .981 1.204l-1.026 6.226A2 2 0 0 1 18.962 14H6.25" /> <circle cx="18" cy="20" r="2" /> <circle cx="8" cy="20" r="2" /></symbol><symbol id="l-shower-head" viewBox="0 0 24 24"><path d="m4 4 2.5 2.5" /> <path d="M13.5 6.5a4.95 4.95 0 0 0-7 7" /> <path d="M15 5 5 15" /> <path d="M14 17v.01" /> <path d="M10 16v.01" /> <path d="M13 13v.01" /> <path d="M16 10v.01" /> <path d="M11 20v.01" /> <path d="M17 14v.01" /> <path d="M20 11v.01" /></symbol><symbol id="l-snowflake" viewBox="0 0 24 24"><path d="m10 20-1.25-2.5L6 18" /> <path d="M10 4 8.75 6.5 6 6" /> <path d="m14 20 1.25-2.5L18 18" /> <path d="m14 4 1.25 2.5L18 6" /> <path d="m17 21-3-6h-4" /> <path d="m17 3-3 6 1.5 3" /> <path d="M2 12h6.5L10 9" /> <path d="m20 10-1.5 2 1.5 2" /> <path d="M22 12h-6.5L14 15" /> <path d="m4 10 1.5 2L4 14" /> <path d="m7 21 3-6-1.5-3" /> <path d="m7 3 3 6h4" /></symbol><symbol id="l-sparkles" viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /> <path d="M20 2v4" /> <path d="M22 4h-4" /> <circle cx="4" cy="20" r="2" /></symbol><symbol id="l-store" viewBox="0 0 24 24"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" /> <path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" /> <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" /></symbol><symbol id="l-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /> <path d="M12 2v2" /> <path d="M12 20v2" /> <path d="m4.93 4.93 1.41 1.41" /> <path d="m17.66 17.66 1.41 1.41" /> <path d="M2 12h2" /> <path d="M20 12h2" /> <path d="m6.34 17.66-1.41 1.41" /> <path d="m19.07 4.93-1.41 1.41" /></symbol><symbol id="l-sunrise" viewBox="0 0 24 24"><path d="M12 2v8" /> <path d="m4.93 10.93 1.41 1.41" /> <path d="M2 18h2" /> <path d="M20 18h2" /> <path d="m19.07 10.93-1.41 1.41" /> <path d="M22 22H2" /> <path d="m8 6 4-4 4 4" /> <path d="M16 18a4 4 0 0 0-8 0" /></symbol><symbol id="l-thumbs-down" viewBox="0 0 24 24"><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z" /> <path d="M17 14V2" /></symbol><symbol id="l-thumbs-up" viewBox="0 0 24 24"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" /> <path d="M7 10v12" /></symbol><symbol id="l-toilet" viewBox="0 0 24 24"><path d="M7 12h13a1 1 0 0 1 1 1 5 5 0 0 1-5 5h-.598a.5.5 0 0 0-.424.765l1.544 2.47a.5.5 0 0 1-.424.765H5.402a.5.5 0 0 1-.424-.765L7 18" /> <path d="M8 18a5 5 0 0 1-5-5V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8" /></symbol><symbol id="l-trash-2" viewBox="0 0 24 24"><path d="M10 11v6" /> <path d="M14 11v6" /> <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /> <path d="M3 6h18" /> <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></symbol><symbol id="l-trees" viewBox="0 0 24 24"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z" /> <path d="M7 16v6" /> <path d="M13 19v3" /> <path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" /></symbol><symbol id="l-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /> <path d="M12 9v4" /> <path d="M12 17h.01" /></symbol><symbol id="l-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" /> <path d="M15 18H9" /> <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14" /> <circle cx="17" cy="18" r="2" /> <circle cx="7" cy="18" r="2" /></symbol><symbol id="l-utensils" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" /> <path d="M7 2v20" /> <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" /></symbol><symbol id="l-utensils-crossed" viewBox="0 0 24 24"><path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8" /> <path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7" /> <path d="m2.1 21.8 6.4-6.3" /> <path d="m19 5-7 7" /></symbol><symbol id="l-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" /> <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" /></symbol><symbol id="l-warehouse" viewBox="0 0 24 24"><path d="M18 21V10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v11" /> <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8z" /> <path d="M6 13h12" /> <path d="M6 17h12" /></symbol><symbol id="l-waves" viewBox="0 0 24 24"><path d="M2 12q2.5 2 5 0t5 0 5 0 5 0" /> <path d="M2 19q2.5 2 5 0t5 0 5 0 5 0" /> <path d="M2 5q2.5 2 5 0t5 0 5 0 5 0" /></symbol><symbol id="l-wifi" viewBox="0 0 24 24"><path d="M12 20h.01" /> <path d="M2 8.82a15 15 0 0 1 20 0" /> <path d="M5 12.859a10 10 0 0 1 14 0" /> <path d="M8.5 16.429a5 5 0 0 1 7 0" /></symbol><symbol id="l-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" /></symbol><symbol id="l-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol><symbol id="l-zap" viewBox="0 0 24 24"><path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" /></symbol><symbol id="t-building-pavilion" viewBox="0 0 24 24"><path d="M3 21h7v-3a2 2 0 0 1 4 0v3h7" /> <path d="M6 21l0 -9" /> <path d="M18 21l0 -9" /> <path d="M6 12h12a3 3 0 0 0 3 -3a9 8 0 0 1 -9 -6a9 8 0 0 1 -9 6a3 3 0 0 0 3 3" /></symbol><symbol id="t-caravan" viewBox="0 0 24 24"><path d="M7 18a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /> <path d="M11 18h7a2 2 0 0 0 2 -2v-7a2 2 0 0 0 -2 -2h-9.5a5.5 5.5 0 0 0 -5.5 5.5v3.5a2 2 0 0 0 2 2h2" /> <path d="M8 7l7 -3l1 3" /> <path d="M13 11.5a.5 .5 0 0 1 .5 -.5h2a.5 .5 0 0 1 .5 .5v2a.5 .5 0 0 1 -.5 .5h-2a.5 .5 0 0 1 -.5 -.5l0 -2" /> <path d="M20 16h2" /></symbol><symbol id="t-coin" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1" /> <path d="M12 7v10" /></symbol><symbol id="t-grill" viewBox="0 0 24 24"><path d="M19 8h-14a6 6 0 0 0 6 6h2a6 6 0 0 0 6 -5.775l0 -.225" /> <path d="M17 20a2 2 0 1 1 0 -4a2 2 0 0 1 0 4" /> <path d="M15 14l1 2" /> <path d="M9 14l-3 6" /> <path d="M15 18h-8" /> <path d="M15 5v-1" /> <path d="M12 5v-1" /> <path d="M9 5v-1" /></symbol><symbol id="t-layers-subtract" viewBox="0 0 24 24"><path d="M8 6a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -8" /> <path d="M16 16v2a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-8a2 2 0 0 1 2 -2h2" /></symbol><symbol id="t-tent" viewBox="0 0 24 24"><path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" /></symbol><symbol id="t-tent-off" viewBox="0 0 24 24"><path d="M11 14l4 6h5m-2.863 -6.868l-5.137 -9.132l-1.44 2.559m-1.44 2.563l-6.12 10.878h6l4 -6" /> <path d="M3 3l18 18" /></symbol></svg>
 <header class="gnb gnb-wide"><div class="gnb-in">
   <a class="sh-brand" href="../" aria-label="모여라 캠핑 홈"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 21 14 3"/><path d="M20.5 21 10 3"/><path d="M15.5 21 12 15l-3.5 6"/><path d="M2 21h20"/></svg></span><b>모여라 캠핑<small>MOYEORA CAMP</small></b></a>
-  <nav class="sh-nav" aria-label="주요 메뉴"><a href="../explore/" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>캠핑장 찾기</a><a href="../explore/themes/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>테마</a><a href="../explore/openings/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>예약 일정</a><a href="../explore/passport/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>내 캠핑</a></nav>
+  <nav class="sh-nav" aria-label="주요 메뉴"><a href="../explore/" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>캠핑장 찾기</a><a href="../explore/?view=map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.1 5.1 9.9 3 3.6 5.1A1 1 0 0 0 3 6v13.2a1 1 0 0 0 1.3.9l5.6-1.9 4.2 2.1 6.3-2.1a1 1 0 0 0 .6-.9V4.8a1 1 0 0 0-1.3-.9z"/><path d="M9.9 3v15.2"/><path d="M14.1 5.1v15.2"/></svg>지도</a><a href="../explore/themes/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>테마</a><a href="../explore/openings/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>예약 일정</a><a href="../explore/passport/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>내 캠핑</a></nav>
   <div class="sh-actions"><div class="sh-user"><button type="button" class="sh-badge" id="shBadge" aria-haspopup="true" aria-expanded="false" aria-label="사용자 전환"><i class="sh-av">나</i><b>나</b></button><div class="sh-menu" id="shMenu" hidden></div></div><button type="button" class="sh-icon" id="shSet" aria-label="설정"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
 </div></header>
 <dialog class="sh-dlg" id="shDlg" aria-labelledby="shDlgTitle"><form method="dialog" class="sh-dlg-in">
@@ -1379,6 +1560,16 @@ if(t.id==="shAdd"){add();return}
 if(t.dataset.fs&&t.closest("#shFs")){fs(t.dataset.fs);return}});
 document.addEventListener("keydown",function(e){if(e.key==="Escape")menu(false);if(e.key==="Enter"&&e.target.id==="shName"){e.preventDefault();if(e.isComposing||e.keyCode===229)return;add()}});
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",draw);else draw();})();</script>
+<section class="x-hero" aria-label="찾는 방법">
+  <div class="wrap x-hero-in">
+    <div class="x-hero-title"><b>이번 주말,</b><span>어디로 갈까</span></div>
+    <div class="x-mode" role="tablist" aria-label="찾는 방법">
+      <button type="button" role="tab" data-mode="list" aria-selected="true"><svg class="i i-sm" aria-hidden="true"><use href="#l-search"/></svg>키워드</button>
+      <a role="tab" aria-selected="false" href="themes/"><svg class="i i-sm" aria-hidden="true"><use href="#l-sparkles"/></svg>테마</a>
+      <button type="button" role="tab" data-mode="map" aria-selected="false"><svg class="i i-sm" aria-hidden="true"><use href="#l-map"/></svg>지도</button>
+    </div>
+  </div>
+</section>
 <div class="bar"><div class="wrap">
   <div class="qrow"><label class="q"><svg class="i" aria-hidden="true"><use href="#l-search"/></svg><input id="q" type="search" placeholder="캠핑장 이름·지역 검색" autocomplete="off" enterkeyhint="search"><button class="clear" id="clearQ" type="button" aria-label="검색어 지우기"><svg class="i i-sm" aria-hidden="true"><use href="#l-x"/></svg></button></label><button class="near-btn" id="nearBtn" type="button" aria-pressed="false"><svg class="i i-sm" aria-hidden="true"><use href="#l-locate-fixed"/></svg><span>내 주변</span></button></div>
   <section class="availability-query" aria-label="공식 접수 상태로 날짜 검색">
@@ -1407,6 +1598,7 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
       <label class="setup-check setup-filter"><input id="profileFilter" type="checkbox">맞지 않는 곳 숨기기</label>
       <label class="setup-check setup-filter"><input id="profileStrict" type="checkbox">등록된 조건만 보기</label>
     </div>
+    <button type="button" class="tip setup-tip" id="setupTip" aria-label="판정 기준 보기" data-tip=""><svg class="i i-xs" aria-hidden="true"><use href="#l-info"/></svg></button>
     <p class="setup-help" id="setupHelp" data-wrap-ok>값은 이 기기에만 저장돼요. ‘확인 필요’는 가능으로 처리하지 않으며, 공식 공지·운영자 확인값이 들어오면 다시 판정됩니다.</p>
   </details>
   <div class="chips" id="areaChips"></div>
@@ -1438,7 +1630,7 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 </div>
 <div id="compareRoot"></div>
 <div id="sheetRoot"></div>
-<nav class="gnb-tabbar" aria-label="모바일 주요 탐색"><a href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>홈</a><a href="../explore/" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>찾기</a><a href="../explore/themes/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>테마</a><a href="../explore/openings/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>예약 일정</a><a href="../explore/passport/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>내 캠핑</a></nav>
+<nav class="gnb-tabbar" aria-label="모바일 주요 탐색"><a href="../"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.3 3.3a1 1 0 0 1 1.4 0l8 7.4a1 1 0 0 1-.7 1.7h-1V20a1 1 0 0 1-1 1h-4v-5h-4v5H6a1 1 0 0 1-1-1v-7.6H4a1 1 0 0 1-.7-1.7z"/></svg><span>홈</span></a><a href="../explore/" aria-current="page"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10.5 3a7.5 7.5 0 0 1 5.96 12.05l4.25 4.24a1 1 0 0 1-1.42 1.42l-4.24-4.25A7.5 7.5 0 1 1 10.5 3zm0 2.6a4.9 4.9 0 1 0 0 9.8 4.9 4.9 0 0 0 0-9.8z"/></svg><span>찾기</span></a><a href="../explore/?view=map"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 3.6 3.6 5.4a1 1 0 0 0-.6.9v13.3a.8.8 0 0 0 1.1.8L9 18.6zm1.5 0v15l4 1.9V5.5zm5.5 1.9v15l4.4-1.5a1 1 0 0 0 .6-.9V4.8a.8.8 0 0 0-1.1-.8z"/></svg><span>지도</span></a><a href="../explore/openings/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5a6 6 0 0 0-6 6v3.6l-1.7 3a1 1 0 0 0 .9 1.5h13.6a1 1 0 0 0 .9-1.5l-1.7-3V8.5a6 6 0 0 0-6-6zM9.5 18.6a2.5 2.5 0 0 0 5 0z"/></svg><span>예약 일정</span></a><a href="../explore/passport/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 20.6s-8.5-5-8.5-11.2A4.7 4.7 0 0 1 12 6.6a4.7 4.7 0 0 1 8.5 2.8c0 6.2-8.5 11.2-8.5 11.2z"/></svg><span>내 캠핑</span></a></nav>
 
 <script type="module">
 // 모여라 캠핑 · 전국 캠핑장 탐색. 데이터: data/campgrounds.json, data/meta.json,
@@ -1619,14 +1811,17 @@ const hasKidsPlay = (c) =>
 // grade: VERIFIED(파일럿 원문 대조) > CONFIRMED(고캠핑 구조화 등록값) > SURVEYED(소개글 신호) > UNKNOWN.
 // 강한 배지·필터·내 세팅 확정 판정은 VERIFIED(일부는 CONFIRMED)만 쓰고, SURVEYED는 ‘소개글 기반’으로만 보인다.
 // 모르는 값은 기본값(600W, 지정 주차, 온수 상시 등)으로 채우지 않는다.
-const GRADE_LABEL = { VERIFIED: "원문 대조", CONFIRMED: "고캠핑 등록값", SURVEYED: "소개글 기반", UNKNOWN: "확인 필요" };
-const GRADE_CLASS = { VERIFIED: "confirmed", CONFIRMED: "confirmed", SURVEYED: "partial", UNKNOWN: "unknown" };
+// OPERATOR: 운영자가 자기 홈페이지에 공개한 문장에서 자동으로 꺼낸 값(원문 문장·URL·확인 시각 보존). 사람이 대조한 VERIFIED와 다르다.
+const GRADE_LABEL = { VERIFIED: "원문 대조", OPERATOR: "운영자 공개", CONFIRMED: "고캠핑 등록값", SURVEYED: "소개글 기반", UNKNOWN: "확인 필요" };
+const GRADE_CLASS = { VERIFIED: "confirmed", OPERATOR: "confirmed", CONFIRMED: "confirmed", SURVEYED: "partial", UNKNOWN: "unknown" };
 const gradeOf = (part, f) => {
   if (f?.status === "VERIFIED" && part) return part.state === "UNKNOWN" ? "UNKNOWN" : "VERIFIED";
   const s = part?.state;
   return s === "VERIFIED" || s === "CONFIRMED" || s === "SURVEYED" ? s : s === "PARTIAL" ? "CONFIRMED" : "UNKNOWN";
 };
-const isFact = (g) => g === "VERIFIED" || g === "CONFIRMED";
+const isFact = (g) => g === "VERIFIED" || g === "OPERATOR" || g === "CONFIRMED";
+// 운영자 홈페이지 사실(c.of: w·pk·fire·cc). 각 값은 { v, q(원문 문장), u(URL), t(확인 시각) }.
+const opSrc = (x) => x ? { label: "운영자 홈페이지", url: x.u, checked_at: x.t, quote: x.q } : null;
 const KIDS_AMENITY_RE = /물놀이|수영|트렘|방방|놀이터|에어바운스|썰매/;
 function conditionView(c) {
   if (c._cv) return c._cv;
@@ -1724,6 +1919,23 @@ function conditionView(c) {
     const r = f.rental_offers ?? [];
     out.rental = { grade: r.length ? (verified ? "VERIFIED" : "CONFIRMED") : "UNKNOWN", items: r, value: r.length ? r.map((x) => x.item).join(" · ") : "확인 필요", note: "" };
   }
+  // 운영자 홈페이지 문장(OPERATOR)은 원문 대조(VERIFIED)가 없는 칸만 채운다. 내 세팅 MATCH/MISMATCH에는 쓰지 않는다.
+  const of = c.of ?? {};
+  if (of.w && out.power.grade !== "VERIFIED") {
+    const w = of.w.v;
+    out.power = { ...out.power, grade: "OPERATOR", watts: w, available: true, value: `최대 ${w.toLocaleString()}W${of.w.max && of.w.max !== w ? ` (다른 안내 ${of.w.max.toLocaleString()}W)` : ""}`, note: "", src: opSrc(of.w) };
+  }
+  if (of.pk && out.parking.grade !== "VERIFIED") {
+    const side = of.pk.v === "SITE_SIDE";
+    out.parking = { ...out.parking, grade: "OPERATOR", tentSide: side ? true : false, cart: false, site: side, external: !side, value: side ? "사이트 옆 주차" : "외부 주차 후 이동", note: "", src: opSrc(of.pk) };
+  }
+  if (of.fire && out.firewood.grade !== "VERIFIED") {
+    const v = of.fire.v;
+    out.firewood = { ...out.firewood, grade: "OPERATOR", allowed: v === "FIREWOOD_OK", designated: false, value: v === "FIREWOOD_OK" ? "장작 불멍 가능" : v === "CHARCOAL_ONLY" ? "장작 금지 · 숯만" : "개인 화기 반입·사용 불가", note: "", src: opSrc(of.fire) };
+    if (out.charcoal.grade !== "VERIFIED" && v !== "FIREWOOD_OK") out.charcoal = { ...out.charcoal, grade: "OPERATOR", allowed: v === "CHARCOAL_ONLY", value: v === "CHARCOAL_ONLY" ? "숯 사용 가능" : "숯 금지", src: opSrc(of.fire) };
+  }
+  out.carCamp = of.cc ? { grade: "OPERATOR", allowed: of.cc.v === true, value: of.cc.v ? "차박 가능" : "차박 불가", src: opSrc(of.cc) } : { grade: "UNKNOWN", allowed: null, value: "확인 필요" };
+  out.firePit = c.fire ?? f.fire_pit?.arrangement ?? null; // 고캠핑 화로대 등록값(개별/불가/공동취사장)
   out.source = f.source ?? { url: c.gc_url, checked_at: c.modified_at, label: "한국관광공사 고캠핑 운영자 등록값" };
   out.verified = verified;
   return (c._cv = out);
@@ -1802,54 +2014,67 @@ function dedupeImages(items, getUrl) {
   return out;
 }
 
-// 사진 위 원형 배지는 원문 대조(VERIFIED) 또는 고캠핑 구조화 등록값(CONFIRMED)만 쓴다.
-// 소개글 신호(SURVEYED)·법정 참고 600W·오토 업종은 배지로 만들지 않는다(PILOT_INTAKE_CONTRACT 2.1절).
-function renderPosterEmblems(c, observations = []) {
+// 포스터 배지(v4): 전기 → 불멍 → 주차·차박, 늘 이 순서로 3칸 + 시간 신호 1칸(docs/DESIGN_SYSTEM.md v4).
+// 채운 배지는 출처 있는 값(원문 대조·운영자 공개·고캠핑 구조화 등록값)만. 모르는 칸은 점선 ‘확인필요’로 남긴다.
+// 소개글 신호(SURVEYED)·법정 참고 600W·오토 업종은 채운 배지로 만들지 않는다(PILOT_INTAKE_CONTRACT 2.1절).
+const kw = (w) => (w >= 1000 ? `${+(w / 1000).toFixed(1)}kW` : `${w}W`);
+function posterBadges(c) {
   const v = conditionView(c), out = [];
+  const why = (d) => d?.src ? `${GRADE_LABEL[d.grade]} · ${d.src.quote ?? ""}` : d?.grade ? GRADE_LABEL[d.grade] : "";
+  // 전기
+  if (v.power.watts && (v.power.grade === "VERIFIED" || v.power.grade === "OPERATOR")) out.push(["pw", "#l-zap", kw(v.power.watts), why(v.power)]);
+  else out.push(["uk", "#l-zap", v.power.available ? "전기 W" : "전기", "확인필요"]);
+  // 불멍: 장작 OK / 숯만 / 화기 불가 / 화로대 개별(고캠핑 등록, 연료 미확인)
+  if (isFact(v.firewood.grade) && v.firewood.allowed === true) out.push(["fi", "#l-flame", v.firewood.designated ? "지정 구역 장작" : "장작 OK", why(v.firewood)]);
+  else if (isFact(v.charcoal.grade) && v.charcoal.allowed === true && isFact(v.firewood.grade) && v.firewood.allowed === false) out.push(["fi", "#l-flame", "숯만", why(v.charcoal)]);
+  else if ((isFact(v.firewood.grade) && v.firewood.allowed === false && isFact(v.charcoal.grade) && v.charcoal.allowed === false) || v.firePit === "불가") out.push(["off", "#l-flame-kindling", v.firePit === "불가" ? "화기 불가" : "개인 화기 불가", why(v.firewood)]);
+  else if (v.firePit === "개별") out.push(["fo", "#l-flame", "화로대 개별", "고캠핑 등록값 · 장작/숯 여부 확인필요"]);
+  else out.push(["uk", "#l-flame", "불멍", "확인필요"]);
+  // 주차·차박: 차박 OK가 있으면 그것을, 없으면 주차 방식
+  if (v.carCamp.allowed === true) out.push(["pk", "#l-car", "차박 OK", why(v.carCamp)]);
+  else if (v.parking.grade !== "UNKNOWN" && v.parking.grade !== "SURVEYED" && v.parking.tentSide === true) out.push(["pk", "#l-car", "사이트 옆 주차", why(v.parking)]);
+  else if (v.parking.grade === "VERIFIED" && v.parking.partial) out.push(["pk", "#l-car", "일부 옆 주차", why(v.parking)]);
+  else if (isFact(v.parking.grade) && (v.parking.cart || v.parking.external || v.parking.tentSide === false)) out.push(["off", "#l-car", v.parking.cart ? "짐수레 이동" : "외부 주차", why(v.parking)]);
+  else out.push(["uk", "#l-car", "주차", "확인필요"]);
+  return out;
+}
+const badgeHtml = ([k, i, label, why]) => `<span class="pb pb-${k}"${why && k !== "uk" ? ` title="${esc(why)}"` : ""}>${ic(i, "i-xs")}${esc(label)}${k === "uk" ? `<b>확인필요</b>` : ""}</span>`;
+function timeSignal(c, observations = []) {
   const obs = observations.find((r) => r.state === "OBSERVED_AVAILABLE");
-  if (obs) out.push(["avail", "#l-sparkles", `${hm(obs.observed_at) || ymd(obs.observed_at)} 빈자리 관측`]);
-  if (v.firewood.grade === "VERIFIED" && v.firewood.allowed === true) out.push(["fire", "#l-flame", "불멍 가능"]);
-  if (v.power.grade === "VERIFIED" && v.power.watts) out.push(["power", "#l-plug-zap", `${v.power.watts >= 1000 ? `${+(v.power.watts / 1000).toFixed(1)}kW` : `${v.power.watts}W`}`]);
-  if (v.parking.grade === "VERIFIED" && v.parking.tentSide === true) out.push(["parking", "#l-car", "텐트 옆 주차"]);
-  else if (v.parking.grade === "VERIFIED" && v.parking.cart) out.push(["cart", "#l-shopping-cart", "짐수레 이동"]);
-  if (v.sanitary.privateBath && isFact(v.sanitary.bathGrade)) out.push(["bath", "#l-shower-head", "개별 욕실"]);
-  if (v.kids.grade === "VERIFIED" || v.kids.grade === "CONFIRMED") out.push(["kids", "#l-baby", "아이 놀거리"]);
-  if (!out.length) return "";
-  return `<span class="poster-emblems" aria-label="확인된 현장 조건">${out.slice(0, 3).map(([k, i, l]) => `<span class="poster-badge badge-${k}">${ic(i, "i-xs")}${esc(l)}</span>`).join("")}</span>`;
+  if (obs) return `<span class="pb pb-tm">${ic("#l-sparkles", "i-xs")}빈자리 ${esc(hm(obs.observed_at) || ymd(obs.observed_at))}</span>`;
+  if (observations.length) return `<span class="pb pb-tm">${ic("#l-circle-check", "i-xs")}공식 접수 중</span>`;
+  const nx = c.booking.next;
+  if (nx) { const dd = Math.ceil((Date.parse(nx.at) - Date.now()) / 864e5); return `<span class="pb pb-tm">${ic("#l-alarm-clock", "i-xs")}오픈 ${dd <= 0 ? "오늘" : `D-${dd}`}${nx.time_known ? ` · ${hm(nx.at).split(" ").pop()}` : ""}</span>`; }
+  return "";
+}
+function renderPosterEmblems(c, observations = []) {
+  return `<span class="poster-time">${timeSignal(c, observations)}</span><span class="poster-emblems" aria-label="전기·불멍·주차 요약">${posterBadges(c).map(badgeHtml).join("")}</span>`;
 }
 
+// 후기 장단점 한 줄: 이 캠핑장 이야기로 확인된 후기 요약 n건에서 센 주제(build-review-digest.mjs).
+// 후기는 사실 확정값이 아니므로 건수를 함께 보인다. 단점 언급이 없으면 줄을 비우지 않고 ‘언급 없음’으로 둔다.
+function rvLine(c) {
+  const rv = c.rv;
+  if (!rv) return "";
+  const fmt = (xs) => xs.map(([t, n]) => `${esc(t)} <em>${n}</em>`).join(" · ");
+  return `<span class="rv-line" title="블로그·카페 후기 요약 ${rv.n}건에서 센 주제예요(협찬 글이 섞일 수 있어요)">
+    <span class="pro">${ic("#l-thumbs-up", "i-xs")}${rv.p.length ? fmt(rv.p) : `<em>장점 언급 없음</em>`}</span>
+    <span class="con">${ic("#l-thumbs-down", "i-xs")}${rv.c.length ? fmt(rv.c) : `<em>단점 언급 없음</em>`}<em>· 후기 ${rv.n}건</em></span>
+  </span>`;
+}
 function card(c) {
-  const kinds = c.kinds.map(([k, n]) => KIND[k] ? `<span class="tag">${ic(KIND[k][1], "i-xs")}${KIND[k][0]} <span class="num">${n}</span></span>` : "").join("");
   const km = state.here ? ` · ${dist(state.here, c).toFixed(0)}km` : "";
   const observations = officialOpenRecords(c, { dateMatch: Boolean(state.checkIn && state.checkOut) });
-  const verifiedBadge = c.field_conditions?.status === "VERIFIED"
-    ? `<span class="tag tag-verified">${ic("#l-shield-check", "i-xs")}조건 검증</span>`
-    : c.field_conditions?.status === "SURVEYED"
-    ? `<span class="tag tag-candidate">${ic("#l-file-search", "i-xs")}소개글 기반 후보</span>`
-    : "";
   const setup = hasSetup() ? setupStatus(c) : null;
-  const setupTag = !setup ? "" : `<span class="tag tag-setup ${setup.overall.toLowerCase()}">${ic(setup.overall === "MATCH" ? "#l-circle-check" : setup.overall === "MISMATCH" ? "#l-circle-x" : "#l-circle-help", "i-xs")}${SETUP_LABEL[setup.overall]}${setup.overall === "UNKNOWN" ? ` ${setup.checks.filter((x) => x.state === "UNKNOWN").length}` : ""}</span>`;
-  const cv = conditionView(c);
-  // 카드 태그도 원문 대조/등록값만. 소개글 신호는 위의 ‘소개글 기반 후보’ 배지 하나로만 알린다.
-  const conditionTags = [
-    cv.parking.grade === "VERIFIED" && cv.parking.tentSide === true ? `<span class="tag">${ic("#l-car", "i-xs")}텐트 옆 주차</span>` : cv.parking.grade === "VERIFIED" && cv.parking.partial ? `<span class="tag">${ic("#l-car", "i-xs")}일부 구역 텐트 옆</span>` : isFact(cv.parking.grade) && cv.parking.cart ? `<span class="tag">${ic("#l-shopping-cart", "i-xs")}짐수레 이동</span>` : "",
-    cv.power.grade === "VERIFIED" && cv.power.watts ? `<span class="tag">${ic("#l-plug-zap", "i-xs")}${cv.power.watts}W</span>` : "",
-    cv.firewood.grade === "VERIFIED" && cv.firewood.allowed === true ? `<span class="tag">${ic("#l-flame", "i-xs")}장작 불멍</span>` : isFact(cv.firewood.grade) && cv.firewood.allowed === false ? `<span class="tag">${ic("#l-ban", "i-xs")}장작 금지</span>` : "",
-    cv.sanitary.privateBath && isFact(cv.sanitary.bathGrade) ? `<span class="tag">${ic("#l-shower-head", "i-xs")}개별 욕실</span>` : "",
-  ].filter(Boolean).slice(0, 3).join("");
-  const availabilityBadge = observations.some((r) => r.state === "OBSERVED_AVAILABLE")
-    ? `<span class="tag tag-green">${ic("#l-sparkles", "i-xs")}빈자리 관측 ${esc(hm(observations.find((r) => r.state === "OBSERVED_AVAILABLE").observed_at) || "")}</span>`
-    : observations.length
-    ? `<span class="tag tag-green">${ic("#l-circle-check", "i-xs")}공식 접수 중${state.checkIn && state.checkOut ? " · 날짜 일치" : ""}</span>`
-    : "";
-  const emblemsHtml = renderPosterEmblems(c, observations);
+  const setupTag = !setup ? "" : `<b class="verdict v-${setup.overall.toLowerCase()}">${SETUP_LABEL[setup.overall]}${setup.overall === "UNKNOWN" ? ` ${setup.checks.filter((x) => x.state === "UNKNOWN").length}` : ""}</b>`;
+  const kinds = c.kinds.filter(([k]) => KIND[k]).map(([k, n]) => `${KIND[k][0]} ${n}`).slice(0, 2).join(" · ");
   return `<button class="card" type="button" data-open="${c.id}" aria-current="${state.open === c.id}">
-    <span class="thumb${!c.ph && !c.img && c.sn ? " snap" : ""}">${emblemsHtml}${c.ph ? `<img src="../media/${esc(largeLocalPhoto(c.ph))}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">` : c.sn ? `<img src="${esc(String(c.sn).replace(/^http:/, "https:"))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentElement.classList.remove('snap');this.remove()"><em class="snap-tag">검색 사진</em>` : ic("#t-tent")}</span>
+    <span class="thumb${!c.ph && !c.img && c.sn ? " snap" : ""}">${renderPosterEmblems(c, observations)}${c.ph ? `<img src="../media/${esc(largeLocalPhoto(c.ph))}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">` : c.sn ? `<img src="${esc(String(c.sn).replace(/^http:/, "https:"))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentElement.classList.remove('snap');this.remove()"><em class="snap-tag">검색 사진</em>` : ic("#t-tent")}</span>
     <span class="card-body">
       <span class="card-title"><h3>${esc(c.name)}</h3><span class="card-actions">${state.saved.has(c.id) ? ic("#l-heart", "i-xs saved-mark") : ""}<span role="button" tabindex="0" class="btn-compare${state.compare.has(c.id) ? " on" : ""}" data-compare="${c.id}" aria-label="${state.compare.has(c.id) ? "비교함에서 제거" : "비교함에 담기"}" title="조건 비교함">${ic("#l-columns-2", "i-xs")}</span></span></span>
-      <span class="loc">${ic("#l-map-pin", "i-xs")}${esc([c.sido, c.sigungu].filter(Boolean).join(" "))}${km}${OP[c.op] ? ` · ${OP[c.op]}` : ""}</span>
-      <span class="tags">${setupTag}${verifiedBadge}${conditionTags}${c.booking.next ? `<span class="tag tag-ember">${ic("#l-alarm-clock", "i-xs")}${c.booking.next.time_known ? hm(c.booking.next.at) : md(c.booking.next.at)} 오픈</span>` : ""}${availabilityBadge}${isRealtime(c) ? `<span class="tag">${ic("#l-zap", "i-xs")}온라인 예약 채널</span>` : ""}${kinds}${petOk(c) ? `<span class="tag">${ic("#l-dog", "i-xs")}반려견</span>` : ""}${c.soc?.[0] ? `<span class="tag">${ic("#l-message-circle", "i-xs")}후기 ${c.soc[0]}</span>` : ""}${c.soc?.[1] ? `<span class="tag">${ic("#l-play", "i-xs")}영상 ${c.soc[1]}</span>` : ""}</span>
-      <span class="price">${c.fee?.min ? `<b>${band(c.fee.min)}부터</b><span>공식 안내 요금</span>` : `<span>요금은 예약처에서 확인</span>`}</span>
+      <span class="loc">${esc([sidoShort(c.sido), c.sigungu].filter(Boolean).join(" "))}${km}${kinds ? ` · ${esc(kinds)}` : ""}</span>
+      <span class="card-foot">${setupTag}${c.fee?.min ? `<span class="fee"><b>${band(c.fee.min)}</b>부터</span>` : ""}</span>
+      ${rvLine(c)}
     </span></button>`;
 }
 
@@ -1885,6 +2110,7 @@ function renderChips() {
   ].join("");
 }
 
+const tipBtn = (html, label = "설명·출처 보기") => `<button type="button" class="tip" aria-label="${label}" data-tip="${esc(html)}">${ic("#l-info", "i-xs")}</button>`;
 function renderAvailabilityQuery() {
   const checkIn = $("#checkIn"), checkOut = $("#checkOut"), clear = $("#availabilityClear"), notice = $("#availabilityNotice");
   if (!checkIn || !checkOut || !clear || !notice) return;
@@ -1896,7 +2122,8 @@ function renderAvailabilityQuery() {
   const nationalPark = `<a href="https://reservation.knps.or.kr/reservation/searchCampRemainSite.do" target="_blank" rel="noopener">국립공원 잔여 현황</a>`;
   const forest = `<a href="https://www.foresttrip.go.kr/rep/or/fcfsRsrvtMain.do?hmpgId=0116&amp;menuId=001001" target="_blank" rel="noopener">숲나들e 예약</a>`;
   if (!isFreshAvailability()) {
-    notice.innerHTML = `${ic("#l-info", "i-xs")}<span>공식 접수 상태를 갱신 중입니다. 잔여 수량은 제공 가능한 공식 API·제휴 채널이 연결될 때만 표시합니다. ${nationalPark} · ${forest}</span>`;
+    // v4: 설명은 (i) 안으로. 화면에는 상태 한 줄만.
+    notice.innerHTML = `<span>접수 상태 갱신 중</span>${tipBtn(`<p>잔여 사이트 수는 공식 예약처에서 최종 확인하세요. 잔여 수량은 제공 가능한 공식 API·제휴 채널이 연결될 때만 표시합니다.</p><p>${nationalPark} · ${forest}</p>`)}`;
     return;
   }
   const isDateQuery = Boolean(state.checkIn && state.checkOut);
@@ -1904,7 +2131,7 @@ function renderAvailabilityQuery() {
   const camps = new Set(records.map((record) => record.campground_id)).size;
   const observed = hm(AVAILABILITY.generated_at) || ymd(AVAILABILITY.generated_at);
   const dateCopy = isDateQuery ? `${state.checkIn.replaceAll("-", ".")} ~ ${state.checkOut.replaceAll("-", ".")} 숙박 기준 ` : "";
-  notice.innerHTML = `${ic("#l-shield-check", "i-xs")}<span><b>${dateCopy}공식 접수 중 ${camps.toLocaleString()}곳 · ${records.length.toLocaleString()}개 상품</b> · 서울시 API ${observed} 확인. 이는 빈자리 수·결제 확정이 아닙니다. ${seoul} · ${nationalPark} · ${forest}</span>`;
+  notice.innerHTML = `<span><b>${dateCopy}공식 접수 중 ${camps.toLocaleString()}곳</b> · ${records.length.toLocaleString()}개 상품</span>${tipBtn(`<p>서울시 API ${observed} 확인. 빈자리 수·결제 확정이 아닙니다. 잔여 사이트 수는 공식 예약처에서 최종 확인하세요.</p><p>${seoul} · ${nationalPark} · ${forest}</p>`)}`;
 }
 
 function renderSetupQuery() {
@@ -1928,6 +2155,9 @@ function renderSetupQuery() {
       : state.profileFilter
         ? "근거상 맞지 않는 곳만 숨깁니다. ‘확인 필요’는 가능으로 처리하지 않고 목록에 남겨 직접 비교할 수 있어요."
         : "현재는 모든 후보를 보되, 카드와 상세에서 내 조건의 근거·확인 필요·불일치를 구분해 보여 줍니다.";
+  // v4: 설명은 (i) 말풍선으로. ‘맞음/맞지 않음’은 사람이 원문 대조한 값으로만 판정한다는 기준도 함께.
+  const tip = $("#setupTip");
+  if (tip) tip.dataset.tip = `<p>${esc(help.textContent)}</p><p>전력 W·텐트 옆 주차·장작 불멍의 맞음/맞지 않음은 사람이 원문 대조한 값으로만 판정해요. 운영자 홈페이지 문장은 배지로 보여 주지만 판정에는 ‘확인 필요’로 남겨요.</p>`;
 }
 
 /* ---------- 둘러보기: 테마 공간 ---------- */
@@ -1962,9 +2192,10 @@ function renderList() {
   renderHub();
   const list = filtered();
   $("#resultTitle").textContent = titleOf(list.length);
-  $("#resultSub").textContent = state.availabilityOnly && isFreshAvailability()
-    ? `공식 접수 상태 ${ymd(AVAILABILITY.generated_at)} 확인 · 잔여 수량은 예약처에서 확정`
-    : (META ? `고캠핑 ${ymd(META.sources[0]?.fetched_at)} 기준` : "");
+  // 출처·기준일은 화면에 늘어놓지 않고 (i) 말풍선에만(소유자 요청 2026-10-16).
+  $("#resultSub").innerHTML = tipBtn(state.availabilityOnly && isFreshAvailability()
+    ? `<p>공식 접수 상태 ${ymd(AVAILABILITY.generated_at)} 확인. 잔여 수량은 예약처에서 확정돼요.</p>`
+    : META ? `<p>전국 캠핑장 목록: 한국관광공사 고캠핑 ${ymd(META.sources[0]?.fetched_at)} 기준.</p><p>배지 근거: 사람이 원문 대조한 값·운영자 홈페이지 문장·고캠핑 등록값. 모르는 칸은 ‘확인필요’예요.</p>` : "<p>데이터 불러오는 중</p>", "데이터 기준 보기");
   $("#cards").innerHTML = list.length ? list.slice(0, state.shown).map(card).join("")
     : emptyBox();
   $("#moreBtn").hidden = list.length <= state.shown;
@@ -2193,7 +2424,7 @@ function initMap() {
     map = new kakao.maps.Map(el, { center: new kakao.maps.LatLng(36.4, 127.8), level: 13 });
     map.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.RIGHT);
     clusterer = new kakao.maps.MarkerClusterer({ map, averageCenter: true, minLevel: 8, disableClickZoom: false,
-      styles: [{ width: "42px", height: "42px", background: "rgba(31,157,92,.88)", color: "#fff", borderRadius: "50%", textAlign: "center", lineHeight: "42px", fontWeight: "800", fontSize: "13px" }] });
+      styles: [{ width: "42px", height: "42px", background: "#101414", color: "#fff", boxShadow: "0 2px 10px rgba(16,20,20,.25)", borderRadius: "50%", textAlign: "center", lineHeight: "42px", fontWeight: "800", fontSize: "13px" }] });
     renderMarkers(filtered({ forMap: true }));
     renderChips();
     // 지도를 옮기거나 확대하면 “지도에 보이는 곳만” 목록을 다시 계산한다.
@@ -2202,15 +2433,44 @@ function initMap() {
   s.onerror = () => { el.innerHTML = `<div class="map-empty"><p data-wrap-ok>지도를 불러오지 못했습니다(도메인 등록 확인). 목록은 그대로 쓸 수 있어요.</p></div>`; };
   document.head.append(s);
 }
+// 지도 핀(Uber Base 패턴): 값 하나를 담은 검정 알약. 전력 W를 알면 W, 아니면 불멍, 아니면 이름 앞 글자.
+// 모르는 곳은 흰 알약. 누르면 바로 상세로 가지 않고 아래 미리보기 카드를 띄운다.
+function pinLabel(c) {
+  const b = posterBadges(c);
+  const known = b.find(([k]) => k !== "uk");
+  if (known?.[0] === "pw") return ["", known[2], "var(--mc-volt)"];
+  if (known?.[0] === "fi") return ["", known[2], "#ff8a5c"];
+  if (known) return ["", known[2], ""];
+  return ["uk", shortName(c.name).slice(0, 6), ""];
+}
 function renderMarkers(list) {
   if (!map || !clusterer) return;
   clusterer.clear(); markers.clear();
   const ms = list.map((c) => {
-    const m = new kakao.maps.Marker({ position: new kakao.maps.LatLng(c.lat, c.lng), title: c.name });
-    kakao.maps.event.addListener(m, "click", () => openDetail(c.id));
+    const [cls, label, dot] = pinLabel(c);
+    const el = document.createElement("button");
+    el.type = "button"; el.className = `mpin ${cls}`; el.dataset.pin = c.id;
+    el.setAttribute("aria-label", `${c.name} 미리보기`);
+    el.innerHTML = `${dot ? `<i style="--dot:${dot}"></i>` : ""}${esc(label)}`;
+    el.addEventListener("click", (e) => { e.stopPropagation(); peek(c.id); });
+    const m = new kakao.maps.CustomOverlay({ position: new kakao.maps.LatLng(c.lat, c.lng), content: el, yAnchor: 1, clickable: true });
     markers.set(c.id, m); return m;
   });
   clusterer.addMarkers(ms);
+}
+// 지도 미리보기 카드: 사진·이름·지역·배지 3칸 + ‘자세히’. 핀이 초록으로 바뀐다.
+function peek(id) {
+  const c = ALL.find((x) => x.id === id);
+  document.querySelectorAll(".mpin.on").forEach((x) => x.classList.remove("on"));
+  document.querySelector(`.mpin[data-pin="${CSS.escape(String(id))}"]`)?.classList.add("on");
+  let box = document.getElementById("mapPeek");
+  if (!c) { box?.remove(); return; }
+  if (!box) { box = document.createElement("div"); box.id = "mapPeek"; box.className = "map-peek"; $(".map-col").append(box); }
+  const img = c.ph ? `../media/${largeLocalPhoto(c.ph)}` : c.img;
+  box.innerHTML = `${img ? `<img src="${esc(img)}" alt="" referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph'}))">` : `<span class="ph"></span>`}
+    <div><b>${esc(c.name)}</b><small>${esc([sidoShort(c.sido), c.sigungu].filter(Boolean).join(" "))}${state.here ? ` · ${dist(state.here, c).toFixed(0)}km` : ""}</small>
+    <span class="peek-badges">${timeSignal(c)}${posterBadges(c).map(badgeHtml).join("")}</span>
+    <span class="peek-actions"><button type="button" class="peek-go" data-open="${c.id}">자세히</button><button type="button" class="peek-x" data-peek-close>닫기</button></span></div>`;
 }
 
 /* ---------- 상세 ---------- */
@@ -2450,12 +2710,9 @@ function heroBlock(c, d) {
   const snaps = dedupeImages(rawSnaps, (x) => x.src);
   const layout = dedupeImages(rawLayout, (x) => x.src);
   const items = lbAdd("all", dedupeImages([...official, ...layout, ...snaps], (x) => x.src));
-  const observations = officialOpenRecords(c, { dateMatch: Boolean(state.checkIn && state.checkOut) });
-  const emblemsHtml = renderPosterEmblems(c, observations);
-  if (!items.length) return `<div class="dv-hero dv-hero-empty">${emblemsHtml}${ic("#t-tent")}</div>`;
+  if (!items.length) return `<div class="dv-hero dv-hero-empty">${ic("#t-tent")}</div>`;
   const shown = items.slice(0, 12);
   return `<div class="dv-hero${shown.length < 3 ? " few" : ""}">
-    ${emblemsHtml}
     ${shown.map((p, i) => `<button type="button" class="dv-shot${p.small ? " sm" : ""}" ${lbAttr("all", i)} aria-label="사진 ${i + 1} 크게 보기"><img src="${esc(p.src)}" alt="" ${i > 1 ? 'loading="lazy"' : ""} decoding="async" ${p.remote ? 'referrerpolicy="no-referrer"' : ""} onerror="this.parentElement.remove()"></button>`).join("")}
     <button type="button" class="dv-all" ${lbAttr("all", 0)}>${ic("#l-images", "i-sm")}사진 <span class="num">${items.length}</span>장 모두 보기</button></div>`;
 }
@@ -2966,6 +3223,22 @@ function infoBlock(c, d) {
 }
 
 const DV_NAV = [["sec-important", "중요"], ["sec-spec", "이용 정보"], ["sec-book", "예약"], ["sec-setup", "내 세팅"], ["sec-prep", "준비"], ["sec-site", "사이트·요금"], ["sec-media", "후기"], ["sec-fac", "시설"], ["sec-near", "주변"], ["sec-info", "정보"], ["sec-talk", "댓글"]];
+// 이름을 굵기 대비로: 첫 단어는 900, 나머지는 200(A안의 강약). 한 단어면 그대로.
+function titleHtml(name) {
+  const n = shortName(name), parts = n.split(/\s+/);
+  if (parts.length < 2) return `<b>${esc(n)}</b>`;
+  return `<b>${esc(parts[0])}</b> <span>${esc(parts.slice(1).join(" "))}</span>`;
+}
+// 배지 (i): 각 배지의 근거(등급·원문 문장·URL·확인 시각). 화면에는 값만, 근거는 여기에.
+function badgeTip(c) {
+  const v = conditionView(c);
+  const row = (label, d) => {
+    if (!d || d.grade === "UNKNOWN") return `<p><b>${label}</b> 확인필요 — 공식 원문이 아직 없어요. 예약 전에 운영자에게 확인하세요.</p>`;
+    const s = d.src ?? (d.grade === "VERIFIED" || d.grade === "CONFIRMED" ? { label: v.source.label, url: v.source.url, checked_at: v.source.checked_at } : null);
+    return `<p><b>${label}</b> ${esc(d.value)} · ${GRADE_LABEL[d.grade]}${s?.quote ? ` — “${esc(s.quote)}”` : ""}${s?.url ? ` · <a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label ?? "원문")}</a>` : ""}${s?.checked_at ? ` · ${ymd(s.checked_at)} 확인` : ""}</p>`;
+  };
+  return [row("전기", v.power), row("장작", v.firewood), row("숯", v.charcoal), row("주차", v.parking), row("차박", v.carCamp), v.firePit ? `<p><b>화로대</b> ${esc(v.firePit)} · 고캠핑 등록값</p>` : ""].join("") + `<p>채운 배지 = 출처 있는 값 · 점선 = 확인필요(불가가 아님)</p>`;
+}
 function detail(c) {
   const d = DETAIL.get(c.id);
   LB.clear();
@@ -2975,10 +3248,16 @@ function detail(c) {
     : "";
   const themes = (META?.themes ?? []).filter((t) => c.th.includes(t.id));
   return `<div class="sheet-close"><button class="back-btn" type="button" data-close aria-label="목록으로">${ic("#l-arrow-left", "i-sm")}<span>목록</span></button></div>
-  ${heroBlock(c, d)}
+  <div class="dv-cover">${heroBlock(c, d)}
+    <div class="dv-glass">
+      <h2>${titleHtml(c.name)}</h2>
+      <p class="dv-glass-loc">${esc([c.sido, c.sigungu].filter(Boolean).join(" "))}${OP[c.op] ? ` · ${OP[c.op]}` : ""}</p>
+      <div class="dv-glass-badges">${timeSignal(c, officialOpenRecords(c, { dateMatch: Boolean(state.checkIn && state.checkOut) }))}${posterBadges(c).map(badgeHtml).join("")}<button type="button" class="tip" aria-label="배지 근거 보기" data-tip="${esc(badgeTip(c))}">${ic("#l-info", "i-xs")}</button></div>
+    </div>
+  </div>
   <div class="d-body dv">
     <header class="dv-title">
-      <h2>${esc(c.name)}</h2>
+      <h2 class="sr">${esc(c.name)}</h2>
       ${c.line ? `<p class="dv-line" data-wrap-ok>${esc(c.line)}</p>` : ""}
       <p class="dv-loc">${ic("#l-map-pin", "i-xs")}${esc([c.sido, c.sigungu].filter(Boolean).join(" "))}${OP[c.op] ? ` · ${OP[c.op]}` : ""}</p>
       ${themes.length ? `<div class="dv-themes">${themes.map((t) => `<button type="button" data-th="${t.id}" data-close-then>${ic(THEME_ICON[t.id] ?? "#t-tent", "i-xs")}${esc(t.label)}</button>`).join("")}</div>` : ""}
@@ -3230,6 +3509,7 @@ document.addEventListener("click", (e) => {
   // (i) 출처 말풍선 · 라이트박스 · 후기 정렬은 다른 클릭보다 먼저 처리한다.
   const tipBtn = e.target.closest(".tip");
   if (tipBtn) { e.preventDefault(); return showTip(tipBtn); }
+  if (e.target.closest("[data-peek-close]")) return peek(null);
   if (!e.target.closest(".tip-pop")) document.getElementById("tipPop")?.remove();
   const lbBtn = e.target.closest("[data-lb]");
   if (lbBtn) { e.preventDefault(); return lbOpen(lbBtn.dataset.lb, Number(lbBtn.dataset.lbI) || 0); }
@@ -3242,7 +3522,7 @@ document.addEventListener("click", (e) => {
     const list = $("#reviewList"); if (list) list.innerHTML = reviewCards(DETAIL.get(state.open), rv.dataset.rv);
     return;
   }
-  const t = e.target.closest("[data-open],[data-close],[data-save],[data-share],[data-share-theme],[data-jump],[data-near],[data-copy],[data-copy-text],[data-video],[data-roadview],[data-th],[data-sgg],[data-area],[data-kind],[data-toggle],[data-setup-focus],[data-compare],[data-compare-del],[data-close-compare],[data-share-compare],#moreBtn,#viewSwitch,#clearQ,#nearBtn,#availabilityRun,#availabilityClear,#openCompareBtn,#clearCompareBtn");
+  const t = e.target.closest("[data-open],[data-close],[data-save],[data-share],[data-share-theme],[data-jump],[data-near],[data-copy],[data-copy-text],[data-video],[data-roadview],[data-th],[data-sgg],[data-area],[data-kind],[data-toggle],[data-setup-focus],[data-mode],[data-compare],[data-compare-del],[data-close-compare],[data-share-compare],#moreBtn,#viewSwitch,#clearQ,#nearBtn,#availabilityRun,#availabilityClear,#openCompareBtn,#clearCompareBtn");
   if (!t) return;
   if (t.dataset.compare) { toggleCompare(t.dataset.compare); return; }
   if (t.dataset.compareDel) { toggleCompare(t.dataset.compareDel); return; }
@@ -3297,18 +3577,32 @@ document.addEventListener("click", (e) => {
   if (t.dataset.toggle) { state[t.dataset.toggle] = !state[t.dataset.toggle]; syncHash(); return rerender(); }
   if (t.id === "moreBtn") { state.shown += PAGE; return renderList(); }
   if (t.id === "clearQ") { state.q = ""; $("#q").value = ""; return rerender(); }
-  if (t.id === "viewSwitch") {
-    const toMap = document.body.dataset.view !== "map";
-    document.body.dataset.view = toMap ? "map" : "list";
-    t.innerHTML = toMap ? `${ic("#l-list", "i-sm")}목록 보기` : `${ic("#l-map", "i-sm")}지도 보기`;
-    if (map) setTimeout(() => map.relayout(), 50);
-  }
+  if (t.id === "viewSwitch") setView(document.body.dataset.view !== "map" ? "map" : "list");
+  if (t.dataset.mode) setView(t.dataset.mode);
   if (t.id === "nearBtn") {
     // 이미 내 주변 순이면 한 번 더 눌러 끈다.
     if (state.sort === "near" && state.here) { state.sort = "best"; $("#sort").value = "best"; t.setAttribute("aria-pressed", "false"); return rerender(); }
     return locate(t);
   }
 });
+// 찾는 방법: 키워드(목록) ↔ 지도. 상단 ‘지도’ 메뉴는 ?view=map으로 들어온다. 정보량은 같고 배치만 바뀐다.
+function setView(view) {
+  const toMap = view === "map";
+  document.body.dataset.view = toMap ? "map" : "list";
+  const sw = $("#viewSwitch");
+  if (sw) sw.innerHTML = toMap ? `${ic("#l-list", "i-sm")}목록 보기` : `${ic("#l-map", "i-sm")}지도 보기`;
+  document.querySelectorAll(".x-mode [data-mode]").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.mode === document.body.dataset.view)));
+  const u = new URL(location.href);
+  if (toMap) u.searchParams.set("view", "map"); else u.searchParams.delete("view");
+  history.replaceState(history.state, "", u);
+  // 상단·하단 메뉴의 ‘찾기’와 ‘지도’ 중 지금 보는 쪽을 표시한다.
+  document.querySelectorAll('.sh-nav a, .gnb-tabbar a').forEach((a) => {
+    const href = a.getAttribute("href") ?? "";
+    const on = /explore\/\?view=map$/.test(href) ? toMap : /explore\/$/.test(href) ? !toMap : null;
+    if (on === true) a.setAttribute("aria-current", "page"); else if (on === false) a.removeAttribute("aria-current");
+  });
+  if (map) setTimeout(() => map.relayout(), 50);
+}
 // 현재 위치: 권한·시간 초과·위치 없음마다 이유를 알려 주고, 찾으면 가까운 순 정렬 + 지도 이동 + 내 위치 표시.
 let hereMarker = null;
 function locate(btn = $("#nearBtn")) {
@@ -3386,6 +3680,7 @@ async function boot() {
   }
   if (state.q) $("#q").value = state.q;
   renderAvailabilityQuery(); renderSetupQuery(); renderChips(); renderList(); renderCompareBar(); head(); initMap();
+  if (new URLSearchParams(location.search).get("view") === "map") setView("map");
   // 목록 끝에 닿으면 자동으로 더 불러온다(수백 곳도 끊김 없이).
   new IntersectionObserver((es) => { if (es.some((x) => x.isIntersecting) && !$("#moreBtn").hidden) { state.shown += PAGE; renderListOnly(); } }, { rootMargin: "600px" }).observe($("#moreBtn"));
   if (state.open) openDetail(state.open);
