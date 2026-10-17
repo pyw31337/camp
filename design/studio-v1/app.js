@@ -9,8 +9,9 @@ function showToast(message, { loading = false } = {}) {
 }
 
 function setScreen(name) {
+  const navigationScreen = ['detail', 'theme-list'].includes(name) ? 'explore' : name;
   all('.screen').forEach((screen) => screen.classList.toggle('is-active', screen.dataset.screen === name));
-  all('[data-screen-target]').forEach((button) => button.classList.toggle('is-active', button.dataset.screenTarget === name && button.closest('.screen-nav')));
+  all('[data-screen-target]').forEach((button) => button.classList.toggle('is-active', button.dataset.screenTarget === navigationScreen && button.closest('.screen-nav')));
   document.body.classList.toggle('is-hero-header', name === 'explore');
   document.querySelector('.topbar').classList.toggle('is-scrolled', name !== 'explore');
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -26,15 +27,6 @@ syncHeader();
 
 all('[data-screen-target]').forEach((button) => button.addEventListener('click', () => setScreen(button.dataset.screenTarget)));
 
-all('.finder-tab').forEach((button) => button.addEventListener('click', () => {
-  all('.finder-tab').forEach((tab) => {
-    const active = tab === button;
-    tab.classList.toggle('is-active', active);
-    tab.setAttribute('aria-selected', String(active));
-  });
-  if (button.dataset.findMode === 'map') setScreen('map');
-}));
-
 all('.condition-pill').forEach((button) => button.addEventListener('click', () => {
   all('.condition-pill').forEach((pill) => pill.classList.toggle('is-active', pill === button));
   showToast(`‘${button.textContent.trim()}’ 조건을 적용했어요`);
@@ -47,15 +39,22 @@ all('.heart').forEach((button) => button.addEventListener('click', () => {
   showToast(isSaved ? '내 캠핑에 저장했어요' : '관심에서 뺐어요');
 }));
 
-all('.card-open, .camp-card').forEach((element) => element.addEventListener('click', (event) => {
-  if (event.target.closest('.photo-carousel, .heart')) return;
-  setScreen('detail');
-}));
+function bindDetailCard(element) {
+  if (element.dataset.detailBound) return;
+  element.dataset.detailBound = 'true';
+  element.addEventListener('click', (event) => {
+    if (event.target.closest('.photo-carousel, .heart')) return;
+    setScreen('detail');
+  });
+}
 
-all('[data-gallery]').forEach((gallery) => {
+function bindGallery(gallery) {
+  if (gallery.dataset.galleryBound) return;
+  gallery.dataset.galleryBound = 'true';
   const images = all(':scope > img', gallery);
   const dots = all('.photo-index i', gallery);
   const counter = gallery.querySelector('.photo-index b');
+  if (!images.length || !counter) return;
   let current = 0;
   let startX = null;
   const render = (index) => {
@@ -75,7 +74,37 @@ all('[data-gallery]').forEach((gallery) => {
     if (event.target.closest('button')) return;
     render(current + 1);
   });
-});
+}
+
+const carouselAssets = ['lake.webp', 'forest.webp', 'valley.webp', 'caravan.webp', 'kids.webp'];
+function galleryAssetsFor(primary) {
+  return [primary, ...carouselAssets.filter((asset) => asset !== primary)].slice(0, 5);
+}
+
+function renderGalleryImages(primary, label) {
+  return galleryAssetsFor(primary).map((asset, index) => `<img${index === 0 ? ' class="is-current"' : ''} src="./assets/${asset}" alt="${index === 0 ? label : `${label} 추가 사진`}" />`).join('');
+}
+
+function renderGalleryIndex() {
+  return '<div class="photo-index" aria-hidden="true"><i class="is-on"></i><i></i><i></i><i></i><i></i><b>1/5</b></div>';
+}
+
+function hydrateOpenSoonGalleries() {
+  all('.open-soon-image:not([data-gallery])').forEach((gallery) => {
+    const source = gallery.querySelector('img');
+    const badge = gallery.querySelector('.open-badge')?.outerHTML || '';
+    const primary = source?.getAttribute('src')?.split('/').pop() || 'forest.webp';
+    const label = source?.alt || '캠핑장 사진';
+    gallery.classList.add('photo-carousel');
+    gallery.dataset.gallery = 'true';
+    gallery.innerHTML = `${renderGalleryImages(primary, label)}${badge}${renderGalleryIndex()}`;
+    bindGallery(gallery);
+  });
+}
+
+all('.card-open, .camp-card, .open-soon-card').forEach(bindDetailCard);
+all('[data-gallery]').forEach(bindGallery);
+hydrateOpenSoonGalleries();
 
 const rangeInput = document.querySelector('#priceRange');
 const rangeFill = document.querySelector('.range-track span');
@@ -165,85 +194,104 @@ const themeCatalog = [
 ];
 
 const themeGrid = document.querySelector('[data-theme-grid]');
-const themeRange = document.querySelector('[data-theme-range]');
-const themeOutput = document.querySelector('[data-theme-page-output]');
+const themeListGrid = document.querySelector('[data-theme-list-grid]');
+const themeListTitle = document.querySelector('[data-theme-list-title]');
 const themeTabs = all('.theme-tabs button');
 let activeTheme = 'info';
-let activeThemePage = 1;
 let suppressThemeCardOpen = false;
 
 function themeCardsFor(theme) {
   return themeCatalog.filter((camp) => camp.tags.includes(theme));
 }
 
+function themeCardMarkup(camp) {
+  return `<article class="theme-camp-card" data-camp-id="${camp.id}" role="button" tabindex="0" aria-label="${camp.name} 상세 보기"><div class="theme-camp-image photo-carousel" data-gallery aria-label="${camp.name} 사진 5장">${renderGalleryImages(camp.image, `${camp.name} 풍경 시안`)}<span>${camp.info}</span>${renderGalleryIndex()}</div><div><small>${camp.region}</small><h3>${camp.name}</h3>${renderCardSpecs(resolveCardSpecs(camp), 'theme-card-specs')}<button class="theme-card-open" type="button">상세 보기 <span>↗</span></button></div></article>`;
+}
+
+function bindThemeRail(rail) {
+  if (!rail || rail.dataset.railBound) return;
+  rail.dataset.railBound = 'true';
+  let startX = null;
+  let startScroll = 0;
+  rail.addEventListener('pointerdown', (event) => {
+    if (event.target.closest('.photo-carousel')) return;
+    startX = event.clientX;
+    startScroll = rail.scrollLeft;
+    rail.setPointerCapture?.(event.pointerId);
+  });
+  rail.addEventListener('pointermove', (event) => {
+    if (startX === null) return;
+    const distance = event.clientX - startX;
+    if (Math.abs(distance) < 6) return;
+    suppressThemeCardOpen = true;
+    rail.scrollLeft = startScroll - distance;
+  });
+  rail.addEventListener('pointerup', () => {
+    startX = null;
+    window.setTimeout(() => { suppressThemeCardOpen = false; }, 0);
+  });
+  rail.addEventListener('pointercancel', () => { startX = null; });
+}
+
+function bindThemeCardOpener(surface) {
+  if (!surface || surface.dataset.detailBound) return;
+  surface.dataset.detailBound = 'true';
+  surface.addEventListener('click', (event) => {
+    if (!event.target.closest('.theme-camp-card') || event.target.closest('.photo-carousel') || suppressThemeCardOpen) return;
+    setScreen('detail');
+  });
+  surface.addEventListener('keydown', (event) => {
+    if ((event.key === 'Enter' || event.key === ' ') && event.target.closest('.theme-camp-card')) {
+      event.preventDefault();
+      setScreen('detail');
+    }
+  });
+}
+
+function hydrateThemeCards(surface) {
+  all('[data-gallery]', surface).forEach(bindGallery);
+}
+
 function renderThemeCards() {
-  if (!themeGrid || !themeRange || !themeOutput) return;
+  if (!themeGrid) return;
   const cards = themeCardsFor(activeTheme);
-  const pageSize = 4;
-  const totalPages = Math.max(1, Math.ceil(cards.length / pageSize));
-  activeThemePage = Math.min(activeThemePage, totalPages);
-  themeRange.max = String(totalPages);
-  themeRange.value = String(activeThemePage);
-  themeRange.style.setProperty('--theme-page-pct', `${totalPages === 1 ? 100 : ((activeThemePage - 1) / (totalPages - 1)) * 100}%`);
-  themeRange.disabled = totalPages === 1;
-  themeOutput.textContent = `${String(activeThemePage).padStart(2, '0')} / ${String(totalPages).padStart(2, '0')}`;
-  const page = cards.slice((activeThemePage - 1) * pageSize, activeThemePage * pageSize);
-  themeGrid.innerHTML = page.map((camp) => `<article class="theme-camp-card" role="button" tabindex="0" aria-label="${camp.name} 상세 보기"><div class="theme-camp-image"><img src="./assets/${camp.image}" alt="${camp.name} 풍경 시안" /><span>${camp.info}</span></div><div><small>${camp.region}</small><h3>${camp.name}</h3>${renderCardSpecs(resolveCardSpecs(camp), 'theme-card-specs')}</div></article>`).join('');
+  themeGrid.innerHTML = cards.map(themeCardMarkup).join('');
+  themeGrid.scrollLeft = 0;
+  hydrateThemeCards(themeGrid);
   themeGrid.classList.remove('is-entering');
   requestAnimationFrame(() => themeGrid.classList.add('is-entering'));
 }
 
-function setThemePage(nextPage) {
-  const totalPages = Math.max(1, Math.ceil(themeCardsFor(activeTheme).length / 4));
-  const normalized = ((nextPage - 1 + totalPages) % totalPages) + 1;
-  if (normalized === activeThemePage && themeGrid?.children.length) return;
-  activeThemePage = normalized;
-  renderThemeCards();
+function renderThemeList() {
+  if (!themeListGrid || !themeListTitle) return;
+  const activeTab = themeTabs.find((tab) => tab.dataset.theme === activeTheme);
+  themeListTitle.textContent = activeTab?.textContent.trim() || '테마';
+  themeListGrid.innerHTML = themeCardsFor(activeTheme).map(themeCardMarkup).join('');
+  hydrateThemeCards(themeListGrid);
 }
 
 themeTabs.forEach((button) => button.addEventListener('click', () => {
   activeTheme = button.dataset.theme;
-  activeThemePage = 1;
   themeTabs.forEach((tab) => {
     const active = tab === button;
     tab.classList.toggle('is-active', active);
     tab.setAttribute('aria-selected', String(active));
   });
   renderThemeCards();
+  renderThemeList();
 }));
 
-themeRange?.addEventListener('input', () => setThemePage(Number(themeRange.value)));
-document.querySelector('[data-theme-prev]')?.addEventListener('click', () => setThemePage(activeThemePage - 1));
-document.querySelector('[data-theme-next]')?.addEventListener('click', () => setThemePage(activeThemePage + 1));
-
-let themeSwipeStartX = null;
-themeGrid?.addEventListener('pointerdown', (event) => {
-  themeSwipeStartX = event.clientX;
-  themeGrid.setPointerCapture?.(event.pointerId);
-});
-themeGrid?.addEventListener('pointerup', (event) => {
-  if (themeSwipeStartX === null) return;
-  const distance = event.clientX - themeSwipeStartX;
-  themeSwipeStartX = null;
-  if (Math.abs(distance) < 34) return;
-  suppressThemeCardOpen = true;
-  setThemePage(activeThemePage + (distance < 0 ? 1 : -1));
-  window.setTimeout(() => { suppressThemeCardOpen = false; }, 0);
-});
-themeGrid?.addEventListener('pointercancel', () => { themeSwipeStartX = null; });
-themeGrid?.addEventListener('click', () => {
-  if (suppressThemeCardOpen) return;
-  setScreen('detail');
-});
-themeGrid?.addEventListener('keydown', (event) => {
-  if (event.key === 'Enter' || event.key === ' ') {
-    event.preventDefault();
-    setScreen('detail');
-  }
+bindThemeRail(themeGrid);
+bindThemeCardOpener(themeGrid);
+bindThemeCardOpener(themeListGrid);
+document.querySelector('[data-theme-all]')?.addEventListener('click', () => {
+  renderThemeList();
+  setScreen('theme-list');
 });
 renderThemeCards();
+renderThemeList();
 
-all('.collection-link').forEach((button) => button.addEventListener('click', () => showToast('전체 목록은 실제 탐색 화면에서 이어집니다')));
+all('.collection-link:not([data-theme-all])').forEach((button) => button.addEventListener('click', () => showToast('전체 목록은 실제 탐색 화면에서 이어집니다')));
 
 document.querySelector('.search-button')?.addEventListener('click', (buttonEvent) => {
   const button = buttonEvent.currentTarget;

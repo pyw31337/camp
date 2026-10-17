@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./style.css?v=20261018-theme-pager" />
+    <link rel="stylesheet" href="./style.css?v=20261018-list-gallery" />
   </head>
   <body class="is-hero-header">
     <div class="prototype-bar"><span class="prototype-dot"></span><span>DESIGN PROTOTYPE 01</span><span class="prototype-hint">데이터 연결 전 UI 시안</span></div>
@@ -24,11 +24,6 @@
           <div class="hero-veil"></div>
           <div class="hero-content"><p class="kicker"><span></span> WEEKEND FINDER</p><h1 id="explore-title"><strong>이번 주말,</strong><br /><em>빈자리부터.</em></h1><p class="hero-summary">전국 <b>3,109</b>개 캠핑장 소식 <i></i> 현재 오픈 <b class="open-count">38</b>개</p></div>
           <form class="finder" onsubmit="return false">
-            <div class="finder-tabs" role="tablist" aria-label="탐색 방법">
-              <button type="button" class="finder-tab is-active" role="tab" aria-selected="true" data-find-mode="keyword"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10a7 7 0 1 0 14 0a7 7 0 0 0 -14 0"/><path d="M21 21l-6 -6"/></svg>키워드</button>
-              <button type="button" class="finder-tab" role="tab" aria-selected="false" data-find-mode="theme"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 6 6"/></svg>테마</button>
-              <button type="button" class="finder-tab" role="tab" aria-selected="false" data-find-mode="map"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"/></svg>지도</button>
-            </div>
             <div class="finder-row"><label class="finder-field field-place"><small>어디로</small><input value="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장" /></label><label class="finder-field"><small>언제</small><input value="10.24 — 10.26" aria-label="날짜" /></label><label class="finder-field field-people"><small>누구와</small><input value="성인 2 · 차 1" aria-label="인원과 차량" /></label><button class="search-button" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10a7 7 0 1 0 14 0a7 7 0 0 0 -14 0"/><path d="M21 21l-6 -6"/></svg><span>찾기</span></button></div>
           </form>
         </section>
@@ -50,10 +45,18 @@
 
         <section class="open-theme-panel" aria-label="예약 오픈과 테마별 캠핑장">
           <section class="open-soon-section" aria-labelledby="open-soon-title"><div class="collection-heading"><div><p class="kicker ink"><span></span> OPENING SOON</p><h2 id="open-soon-title">곧 <strong>오픈</strong></h2></div><button class="collection-link" type="button">일정 모두 보기 <span>↗</span></button></div><div class="open-soon-grid"><article class="open-soon-card"><div class="open-soon-image"><img src="./assets/caravan.webp" alt="무창포오토캠핑장 풍경" /><span class="open-badge now">오늘 오픈</span></div><div><h3>무창포오토캠핑장</h3><p>충남 보령 · 전체 예약</p></div></article><article class="open-soon-card"><div class="open-soon-image"><img src="./assets/forest.webp" alt="국립김천숲속야영장 풍경" /><span class="open-badge">오픈 D-2</span></div><div><h3>국립김천숲속야영장</h3><p>경북 김천 · 숲나들e</p></div></article><article class="open-soon-card"><div class="open-soon-image"><img src="./assets/valley.webp" alt="두타산자연휴양림 풍경" /><span class="open-badge">오픈 D-5</span></div><div><h3>두타산자연휴양림</h3><p>강원 평창 · 숲나들e</p></div></article></div></section>
-          <section class="theme-camps-section" aria-labelledby="theme-camps-title"><div class="collection-heading"><div><p class="kicker ink"><span></span> CURATED CAMPS</p><h2 id="theme-camps-title">테마별 <strong>캠핑장</strong></h2></div><button class="collection-link" type="button">더 보기 <span>↗</span></button></div><div class="theme-tabs" role="tablist" aria-label="캠핑장 테마"><button class="is-active" type="button" role="tab" aria-selected="true" data-theme="info">정보 많은 곳</button><button type="button" role="tab" aria-selected="false" data-theme="valley">계곡·물놀이</button><button type="button" role="tab" aria-selected="false" data-theme="water">호수·바다뷰</button><button type="button" role="tab" aria-selected="false" data-theme="pet">반려견 동반</button><button type="button" role="tab" aria-selected="false" data-theme="family">아이와</button><button type="button" role="tab" aria-selected="false" data-theme="glamping">글램핑·카라반</button><button type="button" role="tab" aria-selected="false" data-theme="forest">숲·산책</button><button type="button" role="tab" aria-selected="false" data-theme="free">무료·공영</button></div><div class="theme-camp-grid" data-theme-grid aria-live="polite"></div><div class="theme-pagination" data-theme-pagination><button type="button" class="theme-page-arrow" data-theme-prev aria-label="이전 테마 결과">←</button><label class="theme-page-range"><span class="sr-only">테마 결과 페이지</span><input type="range" min="1" max="2" value="1" step="1" data-theme-range aria-label="테마 결과 페이지" /><output data-theme-page-output>01 / 02</output></label><button type="button" class="theme-page-arrow" data-theme-next aria-label="다음 테마 결과">→</button></div></section>
+          <section class="theme-camps-section" aria-labelledby="theme-camps-title"><div class="collection-heading"><div><p class="kicker ink"><span></span> CURATED CAMPS</p><h2 id="theme-camps-title">테마별 <strong>캠핑장</strong></h2></div><button class="collection-link" type="button" data-theme-all>전체 보기 <span>↗</span></button></div><div class="theme-tabs" role="tablist" aria-label="캠핑장 테마"><button class="is-active" type="button" role="tab" aria-selected="true" data-theme="info">정보 많은 곳</button><button type="button" role="tab" aria-selected="false" data-theme="valley">계곡·물놀이</button><button type="button" role="tab" aria-selected="false" data-theme="water">호수·바다뷰</button><button type="button" role="tab" aria-selected="false" data-theme="pet">반려견 동반</button><button type="button" role="tab" aria-selected="false" data-theme="family">아이와</button><button type="button" role="tab" aria-selected="false" data-theme="glamping">글램핑·카라반</button><button type="button" role="tab" aria-selected="false" data-theme="forest">숲·산책</button><button type="button" role="tab" aria-selected="false" data-theme="free">무료·공영</button></div><div class="theme-camp-grid theme-camp-rail" data-theme-grid aria-label="테마별 캠핑장 가로 목록" aria-live="polite"></div></section>
         </section>
 
         <section class="detail-peek" id="detail-peek" aria-labelledby="detail-title"><div class="peek-photo"><img src="./assets/lake.webp" alt="삼원레져타운 캠핑장 상세 시안 대표 이미지" /><span>공식 사진 15</span></div><div class="peek-copy"><p class="kicker ink"><span></span> CAMPSITE DETAIL</p><h2 id="detail-title">삼원레져타운<br /><strong>캠핑장</strong></h2><div class="fact-tiles"><div><span>사이트</span><b>6 × 8m</b></div><div><span>바닥</span><b>잔디 · 파쇄석</b></div><div><span>반려견</span><b>동반 가능</b></div></div><button class="dark-button" type="button" data-screen-target="detail">상세 시안 보기 <span>↗</span></button></div><div class="peek-reservation"><span>운영자 안내 요금</span><b>주말 7만원 <em>예약처 최종 확인</em></b><button type="button" data-booking-cta>예약 경로 확인하기</button></div></section>
+      </section>
+
+      <section class="screen" data-screen="theme-list" aria-labelledby="theme-list-title">
+        <div class="theme-list-page">
+          <div class="theme-list-top"><button type="button" class="theme-list-back" data-screen-target="explore" aria-label="찾기 화면으로 돌아가기">←</button><p class="kicker ink"><span></span> THEME LIST</p></div>
+          <div class="theme-list-heading"><h1 id="theme-list-title"><strong data-theme-list-title>정보 많은 곳</strong><br />전체 보기</h1><span>카드 선택 · 상세</span></div>
+          <div class="theme-list-grid" data-theme-list-grid aria-live="polite"></div>
+        </div>
       </section>
 
       <section class="screen" data-screen="detail" aria-labelledby="detail-page-title">
@@ -195,6 +198,6 @@
     </main>
     <footer><span class="brand-mark">M</span> 모여라캠핑 <b>DESIGN PROTOTYPE 01</b></footer>
     <div class="toast-region" aria-live="polite" aria-atomic="true"></div>
-    <script src="./app.js?v=20261018-theme-pager"></script>
+    <script src="./app.js?v=20261018-list-gallery"></script>
   </body>
 </html>
