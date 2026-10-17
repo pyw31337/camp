@@ -111,14 +111,137 @@ all('.pagination button:not(.page-arrow)').forEach((button) => button.addEventLi
   showToast(`${button.textContent.trim()}페이지 결과예요`);
 }));
 
-all('.theme-tabs button').forEach((button) => button.addEventListener('click', () => {
-  all('.theme-tabs button').forEach((tab) => {
+const CARD_SPEC_FALLBACKS = [
+  ['시설', '기본 정보'],
+  ['콘텐츠', '현장 사진'],
+  ['정보', '상세 보기'],
+];
+
+function resolveCardSpecs(source) {
+  const preferred = [
+    ['사이트', source.site],
+    ['현장', source.field],
+    ['예약', source.booking],
+  ];
+  return preferred.map(([label, value], index) => {
+    if (value) return { label, value };
+    return { label: CARD_SPEC_FALLBACKS[index][0], value: source[`fallback${index + 1}`] || CARD_SPEC_FALLBACKS[index][1] };
+  });
+}
+
+function renderCardSpecs(rows, className = 'quick-specs') {
+  return `<dl class="${className}">${rows.map((row, index) => `<div><dt>0${index + 1}</dt><dd>${row.label}<b>${row.value}</b></dd></div>`).join('')}</dl>`;
+}
+
+all('[data-card-specs]').forEach((list) => {
+  list.innerHTML = renderCardSpecs(resolveCardSpecs({
+    site: list.dataset.site,
+    field: list.dataset.field,
+    booking: list.dataset.booking,
+    fallback1: list.dataset.fallback1,
+    fallback2: list.dataset.fallback2,
+    fallback3: list.dataset.fallback3,
+  })).replace(/^<dl class="quick-specs">|<\/dl>$/g, '');
+});
+
+const themeCatalog = [
+  { id: 'gugok', name: '구곡폭포 국민여가캠핑장', region: '강원 춘천 · 일반 10', image: 'forest.webp', info: '정보 14', site: '일반 10면', field: '1.1kW · 장작', booking: '예약 경로', tags: ['info', 'valley', 'forest', 'family'] },
+  { id: 'samwon', name: '삼원레져타운 캠핑장', region: '충남 서산 · 일반 80', image: 'lake.webp', info: '정보 14', site: '6×8m · 80면', field: '전기 · 화로대', booking: '네이버 예약', tags: ['info', 'water', 'pet', 'family'] },
+  { id: 'yangchon', name: '양촌어울 체험캠프', region: '경남 창원 · 일반 38', image: 'valley.webp', info: '정보 12', site: '일반 38면', field: '온수 · 체험', booking: '', fallback3: '사진 12장', tags: ['info', 'valley', 'family', 'forest'] },
+  { id: 'muchangpo', name: '무창포오토캠핑장', region: '충남 보령 · 오토', image: 'caravan.webp', info: '정보 11', site: '오토 · 해변', field: '전기 제공', booking: '예약 경로', tags: ['info', 'water', 'family', 'glamping'] },
+  { id: 'mulsori', name: '물소리 오토캠핑장', region: '강원 홍천 · 오토', image: 'valley.webp', info: '정보 12', site: '7×8m · 파쇄석', field: '1.1kW · 차박', booking: '온라인 예약', tags: ['info', 'valley', 'forest', 'pet'] },
+  { id: 'duta', name: '두타산 자연휴양림', region: '강원 평창 · 숲나들e', image: 'forest.webp', info: '정보 10', site: '야영 · 숲길', field: '산책 · 온수', booking: '숲나들e', tags: ['info', 'valley', 'water', 'family', 'forest', 'free'] },
+  { id: 'bibi', name: '안면도 비비앤조이 캠핑장', region: '충남 태안 · 글램핑 19', image: 'lake.webp', info: '정보 13', site: '글램핑 · 19실', field: '전기 · 장작', booking: '온라인 예약', tags: ['water', 'glamping', 'pet', 'family'] },
+  { id: 'hans', name: '양양한스 오토캠핑장', region: '강원 양양 · 오토 27', image: 'kids.webp', info: '정보 10', site: '오토 · 27면', field: '전기 · 반려견', booking: '', fallback3: '후기 8건', tags: ['water', 'family', 'pet', 'glamping'] },
+  { id: 'pado', name: '파도빛 캠프', region: '인천 강화 · 카라반', image: 'caravan.webp', info: '정보 9', site: '카라반 · 오토', field: '외부 주차 · 숯만', booking: '온라인 예약', tags: ['water', 'glamping', 'pet', 'family'] },
+  { id: 'byeolbit', name: '별빛계곡 캠핑장', region: '경북 청도 · 일반', image: 'valley.webp', info: '정보 8', site: '일반 · 계곡', field: '전기 제공', booking: '', fallback3: '공식 사진 8장', tags: ['valley', 'forest', 'pet', 'family'] },
+  { id: 'sonamu', name: '소나무 계곡야영장', region: '전북 무주 · 공영', image: 'forest.webp', info: '정보 7', site: '야영 · 공영', field: '', booking: '현장 문의', fallback2: '산책로', tags: ['valley', 'forest', 'free', 'family'] },
+  { id: 'noeul', name: '노을항 카라반', region: '전남 여수 · 카라반', image: 'caravan.webp', info: '정보 9', site: '카라반 · 바다', field: '외부 주차', booking: '온라인 예약', tags: ['water', 'glamping', 'pet'] },
+  { id: 'dogforest', name: '강아지숲 캠프', region: '강원 홍천 · 일반', image: 'kids.webp', info: '정보 11', site: '일반 · 반려견', field: '산책 · 전기', booking: '예약 경로', tags: ['pet', 'forest', 'family'] },
+  { id: 'kidsglamp', name: '아이숲 글램핑', region: '경기 가평 · 글램핑', image: 'kids.webp', info: '정보 10', site: '글램핑 · 가족', field: '놀이 · 온수', booking: '온라인 예약', tags: ['family', 'glamping', 'forest', 'pet'] },
+  { id: 'livingforest', name: '리빙포레스트 야영장', region: '충북 제천 · 공영', image: 'forest.webp', info: '정보 8', site: '야영 · 숲', field: '산책로', booking: '', fallback3: '공식 안내', tags: ['forest', 'free', 'valley'] },
+  { id: 'kimcheon', name: '국립김천숲속야영장', region: '경북 김천 · 숲나들e', image: 'forest.webp', info: '정보 12', site: '숲속 야영', field: '전기 제공', booking: '숲나들e', tags: ['forest', 'free', 'family', 'valley'] },
+  { id: 'jayu', name: '자유마당 공영야영장', region: '충남 공주 · 공영', image: 'lake.webp', info: '정보 6', site: '공영 · 야영', field: '', booking: '', fallback2: '주변 화장실', fallback3: '공식 안내', tags: ['free', 'water', 'family', 'forest'] },
+];
+
+const themeGrid = document.querySelector('[data-theme-grid]');
+const themeRange = document.querySelector('[data-theme-range]');
+const themeOutput = document.querySelector('[data-theme-page-output]');
+const themeTabs = all('.theme-tabs button');
+let activeTheme = 'info';
+let activeThemePage = 1;
+let suppressThemeCardOpen = false;
+
+function themeCardsFor(theme) {
+  return themeCatalog.filter((camp) => camp.tags.includes(theme));
+}
+
+function renderThemeCards() {
+  if (!themeGrid || !themeRange || !themeOutput) return;
+  const cards = themeCardsFor(activeTheme);
+  const pageSize = 4;
+  const totalPages = Math.max(1, Math.ceil(cards.length / pageSize));
+  activeThemePage = Math.min(activeThemePage, totalPages);
+  themeRange.max = String(totalPages);
+  themeRange.value = String(activeThemePage);
+  themeRange.style.setProperty('--theme-page-pct', `${totalPages === 1 ? 100 : ((activeThemePage - 1) / (totalPages - 1)) * 100}%`);
+  themeRange.disabled = totalPages === 1;
+  themeOutput.textContent = `${String(activeThemePage).padStart(2, '0')} / ${String(totalPages).padStart(2, '0')}`;
+  const page = cards.slice((activeThemePage - 1) * pageSize, activeThemePage * pageSize);
+  themeGrid.innerHTML = page.map((camp) => `<article class="theme-camp-card" role="button" tabindex="0" aria-label="${camp.name} 상세 보기"><div class="theme-camp-image"><img src="./assets/${camp.image}" alt="${camp.name} 풍경 시안" /><span>${camp.info}</span></div><div><small>${camp.region}</small><h3>${camp.name}</h3>${renderCardSpecs(resolveCardSpecs(camp), 'theme-card-specs')}</div></article>`).join('');
+  themeGrid.classList.remove('is-entering');
+  requestAnimationFrame(() => themeGrid.classList.add('is-entering'));
+}
+
+function setThemePage(nextPage) {
+  const totalPages = Math.max(1, Math.ceil(themeCardsFor(activeTheme).length / 4));
+  const normalized = ((nextPage - 1 + totalPages) % totalPages) + 1;
+  if (normalized === activeThemePage && themeGrid?.children.length) return;
+  activeThemePage = normalized;
+  renderThemeCards();
+}
+
+themeTabs.forEach((button) => button.addEventListener('click', () => {
+  activeTheme = button.dataset.theme;
+  activeThemePage = 1;
+  themeTabs.forEach((tab) => {
     const active = tab === button;
     tab.classList.toggle('is-active', active);
     tab.setAttribute('aria-selected', String(active));
   });
-  showToast(`‘${button.textContent.trim()}’ 테마를 골랐어요`);
+  renderThemeCards();
 }));
+
+themeRange?.addEventListener('input', () => setThemePage(Number(themeRange.value)));
+document.querySelector('[data-theme-prev]')?.addEventListener('click', () => setThemePage(activeThemePage - 1));
+document.querySelector('[data-theme-next]')?.addEventListener('click', () => setThemePage(activeThemePage + 1));
+
+let themeSwipeStartX = null;
+themeGrid?.addEventListener('pointerdown', (event) => {
+  themeSwipeStartX = event.clientX;
+  themeGrid.setPointerCapture?.(event.pointerId);
+});
+themeGrid?.addEventListener('pointerup', (event) => {
+  if (themeSwipeStartX === null) return;
+  const distance = event.clientX - themeSwipeStartX;
+  themeSwipeStartX = null;
+  if (Math.abs(distance) < 34) return;
+  suppressThemeCardOpen = true;
+  setThemePage(activeThemePage + (distance < 0 ? 1 : -1));
+  window.setTimeout(() => { suppressThemeCardOpen = false; }, 0);
+});
+themeGrid?.addEventListener('pointercancel', () => { themeSwipeStartX = null; });
+themeGrid?.addEventListener('click', () => {
+  if (suppressThemeCardOpen) return;
+  setScreen('detail');
+});
+themeGrid?.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    setScreen('detail');
+  }
+});
+renderThemeCards();
 
 all('.collection-link').forEach((button) => button.addEventListener('click', () => showToast('전체 목록은 실제 탐색 화면에서 이어집니다')));
 
