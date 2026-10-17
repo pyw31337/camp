@@ -704,9 +704,9 @@
     "private_bathroom": 310,
     "kids_play_features": 2658
   },
-  "updated_at": "2026-10-16T21:12:31.554Z",
+  "updated_at": "2026-10-17T20:41:26.564Z",
   "spec_sheet": {
-    "generated_at": "2026-10-16T21:12:31.888Z",
+    "generated_at": "2026-10-17T20:41:27.034Z",
     "campgrounds_with_spec": 1014,
     "roundup_reviews_skipped": 2463,
     "fields": {
@@ -765,7 +765,7 @@
     }
   },
   "operator_site_facts": {
-    "generated_at": "2026-10-16T21:12:31.780Z",
+    "generated_at": "2026-10-17T20:41:26.873Z",
     "campgrounds": 114,
     "w": 46,
     "pk": 39,
@@ -777,14 +777,14 @@
     "sites_read": 547
   },
   "review_digest": {
-    "generated_at": "2026-10-16T21:12:35.514Z",
+    "generated_at": "2026-10-17T20:41:31.512Z",
     "campgrounds": 1640,
     "with_pros": 1582,
     "with_cons": 164,
     "reviews": 10060
   },
   "profiles": {
-    "generated_at": "2026-10-16T21:12:37.033Z",
+    "generated_at": "2026-10-17T20:41:33.510Z",
     "total": 3116,
     "fields": {
       "TYPE": {
@@ -893,7 +893,7 @@
     }
   },
   "nearby_licensed": {
-    "generated_at": "2026-10-16T21:12:36.884Z",
+    "generated_at": "2026-10-17T20:41:33.316Z",
     "campgrounds": 3116,
     "details": 3111
   }

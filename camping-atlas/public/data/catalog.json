@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T21:09:33.662Z",
+  "generated_at": "2026-10-17T20:37:54.154Z",
   "publication_scope": "READ_ONLY_DISCOVERY",
   "counts": {
     "opening_events": 38,
@@ -10,7 +10,7 @@
   "sources": {
     "open_calendar": {
       "state": "PUBLISHED",
-      "generated_at": "2026-10-16T21:08:51.180Z",
+      "generated_at": "2026-10-17T20:37:11.435Z",
       "registry_version": 1
     },
     "gocamping": {
