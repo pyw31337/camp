@@ -59,8 +59,10 @@ jobs:
             mkdir -p camping-atlas/dist/client/media
             git archive origin/media | tar -x -C camping-atlas/dist/client/media
             du -sh camping-atlas/dist/client/media
+            node scripts/verify-official-media.mjs camping-atlas/dist/client
           else
-            echo "::notice::media 브랜치가 없어 이미지 없이 배포합니다."
+            echo "::error::공식 사진 media 브랜치를 찾지 못했습니다. 사진이 빠진 탐색 화면은 배포하지 않습니다."
+            exit 1
           fi
       - uses: actions/upload-pages-artifact@v3
         with:

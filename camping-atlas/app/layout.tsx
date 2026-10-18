@@ -19,7 +19,9 @@ export const metadata: Metadata = {
   manifest: "./manifest.webmanifest",
   appleWebApp: {
     capable: true,
-    statusBarStyle: "default",
+    // PWA에서는 상태 표시 영역까지 히어로가 이어진다. 실제 조작부는 공통
+    // 헤더의 safe-area inset 아래에서 시작하므로 노치·상태 아이콘과 겹치지 않는다.
+    statusBarStyle: "black-translucent",
     title: "모여라 캠핑",
   },
 };

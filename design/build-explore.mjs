@@ -17,7 +17,7 @@ const src = `<title>모여라 캠핑 · 전국 캠핑장 찾기</title>
 ${THEME_COLOR_META}
 <link rel="manifest" href="../manifest.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 ${base}
