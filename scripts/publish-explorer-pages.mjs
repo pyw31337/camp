@@ -5,7 +5,6 @@
 import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { utilityPages } from "../design/explore/utility-pages.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const dataDir = `${root}pipeline/out/explore`;
@@ -36,11 +35,22 @@ await writeFile(`${out}style.css`, renewalCss);
 await writeFile(`${out}app.js`, renewalApp);
 await mkdir(`${out}data`, { recursive: true });
 await cp(`${root}design/renewal/data/photos.json`, `${out}data/photos.json`);
+// 보조 주소도 독립된 옛 UI를 만들지 않고, 실제 A 포스터 앱의 해시 화면으로 보낸다.
+// 이렇게 해야 /themes·/openings·/guide·/passport·/collections 어디로 들어와도
+// 같은 헤더, 사진 카드, 반응형·PWA 안전영역 규칙을 쓴다.
+const routePage = (title, route) => `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${title} · 모여라 캠핑</title><meta http-equiv="refresh" content="0; url=../${route}"><script>location.replace(${JSON.stringify(`../${route}`)})</script></head><body><a href="../${route}">${title} 보기</a></body></html>`;
 const writeUtilityPages = async () => {
-  for (const [relative, html] of utilityPages()) {
+  const routes = [
+    ["themes/index.html", "테마로 찾기", "#/themes"],
+    ["openings/index.html", "예약 오픈 일정", "#/openings"],
+    ["guide/index.html", "이용 가이드", "#/guide"],
+    ["passport/index.html", "내 캠핑 비교", "#/compare"],
+    ["collections/index.html", "테마로 찾기", "#/themes"],
+  ];
+  for (const [relative, title, route] of routes) {
     const file = `${out}${relative}`;
     await mkdir(file.slice(0, file.lastIndexOf("/")), { recursive: true });
-    await writeFile(file, html);
+    await writeFile(file, routePage(title, route));
   }
 };
 if (shellOnly) {
