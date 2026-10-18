@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="모여라캠핑 리뉴얼 시안 — 키워드·테마·지도로 찾고, 같은 항목으로 비교합니다." />
+    <meta name="description" content="전국 캠핑장을 사진·현장 규격·요금대·예약 채널로 한눈에 비교하는 모여라캠핑입니다." />
     <meta name="theme-color" content="#f5f6f4" />
-    <title>모여라캠핑 리뉴얼 시안</title>
+    <title>모여라 캠핑 · 전국 캠핑장 찾기</title>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
@@ -46,6 +46,7 @@
         <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 4 21 13h-6v7H9v-7H3z"/></symbol>
         <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 20 3 11h6V4h6v7h6z"/></symbol>
         <symbol id="i-list" viewBox="0 0 24 24"><path d="M3 4.5h3v3H3zm5 0h13v3H8zM3 10.5h3v3H3zm5 0h13v3H8zM3 16.5h3v3H3zm5 0h13v3H8z"/></symbol>
+        <symbol id="i-caravan" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M3 6h13a5 5 0 0 1 5 5v5h1.5v2H18a2.5 2.5 0 0 1-5 0H3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1zm2 2.5v4h4v-4zm6 0v4h3.5v-4zM15.5 16.8a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8z"/></symbol>
         <symbol id="i-home" viewBox="0 0 24 24"><path d="M12 2.5 22 11h-3v10.5h-5.2v-6.3h-3.6v6.3H5V11H2z"/></symbol>
       </defs>
     </svg>
@@ -55,14 +56,8 @@
       <nav class="top-nav" aria-label="주요 메뉴">
         <a href="#/" data-nav="home">찾기</a>
         <a href="#/map" data-nav="map">지도</a>
-        <a href="#/compare" data-nav="compare">찜 <b class="nav-count" data-compare-count>0</b></a>
+        <a href="#/compare" data-nav="compare">비교 <b class="nav-count" data-compare-count>0</b></a>
       </nav>
-      <div class="variant-switch" role="group" aria-label="시안 바꾸기">
-        <span>시안</span>
-        <button type="button" data-variant="a" title="A 포스터">A</button>
-        <button type="button" data-variant="b" title="B 필드북">B</button>
-        <button type="button" data-variant="c" title="C 인덱스">C</button>
-      </div>
       <button class="gear-chip" type="button" data-open="gear" aria-haspopup="dialog"><svg><use href="#i-tent"/></svg><span data-gear-label>내 장비</span></button>
     </header>
 
@@ -71,7 +66,7 @@
     <nav class="tabbar" aria-label="모바일 메뉴">
       <a href="#/" data-nav="home"><svg><use href="#i-search"/></svg><span>찾기</span></a>
       <a href="#/map" data-nav="map"><svg><use href="#i-map"/></svg><span>지도</span></a>
-      <a href="#/compare" data-nav="compare"><svg><use href="#i-heart-o"/></svg><span>찜</span><b class="nav-count" data-compare-count>0</b></a>
+      <a href="#/compare" data-nav="compare"><svg><use href="#i-columns"/></svg><span>비교</span><b class="nav-count" data-compare-count>0</b></a>
       <button type="button" data-open="gear"><svg><use href="#i-tent"/></svg><span>내 장비</span></button>
     </nav>
 
