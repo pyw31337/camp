@@ -65,7 +65,6 @@
         <a href="#/map" data-nav="map">지도</a>
         <a href="#/compare" data-nav="compare">비교 <b class="nav-count" data-compare-count>0</b></a>
       </nav>
-      <button class="gear-chip" type="button" data-open="gear" aria-haspopup="dialog"><svg><use href="#i-tent"/></svg><span data-gear-label>내 장비</span></button>
     </header>
 
     <main id="view" tabindex="-1"></main>
@@ -74,22 +73,11 @@
       <a href="#/" data-nav="home"><svg><use href="#i-search"/></svg><span>찾기</span></a>
       <a href="#/map" data-nav="map"><svg><use href="#i-map"/></svg><span>지도</span></a>
       <a href="#/compare" data-nav="compare"><svg><use href="#i-columns"/></svg><span>비교</span><b class="nav-count" data-compare-count>0</b></a>
-      <button type="button" data-open="gear"><svg><use href="#i-tent"/></svg><span>내 장비</span></button>
     </nav>
-
-
-    <dialog class="sheet" id="gear-dialog" aria-labelledby="gear-title">
-      <form method="dialog" class="sheet-in">
-        <div class="sheet-head"><h2 id="gear-title">내 장비</h2><button class="icon-btn" value="close" aria-label="닫기"><svg><use href="#i-close"/></svg></button></div>
-        <fieldset class="seg-group"><legend>텐트·쉘터</legend><div class="seg" data-gear="size"></div></fieldset>
-        <fieldset class="seg-group"><legend>꼭 필요한 것</legend><div class="seg multi" data-gear="needs"></div></fieldset>
-        <button class="btn primary wide" value="ok">적용</button>
-      </form>
-    </dialog>
 
     <dialog class="sheet" id="date-dialog" aria-labelledby="date-title">
       <form method="dialog" class="sheet-in">
-        <div class="sheet-head"><h2 id="date-title">언제 갈까요?</h2><button class="icon-btn" value="close" aria-label="닫기"><svg><use href="#i-close"/></svg></button></div>
+        <div class="sheet-head"><h2 id="date-title">언제 갈까요?</h2><button class="icon-btn sheet-close" value="close" aria-label="닫기"><svg><use href="#i-close"/></svg></button></div>
         <label class="date-input"><span>입실일</span><input type="date" data-date-input></label>
         <p class="sheet-note">날짜별 잔여·결제 금액은 예약처에서 확인합니다.</p>
         <button class="btn primary wide" value="ok">날짜 적용</button>
