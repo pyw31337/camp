@@ -15,7 +15,8 @@ const TENT_SIDE_PARKING_RE = /(?:(?:텐트|사이트|차량|텐트\s*바로)\s*(
 const SHARED_PARKING_RE = /(?:공용\s*주차장|지정\s*주차장|외부\s*주차장|주차장에\s*주차|주차장\s*이용)\s*(?:후|하고|바랍니다)/;
 
 // 전력 W 및 차단기 판별 정규식
-const POWER_WATT_RE = /(?:사이트당|천막당|개소당)?\s*(\d{3,4})\s*(?:[wW]|와트)|(1|2|3)\s*(?:[kK][wW]|킬로와트)/;
+// “1,100w”의 천 단위 쉼표를 놓치면 100W로 잘못 읽는다(2026-10-16 수정). 앞에 숫자·쉼표·점이 붙은 경우는 받지 않는다.
+const POWER_WATT_RE = /(?:사이트당|천막당|개소당)?\s*(?<![\d,.])(\d{1,2},\d{3}|\d{3,4})\s*(?:[wW]|와트)(?![a-zA-Z])|(?<![\d.])(1|2|3)\s*(?:[kK][wW]|킬로와트)/;
 const HIGH_POWER_KEYWORD_RE = /(?:고전력|고출력|용량\s*넉넉|넉넉한\s*전기|2[kK][wW]|1[kK][wW]|1000\s*[wW]|1200\s*[wW])/;
 
 // 화기(장작/불멍/숯) 판별 정규식
@@ -215,7 +216,9 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
 
   if (wattMatch) {
     if (wattMatch[1]) {
-      limitW = parseInt(wattMatch[1], 10);
+      limitW = parseInt(wattMatch[1].replace(/,/g, ""), 10);
+      // 사이트 전력 상한으로 볼 수 있는 범위(300~3,000W)만 받는다. 그 밖(예: 전기요 180W)은 기기 이야기다.
+      if (!(limitW >= 300 && limitW <= 3000)) limitW = null;
     } else if (wattMatch[2]) {
       limitW = parseInt(wattMatch[2], 10) * 1000;
     }

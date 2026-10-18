@@ -673,7 +673,7 @@
   "stats": {
     "with_booking_url": 1417,
     "online_realtime": 1698,
-    "with_fee_text": 0,
+    "with_fee_text": 1831,
     "with_nearby_toilet": 999,
     "with_image": 2344,
     "with_intro": 1629,
@@ -693,20 +693,20 @@
     "official_notice_camps": 0,
     "official_notice_items": 0,
     "verified_condition_facts": 21,
-    "surveyed_condition_facts": 1744,
-    "confirmed_condition_facts": 1351,
+    "surveyed_condition_facts": 1743,
+    "confirmed_condition_facts": 1352,
     "parking_tent_side": 1178,
     "parking_cart_required": 69,
     "parking_shared": 12,
-    "power_high_w": 23,
+    "power_high_w": 30,
     "firewood_allowed": 2448,
     "firewood_prohibited": 171,
     "private_bathroom": 310,
     "kids_play_features": 2658
   },
-  "updated_at": "2026-10-16T07:14:23.707Z",
+  "updated_at": "2026-10-17T20:41:26.564Z",
   "spec_sheet": {
-    "generated_at": "2026-10-16T07:14:24.407Z",
+    "generated_at": "2026-10-17T20:41:27.034Z",
     "campgrounds_with_spec": 1014,
     "roundup_reviews_skipped": 2463,
     "fields": {
@@ -765,26 +765,26 @@
     }
   },
   "operator_site_facts": {
-    "generated_at": "2026-10-16T07:14:24.189Z",
-    "campgrounds": 108,
-    "w": 45,
-    "pk": 33,
+    "generated_at": "2026-10-17T20:41:26.873Z",
+    "campgrounds": 114,
+    "w": 46,
+    "pk": 39,
     "fire": 33,
     "cc": 16,
-    "conflicts": 0,
+    "conflicts": 1,
     "stale": 0,
     "shared_host": 52,
     "sites_read": 547
   },
   "review_digest": {
-    "generated_at": "2026-10-16T07:16:25.398Z",
+    "generated_at": "2026-10-17T20:41:31.512Z",
     "campgrounds": 1640,
     "with_pros": 1582,
     "with_cons": 164,
     "reviews": 10060
   },
   "profiles": {
-    "generated_at": "2026-10-16T13:37:40.773Z",
+    "generated_at": "2026-10-17T20:41:33.510Z",
     "total": 3116,
     "fields": {
       "TYPE": {
@@ -792,48 +792,48 @@
         "facts": 2288
       },
       "CHECKIN": {
-        "any": 247,
-        "facts": 192
+        "any": 271,
+        "facts": 216
       },
       "CHECKOUT": {
-        "any": 201,
-        "facts": 163
+        "any": 224,
+        "facts": 186
       },
       "MANNER": {
-        "any": 15,
-        "facts": 13
+        "any": 16,
+        "facts": 14
       },
       "PRICE": {
         "any": 1639,
         "facts": 76
       },
       "EXTRA_FEE": {
-        "any": 100,
-        "facts": 100
+        "any": 114,
+        "facts": 114
       },
       "POWER": {
-        "any": 2253,
-        "facts": 2253
+        "any": 2268,
+        "facts": 2268
       },
       "PARKING": {
-        "any": 46,
-        "facts": 46
+        "any": 57,
+        "facts": 57
       },
       "FIRE": {
-        "any": 2427,
-        "facts": 2427
+        "any": 2428,
+        "facts": 2428
       },
       "CAR_CAMPING": {
         "any": 16,
         "facts": 16
       },
       "PET": {
-        "any": 2633,
-        "facts": 2623
+        "any": 2634,
+        "facts": 2624
       },
       "SITE": {
-        "any": 1681,
-        "facts": 1681
+        "any": 1687,
+        "facts": 1687
       },
       "SANITARY": {
         "any": 1735,
@@ -865,7 +865,7 @@
       "GLAMPING": 650,
       "CARAVAN": 478,
       "FAMILY": 1677,
-      "WINTER": 1799,
+      "WINTER": 1806,
       "WATER_PLAY": 1287,
       "FOREST": 1027,
       "RIVER": 356,
@@ -876,29 +876,24 @@
       "BEACH": 375,
       "ISLAND": 85,
       "REVIEW_QUIET": 169,
-      "FIREWOOD": 20,
+      "FIREWOOD": 23,
       "CITY": 180,
-      "SITE_PARKING": 27,
+      "SITE_PARKING": 36,
       "CAR_CAMPING": 10,
-      "HIGH_POWER": 14,
+      "HIGH_POWER": 16,
       "REVIEW_VIEW": 20,
       "REVIEW_CLEAN": 3,
       "REVIEW_HOST": 3
     },
     "facts_distribution": {
-      "0-5": 879,
-      "6-9": 1999,
-      "10-13": 233,
-      "14-18": 5
-    },
-    "price": {
-      "published": 1639,
-      "operator": 76,
-      "mention": 1563
+      "0-5": 872,
+      "6-9": 1990,
+      "10-13": 248,
+      "14-18": 6
     }
   },
   "nearby_licensed": {
-    "generated_at": "2026-10-16T07:15:14.743Z",
+    "generated_at": "2026-10-17T20:41:33.316Z",
     "campgrounds": 3116,
     "details": 3111
   }

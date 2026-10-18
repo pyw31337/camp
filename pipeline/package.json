@@ -47,6 +47,7 @@
     "build:review-digest": "node scripts/build-review-digest.mjs",
     "build:nearby-facts": "node scripts/build-nearby-facts.mjs",
     "build:db": "node scripts/build-database.mjs",
+    "build:pricing-facts": "node scripts/build-site-pricing-facts.mjs",
     "db:import-supabase": "node scripts/import-all-to-supabase.mjs",
     "check:billing": "node scripts/check-external-services-billing.mjs"
   },

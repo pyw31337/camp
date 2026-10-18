@@ -200,3 +200,10 @@ pipeline/out/campgrounds.json ──┐
 - `cd pipeline && node --test test/images.test.mjs` — 14개 통과(네트워크·sharp 없이): 사진 공백 우선 조회, 시설당 첫 사진으로의 공간 재균형, 재확인 전 사진 보존/재확인 뒤 정리 회귀를 포함.
 - 실변환(2026-10-13, `npm i --no-save sharp@0.35.5`, package.json·lock 변경 없음): 고캠핑 c_no=1066 사진 2장. thumb_1000 경유 1000×666 → 16KB/4KB, 9MB 원본(`IMAGE_MAX_BYTES=12000000`) → 1280×853 171KB / 22KB. EXIF 없음 확인, 두 번째 실행에서 다운로드 0건(증분).
 - 기본 8MB 상한에서는 실측 9MB 원본이 건너뛰어진다 → thumb_1000이 없는 사진이 많으면 `IMAGE_MAX_BYTES`를 12MB로 올리는 것을 검토.
+
+
+## 카드 사진(2026-10-16, 리뉴얼 카드 레일)
+
+- `pipeline/scripts/sync-card-photos.mjs`: 대표 사진을 뺀 고캠핑 imageList 사진을 캠핑장당 최대 4장, 가로 480px·품질 55 webp(장당 약 21KB)로 media 브랜치 `cards/{id}/{URL 해시}.webp`에 굽고 `cards/index.json`을 만든다. 비율 유지 축소만(자르기·보정 없음), 메타데이터 제거. 영구 실패(404)는 `cards/failures.json`에 30일 기록.
+- `.github/workflows/card-photos.yml`: 매일 21:37 UTC + 수동 실행. Data sync와 같은 대기열(`data-sync-refs/heads/main`)이라 media 브랜치 강제 푸시가 서로 덮지 않는다. 바뀌면 Pages를 다시 배포한다. 상한 `CARD_BUDGET_MB`(기본 320MB, camps/와 합쳐 Pages 1GB 안).
+- `sync-images.mjs`의 정리는 `camps/`만 보므로 `cards/`를 지우지 않는다. 권리자 삭제 요청은 imageList에서 빠지면 다음 실행에서 함께 지워진다.

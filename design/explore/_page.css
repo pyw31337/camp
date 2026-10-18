@@ -777,6 +777,13 @@ html.lb-open, html.lb-open body { overflow: hidden; }
 .dv-features-wrap { margin-top: 12px; }
 .dv-features-wrap h5 { font-size: var(--fs-xs); font-weight: 750; color: var(--ink-2); margin-bottom: 6px; }
 .feat-chip { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: var(--fs-xs); font-weight: 650; color: var(--ink-2); }
+.text-price { font-weight: 800; color: var(--green-press, #1b7340); }
+.dv-pricing-box { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-top: 12px; }
+.dv-pricing-box-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.dv-pricing-box-head h5 { margin: 0; font-size: var(--fs-xs); font-weight: 750; color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
+.dv-pricing-main { display: flex; align-items: baseline; gap: 8px; font-size: var(--fs-lg); font-weight: 800; color: var(--ink); }
+.dv-pricing-main small { font-size: var(--fs-2xs); color: var(--ink-3); font-weight: 500; }
+.dv-pricing-foot { margin-top: 6px; font-size: var(--fs-2xs); color: var(--ink-3); line-height: 1.4; }
 
 /* 왼쪽 위 ‘목록’ 버튼이 떠 있는 폭에서는 목차가 그 뒤에서 시작하도록 비운다 */
 @media (max-width: 1080px) { .dv-nav { padding-left: calc(var(--pad) + 5.5rem); } }
