@@ -251,7 +251,12 @@ function imageTag(u, alt, { eager = false, sizes = "(max-width: 759px) 80vw, 320
 }
 // 카드 사진: GitHub Pages 배포 단계에서 합쳐지는 고캠핑 공식 webp를 우선 사용한다.
 // 원본 URL은 사진 브랜치에 아직 파생본이 없을 때만 보조로 쓴다.
+// 원본이 지워져 404가 난 사진 주소(이 방문 동안 기억). 상세 사진 묶음·라이트박스에서 뺀다.
+const DEAD = new Set();
 function photosOf(c) {
+  return photosAll(c).filter((u) => !DEAD.has(photoUrl(u)));
+}
+function photosAll(c) {
   const p = S.photos[c.id] ?? [];
   const own = S.cards[c.id];
   const remote = p.filter((x) => !String(x).startsWith("media/"));
@@ -757,7 +762,7 @@ async function detailView(id) {
   return `<article class="detail" data-id="${esc(c.id)}">
     <div class="d-bar"><a class="icon-btn" href="#/" data-back aria-label="뒤로">${ic("left")}</a><span class="d-crumb">${esc(region(c))}</span>${heartBtn(c, { label: true })}</div>
     <header class="d-head">
-      <p class="d-eyebrow">${esc(region(c))}${c.op && OP[c.op] ? ` · ${OP[c.op]}` : tag ? ` · ${esc(tag)}` : ""}${typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
+      <p class="d-eyebrow">${esc(region(c))}${c.op && OP[c.op] ? ` · ${OP[c.op]}` : tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
       <h1 class="d-title">${titleHtml(c)}</h1>
       ${c.line ? `<p class="d-line">${esc(serviceText(c.line, 84))}${c.gc_url ? srcTip({ g: "c", src: { label: "고캠핑 소개", url: c.gc_url, quote: c.line } }, "한 줄 소개") : ""}</p>` : ""}
       <div class="d-bdgs">${badges(c, 5)}</div>
@@ -1330,6 +1335,19 @@ async function route() {
 addEventListener("hashchange", route);
 
 // ── 시작 ─────────────────────────────────────────────────────
+// 상세 사진 묶음에서 깨진 사진: 그 칸을 빼고 남은 칸으로 격자를 다시 짠다(빈 회색 칸 금지).
+addEventListener("error", (e) => {
+  const im = e.target;
+  const cell = im instanceof HTMLImageElement ? im.closest(".gal-cell") : null;
+  if (!cell) return;
+  DEAD.add(im.getAttribute("src"));
+  const grid = cell.parentElement;
+  cell.remove();
+  const cells = $$(".gal-cell", grid);
+  cells.forEach((x, i) => { x.dataset.gal = i; });
+  grid.className = `gal-grid n${cells.length}`;
+  if (!cells.length) grid.remove();
+}, true);
 (async function boot() {
   $("#view").innerHTML = `<div class="loading"></div>`;
   const [camps, photos, openings, cards, avail] = await Promise.all([
