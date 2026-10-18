@@ -49,6 +49,8 @@
 - `MENTION`이 아닌 행은 원천 URL이 반드시 있다(`validateFacts`, Postgres CHECK). AGENTS.md 3번.
 - 확정 판단·요약·필터의 기본(strict)은 `CONFIRMED` 이상만 쓴다. `MENTION`은 lenient 모드에서만 근거가 되며 화면은 ‘확인필요’로 표시한다.
 
+> 2026-10-18: 속성 `SITE_TYPE`(사이트·상품 타입 14종, `pipeline/lib/site-types.mjs`)과 `STAY_RV_SITES` 추가. 고캠핑 사이트 종류 코드(`PITCH`·`CARAVAN_RENTAL`·`RV_PITCH`) 대응 누락을 고쳤다.
+
 ## 4. 조합 조회
 
 ### 터미널

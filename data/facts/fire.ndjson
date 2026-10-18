@@ -8772,7 +8772,7 @@
 {"cid":"101776","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101777","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101777","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101777","attr":"FIRE_SET_FEE","value":10000,"grade":"OPERATOR","src":"operator_homepage","url":"https://mountainandcompanioncamping.co.kr/pages/history","at":"2026-10-16T06:57:22.472Z","quote":"장작 10kg 10,000원","text":"1만원"}
+{"cid":"101777","attr":"FIRE_SET_FEE","value":10000,"grade":"OPERATOR","src":"operator_homepage","url":"https://mountainandcompanioncamping.co.kr/pages/history","at":"2026-10-17T21:01:24.379Z","quote":"장작 10kg 10,000원","text":"1만원"}
 {"cid":"101777","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101777","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101778","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}

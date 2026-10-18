@@ -29,7 +29,8 @@ const THEME = {
   걷기길: "WALKING", 일몰명소: "SUNSET", 일출명소: "SUNRISE", 스키: "SKI", 액티비티: "ACTIVITY", 수상레저: "WATER_LEISURE", 항공레저: "AIR_LEISURE",
 };
 const SEASON = { 봄: "SPRING", 여름: "SUMMER", 가을: "AUTUMN", 겨울: "WINTER" };
-const KIND = { AUTO_PITCH: "AUTO", GENERAL_PITCH: "GENERAL", GLAMPING: "GLAMPING", CARAVAN: "CARAVAN", CAMPNIC: "CAMPNIC" };
+// 카탈로그 kinds 코드(gocamping.mjs SITE_COUNTS) → 사실 속성. 2026-10-18: PITCH·CARAVAN_RENTAL·RV_PITCH가 빠져 일반·카라반 수가 기록되지 않던 것 수정.
+const KIND = { AUTO_PITCH: "AUTO", PITCH: "GENERAL", GENERAL_PITCH: "GENERAL", GLAMPING: "GLAMPING", CARAVAN_RENTAL: "CARAVAN", CARAVAN: "CARAVAN", RV_PITCH: "RV", CAMPNIC: "CAMPNIC" };
 const SURFACE = { GRAVEL: "GRAVEL", DECK: "DECK", GRASS: "GRASS", SAND: "SAND", SOIL: "SOIL" };
 const FEATURE = { SWIMMING_POOL: "POOL", FOREST_TRAIL: "TRAIL", PLAYGROUND: "PLAYGROUND", TRAMPOLINE: "TRAMPOLINE", STORE: "STORE", WIFI: "WIFI" };
 const OP_AMENITY = { WIFI: "WIFI", STORE: "STORE", POOL: "POOL", TRAMPOLINE: "TRAMPOLINE", PLAYGROUND: "PLAYGROUND", DISHWASH: "DISHWASH" };
@@ -94,6 +95,11 @@ export function factsOf(c, d, { site = null, details = null, digest = null, kaka
   let total = 0;
   for (const [k, n] of c.kinds ?? []) if (KIND[k] && n > 0) { push(`STAY_${KIND[k]}_SITES`, n, "CONFIRMED", "gocamping", gc); total += n; }
   if (total) push("SITE_TOTAL", total, "CONFIRMED", "gocamping", gc);
+  // 사이트·상품 타입(build-site-types.mjs가 상세 d.site_types에 근거와 함께 남긴 것). 타입마다 한 행.
+  for (const t of d?.site_types ?? []) {
+    if (!t.url && t.grade !== "MENTION") continue;
+    push("SITE_TYPE", t.code, t.grade, t.src, { url: t.url, at: t.at, ...(t.count ? { count: t.count } : {}), ...(t.sub ? { text: t.sub } : {}), ...(t.quote ? { quote: t.quote } : {}) });
+  }
   for (const e of c.env ?? []) if (ENV[e]) push(`ENV_${ENV[e]}`, true, "CONFIRMED", "gocamping", gc);
   for (const t of c.themes ?? []) if (THEME[t]) push(`THEME_${THEME[t]}`, true, "CONFIRMED", "gocamping", gc);
   const seasons = new Set(c.seasons ?? []);
