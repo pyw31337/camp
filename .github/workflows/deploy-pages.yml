@@ -47,6 +47,8 @@ jobs:
         # 데이터는 매일 Data sync가 커밋하고, 화면(design/explore)은 바뀌면 배포 때 바로 반영한다.
         working-directory: .
         run: |
+          # 고캠핑에서 지워진 원본(카드 사진 동기화의 failures.json)을 색인에서 빼려고 media 브랜치를 먼저 받는다.
+          git fetch --depth=1 origin +media:refs/remotes/origin/media || true
           node scripts/build-renewal-data.mjs
           node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/dist/client/explore
         env:
