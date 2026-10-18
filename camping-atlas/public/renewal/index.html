@@ -48,6 +48,13 @@
         <symbol id="i-list" viewBox="0 0 24 24"><path d="M3 4.5h3v3H3zm5 0h13v3H8zM3 10.5h3v3H3zm5 0h13v3H8zM3 16.5h3v3H3zm5 0h13v3H8z"/></symbol>
         <symbol id="i-caravan" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M3 6h13a5 5 0 0 1 5 5v5h1.5v2H18a2.5 2.5 0 0 1-5 0H3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1zm2 2.5v4h4v-4zm6 0v4h3.5v-4zM15.5 16.8a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8z"/></symbol>
         <symbol id="i-home" viewBox="0 0 24 24"><path d="M12 2.5 22 11h-3v10.5h-5.2v-6.3h-3.6v6.3H5V11H2z"/></symbol>
+        <!-- 상세 정보의 제목 앞에는 Tabler 계열의 가는 선 아이콘을 쓴다. -->
+        <symbol id="i-door" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v17"/><path d="M5 21h14M15 12h.01"/></symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 15.3A9 9 0 0 1 8.7 3.2 9 9 0 1 0 20.8 15.3z"/></symbol>
+        <symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h3l1.7-2h6.6L17 7h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+        <symbol id="i-video" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></symbol>
+        <symbol id="i-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h2a3 3 0 0 0 3-3v-2a3 3 0 0 1 3-3h0"/></symbol>
+        <symbol id="i-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9"/><path d="M11 5H5a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-6"/></symbol>
       </defs>
     </svg>
 
@@ -58,7 +65,6 @@
         <a href="#/map" data-nav="map">지도</a>
         <a href="#/compare" data-nav="compare">비교 <b class="nav-count" data-compare-count>0</b></a>
       </nav>
-      <button class="gear-chip" type="button" data-open="gear" aria-haspopup="dialog"><svg><use href="#i-tent"/></svg><span data-gear-label>내 장비</span></button>
     </header>
 
     <main id="view" tabindex="-1"></main>
@@ -67,16 +73,14 @@
       <a href="#/" data-nav="home"><svg><use href="#i-search"/></svg><span>찾기</span></a>
       <a href="#/map" data-nav="map"><svg><use href="#i-map"/></svg><span>지도</span></a>
       <a href="#/compare" data-nav="compare"><svg><use href="#i-columns"/></svg><span>비교</span><b class="nav-count" data-compare-count>0</b></a>
-      <button type="button" data-open="gear"><svg><use href="#i-tent"/></svg><span>내 장비</span></button>
     </nav>
 
-
-    <dialog class="sheet" id="gear-dialog" aria-labelledby="gear-title">
+    <dialog class="sheet" id="date-dialog" aria-labelledby="date-title">
       <form method="dialog" class="sheet-in">
-        <div class="sheet-head"><h2 id="gear-title">내 장비</h2><button class="icon-btn" value="close" aria-label="닫기"><svg><use href="#i-close"/></svg></button></div>
-        <fieldset class="seg-group"><legend>텐트·쉘터</legend><div class="seg" data-gear="size"></div></fieldset>
-        <fieldset class="seg-group"><legend>꼭 필요한 것</legend><div class="seg multi" data-gear="needs"></div></fieldset>
-        <button class="btn primary wide" value="ok">적용</button>
+        <div class="sheet-head"><h2 id="date-title">언제 갈까요?</h2><button class="icon-btn sheet-close" value="close" aria-label="닫기"><svg><use href="#i-close"/></svg></button></div>
+        <label class="date-input"><span>입실일</span><input type="date" data-date-input></label>
+        <p class="sheet-note">날짜별 잔여·결제 금액은 예약처에서 확인합니다.</p>
+        <button class="btn primary wide" value="ok">날짜 적용</button>
       </form>
     </dialog>
 
