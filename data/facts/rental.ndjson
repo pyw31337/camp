@@ -281,6 +281,9 @@
 {"cid":"2210","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2216","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2216","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2230","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2230","attr":"RENTAL_ITEM","value":"텐트","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2230","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2249","attr":"RENTAL_ITEM","value":"식기","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2249","attr":"RENTAL_ITEM","value":"침낭","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2263","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
@@ -1409,6 +1412,11 @@
 {"cid":"102285","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102319","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102319","attr":"RENTAL_ITEM","value":"일산화탄소감지기","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102365","attr":"RENTAL_ITEM","value":"난방기구","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102365","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102365","attr":"RENTAL_ITEM","value":"일산화탄소감지기","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102365","attr":"RENTAL_ITEM","value":"텐트","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102365","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102368","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"pilot-004-haengun","attr":"RENTAL_ITEM","value":"장작(10kg)","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/haengun","at":"2026-10-15T09:00:00+09:00","num":12000}
 {"cid":"pilot-007-soeggol","attr":"RENTAL_ITEM","value":"깡통열차 탑승권","grade":"VERIFIED","src":"pilot_verified","url":"https://booking.naver.com/booking/3/bizes/soeggol","at":"2026-10-15T09:00:00+09:00","num":4000}

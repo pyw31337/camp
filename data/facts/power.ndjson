@@ -13,9 +13,8 @@
 {"cid":"61","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"75","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"76","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"77","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"81","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"81","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://moonlightcamp.kr/04reser.html","at":"2026-10-15T23:28:49.892Z","quote":"※ 전열기구 600w초과 또는 전기제품에 문제가 발생 시 차단기 내려갑니다.","text":"최대 600W"}
+{"cid":"81","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://moonlightcamp.kr/04reser.html","at":"2026-10-18T12:25:29.959Z","quote":"※ 전열기구 600w초과 또는 전기제품에 문제가 발생 시 차단기 내려갑니다.","text":"최대 600W"}
 {"cid":"85","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"87","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"90","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -43,7 +42,7 @@
 {"cid":"231","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"236","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"267","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"267","attr":"POWER_FEE","value":5000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.sjacamping.com/guide3","at":"2026-10-15T23:29:56.900Z","quote":"(일반차량): 음식물쓰레기처리비용+전기료 5,000원","text":"5,000원"}
+{"cid":"267","attr":"POWER_FEE","value":5000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.sjacamping.com/guide3","at":"2026-10-18T12:30:09.433Z","quote":"(일반차량): 음식물쓰레기처리비용+전기료 5,000원","text":"5,000원"}
 {"cid":"268","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"277","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"289","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -95,6 +94,7 @@
 {"cid":"538","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"543","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"548","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"549","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"550","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"563","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"564","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -175,7 +175,7 @@
 {"cid":"919","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"922","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"923","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"923","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1by4vdqp.com/?page_id=727","at":"2026-10-16T05:40:14.973Z","quote":"과도한 전기 사용금지 (1사이트당 600W 이상사용금지 야영장 법의거)","text":"최대 600W"}
+{"cid":"923","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1by4vdqp.com/?page_id=727","at":"2026-10-18T12:37:37.658Z","quote":"과도한 전기 사용금지 (1사이트당 600W 이상사용금지 야영장 법의거)","text":"최대 600W"}
 {"cid":"930","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"931","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"936","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -193,8 +193,9 @@
 {"cid":"1024","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1025","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1027","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1027","attr":"POWER_MAX_W","value":500,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b46pgsbwd760lj0b.kr/board//bbs/board.php?bo_table=notice&wr_id=30","at":"2026-10-16T00:56:09.399Z","quote":"텐트 사이트당 사용 전기 최대치는 500w 이하만 허용합니다.","text":"최대 500W"}
+{"cid":"1027","attr":"POWER_MAX_W","value":500,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b46pgsbwd760lj0b.kr/board//bbs/board.php?bo_table=notice&wr_id=30","at":"2026-10-18T12:22:59.194Z","quote":"텐트 사이트당 사용 전기 최대치는 500w 이하만 허용합니다.","text":"최대 500W"}
 {"cid":"1032","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1038","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1040","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1042","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1043","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -223,8 +224,8 @@
 {"cid":"1181","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1190","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1194","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1194","attr":"POWER_FEE","value":10000,"grade":"OPERATOR","src":"operator_homepage","url":"http://mycamp.co.kr/sub06_1.php","at":"2026-10-15T23:32:05.120Z","quote":"캠핑장내 전기차 충전금지 위반시 전기요금 10,000원 부과","text":"1만원"}
-{"cid":"1194","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://mycamp.co.kr/sub06_1.php","at":"2026-10-15T23:32:05.120Z","quote":"하계/동계캠핑시 전기사용량이 많은 냉/난방용품 등의 사용금지.(사이트당 전기용량 600W)","text":"최대 600W"}
+{"cid":"1194","attr":"POWER_FEE","value":10000,"grade":"OPERATOR","src":"operator_homepage","url":"http://mycamp.co.kr/sub06_1.php","at":"2026-10-18T12:39:56.262Z","quote":"캠핑장내 전기차 충전금지 위반시 전기요금 10,000원 부과","text":"1만원"}
+{"cid":"1194","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://mycamp.co.kr/sub06_1.php","at":"2026-10-18T12:39:56.262Z","quote":"하계/동계캠핑시 전기사용량이 많은 냉/난방용품 등의 사용금지.(사이트당 전기용량 600W)","text":"최대 600W"}
 {"cid":"1196","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1205","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1208","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -284,7 +285,7 @@
 {"cid":"1528","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1534","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1547","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1547","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.nakdongcamping.com/","at":"2026-10-15T23:30:15.524Z","quote":"전기 캠핑장 내 전기사용량은 600W로 규제되어 있습니다.","text":"최대 600W"}
+{"cid":"1547","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_discovered","url":"https://www.nakdongcamping.com/","at":"2026-10-18T12:31:53.973Z","quote":"전기 캠핑장 내 전기사용량은 600W로 규제되어 있습니다.","text":"최대 600W"}
 {"cid":"1554","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1585","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1587","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -348,7 +349,7 @@
 {"cid":"1984","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1986","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1993","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1993","attr":"POWER_FEE","value":3000,"grade":"OPERATOR","src":"operator_homepage","url":"https://camping.asanfmc.or.kr/main/index.php?m_cd=9","at":"2026-10-16T00:52:19.110Z","quote":"전기 사용 시(1사이트당) 3,000원","text":"3,000원"}
+{"cid":"1993","attr":"POWER_FEE","value":3000,"grade":"OPERATOR","src":"operator_discovered","url":"https://camping.asanfmc.or.kr/main/index.php?m_cd=9","at":"2026-10-18T12:17:39.348Z","quote":"전기 사용 시(1사이트당) 3,000원","text":"3,000원"}
 {"cid":"1999","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2000","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2014","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -384,6 +385,7 @@
 {"cid":"2220","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2226","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2228","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2230","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2232","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2239","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2249","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -398,12 +400,12 @@
 {"cid":"2304","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2314","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2329","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2350","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2355","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2358","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2359","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2363","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2372","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2372","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_discovered","url":"http://www.yongducamp.kr/bbs/content.php?co_id=note","at":"2026-10-18T12:24:45.765Z","quote":"· 고용량의 전열기구(600W 이상) 사용을 자제하여 주세요.","text":"최대 600W"}
 {"cid":"2373","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2394","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2399","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -554,8 +556,8 @@
 {"cid":"3263","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3264","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3271","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"3271","attr":"POWER_FEE","value":3000,"grade":"OPERATOR","src":"operator_homepage","url":"https://camp.pcfac.or.kr/","at":"2026-10-15T23:33:23.130Z","quote":"전기사용료 3,000원 포함","text":"3,000원"}
-{"cid":"3271","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://camp.pcfac.or.kr/","at":"2026-10-15T23:33:23.130Z","quote":"과도한 전기사용은 정전의 우려가 있으니 600W미만의 전기제품 사용을 권장 드리며, 고용량의 전열기구 사용을 자제바랍니다.","text":"최대 600W"}
+{"cid":"3271","attr":"POWER_FEE","value":3000,"grade":"OPERATOR","src":"operator_homepage","url":"https://camp.pcfac.or.kr/","at":"2026-10-18T12:45:45.668Z","quote":"전기사용료 3,000원 포함","text":"3,000원"}
+{"cid":"3271","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://camp.pcfac.or.kr/","at":"2026-10-18T12:45:45.668Z","quote":"과도한 전기사용은 정전의 우려가 있으니 600W미만의 전기제품 사용을 권장 드리며, 고용량의 전열기구 사용을 자제바랍니다.","text":"최대 600W"}
 {"cid":"3275","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3279","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3287","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -614,7 +616,7 @@
 {"cid":"3551","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3559","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3569","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"3569","attr":"POWER_MAX_W","value":750,"grade":"OPERATOR","src":"operator_homepage","url":"https://eco-school.ihc.go.kr/hb/camp/sub02_02","at":"2026-10-15T23:29:03.829Z","quote":"전기는 750W(15Am)미만으로 사용 가능합니다.","text":"최대 750W"}
+{"cid":"3569","attr":"POWER_MAX_W","value":750,"grade":"OPERATOR","src":"operator_homepage","url":"https://eco-school.ihc.go.kr/hb/camp/sub02_02","at":"2026-10-18T12:26:32.516Z","quote":"전기는 750W(15Am)미만으로 사용 가능합니다.","text":"최대 750W"}
 {"cid":"3575","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3577","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3578","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -632,6 +634,7 @@
 {"cid":"3633","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3636","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6731","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"6731","attr":"POWER_FEE","value":42000,"grade":"OPERATOR","src":"operator_discovered","url":"https://www.shsi.or.kr/PageLink.do?tempParam1=&link=forward:/PageContent.do&menuNo=030000&subMenuNo=020600&thirdMenuNo=020601","at":"2026-10-18T12:16:42.955Z","quote":"(데크 42,000원 + 전기료 5,000원)","text":"4.2만원"}
 {"cid":"6732","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6740","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6743","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -694,6 +697,7 @@
 {"cid":"7069","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7071","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7075","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7075","attr":"POWER_MAX_W","value":1000,"grade":"OPERATOR","src":"operator_homepage","url":"https://m.tongtutu.kr/0_tutu/html/camp_page_05.html","at":"2026-10-18T12:40:08.907Z","quote":"전력 소모가 많은 전열기구(1000w 이상) 사용을 금지합니다.","text":"최대 1000W"}
 {"cid":"7078","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7079","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7080","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -760,12 +764,12 @@
 {"cid":"7253","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7254","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7255","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7255","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.hwamyungcamping.com/reservation/rates","at":"2026-10-15T23:30:56.764Z","quote":"(한 사이트 총사용량 600W)","text":"최대 600W"}
+{"cid":"7255","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.hwamyungcamping.com/reservation/rates","at":"2026-10-18T12:35:09.613Z","quote":"(한 사이트 총사용량 600W)","text":"최대 600W"}
 {"cid":"7256","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7257","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7270","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7271","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7271","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_discovered","url":"https://mccamp.cauc.or.kr/node/?menu=020200","at":"2026-10-16T06:49:01.393Z","quote":"밀폐된 텐트안에서 전기용품(총 사용량 600w이하 제외) 및 화기용품의 사용을 금합니다.","text":"최대 600W"}
+{"cid":"7271","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_discovered","url":"https://mccamp.cauc.or.kr/node/?menu=020200","at":"2026-10-18T12:13:55.659Z","quote":"밀폐된 텐트안에서 전기용품(총 사용량 600w이하 제외) 및 화기용품의 사용을 금합니다.","text":"최대 600W"}
 {"cid":"7272","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7274","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7279","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -774,8 +778,9 @@
 {"cid":"7309","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7315","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7318","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7318","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://xn--om2bi2o9qdy7a48exzk3vf68fzzd.kr/room/camping.php","at":"2026-10-15T23:32:29.148Z","quote":"(모든 전기제품은 600W이하 제품만 사용 가능합니다.)","text":"최대 600W"}
+{"cid":"7318","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://xn--om2bi2o9qdy7a48exzk3vf68fzzd.kr/room/camping.php","at":"2026-10-18T12:41:53.795Z","quote":"(모든 전기제품은 600W이하 제품만 사용 가능합니다.)","text":"최대 600W"}
 {"cid":"7333","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7343","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7344","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7353","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7359","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -788,12 +793,15 @@
 {"cid":"7407","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7437","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7442","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7443","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7444","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7469","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7484","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7486","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7490","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7492","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7494","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7496","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7502","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7528","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7536","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -815,7 +823,7 @@
 {"cid":"7590","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7591","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7593","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7593","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://camp-sigonggan.com/sub/reservation.php?page=2","at":"2026-10-15T23:27:49.219Z","quote":"- 600W 이하 전열기구사용, 13kg 이하 LPG가스용기만 반입 가능합니다.","text":"최대 600W"}
+{"cid":"7593","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_discovered","url":"http://camp-sigonggan.com/sub/reservation.php?page=2","at":"2026-10-18T12:21:07.506Z","quote":"- 600W 이하 전열기구사용, 13kg 이하 LPG가스용기만 반입 가능합니다.","text":"최대 600W"}
 {"cid":"7594","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7597","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7603","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -843,7 +851,7 @@
 {"cid":"7735","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7740","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7741","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7741","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.bogwangcamping.com/pub/reserinfo.do","at":"2026-10-15T23:31:56.106Z","quote":"전기사용은 600W 미만으로 사용가능합니다 .","text":"최대 600W"}
+{"cid":"7741","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.bogwangcamping.com/pub/reserinfo.do","at":"2026-10-18T12:39:26.363Z","quote":"전기사용은 600W 미만으로 사용가능합니다 .","text":"최대 600W"}
 {"cid":"7742","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7745","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7747","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -891,7 +899,7 @@
 {"cid":"7879","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7880","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7883","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7883","attr":"POWER_MAX_W","value":1000,"grade":"OPERATOR","src":"operator_homepage","url":"http://gwp.hana-pnc.co.kr/page_FDhn44","at":"2026-10-16T05:45:05.964Z","quote":"사이트당 전기사용은 1KW를 초과하여 사용이 불가능합니다.","text":"최대 1000W"}
+{"cid":"7883","attr":"POWER_MAX_W","value":1000,"grade":"OPERATOR","src":"operator_homepage","url":"http://gwp.hana-pnc.co.kr/page_FDhn44","at":"2026-10-18T12:45:56.938Z","quote":"사이트당 전기사용은 1KW를 초과하여 사용이 불가능합니다.","text":"최대 1000W"}
 {"cid":"7886","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7893","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7894","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -909,6 +917,7 @@
 {"cid":"7916","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7925","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7926","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7928","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7929","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7930","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7931","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -919,7 +928,7 @@
 {"cid":"7944","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7953","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7956","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7956","attr":"POWER_MAX_W","value":500,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--939ap9fowi7mi22il0kvxl.kr/?page_id=6445","at":"2026-10-15T23:29:18.658Z","quote":"• 전기콘센트는 3구이며 전력은 500W입니다.","text":"최대 500W"}
+{"cid":"7956","attr":"POWER_MAX_W","value":500,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--939ap9fowi7mi22il0kvxl.kr/?page_id=6445","at":"2026-10-18T12:27:38.666Z","quote":"• 전기콘센트는 3구이며 전력은 500W입니다.","text":"최대 500W"}
 {"cid":"7958","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7961","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7963","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -930,20 +939,19 @@
 {"cid":"7973","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7975","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7981","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7981","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://jhcamp.kr/bbs/page.php?hid=p301","at":"2026-10-15T23:27:54.796Z","quote":"전기 사용은 600w 이하로 이용 가능합니다.","text":"최대 600W"}
+{"cid":"7981","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://jhcamp.kr/bbs/page.php?hid=p301","at":"2026-10-18T12:21:31.545Z","quote":"전기 사용은 600w 이하로 이용 가능합니다.","text":"최대 600W"}
 {"cid":"7983","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7988","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7991","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7996","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7997","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"8001","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8002","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8003","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8007","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8008","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8012","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8014","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"8014","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://noeuljin.com/page/%EC%9D%B4%EC%9A%A9%EC%95%88%EB%82%B4/","at":"2026-10-15T23:27:17.252Z","quote":"• 캠핑사이트의 전기 사용량은 600W까지 이며, 전기차 충전은 금지합니다.","text":"최대 600W"}
+{"cid":"8014","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://noeuljin.com/page/%EC%9D%B4%EC%9A%A9%EC%95%88%EB%82%B4/","at":"2026-10-18T12:19:01.455Z","quote":"• 캠핑사이트의 전기 사용량은 600W까지 이며, 전기차 충전은 금지합니다.","text":"최대 600W"}
 {"cid":"8015","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8017","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8019","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1000,7 +1008,7 @@
 {"cid":"8158","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8159","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8165","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"8165","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.gaboja7998.com/sub04_1.php","at":"2026-10-15T23:31:07.506Z","quote":"하계/동계캠핑시 전기사용량이 많은 냉/난방용품 등의 사용금지.(사이트당 전기용량 600W)","text":"최대 600W"}
+{"cid":"8165","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.gaboja7998.com/sub04_1.php","at":"2026-10-18T12:35:55.971Z","quote":"하계/동계캠핑시 전기사용량이 많은 냉/난방용품 등의 사용금지.(사이트당 전기용량 600W)","text":"최대 600W"}
 {"cid":"8167","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8170","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8174","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1023,7 +1031,7 @@
 {"cid":"100013","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100015","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100019","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100019","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--ig2b49eosl8pdb2a.com/page/page5","at":"2026-10-15T23:31:58.807Z","quote":"텐트 내 600W 이상의 고출력 전기용품은 사용하실 수 없습니다.","text":"최대 600W"}
+{"cid":"100019","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--ig2b49eosl8pdb2a.com/page/page5","at":"2026-10-18T12:39:37.582Z","quote":"텐트 내 600W 이상의 고출력 전기용품은 사용하실 수 없습니다.","text":"최대 600W"}
 {"cid":"100021","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100022","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100033","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1081,7 +1089,7 @@
 {"cid":"100205","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100209","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100210","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100210","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_discovered","url":"http://greenblueps.com/html/reserve.php?cate=01","at":"2026-10-16T06:57:17.373Z","quote":"- 사용전력이 600w가 넘어가면 안됩니다.","text":"최대 600W"}
+{"cid":"100210","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_discovered","url":"http://greenblueps.com/html/reserve.php?cate=01","at":"2026-10-18T12:27:57.811Z","quote":"- 사용전력이 600w가 넘어가면 안됩니다.","text":"최대 600W"}
 {"cid":"100211","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100216","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100217","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1118,7 +1126,7 @@
 {"cid":"100272","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100273","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100274","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100274","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://njcamping.or.kr/camping_facility/use_information.php","at":"2026-10-15T23:32:31.395Z","quote":"전력소모가 많은 전열기구(600W이상) 사용을 자제하여 주시기 바랍니다.","text":"최대 600W"}
+{"cid":"100274","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://njcamping.or.kr/camping_facility/use_information.php","at":"2026-10-18T12:42:01.960Z","quote":"전력소모가 많은 전열기구(600W이상) 사용을 자제하여 주시기 바랍니다.","text":"최대 600W"}
 {"cid":"100275","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100276","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100278","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1138,7 +1146,7 @@
 {"cid":"100295","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100296","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100298","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100298","attr":"POWER_MAX_W","value":1000,"grade":"OPERATOR","src":"operator_homepage","url":"https://camping808.com/reservation_info","at":"2026-10-15T23:27:06.682Z","quote":"최대 전력 사용량은 각 사이트당 1kw까지 사용 가능합니다.(난방기구 사용시 가스측정 & 일산화탄소감지 및경보기필수지참)","text":"최대 1000W"}
+{"cid":"100298","attr":"POWER_MAX_W","value":1000,"grade":"OPERATOR","src":"operator_homepage","url":"https://camping808.com/reservation_info","at":"2026-10-18T12:18:15.960Z","quote":"최대 전력 사용량은 각 사이트당 1kw까지 사용 가능합니다.(난방기구 사용시 가스측정 & 일산화탄소감지 및경보기필수지참)","text":"최대 1000W"}
 {"cid":"100299","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100300","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100301","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1235,6 +1243,7 @@
 {"cid":"100424","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100428","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100429","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100429","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--oy2b91o08c6xaj9wxnk.com/reserv/01","at":"2026-10-18T12:42:22.154Z","quote":"※ 전력 소모가 많은 전열기구(600w) 사용은 자제하여 주시기 바랍니다.(전기히터, 전기밥솥, 전기난로등 고용량 전열기구 사용 불가)","text":"최대 600W"}
 {"cid":"100431","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100432","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100433","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1271,7 +1280,7 @@
 {"cid":"100476","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100478","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100479","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100479","attr":"POWER_MAX_W","value":800,"grade":"OPERATOR","src":"operator_homepage","url":"https://campriverpark.kr/reser.php?id=5","at":"2026-10-15T23:32:41.480Z","quote":"+ 캠프님들의 안전을 위해 전기 사용은 텐트당 800w 이내에서 사용 가능하고 전등 전기장판외고용량의 전열기 및 전기용품(커피포트,전기밥솥,전자렌지,히터등)사용을 엄격히 금하며,","text":"최대 800W"}
+{"cid":"100479","attr":"POWER_MAX_W","value":800,"grade":"OPERATOR","src":"operator_homepage","url":"https://campriverpark.kr/reser.php?id=5","at":"2026-10-18T12:42:29.041Z","quote":"+ 캠프님들의 안전을 위해 전기 사용은 텐트당 800w 이내에서 사용 가능하고 전등 전기장판외고용량의 전열기 및 전기용품(커피포트,전기밥솥,전자렌지,히터등)사용을 엄격히 금하며,","text":"최대 800W"}
 {"cid":"100480","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100481","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100482","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1364,7 +1373,7 @@
 {"cid":"100603","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100604","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100606","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100606","attr":"POWER_MAX_W","value":1300,"grade":"OPERATOR","src":"operator_homepage","url":"https://sannae.kr/rule","at":"2026-10-16T05:43:03.360Z","quote":"전력: 1300W, 추가 전력 불가","text":"최대 1300W"}
+{"cid":"100606","attr":"POWER_MAX_W","value":1300,"grade":"OPERATOR","src":"operator_homepage","url":"https://sannae.kr/rule","at":"2026-10-18T12:43:15.365Z","quote":"전력: 1300W, 추가 전력 불가","text":"최대 1300W"}
 {"cid":"100607","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100608","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100609","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1442,7 +1451,7 @@
 {"cid":"100702","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100703","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100704","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100704","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--369a96jx3r.kr/05reservation03.html","at":"2026-10-15T23:30:05.162Z","quote":"- 고 전력의 전자 제품은 감전/화재 위험으로 사용 불가(사이트 당 사용량은 600W 이하)","text":"최대 600W"}
+{"cid":"100704","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--369a96jx3r.kr/05reservation03.html","at":"2026-10-18T12:30:57.134Z","quote":"- 고 전력의 전자 제품은 감전/화재 위험으로 사용 불가(사이트 당 사용량은 600W 이하)","text":"최대 600W"}
 {"cid":"100705","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100706","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100708","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1462,12 +1471,14 @@
 {"cid":"100725","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100726","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100727","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100728","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100729","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100730","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100731","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100733","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100734","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100735","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100736","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100737","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100738","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100739","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1477,7 +1488,7 @@
 {"cid":"100745","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100746","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100748","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100748","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--wh1bx90au2c9wbj5qwtebvhpb.com/page/page4","at":"2026-10-15T23:33:15.288Z","quote":"전력 소모가 많은 전열기구(600w) 사용은 자제하여 주시기 바랍니다.","text":"최대 600W"}
+{"cid":"100748","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--wh1bx90au2c9wbj5qwtebvhpb.com/page/page4","at":"2026-10-18T12:45:23.129Z","quote":"전력 소모가 많은 전열기구(600w) 사용은 자제하여 주시기 바랍니다.","text":"최대 600W"}
 {"cid":"100750","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100751","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100752","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1495,6 +1506,7 @@
 {"cid":"100772","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100773","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100774","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100775","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100776","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100778","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100780","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1506,7 +1518,7 @@
 {"cid":"100788","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100789","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100790","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100790","attr":"POWER_MAX_W","value":1000,"grade":"OPERATOR","src":"operator_homepage","url":"http://c-camping.co.kr/theme/basic/html/information.php","at":"2026-10-15T23:28:05.723Z","quote":"전열기구 1KW이상 사용을 금지합니다.","text":"최대 1000W"}
+{"cid":"100790","attr":"POWER_MAX_W","value":1000,"grade":"OPERATOR","src":"operator_homepage","url":"http://c-camping.co.kr/theme/basic/html/information.php","at":"2026-10-18T12:22:03.996Z","quote":"전열기구 1KW이상 사용을 금지합니다.","text":"최대 1000W"}
 {"cid":"100792","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100793","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100796","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1542,7 +1554,6 @@
 {"cid":"100837","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100838","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100839","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100840","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100841","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100843","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100845","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1555,12 +1566,13 @@
 {"cid":"100856","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100857","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100858","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100860","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100861","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100862","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100863","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100864","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100865","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100865","attr":"POWER_MAX_W","value":400,"grade":"OPERATOR","src":"operator_homepage","url":"http://dusonggreen.kr/html/reservation.html","at":"2026-10-15T23:31:41.688Z","quote":"오토캠핑장 이용시 : 순간 전력이 많이 소모되는 전기제품(400W이상)의 사용을 절대 금지합니다.","text":"최대 400W"}
+{"cid":"100865","attr":"POWER_MAX_W","value":400,"grade":"OPERATOR","src":"operator_homepage","url":"http://dusonggreen.kr/html/reservation.html","at":"2026-10-18T12:38:27.855Z","quote":"오토캠핑장 이용시 : 순간 전력이 많이 소모되는 전기제품(400W이상)의 사용을 절대 금지합니다.","text":"최대 400W"}
 {"cid":"100866","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100868","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100869","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1684,11 +1696,10 @@
 {"cid":"101028","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101029","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101030","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101031","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101035","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101036","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101037","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101037","attr":"POWER_MAX_W","value":800,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.5emotion.co.kr/views/info/?gn=1&sn=2&Ln=2","at":"2026-10-15T23:31:29.508Z","quote":"전기사용량은’800W/h’이하로 제한 됩니다.","text":"최대 800W"}
+{"cid":"101037","attr":"POWER_MAX_W","value":800,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.5emotion.co.kr/views/info/?gn=1&sn=2&Ln=2","at":"2026-10-18T12:37:30.787Z","quote":"전기사용량은’800W/h’이하로 제한 됩니다.","text":"최대 800W"}
 {"cid":"101038","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101038","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://choiscamping.com/document/reserv","at":"2026-10-15T23:31:29.678Z","quote":"- 전기용품은 안전인증을 받은 것에 한해 총 600w 이하로 사용해주세요.","text":"최대 600W"}
 {"cid":"101039","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1696,7 +1707,7 @@
 {"cid":"101041","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101043","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101044","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101044","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://narocamp.com/","at":"2026-10-16T00:55:37.757Z","quote":"- 600w이상 전기제품 사용제한","text":"최대 600W"}
+{"cid":"101044","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://narocamp.com/","at":"2026-10-18T12:22:16.984Z","quote":"- 600w이상 전기제품 사용제한","text":"최대 600W"}
 {"cid":"101047","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101048","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101049","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1711,7 +1722,7 @@
 {"cid":"101061","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101062","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101063","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101063","attr":"POWER_MAX_W","value":1100,"grade":"OPERATOR","src":"operator_homepage","url":"https://campnomade.co.kr/notice_board/","at":"2026-10-15T23:31:17.590Z","quote":"오토캠핑, 전기사용 1,100W 으로 변경 하였습니다.","text":"최대 1100W"}
+{"cid":"101063","attr":"POWER_MAX_W","value":1100,"grade":"OPERATOR","src":"operator_homepage","url":"https://campnomade.co.kr/notice_board/","at":"2026-10-18T12:36:47.574Z","quote":"오토캠핑, 전기사용 1,100W 으로 변경 하였습니다.","text":"최대 1100W"}
 {"cid":"101065","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101066","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101068","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1736,7 +1747,7 @@
 {"cid":"101092","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101093","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101094","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101094","attr":"POWER_MAX_W","value":1000,"grade":"OPERATOR","src":"operator_homepage","url":"https://starluvdream.modoo.ro/","at":"2026-10-15T23:26:32.748Z","quote":"- 고출력 개인 전자기기 사용을 제한합니다.(총 1kw 미만으로만 사용하시기 바랍니다.(미 이행으로 인한 전력 문제 발생시 손해배상 청구를 할 수 있습니다)","text":"최대 1000W"}
+{"cid":"101094","attr":"POWER_MAX_W","value":1000,"grade":"OPERATOR","src":"operator_homepage","url":"https://starluvdream.modoo.ro/","at":"2026-10-18T12:15:35.709Z","quote":"- 고출력 개인 전자기기 사용을 제한합니다.(총 1kw 미만으로만 사용하시기 바랍니다.(미 이행으로 인한 전력 문제 발생시 손해배상 청구를 할 수 있습니다)","text":"최대 1000W"}
 {"cid":"101095","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101096","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101099","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1833,7 +1844,7 @@
 {"cid":"101207","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101209","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101210","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101210","attr":"POWER_MAX_W","value":500,"grade":"OPERATOR","src":"operator_discovered","url":"https://solhyang.revrun.kr/","at":"2026-10-16T07:02:34.621Z","quote":"전기 500W","text":"최대 500W"}
+{"cid":"101210","attr":"POWER_MAX_W","value":500,"grade":"OPERATOR","src":"operator_discovered","url":"https://solhyang.revrun.kr/","at":"2026-10-18T12:37:10.898Z","quote":"전기 500W","text":"최대 500W"}
 {"cid":"101211","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101212","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101214","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1853,7 +1864,7 @@
 {"cid":"101230","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101231","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101232","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101232","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bb0bk79aj0j67b2ui.jdweb.kr/sub2.php?num=2_1","at":"2026-10-16T05:40:23.879Z","quote":"전기사용 총 용량은 600W이하입니다.","text":"최대 600W"}
+{"cid":"101232","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bb0bk79aj0j67b2ui.jdweb.kr/sub2.php?num=2_1","at":"2026-10-18T12:37:59.774Z","quote":"전기사용 총 용량은 600W이하입니다.","text":"최대 600W"}
 {"cid":"101233","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101234","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101236","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1922,6 +1933,7 @@
 {"cid":"101329","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101331","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101332","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101335","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101336","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101337","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101339","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2060,6 +2072,7 @@
 {"cid":"101569","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101570","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101574","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101576","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101579","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101583","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101584","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2080,18 +2093,21 @@
 {"cid":"101609","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101610","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101611","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101614","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101616","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101617","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101618","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101620","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101621","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101621","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--oy2bp0c4z1a85f.kr/sub06_1.php","at":"2026-10-15T23:31:55.045Z","quote":"하계/동계캠핑시 전기사용량이 많은 냉/난방용품 등의 사용금지.(사이트당 전기용량 600W)","text":"최대 600W"}
+{"cid":"101621","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--oy2bp0c4z1a85f.kr/sub06_1.php","at":"2026-10-18T12:39:12.169Z","quote":"하계/동계캠핑시 전기사용량이 많은 냉/난방용품 등의 사용금지.(사이트당 전기용량 600W)","text":"최대 600W"}
 {"cid":"101623","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101626","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101627","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101629","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101632","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101633","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101635","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101636","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101637","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101640","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101641","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2108,7 +2124,7 @@
 {"cid":"101655","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101657","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101659","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101659","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_discovered","url":"http://www.gosumokwon.co.kr/page/page10","at":"2026-10-16T07:03:15.909Z","quote":"11 사이트내 전기장판등 을 사이트당 전력사용량은 1k이하이며 600w 이상전열기구사용을금합니다.","text":"최대 600W"}
+{"cid":"101659","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_discovered","url":"http://www.gosumokwon.co.kr/page/page10","at":"2026-10-18T12:38:20.627Z","quote":"11 사이트내 전기장판등 을 사이트당 전력사용량은 1k이하이며 600w 이상전열기구사용을금합니다.","text":"최대 600W"}
 {"cid":"101660","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101662","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101664","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2126,6 +2142,7 @@
 {"cid":"101696","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101709","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101710","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101712","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101714","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101717","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101721","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2147,7 +2164,7 @@
 {"cid":"101751","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101756","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101759","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101759","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://xn--ok0bv55b7xa.com/include/sub_page_05.html","at":"2026-10-16T00:56:14.082Z","quote":"고용량 전기제품 사용금지 (600W 이하 사용가능) “평상 전기사용 금지” (사이트 전기 리더선이용 무단사용 절대금지)","text":"최대 600W"}
+{"cid":"101759","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://xn--ok0bv55b7xa.com/include/sub_page_05.html","at":"2026-10-18T12:23:08.120Z","quote":"고용량 전기제품 사용금지 (600W 이하 사용가능) “평상 전기사용 금지” (사이트 전기 리더선이용 무단사용 절대금지)","text":"최대 600W"}
 {"cid":"101760","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101761","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101763","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2188,7 +2205,7 @@
 {"cid":"101852","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101855","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101857","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101857","attr":"POWER_MAX_W","value":1100,"grade":"OPERATOR","src":"operator_homepage","url":"http://kylinvillaresort.com/camping.html?ckattempt=1","at":"2026-10-16T00:55:51.048Z","quote":"사이트의 전력 사용량 : 1,100W","text":"최대 1100W"}
+{"cid":"101857","attr":"POWER_MAX_W","value":1100,"grade":"OPERATOR","src":"operator_homepage","url":"http://kylinvillaresort.com/camping.html?ckattempt=1","at":"2026-10-18T12:22:31.082Z","quote":"사이트의 전력 사용량 : 1,100W","text":"최대 1100W"}
 {"cid":"101861","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101862","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101864","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2211,6 +2228,7 @@
 {"cid":"101913","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101916","attr":"POWER_AVAILABLE","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030122","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"101916","attr":"POWER_MAX_W","value":600,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030122","at":"2026-10-16T09:00:00+09:00","text":"최대 600W"}
+{"cid":"101919","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101920","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101926","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101927","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2249,7 +2267,7 @@
 {"cid":"102004","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102005","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102006","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102006","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.whitecamp.co.kr/guide.html?ckattempt=1","at":"2026-10-16T00:58:02.722Z","quote":"캠핑장 내 전기 사용 제한은 사이트당 총600W 이하로 사용(법적 제한)하셔야 합니다.","text":"최대 600W"}
+{"cid":"102006","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.whitecamp.co.kr/guide.html","at":"2026-10-18T12:26:14.282Z","quote":"캠핑장 내 전기 사용 제한은 사이트당 총600W 이하로 사용(법적 제한)하셔야 합니다.","text":"최대 600W"}
 {"cid":"102008","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102011","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102014","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2276,6 +2294,7 @@
 {"cid":"102107","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102112","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102114","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102117","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102119","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102121","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102125","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2285,7 +2304,7 @@
 {"cid":"102138","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102146","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102148","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102148","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--le5b8ek5du5cr6etwdvwq.com/05reservation02.html","at":"2026-10-15T23:28:17.635Z","quote":"- 고 전력의 전자 제품은 감전/화재 위험으로 사용 불가(사이트 당 사용량은 600W 이하)","text":"최대 600W"}
+{"cid":"102148","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--le5b8ek5du5cr6etwdvwq.com/05reservation02.html","at":"2026-10-18T12:22:50.969Z","quote":"- 고 전력의 전자 제품은 감전/화재 위험으로 사용 불가(사이트 당 사용량은 600W 이하)","text":"최대 600W"}
 {"cid":"102156","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102165","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102166","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2297,7 +2316,9 @@
 {"cid":"102186","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102189","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102194","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102200","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102201","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102206","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102209","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102210","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102211","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2322,8 +2343,10 @@
 {"cid":"102337","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102338","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102340","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102348","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102352","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102353","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102365","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102368","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"pilot-002-sureui","attr":"POWER_AVAILABLE","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-002-sureui","attr":"POWER_MAX_W","value":600,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032","at":"2026-10-15T09:00:00+09:00","text":"최대 600W"}

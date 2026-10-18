@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-17T20:37:11.435Z",
+  "generated_at": "2026-10-18T20:43:22.417Z",
   "registry_version": 1,
   "range": {
-    "from": "2026-10-18T00:00:00+09:00",
-    "to": "2027-02-14T23:59:00+09:00"
+    "from": "2026-10-19T00:00:00+09:00",
+    "to": "2027-02-15T23:59:00+09:00"
   },
   "events": [
     {
@@ -983,6 +983,28 @@
         "tier": "B"
       },
       "needs_verification": false
+    },
+    {
+      "id": "foresttrip-national-weekend-reopen:REOPEN:2027-02-15T09:00:00+09:00",
+      "rule_id": "foresttrip-national-weekend-reopen",
+      "provider_id": "foresttrip",
+      "campground_ids": [],
+      "type": "REOPEN",
+      "at": "2027-02-15T09:00:00+09:00",
+      "date": "2027-02-15",
+      "time_known": true,
+      "label": "국립자연휴양림 주말 미결제분 선착순",
+      "stay": {
+        "month": "2027-03"
+      },
+      "note": null,
+      "source": {
+        "url": "https://www.foresttrip.go.kr/pot/cc/fa/selectFaqBbrssListView.do?bbrssMsterId=BBRSSMSTER_00000002&ctgryCd=&hmpgId=FRIP&nowPage=1&srwrd=%EC%A3%BC%EC%A4%91&twbbsId=",
+        "title": "숲나들e 자주 묻는 질문 — 미결제분 전환(일자는 공지 재확인 필요)",
+        "checked_at": "2026-10-12",
+        "tier": "C"
+      },
+      "needs_verification": true
     }
   ],
   "recurring": [
