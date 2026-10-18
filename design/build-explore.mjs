@@ -15,6 +15,9 @@ await writeFile(here("../camping-atlas/app/site-header.css"), `/* design/site-he
 await writeFile(here("../camping-atlas/app/site-header.generated.ts"), `// design/site-header.mjs에서 생성 — 직접 고치지 말 것\nexport const SITE_HEADER_HTML = ${JSON.stringify(siteHeader("./", "home"))};\nexport const SITE_TABBAR_HTML = ${JSON.stringify(siteTabbar("./", "home"))};\nexport const SITE_HEADER_JS = ${JSON.stringify(SITE_HEADER_JS)};\n`);
 const src = `<title>모여라 캠핑 · 전국 캠핑장 찾기</title>
 ${THEME_COLOR_META}
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 ${base}

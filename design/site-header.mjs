@@ -28,11 +28,10 @@ const fsvg = (k) => `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="t
 const svg = (k) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[k]}</svg>`;
 // 메뉴(모든 페이지 같은 순서·문구). 홈 React 헤더도 이 문자열을 그대로 넣는다.
 export const MENU = [
-  { id: "explore", label: "캠핑장 찾기", tab: "찾기", href: "explore/", icon: "search" },
-  // v4: 키워드·테마 말고 지도로도 찾는다. 같은 탐색 화면을 지도 배치로 연다(정보는 같다).
+  { id: "explore", label: "찾기", tab: "찾기", href: "explore/", icon: "search" },
   { id: "map", label: "지도", tab: "지도", href: "explore/?view=map", icon: "map" },
-  // 모바일 하단 탭은 다섯 칸을 넘기지 않는다. 테마는 찾기 화면의 ‘테마’ 탭과 PC 메뉴로 들어간다.
-  { id: "themes", label: "테마", tab: "테마", href: "explore/themes/", icon: "sparkles", noTab: true },
+  // 비교는 저장함과 독립된 핵심 탐색 기능이다. 모바일은 다섯 칸 한계를 지켜 내 캠핑에서 연다.
+  { id: "compare", label: "비교", tab: "비교", href: "explore/passport/#compare", icon: "sparkles", noTab: true },
   { id: "open", label: "예약 일정", tab: "예약 일정", href: "explore/openings/", icon: "bell" },
   // v3 사이트맵: ‘관심’을 ‘내 캠핑’으로 넓혀 관심·최근 본·비교함·내 세팅을 한곳에 모은다(주소는 그대로).
   { id: "passport", label: "내 캠핑", tab: "내 캠핑", href: "explore/passport/", icon: "heart" },
@@ -88,11 +87,14 @@ if(t.dataset.shDel){var u=users().filter(function(x){return x.id!==t.dataset.shD
 if(t.id==="shAdd"){add();return}
 if(t.dataset.fs&&t.closest("#shFs")){fs(t.dataset.fs);return}});
 document.addEventListener("keydown",function(e){if(e.key==="Escape")menu(false);if(e.key==="Enter"&&e.target.id==="shName"){e.preventDefault();if(e.isComposing||e.keyCode===229)return;add()}});
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",draw);else draw();})();`;
+function syncHeader(){var h=document.querySelector(".gnb");if(h)h.classList.toggle("scrolled",window.scrollY>8)}
+window.addEventListener("scroll",syncHeader,{passive:true});
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",function(){draw();syncHeader()});else{draw();syncHeader()}})();`;
 export const SITE_HEADER_SCRIPT = `<script>${SITE_HEADER_JS}</script>`;
 export const SITE_HEADER_CSS = `${BRAND_CSS}
 /* ===== 공통 사이트 헤더 v3(홈·탐색·보조 페이지 동일) — 캔버스 유리 바 + 알약 메뉴, 모바일은 떠 있는 탭 바 ===== */
-.gnb { position: sticky; top: 0; z-index: 70; background: color-mix(in srgb, var(--mc-canvas) 84%, transparent); backdrop-filter: saturate(1.3) blur(14px); -webkit-backdrop-filter: saturate(1.3) blur(14px); border-bottom: 1px solid color-mix(in srgb, var(--mc-line) 70%, transparent); color: var(--mc-ink); }
+.gnb { position: sticky; top: 0; z-index: 70; padding-top: env(safe-area-inset-top, 0px); background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; border-bottom: 1px solid transparent; color: var(--mc-ink); transition: background .2s ease, border-color .2s ease, backdrop-filter .2s ease; }
+.gnb.scrolled { background: color-mix(in srgb, var(--mc-canvas) 84%, transparent); backdrop-filter: saturate(1.3) blur(14px); -webkit-backdrop-filter: saturate(1.3) blur(14px); border-bottom-color: color-mix(in srgb, var(--mc-line) 70%, transparent); }
 .gnb-in { box-sizing: border-box; width: 100%; max-width: none; height: 68px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 48px); display: flex; align-items: center; gap: 24px; }
 .sh-brand { display: inline-flex; align-items: center; gap: 10px; flex: none; color: var(--mc-ink); text-decoration: none; white-space: nowrap; }
 .sh-brand > span { width: 38px; height: 38px; border-radius: 13px; display: grid; place-items: center; background: var(--mc-accent, #00875a); color: #fff; }
@@ -147,7 +149,7 @@ export const SITE_HEADER_CSS = `${BRAND_CSS}
   .sh-nav { display: none; }
   .sh-brand small { display: none; }
   .sh-badge { max-width: 6.5rem; padding-right: 10px; }
-  .gnb-tabbar { position: fixed; left: 10px; right: 10px; bottom: calc(8px + env(safe-area-inset-bottom)); z-index: 70; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 6px; border-radius: 26px; background: rgba(255,255,255,.86); backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3); box-shadow: 0 8px 28px rgba(16,20,20,.14); border: 0; }
+  .gnb-tabbar { position: fixed; left: max(10px, env(safe-area-inset-left)); right: max(10px, env(safe-area-inset-right)); bottom: calc(8px + env(safe-area-inset-bottom)); z-index: 70; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 6px; border-radius: 26px; background: rgba(255,255,255,.86); backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3); box-shadow: 0 8px 28px rgba(16,20,20,.14); border: 0; }
   .gnb-tabbar a { display: grid; justify-items: center; gap: 3px; padding: 7px 0 6px; border-radius: 20px; color: var(--mc-ink-3); text-decoration: none; font-size: .78rem; font-weight: 700; white-space: nowrap; letter-spacing: -.02em; }
   .gnb-tabbar a[aria-current="page"] { color: var(--mc-accent-ink, #0a6e45); background: var(--mc-accent-tint, #e4f4ea); font-weight: 900; }
   .gnb-tabbar svg { width: 24px; height: 24px; }

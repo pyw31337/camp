@@ -645,6 +645,18 @@ function renderChips() {
 }
 
 const tipBtn = (html, label = "설명·출처 보기") => `<button type="button" class="tip" aria-label="${label}" data-tip="${esc(html)}">${ic("#l-info", "i-xs")}</button>`;
+function renderHero() {
+  const summary = $("#heroSummary");
+  if (!summary || !META) return;
+  const total = Number(META.count ?? ALL.length ?? 0).toLocaleString();
+  if (!isFreshAvailability()) {
+    summary.textContent = `전국 ${total}곳 · 사진 · 요금 · 예약 채널`;
+    return;
+  }
+  const records = AVAILABILITY.records.filter((record) => record.state === "OFFICIAL_APPLICATION_OPEN");
+  const camps = new Set(records.map((record) => record.campground_id)).size;
+  summary.textContent = `전국 ${total}곳 · 지금 공식 접수 ${camps.toLocaleString()}곳`;
+}
 function renderAvailabilityQuery() {
   const checkIn = $("#checkIn"), checkOut = $("#checkOut"), clear = $("#availabilityClear"), notice = $("#availabilityNotice");
   if (!checkIn || !checkOut || !clear || !notice) return;
@@ -2622,7 +2634,7 @@ async function boot() {
     return;
   }
   if (state.q) $("#q").value = state.q;
-  renderAvailabilityQuery(); renderSetupQuery(); renderChips(); renderList(); renderCompareBar(); head(); initMap();
+  renderHero(); renderAvailabilityQuery(); renderSetupQuery(); renderChips(); renderList(); renderCompareBar(); head(); initMap();
   if (new URLSearchParams(location.search).get("view") === "map") setView("map");
   // 목록 끝에 닿으면 자동으로 더 불러온다(수백 곳도 끊김 없이).
   new IntersectionObserver((es) => { if (es.some((x) => x.isIntersecting) && !$("#moreBtn").hidden) { state.shown += PAGE; renderListOnly(); } }, { rootMargin: "600px" }).observe($("#moreBtn"));

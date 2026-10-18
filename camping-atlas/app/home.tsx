@@ -24,7 +24,6 @@ type Opening = { at: string; tk: boolean; id: string; name: string; where: strin
 type FeaturedCamp = { id: string; name: string; where: string; line: string | null; ph: string; rt: boolean; rv?: { n: number; p: [string, number][]; c: [string, number][] }; bd?: [string, string][] };
 type FeaturedTheme = { id: string; label: string; desc: string; count: number; camps: FeaturedCamp[] };
 type Featured = { total: number; photo_count: number; themes: FeaturedTheme[] };
-type ExplorerMeta = { count: number; stats?: { electricity_registered?: number; site_size_registered?: number; ground_registered?: number } };
 const largeOfficialPhoto = (path: string) => path.replace(/-t\.webp(?=$|[?#])/, "-l.webp");
 type Catalog = {
   generated_at: string;
@@ -80,7 +79,6 @@ export default function Home() {
   const [selectedCamp, setSelectedCamp] = useState<Camp | null>(null);
   const [catalog, setCatalog] = useState<Catalog>(fallbackCatalog);
   const [featured, setFeatured] = useState<Featured | null>(null);
-  const [explorerMeta, setExplorerMeta] = useState<ExplorerMeta | null>(null);
   // 공통 헤더(이름 뱃지·설정)는 모든 페이지와 같은 스크립트로 움직인다.
   useEffect(() => { if (!(window as unknown as { moyeoraUser?: unknown }).moyeoraUser) { const el = document.createElement("script"); el.textContent = SITE_HEADER_JS; document.body.appendChild(el); } }, []);
   const [openings, setOpenings] = useState<Opening[] | null>(null);
@@ -96,16 +94,6 @@ export default function Home() {
     fetch("./explore/data/featured.json", { signal: controller.signal }).then((r) => (r.ok ? r.json() : null)).then((d) => { if (d?.themes?.length) setFeatured(d as Featured); }).catch(() => undefined);
     return () => controller.abort();
   }, []);
-  // 홈에서도 전국 탐색의 실제 범위와 조건 커버리지를 바로 보인다. 캠핑장별 상세
-  // 데이터는 탐색 화면에서만 불러와 홈 첫 화면을 가볍게 유지한다.
-  useEffect(() => {
-    const controller = new AbortController();
-    fetch("./explore/data/meta.json", { signal: controller.signal }).then((r) => (r.ok ? r.json() : null)).then((d) => {
-      if (typeof d?.count === "number") setExplorerMeta(d as ExplorerMeta);
-    }).catch(() => undefined);
-    return () => controller.abort();
-  }, []);
-
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
       try { setSaved(JSON.parse(window.localStorage.getItem("moyeora-camping-saved") ?? "[]")); }
@@ -149,12 +137,18 @@ export default function Home() {
     const params = new URLSearchParams();
     if (keyword.trim() && keyword.trim() !== "전국") params.set("q", keyword.trim());
     const gearKind: Record<string, string> = { 카라반: "t=trailer", 차박: "k=AUTO_PITCH" };
+    // 탐색은 별도 정적 앱이라 클라이언트 라우터 상태를 넘기지 않고 전체 주소로 연다.
+    // eslint-disable-next-line @next/next/no-location-assign-relative-destination
     window.location.assign(`explore/#${[params.toString(), gearKind[gear]].filter(Boolean).join("&")}`);
   };
   const selectCamp = (camp: Camp) => { setSelectedCamp(camp); window.requestAnimationFrame(() => scrollTo("#camp-detail")); };
   const CATEGORY_KIND: Record<string, string> = { 오토캠핑: "AUTO_PITCH", 캠핑: "PITCH", 타프존: "TARP_ZONE", 쉘터존: "SHELTER_ZONE", 카라반: "CARAVAN_RENTAL", 글램핑: "GLAMPING", 캠프닉: "CAMPNIC_DAY" };
   const selectCategory = (category: string) => {
-    if (CATEGORY_KIND[category]) { window.location.assign(`explore/#k=${CATEGORY_KIND[category]}`); return; }
+    if (CATEGORY_KIND[category]) {
+      // eslint-disable-next-line @next/next/no-location-assign-relative-destination
+      window.location.assign(`explore/#k=${CATEGORY_KIND[category]}`);
+      return;
+    }
     setSelectedCategory(category === selectedCategory ? "전체" : category); scrollTo("#search");
   };
   const dataState = catalog.sources.gocamping.state === "PUBLISHED" ? `고캠핑 ${catalog.counts.gocamping_records?.toLocaleString("ko-KR")}곳 동기화` : catalog.sources.gocamping.state === "PENDING_PERSISTENCE_REVIEW" ? "고캠핑 수집 완료 · 공개 전 권리 검토" : "고캠핑 API 동기화 대기";
@@ -165,7 +159,7 @@ export default function Home() {
     <div className="may-shell">
       <section className="may-hero" aria-label="캠핑 탐색">
         <picture><source media="(max-width: 760px)" srcSet="images/hero-home-m.webp" /><img src="images/hero-home.webp" alt="해 질 녘 산골짜기 캠핑장에 불 켜진 텐트들" /></picture><div className="may-hero-overlay" /><span className="may-hero-tip"><InfoTip label="사진 출처 보기">사진: 일곱식구 캠핑장(전북 정읍) · 한국관광공사 고캠핑 공식 등록 사진</InfoTip></span>
-        <div className="may-hero-copy"><h1><span>전국 {featured ? featured.total.toLocaleString("ko-KR") : "3,116"}곳 캠핑장,</span><span>사진 보고 바로 예약</span></h1><p>사이트·시설·주변 정보와 AI 장단점 분석, 예약 오픈 일정까지<br />한 화면에서 비교하세요.</p></div>
+        <div className="may-hero-copy"><h1><span>이번 주말,</span><span>빈자리부터.</span></h1><p>전국 {featured ? featured.total.toLocaleString("ko-KR") : "3,116"}곳 · 사진 · 요금 · 예약 채널</p></div>
         <div className="may-hero-stats" aria-label="예약 오픈"><a href="explore/openings/"><small><CalendarClock size={14} />이번 주 예약 오픈</small><strong>{weekCount ?? "–"}<i>곳</i></strong></a></div>
         <form className="may-searchbox" onSubmit={runSearch}>
           
@@ -179,13 +173,10 @@ export default function Home() {
         </form>
       </section>
 
-      <section className="may-explorer-direct" aria-label="전국 캠핑장 조건 탐색">
-        <div><span><Database size={15} />전국 3,116곳 캠핑장 AI 인텔리전스 DB 구축 완료</span><h2>전국 캠핑장 탐색 & 실시간 AI 분석</h2><p>화장실 청결도·소음·온수·주차 장단점(1,245곳)과 실시간 매너타임·할인 이벤트, 주변 화장실·마트 로드뷰를 바로 확인하세요.</p></div>
-        <div className="may-explorer-stats"><b>{(explorerMeta?.count ?? featured?.total ?? 3116).toLocaleString("ko-KR")}곳</b><span>후기 16,870건 · 영상 6,732건 · 사진 59,834건</span></div>
-        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
-          <a href="explore/">전국 캠핑장 찾기 <ArrowRight size={16} /></a>
-          <a href="explore/?view=map" style={{ background: "#253b30", color: "#fff", padding: "10px 18px", borderRadius: "12px", textDecoration: "none", fontWeight: 700, fontSize: "0.875rem" }}>카카오 지도로 보기</a>
-        </div>
+      <section className="may-explore-ways" aria-label="캠핑장 탐색 방식">
+        <a href="explore/"><span><Search size={21} /></span><b>키워드</b><small>이름 · 지역 · 조건</small></a>
+        <a href="explore/themes/"><span><TentTree size={21} /></span><b>테마</b><small>계곡 · 반려견 · 키즈</small></a>
+        <a href="explore/?view=map"><span><MapPin size={21} /></span><b>지도</b><small>내 주변 · 행정구역</small></a>
       </section>
 
       <section className="may-categories" aria-label="캠핑 형태">{categories.map((category) => <button key={category} type="button" className={selectedCategory === category ? "selected" : ""} onClick={() => selectCategory(category)}>{category === "무료" ? <span className="may-free-icon">₩</span> : category === "오토캠핑" || category === "카라반" ? <Car size={17} /> : <TentTree size={17} />}<span>{category}</span></button>)}</section>

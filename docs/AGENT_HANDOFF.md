@@ -5,6 +5,10 @@
 
 ## 현재 상태
 
+- **운영 UI 적용(2026-10-18, Codex)**: Studio 시안을 별도 데모로 남기지 않고 실제 `/`·`/explore/` 생성 소스에 적용했다. 공통 헤더는 데스크톱 `찾기·지도·비교` 우선, 홈은 실제 `featured.json`의 테마 컬렉션, 탐색 히어로는 `이번 주말, 빈자리부터.`와 실제 카탈로그 수(3,116)를 보인다. 기존 카드의 5장 공식 사진 캐러셀·`01/02/03` 조건 행·근거 있는 요금대·주변 인프라·후기 요약, 상세의 예약·규격/요금·현장조건·미디어·주변/로드뷰·기본정보/댓글은 유지했다.
+- **안전영역·반응형(2026-10-18, Codex)**: `viewport-fit=cover`, PWA manifest, 상단 `safe-area-inset-top`, 하단 탭·상세 예약 CTA의 `safe-area-inset-bottom`을 적용했다. 초기 헤더는 히어로와 겹치고 스크롤 뒤에만 유리 배경을 쓴다. 320px에서 문서 폭 304px/뷰포트 319px으로 전역 가로 넘침이 없음을 확인했다. 화면 밖으로 나가는 칩은 `.chips`의 의도된 가로 스와이프다.
+- **이번 검증(2026-10-18, Codex)**: `node design/build-explore.mjs`, `node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public/explore`, `node --check design/explore/_app.js`, `node --check design/site-header.mjs`, `npm --prefix camping-atlas run lint`, `npm --prefix camping-atlas run build:pages`, `git diff --check` 통과. 로컬 320px 탐색 화면과 실제 상세 프로필 `#c=1554`를 브라우저로 확인했다.
+
 - 저장소: GitHub 공개 저장소 `pyw31337/camp`
 - 배포: 외부 공개 기본 주소는 [GitHub Pages](https://pyw31337.github.io/camp/)이며, 루트 `main` 푸시로 자동 갱신된다.
 - 기준 설계: 전국 등록 야영장은 한국관광공사 고캠핑 API를 기준 모수로 삼고, 실제 재고·가격은 공식 예약 채널에서 별도 확인한다.

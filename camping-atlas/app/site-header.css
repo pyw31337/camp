@@ -27,7 +27,8 @@
 }
 
 /* ===== 공통 사이트 헤더 v3(홈·탐색·보조 페이지 동일) — 캔버스 유리 바 + 알약 메뉴, 모바일은 떠 있는 탭 바 ===== */
-.gnb { position: sticky; top: 0; z-index: 70; background: color-mix(in srgb, var(--mc-canvas) 84%, transparent); backdrop-filter: saturate(1.3) blur(14px); -webkit-backdrop-filter: saturate(1.3) blur(14px); border-bottom: 1px solid color-mix(in srgb, var(--mc-line) 70%, transparent); color: var(--mc-ink); }
+.gnb { position: sticky; top: 0; z-index: 70; padding-top: env(safe-area-inset-top, 0px); background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; border-bottom: 1px solid transparent; color: var(--mc-ink); transition: background .2s ease, border-color .2s ease, backdrop-filter .2s ease; }
+.gnb.scrolled { background: color-mix(in srgb, var(--mc-canvas) 84%, transparent); backdrop-filter: saturate(1.3) blur(14px); -webkit-backdrop-filter: saturate(1.3) blur(14px); border-bottom-color: color-mix(in srgb, var(--mc-line) 70%, transparent); }
 .gnb-in { box-sizing: border-box; width: 100%; max-width: none; height: 68px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 48px); display: flex; align-items: center; gap: 24px; }
 .sh-brand { display: inline-flex; align-items: center; gap: 10px; flex: none; color: var(--mc-ink); text-decoration: none; white-space: nowrap; }
 .sh-brand > span { width: 38px; height: 38px; border-radius: 13px; display: grid; place-items: center; background: var(--mc-accent, #00875a); color: #fff; }
@@ -82,7 +83,7 @@
   .sh-nav { display: none; }
   .sh-brand small { display: none; }
   .sh-badge { max-width: 6.5rem; padding-right: 10px; }
-  .gnb-tabbar { position: fixed; left: 10px; right: 10px; bottom: calc(8px + env(safe-area-inset-bottom)); z-index: 70; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 6px; border-radius: 26px; background: rgba(255,255,255,.86); backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3); box-shadow: 0 8px 28px rgba(16,20,20,.14); border: 0; }
+  .gnb-tabbar { position: fixed; left: max(10px, env(safe-area-inset-left)); right: max(10px, env(safe-area-inset-right)); bottom: calc(8px + env(safe-area-inset-bottom)); z-index: 70; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 6px; border-radius: 26px; background: rgba(255,255,255,.86); backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3); box-shadow: 0 8px 28px rgba(16,20,20,.14); border: 0; }
   .gnb-tabbar a { display: grid; justify-items: center; gap: 3px; padding: 7px 0 6px; border-radius: 20px; color: var(--mc-ink-3); text-decoration: none; font-size: .78rem; font-weight: 700; white-space: nowrap; letter-spacing: -.02em; }
   .gnb-tabbar a[aria-current="page"] { color: var(--mc-accent-ink, #0a6e45); background: var(--mc-accent-tint, #e4f4ea); font-weight: 900; }
   .gnb-tabbar svg { width: 24px; height: 24px; }
