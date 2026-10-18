@@ -23,24 +23,19 @@ if (!shellOnly) { await rm(out, { recursive: true, force: true }); await mkdir(`
 const kakaoKey = (process.env.KAKAO_JS_KEY ?? "").replace(/[^A-Za-z0-9]/g, "");
 const supabaseUrl = process.env.SUPABASE_URL || "https://zgnetdxqzsnmzdvoxzbw.supabase.co";
 const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || "";
-const body = await readFile(`${root}design/explore/index.html`, "utf8");
-await writeFile(`${out}index.html`, `<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="전국 캠핑장을 지도와 목록으로 찾고, 사이트 크기·시설·주변 화장실을 비교해 공식 예약처로 바로 예약하세요.">
-<meta name="theme-color" content="#1f9d5c">
-<meta name="kakao-js-key" content="${kakaoKey}">
-<meta name="supabase-url" content="${supabaseUrl}">
-<meta name="supabase-anon-key" content="${supabaseAnonKey}">
-<link rel="icon" href="../favicon.svg">
-</head>
-<body>
-${body}
-</body>
-</html>
-`);
+// /renewal/에만 있던 실제 데이터 기반 시안을 /explore/의 기본 화면으로 승격한다.
+// 원본(HTML·CSS·JS)은 design/renewal 하나만 관리하며, 여기서는 경로별 산출물만 만든다.
+const [renewalIndex, renewalCss, renewalApp] = await Promise.all([
+  readFile(`${root}design/renewal/index.html`, "utf8"),
+  readFile(`${root}design/renewal/style.css`, "utf8"),
+  readFile(`${root}design/renewal/app.js`, "utf8"),
+]);
+const exploreIndex = renewalIndex.replace("</head>", `<link rel="manifest" href="../manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="kakao-js-key" content="${kakaoKey}"><meta name="supabase-url" content="${supabaseUrl}"><meta name="supabase-anon-key" content="${supabaseAnonKey}"></head>`);
+await writeFile(`${out}index.html`, exploreIndex);
+await writeFile(`${out}style.css`, renewalCss);
+await writeFile(`${out}app.js`, renewalApp);
+await mkdir(`${out}data`, { recursive: true });
+await cp(`${root}design/renewal/data/photos.json`, `${out}data/photos.json`);
 const writeUtilityPages = async () => {
   for (const [relative, html] of utilityPages()) {
     const file = `${out}${relative}`;

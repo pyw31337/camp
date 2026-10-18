@@ -2,7 +2,9 @@
 // 데이터는 탐색 화면과 같은 공개 파일을 읽는다(../explore/data). 사진 색인은 scripts/build-renewal-data.mjs.
 // 원칙: 값만 짧게, 출처는 (i), 모르는 칸은 상세 규격에서만 회색 ‘확인필요’ 글자. 채운 배지는 원문 대조·공식 등록·운영자 공개 값만.
 
-const DATA = "../explore/data/";
+// /renewal/은 시안 확인 주소로 남기고, 실제 서비스 주소 /explore/도 같은 화면을 쓴다.
+// 두 주소에서만 데이터의 상대 경로가 다르다.
+const DATA = location.pathname.includes("/explore/") ? "./data/" : "../explore/data/";
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[m]);
@@ -34,8 +36,13 @@ function setVariant(v) {
   store.set("mc-variant", v);
   const u = new URL(location.href); u.searchParams.set("v", v); history.replaceState(null, "", u);
 }
-setVariant(new URLSearchParams(location.search).get("v") || store.get("mc-variant", "a"));
-document.addEventListener("click", (e) => { const b = e.target.closest("[data-variant]"); if (b) { setVariant(b.dataset.variant); route(); } });
+// A 포스터를 공개 서비스의 기본 표현으로 고정한다. B/C는 더 이상 고객 화면에 노출하지 않는다.
+setVariant("a");
+
+function updateHeaderGlass() {
+  document.querySelector(".top")?.classList.toggle("is-glass", scrollY > 12);
+}
+addEventListener("scroll", updateHeaderGlass, { passive: true });
 
 // ── 이름·지역 ────────────────────────────────────────────────
 const SIDO = [[/^서울/, "서울"], [/^부산/, "부산"], [/^대구/, "대구"], [/^인천/, "인천"], [/^광주/, "광주"], [/^대전/, "대전"], [/^울산/, "울산"], [/^세종/, "세종"], [/^경기/, "경기"], [/^강원/, "강원"], [/^충청북|^충북/, "충북"], [/^충청남|^충남/, "충남"], [/^전라북|^전북/, "전북"], [/^전라남|^전남/, "전남"], [/^경상북|^경북/, "경북"], [/^경상남|^경남/, "경남"], [/^제주/, "제주"]];
@@ -369,42 +376,31 @@ document.addEventListener("click", (e) => {
 $("#gear-dialog").addEventListener("close", () => { store.set("mc-gear", S.gear); renderGear(); for (const c of S.camps) delete c._j; route(); });
 
 // ── 화면: 찾기(메인) ─────────────────────────────────────────
-// 테마 표지: 테마마다 서로 다른 캠핑장의 공식 사진(자체 호스팅 webp)
-const usedCovers = new Set();
-function themeCover(key) {
-  const t = THEMES.find((x) => x[0] === key);
-  const c = S.camps.filter((x) => t[2](x) && x.ph && !usedCovers.has(x.id)).sort((a, b) => rich(b) - rich(a))[0];
-  if (!c) return "";
-  usedCovers.add(c.id);
-  return `../media/${c.ph}`;
-}
 function countOf(test) { return S.camps.reduce((n, c) => n + (test(c) ? 1 : 0), 0); }
 function homeView() {
-  usedCovers.clear();
   const openings = S.camps.map((c) => [c, openingOf(c)]).filter(([c, o]) => o && hasPhoto(c)).sort((a, b) => a[1].dd - b[1].dd);
+  const themeItems = THEMES.map(([key, label, test]) => {
+    const cover = S.camps.filter((c) => test(c) && hasPhoto(c)).sort((a, b) => rich(b) - rich(a))[0];
+    if (!cover) return "";
+    return `<button class="theme-card" type="button" data-theme-all="${key}"><img src="${esc(photoUrl(photosOf(cover)[0]))}" alt="" loading="lazy" decoding="async"><span><b>${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></button>`;
+  }).join("");
   return `
   <section class="hero" aria-labelledby="hero-t">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-in">
-      <h1 id="hero-t"><span class="h1-a">이번 주말,</span> <span class="h1-b">어디로 <em>갈까?</em></span></h1>
+      <h1 id="hero-t"><span class="h1-a">이번 주말,</span> <span class="h1-b"><em>빈자리부터.</em></span></h1>
+      <p class="hero-summary">전국 <b>${fmt(S.camps.length)}개</b> 캠핑장 소식 · 현재 오픈 <b>${fmt(openings.length)}개</b></p>
       <div class="finder">
-      <div class="modes" role="tablist" aria-label="찾는 방법">
-        ${[["keyword", "search", "키워드"], ["theme", "spark", "테마"], ["map", "map", "지도"]].map(([k, i, l]) => `<button type="button" role="tab" class="mode" data-mode="${k}" aria-selected="${S.mode === k}">${ic(i)}<span>${l}</span></button>`).join("")}
-      </div>
-      <div class="mode-panel" ${S.mode === "keyword" ? "" : "hidden"} data-panel="keyword">
-        <form class="search" role="search" data-search>
-          ${ic("search", "search-ic")}
-          <input type="search" name="q" value="${esc(S.q)}" placeholder="지역 · 캠핑장 · 계곡" aria-label="검색어" autocomplete="off" enterkeyhint="search">
-          <button class="btn primary" type="submit">찾기</button>
+        <form class="finder-form" role="search" data-search>
+          <label class="finder-field finder-destination"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
+          <button class="finder-field finder-static" type="button" data-open="date"><small>언제</small><b>날짜 선택</b></button>
+          <button class="finder-field finder-static" type="button" data-open="gear"><small>누구와</small><b>성인 2 · 차 1</b></button>
+          <button class="finder-field finder-static" type="button" data-open="gear"><small>내 장비</small><b>${esc(gearLabel())}</b></button>
+          <button class="finder-go" type="submit">${ic("search")}<span>찾기</span></button>
         </form>
-        <div class="rail chips" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div>
-      </div>
-      <div class="mode-panel" ${S.mode === "theme" ? "" : "hidden"} data-panel="theme">
-        <div class="rail themes" aria-label="테마">${THEMES.map(([k, l, t]) => `<button type="button" class="theme" data-theme="${k}" aria-pressed="${S.theme === k}"><img src="${esc(themeCover(k))}" alt="" loading="lazy" decoding="async"><span><b>${l}</b><i>${fmt(countOf(t))}</i></span></button>`).join("")}</div>
-      </div>
+        <div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div>
       </div>
     </div>
-    <figure class="hero-photo" aria-hidden="true"><img src="../images/hero-home.webp" alt="" decoding="async"></figure>
   </section>
 
   <section class="quick" aria-label="빠른 조건">
@@ -421,11 +417,6 @@ function homeView() {
       <button type="button" class="chip fee-chip" data-fee-band="o7" aria-pressed="${S.feeBand === 'o7'}">7만원+ <i>${fmt(countOf((c) => Boolean(c.fee && (c.fee.min >= 70000 || (c.fee.max && c.fee.max >= 70000)))))}</i></button>
     </div>
   </section>
-
-  ${openings.length ? `<section class="opens" aria-labelledby="op-t">
-    <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2></div>
-    <div class="rail opens-rail">${openings.map(([c, o]) => `<a class="open-card" href="#/c/${encodeURIComponent(c.id)}"><img src="${esc(photoUrl(photosOf(c)[0] ?? ""))}" alt="" loading="lazy" decoding="async"><span class="open-dd">${esc(o.txt)}</span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))} · ${esc(o.platform ?? "")}</i></a>`).join("")}</div>
-  </section>` : ""}
 
   <section class="results" id="results" aria-labelledby="res-t">
     <div class="res-head">
@@ -444,24 +435,20 @@ function homeView() {
     <div class="nophoto" data-nophoto></div>
     <div class="more-wrap"><button class="btn ghost" type="button" data-more>더 보기</button></div>
     <p class="credit">사진: 한국관광공사 고캠핑 · 정보: 각 원문(i)</p>
-  </section>`;
+  </section>
+
+  ${openings.length ? `<section class="opens" aria-labelledby="op-t">
+    <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><a class="link" href="#/map">지도에서 보기 ${ic("right")}</a></div>
+    <div class="rail opens-rail">${openings.map(([c, o]) => `<a class="open-card" href="#/c/${encodeURIComponent(c.id)}"><img src="${esc(photoUrl(photosOf(c)[0] ?? ""))}" alt="" loading="lazy" decoding="async"><span class="open-dd">${esc(o.txt)}</span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))} · ${esc(o.platform ?? "")}</i></a>`).join("")}</div>
+  </section>` : ""}
+  ${themeItems ? `<section class="themes-catalog" aria-labelledby="theme-t">
+    <div class="sec-head"><h2 id="theme-t">테마로 <em>고르기</em></h2></div>
+    <div class="rail theme-catalog-rail">${themeItems}</div>
+  </section>` : ""}`;
 }
 // 사진이 없는 곳은 카드로 보이지 않는다(소유자: 사진 없는 썸네일 금지). 이름 검색일 때만 아래 글 목록으로 남긴다.
 const hasPhoto = (c) => photosOf(c).length > 0;
 const themeName = (k) => (k === "ALL" ? "전체" : THEMES.find((t) => t[0] === k)?.[1] ?? "");
-// 둘러보기(검색어·테마 없음): 테마마다 한 줄씩 가로로 넘기는 줄. 테마를 고르거나 검색하면 격자.
-const browsing = () => !S.q && !S.theme;
-function themeRow([k, label, test], list, first, used) {
-  const all = list.filter(test);
-  // 같은 캠핑장이 여러 줄 맨 앞에 반복되지 않게, 앞줄에 나온 곳은 뺀다.
-  const items = all.filter((c) => hasPhoto(c) && !used.has(c.id)).slice(0, 16);
-  items.forEach((c) => used.add(c.id));
-  if (!items.length) return "";
-  return `<section class="trow" aria-label="${esc(label)}">
-    <div class="trow-head"><h3>${esc(label)} <i>${fmt(all.length)}</i></h3><button type="button" class="link" data-theme-all="${k}">모두 ${ic("right")}</button></div>
-    <div class="rail trow-rail">${items.map((c, i) => card(c, first && i < 4 ? i : 9)).join("")}</div>
-  </section>`;
-}
 function renderResults({ reset = true } = {}) {
   const grid = $("[data-grid]");
   if (!grid) return;
@@ -478,19 +465,9 @@ function renderResults({ reset = true } = {}) {
   for (const k of S.quick) act.push(`<button class="chip on" data-clear="quick:${k}">${esc(QUICK[k].label)} ${ic("close")}</button>`);
   $("[data-active]").innerHTML = act.join("");
   const rows = $("[data-rows]"), noph = $("[data-nophoto]");
-  if (browsing()) {
-    $("[data-res-title]").innerHTML = `테마별 <b>캠핑장</b>`;
-    const defs = [["ALL", "정보 많은 곳", () => true], ...THEMES];
-    const used = new Set();
-    rows.innerHTML = list.length ? defs.map((d, i) => themeRow(d, list, i === 0, used)).join("") : `<div class="empty">${ic("search")}<b>맞는 곳이 없어요</b><button class="btn ghost" data-clear="all">조건 지우기</button></div>`;
-    grid.innerHTML = ""; noph.innerHTML = "";
-    $("[data-more]").hidden = true;
-    initCarousels(rows);
-    return;
-  }
   rows.innerHTML = "";
   const shown = list.filter(hasPhoto), bare = list.filter((c) => !hasPhoto(c));
-  $("[data-res-title]").innerHTML = `${S.theme ? `${esc(themeName(S.theme))} ` : ""}<b>${fmt(list.length)}</b>곳`;
+  $("[data-res-title]").innerHTML = S.theme ? `${esc(themeName(S.theme))} <b>${fmt(list.length)}</b>곳` : `<b>${fmt(shown.length)}</b>곳을 찾았어요`;
   grid.innerHTML = shown.length ? shown.slice(0, S.shown).map(card).join("") : bare.length ? "" : `<div class="empty">${ic("search")}<b>맞는 곳이 없어요</b><button class="btn ghost" data-clear="all">조건 지우기</button></div>`;
   $("[data-more]").hidden = shown.length <= S.shown;
   noph.innerHTML = S.q && bare.length ? `<h4>사진 없는 곳 ${fmt(bare.length)}</h4><ul>${bare.slice(0, 30).map((c) => `<li><a href="#/c/${encodeURIComponent(c.id)}"><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></a>${heartBtn(c)}</li>`).join("")}</ul>` : "";
@@ -894,6 +871,7 @@ async function route() {
   S.cameFromApp = Boolean(prev);
   if (name === "home" && prev === "detail") scrollTo(0, S.homeScroll);
   else if (name !== prev || name === "detail") scrollTo(0, 0);
+  updateHeaderGlass();
 }
 addEventListener("hashchange", route);
 
@@ -912,6 +890,9 @@ addEventListener("hashchange", route);
   S.cards = cards?.camps ?? {};
   for (const o of openings.items ?? []) if (!S.openings.has(String(o.id)) || o.kind !== "접수 마감") S.openings.set(String(o.id), o);
   S.saved = S.saved.filter((id) => S.byId.has(id));
-  syncCompare(); renderGear();
+  // 이전 주소(#c=1554)도 새 상세 주소로 보정해 공유 링크를 깨지 않는다.
+  const legacy = location.hash.match(/^#c=(.+)$/);
+  if (legacy) history.replaceState(null, "", `#/c/${legacy[1]}`);
+  syncCompare(); renderGear(); updateHeaderGlass();
   route();
 })();

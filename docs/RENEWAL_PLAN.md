@@ -1,9 +1,9 @@
 # 모여라캠핑 리뉴얼 시안 기획 (2026-10-16, Claude)
 
-> 시안: https://pyw31337.github.io/camp/renewal/ (`?v=a` 포스터 · `?v=b` 필드북 · `?v=c` 인덱스, 헤더 오른쪽에서 바로 바꿈)
-> 소스: `design/renewal/` → `node scripts/publish-renewal-mockup.mjs` → `camping-atlas/public/renewal/`(생성물, 손으로 고치지 않음)
+> 운영 주소: https://pyw31337.github.io/camp/explore/ (A 포스터, 2026-10-18 소유자 승인)
+> 소스: `design/renewal/` → `node scripts/publish-explorer-pages.mjs` → `camping-atlas/public/explore/`(생성물, 손으로 고치지 않음). `/renewal/`은 같은 소스를 확인하는 보조 주소다.
 > 사진 색인: `node scripts/build-renewal-data.mjs` → `design/renewal/data/photos.json`
-> 기존 `/vision/`(Codex 시안)과 `/explore/`(현재 서비스)는 건드리지 않았다. 소유자가 시안을 고르면 `design/explore/`로 단계 이식한다.
+> 기존 `/vision/`은 독립 실험 시안으로 보존한다. A 포스터는 실제 `/explore/`에 적용됐으며, 이후 변경도 `design/renewal/` 단일 소스에서 한다.
 
 ## 1. 지금까지 모은 데이터와 원래 보여 주려던 것
 

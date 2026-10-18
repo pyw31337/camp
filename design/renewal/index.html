@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="모여라캠핑 리뉴얼 시안 — 키워드·테마·지도로 찾고, 같은 항목으로 비교합니다." />
+    <meta name="description" content="전국 캠핑장을 사진·현장 규격·요금대·예약 채널로 한눈에 비교하는 모여라캠핑입니다." />
     <meta name="theme-color" content="#f5f6f4" />
-    <title>모여라캠핑 리뉴얼 시안</title>
+    <title>모여라 캠핑 · 전국 캠핑장 찾기</title>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
@@ -55,14 +55,8 @@
       <nav class="top-nav" aria-label="주요 메뉴">
         <a href="#/" data-nav="home">찾기</a>
         <a href="#/map" data-nav="map">지도</a>
-        <a href="#/compare" data-nav="compare">찜 <b class="nav-count" data-compare-count>0</b></a>
+        <a href="#/compare" data-nav="compare">비교 <b class="nav-count" data-compare-count>0</b></a>
       </nav>
-      <div class="variant-switch" role="group" aria-label="시안 바꾸기">
-        <span>시안</span>
-        <button type="button" data-variant="a" title="A 포스터">A</button>
-        <button type="button" data-variant="b" title="B 필드북">B</button>
-        <button type="button" data-variant="c" title="C 인덱스">C</button>
-      </div>
       <button class="gear-chip" type="button" data-open="gear" aria-haspopup="dialog"><svg><use href="#i-tent"/></svg><span data-gear-label>내 장비</span></button>
     </header>
 
@@ -71,7 +65,7 @@
     <nav class="tabbar" aria-label="모바일 메뉴">
       <a href="#/" data-nav="home"><svg><use href="#i-search"/></svg><span>찾기</span></a>
       <a href="#/map" data-nav="map"><svg><use href="#i-map"/></svg><span>지도</span></a>
-      <a href="#/compare" data-nav="compare"><svg><use href="#i-heart-o"/></svg><span>찜</span><b class="nav-count" data-compare-count>0</b></a>
+      <a href="#/compare" data-nav="compare"><svg><use href="#i-columns"/></svg><span>비교</span><b class="nav-count" data-compare-count>0</b></a>
       <button type="button" data-open="gear"><svg><use href="#i-tent"/></svg><span>내 장비</span></button>
     </nav>
 
