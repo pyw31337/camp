@@ -756,3 +756,47 @@ body.map-mode { overflow: hidden; height: 100dvh; }
 .site-table th, .site-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); }
 .site-table th { background: var(--soft); font-weight: 700; color: var(--ink-2); white-space: nowrap; }
 .site-table td.text-price { font-weight: 800; color: #237b42; }
+
+/* ── 수집 데이터 연계(2026-10-18): 접수 중·장보기·운영자 안내·예약 방법·요금 언급·캠퍼 사진 ── */
+.sig.live { color: var(--accent); }
+.card-near { display: flex; align-items: center; gap: 5px; font-size: .8rem; font-weight: 700; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-near .ic { width: 13px; height: 13px; flex: none; }
+.d-line { margin-top: 6px; font-size: 1rem; font-weight: 600; color: var(--ink-2); word-break: keep-all; }
+a.near { color: inherit; text-decoration: none; }
+.near em { font-style: normal; font-size: .76rem; font-weight: 600; color: var(--ink-3); max-width: 15em; overflow: hidden; text-overflow: ellipsis; }
+.near b i { margin-left: 4px; color: var(--ink); }
+.amen-n { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; margin-bottom: 12px; }
+.amen-n div { display: grid; gap: 2px; padding: 12px; border-radius: 14px; background: var(--soft); }
+.amen-n b { font-size: 1.2rem; font-weight: 900; }
+.amen-n span { display: flex; align-items: center; gap: 2px; font-size: .8rem; font-weight: 700; color: var(--ink-3); word-break: keep-all; }
+.amen-rent { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; }
+.amen-rent b { font-size: .84rem; margin-right: 4px; }
+.amen-rent span { padding: 4px 10px; border-radius: 999px; background: var(--flame-soft); color: var(--on-flame-soft); font-size: .8rem; font-weight: 700; }
+.plist, .oplist, .steps, .tips { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.plist li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 12px 14px; border-radius: 14px; background: var(--soft); }
+.plist b { font-size: 1.05rem; font-weight: 900; }
+.plist span { font-size: .84rem; font-weight: 700; color: var(--ink-2); }
+.plist a { margin-left: auto; font-size: .78rem; color: var(--ink-3); }
+.plist q { flex-basis: 100%; font-size: .8rem; color: var(--ink-3); line-height: 1.5; word-break: keep-all; quotes: none; }
+.oplist li { display: grid; gap: 2px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.oplist li:last-child { border-bottom: 0; }
+.oplist p { margin: 0; font-size: .92rem; line-height: 1.55; word-break: keep-all; }
+.oplist a { font-size: .76rem; color: var(--ink-3); }
+.chans { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; margin-bottom: 12px; }
+.chan { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0 10px; padding: 12px 14px; border-radius: 14px; background: var(--soft); color: inherit; text-decoration: none; }
+.chan .ic { grid-row: span 2; width: 18px; height: 18px; color: var(--accent); }
+.chan b { font-size: .9rem; }
+.chan i { font-style: normal; font-size: .76rem; color: var(--ink-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.steps { counter-reset: st; margin-top: 12px; }
+.steps li { counter-increment: st; display: flex; gap: 10px; font-size: .9rem; line-height: 1.55; word-break: keep-all; }
+.steps li::before { content: counter(st); flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 999px; background: var(--ink); color: #fff; font-size: .72rem; font-weight: 900; }
+.tips { margin-top: 10px; }
+.tips li { font-size: .84rem; color: var(--ink-2); word-break: keep-all; }
+.tips li::before { content: "· "; }
+.feat { margin: 0 0 10px; font-size: .92rem; line-height: 1.6; color: var(--ink-2); word-break: keep-all; }
+.rs-avail { display: grid; gap: 6px; margin: 10px 0; padding: 12px; border-radius: 14px; background: var(--paper); }
+.rs-avail p { display: flex; align-items: center; gap: 4px; margin: 0; }
+.rs-avail p b { display: inline-flex; align-items: center; gap: 4px; color: var(--accent); font-size: .9rem; }
+.rs-avail p b .ic { width: 16px; height: 16px; }
+.rs-avail a { display: grid; gap: 1px; color: inherit; text-decoration: none; font-size: .84rem; font-weight: 700; word-break: keep-all; }
+.rs-avail a i { font-style: normal; font-size: .76rem; font-weight: 600; color: var(--ink-3); }
