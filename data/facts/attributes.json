@@ -73,8 +73,10 @@
    "pref": "일반 야영을(를) 원하나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 0,
-    "by_grade": {}
+    "campgrounds": 1132,
+    "by_grade": {
+     "CONFIRMED": 1132
+    }
    }
   },
   {
@@ -101,8 +103,10 @@
    "pref": "카라반을(를) 원하나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 0,
-    "by_grade": {}
+    "campgrounds": 478,
+    "by_grade": {
+     "CONFIRMED": 478
+    }
    }
   },
   {
@@ -127,9 +131,56 @@
    "pref": "작고 한적한 곳(사이트 적음)을 선호하나요?",
    "filter": "range",
    "coverage": {
-    "campgrounds": 1362,
+    "campgrounds": 2288,
     "by_grade": {
-     "CONFIRMED": 1362
+     "CONFIRMED": 2288
+    }
+   }
+  },
+  {
+   "code": "STAY_RV_SITES",
+   "group": "stay",
+   "label": "개인 캠핑카·카라반 사이트 수",
+   "type": "count",
+   "unit": "면",
+   "pref": "캠핑카·카라반을 가져가나요?",
+   "filter": "min",
+   "coverage": {
+    "campgrounds": 109,
+    "by_grade": {
+     "CONFIRMED": 109
+    }
+   }
+  },
+  {
+   "code": "SITE_TYPE",
+   "group": "stay",
+   "label": "사이트·상품 타입(업장이 제공하는 종류, 한 행에 하나)",
+   "type": "enum",
+   "enum": {
+    "PITCH": "일반 사이트",
+    "AUTO": "오토캠핑",
+    "DECK": "데크",
+    "DUPLEX_DECK": "복층 데크",
+    "TARP_ZONE": "타프존",
+    "GLAMPING": "글램핑",
+    "CARAVAN": "카라반",
+    "RV": "캠핑카·트레일러",
+    "HOUSE": "숙박동(캐빈·방갈로·펜션 등)",
+    "CAR_CAMP": "차박",
+    "PET_SITE": "반려견 전용",
+    "SOLO": "솔로·백패킹",
+    "EQUIPPED": "장비 포함(설치형)",
+    "PRIVATE_BATH": "개별 화장실"
+   },
+   "pref": "원하는 사이트 타입이 있나요?",
+   "filter": "in",
+   "note": "count가 있으면 면·동 수. text는 세부 이름(방갈로·캐빈 등). 원천: 고캠핑 등록값·소개글, 카카오/네이버 분류, 운영자 홈페이지 문장(lib/site-types.mjs)",
+   "coverage": {
+    "campgrounds": 2562,
+    "by_grade": {
+     "OPERATOR": 352,
+     "CONFIRMED": 5806
     }
    }
   },
@@ -732,10 +783,10 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 1603,
+    "campgrounds": 1604,
     "by_grade": {
      "CONFIRMED": 2767,
-     "OPERATOR": 143,
+     "OPERATOR": 144,
      "VERIFIED": 4
     }
    }
@@ -2253,5 +2304,5 @@
    }
   }
  ],
- "generated_at": "2026-10-17T20:41:36.806Z"
+ "generated_at": "2026-10-18T12:00:40.771Z"
 }
