@@ -461,9 +461,9 @@
    "filter": "max",
    "note": "항목별 1행. 성수기·평일 구분은 period/label",
    "coverage": {
-    "campgrounds": 181,
+    "campgrounds": 382,
     "by_grade": {
-     "OPERATOR": 659,
+     "OPERATOR": 1291,
      "CONFIRMED": 3
     }
    }
@@ -564,9 +564,9 @@
    "pref": "일찍 들어가고 싶나요?",
    "filter": "max",
    "coverage": {
-    "campgrounds": 990,
+    "campgrounds": 1129,
     "by_grade": {
-     "OPERATOR": 690,
+     "OPERATOR": 897,
      "MENTION": 433,
      "CONFIRMED": 4
     }
@@ -580,9 +580,9 @@
    "pref": "늦게 나오고 싶나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 955,
+    "campgrounds": 1094,
     "by_grade": {
-     "OPERATOR": 656,
+     "OPERATOR": 863,
      "MENTION": 398,
      "CONFIRMED": 2
     }
@@ -738,9 +738,10 @@
    "filter": "in",
    "multi": true,
    "coverage": {
-    "campgrounds": 911,
+    "campgrounds": 946,
     "by_grade": {
      "CONFIRMED": 1051,
+     "OPERATOR": 73,
      "VERIFIED": 30
     }
    }
@@ -752,11 +753,11 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 1065,
+    "campgrounds": 1111,
     "by_grade": {
      "CONFIRMED": 1707,
+     "OPERATOR": 444,
      "MENTION": 42,
-     "OPERATOR": 111,
      "VERIFIED": 39
     }
    }
@@ -2533,5 +2534,5 @@
    }
   }
  ],
- "generated_at": "2026-10-19T08:58:16.255Z"
+ "generated_at": "2026-10-19T10:44:25.560Z"
 }

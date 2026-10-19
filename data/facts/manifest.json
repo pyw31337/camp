@@ -1,8 +1,8 @@
 {
  "version": 1,
- "generated_at": "2026-10-19T08:58:16.255Z",
+ "generated_at": "2026-10-19T10:44:25.560Z",
  "campgrounds": 3116,
- "facts": 142746,
+ "facts": 144198,
  "row": "{cid, attr, value, grade, src, url?, at?, quote?, text?, n?, period?, label?, num?, count?} — src=gocamping에서 url·at이 없으면 campgrounds.ndjson의 gc_url·gc_at",
  "files": {
   "campgrounds.ndjson": 3116,
@@ -11,12 +11,12 @@
   "fire.ndjson": 9536,
   "vehicle.ndjson": 6298,
   "pet.ndjson": 3526,
-  "price.ndjson": 6618,
+  "price.ndjson": 7250,
   "fee.ndjson": 295,
-  "time.ndjson": 2950,
+  "time.ndjson": 3364,
   "policy.ndjson": 1044,
   "sanitary.ndjson": 6095,
-  "site.ndjson": 2980,
+  "site.ndjson": 3386,
   "amenity.ndjson": 12874,
   "env.ndjson": 4057,
   "theme.ndjson": 5094,
@@ -36,6 +36,7 @@
   "naver_local": 2110,
   "gocamping_intro": 705,
   "blog_mention": 1051,
+  "booking_engine": 1452,
   "cafe_mention": 117,
   "operator_discovered": 1276,
   "kakao_web": 71,
@@ -44,7 +45,7 @@
  },
  "by_grade": {
   "CONFIRMED": 118641,
-  "OPERATOR": 7696,
+  "OPERATOR": 9148,
   "MENTION": 16129,
   "VERIFIED": 280
  },
@@ -64,7 +65,8 @@
   "kin": "네이버 지식iN 언급(검색 API 요약)",
   "local_gov": "지자체 공개 데이터",
   "localdata": "행정안전부 LOCALDATA 인허가(영업 중 업소)",
-  "gocamping_best": "문화체육관광부·한국관광공사 분야별 공공 우수야영장(고캠핑 공개 목록)"
+  "gocamping_best": "문화체육관광부·한국관광공사 분야별 공공 우수야영장(고캠핑 공개 목록)",
+  "booking_engine": "예약 엔진 공개 화면(업장 등록 사이트 정보)"
  },
  "guide": "docs/FACT_STORE.md"
 }
