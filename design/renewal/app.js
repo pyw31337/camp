@@ -640,18 +640,38 @@ function nearCenter(name) {
   if (!pts.length) return null;
   return { lat: pts.reduce((a, c) => a + c.lat, 0) / pts.length, lng: pts.reduce((a, c) => a + c.lng, 0) / pts.length, label: pts[0].sigungu };
 }
-function condTest(c, k = S.cond, skip = null) {
-  if (skip !== "sido" && k.sido.length && !k.sido.includes(sidoShort(c.sido))) return false;
-  if (skip !== "near" && k.near) { const ctr = k._ctr; if (!ctr || !c.lat || km2(ctr, c) > k.r) return false; }
-  if (skip !== "kind" && k.kind.length && !k.kind.some((x) => KIND[x]?.test(c))) return false;
-  if (skip !== "pet" && k.pet && !petOk(c)) return false;
-  if (skip !== "w" && k.w === 1 && !hasPower(c)) return false;
-  if (skip !== "w" && k.w > 1 && !(wattsOf(c) >= k.w)) return false;
-  if (skip !== "size" && k.size && !(maxSide(c) >= k.size)) return false;
-  if (skip !== "fire" && k.fire && facts(c).fire?.kind !== "FIREWOOD_OK") return false;
-  if (skip !== "park" && k.park && facts(c).park?.ok !== true) return false;
-  return true;
+// 조건 판정은 세 갈래다(소유자 2026-10-19: “데이터가 없어서 걸러지는 건 안 좋다”).
+//   y = 근거로 맞음 · ref = 법령 기준으로 맞다고 볼 수 있음(전기 있음 + W 미공지 → 관광진흥법 사이트당 600W) · ? = 정보 없음 · n = 근거로 안 맞음
+// 정보 없음(?)은 결과에서 빼지 않고 아래쪽에 ‘확인 필요’로 남긴다. 지역·반경만 위치 사실이라 바로 거른다.
+function condEval(c, k = S.cond, skip = null) {
+  const st = {};
+  if (skip !== "sido" && k.sido.length && !k.sido.includes(sidoShort(c.sido))) return null;
+  if (skip !== "near" && k.near) { const ctr = k._ctr; if (!ctr || !c.lat || km2(ctr, c) > k.r) return null; }
+  if (skip !== "kind" && k.kind.length) {
+    const hasInfo = (c.types ?? []).length > 0 || (c.st ?? []).length > 0;
+    st.kind = k.kind.some((x) => KIND[x]?.test(c)) ? "y" : k.kind.includes("DAY") || !hasInfo ? "?" : "n";
+  }
+  if (skip !== "pet" && k.pet) st.pet = petOk(c) ? "y" : /불가/.test(c.pets ?? "") ? "n" : "?";
+  if (skip !== "w" && k.w) {
+    const p = facts(c).power, w = wattsOf(c);
+    if (k.w === 1) st.w = p?.ok ? "y" : p && p.ok === false ? "n" : "?";
+    else if (w) st.w = w >= k.w ? "y" : "n";
+    else if (p?.ok) st.w = k.w <= 600 ? "ref" : "?";
+    else st.w = p && p.ok === false ? "n" : "?";
+  }
+  if (skip !== "size" && k.size) { const m = maxSide(c); st.size = m ? (m >= k.size ? "y" : "n") : "?"; }
+  if (skip !== "fire" && k.fire) { const f = facts(c).fire?.kind; st.fire = f === "FIREWOOD_OK" ? "y" : f ? "n" : "?"; }
+  if (skip !== "park" && k.park) { const o = facts(c).park?.ok; st.park = o === true ? "y" : o === false || o === "part" ? (o === "part" ? "?" : "n") : "?"; }
+  const vals = Object.values(st);
+  if (vals.includes("n")) return null;
+  return { st, unknown: vals.filter((v) => v === "?").length, ref: vals.filter((v) => v === "ref").length };
 }
+// strict(확인된 곳만)이면 정보 없음(?)도 뺀다. 법령 기준(ref)은 남긴다.
+function condTest(c, k = S.cond, skip = null, strict = S.condStrict) {
+  const r = condEval(c, k, skip);
+  return Boolean(r) && (!strict || r.unknown === 0);
+}
+const COND_LABEL = { kind: "상품", pet: "반려견", w: "전기", size: "사이트 크기", fire: "장작", park: "텐트 옆 주차" };
 const condActive = (k = S.cond) => k.sido.length + k.kind.length + (k.pet ? 1 : 0) + (k.w ? 1 : 0) + (k.size ? 1 : 0) + (k.fire ? 1 : 0) + (k.park ? 1 : 0) + (k.near ? 1 : 0);
 function condChips(k = S.cond) {
   const out = [];
@@ -676,6 +696,7 @@ function condToParams(p, k = S.cond) {
   if (k.park) p.set("park", "1");
   if (k.near) { p.set("near", k.near); p.set("r", String(k.r)); }
   if (S.feeBand) p.set("fee", S.feeBand);
+  if (S.condStrict) p.set("strict", "1");
 }
 function condFromParams(q) {
   const k = emptyCond(), list = (n) => (q.get(n) ?? "").split(",").filter(Boolean);
@@ -704,8 +725,9 @@ function condSheet() {
       else if (key === "pet" || key === "fire" || key === "park") k[key] = !k[key];
       else if (key === "w" || key === "size" || key === "r") k[key] = Number(val);
       else if (key === "fee") S.feeDraft = S.feeDraft === val ? "" : val;
-      else if (key === "reset") { S.condDraft = emptyCond(); S.feeDraft = ""; }
-      else if (key === "apply") { S.cond = S.condDraft; S.feeBand = S.feeDraft; store.set("mc-feeband", S.feeBand); dlg.close(); S.onCondApply?.(); return; }
+      else if (key === "strict") S.strictDraft = !S.strictDraft;
+      else if (key === "reset") { S.condDraft = emptyCond(); S.feeDraft = ""; S.strictDraft = false; }
+      else if (key === "apply") { S.cond = S.condDraft; S.feeBand = S.feeDraft; S.condStrict = S.strictDraft; store.set("mc-feeband", S.feeBand); dlg.close(); S.onCondApply?.(); return; }
       else if (key === "close") { dlg.close(); return; }
       paintCondSheet();
     });
@@ -713,6 +735,7 @@ function condSheet() {
   }
   S.condDraft = { ...S.cond, sido: [...S.cond.sido], kind: [...S.cond.kind] };
   S.feeDraft = S.feeBand ?? "";
+  S.strictDraft = Boolean(S.condStrict);
   paintCondSheet();
   dlg.showModal();
 }
@@ -720,24 +743,35 @@ function paintCondSheet() {
   const dlg = $("#cond-dialog"), k = S.condDraft;
   const base = S.camps;
   const feeOk = (c, fb) => { const mn = campFeeMin(c), mx = campFeeMax(c); return !fb || (fb === "u3" ? mn && mn <= 30000 : fb === "3to5" ? mn && mn <= 50000 && (mx == null || mx >= 30000) : fb === "5to7" ? mn && mn <= 70000 && (mx == null || mx >= 50000) : mn && (mn >= 70000 || (mx && mx >= 70000))); };
-  const pool = (skip) => base.filter((c) => condTest(c, k, skip) && (skip === "fee" || feeOk(c, S.feeDraft)));
+  const strict = S.strictDraft;
+  const pool = (skip) => base.filter((c) => condTest(c, k, skip, strict) && (skip === "fee" || feeOk(c, S.feeDraft)));
   const count = (skip, test) => pool(skip).reduce((n, c) => n + (test(c) ? 1 : 0), 0);
-  const chip = (key, val, label, on, n) => `<button type="button" class="chip" data-c="${key}:${val}" aria-pressed="${on}"${n === 0 && !on ? " disabled" : ""}>${esc(label)}${n != null ? ` <i>${fmt(n)}</i>` : ""}</button>`;
-  const total = pool(null).length;
-  const pSido = pool("sido"), pKind = pool("kind");
+  // 선택지 숫자: 근거로 맞는 곳(법령 기준 포함) + 정보 없어 함께 보일 곳(+n, ‘확인된 곳만’이면 0)
+  const tally = (key, val) => {
+    const k2 = { ...k, [key]: val }; let y = 0, u = 0;
+    for (const c of pool(key)) { const r = condEval(c, k2); if (!r) continue; const v = r.st[key]; if (v === "?") u++; else y++; }
+    return [y, strict ? 0 : u];
+  };
+  const chip = (key, val, label, on, n) => {
+    const [y, u] = Array.isArray(n) ? n : [n, 0];
+    return `<button type="button" class="chip" data-c="${key}:${val}" aria-pressed="${on}"${n != null && y + u === 0 && !on ? " disabled" : ""}>${esc(label)}${n != null ? ` <i>${fmt(y)}${u ? `<em>+${fmt(u)}</em>` : ""}</i>` : ""}</button>`;
+  };
+  const all = pool(null), total = all.length, sure = all.filter((c) => condEval(c, k)?.unknown === 0).length;
+  const pSido = pool("sido");
   dlg.innerHTML = `<div class="sheet-in cond-in">
     <div class="sheet-head"><h2 id="cond-title">조건으로 찾기</h2><button type="button" class="icon-btn sheet-close" data-c="close" aria-label="닫기">${ic("close")}</button></div>
     <div class="cond-body">
       <section><h3>지역 <small>여러 곳 선택</small></h3><div class="cond-chips">${SIDOS.map((x) => chip("sido", x, x, k.sido.includes(x), pSido.filter((c) => sidoShort(c.sido) === x).length)).join("")}</div></section>
       <section><h3>주변으로 <small>시·군 이름과 반경</small></h3><div class="cond-near"><input type="search" data-near value="${esc(k.near)}" placeholder="예: 파주, 가평, 양평" aria-label="시·군 이름" autocomplete="off">${R_OPTS.map((r) => chip("r", r, `${r}km`, k.r === r)).join("")}</div>${k.near ? `<p class="cond-hint">${k._ctr ? `${esc(k._ctr.label)} 가운데에서 ${k.r}km 안` : "그 이름의 시·군을 찾지 못했어요"}</p>` : ""}</section>
-      <section><h3>상품·이용 <small>하나라도 있으면</small></h3><div class="cond-chips">${KINDS.map(([x, l, t]) => chip("kind", x, l, k.kind.includes(x), pKind.filter(t).length)).join("")}</div></section>
-      <section><h3>반려견</h3><div class="cond-chips">${chip("pet", 1, "동반 가능", k.pet, count("pet", petOk))}</div></section>
-      <section><h3>전기 <small>W를 밝힌 곳만 W로 걸러져요</small></h3><div class="cond-chips">${W_OPTS.map(([v, l]) => chip("w", v, l, k.w === v, v ? count("w", (c) => (v === 1 ? hasPower(c) : wattsOf(c) >= v)) : null)).join("")}</div></section>
-      <section><h3>사이트 크기 <small>긴 변 기준 · 규격을 등록한 곳</small></h3><div class="cond-chips">${SIZE_OPTS.map(([v, l]) => chip("size", v, l, k.size === v, v ? count("size", (c) => maxSide(c) >= v) : null)).join("")}</div></section>
-      <section><h3>불멍·주차</h3><div class="cond-chips">${chip("fire", 1, "장작 가능", k.fire, count("fire", (c) => facts(c).fire?.kind === "FIREWOOD_OK"))}${chip("park", 1, "텐트 옆 주차", k.park, count("park", (c) => facts(c).park?.ok === true))}</div></section>
+      <section><h3>상품·이용 <small>하나라도 있으면</small></h3><div class="cond-chips">${KINDS.map(([x, l]) => chip("kind", x, l, k.kind.includes(x), tally("kind", [x]))).join("")}</div></section>
+      <section><h3>반려견</h3><div class="cond-chips">${chip("pet", 1, "동반 가능", k.pet, tally("pet", true))}</div></section>
+      <section><h3>전기 <small>W 미공지인 전기 사이트는 관광진흥법 기준 600W로 봐요</small></h3><div class="cond-chips">${W_OPTS.map(([v, l]) => chip("w", v, l, k.w === v, v ? tally("w", v) : null)).join("")}</div></section>
+      <section><h3>사이트 크기 <small>긴 변 기준 · 규격 미등록은 +로 함께</small></h3><div class="cond-chips">${SIZE_OPTS.map(([v, l]) => chip("size", v, l, k.size === v, v ? tally("size", v) : null)).join("")}</div></section>
+      <section><h3>불멍·주차</h3><div class="cond-chips">${chip("fire", 1, "장작 가능", k.fire, tally("fire", true))}${chip("park", 1, "텐트 옆 주차", k.park, tally("park", true))}</div></section>
       <section><h3>1박 요금</h3><div class="cond-chips">${[["u3", "~3만원"], ["3to5", "3~5만원"], ["5to7", "5~7만원"], ["o7", "7만원+"]].map(([v, l]) => chip("fee", v, l, S.feeDraft === v, count("fee", (c) => feeOk(c, v)))).join("")}</div></section>
     </div>
-    <div class="cond-foot"><button type="button" class="btn ghost" data-c="reset">초기화</button><button type="button" class="btn primary wide" data-c="apply">${fmt(total)}곳 보기</button></div>
+    <p class="cond-legend">숫자는 <b>근거로 맞는 곳</b>, <em>+n</em>은 정보가 없어 ‘확인 필요’로 함께 보일 곳이에요. <button type="button" class="link" data-c="strict">${strict ? "정보 없는 곳도 함께 보기" : "확인된 곳만 보기"}</button></p>
+    <div class="cond-foot"><button type="button" class="btn ghost" data-c="reset">초기화</button><button type="button" class="btn primary wide" data-c="apply">${fmt(total)}곳 보기${total !== sure ? ` <small>(확인 ${fmt(sure)})</small>` : ""}</button></div>
   </div>`;
   // 반경 입력 중에 다시 그리면 커서를 잃지 않게 되돌린다.
   if (S._nearFocus) { const inp = $("[data-near]", dlg); inp?.focus(); inp?.setSelectionRange(inp.value.length, inp.value.length); }
@@ -783,12 +817,13 @@ function dateStatus(c, d) {
   return { k: "unknown", rank: 3, icon: "calendar", txt: "운영 기간 미확인", sub: "예약처에서 확인" };
 }
 function listResults(p) {
-  const list = S.camps.filter((c) => matches(c) && condTest(c)).map((c) => ({ c, st: dateStatus(c, p.d) }));
+  const list = S.camps.filter((c) => matches(c) && condTest(c)).map((c) => ({ c, st: dateStatus(c, p.d), ce: condEval(c) }));
   const shown = S.showClosed ? list : list.filter((x) => x.st?.k !== "closed");
   const fee = (c) => campFeeMin(c) ?? Infinity;
   if (S.listSort === "fee") shown.sort((a, b) => fee(a.c) - fee(b.c) || rich(b.c) - rich(a.c));
   else if (S.listSort === "name") shown.sort((a, b) => nameOf(a.c).name.localeCompare(nameOf(b.c).name, "ko"));
-  else shown.sort((a, b) => (a.st?.rank ?? 5) - (b.st?.rank ?? 5) || rich(b.c) - rich(a.c));
+  // 조건이 근거로 맞는 곳 → 법령 기준으로 맞는 곳 → 정보 없어 확인 필요한 곳 순, 그 안에서 날짜·정보량
+  else shown.sort((a, b) => (a.ce?.unknown ?? 0) - (b.ce?.unknown ?? 0) || (a.ce?.ref ?? 0) - (b.ce?.ref ?? 0) || (a.st?.rank ?? 5) - (b.st?.rank ?? 5) || rich(b.c) - rich(a.c));
   return { shown, closed: list.length - list.filter((x) => x.st?.k !== "closed").length };
 }
 // 등록 규격 중 가장 큰 사이트(가로×세로). 조건 검색의 ‘사이트 크기’와 같은 값.
@@ -801,7 +836,13 @@ function siteSizeText(c) {
 function listFact(label, value, g) {
   return `<div class="lf${value ? "" : " none"}"><dt>${label}</dt><dd>${value ? `${esc(value)}${dot(g)}` : "–"}</dd></div>`;
 }
-function listRow({ c, st }, i = 0) {
+// 켜진 조건이 이 캠핑장에서 어떻게 맞는지: ✓ 근거 · 법정 기준 · 확인 필요
+function condLine(c, ce) {
+  if (!ce || !Object.keys(ce.st).length) return "";
+  const txt = { kind: () => S.cond.kind.map((x) => KIND[x]?.label).join("·"), pet: () => "반려견", w: () => (S.cond.w === 1 ? "전기" : `전기 ${fmt(S.cond.w)}W+`), size: () => `사이트 ${S.cond.size}m+`, fire: () => "장작", park: () => "텐트 옆 주차" };
+  return `<p class="lrow-cond">${Object.entries(ce.st).map(([k, v]) => `<span class="cs cs-${v === "?" ? "unk" : v}">${v === "y" ? ic("check") : ""}${esc(txt[k]())}${v === "ref" ? " · 법정 기준 600W" : v === "?" ? " · 확인 필요" : ""}</span>`).join("")}</p>`;
+}
+function listRow({ c, st, ce }, i = 0) {
   const f = facts(c), { tag } = nameOf(c), ti = c.ti ?? {}, r = reviewMeta(c), main = bookingChannels(c)[0];
   const fee = c.fee?.text ? c.fee.text : c.fee?.min ? `${band(c.fee.min)}부터` : null;
   const href = `#/c/${encodeURIComponent(c.id)}`;
@@ -813,6 +854,7 @@ function listRow({ c, st }, i = 0) {
         ${heartBtn(c)}
       </div>
       ${st ? `<p class="lrow-date st-${st.k}">${ic(st.icon)}<b>${esc(st.txt)}</b><i>${esc(st.sub)}</i></p>` : ""}
+      ${condLine(c, ce)}
       <dl class="lrow-facts">
         ${listFact("1박", fee, GR(c.fee?.grade))}
         ${listFact("입실", ti.i?.[0], ti.i?.[1])}
@@ -837,6 +879,7 @@ function listView() {
   const p = listParams();
   S.area = p.cond.sido.length ? "all" : p.area; S.q = p.q; if (p.d) S.stay = p.d;
   S.cond = p.cond; if (["u3", "3to5", "5to7", "o7", ""].includes(p.fee)) S.feeBand = p.fee;
+  S.condStrict = new URLSearchParams(location.hash.split("?")[1] ?? "").get("strict") === "1";
   // 목록 화면에 보이지 않는 조건(홈의 테마·사이트 타입·빠른 조건)은 적용하지 않는다 — 보이는 조건만 결과를 바꾼다.
   S.theme = null; S.stype = null; S.quick.clear();
   const areaLabel = S.cond.near ? `${S.cond._ctr?.label ?? S.cond.near} 주변` : S.cond.sido.length ? S.cond.sido.join("·") : AREAS.find(([k]) => k === S.area)?.[1] ?? "전국";
@@ -852,7 +895,7 @@ function listView() {
         <button class="finder-go" type="submit">${ic("search")}<span>찾기</span></button>
       </form>
       <div class="rail chips" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-list-area-k="${k}" aria-pressed="${S.area === k && !S.cond.sido.length}">${l}</button>`).join("")}</div>
-      <div class="rail chips cond-active" aria-label="조건"><button type="button" class="chip cond-open" data-open-cond>${ic("list")}조건${condActive() ? ` <i>${condActive()}</i>` : ""}</button>${condChips().map(([key, l]) => `<button type="button" class="chip on" data-cond-x="${esc(key)}">${esc(l)} ${ic("close")}</button>`).join("")}</div>
+      <div class="rail chips cond-active" aria-label="조건"><button type="button" class="chip cond-open" data-open-cond>${ic("list")}조건${condActive() ? ` <i>${condActive()}</i>` : ""}</button>${condChips().map(([key, l]) => `<button type="button" class="chip on" data-cond-x="${esc(key)}">${esc(l)} ${ic("close")}</button>`).join("")}${condActive() ? `<button type="button" class="chip" data-strict aria-pressed="${Boolean(S.condStrict)}">확인된 곳만</button>` : ""}</div>
       <div class="rail chips fee-bands" aria-label="1박 요금대"><span class="fee-band-lbl">1박 요금</span>${feeChip("", "전체")}${feeChip("u3", "~3만원")}${feeChip("3to5", "3~5만원")}${feeChip("5to7", "5~7만원")}${feeChip("o7", "7만원+")}</div>
       <div class="list-tools">
         <p class="list-date-note" data-list-note></p>
@@ -895,6 +938,7 @@ function bindList() {
     const fb = e.target.closest("[data-fee-band]");
     if (fb) { S.feeBand = fb.dataset.feeBand || ""; go(); return; }
     if (e.target.closest("[data-list-closed]")) { S.showClosed = !S.showClosed; renderList(); return; }
+    if (e.target.closest("[data-strict]")) { S.condStrict = !S.condStrict; go(); return; }
     if (e.target.closest("[data-list-more]")) { S.listN += LIST_PAGE; renderList({ reset: false }); }
   };
   const onChange = (e) => { if (e.target.matches("[data-list-sort]")) { S.listSort = e.target.value; renderList(); } };
