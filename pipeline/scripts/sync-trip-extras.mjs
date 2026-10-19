@@ -15,7 +15,8 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
 import { apiProblem, itemsOf, isoDay, upcomingWeekend } from "../lib/conditions.mjs";
-import { GridIndex, chargersOf, concentrationByDay, festivalOf, festivalsNear, ldongIndex, matchTourList, nearestCharger, petDetail, sigunguCode, tourPoint } from "../lib/trip-extras.mjs";
+import { matchProducts, normalizeListItem } from "../lib/tour-products.mjs";
+import { GridIndex, chargersOf, concentrationByDay, festivalOf, festivalsNear, ldongIndex, nearestCharger, petDetail, sigunguCode } from "../lib/trip-extras.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const outDir = join(root, "camping-atlas/public/context");
@@ -46,7 +47,7 @@ async function get(name, url, { xml = false } = {}) {
   if (problem === "NOT_JSON" && xml) return { items: xmlItems(text) };
   if (problem) return { problem };
   const json = JSON.parse(text);
-  return { items: itemsOf(json), total: Number(json?.response?.body?.totalCount ?? 0) };
+  return { items: itemsOf(json), total: Number(json?.response?.body?.totalCount ?? json?.body?.totalCount ?? json?.totalCount ?? 0) };
 }
 function xmlItems(text) {
   return [...text.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(([, body]) =>
@@ -93,7 +94,9 @@ const evOfficial = await step("ev_official", async () => {
     if (/^(0[1-7]|09|10)$/.test(String(it.chgerType ?? "")) && it.chgerType !== "02") s.fast = true; // 02 = 완속
     seen.set(it.statId, s);
   }
-  return seen.size ? [...seen.values()] : null;
+  if (!seen.size) { status.ev_official = `NO_DATA 응답 ${r.items.length}건 · 필드 ${Object.keys(r.items[0] ?? {}).slice(0, 12).join(",")}`; return null; }
+  status.ev_official = `OK 충전소 ${seen.size}곳(충전기 ${r.items.length}기)`;
+  return [...seen.values()];
 });
 const evOsm = evOfficial ? null : await step("ev_osm", async () => {
   const p = process.env.OSM_EXTRACT;
@@ -116,8 +119,9 @@ async function tourList(name, svc) {
     for (const type of [28, 32]) {
       const r = await all(name, `${TOUR}/${svc}/areaBasedList2?${C}&contentTypeId=${type}`);
       if (r.problem) return fail(name, r.problem);
-      out.push(...r.items.map(tourPoint).filter(Boolean));
+      out.push(...r.items.map((it) => normalizeListItem(it, String(type))).filter(Boolean));
     }
+    if (out.length) status[name] = `OK 목록 ${out.length}건(야영장 ${out.filter((t) => t.type === "28").length})`;
     return out.length ? out : null;
   });
 }
@@ -127,7 +131,7 @@ const barrierFree = await tourList("barrier_free", "KorWithService2");
 const trails = await step("trail", async () => {
   const r = await all("trail", `https://apis.data.go.kr/B551011/Durunubi/courseList?${C}`, 1000, 10);
   if (r.problem) return fail("trail", r.problem);
-  const list = r.items.map((it) => ({ name: it.crsKorNm, km: Number(it.crsDstnc) || null, h: it.crsTotlRqrmHour ? Math.round(Number(it.crsTotlRqrmHour) / 6) / 10 : null, sigun: String(it.sigun ?? "").trim(), lv: it.crsLevel ?? null, kind: it.brdDiv === "DNBW" ? "걷기" : it.brdDiv === "DNWW" ? "자전거" : null }))
+  const list = r.items.map((it) => ({ name: it.crsKorNm, km: Number(it.crsDstnc) || null, h: it.crsTotlRqrmHour ? Math.round(Number(it.crsTotlRqrmHour) / 6) / 10 : null, sigun: String(it.sigun ?? "").trim(), lv: it.crsLevel ?? null, kind: it.brdDiv === "DNWW" ? "걷기" : it.brdDiv === "DNBW" ? "자전거" : null }))
     .filter((t) => t.name && t.sigun);
   return list.length ? list : null;
 });
@@ -153,8 +157,9 @@ const festIdx = fest ? new GridIndex(fest, 0.1) : null;
 const evPts = evOfficial ?? evOsm;
 const evIdx = evPts ? new GridIndex(evPts, 0.05) : null;
 const erIdx = er ? new GridIndex(er, 0.1) : null;
-const petIdx = pet ? new GridIndex(pet, 0.01) : null;
-const bfIdx = barrierFree ? new GridIndex(barrierFree, 0.01) : null;
+// 고캠핑 ↔ 관광공사 목록 1:1 매칭(이름 유사도+거리, tour-products.mjs와 같은 규칙)
+const petMatch = pet ? matchProducts(catalog, pet) : null;
+const bfMatch = barrierFree ? matchProducts(catalog, barrierFree) : null;
 const wk = upcomingWeekend(now);
 const camps = {};
 const usedFest = new Set();
@@ -172,10 +177,10 @@ for (const c of catalog) {
     const h = erIdx.within(c.lat, c.lng, 80000).sort((a, b) => a.distance_m - b.distance_m)[0];
     if (h) o.er = [h.point.name, Math.round(h.distance_m / 100) / 10, h.point.cls, h.point.tel];
   } else if (p.er) o.er = p.er;
-  const pm = petIdx ? matchTourList(c, petIdx) : null;
-  if (pm) { o.pet = pm.id; if (!petDetails[pm.id]) petNeed.push(pm.id); } else if (!petIdx && p.pet) o.pet = p.pet;
-  const bm = bfIdx ? matchTourList(c, bfIdx) : null;
-  if (bm) o.bf = bm.id; else if (!bfIdx && p.bf) o.bf = p.bf;
+  const pm = petMatch?.get(String(c.id));
+  if (pm) { o.pet = pm.contentid; if (!petDetails[pm.contentid]) petNeed.push(pm.contentid); } else if (!petMatch && p.pet) o.pet = p.pet;
+  const bm = bfMatch?.get(String(c.id));
+  if (bm) o.bf = bm.contentid; else if (!bfMatch && p.bf) o.bf = p.bf;
   if (trails) {
     const sg = String(c.sigungu ?? "").split(/\s+/)[0];
     const t = sg ? trails.filter((x) => x.sigun.includes(sg)).slice(0, 3) : [];

@@ -70,6 +70,12 @@ export async function mount(el, camp) {
   extra.push(["토요일 밤 달", `${esc(moon.label)} (밝기 ${Math.round(moon.illum * 100)}%)${moon.dark_sky ? " · 별 보기 좋은 밤" : ""}`]);
   const row = data?.camps?.[camp.id], air = row?.[3] ? data.air?.[row[3]] : null;
   if (air?.grade) extra.push(["미세먼지(지금)", `${AIR[air.grade]} <span class="muted">${row[3].startsWith("s:") ? `${esc(row[3].slice(2))} 측정소` : `${esc(row[3].slice(2))} 측정소 ${air.stations}곳 중앙값`} · PM10 ${air.pm10 ?? "–"} · PM2.5 ${air.pm25 ?? "–"}</span>`]);
+  const td = row?.[5] ? data.tide?.[row[5]] : null;
+  if (td) {
+    const dd = td.days?.[sat] ? sat : td.days?.[today] ? today : Object.keys(td.days ?? {}).sort()[0];
+    const list = td.days?.[dd] ?? [];
+    if (list.length) extra.push([`물때 ${md(dd)} ${dd === sat ? "토" : dd === today ? "오늘" : ""}`.trim(), `${list.map(([t, ty, h]) => `${esc(ty)} ${esc(t)}${h != null ? `(${esc(h)}cm)` : ""}`).join(" · ")} <span class="muted">${esc(td.name)} 예보지점${row[6] != null ? ` · ${esc(row[6])}km` : ""}</span>`]);
+  }
   const ls = data.landslide?.[String(camp?.id ?? "")];
   if (ls) extra.push(["산사태 예측", `${esc(ls[0])} · 산림청 ${esc(new Date(ls[1]).toLocaleString("ko-KR", { timeZone: "Asia/Seoul", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }))} 분석. <a href="https://sansatai.forest.go.kr/" target="_blank" rel="noopener">산사태정보시스템</a>`]);
   if (row?.[4]) extra.push(["기상특보", '이 지역에 특보가 발효 중이에요. <a href="https://www.weather.go.kr/" target="_blank" rel="noopener">기상청 확인</a>']);

@@ -102,7 +102,7 @@ export function apiProblem(status, text) {
   if (status === 404 || /API not found|NO_OPENAPI_SERVICE/i.test(text)) return "NOT_FOUND";
   if (status >= 500) return `HTTP_${status}`;
   try {
-    const j = JSON.parse(text), code = String(j?.response?.header?.resultCode ?? j?.header?.resultCode ?? "00");
+    const j = JSON.parse(text), code = String(j?.response?.header?.resultCode ?? j?.header?.resultCode ?? j?.resultCode ?? "00");
     if (["00", "0000", "03"].includes(code)) return null; // 03 = NODATA
     return `CODE_${code}`;
   } catch { return /<returnAuthMsg>|<errMsg>/.test(text) ? "NOT_REGISTERED" : "NOT_JSON"; }
@@ -187,13 +187,18 @@ export function airBySido(stations) {
 /** 조석 고·저조 → [{t:"HH:MM", type:"고조"|"저조", h:cm}] (응답 필드명이 다를 수 있어 넓게 찾는다) */
 export function summarizeTide(items) {
   const pick = (o, re) => { const k = Object.keys(o).find((x) => re.test(x)); return k ? o[k] : null; };
-  return items.map((it) => {
+  const rows = items.map((it) => {
     const t = String(pick(it, /^(predcDt|tph_time|recordTime|predcTm|.*[Dd]t)$/) ?? "");
     const kind = String(pick(it, /^(extrSe|hl_code|.*[Ss]e|.*[Cc]ode)$/) ?? "");
     const h = num(pick(it, /^(predcTdlvVl|tph_level|.*[Vv]l|.*[Ll]evel)$/));
     const hm = t.match(/(\d{2}):?(\d{2})(?::\d{2})?$/);
     return { t: hm ? `${hm[1]}:${hm[2]}` : null, type: /고|high|^[13]$/i.test(kind) ? "고조" : /저|low|^[24]$/i.test(kind) ? "저조" : null, h };
-  }).filter((x) => x.t && x.type);
+  }).filter((x) => x.t).sort((a, b) => a.t.localeCompare(b.t));
+  // 구분 코드의 뜻이 문서마다 달라, 높이가 있으면 이웃 극치와 비교해 고조·저조를 정한다(조석은 고·저가 번갈아 온다).
+  if (rows.length >= 2 && rows.every((r) => r.h != null)) {
+    rows.forEach((r, i) => { const nb = rows[i + 1] ?? rows[i - 1]; r.type = r.h >= nb.h ? "고조" : "저조"; });
+  }
+  return rows.filter((x) => x.type);
 }
 /** 산불위험예보 지수 → 등급(산림청 4단계 구간) */
 export const fireGrade = (idx) => (idx == null ? null : idx >= 86 ? "매우높음" : idx >= 66 ? "높음" : idx >= 51 ? "다소높음" : "낮음");

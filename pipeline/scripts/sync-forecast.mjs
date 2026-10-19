@@ -8,7 +8,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
 import { landslideBySgg, landslideFor } from "../lib/trip-extras.mjs";
-import { airBySido, apiProblem, itemsOf, midTmFc, shortBase, sidoKey, summarizeAir, summarizeMid, summarizeShort, isoDay } from "../lib/conditions.mjs";
+import { airBySido, apiProblem, itemsOf, midTmFc, shortBase, sidoKey, summarizeAir, summarizeMid, summarizeShort, summarizeTide, isoDay, upcomingWeekend } from "../lib/conditions.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const outDir = join(root, "camping-atlas/public/conditions");
@@ -112,6 +112,27 @@ const landslide = await service("landslide", async () => {
   return by;
 });
 
+// 3-2) 물때(국립해양조사원 조석예보 고·저조 15156018): 바닷가 캠핑장(25km 안 예보지점)만, 오늘·이번 토·일
+const tide = await service("tide", async () => {
+  const codes = [...new Set(camps.map(([, m]) => m.tide).filter(Boolean))];
+  if (!codes.length) { status.tide = "NO_STATIONS(대응표에 예보지점 없음)"; return null; }
+  const wk = upcomingWeekend(now);
+  const dates = [...new Set([today, wk.sat, wk.sun])];
+  const names = Object.fromEntries((mapping.stations?.tide ?? []).map((t) => [t.code, t.name]));
+  const out = {};
+  let ok = 0, bad = 0;
+  for (const code of codes) {
+    for (const d of dates) {
+      const { problem, json } = await get("tide", `https://apis.data.go.kr/1192136/tideFcstHghLw/GetTideFcstHghLwApiService?obsCode=${code}&reqDate=${d.replaceAll("-", "")}&type=json&numOfRows=20&pageNo=1`);
+      if (problem) { if (FATAL.has(problem)) { status.tide = problem; return null; } bad++; continue; }
+      const rows = summarizeTide(itemsOf(json).filter((it) => !it.predcDt || String(it.predcDt).replaceAll("-", "").startsWith(d.replaceAll("-", ""))));
+      if (rows.length) { ((out[code] ??= { name: names[code] ?? code, days: {} }).days[d] = rows.map((r) => [r.t, r.type, r.h])); ok++; }
+    }
+  }
+  status.tide = `OK 지점 ${Object.keys(out).length}/${codes.length} · 날짜 ${ok}건(실패 ${bad})`;
+  return out;
+});
+
 // 4) 미세먼지(지금): 전국 측정소 실시간 1~2회
 const air = await service("air", async () => {
   const items = [];
@@ -136,13 +157,14 @@ for (const [id, m] of camps) {
   else if (air?.bySido) { const k = sidoKey(air.bySido, m.sido); if (k) { a = `d:${k}`; airOut[a] = air.bySido[k]; } }
   const w = warn?.text && m.sigungu && warn.text.includes(m.sigungu.replace(/(시|군|구)$/, "")) ? 1 : 0;
   campRows[id] = [gridOf(m), m.land ?? null, m.ta ?? null, a, w];
+  if (m.tide && tide?.[m.tide]) campRows[id].push(m.tide, m.tide_km ?? null);
   const ls = landslide ? landslideFor(landslide, m.sido, m.sigungu) : null;
   if (ls) landOut[id] = [ls.level, new Date(ls.at).toISOString()];
 }
 const out = {
   generated_at: new Date(now).toISOString(), today, status, calls,
   sources: {
-    short: "기상청 단기예보(공공데이터포털 15084084)", mid: "기상청 중기예보(15059468)", warn: "기상청 기상특보(15000415)", landslide: "산림청 산사태예측정보(15074800)",
+    short: "기상청 단기예보(공공데이터포털 15084084)", mid: "기상청 중기예보(15059468)", warn: "기상청 기상특보(15000415)", landslide: "산림청 산사태예측정보(15074800)", tide: "국립해양조사원 조석예보 고·저조(15156018)",
     air: "한국환경공단 에어코리아 대기오염정보(15073861)", sun: "일출·일몰·달: 화면에서 천문 계산(근사, ±2분)",
   },
   short: short ?? (prev?.short ? { ...prev.short, grids: Object.fromEntries(Object.entries(prev.short.grids ?? {}).map(([g, d]) => [g, Object.fromEntries(Object.entries(d).filter(([x]) => x >= today))])), stale: true } : null),
@@ -150,6 +172,7 @@ const out = {
   warn: warn?.text ? { text: warn.text.slice(0, 4000), at: warn.at } : null,
   air: airOut,
   landslide: landslide ? landOut : null,
+  tide: tide ?? null,
   camps: campRows,
 };
 writeFileSync(outPath, `${JSON.stringify(out)}\n`);
