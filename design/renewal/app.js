@@ -1232,6 +1232,7 @@ async function detailView(id) {
         ${reviewLinksHtml(d, c)}
         ${infoHtml(c)}
         ${commentsHtml(c)}
+        <section class="d-sec" data-opform-sec hidden></section>
       </div>
       <aside class="d-side">${reserveCard(c, d)}</aside>
     </div>
@@ -1617,6 +1618,9 @@ function bindDetail() {
   // 여행 참고 정보(고도·응급실·전기차 충전·주변 축제 등): /context/card.js가 있을 때만. 실패하면 칸을 숨긴 채 둔다.
   const exEl = $("[data-extras]");
   if (exEl && condCamp) import(new URL("../context/card.js", import.meta.url).href).then((m) => m.mount(exEl, condCamp)).catch(() => {});
+  // 운영자 정보 바로잡기(로그인 없이, Supabase operator_submission에 넣기만): /operator/form.js
+  const opEl = $("[data-opform-sec]");
+  if (opEl && condCamp && SB.url && SB.key) import(new URL("../operator/form.js", import.meta.url).href).then((m) => m.mount(opEl, condCamp, SB)).catch(() => {});
   const previewItems = async (kind) => {
     const d = await detailOf(id);
     const rows = kind === "layout" ? (d?.layout?.images ?? []) : (d?.sns_images ?? []);

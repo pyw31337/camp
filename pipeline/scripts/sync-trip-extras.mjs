@@ -220,6 +220,6 @@ const out = {
 };
 mkdirSync(outDir, { recursive: true });
 writeFileSync(outPath, JSON.stringify(out));
-const cnt = (k) => Object.values(camps).filter((o) => o[k]).length;
+const cnt = (k) => Object.values(camps).filter((o) => o[k] != null).length;
 console.log(`여행 참고 정보: 고도 ${cnt("el")} · 충전소 ${cnt("ev")} · 축제 ${cnt("fe")}곳(${Object.keys(festOut).length}건) · 응급실 ${cnt("er")} · 반려 ${cnt("pet")} · 무장애 ${cnt("bf")} · 걷기길 ${cnt("tr")} · 혼잡 ${cnt("cr")}`);
 console.log(JSON.stringify({ status, calls }));
