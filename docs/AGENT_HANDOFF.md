@@ -3,6 +3,13 @@
 > 최종 갱신: 2026-10-19 KST(플랫폼 허브 구현 확인, 작업 전파 정책 명시) — 맨 위 ‘📌 공지’부터 읽을 것<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
 
+## 📌 수집 주기 분리 (2026-10-19, Grok)
+
+- 시설·주변은 매일 안 바뀐다. **운영 PostgreSQL 전체 스냅샷 적재는 일요일(KST) 또는 `full_db_import=true`만.**
+- 평일 `data-sync`는 `db:migrate`만 하고 고캠핑·context·licences 재적재를 건너뛴다.
+- 임시 DB 이중 적재 검증도 같은 날만.
+- 상세: `docs/SYNC_CADENCE.md`. 새 수집을 매일 단계로 넣기 전에 이 문서를 볼 것.
+
 ## 📌 전기 용량 A 단위 분리 (2026-10-19, Grok)
 
 - `pipeline/registry/attribute-dictionary.json`에 `POWER_MAX_A` (int, unit A) 추가.

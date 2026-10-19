@@ -6,6 +6,11 @@ on:
     - cron: "17 18 * * *"
   workflow_dispatch:
     inputs:
+      full_db_import:
+        description: "운영 PostgreSQL 전체 스냅샷 적재 (기본은 일요일만). true면 강제"
+        required: false
+        default: "false"
+        type: string
       geocode_max_calls:
         description: "공중화장실 주소 지오코딩 최대 호출 수 (기본 2000, 초기 전량 보강만 30000 지정)"
         required: false
@@ -354,10 +359,11 @@ jobs:
         run: npm run sync:localdata-campgrounds
         continue-on-error: true
       - name: Migrate PostgreSQL and import the full source snapshot
-        # PR에서는 운영 DB에 절대 쓰지 않는다. PostgreSQL schema verification
-        # workflow가 별도 임시 DB에서 마이그레이션·중복 적재를 검증한다.
-        # DATABASE_URL이 없으면 Pages 데이터 발행은 계속하되 DB 적재 성공으로
-        # 표기하지 않는다.
+        # PR에서는 운영 DB에 절대 쓰지 않는다.
+        # 전체 스냅샷 적재(캠핑장·주변·인허가 upsert)는 시설이 거의 안 바뀌므로
+        # 일요일(KST) 또는 workflow_dispatch full_db_import=true 때만 한다.
+        # 나머지 날은 스키마 마이그레이션만 적용한다(보통 수 초).
+        # DATABASE_URL이 없으면 Pages 데이터 발행은 계속하되 DB 적재 성공으로 표기하지 않는다.
         if: github.event_name != 'pull_request'
         run: |
           if [ -z "$DATABASE_URL" ]; then
@@ -365,16 +371,31 @@ jobs:
             exit 0
           fi
           npm run db:migrate
-          npm run db:import-gocamping
-          npm run db:import-context
-          npm run db:import-licences
+          force="${{ inputs.full_db_import || 'false' }}"
+          dow="$(TZ=Asia/Seoul date +%u)"
+          if [ "$force" = "true" ] || [ "$dow" = "7" ]; then
+            echo "전체 스냅샷 적재 (일요일 또는 강제)"
+            npm run db:import-gocamping
+            npm run db:import-context
+            npm run db:import-licences
+          else
+            echo "::notice title=PostgreSQL full import skipped::시설·주변은 주 1회(일요일)만 전체 적재합니다. 오늘은 스키마만 확인했습니다."
+          fi
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DATABASE_SSL: ${{ vars.DATABASE_SSL }}
       - name: Load today's real files into a throwaway PostgreSQL (twice)
-        # 고정 표본 검증(database-verify.yml)이 못 잡는 실데이터 문제(중복 키·범위 밖 값 등)를 운영 DB 전에 잡는다.
+        # 고정 표본 검증이 못 잡는 실데이터 문제를 운영 DB 전에 잡는다.
+        # 전체 적재와 같은 날(일요일·강제·PR)만 돌린다. 평일 매일 두 번 넣는 비용은 불필요하다.
         if: always()
         run: |
+          force="${{ inputs.full_db_import || 'false' }}"
+          dow="$(TZ=Asia/Seoul date +%u)"
+          event="${{ github.event_name }}"
+          if [ "$event" != "pull_request" ] && [ "$force" != "true" ] && [ "$dow" != "7" ]; then
+            echo "::notice title=Throwaway DB load skipped::전체 적재일(일요일 또는 강제)이 아니어서 임시 DB 이중 적재를 건너뜁니다."
+            exit 0
+          fi
           if [ ! -f out/campgrounds.json ]; then echo "::notice::고캠핑 결과가 없어 실데이터 DB 검증을 건너뜁니다."; exit 0; fi
           npm run db:migrate
           for _ in 1 2; do
