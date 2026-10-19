@@ -119,14 +119,16 @@ export function summarizeShort(items) {
     const v = it.fcstValue, n = Number(v);
     if (it.category === "TMN" && Number.isFinite(n)) x.tmin = n;
     else if (it.category === "TMX" && Number.isFinite(n)) x.tmax = n;
-    else if (it.category === "TMP" && Number.isFinite(n)) { x._lo = Math.min(x._lo ?? n, n); x._hi = Math.max(x._hi ?? n, n); }
+    else if (it.category === "TMP" && Number.isFinite(n)) { x._lo = Math.min(x._lo ?? n, n); x._hi = Math.max(x._hi ?? n, n); x._n = (x._n ?? 0) + 1; }
     else if (it.category === "POP" && Number.isFinite(n)) x.pop = Math.max(x.pop, n);
     else if (it.category === "SKY" && h >= 6 && h <= 21) x.sky[n] = (x.sky[n] ?? 0) + 1;
     else if (it.category === "PTY" && n > 0) { x.rain = true; x.pty ??= PTY[n] ?? "강수"; }
     else if (it.category === "WSD" && Number.isFinite(n)) x.wsd = Math.max(x.wsd, n);
   }
-  for (const x of Object.values(days)) {
-    x.tmin ??= x._lo ?? null; x.tmax ??= x._hi ?? null; delete x._lo; delete x._hi;
+  for (const [d, x] of Object.entries(days)) {
+    // 예보 끝자락(자정 한두 시간만 있는 날)은 하루 요약이 될 수 없어 뺀다.
+    if (!Object.keys(x.sky).length && (x._n ?? 0) < 6 && x.tmin == null && x.tmax == null) { delete days[d]; continue; }
+    x.tmin ??= x._lo ?? null; x.tmax ??= x._hi ?? null; delete x._lo; delete x._hi; delete x._n;
     const top = Object.entries(x.sky).sort((a, b) => b[1] - a[1])[0];
     x.sky = top ? SKY[top[0]] ?? null : null;
     if (!x.rain) x.pty = null;
