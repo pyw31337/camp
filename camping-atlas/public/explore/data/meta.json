@@ -711,9 +711,9 @@
     "private_bathroom": 449,
     "kids_play_features": 2721
   },
-  "updated_at": "2026-10-19T04:39:01.989Z",
+  "updated_at": "2026-10-19T05:52:39.413Z",
   "operator_site_facts": {
-    "generated_at": "2026-10-19T04:59:34.955Z",
+    "generated_at": "2026-10-19T05:52:39.820Z",
     "campgrounds": 239,
     "w": 105,
     "pk": 49,
@@ -725,17 +725,17 @@
     "sites_read": 1151
   },
   "spec_sheet": {
-    "generated_at": "2026-10-19T04:59:35.299Z",
-    "campgrounds_with_spec": 1559,
+    "generated_at": "2026-10-19T05:52:39.997Z",
+    "campgrounds_with_spec": 1557,
     "roundup_reviews_skipped": 2459,
     "fields": {
       "CHECKIN_TIME": {
         "official": 643,
-        "mention": 419
+        "mention": 418
       },
       "CHECKOUT_TIME": {
         "official": 632,
-        "mention": 379
+        "mention": 378
       },
       "EARLY_CHECKIN": {
         "official": 36,
@@ -767,7 +767,7 @@
       },
       "PET_POLICY": {
         "official": 523,
-        "mention": 303
+        "mention": 298
       },
       "PARKING": {
         "official": 439,
@@ -796,19 +796,19 @@
     }
   },
   "review_digest": {
-    "generated_at": "2026-10-19T05:35:41.483Z",
+    "generated_at": "2026-10-19T05:52:47.168Z",
     "campgrounds": 2567,
     "with_pros": 1926,
     "with_cons": 264,
     "reviews": 13581
   },
   "nearby_licensed": {
-    "generated_at": "2026-10-19T04:39:16.288Z",
+    "generated_at": "2026-10-19T05:52:49.267Z",
     "campgrounds": 3112,
     "details": 3107
   },
   "profiles": {
-    "generated_at": "2026-10-19T05:00:08.085Z",
+    "generated_at": "2026-10-19T05:52:49.533Z",
     "total": 3116,
     "fields": {
       "TYPE": {
@@ -816,11 +816,11 @@
         "facts": 2286
       },
       "CHECKIN": {
-        "any": 980,
+        "any": 979,
         "facts": 643
       },
       "CHECKOUT": {
-        "any": 945,
+        "any": 944,
         "facts": 632
       },
       "MANNER": {
@@ -880,7 +880,7 @@
         "facts": 2392
       },
       "REVIEW": {
-        "any": 1640,
+        "any": 2567,
         "facts": 0
       }
     },
@@ -895,6 +895,7 @@
       "SITE_PARKING": 1273,
       "WATER_PLAY": 1370,
       "WINTER": 1864,
+      "REVIEW_VIEW": 34,
       "LAKE": 145,
       "CARAVAN": 478,
       "HIGH_POWER": 74,
@@ -902,12 +903,11 @@
       "BEACH": 375,
       "ISLAND": 85,
       "CAR_CAMPING": 13,
-      "REVIEW_QUIET": 169,
+      "REVIEW_QUIET": 277,
       "CITY": 180,
-      "REVIEW_VIEW": 20,
       "FIREWOOD": 26,
-      "REVIEW_CLEAN": 3,
-      "REVIEW_HOST": 3
+      "REVIEW_CLEAN": 5,
+      "REVIEW_HOST": 4
     },
     "facts_distribution": {
       "0-5": 610,
@@ -922,7 +922,7 @@
     }
   },
   "coverage": {
-    "measured_at": "2026-10-19T05:00:38.628Z",
+    "measured_at": "2026-10-19T05:52:56.622Z",
     "total": 3116,
     "goal": 2500,
     "fields": {
@@ -931,11 +931,11 @@
         "confirmed": 487
       },
       "checkin": {
-        "any": 980,
+        "any": 979,
         "confirmed": 643
       },
       "checkout": {
-        "any": 945,
+        "any": 944,
         "confirmed": 632
       },
       "manner": {
@@ -967,7 +967,7 @@
         "confirmed": 0
       },
       "rich5": {
-        "any": 1442,
+        "any": 1441,
         "confirmed": 0
       }
     }
