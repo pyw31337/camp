@@ -357,8 +357,17 @@ function initCarousels(root) {
     }));
     // 마우스 끌기(데스크톱). 끌었으면 카드 열기를 막는다.
     let x0 = null, s0 = 0, moved = false;
-    tr.addEventListener("pointerdown", (e) => { if (e.pointerType !== "mouse") return; x0 = e.clientX; s0 = tr.scrollLeft; moved = false; tr.classList.add("drag"); hydrate(car); });
-    window.addEventListener("pointermove", (e) => { if (x0 === null) return; const dx = e.clientX - x0; if (Math.abs(dx) > 4) moved = true; tr.scrollLeft = s0 - dx; });
+    tr.addEventListener("pointerdown", (e) => {
+      if (e.pointerType !== "mouse") return;
+      e.stopPropagation();
+      x0 = e.clientX; s0 = tr.scrollLeft; moved = false; tr.classList.add("drag"); hydrate(car);
+    });
+    window.addEventListener("pointermove", (e) => {
+      if (x0 === null) return;
+      const dx = e.clientX - x0;
+      if (Math.abs(dx) > 4) moved = true;
+      tr.scrollLeft = s0 - dx;
+    });
     window.addEventListener("pointerup", () => {
       if (x0 === null) return;
       x0 = null; tr.classList.remove("drag");
@@ -366,7 +375,11 @@ function initCarousels(root) {
     });
     tr.addEventListener("click", (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
     // 사진 레일은 카드 링크 위에 있다(가로 스와이프를 받으려고). 사진을 누르면 카드 링크로 간다.
-    tr.addEventListener("click", () => { const hit = car.closest(".card, .mi, .review-pick")?.querySelector(".card-hit"); if (hit) location.hash = hit.getAttribute("href"); });
+    tr.addEventListener("click", () => {
+      if (moved) return;
+      const hit = car.closest(".card, .mi, .review-pick")?.querySelector(".card-hit");
+      if (hit) location.hash = hit.getAttribute("href");
+    });
   }
 }
 function initDraggableRails(root = document) {
@@ -378,15 +391,53 @@ function initDraggableRails(root = document) {
     let startX = 0;
     let scrollLeft = 0;
     let hasMoved = false;
+    let bounceX = 0;
+
+    // 프로그레스 바 찾기 또는 헤더에 자동 연결
+    const head = rail.closest("section, .trow")?.querySelector(".sec-head, .trow-head");
+    let pBar = head?.querySelector(".rail-progress");
+    if (!pBar && head) {
+      const anchor = head.querySelector(".sec-side, .sec-note, .link, [data-theme-all]");
+      if (anchor) {
+        pBar = document.createElement("span");
+        pBar.className = "rail-progress";
+        pBar.setAttribute("aria-hidden", "true");
+        pBar.innerHTML = `<i style="width: 18%"></i>`;
+        if (anchor.classList.contains("sec-side")) {
+          anchor.prepend(pBar);
+        } else {
+          anchor.parentNode.insertBefore(pBar, anchor);
+        }
+      }
+    }
+    const fill = pBar ? (pBar.querySelector("i") || pBar) : null;
+    const updateProgress = () => {
+      if (!pBar || !fill) return;
+      const max = rail.scrollWidth - rail.clientWidth;
+      if (max <= 4) {
+        pBar.style.display = "none";
+        return;
+      }
+      pBar.style.display = "inline-flex";
+      const ratio = Math.max(0, Math.min(1, rail.scrollLeft / max));
+      const pct = 18 + ratio * 82;
+      fill.style.width = `${pct.toFixed(1)}%`;
+    };
+    rail.addEventListener("scroll", updateProgress, { passive: true });
+    requestAnimationFrame(updateProgress);
 
     rail.addEventListener("pointerdown", (e) => {
       if (e.pointerType === "touch") return;
       if (e.button !== 0) return;
-      if (e.target.closest(".car-nav, select, input, button.heart, a.btn")) return;
+      // 썸네일(.car, .car-track, .card-media, .review-pick-media)을 잡고 드래그하면 썸네일이 스와이프되고,
+      // 텍스트 영역이나 여백을 잡고 드래그할 때만 가로 레일이 스크롤된다.
+      if (e.target.closest(".car, .car-track, .car-nav, select, input, button, a.btn")) return;
       isDown = true;
       startX = e.clientX;
       scrollLeft = rail.scrollLeft;
       hasMoved = false;
+      bounceX = 0;
+      rail.style.transition = "";
     });
 
     const onPointerMove = (e) => {
@@ -397,13 +448,38 @@ function initDraggableRails(root = document) {
         rail.classList.add("is-dragging");
       }
       if (hasMoved) {
-        rail.scrollLeft = scrollLeft - dx;
+        const targetScroll = scrollLeft - dx;
+        const maxScroll = rail.scrollWidth - rail.clientWidth;
+        if (targetScroll < 0) {
+          rail.scrollLeft = 0;
+          bounceX = -targetScroll * 0.35;
+          rail.style.transform = `translateX(${bounceX}px)`;
+        } else if (targetScroll > maxScroll && maxScroll > 0) {
+          rail.scrollLeft = maxScroll;
+          bounceX = (maxScroll - targetScroll) * 0.35;
+          rail.style.transform = `translateX(${bounceX}px)`;
+        } else {
+          rail.scrollLeft = targetScroll;
+          if (bounceX !== 0) {
+            bounceX = 0;
+            rail.style.transform = "";
+          }
+        }
       }
     };
 
     const onPointerUp = () => {
       if (!isDown) return;
       isDown = false;
+      if (bounceX !== 0) {
+        rail.style.transition = "transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+        rail.style.transform = "translateX(0px)";
+        setTimeout(() => {
+          rail.style.transition = "";
+          rail.style.transform = "";
+          bounceX = 0;
+        }, 450);
+      }
       if (hasMoved) {
         setTimeout(() => {
           rail.classList.remove("is-dragging");
@@ -565,16 +641,16 @@ function homeView() {
     return `<a class="theme-card" href="#/theme/${encodeURIComponent(key)}"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy"><span><b>${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
   }).join("");
   const openingSection = openings.length ? `<section class="opens" aria-labelledby="op-t">
-    <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><a class="link" href="#/theme/OPEN">전체 보기 ${ic("right")}</a></div>
+    <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><div class="sec-side"><span class="rail-progress" data-rail="opens-rail"><i style="width: 18%"></i></span><a class="link" href="#/theme/OPEN">전체 보기 ${ic("right")}</a></div></div>
     <div class="rail opens-rail">${openings.map(([c, o]) => `<a class="open-card" href="#/c/${encodeURIComponent(c.id)}">${imageTag(photosOf(c)[0] ?? "", "", { sizes: "250px" })}<span class="open-dd">${esc(o.txt)}</span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))} · ${esc(o.platform ?? "")}</i></a>`).join("")}</div>
   </section>` : "";
   const picks = reviewPicks();
   const reviewSection = picks.length ? `<section class="review-picks" aria-labelledby="review-picks-t">
-    <div class="sec-head"><div><h2 id="review-picks-t">긍정 <em>후기</em></h2><p class="sec-sub">후기 수 · 긍정 언급</p></div><span class="sec-note">${tip("<b>긍정 후기</b><span>연결된 블로그·카페 후기에서 집계한 주제와 건수입니다. 별점·실시간 인기 순위가 아니며, 원문은 상세에서 바로 열 수 있어요.</span>")}</span></div>
+    <div class="sec-head"><div><h2 id="review-picks-t">긍정 <em>후기</em></h2></div><div class="sec-side"><span class="rail-progress" data-rail="review-picks-rail"><i style="width: 18%"></i></span><span class="sec-note">${tip("<b>긍정 후기</b><span>연결된 블로그·카페 후기에서 집계한 주제와 건수입니다. 별점·실시간 인기 순위가 아니며, 원문은 상세에서 바로 열 수 있어요.</span>")}</span></div></div>
     <div class="rail review-picks-rail">${picks.map(reviewPickCard).join("")}</div>
   </section>` : "";
   const themeSection = themeItems ? `<section class="themes-catalog" aria-labelledby="theme-t">
-    <div class="sec-head"><h2 id="theme-t">테마로 <em>고르기</em></h2><a class="link" href="#/theme/ALL">전체 보기 ${ic("right")}</a></div>
+    <div class="sec-head"><h2 id="theme-t">테마로 <em>고르기</em></h2><div class="sec-side"><span class="rail-progress" data-rail="theme-catalog-rail"><i style="width: 18%"></i></span><a class="link" href="#/theme/ALL">전체 보기 ${ic("right")}</a></div></div>
     <div class="rail theme-catalog-rail">${themeItems}</div>
   </section>` : "";
   return `
