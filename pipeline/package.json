@@ -39,7 +39,7 @@
     "build:spec": "node scripts/build-spec-sheet.mjs",
     "build:facts": "node scripts/build-fact-store.mjs",
     "build:condition-mapping": "node scripts/build-condition-mapping.mjs",
-    "sync:conditions": "node scripts/sync-conditions.mjs",
+    "sync:forecast": "node scripts/sync-forecast.mjs",
     "facts:sqlite": "node scripts/build-fact-store.mjs --sqlite",
     "facts:query": "node scripts/query-facts.mjs",
     "db:import-facts": "node scripts/import-facts-postgres.mjs",

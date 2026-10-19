@@ -1,4 +1,4 @@
-// ‘이번 주말 컨디션’ 공통 로직(순수 함수). 네트워크·파일은 scripts/sync-conditions.mjs, build-condition-mapping.mjs.
+// 주간 날씨 공통 로직(순수 함수). 네트워크·파일은 scripts/sync-forecast.mjs, build-condition-mapping.mjs. (산불·물때 파서는 활용신청·경로 확인 뒤 다시 쓰려고 남겨 둠)
 // 원천(모두 공공데이터포털 같은 인증키, 서비스마다 활용신청 필요):
 //   기상청 단기예보 15084084 · 중기예보 15059468 · 기상특보 15000415 · 에어코리아 대기오염정보 15073861·측정소정보 15073877
 //   산림청 산불위험예보 15084817 · 국립해양조사원 조석예보(고·저조) 15156018
@@ -143,7 +143,8 @@ export function summarizeMid(land, ta, tmFc) {
     const wf = land?.[`wf${n}Pm`] ?? land?.[`wf${n}`] ?? null, pop = Math.max(Number(land?.[`rnSt${n}Am`] ?? 0), Number(land?.[`rnSt${n}Pm`] ?? 0), Number(land?.[`rnSt${n}`] ?? 0));
     const tmin = ta?.[`taMin${n}`], tmax = ta?.[`taMax${n}`];
     if (wf == null && tmin == null) continue;
-    out[d] = { sky: wf, pop: Number.isFinite(pop) ? pop : null, tmin: tmin == null ? null : Number(tmin), tmax: tmax == null ? null : Number(tmax) };
+    const am = land?.[`wf${n}Am`] ?? land?.[`wf${n}`] ?? null, pm = land?.[`wf${n}Pm`] ?? land?.[`wf${n}`] ?? null;
+    out[d] = { sky: wf, sky_am: am, sky_pm: pm, pop: Number.isFinite(pop) ? pop : null, tmin: tmin == null ? null : Number(tmin), tmax: tmax == null ? null : Number(tmax) };
   }
   return out;
 }
