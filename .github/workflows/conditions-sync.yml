@@ -1,7 +1,7 @@
 name: Weekly forecast
 
 # 캠핑장별 주간 날씨(단기 오늘~3일 + 중기 4~10일, 특보·미세먼지 보조) 수집. 하루 2회, 각 서비스 무료 일일 한도 안에서만 부른다.
-# 공공데이터포털 인증키(DATA_GO_KR_SERVICE_KEY) 하나로 부르지만 서비스마다 활용신청이 따로 필요하다(docs/WEEKEND_CONDITIONS.md).
+# 공공데이터포털 인증키(DATA_GO_KR_SERVICE_KEY) 하나로 부르지만 서비스마다 활용신청이 따로 필요하다(docs/WEEKLY_FORECAST.md).
 # 키가 없거나 활용신청 전인 서비스는 건너뛰고(로그에 사유) 실패로 처리하지 않는다.
 on:
   schedule:
@@ -19,6 +19,7 @@ on:
       - "pipeline/lib/conditions.mjs"
       - "pipeline/lib/astro.mjs"
       - "pipeline/lib/kma-grid.mjs"
+      - "pipeline/lib/trip-extras.mjs"
       - "pipeline/scripts/sync-forecast.mjs"
       - "pipeline/scripts/build-condition-mapping.mjs"
       - "camping-atlas/public/conditions/**"

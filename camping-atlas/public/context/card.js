@@ -1,0 +1,60 @@
+// 상세 화면 ‘여행 참고 정보’ — ./extras.json(파이프라인 sync-trip-extras.mjs)을 읽어 캠핑장별로 그린다.
+// 자료가 하나도 없으면 칸을 숨긴 채 둔다. 원천·등급은 extras.json의 sources를 따른다.
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const md = (iso) => { const [, m, d] = String(iso).split("-"); return `${Number(m)}/${Number(d)}`; };
+const DOW = ["일", "월", "화", "수", "목", "금", "토"];
+const dow = (iso) => DOW[new Date(`${iso}T00:00:00Z`).getUTCDay()];
+const km = (v) => (v < 1 ? `${Math.round(v * 1000)}m` : `${v}km`);
+let cache = null;
+const load = () => (cache ??= fetch(new URL("./extras.json", import.meta.url)).then((r) => (r.ok ? r.json() : null)).catch(() => null));
+
+/** 한 캠핑장의 행 목록 [{k, v(html), src}] */
+export function rowsFor(data, id) {
+  const o = data?.camps?.[id];
+  if (!o) return [];
+  const rows = [];
+  if (Number.isFinite(o.el)) {
+    const v = o.el < 10 ? "해안가 저지대(해발 10m 미만)" : `해발 약 ${o.el.toLocaleString("ko-KR")}m`;
+    const note = o.el >= 300 ? ` · 해안 평지보다 기온이 약 ${Math.round(o.el * 0.0065)}℃ 낮은 편이라 밤에 더 쌀쌀해요` : "";
+    rows.push({ k: "고도", v: esc(v) + esc(note), src: "el" });
+  }
+  if (o.er) {
+    const [n, d, cls, tel] = o.er;
+    rows.push({ k: "가까운 응급실", v: `${esc(n)}${cls ? ` <small>${esc(cls)}</small>` : ""} · 직선 ${esc(km(d))}${tel ? ` · <a href="tel:${esc(tel)}">${esc(tel)}</a>` : ""}`, src: "er" });
+  }
+  if (o.ev) {
+    const [n, d, c5] = o.ev;
+    const osm = !/환경부/.test(data.sources?.ev?.name ?? "");
+    rows.push({ k: "전기차 충전", v: `가장 가까운 충전소 직선 ${esc(km(d))}${n ? ` (${esc(n)})` : ""}${c5 > 1 ? ` · 5km 안 ${c5}곳` : ""}${osm ? " <small>지도 공개자료(OSM)에 올라온 곳만이라 실제로는 더 가까이 있을 수 있어요</small>" : ""}`, src: "ev" });
+  }
+  if (o.fe?.length) {
+    const items = o.fe.map(([fid, d]) => [fid, d, data.fest?.[fid]]).filter(([, , f]) => f);
+    if (items.length) rows.push({ k: "주변 축제·행사", v: `<ul class="cx-list">${items.map(([fid, d, f]) => `<li><a href="https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=${esc(fid)}" target="_blank" rel="noopener">${esc(f.t)}</a> <small>${esc(md(f.s))}(${dow(f.s)})${f.e && f.e !== f.s ? `~${esc(md(f.e))}(${dow(f.e)})` : ""} · ${esc(km(d))}</small></li>`).join("")}</ul>`, src: "fe" });
+  }
+  if (o.pet) {
+    const d = data.pet_detail?.[o.pet];
+    rows.push({ k: "반려동물 동반", v: `한국관광공사 반려동물 동반여행지로 등록된 곳이에요${d ? `<ul class="cx-list">${Object.entries(d).map(([k, v]) => `<li><small>${esc(k)}</small> ${esc(v)}</li>`).join("")}</ul>` : ""}`, src: "pet" });
+  }
+  if (o.bf) rows.push({ k: "무장애 여행", v: "한국관광공사 무장애(휠체어·유아차 등) 여행정보에 등록된 곳이에요. 세부 편의시설은 전화로 확인하세요.", src: "bf" });
+  if (o.tr?.length) rows.push({ k: "근처 걷기길", v: `<ul class="cx-list">${o.tr.map(([n, k, h, kind]) => `<li>${esc(n)} <small>${[kind, k ? `${k}km` : null, h ? `약 ${h}시간` : null].filter(Boolean).map(esc).join(" · ")}</small></li>`).join("")}</ul>`, src: "tr" });
+  if (o.cr && data.weekend) {
+    const days = [data.weekend.sat, data.weekend.sun].filter((d) => o.cr[d] != null);
+    if (days.length) rows.push({ k: "주말 관광지 붐빔", v: `${days.map((d) => `${dow(d)} ${o.cr[d]}`).join(" · ")} <small>이 시군 관광지 평균 예측, 가장 붐비는 날 = 100</small>`, src: "cr" });
+  }
+  return rows;
+}
+
+const STYLE = `[data-extras] .use small{color:var(--muted,#667);font-size:12px;font-weight:400}[data-extras] .use dd{line-height:1.5}
+.cx-list{margin:2px 0 0;padding-left:1.1em}.cx-foot{margin-top:10px;font-size:12px;color:var(--muted,#667);line-height:1.5}`;
+
+export async function mount(el, camp) {
+  const data = await load();
+  const rows = rowsFor(data, String(camp?.id ?? ""));
+  if (!rows.length) return;
+  if (!document.getElementById("cx-style")) { const s = document.createElement("style"); s.id = "cx-style"; s.textContent = STYLE; document.head.append(s); }
+  const used = [...new Set(rows.map((r) => r.src))].map((k) => data.sources?.[k]).filter(Boolean);
+  el.innerHTML = `<div class="sec-head"><div class="sec-title"><h2>여행 참고 정보</h2></div><span class="sec-note">고도·응급실·충전소·축제</span></div>
+<dl class="uses">${rows.map((r) => `<div class="use"><dt>${esc(r.k)}</dt><dd>${r.v}</dd></div>`).join("")}</dl>
+<p class="cx-foot">출처: ${used.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>${s.attribution ? ` (${esc(s.attribution)})` : ""}`).join(" · ")}. 거리는 직선거리예요. 갱신 ${esc(String(data.generated_at ?? "").slice(0, 10))}</p>`;
+  el.hidden = false;
+}

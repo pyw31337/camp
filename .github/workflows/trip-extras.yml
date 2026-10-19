@@ -1,0 +1,81 @@
+name: Trip extras
+
+# 캠핑장 상세 ‘여행 참고 정보’(고도·응급실·전기차 충전·주변 축제·반려동물/무장애·걷기길·관광지 붐빔) 수집. 주 2회.
+# 공공데이터포털 서비스는 활용신청이 된 것만 부르고, 나머지는 건너뛴다(로그에 사유). docs/TRIP_EXTRAS.md
+on:
+  schedule:
+    - cron: "30 19 * * 0,3" # 월·목 04:30 KST
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "pipeline/lib/trip-extras.mjs"
+      - "pipeline/scripts/sync-trip-extras.mjs"
+      - "pipeline/registry/elevation.json"
+      - "camping-atlas/public/context/**"
+      - ".github/workflows/trip-extras.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: trip-extras-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: pipeline
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Week key for the OSM extract
+        id: osmweek
+        run: echo "week=$(date -u +%G-%V)" >> "$GITHUB_OUTPUT"
+      # Data sync가 만든 주간 OSM 추출본 캐시를 같이 쓴다(없으면 여기서 만든다).
+      - name: Restore OSM Korea extract
+        uses: actions/cache/restore@v4
+        with:
+          path: pipeline/.cache/osm-extract.json
+          key: osm-extract-v1-${{ steps.osmweek.outputs.week }}
+          restore-keys: osm-extract-v1-
+      - name: Build OSM extract from Geofabrik when missing
+        run: |
+          mkdir -p .cache
+          if [ ! -s .cache/osm-extract.json ]; then
+            sudo apt-get install -y -qq osmium-tool >/dev/null
+            curl -fsSL --retry 2 -o "$RUNNER_TEMP/kr.pbf" https://download.geofabrik.de/asia/south-korea-latest.osm.pbf
+            osmium tags-filter "$RUNNER_TEMP/kr.pbf" nwr/amenity=charging_station,hospital -o "$RUNNER_TEMP/pois.pbf" --overwrite
+            osmium export "$RUNNER_TEMP/pois.pbf" -f geojsonseq --attributes type,id -o "$RUNNER_TEMP/pois.geojsonseq" --overwrite
+            node scripts/osm-extract.mjs "$RUNNER_TEMP/pois.geojsonseq" .cache/osm-extract.json
+          fi
+          echo "OSM_EXTRACT=$PWD/.cache/osm-extract.json" >> "$GITHUB_ENV"
+      - name: Collect trip extras
+        run: node scripts/sync-trip-extras.mjs
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+          # PR 검증에서는 서비스마다 몇 번만 불러 응답 형태를 확인한다.
+          TRIP_EXTRAS_MAX_CALLS: ${{ github.event_name == 'pull_request' && '12' || '900' }}
+      - name: Keep the dry-run output (PR)
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: trip-extras-dry-run
+          path: camping-atlas/public/context/extras.json
+          retention-days: 7
+      - name: Commit (main only)
+        if: github.event_name != 'pull_request'
+        working-directory: .
+        run: |
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add camping-atlas/public/context
+          if git diff --cached --quiet; then echo "변경 없음"; exit 0; fi
+          git commit -q -m "chore(data): refresh trip extras"
+          git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"
+          git push
