@@ -74,13 +74,14 @@ export function buildProfile(c, d = null, details = null, { detailDate = null, u
   if (verified && lw > 0) set("POWER", `최대 ${lw}W`, "VERIFIED", { label: f.source?.label ?? "원문 대조", url: f.source?.url ?? null, date: f.source?.checked_at ?? null }, { watts: lw });
   else if (of.w) set("POWER", `최대 ${of.w.v}W`, "OPERATOR", opSource(of.w), { watts: of.w.v });
   else if (spW) set("POWER", `최대 ${spW.value}`, spW.grade, spW.source, { watts: Number(spW.value.replace(/[^0-9]/g, "")) || null });
-  else if (f.power?.available || (c.amenities ?? []).some((a) => /전기/.test(a))) set("POWER", "전기 제공(W 미확인)", "CONFIRMED", GOCAMPING(c), { watts: null });
+  else if (f.power?.available || (c.amenities ?? []).some((a) => /전기/.test(a))) set("POWER", "최대 600W (법정 기준)", "CONFIRMED", { label: "관광진흥법 야영장 안전위생기준(사이트당 600W 이하)", url: "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=247854" }, { watts: 600, statutory: true });
   if (details?.ELECTRIC_FEE && fields.POWER) fields.POWER.fee = details.ELECTRIC_FEE.amount;
   // 주차
   const spPk = specField(d?.spec, "PARKING");
   if (verified && f.parking?.tent_side != null) set("PARKING", f.parking.tent_side ? "사이트 옆 주차" : "외부 주차", "VERIFIED", { label: f.source?.label ?? "원문 대조", url: f.source?.url ?? null, date: f.source?.checked_at ?? null });
   else if (of.pk) set("PARKING", of.pk.v === "SITE_SIDE" ? "사이트 옆 주차" : "외부 주차 후 이동", "OPERATOR", opSource(of.pk));
   else if (spPk) set("PARKING", spPk.value, spPk.grade, spPk.source);
+  else if (f.parking?.tent_side != null) set("PARKING", f.parking.tent_side ? "사이트 옆 주차" : "전용 주차장 주차", "CONFIRMED", GOCAMPING(c));
   // 불멍
   if (verified && f.firewood?.allowed != null) set("FIRE", f.firewood.allowed ? "장작 가능" : "장작 불가", "VERIFIED", { label: f.source?.label ?? "원문 대조", url: f.source?.url ?? null, date: f.source?.checked_at ?? null });
   else if (of.fire) set("FIRE", { FIREWOOD_OK: "장작 가능", CHARCOAL_ONLY: "숯만 가능", NO_FIRE: "개인 화기 불가" }[of.fire.v], "OPERATOR", opSource(of.fire));

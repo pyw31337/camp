@@ -95,8 +95,8 @@ function parsePeriod(s, year) {
 export function extractFromSentence(s, { year = new Date().getFullYear() } = {}) {
   const out = [];
 
-  // 입·퇴실 복합 표현 (예: "입·퇴실: 14:00 / 11:00", "입/퇴실 14시 ~ 11시")
-  const comboM = s.match(new RegExp(String.raw`입\s*[/·~-]\s*퇴실\s*(?:시간)?\s*(?:은|는|:|：|-)?\s*${CLOCK}\s*[/~–-]\s*(?:익일\s*)?${CLOCK}`, "i"));
+  // 입·퇴실 복합 표현 (예: "입·퇴실: 14:00 / 11:00", "입실/퇴실시간 : 15:00/11:00", "체크인/체크아웃 15:00/11:00")
+  const comboM = s.match(new RegExp(String.raw`(?:입(?:실)?|체크\s*인)\s*[/·~-]\s*(?:퇴실|체크\s*아웃)\s*(?:시간)?\s*(?:은|는|:|：|-)?\s*${CLOCK}\s*[/~–-]\s*(?:익일\s*)?${CLOCK}`, "i"));
   if (comboM) {
     const vIn = parseClock(comboM[1], comboM[2], comboM[3], "in");
     const vOut = parseClock(comboM[4], comboM[5], comboM[6], "out");
