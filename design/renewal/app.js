@@ -1397,22 +1397,23 @@ function fuelPlaces(rows, licensedGas) {
 }
 const isOfficialTourImage = (u) => /^https:\/\/(?:[\w-]+\.)?(?:visitkorea\.or\.kr|kto\.or\.kr)\//i.test(String(u ?? ""));
 /** 주변 칸 한 곳(주유·충전 칸은 상세 화면이 뜬 뒤 충전소를 덧붙일 때도 쓴다) */
+function nearbyThumb(x) {
+  if (x.image && /^https?:\/\//.test(x.image)) return x.image;
+  if (x.lat && x.lng) {
+    // 다음 지도 이미지 서비스(키 불필요, 실측 200). 좌표가 있는 주변시설은 항상 썸네일을 가진다.
+    return `https://spi.maps.daum.net/map2/map/imageservice?IW=480&IH=360&MX=${Number(x.lng)}&MY=${Number(x.lat)}&SCALE=2.5&service=open`;
+  }
+  return "";
+}
 function nearbyCard(x) {
   const [label, icon] = NEARBY_LABELS[x.type] ?? [x.type, "pin"];
   const map = x.lat && x.lng ? `https://map.kakao.com/link/map/${encodeURIComponent(x.name)},${x.lat},${x.lng}` : x.url;
   const road = x.lat && x.lng ? `https://map.kakao.com/link/roadview/${x.lat},${x.lng}` : "";
-  const hasImg = x.image && isOfficialTourImage(x.image);
-  const mapThumb = x.lat && x.lng
-    ? `https://staticmap.openstreetmap.de/staticmap.php?center=${x.lat},${x.lng}&zoom=16&size=480x360&maptype=mapnik`
-    : "";
-  const roadThumb = x.lat && x.lng
-    ? `https://spi.maps.daum.net/map2/map/imageservice?IW=480&IH=360&MX=${x.lng}&MY=${x.lat}&SCALE=2.5&service=open`
-    : "";
-  const photo = hasImg ? x.image : (roadThumb || mapThumb);
+  const photo = nearbyThumb(x);
   const media = photo
-    ? `<div class="media-card-photo"><img src="${esc(photo)}" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${esc(mapThumb || "")}'"></div>`
+    ? `<div class="media-card-photo"><img src="${esc(photo)}" alt="${esc(x.name)}" loading="lazy" decoding="async" onerror="this.closest('.media-card-photo').classList.add('media-card-icon');this.replaceWith(Object.assign(document.createElement('span'),{innerHTML:'${ic(icon).replace(/'/g, "\'") }'}))"></div>`
     : `<div class="media-card-photo media-card-icon" data-kind="${esc(icon)}">${ic(icon)}</div>`;
-  return `<article class="nearby-place media-card${hasImg ? " has-image" : ""}">
+  return `<article class="nearby-place media-card${photo ? " has-image" : ""}">
     ${media}
     <div class="media-card-body">
       <i>${ic(icon)}${label} · ${x.summary ? "공공데이터" : km(x.m)}${x.sub ? ` · ${esc(x.sub)}` : ""}</i>
