@@ -148,6 +148,13 @@ const tide = await service("tide", async () => {
   return out;
 });
 
+// 2026년 전남·광주 통합(전남광주통합특별시)처럼 시도 이름이 원천마다 다를 수 있어 넓게 맞춘다.
+const SIDO_GROUP = [["광주", "전남"]];
+function sidoKey(table, sido) {
+  if (table[sido]) return sido;
+  const group = SIDO_GROUP.find((g) => g.includes(sido)) ?? [sido];
+  return Object.keys(table).find((k) => group.some((g) => k.includes(g))) ?? null;
+}
 // ── 캠핑장별 주말 요약(토·일)
 const dayMid = (m, d) => { const l = mid?.land?.[m.land], t = mid?.ta?.[m.ta]; return l || t ? summarizeMid(l, t, mid.tmFc)[d] ?? null : null; };
 const camps = {};
@@ -157,7 +164,7 @@ for (const [id, m] of Object.entries(mapping.camps)) {
   const row = {};
   if (w.some(Boolean)) row.w = w;
   if (m.air && air?.stations?.[m.air]) row.air = { station: m.air, ...air.stations[m.air] };
-  else if (m.sido && air?.bySido?.[m.sido]) row.air = { sido: m.sido, ...air.bySido[m.sido] };
+  else if (m.sido && air?.bySido) { const k = sidoKey(air.bySido, m.sido); if (k) row.air = { sido: k, ...air.bySido[k] }; }
   const sg = m.sigungu?.split(/\s/)[0];
   const fireKeys = fire && sg ? Object.keys(fire).filter((k) => k.includes(sg)) : [];
   const fireKey = fireKeys.find((k) => m.sido && k.includes(m.sido)) ?? (fireKeys.length === 1 ? fireKeys[0] : null);
