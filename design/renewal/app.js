@@ -721,8 +721,8 @@ function homeView() {
   <section class="hero" aria-labelledby="hero-t">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-in">
-      <h1 id="hero-t"><span class="h1-a">이번 주말,</span> <span class="h1-b"><em>빈자리부터.</em></span></h1>
-      <p class="hero-summary">전국 <b>${fmt(S.camps.length)}개</b> 캠핑장 소식 · 현재 오픈 <b>${fmt(openings.length)}개</b></p>
+      <h1 id="hero-t"><span class="h1-a">취향대로 찾아 떠나는</span> <span class="h1-b">전국 ${fmt(S.camps.length)}개 <em>자연 속으로.</em></span></h1>
+      <p class="hero-summary">숲·계곡·바다, 나만의 쉼터를 조건으로 골라 보세요${openings.length ? ` · 곧 예약 오픈 <b>${fmt(openings.length)}곳</b>` : ""}</p>
       <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div><form class="finder-form" role="search" data-search>
         <label class="finder-field finder-destination"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
         <button class="finder-field finder-static" type="button" data-open="date"><small>언제</small><b data-stay-label>${esc(stayLabel())}</b></button>
@@ -1479,9 +1479,12 @@ function nearbyCard(x) {
   const [label, icon] = NEARBY_LABELS[x.type] ?? [x.type, "pin"];
   const map = x.lat && x.lng ? `https://map.kakao.com/link/map/${encodeURIComponent(x.name)},${x.lat},${x.lng}` : x.url;
   const photo = x.image && /^https?:\/\//.test(x.image) ? x.image : "";
-  const lead = photo ? `<img class="nb-thumb" src="${esc(photo)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'nb-ic',innerHTML:this.dataset.ic}))" data-ic="${esc(ic(icon))}">` : `<span class="nb-ic">${ic(icon)}</span>`;
+  // 실제 모습 사진(검색 API 썸네일 · 관광공사 사진): 64px로 보이고, 사진을 누르면 원문 글로 간다(줄 전체는 지도 링크).
+  const open = x.imgU ? ` data-open="${esc(x.imgU)}" title="사진 원문 보기${x.imgS ? ` · ${esc(x.imgS)}` : ""}"` : "";
+  const lead = photo ? `<img class="nb-thumb${x.imgU ? " nb-photo" : ""}" src="${esc(photo)}" alt="${esc(x.name)} 사진" loading="lazy" decoding="async" referrerpolicy="no-referrer"${open} onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'nb-ic',innerHTML:this.dataset.ic}))" data-ic="${esc(ic(icon))}">` : `<span class="nb-ic">${ic(icon)}</span>`;
+  const credit = photo && x.imgU ? `<small class="nb-credit">사진 · ${esc(x.imgS || "블로그")}</small>` : "";
   const dist = x.summary ? "" : km(x.m);
-  const body = `${lead}<span class="nb-txt"><b>${esc(x.name)}</b><i>${esc(label)}${x.sub ? ` · ${esc(x.sub)}` : ""}${x.summary ? " · 공공데이터" : ""}</i></span>${dist ? `<span class="nb-dist" aria-label="캠핑장에서 ${esc(dist)}">${esc(dist)}</span>` : ""}`;
+  const body = `${lead}<span class="nb-txt"><b>${esc(x.name)}</b><i>${esc(label)}${x.sub ? ` · ${esc(x.sub)}` : ""}${x.summary ? " · 공공데이터" : ""}</i>${credit}</span>${dist ? `<span class="nb-dist" aria-label="캠핑장에서 ${esc(dist)}">${esc(dist)}</span>` : ""}`;
   return map
     ? `<a class="nearby-place nb-row" href="${esc(map)}" target="_blank" rel="noopener" aria-label="${esc(x.name)} 지도 열기 · ${esc(label)}${dist ? ` · ${esc(dist)}` : ""}">${body}${ic("map", "nb-go")}</a>`
     : `<div class="nearby-place nb-row">${body}</div>`;
@@ -1504,7 +1507,7 @@ function nearbyHubHtml(c, d) {
   const entry = (type, x = {}) => {
     const name = x.name ?? x.n;
     const m = Number(x.m);
-    return name && Number.isFinite(m) ? { type, name, m, lat: x.lat, lng: x.lng, url: x.u, image: x.img } : null;
+    return name && Number.isFinite(m) ? { type, name, m, lat: x.lat, lng: x.lng, url: x.u, image: x.img, imgU: x.img_u, imgS: x.img_s } : null;
   };
   const first = (type, rows) => (rows.map((x) => entry(type, x)).filter(Boolean).sort((a, b) => a.m - b.m)[0] ?? null);
   // 상비약 판매처는 보통 같은 편의점이다. 이름이 같으면 한 칸으로 줄인다.
@@ -3052,6 +3055,13 @@ async function route() {
   updateHeaderGlass();
 }
 addEventListener("hashchange", route);
+// 주변시설 사진을 누르면 원문 글을 연다(사진이 든 줄 자체는 지도 링크).
+addEventListener("click", (e) => {
+  const im = e.target.closest?.("img[data-open]");
+  if (!im) return;
+  e.preventDefault(); e.stopPropagation();
+  window.open(im.dataset.open, "_blank", "noopener");
+}, true);
 
 // ── 시작 ─────────────────────────────────────────────────────
 // 상세 사진 묶음에서 깨진 사진: 그 칸을 빼고 남은 칸으로 격자를 다시 짠다(빈 회색 칸 금지).
