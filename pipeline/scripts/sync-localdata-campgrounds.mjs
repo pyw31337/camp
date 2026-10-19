@@ -45,7 +45,8 @@ const campPath = `${out}campgrounds.json`;
 if (existsSync(campPath) && records.length) {
   const { campgrounds } = JSON.parse(await readFile(campPath, "utf8"));
   const gc = campgrounds.map((c) => ({ id: String(c.external_id.id), name: c.name, lat: c.location?.lat ?? null, lng: c.location?.lng ?? null,
-    address: [c.address?.line1, c.address?.line2].filter(Boolean).join(" "), phone: c.contact?.tel ?? null, status: c.status_text ?? null }));
+    address: [c.address?.line1, c.address?.line2].filter(Boolean).join(" "), phone: c.contact?.tel ?? null, status: c.status_text ?? null,
+    licensed_on: c.registry?.licensed_on ?? null, business_no: c.registry?.business_no ?? null }));
   matched = matchLicenses(records, gc);
 } else if (records.length) warn("매칭 건너뜀", "out/campgrounds.json이 없습니다(고캠핑 동기화가 먼저 필요).");
 
@@ -57,6 +58,7 @@ const stats = {
   needs_review: stat((r) => r.match.state === "NEEDS_REVIEW"),
   hidden_candidates: stat((r) => r.match.flags.includes("HIDDEN_CANDIDATE")),
   closed_but_listed: stat((r) => r.match.flags.includes("LICENSE_CLOSED_BUT_LISTED")),
+  license_date_same: stat((r) => r.match.evidence?.license_date_same === true),
 };
 console.log(`매칭: ${JSON.stringify(stats)}`);
 await writeFile(`${out}localdata-campgrounds.json`, JSON.stringify({

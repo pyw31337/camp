@@ -1118,6 +1118,23 @@ function reviewLinksHtml(d) {
     return `<article class="review-link-card"><a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${platform} 후기 ${i + 1} 원문 열기"><span class="review-link-media">${canPreviewExternalMedia(x) && externalImage(x) ? `<img src="${esc(externalImage(x))}" alt="" loading="lazy" decoding="async">` : apiThumb(x) ? `<img src="${esc(apiThumb(x))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : ic(x.t === "cafe" ? "tent" : "camera")}</span><span><i>${esc(sourceName(x.src, platform))}${x.date ? ` · ${esc(String(x.date).slice(0, 10))}` : ""}</i><b>${esc(serviceText(x.title, 54) || `방문 후기 ${i + 1}`)}</b>${summary ? `<em>${esc(summary)}</em>` : ""}</span>${ic("external", "line")}</a>${srcTip(fact, `${platform} 후기 ${i + 1}`)}</article>`;
   }).join("")}</div></section>`;
 }
+// 고캠핑 등록 부가값(c.gx)·공공 우수야영장(c.best). 값이 없으면 줄을 만들지 않는다(0·미입력은 "없음"이 아니다).
+const BEST_LABEL = { ECO: "친환경", FAMILY: "가족친화", ACCESSIBLE: "교통약자 배려", PET: "반려동물 친화" };
+function registryRows(c) {
+  const g = c.gx ?? {}, sf = g.sf ?? [];
+  const safety = [["소화기", sf[0]], ["방화수", sf[1]], ["방화사", sf[2]], ["화재감지기", sf[3]]].filter(([, n]) => n > 0).map(([l, n]) => `${l} ${n}`);
+  const manage = [g.staff ? `상주 ${g.staff}명` : null, g.org].filter(Boolean);
+  const best = (c.best ?? []).map(([y, f]) => `${y} ${BEST_LABEL[f] ?? f}`);
+  return [
+    ["우수야영장", best.length ? `${esc(best.join(" · "))} <span class="muted">공공 선정</span>` : null],
+    ["안전시설", safety.length ? esc(safety.join(" · ")) : null],
+    ["보험", g.ins ? "영업배상책임보험 가입" : null],
+    ["관리", manage.length ? esc(manage.join(" · ")) : null],
+    ["사이트 간격", g.gap ? `${esc(g.gap)}m` : null],
+    ["휴장", g.cl ? esc(`${g.cl[0] ?? ""} ~ ${g.cl[1] ?? ""}`) : null],
+    ["인허가일", g.lic ? esc(g.lic) : null],
+  ];
+}
 function infoHtml(c) {
   const name = encodeURIComponent(nameOf(c).name);
   const map = c.lat ? `https://map.kakao.com/link/map/${name},${c.lat},${c.lng}` : null;
@@ -1129,6 +1146,7 @@ function infoHtml(c) {
     ["전화", c.tel ? `<a href="tel:${esc(c.tel)}">${esc(c.tel)}</a>` : null],
     ["홈페이지", c.homepage ? `<a href="${esc(c.homepage)}" target="_blank" rel="noopener">${esc(hostOf(c.homepage) || c.homepage)}</a>` : null],
     ["운영", [OP[c.op], (c.seasons ?? []).length === 4 ? "사계절" : (c.seasons ?? []).join("·"), (c.days ?? [])[0]].filter(Boolean).map(esc).join(" · ") || null],
+    ...registryRows(c),
   ].filter(([, v]) => v);
   return `<section class="d-sec"><div class="sec-head">${iconTitle("info", "업체 정보")}${c.gc_url ? `<a class="link" href="${esc(c.gc_url)}" target="_blank" rel="noopener">고캠핑 ${ic("right")}</a>` : ""}</div>
     <dl class="uses info">${rows.map(([l, v]) => `<div class="use"><dt>${l}</dt><dd>${v}</dd></div>`).join("")}</dl>

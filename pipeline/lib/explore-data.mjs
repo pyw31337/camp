@@ -36,6 +36,25 @@ const sizeEntries = (campground) => Array.isArray(campground?.site_sizes)
   : Array.isArray(campground?.sizes) ? campground.sizes : [];
 
 /**
+ * 고캠핑 등록 부가값의 목록용 축약형(값이 하나도 없으면 null). 키: lic 인허가일 · ins 영업배상책임보험 가입(Y일 때만 true) ·
+ * staff 상주 관리 인원 · org 운영기관 · area 전체 면적(㎡) · gap 사이트 간 거리(m) · sf [소화기, 방화수, 방화사, 화재감지기] · cl [휴장 시작, 종료].
+ * 휴장 기간은 종료일이 지났으면 내보내지 않는다(now 기준, 테스트용 주입 가능).
+ */
+export function gxOf(c, now = new Date()) {
+  const r = c?.registry ?? {}, sf = c?.safety ?? {};
+  const today = new Date(now.getTime() + 9 * 3600e3).toISOString().slice(0, 10);
+  const cl = c?.closure && (!c.closure.to || c.closure.to >= today) ? [c.closure.from ?? null, c.closure.to ?? null] : null;
+  const safety = [sf.extinguishers, sf.fire_water, sf.fire_sand, sf.fire_sensors].map((n) => (Number(n) > 0 ? Number(n) : 0));
+  const gx = {
+    lic: r.licensed_on ?? null, ins: r.insured === true ? true : null, staff: r.staff_onsite ?? null, org: r.operating_org ?? null,
+    tno: r.tourism_business_no ?? null, area: r.total_area_m2 ?? null, gap: c?.site_gap_m ?? null,
+    sf: safety.some((n) => n > 0) ? safety : null, cl,
+  };
+  const kept = Object.fromEntries(Object.entries(gx).filter(([, v]) => v !== null && v !== undefined));
+  return Object.keys(kept).length ? kept : null;
+}
+
+/**
  * 현장 조건의 공통 읽기 모델. UNKNOWN은 ‘없음/불가’가 아니라 원천에 값이
  * 없다는 뜻이다. 조건별 확인 화면을 추가할 때 이 모델을 단일 계약으로 쓴다.
  */
@@ -204,6 +223,9 @@ export function buildExploreRecords(camps, toilets, fees, seoul = new Map(), not
         url: s.url, source_url: s.source_url, checked_at: s.checked_at,
       })),
       modified_at: c.source?.modified_at ?? null,
+      // 고캠핑 등록 부가값(2026-10-19): 인허가일·보험·상주 인원·운영기관·면적·사이트 간 거리·안전시설 수·휴장 기간.
+      // 사업자번호(registry.business_no)는 매칭 키로만 쓰고 공개 데이터에는 싣지 않는다.
+      ...(gxOf(c) ? { gx: gxOf(c) } : {}),
     };
   });
 
@@ -305,7 +327,16 @@ export function buildExploreTexts(camps) {
   const out = {};
   for (const c of camps.campgrounds ?? []) {
     if (!c.location || !c.name) continue;
-    const t = { intro: clip(c.intro?.text, 700), feature: clip(c.intro?.feature, 400), nearby: c.nearby_facilities?.length ? c.nearby_facilities : null, programs: clip(c.programs, 200) };
+    const t = {
+      intro: clip(c.intro?.text, 700), feature: clip(c.intro?.feature, 400), nearby: c.nearby_facilities?.length ? c.nearby_facilities : null, programs: clip(c.programs, 200),
+      // 2026-10-19: 고캠핑 등록 부가 문구(글램핑·카라반 내부시설, 자체 행사, 체험 프로그램 여부, 여행 시기, 주변 시설 기타, 오시는 길)
+      inner: c.inner?.glamping?.length || c.inner?.caravan?.length ? Object.fromEntries(Object.entries({ glamping: c.inner.glamping, caravan: c.inner.caravan }).filter(([, v]) => v?.length)) : null,
+      event: clip(c.culture_event, 120),
+      exp: c.experience_program === true ? true : null,
+      era: c.travel_seasons?.length ? c.travel_seasons : null,
+      nearby_etc: c.nearby_facilities_etc?.length ? c.nearby_facilities_etc : null,
+      direction: clip(c.directions, 400),
+    };
     if (Object.values(t).some(Boolean)) out[String(c.external_id.id)] = Object.fromEntries(Object.entries(t).filter(([, v]) => v));
   }
   return out;

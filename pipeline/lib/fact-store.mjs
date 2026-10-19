@@ -4,6 +4,7 @@
 // - 프로필·요약(campground-profile.mjs)은 화면용 읽기 모델이고, 이 저장소는 여러 에이전트가 조합·검증하는 원장이다.
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { innerCodes } from "./gocamping.mjs";
 
 export const DICTIONARY = JSON.parse(readFileSync(fileURLToPath(new URL("../registry/attribute-dictionary.json", import.meta.url)), "utf8"));
 export const ATTR = new Map(DICTIONARY.attributes.map((a) => [a.code, a]));
@@ -21,6 +22,7 @@ export const SOURCES = {
   naver_local: "네이버 검색 API 지역 검색(업장 등록 정보)",
   review_search: "Daum 블로그·카페 검색 요약",
   localdata: "행정안전부 LOCALDATA 인허가(영업 중 업소)",
+  gocamping_best: "문화체육관광부·한국관광공사 분야별 공공 우수야영장(고캠핑 공개 목록)",
 };
 
 const ENV = { 산: "MOUNTAIN", 숲: "FOREST", 강: "RIVER", 호수: "LAKE", 계곡: "VALLEY", 해변: "BEACH", 섬: "ISLAND", 도심: "CITY" };
@@ -115,6 +117,26 @@ export function factsOf(c, d, { site = null, details = null, digest = null, kaka
   if (typeof c.caravan === "boolean") push("CARAVAN_ALLOWED", c.caravan, "CONFIRMED", "gocamping", gc);
   if (c.tel) push("PHONE", c.tel, "CONFIRMED", "gocamping", gc);
   if (c.homepage) push("HOMEPAGE", c.homepage, "CONFIRMED", "gocamping", gc);
+  // ── 고캠핑 등록 부가값(2026-10-19, explore-data.mjs gxOf·buildExploreTexts). 0·N·빈값은 미입력으로 보고 행을 만들지 않는다.
+  const gx = c.gx ?? {};
+  const SAFETY = ["SAFETY_EXTINGUISHER", "SAFETY_FIRE_WATER", "SAFETY_FIRE_SAND", "SAFETY_FIRE_SENSOR"];
+  (gx.sf ?? []).forEach((n, i) => { if (Number(n) > 0) push(SAFETY[i], Number(n), "CONFIRMED", "gocamping", gc); });
+  if (gx.ins === true) push("SAFETY_INSURANCE", true, "CONFIRMED", "gocamping", { ...gc, text: "영업배상책임보험 가입(고캠핑 등록)" });
+  if (Number(gx.staff) > 0) push("STAFF_ONSITE", Number(gx.staff), "CONFIRMED", "gocamping", gc);
+  if (gx.lic) push("LICENSE_DATE", gx.lic, "CONFIRMED", "gocamping", gc);
+  if (gx.tno) push("TOURISM_BIZ_NO", gx.tno, "CONFIRMED", "gocamping", gc);
+  if (gx.org) push("OPERATOR_ORG", gx.org, "CONFIRMED", "gocamping", gc);
+  if (Number(gx.gap) > 0) push("SITE_GAP_M", Number(gx.gap), "CONFIRMED", "gocamping", { ...gc, text: `${gx.gap}m` });
+  if (Number(gx.area) > 0) push("AREA_TOTAL_M2", Number(gx.area), "CONFIRMED", "gocamping", gc);
+  if (gx.cl) push("SEASONAL_CLOSURE", `${gx.cl[0] ?? ""}~${gx.cl[1] ?? ""}`, "CONFIRMED", "gocamping", { ...gc, period: { from: gx.cl[0] ?? null, to: gx.cl[1] ?? null } });
+  for (const [label, items] of Object.entries(d?.inner ?? {})) {
+    const kind = label === "caravan" ? "CARAVAN" : "GLAMPING";
+    for (const code of innerCodes(items)) push("INNER_AMENITY", code, "CONFIRMED", "gocamping", { ...gc, label: kind, text: items.join(",") });
+  }
+  if (d?.event) push("PROGRAM_EVENT", d.event, "CONFIRMED", "gocamping", gc);
+  if (d?.exp === true) push("PROGRAM_EXPERIENCE", true, "CONFIRMED", "gocamping", gc);
+  // ── 분야별 공공 우수야영장(고캠핑 공개 목록, 연도별)
+  for (const [year, field] of c.best ?? []) push("AWARD_PUBLIC_BEST", field, "CONFIRMED", "gocamping_best", { url: `https://gocamping.or.kr/camp/best/list.do?searchYear=${year}`, at: c.best_at ?? null, label: String(year) });
   const am = new Map();
   for (const a of c.amenities ?? []) {
     if (a === "전기") continue;
