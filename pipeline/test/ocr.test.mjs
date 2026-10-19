@@ -26,3 +26,9 @@ test("OCR 잡음 줄은 버리고 안내 문장은 남긴다; 점수는 요금 �
   assert.deepEqual(s, ["입실은 오후 2시, 퇴실은 오전 11시입니다."]);
   assert.ok(ocrScore("평일 45,000원 주말 60,000원") > ocrScore("평일 45 OOO 주말 6O OOO"));
 });
+
+test("OCR 표: 요금 칸 이름의 잡음 글자는 버린다", () => {
+  const t = "방이름      평형      기준인원     성수기 $s 비고·Fue)      평일\n밤나무집      7평        4명       13만원      7만원";
+  const s = ocrSentences(t);
+  assert.ok(!/\$s|Fue/.test(s[0]), s[0]);
+});

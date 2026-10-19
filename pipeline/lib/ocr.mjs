@@ -6,6 +6,8 @@
 
 const HEADER_WORD = /평일|주중|주말|금[,·\s]*토|일[~\-]?목|성수기|비수기|준성수기|극성수기|요금|이용료|가격|기준\s*인원|기준|최대\s*인원|인원|사이트(수|명|그룹)?|구분|객실|방이름|평형|크기|규격|면적|비고|전기|1박|2박|연박/;
 const PRICE_COL = /평일|주중|주말|금[,·\s]*토|일[~\-]?목|성수기|비수기|요금|이용료|가격|1박|2박|연박|추가/;
+// 요금 칸 이름에 OCR 잡음(“$s 비고·Fue)”)이 섞이면 칸 이름 낱말만 남긴다.
+const priceWordOf = (c) => (hangulRatio(c.replace(/[()[\],·~/]/g, "")) >= 0.6 ? c : (c.match(new RegExp(PRICE_COL.source, "g")) ?? []).join("·"));
 const cellsOf = (line) => line.split(/\s{2,}|\t|\s*[|│]\s*/).map((c) => c.trim()).filter(Boolean);
 const hangulRatio = (s) => (s.match(/[가-힣]/g)?.length ?? 0) / Math.max(1, s.replace(/\s/g, "").length);
 
@@ -37,10 +39,10 @@ export function ocrSentences(text) {
     const headerHits = cells.filter((c) => HEADER_WORD.test(c)).length;
     const hasValue = cells.some((c) => /\d/.test(c));
     if (cells.length >= 3 && headerHits >= Math.max(2, Math.ceil(cells.length * 0.5)) && !/\d{1,3},\d{3}|\d+\s*만\s*원/.test(line)) {
-      header = cells; priceWords = cells.filter((c) => PRICE_COL.test(c)); groupLabel = ""; lastWasHeader = true; continue;
+      header = cells; priceWords = cells.filter((c) => PRICE_COL.test(c)).map(priceWordOf).filter(Boolean); groupLabel = ""; lastWasHeader = true; continue;
     }
     // 두 줄 머리: 머리 바로 다음의 숫자 없는 짧은 줄(“주말(금,토)  평일”)은 요금 칸 이름으로 보탠다.
-    if (lastWasHeader && !hasValue && cells.length <= 4 && cells.every((c) => HEADER_WORD.test(c))) { priceWords.push(...cells.filter((c) => PRICE_COL.test(c))); continue; }
+    if (lastWasHeader && !hasValue && cells.length <= 4 && cells.every((c) => HEADER_WORD.test(c))) { priceWords.push(...cells.filter((c) => PRICE_COL.test(c)).map(priceWordOf).filter(Boolean)); continue; }
     lastWasHeader = false;
     if (header && hasValue && cells.length >= 2) {
       // 행 머리(사이트·객실 이름)는 첫 칸. 첫 칸이 숫자뿐이거나 계절·요일이면 앞 행 이름을 잇는다(병합 셀).
@@ -56,7 +58,7 @@ export function ocrSentences(text) {
           if (j === 0) return;
           const h = header[j + offset] ?? "";
           if (!h || !/\d|가능|불가|무료|포함|없음|성수기|비수기|평일|주말/.test(c)) return;
-          if (PRICE_COL.test(h) && (isPriceCell(c) || /원/.test(c))) prices.push(`${h} ${wonCell(c)}`);
+          if (PRICE_COL.test(h) && (isPriceCell(c) || /원/.test(c))) prices.push(`${priceWordOf(h)} ${wonCell(c)}`);
           else meta.push(`${h} ${c}`);
         });
       } else {

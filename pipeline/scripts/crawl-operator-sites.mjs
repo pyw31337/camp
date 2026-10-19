@@ -185,7 +185,8 @@ function guideImages(pages, max = 8) {
   return [...out.values()].sort((a, b) => b.score - a.score).slice(0, max);
 }
 let tesseractOk = null, sharpMod = null;
-async function ocrImages(pages, rules) {
+// 결과는 넘겨받은 out에 바로 쌓는다(시간이 다 되어도 읽은 이미지 결과는 남는다). deadline이 지나면 다음 이미지를 읽지 않는다.
+async function ocrImages(pages, rules, out = [], deadline = Date.now() + 150000) {
   const { execFile } = await import("node:child_process");
   const { writeFile, rm, mkdtemp } = await import("node:fs/promises");
   const { tmpdir } = await import("node:os");
@@ -195,9 +196,12 @@ async function ocrImages(pages, rules) {
   if (!tesseractOk) return [];
   sharpMod ??= await import("sharp").then((m) => m.default).catch(() => false);
   const dir = await mkdtemp(join(tmpdir(), "ocr-"));
-  const out = [];
+  const left = () => deadline - Date.now();
   try {
-    for (const [n, img] of guideImages(pages).entries()) {
+    const picked = guideImages(pages);
+    if (process.env.CRAWL_DEBUG) console.log("  ocr candidates", picked.length, picked.slice(0, 3).map((x) => x.url).join(" "));
+    for (const [n, img] of picked.entries()) {
+      if (left() < 15000) break;
       const u = new URL(img.url);
       if (!robotsAllows(rules, u.pathname)) continue;
       await sleep(1000);
@@ -215,8 +219,12 @@ async function ocrImages(pages, rules) {
           await sharpMod(buf).flatten({ background: "#ffffff" }).resize({ width: Math.round(meta.width * scale) }).grayscale().normalize().sharpen().png().toFile(pre);
         } else await writeFile(raw, buf);
         // 원본 psm6 · 전처리 psm6 · 전처리 psm4 중 요금·시간 단서가 가장 많은 결과를 쓴다.
-        const texts = [await run([raw, "-", "-l", "kor+eng", "--psm", "6"]), ...(sharpMod ? [await run([pre, "-", "-l", "kor+eng", "--psm", "6"]), await run([pre, "-", "-l", "kor+eng", "--psm", "4"])] : [])].filter(Boolean);
+        // 원본 결과에 요금 단서가 충분하면(점수 15↑) 전처리 판독은 건너뛴다(시간 절약).
+        const texts = [await run([raw, "-", "-l", "kor+eng", "--psm", "6"])];
+        if (sharpMod && !(ocrScore(texts[0] ?? "") >= 15)) for (const psm of ["6", "4"]) if (left() > 20000) texts.push(await run([pre, "-", "-l", "kor+eng", "--psm", psm]));
+        texts.splice(0, texts.length, ...texts.filter(Boolean));
         const best = texts.sort((a, b) => ocrScore(b) - ocrScore(a))[0] ?? "";
+        if (process.env.CRAWL_DEBUG) console.log("  ocr", img.url, "runs", texts.length, "len", best.length);
         const priceLine = /\d[\d,]*\s*(만\s*)?원/;
         for (const s of ocrSentences(best)) {
           const keep = priceLine.test(s) ? [s] : relevantSentences(s, 2);
@@ -236,6 +244,7 @@ const snippetsOf = (pages) => {
 
 async function crawlOne(c) {
   const checked_at = new Date().toISOString();
+  const siteDeadline = Date.now() + 225000; // 사이트 전체 시간(240초) 안에서 OCR이 끝나도록
   const starts = startsOf(c);
   const uniq = [...new Map(starts.map((u) => [new URL(withProto(u)).hostname.replace(/^www\./, ""), u])).values()];
   if (!uniq.length) return { status: isClosedHost(c.homepage ?? "") ? "SERVICE_CLOSED" : "NO_OPERATOR_SITE", url: c.homepage ?? null, checked_at };
@@ -259,7 +268,8 @@ async function crawlOne(c) {
     for (const s of snippetsOf(r.pages)) if (!all.some((x) => x.text === s.text)) all.push(s);
     // 글이 적거나, 요금 문장이 하나도 없으면(요금표가 이미지인 곳) 안내 이미지를 읽는다.
     if (OCR && (all.length < 8 || !all.some((x) => /\d[\d,]*\s*(만\s*)?원/.test(x.text)))) {
-      const o = await within(180000, ocrImages([...r.pages, ...(rendered?.pages ?? [])], rules), "ocr").catch(() => []);
+      const o = [];
+      await within(Math.max(20000, siteDeadline - Date.now()), ocrImages([...r.pages, ...(rendered?.pages ?? [])], rules, o, siteDeadline - 10000), "ocr").catch(() => {});
       for (const s of o) if (!all.some((x) => x.text === s.text)) all.push(s);
     }
   }
