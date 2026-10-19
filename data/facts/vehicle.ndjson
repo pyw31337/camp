@@ -3,7 +3,7 @@
 {"cid":"10","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"10","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"11","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"11","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.yangchoncamp.co.kr/bbs/board.php?bo_table=gallery&wr_id=42","at":"2026-10-19T02:39:31.618Z","quote":"사이트 옆 주차 (안내도참고 놀이터 쪽으로 일괄주차)"}
+{"cid":"11","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.yangchoncamp.co.kr/bbs/board.php?bo_table=gallery&wr_id=42","at":"2026-10-19T09:39:02.937Z","quote":"사이트 옆 주차 (안내도참고 놀이터 쪽으로 일괄주차)"}
 {"cid":"11","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"12","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"12","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -32,14 +32,14 @@
 {"cid":"61","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"61","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"63","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"63","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_discovered","url":"https://yellowhill.revrun.kr/guide-info","at":"2026-10-19T02:14:11.457Z","quote":"주차장과 캠핑 공간이 약 30m 분리되어 있어, 장비 하차 후 차량은 주차장에 주차해 주세요."}
+{"cid":"63","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_discovered","url":"https://yellowhill.revrun.kr/guide-info","at":"2026-10-19T09:24:53.940Z","quote":"주차장과 캠핑 공간이 약 30m 분리되어 있어, 장비 하차 후 차량은 주차장에 주차해 주세요."}
 {"cid":"63","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"75","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"75","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"76","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"76","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"81","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"81","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://moonlightcamp.kr/02facilities.html","at":"2026-10-19T02:12:25.597Z","quote":"카라반 외부: 야외테이블 및 파라솔, 카라반 옆 주차가능(1대)"}
+{"cid":"81","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://moonlightcamp.kr/02facilities.html","at":"2026-10-19T09:23:58.998Z","quote":"카라반 외부: 야외테이블 및 파라솔, 카라반 옆 주차가능(1대)"}
 {"cid":"81","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"85","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"85","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -240,7 +240,7 @@
 {"cid":"596","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"596","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"597","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"597","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"http://www.handure.net/camping","at":"2026-10-19T01:54:17.694Z","quote":"사이트 바로 옆까지 차량 진입이 가능합니다."}
+{"cid":"597","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"http://www.handure.net/camping","at":"2026-10-19T09:14:09.070Z","quote":"사이트 바로 옆까지 차량 진입이 가능합니다."}
 {"cid":"597","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"604","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"604","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -367,7 +367,7 @@
 {"cid":"869","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"869","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"873","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"873","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--989a5bx9vuzab11ae0htwlp5nruo17c.kr/?page_id=1256","at":"2026-10-19T02:32:03.998Z","quote":"사이트별 개별 주차가 가능합니다."}
+{"cid":"873","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--989a5bx9vuzab11ae0htwlp5nruo17c.kr/?page_id=1256","at":"2026-10-19T09:35:20.754Z","quote":"사이트별 개별 주차가 가능합니다."}
 {"cid":"873","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"874","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"874","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -395,9 +395,9 @@
 {"cid":"919","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"922","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"922","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"923","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1by4vdqp.com/?page_id=67","at":"2026-10-19T02:35:14.592Z","quote":"계곡 3동 ( 18m x 12m) – 차박가능"}
+{"cid":"923","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1by4vdqp.com/?page_id=67","at":"2026-10-19T09:36:38.452Z","quote":"계곡 3동 ( 18m x 12m) – 차박가능"}
 {"cid":"923","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"923","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1by4vdqp.com/?ckattempt=1","at":"2026-10-19T02:35:14.592Z","quote":"8m X 12m의 크기로 사이트옆 주차가능합니다.1번~4번사이트와 5번~8번사이트 사이는 차량통행 구간입니다."}
+{"cid":"923","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1by4vdqp.com/?ckattempt=1","at":"2026-10-19T09:36:38.452Z","quote":"8m X 12m의 크기로 사이트옆 주차가능합니다.1번~4번사이트와 5번~8번사이트 사이는 차량통행 구간입니다."}
 {"cid":"923","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"930","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"930","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -422,7 +422,7 @@
 {"cid":"977","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"977","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"978","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"978","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--2o2b21q82j1vg6a.kr/main","at":"2026-10-19T02:08:29.076Z","quote":"짐을 내린후 주차장으로 이동조치됩니다."}
+{"cid":"978","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--2o2b21q82j1vg6a.kr/main","at":"2026-10-19T09:22:09.453Z","quote":"짐을 내린후 주차장으로 이동조치됩니다."}
 {"cid":"978","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"987","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"987","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -499,7 +499,7 @@
 {"cid":"1190","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1190","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1194","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1194","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://mycamp.co.kr/","at":"2026-10-19T02:39:36.600Z","quote":"텐트 옆 주차가능 (여유로운 사이트 크기)"}
+{"cid":"1194","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://mycamp.co.kr/","at":"2026-10-19T09:39:07.035Z","quote":"텐트 옆 주차가능 (여유로운 사이트 크기)"}
 {"cid":"1194","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1196","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1196","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -527,7 +527,7 @@
 {"cid":"1260","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1260","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1264","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1264","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://baekmagangleisure.com/?page_id=6445","at":"2026-10-19T02:28:57.498Z","quote":"카라반 옆 주차 2명"}
+{"cid":"1264","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://baekmagangleisure.com/?page_id=6445","at":"2026-10-19T09:34:03.655Z","quote":"카라반 옆 주차 2명"}
 {"cid":"1264","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1266","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1266","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -553,7 +553,7 @@
 {"cid":"1321","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1324","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1324","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1327","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.starmaro.com/camp","at":"2026-10-19T01:46:27.738Z","quote":"차박 - 예약하실때 차박가능이라고 써 있는 자리에 예약하시면 차박이 가능합니다."}
+{"cid":"1327","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.starmaro.com/camp","at":"2026-10-19T09:10:00.857Z","quote":"차박 - 예약하실때 차박가능이라고 써 있는 자리에 예약하시면 차박이 가능합니다."}
 {"cid":"1327","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1327","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1330","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -586,9 +586,9 @@
 {"cid":"1418","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1433","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1433","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1438","attr":"CAR_CAMPING","value":false,"grade":"OPERATOR","src":"operator_homepage","url":"http://bibiautocamp.com/contents/reserve.html","at":"2026-10-19T02:20:34.149Z","quote":"타프형 오토캠핑, 오토캠핑은 차박불가, 트레일러, 캠핑카 이용이 불가능합니다."}
+{"cid":"1438","attr":"CAR_CAMPING","value":false,"grade":"OPERATOR","src":"operator_homepage","url":"http://bibiautocamp.com/contents/reserve.html","at":"2026-10-19T09:29:07.731Z","quote":"타프형 오토캠핑, 오토캠핑은 차박불가, 트레일러, 캠핑카 이용이 불가능합니다."}
 {"cid":"1438","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1438","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://bibiautocamp.com/contents/reserve.html","at":"2026-10-19T02:20:34.149Z","quote":"전 객실 사이트 옆 주차 가능합니다."}
+{"cid":"1438","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://bibiautocamp.com/contents/reserve.html","at":"2026-10-19T09:29:07.731Z","quote":"전 객실 사이트 옆 주차 가능합니다."}
 {"cid":"1438","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1441","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1441","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -631,7 +631,7 @@
 {"cid":"1534","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1534","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1547","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1547","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"https://www.nakdongcamping.com/","at":"2026-10-19T02:24:07.059Z","quote":"이로 인해 사이트 내 주차할 시 진입로의 경사가 가파르기 때문에 자동차 하부와 사이트 높이에 주의하시기 바랍니다."}
+{"cid":"1547","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"https://www.nakdongcamping.com/","at":"2026-10-19T09:30:50.339Z","quote":"이로 인해 사이트 내 주차할 시 진입로의 경사가 가파르기 때문에 자동차 하부와 사이트 높이에 주의하시기 바랍니다."}
 {"cid":"1547","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1554","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1554","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -690,7 +690,7 @@
 {"cid":"1705","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1705","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1709","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1709","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"http://pinestream.co.kr/","at":"2026-10-19T02:08:21.941Z","quote":"A동은 계곡 바로위에 위치하며, 텐트 앞에 차를 주차할 수 있는 오토캠핑장입니다."}
+{"cid":"1709","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"http://pinestream.co.kr/","at":"2026-10-19T09:21:54.520Z","quote":"A동은 계곡 바로위에 위치하며, 텐트 앞에 차를 주차할 수 있는 오토캠핑장입니다."}
 {"cid":"1709","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1715","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1715","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -763,7 +763,7 @@
 {"cid":"1941","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1941","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1957","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1957","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://analogday.co.kr/","at":"2026-10-19T02:40:54.430Z","quote":"개별사이트 바로옆 주차가능"}
+{"cid":"1957","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://analogday.co.kr/","at":"2026-10-19T09:40:02.013Z","quote":"개별사이트 바로옆 주차가능"}
 {"cid":"1957","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1970","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1970","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -788,7 +788,7 @@
 {"cid":"2022","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2022","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2031","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2031","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"https://www.anseong.go.kr/tourPortal/camp/contents.do?mId=0104010000","at":"2026-10-18T12:28:20.565Z","quote":"일반, 데크캠핑장 이용자는 주차장 주차 후 캠핑 장비를 개별 운반하셔야 합니다.(차량 진입 불가)"}
+{"cid":"2031","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"https://www.anseong.go.kr/tourPortal/camp/contents.do?mId=0104010000","at":"2026-10-19T09:27:02.748Z","quote":"일반, 데크캠핑장 이용자는 주차장 주차 후 캠핑 장비를 개별 운반하셔야 합니다.(차량 진입 불가)"}
 {"cid":"2031","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2032","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2032","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -882,7 +882,7 @@
 {"cid":"2280","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2282","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2282","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2288","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://rsvt.co.kr:1447/rsvt_web_jw/index.html?p_id=ypccamp","at":"2026-10-19T02:18:51.138Z","quote":"A구역은 차박 가능합니다."}
+{"cid":"2288","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://rsvt.co.kr:1447/rsvt_web_jw/index.html?p_id=ypccamp","at":"2026-10-19T09:27:50.671Z","quote":"A구역은 차박 가능합니다."}
 {"cid":"2288","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2288","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2304","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -1020,7 +1020,7 @@
 {"cid":"2751","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2751","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2755","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2755","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"http://www.thebestcamp.co.kr/home/bbs/board.php?bo_table=booking","at":"2026-10-19T02:38:46.135Z","quote":"a: 페쇠석형, 차량 진입가능, 18사이트"}
+{"cid":"2755","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"http://www.thebestcamp.co.kr/home/bbs/board.php?bo_table=booking","at":"2026-10-19T09:38:20.534Z","quote":"a: 페쇠석형, 차량 진입가능, 18사이트"}
 {"cid":"2755","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2758","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2758","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -1080,7 +1080,7 @@
 {"cid":"2879","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2880","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2880","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2882","attr":"CAR_CAMPING","value":false,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.ckdcamp.kr/camp/","at":"2026-10-19T02:00:31.693Z","quote":"카라반 캠핑카 트레일러 차박 출입금지 2023-08-03"}
+{"cid":"2882","attr":"CAR_CAMPING","value":false,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.ckdcamp.kr/camp/","at":"2026-10-19T09:17:03.209Z","quote":"카라반 캠핑카 트레일러 차박 출입금지 2023-08-03"}
 {"cid":"2882","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2882","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2886","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -1147,7 +1147,7 @@
 {"cid":"3024","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3025","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3025","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"3034","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://kalcamping.kr/reservation.html","at":"2026-10-19T02:18:12.975Z","quote":"- 전 텐트사이트 차박 가능"}
+{"cid":"3034","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://kalcamping.kr/reservation.html","at":"2026-10-19T09:27:31.410Z","quote":"- 전 텐트사이트 차박 가능"}
 {"cid":"3034","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3034","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3045","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -1626,7 +1626,6 @@
 {"cid":"7175","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7182","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7182","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7187","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.wando.go.kr/tour/sub.cs?m=117","at":"2026-10-18T12:20:56.576Z","quote":"덕분에 오토캠핑장뿐만 아니라 노지에서도 전력 걱정 없이 편안한 차박이 가능합니다."}
 {"cid":"7187","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7187","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7192","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -1660,7 +1659,7 @@
 {"cid":"7211","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7212","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7212","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7214","attr":"CAR_CAMPING","value":false,"grade":"OPERATOR","src":"operator_discovered","url":"http://www.campingoclock.com/main/main.html","at":"2026-10-19T02:40:42.434Z","quote":"캠핑카, 트레일러, 차박, 루푸탑 입장불가"}
+{"cid":"7214","attr":"CAR_CAMPING","value":false,"grade":"OPERATOR","src":"operator_discovered","url":"http://www.campingoclock.com/main/main.html","at":"2026-10-19T09:39:55.799Z","quote":"캠핑카, 트레일러, 차박, 루푸탑 입장불가"}
 {"cid":"7214","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7214","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7216","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -1690,12 +1689,12 @@
 {"cid":"7251","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7251","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7253","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7253","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://www.bestfield.kr/content/110","at":"2026-10-19T01:41:15.672Z","quote":"• 주차는 각 텐트당 1대씩 텐트옆에 주차 가능 (추가 차량은 외부주차장 이용)"}
+{"cid":"7253","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://www.bestfield.kr/content/110","at":"2026-10-19T09:05:56.521Z","quote":"• 주차는 각 텐트당 1대씩 텐트옆에 주차 가능 (추가 차량은 외부주차장 이용)"}
 {"cid":"7253","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7254","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7254","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7255","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7255","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"https://www.hwamyungcamping.com/introduce/useful","at":"2026-10-19T02:28:47.435Z","quote":"밤 10시 이후 오토캠핑장내 방문차량 출입 금지."}
+{"cid":"7255","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"https://www.hwamyungcamping.com/introduce/useful","at":"2026-10-19T09:33:52.791Z","quote":"밤 10시 이후 오토캠핑장내 방문차량 출입 금지."}
 {"cid":"7255","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7256","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7256","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1733,7 +1732,7 @@
 {"cid":"7314","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7315","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7315","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7318","attr":"CAR_CAMPING","value":false,"grade":"OPERATOR","src":"operator_homepage","url":"https://xn--om2bi2o9qdy7a48exzk3vf68fzzd.kr/board/lists/b_id/3","at":"2026-10-19T02:42:49.351Z","quote":"저희 캠핑장에서는 캠핑카, 캠핑트레일러, 차박은 공간이 협소하여 불가능 함을 알려드립니다."}
+{"cid":"7318","attr":"CAR_CAMPING","value":false,"grade":"OPERATOR","src":"operator_homepage","url":"https://xn--om2bi2o9qdy7a48exzk3vf68fzzd.kr/board/lists/b_id/3","at":"2026-10-19T09:40:58.541Z","quote":"저희 캠핑장에서는 캠핑카, 캠핑트레일러, 차박은 공간이 협소하여 불가능 함을 알려드립니다."}
 {"cid":"7318","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7318","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7319","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -1881,7 +1880,7 @@
 {"cid":"7588","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7588","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7590","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7590","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://www.hopecamping.co.kr/app/app_info.php","at":"2026-10-19T02:26:35.844Z","quote":"데크에는 나사팩만 사용 가능하며, 데크 옆 주차공간은 주차 용도로만 사용해 주세요."}
+{"cid":"7590","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://www.hopecamping.co.kr/app/app_info.php","at":"2026-10-19T09:32:34.406Z","quote":"데크에는 나사팩만 사용 가능하며, 데크 옆 주차공간은 주차 용도로만 사용해 주세요."}
 {"cid":"7590","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7591","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7591","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -2132,7 +2131,7 @@
 {"cid":"7946","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7953","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7953","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7956","attr":"CAR_CAMPING","value":false,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--939ap9fowi7mi22il0kvxl.kr/?page_id=6445","at":"2026-10-19T02:15:56.046Z","quote":"• 주차장에 쉘터, 타프등 설치가능하나 추가인원께서 텐트/차박등을 이용한 숙박은 허용안됩니다."}
+{"cid":"7956","attr":"CAR_CAMPING","value":false,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--939ap9fowi7mi22il0kvxl.kr/?page_id=6445","at":"2026-10-19T09:26:15.504Z","quote":"• 주차장에 쉘터, 타프등 설치가능하나 추가인원께서 텐트/차박등을 이용한 숙박은 허용안됩니다."}
 {"cid":"7956","attr":"CARAVAN_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7956","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7958","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -2154,7 +2153,7 @@
 {"cid":"7975","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7975","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7981","attr":"CARAVAN_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7981","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://jhcamp.kr/bbs/board.php?bo_table=b601","at":"2026-10-19T02:02:04.769Z","quote":"(차박)A 1~3번 데크, B 4~8, B 24~28, C 12~16번 데크에서 차박을 자유롭고 편한하게 즐기실 수 있습니다.(주차) 모든 개별 데크는 데크 옆에 주차가 가능합니다… 더보기"}
+{"cid":"7981","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://jhcamp.kr/bbs/board.php?bo_table=b601","at":"2026-10-19T09:18:20.913Z","quote":"(차박)A 1~3번 데크, B 4~8, B 24~28, C 12~16번 데크에서 차박을 자유롭고 편한하게 즐기실 수 있습니다.(주차) 모든 개별 데크는 데크 옆에 주차가 가능합니다… 더보기"}
 {"cid":"7981","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7983","attr":"CARAVAN_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7983","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2179,7 +2178,7 @@
 {"cid":"8012","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8012","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8014","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"8014","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"https://noeuljin.com/page/%EC%98%88%EC%95%BD%EC%95%88%EB%82%B4/","at":"2026-10-19T01:55:13.743Z","quote":"* 차후 예약 시 별도 통보없이 예약취소 처리되며, 캠핑장내 차량 진입 불가"}
+{"cid":"8014","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"https://noeuljin.com/page/%EC%98%88%EC%95%BD%EC%95%88%EB%82%B4/","at":"2026-10-19T09:14:41.462Z","quote":"* 차후 예약 시 별도 통보없이 예약취소 처리되며, 캠핑장내 차량 진입 불가"}
 {"cid":"8014","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8015","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8015","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -2728,6 +2727,7 @@
 {"cid":"100365","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100365","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100366","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100366","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--ok0b92m99epnnjpixnk.kr/bbs/board.php?bo_table=yb_reservation01&wr_id=1","at":"2026-10-19T09:41:25.815Z","quote":"BH 화장실이 잘되어있어요 +4 (객실명: 오토캠핑장(&-3)-주차가능 (트레일러%) 깨끗해요 +4, 객실명: 오토캠핑장(&-3) - 차량진입가능 [6] 주자하기 편해요 44)"}
 {"cid":"100366","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100367","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100367","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -2756,7 +2756,7 @@
 {"cid":"100381","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100381","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100382","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100382","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://camp.seondori.com/","at":"2026-10-19T02:43:35.505Z","quote":"각 사이트 바로 옆에 주차가 가능합니다."}
+{"cid":"100382","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://camp.seondori.com/","at":"2026-10-19T09:41:29.104Z","quote":"각 사이트 바로 옆에 주차가 가능합니다."}
 {"cid":"100382","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100383","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100383","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3046,7 +3046,7 @@
 {"cid":"100549","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100549","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100550","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100550","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://hbasecamp.com/page/charge.php","at":"2026-10-19T02:06:55.423Z","quote":"차박(차박or차량을 텐트옆에 주차 가능한 사이트) 가능 (A17,18,22, 26,27,30, B1,2,3,4,5,8,9,10,11,14,15,18,19,21,22)"}
+{"cid":"100550","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://hbasecamp.com/page/charge.php","at":"2026-10-19T09:21:00.420Z","quote":"차박(차박or차량을 텐트옆에 주차 가능한 사이트) 가능 (A17,18,22, 26,27,30, B1,2,3,4,5,8,9,10,11,14,15,18,19,21,22)"}
 {"cid":"100550","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100552","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100552","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -3097,7 +3097,7 @@
 {"cid":"100582","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100582","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100583","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100583","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://andocamping.nammyeon.kr/","at":"2026-10-19T02:02:56.081Z","quote":"사이트별 주차 가능"}
+{"cid":"100583","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://andocamping.nammyeon.kr/","at":"2026-10-19T09:18:59.956Z","quote":"사이트별 주차 가능"}
 {"cid":"100583","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100584","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100584","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3248,7 +3248,7 @@
 {"cid":"100659","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100659","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100661","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100661","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"https://riverwith.co.kr/?page_id=7","at":"2026-10-19T02:48:50.577Z","quote":"글램핑 사이트 옆 주차 가능"}
+{"cid":"100661","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"https://riverwith.co.kr/?page_id=7","at":"2026-10-19T09:44:23.104Z","quote":"글램핑 사이트 옆 주차 가능"}
 {"cid":"100661","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100662","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100662","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -3327,7 +3327,7 @@
 {"cid":"100703","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100703","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100704","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100704","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--369a96jx3r.kr/","at":"2026-10-19T02:22:23.144Z","quote":"사이트옆 주차"}
+{"cid":"100704","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--369a96jx3r.kr/","at":"2026-10-19T09:29:49.810Z","quote":"사이트옆 주차"}
 {"cid":"100704","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100705","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100705","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3376,7 +3376,7 @@
 {"cid":"100729","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100729","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100730","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100730","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--v20b662avzeeob84iwndvwq.com/page/page78","at":"2026-10-19T02:49:21.750Z","quote":"사이트 옆 주차"}
+{"cid":"100730","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--v20b662avzeeob84iwndvwq.com/page/page78","at":"2026-10-19T09:44:43.198Z","quote":"사이트 옆 주차"}
 {"cid":"100730","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100731","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100731","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3409,7 +3409,7 @@
 {"cid":"100746","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100746","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100748","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100748","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--wh1bx90au2c9wbj5qwtebvhpb.com/page/page66","at":"2026-10-19T02:49:36.415Z","quote":"(주차미포함 사이트옆 주차가능)"}
+{"cid":"100748","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--wh1bx90au2c9wbj5qwtebvhpb.com/page/page66","at":"2026-10-19T09:44:55.813Z","quote":"(주차미포함 사이트옆 주차가능)"}
 {"cid":"100748","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100749","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100749","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -3897,7 +3897,7 @@
 {"cid":"101041","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101041","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101043","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101043","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://donggucamp.co.kr/sub/sub02_3","at":"2026-10-19T01:43:19.165Z","quote":"사이트내 주차(1대)"}
+{"cid":"101043","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://donggucamp.co.kr/sub/sub02_3","at":"2026-10-19T09:07:30.742Z","quote":"사이트내 주차(1대)"}
 {"cid":"101043","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101044","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101044","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -4038,7 +4038,7 @@
 {"cid":"101127","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101127","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101130","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101130","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://ddglamping.com/contents/reserve.html","at":"2026-10-19T02:27:06.464Z","quote":"글램핑1,2,5호는 글램핑텐트 옆 주차가능합니다."}
+{"cid":"101130","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://ddglamping.com/contents/reserve.html","at":"2026-10-19T09:32:57.711Z","quote":"글램핑1,2,5호는 글램핑텐트 옆 주차가능합니다."}
 {"cid":"101130","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101131","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101131","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4493,7 +4493,7 @@
 {"cid":"101364","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101364","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101365","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101365","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"https://xn--989a5b27mi7l2xdtpvbsh21er1nhzd.com/about/","at":"2026-10-19T02:42:24.872Z","quote":"사이트 옆 주차가 가능."}
+{"cid":"101365","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"https://xn--989a5b27mi7l2xdtpvbsh21er1nhzd.com/about/","at":"2026-10-19T09:40:45.586Z","quote":"사이트 옆 주차가 가능."}
 {"cid":"101365","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101366","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101366","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -4549,7 +4549,7 @@
 {"cid":"101392","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101393","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101393","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101394","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://www.starlightcamp.kr/reserve/reserve01.php","at":"2026-10-19T02:19:48.610Z","quote":"전사이트 차박 가능 (전기차 충전 X)"}
+{"cid":"101394","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://www.starlightcamp.kr/reserve/reserve01.php","at":"2026-10-19T09:28:26.675Z","quote":"전사이트 차박 가능 (전기차 충전 X)"}
 {"cid":"101394","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101394","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101395","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -4606,7 +4606,7 @@
 {"cid":"101420","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101421","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101421","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101422","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://soorim.webbit.kr/","at":"2026-10-19T02:16:28.042Z","quote":"차박 사이트"}
+{"cid":"101422","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://soorim.webbit.kr/","at":"2026-10-19T09:26:42.883Z","quote":"차박 사이트"}
 {"cid":"101422","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101422","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101423","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -4647,7 +4647,7 @@
 {"cid":"101443","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101444","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101444","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101446","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--dm2b95g82rrwb37jlsb.com/reservation.php?id=1","at":"2026-10-19T02:18:33.152Z","quote":"차박사이트"}
+{"cid":"101446","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--dm2b95g82rrwb37jlsb.com/reservation.php?id=1","at":"2026-10-19T09:27:40.638Z","quote":"차박사이트"}
 {"cid":"101446","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101446","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101447","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -5187,7 +5187,7 @@
 {"cid":"101738","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101738","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101739","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101739","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"https://cms.seantour.com/GK001/reservation-of-accommodation.do?mode=view&articleNo=1101&article.offset=0&articleLimit=10","at":"2026-10-19T02:13:43.947Z","quote":"짐을 옮길시 주차장에 주차 후 리어카로 옮겨주세요"}
+{"cid":"101739","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"https://cms.seantour.com/GK001/reservation-of-accommodation.do?mode=view&articleNo=1101&article.offset=0&articleLimit=10","at":"2026-10-19T09:24:40.251Z","quote":"짐을 옮길시 주차장에 주차 후 리어카로 옮겨주세요"}
 {"cid":"101739","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101740","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101740","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -5404,7 +5404,7 @@
 {"cid":"101856","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101856","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101857","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101857","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"http://kylinvillaresort.com/camping.html?ckattempt=1","at":"2026-10-19T02:04:34.964Z","quote":"고객의 안전을 위해 캠핑카 및 차량 진입이 불가합니다."}
+{"cid":"101857","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"http://kylinvillaresort.com/camping.html?ckattempt=1","at":"2026-10-19T09:20:04.438Z","quote":"고객의 안전을 위해 캠핑카 및 차량 진입이 불가합니다."}
 {"cid":"101857","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101858","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101858","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -5465,7 +5465,7 @@
 {"cid":"101888","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101888","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101889","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101889","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"https://sarangbeach.cafe24.com/product/%EB%8C%80%ED%95%AD%ED%95%B4%EC%88%98%EC%9A%95%EC%9E%A5--%EC%BA%A0%ED%95%91%EB%8D%B0%ED%81%AC/22/category/44/display/1/category/44/display/1/category/44/display/1/","at":"2026-10-19T01:53:36.523Z","quote":"일부 구간에 차량 진입 금지 구역 있음 (아이콘 표시됨)"}
+{"cid":"101889","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"https://sarangbeach.cafe24.com/product/%EB%8C%80%ED%95%AD%ED%95%B4%EC%88%98%EC%9A%95%EC%9E%A5--%EC%BA%A0%ED%95%91%EB%8D%B0%ED%81%AC/22/category/44/display/1/category/44/display/1/category/44/display/1/","at":"2026-10-19T09:13:39.197Z","quote":"일부 구간에 차량 진입 금지 구역 있음 (아이콘 표시됨)"}
 {"cid":"101889","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101890","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101890","attr":"PARKING_MODE","value":"CART_REQUIRED","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030118#none","at":"2026-10-16T09:00:00+09:00"}
@@ -5678,7 +5678,7 @@
 {"cid":"102004","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102005","attr":"CARAVAN_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102005","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102006","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.whitecamp.co.kr/guide.html","at":"2026-10-19T02:13:57.474Z","quote":"카라반, 캠핑카, 폴딩트레일러, 루프탑, 차박형 차량은 이용이 가능합니다."}
+{"cid":"102006","attr":"CAR_CAMPING","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.whitecamp.co.kr/guide.html","at":"2026-10-19T09:24:48.713Z","quote":"카라반, 캠핑카, 폴딩트레일러, 루프탑, 차박형 차량은 이용이 가능합니다."}
 {"cid":"102006","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102006","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102007","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -5738,7 +5738,7 @@
 {"cid":"102035","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102035","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102036","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102036","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"http://www.xn--h49au9lm9esqk42flulvxl.com/operation_guide.php?pg=51","at":"2026-10-19T02:23:10.286Z","quote":"공용 주차장 및 사이트 옆 주차 공간"}
+{"cid":"102036","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"http://www.xn--h49au9lm9esqk42flulvxl.com/operation_guide.php?pg=51","at":"2026-10-19T09:30:12.014Z","quote":"공용 주차장 및 사이트 옆 주차 공간"}
 {"cid":"102036","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102037","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102037","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -5954,7 +5954,7 @@
 {"cid":"102178","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102178","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102179","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102179","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"http://www.xn--3h3bokv4bg3dn5azzwnvmt5m.kr/05reservation02.html","at":"2026-10-19T02:09:20.421Z","quote":"차량은 사이트 옆에 주차 하시면 됩니다。."}
+{"cid":"102179","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"http://www.xn--3h3bokv4bg3dn5azzwnvmt5m.kr/05reservation02.html","at":"2026-10-19T09:22:39.396Z","quote":"차량은 사이트 옆에 주차 하시면 됩니다。."}
 {"cid":"102179","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102180","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102180","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -6011,7 +6011,7 @@
 {"cid":"102209","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102209","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102210","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102210","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://www.deokpojincaravan.kr/07cs.html","at":"2026-10-19T02:05:30.128Z","quote":"카라반 옆에 주차 하시면 됩니다."}
+{"cid":"102210","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://www.deokpojincaravan.kr/07cs.html","at":"2026-10-19T09:20:27.166Z","quote":"카라반 옆에 주차 하시면 됩니다."}
 {"cid":"102210","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102211","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102211","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
