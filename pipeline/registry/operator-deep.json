@@ -1,0 +1,833 @@
+{
+  "generated_at": "2026-10-19T08:52:59.667Z",
+  "policy": "operator hosts only, robots respected, sentences and image urls",
+  "campgrounds": {
+    "483": {
+      "status": "FETCH_FAILED",
+      "name": "금원산자연휴양림 야영장",
+      "url": "http://www.geumwonsan.or.kr/",
+      "checked_at": "2026-10-19T08:53:00.029Z",
+      "pages": [],
+      "snippets": [],
+      "images": []
+    },
+    "2230": {
+      "status": "FETCH_FAILED",
+      "name": "영월 외룡 캠핑장",
+      "url": "http://www.orcamping.co.kr/",
+      "checked_at": "2026-10-19T08:53:01.016Z",
+      "pages": [],
+      "snippets": [],
+      "images": []
+    },
+    "7709": {
+      "status": "OK",
+      "name": "에스글램핑",
+      "url": "https://www.sglamping.com/index.html",
+      "checked_at": "2026-10-19T08:53:06.218Z",
+      "pages": [
+        "https://www.sglamping.com/index.html",
+        "https://www.sglamping.com/overview.html",
+        "https://www.sglamping.com/customer.html",
+        "https://www.sglamping.com/map.html"
+      ],
+      "snippets": [
+        {
+          "text": "에스글램핑 - 온가족이 즐기는 즐거운 글램핑",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "글램핑 5",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "2~4인 기준으로 편히 쉴수 있는 최고의 글램핑 텐트입니다.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "편안한 침대와 시원한 에어컨 설비 및 텐트 안에서 식사까지 할 수 있는 공간감 있는 글램핑 텐트입니다.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "입실 및 퇴실안내",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "입실은 오후 3시이며, 퇴실은 오전 11시입니다.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "매점 이용시간",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "바비큐 그릴(숯포함) 이용료는 20,000원 입니다.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "에스글램핑 이용시 주의사항",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "글램핑 내에서는 흡연 및 바베큐 이용이 금지되어 있습니다.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "트램펄린 및 야외풀장 이용시 유아는 반드시 보호자 입회하에 이용해주십시오.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "퇴실시 주의사항",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "쓰레기는 분리수거하여 지정된 수거용기에 넣어 주십시오.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "음식물쓰레기는 세척실에 비치되어 있는 음식물 수거함에 버려주시길 바랍니다.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "퇴실시간을 꼭 지켜주시고, 최종 퇴실 시 사무실에 퇴실 신청 부탁드립니다.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "1박 2일 2박 3일",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "그늘막 평상 (40,000원)",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "파라솔 (40,000원)",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "바베큐그릴 (20,000원, 숯포함, 이용 시 1시간 전에 사무실에 말씀해 주세요.)",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "에스글램핑 소개",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "예약확인 및 취소",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "글램핑포토",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "에스글램핑",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "트램펄린",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "에스글램핑 예약하기",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "품은 에스글램핑에서 가슴 설레는 여행을 시작해 보세요.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "에스글램핑은 자연 친화적인 환경과 세련되고 드라마틱한",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "전기시설",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "조리기구 대여",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "상호명 : 에스글램핑",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "충청남도 천안 인근 최신 글램핑 시설",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "자연에서 즐기는 캠핑 그 이상, 천안 에스글램핑",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑 대표입니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "먼저 저희 에스글램핑을 방문하여 주신 고객 여러분께 감사의 말씀을 전합니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "저희 에스글램핑은 충청남도 천안에 위치하여 아무때라도 부담없이 오토캠핑과 글램핑의 즐거움을 누리실 수 있습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑은 약 3,000평의 넓은 캠핑장에서 다양한 오토캠핑장과 글램핑장을 갖추고 있습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "부대시설로는 캠핑장 내 식당 그리고 매점, 글램핑장, 야외물놀이장, 덧밭 등을 갖추고 고객 어려분께서 불편함이 없도록 만전을 기하고 있습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑은 충청도 천안 인근에 위치하여 편리한 접근성과 교통을 가지고 있습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "신나는 야외물놀이장",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "온 가족이 좋아하는 야외 물놀이장 뜨거운 여름에도 문제없어요.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑에서 운영하는 매장은 언제든 편하게 필요한 물건을 사실 수 있어요.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "아이들이 좋아하는 트램펄린",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑은 어린 아이들이 신나게 놀 수있는 트램펄린을 준비했습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑은 신선한 야채와 그릇을 씻을 수 있는 세척실을 준비했습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑은 편안하고 쾌적한 캠핑을 위해 남녀 샤워 시설을 완비했습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "청결한 화장실",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑은 시원한 에어컨이 나오는 쾌적한 화장실을 준비했습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑은 재미난 공놀이를 할 수 있는 잔디밭 족구장을 준비했습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "귀여운 염소친구, 강아지 친구들을 만날 수 있습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑 고객문의",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "입실인원",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "성수기(7월 ~ 8월)",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "당일대여",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "카라반 (소)",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "카라반 (대)",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "글램핑A",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "글램핑A+",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "글램핑B",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "오토데크",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "매점 이용",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 기준 인원 초과시 인당 1만원 추가 요금이 발생합니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 방문인원도 적용되며 인원 추가시 반드시 관리동으로 연락 바랍니다.(무단이용시 벌금 2배)",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 최대 인원 초과시 입실 제한을 받을 수 있습니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 반려동물 동반 이용은 불가합니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 예약자명과 입금자명이 다를 경우 확인이 어려워 취소될 수 있으니 꼭 사무실로 연락 부탁드립니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 환불로 인한 분쟁소지가 없도록 예약 전 환불 규정을 반드시 읽어주세요.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 개인 전열기구 사용 금지 (전기포트, 그릴, 히터 등..)",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "과도한 전기사용으로 인해 글램핑 전체 전기가 다운될 수 있으니 양해 부탁드립니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 글램핑장 내 전체 금연 (정문 및 후문 출입구에 흡연 구역 별도 마련되어 있습니다.)",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 매너타임은 오후 10시반 부터 입니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "※ 소음으로 인한 민원 발생시 1회 경고, 2회 환불없이 퇴실 조치 됩니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 에어바운스 이용은 우천시 제한되며 6월-8월까지는 어린이수영장으로 대체되어 운영됩니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 트램펄린 은 유아용/ 초등학생용으로 나뉘어져 있습니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 족구장 은 예약없이 이용 가능 하며 족구공은 사무실에서 대여 가능합니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 탁구장 은 썰매장 뒤 하우스 안에 위치해 있으며 탁구채는 사무실에서 대여 가능합니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "수영장 이용 안내",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "비수기 (5월중순 이후~)",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "주말/성수기 (7-8월)",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "성인수영장",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "어린이수영장",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "숯 이용 최소 30분 전에 사무실에 연락 부탁드립니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "20,000 원",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "장작세트",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "15,000 원 ( 장작 10,000원",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "화로대 대여 5,000원 )",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "에스글램핑 - 온가족이 즐기는 즐거운 클램핑",
+          "url": "https://www.sglamping.com/map.html"
+        },
+        {
+          "text": "차량으로 오시는 길",
+          "url": "https://www.sglamping.com/map.html"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://www.sglamping.com/dist2/images/popup_211005.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/popup2_0409.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_01.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_01s.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_02s.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_02.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_03s.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_03.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_04s.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_04.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_05s.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_05.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_06s.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_06.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_07s.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_07.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_08s.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_08.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_map.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": true
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_service01.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_service02.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_service03.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_service05.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_service04.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        }
+      ]
+    },
+    "101040": {
+      "status": "OK",
+      "name": "글로우",
+      "url": "http://www.glowglam.co.kr/",
+      "checked_at": "2026-10-19T08:53:13.031Z",
+      "pages": [
+        "http://www.glowglam.co.kr/",
+        "http://glowglam.co.kr/glow_guide.php",
+        "http://glowglam.co.kr/glow_notice.php",
+        "http://glowglam.co.kr/glow_map.php"
+      ],
+      "snippets": [
+        {
+          "text": "글로우글램핑",
+          "url": "http://www.glowglam.co.kr/"
+        },
+        {
+          "text": "글로우A(개별수영장)",
+          "url": "http://www.glowglam.co.kr/"
+        },
+        {
+          "text": "자연 담은 글로우 글램핑",
+          "url": "http://www.glowglam.co.kr/"
+        },
+        {
+          "text": "글로우 A (개별수영장)",
+          "url": "http://www.glowglam.co.kr/"
+        },
+        {
+          "text": "자연 속 글로우 글램핑",
+          "url": "http://www.glowglam.co.kr/"
+        },
+        {
+          "text": "글로우글램의 휴게시설은 글램핑장을 이용하는 고객들이라면",
+          "url": "http://glowglam.co.kr/glow_guide.php"
+        },
+        {
+          "text": "1층에는 관리사무실이며 안내직원이 상주하고 있으니, 글램핑돔 이용시 문의사항은",
+          "url": "http://glowglam.co.kr/glow_guide.php"
+        },
+        {
+          "text": "1층 매점은 오전 8시 ~ 오후 9시 까지 운영됩니다.",
+          "url": "http://glowglam.co.kr/glow_guide.php"
+        },
+        {
+          "text": "1층 매점 이용",
+          "url": "http://glowglam.co.kr/glow_guide.php"
+        },
+        {
+          "text": "글램핑 이용객 무료",
+          "url": "http://glowglam.co.kr/glow_guide.php"
+        },
+        {
+          "text": "온가족이 함께하는 힐링쉼터, 공주시 글램핑장입니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "식기류 대여 (4인 기준) 알려드립니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 숙박이 아닌 바비큐장의 경우 유상 대여입니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 대여하신 식기류는 기본 세척 후 퇴실 시 관리실에 반납 부탁드립니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 2인 이상부터 인원추가 비용 발생합니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 3인 이상 이성 혼숙의 경우, 모든 투숙객의 신분증 확인 및 카드 등록 후 입실이 가능합니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "캠프닉, 글램핑 상품은 식기류 무상 대여 (세척 후 반납)",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "숯 종류, 외부 장작, 전기&가스난로, 튀김기, 에어프라이어, 폭죽, 촛불, 총 무기 장난감, 개인 미니 풀장 등",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "** 무단 반입 및 사용 시 환불 없이 퇴실 조치됩니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "반려동물이 출입 가능한가요?",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "털과 배설물은 피부염, 천식, 비염 등의 질환과 알레르기를 일으킬 수 있어 반려동물의 출입을 금지하고 있습니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "* 반려동물의 출입은 불가합니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "받침대가 구비된 개인화로대 반입 가능합니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- C동 한정 개인 화로대 사용 가능 하며 장작은 반입 불가합니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 외부 숯, 장작, 전열기구, 발화성물질은 절대 반입 및 사용 금지",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "(무단 사용 시 즉시 퇴실 조치되오니 유의해 주시기 바랍니다.)",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 체크인 마감, 숯 오더는 오후 9시까지입니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 반입한 쓰레기는 꼭!",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "분리수거해 주세요.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "객실 및 바베큐장은 체크인 시 현장에서 배정됩니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 중복 예약 발생 시 100% 환불 해 드립니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "* 자연과 인접해있는 글램핑장으로 정기적인 방역을 실시하나 간혹 출몰할 수 있는 곤충과 벌레에 대한 부분은 양해 부탁드립니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "* 무단으로 고용량 및 고전력 전기기구를 사용하여 다른 고객의 객실에 피해가 발생할 경우, 해당 이용자는 그에 따른 배상 책임을 지게 됩니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        }
+      ],
+      "images": [
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/head/reservation2.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/head/fixed-circle2.png",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/head/fixed-circle.png",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/plugin/weather/img/light/%ED%95%B4.png",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "맑음",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/location.png",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/a_1.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/a_2.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/a_3.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/main_1.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/slide5.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/slide6.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/slide7.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/slide8.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/slide9.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/slide10.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/slide11.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/slide12.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/main/A-1.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/main/B-1.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/main/C-1.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/main/D-1.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/main/E-1.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/main/F-1.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/main/Main-Masc-2.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        }
+      ]
+    },
+    "102130": {
+      "status": "FETCH_FAILED",
+      "name": "감포누리캠핑글램핑",
+      "url": "http://gamponuri.co.kr/",
+      "checked_at": "2026-10-19T08:53:07.205Z",
+      "pages": [],
+      "snippets": [],
+      "images": []
+    }
+  }
+}

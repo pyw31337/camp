@@ -1605,6 +1605,7 @@ async function detailView(id) {
         ${introHtml(d)}
         ${programsHtml(d)}
         ${layoutHtml(d)}
+        ${operatorMediaHtml(d)}
         ${snsHtml(d, c)}
         ${videosHtml(d)}
         ${platformHubHtml(d, c)}
@@ -1885,6 +1886,13 @@ function snsHtml(d, c) {
     ${thumbs.length ? thumbLinks(thumbs, "캠퍼 사진") : ""}
     ${references.length ? `<div class="visitor-sources">${references.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener"><span>${ic("camera")}방문 사진 ${i + 1}</span><i>원문 열기 · ${esc(sourceName(x.src, "외부 콘텐츠"))}</i>${ic("external", "line")}</a>`).join("")}</div>` : ""}
   </section>`;
+}
+
+function operatorMediaHtml(d) {
+  const imgs = (d?.operator_media?.images ?? []).filter((x) => x.url).slice(0, 8);
+  if (!imgs.length) return "";
+  const cards = imgs.map((x, i) => `<a class="media-card" href="${esc(x.page || x.url)}" target="_blank" rel="noopener"><div class="media-card-photo"><img src="${esc(x.url)}" alt="${esc(x.alt || "운영자 사진")}" loading="lazy" decoding="async" onerror="this.closest('.media-card').remove()"></div><div class="media-card-body"><i>${x.layout ? "배치·시설" : "운영자 사진"}</i><b>${esc(x.alt || `사진 ${i + 1}`)}</b></div></a>`).join("");
+  return `<section class="d-sec"><div class="sec-head">${iconTitle("layers", "운영자 제공 사진")}<span class="sec-note">운영자 홈페이지 원문</span></div><div class="media-grid">${cards}</div></section>`;
 }
 function layoutHtml(d) {
   const imgs = (d?.layout?.images ?? []).filter((x) => x.url).filter((x, i, all) => all.findIndex((y) => y.url === x.url) === i).slice(0, 6);
