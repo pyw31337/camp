@@ -1523,7 +1523,7 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .nearby-hub [data-nb-tab]:focus-visible { outline: 2px solid var(--cobalt, #2b59ff); outline-offset: 2px; }
 .nearby-hub [data-nb-tab][hidden], .nearby-hub .nearby-group[hidden] { display: none; }
 .nearby-hub .nearby-group h3 { display: none; }
-.nearby-hub .nearby-places { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 6px; }
+.nearby-hub .nearby-places { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 6px; }
 .nearby-hub .nb-row { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 12px; border-radius: 12px; background: var(--soft); color: inherit; text-decoration: none; }
 .nearby-hub a.nb-row:hover { background: var(--line); }
 .nearby-hub .nb-ic { display: inline-grid; place-items: center; flex: 0 0 32px; width: 32px; height: 32px; border-radius: 9px; background: var(--paper, #fff); color: var(--ink-2); }
@@ -1615,3 +1615,18 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .tr-empty span { font-size: .84rem; color: var(--ink-3); }
 @media (max-width: 759px) { .tr-card { width: 64vw; max-width: 240px; } }
 @media (prefers-reduced-motion: reduce) { .tr-skel .tr-ph { animation: none; } }
+
+/* 주변시설 로드뷰(2026-10-19 소유자: 주변시설 실제 모습) — 줄 안 작은 버튼 + 팝업 */
+.nearby-hub .nb-rv { display: inline-flex; align-items: center; gap: 4px; flex: none; height: 28px; padding: 0 10px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--ink-2); font-size: .74rem; font-weight: 800; cursor: pointer; }
+.nearby-hub .nb-rv .ic { width: 14px; height: 14px; color: var(--accent); }
+.nearby-hub .nb-rv:hover, .nearby-hub .nb-rv:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
+dialog.rv-modal { border: 0; border-radius: var(--r); padding: 0; width: min(920px, calc(100vw - 24px)); background: var(--paper); color: var(--ink); box-shadow: var(--shadow-2); margin: auto; overflow: hidden; }
+dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: blur(4px); }
+.rv-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; align-items: center; padding: 14px 16px 10px; }
+.rv-head b { font-size: 1.02rem; font-weight: 850; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rv-head span { grid-row: 2; font-size: .78rem; color: var(--ink-3); font-weight: 700; }
+.rv-head .w-modal-close { grid-row: 1 / span 2; grid-column: 2; }
+.rv-view { position: relative; width: 100%; aspect-ratio: 16 / 10; max-height: 70vh; background: var(--soft); }
+.rv-msg { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; padding: 16px; text-align: center; color: var(--ink-2); font-weight: 700; }
+.rv-foot { display: flex; justify-content: space-between; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--line); }
+@media (max-width: 759px) { .rv-view { aspect-ratio: 4 / 5; } .nearby-hub .nb-rv { padding: 0 8px; } }
