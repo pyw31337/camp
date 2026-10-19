@@ -85,3 +85,18 @@ test("trending: 카카오 동시 수집도 종류별 상한·시간 상한을 �
   assert.deepEqual(await late.collect(["a"], "2026-10-13"), []);
   assert.equal(late.stopped, "deadline");
 });
+
+test("trending: 일반어 핵심어·지역 없는 글·작성자 도배는 세지 않는다", () => {
+  const M = buildMatcher([
+    { id: "p1", name: "산청프리미엄캠핑장", sido: "경상남도", sigungu: "산청군" },
+    { id: "p2", name: "캠핑아이", sido: "전라남도", sigungu: "영광군" },
+    { id: "p3", name: "인천대공원 캠핑장", sido: "인천광역시", sigungu: "남동구" },
+  ]);
+  assert.deepEqual(matchPost({ title: "캠핑용 프리미엄 휴대용 빔프로젝터 산청 여행" }, M), []);
+  assert.deepEqual(matchPost({ title: "산청 프리미엄 캠핑장 1박 후기", snippet: "산청 캠핑" }, M), ["p1"]);
+  assert.deepEqual(matchPost({ title: "김해 캠핑 아이랑 가기 좋은 곳" }, M), []);
+  assert.deepEqual(matchPost({ title: "인천대공원 가을 산책 단풍 캠핑 피크닉" }, M), []);
+  assert.deepEqual(matchPost({ title: "인천대공원 캠핑장 후기 아이와 캠핑", snippet: "인천 남동구" }, M), ["p3"]);
+  const posts = Array.from({ length: 5 }, (_, i) => ({ ids: ["p1"], date: "2026-10-19", url: `https://blog.naver.com/owner/${i}`, platform: "naver", title: "t" }));
+  assert.equal(rankCamps(posts, "2026-10-19")[0].week, 2);
+});
