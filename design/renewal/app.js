@@ -2,9 +2,13 @@
 // 데이터는 탐색 화면과 같은 공개 파일을 읽는다(../explore/data). 사진 색인은 scripts/build-renewal-data.mjs.
 // 원칙: 값만 짧게, 출처는 (i), 모르는 칸은 상세 규격에서만 회색 ‘확인필요’ 글자. 채운 배지는 원문 대조·공식 등록·운영자 공개 값만.
 
-// /renewal/은 시안 확인 주소로 남기고, 실제 서비스 주소 /explore/도 같은 화면을 쓴다.
-// 두 주소에서만 데이터의 상대 경로가 다르다.
-const DATA = location.pathname.includes("/explore/") ? "./data/" : "../explore/data/";
+// /renewal/은 시안 확인 주소로 남기고, 실제 서비스 주소 /explore/와 /camp/ 루트는
+// 같은 화면을 쓴다. 루트는 Pages 발행 단계에서 explore 앱 셸을 직접 받는다.
+const appPath = location.pathname;
+const IS_EXPLORE = appPath.includes("/explore/");
+const IS_ROOT = /\/(?:camp\/)?$/.test(appPath);
+const DATA = IS_EXPLORE ? "./data/" : IS_ROOT ? "./explore/data/" : "../explore/data/";
+const PUBLIC = IS_EXPLORE || !IS_ROOT ? "../" : "./";
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[m]);
@@ -22,10 +26,9 @@ const store = {
 
 const S = {
   stype: "", camps: [], byId: new Map(), photos: {}, cards: {}, openings: new Map(),
-  q: "", area: "all", quick: new Set(), theme: null, feeBand: store.get("mc-feeband", ""), sort: "rich", shown: 24, mode: "keyword",
-  stay: store.get("mc-stay", ""),
+  q: "", area: "all", quick: new Set(), theme: null, feeBand: store.get("mc-feeband", ""), sort: "rich", shown: 24, searchShown: 24, mode: "keyword",
   saved: store.get("mc-saved", store.get("mc-compare", [])), pick: store.get("mc-pick", []), compare: store.get("mc-compare", []),
-  detailCache: new Map(), homeScroll: 0,
+  detailCache: new Map(), homeScroll: 0, live: new Map(),
 };
 
 // ── 시안 전환 ────────────────────────────────────────────────
@@ -64,11 +67,6 @@ function titleHtml(c) {
 }
 const region = (c) => `${sidoShort(c.sido)} ${c.sigungu ?? ""}`.trim();
 const typeLine = (c) => (c.pf?.s ?? "").split(" · ")[0] || (c.types ?? [])[0] || "";
-function stayLabel() {
-  if (!S.stay) return "날짜 선택";
-  const [, month, day] = S.stay.split("-");
-  return `${Number(month)}월 ${Number(day)}일`;
-}
 
 // ── 사실 해석(카드·상세·비교·지도 공통) ─────────────────────
 // 등급: v=원문 대조(VERIFIED) · c=공식 등록·운영자 공개 · m=소개·후기 언급. 배지는 v·c만.
@@ -230,6 +228,52 @@ function reviewPickCard(c, i = 0) {
     <div class="card-body review-pick-body"><p class="review-place">${esc(region(c))}</p><h3>${esc(nameOf(c).name)}</h3><div class="review-topics">${reviewTopics(r.rv.p, "good", "heart")}${reviewTopics(r.rv.c, "watch", "down")}</div></div>
   </article>`;
 }
+// 이번 주말은 실제 잔여 수량이 확인된 LIVE_AVAILABLE만 쓴다. 접수 기간만 아는
+// OFFICIAL_APPLICATION_OPEN은 빈자리로 바꾸지 않는다.
+function upcomingWeekend() {
+  const kst = new Date(Date.now() + 9 * 60 * 60 * 1000);
+  const untilFriday = (5 - kst.getUTCDay() + 7) % 7;
+  const start = Date.UTC(kst.getUTCFullYear(), kst.getUTCMonth(), kst.getUTCDate() + untilFriday) - 9 * 60 * 60 * 1000;
+  return { from: start, to: start + 3 * 24 * 60 * 60 * 1000 - 1 };
+}
+function kmFromSeoul(c) {
+  if (!Number.isFinite(Number(c.lat)) || !Number.isFinite(Number(c.lng))) return Infinity;
+  const rad = (n) => n * Math.PI / 180;
+  const dLat = rad(Number(c.lat) - 37.5665), dLng = rad(Number(c.lng) - 126.9780);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(rad(37.5665)) * Math.cos(rad(Number(c.lat))) * Math.sin(dLng / 2) ** 2;
+  return Math.round(6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+}
+function weekendRows() {
+  const { from, to } = upcomingWeekend();
+  return [...S.live.entries()].map(([id, records]) => {
+    const c = S.byId.get(id);
+    if (!c || !hasPhoto(c)) return null;
+    const options = records.filter((r) => {
+      const useFrom = Date.parse(r.use?.from ?? ""), useTo = Date.parse(r.use?.to ?? "");
+      return Number.isFinite(useFrom) && Number.isFinite(useTo) && useFrom <= to && useTo >= from;
+    }).sort((a, b) => Number(b.remaining_count) - Number(a.remaining_count) || Date.parse(b.observed_at ?? 0) - Date.parse(a.observed_at ?? 0));
+    if (!options.length) return null;
+    const review = reviewMeta(c), distance = kmFromSeoul(c);
+    return { c, record: options[0], distance, review, richness: rich(c) };
+  }).filter(Boolean).sort((a, b) => {
+    // 지역 안에서는 후기 신호와 보유 정보가 많은 곳을 먼저, 지역 간에는 서울 거리순.
+    if (a.c.sido === b.c.sido) return b.review.score - a.review.score || b.richness - a.richness || a.distance - b.distance;
+    return a.distance - b.distance;
+  });
+}
+function weekendLabel() {
+  const { from } = upcomingWeekend();
+  const fmtDate = (d) => new Date(d).toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul", month: "numeric", day: "numeric" }).replace(/\.\s?/g, ".").replace(/\.$/, "");
+  return `${fmtDate(from)} 금–${fmtDate(from + 2 * 24 * 60 * 60 * 1000)} 일`;
+}
+function weekendCard({ c, record, distance }, i = 0) {
+  const product = String(record.product_name ?? "").replace(/^\([^)]*\)\s*/, "").slice(0, 38);
+  const info = `<b>공식 잔여 ${fmt(record.remaining_count)}자리</b><span>${esc(record.source_name ?? "공식 예약처")} · ${new Date(record.observed_at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "Asia/Seoul" })} 확인</span><a href="${esc(record.source_url)}" target="_blank" rel="noopener">원문에서 예약 확인</a>`;
+  return `<article class="weekend-card">
+    <a class="weekend-photo" href="#/c/${encodeURIComponent(c.id)}" aria-label="${esc(nameOf(c).name)} 상세 보기">${imageTag(photosOf(c)[0], "", { eager: i < 3, sizes: "260px" })}<span>${ic("check")}잔여 ${fmt(record.remaining_count)}</span></a>
+    <div class="weekend-copy"><p>${esc(region(c))} · 서울 ${Number.isFinite(distance) ? `${fmt(distance)}km` : "거리 정보 없음"}</p><h3><a href="#/c/${encodeURIComponent(c.id)}">${esc(nameOf(c).name)}</a></h3>${product ? `<i>${esc(product)}</i>` : ""}<span class="weekend-proof">${tip(info, "이번 주말 잔여 근거")}</span></div>
+  </article>`;
+}
 function results() {
   const list = S.camps.filter((c) => matches(c));
   if (S.sort === "name") list.sort((a, b) => nameOf(a).name.localeCompare(nameOf(b).name, "ko"));
@@ -237,10 +281,25 @@ function results() {
   return list;
 }
 
+const areaLabel = () => AREAS.find(([key]) => key === S.area)?.[1] ?? "전국";
+function searchHash() {
+  const p = new URLSearchParams();
+  if (S.area !== "all") p.set("area", S.area);
+  if (S.q) p.set("q", S.q);
+  return `#/search${p.size ? `?${p.toString()}` : ""}`;
+}
+function readSearchHash(h) {
+  const i = h.indexOf("?");
+  const p = new URLSearchParams(i < 0 ? "" : h.slice(i + 1));
+  const area = p.get("area");
+  S.area = AREAS.some(([key]) => key === area) ? area : "all";
+  S.q = p.get("q")?.trim() ?? "";
+}
+
 // ── 사진 ─────────────────────────────────────────────────────
 const photoUrl = (u) => {
   const value = String(u ?? "");
-  return value.startsWith("media/") ? `../${value}` : value;
+  return value.startsWith("media/") ? `${PUBLIC}${value}` : value;
 };
 // 목록은 480px 파생본을 우선 쓰되, 고밀도 화면에서는 같은 공식 원본의 1280px 파생본을 선택한다.
 // 외부 원문 URL은 변형하지 않아 원천의 표시 조건과 주소를 유지한다.
@@ -332,7 +391,11 @@ function initCarousels(root) {
     });
     tr.addEventListener("click", (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
     // 사진 레일은 카드 링크 위에 있다(가로 스와이프를 받으려고). 사진을 누르면 카드 링크로 간다.
-    tr.addEventListener("click", () => { const hit = car.closest(".card, .mi, .review-pick")?.querySelector(".card-hit"); if (hit) location.hash = hit.getAttribute("href"); });
+    tr.addEventListener("click", () => {
+      const item = car.closest(".card, .mi, .review-pick, .search-row");
+      const hit = item?.querySelector(".card-hit, h2 a[href^='#/c/']");
+      if (hit) location.hash = hit.getAttribute("href");
+    });
   }
 }
 
@@ -424,27 +487,11 @@ document.addEventListener("click", (e) => {
 });
 function syncCompare() { $$("[data-compare-count]").forEach((x) => { x.textContent = S.saved.length; x.hidden = !S.saved.length; }); }
 
-document.addEventListener("click", (e) => {
-  if (e.target.closest("[data-open=date]")) {
-    const input = $("[data-date-input]");
-    if (input) { input.value = S.stay; $("#date-dialog").showModal(); }
-    return;
-  }
-});
-$("#date-dialog")?.addEventListener("close", () => {
-  if ($("#date-dialog").returnValue !== "ok") return;
-  const selected = $("[data-date-input]")?.value;
-  if (!selected) return;
-  S.stay = selected;
-  store.set("mc-stay", S.stay);
-  $$('[data-stay-label]').forEach((x) => (x.textContent = stayLabel()));
-  toast(`${stayLabel()} 일정으로 예약처에서 확인해요`);
-});
-
 // ── 화면: 찾기(메인) ─────────────────────────────────────────
 function countOf(test) { return S.camps.reduce((n, c) => n + (test(c) ? 1 : 0), 0); }
 function homeView() {
   const openings = S.camps.map((c) => [c, openingOf(c)]).filter(([c, o]) => o && hasPhoto(c)).sort((a, b) => a[1].dd - b[1].dd);
+  const weekend = weekendRows();
   const usedThemeCovers = new Set();
   const themeItems = THEMES.map(([key, label, test]) => {
     const candidates = S.camps.filter((c) => test(c) && hasPhoto(c)).sort((a, b) => rich(b) - rich(a));
@@ -455,16 +502,20 @@ function homeView() {
   }).join("");
   const openingSection = openings.length ? `<section class="opens" aria-labelledby="op-t">
     <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><button type="button" class="link" data-theme-all="OPEN">전체 보기 ${ic("right")}</button></div>
-    <div class="rail opens-rail">${openings.map(([c, o]) => `<a class="open-card" href="#/c/${encodeURIComponent(c.id)}">${imageTag(photosOf(c)[0] ?? "", "", { sizes: "250px" })}<span class="open-dd">${esc(o.txt)}</span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))} · ${esc(o.platform ?? "")}</i></a>`).join("")}</div>
+    <div class="rail rail-shadow-safe opens-rail">${openings.map(([c, o]) => `<a class="open-card" href="#/c/${encodeURIComponent(c.id)}">${imageTag(photosOf(c)[0] ?? "", "", { sizes: "250px" })}<span class="open-dd">${esc(o.txt)}</span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))} · ${esc(o.platform ?? "")}</i></a>`).join("")}</div>
   </section>` : "";
+  const weekendSection = `<section class="weekend" aria-labelledby="weekend-t">
+    <div class="sec-head"><div><h2 id="weekend-t">이번 <em>주말</em></h2><p class="sec-sub">${weekendLabel()} · 서울 기준 거리순</p></div><span class="sec-note">${tip("<b>이번 주말</b><span>시설·상품·이용일·남은 수량이 같은 시각에 확인된 LIVE_AVAILABLE만 보여 줍니다. 접수 기간만 열린 상품은 빈자리로 표시하지 않습니다.</span>", "이번 주말 기준")}</span></div>
+    ${weekend.length ? `<div class="rail rail-shadow-safe weekend-rail">${weekend.map(weekendCard).join("")}</div>` : `<div class="weekend-empty">${ic("calendar")}확인된 잔여 없음</div>`}
+  </section>`;
   const picks = reviewPicks();
   const reviewSection = picks.length ? `<section class="review-picks" aria-labelledby="review-picks-t">
-    <div class="sec-head"><div><h2 id="review-picks-t"><em>긍정 후기</em></h2><p class="sec-sub">후기 수 · 긍정 언급</p></div><span class="sec-note">${tip("<b>긍정 후기</b><span>연결된 블로그·카페 후기에서 집계한 주제와 건수입니다. 별점·실시간 인기 순위가 아니며, 원문은 상세에서 바로 열 수 있어요.</span>")}</span></div>
-    <div class="rail review-picks-rail">${picks.map(reviewPickCard).join("")}</div>
+    <div class="sec-head"><div><h2 id="review-picks-t">긍정 후기</h2><p class="sec-sub">후기 수 · 긍정 언급</p></div><span class="sec-note">${tip("<b>긍정 후기</b><span>연결된 블로그·카페 후기에서 집계한 주제와 건수입니다. 별점·실시간 인기 순위가 아니며, 원문은 상세에서 바로 열 수 있어요.</span>")}</span></div>
+    <div class="rail rail-shadow-safe review-picks-rail">${picks.map(reviewPickCard).join("")}</div>
   </section>` : "";
   const themeSection = themeItems ? `<section class="themes-catalog" aria-labelledby="theme-t">
-    <div class="sec-head"><h2 id="theme-t">테마로 <em>고르기</em></h2><button type="button" class="link" data-theme-all="ALL">전체 보기 ${ic("right")}</button></div>
-    <div class="rail theme-catalog-rail">${themeItems}</div>
+    <div class="sec-head"><h2 id="theme-t">취향으로 <em>고르기</em></h2><button type="button" class="link" data-theme-all="ALL">전체 보기 ${ic("right")}</button></div>
+    <div class="rail rail-shadow-safe theme-catalog-rail">${themeItems}</div>
   </section>` : "";
   return `
   <section class="hero" aria-labelledby="hero-t">
@@ -472,15 +523,15 @@ function homeView() {
     <div class="hero-in">
       <h1 id="hero-t"><span class="h1-a">이번 주말,</span> <span class="h1-b"><em>빈자리부터.</em></span></h1>
       <p class="hero-summary">전국 <b>${fmt(S.camps.length)}개</b> 캠핑장 소식 · 현재 오픈 <b>${fmt(openings.length)}개</b></p>
-      <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div><form class="finder-form" role="search" data-search>
+      <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div><form class="finder-form finder-form-short" role="search" data-search>
         <label class="finder-field finder-destination"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
-        <button class="finder-field finder-static" type="button" data-open="date"><small>언제</small><b data-stay-label>${esc(stayLabel())}</b></button>
         <button class="finder-go" type="submit">${ic("search")}<span>찾기</span></button>
       </form></div>
     </div>
   </section>
 
   ${openingSection}
+  ${weekendSection}
   ${reviewSection}
   ${themeSection}
   <section class="filter-zone" aria-label="캠핑장 조건 필터">
@@ -527,7 +578,7 @@ function themeRow([k, label, test], list, first, used) {
   items.forEach((c) => used.add(c.id));
   return `<section class="trow" aria-label="${esc(label)}">
     <div class="trow-head"><h3>${esc(label)} <i>${fmt(all.length)}</i></h3><button type="button" class="link" data-theme-all="${k}">모두 ${ic("right")}</button></div>
-    <div class="rail trow-rail">${items.map((c, i) => card(c, first && i < 4 ? i : 9)).join("")}</div>
+    <div class="rail rail-shadow-safe trow-rail">${items.map((c, i) => card(c, first && i < 4 ? i : 9)).join("")}</div>
   </section>`;
 }
 const themeName = (k) => (k === "ALL" ? "전체" : k === "AVAIL" ? "공식 접수 중" : k === "OPEN" ? "곧 오픈" : THEMES.find((t) => t[0] === k)?.[1] ?? "");
@@ -575,11 +626,88 @@ function moreResults() {
   $("[data-more]").hidden = list.length <= S.shown;
   initCarousels(grid);
 }
+
+// ── 화면: 검색 결과 ──────────────────────────────────────────
+// 세로 카드 격자 대신, 사진은 왼쪽·선택에 필요한 정형 정보는 오른쪽에 둔다.
+// 전국 단위의 날짜별 잔여 연동률이 충분해질 때까지 이 목록은 예약 상태를 판정하지 않는다.
+function searchSpec(label, value, source) {
+  return `<div class="search-spec"><i>${esc(label)}</i><b${value ? "" : ' class="muted"'}>${esc(value || "확인 필요")}</b>${value ? srcTip(source ? { g: source.g, src: source.src } : null, label) : ""}</div>`;
+}
+function searchRow(c, { index = 0 } = {}) {
+  const f = facts(c), review = reviewMeta(c);
+  const type = typeLine2(c) || typeLine(c) || "캠핑 사이트";
+  const fee = c.fee?.text || (c.fee?.min ? `${band(c.fee.min)}부터` : "요금 확인 필요");
+  return `<article class="search-row" data-id="${esc(c.id)}">
+    <div class="search-row-media">${carousel(c, { eager: index < 3, cls: "search-carousel" })}<span class="bdgs">${badges(c, 3)}</span></div>
+    <div class="search-row-copy">
+      <div class="search-row-top"><p>${esc(region(c))}</p>${heartBtn(c)}</div>
+      <h2><a href="#/c/${encodeURIComponent(c.id)}">${titleHtml(c)}</a></h2>
+      <p class="search-row-type">${ic("tent")}${esc(type)}</p>
+      <div class="search-specs">
+        ${searchSpec("사이트", f.size?.v || type, f.size)}
+        ${searchSpec("바닥", f.ground?.v, f.ground)}
+        ${searchSpec("전기", f.power?.v, f.power)}
+        ${searchSpec("주차", f.park?.v, f.park)}
+      </div>
+      <div class="search-row-foot">
+        <span class="search-fee"><i>1박</i><b>${esc(fee)}</b>${c.fee ? dot(GR(c.fee.grade)) : ""}</span>
+        ${nearLine(c) ? `<span>${ic("store")}${esc(nearLine(c))}</span>` : ""}
+        ${review.total ? `<span>${ic("heart")}후기 ${fmt(review.total)}</span>` : ""}
+      </div>
+    </div>
+  </article>`;
+}
+function searchView() {
+  const all = results().filter(hasPhoto);
+  const scope = S.q ? `“${esc(S.q)}” 검색` : `${esc(areaLabel())} 캠핑장`;
+  const shown = all.slice(0, S.searchShown);
+  return `<main class="search-page" aria-labelledby="search-title">
+    <header class="search-head"><a class="search-back" href="#/">${ic("left")}찾기</a><div><p class="search-kicker">검색 결과</p><h1 id="search-title">${scope}</h1><p>${fmt(all.length)}곳 · 사진·규격·요금·주변 정보를 한 줄에서 비교</p></div></header>
+    <form class="search-refine search-refine-short" data-search role="search">
+      <label class="finder-field"><small>캠핑장명</small><input type="search" name="q" value="${esc(S.q)}" placeholder="캠핑장명 또는 지역" aria-label="캠핑장명 또는 지역" autocomplete="off" enterkeyhint="search"></label>
+      <button class="finder-go" type="submit">${ic("search")}<span>찾기</span></button>
+    </form>
+    <section class="search-all" aria-labelledby="search-all-t"><div class="sec-head"><div><p class="search-kicker">탐색 목록</p><h2 id="search-all-t">${scope} <b>${fmt(all.length)}곳</b></h2></div><span class="sec-note">${tip("<b>목록 기준</b><span>선택한 권역과 검색어에 맞는 전체 캠핑장입니다. 날짜별 잔여 여부를 추정하거나 제외하지 않습니다.</span>", "전체 목록 기준")}</span></div>
+      <div class="search-list" data-search-list>${shown.length ? shown.map((c, i) => searchRow(c, { index: i })).join("") : `<div class="empty">${ic("search")}<b>맞는 곳이 없어요</b><a class="btn ghost" href="#/">조건 바꾸기</a></div>`}</div>
+      <div class="more-wrap"><button class="btn ghost" type="button" data-search-more ${all.length <= S.searchShown ? "hidden" : ""}>더 보기</button></div>
+    </section>
+  </main>`;
+}
+function moreSearchResults() {
+  const list = results().filter(hasPhoto), box = $("[data-search-list]");
+  if (!box) return;
+  const from = S.searchShown;
+  S.searchShown += 24;
+  box.insertAdjacentHTML("beforeend", list.slice(from, S.searchShown).map((c, i) => searchRow(c, { index: from + i })).join(""));
+  $("[data-search-more]").hidden = list.length <= S.searchShown;
+  initCarousels(box);
+}
+function bindSearch() {
+  S.searchShown = 24;
+  const v = $("#view");
+  initCarousels(v);
+  const onSubmit = (e) => {
+    const form = e.target.closest("[data-search]");
+    if (!form) return;
+    e.preventDefault();
+    S.q = form.q.value.trim();
+    S.searchShown = 24;
+    const next = searchHash();
+    if (location.hash === next) route(); else location.hash = next;
+  };
+  const onClick = (e) => { if (e.target.closest("[data-search-more]")) moreSearchResults(); };
+  v.addEventListener("submit", onSubmit); v.addEventListener("click", onClick);
+  cleanup.push(() => { v.removeEventListener("submit", onSubmit); v.removeEventListener("click", onClick); });
+}
 function bindHome() {
   renderResults();
   const v = $("#view");
   v.addEventListener("click", homeClicks);
-  v.addEventListener("submit", (e) => { const f = e.target.closest("[data-search]"); if (!f) return; e.preventDefault(); S.q = f.q.value.trim(); render(); $("#results")?.scrollIntoView({ behavior: "smooth", block: "start" }); });
+  v.addEventListener("submit", (e) => {
+    const f = e.target.closest("[data-search]"); if (!f) return;
+    e.preventDefault(); S.q = f.q.value.trim(); S.searchShown = 24;
+    location.hash = searchHash();
+  });
   v.addEventListener("change", (e) => { if (e.target.matches("[data-sort]")) { S.sort = e.target.value; renderResults(); } });
   const sentinel = $(".more-wrap");
   const io = new IntersectionObserver((es) => { if (es[0].isIntersecting && !$("[data-more]").hidden) moreResults(); }, { rootMargin: "800px" });
@@ -588,7 +716,7 @@ function bindHome() {
 }
 function homeClicks(e) {
   const a = e.target.closest("[data-area]");
-  if (a) { S.area = a.dataset.area; $$("[data-area]").forEach((x) => x.setAttribute("aria-pressed", String(x === a))); renderResults(); return; }
+  if (a) { S.area = a.dataset.area; $$("[data-area]").forEach((x) => x.setAttribute("aria-pressed", String(x === a))); return; }
   const t = e.target.closest("[data-theme]");
   if (t) { S.theme = S.theme === t.dataset.theme ? null : t.dataset.theme; $$("[data-theme]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.theme === S.theme))); renderResults(); return; }
   const all = e.target.closest("[data-theme-all]");
@@ -1393,10 +1521,12 @@ async function render() {
   TIPS.clear(); $("#pop").hidden = true;
   const h = location.hash || "#/";
   const v = $("#view");
-  const name = h.startsWith("#/c/") ? "detail" : h.startsWith("#/map") ? "map" : h.startsWith("#/compare") ? "compare" : "home";
-  $$("[data-nav]").forEach((a) => a.toggleAttribute("aria-current", a.dataset.nav === (name === "detail" ? "home" : name)));
+  const name = h.startsWith("#/c/") ? "detail" : h.startsWith("#/search") ? "search" : h.startsWith("#/map") ? "map" : h.startsWith("#/compare") ? "compare" : "home";
+  if (name === "search") readSearchHash(h);
+  $$("[data-nav]").forEach((a) => a.toggleAttribute("aria-current", a.dataset.nav === ((name === "detail" || name === "search") ? "home" : name)));
   document.body.dataset.view = name;
   if (name === "home") { v.innerHTML = homeView(); bindHome(); }
+  else if (name === "search") { v.innerHTML = searchView(); bindSearch(); }
   else if (name === "detail") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await detailView(decodeURIComponent(h.slice(4))); bindDetail(); }
   else if (name === "compare") { v.innerHTML = await compareView(); bindCompare(); }
   else { v.innerHTML = mapView(); bindMap(); }
@@ -1438,9 +1568,9 @@ addEventListener("error", (e) => {
   $("#view").innerHTML = `<div class="loading"></div>`;
   const [camps, photos, openings, cards, avail] = await Promise.all([
     fetch(`${DATA}campgrounds.json`).then((r) => r.json()),
-    fetch("./data/photos.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
+    fetch(`${DATA}photos.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
     fetch(`${DATA}openings.json`).then((r) => (r.ok ? r.json() : { items: [] })).catch(() => ({ items: [] })),
-    fetch("../media/cards/index.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
+    fetch(`${PUBLIC}media/cards/index.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
     fetch(`${DATA}availability.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
   ]);
   S.camps = camps.filter((c) => c.status !== "폐업");
@@ -1450,8 +1580,13 @@ addEventListener("error", (e) => {
   for (const o of openings.items ?? []) if (!S.openings.has(String(o.id)) || o.kind !== "접수 마감") S.openings.set(String(o.id), o);
   S.saved = S.saved.filter((id) => S.byId.has(id));
   // 공식 접수 상태(서울 공공서비스예약 등)는 짧은 유효기간이 있다. 만료된 파일은 쓰지 않는다.
-  S.avail = new Map();
-  if (avail && Date.parse(avail.expires_at) > Date.now()) for (const r of avail.records ?? []) if (r.state === "OFFICIAL_APPLICATION_OPEN") { const k = String(r.campground_id); S.avail.set(k, [...(S.avail.get(k) ?? []), { ...r, disclaimer: avail.disclaimer, source_name: avail.source?.name }]); }
+  S.avail = new Map(); S.live = new Map();
+  if (avail && Date.parse(avail.expires_at) > Date.now()) for (const raw of avail.records ?? []) {
+    const r = { ...raw, disclaimer: avail.disclaimer, source_name: avail.source?.name };
+    const k = String(r.campground_id);
+    if (r.state === "OFFICIAL_APPLICATION_OPEN") S.avail.set(k, [...(S.avail.get(k) ?? []), r]);
+    if (r.state === "LIVE_AVAILABLE" && r.inventory_verified === true && Number(r.remaining_count) > 0 && r.source_url && r.observed_at) S.live.set(k, [...(S.live.get(k) ?? []), r]);
+  }
   // 이전 주소(#c=1554)도 새 상세 주소로 보정해 공유 링크를 깨지 않는다.
   const legacy = location.hash.match(/^#c=(.+)$/);
   if (legacy) history.replaceState(null, "", `#/c/${legacy[1]}`);

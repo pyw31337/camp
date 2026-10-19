@@ -4,6 +4,7 @@
 // KAKAO_JS_KEY: 브라우저에 노출되는 지도 키(카카오 개발자 콘솔의 도메인 제한으로 보호). 없으면 지도 없이 목록만.
 import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
@@ -29,10 +30,25 @@ const [renewalIndex, renewalCss, renewalApp] = await Promise.all([
   readFile(`${root}design/renewal/style.css`, "utf8"),
   readFile(`${root}design/renewal/app.js`, "utf8"),
 ]);
-const exploreIndex = renewalIndex.replace("</head>", `<link rel="manifest" href="../manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="kakao-js-key" content="${kakaoKey}"><meta name="supabase-url" content="${supabaseUrl}"><meta name="supabase-anon-key" content="${supabaseAnonKey}"></head>`);
+// Pages의 HTML은 빨리 갱신되지만 이름이 고정된 app.js/style.css는 브라우저가 이전
+// 탐색 규칙을 오래 쥘 수 있다. 소스 내용 해시를 쿼리로 붙여 배포마다 같은 셸·같은
+// 동작을 즉시 받게 한다(자산 자체는 정적 파일 하나만 유지).
+const assetVersion = createHash("sha256").update(renewalCss).update(renewalApp).digest("hex").slice(0, 12);
+const exploreIndex = renewalIndex
+  .replace('href="./style.css"', `href="./style.css?v=${assetVersion}"`)
+  .replace('src="./app.js"', `src="./app.js?v=${assetVersion}"`)
+  .replace("</head>", `<link rel="manifest" href="../manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="kakao-js-key" content="${kakaoKey}"><meta name="supabase-url" content="${supabaseUrl}"><meta name="supabase-anon-key" content="${supabaseAnonKey}"></head>`);
 await writeFile(`${out}index.html`, exploreIndex);
 await writeFile(`${out}style.css`, renewalCss);
 await writeFile(`${out}app.js`, renewalApp);
+// 루트도 더 이상 별도 React 리다이렉트 페이지가 아니다. 같은 탐색 셸을 직접
+// 발행하되, CSS/JS만 explore 폴더에서 재사용해 /camp/와 /camp/explore/가 완전히
+// 같은 홈 경험을 제공하도록 한다.
+const rootIndex = renewalIndex
+  .replace('href="./style.css"', `href="./explore/style.css?v=${assetVersion}"`)
+  .replace('src="./app.js"', `src="./explore/app.js?v=${assetVersion}"`)
+  .replace("</head>", `<link rel="manifest" href="./manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="kakao-js-key" content="${kakaoKey}"><meta name="supabase-url" content="${supabaseUrl}"><meta name="supabase-anon-key" content="${supabaseAnonKey}"></head>`);
+await writeFile(`${out}../index.html`, rootIndex);
 await mkdir(`${out}data`, { recursive: true });
 await cp(`${root}design/renewal/data/photos.json`, `${out}data/photos.json`);
 // 보조 주소도 독립된 옛 UI를 만들지 않고, 실제 A 포스터 앱의 해시 화면으로 보낸다.
