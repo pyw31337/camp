@@ -4,10 +4,8 @@ name: Nearby place photos
 # 카카오 Daum 검색 API(블로그 대표 썸네일, 제목·요약에 가게 이름이 있는 글만 / 관광지·맛집은 이미지 검색)
 # → registry/nearby-photos.json → 바로 화면 반영(증분 발행). 썸네일 URL·원문 링크만 저장한다(내려받기·재호스팅 없음).
 # 한도: Daum 검색은 종류별 일 20,000건 무료 — 실행당 4,000건 상한(소셜 수집과 합쳐도 절반 이하). 멈추려면 저장소 변수 NEARBY_PHOTOS_ENABLED=off.
+# 2026-10-19: 첫 실행 표본의 사진 정확도가 낮아(약 20%) 매일 실행을 멈추고 수동 실행만 남긴다. 화면은 로드뷰로 실제 모습을 보인다.
 on:
-  schedule:
-    # 매일 05:37 KST
-    - cron: "37 20 * * *"
   workflow_dispatch:
     inputs:
       max_calls:

@@ -10,7 +10,11 @@ import { placeKey } from "../lib/nearby-photos.mjs";
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const dir = join(root, "camping-atlas/public/explore/data/camps");
 const regPath = join(root, "pipeline/registry/nearby-photos.json");
-const places = existsSync(regPath) ? JSON.parse(readFileSync(regPath, "utf8")).places ?? {} : {};
+// 2026-10-19 첫 실행 표본 점검: 블로그 대표 썸네일 24장 중 실제 가게 모습은 5장뿐(안내문·배너·관계없는 풍경이 대부분).
+// 엉뚱한 사진은 신뢰를 해치므로 기본은 붙이지 않고(이미 붙은 검색 사진은 걷어 냄), 실제 모습은 상세의 ‘로드뷰’로 보인다.
+// 규칙을 개선해 다시 켤 때만 NEARBY_SEARCH_PHOTOS=on.
+const enabled = process.env.NEARBY_SEARCH_PHOTOS === "on";
+const places = enabled && existsSync(regPath) ? JSON.parse(readFileSync(regPath, "utf8")).places ?? {} : {};
 
 let files = 0, attached = 0;
 for (const f of readdirSync(dir)) {

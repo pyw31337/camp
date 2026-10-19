@@ -1535,8 +1535,10 @@ function nearbyCard(x) {
   const credit = photo && x.imgU ? `<small class="nb-credit">사진 · ${esc(x.imgS || "블로그")}</small>` : "";
   const dist = x.summary ? "" : km(x.m);
   const body = `${lead}<span class="nb-txt"><b>${esc(x.name)}</b><i>${esc(label)}${x.sub ? ` · ${esc(x.sub)}` : ""}${x.summary ? " · 공공데이터" : ""}</i>${credit}</span>${dist ? `<span class="nb-dist" aria-label="캠핑장에서 ${esc(dist)}">${esc(dist)}</span>` : ""}`;
+  // 실제 모습: 좌표가 있으면 ‘로드뷰’(카카오 지도 로드뷰, 화면 안 팝업). 줄 자체는 지도 링크.
+  const rv = x.lat && x.lng ? `<span class="nb-rv" role="button" tabindex="0" data-rv="${esc(`${x.lat},${x.lng}`)}" data-rv-name="${esc(x.name)}" aria-label="${esc(x.name)} 로드뷰 보기">${ic("camera")}로드뷰</span>` : "";
   return map
-    ? `<a class="nearby-place nb-row" href="${esc(map)}" target="_blank" rel="noopener" aria-label="${esc(x.name)} 지도 열기 · ${esc(label)}${dist ? ` · ${esc(dist)}` : ""}">${body}${ic("map", "nb-go")}</a>`
+    ? `<a class="nearby-place nb-row" href="${esc(map)}" target="_blank" rel="noopener" aria-label="${esc(x.name)} 지도 열기 · ${esc(label)}${dist ? ` · ${esc(dist)}` : ""}">${body}${rv}${ic("map", "nb-go")}</a>`
     : `<div class="nearby-place nb-row">${body}</div>`;
 }
 /** 주변 > 주유 · 충전 칸에 가까운 전기차 충전소(최대 3곳)를 덧붙인다. ev: context/card.js evFor() 결과 */
@@ -3322,6 +3324,57 @@ addEventListener("click", (e) => {
   if (!im) return;
   e.preventDefault(); e.stopPropagation();
   window.open(im.dataset.open, "_blank", "noopener");
+}, true);
+// 주변시설 ‘로드뷰’: 카카오 지도 JS SDK(도메인 제한 키, 무료 한도)의 로드뷰를 팝업으로. 키·SDK가 없으면 카카오맵 로드뷰 링크를 연다.
+let kakaoSdk = null;
+function loadKakao() {
+  const key = document.querySelector('meta[name="kakao-js-key"]')?.content;
+  if (!key) return Promise.reject(new Error("no key"));
+  return (kakaoSdk ??= new Promise((ok, no) => {
+    const sc = document.createElement("script");
+    sc.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(key)}&autoload=false`;
+    sc.onload = () => window.kakao?.maps?.load ? window.kakao.maps.load(() => ok(window.kakao)) : no(new Error("sdk"));
+    sc.onerror = () => { kakaoSdk = null; no(new Error("sdk")); };
+    document.head.append(sc);
+  }));
+}
+async function openRoadview(lat, lng, name) {
+  const link = `https://map.kakao.com/link/roadview/${lat},${lng}`;
+  const dlg = document.createElement("dialog");
+  dlg.className = "rv-modal";
+  dlg.innerHTML = `<div class="rv-head"><b>${esc(name)}</b><span>로드뷰 · 실제 거리 모습(촬영 시점은 다를 수 있어요)</span><button type="button" class="w-modal-close" data-rv-close aria-label="닫기">${ic("close")}</button></div>
+    <div class="rv-view" data-rv-view><p class="rv-msg">로드뷰를 불러오는 중…</p></div>
+    <div class="rv-foot"><a class="w-btn-windy" href="${esc(link)}" target="_blank" rel="noopener">${ic("map")}카카오맵에서 크게 보기</a><button type="button" class="btn primary w-btn-close" data-rv-close>닫기</button></div>`;
+  document.body.append(dlg);
+  dlg.showModal();
+  dlg.addEventListener("close", () => dlg.remove());
+  dlg.addEventListener("click", (e) => { if (e.target === dlg || e.target.closest("[data-rv-close]")) dlg.close(); });
+  const view = $("[data-rv-view]", dlg);
+  try {
+    const kakao = await loadKakao();
+    const pos = new kakao.maps.LatLng(Number(lat), Number(lng));
+    view.innerHTML = "";
+    const rv = new kakao.maps.Roadview(view);
+    new kakao.maps.RoadviewClient().getNearestPanoId(pos, 120, (panoId) => {
+      if (panoId == null) { view.innerHTML = `<p class="rv-msg">이 장소 근처(120m)에는 로드뷰 사진이 없어요.</p>`; return; }
+      rv.setPanoId(panoId, pos);
+    });
+  } catch {
+    dlg.close();
+    window.open(link, "_blank", "noopener");
+  }
+}
+addEventListener("click", (e) => {
+  const b = e.target.closest?.("[data-rv]");
+  if (!b) return;
+  e.preventDefault(); e.stopPropagation();
+  const [lat, lng] = b.dataset.rv.split(",");
+  openRoadview(lat, lng, b.dataset.rvName || "주변 장소");
+}, true);
+addEventListener("keydown", (e) => {
+  const b = e.target.closest?.("[data-rv]");
+  if (!b || (e.key !== "Enter" && e.key !== " ")) return;
+  e.preventDefault(); b.click();
 }, true);
 
 // ── 시작 ─────────────────────────────────────────────────────

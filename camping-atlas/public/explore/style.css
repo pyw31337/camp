@@ -320,6 +320,7 @@ img { color: transparent; }
 
 /* ── 홈 메인 주요 섹션 규격화 (곧 오픈, 긍정 후기, 테마로 고르기) ────────── */
 .opens,
+.trending,
 .review-picks,
 .themes-catalog {
   width: 100%;
@@ -1522,7 +1523,7 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .nearby-hub [data-nb-tab]:focus-visible { outline: 2px solid var(--cobalt, #2b59ff); outline-offset: 2px; }
 .nearby-hub [data-nb-tab][hidden], .nearby-hub .nearby-group[hidden] { display: none; }
 .nearby-hub .nearby-group h3 { display: none; }
-.nearby-hub .nearby-places { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 6px; }
+.nearby-hub .nearby-places { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 6px; }
 .nearby-hub .nb-row { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 12px; border-radius: 12px; background: var(--soft); color: inherit; text-decoration: none; }
 .nearby-hub a.nb-row:hover { background: var(--line); }
 .nearby-hub .nb-ic { display: inline-grid; place-items: center; flex: 0 0 32px; width: 32px; height: 32px; border-radius: 9px; background: var(--paper, #fff); color: var(--ink-2); }
@@ -1581,3 +1582,51 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .pl-more summary { cursor: pointer; width: fit-content; padding: 6px 12px; border-radius: 999px; background: var(--soft); font-size: .8rem; font-weight: 800; color: var(--ink-2); list-style: none; }
 .pl-more summary::-webkit-details-marker { display: none; }
 .pl-more[open] summary { margin-bottom: 8px; }
+
+/* 홈 ‘실시간 인기’(2026-10-19): 곧 오픈과 같은 레일·카드 크기, 순위 번호·변동·출처 아이콘(같은 크기) */
+.trending-rail { gap: 14px; padding: 10px 4px 18px; margin: -8px -4px -10px; }
+.tr-card { position: relative; flex: none; width: 220px; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+.tr-ph { position: relative; display: block; width: 100%; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--r-s, 12px); background: var(--soft-2, #eee); box-shadow: var(--shadow); }
+.tr-ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .2s; }
+@media (hover:hover) { .tr-card:hover .tr-ph img { transform: scale(1.03); } }
+.tr-noimg { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ink-3); }
+.tr-noimg .ic { width: 28px; height: 28px; }
+.tr-rank { position: absolute; left: 8px; top: 8px; display: inline-grid; place-items: center; min-width: 30px; height: 30px; padding: 0 6px; border-radius: 9px; background: var(--ink, #111); color: #fff; font-size: 1rem; font-weight: 900; font-variant-numeric: tabular-nums; box-shadow: 0 2px 8px rgba(0, 0, 0, .25); }
+.tr-tr { position: absolute; right: 8px; top: 8px; padding: 3px 7px; border-radius: 999px; background: rgba(255, 255, 255, .94); font-size: .7rem; font-weight: 900; color: var(--ink-2); }
+.tr-tr.up { color: #d6336c; }
+.tr-tr.down { color: #1c7ed6; }
+.tr-tr.new { color: #fff; background: var(--accent, #0a7c4a); }
+.tr-card > b { margin-top: 10px; font-weight: 800; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tr-card > i { margin-top: 2px; font-style: normal; font-size: .82rem; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tr-meta { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-top: 6px; }
+.tr-count { font-size: .8rem; color: var(--ink-2); white-space: nowrap; }
+.tr-count b { font-weight: 900; color: var(--accent, #0a7c4a); }
+.tr-srcs { display: inline-flex; gap: 4px; flex-wrap: nowrap; overflow: hidden; }
+.tr-src { display: inline-flex; align-items: center; gap: 2px; height: 20px; padding: 0 5px 0 3px; border-radius: 6px; background: var(--soft); color: var(--ink-2); font-size: .68rem; font-weight: 800; }
+.tr-src svg { flex: 0 0 14px; width: 14px; height: 14px; padding: 1px; border-radius: 4px; background: var(--ink); color: var(--paper, #fff); }
+.tr-src i { font-style: normal; font-variant-numeric: tabular-nums; }
+.tr-asof { margin-right: 6px; font-size: .78rem; color: var(--ink-3); }
+.tr-skel .tr-ph { animation: tr-pulse 1.2s ease-in-out infinite; box-shadow: none; }
+.tr-skel b, .tr-skel i { display: block; height: 12px; margin-top: 10px; border-radius: 6px; background: var(--soft-2, #eee); width: 70%; }
+.tr-skel i { width: 45%; margin-top: 6px; }
+@keyframes tr-pulse { 50% { opacity: .55; } }
+.tr-empty { display: grid; justify-items: start; gap: 4px; padding: 18px; border-radius: 14px; background: var(--soft); color: var(--ink-2); }
+.tr-empty .ic { width: 20px; height: 20px; color: var(--ink-3); }
+.tr-empty span { font-size: .84rem; color: var(--ink-3); }
+@media (max-width: 759px) { .tr-card { width: 64vw; max-width: 240px; } }
+@media (prefers-reduced-motion: reduce) { .tr-skel .tr-ph { animation: none; } }
+
+/* 주변시설 로드뷰(2026-10-19 소유자: 주변시설 실제 모습) — 줄 안 작은 버튼 + 팝업 */
+.nearby-hub .nb-rv { display: inline-flex; align-items: center; gap: 4px; flex: none; height: 28px; padding: 0 10px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--ink-2); font-size: .74rem; font-weight: 800; cursor: pointer; }
+.nearby-hub .nb-rv .ic { width: 14px; height: 14px; color: var(--accent); }
+.nearby-hub .nb-rv:hover, .nearby-hub .nb-rv:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
+dialog.rv-modal { border: 0; border-radius: var(--r); padding: 0; width: min(920px, calc(100vw - 24px)); background: var(--paper); color: var(--ink); box-shadow: var(--shadow-2); margin: auto; overflow: hidden; }
+dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: blur(4px); }
+.rv-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; align-items: center; padding: 14px 16px 10px; }
+.rv-head b { font-size: 1.02rem; font-weight: 850; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rv-head span { grid-row: 2; font-size: .78rem; color: var(--ink-3); font-weight: 700; }
+.rv-head .w-modal-close { grid-row: 1 / span 2; grid-column: 2; }
+.rv-view { position: relative; width: 100%; aspect-ratio: 16 / 10; max-height: 70vh; background: var(--soft); }
+.rv-msg { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; padding: 16px; text-align: center; color: var(--ink-2); font-weight: 700; }
+.rv-foot { display: flex; justify-content: space-between; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--line); }
+@media (max-width: 759px) { .rv-view { aspect-ratio: 4 / 5; } .nearby-hub .nb-rv { padding: 0 8px; } }
