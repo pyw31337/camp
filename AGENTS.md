@@ -66,6 +66,15 @@
    - 네이버 검색 API 질의 계획(QUERY_PLAN) 정밀 타깃화: 따옴표 exact match로 스니펫 적중률 극대화.
    - 화면 표출 시 확정값(`CONFIRMED`)은 확인필요 배지 없이 정규 값으로 바로 노출되므로, 디자인 에이전트는 해당 필드들을 핵심 카드로 적극 배치할 것.
 
+## 수집 데이터 즉시 공유·발행 (2026-10-19 소유자 지시 — 모든 에이전트 공통)
+
+**“수집된 데이터는 다른 에이전트들이 즉각 알 수 있게 공유하고, 바로 사이트에 반영될 수 있게.”** 자세한 내용은 `docs/COLLECTED_DATA.md`.
+
+1. **원본 공유**: 누적 수집 캐시(카카오 후기·네이버 블로그/카페/웹문서/지식iN·허용 본문)는 `collected-data` 브랜치(`cache/*.json.gz`, `out/*.json.gz`, `MANIFEST.json`)에 수집 직후 저장된다. `git fetch origin collected-data`로 읽는다.
+2. **즉시 발행**: 수집 단계가 끝나면 `pipeline/scripts/publish-incremental.sh`가 최신 main 데이터 위에 새 글만 덧붙이고 파생 정보를 다시 계산해 바로 커밋한다(실행 끝까지 기다리지 않음).
+3. **회귀 금지**: 데이터를 다시 만든 커밋은 `pipeline/scripts/coverage-guard.mjs`로 항목별 커버리지가 줄지 않았는지 확인한다(max(20곳, 2%) 넘게 줄면 발행하지 않음).
+4. **원천 등록**: 사실 원천 종류를 새로 만들면 `pipeline/lib/fact-store.mjs` `SOURCES`에 등록한다(미등록이면 그날 발행 전체가 막힘).
+
 ## 문서의 역할
 
 - `docs/PROJECT_PLAN.md`: 제품 범위, 단계, 수용 기준, 결정 대기 사항
@@ -77,3 +86,4 @@
 - `docs/FACT_STORE.md`: 원자 사실 저장소(속성 사전·등급·조합 조회·쓰기 소유권)
 - `docs/PUBLIC_DATA_PLAN.md`: 공공데이터(캠핑·편의점·사진) 목록과 활용 기획, 단계별 담당
 - `docs/KAKAO_DISCOVERY.md`: 카카오 공식 API 장소 맞춤·홈페이지 발굴
+- `docs/COLLECTED_DATA.md`: 수집 데이터 공유 위치(collected-data 브랜치)·증분 발행·회귀 검사

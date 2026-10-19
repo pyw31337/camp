@@ -227,6 +227,24 @@ jobs:
           # 캐시는 브랜치별로 분리된다. main 정기 실행은 2,000건씩 이어서 보강하고,
           # 초기 전량 보강만 workflow_dispatch 입력값으로 30,000건을 명시한다.
           GEOCODE_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || (github.event_name == 'workflow_dispatch' && inputs.geocode_max_calls) || '2000' }}
+      - name: Restore collected caches from the shared data branch
+        # 여러 날에 걸쳐 쌓는 후기·웹 언급 캐시는 Actions 캐시만으로는 잃기 쉽다(실패한 실행은 저장 안 됨, 일부만 복원).
+        # collected-data 브랜치(단일 커밋)가 원본이다. 다른 에이전트도 git fetch origin collected-data로 바로 읽는다.
+        continue-on-error: true
+        run: |
+          if git ls-remote --exit-code --heads origin collected-data >/dev/null 2>&1; then
+            git fetch -q --depth=1 origin +collected-data:refs/remotes/origin/collected-data
+            for f in social-search web-mentions; do
+              if git cat-file -e "origin/collected-data:cache/$f.json.gz" 2>/dev/null; then
+                git show "origin/collected-data:cache/$f.json.gz" | gunzip > ".cache/$f.json.branch"
+                # 브랜치 쪽이 더 크면(더 많이 쌓였으면) 그것을 쓴다.
+                if [ ! -s ".cache/$f.json" ] || [ "$(stat -c%s ".cache/$f.json.branch")" -ge "$(stat -c%s ".cache/$f.json")" ]; then mv ".cache/$f.json.branch" ".cache/$f.json"; else rm ".cache/$f.json.branch"; fi
+              fi
+            done
+            ls -la .cache/social-search.json .cache/web-mentions.json 2>/dev/null || true
+          else
+            echo "collected-data 브랜치가 아직 없습니다(첫 저장 때 만들어짐)."
+          fi
       - name: Sync campground social search (Kakao Daum blog/cafe/image/video)
         # 사람들의 후기·사진·영상(링크와 썸네일 주소만 저장, 이미지 재호스팅 안 함). 다음 검색 한도 일 5만·종류별 3만. 캠핑장당 7회(후기·카페·사진·영상 + 배치도 글·배치도 사진·요금 후기)로 하루 약 1,300곳.
         continue-on-error: true
@@ -248,6 +266,41 @@ jobs:
           NAVER_MONTHLY_CAP: ${{ vars.NAVER_MONTHLY_CAP }}
           NAVER_MENTION_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '8000' }}
           BODY_MINUTES: ${{ github.event_name == 'pull_request' && '0' || '30' }}
+      - name: Save collected caches to the shared data branch (single commit, force push)
+        # 수집 직후 바로 저장한다(뒤 단계가 실패해도 남게). 다른 에이전트 공유용: cache/*.json.gz(누적 캐시), out/*.json.gz(이번 결과), MANIFEST.json
+        if: always() && github.event_name != 'pull_request'
+        continue-on-error: true
+        run: |
+          DIR="$RUNNER_TEMP/collected"
+          if git ls-remote --exit-code --heads origin collected-data >/dev/null 2>&1; then
+            git worktree add -q -B collected-data "$DIR" origin/collected-data
+          else
+            git worktree add -q --detach "$DIR" && git -C "$DIR" switch -q --orphan collected-data
+          fi
+          mkdir -p "$DIR/cache" "$DIR/out"
+          for f in social-search web-mentions; do [ -s ".cache/$f.json" ] && gzip -9c ".cache/$f.json" > "$DIR/cache/$f.json.gz"; done
+          for f in campground-social campground-web; do [ -s "out/$f.json" ] && gzip -9c "out/$f.json" > "$DIR/out/$f.json.gz"; done
+          node -e '
+            const fs=require("fs"),z=require("zlib");const m={updated_at:new Date().toISOString(),run:process.env.RUN_URL,files:{}};
+            for(const f of ["out/campground-social.json.gz","out/campground-web.json.gz"]){const p=process.argv[1]+"/"+f;if(!fs.existsSync(p))continue;
+              const j=JSON.parse(z.gunzipSync(fs.readFileSync(p)));const c=j.campgrounds??{};m.files[f]={campgrounds:Object.keys(c).length,bytes:fs.statSync(p).size};}
+            fs.writeFileSync(process.argv[1]+"/MANIFEST.json",JSON.stringify(m,null,1));' "$DIR"
+          cp ../docs/COLLECTED_DATA.md "$DIR/README.md" 2>/dev/null || true
+          cd "$DIR" && git add -A
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          MSG="chore(collected): social·web mention caches $(date -u +%Y-%m-%dT%H:%MZ)"
+          if git rev-parse -q --verify HEAD >/dev/null; then git commit -q --amend -m "$MSG"; else git commit -q -m "$MSG"; fi
+          git push -q --force origin collected-data
+          cat MANIFEST.json; du -sh --exclude=.git .
+        env:
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      - name: Publish collected web mentions to the site now (incremental)
+        # 수집 직후 최신 main 데이터에 새 글만 덧붙이고 파생 정보를 다시 계산해 바로 커밋한다(실행 끝까지 기다리지 않음).
+        # 커버리지가 줄면 커밋하지 않는다. 사이트는 main 푸시로 곧바로 다시 배포된다.
+        if: always() && github.event_name != 'pull_request'
+        continue-on-error: true
+        run: bash scripts/publish-incremental.sh "Naver web mentions" --web out/campground-web.json
       - name: Sync rest areas and drowsy shelters
         continue-on-error: true
         run: npm run sync:rest-stops
@@ -368,6 +421,9 @@ jobs:
           fi
           git config user.name "moyeora-camping-data-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # 실행 시작 시점 코드·일부만 복원된 캐시로 만든 결과가 최신 데이터를 줄이면 발행하지 않는다(2026-10-19 후기 2,686→1,272 사고 방지).
+          git fetch -q origin main && git show origin/main:camping-atlas/public/explore/data/meta.json > "$RUNNER_TEMP/base-meta.json"
+          node pipeline/scripts/coverage-guard.mjs "$RUNNER_TEMP/base-meta.json" camping-atlas/public/explore/data/meta.json
           git add camping-atlas/public/data camping-atlas/public/explore data/facts pipeline/registry/naver-usage.json
           if git diff --cached --quiet; then
             echo "공개 데이터 변경 없음."; exit 0
@@ -395,6 +451,7 @@ jobs:
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: pipeline-out
           path: pipeline/out/
