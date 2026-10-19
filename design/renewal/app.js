@@ -420,20 +420,30 @@ function initDraggableRails(root = document) {
       }
     }
     const fill = pBar ? (pBar.querySelector("i") || pBar) : null;
-    const updateProgress = () => {
-      if (!pBar || !fill) return;
+    const updateRailState = () => {
       const max = rail.scrollWidth - rail.clientWidth;
-      if (max <= 4) {
-        pBar.style.display = "none";
+      if (max <= 6) {
+        if (pBar) pBar.style.display = "none";
+        rail.classList.remove("has-left-fade", "has-right-fade");
         return;
       }
-      pBar.style.display = "inline-flex";
-      const ratio = Math.max(0, Math.min(1, rail.scrollLeft / max));
-      const pct = 18 + ratio * 82;
-      fill.style.width = `${pct.toFixed(1)}%`;
+      if (pBar && fill) {
+        pBar.style.display = "inline-flex";
+        const ratio = Math.max(0, Math.min(1, rail.scrollLeft / max));
+        const pct = 18 + ratio * 82;
+        fill.style.width = `${pct.toFixed(1)}%`;
+      }
+      const atStart = rail.scrollLeft <= 6;
+      const atEnd = rail.scrollLeft >= max - 6;
+      rail.classList.toggle("has-left-fade", !atStart);
+      rail.classList.toggle("has-right-fade", !atEnd);
     };
-    rail.addEventListener("scroll", updateProgress, { passive: true });
-    requestAnimationFrame(updateProgress);
+    rail.addEventListener("scroll", updateRailState, { passive: true });
+    requestAnimationFrame(updateRailState);
+    if (window.ResizeObserver) {
+      const ro = new ResizeObserver(updateRailState);
+      ro.observe(rail);
+    }
 
     rail.addEventListener("pointerdown", (e) => {
       if (e.pointerType === "touch") return;
@@ -474,6 +484,7 @@ function initDraggableRails(root = document) {
             rail.style.transform = "";
           }
         }
+        updateRailState();
       }
     };
 
@@ -487,6 +498,7 @@ function initDraggableRails(root = document) {
           rail.style.transition = "";
           rail.style.transform = "";
           bounceX = 0;
+          updateRailState();
         }, 450);
       }
       if (hasMoved) {
@@ -1643,6 +1655,7 @@ async function detailView(id) {
         ${priceMentionsHtml(d)}
         <section class="d-sec"><div class="sec-head">${iconTitle("info", "이용 정보")}</div><dl class="uses">${us.map(([l, x, icon]) => `<div class="use${x ? "" : " unk"}"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${x ? `${esc(detailValue(x))}${asOfMention(x)}` : "확인필요"}</span>${x ? `<span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span>` : ""}</dd></div>`).join("")}</dl></section>
         <section class="d-sec" data-cond hidden></section>
+        <section class="d-sec" data-extras hidden></section>
         ${reviewHtml(d, c)}
         ${operatorHtml(d)}
         ${bookingHtml(c, d)}
@@ -1659,6 +1672,7 @@ async function detailView(id) {
         ${reviewLinksHtml(d, c)}
         ${infoHtml(c)}
         ${commentsHtml(c)}
+        <section class="d-sec" data-opform-sec hidden></section>
       </div>
       <aside class="d-side">${reserveCard(c, d)}</aside>
     </div>
