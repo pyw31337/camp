@@ -41,6 +41,8 @@ jobs:
         working-directory: pipeline
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -51,6 +53,10 @@ jobs:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
       - name: Build campground ↔ station mapping when stations are missing
         run: |
+          # PR에서는 대응표 스크립트가 바뀐 때만 다시 만든다(측정소·조석 지점 조회가 data.go.kr 지연 시 수십 분 걸림).
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            if git diff --quiet "origin/${{ github.base_ref }}" -- scripts/build-condition-mapping.mjs 2>/dev/null; then echo "PR: 대응표 유지"; exit 0; fi
+          fi
           if [ "${{ inputs.rebuild_mapping }}" = "true" ] || [ "${{ github.event_name }}" = "pull_request" ] || ! grep -q '"with_air":[1-9]' registry/condition-mapping.json; then
             node scripts/build-condition-mapping.mjs
           else
