@@ -17,6 +17,9 @@ export const SPEC_FIELDS = {
   EXTRA_CAR_FEE: { group: "fee", label: "차량 추가" },
   VISITOR_POLICY: { group: "fee", label: "방문객" },
   PET_POLICY: { group: "rule", label: "반려동물" },
+  PARKING: { group: "rule", label: "주차" },
+  POWER_W: { group: "rule", label: "전기 용량" },
+  REFUND_POLICY: { group: "booking", label: "환불" },
   RENTAL: { group: "rental", label: "대여" },
   DISCOUNT: { group: "promo", label: "할인 대상" },
   PROMOTION: { group: "promo", label: "기간 행사" },
@@ -130,6 +133,22 @@ export function extractFromSentence(s, { year = new Date().getFullYear() } = {})
     const period = parsePeriod(s, year);
     if (period) out.push({ code: "PROMOTION", value: clip(s, 60), norm: `${period.from ?? ""}~${period.to ?? ""}`, period });
   }
+  // 주차 방식(2026-10-19): 사이트 옆 주차 / 짐수레·카트 이동 / 별도 주차장
+  if (/주차/.test(s) && !/주차\s*(요금|비)|\?\s*$/.test(s)) {
+    if (/(사이트|텐트|데크)\s*(바로\s*)?(옆|앞|뒤)\s*(에)?\s*(차량\s*)?주차|차를\s*(바로\s*)?(옆|앞)에|오토\s*캠핑\s*(이\s*)?가능|차\s*옆\s*에서/.test(s) && !/불가|안\s*됩|안\s*돼/.test(s)) out.push({ code: "PARKING", value: "사이트 옆 주차", norm: "SITE_ADJACENT" });
+    else if (/(짐\s*수레|카트|리어카|손수레|운반차)/.test(s)) out.push({ code: "PARKING", value: "주차장에서 짐수레로 이동", norm: "CART_REQUIRED" });
+    else if (/(별도|공용|전용)\s*주차장|주차장\s*(에\s*)?(주차|세우)/.test(s)) out.push({ code: "PARKING", value: "별도 주차장", norm: "SHARED_NEARBY" });
+  }
+  // 전기 용량: “전기 600W”, “최대 1kW”, “1,100와트” (300~3,000W만, 전기 맥락이 같은 문장에 있을 때)
+  const w = s.match(/(\d(?:[\d,]{0,4}))\s*(w|와트|kw|킬로와트)(?![a-z])/i);
+  if (w && /전기|전력|전기\s*사용|사용\s*가능|용량|차단기|릴선|전열/.test(s)) {
+    const n = Number(w[1].replace(/,/g, "")) * (/k/i.test(w[2]) ? 1000 : 1);
+    if (n >= 300 && n <= 3000) out.push({ code: "POWER_W", value: `${n.toLocaleString("ko-KR")}W`, norm: String(n) });
+  }
+  // 환불: “당일 취소 환불 불가”, “7일 전 100% 환불”
+  const rf = s.match(/(\d{1,2})\s*일\s*전[^.]{0,12}?(\d{1,3})\s*%\s*(환불|환급)/);
+  if (rf) out.push({ code: "REFUND_POLICY", value: `${rf[1]}일 전 ${rf[2]}% 환불`, norm: `${rf[1]}d${rf[2]}` });
+  else if (/(당일|전날|1일\s*전)[^.]{0,10}(취소|환불)[^.]{0,8}(불가|안\s*됩)/.test(s)) out.push({ code: "REFUND_POLICY", value: "당일 취소 환불 불가", norm: "SAMEDAY_NONE" });
   return out;
 }
 
@@ -164,7 +183,7 @@ export function attributable(review, name) {
  * @param {Array} p.reviews 후기 요약(title·snippet·url·date)
  * @param {string} p.now 기준 시각(지난 행사 제외)
  */
-export function buildSpecSheet({ name, docs = [], reviews = [], now = new Date().toISOString(), mentionMaxAgeDays = 730 }) {
+export function buildSpecSheet({ name, docs = [], reviews = [], now = new Date().toISOString(), mentionMaxAgeDays = 1460 }) {
   const year = Number(now.slice(0, 4));
   const today = now.slice(0, 10);
   const facts = [];
@@ -181,11 +200,12 @@ export function buildSpecSheet({ name, docs = [], reviews = [], now = new Date()
     const at = Date.parse(r.date ?? "");
     if (Number.isFinite(at) && nowMs - at > mentionMaxAgeDays * 864e5) continue;
     let hit = false;
-    for (const s of sentences(`${r.title ?? ""}. ${r.snippet ?? ""}`)) {
+    // 본문 문장(robots 허용 블로그)이 있으면 함께 읽는다. 오래된 글은 화면에서 “(YYYY.MM.DD 기준)”으로 표시한다.
+    for (const s of sentences(`${r.title ?? ""}. ${r.snippet ?? ""}${r.body?.length ? `\n${r.body.join("\n")}` : ""}`)) {
       for (const f of extractFromSentence(s, { year: Number.isFinite(at) ? new Date(at).getFullYear() : year })) {
         // 후기의 행사 언급은 작성 시점 기준이라 최근 60일 글만, 기간이 이미 지난 것은 뺀다.
         if (f.code === "PROMOTION" && (!Number.isFinite(at) || nowMs - at > 60 * 864e5)) continue;
-        facts.push({ ...f, quote: s, grade: "MENTION", source: { kind: "review", label: r.src ?? (r.t === "cafe" ? "카페" : "블로그"), url: r.url, date: r.date ?? null } });
+        facts.push({ ...f, quote: s, grade: "MENTION", source: { kind: "review", label: r.src ?? (/cafe/.test(r.t ?? "") ? "카페" : r.t === "web" ? "웹문서" : r.t === "kin" ? "지식iN" : "블로그"), url: r.url, date: r.date ?? null } });
         hit = true;
       }
     }

@@ -32,6 +32,7 @@ for (const c of camps) {
     snippets: s && s.status === "OK" ? s : null,
     kakao: k?.place ? { ...k.place, checked_at: k.checked_at } : null,
     naver: n?.place ? { ...n.place, checked_at: n.checked_at } : null,
+    posts: d ? [...(d.reviews ?? []), ...(d.cafe ?? []), ...(d.web ?? [])] : [],
   });
   if (list.length) { c.st = compactTypes(list); withTypes++; } else delete c.st;
   if (list.some((t) => t.code !== "PITCH" && t.code !== "AUTO")) beyondPitch++;

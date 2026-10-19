@@ -40,7 +40,7 @@ for (const c of camps) {
     for (const [url, text] of byUrl) docs.push({ text, grade: "OFFICIAL_TEXT", source: { kind: "operator_homepage", label: "운영자 홈페이지", url, date: site.checked_at } });
   }
   if (d.intro) docs.push({ text: d.intro, grade: "OFFICIAL_TEXT", source: { kind: "gocamping_intro", label: "고캠핑 운영자 소개글", url: c.gc_url ?? null, date: c.modified_at ?? null } });
-  const reviews = [...(d.reviews ?? []), ...(d.cafe ?? [])];
+  const reviews = [...(d.reviews ?? []), ...(d.cafe ?? []), ...(d.web ?? [])];
   const spec = buildSpecSheet({ name: c.name, docs, reviews, now });
   roundups += spec.stats.roundups_skipped;
   if (Object.keys(spec.fields).length) { withAny++; d.spec = spec; } else delete d.spec;

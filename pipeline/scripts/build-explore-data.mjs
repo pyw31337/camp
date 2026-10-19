@@ -19,6 +19,8 @@ const fees = await read("../out/tour-fees.json");
 const nearby = await read("../out/campground-nearby.json");
 const products = await read("../out/campground-products.json");
 const social = await read("../out/campground-social.json");
+// 네이버 검색 API(블로그·카페·웹문서·지식iN) 언급 + robots 허용 블로그 본문 문장(scripts/sync-web-mentions.mjs)
+const web = await read("../out/campground-web.json");
 // 제휴·운영자 제공으로 확인한 공지만 읽는다. 플랫폼 공지 페이지를 자동 수집하지 않는다.
 const notices = await read("../registry/campground-notices.json");
 // 자체 저장 공식 사진(webp, media 브랜치). 없으면 고캠핑 원본 주소를 그대로 쓴다.
@@ -177,6 +179,8 @@ for (const [id, d] of Object.entries(details)) {
     if (so.layout) d.layout = so.layout;
     if (so.prices?.length) d.prices = so.prices;
     d.social_checked_at = so.fetched_at ?? null;
+    // 카카오 후기·카페 글에 본문 사실 문장이 있으면 붙인다(추출기가 요약보다 긴 근거를 읽게).
+    for (const x of [...(d.reviews ?? []), ...(d.cafe ?? [])]) { const b = web?.bodies?.[x.url]; if (b?.length) x.body = b; }
     const rec = records.find((r) => r.id === id);
     if (rec) rec.soc = [(so.blog?.length ?? 0) + (so.cafe?.length ?? 0), so.vclip?.length ?? 0, so.image?.length ?? 0];
     // 공식 사진이 없는 곳은 목록 썸네일로 Daum 검색 이미지 썸네일 주소를 쓴다(저장·재호스팅 없음, 화면에 “검색 사진” 표기).
@@ -185,6 +189,20 @@ for (const [id, d] of Object.entries(details)) {
     if (snap) usedSnaps.add(snap.thumb);
     if (rec && !rec.ph && !rec.img && snap) rec.sn = snap.thumb;
   }
+}
+// 웹 언급: 카카오 후기와 겹치지 않는 네이버 블로그·카페·웹문서·지식iN 글(요약 + 허용 본문 문장)과 요금 언급
+for (const [id, d] of Object.entries(details)) {
+  const w = web?.campgrounds?.[id];
+  if (!w) continue;
+  const known = new Set([...(d.reviews ?? []), ...(d.cafe ?? [])].map((x) => x.url));
+  const docs = (w.docs ?? []).filter((x) => !known.has(x.url));
+  if (docs.length) d.web = docs;
+  if (w.prices?.length) {
+    const seen = new Set((d.prices ?? []).map((p) => `${p.url}|${p.won}`));
+    d.prices = [...(d.prices ?? []), ...w.prices.filter((p) => !seen.has(`${p.url}|${p.won}`))]
+      .sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? ""))).slice(0, 16);
+  }
+  d.web_checked_at = w.fetched_at ?? null;
 }
 for (const [id, d] of Object.entries(details)) {
   // 이미 저장한 사진(중복으로 뺀 것 포함)과 이름 키가 같은 원본 주소는 다시 보여 주지 않는다.
