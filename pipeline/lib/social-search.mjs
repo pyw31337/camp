@@ -13,9 +13,11 @@ export const EXTRA_SEARCHES = [
   { key: "layout_blog", type: "blog", suffix: "배치도", params: { sort: "accuracy", size: 15 } },
   { key: "layout_image", type: "image", suffix: "배치도", params: { sort: "accuracy", size: 20 } },
   { key: "price_blog", type: "blog", suffix: "가격 요금", params: { sort: "recency", size: 25 } },
+  { key: "manner_blog", type: "blog", suffix: "매너타임", params: { sort: "accuracy", size: 15 } },
+  { key: "time_blog", type: "blog", suffix: "입실 퇴실", params: { sort: "accuracy", size: 15 } },
 ];
 export const SOCIAL_CACHE_VERSION = 2;
-export const CAPS = { blog: 8, cafe: 6, image: 24, vclip: 10 };
+export const CAPS = { blog: 12, cafe: 6, image: 24, vclip: 10 };
 // 타입별 1회 호출. blog·cafe는 최신 후기를 보이려고 recency, image·vclip은 엉뚱한 결과를 줄이려고 accuracy.
 export const REQUEST_PLAN = {
   blog: { sort: "recency", size: 10 },
@@ -135,7 +137,7 @@ export function isRelevant(doc, { tokens, stem = "", others = [] }) {
   return true;
 }
 
-const DETAIL_WORDS = /(사이트|화장실|샤워|개수대|매점|전기|온수|데크|파쇄석|잔디|주차|요금|가격|예약|명당|구역|배치|놀이터|계곡|그늘|뷰)/g;
+const DETAIL_WORDS = /(사이트|화장실|샤워|개수대|매점|전기|온수|데크|파쇄석|잔디|주차|요금|가격|예약|명당|구역|배치|놀이터|계곡|그늘|뷰|매너|입실|퇴실|환불)/g;
 /**
  * 후기 정보량·정확도 점수(0~100). 화면의 ‘정확순’과 ‘추천’ 정렬에 쓴다.
  * 제목에 이름(+캠핑 관련어)이 있는지, 본문 길이, 사이트·시설 같은 구체어, 썸네일 유무를 본다.
@@ -245,18 +247,24 @@ const byDateDesc = (a, b) => String(b.date ?? "").localeCompare(String(a.date ??
 /**
  * 한 캠핑장의 원본 응답(documents 배열들)을 걸러 압축 레코드로 만든다.
  * @param {{name:string,address?:{sigungu?:string}}} camp
- * @param {{blog?:any[],cafe?:any[],image?:any[],vclip?:any[]}} raw
+ * @param {{blog?:any[],cafe?:any[],image?:any[],vclip?:any[],manner_blog?:any[],time_blog?:any[],price_blog?:any[]}} raw
  * @param {{others?:string[]}} [opts]
  */
 export function buildSocialRecord(camp, raw, { others = [] } = {}) {
   const sigungu = camp?.address?.sigungu;
   const ctx = { tokens: distinctiveTokens(camp?.name, sigungu), stem: regionStem(sigungu), others };
-  const docs = (t) => dedupe(
-    (raw?.[t] ?? []).filter((d) => isRelevant({ title: d?.title, contents: d?.contents, src: t === "cafe" ? d?.cafename : d?.blogname }, ctx))
+  const rawBlogDocs = [
+    ...(raw?.blog ?? []),
+    ...(raw?.manner_blog ?? []),
+    ...(raw?.time_blog ?? []),
+    ...(raw?.price_blog ?? []),
+  ];
+  const docs = (list, t) => dedupe(
+    (list ?? []).filter((d) => isRelevant({ title: d?.title, contents: d?.contents, src: t === "cafe" ? d?.cafename : d?.blogname }, ctx))
       .map((d) => normalizeDoc(d, t)).filter(Boolean),
     (x) => urlKey(x.url),
   ).sort(byDateDesc).slice(0, CAPS[t]);
-  const blog = docs("blog"), cafe = docs("cafe");
+  const blog = docs(rawBlogDocs, "blog"), cafe = docs(raw?.cafe ?? [], "cafe");
 
   const vclip = dedupe(
     (raw?.vclip ?? []).filter((d) => isRelevant({ title: d?.title, src: d?.author }, ctx)).map(normalizeVclip).filter(Boolean),

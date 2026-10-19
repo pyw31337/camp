@@ -1723,6 +1723,7 @@
 {"cid":"2228","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2228","attr":"PHONE","value":"010-5449-7976","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/675764039","at":"2026-10-16T05:35:30.633Z"}
 {"cid":"2230","attr":"HOMEPAGE","value":"http://www.orcamping.co.kr/","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2230","attr":"HOMEPAGE","value":"https://cafe.naver.com/pinkpgbcr","grade":"CONFIRMED","src":"naver_local","url":"https://cafe.naver.com/pinkpgbcr","at":"2026-10-19T00:58:50.026Z","text":"숙박>캠핑,야영장"}
 {"cid":"2230","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2230","attr":"PHONE","value":"033-378-5376","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2232","attr":"HOMEPAGE","value":"http://www.xn--sk4b78fdsau01b.net/","grade":"CONFIRMED","src":"gocamping"}
@@ -10786,6 +10787,7 @@
 {"cid":"102116","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102117","attr":"HOMEPAGE","value":"http://artemisresort.co.kr","grade":"CONFIRMED","src":"naver_local","url":"http://artemisresort.co.kr","at":"2026-10-16T06:20:15.699Z","text":"숙박>캠핑,야영장"}
 {"cid":"102117","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102118","attr":"HOMEPAGE","value":"https://ungyoland.revrun.kr/","grade":"CONFIRMED","src":"naver_local","url":"https://ungyoland.revrun.kr/","at":"2026-10-19T00:58:53.494Z","text":"숙박>펜션"}
 {"cid":"102118","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102119","attr":"HOMEPAGE","value":"http://naturalcarefarm.shop/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102119","attr":"HOMEPAGE","value":"http://naturalcarefarm.shop/","grade":"CONFIRMED","src":"naver_local","url":"http://naturalcarefarm.shop/","at":"2026-10-16T06:18:08.745Z","text":"숙박>캠핑,야영장"}
