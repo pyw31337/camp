@@ -52,10 +52,11 @@ test("요약은 확인된 값만, 최대 6조각", () => {
   assert.equal(s, "오토 30 · 입실 14:00 · 전기 600W · 장작 가능 · 사이트 옆 주차 · 차박 가능");
 });
 
-test("환불 규정 미기재 시 법정 소비자분쟁해결기준 기본값 적용", () => {
+test("환불 규정 미기재 시 법정 소비자분쟁해결기준을 참고값(REFERENCE)으로만 둔다", () => {
+  // 2026-10-19 소유자 결정: 업장이 공지하지 않은 법정 기본값은 그 업장의 규정이 아니므로 확정값으로 쓰지 않는다.
   const p = buildProfile(base);
-  assert.equal(p.fields.REFUND.value, "10일 전 100% 환불 (소비자분쟁기준)");
-  assert.equal(p.fields.REFUND.grade, "CONFIRMED");
+  assert.equal(p.fields.REFUND.value, "업장 미공지 · 법정 기준 10일 전 100% 환불");
+  assert.equal(p.fields.REFUND.grade, "REFERENCE");
   assert.equal(p.fields.REFUND.source.url, "https://www.ftc.go.kr/");
   assert.equal(p.fields.REFUND.statutory, true);
 });

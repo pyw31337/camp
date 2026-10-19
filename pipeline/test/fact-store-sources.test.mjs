@@ -13,3 +13,9 @@ test("사이트 타입이 내보내는 원천 코드가 모두 SOURCES에 등록
   for (const code of emitted) assert.ok(SOURCES[code], `SOURCES에 ${code}가 없습니다`);
   for (const code of ["blog_mention", "cafe_mention", "kin"]) assert.ok(SOURCES[code], `SOURCES에 ${code}가 없습니다`);
 });
+
+test("사실 원장 빌더가 직접 쓰는 원천 코드(src: \"...\")도 모두 SOURCES에 있다", () => {
+  const src = readFileSync(new URL("../scripts/build-fact-store.mjs", import.meta.url), "utf8") + readFileSync(new URL("../lib/fact-store.mjs", import.meta.url), "utf8");
+  const codes = new Set([...src.matchAll(/\bsrc:\s*"([a-z_]+)"/g)].map((m) => m[1]));
+  for (const code of codes) assert.ok(SOURCES[code], `SOURCES에 ${code}가 없습니다(build-fact-store 사실 검증 실패로 매일 발행이 막힘)`);
+});

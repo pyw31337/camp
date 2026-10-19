@@ -74,7 +74,7 @@ export function buildProfile(c, d = null, details = null, { detailDate = null, u
   if (verified && lw > 0) set("POWER", `최대 ${lw}W`, "VERIFIED", { label: f.source?.label ?? "원문 대조", url: f.source?.url ?? null, date: f.source?.checked_at ?? null }, { watts: lw });
   else if (of.w) set("POWER", `최대 ${of.w.v}W`, "OPERATOR", opSource(of.w), { watts: of.w.v });
   else if (spW) set("POWER", `최대 ${spW.value}`, spW.grade, spW.source, { watts: Number(spW.value.replace(/[^0-9]/g, "")) || null });
-  else if (f.power?.available || (c.amenities ?? []).some((a) => /전기/.test(a))) set("POWER", "최대 600W (법정 기준)", "CONFIRMED", { label: "관광진흥법 야영장 안전위생기준(사이트당 600W 이하)", url: "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=247854" }, { watts: 600, statutory: true });
+  else if (f.power?.available || (c.amenities ?? []).some((a) => /전기/.test(a))) set("POWER", "업장 미공지 · 법정 상한 600W", "REFERENCE", { label: "관광진흥법 야영장 안전위생기준(사이트당 600W 이하)", url: "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=247854" }, { watts: 600, statutory: true });
   if (details?.ELECTRIC_FEE && fields.POWER) fields.POWER.fee = details.ELECTRIC_FEE.amount;
   // 주차
   const spPk = specField(d?.spec, "PARKING");
@@ -123,7 +123,8 @@ export function buildProfile(c, d = null, details = null, { detailDate = null, u
   const spRf = specField(d?.spec, "REFUND_POLICY");
   if (details?.REFUND) set("REFUND", "규정 있음", "OPERATOR", dsrc(details.REFUND));
   else if (spRf) set("REFUND", spRf.value, spRf.grade, spRf.source);
-  else if (c.booking || c.tel) set("REFUND", "10일 전 100% 환불 (소비자분쟁기준)", "CONFIRMED", { label: "공정거래위원회 소비자분쟁해결기준(야영장업)", url: "https://www.ftc.go.kr/" }, { statutory: true });
+  // 업장이 공지하지 않은 곳의 법령·고시 기본값은 그 업장의 규정이 아니다 → REFERENCE(참고)로 두고 확정값·커버리지에 넣지 않는다(소유자 2026-10-19).
+  else if (c.booking || c.tel) set("REFUND", "업장 미공지 · 법정 기준 10일 전 100% 환불", "REFERENCE", { label: "공정거래위원회 소비자분쟁해결기준(야영장업)", url: "https://www.ftc.go.kr/" }, { statutory: true });
   // 예약
   const ch = (c.booking?.channels ?? []).filter((x) => x.kind !== "phone").map((x) => x.platform_name).filter(Boolean);
   if (ch.length || c.tel) set("BOOKING", [...new Set(ch)].slice(0, 3).join(" · ") || "전화 예약", "CONFIRMED", { label: c.booking?.source?.label ?? "고캠핑 등록 예약 정보", url: c.booking?.source?.url ?? c.gc_url ?? null, date: c.booking?.source?.checked_at ?? null });

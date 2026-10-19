@@ -427,7 +427,11 @@ jobs:
           git config user.name "moyeora-camping-data-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # 실행 시작 시점 코드·일부만 복원된 캐시로 만든 결과가 최신 데이터를 줄이면 발행하지 않는다(2026-10-19 후기 2,686→1,272 사고 방지).
-          git fetch -q origin main && git show origin/main:camping-atlas/public/explore/data/meta.json > "$RUNNER_TEMP/base-meta.json"
+          # 기준은 발행된 meta.json 숫자가 아니라 최신 main 데이터를 지금 규칙으로 다시 센 값이다(세는 규칙이 바뀌어도 비교가 맞게).
+          git fetch -q origin main && git worktree add -q --detach "$RUNNER_TEMP/base-main" origin/main
+          node "$RUNNER_TEMP/base-main/pipeline/scripts/report-coverage.mjs" >/dev/null
+          cp "$RUNNER_TEMP/base-main/camping-atlas/public/explore/data/meta.json" "$RUNNER_TEMP/base-meta.json"
+          git worktree remove --force "$RUNNER_TEMP/base-main"
           node pipeline/scripts/coverage-guard.mjs "$RUNNER_TEMP/base-meta.json" camping-atlas/public/explore/data/meta.json
           git add camping-atlas/public/data camping-atlas/public/explore data/facts pipeline/registry/naver-usage.json
           if git diff --cached --quiet; then

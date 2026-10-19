@@ -68,7 +68,7 @@ for (const c of camps) {
     if (price.g === "MENTION") priceCoverage.mention++;
   }
   if (d) { d.profile = p; writeFileSync(path, JSON.stringify(d)); }
-  for (const [k, f] of Object.entries(p.fields)) { cov[k].any++; if (f.grade !== "MENTION") cov[k].facts++; }
+  for (const [k, f] of Object.entries(p.fields)) { if (f.statutory || f.grade === "REFERENCE") continue; cov[k].any++; if (f.grade !== "MENTION") cov[k].facts++; }
   for (const t of p.tags) tagCount[t.code] = (tagCount[t.code] ?? 0) + 1;
   const k = p.score.facts;
   dist[k <= 5 ? "0-5" : k <= 9 ? "6-9" : k <= 13 ? "10-13" : "14-18"]++;
