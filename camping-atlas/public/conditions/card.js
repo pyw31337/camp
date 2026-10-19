@@ -16,9 +16,12 @@ const kstNow = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10
 const kstStamp = (iso) => { const d = new Date(new Date(iso).getTime() + 9 * 3600e3); return `${d.getUTCMonth() + 1}/${d.getUTCDate()} ${String(d.getUTCHours()).padStart(2, "0")}:${String(d.getUTCMinutes()).padStart(2, "0")}`; };
 const ICON = (sky, pty) => (/눈/.test(pty ?? sky ?? "") ? "❄️" : /비|소나기|빗방울/.test(pty ?? sky ?? "") ? "🌧️" : /흐림/.test(sky ?? "") ? "☁️" : /구름/.test(sky ?? "") ? "⛅" : sky ? "☀️" : "·");
 const STYLE = `.fc-strip{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none}.fc-strip::-webkit-scrollbar{display:none}
-.fc-day{flex:0 0 64px;border:1px solid var(--line,#e5e7eb);border-radius:12px;padding:8px 4px;text-align:center;font-size:12px;line-height:1.35;background:var(--card,#fff)}
-.fc-day.we{background:var(--accent-soft,#eef7f0);border-color:var(--accent,#2f855a)}.fc-day b{display:block;font-size:12px}.fc-day .ic{font-size:20px;display:block;margin:2px 0}
-.fc-day .t{font-weight:600}.fc-day .p{color:var(--muted,#6b7280)}.fc-day .lbl{display:block;font-size:10px;color:var(--accent,#2f855a);font-weight:700;min-height:13px}
+.fc-day{flex:0 0 72px;display:flex;flex-direction:column;align-items:center;gap:2px;border:1px solid var(--line,#e5e7eb);border-radius:16px;padding:10px 6px;text-align:center;font-size:12px;line-height:1.3;background:var(--paper,#fff);color:inherit;cursor:pointer}
+.fc-day:hover{border-color:var(--accent,#2f855a)}
+.fc-day.is-today,.fc-day.we{background:var(--accent-soft,#eef7f0);border-color:var(--accent,#2f855a)}
+.fc-day .ic{font-size:22px;display:block;margin:2px 0}
+.fc-day .t{font-weight:750;font-size:15px}
+.fc-day .lbl{display:block;font-size:11px;font-weight:800;color:var(--ink-2,#374151)}
 .fc-note{font-size:12px;color:var(--muted,#6b7280);margin:4px 0 0}`;
 function injectStyle() { if (typeof document === "undefined" || document.getElementById("fc-style")) return; const s = document.createElement("style"); s.id = "fc-style"; s.textContent = STYLE; document.head.appendChild(s); }
 
@@ -52,10 +55,22 @@ export async function mount(el, camp) {
   const data = await load();
   const today = data?.today && data.today > kstNow() ? data.today : kstNow();
   const days = daysFor(data, camp.id, today);
+  const relOf = (ymd) => {
+    const diff = Math.round((Date.parse(`${ymd}T12:00:00+09:00`) - Date.parse(`${today}T12:00:00+09:00`)) / 864e5);
+    if (diff === -1) return "어제";
+    if (diff === 0) return "오늘";
+    if (diff === 1) return "내일";
+    if (diff === 2) return "모레";
+    return `${md(ymd)} ${DOW[dow(ymd)]}`;
+  };
   const strip = days.map((x) => {
     const lbl = weekendLabel(x.d, today);
-    const temp = x.tmin != null || x.tmax != null ? `${x.tmin ?? "–"}°/${x.tmax ?? "–"}°` : "";
-    return `<div class="fc-day${lbl ? " we" : ""}"><span class="lbl">${lbl}</span><b>${md(x.d)} ${DOW[dow(x.d)]}</b><span class="ic" role="img" title="${esc(x.pty ?? x.sky ?? "")}" aria-label="${esc(x.pty ?? x.sky ?? "")}">${ICON(x.sky, x.pty)}</span><span class="t">${esc(temp)}</span><span class="p">${x.pop != null ? `☔${x.pop}%` : ""}</span></div>`;
+    const temp = x.tmax != null ? `${x.tmax}°` : (x.tmin != null ? `${x.tmin}°` : "–");
+    return `<button type="button" class="fc-day${lbl ? " we" : ""}${x.d === today ? " is-today" : ""}" data-fc-date="${esc(x.d)}" title="${esc(x.d)} 날씨 상세">
+      <span class="lbl">${relOf(x.d)}</span>
+      <span class="ic" role="img" title="${esc(x.pty ?? x.sky ?? "")}">${ICON(x.sky, x.pty)}</span>
+      <span class="t">${esc(temp)}</span>
+    </button>`;
   }).join("");
   const nShort = days.filter((x) => x.src === "short").length, nMid = days.length - nShort;
   let note;

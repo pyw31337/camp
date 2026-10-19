@@ -1402,8 +1402,15 @@ function nearbyCard(x) {
   const map = x.lat && x.lng ? `https://map.kakao.com/link/map/${encodeURIComponent(x.name)},${x.lat},${x.lng}` : x.url;
   const road = x.lat && x.lng ? `https://map.kakao.com/link/roadview/${x.lat},${x.lng}` : "";
   const hasImg = x.image && isOfficialTourImage(x.image);
-  const media = hasImg
-    ? `<div class="media-card-photo"><img src="${esc(x.image)}" alt="" loading="lazy" decoding="async"></div>`
+  const mapThumb = x.lat && x.lng
+    ? `https://staticmap.openstreetmap.de/staticmap.php?center=${x.lat},${x.lng}&zoom=16&size=480x360&maptype=mapnik`
+    : "";
+  const roadThumb = x.lat && x.lng
+    ? `https://spi.maps.daum.net/map2/map/imageservice?IW=480&IH=360&MX=${x.lng}&MY=${x.lat}&SCALE=2.5&service=open`
+    : "";
+  const photo = hasImg ? x.image : (roadThumb || mapThumb);
+  const media = photo
+    ? `<div class="media-card-photo"><img src="${esc(photo)}" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${esc(mapThumb || "")}'"></div>`
     : `<div class="media-card-photo media-card-icon" data-kind="${esc(icon)}">${ic(icon)}</div>`;
   return `<article class="nearby-place media-card${hasImg ? " has-image" : ""}">
     ${media}
@@ -1455,7 +1462,7 @@ function nearbyHubHtml(c, d) {
     .filter(([, , rows]) => rows.length);
   // 주유·충전: 주유소는 상세 자료에 있고, 전기차 충전소는 /context/extras.json에서 화면이 뜬 뒤 덧붙인다(mountNearbyEv).
   const energy = `<section class="nearby-group" data-energy${fuel.length ? "" : " hidden"}><h3>${ic("fuel")}주유 · 충전</h3><div class="nearby-places" data-energy-places>${fuel.map(nearbyCard).join("")}</div><p class="nearby-note" data-energy-note hidden></p></section>`;
-  return `<section class="d-sec nearby-hub"${groups.length || fuel.length ? "" : " hidden"}><div class="sec-head">${iconTitle("route", "주변")}<span class="sec-note">직선거리 ${tip("<b>주변 정보</b><span>생활·안전 시설은 인허가·공공 데이터, 관광·맛집은 한국관광공사 데이터로 연결합니다. 운영 시간과 영업 여부는 원문에서 다시 확인하세요.</span>")}</span></div><div class="nearby-groups">${groups.map(([title, icon, rows]) => `<section class="nearby-group"><h3>${ic(icon)}${title}</h3><div class="nearby-places">${rows.map(nearbyCard).join("")}</div></section>`).join("")}${energy}</div></section>`;
+  return `<section class="d-sec nearby-hub"${groups.length || fuel.length ? "" : " hidden"}><div class="sec-head">${iconTitle("route", "주변시설")}<span class="sec-note">직선거리 ${tip("<b>주변 정보</b><span>생활·안전 시설은 인허가·공공 데이터, 관광·맛집은 한국관광공사 데이터로 연결합니다. 운영 시간과 영업 여부는 원문에서 다시 확인하세요.</span>")}</span></div><div class="nearby-groups">${groups.map(([title, icon, rows]) => `<section class="nearby-group"><h3>${ic(icon)}${title}</h3><div class="nearby-places">${rows.map(nearbyCard).join("")}</div></section>`).join("")}${energy}</div></section>`;
 }
 function reviewHtml(d, c) {
   const rv = d?.rv ?? c?.rv;
@@ -1562,7 +1569,6 @@ async function detailView(id) {
         ${priceMentionsHtml(d)}
         <section class="d-sec"><div class="sec-head">${iconTitle("info", "이용 정보")}</div><dl class="uses">${us.map(([l, x, icon]) => `<div class="use${x ? "" : " unk"}"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${x ? `${esc(detailValue(x))}${asOfMention(x)}` : "확인필요"}</span>${x ? `<span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span>` : ""}</dd></div>`).join("")}</dl></section>
         <section class="d-sec" data-cond hidden></section>
-        ${weatherSectionHtml(c)}
         ${reviewHtml(d, c)}
         ${operatorHtml(d)}
         ${bookingHtml(c, d)}
@@ -1868,22 +1874,23 @@ function layoutHtml(d) {
 function platformHubHtml(d, c) {
   const name = nameOf(c).name;
   const q = encodeURIComponent(`${name} 캠핑`);
+  const svg = (path) => `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${path}</svg>`;
   const platforms = [
-    { label: "YouTube", icon: "video", url: `https://www.youtube.com/results?search_query=${q}`, has: (d?.videos ?? []).length > 0 },
-    { label: "Instagram", icon: "camera", url: `https://www.instagram.com/explore/search/keyword/?q=${q}` },
-    { label: "Facebook", icon: "external", url: `https://www.facebook.com/search/posts/?q=${q}` },
-    { label: "TikTok", icon: "video", url: `https://www.tiktok.com/search?q=${q}` },
-    { label: "네이버", icon: "search", url: `https://search.naver.com/search.naver?query=${q}` },
-    { label: "다음", icon: "search", url: `https://search.daum.net/search?q=${q}` },
+    { label: "YouTube", icon: svg('<path d="M18 3a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H6a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5zm-9 6v6a1 1 0 0 0 1.514.857l5-3a1 1 0 0 0 0-1.714l-5-3A1 1 0 0 0 9 9z"/>'), url: `https://www.youtube.com/results?search_query=${q}`, has: (d?.videos ?? []).length > 0 },
+    { label: "Instagram", icon: svg('<path d="M16 3a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5zm-4 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8m4.5-1.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>'), url: `https://www.instagram.com/explore/search/keyword/?q=${q}` },
+    { label: "Facebook", icon: svg('<path d="M18 2a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-3v1h3a1 1 0 0 1 .97 1.24l-1 4A1 1 0 0 1 17 15h-2v6a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-6H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2V7a6 6 0 0 1 6-6h3z"/>'), url: `https://www.facebook.com/search/posts/?q=${q}` },
+    { label: "TikTok", icon: svg('<path d="M16.083 2h-4.083a1 1 0 0 0-1 1v11.5a1.5 1.5 0 1 1-2.4-1.2 1 1 0 0 0 .4-.8V8.174a1 1 0 0 0-1.23-.974 7.5 7.5 0 1 0 8.73 7.3V12.3l.311.153a9 9 0 0 0 3.59.993 1 1 0 0 0 1.1-.996V8.417a1 1 0 0 0-.835-.986 5 5 0 0 1-4.096-4.096A1 1 0 0 0 16.083 2z"/>'), url: `https://www.tiktok.com/search?q=${q}` },
+    { label: "네이버", icon: `<img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Naver_logo_initial.svg" alt="" width="22" height="22">`, url: `https://search.naver.com/search.naver?query=${q}` },
+    { label: "다음", icon: `<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Daum_icon_%282025%E2%80%932026%29.svg/240px-Daum_icon_%282025%E2%80%932026%29.svg.png" alt="" width="22" height="22">`, url: `https://search.daum.net/search?q=${q}` },
   ];
-  return `<section class="d-sec plat-hub"><div class="sec-head">${iconTitle("external", "더 보기")}<span class="sec-note">플랫폼별 검색</span></div><div class="plat-btns">${platforms.map((p) => `<a class="plat-btn${p.has ? " has" : ""}" href="${esc(p.url)}" target="_blank" rel="noopener" title="${esc(p.label)}에서 ${esc(name)} 검색">${ic(p.icon)}<span>${esc(p.label)}</span>${p.has ? "<i>영상 있음</i>" : ""}</a>`).join("")}</div></section>`;
+  return `<section class="d-sec plat-hub"><div class="sec-head">${iconTitle("external", "더 보기")}<span class="sec-note">플랫폼별 검색</span></div><div class="plat-btns">${platforms.map((p) => `<a class="plat-btn${p.has ? " has" : ""}" href="${esc(p.url)}" target="_blank" rel="noopener" title="${esc(p.label)}에서 ${esc(name)} 검색">${p.icon}<span>${esc(p.label)}</span>${p.has ? "<i>영상 있음</i>" : ""}</a>`).join("")}</div></section>`;
 }
 function videosHtml(d) {
   const v = (d?.videos ?? []).filter((x) => x.yt).slice(0, 8);
   if (!v.length) return "";
   return `<section class="d-sec"><div class="sec-head">${iconTitle("video", "관련 영상")}<span class="sec-note">YouTube</span></div><div class="rail vids">${v.map((x, i) => {
     const fact = sourceFact({ src: "YouTube", url: x.url ?? `https://www.youtube.com/watch?v=${x.yt}`, date: x.date, title: x.title }, "YouTube");
-    return `<article class="vid-wrap"><button type="button" class="vid" data-yt="${esc(x.yt)}"><img src="https://i.ytimg.com/vi/${encodeURIComponent(x.yt)}/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="vid-play">${ic("video")}</span><b>${esc(serviceText(x.title, 60) || `현장 영상 ${i + 1}`)}</b><i>${esc([x.author, x.date ? String(x.date).slice(0, 7) : ""].filter(Boolean).join(" · ") || "재생하기")}</i></button>${srcTip(fact, `관련 영상 ${i + 1}`)}</article>`;
+    return `<article class="vid-wrap"><button type="button" class="vid" data-yt="${esc(x.yt)}"><img src="https://i.ytimg.com/vi/${encodeURIComponent(x.yt)}/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14z"/></svg></span><b>${esc(serviceText(x.title, 60) || `현장 영상 ${i + 1}`)}</b><i>${esc([x.author, x.date ? String(x.date).slice(0, 7) : ""].filter(Boolean).join(" · ") || "재생하기")}</i></button>${srcTip(fact, `관련 영상 ${i + 1}`)}</article>`;
   }).join("")}</div></section>`;
 }
 function reviewSummary(value) {
@@ -1926,10 +1933,11 @@ function reviewLinksHtml(d, c) {
       const platform = /cafe/.test(x.t ?? "") ? "카페" : x.t === "kin" ? "지식iN" : x.t === "web" ? "웹문서" : "블로그";
       const fact = sourceFact(x, platform, [x.title, x.snippet].filter(Boolean).join("\n"));
       const summary = reviewSummary(x.snippet);
-      const thumb = (canPreviewExternalMedia(x) && externalImage(x)) || apiThumb(x);
-      const media = thumb
-        ? `<div class="media-card-photo"><img src="${esc(thumb)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"></div>`
-        : `<div class="media-card-photo media-card-icon" data-kind="review">${ic(x.image ? "polaroid" : "file-text")}</div>`;
+      const host = (() => { try { return new URL(x.url).hostname; } catch { return ""; } })();
+      const fav = host ? `https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=128` : "";
+      const campShot = photosOf(c)[0] || "";
+      const thumb = (canPreviewExternalMedia(x) && externalImage(x)) || apiThumb(x) || fav || campShot;
+      const media = `<div class="media-card-photo">${thumb ? `<img src="${esc(thumb)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${esc(campShot || fav)}'">` : ic("file-text")}</div>`;
       return `<article class="review-link-card media-card"><a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${platform} 후기 ${i + 1} 원문 열기">${media}<div class="media-card-body"><i>${ic("file-text")}${esc(sourceName(x.src, platform))}${x.date ? ` · ${esc(String(x.date).slice(0, 10))}` : ""}</i><b>${esc(serviceText(x.title, 54) || `방문 후기 ${i + 1}`)}</b>${summary ? `<em>${esc(summary)}</em>` : ""}<span class="media-card-go">${ic("external")}원문 보기</span></div></a>${srcTip(fact, `${platform} 후기 ${i + 1}`)}</article>`;
     }).join("")}</div>
     ${directLinks}
@@ -2487,7 +2495,15 @@ function bindDetail() {
   }));
   const id = $(".detail")?.dataset.id;
   const currentCamp = S.byId.get(id);
-  if (currentCamp) initCampWeather(currentCamp);
+  if (currentCamp?.lat && currentCamp?.lng) {
+    const cond = $("[data-cond]");
+    cond?.addEventListener("click", async (ev) => {
+      const day = ev.target.closest("[data-fc-date]");
+      if (!day) return;
+      const data = await fetchCampWeather(currentCamp.lat, currentCamp.lng);
+      if (data) openWeatherModal(currentCamp, day.dataset.fcDate, data);
+    });
+  }
   // 이번 주말 컨디션(날씨·일출일몰·달·미세먼지·산불·물때): /conditions/card.js가 있을 때만 붙인다. 실패하면 칸을 숨긴 채 둔다.
   const condEl = $("[data-cond]"), condCamp = S.byId.get(id);
   if (condEl && condCamp) import(new URL("../conditions/card.js", import.meta.url).href).then((m) => m.mount(condEl, condCamp)).catch(() => {});
