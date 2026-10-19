@@ -29,6 +29,8 @@ export const SOURCES = {
   local_gov: "지자체 공개 데이터",
   localdata: "행정안전부 LOCALDATA 인허가(영업 중 업소)",
   gocamping_best: "문화체육관광부·한국관광공사 분야별 공공 우수야영장(고캠핑 공개 목록)",
+  // 예약 엔진(땡큐캠핑 등) 공개 예약 화면에 업장이 등록한 사이트 정보 — build-thankq-facts.mjs의 d.booking_sites.
+  booking_engine: "예약 엔진 공개 화면(업장 등록 사이트 정보)",
 };
 
 const ENV = { 산: "MOUNTAIN", 숲: "FOREST", 강: "RIVER", 호수: "LAKE", 계곡: "VALLEY", 해변: "BEACH", 섬: "ISLAND", 도심: "CITY" };
@@ -221,6 +223,22 @@ export function factsOf(c, d, { site = null, details = null, digest = null, kaka
     }
   }
   // ── 후기 요금 언급(1건 1행)
+  // ── 예약 엔진에 업장이 등록한 사이트 정보(OPERATOR): 사이트별 1박 요금(관측 날짜 기준)·규격·바닥·입퇴실
+  const bs = d?.booking_sites;
+  if (bs?.sites?.length) {
+    const be = (attr, value, extra = {}) => push(attr, value, "OPERATOR", "booking_engine", { url: bs.url ?? null, at: bs.checked_at?.slice(0, 10) ?? null, ...extra });
+    const seen = new Set();
+    const once = (k) => (seen.has(k) ? false : (seen.add(k), true));
+    const BS_SURFACE = { 파쇄석: "GRAVEL", 데크: "DECK", 잔디: "GRASS", 모래: "SAND", 마사토: "SOIL", 흙: "SOIL" };
+    for (const x of bs.sites) {
+      if (x.price && once(`p${x.price}`)) be("PRICE_NIGHT", x.price, { text: won(x.price), label: `${x.name}${bs.date ? ` · ${bs.date} 1박` : ""}` });
+      if (x.size && once(`s${x.size.join("x")}`)) be("SITE_SIZE", `${x.size[0]}×${x.size[1]}m`, { text: x.name });
+      const sf = Object.entries(BS_SURFACE).find(([k]) => x.floor?.includes(k))?.[1];
+      if (sf && once(`f${sf}`)) be("SITE_SURFACE", sf, { text: x.floor });
+      if (x.checkIn && once("ci")) be("CHECKIN_TIME", x.checkIn);
+      if (x.checkOut && once("co")) be("CHECKOUT_TIME", x.checkOut);
+    }
+  }
   for (const p of d?.prices ?? []) if (p.won >= 10000 && p.won <= 1000000) push("PRICE_MENTION", p.won, "MENTION", "review_search", { url: p.url ?? null, at: p.date ?? null, quote: p.quote ?? null, text: won(p.won), label: p.day ?? p.season ?? p.label ?? null });
   // ── 후기 장단점(주제별 건수)
   if (digest?.n) {

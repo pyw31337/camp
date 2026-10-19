@@ -608,7 +608,7 @@ function moreResults() {
 // 키워드 대신 조건을 조합한다: 지역 여러 곳 · 시군 주변 반경 · 상품(글램핑·카라반 등, 하나라도) · 반려견 · 전기 W · 사이트 크기 · 장작 · 텐트 옆 주차 · 1박 요금.
 // 값을 모르는 곳은 그 조건으로 걸러지지 않는다(“없음”으로 보지 않음) — 조건을 켜면 근거가 있는 곳만 남는다.
 const SIDOS = ["서울", "경기", "인천", "강원", "충북", "충남", "대전", "세종", "전북", "전남", "광주", "경북", "경남", "대구", "부산", "울산", "제주"];
-const maxSide = (c) => (c._ms ??= Math.max(0, ...(c.field_conditions?.site_size?.groups ?? []).map((g) => Math.max(Number(g.width_m) || 0, Number(g.depth_m) || 0))));
+const maxSide = (c) => (c._ms ??= Math.max(0, ...(c.field_conditions?.site_size?.groups ?? []).map((g) => Math.max(Number(g.width_m) || 0, Number(g.depth_m) || 0)), ...(c.tq?.mx ?? [])));
 const wattsOf = (c) => (c._w ??= facts(c).power?.w ?? 0);
 const hasPower = (c) => (c._pw ??= Boolean(facts(c).power?.ok));
 const petOk = (c) => (/가능/.test(c.pets ?? "") && !/불가/.test(c.pets ?? "")) || Boolean(c.pf?.t?.includes("PET_OK"));
@@ -788,6 +788,13 @@ const PRESETS = [
 const LIST_PAGE = 30;
 const ymdKst = (t) => new Date(t).toLocaleDateString("sv-SE", { timeZone: "Asia/Seoul" });
 const mdKst = (s) => new Date(s).toLocaleDateString("ko-KR", { month: "numeric", day: "numeric", timeZone: "Asia/Seoul" }).replace(/\.\s?/g, "/").replace(/\/$/, "");
+const hmKst = (s) => { const t = new Date(s); return Number.isFinite(t.getTime()) ? `${mdKst(s)} ${t.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Seoul" })}` : ""; };
+const THANKQ_VIEW = (cseq, d) => `https://m.thankqcamping.com/resv/view.hbb?cseq=${encodeURIComponent(cseq)}${d ? `&res_dt=${d.replaceAll("-", "")}` : ""}`;
+// 날짜 d(YYYY-MM-DD)의 예약 화면 관측 { open, total, at, url } — 관측 파일이 있고 그 날짜를 본 곳만.
+function vacOf(c, d) {
+  const e = S.vac?.camps?.[String(c.id)], x = d && e?.d?.[d];
+  return x ? { open: x[0], total: x[1], at: x[2], url: THANKQ_VIEW(e.cseq, d) } : null;
+}
 function listParams() {
   const q = new URLSearchParams(location.hash.split("?")[1] ?? "");
   const area = q.get("area");
@@ -808,6 +815,9 @@ function dateStatus(c, d) {
   if (!d) return null;
   const t = Date.parse(`${d}T12:00:00+09:00`);
   const rs = (S.avail?.get(String(c.id)) ?? []).filter((r) => Date.parse(r.use?.from) <= t && t < Date.parse(r.use?.to) + 864e5);
+  // 예약 화면 관측(땡큐캠핑, 원천 승인 후 발행): 확인 시각과 함께 빈자리 수. 만석도 관측값으로 보인다(빼지 않음).
+  const v = vacOf(c, d);
+  if (v) return v.open > 0 ? { k: "vac", rank: 0, icon: "check", txt: `빈자리 ${v.open}/${v.total}`, sub: `${hmKst(v.at)} 확인 · ${S.vac.source?.name ?? "예약 화면"}`, url: v.url } : { k: "full", rank: 4, icon: "close", txt: "만석(관측)", sub: `${hmKst(v.at)} 확인 · 취소분은 예약처에서`, url: v.url };
   if (rs.length) return { k: "open", rank: 0, icon: "check", txt: "공식 접수 중", sub: `이용 ${mdKst(rs[0].use.from)}~${mdKst(rs[0].use.to)} · 신청 ~${mdKst(rs[0].receipt?.to)}`, url: rs[0].source_url };
   const month = Number(d.slice(5, 7));
   if (c.om != null && !(c.om & (1 << (month - 1)))) return { k: "closed", rank: 9, icon: "close", txt: `${month}월 휴장`, sub: "운영 기간 밖(고캠핑·운영자 안내)" };
@@ -829,7 +839,7 @@ function listResults(p) {
 // 등록 규격 중 가장 큰 사이트(가로×세로). 조건 검색의 ‘사이트 크기’와 같은 값.
 function siteSizeText(c) {
   const gs = (c.field_conditions?.site_size?.groups ?? []).filter((g) => g.width_m && g.depth_m);
-  if (!gs.length) return "";
+  if (!gs.length) return c.tq?.mx ? `사이트 최대 ${c.tq.mx[0]}×${c.tq.mx[1]}m${c.tq.n ? ` · 예약 화면 ${c.tq.n}개 사이트` : ""}` : "";
   const big = gs.reduce((a, g) => (Math.max(g.width_m, g.depth_m) > Math.max(a.width_m, a.depth_m) ? g : a));
   return `사이트 최대 ${big.width_m}×${big.depth_m}m`;
 }
@@ -869,7 +879,7 @@ function listRow({ c, st, ce }, i = 0) {
       ${nearLine(c) ? `<p class="lrow-line">${ic("store")}<span>${esc(nearLine(c))}</span></p>` : ""}
       ${r.total ? `<p class="lrow-line lrow-review">${ic("heart")}<span>후기 ${fmt(r.total)}건</span>${reviewTopics(r.rv.p, "good", "heart")}${reviewTopics(r.rv.c, "watch", "down")}</p>` : ""}
       <div class="lrow-cta">
-        ${st?.url ? `<a class="btn primary" href="${esc(st.url)}" target="_blank" rel="noopener">공식 접수 보기</a>` : main ? `<a class="btn primary" href="${esc(main.url)}" target="_blank" rel="noopener" title="${esc(bookingLabel(main))}"><span>날짜 확인 · ${esc(bookingLabel(main))}</span></a>` : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}
+        ${st?.url ? `<a class="btn primary" href="${esc(st.url)}" target="_blank" rel="noopener">${st.k === "vac" ? "빈자리 예약하기" : st.k === "full" ? "예약 화면 보기" : "공식 접수 보기"}</a>` : main ? `<a class="btn primary" href="${esc(main.url)}" target="_blank" rel="noopener" title="${esc(bookingLabel(main))}"><span>날짜 확인 · ${esc(bookingLabel(main))}</span></a>` : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}
         <a class="btn ghost" href="${href}">자세히</a>
       </div>
     </div>
@@ -1031,6 +1041,8 @@ function sitePricingHtml(c, d) {
   const feeInfo = c.fee;
   const groups = c.field_conditions?.site_size?.groups ?? [];
   const prods = d?.products ?? [];
+  const bs = d?.booking_sites;
+  if (bs?.sites?.length) return bookingSitesHtml(c, bs);
   if (!feeInfo && !groups.length && !prods.length) return "";
   const feeFact = feeInfo ? { g: GR(feeInfo.grade) || "m", src: { label: sourceName(feeInfo.basis, "요금 근거"), url: feeInfo.url, at: feeInfo.checked_at, quote: feeInfo.quote } } : null;
   const prodFact = (p) => ({ g: "c", src: { label: d?.products_src?.label || "한국관광공사 상품 등록 기준가", url: d?.products_src?.url || c.gc_url, at: d?.products_src?.checked_at, quote: p.name ? `${p.name} ${p.price ? `${fmt(p.price)}원` : ""}` : null } });
@@ -1052,6 +1064,28 @@ function sitePricingHtml(c, d) {
   return `<section class="d-sec">
     <div class="sec-head">${iconTitle("layers", "사이트 규격 및 1박 요금")}${feeFact ? `<span class="sec-note">기준 요금 ${srcTip(feeFact, "요금 근거")}</span>` : ""}</div>
     <div class="table-wrap"><table class="site-table"><thead><tr><th>구분</th><th>규격</th><th>규모</th><th>1박 요금</th></tr></thead><tbody>${rows}</tbody></table></div>
+  </section>`;
+}
+// 예약 엔진(땡큐캠핑) 공개 화면에 업장이 등록한 사이트별 규격·바닥·요금. 같은 조건의 사이트는 한 줄로 묶는다(A1~A12 · 12면).
+function bookingSitesHtml(c, bs) {
+  const fact = (q) => ({ g: "c", src: { label: bs.label ?? "예약 화면(업장 등록)", url: bs.url, at: bs.checked_at, quote: q } });
+  const groups = new Map();
+  for (const x of bs.sites) {
+    const k = [x.kind, x.size?.join("x"), x.floor, x.price, x.parking, x.pet].join("|");
+    if (!groups.has(k)) groups.set(k, { ...x, names: [] });
+    groups.get(k).names.push(x.name);
+  }
+  const nameOf2 = (ns) => (ns.length > 2 ? `${ns[0]} ~ ${ns.at(-1)}` : ns.join(", "));
+  const rows = [...groups.values()].map((g) => {
+    const label = serviceText(nameOf2(g.names), 30);
+    const meta = [g.kind, g.parking, g.pet ? "반려동물 동반" : null].filter(Boolean).join(" · ");
+    return `<tr><td><b>${esc(label)}</b>${meta ? `<i class="st-meta">${esc(meta)}</i>` : ""}</td><td>${g.size ? `${g.size[0]}×${g.size[1]}m` : "-"}${g.floor ? `<i class="st-meta">${esc(g.floor)}</i>` : ""}</td><td>${g.names.length}개</td><td class="text-price"><div class="price-cell"><span class="price-val">${g.price ? `${fmt(g.price)}원` : "예약처 확인"}</span>${srcTip(fact(`${label} ${g.size ? `규격 ${g.size[0]}m × ${g.size[1]}m` : ""} ${g.price ? `${fmt(g.price)}원` : ""}`.trim()), label)}</div></td></tr>`;
+  }).join("");
+  const day = bs.date ? `${mdKst(`${bs.date}T12:00:00+09:00`)}(토) 1박 기준` : "1박 기준";
+  return `<section class="d-sec">
+    <div class="sec-head">${iconTitle("layers", "사이트 규격 및 1박 요금")}<span class="sec-note">${dot("c")}업장 등록 · ${esc(day)} ${srcTip(fact(null), "사이트 정보")}</span></div>
+    <div class="table-wrap"><table class="site-table"><thead><tr><th>사이트</th><th>규격·바닥</th><th>수</th><th>1박 요금</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <p class="st-foot">${esc(bs.label ?? "예약 화면")}에 업장이 올린 사이트 ${fmt(bs.sites.length)}개 · 요금은 날짜마다 다를 수 있어요. ${bs.url ? `<a href="${esc(bs.url)}" target="_blank" rel="noopener">날짜별 예약 화면 열기</a>` : ""}</p>
   </section>`;
 }
 function specTiles(c, d) {
@@ -1139,7 +1173,9 @@ function bookingRank(channel) {
   return 10;
 }
 function bookingChannels(c) {
-  return [...(c.booking?.channels ?? [])]
+  // 땡큐캠핑 엔진에서 같은 업장(이름·시군구 일치)을 찾았으면, 등록 경로에 없을 때 날짜별 예약 화면을 덧붙인다.
+  const tq = c.tq?.s && !(c.booking?.channels ?? []).some((x) => /thankqcamping|camperstory/.test(x?.url ?? "")) ? [{ platform_id: "thankqcamping", platform_name: "땡큐캠핑", url: THANKQ_VIEW(c.tq.s), kind: "online", confidence: 0.7, evidence: ["땡큐캠핑 업장 검색(이름·시군구 일치)"] }] : [];
+  return [...(c.booking?.channels ?? []), ...tq]
     .filter((x) => x?.url)
     .sort((a, b) => bookingRank(a) - bookingRank(b) || Number(b.confidence ?? 0) - Number(a.confidence ?? 0));
 }
@@ -1170,7 +1206,7 @@ function reserveCard(c) {
   return `<div class="reserve">
     <div class="rs-top"><span>${esc(main ? bookingLabel(main) : "예약")}</span>${o ? `<span class="rs-dd">${esc(o.txt ?? o.kind)}</span>` : ""}</div>
     ${o ? `<p class="rs-open"><b>${esc(new Date(o.at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", weekday: "short", hour: "2-digit", minute: "2-digit" }))}</b><span>${esc(o.label ?? "")}</span></p>` : ""}
-    ${availHtml(c)}
+    ${availHtml(c)}${S.avail?.get(String(c.id))?.length ? vacHtml(c) : ""}
     <div class="rs-btns">
       ${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">${esc(bookingLabel(main))} 예약</a>` : c.gc_url ? `<a class="btn primary wide" href="${esc(c.gc_url)}" target="_blank" rel="noopener">고캠핑에서 보기</a>` : ""}
       ${c.tel ? `<a class="btn ghost" href="tel:${esc(c.tel)}">${ic("phone")}전화</a>` : ""}
@@ -1429,9 +1465,17 @@ function bookingHtml(c, d) {
   </section>`;
 }
 // 공식 접수 중(서울 공공서비스예약 Open API). 남은 자리는 예약처 확인.
+// 예약 화면 관측 빈자리(원천 승인 후 vacancy.json이 있을 때만). 날짜별 빈자리/전체 사이트와 확인 시각.
+function vacHtml(c) {
+  const e = S.vac?.camps?.[String(c.id)];
+  if (!e) return "";
+  const ds = S.vac.dates.filter((d) => e.d?.[d]);
+  if (!ds.length) return "";
+  return `<div class="rs-avail rs-vac"><p><b>${ic("check")}주말 빈자리 관측</b>${tip(`<b>${esc(S.vac.source?.name ?? "예약 화면")}</b><span>${esc(S.vac.disclaimer ?? "")}</span>`)}</p>${ds.map((d) => { const [o, t, at] = e.d[d]; return `<a href="${esc(THANKQ_VIEW(e.cseq, d))}" target="_blank" rel="noopener"><span>${mdKst(`${d}T12:00:00+09:00`)}(토) 1박 · ${o > 0 ? `빈자리 ${o}/${t}` : `만석 ${t}개 사이트`}</span><i>${hmKst(at)} 확인 · 예약처에서 최종 확인</i></a>`; }).join("")}</div>`;
+}
 function availHtml(c) {
   const rs = S.avail?.get(String(c.id)) ?? [];
-  if (!rs.length) return "";
+  if (!rs.length) return vacHtml(c);
   const dt = (s) => new Date(s).toLocaleDateString("ko-KR", { month: "numeric", day: "numeric", timeZone: "Asia/Seoul" }).replace(/\.\s?/g, "/").replace(/\/$/, "");
   return `<div class="rs-avail"><p><b>${ic("check")}공식 접수 중</b>${tip(`<b>${esc(rs[0].source_name ?? "공식 접수 상태")}</b><span>${esc(rs[0].disclaimer ?? "")}</span>`)}</p>${rs.slice(0, 3).map((r) => `<a href="${esc(r.source_url)}" target="_blank" rel="noopener"><span>${esc(r.product_name.replace(/\(.*?\)\s*/, ""))}</span><i>접수 ~${dt(r.receipt?.to)} · 이용 ${dt(r.use?.from)}~${dt(r.use?.to)}</i></a>`).join("")}</div>`;
 }
@@ -1884,12 +1928,13 @@ addEventListener("error", (e) => {
 }, true);
 (async function boot() {
   $("#view").innerHTML = `<div class="loading"></div>`;
-  const [camps, photos, openings, cards, avail] = await Promise.all([
+  const [camps, photos, openings, cards, avail, vac] = await Promise.all([
     fetch(`${DATA}campgrounds.json`).then((r) => r.json()),
     fetch("./data/photos.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
     fetch(`${DATA}openings.json`).then((r) => (r.ok ? r.json() : { items: [] })).catch(() => ({ items: [] })),
     fetch("../media/cards/index.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
     fetch(`${DATA}availability.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    fetch(`${DATA}vacancy.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
   ]);
   S.camps = camps.filter((c) => c.status !== "폐업");
   S.byId = new Map(S.camps.map((c) => [String(c.id), c]));
@@ -1900,6 +1945,8 @@ addEventListener("error", (e) => {
   // 공식 접수 상태(서울 공공서비스예약 등)는 짧은 유효기간이 있다. 만료된 파일은 쓰지 않는다.
   S.avail = new Map();
   if (avail && Date.parse(avail.expires_at) > Date.now()) for (const r of avail.records ?? []) if (r.state === "OFFICIAL_APPLICATION_OPEN") { const k = String(r.campground_id); S.avail.set(k, [...(S.avail.get(k) ?? []), { ...r, disclaimer: avail.disclaimer, source_name: avail.source?.name }]); }
+  // 예약 화면 빈자리 관측도 만료 시각이 지나면 쓰지 않는다.
+  S.vac = vac && Date.parse(vac.expires_at) > Date.now() && Array.isArray(vac.dates) ? vac : null;
   // 이전 주소(#c=1554)도 새 상세 주소로 보정해 공유 링크를 깨지 않는다.
   const legacy = location.hash.match(/^#c=(.+)$/);
   if (legacy) history.replaceState(null, "", `#/c/${legacy[1]}`);

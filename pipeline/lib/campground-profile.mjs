@@ -53,10 +53,22 @@ export function buildProfile(c, d = null, details = null, { detailDate = null, u
     const s = specField(d?.spec, sc);
     if (s) set(code, s.value, s.grade, s.source, s.conflict ? { conflict: true } : {});
   }
+  // 예약 엔진에 업장이 등록한 사이트 정보(땡큐캠핑 등, d.booking_sites): 다른 근거가 없을 때 입·퇴실·1박 요금을 채운다.
+  const bs = d?.booking_sites, bsSites = bs?.sites ?? [];
+  const bsrc = bs ? { label: bs.label ?? "예약 화면(업장 등록)", url: bs.url ?? null, date: bs.checked_at?.slice(0, 10) ?? null, quote: bs.quote ?? null } : null;
+  const modeOf = (xs) => { const n = new Map(); for (const x of xs) if (x) n.set(x, (n.get(x) ?? 0) + 1); return [...n].sort((a, b) => b[1] - a[1])[0]?.[0] ?? null; };
+  for (const [code, k, word] of [["CHECKIN", "checkIn", "부터"], ["CHECKOUT", "checkOut", "까지"]]) {
+    const t = modeOf(bsSites.map((x) => x[k]));
+    if (!fields[code] && t) set(code, `${t}${word}`, "OPERATOR", bsrc);
+  }
   // 1박 요금: 운영자 문장 > 후기 언급(건수)
   if (details?.SITE_PRICE) {
     const p = details.SITE_PRICE;
     set("PRICE", p.min === p.max ? `${man(p.min)}원` : `${man(p.min)}~${man(p.max)}원`, "OPERATOR", dsrc(p.items[0]), { min: p.min, max: p.max });
+  } else if (bsSites.some((x) => x.price)) {
+    const ws = bsSites.map((x) => x.price).filter((n) => n >= 10000 && n <= 1000000);
+    const lo = Math.min(...ws), hi = Math.max(...ws);
+    set("PRICE", lo === hi ? `${man(lo)}원` : `${man(lo)}~${man(hi)}원`, "OPERATOR", { ...bsrc, label: `${bsrc.label} · ${bs.date ?? ""} 1박`.replace(/ · {2}1박$/, " · 1박") }, { min: lo, max: hi });
   } else if (d?.prices?.length) {
     const ws = d.prices.map((x) => x.won).filter((n) => n >= 20000 && n <= 400000).sort((a, b) => a - b);
     if (ws.length) set("PRICE", `${man(ws[0])}${ws.length > 1 && ws.at(-1) !== ws[0] ? `~${man(ws.at(-1))}` : ""}원대`, "MENTION", { label: "후기 언급", url: d.prices[0].url ?? null, date: d.prices[0].date ?? null, quote: d.prices[0].quote ?? null }, { count: ws.length, min: ws[0], max: ws.at(-1) });
