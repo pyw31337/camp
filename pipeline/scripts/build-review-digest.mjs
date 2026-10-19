@@ -17,7 +17,7 @@ for (const c of camps) {
   const path = join(dataDir, "camps", `${c.id}.json`);
   if (!existsSync(path)) continue;
   const d = JSON.parse(readFileSync(path, "utf8"));
-  const dg = digestReviews(c.name, [...(d.reviews ?? []), ...(d.cafe ?? []), ...(d.web ?? [])], { min: 1, top: 4 });
+  const dg = digestReviews(c.name, [...(d.reviews ?? []), ...(d.cafe ?? []), ...(d.web ?? [])], { min: 1, top: 4, regions: [c.sigungu, c.sido] });
   if (!dg || (!dg.pros.length && !dg.cons.length && !dg.details?.issues?.length)) continue;
   c.rv = { n: dg.n, p: dg.pros.slice(0, 2), c: dg.cons.slice(0, 2) };
   d.rv = { n: dg.n, p: dg.pros, c: dg.cons, details: dg.details };

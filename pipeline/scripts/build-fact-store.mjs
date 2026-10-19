@@ -43,7 +43,7 @@ for (const c of camps) {
   const shared = [host(c.homepage), host(s?.url)].some((h) => h && (hostCount.get(h) ?? 0) > 1);
   const site = s?.status === "OK" && s.snippets?.length && !shared ? s : null;
   const details = site ? extractSiteDetails(site.snippets.map((x) => x.text)) : null;
-  const digest = d ? digestReviews(c.name, [...(d.reviews ?? []), ...(d.cafe ?? [])], { min: 1, top: 99 }) : null;
+  const digest = d ? digestReviews(c.name, [...(d.reviews ?? []), ...(d.cafe ?? [])], { min: 1, top: 99, regions: [c.sigungu, c.sido] }) : null;
   facts.push(...factsOf(c, d, { site, details, digest, kakao: kakao[c.id] ?? null, nearby: nearbyOf(c.id), naver: naverReg[c.id] ?? null }));
   registry.push({ cid: String(c.id), name: c.name, sido: c.sido ?? null, sigungu: c.sigungu ?? null, lat: c.lat ?? null, lng: c.lng ?? null, gc_url: c.gc_url ?? null, gc_at: c.modified_at ?? null, kakao_place_id: kakao[c.id]?.place?.id ?? null });
 }

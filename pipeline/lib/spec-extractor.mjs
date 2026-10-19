@@ -60,6 +60,8 @@ function parseClock(ampm, h, m, kind) {
 }
 const hhmm = (mins) => `${p2(Math.floor(mins / 60))}:${p2(mins % 60)}`;
 const TIME_PREFIX = String.raw`(?:오전|오후|아침|새벽|저녁|밤|낮|am|pm|AM|PM)`;
+// “첫 날 오후 2시”, “입촌일 14시”, “익일 11시”처럼 시각 앞에 붙는 날 표현
+const DAY_WORD = String.raw`(?:(?:첫\s*날|첫날|당일|입촌일|입실일|마지막\s*날|퇴촌일|퇴실일|익일|다음\s*날|다음날)\s*)?`;
 const CLOCK = String.raw`(${TIME_PREFIX})?\s*(\d{1,2})\s*(?:[:：시]\s*(\d{2})?\s*분?)`;
 
 function feeOrRule(s) {
@@ -105,10 +107,12 @@ export function extractFromSentence(s, { year = new Date().getFullYear() } = {})
   }
 
   // 입실 / 체크인: 역순("15:00 입실") 우선, 다음 정순("입실 14:00")
+  let inSpan = null; // 정순 입실 매치가 쓴 구간(퇴실 역순 매치가 같은 시각을 다시 쓰지 않게)
   if (!out.some((x) => x.code === "CHECKIN_TIME") && !/얼리|조기|동반\s*입실/.test(s)) {
     const rev = s.match(new RegExp(String.raw`${CLOCK}\s*(?:부터)?\s*(?:입실|체크인|check\s*-?in)(?![가-힣])`, "i"));
-    const fwd = s.match(new RegExp(String.raw`(?:입실|체크인|check\s*-?in)(?:\s*\([^)]*\))?\s*(?:시간)?\s*(?:은|는|:|：|-)?\s*${CLOCK}`, "i"));
+    const fwd = s.match(new RegExp(String.raw`(?:입실|체크인|check\s*-?in)(?:\s*\([^)]*\))?\s*(?:시간)?\s*(?:은|는|:|：|-)?\s*${DAY_WORD}${CLOCK}`, "i"));
     const m = rev || fwd;
+    if (m === fwd && fwd) inSpan = [fwd.index, fwd.index + fwd[0].length];
     if (m) {
       const v = parseClock(m[1], m[2], m[3], "in");
       if (v != null) out.push({ code: "CHECKIN_TIME", value: `${hhmm(v)}부터`, norm: hhmm(v) });
@@ -117,8 +121,9 @@ export function extractFromSentence(s, { year = new Date().getFullYear() } = {})
 
   // 퇴실 / 체크아웃: 정순("퇴실 12:00") 우선, 다음 역순("11:00 퇴실")
   if (!out.some((x) => x.code === "CHECKOUT_TIME") && !/레이트|연장|늦은/.test(s)) {
-    const fwd = s.match(new RegExp(String.raw`(?:퇴실|체크아웃|check\s*-?out)(?:\s*\([^)]*\))?\s*(?:시간)?\s*(?:은|는|:|：|-)?\s*(?:익일\s*)?${CLOCK}`, "i"));
-    const rev = s.match(new RegExp(String.raw`${CLOCK}\s*(?:까지)?\s*(?:퇴실|체크아웃|check\s*-?out)(?![가-힣])`, "i"));
+    const fwd = s.match(new RegExp(String.raw`(?:퇴실|체크아웃|check\s*-?out)(?:\s*\([^)]*\))?\s*(?:시간)?\s*(?:은|는|:|：|-)?\s*${DAY_WORD}${CLOCK}`, "i"));
+    // 역순(“11:00 퇴실”)은 그 시각이 정순 입실(“입실 13시”)이 이미 쓴 시각이 아닐 때만(“입실 13시 퇴실 익일 11…”을 퇴실 13시로 읽던 오류).
+    const rev = [...s.matchAll(new RegExp(String.raw`${CLOCK}\s*(?:까지)?\s*(?:퇴실|체크아웃|check\s*-?out)(?![가-힣])`, "gi"))].find((x) => !inSpan || x.index >= inSpan[1] || x.index + x[0].length <= inSpan[0]);
     const m = fwd || rev;
     if (m) {
       const v = parseClock(m[1], m[2], m[3], "out");
@@ -204,10 +209,26 @@ export function extractFromSentence(s, { year = new Date().getFullYear() } = {})
 
 // ─── 후기 귀속 ───────────────────────────────────────────────────────────
 const GENERIC = /(오토\s*캠핑장|캠핑장|야영장|글램핑장?|카라반|캠프닉|자연휴양림|휴양림|국민여가|오토캠핑|캠핑|펜션|리조트|\[[^\]]*\]|\([^)]*\))/g;
-/** 캠핑장 이름에서 구분력 있는 핵심어(2자 이상)를 만든다. */
-export function nameTokens(name) {
+/** 캠핑장 이름에서 구분력 있는 핵심어(2자 이상)를 만든다.
+ * regions(그 캠핑장의 시·군·구·시도 이름)가 붙어 있는 핵심어(“가평물의나라”)는 지명을 뗀 것(“물의나라”, 3자 이상)도 핵심어로 쓴다 —
+ * 글은 대개 지명 없이 부른다(2026-10-19: 이 때문에 입실·퇴실 언급이 이 캠핑장 글이 아닌 것으로 버려지고 있었다). */
+export function nameTokens(name, regions = []) {
   const core = String(name ?? "").replace(GENERIC, " ").replace(/[^가-힣A-Za-z0-9\s]/g, " ").split(/\s+/).filter((t) => t.length >= 2);
-  return [...new Set(core)];
+  const shorts = regionShorts(regions);
+  const extra = [];
+  for (const t of core) for (const r of shorts) if (t.startsWith(r) && t.length - r.length >= 3) extra.push(t.slice(r.length));
+  return [...new Set([...core, ...extra])];
+}
+/** “가평군”→[“가평군”,“가평”], “경상남도”→[“경상남도”] 지명 접두어 후보(긴 것 먼저). */
+export function regionShorts(regions = []) {
+  const out = new Set();
+  for (const r of regions) {
+    const s = String(r ?? "").trim();
+    if (s.length < 2) continue;
+    out.add(s);
+    if (/[시군구]$/.test(s) && s.length >= 3) out.add(s.slice(0, -1));
+  }
+  return [...out].sort((a, b) => b.length - a.length);
 }
 /** 여러 업장을 묶은 글인가? 제목의 “N곳/추천/모음/TOP”, 본문의 여러 📍·번호 목록. */
 export function isRoundup({ title, snippet } = {}) {
@@ -218,8 +239,8 @@ export function isRoundup({ title, snippet } = {}) {
   return pins >= 2 || nums >= 2;
 }
 /** 이 후기가 이 캠핑장 이야기인가: 핵심어가 제목 또는 요약에 있고, 묶음 글이 아니어야 한다. */
-export function attributable(review, name) {
-  const toks = nameTokens(name);
+export function attributable(review, name, regions = []) {
+  const toks = nameTokens(name, regions);
   if (!toks.length || isRoundup(review)) return false;
   const text = `${review.title ?? ""} ${review.snippet ?? ""}`;
   return toks.some((t) => text.includes(t));
@@ -233,7 +254,7 @@ export function attributable(review, name) {
  * @param {Array} p.reviews 후기 요약(title·snippet·url·date)
  * @param {string} p.now 기준 시각(지난 행사 제외)
  */
-export function buildSpecSheet({ name, docs = [], reviews = [], now = new Date().toISOString(), mentionMaxAgeDays = 1460 }) {
+export function buildSpecSheet({ name, regions = [], docs = [], reviews = [], now = new Date().toISOString(), mentionMaxAgeDays = 1460 }) {
   const year = Number(now.slice(0, 4));
   const today = now.slice(0, 10);
   const facts = [];
@@ -246,7 +267,7 @@ export function buildSpecSheet({ name, docs = [], reviews = [], now = new Date()
   let usedReviews = 0, skippedRoundups = 0;
   for (const r of reviews) {
     if (isRoundup(r)) { skippedRoundups++; continue; }
-    if (!attributable(r, name)) continue;
+    if (!attributable(r, name, regions)) continue;
     const at = Date.parse(r.date ?? "");
     if (Number.isFinite(at) && nowMs - at > mentionMaxAgeDays * 864e5) continue;
     let hit = false;
