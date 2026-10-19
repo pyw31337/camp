@@ -1,1 +1,1 @@
-PLACEHOLDER_APP
+// PLACEHOLDER - will be replaced
