@@ -420,20 +420,30 @@ function initDraggableRails(root = document) {
       }
     }
     const fill = pBar ? (pBar.querySelector("i") || pBar) : null;
-    const updateProgress = () => {
-      if (!pBar || !fill) return;
+    const updateRailState = () => {
       const max = rail.scrollWidth - rail.clientWidth;
-      if (max <= 4) {
-        pBar.style.display = "none";
+      if (max <= 6) {
+        if (pBar) pBar.style.display = "none";
+        rail.classList.remove("has-left-fade", "has-right-fade");
         return;
       }
-      pBar.style.display = "inline-flex";
-      const ratio = Math.max(0, Math.min(1, rail.scrollLeft / max));
-      const pct = 18 + ratio * 82;
-      fill.style.width = `${pct.toFixed(1)}%`;
+      if (pBar && fill) {
+        pBar.style.display = "inline-flex";
+        const ratio = Math.max(0, Math.min(1, rail.scrollLeft / max));
+        const pct = 18 + ratio * 82;
+        fill.style.width = `${pct.toFixed(1)}%`;
+      }
+      const atStart = rail.scrollLeft <= 6;
+      const atEnd = rail.scrollLeft >= max - 6;
+      rail.classList.toggle("has-left-fade", !atStart);
+      rail.classList.toggle("has-right-fade", !atEnd);
     };
-    rail.addEventListener("scroll", updateProgress, { passive: true });
-    requestAnimationFrame(updateProgress);
+    rail.addEventListener("scroll", updateRailState, { passive: true });
+    requestAnimationFrame(updateRailState);
+    if (window.ResizeObserver) {
+      const ro = new ResizeObserver(updateRailState);
+      ro.observe(rail);
+    }
 
     rail.addEventListener("pointerdown", (e) => {
       if (e.pointerType === "touch") return;
@@ -474,6 +484,7 @@ function initDraggableRails(root = document) {
             rail.style.transform = "";
           }
         }
+        updateRailState();
       }
     };
 
@@ -487,6 +498,7 @@ function initDraggableRails(root = document) {
           rail.style.transition = "";
           rail.style.transform = "";
           bounceX = 0;
+          updateRailState();
         }, 450);
       }
       if (hasMoved) {
@@ -1619,6 +1631,7 @@ async function detailView(id) {
         ${videosHtml(d)}
         ${platformHubHtml(d, c)}
         ${nearbyHubHtml(c, d)}
+        <section class="d-sec ev-sec" id="sec-events" data-events hidden><div class="sec-head">${iconTitle("calendar", "주변 축제·행사")}<span class="sec-note">30km 안 · 45일 이내</span></div><div data-events-body></div></section>
         ${reviewLinksHtml(d, c)}
         ${infoHtml(c)}
         ${commentsHtml(c)}
@@ -2559,6 +2572,9 @@ function bindDetail() {
     if (exEl) m.mount(exEl, condCamp).catch(() => {});
     m.evFor(id).then(mountNearbyEv).catch(() => {});
   }).catch(() => {});
+  // 주변 축제·행사 포스터 카드(CultureFlow + 관광공사 축제): /context/events.js가 있을 때만. 실패하면 칸을 숨긴 채 둔다.
+  const evSec = $("[data-events]");
+  if (evSec && condCamp) import(new URL("../context/events.js", import.meta.url).href).then((m) => m.mount(evSec, condCamp)).catch(() => {});
   // 운영자 정보 바로잡기(로그인 없이, Supabase operator_submission에 넣기만): /operator/form.js
   const opEl = $("[data-opform-sec]");
   if (opEl && condCamp && SB.url && SB.key) import(new URL("../operator/form.js", import.meta.url).href).then((m) => m.mount(opEl, condCamp, SB)).catch(() => {});

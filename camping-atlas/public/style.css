@@ -93,10 +93,31 @@ em { font-style: normal; color: var(--accent); }
 .rail {
   display: flex; gap: 8px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; -webkit-overflow-scrolling: touch;
   padding-top: 10px; padding-bottom: 16px; margin-top: -8px; margin-bottom: -10px; cursor: grab;
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 .rail.is-dragging { cursor: grabbing; scroll-behavior: auto !important; scroll-snap-type: none !important; user-select: none; }
 .rail.is-dragging * { pointer-events: none; }
 .rail::-webkit-scrollbar, .car-track::-webkit-scrollbar, .cmp-scroll::-webkit-scrollbar, .lb-track::-webkit-scrollbar { display: none; }
+
+/* ── 가로 캐러셀 가장자리 그라데이션 페이드 규격화 (Scroll Edge Gradient Mask) ── */
+/* 우측에 컨텐츠가 더 있을 때: 우측 가장자리를 칼처럼 자르지 않고 부드럽게 페이드아웃 */
+.rail.has-right-fade:not(.has-left-fade) {
+  -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - clamp(36px, 6vw, 64px)), transparent 100%);
+  mask-image: linear-gradient(to right, #000 0, #000 calc(100% - clamp(36px, 6vw, 64px)), transparent 100%);
+}
+
+/* 좌측에 컨텐츠가 더 있을 때 (끝까지 스크롤됨): 좌측만 페이드, 우측 마지막 카드는 100% 선명하게 노출 */
+.rail.has-left-fade:not(.has-right-fade) {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 clamp(32px, 5vw, 48px), #000 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 clamp(32px, 5vw, 48px), #000 100%);
+}
+
+/* 양쪽에 컨텐츠가 모두 있을 때 (중간 스크롤 중): 좌우 양쪽 가장자리 부드럽게 페이드 */
+.rail.has-left-fade.has-right-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 clamp(32px, 5vw, 48px), #000 calc(100% - clamp(36px, 6vw, 64px)), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 clamp(32px, 5vw, 48px), #000 calc(100% - clamp(36px, 6vw, 64px)), transparent 100%);
+}
 
 /* ── 헤더: 스크롤 시 따라다니지 않고 문서 상단에 위치 ───────── */
 .top {
