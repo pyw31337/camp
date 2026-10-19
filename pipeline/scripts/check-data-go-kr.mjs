@@ -43,7 +43,7 @@ const checks = [
   { name: "한국관광공사 고캠핑", url: `https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=1&pageNo=1&${common}` },
   { name: "기상청 단기예보(초단기실황)", url: `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?pageNo=1&numOfRows=1&dataType=JSON&base_date=${ymd}&base_time=${hh}&nx=60&ny=127` },
   { name: "한국관광공사 TourAPI(국문)", url: `https://apis.data.go.kr/B551011/KorService2/areaBasedList2?numOfRows=1&pageNo=1&${common}` },
-  // 주말 컨디션(sync-conditions.mjs) — 각각 data.go.kr 활용신청 필요
+  // 주간 날씨(sync-forecast.mjs) — 각각 data.go.kr 활용신청 필요
   { name: "기상청 중기예보(15059468)", url: `https://apis.data.go.kr/1360000/MidFcstInfoService/getMidTa?pageNo=1&numOfRows=1&dataType=JSON&regId=11B10101&tmFc=${midTmFc()}` },
   { name: "기상청 기상특보(15000415)", url: "https://apis.data.go.kr/1360000/WthrWrnInfoService/getPwnStatus?pageNo=1&numOfRows=1&dataType=JSON" },
   { name: "에어코리아 대기오염정보(15073861)", url: `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?returnType=json&numOfRows=1&pageNo=1&sidoName=${encodeURIComponent("서울")}&ver=1.0` },

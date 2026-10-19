@@ -51,7 +51,7 @@ test("응답 정리: 단기·중기·미세먼지·물때·오류 판별", () =>
   const d = summarizeShort([it("TMN", "0600", "8.0"), it("TMX", "1500", "19.0"), it("POP", "0900", "20"), it("POP", "1500", "60"), it("SKY", "0900", "1"), it("SKY", "1200", "4"), it("SKY", "1500", "4"), it("PTY", "1500", "1"), it("WSD", "1500", "5.1")])["2026-10-24"];
   assert.deepEqual(d, { tmin: 8, tmax: 19, pop: 60, sky: "흐림", pty: "비", wsd: 5.1 });
   const mid = summarizeMid({ wf5Am: "맑음", wf5Pm: "구름많음", rnSt5Am: 10, rnSt5Pm: 30 }, { taMin5: 7, taMax5: 18 }, "202610190600");
-  assert.deepEqual(mid["2026-10-24"], { sky: "구름많음", pop: 30, tmin: 7, tmax: 18 });
+  assert.deepEqual(mid["2026-10-24"], { sky: "구름많음", sky_am: "맑음", sky_pm: "구름많음", pop: 30, tmin: 7, tmax: 18 });
   assert.equal(airGrade(45, 40), 3);
   assert.deepEqual(summarizeAir([{ stationName: "A", pm10Value: "20", pm25Value: "-", dataTime: "2026-10-19 13:00" }]).A, { pm10: 20, pm25: null, grade: 1, at: "2026-10-19 13:00", sido: null });
   assert.deepEqual(summarizeTide([{ predcDt: "2026-10-24 04:12", extrSe: "1", predcTdlvVl: "612" }, { predcDt: "2026-10-24 10:30", extrSe: "2", predcTdlvVl: "80" }]),
@@ -61,27 +61,33 @@ test("응답 정리: 단기·중기·미세먼지·물때·오류 판별", () =>
   assert.equal(apiProblem(200, '{"response":{"header":{"resultCode":"03","resultMsg":"NO_DATA"}}}'), null);
 });
 
-test("주말 카드: 예보가 없어도 일출·일몰·달은 보인다", async () => {
-  globalThis.fetch = async () => ({ ok: true, json: async () => ({ generated_at: "2026-10-21T20:41:00Z", weekend: { sat: "2026-10-24", sun: "2026-10-25" },
-    camps: { 9: { w: [{ src: "short", sky: "맑음", tmin: 8, tmax: 19, pop: 10, wsd: 2 }, null], air: { station: "옥천동", pm10: 20, pm25: 9, grade: 1 } } } }) });
-  const { mount } = await import("../../camping-atlas/public/conditions/card.js");
+test("주간 날씨 카드: 단기만 있을 때·중기까지 있을 때 문구와 주말 표시", async () => {
+  const base = { generated_at: "2026-10-21T20:41:00Z", today: "2026-10-22", camps: { 9: ["93,131", "11D20000", "11D20501", "d:강원", 0] },
+    short: { grids: { "93,131": { "2026-10-22": ["맑음", null, 8, 19, 10, 2], "2026-10-23": ["흐림", "비", 9, 15, 70, 6], "2026-10-24": ["구름많음", null, 7, 17, 20, 3], "2026-10-25": ["맑음", null, 5, 18, 0, 2] } } },
+    air: { "d:강원": { pm10: 20, pm25: 9, grade: 1, stations: 39 } } };
+  let payload = base;
+  globalThis.fetch = async () => ({ ok: true, json: async () => payload });
+  const { mount, daysFor } = await import("../../camping-atlas/public/conditions/card.js");
+  assert.equal(daysFor(base, "9", "2026-10-22").length, 4);
   const el = { hidden: true, innerHTML: "" };
   await mount(el, { id: "9", lat: 37.75, lng: 128.9 });
   assert.equal(el.hidden, false);
-  assert.match(el.innerHTML, /10\/24\(토\) 날씨/);
-  assert.match(el.innerHTML, /맑음 · 8°\/19° · 강수 10%/);
-  assert.match(el.innerHTML, /일출·일몰/);
-  assert.match(el.innerHTML, /좋음/);
-  assert.match(el.innerHTML, /KST 확인/);
+  assert.match(el.innerHTML, /오늘부터 4일 예보예요/);
+  assert.match(el.innerHTML, /이번 주말/);
+  assert.match(el.innerHTML, /일출 \d\d:\d\d/);
+  assert.match(el.innerHTML, /강원 측정소 39곳 중앙값/);
+  const withMid = { ...base, mid: { land: { "11D20000": { "2026-10-26": ["맑음", "구름많음", 20], "2026-11-01": ["흐림", "비", 60] } }, ta: { "11D20501": { "2026-10-26": [6, 17], "2026-11-01": [4, 12] } } } };
+  const ds = daysFor(withMid, "9", "2026-10-22");
+  assert.deepEqual(ds.map((x) => x.src), ["short", "short", "short", "short", "mid", "mid"]);
+  assert.equal(ds[5].sky, "비");
 });
 
-test("미세먼지 시도 중앙값 대안·산불위험 행 해석", async () => {
-  const { airBySido, fireRow, sidoKey } = await import("../lib/conditions.mjs");
-  assert.equal(sidoKey({ 전남: {}, 서울: {} }, "광주"), "전남");
-  assert.equal(sidoKey({ 서울: {} }, "서울"), "서울");
-  const s = airBySido({ A: { pm10: 20, pm25: 10, sido: "강원", at: "2026-10-19 13:00" }, B: { pm10: 60, pm25: 30, sido: "강원", at: "2026-10-19 14:00" }, C: { pm10: 90, pm25: 40, sido: "강원" } });
-  assert.deepEqual(s.강원, { pm10: 60, pm25: 30, grade: 2, stations: 3, at: "2026-10-19 14:00" });
-  assert.deepEqual(fireRow({ doname: "강원도", sigun: "강릉시", meanavg: "57", d1: "60", d2: "35", d3: "5", d4: "0", analdate: "2026-10-19 14" }),
-    { name: "강원도 강릉시", idx: 57, grade: "다소높음", at: "2026-10-19 14" });
-  assert.equal(fireRow({ resultMsg: "OK" }), null);
+test("단기예보 끝자락(자정 한두 시간만 있는 날)은 하루 요약에서 뺀다", () => {
+  const it = (fcstDate, fcstTime, category, fcstValue) => ({ fcstDate, fcstTime, category, fcstValue });
+  const days = summarizeShort([
+    it("20261022", "0600", "TMN", "4"), it("20261022", "1500", "TMX", "17"), it("20261022", "1200", "SKY", "1"), it("20261022", "1200", "TMP", "15"),
+    it("20261023", "0000", "TMP", "5"), it("20261023", "0000", "POP", "0"),
+  ]);
+  assert.deepEqual(Object.keys(days), ["2026-10-22"]);
+  assert.equal(days["2026-10-22"].sky, "맑음");
 });

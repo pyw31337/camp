@@ -1,4 +1,4 @@
-// ‘이번 주말 컨디션’ 공통 로직(순수 함수). 네트워크·파일은 scripts/sync-conditions.mjs, build-condition-mapping.mjs.
+// 주간 날씨 공통 로직(순수 함수). 네트워크·파일은 scripts/sync-forecast.mjs, build-condition-mapping.mjs. (산불·물때 파서는 활용신청·경로 확인 뒤 다시 쓰려고 남겨 둠)
 // 원천(모두 공공데이터포털 같은 인증키, 서비스마다 활용신청 필요):
 //   기상청 단기예보 15084084 · 중기예보 15059468 · 기상특보 15000415 · 에어코리아 대기오염정보 15073861·측정소정보 15073877
 //   산림청 산불위험예보 15084817 · 국립해양조사원 조석예보(고·저조) 15156018
@@ -119,14 +119,16 @@ export function summarizeShort(items) {
     const v = it.fcstValue, n = Number(v);
     if (it.category === "TMN" && Number.isFinite(n)) x.tmin = n;
     else if (it.category === "TMX" && Number.isFinite(n)) x.tmax = n;
-    else if (it.category === "TMP" && Number.isFinite(n)) { x._lo = Math.min(x._lo ?? n, n); x._hi = Math.max(x._hi ?? n, n); }
+    else if (it.category === "TMP" && Number.isFinite(n)) { x._lo = Math.min(x._lo ?? n, n); x._hi = Math.max(x._hi ?? n, n); x._n = (x._n ?? 0) + 1; }
     else if (it.category === "POP" && Number.isFinite(n)) x.pop = Math.max(x.pop, n);
     else if (it.category === "SKY" && h >= 6 && h <= 21) x.sky[n] = (x.sky[n] ?? 0) + 1;
     else if (it.category === "PTY" && n > 0) { x.rain = true; x.pty ??= PTY[n] ?? "강수"; }
     else if (it.category === "WSD" && Number.isFinite(n)) x.wsd = Math.max(x.wsd, n);
   }
-  for (const x of Object.values(days)) {
-    x.tmin ??= x._lo ?? null; x.tmax ??= x._hi ?? null; delete x._lo; delete x._hi;
+  for (const [d, x] of Object.entries(days)) {
+    // 예보 끝자락(자정 한두 시간만 있는 날)은 하루 요약이 될 수 없어 뺀다.
+    if (!Object.keys(x.sky).length && (x._n ?? 0) < 6 && x.tmin == null && x.tmax == null) { delete days[d]; continue; }
+    x.tmin ??= x._lo ?? null; x.tmax ??= x._hi ?? null; delete x._lo; delete x._hi; delete x._n;
     const top = Object.entries(x.sky).sort((a, b) => b[1] - a[1])[0];
     x.sky = top ? SKY[top[0]] ?? null : null;
     if (!x.rain) x.pty = null;
@@ -143,7 +145,8 @@ export function summarizeMid(land, ta, tmFc) {
     const wf = land?.[`wf${n}Pm`] ?? land?.[`wf${n}`] ?? null, pop = Math.max(Number(land?.[`rnSt${n}Am`] ?? 0), Number(land?.[`rnSt${n}Pm`] ?? 0), Number(land?.[`rnSt${n}`] ?? 0));
     const tmin = ta?.[`taMin${n}`], tmax = ta?.[`taMax${n}`];
     if (wf == null && tmin == null) continue;
-    out[d] = { sky: wf, pop: Number.isFinite(pop) ? pop : null, tmin: tmin == null ? null : Number(tmin), tmax: tmax == null ? null : Number(tmax) };
+    const am = land?.[`wf${n}Am`] ?? land?.[`wf${n}`] ?? null, pm = land?.[`wf${n}Pm`] ?? land?.[`wf${n}`] ?? null;
+    out[d] = { sky: wf, sky_am: am, sky_pm: pm, pop: Number.isFinite(pop) ? pop : null, tmin: tmin == null ? null : Number(tmin), tmax: tmax == null ? null : Number(tmax) };
   }
   return out;
 }
