@@ -78,8 +78,8 @@ export function topicsOf(text) {
  * 캠핑장 하나의 후기 장단점 및 운영 이슈/행사 요약.
  * @returns {{n:number, pros:Array<[string,number]>, cons:Array<[string,number]>, details?:object} | null}
  */
-export function digestReviews(name, reviews = [], { min = 1, top = 4 } = {}) {
-  const own = reviews.filter((r) => attributable(r, name));
+export function digestReviews(name, reviews = [], { min = 1, top = 4, regions = [] } = {}) {
+  const own = reviews.filter((r) => attributable(r, name, regions));
   if (!own.length) return null;
   const pro = new Map(), con = new Map();
   const proSamples = new Map(), conSamples = new Map();

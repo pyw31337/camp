@@ -3,6 +3,41 @@
 > 최종 갱신: 2026-10-19 KST(후기 장단점 평가 NLP 양방향 매칭 강화로 2,567곳 확대, 리스트단/상세페이지 장단점 카드 노출, 업체별 5건 이상 후기 바로보기 채널 연동 완료) — 맨 위 ‘📌 공지’부터 읽을 것<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
 
+## 🚨 화면 원본을 자리표시자로 덮지 말 것 (2026-10-19 15시, Claude → 전 에이전트)
+
+- 14:43 KST 커밋 6463b3336·49a4d6498(“platform hub”)이 `design/renewal/app.js`·`style.css`를 `// PLACEHOLDER - will be replaced`로 덮었다. 이 원본은 매일 발행이 `/explore/`로 그대로 복사하므로 **다음 발행에서 라이브 사이트 전체가 빈 화면이 될 뻔했다.** PR #39에서 전체 원본을 되살리고, `docs/PLATFORM_HUB.md`의 의도(상세 ‘더 보기’ 플랫폼별 검색 버튼)는 `platformHubHtml`로 구현했다.
+- `pipeline/test/design-source-guard.test.mjs`가 이제 원본의 자리표시자·잘림(app.js 100KB↓·style.css 40KB↓)·핵심 함수 누락·문법 오류를 CI에서 막는다.
+- 화면 수정은 `design/renewal/`을 **부분 수정**하고 `node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public/explore`로 발행한다. 발행본(`camping-atlas/public/explore/app.js`)만 고치면 다음 발행에 덮인다.
+
+## 📌 조건 검색 + 민간 빈자리 연구 (2026-10-19 15시, Claude → Codex·Gemini)
+
+- 히어로에 ‘조건’ 칸·예시 조건 칩·조건 시트(지역 여러 곳·시군 반경·상품·반려견·전기 W·사이트 크기·장작·주차·요금). 규칙은 `docs/DESIGN_SYSTEM.md` ‘조건 검색’. 화면 원본은 `design/renewal/app.js`(발행본 `camping-atlas/public/explore/app.js`를 직접 고치지 말 것 — 발행 때 덮인다).
+- 민간 캠핑장 빈자리 경로 연구: `docs/PRIVATE_AVAILABILITY_RESEARCH.md`. 땡큐캠핑·캠퍼스토리 엔진이 robots `Allow: /`로 가장 유망(날짜별 상태가 로그인 없이 보이는지는 스파이크 필요). 네이버 예약·캠핏은 막혀 있어 하지 않는다.
+- 검증: PC 1440·모바일 390에서 소유자 예시 5개(경기 반려견 291곳 · 강원 1,100W+ 16곳 · 경기·강원·인천 글램핑/카라반 661곳 · 경기·인천 글램핑/카라반 8m+ 74곳 · 파주 20km 당일 캠크닉 2곳) 확인, 가로 넘침·콘솔 오류 없음.
+
+## 📌 법정 기본값은 확정값이 아니다 — REFERENCE 등급 (2026-10-19 15시, Claude · 소유자 결정)
+
+- 업장이 공지하지 않은 곳에 넣은 법령·고시 기본값(환불 “10일 전 100%” 소비자분쟁해결기준, 전기 “600W” 관광진흥법 상한)은 **그 업장의 규정이 아니다.** `campground-profile.mjs`에서 등급을 `CONFIRMED` → `REFERENCE`로, 값을 “업장 미공지 · 법정 기준 …”으로 바꿨다. 화면은 점선 점(`gd-r`)과 “법정 기준 참고(업장 미공지)”로 보인다.
+- 커버리지(`report-coverage.mjs`)·프로필 집계는 `statutory`·`REFERENCE`를 세지 않는다. 실제 수치: 환불 3,111 → **806곳**, 전기 W 2,439 → **484곳**. 2,500곳 목표는 업장 자신의 정보로 채운다.
+- 데이터 동기화 마지막 단계의 회귀 검사는 이제 발행된 meta.json 숫자가 아니라 **최신 main 데이터를 현재 규칙으로 다시 센 값**과 비교한다(세는 규칙이 바뀌어도 오탐 없음).
+- `local_gov`(여주·구미·화성 요금, `build-fact-store.mjs`)가 `SOURCES`에 없어 **main의 매일 발행이 사실 검증에서 실패하던 것**을 고쳤다. `test/fact-store-sources.test.mjs`가 이제 빌더가 쓰는 모든 `src:` 코드를 검사한다.
+
+## 📌 히어로 검색 → 목록 화면 `#/list` (2026-10-19, Claude → Codex 화면 작업 전 필독)
+
+- 히어로 ‘찾기’는 `#/list?area=…&q=…&d=YYYY-MM-DD`로 옮겨 가 가로 한 줄 행(왼쪽 썸네일·오른쪽 사실 8칸·사이트·주변·후기·예약 버튼)으로 보인다. 규칙은 `docs/DESIGN_SYSTEM.md` ‘검색 결과 목록 화면’.
+- ‘언제’ 날짜는 **빈자리를 판단하지 않는다**(원천 없음). 공식 접수(서울 공공예약 이용 기간)·오픈 예정·운영 계절(`c.om`)만 판단하고, 운영 기간 밖은 기본 제외.
+- 새 카탈로그 필드 `c.om`·`c.ti`(`build-campground-profiles.mjs`) — 프로필 빌드가 다음 발행에서 채운다. 검증: `npm --prefix pipeline test`, PC 1440·모바일 390 스크린샷(가로 넘침 없음, 콘솔 오류 없음).
+
+## 📌 사실 원장 원천 등록을 지우지 말 것 (2026-10-19 14시, Claude → 전 에이전트)
+
+- 13:36·13:58 KST 커밋이 `pipeline/lib/fact-store.mjs`를 통째로 되돌리면서 `SOURCES`의 `blog_mention`·`cafe_mention`·`kin`이 두 번 지워졌다. 이 셋이 없으면 사이트 타입 후기 언급 사실이 검증에 걸려 **매일 데이터 동기화 발행이 통째로 실패**한다(10-19 오전 실제 발생).
+- 다시 넣었고 `pipeline/test/fact-store-sources.test.mjs`가 지킨다. 이 파일은 통째로 덮어쓰지 말고 필요한 줄만 고친 뒤 `npm --prefix pipeline test`를 돌릴 것.
+
+## 📌 수집 즉시 공유·발행 + 회귀 가드 (2026-10-19 오후, Claude → 전 에이전트 필독)
+
+- 수집 원본은 `collected-data` 브랜치, 수집 직후 `publish-incremental.sh`로 최신 main 위에 덧붙여 바로 발행, `coverage-guard.mjs`로 커버리지 감소 시 발행 중단. 자세한 내용은 `docs/COLLECTED_DATA.md`.
+
+## 📌 필독 완료 보고 — 여주·구미·화성 요금 사실 및 국립자연휴양림 Fact Store 적재 완료 (2026-10-19, Gemini)
 ## 📌 필독 완료 보고 — 후기 장단점 분석 대도약 및 리스트/상세 노출 전면 연동 (2026-10-19, Gemini)
 
 **사용자 요구사항인 "업체별 5개 이상 후기 제공 및 후기 내용 분석을 통한 장단점 평가 리스트/상세 노출"이 완벽 구현되었습니다.**

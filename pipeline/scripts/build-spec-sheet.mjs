@@ -51,7 +51,7 @@ for (const c of camps) {
     const body = web?.bodies?.[r.url];
     return body?.length ? { ...r, body } : r;
   });
-  const spec = buildSpecSheet({ name: c.name, docs, reviews, now });
+  const spec = buildSpecSheet({ name: c.name, regions: [c.sigungu, c.sido], docs, reviews, now });
   roundups += spec.stats.roundups_skipped;
   if (Object.keys(spec.fields).length) { withAny++; d.spec = spec; } else delete d.spec;
   for (const [code, f] of Object.entries(spec.fields)) { if (f.values.length) count[code].official++; if (f.mentions.length) count[code].mention++; }

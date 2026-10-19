@@ -17,7 +17,8 @@ const F = {
 const files = new Set(readdirSync(join(dataDir, "camps")));
 for (const c of camps) {
   const d = files.has(`${c.id}.json`) ? JSON.parse(readFileSync(join(dataDir, "camps", `${c.id}.json`), "utf8")) : {};
-  const pf = d.profile?.fields ?? {}, sp = d.spec?.fields ?? {};
+  // 업장이 공지하지 않아 넣은 법령·고시 기본값(statutory·REFERENCE)은 그 업장 정보가 아니므로 세지 않는다(2026-10-19).
+  const pf = Object.fromEntries(Object.entries(d.profile?.fields ?? {}).filter(([, f]) => !f.statutory && f.grade !== "REFERENCE")), sp = d.spec?.fields ?? {};
   const has = (code, specCode) => ({ any: Boolean(pf[code] || sp[specCode]?.values?.length || sp[specCode]?.mentions?.length), confirmed: Boolean(pf[code] && pf[code].grade !== "MENTION") || Boolean(sp[specCode]?.values?.length) });
   const row = {
     price: { any: Boolean(c.fee || d.prices?.length || pf.PRICE), confirmed: Boolean((c.fee && c.fee.grade !== "MENTION") || d.products?.some((p) => p.price)) },

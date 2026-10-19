@@ -5,7 +5,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildProfile, PROFILE_FIELDS } from "../lib/campground-profile.mjs";
+import { buildProfile, PROFILE_FIELDS, compactTimes, openMonthsOf } from "../lib/campground-profile.mjs";
 import { extractSiteDetails } from "../lib/operator-site.mjs";
 import { sentences } from "../lib/spec-extractor.mjs";
 
@@ -58,13 +58,17 @@ for (const c of camps) {
   p.generated_at = now;
   const price = compactPrice(p.fields.PRICE, now);
   c.pf = { s: p.summary, t: p.tags.map((t) => t.code), k: p.score.facts, ...(price ? { p: price } : {}) };
+  // 목록 행(#/list)용: 운영 달·입퇴실 시각을 카탈로그에 압축해 둔다(상세 파일을 열지 않고 날짜 판단·표시).
+  const om = openMonthsOf(p.fields.SEASON), ti = compactTimes(p.fields);
+  if (om != null) c.om = om; else delete c.om;
+  if (ti) c.ti = ti; else delete c.ti;
   if (price) {
     priceCoverage.published++;
     if (price.g === "OPERATOR") priceCoverage.operator++;
     if (price.g === "MENTION") priceCoverage.mention++;
   }
   if (d) { d.profile = p; writeFileSync(path, JSON.stringify(d)); }
-  for (const [k, f] of Object.entries(p.fields)) { cov[k].any++; if (f.grade !== "MENTION") cov[k].facts++; }
+  for (const [k, f] of Object.entries(p.fields)) { if (f.statutory || f.grade === "REFERENCE") continue; cov[k].any++; if (f.grade !== "MENTION") cov[k].facts++; }
   for (const t of p.tags) tagCount[t.code] = (tagCount[t.code] ?? 0) + 1;
   const k = p.score.facts;
   dist[k <= 5 ? "0-5" : k <= 9 ? "6-9" : k <= 13 ? "10-13" : "14-18"]++;
