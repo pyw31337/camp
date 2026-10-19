@@ -181,6 +181,7 @@ jobs:
             pipeline/.cache/tour-stay.json
             pipeline/.cache/tour-products.json
             pipeline/.cache/social-search.json
+            pipeline/.cache/web-mentions.json
           key: source-cache-v4-${{ github.run_id }}
           restore-keys: |
             source-cache-v4-
@@ -233,6 +234,20 @@ jobs:
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           SOCIAL_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '9100' }}
+      - name: Sync web mentions (NAVER search blog·cafe·web·kin + robots-allowed blog text)
+        # 네이버 검색 API(HUB, 한시 무료 월 775,000건) 요약과 robots가 허용한 블로그(티스토리 등) 본문의 사실 문장.
+        # 캠핑장당 7회, 14일 순환. 한 실행 8,000회(일 한도 25,000의 절반 미만). naver-guard가 0원 확인·월 예산·402 즉시 중단.
+        # 네이버 블로그·카페·예약처럼 robots가 AI 수집기를 막은 곳은 본문을 읽지 않는다(API 요약만).
+        continue-on-error: true
+        timeout-minutes: 50
+        run: node scripts/sync-web-mentions.mjs
+        env:
+          NAVER_API_HUB_CLIENT_ID: ${{ secrets.NAVER_API_HUB_CLIENT_ID }}
+          NAVER_API_HUB_CLIENT_SECRET: ${{ secrets.NAVER_API_HUB_CLIENT_SECRET }}
+          NAVER_API_ENABLED: ${{ vars.NAVER_API_ENABLED }}
+          NAVER_MONTHLY_CAP: ${{ vars.NAVER_MONTHLY_CAP }}
+          NAVER_MENTION_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '8000' }}
+          BODY_MINUTES: ${{ github.event_name == 'pull_request' && '0' || '30' }}
       - name: Sync rest areas and drowsy shelters
         continue-on-error: true
         run: npm run sync:rest-stops
@@ -343,6 +358,8 @@ jobs:
           node pipeline/scripts/build-site-pricing-facts.mjs
           # 업장별 사이트·상품 타입(일반·오토·데크·복층 데크·타프존·글램핑·카라반·캠핑카·숙박동·차박·반려견 전용 등)을 근거와 함께 붙인다.
           node pipeline/scripts/build-site-types.mjs
+          # 업장 정보 커버리지(요금·입퇴실·매너타임·주차·전기 W·사이트 타입 등, 목표 2,500곳)를 meta.json에 남긴다.
+          node pipeline/scripts/report-coverage.mjs
           # 모든 원천을 (캠핑장·속성·값·등급·원천·근거) 원자 사실로 풀어 묶음별 NDJSON(data/facts)으로 쓴다. 여러 에이전트의 공유 원장.
           node pipeline/scripts/build-fact-store.mjs
           # PR은 생성만 검사한다. main은 catalog·explorer를 원자적으로 갱신한다.
@@ -351,7 +368,7 @@ jobs:
           fi
           git config user.name "moyeora-camping-data-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add camping-atlas/public/data camping-atlas/public/explore data/facts
+          git add camping-atlas/public/data camping-atlas/public/explore data/facts pipeline/registry/naver-usage.json
           if git diff --cached --quiet; then
             echo "공개 데이터 변경 없음."; exit 0
           fi
