@@ -1,10 +1,10 @@
 // 상세 화면 ‘주변 축제·행사’ 포스터 카드 — ./events.json(파이프라인 sync-culture-events.mjs)을 읽어 그린다.
 // 원천: CultureFlow(공연·전시·축제 모음) + 한국관광공사 TourAPI 축제. 포스터는 원래 주소를 그대로 쓰고(저장하지 않음)
-// 카드마다 출처와 원문 링크를 붙인다. 자료가 없거나 실패하면 칸을 숨긴 채 둔다.
+// 카드마다 캠핑장에서의 거리와 원문 링크를 붙이고, 출처는 칸 아래 한 줄에 모은다. 자료가 없거나 실패하면 칸을 숨긴 채 둔다.
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const DOW = ["일", "월", "화", "수", "목", "금", "토"];
 const md = (iso) => { const [, m, d] = String(iso).split("-"); const w = DOW[new Date(`${iso}T00:00:00Z`).getUTCDay()]; return `${Number(m)}/${Number(d)}(${w})`; };
-const km = (v) => (v < 1 ? `${Math.round(v * 1000)}m` : `${v}km`);
+const km = (v) => (v < 1 ? `${Math.round(v * 100) * 10}m` : `${Number(v).toFixed(1).replace(/\.0$/, "")}km`);
 const kstToday = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
 const addDays = (day, n) => new Date(Date.parse(`${day}T00:00:00Z`) + n * 864e5).toISOString().slice(0, 10);
 const dday = (from, to) => Math.round((Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 864e5);
@@ -48,7 +48,6 @@ const STYLE = `.ev-sec .ev-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 1
 .ev-acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:8px}
 .ev-acts a{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:999px;background:var(--soft,#f2f2f2);color:var(--ink-2,#333);font-size:.74rem;font-weight:800;text-decoration:none}
 .ev-acts a.main{background:var(--ink,#111);color:var(--paper,#fff)}
-.ev-src{color:var(--ink-3,#777);font-size:.68rem;line-height:1.4}
 .ev-more{margin:12px auto 0;display:block;height:36px;padding:0 16px;border-radius:999px;border:1px solid var(--line,#e5e5e5);background:var(--paper,#fff);font:inherit;font-size:.8rem;font-weight:800;cursor:pointer}
 .ev-foot{margin-top:12px;font-size:12px;color:var(--ink-3,#667);line-height:1.5}
 @media (max-width:720px){.ev-rail{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0;padding:2px 2px 10px;scrollbar-width:none;overscroll-behavior-x:contain}
@@ -70,7 +69,6 @@ function card(x, today, i) {
   const badges = [x.state === "ongoing" ? `<b class="on">진행 중</b>` : `<b>예정 · D-${dday(today, e.s)}</b>`, x.weekend ? `<b class="wk">이번 주말</b>` : ""].join("");
   const period = e.e && e.e !== e.s ? `${md(e.s)} ~ ${md(e.e)}` : md(e.s);
   const place = e.v || (e.a ? e.a.split(/\s+/).slice(0, 3).join(" ") : "");
-  const src = [e.cf ? "CultureFlow" : null, e.src, ...(e.also ?? [])].filter(Boolean);
   const acts = [
     e.cf ? `<a class="main" href="${esc(e.cf)}" target="_blank" rel="noopener">CultureFlow에서 보기</a>` : "",
     e.u ? `<a class="${e.cf ? "" : "main"}" href="${esc(e.u)}" target="_blank" rel="noopener">${e.cf ? "원문" : "자세히 보기"}</a>` : "",
@@ -79,9 +77,9 @@ function card(x, today, i) {
   return `<article class="ev-card" data-state="${x.state}" data-kind="${esc(e.k)}"${i >= 6 ? " data-extra hidden" : ""}>
   <a class="ev-poster${e.img ? "" : " noimg"}" ${href ? `href="${esc(href)}" target="_blank" rel="noopener"` : ""} aria-label="${esc(e.t)} 자세히">${poster(x)}<div class="ev-badges">${badges}</div><span class="ev-dist">${esc(km(x.km))}</span></a>
   <div class="ev-body"><span class="ev-kind">${esc(e.k)}</span><h3>${esc(e.t)}</h3>
-  <span class="ev-meta">${esc(period)}${place ? `<br>${esc(place)}` : ""}${e.p ? ` · ${esc(e.p)}` : ""}</span>
+  <span class="ev-meta">${esc(period)}${place ? `<br>${esc(place)}` : ""} · 캠핑장에서 ${esc(km(x.km))}${e.p ? ` · ${esc(e.p)}` : ""}</span>
   ${e.d ? `<p class="ev-desc">${esc(e.d)}</p>` : ""}
-  <div class="ev-acts">${acts}</div><span class="ev-src">정보·포스터: ${esc(src.join(" · "))}</span></div></article>`;
+  <div class="ev-acts">${acts}</div></div></article>`;
 }
 export function render(data, id, today = kstToday()) {
   const list = eventsFor(data, id, today);
