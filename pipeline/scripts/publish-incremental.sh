@@ -27,6 +27,7 @@ node pipeline/scripts/build-operator-facts.mjs
 node pipeline/scripts/build-spec-sheet.mjs
 node pipeline/scripts/build-review-digest.mjs
 node pipeline/scripts/build-nearby-facts.mjs
+node pipeline/scripts/build-thankq-facts.mjs
 node pipeline/scripts/build-campground-profiles.mjs
 node pipeline/scripts/build-site-pricing-facts.mjs
 node pipeline/scripts/build-site-types.mjs

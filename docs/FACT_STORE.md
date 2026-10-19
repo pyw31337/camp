@@ -42,7 +42,7 @@
 | 등급 | 뜻 | 원천 코드 |
 | --- | --- | --- |
 | `VERIFIED` (4) | 사람이 공식 원문과 대조 | `pilot_verified` |
-| `OPERATOR` (3) | 운영자가 스스로 공개한 문장에서 자동 추출 | `operator_homepage`, `operator_discovered`(카카오 검색으로 찾은 홈페이지) |
+| `OPERATOR` (3) | 운영자가 스스로 공개한 문장에서 자동 추출 | `operator_homepage`, `operator_discovered`(카카오 검색으로 찾은 홈페이지), `booking_engine`(예약 엔진 공개 화면에 업장이 등록한 사이트 정보 — 땡큐캠핑) |
 | `CONFIRMED` (2) | 공공 등록값·공식 소개·지도 장소·공공 인허가 | `gocamping`, `gocamping_intro`, `kakao_local`, `localdata` |
 | `MENTION` (1) | 후기·검색 언급(건수 n) | `review_search`, `kakao_web`(홈페이지 후보) |
 

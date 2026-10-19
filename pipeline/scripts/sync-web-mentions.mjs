@@ -4,7 +4,7 @@
 // 2) 본문 문장 — 네이버 결과와 카카오 다음 검색 후기(.cache/social-search.json) 중 robots.txt가 허용한 블로그만(티스토리 등).
 //    호스트 묶음마다 1.1초 간격, 봇 이름 표기, 한 번 읽은 글은 다시 읽지 않는다.
 // 유료 방지: naver-guard(요금표 0원 확인·월 예산·402 즉시 중단·NAVER_API_ENABLED=false 킬스위치). 한 실행 호출은 일 한도(25,000)의 절반 미만.
-// 환경: NAVER_API_HUB_CLIENT_ID/SECRET, NAVER_MENTION_MAX_CALLS(기본 8000), WEB_MAX_AGE_DAYS(14), BODY_MINUTES(25), BODY_MAX(2500)
+// 환경: NAVER_API_HUB_CLIENT_ID/SECRET, NAVER_MENTION_MAX_CALLS(기본 8000), WEB_MAX_AGE_DAYS(14), BODY_MINUTES(25), SEARCH_MINUTES(15), BODY_MAX(2500)
 // 키가 없거나 실패해도 캐시로 출력하고 exit 0.
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, resolve } from "node:path";
@@ -26,6 +26,7 @@ const usagePath = join(root, "pipeline/registry/naver-usage.json");
 const MAX_AGE = envNum("WEB_MAX_AGE_DAYS", 14);
 const DROP_AGE = envNum("WEB_DROP_AGE_DAYS", 120);
 const BODY_MINUTES = envNum("BODY_MINUTES", 25);
+const SEARCH_MINUTES = envNum("SEARCH_MINUTES", 15);
 const BODY_MAX = envNum("BODY_MAX", 2500);
 const KEEP_DOCS = 30;
 mkdirSync(cacheDir, { recursive: true }); mkdirSync(outDir, { recursive: true });
@@ -83,8 +84,11 @@ async function naverPhase() {
     .sort((a, b) => String(cache.campgrounds[a.id]?.fetched_at ?? "").localeCompare(String(cache.campgrounds[b.id]?.fetched_at ?? "")));
   console.log(`갱신 대상 ${due.length}곳 · 캠핑장당 ${plan.length}회`);
   let done = 0, stop = null;
+  // 검색 단계 시간 상한: 워크플로 단계 시간 제한(50분)에 걸려 out/campground-web.json을 못 쓰고 끝나지 않게(2026-10-19 run 39200981608).
+  const searchDeadline = Date.now() + SEARCH_MINUTES * 60e3;
   for (const c of due) {
     if (calls + plan.length > MAX) { stop = "호출 상한"; break; }
+    if (Date.now() > searchDeadline) { stop = `시간 상한 ${SEARCH_MINUTES}분`; break; }
     const q = buildQuery(c);
     const ctx = ctxOf(c);
     const docs = new Map();
