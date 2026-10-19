@@ -91,3 +91,12 @@ test("단기예보 끝자락(자정 한두 시간만 있는 날)은 하루 요�
   assert.deepEqual(Object.keys(days), ["2026-10-22"]);
   assert.equal(days["2026-10-22"].sky, "맑음");
 });
+
+test("물때: 구분 코드와 무관하게 이웃 극치 높이로 고조·저조를 정한다", () => {
+  const rows = summarizeTide([
+    { predcDt: "2026-10-24 10:30", extrSe: "1", predcTdlvVl: "80" },
+    { predcDt: "2026-10-24 04:12", extrSe: "2", predcTdlvVl: "612" },
+    { predcDt: "2026-10-24 16:40", extrSe: "3", predcTdlvVl: "640" },
+  ]);
+  assert.deepEqual(rows.map((r) => [r.t, r.type]), [["04:12", "고조"], ["10:30", "저조"], ["16:40", "고조"]]);
+});

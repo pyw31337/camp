@@ -71,7 +71,8 @@ function diagnose(status, text) {
   if (status === 404 || /API not found/i.test(text)) return "주소 없음: 서비스 경로가 바뀌었을 수 있음";
   try {
     const j = JSON.parse(text);
-    const h = j?.response?.header;
+    const h = j?.response?.header ?? j?.header ?? (j?.resultCode != null ? { resultCode: j.resultCode, resultMsg: j.resultMsg } : null);
+    if (!h && (j?.items || j?.body)) return null;
     if (h && ["0000", "00"].includes(String(h.resultCode))) return null;
     if (h) return `응답 코드 ${h.resultCode}: ${h.resultMsg}`;
   } catch { /* JSON이 아니면 아래에서 처리 */ }
@@ -88,7 +89,15 @@ for (const c of activeChecks) {
     const problem = diagnose(res.status, text);
     if (problem) failed += 1;
     let extra = "";
-    if (!problem) { try { const n = JSON.parse(text)?.response?.body?.totalCount; if (n != null) extra = ` · 전체 ${n}건`; } catch { /* 무시 */ } }
+    if (!problem) {
+      try {
+        const j = JSON.parse(text), n = j?.response?.body?.totalCount ?? j?.body?.totalCount ?? j?.totalCount;
+        if (n != null) extra = ` · 전체 ${n}건`;
+        const it = [j?.response?.body?.items?.item, j?.body?.items?.item, j?.items?.item, j?.items].find((x) => x != null);
+        const first = Array.isArray(it) ? it[0] : it;
+        if (first && typeof first === "object") extra += ` · 필드 ${Object.keys(first).slice(0, 20).join(",")}`;
+      } catch { /* XML 등은 무시 */ }
+    }
     console.log(`${problem ? "✗" : "✓"} ${c.name}${problem ? ` — ${problem}` : extra}`);
   } catch (e) {
     failed += 1;
