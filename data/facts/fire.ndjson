@@ -238,22 +238,26 @@
 {"cid":"379","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"383","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"383","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"383","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0184","at":"2026-10-19T04:56:00.479Z","text":"산림보호법에 따른 숯만 허용(장작 금지)"}
 {"cid":"383","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"385","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"385","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"385","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"387","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"387","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"387","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0192","at":"2026-10-19T04:56:00.479Z","text":"산림보호법에 따른 숯만 허용(장작 금지)"}
 {"cid":"387","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"389","attr":"CHARCOAL_ALLOWED","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"389","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"389","attr":"FIREWOOD_ALLOWED","value":false,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"395","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"395","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"산림보호법에 따른 숯만 허용(장작 금지)"}
 {"cid":"395","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"398","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"398","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"398","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"399","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"399","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"산림보호법에 따른 숯만 허용(장작 금지)"}
 {"cid":"399","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"400","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"400","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -560,6 +564,7 @@
 {"cid":"810","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"812","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"812","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"812","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0141","at":"2026-10-19T04:56:00.479Z","text":"산림보호법에 따른 숯만 허용(장작 금지)"}
 {"cid":"812","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"813","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"813","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -1013,6 +1018,7 @@
 {"cid":"1508","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1513","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1513","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"1513","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"산림보호법에 따른 숯만 허용(장작 금지)"}
 {"cid":"1513","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1528","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1528","attr":"FIRE_PIT","value":"SHARED","grade":"CONFIRMED","src":"gocamping","text":"공동취사장"}
@@ -1678,6 +1684,7 @@
 {"cid":"2778","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2782","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2782","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"2782","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"산림보호법에 따른 숯만 허용(장작 금지)"}
 {"cid":"2782","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2783","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2783","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -1936,6 +1943,7 @@
 {"cid":"3157","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3160","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3160","attr":"FIRE_PIT","value":"NONE","grade":"CONFIRMED","src":"gocamping","text":"불가"}
+{"cid":"3160","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"산림보호법에 따른 숯만 허용(장작 금지)"}
 {"cid":"3160","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3170","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3170","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -2432,6 +2440,7 @@
 {"cid":"6968","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6971","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6971","attr":"FIRE_PIT","value":"NONE","grade":"CONFIRMED","src":"gocamping","text":"불가"}
+{"cid":"6971","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0111","at":"2026-10-19T04:56:00.479Z","text":"산림보호법에 따른 숯만 허용(장작 금지)"}
 {"cid":"6971","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6972","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6972","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -2813,6 +2822,7 @@
 {"cid":"7272","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"7272","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7274","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7274","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"산림보호법에 따른 숯만 허용(장작 금지)"}
 {"cid":"7274","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7274","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7279","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}

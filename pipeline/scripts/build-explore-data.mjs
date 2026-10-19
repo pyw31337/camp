@@ -55,7 +55,11 @@ const seoul = seoulRaw ? matchSeoulToCampgrounds(seoulRaw.services ?? [], camps.
 const pilotFacts = await read("../registry/pilot-condition-facts.json");
 const stdCampgrounds = await read("../out/standard-campgrounds.json");
 const records = buildExploreRecords(camps, toilets, fees, seoul, notices, pilotFacts);
+// 분야별 공공 우수야영장(고캠핑 공개 목록, registry/gocamping-best.json): [[연도, 분야]] 최근 연도 먼저
+const best = await read("../registry/gocamping-best.json");
 for (const r of records) {
+  const awards = best?.by_campground?.[r.id];
+  if (awards?.length) { r.best = awards.map((a) => [a.year, a.field]); r.best_at = best.generated_at; }
   const hero = hostedOf(r.id)[0];
   if (hero?.thumb) r.ph = hero.thumb;
   const std = stdCampgrounds?.records?.[r.id];

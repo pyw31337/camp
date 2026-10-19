@@ -108,3 +108,22 @@ WHERE EXISTS (SELECT 1 FROM fact_best f WHERE f.cid=c.cid AND f.attr='FIRE_RULE'
 ## 7. 현재 규모 (2026-10-16 첫 생성)
 
 사실 118,491건 · 3,116곳 · 속성 137개(20묶음) · VERIFIED 280 · OPERATOR 1,500 · CONFIRMED 105,331(LOCALDATA 주변 인프라 21,574 포함) · MENTION 11,380. 카카오 발굴은 첫 워크플로 실행 뒤 채워진다.
+
+## 8. 고캠핑 등록 부가값·공공 우수야영장 (2026-10-19 추가)
+
+같은 고캠핑 응답에 이미 있었지만 버리던 필드를 정규화했다(API 호출 수 변화 없음). 0·빈값·N은 ‘미입력’과 구분되지 않으므로 **행을 만들지 않는다**(없다는 뜻이 아님).
+
+| 속성 | 원문 필드 | 비고 |
+|---|---|---|
+| SAFETY_EXTINGUISHER / FIRE_WATER / FIRE_SAND / FIRE_SENSOR | extshrCo · frprvtWrppCo · frprvtSandCo · fireSensorCo | 새 묶음 `safety` |
+| SAFETY_INSURANCE | insrncAt=Y | Y만 true 행 |
+| STAFF_ONSITE · OPERATOR_ORG · LICENSE_DATE · TOURISM_BIZ_NO | manageNmpr · mgcDiv · prmisnDe · trsagntNo | |
+| SITE_GAP_M · AREA_TOTAL_M2 | sitedStnc · allar | |
+| SEASONAL_CLOSURE(period) | hvofBgnde~hvofEnddle | 종료일이 지난 휴장은 카탈로그(gx.cl)에서 뺀다 |
+| INNER_AMENITY(label=GLAMPING·CARAVAN) | glampInnerFclty · caravInnerFclty | |
+| PROGRAM_EVENT · PROGRAM_EXPERIENCE | clturEventAt·clturEvent · exprnProgrmAt | |
+| AWARD_PUBLIC_BEST (원천 `gocamping_best`) | gocamping.or.kr/camp/best/list.do | `npm run sync:best` → registry/gocamping-best.json (연 1회) |
+
+- **사업자등록번호(bizrno)는 LOCALDATA 인허가 매칭 키로만 쓰고 카탈로그·사실 저장소·화면에 싣지 않는다.** 인허가일(prmisnDe)도 매칭 보조 근거로 쓴다(`localdata-campgrounds.mjs scorePair`, evidence.license_date_same·business_no_same).
+- 여행 시기(tourEraCl)·주변 시설 기타(posblFcltyEtc)·오시는 길(direction)은 상세(camps/{id}.json texts)의 era·nearby_etc·direction에만 둔다.
+- 카탈로그 축약 키 `gx`: lic·ins·staff·org·tno·area·gap·sf[소화기, 방화수, 방화사, 감지기]·cl[시작, 종료] (`explore-data.mjs gxOf`).

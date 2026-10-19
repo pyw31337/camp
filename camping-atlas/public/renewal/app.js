@@ -168,6 +168,8 @@ function typeLine2(c) {
 }
 
 // ── 필터 ─────────────────────────────────────────────────────
+const campFeeMin = (c) => c.fee?.min ?? c.pf?.p?.min;
+const campFeeMax = (c) => c.fee?.max ?? c.pf?.p?.max ?? campFeeMin(c);
 const AREAS = [["all", "전국"], ["서울·경기", "서울·경기"], ["강원", "강원"], ["충청", "충청"], ["전라", "전라"], ["경상", "경상"], ["제주", "제주"]];
 const AREA_OF = { 서울: "서울·경기", 인천: "서울·경기", 경기: "서울·경기", 강원: "강원", 충북: "충청", 충남: "충청", 대전: "충청", 세종: "충청", 전북: "전라", 전남: "전라", 광주: "전라", 경북: "경상", 경남: "경상", 대구: "경상", 부산: "경상", 울산: "경상", 제주: "제주" };
 const QUICK = {
@@ -191,10 +193,11 @@ const THEMES = [
 function matches(c, { useArea = true } = {}) {
   if (useArea && S.area !== "all" && AREA_OF[sidoShort(c.sido)] !== S.area) return false;
   for (const k of S.quick) if (!QUICK[k].test(c)) return false;
-  if (S.feeBand === "u3" && !(c.fee?.min && c.fee.min <= 30000)) return false;
-  if (S.feeBand === "3to5" && !(c.fee?.min && c.fee.min <= 50000 && (c.fee.max == null || c.fee.max >= 30000))) return false;
-  if (S.feeBand === "5to7" && !(c.fee?.min && c.fee.min <= 70000 && (c.fee.max == null || c.fee.max >= 50000))) return false;
-  if (S.feeBand === "o7" && !(c.fee && (c.fee.min >= 70000 || (c.fee.max && c.fee.max >= 70000)))) return false;
+  const fMin = campFeeMin(c), fMax = campFeeMax(c);
+  if (S.feeBand === "u3" && !(fMin && fMin <= 30000)) return false;
+  if (S.feeBand === "3to5" && !(fMin && fMin <= 50000 && (fMax == null || fMax >= 30000))) return false;
+  if (S.feeBand === "5to7" && !(fMin && fMin <= 70000 && (fMax == null || fMax >= 50000))) return false;
+  if (S.feeBand === "o7" && !(fMin && (fMin >= 70000 || (fMax && fMax >= 70000)))) return false;
   if (S.theme && S.theme !== "ALL") { const t = THEMES.find((x) => x[0] === S.theme); if (t && !t[2](c)) return false; }
   if (S.theme === "AVAIL" && !S.avail?.has(String(c.id))) return false;
   if (S.theme === "OPEN" && !openingOf(c)) return false;
@@ -492,10 +495,10 @@ function homeView() {
     </div></div>
     <div class="fee-filter" aria-label="1박 요금대"><div class="rail fee-bands">
       <span class="fee-band-lbl">1박 요금</span><button type="button" class="chip fee-chip" data-fee-band="" aria-pressed="${!S.feeBand}">전체</button>
-      <button type="button" class="chip fee-chip" data-fee-band="u3" aria-pressed="${S.feeBand === 'u3'}">~3만원 <i>${fmt(countOf((c) => Boolean(c.fee?.min && c.fee.min <= 30000)))}</i></button>
-      <button type="button" class="chip fee-chip" data-fee-band="3to5" aria-pressed="${S.feeBand === '3to5'}">3~5만원 <i>${fmt(countOf((c) => Boolean(c.fee?.min && c.fee.min <= 50000 && (c.fee.max == null || c.fee.max >= 30000))))}</i></button>
-      <button type="button" class="chip fee-chip" data-fee-band="5to7" aria-pressed="${S.feeBand === '5to7'}">5~7만원 <i>${fmt(countOf((c) => Boolean(c.fee?.min && c.fee.min <= 70000 && (c.fee.max == null || c.fee.max >= 50000))))}</i></button>
-      <button type="button" class="chip fee-chip" data-fee-band="o7" aria-pressed="${S.feeBand === 'o7'}">7만원+ <i>${fmt(countOf((c) => Boolean(c.fee && (c.fee.min >= 70000 || (c.fee.max && c.fee.max >= 70000)))))}</i></button>
+      <button type="button" class="chip fee-chip" data-fee-band="u3" aria-pressed="${S.feeBand === 'u3'}">~3만원 <i>${fmt(countOf((c) => Boolean(campFeeMin(c) && campFeeMin(c) <= 30000)))}</i></button>
+      <button type="button" class="chip fee-chip" data-fee-band="3to5" aria-pressed="${S.feeBand === '3to5'}">3~5만원 <i>${fmt(countOf((c) => { const mn = campFeeMin(c), mx = campFeeMax(c); return Boolean(mn && mn <= 50000 && (mx == null || mx >= 30000)); }))}</i></button>
+      <button type="button" class="chip fee-chip" data-fee-band="5to7" aria-pressed="${S.feeBand === '5to7'}">5~7만원 <i>${fmt(countOf((c) => { const mn = campFeeMin(c), mx = campFeeMax(c); return Boolean(mn && mn <= 70000 && (mx == null || mx >= 50000)); }))}</i></button>
+      <button type="button" class="chip fee-chip" data-fee-band="o7" aria-pressed="${S.feeBand === 'o7'}">7만원+ <i>${fmt(countOf((c) => { const mn = campFeeMin(c), mx = campFeeMax(c); return Boolean(mn && (mn >= 70000 || (mx && mx >= 70000))); }))}</i></button>
     </div></div>
   </section>
   <section class="results" id="results" aria-labelledby="res-t">
@@ -612,7 +615,7 @@ function dateStatus(c, d) {
 function listResults(p) {
   const list = S.camps.filter((c) => matches(c)).map((c) => ({ c, st: dateStatus(c, p.d) }));
   const shown = S.showClosed ? list : list.filter((x) => x.st?.k !== "closed");
-  const fee = (c) => c.fee?.min ?? Infinity;
+  const fee = (c) => campFeeMin(c) ?? Infinity;
   if (S.listSort === "fee") shown.sort((a, b) => fee(a.c) - fee(b.c) || rich(b.c) - rich(a.c));
   else if (S.listSort === "name") shown.sort((a, b) => nameOf(a.c).name.localeCompare(nameOf(b.c).name, "ko"));
   else shown.sort((a, b) => (a.st?.rank ?? 5) - (b.st?.rank ?? 5) || rich(b.c) - rich(a.c));
@@ -708,7 +711,7 @@ function bindList() {
     const a = e.target.closest("[data-list-area-k]");
     if (a) { S.area = a.dataset.listAreaK; go(); return; }
     const fb = e.target.closest("[data-fee-band]");
-    if (fb) { S.feeBand = fb.dataset.feeBand || null; $$("[data-fee-band]").forEach((x) => x.setAttribute("aria-pressed", String(x === fb))); renderList(); return; }
+    if (fb) { S.feeBand = fb.dataset.feeBand || ""; $$("[data-fee-band]").forEach((x) => x.setAttribute("aria-pressed", String(x === fb))); renderList(); return; }
     if (e.target.closest("[data-list-closed]")) { S.showClosed = !S.showClosed; renderList(); return; }
     if (e.target.closest("[data-list-more]")) { S.listN += LIST_PAGE; renderList({ reset: false }); }
   };
@@ -977,6 +980,7 @@ async function detailView(id) {
         ${sitePricingHtml(c, d)}
         ${priceMentionsHtml(d)}
         <section class="d-sec"><div class="sec-head">${iconTitle("info", "이용 정보")}</div><dl class="uses">${us.map(([l, x]) => `<div class="use${x ? "" : " unk"}"><dt>${l}</dt><dd>${x ? `${esc(detailValue(x))}${asOfMention(x)}${dot(x.g)}${srcTip(x, l)}` : "확인필요"}</dd></div>`).join("")}</dl></section>
+        <section class="d-sec" data-cond hidden></section>
         ${operatorHtml(d)}
         ${bookingHtml(c, d)}
         ${amenityHtml(c)}
@@ -1262,6 +1266,23 @@ function reviewLinksHtml(d) {
     return `<article class="review-link-card"><a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${platform} 후기 ${i + 1} 원문 열기"><span class="review-link-media">${canPreviewExternalMedia(x) && externalImage(x) ? `<img src="${esc(externalImage(x))}" alt="" loading="lazy" decoding="async">` : apiThumb(x) ? `<img src="${esc(apiThumb(x))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : ic(x.t === "cafe" ? "tent" : "camera")}</span><span><i>${esc(sourceName(x.src, platform))}${x.date ? ` · ${esc(String(x.date).slice(0, 10))}` : ""}</i><b>${esc(serviceText(x.title, 54) || `방문 후기 ${i + 1}`)}</b>${summary ? `<em>${esc(summary)}</em>` : ""}</span>${ic("external", "line")}</a>${srcTip(fact, `${platform} 후기 ${i + 1}`)}</article>`;
   }).join("")}</div></section>`;
 }
+// 고캠핑 등록 부가값(c.gx)·공공 우수야영장(c.best). 값이 없으면 줄을 만들지 않는다(0·미입력은 "없음"이 아니다).
+const BEST_LABEL = { ECO: "친환경", FAMILY: "가족친화", ACCESSIBLE: "교통약자 배려", PET: "반려동물 친화" };
+function registryRows(c) {
+  const g = c.gx ?? {}, sf = g.sf ?? [];
+  const safety = [["소화기", sf[0]], ["방화수", sf[1]], ["방화사", sf[2]], ["화재감지기", sf[3]]].filter(([, n]) => n > 0).map(([l, n]) => `${l} ${n}`);
+  const manage = [g.staff ? `상주 ${g.staff}명` : null, g.org].filter(Boolean);
+  const best = (c.best ?? []).map(([y, f]) => `${y} ${BEST_LABEL[f] ?? f}`);
+  return [
+    ["우수야영장", best.length ? `${esc(best.join(" · "))} <span class="muted">공공 선정</span>` : null],
+    ["안전시설", safety.length ? esc(safety.join(" · ")) : null],
+    ["보험", g.ins ? "영업배상책임보험 가입" : null],
+    ["관리", manage.length ? esc(manage.join(" · ")) : null],
+    ["사이트 간격", g.gap ? `${esc(g.gap)}m` : null],
+    ["휴장", g.cl ? esc(`${g.cl[0] ?? ""} ~ ${g.cl[1] ?? ""}`) : null],
+    ["인허가일", g.lic ? esc(g.lic) : null],
+  ];
+}
 function infoHtml(c) {
   const name = encodeURIComponent(nameOf(c).name);
   const map = c.lat ? `https://map.kakao.com/link/map/${name},${c.lat},${c.lng}` : null;
@@ -1273,6 +1294,7 @@ function infoHtml(c) {
     ["전화", c.tel ? `<a href="tel:${esc(c.tel)}">${esc(c.tel)}</a>` : null],
     ["홈페이지", c.homepage ? `<a href="${esc(c.homepage)}" target="_blank" rel="noopener">${esc(hostOf(c.homepage) || c.homepage)}</a>` : null],
     ["운영", [OP[c.op], (c.seasons ?? []).length === 4 ? "사계절" : (c.seasons ?? []).join("·"), (c.days ?? [])[0]].filter(Boolean).map(esc).join(" · ") || null],
+    ...registryRows(c),
   ].filter(([, v]) => v);
   return `<section class="d-sec"><div class="sec-head">${iconTitle("info", "업체 정보")}${c.gc_url ? `<a class="link" href="${esc(c.gc_url)}" target="_blank" rel="noopener">고캠핑 ${ic("right")}</a>` : ""}</div>
     <dl class="uses info">${rows.map(([l, v]) => `<div class="use"><dt>${l}</dt><dd>${v}</dd></div>`).join("")}</dl>
@@ -1310,6 +1332,9 @@ function bindDetail() {
     b.outerHTML = `<div class="vid playing"><iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(b.dataset.yt)}?autoplay=1" title="영상" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>`;
   }));
   const id = $(".detail")?.dataset.id;
+  // 이번 주말 컨디션(날씨·일출일몰·달·미세먼지·산불·물때): /conditions/card.js가 있을 때만 붙인다. 실패하면 칸을 숨긴 채 둔다.
+  const condEl = $("[data-cond]"), condCamp = S.byId.get(id);
+  if (condEl && condCamp) import(new URL("../conditions/card.js", import.meta.url).href).then((m) => m.mount(condEl, condCamp)).catch(() => {});
   const previewItems = async (kind) => {
     const d = await detailOf(id);
     const rows = kind === "layout" ? (d?.layout?.images ?? []) : (d?.sns_images ?? []);

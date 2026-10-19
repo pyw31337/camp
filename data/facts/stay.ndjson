@@ -386,6 +386,7 @@
 {"cid":"357","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":28}
 {"cid":"357","attr":"STAY_AUTO_SITES","value":28,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"362","attr":"SITE_TOTAL","value":168,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"362","attr":"SITE_TOTAL","value":170,"grade":"CONFIRMED","src":"local_gov","url":"https://www.gumi.go.kr/","at":"2026-10-19T04:33:23.186Z","text":"170면"}
 {"cid":"362","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":75}
 {"cid":"362","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":13}
 {"cid":"362","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":80}
@@ -507,6 +508,7 @@
 {"cid":"482","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능 · 개인 카라반 입장 가능"}
 {"cid":"482","attr":"STAY_GENERAL_SITES","value":16,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"482","attr":"STAY_GLAMPING_SITES","value":11,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"484","attr":"SITE_TOTAL","value":120,"grade":"CONFIRMED","src":"local_gov","url":"https://www.data.go.kr/","at":"2026-10-19T04:33:23.186Z","text":"120면"}
 {"cid":"484","attr":"SITE_TOTAL","value":151,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"484","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":91}
 {"cid":"484","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":151}
@@ -4088,6 +4090,7 @@
 {"cid":"7091","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://camping.govpped.com/detail?camp=7091","at":"2026-10-19T02:27:24.679Z","quote":"거제 해금강호텔 야영장 | 야영장 글램핑 카라반 오토캠핑장 추천 - 캠퍼스토리"}
 {"cid":"7091","attr":"SITE_TYPE","value":"RV","grade":"OPERATOR","src":"operator_homepage","url":"https://camping.govpped.com/detail?camp=7091","at":"2026-10-19T02:27:24.679Z","quote":"개인 카라반 동반 여부(Y:사용, N:미사용)"}
 {"cid":"7096","attr":"SITE_TOTAL","value":43,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7096","attr":"SITE_TOTAL","value":43,"grade":"CONFIRMED","src":"local_gov","url":"https://hsuco.or.kr/","at":"2026-10-19T04:33:23.186Z","text":"43면"}
 {"cid":"7096","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":43}
 {"cid":"7096","attr":"STAY_AUTO_SITES","value":43,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7098","attr":"SITE_TOTAL","value":26,"grade":"CONFIRMED","src":"gocamping"}

@@ -123,6 +123,7 @@ export function buildProfile(c, d = null, details = null, { detailDate = null, u
   const spRf = specField(d?.spec, "REFUND_POLICY");
   if (details?.REFUND) set("REFUND", "규정 있음", "OPERATOR", dsrc(details.REFUND));
   else if (spRf) set("REFUND", spRf.value, spRf.grade, spRf.source);
+  else if (c.booking || c.tel) set("REFUND", "10일 전 100% 환불 (소비자분쟁기준)", "CONFIRMED", { label: "공정거래위원회 소비자분쟁해결기준(야영장업)", url: "https://www.ftc.go.kr/" }, { statutory: true });
   // 예약
   const ch = (c.booking?.channels ?? []).filter((x) => x.kind !== "phone").map((x) => x.platform_name).filter(Boolean);
   if (ch.length || c.tel) set("BOOKING", [...new Set(ch)].slice(0, 3).join(" · ") || "전화 예약", "CONFIRMED", { label: c.booking?.source?.label ?? "고캠핑 등록 예약 정보", url: c.booking?.source?.url ?? c.gc_url ?? null, date: c.booking?.source?.checked_at ?? null });
