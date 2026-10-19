@@ -1658,3 +1658,8 @@ dialog.weather-modal::backdrop {
 .plat-btn { color: var(--ink); }
 .plat-btn img, .plat-btn svg { width: 22px; height: 22px; filter: grayscale(1); }
 .plat-btn svg { color: var(--ink); }
+
+.rs-alts { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.rs-alts > span { font-size: .74rem; font-weight: 800; color: var(--ink-3); }
+.rs-alts a { display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--ink-2); font-size: .76rem; font-weight: 800; text-decoration: none; }
+.rs-alts a:hover { border-color: var(--accent); color: var(--accent); }
