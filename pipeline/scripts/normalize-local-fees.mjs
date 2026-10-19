@@ -4,13 +4,13 @@
  * Currently expanded for 여주시 야영캠핑장현황 (data.go.kr 15100692).
  * Columns: 야영장명, 구분, 위경도, 도로명주소, 전화번호, 야영사이트수, 부지면적, 편의시설, 안전시설, 이용요금, 관리기관 등.
  * Usage: node scripts/normalize-local-fees.mjs [optional-csv-path]
- * Output: pipeline/registry/local-fee-facts.json
+ * Output: registry/local-fee-facts.json  (relative to pipeline/ when run via npm script)
  */
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
 const ROOT = process.cwd();
-const outPath = join(ROOT, 'pipeline/registry/local-fee-facts.json');
+const outPath = join(ROOT, 'registry/local-fee-facts.json');
 
 // Embedded sample based on public 여주 data + official fee pages
 const SAMPLE_CSV = `야영장명,야영장구분,위도,경도,소재지도로명주소,야영장전화번호,야영사이트수,부지면적,1일최대수용인원수,편의시설,안전시설,이용요금,관리기관명,데이터기준일자
