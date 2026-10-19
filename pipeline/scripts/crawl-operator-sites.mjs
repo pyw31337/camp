@@ -191,7 +191,8 @@ async function ocrImages(picked, rules, out = [], deadline = Date.now() + 150000
   const { writeFile, rm, mkdtemp } = await import("node:fs/promises");
   const { tmpdir } = await import("node:os");
   const { ocrScore, ocrSentences } = await import("../lib/ocr.mjs");
-  const run = (args) => new Promise((ok) => execFile("tesseract", args, { timeout: 60000, maxBuffer: 4e6 }, (e, out) => ok(e ? null : String(out))));
+  // OMP_THREAD_LIMIT=1: tesseract가 프로세스마다 여러 스레드를 띄우면 동시 OCR끼리 서로 느려져 시간 초과로 0줄이 된다.
+  const run = (args) => new Promise((ok) => execFile("tesseract", args, { timeout: 90000, maxBuffer: 4e6, env: { ...process.env, OMP_THREAD_LIMIT: "1" } }, (e, out) => ok(e ? null : String(out))));
   tesseractOk ??= (await run(["--version"])) !== null;
   if (!tesseractOk) return [];
   sharpMod ??= await import("sharp").then((m) => m.default).catch(() => false);
