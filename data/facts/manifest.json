@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-10-19T10:47:49.890Z",
+ "generated_at": "2026-10-19T11:48:47.525Z",
  "campgrounds": 3116,
  "facts": 144410,
  "row": "{cid, attr, value, grade, src, url?, at?, quote?, text?, n?, period?, label?, num?, count?} — src=gocamping에서 url·at이 없으면 campgrounds.ndjson의 gc_url·gc_at",
