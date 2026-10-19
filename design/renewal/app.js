@@ -2531,6 +2531,8 @@ function reserveDock(c) {
   const main = primaryBooking(c);
   return `${heartBtn(c)}${c.tel ? `<a class="btn ghost" href="tel:${esc(c.tel)}" aria-label="전화">${ic("phone")}</a>` : ""}${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">예약하기</a>` : ""}`;
 }
+// 상세 보조 모듈(/conditions·/context·/operator)은 사이트 루트(/camp/)에 있다. 화면이 /camp/에서 뜨든 /camp/explore/에서 뜨든 같은 곳을 가리키게 한다.
+const MOD_ROOT = /\/(explore|renewal)\/[^/]*$/.test(new URL(import.meta.url).pathname) ? "../" : "./";
 function bindDetail() {
   initCarousels($("#view"));
   const back = $("[data-back]");
@@ -2553,19 +2555,19 @@ function bindDetail() {
   }
   // 이번 주말 컨디션(날씨·일출일몰·달·미세먼지·산불·물때): /conditions/card.js가 있을 때만 붙인다. 실패하면 칸을 숨긴 채 둔다.
   const condEl = $("[data-cond]"), condCamp = S.byId.get(id);
-  if (condEl && condCamp) import(new URL("../conditions/card.js", import.meta.url).href).then((m) => m.mount(condEl, condCamp)).catch(() => {});
+  if (condEl && condCamp) import(new URL(`${MOD_ROOT}conditions/card.js`, import.meta.url).href).then((m) => m.mount(condEl, condCamp)).catch(() => {});
   // 여행 참고 정보(고도·응급실·전기차 충전·주변 축제 등): /context/card.js가 있을 때만. 실패하면 칸을 숨긴 채 둔다.
   const exEl = $("[data-extras]");
-  if (condCamp) import(new URL("../context/card.js", import.meta.url).href).then((m) => {
+  if (condCamp) import(new URL(`${MOD_ROOT}context/card.js`, import.meta.url).href).then((m) => {
     if (exEl) m.mount(exEl, condCamp).catch(() => {});
     m.evFor(id).then(mountNearbyEv).catch(() => {});
   }).catch(() => {});
   // 주변 축제·행사 포스터 카드(CultureFlow + 관광공사 축제): /context/events.js가 있을 때만. 실패하면 칸을 숨긴 채 둔다.
   const evSec = $("[data-events]");
-  if (evSec && condCamp) import(new URL("../context/events.js", import.meta.url).href).then((m) => m.mount(evSec, condCamp)).catch(() => {});
+  if (evSec && condCamp) import(new URL(`${MOD_ROOT}context/events.js`, import.meta.url).href).then((m) => m.mount(evSec, condCamp)).catch(() => {});
   // 운영자 정보 바로잡기(로그인 없이, Supabase operator_submission에 넣기만): /operator/form.js
   const opEl = $("[data-opform-sec]");
-  if (opEl && condCamp && SB.url && SB.key) import(new URL("../operator/form.js", import.meta.url).href).then((m) => m.mount(opEl, condCamp, SB)).catch(() => {});
+  if (opEl && condCamp && SB.url && SB.key) import(new URL(`${MOD_ROOT}operator/form.js`, import.meta.url).href).then((m) => m.mount(opEl, condCamp, SB)).catch(() => {});
   const previewItems = async (kind) => {
     const d = await detailOf(id);
     const rows = kind === "layout" ? (d?.layout?.images ?? []) : (d?.sns_images ?? []);
