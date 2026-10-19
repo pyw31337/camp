@@ -1027,3 +1027,6 @@ a.near { color: inherit; text-decoration: none; }
   /* 모바일은 하단 예약 막대가 있으므로, 접수·오픈 정보가 없는 빈 예약 카드는 숨긴다 */
   .d-side:not(:has(.rs-avail, .rs-open)) { display: none; }
 }
+
+/* 과거 글 기준일 표기 “(2025.09.16 기준)” — 값 오른쪽 작은 회색 */
+.asof { margin-left: 4px; font-style: normal; font-size: .74rem; font-weight: 600; color: var(--ink-3); white-space: nowrap; }
