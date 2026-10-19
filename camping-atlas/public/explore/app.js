@@ -283,7 +283,11 @@ function results() {
 // ── 사진 ─────────────────────────────────────────────────────
 const photoUrl = (u) => {
   const value = String(u ?? "");
-  return value.startsWith("media/") ? `../${value}` : value;
+  if (!value) return "";
+  if (value.startsWith("media/")) return `${MEDIA}${value.slice(6)}`;
+  if (value.startsWith("./media/")) return `${MEDIA}${value.slice(8)}`;
+  if (value.startsWith("../media/")) return `${MEDIA}${value.slice(9)}`;
+  return value;
 };
 // 목록은 480px 파생본을 우선 쓰되, 고밀도 화면에서는 같은 공식 원본의 1280px 파생본을 선택한다.
 // 외부 원문 URL은 변형하지 않아 원천의 표시 조건과 주소를 유지한다.
@@ -2040,7 +2044,7 @@ function reviewLinksHtml(d, c) {
       const summary = reviewSummary(x.snippet);
       const host = (() => { try { return new URL(x.url).hostname; } catch { return ""; } })();
       const fav = host ? `https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=128` : "";
-      const campShot = photosOf(c)[0] || "";
+      const campShot = photosOf(c)[0] ? photoUrl(photosOf(c)[0]) : "";
       const thumb = (canPreviewExternalMedia(x) && externalImage(x)) || apiThumb(x) || fav || campShot;
       const media = `<div class="media-card-photo">${thumb ? `<img src="${esc(thumb)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${esc(campShot || fav)}'">` : ic("file-text")}</div>`;
       return `<article class="review-link-card media-card"><a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${platform} 후기 ${i + 1} 원문 열기">${media}<div class="media-card-body"><i>${ic("file-text")}${esc(sourceName(x.src, platform))}${x.date ? ` · ${esc(String(x.date).slice(0, 10))}` : ""}</i><b>${esc(serviceText(x.title, 54) || `방문 후기 ${i + 1}`)}</b>${summary ? `<em>${esc(summary)}</em>` : ""}<span class="media-card-go">${ic("external")}원문 보기</span></div></a>${srcTip(fact, `${platform} 후기 ${i + 1}`)}</article>`;
