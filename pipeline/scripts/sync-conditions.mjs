@@ -6,7 +6,7 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
-import { apiProblem, fireGrade, itemsOf, midTmFc, shortBase, summarizeAir, summarizeMid, summarizeShort, summarizeTide, upcomingWeekend } from "../lib/conditions.mjs";
+import { airBySido, apiProblem, fireRow, itemsOf, midTmFc, shortBase, summarizeAir, summarizeMid, summarizeShort, summarizeTide, upcomingWeekend } from "../lib/conditions.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const outDir = join(root, "camping-atlas/public/conditions");
@@ -14,6 +14,8 @@ const mapping = JSON.parse(readFileSync(join(root, "pipeline/registry/condition-
 const key = process.env.DATA_GO_KR_SERVICE_KEY;
 const envNum = (k, d) => (Number.isFinite(Number(process.env[k])) && process.env[k] !== "" && process.env[k] != null ? Number(process.env[k]) : d);
 const SHORT_MAX = envNum("CONDITIONS_SHORT_MAX", 1800), TIDE_MAX = envNum("CONDITIONS_TIDE_MAX", 120);
+// PR 검증용: 주말이 멀어도 단기예보를 소수 격자만 불러 응답 형태를 확인한다(CONDITIONS_SHORT_FORCE=1)
+const SHORT_FORCE = process.env.CONDITIONS_SHORT_FORCE === "1";
 const now = Date.now();
 const wk = upcomingWeekend(now);
 const status = {}, calls = {};
@@ -40,7 +42,7 @@ async function pool(list, n, fn) {
 const FATAL = new Set(["NOT_REGISTERED", "UNAUTHORIZED", "NOT_FOUND", "EXPIRED", "QUOTA"]);
 
 // 1) 단기예보(격자별)
-const shortDays = wk.days_ahead <= 3; // 토요일이 단기예보 범위(오늘+3일) 안. 일요일이 밖이면 중기예보로 채운다
+const shortDays = wk.days_ahead <= 3 || SHORT_FORCE; // 토요일이 단기예보 범위(오늘+3일) 안. 일요일이 밖이면 중기예보로 채운다
 const short = await service("short", async () => {
   if (!shortDays) { status.short = `SKIPPED_FAR (주말까지 ${wk.days_ahead}일 — 중기예보 사용)`; return null; }
   const { base_date, base_time } = shortBase(now);
@@ -54,6 +56,7 @@ const short = await service("short", async () => {
       if (problem) { fails++; return null; }
       const days = summarizeShort(itemsOf(json));
       out[g] = [wk.sat, wk.sun].map((d) => days[d] ?? null);
+      if (SHORT_FORCE && !status.short_sample) status.short_sample = `${g} ${JSON.stringify(days).slice(0, 300)}`;
     } catch { fails++; }
     return null;
   });
@@ -101,26 +104,31 @@ const air = await service("air", async () => {
     if (rows.length < 1000) break;
   }
   const out = summarizeAir(items);
-  status.air = `OK 측정소 ${Object.keys(out).length}${mapping.stats?.with_air ? "" : " (대응표에 측정소가 없어 화면에는 아직 안 붙음 — build-condition-mapping 재실행 필요)"}`;
-  return out;
+  const bySido = airBySido(out);
+  status.air = `OK 측정소 ${Object.keys(out).length} · 시도 ${Object.keys(bySido).length}${mapping.stats?.with_air ? "" : " (측정소 좌표 없음 → 시도 중앙값으로 표시. 측정소정보 활용신청 후 가장 가까운 측정소로 바뀜)"}`;
+  return { stations: out, bySido };
 });
 
 // 5) 산불위험예보(시군구). 응답 필드명은 첫 검증 실행에서 확인한다 — 이름·지수로 보이는 칸만 남긴다.
 const fire = await service("fire", async () => {
-  const items = [];
-  for (let page = 1; page <= 3; page++) {
-    const { problem, json } = await get("fire", `https://apis.data.go.kr/1400377/forestPoint/forestPointListGeongugSearch?_type=json&numOfRows=300&pageNo=${page}`);
-    if (problem) { status.fire = problem; return null; }
-    const rows = itemsOf(json); items.push(...rows);
-    if (rows.length < 300) break;
+  // 시군구 조회를 먼저, 안 되면 전국(시도) 조회. 2026-10-19 PR 검증에서 전국 조회 경로가 NO_OPENAPI_SERVICE_ERROR였다.
+  const items = [], tried = [];
+  for (const op of ["forestPointListSigunguSearch", "forestPointListGeongugSearch"]) {
+    let problem = null;
+    for (let page = 1; page <= 3; page++) {
+      const r = await get("fire", `https://apis.data.go.kr/1400377/forestPoint/${op}?_type=json&numOfRows=300&pageNo=${page}&excludeForecast=1`);
+      problem = r.problem;
+      if (problem) break;
+      const rows = itemsOf(r.json); items.push(...rows);
+      if (rows.length < 300) break;
+    }
+    tried.push(`${op}=${problem ?? "OK"}`);
+    if (items.length) break;
+    if (problem === "NOT_REGISTERED" || problem === "UNAUTHORIZED") break;
   }
+  if (!items.length) { status.fire = `${tried.join(" · ")}`; return null; }
   const out = {};
-  for (const it of items) {
-    const name = Object.entries(it).filter(([k, v]) => typeof v === "string" && /(do|sido|sigun|sigungu|region).*n(a)?m(e)?$/i.test(k)).map(([, v]) => v.trim()).join(" ");
-    const idxKey = Object.keys(it).find((k) => /meanavg|mean_avg|avg/i.test(k)) ?? Object.keys(it).find((k) => /maxi|max/i.test(k));
-    const idx = idxKey ? Number(it[idxKey]) : NaN;
-    if (name && Number.isFinite(idx)) out[name] = { idx: Math.round(idx), grade: fireGrade(idx), at: it.analdate ?? it.anlDt ?? null };
-  }
+  for (const it of items) { const r = fireRow(it); if (r) out[r.name] = r; }
   status.fire = `OK 지역 ${Object.keys(out).length}/${items.length}${items[0] ? ` · 필드 ${Object.keys(items[0]).slice(0, 12).join(",")}` : ""}`;
   return out;
 });
@@ -148,7 +156,8 @@ for (const [id, m] of Object.entries(mapping.camps)) {
   const w = [wk.sat, wk.sun].map((d, i) => { const s = g?.[i]; if (s) return { src: "short", ...s }; const x = dayMid(m, d); return x ? { src: "mid", ...x } : null; });
   const row = {};
   if (w.some(Boolean)) row.w = w;
-  if (m.air && air?.[m.air]) row.air = { station: m.air, ...air[m.air] };
+  if (m.air && air?.stations?.[m.air]) row.air = { station: m.air, ...air.stations[m.air] };
+  else if (m.sido && air?.bySido?.[m.sido]) row.air = { sido: m.sido, ...air.bySido[m.sido] };
   const sg = m.sigungu?.split(/\s/)[0];
   const fireKeys = fire && sg ? Object.keys(fire).filter((k) => k.includes(sg)) : [];
   const fireKey = fireKeys.find((k) => m.sido && k.includes(m.sido)) ?? (fireKeys.length === 1 ? fireKeys[0] : null);

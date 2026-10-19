@@ -34,7 +34,7 @@ export async function mount(el, camp) {
   if (sun.sunrise) rows.push(["일출·일몰", `${sun.sunrise} · ${sun.sunset} <span class="muted">${md(wk.sat)}</span>`]);
   const moon = moonPhase(wk.sat);
   rows.push(["토요일 밤 달", `${esc(moon.label)} (밝기 ${Math.round(moon.illum * 100)}%)${moon.dark_sky ? " · 별 보기 좋은 밤" : ""}`]);
-  if (row.air?.grade) rows.push(["미세먼지(지금)", `${AIR[row.air.grade]} <span class="muted">${esc(row.air.station)} 측정소 · PM10 ${row.air.pm10 ?? "–"} · PM2.5 ${row.air.pm25 ?? "–"}</span>`]);
+  if (row.air?.grade) rows.push(["미세먼지(지금)", `${AIR[row.air.grade]} <span class="muted">${row.air.station ? `${esc(row.air.station)} 측정소` : `${esc(row.air.sido)} 측정소 ${row.air.stations}곳 중앙값`} · PM10 ${row.air.pm10 ?? "–"} · PM2.5 ${row.air.pm25 ?? "–"}</span>`]);
   if (row.fire?.grade) rows.push(["산불위험", `${esc(row.fire.grade)} <span class="muted">지수 ${row.fire.idx}</span>`]);
   const tide = row.tide?.days?.[0];
   if (tide?.length) rows.push([`${md(wk.sat)} 물때`, `${tide.map((x) => `${x.type} ${x.t}`).join(" · ")} <span class="muted">${row.tide.km}km 거리 지점</span>`]);

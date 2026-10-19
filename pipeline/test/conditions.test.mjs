@@ -53,7 +53,7 @@ test("응답 정리: 단기·중기·미세먼지·물때·오류 판별", () =>
   const mid = summarizeMid({ wf5Am: "맑음", wf5Pm: "구름많음", rnSt5Am: 10, rnSt5Pm: 30 }, { taMin5: 7, taMax5: 18 }, "202610190600");
   assert.deepEqual(mid["2026-10-24"], { sky: "구름많음", pop: 30, tmin: 7, tmax: 18 });
   assert.equal(airGrade(45, 40), 3);
-  assert.deepEqual(summarizeAir([{ stationName: "A", pm10Value: "20", pm25Value: "-", dataTime: "2026-10-19 13:00" }]).A, { pm10: 20, pm25: null, grade: 1, at: "2026-10-19 13:00" });
+  assert.deepEqual(summarizeAir([{ stationName: "A", pm10Value: "20", pm25Value: "-", dataTime: "2026-10-19 13:00" }]).A, { pm10: 20, pm25: null, grade: 1, at: "2026-10-19 13:00", sido: null });
   assert.deepEqual(summarizeTide([{ predcDt: "2026-10-24 04:12", extrSe: "1", predcTdlvVl: "612" }, { predcDt: "2026-10-24 10:30", extrSe: "2", predcTdlvVl: "80" }]),
     [{ t: "04:12", type: "고조", h: 612 }, { t: "10:30", type: "저조", h: 80 }]);
   assert.equal(apiProblem(200, "<OpenAPI_ServiceResponse><returnAuthMsg>SERVICE_KEY_IS_NOT_REGISTERED_ERROR</returnAuthMsg>"), "NOT_REGISTERED");
@@ -73,4 +73,13 @@ test("주말 카드: 예보가 없어도 일출·일몰·달은 보인다", asyn
   assert.match(el.innerHTML, /일출·일몰/);
   assert.match(el.innerHTML, /좋음/);
   assert.match(el.innerHTML, /KST 확인/);
+});
+
+test("미세먼지 시도 중앙값 대안·산불위험 행 해석", async () => {
+  const { airBySido, fireRow } = await import("../lib/conditions.mjs");
+  const s = airBySido({ A: { pm10: 20, pm25: 10, sido: "강원", at: "2026-10-19 13:00" }, B: { pm10: 60, pm25: 30, sido: "강원", at: "2026-10-19 14:00" }, C: { pm10: 90, pm25: 40, sido: "강원" } });
+  assert.deepEqual(s.강원, { pm10: 60, pm25: 30, grade: 2, stations: 3, at: "2026-10-19 14:00" });
+  assert.deepEqual(fireRow({ doname: "강원도", sigun: "강릉시", meanavg: "57", d1: "60", d2: "35", d3: "5", d4: "0", analdate: "2026-10-19 14" }),
+    { name: "강원도 강릉시", idx: 57, grade: "다소높음", at: "2026-10-19 14" });
+  assert.equal(fireRow({ resultMsg: "OK" }), null);
 });

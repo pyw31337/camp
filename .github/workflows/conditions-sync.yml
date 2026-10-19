@@ -61,6 +61,9 @@ jobs:
         run: node scripts/sync-conditions.mjs
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+          # PR 검증에서는 주말이 멀어도 단기예보를 격자 20곳만 불러 응답 형태를 확인한다.
+          CONDITIONS_SHORT_FORCE: ${{ github.event_name == 'pull_request' && '1' || '' }}
+          CONDITIONS_SHORT_MAX: ${{ github.event_name == 'pull_request' && '20' || '1800' }}
       - name: Keep the dry-run output (PR)
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4

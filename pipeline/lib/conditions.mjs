@@ -159,9 +159,19 @@ export function summarizeAir(items) {
   for (const it of items) {
     const pm10 = num(it.pm10Value), pm25 = num(it.pm25Value);
     if (!it.stationName || (pm10 == null && pm25 == null)) continue;
-    out[it.stationName] = { pm10, pm25, grade: airGrade(pm10, pm25), at: it.dataTime ?? null };
+    out[it.stationName] = { pm10, pm25, grade: airGrade(pm10, pm25), at: it.dataTime ?? null, sido: it.sidoName ?? null };
   }
   return out;
+}
+const median = (xs) => { const v = xs.filter((x) => x != null).sort((a, b) => a - b); return v.length ? v[Math.floor((v.length - 1) / 2)] : null; };
+/** 측정소 좌표(측정소정보 API)가 없을 때의 대안: 시도별 중앙값 */
+export function airBySido(stations) {
+  const by = {};
+  for (const s of Object.values(stations)) if (s.sido) (by[s.sido] ??= []).push(s);
+  return Object.fromEntries(Object.entries(by).map(([sido, list]) => {
+    const pm10 = median(list.map((x) => x.pm10)), pm25 = median(list.map((x) => x.pm25));
+    return [sido, { pm10, pm25, grade: airGrade(pm10, pm25), stations: list.length, at: list.map((x) => x.at).filter(Boolean).sort().at(-1) ?? null }];
+  }));
 }
 /** 조석 고·저조 → [{t:"HH:MM", type:"고조"|"저조", h:cm}] (응답 필드명이 다를 수 있어 넓게 찾는다) */
 export function summarizeTide(items) {
@@ -176,3 +186,14 @@ export function summarizeTide(items) {
 }
 /** 산불위험예보 지수 → 등급(산림청 4단계 구간) */
 export const fireGrade = (idx) => (idx == null ? null : idx >= 86 ? "매우높음" : idx >= 66 ? "높음" : idx >= 51 ? "다소높음" : "낮음");
+/** 산불위험예보 1행(문서: doname·meanavg·maxi·d1~d4 면적 비율·analdate) → {name, idx, grade, at} */
+export function fireRow(it) {
+  const name = Object.entries(it).filter(([k, v]) => typeof v === "string" && /^(doname|sido.*|sigun.*|sigungu.*|.*nm|.*name)$/i.test(k) && !/^(resultMsg|searchcd)$/i.test(k)).map(([, v]) => v.trim()).filter(Boolean).join(" ");
+  const idx = num(it.meanavg ?? it.meanAvg ?? it.maxi);
+  if (!name || idx == null) return null;
+  const share = [num(it.d1), num(it.d2), num(it.d3), num(it.d4)];
+  const LABEL = ["낮음", "다소높음", "높음", "매우높음"];
+  // 면적 비율이 있으면 10% 이상을 차지하는 가장 높은 등급, 없으면 평균 지수 구간
+  const byShare = share.every((x) => x != null) ? LABEL[[3, 2, 1, 0].find((i) => share[i] >= 10) ?? 0] : null;
+  return { name, idx: Math.round(idx), grade: byShare ?? fireGrade(idx), at: it.analdate ?? null };
+}
