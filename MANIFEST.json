@@ -1,0 +1,14 @@
+{
+ "updated_at": "2026-11-14T15:01:35.289Z",
+ "run": "https://github.com/pyw31337/camp/actions/runs/43600658152",
+ "files": {
+  "out/campground-social.json.gz": {
+   "campgrounds": 7726,
+   "bytes": 35303793
+  },
+  "out/campground-web.json.gz": {
+   "campgrounds": 5319,
+   "bytes": 17657795
+  }
+ }
+}
