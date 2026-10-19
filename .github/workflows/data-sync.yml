@@ -270,7 +270,9 @@ jobs:
           NAVER_API_ENABLED: ${{ vars.NAVER_API_ENABLED }}
           NAVER_MONTHLY_CAP: ${{ vars.NAVER_MONTHLY_CAP }}
           NAVER_MENTION_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || (github.event_name == 'workflow_dispatch' && inputs.naver_mention_max_calls) || '8000' }}
-          BODY_MINUTES: ${{ github.event_name == 'pull_request' && '0' || '30' }}
+          # 검색 15분 + 본문 25분 < 단계 제한 50분: 끝까지 가서 out/campground-web.json을 써야 증분 발행·공유 브랜치에 실린다.
+          SEARCH_MINUTES: "15"
+          BODY_MINUTES: ${{ github.event_name == 'pull_request' && '0' || '25' }}
       - name: Save collected caches to the shared data branch (single commit, force push)
         # 수집 직후 바로 저장한다(뒤 단계가 실패해도 남게). 다른 에이전트 공유용: cache/*.json.gz(누적 캐시), out/*.json.gz(이번 결과), MANIFEST.json
         if: always() && github.event_name != 'pull_request'
