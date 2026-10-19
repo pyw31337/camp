@@ -22,7 +22,8 @@ const kakao = existsSync(kakaoPath) ? JSON.parse(readFileSync(kakaoPath, "utf8")
 // 네이버 지역 검색에 업장이 등록한 링크(운영자 호스트일 때, registry/naver-places.json)를 웹 검색 후보보다 먼저 쓴다.
 const naverPath = join(root, "pipeline/registry/naver-places.json");
 const naver = existsSync(naverPath) ? JSON.parse(readFileSync(naverPath, "utf8")).campgrounds ?? {} : {};
-const discoveredOf = (c) => (naver[c.id]?.place?.link_is_operator ? naver[c.id].place.link : null) ?? kakao[c.id]?.homepage?.url ?? null;
+// 네이버 웹문서 검색으로 찾은 새 홈페이지(죽은 등록 주소 대체, discover-naver.mjs --web-homepage)도 후보에 넣는다.
+const discoveredOf = (c) => (naver[c.id]?.place?.link_is_operator ? naver[c.id].place.link : null) ?? kakao[c.id]?.homepage?.url ?? naver[c.id]?.web_homepage?.url ?? null;
 const flag = (k) => process.argv.includes(k);
 const arg = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : d; };
 const limit = Number(arg("--limit", 0)) || Infinity;
@@ -31,6 +32,8 @@ const concurrency = Number(arg("--concurrency", 12));
 const maxAgeDays = Number(arg("--max-age-days", 14));
 const RENDER = flag("--render");
 const RETRY_FAILED = flag("--retry-failed");
+// --ocr: 글이 거의 없는(요금표·이용안내가 이미지인) 운영자 페이지의 안내 이미지를 tesseract(kor)로 읽는다. 운영자 자체 이미지만.
+const OCR = flag("--ocr");
 // --out: 긴 수집 중에는 레지스트리 대신 다른 파일에 써 두고, 끝난 뒤 옮긴다(작업 트리가 계속 바뀌지 않게).
 const outPath = resolve(arg("--out", registryPath));
 // --since: 이 시각 이후 이미 다시 읽은 곳은 건너뛴다(중단된 수집 이어 하기).
@@ -50,7 +53,7 @@ function decode(buf, ctype) {
 }
 async function get(url) {
   const ctl = new AbortController();
-  const t = setTimeout(() => ctl.abort(), 12000);
+  const t = setTimeout(() => ctl.abort(), 20000); // 지자체·소규모 서버가 느린 곳이 많다(2026-10-19: 12초 → 20초)
   try {
     const r = await fetch(url, { headers: { "user-agent": UA, accept: "text/html,*/*;q=0.5", "accept-language": "ko" }, redirect: "follow", signal: ctl.signal });
     const ctype = r.headers.get("content-type") ?? "";
@@ -150,6 +153,53 @@ async function staticSite(start, rules) {
   return { ok: true, url: first.url, pages };
 }
 
+// ---------- 이미지 안내문 OCR(선택) ----------
+const OCR_HINT = /요금|가격|이용|안내|규정|규칙|공지|시설|사이트|배치|price|fee|charge|guide|info|rule|notice|use|sub|page|con|img_?\d/i;
+function guideImages(pages, max = 6) {
+  const out = [];
+  for (const p of pages) {
+    for (const m of String(p.html ?? "").matchAll(/<img\b[^>]*>/gi)) {
+      const tag = m[0];
+      const src = tag.match(/\bsrc\s*=\s*["']([^"']+)["']/i)?.[1];
+      if (!src || /\.(gif|svg)(\?|$)|logo|icon|btn|bullet|banner_?s|arrow|blank|spacer|sns|kakao|naver|facebook|insta/i.test(src)) continue;
+      const alt = tag.match(/\balt\s*=\s*["']([^"']*)["']/i)?.[1] ?? "";
+      let u; try { u = new URL(src, p.url).toString(); } catch { continue; }
+      if (!isOperatorHost(u) || out.some((x) => x.url === u)) continue;
+      out.push({ url: u, page: p.url, score: (OCR_HINT.test(`${alt} ${src}`) ? 2 : 0) + (/요금|가격|price|fee/i.test(`${alt} ${src}`) ? 2 : 0) });
+    }
+  }
+  return out.sort((a, b) => b.score - a.score).slice(0, max);
+}
+let tesseractOk = null;
+async function ocrImages(pages, rules) {
+  const { execFile } = await import("node:child_process");
+  const { writeFile, rm, mkdtemp } = await import("node:fs/promises");
+  const { tmpdir } = await import("node:os");
+  const run = (args) => new Promise((ok) => execFile("tesseract", args, { timeout: 60000, maxBuffer: 4e6 }, (e, out) => ok(e ? null : String(out))));
+  tesseractOk ??= (await run(["--version"])) !== null;
+  if (!tesseractOk) return [];
+  const dir = await mkdtemp(join(tmpdir(), "ocr-"));
+  const out = [];
+  try {
+    for (const img of guideImages(pages)) {
+      const u = new URL(img.url);
+      if (!robotsAllows(rules, u.pathname)) continue;
+      await sleep(1000);
+      try {
+        const r = await fetch(img.url, { headers: { "user-agent": UA }, signal: AbortSignal.timeout(20000) });
+        if (!r.ok || !/image\/(png|jpe?g|webp)/i.test(r.headers.get("content-type") ?? "")) continue;
+        const buf = Buffer.from(await r.arrayBuffer());
+        if (buf.length < 15000 || buf.length > 6e6) continue; // 아이콘·초대형 제외
+        const f = join(dir, `i${out.length}.img`);
+        await writeFile(f, buf);
+        const text = await run([f, "-", "-l", "kor+eng", "--psm", "6"]);
+        for (const s of relevantSentences(String(text ?? "").replace(/[|]/g, " "), 30)) if (s.length >= 6 && /[가-힣]{2}/.test(s)) out.push({ text: s, url: img.page, image: img.url, ocr: true });
+      } catch {}
+    }
+  } finally { await rm(dir, { recursive: true, force: true }); }
+  return out;
+}
+
 const snippetsOf = (pages) => {
   const out = [];
   for (const p of pages) for (const s of relevantSentences(p.text, 80)) if (!out.some((x) => x.text === s)) out.push({ text: s, url: p.url });
@@ -167,16 +217,22 @@ async function crawlOne(c) {
     const rules = await robotsFor(withProto(start)).catch(() => []);
     if (!robotsAllows(rules, new URL(withProto(start)).pathname)) { errors.push("ROBOTS_DISALLOWED"); continue; }
     let r = await staticSite(start, rules);
+    let rendered = null; // 렌더링한 페이지(이미지 태그가 자바스크립트로 그려지는 사이트의 OCR용)
     const thin = r.ok && snippetsOf(r.pages).length < 3;
     const retriable = !r.ok && /^(403|429|5\d\d|timeout|UND_ERR|render)/.test(String(r.error));
     if (RENDER && (thin || retriable)) {
       const rr = await within(120000, renderSite(r.ok ? r.url : withProto(start), rules), "render").catch((e) => ({ ok: false, error: `render:${e.message}` }));
       if (process.env.CRAWL_DEBUG) console.log("  render", start, rr.ok, rr.error ?? "", rr.ok ? snippetsOf(rr.pages).length : 0);
+      if (rr.ok) rendered = rr;
       if (rr.ok && snippetsOf(rr.pages).length > (r.ok ? snippetsOf(r.pages).length : 0)) { r = rr; renderedAny = true; }
     }
     if (!r.ok) { errors.push(String(r.error)); continue; }
     urls.push(...r.pages.map((p) => p.url));
     for (const s of snippetsOf(r.pages)) if (!all.some((x) => x.text === s.text)) all.push(s);
+    if (OCR && all.length < 8) {
+      const o = await within(180000, ocrImages([...r.pages, ...(rendered?.pages ?? [])], rules), "ocr").catch(() => []);
+      for (const s of o) if (!all.some((x) => x.text === s.text)) all.push(s);
+    }
   }
   if (!urls.length) return { status: errors.includes("ROBOTS_DISALLOWED") ? "ROBOTS_DISALLOWED" : errors.some((e) => /platform_redirect/.test(e)) ? "REDIRECTED_TO_PLATFORM" : "FETCH_FAILED", url: withProto(uniq[0]), checked_at, error: errors.join(",") || null };
   const discovered = Boolean(discoveredOf(c) && uniq.includes(discoveredOf(c))) || undefined;
@@ -193,7 +249,10 @@ const fresh = (r) => r?.checked_at && Date.now() - Date.parse(r.checked_at) < ma
 const retryable = (r) => RETRY_FAILED && r && (r.status === "NO_RELEVANT_TEXT" || r.status === "FETCH_FAILED" || r.status === "ERROR" || (r.status === "OK" && (r.snippets?.length ?? 0) < 8));
 // 시작 주소: 고캠핑 등록 홈페이지·예약 URL(운영자 호스트) + 카카오 발굴 홈페이지(등록 사이트가 없거나 지난 실행에서 죽은 곳)
 function startsOf(c) {
-  const own = [c.homepage, c.booking?.url].filter((u) => u && isOperatorHost(u) && !isClosedHost(u));
+  // 지자체·공단 예약 사이트(공공 운영자)와 자체 홈페이지 채널도 시작 주소로 쓴다(2026-10-19).
+  // 여러 캠핑장이 같은 첫 화면을 쓰는 통합 포털(숲나들e·국립공원 예약)은 isOperatorHost에서 걸러진다.
+  const channels = (c.booking?.channels ?? []).filter((ch) => ["public-site", "homepage"].includes(ch.platform_id)).map((ch) => ch.url);
+  const own = [...new Set([c.homepage, c.booking?.url, ...channels])].filter((u) => u && isOperatorHost(u) && !isClosedHost(u));
   const dead = ["FETCH_FAILED", "SERVICE_CLOSED", "NO_OPERATOR_SITE"].includes(prev.campgrounds[c.id]?.status);
   const found = discoveredOf(c);
   return found && (!own.length || dead) ? [...own, found] : own;

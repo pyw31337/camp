@@ -75,8 +75,14 @@ jobs:
           git commit -m "chore(data): refresh Kakao·Naver place matches"
           git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"
           git push
+      - name: Install Korean OCR (tesseract) for image-only guide pages
+        # 요금표·이용안내가 이미지뿐인 운영자 페이지를 읽는다(운영자 자체 이미지, robots 준수). 실패해도 OCR만 빠진다.
+        continue-on-error: true
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq tesseract-ocr tesseract-ocr-kor >/dev/null && tesseract --list-langs
       - name: Read operator homepages
-        run: node scripts/crawl-operator-sites.mjs --concurrency 10 --render --retry-failed --max-age-days "${{ github.event.inputs.max_age_days || '14' }}"
+        # 2026-10-19: 공공 예약 사이트(지자체·공단) 채널도 시작 주소, 타임아웃 20초, 글이 적은 곳은 이미지 OCR(--ocr),
+        #             죽은 주소는 네이버 웹문서 검색으로 찾은 새 홈페이지(discover-naver)로 다시 시도한다.
+        run: node scripts/crawl-operator-sites.mjs --concurrency 10 --render --retry-failed --ocr --max-age-days "${{ github.event.inputs.max_age_days || '14' }}"
       - name: Commit refreshed snippets
         # 읽기가 중간에 실패·취소돼도 그때까지 저장된 문장은 남긴다(크롤러는 25곳마다 파일에 저장).
         if: always()

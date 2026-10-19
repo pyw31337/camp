@@ -8,7 +8,9 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { LOCAL_PATHS, localUrl, matchNaver, naverGet, queryOf } from "../lib/naver-discovery.mjs";
+import { LOCAL_PATHS, NAVER_HUB_BASE, localUrl, matchNaver, naverGet, queryOf } from "../lib/naver-discovery.mjs";
+import { isClosedHost, isOperatorHost } from "../lib/operator-site.mjs";
+import { distinctiveTokens } from "../lib/social-search.mjs";
 import { checkFreeTier, DEFAULT_MONTHLY_CAP, monthKey, recordUsage, remainingBudget } from "../lib/naver-guard.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
@@ -101,6 +103,42 @@ function save() {
     campgrounds: store,
   }, null, 0)}\n`);
 }
+// ── 웹문서 검색으로 새 홈페이지 찾기(2026-10-19) ─────────────────────────
+// 등록 홈페이지가 죽었거나(도메인 만료·접속 불가) 없는 곳: “캠핑장명 시군구 캠핑장” 웹문서 결과 중
+// 운영자 호스트이고 제목·요약에 캠핑장 고유어가 있는 첫 주소를 후보로 둔다. 실제 운영자 사이트인지는
+// crawl-operator-sites가 읽은 뒤 validatesAsOperatorSite로 다시 확인한다(아니면 DISCOVERED_NOT_OPERATOR).
+const sitesPath = join(root, "pipeline/registry/operator-site-snippets.json");
+const sites = existsSync(sitesPath) ? JSON.parse(readFileSync(sitesPath, "utf8")).campgrounds ?? {} : {};
+const WEB_PATHS = ["/search/v1/webkr", "/search/v1/webkr.json", "/v1/search/webkr.json"];
+const kakaoReg = (() => { const p = join(root, "pipeline/registry/kakao-places.json"); return existsSync(p) ? JSON.parse(readFileSync(p, "utf8")).campgrounds ?? {} : {}; })();
+const needsHome = (c) => {
+  const st = sites[c.id]?.status;
+  const dead = !st || ["FETCH_FAILED", "NO_OPERATOR_SITE", "SERVICE_CLOSED", "DISCOVERED_NOT_OPERATOR"].includes(st);
+  const hasLead = store[c.id]?.place?.link_is_operator || kakaoReg[c.id]?.homepage?.url;
+  const tried = store[c.id]?.web_homepage_checked_at && Date.now() - Date.parse(store[c.id].web_homepage_checked_at) < 30 * 864e5;
+  return dead && !hasLead && !tried && (!c.homepage || st === "FETCH_FAILED" || st === "SERVICE_CLOSED");
+};
+let webPath = null, webDone = 0, webFound = 0;
+const webQueue = camps.filter((c) => c.name && (!only || only.has(String(c.id))) && needsHome(c));
+const WEB_MAX = Math.min(Number(process.env.NAVER_WEB_HOME_MAX ?? 1500), MAX_CALLS - calls);
+for (const p of WEB_PATHS) { if (WEB_MAX <= 0 || !webQueue.length) break; try { calls++; await naverGet(`${NAVER_HUB_BASE}${p}?${new URLSearchParams({ query: queryOf(webQueue[0]), display: "1" })}`, { id, secret }); webPath = p; break; } catch (e) { if (e.code === "BILLING") { stop = "BILLING"; break; } } }
+for (const c of webPath ? webQueue : []) {
+  if (webDone >= WEB_MAX || stop) break;
+  try {
+    calls++; webDone++;
+    const items = await naverGet(`${NAVER_HUB_BASE}${webPath}?${new URLSearchParams({ query: `${queryOf(c)} 캠핑장`, display: "10" })}`, { id, secret });
+    const toks = distinctiveTokens(c.name, c.sigungu).map((t) => t.replace(/\s+/g, ""));
+    const hit = items.map((it) => ({ url: it.link, text: `${it.title} ${it.description}`.replace(/<[^>]+>/g, "").replace(/\s+/g, "") }))
+      .find((x) => /^https?:\/\//.test(x.url ?? "") && isOperatorHost(x.url) && !isClosedHost(x.url) && toks.length && toks.every((t) => x.text.toLowerCase().includes(t.toLowerCase())));
+    store[c.id] = { ...(store[c.id] ?? { checked_at: null, query: queryOf(c), place: null }), web_homepage_checked_at: new Date().toISOString(), ...(hit ? { web_homepage: { url: hit.url, via: "naver_webkr" } } : {}) };
+    if (hit) webFound++;
+  } catch (e) {
+    if (e.code === "BILLING") { stop = `BILLING: ${e.message.slice(0, 160)}`; break; }
+    if (e.code === "RATE_LIMIT" || e.code === "AUTH") break;
+  }
+  await sleep(60);
+}
+console.log(`웹문서 홈페이지 찾기: 대상 ${webQueue.length}곳 · 검색 ${webDone} · 새 후보 ${webFound}`);
 save();
 persistUsage();
 if (stop?.startsWith("BILLING")) console.log(`::error title=네이버 결제·요금 응답(즉시 중단)::${stop}`);
