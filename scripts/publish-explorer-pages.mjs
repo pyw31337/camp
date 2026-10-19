@@ -4,6 +4,7 @@
 // KAKAO_JS_KEY: 브라우저에 노출되는 지도 키(카카오 개발자 콘솔의 도메인 제한으로 보호). 없으면 지도 없이 목록만.
 import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
+import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
@@ -61,7 +62,7 @@ const [renewalIndex, renewalCss, renewalApp] = await Promise.all([
 // 1. 루트 메인 화면(https://pyw31337.github.io/camp/): 어떤 리다이렉트도 없이 즉시 열리는 메인 앱 셸
 const rootIndex = renewalIndex.replace(
   "</head>",
-  `<link rel="manifest" href="./manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="kakao-js-key" content="${kakaoKey}"><meta name="supabase-url" content="${supabaseUrl}"><meta name="supabase-anon-key" content="${supabaseAnonKey}"></head>`
+  `<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="kakao-js-key" content="${kakaoKey}"><meta name="supabase-url" content="${supabaseUrl}"><meta name="supabase-anon-key" content="${supabaseAnonKey}"></head>`
 );
 const rootCss = renewalCss.replaceAll('url("../images/', 'url("./images/');
 await mkdir(rootOut, { recursive: true });
@@ -80,8 +81,11 @@ const exploreIndex = renewalIndex
   .replace("<head>", `<head>\n    ${exploreRedirectScript}`)
   .replace(
     "</head>",
-    `<link rel="manifest" href="../manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="kakao-js-key" content="${kakaoKey}"><meta name="supabase-url" content="${supabaseUrl}"><meta name="supabase-anon-key" content="${supabaseAnonKey}"></head>`
-  );
+    `<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="kakao-js-key" content="${kakaoKey}"><meta name="supabase-url" content="${supabaseUrl}"><meta name="supabase-anon-key" content="${supabaseAnonKey}"></head>`
+  )
+  .replaceAll('href="./manifest.webmanifest"', 'href="../manifest.webmanifest"')
+  .replaceAll('href="./favicon.svg"', 'href="../favicon.svg"')
+  .replaceAll('href="./images/', 'href="../images/');
 
 await mkdir(out, { recursive: true });
 await writeFile(`${out}index.html`, exploreIndex);
@@ -89,6 +93,24 @@ await writeFile(`${out}style.css`, renewalCss);
 await writeFile(`${out}app.js`, renewalApp);
 await mkdir(`${out}data`, { recursive: true });
 await cp(`${root}design/renewal/data/photos.json`, `${out}data/photos.json`);
+
+// 브랜드 자산(파비콘, PWA 아이콘, 오픈그래프 배너 이미지)을 대상 디렉토리에 동기화
+const copyBrandImages = async (destDir) => {
+  const imgDest = `${destDir}images/`;
+  await mkdir(imgDest, { recursive: true });
+  for (const f of ["og-image.png", "og-image.webp", "apple-touch-icon.png", "icon-192.png", "icon-512.png"]) {
+    const src = `${root}camping-atlas/public/images/${f}`;
+    const dst = `${imgDest}${f}`;
+    if (existsSync(src) && resolve(src) !== resolve(dst)) await cp(src, dst);
+  }
+  for (const f of ["favicon.svg", "favicon.png", "manifest.webmanifest"]) {
+    const src = `${root}camping-atlas/public/${f}`;
+    const dst = `${destDir}${f}`;
+    if (existsSync(src) && resolve(src) !== resolve(dst)) await cp(src, dst);
+  }
+};
+await copyBrandImages(rootOut);
+await copyBrandImages(out);
 
 // 보조 주소도 독립된 옛 UI를 만들지 않고, 실제 A 포스터 앱의 해시 화면으로 보낸다.
 const routePage = (title, route) => `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${title} · 모여라 캠핑</title><meta http-equiv="refresh" content="0; url=../${route}"><script>location.replace(${JSON.stringify(`../${route}`)})</script></head><body><a href="../${route}">${title} 보기</a></body></html>`;
