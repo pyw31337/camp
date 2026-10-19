@@ -428,7 +428,22 @@ document.addEventListener("click", (e) => {
 });
 function syncCompare() { $$("[data-compare-count]").forEach((x) => { x.textContent = S.saved.length; x.hidden = !S.saved.length; }); }
 
+function presetOn(i) { const v = PRESETS[i][1]; return Object.entries(v).every(([k, x]) => (Array.isArray(x) ? x.every((y) => S.cond[k].includes(y)) : S.cond[k] === x)); }
+function syncCondUi() {
+  $$("[data-cond-label]").forEach((x) => (x.textContent = condSummary()));
+  $$("[data-preset]").forEach((b) => b.setAttribute("aria-pressed", String(presetOn(Number(b.dataset.preset)))));
+}
 document.addEventListener("click", (e) => {
+  if (e.target.closest("[data-open-cond]")) { if (!location.hash.startsWith("#/list")) S.onCondApply = syncCondUi; condSheet(); return; }
+  const pr = e.target.closest("[data-preset]");
+  if (pr) {
+    const v = PRESETS[Number(pr.dataset.preset)][1], on = presetOn(Number(pr.dataset.preset));
+    for (const [k, x] of Object.entries(v)) {
+      if (Array.isArray(x)) S.cond[k] = on ? S.cond[k].filter((y) => !x.includes(y)) : [...new Set([...S.cond[k], ...x])];
+      else S.cond[k] = on ? (typeof x === "boolean" ? false : 0) : x;
+    }
+    syncCondUi(); return;
+  }
   if (e.target.closest("[data-open=date]")) {
     const input = $("[data-date-input]");
     if (input) { input.value = S.stay; $("#date-dialog").showModal(); }
@@ -480,8 +495,9 @@ function homeView() {
       <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div><form class="finder-form" role="search" data-search>
         <label class="finder-field finder-destination"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
         <button class="finder-field finder-static" type="button" data-open="date"><small>언제</small><b data-stay-label>${esc(stayLabel())}</b></button>
+        <button class="finder-field finder-static finder-cond" type="button" data-open-cond><small>조건</small><b data-cond-label>${esc(condSummary())}</b></button>
         <button class="finder-go" type="submit">${ic("search")}<span>찾기</span></button>
-      </form></div>
+      </form><div class="rail chips finder-presets" aria-label="자주 찾는 조건">${PRESETS.map(([l], i) => `<button type="button" class="chip" data-preset="${i}" aria-pressed="${presetOn(i)}">${esc(l)}</button>`).join("")}</div></div>
     </div>
   </section>
 
@@ -580,6 +596,150 @@ function moreResults() {
   $("[data-more]").hidden = list.length <= S.shown;
   initCarousels(grid);
 }
+// ── 조건 검색(히어로·목록 공통, 소유자 2026-10-19) ─────────────────
+// 키워드 대신 조건을 조합한다: 지역 여러 곳 · 시군 주변 반경 · 상품(글램핑·카라반 등, 하나라도) · 반려견 · 전기 W · 사이트 크기 · 장작 · 텐트 옆 주차 · 1박 요금.
+// 값을 모르는 곳은 그 조건으로 걸러지지 않는다(“없음”으로 보지 않음) — 조건을 켜면 근거가 있는 곳만 남는다.
+const SIDOS = ["서울", "경기", "인천", "강원", "충북", "충남", "대전", "세종", "전북", "전남", "광주", "경북", "경남", "대구", "부산", "울산", "제주"];
+const maxSide = (c) => (c._ms ??= Math.max(0, ...(c.field_conditions?.site_size?.groups ?? []).map((g) => Math.max(Number(g.width_m) || 0, Number(g.depth_m) || 0))));
+const wattsOf = (c) => (c._w ??= facts(c).power?.w ?? 0);
+const hasPower = (c) => (c._pw ??= Boolean(facts(c).power?.ok));
+const petOk = (c) => (/가능/.test(c.pets ?? "") && !/불가/.test(c.pets ?? "")) || Boolean(c.pf?.t?.includes("PET_OK"));
+const dayUse = (c) => (c.types ?? []).includes("캠프닉") || /캠프닉|캠크닉|데이\s*캠핑|당일\s*(캠핑|이용)/.test(`${c.name} ${(c.amenities ?? []).join(" ")} ${c.pf?.s ?? ""}`);
+// 상품 조건은 등록·운영자 근거가 있는 타입만(후기 언급 m은 “있다”의 근거로 약하다).
+const hasFirmType = (c, k) => (c.st ?? []).some((t) => t[0] === k && t[2] !== "m");
+const KINDS = [
+  ["GLAMPING", "글램핑", (c) => (c.types ?? []).includes("글램핑") || hasFirmType(c, "GLAMPING")],
+  ["CARAVAN", "카라반", (c) => (c.types ?? []).includes("카라반") || hasFirmType(c, "CARAVAN")],
+  ["AUTO", "오토캠핑", (c) => (c.types ?? []).includes("자동차야영장") || hasFirmType(c, "AUTO")],
+  ["GENERAL", "일반 사이트", (c) => (c.types ?? []).includes("일반야영장") || hasFirmType(c, "PITCH")],
+  ["HOUSE", "숙박동·방갈로", (c) => hasFirmType(c, "HOUSE")],
+  ["RV", "캠핑카·트레일러", (c) => hasFirmType(c, "RV") || c.trailer === true],
+  ["CAR_CAMP", "차박", (c) => hasFirmType(c, "CAR_CAMP")],
+  ["DAY", "당일 캠크닉", dayUse],
+];
+const KIND = Object.fromEntries(KINDS.map(([k, l, t]) => [k, { label: l, test: t }]));
+const W_OPTS = [[0, "상관없음"], [1, "전기 있음"], [600, "600W 이상"], [1100, "1,100W 이상"]];
+const SIZE_OPTS = [[0, "상관없음"], [6, "6m 이상"], [8, "8m 이상"], [10, "10m 이상"]];
+const R_OPTS = [10, 20, 30];
+const emptyCond = () => ({ sido: [], kind: [], pet: false, w: 0, size: 0, fire: false, park: false, near: "", r: 20 });
+S.cond = emptyCond();
+const km2 = (a, b) => { const R = 6371, dLa = ((b.lat - a.lat) * Math.PI) / 180, dLo = ((b.lng - a.lng) * Math.PI) / 180; const x = Math.sin(dLa / 2) ** 2 + Math.cos((a.lat * Math.PI) / 180) * Math.cos((b.lat * Math.PI) / 180) * Math.sin(dLo / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(x)); };
+// “파주 일대”: 그 시·군 캠핑장 좌표의 가운데에서 반경 r km
+function nearCenter(name) {
+  const q = String(name ?? "").trim().replace(/(시|군|구)$/, "");
+  if (q.length < 2) return null;
+  const pts = S.camps.filter((c) => c.lat && String(c.sigungu ?? "").replace(/(시|군|구)$/, "").startsWith(q));
+  if (!pts.length) return null;
+  return { lat: pts.reduce((a, c) => a + c.lat, 0) / pts.length, lng: pts.reduce((a, c) => a + c.lng, 0) / pts.length, label: pts[0].sigungu };
+}
+function condTest(c, k = S.cond, skip = null) {
+  if (skip !== "sido" && k.sido.length && !k.sido.includes(sidoShort(c.sido))) return false;
+  if (skip !== "near" && k.near) { const ctr = k._ctr; if (!ctr || !c.lat || km2(ctr, c) > k.r) return false; }
+  if (skip !== "kind" && k.kind.length && !k.kind.some((x) => KIND[x]?.test(c))) return false;
+  if (skip !== "pet" && k.pet && !petOk(c)) return false;
+  if (skip !== "w" && k.w === 1 && !hasPower(c)) return false;
+  if (skip !== "w" && k.w > 1 && !(wattsOf(c) >= k.w)) return false;
+  if (skip !== "size" && k.size && !(maxSide(c) >= k.size)) return false;
+  if (skip !== "fire" && k.fire && facts(c).fire?.kind !== "FIREWOOD_OK") return false;
+  if (skip !== "park" && k.park && facts(c).park?.ok !== true) return false;
+  return true;
+}
+const condActive = (k = S.cond) => k.sido.length + k.kind.length + (k.pet ? 1 : 0) + (k.w ? 1 : 0) + (k.size ? 1 : 0) + (k.fire ? 1 : 0) + (k.park ? 1 : 0) + (k.near ? 1 : 0);
+function condChips(k = S.cond) {
+  const out = [];
+  if (k.near) out.push(["near", `${k._ctr?.label ?? k.near} ${k.r}km 안`]);
+  for (const x of k.sido) out.push([`sido:${x}`, x]);
+  for (const x of k.kind) out.push([`kind:${x}`, KIND[x]?.label ?? x]);
+  if (k.pet) out.push(["pet", "반려견 동반"]);
+  if (k.w) out.push(["w", W_OPTS.find(([v]) => v === k.w)?.[1] ?? ""]);
+  if (k.size) out.push(["size", `사이트 ${k.size}m 이상`]);
+  if (k.fire) out.push(["fire", "장작 가능"]);
+  if (k.park) out.push(["park", "텐트 옆 주차"]);
+  return out;
+}
+function condSummary() { const ch = condChips(); return ch.length ? (ch.length > 2 ? `${ch[0][1]} · ${ch[1][1]} 외 ${ch.length - 2}` : ch.map((x) => x[1]).join(" · ")) : "조건 추가"; }
+function condToParams(p, k = S.cond) {
+  if (k.sido.length) p.set("sido", k.sido.join(","));
+  if (k.kind.length) p.set("kind", k.kind.join(","));
+  if (k.pet) p.set("pet", "1");
+  if (k.w) p.set("w", String(k.w));
+  if (k.size) p.set("size", String(k.size));
+  if (k.fire) p.set("fire", "1");
+  if (k.park) p.set("park", "1");
+  if (k.near) { p.set("near", k.near); p.set("r", String(k.r)); }
+  if (S.feeBand) p.set("fee", S.feeBand);
+}
+function condFromParams(q) {
+  const k = emptyCond(), list = (n) => (q.get(n) ?? "").split(",").filter(Boolean);
+  k.sido = list("sido").filter((x) => SIDOS.includes(x));
+  k.kind = list("kind").filter((x) => KIND[x]);
+  k.pet = q.get("pet") === "1"; k.fire = q.get("fire") === "1"; k.park = q.get("park") === "1";
+  k.w = W_OPTS.some(([v]) => v === Number(q.get("w"))) ? Number(q.get("w")) : 0;
+  k.size = SIZE_OPTS.some(([v]) => v === Number(q.get("size"))) ? Number(q.get("size")) : 0;
+  k.near = (q.get("near") ?? "").slice(0, 20); k.r = R_OPTS.includes(Number(q.get("r"))) ? Number(q.get("r")) : 20;
+  k._ctr = k.near ? nearCenter(k.near) : null;
+  return k;
+}
+// 조건 시트: 고르는 동안 각 선택지 옆에 “지금 다른 조건과 겹치는 곳 수”를 보인다.
+function condSheet() {
+  let dlg = $("#cond-dialog");
+  if (!dlg) {
+    dlg = document.createElement("dialog");
+    dlg.className = "sheet cond-sheet"; dlg.id = "cond-dialog"; dlg.setAttribute("aria-labelledby", "cond-title");
+    document.body.append(dlg);
+    dlg.addEventListener("click", (e) => {
+      if (e.target === dlg) { dlg.close(); return; }
+      const b = e.target.closest("[data-c]");
+      if (!b) return;
+      const [key, val] = b.dataset.c.split(":"), k = S.condDraft;
+      if (key === "sido" || key === "kind") k[key] = k[key].includes(val) ? k[key].filter((x) => x !== val) : [...k[key], val];
+      else if (key === "pet" || key === "fire" || key === "park") k[key] = !k[key];
+      else if (key === "w" || key === "size" || key === "r") k[key] = Number(val);
+      else if (key === "fee") S.feeDraft = S.feeDraft === val ? "" : val;
+      else if (key === "reset") { S.condDraft = emptyCond(); S.feeDraft = ""; }
+      else if (key === "apply") { S.cond = S.condDraft; S.feeBand = S.feeDraft; store.set("mc-feeband", S.feeBand); dlg.close(); S.onCondApply?.(); return; }
+      else if (key === "close") { dlg.close(); return; }
+      paintCondSheet();
+    });
+    dlg.addEventListener("input", (e) => { if (e.target.matches("[data-near]")) { S.condDraft.near = e.target.value.trim(); S.condDraft._ctr = nearCenter(S.condDraft.near); clearTimeout(S._nt); S._nt = setTimeout(() => { S._nearFocus = true; paintCondSheet(); S._nearFocus = false; }, 350); } });
+  }
+  S.condDraft = { ...S.cond, sido: [...S.cond.sido], kind: [...S.cond.kind] };
+  S.feeDraft = S.feeBand ?? "";
+  paintCondSheet();
+  dlg.showModal();
+}
+function paintCondSheet() {
+  const dlg = $("#cond-dialog"), k = S.condDraft;
+  const base = S.camps;
+  const feeOk = (c, fb) => { const mn = campFeeMin(c), mx = campFeeMax(c); return !fb || (fb === "u3" ? mn && mn <= 30000 : fb === "3to5" ? mn && mn <= 50000 && (mx == null || mx >= 30000) : fb === "5to7" ? mn && mn <= 70000 && (mx == null || mx >= 50000) : mn && (mn >= 70000 || (mx && mx >= 70000))); };
+  const pool = (skip) => base.filter((c) => condTest(c, k, skip) && (skip === "fee" || feeOk(c, S.feeDraft)));
+  const count = (skip, test) => pool(skip).reduce((n, c) => n + (test(c) ? 1 : 0), 0);
+  const chip = (key, val, label, on, n) => `<button type="button" class="chip" data-c="${key}:${val}" aria-pressed="${on}"${n === 0 && !on ? " disabled" : ""}>${esc(label)}${n != null ? ` <i>${fmt(n)}</i>` : ""}</button>`;
+  const total = pool(null).length;
+  const pSido = pool("sido"), pKind = pool("kind");
+  dlg.innerHTML = `<div class="sheet-in cond-in">
+    <div class="sheet-head"><h2 id="cond-title">조건으로 찾기</h2><button type="button" class="icon-btn sheet-close" data-c="close" aria-label="닫기">${ic("close")}</button></div>
+    <div class="cond-body">
+      <section><h3>지역 <small>여러 곳 선택</small></h3><div class="cond-chips">${SIDOS.map((x) => chip("sido", x, x, k.sido.includes(x), pSido.filter((c) => sidoShort(c.sido) === x).length)).join("")}</div></section>
+      <section><h3>주변으로 <small>시·군 이름과 반경</small></h3><div class="cond-near"><input type="search" data-near value="${esc(k.near)}" placeholder="예: 파주, 가평, 양평" aria-label="시·군 이름" autocomplete="off">${R_OPTS.map((r) => chip("r", r, `${r}km`, k.r === r)).join("")}</div>${k.near ? `<p class="cond-hint">${k._ctr ? `${esc(k._ctr.label)} 가운데에서 ${k.r}km 안` : "그 이름의 시·군을 찾지 못했어요"}</p>` : ""}</section>
+      <section><h3>상품·이용 <small>하나라도 있으면</small></h3><div class="cond-chips">${KINDS.map(([x, l, t]) => chip("kind", x, l, k.kind.includes(x), pKind.filter(t).length)).join("")}</div></section>
+      <section><h3>반려견</h3><div class="cond-chips">${chip("pet", 1, "동반 가능", k.pet, count("pet", petOk))}</div></section>
+      <section><h3>전기 <small>W를 밝힌 곳만 W로 걸러져요</small></h3><div class="cond-chips">${W_OPTS.map(([v, l]) => chip("w", v, l, k.w === v, v ? count("w", (c) => (v === 1 ? hasPower(c) : wattsOf(c) >= v)) : null)).join("")}</div></section>
+      <section><h3>사이트 크기 <small>긴 변 기준 · 규격을 등록한 곳</small></h3><div class="cond-chips">${SIZE_OPTS.map(([v, l]) => chip("size", v, l, k.size === v, v ? count("size", (c) => maxSide(c) >= v) : null)).join("")}</div></section>
+      <section><h3>불멍·주차</h3><div class="cond-chips">${chip("fire", 1, "장작 가능", k.fire, count("fire", (c) => facts(c).fire?.kind === "FIREWOOD_OK"))}${chip("park", 1, "텐트 옆 주차", k.park, count("park", (c) => facts(c).park?.ok === true))}</div></section>
+      <section><h3>1박 요금</h3><div class="cond-chips">${[["u3", "~3만원"], ["3to5", "3~5만원"], ["5to7", "5~7만원"], ["o7", "7만원+"]].map(([v, l]) => chip("fee", v, l, S.feeDraft === v, count("fee", (c) => feeOk(c, v)))).join("")}</div></section>
+    </div>
+    <div class="cond-foot"><button type="button" class="btn ghost" data-c="reset">초기화</button><button type="button" class="btn primary wide" data-c="apply">${fmt(total)}곳 보기</button></div>
+  </div>`;
+  // 반경 입력 중에 다시 그리면 커서를 잃지 않게 되돌린다.
+  if (S._nearFocus) { const inp = $("[data-near]", dlg); inp?.focus(); inp?.setSelectionRange(inp.value.length, inp.value.length); }
+}
+// 히어로 아래 바로 쓰는 예시 조건(소유자 예시를 그대로 버튼으로)
+const PRESETS = [
+  ["반려견 동반", { pet: true }], ["1,100W 이상 전기", { w: 1100 }], ["사이트 8m 이상", { size: 8 }],
+  ["글램핑·카라반", { kind: ["GLAMPING", "CARAVAN"] }], ["당일 캠크닉", { kind: ["DAY"] }], ["장작 불멍", { fire: true }],
+];
+
 // ── 화면: 목록(히어로 검색 결과) ─────────────────────────────
 // 주소: #/list?area=강원&q=가평&d=2026-10-25. 히어로의 ‘찾기’가 이 화면으로 옮겨 온다(소유자 2026-10-19).
 // 한 줄 가로 행: 왼쪽 썸네일, 오른쪽 요금·입퇴실·매너타임·전기·주차·장작·반려견·사이트·주변·후기·날짜 상태.
@@ -589,13 +749,14 @@ const mdKst = (s) => new Date(s).toLocaleDateString("ko-KR", { month: "numeric",
 function listParams() {
   const q = new URLSearchParams(location.hash.split("?")[1] ?? "");
   const area = q.get("area");
-  return { area: area && AREAS.some(([k]) => k === area) ? area : "all", q: q.get("q") ?? "", d: /^\d{4}-\d{2}-\d{2}$/.test(q.get("d") ?? "") ? q.get("d") : "" };
+  return { area: area && AREAS.some(([k]) => k === area) ? area : "all", q: q.get("q") ?? "", d: /^\d{4}-\d{2}-\d{2}$/.test(q.get("d") ?? "") ? q.get("d") : "", cond: condFromParams(q), fee: q.get("fee") ?? "" };
 }
 function listHash({ area = S.area, q = S.q, d = S.stay } = {}) {
   const p = new URLSearchParams();
   if (area && area !== "all") p.set("area", area);
   if (q) p.set("q", q);
   if (d) p.set("d", d);
+  condToParams(p);
   const s = p.toString();
   return `#/list${s ? `?${s}` : ""}`;
 }
@@ -614,13 +775,20 @@ function dateStatus(c, d) {
   return { k: "unknown", rank: 3, icon: "calendar", txt: "운영 기간 미확인", sub: "예약처에서 확인" };
 }
 function listResults(p) {
-  const list = S.camps.filter((c) => matches(c)).map((c) => ({ c, st: dateStatus(c, p.d) }));
+  const list = S.camps.filter((c) => matches(c) && condTest(c)).map((c) => ({ c, st: dateStatus(c, p.d) }));
   const shown = S.showClosed ? list : list.filter((x) => x.st?.k !== "closed");
   const fee = (c) => campFeeMin(c) ?? Infinity;
   if (S.listSort === "fee") shown.sort((a, b) => fee(a.c) - fee(b.c) || rich(b.c) - rich(a.c));
   else if (S.listSort === "name") shown.sort((a, b) => nameOf(a.c).name.localeCompare(nameOf(b.c).name, "ko"));
   else shown.sort((a, b) => (a.st?.rank ?? 5) - (b.st?.rank ?? 5) || rich(b.c) - rich(a.c));
   return { shown, closed: list.length - list.filter((x) => x.st?.k !== "closed").length };
+}
+// 등록 규격 중 가장 큰 사이트(가로×세로). 조건 검색의 ‘사이트 크기’와 같은 값.
+function siteSizeText(c) {
+  const gs = (c.field_conditions?.site_size?.groups ?? []).filter((g) => g.width_m && g.depth_m);
+  if (!gs.length) return "";
+  const big = gs.reduce((a, g) => (Math.max(g.width_m, g.depth_m) > Math.max(a.width_m, a.depth_m) ? g : a));
+  return `사이트 최대 ${big.width_m}×${big.depth_m}m`;
 }
 function listFact(label, value, g) {
   return `<div class="lf${value ? "" : " none"}"><dt>${label}</dt><dd>${value ? `${esc(value)}${dot(g)}` : "–"}</dd></div>`;
@@ -647,7 +815,7 @@ function listRow({ c, st }, i = 0) {
         ${listFact("장작", f.fire?.v, f.fire?.g)}
         ${listFact("반려견", f.pet?.v, f.pet?.g)}
       </dl>
-      ${c.st?.length ? `<p class="lrow-line">${ic("tent")}<span>${esc(typeLine2(c))}</span></p>` : typeLine(c) ? `<p class="lrow-line">${ic("tent")}<span>${esc(typeLine(c))}</span></p>` : ""}
+      ${c.st?.length || typeLine(c) || siteSizeText(c) ? `<p class="lrow-line">${ic("tent")}<span>${esc([c.st?.length ? typeLine2(c) : typeLine(c), siteSizeText(c)].filter(Boolean).join(" · "))}</span></p>` : ""}
       ${nearLine(c) ? `<p class="lrow-line">${ic("store")}<span>${esc(nearLine(c))}</span></p>` : ""}
       ${r.total ? `<p class="lrow-line lrow-review">${ic("heart")}<span>후기 ${fmt(r.total)}건</span>${reviewTopics(r.rv.p, "good", "heart")}${reviewTopics(r.rv.c, "watch", "down")}</p>` : ""}
       <div class="lrow-cta">
@@ -659,10 +827,11 @@ function listRow({ c, st }, i = 0) {
 }
 function listView() {
   const p = listParams();
-  S.area = p.area; S.q = p.q; if (p.d) S.stay = p.d;
+  S.area = p.cond.sido.length ? "all" : p.area; S.q = p.q; if (p.d) S.stay = p.d;
+  S.cond = p.cond; if (["u3", "3to5", "5to7", "o7", ""].includes(p.fee)) S.feeBand = p.fee;
   // 목록 화면에 보이지 않는 조건(홈의 테마·사이트 타입·빠른 조건)은 적용하지 않는다 — 보이는 조건만 결과를 바꾼다.
   S.theme = null; S.stype = null; S.quick.clear();
-  const areaLabel = AREAS.find(([k]) => k === S.area)?.[1] ?? "전국";
+  const areaLabel = S.cond.near ? `${S.cond._ctr?.label ?? S.cond.near} 주변` : S.cond.sido.length ? S.cond.sido.join("·") : AREAS.find(([k]) => k === S.area)?.[1] ?? "전국";
   const feeChip = (k, l) => `<button type="button" class="chip fee-chip" data-fee-band="${k}" aria-pressed="${(S.feeBand ?? "") === k}">${l}</button>`;
   const dateTip = tip("<b>날짜로 보기</b><span>날짜별 빈자리는 각 예약처만 알고 있어 여기서 확정하지 않아요. 공식 접수 중(그날이 이용 기간에 포함된 공공 예약), 예약 오픈 예정, 운영 기간(고캠핑·운영자 안내의 운영 계절)만 판단하고, 운영 기간 밖인 곳은 기본으로 뺍니다. 예약 가능 여부는 각 행의 예약처에서 확인하세요.</span>", "날짜 판단 기준");
   return `<section class="list-page" aria-labelledby="list-t">
@@ -674,7 +843,8 @@ function listView() {
         <button class="finder-field finder-static" type="button" data-open="date"><small>언제</small><b data-stay-label>${esc(stayLabel())}</b></button>
         <button class="finder-go" type="submit">${ic("search")}<span>찾기</span></button>
       </form>
-      <div class="rail chips" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-list-area-k="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div>
+      <div class="rail chips" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-list-area-k="${k}" aria-pressed="${S.area === k && !S.cond.sido.length}">${l}</button>`).join("")}</div>
+      <div class="rail chips cond-active" aria-label="조건"><button type="button" class="chip cond-open" data-open-cond>${ic("list")}조건${condActive() ? ` <i>${condActive()}</i>` : ""}</button>${condChips().map(([key, l]) => `<button type="button" class="chip on" data-cond-x="${esc(key)}">${esc(l)} ${ic("close")}</button>`).join("")}</div>
       <div class="rail chips fee-bands" aria-label="1박 요금대"><span class="fee-band-lbl">1박 요금</span>${feeChip("", "전체")}${feeChip("u3", "~3만원")}${feeChip("3to5", "3~5만원")}${feeChip("5to7", "5~7만원")}${feeChip("o7", "7만원+")}</div>
       <div class="list-tools">
         <p class="list-date-note" data-list-note></p>
@@ -707,12 +877,15 @@ function bindList() {
   renderList();
   const v = $("#view");
   const go = () => { const h = listHash(); if (location.hash !== h) location.hash = h; else renderList(); };
+  S.onCondApply = go;
   const onSubmit = (e) => { const f = e.target.closest("[data-list-search]"); if (!f) return; e.preventDefault(); S.q = f.q.value.trim(); go(); };
   const onClick = (e) => {
     const a = e.target.closest("[data-list-area-k]");
-    if (a) { S.area = a.dataset.listAreaK; go(); return; }
+    if (a) { S.area = a.dataset.listAreaK; S.cond.sido = []; go(); return; }
+    const x = e.target.closest("[data-cond-x]");
+    if (x) { const [key, val] = x.dataset.condX.split(":"); if (val) S.cond[key] = S.cond[key].filter((v) => v !== val); else if (key === "near") S.cond.near = ""; else S.cond[key] = typeof S.cond[key] === "boolean" ? false : 0; go(); return; }
     const fb = e.target.closest("[data-fee-band]");
-    if (fb) { S.feeBand = fb.dataset.feeBand || ""; $$("[data-fee-band]").forEach((x) => x.setAttribute("aria-pressed", String(x === fb))); renderList(); return; }
+    if (fb) { S.feeBand = fb.dataset.feeBand || ""; go(); return; }
     if (e.target.closest("[data-list-closed]")) { S.showClosed = !S.showClosed; renderList(); return; }
     if (e.target.closest("[data-list-more]")) { S.listN += LIST_PAGE; renderList({ reset: false }); }
   };

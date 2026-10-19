@@ -157,7 +157,7 @@ body[data-view="home"] .top.is-glass { background: rgba(12,22,31,.68); backdrop-
 [data-v="b"] .finder .chip, [data-v="c"] .finder .chip { border: 1px solid var(--line); background: var(--paper); }
 .finder .chip[aria-pressed="true"] { background: var(--sel); color: var(--on-sel); }
 .mode-panel { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; max-width: 760px; min-width: 0; }
-.finder-form { display: grid; grid-template-columns: minmax(0,1.6fr) minmax(130px,.9fr) auto; gap: 6px; min-width: 0; }
+.finder-form { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(120px,.75fr) minmax(140px,1fr) auto; gap: 6px; min-width: 0; }
 .finder-field select { min-width: 0; padding: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font: inherit; font-size: .86rem; font-weight: 850; appearance: none; cursor: pointer; }
 .finder-field { min-width: 0; height: 60px; padding: 9px 13px; display: grid; align-content: center; gap: 2px; text-align: left; border-radius: 14px; background: var(--soft); color: var(--ink); }
 .finder-field small { color: var(--ink-3); font-size: .7rem; font-weight: 700; }
@@ -949,7 +949,7 @@ a.near { color: inherit; text-decoration: none; }
   .nearby-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .layout-links a, .source-list a { padding: 10px; }
   .gallery-head { display: none; }
-  .finder-go { grid-column: auto; }
+  .finder-go { grid-column: 1 / -1; } /* 날짜·조건 두 칸 아래 한 줄(2026-10-19 조건 칸 추가) */
   .tabbar { grid-template-columns: repeat(3, 1fr); }
   .filter-zone { margin-bottom: 24px; }
   .filter-zone-head, .filter-zone .type-filter, .filter-zone .fee-filter { padding-left: 12px; padding-right: 12px; }
@@ -1103,4 +1103,33 @@ a.near { color: inherit; text-decoration: none; }
   .lrow h3 { font-size: 1rem; }
   .lrow-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 10px; }
   .lrow-cta .btn { flex: 1; padding: 0 10px; }
+}
+
+/* ── 조건 검색: 히어로 ‘조건’ 칸·예시 조건 줄·조건 시트(소유자 2026-10-19) ── */
+.finder-cond b { color: var(--ink); }
+.finder-presets { gap: 6px; padding: 0 4px 2px; }
+.finder-presets .chip { height: 32px; padding: 0 12px; font-size: .82rem; box-shadow: none; background: var(--soft); }
+.finder-presets .chip[aria-pressed="true"] { background: var(--sel); color: var(--on-sel); }
+.cond-sheet { width: min(640px, calc(100vw - 32px)); max-height: min(88dvh, 860px); overflow: hidden; }
+.cond-sheet[open] { display: flex; }
+.cond-in { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 12px; width: 100%; max-height: inherit; }
+.cond-body { display: grid; gap: 18px; overflow: auto; overscroll-behavior: contain; padding-right: 2px; }
+.cond-body section { display: grid; gap: 8px; }
+.cond-body h3 { margin: 0; font-size: .95rem; font-weight: 850; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.cond-body h3 small { color: var(--ink-3); font-size: .74rem; font-weight: 600; }
+.cond-chips, .cond-near { display: flex; flex-wrap: wrap; gap: 6px; }
+.cond-chips .chip, .cond-near .chip { height: 34px; padding: 0 12px; font-size: .84rem; box-shadow: none; border: 1px solid var(--line); }
+.cond-chips .chip i, .cond-near .chip i { font-style: normal; color: var(--ink-3); font-weight: 600; font-size: .76rem; }
+.cond-chips .chip[aria-pressed="true"] i { color: inherit; opacity: .75; }
+.cond-chips .chip:disabled { opacity: .4; cursor: default; }
+.cond-near input { flex: 1 1 180px; min-width: 0; height: 34px; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--soft); color: var(--ink); font: inherit; font-size: .88rem; }
+.cond-hint { margin: 0; color: var(--ink-2); font-size: .8rem; }
+.cond-foot { display: flex; gap: 8px; padding-top: 4px; border-top: 1px solid var(--line); padding-block: 12px 2px; }
+.cond-active { gap: 6px; }
+.cond-active .chip.on { background: var(--sel); color: var(--on-sel); border-color: var(--sel); }
+.cond-active .chip .ic { width: 14px; height: 14px; }
+.cond-open i { font-style: normal; display: inline-grid; place-items: center; min-width: 18px; height: 18px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-size: .7rem; }
+@media (max-width: 759px) {
+  .cond-sheet { width: 100vw; max-height: 92dvh; }
+  .finder-presets .chip { height: 30px; font-size: .76rem; }
 }
