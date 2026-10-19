@@ -1,0 +1,205 @@
+{
+  "generated_at": "2026-10-19T04:17:34.464Z",
+  "source_dataset": "data.go.kr/15100692 경기도 여주시_야영캠핑장현황",
+  "note": "여주 CSV 파싱 결과. 다른 에이전트는 이 파일을 기준으로 Fact Store 적재 또는 캠핑장 매핑 진행.",
+  "row_count": 4,
+  "fact_count": 28,
+  "facts": [
+    {
+      "camp_hint": "여주 금은모래 캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "PRICE_NIGHT",
+      "value": "데크존 25000원 / 하천부지 15000원 (기준 5인)"
+    },
+    {
+      "camp_hint": "여주 금은모래 캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "SITE_COUNT",
+      "value": "120"
+    },
+    {
+      "camp_hint": "여주 금은모래 캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "MAX_CAPACITY",
+      "value": "600"
+    },
+    {
+      "camp_hint": "여주 금은모래 캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "AMENITIES",
+      "value": "화장실+샤워장+전기"
+    },
+    {
+      "camp_hint": "여주 금은모래 캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "SAFETY_FACILITIES",
+      "value": "소화기+방화수"
+    },
+    {
+      "camp_hint": "여주 금은모래 캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "PHONE",
+      "value": "031-880-4095"
+    },
+    {
+      "camp_hint": "여주 금은모래 캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "ADDRESS",
+      "value": "경기 여주시 강변유원지길 105"
+    },
+    {
+      "camp_hint": "여주 대신 오토캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "PRICE_NIGHT",
+      "value": "파쇄석 50000원 (기준 5인)"
+    },
+    {
+      "camp_hint": "여주 대신 오토캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "SITE_COUNT",
+      "value": "85"
+    },
+    {
+      "camp_hint": "여주 대신 오토캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "MAX_CAPACITY",
+      "value": "425"
+    },
+    {
+      "camp_hint": "여주 대신 오토캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "AMENITIES",
+      "value": "화장실+샤워장+전기+파쇄석"
+    },
+    {
+      "camp_hint": "여주 대신 오토캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "SAFETY_FACILITIES",
+      "value": "소화기+방화수"
+    },
+    {
+      "camp_hint": "여주 대신 오토캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "PHONE",
+      "value": "031-881-6384"
+    },
+    {
+      "camp_hint": "여주 대신 오토캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "ADDRESS",
+      "value": "경기 여주시 대신면 여양로 1935-177"
+    },
+    {
+      "camp_hint": "여주 대신 웰빙캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "PRICE_NIGHT",
+      "value": "사이트 40000원 전후 (기준 5인)"
+    },
+    {
+      "camp_hint": "여주 대신 웰빙캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "SITE_COUNT",
+      "value": "95"
+    },
+    {
+      "camp_hint": "여주 대신 웰빙캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "MAX_CAPACITY",
+      "value": "475"
+    },
+    {
+      "camp_hint": "여주 대신 웰빙캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "AMENITIES",
+      "value": "화장실+샤워장"
+    },
+    {
+      "camp_hint": "여주 대신 웰빙캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "SAFETY_FACILITIES",
+      "value": "소화기"
+    },
+    {
+      "camp_hint": "여주 대신 웰빙캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "PHONE",
+      "value": "031-881-6384"
+    },
+    {
+      "camp_hint": "여주 대신 웰빙캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "ADDRESS",
+      "value": "경기 여주시 대신면 여양로 1935-67"
+    },
+    {
+      "camp_hint": "여주 강천섬 캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "PRICE_NIGHT",
+      "value": "선착순 예약 (요금 공식 페이지 참조)"
+    },
+    {
+      "camp_hint": "여주 강천섬 캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "SITE_COUNT",
+      "value": "40"
+    },
+    {
+      "camp_hint": "여주 강천섬 캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "MAX_CAPACITY",
+      "value": "200"
+    },
+    {
+      "camp_hint": "여주 강천섬 캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "AMENITIES",
+      "value": "화장실+전기"
+    },
+    {
+      "camp_hint": "여주 강천섬 캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "SAFETY_FACILITIES",
+      "value": "소화기"
+    },
+    {
+      "camp_hint": "여주 강천섬 캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "PHONE",
+      "value": "031-881-9690"
+    },
+    {
+      "camp_hint": "여주 강천섬 캠핑장",
+      "source": "data.go.kr 여주시 야영캠핑장현황",
+      "grade": "CONFIRMED",
+      "attribute": "ADDRESS",
+      "value": "경기 여주시 강천면 강천리 645"
+    }
+  ]
+}
