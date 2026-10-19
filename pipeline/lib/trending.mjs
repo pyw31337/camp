@@ -99,8 +99,12 @@ export function spamReason(post) {
  * 글 하나가 어느 캠핑장 이야기인지. 반환: 캠핑장 id 배열(모음 글·애매하면 빈 배열)
  * @param {{title:string, snippet?:string, src?:string}} post
  */
+const CAMP_WORD = /(캠핑|글램핑|카라반|차박|야영|캠프|캠낚)/;
+const EVENT_WORD = /(축제|페스티벌|행사|박람회|총정리|가볼만한곳|가볼만한|코스|모음)/;
 export function matchPost(post, matcher) {
   const title = compact(post.title), body = compact(post.snippet);
+  // 제목에 이름이 없고 요약에만 나오면 ‘장소로 스친’ 글일 때가 많다(축제 안내·가볼만한곳 모음) → 제목이 캠핑 글일 때만 본다.
+  const titleCamp = CAMP_WORD.test(title) && !EVENT_WORD.test(title);
   const text = `${title}|${body}`;
   const hits = [];
   for (const r of matcher.rows) {
@@ -108,6 +112,8 @@ export function matchPost(post, matcher) {
     if (hits.some((h) => h.core.includes(r.core))) continue; // 더 긴 이름에 덮인 짧은 이름
     // 일반 검색어로 모은 글이라 이름 전체(또는 ‘핵심어+캠핑장’ 꼴)와 지역 단서가 함께 있어야 센다.
     if (!nameHit(text, r)) continue;
+    if (!title.includes(r.core) && !titleCamp) continue;
+    if (EVENT_WORD.test(title) && !CAMP_WORD.test(title)) continue; // 같은 이름의 축제·행사 글(“부안붉은노을축제”)
     const longUnique = r.core.length >= 4 && r.dup === 1 && !r.generic;
     if (!regionCue(text, r) && !(longUnique && r.sido.length >= 2 && text.includes(r.sido))) continue;
     if (r.needRegion) {
@@ -142,10 +148,10 @@ export function recencyWeight(date, today) {
  * 맞춘 글 묶음 → 순위. posts: [{key,url,title,date,platform,thumb,ids[]}]
  * prevRanks: {id: rank}(전날 순위) — 화살표용
  */
-export const MAX_PER_AUTHOR = 2; // 같은 블로그(작성자)가 한 캠핑장을 7일에 몇 번까지 세나(운영자 홍보·도배 막기)
+export const MAX_PER_AUTHOR = 2; // 같은 블로그·카페가 한 캠핑장을 7일에 몇 번까지 세나(운영자 홍보·도배 막기)
 export function authorKey(u) {
   const k = urlKey(u);
-  const m = k.match(/^blog\.naver\.com\/([^/]+)/) || k.match(/^([^/]+\.tistory\.com)/) || k.match(/^blog\.daum\.net\/([^/]+)/) || k.match(/^(youtube\.com\/@[^/]+)/);
+  const m = k.match(/^blog\.naver\.com\/([^/]+)/) || k.match(/^(cafe\.naver\.com\/[^/]+)/) || k.match(/^(cafe\.daum\.net\/[^/]+)/) || k.match(/^([^/]+\.tistory\.com)/) || k.match(/^blog\.daum\.net\/([^/]+)/) || k.match(/^(youtube\.com\/@[^/]+)/);
   return m ? m[1] : k;
 }
 export function rankCamps(posts, today, { prevRanks = {}, top = 30, samples = 3 } = {}) {

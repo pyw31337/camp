@@ -100,3 +100,11 @@ test("trending: 일반어 핵심어·지역 없는 글·작성자 도배는 세�
   const posts = Array.from({ length: 5 }, (_, i) => ({ ids: ["p1"], date: "2026-10-19", url: `https://blog.naver.com/owner/${i}`, platform: "naver", title: "t" }));
   assert.equal(rankCamps(posts, "2026-10-19")[0].week, 2);
 });
+
+test("trending: 요약에만 스친 축제·모음 글, 같은 카페 도배는 세지 않는다", () => {
+  const M = buildMatcher([{ id: "c1", name: "칠곡보 오토캠핑장", sido: "경상북도", sigungu: "칠곡군" }]);
+  assert.deepEqual(matchPost({ title: "칠곡낙동강평화축제 총정리", snippet: "주요 장소 칠곡보오토캠핑장 칠곡 왜관" }, M), []);
+  assert.deepEqual(matchPost({ title: "칠곡 캠핑 1박 후기", snippet: "칠곡보오토캠핑장 사이트 넓고 칠곡군" }, M), ["c1"]);
+  const posts = Array.from({ length: 4 }, (_, i) => ({ ids: ["c1"], date: "2026-10-19", url: `https://cafe.naver.com/owner/${i}`, platform: "naver", title: "t" }));
+  assert.equal(rankCamps(posts, "2026-10-19")[0].week, 2);
+});
