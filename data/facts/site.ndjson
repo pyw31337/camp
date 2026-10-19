@@ -1914,6 +1914,7 @@
 {"cid":"101236","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101237","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101240","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101243","attr":"SITE_SIZE","value":"4.5×3.5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101246","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"101246","attr":"SITE_SIZE","value":"8×7m","grade":"CONFIRMED","src":"gocamping","count":21}
 {"cid":"101246","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}

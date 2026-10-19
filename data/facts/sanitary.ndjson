@@ -2005,6 +2005,8 @@
 {"cid":"7218","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7218","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7222","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"7224","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://www.fourseasonscamp.com/","at":"2026-10-19T05:02:11.378Z","quote":"-과도한 전력 사용 또는 온수 사용을 자제해주세요."}
+{"cid":"7224","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"7224","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7224","attr":"TOILET_COUNT","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7226","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -3232,6 +3234,7 @@
 {"cid":"100467","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100467","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100467","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100470","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.kumhoresort.co.kr/main.asp","at":"2026-10-19T05:01:49.670Z","quote":"야외 온수풀 이용안내"}
 {"cid":"100470","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100470","attr":"SHOWER_COUNT","value":41,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100470","attr":"TOILET_COUNT","value":41,"grade":"CONFIRMED","src":"gocamping"}
@@ -3530,7 +3533,7 @@
 {"cid":"100635","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100635","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100635","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100636","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://highlark.co.kr/index.html","at":"2026-10-19T02:02:57.561Z","quote":"대형 파노라마 인피니티풀, 키즈풀, 키즈워터플레이플 등 3가지 미온수풀이 사계절 내내 운영하며 다양한 수영장"}
+{"cid":"100636","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://highlark.co.kr/index.html","at":"2026-10-19T04:51:56.909Z","quote":"대형 파노라마 인피니티풀, 키즈풀, 키즈워터플레이플 등 3가지 미온수풀이 사계절 내내 운영하며 다양한 수영장"}
 {"cid":"100636","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100636","attr":"SHOWER_COUNT","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100636","attr":"TOILET_COUNT","value":8,"grade":"CONFIRMED","src":"gocamping"}
@@ -4041,7 +4044,7 @@
 {"cid":"100932","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100933","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100935","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"100935","attr":"PRIVATE_BATHROOM","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.glamhi.co.kr/html/index.html","at":"2026-10-19T02:32:51.094Z","quote":"내부 개별 샤워실 & 화장실"}
+{"cid":"100935","attr":"PRIVATE_BATHROOM","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.glamhi.co.kr/html/index.html","at":"2026-10-19T04:59:02.463Z","quote":"내부 개별 샤워실 & 화장실"}
 {"cid":"100935","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100937","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100938","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -4656,6 +4659,7 @@
 {"cid":"101242","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101242","attr":"SHOWER_COUNT","value":9,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101242","attr":"TOILET_COUNT","value":9,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101243","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://dingdongdang.kr/dingdongdang","at":"2026-10-19T04:59:48.169Z","quote":"핑크(대형수영장미온수무료/대형개별운동장)"}
 {"cid":"101243","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101244","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101244","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -5004,6 +5008,7 @@
 {"cid":"101411","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101411","attr":"SHOWER_COUNT","value":30,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101411","attr":"TOILET_COUNT","value":3,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101412","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--989a5b18vjuk7pm99bn7sszfbsj.com/sub04.html","at":"2026-10-19T05:01:09.936Z","quote":"주차, 전기, 온수샤워 등제반편의시설 이용요금이 포함된 금액입니다."}
 {"cid":"101412","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101412","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101412","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}

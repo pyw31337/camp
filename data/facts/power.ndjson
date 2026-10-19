@@ -2027,6 +2027,7 @@
 {"cid":"101410","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101411","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101412","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101412","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--989a5b18vjuk7pm99bn7sszfbsj.com/sub04.html","at":"2026-10-19T05:01:09.936Z","quote":"※ 관광진흥법 규칙 별표7(야영장의 안전기준) :야영장에서의 전기사용은 안전인증을 받은 제품으로 총 사용량이 600와트를 초과해서는 안 된다.","text":"최대 600W"}
 {"cid":"101413","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101414","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101415","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
