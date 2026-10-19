@@ -76,7 +76,9 @@ test("주말 카드: 예보가 없어도 일출·일몰·달은 보인다", asyn
 });
 
 test("미세먼지 시도 중앙값 대안·산불위험 행 해석", async () => {
-  const { airBySido, fireRow } = await import("../lib/conditions.mjs");
+  const { airBySido, fireRow, sidoKey } = await import("../lib/conditions.mjs");
+  assert.equal(sidoKey({ 전남: {}, 서울: {} }, "광주"), "전남");
+  assert.equal(sidoKey({ 서울: {} }, "서울"), "서울");
   const s = airBySido({ A: { pm10: 20, pm25: 10, sido: "강원", at: "2026-10-19 13:00" }, B: { pm10: 60, pm25: 30, sido: "강원", at: "2026-10-19 14:00" }, C: { pm10: 90, pm25: 40, sido: "강원" } });
   assert.deepEqual(s.강원, { pm10: 60, pm25: 30, grade: 2, stations: 3, at: "2026-10-19 14:00" });
   assert.deepEqual(fireRow({ doname: "강원도", sigun: "강릉시", meanavg: "57", d1: "60", d2: "35", d3: "5", d4: "0", analdate: "2026-10-19 14" }),

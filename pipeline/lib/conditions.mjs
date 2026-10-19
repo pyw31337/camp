@@ -164,6 +164,14 @@ export function summarizeAir(items) {
   return out;
 }
 const median = (xs) => { const v = xs.filter((x) => x != null).sort((a, b) => a - b); return v.length ? v[Math.floor((v.length - 1) / 2)] : null; };
+// 2026년 전남·광주 통합(전남광주통합특별시)처럼 시도 이름이 원천마다 다를 수 있어 넓게 맞춘다.
+const SIDO_GROUP = [["광주", "전남"]];
+export function sidoKey(table, sido) {
+  if (!sido || !table) return null;
+  if (table[sido]) return sido;
+  const group = SIDO_GROUP.find((g) => g.includes(sido)) ?? [sido];
+  return Object.keys(table).find((k) => group.some((g) => k.includes(g))) ?? null;
+}
 /** 측정소 좌표(측정소정보 API)가 없을 때의 대안: 시도별 중앙값 */
 export function airBySido(stations) {
   const by = {};

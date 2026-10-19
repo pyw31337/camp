@@ -6,7 +6,7 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
-import { airBySido, apiProblem, fireRow, itemsOf, midTmFc, shortBase, summarizeAir, summarizeMid, summarizeShort, summarizeTide, upcomingWeekend } from "../lib/conditions.mjs";
+import { airBySido, apiProblem, sidoKey, fireRow, itemsOf, midTmFc, shortBase, summarizeAir, summarizeMid, summarizeShort, summarizeTide, upcomingWeekend } from "../lib/conditions.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const outDir = join(root, "camping-atlas/public/conditions");
@@ -22,9 +22,15 @@ const status = {}, calls = {};
 mkdirSync(outDir, { recursive: true });
 copyFileSync(join(root, "pipeline/lib/astro.mjs"), join(outDir, "astro.js"));
 
-async function get(service, url) {
+async function get(service, url, timeoutMs = 20000) {
   calls[service] = (calls[service] ?? 0) + 1;
-  const { res } = await fetchDataGoKr(url, key, { timeoutMs: 20000 });
+  let res;
+  try { ({ res } = await fetchDataGoKr(url, key, { timeoutMs })); } catch (e) {
+    // 시간 초과 등 연결 오류는 한 번만 다시 시도한다(호출 수는 그대로 센다)
+    if (/DATA_GO_KR_UNREACHABLE/.test(e.code ?? "")) throw e;
+    calls[service] += 1;
+    ({ res } = await fetchDataGoKr(url, key, { timeoutMs: timeoutMs * 2 }));
+  }
   const text = await res.text();
   const problem = apiProblem(res.status, text);
   return { problem, json: problem ? null : JSON.parse(text) };
@@ -98,7 +104,7 @@ const warn = await service("warn", async () => {
 const air = await service("air", async () => {
   const items = [];
   for (let page = 1; page <= 2; page++) {
-    const { problem, json } = await get("air", `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?returnType=json&numOfRows=1000&pageNo=${page}&sidoName=${encodeURIComponent("전국")}&ver=1.0`);
+    const { problem, json } = await get("air", `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?returnType=json&numOfRows=1000&pageNo=${page}&sidoName=${encodeURIComponent("전국")}&ver=1.0`, 45000);
     if (problem) { status.air = problem; return null; }
     const rows = itemsOf(json); items.push(...rows);
     if (rows.length < 1000) break;
@@ -148,13 +154,6 @@ const tide = await service("tide", async () => {
   return out;
 });
 
-// 2026년 전남·광주 통합(전남광주통합특별시)처럼 시도 이름이 원천마다 다를 수 있어 넓게 맞춘다.
-const SIDO_GROUP = [["광주", "전남"]];
-function sidoKey(table, sido) {
-  if (table[sido]) return sido;
-  const group = SIDO_GROUP.find((g) => g.includes(sido)) ?? [sido];
-  return Object.keys(table).find((k) => group.some((g) => k.includes(g))) ?? null;
-}
 // ── 캠핑장별 주말 요약(토·일)
 const dayMid = (m, d) => { const l = mid?.land?.[m.land], t = mid?.ta?.[m.ta]; return l || t ? summarizeMid(l, t, mid.tmFc)[d] ?? null : null; };
 const camps = {};
