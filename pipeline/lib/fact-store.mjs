@@ -21,6 +21,12 @@ export const SOURCES = {
   kakao_web: "Daum 웹 검색(홈페이지 후보)",
   naver_local: "네이버 검색 API 지역 검색(업장 등록 정보)",
   review_search: "Daum 블로그·카페 검색 요약",
+  // 사이트 타입 등 후기 언급(MENTION) 값의 원천(site-types.mjs). 2026-10-19: 빠져 있어 사실 검증이 실패하고 매일 발행이 통째로 막혔다.
+  // ffb91fefd에서 다시 빠져 복구(2026-10-19 14:1x KST). 지우면 build-fact-store가 exit 1로 발행을 막는다 — test/fact-store-sources.test.mjs.
+  blog_mention: "블로그 후기 언급(검색 API 요약·허용 본문)",
+  cafe_mention: "카페 글 언급(검색 API 요약)",
+  kin: "네이버 지식iN 언급(검색 API 요약)",
+  local_gov: "지자체 공개 데이터",
   localdata: "행정안전부 LOCALDATA 인허가(영업 중 업소)",
   gocamping_best: "문화체육관광부·한국관광공사 분야별 공공 우수야영장(고캠핑 공개 목록)",
 };
