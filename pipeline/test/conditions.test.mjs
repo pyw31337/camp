@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import { toKmaGrid } from "../lib/kma-grid.mjs";
 import { moonPhase, sunTimes } from "../lib/astro.mjs";
-import { airGrade, apiProblem, mapCampground, midLandOf, midTmFc, shortBase, summarizeAir, summarizeMid, summarizeShort, summarizeTide, upcomingWeekend } from "../lib/conditions.mjs";
+import { airGrade, apiProblem, itemsOf, mapCampground, midLandOf, midTmFc, shortBase, summarizeAir, summarizeMid, summarizeShort, summarizeTide, upcomingWeekend } from "../lib/conditions.mjs";
 
 test("기상청 격자 변환: 활용가이드 예시 지점", () => {
   assert.deepEqual(toKmaGrid(37.5665, 126.978), { nx: 60, ny: 127 }); // 서울 중구
@@ -99,4 +99,9 @@ test("물때: 구분 코드와 무관하게 이웃 극치 높이로 고조·저�
     { predcDt: "2026-10-24 16:40", extrSe: "3", predcTdlvVl: "640" },
   ]);
   assert.deepEqual(rows.map((r) => [r.t, r.type]), [["04:12", "고조"], ["10:30", "저조"], ["16:40", "고조"]]);
+});
+
+test("itemsOf: 최상위 items.item 형태(환경부 충전소)도 펼친다", () => {
+  assert.deepEqual(itemsOf({ items: { item: [{ statId: "A" }, { statId: "B" }] }, totalCount: 2 }).map((x) => x.statId), ["A", "B"]);
+  assert.deepEqual(itemsOf({ items: { item: { statId: "C" } } }).map((x) => x.statId), ["C"]);
 });
