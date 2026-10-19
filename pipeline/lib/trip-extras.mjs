@@ -33,14 +33,32 @@ export function festivalsNear(camp, festIdx, limit = 3, radiusM = FEST_RADIUS_M)
 /** OSM 추출본 요소 → 충전소 점 */
 export function chargersOf(elements = []) {
   return elements.filter((e) => e?.tags?.amenity === "charging_station" && Number.isFinite(e.lat) && Number.isFinite(e.lon))
-    .map((e) => ({ lat: e.lat, lng: e.lon, name: e.tags.name || e.tags.operator || e.tags.brand || null }));
+    .map((e) => ({ lat: e.lat, lng: e.lon, name: e.tags.name || e.tags.operator || e.tags.brand || null, fast: osmFast(e.tags) }));
 }
-/** 가장 가까운 충전소 [이름|null, km, 5km 안 개수] */
+/** OSM 태그로 본 급속 여부: DC 커넥터(CCS·차데모·테슬라)가 있으면 true, 완속 커넥터만 있으면 false, 모르면 null */
+function osmFast(t = {}) {
+  const has = (k) => Object.keys(t).some((x) => x.startsWith(`socket:${k}`) && t[x] !== "no" && t[x] !== "0");
+  if (has("type2_combo") || has("chademo") || has("tesla_supercharger") || has("type1_combo")) return true;
+  if (has("type2") || has("type1") || has("schuko")) return false;
+  return null;
+}
+export const EV_NEAREST = 3;
+/**
+ * 가까운 충전소 [5km 안 개수, [[이름|null, km, 급속(1/0/null), 위도, 경도], ...최대 3곳]]
+ * 같은 충전소가 겹쳐 올라온 경우(30m 안, 이름 같음)는 하나로 센다.
+ */
 export function nearestCharger(camp, evIdx) {
-  const hits = evIdx.within(camp.lat, camp.lng, EV_RADIUS_M);
+  const hits = evIdx.within(camp.lat, camp.lng, EV_RADIUS_M).sort((a, b) => a.distance_m - b.distance_m);
   if (!hits.length) return null;
-  const near = hits.reduce((a, b) => (b.distance_m < a.distance_m ? b : a));
-  return [near.point.name, Math.round(near.distance_m / 100) / 10, hits.filter((h) => h.distance_m <= 5000).length];
+  const picked = [];
+  for (const h of hits) {
+    if (picked.some((x) => x.point.name === h.point.name && haversineM(x.point.lat, x.point.lng, h.point.lat, h.point.lng) < 30)) continue;
+    picked.push(h);
+    if (picked.length >= EV_NEAREST) break;
+  }
+  const r5 = (v) => Math.round(v * 1e5) / 1e5;
+  return [hits.filter((h) => h.distance_m <= 5000).length,
+    picked.map(({ point: p, distance_m }) => [p.name ?? null, Math.round(distance_m / 100) / 10, p.fast == null ? null : p.fast ? 1 : 0, r5(p.lat), r5(p.lng)])];
 }
 const norm = (s) => String(s ?? "").replace(/\(.*?\)|\[.*?\]|\s|오토|캠핑장|야영장|캠프|글램핑|카라반/g, "").toLowerCase();
 /** 관광공사 목록(반려동물·무장애)에서 같은 캠핑장으로 보이는 항목: 300m 안이고 이름이 겹치거나 50m 안 */

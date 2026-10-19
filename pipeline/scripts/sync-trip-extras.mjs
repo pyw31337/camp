@@ -56,13 +56,15 @@ function xmlItems(text) {
 /** 모든 쪽 읽기 */
 async function all(name, base, rows = 1000, maxPages = 60) {
   const out = [];
+  let total = 0;
   for (let p = 1; p <= maxPages; p++) {
     const r = await get(name, `${base}&numOfRows=${rows}&pageNo=${p}`);
     if (r.problem) { if (p === 1) return { problem: r.problem }; break; }
     out.push(...r.items);
+    total = r.total || total;
     if (!r.items.length || out.length >= r.total) break;
   }
-  return { items: out };
+  return { items: out, total };
 }
 async function step(name, fn) {
   if (!key && name !== "ev_osm") { status[name] = "SKIPPED_NO_KEY"; return null; }
@@ -84,18 +86,30 @@ const fest = await step("festival", async () => {
 });
 // 2) 전기차 충전소: 환경부(신청 후) → 없으면 OSM 추출본
 const evOfficial = await step("ev_official", async () => {
-  const r = await all("ev_official", "https://apis.data.go.kr/B552584/EvCharger/getChargerInfo?dataType=JSON", 9999, 80);
-  if (r.problem) return fail("ev_official", r.problem);
+  // 전국 충전기 50만 건 이상 — 쪽마다 충전소 단위로 바로 접어 메모리에 원본을 쌓지 않는다.
   const seen = new Map();
-  for (const it of r.items) {
-    const lat = Number(it.lat), lng = Number(it.lng);
-    if (!it.statId || !Number.isFinite(lat) || !Number.isFinite(lng)) continue;
-    const s = seen.get(it.statId) ?? { lat, lng, name: it.statNm || null, fast: false };
-    if (/^(0[1-7]|09|10)$/.test(String(it.chgerType ?? "")) && it.chgerType !== "02") s.fast = true; // 02 = 완속
-    seen.set(it.statId, s);
+  let n = 0, total = 0, fields = "";
+  for (let p = 1; p <= 80; p++) {
+    const r = await get("ev_official", `https://apis.data.go.kr/B552584/EvCharger/getChargerInfo?dataType=JSON&numOfRows=9999&pageNo=${p}`);
+    if (r.problem) { if (p === 1) return fail("ev_official", r.problem); break; }
+    total = r.total || total;
+    fields ||= Object.keys(r.items[0] ?? {}).slice(0, 12).join(",");
+    for (const it of r.items) {
+      n++;
+      if (it.delYn === "Y") continue;
+      const lat = Number(it.lat), lng = Number(it.lng);
+      if (!it.statId || !Number.isFinite(lat) || !Number.isFinite(lng) || !lat || !lng) continue;
+      const s = seen.get(it.statId) ?? { lat, lng, name: it.statNm || null, fast: false };
+      // 충전기 타입: 02=AC완속, 08=DC콤보(완속) 외에는 급속(01·03~07·09·10)
+      if (/^(0[1-7]|09|10)$/.test(String(it.chgerType ?? "")) && it.chgerType !== "02") s.fast = true;
+      seen.set(it.statId, s);
+    }
+    if (!r.items.length || n >= total) break;
   }
-  if (!seen.size) { status.ev_official = `NO_DATA 응답 ${r.items.length}건 · 필드 ${Object.keys(r.items[0] ?? {}).slice(0, 12).join(",")}`; return null; }
-  status.ev_official = `OK 충전소 ${seen.size}곳(충전기 ${r.items.length}기)`;
+  // 전국 목록이 중간에 끊기면(호출 상한·오류) 일부 지역만 비어 보이므로 OSM으로 대신한다.
+  if (total && n < total * 0.95) return fail("ev_official", `PARTIAL ${n}/${total}`);
+  if (!seen.size) return fail("ev_official", `NO_DATA 응답 ${n}건 · 필드 ${fields}`);
+  status.ev_official = `OK 충전소 ${seen.size}곳(충전기 ${n}기)`;
   return [...seen.values()];
 });
 const evOsm = evOfficial ? null : await step("ev_osm", async () => {
@@ -169,7 +183,7 @@ for (const c of catalog) {
   const p = prev?.camps?.[c.id] ?? {};
   const o = {};
   if (Number.isFinite(elevation.camps?.[c.id])) o.el = elevation.camps[c.id];
-  const ev = evIdx ? nearestCharger(c, evIdx) : (status.ev_official === "OK" || status.ev_osm === "OK") ? null : p.ev;
+  const ev = evIdx ? nearestCharger(c, evIdx) : Array.isArray(p.ev?.[1]) ? p.ev : null; // 이전 형식([이름, km, 개수])은 버린다
   if (ev) o.ev = ev;
   const fs = festIdx ? festivalsNear(c, festIdx) : (p.fe ?? []).filter((x) => prev?.fest?.[x[0]]);
   if (fs.length) { o.fe = fs; fs.forEach(([id]) => usedFest.add(id)); }

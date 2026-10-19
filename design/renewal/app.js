@@ -1072,15 +1072,61 @@ function specTiles(c, d) {
 }
 const km = (m) => (m < 1000 ? `${Math.round(m / 10) * 10}m` : `${(m / 1000).toFixed(1)}km`);
 // 생활·안전·관광을 한 섹션으로 묶는다. 관광 사진은 한국관광공사 원본 URL이 있는 항목만 직접 보인다.
+const NEARBY_LABELS = {
+  CONVENIENCE: ["편의점", "store"], MART: ["마트", "cart"], BUTCHER: ["정육", "meat"], FUEL: ["주유", "fuel"],
+  PHARMACY: ["약국", "cross"], HOSPITAL: ["병원", "cross"], VET: ["동물병원", "paw"],
+  DROWSY_SHELTER: ["졸음쉼터", "route"], REST_AREA: ["휴게소", "route"], TOILET: ["공중화장실", "drop"],
+  TOUR: ["관광", "pin"], FOOD: ["맛집", "meat"], EV: ["전기차 충전", "bolt"],
+  OTC_MEDICINE: ["상비약", "cross"], GAS_STATION: ["주유", "fuel"], ANIMAL_HOSPITAL: ["동물병원", "paw"],
+};
+const FUEL_BRANDS = [[/S-?OIL|에쓰오일|에스오일/i, "S-OIL"], [/GS칼텍스|\bGS\b|^GS/i, "GS칼텍스"], [/SK에너지|\bSK\b|^SK/i, "SK에너지"], [/현대오일뱅크|오일뱅크|HD현대/i, "HD현대오일뱅크"], [/알뜰/, "알뜰주유소"], [/농협|NH/i, "농협(알뜰)"], [/E1|이원/, "E1(LPG)"], [/LPG|충전소/, "LPG"]];
+/** 주유소 이름에서 상표(정유사)를 짐작한다. 모르면 null */
+function fuelBrand(name) { return FUEL_BRANDS.find(([re]) => re.test(String(name ?? "")))?.[1] ?? null; }
+/** 주변 주유소 최대 3곳: 인허가·지도 자료에 겹쳐 올라온 같은 곳(80m 안)은 하나로 */
+function fuelPlaces(rows, licensedGas) {
+  const all = [...rows, ...(licensedGas ? [licensedGas] : [])]
+    .map((x) => ({ type: "FUEL", name: x.name ?? x.n, m: Number(x.m), lat: x.lat, lng: x.lng, url: x.u }))
+    .filter((x) => x.name && Number.isFinite(x.m)).sort((a, b) => a.m - b.m);
+  const near = (a, b) => a.lat && b.lat && Math.hypot((a.lat - b.lat) * 111000, (a.lng - b.lng) * 88000) < 80;
+  const out = [];
+  for (const x of all) {
+    const dup = out.find((y) => near(x, y) || y.name.replace(/\s+/g, "") === x.name.replace(/\s+/g, ""));
+    if (dup) { if (dup.name.length < 5 && x.name.length > dup.name.length) dup.name = x.name; continue; } // OSM의 "SK"처럼 상표만 적힌 이름은 긴 이름으로
+    out.push(x);
+    if (out.length >= 3) break;
+  }
+  return out.map((x) => {
+    const brand = fuelBrand(x.name);
+    // 지도 자료엔 "SK"처럼 상표만 적힌 곳이 있다 → "SK에너지 주유소"
+    return { ...x, name: brand && x.name.replace(/\s+/g, "").length <= 5 && !/주유소/.test(x.name) ? `${brand} 주유소` : x.name, sub: brand };
+  });
+}
+const isOfficialTourImage = (u) => /^https:\/\/(?:[\w-]+\.)?(?:visitkorea\.or\.kr|kto\.or\.kr)\//i.test(String(u ?? ""));
+/** 주변 칸 한 곳(주유·충전 칸은 상세 화면이 뜬 뒤 충전소를 덧붙일 때도 쓴다) */
+function nearbyCard(x) {
+  const [label, icon] = NEARBY_LABELS[x.type] ?? [x.type, "pin"];
+  const map = x.lat && x.lng ? `https://map.kakao.com/link/map/${encodeURIComponent(x.name)},${x.lat},${x.lng}` : x.url;
+  const road = x.lat && x.lng ? `https://map.kakao.com/link/roadview/${x.lat},${x.lng}` : "";
+  return `<article class="nearby-place${x.image && isOfficialTourImage(x.image) ? " has-image" : ""}">
+    ${x.image && isOfficialTourImage(x.image) ? `<img src="${esc(x.image)}" alt="" loading="lazy" decoding="async">` : `<span class="nearby-place-icon">${ic(icon)}</span>`}
+    <span class="nearby-place-copy"><i>${label} · ${x.summary ? "공공데이터" : km(x.m)}${x.sub ? ` · ${esc(x.sub)}` : ""}</i><b>${esc(x.name)}</b></span>
+    <span class="nearby-place-actions">${map ? `<a href="${esc(map)}" target="_blank" rel="noopener" aria-label="${esc(x.name)} 지도">${ic("map")}</a>` : ""}${road ? `<a href="${esc(road)}" target="_blank" rel="noopener" aria-label="${esc(x.name)} 로드뷰">${ic("search")}</a>` : ""}</span>
+  </article>`;
+}
+/** 주변 > 주유 · 충전 칸에 가까운 전기차 충전소(최대 3곳)를 덧붙인다. ev: context/card.js evFor() 결과 */
+function mountNearbyEv(ev) {
+  const group = $("[data-energy]");
+  if (!ev || !group) return;
+  const places = group.querySelector("[data-energy-places]");
+  places.insertAdjacentHTML("beforeend", ev.list.map((x) => nearbyCard({ type: "EV", name: x.name || "이름 없는 충전소", m: x.km * 1000, lat: x.lat, lng: x.lng, sub: x.fast === 1 ? "급속" : x.fast === 0 ? "완속" : "" })).join(""));
+  const note = group.querySelector("[data-energy-note]");
+  note.innerHTML = `충전소 5km 안 ${ev.c5}곳 · 출처 ${ev.source ? `<a href="${esc(ev.source.url)}" target="_blank" rel="noopener">${esc(ev.source.name)}</a>` : "공개자료"}${ev.osm ? " (지도 공개자료라 실제로는 더 가까이 있을 수 있어요)" : ""}`;
+  note.hidden = false;
+  group.hidden = false;
+  group.closest(".nearby-hub")?.removeAttribute("hidden");
+}
 function nearbyHubHtml(c, d) {
   const nearby = d?.nearby ?? {}, licensed = d?.nearby_licensed ?? {};
-  const labels = {
-    CONVENIENCE: ["편의점", "store"], MART: ["마트", "cart"], BUTCHER: ["정육", "meat"], FUEL: ["주유", "fuel"],
-    PHARMACY: ["약국", "cross"], HOSPITAL: ["병원", "cross"], VET: ["동물병원", "paw"],
-    DROWSY_SHELTER: ["졸음쉼터", "route"], REST_AREA: ["휴게소", "route"], TOILET: ["공중화장실", "drop"],
-    TOUR: ["관광", "pin"], FOOD: ["맛집", "meat"],
-    OTC_MEDICINE: ["상비약", "cross"], GAS_STATION: ["주유", "fuel"], ANIMAL_HOSPITAL: ["동물병원", "paw"],
-  };
   const entry = (type, x = {}) => {
     const name = x.name ?? x.n;
     const m = Number(x.m);
@@ -1088,11 +1134,11 @@ function nearbyHubHtml(c, d) {
   };
   const first = (type, rows) => (rows.map((x) => entry(type, x)).filter(Boolean).sort((a, b) => a.m - b.m)[0] ?? null);
   // 상비약 판매처는 보통 같은 편의점이다. 이름이 같으면 한 칸으로 줄인다.
-  const licensedRows = Object.entries(licensed).map(([type, x]) => entry(type, x)).filter(Boolean)
+  const licensedRows = Object.entries(licensed).filter(([type]) => type !== "FUEL" && type !== "GAS_STATION").map(([type, x]) => entry(type, x)).filter(Boolean)
     .filter((x, _, all) => x.type !== "OTC_MEDICINE" || !all.some((y) => y.type === "CONVENIENCE" && y.name === x.name));
   const local = [
     ...licensedRows,
-    first("CONVENIENCE", nearby.conv ?? []), first("MART", nearby.mart ?? []), first("FUEL", nearby.fuel ?? []), first("BUTCHER", (nearby.mart ?? []).filter((x) => /정육|바베큐/.test(x.k ?? ""))),
+    first("CONVENIENCE", nearby.conv ?? []), first("MART", nearby.mart ?? []), first("BUTCHER", (nearby.mart ?? []).filter((x) => /정육|바베큐/.test(x.k ?? ""))),
   ].filter(Boolean);
   const safety = [
     first("PHARMACY", (nearby.medical ?? []).filter((x) => /약국|pharmacy|의약/.test(x.k ?? x.n ?? ""))),
@@ -1103,21 +1149,12 @@ function nearbyHubHtml(c, d) {
   if (Number(toilet.within_500m) || Number(toilet.within_2km)) safety.push({ type: "TOILET", name: `500m ${Number(toilet.within_500m) || 0}곳 · 2km ${Number(toilet.within_2km) || 0}곳`, m: Number(toilet.within_500m) ? 500 : 2000, summary: true });
   const leisure = [...(nearby.tour ?? []).slice(0, 4).map((x) => entry("TOUR", x)), ...(nearby.food ?? []).slice(0, 4).map((x) => entry("FOOD", x))].filter(Boolean);
   const unique = (rows) => [...new Map(rows.map((x) => [`${x.type}:${x.name.replace(/\s+/g, "")}`, x])).values()].slice(0, 5);
+  const fuel = fuelPlaces(nearby.fuel ?? [], licensed.FUEL ?? licensed.GAS_STATION);
   const groups = [["생활", "store", unique(local)], ["안전 · 이동", "route", unique(safety)], ["관광 · 맛집", "pin", unique(leisure)]]
     .filter(([, , rows]) => rows.length);
-  if (!groups.length) return "";
-  const isOfficialTourImage = (u) => /^https:\/\/(?:[\w-]+\.)?(?:visitkorea\.or\.kr|kto\.or\.kr)\//i.test(String(u ?? ""));
-  const card = (x) => {
-    const [label, icon] = labels[x.type] ?? [x.type, "pin"];
-    const map = x.lat && x.lng ? `https://map.kakao.com/link/map/${encodeURIComponent(x.name)},${x.lat},${x.lng}` : x.url;
-    const road = x.lat && x.lng ? `https://map.kakao.com/link/roadview/${x.lat},${x.lng}` : "";
-    return `<article class="nearby-place${x.image && isOfficialTourImage(x.image) ? " has-image" : ""}">
-      ${x.image && isOfficialTourImage(x.image) ? `<img src="${esc(x.image)}" alt="" loading="lazy" decoding="async">` : `<span class="nearby-place-icon">${ic(icon)}</span>`}
-      <span class="nearby-place-copy"><i>${label} · ${x.summary ? "공공데이터" : km(x.m)}</i><b>${esc(x.name)}</b></span>
-      <span class="nearby-place-actions">${map ? `<a href="${esc(map)}" target="_blank" rel="noopener" aria-label="${esc(x.name)} 지도">${ic("map")}</a>` : ""}${road ? `<a href="${esc(road)}" target="_blank" rel="noopener" aria-label="${esc(x.name)} 로드뷰">${ic("search")}</a>` : ""}</span>
-    </article>`;
-  };
-  return `<section class="d-sec nearby-hub"><div class="sec-head">${iconTitle("route", "주변")}<span class="sec-note">직선거리 ${tip("<b>주변 정보</b><span>생활·안전 시설은 인허가·공공 데이터, 관광·맛집은 한국관광공사 데이터로 연결합니다. 운영 시간과 영업 여부는 원문에서 다시 확인하세요.</span>")}</span></div><div class="nearby-groups">${groups.map(([title, icon, rows]) => `<section class="nearby-group"><h3>${ic(icon)}${title}</h3><div class="nearby-places">${rows.map(card).join("")}</div></section>`).join("")}</div></section>`;
+  // 주유·충전: 주유소는 상세 자료에 있고, 전기차 충전소는 /context/extras.json에서 화면이 뜬 뒤 덧붙인다(mountNearbyEv).
+  const energy = `<section class="nearby-group" data-energy${fuel.length ? "" : " hidden"}><h3>${ic("fuel")}주유 · 충전</h3><div class="nearby-places" data-energy-places>${fuel.map(nearbyCard).join("")}</div><p class="nearby-note" data-energy-note hidden></p></section>`;
+  return `<section class="d-sec nearby-hub"${groups.length || fuel.length ? "" : " hidden"}><div class="sec-head">${iconTitle("route", "주변")}<span class="sec-note">직선거리 ${tip("<b>주변 정보</b><span>생활·안전 시설은 인허가·공공 데이터, 관광·맛집은 한국관광공사 데이터로 연결합니다. 운영 시간과 영업 여부는 원문에서 다시 확인하세요.</span>")}</span></div><div class="nearby-groups">${groups.map(([title, icon, rows]) => `<section class="nearby-group"><h3>${ic(icon)}${title}</h3><div class="nearby-places">${rows.map(nearbyCard).join("")}</div></section>`).join("")}${energy}</div></section>`;
 }
 function reviewHtml(d, c) {
   const rv = d?.rv ?? c?.rv;
@@ -1617,7 +1654,10 @@ function bindDetail() {
   if (condEl && condCamp) import(new URL("../conditions/card.js", import.meta.url).href).then((m) => m.mount(condEl, condCamp)).catch(() => {});
   // 여행 참고 정보(고도·응급실·전기차 충전·주변 축제 등): /context/card.js가 있을 때만. 실패하면 칸을 숨긴 채 둔다.
   const exEl = $("[data-extras]");
-  if (exEl && condCamp) import(new URL("../context/card.js", import.meta.url).href).then((m) => m.mount(exEl, condCamp)).catch(() => {});
+  if (condCamp) import(new URL("../context/card.js", import.meta.url).href).then((m) => {
+    if (exEl) m.mount(exEl, condCamp).catch(() => {});
+    m.evFor(id).then(mountNearbyEv).catch(() => {});
+  }).catch(() => {});
   // 운영자 정보 바로잡기(로그인 없이, Supabase operator_submission에 넣기만): /operator/form.js
   const opEl = $("[data-opform-sec]");
   if (opEl && condCamp && SB.url && SB.key) import(new URL("../operator/form.js", import.meta.url).href).then((m) => m.mount(opEl, condCamp, SB)).catch(() => {});

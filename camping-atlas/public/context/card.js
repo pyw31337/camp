@@ -22,11 +22,6 @@ export function rowsFor(data, id) {
     const [n, d, cls, tel] = o.er;
     rows.push({ k: "가까운 응급실", v: `${esc(n)}${cls ? ` <small>${esc(cls)}</small>` : ""} · 직선 ${esc(km(d))}${tel ? ` · <a href="tel:${esc(tel)}">${esc(tel)}</a>` : ""}`, src: "er" });
   }
-  if (o.ev) {
-    const [n, d, c5] = o.ev;
-    const osm = !/환경부/.test(data.sources?.ev?.name ?? "");
-    rows.push({ k: "전기차 충전", v: `가장 가까운 충전소 직선 ${esc(km(d))}${n ? ` (${esc(n)})` : ""}${c5 > 1 ? ` · 5km 안 ${c5}곳` : ""}${osm ? " <small>지도 공개자료(OSM)에 올라온 곳만이라 실제로는 더 가까이 있을 수 있어요</small>" : ""}`, src: "ev" });
-  }
   if (o.fe?.length) {
     const items = o.fe.map(([fid, d]) => [fid, d, data.fest?.[fid]]).filter(([, , f]) => f);
     if (items.length) rows.push({ k: "주변 축제·행사", v: `<ul class="cx-list">${items.map(([fid, d, f]) => `<li><a href="https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=${esc(fid)}" target="_blank" rel="noopener">${esc(f.t)}</a> <small>${esc(md(f.s))}(${dow(f.s)})${f.e && f.e !== f.s ? `~${esc(md(f.e))}(${dow(f.e)})` : ""} · ${esc(km(d))}</small></li>`).join("")}</ul>`, src: "fe" });
@@ -47,13 +42,25 @@ export function rowsFor(data, id) {
 const STYLE = `[data-extras] .use small{color:var(--muted,#667);font-size:12px;font-weight:400}[data-extras] .use dd{line-height:1.5}
 .cx-list{margin:2px 0 0;padding-left:1.1em}.cx-foot{margin-top:10px;font-size:12px;color:var(--muted,#667);line-height:1.5}`;
 
+/**
+ * 주변 전기차 충전소(상세 ‘주변’ 칸에 붙인다): {list:[{name, km, fast, lat, lng}], c5, source:{name,url}, osm} | null
+ * extras.json camps[id].ev = [5km 안 개수, [[이름, km, 급속 1/0/null, 위도, 경도], …]]
+ */
+export function evOf(data, id) {
+  const ev = data?.camps?.[id]?.ev;
+  if (!Array.isArray(ev?.[1]) || !ev[1].length) return null;
+  const source = data.sources?.ev ?? null;
+  return { c5: ev[0], list: ev[1].map(([name, km, fast, lat, lng]) => ({ name, km, fast, lat, lng })), source, osm: !/환경부/.test(source?.name ?? "") };
+}
+export async function evFor(id) { return evOf(await load(), String(id ?? "")); }
+
 export async function mount(el, camp) {
   const data = await load();
   const rows = rowsFor(data, String(camp?.id ?? ""));
   if (!rows.length) return;
   if (!document.getElementById("cx-style")) { const s = document.createElement("style"); s.id = "cx-style"; s.textContent = STYLE; document.head.append(s); }
   const used = [...new Set(rows.map((r) => r.src))].map((k) => data.sources?.[k]).filter(Boolean);
-  el.innerHTML = `<div class="sec-head"><div class="sec-title"><h2>여행 참고 정보</h2></div><span class="sec-note">고도·응급실·충전소·축제</span></div>
+  el.innerHTML = `<div class="sec-head"><div class="sec-title"><h2>여행 참고 정보</h2></div><span class="sec-note">고도·응급실·축제·걷기길</span></div>
 <dl class="uses">${rows.map((r) => `<div class="use"><dt>${esc(r.k)}</dt><dd>${r.v}</dd></div>`).join("")}</dl>
 <p class="cx-foot">출처: ${used.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>${s.attribution ? ` (${esc(s.attribution)})` : ""}`).join(" · ")}. 거리는 직선거리예요. 갱신 ${esc(String(data.generated_at ?? "").slice(0, 10))}</p>`;
   el.hidden = false;
