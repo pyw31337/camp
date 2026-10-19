@@ -11582,7 +11582,6 @@
 {"cid":"101243","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101243","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101243","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101243","attr":"YEAR_ROUND","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://dingdongdang.kr/dingdongdang/reservation/guide","at":"2026-10-19T04:59:48.169Z","quote":"* 운영 기간 : 사계절 운영"}
 {"cid":"101244","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101244","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101244","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}

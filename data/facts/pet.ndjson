@@ -2666,7 +2666,6 @@
 {"cid":"101240","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"101241","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101242","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
-{"cid":"101243","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"https://dingdongdang.kr/dingdongdang/reservation/guide","at":"2026-10-19T04:59:48.169Z","quote":"* 애견동반 사용이 가능합니다.","text":"동반 가능"}
 {"cid":"101243","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101244","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101245","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"https://www.camperest.kr/campsite/101245","at":"2026-10-19T01:44:46.141Z","quote":"객실명: 104호(애견동반가능)","text":"동반 가능"}

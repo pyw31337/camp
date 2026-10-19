@@ -7210,7 +7210,6 @@
 {"cid":"101242","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101243","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101243","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101243","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_discovered","url":"https://dingdongdang.kr/dingdongdang/reservation/guide","at":"2026-10-19T04:59:48.169Z","quote":"* 숯, 전기그릴, 부르스타, 부탄가스 등 개인화기 절대 사용불가입니다."}
 {"cid":"101243","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101243","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101244","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
