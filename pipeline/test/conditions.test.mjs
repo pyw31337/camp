@@ -81,3 +81,13 @@ test("주간 날씨 카드: 단기만 있을 때·중기까지 있을 때 문구
   assert.deepEqual(ds.map((x) => x.src), ["short", "short", "short", "short", "mid", "mid"]);
   assert.equal(ds[5].sky, "비");
 });
+
+test("단기예보 끝자락(자정 한두 시간만 있는 날)은 하루 요약에서 뺀다", () => {
+  const it = (fcstDate, fcstTime, category, fcstValue) => ({ fcstDate, fcstTime, category, fcstValue });
+  const days = summarizeShort([
+    it("20261022", "0600", "TMN", "4"), it("20261022", "1500", "TMX", "17"), it("20261022", "1200", "SKY", "1"), it("20261022", "1200", "TMP", "15"),
+    it("20261023", "0000", "TMP", "5"), it("20261023", "0000", "POP", "0"),
+  ]);
+  assert.deepEqual(Object.keys(days), ["2026-10-22"]);
+  assert.equal(days["2026-10-22"].sky, "맑음");
+});
