@@ -32,3 +32,18 @@ test("테마 줄마다 다른 캠핑장을 번갈아 담고, 모자라면 겹치
   assert.deepEqual(few.get("y"), []);
   assert.deepEqual(allocateUnique([{ id: "x", candidates: c("A") }, { id: "y", candidates: c("A") }], 2, { fillWithRepeats: true }).get("y").map((x) => x.id), ["A"]);
 });
+
+test("같은 캠핑장 내 중복 사진(대표 사진과 동일 또는 배너 중복)을 dHash와 photoKey로 걸러낸다", () => {
+  const heroKey = photoKey("https://gocamping.or.kr/upload/camp/7760/thumb/thumb_720_6212BqMrJn7PF3Yi73J8oTfn.jpg");
+  const candidates = [
+    "https://gocamping.or.kr/upload/camp/7760/6801AVQUFvU3Qjr66urzrBvW.jpg", // banner 1
+    "https://gocamping.or.kr/upload/camp/7760/5306zakjHuxQVUcX4pnMlEj4.jpg", // banner 2 (identical content)
+    "https://gocamping.or.kr/upload/camp/7760/5106nF1RZwDvSGGXWqXH1DAE.jpg", // road
+    "https://gocamping.or.kr/upload/camp/7760/6212BqMrJn7PF3Yi73J8oTfn.jpg", // same as hero
+    "https://gocamping.or.kr/upload/camp/7760/5780GZCWpDyIZwMtdk5WURN9.jpg", // facility
+  ];
+  const seen = new Set([heroKey]);
+  const uniqueUrls = uniqueBy(candidates, photoKey, seen);
+  assert.equal(uniqueUrls.includes("https://gocamping.or.kr/upload/camp/7760/6212BqMrJn7PF3Yi73J8oTfn.jpg"), false, "대표 사진과 파일명이 같은 imageList 원본은 제외된다");
+  assert.equal(uniqueUrls.length, 4);
+});

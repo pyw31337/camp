@@ -4,7 +4,7 @@
 // KAKAO_JS_KEY: 브라우저에 노출되는 지도 키(카카오 개발자 콘솔의 도메인 제한으로 보호). 없으면 지도 없이 목록만.
 import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
@@ -91,8 +91,20 @@ await mkdir(out, { recursive: true });
 await writeFile(`${out}index.html`, exploreIndex);
 await writeFile(`${out}style.css`, renewalCss);
 await writeFile(`${out}app.js`, renewalApp);
+await mkdir(`${rootOut}data`, { recursive: true });
+await cp(`${root}design/renewal/data/photos.json`, `${rootOut}data/photos.json`);
 await mkdir(`${out}data`, { recursive: true });
 await cp(`${root}design/renewal/data/photos.json`, `${out}data/photos.json`);
+
+// 중복 제거된 공식 카드 사진 색인이 있으면 대상 경로에 동기화
+const dedupedCards = `${root}pipeline/registry/cards-deduped.json`;
+if (existsSync(dedupedCards)) {
+  for (const dir of [rootOut, out]) {
+    const dst = `${dir}media/cards/index.json`;
+    await mkdir(dirname(dst), { recursive: true });
+    await cp(dedupedCards, dst);
+  }
+}
 
 // 브랜드 자산(파비콘, PWA 아이콘, 오픈그래프 배너 이미지, 테마/히어로 사진)을 대상 디렉토리에 동기화
 const copyBrandImages = async (destDir) => {
