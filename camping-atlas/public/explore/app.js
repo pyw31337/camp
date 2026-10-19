@@ -1036,7 +1036,7 @@ function bookingHtml(c, d) {
     if (/취소|환불/.test(text)) return "취소 규정 확인";
     return `예약 안내 ${n + 1}`;
   };
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("calendar", "예약 방법")}${main ? `<span class="sec-note">대표 채널 ${srcTip(bookingSource(main), "대표 예약 채널")}</span>` : ""}</div>
+  return `<section class="d-sec"><div class="sec-head">${iconTitle("calendar", "예약 방법")}${main || steps.length || (pf.tips ?? []).length ? `<span class="sec-note">${main ? `대표 채널 ${srcTip(bookingSource(main), "대표 예약 채널")}` : ""}${steps.length || (pf.tips ?? []).length ? srcTip(guideFact, "예약 안내") : ""}</span>` : ""}</div>
     ${main || c.tel ? `<div class="chans">${main ? `<a class="chan" href="${esc(main.url)}" target="_blank" rel="noopener">${ic("right")}<b>${esc(bookingLabel(main))}</b><i>예약 페이지</i></a>` : ""}${c.tel ? `<a class="chan" href="tel:${esc(c.tel)}">${ic("phone")}<b>전화 문의</b><i>${esc(c.tel)}</i></a>` : ""}</div>` : ""}
     ${meta.length ? `<dl class="uses">${meta.map(([l, v]) => `<div class="use"><dt>${l}</dt><dd>${esc(serviceText(v, 32))}${srcTip({ g: "c", src: { label: "예약 안내", url: g?.source?.url, at: g?.source?.date, quote: v } }, l)}</dd></div>`).join("")}</dl>` : ""}
     ${steps.length ? `<ol class="steps">${[...new Set(steps.map((x, i) => serviceText(x.t, 52) || stepName(x.t, i)))].slice(0, 5).map((t) => `<li>${esc(t)}</li>`).join("")}</ol>` : ""}
