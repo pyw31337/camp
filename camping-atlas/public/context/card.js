@@ -56,7 +56,8 @@ export async function evFor(id) { return evOf(await load(), String(id ?? "")); }
 
 export async function mount(el, camp) {
   const data = await load();
-  const rows = rowsFor(data, String(camp?.id ?? ""));
+  // 상세에 ‘주변 축제·행사’ 포스터 칸(/context/events.js)이 있으면 축제 줄은 거기에 맡긴다(중복 방지).
+  const rows = rowsFor(data, String(camp?.id ?? "")).filter((r) => r.src !== "fe" || !document.querySelector("[data-events]"));
   if (!rows.length) return;
   if (!document.getElementById("cx-style")) { const s = document.createElement("style"); s.id = "cx-style"; s.textContent = STYLE; document.head.append(s); }
   const used = [...new Set(rows.map((r) => r.src))].map((k) => data.sources?.[k]).filter(Boolean);
