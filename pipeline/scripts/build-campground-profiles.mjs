@@ -51,8 +51,10 @@ for (const c of camps) {
   const usable = site?.status === "OK" && site.snippets?.length && !shared;
   const details = usable ? extractSiteDetails(site.snippets.map((s) => s.text)) : null;
   const urlOf = (q) => site?.snippets?.find((s) => s.text === q)?.url ?? site?.url ?? null;
+  // OCR로 읽은 문장이면 원본 안내 이미지 주소(화면 (i)에서 이미지 원문 보기)
+  const imageOf = (q) => site?.snippets?.find((s) => s.text === q)?.image ?? null;
   const intro = d?.intro ? extractSiteDetails(sentences(d.intro)) : null;
-  const p = buildProfile(c, d, details, { detailDate: site?.checked_at ?? null, urlOf, intro });
+  const p = buildProfile(c, d, details, { detailDate: site?.checked_at ?? null, urlOf, imageOf, intro });
   p.generated_at = now;
   const price = compactPrice(p.fields.PRICE, now);
   c.pf = { s: p.summary, t: p.tags.map((t) => t.code), k: p.score.facts, ...(price ? { p: price } : {}) };

@@ -35,9 +35,10 @@ for (const c of camps) {
   const site = sites[c.id];
   if (site?.status === "OK" && site.snippets?.length && (hostCount.get(hostOf(c.homepage)) ?? 0) <= 1 && (hostCount.get(hostOf(site.url)) ?? 0) <= 1) {
     // 쪽(URL)마다 한 문서로 묶어 원문 링크가 정확한 쪽을 가리키게 한다.
+    // 이미지 안내문 OCR 문장은 이미지마다 한 문서로 두고 원본 이미지 주소를 근거에 남긴다(화면 (i)에서 원본 이미지를 본다).
     const byUrl = new Map();
-    for (const sn of site.snippets) byUrl.set(sn.url, `${byUrl.get(sn.url) ?? ""}\n${sn.text}`);
-    for (const [url, text] of byUrl) docs.push({ text, grade: "OFFICIAL_TEXT", source: { kind: "operator_homepage", label: "운영자 홈페이지", url, date: site.checked_at } });
+    for (const sn of site.snippets) { const k = sn.image ? `img|${sn.image}` : sn.url; const cur = byUrl.get(k) ?? { url: sn.url, image: sn.image ?? null, text: "" }; cur.text += `\n${sn.text}`; byUrl.set(k, cur); }
+    for (const { url, image, text } of byUrl.values()) docs.push({ text, grade: "OFFICIAL_TEXT", source: { kind: "operator_homepage", label: image ? "운영자 안내 이미지(글자 인식)" : "운영자 홈페이지", url, date: site.checked_at, ...(image ? { image } : {}) } });
   }
   if (d.intro) docs.push({ text: d.intro, grade: "OFFICIAL_TEXT", source: { kind: "gocamping_intro", label: "고캠핑 운영자 소개글", url: c.gc_url ?? null, date: c.modified_at ?? null } });
   const reviews = [...(d.reviews ?? []), ...(d.cafe ?? []), ...(d.web ?? [])];

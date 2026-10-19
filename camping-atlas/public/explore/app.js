@@ -376,8 +376,19 @@ function srcTip(x, label) {
   if (!x) return "";
   const s = x.src ?? {};
   const d = s.at ? String(s.at).slice(0, 10) : "";
-  return tip(`<b>${esc(label)}</b><span>${GRADE_TXT[x.g] ?? ""}${s.label ? ` · ${esc(s.label)}` : ""}${d ? ` · ${esc(d)}` : ""}</span>${s.quote ? `<q>${esc(String(s.quote).slice(0, 240))}</q>` : ""}${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">원문 보기</a>` : ""}`, `${label} 근거`);
+  // 운영자 안내 이미지에서 글자 인식(OCR)으로 읽은 값이면 원본 이미지를 함께 보인다 — 인식이 틀릴 수 있으니 눈으로 확인(소유자 2026-10-19).
+  const img = s.image ? `<button type="button" class="tip-img" data-ocr-img="${esc(s.image)}" aria-label="원본 이미지 크게 보기"><img src="${esc(s.image)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.tip-img').classList.add('is-broken')"><span>${ic("search")}원본 이미지 크게 보기</span></button><small class="tip-note">글자 인식 결과라 틀릴 수 있어요. 이미지를 확인하세요. <a href="${esc(s.image)}" target="_blank" rel="noopener">이미지 새 창</a></small>` : "";
+  return tip(`<b>${esc(label)}</b><span>${GRADE_TXT[x.g] ?? ""}${s.label ? ` · ${esc(s.label)}` : ""}${d ? ` · ${esc(d)}` : ""}</span>${img}${s.quote ? `<q>${esc(String(s.quote).slice(0, 240))}</q>` : ""}${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">원문 보기</a>` : ""}`, `${label} 근거`);
 }
+// (i) 안의 원본 안내 이미지 → 크게 보기
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-ocr-img]");
+  if (!b) return;
+  e.preventDefault(); e.stopPropagation();
+  $("#pop").hidden = true;
+  openLightboxUrls([b.dataset.ocrImg], 0, "운영자 안내 이미지 원본");
+  document.querySelector("dialog.lightbox:last-of-type")?.classList.add("lb-doc"); // 투명 PNG 안내문이 어두운 바탕에 묻히지 않게
+});
 document.addEventListener("click", (e) => {
   const b = e.target.closest("[data-tip]"), pop = $("#pop");
   if (!b) { if (!e.target.closest("#pop")) pop.hidden = true; return; }
@@ -614,14 +625,14 @@ async function detailOf(id) {
   return d;
 }
 const PF = (d, k) => d?.profile?.fields?.[k];
-function profFact(x) { return x ? { v: x.value, g: GR(x.grade), src: { label: x.source?.label, url: x.source?.url, at: x.source?.date, quote: x.source?.quote } } : null; }
+function profFact(x) { return x ? { v: x.value, g: GR(x.grade), src: { label: x.source?.label, url: x.source?.url, at: x.source?.date, quote: x.source?.quote, image: x.source?.image } } : null; }
 function specFact(d, k) {
   const f = d?.spec?.fields?.[k];
   if (!f) return null;
   const top = f.values?.[0] ?? f.mentions?.[0];
   if (!top) return null;
   const s = top.samples?.[0] ?? top.source ?? {};
-  return { v: top.value, g: f.values?.length ? GR(f.grade) || "c" : "m", src: { label: s.label, url: s.url, at: s.date, quote: s.quote } };
+  return { v: top.value, g: f.values?.length ? GR(f.grade) || "c" : "m", src: { label: s.label, url: s.url, at: s.date, quote: s.quote, image: s.image ?? top.source?.image } };
 }
 function usage(c, d) {
   const f = facts(c);
@@ -955,7 +966,8 @@ function operatorHtml(d) {
     if (text.length < 14 || used.has(text) || /^(캠핑 이용요금|예약 취소|이용요금 환불기준|.+가능한가요)\??$/.test(text)) continue;
     used.add(text);
     const label = OPERATOR_CATEGORIES.find(([, re]) => re.test(text))?.[0] ?? "운영 안내";
-    const row = grouped.get(label) ?? { label, texts: [], url: x.url, src: x.src, at: x.date };
+    const row = grouped.get(label) ?? { label, texts: [], url: x.url, src: x.src, at: x.date, image: null };
+    if (x.image && !row.image) row.image = x.image;
     if (row.texts.length < 3 && !row.texts.some((t) => t.includes(text) || text.includes(t))) row.texts.push(text);
     if (!row.url && x.url) row.url = x.url;
     grouped.set(label, row);
@@ -964,7 +976,7 @@ function operatorHtml(d) {
   const rows = [...grouped.values()].filter((x) => x.texts.length).sort((a, b) => (order.get(a.label) ?? 99) - (order.get(b.label) ?? 99)).slice(0, 8);
   if (!rows.length) return "";
   return `<section class="d-sec operator-sec"><div class="sec-head">${iconTitle("info", "운영자 안내")}<span class="sec-note">${dot("c")}항목별 정리</span></div><div class="operator-grid">${rows.map((x) => {
-    const source = srcTip({ g: "c", src: { label: sourceName(x.src, "운영자 홈페이지"), url: x.url, at: x.at, quote: x.texts.join("\n") } }, x.label);
+    const source = srcTip({ g: "c", src: { label: x.image ? "운영자 안내 이미지(글자 인식)" : sourceName(x.src, "운영자 홈페이지"), url: x.url, at: x.at, quote: x.texts.join("\n"), image: x.image } }, x.label);
     const sum = operatorSummary(x.label, x.texts);
     // ‘○○ 안내’ ‘○○ 확인’ 같은 빈 요약 대신 운영자가 쓴 첫 문장을 짧게 정리해 보인다.
     const statement = x.texts.find((t) => !/(\?|까요|나요|가요|인가요)\s*$/.test(t));

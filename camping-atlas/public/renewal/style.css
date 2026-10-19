@@ -518,7 +518,7 @@ body.map-mode { overflow: hidden; height: 100dvh; }
 .lightbox::backdrop { background: rgba(0, 0, 0, .6); }
 .lb-track { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .lb-track img { flex: 0 0 100%; width: 100%; height: 100%; object-fit: contain; scroll-snap-align: center; }
-.lb-x { position: fixed; top: 16px; right: 16px; z-index: 2; }
+.lb-x { position: fixed; top: 16px; right: 16px; z-index: 2; color: var(--ink); }
 .lb-cap { position: fixed; left: 0; right: 0; bottom: 16px; text-align: center; font-size: .8rem; opacity: .7; }
 .loading { height: 60vh; display: grid; place-items: center; }
 .loading::after { content: ""; width: 32px; height: 32px; border-radius: 50%; border: 3px solid var(--soft-2); border-top-color: var(--ink); animation: spin .8s linear infinite; }
@@ -1030,3 +1030,14 @@ a.near { color: inherit; text-decoration: none; }
 
 /* 과거 글 기준일 표기 “(2025.09.16 기준)” — 값 오른쪽 작은 회색 */
 .asof { margin-left: 4px; font-style: normal; font-size: .74rem; font-weight: 600; color: var(--ink-3); white-space: nowrap; }
+
+/* (i) 원본 안내 이미지(OCR 근거) — 높이를 고정해 말풍선 위치가 이미지 로딩 후에도 맞게 */
+.pop .tip-img { position: relative; display: block; width: 100%; height: 140px; padding: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: var(--soft); cursor: zoom-in; }
+.pop .tip-img img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
+.pop .tip-img span { position: absolute; right: 6px; bottom: 6px; display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 999px; background: rgba(16, 20, 20, .72); color: #fff; font-size: .72rem; font-weight: 800; }
+.pop .tip-img span .ic { width: 12px; height: 12px; }
+.pop .tip-note { color: var(--ink-3); font-size: .74rem; }
+/* 운영자 사이트가 https를 지원하지 않는 등으로 이미지가 안 뜨면 칸을 접고 ‘이미지 새 창’ 링크만 남긴다 */
+.pop .tip-img.is-broken { display: none; }
+.pop .tip-note a { color: var(--accent); font-weight: 700; }
+.lightbox.lb-doc .lb-track img { background: #fff; height: auto; max-height: 100%; align-self: center; }
