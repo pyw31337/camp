@@ -75,3 +75,13 @@ test("수집원: 네이버는 최신순(sort=date)·실행 상한을 지킨다",
   assert.ok(s.calls <= 7 && n <= 7);
   assert.equal(queryPlan().length, 44);
 });
+
+test("trending: 카카오 동시 수집도 종류별 상한·시간 상한을 지킨다", async () => {
+  const fetchImpl = async () => ({ ok: true, status: 200, json: async () => ({ documents: Array.from({ length: 50 }, (_, i) => ({ url: `https://blog.example/${Math.random()}`, datetime: "2026-10-19T10:00:00+09:00", title: "t" + i, contents: "" })) }) });
+  const s = kakaoSource({ key: "k", caps: { blog: 7, cafe: 3, vclip: 0 }, concurrency: 4, fetchImpl, sleep: async () => {} });
+  await s.collect(["a", "b", "c"], "2026-10-13");
+  assert.deepEqual(s.calls, { blog: 7, cafe: 3, vclip: 0 });
+  const late = kakaoSource({ key: "k", deadline: Date.now() - 1, fetchImpl, sleep: async () => {} });
+  assert.deepEqual(await late.collect(["a"], "2026-10-13"), []);
+  assert.equal(late.stopped, "deadline");
+});

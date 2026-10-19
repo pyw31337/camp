@@ -36,10 +36,12 @@ const queries = queryPlan();
 const usage = readJson(USAGE, { version: 1, days: {} });
 const run = { at: new Date().toISOString(), kakao: null, naver: null };
 const collected = [];
+// 시간 상한: 카카오 12분, 네이버는 시작부터 22분까지. 넘으면 그때까지 모은 글로 순위를 낸다(작업 제한 40분).
+const t0 = Date.now(), mins = (k, d) => envNum(k, d) * 60e3;
 if (!dry) {
   const [b, c, v] = String(process.env.TRENDING_KAKAO_CAPS || "3000,3000,800").split(",").map(Number);
-  const kakao = kakaoSource({ key: process.env.KAKAO_REST_API_KEY?.trim(), caps: { blog: b, cafe: c, vclip: v } });
-  if (kakao.enabled) { collected.push(...await kakao.collect(queries, since, log)); run.kakao = kakao.calls; }
+  const kakao = kakaoSource({ key: process.env.KAKAO_REST_API_KEY?.trim(), caps: { blog: b, cafe: c, vclip: v }, deadline: t0 + mins("TRENDING_KAKAO_MIN", 12) });
+  if (kakao.enabled) { collected.push(...await kakao.collect(queries, since, log)); run.kakao = kakao.calls; log(`카카오 ${JSON.stringify(kakao.calls)}건 · ${Math.round((Date.now() - t0) / 1000)}초${kakao.stopped ? ` · 중단(${kakao.stopped})` : ""}`); }
   else log("카카오 건너뜀: KAKAO_REST_API_KEY 없음");
 
   const id = process.env.NAVER_API_HUB_CLIENT_ID?.trim(), secret = process.env.NAVER_API_HUB_CLIENT_SECRET?.trim();
@@ -53,7 +55,7 @@ if (!dry) {
       const budget = remainingBudget(shared, Number(process.env.NAVER_MONTHLY_CAP || DEFAULT_MONTHLY_CAP)) - mine;
       const max = Math.max(0, Math.min(envNum("TRENDING_NAVER_MAX_CALLS", 1500), budget));
       log(`네이버 이번 실행 상한 ${max}건(이번 달 남은 공용 예산 ${budget})`);
-      if (max > 0) { const naver = naverSource({ id, secret, maxCalls: max }); collected.push(...await naver.collect(queries, since, log)); run.naver = naver.calls; }
+      if (max > 0) { const naver = naverSource({ id, secret, maxCalls: max, deadline: t0 + mins("TRENDING_TOTAL_MIN", 22) }); collected.push(...await naver.collect(queries, since, log)); run.naver = naver.calls; log(`네이버 ${naver.calls}건 · ${Math.round((Date.now() - t0) / 1000)}초`); }
     }
   } else log("네이버 건너뜀: 키 없음 또는 NAVER_API_ENABLED=false");
 }
