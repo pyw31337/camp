@@ -7,6 +7,7 @@
   --flame: #ff4a1c; --on-flame: #fff; --flame-soft: #ffe3d8; --on-flame-soft: #b2300a;
   --cobalt: #2563eb; --on-cobalt: #fff;
   --ok: #00875a; --part: #c2410c;
+  --content: 1320px;
   --gut: clamp(16px, 3.2vw, 56px);
   --head-h: 64px;
   --font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
@@ -131,7 +132,7 @@ body[data-view="home"] .top.is-glass { background: rgba(12,22,31,.68); backdrop-
 [data-v="a"] .hero { min-height: clamp(380px, 40vw, 560px); display: flex; align-items: flex-end; }
 [data-v="a"] .hero-bg { display: block; position: absolute; inset: 0; background: url("../images/hero-campsite.webp") 70% 60% / cover no-repeat; }
 [data-v="a"] .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5,17,31,.88) 0%, rgba(5,17,31,.64) 38%, rgba(5,17,31,.18) 70%, rgba(5,17,31,.1)), linear-gradient(180deg, rgba(2,12,25,.28), rgba(2,12,25,.1) 48%, rgba(5,17,31,.7)); }
-.hero-in { position: relative; width: 100%; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+.hero-in { position: relative; width: 100%; max-width: var(--content); margin: 0 auto; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
 .hero h1 { font-size: clamp(2.3rem, 1.2rem + 4.2vw, 5rem); line-height: 1.14; letter-spacing: -0.045em; }
 .h1-a { display: block; font-weight: 800; color: #fff; }
 .h1-b { display: block; font-weight: 900; color: #fff; }
@@ -270,7 +271,7 @@ body[data-view="home"] .top.is-glass { background: rgba(12,22,31,.68); backdrop-
 [data-v="b"] .sec-head { border-bottom: 2px solid var(--ink); padding-bottom: 8px; }
 
 /* ── 곧 오픈 ──────────────────────────────────────── */
-.opens { padding: 0 var(--gut) clamp(24px, 3vw, 40px); }
+.opens { width: 100%; max-width: var(--content); margin-left: auto; margin-right: auto; padding: 0 var(--gut) clamp(24px, 3vw, 40px); }
 .opens-rail { gap: 14px; padding: 10px 4px 18px; margin: -8px -4px -10px; }
 .open-card { position: relative; flex: none; width: 250px; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
 .open-card img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: var(--r-s); background: var(--soft-2); box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s; }
@@ -281,7 +282,7 @@ body[data-view="home"] .top.is-glass { background: rgba(12,22,31,.68); backdrop-
 .sig .ic { width: 14px; height: 14px; }
 
 /* 테마는 별도 설명 없이 사진 레일 자체가 탐색 버튼이 되게 한다. */
-.themes-catalog { padding: 0 var(--gut) clamp(24px, 3.5vw, 44px); }
+.themes-catalog { width: 100%; max-width: var(--content); margin-left: auto; margin-right: auto; padding: 0 var(--gut) clamp(24px, 3.5vw, 44px); }
 .theme-catalog-rail { gap: 14px; padding: 10px 4px 18px; margin: -8px -4px -10px; scroll-snap-type: x proximity; }
 .theme-card { position: relative; flex: 0 0 clamp(145px, 15vw, 210px); aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--r, 18px); border: 1px solid var(--card-line, rgba(0,0,0,0.06)); background: var(--soft-2); box-shadow: var(--shadow); scroll-snap-align: start; text-align: left; text-decoration: none; display: block; transition: transform .2s, box-shadow .2s; }
 .theme-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .25s ease; }
@@ -296,6 +297,10 @@ body[data-view="home"] .top.is-glass { background: rgba(12,22,31,.68); backdrop-
 
 /* ── 결과 (조건 검색) ─────────────────────────────────── */
 .results {
+  width: 100%;
+  max-width: var(--content);
+  margin-left: auto;
+  margin-right: auto;
   margin-top: clamp(36px, 5.5vw, 68px);
   padding: clamp(32px, 4.5vw, 56px) var(--gut) 48px;
   border-top: 1px solid var(--line);
@@ -396,7 +401,7 @@ body[data-view="home"] .top.is-glass { background: rgba(12,22,31,.68); backdrop-
 @media (hover: hover) { .car:hover .car-nav, .card:hover .car-nav, .review-pick:hover .car-nav { opacity: 1; } }
 
 /* ── 상세 ─────────────────────────────────────────── */
-.detail { padding: 0 var(--gut) 64px; }
+.detail { width: 100%; max-width: var(--content); margin-left: auto; margin-right: auto; padding: 0 var(--gut) 64px; }
 .d-bar { display: flex; align-items: center; gap: 12px; padding: 14px 0; }
 .d-crumb { flex: 1; font-weight: 700; color: var(--ink-3); font-size: .92rem; }
 .d-head { display: grid; gap: 12px; padding: 4px 0 20px; }
@@ -500,7 +505,7 @@ body[data-view="home"] .top.is-glass { background: rgba(12,22,31,.68); backdrop-
 .d-dock { display: none; }
 
 /* ── 비교 ─────────────────────────────────────────── */
-.cmp-page { padding: 24px var(--gut) 64px; }
+.cmp-page { width: 100%; max-width: var(--content); margin-left: auto; margin-right: auto; padding: 24px var(--gut) 64px; }
 .switch { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: .92rem; white-space: nowrap; cursor: pointer; }
 .switch input { width: 18px; height: 18px; accent-color: var(--ink); }
 .cmp-scroll { overflow-x: auto; scrollbar-width: none; margin: 0 calc(var(--gut) * -1); padding: 0 var(--gut); }
@@ -898,9 +903,9 @@ a.near { color: inherit; text-decoration: none; }
 .gallery-sec { margin: 0 auto; max-width: var(--content); }
 .gallery-head { padding: 0 var(--gut); margin: 0 0 8px; }
 .gallery-head .sec-title { display: none; }
-.intro-sec { background: linear-gradient(135deg, color-mix(in srgb, var(--accent-tint) 78%, #fff), var(--paper)); }
-.review-picks { padding: 24px var(--gut) 0; }
-.themes-catalog { padding: 24px var(--gut) clamp(20px, 3vw, 36px); }
+.intro-sec { background: var(--paper); }
+.review-picks { width: 100%; max-width: var(--content); margin-left: auto; margin-right: auto; padding: 24px var(--gut) 0; }
+.themes-catalog { width: 100%; max-width: var(--content); margin-left: auto; margin-right: auto; padding: 24px var(--gut) clamp(20px, 3vw, 36px); }
 .review-pick { position: relative; flex: 0 0 min(76vw, 280px); overflow: hidden; border-radius: var(--r, 18px); border: 1px solid var(--card-line, rgba(0,0,0,0.06)); background: var(--paper); box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s; }
 @media (hover: hover) {
   .review-pick:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); }
@@ -1142,7 +1147,7 @@ a.near { color: inherit; text-decoration: none; }
 .lightbox.lb-doc .lb-track img { background: #fff; height: auto; max-height: 100%; align-self: center; }
 
 /* ── 목록 화면(#/list): 히어로 ‘찾기’ 결과. 가로 한 줄 행 — 왼쪽 썸네일, 오른쪽 상세(소유자 2026-10-19) ── */
-.list-page { padding: calc(var(--head-h) + 20px) var(--gut) 56px; max-width: 1280px; margin: 0 auto; }
+.list-page { width: 100%; max-width: var(--content); margin: 0 auto; padding: calc(var(--head-h) + 20px) var(--gut) 56px; }
 .list-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; margin-bottom: 18px; }
 .list-back { justify-self: start; display: inline-flex; align-items: center; gap: 4px; color: var(--ink-2); font-weight: 700; font-size: .9rem; }
 .list-back .ic { width: 16px; height: 16px; }
@@ -1654,3 +1659,7 @@ dialog.weather-modal::backdrop {
   background: #6d28d9;
 }
 
+
+.plat-btn { color: var(--ink); }
+.plat-btn img, .plat-btn svg { width: 22px; height: 22px; filter: grayscale(1); }
+.plat-btn svg { color: var(--ink); }

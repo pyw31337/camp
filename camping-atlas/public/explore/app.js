@@ -2,9 +2,11 @@
 // 데이터는 탐색 화면과 같은 공개 파일을 읽는다(../explore/data). 사진 색인은 scripts/build-renewal-data.mjs.
 // 원칙: 값만 짧게, 출처는 (i), 모르는 칸은 상세 규격에서만 회색 ‘확인필요’ 글자. 채운 배지는 원문 대조·공식 등록·운영자 공개 값만.
 
-// /renewal/은 시안 확인 주소로 남기고, 실제 서비스 주소 /explore/도 같은 화면을 쓴다.
-// 두 주소에서만 데이터의 상대 경로가 다르다.
-const DATA = location.pathname.includes("/explore/") ? "./data/" : "../explore/data/";
+// /camp/ 루트와 /camp/explore/ 및 로컬 시안 /camp/renewal/ 경로를 모두 지원한다.
+const IS_SUBDIR = location.pathname.includes("/explore/") || location.pathname.includes("/renewal/");
+const ASSETS_BASE = IS_SUBDIR ? "../" : "./";
+const DATA = location.pathname.includes("/explore/") ? "./data/" : location.pathname.includes("/renewal/") ? "../explore/data/" : "./explore/data/";
+const MEDIA = IS_SUBDIR ? "../media/" : "./media/";
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[m]);
@@ -35,7 +37,14 @@ function setVariant(v) {
   document.documentElement.dataset.v = v;
   $$("[data-variant]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.variant === v)));
   store.set("mc-variant", v);
-  const u = new URL(location.href); u.searchParams.set("v", v); history.replaceState(null, "", u);
+  // ?v=a 파라미터가 주소창에 불필요하게 남지 않도록 제거한다.
+  const u = new URL(location.href);
+  if (u.searchParams.has("v")) {
+    u.searchParams.delete("v");
+    const cleanSearch = u.searchParams.toString();
+    const cleanUrl = u.pathname + (cleanSearch ? `?${cleanSearch}` : "") + u.hash;
+    history.replaceState(null, "", cleanUrl);
+  }
 }
 // A 포스터를 공개 서비스의 기본 표현으로 고정한다. B/C는 더 이상 고객 화면에 노출하지 않는다.
 setVariant("a");
@@ -191,21 +200,23 @@ const THEMES = [
   ["WINTER", "겨울", (c) => c.pf?.t?.includes("WINTER")],
   ["AUTO", "오토캠핑", (c) => c.pf?.t?.includes("AUTO")],
 ];
-const THEME_IMAGES = {
-  VALLEY: "../images/themes/valley.webp",
-  FOREST: "../images/themes/forest.webp",
-  BEACH: "../images/themes/sea.webp",
-  LAKE: "../images/themes/lake.webp",
-  FAMILY: "../images/themes/kids.webp",
-  PET: "../images/themes/pet.webp",
-  GLAMPING: "../images/themes/glamping.webp",
-  CARAVAN: "../images/themes/caravan.webp",
-  WINTER: "../images/themes/winter.webp",
-  AUTO: "../images/themes/auto.webp",
-  ALL: "../images/themes/valley.webp",
-  OPEN: "../images/themes/sunrise.webp",
-  AVAIL: "../images/themes/comfort.webp",
+const THEME_FILES = {
+  VALLEY: "valley.webp",
+  FOREST: "forest.webp",
+  BEACH: "sea.webp",
+  LAKE: "lake.webp",
+  FAMILY: "kids.webp",
+  PET: "pet.webp",
+  GLAMPING: "glamping.webp",
+  CARAVAN: "caravan.webp",
+  WINTER: "winter.webp",
+  AUTO: "auto.webp",
+  ALL: "valley.webp",
+  OPEN: "sunrise.webp",
+  AVAIL: "comfort.webp",
+  REVIEWS: "forest.webp",
 };
+const themeImg = (k) => `${ASSETS_BASE}images/themes/${THEME_FILES[k] ?? "valley.webp"}`;
 const THEME_SUBS = {
   VALLEY: "시원한 물소리와 맑은 물놀이를 즐길 수 있는 계곡 야영장",
   FOREST: "피톤치드 가득한 울창한 숲속 힐링 캠핑장",
@@ -220,6 +231,7 @@ const THEME_SUBS = {
   ALL: "모여라캠핑이 엄선한 전국 다양한 테마별 캠핑장",
   OPEN: "곧 예약이 오픈되는 캠핑장 모아보기",
   AVAIL: "지금 바로 실시간 예약 접수 중인 캠핑장",
+  REVIEWS: "방문자들의 생생한 긍정 평가가 많은 캠핑장",
 };
 function matches(c, { useArea = true } = {}) {
   if (useArea && S.area !== "all" && AREA_OF[sidoShort(c.sido)] !== S.area) return false;
@@ -637,7 +649,7 @@ function countOf(test) { return S.camps.reduce((n, c) => n + (test(c) ? 1 : 0), 
 function homeView() {
   const openings = S.camps.map((c) => [c, openingOf(c)]).filter(([c, o]) => o && hasPhoto(c)).sort((a, b) => a[1].dd - b[1].dd);
   const themeItems = THEMES.map(([key, label, test]) => {
-    const imgSrc = THEME_IMAGES[key] ?? "../images/themes/valley.webp";
+    const imgSrc = themeImg(key);
     return `<a class="theme-card" href="#/theme/${encodeURIComponent(key)}"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy"><span><b>${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
   }).join("");
   const openingSection = openings.length ? `<section class="opens" aria-labelledby="op-t">
@@ -646,7 +658,7 @@ function homeView() {
   </section>` : "";
   const picks = reviewPicks();
   const reviewSection = picks.length ? `<section class="review-picks" aria-labelledby="review-picks-t">
-    <div class="sec-head"><div><h2 id="review-picks-t">긍정 <em>후기</em></h2></div><div class="sec-side"><span class="rail-progress" data-rail="review-picks-rail"><i style="width: 18%"></i></span><span class="sec-note">${tip("<b>긍정 후기</b><span>연결된 블로그·카페 후기에서 집계한 주제와 건수입니다. 별점·실시간 인기 순위가 아니며, 원문은 상세에서 바로 열 수 있어요.</span>")}</span></div></div>
+    <div class="sec-head"><div><h2 id="review-picks-t">긍정 <em>후기</em></h2></div><div class="sec-side"><span class="rail-progress" data-rail="review-picks-rail"><i style="width: 18%"></i></span><a class="link" href="#/theme/REVIEWS">전체 보기 ${ic("right")}</a><span class="sec-note">${tip("<b>긍정 후기</b><span>연결된 블로그·카페 후기에서 집계한 주제와 건수입니다. 별점·실시간 인기 순위가 아니며, 원문은 상세에서 바로 열 수 있어요.</span>")}</span></div></div>
     <div class="rail review-picks-rail">${picks.map(reviewPickCard).join("")}</div>
   </section>` : "";
   const themeSection = themeItems ? `<section class="themes-catalog" aria-labelledby="theme-t">
@@ -717,7 +729,7 @@ function themeRow([k, label, test], list, first, used) {
     <div class="rail trow-rail">${items.map((c, i) => card(c, first && i < 4 ? i : 9)).join("")}</div>
   </section>`;
 }
-const themeName = (k) => (k === "ALL" ? "전체 테마" : k === "AVAIL" ? "공식 접수 중" : k === "OPEN" ? "곧 오픈" : THEMES.find((t) => t[0] === k)?.[1] ?? k);
+const themeName = (k) => (k === "ALL" ? "전체 테마" : k === "AVAIL" ? "공식 접수 중" : k === "OPEN" ? "곧 오픈" : k === "REVIEWS" ? "긍정 후기 추천" : THEMES.find((t) => t[0] === k)?.[1] ?? k);
 function renderResults({ reset = true } = {}) {
   const grid = $("[data-grid]");
   if (!grid) return;
@@ -1112,9 +1124,9 @@ function bindList() {
 
 function themeView(themeKey) {
   const tName = themeName(themeKey);
-  const tImg = THEME_IMAGES[themeKey] ?? "../images/themes/valley.webp";
+  const tImg = themeImg(themeKey);
   const tSub = THEME_SUBS[themeKey] ?? "자연과 함께하는 특별한 테마 캠핑장";
-  const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "AVAIL" ? (c) => S.avail?.has(String(c.id)) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
+  const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "AVAIL" ? (c) => S.avail?.has(String(c.id)) : themeKey === "REVIEWS" ? (c) => Boolean((c.rv?.p?.length ?? 0) >= 2 || (c.rv?.t ?? 0) >= 4) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
   const totalInTheme = S.camps.filter(testFn).length;
 
   return `<section class="theme-page" aria-labelledby="tp-title">
@@ -1397,15 +1409,23 @@ function fuelPlaces(rows, licensedGas) {
 }
 const isOfficialTourImage = (u) => /^https:\/\/(?:[\w-]+\.)?(?:visitkorea\.or\.kr|kto\.or\.kr)\//i.test(String(u ?? ""));
 /** 주변 칸 한 곳(주유·충전 칸은 상세 화면이 뜬 뒤 충전소를 덧붙일 때도 쓴다) */
+function nearbyThumb(x) {
+  if (x.image && /^https?:\/\//.test(x.image)) return x.image;
+  if (x.lat && x.lng) {
+    // 다음 지도 이미지 서비스(키 불필요, 실측 200). 좌표가 있는 주변시설은 항상 썸네일을 가진다.
+    return `https://spi.maps.daum.net/map2/map/imageservice?IW=480&IH=360&MX=${Number(x.lng)}&MY=${Number(x.lat)}&SCALE=2.5&service=open`;
+  }
+  return "";
+}
 function nearbyCard(x) {
   const [label, icon] = NEARBY_LABELS[x.type] ?? [x.type, "pin"];
   const map = x.lat && x.lng ? `https://map.kakao.com/link/map/${encodeURIComponent(x.name)},${x.lat},${x.lng}` : x.url;
   const road = x.lat && x.lng ? `https://map.kakao.com/link/roadview/${x.lat},${x.lng}` : "";
-  const hasImg = x.image && isOfficialTourImage(x.image);
-  const media = hasImg
-    ? `<div class="media-card-photo"><img src="${esc(x.image)}" alt="" loading="lazy" decoding="async"></div>`
+  const photo = nearbyThumb(x);
+  const media = photo
+    ? `<div class="media-card-photo"><img src="${esc(photo)}" alt="${esc(x.name)}" loading="lazy" decoding="async" onerror="this.closest('.media-card-photo').classList.add('media-card-icon');this.replaceWith(Object.assign(document.createElement('span'),{innerHTML:'${ic(icon).replace(/'/g, "\'") }'}))"></div>`
     : `<div class="media-card-photo media-card-icon" data-kind="${esc(icon)}">${ic(icon)}</div>`;
-  return `<article class="nearby-place media-card${hasImg ? " has-image" : ""}">
+  return `<article class="nearby-place media-card${photo ? " has-image" : ""}">
     ${media}
     <div class="media-card-body">
       <i>${ic(icon)}${label} · ${x.summary ? "공공데이터" : km(x.m)}${x.sub ? ` · ${esc(x.sub)}` : ""}</i>
@@ -1455,7 +1475,7 @@ function nearbyHubHtml(c, d) {
     .filter(([, , rows]) => rows.length);
   // 주유·충전: 주유소는 상세 자료에 있고, 전기차 충전소는 /context/extras.json에서 화면이 뜬 뒤 덧붙인다(mountNearbyEv).
   const energy = `<section class="nearby-group" data-energy${fuel.length ? "" : " hidden"}><h3>${ic("fuel")}주유 · 충전</h3><div class="nearby-places" data-energy-places>${fuel.map(nearbyCard).join("")}</div><p class="nearby-note" data-energy-note hidden></p></section>`;
-  return `<section class="d-sec nearby-hub"${groups.length || fuel.length ? "" : " hidden"}><div class="sec-head">${iconTitle("route", "주변")}<span class="sec-note">직선거리 ${tip("<b>주변 정보</b><span>생활·안전 시설은 인허가·공공 데이터, 관광·맛집은 한국관광공사 데이터로 연결합니다. 운영 시간과 영업 여부는 원문에서 다시 확인하세요.</span>")}</span></div><div class="nearby-groups">${groups.map(([title, icon, rows]) => `<section class="nearby-group"><h3>${ic(icon)}${title}</h3><div class="nearby-places">${rows.map(nearbyCard).join("")}</div></section>`).join("")}${energy}</div></section>`;
+  return `<section class="d-sec nearby-hub"${groups.length || fuel.length ? "" : " hidden"}><div class="sec-head">${iconTitle("route", "주변시설")}<span class="sec-note">직선거리 ${tip("<b>주변 정보</b><span>생활·안전 시설은 인허가·공공 데이터, 관광·맛집은 한국관광공사 데이터로 연결합니다. 운영 시간과 영업 여부는 원문에서 다시 확인하세요.</span>")}</span></div><div class="nearby-groups">${groups.map(([title, icon, rows]) => `<section class="nearby-group"><h3>${ic(icon)}${title}</h3><div class="nearby-places">${rows.map(nearbyCard).join("")}</div></section>`).join("")}${energy}</div></section>`;
 }
 function reviewHtml(d, c) {
   const rv = d?.rv ?? c?.rv;
@@ -1562,7 +1582,6 @@ async function detailView(id) {
         ${priceMentionsHtml(d)}
         <section class="d-sec"><div class="sec-head">${iconTitle("info", "이용 정보")}</div><dl class="uses">${us.map(([l, x, icon]) => `<div class="use${x ? "" : " unk"}"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${x ? `${esc(detailValue(x))}${asOfMention(x)}` : "확인필요"}</span>${x ? `<span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span>` : ""}</dd></div>`).join("")}</dl></section>
         <section class="d-sec" data-cond hidden></section>
-        ${weatherSectionHtml(c)}
         ${reviewHtml(d, c)}
         ${operatorHtml(d)}
         ${bookingHtml(c, d)}
@@ -1868,22 +1887,23 @@ function layoutHtml(d) {
 function platformHubHtml(d, c) {
   const name = nameOf(c).name;
   const q = encodeURIComponent(`${name} 캠핑`);
+  const svg = (path) => `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${path}</svg>`;
   const platforms = [
-    { label: "YouTube", icon: "video", url: `https://www.youtube.com/results?search_query=${q}`, has: (d?.videos ?? []).length > 0 },
-    { label: "Instagram", icon: "camera", url: `https://www.instagram.com/explore/search/keyword/?q=${q}` },
-    { label: "Facebook", icon: "external", url: `https://www.facebook.com/search/posts/?q=${q}` },
-    { label: "TikTok", icon: "video", url: `https://www.tiktok.com/search?q=${q}` },
-    { label: "네이버", icon: "search", url: `https://search.naver.com/search.naver?query=${q}` },
-    { label: "다음", icon: "search", url: `https://search.daum.net/search?q=${q}` },
+    { label: "YouTube", icon: svg('<path d="M18 3a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H6a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5zm-9 6v6a1 1 0 0 0 1.514.857l5-3a1 1 0 0 0 0-1.714l-5-3A1 1 0 0 0 9 9z"/>'), url: `https://www.youtube.com/results?search_query=${q}`, has: (d?.videos ?? []).length > 0 },
+    { label: "Instagram", icon: svg('<path d="M16 3a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5zm-4 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8m4.5-1.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>'), url: `https://www.instagram.com/explore/search/keyword/?q=${q}` },
+    { label: "Facebook", icon: svg('<path d="M18 2a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-3v1h3a1 1 0 0 1 .97 1.24l-1 4A1 1 0 0 1 17 15h-2v6a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-6H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2V7a6 6 0 0 1 6-6h3z"/>'), url: `https://www.facebook.com/search/posts/?q=${q}` },
+    { label: "TikTok", icon: svg('<path d="M16.083 2h-4.083a1 1 0 0 0-1 1v11.5a1.5 1.5 0 1 1-2.4-1.2 1 1 0 0 0 .4-.8V8.174a1 1 0 0 0-1.23-.974 7.5 7.5 0 1 0 8.73 7.3V12.3l.311.153a9 9 0 0 0 3.59.993 1 1 0 0 0 1.1-.996V8.417a1 1 0 0 0-.835-.986 5 5 0 0 1-4.096-4.096A1 1 0 0 0 16.083 2z"/>'), url: `https://www.tiktok.com/search?q=${q}` },
+    { label: "네이버", icon: `<img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Naver_logo_initial.svg" alt="" width="22" height="22">`, url: `https://search.naver.com/search.naver?query=${q}` },
+    { label: "다음", icon: `<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Daum_icon_%282025%E2%80%932026%29.svg/240px-Daum_icon_%282025%E2%80%932026%29.svg.png" alt="" width="22" height="22">`, url: `https://search.daum.net/search?q=${q}` },
   ];
-  return `<section class="d-sec plat-hub"><div class="sec-head">${iconTitle("external", "더 보기")}<span class="sec-note">플랫폼별 검색</span></div><div class="plat-btns">${platforms.map((p) => `<a class="plat-btn${p.has ? " has" : ""}" href="${esc(p.url)}" target="_blank" rel="noopener" title="${esc(p.label)}에서 ${esc(name)} 검색">${ic(p.icon)}<span>${esc(p.label)}</span>${p.has ? "<i>영상 있음</i>" : ""}</a>`).join("")}</div></section>`;
+  return `<section class="d-sec plat-hub"><div class="sec-head">${iconTitle("external", "더 보기")}<span class="sec-note">플랫폼별 검색</span></div><div class="plat-btns">${platforms.map((p) => `<a class="plat-btn${p.has ? " has" : ""}" href="${esc(p.url)}" target="_blank" rel="noopener" title="${esc(p.label)}에서 ${esc(name)} 검색">${p.icon}<span>${esc(p.label)}</span>${p.has ? "<i>영상 있음</i>" : ""}</a>`).join("")}</div></section>`;
 }
 function videosHtml(d) {
   const v = (d?.videos ?? []).filter((x) => x.yt).slice(0, 8);
   if (!v.length) return "";
   return `<section class="d-sec"><div class="sec-head">${iconTitle("video", "관련 영상")}<span class="sec-note">YouTube</span></div><div class="rail vids">${v.map((x, i) => {
     const fact = sourceFact({ src: "YouTube", url: x.url ?? `https://www.youtube.com/watch?v=${x.yt}`, date: x.date, title: x.title }, "YouTube");
-    return `<article class="vid-wrap"><button type="button" class="vid" data-yt="${esc(x.yt)}"><img src="https://i.ytimg.com/vi/${encodeURIComponent(x.yt)}/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="vid-play">${ic("video")}</span><b>${esc(serviceText(x.title, 60) || `현장 영상 ${i + 1}`)}</b><i>${esc([x.author, x.date ? String(x.date).slice(0, 7) : ""].filter(Boolean).join(" · ") || "재생하기")}</i></button>${srcTip(fact, `관련 영상 ${i + 1}`)}</article>`;
+    return `<article class="vid-wrap"><button type="button" class="vid" data-yt="${esc(x.yt)}"><img src="https://i.ytimg.com/vi/${encodeURIComponent(x.yt)}/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14z"/></svg></span><b>${esc(serviceText(x.title, 60) || `현장 영상 ${i + 1}`)}</b><i>${esc([x.author, x.date ? String(x.date).slice(0, 7) : ""].filter(Boolean).join(" · ") || "재생하기")}</i></button>${srcTip(fact, `관련 영상 ${i + 1}`)}</article>`;
   }).join("")}</div></section>`;
 }
 function reviewSummary(value) {
@@ -1926,10 +1946,11 @@ function reviewLinksHtml(d, c) {
       const platform = /cafe/.test(x.t ?? "") ? "카페" : x.t === "kin" ? "지식iN" : x.t === "web" ? "웹문서" : "블로그";
       const fact = sourceFact(x, platform, [x.title, x.snippet].filter(Boolean).join("\n"));
       const summary = reviewSummary(x.snippet);
-      const thumb = (canPreviewExternalMedia(x) && externalImage(x)) || apiThumb(x);
-      const media = thumb
-        ? `<div class="media-card-photo"><img src="${esc(thumb)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"></div>`
-        : `<div class="media-card-photo media-card-icon" data-kind="review">${ic(x.image ? "polaroid" : "file-text")}</div>`;
+      const host = (() => { try { return new URL(x.url).hostname; } catch { return ""; } })();
+      const fav = host ? `https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=128` : "";
+      const campShot = photosOf(c)[0] || "";
+      const thumb = (canPreviewExternalMedia(x) && externalImage(x)) || apiThumb(x) || fav || campShot;
+      const media = `<div class="media-card-photo">${thumb ? `<img src="${esc(thumb)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${esc(campShot || fav)}'">` : ic("file-text")}</div>`;
       return `<article class="review-link-card media-card"><a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${platform} 후기 ${i + 1} 원문 열기">${media}<div class="media-card-body"><i>${ic("file-text")}${esc(sourceName(x.src, platform))}${x.date ? ` · ${esc(String(x.date).slice(0, 10))}` : ""}</i><b>${esc(serviceText(x.title, 54) || `방문 후기 ${i + 1}`)}</b>${summary ? `<em>${esc(summary)}</em>` : ""}<span class="media-card-go">${ic("external")}원문 보기</span></div></a>${srcTip(fact, `${platform} 후기 ${i + 1}`)}</article>`;
     }).join("")}</div>
     ${directLinks}
@@ -2487,7 +2508,15 @@ function bindDetail() {
   }));
   const id = $(".detail")?.dataset.id;
   const currentCamp = S.byId.get(id);
-  if (currentCamp) initCampWeather(currentCamp);
+  if (currentCamp?.lat && currentCamp?.lng) {
+    const cond = $("[data-cond]");
+    cond?.addEventListener("click", async (ev) => {
+      const day = ev.target.closest("[data-fc-date]");
+      if (!day) return;
+      const data = await fetchCampWeather(currentCamp.lat, currentCamp.lng);
+      if (data) openWeatherModal(currentCamp, day.dataset.fcDate, data);
+    });
+  }
   // 이번 주말 컨디션(날씨·일출일몰·달·미세먼지·산불·물때): /conditions/card.js가 있을 때만 붙인다. 실패하면 칸을 숨긴 채 둔다.
   const condEl = $("[data-cond]"), condCamp = S.byId.get(id);
   if (condEl && condCamp) import(new URL("../conditions/card.js", import.meta.url).href).then((m) => m.mount(condEl, condCamp)).catch(() => {});
@@ -2775,9 +2804,9 @@ addEventListener("error", (e) => {
   $("#view").innerHTML = `<div class="loading"></div>`;
   const [camps, photos, openings, cards, avail] = await Promise.all([
     fetch(`${DATA}campgrounds.json`).then((r) => r.json()),
-    fetch("./data/photos.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
+    fetch(`${DATA}photos.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
     fetch(`${DATA}openings.json`).then((r) => (r.ok ? r.json() : { items: [] })).catch(() => ({ items: [] })),
-    fetch("../media/cards/index.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
+    fetch(`${MEDIA}cards/index.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
     fetch(`${DATA}availability.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
   ]);
   S.camps = camps.filter((c) => c.status !== "폐업");

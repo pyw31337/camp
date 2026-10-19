@@ -2,9 +2,11 @@
 // 데이터는 탐색 화면과 같은 공개 파일을 읽는다(../explore/data). 사진 색인은 scripts/build-renewal-data.mjs.
 // 원칙: 값만 짧게, 출처는 (i), 모르는 칸은 상세 규격에서만 회색 ‘확인필요’ 글자. 채운 배지는 원문 대조·공식 등록·운영자 공개 값만.
 
-// /renewal/은 시안 확인 주소로 남기고, 실제 서비스 주소 /explore/도 같은 화면을 쓴다.
-// 두 주소에서만 데이터의 상대 경로가 다르다.
-const DATA = location.pathname.includes("/explore/") ? "./data/" : "../explore/data/";
+// /camp/ 루트와 /camp/explore/ 및 로컬 시안 /camp/renewal/ 경로를 모두 지원한다.
+const IS_SUBDIR = location.pathname.includes("/explore/") || location.pathname.includes("/renewal/");
+const ASSETS_BASE = IS_SUBDIR ? "../" : "./";
+const DATA = location.pathname.includes("/explore/") ? "./data/" : location.pathname.includes("/renewal/") ? "../explore/data/" : "./explore/data/";
+const MEDIA = IS_SUBDIR ? "../media/" : "./media/";
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[m]);
@@ -35,7 +37,14 @@ function setVariant(v) {
   document.documentElement.dataset.v = v;
   $$("[data-variant]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.variant === v)));
   store.set("mc-variant", v);
-  const u = new URL(location.href); u.searchParams.set("v", v); history.replaceState(null, "", u);
+  // ?v=a 파라미터가 주소창에 불필요하게 남지 않도록 제거한다.
+  const u = new URL(location.href);
+  if (u.searchParams.has("v")) {
+    u.searchParams.delete("v");
+    const cleanSearch = u.searchParams.toString();
+    const cleanUrl = u.pathname + (cleanSearch ? `?${cleanSearch}` : "") + u.hash;
+    history.replaceState(null, "", cleanUrl);
+  }
 }
 // A 포스터를 공개 서비스의 기본 표현으로 고정한다. B/C는 더 이상 고객 화면에 노출하지 않는다.
 setVariant("a");
@@ -191,21 +200,23 @@ const THEMES = [
   ["WINTER", "겨울", (c) => c.pf?.t?.includes("WINTER")],
   ["AUTO", "오토캠핑", (c) => c.pf?.t?.includes("AUTO")],
 ];
-const THEME_IMAGES = {
-  VALLEY: "../images/themes/valley.webp",
-  FOREST: "../images/themes/forest.webp",
-  BEACH: "../images/themes/sea.webp",
-  LAKE: "../images/themes/lake.webp",
-  FAMILY: "../images/themes/kids.webp",
-  PET: "../images/themes/pet.webp",
-  GLAMPING: "../images/themes/glamping.webp",
-  CARAVAN: "../images/themes/caravan.webp",
-  WINTER: "../images/themes/winter.webp",
-  AUTO: "../images/themes/auto.webp",
-  ALL: "../images/themes/valley.webp",
-  OPEN: "../images/themes/sunrise.webp",
-  AVAIL: "../images/themes/comfort.webp",
+const THEME_FILES = {
+  VALLEY: "valley.webp",
+  FOREST: "forest.webp",
+  BEACH: "sea.webp",
+  LAKE: "lake.webp",
+  FAMILY: "kids.webp",
+  PET: "pet.webp",
+  GLAMPING: "glamping.webp",
+  CARAVAN: "caravan.webp",
+  WINTER: "winter.webp",
+  AUTO: "auto.webp",
+  ALL: "valley.webp",
+  OPEN: "sunrise.webp",
+  AVAIL: "comfort.webp",
+  REVIEWS: "forest.webp",
 };
+const themeImg = (k) => `${ASSETS_BASE}images/themes/${THEME_FILES[k] ?? "valley.webp"}`;
 const THEME_SUBS = {
   VALLEY: "시원한 물소리와 맑은 물놀이를 즐길 수 있는 계곡 야영장",
   FOREST: "피톤치드 가득한 울창한 숲속 힐링 캠핑장",
@@ -220,6 +231,7 @@ const THEME_SUBS = {
   ALL: "모여라캠핑이 엄선한 전국 다양한 테마별 캠핑장",
   OPEN: "곧 예약이 오픈되는 캠핑장 모아보기",
   AVAIL: "지금 바로 실시간 예약 접수 중인 캠핑장",
+  REVIEWS: "방문자들의 생생한 긍정 평가가 많은 캠핑장",
 };
 function matches(c, { useArea = true } = {}) {
   if (useArea && S.area !== "all" && AREA_OF[sidoShort(c.sido)] !== S.area) return false;
@@ -637,7 +649,7 @@ function countOf(test) { return S.camps.reduce((n, c) => n + (test(c) ? 1 : 0), 
 function homeView() {
   const openings = S.camps.map((c) => [c, openingOf(c)]).filter(([c, o]) => o && hasPhoto(c)).sort((a, b) => a[1].dd - b[1].dd);
   const themeItems = THEMES.map(([key, label, test]) => {
-    const imgSrc = THEME_IMAGES[key] ?? "../images/themes/valley.webp";
+    const imgSrc = themeImg(key);
     return `<a class="theme-card" href="#/theme/${encodeURIComponent(key)}"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy"><span><b>${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
   }).join("");
   const openingSection = openings.length ? `<section class="opens" aria-labelledby="op-t">
@@ -646,7 +658,7 @@ function homeView() {
   </section>` : "";
   const picks = reviewPicks();
   const reviewSection = picks.length ? `<section class="review-picks" aria-labelledby="review-picks-t">
-    <div class="sec-head"><div><h2 id="review-picks-t">긍정 <em>후기</em></h2></div><div class="sec-side"><span class="rail-progress" data-rail="review-picks-rail"><i style="width: 18%"></i></span><span class="sec-note">${tip("<b>긍정 후기</b><span>연결된 블로그·카페 후기에서 집계한 주제와 건수입니다. 별점·실시간 인기 순위가 아니며, 원문은 상세에서 바로 열 수 있어요.</span>")}</span></div></div>
+    <div class="sec-head"><div><h2 id="review-picks-t">긍정 <em>후기</em></h2></div><div class="sec-side"><span class="rail-progress" data-rail="review-picks-rail"><i style="width: 18%"></i></span><a class="link" href="#/theme/REVIEWS">전체 보기 ${ic("right")}</a><span class="sec-note">${tip("<b>긍정 후기</b><span>연결된 블로그·카페 후기에서 집계한 주제와 건수입니다. 별점·실시간 인기 순위가 아니며, 원문은 상세에서 바로 열 수 있어요.</span>")}</span></div></div>
     <div class="rail review-picks-rail">${picks.map(reviewPickCard).join("")}</div>
   </section>` : "";
   const themeSection = themeItems ? `<section class="themes-catalog" aria-labelledby="theme-t">
@@ -717,7 +729,7 @@ function themeRow([k, label, test], list, first, used) {
     <div class="rail trow-rail">${items.map((c, i) => card(c, first && i < 4 ? i : 9)).join("")}</div>
   </section>`;
 }
-const themeName = (k) => (k === "ALL" ? "전체 테마" : k === "AVAIL" ? "공식 접수 중" : k === "OPEN" ? "곧 오픈" : THEMES.find((t) => t[0] === k)?.[1] ?? k);
+const themeName = (k) => (k === "ALL" ? "전체 테마" : k === "AVAIL" ? "공식 접수 중" : k === "OPEN" ? "곧 오픈" : k === "REVIEWS" ? "긍정 후기 추천" : THEMES.find((t) => t[0] === k)?.[1] ?? k);
 function renderResults({ reset = true } = {}) {
   const grid = $("[data-grid]");
   if (!grid) return;
@@ -1112,9 +1124,9 @@ function bindList() {
 
 function themeView(themeKey) {
   const tName = themeName(themeKey);
-  const tImg = THEME_IMAGES[themeKey] ?? "../images/themes/valley.webp";
+  const tImg = themeImg(themeKey);
   const tSub = THEME_SUBS[themeKey] ?? "자연과 함께하는 특별한 테마 캠핑장";
-  const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "AVAIL" ? (c) => S.avail?.has(String(c.id)) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
+  const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "AVAIL" ? (c) => S.avail?.has(String(c.id)) : themeKey === "REVIEWS" ? (c) => Boolean((c.rv?.p?.length ?? 0) >= 2 || (c.rv?.t ?? 0) >= 4) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
   const totalInTheme = S.camps.filter(testFn).length;
 
   return `<section class="theme-page" aria-labelledby="tp-title">
@@ -2828,9 +2840,9 @@ addEventListener("error", (e) => {
   $("#view").innerHTML = `<div class="loading"></div>`;
   const [camps, photos, openings, cards, avail] = await Promise.all([
     fetch(`${DATA}campgrounds.json`).then((r) => r.json()),
-    fetch("./data/photos.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
+    fetch(`${DATA}photos.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
     fetch(`${DATA}openings.json`).then((r) => (r.ok ? r.json() : { items: [] })).catch(() => ({ items: [] })),
-    fetch("../media/cards/index.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
+    fetch(`${MEDIA}cards/index.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
     fetch(`${DATA}availability.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
   ]);
   S.camps = camps.filter((c) => c.status !== "폐업");
