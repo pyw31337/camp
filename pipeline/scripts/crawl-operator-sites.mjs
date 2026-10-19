@@ -186,19 +186,19 @@ function guideImages(pages, max = 8) {
 }
 let tesseractOk = null, sharpMod = null;
 // 결과는 넘겨받은 out에 바로 쌓는다(시간이 다 되어도 읽은 이미지 결과는 남는다). deadline이 지나면 다음 이미지를 읽지 않는다.
-async function ocrImages(pages, rules, out = [], deadline = Date.now() + 150000) {
+async function ocrImages(picked, rules, out = [], deadline = Date.now() + 150000) {
   const { execFile } = await import("node:child_process");
   const { writeFile, rm, mkdtemp } = await import("node:fs/promises");
   const { tmpdir } = await import("node:os");
   const { ocrScore, ocrSentences } = await import("../lib/ocr.mjs");
-  const run = (args) => new Promise((ok) => execFile("tesseract", args, { timeout: 60000, maxBuffer: 4e6 }, (e, out) => ok(e ? null : String(out))));
+  // OMP_THREAD_LIMIT=1: tesseract가 프로세스마다 여러 스레드를 띄우면 동시 OCR끼리 서로 느려져 시간 초과로 0줄이 된다.
+  const run = (args) => new Promise((ok) => execFile("tesseract", args, { timeout: 90000, maxBuffer: 4e6, env: { ...process.env, OMP_THREAD_LIMIT: "1" } }, (e, out) => ok(e ? null : String(out))));
   tesseractOk ??= (await run(["--version"])) !== null;
   if (!tesseractOk) return [];
   sharpMod ??= await import("sharp").then((m) => m.default).catch(() => false);
   const dir = await mkdtemp(join(tmpdir(), "ocr-"));
   const left = () => deadline - Date.now();
   try {
-    const picked = guideImages(pages);
     if (process.env.CRAWL_DEBUG) console.log("  ocr candidates", picked.length, picked.slice(0, 3).map((x) => x.url).join(" "));
     for (const [n, img] of picked.entries()) {
       if (left() < 15000) break;
@@ -244,11 +244,10 @@ const snippetsOf = (pages) => {
 
 async function crawlOne(c) {
   const checked_at = new Date().toISOString();
-  const siteDeadline = Date.now() + 225000; // 사이트 전체 시간(240초) 안에서 OCR이 끝나도록
   const starts = startsOf(c);
   const uniq = [...new Map(starts.map((u) => [new URL(withProto(u)).hostname.replace(/^www\./, ""), u])).values()];
   if (!uniq.length) return { status: isClosedHost(c.homepage ?? "") ? "SERVICE_CLOSED" : "NO_OPERATOR_SITE", url: c.homepage ?? null, checked_at };
-  const all = [], urls = [], errors = [];
+  const all = [], urls = [], errors = [], ocrQueue = [];
   let renderedAny = false;
   for (const start of uniq) {
     const rules = await robotsFor(withProto(start)).catch(() => []);
@@ -266,11 +265,10 @@ async function crawlOne(c) {
     if (!r.ok) { errors.push(String(r.error)); continue; }
     urls.push(...r.pages.map((p) => p.url));
     for (const s of snippetsOf(r.pages)) if (!all.some((x) => x.text === s.text)) all.push(s);
-    // 글이 적거나, 요금 문장이 하나도 없으면(요금표가 이미지인 곳) 안내 이미지를 읽는다.
+    // 글이 적거나, 요금 문장이 하나도 없으면(요금표가 이미지인 곳) 안내 이미지를 OCR 대기열에 올린다.
+    // OCR은 크롤이 끝난 뒤 따로 읽는다 — 동시 크롤과 CPU를 다투면 사이트 시간 안에 끝나지 못해 결과가 0이 되었다(2026-10-19).
     if (OCR && (all.length < 8 || !all.some((x) => /\d[\d,]*\s*(만\s*)?원/.test(x.text)))) {
-      const o = [];
-      await within(Math.max(20000, siteDeadline - Date.now()), ocrImages([...r.pages, ...(rendered?.pages ?? [])], rules, o, siteDeadline - 10000), "ocr").catch(() => {});
-      for (const s of o) if (!all.some((x) => x.text === s.text)) all.push(s);
+      for (const img of guideImages([...r.pages, ...(rendered?.pages ?? [])])) if (!ocrQueue.some((q) => q.url === img.url)) ocrQueue.push(img);
     }
   }
   if (!urls.length) return { status: errors.includes("ROBOTS_DISALLOWED") ? "ROBOTS_DISALLOWED" : errors.some((e) => /platform_redirect/.test(e)) ? "REDIRECTED_TO_PLATFORM" : "FETCH_FAILED", url: withProto(uniq[0]), checked_at, error: errors.join(",") || null };
@@ -280,7 +278,7 @@ async function crawlOne(c) {
     const v = validatesAsOperatorSite(c, all);
     if (!v.ok) return { status: "DISCOVERED_NOT_OPERATOR", url: urls[0], checked_at, discovered, check: v };
   }
-  return { status: all.length ? "OK" : "NO_RELEVANT_TEXT", url: urls[0], checked_at, rendered: renderedAny || undefined, discovered, pages: urls, snippets: all.slice(0, 160) };
+  return { status: all.length ? "OK" : "NO_RELEVANT_TEXT", url: urls[0], checked_at, rendered: renderedAny || undefined, discovered, pages: urls, snippets: all.slice(0, 160), ...(ocrQueue.length ? { _ocr: ocrQueue.slice(0, 8) } : {}) };
 }
 
 const fresh = (r) => r?.checked_at && Date.now() - Date.parse(r.checked_at) < maxAgeDays * 864e5;
@@ -315,7 +313,7 @@ async function worker() {
       if (process.env.CRAWL_DEBUG) console.log(c.id, r.status, r.error ?? "", r.snippets?.length ?? 0);
       // 이전에 문장을 얻었는데 이번에 실패했다면 이전 결과를 지우지 않는다(일시 장애).
       const old = prev.campgrounds[c.id];
-      if (r.status !== "OK" && old?.status === "OK" && old.snippets?.length) result.campgrounds[c.id] = { ...old, last_attempt: { at: r.checked_at, status: r.status, error: r.error ?? null } };
+      if (r.status !== "OK" && old?.status === "OK" && old.snippets?.length && !r._ocr) result.campgrounds[c.id] = { ...old, last_attempt: { at: r.checked_at, status: r.status, error: r.error ?? null } };
       else result.campgrounds[c.id] = { name: c.name, ...r };
       stat[r.status] = (stat[r.status] ?? 0) + 1;
       if (++done % 25 === 0) { console.log(`  ${done}/${targets.length}`, JSON.stringify(stat)); save(); }
@@ -326,9 +324,41 @@ async function worker() {
 function save() {
   result.generated_at = new Date().toISOString();
   result.policy = "운영자 자체 홈페이지·예약 페이지만, robots.txt 준수, 봇 이름 공개, 문장(≤140자)·원문 URL·확인 시각만 저장. 플랫폼 페이지는 수집하지 않음.";
-  writeFileSync(outPath, JSON.stringify(result, null, 1));
+  writeFileSync(outPath, JSON.stringify(result, (k, v) => (k === "_ocr" ? undefined : v), 1));
 }
 await Promise.all(Array.from({ length: concurrency }, worker));
 save();
+// OCR 단계: 크롤이 끝난 뒤 대기열의 안내 이미지를 적은 동시성으로 읽는다(전체 --ocr-minutes, 캠핑장당 120초).
+if (OCR) {
+  const queue = Object.entries(result.campgrounds).filter(([, r]) => r._ocr?.length);
+  const until = Date.now() + Number(arg("--ocr-minutes", 60)) * 60000;
+  const ocrStat = { camps: 0, withText: 0, lines: 0 };
+  console.log(`OCR 단계: ${queue.length}곳 · 이미지 ${queue.reduce((n, [, r]) => n + r._ocr.length, 0)}개`);
+  // OCR로도 글을 못 얻었는데 이전에 문장이 있던 곳은 이전 결과를 지키고 시도 기록만 남긴다(워커와 같은 규칙).
+  const keepOld = (id, r) => { const old = prev.campgrounds[id]; if (r.status !== "OK" && old?.status === "OK" && old.snippets?.length) result.campgrounds[id] = { ...old, last_attempt: { at: r.checked_at, status: r.status, error: null } }; };
+  const ocrWorker = async () => {
+    while (queue.length && Date.now() < until - 30000) {
+      const [id, r] = queue.shift();
+      const rules = await robotsFor(r._ocr[0].url).catch(() => []);
+      const out = [];
+      await within(130000, ocrImages(r._ocr, rules, out, Math.min(until, Date.now() + 120000)), "ocr").catch(() => {});
+      delete r._ocr;
+      ocrStat.camps++;
+      const add = out.filter((s) => !(r.snippets ?? []).some((x) => x.text === s.text));
+      if (add.length) {
+        ocrStat.withText++; ocrStat.lines += add.length;
+        r.snippets = [...(r.snippets ?? []), ...add].slice(0, 160);
+        if (r.status === "NO_RELEVANT_TEXT") { r.status = "OK"; r.url ??= add[0].url; }
+      }
+      keepOld(id, r);
+      if (ocrStat.camps % 10 === 0) { console.log("  OCR", JSON.stringify(ocrStat)); save(); }
+      if (process.env.CRAWL_DEBUG) console.log("  ocr", id, add.length);
+    }
+  };
+  await Promise.all(Array.from({ length: Number(arg("--ocr-workers", 2)) }, ocrWorker));
+  for (const [id, r] of queue) { delete r._ocr; keepOld(id, r); } // 시간 안에 못 읽은 곳은 다음 실행에서
+  console.log("OCR 완료", JSON.stringify(ocrStat), queue.length ? `미처리 ${queue.length}곳` : "");
+  save();
+}
 await browser?.close();
 console.log("완료", JSON.stringify(stat));
