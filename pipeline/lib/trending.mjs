@@ -70,6 +70,16 @@ export function buildMatcher(camps) {
   return { rows, byCore };
 }
 
+// 핵심어 바로 뒤에 붙는 캠핑장 종류 낱말(“합강캠핑장”“프리미엄캠핑장”). 이름만 따로 나오면 일반어와 헷갈린다(“캠핑용 프리미엄 빔프로젝터”).
+const KIND_AFTER = "(오토)?(캠핑장|캠핑|글램핑장|글램핑|카라반|야영장|캠프|오토캠핑장|자연휴양림|휴양림|차박)";
+const kindRe = new Map();
+function nameHit(text, r) {
+  if (r.full.length >= 4 && text.includes(r.full)) return true;
+  let re = kindRe.get(r.core);
+  if (!re) kindRe.set(r.core, (re = new RegExp(`${r.core.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}${KIND_AFTER}`)));
+  return re.test(text);
+}
+
 function regionCue(text, r) {
   if (r.stem.length >= 3 && text.includes(r.stem)) return true;
   if (r.stem.length === 2 && text.includes(r.stem) && (r.stem.endsWith("구") ? text.includes(r.sido) : true)) return true;
@@ -96,6 +106,10 @@ export function matchPost(post, matcher) {
   for (const r of matcher.rows) {
     if (!text.includes(r.core)) continue;
     if (hits.some((h) => h.core.includes(r.core))) continue; // 더 긴 이름에 덮인 짧은 이름
+    // 일반 검색어로 모은 글이라 이름 전체(또는 ‘핵심어+캠핑장’ 꼴)와 지역 단서가 함께 있어야 센다.
+    if (!nameHit(text, r)) continue;
+    const longUnique = r.core.length >= 4 && r.dup === 1 && !r.generic;
+    if (!regionCue(text, r) && !(longUnique && r.sido.length >= 2 && text.includes(r.sido))) continue;
     if (r.needRegion) {
       if (!regionCue(text, r)) continue;
       if (r.generic && !text.includes(r.full)) continue;
@@ -128,14 +142,25 @@ export function recencyWeight(date, today) {
  * 맞춘 글 묶음 → 순위. posts: [{key,url,title,date,platform,thumb,ids[]}]
  * prevRanks: {id: rank}(전날 순위) — 화살표용
  */
+export const MAX_PER_AUTHOR = 2; // 같은 블로그(작성자)가 한 캠핑장을 7일에 몇 번까지 세나(운영자 홍보·도배 막기)
+export function authorKey(u) {
+  const k = urlKey(u);
+  const m = k.match(/^blog\.naver\.com\/([^/]+)/) || k.match(/^([^/]+\.tistory\.com)/) || k.match(/^blog\.daum\.net\/([^/]+)/) || k.match(/^(youtube\.com\/@[^/]+)/);
+  return m ? m[1] : k;
+}
 export function rankCamps(posts, today, { prevRanks = {}, top = 30, samples = 3 } = {}) {
-  const agg = new Map();
-  for (const p of posts) {
+  const agg = new Map(), perAuthor = new Map();
+  const sorted = [...posts].sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
+  for (const p of sorted) {
     if (!p.ids?.length || !p.date) continue;
     const w = recencyWeight(p.date, today);
     if (!w) continue;
     const share = 1 / p.ids.length;
+    const author = authorKey(p.url);
     for (const id of p.ids) {
+      const ak = `${author}|${id}`, n = perAuthor.get(ak) ?? 0;
+      if (n >= MAX_PER_AUTHOR) continue;
+      perAuthor.set(ak, n + 1);
       const a = agg.get(id) ?? { id, score: 0, today: 0, week: 0, by: {}, posts: [] };
       a.score += w * share;
       a.week++;

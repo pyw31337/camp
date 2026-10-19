@@ -64,7 +64,15 @@ for (const d of Object.keys(usage.days)) if (d < new Date(Date.now() - 62 * 864e
 if (!dry) writeJson(USAGE, usage, true);
 
 // 2) 거르기·맞추기 (같은 주소는 한 번)
-const store = readJson(POSTS, { version: 1, posts: {} });
+// 맞춤 규칙이 바뀌면(STORE_VERSION) 예전 글은 버린다. 글마다 제목·요약을 함께 두고 매번 다시 맞춘다.
+const STORE_VERSION = 2;
+let store = readJson(POSTS, { version: STORE_VERSION, posts: {} });
+if (store.version !== STORE_VERSION) { log(`저장 글 형식 ${store.version} → ${STORE_VERSION}: 예전 글 ${Object.keys(store.posts ?? {}).length}건 버림`); store = { version: STORE_VERSION, posts: {} }; }
+let rematchedOut = 0;
+for (const [k, p] of Object.entries(store.posts)) {
+  const ids = matchPost(p, matcher);
+  if (ids.length) p.ids = ids; else { delete store.posts[k]; rematchedOut++; }
+}
 let spam = 0, matched = 0, unmatched = 0, dup = 0;
 for (const p of collected) {
   const key = urlKey(p.url);
@@ -76,12 +84,12 @@ for (const p of collected) {
   if (!ids.length) { unmatched++; continue; }
   matched++;
   // 날짜가 없는 글(네이버 카페)은 처음 본 날로 센다. 최신순 결과에서만 모으므로 대개 당일 글이다.
-  store.posts[key] = { ids, date: p.date ?? today, seen: today, url: p.url, title: p.title, platform: platformOf(p), thumb: p.thumb ?? null };
+  store.posts[key] = { ids, date: p.date ?? today, seen: today, url: p.url, title: p.title, snippet: p.snippet ?? "", src: p.src ?? null, platform: platformOf(p), thumb: p.thumb ?? null };
 }
 for (const [k, p] of Object.entries(store.posts)) if (p.date < since || p.seen < since) delete store.posts[k];
 store.updated_at = new Date().toISOString();
 writeJson(POSTS, store);
-log(`수집 ${collected.length}건 · 같은 주소 ${dup} · 스팸 ${spam} · 캠핑장 못 맞춤 ${unmatched} · 새로 맞춤 ${matched} · 저장 글 ${Object.keys(store.posts).length}`);
+log(`수집 ${collected.length}건 · 같은 주소 ${dup} · 스팸 ${spam} · 캠핑장 못 맞춤 ${unmatched} · 새로 맞춤 ${matched} · 다시 맞춰 뺌 ${rematchedOut} · 저장 글 ${Object.keys(store.posts).length}`);
 
 // 3) 순위
 const prevOut = readJson(OUT, null);
