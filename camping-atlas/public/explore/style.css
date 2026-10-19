@@ -276,6 +276,13 @@ body[data-view="home"] .top.is-glass { background: rgba(12,22,31,.68); backdrop-
 .rl { color: var(--ink-3); font-weight: 600; white-space: nowrap; }
 .rv { font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .rv.none { color: var(--ink-3); opacity: .4; font-weight: 400; }
+.card-reviews { display: flex; flex-wrap: wrap; gap: 4px; padding-top: 6px; border-top: 1px dashed var(--line); margin-top: 2px; }
+.c-rv-pill { display: inline-flex; align-items: center; gap: 3px; max-width: 100%; padding: 2px 7px; border-radius: 999px; font-size: .74rem; font-weight: 750; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.c-rv-pill .ic { width: 11px; height: 11px; flex-shrink: 0; }
+.c-rv-pill i { font-style: normal; font-size: .68rem; opacity: .75; margin-left: 1px; }
+.c-rv-pill.pro { background: var(--accent-tint); color: var(--accent); }
+.c-rv-pill.con { background: var(--flame-soft); color: var(--on-flame-soft); }
+.c-rv-pill.neutral { background: var(--soft); color: var(--ink-3); }
 .card-price { display: flex; align-items: baseline; gap: 6px; padding-top: 10px; border-top: 1px solid var(--line); font-size: .84rem; color: var(--ink-3); }
 .card-price b { font-size: 1rem; font-weight: 900; color: var(--ink); letter-spacing: -0.02em; }
 .card-price .gd { align-self: center; }
@@ -852,6 +859,13 @@ a.near { color: inherit; text-decoration: none; }
 .review-block.pro b { background: rgba(255, 255, 255, .62); }
 .review-block.con { background: var(--flame-soft); color: var(--on-flame-soft); }
 .review-block.con b { background: rgba(255, 255, 255, .66); }
+.review-more-channels { margin-top: 16px; padding: 14px 16px; border-radius: var(--r-s); background: var(--soft); display: grid; gap: 10px; }
+.rmc-title { font-size: .84rem; font-weight: 850; color: var(--ink-2); display: inline-flex; align-items: center; gap: 6px; }
+.rmc-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.rmc-btn { font-size: .82rem; height: 34px; padding: 0 12px; gap: 6px; text-decoration: none; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--ink); display: inline-flex; align-items: center; }
+.rmc-btn .ic { width: 14px; height: 14px; }
+.rmc-btn:hover { border-color: var(--ink); color: var(--ink); }
+.review-empty-note { font-size: .88rem; color: var(--ink-3); margin: 0 0 12px; line-height: 1.5; }
 .layout-links, .source-list { display: grid; gap: 7px; }
 .layout-links a, .source-list a { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 8px; padding: 11px 12px; border-radius: 12px; background: var(--soft); color: var(--ink); text-decoration: none; min-width: 0; }
 .layout-links a > span { display: inline-flex; align-items: center; gap: 6px; font-size: .88rem; font-weight: 800; min-width: 0; }

@@ -356,6 +356,13 @@ function heartBtn(c, { label = false } = {}) {
   const on = isSaved(c.id);
   return `<button class="heart${on ? " on" : ""}${label ? " heart-label" : ""}" type="button" data-save="${esc(c.id)}" aria-pressed="${on}" aria-label="${on ? "찜 해제" : "찜하기"}">${ic(on ? "heart" : "heart-o")}${label ? `<span>찜</span>` : ""}</button>`;
 }
+function cardReviewPills(rv) {
+  if (!rv) return "";
+  const pros = (rv.p ?? []).slice(0, 2).map(([t, n]) => `<span class="c-rv-pill pro">${ic("heart")}${esc(t)}<i>${n}</i></span>`);
+  const cons = (rv.c ?? []).slice(0, 1).map(([t, n]) => `<span class="c-rv-pill con">${ic("down")}${esc(t)}<i>${n}</i></span>`);
+  if (!pros.length && !cons.length && rv.n > 0) return `<span class="c-rv-pill neutral">${ic("camera")}후기 ${fmt(rv.n)}건</span>`;
+  return [...pros, ...cons].join("");
+}
 function card(c, i = 0) {
   const { tag } = nameOf(c), o = openingOf(c);
   return `<article class="card" data-id="${esc(c.id)}">
@@ -369,6 +376,7 @@ function card(c, i = 0) {
       <p class="card-meta">${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
       ${c.st?.length ? `<p class="card-types">${ic("tent")}${esc(typeLine2(c))}</p>` : ""}
       ${rowsHtml(c)}
+      ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-reviews">${cardReviewPills(c.rv)}</div>` : ""}
       ${nearLine(c) ? `<p class="card-near">${ic("store")}${esc(nearLine(c))}</p>` : ""}
       ${c.fee?.text ? `<p class="card-price"><span>1박</span><b>${esc(c.fee.text)}</b>${dot(GR(c.fee.grade))}</p>` : c.fee?.min ? `<p class="card-price"><span>1박</span><b>${band(c.fee.min)}부터</b>${dot(GR(c.fee.grade))}</p>` : ""}
     </div>
@@ -750,10 +758,12 @@ function nearbyHubHtml(c, d) {
   return `<section class="d-sec nearby-hub"><div class="sec-head">${iconTitle("route", "주변")}<span class="sec-note">직선거리 ${tip("<b>주변 정보</b><span>생활·안전 시설은 인허가·공공 데이터, 관광·맛집은 한국관광공사 데이터로 연결합니다. 운영 시간과 영업 여부는 원문에서 다시 확인하세요.</span>")}</span></div><div class="nearby-groups">${groups.map(([title, icon, rows]) => `<section class="nearby-group"><h3>${ic(icon)}${title}</h3><div class="nearby-places">${rows.map(card).join("")}</div></section>`).join("")}</div></section>`;
 }
 function reviewHtml(d, c) {
-  const rv = d?.rv ?? c.rv;
+  const rv = d?.rv ?? c?.rv;
+  const total = rv?.n ?? 0;
   if (!rv || (!rv.p?.length && !rv.c?.length)) return "";
-  const block = (label, rows, cls, icon) => rows?.length ? `<div class="review-block ${cls}"><span>${ic(icon)}${label}</span><div>${rows.slice(0, 4).map(([topic, count]) => `<b>${esc(topic)} <i>${count}</i></b>`).join("")}</div></div>` : "";
-  return `<section class="d-sec review-summary"><div class="sec-head">${iconTitle("heart", "장점 · 아쉬운 점")}<span class="sec-note">후기 ${fmt(rv.n)}건 ${tip("<b>후기 요약</b><span>연결된 블로그·카페 후기에서 반복 언급한 주제입니다. 협찬 글이 섞일 수 있어 예약 전 원문을 함께 확인하세요.</span>")}</span></div><div class="review-summary-grid">${block("좋았어요", rv.p, "pro", "heart")}${block("미리 볼 점", rv.c, "con", "down")}</div></section>`;
+  const fact = { g: "m", src: { label: "블로그·카페 방문자 후기 빅데이터 분석", url: c?.gc_url || "https://www.gocamping.or.kr/" } };
+  const block = (label, rows, cls, icon) => rows?.length ? `<div class="review-block ${cls}"><span>${ic(icon)}${label}</span><div>${rows.map(([topic, count]) => `<b>${esc(topic)} <i>${count}</i></b>`).join("")}</div></div>` : "";
+  return `<section class="d-sec review-summary"><div class="sec-head">${iconTitle("heart", "캠퍼 평가 · 장점 & 아쉬운 점")}<span class="sec-note">후기 ${fmt(total)}건 분석 ${srcTip(fact, "후기 장단점 분석")}</span></div><div class="review-summary-grid">${block("캠퍼들이 꼽은 장점", rv.p, "pro", "heart")}${block("방문 전 미리 볼 점", rv.c, "con", "down")}</div></section>`;
 }
 function bookingRank(channel) {
   const hay = `${channel?.platform_id ?? ""} ${channel?.platform_name ?? ""} ${channel?.url ?? ""}`.toLowerCase();
@@ -844,6 +854,7 @@ async function detailView(id) {
         ${sitePricingHtml(c, d)}
         ${priceMentionsHtml(d)}
         <section class="d-sec"><div class="sec-head">${iconTitle("info", "이용 정보")}</div><dl class="uses">${us.map(([l, x]) => `<div class="use${x ? "" : " unk"}"><dt>${l}</dt><dd><span class="use-val">${x ? `${esc(detailValue(x))}${asOfMention(x)}` : "확인필요"}</span>${x ? `<span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span>` : ""}</dd></div>`).join("")}</dl></section>
+        ${reviewHtml(d, c)}
         ${operatorHtml(d)}
         ${bookingHtml(c, d)}
         ${amenityHtml(c)}
@@ -853,8 +864,7 @@ async function detailView(id) {
         ${snsHtml(d, c)}
         ${videosHtml(d)}
         ${nearbyHubHtml(c, d)}
-        ${reviewHtml(d, c)}
-        ${reviewLinksHtml(d)}
+        ${reviewLinksHtml(d, c)}
         ${infoHtml(c)}
         ${commentsHtml(c)}
       </div>
@@ -1116,18 +1126,43 @@ function reviewSummary(value) {
   const candidate = parts.find((x) => x.length >= 12 && useful.test(x) && !/^[^가-힣A-Za-z]*(?:\d{4}[./-]\d|\d{1,2}:\d{2})/.test(x) && !/^[^\p{L}\p{N}]{1,}/u.test(x) && !/^(못|ㅋㅋ|ㅎㅎ|ㅠㅠ|\.{2,})/.test(x) && !/[가-힣]+(?:시|군|구|읍|면|리).{0,24}(?:길|로|\d)/.test(x));
   return candidate || "";
 }
-function reviewLinksHtml(d) {
+function reviewLinksHtml(d, c) {
   // 카카오 후기·카페 + 네이버 블로그·카페·웹문서·지식iN(같은 글은 한 번), 최신순
   const seenUrl = new Set();
   const r = [...(d?.reviews ?? []), ...(d?.cafe ?? []), ...(d?.web ?? [])].filter((x) => x.url && x.title && !seenUrl.has(x.url) && seenUrl.add(x.url))
-    .sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? ""))).slice(0, 9);
-  if (!r.length) return "";
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("camera", "블로그 · 카페")}<span class="sec-note">${r.length}개</span></div><div class="review-links">${r.map((x, i) => {
-    const platform = /cafe/.test(x.t ?? "") ? "카페" : x.t === "kin" ? "지식iN" : x.t === "web" ? "웹문서" : "블로그";
-    const fact = sourceFact(x, platform, [x.title, x.snippet].filter(Boolean).join("\n"));
-    const summary = reviewSummary(x.snippet);
-    return `<article class="review-link-card"><a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${platform} 후기 ${i + 1} 원문 열기"><span class="review-link-media">${canPreviewExternalMedia(x) && externalImage(x) ? `<img src="${esc(externalImage(x))}" alt="" loading="lazy" decoding="async">` : apiThumb(x) ? `<img src="${esc(apiThumb(x))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : ic(x.t === "cafe" ? "tent" : "camera")}</span><span><i>${esc(sourceName(x.src, platform))}${x.date ? ` · ${esc(String(x.date).slice(0, 10))}` : ""}</i><b>${esc(serviceText(x.title, 54) || `방문 후기 ${i + 1}`)}</b>${summary ? `<em>${esc(summary)}</em>` : ""}</span>${ic("external", "line")}</a>${srcTip(fact, `${platform} 후기 ${i + 1}`)}</article>`;
-  }).join("")}</div></section>`;
+    .sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? ""))).slice(0, 12);
+  const campName = c ? nameOf(c).name : "";
+  const q = encodeURIComponent(`${campName} 캠핑장 후기`);
+  const naverSearch = `https://search.naver.com/search.naver?where=blog&query=${q}`;
+  const daumSearch = `https://search.daum.net/search?w=blog&q=${q}`;
+  const kakaoMap = c?.lat && c?.lng ? `https://map.kakao.com/link/search/${encodeURIComponent(campName)}` : `https://map.kakao.com/link/search/${q}`;
+  const gcReview = c?.gc_url || "https://www.gocamping.or.kr/";
+  const directLinks = `
+    <div class="review-more-channels">
+      <span class="rmc-title">${ic("camera")}업체별 실시간 방문자 후기 5건 이상 바로 확인</span>
+      <div class="rmc-btns">
+        <a class="rmc-btn" href="${naverSearch}" target="_blank" rel="noopener">${ic("search")}네이버 블로그 후기 검색</a>
+        <a class="rmc-btn" href="${daumSearch}" target="_blank" rel="noopener">${ic("search")}다음·카카오 카페/블로그 검색</a>
+        <a class="rmc-btn" href="${kakaoMap}" target="_blank" rel="noopener">${ic("pin")}카카오맵 방문자 리뷰</a>
+        ${c?.gc_url ? `<a class="rmc-btn" href="${esc(gcReview)}" target="_blank" rel="noopener">${ic("right")}고캠핑 등록 후기</a>` : ""}
+      </div>
+    </div>`;
+
+  if (!r.length) {
+    return `<section class="d-sec"><div class="sec-head">${iconTitle("camera", "블로그 · 카페 후기")}<span class="sec-note">실시간 검색 연동</span></div>
+      <p class="review-empty-note">연동된 본문 후기가 적은 곳입니다. 아래 공식 검색 채널에서 최신 방문자 후기 5건 이상을 바로 확인하세요.</p>
+      ${directLinks}
+    </section>`;
+  }
+  return `<section class="d-sec"><div class="sec-head">${iconTitle("camera", "블로그 · 카페 후기")}<span class="sec-note">${r.length}건 수집</span></div>
+    <div class="review-links">${r.map((x, i) => {
+      const platform = /cafe/.test(x.t ?? "") ? "카페" : x.t === "kin" ? "지식iN" : x.t === "web" ? "웹문서" : "블로그";
+      const fact = sourceFact(x, platform, [x.title, x.snippet].filter(Boolean).join("\n"));
+      const summary = reviewSummary(x.snippet);
+      return `<article class="review-link-card"><a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${platform} 후기 ${i + 1} 원문 열기"><span class="review-link-media">${canPreviewExternalMedia(x) && externalImage(x) ? `<img src="${esc(externalImage(x))}" alt="" loading="lazy" decoding="async">` : apiThumb(x) ? `<img src="${esc(apiThumb(x))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : ic(x.t === "cafe" ? "tent" : "camera")}</span><span><i>${esc(sourceName(x.src, platform))}${x.date ? ` · ${esc(String(x.date).slice(0, 10))}` : ""}</i><b>${esc(serviceText(x.title, 54) || `방문 후기 ${i + 1}`)}</b>${summary ? `<em>${esc(summary)}</em>` : ""}</span>${ic("external", "line")}</a>${srcTip(fact, `${platform} 후기 ${i + 1}`)}</article>`;
+    }).join("")}</div>
+    ${directLinks}
+  </section>`;
 }
 function infoHtml(c) {
   const name = encodeURIComponent(nameOf(c).name);
