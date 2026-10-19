@@ -1400,9 +1400,16 @@ function bookingRank(channel) {
   if (channel?.kind === "phone") return 5;
   return 10;
 }
+const DEAD_BOOKING = /(^|\.)ticketplay\.zone$|(^|\.)(example\.(com|org|net)|localhost)$/i;
+function liveBookingUrl(u) {
+  try {
+    const h = new URL(u).hostname;
+    return h && !DEAD_BOOKING.test(h);
+  } catch { return false; }
+}
 function bookingChannels(c) {
   return [...(c.booking?.channels ?? [])]
-    .filter((x) => x?.url)
+    .filter((x) => x?.url && liveBookingUrl(x.url))
     .sort((a, b) => bookingRank(a) - bookingRank(b) || Number(b.confidence ?? 0) - Number(a.confidence ?? 0));
 }
 function bookingLabel(channel) {

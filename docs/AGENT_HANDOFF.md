@@ -3,6 +3,14 @@
 > 최종 갱신: 2026-10-19 KST(플랫폼 허브 구현 확인, 작업 전파 정책 명시) — 맨 위 ‘📌 공지’부터 읽을 것<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
 
+## 📌 깨진 예약 링크 제외 (2026-10-19, Grok)
+
+- 예약 채널 URL 전수 조사: 비주요 호스트 1,169개 중 연결 실패 287개.
+- `ticketplay.zone` (구곡폭포·청평사·양구 등)은 ERR_CONNECTION_REFUSED / 503. 화면·분류에서 제외.
+- 목록: `pipeline/registry/dead-booking-hosts.json`
+- 필터: `pipeline/lib/booking-intel.mjs` `normalizeUrl`, `design/renewal/app.js` `liveBookingUrl`
+- 다음 카탈로그 빌드부터 채널에서 빠지고, 프론트는 이미 발행된 데이터에서도 숨긴다.
+
 ## 📌 상세 미디어 카드 (2026-10-19, Grok)
 
 - 주변 시설·블로그/카페 후기를 **상단 사진(또는 아이콘 히어로) + 하단 텍스트** 카드로 바꿈.
