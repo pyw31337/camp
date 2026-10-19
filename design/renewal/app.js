@@ -1347,9 +1347,28 @@ function homeClicks(e) {
 // ── 화면: 상세 ───────────────────────────────────────────────
 async function detailOf(id) {
   if (S.detailCache.has(id)) return S.detailCache.get(id);
-  const d = await fetch(`${DATA}camps/${encodeURIComponent(id)}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  let d = await fetch(`${DATA}camps/${encodeURIComponent(id)}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  if (d) d = await reviewTexts(d, S.camps.find((c) => String(c.id) === String(id)));
   S.detailCache.set(id, d);
   return d;
+}
+// 상세 글 점검(pipeline/lib/detail-text-review.mjs와 같은 파일): 이 캠핑장 이야기가 아니거나 칸에 맞지 않는 글을 뺀다.
+// 다음 데이터 갱신부터는 파이프라인에서 이미 걸러져 오고, 같은 규칙을 다시 적용해도 결과가 같다.
+let textReview;
+async function reviewTexts(d, c) {
+  if (!c) return d;
+  try {
+    textReview ??= import(new URL(`${MOD_ROOT}context/text-review.js`, import.meta.url).href);
+    const m = await textReview;
+    if (!S.reviewCtx) {
+      const common = await fetch(new URL(`${MOD_ROOT}context/text-common.json`, import.meta.url)).then((r) => (r.ok ? r.json() : [])).catch(() => []);
+      const cores = new Map();
+      for (const x of S.camps) { const k = `${x.sido} ${x.sigungu}`; (cores.get(k) ?? cores.set(k, []).get(k)).push(m.nameCoreOf(x.name, x.sigungu)); }
+      const regions = new Set(S.camps.map((x) => String(x.sigungu ?? "").split(/\s+/)[0].replace(/(시|군|구)$/, "")).filter((x) => x.length >= 2));
+      S.reviewCtx = { cores, regions, common: new Set(common) };
+    }
+    return m.reviewDetailTexts(d, c, { others: S.reviewCtx.cores.get(`${c.sido} ${c.sigungu}`) ?? [], regions: S.reviewCtx.regions, common: S.reviewCtx.common }).d;
+  } catch { return d; }
 }
 const PF = (d, k) => d?.profile?.fields?.[k];
 function profFact(x) { return x ? { v: x.value, g: GR(x.grade), src: { label: x.source?.label, url: x.source?.url, at: x.source?.date, quote: x.source?.quote, image: x.source?.image } } : null; }
@@ -1925,14 +1944,14 @@ function operatorHtml(d) {
     const text = compactOperatorText(x.text);
     if (text.length < 14 || used.has(text) || /^(캠핑 이용요금|예약 취소|이용요금 환불기준|.+가능한가요)\??$/.test(text)) continue;
     used.add(text);
-    const label = OPERATOR_CATEGORIES.find(([, re]) => re.test(text))?.[0] ?? "운영 안내";
+    const label = x.cat ?? OPERATOR_CATEGORIES.find(([, re]) => re.test(text))?.[0] ?? "운영 안내";
     const row = grouped.get(label) ?? { label, texts: [], url: x.url, src: x.src, at: x.date, image: null };
     if (x.image && !row.image) row.image = x.image;
     if (row.texts.length < 3 && !row.texts.some((t) => t.includes(text) || text.includes(t))) row.texts.push(text);
     if (!row.url && x.url) row.url = x.url;
     grouped.set(label, row);
   }
-  const order = new Map(OPERATOR_CATEGORIES.map(([label], i) => [label, i]));
+  const order = new Map(["입·퇴실", "예약 · 성수기", "요금 · 환불", "인원 · 추가", "주차", "전기", "불멍 · 화로", "반려동물", "매너타임 · 소음", "시설", "이용 규칙", "사이트 이용", ...OPERATOR_CATEGORIES.map(([l]) => l)].map((label, i) => [label, i]));
   const rows = [...grouped.values()].filter((x) => x.texts.length).sort((a, b) => (order.get(a.label) ?? 99) - (order.get(b.label) ?? 99)).slice(0, 8);
   if (!rows.length) return "";
   return `<section class="d-sec operator-sec"><div class="sec-head">${iconTitle("report", "운영자 안내 · 공지사항")}<span class="sec-note">항목별 정리</span></div><div class="operator-grid">${rows.map((x) => {
@@ -1941,7 +1960,7 @@ function operatorHtml(d) {
     // ‘○○ 안내’ ‘○○ 확인’ 같은 빈 요약 대신 운영자가 쓴 첫 문장을 짧게 정리해 보인다.
     const statement = x.texts.find((t) => !/(\?|까요|나요|가요|인가요)\s*$/.test(t));
     const value = /(안내|확인)$/.test(sum) && statement ? serviceText(statement, 64) || sum : sum;
-    const opIc = /입실|퇴실/.test(x.label) ? "clock-in" : /요금|환불/.test(x.label) ? "won" : /주차/.test(x.label) ? "car" : /전기/.test(x.label) ? "bolt" : /화로|장작/.test(x.label) ? "flame" : /반려/.test(x.label) ? "paw" : /시설/.test(x.label) ? "drop" : "report";
+    const opIc = /입실|퇴실/.test(x.label) ? "clock-in" : /요금|환불/.test(x.label) ? "won" : /주차/.test(x.label) ? "car" : /전기/.test(x.label) ? "bolt" : /화로|장작/.test(x.label) ? "flame" : /반려/.test(x.label) ? "paw" : /시설/.test(x.label) ? "drop" : /예약/.test(x.label) ? "calendar" : /인원/.test(x.label) ? "plus" : /매너/.test(x.label) ? "moon" : "report";
     return `<article><span>${ic(opIc)}${esc(x.label)}</span><p>${esc(value)}</p>${source}</article>`;
   }).join("")}</div></section>`;
 }

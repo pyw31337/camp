@@ -9,6 +9,7 @@ import { buildOpenings } from "../lib/openings.mjs";
 import { nameCore, refilterSocial } from "../lib/social-search.mjs";
 import { allocateUnique, dhashFile, photoKey, uniqueBy, uniqueByHash } from "../lib/photo-dedupe.mjs";
 import { SEOUL_DATASET_URL, matchSeoulToCampgrounds } from "../lib/seoul-yeyak.mjs";
+import { commonOperatorTexts, mergeLogs, nameCoreOf, reviewDetailTexts } from "../lib/detail-text-review.mjs";
 
 const p = (rel) => fileURLToPath(new URL(rel, import.meta.url));
 const read = async (rel) => (existsSync(p(rel)) ? JSON.parse(await readFile(p(rel), "utf8")) : null);
@@ -221,6 +222,23 @@ for (const [id, d] of Object.entries(details)) {
   const photos = hostedOf(id).filter((x) => x.thumb && x.large).map((x) => ({ t: x.thumb, l: x.large, w: x.w, h: x.h }));
   if (photos.length) d.photos = photos;
 }
+// 상세 글 점검(lib/detail-text-review.mjs): 이 캠핑장 이야기가 아니거나 칸에 맞지 않는 글을 빼고, 운영 안내는 항목을 다시 정한다.
+const gcById = new Map((camps.campgrounds ?? []).map((c) => [String(c.external_id?.id ?? c.id), c]));
+const reviewCores = new Map();
+for (const c of camps.campgrounds ?? []) { const k = `${c.address?.sido ?? ""} ${c.address?.sigungu ?? ""}`; (reviewCores.get(k) ?? reviewCores.set(k, []).get(k)).push(nameCoreOf(c.name, c.address?.sigungu)); }
+const reviewRegions = new Set((camps.campgrounds ?? []).map((c) => String(c.address?.sigungu ?? "").split(/\s+/)[0].replace(/(시|군|구)$/, "")).filter((x) => x.length >= 2));
+const reviewCommon = new Set(commonOperatorTexts(Object.entries(details).map(([id, d]) => ({ sido: gcById.get(String(id))?.address?.sido, d }))));
+await writeFile(p("../out/explore/text-common.json"), `${JSON.stringify([...reviewCommon])}\n`);
+const reviewLogs = [];
+for (const [id, d] of Object.entries(details)) {
+  const gc = gcById.get(String(id));
+  if (!gc) continue;
+  const r = reviewDetailTexts(d, { name: gc.name, sigungu: gc.address?.sigungu }, { others: reviewCores.get(`${gc.address?.sido ?? ""} ${gc.address?.sigungu ?? ""}`) ?? [], regions: reviewRegions, common: reviewCommon });
+  details[id] = r.d;
+  reviewLogs.push(r.log);
+}
+const reviewSum = mergeLogs(reviewLogs);
+console.log(`상세 글 점검: 바뀐 곳 ${reviewSum.camps_changed} · 뺀 글 ${Object.values(reviewSum.removed).reduce((a, b) => a + b, 0)} · 표기 다듬음 ${reviewSum.normalized} ${JSON.stringify(reviewSum.removed)}`);
 for (const [id, d] of Object.entries(details)) await writeFile(p(`../out/explore/camps/${id}.json`), JSON.stringify(d));
 console.log(`탐색 데이터 ${records.length}곳 ${JSON.stringify(meta.stats)}`);
 console.log(`테마 ${meta.themes.map((t) => `${t.label} ${t.count}`).join(" · ")}`);
