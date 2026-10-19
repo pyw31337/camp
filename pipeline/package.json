@@ -50,7 +50,9 @@
     "build:pricing-facts": "node scripts/build-site-pricing-facts.mjs",
     "db:import-supabase": "node scripts/import-all-to-supabase.mjs",
     "check:billing": "node scripts/check-external-services-billing.mjs",
-    "sync:forest": "node scripts/sync-forest-recreation.mjs"
+    "sync:forest": "node scripts/sync-forest-recreation.mjs",
+    "match:forest": "node scripts/match-forest-recreation.mjs",
+    "normalize:local-fees": "node scripts/normalize-local-fees.mjs"
   },
   "dependencies": {
     "pg": "8.23.1",
