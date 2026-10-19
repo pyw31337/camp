@@ -74,7 +74,7 @@ function card(x, today, i) {
     e.u ? `<a class="${e.cf ? "" : "main"}" href="${esc(e.u)}" target="_blank" rel="noopener">${e.cf ? "원문" : "자세히 보기"}</a>` : "",
     e.a ? `<a href="https://map.kakao.com/link/search/${encodeURIComponent(e.v || e.a)}" target="_blank" rel="noopener">지도</a>` : "",
   ].join("");
-  return `<article class="ev-card" data-state="${x.state}" data-kind="${esc(e.k)}"${i >= 6 ? " data-extra hidden" : ""}>
+  return `<article class="ev-card" data-state="${x.state}" data-kind="${esc(e.k)}">
   <a class="ev-poster${e.img ? "" : " noimg"}" ${href ? `href="${esc(href)}" target="_blank" rel="noopener"` : ""} aria-label="${esc(e.t)} 자세히">${poster(x)}<div class="ev-badges">${badges}</div><span class="ev-dist">${esc(km(x.km))}</span></a>
   <div class="ev-body"><span class="ev-kind">${esc(e.k)}</span><h3>${esc(e.t)}</h3>
   <span class="ev-meta">${esc(period)}${place ? `<br>${esc(place)}` : ""} · 캠핑장에서 ${esc(km(x.km))}${e.p ? ` · ${esc(e.p)}` : ""}</span>
@@ -89,30 +89,20 @@ export function render(data, id, today = kstToday()) {
   const cfAt = String(data.sources?.cf?.data_at ?? "").slice(0, 10);
   return `${tabs.length > 2 ? `<div class="ev-tabs" role="group" aria-label="행사 상태">${tabs.map(([k, l, n], i) => `<button type="button" data-ev-tab="${k}" aria-pressed="${i === 0}">${l}<i>${n}</i></button>`).join("")}</div>` : ""}
 <div class="ev-rail">${list.map((x, i) => card(x, today, i)).join("")}</div>
-${list.length > 6 ? `<button type="button" class="ev-more" data-ev-more>${list.length - 6}개 더 보기</button>` : ""}
 <p class="ev-foot">캠핑장에서 직선 30km 안, 오늘부터 45일 안에 열리는 축제·공연·전시예요. 일정·요금은 바뀔 수 있으니 원문에서 꼭 확인하세요. 출처: <a href="${esc(data.sources?.cf?.url ?? "https://pyw31337.github.io/culture/")}" target="_blank" rel="noopener">CultureFlow</a>${cfAt ? `(${esc(cfAt)} 수집)` : ""} · <a href="${esc(data.sources?.tour?.url ?? "https://api.visitkorea.or.kr")}" target="_blank" rel="noopener">한국관광공사 TourAPI</a>. 포스터 저작권은 각 주최·원출처에 있어요. 갱신 ${esc(String(data.generated_at ?? "").slice(0, 10))}</p>`;
 }
-function bind(el) {
-  const cards = [...el.querySelectorAll(".ev-card")];
-  let filter = "all", expanded = false;
-  const apply = () => {
-    let shown = 0;
-    for (const c of cards) {
-      const hit = filter === "all" || c.dataset.state === filter;
-      const narrow = matchMedia("(max-width:720px)").matches;
-      c.hidden = !hit || (!expanded && !narrow && shown >= 6);
-      if (hit) shown++;
-    }
-    const more = el.querySelector("[data-ev-more]");
-    if (more) more.hidden = expanded || shown <= 6;
-  };
+// 카드 수는 context/cgrid.js 규칙(태블릿부터 여러 단 · 줄이 꽉 차는 개수 · 더보기)을 따른다.
+async function bind(el) {
+  const grid = el.querySelector(".ev-rail");
+  const cg = await import("./cgrid.js");
+  let filter = "all";
+  const hit = (c) => filter === "all" || c.dataset.state === filter;
+  cg.setup(grid, { filter: hit });
   el.querySelectorAll("[data-ev-tab]").forEach((b) => b.addEventListener("click", () => {
     filter = b.dataset.evTab;
     el.querySelectorAll("[data-ev-tab]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
-    apply();
+    cg.setFilter(grid, hit);
   }));
-  el.querySelector("[data-ev-more]")?.addEventListener("click", () => { expanded = true; apply(); });
-  apply();
 }
 /** el: <section data-events> (안에 [data-events-body]가 있으면 거기에 그린다) */
 export async function mount(el, camp) {
@@ -122,6 +112,6 @@ export async function mount(el, camp) {
   if (!document.getElementById("ev-style")) { const s = document.createElement("style"); s.id = "ev-style"; s.textContent = STYLE; document.head.append(s); }
   const body = el.querySelector("[data-events-body]") ?? el;
   body.innerHTML = html;
-  bind(body);
+  await bind(body);
   el.hidden = false;
 }
