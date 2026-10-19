@@ -1,5 +1,5 @@
-{"generated_at":"2026-10-19T04:48:01.744Z","note":"캠핑장 id → 기상청 단기예보 격자(nx,ny)·중기육상 구역(land)·중기기온 도시(ta)·에어코리아 측정소(air, 40km 이내)·조석 예보지점(tide, 25km 이내). build-condition-mapping.mjs가 만든다.","sources":{"grid":"기상청 단기예보 격자 변환식(LCC)","air":"에어코리아 측정소정보 getMsrstnList","tide":"국립해양조사원 조석예보(고·저조) 응답 위경도"},
-"stats":{"campgrounds":3116,"no_coordinate":0,"unique_grids":1593,"with_air":0,"with_tide":0,"status":{"air":"NO_KEY","tide":"NO_KEY"}},
+{"generated_at":"2026-10-19T05:13:22.373Z","note":"캠핑장 id → 기상청 단기예보 격자(nx,ny)·중기육상 구역(land)·중기기온 도시(ta)·에어코리아 측정소(air, 40km 이내)·조석 예보지점(tide, 25km 이내). build-condition-mapping.mjs가 만든다.","sources":{"grid":"기상청 단기예보 격자 변환식(LCC)","air":"에어코리아 측정소정보 getMsrstnList","tide":"국립해양조사원 조석예보(고·저조) 응답 위경도"},
+"stats":{"campgrounds":3116,"no_coordinate":0,"unique_grids":1593,"with_air":0,"with_tide":0,"status":{"air":"NOT_REGISTERED","tide":"NOT_REGISTERED"}},
 "stations":{"air":[],"tide":[]},
 "camps":{"4":{"nx":60,"ny":77,"land":"11F20000","ta":"11F20501","sido":"광주","sigungu":"담양군"},
 "10":{"nx":69,"ny":130,"land":"11D10000","ta":"11D10301","sido":"강원","sigungu":"춘천시"},

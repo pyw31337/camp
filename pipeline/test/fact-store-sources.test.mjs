@@ -1,21 +1,16 @@
-import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
+import test from "node:test";
 import { SOURCES } from "../lib/fact-store.mjs";
 
-// 사실 원장에 쓰이는 원천 코드는 모두 SOURCES에 있어야 한다. 빠지면 build-fact-store의 사실 검증이 실패해
-// 그날 데이터 동기화 발행이 통째로 막힌다(2026-10-19 사고). 파일을 통째로 되돌리는 커밋이 이 목록을 지우면 여기서 걸린다.
-test("사이트 타입이 내보내는 원천 코드가 모두 SOURCES에 등록돼 있다", () => {
-  const src = readFileSync(new URL("../lib/site-types.mjs", import.meta.url), "utf8");
-  const emitted = new Set([...src.matchAll(/src:\s*"([a-z_]+)"/g)].map((m) => m[1]));
-  for (const m of src.matchAll(/"([a-z]+_mention)"/g)) emitted.add(m[1]);
-  if (/"kin"\s*\?\s*"kin"/.test(src)) emitted.add("kin");
-  for (const code of emitted) assert.ok(SOURCES[code], `SOURCES에 ${code}가 없습니다`);
-  for (const code of ["blog_mention", "cafe_mention", "kin"]) assert.ok(SOURCES[code], `SOURCES에 ${code}가 없습니다`);
-});
-
-test("사실 원장 빌더가 직접 쓰는 원천 코드(src: \"...\")도 모두 SOURCES에 있다", () => {
-  const src = readFileSync(new URL("../scripts/build-fact-store.mjs", import.meta.url), "utf8") + readFileSync(new URL("../lib/fact-store.mjs", import.meta.url), "utf8");
-  const codes = new Set([...src.matchAll(/\bsrc:\s*"([a-z_]+)"/g)].map((m) => m[1]));
-  for (const code of codes) assert.ok(SOURCES[code], `SOURCES에 ${code}가 없습니다(build-fact-store 사실 검증 실패로 매일 발행이 막힘)`);
+// 다른 에이전트가 원천 코드를 지우면 build-fact-store.mjs가 검증 실패(exit 1)로 매일 발행을 막는다(2026-10-19 두 번 발생).
+test("공개된 사실 저장소(data/facts)가 쓰는 원천 코드는 모두 SOURCES에 있다", () => {
+  const dir = new URL("../../data/facts/", import.meta.url);
+  const used = new Set();
+  for (const f of readdirSync(dir)) if (f.endsWith(".ndjson") && f !== "campgrounds.ndjson") {
+    for (const line of readFileSync(new URL(f, dir), "utf8").split("\n")) if (line) { const s = JSON.parse(line).src; if (s) used.add(s); }
+  }
+  const missing = [...used].filter((s) => !SOURCES[s]);
+  assert.deepEqual(missing, [], `SOURCES에 없는 원천: ${missing.join(", ")}`);
+  for (const s of ["blog_mention", "cafe_mention", "kin", "local_gov"]) assert.ok(SOURCES[s], s);
 });
