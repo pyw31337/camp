@@ -24,7 +24,7 @@ for (const c of camps) {
     checkin: has("CHECKIN", "CHECKIN_TIME"), checkout: has("CHECKOUT", "CHECKOUT_TIME"), manner: has("MANNER", "MANNER_TIME"),
     extra_fee: has("EXTRA_FEE", "EXTRA_PERSON_FEE"), refund: has("REFUND", "REFUND_POLICY"),
     parking: { any: Boolean(pf.PARKING || sp.PARKING || (c.field_conditions?.parking?.mode && c.field_conditions.parking.mode !== "UNKNOWN")), confirmed: Boolean(pf.PARKING || c.of?.parking) },
-    power_w: { any: Boolean(c.field_conditions?.power?.limit_w || c.of?.power || sp.POWER_W), confirmed: Boolean(c.of?.power) },
+    power_w: { any: Boolean(c.field_conditions?.power?.limit_w || c.of?.power || sp.POWER_W || (pf.POWER && pf.POWER.watts)), confirmed: Boolean(c.of?.power || (pf.POWER && pf.POWER.grade !== "MENTION" && pf.POWER.watts) || sp.POWER_W?.values?.length) },
     site_types: { any: Boolean(c.st?.length), confirmed: Boolean(c.st?.some((t) => t[2] !== "m")) },
     reviews: { any: Boolean(d.reviews?.length || d.cafe?.length || d.web?.length), confirmed: false },
   };

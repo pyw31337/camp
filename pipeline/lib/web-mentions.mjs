@@ -22,15 +22,15 @@ export const NAVER_TYPES = {
 };
 export const pathsOf = (type) => [`/search/v1/${type}`, `/search/v1/${type}.json`, `/v1/search/${type}.json`];
 
-// 캠핑장 1곳당 질의 계획. 일반 후기 + 비어 있는 항목(요금·입퇴실·사이트·주차/전기)을 겨냥한 질의.
+// 캠핑장 1곳당 질의 계획. 일반 후기 + 비어 있는 항목(요금·입퇴실·매너타임·전기·환불)을 정밀 겨냥한 질의.
 export const QUERY_PLAN = [
   { type: "blog", suffix: "", display: 30 },
-  { type: "blog", suffix: "요금", display: 20 },
-  { type: "blog", suffix: "입실 퇴실 매너타임", display: 20 },
-  { type: "blog", suffix: "사이트 크기 주차 전기", display: 20 },
-  { type: "cafearticle", suffix: "", display: 20 },
-  { type: "webkr", suffix: "", display: 20 },
-  { type: "kin", suffix: "", display: 10 },
+  { type: "blog", suffix: '"매너타임"', display: 20 },
+  { type: "blog", suffix: '"입실" "퇴실"', display: 20 },
+  { type: "blog", suffix: '"600W" 전기', display: 20 },
+  { type: "blog", suffix: '"1박" 요금', display: 20 },
+  { type: "cafearticle", suffix: '"매너타임" OR "입실"', display: 20 },
+  { type: "webkr", suffix: '"환불" 취소', display: 20 },
 ];
 
 export function naverSearchUrl(path, query, display = 20, sort = "sim") {

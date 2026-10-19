@@ -130,7 +130,7 @@ export function extractFromSentence(s, { year = new Date().getFullYear() } = {})
   if (/레이트\s*체크아웃|늦은\s*퇴실|퇴실\s*연장|연장\s*퇴실|레이트\s*퇴실/.test(s)) { const f = feeOrRule(s.slice(s.search(/레이트|늦은|연장/))); if (f) out.push({ code: "LATE_CHECKOUT", value: f.text, norm: f.text }); }
 
   // 매너타임 / 소등
-  const mtRange = s.match(new RegExp(String.raw`(?:매너\s*타임|소등\s*(?:시간)?|정숙\s*시간|취침\s*시간)[^0-9\n]{0,16}?${CLOCK}\s*(?:부터)?\s*[~\-–]\s*(?:익일|다음\s*날|아침|오전)?\s*${CLOCK}`, "i"));
+  const mtRange = s.match(new RegExp(String.raw`(?:매너\s*타임|소등\s*(?:시간)?|정숙\s*시간|취침\s*시간)[^0-9\n]{0,20}?${CLOCK}\s*(?:부터)?\s*(?:[~\-–]\s*(?:익일\s*|다음\s*날\s*)?|(?:부터\s+)?(?:익일\s*|다음\s*날\s*))\s*${CLOCK}`, "i"));
   if (mtRange) {
     const a = parseClock(mtRange[1] ?? (Number(mtRange[2]) <= 12 && Number(mtRange[2]) >= 8 ? "오후" : null), mtRange[2], mtRange[3], "manner");
     const b = parseClock(mtRange[4] ?? "오전", mtRange[5], mtRange[6], "any");
