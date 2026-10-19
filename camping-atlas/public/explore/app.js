@@ -1818,7 +1818,7 @@ function introHtml(d) {
   const t = String(d?.intro ?? "").replace(/\s+/g, " ").trim();
   if (!t) return "";
   const fact = sourceFact({ src: "고캠핑 소개", url: d?.intro_url, date: d?.intro_at, quote: d?.intro }, "고캠핑 소개");
-  return `<section class="d-sec intro-sec"><div class="sec-head">${iconTitle("spark", "업장 소개")}<span class="sec-note">고캠핑 소개 ${srcTip(fact, "업장 소개")}</span></div><details class="intro"><summary><p class="intro-copy">${esc(t)}</p></summary></details></section>`;
+  return `<section class="d-sec intro-sec"><div class="sec-head">${iconTitle("spark", "업장 소개")}<span class="sec-note">고캠핑 소개 ${srcTip(fact, "업장 소개")}</span></div><div class="intro intro-full"><p class="intro-copy">${esc(t)}</p></div></section>`;
 }
 function amenityIcon(x) {
   const s = String(x ?? "");
@@ -1916,7 +1916,7 @@ function priceHtml(c, d) {
   if (!rows.length) return "";
   const li = (r, i) => `<li class="pl-${r.kind === "후기 언급" ? "m" : "c"}"><b>${r.won ? `${fmt(r.won)}원` : esc(r.text || "예약처 확인")}</b><span>${esc(r.label)}</span><i class="pl-kind">${esc(r.kind)}${r.kind === "후기 언급" ? " · 확인필요" : ""}</i>${r.extra && r.kind === "후기 언급" ? r.extra : ""}${srcTip(r.fact, `1박 요금 ${i + 1}`)}</li>`;
   const foot = bs?.url ? `<p class="st-foot">요금은 날짜마다 달라요. <a href="${esc(bs.url)}" target="_blank" rel="noopener">날짜별 예약 화면 열기</a></p>` : "";
-  return `<section class="d-sec price-sec" id="sec-price"><div class="sec-head">${iconTitle("won", "1박 요금")}<span class="sec-note">업장 등록 우선 · 후기는 참고</span></div><ul class="plist">${rows.slice(0, 6).map(li).join("")}</ul>${rows.length > 6 ? `<details class="pl-more"><summary>요금 ${rows.slice(6, 12).length}개 더 보기</summary><ul class="plist">${rows.slice(6, 12).map((r, i) => li(r, i + 6)).join("")}</ul></details>` : ""}${foot}</section>`;
+  return `<section class="d-sec price-sec" id="sec-price"><div class="sec-head">${iconTitle("won", "1박 요금")}<span class="sec-note">업장 등록 우선 · 후기는 참고</span></div><ul class="plist">${rows.map(li).join("")}</ul>${foot}</section>`;
 }
 // 운영자 원문은 말투·질문·반복이 섞여 있으므로, 예약에 필요한 항목으로 묶어 읽기 좋게 정리한다.
 // 값 자체는 바꾸지 않고 같은 항목의 짧은 원문만 합치며, 전체 원문은 작은 (i)에서 다시 열 수 있다.
@@ -2227,7 +2227,7 @@ function platformHubHtml(d, c) {
 function videosHtml(d) {
   const v = (d?.videos ?? []).filter((x) => x.yt).slice(0, 8);
   if (!v.length) return "";
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("video", "관련 영상")}<span class="sec-note">YouTube</span></div><div class="rail vids">${v.map((x, i) => {
+  return `<section class="d-sec"><div class="sec-head">${iconTitle("video", "관련 영상")}<span class="sec-note">YouTube</span></div><div class="rail vids" data-cgrid>${v.map((x, i) => {
     const fact = sourceFact({ src: "YouTube", url: x.url ?? `https://www.youtube.com/watch?v=${x.yt}`, date: x.date, title: x.title }, "YouTube");
     return `<article class="vid-wrap"><button type="button" class="vid" data-yt="${esc(x.yt)}"><img src="https://i.ytimg.com/vi/${encodeURIComponent(x.yt)}/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14z"/></svg></span><b>${esc(serviceText(x.title, 60) || `현장 영상 ${i + 1}`)}</b><i>${esc([x.author, x.date ? String(x.date).slice(0, 7) : ""].filter(Boolean).join(" · ") || "재생하기")}</i></button>${srcTip(fact, `관련 영상 ${i + 1}`)}</article>`;
   }).join("")}</div></section>`;
@@ -2269,7 +2269,7 @@ function reviewLinksHtml(d, c) {
   const title = photos.length ? "방문 후기 · 캠퍼 사진" : "블로그 · 카페 후기";
   if (!r.length && photos.length) {
     return `<section class="d-sec" id="sec-reviews"><div class="sec-head">${iconTitle("file-text", title)}<span class="sec-note">사진 ${photos.length}장</span></div>
-      <div class="review-links review-photos">${photoCards()}</div>
+      <div class="review-links review-photos" data-cgrid>${photoCards()}</div>
       ${directLinks}
     </section>`;
   }
@@ -2294,7 +2294,7 @@ function reviewLinksHtml(d, c) {
     }).join("");
   const extra = photoCards();
   return `<section class="d-sec" id="sec-reviews"><div class="sec-head">${iconTitle("file-text", title)}<span class="sec-note">후기 ${r.length}건${photos.length ? ` · 사진 ${photos.length}장` : ""}</span></div>
-    <div class="review-links">${cards}</div>${extra ? `<h3 class="rv-sub">${ic("camera")}캠퍼 사진</h3><div class="review-links review-photos">${extra}</div>` : ""}
+    <div class="review-links" data-cgrid>${cards}</div>${extra ? `<h3 class="rv-sub">${ic("camera")}캠퍼 사진</h3><div class="review-links review-photos" data-cgrid>${extra}</div>` : ""}
     ${directLinks}
   </section>`;
 }
@@ -2914,6 +2914,8 @@ function bindDetail() {
     if (exEl) m.mount(exEl, condCamp).then(() => titleIcon(exEl, "route")).catch(() => {});
     m.evFor(id).then(mountNearbyEv).catch(() => {});
   }).catch(() => {});
+  // 콘텐츠 카드 격자(후기·사진·영상): 태블릿부터 여러 단 + 더보기. 업장 기본 정보 칸에는 붙이지 않는다.
+  import(new URL(`${MOD_ROOT}context/cgrid.js`, import.meta.url).href).then((m) => m.setupAll($(".detail") ?? document)).catch(() => {});
   // 주변 축제·행사 포스터 카드(CultureFlow + 관광공사 축제): /context/events.js가 있을 때만. 실패하면 칸을 숨긴 채 둔다.
   const evSec = $("[data-events]");
   if (evSec && condCamp) import(new URL(`${MOD_ROOT}context/events.js`, import.meta.url).href).then((m) => m.mount(evSec, condCamp)).catch(() => {});
