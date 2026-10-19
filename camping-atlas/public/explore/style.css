@@ -1630,3 +1630,23 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 .rv-msg { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; padding: 16px; text-align: center; color: var(--ink-2); font-weight: 700; }
 .rv-foot { display: flex; justify-content: space-between; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--line); }
 @media (max-width: 759px) { .rv-view { aspect-ratio: 4 / 5; } .nearby-hub .nb-rv { padding: 0 8px; } }
+
+/* ── 콘텐츠 카드 격자(소유자 2026-10-20, context/cgrid.js) ──
+   후기·캠퍼 사진·영상·축제 카드만: ~767px 기존 배치 · 768px 2단 · 1024px 3단 · 1280px 4단 · 1600px 5단.
+   처음 개수는 줄이 꽉 차게(2단 4 · 3단 6 · 4단 4 · 5단 5), 나머지는 더보기로 같은 개수씩. */
+.intro-sec .intro-full .intro-copy, .intro.intro-full p { display: block; -webkit-line-clamp: unset; overflow: visible; }
+[data-cg-hide] { display: none !important; }
+.cg-more-wrap { display: flex; justify-content: center; margin-top: 12px; }
+.cg-more-wrap[hidden], .cg-more-wrap:has(> .cg-more[hidden]) { display: none; }
+.cg-more { height: 38px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink-2); font: inherit; font-size: .84rem; font-weight: 800; cursor: pointer; }
+.cg-more:hover { background: var(--soft); }
+@media (max-width: 767px) { .cg-more-wrap { display: none; } }
+@media (min-width: 768px) {
+  .review-links.cgrid, .review-links.review-photos.cgrid { grid-template-columns: repeat(var(--cg-cols, 2), minmax(0, 1fr)); }
+  .rail.vids.cgrid { display: grid; grid-template-columns: repeat(var(--cg-cols, 2), minmax(0, 1fr)); overflow: visible; scroll-snap-type: none; -webkit-mask-image: none; mask-image: none; }
+  .rail.vids.cgrid .vid-wrap { width: auto; min-width: 0; }
+  .rail.vids.cgrid .vid, .rail.vids.cgrid .vid img { width: 100%; }
+  .rail.vids.cgrid .vid { container-type: inline-size; }
+  .rail.vids.cgrid .vid-play { left: calc(50% - 24px); top: calc(28.125cqw - 24px); }
+  .ev-rail.cgrid { grid-template-columns: repeat(var(--cg-cols, 2), minmax(0, 1fr)); }
+}
