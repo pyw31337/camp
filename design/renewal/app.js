@@ -1433,7 +1433,7 @@ function nearbyCard(x) {
   const road = x.lat && x.lng ? `https://map.kakao.com/link/roadview/${x.lat},${x.lng}` : "";
   const photo = nearbyThumb(x);
   const media = photo
-    ? `<div class="media-card-photo"><img src="${esc(photo)}" alt="${esc(x.name)}" loading="lazy" decoding="async" onerror="this.closest('.media-card-photo').classList.add('media-card-icon');this.replaceWith(Object.assign(document.createElement('span'),{innerHTML:'${ic(icon).replace(/'/g, "\'") }'}))"></div>`
+    ? `<div class="media-card-photo"><img src="${esc(photo)}" alt="${esc(x.name)}" loading="lazy" decoding="async" onerror="this.closest('.media-card-photo').classList.add('media-card-icon');this.replaceWith(Object.assign(document.createElement('span'),{innerHTML:'${esc(ic(icon))}'}))"></div>`
     : `<div class="media-card-photo media-card-icon" data-kind="${esc(icon)}">${ic(icon)}</div>`;
   return `<article class="nearby-place media-card${photo ? " has-image" : ""}">
     ${media}
