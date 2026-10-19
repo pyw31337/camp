@@ -315,7 +315,15 @@ function campThumb(c, { alt = "", sizes } = {}) {
 // 카드 사진: GitHub Pages 배포 단계에서 합쳐지는 고캠핑 공식 webp를 우선 사용한다.
 // 원본 URL은 사진 브랜치에 아직 파생본이 없을 때만 보조로 쓴다.
 // 원본이 지워져 404가 난 사진 주소(이 방문 동안 기억). 상세 사진 묶음·라이트박스에서 뺀다.
-const DEAD = new Set();
+// 고캠핑 원본·썸네일은 같은 파일명을 가진다. 파일명 및 파라미터 제외 키로 중복을 거른다.
+const photoKey = (u) => {
+  const path = String(u ?? "").split(/[?#]/)[0];
+  const raw = path.slice(path.lastIndexOf("/") + 1) || path;
+  let base;
+  try { base = decodeURIComponent(raw); } catch { base = raw; }
+  base = base.toLowerCase();
+  return base.replace(/^thumb_\d+_/, "");
+};
 function photosOf(c) {
   return photosAll(c).filter((u) => !DEAD.has(photoUrl(u)));
 }
@@ -324,12 +332,25 @@ function photosAll(c) {
   const own = S.cards[c.id];
   const remote = p.filter((x) => !String(x).startsWith("media/"));
   const local = p.filter((x) => String(x).startsWith("media/"));
-  if (local.length) return [...local, ...(own ?? []).map((x) => `media/${x}`), ...remote].slice(0, 5);
-  if (own?.length) return [...(c.ph ? [`media/${c.ph}`] : []), ...own.map((x) => `media/${x}`), ...remote].slice(0, 5);
-  if (remote.length) return remote;
-  if (c.ph) return [`media/${c.ph}`];
-  if (c.img) return [c.img];
-  return [];
+  let list = [];
+  if (local.length) list = [...local, ...(own ?? []).map((x) => `media/${x}`), ...remote];
+  else if (own?.length) list = [...(c.ph ? [`media/${c.ph}`] : []), ...own.map((x) => `media/${x}`), ...remote];
+  else if (remote.length) list = remote;
+  else if (c.ph) list = [`media/${c.ph}`];
+  else if (c.img) list = [c.img];
+
+  const seen = new Set();
+  const deduped = [];
+  for (const u of list) {
+    if (!u) continue;
+    const k = photoKey(u);
+    if (seen.has(k) || seen.has(u)) continue;
+    seen.add(k);
+    seen.add(u);
+    deduped.push(u);
+    if (deduped.length >= 5) break;
+  }
+  return deduped;
 }
 // 카드 사진 레일: 첫 장만 바로, 나머지는 손이 닿을 때(hover·터치·스크롤) 받는다.
 function carousel(c, { eager = false, cls = "" } = {}) {
