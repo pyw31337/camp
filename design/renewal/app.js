@@ -20,6 +20,27 @@ function feeLabel(fee) {
   const approx = /대\s*$/.test(fee.text ?? "") ? "대" : "";
   return `${manWon(lo)}${hi > lo ? `~${manWon(hi)}` : ""}원${approx}`;
 }
+// 숙박 형태별 1박 요금(build-price-tiers.mjs → c.fee.tiers = [[형태, 최저, 최고, 짐작]]).
+// 소유자 2026-10-19: 1박 10만원대를 넘으면 카라반·글램핑, 20만원대를 넘으면 펜션인 경우가 많다 → 텐트 사이트 요금과 따로 보인다.
+// 짐작(금액으로만 나눈 형태)은 ‘추정’을 붙인다.
+const TIER_LABEL = { site: "사이트", glamp: "글램핑", caravan: "카라반", gc: "글램핑·카라반", lodge: "펜션·숙박동" };
+const tierOf = (c, t) => c.fee?.tiers?.find((x) => x[0] === t) ?? null;
+const rangeWon = (lo, hi) => `${manWon(lo)}${hi > lo ? `~${manWon(hi)}` : ""}원`;
+/** 카드·목록의 대표 1박 요금: 사이트 요금이 있으면 그것, 없으면 첫 형태 { label, text } */
+function feeMain(c) {
+  if (!c.fee) return null;
+  const t = c.fee.tiers;
+  if (!t?.length) return { label: "1박", text: feeLabel(c.fee) };
+  const main = tierOf(c, "site") ?? t[0];
+  return { label: `1박 ${TIER_LABEL[main[0]]}`, text: `${rangeWon(main[1], main[2])}${/대\s*$/.test(c.fee.text ?? "") ? "대" : ""}`, est: main[3] && main[0] !== "site" };
+}
+/** 대표 요금 말고 다른 형태 요금 줄(글램핑 12만~19만원 · 펜션·숙박동 25만원 추정) */
+function feeTiersLine(c) {
+  const t = c.fee?.tiers;
+  if (!t?.length) return "";
+  const main = tierOf(c, "site") ?? t[0];
+  return t.filter((x) => x !== main).map(([k, lo, hi, e]) => [k, lo, hi, e && k !== "site"]).map(([k, lo, hi, est]) => `<span class="ft ft-${k}${est ? " est" : ""}"${est ? ' title="요금 금액으로 짐작한 형태(10만원대 글램핑·카라반, 20만원대 이상 펜션·숙박동)"' : ""}>${TIER_LABEL[k]} <b>${rangeWon(lo, hi)}</b>${est ? "<i>추정</i>" : ""}</span>`).join("");
+}
 // 상세 화면 금액 표기: 18.9만~42만원 → 189,000~420,000원, 2만5천원 → 25,000원, 130000원 → 130,000원, 2만~4만원대 → 20,000~40,000원대.
 function wonText(v) {
   const n = (m, c, t) => fmt(Math.round(parseFloat(m) * 10000 + (c ? parseFloat(c) * 1000 : 0)));
@@ -151,17 +172,40 @@ function facts(c) {
 }
 const filled = (f) => f && (f.g === "v" || f.g === "c");
 
-// 포스터 배지: 값이 ‘가능·있음’이면 붙인다(등급은 카드 줄·상세의 점과 (i)로). 전기=라임 · 불=주황 · 주차=블루 · 반려견=잉크
-// 전기는 W를 알면 ‘600W’, 모르면 ‘전기’.
+// 포스터 배지(소유자 2026-10-19): ‘전기 있음·온수 있음’처럼 거의 모든 곳에 해당하는 값은 붙이지 않는다.
+// 전기는 W 제한을 아는 곳만 ‘600W’. 장작=주황 · 텐트 옆 주차=블루 · 반려견=잉크.
+// 불가사항(전기·장작·숯·온수·반려동물 불가 등)은 같은 아이콘에 공통 빨간 배지로 하나씩(build-house-rules.mjs → c.nr).
 const pos = (f) => f && f.g;
-function badges(c, max = 4) {
+const NO_TAGS = {
+  NO_POWER: ["전기 불가", "bolt"], HIGH_POWER: ["고출력 전열기구 금지", "bolt"], NO_FIRE: ["화기 불가", "flame"], NO_FIREWOOD: ["장작 불가", "flame"],
+  NO_CHARCOAL: ["숯 불가", "flame"], BYO_FUEL: ["개인 장작·숯 반입 금지", "flame"], BYO_PIT: ["개인 화로대 금지", "flame"], NO_HOT_WATER: ["온수 불가", "drop"],
+  NO_PET: ["반려동물 불가", "paw"], BIG_DOG: ["대형견 불가", "paw"], NO_CARAVAN: ["개인 카라반·트레일러 불가", "caravan"], NO_EXTRA_TENT: ["추가 텐트 불가", "tent"],
+  NO_FIREWORKS: ["폭죽 금지", "spark"], NO_LOUD: ["음향기기 금지", "broadcast"], NO_MINOR: ["미성년자 단독 불가", "alert"], NO_VISITOR: ["방문객 불가", "door"], NO_WINTER: ["동계 휴장", "calendar"],
+};
+const NO_ORDER = ["NO_PET", "BIG_DOG", "NO_FIRE", "NO_FIREWOOD", "NO_CHARCOAL", "BYO_FUEL", "BYO_PIT", "NO_POWER", "HIGH_POWER", "NO_HOT_WATER", "NO_CARAVAN", "NO_EXTRA_TENT", "NO_WINTER", "NO_FIREWORKS", "NO_LOUD", "NO_MINOR", "NO_VISITOR"];
+// 카드에 먼저 보일 불가사항(이용 여부를 바로 가르는 것)
+const NO_CARD = ["NO_POWER", "NO_FIRE", "NO_FIREWOOD", "NO_CHARCOAL", "NO_HOT_WATER", "NO_PET", "BIG_DOG", "NO_CARAVAN", "NO_WINTER"];
+/** 공식(업장 공개·고캠핑 등록) 불가 태그 키 목록. 데이터가 아직 없는 발행본에서도 사실 값으로 보탠다. */
+function noKeys(c) {
+  if (c._no) return c._no;
+  const f = facts(c), k = new Set(c.nr ?? []);
+  if (pos(f.fire) && f.fire.kind === "NO_FIRE") k.add("NO_FIRE");
+  if (pos(f.fire) && f.fire.kind === "CHARCOAL_ONLY") k.add("NO_FIREWOOD");
+  if (pos(f.power) && f.power.ok === false) k.add("NO_POWER");
+  if (pos(f.pet) && /불가/.test(f.pet.v ?? "")) k.add("NO_PET");
+  if (k.has("NO_FIRE")) { k.delete("NO_FIREWOOD"); k.delete("NO_CHARCOAL"); }
+  if (k.has("NO_PET")) k.delete("BIG_DOG");
+  return (c._no = NO_ORDER.filter((x) => k.has(x)));
+}
+const noBadge = (k) => (NO_TAGS[k] ? `<span class="bdg bdg-no">${ic(NO_TAGS[k][1])}${esc(NO_TAGS[k][0])}</span>` : "");
+function badges(c, max = 4, maxNo = 2) {
   const f = facts(c), out = [];
-  if (pos(f.power) && f.power.ok) out.push(`<span class="bdg bdg-volt">${ic("bolt")}${esc(f.power.short)}</span>`);
+  if (pos(f.power) && f.power.ok && f.power.w) out.push(`<span class="bdg bdg-volt">${ic("bolt")}${esc(f.power.short)}</span>`);
   if (pos(f.fire) && f.fire.kind === "FIREWOOD_OK") out.push(`<span class="bdg bdg-flame">${ic("flame")}장작</span>`);
-  else if (pos(f.fire) && f.fire.kind === "CHARCOAL_ONLY") out.push(`<span class="bdg bdg-flame-soft">${ic("flame")}숯만</span>`);
   if (pos(f.park) && f.park.ok === true) out.push(`<span class="bdg bdg-cobalt">${ic("car")}텐트 옆</span>`);
   if (pos(f.pet) && f.pet.ok) out.push(`<span class="bdg bdg-ink">${ic("paw")}반려견</span>`);
-  return out.slice(0, max).join("");
+  const no = noKeys(c).filter((k) => NO_CARD.includes(k)).slice(0, maxNo).map(noBadge);
+  return [...out.slice(0, Math.max(max - no.length, 1)), ...no].slice(0, max).join("");
 }
 const dot = () => "";
 
@@ -192,8 +236,9 @@ function typeLine2(c) {
 }
 
 // ── 필터 ─────────────────────────────────────────────────────
-const campFeeMin = (c) => c.fee?.min ?? c.pf?.p?.min;
-const campFeeMax = (c) => c.fee?.max ?? c.pf?.p?.max ?? campFeeMin(c);
+// 요금대 필터는 텐트 사이트 요금으로(글램핑·펜션 요금이 섞인 범위로 거르지 않게). 사이트 요금을 모르면 전체 범위.
+const campFeeMin = (c) => tierOf(c, "site")?.[1] ?? c.fee?.min ?? c.pf?.p?.min;
+const campFeeMax = (c) => tierOf(c, "site")?.[2] ?? c.fee?.max ?? c.pf?.p?.max ?? campFeeMin(c);
 const AREAS = [["all", "전국"], ["서울·경기", "서울·경기"], ["강원", "강원"], ["충청", "충청"], ["전라", "전라"], ["경상", "경상"], ["제주", "제주"]];
 const AREA_OF = { 서울: "서울·경기", 인천: "서울·경기", 경기: "서울·경기", 강원: "강원", 충북: "충청", 충남: "충청", 대전: "충청", 세종: "충청", 전북: "전라", 전남: "전라", 광주: "전라", 경북: "경상", 경남: "경상", 대구: "경상", 부산: "경상", 울산: "경상", 제주: "제주" };
 const QUICK = {
@@ -606,7 +651,7 @@ function card(c, i = 0) {
       ${rowsHtml(c)}
       ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-reviews">${cardReviewPills(c.rv)}</div>` : ""}
       ${nearLine(c) ? `<p class="card-near">${ic("store")}${esc(nearLine(c))}</p>` : ""}
-      ${feeLabel(c.fee) ? `<p class="card-price"><span>1박</span><b>${esc(feeLabel(c.fee))}</b>${dot(GR(c.fee.grade))}</p>` : ""}
+      ${feeMain(c)?.text ? `<p class="card-price"><span>${esc(feeMain(c).label)}${feeMain(c).est ? "<i>추정</i>" : ""}</span><b>${esc(feeMain(c).text)}</b>${dot(GR(c.fee.grade))}</p>${feeTiersLine(c) ? `<p class="card-tiers">${feeTiersLine(c)}</p>` : ""}` : ""}
     </div>
   </article>`;
 }
@@ -1128,7 +1173,7 @@ function condLine(c, ce) {
 }
 function listRow({ c, st, ce }, i = 0) {
   const f = facts(c), { tag } = nameOf(c), ti = c.ti ?? {}, r = reviewMeta(c), main = bookingChannels(c)[0];
-  const fee = feeLabel(c.fee);
+  const fee = feeMain(c)?.text ?? null;
   const href = `#/c/${encodeURIComponent(c.id)}`;
   return `<article class="lrow" data-id="${esc(c.id)}">
     <a class="lrow-media" href="${href}" tabindex="-1" aria-hidden="true">${campThumb(c, { sizes: "(max-width: 759px) 132px, 300px" })}<span class="bdgs">${badges(c, 2)}</span></a>
@@ -1706,7 +1751,7 @@ async function detailView(id) {
       <p class="d-eyebrow">${esc(region(c))}${c.op && OP[c.op] ? ` · ${OP[c.op]}` : tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
       <h1 class="d-title">${titleHtml(c)}</h1>
       ${c.line ? `<p class="d-line">${esc(serviceText(c.line, 84))}${c.gc_url ? srcTip({ g: "c", src: { label: "고캠핑 소개", url: c.gc_url, quote: c.line } }, "한 줄 소개") : ""}</p>` : ""}
-      <div class="d-bdgs">${badges(c, 5)}</div>
+      <div class="d-bdgs">${badges(c, 14, 10)}</div>
       </div>
       <aside class="d-side">${reserveCard(c, d)}</aside>
     </header>
@@ -1716,13 +1761,14 @@ async function detailView(id) {
       <div><span>${ic("file-text")}후기</span><b>${c.rv?.n ? fmt(c.rv.n) : "–"}</b></div>
       <div><span>다음 오픈</span><b class="${o ? "hot" : "muted"}">${o ? esc(o.txt) : "–"}</b></div>
     </div>
-    <nav class="d-jump" aria-label="상세 바로가기">${[["sec-price", "요금"], ["sec-usage", "이용 정보"], ["sec-operator", "운영 안내"], ["sec-nearby", "주변"], ["sec-events", "축제·행사"], ["sec-reviews", "후기·사진"], ["sec-info", "업체 정보"]].map(([id, l]) => `<a href="#${id}" data-jump="${id}" hidden>${l}</a>`).join("")}</nav>
+    <nav class="d-jump" aria-label="상세 바로가기">${[["sec-price", "요금"], ["sec-usage", "이용 정보"], ["sec-rules", "이용 규칙"], ["sec-operator", "운영 안내"], ["sec-nearby", "주변"], ["sec-events", "축제·행사"], ["sec-reviews", "후기·사진"], ["sec-info", "업체 정보"]].map(([id, l]) => `<a href="#${id}" data-jump="${id}" hidden>${l}</a>`).join("")}</nav>
     <div class="d-body">
       <div class="d-main">
         ${siteTypesHtml(c, d)}
         ${specSection(c, d)}
         ${priceHtml(c, d)}
         ${us.some(([, x]) => x) ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("info", "이용 정보")}</div><dl class="uses">${us.filter(([, x]) => x).map(([l, x, icon]) => `<div class="use"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${esc(wonText(detailValue(x)))}${asOfMention(x)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span></dd></div>`).join("")}</dl>${unknownLine(us.filter(([, x]) => !x).map(([l]) => l))}</section>` : ""}
+        ${houseRulesHtml(c, d)}
         <section class="d-sec" data-cond hidden></section>
         <section class="d-sec" data-extras hidden></section>
         ${reviewHtml(d, c)}
@@ -1916,7 +1962,32 @@ function priceHtml(c, d) {
   if (!rows.length) return "";
   const li = (r, i) => `<li class="pl-${r.kind === "후기 언급" ? "m" : "c"}"><b>${r.won ? `${fmt(r.won)}원` : esc(r.text || "예약처 확인")}</b><span>${esc(r.label)}</span><i class="pl-kind">${esc(r.kind)}${r.kind === "후기 언급" ? " · 확인필요" : ""}</i>${r.extra && r.kind === "후기 언급" ? r.extra : ""}${srcTip(r.fact, `1박 요금 ${i + 1}`)}</li>`;
   const foot = bs?.url ? `<p class="st-foot">요금은 날짜마다 달라요. <a href="${esc(bs.url)}" target="_blank" rel="noopener">날짜별 예약 화면 열기</a></p>` : "";
-  return `<section class="d-sec price-sec" id="sec-price"><div class="sec-head">${iconTitle("won", "1박 요금")}<span class="sec-note">업장 등록 우선 · 후기는 참고</span></div><ul class="plist">${rows.slice(0, 6).map(li).join("")}</ul>${rows.length > 6 ? `<details class="pl-more"><summary>요금 ${rows.slice(6, 12).length}개 더 보기</summary><ul class="plist">${rows.slice(6, 12).map((r, i) => li(r, i + 6)).join("")}</ul></details>` : ""}${foot}</section>`;
+  const tiers = c.fee?.tiers?.length ? `<div class="ptiers">${c.fee.tiers.map(([k, lo, hi, est]) => `<div class="pt pt-${k}${est && k !== "site" ? " est" : ""}"><span>${TIER_LABEL[k]}${est && k !== "site" ? "<i>추정</i>" : ""}</span><b>${rangeWon(lo, hi)}</b></div>`).join("")}${tip("<b>숙박 형태별 1박 요금</b><span>요금 문장에 ‘글램핑·카라반·펜션·오토·데크’ 같은 이름이 있으면 그 형태로 나눠요. 이름이 없으면 금액으로 짐작해요(10만원 미만 사이트, 10만~20만원 글램핑·카라반, 20만원 이상 펜션·숙박동). 짐작한 것은 ‘추정’으로 표시하고, 그 캠핑장에 실제로 있는 사이트 타입으로 좁혀요.</span>", "형태별 요금 기준")}</div>` : "";
+  return `<section class="d-sec price-sec" id="sec-price"><div class="sec-head">${iconTitle("won", "1박 요금")}<span class="sec-note">업장 등록 우선 · 후기는 참고</span></div>${tiers}<ul class="plist">${rows.slice(0, 6).map(li).join("")}</ul>${rows.length > 6 ? `<details class="pl-more"><summary>요금 ${rows.slice(6, 12).length}개 더 보기</summary><ul class="plist">${rows.slice(6, 12).map((r, i) => li(r, i + 6)).join("")}</ul></details>` : ""}${foot}</section>`;
+}
+// 이용 규칙 · 공지(2026-10-19 소유자: 금지사항·이용수칙·이용제한은 업장 이용에 매우 중요 — 수집해서 노출, 공지는 눌러 바로 원문으로).
+// build-house-rules.mjs → d.house_rules { tags, rules[{cat,text,url,at}], ops, notices[{title,date,url}] }. 업장 공개 문장만(후기 제외).
+const RULE_CATS = [["ban", "금지사항", "alert"], ["limit", "이용 제한", "report"], ["rule", "이용 수칙", "check"]];
+const ymd = (at) => { const t = Date.parse(at ?? ""); if (!Number.isFinite(t)) return ""; const d = new Date(t); return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}`; };
+function houseRulesHtml(c, d) {
+  const h = d?.house_rules ?? {};
+  const tags = (h.tags ?? []).filter((t) => NO_TAGS[t.k]);
+  const rules = h.rules ?? [], ops = h.ops ?? [], notices = h.notices ?? [];
+  if (!tags.length && !rules.length && !ops.length && !notices.length) return "";
+  const srcLink = (u) => (u && /^https?:/.test(u) ? `<a class="hr-src" href="${esc(u)}" target="_blank" rel="noopener" aria-label="원문 보기">원문${ic("external")}</a>` : "");
+  const list = (rows, cls) => {
+    const li = (x) => `<li><span>${esc(compactOperatorText(x.text))}</span>${srcLink(x.url)}</li>`;
+    return `<ul class="hr-list ${cls}">${rows.slice(0, 4).map(li).join("")}</ul>${rows.length > 4 ? `<details class="hr-more"><summary>${rows.length - 4}개 더 보기</summary><ul class="hr-list ${cls}">${rows.slice(4).map(li).join("")}</ul></details>` : ""}`;
+  };
+  const tagRow = tags.length ? `<div class="hr-tags">${tags.map((t) => `<span class="hr-tag">${noBadge(t.k)}${srcTip({ g: "c", src: { label: t.src ?? "업장 공개", url: t.url, at: t.at, quote: t.quote } }, NO_TAGS[t.k][0])}</span>`).join("")}</div>` : "";
+  const groups = RULE_CATS.map(([k, l, icon]) => [l, icon, rules.filter((r) => r.cat === k)]).filter(([, , rows]) => rows.length);
+  const cols = [
+    ...groups.map(([l, icon, rows]) => `<div class="hr-col"><h3>${ic(icon)}${l}<i>${rows.length}</i></h3>${list(rows, "")}</div>`),
+    ops.length ? `<div class="hr-col"><h3>${ic("clock")}운영 안내<i>${ops.length}</i></h3>${list(ops, "")}</div>` : "",
+  ].filter(Boolean);
+  const noticeList = notices.length ? `<div class="hr-notices"><h3>${ic("report")}공지사항</h3><ul>${notices.map((n) => `<li>${/^https?:/.test(n.url ?? "") ? `<a href="${esc(n.url)}" target="_blank" rel="noopener">` : "<span>"}${n.date ? `<time>${esc(n.date.replaceAll("-", "."))}</time>` : ""}<b>${esc(n.title)}</b>${n.url ? ic("external") : ""}${/^https?:/.test(n.url ?? "") ? "</a>" : "</span>"}</li>`).join("")}</ul></div>` : "";
+  const at = [...rules, ...ops].map((x) => x.at).filter(Boolean).sort().at(-1);
+  return `<section class="d-sec hr-sec" id="sec-rules"><div class="sec-head">${iconTitle("alert", "이용 규칙 · 공지")}<span class="sec-note">업장이 공개한 원문${at ? ` · ${ymd(at)} 확인` : ""} ${tip("<b>이용 규칙 · 공지</b><span>운영자 홈페이지·예약 페이지와 고캠핑 등록값에서 업장이 직접 공개한 금지사항·이용 제한·이용 수칙만 모았어요. 후기 글은 쓰지 않아요. 규칙은 바뀔 수 있으니 예약 전 원문을 확인하세요. 각 줄의 ‘원문’과 공지 제목을 누르면 원래 페이지가 열려요.</span>", "이용 규칙 기준")}</span></div>${tagRow}${cols.length ? `<div class="hr-grid">${cols.join("")}</div>` : ""}${noticeList}</section>`;
 }
 // 운영자 원문은 말투·질문·반복이 섞여 있으므로, 예약에 필요한 항목으로 묶어 읽기 좋게 정리한다.
 // 값 자체는 바꾸지 않고 같은 항목의 짧은 원문만 합치며, 전체 원문은 작은 (i)에서 다시 열 수 있다.
@@ -2010,8 +2081,7 @@ function operatorHtml(d) {
     used.add(text);
     let label = x.cat ?? OPERATOR_CATEGORIES.find(([, re]) => re.test(text))?.[0] ?? "운영 안내";
     // 금액 문장은 ‘1박 요금’ 칸으로 옮겼다. 여기에는 취소·환불 규정만 남긴다.
-    if (label === "취소 · 환불") return /당일.{0,8}(환불\s*불가|불가)/.test(text) ? "당일 취소 환불 불가" : "취소·환불 규정 확인";
-  if (label === "요금 · 환불") { if (!/환불|취소|위약|수수료/.test(text)) continue; label = "취소 · 환불"; }
+    if (label === "요금 · 환불") { if (!/환불|취소|위약|수수료/.test(text)) continue; label = "취소 · 환불"; }
     const row = grouped.get(label) ?? { label, texts: [], url: x.url, src: x.src, at: x.date, image: null };
     if (x.image && !row.image) row.image = x.image;
     if (row.texts.length < 3 && !row.texts.some((t) => t.includes(text) || text.includes(t))) row.texts.push(text);
