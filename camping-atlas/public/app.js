@@ -1679,7 +1679,7 @@ async function detailView(id) {
         ${amenityHtml(c)}
         ${introHtml(d)}
         ${programsHtml(d)}
-        ${layoutHtml(d)}
+        ${layoutHtml(d, c)}
         ${operatorMediaHtml(d)}
         ${videosHtml(d)}
         ${platformHubHtml(d, c)}
@@ -2034,15 +2034,124 @@ function operatorMediaHtml(d) {
 // 원본을 못 불러오면 검색 API 썸네일을 대신 보이고, 원문 링크는 라이트박스 아래에 둔다. 그림은 저장하지 않는다.
 const mediaFull = (x) => externalImage(x) || apiThumb(x);
 const mediaSmall = (x) => apiThumb(x) || externalImage(x);
-const layoutImages = (d) => (d?.layout?.images ?? []).filter((x) => x.url && mediaFull(x)).filter((x, i, all) => all.findIndex((y) => y.url === x.url && mediaFull(y) === mediaFull(x)) === i).slice(0, 6);
+const layoutImages = (d) => (d?.layout?.images ?? []).filter((x) => (x.img || x.thumb || x.url)).filter((x, i, all) => all.findIndex((y) => (y.img || y.thumb || y.url) === (x.img || x.thumb || x.url)) === i).slice(0, 6);
 const snsImages = (d) => (d?.sns_images ?? []).filter((x) => x.url && mediaFull(x)).slice(0, 8);
-function layoutHtml(d) {
-  const imgs = layoutImages(d);
-  if (!imgs.length) return "";
-  const first = imgs[0];
-  return `<section class="d-sec layout-sec"><div class="sec-head">${iconTitle("layers", "시설 배치도")}<span class="sec-note">${imgs.length}장 · 눌러서 크게 보기</span></div>
-    <div class="layout-viewer"><button class="layout-main" type="button" data-media-lb="layout" data-index="0" aria-label="시설 배치도 1 크게 보기"><img src="${esc(mediaFull(first))}" data-fb="${esc(mediaSmall(first))}" alt="시설 배치도" decoding="async" referrerpolicy="no-referrer"><span>${ic("search")}크게 보기</span></button>${imgs.length > 1 ? `<div class="layout-thumbs">${imgs.map((x, i) => `<button type="button" data-layout-thumb="${i}" aria-label="배치도 ${i + 1} 보기"${i ? "" : " aria-current"}><img src="${esc(mediaSmall(x))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"></button>`).join("")}</div>` : ""}</div>
-    <p class="st-foot">출처 ${esc(sourceName(first.src, hostOf(first.url) || "원문"))}${first.date ? ` · ${esc(String(first.date).slice(0, 10))}` : ""} · <a href="${esc(first.url)}" target="_blank" rel="noopener">원문 보기</a></p>
+
+const isOfficialLayout = (x) => Boolean(x && (x.official || /gocamping\.or\.kr|mgocamping/i.test(x.img || x.url || "") || x.src === "고캠핑" || x.src === "한국관광공사"));
+
+function layoutHtml(d, c) {
+  const allImages = (d?.layout?.images ?? [])
+    .filter((x) => x && (x.img || x.thumb))
+    .filter((x, i, arr) => arr.findIndex((y) => (y.img || y.thumb) === (x.img || x.thumb)) === i);
+
+  const posts = (d?.layout?.posts ?? []).filter((x) => x.url && x.title).slice(0, 4);
+
+  if (!allImages.length && !posts.length) return "";
+
+  const officialList = allImages.filter(isOfficialLayout);
+  const hasOfficial = officialList.length > 0;
+  const officialImg = officialList[0];
+
+  if (hasOfficial) {
+    const candidates = allImages.filter((x) => x !== officialImg).slice(0, 4);
+    const mainImgUrl = officialImg.img || officialImg.thumb;
+    return `<section class="d-sec layout-sec">
+      <div class="sec-head">
+        ${iconTitle("layers", "시설 배치도")}
+        <span class="sec-note">고캠핑 등록 원본</span>
+      </div>
+      <div class="layout-single-wrap">
+        <button type="button" class="layout-single-btn" data-layout-open="0" aria-label="고캠핑 공식 시설 배치도 원본 크게 보기">
+          <img src="${esc(mainImgUrl)}" alt="고캠핑 공식 시설 배치도" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(officialImg.thumb)}'){this.src='${esc(officialImg.thumb)}'}">
+          <span class="cand-zoom-badge">${ic("search")}고화질 크게 보기</span>
+        </button>
+      </div>
+      ${candidates.length ? `
+      <div class="layout-extra-zone">
+        <p class="layout-note">캠퍼 후기 참고 배치도 (${candidates.length}장)</p>
+        <div class="layout-candidate-grid">
+          ${candidates.map((x, i) => {
+            const imgUrl = x.img || x.thumb;
+            return `
+            <button type="button" class="layout-cand-btn" data-layout-open="${i + 1}" aria-label="참고 시설배치도 ${i + 1} 크게 보기">
+              <div class="layout-cand-photo">
+                <img src="${esc(imgUrl)}" alt="참고 배치도 ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(x.thumb)}'){this.src='${esc(x.thumb)}'}">
+                <span class="cand-zoom-badge">${ic("search")}크게 보기</span>
+              </div>
+              <div class="layout-cand-info">
+                <b>참고 배치도 ${i + 1}</b>
+                <span>${esc(sourceName(x.src, hostOf(x.url) || "후기"))}${x.date ? ` · ${esc(String(x.date).slice(0, 7))}` : ""}</span>
+              </div>
+            </button>`;
+          }).join("")}
+        </div>
+      </div>` : ""}
+    </section>`;
+  }
+
+  // 고캠핑 공식 배치도가 없는 경우: 후보 사진 표시
+  const candidates = allImages.slice(0, 6);
+  if (candidates.length === 1) {
+    const single = candidates[0];
+    const imgUrl = single.img || single.thumb;
+    return `<section class="d-sec layout-sec">
+      <div class="sec-head">
+        ${iconTitle("layers", "시설 배치도")}
+        <span class="sec-note">추정 사진 1장 (고캠핑 공식 배치도 없음)</span>
+      </div>
+      <p class="layout-note">고캠핑에 공식 배치도가 등록되지 않아, 캠퍼 후기 및 포토에서 찾은 시설배치도 추정 사진입니다. 사진을 누르면 라이트박스로 크게 확인하실 수 있습니다.</p>
+      <div class="layout-single-wrap">
+        <button type="button" class="layout-single-btn" data-layout-open="0" aria-label="추정 시설 배치도 원본 크게 보기">
+          <img src="${esc(imgUrl)}" alt="추정 시설 배치도" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(single.thumb)}'){this.src='${esc(single.thumb)}'}">
+          <span class="cand-zoom-badge">${ic("search")}고화질 크게 보기</span>
+        </button>
+      </div>
+      ${posts.length ? `
+      <div class="layout-links" style="margin-top: 12px;">
+        ${posts.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener"><span>${ic("layers", "line")}배치도 관련 글 ${i + 1}</span><i>${esc(serviceText(x.title, 40))} · ${esc(sourceName(x.src, hostOf(x.url) || "원문"))}</i>${ic("external", "line")}</a>`).join("")}
+      </div>` : ""}
+    </section>`;
+  }
+
+  if (candidates.length > 1) {
+    return `<section class="d-sec layout-sec">
+      <div class="sec-head">
+        ${iconTitle("layers", "시설 배치도")}
+        <span class="sec-note">추정 사진 ${candidates.length}장 (고캠핑 공식 배치도 없음)</span>
+      </div>
+      <p class="layout-note">고캠핑에 등록된 공식 배치도가 없습니다. 캠퍼 후기 및 포토에서 수집된 시설배치도 후보 사진들을 아래에서 직접 확인해 보세요. 카드를 누르면 라이트박스로 또렷하게 크게 열립니다.</p>
+      <div class="layout-candidate-grid">
+        ${candidates.map((x, i) => {
+          const imgUrl = x.img || x.thumb;
+          return `
+          <button type="button" class="layout-cand-btn" data-layout-open="${i}" aria-label="시설배치도 추정 후보 ${i + 1} 원본 크게 보기">
+            <div class="layout-cand-photo">
+              <img src="${esc(imgUrl)}" alt="배치도 후보 ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(x.thumb)}'){this.src='${esc(x.thumb)}'}">
+              <span class="cand-zoom-badge">${ic("search")}크게 보기</span>
+            </div>
+            <div class="layout-cand-info">
+              <b>배치도 후보 ${i + 1}</b>
+              <span>${esc(sourceName(x.src, hostOf(x.url) || "후기"))}${x.date ? ` · ${esc(String(x.date).slice(0, 7))}` : ""}${x.sure ? " · 관련도 높음" : ""}</span>
+            </div>
+          </button>`;
+        }).join("")}
+      </div>
+      ${posts.length ? `
+      <div class="layout-links" style="margin-top: 12px;">
+        ${posts.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener"><span>${ic("layers", "line")}배치도 관련 글 ${i + 1}</span><i>${esc(serviceText(x.title, 40))} · ${esc(sourceName(x.src, hostOf(x.url) || "원문"))}</i>${ic("external", "line")}</a>`).join("")}
+      </div>` : ""}
+    </section>`;
+  }
+
+  return `<section class="d-sec layout-sec">
+    <div class="sec-head">
+      ${iconTitle("layers", "시설 배치도")}
+      <span class="sec-note">고캠핑 공식 배치도 없음</span>
+    </div>
+    <p class="layout-note">고캠핑에 등록된 공식 배치도 이미지가 없습니다. 아래 캠퍼 후기 및 관련 글에서 현장 안내를 확인하실 수 있습니다.</p>
+    <div class="layout-links">
+      ${posts.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener"><span>${ic("layers", "line")}배치도 관련 글 ${i + 1}</span><i>${esc(serviceText(x.title, 40))} · ${esc(sourceName(x.src, hostOf(x.url) || "원문"))}</i>${ic("external", "line")}</a>`).join("")}
+    </div>
   </section>`;
 }
 // 플랫폼별 더 보기(docs/PLATFORM_HUB.md, 2026-10-19): 수집한 영상은 위 영상 칸에서 재생하고,
@@ -2171,7 +2280,16 @@ function infoHtml(c) {
     ["운영", [OP[c.op], (c.days ?? [])[0]].filter(Boolean).map(esc).join(" · ") || null, gcSrc("운영 정보")],
     ...registryRows(c),
   ].filter(([, v]) => v);
-  return `<section class="d-sec" id="sec-info"><div class="sec-head">${iconTitle("info", "업체 정보")}${c.gc_url ? `<a class="link" href="${esc(c.gc_url)}" target="_blank" rel="noopener">고캠핑 ${ic("right")}</a>` : ""}</div>
+  const savedMapH = Number(store.get("mc-detail-map-h", 280));
+  const detailMapHeight = Number.isFinite(savedMapH) && savedMapH >= 160 && savedMapH <= 800 ? savedMapH : 280;
+  return `<section class="d-sec info-sec" id="sec-info"><div class="sec-head">${iconTitle("info", "업체 정보")}${c.gc_url ? `<a class="link" href="${esc(c.gc_url)}" target="_blank" rel="noopener">고캠핑 ${ic("right")}</a>` : ""}</div>
+    ${c.lat && c.lng ? `
+    <div class="detail-map-box" id="detail-map-box">
+      <div class="detail-map" id="detail-map" style="height:${detailMapHeight}px;" data-lat="${c.lat}" data-lng="${c.lng}"></div>
+      <div class="detail-map-handle" id="detail-map-handle" role="separator" aria-orientation="horizontal" aria-label="지도 크기 조절" tabindex="0" title="드래그하여 지도 높이 조절">
+        <span class="handle-bar"></span>
+      </div>
+    </div>` : ""}
     <dl class="uses info">${rows.map(([l, v, src]) => `<div class="use"><dt>${l}</dt><dd><span class="use-val">${v}</span>${src ? `<span class="use-meta">${dot(src.g)}${srcTip(src, l)}</span>` : ""}</dd></div>`).join("")}</dl>
   </section>`;
 }
@@ -2750,15 +2868,23 @@ function bindDetail() {
   // 운영자 정보 바로잡기(로그인 없이, Supabase operator_submission에 넣기만): /operator/form.js
   const opEl = $("[data-opform-sec]");
   if (opEl && condCamp && SB.url && SB.key) import(new URL(`${MOD_ROOT}operator/form.js`, import.meta.url).href).then((m) => m.mount(opEl, condCamp, SB)).catch(() => {});
-  const previewItems = async (kind) => {
+  // ── 시설배치도 라이트박스 열기 (단일/후보 다중) ──
+  $$("[data-layout-open]").forEach((b) => b.addEventListener("click", async () => {
     const d = await detailOf(id);
-    const rows = kind === "layout" ? (d?.layout?.images ?? []) : (d?.sns_images ?? []);
-    return rows.filter((x) => x?.url && canPreviewExternalMedia(x) && externalImage(x));
-  };
-  $$('[data-external-media]').forEach((b) => b.addEventListener("click", async () => {
-    const items = await previewItems(b.dataset.externalMedia);
-    const idx = Math.min(Number(b.dataset.index) || 0, Math.max(0, items.length - 1));
-    if (items.length) openLightboxUrls(items.map(externalImage), idx, b.dataset.externalMedia === "layout" ? "시설 배치도 · 원문 제공 이미지" : "캠퍼 사진 · 원문 제공 이미지");
+    const allImages = (d?.layout?.images ?? [])
+      .filter((x) => x && (x.img || x.thumb))
+      .filter((x, i, arr) => arr.findIndex((y) => (y.img || y.thumb) === (x.img || x.thumb)) === i);
+    const officialList = allImages.filter(isOfficialLayout);
+    const ordered = officialList.length > 0
+      ? [officialList[0], ...allImages.filter((x) => x !== officialList[0]).slice(0, 4)]
+      : allImages.slice(0, 6);
+    const idx = Math.max(0, Math.min(Number(b.dataset.layoutOpen) || 0, ordered.length - 1));
+    const urls = ordered.map((x) => x.img || x.thumb);
+    const caps = ordered.map((x, i) => {
+      if (officialList.length > 0 && i === 0) return "시설 배치도: 고캠핑 등록 원본";
+      return `시설 배치도 추정 후보 ${i + 1} (${sourceName(x.src, hostOf(x.url) || "후기 사진")})`;
+    });
+    if (urls.length) openLightboxUrls(urls, idx, caps);
   }));
   $$("img[data-fb]", $("#view")).forEach((im) => {
     const swap = () => { if (im.dataset.fb && im.src !== im.dataset.fb) { im.src = im.dataset.fb; delete im.dataset.fb; } };
@@ -2804,17 +2930,102 @@ function bindDetail() {
     const label = kind === "layout" ? "시설 배치도" : "캠퍼 사진";
     openLightboxUrls(list.map((x) => ({ src: mediaFull(x), fb: mediaSmall(x), link: x.url, cap: `${label} · ${sourceName(x.src, hostOf(x.url) || "원문")}` })), Number(b.dataset.index) || 0, label);
   }));
-  $$('[data-layout-thumb]').forEach((b) => b.addEventListener("click", async () => {
-    const items = layoutImages(await detailOf(id)), i = Number(b.dataset.layoutThumb);
-    const main = $(".layout-main");
-    if (!items[i] || !main) return;
-    const im = $("img", main);
-    im.dataset.fb = mediaSmall(items[i]);
-    im.src = mediaFull(items[i]);
-    main.dataset.index = String(i);
-    main.setAttribute("aria-label", `시설 배치도 ${i + 1} 크게 보기`);
-    $$("[data-layout-thumb]").forEach((x, n) => x.toggleAttribute("aria-current", n === i));
+  $$('[data-external-media="sns"]').forEach((b) => b.addEventListener("click", async () => {
+    const d = await detailOf(id);
+    const rows = (d?.sns_images ?? []).filter((x) => x?.url && canPreviewExternalMedia(x) && externalImage(x));
+    const idx = Math.min(Number(b.dataset.index) || 0, Math.max(0, rows.length - 1));
+    if (rows.length) openLightboxUrls(rows.map(externalImage), idx, "캠퍼 사진 · 원문 제공 이미지");
   }));
+
+  // ── 업체 지도 및 드래그 높이 조절 핸들 ──
+  const mapEl = $("#detail-map");
+  if (mapEl && currentCamp?.lat && currentCamp?.lng && window.L) {
+    try {
+      const detailMap = L.map("detail-map", {
+        zoomControl: true,
+        scrollWheelZoom: false,
+        attributionControl: true,
+      }).setView([currentCamp.lat, currentCamp.lng], 15);
+
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }).addTo(detailMap);
+
+      const markerHtml = `<div class="detail-map-pin"><span class="pin-icon">${ic("pin")}</span><span class="pin-name">${esc(nameOf(currentCamp).name)}</span></div>`;
+      L.marker([currentCamp.lat, currentCamp.lng], {
+        icon: L.divIcon({
+          className: "detail-map-marker-wrap",
+          html: markerHtml,
+          iconSize: [0, 0],
+          iconAnchor: [0, 0],
+        }),
+      }).addTo(detailMap);
+
+      setTimeout(() => { detailMap.invalidateSize(); }, 200);
+
+      cleanup.push(() => {
+        try { detailMap.remove(); } catch {}
+      });
+
+      const handle = $("#detail-map-handle");
+      if (handle) {
+        let isDragging = false;
+        let startY = 0;
+        let startH = 0;
+
+        const onPointerDown = (e) => {
+          isDragging = true;
+          startY = e.clientY;
+          startH = mapEl.offsetHeight;
+          handle.setPointerCapture(e.pointerId);
+          handle.classList.add("dragging");
+          document.body.style.userSelect = "none";
+          document.body.style.cursor = "ns-resize";
+          e.preventDefault();
+        };
+
+        const onPointerMove = (e) => {
+          if (!isDragging) return;
+          const dy = e.clientY - startY;
+          const newH = Math.max(160, Math.min(800, Math.round(startH + dy)));
+          mapEl.style.height = `${newH}px`;
+          detailMap.invalidateSize();
+        };
+
+        const onPointerUp = (e) => {
+          if (!isDragging) return;
+          isDragging = false;
+          try { handle.releasePointerCapture(e.pointerId); } catch {}
+          handle.classList.remove("dragging");
+          document.body.style.userSelect = "";
+          document.body.style.cursor = "";
+          const finalH = mapEl.offsetHeight;
+          store.set("mc-detail-map-h", finalH);
+          detailMap.invalidateSize();
+        };
+
+        handle.addEventListener("pointerdown", onPointerDown);
+        handle.addEventListener("pointermove", onPointerMove);
+        handle.addEventListener("pointerup", onPointerUp);
+        handle.addEventListener("pointercancel", onPointerUp);
+
+        handle.addEventListener("keydown", (e) => {
+          const curH = mapEl.offsetHeight;
+          let nextH = curH;
+          if (e.key === "ArrowDown") nextH = Math.min(800, curH + 40);
+          else if (e.key === "ArrowUp") nextH = Math.max(160, curH - 40);
+          else return;
+          e.preventDefault();
+          mapEl.style.height = `${nextH}px`;
+          store.set("mc-detail-map-h", nextH);
+          detailMap.invalidateSize();
+        });
+      }
+    } catch (err) {
+      console.warn("Detail map error", err);
+    }
+  }
   if (id && $("[data-cmts]")) loadComments(id);
   $("[data-cmt]")?.addEventListener("submit", async (e) => {
     e.preventDefault();
