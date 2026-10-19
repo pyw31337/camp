@@ -1060,8 +1060,19 @@ function specTiles(c, d) {
   const mention = {
     park: specFact(d, "PARKING"),
     power: specFact(d, "POWER_W"),
+    powerA: specFact(d, "POWER_MAX_A"),
     pet: specFact(d, "PET_POLICY"),
   };
+  // A 값이 있으면 전기 타일에 우선 표시 (예: "15A"). W와 둘 다 있으면 함께.
+  if (mention.powerA?.v) {
+    const aVal = mention.powerA.v;
+    const aText = typeof aVal === "number" ? `${aVal}A` : String(aVal);
+    if (mention.power?.v && !String(mention.power.v).includes("A")) {
+      mention.power = { ...mention.power, v: `${aText} · ${mention.power.v}` };
+    } else if (!mention.power) {
+      mention.power = { ...mention.powerA, v: aText };
+    }
+  }
   const T = [["size", "size", "설치 공간", ""], ["park", "car", "텐트 옆 주차", "cobalt"], ["power", "bolt", "전기", "volt"], ["fire", "flame", "장작·숯", "flame"], ["ground", "layers", "바닥", ""], ["shelter", "tent", "텐트·타프", ""], ["sanitary", "drop", "위생", ""], ["hot", "drop", "온수", ""], ["pet", "paw", "반려동물", ""]];
   return T.map(([k, i, l, cls]) => {
     let x = f[k] ?? mention[k] ?? null;
