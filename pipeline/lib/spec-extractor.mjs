@@ -19,6 +19,7 @@ export const SPEC_FIELDS = {
   PET_POLICY: { group: "rule", label: "반려동물" },
   PARKING: { group: "rule", label: "주차" },
   POWER_W: { group: "rule", label: "전기 용량" },
+  POWER_MAX_A: { group: "rule", label: "전기 용량(A)" },
   REFUND_POLICY: { group: "booking", label: "환불" },
   RENTAL: { group: "rental", label: "대여" },
   DISCOUNT: { group: "promo", label: "할인 대상" },
@@ -29,7 +30,7 @@ export const SPEC_GROUPS = [
 ];
 export const GRADE_RANK = { OPERATOR: 3, OFFICIAL_TEXT: 2, MENTION: 1 };
 
-// 반쪽 이모지(짝 잃은 서러가이트)를 지우고, 자를 때는 코드 포인트 단위로 자른다.
+// 반쪽 이모지(짝 잃은 서러게이트)를 지우고, 자를 때는 코드 포인트 단위로 자른다.
 const LONE_SURROGATE = /[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/g;
 export const clip = (s, n) => { const a = Array.from(String(s)); return a.length > n ? `${a.slice(0, n - 1).join("")}…` : a.join(""); };
 const won = (s) => Number(String(s).replace(/[,\s]/g, ""));
@@ -188,19 +189,16 @@ export function extractFromSentence(s, { year = new Date().getFullYear() } = {})
     else if (/(별도|공용|전용)\s*주차장|주차장\s*(에\s*)?(주차|세우)/.test(s)) out.push({ code: "PARKING", value: "별도 주차장", norm: "SHARED_NEARBY" });
   }
   // 전기 용량: “전기 600W”, “최대 1kW”, “1,100와트” (300~3,000W만, 전기 맥락이 같은 문장에 있을 때)
-  // + 2026-10-19: 한국 캠핑장에서 흔한 A(암페어) 단위도 추출. 220V 기준으로 W 환산해 저장(원문 A는 value에 보존).
   const w = s.match(/(\d(?:[\d,]{0,4}))\s*(w|와트|kw|킬로와트)(?![a-z])/i);
   if (w && /전기|전력|소비\s*전력|허용\s*용량|차단기|릴선|전열|과전력|초과|사용\s*가능|용량|사이트당|팀당/.test(s)) {
     const n = Number(w[1].replace(/,/g, "")) * (/k/i.test(w[2]) ? 1000 : 1);
     if (n >= 300 && n <= 3000) out.push({ code: "POWER_W", value: `${n.toLocaleString("ko-KR")}W`, norm: String(n) });
   }
+  // 전기 A 단위 (2026-10-19): “전기 15A”, “사이트당 20A” 등. 별도 속성 POWER_MAX_A로 저장(환산 없음).
   const amp = s.match(/(\d{1,2})\s*A(?![a-zA-Z])/i);
   if (amp && /전기|차단기|사이트당|팀당|허용|사용|용량|한도|제한/.test(s)) {
     const a = Number(amp[1]);
-    if (a >= 10 && a <= 30) {
-      const watts = Math.round(a * 220);
-      out.push({ code: "POWER_W", value: `${a}A (약 ${watts.toLocaleString("ko-KR")}W)`, norm: String(watts) });
-    }
+    if (a >= 10 && a <= 30) out.push({ code: "POWER_MAX_A", value: a, norm: String(a) });
   }
   // 환불: “당일 취소 환불 불가”, “7일 전 100% 환불”
   const rf = s.match(/(\d{1,2})\s*일\s*전[^.]{0,15}?(\d{1,3})\s*%\s*(환불|환급)/);
@@ -238,4 +236,89 @@ export function regionShorts(regions = []) {
     if (/[시군구]$/.test(s) && s.length >= 3) out.add(s.slice(0, -1));
   }
   return [...out].sort((a, b) => b.length - a.length);
+}
+/** 여러 업장을 묶은 글인가? 제목의 “N곳/추천/모음/TOP”, 본문의 여러 📍·번호 목록. */
+export function isRoundup({ title, snippet } = {}) {
+  title = String(title ?? ""); snippet = String(snippet ?? "");
+  if (/(\d+\s*곳|\d+\s*선|TOP\s*\d*|BEST|베스트|추천\s*(?:캠핑장|리스트)|모음|총정리|리스트|가볼\s*만한|가볼만한)/i.test(title)) return true;
+  const pins = (snippet.match(/📍/g) ?? []).length;
+  const nums = (snippet.match(/(?:^|\s)\d\.\s/g) ?? []).length;
+  return pins >= 2 || nums >= 2;
+}
+/** 이 후기가 이 캠핑장 이야기인가: 핵심어가 제목 또는 요약에 있고, 묶음 글이 아니어야 한다. */
+export function attributable(review, name, regions = []) {
+  const toks = nameTokens(name, regions);
+  if (!toks.length || isRoundup(review)) return false;
+  const text = `${review.title ?? ""} ${review.snippet ?? ""}`;
+  return toks.some((t) => text.includes(t));
+}
+
+/**
+ * 한 캠핑장의 스펙 시트를 만든다.
+ * @param {object} p
+ * @param {string} p.name 캠핑장 이름(귀속 판정)
+ * @param {Array<{text:string, source:object, grade:string}>} p.docs 운영자 공지·공식 소개 문서
+ * @param {Array} p.reviews 후기 요약(title·snippet·url·date)
+ * @param {string} p.now 기준 시각(지난 행사 제외)
+ */
+export function buildSpecSheet({ name, regions = [], docs = [], reviews = [], now = new Date().toISOString(), mentionMaxAgeDays = 1460 }) {
+  const year = Number(now.slice(0, 4));
+  const today = now.slice(0, 10);
+  const facts = [];
+  for (const doc of docs) {
+    for (const s of sentences(doc.text)) {
+      for (const f of extractFromSentence(s, { year })) facts.push({ ...f, quote: s, grade: doc.grade, source: doc.source });
+    }
+  }
+  const nowMs = Date.parse(now);
+  let usedReviews = 0, skippedRoundups = 0;
+  for (const r of reviews) {
+    if (isRoundup(r)) { skippedRoundups++; continue; }
+    if (!attributable(r, name, regions)) continue;
+    const at = Date.parse(r.date ?? "");
+    if (Number.isFinite(at) && nowMs - at > mentionMaxAgeDays * 864e5) continue;
+    let hit = false;
+    // 본문 문장(robots 허용 블로그)이 있으면 함께 읽는다. 오래된 글은 화면에서 “(YYYY.MM.DD 기준)”으로 표시한다.
+    for (const s of sentences(`${r.title ?? ""}. ${r.snippet ?? ""}${r.body?.length ? `\n${r.body.join("\n")}` : ""}`)) {
+      for (const f of extractFromSentence(s, { year: Number.isFinite(at) ? new Date(at).getFullYear() : year })) {
+        // 후기의 행사 언급은 작성 시점 기준이라 최근 60일 글만, 기간이 이미 지난 것은 뺀다.
+        if (f.code === "PROMOTION" && (!Number.isFinite(at) || nowMs - at > 60 * 864e5)) continue;
+        facts.push({ ...f, quote: s, grade: "MENTION", source: { kind: "review", label: r.src ?? (/cafe/.test(r.t ?? "") ? "카페" : r.t === "web" ? "웹문서" : r.t === "kin" ? "지식iN" : "블로그"), url: r.url, date: r.date ?? null } });
+        hit = true;
+      }
+    }
+    if (hit) usedReviews++;
+  }
+  // 지난 행사 제외
+  const live = facts.filter((f) => f.code !== "PROMOTION" || !f.period?.to || f.period.to >= today);
+  const fields = {};
+  for (const code of Object.keys(SPEC_FIELDS)) {
+    const list = live.filter((f) => f.code === code);
+    if (!list.length) continue;
+    const top = Math.max(...list.map((f) => GRADE_RANK[f.grade] ?? 0));
+    const best = list.filter((f) => (GRADE_RANK[f.grade] ?? 0) === top);
+    const mentions = list.filter((f) => f.grade === "MENTION");
+    // 후기 언급은 값별로 묶어 건수·최근 날짜를 센다. 값이 갈리면 conflict.
+    const byNorm = new Map();
+    for (const m of mentions) {
+      const k = m.norm; const g = byNorm.get(k) ?? { value: m.value, count: 0, latest: null, samples: [] };
+      g.count++; if (m.source.date && (!g.latest || m.source.date > g.latest)) g.latest = m.source.date;
+      if (g.samples.length < 2) g.samples.push({ quote: m.quote, url: m.source.url, label: m.source.label, date: m.source.date });
+      byNorm.set(k, g);
+    }
+    const official = best[0].grade === "MENTION" ? [] : dedupe(best, code);
+    // RENTAL·DISCOUNT는 여러 값이 함께 성립하므로 충돌로 보지 않는다.
+    fields[code] = {
+      grade: best[0].grade,
+      values: official.map((f) => ({ value: f.value, quote: f.quote, source: f.source, period: f.period ?? null })),
+      mentions: [...byNorm.values()].sort((a, b) => b.count - a.count || String(b.latest).localeCompare(String(a.latest))).slice(0, 4),
+      conflict: byNorm.size > 1 && !["RENTAL", "PROMOTION", "DISCOUNT"].includes(code),
+    };
+  }
+  return { version: 1, generated_at: now, fields, stats: { facts: live.length, reviews_used: usedReviews, roundups_skipped: skippedRoundups } };
+}
+function dedupe(list, code) {
+  const seen = new Set(), out = [];
+  for (const f of list) { const k = `${code}|${f.norm}`; if (seen.has(k)) continue; seen.add(k); out.push(f); }
+  return out.slice(0, code === "RENTAL" ? 12 : 4);
 }
