@@ -250,6 +250,12 @@ function imageTag(u, alt, { eager = false, sizes = "(max-width: 759px) 80vw, 320
   const srcset = high !== src ? ` srcset="${esc(src)} 480w, ${esc(high)} 1280w" sizes="${sizes}"` : "";
   return `<img src="${esc(src)}"${srcset} alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" draggable="false">`;
 }
+// 비교·찜처럼 사진이 보조 역할인 곳은 빈 src를 만들지 않고, 사진 미보유를 중립적인 아이콘으로 표시한다.
+function campThumb(c, { alt = "", sizes } = {}) {
+  const u = photosOf(c)[0];
+  if (u) return imageTag(u, alt, { sizes });
+  return `<span class="photo-empty" role="img" aria-label="${esc(`${nameOf(c).name} 사진 없음`)}">${ic("tent")}</span>`;
+}
 // 카드 사진: GitHub Pages 배포 단계에서 합쳐지는 고캠핑 공식 webp를 우선 사용한다.
 // 원본 URL은 사진 브랜치에 아직 파생본이 없을 때만 보조로 쓴다.
 // 원본이 지워져 404가 난 사진 주소(이 방문 동안 기억). 상세 사진 묶음·라이트박스에서 뺀다.
@@ -432,7 +438,8 @@ $("#date-dialog")?.addEventListener("close", () => {
   S.stay = selected;
   store.set("mc-stay", S.stay);
   $$('[data-stay-label]').forEach((x) => (x.textContent = stayLabel()));
-  toast(`${stayLabel()} 일정으로 예약처에서 확인해요`);
+  if (location.hash.startsWith("#/list")) { location.hash = listHash(); return; }
+  toast(`${stayLabel()} · 찾기를 누르면 그날 운영하는 곳을 보여 줘요`);
 });
 
 // ── 화면: 찾기(메인) ─────────────────────────────────────────
@@ -569,11 +576,154 @@ function moreResults() {
   $("[data-more]").hidden = list.length <= S.shown;
   initCarousels(grid);
 }
+// ── 화면: 목록(히어로 검색 결과) ─────────────────────────────
+// 주소: #/list?area=강원&q=가평&d=2026-10-25. 히어로의 ‘찾기’가 이 화면으로 옮겨 온다(소유자 2026-10-19).
+// 한 줄 가로 행: 왼쪽 썸네일, 오른쪽 요금·입퇴실·매너타임·전기·주차·장작·반려견·사이트·주변·후기·날짜 상태.
+const LIST_PAGE = 30;
+const ymdKst = (t) => new Date(t).toLocaleDateString("sv-SE", { timeZone: "Asia/Seoul" });
+const mdKst = (s) => new Date(s).toLocaleDateString("ko-KR", { month: "numeric", day: "numeric", timeZone: "Asia/Seoul" }).replace(/\.\s?/g, "/").replace(/\/$/, "");
+function listParams() {
+  const q = new URLSearchParams(location.hash.split("?")[1] ?? "");
+  const area = q.get("area");
+  return { area: area && AREAS.some(([k]) => k === area) ? area : "all", q: q.get("q") ?? "", d: /^\d{4}-\d{2}-\d{2}$/.test(q.get("d") ?? "") ? q.get("d") : "" };
+}
+function listHash({ area = S.area, q = S.q, d = S.stay } = {}) {
+  const p = new URLSearchParams();
+  if (area && area !== "all") p.set("area", area);
+  if (q) p.set("q", q);
+  if (d) p.set("d", d);
+  const s = p.toString();
+  return `#/list${s ? `?${s}` : ""}`;
+}
+// 날짜 판단. 날짜별 빈자리는 예약처만 안다(공개 원천 없음) — 아는 것만 말한다:
+// 공식 접수(이용 기간에 그 날 포함) > 예약 오픈 예정 > 운영 달 밖(휴장) > 운영 기간 안 > 운영 기간 미확인.
+function dateStatus(c, d) {
+  if (!d) return null;
+  const t = Date.parse(`${d}T12:00:00+09:00`);
+  const rs = (S.avail?.get(String(c.id)) ?? []).filter((r) => Date.parse(r.use?.from) <= t && t < Date.parse(r.use?.to) + 864e5);
+  if (rs.length) return { k: "open", rank: 0, icon: "check", txt: "공식 접수 중", sub: `이용 ${mdKst(rs[0].use.from)}~${mdKst(rs[0].use.to)} · 신청 ~${mdKst(rs[0].receipt?.to)}`, url: rs[0].source_url };
+  const month = Number(d.slice(5, 7));
+  if (c.om != null && !(c.om & (1 << (month - 1)))) return { k: "closed", rank: 9, icon: "close", txt: `${month}월 휴장`, sub: "운영 기간 밖(고캠핑·운영자 안내)" };
+  const o = openingOf(c);
+  if (o) return { k: "soon", rank: 1, icon: "clock", txt: o.txt, sub: "예약 오픈 예정" };
+  if (c.om != null) return { k: "season", rank: 2, icon: "calendar", txt: `${month}월 운영`, sub: "빈자리는 예약처에서 확인" };
+  return { k: "unknown", rank: 3, icon: "calendar", txt: "운영 기간 미확인", sub: "예약처에서 확인" };
+}
+function listResults(p) {
+  const list = S.camps.filter((c) => matches(c)).map((c) => ({ c, st: dateStatus(c, p.d) }));
+  const shown = S.showClosed ? list : list.filter((x) => x.st?.k !== "closed");
+  const fee = (c) => c.fee?.min ?? Infinity;
+  if (S.listSort === "fee") shown.sort((a, b) => fee(a.c) - fee(b.c) || rich(b.c) - rich(a.c));
+  else if (S.listSort === "name") shown.sort((a, b) => nameOf(a.c).name.localeCompare(nameOf(b.c).name, "ko"));
+  else shown.sort((a, b) => (a.st?.rank ?? 5) - (b.st?.rank ?? 5) || rich(b.c) - rich(a.c));
+  return { shown, closed: list.length - list.filter((x) => x.st?.k !== "closed").length };
+}
+function listFact(label, value, g) {
+  return `<div class="lf${value ? "" : " none"}"><dt>${label}</dt><dd>${value ? `${esc(value)}${dot(g)}` : "–"}</dd></div>`;
+}
+function listRow({ c, st }, i = 0) {
+  const f = facts(c), { tag } = nameOf(c), ti = c.ti ?? {}, r = reviewMeta(c), main = bookingChannels(c)[0];
+  const fee = c.fee?.text ? c.fee.text : c.fee?.min ? `${band(c.fee.min)}부터` : null;
+  const href = `#/c/${encodeURIComponent(c.id)}`;
+  return `<article class="lrow" data-id="${esc(c.id)}">
+    <a class="lrow-media" href="${href}" tabindex="-1" aria-hidden="true">${campThumb(c, { sizes: "(max-width: 759px) 132px, 300px" })}<span class="bdgs">${badges(c, 2)}</span></a>
+    <div class="lrow-body">
+      <div class="lrow-top">
+        <div class="lrow-title"><p class="lrow-meta">${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}</p><h3><a href="${href}">${esc(nameOf(c).name)}</a></h3></div>
+        ${heartBtn(c)}
+      </div>
+      ${st ? `<p class="lrow-date st-${st.k}">${ic(st.icon)}<b>${esc(st.txt)}</b><i>${esc(st.sub)}</i></p>` : ""}
+      <dl class="lrow-facts">
+        ${listFact("1박", fee, GR(c.fee?.grade))}
+        ${listFact("입실", ti.i?.[0], ti.i?.[1])}
+        ${listFact("퇴실", ti.o?.[0], ti.o?.[1])}
+        ${listFact("매너타임", ti.m?.[0] ? `${ti.m[0]}부터` : null, ti.m?.[1])}
+        ${listFact("전기", f.power?.v, f.power?.g)}
+        ${listFact("주차", f.park?.v, f.park?.g)}
+        ${listFact("장작", f.fire?.v, f.fire?.g)}
+        ${listFact("반려견", f.pet?.v, f.pet?.g)}
+      </dl>
+      ${c.st?.length ? `<p class="lrow-line">${ic("tent")}<span>${esc(typeLine2(c))}</span></p>` : typeLine(c) ? `<p class="lrow-line">${ic("tent")}<span>${esc(typeLine(c))}</span></p>` : ""}
+      ${nearLine(c) ? `<p class="lrow-line">${ic("store")}<span>${esc(nearLine(c))}</span></p>` : ""}
+      ${r.total ? `<p class="lrow-line lrow-review">${ic("heart")}<span>후기 ${fmt(r.total)}건</span>${reviewTopics(r.rv.p, "good", "heart")}${reviewTopics(r.rv.c, "watch", "down")}</p>` : ""}
+      <div class="lrow-cta">
+        ${st?.url ? `<a class="btn primary" href="${esc(st.url)}" target="_blank" rel="noopener">공식 접수 보기</a>` : main ? `<a class="btn primary" href="${esc(main.url)}" target="_blank" rel="noopener" title="${esc(bookingLabel(main))}"><span>날짜 확인 · ${esc(bookingLabel(main))}</span></a>` : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}
+        <a class="btn ghost" href="${href}">자세히</a>
+      </div>
+    </div>
+  </article>`;
+}
+function listView() {
+  const p = listParams();
+  S.area = p.area; S.q = p.q; if (p.d) S.stay = p.d;
+  // 목록 화면에 보이지 않는 조건(홈의 테마·사이트 타입·빠른 조건)은 적용하지 않는다 — 보이는 조건만 결과를 바꾼다.
+  S.theme = null; S.stype = null; S.quick.clear();
+  const areaLabel = AREAS.find(([k]) => k === S.area)?.[1] ?? "전국";
+  const feeChip = (k, l) => `<button type="button" class="chip fee-chip" data-fee-band="${k}" aria-pressed="${(S.feeBand ?? "") === k}">${l}</button>`;
+  const dateTip = tip("<b>날짜로 보기</b><span>날짜별 빈자리는 각 예약처만 알고 있어 여기서 확정하지 않아요. 공식 접수 중(그날이 이용 기간에 포함된 공공 예약), 예약 오픈 예정, 운영 기간(고캠핑·운영자 안내의 운영 계절)만 판단하고, 운영 기간 밖인 곳은 기본으로 뺍니다. 예약 가능 여부는 각 행의 예약처에서 확인하세요.</span>", "날짜 판단 기준");
+  return `<section class="list-page" aria-labelledby="list-t">
+    <div class="list-head">
+      <a class="link list-back" href="#/">${ic("left")}처음으로</a>
+      <h1 id="list-t"><span data-list-area>${esc(areaLabel)}</span> 캠핑장 <b data-list-count></b></h1>
+      <form class="list-search" role="search" data-list-search>
+        <label class="finder-field"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
+        <button class="finder-field finder-static" type="button" data-open="date"><small>언제</small><b data-stay-label>${esc(stayLabel())}</b></button>
+        <button class="finder-go" type="submit">${ic("search")}<span>찾기</span></button>
+      </form>
+      <div class="rail chips" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-list-area-k="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div>
+      <div class="rail chips fee-bands" aria-label="1박 요금대"><span class="fee-band-lbl">1박 요금</span>${feeChip("", "전체")}${feeChip("u3", "~3만원")}${feeChip("3to5", "3~5만원")}${feeChip("5to7", "5~7만원")}${feeChip("o7", "7만원+")}</div>
+      <div class="list-tools">
+        <p class="list-date-note" data-list-note></p>
+        <label class="sort">${ic("list")}<select data-list-sort aria-label="정렬">
+          <option value="date"${(S.listSort ?? "date") === "date" ? " selected" : ""}>${S.stay ? "날짜 맞는 순" : "정보 많은 순"}</option>
+          <option value="fee"${S.listSort === "fee" ? " selected" : ""}>요금 낮은 순</option>
+          <option value="name"${S.listSort === "name" ? " selected" : ""}>이름순</option>
+        </select></label>
+      </div>
+      <p class="list-explain">${S.stay ? `<b>${esc(stayLabel())}</b> 기준 · 빈자리는 예약처에서 확인 ${dateTip}` : "날짜를 고르면 운영 기간 밖인 곳을 빼고, 공식 접수 중·오픈 예정인 곳을 먼저 보여 줘요."}</p>
+    </div>
+    <div class="lrows" data-lrows></div>
+    <div class="more-wrap"><button class="btn ghost" type="button" data-list-more>더 보기</button></div>
+    <p class="credit">사진: 한국관광공사 고캠핑 · 정보: 각 원문(i)</p>
+  </section>`;
+}
+function renderList({ reset = true } = {}) {
+  const box = $("[data-lrows]");
+  if (!box) return;
+  const { shown, closed } = listResults(listParams());
+  if (reset) { S.listN = LIST_PAGE; box.innerHTML = ""; }
+  const from = box.children.length, to = Math.min(S.listN, shown.length);
+  box.insertAdjacentHTML("beforeend", shown.slice(from, to).map((x, i) => listRow(x, from + i)).join("") || (reset ? `<p class="empty">조건에 맞는 캠핑장이 없어요. 지역이나 요금대를 바꿔 보세요.</p>` : ""));
+  $("[data-list-count]").textContent = `${fmt(shown.length)}곳`;
+  $("[data-list-more]").hidden = to >= shown.length;
+  const note = $("[data-list-note]");
+  if (note) note.innerHTML = S.stay && (closed || S.showClosed) ? `<button type="button" class="link" data-list-closed>${S.showClosed ? "운영 기간 밖 빼기" : `운영 기간 밖 ${fmt(closed)}곳 함께 보기`}</button>` : "";
+}
+function bindList() {
+  renderList();
+  const v = $("#view");
+  const go = () => { const h = listHash(); if (location.hash !== h) location.hash = h; else renderList(); };
+  const onSubmit = (e) => { const f = e.target.closest("[data-list-search]"); if (!f) return; e.preventDefault(); S.q = f.q.value.trim(); go(); };
+  const onClick = (e) => {
+    const a = e.target.closest("[data-list-area-k]");
+    if (a) { S.area = a.dataset.listAreaK; go(); return; }
+    const fb = e.target.closest("[data-fee-band]");
+    if (fb) { S.feeBand = fb.dataset.feeBand || null; $$("[data-fee-band]").forEach((x) => x.setAttribute("aria-pressed", String(x === fb))); renderList(); return; }
+    if (e.target.closest("[data-list-closed]")) { S.showClosed = !S.showClosed; renderList(); return; }
+    if (e.target.closest("[data-list-more]")) { S.listN += LIST_PAGE; renderList({ reset: false }); }
+  };
+  const onChange = (e) => { if (e.target.matches("[data-list-sort]")) { S.listSort = e.target.value; renderList(); } };
+  v.addEventListener("submit", onSubmit); v.addEventListener("click", onClick); v.addEventListener("change", onChange);
+  const io = new IntersectionObserver((es) => { if (es[0].isIntersecting && !$("[data-list-more]").hidden) { S.listN += LIST_PAGE; renderList({ reset: false }); } }, { rootMargin: "800px" });
+  io.observe($(".list-page .more-wrap"));
+  cleanup.push(() => { io.disconnect(); v.removeEventListener("submit", onSubmit); v.removeEventListener("click", onClick); v.removeEventListener("change", onChange); });
+}
 function bindHome() {
   renderResults();
   const v = $("#view");
   v.addEventListener("click", homeClicks);
-  v.addEventListener("submit", (e) => { const f = e.target.closest("[data-search]"); if (!f) return; e.preventDefault(); S.q = f.q.value.trim(); render(); $("#results")?.scrollIntoView({ behavior: "smooth", block: "start" }); });
+  // 히어로 ‘찾기’: 지역·검색어·날짜를 담아 목록 화면(#/list)으로 옮겨 간다(소유자 2026-10-19).
+  v.addEventListener("submit", (e) => { const f = e.target.closest("[data-search]"); if (!f) return; e.preventDefault(); S.q = f.q.value.trim(); location.hash = listHash(); });
   v.addEventListener("change", (e) => { if (e.target.matches("[data-sort]")) { S.sort = e.target.value; renderResults(); } });
   const sentinel = $(".more-wrap");
   const io = new IntersectionObserver((es) => { if (es[0].isIntersecting && !$("[data-more]").hidden) moreResults(); }, { rootMargin: "800px" });
@@ -739,26 +889,51 @@ function reviewHtml(d, c) {
   return `<section class="d-sec review-summary"><div class="sec-head">${iconTitle("heart", "장점 · 아쉬운 점")}<span class="sec-note">후기 ${fmt(rv.n)}건 ${tip("<b>후기 요약</b><span>연결된 블로그·카페 후기에서 반복 언급한 주제입니다. 협찬 글이 섞일 수 있어 예약 전 원문을 함께 확인하세요.</span>")}</span></div><div class="review-summary-grid">${block("좋았어요", rv.p, "pro", "heart")}${block("미리 볼 점", rv.c, "con", "down")}</div></section>`;
 }
 function bookingRank(channel) {
-  const hay = `${channel?.platform_name ?? ""} ${channel?.url ?? ""}`.toLowerCase();
+  const hay = `${channel?.platform_id ?? ""} ${channel?.platform_name ?? ""} ${channel?.url ?? ""}`.toLowerCase();
   if (/campit|캠핏/.test(hay)) return 0;
-  if (/naver|네이버/.test(hay)) return 1;
+  // 네이버 카페·블로그는 운영자 페이지일 수 있으므로, 네이버 예약 경로만 2순위로 본다.
+  if (/booking\.naver\.com|m\.booking\.naver\.com|naver\.me|naver[_ -]?reservation|네이버\s*예약/.test(hay)) return 1;
   if (/thank.?camp|땡큐/.test(hay)) return 2;
+  if (channel?.kind === "online") return 3;
+  if (channel?.kind === "homepage") return 4;
+  if (channel?.kind === "phone") return 5;
   return 10;
 }
 function bookingChannels(c) {
-  return [...(c.booking?.channels ?? [])].sort((a, b) => bookingRank(a) - bookingRank(b) || Number(b.confidence ?? 0) - Number(a.confidence ?? 0));
+  return [...(c.booking?.channels ?? [])]
+    .filter((x) => x?.url)
+    .sort((a, b) => bookingRank(a) - bookingRank(b) || Number(b.confidence ?? 0) - Number(a.confidence ?? 0));
+}
+function bookingLabel(channel) {
+  const hay = `${channel?.platform_id ?? ""} ${channel?.platform_name ?? ""} ${channel?.url ?? ""}`.toLowerCase();
+  if (/campit|캠핏/.test(hay)) return "캠핏";
+  if (/booking\.naver\.com|m\.booking\.naver\.com|naver\.me|naver[_ -]?reservation|네이버\s*예약/.test(hay)) return "네이버 예약";
+  if (/thank.?camp|땡큐/.test(hay)) return "땡큐캠핑";
+  if (channel?.kind === "homepage") return "홈페이지";
+  return serviceText(channel?.platform_name, 20) || "온라인 예약";
+}
+// 한 캠핑장에는 하나의 대표 예약 동선만 쓴다.
+// 캠핏 → 네이버 예약 → 땡큐캠핑 → 기타 온라인 → 운영자 홈페이지 순이며,
+// 전화·현장 접수는 보조 문의 수단으로만 남긴다.
+function primaryBooking(c) {
+  return bookingChannels(c).find((x) => x.kind === "online" || x.kind === "homepage") ?? null;
+}
+function bookingSource(channel, label = "대표 예약 채널") {
+  const evidence = Array.isArray(channel?.evidence) ? channel.evidence.join(" · ") : "";
+  return sourceFact({
+    g: "c",
+    src: { label: "등록된 예약 경로", url: channel?.url, quote: [bookingLabel(channel), evidence].filter(Boolean).join("\n") },
+  }, label);
 }
 function reserveCard(c) {
-  const ch = bookingChannels(c);
-  const main = ch.find((x) => x.kind !== "phone") ?? null;
+  const main = primaryBooking(c);
   const o = openingOf(c) ?? (S.openings.get(String(c.id)) ?? null);
-  const short = (n) => String(n ?? "").replace(/ 예약시스템| 공공서비스예약|\(.*\)/g, "").trim();
   return `<div class="reserve">
-    <div class="rs-top"><span>${esc(main ? short(main.platform_name) : "예약")}</span>${o ? `<span class="rs-dd">${esc(o.txt ?? o.kind)}</span>` : ""}</div>
+    <div class="rs-top"><span>${esc(main ? bookingLabel(main) : "예약")}</span>${o ? `<span class="rs-dd">${esc(o.txt ?? o.kind)}</span>` : ""}</div>
     ${o ? `<p class="rs-open"><b>${esc(new Date(o.at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", weekday: "short", hour: "2-digit", minute: "2-digit" }))}</b><span>${esc(o.label ?? "")}</span></p>` : ""}
     ${availHtml(c)}
     <div class="rs-btns">
-      ${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">${esc(short(main.platform_name))} 예약</a>` : c.gc_url ? `<a class="btn primary wide" href="${esc(c.gc_url)}" target="_blank" rel="noopener">고캠핑에서 보기</a>` : ""}
+      ${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">${esc(bookingLabel(main))} 예약</a>` : c.gc_url ? `<a class="btn primary wide" href="${esc(c.gc_url)}" target="_blank" rel="noopener">고캠핑에서 보기</a>` : ""}
       ${c.tel ? `<a class="btn ghost" href="tel:${esc(c.tel)}">${ic("phone")}전화</a>` : ""}
       ${heartBtn(c, { label: true })}
     </div>
@@ -989,11 +1164,11 @@ function operatorHtml(d) {
     return `<article><span>${esc(x.label)}</span><p>${esc(value)}</p>${source}</article>`;
   }).join("")}</div></section>`;
 }
-// 예약 방법: 예약 채널 전부 + 채널별 안내 단계(guide).
+// 예약 방법: 화면에는 우선순위로 고른 대표 채널 하나만 보이고, 모든 원본 채널은 데이터에 보존한다.
 function bookingHtml(c, d) {
-  const ch = [...(c.booking?.channels ?? [])].sort((a, b) => b.confidence - a.confidence).filter((x, i, a) => a.findIndex((y) => y.url === x.url) === i);
+  const main = primaryBooking(c);
   const g = d?.guide, steps = (g?.steps ?? []).filter((x) => x.t && !/https?:\/\//.test(x.t));
-  if (!ch.length && !steps.length) return "";
+  if (!main && !c.tel && !steps.length) return "";
   const pf = g?.platform ?? {};
   const meta = [["오픈", pf.opening], ["결제", pf.payment], ["취소", pf.cancel], ["대기", pf.waitlist]].filter(([, v]) => v && !/운영자 안내에 따름|홈페이지마다 다름/.test(v));
   const guideFact = sourceFact({ src: g?.source?.label ?? g?.source, url: g?.source?.url, date: g?.source?.date, quote: [...steps.map((x) => x.t), ...(pf.tips ?? [])].join("\n") }, "예약 안내");
@@ -1005,8 +1180,8 @@ function bookingHtml(c, d) {
     if (/취소|환불/.test(text)) return "취소 규정 확인";
     return `예약 안내 ${n + 1}`;
   };
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("calendar", "예약 방법")}<span class="sec-note">${esc((c.booking?.methods ?? []).join(" · "))} ${steps.length ? srcTip(guideFact, "예약 절차") : ""}</span></div>
-    ${ch.length ? `<div class="chans">${ch.filter((x, i, a) => a.findIndex((y) => (y.kind === "phone") === (x.kind === "phone") && y.platform_name === x.platform_name && hostOf(y.url) === hostOf(x.url)) === i).map((x, i) => x.kind === "phone" ? `<a class="chan" href="tel:${esc(c.tel ?? "")}">${ic("phone")}<b>전화 예약</b><i>${esc(c.tel ?? "")}</i></a>` : `<a class="chan" href="${esc(x.url)}" target="_blank" rel="noopener">${ic("right")}<b>${esc(serviceText(x.platform_name, 22) || hostOf(x.url) || `예약처 ${i + 1}`)}</b><i>${esc(hostOf(x.url) || "예약 페이지")}</i></a>`).join("")}</div>` : ""}
+  return `<section class="d-sec"><div class="sec-head">${iconTitle("calendar", "예약 방법")}${main || steps.length || (pf.tips ?? []).length ? `<span class="sec-note">${main ? `대표 채널 ${srcTip(bookingSource(main), "대표 예약 채널")}` : ""}${steps.length || (pf.tips ?? []).length ? srcTip(guideFact, "예약 안내") : ""}</span>` : ""}</div>
+    ${main || c.tel ? `<div class="chans">${main ? `<a class="chan" href="${esc(main.url)}" target="_blank" rel="noopener">${ic("right")}<b>${esc(bookingLabel(main))}</b><i>예약 페이지</i></a>` : ""}${c.tel ? `<a class="chan" href="tel:${esc(c.tel)}">${ic("phone")}<b>전화 문의</b><i>${esc(c.tel)}</i></a>` : ""}</div>` : ""}
     ${meta.length ? `<dl class="uses">${meta.map(([l, v]) => `<div class="use"><dt>${l}</dt><dd>${esc(serviceText(v, 32))}${srcTip({ g: "c", src: { label: "예약 안내", url: g?.source?.url, at: g?.source?.date, quote: v } }, l)}</dd></div>`).join("")}</dl>` : ""}
     ${steps.length ? `<ol class="steps">${[...new Set(steps.map((x, i) => serviceText(x.t, 52) || stepName(x.t, i)))].slice(0, 5).map((t) => `<li>${esc(t)}</li>`).join("")}</ol>` : ""}
     ${(pf.tips ?? []).length ? `<ul class="tips">${pf.tips.slice(0, 3).map((t) => `<li>${esc(serviceText(t, 60))}</li>`).join("")}</ul>` : ""}
@@ -1122,7 +1297,7 @@ async function loadComments(id) {
   } catch { box.innerHTML = `<li class="muted">지금은 불러오지 못했어요.</li>`; }
 }
 function reserveDock(c) {
-  const main = bookingChannels(c).find((x) => x.kind !== "phone");
+  const main = primaryBooking(c);
   return `${heartBtn(c)}${c.tel ? `<a class="btn ghost" href="tel:${esc(c.tel)}" aria-label="전화">${ic("phone")}</a>` : ""}${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">예약하기</a>` : ""}`;
 }
 function bindDetail() {
@@ -1209,7 +1384,7 @@ async function compareView() {
   S.pick = S.pick.filter((id) => S.saved.includes(id));
   if (!S.pick.length) S.pick = saved.slice(0, 3).map((c) => String(c.id));
   const camps = S.pick.map((id) => S.byId.get(id)).filter(Boolean);
-  const picker = `<div class="rail picks">${saved.map((c) => { const on = S.pick.includes(String(c.id)); return `<button type="button" class="pick${on ? " on" : ""}" data-pick="${esc(c.id)}" aria-pressed="${on}"><img src="${esc(photoUrl(photosOf(c)[0] ?? ""))}" alt="" loading="lazy"><span>${esc(nameOf(c).name)}</span>${ic(on ? "check" : "plus")}</button>`; }).join("")}</div>`;
+  const picker = `<div class="rail picks">${saved.map((c) => { const on = S.pick.includes(String(c.id)); return `<button type="button" class="pick${on ? " on" : ""}" data-pick="${esc(c.id)}" aria-pressed="${on}">${campThumb(c, { sizes: "36px" })}<span>${esc(nameOf(c).name)}</span>${ic(on ? "check" : "plus")}</button>`; }).join("")}</div>`;
   const ds = await Promise.all(camps.map((c) => detailOf(c.id)));
   const rowsDef = [
     ["현장 조건", [["주차", (c) => facts(c).park], ["전기", (c) => facts(c).power], ["장작·숯", (c) => facts(c).fire], ["사이트 규격", (c) => facts(c).size], ["바닥", (c) => facts(c).ground], ["위생", (c) => facts(c).sanitary], ["반려동물", (c) => facts(c).pet]]],
@@ -1217,15 +1392,15 @@ async function compareView() {
     ["시간·요금", [["입실", (c, d) => usage(c, d)[0][1]], ["퇴실", (c, d) => usage(c, d)[1][1]], ["매너타임", (c, d) => usage(c, d)[2][1]], ["요금", (c, d) => usage(c, d)[3][1]]]],
     ["시설·주변", [["편의시설", (c) => ((c.amenities ?? []).length ? { v: c.amenities.slice(0, 6).join(" · "), g: "c" } : null)], ["대여", (c) => ((c.rental ?? []).length ? { v: c.rental.join(" · "), g: "c" } : null)], ["편의점", (c) => (c.nl?.c ? { v: km(c.nl.c), g: "c" } : null)], ["마트", (c) => (c.nl?.m ? { v: km(c.nl.m), g: "c" } : null)], ["후기 장점", (c) => (c.rv?.p?.length ? { v: c.rv.p.slice(0, 2).map(([t]) => t).join(" · "), g: "m" } : null)]]],
   ];
-  const head = camps.map((c) => `<th scope="col"><a class="ch" href="#/c/${encodeURIComponent(c.id)}"><img src="${esc(photoUrl(photosOf(c)[0] ?? ""))}" alt="" loading="lazy"><span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></span></a><button class="icon-btn ch-x" type="button" data-pick="${esc(c.id)}" aria-label="비교에서 빼기">${ic("close")}</button></th>`).join("");
-  const opens = camps.map((c) => { const o = openingOf(c); const ch = (c.booking?.channels ?? []).find((x) => x.kind !== "phone"); return `<td class="${o ? "hot" : ""}">${o ? `<b>${esc(o.txt)}</b> · ` : ""}${esc(ch?.platform_name ?? "–")}</td>`; }).join("");
+  const head = camps.map((c) => `<th scope="col"><a class="ch" href="#/c/${encodeURIComponent(c.id)}">${campThumb(c, { sizes: "64px" })}<span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></span></a><button class="icon-btn ch-x" type="button" data-pick="${esc(c.id)}" aria-label="비교에서 빼기">${ic("close")}</button></th>`).join("");
+  const opens = camps.map((c) => { const o = openingOf(c); const ch = primaryBooking(c); return `<td class="${o ? "hot" : ""}">${o ? `<b>${esc(o.txt)}</b> · ` : ""}${esc(ch ? bookingLabel(ch) : "–")}</td>`; }).join("");
   const body = rowsDef.map(([g, rows]) => `<tr class="grp"><th scope="rowgroup" colspan="${camps.length + 1}">${g}</th></tr>${rows.map(([l, get]) => {
     const vals = camps.map((c, i) => get(c, ds[i]));
     const keys = vals.map((v) => v?.v ?? "");
     const diff = new Set(keys).size > 1;
     return `<tr class="${diff ? "diff" : ""}"><th scope="row">${l}</th>${vals.map((v) => `<td>${v ? `${esc(v.v)}${dot(v.g)}` : '<span class="none">–</span>'}</td>`).join("")}</tr>`;
   }).join("")}`).join("");
-  const acts = camps.map((c) => { const ch = (c.booking?.channels ?? []).find((x) => x.kind !== "phone"); return `<td>${ch ? `<a class="btn primary wide" href="${esc(ch.url)}" target="_blank" rel="noopener">예약</a>` : `<a class="btn ghost wide" href="#/c/${encodeURIComponent(c.id)}">자세히</a>`}</td>`; }).join("");
+  const acts = camps.map((c) => { const ch = primaryBooking(c); return `<td>${ch ? `<a class="btn primary wide" href="${esc(ch.url)}" target="_blank" rel="noopener">예약</a>` : `<a class="btn ghost wide" href="#/c/${encodeURIComponent(c.id)}">자세히</a>`}</td>`; }).join("");
   return `<section class="cmp-page">
     <div class="sec-head big"><h1>찜 ${saved.length} · <em>${camps.length}곳 비교</em></h1><span class="sec-tools"><span class="sec-note legend">${dot("v")}원문 ${dot("c")}공식 ${dot("m")}언급</span><label class="switch"><input type="checkbox" data-diff checked><span>다른 점만 강조</span></label></span></div>
     ${picker}
@@ -1362,12 +1537,13 @@ async function render() {
   TIPS.clear(); $("#pop").hidden = true;
   const h = location.hash || "#/";
   const v = $("#view");
-  const name = h.startsWith("#/c/") ? "detail" : h.startsWith("#/map") ? "map" : h.startsWith("#/compare") ? "compare" : "home";
-  $$("[data-nav]").forEach((a) => a.toggleAttribute("aria-current", a.dataset.nav === (name === "detail" ? "home" : name)));
+  const name = h.startsWith("#/c/") ? "detail" : h.startsWith("#/map") ? "map" : h.startsWith("#/compare") ? "compare" : h.startsWith("#/list") ? "list" : "home";
+  $$("[data-nav]").forEach((a) => a.toggleAttribute("aria-current", a.dataset.nav === (name === "detail" || name === "list" ? "home" : name)));
   document.body.dataset.view = name;
   if (name === "home") { v.innerHTML = homeView(); bindHome(); }
   else if (name === "detail") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await detailView(decodeURIComponent(h.slice(4))); bindDetail(); }
   else if (name === "compare") { v.innerHTML = await compareView(); bindCompare(); }
+  else if (name === "list") { v.innerHTML = listView(); bindList(); }
   else { v.innerHTML = mapView(); bindMap(); }
   return name;
 }

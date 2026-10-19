@@ -180,3 +180,34 @@ export function tagsOf(c, fields, details, intro = null) {
   for (const [code, topic] of R) if ((rv.get(topic) ?? 0) >= 2) add(code, `후기 ${rv.get(topic)}건`);
   return [...t.entries()].map(([code, why]) => ({ code, label: TAG_LABEL[code], why }));
 }
+
+// ── 목록 화면용 압축 값(카탈로그 campgrounds.json) ─────────────────────────────
+// om: 운영하는 달 비트(1월=bit0 … 12월=bit11). 모르면 넣지 않는다(날짜로 거르지 않음).
+// ti: 입실·퇴실·매너타임 시작 [값, 등급 c|m] — 목록 행에서 상세를 열지 않고 보이게.
+const SEASON_MONTHS = { 봄: [3, 4, 5], 여름: [6, 7, 8], 가을: [9, 10, 11], 겨울: [12, 1, 2] };
+const monthBits = (ms) => ms.reduce((b, m) => b | (1 << (m - 1)), 0);
+export function openMonthsOf(season) {
+  const v = String(season?.value ?? "");
+  if (/사계절|연중/.test(v)) return monthBits([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+  const named = Object.keys(SEASON_MONTHS).filter((k) => v.includes(k));
+  if (named.length && /운영/.test(v)) return monthBits(named.flatMap((k) => SEASON_MONTHS[k]));
+  // “매년 12월부터 이듬해 3월까지 휴장”처럼 달 범위가 분명할 때만 휴장 달을 뺀다(“11월 말경” 같은 애매한 말은 그 달을 운영으로 둔다).
+  const q = String(season?.source?.quote ?? "");
+  const m = q.match(/(\d{1,2})\s*월\s*(초|말경?|중순)?[^0-9]{0,12}?(?:이듬해|다음\s*해|익년)?\s*(\d{1,2})\s*월\s*(초|말경?|중순)?\s*까지\s*휴장/);
+  if (!m) return null;
+  let from = Number(m[1]), to = Number(m[3]);
+  if (from < 1 || from > 12 || to < 1 || to > 12) return null;
+  if (m[2] && /말/.test(m[2])) from = from % 12 + 1; // 그 달 말부터 휴장 → 그 달은 운영
+  if (m[4] && /초/.test(m[4])) to = to === 1 ? 12 : to - 1; // 그 달 초까지 휴장 → 그 달은 운영
+  const closed = [];
+  for (let x = from, n = 0; n < 12; x = x % 12 + 1, n++) { closed.push(x); if (x === to) break; }
+  if (closed.length >= 12) return null;
+  return monthBits([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].filter((x) => !closed.includes(x)));
+}
+export function compactTimes(fields = {}) {
+  const g = (f) => (f.grade === "MENTION" ? "m" : "c");
+  const hm = (s) => String(s ?? "").match(/\d{1,2}:\d{2}/)?.[0] ?? null;
+  const out = {};
+  for (const [k, code] of [["i", "CHECKIN"], ["o", "CHECKOUT"], ["m", "MANNER"]]) { const f = fields[code]; const v = f && hm(f.value); if (v) out[k] = [v, g(f)]; }
+  return Object.keys(out).length ? out : null;
+}
