@@ -3,6 +3,7 @@
 // 권리 조건과 금지 사항은 docs/IMAGE_PIPELINE.md 참고. 공식 호스트가 아닌 URL(인스타그램·블로그 등)은 받지 않는다.
 
 import { createHash } from "node:crypto";
+import { photoKey } from "./photo-dedupe.mjs";
 
 export const IMAGE_CREDIT = "한국관광공사 고캠핑";
 export const LICENSE_NOTE =
@@ -163,13 +164,14 @@ export function desiredImages(campgrounds, imageListCache = {}, {
     const list = [];
     const seen = new Set();
     const hero = normalizeSrcUrl(c.hero_image_url);
-    if (hero && isOfficialImageUrl(hero)) { list.push({ src_url: hero, source: "gocamping" }); seen.add(hero); }
+    if (hero && isOfficialImageUrl(hero)) { list.push({ src_url: hero, source: "gocamping" }); seen.add(photoKey(hero)); }
     let extra = 0;
     for (const img of imageListCache?.[id]?.images ?? []) {
       if (extra >= maxPerCamp || (maxTotalPerCamp > 0 && list.length >= maxTotalPerCamp)) break;
       const u = normalizeSrcUrl(img.imageUrl);
-      if (!u || seen.has(u) || !isOfficialImageUrl(u)) continue;
-      seen.add(u);
+      const k = photoKey(u);
+      if (!u || seen.has(k) || !isOfficialImageUrl(u)) continue;
+      seen.add(k);
       list.push({ src_url: u, source: "gocamping-imageList" });
       extra++;
     }

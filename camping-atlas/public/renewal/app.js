@@ -357,8 +357,17 @@ function initCarousels(root) {
     }));
     // 마우스 끌기(데스크톱). 끌었으면 카드 열기를 막는다.
     let x0 = null, s0 = 0, moved = false;
-    tr.addEventListener("pointerdown", (e) => { if (e.pointerType !== "mouse") return; x0 = e.clientX; s0 = tr.scrollLeft; moved = false; tr.classList.add("drag"); hydrate(car); });
-    window.addEventListener("pointermove", (e) => { if (x0 === null) return; const dx = e.clientX - x0; if (Math.abs(dx) > 4) moved = true; tr.scrollLeft = s0 - dx; });
+    tr.addEventListener("pointerdown", (e) => {
+      if (e.pointerType !== "mouse") return;
+      e.stopPropagation();
+      x0 = e.clientX; s0 = tr.scrollLeft; moved = false; tr.classList.add("drag"); hydrate(car);
+    });
+    window.addEventListener("pointermove", (e) => {
+      if (x0 === null) return;
+      const dx = e.clientX - x0;
+      if (Math.abs(dx) > 4) moved = true;
+      tr.scrollLeft = s0 - dx;
+    });
     window.addEventListener("pointerup", () => {
       if (x0 === null) return;
       x0 = null; tr.classList.remove("drag");
@@ -366,7 +375,11 @@ function initCarousels(root) {
     });
     tr.addEventListener("click", (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
     // 사진 레일은 카드 링크 위에 있다(가로 스와이프를 받으려고). 사진을 누르면 카드 링크로 간다.
-    tr.addEventListener("click", () => { const hit = car.closest(".card, .mi, .review-pick")?.querySelector(".card-hit"); if (hit) location.hash = hit.getAttribute("href"); });
+    tr.addEventListener("click", () => {
+      if (moved) return;
+      const hit = car.closest(".card, .mi, .review-pick")?.querySelector(".card-hit");
+      if (hit) location.hash = hit.getAttribute("href");
+    });
   }
 }
 function initDraggableRails(root = document) {
@@ -378,15 +391,53 @@ function initDraggableRails(root = document) {
     let startX = 0;
     let scrollLeft = 0;
     let hasMoved = false;
+    let bounceX = 0;
+
+    // 프로그레스 바 찾기 또는 헤더에 자동 연결
+    const head = rail.closest("section, .trow")?.querySelector(".sec-head, .trow-head");
+    let pBar = head?.querySelector(".rail-progress");
+    if (!pBar && head) {
+      const anchor = head.querySelector(".sec-side, .sec-note, .link, [data-theme-all]");
+      if (anchor) {
+        pBar = document.createElement("span");
+        pBar.className = "rail-progress";
+        pBar.setAttribute("aria-hidden", "true");
+        pBar.innerHTML = `<i style="width: 18%"></i>`;
+        if (anchor.classList.contains("sec-side")) {
+          anchor.prepend(pBar);
+        } else {
+          anchor.parentNode.insertBefore(pBar, anchor);
+        }
+      }
+    }
+    const fill = pBar ? (pBar.querySelector("i") || pBar) : null;
+    const updateProgress = () => {
+      if (!pBar || !fill) return;
+      const max = rail.scrollWidth - rail.clientWidth;
+      if (max <= 4) {
+        pBar.style.display = "none";
+        return;
+      }
+      pBar.style.display = "inline-flex";
+      const ratio = Math.max(0, Math.min(1, rail.scrollLeft / max));
+      const pct = 18 + ratio * 82;
+      fill.style.width = `${pct.toFixed(1)}%`;
+    };
+    rail.addEventListener("scroll", updateProgress, { passive: true });
+    requestAnimationFrame(updateProgress);
 
     rail.addEventListener("pointerdown", (e) => {
       if (e.pointerType === "touch") return;
       if (e.button !== 0) return;
-      if (e.target.closest(".car-nav, select, input, button.heart, a.btn")) return;
+      // 썸네일(.car, .car-track, .card-media, .review-pick-media)을 잡고 드래그하면 썸네일이 스와이프되고,
+      // 텍스트 영역이나 여백을 잡고 드래그할 때만 가로 레일이 스크롤된다.
+      if (e.target.closest(".car, .car-track, .car-nav, select, input, button, a.btn")) return;
       isDown = true;
       startX = e.clientX;
       scrollLeft = rail.scrollLeft;
       hasMoved = false;
+      bounceX = 0;
+      rail.style.transition = "";
     });
 
     const onPointerMove = (e) => {
@@ -397,13 +448,38 @@ function initDraggableRails(root = document) {
         rail.classList.add("is-dragging");
       }
       if (hasMoved) {
-        rail.scrollLeft = scrollLeft - dx;
+        const targetScroll = scrollLeft - dx;
+        const maxScroll = rail.scrollWidth - rail.clientWidth;
+        if (targetScroll < 0) {
+          rail.scrollLeft = 0;
+          bounceX = -targetScroll * 0.35;
+          rail.style.transform = `translateX(${bounceX}px)`;
+        } else if (targetScroll > maxScroll && maxScroll > 0) {
+          rail.scrollLeft = maxScroll;
+          bounceX = (maxScroll - targetScroll) * 0.35;
+          rail.style.transform = `translateX(${bounceX}px)`;
+        } else {
+          rail.scrollLeft = targetScroll;
+          if (bounceX !== 0) {
+            bounceX = 0;
+            rail.style.transform = "";
+          }
+        }
       }
     };
 
     const onPointerUp = () => {
       if (!isDown) return;
       isDown = false;
+      if (bounceX !== 0) {
+        rail.style.transition = "transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+        rail.style.transform = "translateX(0px)";
+        setTimeout(() => {
+          rail.style.transition = "";
+          rail.style.transform = "";
+          bounceX = 0;
+        }, 450);
+      }
       if (hasMoved) {
         setTimeout(() => {
           rail.classList.remove("is-dragging");
@@ -565,16 +641,16 @@ function homeView() {
     return `<a class="theme-card" href="#/theme/${encodeURIComponent(key)}"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy"><span><b>${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
   }).join("");
   const openingSection = openings.length ? `<section class="opens" aria-labelledby="op-t">
-    <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><a class="link" href="#/theme/OPEN">전체 보기 ${ic("right")}</a></div>
+    <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><div class="sec-side"><span class="rail-progress" data-rail="opens-rail"><i style="width: 18%"></i></span><a class="link" href="#/theme/OPEN">전체 보기 ${ic("right")}</a></div></div>
     <div class="rail opens-rail">${openings.map(([c, o]) => `<a class="open-card" href="#/c/${encodeURIComponent(c.id)}">${imageTag(photosOf(c)[0] ?? "", "", { sizes: "250px" })}<span class="open-dd">${esc(o.txt)}</span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))} · ${esc(o.platform ?? "")}</i></a>`).join("")}</div>
   </section>` : "";
   const picks = reviewPicks();
   const reviewSection = picks.length ? `<section class="review-picks" aria-labelledby="review-picks-t">
-    <div class="sec-head"><div><h2 id="review-picks-t">긍정 <em>후기</em></h2><p class="sec-sub">후기 수 · 긍정 언급</p></div><span class="sec-note">${tip("<b>긍정 후기</b><span>연결된 블로그·카페 후기에서 집계한 주제와 건수입니다. 별점·실시간 인기 순위가 아니며, 원문은 상세에서 바로 열 수 있어요.</span>")}</span></div>
+    <div class="sec-head"><div><h2 id="review-picks-t">긍정 <em>후기</em></h2></div><div class="sec-side"><span class="rail-progress" data-rail="review-picks-rail"><i style="width: 18%"></i></span><span class="sec-note">${tip("<b>긍정 후기</b><span>연결된 블로그·카페 후기에서 집계한 주제와 건수입니다. 별점·실시간 인기 순위가 아니며, 원문은 상세에서 바로 열 수 있어요.</span>")}</span></div></div>
     <div class="rail review-picks-rail">${picks.map(reviewPickCard).join("")}</div>
   </section>` : "";
   const themeSection = themeItems ? `<section class="themes-catalog" aria-labelledby="theme-t">
-    <div class="sec-head"><h2 id="theme-t">테마로 <em>고르기</em></h2><a class="link" href="#/theme/ALL">전체 보기 ${ic("right")}</a></div>
+    <div class="sec-head"><h2 id="theme-t">테마로 <em>고르기</em></h2><div class="sec-side"><span class="rail-progress" data-rail="theme-catalog-rail"><i style="width: 18%"></i></span><a class="link" href="#/theme/ALL">전체 보기 ${ic("right")}</a></div></div>
     <div class="rail theme-catalog-rail">${themeItems}</div>
   </section>` : "";
   return `
@@ -1236,11 +1312,11 @@ function usage(c, d) {
 }
 function sitePricingHtml(c, d) {
   const feeInfo = c.fee;
-  const groups = c.field_conditions?.site_size?.groups ?? [];
+  const groups = d?.field_conditions?.site_size?.groups ?? c.field_conditions?.site_size?.groups ?? [];
   const prods = d?.products ?? [];
   if (!feeInfo && !groups.length && !prods.length) return "";
   const feeFact = feeInfo ? { g: GR(feeInfo.grade) || "m", src: { label: sourceName(feeInfo.basis, "요금 근거"), url: feeInfo.url, at: feeInfo.checked_at, quote: feeInfo.quote } } : null;
-  const prodFact = (p) => ({ g: "c", src: { label: d?.products_src?.label || "한국관광공사 상품 등록 기준가", url: d?.products_src?.url || c.gc_url, at: d?.products_src?.checked_at, quote: p.name ? `${p.name} ${p.price ? `${fmt(p.price)}원` : ""}` : null } });
+  const prodFact = (p) => ({ g: "c", src: { label: d?.products_src?.label || "공식 시설 및 상품 등록 기준", url: d?.products_src?.url || c.gc_url, at: d?.products_src?.checked_at, quote: p.name ? `${p.name} ${p.size ? `규격: ${p.size}` : ""} ${p.price ? `${fmt(p.price)}원` : ""}` : null } });
   let rows = "";
   if (prods.length) {
     rows = prods.map((p, i) => {
@@ -1257,7 +1333,7 @@ function sitePricingHtml(c, d) {
     rows = `<tr><td><b>1박 기준 요금</b></td><td>-</td><td>-</td><td class="text-price"><div class="price-cell"><span class="price-val">${feeInfo.text ? esc(feeInfo.text) : (feeInfo.min ? `${band(feeInfo.min)}부터` : "-")}</span>${tip}</div></td></tr>`;
   }
   return `<section class="d-sec">
-    <div class="sec-head">${iconTitle("layers", "사이트 규격 및 1박 요금")}${feeFact ? `<span class="sec-note">기준 요금 ${srcTip(feeFact, "요금 근거")}</span>` : ""}</div>
+    <div class="sec-head">${iconTitle("layers", "사이트 규격 및 1박 요금")}${feeFact || d?.products_src ? `<span class="sec-note">기준 규격·요금 ${srcTip(d?.products_src ? { g: "c", src: d.products_src } : feeFact, "요금 근거")}</span>` : ""}</div>
     <div class="table-wrap"><table class="site-table"><thead><tr><th>구분</th><th>규격</th><th>규모</th><th>1박 요금</th></tr></thead><tbody>${rows}</tbody></table></div>
   </section>`;
 }
@@ -1267,8 +1343,19 @@ function specTiles(c, d) {
   const mention = {
     park: specFact(d, "PARKING"),
     power: specFact(d, "POWER_W"),
+    powerA: specFact(d, "POWER_MAX_A"),
     pet: specFact(d, "PET_POLICY"),
   };
+  // A 값이 있으면 전기 타일에 우선 표시 (예: "15A"). W와 둘 다 있으면 함께.
+  if (mention.powerA?.v) {
+    const aVal = mention.powerA.v;
+    const aText = typeof aVal === "number" ? `${aVal}A` : String(aVal);
+    if (mention.power?.v && !String(mention.power.v).includes("A")) {
+      mention.power = { ...mention.power, v: `${aText} · ${mention.power.v}` };
+    } else if (!mention.power) {
+      mention.power = { ...mention.powerA, v: aText };
+    }
+  }
   const T = [["size", "size", "설치 공간", ""], ["park", "car", "텐트 옆 주차", "cobalt"], ["power", "bolt", "전기", "volt"], ["fire", "flame", "장작·숯", "flame"], ["ground", "layers", "바닥", ""], ["shelter", "tent", "텐트·타프", ""], ["sanitary", "drop", "위생", ""], ["hot", "drop", "온수", ""], ["pet", "paw", "반려동물", ""]];
   return T.map(([k, i, l, cls]) => {
     let x = f[k] ?? mention[k] ?? null;
@@ -1279,15 +1366,68 @@ function specTiles(c, d) {
 }
 const km = (m) => (m < 1000 ? `${Math.round(m / 10) * 10}m` : `${(m / 1000).toFixed(1)}km`);
 // 생활·안전·관광을 한 섹션으로 묶는다. 관광 사진은 한국관광공사 원본 URL이 있는 항목만 직접 보인다.
+const NEARBY_LABELS = {
+  CONVENIENCE: ["편의점", "store"], MART: ["마트", "cart"], BUTCHER: ["정육", "meat"], FUEL: ["주유", "fuel"],
+  PHARMACY: ["약국", "cross"], HOSPITAL: ["병원", "cross"], VET: ["동물병원", "paw"],
+  DROWSY_SHELTER: ["졸음쉼터", "route"], REST_AREA: ["휴게소", "route"], TOILET: ["공중화장실", "drop"],
+  TOUR: ["관광", "pin"], FOOD: ["맛집", "meat"], EV: ["전기차 충전", "bolt"],
+  OTC_MEDICINE: ["상비약", "cross"], GAS_STATION: ["주유", "fuel"], ANIMAL_HOSPITAL: ["동물병원", "paw"],
+};
+const FUEL_BRANDS = [[/S-?OIL|에쓰오일|에스오일/i, "S-OIL"], [/GS칼텍스|\bGS\b|^GS/i, "GS칼텍스"], [/SK에너지|\bSK\b|^SK/i, "SK에너지"], [/현대오일뱅크|오일뱅크|HD현대/i, "HD현대오일뱅크"], [/알뜰/, "알뜰주유소"], [/농협|NH/i, "농협(알뜰)"], [/E1|이원/, "E1(LPG)"], [/LPG|충전소/, "LPG"]];
+/** 주유소 이름에서 상표(정유사)를 짐작한다. 모르면 null */
+function fuelBrand(name) { return FUEL_BRANDS.find(([re]) => re.test(String(name ?? "")))?.[1] ?? null; }
+/** 주변 주유소 최대 3곳: 인허가·지도 자료에 겹쳐 올라온 같은 곳(80m 안)은 하나로 */
+function fuelPlaces(rows, licensedGas) {
+  const all = [...rows, ...(licensedGas ? [licensedGas] : [])]
+    .map((x) => ({ type: "FUEL", name: x.name ?? x.n, m: Number(x.m), lat: x.lat, lng: x.lng, url: x.u }))
+    .filter((x) => x.name && Number.isFinite(x.m)).sort((a, b) => a.m - b.m);
+  const near = (a, b) => a.lat && b.lat && Math.hypot((a.lat - b.lat) * 111000, (a.lng - b.lng) * 88000) < 80;
+  const out = [];
+  for (const x of all) {
+    const dup = out.find((y) => near(x, y) || y.name.replace(/\s+/g, "") === x.name.replace(/\s+/g, ""));
+    if (dup) { if (dup.name.length < 5 && x.name.length > dup.name.length) dup.name = x.name; continue; } // OSM의 "SK"처럼 상표만 적힌 이름은 긴 이름으로
+    out.push(x);
+    if (out.length >= 3) break;
+  }
+  return out.map((x) => {
+    const brand = fuelBrand(x.name);
+    // 지도 자료엔 "SK"처럼 상표만 적힌 곳이 있다 → "SK에너지 주유소"
+    return { ...x, name: brand && x.name.replace(/\s+/g, "").length <= 5 && !/주유소/.test(x.name) ? `${brand} 주유소` : x.name, sub: brand };
+  });
+}
+const isOfficialTourImage = (u) => /^https:\/\/(?:[\w-]+\.)?(?:visitkorea\.or\.kr|kto\.or\.kr)\//i.test(String(u ?? ""));
+/** 주변 칸 한 곳(주유·충전 칸은 상세 화면이 뜬 뒤 충전소를 덧붙일 때도 쓴다) */
+function nearbyCard(x) {
+  const [label, icon] = NEARBY_LABELS[x.type] ?? [x.type, "pin"];
+  const map = x.lat && x.lng ? `https://map.kakao.com/link/map/${encodeURIComponent(x.name)},${x.lat},${x.lng}` : x.url;
+  const road = x.lat && x.lng ? `https://map.kakao.com/link/roadview/${x.lat},${x.lng}` : "";
+  const hasImg = x.image && isOfficialTourImage(x.image);
+  const media = hasImg
+    ? `<div class="media-card-photo"><img src="${esc(x.image)}" alt="" loading="lazy" decoding="async"></div>`
+    : `<div class="media-card-photo media-card-icon" data-kind="${esc(icon)}">${ic(icon)}</div>`;
+  return `<article class="nearby-place media-card${hasImg ? " has-image" : ""}">
+    ${media}
+    <div class="media-card-body">
+      <i>${ic(icon)}${label} · ${x.summary ? "공공데이터" : km(x.m)}${x.sub ? ` · ${esc(x.sub)}` : ""}</i>
+      <b>${esc(x.name)}</b>
+      <span class="nearby-place-actions">${map ? `<a href="${esc(map)}" target="_blank" rel="noopener" aria-label="${esc(x.name)} 지도">${ic("map")}지도</a>` : ""}${road ? `<a href="${esc(road)}" target="_blank" rel="noopener" aria-label="${esc(x.name)} 로드뷰">${ic("search")}로드뷰</a>` : ""}</span>
+    </div>
+  </article>`;
+}
+/** 주변 > 주유 · 충전 칸에 가까운 전기차 충전소(최대 3곳)를 덧붙인다. ev: context/card.js evFor() 결과 */
+function mountNearbyEv(ev) {
+  const group = $("[data-energy]");
+  if (!ev || !group) return;
+  const places = group.querySelector("[data-energy-places]");
+  places.insertAdjacentHTML("beforeend", ev.list.map((x) => nearbyCard({ type: "EV", name: x.name || "이름 없는 충전소", m: x.km * 1000, lat: x.lat, lng: x.lng, sub: x.fast === 1 ? "급속" : x.fast === 0 ? "완속" : "" })).join(""));
+  const note = group.querySelector("[data-energy-note]");
+  note.innerHTML = `충전소 5km 안 ${ev.c5}곳 · 출처 ${ev.source ? `<a href="${esc(ev.source.url)}" target="_blank" rel="noopener">${esc(ev.source.name)}</a>` : "공개자료"}${ev.osm ? " (지도 공개자료라 실제로는 더 가까이 있을 수 있어요)" : ""}`;
+  note.hidden = false;
+  group.hidden = false;
+  group.closest(".nearby-hub")?.removeAttribute("hidden");
+}
 function nearbyHubHtml(c, d) {
   const nearby = d?.nearby ?? {}, licensed = d?.nearby_licensed ?? {};
-  const labels = {
-    CONVENIENCE: ["편의점", "store"], MART: ["마트", "cart"], BUTCHER: ["정육", "meat"], FUEL: ["주유", "fuel"],
-    PHARMACY: ["약국", "cross"], HOSPITAL: ["병원", "cross"], VET: ["동물병원", "paw"],
-    DROWSY_SHELTER: ["졸음쉼터", "route"], REST_AREA: ["휴게소", "route"], TOILET: ["공중화장실", "drop"],
-    TOUR: ["관광", "pin"], FOOD: ["맛집", "meat"],
-    OTC_MEDICINE: ["상비약", "cross"], GAS_STATION: ["주유", "fuel"], ANIMAL_HOSPITAL: ["동물병원", "paw"],
-  };
   const entry = (type, x = {}) => {
     const name = x.name ?? x.n;
     const m = Number(x.m);
@@ -1295,11 +1435,11 @@ function nearbyHubHtml(c, d) {
   };
   const first = (type, rows) => (rows.map((x) => entry(type, x)).filter(Boolean).sort((a, b) => a.m - b.m)[0] ?? null);
   // 상비약 판매처는 보통 같은 편의점이다. 이름이 같으면 한 칸으로 줄인다.
-  const licensedRows = Object.entries(licensed).map(([type, x]) => entry(type, x)).filter(Boolean)
+  const licensedRows = Object.entries(licensed).filter(([type]) => type !== "FUEL" && type !== "GAS_STATION").map(([type, x]) => entry(type, x)).filter(Boolean)
     .filter((x, _, all) => x.type !== "OTC_MEDICINE" || !all.some((y) => y.type === "CONVENIENCE" && y.name === x.name));
   const local = [
     ...licensedRows,
-    first("CONVENIENCE", nearby.conv ?? []), first("MART", nearby.mart ?? []), first("FUEL", nearby.fuel ?? []), first("BUTCHER", (nearby.mart ?? []).filter((x) => /정육|바베큐/.test(x.k ?? ""))),
+    first("CONVENIENCE", nearby.conv ?? []), first("MART", nearby.mart ?? []), first("BUTCHER", (nearby.mart ?? []).filter((x) => /정육|바베큐/.test(x.k ?? ""))),
   ].filter(Boolean);
   const safety = [
     first("PHARMACY", (nearby.medical ?? []).filter((x) => /약국|pharmacy|의약/.test(x.k ?? x.n ?? ""))),
@@ -1310,21 +1450,12 @@ function nearbyHubHtml(c, d) {
   if (Number(toilet.within_500m) || Number(toilet.within_2km)) safety.push({ type: "TOILET", name: `500m ${Number(toilet.within_500m) || 0}곳 · 2km ${Number(toilet.within_2km) || 0}곳`, m: Number(toilet.within_500m) ? 500 : 2000, summary: true });
   const leisure = [...(nearby.tour ?? []).slice(0, 4).map((x) => entry("TOUR", x)), ...(nearby.food ?? []).slice(0, 4).map((x) => entry("FOOD", x))].filter(Boolean);
   const unique = (rows) => [...new Map(rows.map((x) => [`${x.type}:${x.name.replace(/\s+/g, "")}`, x])).values()].slice(0, 5);
+  const fuel = fuelPlaces(nearby.fuel ?? [], licensed.FUEL ?? licensed.GAS_STATION);
   const groups = [["생활", "store", unique(local)], ["안전 · 이동", "route", unique(safety)], ["관광 · 맛집", "pin", unique(leisure)]]
     .filter(([, , rows]) => rows.length);
-  if (!groups.length) return "";
-  const isOfficialTourImage = (u) => /^https:\/\/(?:[\w-]+\.)?(?:visitkorea\.or\.kr|kto\.or\.kr)\//i.test(String(u ?? ""));
-  const card = (x) => {
-    const [label, icon] = labels[x.type] ?? [x.type, "pin"];
-    const map = x.lat && x.lng ? `https://map.kakao.com/link/map/${encodeURIComponent(x.name)},${x.lat},${x.lng}` : x.url;
-    const road = x.lat && x.lng ? `https://map.kakao.com/link/roadview/${x.lat},${x.lng}` : "";
-    return `<article class="nearby-place${x.image && isOfficialTourImage(x.image) ? " has-image" : ""}">
-      ${x.image && isOfficialTourImage(x.image) ? `<img src="${esc(x.image)}" alt="" loading="lazy" decoding="async">` : `<span class="nearby-place-icon">${ic(icon)}</span>`}
-      <span class="nearby-place-copy"><i>${label} · ${x.summary ? "공공데이터" : km(x.m)}</i><b>${esc(x.name)}</b></span>
-      <span class="nearby-place-actions">${map ? `<a href="${esc(map)}" target="_blank" rel="noopener" aria-label="${esc(x.name)} 지도">${ic("map")}</a>` : ""}${road ? `<a href="${esc(road)}" target="_blank" rel="noopener" aria-label="${esc(x.name)} 로드뷰">${ic("search")}</a>` : ""}</span>
-    </article>`;
-  };
-  return `<section class="d-sec nearby-hub"><div class="sec-head">${iconTitle("route", "주변")}<span class="sec-note">직선거리 ${tip("<b>주변 정보</b><span>생활·안전 시설은 인허가·공공 데이터, 관광·맛집은 한국관광공사 데이터로 연결합니다. 운영 시간과 영업 여부는 원문에서 다시 확인하세요.</span>")}</span></div><div class="nearby-groups">${groups.map(([title, icon, rows]) => `<section class="nearby-group"><h3>${ic(icon)}${title}</h3><div class="nearby-places">${rows.map(card).join("")}</div></section>`).join("")}</div></section>`;
+  // 주유·충전: 주유소는 상세 자료에 있고, 전기차 충전소는 /context/extras.json에서 화면이 뜬 뒤 덧붙인다(mountNearbyEv).
+  const energy = `<section class="nearby-group" data-energy${fuel.length ? "" : " hidden"}><h3>${ic("fuel")}주유 · 충전</h3><div class="nearby-places" data-energy-places>${fuel.map(nearbyCard).join("")}</div><p class="nearby-note" data-energy-note hidden></p></section>`;
+  return `<section class="d-sec nearby-hub"${groups.length || fuel.length ? "" : " hidden"}><div class="sec-head">${iconTitle("route", "주변")}<span class="sec-note">직선거리 ${tip("<b>주변 정보</b><span>생활·안전 시설은 인허가·공공 데이터, 관광·맛집은 한국관광공사 데이터로 연결합니다. 운영 시간과 영업 여부는 원문에서 다시 확인하세요.</span>")}</span></div><div class="nearby-groups">${groups.map(([title, icon, rows]) => `<section class="nearby-group"><h3>${ic(icon)}${title}</h3><div class="nearby-places">${rows.map(nearbyCard).join("")}</div></section>`).join("")}${energy}</div></section>`;
 }
 function reviewHtml(d, c) {
   const rv = d?.rv ?? c?.rv;
@@ -1345,9 +1476,16 @@ function bookingRank(channel) {
   if (channel?.kind === "phone") return 5;
   return 10;
 }
+const DEAD_BOOKING = /(^|\.)ticketplay\.zone$|(^|\.)(example\.(com|org|net)|localhost)$/i;
+function liveBookingUrl(u) {
+  try {
+    const h = new URL(u).hostname;
+    return h && !DEAD_BOOKING.test(h);
+  } catch { return false; }
+}
 function bookingChannels(c) {
   return [...(c.booking?.channels ?? [])]
-    .filter((x) => x?.url)
+    .filter((x) => x?.url && liveBookingUrl(x.url))
     .sort((a, b) => bookingRank(a) - bookingRank(b) || Number(b.confidence ?? 0) - Number(a.confidence ?? 0));
 }
 function bookingLabel(channel) {
@@ -1424,6 +1562,7 @@ async function detailView(id) {
         ${priceMentionsHtml(d)}
         <section class="d-sec"><div class="sec-head">${iconTitle("info", "이용 정보")}</div><dl class="uses">${us.map(([l, x, icon]) => `<div class="use${x ? "" : " unk"}"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${x ? `${esc(detailValue(x))}${asOfMention(x)}` : "확인필요"}</span>${x ? `<span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span>` : ""}</dd></div>`).join("")}</dl></section>
         <section class="d-sec" data-cond hidden></section>
+        ${weatherSectionHtml(c)}
         ${reviewHtml(d, c)}
         ${operatorHtml(d)}
         ${bookingHtml(c, d)}
@@ -1582,15 +1721,52 @@ function operatorSummary(label, texts) {
     return [...new Set(times)].slice(0, 2).join(" · ") || "입·퇴실 시간 확인";
   }
   if (label === "요금 · 환불") {
-    const prices = [...scan.matchAll(/(?:\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?(?:만|천)?)\s*원/g)].map((x) => x[0].replace(/\s+/g, ""));
+    const parsePriceWon = (str) => {
+      const clean = str.replace(/[^\d.만천]/g, "");
+      if (clean.includes("만")) {
+        const [m, rem] = clean.split("만");
+        return (parseFloat(m) || 0) * 10000 + (parseFloat(rem) || 0);
+      }
+      if (clean.includes("천")) {
+        const [t, rem] = clean.split("천");
+        return (parseFloat(t) || 0) * 1000 + (parseFloat(rem) || 0);
+      }
+      return parseInt(clean, 10) || 0;
+    };
+    const priceCandidates = [...scan.matchAll(/(?:\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?(?:만|천)?)\s*원/g)]
+      .map((x) => ({
+        raw: x[0].replace(/\s+/g, ""),
+        index: x.index,
+        num: parsePriceWon(x[0]),
+      }))
+      .filter((p) => {
+        if (!p.num) return false;
+        const start = Math.max(0, p.index - 35);
+        const end = Math.min(scan.length, p.index + p.raw.length + 35);
+        const context = scan.slice(start, end);
+        if (/입장료|입장권|상품권|관광지|문화재|쓰레기\s*봉투/.test(context) && p.num < 10000) return false;
+        if (p.num < 5000) return false;
+        return true;
+      });
+    const prices = priceCandidates.map((p) => p.raw);
     if (prices.length) return [...new Set(prices)].slice(0, 2).join(" · ");
     if (/환불|취소/.test(text)) return "취소·환불 규정 확인";
     return "이용 요금 확인";
   }
   if (label === "주차") return /텐트.?옆|사이트.?옆/.test(text) ? "사이트 옆 주차 안내" : /외부|공용/.test(text) ? "외부 주차 안내" : "주차 방법 확인";
   if (label === "전기") {
-    const watts = matches(/\d+(?:\.\d+)?\s*(?:kW|W)/gi);
-    if (watts[0]) return watts[0];
+    const wattMatches = [...scan.matchAll(/(?<![a-zA-Z\d,.])(\d{1,2}(?:,\d{3})+|\d{3,4}(?:\.\d+)?)\s*(?:[wW]|와트)(?![a-zA-Z])/gi)];
+    const kwMatches = [...scan.matchAll(/(?<![a-zA-Z\d.])(\d+(?:\.\d+)?)\s*(?:kW|킬로와트)(?![a-zA-Z])/gi)];
+    const parsed = [];
+    for (const m of wattMatches) {
+      const val = parseInt(m[1].replace(/,/g, ""), 10);
+      if (val >= 200 && val <= 5000) parsed.push(`${val.toLocaleString()}W`);
+    }
+    for (const m of kwMatches) {
+      const val = parseFloat(m[1]);
+      if (val >= 0.5 && val <= 5) parsed.push(`${Math.round(val * 1000).toLocaleString()}W`);
+    }
+    if (parsed[0]) return parsed[0];
     return /없음|불가/.test(text) ? "전기 이용 불가" : "전기 이용 안내";
   }
   if (label === "불멍 · 화로") return /장작/.test(text) ? "장작 이용 안내" : /숯/.test(text) ? "숯 이용 안내" : /불가|금지/.test(text) ? "화기 이용 불가" : "화기 이용 안내";
@@ -1629,23 +1805,14 @@ function operatorHtml(d) {
 // 예약 방법: 화면에는 우선순위로 고른 대표 채널 하나만 보이고, 모든 원본 채널은 데이터에 보존한다.
 function bookingHtml(c, d) {
   const main = primaryBooking(c);
-  const g = d?.guide, steps = (g?.steps ?? []).filter((x) => x.t && !/https?:\/\//.test(x.t));
-  if (!main && !c.tel && !steps.length) return "";
+  const g = d?.guide;
   const pf = g?.platform ?? {};
   const meta = [["오픈", pf.opening], ["결제", pf.payment], ["취소", pf.cancel], ["대기", pf.waitlist]].filter(([, v]) => v && !/운영자 안내에 따름|홈페이지마다 다름/.test(v));
-  const guideFact = sourceFact({ src: g?.source?.label ?? g?.source, url: g?.source?.url, date: g?.source?.date, quote: [...steps.map((x) => x.t), ...(pf.tips ?? [])].join("\n") }, "예약 안내");
-  const stepName = (text, n) => {
-    if (/날짜|일정|입실|체크인/.test(text)) return "날짜 선택";
-    if (/상품|사이트|객실|구역|타입/.test(text)) return "상품 선택";
-    if (/인원|차량|옵션/.test(text)) return "인원·옵션 확인";
-    if (/결제|입금/.test(text)) return "결제 진행";
-    if (/취소|환불/.test(text)) return "취소 규정 확인";
-    return `예약 안내 ${n + 1}`;
-  };
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("calendar", "예약 방법")}${main || steps.length || (pf.tips ?? []).length ? `<span class="sec-note">${main ? `대표 채널 ${srcTip(bookingSource(main), "대표 예약 채널")}` : ""}${steps.length || (pf.tips ?? []).length ? srcTip(guideFact, "예약 안내") : ""}</span>` : ""}</div>
+  if (!main && !c.tel && !meta.length && !(pf.tips ?? []).length) return "";
+  const guideFact = sourceFact({ src: g?.source?.label ?? g?.source, url: g?.source?.url, date: g?.source?.date, quote: (pf.tips ?? []).join("\n") }, "예약 안내");
+  return `<section class="d-sec"><div class="sec-head">${iconTitle("calendar", "예약 방법")}${main || (pf.tips ?? []).length ? `<span class="sec-note">${main ? `대표 채널 ${srcTip(bookingSource(main), "대표 예약 채널")}` : ""}${(pf.tips ?? []).length ? srcTip(guideFact, "예약 안내") : ""}</span>` : ""}</div>
     ${main || c.tel ? `<div class="chans">${main ? `<a class="chan" href="${esc(main.url)}" target="_blank" rel="noopener">${ic("right")}<b>${esc(bookingLabel(main))}</b><i>예약 페이지</i></a>` : ""}${c.tel ? `<a class="chan" href="tel:${esc(c.tel)}">${ic("phone")}<b>전화 문의</b><i>${esc(c.tel)}</i></a>` : ""}</div>` : ""}
-    ${meta.length ? `<dl class="uses">${meta.map(([l, v]) => `<div class="use"><dt>${l}</dt><dd><span class="use-val">${esc(serviceText(v, 32))}</span><span class="use-meta">${dot("c")}${srcTip({ g: "c", src: { label: "예약 안내", url: g?.source?.url, at: g?.source?.date, quote: v } }, l)}</span></dd></div>`).join("")}</dl>` : ""}
-    ${steps.length ? `<ol class="steps">${[...new Set(steps.map((x, i) => serviceText(x.t, 52) || stepName(x.t, i)))].slice(0, 5).map((t) => `<li>${esc(t)}</li>`).join("")}</ol>` : ""}
+    ${meta.length ? `<dl class="uses">${meta.map(([l, v]) => `<div class="use"><dt>${l}</dt><dd><span class="use-val">${esc(serviceText(v, 32))}</span><span class="use-meta">${srcTip({ g: "c", src: { label: "예약 안내", url: g?.source?.url, at: g?.source?.date, quote: v } }, l)}</span></dd></div>`).join("")}</dl>` : ""}
     ${(pf.tips ?? []).length ? `<ul class="tips">${pf.tips.slice(0, 3).map((t) => `<li>${esc(serviceText(t, 60))}</li>`).join("")}</ul>` : ""}
   </section>`;
 }
@@ -1759,7 +1926,11 @@ function reviewLinksHtml(d, c) {
       const platform = /cafe/.test(x.t ?? "") ? "카페" : x.t === "kin" ? "지식iN" : x.t === "web" ? "웹문서" : "블로그";
       const fact = sourceFact(x, platform, [x.title, x.snippet].filter(Boolean).join("\n"));
       const summary = reviewSummary(x.snippet);
-      return `<article class="review-link-card"><a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${platform} 후기 ${i + 1} 원문 열기"><span class="review-link-media">${canPreviewExternalMedia(x) && externalImage(x) ? `<img src="${esc(externalImage(x))}" alt="" loading="lazy" decoding="async">` : apiThumb(x) ? `<img src="${esc(apiThumb(x))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : ic(x.image ? "polaroid" : "file-text")}</span><span><i>${esc(sourceName(x.src, platform))}${x.date ? ` · ${esc(String(x.date).slice(0, 10))}` : ""}</i><b>${esc(serviceText(x.title, 54) || `방문 후기 ${i + 1}`)}</b>${summary ? `<em>${esc(summary)}</em>` : ""}</span>${ic("external", "line")}</a>${srcTip(fact, `${platform} 후기 ${i + 1}`)}</article>`;
+      const thumb = (canPreviewExternalMedia(x) && externalImage(x)) || apiThumb(x);
+      const media = thumb
+        ? `<div class="media-card-photo"><img src="${esc(thumb)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"></div>`
+        : `<div class="media-card-photo media-card-icon" data-kind="review">${ic(x.image ? "polaroid" : "file-text")}</div>`;
+      return `<article class="review-link-card media-card"><a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${platform} 후기 ${i + 1} 원문 열기">${media}<div class="media-card-body"><i>${ic("file-text")}${esc(sourceName(x.src, platform))}${x.date ? ` · ${esc(String(x.date).slice(0, 10))}` : ""}</i><b>${esc(serviceText(x.title, 54) || `방문 후기 ${i + 1}`)}</b>${summary ? `<em>${esc(summary)}</em>` : ""}<span class="media-card-go">${ic("external")}원문 보기</span></div></a>${srcTip(fact, `${platform} 후기 ${i + 1}`)}</article>`;
     }).join("")}</div>
     ${directLinks}
   </section>`;
@@ -1817,6 +1988,490 @@ async function loadComments(id) {
     box.innerHTML = list.length ? list.map((x) => `<li><b>${esc(x.nickname)}</b><i>${esc(String(x.created_at).slice(0, 10))}</i>${mine.includes(String(x.id)) ? `<button type="button" class="link" data-cmt-del="${esc(x.id)}">지우기</button>` : ""}<p>${esc(x.content)}</p></li>`).join("") : `<li class="muted">첫 한마디를 남겨 주세요.</li>`;
   } catch { box.innerHTML = `<li class="muted">지금은 불러오지 못했어요.</li>`; }
 }
+// ── 주간 날씨 예보 & 일자별 상세 모달 (모여라 캘린더 동일 구조) ──────
+const WEATHER_CACHE = new Map();
+
+function getWeatherDescription(code) {
+  const c = Number(code);
+  if (c === 0) return "맑음";
+  if (c === 1) return "대체로 맑음";
+  if (c === 2) return "구름 조금";
+  if (c === 3) return "흐림";
+  if ([45, 48].includes(c)) return "안개";
+  if ([51, 53, 55].includes(c)) return "이슬비";
+  if ([56, 57].includes(c)) return "어는 이슬비";
+  if (c === 61) return "약한 비";
+  if (c === 63) return "비";
+  if (c === 65) return "강한 비";
+  if ([66, 67].includes(c)) return "어는 비";
+  if ([71, 73, 75].includes(c)) return "눈";
+  if (c === 77) return "싸락눈";
+  if ([80, 81, 82].includes(c)) return "소나기";
+  if ([85, 86].includes(c)) return "눈보라/소낙눈";
+  if (c === 95) return "뇌우";
+  if ([96, 99].includes(c)) return "우박을 동반한 뇌우";
+  return "맑음";
+}
+
+function getWeatherIconSvg(code, size = 20) {
+  const c = Number(code);
+  if (c === 0) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-sun"><circle cx="12" cy="12" r="4"/><path d="M3 12h1m8-9v1m8 8h1m-9 8v1m-6.4-15.4l.7.7m12.1-.7l-.7.7m0 11.4l.7.7m-12.1-.7l-.7.7"/></svg>`;
+  }
+  if ([1, 2, 3].includes(c)) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-cloud"><path d="M7 18a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12"/></svg>`;
+  }
+  if ([45, 48].includes(c)) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-mist"><path d="M5 5h14M5 9h14M5 13h14M5 17h14"/></svg>`;
+  }
+  if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(c)) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-rain"><path d="M7 18a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12M8 22l-.5-1.5M12 22l-.5-1.5M16 22l-.5-1.5"/></svg>`;
+  }
+  if ([71, 73, 75, 77, 85, 86].includes(c)) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-snow"><path d="M10 4l2 1l2-1M12 2v6.5M10 20l2-1l2 1M12 15.5v6.5M20 10l-1 2l1 2M15.5 12h6.5M4 10l1 2l-1 2M2 12h6.5M4.43 4.43l4.24 4.24M2.5 5.5l1.5 1.5l1.5-1.5M19.56 19.56l-4.24-4.24M18.5 17.5l1.5 1.5l1.5-1.5M19.56 4.43l-4.24 4.24M18.5 6.5l1.5-1.5l1.5 1.5M4.43 19.56l4.24-4.24M2.5 18.5l1.5-1.5l1.5 1.5"/></svg>`;
+  }
+  if ([95, 96, 99].includes(c)) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-lightning"><path d="M7 18a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12M13 18l-2 3v-3l-2 3"/></svg>`;
+  }
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-sun"><circle cx="12" cy="12" r="4"/><path d="M3 12h1m8-9v1m8 8h1m-9 8v1m-6.4-15.4l.7.7m12.1-.7l-.7.7m0 11.4l.7.7m-12.1-.7l-.7.7"/></svg>`;
+}
+
+function getAirQualityGrade(type, val) {
+  if (val == null || Number.isNaN(Number(val))) return { text: "보통", color: "#10B981" };
+  const v = Number(val);
+  if (type === "pm10") {
+    if (v <= 30) return { text: "좋음", color: "#3B82F6" };
+    if (v <= 80) return { text: "보통", color: "#10B981" };
+    if (v <= 150) return { text: "나쁨", color: "#F59E0B" };
+    return { text: "매우나쁨", color: "#EF4444" };
+  }
+  if (v <= 15) return { text: "좋음", color: "#3B82F6" };
+  if (v <= 35) return { text: "보통", color: "#10B981" };
+  if (v <= 75) return { text: "나쁨", color: "#F59E0B" };
+  return { text: "매우나쁨", color: "#EF4444" };
+}
+
+function getUvText(uv) {
+  if (uv == null) return "보통";
+  const u = Number(uv);
+  if (u <= 2) return `낮음 (${u})`;
+  if (u <= 5) return `보통 (${u})`;
+  if (u <= 7) return `높음 (${u})`;
+  if (u <= 10) return `매우높음 (${u})`;
+  return `위험 (${u})`;
+}
+
+async function fetchCampWeather(lat, lon) {
+  const key = `${Number(lat).toFixed(3)}_${Number(lon).toFixed(3)}`;
+  if (WEATHER_CACHE.has(key)) {
+    const entry = WEATHER_CACHE.get(key);
+    if (Date.now() - entry.time < 3600000) return entry.data;
+  }
+  const fUrl = `https://api.open-meteo.com/v1/forecast?latitude=${Number(lat).toFixed(3)}&longitude=${Number(lon).toFixed(3)}&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,uv_index_max&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,precipitation,weather_code,wind_speed_10m,uv_index&timezone=Asia%2FSeoul&past_days=1&forecast_days=10`;
+  const aUrl = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${Number(lat).toFixed(3)}&longitude=${Number(lon).toFixed(3)}&hourly=pm10,pm2_5,european_aqi&timezone=Asia%2FSeoul&past_days=1&forecast_days=7`;
+
+  try {
+    const [fRes, aRes] = await Promise.all([
+      fetch(fUrl).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+      fetch(aUrl).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    ]);
+    if (!fRes || !fRes.daily) return null;
+
+    const dailyMap = {};
+    const daysList = [];
+    (fRes.daily.time || []).forEach((t, i) => {
+      const dayItem = {
+        dateStr: t,
+        code: fRes.daily.weather_code?.[i] ?? 0,
+        max: Math.round(fRes.daily.temperature_2m_max?.[i] ?? 0),
+        min: Math.round(fRes.daily.temperature_2m_min?.[i] ?? 0),
+        apparentMax: Math.round(fRes.daily.apparent_temperature_max?.[i] ?? 0),
+        apparentMin: Math.round(fRes.daily.apparent_temperature_min?.[i] ?? 0),
+        precipSum: Math.round((fRes.daily.precipitation_sum?.[i] ?? 0) * 10) / 10,
+        precipProb: Math.round(fRes.daily.precipitation_probability_max?.[i] ?? 0),
+        windSpeed: Math.round(((fRes.daily.wind_speed_10m_max?.[i] ?? 0) / 3.6) * 10) / 10,
+        uv: Math.round(fRes.daily.uv_index_max?.[i] ?? 0),
+      };
+      dailyMap[t] = dayItem;
+      daysList.push(dayItem);
+    });
+
+    const hourlyMap = {};
+    if (fRes.hourly && Array.isArray(fRes.hourly.time)) {
+      fRes.hourly.time.forEach((iso, idx) => {
+        const dStr = iso.slice(0, 10);
+        if (!hourlyMap[dStr]) hourlyMap[dStr] = [];
+        const rawWind = fRes.hourly.wind_speed_10m?.[idx];
+        hourlyMap[dStr].push({
+          time: iso.slice(11, 16),
+          iso,
+          temp: Math.round(fRes.hourly.temperature_2m?.[idx] ?? 0),
+          apparent: Math.round(fRes.hourly.apparent_temperature?.[idx] ?? 0),
+          humidity: Math.round(fRes.hourly.relative_humidity_2m?.[idx] ?? 0),
+          precipProb: Math.round(fRes.hourly.precipitation_probability?.[idx] ?? 0),
+          precip: Math.round((fRes.hourly.precipitation?.[idx] ?? 0) * 10) / 10,
+          code: fRes.hourly.weather_code?.[idx] ?? 0,
+          windSpeed: rawWind != null ? Math.round((rawWind / 3.6) * 10) / 10 : null,
+          uv: fRes.hourly.uv_index?.[idx] != null ? Math.round(fRes.hourly.uv_index[idx]) : null,
+          pm10: null,
+          pm2_5: null,
+        });
+      });
+    }
+
+    const airMap = {};
+    if (aRes?.hourly?.time) {
+      const pm10ByDay = {}, pm25ByDay = {};
+      const hourByIso = {};
+      Object.values(hourlyMap).forEach((list) => list.forEach((h) => { hourByIso[h.iso] = h; }));
+
+      aRes.hourly.time.forEach((iso, idx) => {
+        const dStr = iso.slice(0, 10);
+        if (!pm10ByDay[dStr]) pm10ByDay[dStr] = [];
+        if (!pm25ByDay[dStr]) pm25ByDay[dStr] = [];
+        const v10 = aRes.hourly.pm10?.[idx];
+        const v25 = aRes.hourly.pm2_5?.[idx];
+        if (v10 != null && !Number.isNaN(v10)) {
+          pm10ByDay[dStr].push(v10);
+          if (hourByIso[iso]) hourByIso[iso].pm10 = Math.round(v10);
+        }
+        if (v25 != null && !Number.isNaN(v25)) {
+          pm25ByDay[dStr].push(v25);
+          if (hourByIso[iso]) hourByIso[iso].pm2_5 = Math.round(v25);
+        }
+      });
+
+      Object.keys(pm10ByDay).forEach((dStr) => {
+        const v10 = pm10ByDay[dStr], v25 = pm25ByDay[dStr] || [];
+        const avg10 = v10.length ? Math.round(v10.reduce((a, b) => a + b, 0) / v10.length) : null;
+        const avg25 = v25.length ? Math.round(v25.reduce((a, b) => a + b, 0) / v25.length) : null;
+        airMap[dStr] = {
+          pm10: avg10,
+          pm2_5: avg25,
+          grade10: getAirQualityGrade("pm10", avg10),
+          grade25: getAirQualityGrade("pm2_5", avg25),
+        };
+      });
+    }
+
+    const compiled = { daily: dailyMap, days: daysList, hourly: hourlyMap, air: airMap };
+    WEATHER_CACHE.set(key, { time: Date.now(), data: compiled });
+    return compiled;
+  } catch (err) {
+    console.warn("Weather fetch error", err);
+    return null;
+  }
+}
+
+function parseKstDate(dateStr) {
+  const [y, m, d] = dateStr.split("-").map(Number);
+  const date = new Date(y, m - 1, d);
+  const now = new Date();
+  const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+  const diffTime = date.getTime() - new Date(todayStr).getTime();
+  const diffDays = Math.round(diffTime / 86400000);
+  const dayName = ["일", "월", "화", "수", "목", "금", "토"][date.getDay()];
+  let rel = `${m}.${d}`;
+  if (diffDays === -1) rel = "어제";
+  else if (diffDays === 0) rel = "오늘";
+  else if (diffDays === 1) rel = "내일";
+  else if (diffDays === 2) rel = "모레";
+  return { rel, dayName, diffDays, fullDate: `${String(y).slice(2)}.${String(m).padStart(2, "0")}.${String(d).padStart(2, "0")} (${dayName})`, tabLabel: diffDays === 0 ? `오늘(${dayName})` : `${m}.${d}(${dayName})` };
+}
+
+function weatherSectionHtml(c) {
+  if (!c.lat || !c.lng) return "";
+  return `<section class="d-sec weather-sec" id="sec-weather">
+    <div class="sec-head">
+      ${iconTitle("cloud", "주간 날씨 예보")}
+      <span class="sec-note">현장 좌표 실시간 예보 · 일자별 날씨 클릭 시 상세</span>
+    </div>
+    <div class="weather-hero-card" id="weather-hero-card">
+      <div class="weather-hero-head">
+        <span>📍 ${esc(c.name)} 현장 날씨</span>
+        <span>Open-Meteo 실시간 연동</span>
+      </div>
+      <div class="weather-hero-days" id="weather-hero-days">
+        <div style="padding: 10px 0; font-size: 0.85rem; opacity: 0.8;">날씨 정보를 실시간으로 불러오는 중…</div>
+      </div>
+    </div>
+  </section>`;
+}
+
+async function initCampWeather(c) {
+  const container = $("#weather-hero-days");
+  if (!container || !c?.lat || !c?.lng) return;
+  const data = await fetchCampWeather(c.lat, c.lng);
+  if (!data || !data.days?.length) {
+    container.innerHTML = `<div style="padding: 10px 0; font-size: 0.85rem; opacity: 0.8;">현재 날씨 정보를 불러올 수 없습니다.</div>`;
+    return;
+  }
+  container.innerHTML = data.days.map((d) => {
+    const meta = parseKstDate(d.dateStr);
+    const isToday = meta.diffDays === 0;
+    return `<button type="button" class="w-day-pill${isToday ? " is-today" : ""}" data-wdate="${esc(d.dateStr)}" title="${meta.fullDate} 날씨 상세 보기">
+      <span class="w-rel">${meta.rel}</span>
+      <span class="w-icon-wrap">${getWeatherIconSvg(d.code, 20)}</span>
+      <span class="w-temp">${d.max}°</span>
+    </button>`;
+  }).join("");
+
+  container.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-wdate]");
+    if (!btn) return;
+    openWeatherModal(c, btn.dataset.wdate, data);
+  });
+}
+
+function renderHourlyTimeline(hourlyList, tab, isToday, nowHour) {
+  const colWidth = 52;
+  const totalWidth = hourlyList.length * colWidth;
+
+  if (tab === "weather") {
+    const temps = hourlyList.map((h) => h.temp);
+    const minT = Math.min(...temps);
+    const maxT = Math.max(...temps);
+    const spanT = Math.max(2, maxT - minT);
+    const chartHeight = 58;
+
+    const points = hourlyList.map((h, idx) => {
+      const x = idx * colWidth + colWidth / 2;
+      const y = 18 + ((maxT - h.temp) / spanT) * (chartHeight - 26);
+      return { x, y, temp: h.temp, code: h.code, time: h.time };
+    });
+
+    const pathD = points.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
+
+    return `<div style="display:flex; flex-direction:column; min-width:${totalWidth}px;">
+      <svg width="${totalWidth}" height="${chartHeight}" style="overflow:visible; display:block;">
+        <path d="${pathD}" fill="none" stroke="#7C2FE5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        ${points.map((p) => `
+          <circle cx="${p.x}" cy="${p.y}" r="3" fill="#7C2FE5"/>
+          <text x="${p.x}" y="${p.y - 6}" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">${p.temp}°</text>
+        `).join("")}
+      </svg>
+      <div class="w-hourly-bottom-row">
+        ${hourlyList.map((h) => {
+          const hourNum = parseInt(h.time.split(":")[0], 10);
+          const isNow = isToday && hourNum === nowHour;
+          return `<div class="w-hourly-col${isNow ? " is-now" : ""}">
+            <div style="height:20px; display:flex; align-items:center; justify-content:center;">${getWeatherIconSvg(h.code, 16)}</div>
+            <span class="w-hour-label">${hourNum}시</span>
+          </div>`;
+        }).join("")}
+      </div>
+    </div>`;
+  }
+
+  return `<div style="display:flex; min-width:${totalWidth}px;">
+    ${hourlyList.map((h) => {
+      const hourNum = parseInt(h.time.split(":")[0], 10);
+      const isNow = isToday && hourNum === nowHour;
+      let valText = "";
+      if (tab === "precip") valText = `${h.precip}mm\n(${h.precipProb}%)`;
+      else if (tab === "wind") valText = `${h.windSpeed ?? "-"}m/s`;
+      else if (tab === "humidity") valText = `${h.humidity}%`;
+      else if (tab === "air") valText = h.pm10 ? `${h.pm10}/${h.pm2_5}` : "-";
+      else if (tab === "uv") valText = h.uv != null ? `${h.uv}` : "-";
+
+      return `<div class="w-hourly-col${isNow ? " is-now" : ""}">
+        <span class="w-hourly-val" style="white-space:pre-line; height:32px; display:flex; align-items:center; justify-content:center;">${valText}</span>
+        <span class="w-hour-label">${hourNum}시</span>
+      </div>`;
+    }).join("")}
+  </div>`;
+}
+
+function openWeatherModal(c, initialDate, data) {
+  let selectedDate = initialDate;
+  let currentTab = "weather";
+
+  const dlg = document.createElement("dialog");
+  dlg.className = "weather-modal";
+
+  function render() {
+    const dayItem = data.daily[selectedDate] || data.days[0];
+    const dateMeta = parseKstDate(selectedDate);
+    const air = data.air[selectedDate];
+    const hourlyList = data.hourly[selectedDate] || [];
+
+    const nowHour = new Date().getHours();
+    const isToday = dateMeta.diffDays === 0;
+
+    dlg.innerHTML = `
+      <div class="w-modal-drag"></div>
+      <div class="w-modal-header">
+        <div class="w-modal-date-badge">
+          ${dateMeta.diffDays === 0 ? `<span class="w-badge-tag">오늘</span>` : dateMeta.diffDays === 1 ? `<span class="w-badge-tag">내일</span>` : ""}
+          <span>${dateMeta.fullDate}</span>
+        </div>
+        <button type="button" class="w-modal-close" aria-label="닫기">${ic("close")}</button>
+      </div>
+      <div class="w-modal-days-strip">
+        ${data.days.map((d) => {
+          const m = parseKstDate(d.dateStr);
+          const active = d.dateStr === selectedDate;
+          return `<button type="button" class="w-modal-day-btn${active ? " is-active" : ""}" data-switch-date="${esc(d.dateStr)}">${m.tabLabel}</button>`;
+        }).join("")}
+      </div>
+      <div class="w-modal-body">
+        <div class="w-highlight-card">
+          <div class="w-highlight-top">
+            <span class="w-highlight-desc">${getWeatherDescription(dayItem.code)}</span>
+            <div class="w-highlight-icon">${getWeatherIconSvg(dayItem.code, 44)}</div>
+          </div>
+          <div class="w-highlight-main">
+            <span class="w-highlight-temp">${dayItem.max}</span>
+            <span class="w-highlight-unit">°</span>
+          </div>
+          <div class="w-highlight-sub">
+            체감 ${dayItem.apparentMax}° · 최고 ${dayItem.max}° / 최저 ${dayItem.min}°
+          </div>
+          <div class="w-highlight-loc">
+            <span>📍 현장위치: [${esc(c.sigungu || c.sido || "캠핑장")}] ${esc(c.name)}</span>
+          </div>
+        </div>
+
+        <div class="w-metrics-grid">
+          <div class="w-metric-card">
+            <div class="w-metric-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M7 18a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12M8 22l-.5-1.5M12 22l-.5-1.5M16 22l-.5-1.5"/></svg>
+              <span>강수량 및 확률</span>
+            </div>
+            <div class="w-metric-val">
+              <span>${dayItem.precipSum} mm</span>
+              <span class="w-prob">(확률 ${dayItem.precipProb}%)</span>
+            </div>
+          </div>
+
+          <div class="w-metric-card">
+            <div class="w-metric-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M3 21h18M5 21V7l8-4v18M19 21v-8l-6-4M9 9h1M9 13h1M9 17h1"/></svg>
+              <span>대기질 (미세먼지)</span>
+            </div>
+            ${air ? `
+              <div style="display: flex; flex-direction: column; gap: 3px;">
+                <div class="w-air-row">
+                  <span style="color: #64748b;">미세 ${air.pm10 ?? "-"}µg</span>
+                  <span class="w-badge-grade" style="color:${air.grade10.color}; background:${air.grade10.color}20;">${air.grade10.text}</span>
+                </div>
+                <div class="w-air-row">
+                  <span style="color: #64748b;">초미세 ${air.pm2_5 ?? "-"}µg</span>
+                  <span class="w-badge-grade" style="color:${air.grade25.color}; background:${air.grade25.color}20;">${air.grade25.text}</span>
+                </div>
+              </div>
+            ` : `<div class="w-metric-val" style="font-size: 0.9rem; color: #10B981;">보통 / 쾌적</div>`}
+          </div>
+
+          <div class="w-metric-card">
+            <div class="w-metric-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2"><path d="M5 8h8.5a2.5 2.5 0 1 0-2.34-3.24M3 12h15.5a2.5 2.5 0 1 1-2.34 3.24M4 16h5.5a2.5 2.5 0 1 1-2.34 3.24"/></svg>
+              <span>최대 풍속</span>
+            </div>
+            <div class="w-metric-val">${dayItem.windSpeed ? `${dayItem.windSpeed} m/s` : "산들바람"}</div>
+          </div>
+
+          <div class="w-metric-card">
+            <div class="w-metric-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+              <span>자외선 지수</span>
+            </div>
+            <div class="w-metric-val">${getUvText(dayItem.uv)}</div>
+          </div>
+        </div>
+
+        ${hourlyList.length ? `
+          <div class="w-hourly-sec">
+            <div class="w-hourly-title">시간별 일기예보</div>
+            <div class="w-hourly-tabs">
+              ${[
+                ["weather", "날씨"],
+                ["precip", "강수"],
+                ["wind", "바람"],
+                ["humidity", "습도"],
+                ["air", "대기"],
+                ["uv", "자외선"]
+              ].map(([k, lbl]) => `<button type="button" class="w-hourly-tab-btn${currentTab === k ? " is-active" : ""}" data-hourly-tab="${k}">${lbl}</button>`).join("")}
+            </div>
+            <div class="w-hourly-timeline">
+              ${renderHourlyTimeline(hourlyList, currentTab, isToday, nowHour)}
+            </div>
+          </div>
+        ` : ""}
+      </div>
+      <div class="w-modal-footer">
+        <a class="w-btn-windy" href="https://www.windy.com/?${Number(c.lat).toFixed(4)},${Number(c.lng).toFixed(4)},9" target="_blank" rel="noopener">
+          🌐 Windy 레이더
+        </a>
+        <button type="button" class="w-btn-close">닫기</button>
+      </div>
+    `;
+
+    // Event listeners
+    $(".w-modal-close", dlg).onclick = () => dlg.close();
+    $(".w-btn-close", dlg).onclick = () => dlg.close();
+    $$("[data-switch-date]", dlg).forEach((btn) => {
+      btn.onclick = () => {
+        selectedDate = btn.dataset.switchDate;
+        render();
+      };
+    });
+    $$("[data-hourly-tab]", dlg).forEach((btn) => {
+      btn.onclick = () => {
+        currentTab = btn.dataset.hourlyTab;
+        render();
+      };
+    });
+
+    // Drag-to-scroll timeline
+    const timeline = $(".w-hourly-timeline", dlg);
+    if (timeline) {
+      let isDown = false, startX = 0, scrollLeft = 0;
+      timeline.addEventListener("pointerdown", (e) => {
+        isDown = true;
+        startX = e.pageX - timeline.offsetLeft;
+        scrollLeft = timeline.scrollLeft;
+        try { timeline.setPointerCapture?.(e.pointerId); } catch (_) {}
+      });
+      timeline.addEventListener("pointerleave", () => { isDown = false; });
+      timeline.addEventListener("pointerup", (e) => {
+        isDown = false;
+        try { timeline.releasePointerCapture?.(e.pointerId); } catch (_) {}
+      });
+      timeline.addEventListener("pointermove", (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - timeline.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        timeline.scrollLeft = scrollLeft - walk;
+      });
+
+      if (isToday) {
+        requestAnimationFrame(() => {
+          const nowCol = $(".w-hourly-col.is-now", dlg);
+          if (nowCol) timeline.scrollLeft = Math.max(0, nowCol.offsetLeft - timeline.clientWidth / 2 + nowCol.clientWidth / 2);
+        });
+      }
+    }
+
+    const dayStrip = $(".w-modal-days-strip", dlg);
+    if (dayStrip) {
+      const activeBtn = $(".w-modal-day-btn.is-active", dlg);
+      if (activeBtn) {
+        requestAnimationFrame(() => {
+          dayStrip.scrollLeft = Math.max(0, activeBtn.offsetLeft - dayStrip.clientWidth / 2 + activeBtn.clientWidth / 2);
+        });
+      }
+    }
+  }
+
+  render();
+  document.body.append(dlg);
+  dlg.showModal();
+  dlg.addEventListener("close", () => dlg.remove());
+  dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
+}
+
 function reserveDock(c) {
   const main = primaryBooking(c);
   return `${heartBtn(c)}${c.tel ? `<a class="btn ghost" href="tel:${esc(c.tel)}" aria-label="전화">${ic("phone")}</a>` : ""}${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">예약하기</a>` : ""}`;
@@ -1831,9 +2486,20 @@ function bindDetail() {
     b.outerHTML = `<div class="vid playing"><iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(b.dataset.yt)}?autoplay=1" title="영상" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>`;
   }));
   const id = $(".detail")?.dataset.id;
+  const currentCamp = S.byId.get(id);
+  if (currentCamp) initCampWeather(currentCamp);
   // 이번 주말 컨디션(날씨·일출일몰·달·미세먼지·산불·물때): /conditions/card.js가 있을 때만 붙인다. 실패하면 칸을 숨긴 채 둔다.
   const condEl = $("[data-cond]"), condCamp = S.byId.get(id);
   if (condEl && condCamp) import(new URL("../conditions/card.js", import.meta.url).href).then((m) => m.mount(condEl, condCamp)).catch(() => {});
+  // 여행 참고 정보(고도·응급실·전기차 충전·주변 축제 등): /context/card.js가 있을 때만. 실패하면 칸을 숨긴 채 둔다.
+  const exEl = $("[data-extras]");
+  if (condCamp) import(new URL("../context/card.js", import.meta.url).href).then((m) => {
+    if (exEl) m.mount(exEl, condCamp).catch(() => {});
+    m.evFor(id).then(mountNearbyEv).catch(() => {});
+  }).catch(() => {});
+  // 운영자 정보 바로잡기(로그인 없이, Supabase operator_submission에 넣기만): /operator/form.js
+  const opEl = $("[data-opform-sec]");
+  if (opEl && condCamp && SB.url && SB.key) import(new URL("../operator/form.js", import.meta.url).href).then((m) => m.mount(opEl, condCamp, SB)).catch(() => {});
   const previewItems = async (kind) => {
     const d = await detailOf(id);
     const rows = kind === "layout" ? (d?.layout?.images ?? []) : (d?.sns_images ?? []);

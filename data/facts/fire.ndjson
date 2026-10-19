@@ -57,9 +57,9 @@
 {"cid":"76","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"76","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"76","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"81","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://moonlightcamp.kr/02facilities.html","at":"2026-10-19T02:12:25.597Z","quote":"ㆍ바베큐그릴 셋트(바베큐그릴.숯.석쇠) 20,000원","text":"2만원"}
+{"cid":"81","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://moonlightcamp.kr/02facilities.html","at":"2026-10-19T09:23:58.998Z","quote":"ㆍ바베큐그릴 셋트(바베큐그릴.숯.석쇠) 20,000원","text":"2만원"}
 {"cid":"81","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"81","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://moonlightcamp.kr/02facilities.html","at":"2026-10-19T02:12:25.597Z","quote":"ㆍ불멍 화롯대셋트(화롯대.장작) 20,000원","text":"2만원"}
+{"cid":"81","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://moonlightcamp.kr/02facilities.html","at":"2026-10-19T09:23:58.998Z","quote":"ㆍ불멍 화롯대셋트(화롯대.장작) 20,000원","text":"2만원"}
 {"cid":"81","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"81","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"85","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -110,7 +110,7 @@
 {"cid":"142","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"142","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"142","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"146","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.gang42.com/?ckattempt=1","at":"2026-10-19T01:37:50.685Z","quote":"바베큐세트는 2만원(그릴,장작,석쇠,장갑)이며 장작은 1망 1만원에 판매합니다","text":"2만원"}
+{"cid":"146","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.gang42.com/?ckattempt=1","at":"2026-10-19T09:02:53.694Z","quote":"바베큐세트는 2만원(그릴,장작,석쇠,장갑)이며 장작은 1망 1만원에 판매합니다","text":"2만원"}
 {"cid":"146","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"146","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"146","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -293,10 +293,10 @@
 {"cid":"462","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"462","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"462","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"467","attr":"BBQ_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b46pg2o8vgljd67d.com/default/sub_page_02_01.php","at":"2026-10-19T02:14:14.555Z","quote":"- 바비큐 시설(숯불, 석쇠) 이용요금 : 25,000원","text":"2.5만원"}
+{"cid":"467","attr":"BBQ_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b46pg2o8vgljd67d.com/default/sub_page_02_01.php","at":"2026-10-19T09:24:54.387Z","quote":"- 바비큐 시설(숯불, 석쇠) 이용요금 : 25,000원","text":"2.5만원"}
 {"cid":"467","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"467","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"467","attr":"FIRE_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b46pg2o8vgljd67d.com/default/sub_page_02_01.php","at":"2026-10-19T02:14:14.555Z","quote":"- 불멍세트 이용요금 : 25,000원","text":"2.5만원"}
+{"cid":"467","attr":"FIRE_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b46pg2o8vgljd67d.com/default/sub_page_02_01.php","at":"2026-10-19T09:24:54.387Z","quote":"- 불멍세트 이용요금 : 25,000원","text":"2.5만원"}
 {"cid":"467","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"467","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"468","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -736,10 +736,10 @@
 {"cid":"1057","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"1057","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1057","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1065","attr":"BBQ_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"https://mgocamping.com/reserve","at":"2026-10-19T01:47:16.809Z","quote":"- 바비큐 세트(그릴, 석쇠, 착 화재, 숯) 4인 기준 25,000원, 추가 5,000원 (현장 결제)","text":"2.5만원"}
+{"cid":"1065","attr":"BBQ_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"https://mgocamping.com/reserve","at":"2026-10-19T09:10:47.828Z","quote":"- 바비큐 세트(그릴, 석쇠, 착 화재, 숯) 4인 기준 25,000원, 추가 5,000원 (현장 결제)","text":"2.5만원"}
 {"cid":"1065","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1065","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"1065","attr":"FIRE_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"https://mgocamping.com/reserve","at":"2026-10-19T01:47:16.809Z","quote":"- 모닥불 세트(화롯대, 고체연료, 장작 10kg) 25,000원, 장작 추가 10,000원 (현장 결제)","text":"2.5만원"}
+{"cid":"1065","attr":"FIRE_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"https://mgocamping.com/reserve","at":"2026-10-19T09:10:47.828Z","quote":"- 모닥불 세트(화롯대, 고체연료, 장작 10kg) 25,000원, 장작 추가 10,000원 (현장 결제)","text":"2.5만원"}
 {"cid":"1065","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1065","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1066","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -830,7 +830,7 @@
 {"cid":"1196","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"1196","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1196","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1205","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://badaaeglamping.com/theme/basic/reser1.php","at":"2026-10-19T02:27:05.504Z","quote":"개별 숯 + 그릴(야외) 이용료 : 20,000원","text":"2만원"}
+{"cid":"1205","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://badaaeglamping.com/theme/basic/reser1.php","at":"2026-10-19T09:32:57.199Z","quote":"개별 숯 + 그릴(야외) 이용료 : 20,000원","text":"2만원"}
 {"cid":"1205","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1205","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"1205","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1280,7 +1280,7 @@
 {"cid":"2022","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2031","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2031","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"2031","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"OPERATOR","src":"operator_homepage","url":"https://www.anseong.go.kr/tourPortal/camp/contents.do?mId=0104010000","at":"2026-10-18T12:28:20.565Z","quote":"외부 : 외등, 220v 콘센트, 평상, 화롯대(바베큐용 숯만 사용 가능)"}
+{"cid":"2031","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"OPERATOR","src":"operator_homepage","url":"https://www.anseong.go.kr/tourPortal/camp/contents.do?mId=0104010000","at":"2026-10-19T09:27:02.748Z","quote":"외부 : 외등, 220v 콘센트, 평상, 화롯대(바베큐용 숯만 사용 가능)"}
 {"cid":"2031","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2031","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2032","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1656,7 +1656,7 @@
 {"cid":"2735","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2735","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"2735","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2750","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://joeunsesang.co.kr/04reser.html","at":"2026-10-19T02:00:09.304Z","quote":"바베큐용숯불셋트(소) : 20,000원 (숯+그릴 제공, 2~4인용, 현장결제)","text":"2만원"}
+{"cid":"2750","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://joeunsesang.co.kr/04reser.html","at":"2026-10-19T09:16:44.544Z","quote":"바베큐용숯불셋트(소) : 20,000원 (숯+그릴 제공, 2~4인용, 현장결제)","text":"2만원"}
 {"cid":"2750","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2750","attr":"FIRE_PIT","value":"NONE","grade":"CONFIRMED","src":"gocamping","text":"불가"}
 {"cid":"2750","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -1967,7 +1967,7 @@
 {"cid":"3198","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3201","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3201","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"3201","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--ob0bvty5ugmjs8wm8c.com/index3.html","at":"2026-10-19T02:23:22.440Z","quote":"FIRE 19:00 - 20:00 불멍 주문 가능 시간입니다."}
+{"cid":"3201","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--ob0bvty5ugmjs8wm8c.com/index3.html","at":"2026-10-19T09:30:19.176Z","quote":"FIRE 19:00 - 20:00 불멍 주문 가능 시간입니다."}
 {"cid":"3201","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3202","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3202","attr":"FIRE_PIT","value":"NONE","grade":"CONFIRMED","src":"gocamping","text":"불가"}
@@ -1977,7 +1977,7 @@
 {"cid":"3203","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3205","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3205","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"3205","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_homepage","url":"https://palbongps.kr/about.html","at":"2026-10-19T02:19:26.162Z","quote":"프라이빗한 개별 바베큐, 불멍까지 즐기실 수 있습니다."}
+{"cid":"3205","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_homepage","url":"https://palbongps.kr/about.html","at":"2026-10-19T09:28:13.816Z","quote":"프라이빗한 개별 바베큐, 불멍까지 즐기실 수 있습니다."}
 {"cid":"3205","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3205","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3206","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2309,7 +2309,7 @@
 {"cid":"3636","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6731","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6731","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"6731","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_discovered","url":"https://www.shsi.or.kr/PageLink.do?tempParam1=&link=forward:/PageContent.do&menuNo=030000&subMenuNo=020600&thirdMenuNo=020601","at":"2026-10-19T01:48:27.155Z","quote":"화재예방 및 안전을 위해 갯골캠핑장 내 숯, 장작은 사용 불가 합니다."}
+{"cid":"6731","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_discovered","url":"https://www.shsi.or.kr/PageLink.do?tempParam1=&link=forward:/PageContent.do&menuNo=030000&subMenuNo=020600&thirdMenuNo=020601","at":"2026-10-19T09:11:39.228Z","quote":"화재예방 및 안전을 위해 갯골캠핑장 내 숯, 장작은 사용 불가 합니다."}
 {"cid":"6731","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6732","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6732","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -2424,7 +2424,7 @@
 {"cid":"6953","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6953","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6957","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"6957","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_discovered","url":"http://cloudedwalk.kr/home","at":"2026-10-18T12:28:28.301Z","quote":"ㆍ외부 장작 또는 화기 반입 금지"}
+{"cid":"6957","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_discovered","url":"https://cloudedwalk.kr/home","at":"2026-10-19T09:27:09.387Z","quote":"ㆍ외부 장작 또는 화기 반입 금지"}
 {"cid":"6957","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6959","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6959","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -2794,7 +2794,7 @@
 {"cid":"7249","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7251","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7251","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"7251","attr":"FIRE_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.bbcamp.kr/?sid=21","at":"2026-10-19T02:01:24.014Z","quote":"- 불멍세트 (장작10kg, 화로대, 장갑 등) 25,000원 별도 추가","text":"2.5만원"}
+{"cid":"7251","attr":"FIRE_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.bbcamp.kr/?sid=21","at":"2026-10-19T09:17:42.978Z","quote":"- 불멍세트 (장작10kg, 화로대, 장갑 등) 25,000원 별도 추가","text":"2.5만원"}
 {"cid":"7251","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7251","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7253","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2840,7 +2840,7 @@
 {"cid":"7314","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"7314","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7318","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7318","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--om2bi2o9qdy7a48exzk3vf68fzzd.kr/room/camping.php","at":"2026-10-19T02:42:49.351Z","quote":"화로대 사용시 숯만 사용가능하며 장작, 솔방울등 캠프파이어를 금지 합니다."}
+{"cid":"7318","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--om2bi2o9qdy7a48exzk3vf68fzzd.kr/room/camping.php","at":"2026-10-19T09:40:58.541Z","quote":"화로대 사용시 숯만 사용가능하며 장작, 솔방울등 캠프파이어를 금지 합니다."}
 {"cid":"7318","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7319","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7319","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -2961,7 +2961,7 @@
 {"cid":"7488","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7490","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7490","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"7490","attr":"FIRE_SET_FEE","value":7000,"grade":"OPERATOR","src":"operator_discovered","url":"https://xn--hy1b58lpofnseb9al4xvxlrb.com/facilities/","at":"2026-10-19T02:40:03.655Z","quote":"(참나무 장작 10kg을 7,000원에 판매합니다.)","text":"7,000원"}
+{"cid":"7490","attr":"FIRE_SET_FEE","value":7000,"grade":"OPERATOR","src":"operator_discovered","url":"https://xn--hy1b58lpofnseb9al4xvxlrb.com/facilities/","at":"2026-10-19T09:39:25.747Z","quote":"(참나무 장작 10kg을 7,000원에 판매합니다.)","text":"7,000원"}
 {"cid":"7490","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7492","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7492","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -3166,7 +3166,7 @@
 {"cid":"7726","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7726","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"7726","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7731","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"https://pureunsoop.co.kr/reservation.html","at":"2026-10-19T02:24:59.761Z","quote":"- 이용 요금: 숯불세트 20,000원 추가 시 10,000원 (1박기준/현장결제)","text":"2만원"}
+{"cid":"7731","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"https://pureunsoop.co.kr/reservation.html","at":"2026-10-19T09:31:10.113Z","quote":"- 이용 요금: 숯불세트 20,000원 추가 시 10,000원 (1박기준/현장결제)","text":"2만원"}
 {"cid":"7731","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7731","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"7731","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3213,7 +3213,7 @@
 {"cid":"7751","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7752","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7752","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"7752","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_discovered","url":"https://rosemoss1glamping.kr/about.html","at":"2026-10-19T02:22:13.328Z","quote":"프라이빗한 개별 바베큐, 불멍까지 즐기실 수 있습니다."}
+{"cid":"7752","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_discovered","url":"https://rosemoss1glamping.kr/about.html","at":"2026-10-19T09:29:42.480Z","quote":"프라이빗한 개별 바베큐, 불멍까지 즐기실 수 있습니다."}
 {"cid":"7752","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7755","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7755","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -3457,7 +3457,7 @@
 {"cid":"7925","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7926","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7926","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"7926","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.xn--oi2bjk57hrxi90pg6fs9b.kr/page/reservation/reservation_InformationUse.html","at":"2026-10-19T01:54:05.732Z","quote":"캠프파이어(모닥불세트/장작포함) : 20,000원 [추가 장작 요청 시 20,000원]","text":"2만원"}
+{"cid":"7926","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.xn--oi2bjk57hrxi90pg6fs9b.kr/page/reservation/reservation_InformationUse.html","at":"2026-10-19T09:13:55.162Z","quote":"캠프파이어(모닥불세트/장작포함) : 20,000원 [추가 장작 요청 시 20,000원]","text":"2만원"}
 {"cid":"7926","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7928","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7928","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -3477,7 +3477,7 @@
 {"cid":"7932","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"7932","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7932","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7934","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--oi2bl1g0yl2ibg8o.com/bbs/faq.php","at":"2026-10-19T02:40:13.479Z","quote":"바비큐 그릴 세트 대여료는 20,000원 이며, 야외그릴, 숯, 석쇠를 제공해 드리고 있습니다.","text":"2만원"}
+{"cid":"7934","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--oi2bl1g0yl2ibg8o.com/bbs/faq.php","at":"2026-10-19T09:39:32.819Z","quote":"바비큐 그릴 세트 대여료는 20,000원 이며, 야외그릴, 숯, 석쇠를 제공해 드리고 있습니다.","text":"2만원"}
 {"cid":"7934","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7934","attr":"FIRE_PIT","value":"NONE","grade":"CONFIRMED","src":"gocamping","text":"불가"}
 {"cid":"7934","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -3864,7 +3864,7 @@
 {"cid":"8202","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8206","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8206","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"8206","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"https://www.clovercamp.co.kr/%EC%98%88%EC%95%BD%EC%95%88%EB%82%B4","at":"2026-10-19T02:50:15.838Z","quote":"- 개인숯, 장작 이용이 안되며 반입 금지 입니다."}
+{"cid":"8206","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"https://www.clovercamp.co.kr/%EC%98%88%EC%95%BD%EC%95%88%EB%82%B4","at":"2026-10-19T09:45:23.945Z","quote":"- 개인숯, 장작 이용이 안되며 반입 금지 입니다."}
 {"cid":"8206","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8206","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8209","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4045,10 +4045,10 @@
 {"cid":"100140","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"100140","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100140","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100141","attr":"BBQ_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"http://moonglamping.co.kr/reserve","at":"2026-10-19T02:15:02.108Z","quote":"- 숯불 세트 25,000원(부탄가스+숯+철망+장갑+점화제)","text":"2.5만원"}
+{"cid":"100141","attr":"BBQ_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"http://moonglamping.co.kr/reserve","at":"2026-10-19T09:25:18.092Z","quote":"- 숯불 세트 25,000원(부탄가스+숯+철망+장갑+점화제)","text":"2.5만원"}
 {"cid":"100141","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100141","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"100141","attr":"FIRE_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"http://moonglamping.co.kr/reserve","at":"2026-10-19T02:15:02.108Z","quote":"- 오로라 불멍세트 25,000원(장작+오로라 가루+점화제)","text":"2.5만원"}
+{"cid":"100141","attr":"FIRE_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"http://moonglamping.co.kr/reserve","at":"2026-10-19T09:25:18.092Z","quote":"- 오로라 불멍세트 25,000원(장작+오로라 가루+점화제)","text":"2.5만원"}
 {"cid":"100141","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100141","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100144","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4436,7 +4436,7 @@
 {"cid":"100324","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100326","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100326","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"100326","attr":"FIRE_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.kglamping.com/pricing","at":"2026-10-19T02:43:21.072Z","quote":"화로, 참나무장작 10kg - 25,000원","text":"2.5만원"}
+{"cid":"100326","attr":"FIRE_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.kglamping.com/pricing","at":"2026-10-19T09:41:20.507Z","quote":"화로, 참나무장작 10kg - 25,000원","text":"2.5만원"}
 {"cid":"100326","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100326","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100327","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4807,7 +4807,7 @@
 {"cid":"100460","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100460","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100464","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100464","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"https://www.dogpalace.kr/index.php/information/","at":"2026-10-19T02:02:53.486Z","quote":"외부(개인) BBQ 소모품(숯, 장작, 그릴망)은 반입이 금지됩니다."}
+{"cid":"100464","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"https://www.dogpalace.kr/index.php/information/","at":"2026-10-19T09:18:56.734Z","quote":"외부(개인) BBQ 소모품(숯, 장작, 그릴망)은 반입이 금지됩니다."}
 {"cid":"100464","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100465","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100465","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -4821,9 +4821,9 @@
 {"cid":"100467","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"100467","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100467","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100468","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://ourforest.co.kr/reservation.php?id=2","at":"2026-10-19T02:35:47.205Z","quote":"바베큐장+숯불+태망 이용요금(음식제공 아님)(돔글램핑존 전용) : 2만원","text":"2만원"}
+{"cid":"100468","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://ourforest.co.kr/reservation.php?id=2","at":"2026-10-19T09:36:52.055Z","quote":"바베큐장+숯불+태망 이용요금(음식제공 아님)(돔글램핑존 전용) : 2만원","text":"2만원"}
 {"cid":"100468","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100468","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://ourforest.co.kr/reservation.php?id=2","at":"2026-10-19T02:35:47.205Z","quote":"불멍세트(장작+마시멜로+오로라가루) : 2만원","text":"2만원"}
+{"cid":"100468","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://ourforest.co.kr/reservation.php?id=2","at":"2026-10-19T09:36:52.055Z","quote":"불멍세트(장작+마시멜로+오로라가루) : 2만원","text":"2만원"}
 {"cid":"100468","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100470","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100470","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -5163,11 +5163,11 @@
 {"cid":"100590","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"100590","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100590","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100592","attr":"BBQ_SET_FEE","value":50000,"grade":"OPERATOR","src":"operator_discovered","url":"http://provenceglamping.com/bbs/board.php?bo_table=w2_1&wr_id=1","at":"2026-10-19T01:46:59.172Z","quote":"숯그릴세트(1세트 2.5만원, 숯추가 1만원, 객실데크 개별바비큐, 숯&그릴 제공)","text":"5만원"}
+{"cid":"100592","attr":"BBQ_SET_FEE","value":50000,"grade":"OPERATOR","src":"operator_discovered","url":"http://provenceglamping.com/bbs/board.php?bo_table=w2_1&wr_id=1","at":"2026-10-19T09:10:12.867Z","quote":"숯그릴세트(1세트 2.5만원, 숯추가 1만원, 객실데크 개별바비큐, 숯&그릴 제공)","text":"5만원"}
 {"cid":"100592","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100592","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"100592","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_discovered","url":"http://provenceglamping.com/bbs/board.php?bo_table=w1_c&wr_id=2","at":"2026-10-19T01:46:59.172Z","quote":"- 라이터, 가스버너, 토치, 화로대, 성냥, 양초, 폭죽 등 불과 관련된 개인화기 사용은 절대 금지되어 있습니다."}
-{"cid":"100592","attr":"FIRE_SET_FEE","value":50000,"grade":"OPERATOR","src":"operator_discovered","url":"http://provenceglamping.com/bbs/board.php?bo_table=w2_1&wr_id=1","at":"2026-10-19T01:46:59.172Z","quote":"불멍세트(1세트 2.5만원, 장작추가 1만원, 테라스 개별불멍, 화로대&장작 제공)","text":"5만원"}
+{"cid":"100592","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_discovered","url":"http://provenceglamping.com/bbs/board.php?bo_table=w1_c&wr_id=2","at":"2026-10-19T09:10:12.867Z","quote":"- 라이터, 가스버너, 토치, 화로대, 성냥, 양초, 폭죽 등 불과 관련된 개인화기 사용은 절대 금지되어 있습니다."}
+{"cid":"100592","attr":"FIRE_SET_FEE","value":50000,"grade":"OPERATOR","src":"operator_discovered","url":"http://provenceglamping.com/bbs/board.php?bo_table=w2_1&wr_id=1","at":"2026-10-19T09:10:12.867Z","quote":"불멍세트(1세트 2.5만원, 장작추가 1만원, 테라스 개별불멍, 화로대&장작 제공)","text":"5만원"}
 {"cid":"100592","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100592","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100594","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -5360,10 +5360,10 @@
 {"cid":"100656","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"100656","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100656","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100657","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b46pgrm22ac17b.com/m/reserve.html?reserve=gd","at":"2026-10-19T02:48:47.683Z","quote":"· 숯불,불판 이용 요금 : 2만원","text":"2만원"}
+{"cid":"100657","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b46pgrm22ac17b.com/m/reserve.html?reserve=gd","at":"2026-10-19T09:44:21.020Z","quote":"· 숯불,불판 이용 요금 : 2만원","text":"2만원"}
 {"cid":"100657","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100657","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"100657","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b46pgrm22ac17b.com/m/reserve.html?reserve=gd","at":"2026-10-19T02:48:47.683Z","quote":"불멍이용 요금 : 2만원","text":"2만원"}
+{"cid":"100657","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b46pgrm22ac17b.com/m/reserve.html?reserve=gd","at":"2026-10-19T09:44:21.020Z","quote":"불멍이용 요금 : 2만원","text":"2만원"}
 {"cid":"100657","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100657","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100659","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -5517,7 +5517,6 @@
 {"cid":"100710","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100711","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100711","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"100711","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_discovered","url":"https://luzern365.kr/special1.html","at":"2026-10-16T05:46:03.551Z","quote":"캠핑사랑 1호(애견O,불멍가능,넷플릭스)"}
 {"cid":"100711","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100711","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100712","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -5579,7 +5578,7 @@
 {"cid":"100729","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100729","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100730","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100730","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--v20b662avzeeob84iwndvwq.com/page/page101","at":"2026-10-19T02:49:21.750Z","quote":"365일 1일 1 불멍 가능"}
+{"cid":"100730","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--v20b662avzeeob84iwndvwq.com/page/page101","at":"2026-10-19T09:44:43.198Z","quote":"365일 1일 1 불멍 가능"}
 {"cid":"100730","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100730","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100731","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -5622,7 +5621,7 @@
 {"cid":"100744","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"100744","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100745","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100745","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_homepage","url":"http://www.onthebeachpoolvilla.com/reservation.php?id=2","at":"2026-10-19T02:49:32.678Z","quote":"불멍용 장작은 현장에서 구매 가능하며 불멍용 화로대도 대여 가능합니다."}
+{"cid":"100745","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_homepage","url":"http://www.onthebeachpoolvilla.com/reservation.php?id=2","at":"2026-10-19T09:44:53.817Z","quote":"불멍용 장작은 현장에서 구매 가능하며 불멍용 화로대도 대여 가능합니다."}
 {"cid":"100745","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100745","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100746","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -5943,7 +5942,7 @@
 {"cid":"100855","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100856","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100856","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"100856","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_discovered","url":"https://mountainvillagecamp.kr/reservation.html","at":"2026-10-19T02:35:38.255Z","quote":"숯, 장작, 전연기구 화기류 반입 금지"}
+{"cid":"100856","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_discovered","url":"https://mountainvillagecamp.kr/reservation.html","at":"2026-10-19T09:36:47.624Z","quote":"숯, 장작, 전연기구 화기류 반입 금지"}
 {"cid":"100856","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100856","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100857","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -5976,7 +5975,7 @@
 {"cid":"100864","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100865","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100865","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"100865","attr":"FIRE_SET_FEE","value":10000,"grade":"OPERATOR","src":"operator_homepage","url":"http://dusonggreen.kr/html/reservation.html","at":"2026-10-19T02:36:53.876Z","quote":"캠핑용 장작 20kg 가격은 1만원에 판매합니다.","text":"1만원"}
+{"cid":"100865","attr":"FIRE_SET_FEE","value":10000,"grade":"OPERATOR","src":"operator_homepage","url":"http://dusonggreen.kr/html/reservation.html","at":"2026-10-19T09:37:24.902Z","quote":"캠핑용 장작 20kg 가격은 1만원에 판매합니다.","text":"1만원"}
 {"cid":"100865","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100866","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100866","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -6054,7 +6053,7 @@
 {"cid":"100886","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100887","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100887","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"100887","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_homepage","url":"https://www.forestbada.com/board/bbs/board.php?bo_table=faq","at":"2026-10-19T02:34:51.260Z","quote":"화로세트만 신청해주시면 바베큐와 불멍 함께 가능합니다."}
+{"cid":"100887","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_homepage","url":"https://www.forestbada.com/board/bbs/board.php?bo_table=faq","at":"2026-10-19T09:36:27.903Z","quote":"화로세트만 신청해주시면 바베큐와 불멍 함께 가능합니다."}
 {"cid":"100887","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100888","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100888","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -6180,7 +6179,7 @@
 {"cid":"100928","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"100928","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100928","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100930","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.dreamglamping.co.kr/html/sub6_reser.html?menu=6&sub=1","at":"2026-10-19T02:34:54.381Z","quote":"바베큐 숯불세트 이용시 숯+그릴+장갑 이용료는 20,000원 입니다.","text":"2만원"}
+{"cid":"100930","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.dreamglamping.co.kr/html/sub6_reser.html?menu=6&sub=1","at":"2026-10-19T09:36:34.254Z","quote":"바베큐 숯불세트 이용시 숯+그릴+장갑 이용료는 20,000원 입니다.","text":"2만원"}
 {"cid":"100930","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100930","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"100930","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -6217,8 +6216,8 @@
 {"cid":"100939","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100940","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100940","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"100940","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_homepage","url":"https://hackberryville.com/faq/","at":"2026-10-19T02:34:27.403Z","quote":"• 장작이 꺼지기 전 틈틈이 장작을 추가 로 넣어주시면 더 오랜 시간 불멍을 즐기실 수 있습니다."}
-{"cid":"100940","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"https://hackberryville.com/faq/","at":"2026-10-19T02:34:27.403Z","quote":"• 불멍 세트는 20,000원의 추가 요금 을 지불하고 이용할 수 있는 서비스입니다.","text":"2만원"}
+{"cid":"100940","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_homepage","url":"https://hackberryville.com/faq/","at":"2026-10-19T09:36:16.635Z","quote":"• 장작이 꺼지기 전 틈틈이 장작을 추가 로 넣어주시면 더 오랜 시간 불멍을 즐기실 수 있습니다."}
+{"cid":"100940","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"https://hackberryville.com/faq/","at":"2026-10-19T09:36:16.635Z","quote":"• 불멍 세트는 20,000원의 추가 요금 을 지불하고 이용할 수 있는 서비스입니다.","text":"2만원"}
 {"cid":"100940","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100940","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100941","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -6297,10 +6296,10 @@
 {"cid":"100966","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100966","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"100966","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100967","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--oi2b43du5aq9nba305er8m3kf3yd.com/theme/basic/pages/reserve.php","at":"2026-10-19T02:37:19.829Z","quote":"· 전기 그릴 + 1구 인덕션 이용료 2만 원, 숯 이용료 2만 원, 불멍 이용료 3만 원 입니다.","text":"2만원"}
+{"cid":"100967","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--oi2b43du5aq9nba305er8m3kf3yd.com/theme/basic/pages/reserve.php","at":"2026-10-19T09:37:38.955Z","quote":"· 전기 그릴 + 1구 인덕션 이용료 2만 원, 숯 이용료 2만 원, 불멍 이용료 3만 원 입니다.","text":"2만원"}
 {"cid":"100967","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100967","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"100967","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--oi2b43du5aq9nba305er8m3kf3yd.com/theme/basic/pages/reserve.php","at":"2026-10-19T02:37:19.829Z","quote":"· 전기 그릴 + 1구 인덕션 이용료 2만 원, 숯 이용료 2만 원, 불멍 이용료 3만 원 입니다.","text":"2만원"}
+{"cid":"100967","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--oi2b43du5aq9nba305er8m3kf3yd.com/theme/basic/pages/reserve.php","at":"2026-10-19T09:37:38.955Z","quote":"· 전기 그릴 + 1구 인덕션 이용료 2만 원, 숯 이용료 2만 원, 불멍 이용료 3만 원 입니다.","text":"2만원"}
 {"cid":"100967","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100967","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100968","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -6411,7 +6410,7 @@
 {"cid":"101003","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101003","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101003","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101005","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://plansignature.com/contents/reserve.html","at":"2026-10-19T02:06:07.548Z","quote":"숯불 바비큐 이용료 : 2~4인 20,000원","text":"2만원"}
+{"cid":"101005","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://plansignature.com/contents/reserve.html","at":"2026-10-19T09:20:40.836Z","quote":"숯불 바비큐 이용료 : 2~4인 20,000원","text":"2만원"}
 {"cid":"101005","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101005","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101005","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -6532,7 +6531,7 @@
 {"cid":"101041","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101043","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101043","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101043","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101043","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101044","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101044","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101044","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -6546,7 +6545,7 @@
 {"cid":"101047","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101048","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101048","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101048","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"http://rahaglamping.com/reserve","at":"2026-10-19T01:37:05.210Z","quote":"개인화기 및 숯 장작 반입 불가"}
+{"cid":"101048","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"http://rahaglamping.com/reserve","at":"2026-10-19T09:02:11.390Z","quote":"개인화기 및 숯 장작 반입 불가"}
 {"cid":"101048","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101048","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101049","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -6561,10 +6560,10 @@
 {"cid":"101051","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101051","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101051","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101052","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.5th-season.co.kr/html/sub6_reser.html","at":"2026-10-19T02:37:30.853Z","quote":"- 바비큐그릴(숯)은 2인 기준 20,000원의 이용료가 있습니다.","text":"2만원"}
+{"cid":"101052","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.5th-season.co.kr/html/sub6_reser.html","at":"2026-10-19T09:37:42.956Z","quote":"- 바비큐그릴(숯)은 2인 기준 20,000원의 이용료가 있습니다.","text":"2만원"}
 {"cid":"101052","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101052","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101052","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"https://www.5th-season.co.kr/html/sub6_reser.html","at":"2026-10-19T02:37:30.853Z","quote":"- 휴대용 가스레인지, 버너, 전기 그릴 등 개인화기는 절대 반입 금지이며, 규정 위반 시 퇴실 조치됩니다."}
+{"cid":"101052","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"https://www.5th-season.co.kr/html/sub6_reser.html","at":"2026-10-19T09:37:42.956Z","quote":"- 휴대용 가스레인지, 버너, 전기 그릴 등 개인화기는 절대 반입 금지이며, 규정 위반 시 퇴실 조치됩니다."}
 {"cid":"101052","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101052","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101053","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -6599,7 +6598,7 @@
 {"cid":"101062","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101063","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101063","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101063","attr":"FIRE_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"https://campnomade.co.kr/faqs/","at":"2026-10-19T02:32:54.412Z","quote":"· 불멍 화로대 — 25,000원(장작 10kg 포함)","text":"2.5만원"}
+{"cid":"101063","attr":"FIRE_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"https://campnomade.co.kr/faqs/","at":"2026-10-19T09:35:41.900Z","quote":"· 불멍 화로대 — 25,000원(장작 10kg 포함)","text":"2.5만원"}
 {"cid":"101063","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101063","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101065","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -6799,10 +6798,10 @@
 {"cid":"101127","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101127","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101127","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101130","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"http://ddglamping.com/contents/reserve.html","at":"2026-10-19T02:27:06.464Z","quote":"바비큐장 숯 이용료 : 30,000원(현장 결제)","text":"3만원"}
+{"cid":"101130","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"http://ddglamping.com/contents/reserve.html","at":"2026-10-19T09:32:57.711Z","quote":"바비큐장 숯 이용료 : 30,000원(현장 결제)","text":"3만원"}
 {"cid":"101130","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101130","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101130","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"OPERATOR","src":"operator_homepage","url":"http://ddglamping.com/contents/reserve.html","at":"2026-10-19T02:27:06.464Z","quote":"바비큐 세트 구성은 필수가 아니며 숯불만 사용 가능하오니 예약 시 참고 바랍니다."}
+{"cid":"101130","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"OPERATOR","src":"operator_homepage","url":"http://ddglamping.com/contents/reserve.html","at":"2026-10-19T09:32:57.711Z","quote":"바비큐 세트 구성은 필수가 아니며 숯불만 사용 가능하오니 예약 시 참고 바랍니다."}
 {"cid":"101130","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101130","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101131","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -6835,7 +6834,7 @@
 {"cid":"101139","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101139","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101139","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101140","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"http://astellarforest.co.kr/theme/basic/reservation.php","at":"2026-10-19T02:33:43.258Z","quote":"· 바비큐 그릴 숯 세트: 3만원 (숯 추가 1만5천원)","text":"3만원"}
+{"cid":"101140","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"http://astellarforest.co.kr/theme/basic/reservation.php","at":"2026-10-19T09:36:09.321Z","quote":"· 바비큐 그릴 숯 세트: 3만원 (숯 추가 1만5천원)","text":"3만원"}
 {"cid":"101140","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101140","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101140","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -7095,7 +7094,7 @@
 {"cid":"101207","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101209","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101209","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101209","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b46p86ic3rr4a.kr/html/reserve.php?cate=01","at":"2026-10-19T02:35:10.712Z","quote":"* 개인 화로대, 장작, 전기그릴, 난로 등 개인 화기 사용불가"}
+{"cid":"101209","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b46p86ic3rr4a.kr/html/reserve.php?cate=01","at":"2026-10-19T09:36:38.315Z","quote":"* 개인 화로대, 장작, 전기그릴, 난로 등 개인 화기 사용불가"}
 {"cid":"101209","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101209","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101210","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -7210,6 +7209,7 @@
 {"cid":"101242","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101243","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101243","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"101243","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_discovered","url":"https://dingdongdang.kr/dingdongdang/reservation/guide","at":"2026-10-19T09:36:50.327Z","quote":"* 숯, 전기그릴, 부르스타, 부탄가스 등 개인화기 절대 사용불가입니다."}
 {"cid":"101243","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101243","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101244","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -7329,9 +7329,10 @@
 {"cid":"101276","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101276","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101276","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101276","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101277","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101277","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101277","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_discovered","url":"https://www.thehillglamping.net/%EC%98%88%EC%95%BD%EC%95%88%EB%82%B4","at":"2026-10-19T02:49:53.136Z","quote":"외부 반입한 장작, 숯은 사용이 불가합니다."}
+{"cid":"101277","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_discovered","url":"https://www.thehillglamping.net/%EC%98%88%EC%95%BD%EC%95%88%EB%82%B4","at":"2026-10-19T09:45:05.656Z","quote":"외부 반입한 장작, 숯은 사용이 불가합니다."}
 {"cid":"101277","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101278","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101278","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -7656,7 +7657,7 @@
 {"cid":"101372","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101373","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101373","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101373","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"https://wfc.gne.go.kr/mss/cm/cntnts/cntntsView.do?mi=13310&cntntsId=6901","at":"2026-10-18T12:41:22.508Z","quote":"휴양원에서는 화재 위험성이 높은 숯, 장작 등 절대 사용금지"}
+{"cid":"101373","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"https://wfc.gne.go.kr/mss/cm/cntnts/cntntsView.do?mi=13310&cntntsId=6901","at":"2026-10-19T09:40:29.860Z","quote":"휴양원에서는 화재 위험성이 높은 숯, 장작 등 절대 사용금지"}
 {"cid":"101373","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101374","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101374","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -7691,10 +7692,10 @@
 {"cid":"101383","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101383","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101383","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101384","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b14h95dtwuvlp59a.com/contents/main.html","at":"2026-10-19T02:15:17.663Z","quote":"바비큐 이용요금 30,000원","text":"3만원"}
+{"cid":"101384","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b14h95dtwuvlp59a.com/contents/main.html","at":"2026-10-19T09:25:31.652Z","quote":"바비큐 이용요금 30,000원","text":"3만원"}
 {"cid":"101384","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101384","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101384","attr":"FIRE_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b14h95dtwuvlp59a.com/contents/main.html","at":"2026-10-19T02:15:17.663Z","quote":"불멍 이용요금 30,000원","text":"3만원"}
+{"cid":"101384","attr":"FIRE_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b14h95dtwuvlp59a.com/contents/main.html","at":"2026-10-19T09:25:31.652Z","quote":"불멍 이용요금 30,000원","text":"3만원"}
 {"cid":"101384","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101384","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101385","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -7730,7 +7731,7 @@
 {"cid":"101393","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101394","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101394","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101394","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_discovered","url":"https://www.starlightcamp.kr/reserve/reserve01.php","at":"2026-10-19T02:19:48.610Z","quote":"방앞 나무데크 취사가능 (불멍가능)"}
+{"cid":"101394","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_discovered","url":"https://www.starlightcamp.kr/reserve/reserve01.php","at":"2026-10-19T09:28:26.675Z","quote":"방앞 나무데크 취사가능 (불멍가능)"}
 {"cid":"101394","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101394","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101395","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8055,11 +8056,11 @@
 {"cid":"101493","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101493","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101493","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101494","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_discovered","url":"http://sanchoncaravan.com/document/reserv","at":"2026-10-19T02:19:51.857Z","quote":"-숯+그릴+장갑세트 : 30,000원(현장결제)","text":"3만원"}
+{"cid":"101494","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_discovered","url":"http://sanchoncaravan.com/document/reserv","at":"2026-10-19T09:28:29.371Z","quote":"-숯+그릴+장갑세트 : 30,000원(현장결제)","text":"3만원"}
 {"cid":"101494","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101494","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101494","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_discovered","url":"http://sanchoncaravan.com/document/reserv","at":"2026-10-19T02:19:51.857Z","quote":"- 개인 숯 및 장작 화기용품 사용 불가합니다."}
-{"cid":"101494","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_discovered","url":"http://sanchoncaravan.com/document/reserv","at":"2026-10-19T02:19:51.857Z","quote":"-불멍화로대+장작세트:20,000원(현장결제)","text":"2만원"}
+{"cid":"101494","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_discovered","url":"http://sanchoncaravan.com/document/reserv","at":"2026-10-19T09:28:29.371Z","quote":"- 개인 숯 및 장작 화기용품 사용 불가합니다."}
+{"cid":"101494","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_discovered","url":"http://sanchoncaravan.com/document/reserv","at":"2026-10-19T09:28:29.371Z","quote":"-불멍화로대+장작세트:20,000원(현장결제)","text":"2만원"}
 {"cid":"101494","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101494","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101495","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8103,7 +8104,7 @@
 {"cid":"101507","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101508","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101508","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101508","attr":"FIRE_SET_FEE","value":15000,"grade":"OPERATOR","src":"operator_homepage","url":"https://joypark24h.com/_vb/page/sub/detail_02.html","at":"2026-10-19T02:17:32.753Z","quote":"셀프 불멍 키트 15,000원 지정된 불멍 공간에서 이용","text":"1.5만원"}
+{"cid":"101508","attr":"FIRE_SET_FEE","value":15000,"grade":"OPERATOR","src":"operator_homepage","url":"https://joypark24h.com/_vb/page/sub/detail_02.html","at":"2026-10-19T09:27:18.714Z","quote":"셀프 불멍 키트 15,000원 지정된 불멍 공간에서 이용","text":"1.5만원"}
 {"cid":"101508","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101508","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101510","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8174,7 +8175,7 @@
 {"cid":"101531","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101531","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101531","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101532","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"http://8seasons.co.kr/","at":"2026-10-19T02:19:53.158Z","quote":"· BBQ 그릴 이용료 3만 원입니다.","text":"3만원"}
+{"cid":"101532","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"http://8seasons.co.kr/","at":"2026-10-19T09:28:33.619Z","quote":"· BBQ 그릴 이용료 3만 원입니다.","text":"3만원"}
 {"cid":"101532","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101532","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101532","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8271,7 +8272,7 @@
 {"cid":"101566","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101566","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101566","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101568","attr":"BBQ_SET_FEE","value":10000,"grade":"OPERATOR","src":"operator_discovered","url":"https://triple.guide/hotels/104552eb-5870-4755-96a4-172d501e656a","at":"2026-10-19T02:28:08.066Z","quote":"동물먹이주기체험 or 카페음료중 택1 제공 해드립니다 [편의시설 및 테마] [바비큐 시설] * 개인 바베큐 그릴 대여 가능 * 바비큐 : (숯+그릴)세트 10,000원 * 불멍 : 장작 1망 10,000원 [수영장 시설] * 무료 캠핑을 즐김과 동시…","text":"1만원"}
+{"cid":"101568","attr":"BBQ_SET_FEE","value":10000,"grade":"OPERATOR","src":"operator_discovered","url":"https://triple.guide/hotels/104552eb-5870-4755-96a4-172d501e656a","at":"2026-10-19T09:33:35.509Z","quote":"동물먹이주기체험 or 카페음료중 택1 제공 해드립니다 [편의시설 및 테마] [바비큐 시설] * 개인 바베큐 그릴 대여 가능 * 바비큐 : (숯+그릴)세트 10,000원 * 불멍 : 장작 1망 10,000원 [수영장 시설] * 무료 캠핑을 즐김과 동시…","text":"1만원"}
 {"cid":"101568","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101568","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101568","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8353,7 +8354,7 @@
 {"cid":"101592","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101592","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101592","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101593","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_discovered","url":"http://xn--bj0b14hh2dcfu72e5yb5v7b.com/?page_id=6758","at":"2026-10-19T02:37:57.898Z","quote":"숯불 이용요금 2인 기준 2만원(인원 추가시 1인당 5,000원 추가)입니다.","text":"2만원"}
+{"cid":"101593","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_discovered","url":"http://xn--bj0b14hh2dcfu72e5yb5v7b.com/?page_id=6758","at":"2026-10-19T09:37:54.291Z","quote":"숯불 이용요금 2인 기준 2만원(인원 추가시 1인당 5,000원 추가)입니다.","text":"2만원"}
 {"cid":"101593","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101593","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101593","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8361,10 +8362,10 @@
 {"cid":"101594","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101594","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101594","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101595","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"https://sunjedahm.com/reservation/information/","at":"2026-10-19T02:26:17.108Z","quote":"바비큐 그릴 이용료는 3만 원입니다.","text":"3만원"}
+{"cid":"101595","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"https://sunjedahm.com/reservation/information/","at":"2026-10-19T09:32:23.868Z","quote":"바비큐 그릴 이용료는 3만 원입니다.","text":"3만원"}
 {"cid":"101595","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101595","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101595","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"https://sunjedahm.com/reservation/information/","at":"2026-10-19T02:26:17.108Z","quote":"불멍세트 이용료는 2만 원입니다.","text":"2만원"}
+{"cid":"101595","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"https://sunjedahm.com/reservation/information/","at":"2026-10-19T09:32:23.868Z","quote":"불멍세트 이용료는 2만 원입니다.","text":"2만원"}
 {"cid":"101595","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101595","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101596","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8433,7 +8434,7 @@
 {"cid":"101614","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101616","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101616","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101616","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"http://starlightcamping.net/contents/reserve.html","at":"2026-10-19T02:38:25.132Z","quote":"외부에서 버너, 숯 등 모든 화기 반입금지 : 위반 시 퇴실 조치됩니다."}
+{"cid":"101616","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"http://starlightcamping.net/contents/reserve.html","at":"2026-10-19T09:38:08.842Z","quote":"외부에서 버너, 숯 등 모든 화기 반입금지 : 위반 시 퇴실 조치됩니다."}
 {"cid":"101616","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101617","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101617","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -8456,10 +8457,10 @@
 {"cid":"101622","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101622","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101622","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101623","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://danyangglamping.com/contents/reserve.html","at":"2026-10-19T02:16:14.116Z","quote":"바비큐(숯+그릴+석쇠) 이용 요금: 2~4인 20,000원","text":"2만원"}
+{"cid":"101623","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://danyangglamping.com/contents/reserve.html","at":"2026-10-19T09:26:30.633Z","quote":"바비큐(숯+그릴+석쇠) 이용 요금: 2~4인 20,000원","text":"2만원"}
 {"cid":"101623","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101623","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101623","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://danyangglamping.com/contents/reserve.html","at":"2026-10-19T02:16:14.116Z","quote":"불멍 이용 요금: 1회 20,000원 (장작 추가 10kg 15,000원)","text":"2만원"}
+{"cid":"101623","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://danyangglamping.com/contents/reserve.html","at":"2026-10-19T09:26:30.633Z","quote":"불멍 이용 요금: 1회 20,000원 (장작 추가 10kg 15,000원)","text":"2만원"}
 {"cid":"101623","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101623","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101624","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8654,9 +8655,9 @@
 {"cid":"101687","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101688","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101688","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101689","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_discovered","url":"http://xn--2j1b40g0uesa0dx48c81gl5s.com/document/reserv","at":"2026-10-19T01:51:59.778Z","quote":"- 숯+그릴세트 20,000원","text":"2만원"}
+{"cid":"101689","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_discovered","url":"http://xn--2j1b40g0uesa0dx48c81gl5s.com/document/reserv","at":"2026-10-19T09:13:00.638Z","quote":"- 숯+그릴세트 20,000원","text":"2만원"}
 {"cid":"101689","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101689","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_discovered","url":"http://xn--2j1b40g0uesa0dx48c81gl5s.com/document/reserv","at":"2026-10-19T01:51:59.778Z","quote":"- 불멍세트 20,000원","text":"2만원"}
+{"cid":"101689","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_discovered","url":"http://xn--2j1b40g0uesa0dx48c81gl5s.com/document/reserv","at":"2026-10-19T09:13:00.638Z","quote":"- 불멍세트 20,000원","text":"2만원"}
 {"cid":"101689","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101690","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101690","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -8666,6 +8667,8 @@
 {"cid":"101696","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101696","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101696","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101698","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101698","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101705","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101705","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101705","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8676,9 +8679,9 @@
 {"cid":"101710","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101710","attr":"FIRE_PIT","value":"NONE","grade":"CONFIRMED","src":"gocamping","text":"불가"}
 {"cid":"101710","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101712","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_discovered","url":"https://sagyedom.com/web3/02facilities.html","at":"2026-10-19T02:23:54.710Z","quote":"- 바비큐 시설 이용료 (숯+석쇠+친환경 피어콘 착화탄) : 20,000원","text":"2만원"}
+{"cid":"101712","attr":"BBQ_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_discovered","url":"https://sagyedom.com/web3/02facilities.html","at":"2026-10-19T09:30:36.822Z","quote":"- 바비큐 시설 이용료 (숯+석쇠+친환경 피어콘 착화탄) : 20,000원","text":"2만원"}
 {"cid":"101712","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101712","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_discovered","url":"https://sagyedom.com/web3/02facilities.html","at":"2026-10-19T02:23:54.710Z","quote":"- 불멍 가능 (1회 20,000원)"}
+{"cid":"101712","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_discovered","url":"https://sagyedom.com/web3/02facilities.html","at":"2026-10-19T09:30:36.822Z","quote":"- 불멍 가능 (1회 20,000원)"}
 {"cid":"101712","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101714","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101714","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -8695,7 +8698,7 @@
 {"cid":"101723","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101723","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101723","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101724","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_discovered","url":"https://www.thebeachglamping.com/info.php","at":"2026-10-19T02:16:31.414Z","quote":"숯불 이용 요금 : 3만원 (현장 결제)","text":"3만원"}
+{"cid":"101724","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_discovered","url":"https://www.thebeachglamping.com/info.php","at":"2026-10-19T09:26:45.598Z","quote":"숯불 이용 요금 : 3만원 (현장 결제)","text":"3만원"}
 {"cid":"101724","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101724","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101724","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8760,7 +8763,7 @@
 {"cid":"101756","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101756","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101756","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101757","attr":"BBQ_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_discovered","url":"http://bomoonho.com/contents/reserve1.html","at":"2026-10-19T02:22:39.118Z","quote":"바비큐 이용 요금(숯+그릴): 1회 25,000원 (현장결제)","text":"2.5만원"}
+{"cid":"101757","attr":"BBQ_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_discovered","url":"http://bomoonho.com/contents/reserve1.html","at":"2026-10-19T09:29:56.525Z","quote":"바비큐 이용 요금(숯+그릴): 1회 25,000원 (현장결제)","text":"2.5만원"}
 {"cid":"101757","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101757","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101759","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8781,10 +8784,10 @@
 {"cid":"101764","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101764","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101764","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101766","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.glamforet.com/contents/reserve1.html","at":"2026-10-19T02:16:15.241Z","quote":"바비큐(숯+그릴) 이용 요금: 1회 30,000원","text":"3만원"}
+{"cid":"101766","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.glamforet.com/contents/reserve1.html","at":"2026-10-19T09:26:30.830Z","quote":"바비큐(숯+그릴) 이용 요금: 1회 30,000원","text":"3만원"}
 {"cid":"101766","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101766","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101766","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.glamforet.com/contents/reserve1.html","at":"2026-10-19T02:16:15.241Z","quote":"불멍 이용 요금(장작 10kg) : 20,000원","text":"2만원"}
+{"cid":"101766","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.glamforet.com/contents/reserve1.html","at":"2026-10-19T09:26:30.830Z","quote":"불멍 이용 요금(장작 10kg) : 20,000원","text":"2만원"}
 {"cid":"101766","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101766","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101767","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8815,7 +8818,7 @@
 {"cid":"101776","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101777","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101777","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101777","attr":"FIRE_SET_FEE","value":10000,"grade":"OPERATOR","src":"operator_homepage","url":"https://mountainandcompanioncamping.co.kr/pages/history","at":"2026-10-18T12:28:08.245Z","quote":"장작 10kg 10,000원","text":"1만원"}
+{"cid":"101777","attr":"FIRE_SET_FEE","value":10000,"grade":"OPERATOR","src":"operator_homepage","url":"https://mountainandcompanioncamping.co.kr/pages/history","at":"2026-10-19T09:26:52.318Z","quote":"장작 10kg 10,000원","text":"1만원"}
 {"cid":"101777","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101777","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101778","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8849,12 +8852,12 @@
 {"cid":"101796","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101804","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101804","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101804","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_discovered","url":"http://jejuincaravan.com/contents/reserve.html","at":"2026-10-19T02:16:15.937Z","quote":"외부에서 버너, 숯 등 모든 화기 반입금지 : 위반 시 퇴실 조치됩니다."}
+{"cid":"101804","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_discovered","url":"http://jejuincaravan.com/contents/reserve.html","at":"2026-10-19T09:26:31.313Z","quote":"외부에서 버너, 숯 등 모든 화기 반입금지 : 위반 시 퇴실 조치됩니다."}
 {"cid":"101804","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101805","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"https://dauphin.co.kr/about/","at":"2026-10-19T02:16:42.844Z","quote":"바비큐세트 : 30,000원 (숯+착화제+바비큐 그릴)","text":"3만원"}
+{"cid":"101805","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"https://dauphin.co.kr/about/","at":"2026-10-19T09:26:54.812Z","quote":"바비큐세트 : 30,000원 (숯+착화제+바비큐 그릴)","text":"3만원"}
 {"cid":"101805","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101805","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"101805","attr":"FIRE_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"https://dauphin.co.kr/about/","at":"2026-10-19T02:16:42.844Z","quote":"불멍세트 : 25,000원 (장작 10kg+착화제+화로대)","text":"2.5만원"}
+{"cid":"101805","attr":"FIRE_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"https://dauphin.co.kr/about/","at":"2026-10-19T09:26:54.812Z","quote":"불멍세트 : 25,000원 (장작 10kg+착화제+화로대)","text":"2.5만원"}
 {"cid":"101805","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101805","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101812","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8908,7 +8911,7 @@
 {"cid":"101845","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101845","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101845","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101846","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--bj0b46pn1aqw69ae4kqppdkf200a63f.kr/07cs.html","at":"2026-10-19T02:26:19.592Z","quote":"- 바비큐세트 추가시 1인 30,000원","text":"3만원"}
+{"cid":"101846","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--bj0b46pn1aqw69ae4kqppdkf200a63f.kr/07cs.html","at":"2026-10-19T09:32:24.145Z","quote":"- 바비큐세트 추가시 1인 30,000원","text":"3만원"}
 {"cid":"101846","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101846","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"101846","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -9117,8 +9120,8 @@
 {"cid":"101973","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101973","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101974","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101974","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"http://bcampplace.gp114.net/contents/reserve.html","at":"2026-10-19T02:24:01.081Z","quote":"외부에서 반입하는 숯 및 장작, 화기도구는 반입이 불가합니다."}
-{"cid":"101974","attr":"FIRE_SET_FEE","value":15000,"grade":"OPERATOR","src":"operator_homepage","url":"http://bcampplace.gp114.net/contents/reserve.html","at":"2026-10-19T02:24:01.081Z","quote":"불멍 장작 10kg 요금: 15,000원","text":"1.5만원"}
+{"cid":"101974","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"http://bcampplace.gp114.net/contents/reserve.html","at":"2026-10-19T09:30:44.504Z","quote":"외부에서 반입하는 숯 및 장작, 화기도구는 반입이 불가합니다."}
+{"cid":"101974","attr":"FIRE_SET_FEE","value":15000,"grade":"OPERATOR","src":"operator_homepage","url":"http://bcampplace.gp114.net/contents/reserve.html","at":"2026-10-19T09:30:44.504Z","quote":"불멍 장작 10kg 요금: 15,000원","text":"1.5만원"}
 {"cid":"101974","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101976","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101976","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -9167,7 +9170,7 @@
 {"cid":"102000","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102003","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102003","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"102003","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"http://badayosae.com/reserve.html?reserve=gd","at":"2026-10-19T02:16:52.625Z","quote":"카라반 내 취사 및 화기 사용 금지"}
+{"cid":"102003","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"http://badayosae.com/reserve.html?reserve=gd","at":"2026-10-19T09:27:02.264Z","quote":"카라반 내 취사 및 화기 사용 금지"}
 {"cid":"102003","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102003","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102004","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -9179,7 +9182,7 @@
 {"cid":"102005","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102006","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102006","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
-{"cid":"102006","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_homepage","url":"http://www.whitecamp.co.kr/guide.html","at":"2026-10-19T02:13:57.474Z","quote":"관리사무실에서 종량제 쓰레기 봉투, 장작 구매 가능"}
+{"cid":"102006","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_homepage","url":"http://www.whitecamp.co.kr/guide.html","at":"2026-10-19T09:24:48.713Z","quote":"관리사무실에서 종량제 쓰레기 봉투, 장작 구매 가능"}
 {"cid":"102006","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102007","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102007","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -9298,9 +9301,9 @@
 {"cid":"102114","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102116","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102116","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102117","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_discovered","url":"http://artemisresort.co.kr/reserve","at":"2026-10-19T02:13:30.787Z","quote":"숯불 이용료 : 30,000원","text":"3만원"}
+{"cid":"102117","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_discovered","url":"http://artemisresort.co.kr/reserve","at":"2026-10-19T09:24:35.341Z","quote":"숯불 이용료 : 30,000원","text":"3만원"}
 {"cid":"102117","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102117","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_discovered","url":"http://artemisresort.co.kr/reserve","at":"2026-10-19T02:13:30.787Z","quote":"불멍 이용료 : 20,000원","text":"2만원"}
+{"cid":"102117","attr":"FIRE_SET_FEE","value":20000,"grade":"OPERATOR","src":"operator_discovered","url":"http://artemisresort.co.kr/reserve","at":"2026-10-19T09:24:35.341Z","quote":"불멍 이용료 : 20,000원","text":"2만원"}
 {"cid":"102117","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102119","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102119","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -9392,14 +9395,14 @@
 {"cid":"102194","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102194","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102200","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102200","attr":"FIRE_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_discovered","url":"http://gyeongjurang.com/contents/reserve.html","at":"2026-10-19T02:08:28.537Z","quote":"장작 10kg 1회 3만원","text":"3만원"}
+{"cid":"102200","attr":"FIRE_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_discovered","url":"http://gyeongjurang.com/contents/reserve.html","at":"2026-10-19T09:21:56.620Z","quote":"장작 10kg 1회 3만원","text":"3만원"}
 {"cid":"102200","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102201","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102201","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"102201","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102206","attr":"BBQ_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"https://orchardbliss.co.kr/faq","at":"2026-10-19T01:47:48.194Z","quote":"숯불 그릴 세트는 현장에서 25,000원에 구매 가능하며, 토치와 점화제가 포함됩니다.","text":"2.5만원"}
+{"cid":"102206","attr":"BBQ_SET_FEE","value":25000,"grade":"OPERATOR","src":"operator_homepage","url":"https://orchardbliss.co.kr/faq","at":"2026-10-19T09:11:10.549Z","quote":"숯불 그릴 세트는 현장에서 25,000원에 구매 가능하며, 토치와 점화제가 포함됩니다.","text":"2.5만원"}
 {"cid":"102206","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102206","attr":"FIRE_SET_FEE","value":15000,"grade":"OPERATOR","src":"operator_homepage","url":"https://orchardbliss.co.kr/faq","at":"2026-10-19T01:47:48.194Z","quote":"불멍용 장작 세트는 현장에서 15,000원에 구매 가능합니다.","text":"1.5만원"}
+{"cid":"102206","attr":"FIRE_SET_FEE","value":15000,"grade":"OPERATOR","src":"operator_homepage","url":"https://orchardbliss.co.kr/faq","at":"2026-10-19T09:11:10.549Z","quote":"불멍용 장작 세트는 현장에서 15,000원에 구매 가능합니다.","text":"1.5만원"}
 {"cid":"102206","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102209","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102209","attr":"FIRE_PIT","value":"NONE","grade":"CONFIRMED","src":"gocamping","text":"불가"}
@@ -9479,6 +9482,7 @@
 {"cid":"102324","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102331","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102331","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"102331","attr":"FIRE_RULE","value":"FIREWOOD_OK","grade":"OPERATOR","src":"operator_homepage","url":"https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1","at":"2026-10-19T09:04:26.478Z","quote":"불멍 난로는 펜션 매점에서 판매하는 장작으로만 사용 가능합니다."}
 {"cid":"102331","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102334","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102334","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}

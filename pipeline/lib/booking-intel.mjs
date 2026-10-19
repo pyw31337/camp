@@ -4,6 +4,7 @@
 // 모든 함수는 순수 함수다(파일·네트워크 접근 없음). 기본 플랫폼 목록은 registry/booking-platforms.json.
 
 import DEFAULT_REGISTRY from "../registry/booking-platforms.json" with { type: "json" };
+import DEAD_HOSTS from "../registry/dead-booking-hosts.json" with { type: "json" };
 import { addDays, clampDay, kstDate, mondayOf, nowInKst, toKstDay, toKstIso, toYearMonth } from "./kst.mjs";
 
 export { DEFAULT_REGISTRY };
@@ -23,6 +24,14 @@ function compile(registry) {
 }
 
 const BAD_HOST = /(^|\.)(example\.(com|org|net)|localhost|test|invalid)$/i;
+// 연결이 끊긴 예약 호스트(2026-10-19 전수 조사). ticketplay.zone 등.
+const DEAD_SUFFIX = /(^|\.)ticketplay\.zone$/i;
+const DEAD_HOST_SET = new Set((DEAD_HOSTS.hosts ?? []).map((h) => h.toLowerCase()));
+const deadHost = (hostname) => {
+  const h = String(hostname ?? "").toLowerCase();
+  if (DEAD_SUFFIX.test(h) || DEAD_HOST_SET.has(h)) return true;
+  return (DEAD_HOSTS.suffixes ?? []).some((s) => h === s || h.endsWith(`.${s}`));
+};
 
 /** 문자열 → 정규화한 http(s) URL. 형식이 틀리거나 예시 도메인이면 null */
 export function normalizeUrl(u) {
@@ -31,7 +40,7 @@ export function normalizeUrl(u) {
   const v = /^https?:\/\//i.test(s) ? s : `http://${s.replace(/^\/+/, "")}`;
   try {
     const url = new URL(v);
-    if (!url.hostname.includes(".") || BAD_HOST.test(url.hostname)) return null;
+    if (!url.hostname.includes(".") || BAD_HOST.test(url.hostname) || deadHost(url.hostname)) return null;
     return url.toString();
   } catch { return null; }
 }

@@ -1,0 +1,73 @@
+name: Booking engine site facts (thankq)
+
+# 땡큐캠핑(캠퍼스토리 엔진) 공개 예약 화면 — robots.txt `User-agent: * / Allow: /` — 에서
+# 업장이 등록한 사이트 사실(규격·바닥·요금·입퇴실)을 읽어 registry/thankq.json에 남기고 바로 화면에 반영한다(증분 발행).
+# 봇 이름 공개, 호스트 간격 2초, 실행당 요청 상한. 자세한 내용: docs/PRIVATE_AVAILABILITY_RESEARCH.md
+# 빈자리(사이트 상태) 화면 발행은 원천 승인 전까지 끈다: 저장소 변수 THANKQ_VACANCY_PUBLISH=on일 때만 vacancy.json을 쓴다.
+# 수집 자체를 멈추려면 저장소 변수 THANKQ_ENABLED=off.
+on:
+  schedule:
+    # 매일 06:13·18:13 KST (평일 업무 시간 08~18시를 피한다)
+    - cron: "13 21 * * *"
+    - cron: "13 9 * * *"
+  workflow_dispatch:
+    inputs:
+      match_max:
+        description: "이름 매칭 조회 상한 (기본 1500)"
+        required: false
+        default: "1500"
+      max_requests:
+        description: "실행당 전체 요청 상한 (기본 2500)"
+        required: false
+        default: "2500"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: thankq-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    if: vars.THANKQ_ENABLED != 'off'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    defaults:
+      run:
+        working-directory: pipeline
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: pipeline/package-lock.json
+      - run: npm ci
+      - run: node --test test/thankq.test.mjs
+      - name: Read booking-engine site lists
+        env:
+          THANKQ_MATCH_MAX: ${{ github.event.inputs.match_max || '1500' }}
+          THANKQ_MAX_REQUESTS: ${{ github.event.inputs.max_requests || '2500' }}
+          THANKQ_MINUTES: "95"
+          THANKQ_VACANCY_PUBLISH: ${{ vars.THANKQ_VACANCY_PUBLISH || 'off' }}
+        run: node scripts/collect-thankq.mjs
+      - name: Commit registry
+        # 중간에 멈춰도 그때까지 저장된 매칭·사이트 사실은 남긴다.
+        if: always()
+        run: |
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add registry/thankq.json
+          if [ -f ../camping-atlas/public/explore/data/vacancy.json ]; then git add ../camping-atlas/public/explore/data/vacancy.json; fi
+          if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
+          git commit -m "chore(data): refresh booking-engine site facts (thankq)"
+          for i in 1 2 3 4; do
+            if git pull -q --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push -q; then exit 0; fi
+            sleep $((i * 5))
+          done
+          exit 1
+      - name: Publish to the site now (incremental)
+        if: always() && github.event_name != 'pull_request'
+        continue-on-error: true
+        run: bash scripts/publish-incremental.sh "booking-engine site facts"

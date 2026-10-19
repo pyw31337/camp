@@ -18,6 +18,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { downloadImage, isOfficialImageUrl, mapLimit, safeCampId } from "../lib/images.mjs";
+import { photoKey } from "../lib/photo-dedupe.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const num = (k, d) => (Number.isFinite(Number(process.env[k])) && process.env[k] !== "" && process.env[k] != null ? Number(process.env[k]) : d);
@@ -29,8 +30,6 @@ const CONC = num("CARD_CONCURRENCY", 4);
 const dataDir = join(root, "camping-atlas/public/explore/data");
 const cardsDir = join(MEDIA_DIR, "cards");
 
-// 고캠핑 원본·썸네일은 같은 파일명을 쓴다. 대표 사진과 같은 장면은 빼려고 파일명으로 비교한다.
-const fileKey = (u) => String(u).match(/\/upload\/camp\/\d+\/(?:thumb\/thumb_\d+_)?([\w.-]+)/)?.[1] ?? u;
 const urlHash = (u) => createHash("sha256").update(String(u)).digest("hex").slice(0, 10);
 
 const catalog = new Map(JSON.parse(await readFile(join(dataDir, "campgrounds.json"), "utf8")).map((c) => [String(c.id), c]));
@@ -39,12 +38,13 @@ for (const f of await readdir(join(dataDir, "camps"))) {
   const id = f.replace(/\.json$/, "");
   if (!safeCampId(id)) continue;
   const d = JSON.parse(await readFile(join(dataDir, "camps", f), "utf8"));
-  const hero = catalog.get(id)?.img ? fileKey(catalog.get(id).img) : null;
-  const seen = new Set(hero ? [hero] : []);
+  const heroImg = catalog.get(id)?.img ? photoKey(catalog.get(id).img) : null;
+  const heroThumb = catalog.get(id)?.ph ? photoKey(catalog.get(id).ph) : null;
+  const seen = new Set([heroImg, heroThumb].filter(Boolean));
   const list = [];
   for (const raw of d.photos_remote ?? []) {
     const url = String(raw).replace(/^http:/, "https:");
-    const k = fileKey(url);
+    const k = photoKey(url);
     if (seen.has(k) || !isOfficialImageUrl(url)) continue;
     seen.add(k);
     list.push({ url, rel: `cards/${id}/${urlHash(url)}.webp` });

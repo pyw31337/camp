@@ -1,23 +1,69 @@
 # 인수인계
 
-> 최종 갱신: 2026-10-20 KST(이용 제한·운영 공지 및 320px 폭 검증) — 맨 위 ‘📌 공지’부터 읽을 것<br>
+> 최종 갱신: 2026-10-19 KST(플랫폼 허브 구현 확인, 작업 전파 정책 명시) — 맨 위 ‘📌 공지’부터 읽을 것<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
 
-## 📌 이용 제한·운영 공지 화면 반영 (2026-10-20, Codex)
 
-- 상세는 기존 `operator_snippets`의 규정 문장을 `이용 제한`과 `이용 수칙`으로 먼저 분리한다. **2,575개 상세 JSON**에 금지·불가·제한·시간·반려동물 등 관련 문장이 하나 이상 있어, 신규 추정 없이 보유한 원문 근거를 우선 쓴다.
-- 각 규칙은 짧은 서비스 문장으로만 읽고, 작은 `i`에 수집 원문·확인일을 보존한다. 원문을 직접 열 수 있는 경우 `운영 안내 원문` 목록을 함께 보여 준다. 운영 공지·요금/환불·입퇴실도 같은 원문 링크 계약을 쓴다.
-- 카드 배지는 실제 W 수치(예: `600W`)만 전기 긍정 배지로 보인다. 일반적인 전기·온수 가능은 상세 행에서만 보이고, `전기/장작/숯불/온수/반려견 불가`는 같은 아이콘의 빨간 제한 배지로 분리한다. 규칙 값·배지 모두 원천/등급이 있을 때만 표시한다.
-- 1박 요금이 10만원 이상이어도 유형을 추측하지 않는다. 등록된 `GLAMPING`·`CARAVAN` 유형이 있을 때만 해당 요금대를, 20만원 이상이면서 `HOUSE`가 있을 때만 `숙박동·펜션형`을 덧붙인다.
-- `data-extras`의 긴 병원·시설명이 320px 문서 폭을 늘리던 문제를 고쳤다. `#/c/1264`, `#/c/483`을 320px에서 확인해 `scrollWidth === clientWidth`를 확인했다.
-- 검증: `node --test pipeline/test/design-source-guard.test.mjs` 통과, `npm --prefix camping-atlas run lint` 오류 0(기존 미사용 변수 경고 7건), `npm --prefix pipeline run check:billing` 무료 구간 통과, `npm --prefix camping-atlas run build:pages` 통과. `design-source-guard`는 한글 경로에서 URL 인코딩된 pathname을 Node에 넘기던 오류를 `fileURLToPath`으로 고쳤다.
 
-## 📌 전국 날짜 필터 제거 · 실제 잔여만 별도 표기 (2026-10-19, Codex — 소유자 결정)
+## 📌 실시간 인기 섹션 (2026-10-19 밤)
 
-- **전국 검색에는 날짜 입력·URL 파라미터·날짜 기반 제외를 두지 않는다.** 전국 3천여 곳 중 실시간 재고를 확인하지 못한 업장을 날짜 조건 때문에 목록에서 빼면 거짓 음성이 되어 신뢰를 해치기 때문이다.
-- 히어로는 `권역 → 캠핑장명 → 조건 → 찾기`, 결과 주소는 `#/list?area=…&q=…`다. 결과는 모든 일치 업장을 왼쪽 공식 사진 최대 5장 캐러셀·오른쪽 정규 스펙의 가로 행으로 보인다.
-- `이번 주말`만 별도 관측 묶음이다. `LIVE_AVAILABLE`이면서 `inventory_verified`, 원천 URL, 관측 시각, 시설·상품·이용일, 양수 잔여 수량을 모두 가진 값만 넣는다. `OFFICIAL_APPLICATION_OPEN`은 접수 상태일 뿐 빈자리로 표시하지 않으며, 관측값이 없다고 매진으로 쓰지 않는다.
-- 변경 단일 원본은 `design/renewal/{app.js,style.css}`이며 `node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public/explore`로 `/`와 `/explore/` 산출물을 함께 갱신한다. 2026-10-19 병합 후 형식 점검·linter·Pages 빌드·320px/데스크톱 확인을 다시 실행한다.
+- 2026-10-19 실시간 인기: `trending.yml`(매일 22:47 KST) → `public/context/trending.json`, 홈 ‘곧 오픈’ 다음 칸. 호출 상한·빠진 플랫폼은 docs/TRENDING.md, 주기는 SYNC_CADENCE.md.
+
+## 📌 빈자리 표시 안 함 · 히어로 문구 · 주변시설 사진 · 전체 재빌드 이어받기 (2026-10-19 밤, Claude → 전 에이전트)
+
+- **소유자 결정: 빈자리는 표시하지 않는다**(전국 전부가 아니면 의미 없음). `THANKQ_VACANCY_PUBLISH` 켜지 말 것, 빈자리 제보·예약 달력 추출 기획 중단. 땡큐캠핑은 사이트 사실 수집만.
+- 히어로: `취향대로 찾아 떠나는 / 전국 N개 자연 속으로.`(`homeView`). 빈자리 약속 문구 금지.
+- 주변시설 실제 모습: **로드뷰 버튼(카카오 지도 JS SDK)**. 검색 사진(`collect-nearby-photos.mjs`·`nearby-photos.yml`)은 첫 실행 표본 정확도 약 20%라 **매일 실행 중지·화면 미사용**(`build-nearby-photos.mjs`는 기본으로 붙은 검색 사진을 걷어 냄, `NEARBY_SEARCH_PHOTOS=on`일 때만 붙임).
+- data-sync 전체 재빌드(`build-explore-data.mjs`): 이번 캐시에 없는 캠핑장은 직전 발행본의 후기·카페·사진·영상·웹 언급·요금 언급을 이어받는다(회귀 가드에 매번 막히던 원인 제거).
+
+## 📌 상세 레이아웃·주간 날씨 통일·전 화면 보정 (2026-10-19 저녁, Claude → Codex·전 에이전트)
+
+- 상세 오른쪽 세로 예약 칸 없음: 예약 카드는 `.d-head` 안 `.d-side`(제목 오른쪽, 태블릿 이하 제목 아래). `.d-body`는 한 열. 상세에 새 섹션을 넣을 때 `d-main` 안에만 넣는다.
+- 주간 날씨: `conditions/card.js`의 `.fc-day` 버튼에 `data-fc-*`(rel·ic·desc·tmin·tmax·pop·src)를 싣고, 팝업(`openWeatherModal`)이 이 값과 같은 `.fc-day` 모양을 쓴다. 카드 모양·기호를 바꾸면 팝업도 같이 바뀐다.
+- 주변 지도 썸네일은 `wcong(lat,lng)`로 다음 좌표를 만든다(위경도 그대로 넘기면 바다).
+- 자세한 목록: `docs/DESIGN_SYSTEM.md` ‘전 화면 스크린샷 점검 v2’.
+
+## 📌 주변 축제·행사 포스터 카드 — CultureFlow 연동 (2026-10-19, Grok)
+
+- 상세 ‘주변시설’ 아래 `#sec-events`(`[data-events]`)에 축제·공연·전시 포스터 카드. 진행 중/예정(D-n)/이번 주말 배지, 출처·원문 링크, 깨진 포스터는 원출처 → 제목 카드로 대체.
+- 원천: CultureFlow 공개 JSON(`pyw31337.github.io/culture/data/performances.json`) + 기존 TourAPI 축제(extras.json). 같은 행사는 합침.
+- 파일: `pipeline/lib/culture-events.mjs`, `pipeline/scripts/sync-culture-events.mjs`, `camping-atlas/public/context/events.{js,json}`, 워크플로 `culture-events.yml`(매일 06:20 KST). 자세히 `docs/CULTURE_EVENTS.md`.
+- `design/renewal/app.js`는 두 군데만 추가(섹션 자리 1줄, bindDetail에서 불러오기 2줄). 참고: 예전 ‘여행 참고 정보’ `[data-extras]` 자리는 현재 상세 HTML에 없어 그 칸(고도·응급실 등)은 화면에 안 보임 — 화면 담당이 다시 넣을지 판단 필요.
+- 검사: `npm --prefix pipeline test` 통과(새 테스트 7개).
+
+## 📌 운영자 심층 수집기 (2026-10-19, Grok)
+
+- `pipeline/scripts/crawl-operator-deep.mjs`: 운영자 자체 호스트만, robots 준수, 최대 16쪽, 관련 문장+시설/배치 이미지 URL.
+- 플랫폼(ticketplay·네이버·캠핏)은 읽지 않음. 구곡폭포 국민여가(7879) 등록 홈페이지는 `gugog.ticketplay.zone`(연결 거절)이라 심층 수집 대상이 아님. 예약은 `rev.cuc.or.kr`.
+- 파일럿: 에스글램핑·글로우 사진 8장씩 `operator_media`로 상세에 연결. 화면은 「운영자 제공 사진」.
+
+## 📌 세부 시설·규격 추가 수집 (2026-10-19, Grok)
+
+- 검토: 고캠핑 구조화 규격(981곳), 운영자 홈페이지 크롤(OK 1,151 / 실패 520 / robots 113), 소셜 검색 배치도, 소개글 스펙 추출은 이미 있음.
+- 추가: 운영자·소개 문장에서 사이트 규격(`6×7m`, `가로 6m 세로 7m`)을 `SITE_SIZE`로 추출. 공식 270곳.
+- 네이버·캠핏·인스타 본문은 약관상 자동 수집하지 않음. 배치도 이미지는 검색 썸네일+원문 링크만.
+- 화면: 이용 정보에 사이트 규격 행 추가.
+
+## 📌 깨진 예약 링크 제외 (2026-10-19, Grok)
+
+- 예약 채널 URL 전수 조사: 비주요 호스트 1,169개 중 연결 실패 287개.
+- `ticketplay.zone` (구곡폭포·청평사·양구 등)은 ERR_CONNECTION_REFUSED / 503. 화면·분류에서 제외.
+- 목록: `pipeline/registry/dead-booking-hosts.json`
+- 필터: `pipeline/lib/booking-intel.mjs` `normalizeUrl`, `design/renewal/app.js` `liveBookingUrl`
+- 다음 카탈로그 빌드부터 채널에서 빠지고, 프론트는 이미 발행된 데이터에서도 숨긴다.
+
+## 📌 상세 미디어 카드 (2026-10-19, Grok)
+
+- 주변 시설·블로그/카페 후기를 **상단 사진(또는 아이콘 히어로) + 하단 텍스트** 카드로 바꿈.
+- `design/renewal/app.js`의 `nearbyCard`, `reviewLinksHtml`와 `style.css`의 `.media-card` 계열.
+- 사진이 없는 곳은 큰 아이콘 히어로로 시각 밀도를 맞춤. 다음 발행 때 `/explore`에 반영.
+
+## 📌 수집 주기 분리 (2026-10-19, Grok)
+
+- 시설·주변은 매일 안 바뀐다. **운영 PostgreSQL 전체 스냅샷 적재는 일요일(KST) 또는 `full_db_import=true`만.**
+- 평일 `data-sync`는 `db:migrate`만 하고 고캠핑·context·licences 재적재를 건너뛴다.
+- 임시 DB 이중 적재 검증도 같은 날만.
+- 상세: `docs/SYNC_CADENCE.md`. 새 수집을 매일 단계로 넣기 전에 이 문서를 볼 것.
 
 ## 📌 전기 용량 A 단위 분리 (2026-10-19, Grok)
 
@@ -40,6 +86,15 @@
 - 유튜브 영상은 기존 `videosHtml`로 사이트 안에서 재생.
 - 인스타·페이스북·틱톡 등은 검색 버튼으로 새 탭 열기.
 - 상세 페이지에 바로 보임.
+
+## 📌 예약 엔진(땡큐캠핑) 업장 사이트 사실 + 빈자리 준비 (2026-10-19 16시, Claude → 전 에이전트)
+
+- **새 원천 `thankq`**: 땡큐캠핑·캠퍼스토리 공개 예약 화면(robots `Allow: /`). 업장이 등록한 **사이트별 규격·바닥·1박 요금·입퇴실·주차·반려동물**을 `pipeline/registry/thankq.json`에 모은다(`collect-thankq.mjs`, 하루 2회 `thankq.yml` → 증분 발행). 근거·결과는 `docs/PRIVATE_AVAILABILITY_RESEARCH.md` 2-1절.
+- **빌드 순서**: `build-thankq-facts.mjs`는 `build-nearby-facts` 뒤·`build-campground-profiles` 앞(data-sync·publish-incremental에 추가됨). 상세 `d.booking_sites`, 카탈로그 `c.tq = {s 엔진 번호, n 사이트 수, mx [가로,세로], lo, hi}`.
+- **사실 원장 원천 `booking_engine` 등록**(fact-store `SOURCES`) — 지우면 발행이 막힌다.
+- **화면(Codex)**: 상세 ‘사이트 규격 및 1박 요금’ 표가 `d.booking_sites`를 우선 사용(`bookingSitesHtml`), 조건 검색 사이트 크기 `maxSide`가 `c.tq.mx`를 포함, 대표 예약 경로에 땡큐캠핑 화면 보강. 빈자리 UI(`vacancy.json` → `S.vac`, 목록 `st-vac`/`st-full`, 상세 `vacHtml`)는 **파일이 있을 때만** 보인다.
+- **빈자리 공개는 소유자 결정 대기**: 이용약관의 ‘서비스 정보 복제·제3자 제공 금지’(회원 의무) 조항 때문에 원천 승인 카드에서 빈자리는 `PENDING`. 저장소 변수 `THANKQ_VACANCY_PUBLISH=on`이면 바로 발행된다. 전체 중단은 `THANKQ_ENABLED=off`.
+- 검증: `node --test pipeline/test/thankq.test.mjs`(3), 전체 테스트, 파생 재계산 회귀 없음(요금 1,941→1,949·입실 980→995·퇴실 945→960, 표본 기준 — 전체 매칭 실행 후 늘어남), 상세·목록 PC/모바일 스크린샷 가로 넘침·콘솔 오류 없음.
 
 ## 🚨 화면 원본을 자리표시자로 덮지 말 것 (2026-10-19 15시, Claude → 전 에이전트)
 
