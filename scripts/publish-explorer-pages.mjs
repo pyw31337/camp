@@ -94,14 +94,13 @@ await writeFile(`${out}app.js`, renewalApp);
 await mkdir(`${out}data`, { recursive: true });
 await cp(`${root}design/renewal/data/photos.json`, `${out}data/photos.json`);
 
-// 브랜드 자산(파비콘, PWA 아이콘, 오픈그래프 배너 이미지)을 대상 디렉토리에 동기화
+// 브랜드 자산(파비콘, PWA 아이콘, 오픈그래프 배너 이미지, 테마/히어로 사진)을 대상 디렉토리에 동기화
 const copyBrandImages = async (destDir) => {
   const imgDest = `${destDir}images/`;
   await mkdir(imgDest, { recursive: true });
-  for (const f of ["og-image.png", "og-image.webp", "apple-touch-icon.png", "icon-192.png", "icon-512.png"]) {
-    const src = `${root}camping-atlas/public/images/${f}`;
-    const dst = `${imgDest}${f}`;
-    if (existsSync(src) && resolve(src) !== resolve(dst)) await cp(src, dst);
+  const srcImages = `${root}camping-atlas/public/images`;
+  if (existsSync(srcImages) && resolve(srcImages) !== resolve(imgDest.replace(/\/$/, ""))) {
+    await cp(srcImages, imgDest, { recursive: true });
   }
   for (const f of ["favicon.svg", "favicon.png", "manifest.webmanifest"]) {
     const src = `${root}camping-atlas/public/${f}`;

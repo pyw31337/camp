@@ -122,11 +122,16 @@ em { font-style: normal; color: var(--accent); }
 /* ── 헤더: 스크롤 시 따라다니지 않고 문서 상단에 위치 ───────── */
 .top {
   position: relative; z-index: 100; height: calc(var(--head-h) + env(safe-area-inset-top));
+  width: 100%; max-width: var(--content); margin-left: auto; margin-right: auto;
   display: flex; align-items: center; gap: clamp(12px, 3vw, 40px); padding: env(safe-area-inset-top) var(--gut) 0;
   background: var(--bg);
 }
 /* 첫 화면의 헤더는 히어로 사진 위에 놓이고, 스크롤 시 히어로와 함께 위로 올라감 */
-body[data-view="home"] .top { position: absolute; top: 0; left: 0; right: 0; z-index: 100; margin-bottom: 0; background: transparent; color: #fff; }
+body[data-view="home"] .top {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 100;
+  width: 100%; max-width: var(--content); margin-left: auto; margin-right: auto;
+  margin-bottom: 0; background: transparent; color: #fff;
+}
 body[data-view="home"] .top .top-nav a { color: rgba(255,255,255,.78); }
 body[data-view="home"] .top .top-nav a[aria-current] { color: #fff; background: rgba(255,255,255,.14); }
 body[data-view="home"] .top .brand-mark { background: var(--volt); color: #101414; }
@@ -163,12 +168,16 @@ body[data-view="home"] .top .gear-chip { background: rgba(8,18,30,.42); color: #
 .link { display: inline-flex; align-items: center; gap: 2px; font-weight: 700; color: var(--ink-2); font-size: .92rem; }
 
 /* ── 히어로 ───────────────────────────────────────── */
-.hero { position: relative; padding: clamp(28px, 5vw, 72px) var(--gut) clamp(24px, 3.5vw, 44px); overflow: hidden; }
+.hero { position: relative; padding: clamp(28px, 5vw, 72px) 0 clamp(24px, 3.5vw, 44px); overflow: hidden; }
 .hero-bg { display: none; }
 [data-v="a"] .hero { min-height: clamp(380px, 40vw, 560px); display: flex; align-items: flex-end; }
 [data-v="a"] .hero-bg { display: block; position: absolute; inset: 0; background: url("./images/hero-campsite.webp") 70% 60% / cover no-repeat; }
 [data-v="a"] .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5,17,31,.88) 0%, rgba(5,17,31,.64) 38%, rgba(5,17,31,.18) 70%, rgba(5,17,31,.1)), linear-gradient(180deg, rgba(2,12,25,.28), rgba(2,12,25,.1) 48%, rgba(5,17,31,.7)); }
-.hero-in { position: relative; width: 100%; max-width: var(--content); margin: 0 auto; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+.hero-in {
+  position: relative; width: 100%; max-width: var(--content); margin: 0 auto; min-width: 0;
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px;
+  padding-left: var(--gut); padding-right: var(--gut);
+}
 .hero h1 { font-size: clamp(2.3rem, 1.2rem + 4.2vw, 5rem); line-height: 1.14; letter-spacing: -0.045em; }
 .h1-a { display: block; font-weight: 800; color: #fff; }
 .h1-b { display: block; font-weight: 900; color: #fff; }
