@@ -181,7 +181,7 @@ body[data-view="home"] .top .gear-chip { background: rgba(8,18,30,.42); color: #
 .hero h1 { font-size: clamp(2.3rem, 1.2rem + 4.2vw, 5rem); line-height: 1.14; letter-spacing: -0.045em; }
 .h1-a { display: block; font-weight: 800; color: #fff; }
 .h1-b { display: block; font-weight: 900; color: #fff; }
-.hero h1 em { color: var(--volt); }
+.hero h1 em { color: var(--volt); white-space: nowrap; }
 .hero-summary { color: rgba(255,255,255,.84); font-size: clamp(.82rem, .76rem + .18vw, 1rem); font-weight: 650; }
 .hero-summary b { color: #fff; font-weight: 900; }
 [data-v="b"] .hero h1 { font-size: clamp(2.6rem, 1.2rem + 5.4vw, 6.2rem); line-height: 1.1; }
@@ -1507,6 +1507,10 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .nearby-hub .nb-ic { display: inline-grid; place-items: center; flex: 0 0 32px; width: 32px; height: 32px; border-radius: 9px; background: var(--paper, #fff); color: var(--ink-2); }
 .nearby-hub .nb-ic .ic { width: 16px; height: 16px; }
 .nearby-hub .nb-thumb { flex: 0 0 32px; width: 32px; height: 32px; border-radius: 9px; object-fit: cover; }
+/* 실제 모습 사진(2026-10-19 소유자: 주변시설 실제 사진): 64px 정사각, 누르면 원문 */
+.nearby-hub .nb-thumb { flex-basis: 64px; width: 64px; height: 64px; border-radius: 12px; }
+.nearby-hub .nb-thumb.nb-photo { cursor: zoom-in; }
+.nearby-hub .nb-credit { display: block; margin-top: 1px; font-size: .68rem; font-weight: 700; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .nearby-hub .nb-txt { display: grid; min-width: 0; flex: 1; }
 .nearby-hub .nb-txt b { font-size: .9rem; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .nearby-hub .nb-txt i { font-style: normal; font-size: .74rem; color: var(--ink-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

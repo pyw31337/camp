@@ -209,6 +209,30 @@ for (const [id, d] of Object.entries(details)) {
   }
   d.web_checked_at = w.fetched_at ?? null;
 }
+// 이번 실행의 캐시(소셜·웹 언급)에 없는 캠핑장은 직전 발행본의 글·사진·영상·요금 언급을 그대로 잇는다.
+// 캐시가 일부만 복원된 날 전체 재빌드가 후기 2,686→1,156곳처럼 줄어 회귀 가드에 막히던 문제(2026-10-19) — 줄이지 않고 덧붙이기만.
+const prevDir = p("../../camping-atlas/public/explore/data/camps/");
+let carried = 0;
+if (existsSync(prevDir)) for (const [id, d] of Object.entries(details)) {
+  const needSo = !social?.campgrounds?.[id], needWeb = !web?.campgrounds?.[id];
+  if (!needSo && !needWeb) continue;
+  const f = `${prevDir}${id}.json`;
+  if (!existsSync(f)) continue;
+  let prev;
+  try { prev = JSON.parse(await readFile(f, "utf8")); } catch { continue; }
+  let any = false;
+  const keys = [...(needSo ? ["reviews", "cafe", "sns_images", "videos", "layout", "social_checked_at"] : []), ...(needWeb ? ["web", "web_checked_at"] : [])];
+  for (const k of keys) if (prev[k] != null && d[k] == null) { d[k] = prev[k]; any = true; }
+  if (prev.prices?.length) {
+    const seen = new Set((d.prices ?? []).map((x) => `${x.url}|${x.won}`));
+    const add = prev.prices.filter((x) => !seen.has(`${x.url}|${x.won}`));
+    if (add.length) { d.prices = [...(d.prices ?? []), ...add].sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? ""))).slice(0, 16); any = true; }
+  }
+  const rec = needSo ? records.find((r) => r.id === id) : null;
+  if (rec && (d.reviews || d.cafe || d.videos || d.sns_images)) rec.soc = [(d.reviews?.length ?? 0) + (d.cafe?.length ?? 0), d.videos?.length ?? 0, d.sns_images?.length ?? 0];
+  if (any) carried++;
+}
+if (carried) console.log(`직전 발행본에서 이어 받은 글·사진(이번 캐시에 없던 곳): ${carried}곳`);
 for (const [id, d] of Object.entries(details)) {
   // 이미 저장한 사진(중복으로 뺀 것 포함)과 이름 키가 같은 원본 주소는 다시 보여 주지 않는다.
   const seenKeys = new Set((media?.camps?.[id] ?? []).map((x) => photoKey(x.src_url)));

@@ -181,7 +181,7 @@ body[data-view="home"] .top .gear-chip { background: rgba(8,18,30,.42); color: #
 .hero h1 { font-size: clamp(2.3rem, 1.2rem + 4.2vw, 5rem); line-height: 1.14; letter-spacing: -0.045em; }
 .h1-a { display: block; font-weight: 800; color: #fff; }
 .h1-b { display: block; font-weight: 900; color: #fff; }
-.hero h1 em { color: var(--volt); }
+.hero h1 em { color: var(--volt); white-space: nowrap; }
 .hero-summary { color: rgba(255,255,255,.84); font-size: clamp(.82rem, .76rem + .18vw, 1rem); font-weight: 650; }
 .hero-summary b { color: #fff; font-weight: 900; }
 [data-v="b"] .hero h1 { font-size: clamp(2.6rem, 1.2rem + 5.4vw, 6.2rem); line-height: 1.1; }
@@ -1476,3 +1476,87 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .rs-alts > span { font-size: .74rem; font-weight: 800; color: var(--ink-3); }
 .rs-alts a { display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--ink-2); font-size: .76rem; font-weight: 800; text-decoration: none; }
 .rs-alts a:hover { border-color: var(--accent); color: var(--accent); }
+
+/* 1박 요금(하나로 합친 칸, 2026-10-19) */
+.price-sec .plist li { flex-wrap: wrap; }
+.price-sec .plist li b { min-width: 6.5em; font-variant-numeric: tabular-nums; }
+.price-sec .plist li span { flex: 1 1 10em; min-width: 0; }
+.price-sec .pl-kind { font-style: normal; font-size: .72rem; font-weight: 800; color: var(--ink-3); background: var(--card, #fff); border-radius: 999px; padding: 2px 8px; }
+.price-sec .pl-m b { color: var(--ink-2); }
+.price-sec .st-foot { margin: 10px 2px 0; }
+
+/* 더 보기: 플랫폼 아이콘을 같은 크기·모양으로(둥근 네모 26px, 글리프 15px, 단색) */
+.plat-hub .plat-ic { display: inline-grid; place-items: center; flex: 0 0 26px; width: 26px; height: 26px; border-radius: 8px; background: var(--ink); color: var(--paper, #fff); }
+.plat-hub .plat-btn .plat-ic svg { width: 15px; height: 15px; filter: none; color: inherit; }
+.plat-hub .plat-btn { padding-left: 7px; }
+
+/* 주변시설: 칩(탭)으로 한 묶음씩, 한 줄짜리 작은 행(2026-10-19) */
+.nearby-hub .nb-tabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 0 10px; padding-bottom: 2px; }
+.nearby-hub .nb-tabs::-webkit-scrollbar { display: none; }
+.nearby-hub [data-nb-tab] { display: inline-flex; align-items: center; gap: 5px; flex: 0 0 auto; height: 34px; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper, #fff); color: var(--ink-2); font: inherit; font-size: .84rem; font-weight: 800; cursor: pointer; }
+.nearby-hub [data-nb-tab] .ic { width: 15px; height: 15px; }
+.nearby-hub [data-nb-tab] i { font-style: normal; font-size: .7rem; color: var(--ink-3); }
+.nearby-hub [data-nb-tab][aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper, #fff); }
+.nearby-hub [data-nb-tab][aria-selected="true"] i { color: inherit; opacity: .75; }
+.nearby-hub [data-nb-tab]:focus-visible { outline: 2px solid var(--cobalt, #2b59ff); outline-offset: 2px; }
+.nearby-hub [data-nb-tab][hidden], .nearby-hub .nearby-group[hidden] { display: none; }
+.nearby-hub .nearby-group h3 { display: none; }
+.nearby-hub .nearby-places { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 6px; }
+.nearby-hub .nb-row { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 12px; border-radius: 12px; background: var(--soft); color: inherit; text-decoration: none; }
+.nearby-hub a.nb-row:hover { background: var(--line); }
+.nearby-hub .nb-ic { display: inline-grid; place-items: center; flex: 0 0 32px; width: 32px; height: 32px; border-radius: 9px; background: var(--paper, #fff); color: var(--ink-2); }
+.nearby-hub .nb-ic .ic { width: 16px; height: 16px; }
+.nearby-hub .nb-thumb { flex: 0 0 32px; width: 32px; height: 32px; border-radius: 9px; object-fit: cover; }
+/* 실제 모습 사진(2026-10-19 소유자: 주변시설 실제 사진): 64px 정사각, 누르면 원문 */
+.nearby-hub .nb-thumb { flex-basis: 64px; width: 64px; height: 64px; border-radius: 12px; }
+.nearby-hub .nb-thumb.nb-photo { cursor: zoom-in; }
+.nearby-hub .nb-credit { display: block; margin-top: 1px; font-size: .68rem; font-weight: 700; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nearby-hub .nb-txt { display: grid; min-width: 0; flex: 1; }
+.nearby-hub .nb-txt b { font-size: .9rem; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nearby-hub .nb-txt i { font-style: normal; font-size: .74rem; color: var(--ink-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nearby-hub .nb-dist { flex: 0 0 auto; font-size: .84rem; font-weight: 900; font-variant-numeric: tabular-nums; color: var(--ink); }
+.nearby-hub .nb-go { flex: 0 0 auto; width: 14px; height: 14px; color: var(--ink-3); }
+.nearby-hub .nearby-note { margin: 8px 2px 0; font-size: .76rem; color: var(--ink-3); }
+
+/* 방문 후기 · 캠퍼 사진 한 칸: 사진 카드는 눌러서 크게 보기 */
+.review-links .photo-card .media-card-photo { position: relative; display: block; width: 100%; padding: 0; border: 0; background: var(--soft); cursor: zoom-in; }
+.review-links .photo-card .mc-zoom { position: absolute; right: 8px; bottom: 8px; display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 999px; background: rgba(0, 0, 0, .55); color: #fff; }
+.review-links .photo-card .mc-zoom .ic { width: 14px; height: 14px; }
+.review-links .photo-card .media-card-go { color: inherit; text-decoration: none; }
+.layout-sec .layout-main { cursor: zoom-in; }
+.lightbox .lb-cap a { color: #fff; text-decoration: underline; }
+.unk-line { display: flex; align-items: flex-start; gap: 6px; margin: 10px 2px 0; font-size: .78rem; line-height: 1.5; color: var(--ink-3); }
+.unk-line .ic { flex: 0 0 14px; width: 14px; height: 14px; margin-top: 2px; }
+.unk-line b { font-weight: 800; color: var(--ink-2); }
+.rv-sub { display: flex; align-items: center; gap: 6px; margin: 16px 2px 8px; font-size: .86rem; font-weight: 800; color: var(--ink-2); }
+.rv-sub .ic { width: 15px; height: 15px; }
+.review-links.review-photos { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.review-photos .media-card-photo { aspect-ratio: 1 / 1; }
+.review-photos .media-card-body { padding: 8px 10px; gap: 2px; }
+.review-photos .media-card-body b { font-size: .8rem; }
+.review-photos .media-card-body i, .review-photos .media-card-go { font-size: .7rem; }
+@media (max-width: 759px) { .review-links.review-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.layout-sec .layout-main img { width: 100%; max-height: min(560px, 70vh); object-fit: contain; background: var(--soft); }
+
+/* 상세 바로가기(2026-10-19): 긴 상세에서 요금·이용 정보·주변·후기로 바로 간다 */
+.d-jump { position: sticky; top: 0; z-index: 50; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 4px calc(var(--gut, 16px) * -1) 8px; padding: 8px var(--gut, 16px); background: color-mix(in srgb, var(--bg, #fff) 94%, transparent); backdrop-filter: blur(8px); box-shadow: 0 1px 0 var(--line); }
+.d-jump::-webkit-scrollbar { display: none; }
+.d-jump a { flex: 0 0 auto; display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 999px; font-size: .82rem; font-weight: 800; color: var(--ink-2); background: var(--soft); text-decoration: none; }
+.d-jump a[aria-current] { background: var(--ink); color: var(--paper, #fff); }
+.d-jump a[hidden] { display: none; }
+.d-jump:not(:has(a:not([hidden]))) { display: none; }
+.detail .d-sec { scroll-margin-top: 60px; }
+.detail .d-sec:focus { outline: none; }
+.detail .use-val, .detail .tile-v, .plist b { word-break: keep-all; overflow-wrap: anywhere; }
+@media (max-width: 759px) {
+  .detail .d-sec .sec-head h2 { font-size: 1.08rem; }
+  .price-sec .plist li { padding: 10px 34px 10px 12px; }
+  .price-sec .plist li b { min-width: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .detail *, .lightbox * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+.pl-more { margin-top: 8px; }
+.pl-more summary { cursor: pointer; width: fit-content; padding: 6px 12px; border-radius: 999px; background: var(--soft); font-size: .8rem; font-weight: 800; color: var(--ink-2); list-style: none; }
+.pl-more summary::-webkit-details-marker { display: none; }
+.pl-more[open] summary { margin-bottom: 8px; }

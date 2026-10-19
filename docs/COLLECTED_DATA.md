@@ -10,6 +10,7 @@
 | 항목별 커버리지(2,500곳 목표) | `main`: `meta.json`의 `coverage` | 위와 같음 |
 | 원자 사실 원장(캠핑장·속성·값·등급·원천·근거) | `main`: `data/facts/*.ndjson` (`docs/FACT_STORE.md`) | 위와 같음 |
 | 예약 엔진(땡큐캠핑) 업장 등록 사이트 사실 | `main`: `pipeline/registry/thankq.json` (`matches`·`sites`) | 하루 2회(`thankq.yml`) 직후 증분 발행 |
+| 주변시설 실제 사진(검색 썸네일·원문 링크) | `main`: `pipeline/registry/nearby-photos.json` (`places{이름|좌표}`) | 매일 05:37 KST(`nearby-photos.yml`) 직후 증분 발행 |
 | 운영자 홈페이지 문장(OCR 포함) | `main`: `pipeline/registry/operator-site-snippets.json` | 운영자 홈페이지 읽기 직후 |
 | **누적 수집 캐시(원본)** — 카카오 다음 후기·카페·사진, 네이버 블로그·카페·웹문서·지식iN 요약과 허용 본문 문장 | **`collected-data` 브랜치**(단일 커밋, 강제 갱신): `cache/social-search.json.gz`, `cache/web-mentions.json.gz`, `out/campground-social.json.gz`, `out/campground-web.json.gz`, `MANIFEST.json` | 매일 데이터 동기화에서 수집 직후(뒤 단계가 실패해도 저장) |
 

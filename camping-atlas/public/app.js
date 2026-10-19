@@ -20,6 +20,14 @@ function feeLabel(fee) {
   const approx = /대\s*$/.test(fee.text ?? "") ? "대" : "";
   return `${manWon(lo)}${hi > lo ? `~${manWon(hi)}` : ""}원${approx}`;
 }
+// 상세 화면 금액 표기: 18.9만~42만원 → 189,000~420,000원, 2만5천원 → 25,000원, 130000원 → 130,000원, 2만~4만원대 → 20,000~40,000원대.
+function wonText(v) {
+  const n = (m, c, t) => fmt(Math.round(parseFloat(m) * 10000 + (c ? parseFloat(c) * 1000 : 0)));
+  return String(v ?? "")
+    .replace(/(\d+(?:\.\d+)?)\s*만(?:\s*(\d)\s*천)?\s*(?=~|-|원)/g, (_, m, c) => n(m, c))
+    .replace(/(?<![\d,.])(\d{4,7})\s*원/g, (_, x) => `${fmt(Number(x))}원`)
+    .replace(/(\d+)\s*천\s*원/g, (_, x) => `${fmt(Number(x) * 1000)}원`);
+}
 const band = (n) => {
   if (n == null) return "-";
   const m = Math.floor(n / 10000);
@@ -315,6 +323,7 @@ function campThumb(c, { alt = "", sizes } = {}) {
 // 카드 사진: GitHub Pages 배포 단계에서 합쳐지는 고캠핑 공식 webp를 우선 사용한다.
 // 원본 URL은 사진 브랜치에 아직 파생본이 없을 때만 보조로 쓴다.
 // 원본이 지워져 404가 난 사진 주소(이 방문 동안 기억). 상세 사진 묶음·라이트박스에서 뺀다.
+const DEAD = new Set();
 // 고캠핑 원본·썸네일은 같은 파일명을 가진다. 파일명 및 파라미터 제외 키로 중복을 거른다.
 const photoKey = (u) => {
   const path = String(u ?? "").split(/[?#]/)[0];
@@ -712,8 +721,8 @@ function homeView() {
   <section class="hero" aria-labelledby="hero-t">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-in">
-      <h1 id="hero-t"><span class="h1-a">이번 주말,</span> <span class="h1-b"><em>빈자리부터.</em></span></h1>
-      <p class="hero-summary">전국 <b>${fmt(S.camps.length)}개</b> 캠핑장 소식 · 현재 오픈 <b>${fmt(openings.length)}개</b></p>
+      <h1 id="hero-t"><span class="h1-a">취향대로 찾아 떠나는</span> <span class="h1-b">전국 ${fmt(S.camps.length)}개 <em>자연 속으로.</em></span></h1>
+      <p class="hero-summary">숲·계곡·바다, 나만의 쉼터를 조건으로 골라 보세요${openings.length ? ` · 곧 예약 오픈 <b>${fmt(openings.length)}곳</b>` : ""}</p>
       <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div><form class="finder-form" role="search" data-search>
         <label class="finder-field finder-destination"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
         <button class="finder-field finder-static" type="button" data-open="date"><small>언제</small><b data-stay-label>${esc(stayLabel())}</b></button>
@@ -1347,9 +1356,28 @@ function homeClicks(e) {
 // ── 화면: 상세 ───────────────────────────────────────────────
 async function detailOf(id) {
   if (S.detailCache.has(id)) return S.detailCache.get(id);
-  const d = await fetch(`${DATA}camps/${encodeURIComponent(id)}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  let d = await fetch(`${DATA}camps/${encodeURIComponent(id)}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  if (d) d = await reviewTexts(d, S.camps.find((c) => String(c.id) === String(id)));
   S.detailCache.set(id, d);
   return d;
+}
+// 상세 글 점검(pipeline/lib/detail-text-review.mjs와 같은 파일): 이 캠핑장 이야기가 아니거나 칸에 맞지 않는 글을 뺀다.
+// 다음 데이터 갱신부터는 파이프라인에서 이미 걸러져 오고, 같은 규칙을 다시 적용해도 결과가 같다.
+let textReview;
+async function reviewTexts(d, c) {
+  if (!c) return d;
+  try {
+    textReview ??= import(new URL(`${MOD_ROOT}context/text-review.js`, import.meta.url).href);
+    const m = await textReview;
+    if (!S.reviewCtx) {
+      const common = await fetch(new URL(`${MOD_ROOT}context/text-common.json`, import.meta.url)).then((r) => (r.ok ? r.json() : [])).catch(() => []);
+      const cores = new Map();
+      for (const x of S.camps) { const k = `${x.sido} ${x.sigungu}`; (cores.get(k) ?? cores.set(k, []).get(k)).push(m.nameCoreOf(x.name, x.sigungu)); }
+      const regions = new Set(S.camps.map((x) => String(x.sigungu ?? "").split(/\s+/)[0].replace(/(시|군|구)$/, "")).filter((x) => x.length >= 2));
+      S.reviewCtx = { cores, regions, common: new Set(common) };
+    }
+    return m.reviewDetailTexts(d, c, { others: S.reviewCtx.cores.get(`${c.sido} ${c.sigungu}`) ?? [], regions: S.reviewCtx.regions, common: S.reviewCtx.common }).d;
+  } catch { return d; }
 }
 const PF = (d, k) => d?.profile?.fields?.[k];
 function profFact(x) { return x ? { v: x.value, g: GR(x.grade), src: { label: x.source?.label, url: x.source?.url, at: x.source?.date, quote: x.source?.quote, image: x.source?.image } } : null; }
@@ -1367,65 +1395,22 @@ function usage(c, d) {
     ["입실", profFact(PF(d, "CHECKIN")) ?? specFact(d, "CHECKIN_TIME"), "clock-in"],
     ["퇴실", profFact(PF(d, "CHECKOUT")) ?? specFact(d, "CHECKOUT_TIME"), "clock-out"],
     ["매너타임", profFact(PF(d, "MANNER")) ?? specFact(d, "MANNER_TIME"), "bed"],
-    ["요금", profFact(PF(d, "PRICE")) ?? (c.fee ? { v: feeLabel(c.fee), g: GR(c.fee.grade) || "c", src: { label: c.fee.basis, url: c.fee.url, at: c.fee.checked_at } } : null), "won"],
-    ["추가 요금", profFact(PF(d, "EXTRA_FEE")) ?? specFact(d, "EXTRA_PERSON_FEE"), "won"],
     ["환불", profFact(PF(d, "REFUND")) ?? specFact(d, "REFUND_POLICY"), "calc"],
     ["운영", profFact(PF(d, "SEASON")) ?? ((c.seasons ?? []).length ? { v: (c.seasons ?? []).length === 4 ? "사계절 운영" : `${(c.seasons ?? []).join("·")} 운영`, g: "c", src: { label: "고캠핑 등록 운영 기간", url: c.gc_url } } : null), "calendar"],
-    ["사이트 규격", specFact(d, "SITE_SIZE"), "layers"],
-    ["반려동물", f.pet ?? profFact(PF(d, "PET")) ?? specFact(d, "PET_POLICY"), "paw"],
     ["대여", (d?.field_conditions ?? c.field_conditions)?.rental_offers?.length ? { v: (d?.field_conditions ?? c.field_conditions).rental_offers.map((r) => r.item).slice(0, 5).join(" · "), g: "c", src: srcOf(c.field_conditions) } : (specFact(d, "RENTAL") ?? null), "cart"],
   ];
 }
-function sitePricingHtml(c, d) {
-  const feeInfo = c.fee;
-  const groups = d?.field_conditions?.site_size?.groups ?? c.field_conditions?.site_size?.groups ?? [];
-  const prods = d?.products ?? [];
-  const bs = d?.booking_sites;
-  if (bs?.sites?.length) return bookingSitesHtml(c, bs);
-  if (!feeInfo && !groups.length && !prods.length) return "";
-  const feeFact = feeInfo ? { g: GR(feeInfo.grade) || "m", src: { label: sourceName(feeInfo.basis, "요금 근거"), url: feeInfo.url, at: feeInfo.checked_at, quote: feeInfo.quote } } : null;
-  const prodFact = (p) => ({ g: "c", src: { label: d?.products_src?.label || "공식 시설 및 상품 등록 기준", url: d?.products_src?.url || c.gc_url, at: d?.products_src?.checked_at, quote: p.name ? `${p.name} ${p.size ? `규격: ${p.size}` : ""} ${p.price ? `${fmt(p.price)}원` : ""}` : null } });
-  let rows = "";
-  if (prods.length) {
-    rows = prods.map((p, i) => {
-      const tip = srcTip(prodFact(p), p.name || `사이트 ${i + 1} 요금`);
-      return `<tr><td><b>${esc(serviceText(p.name, 26) || `사이트 ${i + 1}`)}</b></td><td>${esc(serviceText(p.size, 20) || "-")}</td><td>${esc(p.base ? `기준 ${serviceText(p.base, 16)}인` : "-")}</td><td class="text-price"><div class="price-cell"><span class="price-val">${p.price ? fmt(p.price) + "원" : "예약처 확인"}</span>${tip}</div></td></tr>`;
-    }).join("");
-  } else if (groups.length) {
-    rows = groups.map((g) => {
-      const tip = feeFact ? srcTip(feeFact, g.name || "요금") : "";
-      return `<tr><td><b>${esc(g.name || "일반 사이트")}</b></td><td>${g.width_m && g.depth_m ? `${g.width_m}×${g.depth_m}m` : "-"}</td><td>${g.count ? `${g.count}면` : "-"}</td><td class="text-price"><div class="price-cell"><span class="price-val">${feeInfo?.text ? esc(feeInfo.text) : (feeInfo?.min ? `${band(feeInfo.min)}대` : "예약처 확인")}</span>${tip}</div></td></tr>`;
-    }).join("");
-  } else if (feeInfo) {
-    const tip = feeFact ? srcTip(feeFact, "1박 기준 요금") : "";
-    rows = `<tr><td><b>1박 기준 요금</b></td><td>-</td><td>-</td><td class="text-price"><div class="price-cell"><span class="price-val">${feeInfo.text ? esc(feeInfo.text) : (feeInfo.min ? `${band(feeInfo.min)}부터` : "-")}</span>${tip}</div></td></tr>`;
-  }
-  return `<section class="d-sec">
-    <div class="sec-head">${iconTitle("layers", "사이트 규격 및 1박 요금")}${feeFact || d?.products_src ? `<span class="sec-note">기준 규격·요금 ${srcTip(d?.products_src ? { g: "c", src: d.products_src } : feeFact, "요금 근거")}</span>` : ""}</div>
-    <div class="table-wrap"><table class="site-table"><thead><tr><th>구분</th><th>규격</th><th>규모</th><th>1박 요금</th></tr></thead><tbody>${rows}</tbody></table></div>
-  </section>`;
+// 값이 없는 항목은 칸마다 ‘확인필요’를 늘어놓지 않고 한 줄로 모은다(소유자 2026-10-19 · 빈 상태 정리).
+function unknownLine(labels) {
+  return labels.length ? `<p class="unk-line">${ic("alert")}아직 확인 안 된 항목 <b>${labels.map(esc).join(" · ")}</b> · 예약처나 전화로 확인하세요</p>` : "";
 }
-// 예약 엔진(땡큐캠핑) 공개 화면에 업장이 등록한 사이트별 규격·바닥·요금. 같은 조건의 사이트는 한 줄로 묶는다(A1~A12 · 12면).
-function bookingSitesHtml(c, bs) {
-  const fact = (q) => ({ g: "c", src: { label: bs.label ?? "예약 화면(업장 등록)", url: bs.url, at: bs.checked_at, quote: q } });
-  const groups = new Map();
-  for (const x of bs.sites) {
-    const k = [x.kind, x.size?.join("x"), x.floor, x.price, x.parking, x.pet].join("|");
-    if (!groups.has(k)) groups.set(k, { ...x, names: [] });
-    groups.get(k).names.push(x.name);
-  }
-  const nameOf2 = (ns) => (ns.length > 2 ? `${ns[0]} ~ ${ns.at(-1)}` : ns.join(", "));
-  const rows = [...groups.values()].map((g) => {
-    const label = serviceText(nameOf2(g.names), 30);
-    const meta = [g.kind, g.parking, g.pet ? "반려동물 동반" : null].filter(Boolean).join(" · ");
-    return `<tr><td><b>${esc(label)}</b>${meta ? `<i class="st-meta">${esc(meta)}</i>` : ""}</td><td>${g.size ? `${g.size[0]}×${g.size[1]}m` : "-"}${g.floor ? `<i class="st-meta">${esc(g.floor)}</i>` : ""}</td><td>${g.names.length}개</td><td class="text-price"><div class="price-cell"><span class="price-val">${g.price ? `${fmt(g.price)}원` : "예약처 확인"}</span>${srcTip(fact(`${label} ${g.size ? `규격 ${g.size[0]}m × ${g.size[1]}m` : ""} ${g.price ? `${fmt(g.price)}원` : ""}`.trim()), label)}</div></td></tr>`;
-  }).join("");
-  const day = bs.date ? `${mdKst(`${bs.date}T12:00:00+09:00`)}(토) 1박 기준` : "1박 기준";
-  return `<section class="d-sec">
-    <div class="sec-head">${iconTitle("layers", "사이트 규격 및 1박 요금")}<span class="sec-note">${dot("c")}업장 등록 · ${esc(day)} ${srcTip(fact(null), "사이트 정보")}</span></div>
-    <div class="table-wrap"><table class="site-table"><thead><tr><th>사이트</th><th>규격·바닥</th><th>수</th><th>1박 요금</th></tr></thead><tbody>${rows}</tbody></table></div>
-    <p class="st-foot">${esc(bs.label ?? "예약 화면")}에 업장이 올린 사이트 ${fmt(bs.sites.length)}개 · 요금은 날짜마다 다를 수 있어요. ${bs.url ? `<a href="${esc(bs.url)}" target="_blank" rel="noopener">날짜별 예약 화면 열기</a>` : ""}</p>
-  </section>`;
+function specSection(c, d) {
+  const html = specTiles(c, d);
+  const tiles = html.match(/<div class="tile[\s\S]*?(?=<div class="tile|$)/g) ?? [];
+  const known = tiles.filter((t) => !/^<div class="tile unk/.test(t));
+  const unknown = tiles.filter((t) => /^<div class="tile unk/.test(t)).map((t) => (t.match(/<span class="tile-l">([^<]*)<\/span>/) ?? [])[1]).filter(Boolean);
+  if (!known.length && !unknown.length) return "";
+  return `<section class="d-sec" id="sec-spec"><div class="sec-head">${iconTitle("info", "기본 규격")}${known.length ? `<span class="sec-note">${known.length}/${tiles.length} 확인</span>` : ""}</div>${known.length ? `<div class="tiles">${known.join("")}</div>` : ""}${unknownLine(unknown)}</section>`;
 }
 function specTiles(c, d) {
   const f = facts(c);
@@ -1489,40 +1474,20 @@ const isOfficialTourImage = (u) => /^https:\/\/(?:[\w-]+\.)?(?:visitkorea\.or\.k
 /** 주변 칸 한 곳(주유·충전 칸은 상세 화면이 뜬 뒤 충전소를 덧붙일 때도 쓴다) */
 // 위경도(WGS84) → 다음 지도 좌표(WCONGNAMUL = GRS80 TM(38N 127E, FE 200000, FN 500000) × 2.5).
 // 2026-10-19: 위경도를 그대로 넘겨 모든 주변시설 썸네일이 바다(빈 하늘색)로 나오던 것을 고쳤다. 서울시청으로 위치 확인.
-function wcong(lat, lng) {
-  const r = Math.PI / 180, a = 6378137, f = 1 / 298.257222101, e2 = f * (2 - f), ep2 = e2 / (1 - e2);
-  const phi = lat * r, A = (lng - 127) * r * Math.cos(phi);
-  const M = (p) => a * ((1 - e2 / 4 - 3 * e2 ** 2 / 64 - 5 * e2 ** 3 / 256) * p - (3 * e2 / 8 + 3 * e2 ** 2 / 32 + 45 * e2 ** 3 / 1024) * Math.sin(2 * p) + (15 * e2 ** 2 / 256 + 45 * e2 ** 3 / 1024) * Math.sin(4 * p) - (35 * e2 ** 3 / 3072) * Math.sin(6 * p));
-  const N = a / Math.sqrt(1 - e2 * Math.sin(phi) ** 2), T = Math.tan(phi) ** 2, C = ep2 * Math.cos(phi) ** 2;
-  const x = 200000 + N * (A + (1 - T + C) * A ** 3 / 6 + (5 - 18 * T + T * T + 72 * C - 58 * ep2) * A ** 5 / 120);
-  const y = 500000 + M(phi) - M(38 * r) + N * Math.tan(phi) * (A * A / 2 + (5 - T + 9 * C + 4 * C * C) * A ** 4 / 24 + (61 - 58 * T + T * T + 600 * C - 330 * ep2) * A ** 6 / 720);
-  return [Math.round(x * 2.5), Math.round(y * 2.5)];
-}
-function nearbyThumb(x) {
-  if (x.image && /^https?:\/\//.test(x.image)) return x.image;
-  if (x.lat && x.lng) {
-    // 다음 지도 이미지 서비스(키 불필요). 좌표가 있는 주변시설은 위치 지도 썸네일을 가진다.
-    const [mx, my] = wcong(Number(x.lat), Number(x.lng));
-    return `https://spi.maps.daum.net/map2/map/imageservice?IW=480&IH=360&MX=${mx}&MY=${my}&SCALE=1&service=open`;
-  }
-  return "";
-}
+// 주변시설 한 줄: 아이콘 · 이름 · 종류 · 캠핑장에서 직선거리(850m / 1.2km) · 지도. 빈 지도 그림 대신 작게 줄였다(소유자 2026-10-19).
 function nearbyCard(x) {
   const [label, icon] = NEARBY_LABELS[x.type] ?? [x.type, "pin"];
   const map = x.lat && x.lng ? `https://map.kakao.com/link/map/${encodeURIComponent(x.name)},${x.lat},${x.lng}` : x.url;
-  const road = x.lat && x.lng ? `https://map.kakao.com/link/roadview/${x.lat},${x.lng}` : "";
-  const photo = nearbyThumb(x);
-  const media = photo
-    ? `<div class="media-card-photo"><img src="${esc(photo)}" alt="${esc(x.name)}" loading="lazy" decoding="async" onerror="this.closest('.media-card-photo').classList.add('media-card-icon');this.replaceWith(Object.assign(document.createElement('span'),{innerHTML:'${esc(ic(icon))}'}))"></div>`
-    : `<div class="media-card-photo media-card-icon" data-kind="${esc(icon)}">${ic(icon)}</div>`;
-  return `<article class="nearby-place media-card${photo ? " has-image" : ""}">
-    ${media}
-    <div class="media-card-body">
-      <i>${ic(icon)}${label} · ${x.summary ? "공공데이터" : km(x.m)}${x.sub ? ` · ${esc(x.sub)}` : ""}</i>
-      <b>${esc(x.name)}</b>
-      <span class="nearby-place-actions">${map ? `<a href="${esc(map)}" target="_blank" rel="noopener" aria-label="${esc(x.name)} 지도">${ic("map")}지도</a>` : ""}${road ? `<a href="${esc(road)}" target="_blank" rel="noopener" aria-label="${esc(x.name)} 로드뷰">${ic("search")}로드뷰</a>` : ""}</span>
-    </div>
-  </article>`;
+  const photo = x.image && /^https?:\/\//.test(x.image) ? x.image : "";
+  // 실제 모습 사진(검색 API 썸네일 · 관광공사 사진): 64px로 보이고, 사진을 누르면 원문 글로 간다(줄 전체는 지도 링크).
+  const open = x.imgU ? ` data-open="${esc(x.imgU)}" title="사진 원문 보기${x.imgS ? ` · ${esc(x.imgS)}` : ""}"` : "";
+  const lead = photo ? `<img class="nb-thumb${x.imgU ? " nb-photo" : ""}" src="${esc(photo)}" alt="${esc(x.name)} 사진" loading="lazy" decoding="async" referrerpolicy="no-referrer"${open} onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'nb-ic',innerHTML:this.dataset.ic}))" data-ic="${esc(ic(icon))}">` : `<span class="nb-ic">${ic(icon)}</span>`;
+  const credit = photo && x.imgU ? `<small class="nb-credit">사진 · ${esc(x.imgS || "블로그")}</small>` : "";
+  const dist = x.summary ? "" : km(x.m);
+  const body = `${lead}<span class="nb-txt"><b>${esc(x.name)}</b><i>${esc(label)}${x.sub ? ` · ${esc(x.sub)}` : ""}${x.summary ? " · 공공데이터" : ""}</i>${credit}</span>${dist ? `<span class="nb-dist" aria-label="캠핑장에서 ${esc(dist)}">${esc(dist)}</span>` : ""}`;
+  return map
+    ? `<a class="nearby-place nb-row" href="${esc(map)}" target="_blank" rel="noopener" aria-label="${esc(x.name)} 지도 열기 · ${esc(label)}${dist ? ` · ${esc(dist)}` : ""}">${body}${ic("map", "nb-go")}</a>`
+    : `<div class="nearby-place nb-row">${body}</div>`;
 }
 /** 주변 > 주유 · 충전 칸에 가까운 전기차 충전소(최대 3곳)를 덧붙인다. ev: context/card.js evFor() 결과 */
 function mountNearbyEv(ev) {
@@ -1533,15 +1498,16 @@ function mountNearbyEv(ev) {
   const note = group.querySelector("[data-energy-note]");
   note.innerHTML = `충전소 5km 안 ${ev.c5}곳 · 출처 ${ev.source ? `<a href="${esc(ev.source.url)}" target="_blank" rel="noopener">${esc(ev.source.name)}</a>` : "공개자료"}${ev.osm ? " (지도 공개자료라 실제로는 더 가까이 있을 수 있어요)" : ""}`;
   note.hidden = false;
-  group.hidden = false;
   group.closest(".nearby-hub")?.removeAttribute("hidden");
+  const tab = $("[data-nb-tab='energy']");
+  if (tab) { tab.hidden = false; if (!$("[data-nb-tab][aria-selected='true']:not([hidden])")) tab.click(); } else group.hidden = false;
 }
 function nearbyHubHtml(c, d) {
   const nearby = d?.nearby ?? {}, licensed = d?.nearby_licensed ?? {};
   const entry = (type, x = {}) => {
     const name = x.name ?? x.n;
     const m = Number(x.m);
-    return name && Number.isFinite(m) ? { type, name, m, lat: x.lat, lng: x.lng, url: x.u, image: x.img } : null;
+    return name && Number.isFinite(m) ? { type, name, m, lat: x.lat, lng: x.lng, url: x.u, image: x.img, imgU: x.img_u, imgS: x.img_s } : null;
   };
   const first = (type, rows) => (rows.map((x) => entry(type, x)).filter(Boolean).sort((a, b) => a.m - b.m)[0] ?? null);
   // 상비약 판매처는 보통 같은 편의점이다. 이름이 같으면 한 칸으로 줄인다.
@@ -1564,8 +1530,11 @@ function nearbyHubHtml(c, d) {
   const groups = [["생활", "store", unique(local)], ["안전 · 이동", "route", unique(safety)], ["관광 · 맛집", "pin", unique(leisure)]]
     .filter(([, , rows]) => rows.length);
   // 주유·충전: 주유소는 상세 자료에 있고, 전기차 충전소는 /context/extras.json에서 화면이 뜬 뒤 덧붙인다(mountNearbyEv).
-  const energy = `<section class="nearby-group" data-energy${fuel.length ? "" : " hidden"}><h3>${ic("fuel")}주유 · 충전</h3><div class="nearby-places" data-energy-places>${fuel.map(nearbyCard).join("")}</div><p class="nearby-note" data-energy-note hidden></p></section>`;
-  return `<section class="d-sec nearby-hub"${groups.length || fuel.length ? "" : " hidden"}><div class="sec-head">${iconTitle("route", "주변시설")}<span class="sec-note">직선거리 ${tip("<b>주변 정보</b><span>생활·안전 시설은 인허가·공공 데이터, 관광·맛집은 한국관광공사 데이터로 연결합니다. 운영 시간과 영업 여부는 원문에서 다시 확인하세요.</span>")}</span></div><div class="nearby-groups">${groups.map(([title, icon, rows]) => `<section class="nearby-group"><h3>${ic(icon)}${title}</h3><div class="nearby-places">${rows.map(nearbyCard).join("")}</div></section>`).join("")}${energy}</div></section>`;
+  const energy = `<section class="nearby-group" id="nb-p-energy" role="tabpanel" aria-labelledby="nb-t-energy" data-energy${groups.length ? " hidden" : fuel.length ? "" : " hidden"}><div class="nearby-places" data-energy-places>${fuel.map(nearbyCard).join("")}</div><p class="nearby-note" data-energy-note hidden></p></section>`;
+  // 칩(탭)으로 한 묶음씩 본다. 주유·충전 칩은 주유소가 없으면 숨겼다가 충전소가 붙을 때 보인다(mountNearbyEv).
+  const tabs = [...groups.map(([title, icon, rows], i) => ({ key: `g${i}`, title, icon, n: rows.length })), { key: "energy", title: "주유 · 충전", icon: "fuel", n: fuel.length, hide: !fuel.length }];
+  const tabsHtml = `<div class="nb-tabs" role="tablist" aria-label="주변시설 종류">${tabs.map((t, i) => `<button type="button" role="tab" id="nb-t-${t.key}" data-nb-tab="${t.key}" aria-controls="nb-p-${t.key}" aria-selected="${i === 0 && !t.hide}"${t.hide ? " hidden" : ""}>${ic(t.icon)}${esc(t.title)}${t.n ? `<i>${t.n}</i>` : ""}</button>`).join("")}</div>`;
+  return `<section class="d-sec nearby-hub" id="sec-nearby"${groups.length || fuel.length ? "" : " hidden"}><div class="sec-head">${iconTitle("route", "주변시설")}<span class="sec-note">캠핑장에서 직선거리 ${tip("<b>주변 정보</b><span>생활·안전 시설은 인허가·공공 데이터, 관광·맛집은 한국관광공사 데이터로 연결합니다. 운영 시간과 영업 여부는 원문에서 다시 확인하세요.</span>")}</span></div>${tabsHtml}<div class="nearby-groups">${groups.map(([title, icon, rows], i) => `<section class="nearby-group" id="nb-p-g${i}" role="tabpanel" aria-labelledby="nb-t-g${i}"${i ? " hidden" : ""}><div class="nearby-places">${rows.map(nearbyCard).join("")}</div></section>`).join("")}${energy}</div></section>`;
 }
 function reviewHtml(d, c) {
   const rv = d?.rv ?? c?.rv;
@@ -1695,13 +1664,13 @@ async function detailView(id) {
       <div><span>${ic("file-text")}후기</span><b>${c.rv?.n ? fmt(c.rv.n) : "–"}</b></div>
       <div><span>다음 오픈</span><b class="${o ? "hot" : "muted"}">${o ? esc(o.txt) : "–"}</b></div>
     </div>
+    <nav class="d-jump" aria-label="상세 바로가기">${[["sec-price", "요금"], ["sec-usage", "이용 정보"], ["sec-operator", "운영 안내"], ["sec-nearby", "주변"], ["sec-events", "축제·행사"], ["sec-reviews", "후기·사진"], ["sec-info", "업체 정보"]].map(([id, l]) => `<a href="#${id}" data-jump="${id}" hidden>${l}</a>`).join("")}</nav>
     <div class="d-body">
       <div class="d-main">
         ${siteTypesHtml(c, d)}
-        <section class="d-sec"><div class="sec-head">${iconTitle("info", "기본 규격")}</div><div class="tiles">${specTiles(c, d)}</div></section>
-        ${sitePricingHtml(c, d)}
-        ${priceMentionsHtml(d)}
-        <section class="d-sec"><div class="sec-head">${iconTitle("info", "이용 정보")}</div><dl class="uses">${us.map(([l, x, icon]) => `<div class="use${x ? "" : " unk"}"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${x ? `${esc(detailValue(x))}${asOfMention(x)}` : "확인필요"}</span>${x ? `<span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span>` : ""}</dd></div>`).join("")}</dl></section>
+        ${specSection(c, d)}
+        ${priceHtml(c, d)}
+        ${us.some(([, x]) => x) ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("info", "이용 정보")}</div><dl class="uses">${us.filter(([, x]) => x).map(([l, x, icon]) => `<div class="use"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${esc(wonText(detailValue(x)))}${asOfMention(x)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span></dd></div>`).join("")}</dl>${unknownLine(us.filter(([, x]) => !x).map(([l]) => l))}</section>` : ""}
         <section class="d-sec" data-cond hidden></section>
         <section class="d-sec" data-extras hidden></section>
         ${reviewHtml(d, c)}
@@ -1712,7 +1681,6 @@ async function detailView(id) {
         ${programsHtml(d)}
         ${layoutHtml(d)}
         ${operatorMediaHtml(d)}
-        ${snsHtml(d, c)}
         ${videosHtml(d)}
         ${platformHubHtml(d, c)}
         ${nearbyHubHtml(c, d)}
@@ -1825,16 +1793,78 @@ function amenityHtml(c) {
     ${rent.length ? `<p class="amen-rent"><b>${ic("cart")}대여</b>${rent.map((x) => `<span>${esc(x)}</span>`).join("")}</p>` : ""}
   </section>`;
 }
-// 블로그 후기에 언급된 1박 요금(MENTION). 원문 링크와 문장을 그대로 남긴다.
 const DAY = { weekday: "평일", weekend: "주말", holiday: "공휴일" };
-function priceMentionsHtml(d) {
-  const ps = (d?.prices ?? []).filter((p) => p.won).slice(0, 6);
-  if (!ps.length) return "";
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("info", "요금 언급")}<span class="sec-note">후기 기준 · 예약처 확인</span></div><ul class="plist">${ps.map((p, i) => {
-    const context = [serviceText(p.label, 22), DAY[p.day], serviceText(p.season, 14)].filter(Boolean).join(" · ") || "1박 기준";
-    const evidence = sourceFact(p, "후기 원문", p.quote);
-    return `<li><b>${fmt(p.won)}원</b><span>${esc(context)}</span>${asOf(p.date)}${srcTip(evidence, `요금 언급 ${i + 1}`)}</li>`;
-  }).join("")}</ul></section>`;
+// 1박 요금은 한 곳에서만 보여 준다(소유자 2026-10-19: 이용 정보 · 사이트 표 · 요금 언급 · 운영자 안내에 세 번 나오던 요금을 하나로).
+// 순서: 업장 등록(예약 화면·시설 상품) → 대표 요금(고캠핑·운영자) → 추가 요금 → 운영자 안내 금액 → 후기 언급(확인필요).
+// 모든 줄은 ‘요금 언급’ 모양(금액 + 짧은 설명 + 근거 i)이고, 같은 금액은 한 번만 보인다.
+const WON_RE = /(\d{1,3}(?:,\d{3})+|\d{4,7})\s*원/;
+function priceRows(c, d) {
+  const rows = [], seen = new Set();
+  const add = (won, label, kind, fact, extra = "", text = "") => {
+    const key = `${won}|${kind === "후기 언급" ? "" : label}`;
+    if (!won && !label && !text) return;
+    if (won && (seen.has(won) && kind === "후기 언급")) return;
+    if (seen.has(key)) return;
+    seen.add(key); if (won) seen.add(won);
+    rows.push({ won, label, kind, fact, extra, text });
+  };
+  const bs = d?.booking_sites;
+  if (bs?.sites?.length) {
+    const groups = new Map();
+    for (const x of bs.sites) {
+      const k = [x.kind, x.size?.join("x"), x.floor, x.price, x.parking, x.pet].join("|");
+      if (!groups.has(k)) groups.set(k, { ...x, names: [] });
+      groups.get(k).names.push(x.name);
+    }
+    const day = bs.date ? `${mdKst(`${bs.date}T12:00:00+09:00`)}(토)` : "";
+    for (const g of groups.values()) {
+      const ns = g.names, name = serviceText(ns.length > 2 ? `${ns[0]} ~ ${ns.at(-1)}` : ns.join(", "), 30);
+      const label = [name, g.kind, `${ns.length}개`, g.size ? `${g.size[0]}×${g.size[1]}m` : "", g.floor, g.pet ? "반려동물 동반" : ""].filter(Boolean).join(" · ");
+      add(g.price || 0, label, "업장 등록", { g: "c", src: { label: bs.label ?? "예약 화면(업장 등록)", url: bs.url, at: bs.checked_at, quote: `${name}${g.size ? ` 규격 ${g.size[0]}m × ${g.size[1]}m` : ""}${g.price ? ` ${fmt(g.price)}원` : ""}${day ? ` · ${day} 1박` : ""}` } }, day ? `${day} 1박` : "");
+    }
+  } else if ((d?.products ?? []).length) {
+    for (const [i, x] of d.products.entries()) {
+      const label = [serviceText(x.name, 26) || `사이트 ${i + 1}`, serviceText(x.size, 20), x.base ? `기준 ${serviceText(x.base, 16)}인` : ""].filter(Boolean).join(" · ");
+      add(Number(x.price) || 0, label, "업장 등록", { g: "c", src: { label: d?.products_src?.label || "공식 시설 및 상품 등록", url: d?.products_src?.url || c.gc_url, at: d?.products_src?.checked_at, quote: `${x.name ?? ""} ${x.size ? `규격: ${x.size}` : ""} ${x.price ? `${fmt(x.price)}원` : ""}`.trim() } });
+    }
+  }
+  if (!rows.length) {
+    const pf = profFact(PF(d, "PRICE"));
+    const fee = c.fee;
+    if (pf?.v) add(0, "1박 기준", "대표 요금", pf, "", wonText(detailValue(pf)));
+    else if (fee) {
+      const lo = Number(fee.min), hi = Number(fee.max ?? fee.min);
+      const range = lo > 0 ? `${fmt(lo)}${hi > lo ? `~${fmt(hi)}` : ""}원${/대\s*$/.test(fee.text ?? "") ? "대" : ""}` : wonText(fee.text ?? "");
+      add(0, "1박 기준", "대표 요금", { g: GR(fee.grade) || "m", src: { label: sourceName(fee.basis, "요금 근거"), url: fee.url, at: fee.checked_at, quote: fee.quote } }, "", range);
+    }
+  }
+  const extra = profFact(PF(d, "EXTRA_FEE")) ?? specFact(d, "EXTRA_PERSON_FEE");
+  if (extra?.v) add(0, "인원·차량 추가", "추가 요금", extra, "", wonText(detailValue(extra)));
+  // 운영자 안내 중 금액 문장(환불·취소 규정 제외)은 여기로 옮기고, 운영자 안내 칸에서는 뺀다.
+  for (const x of d?.operator_snippets ?? []) {
+    const t = typeof x === "string" ? x : x.text;
+    if ((x.cat ?? "요금 · 환불") !== "요금 · 환불" || /환불|취소|위약|수수료/.test(t)) continue;
+    const m = String(t).match(WON_RE);
+    const won = m ? Number(m[1].replace(/,/g, "")) : 0;
+    if (won < 5000) continue;
+    add(won, serviceText(String(t).replace(m[0], "").replace(/^[\s:：·\-]+|[\s:：·\-]+$/g, ""), 40) || "운영자 안내", "운영자 안내", { g: "c", src: { label: sourceName(x.src, "운영자 홈페이지"), url: x.url, at: x.date, quote: x.orig ?? t } });
+    if (rows.filter((r) => r.kind === "운영자 안내").length >= 3) break;
+  }
+  let mentions = 0;
+  for (const x of d?.prices ?? []) {
+    if (!x.won || mentions >= 3) continue;
+    const before = rows.length;
+    add(x.won, [serviceText(x.label, 22), DAY[x.day], serviceText(x.season, 14)].filter(Boolean).join(" · ") || "1박", "후기 언급", sourceFact(x, "후기 원문", x.quote), asOf(x.date));
+    if (rows.length > before) mentions++;
+  }
+  return { rows, bs };
+}
+function priceHtml(c, d) {
+  const { rows, bs } = priceRows(c, d);
+  if (!rows.length) return "";
+  const li = (r, i) => `<li class="pl-${r.kind === "후기 언급" ? "m" : "c"}"><b>${r.won ? `${fmt(r.won)}원` : esc(r.text || "예약처 확인")}</b><span>${esc(r.label)}</span><i class="pl-kind">${esc(r.kind)}${r.kind === "후기 언급" ? " · 확인필요" : ""}</i>${r.extra && r.kind === "후기 언급" ? r.extra : ""}${srcTip(r.fact, `1박 요금 ${i + 1}`)}</li>`;
+  const foot = bs?.url ? `<p class="st-foot">요금은 날짜마다 달라요. <a href="${esc(bs.url)}" target="_blank" rel="noopener">날짜별 예약 화면 열기</a></p>` : "";
+  return `<section class="d-sec price-sec" id="sec-price"><div class="sec-head">${iconTitle("won", "1박 요금")}<span class="sec-note">업장 등록 우선 · 후기는 참고</span></div><ul class="plist">${rows.slice(0, 6).map(li).join("")}</ul>${rows.length > 6 ? `<details class="pl-more"><summary>요금 ${rows.slice(6, 12).length}개 더 보기</summary><ul class="plist">${rows.slice(6, 12).map((r, i) => li(r, i + 6)).join("")}</ul></details>` : ""}${foot}</section>`;
 }
 // 운영자 원문은 말투·질문·반복이 섞여 있으므로, 예약에 필요한 항목으로 묶어 읽기 좋게 정리한다.
 // 값 자체는 바꾸지 않고 같은 항목의 짧은 원문만 합치며, 전체 원문은 작은 (i)에서 다시 열 수 있다.
@@ -1863,6 +1893,7 @@ function operatorSummary(label, texts) {
     const times = [...text.matchAll(/(?:입실|퇴실|체크인|체크아웃|얼리.?체크)[^.!?·]{0,28}/gi)].map((x) => clock(x[0])).filter(Boolean);
     return [...new Set(times)].slice(0, 2).join(" · ") || "입·퇴실 시간 확인";
   }
+  if (label === "취소 · 환불") return /당일.{0,8}(환불\s*불가|불가)/.test(text) ? "당일 취소 환불 불가" : "취소·환불 규정 확인";
   if (label === "요금 · 환불") {
     const parsePriceWon = (str) => {
       const clean = str.replace(/[^\d.만천]/g, "");
@@ -1925,23 +1956,26 @@ function operatorHtml(d) {
     const text = compactOperatorText(x.text);
     if (text.length < 14 || used.has(text) || /^(캠핑 이용요금|예약 취소|이용요금 환불기준|.+가능한가요)\??$/.test(text)) continue;
     used.add(text);
-    const label = OPERATOR_CATEGORIES.find(([, re]) => re.test(text))?.[0] ?? "운영 안내";
+    let label = x.cat ?? OPERATOR_CATEGORIES.find(([, re]) => re.test(text))?.[0] ?? "운영 안내";
+    // 금액 문장은 ‘1박 요금’ 칸으로 옮겼다. 여기에는 취소·환불 규정만 남긴다.
+    if (label === "취소 · 환불") return /당일.{0,8}(환불\s*불가|불가)/.test(text) ? "당일 취소 환불 불가" : "취소·환불 규정 확인";
+  if (label === "요금 · 환불") { if (!/환불|취소|위약|수수료/.test(text)) continue; label = "취소 · 환불"; }
     const row = grouped.get(label) ?? { label, texts: [], url: x.url, src: x.src, at: x.date, image: null };
     if (x.image && !row.image) row.image = x.image;
     if (row.texts.length < 3 && !row.texts.some((t) => t.includes(text) || text.includes(t))) row.texts.push(text);
     if (!row.url && x.url) row.url = x.url;
     grouped.set(label, row);
   }
-  const order = new Map(OPERATOR_CATEGORIES.map(([label], i) => [label, i]));
+  const order = new Map(["입·퇴실", "예약 · 성수기", "취소 · 환불", "인원 · 추가", "주차", "전기", "불멍 · 화로", "반려동물", "매너타임 · 소음", "시설", "이용 규칙", "사이트 이용", ...OPERATOR_CATEGORIES.map(([l]) => l)].map((label, i) => [label, i]));
   const rows = [...grouped.values()].filter((x) => x.texts.length).sort((a, b) => (order.get(a.label) ?? 99) - (order.get(b.label) ?? 99)).slice(0, 8);
   if (!rows.length) return "";
-  return `<section class="d-sec operator-sec"><div class="sec-head">${iconTitle("report", "운영자 안내 · 공지사항")}<span class="sec-note">항목별 정리</span></div><div class="operator-grid">${rows.map((x) => {
+  return `<section class="d-sec operator-sec" id="sec-operator"><div class="sec-head">${iconTitle("report", "운영자 안내 · 공지사항")}<span class="sec-note">항목별 정리</span></div><div class="operator-grid">${rows.map((x) => {
     const source = srcTip({ g: "c", src: { label: x.image ? "운영자 안내 이미지(글자 인식)" : sourceName(x.src, "운영자 홈페이지"), url: x.url, at: x.at, quote: x.texts.join("\n"), image: x.image } }, x.label);
     const sum = operatorSummary(x.label, x.texts);
     // ‘○○ 안내’ ‘○○ 확인’ 같은 빈 요약 대신 운영자가 쓴 첫 문장을 짧게 정리해 보인다.
     const statement = x.texts.find((t) => !/(\?|까요|나요|가요|인가요)\s*$/.test(t));
     const value = /(안내|확인)$/.test(sum) && statement ? serviceText(statement, 64) || sum : sum;
-    const opIc = /입실|퇴실/.test(x.label) ? "clock-in" : /요금|환불/.test(x.label) ? "won" : /주차/.test(x.label) ? "car" : /전기/.test(x.label) ? "bolt" : /화로|장작/.test(x.label) ? "flame" : /반려/.test(x.label) ? "paw" : /시설/.test(x.label) ? "drop" : "report";
+    const opIc = /입실|퇴실/.test(x.label) ? "clock-in" : /요금|환불/.test(x.label) ? "won" : /주차/.test(x.label) ? "car" : /전기/.test(x.label) ? "bolt" : /화로|장작/.test(x.label) ? "flame" : /반려/.test(x.label) ? "paw" : /시설/.test(x.label) ? "drop" : /예약/.test(x.label) ? "calendar" : /인원/.test(x.label) ? "plus" : /매너/.test(x.label) ? "moon" : "report";
     return `<article><span>${ic(opIc)}${esc(x.label)}</span><p>${esc(value)}</p>${source}</article>`;
   }).join("")}</div></section>`;
 }
@@ -1950,11 +1984,11 @@ function bookingHtml(c, d) {
   const main = primaryBooking(c);
   const g = d?.guide;
   const pf = g?.platform ?? {};
-  const meta = [["오픈", pf.opening], ["결제", pf.payment], ["취소", pf.cancel], ["대기", pf.waitlist]].filter(([, v]) => v && !/운영자 안내에 따름|홈페이지마다 다름/.test(v));
+  const meta = [["오픈", pf.opening], ["결제", pf.payment], ["취소", pf.cancel], ["대기", pf.waitlist]].filter(([, v]) => v && !/운영자 안내에 따름|홈페이지마다 다름|홈페이지\s*(공지|예약\s*안내)|일정을 따른다/.test(v));
   if (!main && !c.tel && !meta.length && !(pf.tips ?? []).length) return "";
   const guideFact = sourceFact({ src: g?.source?.label ?? g?.source, url: g?.source?.url, date: g?.source?.date, quote: (pf.tips ?? []).join("\n") }, "예약 안내");
   return `<section class="d-sec"><div class="sec-head">${iconTitle("calendar", "예약 방법")}${main || (pf.tips ?? []).length ? `<span class="sec-note">${main ? `대표 채널 ${srcTip(bookingSource(main), "대표 예약 채널")}` : ""}${(pf.tips ?? []).length ? srcTip(guideFact, "예약 안내") : ""}</span>` : ""}</div>
-    ${main || c.tel ? `<div class="chans">${main ? `<a class="chan" href="${esc(main.url)}" target="_blank" rel="noopener">${ic("right")}<b>${esc(bookingLabel(main))}</b><i>예약 페이지</i></a>` : ""}${c.tel ? `<a class="chan" href="tel:${esc(c.tel)}">${ic("phone")}<b>전화 문의</b><i>${esc(c.tel)}</i></a>` : ""}</div>` : ""}
+    ${main || c.tel ? `<div class="chans">${main ? `<a class="chan" href="${esc(main.url)}" target="_blank" rel="noopener">${ic("right")}<b>${esc(bookingLabel(main))}</b><i>예약 페이지</i></a>` : ""}${c.tel ? `<a class="chan" href="tel:${esc(telText(c.tel).replace(/[^\d+]/g, ""))}">${ic("phone")}<b>전화 문의</b><i>${esc(telText(c.tel))}</i></a>` : ""}</div>` : ""}
     ${meta.length ? `<dl class="uses">${meta.map(([l, v]) => `<div class="use"><dt>${l}</dt><dd><span class="use-val">${esc(serviceText(v, 32))}</span><span class="use-meta">${srcTip({ g: "c", src: { label: "예약 안내", url: g?.source?.url, at: g?.source?.date, quote: v } }, l)}</span></dd></div>`).join("")}</dl>` : ""}
     ${(pf.tips ?? []).length ? `<ul class="tips">${pf.tips.slice(0, 3).map((t) => `<li>${esc(serviceText(t, 60))}</li>`).join("")}</ul>` : ""}
   </section>`;
@@ -1990,35 +2024,25 @@ const apiThumb = (x) => (/^https:\/\/search\d?\.kakaocdn\.net\//.test(String(x?.
 function thumbLinks(list, label) {
   return `<div class="thumb-links">${list.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${label} ${i + 1} 원문 열기"><img src="${esc(apiThumb(x))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"><i>${esc(sourceName(x.src, hostOf(x.url) || "원문"))}</i></a>`).join("")}</div>`;
 }
-function snsHtml(d, c) {
-  const im = (d?.sns_images ?? []).filter((x) => x.url).slice(0, 8);
-  if (!im.length) return "";
-  const previews = im.filter(canPreviewExternalMedia).filter((x) => externalImage(x));
-  const thumbs = im.filter((x) => !previews.includes(x) && apiThumb(x));
-  const references = im.filter((x) => !previews.includes(x) && !thumbs.includes(x));
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("camera", "캠퍼 사진")}<span class="sec-note">${c.soc?.[0] ? `후기 ${fmt(c.soc[0])} · ` : ""}${c.soc?.[1] ? `영상 ${fmt(c.soc[1])}` : "원문"}</span></div>
-    ${previews.length ? `<div class="visitor-gallery">${previews.map((x, i) => `<button type="button" data-external-media="sns" data-index="${i}"><img src="${esc(externalImage(x))}" alt="방문 사진" loading="lazy" decoding="async"></button>`).join("")}</div>` : ""}
-    ${thumbs.length ? thumbLinks(thumbs, "캠퍼 사진") : ""}
-    ${references.length ? `<div class="visitor-sources">${references.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener"><span>${ic("camera")}방문 사진 ${i + 1}</span><i>원문 열기 · ${esc(sourceName(x.src, "외부 콘텐츠"))}</i>${ic("external", "line")}</a>`).join("")}</div>` : ""}
-  </section>`;
-}
-
 function operatorMediaHtml(d) {
   const imgs = (d?.operator_media?.images ?? []).filter((x) => x.url).slice(0, 8);
   if (!imgs.length) return "";
   const cards = imgs.map((x, i) => `<a class="media-card" href="${esc(x.page || x.url)}" target="_blank" rel="noopener"><div class="media-card-photo"><img src="${esc(x.url)}" alt="${esc(x.alt || "운영자 사진")}" loading="lazy" decoding="async" onerror="this.closest('.media-card').remove()"></div><div class="media-card-body"><i>${x.layout ? "배치·시설" : "운영자 사진"}</i><b>${esc(x.alt || `사진 ${i + 1}`)}</b></div></a>`).join("");
   return `<section class="d-sec"><div class="sec-head">${iconTitle("layers", "운영자 제공 사진")}<span class="sec-note">운영자 홈페이지 원문</span></div><div class="media-grid">${cards}</div></section>`;
 }
+// 시설 배치도·캠퍼 사진: 누르면 이 화면 안 라이트박스에서 원본 그림을 크게 연다(소유자 2026-10-19).
+// 원본을 못 불러오면 검색 API 썸네일을 대신 보이고, 원문 링크는 라이트박스 아래에 둔다. 그림은 저장하지 않는다.
+const mediaFull = (x) => externalImage(x) || apiThumb(x);
+const mediaSmall = (x) => apiThumb(x) || externalImage(x);
+const layoutImages = (d) => (d?.layout?.images ?? []).filter((x) => x.url && mediaFull(x)).filter((x, i, all) => all.findIndex((y) => y.url === x.url && mediaFull(y) === mediaFull(x)) === i).slice(0, 6);
+const snsImages = (d) => (d?.sns_images ?? []).filter((x) => x.url && mediaFull(x)).slice(0, 8);
 function layoutHtml(d) {
-  const imgs = (d?.layout?.images ?? []).filter((x) => x.url).filter((x, i, all) => all.findIndex((y) => y.url === x.url) === i).slice(0, 6);
+  const imgs = layoutImages(d);
   if (!imgs.length) return "";
-  const previews = imgs.filter(canPreviewExternalMedia).filter((x) => externalImage(x));
-  const thumbs = imgs.filter((x) => !previews.includes(x) && apiThumb(x));
-  const references = imgs.filter((x) => !previews.includes(x) && !thumbs.includes(x));
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("layers", "시설 배치도")}<span class="sec-note">${imgs.length}개</span></div>
-    ${previews.length ? `<div class="layout-viewer"><button class="layout-main" type="button" data-external-media="layout" data-index="0"><img src="${esc(externalImage(previews[0]))}" alt="시설 배치도" decoding="async"><span>${ic("search")}크게 보기</span></button><div class="layout-thumbs">${previews.map((x, i) => `<button type="button" data-layout-thumb="${i}"><img src="${esc(externalImage(x))}" alt="배치도 ${i + 1}" loading="lazy" decoding="async"></button>`).join("")}</div></div>` : ""}
-    ${thumbs.length ? thumbLinks(thumbs, "배치도") : ""}
-    ${references.length ? `<div class="layout-links">${references.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener"><span>${ic("layers", "line")}배치도 ${i + 1}</span><i>원문 열기 · ${esc(sourceName(x.src, "외부 안내"))}</i>${ic("external", "line")}</a>`).join("")}</div>` : ""}
+  const first = imgs[0];
+  return `<section class="d-sec layout-sec"><div class="sec-head">${iconTitle("layers", "시설 배치도")}<span class="sec-note">${imgs.length}장 · 눌러서 크게 보기</span></div>
+    <div class="layout-viewer"><button class="layout-main" type="button" data-media-lb="layout" data-index="0" aria-label="시설 배치도 1 크게 보기"><img src="${esc(mediaFull(first))}" data-fb="${esc(mediaSmall(first))}" alt="시설 배치도" decoding="async" referrerpolicy="no-referrer"><span>${ic("search")}크게 보기</span></button>${imgs.length > 1 ? `<div class="layout-thumbs">${imgs.map((x, i) => `<button type="button" data-layout-thumb="${i}" aria-label="배치도 ${i + 1} 보기"${i ? "" : " aria-current"}><img src="${esc(mediaSmall(x))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"></button>`).join("")}</div>` : ""}</div>
+    <p class="st-foot">출처 ${esc(sourceName(first.src, hostOf(first.url) || "원문"))}${first.date ? ` · ${esc(String(first.date).slice(0, 10))}` : ""} · <a href="${esc(first.url)}" target="_blank" rel="noopener">원문 보기</a></p>
   </section>`;
 }
 // 플랫폼별 더 보기(docs/PLATFORM_HUB.md, 2026-10-19): 수집한 영상은 위 영상 칸에서 재생하고,
@@ -2026,14 +2050,16 @@ function layoutHtml(d) {
 function platformHubHtml(d, c) {
   const name = nameOf(c).name;
   const q = encodeURIComponent(`${name} 캠핑`);
-  const svg = (path) => `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${path}</svg>`;
+  // 아이콘은 모두 같은 크기·모양(둥근 네모 34px, 흰 글리프 18px)으로 맞춘다(소유자 2026-10-19). 바깥 그림 파일은 쓰지 않는다.
+  const svg = (path, bg) => `<span class="plat-ic" style="--pb:${bg}"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${path}</svg></span>`;
+  const letter = (t) => `<text x="12" y="17.5" text-anchor="middle" font-size="16" font-weight="900" font-family="Arial, Helvetica, sans-serif">${t}</text>`;
   const platforms = [
-    { label: "YouTube", icon: svg('<path d="M18 3a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H6a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5zm-9 6v6a1 1 0 0 0 1.514.857l5-3a1 1 0 0 0 0-1.714l-5-3A1 1 0 0 0 9 9z"/>'), url: `https://www.youtube.com/results?search_query=${q}`, has: (d?.videos ?? []).length > 0 },
-    { label: "Instagram", icon: svg('<path d="M16 3a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5zm-4 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8m4.5-1.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>'), url: `https://www.instagram.com/explore/search/keyword/?q=${q}` },
-    { label: "Facebook", icon: svg('<path d="M18 2a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-3v1h3a1 1 0 0 1 .97 1.24l-1 4A1 1 0 0 1 17 15h-2v6a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-6H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2V7a6 6 0 0 1 6-6h3z"/>'), url: `https://www.facebook.com/search/posts/?q=${q}` },
-    { label: "TikTok", icon: svg('<path d="M16.083 2h-4.083a1 1 0 0 0-1 1v11.5a1.5 1.5 0 1 1-2.4-1.2 1 1 0 0 0 .4-.8V8.174a1 1 0 0 0-1.23-.974 7.5 7.5 0 1 0 8.73 7.3V12.3l.311.153a9 9 0 0 0 3.59.993 1 1 0 0 0 1.1-.996V8.417a1 1 0 0 0-.835-.986 5 5 0 0 1-4.096-4.096A1 1 0 0 0 16.083 2z"/>'), url: `https://www.tiktok.com/search?q=${q}` },
-    { label: "네이버", icon: `<img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Naver_logo_initial.svg" alt="" width="22" height="22">`, url: `https://search.naver.com/search.naver?query=${q}` },
-    { label: "다음", icon: svg('<rect x="2" y="2" width="20" height="20" rx="6"/><text x="12" y="16.5" text-anchor="middle" font-size="12" font-weight="900" font-family="Arial, sans-serif" fill="#fff">D</text>'), url: `https://search.daum.net/search?q=${q}` },
+    { label: "YouTube", icon: svg('<path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/>', "#ff0033"), url: `https://www.youtube.com/results?search_query=${q}`, has: (d?.videos ?? []).length > 0 },
+    { label: "Instagram", icon: svg('<path d="M16 3a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5zm0 2H8a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3m-4 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8m0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4m4.6-3.4a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>', "linear-gradient(45deg,#f9a825,#e1306c 55%,#833ab4)"), url: `https://www.instagram.com/explore/search/keyword/?q=${q}` },
+    { label: "Facebook", icon: svg('<path d="M14 8h3V4h-3a5 5 0 0 0-5 5v2H7v4h2v7h4v-7h3l1-4h-4V9a1 1 0 0 1 1-1"/>', "#1877f2"), url: `https://www.facebook.com/search/posts/?q=${q}` },
+    { label: "TikTok", icon: svg('<path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9.1a7.4 7.4 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.2-1.6"/>', "#111"), url: `https://www.tiktok.com/search?q=${q}` },
+    { label: "네이버", icon: svg('<path d="M15.6 12.8 8.1 2H2v20h6.4V11.2L15.9 22H22V2h-6.4z" transform="translate(3 3) scale(.75)"/>', "#03c75a"), url: `https://search.naver.com/search.naver?query=${q}` },
+    { label: "다음", icon: svg(letter("D"), "#0a6cff"), url: `https://search.daum.net/search?q=${q}` },
   ];
   return `<section class="d-sec plat-hub"><div class="sec-head">${iconTitle("external", "더 보기")}<span class="sec-note">플랫폼별 검색</span></div><div class="plat-btns">${platforms.map((p) => `<a class="plat-btn${p.has ? " has" : ""}" href="${esc(p.url)}" target="_blank" rel="noopener" title="${esc(p.label)}에서 ${esc(name)} 검색">${p.icon}<span>${esc(p.label)}</span>${p.has ? "<i>영상 있음</i>" : ""}</a>`).join("")}</div></section>`;
 }
@@ -2074,24 +2100,40 @@ function reviewLinksHtml(d, c) {
       </div>
     </div>`;
 
+  // 캠퍼 사진(소유자 2026-10-19: 블로그 후기와 한 칸으로): 같은 글의 사진은 그 후기 카드 그림으로 쓰고, 나머지는 사진 카드로 붙인다.
+  const photos = snsImages(d);
+  const photoByUrl = new Map(photos.map((x, i) => [x.url, i]));
+  const usedPhoto = new Set();
+  const photoCards = () => photos.map((x, i) => [x, i]).filter(([, i]) => !usedPhoto.has(i)).map(([x, i]) => `<article class="review-link-card media-card photo-card"><button type="button" class="media-card-photo" data-media-lb="sns" data-index="${i}" aria-label="캠퍼 사진 ${i + 1} 크게 보기"><img src="${esc(mediaSmall(x))}" data-fb="${esc(apiThumb(x) || "")}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="mc-zoom">${ic("search")}</span></button><div class="media-card-body"><i>${ic("camera")}${esc(sourceName(x.src, hostOf(x.url) || "원문"))}${x.date ? ` · ${esc(String(x.date).slice(0, 10))}` : ""}</i><b>${esc(serviceText(x.title, 54) || `캠퍼 사진 ${i + 1}`)}</b><a class="media-card-go" href="${esc(x.url)}" target="_blank" rel="noopener">${ic("external")}원문 보기</a></div></article>`).join("");
+  const title = photos.length ? "방문 후기 · 캠퍼 사진" : "블로그 · 카페 후기";
+  if (!r.length && photos.length) {
+    return `<section class="d-sec" id="sec-reviews"><div class="sec-head">${iconTitle("file-text", title)}<span class="sec-note">사진 ${photos.length}장</span></div>
+      <div class="review-links review-photos">${photoCards()}</div>
+      ${directLinks}
+    </section>`;
+  }
   if (!r.length) {
-    return `<section class="d-sec"><div class="sec-head">${iconTitle("file-text", "블로그 · 카페 후기")}<span class="sec-note">실시간 검색 연동</span></div>
+    return `<section class="d-sec" id="sec-reviews"><div class="sec-head">${iconTitle("file-text", "블로그 · 카페 후기")}<span class="sec-note">실시간 검색 연동</span></div>
       <p class="review-empty-note">연동된 본문 후기가 적은 곳입니다. 아래 공식 검색 채널에서 최신 방문자 후기 5건 이상을 바로 확인하세요.</p>
       ${directLinks}
     </section>`;
   }
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("file-text", "블로그 · 카페 후기")}<span class="sec-note">${r.length}건 수집</span></div>
-    <div class="review-links">${r.map((x, i) => {
+  const cards = r.map((x, i) => {
       const platform = /cafe/.test(x.t ?? "") ? "카페" : x.t === "kin" ? "지식iN" : x.t === "web" ? "웹문서" : "블로그";
       const fact = sourceFact(x, platform, [x.title, x.snippet].filter(Boolean).join("\n"));
       const summary = reviewSummary(x.snippet);
       const host = (() => { try { return new URL(x.url).hostname; } catch { return ""; } })();
       const fav = host ? `https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=128` : "";
       const campShot = photosOf(c)[0] ? photoUrl(photosOf(c)[0]) : "";
-      const thumb = (canPreviewExternalMedia(x) && externalImage(x)) || apiThumb(x) || fav || campShot;
+      const pi = photoByUrl.get(x.url);
+      if (pi != null) usedPhoto.add(pi);
+      const thumb = (pi != null && mediaSmall(photos[pi])) || (canPreviewExternalMedia(x) && externalImage(x)) || apiThumb(x) || fav || campShot;
       const media = `<div class="media-card-photo">${thumb ? `<img src="${esc(thumb)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${esc(campShot || fav)}'">` : ic("file-text")}</div>`;
       return `<article class="review-link-card media-card"><a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${platform} 후기 ${i + 1} 원문 열기">${media}<div class="media-card-body"><i>${ic("file-text")}${esc(sourceName(x.src, platform))}${x.date ? ` · ${esc(String(x.date).slice(0, 10))}` : ""}</i><b>${esc(serviceText(x.title, 54) || `방문 후기 ${i + 1}`)}</b>${summary ? `<em>${esc(summary)}</em>` : ""}<span class="media-card-go">${ic("external")}원문 보기</span></div></a>${srcTip(fact, `${platform} 후기 ${i + 1}`)}</article>`;
-    }).join("")}</div>
+    }).join("");
+  const extra = photoCards();
+  return `<section class="d-sec" id="sec-reviews"><div class="sec-head">${iconTitle("file-text", title)}<span class="sec-note">후기 ${r.length}건${photos.length ? ` · 사진 ${photos.length}장` : ""}</span></div>
+    <div class="review-links">${cards}</div>${extra ? `<h3 class="rv-sub">${ic("camera")}캠퍼 사진</h3><div class="review-links review-photos">${extra}</div>` : ""}
     ${directLinks}
   </section>`;
 }
@@ -2112,6 +2154,8 @@ function registryRows(c) {
     ["인허가일", g.lic ? esc(g.lic) : null],
   ];
 }
+// 전화번호 표기: 앞뒤 하이픈·공백을 정리한다(“1522-1861-” → “1522-1861”).
+const telText = (t) => String(t ?? "").trim().replace(/^[-\s]+|[-\s]+$/g, "").replace(/\s*-\s*/g, "-").replace(/-{2,}/g, "-");
 function infoHtml(c) {
   const name = encodeURIComponent(nameOf(c).name);
   const map = c.lat ? `https://map.kakao.com/link/map/${name},${c.lat},${c.lng}` : null;
@@ -2121,12 +2165,13 @@ function infoHtml(c) {
   const gcSrc = (field, quote) => ({ g: "c", src: { label: "한국관광공사 고캠핑 등록 현황", url: c.gc_url, quote: quote ? String(quote) : null } });
   const rows = [
     ["주소", c.addr ? `<span class="address-value">${esc(c.addr)}${addressActions}</span>` : null, gcSrc("주소", c.addr)],
-    ["전화", c.tel ? `<a href="tel:${esc(c.tel)}">${esc(c.tel)}</a>` : null, gcSrc("전화", c.tel)],
+    ["전화", telText(c.tel) ? `<a href="tel:${esc(telText(c.tel).replace(/[^\d+]/g, ""))}">${esc(telText(c.tel))}</a>` : null, gcSrc("전화", c.tel)],
     ["홈페이지", c.homepage ? `<a href="${esc(c.homepage)}" target="_blank" rel="noopener">${esc(hostOf(c.homepage) || c.homepage)}</a>` : null, { g: "c", src: { label: "공식 홈페이지", url: c.homepage } }],
-    ["운영", [OP[c.op], (c.seasons ?? []).length === 4 ? "사계절" : (c.seasons ?? []).join("·"), (c.days ?? [])[0]].filter(Boolean).map(esc).join(" · ") || null, gcSrc("운영 정보")],
+    // 운영 기간(계절)은 ‘이용 정보’에 있으므로 여기서는 운영 주체·요일만 둔다.
+    ["운영", [OP[c.op], (c.days ?? [])[0]].filter(Boolean).map(esc).join(" · ") || null, gcSrc("운영 정보")],
     ...registryRows(c),
   ].filter(([, v]) => v);
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("info", "업체 정보")}${c.gc_url ? `<a class="link" href="${esc(c.gc_url)}" target="_blank" rel="noopener">고캠핑 ${ic("right")}</a>` : ""}</div>
+  return `<section class="d-sec" id="sec-info"><div class="sec-head">${iconTitle("info", "업체 정보")}${c.gc_url ? `<a class="link" href="${esc(c.gc_url)}" target="_blank" rel="noopener">고캠핑 ${ic("right")}</a>` : ""}</div>
     <dl class="uses info">${rows.map(([l, v, src]) => `<div class="use"><dt>${l}</dt><dd><span class="use-val">${v}</span>${src ? `<span class="use-meta">${dot(src.g)}${srcTip(src, l)}</span>` : ""}</dd></div>`).join("")}</dl>
   </section>`;
 }
@@ -2715,12 +2760,59 @@ function bindDetail() {
     const idx = Math.min(Number(b.dataset.index) || 0, Math.max(0, items.length - 1));
     if (items.length) openLightboxUrls(items.map(externalImage), idx, b.dataset.externalMedia === "layout" ? "시설 배치도 · 원문 제공 이미지" : "캠퍼 사진 · 원문 제공 이미지");
   }));
+  $$("img[data-fb]", $("#view")).forEach((im) => {
+    const swap = () => { if (im.dataset.fb && im.src !== im.dataset.fb) { im.src = im.dataset.fb; delete im.dataset.fb; } };
+    im.addEventListener("error", swap);
+    if (im.complete && !im.naturalWidth) swap();
+  });
+  // 상세 바로가기: 보이는 칸만 링크를 켜고(축제 칸처럼 늦게 열리는 칸은 열릴 때 켠다), 지금 읽는 칸을 표시한다.
+  const jumps = $$("[data-jump]");
+  const syncJumps = () => jumps.forEach((a) => { const t = document.getElementById(a.dataset.jump); a.hidden = !t || t.hidden; });
+  syncJumps();
+  const late = jumps.map((a) => document.getElementById(a.dataset.jump)).filter(Boolean);
+  if (late.length) {
+    const mo = new MutationObserver(syncJumps);
+    late.forEach((t) => mo.observe(t, { attributes: true, attributeFilter: ["hidden"] }));
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) jumps.forEach((a) => a.toggleAttribute("aria-current", a.dataset.jump === e.target.id)); }), { rootMargin: "-30% 0px -60% 0px" });
+      late.forEach((t) => io.observe(t));
+    }
+  }
+  $(".d-jump")?.addEventListener("click", (e) => {
+    const a = e.target.closest("[data-jump]");
+    if (!a) return;
+    e.preventDefault();
+    const t = document.getElementById(a.dataset.jump);
+    t?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+    t?.setAttribute("tabindex", "-1"); t?.focus({ preventScroll: true });
+  });
+  $(".nearby-hub")?.addEventListener("click", (e) => {
+    const t = e.target.closest("[data-nb-tab]");
+    if (!t) return;
+    $$("[data-nb-tab]").forEach((b) => b.setAttribute("aria-selected", String(b === t)));
+    $$(".nearby-hub [role='tabpanel']").forEach((p) => { p.hidden = p.id !== t.getAttribute("aria-controls"); });
+  });
+  $(".nearby-hub [role='tablist']")?.addEventListener("keydown", (e) => {
+    if (!["ArrowLeft", "ArrowRight"].includes(e.key)) return;
+    const tabs = $$("[data-nb-tab]:not([hidden])"), i = tabs.indexOf(document.activeElement);
+    const n = tabs[(i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length];
+    n?.focus(); n?.click();
+  });
+  $$("[data-media-lb]").forEach((b) => b.addEventListener("click", async () => {
+    const d = await detailOf(id), kind = b.dataset.mediaLb;
+    const list = kind === "layout" ? layoutImages(d) : snsImages(d);
+    const label = kind === "layout" ? "시설 배치도" : "캠퍼 사진";
+    openLightboxUrls(list.map((x) => ({ src: mediaFull(x), fb: mediaSmall(x), link: x.url, cap: `${label} · ${sourceName(x.src, hostOf(x.url) || "원문")}` })), Number(b.dataset.index) || 0, label);
+  }));
   $$('[data-layout-thumb]').forEach((b) => b.addEventListener("click", async () => {
-    const items = await previewItems("layout"), i = Number(b.dataset.layoutThumb);
+    const items = layoutImages(await detailOf(id)), i = Number(b.dataset.layoutThumb);
     const main = $(".layout-main");
     if (!items[i] || !main) return;
-    $("img", main).src = externalImage(items[i]);
+    const im = $("img", main);
+    im.dataset.fb = mediaSmall(items[i]);
+    im.src = mediaFull(items[i]);
     main.dataset.index = String(i);
+    main.setAttribute("aria-label", `시설 배치도 ${i + 1} 크게 보기`);
     $$("[data-layout-thumb]").forEach((x, n) => x.toggleAttribute("aria-current", n === i));
   }));
   if (id && $("[data-cmts]")) loadComments(id);
@@ -2748,22 +2840,30 @@ function bindDetail() {
 function openLightbox(c, start) {
   openLightboxUrls(photosOf(c).map(photoHiUrl), start, "사진: 한국관광공사 고캠핑");
 }
+// urls: 주소 문자열 또는 { src, fb(못 불러오면 대신 보일 작은 그림), link(원문), cap(설명) }.
 function openLightboxUrls(urls, start = 0, caption = "사진") {
-  const ph = urls.filter(Boolean);
+  const ph = urls.filter(Boolean).map((u) => (typeof u === "string" ? { src: u } : u)).filter((u) => u.src || u.fb);
   if (!ph.length) return;
   const dlg = document.createElement("dialog");
   dlg.className = "lightbox";
-  dlg.innerHTML = `<button class="icon-btn lb-x" aria-label="닫기">${ic("close")}</button>${ph.length > 1 ? `<button class="icon-btn lb-nav lb-prev" aria-label="이전 사진">${ic("left")}</button><button class="icon-btn lb-nav lb-next" aria-label="다음 사진">${ic("right")}</button>` : ""}<div class="lb-track">${ph.map((u) => `<img src="${esc(u)}" alt="" decoding="async">`).join("")}</div><p class="lb-cap">${esc(caption)}</p>`;
+  dlg.setAttribute("aria-label", caption);
+  dlg.innerHTML = `<button class="icon-btn lb-x" aria-label="닫기">${ic("close")}</button>${ph.length > 1 ? `<button class="icon-btn lb-nav lb-prev" aria-label="이전 사진">${ic("left")}</button><button class="icon-btn lb-nav lb-next" aria-label="다음 사진">${ic("right")}</button>` : ""}<div class="lb-track">${ph.map((u, i) => `<img src="${esc(u.src || u.fb)}"${u.fb && u.src ? ` data-fb="${esc(u.fb)}"` : ""} alt="${esc(u.cap || `${caption} ${i + 1}`)}" decoding="async" referrerpolicy="no-referrer">`).join("")}</div><p class="lb-cap" aria-live="polite"></p>`;
   document.body.append(dlg);
+  $$(".lb-track img[data-fb]", dlg).forEach((im) => im.addEventListener("error", () => { if (im.dataset.fb && im.src !== im.dataset.fb) { im.src = im.dataset.fb; delete im.dataset.fb; } }));
   dlg.showModal();
-  const tr = $(".lb-track", dlg);
+  const tr = $(".lb-track", dlg), cap = $(".lb-cap", dlg);
   let active = Math.max(0, Math.min(start, ph.length - 1));
-  const move = (n) => { active = (n + ph.length) % ph.length; tr.scrollTo({ left: active * tr.clientWidth, behavior: "smooth" }); };
+  const label = () => {
+    const u = ph[active];
+    cap.innerHTML = `${esc(u.cap || caption)}${ph.length > 1 ? ` · ${active + 1}/${ph.length}` : ""}${u.link ? ` · <a href="${esc(u.link)}" target="_blank" rel="noopener">원문 보기</a>` : ""}`;
+  };
+  const move = (n) => { active = (n + ph.length) % ph.length; tr.scrollTo({ left: active * tr.clientWidth, behavior: "smooth" }); label(); };
   requestAnimationFrame(() => (tr.scrollLeft = active * tr.clientWidth));
+  label();
   $(".lb-x", dlg).onclick = () => dlg.close();
   $(".lb-prev", dlg)?.addEventListener("click", () => move(active - 1));
   $(".lb-next", dlg)?.addEventListener("click", () => move(active + 1));
-  tr.addEventListener("scroll", () => { active = Math.round(tr.scrollLeft / Math.max(1, tr.clientWidth)); }, { passive: true });
+  tr.addEventListener("scroll", () => { const n = Math.round(tr.scrollLeft / Math.max(1, tr.clientWidth)); if (n !== active) { active = n; label(); } }, { passive: true });
   dlg.addEventListener("keydown", (e) => { if (e.key === "ArrowLeft") move(active - 1); if (e.key === "ArrowRight") move(active + 1); });
   dlg.addEventListener("close", () => dlg.remove());
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
@@ -2955,6 +3055,13 @@ async function route() {
   updateHeaderGlass();
 }
 addEventListener("hashchange", route);
+// 주변시설 사진을 누르면 원문 글을 연다(사진이 든 줄 자체는 지도 링크).
+addEventListener("click", (e) => {
+  const im = e.target.closest?.("img[data-open]");
+  if (!im) return;
+  e.preventDefault(); e.stopPropagation();
+  window.open(im.dataset.open, "_blank", "noopener");
+}, true);
 
 // ── 시작 ─────────────────────────────────────────────────────
 // 상세 사진 묶음에서 깨진 사진: 그 칸을 빼고 남은 칸으로 격자를 다시 짠다(빈 회색 칸 금지).
