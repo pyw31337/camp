@@ -21,6 +21,11 @@ on:
           - media-backfill
           - tour-enrichment
           - free-audit
+      naver_mention_max_calls:
+        description: "네이버 웹 언급 최대 호출 수 (기본 8000). 같은 날 다시 돌릴 때는 일 한도 25,000의 절반(12,500) 안에서 남은 만큼만"
+        required: false
+        default: "8000"
+        type: string
   # 같은 저장소의 PR에서도 실행해 인증키·수집기를 병합 전에 확인한다(포크 PR에는 Secret이 전달되지 않음).
   pull_request:
     paths:
@@ -264,7 +269,7 @@ jobs:
           NAVER_API_HUB_CLIENT_SECRET: ${{ secrets.NAVER_API_HUB_CLIENT_SECRET }}
           NAVER_API_ENABLED: ${{ vars.NAVER_API_ENABLED }}
           NAVER_MONTHLY_CAP: ${{ vars.NAVER_MONTHLY_CAP }}
-          NAVER_MENTION_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '8000' }}
+          NAVER_MENTION_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || (github.event_name == 'workflow_dispatch' && inputs.naver_mention_max_calls) || '8000' }}
           BODY_MINUTES: ${{ github.event_name == 'pull_request' && '0' || '30' }}
       - name: Save collected caches to the shared data branch (single commit, force push)
         # 수집 직후 바로 저장한다(뒤 단계가 실패해도 남게). 다른 에이전트 공유용: cache/*.json.gz(누적 캐시), out/*.json.gz(이번 결과), MANIFEST.json
