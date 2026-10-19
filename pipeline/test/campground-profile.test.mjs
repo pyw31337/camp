@@ -17,7 +17,6 @@ test("원천 우선순위: 운영자 공개 W > 고캠핑 전기 제공, 고캠�
   assert.equal(p.fields.FIRE.value, "화로대 개별(연료 미확인)");
   assert.equal(p.fields.FIRE.grade, "CONFIRMED");
 });
-
 test("후기 언급은 MENTION으로만, 요약에는 쓰지 않는다", () => {
   const d = { prices: [{ won: 50000, url: "https://blog/x", quote: "5만원", date: "2026-10-01" }, { won: 60000 }],
     spec: { fields: { CHECKIN_TIME: { values: [], mentions: [{ value: "14:00부터", count: 3, samples: [{ url: "https://blog/y", quote: "체크인 2시" }] }] } } } };
@@ -50,4 +49,13 @@ test("운영자 상세 사실은 요금·편의시설·환불로 들어가고 �
 test("요약은 확인된 값만, 최대 6조각", () => {
   const s = summaryOf({ TYPE: { value: "오토 30", grade: "CONFIRMED" }, CHECKIN: { value: "14:00부터", grade: "OPERATOR" }, PRICE: { value: "5만원", grade: "MENTION" }, POWER: { watts: 600, grade: "OPERATOR" }, FIRE: { value: "장작 가능", grade: "OPERATOR" }, PARKING: { value: "사이트 옆 주차", grade: "OPERATOR" }, CAR_CAMPING: { value: "차박 가능", grade: "OPERATOR" }, PET: { value: "동반 가능", grade: "CONFIRMED" } });
   assert.equal(s, "오토 30 · 입실 14:00 · 전기 600W · 장작 가능 · 사이트 옆 주차 · 차박 가능");
+});
+
+test("환불 규정 미기재 시 법정 소비자분쟁해결기준을 참고값(REFERENCE)으로만 둔다", () => {
+  // 2026-10-19 소유자 결정: 업장이 공지하지 않은 법정 기본값은 그 업장의 규정이 아니므로 확정값으로 쓰지 않는다.
+  const p = buildProfile(base);
+  assert.equal(p.fields.REFUND.value, "업장 미공지 · 법정 기준 10일 전 100% 환불");
+  assert.equal(p.fields.REFUND.grade, "REFERENCE");
+  assert.equal(p.fields.REFUND.source.url, "https://www.ftc.go.kr/");
+  assert.equal(p.fields.REFUND.statutory, true);
 });

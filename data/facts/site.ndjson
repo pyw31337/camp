@@ -351,6 +351,7 @@
 {"cid":"1234","attr":"SITE_SIZE","value":"6×9m","grade":"CONFIRMED","src":"gocamping","count":50}
 {"cid":"1234","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1234","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1246","attr":"SITE_SIZE","value":"3.5×4m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1255","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1258","attr":"SITE_SIZE","value":"5×3m","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"1258","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"gocamping","count":29}
@@ -629,6 +630,7 @@
 {"cid":"2304","attr":"SITE_SIZE","value":"8×10m","grade":"CONFIRMED","src":"gocamping","count":150}
 {"cid":"2304","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2304","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2329","attr":"SITE_SIZE","value":"7×7.8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2355","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2355","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2355","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
@@ -1073,6 +1075,7 @@
 {"cid":"6998","attr":"SITE_SIZE","value":"7×12m","grade":"CONFIRMED","src":"gocamping","count":17}
 {"cid":"6998","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6998","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7025","attr":"SITE_SIZE","value":"7×5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7026","attr":"SITE_SIZE","value":"3×3m","grade":"CONFIRMED","src":"gocamping","count":100}
 {"cid":"7026","attr":"SITE_SIZE","value":"7×5m","grade":"CONFIRMED","src":"gocamping","count":18}
 {"cid":"7026","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -1286,6 +1289,7 @@
 {"cid":"7838","attr":"SITE_SIZE","value":"8×12m","grade":"CONFIRMED","src":"gocamping","count":14}
 {"cid":"7838","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":6}
 {"cid":"7846","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7848","attr":"SITE_SIZE","value":"5.3×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7848","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7853","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7854","attr":"SITE_SIZE","value":"5.5×8m","grade":"CONFIRMED","src":"gocamping"}
@@ -1546,6 +1550,7 @@
 {"cid":"100377","attr":"SITE_SIZE","value":"8×9m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100377","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100377","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100380","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100380","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100381","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100385","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -1755,11 +1760,13 @@
 {"cid":"100906","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100906","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100908","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100910","attr":"SITE_SIZE","value":"4×4m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100912","attr":"SITE_SIZE","value":"7.5×8.5m","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/vivaldipark","at":"2026-10-15T09:00:00+09:00","text":"일반 오토캠핑존","count":25}
 {"cid":"100912","attr":"SITE_SIZE","value":"8.5×9.5m","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/vivaldipark","at":"2026-10-15T09:00:00+09:00","text":"프리미엄 개별욕실존","count":15}
 {"cid":"100912","attr":"SITE_SURFACE","value":"GRAVEL","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/vivaldipark","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"100914","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100918","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100919","attr":"SITE_SIZE","value":"11×11m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100920","attr":"SITE_SIZE","value":"4×4m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100920","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100923","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
@@ -2592,6 +2599,7 @@
 {"cid":"102285","attr":"SITE_SIZE","value":"10×7m","grade":"CONFIRMED","src":"gocamping","count":33}
 {"cid":"102303","attr":"SITE_SIZE","value":"4×5m","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"102303","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102308","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102310","attr":"SITE_SIZE","value":"4×5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102315","attr":"SITE_SIZE","value":"8×8.5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102316","attr":"SITE_SIZE","value":"3×4m","grade":"CONFIRMED","src":"gocamping","count":10}

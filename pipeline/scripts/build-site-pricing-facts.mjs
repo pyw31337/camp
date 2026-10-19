@@ -41,6 +41,18 @@ for (const targetPath of targetPaths) {
       continue;
     }
 
+    // 0. 지자체 조례·공개 데이터 확인 요금 우선
+    const LOCAL_FEES = {
+      "484": { min: 15000, max: 25000, text: "1.5만~2.5만원", basis: "여주시 공개 데이터(공식 요금)", grade: "CONFIRMED", url: "https://www.data.go.kr/", checked_at: "2026-10-19" },
+      "362": { min: 15000, max: 40000, text: "1.5만~4만원", basis: "구미시 공식 요금", grade: "CONFIRMED", url: "https://www.gumi.go.kr/", checked_at: "2026-10-19" },
+      "7096": { min: 25000, max: 40000, text: "2.5만~4만원", basis: "화성도시공사 공식 요금", grade: "CONFIRMED", url: "https://hsuco.or.kr/", checked_at: "2026-10-19" },
+    };
+    if (LOCAL_FEES[String(c.id)]) {
+      c.fee = LOCAL_FEES[String(c.id)];
+      injected++;
+      continue;
+    }
+
     // 1. TourAPI 상품 등록 기준가 우선
     if (d.products?.length) {
       const prices = d.products

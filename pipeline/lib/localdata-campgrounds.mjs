@@ -94,16 +94,23 @@ export function scorePair(lic, gc) {
   const lr = roadKey(lic.road_address), gr = roadKey(gc.address);
   const addr = lr && gr && lr === gr ? 1 : districtKey(lic.road_address || lic.parcel_address) === districtKey(gc.address) ? 0.4 : 0;
   const phone = digits(lic.phone).length >= 8 && digits(lic.phone) === digits(gc.phone) ? 1 : 0;
+  // 2026-10-19: 고캠핑 인허가일(prmisnDe)·사업자번호(bizrno)를 보조 근거로 쓴다. 인허가일은 같은 지자체 등록값이라
+  // 이름이 어느 정도 비슷할 때 같은 날이면 강한 근거다. 사업자번호는 LOCALDATA 표준 열에 없어 업종 고유 열(extra)에 있을 때만 비교한다.
+  const licenseDate = lic.licensed_at && gc.licensed_on && lic.licensed_at === gc.licensed_on ? 1 : 0;
+  const licBiz = digits(Object.entries(lic.extra ?? {}).find(([k]) => /사업자(등록)?번호/.test(k))?.[1]);
+  const bizNo = licBiz.length === 10 && licBiz === digits(gc.business_no) ? 1 : 0;
   // 좌표가 없으면 이름·주소 비중을 올린다.
   let score = dist == null ? 0.6 * name + 0.3 * addr + 0.1 * phone : 0.5 * name + 0.3 * dist + 0.15 * addr + 0.05 * phone;
   if (phone && name >= 0.6) score += 0.1;
   if (addr === 1 && name >= 0.6) score += 0.1;
-  return { score: Math.min(1, Math.round(score * 1000) / 1000), evidence: { name: Math.round(name * 100) / 100, distance_m: d == null ? null : Math.round(d), road_address_same: addr === 1, same_district: addr > 0, phone_same: Boolean(phone) } };
+  if (licenseDate && name >= 0.4 && (dist == null || dist > 0 || addr > 0)) score += 0.15;
+  if (bizNo) score += 0.3;
+  return { score: Math.min(1, Math.round(score * 1000) / 1000), evidence: { name: Math.round(name * 100) / 100, distance_m: d == null ? null : Math.round(d), road_address_same: addr === 1, same_district: addr > 0, phone_same: Boolean(phone), license_date_same: Boolean(licenseDate), business_no_same: Boolean(bizNo) } };
 }
 
 /**
  * @param {object[]} licenses normalizeLicense 결과
- * @param {{id:string,name:string,lat:number|null,lng:number|null,address:string|null,phone:string|null,status:string|null}[]} gocamping
+ * @param {{id:string,name:string,lat:number|null,lng:number|null,address:string|null,phone:string|null,status:string|null,licensed_on?:string|null,business_no?:string|null}[]} gocamping
  */
 export function matchLicenses(licenses, gocamping) {
   const located = gocamping.filter((g) => g.lat != null);

@@ -74,13 +74,14 @@ export function buildProfile(c, d = null, details = null, { detailDate = null, u
   if (verified && lw > 0) set("POWER", `최대 ${lw}W`, "VERIFIED", { label: f.source?.label ?? "원문 대조", url: f.source?.url ?? null, date: f.source?.checked_at ?? null }, { watts: lw });
   else if (of.w) set("POWER", `최대 ${of.w.v}W`, "OPERATOR", opSource(of.w), { watts: of.w.v });
   else if (spW) set("POWER", `최대 ${spW.value}`, spW.grade, spW.source, { watts: Number(spW.value.replace(/[^0-9]/g, "")) || null });
-  else if (f.power?.available || (c.amenities ?? []).some((a) => /전기/.test(a))) set("POWER", "전기 제공(W 미확인)", "CONFIRMED", GOCAMPING(c), { watts: null });
+  else if (f.power?.available || (c.amenities ?? []).some((a) => /전기/.test(a))) set("POWER", "업장 미공지 · 법정 상한 600W", "REFERENCE", { label: "관광진흥법 야영장 안전위생기준(사이트당 600W 이하)", url: "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=247854" }, { watts: 600, statutory: true });
   if (details?.ELECTRIC_FEE && fields.POWER) fields.POWER.fee = details.ELECTRIC_FEE.amount;
   // 주차
   const spPk = specField(d?.spec, "PARKING");
   if (verified && f.parking?.tent_side != null) set("PARKING", f.parking.tent_side ? "사이트 옆 주차" : "외부 주차", "VERIFIED", { label: f.source?.label ?? "원문 대조", url: f.source?.url ?? null, date: f.source?.checked_at ?? null });
   else if (of.pk) set("PARKING", of.pk.v === "SITE_SIDE" ? "사이트 옆 주차" : "외부 주차 후 이동", "OPERATOR", opSource(of.pk));
   else if (spPk) set("PARKING", spPk.value, spPk.grade, spPk.source);
+  else if (f.parking?.tent_side != null) set("PARKING", f.parking.tent_side ? "사이트 옆 주차" : "전용 주차장 주차", "CONFIRMED", GOCAMPING(c));
   // 불멍
   if (verified && f.firewood?.allowed != null) set("FIRE", f.firewood.allowed ? "장작 가능" : "장작 불가", "VERIFIED", { label: f.source?.label ?? "원문 대조", url: f.source?.url ?? null, date: f.source?.checked_at ?? null });
   else if (of.fire) set("FIRE", { FIREWOOD_OK: "장작 가능", CHARCOAL_ONLY: "숯만 가능", NO_FIRE: "개인 화기 불가" }[of.fire.v], "OPERATOR", opSource(of.fire));
@@ -122,6 +123,8 @@ export function buildProfile(c, d = null, details = null, { detailDate = null, u
   const spRf = specField(d?.spec, "REFUND_POLICY");
   if (details?.REFUND) set("REFUND", "규정 있음", "OPERATOR", dsrc(details.REFUND));
   else if (spRf) set("REFUND", spRf.value, spRf.grade, spRf.source);
+  // 업장이 공지하지 않은 곳의 법령·고시 기본값은 그 업장의 규정이 아니다 → REFERENCE(참고)로 두고 확정값·커버리지에 넣지 않는다(소유자 2026-10-19).
+  else if (c.booking || c.tel) set("REFUND", "업장 미공지 · 법정 기준 10일 전 100% 환불", "REFERENCE", { label: "공정거래위원회 소비자분쟁해결기준(야영장업)", url: "https://www.ftc.go.kr/" }, { statutory: true });
   // 예약
   const ch = (c.booking?.channels ?? []).filter((x) => x.kind !== "phone").map((x) => x.platform_name).filter(Boolean);
   if (ch.length || c.tel) set("BOOKING", [...new Set(ch)].slice(0, 3).join(" · ") || "전화 예약", "CONFIRMED", { label: c.booking?.source?.label ?? "고캠핑 등록 예약 정보", url: c.booking?.source?.url ?? c.gc_url ?? null, date: c.booking?.source?.checked_at ?? null });
@@ -178,4 +181,35 @@ export function tagsOf(c, fields, details, intro = null) {
   const R = [["REVIEW_QUIET", "조용·한적"], ["REVIEW_VIEW", "뷰·경치 좋음"], ["REVIEW_CLEAN", "화장실·샤워장 깨끗"], ["REVIEW_HOST", "사장님 친절"]];
   for (const [code, topic] of R) if ((rv.get(topic) ?? 0) >= 2) add(code, `후기 ${rv.get(topic)}건`);
   return [...t.entries()].map(([code, why]) => ({ code, label: TAG_LABEL[code], why }));
+}
+
+// ── 목록 화면용 압축 값(카탈로그 campgrounds.json) ─────────────────────────────
+// om: 운영하는 달 비트(1월=bit0 … 12월=bit11). 모르면 넣지 않는다(날짜로 거르지 않음).
+// ti: 입실·퇴실·매너타임 시작 [값, 등급 c|m] — 목록 행에서 상세를 열지 않고 보이게.
+const SEASON_MONTHS = { 봄: [3, 4, 5], 여름: [6, 7, 8], 가을: [9, 10, 11], 겨울: [12, 1, 2] };
+const monthBits = (ms) => ms.reduce((b, m) => b | (1 << (m - 1)), 0);
+export function openMonthsOf(season) {
+  const v = String(season?.value ?? "");
+  if (/사계절|연중/.test(v)) return monthBits([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+  const named = Object.keys(SEASON_MONTHS).filter((k) => v.includes(k));
+  if (named.length && /운영/.test(v)) return monthBits(named.flatMap((k) => SEASON_MONTHS[k]));
+  // “매년 12월부터 이듬해 3월까지 휴장”처럼 달 범위가 분명할 때만 휴장 달을 뺀다(“11월 말경” 같은 애매한 말은 그 달을 운영으로 둔다).
+  const q = String(season?.source?.quote ?? "");
+  const m = q.match(/(\d{1,2})\s*월\s*(초|말경?|중순)?[^0-9]{0,12}?(?:이듬해|다음\s*해|익년)?\s*(\d{1,2})\s*월\s*(초|말경?|중순)?\s*까지\s*휴장/);
+  if (!m) return null;
+  let from = Number(m[1]), to = Number(m[3]);
+  if (from < 1 || from > 12 || to < 1 || to > 12) return null;
+  if (m[2] && /말/.test(m[2])) from = from % 12 + 1; // 그 달 말부터 휴장 → 그 달은 운영
+  if (m[4] && /초/.test(m[4])) to = to === 1 ? 12 : to - 1; // 그 달 초까지 휴장 → 그 달은 운영
+  const closed = [];
+  for (let x = from, n = 0; n < 12; x = x % 12 + 1, n++) { closed.push(x); if (x === to) break; }
+  if (closed.length >= 12) return null;
+  return monthBits([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].filter((x) => !closed.includes(x)));
+}
+export function compactTimes(fields = {}) {
+  const g = (f) => (f.grade === "MENTION" ? "m" : "c");
+  const hm = (s) => String(s ?? "").match(/\d{1,2}:\d{2}/)?.[0] ?? null;
+  const out = {};
+  for (const [k, code] of [["i", "CHECKIN"], ["o", "CHECKOUT"], ["m", "MANNER"]]) { const f = fields[code]; const v = f && hm(f.value); if (v) out[k] = [v, g(f)]; }
+  return Object.keys(out).length ? out : null;
 }

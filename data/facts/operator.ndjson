@@ -270,8 +270,10 @@
 {"cid":"379","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"379","attr":"PHONE","value":"063-322-2771","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"383","attr":"HOMEPAGE","value":"https://www.huyang.go.kr/main.action","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"383","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0184","at":"2026-10-19T04:56:00.479Z","text":"국립자연휴양림"}
 {"cid":"383","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"383","attr":"PHONE","value":"054-682-9009","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"383","attr":"PHONE","value":"054-682-9009","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0184","at":"2026-10-19T04:56:00.479Z"}
 {"cid":"385","attr":"HOMEPAGE","value":"http://naju.museum.go.kr/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"385","attr":"HOMEPAGE","value":"http://naju.museum.go.kr/html/kr/","grade":"CONFIRMED","src":"naver_local","url":"http://naju.museum.go.kr/html/kr/","at":"2026-10-16T06:11:59.538Z","text":"관람,체험>부속시설"}
 {"cid":"385","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
@@ -279,8 +281,10 @@
 {"cid":"387","attr":"HOMEPAGE","value":"https://www.foresttrip.go.kr/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"387","attr":"HOMEPAGE","value":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0192","grade":"CONFIRMED","src":"naver_local","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0192","at":"2026-10-16T06:06:23.828Z","text":"자연명소>휴양림,산림욕장"}
 {"cid":"387","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/10188423","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/10188423","at":"2026-10-16T05:32:31.204Z","text":"여행 > 관광,명소 > 자연휴양림"}
+{"cid":"387","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0192","at":"2026-10-19T04:56:00.479Z","text":"국립자연휴양림"}
 {"cid":"387","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"387","attr":"PHONE","value":"055-867-7881","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"387","attr":"PHONE","value":"055-867-7881","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0192","at":"2026-10-19T04:56:00.479Z"}
 {"cid":"389","attr":"HOMEPAGE","value":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0243","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"389","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"389","attr":"PHONE","value":"033-334-8815","grade":"CONFIRMED","src":"gocamping"}
@@ -288,7 +292,9 @@
 {"cid":"395","attr":"HOMEPAGE","value":"http://www.huyang.go.kr/main.action","grade":"CONFIRMED","src":"naver_local","url":"http://www.huyang.go.kr/main.action","at":"2026-10-16T06:21:47.955Z","text":"숙박>캠핑,야영장"}
 {"cid":"395","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/18452353","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/18452353","at":"2026-10-16T05:34:30.011Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"395","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"395","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"국립자연휴양림"}
 {"cid":"395","attr":"PHONE","value":"033-343-9707","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"395","attr":"PHONE","value":"033-343-9707","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z"}
 {"cid":"398","attr":"HOMEPAGE","value":"http://www.huyang.go.kr/main.action","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"398","attr":"HOMEPAGE","value":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0196","grade":"CONFIRMED","src":"naver_local","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0196","at":"2026-10-16T06:12:00.401Z","text":"자연명소>휴양림,산림욕장"}
 {"cid":"398","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/8092760","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/8092760","at":"2026-10-16T05:33:14.400Z","text":"여행 > 관광,명소 > 자연휴양림"}
@@ -297,8 +303,10 @@
 {"cid":"399","attr":"HOMEPAGE","value":"http://www.huyang.go.kr/main.action","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"399","attr":"HOMEPAGE","value":"http://www.huyang.go.kr/main.action","grade":"CONFIRMED","src":"naver_local","url":"http://www.huyang.go.kr/main.action","at":"2026-10-16T06:09:34.118Z","text":"숙박>캠핑,야영장"}
 {"cid":"399","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/13576330","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/13576330","at":"2026-10-16T05:32:55.627Z","text":"여행 > 숙박 > 야영,캠핑장"}
+{"cid":"399","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"국립자연휴양림"}
 {"cid":"399","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"399","attr":"PHONE","value":"054-672-1051","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"399","attr":"PHONE","value":"054-672-1051","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z"}
 {"cid":"400","attr":"HOMEPAGE","value":"http://www.huyang.go.kr/main.action","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"400","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/24372501","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/24372501","at":"2026-10-16T05:34:30.216Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"400","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"gocamping"}
@@ -687,8 +695,10 @@
 {"cid":"812","attr":"HOMEPAGE","value":"http://www.huyang.go.kr/main.action","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"812","attr":"HOMEPAGE","value":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0141","grade":"CONFIRMED","src":"naver_local","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0141","at":"2026-10-16T06:07:27.022Z","text":"자연명소>휴양림,산림욕장"}
 {"cid":"812","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/26622191","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/26622191","at":"2026-10-16T05:32:39.746Z","text":"여행 > 관광,명소 > 자연휴양림"}
+{"cid":"812","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0141","at":"2026-10-19T04:56:00.479Z","text":"국립자연휴양림"}
 {"cid":"812","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"812","attr":"PHONE","value":"063-322-1097","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"812","attr":"PHONE","value":"063-322-1097","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0141","at":"2026-10-19T04:56:00.479Z"}
 {"cid":"813","attr":"HOMEPAGE","value":"http://www.mujuneverland.com/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"813","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1128409679","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1128409679","at":"2026-10-16T05:34:15.968Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"813","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"gocamping"}
@@ -1234,7 +1244,9 @@
 {"cid":"1513","attr":"HOMEPAGE","value":"http://www.huyang.go.kr/main.action","grade":"CONFIRMED","src":"naver_local","url":"http://www.huyang.go.kr/main.action","at":"2026-10-16T06:21:54.747Z","text":"숙박>캠핑,야영장"}
 {"cid":"1513","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/207328835","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/207328835","at":"2026-10-16T05:34:30.889Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"1513","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1513","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"국립자연휴양림"}
 {"cid":"1513","attr":"PHONE","value":"031-774-8133","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/207328835","at":"2026-10-16T05:34:30.889Z"}
+{"cid":"1513","attr":"PHONE","value":"031-774-8133","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z"}
 {"cid":"1528","attr":"HOMEPAGE","value":"http://sjglamping.com/main.htm","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1528","attr":"HOMEPAGE","value":"http://sjglamping.com/main.htm","grade":"CONFIRMED","src":"naver_local","url":"http://sjglamping.com/main.htm","at":"2026-10-16T06:19:19.376Z","text":"숙박>캠핑,야영장"}
 {"cid":"1528","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/2006480467","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/2006480467","at":"2026-10-16T05:34:11.099Z","text":"여행 > 숙박 > 야영,캠핑장 > 글램핑장"}
@@ -1723,6 +1735,7 @@
 {"cid":"2228","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2228","attr":"PHONE","value":"010-5449-7976","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/675764039","at":"2026-10-16T05:35:30.633Z"}
 {"cid":"2230","attr":"HOMEPAGE","value":"http://www.orcamping.co.kr/","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2230","attr":"HOMEPAGE","value":"https://cafe.naver.com/pinkpgbcr","grade":"CONFIRMED","src":"naver_local","url":"https://cafe.naver.com/pinkpgbcr","at":"2026-10-19T00:58:50.026Z","text":"숙박>캠핑,야영장"}
 {"cid":"2230","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2230","attr":"PHONE","value":"033-378-5376","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2232","attr":"HOMEPAGE","value":"http://www.xn--sk4b78fdsau01b.net/","grade":"CONFIRMED","src":"gocamping"}
@@ -2087,8 +2100,10 @@
 {"cid":"2778","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/2073358160","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/2073358160","at":"2026-10-16T05:36:21.065Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"2778","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2778","attr":"PHONE","value":"010-3316-8138","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/2073358160","at":"2026-10-16T05:36:21.065Z"}
+{"cid":"2782","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"국립자연휴양림"}
 {"cid":"2782","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2782","attr":"PHONE","value":"031-771-1766","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2782","attr":"PHONE","value":"031-771-7166","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z"}
 {"cid":"2783","attr":"HOMEPAGE","value":"http://cafe.naver.com/jbwcamping","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2783","attr":"HOMEPAGE","value":"https://cafe.naver.com/jbwcamping","grade":"CONFIRMED","src":"naver_local","url":"https://cafe.naver.com/jbwcamping","at":"2026-10-16T06:45:09.272Z","text":"숙박>캠핑,야영장"}
 {"cid":"2783","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/10784878","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/10784878","at":"2026-10-16T05:37:31.540Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
@@ -2409,7 +2424,9 @@
 {"cid":"3160","attr":"HOMEPAGE","value":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0193","grade":"CONFIRMED","src":"naver_local","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0193","at":"2026-10-16T06:23:08.428Z","text":"자연명소>휴양림,산림욕장"}
 {"cid":"3160","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1765340808","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1765340808","at":"2026-10-16T05:34:40.074Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"3160","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3160","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"국립자연휴양림"}
 {"cid":"3160","attr":"PHONE","value":"054-783-3167","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3160","attr":"PHONE","value":"054-783-3167","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z"}
 {"cid":"3170","attr":"HOMEPAGE","value":"http://xn--vv5br1kvwdhxcbd.nasoft.kr/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3170","attr":"HOMEPAGE","value":"https://cafe.naver.com/teepee","grade":"CONFIRMED","src":"naver_local","url":"https://cafe.naver.com/teepee","at":"2026-10-16T06:45:38.047Z","text":"숙박>펜션"}
 {"cid":"3170","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1251750387","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1251750387","at":"2026-10-16T05:37:35.331Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
@@ -3022,7 +3039,9 @@
 {"cid":"6971","attr":"HOMEPAGE","value":"https://www.foresttrip.go.kr/main.do","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6971","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1256308532","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1256308532","at":"2026-10-16T05:34:31.243Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"6971","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"6971","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0111","at":"2026-10-19T04:56:00.479Z","text":"국립자연휴양림"}
 {"cid":"6971","attr":"PHONE","value":"033-641-9990","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"6971","attr":"PHONE","value":"033-641-9990","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0111","at":"2026-10-19T04:56:00.479Z"}
 {"cid":"6972","attr":"HOMEPAGE","value":"http://daecheonbeach.kr/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6972","attr":"HOMEPAGE","value":"http://www.daechonbeach.or.kr/","grade":"CONFIRMED","src":"naver_local","url":"http://www.daechonbeach.or.kr/","at":"2026-10-16T06:33:58.681Z","text":"숙박>캠핑,야영장"}
 {"cid":"6972","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/25854123","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/25854123","at":"2026-10-16T05:36:04.651Z","text":"여행 > 숙박 > 야영,캠핑장"}
@@ -3490,8 +3509,10 @@
 {"cid":"7272","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7272","attr":"PHONE","value":"010-2709-4580","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7274","attr":"HOMEPAGE","value":"http://www.huyang.go.kr/forest/contentIntro.action?dprtmId=0187","grade":"CONFIRMED","src":"naver_local","url":"http://www.huyang.go.kr/forest/contentIntro.action?dprtmId=0187","at":"2026-10-16T06:21:03.955Z","text":"숙박>캠핑,야영장"}
+{"cid":"7274","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"국립자연휴양림"}
 {"cid":"7274","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7274","attr":"PHONE","value":"041-953-2230","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7274","attr":"PHONE","value":"041-953-2230","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z"}
 {"cid":"7279","attr":"HOMEPAGE","value":"http://sapyung.kr/skin_mw2/","grade":"MENTION","src":"kakao_web","url":"http://sapyung.kr/skin_mw2/","at":"2026-10-16T05:33:24.744Z","quote":"화순 사평풍류마을 오토캠핑장"}
 {"cid":"7279","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/757639845","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/757639845","at":"2026-10-16T05:33:24.744Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"7279","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
@@ -10786,7 +10807,10 @@
 {"cid":"102116","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102117","attr":"HOMEPAGE","value":"http://artemisresort.co.kr","grade":"CONFIRMED","src":"naver_local","url":"http://artemisresort.co.kr","at":"2026-10-16T06:20:15.699Z","text":"숙박>캠핑,야영장"}
 {"cid":"102117","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102118","attr":"HOMEPAGE","value":"https://ungyoland.revrun.kr/","grade":"CONFIRMED","src":"naver_local","url":"https://ungyoland.revrun.kr/","at":"2026-10-19T00:58:53.494Z","text":"숙박>펜션"}
+{"cid":"102118","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1071199926","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1071199926","at":"2026-10-19T04:44:59.206Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"102118","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102118","attr":"PHONE","value":"043-833-8700","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1071199926","at":"2026-10-19T04:44:59.206Z"}
 {"cid":"102119","attr":"HOMEPAGE","value":"http://naturalcarefarm.shop/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102119","attr":"HOMEPAGE","value":"http://naturalcarefarm.shop/","grade":"CONFIRMED","src":"naver_local","url":"http://naturalcarefarm.shop/","at":"2026-10-16T06:18:08.745Z","text":"숙박>캠핑,야영장"}
 {"cid":"102119","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1878975469","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1878975469","at":"2026-10-16T05:34:02.255Z","text":"여행 > 숙박 > 야영,캠핑장"}

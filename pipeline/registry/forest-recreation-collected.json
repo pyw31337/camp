@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "generated_at": "2026-10-19T13:20:00Z",
+  "source": "forest.go.kr + foresttrip.go.kr public pages + huyang.forest.go.kr",
+  "note": "국립자연휴양림 확장 목록 (약 20곳). 전체 48곳 대상. 다른 에이전트는 match 스크립트로 캠핑장 매핑 후 Fact Store 입력.",
+  "total_reported": 48,
+  "items": [
+    {"name": "가리왕산자연휴양림", "address": "강원도 정선군 정선읍 가리왕산로 791", "phone": "033-562-5833", "reservation": "http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0113"},
+    {"name": "검마산자연휴양림", "address": "경북 영양군 수비면 검마산길 191", "phone": "054-682-9009", "reservation": "http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0184"},
+    {"name": "검봉산자연휴양림", "address": "강원도 삼척시 원덕읍 임원안길 525-145", "phone": "033-574-2553", "reservation": "http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0244"},
+    {"name": "금산자연휴양림", "address": "충남 금산군 남이면 거북바위길 10-163", "phone": "041-754-0102", "reservation": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0305"},
+    {"name": "낙안민속자연휴양림", "address": "전남 순천시 낙안면 민속마을길 1600번지", "phone": "061-754-4400", "reservation": "http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0200"},
+    {"name": "남해편백자연휴양림", "address": "경남 남해군 삼동면 금암로 658", "phone": "055-867-7881", "reservation": "http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0192"},
+    {"name": "달음산자연휴양림", "address": "부산광역시 기장군 일광면 화용길 299-106", "phone": "051-722-3023", "reservation": "http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0202"},
+    {"name": "대관령자연휴양림", "address": "강원도 강릉시 성산면 삼포암길 133", "phone": "033-641-9990", "reservation": "http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0111"},
+    {"name": "대야산자연휴양림", "address": "경북 문경시 가은읍 용추길 31-35", "phone": "054-571-7181", "reservation": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0245"},
+    {"name": "덕유산자연휴양림", "address": "전북 무주군 무풍면 구천동로 530-62", "phone": "063-322-1097", "reservation": "http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0141"},
+    {"name": "유명산자연휴양림", "address": "경기 가평군 설악면 유명산길 79-53", "phone": "031-589-5487", "reservation": "https://www.foresttrip.go.kr"},
+    {"name": "산음자연휴양림", "address": "경기 양평군 단월면 고북길 347", "phone": "031-774-8133", "reservation": "https://www.foresttrip.go.kr"},
+    {"name": "중미산자연휴양림", "address": "경기 양평군 옥천면 중미산로 1152", "phone": "031-771-7166", "reservation": "https://www.foresttrip.go.kr"},
+    {"name": "청태산자연휴양림", "address": "강원 횡성군 둔내면 청태산로 610", "phone": "033-343-9707", "reservation": "https://www.foresttrip.go.kr"},
+    {"name": "미천골자연휴양림", "address": "강원 양양군 서면 미천골길 115", "phone": "033-673-1806", "reservation": "https://www.foresttrip.go.kr"},
+    {"name": "청옥산자연휴양림", "address": "경북 봉화군 석포면 청옥로 1552-163", "phone": "054-672-1051", "reservation": "https://www.foresttrip.go.kr"},
+    {"name": "통고산자연휴양림", "address": "경북 울진군 금강송면 불영계곡로 880", "phone": "054-783-3167", "reservation": "https://www.foresttrip.go.kr"},
+    {"name": "지리산자연휴양림", "address": "경남 함양군 마천면 음정길 152", "phone": "055-963-8133", "reservation": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0190"},
+    {"name": "변산자연휴양림", "address": "전북 부안군 변산면 변산로 3768", "phone": "063-581-9977", "reservation": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0189"},
+    {"name": "희리산해송자연휴양림", "address": "충남 서천군 종천면 희리산길 206", "phone": "041-953-2230", "reservation": "https://www.foresttrip.go.kr"}
+  ]
+}

@@ -38,6 +38,9 @@
     "survey:conditions": "node scripts/survey-all-campgrounds.mjs",
     "build:spec": "node scripts/build-spec-sheet.mjs",
     "build:facts": "node scripts/build-fact-store.mjs",
+    "build:condition-mapping": "node scripts/build-condition-mapping.mjs",
+    "sync:forecast": "node scripts/sync-forecast.mjs",
+    "sync:extras": "node scripts/sync-trip-extras.mjs",
     "facts:sqlite": "node scripts/build-fact-store.mjs --sqlite",
     "facts:query": "node scripts/query-facts.mjs",
     "db:import-facts": "node scripts/import-facts-postgres.mjs",
@@ -49,7 +52,11 @@
     "build:db": "node scripts/build-database.mjs",
     "build:pricing-facts": "node scripts/build-site-pricing-facts.mjs",
     "db:import-supabase": "node scripts/import-all-to-supabase.mjs",
-    "check:billing": "node scripts/check-external-services-billing.mjs"
+    "check:billing": "node scripts/check-external-services-billing.mjs",
+    "sync:forest": "node scripts/sync-forest-recreation.mjs",
+    "sync:best": "node scripts/sync-best-campgrounds.mjs",
+    "match:forest": "node scripts/match-forest-recreation.mjs",
+    "normalize:local-fees": "node scripts/normalize-local-fees.mjs"
   },
   "dependencies": {
     "pg": "8.23.1",

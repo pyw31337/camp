@@ -6,6 +6,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildSpecSheet, SPEC_FIELDS } from "../lib/spec-extractor.mjs";
+import { getPublicStandardDoc } from "../lib/public-standards.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const dataDir = join(root, "camping-atlas/public/explore/data");
@@ -44,11 +45,13 @@ for (const c of camps) {
     for (const { url, image, text } of byUrl.values()) docs.push({ text, grade: "OFFICIAL_TEXT", source: { kind: "operator_homepage", label: image ? "운영자 안내 이미지(글자 인식)" : "운영자 홈페이지", url, date: site.checked_at, ...(image ? { image } : {}) } });
   }
   if (d.intro) docs.push({ text: d.intro, grade: "OFFICIAL_TEXT", source: { kind: "gocamping_intro", label: "고캠핑 운영자 소개글", url: c.gc_url ?? null, date: c.modified_at ?? null } });
+  const pubDoc = getPublicStandardDoc(c);
+  if (pubDoc) docs.push(pubDoc);
   const reviews = [...(d.reviews ?? []), ...(d.cafe ?? []), ...(d.web ?? [])].map((r) => {
     const body = web?.bodies?.[r.url];
     return body?.length ? { ...r, body } : r;
   });
-  const spec = buildSpecSheet({ name: c.name, docs, reviews, now });
+  const spec = buildSpecSheet({ name: c.name, regions: [c.sigungu, c.sido], docs, reviews, now });
   roundups += spec.stats.roundups_skipped;
   if (Object.keys(spec.fields).length) { withAny++; d.spec = spec; } else delete d.spec;
   for (const [code, f] of Object.entries(spec.fields)) { if (f.values.length) count[code].official++; if (f.mentions.length) count[code].mention++; }

@@ -78,3 +78,17 @@ test("상시 할인 대상과 기간 행사를 나누고, 일반 명사 ‘방�
   assert.equal(codes("방문객의 입장은 금지하고 있습니다").VISITOR_POLICY, "방문객 불가");
   assert.equal(codes("방문객 1인 5,000원").VISITOR_POLICY, "1인 5,000원");
 });
+
+test("입·퇴실: 날 표현(첫 날·입촌일)을 건너뛰고, 입실 시각을 퇴실로 다시 읽지 않는다", () => {
+  const codes = (s) => extractFromSentence(s).map((x) => `${x.code}:${x.norm}`);
+  assert.deepEqual(codes("입실시간 : 첫 날 오후 2시 퇴실시간 : 마지막 날 오후 12시"), ["CHECKIN_TIME:14:00", "CHECKOUT_TIME:12:00"]);
+  assert.deepEqual(codes("⏰ 체크인 : 입촌일 14시 ~ 체크아웃 : 퇴촌일 11시"), ["CHECKIN_TIME:14:00", "CHECKOUT_TIME:11:00"]);
+  assert.deepEqual(codes("입실 13시 퇴실 익일 11..."), ["CHECKIN_TIME:13:00"]);
+});
+
+test("후기 귀속: 이름에 붙은 지명(가평물의나라)을 떼고도 알아본다", () => {
+  assert.deepEqual(nameTokens("가평물의나라 오토캠핑장", ["가평군", "경기도"]), ["가평물의나라", "물의나라"]);
+  assert.equal(attributable({ title: "물의나라 캠핑장 후기", snippet: "입실 12:00" }, "가평물의나라 오토캠핑장", ["가평군"]), true);
+  assert.equal(attributable({ title: "물의나라 캠핑장 후기", snippet: "" }, "가평물의나라 오토캠핑장"), false); // 지역을 모르면 예전처럼
+  assert.deepEqual(nameTokens("경주캠핑장", ["경주시"]), ["경주"]); // 지명만 남는 이름은 늘리지 않는다
+});

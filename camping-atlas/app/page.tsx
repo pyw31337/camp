@@ -1,8 +1,7 @@
 export const dynamic = "force-static";
 
 export default function Page() {
-  // GitHub Pages 발행 단계가 이 파일의 정적 산출물을 현재 탐색 셸로 바꾼다.
-  // 개발/빌드가 중간에 끝나도 자동 이동으로 다른 주소를 강제하지 않고, 명시적인
-  // 진입 링크만 남긴다.
-  return <main aria-live="polite"><a href="./explore/">모여라 캠핑 열기</a></main>;
+  // GitHub Pages 발행 단계가 이 파일의 정적 산출물을 /camp/ 탐색 셸로 교체한다.
+  // 이 fallback도 다른 주소로 보내지 않는다. 운영 주소는 언제나 /camp/ 하나다.
+  return <main aria-live="polite"><h1>모여라 캠핑</h1></main>;
 }

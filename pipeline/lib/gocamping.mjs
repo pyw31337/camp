@@ -25,6 +25,17 @@ const int = (v) => {
 const list = (v) => String(v ?? "").split(",").map((s) => s.trim()).filter(Boolean);
 const num = (v) => { const n = Number(v); return Number.isFinite(n) && n !== 0 ? n : null; };
 const text = (v) => { const s = String(v ?? "").trim(); return s || null; };
+const yn = (v) => (v === "Y" ? true : v === "N" ? false : null);
+/** "20200109"·"2020-01-09" → "2020-01-09" (0000·빈값은 null) */
+export function gcDate(v) {
+  const d = String(v ?? "").replace(/\D/g, "");
+  if (d.length < 8 || /^0+$/.test(d.slice(0, 8))) return null;
+  const [y, m, day] = [d.slice(0, 4), d.slice(4, 6), d.slice(6, 8)];
+  return +y >= 1950 && +m >= 1 && +m <= 12 && +day >= 1 && +day <= 31 ? `${y}-${m}-${day}` : null;
+}
+// 글램핑·카라반 내부시설 원문 → 코드(원문은 함께 보관)
+export const INNER_AMENITY = [["BED", /침대/], ["TV", /TV|티비|텔레비전/i], ["AIRCON", /에어컨|냉방/], ["FRIDGE", /냉장고/], ["INTERNET", /인터넷|와이파이|wi-?fi/i], ["HEATER", /난방|보일러|온열/], ["COOKWARE", /취사|조리|주방/], ["PRIVATE_TOILET", /화장실/], ["PRIVATE_SHOWER", /샤워|욕실/]];
+export const innerCodes = (items) => [...new Set((items ?? []).flatMap((s) => INNER_AMENITY.filter(([, re]) => re.test(s)).map(([c]) => c)))];
 
 // 고캠핑의 siteMg 규격은 보통 m 값이지만, 일부 등록값은 700·800처럼 cm 단위로
 // 들어온다. 같은 물리량을 화면에서 700m로 보이지 않게 m로 표준화한다.
@@ -92,6 +103,31 @@ export function normalizeCampground(item, fetchedAt) {
     intro: { line: text(item.lineIntro), text: text(item.intro), feature: text(item.featureNm) },
     nearby_facilities: list(item.posblFcltyCl),
     programs: text(item.exprnProgrm),
+    // ── 2026-10-19 추가: 같은 응답에 이미 있던 필드(호출 수 변화 없음). 0·빈값은 ‘미입력’으로 보고 null.
+    registry: {
+      // 사업자번호는 매칭 키로만 쓴다(공개 카탈로그·화면에는 내보내지 않음 — explore-data.mjs).
+      business_no: text(item.bizrno),
+      tourism_business_no: text(item.trsagntNo),
+      licensed_on: gcDate(item.prmisnDe),
+      insured: yn(item.insrncAt),
+      staff_onsite: int(item.manageNmpr) || null,
+      operating_org: text(item.mgcDiv),
+      total_area_m2: int(item.allar) || null,
+    },
+    site_gap_m: int(item.sitedStnc) || null,
+    closure: gcDate(item.hvofBgnde) || gcDate(item.hvofEnddle) ? { from: gcDate(item.hvofBgnde), to: gcDate(item.hvofEnddle) } : null,
+    safety: {
+      extinguishers: int(item.extshrCo) || null,
+      fire_water: int(item.frprvtWrppCo) || null,
+      fire_sand: int(item.frprvtSandCo) || null,
+      fire_sensors: int(item.fireSensorCo) || null,
+    },
+    inner: { glamping: list(item.glampInnerFclty), caravan: list(item.caravInnerFclty) },
+    culture_event: item.clturEventAt === "Y" ? text(item.clturEvent) ?? "자체 문화행사" : null,
+    experience_program: yn(item.exprnProgrmAt),
+    travel_seasons: list(item.tourEraCl),
+    nearby_facilities_etc: list(item.posblFcltyEtc),
+    directions: text(item.direction),
     gocamping_url: item.contentId ? `https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=${encodeURIComponent(item.contentId)}` : null,
     source: {
       provider: "gocamping",

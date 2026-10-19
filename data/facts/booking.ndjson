@@ -203,6 +203,7 @@
 {"cid":"379","attr":"BOOKING_CHANNEL","value":"onsite","grade":"CONFIRMED","src":"gocamping","text":"현장 접수","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"379","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"379","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"383","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0184","at":"2026-10-19T04:56:00.479Z","text":"숲나들e(국립자연휴양림 예약)"}
 {"cid":"383","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"383","attr":"BOOKING_CHANNEL","value":"public-site","grade":"CONFIRMED","src":"gocamping","text":"지자체·공단 자체 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"383","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -210,16 +211,19 @@
 {"cid":"385","attr":"BOOKING_CHANNEL","value":"public-site","grade":"CONFIRMED","src":"gocamping","text":"지자체·공단 자체 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"385","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"387","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"gocamping","text":"숲나들e (자연휴양림 통합예약)","at":"2026-10-19T05:43:00+09:00"}
+{"cid":"387","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0192","at":"2026-10-19T04:56:00.479Z","text":"숲나들e(국립자연휴양림 예약)"}
 {"cid":"387","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"387","attr":"BOOKING_CHANNEL","value":"public-site","grade":"CONFIRMED","src":"gocamping","text":"지자체·공단 자체 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"387","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"389","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"gocamping","text":"숲나들e (자연휴양림 통합예약)","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"389","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"389","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"395","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"숲나들e(국립자연휴양림 예약)"}
 {"cid":"395","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"395","attr":"BOOKING_CHANNEL","value":"public-site","grade":"CONFIRMED","src":"gocamping","text":"지자체·공단 자체 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"398","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"398","attr":"BOOKING_CHANNEL","value":"public-site","grade":"CONFIRMED","src":"gocamping","text":"지자체·공단 자체 예약","at":"2026-10-19T05:43:00+09:00"}
+{"cid":"399","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"숲나들e(국립자연휴양림 예약)"}
 {"cid":"399","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"399","attr":"BOOKING_CHANNEL","value":"public-site","grade":"CONFIRMED","src":"gocamping","text":"지자체·공단 자체 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"400","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
@@ -489,6 +493,7 @@
 {"cid":"810","attr":"BOOKING_CHANNEL","value":"knps","grade":"CONFIRMED","src":"gocamping","text":"국립공원공단 예약시스템","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"810","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"810","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"812","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0141","at":"2026-10-19T04:56:00.479Z","text":"숲나들e(국립자연휴양림 예약)"}
 {"cid":"812","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"812","attr":"BOOKING_CHANNEL","value":"public-site","grade":"CONFIRMED","src":"gocamping","text":"지자체·공단 자체 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"812","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -888,6 +893,7 @@
 {"cid":"1504","attr":"BOOKING_CHANNEL","value":"thankqcamping","grade":"CONFIRMED","src":"gocamping","text":"땡큐캠핑","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"1504","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1508","attr":"BOOKING_CHANNEL","value":"homepage","grade":"CONFIRMED","src":"gocamping","text":"캠핑장 자체 홈페이지","at":"2026-10-19T05:43:00+09:00"}
+{"cid":"1513","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"숲나들e(국립자연휴양림 예약)"}
 {"cid":"1528","attr":"BOOKING_CHANNEL","value":"homepage","grade":"CONFIRMED","src":"gocamping","text":"캠핑장 자체 홈페이지","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"1528","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"1528","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1487,6 +1493,7 @@
 {"cid":"2765","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2778","attr":"BOOKING_CHANNEL","value":"homepage","grade":"CONFIRMED","src":"gocamping","text":"캠핑장 자체 홈페이지","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"2778","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"2782","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"숲나들e(국립자연휴양림 예약)"}
 {"cid":"2782","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"2783","attr":"BOOKING_CHANNEL","value":"homepage","grade":"CONFIRMED","src":"gocamping","text":"캠핑장 자체 홈페이지","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"2783","attr":"BOOKING_CHANNEL","value":"naver-cafe","grade":"CONFIRMED","src":"gocamping","text":"네이버 카페(운영자 카페 예약)","at":"2026-10-19T05:43:00+09:00"}
@@ -1718,6 +1725,7 @@
 {"cid":"3157","attr":"BOOKING_CHANNEL","value":"public-site","grade":"CONFIRMED","src":"gocamping","text":"지자체·공단 자체 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"3157","attr":"BOOKING_CHANNEL","value":"public-site","grade":"CONFIRMED","src":"gocamping","text":"지자체·공단 자체 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"3157","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3160","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"숲나들e(국립자연휴양림 예약)"}
 {"cid":"3160","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"3160","attr":"BOOKING_CHANNEL","value":"public-site","grade":"CONFIRMED","src":"gocamping","text":"지자체·공단 자체 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"3160","attr":"BOOKING_CHANNEL","value":"public-site","grade":"CONFIRMED","src":"gocamping","text":"지자체·공단 자체 예약","at":"2026-10-19T05:43:00+09:00"}
@@ -2155,6 +2163,7 @@
 {"cid":"6968","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6970","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"6971","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"gocamping","text":"숲나들e (자연휴양림 통합예약)","at":"2026-10-19T05:43:00+09:00"}
+{"cid":"6971","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0111","at":"2026-10-19T04:56:00.479Z","text":"숲나들e(국립자연휴양림 예약)"}
 {"cid":"6971","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"6971","attr":"BOOKING_CHANNEL","value":"public-site","grade":"CONFIRMED","src":"gocamping","text":"지자체·공단 자체 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"6971","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2456,6 +2465,7 @@
 {"cid":"7272","attr":"BOOKING_CHANNEL","value":"onsite","grade":"CONFIRMED","src":"gocamping","text":"현장 접수","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"7272","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"7272","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7274","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-19T04:56:00.479Z","text":"숲나들e(국립자연휴양림 예약)"}
 {"cid":"7274","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"7279","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"7281","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}

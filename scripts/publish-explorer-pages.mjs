@@ -51,22 +51,23 @@ const rootIndex = renewalIndex
 await writeFile(`${out}../index.html`, rootIndex);
 await mkdir(`${out}data`, { recursive: true });
 await cp(`${root}design/renewal/data/photos.json`, `${out}data/photos.json`);
-// 보조 주소도 독립된 옛 UI를 만들지 않고, 실제 A 포스터 앱의 해시 화면으로 보낸다.
-// 이렇게 해야 /themes·/openings·/guide·/passport·/collections 어디로 들어와도
-// 같은 헤더, 사진 카드, 반응형·PWA 안전영역 규칙을 쓴다.
-const routePage = (title, route) => `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${title} · 모여라 캠핑</title><meta http-equiv="refresh" content="0; url=../${route}"><script>location.replace(${JSON.stringify(`../${route}`)})</script></head><body><a href="../${route}">${title} 보기</a></body></html>`;
+// 보조 주소도 독립된 옛 UI를 만들지 않고, 실제 A 포스터 앱의 전체 결과 화면으로 보낸다.
+// /camp/를 유일한 공개 진입점으로 두되 기존 /explore/* 링크는 호환용으로만 남긴다.
+const routePage = (title, route, rootPrefix) => `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${title} · 모여라 캠핑</title><meta http-equiv="refresh" content="0; url=${rootPrefix}${route}"><script>location.replace(${JSON.stringify(`${rootPrefix}${route}`)})</script></head><body><a href="${rootPrefix}${route}">${title} 보기</a></body></html>`;
 const writeUtilityPages = async () => {
   const routes = [
-    ["themes/index.html", "테마로 찾기", "#/themes"],
-    ["openings/index.html", "예약 오픈 일정", "#/openings"],
-    ["guide/index.html", "이용 가이드", "#/guide"],
+    ["themes/index.html", "테마로 찾기", "#/list?theme=ALL"],
+    ["openings/index.html", "예약 오픈 일정", "#/list?theme=OPEN"],
+    ["guide/index.html", "캠핑장 찾기", "#/"],
     ["passport/index.html", "내 캠핑 비교", "#/compare"],
-    ["collections/index.html", "테마로 찾기", "#/themes"],
+    ["collections/index.html", "테마로 찾기", "#/list?theme=ALL"],
   ];
   for (const [relative, title, route] of routes) {
-    const file = `${out}${relative}`;
-    await mkdir(file.slice(0, file.lastIndexOf("/")), { recursive: true });
-    await writeFile(file, routePage(title, route));
+    // 새 canonical /camp/{themes,openings,…}/ 와 기존 /camp/explore/{…}/를 함께 둔다.
+    for (const [file, prefix] of [[`${out}../${relative}`, "../"], [`${out}${relative}`, "../../"]]) {
+      await mkdir(file.slice(0, file.lastIndexOf("/")), { recursive: true });
+      await writeFile(file, routePage(title, route, prefix));
+    }
   }
 };
 if (shellOnly) {
@@ -87,7 +88,7 @@ await writeUtilityPages();
 
 // 공유용 정적 페이지: 캠핑장마다 c/{id}/ 에 오픈그래프·트위터 카드 메타를 넣고, 사람은 탐색 화면 상세로 보낸다.
 // 카카오톡·메신저 미리보기는 자바스크립트를 실행하지 않으므로 메타가 HTML에 들어 있어야 한다.
-const SITE = (process.env.SITE_URL ?? "https://pyw31337.github.io/camp/explore/").replace(/\/?$/, "/");
+const SITE = (process.env.SITE_URL ?? "https://pyw31337.github.io/camp/").replace(/\/?$/, "/");
 const attr = (v) => String(v ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const camps = JSON.parse(await readFile(`${dataDir}/campgrounds.json`, "utf8"));
 const KIND = { AUTO_PITCH: "오토캠핑", PITCH: "일반 캠핑", GLAMPING: "글램핑", CARAVAN_RENTAL: "카라반", RV_PITCH: "개인 카라반" };
@@ -112,7 +113,7 @@ for (const c of camps) {
   const description = [c.line, where, kinds, "사이트 크기·시설·주변 정보와 공식 예약처 바로가기"].filter(Boolean).join(" · ").slice(0, 160);
   const dir = `${out}c/${c.id}/`;
   await mkdir(dir, { recursive: true });
-  await writeFile(`${dir}index.html`, page({ url: `${SITE}c/${c.id}/`, title: `${c.name} · 모여라 캠핑`, description, image: c.img ? c.img.replace(/^http:/, "https:") : null, redirect: `../../#c=${c.id}` }));
+  await writeFile(`${dir}index.html`, page({ url: `${SITE}c/${c.id}/`, title: `${c.name} · 모여라 캠핑`, description, image: c.img ? c.img.replace(/^http:/, "https:") : null, redirect: `../../../#c=${c.id}` }));
   pages++;
 }
 console.log(`공유용 캠핑장 페이지 ${pages}개`);
