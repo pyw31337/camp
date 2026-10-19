@@ -33,13 +33,13 @@ const status = {}, calls = {};
 const C = "MobileOS=ETC&MobileApp=moyeora&_type=json";
 const TOUR = "https://apis.data.go.kr/B551011";
 
-async function get(name, url, { xml = false } = {}) {
+async function get(name, url, { xml = false, timeoutMs = 25000 } = {}) {
   if ((calls[name] = (calls[name] ?? 0) + 1) > MAX) throw new Error("호출 상한");
   let res;
-  try { ({ res } = await fetchDataGoKr(url, key, { timeoutMs: 25000 })); } catch (e) {
+  try { ({ res } = await fetchDataGoKr(url, key, { timeoutMs })); } catch (e) {
     if (/DATA_GO_KR_UNREACHABLE/.test(e.code ?? "")) throw e;
     calls[name] += 1;
-    ({ res } = await fetchDataGoKr(url, key, { timeoutMs: 45000 }));
+    ({ res } = await fetchDataGoKr(url, key, { timeoutMs: timeoutMs + 20000 }));
   }
   const text = await res.text();
   if (xml && res.ok && /<item>/.test(text)) return { items: xmlItems(text) };
@@ -89,8 +89,17 @@ const evOfficial = await step("ev_official", async () => {
   // 전국 충전기 50만 건 이상 — 쪽마다 충전소 단위로 바로 접어 메모리에 원본을 쌓지 않는다.
   const seen = new Map();
   let n = 0, total = 0, fields = "";
-  for (let p = 1; p <= 80; p++) {
-    const r = await get("ev_official", `https://apis.data.go.kr/B552584/EvCharger/getChargerInfo?dataType=JSON&numOfRows=9999&pageNo=${p}`);
+  // 9,999건 쪽은 응답이 느려 시간 초과가 잦다(2026-10-19 main 실행). 5,000건씩, 쪽마다 최대 3번 다시 시도한다.
+  const page = async (p) => {
+    for (let i = 0; ; i++) {
+      try { return await get("ev_official", `https://apis.data.go.kr/B552584/EvCharger/getChargerInfo?dataType=JSON&numOfRows=5000&pageNo=${p}`, { timeoutMs: 90000 }); } catch (e) {
+        if (i >= 2 || /호출 상한|DATA_GO_KR_UNREACHABLE/.test(`${e.message} ${e.code ?? ""}`)) throw e;
+        await new Promise((ok) => setTimeout(ok, 5000 * (i + 1)));
+      }
+    }
+  };
+  for (let p = 1; p <= 160; p++) {
+    const r = await page(p);
     if (r.problem) { if (p === 1) return fail("ev_official", r.problem); break; }
     total = r.total || total;
     fields ||= Object.keys(r.items[0] ?? {}).slice(0, 12).join(",");
