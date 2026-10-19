@@ -72,8 +72,9 @@ for (const targetPath of targetPaths) {
         min,
         max,
         text: pr.value || (min === max ? `${min.toLocaleString()}원` : `${min.toLocaleString()}~${max.toLocaleString()}원`),
-        basis: "방문자 후기 언급 1박 요금",
-        grade: "MENTION",
+        // 프로필 요금은 운영자 홈페이지·안내 이미지(OCR)에서 온 값이 많다 — 원천 이름·등급을 그대로 잇는다.
+        basis: pr.source?.label ? `${pr.source.label} 1박 요금` : "방문자 후기 언급 1박 요금",
+        grade: pr.grade === "OPERATOR" || pr.grade === "CONFIRMED" ? pr.grade : "MENTION",
         url: pr.source?.url || null,
         checked_at: pr.source?.date || null,
       };

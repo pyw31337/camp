@@ -105,7 +105,9 @@ async function renderSite(start, rules) {
       const texts = [];
       for (const f of page.frames().slice(0, 6)) { try { texts.push(await within(5000, f.evaluate(() => document.body?.innerText ?? ""), "frame")); } catch {} }
       const html = await within(5000, page.content(), "content");
-      return { url: page.url(), text: texts.join("\n"), html };
+      // OCR 후보: 지연 로딩이 끝난 실제 그림 주소와 크기(작은 아이콘 거르기)
+      const imgs = await within(5000, page.evaluate(() => [...document.images].map((i) => ({ src: i.currentSrc || i.src, alt: i.alt || "", w: i.naturalWidth, h: i.naturalHeight }))), "imgs").catch(() => []);
+      return { url: page.url(), text: texts.join("\n"), html, imgs };
     } catch (e) { return null; }
   };
   try {
@@ -154,46 +156,80 @@ async function staticSite(start, rules) {
 }
 
 // ---------- 이미지 안내문 OCR(선택) ----------
-const OCR_HINT = /요금|가격|이용|안내|규정|규칙|공지|시설|사이트|배치|price|fee|charge|guide|info|rule|notice|use|sub|page|con|img_?\d/i;
-function guideImages(pages, max = 6) {
-  const out = [];
+// 요금표·이용안내가 이미지인 운영자 페이지: 안내 이미지를 골라 전처리(확대·흑백·정규화) 후 tesseract(kor)로 읽고,
+// 표는 lib/ocr.mjs가 칸 이름이 붙은 문장으로 바꾼다. 운영자 자체 이미지만, robots 준수, 이미지당 1초 간격.
+const OCR_HINT = /요금|가격|이용|안내|규정|규칙|공지|시설|사이트|배치|객실|price|fee|charge|pay|guide|info|rule|notice|use|room|sub|page|con|img_?\d/i;
+const OCR_PRICE_HINT = /요금|가격|이용료|price|fee|charge|pay/i;
+const OCR_SKIP = /logo|icon|btn|button|bullet|arrow|blank|spacer|sns|kakao|naver|facebook|insta|youtube|roughmap|staticmap|maps?\.(google|kakao|naver)|map_|_map|banner_?s|\.(gif|svg|ico)(\?|$)/i;
+function guideImages(pages, max = 8) {
+  const out = new Map();
+  const add = (src, alt, page, w = 0, h = 0) => {
+    if (!src || src.startsWith("data:") || OCR_SKIP.test(src)) return;
+    let u; try { u = new URL(src, page).toString(); } catch { return; }
+    if (!isOperatorHost(u) || out.has(u)) return;
+    if (w && h && (w < 300 || h < 120)) return; // 렌더링에서 크기를 알면 작은 그림은 뺀다
+    const hint = `${alt} ${src}`;
+    out.set(u, { url: u, page, score: (OCR_HINT.test(hint) ? 2 : 0) + (OCR_PRICE_HINT.test(hint) ? 3 : 0) + (OCR_PRICE_HINT.test(page) ? 2 : 0) + (w * h > 400000 ? 1 : 0) });
+  };
   for (const p of pages) {
-    for (const m of String(p.html ?? "").matchAll(/<img\b[^>]*>/gi)) {
-      const tag = m[0];
-      const src = tag.match(/\bsrc\s*=\s*["']([^"']+)["']/i)?.[1];
-      if (!src || /\.(gif|svg)(\?|$)|logo|icon|btn|bullet|banner_?s|arrow|blank|spacer|sns|kakao|naver|facebook|insta/i.test(src)) continue;
-      const alt = tag.match(/\balt\s*=\s*["']([^"']*)["']/i)?.[1] ?? "";
-      let u; try { u = new URL(src, p.url).toString(); } catch { continue; }
-      if (!isOperatorHost(u) || out.some((x) => x.url === u)) continue;
-      out.push({ url: u, page: p.url, score: (OCR_HINT.test(`${alt} ${src}`) ? 2 : 0) + (/요금|가격|price|fee/i.test(`${alt} ${src}`) ? 2 : 0) });
+    for (const im of p.imgs ?? []) add(im.src, im.alt ?? "", p.url, im.w, im.h);
+    const html = String(p.html ?? "");
+    for (const m of html.matchAll(/<img\b[^>]*>/gi)) {
+      const tag = m[0], alt = tag.match(/\balt\s*=\s*["']([^"']*)["']/i)?.[1] ?? "";
+      for (const a of tag.matchAll(/\b(?:src|data-src|data-original|data-lazy-src|data-url)\s*=\s*["']([^"']+)["']/gi)) add(a[1], alt, p.url);
+      const set = tag.match(/\b(?:srcset|data-srcset)\s*=\s*["']([^"']+)["']/i)?.[1];
+      if (set) add(set.split(",").map((x) => x.trim().split(/\s+/)[0]).pop(), alt, p.url); // 가장 큰 후보
     }
+    for (const m of html.matchAll(/background(?:-image)?\s*:\s*url\(\s*["']?([^"')]+)/gi)) add(m[1], "", p.url);
   }
-  return out.sort((a, b) => b.score - a.score).slice(0, max);
+  return [...out.values()].sort((a, b) => b.score - a.score).slice(0, max);
 }
-let tesseractOk = null;
-async function ocrImages(pages, rules) {
+let tesseractOk = null, sharpMod = null;
+// 결과는 넘겨받은 out에 바로 쌓는다(시간이 다 되어도 읽은 이미지 결과는 남는다). deadline이 지나면 다음 이미지를 읽지 않는다.
+async function ocrImages(pages, rules, out = [], deadline = Date.now() + 150000) {
   const { execFile } = await import("node:child_process");
   const { writeFile, rm, mkdtemp } = await import("node:fs/promises");
   const { tmpdir } = await import("node:os");
+  const { ocrScore, ocrSentences } = await import("../lib/ocr.mjs");
   const run = (args) => new Promise((ok) => execFile("tesseract", args, { timeout: 60000, maxBuffer: 4e6 }, (e, out) => ok(e ? null : String(out))));
   tesseractOk ??= (await run(["--version"])) !== null;
   if (!tesseractOk) return [];
+  sharpMod ??= await import("sharp").then((m) => m.default).catch(() => false);
   const dir = await mkdtemp(join(tmpdir(), "ocr-"));
-  const out = [];
+  const left = () => deadline - Date.now();
   try {
-    for (const img of guideImages(pages)) {
+    const picked = guideImages(pages);
+    if (process.env.CRAWL_DEBUG) console.log("  ocr candidates", picked.length, picked.slice(0, 3).map((x) => x.url).join(" "));
+    for (const [n, img] of picked.entries()) {
+      if (left() < 15000) break;
       const u = new URL(img.url);
       if (!robotsAllows(rules, u.pathname)) continue;
       await sleep(1000);
       try {
-        const r = await fetch(img.url, { headers: { "user-agent": UA }, signal: AbortSignal.timeout(20000) });
+        const r = await fetch(img.url, { headers: { "user-agent": UA, referer: img.page }, signal: AbortSignal.timeout(20000) });
         if (!r.ok || !/image\/(png|jpe?g|webp)/i.test(r.headers.get("content-type") ?? "")) continue;
         const buf = Buffer.from(await r.arrayBuffer());
-        if (buf.length < 15000 || buf.length > 6e6) continue; // 아이콘·초대형 제외
-        const f = join(dir, `i${out.length}.img`);
-        await writeFile(f, buf);
-        const text = await run([f, "-", "-l", "kor+eng", "--psm", "6"]);
-        for (const s of relevantSentences(String(text ?? "").replace(/[|]/g, " "), 30)) if (s.length >= 6 && /[가-힣]{2}/.test(s)) out.push({ text: s, url: img.page, image: img.url, ocr: true });
+        if (buf.length < 3000 || buf.length > 8e6) continue; // 아이콘·초대형 제외(작은 표 이미지는 파일이 가벼워도 픽셀 크기로 거른다)
+        const raw = join(dir, `r${n}.png`), pre = join(dir, `p${n}.png`);
+        if (sharpMod) {
+          const meta = await sharpMod(buf).metadata();
+          if ((meta.width ?? 0) < 300 || (meta.height ?? 0) < 120) continue;
+          const scale = Math.min(3, Math.max(1, 1800 / meta.width));
+          await sharpMod(buf).flatten({ background: "#ffffff" }).png().toFile(raw);
+          await sharpMod(buf).flatten({ background: "#ffffff" }).resize({ width: Math.round(meta.width * scale) }).grayscale().normalize().sharpen().png().toFile(pre);
+        } else await writeFile(raw, buf);
+        // 원본 psm6 · 전처리 psm6 · 전처리 psm4 중 요금·시간 단서가 가장 많은 결과를 쓴다.
+        // 원본 결과에 요금 단서가 충분하면(점수 15↑) 전처리 판독은 건너뛴다(시간 절약).
+        const texts = [await run([raw, "-", "-l", "kor+eng", "--psm", "6"])];
+        if (sharpMod && !(ocrScore(texts[0] ?? "") >= 15)) for (const psm of ["6", "4"]) if (left() > 20000) texts.push(await run([pre, "-", "-l", "kor+eng", "--psm", psm]));
+        texts.splice(0, texts.length, ...texts.filter(Boolean));
+        const best = texts.sort((a, b) => ocrScore(b) - ocrScore(a))[0] ?? "";
+        if (process.env.CRAWL_DEBUG) console.log("  ocr", img.url, "runs", texts.length, "len", best.length);
+        const priceLine = /\d[\d,]*\s*(만\s*)?원/;
+        for (const s of ocrSentences(best)) {
+          const keep = priceLine.test(s) ? [s] : relevantSentences(s, 2);
+          for (const k of keep) if (k.length >= 6 && /[가-힣]{2}/.test(k)) out.push({ text: k, url: img.page, image: img.url, ocr: true });
+        }
       } catch {}
     }
   } finally { await rm(dir, { recursive: true, force: true }); }
@@ -208,6 +244,7 @@ const snippetsOf = (pages) => {
 
 async function crawlOne(c) {
   const checked_at = new Date().toISOString();
+  const siteDeadline = Date.now() + 225000; // 사이트 전체 시간(240초) 안에서 OCR이 끝나도록
   const starts = startsOf(c);
   const uniq = [...new Map(starts.map((u) => [new URL(withProto(u)).hostname.replace(/^www\./, ""), u])).values()];
   if (!uniq.length) return { status: isClosedHost(c.homepage ?? "") ? "SERVICE_CLOSED" : "NO_OPERATOR_SITE", url: c.homepage ?? null, checked_at };
@@ -229,8 +266,10 @@ async function crawlOne(c) {
     if (!r.ok) { errors.push(String(r.error)); continue; }
     urls.push(...r.pages.map((p) => p.url));
     for (const s of snippetsOf(r.pages)) if (!all.some((x) => x.text === s.text)) all.push(s);
-    if (OCR && all.length < 8) {
-      const o = await within(180000, ocrImages([...r.pages, ...(rendered?.pages ?? [])], rules), "ocr").catch(() => []);
+    // 글이 적거나, 요금 문장이 하나도 없으면(요금표가 이미지인 곳) 안내 이미지를 읽는다.
+    if (OCR && (all.length < 8 || !all.some((x) => /\d[\d,]*\s*(만\s*)?원/.test(x.text)))) {
+      const o = [];
+      await within(Math.max(20000, siteDeadline - Date.now()), ocrImages([...r.pages, ...(rendered?.pages ?? [])], rules, o, siteDeadline - 10000), "ocr").catch(() => {});
       for (const s of o) if (!all.some((x) => x.text === s.text)) all.push(s);
     }
   }

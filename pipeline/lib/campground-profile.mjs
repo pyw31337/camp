@@ -39,11 +39,11 @@ function specField(spec, code) {
  * @param {object|null} details 운영자 문장 상세(extractSiteDetails 결과, 공용 홈페이지면 null)
  * @param {{detailDate?:string, urlOf?:(quote:string)=>string|null}} opts 운영자 문장의 확인 시각·원문 쪽 URL 찾기
  */
-export function buildProfile(c, d = null, details = null, { detailDate = null, urlOf = null, intro = null } = {}) {
+export function buildProfile(c, d = null, details = null, { detailDate = null, urlOf = null, imageOf = null, intro = null } = {}) {
   const f = c.field_conditions ?? {}, of = c.of ?? {}, verified = f.status === "VERIFIED";
   const fields = {};
   const set = (code, value, grade, source, extra = {}) => { if (value != null && value !== "") fields[code] = { value, grade, source, ...extra }; };
-  const dsrc = (x) => ({ label: "운영자 홈페이지", url: urlOf?.(x?.quote) ?? null, date: detailDate, quote: x?.quote ?? null });
+  const dsrc = (x) => { const image = imageOf?.(x?.quote) ?? null; return { label: image ? "운영자 안내 이미지(글자 인식)" : "운영자 홈페이지", url: urlOf?.(x?.quote) ?? null, date: detailDate, quote: x?.quote ?? null, ...(image ? { image } : {}) }; };
 
   // 유형·규모
   const kinds = (c.kinds ?? []).filter(([k]) => KIND_LABEL[k]);
