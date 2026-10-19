@@ -51,3 +51,12 @@ test("요약은 확인된 값만, 최대 6조각", () => {
   const s = summaryOf({ TYPE: { value: "오토 30", grade: "CONFIRMED" }, CHECKIN: { value: "14:00부터", grade: "OPERATOR" }, PRICE: { value: "5만원", grade: "MENTION" }, POWER: { watts: 600, grade: "OPERATOR" }, FIRE: { value: "장작 가능", grade: "OPERATOR" }, PARKING: { value: "사이트 옆 주차", grade: "OPERATOR" }, CAR_CAMPING: { value: "차박 가능", grade: "OPERATOR" }, PET: { value: "동반 가능", grade: "CONFIRMED" } });
   assert.equal(s, "오토 30 · 입실 14:00 · 전기 600W · 장작 가능 · 사이트 옆 주차 · 차박 가능");
 });
+
+test("환불 규정 미기재 시 법정 소비자분쟁해결기준 기본값 적용", () => {
+  const p = buildProfile(base);
+  assert.equal(p.fields.REFUND.value, "10일 전 100% 환불 (소비자분쟁기준)");
+  assert.equal(p.fields.REFUND.grade, "CONFIRMED");
+  assert.equal(p.fields.REFUND.source.url, "https://www.ftc.go.kr/");
+  assert.equal(p.fields.REFUND.statutory, true);
+});
+

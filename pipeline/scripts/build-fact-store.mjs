@@ -24,6 +24,8 @@ const sites = readJson(join(root, "pipeline/registry/operator-site-snippets.json
 const kakao = readJson(join(root, "pipeline/registry/kakao-places.json"), {}).campgrounds ?? {};
 const naverReg = readJson(join(root, "pipeline/registry/naver-places.json"), {}).campgrounds ?? {};
 const nearbyReg = readJson(join(root, "pipeline/registry/nearby-licensed.json"), null);
+const localFeeReg = readJson(join(root, "pipeline/registry/local-fee-facts.json"), null);
+const forestMatchesReg = readJson(join(root, "pipeline/registry/forest-matches.json"), null);
 // 범주 → 원천 업종 페이지(첫 번째 원천) URL
 const nearbyUrls = Object.fromEntries(NEARBY_CATS.map((c) => [c.code, nearbyReg?.sources?.find((s) => s.slug === c.from[0] && s.page_url)?.page_url ?? "https://www.localdata.go.kr/"]));
 const nearbyOf = (id) => (nearbyReg?.campgrounds?.[id] ? { places: nearbyReg.campgrounds[id], urls: nearbyUrls, at: nearbyReg.generated_at } : null);
@@ -46,6 +48,53 @@ for (const c of camps) {
   const digest = d ? digestReviews(c.name, [...(d.reviews ?? []), ...(d.cafe ?? [])], { min: 1, top: 99 }) : null;
   facts.push(...factsOf(c, d, { site, details, digest, kakao: kakao[c.id] ?? null, nearby: nearbyOf(c.id), naver: naverReg[c.id] ?? null }));
   registry.push({ cid: String(c.id), name: c.name, sido: c.sido ?? null, sigungu: c.sigungu ?? null, lat: c.lat ?? null, lng: c.lng ?? null, gc_url: c.gc_url ?? null, gc_at: c.modified_at ?? null, kakao_place_id: kakao[c.id]?.place?.id ?? null });
+}
+
+// 지자체 공개 데이터(조례·표준데이터 요금 및 사이트 수) 적재
+if (localFeeReg?.facts?.length) {
+  const hintMap = {
+    "여주 금은모래": "484",
+    "구미 구미캠핑장": "362",
+    "화성 향남": "7096",
+  };
+  for (const f of localFeeReg.facts) {
+    let cid = null;
+    for (const [k, id] of Object.entries(hintMap)) {
+      if (f.camp_hint.includes(k)) { cid = id; break; }
+    }
+    if (!cid) continue;
+    const url = f.camp_hint.includes("여주") ? "https://www.data.go.kr/"
+      : f.camp_hint.includes("구미") ? "https://www.gumi.go.kr/"
+      : "https://hsuco.or.kr/";
+    const at = localFeeReg.generated_at ?? now;
+    if (f.attribute === "SITE_COUNT") {
+      const cnt = Number(f.value);
+      if (Number.isFinite(cnt)) {
+        facts.push({ cid, attr: "SITE_TOTAL", value: cnt, grade: "CONFIRMED", src: "local_gov", url, at, text: `${cnt}면` });
+      }
+    } else if (f.attribute === "PRICE_NIGHT") {
+      const prices = (String(f.value).match(/\d{4,6}/g) || []).map(Number).filter((n) => n >= 5000 && n <= 500000);
+      for (const p of [...new Set(prices)]) {
+        facts.push({ cid, attr: "PRICE_NIGHT", value: p, grade: "CONFIRMED", src: "local_gov", url, at, text: f.value });
+      }
+    }
+  }
+}
+
+// 국립자연휴양림 매칭 사실(forest-matches.json) 적재
+if (forestMatchesReg?.matches?.length) {
+  for (const m of forestMatchesReg.matches) {
+    if (!m.matched_camp_id || m.match_confidence === "none") continue;
+    const cid = String(m.matched_camp_id);
+    const url = m.reservation || "https://www.foresttrip.go.kr/";
+    const at = forestMatchesReg.generated_at ?? now;
+    facts.push({ cid, attr: "BOOKING_CHANNEL", value: "foresttrip", grade: "CONFIRMED", src: "operator_homepage", url, at, text: "숲나들e(국립자연휴양림 예약)" });
+    facts.push({ cid, attr: "OPERATOR_TYPE", value: "NATURAL_RECREATION_FOREST", grade: "CONFIRMED", src: "operator_homepage", url, at, text: "국립자연휴양림" });
+    facts.push({ cid, attr: "FIRE_RULE", value: "CHARCOAL_ONLY", grade: "CONFIRMED", src: "operator_homepage", url, at, text: "산림보호법에 따른 숯만 허용(장작 금지)" });
+    if (m.phone) {
+      facts.push({ cid, attr: "PHONE", value: m.phone, grade: "CONFIRMED", src: "operator_homepage", url, at });
+    }
+  }
 }
 
 const errs = validateFacts(facts);

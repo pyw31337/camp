@@ -133,7 +133,7 @@
    "coverage": {
     "campgrounds": 2286,
     "by_grade": {
-     "CONFIRMED": 2286
+     "CONFIRMED": 2289
     }
    }
   },
@@ -243,9 +243,10 @@
    "pref": "장작 불멍을 하고 싶나요?",
    "filter": "in",
    "coverage": {
-    "campgrounds": 33,
+    "campgrounds": 43,
     "by_grade": {
-     "OPERATOR": 33
+     "OPERATOR": 33,
+     "CONFIRMED": 10
     }
    }
   },
@@ -445,9 +446,10 @@
    "filter": "max",
    "note": "항목별 1행. 성수기·평일 구분은 period/label",
    "coverage": {
-    "campgrounds": 178,
+    "campgrounds": 181,
     "by_grade": {
-     "OPERATOR": 659
+     "OPERATOR": 659,
+     "CONFIRMED": 11
     }
    }
   },
@@ -1558,9 +1560,9 @@
    "multi": true,
    "note": "value=플랫폼 코드(homepage·phone·onsite·naver·camfit·thankqcamping·foresttrip·knps·public-site 등), text=플랫폼 이름",
    "coverage": {
-    "campgrounds": 2530,
+    "campgrounds": 2531,
     "by_grade": {
-     "CONFIRMED": 5363
+     "CONFIRMED": 5373
     }
    }
   },
@@ -1596,7 +1598,7 @@
    "coverage": {
     "campgrounds": 3116,
     "by_grade": {
-     "CONFIRMED": 3116
+     "CONFIRMED": 3126
     }
    }
   },
@@ -1606,9 +1608,9 @@
    "label": "전화",
    "type": "text",
    "coverage": {
-    "campgrounds": 2308,
+    "campgrounds": 2309,
     "by_grade": {
-     "CONFIRMED": 2308
+     "CONFIRMED": 2319
     }
    }
   },
@@ -1632,9 +1634,9 @@
    "type": "url",
    "note": "value=place_url, value_text=분류",
    "coverage": {
-    "campgrounds": 1974,
+    "campgrounds": 1975,
     "by_grade": {
-     "CONFIRMED": 1974
+     "CONFIRMED": 1975
     }
    }
   },
@@ -2304,5 +2306,5 @@
    }
   }
  ],
- "generated_at": "2026-10-19T04:40:42.950Z"
+ "generated_at": "2026-10-19T05:00:40.510Z"
 }
