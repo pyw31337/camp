@@ -1,7 +1,7 @@
 // 네이버 검색 API(NAVER API HUB)가 절대 유료로 쓰이지 않게 막는 안전장치(소유자 지시 2026-10-16).
 // 1) 무료 확인: 호출 전마다 NCP 공식 상품 페이지 요금표에서 ‘검색 API 무료 구간 0원’을 확인하고, 금액·유료 구간이 보이면 멈춘다.
 //    요금표를 읽지 못해도 멈춘다(확인 못 하면 쓰지 않는다 — fail-closed). 가이드를 읽을 수 있으면 유료 전환 문구도 함께 본다.
-// 2) 월 예산: 무료 한도(월 775,000건)의 일부(기본 20,000건)만 쓰도록 월별 사용량을 registry/naver-usage.json에 남기고 넘으면 멈춘다.
+// 2) 월 예산: 무료 한도(월 775,000건)의 일부(기본 250,000건)만 쓰도록 월별 사용량을 registry/naver-usage.json에 남기고 넘으면 멈춘다.
 // 3) 응답 감시: 402·결제/요금 관련 오류가 오면 즉시 멈춘다.
 // 4) 소유자 스위치: 저장소 변수 NAVER_API_ENABLED=false면 아무 호출도 하지 않는다.
 
@@ -9,7 +9,7 @@
 export const PRICING_URL = "https://www.ncloud.com/product/applicationService/naverApiHub";
 export const FREE_TIER_URL = "https://guide.ncloud-docs.com/docs/apihub-overview";
 export const FREE_QUOTA_MONTHLY = 775000;
-export const DEFAULT_MONTHLY_CAP = 20000; // 무료 한도의 약 2.6%
+export const DEFAULT_MONTHLY_CAP = 250000; // 무료 한도(775,000)의 약 32% — 2026-10-19 소유자: 블로그·카페·웹문서·지식iN까지 충분히 활용
 export const DAILY_LIMIT = 25000; // 요금표의 일 최대 호출 제한 — 한 실행 호출 상한은 이보다 훨씬 낮게(기본 4,000)
 // 지금 가이드 문장: “NAVER API HUB 서비스는 한시적으로 무료로 제공되며, 유료 전환 시 사전에 별도 공지로 안내될 예정입니다.”
 export const FREE_SENTENCE = /한시적으로\s*무료/;
