@@ -87,7 +87,7 @@ export function digestReviews(name, reviews = [], { min = 1, top = 4 } = {}) {
 
   for (const r of own) {
     // 캠핑장 이름 속 단어(“솔바람”의 바람 등)를 후기 표현으로 세지 않게 이름을 지운다.
-    const text = `${r.title ?? ""}. ${r.snippet ?? ""}`.split(String(name ?? "").trim()).join(" ");
+    const text = `${r.title ?? ""}. ${r.snippet ?? ""}${r.body?.length ? `. ${r.body.join(". ")}` : ""}`.split(String(name ?? "").trim()).join(" ");
     const normText = text.replace(new RegExp(String(name ?? "").replace(/[^가-힣A-Za-z0-9]+/g, "|").replace(/^\||\|$/g, "").split("|").filter((t) => t.length >= 2).join("|") || "$^", "g"), " ");
     const { pros, cons } = topicsOf(normText);
     const sample = { title: r.title ?? "후기", url: r.url ?? null, date: r.date ?? null };

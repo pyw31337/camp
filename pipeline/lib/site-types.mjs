@@ -70,9 +70,9 @@ const KIND_CODE = { PITCH: "PITCH", GENERAL_PITCH: "PITCH", AUTO_PITCH: "AUTO", 
  * @param c 카탈로그 행, d 상세(intro·feature), opts { snippets: {url, checked_at, snippets[]}, kakao: place, naver: place }
  * @returns [{ code, label, count, sub, grade, src, url, at, quote }] — 타입마다 가장 강한 근거 하나
  */
-export function siteTypesOf(c, d = {}, { snippets = null, kakao = null, naver = null } = {}) {
+export function siteTypesOf(c, d = {}, { snippets = null, kakao = null, naver = null, posts = [] } = {}) {
   const best = new Map();
-  const RANK = { OPERATOR: 3, CONFIRMED: 2 };
+  const RANK = { OPERATOR: 3, CONFIRMED: 2, MENTION: 1 };
   const put = (code, e) => {
     const cur = best.get(code);
     // 개수가 있는 등록값을 가장 먼저 둔다. 그다음 운영자 문장, 그다음 분류·소개글.
@@ -110,10 +110,23 @@ export function siteTypesOf(c, d = {}, { snippets = null, kakao = null, naver = 
       for (const [code, sub, quote] of typesInText(line)) put(code, { count: null, grade: "OPERATOR", src: "operator_homepage", url, at: snippets.checked_at ?? null, sub, quote });
     }
   }
+  // 5) 후기·게시글(카카오·네이버 검색 요약 + 허용 블로그 본문). 단서 등급(MENTION).
+  //    한 글의 스쳐 지나간 언급을 막으려고, 서로 다른 글 2건 이상이거나 글 제목에 나온 타입만 받는다.
+  const seen = new Map();
+  for (const p of posts ?? []) {
+    const text = [p.title, p.snippet, ...(p.body ?? [])].filter(Boolean).join(". ");
+    for (const [code, sub, quote] of typesInText(text)) {
+      const e = seen.get(code) ?? { n: 0, inTitle: false, sub: null, first: null };
+      e.n++; e.inTitle ||= typesInText(p.title ?? "").some(([k]) => k === code); e.sub ??= sub;
+      e.first ??= { url: p.url ?? null, at: p.date ?? null, quote, src: p.t === "kin" ? "kin" : /cafe/.test(p.t ?? "") ? "cafe_mention" : "blog_mention" };
+      seen.set(code, e);
+    }
+  }
+  for (const [code, e] of seen) if (e.n >= 2 || e.inTitle) put(code, { count: null, grade: "MENTION", src: e.first.src, url: e.first.url, at: e.first.at, sub: e.sub, quote: e.first.quote });
   return [...best.entries()]
     .map(([code, e]) => ({ code, label: SITE_TYPE_LABEL[code], count: e.count ?? null, sub: e.sub ?? null, grade: e.grade, src: e.src, url: e.url ?? null, at: e.at ?? null, quote: e.quote ?? null }))
     .sort((a, b) => ORDER[a.code] - ORDER[b.code]);
 }
 
-/** 카탈로그용 짧은 형태: [[code, count|null, g, sub|null]] (g: c=공식 등록·분류·소개글, o=운영자 홈페이지) */
-export const compactTypes = (list) => list.map((t) => [t.code, t.count, t.grade === "OPERATOR" ? "o" : "c", t.sub]);
+/** 카탈로그용 짧은 형태: [[code, count|null, g, sub|null]] (g: c=공식 등록·분류·소개글, o=운영자 홈페이지, m=후기·게시글 언급) */
+export const compactTypes = (list) => list.map((t) => [t.code, t.count, t.grade === "OPERATOR" ? "o" : t.grade === "MENTION" ? "m" : "c", t.sub]);
