@@ -7,6 +7,7 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
+import { landslideBySgg, landslideFor } from "../lib/trip-extras.mjs";
 import { airBySido, apiProblem, itemsOf, midTmFc, shortBase, sidoKey, summarizeAir, summarizeMid, summarizeShort, isoDay } from "../lib/conditions.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
@@ -102,6 +103,15 @@ const warn = await service("warn", async () => {
   return { text, at: it.tmFc ?? null };
 });
 
+// 3-1) 산사태 예측(산림청 15074800, 활용신청 전이면 건너뜀): 최근 12시간 안의 시군구 주의보·경보
+const landslide = await service("landslide", async () => {
+  const { problem, json } = await get("landslide", "https://apis.data.go.kr/1400000/predictionInfoService/predictionInfoList?_type=json&pageNo=1&numOfRows=500");
+  if (problem) { status.landslide = problem; return null; }
+  const by = landslideBySgg(itemsOf(json), now);
+  status.landslide = `OK 최근 12시간 ${Object.keys(by).length}개 시군구`;
+  return by;
+});
+
 // 4) 미세먼지(지금): 전국 측정소 실시간 1~2회
 const air = await service("air", async () => {
   const items = [];
@@ -119,23 +129,27 @@ const air = await service("air", async () => {
 // 캠핑장 → [격자, 육상 구역, 기온 도시, 미세먼지 키("s:측정소"|"d:시도"), 특보 여부]
 const campRows = {};
 const airOut = {};
+const landOut = {};
 for (const [id, m] of camps) {
   let a = null;
   if (m.air && air?.stations?.[m.air]) { a = `s:${m.air}`; airOut[a] = air.stations[m.air]; }
   else if (air?.bySido) { const k = sidoKey(air.bySido, m.sido); if (k) { a = `d:${k}`; airOut[a] = air.bySido[k]; } }
   const w = warn?.text && m.sigungu && warn.text.includes(m.sigungu.replace(/(시|군|구)$/, "")) ? 1 : 0;
   campRows[id] = [gridOf(m), m.land ?? null, m.ta ?? null, a, w];
+  const ls = landslide ? landslideFor(landslide, m.sido, m.sigungu) : null;
+  if (ls) landOut[id] = [ls.level, new Date(ls.at).toISOString()];
 }
 const out = {
   generated_at: new Date(now).toISOString(), today, status, calls,
   sources: {
-    short: "기상청 단기예보(공공데이터포털 15084084)", mid: "기상청 중기예보(15059468)", warn: "기상청 기상특보(15000415)",
+    short: "기상청 단기예보(공공데이터포털 15084084)", mid: "기상청 중기예보(15059468)", warn: "기상청 기상특보(15000415)", landslide: "산림청 산사태예측정보(15074800)",
     air: "한국환경공단 에어코리아 대기오염정보(15073861)", sun: "일출·일몰·달: 화면에서 천문 계산(근사, ±2분)",
   },
   short: short ?? (prev?.short ? { ...prev.short, grids: Object.fromEntries(Object.entries(prev.short.grids ?? {}).map(([g, d]) => [g, Object.fromEntries(Object.entries(d).filter(([x]) => x >= today))])), stale: true } : null),
   mid: mid ?? null,
   warn: warn?.text ? { text: warn.text.slice(0, 4000), at: warn.at } : null,
   air: airOut,
+  landslide: landslide ? landOut : null,
   camps: campRows,
 };
 writeFileSync(outPath, `${JSON.stringify(out)}\n`);

@@ -48,6 +48,14 @@ const checks = [
   { name: "기상청 기상특보(15000415)", url: "https://apis.data.go.kr/1360000/WthrWrnInfoService/getPwnStatus?pageNo=1&numOfRows=1&dataType=JSON" },
   { name: "에어코리아 대기오염정보(15073861)", url: `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?returnType=json&numOfRows=1&pageNo=1&sidoName=${encodeURIComponent("서울")}&ver=1.0` },
   { name: "에어코리아 측정소정보(15073877)", url: "https://apis.data.go.kr/B552584/MsrstnInfoInqireSvc/getMsrstnList?returnType=json&numOfRows=1&pageNo=1" },
+  { name: "산림청 산사태예측정보(15074800)", url: "https://apis.data.go.kr/1400000/predictionInfoService/predictionInfoList?_type=json&numOfRows=1&pageNo=1" },
+  // 여행 참고 정보(sync-trip-extras.mjs) — 각각 data.go.kr 활용신청 필요
+  { name: "한국관광공사 반려동물 동반여행(15135102)", url: `https://apis.data.go.kr/B551011/KorPetTourService2/areaBasedList2?numOfRows=1&pageNo=1&${common}` },
+  { name: "한국관광공사 무장애 여행(15101897)", url: `https://apis.data.go.kr/B551011/KorWithService2/areaBasedList2?numOfRows=1&pageNo=1&${common}` },
+  { name: "한국관광공사 두루누비(15101974)", url: `https://apis.data.go.kr/B551011/Durunubi/courseList?numOfRows=1&pageNo=1&${common}` },
+  { name: "한국관광공사 관광지 집중률(15128555)", url: `https://apis.data.go.kr/B551011/TatsCnctrRateService/tatsCnctrRatedList?numOfRows=1&pageNo=1&areaCd=51&signguCd=51130&${common}` },
+  { name: "국립중앙의료원 응급의료기관(15000563)", url: "https://apis.data.go.kr/B552657/ErmctInfoInqireService/getEgytListInfoInqire?pageNo=1&numOfRows=1" },
+  { name: "환경부 전기차 충전소(15076352)", url: "https://apis.data.go.kr/B552584/EvCharger/getChargerInfo?numOfRows=1&pageNo=1&dataType=JSON" },
   { name: "산림청 산불위험예보(15084817)", url: "https://apis.data.go.kr/1400377/forestPoint/forestPointListGeongugSearch?_type=json&numOfRows=1&pageNo=1" },
   { name: "국립해양조사원 조석예보 고·저조(15156018)", url: `https://apis.data.go.kr/1192136/tideFcstHghLw/GetTideFcstHghLwApiService?obsCode=DT_0001&reqDate=${ymd}&type=json&numOfRows=1&pageNo=1` },
 ];
@@ -67,6 +75,7 @@ function diagnose(status, text) {
     if (h && ["0000", "00"].includes(String(h.resultCode))) return null;
     if (h) return `응답 코드 ${h.resultCode}: ${h.resultMsg}`;
   } catch { /* JSON이 아니면 아래에서 처리 */ }
+  if (/<resultCode>0+<\/resultCode>/.test(text)) return null; // XML 전용 서비스(국립중앙의료원 등)
   return `알 수 없는 응답(HTTP ${status}): ${text.slice(0, 120).replace(/\s+/g, " ")}`;
 }
 
