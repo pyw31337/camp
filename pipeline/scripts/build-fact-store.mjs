@@ -14,6 +14,7 @@ import { ATTR, DICTIONARY, GRADE_RANK, SOURCES, factsOf, validateFacts } from ".
 import { CATEGORIES as NEARBY_CATS } from "../lib/nearby-licensed.mjs";
 import { extractSiteDetails, hostOf } from "../lib/operator-site.mjs";
 import { digestReviews } from "../lib/review-digest.mjs";
+import { operatorFormFacts } from "../lib/operator-form.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const dataDir = join(root, "camping-atlas/public/explore/data");
@@ -48,6 +49,13 @@ for (const c of camps) {
   const digest = d ? digestReviews(c.name, [...(d.reviews ?? []), ...(d.cafe ?? [])], { min: 1, top: 99, regions: [c.sigungu, c.sido] }) : null;
   facts.push(...factsOf(c, d, { site, details, digest, kakao: kakao[c.id] ?? null, nearby: nearbyOf(c.id), naver: naverReg[c.id] ?? null }));
   registry.push({ cid: String(c.id), name: c.name, sido: c.sido ?? null, sigungu: c.sigungu ?? null, lat: c.lat ?? null, lng: c.lng ?? null, gc_url: c.gc_url ?? null, gc_at: c.modified_at ?? null, kakao_place_id: kakao[c.id]?.place?.id ?? null });
+}
+
+// 운영자 셀프 등록(소유자 승인분, registry/operator-submissions.json — export-operator-submissions.mjs)
+{
+  const known = new Set(camps.map((c) => String(c.id)));
+  const items = (readJson(join(root, "pipeline/registry/operator-submissions.json"), null)?.items ?? []).filter((it) => known.has(it.cid));
+  facts.push(...operatorFormFacts(items));
 }
 
 // 지자체 공개 데이터(조례·표준데이터 요금 및 사이트 수) 적재

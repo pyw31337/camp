@@ -15,6 +15,7 @@ export const SOURCES = {
   pilot_verified: "모여라캠핑 파일럿 원문 대조",
   operator_homepage: "운영자 홈페이지",
   operator_discovered: "운영자 홈페이지(카카오 검색으로 발굴)",
+  operator_form: "운영자 셀프 등록(사이트 제출·소유자 검토 승인)",
   gocamping: "한국관광공사 고캠핑 등록값",
   gocamping_intro: "고캠핑 운영자 소개글",
   kakao_local: "카카오 로컬(장소 검색 API)",
