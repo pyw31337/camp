@@ -91,7 +91,7 @@ export function upcomingWeekend(nowMs = Date.now()) {
 
 // ── 응답 정리
 export function itemsOf(json) {
-  const it = json?.response?.body?.items?.item ?? json?.response?.body?.items ?? json?.body?.items?.item ?? json?.body?.items ?? json?.items ?? [];
+  const it = json?.response?.body?.items?.item ?? json?.response?.body?.items ?? json?.body?.items?.item ?? json?.body?.items ?? json?.items?.item ?? json?.items ?? [];
   return Array.isArray(it) ? it : it ? [it] : [];
 }
 export function apiProblem(status, text) {
