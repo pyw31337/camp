@@ -18,15 +18,18 @@ test("축제: 오늘~45일 사이에 걸치는 것만, 시작일 순으로 30km 
   assert.equal(near[1][1], 0);
 });
 
-test("충전소: OSM 추출본에서 가장 가까운 곳과 5km 안 개수", () => {
+test("충전소: 가까운 3곳(급속 여부·좌표)과 5km 안 개수", () => {
   const pts = chargersOf([
-    { lat: 37.501, lon: 127.5, tags: { amenity: "charging_station", operator: "환경부" } },
+    { lat: 37.501, lon: 127.5, tags: { amenity: "charging_station", operator: "환경부", "socket:type2_combo": "2" } },
     { lat: 37.53, lon: 127.5, tags: { amenity: "charging_station" } },
     { lat: 37.6, lon: 127.5, tags: { amenity: "fuel" } },
   ]);
   assert.equal(pts.length, 2);
-  const [name, km, c5] = nearestCharger({ lat: 37.5, lng: 127.5 }, new GridIndex(pts, 0.05));
-  assert.equal(name, "환경부"); assert.equal(km, 0.1); assert.equal(c5, 2);
+  const [c5, list] = nearestCharger({ lat: 37.5, lng: 127.5 }, new GridIndex(pts, 0.05));
+  assert.equal(c5, 2);
+  assert.deepEqual(list, [["환경부", 0.1, 1, 37.501, 127.5], [null, 3.3, null, 37.53, 127.5]]);
+  const dup = [{ lat: 37.5, lng: 127.5, name: "A", fast: false }, { lat: 37.5001, lng: 127.5, name: "A", fast: true }, { lat: 37.51, lng: 127.5, name: "B" }];
+  assert.deepEqual(nearestCharger({ lat: 37.5, lng: 127.5 }, new GridIndex(dup, 0.05))[1].map((x) => x[0]), ["A", "B"]);
   assert.equal(nearestCharger({ lat: 35, lng: 129 }, new GridIndex(pts, 0.05)), null);
 });
 
@@ -59,13 +62,15 @@ test("여행 참고 정보 카드: 있는 항목만 행으로", async () => {
   const { rowsFor } = await import("../../camping-atlas/public/context/card.js");
   const data = { weekend: { sat: "2026-10-24", sun: "2026-10-25" }, sources: { ev: { name: "OpenStreetMap 충전소" } },
     fest: { 1: { t: "가을 <축제>", s: "2026-10-24", e: "2026-10-26" } },
-    camps: { 10: { el: 488, ev: ["충전소", 2.3, 3], fe: [["1", 4.2]], cr: { "2026-10-24": 42 } }, 11: { el: 3 } } };
+    camps: { 10: { el: 488, ev: [3, [["충전소", 2.3, 1, 37.5, 127.5]]], fe: [["1", 4.2]], cr: { "2026-10-24": 42 } }, 11: { el: 3 } } };
   const r = rowsFor(data, "10");
-  assert.deepEqual(r.map((x) => x.k), ["고도", "전기차 충전", "주변 축제·행사", "주말 관광지 붐빔"]);
+  assert.deepEqual(r.map((x) => x.k), ["고도", "주변 축제·행사", "주말 관광지 붐빔"]); // 충전소는 ‘주변’ 칸으로 옮김
   assert.match(r[0].v, /해발 약 488m.*약 3℃ 낮은/);
-  assert.match(r[1].v, /2\.3km \(충전소\) · 5km 안 3곳.*OSM/);
-  assert.match(r[2].v, /가을 &lt;축제&gt;.*10\/24\(토\)~10\/26\(월\) · 4\.2km/);
-  assert.match(r[3].v, /토 42/);
+  assert.match(r[1].v, /가을 &lt;축제&gt;.*10\/24\(토\)~10\/26\(월\) · 4\.2km/);
+  assert.match(r[2].v, /토 42/);
   assert.match(rowsFor(data, "11")[0].v, /해안가 저지대/);
   assert.deepEqual(rowsFor(data, "12"), []);
+  const { evOf } = await import("../../camping-atlas/public/context/card.js");
+  assert.deepEqual(evOf(data, "10"), { c5: 3, list: [{ name: "충전소", km: 2.3, fast: 1, lat: 37.5, lng: 127.5 }], source: { name: "OpenStreetMap 충전소" }, osm: true });
+  assert.equal(evOf({ camps: { 1: { ev: ["옛 형식", 2, 1] } } }, "1"), null);
 });
