@@ -11,6 +11,15 @@ const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[m]);
 const fmt = (n) => Number(n).toLocaleString("ko-KR");
+// 카드·목록의 1박 요금 표기를 한 형식으로: 4만~5만원, 2만~2.5만원대(후기 언급처럼 어림값이면 ‘대’).
+const manWon = (n) => (n % 10000 === 0 ? `${n / 10000}만` : n >= 10000 ? `${(n / 10000).toFixed(1).replace(/\.0$/, "")}만` : `${Math.round(n / 1000)}천`);
+function feeLabel(fee) {
+  if (!fee) return null;
+  const lo = Number(fee.min), hi = Number(fee.max ?? fee.min);
+  if (!(lo > 0)) return fee.text || null;
+  const approx = /대\s*$/.test(fee.text ?? "") ? "대" : "";
+  return `${manWon(lo)}${hi > lo ? `~${manWon(hi)}` : ""}원${approx}`;
+}
 const band = (n) => {
   if (n == null) return "-";
   const m = Math.floor(n / 10000);
@@ -563,7 +572,7 @@ function card(c, i = 0) {
       ${rowsHtml(c)}
       ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-reviews">${cardReviewPills(c.rv)}</div>` : ""}
       ${nearLine(c) ? `<p class="card-near">${ic("store")}${esc(nearLine(c))}</p>` : ""}
-      ${c.fee?.text ? `<p class="card-price"><span>1박</span><b>${esc(c.fee.text)}</b>${dot(GR(c.fee.grade))}</p>` : c.fee?.min ? `<p class="card-price"><span>1박</span><b>${band(c.fee.min)}부터</b>${dot(GR(c.fee.grade))}</p>` : ""}
+      ${feeLabel(c.fee) ? `<p class="card-price"><span>1박</span><b>${esc(feeLabel(c.fee))}</b>${dot(GR(c.fee.grade))}</p>` : ""}
     </div>
   </article>`;
 }
@@ -694,7 +703,7 @@ function homeView() {
   ${themeSection}
   <section class="results" id="results" aria-labelledby="res-t">
     <div class="res-head">
-      <h2 id="res-t" data-res-title>조건 <b>검색</b></h2>
+      <h2 id="res-t" data-res-title>조건 <em>검색</em></h2>
       <div class="res-tools">
         <div class="rail active-chips" data-active></div>
         <label class="sort">${ic("list")}<select data-sort aria-label="정렬">
@@ -759,7 +768,7 @@ function renderResults({ reset = true } = {}) {
   const rows = $("[data-rows]"), noph = $("[data-nophoto]");
   // 둘러보기(검색어·테마·사이트 타입 없음): 테마·사이트 타입마다 한 줄씩 가로로 넘기는 줄(소유자 요청). 고르면 격자.
   if (!S.q && !S.theme && !S.stype) {
-    $("[data-res-title]").innerHTML = `조건 <b>검색</b>`;
+    $("[data-res-title]").innerHTML = `조건 <em>검색</em>`;
     const defs = [["AVAIL", "지금 공식 접수 중", (c) => S.avail.has(String(c.id))], ["ALL", "정보 많은 곳", () => true], ...THEMES.slice(0, 3), ["T:HOUSE", "캐빈·방갈로 숙박동", (c) => hasType(c, "HOUSE")], ...THEMES.slice(3, 6), ["T:DECK", "데크 사이트", (c) => hasType(c, "DECK")], ...THEMES.slice(6), ["T:CAR_CAMP", "차박", (c) => hasType(c, "CAR_CAMP")], ["T:PET_SITE", "반려견 전용 사이트", (c) => hasType(c, "PET_SITE")]];
     const used = new Set();
     rows.innerHTML = list.length ? defs.map((dd, i) => themeRow(dd, list, i === 0, used)).join("") : `<div class="empty">${ic("search")}<b>맞는 곳이 없어요</b><button class="btn ghost" data-clear="all">조건 지우기</button></div>`;
@@ -1036,7 +1045,7 @@ function condLine(c, ce) {
 }
 function listRow({ c, st, ce }, i = 0) {
   const f = facts(c), { tag } = nameOf(c), ti = c.ti ?? {}, r = reviewMeta(c), main = bookingChannels(c)[0];
-  const fee = c.fee?.text ? c.fee.text : c.fee?.min ? `${band(c.fee.min)}부터` : null;
+  const fee = feeLabel(c.fee);
   const href = `#/c/${encodeURIComponent(c.id)}`;
   return `<article class="lrow" data-id="${esc(c.id)}">
     <a class="lrow-media" href="${href}" tabindex="-1" aria-hidden="true">${campThumb(c, { sizes: "(max-width: 759px) 132px, 300px" })}<span class="bdgs">${badges(c, 2)}</span></a>
@@ -1333,7 +1342,7 @@ function usage(c, d) {
     ["입실", profFact(PF(d, "CHECKIN")) ?? specFact(d, "CHECKIN_TIME"), "clock-in"],
     ["퇴실", profFact(PF(d, "CHECKOUT")) ?? specFact(d, "CHECKOUT_TIME"), "clock-out"],
     ["매너타임", profFact(PF(d, "MANNER")) ?? specFact(d, "MANNER_TIME"), "bed"],
-    ["요금", profFact(PF(d, "PRICE")) ?? (c.fee ? { v: c.fee.text || (c.fee.min ? `${band(c.fee.min)}부터` : null), g: GR(c.fee.grade) || "c", src: { label: c.fee.basis, url: c.fee.url, at: c.fee.checked_at } } : null), "won"],
+    ["요금", profFact(PF(d, "PRICE")) ?? (c.fee ? { v: feeLabel(c.fee), g: GR(c.fee.grade) || "c", src: { label: c.fee.basis, url: c.fee.url, at: c.fee.checked_at } } : null), "won"],
     ["추가 요금", profFact(PF(d, "EXTRA_FEE")) ?? specFact(d, "EXTRA_PERSON_FEE"), "won"],
     ["환불", profFact(PF(d, "REFUND")) ?? specFact(d, "REFUND_POLICY"), "calc"],
     ["운영", profFact(PF(d, "SEASON")) ?? ((c.seasons ?? []).length ? { v: (c.seasons ?? []).length === 4 ? "사계절 운영" : `${(c.seasons ?? []).join("·")} 운영`, g: "c", src: { label: "고캠핑 등록 운영 기간", url: c.gc_url } } : null), "calendar"],
@@ -1453,11 +1462,23 @@ function fuelPlaces(rows, licensedGas) {
 }
 const isOfficialTourImage = (u) => /^https:\/\/(?:[\w-]+\.)?(?:visitkorea\.or\.kr|kto\.or\.kr)\//i.test(String(u ?? ""));
 /** 주변 칸 한 곳(주유·충전 칸은 상세 화면이 뜬 뒤 충전소를 덧붙일 때도 쓴다) */
+// 위경도(WGS84) → 다음 지도 좌표(WCONGNAMUL = GRS80 TM(38N 127E, FE 200000, FN 500000) × 2.5).
+// 2026-10-19: 위경도를 그대로 넘겨 모든 주변시설 썸네일이 바다(빈 하늘색)로 나오던 것을 고쳤다. 서울시청으로 위치 확인.
+function wcong(lat, lng) {
+  const r = Math.PI / 180, a = 6378137, f = 1 / 298.257222101, e2 = f * (2 - f), ep2 = e2 / (1 - e2);
+  const phi = lat * r, A = (lng - 127) * r * Math.cos(phi);
+  const M = (p) => a * ((1 - e2 / 4 - 3 * e2 ** 2 / 64 - 5 * e2 ** 3 / 256) * p - (3 * e2 / 8 + 3 * e2 ** 2 / 32 + 45 * e2 ** 3 / 1024) * Math.sin(2 * p) + (15 * e2 ** 2 / 256 + 45 * e2 ** 3 / 1024) * Math.sin(4 * p) - (35 * e2 ** 3 / 3072) * Math.sin(6 * p));
+  const N = a / Math.sqrt(1 - e2 * Math.sin(phi) ** 2), T = Math.tan(phi) ** 2, C = ep2 * Math.cos(phi) ** 2;
+  const x = 200000 + N * (A + (1 - T + C) * A ** 3 / 6 + (5 - 18 * T + T * T + 72 * C - 58 * ep2) * A ** 5 / 120);
+  const y = 500000 + M(phi) - M(38 * r) + N * Math.tan(phi) * (A * A / 2 + (5 - T + 9 * C + 4 * C * C) * A ** 4 / 24 + (61 - 58 * T + T * T + 600 * C - 330 * ep2) * A ** 6 / 720);
+  return [Math.round(x * 2.5), Math.round(y * 2.5)];
+}
 function nearbyThumb(x) {
   if (x.image && /^https?:\/\//.test(x.image)) return x.image;
   if (x.lat && x.lng) {
-    // 다음 지도 이미지 서비스(키 불필요, 실측 200). 좌표가 있는 주변시설은 항상 썸네일을 가진다.
-    return `https://spi.maps.daum.net/map2/map/imageservice?IW=480&IH=360&MX=${Number(x.lng)}&MY=${Number(x.lat)}&SCALE=2.5&service=open`;
+    // 다음 지도 이미지 서비스(키 불필요). 좌표가 있는 주변시설은 위치 지도 썸네일을 가진다.
+    const [mx, my] = wcong(Number(x.lat), Number(x.lng));
+    return `https://spi.maps.daum.net/map2/map/imageservice?IW=480&IH=360&MX=${mx}&MY=${my}&SCALE=1&service=open`;
   }
   return "";
 }
@@ -1467,7 +1488,7 @@ function nearbyCard(x) {
   const road = x.lat && x.lng ? `https://map.kakao.com/link/roadview/${x.lat},${x.lng}` : "";
   const photo = nearbyThumb(x);
   const media = photo
-    ? `<div class="media-card-photo"><img src="${esc(photo)}" alt="${esc(x.name)}" loading="lazy" decoding="async" onerror="this.closest('.media-card-photo').classList.add('media-card-icon');this.replaceWith(Object.assign(document.createElement('span'),{innerHTML:'${ic(icon).replace(/'/g, "\'") }'}))"></div>`
+    ? `<div class="media-card-photo"><img src="${esc(photo)}" alt="${esc(x.name)}" loading="lazy" decoding="async" onerror="this.closest('.media-card-photo').classList.add('media-card-icon');this.replaceWith(Object.assign(document.createElement('span'),{innerHTML:'${esc(ic(icon))}'}))"></div>`
     : `<div class="media-card-photo media-card-icon" data-kind="${esc(icon)}">${ic(icon)}</div>`;
   return `<article class="nearby-place media-card${photo ? " has-image" : ""}">
     ${media}
@@ -1611,7 +1632,6 @@ function reserveCard(c) {
     <div class="rs-btns">
       ${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">${esc(bookingLabel(main))}에서 예약</a>` : ""}
       ${c.tel ? `<a class="btn ghost" href="tel:${esc(c.tel)}">${ic("phone")}전화</a>` : ""}
-      ${heartBtn(c, { label: true })}
     </div>
     ${altHtml}
   </div>`;
@@ -1636,10 +1656,13 @@ async function detailView(id) {
   return `<article class="detail" data-id="${esc(c.id)}">
     <div class="d-bar"><a class="icon-btn" href="#/" data-back aria-label="뒤로">${ic("left")}</a><span class="d-crumb">${esc(region(c))}</span>${heartBtn(c, { label: true })}</div>
     <header class="d-head">
+      <div class="d-head-main">
       <p class="d-eyebrow">${esc(region(c))}${c.op && OP[c.op] ? ` · ${OP[c.op]}` : tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
       <h1 class="d-title">${titleHtml(c)}</h1>
       ${c.line ? `<p class="d-line">${esc(serviceText(c.line, 84))}${c.gc_url ? srcTip({ g: "c", src: { label: "고캠핑 소개", url: c.gc_url, quote: c.line } }, "한 줄 소개") : ""}</p>` : ""}
       <div class="d-bdgs">${badges(c, 5)}</div>
+      </div>
+      <aside class="d-side">${reserveCard(c, d)}</aside>
     </header>
     ${galleryHtml(c)}
     <div class="d-sum">
@@ -1674,7 +1697,6 @@ async function detailView(id) {
         ${commentsHtml(c)}
         <section class="d-sec" data-opform-sec hidden></section>
       </div>
-      <aside class="d-side">${reserveCard(c, d)}</aside>
     </div>
     <div class="d-dock">${reserveDock(c)}</div>
   </article>`;
@@ -1986,7 +2008,7 @@ function platformHubHtml(d, c) {
     { label: "Facebook", icon: svg('<path d="M18 2a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-3v1h3a1 1 0 0 1 .97 1.24l-1 4A1 1 0 0 1 17 15h-2v6a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-6H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2V7a6 6 0 0 1 6-6h3z"/>'), url: `https://www.facebook.com/search/posts/?q=${q}` },
     { label: "TikTok", icon: svg('<path d="M16.083 2h-4.083a1 1 0 0 0-1 1v11.5a1.5 1.5 0 1 1-2.4-1.2 1 1 0 0 0 .4-.8V8.174a1 1 0 0 0-1.23-.974 7.5 7.5 0 1 0 8.73 7.3V12.3l.311.153a9 9 0 0 0 3.59.993 1 1 0 0 0 1.1-.996V8.417a1 1 0 0 0-.835-.986 5 5 0 0 1-4.096-4.096A1 1 0 0 0 16.083 2z"/>'), url: `https://www.tiktok.com/search?q=${q}` },
     { label: "네이버", icon: `<img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Naver_logo_initial.svg" alt="" width="22" height="22">`, url: `https://search.naver.com/search.naver?query=${q}` },
-    { label: "다음", icon: `<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Daum_icon_%282025%E2%80%932026%29.svg/240px-Daum_icon_%282025%E2%80%932026%29.svg.png" alt="" width="22" height="22">`, url: `https://search.daum.net/search?q=${q}` },
+    { label: "다음", icon: svg('<rect x="2" y="2" width="20" height="20" rx="6"/><text x="12" y="16.5" text-anchor="middle" font-size="12" font-weight="900" font-family="Arial, sans-serif" fill="#fff">D</text>'), url: `https://search.daum.net/search?q=${q}` },
   ];
   return `<section class="d-sec plat-hub"><div class="sec-head">${iconTitle("external", "더 보기")}<span class="sec-note">플랫폼별 검색</span></div><div class="plat-btns">${platforms.map((p) => `<a class="plat-btn${p.has ? " has" : ""}" href="${esc(p.url)}" target="_blank" rel="noopener" title="${esc(p.label)}에서 ${esc(name)} 검색">${p.icon}<span>${esc(p.label)}</span>${p.has ? "<i>영상 있음</i>" : ""}</a>`).join("")}</div></section>`;
 }
@@ -2149,6 +2171,26 @@ function getWeatherIconSvg(code, size = 20) {
   return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-sun"><circle cx="12" cy="12" r="4"/><path d="M3 12h1m8-9v1m8 8h1m-9 8v1m-6.4-15.4l.7.7m12.1-.7l-.7.7m0 11.4l.7.7m-12.1-.7l-.7.7"/></svg>`;
 }
 
+// 상세 ‘주간 날씨’ 칸(conditions/card.js)과 같은 기호를 쓴다(팝업·페이지 통일).
+function weatherEmoji(code) {
+  const c = Number(code);
+  if ([71, 73, 75, 77, 85, 86].includes(c)) return "❄️";
+  if ([95, 96, 99].includes(c)) return "⛈️";
+  if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(c)) return "🌧️";
+  if ([45, 48].includes(c)) return "🌫️";
+  if (c === 3) return "☁️";
+  if (c === 1 || c === 2) return "⛅";
+  return "☀️";
+}
+// 페이지 ‘주간 날씨’ 칸(기상청 단기·중기예보)의 날짜별 값. 팝업의 날짜 칸·하루 요약은 이 값을 먼저 쓴다(같은 날 숫자가 다르지 않게).
+function pageForecast() {
+  const out = {};
+  for (const b of $$("[data-fc-date]")) {
+    const n = (v) => (v === "" || v == null ? null : Number(v));
+    out[b.dataset.fcDate] = { rel: b.dataset.fcRel, ic: b.dataset.fcIc, desc: b.dataset.fcDesc, tmin: n(b.dataset.fcTmin), tmax: n(b.dataset.fcTmax), pop: n(b.dataset.fcPop), src: b.dataset.fcSrc };
+  }
+  return out;
+}
 function getAirQualityGrade(type, val) {
   if (val == null || Number.isNaN(Number(val))) return { text: "보통", color: "#10B981" };
   const v = Number(val);
@@ -2357,10 +2399,10 @@ function renderHourlyTimeline(hourlyList, tab, isToday, nowHour) {
 
     return `<div style="display:flex; flex-direction:column; min-width:${totalWidth}px;">
       <svg width="${totalWidth}" height="${chartHeight}" style="overflow:visible; display:block;">
-        <path d="${pathD}" fill="none" stroke="#7C2FE5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="${pathD}" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
         ${points.map((p) => `
-          <circle cx="${p.x}" cy="${p.y}" r="3" fill="#7C2FE5"/>
-          <text x="${p.x}" y="${p.y - 6}" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">${p.temp}°</text>
+          <circle cx="${p.x}" cy="${p.y}" r="3" fill="currentColor"/>
+          <text x="${p.x}" y="${p.y - 6}" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">${p.temp}°</text>
         `).join("")}
       </svg>
       <div class="w-hourly-bottom-row">
@@ -2368,7 +2410,7 @@ function renderHourlyTimeline(hourlyList, tab, isToday, nowHour) {
           const hourNum = parseInt(h.time.split(":")[0], 10);
           const isNow = isToday && hourNum === nowHour;
           return `<div class="w-hourly-col${isNow ? " is-now" : ""}">
-            <div style="height:20px; display:flex; align-items:center; justify-content:center;">${getWeatherIconSvg(h.code, 16)}</div>
+            <div style="height:20px; display:flex; align-items:center; justify-content:center; font-size:15px;">${weatherEmoji(h.code)}</div>
             <span class="w-hour-label">${hourNum}시</span>
           </div>`;
         }).join("")}
@@ -2402,8 +2444,11 @@ function openWeatherModal(c, initialDate, data) {
   const dlg = document.createElement("dialog");
   dlg.className = "weather-modal";
 
+  const kma = pageForecast();
+  const stripDays = Object.keys(kma).length ? Object.keys(kma).sort() : data.days.map((d) => d.dateStr);
   function render() {
     const dayItem = data.daily[selectedDate] || data.days[0];
+    const k = kma[selectedDate];
     const dateMeta = parseKstDate(selectedDate);
     const air = data.air[selectedDate];
     const hourlyList = data.hourly[selectedDate] || [];
@@ -2420,46 +2465,46 @@ function openWeatherModal(c, initialDate, data) {
         </div>
         <button type="button" class="w-modal-close" aria-label="닫기">${ic("close")}</button>
       </div>
-      <div class="w-modal-days-strip">
-        ${data.days.map((d) => {
-          const m = parseKstDate(d.dateStr);
-          const active = d.dateStr === selectedDate;
-          return `<button type="button" class="w-modal-day-btn${active ? " is-active" : ""}" data-switch-date="${esc(d.dateStr)}">${m.tabLabel}</button>`;
+      <div class="fc-strip w-modal-days-strip">
+        ${stripDays.map((ds) => {
+          const m = parseKstDate(ds), kd = kma[ds], od = data.daily[ds];
+          const temp = kd?.tmax ?? od?.max;
+          return `<button type="button" class="fc-day${ds === selectedDate ? " is-active" : ""}" data-switch-date="${esc(ds)}"><span class="lbl">${esc(kd?.rel ?? m.tabLabel)}</span><span class="ic">${kd?.ic ?? (od ? weatherEmoji(od.code) : "·")}</span><span class="t">${temp != null ? `${temp}°` : "–"}</span></button>`;
         }).join("")}
       </div>
       <div class="w-modal-body">
         <div class="w-highlight-card">
           <div class="w-highlight-top">
-            <span class="w-highlight-desc">${getWeatherDescription(dayItem.code)}</span>
-            <div class="w-highlight-icon">${getWeatherIconSvg(dayItem.code, 44)}</div>
+            <span class="w-highlight-desc">${esc(k?.desc || getWeatherDescription(dayItem.code))}</span>
+            <div class="w-highlight-icon">${k?.ic ?? weatherEmoji(dayItem.code)}</div>
           </div>
           <div class="w-highlight-main">
-            <span class="w-highlight-temp">${dayItem.max}</span>
+            <span class="w-highlight-temp">${k?.tmax ?? dayItem.max}</span>
             <span class="w-highlight-unit">°</span>
           </div>
           <div class="w-highlight-sub">
-            체감 ${dayItem.apparentMax}° · 최고 ${dayItem.max}° / 최저 ${dayItem.min}°
+            ${k ? `최고 ${k.tmax ?? "–"}° / 최저 ${k.tmin ?? "–"}°${k.pop != null ? ` · 강수확률 ${k.pop}%` : ""} · 기상청 ${k.src === "mid" ? "중기" : "단기"}예보` : `체감 ${dayItem.apparentMax}° · 최고 ${dayItem.max}° / 최저 ${dayItem.min}°`}
           </div>
           <div class="w-highlight-loc">
-            <span>📍 현장위치: [${esc(c.sigungu || c.sido || "캠핑장")}] ${esc(c.name)}</span>
+            ${ic("pin")}<span>${esc(c.sigungu || c.sido || "")} · ${esc(c.name)}</span>
           </div>
         </div>
 
         <div class="w-metrics-grid">
           <div class="w-metric-card">
             <div class="w-metric-title">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M7 18a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12M8 22l-.5-1.5M12 22l-.5-1.5M16 22l-.5-1.5"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 18a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12M8 22l-.5-1.5M12 22l-.5-1.5M16 22l-.5-1.5"/></svg>
               <span>강수량 및 확률</span>
             </div>
             <div class="w-metric-val">
               <span>${dayItem.precipSum} mm</span>
-              <span class="w-prob">(확률 ${dayItem.precipProb}%)</span>
+              <span class="w-prob">(확률 ${k?.pop ?? dayItem.precipProb}%)</span>
             </div>
           </div>
 
           <div class="w-metric-card">
             <div class="w-metric-title">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M3 21h18M5 21V7l8-4v18M19 21v-8l-6-4M9 9h1M9 13h1M9 17h1"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4v18M19 21v-8l-6-4M9 9h1M9 13h1M9 17h1"/></svg>
               <span>대기질 (미세먼지)</span>
             </div>
             ${air ? `
@@ -2478,7 +2523,7 @@ function openWeatherModal(c, initialDate, data) {
 
           <div class="w-metric-card">
             <div class="w-metric-title">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2"><path d="M5 8h8.5a2.5 2.5 0 1 0-2.34-3.24M3 12h15.5a2.5 2.5 0 1 1-2.34 3.24M4 16h5.5a2.5 2.5 0 1 1-2.34 3.24"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8h8.5a2.5 2.5 0 1 0-2.34-3.24M3 12h15.5a2.5 2.5 0 1 1-2.34 3.24M4 16h5.5a2.5 2.5 0 1 1-2.34 3.24"/></svg>
               <span>최대 풍속</span>
             </div>
             <div class="w-metric-val">${dayItem.windSpeed ? `${dayItem.windSpeed} m/s` : "산들바람"}</div>
@@ -2486,7 +2531,7 @@ function openWeatherModal(c, initialDate, data) {
 
           <div class="w-metric-card">
             <div class="w-metric-title">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
               <span>자외선 지수</span>
             </div>
             <div class="w-metric-val">${getUvText(dayItem.uv)}</div>
@@ -2495,7 +2540,7 @@ function openWeatherModal(c, initialDate, data) {
 
         ${hourlyList.length ? `
           <div class="w-hourly-sec">
-            <div class="w-hourly-title">시간별 일기예보</div>
+            <div class="w-hourly-title">시간별 예보 <span>Open-Meteo 모델 · 참고용</span></div>
             <div class="w-hourly-tabs">
               ${[
                 ["weather", "날씨"],
@@ -2514,12 +2559,14 @@ function openWeatherModal(c, initialDate, data) {
       </div>
       <div class="w-modal-footer">
         <a class="w-btn-windy" href="https://www.windy.com/?${Number(c.lat).toFixed(4)},${Number(c.lng).toFixed(4)},9" target="_blank" rel="noopener">
-          🌐 Windy 레이더
+          ${ic("map")}Windy 레이더
         </a>
-        <button type="button" class="w-btn-close">닫기</button>
+        <button type="button" class="btn primary w-btn-close">닫기</button>
       </div>
     `;
 
+    // 고른 날짜 칸이 보이게 가로 위치를 맞춘다(모바일에서 10/24가 화면 밖에 있던 문제).
+    centerDay();
     // Event listeners
     $(".w-modal-close", dlg).onclick = () => dlg.close();
     $(".w-btn-close", dlg).onclick = () => dlg.close();
@@ -2578,9 +2625,14 @@ function openWeatherModal(c, initialDate, data) {
     }
   }
 
+  function centerDay() {
+    const strip = $(".w-modal-days-strip", dlg), act = $(".fc-day.is-active", dlg);
+    if (strip && act) strip.scrollLeft = act.offsetLeft - strip.offsetLeft - (strip.clientWidth - act.offsetWidth) / 2;
+  }
   render();
   document.body.append(dlg);
   dlg.showModal();
+  centerDay();
   dlg.addEventListener("close", () => dlg.remove());
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
 }
@@ -2613,11 +2665,13 @@ function bindDetail() {
   }
   // 이번 주말 컨디션(날씨·일출일몰·달·미세먼지·산불·물때): /conditions/card.js가 있을 때만 붙인다. 실패하면 칸을 숨긴 채 둔다.
   const condEl = $("[data-cond]"), condCamp = S.byId.get(id);
-  if (condEl && condCamp) import(new URL(`${MOD_ROOT}conditions/card.js`, import.meta.url).href).then((m) => m.mount(condEl, condCamp)).catch(() => {});
+  // 모듈 카드의 제목에도 다른 섹션과 같은 선 아이콘을 붙인다.
+  const titleIcon = (el, icon) => { const t = el?.querySelector(".sec-title"); if (t && !t.querySelector("svg")) t.insertAdjacentHTML("afterbegin", ic(icon, "line")); };
+  if (condEl && condCamp) import(new URL(`${MOD_ROOT}conditions/card.js`, import.meta.url).href).then((m) => m.mount(condEl, condCamp)).then(() => titleIcon(condEl, "moon")).catch(() => {});
   // 여행 참고 정보(고도·응급실·전기차 충전·주변 축제 등): /context/card.js가 있을 때만. 실패하면 칸을 숨긴 채 둔다.
   const exEl = $("[data-extras]");
   if (condCamp) import(new URL(`${MOD_ROOT}context/card.js`, import.meta.url).href).then((m) => {
-    if (exEl) m.mount(exEl, condCamp).catch(() => {});
+    if (exEl) m.mount(exEl, condCamp).then(() => titleIcon(exEl, "route")).catch(() => {});
     m.evFor(id).then(mountNearbyEv).catch(() => {});
   }).catch(() => {});
   // 주변 축제·행사 포스터 카드(CultureFlow + 관광공사 축제): /context/events.js가 있을 때만. 실패하면 칸을 숨긴 채 둔다.

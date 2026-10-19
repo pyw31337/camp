@@ -16,7 +16,7 @@ const kstNow = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10
 const kstStamp = (iso) => { const d = new Date(new Date(iso).getTime() + 9 * 3600e3); return `${d.getUTCMonth() + 1}/${d.getUTCDate()} ${String(d.getUTCHours()).padStart(2, "0")}:${String(d.getUTCMinutes()).padStart(2, "0")}`; };
 const ICON = (sky, pty) => (/눈/.test(pty ?? sky ?? "") ? "❄️" : /비|소나기|빗방울/.test(pty ?? sky ?? "") ? "🌧️" : /흐림/.test(sky ?? "") ? "☁️" : /구름/.test(sky ?? "") ? "⛅" : sky ? "☀️" : "·");
 const STYLE = `.fc-strip{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none}.fc-strip::-webkit-scrollbar{display:none}
-.fc-day{flex:0 0 72px;display:flex;flex-direction:column;align-items:center;gap:2px;border:1px solid var(--line,#e5e7eb);border-radius:16px;padding:10px 6px;text-align:center;font-size:12px;line-height:1.3;background:var(--paper,#fff);color:inherit;cursor:pointer}
+.fc-day{flex:1 0 72px;display:flex;flex-direction:column;align-items:center;gap:2px;border:1px solid var(--line,#e5e7eb);border-radius:16px;padding:10px 6px;text-align:center;font-size:12px;line-height:1.3;background:var(--paper,#fff);color:inherit;cursor:pointer}
 .fc-day:hover{border-color:var(--accent,#2f855a)}
 .fc-day.is-today,.fc-day.we{background:var(--accent-soft,#eef7f0);border-color:var(--accent,#2f855a)}
 .fc-day .ic{font-size:22px;display:block;margin:2px 0}
@@ -66,7 +66,8 @@ export async function mount(el, camp) {
   const strip = days.map((x) => {
     const lbl = weekendLabel(x.d, today);
     const temp = x.tmax != null ? `${x.tmax}°` : (x.tmin != null ? `${x.tmin}°` : "–");
-    return `<button type="button" class="fc-day${lbl ? " we" : ""}${x.d === today ? " is-today" : ""}" data-fc-date="${esc(x.d)}" title="${esc(x.d)} 날씨 상세">
+    // 상세 팝업(app.js openWeatherModal)이 같은 기상청 값·아이콘으로 날짜 칸과 하루 요약을 그리도록 값을 함께 싣는다.
+    return `<button type="button" class="fc-day${lbl ? " we" : ""}${x.d === today ? " is-today" : ""}" data-fc-date="${esc(x.d)}" data-fc-rel="${esc(relOf(x.d))}" data-fc-ic="${esc(ICON(x.sky, x.pty))}" data-fc-desc="${esc(x.pty && x.pty !== "없음" ? x.pty : x.sky ?? "")}" data-fc-tmin="${esc(x.tmin ?? "")}" data-fc-tmax="${esc(x.tmax ?? "")}" data-fc-pop="${esc(x.pop ?? "")}" data-fc-src="${esc(x.src)}" title="${esc(x.d)} 날씨 상세">
       <span class="lbl">${relOf(x.d)}</span>
       <span class="ic" role="img" title="${esc(x.pty ?? x.sky ?? "")}">${ICON(x.sky, x.pty)}</span>
       <span class="t">${esc(temp)}</span>
