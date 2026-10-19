@@ -19,6 +19,8 @@ export const SPEC_FIELDS = {
   PET_POLICY: { group: "rule", label: "반려동물" },
   PARKING: { group: "rule", label: "주차" },
   POWER_W: { group: "rule", label: "전기 용량" },
+  POWER_MAX_A: { group: "rule", label: "전기 용량(A)" },
+  SITE_SIZE: { group: "rule", label: "사이트 규격" },
   REFUND_POLICY: { group: "booking", label: "환불" },
   RENTAL: { group: "rental", label: "대여" },
   DISCOUNT: { group: "promo", label: "할인 대상" },
@@ -192,6 +194,22 @@ export function extractFromSentence(s, { year = new Date().getFullYear() } = {})
   if (w && /전기|전력|소비\s*전력|허용\s*용량|차단기|릴선|전열|과전력|초과|사용\s*가능|용량|사이트당|팀당/.test(s)) {
     const n = Number(w[1].replace(/,/g, "")) * (/k/i.test(w[2]) ? 1000 : 1);
     if (n >= 300 && n <= 3000) out.push({ code: "POWER_W", value: `${n.toLocaleString("ko-KR")}W`, norm: String(n) });
+  }
+  // 사이트 규격 (2026-10-19): “6×7m”, “가로 6m 세로 7m”, “파쇄석(6*8m)”. 한쪽만 있으면 버린다.
+  const dim = s.match(/(?:가로\s*)?(\d+(?:\.\d+)?)\s*[mｍ]?\s*[x×*]\s*(?:세로\s*)?(\d+(?:\.\d+)?)\s*[mｍ]/i)
+    ?? s.match(/가로\s*(\d+(?:\.\d+)?)\s*[mｍ][^0-9]{0,8}세로\s*(\d+(?:\.\d+)?)\s*[mｍ]/);
+  if (dim && /사이트|데크|파쇄석|잔디|바닥|규격|크기|야영/.test(s)) {
+    const w = Number(dim[1]), d = Number(dim[2]);
+    if (w >= 2 && w <= 20 && d >= 2 && d <= 30) {
+      const norm = `${w}x${d}`;
+      out.push({ code: "SITE_SIZE", value: `${w}×${d}m`, norm });
+    }
+  }
+  // 전기 A 단위 (2026-10-19): “전기 15A”, “사이트당 20A” 등. 별도 속성 POWER_MAX_A로 저장(환산 없음).
+  const amp = s.match(/(\d{1,2})\s*A(?![a-zA-Z])/i);
+  if (amp && /전기|차단기|사이트당|팀당|허용|사용|용량|한도|제한/.test(s)) {
+    const a = Number(amp[1]);
+    if (a >= 10 && a <= 30) out.push({ code: "POWER_MAX_A", value: a, norm: String(a) });
   }
   // 환불: “당일 취소 환불 불가”, “7일 전 100% 환불”
   const rf = s.match(/(\d{1,2})\s*일\s*전[^.]{0,15}?(\d{1,3})\s*%\s*(환불|환급)/);

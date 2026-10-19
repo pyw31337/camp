@@ -1,4 +1,4 @@
-// ‘이번 주말 컨디션’ 공통 로직(순수 함수). 네트워크·파일은 scripts/sync-conditions.mjs, build-condition-mapping.mjs.
+// 주간 날씨 공통 로직(순수 함수). 네트워크·파일은 scripts/sync-forecast.mjs, build-condition-mapping.mjs. (산불·물때 파서는 활용신청·경로 확인 뒤 다시 쓰려고 남겨 둠)
 // 원천(모두 공공데이터포털 같은 인증키, 서비스마다 활용신청 필요):
 //   기상청 단기예보 15084084 · 중기예보 15059468 · 기상특보 15000415 · 에어코리아 대기오염정보 15073861·측정소정보 15073877
 //   산림청 산불위험예보 15084817 · 국립해양조사원 조석예보(고·저조) 15156018
@@ -91,7 +91,7 @@ export function upcomingWeekend(nowMs = Date.now()) {
 
 // ── 응답 정리
 export function itemsOf(json) {
-  const it = json?.response?.body?.items?.item ?? json?.response?.body?.items ?? json?.body?.items?.item ?? json?.body?.items ?? json?.items ?? [];
+  const it = json?.response?.body?.items?.item ?? json?.response?.body?.items ?? json?.body?.items?.item ?? json?.body?.items ?? json?.items?.item ?? json?.items ?? [];
   return Array.isArray(it) ? it : it ? [it] : [];
 }
 export function apiProblem(status, text) {
@@ -102,7 +102,7 @@ export function apiProblem(status, text) {
   if (status === 404 || /API not found|NO_OPENAPI_SERVICE/i.test(text)) return "NOT_FOUND";
   if (status >= 500) return `HTTP_${status}`;
   try {
-    const j = JSON.parse(text), code = String(j?.response?.header?.resultCode ?? j?.header?.resultCode ?? "00");
+    const j = JSON.parse(text), code = String(j?.response?.header?.resultCode ?? j?.header?.resultCode ?? j?.resultCode ?? "00");
     if (["00", "0000", "03"].includes(code)) return null; // 03 = NODATA
     return `CODE_${code}`;
   } catch { return /<returnAuthMsg>|<errMsg>/.test(text) ? "NOT_REGISTERED" : "NOT_JSON"; }
@@ -119,14 +119,16 @@ export function summarizeShort(items) {
     const v = it.fcstValue, n = Number(v);
     if (it.category === "TMN" && Number.isFinite(n)) x.tmin = n;
     else if (it.category === "TMX" && Number.isFinite(n)) x.tmax = n;
-    else if (it.category === "TMP" && Number.isFinite(n)) { x._lo = Math.min(x._lo ?? n, n); x._hi = Math.max(x._hi ?? n, n); }
+    else if (it.category === "TMP" && Number.isFinite(n)) { x._lo = Math.min(x._lo ?? n, n); x._hi = Math.max(x._hi ?? n, n); x._n = (x._n ?? 0) + 1; }
     else if (it.category === "POP" && Number.isFinite(n)) x.pop = Math.max(x.pop, n);
     else if (it.category === "SKY" && h >= 6 && h <= 21) x.sky[n] = (x.sky[n] ?? 0) + 1;
     else if (it.category === "PTY" && n > 0) { x.rain = true; x.pty ??= PTY[n] ?? "강수"; }
     else if (it.category === "WSD" && Number.isFinite(n)) x.wsd = Math.max(x.wsd, n);
   }
-  for (const x of Object.values(days)) {
-    x.tmin ??= x._lo ?? null; x.tmax ??= x._hi ?? null; delete x._lo; delete x._hi;
+  for (const [d, x] of Object.entries(days)) {
+    // 예보 끝자락(자정 한두 시간만 있는 날)은 하루 요약이 될 수 없어 뺀다.
+    if (!Object.keys(x.sky).length && (x._n ?? 0) < 6 && x.tmin == null && x.tmax == null) { delete days[d]; continue; }
+    x.tmin ??= x._lo ?? null; x.tmax ??= x._hi ?? null; delete x._lo; delete x._hi; delete x._n;
     const top = Object.entries(x.sky).sort((a, b) => b[1] - a[1])[0];
     x.sky = top ? SKY[top[0]] ?? null : null;
     if (!x.rain) x.pty = null;
@@ -143,7 +145,8 @@ export function summarizeMid(land, ta, tmFc) {
     const wf = land?.[`wf${n}Pm`] ?? land?.[`wf${n}`] ?? null, pop = Math.max(Number(land?.[`rnSt${n}Am`] ?? 0), Number(land?.[`rnSt${n}Pm`] ?? 0), Number(land?.[`rnSt${n}`] ?? 0));
     const tmin = ta?.[`taMin${n}`], tmax = ta?.[`taMax${n}`];
     if (wf == null && tmin == null) continue;
-    out[d] = { sky: wf, pop: Number.isFinite(pop) ? pop : null, tmin: tmin == null ? null : Number(tmin), tmax: tmax == null ? null : Number(tmax) };
+    const am = land?.[`wf${n}Am`] ?? land?.[`wf${n}`] ?? null, pm = land?.[`wf${n}Pm`] ?? land?.[`wf${n}`] ?? null;
+    out[d] = { sky: wf, sky_am: am, sky_pm: pm, pop: Number.isFinite(pop) ? pop : null, tmin: tmin == null ? null : Number(tmin), tmax: tmax == null ? null : Number(tmax) };
   }
   return out;
 }
@@ -184,13 +187,18 @@ export function airBySido(stations) {
 /** 조석 고·저조 → [{t:"HH:MM", type:"고조"|"저조", h:cm}] (응답 필드명이 다를 수 있어 넓게 찾는다) */
 export function summarizeTide(items) {
   const pick = (o, re) => { const k = Object.keys(o).find((x) => re.test(x)); return k ? o[k] : null; };
-  return items.map((it) => {
+  const rows = items.map((it) => {
     const t = String(pick(it, /^(predcDt|tph_time|recordTime|predcTm|.*[Dd]t)$/) ?? "");
     const kind = String(pick(it, /^(extrSe|hl_code|.*[Ss]e|.*[Cc]ode)$/) ?? "");
     const h = num(pick(it, /^(predcTdlvVl|tph_level|.*[Vv]l|.*[Ll]evel)$/));
     const hm = t.match(/(\d{2}):?(\d{2})(?::\d{2})?$/);
     return { t: hm ? `${hm[1]}:${hm[2]}` : null, type: /고|high|^[13]$/i.test(kind) ? "고조" : /저|low|^[24]$/i.test(kind) ? "저조" : null, h };
-  }).filter((x) => x.t && x.type);
+  }).filter((x) => x.t).sort((a, b) => a.t.localeCompare(b.t));
+  // 구분 코드의 뜻이 문서마다 달라, 높이가 있으면 이웃 극치와 비교해 고조·저조를 정한다(조석은 고·저가 번갈아 온다).
+  if (rows.length >= 2 && rows.every((r) => r.h != null)) {
+    rows.forEach((r, i) => { const nb = rows[i + 1] ?? rows[i - 1]; r.type = r.h >= nb.h ? "고조" : "저조"; });
+  }
+  return rows.filter((x) => x.type);
 }
 /** 산불위험예보 지수 → 등급(산림청 4단계 구간) */
 export const fireGrade = (idx) => (idx == null ? null : idx >= 86 ? "매우높음" : idx >= 66 ? "높음" : idx >= 51 ? "다소높음" : "낮음");

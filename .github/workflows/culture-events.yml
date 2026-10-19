@@ -1,0 +1,59 @@
+name: Culture events
+
+# 캠핑장 상세 ‘주변 축제·행사’ 포스터 카드: CultureFlow 공개 JSON + 관광공사 축제(extras.json)를 합쳐
+# camping-atlas/public/context/events.json을 만든다. 키 필요 없음. docs/CULTURE_EVENTS.md
+on:
+  schedule:
+    - cron: "20 21 * * *" # 매일 06:20 KST (CultureFlow 03:00 KST 폴백 갱신 뒤)
+  workflow_run:
+    workflows: ["Trip extras"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "pipeline/lib/culture-events.mjs"
+      - "pipeline/scripts/sync-culture-events.mjs"
+      - "camping-atlas/public/context/events.*"
+      - ".github/workflows/culture-events.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: culture-events-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && 'main' || '' }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build nearby events
+        working-directory: pipeline
+        run: node scripts/sync-culture-events.mjs
+      - name: Check output
+        run: node -e 'const x=JSON.parse(require("fs").readFileSync("camping-atlas/public/context/events.json"));const n=Object.keys(x.camps).length;console.log("camps",n,"events",Object.keys(x.ev).length);if(n<100){console.log("::error::주변 행사가 붙은 캠핑장이 너무 적습니다");process.exit(1)}'
+      - name: Keep the dry-run output (PR)
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: culture-events-dry-run
+          path: camping-atlas/public/context/events.json
+          retention-days: 7
+      - name: Commit (main only)
+        if: github.event_name != 'pull_request'
+        run: |
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add camping-atlas/public/context/events.json
+          if git diff --cached --quiet; then echo "변경 없음"; exit 0; fi
+          git commit -q -m "chore(data): refresh nearby culture events"
+          git pull --rebase -X theirs origin main
+          git push origin HEAD:main

@@ -43,11 +43,19 @@ const checks = [
   { name: "한국관광공사 고캠핑", url: `https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=1&pageNo=1&${common}` },
   { name: "기상청 단기예보(초단기실황)", url: `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?pageNo=1&numOfRows=1&dataType=JSON&base_date=${ymd}&base_time=${hh}&nx=60&ny=127` },
   { name: "한국관광공사 TourAPI(국문)", url: `https://apis.data.go.kr/B551011/KorService2/areaBasedList2?numOfRows=1&pageNo=1&${common}` },
-  // 주말 컨디션(sync-conditions.mjs) — 각각 data.go.kr 활용신청 필요
+  // 주간 날씨(sync-forecast.mjs) — 각각 data.go.kr 활용신청 필요
   { name: "기상청 중기예보(15059468)", url: `https://apis.data.go.kr/1360000/MidFcstInfoService/getMidTa?pageNo=1&numOfRows=1&dataType=JSON&regId=11B10101&tmFc=${midTmFc()}` },
   { name: "기상청 기상특보(15000415)", url: "https://apis.data.go.kr/1360000/WthrWrnInfoService/getPwnStatus?pageNo=1&numOfRows=1&dataType=JSON" },
   { name: "에어코리아 대기오염정보(15073861)", url: `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?returnType=json&numOfRows=1&pageNo=1&sidoName=${encodeURIComponent("서울")}&ver=1.0` },
   { name: "에어코리아 측정소정보(15073877)", url: "https://apis.data.go.kr/B552584/MsrstnInfoInqireSvc/getMsrstnList?returnType=json&numOfRows=1&pageNo=1" },
+  { name: "산림청 산사태예측정보(15074800)", url: "https://apis.data.go.kr/1400000/predictionInfoService/predictionInfoList?_type=json&numOfRows=1&pageNo=1" },
+  // 여행 참고 정보(sync-trip-extras.mjs) — 각각 data.go.kr 활용신청 필요
+  { name: "한국관광공사 반려동물 동반여행(15135102)", url: `https://apis.data.go.kr/B551011/KorPetTourService2/areaBasedList2?numOfRows=1&pageNo=1&${common}` },
+  { name: "한국관광공사 무장애 여행(15101897)", url: `https://apis.data.go.kr/B551011/KorWithService2/areaBasedList2?numOfRows=1&pageNo=1&${common}` },
+  { name: "한국관광공사 두루누비(15101974)", url: `https://apis.data.go.kr/B551011/Durunubi/courseList?numOfRows=1&pageNo=1&${common}` },
+  { name: "한국관광공사 관광지 집중률(15128555)", url: `https://apis.data.go.kr/B551011/TatsCnctrRateService/tatsCnctrRatedList?numOfRows=1&pageNo=1&areaCd=51&signguCd=51130&${common}` },
+  { name: "국립중앙의료원 응급의료기관(15000563)", url: "https://apis.data.go.kr/B552657/ErmctInfoInqireService/getEgytListInfoInqire?pageNo=1&numOfRows=1" },
+  { name: "환경부 전기차 충전소(15076352)", url: "https://apis.data.go.kr/B552584/EvCharger/getChargerInfo?numOfRows=1&pageNo=1&dataType=JSON" },
   { name: "산림청 산불위험예보(15084817)", url: "https://apis.data.go.kr/1400377/forestPoint/forestPointListGeongugSearch?_type=json&numOfRows=1&pageNo=1" },
   { name: "국립해양조사원 조석예보 고·저조(15156018)", url: `https://apis.data.go.kr/1192136/tideFcstHghLw/GetTideFcstHghLwApiService?obsCode=DT_0001&reqDate=${ymd}&type=json&numOfRows=1&pageNo=1` },
 ];
@@ -63,10 +71,12 @@ function diagnose(status, text) {
   if (status === 404 || /API not found/i.test(text)) return "주소 없음: 서비스 경로가 바뀌었을 수 있음";
   try {
     const j = JSON.parse(text);
-    const h = j?.response?.header;
+    const h = j?.response?.header ?? j?.header ?? (j?.resultCode != null ? { resultCode: j.resultCode, resultMsg: j.resultMsg } : null);
+    if (!h && (j?.items || j?.body)) return null;
     if (h && ["0000", "00"].includes(String(h.resultCode))) return null;
     if (h) return `응답 코드 ${h.resultCode}: ${h.resultMsg}`;
   } catch { /* JSON이 아니면 아래에서 처리 */ }
+  if (/<resultCode>0+<\/resultCode>/.test(text)) return null; // XML 전용 서비스(국립중앙의료원 등)
   return `알 수 없는 응답(HTTP ${status}): ${text.slice(0, 120).replace(/\s+/g, " ")}`;
 }
 
@@ -79,7 +89,15 @@ for (const c of activeChecks) {
     const problem = diagnose(res.status, text);
     if (problem) failed += 1;
     let extra = "";
-    if (!problem) { try { const n = JSON.parse(text)?.response?.body?.totalCount; if (n != null) extra = ` · 전체 ${n}건`; } catch { /* 무시 */ } }
+    if (!problem) {
+      try {
+        const j = JSON.parse(text), n = j?.response?.body?.totalCount ?? j?.body?.totalCount ?? j?.totalCount;
+        if (n != null) extra = ` · 전체 ${n}건`;
+        const it = [j?.response?.body?.items?.item, j?.body?.items?.item, j?.items?.item, j?.items].find((x) => x != null);
+        const first = Array.isArray(it) ? it[0] : it;
+        if (first && typeof first === "object") extra += ` · 필드 ${Object.keys(first).slice(0, 20).join(",")}`;
+      } catch { /* XML 등은 무시 */ }
+    }
     console.log(`${problem ? "✗" : "✓"} ${c.name}${problem ? ` — ${problem}` : extra}`);
   } catch (e) {
     failed += 1;

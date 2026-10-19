@@ -1,0 +1,1990 @@
+{
+  "generated_at": "2026-10-19T08:56:46.136Z",
+  "policy": "operator hosts only, robots respected, sentences and image urls",
+  "campgrounds": {
+    "146": {
+      "status": "OK",
+      "name": "강변사리 캠핑장",
+      "url": "http://www.gang42.com/",
+      "checked_at": "2026-10-19T08:54:58.145Z",
+      "pages": [
+        "http://www.gang42.com/"
+      ],
+      "snippets": [],
+      "images": []
+    },
+    "427": {
+      "status": "OK",
+      "name": "그날카라반",
+      "url": "http://mujucaravan.com/",
+      "checked_at": "2026-10-19T08:54:41.438Z",
+      "pages": [
+        "http://mujucaravan.com/"
+      ],
+      "snippets": [],
+      "images": []
+    },
+    "483": {
+      "status": "FETCH_FAILED",
+      "name": "금원산자연휴양림 야영장",
+      "url": "http://www.geumwonsan.or.kr/",
+      "checked_at": "2026-10-19T08:53:00.029Z",
+      "pages": [],
+      "snippets": [],
+      "images": []
+    },
+    "1903": {
+      "status": "SKIPPED",
+      "reason": "not operator host",
+      "url": "http://www.knps.or.kr/front/portal/visit/visitCourseMain.do?parkId=121200&parkNavGb=park_facView&vnewsId=173"
+    },
+    "2119": {
+      "status": "SKIPPED",
+      "reason": "not operator host",
+      "url": "https://eoreumgol.campingt.me/"
+    },
+    "2230": {
+      "status": "FETCH_FAILED",
+      "name": "영월 외룡 캠핑장",
+      "url": "http://www.orcamping.co.kr/",
+      "checked_at": "2026-10-19T08:56:47.147Z",
+      "pages": [],
+      "snippets": [],
+      "images": []
+    },
+    "2329": {
+      "status": "FETCH_FAILED",
+      "name": "옥화자연휴양림 국민여가오토캠핑장",
+      "url": "http://okhwa.cbhuyang.go.kr/",
+      "checked_at": "2026-10-19T08:54:58.545Z",
+      "pages": [],
+      "snippets": [],
+      "images": []
+    },
+    "2931": {
+      "status": "OK",
+      "name": "청양동강리오토캠핑장",
+      "url": "http://river.cheongyang.go.kr/",
+      "checked_at": "2026-10-19T08:57:18.208Z",
+      "pages": [
+        "http://river.cheongyang.go.kr/",
+        "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_1",
+        "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_2",
+        "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_3",
+        "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_4",
+        "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_5"
+      ],
+      "snippets": [
+        {
+          "text": "ķ���峻 �� ���� WI-FI(�������ͳ�) ..",
+          "url": "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_1"
+        },
+        {
+          "text": "wifi���Ӻҷ� ���ǿ����� �亯",
+          "url": "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_2"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://river.cheongyang.go.kr/river/board/files/inno_5/1506650165378.jpg",
+          "page": "https://river.cheongyang.go.kr/river/",
+          "alt": "ķ����ǳ��",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/board/files/inno_5/1506650161043.jpg",
+          "page": "https://river.cheongyang.go.kr/river/",
+          "alt": "ķ����ǳ��",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/board/files/inno_5/1506650155544.jpg",
+          "page": "https://river.cheongyang.go.kr/river/",
+          "alt": "ķ����ǳ��",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/images/main/mtitle.jpg",
+          "page": "https://river.cheongyang.go.kr/river/",
+          "alt": "û�� ����������ķ����",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/images/common/badge-valid-xhtml10.png",
+          "page": "https://river.cheongyang.go.kr/river/",
+          "alt": "Valid XHTML 1.0 Transitional",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/images/common/badge-valid-css.png",
+          "page": "https://river.cheongyang.go.kr/river/",
+          "alt": "�ùٸ� CSS�Դϴ�.",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/images/donggangri/name.jpg",
+          "page": "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_1",
+          "alt": "û�� ����������ķ����",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/board/files/inno_5/1506650151468.jpg",
+          "page": "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_5",
+          "alt": "ķ���� ǳ��",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/board/files/inno_5/1496014835930.jpeg",
+          "page": "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_5",
+          "alt": "û���Ư�繰 ���ŷ���..",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/board/files/inno_5/1496014820340.jpeg",
+          "page": "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_5",
+          "alt": "�ָ� û���Ư�깰 ȫ..",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/board/files/inno_5/1496014772607.jpeg",
+          "page": "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_5",
+          "alt": "���� ķ���忡�� ���..",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/board/files/inno_5/1496014695089.jpeg",
+          "page": "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_5",
+          "alt": "��̿� ��, �׸��� ..",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/board/files/inno_5/1495596458475.jpeg",
+          "page": "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_5",
+          "alt": "ķ���忡 �� ��̲�",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/board/files/inno_5/1495596434664.jpeg",
+          "page": "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_5",
+          "alt": "����ͳ�",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/board/files/inno_5/temp_1495621434475.403339682.jpeg",
+          "page": "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_5",
+          "alt": "ķ���� ����ͳ�",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/board/files/inno_5/temp_1495413268001.-1519846903.jpeg",
+          "page": "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_5",
+          "alt": "�ָ� û�籺 ��Ư�깰..",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/board/files/inno_5/20170520_161527.jpg",
+          "page": "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_5",
+          "alt": "�ָ� û�� ��Ư�깰 ..",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/board/files/inno_5/temp_1495413409691.-1974027845.jpeg",
+          "page": "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_5",
+          "alt": "����ͳ� ���ֱ�",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/board/files/inno_5/20170520_134207.jpg",
+          "page": "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_5",
+          "alt": "����ͳ�(�ɿ� ���� ..",
+          "layout": false
+        },
+        {
+          "url": "https://river.cheongyang.go.kr/river/board/files/inno_5/%C3%BB%EF%BF%BD%E7%B5%BF%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%C4%B7%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD1.jpg",
+          "page": "https://river.cheongyang.go.kr/river/board/board/list.asp?tb=inno_5",
+          "alt": "2017�� 4�� ����..",
+          "layout": false
+        }
+      ]
+    },
+    "7204": {
+      "status": "OK",
+      "name": "입화산참살이숲야영장",
+      "url": "http://camping.junggu.ulsan.kr/",
+      "checked_at": "2026-10-19T08:57:23.140Z",
+      "pages": [
+        "http://camping.junggu.ulsan.kr/"
+      ],
+      "snippets": [],
+      "images": []
+    },
+    "7709": {
+      "status": "OK",
+      "name": "에스글램핑",
+      "url": "https://www.sglamping.com/index.html",
+      "checked_at": "2026-10-19T08:53:06.218Z",
+      "pages": [
+        "https://www.sglamping.com/index.html",
+        "https://www.sglamping.com/overview.html",
+        "https://www.sglamping.com/customer.html",
+        "https://www.sglamping.com/map.html"
+      ],
+      "snippets": [
+        {
+          "text": "에스글램핑 - 온가족이 즐기는 즐거운 글램핑",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "글램핑 5",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "2~4인 기준으로 편히 쉴수 있는 최고의 글램핑 텐트입니다.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "편안한 침대와 시원한 에어컨 설비 및 텐트 안에서 식사까지 할 수 있는 공간감 있는 글램핑 텐트입니다.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "입실 및 퇴실안내",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "입실은 오후 3시이며, 퇴실은 오전 11시입니다.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "매점 이용시간",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "바비큐 그릴(숯포함) 이용료는 20,000원 입니다.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "에스글램핑 이용시 주의사항",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "글램핑 내에서는 흡연 및 바베큐 이용이 금지되어 있습니다.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "트램펄린 및 야외풀장 이용시 유아는 반드시 보호자 입회하에 이용해주십시오.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "퇴실시 주의사항",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "쓰레기는 분리수거하여 지정된 수거용기에 넣어 주십시오.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "음식물쓰레기는 세척실에 비치되어 있는 음식물 수거함에 버려주시길 바랍니다.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "퇴실시간을 꼭 지켜주시고, 최종 퇴실 시 사무실에 퇴실 신청 부탁드립니다.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "1박 2일 2박 3일",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "그늘막 평상 (40,000원)",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "파라솔 (40,000원)",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "바베큐그릴 (20,000원, 숯포함, 이용 시 1시간 전에 사무실에 말씀해 주세요.)",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "에스글램핑 소개",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "예약확인 및 취소",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "글램핑포토",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "에스글램핑",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "트램펄린",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "에스글램핑 예약하기",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "품은 에스글램핑에서 가슴 설레는 여행을 시작해 보세요.",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "에스글램핑은 자연 친화적인 환경과 세련되고 드라마틱한",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "전기시설",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "조리기구 대여",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "상호명 : 에스글램핑",
+          "url": "https://www.sglamping.com/index.html"
+        },
+        {
+          "text": "충청남도 천안 인근 최신 글램핑 시설",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "자연에서 즐기는 캠핑 그 이상, 천안 에스글램핑",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑 대표입니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "먼저 저희 에스글램핑을 방문하여 주신 고객 여러분께 감사의 말씀을 전합니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "저희 에스글램핑은 충청남도 천안에 위치하여 아무때라도 부담없이 오토캠핑과 글램핑의 즐거움을 누리실 수 있습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑은 약 3,000평의 넓은 캠핑장에서 다양한 오토캠핑장과 글램핑장을 갖추고 있습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "부대시설로는 캠핑장 내 식당 그리고 매점, 글램핑장, 야외물놀이장, 덧밭 등을 갖추고 고객 어려분께서 불편함이 없도록 만전을 기하고 있습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑은 충청도 천안 인근에 위치하여 편리한 접근성과 교통을 가지고 있습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "신나는 야외물놀이장",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "온 가족이 좋아하는 야외 물놀이장 뜨거운 여름에도 문제없어요.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑에서 운영하는 매장은 언제든 편하게 필요한 물건을 사실 수 있어요.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "아이들이 좋아하는 트램펄린",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑은 어린 아이들이 신나게 놀 수있는 트램펄린을 준비했습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑은 신선한 야채와 그릇을 씻을 수 있는 세척실을 준비했습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑은 편안하고 쾌적한 캠핑을 위해 남녀 샤워 시설을 완비했습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "청결한 화장실",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑은 시원한 에어컨이 나오는 쾌적한 화장실을 준비했습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑은 재미난 공놀이를 할 수 있는 잔디밭 족구장을 준비했습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "귀여운 염소친구, 강아지 친구들을 만날 수 있습니다.",
+          "url": "https://www.sglamping.com/overview.html"
+        },
+        {
+          "text": "에스글램핑 고객문의",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "입실인원",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "성수기(7월 ~ 8월)",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "당일대여",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "카라반 (소)",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "카라반 (대)",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "글램핑A",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "글램핑A+",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "글램핑B",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "오토데크",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "매점 이용",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 기준 인원 초과시 인당 1만원 추가 요금이 발생합니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 방문인원도 적용되며 인원 추가시 반드시 관리동으로 연락 바랍니다.(무단이용시 벌금 2배)",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 최대 인원 초과시 입실 제한을 받을 수 있습니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 반려동물 동반 이용은 불가합니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 예약자명과 입금자명이 다를 경우 확인이 어려워 취소될 수 있으니 꼭 사무실로 연락 부탁드립니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 환불로 인한 분쟁소지가 없도록 예약 전 환불 규정을 반드시 읽어주세요.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 개인 전열기구 사용 금지 (전기포트, 그릴, 히터 등..)",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "과도한 전기사용으로 인해 글램핑 전체 전기가 다운될 수 있으니 양해 부탁드립니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 글램핑장 내 전체 금연 (정문 및 후문 출입구에 흡연 구역 별도 마련되어 있습니다.)",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 매너타임은 오후 10시반 부터 입니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "※ 소음으로 인한 민원 발생시 1회 경고, 2회 환불없이 퇴실 조치 됩니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 에어바운스 이용은 우천시 제한되며 6월-8월까지는 어린이수영장으로 대체되어 운영됩니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 트램펄린 은 유아용/ 초등학생용으로 나뉘어져 있습니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 족구장 은 예약없이 이용 가능 하며 족구공은 사무실에서 대여 가능합니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 탁구장 은 썰매장 뒤 하우스 안에 위치해 있으며 탁구채는 사무실에서 대여 가능합니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "수영장 이용 안내",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "비수기 (5월중순 이후~)",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "주말/성수기 (7-8월)",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "성인수영장",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "어린이수영장",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "숯 이용 최소 30분 전에 사무실에 연락 부탁드립니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "20,000 원",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "장작세트",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "15,000 원 ( 장작 10,000원",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "화로대 대여 5,000원 )",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "에스글램핑 - 온가족이 즐기는 즐거운 클램핑",
+          "url": "https://www.sglamping.com/map.html"
+        },
+        {
+          "text": "차량으로 오시는 길",
+          "url": "https://www.sglamping.com/map.html"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://www.sglamping.com/dist2/images/popup_211005.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/popup2_0409.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_01.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_01s.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_02s.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_02.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_03s.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_03.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_04s.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_04.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_05s.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_05.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_06s.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_06.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_07s.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_07.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_08s.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_glamping_08.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_map.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": true
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_service01.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_service02.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_service03.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_service05.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.sglamping.com/dist2/images/img_service04.jpg",
+          "page": "https://www.sglamping.com/index.html",
+          "alt": "",
+          "layout": false
+        }
+      ]
+    },
+    "7778": {
+      "status": "FETCH_FAILED",
+      "name": "포항국민여가캠핑장",
+      "url": "http://www.pohang.go.kr/camping",
+      "checked_at": "2026-10-19T08:58:09.639Z",
+      "pages": [],
+      "snippets": [],
+      "images": []
+    },
+    "8103": {
+      "status": "OK",
+      "name": "경주시종합자원화단지 별빛카라반",
+      "url": "http://www.xn--oi2bv4eitat0ab45dqwcn8f.kr/intro/intro.php",
+      "checked_at": "2026-10-19T08:54:44.032Z",
+      "pages": [
+        "http://www.xn--oi2bv4eitat0ab45dqwcn8f.kr/intro/intro.php"
+      ],
+      "snippets": [
+        {
+          "text": "경주 보문(별빛) 카라반파크",
+          "url": "http://www.xn--oi2bv4eitat0ab45dqwcn8f.kr/intro/intro.php"
+        }
+      ],
+      "images": []
+    },
+    "8145": {
+      "status": "FETCH_FAILED",
+      "name": "비토어촌체험휴양마을",
+      "url": "http://bitoseom.co.kr/",
+      "checked_at": "2026-10-19T08:58:09.935Z",
+      "pages": [],
+      "snippets": [],
+      "images": []
+    },
+    "101040": {
+      "status": "OK",
+      "name": "글로우",
+      "url": "http://www.glowglam.co.kr/",
+      "checked_at": "2026-10-19T08:53:13.031Z",
+      "pages": [
+        "http://www.glowglam.co.kr/",
+        "http://glowglam.co.kr/glow_guide.php",
+        "http://glowglam.co.kr/glow_notice.php",
+        "http://glowglam.co.kr/glow_map.php"
+      ],
+      "snippets": [
+        {
+          "text": "글로우글램핑",
+          "url": "http://www.glowglam.co.kr/"
+        },
+        {
+          "text": "글로우A(개별수영장)",
+          "url": "http://www.glowglam.co.kr/"
+        },
+        {
+          "text": "자연 담은 글로우 글램핑",
+          "url": "http://www.glowglam.co.kr/"
+        },
+        {
+          "text": "글로우 A (개별수영장)",
+          "url": "http://www.glowglam.co.kr/"
+        },
+        {
+          "text": "자연 속 글로우 글램핑",
+          "url": "http://www.glowglam.co.kr/"
+        },
+        {
+          "text": "글로우글램의 휴게시설은 글램핑장을 이용하는 고객들이라면",
+          "url": "http://glowglam.co.kr/glow_guide.php"
+        },
+        {
+          "text": "1층에는 관리사무실이며 안내직원이 상주하고 있으니, 글램핑돔 이용시 문의사항은",
+          "url": "http://glowglam.co.kr/glow_guide.php"
+        },
+        {
+          "text": "1층 매점은 오전 8시 ~ 오후 9시 까지 운영됩니다.",
+          "url": "http://glowglam.co.kr/glow_guide.php"
+        },
+        {
+          "text": "1층 매점 이용",
+          "url": "http://glowglam.co.kr/glow_guide.php"
+        },
+        {
+          "text": "글램핑 이용객 무료",
+          "url": "http://glowglam.co.kr/glow_guide.php"
+        },
+        {
+          "text": "온가족이 함께하는 힐링쉼터, 공주시 글램핑장입니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "식기류 대여 (4인 기준) 알려드립니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 숙박이 아닌 바비큐장의 경우 유상 대여입니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 대여하신 식기류는 기본 세척 후 퇴실 시 관리실에 반납 부탁드립니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 2인 이상부터 인원추가 비용 발생합니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 3인 이상 이성 혼숙의 경우, 모든 투숙객의 신분증 확인 및 카드 등록 후 입실이 가능합니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "캠프닉, 글램핑 상품은 식기류 무상 대여 (세척 후 반납)",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "숯 종류, 외부 장작, 전기&가스난로, 튀김기, 에어프라이어, 폭죽, 촛불, 총 무기 장난감, 개인 미니 풀장 등",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "** 무단 반입 및 사용 시 환불 없이 퇴실 조치됩니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "반려동물이 출입 가능한가요?",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "털과 배설물은 피부염, 천식, 비염 등의 질환과 알레르기를 일으킬 수 있어 반려동물의 출입을 금지하고 있습니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "* 반려동물의 출입은 불가합니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "받침대가 구비된 개인화로대 반입 가능합니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- C동 한정 개인 화로대 사용 가능 하며 장작은 반입 불가합니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 외부 숯, 장작, 전열기구, 발화성물질은 절대 반입 및 사용 금지",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "(무단 사용 시 즉시 퇴실 조치되오니 유의해 주시기 바랍니다.)",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 체크인 마감, 숯 오더는 오후 9시까지입니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 반입한 쓰레기는 꼭!",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "분리수거해 주세요.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "객실 및 바베큐장은 체크인 시 현장에서 배정됩니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 중복 예약 발생 시 100% 환불 해 드립니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "* 자연과 인접해있는 글램핑장으로 정기적인 방역을 실시하나 간혹 출몰할 수 있는 곤충과 벌레에 대한 부분은 양해 부탁드립니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "* 무단으로 고용량 및 고전력 전기기구를 사용하여 다른 고객의 객실에 피해가 발생할 경우, 해당 이용자는 그에 따른 배상 책임을 지게 됩니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        }
+      ],
+      "images": [
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/head/reservation2.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/head/fixed-circle2.png",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/head/fixed-circle.png",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/plugin/weather/img/light/%ED%95%B4.png",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "맑음",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/location.png",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/a_1.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/a_2.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/a_3.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/main_1.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/slide5.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/slide6.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/slide7.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/slide8.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/slide9.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/slide10.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/slide11.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/slide12.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/main/A-1.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/main/B-1.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/main/C-1.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/main/D-1.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/main/E-1.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/main/F-1.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://glowglam.co.kr/img/kangaroo/main/Main-Masc-2.jpg",
+          "page": "http://glowglam.co.kr/glowglam.php",
+          "alt": "",
+          "layout": false
+        }
+      ]
+    },
+    "101048": {
+      "status": "OK",
+      "name": "주식회사 라하",
+      "url": "http://rahaglamping.com/",
+      "checked_at": "2026-10-19T08:54:48.093Z",
+      "pages": [
+        "http://rahaglamping.com/",
+        "http://rahaglamping.com/about",
+        "http://rahaglamping.com/reserve"
+      ],
+      "snippets": [
+        {
+          "text": "원주 라하글램핑",
+          "url": "http://rahaglamping.com/"
+        },
+        {
+          "text": "펜션소개",
+          "url": "http://rahaglamping.com/"
+        },
+        {
+          "text": "펜션전경",
+          "url": "http://rahaglamping.com/"
+        },
+        {
+          "text": "라하글램핑",
+          "url": "http://rahaglamping.com/"
+        },
+        {
+          "text": "초록상회(매점)",
+          "url": "http://rahaglamping.com/"
+        },
+        {
+          "text": "야외수영장",
+          "url": "http://rahaglamping.com/"
+        },
+        {
+          "text": "마음의 진정한 휴식처 원주 라하 글램핑입니다.",
+          "url": "http://rahaglamping.com/"
+        },
+        {
+          "text": "원주의 명산 치악산 자락에서 느끼는 ‘머뭄’의 여유 라하 글램핑",
+          "url": "http://rahaglamping.com/"
+        },
+        {
+          "text": "Campfire 불멍",
+          "url": "http://rahaglamping.com/"
+        },
+        {
+          "text": "Campfire 불멍 유료이용/현장결제",
+          "url": "http://rahaglamping.com/"
+        },
+        {
+          "text": "Store 매점",
+          "url": "http://rahaglamping.com/"
+        },
+        {
+          "text": "Store 매점 09:00 ~ 22:00",
+          "url": "http://rahaglamping.com/"
+        },
+        {
+          "text": "Swimming 야외수영장",
+          "url": "http://rahaglamping.com/"
+        },
+        {
+          "text": "업체명 라하글램핑",
+          "url": "http://rahaglamping.com/"
+        },
+        {
+          "text": "라하 글램핑",
+          "url": "http://rahaglamping.com/about"
+        },
+        {
+          "text": "라하 글램핑에서 행복한 시간을 보내시길 바랍니다.",
+          "url": "http://rahaglamping.com/about"
+        },
+        {
+          "text": "요금안내",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "# 입실/퇴실",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "입실: 오후 15:00",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "퇴실: 오전 11:00",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "21:00이후 입실 시 사전연락 필수(입실문의 033-813-1330)",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "22시부터는 매너타임으로 다른 투숙객분들을 배려해주시길 바랍니다.",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "# 인원추가",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "객실별 기준인원 초과시 1인당(1박당) 인원추가요금 발생",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "인원추가비용 : 24개월 이상 1인당(1박당) 20,000원",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "잠시 머무르시는 경우도 객실이용 인원에 포함되며, 인원추가 비용이 발생합니다.",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "1회(약 3시간) 2인 기준, 통대여 40,000원",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "1인 추가시마다 10,000원(최대 4인까지 이용)",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "이용 고객 전원 사우나 옷, 수건 대여 및 샤워실 이용 가능",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "숯+그릴 : 30,000원",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "그리들(해바라기버너) : 20,000원",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "숯+그릴,그리들(해바라기버너) 모두 이용 시 40,000원",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "개인화기 및 숯 장작 반입 불가",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "# 불멍",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "장작 1망 : 20,000원",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "장작 추가 시 10,000원",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "불멍 신청시간 : 21시까지",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "# 매점",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "실내(객실, 사우나 등) 절대 금연이며, 적발시 강제퇴실 및 청소비와 익일 객실료가 청구됩니다.",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "보호자 동반없는 미성년자는 예약 및 입실 절대 불가합니다.",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "객실별 최대인원 초과시 입실 불가하며, 잠시 머무르시는 경우도 객실 이용인원에 포함되며 인원추가 비용이 발생됩니다.",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "예약 후 이용일자 및 객실 변경은 해당예약 취소 후 다시 재예약하셔야 합니다.(예약변경을 위한 취소시에도 취소수수료가 부과되오니 신중하게 예약하시기 바랍니다.)",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "애견동반 및 입실은 불가합니다.",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "현금을 포함한 개인소지 귀중품의 분실 및 도난에 대해서는 펜션에서 책임지지 않습니다.",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "펜션이용시 아동을 포함한 고객분의 안전에 유의하여 주시고, 본인 부주의로 인한 안전사고에 대해서는 숙소에서 책임지지 않습니다.",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "퇴실시 음식물을 비롯한 모든 쓰레기는 분리수거해 주시고, 사용하신 주방기구는 세척해 주시기 바랍니다.",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "환불기준",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "환불은 입금자와 동일한 예금주에 한하여 가능합니다.",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "취소 수수료는 결제일이 아닌 입실일 기준으로 적용됩니다.",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "예약 완료 후 날짜 및 객실변경은 입실일 10일 이전에만 가능합니다.",
+          "url": "http://rahaglamping.com/reserve"
+        }
+      ],
+      "images": [
+        {
+          "url": "http://rahaglamping.com/images/common/m/navbar.png",
+          "page": "http://rahaglamping.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/common/m/close.png",
+          "page": "http://rahaglamping.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/se2/upload/202609/1788229878_31839.jpg",
+          "page": "http://rahaglamping.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/se2/upload/202409/1725509129_86978.jpg",
+          "page": "http://rahaglamping.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/file/slide/a6402514acb52622c68a473266f64d67.jpg",
+          "page": "http://rahaglamping.com/",
+          "alt": "전화",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/file/slide/8d2276047c32c32206e3b9d1eedb490e.jpg",
+          "page": "http://rahaglamping.com/",
+          "alt": "핀란드사우나",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/file/slide/554f53ca6521ff02893b40ef7fe964b3.jpg",
+          "page": "http://rahaglamping.com/",
+          "alt": "얼리체크인",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/popup/arrow_left2.png",
+          "page": "http://rahaglamping.com/",
+          "alt": "이전",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/popup/arrow_right2.png",
+          "page": "http://rahaglamping.com/",
+          "alt": "다음",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/popup/stop.png",
+          "page": "http://rahaglamping.com/",
+          "alt": "정지",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/popup/start.png",
+          "page": "http://rahaglamping.com/",
+          "alt": "시작",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/popup/close.png",
+          "page": "http://rahaglamping.com/",
+          "alt": "닫기",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/main/01_01.jpg",
+          "page": "http://rahaglamping.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/main/01_02.jpg",
+          "page": "http://rahaglamping.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/main/01_03.jpg",
+          "page": "http://rahaglamping.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/main/01_04.jpg",
+          "page": "http://rahaglamping.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/main/01_05.jpg",
+          "page": "http://rahaglamping.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/main/01_06.jpg",
+          "page": "http://rahaglamping.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/main/01_07.jpg",
+          "page": "http://rahaglamping.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/main/01_08.jpg",
+          "page": "http://rahaglamping.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/main/01_09.jpg",
+          "page": "http://rahaglamping.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/main/01_10.jpg",
+          "page": "http://rahaglamping.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/main/01_11.jpg",
+          "page": "http://rahaglamping.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rahaglamping.com/images/main/01_12.jpg",
+          "page": "http://rahaglamping.com/",
+          "alt": "",
+          "layout": false
+        }
+      ]
+    },
+    "101150": {
+      "status": "OK",
+      "name": "THE 숨 FOREST",
+      "url": "http://xn--9m1b62gfwkhoae75dzub.com/",
+      "checked_at": "2026-10-19T08:54:56.560Z",
+      "pages": [
+        "http://xn--9m1b62gfwkhoae75dzub.com/",
+        "http://xn--9m1b62gfwkhoae75dzub.com/about.html",
+        "http://xn--9m1b62gfwkhoae75dzub.com/faq.html",
+        "http://xn--9m1b62gfwkhoae75dzub.com/news.html",
+        "http://xn--9m1b62gfwkhoae75dzub.com/charge.html",
+        "http://xn--9m1b62gfwkhoae75dzub.com/include/iframe/ddnayo_rooms_price.php?biz_code=P202309013&booking_id=100556"
+      ],
+      "snippets": [
+        {
+          "text": "카라반_가족",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/"
+        },
+        {
+          "text": "카라반_커플",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/"
+        },
+        {
+          "text": "오토 캠핑장",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/"
+        },
+        {
+          "text": "개별 주차장",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/"
+        },
+        {
+          "text": "공용 샤워 시설",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/"
+        },
+        {
+          "text": "침대1, 침대2(테이블로 변환가능), 주방1+거실1, 화장실1(샤워실)",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/"
+        },
+        {
+          "text": "인원추가요금 성인: 20,000원(중학생 이상) 아동: 15,000원 (초등학생 이하) 유아: 없음 (36개월 이하)",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/"
+        },
+        {
+          "text": "인원추가요금",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/"
+        },
+        {
+          "text": "아동: 15,000원 (초등학생 이하)",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/"
+        },
+        {
+          "text": "오토캠핑장 파쇄석",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/"
+        },
+        {
+          "text": "성인: 10,000원(중학생 이상) 아동: 5,000원 (초등학생 이하) 유아: 없음 (36개월 이하)",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/"
+        },
+        {
+          "text": "Free wifi zone",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/"
+        },
+        {
+          "text": "무료 Wi-Fi",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/"
+        },
+        {
+          "text": "01 요금 안내",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "예약 시 안내문구, 환불규정을 숙지하시고 예약하시기 바랍니다.",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "1) 입금대기시간이 경과되면 자동으로 예약신청이 취소됩니다.",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "2) 입금 시 반드시 예약자명으로 입금해주셔야 확인가능 하며, 입금자명이 다를 경우 반드시 펜션으로 연락 주셔야 합니다.",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "[카라반 가족]",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "성인: 20,000원(중학생 이상)",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "[카라반 커플]",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "[오토캠핑장]",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "성인: 10,000원(중학생 이상)",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "아동: 5,000원 (초등학생 이하)",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "입실시간 : 15시~22시",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "퇴실시간 : 11시",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "** 22시 이후 입실 고객님께서는 사전에 미리 연락 주시기 바랍니다.",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "1) 보호자를 동반하지 않은 미성년자는 어떠한 경우에도 입실하실 수 없습니다.",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "2) 애완동물은 부득이 타 객실 및 손님을 위해 입실을 금하오니 양해바랍니다.",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "6) 집기 파손 시에는 펜션지기에게 알려주시기 바랍니다.",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "7) 퇴실 시 음식물을 비롯한 모든 쓰레기는 분리수거해 주시고, 사용하신 주방기구는 세척해 주시기 바랍니다.",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "8) 화재 위험으로 외부에서 가져오신 개인 버너,전기/가스,그릴은 사용이 불가합니다.",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "04 환불규정",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "2) 보호자 동반 없는 미성년자 예약 발견 시 환불 없이 예약 취소됩니다.",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "3) 예약일 변경 시 발생하는 수수료도 취소 수수료가 동일하게 적용되오니 예약 시 신중하게 생각하시고 결정해 주시기 바랍니다.",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "기본 환불 수수료",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        }
+      ],
+      "images": [
+        {
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/img/common/scroll.png",
+          "page": "http://xn--9m1b62gfwkhoae75dzub.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://img.einet.kr/P202309013/landscape/sitemap(original).png?v=2",
+          "page": "http://xn--9m1b62gfwkhoae75dzub.com/about.html",
+          "alt": "",
+          "layout": true
+        }
+      ]
+    },
+    "101934": {
+      "status": "FETCH_FAILED",
+      "name": "소나무 캠핑장",
+      "url": "https://pinetreecamp.co.kr/",
+      "checked_at": "2026-10-19T08:55:53.328Z",
+      "pages": [],
+      "snippets": [],
+      "images": []
+    },
+    "102130": {
+      "status": "FETCH_FAILED",
+      "name": "감포누리캠핑글램핑",
+      "url": "http://gamponuri.co.kr/",
+      "checked_at": "2026-10-19T08:56:47.273Z",
+      "pages": [],
+      "snippets": [],
+      "images": []
+    },
+    "102331": {
+      "status": "OK",
+      "name": "알프스캠핑장",
+      "url": "https://alpsvillage.kr/html/index.html",
+      "checked_at": "2026-10-19T08:55:52.409Z",
+      "pages": [
+        "https://alpsvillage.kr/html/index.html",
+        "https://alpsvillage.kr/html/sub1_map.html?menu=1&amp;sub=2",
+        "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1",
+        "https://alpsvillage.kr/html/sub5_notice.html?menu=5&amp;sub=2",
+        "https://alpsvillage.kr/html/sub1_view.html?menu=1&amp;sub=1",
+        "https://alpsvillage.kr/html/sub2_room1.html?menu=2&amp;room=1&amp;sub=1"
+      ],
+      "snippets": [
+        {
+          "text": "알프스캠핑펜션",
+          "url": "https://alpsvillage.kr/html/index.html"
+        },
+        {
+          "text": "펜션 네이버예약",
+          "url": "https://alpsvillage.kr/html/index.html"
+        },
+        {
+          "text": "알프스캠핑펜션,",
+          "url": "https://alpsvillage.kr/html/index.html"
+        },
+        {
+          "text": "알프스캠핑펜션으로 놀러 오세요",
+          "url": "https://alpsvillage.kr/html/index.html"
+        },
+        {
+          "text": "거실겸주방1개+온돌방2개+화장실2개",
+          "url": "https://alpsvillage.kr/html/index.html"
+        },
+        {
+          "text": "거실겸주방1개+온돌방1개+화장실1개",
+          "url": "https://alpsvillage.kr/html/index.html"
+        },
+        {
+          "text": "주방겸거실1개+화장실1개",
+          "url": "https://alpsvillage.kr/html/index.html"
+        },
+        {
+          "text": "SWIMMING POOL 수영장",
+          "url": "https://alpsvillage.kr/html/index.html"
+        },
+        {
+          "text": "CAFETERIA 매점",
+          "url": "https://alpsvillage.kr/html/index.html"
+        },
+        {
+          "text": "상호 : 알프스캠핑펜션, 알프스펜션",
+          "url": "https://alpsvillage.kr/html/index.html"
+        },
+        {
+          "text": "Copyright&copy; 알프스캠핑펜션 photo & designed by 언제나,디자인",
+          "url": "https://alpsvillage.kr/html/index.html"
+        },
+        {
+          "text": "알프스캠핑펜션 - LOCATION",
+          "url": "https://alpsvillage.kr/html/sub1_map.html?menu=1&amp;sub=2"
+        },
+        {
+          "text": "알프스캠핑펜션 - RESERVATION",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "펜션 성수기 기간: 6월 셋째 주 ~ 9월 셋째 주",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "기준 인원 추가 시 추가 요금은 1인 20,000원입니다.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "반려동물의 동반 입실은 불가합니다.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "이용객의 부주의로 인한 안전사고 및 분실 사고는 펜션 측에서 책임지지 않습니다.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "수영장 미끄럼틀은 어린이용으로 성인은 사용할 수 없습니다.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "퇴실 시",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "음식물 쓰레기는 음식물 쓰레기통에 담아서 배출해 주세요.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "사용하신 쓰레기는 분리수거장에 분리배출해 주시기 바랍니다.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "바베큐 및 불멍",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "바베큐 시설을 이용하실 분들은 펜션 관리자에게 말씀해 주세요.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "펜션 그릴은 장작을 사용할 수 없습니다.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "불멍 난로는 펜션 매점에서 판매하는 장작으로만 사용 가능합니다.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "7월 8월 평일 수영장 이용은 예약제로 운영되고 있습니다.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "펜션 이용요금의 100% 사전 입금 시 예약이 완료됩니다.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "실시간예약 달력으로 예약시 발송되는 문자(객실,투숙일,요금)를 확인하세요.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "최대인원 초과시 입실 및 환불이 불가합니다.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "입실시간",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "이용 당일 펜션 : 15:00 ~ 22:00, 캠핑장 14:00 ~ 20:00까지입니다.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "퇴실시간",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "다음 이용인을 위하여 퇴실시간을 준수해 주시기 바랍니다.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "이용 중 집기 파손 시에는 펜션지기에게 알려주시기 바랍니다",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "쓰레기는 지정된 장소에 분리하여 주시기 바랍니다.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "(매너 타임 10시 입니다.)",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "환불규정",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "올바른 예약문화 정착을 위하여 해당 업소에서는 예약 취소 시 환불기준을 아래와 같이 운영하고 있으니",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "당일예약 후 당일 취소 시에도 수수료 적용되니 신중히 예약 바랍니다.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "* 환불액은 객실전체요금에서 환불됩니다.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "* 환불은 입금자명으로 되며 입금시 송금수수료는 제외한 후 입금됩니다.",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "취소 수수료",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "기본 취소 수수료",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "10% 공제 (10일 전 취소는 100% 환불)",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "이용 10일 전 취소 시",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "이용 9일 전 취소 시",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "이용 8일 전 취소 시",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "이용 7일 전 취소 시",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "이용 6일 전 취소 시",
+          "url": "https://alpsvillage.kr/html/sub5_reser.html?menu=5&amp;sub=1"
+        },
+        {
+          "text": "알프스캠핑펜션 - NOTICE",
+          "url": "https://alpsvillage.kr/html/sub5_notice.html?menu=5&amp;sub=2"
+        },
+        {
+          "text": "알프스캠핑펜션 - PROLOGUE",
+          "url": "https://alpsvillage.kr/html/sub1_view.html?menu=1&amp;sub=1"
+        },
+        {
+          "text": "여름철 시원하게 놀 수 있는 수영장",
+          "url": "https://alpsvillage.kr/html/sub1_view.html?menu=1&amp;sub=1"
+        },
+        {
+          "text": "알프스캠핑펜션 - ROOM",
+          "url": "https://alpsvillage.kr/html/sub2_room1.html?menu=2&amp;room=1&amp;sub=1"
+        },
+        {
+          "text": "CHECK IN & OUT 체크인아웃",
+          "url": "https://alpsvillage.kr/html/sub2_room1.html?menu=2&amp;room=1&amp;sub=1"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://www.alpsvillage.kr/board/data/editor/2608/5ebd994b1949354c7e673002fa1cc7c8_1787205741_7138.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://www.alpsvillage.kr/board/data/editor/2609/b620dd5ed88a02de7a57408a1afc3026_1789689594_7049.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/room_preview1.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "석류방",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/room_preview2.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "대나무방",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/room_preview3.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "소나무방",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/room_preview4.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "매화방",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/room_preview5.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "수련방",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/room_preview6.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "머루방",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/room_preview7.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "다래방",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/room_preview8.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "진달래방",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/room_preview9.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "개나리방",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/room_preview10.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "연산홍방",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/room_preview11.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "국화방",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/room_preview12.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "난초방",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/campsite_preview1.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "일반데크",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/campsite_preview2.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "독채데크",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/campsite_preview3.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "대형데크",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/campsite_preview4.jpg",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "파쇄석",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/common/ico_clock.png",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "실시간예약",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/common/ico_thankq.png",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/common/ico_blog.png",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "네이버블로그",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/common/ico_airbnb_simbol.png",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "에어비엔비",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/common/ico_simbol.png",
+          "page": "https://alpsvillage.kr/html/index.html",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://alpsvillage.kr/html/img/sub1_map_deco.jpg",
+          "page": "https://alpsvillage.kr/html/sub1_map.html?menu=1&amp;sub=2",
+          "alt": "",
+          "layout": true
+        }
+      ]
+    },
+    "102337": {
+      "status": "FETCH_FAILED",
+      "name": "글램인(GLAMIN)",
+      "url": "http://glamin.kr/",
+      "checked_at": "2026-10-19T08:58:10.282Z",
+      "pages": [],
+      "snippets": [],
+      "images": []
+    }
+  }
+}
