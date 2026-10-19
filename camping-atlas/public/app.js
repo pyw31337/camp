@@ -49,10 +49,7 @@ function setVariant(v) {
 // A 포스터를 공개 서비스의 기본 표현으로 고정한다. B/C는 더 이상 고객 화면에 노출하지 않는다.
 setVariant("a");
 
-function updateHeaderGlass() {
-  document.querySelector(".top")?.classList.toggle("is-glass", scrollY > 12);
-}
-addEventListener("scroll", updateHeaderGlass, { passive: true });
+function updateHeaderGlass() {}
 
 // ── 이름·지역 ────────────────────────────────────────────────
 const SIDO = [[/^서울/, "서울"], [/^부산/, "부산"], [/^대구/, "대구"], [/^인천/, "인천"], [/^광주/, "광주"], [/^대전/, "대전"], [/^울산/, "울산"], [/^세종/, "세종"], [/^경기/, "경기"], [/^강원/, "강원"], [/^충청북|^충북/, "충북"], [/^충청남|^충남/, "충남"], [/^전라북|^전북/, "전북"], [/^전라남|^전남/, "전남"], [/^경상북|^경북/, "경북"], [/^경상남|^경남/, "경남"], [/^제주/, "제주"]];
@@ -1318,6 +1315,7 @@ function usage(c, d) {
     ["추가 요금", profFact(PF(d, "EXTRA_FEE")) ?? specFact(d, "EXTRA_PERSON_FEE"), "won"],
     ["환불", profFact(PF(d, "REFUND")) ?? specFact(d, "REFUND_POLICY"), "calc"],
     ["운영", profFact(PF(d, "SEASON")) ?? ((c.seasons ?? []).length ? { v: (c.seasons ?? []).length === 4 ? "사계절 운영" : `${(c.seasons ?? []).join("·")} 운영`, g: "c", src: { label: "고캠핑 등록 운영 기간", url: c.gc_url } } : null), "calendar"],
+    ["사이트 규격", specFact(d, "SITE_SIZE"), "layers"],
     ["반려동물", f.pet ?? profFact(PF(d, "PET")) ?? specFact(d, "PET_POLICY"), "paw"],
     ["대여", (d?.field_conditions ?? c.field_conditions)?.rental_offers?.length ? { v: (d?.field_conditions ?? c.field_conditions).rental_offers.map((r) => r.item).slice(0, 5).join(" · "), g: "c", src: srcOf(c.field_conditions) } : (specFact(d, "RENTAL") ?? null), "cart"],
   ];
@@ -1491,7 +1489,9 @@ function bookingRank(channel) {
   // 네이버 카페·블로그는 운영자 페이지일 수 있으므로, 네이버 예약 경로만 2순위로 본다.
   if (/booking\.naver\.com|m\.booking\.naver\.com|naver\.me|naver[_ -]?reservation|네이버\s*예약/.test(hay)) return 1;
   if (/thank.?camp|땡큐/.test(hay)) return 2;
-  if (channel?.kind === "online") return 3;
+  if (/foresttrip|숲나들|knps|국립공원|huyang/.test(hay)) return 3;
+  if (/gocamping|고캠핑/.test(hay)) return 6;
+  if (channel?.kind === "online") return 4;
   if (channel?.kind === "homepage") return 4;
   if (channel?.kind === "phone") return 5;
   return 10;
@@ -1513,14 +1513,33 @@ function bookingLabel(channel) {
   if (/campit|캠핏/.test(hay)) return "캠핏";
   if (/booking\.naver\.com|m\.booking\.naver\.com|naver\.me|naver[_ -]?reservation|네이버\s*예약/.test(hay)) return "네이버 예약";
   if (/thank.?camp|땡큐/.test(hay)) return "땡큐캠핑";
+  if (/foresttrip|숲나들/.test(hay)) return "숲나들e";
+  if (/knps|국립공원/.test(hay)) return "국립공원";
+  if (/gocamping|고캠핑/.test(hay)) return "고캠핑";
   if (channel?.kind === "homepage") return "홈페이지";
   return serviceText(channel?.platform_name, 20) || "온라인 예약";
 }
-// 한 캠핑장에는 하나의 대표 예약 동선만 쓴다.
-// 캠핏 → 네이버 예약 → 땡큐캠핑 → 기타 온라인 → 운영자 홈페이지 순이며,
-// 전화·현장 접수는 보조 문의 수단으로만 남긴다.
+// 캠퍼가 많이 쓰는 순: 캠핏 → 네이버 예약 → 땡큐캠핑 → 숲나들e·국립공원 → 기타 온라인 → 홈페이지 → 고캠핑.
+// 1순위를 대표 버튼으로, 2·3순위는 대안 링크로 남겨 한 곳이 죽어도 예약이 끊기지 않게 한다.
 function primaryBooking(c) {
-  return bookingChannels(c).find((x) => x.kind === "online" || x.kind === "homepage") ?? null;
+  return bookingOptions(c)[0] ?? null;
+}
+function bookingOptions(c) {
+  const seen = new Set();
+  const out = [];
+  for (const ch of bookingChannels(c)) {
+    if (ch.kind !== "online" && ch.kind !== "homepage") continue;
+    const label = bookingLabel(ch);
+    const key = label.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(ch);
+    if (out.length >= 3) break;
+  }
+  if (c.gc_url && liveBookingUrl(c.gc_url) && !seen.has("고캠핑") && out.length < 3) {
+    out.push({ url: c.gc_url, kind: "online", platform_name: "고캠핑", platform_id: "gocamping" });
+  }
+  return out;
 }
 function bookingSource(channel, label = "대표 예약 채널") {
   const evidence = Array.isArray(channel?.evidence) ? channel.evidence.join(" · ") : "";
@@ -1530,17 +1549,23 @@ function bookingSource(channel, label = "대표 예약 채널") {
   }, label);
 }
 function reserveCard(c) {
-  const main = primaryBooking(c);
+  const options = bookingOptions(c);
+  const main = options[0] ?? null;
+  const alts = options.slice(1);
   const o = openingOf(c) ?? (S.openings.get(String(c.id)) ?? null);
+  const altHtml = alts.length
+    ? `<div class="rs-alts"><span>다른 예약처</span>${alts.map((ch, i) => `<a href="${esc(ch.url)}" target="_blank" rel="noopener">${i + 2}순위 · ${esc(bookingLabel(ch))}</a>`).join("")}</div>`
+    : "";
   return `<div class="reserve">
-    <div class="rs-top"><span>${esc(main ? bookingLabel(main) : "예약")}</span>${o ? `<span class="rs-dd">${esc(o.txt ?? o.kind)}</span>` : ""}</div>
+    <div class="rs-top"><span>${esc(main ? bookingLabel(main) : "예약")}${main ? " · 1순위" : ""}</span>${o ? `<span class="rs-dd">${esc(o.txt ?? o.kind)}</span>` : ""}</div>
     ${o ? `<p class="rs-open"><b>${esc(new Date(o.at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", weekday: "short", hour: "2-digit", minute: "2-digit" }))}</b><span>${esc(o.label ?? "")}</span></p>` : ""}
     ${availHtml(c)}
     <div class="rs-btns">
-      ${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">${esc(bookingLabel(main))} 예약</a>` : c.gc_url ? `<a class="btn primary wide" href="${esc(c.gc_url)}" target="_blank" rel="noopener">고캠핑에서 보기</a>` : ""}
+      ${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">${esc(bookingLabel(main))}에서 예약</a>` : ""}
       ${c.tel ? `<a class="btn ghost" href="tel:${esc(c.tel)}">${ic("phone")}전화</a>` : ""}
       ${heartBtn(c, { label: true })}
     </div>
+    ${altHtml}
   </div>`;
 }
 function galleryHtml(c) {
@@ -1589,6 +1614,7 @@ async function detailView(id) {
         ${introHtml(d)}
         ${programsHtml(d)}
         ${layoutHtml(d)}
+        ${operatorMediaHtml(d)}
         ${snsHtml(d, c)}
         ${videosHtml(d)}
         ${platformHubHtml(d, c)}
@@ -1869,6 +1895,13 @@ function snsHtml(d, c) {
     ${thumbs.length ? thumbLinks(thumbs, "캠퍼 사진") : ""}
     ${references.length ? `<div class="visitor-sources">${references.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener"><span>${ic("camera")}방문 사진 ${i + 1}</span><i>원문 열기 · ${esc(sourceName(x.src, "외부 콘텐츠"))}</i>${ic("external", "line")}</a>`).join("")}</div>` : ""}
   </section>`;
+}
+
+function operatorMediaHtml(d) {
+  const imgs = (d?.operator_media?.images ?? []).filter((x) => x.url).slice(0, 8);
+  if (!imgs.length) return "";
+  const cards = imgs.map((x, i) => `<a class="media-card" href="${esc(x.page || x.url)}" target="_blank" rel="noopener"><div class="media-card-photo"><img src="${esc(x.url)}" alt="${esc(x.alt || "운영자 사진")}" loading="lazy" decoding="async" onerror="this.closest('.media-card').remove()"></div><div class="media-card-body"><i>${x.layout ? "배치·시설" : "운영자 사진"}</i><b>${esc(x.alt || `사진 ${i + 1}`)}</b></div></a>`).join("");
+  return `<section class="d-sec"><div class="sec-head">${iconTitle("layers", "운영자 제공 사진")}<span class="sec-note">운영자 홈페이지 원문</span></div><div class="media-grid">${cards}</div></section>`;
 }
 function layoutHtml(d) {
   const imgs = (d?.layout?.images ?? []).filter((x) => x.url).filter((x, i, all) => all.findIndex((y) => y.url === x.url) === i).slice(0, 6);

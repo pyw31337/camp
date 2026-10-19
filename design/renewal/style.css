@@ -82,19 +82,18 @@ em { font-style: normal; color: var(--accent); }
 .rail.is-dragging * { pointer-events: none; }
 .rail::-webkit-scrollbar, .car-track::-webkit-scrollbar, .cmp-scroll::-webkit-scrollbar, .lb-track::-webkit-scrollbar { display: none; }
 
-/* ── 헤더 ─────────────────────────────────────────── */
+/* ── 헤더: 스크롤 시 따라다니지 않고 문서 상단에 위치 ───────── */
 .top {
-  position: sticky; top: 0; z-index: 900; height: calc(var(--head-h) + env(safe-area-inset-top));
+  position: relative; z-index: 100; height: calc(var(--head-h) + env(safe-area-inset-top));
   display: flex; align-items: center; gap: clamp(12px, 3vw, 40px); padding: env(safe-area-inset-top) var(--gut) 0;
-  background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: saturate(1.4) blur(10px);
+  background: var(--bg);
 }
-/* 첫 화면의 헤더는 사진 위에 놓이고, 스크롤 뒤에만 유리 면을 만든다. */
-body[data-view="home"] .top { margin-bottom: calc((var(--head-h) + env(safe-area-inset-top)) * -1); background: transparent; color: #fff; }
+/* 첫 화면의 헤더는 히어로 사진 위에 놓이고, 스크롤 시 히어로와 함께 위로 올라감 */
+body[data-view="home"] .top { position: absolute; top: 0; left: 0; right: 0; z-index: 100; margin-bottom: 0; background: transparent; color: #fff; }
 body[data-view="home"] .top .top-nav a { color: rgba(255,255,255,.78); }
 body[data-view="home"] .top .top-nav a[aria-current] { color: #fff; background: rgba(255,255,255,.14); }
 body[data-view="home"] .top .brand-mark { background: var(--volt); color: #101414; }
 body[data-view="home"] .top .gear-chip { background: rgba(8,18,30,.42); color: #fff; box-shadow: none; border: 1px solid rgba(255,255,255,.2); backdrop-filter: blur(12px); }
-body[data-view="home"] .top.is-glass { background: rgba(12,22,31,.68); backdrop-filter: saturate(1.25) blur(18px); box-shadow: 0 1px 0 rgba(255,255,255,.16); }
 [data-v="b"] .top { border-bottom: 1px solid var(--line); }
 [data-v="c"] .top { border-bottom: 1px solid var(--line); background: #fff; }
 .brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 900; font-size: 1.08rem; letter-spacing: -0.03em; white-space: nowrap; }

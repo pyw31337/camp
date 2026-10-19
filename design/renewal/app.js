@@ -49,10 +49,7 @@ function setVariant(v) {
 // A 포스터를 공개 서비스의 기본 표현으로 고정한다. B/C는 더 이상 고객 화면에 노출하지 않는다.
 setVariant("a");
 
-function updateHeaderGlass() {
-  document.querySelector(".top")?.classList.toggle("is-glass", scrollY > 12);
-}
-addEventListener("scroll", updateHeaderGlass, { passive: true });
+function updateHeaderGlass() {}
 
 // ── 이름·지역 ────────────────────────────────────────────────
 const SIDO = [[/^서울/, "서울"], [/^부산/, "부산"], [/^대구/, "대구"], [/^인천/, "인천"], [/^광주/, "광주"], [/^대전/, "대전"], [/^울산/, "울산"], [/^세종/, "세종"], [/^경기/, "경기"], [/^강원/, "강원"], [/^충청북|^충북/, "충북"], [/^충청남|^충남/, "충남"], [/^전라북|^전북/, "전북"], [/^전라남|^전남/, "전남"], [/^경상북|^경북/, "경북"], [/^경상남|^경남/, "경남"], [/^제주/, "제주"]];
