@@ -698,6 +698,54 @@ $("#date-dialog")?.addEventListener("close", () => {
 
 // ── 화면: 찾기(메인) ─────────────────────────────────────────
 function countOf(test) { return S.camps.reduce((n, c) => n + (test(c) ? 1 : 0), 0); }
+// ── 실시간 인기(소유자 2026-10-19): 최근 7일 블로그·카페·뉴스·동영상 글의 캠핑장 언급 순위. /context/trending.json(Trending mentions)
+const TR_GLYPH = {
+  naver: ["네이버", '<path d="M15.6 12.8 8.1 2H2v20h6.4V11.2L15.9 22H22V2h-6.4z" transform="translate(3 3) scale(.75)"/>'],
+  daum: ["Daum", '<text x="12" y="17.5" text-anchor="middle" font-size="16" font-weight="900" font-family="Arial, Helvetica, sans-serif">D</text>'],
+  youtube: ["YouTube", '<path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/>'],
+  tiktok: ["TikTok", '<path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9.1a7.4 7.4 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.2-1.6"/>'],
+  instagram: ["Instagram", '<path d="M16 3a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5zm-4 5a4 4 0 1 1 0 8 4 4 0 0 1 0-8"/>'],
+  facebook: ["Facebook", '<path d="M14 8h3V4h-3a5 5 0 0 0-5 5v2H7v4h2v7h4v-7h3l1-4h-4V9a1 1 0 0 1 1-1"/>'],
+};
+const trIcon = (k, n) => { const [label, path] = TR_GLYPH[k] ?? [k, ""]; return `<span class="tr-src" title="${esc(label)} ${n}건" aria-label="${esc(label)} ${n}건"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true">${path}</svg><i>${fmt(n)}</i></span>`; };
+function trendingShell() {
+  return `<section class="trending" data-trending aria-labelledby="tr-t" aria-busy="true">
+    <div class="sec-head"><h2 id="tr-t">실시간 <em>인기</em></h2><div class="sec-side"><span class="rail-progress" data-rail="trending-rail"><i style="width: 18%"></i></span><span class="sec-note" data-tr-note>${tip("<b>실시간 인기</b><span>최근 7일 블로그·카페·뉴스·동영상 글에서 캠핑장 이름과 지역을 맞춰 센 순위예요. 최근 글일수록 크게 세고, 광고·정보 모음 글은 뺍니다. 매일 밤 갱신돼요.</span>")}</span></div></div>
+    <div class="rail trending-rail" data-tr-rail>${Array.from({ length: 4 }, () => `<div class="tr-card tr-skel" aria-hidden="true"><span class="tr-ph"></span><b></b><i></i></div>`).join("")}</div>
+  </section>`;
+}
+function trendingCard(x) {
+  const c = S.byId.get(String(x.id));
+  if (!c) return "";
+  const photo = photosOf(c)[0];
+  const thumb = photo ? imageTag(photo, "", { sizes: "220px" }) : x.samples?.find((s) => s.thumb) ? `<img src="${esc(x.samples.find((s) => s.thumb).thumb)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : `<span class="tr-noimg">${ic("tent")}</span>`;
+  const arrow = x.trend === "up" ? `<span class="tr-tr up" aria-label="어제 ${x.prev}위에서 올라옴">▲${x.prev - x.rank}</span>` : x.trend === "down" ? `<span class="tr-tr down" aria-label="어제 ${x.prev}위에서 내려감">▼${x.rank - x.prev}</span>` : x.trend === "new" ? `<span class="tr-tr new" aria-label="새로 들어옴">NEW</span>` : `<span class="tr-tr same" aria-label="어제와 같음">–</span>`;
+  const count = x.today ? `오늘 언급 <b>${fmt(x.today)}</b>건` : `7일 언급 <b>${fmt(x.week)}</b>건`;
+  const srcs = Object.entries(x.by ?? {}).sort((a, b) => b[1] - a[1]).map(([k, n]) => trIcon(k, n)).join("");
+  return `<a class="tr-card" href="#/c/${encodeURIComponent(c.id)}" aria-label="${x.rank}위 ${esc(nameOf(c).name)} · ${esc(region(c))} · ${x.today ? `오늘 언급 ${x.today}건` : `7일 언급 ${x.week}건`}">
+    <span class="tr-ph">${thumb}<span class="tr-rank">${x.rank}</span>${arrow}</span>
+    <b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i>
+    <span class="tr-meta"><span class="tr-count">${count}</span><span class="tr-srcs">${srcs}</span></span>
+  </a>`;
+}
+async function mountTrending() {
+  const sec = $("[data-trending]");
+  if (!sec) return;
+  const data = await fetch(new URL(`${MOD_ROOT}context/trending.json?v=${new Date().toISOString().slice(0, 13)}`, import.meta.url)).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  if (!sec.isConnected) return;
+  const cards = (data?.top ?? []).slice(0, 20).map(trendingCard).filter(Boolean);
+  const rail = $("[data-tr-rail]", sec);
+  sec.removeAttribute("aria-busy");
+  if (!cards.length) {
+    rail.outerHTML = `<div class="tr-empty">${ic("broadcast")}<b>아직 집계된 글이 없어요</b><span>매일 밤 최근 7일 글을 모아 순위를 새로 매겨요.</span></div>`;
+    $("[data-rail='trending-rail']", sec)?.remove();
+    return;
+  }
+  rail.innerHTML = cards.join("");
+  const note = $("[data-tr-note]", sec);
+  if (note && data.date) note.insertAdjacentHTML("afterbegin", `<span class="tr-asof">${esc(Number(data.date.slice(5, 7)))}/${esc(Number(data.date.slice(8, 10)))} 기준</span>`);
+  initDraggableRails(sec);
+}
 function homeView() {
   const openings = S.camps.map((c) => [c, openingOf(c)]).filter(([c, o]) => o && hasPhoto(c)).sort((a, b) => a[1].dd - b[1].dd);
   const themeItems = THEMES.map(([key, label, test]) => {
@@ -733,6 +781,7 @@ function homeView() {
   </section>
 
   ${openingSection}
+  ${trendingShell()}
   ${reviewSection}
   ${themeSection}
   <section class="results" id="results" aria-labelledby="res-t">
@@ -1309,6 +1358,7 @@ function bindHome() {
   const io = new IntersectionObserver((es) => { if (es[0].isIntersecting && !$("[data-more]").hidden) moreResults(); }, { rootMargin: "800px" });
   io.observe(sentinel);
   initDraggableRails(v);
+  mountTrending();
   cleanup.push(() => { io.disconnect(); v.removeEventListener("click", homeClicks); });
 }
 function homeClicks(e) {
