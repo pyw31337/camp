@@ -1533,3 +1533,26 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .review-photos .media-card-body i, .review-photos .media-card-go { font-size: .7rem; }
 @media (max-width: 759px) { .review-links.review-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .layout-sec .layout-main img { width: 100%; max-height: min(560px, 70vh); object-fit: contain; background: var(--soft); }
+
+/* 상세 바로가기(2026-10-19): 긴 상세에서 요금·이용 정보·주변·후기로 바로 간다 */
+.d-jump { position: sticky; top: 0; z-index: 50; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 4px calc(var(--gut, 16px) * -1) 8px; padding: 8px var(--gut, 16px); background: color-mix(in srgb, var(--bg, #fff) 94%, transparent); backdrop-filter: blur(8px); box-shadow: 0 1px 0 var(--line); }
+.d-jump::-webkit-scrollbar { display: none; }
+.d-jump a { flex: 0 0 auto; display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 999px; font-size: .82rem; font-weight: 800; color: var(--ink-2); background: var(--soft); text-decoration: none; }
+.d-jump a[aria-current] { background: var(--ink); color: var(--paper, #fff); }
+.d-jump a[hidden] { display: none; }
+.d-jump:not(:has(a:not([hidden]))) { display: none; }
+.detail .d-sec { scroll-margin-top: 60px; }
+.detail .d-sec:focus { outline: none; }
+.detail .use-val, .detail .tile-v, .plist b { word-break: keep-all; overflow-wrap: anywhere; }
+@media (max-width: 759px) {
+  .detail .d-sec .sec-head h2 { font-size: 1.08rem; }
+  .price-sec .plist li { padding: 10px 34px 10px 12px; }
+  .price-sec .plist li b { min-width: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .detail *, .lightbox * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+.pl-more { margin-top: 8px; }
+.pl-more summary { cursor: pointer; width: fit-content; padding: 6px 12px; border-radius: 999px; background: var(--soft); font-size: .8rem; font-weight: 800; color: var(--ink-2); list-style: none; }
+.pl-more summary::-webkit-details-marker { display: none; }
+.pl-more[open] summary { margin-bottom: 8px; }
