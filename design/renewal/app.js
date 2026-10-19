@@ -315,6 +315,7 @@ function campThumb(c, { alt = "", sizes } = {}) {
 // 카드 사진: GitHub Pages 배포 단계에서 합쳐지는 고캠핑 공식 webp를 우선 사용한다.
 // 원본 URL은 사진 브랜치에 아직 파생본이 없을 때만 보조로 쓴다.
 // 원본이 지워져 404가 난 사진 주소(이 방문 동안 기억). 상세 사진 묶음·라이트박스에서 뺀다.
+const DEAD = new Set();
 // 고캠핑 원본·썸네일은 같은 파일명을 가진다. 파일명 및 파라미터 제외 키로 중복을 거른다.
 const photoKey = (u) => {
   const path = String(u ?? "").split(/[?#]/)[0];
