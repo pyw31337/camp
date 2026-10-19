@@ -10,6 +10,8 @@
 - **OCR 단계 분리**(`crawl-operator-sites.mjs`): 크롤 중에는 안내 이미지 주소만 모으고, 크롤이 끝난 뒤 동시 2개·전체 `--ocr-minutes`(60)·캠핑장당 120초로 따로 읽는다. 이전 방식은 동시 크롤 10개와 CPU를 다퉈 사이트 제한 시간에 잘려 결과가 거의 0이었다.
 - **참고**: 최신 main에서 파생 빌더만 다시 돌려도 입실 +10·전기 W +48·사이트 타입 +63이 오른다(발행 데이터가 최신 스크립트보다 늦음). 첫 증분 발행에서 함께 반영된다.
 - 검증: `npm --prefix pipeline test` 267/267, 워크플로 YAML 파싱, 증분 발행 시험 실행(`PUBLISH_DRY_RUN=1`, 가짜 웹 언급 1곳 병합 → 회귀 없음).
+- **⚠️ main 복구(13:36 KST 커밋 b2f633dcb·b91849f4e)**: `pipeline/lib/fact-store.mjs`(252줄)와 `scripts/build-fact-store.mjs`(109줄)가 3줄짜리 스텁으로 덮여 사실 저장소·매일 발행·테스트가 모두 깨져 있었다. 이 PR에서 원래 내용(+ 원천 등록)으로 되돌렸다. 파일 전체를 API로 덮어쓰지 말고 부분 수정·로컬 테스트 후 커밋할 것.
+- **지자체 요금 사실(`registry/local-fee-facts.json`, 여주·구미·화성 56건)**: 사실 원장에 넣으려면 ① 캠핑장 id 매칭(`camp_hint`→`c.id`), ② 원문 URL·확인 시각(AGENTS.md 3번 — 없으면 확정값 금지), ③ 원천 코드(`local_gov`)를 `SOURCES`에 등록, ④ 속성 코드를 `attribute-dictionary.json`에 있는 것(`PRICE_NIGHT`가 아니라 사전의 요금 속성)으로 맞춘 뒤 `build-fact-store.mjs`에 읽기를 추가한다. 지금은 원장에 넣지 않았다(Gemini 담당으로 남김).
 
 ## 📌 공지 — 데이터 수집 확장 (2026-10-19)
 
