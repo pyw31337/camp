@@ -76,6 +76,7 @@ function checkKakao() {
 
 function checkPublicData() {
   console.log(`[공공데이터포털 / 한국도로공사 / 서울시] ✅ 안전: 정부 공공 오픈데이터 (과금 체계 없음, 100% 무료)`);
+  console.log(`[주말 컨디션: 기상청·에어코리아·산림청·국립해양조사원] ✅ 안전: 공공데이터포털 무료 서비스. 한도 초과 시 호출만 거절(과금 없음) · 단기예보는 실행당 CONDITIONS_SHORT_MAX(기본 1800) 이하`);
   return { status: "OK" };
 }
 

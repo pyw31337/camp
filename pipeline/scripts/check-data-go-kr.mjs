@@ -4,6 +4,7 @@ import { fetchDataGoKr } from "../lib/datagokr.mjs";
 import { fetchExAll } from "../lib/ex-rest-areas.mjs";
 import { kakaoGeocode } from "../lib/geocode.mjs";
 import { nowInKst } from "../lib/kst.mjs";
+import { midTmFc } from "../lib/conditions.mjs";
 
 // 다른 원천 키(값은 출력하지 않음): 한국도로공사 EX_API_KEY, 카카오 REST/JS 키
 async function checkOtherKeys() {
@@ -42,6 +43,13 @@ const checks = [
   { name: "한국관광공사 고캠핑", url: `https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=1&pageNo=1&${common}` },
   { name: "기상청 단기예보(초단기실황)", url: `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?pageNo=1&numOfRows=1&dataType=JSON&base_date=${ymd}&base_time=${hh}&nx=60&ny=127` },
   { name: "한국관광공사 TourAPI(국문)", url: `https://apis.data.go.kr/B551011/KorService2/areaBasedList2?numOfRows=1&pageNo=1&${common}` },
+  // 주말 컨디션(sync-conditions.mjs) — 각각 data.go.kr 활용신청 필요
+  { name: "기상청 중기예보(15059468)", url: `https://apis.data.go.kr/1360000/MidFcstInfoService/getMidTa?pageNo=1&numOfRows=1&dataType=JSON&regId=11B10101&tmFc=${midTmFc()}` },
+  { name: "기상청 기상특보(15000415)", url: "https://apis.data.go.kr/1360000/WthrWrnInfoService/getPwnStatus?pageNo=1&numOfRows=1&dataType=JSON" },
+  { name: "에어코리아 대기오염정보(15073861)", url: `https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty?returnType=json&numOfRows=1&pageNo=1&sidoName=${encodeURIComponent("서울")}&ver=1.0` },
+  { name: "에어코리아 측정소정보(15073877)", url: "https://apis.data.go.kr/B552584/MsrstnInfoInqireSvc/getMsrstnList?returnType=json&numOfRows=1&pageNo=1" },
+  { name: "산림청 산불위험예보(15084817)", url: "https://apis.data.go.kr/1400377/forestPoint/forestPointListGeongugSearch?_type=json&numOfRows=1&pageNo=1" },
+  { name: "국립해양조사원 조석예보 고·저조(15156018)", url: `https://apis.data.go.kr/1192136/tideFcstHghLw/GetTideFcstHghLwApiService?obsCode=DT_0001&reqDate=${ymd}&type=json&numOfRows=1&pageNo=1` },
 ];
 // 정기 수집에서는 실제 필수 원천(고캠핑)만 빠르게 점검한다. 날씨·TourAPI는
 // 해당 어댑터를 도입할 때 별도 진단으로 확인해, 연결 지연이 전국 시설 적재를 막지 않게 한다.
