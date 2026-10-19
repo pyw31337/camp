@@ -3,6 +3,14 @@
 > 최종 갱신: 2026-10-19 KST(플랫폼 허브 구현 확인, 작업 전파 정책 명시) — 맨 위 ‘📌 공지’부터 읽을 것<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
 
+## 📌 주변 축제·행사 포스터 카드 — CultureFlow 연동 (2026-10-19, Grok)
+
+- 상세 ‘주변시설’ 아래 `#sec-events`(`[data-events]`)에 축제·공연·전시 포스터 카드. 진행 중/예정(D-n)/이번 주말 배지, 출처·원문 링크, 깨진 포스터는 원출처 → 제목 카드로 대체.
+- 원천: CultureFlow 공개 JSON(`pyw31337.github.io/culture/data/performances.json`) + 기존 TourAPI 축제(extras.json). 같은 행사는 합침.
+- 파일: `pipeline/lib/culture-events.mjs`, `pipeline/scripts/sync-culture-events.mjs`, `camping-atlas/public/context/events.{js,json}`, 워크플로 `culture-events.yml`(매일 06:20 KST). 자세히 `docs/CULTURE_EVENTS.md`.
+- `design/renewal/app.js`는 두 군데만 추가(섹션 자리 1줄, bindDetail에서 불러오기 2줄). 참고: 예전 ‘여행 참고 정보’ `[data-extras]` 자리는 현재 상세 HTML에 없어 그 칸(고도·응급실 등)은 화면에 안 보임 — 화면 담당이 다시 넣을지 판단 필요.
+- 검사: `npm --prefix pipeline test` 통과(새 테스트 7개).
+
 ## 📌 운영자 심층 수집기 (2026-10-19, Grok)
 
 - `pipeline/scripts/crawl-operator-deep.mjs`: 운영자 자체 호스트만, robots 준수, 최대 16쪽, 관련 문장+시설/배치 이미지 URL.
