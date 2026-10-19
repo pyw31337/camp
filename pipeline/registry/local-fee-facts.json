@@ -1,22 +1,92 @@
 {
-  "generated_at": "2026-10-19T04:33:23.186Z",
-  "sources": [
-    "여주 data.go.kr",
-    "구미 공식페이지",
-    "화성 공식페이지"
-  ],
-  "note": "여주·구미·화성 공개 데이터 기반 사실. 다른 에이전트는 Fact Store 적재 또는 캠핑장 매칭에 활용.",
-  "fact_count": 56,
+  "generated_at": "2026-10-19T04:50:00Z",
+  "note": "여주·구미·화성 공개 원천 기반. 각 사실에 url·at 포함. Fact Store CONFIRMED 적재 가능.",
   "facts": [
-    {"camp_hint": "여주 금은모래 캠핑장", "source": "public data 여주", "grade": "CONFIRMED", "attribute": "PRICE_NIGHT", "value": "데크존 25000원 / 하천부지 15000원 (기준 5인)"},
-    {"camp_hint": "여주 금은모래 캠핑장", "source": "public data 여주", "grade": "CONFIRMED", "attribute": "SITE_COUNT", "value": "120"},
-    {"camp_hint": "구미 구미캠핑장", "source": "public data 구미", "grade": "CONFIRMED", "attribute": "PRICE_NIGHT", "value": "일반 15000~30000원 / 오토 20000~40000원 / 카라반 80000~160000원"},
-    {"camp_hint": "구미 구미캠핑장", "source": "public data 구미", "grade": "CONFIRMED", "attribute": "SITE_COUNT", "value": "170"},
-    {"camp_hint": "구미 옥성자연휴양림 야영장", "source": "public data 구미", "grade": "CONFIRMED", "attribute": "PRICE_NIGHT", "value": "데크 6000원 / 숲속의집 35000~110000원"},
-    {"camp_hint": "구미 옥성자연휴양림 야영장", "source": "public data 구미", "grade": "CONFIRMED", "attribute": "SITE_COUNT", "value": "40"},
-    {"camp_hint": "화성 향남 오토캠핑장", "source": "public data 화성", "grade": "CONFIRMED", "attribute": "PRICE_NIGHT", "value": "오토A형 25000~30000원 / B형 30000~40000원 (화성시민 할인)"},
-    {"camp_hint": "화성 향남 오토캠핑장", "source": "public data 화성", "grade": "CONFIRMED", "attribute": "SITE_COUNT", "value": "43"},
-    {"camp_hint": "화성 매송 오토캠핑장", "source": "public data 화성", "grade": "CONFIRMED", "attribute": "PRICE_NIGHT", "value": "오토 약 20000~30000원 (화성시민 할인)"},
-    {"camp_hint": "화성 매송 오토캠핑장", "source": "public data 화성", "grade": "CONFIRMED", "attribute": "SITE_COUNT", "value": "25"}
+    {
+      "camp_hint": "여주 금은모래 캠핑장",
+      "attribute": "PRICE_NIGHT",
+      "value": 25000,
+      "text": "데크존 25000원 / 하천부지 15000원 (기준 5인)",
+      "grade": "CONFIRMED",
+      "src": "local_gov",
+      "url": "https://www.data.go.kr/data/15100692/fileData.do",
+      "at": "2026-10-19T04:50:00Z"
+    },
+    {
+      "camp_hint": "여주 금은모래 캠핑장",
+      "attribute": "SITE_COUNT",
+      "value": 120,
+      "grade": "CONFIRMED",
+      "src": "local_gov",
+      "url": "https://www.data.go.kr/data/15100692/fileData.do",
+      "at": "2026-10-19T04:50:00Z"
+    },
+    {
+      "camp_hint": "구미 구미캠핑장",
+      "attribute": "PRICE_NIGHT",
+      "value": 20000,
+      "text": "일반 15000~30000원 / 오토 20000~40000원 / 카라반 80000~160000원",
+      "grade": "CONFIRMED",
+      "src": "local_gov",
+      "url": "https://www.gumi.go.kr/reservation/www/campingFcltWebView.do?fcltNo=8",
+      "at": "2026-10-19T04:50:00Z"
+    },
+    {
+      "camp_hint": "구미 구미캠핑장",
+      "attribute": "SITE_COUNT",
+      "value": 170,
+      "grade": "CONFIRMED",
+      "src": "local_gov",
+      "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=362",
+      "at": "2026-10-19T04:50:00Z"
+    },
+    {
+      "camp_hint": "구미 옥성자연휴양림 야영장",
+      "attribute": "PRICE_NIGHT",
+      "value": 6000,
+      "text": "데크 6000원 / 숲속의집 35000~110000원",
+      "grade": "CONFIRMED",
+      "src": "local_gov",
+      "url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030066",
+      "at": "2026-10-19T04:50:00Z"
+    },
+    {
+      "camp_hint": "화성 향남 오토캠핑장",
+      "attribute": "PRICE_NIGHT",
+      "value": 25000,
+      "text": "오토A형 25000~30000원 / B형 30000~40000원 (화성시민 할인)",
+      "grade": "CONFIRMED",
+      "src": "local_gov",
+      "url": "https://www.hsuco.or.kr/",
+      "at": "2026-10-19T04:50:00Z"
+    },
+    {
+      "camp_hint": "화성 향남 오토캠핑장",
+      "attribute": "SITE_COUNT",
+      "value": 43,
+      "grade": "CONFIRMED",
+      "src": "local_gov",
+      "url": "https://www.hsuco.or.kr/",
+      "at": "2026-10-19T04:50:00Z"
+    },
+    {
+      "camp_hint": "화성 매송 오토캠핑장",
+      "attribute": "PRICE_NIGHT",
+      "value": 20000,
+      "text": "오토 약 20000~30000원 (화성시민 할인)",
+      "grade": "CONFIRMED",
+      "src": "local_gov",
+      "url": "https://www.data.go.kr/data/15136415/fileData.do",
+      "at": "2026-10-19T04:50:00Z"
+    },
+    {
+      "camp_hint": "화성 매송 오토캠핑장",
+      "attribute": "SITE_COUNT",
+      "value": 25,
+      "grade": "CONFIRMED",
+      "src": "local_gov",
+      "url": "https://www.data.go.kr/data/15136415/fileData.do",
+      "at": "2026-10-19T04:50:00Z"
+    }
   ]
 }

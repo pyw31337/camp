@@ -95,3 +95,9 @@ jobs:
           git commit -m "chore(data): refresh operator homepage snippets"
           git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"
           git push
+      - name: Publish operator facts to the site now (incremental)
+        # 새 문장을 기다리지 않고 바로 화면에 반영한다: 최신 main 데이터 위에서 파생 정보(스펙·프로필·요금·사이트 타입·사실 저장소)를
+        # 다시 계산해 커밋한다. 커버리지가 줄면 커밋하지 않는다(scripts/publish-incremental.sh).
+        if: always() && github.event_name != 'pull_request'
+        continue-on-error: true
+        run: bash scripts/publish-incremental.sh "operator homepage facts"

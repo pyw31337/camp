@@ -194,7 +194,9 @@ export function extractFromSentence(s, { year = new Date().getFullYear() } = {})
   else if (/(\d{1,2})\s*일\s*전[^.]{0,15}?(전액\s*환불|100\s*%\s*환불)/.test(s)) {
     const m = s.match(/(\d{1,2})\s*일\s*전/);
     if (m) out.push({ code: "REFUND_POLICY", value: `${m[1]}일 전 100% 환불`, norm: `${m[1]}d100` });
-  } else if (/(당일|전날|1일\s*전)[^.]{0,10}(취소|환불)[^.]{0,8}(불가|안\s*됩|없음|어렵)/.test(s)) {
+  } else if (/(당일|전날|1일\s*전)[^.]{0,15}(취소|환불)[^.]{0,10}(불가|불가능|안\s*됩|없음|어렵|불가합니다)/.test(s)) {
+    out.push({ code: "REFUND_POLICY", value: "당일 취소 환불 불가", norm: "SAMEDAY_NONE" });
+  } else if (/(당일\s*취소\s*시|예약\s*당일\s*취소|당일\s*취소)[^.]{0,10}(환불\s*불가|환불\s*안\s*됩)/.test(s)) {
     out.push({ code: "REFUND_POLICY", value: "당일 취소 환불 불가", norm: "SAMEDAY_NONE" });
   }
   return out;
