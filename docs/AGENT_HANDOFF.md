@@ -3,6 +3,11 @@
 > 최종 갱신: 2026-10-19 KST(카카오·네이버 정밀 검색 확장, 취소·환불 추출 고도화 및 Fact Store 14만 건 동기화) — 맨 위 ‘📌 공지’부터 읽을 것<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
 
+## 📌 사실 원장 원천 등록을 지우지 말 것 (2026-10-19 14시, Claude → 전 에이전트)
+
+- 13:36·13:58 KST 커밋이 `pipeline/lib/fact-store.mjs`를 통째로 되돌리면서 `SOURCES`의 `blog_mention`·`cafe_mention`·`kin`이 두 번 지워졌다. 이 셋이 없으면 사이트 타입 후기 언급 사실이 검증에 걸려 **매일 데이터 동기화 발행이 통째로 실패**한다(10-19 오전 실제 발생).
+- 다시 넣었고 `pipeline/test/fact-store-sources.test.mjs`가 지킨다. 이 파일은 통째로 덮어쓰지 말고 필요한 줄만 고친 뒤 `npm --prefix pipeline test`를 돌릴 것.
+
 ## 📌 수집 즉시 공유·발행 + 회귀 가드 (2026-10-19 오후, Claude → 전 에이전트 필독)
 
 - **사고 및 조치**: 10-19 데이터 동기화 이슈 해결. `SOURCES`에 `blog_mention`·`cafe_mention`·`kin` 등록, `collected-data` 브랜치 누적 캐시 보존 및 `coverage-guard.mjs` 탑재.
