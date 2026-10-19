@@ -20,18 +20,25 @@ const UA = "MoyeoraCampBot/1.0 (+https://github.com/pyw31337/camp; operator-publ
 const LAYOUT_HINT = /배치|안내도|사이트\s*맵|사이트맵|layout|map|facility|시설|안내/i;
 const IMG_SKIP = /logo|icon|btn|button|spacer|blank|sns|kakao|naver|facebook|insta|youtube|pixel|1x1|\.gif(\?|$)/i;
 
-async function fetchText(url, timeout = 12000) {
-  const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), timeout);
-  try {
-    const r = await fetch(url, { headers: { "user-agent": UA, accept: "text/html,image/*" }, signal: ctrl.signal, redirect: "follow" });
-    if (!r.ok) return { ok: false, status: r.status };
-    const ctype = r.headers.get("content-type") || "";
-    if (!/html|text|xml/i.test(ctype)) return { ok: false, status: r.status, ctype };
-    return { ok: true, url: r.url, html: await r.text(), status: r.status };
-  } catch (e) {
-    return { ok: false, error: String(e.message || e) };
-  } finally { clearTimeout(t); }
+async function fetchText(url, timeout = 15000) {
+  const tryOne = async (u, ua) => {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), timeout);
+    try {
+      const r = await fetch(u, { headers: { "user-agent": ua, accept: "text/html,image/*" }, signal: ctrl.signal, redirect: "follow" });
+      if (!r.ok) return { ok: false, status: r.status, url: u };
+      const ctype = r.headers.get("content-type") || "";
+      if (!/html|text|xml/i.test(ctype)) return { ok: false, status: r.status, ctype, url: u };
+      return { ok: true, url: r.url, html: await r.text(), status: r.status };
+    } catch (e) {
+      return { ok: false, error: String(e.message || e), url: u };
+    } finally { clearTimeout(t); }
+  };
+  const browser = "Mozilla/5.0 (compatible; MoyeoraCampBot/1.0; +https://github.com/pyw31337/camp)";
+  let res = await tryOne(url, UA);
+  if (!res.ok && url.startsWith("http://")) res = await tryOne(url.replace("http://", "https://"), UA);
+  if (!res.ok && (res.status === 403 || /reset|refused|timed out/i.test(res.error || ""))) res = await tryOne(res.url || url, browser);
+  return res;
 }
 
 function imagesOf(html, pageUrl) {
