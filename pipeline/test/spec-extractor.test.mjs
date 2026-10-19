@@ -9,6 +9,12 @@ test("입·퇴실·매너타임 시간을 정규화한다", () => {
   assert.equal(codes("체크인 15:00 / 체크아웃 11:00").CHECKIN_TIME, "15:00부터");
   assert.equal(codes("체크아웃 12시까지").CHECKOUT_TIME, "12:00까지");
   assert.equal(codes("매너타임 22시~07시 꼭 지켜주세요").MANNER_TIME, "22:00~07:00");
+  assert.equal(codes("입·퇴실: 14:00 / 11:00").CHECKIN_TIME, "14:00부터");
+  assert.equal(codes("입·퇴실: 14:00 / 11:00").CHECKOUT_TIME, "11:00까지");
+  assert.equal(codes("15:00 입실 11:00 퇴실").CHECKIN_TIME, "15:00부터");
+  assert.equal(codes("15:00 입실 11:00 퇴실").CHECKOUT_TIME, "11:00까지");
+  assert.equal(codes("소등은 밤 10시 입니다").MANNER_TIME, "22:00부터");
+  assert.equal(codes("매너타임은 오후 10시 ~ 익일 오전 8시까지입니다").MANNER_TIME, "22:00~08:00");
   assert.equal(codes("입실 35시").CHECKIN_TIME, undefined);
 });
 
@@ -18,9 +24,14 @@ test("얼리·레이트 요금과 불가를 구분한다", () => {
   assert.equal(codes("레이트체크아웃 1만원").LATE_CHECKOUT, "10,000원");
 });
 
-test("연박 규칙·추가 요금·반려견·대여·행사", () => {
+test("연박 규칙·추가 요금·반려견·대여·행사·전기·환불", () => {
   assert.equal(codes("주말은 2박 우선 예약입니다").MIN_STAY, "2박 우선 예약");
   assert.equal(codes("인원 추가 시 1인 10,000원").EXTRA_PERSON_FEE, "1인 10,000원");
+  assert.equal(codes("기준인원 초과 시 1인 10,000원").EXTRA_PERSON_FEE, "1인 10,000원");
+  assert.equal(codes("차량 1대 추가 10,000원").EXTRA_CAR_FEE, "1대 10,000원");
+  assert.equal(codes("※ 전열기구 600w초과 또는 전기제품에 문제 발생 시 차단기 내려갑니다").POWER_W, "600W");
+  assert.equal(codes("당일 취소시 환불 불가합니다").REFUND_POLICY, "당일 취소 환불 불가");
+  assert.equal(codes("이용 7일 전 100% 환불").REFUND_POLICY, "7일 전 100% 환불");
   assert.equal(codes("방문객은 받지 않습니다").VISITOR_POLICY, "방문객 불가");
   assert.equal(codes("반려견 동반 가능 (소형견 2마리)").PET_POLICY, "동반 가능 (소형견 · 2마리까지)");
   assert.equal(codes("전기장판 대여 5,000원, 화로대 대여 10,000원").RENTAL, "화로대 10,000원");

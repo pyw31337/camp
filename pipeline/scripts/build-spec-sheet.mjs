@@ -13,6 +13,9 @@ const camps = JSON.parse(readFileSync(join(dataDir, "campgrounds.json"), "utf8")
 const noticesPath = join(root, "pipeline/registry/campground-notices.json");
 const notices = existsSync(noticesPath) ? JSON.parse(readFileSync(noticesPath, "utf8")).campgrounds ?? {} : {};
 const now = process.env.SPEC_NOW ?? new Date().toISOString();
+// 네이버 검색 + 허용 블로그 본문 수집 결과(sync-web-mentions.mjs)
+const webPath = join(root, "pipeline/out/campground-web.json");
+const web = existsSync(webPath) ? JSON.parse(readFileSync(webPath, "utf8")) : null;
 // 운영자 자체 홈페이지 문장(crawl-operator-sites.mjs). 운영자가 스스로 공개한 글이므로 공식 소개와 같은 OFFICIAL_TEXT 등급으로 쓴다.
 const sitesPath = join(root, "pipeline/registry/operator-site-snippets.json");
 const sites = existsSync(sitesPath) ? JSON.parse(readFileSync(sitesPath, "utf8")).campgrounds ?? {} : {};
@@ -41,7 +44,10 @@ for (const c of camps) {
     for (const { url, image, text } of byUrl.values()) docs.push({ text, grade: "OFFICIAL_TEXT", source: { kind: "operator_homepage", label: image ? "운영자 안내 이미지(글자 인식)" : "운영자 홈페이지", url, date: site.checked_at, ...(image ? { image } : {}) } });
   }
   if (d.intro) docs.push({ text: d.intro, grade: "OFFICIAL_TEXT", source: { kind: "gocamping_intro", label: "고캠핑 운영자 소개글", url: c.gc_url ?? null, date: c.modified_at ?? null } });
-  const reviews = [...(d.reviews ?? []), ...(d.cafe ?? []), ...(d.web ?? [])];
+  const reviews = [...(d.reviews ?? []), ...(d.cafe ?? []), ...(d.web ?? [])].map((r) => {
+    const body = web?.bodies?.[r.url];
+    return body?.length ? { ...r, body } : r;
+  });
   const spec = buildSpecSheet({ name: c.name, docs, reviews, now });
   roundups += spec.stats.roundups_skipped;
   if (Object.keys(spec.fields).length) { withAny++; d.spec = spec; } else delete d.spec;

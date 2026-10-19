@@ -50,14 +50,17 @@ export function sentences(text) {
 function parseClock(ampm, h, m, kind) {
   let hour = Number(h), min = m ? Number(m) : 0;
   if (!Number.isFinite(hour) || hour > 24 || min > 59) return null;
-  if (ampm === "오후" && hour < 12) hour += 12;
-  if (ampm === "오전" && hour === 12) hour = 0;
-  if (!ampm && kind === "in" && hour >= 1 && hour <= 8) hour += 12; // "입실 2시" = 14시
-  const ok = kind === "in" ? hour >= 10 && hour <= 21 : kind === "out" ? hour >= 7 && hour <= 16 : true;
+  const a = String(ampm ?? "").trim().toLowerCase();
+  if (["오후", "저녁", "밤", "pm"].includes(a) && hour < 12) hour += 12;
+  if (["오전", "아침", "새벽", "am"].includes(a) && hour === 12) hour = 0;
+  if (!a && kind === "in" && hour >= 1 && hour <= 8) hour += 12; // "입실 2시" = 14시
+  if (!a && kind === "manner" && hour >= 8 && hour <= 12) hour += 12; // "매너타임 10시" = 22시
+  const ok = kind === "in" ? hour >= 10 && hour <= 21 : kind === "out" ? hour >= 7 && hour <= 16 : hour >= 0 && hour <= 24;
   return ok ? hour * 60 + min : null;
 }
 const hhmm = (mins) => `${p2(Math.floor(mins / 60))}:${p2(mins % 60)}`;
-const CLOCK = String.raw`(오전|오후)?\s*(\d{1,2})\s*(?:[:：시]\s*(\d{2})?\s*분?)`;
+const TIME_PREFIX = String.raw`(?:오전|오후|아침|새벽|저녁|밤|낮|am|pm|AM|PM)`;
+const CLOCK = String.raw`(${TIME_PREFIX})?\s*(\d{1,2})\s*(?:[:：시]\s*(\d{2})?\s*분?)`;
 
 function feeOrRule(s) {
   if (/무료|무상|추가\s*요금\s*없/.test(s)) return { text: "무료", fee: 0 };
@@ -91,21 +94,61 @@ function parsePeriod(s, year) {
  */
 export function extractFromSentence(s, { year = new Date().getFullYear() } = {}) {
   const out = [];
-  const inM = s.match(new RegExp(String.raw`(?:입실|체크인|check\s*-?in)\s*(?:시간)?\s*(?:은|는|:|：|-)?\s*${CLOCK}`, "i"));
-  if (inM && !/얼리|조기/.test(s.slice(0, inM.index + 4))) { const v = parseClock(inM[1], inM[2], inM[3], "in"); if (v != null) out.push({ code: "CHECKIN_TIME", value: `${hhmm(v)}부터`, norm: hhmm(v) }); }
-  const outM = s.match(new RegExp(String.raw`(?:퇴실|체크아웃|check\s*-?out)\s*(?:시간)?\s*(?:은|는|:|：|-)?\s*${CLOCK}`, "i"));
-  if (outM && !/레이트|연장|늦은/.test(s.slice(0, outM.index + 4))) { const v = parseClock(outM[1], outM[2], outM[3], "out"); if (v != null) out.push({ code: "CHECKOUT_TIME", value: `${hhmm(v)}까지`, norm: hhmm(v) }); }
+
+  // 입·퇴실 복합 표현 (예: "입·퇴실: 14:00 / 11:00", "입/퇴실 14시 ~ 11시")
+  const comboM = s.match(new RegExp(String.raw`입\s*[/·~-]\s*퇴실\s*(?:시간)?\s*(?:은|는|:|：|-)?\s*${CLOCK}\s*[/~–-]\s*(?:익일\s*)?${CLOCK}`, "i"));
+  if (comboM) {
+    const vIn = parseClock(comboM[1], comboM[2], comboM[3], "in");
+    const vOut = parseClock(comboM[4], comboM[5], comboM[6], "out");
+    if (vIn != null) out.push({ code: "CHECKIN_TIME", value: `${hhmm(vIn)}부터`, norm: hhmm(vIn) });
+    if (vOut != null) out.push({ code: "CHECKOUT_TIME", value: `${hhmm(vOut)}까지`, norm: hhmm(vOut) });
+  }
+
+  // 입실 / 체크인: 역순("15:00 입실") 우선, 다음 정순("입실 14:00")
+  if (!out.some((x) => x.code === "CHECKIN_TIME") && !/얼리|조기|동반\s*입실/.test(s)) {
+    const rev = s.match(new RegExp(String.raw`${CLOCK}\s*(?:부터)?\s*(?:입실|체크인|check\s*-?in)(?![가-힣])`, "i"));
+    const fwd = s.match(new RegExp(String.raw`(?:입실|체크인|check\s*-?in)(?:\s*\([^)]*\))?\s*(?:시간)?\s*(?:은|는|:|：|-)?\s*${CLOCK}`, "i"));
+    const m = rev || fwd;
+    if (m) {
+      const v = parseClock(m[1], m[2], m[3], "in");
+      if (v != null) out.push({ code: "CHECKIN_TIME", value: `${hhmm(v)}부터`, norm: hhmm(v) });
+    }
+  }
+
+  // 퇴실 / 체크아웃: 정순("퇴실 12:00") 우선, 다음 역순("11:00 퇴실")
+  if (!out.some((x) => x.code === "CHECKOUT_TIME") && !/레이트|연장|늦은/.test(s)) {
+    const fwd = s.match(new RegExp(String.raw`(?:퇴실|체크아웃|check\s*-?out)(?:\s*\([^)]*\))?\s*(?:시간)?\s*(?:은|는|:|：|-)?\s*(?:익일\s*)?${CLOCK}`, "i"));
+    const rev = s.match(new RegExp(String.raw`${CLOCK}\s*(?:까지)?\s*(?:퇴실|체크아웃|check\s*-?out)(?![가-힣])`, "i"));
+    const m = fwd || rev;
+    if (m) {
+      const v = parseClock(m[1], m[2], m[3], "out");
+      if (v != null) out.push({ code: "CHECKOUT_TIME", value: `${hhmm(v)}까지`, norm: hhmm(v) });
+    }
+  }
+
   if (/얼리\s*체크인|얼리\s*입실|조기\s*입실|빠른\s*입실/.test(s)) { const f = feeOrRule(s.slice(s.search(/얼리|조기|빠른/))); if (f) out.push({ code: "EARLY_CHECKIN", value: f.text, norm: f.text }); }
   if (/레이트\s*체크아웃|늦은\s*퇴실|퇴실\s*연장|연장\s*퇴실|레이트\s*퇴실/.test(s)) { const f = feeOrRule(s.slice(s.search(/레이트|늦은|연장/))); if (f) out.push({ code: "LATE_CHECKOUT", value: f.text, norm: f.text }); }
-  const mt = s.match(new RegExp(String.raw`(?:매너\s*타임|소등)\s*(?:은|는|:|：)?\s*${CLOCK}\s*(?:부터)?\s*[~\-–]\s*${CLOCK}`));
-  if (mt) {
-    const a = parseClock(mt[1] ?? (Number(mt[2]) <= 12 && Number(mt[2]) >= 9 ? "오후" : null), mt[2], mt[3], "any"), b = parseClock(mt[4] ?? "오전", mt[5], mt[6], "any");
+
+  // 매너타임 / 소등
+  const mtRange = s.match(new RegExp(String.raw`(?:매너\s*타임|소등\s*(?:시간)?|정숙\s*시간|취침\s*시간)[^0-9\n]{0,16}?${CLOCK}\s*(?:부터)?\s*[~\-–]\s*(?:익일|다음\s*날|아침|오전)?\s*${CLOCK}`, "i"));
+  if (mtRange) {
+    const a = parseClock(mtRange[1] ?? (Number(mtRange[2]) <= 12 && Number(mtRange[2]) >= 8 ? "오후" : null), mtRange[2], mtRange[3], "manner");
+    const b = parseClock(mtRange[4] ?? "오전", mtRange[5], mtRange[6], "any");
     if (a != null && b != null) out.push({ code: "MANNER_TIME", value: `${hhmm(a)}~${hhmm(b)}`, norm: `${hhmm(a)}~${hhmm(b)}` });
+  } else {
+    const mtSingle = s.match(new RegExp(String.raw`(?:매너\s*타임|소등\s*(?:시간)?|정숙\s*시간)[^0-9\n]{0,16}?${CLOCK}`, "i"))
+      ?? s.match(new RegExp(String.raw`${CLOCK}\s*(?:부터)?\s*(?:는|은)?\s*(?:매너\s*타임|소등)`, "i"));
+    if (mtSingle && !/24시간/.test(s)) {
+      const a = parseClock(mtSingle[1] ?? (Number(mtSingle[2]) <= 12 && Number(mtSingle[2]) >= 8 ? "오후" : null), mtSingle[2], mtSingle[3], "manner");
+      if (a != null && a >= 18 * 60) {
+        out.push({ code: "MANNER_TIME", value: `${hhmm(a)}부터`, norm: `${hhmm(a)}~07:00` });
+      }
+    }
   }
   if (/(2박|연박)\s*(우선|필수|이상|만)\s*(예약|가능|받)?/.test(s) && !/연박\s*할인/.test(s)) out.push({ code: "MIN_STAY", value: /필수|이상|만/.test(s.match(/(2박|연박)\s*(우선|필수|이상|만)/)[2]) ? "2박 이상만" : "2박 우선 예약", norm: /필수|이상|만/.test(s.match(/(2박|연박)\s*(우선|필수|이상|만)/)[2]) ? "2N_ONLY" : "2N_FIRST" });
   else if (/1박\s*(예약)?\s*(불가|안\s*됩)/.test(s)) out.push({ code: "MIN_STAY", value: "1박 예약 불가", norm: "2N_ONLY" });
-  if (/(인원\s*추가|추가\s*인원)/.test(s)) { const f = feeOrRule(s.slice(s.search(/인원\s*추가|추가\s*인원/))); if (f && f.fee != null) out.push({ code: "EXTRA_PERSON_FEE", value: `1인 ${f.text}`, norm: f.text }); }
-  if (/(차량\s*추가|추가\s*차량|차량\s*1대\s*추가)/.test(s)) { const f = feeOrRule(s.slice(s.search(/차량/))); if (f) out.push({ code: "EXTRA_CAR_FEE", value: f.fee != null ? `1대 ${f.text}` : f.text, norm: f.text }); }
+  if (/(기준\s*인원\s*초과|인원\s*추가|추가\s*인원|1인\s*추가|추가\s*1인)/.test(s)) { const f = feeOrRule(s.slice(s.search(/기준\s*인원|인원|추가/))); if (f && f.fee != null) out.push({ code: "EXTRA_PERSON_FEE", value: `1인 ${f.text}`, norm: f.text }); }
+  if (/(차량\s*추가|추가\s*차량|차량\s*1대\s*추가|추가\s*차량\s*1대|1대\s*추가)/.test(s)) { const f = feeOrRule(s.slice(s.search(/차량|1대/))); if (f) out.push({ code: "EXTRA_CAR_FEE", value: f.fee != null ? `1대 ${f.text}` : f.text, norm: f.text }); }
   // ‘방문객’은 일반 명사로도 많이 쓰이므로 입장·요금·금지 같은 정책 표현이 바로 붙을 때만 본다.
   const vis = s.match(/(?:방문객|외부\s*방문(?:객|자)?)\s*(?:의|은|는|분)?\s*(?:입장|출입|방문|요금|이용료|1인|인당|불가|금지|제한|받지)[^.]{0,30}/);
   if (vis) { const f = feeOrRule(vis[0]); if (f && f.text !== "가능(요금 미기재)") out.push({ code: "VISITOR_POLICY", value: f.fee != null ? `1인 ${f.text}` : f.text === "불가" ? "방문객 불가" : f.text, norm: f.text }); }
@@ -141,14 +184,19 @@ export function extractFromSentence(s, { year = new Date().getFullYear() } = {})
   }
   // 전기 용량: “전기 600W”, “최대 1kW”, “1,100와트” (300~3,000W만, 전기 맥락이 같은 문장에 있을 때)
   const w = s.match(/(\d(?:[\d,]{0,4}))\s*(w|와트|kw|킬로와트)(?![a-z])/i);
-  if (w && /전기|전력|전기\s*사용|사용\s*가능|용량|차단기|릴선|전열/.test(s)) {
+  if (w && /전기|전력|소비\s*전력|허용\s*용량|차단기|릴선|전열|과전력|초과|사용\s*가능|용량|사이트당|팀당/.test(s)) {
     const n = Number(w[1].replace(/,/g, "")) * (/k/i.test(w[2]) ? 1000 : 1);
     if (n >= 300 && n <= 3000) out.push({ code: "POWER_W", value: `${n.toLocaleString("ko-KR")}W`, norm: String(n) });
   }
   // 환불: “당일 취소 환불 불가”, “7일 전 100% 환불”
-  const rf = s.match(/(\d{1,2})\s*일\s*전[^.]{0,12}?(\d{1,3})\s*%\s*(환불|환급)/);
+  const rf = s.match(/(\d{1,2})\s*일\s*전[^.]{0,15}?(\d{1,3})\s*%\s*(환불|환급)/);
   if (rf) out.push({ code: "REFUND_POLICY", value: `${rf[1]}일 전 ${rf[2]}% 환불`, norm: `${rf[1]}d${rf[2]}` });
-  else if (/(당일|전날|1일\s*전)[^.]{0,10}(취소|환불)[^.]{0,8}(불가|안\s*됩)/.test(s)) out.push({ code: "REFUND_POLICY", value: "당일 취소 환불 불가", norm: "SAMEDAY_NONE" });
+  else if (/(\d{1,2})\s*일\s*전[^.]{0,15}?(전액\s*환불|100\s*%\s*환불)/.test(s)) {
+    const m = s.match(/(\d{1,2})\s*일\s*전/);
+    if (m) out.push({ code: "REFUND_POLICY", value: `${m[1]}일 전 100% 환불`, norm: `${m[1]}d100` });
+  } else if (/(당일|전날|1일\s*전)[^.]{0,10}(취소|환불)[^.]{0,8}(불가|안\s*됩|없음|어렵)/.test(s)) {
+    out.push({ code: "REFUND_POLICY", value: "당일 취소 환불 불가", norm: "SAMEDAY_NONE" });
+  }
   return out;
 }
 

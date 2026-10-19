@@ -644,8 +644,8 @@ function usage(c, d) {
     ["추가 요금", profFact(PF(d, "EXTRA_FEE")) ?? specFact(d, "EXTRA_PERSON_FEE")],
     ["환불", profFact(PF(d, "REFUND")) ?? specFact(d, "REFUND_POLICY")],
     ["운영", profFact(PF(d, "SEASON"))],
-    ["반려동물", f.pet ?? profFact(PF(d, "PET"))],
-    ["대여", (d?.field_conditions ?? c.field_conditions)?.rental_offers?.length ? { v: (d?.field_conditions ?? c.field_conditions).rental_offers.map((r) => r.item).slice(0, 5).join(" · "), g: "c", src: srcOf(c.field_conditions) } : null],
+    ["반려동물", f.pet ?? profFact(PF(d, "PET")) ?? specFact(d, "PET_POLICY")],
+    ["대여", (d?.field_conditions ?? c.field_conditions)?.rental_offers?.length ? { v: (d?.field_conditions ?? c.field_conditions).rental_offers.map((r) => r.item).slice(0, 5).join(" · "), g: "c", src: srcOf(c.field_conditions) } : (specFact(d, "RENTAL") ?? null)],
   ];
 }
 function sitePricingHtml(c, d) {
@@ -669,11 +669,16 @@ function sitePricingHtml(c, d) {
 }
 function specTiles(c, d) {
   const f = facts(c);
-  // 고캠핑·운영자 값이 없으면 후기·게시글 언급(MENTION)으로 채운다 — 주차 방식·전기 용량
-  const mention = { park: specFact(d, "PARKING"), power: specFact(d, "POWER_W") };
+  // 고캠핑·운영자 값이 없으면 후기·게시글 언급(MENTION)으로 채운다 — 주차 방식·전기 용량·반려동물
+  const mention = {
+    park: specFact(d, "PARKING"),
+    power: specFact(d, "POWER_W"),
+    pet: specFact(d, "PET_POLICY"),
+  };
   const T = [["size", "size", "설치 공간", ""], ["park", "car", "텐트 옆 주차", "cobalt"], ["power", "bolt", "전기", "volt"], ["fire", "flame", "장작·숯", "flame"], ["ground", "layers", "바닥", ""], ["shelter", "tent", "텐트·타프", ""], ["sanitary", "drop", "위생", ""], ["hot", "drop", "온수", ""], ["pet", "paw", "반려동물", ""]];
   return T.map(([k, i, l, cls]) => {
-    const x = f[k] ?? mention[k] ?? null;
+    let x = f[k] ?? mention[k] ?? null;
+    if (k === "power" && f.power?.v === "있음" && mention.power?.v) x = mention.power;
     const on = x && cls && x.ok !== false && !(k === "fire" && x.kind === "NO_FIRE");
     return `<div class="tile${x ? "" : " unk"} ${on ? `t-${cls}` : ""}"><span class="tile-ic">${ic(i)}</span><span class="tile-l">${l}</span><b class="tile-v">${x ? `${esc(detailValue(x))}${asOfMention(x)}` : "확인필요"}</b>${x ? `<span class="tile-g">${dot(x.g)}${srcTip(x, l)}</span>` : ""}</div>`;
   }).join("");
@@ -827,7 +832,7 @@ function asOf(at) {
   if (d.getFullYear() >= new Date().getFullYear()) return "";
   return `<em class="asof">(${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")} 기준)</em>`;
 }
-const asOfMention = (x) => (x?.g === "m" ? asOf(x.src?.at) : "");
+const asOfMention = (x) => (x?.g === "m" ? `<span class="badge-check">확인필요</span>${asOf(x.src?.at)}` : "");
 const SRC_LABEL = { gocamping: "한국관광공사 고캠핑 등록값", gocamping_intro: "고캠핑 소개글", kakao_local: "카카오 장소 분류", naver_local: "네이버 장소 분류", operator_homepage: "운영자 홈페이지", blog_mention: "블로그 후기 언급", cafe_mention: "카페 글 언급", kin: "지식iN 언급" };
 function iconTitle(icon, label) { return `<div class="sec-title">${ic(icon, "line")}<h2>${esc(label)}</h2></div>`; }
 // 화면에서 쓰는 문장은 데이터 원문을 그대로 반복하지 않는다. 공통 규칙으로 공백·목록기호를

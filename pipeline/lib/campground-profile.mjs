@@ -24,11 +24,11 @@ function specField(spec, code) {
   const f = spec?.fields?.[code];
   const v = f?.values?.[0];
   if (!v) {
-    // 확정값이 없으면 후기 언급을 ‘언급’ 등급으로만(2건 이상, 가장 많이 나온 값). 요약·태그에는 쓰지 않는다.
+    // 확정값이 없으면 후기 언급을 ‘언급’ 등급으로(1건 이상, 가장 많이 나온 값). 요약·태그에는 쓰지 않는다.
     const m = [...(f?.mentions ?? [])].sort((a, b) => b.count - a.count)[0];
-    if (!m || m.count < 2) return null;
+    if (!m || m.count < 1) return null;
     const x = m.samples?.[0] ?? {};
-    return { value: m.value, grade: "MENTION", source: { label: `후기 ${m.count}건`, url: x.url ?? null, date: m.latest ?? x.date ?? null, quote: x.quote ?? null }, count: m.count };
+    return { value: m.value, grade: "MENTION", source: { label: m.count > 1 ? `후기 ${m.count}건` : (x.label ?? "후기 언급"), url: x.url ?? null, date: m.latest ?? x.date ?? null, quote: x.quote ?? null }, count: m.count };
   }
   return { value: v.value, grade: specGrade(v, f.grade), source: specSource(v), conflict: f.conflict || undefined };
 }
@@ -70,13 +70,17 @@ export function buildProfile(c, d = null, details = null, { detailDate = null, u
   }
   // 전기
   const lw = Number(f.power?.limit_w);
+  const spW = specField(d?.spec, "POWER_W");
   if (verified && lw > 0) set("POWER", `최대 ${lw}W`, "VERIFIED", { label: f.source?.label ?? "원문 대조", url: f.source?.url ?? null, date: f.source?.checked_at ?? null }, { watts: lw });
   else if (of.w) set("POWER", `최대 ${of.w.v}W`, "OPERATOR", opSource(of.w), { watts: of.w.v });
+  else if (spW) set("POWER", `최대 ${spW.value}`, spW.grade, spW.source, { watts: Number(spW.value.replace(/[^0-9]/g, "")) || null });
   else if (f.power?.available || (c.amenities ?? []).some((a) => /전기/.test(a))) set("POWER", "전기 제공(W 미확인)", "CONFIRMED", GOCAMPING(c), { watts: null });
   if (details?.ELECTRIC_FEE && fields.POWER) fields.POWER.fee = details.ELECTRIC_FEE.amount;
   // 주차
+  const spPk = specField(d?.spec, "PARKING");
   if (verified && f.parking?.tent_side != null) set("PARKING", f.parking.tent_side ? "사이트 옆 주차" : "외부 주차", "VERIFIED", { label: f.source?.label ?? "원문 대조", url: f.source?.url ?? null, date: f.source?.checked_at ?? null });
   else if (of.pk) set("PARKING", of.pk.v === "SITE_SIDE" ? "사이트 옆 주차" : "외부 주차 후 이동", "OPERATOR", opSource(of.pk));
+  else if (spPk) set("PARKING", spPk.value, spPk.grade, spPk.source);
   // 불멍
   if (verified && f.firewood?.allowed != null) set("FIRE", f.firewood.allowed ? "장작 가능" : "장작 불가", "VERIFIED", { label: f.source?.label ?? "원문 대조", url: f.source?.url ?? null, date: f.source?.checked_at ?? null });
   else if (of.fire) set("FIRE", { FIREWOOD_OK: "장작 가능", CHARCOAL_ONLY: "숯만 가능", NO_FIRE: "개인 화기 불가" }[of.fire.v], "OPERATOR", opSource(of.fire));
@@ -115,7 +119,9 @@ export function buildProfile(c, d = null, details = null, { detailDate = null, u
   else if (intro?.SEASON) set("SEASON", intro.SEASON.value === "YEAR_ROUND" ? "연중 운영" : "기간 휴장 있음", "CONFIRMED", { ...GOCAMPING(c), label: "고캠핑 소개글", quote: intro.SEASON.quote });
   else if (c.seasons?.length) set("SEASON", c.seasons.length === 4 ? "사계절 운영" : `${c.seasons.join("·")} 운영`, "CONFIRMED", GOCAMPING(c));
   // 취소·환불
+  const spRf = specField(d?.spec, "REFUND_POLICY");
   if (details?.REFUND) set("REFUND", "규정 있음", "OPERATOR", dsrc(details.REFUND));
+  else if (spRf) set("REFUND", spRf.value, spRf.grade, spRf.source);
   // 예약
   const ch = (c.booking?.channels ?? []).filter((x) => x.kind !== "phone").map((x) => x.platform_name).filter(Boolean);
   if (ch.length || c.tel) set("BOOKING", [...new Set(ch)].slice(0, 3).join(" · ") || "전화 예약", "CONFIRMED", { label: c.booking?.source?.label ?? "고캠핑 등록 예약 정보", url: c.booking?.source?.url ?? c.gc_url ?? null, date: c.booking?.source?.checked_at ?? null });
