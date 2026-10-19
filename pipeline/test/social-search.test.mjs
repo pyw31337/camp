@@ -138,6 +138,22 @@ test("buildSocialRecord: 필터·중복 제거·정렬·상한", () => {
   for (const x of r.image) assert.equal(typeof x.thumb, "string");
 });
 
+test("buildSocialRecord: manner_blog·time_blog·price_blog 병합 및 중복 제거", () => {
+  const mannerDocs = [
+    { title: "파주 <b>명학산</b> 캠핑장 매너타임 안내", contents: "매너타임 22시부터 엄격히 관리됩니다", url: "https://camplog.tistory.com/99", blogname: "캠프로그", datetime: "2026-09-25T10:00:00.000+09:00" },
+    { title: "파주 <b>명학산</b> <b>캠핑장</b> 솔캠 후기 - 파쇄석 사이트", contents: "중복 URL", url: "https://blog.naver.com/camper/223000000001", blogname: "주말캠퍼", datetime: "2026-09-20T10:00:00.000+09:00" },
+  ];
+  const timeDocs = [
+    { title: "<b>명학산 캠핑장</b> 입실 퇴실 시간 정리", contents: "입실 14:00 퇴실 11:00 입니다", url: "https://camplog.tistory.com/100", blogname: "캠프로그", datetime: "2026-09-26T10:00:00.000+09:00" },
+  ];
+  const r = buildSocialRecord(camp, { blog: blogDocs, manner_blog: mannerDocs, time_blog: timeDocs }, { others: ["명학산", "임진강", "율곡"] });
+  const urls = r.blog.map((x) => x.url);
+  assert.ok(urls.includes("https://camplog.tistory.com/99"));
+  assert.ok(urls.includes("https://camplog.tistory.com/100"));
+  // 중복 url은 1건만 존재
+  assert.equal(urls.filter((u) => u === "https://blog.naver.com/camper/223000000001").length, 1);
+});
+
 test("buildSocialRecord: 타입별 상한", () => {
   const many = Array.from({ length: 50 }, (_, i) => ({ title: `명학산 캠핑장 후기 ${i}`, contents: "", url: `https://blog.example.com/${i}`, blogname: "b", datetime: `2026-09-${String((i % 28) + 1).padStart(2, "0")}T00:00:00+09:00` }));
   const imgs = Array.from({ length: 50 }, (_, i) => ({ thumbnail_url: `https://t/${i}`, image_url: `https://i/${i}`, doc_url: `https://d/${i}`, width: 800, height: 600 }));

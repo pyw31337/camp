@@ -244,7 +244,7 @@ export function extractSiteDetails(lines) {
       if (/동계\s*(기간\s*)?(휴장|휴업|운영\s*중단)|(\d{1,2})\s*월[^.]{0,12}휴장|휴장\s*기간/.test(s)) out.SEASON = { value: "SEASONAL_CLOSURE", quote: s };
       else if (/연중\s*무휴|사계절\s*운영|365\s*일\s*운영|동계\s*(캠핑\s*)?운영/.test(s)) out.SEASON = { value: "YEAR_ROUND", quote: s };
     }
-    if (!out.REFUND && /(취소|환불)[^.]{0,30}(수수료|위약|\d+\s*%|일\s*전)/.test(s)) out.REFUND = { quote: s };
+    if (!out.REFUND && /(?:취소|환불|위약금)[^.]{0,30}?(?:수수료|위약|\d+\s*%|일\s*전|불가|불가능|기준|안내|규정|정책|전액|공제)/.test(s)) out.REFUND = { quote: s };
   }
   if (prices.length) {
     const ns = prices.map((p) => p.amount).sort((a, b) => a - b);

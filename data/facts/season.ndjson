@@ -230,7 +230,7 @@
 {"cid":"190","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"190","attr":"OPEN_WINTER","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"190","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"190","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_homepage","url":"https://www.turtlecamp.co.kr/bbs/board.php?bo_table=table56","at":"2026-10-18T12:19:16.324Z","quote":"2025년 거북바위캠핑장 동계휴장 안내 (25년 12월 1일 ~ 26년 2월 26일)"}
+{"cid":"190","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_homepage","url":"https://www.turtlecamp.co.kr/bbs/board.php?bo_table=table56","at":"2026-10-19T01:56:39.860Z","quote":"2025년 거북바위캠핑장 동계휴장 안내 (25년 12월 1일 ~ 26년 2월 26일)"}
 {"cid":"217","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"217","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"217","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -371,7 +371,6 @@
 {"cid":"362","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"362","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"362","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"362","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_homepage","url":"https://www.gmuc.or.kr/camping/boardViewModel.do?mid=194&ArticleId=16411&Category=194","at":"2026-10-18T12:16:53.444Z","quote":"구미캠핑장 12 월 정기휴장일"}
 {"cid":"373","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"373","attr":"OPEN_DAYS","value":"WEEKEND","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"373","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3739,7 +3738,7 @@
 {"cid":"6731","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6731","attr":"OPEN_WINTER","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6731","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"6731","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_discovered","url":"https://www.shsi.or.kr/main/mainPage.do","at":"2026-10-18T12:16:42.955Z","quote":"혹서기 7, 8월 휴장"}
+{"cid":"6731","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_discovered","url":"https://www.shsi.or.kr/main/mainPage.do","at":"2026-10-19T01:48:27.155Z","quote":"혹서기 7, 8월 휴장"}
 {"cid":"6732","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6732","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6732","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3944,7 +3943,7 @@
 {"cid":"6968","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6968","attr":"OPEN_WINTER","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6968","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"6968","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_homepage","url":"http://www.danyangcamping.com/bbs/notice","at":"2026-10-18T12:29:03.530Z","quote":"2023년 동계 휴장 안내"}
+{"cid":"6968","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_homepage","url":"http://www.danyangcamping.com/bbs/notice","at":"2026-10-19T02:18:54.274Z","quote":"2023년 동계 휴장 안내"}
 {"cid":"6970","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6971","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6971","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
@@ -4523,7 +4522,7 @@
 {"cid":"7254","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7255","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7255","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7255","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_homepage","url":"https://www.hwamyungcamping.com/notice/news","at":"2026-10-18T12:35:09.613Z","quote":"8월9일 휴장알립니다"}
+{"cid":"7255","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_homepage","url":"https://www.hwamyungcamping.com/notice/news","at":"2026-10-19T02:28:47.435Z","quote":"8월9일 휴장알립니다"}
 {"cid":"7256","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7256","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7256","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4597,7 +4596,7 @@
 {"cid":"7353","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7353","attr":"OPEN_WINTER","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7353","attr":"OPERATING_STATUS","value":"PAUSED","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7353","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_homepage","url":"https://cms.wfmc.kr/web/lay1/S1T155C194/contents.do","at":"2026-10-18T12:35:56.833Z","quote":"2024년 7월~8월 휴장"}
+{"cid":"7353","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_homepage","url":"https://cms.wfmc.kr/web/lay1/S1T155C194/contents.do","at":"2026-10-19T02:30:30.078Z","quote":"2024년 7월~8월 휴장"}
 {"cid":"7357","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7359","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7359","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
@@ -4874,7 +4873,7 @@
 {"cid":"7561","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7561","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7561","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7561","attr":"YEAR_ROUND","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://wawoopark.co.kr/reservation.html","at":"2026-10-18T12:31:07.989Z","quote":"- 운영 기간: 사계절운영"}
+{"cid":"7561","attr":"YEAR_ROUND","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://wawoopark.co.kr/reservation.html","at":"2026-10-19T02:22:45.135Z","quote":"- 운영 기간: 사계절운영"}
 {"cid":"7563","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7563","attr":"OPEN_DAYS","value":"WEEKEND","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7563","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4935,7 +4934,7 @@
 {"cid":"7590","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7590","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7590","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7590","attr":"YEAR_ROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.hopecamping.co.kr/intro/introduce.php","at":"2026-10-18T12:34:05.228Z","quote":"운영기간 연중 무휴 (봄"}
+{"cid":"7590","attr":"YEAR_ROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.hopecamping.co.kr/intro/introduce.php","at":"2026-10-19T02:26:35.844Z","quote":"운영기간 연중 무휴 (봄"}
 {"cid":"7591","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7591","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7591","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -5806,7 +5805,7 @@
 {"cid":"8014","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8014","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8014","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"8014","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_homepage","url":"https://noeuljin.com/","at":"2026-10-18T12:19:01.455Z","quote":"2025년 1월 20일부터 임시 휴장합니다."}
+{"cid":"8014","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_homepage","url":"https://noeuljin.com/","at":"2026-10-19T01:55:13.743Z","quote":"2025년 1월 20일부터 임시 휴장합니다."}
 {"cid":"8015","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8015","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8015","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -6261,7 +6260,7 @@
 {"cid":"8209","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8209","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8209","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"8209","attr":"YEAR_ROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--oi2b18fzskqwa69s07fhpa.com/index.php","at":"2026-10-18T12:35:34.535Z","quote":"주말/공휴일 : 연중무휴 운영"}
+{"cid":"8209","attr":"YEAR_ROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--oi2b18fzskqwa69s07fhpa.com/index.php","at":"2026-10-19T02:29:17.082Z","quote":"주말/공휴일 : 연중무휴 운영"}
 {"cid":"8210","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8210","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8210","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -7162,7 +7161,7 @@
 {"cid":"100326","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100326","attr":"OPEN_WINTER","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100326","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100326","attr":"YEAR_ROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.kglamping.com/pricing","at":"2026-10-18T12:42:06.699Z","quote":"케이글램핑애월은 연중무휴로 운영되는 글램핑장입니다"}
+{"cid":"100326","attr":"YEAR_ROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.kglamping.com/pricing","at":"2026-10-19T02:43:21.072Z","quote":"케이글램핑애월은 연중무휴로 운영되는 글램핑장입니다"}
 {"cid":"100327","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100327","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100327","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -10019,7 +10018,7 @@
 {"cid":"100940","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100940","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100940","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100940","attr":"YEAR_ROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://hackberryville.com/","at":"2026-10-18T12:37:17.787Z","quote":"사계절 운영되는 미온수풀장"}
+{"cid":"100940","attr":"YEAR_ROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://hackberryville.com/","at":"2026-10-19T02:34:27.403Z","quote":"사계절 운영되는 미온수풀장"}
 {"cid":"100941","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100941","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100941","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -14436,7 +14435,7 @@
 {"cid":"101846","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101846","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101846","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101846","attr":"YEAR_ROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--bj0b46pn1aqw69ae4kqppdkf200a63f.kr/02facilities.html","at":"2026-10-18T12:33:52.855Z","quote":"- 미온수풀은 사계절 운영 예정입니다."}
+{"cid":"101846","attr":"YEAR_ROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--bj0b46pn1aqw69ae4kqppdkf200a63f.kr/02facilities.html","at":"2026-10-19T02:26:19.592Z","quote":"- 미온수풀은 사계절 운영 예정입니다."}
 {"cid":"101847","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101848","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101848","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}

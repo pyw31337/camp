@@ -24,6 +24,7 @@ export const SOURCES = {
   blog_mention: "블로그 후기 언급(검색 API 요약·허용 본문)",
   cafe_mention: "카페 글 언급(검색 API 요약)",
   kin: "네이버 지식iN 언급(검색 API 요약)",
+  local_gov: "지자체 공개 데이터",
   localdata: "행정안전부 LOCALDATA 인허가(영업 중 업소)",
 };
 
