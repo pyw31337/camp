@@ -1168,3 +1168,10 @@ a.near { color: inherit; text-decoration: none; }
 .cs-y { background: var(--accent-tint); color: var(--accent); }
 .cs-ref { background: var(--soft); color: var(--ink-2); border: 1px dashed var(--ink-3); }
 .cs-unk { background: transparent; color: var(--ink-3); border: 1px dashed var(--line); }
+/* 플랫폼별 더 보기(docs/PLATFORM_HUB.md) */
+.plat-hub .plat-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.plat-btn { display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink); text-decoration: none; font-size: .85rem; font-weight: 700; }
+.plat-btn .ic { width: 16px; height: 16px; }
+.plat-btn:hover { background: var(--soft); }
+.plat-btn.has { border-color: var(--cobalt); color: var(--cobalt); }
+.plat-btn i { font-style: normal; font-size: .7rem; font-weight: 800; padding: 2px 6px; border-radius: 999px; background: var(--cobalt); color: #fff; }

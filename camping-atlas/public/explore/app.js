@@ -1226,6 +1226,7 @@ async function detailView(id) {
         ${layoutHtml(d)}
         ${snsHtml(d, c)}
         ${videosHtml(d)}
+        ${platformHubHtml(d, c)}
         ${nearbyHubHtml(c, d)}
         ${reviewLinksHtml(d, c)}
         ${infoHtml(c)}
@@ -1473,6 +1474,21 @@ function layoutHtml(d) {
     ${thumbs.length ? thumbLinks(thumbs, "배치도") : ""}
     ${references.length ? `<div class="layout-links">${references.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener"><span>${ic("layers", "line")}배치도 ${i + 1}</span><i>원문 열기 · ${esc(sourceName(x.src, "외부 안내"))}</i>${ic("external", "line")}</a>`).join("")}</div>` : ""}
   </section>`;
+}
+// 플랫폼별 더 보기(docs/PLATFORM_HUB.md, 2026-10-19): 수집한 영상은 위 영상 칸에서 재생하고,
+// 직접 수집하지 않는 플랫폼(인스타·페이스북·틱톡 등)은 캠핑장 이름 검색 결과로 새 탭에서 연다.
+function platformHubHtml(d, c) {
+  const name = nameOf(c).name;
+  const q = encodeURIComponent(`${name} 캠핑`);
+  const platforms = [
+    { label: "YouTube", icon: "video", url: `https://www.youtube.com/results?search_query=${q}`, has: (d?.videos ?? []).length > 0 },
+    { label: "Instagram", icon: "camera", url: `https://www.instagram.com/explore/search/keyword/?q=${q}` },
+    { label: "Facebook", icon: "external", url: `https://www.facebook.com/search/posts/?q=${q}` },
+    { label: "TikTok", icon: "video", url: `https://www.tiktok.com/search?q=${q}` },
+    { label: "네이버", icon: "search", url: `https://search.naver.com/search.naver?query=${q}` },
+    { label: "다음", icon: "search", url: `https://search.daum.net/search?q=${q}` },
+  ];
+  return `<section class="d-sec plat-hub"><div class="sec-head">${iconTitle("external", "더 보기")}<span class="sec-note">플랫폼별 검색</span></div><div class="plat-btns">${platforms.map((p) => `<a class="plat-btn${p.has ? " has" : ""}" href="${esc(p.url)}" target="_blank" rel="noopener" title="${esc(p.label)}에서 ${esc(name)} 검색">${ic(p.icon)}<span>${esc(p.label)}</span>${p.has ? "<i>영상 있음</i>" : ""}</a>`).join("")}</div></section>`;
 }
 function videosHtml(d) {
   const v = (d?.videos ?? []).filter((x) => x.yt).slice(0, 8);

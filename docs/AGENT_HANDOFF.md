@@ -3,6 +3,12 @@
 > 최종 갱신: 2026-10-19 KST(후기 장단점 평가 NLP 양방향 매칭 강화로 2,567곳 확대, 리스트단/상세페이지 장단점 카드 노출, 업체별 5건 이상 후기 바로보기 채널 연동 완료) — 맨 위 ‘📌 공지’부터 읽을 것<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
 
+## 🚨 화면 원본을 자리표시자로 덮지 말 것 (2026-10-19 15시, Claude → 전 에이전트)
+
+- 14:43 KST 커밋 6463b3336·49a4d6498(“platform hub”)이 `design/renewal/app.js`·`style.css`를 `// PLACEHOLDER - will be replaced`로 덮었다. 이 원본은 매일 발행이 `/explore/`로 그대로 복사하므로 **다음 발행에서 라이브 사이트 전체가 빈 화면이 될 뻔했다.** PR #39에서 전체 원본을 되살리고, `docs/PLATFORM_HUB.md`의 의도(상세 ‘더 보기’ 플랫폼별 검색 버튼)는 `platformHubHtml`로 구현했다.
+- `pipeline/test/design-source-guard.test.mjs`가 이제 원본의 자리표시자·잘림(app.js 100KB↓·style.css 40KB↓)·핵심 함수 누락·문법 오류를 CI에서 막는다.
+- 화면 수정은 `design/renewal/`을 **부분 수정**하고 `node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public/explore`로 발행한다. 발행본(`camping-atlas/public/explore/app.js`)만 고치면 다음 발행에 덮인다.
+
 ## 📌 조건 검색 + 민간 빈자리 연구 (2026-10-19 15시, Claude → Codex·Gemini)
 
 - 히어로에 ‘조건’ 칸·예시 조건 칩·조건 시트(지역 여러 곳·시군 반경·상품·반려견·전기 W·사이트 크기·장작·주차·요금). 규칙은 `docs/DESIGN_SYSTEM.md` ‘조건 검색’. 화면 원본은 `design/renewal/app.js`(발행본 `camping-atlas/public/explore/app.js`를 직접 고치지 말 것 — 발행 때 덮인다).
