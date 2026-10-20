@@ -1832,7 +1832,6 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 
 /* ── 이용 규칙 · 공지(2026-10-19) ── */
 .hr-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-.hr-tag { display: inline-flex; align-items: center; gap: 2px; }
 .hr-tags .bdg { box-shadow: none; height: 32px; font-size: .86rem; border: 1px solid var(--line); }
 .hr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 10px; min-width: 0; }
 .hr-col { min-width: 0; padding: 14px; border-radius: var(--r-s); background: var(--soft); }
@@ -1844,9 +1843,6 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 .hr-list li { display: flex; align-items: flex-start; gap: 8px; font-size: .86rem; line-height: 1.5; color: var(--ink-2); }
 .hr-list li::before { content: ""; flex: none; width: 5px; height: 5px; margin-top: .6em; border-radius: 50%; background: var(--ink-3); }
 .hr-list li span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
-.hr-src { flex: none; display: inline-flex; align-items: center; gap: 2px; font-size: .74rem; font-weight: 800; color: var(--ink-3); text-decoration: none; white-space: nowrap; }
-.hr-src .ic { width: 12px; height: 12px; }
-.hr-src:hover { color: var(--accent); }
 .hr-more summary { margin-top: 6px; cursor: pointer; font-size: .8rem; font-weight: 800; color: var(--ink-3); }
 .hr-more .hr-list { margin-top: 6px; }
 .hr-notices { margin-top: 12px; }
@@ -1893,3 +1889,13 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 /* 테마 아이콘(소유자 지정 SVG): 글자 왼쪽, 같은 크기·글자색 */
 .th-ic { width: 1.1em; height: 1.1em; flex: none; vertical-align: -0.18em; margin-right: .3em; color: currentColor; }
 .theme-card b .th-ic { margin-right: .25em; }
+
+/* 이용 규칙: 배지 자체가 근거 팝업 버튼, 글줄 전체가 원문 링크(2026-10-20) */
+.hr-badge { border: 1px solid transparent; font: inherit; font-size: .86rem; font-weight: 800; cursor: pointer; padding-right: 8px; }
+.hr-badge:hover { filter: brightness(.92); }
+.hr-badge:focus-visible { outline: 2px solid var(--no); outline-offset: 2px; }
+.hr-badge .bdg-i { display: inline-grid; place-items: center; margin-left: 2px; }
+.hr-badge .bdg-i .ic { width: 15px; height: 15px; padding: 0; background: none; color: currentColor; opacity: .85; }
+.hr-list li a.hr-line { flex: 1; min-width: 0; color: inherit; text-decoration: none; overflow-wrap: anywhere; border-radius: 4px; }
+.hr-list li a.hr-line:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.hr-list li a.hr-line:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }

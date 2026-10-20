@@ -2101,12 +2101,20 @@ function houseRulesHtml(c, d) {
   const tags = (h.tags ?? []).filter((t) => NO_TAGS[t.k]);
   const rules = h.rules ?? [], ops = h.ops ?? [], notices = h.notices ?? [];
   if (!tags.length && !rules.length && !ops.length && !notices.length) return "";
-  const srcLink = (u) => (u && /^https?:/.test(u) ? `<a class="hr-src" href="${esc(u)}" target="_blank" rel="noopener" aria-label="원문 보기">원문${ic("external")}</a>` : "");
+  // 줄 전체가 원문 링크(소유자 2026-10-20: 오른쪽 ‘원문’ 버튼 대신 글줄을 누르면 원문으로)
   const list = (rows, cls) => {
-    const li = (x) => `<li><span>${esc(compactOperatorText(x.text))}</span>${srcLink(x.url)}</li>`;
+    const li = (x) => {
+      const t = esc(compactOperatorText(x.text));
+      return /^https?:/.test(x.url ?? "") ? `<li><a class="hr-line" href="${esc(x.url)}" target="_blank" rel="noopener" title="원문 보기">${t}</a></li>` : `<li><span>${t}</span></li>`;
+    };
     return `<ul class="hr-list ${cls}">${rows.slice(0, 4).map(li).join("")}</ul>${rows.length > 4 ? `<details class="hr-more"><summary>${rows.length - 4}개 더 보기</summary><ul class="hr-list ${cls}">${rows.slice(4).map(li).join("")}</ul></details>` : ""}`;
   };
-  const tagRow = tags.length ? `<div class="hr-tags">${tags.map((t) => `<span class="hr-tag">${noBadge(t.k)}${srcTip({ g: "c", src: { label: t.src ?? "업장 공개", url: t.url, at: t.at, quote: t.quote } }, NO_TAGS[t.k][0])}</span>`).join("")}</div>` : "";
+  // 불가 배지 = 근거 팝업 버튼: (아이콘 · 이름 · i) 한 덩어리, 배지를 누르면 근거 문장·원문 보기 팝업(소유자 2026-10-20)
+  const tagBtn = (t) => {
+    const k = srcTip({ g: "c", src: { label: t.src ?? "업장 공개", url: t.url, at: t.at, quote: t.quote } }, NO_TAGS[t.k][0]).match(/data-tip="([^"]+)"/)?.[1];
+    return `<button type="button" class="bdg bdg-no hr-badge"${k ? ` data-tip="${k}"` : ""} aria-label="${esc(NO_TAGS[t.k][0])} 근거·원문 보기">${ic(NO_TAGS[t.k][1])}${esc(NO_TAGS[t.k][0])}<span class="bdg-i">${ic("info")}</span></button>`;
+  };
+  const tagRow = tags.length ? `<div class="hr-tags">${tags.map(tagBtn).join("")}</div>` : "";
   const groups = RULE_CATS.map(([k, l, icon]) => [l, icon, rules.filter((r) => r.cat === k)]).filter(([, , rows]) => rows.length);
   const cols = [
     ...groups.map(([l, icon, rows]) => `<div class="hr-col"><h3>${ic(icon)}${l}<i>${rows.length}</i></h3>${list(rows, "")}</div>`),
@@ -2114,7 +2122,7 @@ function houseRulesHtml(c, d) {
   ].filter(Boolean);
   const noticeList = notices.length ? `<div class="hr-notices"><h3>${ic("report")}공지사항</h3><ul>${notices.map((n) => `<li>${/^https?:/.test(n.url ?? "") ? `<a href="${esc(n.url)}" target="_blank" rel="noopener">` : "<span>"}${n.date ? `<time>${esc(n.date.replaceAll("-", "."))}</time>` : ""}<b>${esc(n.title)}</b>${n.url ? ic("external") : ""}${/^https?:/.test(n.url ?? "") ? "</a>" : "</span>"}</li>`).join("")}</ul></div>` : "";
   const at = [...rules, ...ops].map((x) => x.at).filter(Boolean).sort().at(-1);
-  return `<section class="d-sec hr-sec" id="sec-rules"><div class="sec-head">${iconTitle("alert", "이용 규칙 · 공지")}<span class="sec-note">업장이 공개한 원문${at ? ` · ${ymd(at)} 확인` : ""} ${tip("<b>이용 규칙 · 공지</b><span>운영자 홈페이지·예약 페이지와 고캠핑 등록값에서 업장이 직접 공개한 금지사항·이용 제한·이용 수칙만 모았어요. 후기 글은 쓰지 않아요. 규칙은 바뀔 수 있으니 예약 전 원문을 확인하세요. 각 줄의 ‘원문’과 공지 제목을 누르면 원래 페이지가 열려요.</span>", "이용 규칙 기준")}</span></div>${tagRow}${cols.length ? `<div class="hr-grid">${cols.join("")}</div>` : ""}${noticeList}</section>`;
+  return `<section class="d-sec hr-sec" id="sec-rules"><div class="sec-head">${iconTitle("alert", "이용 규칙 · 공지")}<span class="sec-note">업장이 공개한 원문${at ? ` · ${ymd(at)} 확인` : ""} ${tip("<b>이용 규칙 · 공지</b><span>운영자 홈페이지·예약 페이지와 고캠핑 등록값에서 업장이 직접 공개한 금지사항·이용 제한·이용 수칙만 모았어요. 후기 글은 쓰지 않아요. 규칙은 바뀔 수 있으니 예약 전 원문을 확인하세요. 각 줄과 공지 제목을 누르면 원래 페이지가 열리고, 빨간 배지를 누르면 근거 문장과 원문 링크가 보여요.</span>", "이용 규칙 기준")}</span></div>${tagRow}${cols.length ? `<div class="hr-grid">${cols.join("")}</div>` : ""}${noticeList}</section>`;
 }
 // 운영자 원문은 말투·질문·반복이 섞여 있으므로, 예약에 필요한 항목으로 묶어 읽기 좋게 정리한다.
 // 값 자체는 바꾸지 않고 같은 항목의 짧은 원문만 합치며, 전체 원문은 작은 (i)에서 다시 열 수 있다.
