@@ -691,19 +691,22 @@ $("#date-dialog")?.addEventListener("close", () => {
 // ── 화면: 찾기(메인) ─────────────────────────────────────────
 function countOf(test) { return S.camps.reduce((n, c) => n + (test(c) ? 1 : 0), 0); }
 // ── 실시간 인기(소유자 2026-10-19): 최근 7일 블로그·카페·뉴스·동영상 글의 캠핑장 언급 순위. /context/trending.json(Trending mentions)
+// 다음(Daum) 공식 아이콘(위키미디어 공용 Daum_icon_(2025–2026).svg)을 로컬 파일로 쓴다(소유자 2026-10-20).
+const DAUM_LOGO = new URL("images/daum.svg", import.meta.url).href;
+const daumImg = (px) => `<img class="daum-logo" src="${DAUM_LOGO}" width="${px}" height="${px}" alt="" aria-hidden="true">`;
 const TR_GLYPH = {
   naver: ["네이버", '<path d="M15.6 12.8 8.1 2H2v20h6.4V11.2L15.9 22H22V2h-6.4z" transform="translate(3 3) scale(.75)"/>'],
-  daum: ["Daum", '<text x="12" y="17.5" text-anchor="middle" font-size="16" font-weight="900" font-family="Arial, Helvetica, sans-serif">D</text>'],
+  daum: ["Daum", ""],
   youtube: ["YouTube", '<path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/>'],
   tiktok: ["TikTok", '<path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9.1a7.4 7.4 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.2-1.6"/>'],
   instagram: ["Instagram", '<path d="M16 3a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5zm-4 5a4 4 0 1 1 0 8 4 4 0 0 1 0-8"/>'],
   facebook: ["Facebook", '<path d="M14 8h3V4h-3a5 5 0 0 0-5 5v2H7v4h2v7h4v-7h3l1-4h-4V9a1 1 0 0 1 1-1"/>'],
 };
-const trIcon = (k, n) => { const [label, path] = TR_GLYPH[k] ?? [k, ""]; return `<span class="tr-src" title="${esc(label)} ${n}건" aria-label="${esc(label)} ${n}건"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true">${path}</svg><i>${fmt(n)}</i></span>`; };
+const trIcon = (k, n) => { const [label, path] = TR_GLYPH[k] ?? [k, ""]; return `<span class="tr-src" title="${esc(label)} ${n}건" aria-label="${esc(label)} ${n}건">${k === "daum" ? daumImg(12) : `<svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true">${path}</svg>`}<i>${fmt(n)}</i></span>`; };
 function trendingShell() {
   return `<section class="trending" data-trending aria-labelledby="tr-t" aria-busy="true">
     <div class="sec-head">
-      <h2 id="tr-t"><b>실시간 인기</b></h2>
+      <h2 id="tr-t">실시간 <em>인기</em></h2>
       <div class="sec-side">
         <a class="more-link" href="#/theme/POPULAR">더보기 ${ic("arr-right")}</a>
       </div>
@@ -2223,14 +2226,13 @@ function platformHubHtml(d, c) {
   const q = encodeURIComponent(`${name} 캠핑`);
   // 아이콘은 모두 같은 크기·모양(둥근 네모 34px, 흰 글리프 18px)으로 맞춘다(소유자 2026-10-19). 바깥 그림 파일은 쓰지 않는다.
   const svg = (path, bg) => `<span class="plat-ic" style="--pb:${bg}"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${path}</svg></span>`;
-  const letter = (t) => `<text x="12" y="17.5" text-anchor="middle" font-size="16" font-weight="900" font-family="Arial, Helvetica, sans-serif">${t}</text>`;
   const platforms = [
     { label: "YouTube", icon: svg('<path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/>', "#ff0033"), url: `https://www.youtube.com/results?search_query=${q}`, has: (d?.videos ?? []).length > 0 },
     { label: "Instagram", icon: svg('<path d="M16 3a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5zm0 2H8a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3m-4 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8m0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4m4.6-3.4a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>', "linear-gradient(45deg,#f9a825,#e1306c 55%,#833ab4)"), url: `https://www.instagram.com/explore/search/keyword/?q=${q}` },
     { label: "Facebook", icon: svg('<path d="M14 8h3V4h-3a5 5 0 0 0-5 5v2H7v4h2v7h4v-7h3l1-4h-4V9a1 1 0 0 1 1-1"/>', "#1877f2"), url: `https://www.facebook.com/search/posts/?q=${q}` },
     { label: "TikTok", icon: svg('<path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9.1a7.4 7.4 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.2-1.6"/>', "#111"), url: `https://www.tiktok.com/search?q=${q}` },
     { label: "네이버", icon: svg('<path d="M15.6 12.8 8.1 2H2v20h6.4V11.2L15.9 22H22V2h-6.4z" transform="translate(3 3) scale(.75)"/>', "#03c75a"), url: `https://search.naver.com/search.naver?query=${q}` },
-    { label: "다음", icon: svg(letter("D"), "#0a6cff"), url: `https://search.daum.net/search?q=${q}` },
+    { label: "다음", icon: `<span class="plat-ic plat-ic-img">${daumImg(18)}</span>`, url: `https://search.daum.net/search?q=${q}` },
   ];
   return `<section class="d-sec plat-hub"><div class="sec-head">${iconTitle("external", "더 보기")}<span class="sec-note">플랫폼별 검색</span></div><div class="plat-btns">${platforms.map((p) => `<a class="plat-btn${p.has ? " has" : ""}" href="${esc(p.url)}" target="_blank" rel="noopener" title="${esc(p.label)}에서 ${esc(name)} 검색">${p.icon}<span>${esc(p.label)}</span>${p.has ? "<i>영상 있음</i>" : ""}</a>`).join("")}</div></section>`;
 }
