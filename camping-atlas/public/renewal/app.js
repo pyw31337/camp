@@ -1956,10 +1956,10 @@ function nearbyHubHtml(c, d) {
 function reviewHtml(d, c) {
   const rv = d?.rv ?? c?.rv;
   const total = rv?.n ?? 0;
-  if (!rv || (!rv.p?.length && !rv.c?.length)) return "";
+  if (!rv || (!rv.p?.length && !rv.c?.length && !total)) return "";
   const fact = { g: "m", src: { label: "블로그·카페 방문자 후기 빅데이터 분석", url: c?.gc_url || "https://www.gocamping.or.kr/" } };
-  const block = (label, rows, cls, icon) => rows?.length ? `<div class="review-block ${cls}"><span>${ic(icon)}${label}</span><div>${rows.map(([topic, count]) => `<b>${esc(topic)} <i>${count}</i></b>`).join("")}</div></div>` : "";
-  return `<section class="d-sec review-summary"><div class="sec-head">${iconTitle("thumb-up", "캠퍼 평가 · 장점 & 아쉬운 점")}<span class="sec-note">후기 ${fmt(total)}건 분석 ${srcTip(fact, "후기 장단점 분석")}</span></div><div class="review-summary-grid">${block("캠퍼들이 꼽은 장점", rv.p, "pro", "thumb-up")}${block("방문 전 미리 볼 점", rv.c, "con", "alert")}</div></section>`;
+  const block = (label, rows, cls, icon) => `<div class="review-block ${cls}"><span>${ic(icon)}${label}</span><div>${rows?.length ? rows.map(([topic, count]) => `<b>${esc(topic)} <i>${count}</i></b>`).join("") : `<span class="review-empty">없음</span>`}</div></div>`;
+  return `<section class="d-sec review-summary"><div class="sec-head">${iconTitle("thumb-up", "평가")}<span class="sec-note">후기 ${fmt(total)}건 분석 ${srcTip(fact, "후기 장단점 분석")}</span></div><div class="review-summary-grid">${block("장점", rv.p, "pro", "thumb-up")}${block("단점", rv.c, "con", "thumb-down")}</div></section>`;
 }
 function bookingRank(channel) {
   const hay = `${channel?.platform_id ?? ""} ${channel?.platform_name ?? ""} ${channel?.url ?? ""}`.toLowerCase();
