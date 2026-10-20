@@ -3575,8 +3575,10 @@ function kakaoTilesOk(kakao, map, el, ms = 6000) {
   return new Promise((ok, no) => {
     let done = false;
     const fin = (good, why) => { if (done) return; done = true; clearTimeout(t); good ? ok() : (kakaoDead = true, console.warn("[map] 카카오 타일 실패 → OSM:", why), no(new Error(why))); };
-    const t = setTimeout(() => fin([...el.querySelectorAll("img")].some((i) => i.complete && i.naturalWidth > 1 && /daumcdn|kakao/.test(i.src)), "tiles timeout"), ms);
-    kakao.maps.event.addListener(map, "tilesloaded", () => fin(true));
+    // tilesloaded는 타일이 실패해도(빈 칸) 오므로, 실제로 그림이 들어온 타일 이미지가 하나라도 있는지 본다.
+    const drawn = () => { const im = [...el.querySelectorAll("img")].filter((i) => /kakaocdn|daumcdn/.test(i.src) && /tile|map_/.test(i.src)); return !im.length ? null : im.some((i) => i.complete && i.naturalWidth > 1); };
+    const t = setTimeout(() => fin(drawn() === true, "tiles timeout"), ms);
+    kakao.maps.event.addListener(map, "tilesloaded", () => setTimeout(() => { const d = drawn(); if (d !== null) fin(d, "tiles blocked"); }, 1500));
   });
 }
 // 마커 html(위치 기준점이 왼쪽 위)을 카카오 CustomOverlay로. center=true면 가운데 기준(묶음 원).
