@@ -664,6 +664,7 @@ function initDraggableRails(root = document) {
     rail.dataset.dragInit = "1";
     let isDown = false;
     let startX = 0;
+    let startY = 0;
     let scrollLeft = 0;
     let hasMoved = false;
     let bounceX = 0;
