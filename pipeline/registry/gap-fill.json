@@ -447,5 +447,14 @@
       "url": "http://glamin.kr/",
       "error": 403
     }
+  },
+  "ocr": {
+    "checked_at": "2026-10-20T15:25:00+09:00",
+    "lang": "kor+eng",
+    "images_tried": 15,
+    "layout_maps": 2,
+    "size_found": 0,
+    "parking_found": 0,
+    "note": "배치도 이미지는 사이트 번호·구역명 위주. 8x10m 같은 규격 문구가 이미지에 없어 OCR로 크기를 못 읽음."
   }
 }
