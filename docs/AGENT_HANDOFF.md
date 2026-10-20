@@ -11,6 +11,7 @@
 - **가격·행사:** 고캠핑 요금표는 같은 금액이어도 사이트/시즌/요일 행을 합치거나 예약 상품 요금과 서로 지우지 않는다. 축제 자동 범위는 `5km·7일 → 10km·10일 → 20km·30일 → 30km·45일`이며, 진행 중 우선이 아니라 **결과가 하나라도 있는 첫 범위**를 쓴다. `events.js`의 `mount()`에서 누락되어 있던 `all` 계산도 보정했다.
 - **SNS:** YouTube·네이버·다음 수집 항목의 8개 상한과 `data-cgrid` 더보기를 제거해 수집된 항목을 모두 레일에 넣는다. 플랫폼 탭/외부 검색 링크는 모든 폭에서 한 줄 가로 스와이프다.
 - **검증·발행본:** `node --check design/renewal/app.js`·`events.js`, `node --test pipeline/test/detail-events-card.test.mjs`(3), `npm --prefix pipeline test`(353 통과·2 skip), `npm --prefix pipeline run check:billing`, `git diff --check`, `npm --prefix camping-atlas run build:pages`, `publish-explorer-pages --shell-only`을 통과했다. CUA 정적본 `4202`에서 320px 홈과 상세(요금 행·배치도 레일·SNS 한 줄 탭·행사 자동 확장·후기·푸터·하단 예약 바)를 캡처 검수했다. `rail-swipe-test.mjs`는 이 작업 환경에 `playwright` 패키지가 없어 실행하지 못했다(`ERR_MODULE_NOT_FOUND`); 의존성 복구 뒤 재실행할 것.
+- **리뉴얼 공개본 동기화:** `/renewal/`은 더 이상 리다이렉트 자리표시자가 아니며 `design/renewal/`의 정적 시안을 그대로 발행한다. 원본을 고친 뒤에는 반드시 `node scripts/publish-renewal-mockup.mjs`를 실행해 `camping-atlas/public/renewal/` 전체를 동기화한다. CI의 `rail-swipe`는 이 원본/발행본 불일치를 오류로 처리한다.
 
 ## 📌 320px 전수 점검 · 카테고리 단일 레일 (2026-10-20, Codex)
 
