@@ -2182,9 +2182,12 @@ function amenityIcon(x) {
   if (/개수대/i.test(s)) return ic("fountain");
   if (/전기/i.test(s)) return ic("bolt");
   if (/온수/i.test(s)) return ic("drop");
-  if (/마트|매점/i.test(s)) return ic("store");
-  if (/물놀이|수영/i.test(s)) return ic("fountain");
-  return "";
+  if (/마트|매점|편의점|카페/i.test(s)) return ic("store");
+  if (/물놀이|수영|풀장/i.test(s)) return ic("swim");
+  if (/놀이터|놀이|키즈/i.test(s)) return ic("users");
+  if (/산책로|둘레길/i.test(s)) return ic("route");
+  if (/분리수거|재활용/i.test(s)) return ic("recycle");
+  return ic("check");
 }
 function amenityHtml(c, d) {
   const a = (c.amenities ?? []).map((x) => x.replace(".", "·"));
@@ -2192,14 +2195,24 @@ function amenityHtml(c, d) {
   const rent = c.rental ?? [];
   const pt = c.nearby_toilets?.within_2km;
   if (!a.length && !cnt.length && !rent.length) return "";
-  // 상단 요약정보(스펙 섹션)와 중복 판별: 편의시설 내용이 이미 상단에서 다뤄졌으면 섹션 자체 제거
-  const handledRe = /전기|와이파이|인터넷|wifi|장작|숯|온수|트렘|트램|방방|물놀이|수영|풀장|놀이터|놀이|산책로|둘레길|운동|족구|풋살|배드민턴|마트|매점|편의점|분리수거|재활용|화로|반려동물|애완|주차|화장실|샤워|개수대|에어바운스|키즈/i;
-  const uniqueAmenities = a.filter((item) => !handledRe.test(item));
+
+  const seen = new Set(cnt.map(([l]) => l.replace(/실|장$/, "")));
+  const amenityItems = a.filter((item) => {
+    const base = item.replace(/실|장$/, "");
+    return !seen.has(base);
+  });
+
   const hasUniqueRental = rent.length > 0 && !usage(c, d).some(([l, x]) => l === "대여" && x);
-  if (!uniqueAmenities.length && !hasUniqueRental) return "";
+
+  const cntCards = cnt.map(([l, n, icon]) => `<div><b>${ic(icon)} ${fmt(n)}</b><span>${l}</span></div>`);
+  const ptCard = pt ? `<div><b>${ic("poo")} ${fmt(pt)}</b><span>2km 안 공중화장실 ${tip("<b>공중화장실</b><span>행정안전부 공중화장실 표준데이터 기준, 캠핑장 2km 안 개수입니다.</span>")}</span></div>` : "";
+  const amCards = amenityItems.map((x) => `<div><b>${amenityIcon(x)}</b><span>${esc(x)}</span></div>`);
+
+  const allCards = [...cntCards, ptCard, ...amCards].filter(Boolean);
+  if (!allCards.length && !hasUniqueRental) return "";
+
   return `<section class="d-sec"><div class="sec-head">${iconTitle("drop", "편의시설")}<span class="sec-note">고캠핑 등록 ${srcTip({ g: "c", src: { label: "고캠핑 등록 편의시설", url: c.gc_url } }, "편의시설")}</span></div>
-    ${cnt.length ? `<div class="amen-n">${cnt.map(([l, n, icon]) => `<div><b>${ic(icon)} ${fmt(n)}</b><span>${l}</span></div>`).join("")}${pt ? `<div><b>${ic("poo")} ${fmt(pt)}</b><span>2km 안 공중화장실 ${tip("<b>공중화장실</b><span>행정안전부 공중화장실 표준데이터 기준, 캠핑장 2km 안 개수입니다.</span>")}</span></div>` : ""}</div>` : ""}
-    ${uniqueAmenities.length ? `<div class="amen">${uniqueAmenities.map((x) => `<span>${amenityIcon(x)}${esc(x)}</span>`).join("")}</div>` : ""}
+    ${allCards.length ? `<div class="amen-n">${allCards.join("")}</div>` : ""}
     ${hasUniqueRental ? `<p class="amen-rent"><b>${ic("cart")}대여</b>${rent.map((x) => `<span>${esc(x)}</span>`).join("")}</p>` : ""}
   </section>`;
 }
