@@ -9,6 +9,9 @@ import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const dataDir = process.env.EXPLORE_DIR || join(root, "camping-atlas/public/explore/data");
 const seed = JSON.parse(readFileSync(join(root, "pipeline/registry/dayuse-seed.json"), "utf8"));
+// P1: OSM 공원·공공 물놀이(registry/dayuse-osm.json, build-dayuse-osm.mjs 산출) — 수기 시드가 우선.
+const osmPath = join(root, "pipeline/registry/dayuse-osm.json");
+if (existsSync(osmPath)) { const ids = new Set(seed.places.map((p) => p.id)); seed.places.push(...JSON.parse(readFileSync(osmPath, "utf8")).places.filter((p) => !ids.has(p.id))); }
 const catPath = join(dataDir, "campgrounds.json");
 const cat = JSON.parse(readFileSync(catPath, "utf8"));
 const unify = (t) => (t === "캠프닉" ? "캠크닉" : t);
