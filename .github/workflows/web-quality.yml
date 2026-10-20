@@ -1,18 +1,20 @@
 name: Web quality
 
 on:
+  # 데이터 봇 PR(GITHUB_TOKEN)은 pull_request 이벤트를 만들지 않으므로 land-on-main.sh가 이걸로 검사를 돌린다.
+  workflow_dispatch:
+  # 필수 검사(Lint and build, Rail swipe)라서 모든 PR에서 돈다. 경로 필터를 걸면 데이터만 바꾼 PR이 '대기 중'으로 막힌다.
   pull_request:
-    paths:
-      - "camping-atlas/**"
-      - ".github/workflows/web-quality.yml"
   push:
     branches: [main]
     paths:
       - "camping-atlas/**"
+      - "design/renewal/**"
       - ".github/workflows/web-quality.yml"
 
 permissions:
   contents: read
+  statuses: write
 
 jobs:
   lint-and-build:
@@ -31,3 +33,44 @@ jobs:
       - run: npm run install:ci
       - run: npm run lint
       - run: npm run build
+      # workflow_dispatch(데이터 봇 PR) 결과는 PR 검사 목록에 안 잡혀서, 같은 이름의 커밋 상태로도 남긴다(main 룰셋 필수 검사).
+      - name: Report commit status for bot PRs
+        if: always() && github.event_name == 'workflow_dispatch'
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          state=$([ "${{ job.status }}" = success ] && echo success || echo failure)
+          gh api -X POST "repos/${{ github.repository }}/statuses/${{ github.sha }}" -f state="$state" -f context="Lint and build" -f target_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >/dev/null
+
+  rail-swipe:
+    name: Rail swipe
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: app.js 복사본 동기화 확인
+        run: |
+          for f in camping-atlas/public/app.js camping-atlas/public/renewal/app.js camping-atlas/public/explore/app.js; do
+            cmp design/renewal/app.js "$f" || { echo "::error::$f 가 design/renewal/app.js 와 다릅니다. 복사본을 맞추세요."; exit 1; }
+          done
+      - name: Install Playwright
+        run: |
+          mkdir -p /tmp/pw && cd /tmp/pw && npm init -y >/dev/null && npm i playwright@1 >/dev/null
+          npx playwright install --with-deps chromium
+      - name: 홈 레일 드래그/스와이프 회귀 테스트
+        run: |
+          (cd camping-atlas/public && python3 -m http.server 8765 >/tmp/srv.log 2>&1 &)
+          sleep 2
+          PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/rail-swipe-test.mjs http://127.0.0.1:8765/
+      # workflow_dispatch(데이터 봇 PR) 결과는 PR 검사 목록에 안 잡혀서, 같은 이름의 커밋 상태로도 남긴다(main 룰셋 필수 검사).
+      - name: Report commit status for bot PRs
+        if: always() && github.event_name == 'workflow_dispatch'
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          state=$([ "${{ job.status }}" = success ] && echo success || echo failure)
+          gh api -X POST "repos/${{ github.repository }}/statuses/${{ github.sha }}" -f state="$state" -f context="Rail swipe" -f target_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >/dev/null

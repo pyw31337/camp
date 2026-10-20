@@ -1046,6 +1046,7 @@
 {"cid":"8206","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8209","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8210","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"8213","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8217","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100002","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100008","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2042,6 +2043,7 @@
 {"cid":"101425","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101426","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101427","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101431","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101433","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101434","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101436","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2356,6 +2358,7 @@
 {"cid":"102044","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102070","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102071","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102073","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102074","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102083","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102089","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}

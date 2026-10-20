@@ -39,6 +39,11 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+  actions: write
+
+env:
+  GH_TOKEN: ${{ github.token }}  # land-on-main.sh (gh)
 
 concurrency:
   # PR 검증의 장시간 보조 수집이 main의 실제 기준 카탈로그 발행을 막지 않게
@@ -449,6 +454,11 @@ jobs:
           node pipeline/scripts/build-house-rules.mjs
           # 고캠핑 상세 화면 수집본(data/gocamping-detail.ndjson, 요금표·시설정보·배치도·시설 사진)을 camps/{id}.json의 gcd로 붙인다.
           node pipeline/scripts/build-gocamping-detail.mjs
+          # 당일 나들이 장소(registry/dayuse-seed.json, 원문 URL·확인일)를 붙이고 캠크닉 이름을 통일한다.
+          # 전국도시공원정보표준데이터(15012890) 원본 갱신 — 당일 공원 병합은 build-dayuse-osm.mjs(OSM pbf 필요, 수동·주간)
+          DATA_GO_KR_SERVICE_KEY="${{ github.event_name != 'pull_request' && secrets.DATA_GO_KR_SERVICE_KEY || '' }}" node pipeline/scripts/collect-urban-parks.mjs || true
+          KAKAO_REST_API_KEY="${{ github.event_name != 'pull_request' && secrets.KAKAO_REST_API_KEY || '' }}" node pipeline/scripts/geocode-dayuse-osm.mjs || true
+          node pipeline/scripts/apply-dayuse-seed.mjs
           # 열어 보니 없는 예약·홈페이지 링크(registry/link-health.json)를 c.dl로 표시해 화면 버튼에서 뺀다.
           node pipeline/scripts/build-link-health.mjs
           # 공식 사진이 없는 곳의 카드 대표 사진(registry/card-fallback.json — 검색 썸네일·원문 링크)을 c.pt로 붙인다.
@@ -472,7 +482,7 @@ jobs:
           # 화면 원본(design/renewal)은 실행 시작 시점이 아니라 최신 main 것으로 발행본을 다시 쓴다(긴 실행 중 머지된 화면 변경을 되돌리지 않게).
           git checkout origin/main -- design/renewal scripts/publish-explorer-pages.mjs && node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public/explore
           node pipeline/scripts/coverage-guard.mjs "$RUNNER_TEMP/base-meta.json" camping-atlas/public/explore/data/meta.json
-          git add camping-atlas/public/data camping-atlas/public/explore data/facts pipeline/registry/naver-usage.json
+          git add camping-atlas/public/data camping-atlas/public/explore data/facts pipeline/registry/naver-usage.json pipeline/registry/dayuse-osm.json pipeline/registry/urban-parks.json
           if git diff --cached --quiet; then
             echo "공개 데이터 변경 없음."; exit 0
           fi
@@ -485,8 +495,7 @@ jobs:
           # pull --rebase가 "unstaged changes"로 멈춘다(2026-10-20 run 39334337258: media만 바뀌고 데이터 발행 실패).
           # 이 부산물은 Pages 배포가 design/renewal로 다시 만들므로 버리고 rebase한다.
           git stash push -q -m "sync-leftovers" || true
-          git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"
-          git push
+          bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" data-sync
         env:
           KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY || secrets.KAKAO_JS_KEY }}
           MEDIA_DIR: ${{ steps.media.outputs.dir }}

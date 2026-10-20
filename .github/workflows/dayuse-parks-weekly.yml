@@ -1,0 +1,43 @@
+name: dayuse-parks-weekly
+# 주 1회: OSM(Geofabrik, ODbL) + 전국도시공원정보표준데이터(15012890) 병합 → registry/dayuse-osm.json, 카카오 역지오코딩, 탐색 데이터 반영 후 main에 커밋.
+on:
+  schedule: [{ cron: "30 18 * * 0" }]
+  workflow_dispatch:
+permissions: { contents: write, pull-requests: write, actions: write }
+env:
+  GH_TOKEN: ${{ github.token }}
+concurrency: { group: dayuse-parks, cancel-in-progress: false }
+jobs:
+  parks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: sudo apt-get update -q && sudo apt-get install -yq osmium-tool
+      - name: OSM 추출
+        run: |
+          curl -sSfL -o "$RUNNER_TEMP/kr.pbf" https://download.geofabrik.de/asia/south-korea-latest.osm.pbf
+          osmium tags-filter "$RUNNER_TEMP/kr.pbf" nwr/leisure=park,water_park,picnic_site nwr/amenity=toilets,bbq nwr/playground=splash_pad nw/leisure=splash_pad -o "$RUNNER_TEMP/f.pbf" --overwrite
+          osmium export "$RUNNER_TEMP/f.pbf" -f geojsonseq -o "$RUNNER_TEMP/f.geojsonseq" --overwrite --geometry-types=point,polygon -a type,id
+      - name: 공식 공원 + 병합 + 역지오코딩 + 반영
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          GEOCODE_MAX_CALLS: "6000"
+        run: |
+          node pipeline/scripts/collect-urban-parks.mjs
+          [ -f .cache-rg.json ] || node -e 'const p=require("./pipeline/registry/dayuse-osm.json").places;require("fs").writeFileSync(".cache-rg.json",JSON.stringify(Object.fromEntries(p.filter(x=>x.rg==="kakao").map(x=>[x.id,[x.sido,x.sigungu]]))))'
+          node pipeline/scripts/build-dayuse-osm.mjs "$RUNNER_TEMP/f.geojsonseq"
+          node -e 'const f="./pipeline/registry/dayuse-osm.json",r=require(f),c=require("./.cache-rg.json");for(const x of r.places){const v=c[x.id];if(v&&!x.rg){[x.sido,x.sigungu]=v;x.rg="kakao"}}require("fs").writeFileSync(f,JSON.stringify(r))'
+          rm -f .cache-rg.json
+          node pipeline/scripts/geocode-dayuse-osm.mjs
+          node pipeline/scripts/apply-dayuse-seed.mjs
+      - name: 커밋
+        run: |
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pipeline/registry/dayuse-osm.json pipeline/registry/urban-parks.json camping-atlas/public/explore
+          git diff --cached --quiet && exit 0
+          git commit -qm "data(dayuse): 주간 공원 병합(OSM+공식)·역지오코딩"
+          bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" dayuse-parks

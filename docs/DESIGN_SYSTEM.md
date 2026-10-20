@@ -512,3 +512,14 @@ Pretendard Variable 한 가지. 제목 800, 본문 400~600, 숫자 `tabular-nums
 - 단 수: ~767px 기존 모바일 배치(제한 없음) · 768px 2단 · 1024px 3단 · 1280px 4단 · 1600px 5단.
 - 처음 개수: 짝수 단은 4·6 중 단 수의 배수(2단 4, 4단 4, 6단 6), 홀수 단은 5 기준으로 5 이상 단 수의 배수(3단 6, 5단 5) → 첫 화면 줄이 늘 꽉 참. 나머지는 '더보기'로 같은 개수씩, 다 보이면 버튼 숨김, 화면 크기가 바뀌면 다시 계산.
 - 업장 기본 정보(1박 요금·이용 정보·운영 안내·시설·업장 소개·주변시설·업체 정보)는 접기·더보기 없이 전부 보인다. 1박 요금 6줄 접기(`.pl-more`)와 업장 소개 4줄 접기는 제거했다.
+
+## 홈 가로 레일 드래그/스와이프 가드 (필수)
+
+홈의 가로 레일(실시간 인기, 곧 오픈, 긍정 후기, 테마로 고르기, 테마 줄)은 여러 에이전트가 반복해서 고치다 깨뜨린 영역이다.
+`initCarousels`, `initDraggableRails`, `.rail`, `.car-track`, `touch-action`, `pointer*` 핸들러, `scroll-snap`을 건드리면:
+
+1. 네 복사본(`design/renewal/app.js`, `camping-atlas/public/app.js`, `camping-atlas/public/renewal/app.js`, `camping-atlas/public/explore/app.js`)을 똑같이 맞춘다.
+2. `node camping-atlas/scripts/rail-swipe-test.mjs [URL]`을 로컬에서 통과시킨다(기본 URL은 `camping-atlas/public`을 띄운 `http://127.0.0.1:8765/`).
+3. CI `Web quality / Rail swipe`가 초록이어야 병합한다. 1366 마우스 드래그, 390 터치 스와이프(카드 본문·썸네일), 세로 스와이프 통과, 탭 시 카드 열림, pageerror 0을 검사한다.
+
+동작 원칙: 카드 본문이나 사진 한 장 위에서 가로로 끌면 레일이 넘어간다. 여러 장 사진 위에서 시작하면 썸네일만 넘어간다. 세로 스와이프는 절대 막지 않는다. 끌지 않은 클릭은 카드를 연다.

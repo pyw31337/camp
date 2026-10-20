@@ -98,10 +98,15 @@ await mkdir(out, { recursive: true });
 await writeFile(`${out}index.html`, exploreIndex);
 await writeFile(`${out}style.css`, renewalCss);
 await writeFile(`${out}app.js`, renewalApp);
-await mkdir(`${rootOut}data`, { recursive: true });
 await cp(`${root}design/renewal/data/photos.json`, `${rootOut}data/photos.json`);
+if (existsSync(`${root}design/renewal/data/vacancy.json`)) {
+  await cp(`${root}design/renewal/data/vacancy.json`, `${rootOut}data/vacancy.json`);
+}
 await mkdir(`${out}data`, { recursive: true });
 await cp(`${root}design/renewal/data/photos.json`, `${out}data/photos.json`);
+if (existsSync(`${root}design/renewal/data/vacancy.json`)) {
+  await cp(`${root}design/renewal/data/vacancy.json`, `${out}data/vacancy.json`);
+}
 
 // 중복 제거된 공식 카드 사진 색인이 있으면 대상 경로에 동기화
 const dedupedCards = `${root}pipeline/registry/cards-deduped.json`;

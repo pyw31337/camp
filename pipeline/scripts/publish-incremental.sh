@@ -46,9 +46,7 @@ git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 git add camping-atlas/public/explore data/facts
 if git diff --cached --quiet; then echo "증분 발행: 변경 없음."; exit 0; fi
 git commit -q -m "chore(data): publish ${LABEL} now (incremental)"
-# 다른 에이전트가 그 사이 main을 바꿨으면 그 위로 다시 올린다. 생성물 충돌은 방금 만든 결과를 쓴다.
-for i in 1 2 3 4; do
-  if git pull -q --rebase -X theirs origin main && git push -q origin HEAD:main; then echo "증분 발행 완료: ${LABEL}"; exit 0; fi
-  sleep $((i * 5))
-done
-echo "::error::증분 발행 푸시 실패(${LABEL})"; exit 1
+# main은 필수 검사 룰셋이 걸려 있어 직접 push하지 않고 PR로 착지시킨다(.github/scripts/land-on-main.sh).
+SLUG="$(printf '%s' "${LABEL}" | tr 'A-Z' 'a-z' | tr -cs 'a-z0-9' '-' | sed 's/^-*//;s/-*$//')"
+bash "${GITHUB_WORKSPACE:-$(git rev-parse --show-toplevel)}/.github/scripts/land-on-main.sh" "incr-${SLUG:-misc}" && { echo "증분 발행 완료: ${LABEL}"; exit 0; }
+echo "::error::증분 발행 착지 실패(${LABEL})"; exit 1

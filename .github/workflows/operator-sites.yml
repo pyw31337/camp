@@ -25,6 +25,11 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+  actions: write
+
+env:
+  GH_TOKEN: ${{ github.token }}  # land-on-main.sh (gh)
 
 concurrency:
   group: operator-sites-${{ github.ref }}
@@ -73,8 +78,7 @@ jobs:
           for f in registry/kakao-places.json registry/naver-places.json registry/naver-usage.json; do if [ -f "$f" ]; then git add "$f"; fi; done
           if git diff --cached --quiet; then echo "장소 맞춤 변경 없음."; exit 0; fi
           git commit -m "chore(data): refresh Kakao·Naver place matches"
-          git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"
-          git push
+          bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" operator-sites
       - name: Install Korean OCR (tesseract) for image-only guide pages
         # 요금표·이용안내가 이미지뿐인 운영자 페이지를 읽는다(운영자 자체 이미지, robots 준수). 실패해도 OCR만 빠진다.
         continue-on-error: true
@@ -93,8 +97,7 @@ jobs:
           for f in registry/kakao-places.json registry/naver-places.json registry/naver-usage.json; do if [ -f "$f" ]; then git add "$f"; fi; done
           if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
           git commit -m "chore(data): refresh operator homepage snippets"
-          git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"
-          git push
+          bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" operator-sites
       - name: Publish operator facts to the site now (incremental)
         # 새 문장을 기다리지 않고 바로 화면에 반영한다: 최신 main 데이터 위에서 파생 정보(스펙·프로필·요금·사이트 타입·사실 저장소)를
         # 다시 계산해 커밋한다. 커버리지가 줄면 커밋하지 않는다(scripts/publish-incremental.sh).

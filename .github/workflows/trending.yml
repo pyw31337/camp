@@ -16,6 +16,11 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+  actions: write
+
+env:
+  GH_TOKEN: ${{ github.token }}  # land-on-main.sh (gh)
 
 concurrency:
   group: trending-${{ github.ref }}
@@ -48,5 +53,4 @@ jobs:
           git add camping-atlas/public/context/trending.json pipeline/registry/trending-posts.json pipeline/registry/trending-usage.json
           if git diff --cached --quiet; then echo "변경 없음"; exit 0; fi
           git commit -q -m "chore(data): refresh trending mentions"
-          git pull --rebase -X theirs origin main
-          git push origin HEAD:main
+          bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" trending

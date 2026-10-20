@@ -1,0 +1,815 @@
+{
+  "generated_at": "2026-10-20T07:04:42.188Z",
+  "results": {
+    "467": {
+      "name": "금박산관광농원",
+      "status": "ok",
+      "url": "https://booking.naver.com/booking/3/bizes/379258",
+      "min": 20000,
+      "night": true,
+      "samples": [
+        25000,
+        20000
+      ]
+    },
+    "512": {
+      "name": "깊이울 달빛 캠핑장",
+      "status": "fail",
+      "url": "http://www.campingsearch.co.kr/campReserve/reserveTableStatus.asp?idx=795"
+    },
+    "604": {
+      "name": "노르딕 민박",
+      "status": "fail",
+      "url": "https://map.naver.com/p/entry/place/36886815?placePath=%2Froom%20http://xn--o80bo2e5xe56j8xx.kr/booking/write?bo_table=booking"
+    },
+    "616": {
+      "name": "녹수원글램핑",
+      "status": "ok",
+      "url": "http://www.xn--bj0bw9dz1gl4luwfumy.kr/",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "627": {
+      "name": "봉산극기체험센터캠핑장",
+      "status": "fail",
+      "url": "http://www.bongsan.kr/html/sub.php?menu=page&menu_id=16"
+    },
+    "699": {
+      "name": "달빛글램핑장",
+      "status": "ok",
+      "url": "http://rev.yapen.co.kr/external?ypIdx=33587",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "964": {
+      "name": "반려견호텔 랩도그빌",
+      "status": "fail",
+      "url": "http://www.lapdogvill.keunter.co.kr/"
+    },
+    "1025": {
+      "name": "휴식관광농원캠핑장",
+      "status": "ok",
+      "url": "http://www.mywayr.com/sub02_2.php",
+      "min": null,
+      "night": true,
+      "samples": []
+    },
+    "1095": {
+      "name": "몽산포 홀리데이파크",
+      "status": "fail",
+      "url": "http://mongsanporesort.cafe24.com/?page_id=951"
+    },
+    "1100": {
+      "name": "무릉계곡 힐링캠프장",
+      "status": "fail",
+      "url": "http://www.campingkorea.or.kr/"
+    },
+    "1152": {
+      "name": "물내치기",
+      "status": "ok",
+      "url": "http://newpension.logosweb.or.kr/reservation/reservation2.php?id=mulnaechigi",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "1225": {
+      "name": "반딧불자연캠핑장",
+      "status": "ok",
+      "url": "https://camplink.co.kr:444/?camp=ho2227",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "1234": {
+      "name": "밤별2 캠핑장",
+      "status": "fail",
+      "url": "http://www.bambyul.co.kr/default/app/app_online.php"
+    },
+    "1293": {
+      "name": "버디버디",
+      "status": "fail",
+      "url": "http://www.buddycamping.com/bbs/board.php?bo_table=notic&wr_id=6"
+    },
+    "1503": {
+      "name": "산여울캠핑장",
+      "status": "fail",
+      "url": "http://xn--w80bz29awpb/"
+    },
+    "1709": {
+      "name": "소나무와 계곡 캠핑장",
+      "status": "ok",
+      "url": "http://pinestream.co.kr/bbs/content.php?co_id=05reserv_01",
+      "min": null,
+      "night": true,
+      "samples": []
+    },
+    "1930": {
+      "name": "심천 하늘바람캠핑장",
+      "status": "ok",
+      "url": "http://skywindcamp.com/",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "2015": {
+      "name": "안단테 홍천캠핑장",
+      "status": "fail",
+      "url": "http://adtcamping.com/"
+    },
+    "2116": {
+      "name": "어은돌야영장",
+      "status": "fail",
+      "url": "http://www.eoeundol.net/theme/sample06/html/reservation.php"
+    },
+    "2146": {
+      "name": "에이원 글램핑 관광농원",
+      "status": "ok",
+      "url": "http://aoneglamping.pensionnara.co.kr/theme/basic/reservation.php",
+      "min": 20000,
+      "night": true,
+      "samples": [
+        20000
+      ]
+    },
+    "2216": {
+      "name": "김포캠핑파크 주식회사",
+      "status": "ok",
+      "url": "https://rsvt.co.kr/rsvt_web_jw/index.html?p_id=kimpo",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "2257": {
+      "name": "예다움 캠핑장",
+      "status": "ok",
+      "url": "http://www.yedaumcamping.co.kr/online/onlinebd02",
+      "min": null,
+      "night": true,
+      "samples": []
+    },
+    "2418": {
+      "name": "우니메이카홍천본점",
+      "status": "fail",
+      "url": "http://www.woony.co.kr/"
+    },
+    "2956": {
+      "name": "청화산카라반&캠핑",
+      "status": "ok",
+      "url": "https://m.site.naver.com/1mCwy",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "2975": {
+      "name": "추암오토캠핑장",
+      "status": "fail",
+      "url": "http://www.chuamautocamping.or.kr/"
+    },
+    "2997": {
+      "name": "충주 루루네 오토캠핑장",
+      "status": "ok",
+      "url": "https://naver.me/GP2qhm3t",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "3045": {
+      "name": "캠프 예그리나",
+      "status": "fail",
+      "url": "http://campyegreena.com/test-booking-system/"
+    },
+    "3056": {
+      "name": "캠프원오토캠핑",
+      "status": "ok",
+      "url": "http://camp-1.com/",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "3184": {
+      "name": "파인벨리펜션앤글램핑",
+      "status": "fail",
+      "url": "http://p-valley.kr/"
+    },
+    "3426": {
+      "name": "한탄강 소나무 캠핑",
+      "status": "fail",
+      "url": "http://hpcamping.com/page/03_01.php"
+    },
+    "3496": {
+      "name": "헤밍웨이 글램핑",
+      "status": "fail",
+      "url": "http://www.hwgarden.co.kr/"
+    },
+    "3627": {
+      "name": "동상 힐링 캠핑장",
+      "status": "fail",
+      "url": "http://dscamp.kr/"
+    },
+    "6841": {
+      "name": "참나무숲 오토캠핑장",
+      "status": "fail",
+      "url": "http://xn--910b64rpsfg7k.com/html/reservation/step2.php?room_type=%ED%8E%9C%EC%85%98&rt=1"
+    },
+    "7058": {
+      "name": "진틀펜션캠핑장",
+      "status": "ok",
+      "url": "http://www.baekuncamp.co.kr/",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "7078": {
+      "name": "파인 관광농원",
+      "status": "fail",
+      "url": "http://reserve.dothome.co.kr/schedule/?links_number=786"
+    },
+    "7091": {
+      "name": "해금강호텔 야영장",
+      "status": "fail",
+      "url": "http://haegeumgang.co.kr/sub05_03.php"
+    },
+    "7173": {
+      "name": "아름다운글램핑장",
+      "status": "fail",
+      "url": "http://www.bcamping.co.kr/"
+    },
+    "7218": {
+      "name": "파인포레스트 글램핑",
+      "status": "fail",
+      "url": "http://www.pine4rest.co.kr/"
+    },
+    "7227": {
+      "name": "플로렌스 글램핑 & 캠핑",
+      "status": "fail",
+      "url": "http://happy.pen-ple.com/reservation/reserve.php?ps_code=5d06f8a024db"
+    },
+    "7248": {
+      "name": "통영 편백숲길관광농원 캠핑장",
+      "status": "fail",
+      "url": "http://tycamping.com/"
+    },
+    "7442": {
+      "name": "회산백련지 오토캠핑장",
+      "status": "ok",
+      "url": "http://tour.muan.go.kr/lotus/camping",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "7494": {
+      "name": "BABO글램핑",
+      "status": "ok",
+      "url": "http://baboglamping.co.kr/",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "7588": {
+      "name": "월드니스 오토캠핑장",
+      "status": "ok",
+      "url": "http://www.wncamp.com/wering/bbs/board.php?bo_table=w3_1",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "7593": {
+      "name": "시공간",
+      "status": "ok",
+      "url": "http://camp-sigonggan.com/sub/reservation.php?page=2",
+      "min": null,
+      "night": true,
+      "samples": []
+    },
+    "7621": {
+      "name": "우리두리글램핑장",
+      "status": "fail",
+      "url": "http://xn--bj0bs3jo1c5scba301rfnx.com/"
+    },
+    "7670": {
+      "name": "호랑이 캠핑(가평점)",
+      "status": "ok",
+      "url": "http://tiger-camping2.com/reservation.php?id=2",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "7748": {
+      "name": "KEROAIN CAMP",
+      "status": "fail",
+      "url": "https://pawscamp.co.kr/reservation.php"
+    },
+    "7828": {
+      "name": "럭셔리 비토섬 제이 클램핑",
+      "status": "fail",
+      "url": "https://www.ddnayo.com/RsvSys/Calendar.aspx?id_hotel=11860"
+    },
+    "7850": {
+      "name": "반디품은마을",
+      "status": "fail",
+      "url": "https://www.bandyworld.co.kr/"
+    },
+    "7908": {
+      "name": "아라미르글램핑",
+      "status": "fail",
+      "url": "http://www.aramirresort.com/reserve.html?reserve=rv"
+    },
+    "7934": {
+      "name": "좋은 카라반",
+      "status": "ok",
+      "url": "http://www.xn--oi2bl1g0yl2ibg8o.com/",
+      "min": null,
+      "night": true,
+      "samples": []
+    },
+    "7935": {
+      "name": "성주선바위캠핑장",
+      "status": "ok",
+      "url": "https://www.sj.go.kr/tour/page.do?con_uid=8912&cmd=2&mnu_uid=3791",
+      "min": null,
+      "night": true,
+      "samples": []
+    },
+    "8047": {
+      "name": "해울림영농조합법인",
+      "status": "ok",
+      "url": "http://ghshinpyeong.com/",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "8103": {
+      "name": "경주시종합자원화단지 별빛카라반",
+      "status": "fail",
+      "url": "https://camp.xticket.kr/web/main?shopEncode=8918d7dcb333ee50b6d26bbef7501b526cd576f4a91f2f5bf82278f6096f486f"
+    },
+    "8138": {
+      "name": "휴먼캠핑장",
+      "status": "fail",
+      "url": "http://humanauto.co.kr/"
+    },
+    "8165": {
+      "name": "밀양 가보자 캠핑장",
+      "status": "ok",
+      "url": "http://rsvt.co.kr/rsvt_web_jw/index.html?p_id=gcamp&r_id=&year=&month=&useStartDate=&adt=",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "100071": {
+      "name": "(주)더그린포천 농업회사법인(민트글램핑)",
+      "status": "fail",
+      "url": "http://www.mintcamping.com/"
+    },
+    "100141": {
+      "name": "달빛정원글램핑&카라반",
+      "status": "ok",
+      "url": "http://moonglamping.co.kr/reserve",
+      "min": 25000,
+      "night": true,
+      "samples": [
+        25000
+      ]
+    },
+    "100149": {
+      "name": "아메리카 RV CAMP PARK",
+      "status": "fail",
+      "url": "http://www.rvcamppark.co.kr/"
+    },
+    "100270": {
+      "name": "가평 오블리비아테 수영장 펜션&카라반",
+      "status": "ok",
+      "url": "http://xn--oy2bp4ffes00a55az72b.com/reserve.html?link=guide",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "100288": {
+      "name": "글램조이(GLAMJOI)",
+      "status": "ok",
+      "url": "http://www.glamjoi.com/reserve.html",
+      "min": 20000,
+      "night": true,
+      "samples": [
+        20000
+      ]
+    },
+    "100291": {
+      "name": "썬오브글램핑",
+      "status": "ok",
+      "url": "http://naver.me/GTgSSSAR",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "100300": {
+      "name": "사계오토캠핑장",
+      "status": "fail",
+      "url": "https://map.naver.com/p/search/%EA%B5%AC%EB%A3%A1%ED%8F%AC%20%EC%82%AC%EA%B3%84%EC%98%A4%ED%86%A0%EC%BA%A0%ED%95%91/place/1047885654?c=15.00,0,0,0,dh&isCorrectAnswer=true"
+    },
+    "100303": {
+      "name": "영월 엄둔밸리 계곡캠핑장",
+      "status": "ok",
+      "url": "https://www.camfit.co.kr/camp/623818516fa4ab001e00c448",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "100334": {
+      "name": "포유카라반파크",
+      "status": "fail",
+      "url": "http://xn--2r5b17u.kr/include/reservation.php?biz_code=P202203013&tab=1"
+    },
+    "100377": {
+      "name": "왕산골 관광농원",
+      "status": "ok",
+      "url": "https://www.camfit.co.kr/camp/6364a33176d05a001ed29087",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "100386": {
+      "name": "힐링캠프 제이앤엘(J&L)",
+      "status": "ok",
+      "url": "http://healingcampjnl.com/reservation.html?reserve=gd",
+      "min": null,
+      "night": true,
+      "samples": []
+    },
+    "100403": {
+      "name": "가든글램핑 캠핑장",
+      "status": "fail",
+      "url": "https://xn--o39az1b34ko3cgsydmqmlh.com/"
+    },
+    "100414": {
+      "name": "명암539펜션오토캠핑장",
+      "status": "fail",
+      "url": "https://map.naver.com/p/entry/place/1183603199?entry=plt&c=7.65,0,0,0,dh&isCorrectAnswer=true"
+    },
+    "100416": {
+      "name": "더자리",
+      "status": "fail",
+      "url": "https://map.naver.com/p/entry/place/1121962691?c=15.00,0,0,0,dh"
+    },
+    "100470": {
+      "name": "아산스파포레",
+      "status": "fail",
+      "url": "https://map.naver.com/p/entry/place/1780108077?c=11.15,0,0,0,dh&isCorrectAnswer=true"
+    },
+    "100471": {
+      "name": "새솔캠핑장&펜션",
+      "status": "fail",
+      "url": "http://www.saesolcamping.co.kr/"
+    },
+    "100489": {
+      "name": "은고개 캠핑장",
+      "status": "fail",
+      "url": "http://egcamping.com/%EC%98%88%EC%95%BD%EC%9D%B4%EC%9A%A9%EC%95%88%EB%82%B4-2/"
+    },
+    "100503": {
+      "name": "세모글램핑장",
+      "status": "ok",
+      "url": "https://www.bookingplay.co.kr/partner/item/2818/calendar_main/",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "100520": {
+      "name": "소백산자연누리야영장",
+      "status": "fail",
+      "url": "https://map.naver.com/p/search/%EC%86%8C%EB%B0%B1%EC%82%B0%EC%9E%90%EC%97%B0%EB%88%84%EB%A6%AC%EC%B9%B4%EB%9D%BC%EB%B0%98%EC%95%BC%EC%98%81%EC%9E%A5/place/1626873965?c=15.00,0,0,0,dh&isCorrectAnswer=true"
+    },
+    "100561": {
+      "name": "서천 장항글램핑장",
+      "status": "fail",
+      "url": "http://xn--bj0b46p1mnckn6d.com/reserinfo.php"
+    },
+    "100657": {
+      "name": "용장 글램핑",
+      "status": "fail",
+      "url": "http://xn--bj0b46pgrm22ac17b.com/m/reserve.html?reserve=rv"
+    },
+    "100681": {
+      "name": "올캠프(ALL camp)",
+      "status": "ok",
+      "url": "https://www.camfit.co.kr/camp/62ac28005e56d0001e204f1e",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "100694": {
+      "name": "태양&바다 카라반",
+      "status": "fail",
+      "url": "https://map.naver.com/p/entry/place/1034284570?c=15.00,0,0,0,dh&isCorrectAnswer=true"
+    },
+    "100755": {
+      "name": "트라움 풀 빌라 글램핑&카라반",
+      "status": "fail",
+      "url": "https://booking.ddnayo.com/booking-calendar-status?accommodationId=15613"
+    },
+    "100760": {
+      "name": "두랭이해변 오토 캠핑장",
+      "status": "fail",
+      "url": "http://doorangicamping.com/list"
+    },
+    "100761": {
+      "name": "클럽아일랜드 글램핑카라반",
+      "status": "fail",
+      "url": "http://lespia.org/reservation.php"
+    },
+    "100766": {
+      "name": "테토양평캠핑장",
+      "status": "fail",
+      "url": "http://tetttocamp.com/"
+    },
+    "100786": {
+      "name": "The Stay 309",
+      "status": "fail",
+      "url": "https://map.naver.com/p/entry/place/1929068807?c=15.00,0,0,0,dh"
+    },
+    "100819": {
+      "name": "동학농민혁명 기념공원 녹두장군 캠핑장",
+      "status": "fail",
+      "url": "http://www.1894.or.kr/n_camp/reservation/"
+    },
+    "100876": {
+      "name": "금오산 풀타운",
+      "status": "fail",
+      "url": "https://map.naver.com/p/entry/place/1961285063?c=18.30,0,0,0,dh"
+    },
+    "100913": {
+      "name": "노블글램핑",
+      "status": "ok",
+      "url": "https://naver.me/FHYv6uzx",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "101078": {
+      "name": "청솔글램핑장",
+      "status": "fail",
+      "url": "https://map.naver.com/p/search/%EC%B2%AD%EC%86%94%EA%B8%80%EB%9E%A8%ED%95%91/place/1588784057?c=15.00,0,0,0,dh&placePath=/room&isCorrectAnswer=true"
+    },
+    "101079": {
+      "name": "더 글래드 글램핑",
+      "status": "ok",
+      "url": "https://naver.me/GSHG8cIq",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "101085": {
+      "name": "캠프공존",
+      "status": "fail",
+      "url": "https://booking.ddnayo.com/booking-calendar-status?accommodationId=100394"
+    },
+    "101102": {
+      "name": "글램핑 봄",
+      "status": "ok",
+      "url": "https://www.glampingbom.kr/bbs/board.php?bo_table=reservation",
+      "min": null,
+      "night": true,
+      "samples": []
+    },
+    "101117": {
+      "name": "양명힐링캠프",
+      "status": "ok",
+      "url": "https://blog.naver.com/moktan88/224060256428",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "101130": {
+      "name": "덕두글램핑",
+      "status": "ok",
+      "url": "http://ddglamping.com/contents/main.html",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "101140": {
+      "name": "별숲글램핑",
+      "status": "ok",
+      "url": "http://astellarforest.co.kr/",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "101223": {
+      "name": "바다풍경관광농원",
+      "status": "fail",
+      "url": "http://eoeundol.net/"
+    },
+    "101231": {
+      "name": "캠프(camp)301",
+      "status": "fail",
+      "url": "https://map.naver.com/p/entry/place/1150416943?c=15.00,0,0,0,dh&placePath=/home"
+    },
+    "101233": {
+      "name": "육백캠핑장",
+      "status": "ok",
+      "url": "http://www.xn--299ayvs34asler5hkqbr0af7j7vnoqhb1k.com/",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "101259": {
+      "name": "석병관광농원 야영장",
+      "status": "fail",
+      "url": "http://sbfarmcamp.com/"
+    },
+    "101276": {
+      "name": "지파크 글램핑",
+      "status": "ok",
+      "url": "http://g-park.kr/",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "101279": {
+      "name": "메타쉐콰이어 오토 캠핑장",
+      "status": "ok",
+      "url": "https://mscamp.napage.kr/",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "101313": {
+      "name": "별빛갯벌캠핑장",
+      "status": "fail",
+      "url": "https://map.naver.com/p/search/%EB%B3%84%EB%B9%9B%EA%B0%AF%EB%B2%8C%EC%BA%A0%ED%95%91%EC%9E%A5/place/1144705315?c=15.00,0,0,0,dh&placePath=%3Fentry%253Dpll"
+    },
+    "101319": {
+      "name": "숯숯",
+      "status": "fail",
+      "url": "https://naver.me/5FmSwzzn"
+    },
+    "101370": {
+      "name": "돈내코 야영장",
+      "status": "fail",
+      "url": "https://naver.me/5vc8Lg1j"
+    },
+    "101425": {
+      "name": "더 스타일",
+      "status": "fail",
+      "url": "http://thestyle-glamping.co.kr/"
+    },
+    "101446": {
+      "name": "화봉캠핑클럽",
+      "status": "ok",
+      "url": "http://www.xn--dm2b95g82rrwb37jlsb.com/reservation.php?id=1",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "101459": {
+      "name": "포천탑글램핑장",
+      "status": "fail",
+      "url": "http://xn--bj0b46pzrrd1dsrelpc.kr/"
+    },
+    "101461": {
+      "name": "엔더스뷰",
+      "status": "fail",
+      "url": "https://www.endersbew.com/reservation"
+    },
+    "101463": {
+      "name": "가평운악카라반파크",
+      "status": "fail",
+      "url": "http://xn--,http-9q5tx13d85t//ulaanpak.staynt.co.kr/"
+    },
+    "101472": {
+      "name": "위고고 제천점",
+      "status": "ok",
+      "url": "https://wegogo-jc.nowgo.kr/deploy",
+      "min": null,
+      "night": true,
+      "samples": []
+    },
+    "101537": {
+      "name": "더 클리프 카라반 캠핑장",
+      "status": "ok",
+      "url": "https://naver.me/GFBelnBb",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "101547": {
+      "name": "아낌없이주는나무",
+      "status": "fail",
+      "url": "https://map.naver.com/p/entry/place/1648953200?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.0427531&lat=37.9278830&c=15.00,0,0,0,dh"
+    },
+    "101550": {
+      "name": "조이포레",
+      "status": "fail",
+      "url": "https://naver.me/GOPEvdgn"
+    },
+    "101559": {
+      "name": "캠핑노리",
+      "status": "fail",
+      "url": "https://naver.me/xLsjm0oH"
+    },
+    "101591": {
+      "name": "파티엔 카라반 글램핑 펜션캠핑-충남서산태안점",
+      "status": "ok",
+      "url": "http://xn--oi2bl1gt7jm2i7xf1e.com/include/reservation.php?biz_code=P202311013&tab=1",
+      "min": 15000,
+      "night": false,
+      "samples": [
+        20000,
+        25000,
+        15000,
+        30000
+      ]
+    },
+    "101623": {
+      "name": "단양 글램핑&펜션",
+      "status": "ok",
+      "url": "http://danyangglamping.com/contents/main.html",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "101640": {
+      "name": "세이지힐 패밀리캠핑장",
+      "status": "fail",
+      "url": "http://sagehill.co.kr/"
+    },
+    "101647": {
+      "name": "간절곶풍차",
+      "status": "fail",
+      "url": "http://gjgcamp2.com/"
+    },
+    "101672": {
+      "name": "달마당 캠핑장",
+      "status": "ok",
+      "url": "https://dalcam0421.modoo.at/",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "101776": {
+      "name": "용인 에버베이카라반",
+      "status": "fail",
+      "url": "http://everbay.kr/"
+    },
+    "101795": {
+      "name": "사기리134",
+      "status": "fail",
+      "url": "http://sagiri134.com/reserinfo.php"
+    },
+    "101797": {
+      "name": "누크(NOOK) 글램핑&캠핑",
+      "status": "fail",
+      "url": "https://naver.me/5V8nYZpU"
+    },
+    "101849": {
+      "name": "카라반캠핑 고요",
+      "status": "fail",
+      "url": "https://map.naver.com/p/search/%EC%B9%B4%EB%9D%BC%EB%B0%98%EC%BA%A0%ED%95%91%20%EA%B3%A0%EC%9A%94/place/35022087?placePath=/room?entry=pll&from=nx&fromPanelNum=2&timestamp=202601131523&locale=ko&svcName=map_pcv5&searchText=%EC%B9%B4%EB%9D%BC%EB%B0%98%EC%BA%A0%ED%95%91%20%EA%B3%A0%EC%9A%94&businessCategory=camping&level=top&guest=2&checkin=20260114&checkout=20260115&fromNxList=true&searchType=place&c=15.95,0,0,0,dh"
+    },
+    "101942": {
+      "name": "장성 맑은물 캠핑장",
+      "status": "fail",
+      "url": "https://jscamp.three-four.co.kr/Reservation"
+    },
+    "101950": {
+      "name": "고원힐링캠핑장",
+      "status": "ok",
+      "url": "https://tfmc.huyang.co.kr:452/reservation.asp?wloc=B01",
+      "min": 15000,
+      "night": true,
+      "samples": [
+        25000,
+        30000,
+        15000,
+        20000,
+        35000
+      ]
+    },
+    "102070": {
+      "name": "ROCKON글램핑",
+      "status": "ok",
+      "url": "https://www.rockonglamping.co.kr/",
+      "min": null,
+      "night": false,
+      "samples": []
+    },
+    "102166": {
+      "name": "홍천제이(J)글램핑",
+      "status": "fail",
+      "url": "https://xn--bj0b46pu8mgtar8oi6oiub.kr/"
+    },
+    "102209": {
+      "name": "금산 우디즘 글램핑",
+      "status": "fail",
+      "url": "https://www.woodism.kr/"
+    },
+    "102337": {
+      "name": "글램인(GLAMIN)",
+      "status": "fail",
+      "url": "https://naver.me/GCJHsMEY"
+    }
+  }
+}

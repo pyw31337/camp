@@ -107,13 +107,28 @@ export function tourEventsOf(extras, today) {
   }
   return { events: [...ev.values()], near };
 }
+/** 지자체 구/군 명칭이나 수식어를 정규화하여 다른 출처 간 제목 일치율을 높인다 */
+export function coreTitle(s) {
+  return String(s ?? "")
+    .replace(/특별자치시|특별자치도|광역시|특례시/g, "")
+    .replace(/(중|남|북|동|서)구/g, "")
+    .replace(/(강서|강남|강동|강북|관악|광진|구로|금천|노원|도봉|동대문|동작|마포|서대문|서초|성동|성북|송파|양천|영등포|용산|은평|종로)구?/g, "")
+    .replace(/(해운대|수영|사상|사하|부산진|연제|영도)구?/g, "")
+    .replace(/(수성|달서)구?/g, "")
+    .replace(/(미추홀|연수|부평|계양)구?/g, "")
+    .replace(/(광산|유성|대덕|울주)구?/g, "");
+}
 const overlaps = (a, b) => a.s <= b.e && b.s <= a.e;
-/** 같은 행사인지: 제목 키가 같거나 한쪽이 다른 쪽을 품고(4자↑), 기간이 겹친다. 좌표가 둘 다 있으면 5km 안. */
+/** 같은 행사인지: 제목 키가 같거나 한쪽이 다른 쪽을 품고(4자↑, 구/군 정규화 포함), 기간이 겹친다. 좌표가 둘 다 있으면 5km 안. */
 export function sameEvent(a, b) {
   if (!overlaps(a, b)) return false;
   const x = titleKey(a.title), y = titleKey(b.title);
   if (!x || !y) return false;
-  const titleHit = x === y || (Math.min(x.length, y.length) >= 4 && (x.includes(y) || y.includes(x)));
+  let titleHit = x === y || (Math.min(x.length, y.length) >= 4 && (x.includes(y) || y.includes(x)));
+  if (!titleHit) {
+    const cx = coreTitle(x), cy = coreTitle(y);
+    if (cx && cy) titleHit = cx === cy || (Math.min(cx.length, cy.length) >= 4 && (cx.includes(cy) || cy.includes(cx)));
+  }
   if (!titleHit) return false;
   if (Number.isFinite(a.lat) && Number.isFinite(b.lat)) return haversineM(a.lat, a.lng, b.lat, b.lng) <= 5000;
   return true;
@@ -121,19 +136,16 @@ export function sameEvent(a, b) {
 /** 두 원천을 합친다: CultureFlow 쪽을 기본으로(소개·포스터가 더 많음) 빈 칸만 관광공사 값으로 채운다. 반환: {events, alias(옛 id → 남긴 id)} */
 export function mergeEvents(cfEvents, tourEvents) {
   const keep = [], alias = new Map();
-  const byKey = new Map();
   const add = (e) => {
-    const k = titleKey(e.title).slice(0, 6);
-    const cands = byKey.get(k) ?? [];
-    const dup = cands.find((x) => sameEvent(x, e)) ?? keep.find((x) => x.kind === e.kind && sameEvent(x, e));
+    const dup = keep.find((x) => sameEvent(x, e));
     if (dup) {
       alias.set(e.id, dup.id);
-      for (const f of ["img", "img2", "desc", "venue", "addr", "price", "url"]) if (!dup[f] && e[f]) dup[f] = e[f];
-      if (e.origin !== dup.origin) dup.also = [...new Set([...(dup.also ?? []), e.src])];
+      if ((KIND_RANK[e.kind] ?? 4) < (KIND_RANK[dup.kind] ?? 4)) dup.kind = e.kind;
+      for (const f of ["img", "img2", "desc", "venue", "addr", "price", "url", "cf"]) if (!dup[f] && e[f]) dup[f] = e[f];
+      if (e.src && e.src !== dup.src) dup.also = [...new Set([...(dup.also ?? []), e.src])];
       return;
     }
     keep.push(e);
-    byKey.set(k, [...cands, e]);
   };
   // 포스터가 있는 쪽이 먼저 자리를 잡게 한다
   [...cfEvents].sort((a, b) => Number(!a.img) - Number(!b.img)).forEach(add);

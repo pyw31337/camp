@@ -1,0 +1,804 @@
+{
+  "generated_at": "2026-10-20T06:31:35.515Z",
+  "targets": 785,
+  "results": {
+    "76": {
+      "name": "가산글램핑",
+      "status": "fail",
+      "url": "http://gsglamping.com/",
+      "error": "fetch failed"
+    },
+    "129": {
+      "name": "갈기산 캠핑장",
+      "status": "fail",
+      "url": "http://galgisanpensioncamp.com/stdzn/page.do?request=goMainPage&bizCode=P201410001",
+      "error": 404
+    },
+    "141": {
+      "name": "강동그린웨이 가족캠핑장",
+      "status": "fail",
+      "url": "http://igangdong.or.kr/",
+      "error": "fetch failed"
+    },
+    "146": {
+      "name": "강변사리 캠핑장",
+      "status": "ok",
+      "url": "http://www.gang42.com/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:18:09.996Z"
+    },
+    "154": {
+      "name": "강원특별자치도 산림과학연구원 집다리골자연휴양림",
+      "status": "fail",
+      "url": "http://www.xn--bb0bm7i2qgk4r.kr/",
+      "error": "fetch failed"
+    },
+    "356": {
+      "name": "구름포해수욕장카라반",
+      "status": "fail",
+      "url": "http://lespia.net/",
+      "error": "fetch failed"
+    },
+    "383": {
+      "name": "국림검마산자연휴양림",
+      "status": "fail",
+      "url": "https://www.huyang.go.kr/main.action",
+      "error": "fetch failed"
+    },
+    "399": {
+      "name": "국립청옥산자연휴양림제1야영장",
+      "status": "fail",
+      "url": "http://www.huyang.go.kr/main.action",
+      "error": "fetch failed"
+    },
+    "401": {
+      "name": "국립황정산자연휴양림캠핑장",
+      "status": "fail",
+      "url": "http://www.huyang.go.kr/main.action",
+      "error": "fetch failed"
+    },
+    "427": {
+      "name": "그날카라반",
+      "status": "ok",
+      "url": "http://mujucaravan.com/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:18:03.236Z"
+    },
+    "441": {
+      "name": "글램비글램핑",
+      "status": "fail",
+      "url": "http://www.glambcamp.com/",
+      "error": 403
+    },
+    "483": {
+      "name": "금원산자연휴양림 야영장",
+      "status": "fail",
+      "url": "http://www.geumwonsan.or.kr/",
+      "error": "fetch failed"
+    },
+    "492": {
+      "name": "기산골캠핑장",
+      "status": "fail",
+      "url": "http://xn--bb0b8x791burgjmjxnk.kr/",
+      "error": "fetch failed"
+    },
+    "508": {
+      "name": "김포한강오토캠핑장",
+      "status": "fail",
+      "url": "http://kimpocamping.com/",
+      "error": "fetch failed"
+    },
+    "676": {
+      "name": "다인카라반",
+      "status": "ok",
+      "url": "http://www.dyneresort.co.kr/index.php",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:19:24.527Z"
+    },
+    "722": {
+      "name": "대관령 솔내음 오토 캠핑장",
+      "status": "fail",
+      "url": "http://dscamp.co.kr/",
+      "error": "fetch failed"
+    },
+    "734": {
+      "name": "대둔산 그린시티 캠핑장",
+      "status": "fail",
+      "url": "http://www.xn--2i0bk9gf3a3yl74jnldhz2b.com/",
+      "error": "fetch failed"
+    },
+    "812": {
+      "name": "덕유산 자연휴양림",
+      "status": "fail",
+      "url": "http://www.huyang.go.kr/main.action",
+      "error": "fetch failed"
+    },
+    "833": {
+      "name": "도사곡휴양림야영장",
+      "status": "ok",
+      "url": "https://jsimc.or.kr/front/html/block_state.html",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:19:26.805Z"
+    },
+    "1065": {
+      "name": "가평명지산카라반글램핑",
+      "status": "ok",
+      "url": "https://mgocamping.com/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:19:30.286Z"
+    },
+    "1100": {
+      "name": "무릉계곡 힐링캠프장",
+      "status": "ok",
+      "url": "https://www.campingkorea.or.kr/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:31:06.814Z"
+    },
+    "1190": {
+      "name": "밀양댐스쿨캠핑장",
+      "status": "fail",
+      "url": "http://www.mjcamping.co.kr/",
+      "error": 404
+    },
+    "1208": {
+      "name": "바라산자연휴양림 야영장",
+      "status": "ok",
+      "url": "http://barasan.uw21.net/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:31:20.741Z"
+    },
+    "1255": {
+      "name": "예그리나숲",
+      "status": "fail",
+      "url": "http://www.yegreenasoop.net/",
+      "error": "fetch failed"
+    },
+    "1318": {
+      "name": "별고을오토캠핑장",
+      "status": "ok",
+      "url": "http://xn--299a941ap1h.com/",
+      "size": null,
+      "park": null,
+      "visitor": "no",
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:31:26.667Z"
+    },
+    "1357": {
+      "name": "병목안캠핑장",
+      "status": "ok",
+      "url": "http://www.auc.or.kr/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:30:17.569Z"
+    },
+    "1364": {
+      "name": "보또피아힐링파크",
+      "status": "fail",
+      "url": "http://botopia.co.kr/h/d6661/home.php",
+      "error": 404
+    },
+    "1441": {
+      "name": "비슬산 숲속 오토캠핑장",
+      "status": "ok",
+      "url": "http://siseol.dssiseol.or.kr/bisulsan/html/main.html",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:18:16.354Z"
+    },
+    "1554": {
+      "name": "삼원레져타운",
+      "status": "ok",
+      "url": "http://samwonleisure.com/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:19:00.813Z"
+    },
+    "1930": {
+      "name": "심천 하늘바람캠핑장",
+      "status": "ok",
+      "url": "https://www.skywindcamp.com/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:18:48.692Z"
+    },
+    "1993": {
+      "name": "아산곡교천야영장",
+      "status": "ok",
+      "url": "https://camping.asanfmc.or.kr/main/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:31:19.302Z"
+    },
+    "2110": {
+      "name": "양양캠핑장",
+      "status": "fail",
+      "url": "http://me2.do/FhpNyW3i",
+      "error": 404
+    },
+    "2179": {
+      "name": "여주참숯마을 캠핑장",
+      "status": "ok",
+      "url": "https://www.yjcharmsoot.co.kr/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": true,
+      "water": null,
+      "checked_at": "2026-10-20T06:18:52.215Z"
+    },
+    "2519": {
+      "name": "유식물원 관광농원",
+      "status": "fail",
+      "url": "http://www.yoogarden.com/",
+      "error": "fetch failed"
+    },
+    "2697": {
+      "name": "정선 펫 캠핑장",
+      "status": "ok",
+      "url": "https://www.jsimc.or.kr/front/html/block_state.html",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:30:14.331Z"
+    },
+    "2735": {
+      "name": "제천옛날학교캠핑장",
+      "status": "fail",
+      "url": "http://www.xn--9d0bv6dl30adnbj4pxnksb.com/default/",
+      "error": 404
+    },
+    "2837": {
+      "name": "진위천유원지 자동차야영장",
+      "status": "fail",
+      "url": "https://www.puc.or.kr/business/jinweepark.do",
+      "error": "fetch failed"
+    },
+    "2937": {
+      "name": "강진 청자촌 오토캠핑장",
+      "status": "ok",
+      "url": "http://gjcamping.co/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:31:28.584Z"
+    },
+    "2940": {
+      "name": "청천화양동관광농원 초롱이 캠핑장",
+      "status": "ok",
+      "url": "http://www.hwayangdong.co.kr/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:19:03.493Z"
+    },
+    "2963": {
+      "name": "초막골생태공원 느티나무야영장",
+      "status": "ok",
+      "url": "https://www.gunpouc.or.kr/fmcs/24",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:31:12.130Z"
+    },
+    "2975": {
+      "name": "추암오토캠핑장",
+      "status": "fail",
+      "url": "http://www.chuamautocamping.or.kr/",
+      "error": "fetch failed"
+    },
+    "3206": {
+      "name": "팔봉산관광지 야영장",
+      "status": "ok",
+      "url": "https://www.hongcheon.go.kr/palbong/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:19:05.911Z"
+    },
+    "3209": {
+      "name": "팔영산 자연휴양림 야영장",
+      "status": "fail",
+      "url": "http://singihan.goheung.go.kr/",
+      "error": 500
+    },
+    "3397": {
+      "name": "한강공원 난지캠핑장",
+      "status": "ok",
+      "url": "https://hangang.seoul.go.kr/www/contents/756.do?mid=504",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:31:03.752Z"
+    },
+    "3423": {
+      "name": "한탄강관광지오토캠핑장",
+      "status": "fail",
+      "url": "http://www.hantan.co.kr/",
+      "error": 406
+    },
+    "7008": {
+      "name": "숲속의하모니",
+      "status": "ok",
+      "url": "http://www.forestcamp1.co.kr/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:30:31.805Z"
+    },
+    "7110": {
+      "name": "가족소풍",
+      "status": "fail",
+      "url": "http://familypicnic.blog.me/",
+      "error": "fetch failed"
+    },
+    "7226": {
+      "name": "플라워 카라반 펜션",
+      "status": "fail",
+      "url": "http://www.pensionflower.net/",
+      "error": "fetch failed"
+    },
+    "7253": {
+      "name": "베스트필드",
+      "status": "ok",
+      "url": "https://www.bestfield.kr/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:18:20.845Z"
+    },
+    "7309": {
+      "name": "쥬라기 카라반",
+      "status": "ok",
+      "url": "http://xn--ok0b89oba438bl5t48g.com/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:18:24.748Z"
+    },
+    "7315": {
+      "name": "등억알프스야영장",
+      "status": "ok",
+      "url": "https://camping.ulju.ulsan.kr/ujcamping/index_main",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:30:03.832Z"
+    },
+    "7606": {
+      "name": "소풍 스테이",
+      "status": "fail",
+      "url": "http://sjrcamp.co.kr/",
+      "error": "fetch failed"
+    },
+    "7693": {
+      "name": "영암군 국민여가 캠핑장",
+      "status": "ok",
+      "url": "https://www.yeongam.go.kr/home/ok/camping/info",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:30:33.597Z"
+    },
+    "7709": {
+      "name": "에스글램핑",
+      "status": "ok",
+      "url": "https://www.sglamping.com/index.html",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:17:58.860Z"
+    },
+    "7763": {
+      "name": "이천농업테마공원 국민여가캠핑장",
+      "status": "fail",
+      "url": "http://2000farmpark.or.kr/",
+      "error": "fetch failed"
+    },
+    "7778": {
+      "name": "포항국민여가캠핑장",
+      "status": "ok",
+      "url": "http://www.pohang.go.kr/camping/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:18:12.065Z"
+    },
+    "7910": {
+      "name": "양양오색 휴랜드 야영장",
+      "status": "fail",
+      "url": "http://xn--hy1b45clvm41ea69fd1fp2uruo5ne.com/",
+      "error": "fetch failed"
+    },
+    "7912": {
+      "name": "숲속야영장",
+      "status": "fail",
+      "url": "https://www.ariihills.co.kr/glamping",
+      "error": 403
+    },
+    "7997": {
+      "name": "고도 캠핑장",
+      "status": "ok",
+      "url": "http://daegayacaravan.com/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:30:15.213Z"
+    },
+    "8028": {
+      "name": "(주)드윌레저캠프 양촌지점",
+      "status": "fail",
+      "url": "https://www.theharucamp.co.kr/",
+      "error": "fetch failed"
+    },
+    "8103": {
+      "name": "경주시종합자원화단지 별빛카라반",
+      "status": "ok",
+      "url": "https://xn--oi2bv4eitat0ab45dqwcn8f.kr/intro/intro.php",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:18:05.259Z"
+    },
+    "8121": {
+      "name": "피카푸 피크닉앤글램핑 진주점",
+      "status": "ok",
+      "url": "http://www.socamping.com/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:18:53.321Z"
+    },
+    "8150": {
+      "name": "뷰델카라반펜션",
+      "status": "ok",
+      "url": "http://viewdel.co.kr/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:31:15.262Z"
+    },
+    "8170": {
+      "name": "스타빌",
+      "status": "ok",
+      "url": "https://starville.ninebridges.co.kr/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:19:33.458Z"
+    },
+    "100056": {
+      "name": "운악산 글램핑",
+      "status": "fail",
+      "url": "http://xn--bj0b46peqhb0eo2bp72b.com/",
+      "error": "fetch failed"
+    },
+    "100082": {
+      "name": "당사현대차오션캠프",
+      "status": "fail",
+      "url": "https://camping.ubimc.or.kr/main.do?bid=2",
+      "error": "fetch failed"
+    },
+    "100107": {
+      "name": "강화도 바다다캠핑장",
+      "status": "fail",
+      "url": "http://badadacamp.co.kr/",
+      "error": "fetch failed"
+    },
+    "100166": {
+      "name": "몽리치",
+      "status": "ok",
+      "url": "http://montriche.net/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:30:12.243Z"
+    },
+    "100181": {
+      "name": "캠프여주",
+      "status": "ok",
+      "url": "http://www.yjfarm.co.kr/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:31:30.313Z"
+    },
+    "100342": {
+      "name": "골드바베큐 당일캠핑장",
+      "status": "ok",
+      "url": "https://www.goldbbqcamp.net/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:18:54.115Z"
+    },
+    "100476": {
+      "name": "비발디 캠핑파크 설악오색점",
+      "status": "ok",
+      "url": "https://vivaldicamping.com/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:19:10.495Z"
+    },
+    "100588": {
+      "name": "더 플래츠 글램핑",
+      "status": "fail",
+      "url": "https://gpartsalon.imweb.me/",
+      "error": 403
+    },
+    "100592": {
+      "name": "(주)청도 프로방스 글램핑",
+      "status": "ok",
+      "url": "http://provenceglamping.com/",
+      "size": null,
+      "park": null,
+      "visitor": "no",
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:19:22.128Z"
+    },
+    "101040": {
+      "name": "글로우",
+      "status": "ok",
+      "url": "http://glowglam.co.kr/glowglam.php",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": true,
+      "water": null,
+      "checked_at": "2026-10-20T06:18:02.357Z"
+    },
+    "101043": {
+      "name": "용암산성오토캠핑장",
+      "status": "ok",
+      "url": "https://donggucamp.co.kr/sub/sub01_1",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:18:57.147Z"
+    },
+    "101048": {
+      "name": "주식회사 라하",
+      "status": "ok",
+      "url": "http://rahaglamping.com/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:18:07.003Z"
+    },
+    "101150": {
+      "name": "THE 숨 FOREST",
+      "status": "ok",
+      "url": "http://xn--9m1b62gfwkhoae75dzub.com/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:18:09.107Z"
+    },
+    "101239": {
+      "name": "비토 노을숲 글램핑",
+      "status": "ok",
+      "url": "https://bitonoul.lovable.app/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:30:15.922Z"
+    },
+    "101344": {
+      "name": "별천지 캠핑장",
+      "status": "ok",
+      "url": "https://www.buyun2fv.com/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:31:32.234Z"
+    },
+    "101486": {
+      "name": "더아리웃집 모롱공간",
+      "status": "fail",
+      "url": "http://www.theariut.com/",
+      "error": 403
+    },
+    "101490": {
+      "name": "성북동 숲속야영장",
+      "status": "ok",
+      "url": "https://www.hgscamp.kr:454/sbd/intro.asp",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:18:58.626Z"
+    },
+    "101530": {
+      "name": "헤리티지글램핑",
+      "status": "ok",
+      "url": "https://heritageglamping.co.kr/html/index.html",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:19:02.193Z"
+    },
+    "101768": {
+      "name": "강릉 바다내음 캠핑장",
+      "status": "ok",
+      "url": "https://autocamping.gtdc.or.kr/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:31:23.599Z"
+    },
+    "101775": {
+      "name": "캠프운악Hi",
+      "status": "ok",
+      "url": "https://www.campunak.co.kr/main.aspx",
+      "size": null,
+      "park": {
+        "value": "SITE_SIDE",
+        "quote": "사이트 옆 주차"
+      },
+      "visitor": "no",
+      "day": null,
+      "water": "9월말 또는 10월초부터 운영",
+      "checked_at": "2026-10-20T06:30:38.468Z"
+    },
+    "101797": {
+      "name": "누크(NOOK) 글램핑&캠핑",
+      "status": "ok",
+      "url": "http://www.nookglamping.co.kr/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:30:07.740Z"
+    },
+    "102070": {
+      "name": "ROCKON글램핑",
+      "status": "ok",
+      "url": "https://www.rockonglamping.co.kr/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:31:35.214Z"
+    },
+    "102130": {
+      "name": "감포누리캠핑글램핑",
+      "status": "fail",
+      "url": "http://gamponuri.co.kr/",
+      "error": 403
+    },
+    "102206": {
+      "name": "오차드블리스",
+      "status": "ok",
+      "url": "https://orchardbliss.co.kr/",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": null,
+      "checked_at": "2026-10-20T06:19:37.380Z"
+    },
+    "102331": {
+      "name": "알프스캠핑장",
+      "status": "ok",
+      "url": "https://alpsvillage.kr/html/index.html",
+      "size": null,
+      "park": null,
+      "visitor": null,
+      "day": null,
+      "water": "9월 셋째 주 \r\n 6월, 9월은 금, 토만 운영",
+      "checked_at": "2026-10-20T06:18:14.191Z"
+    },
+    "102337": {
+      "name": "글램인(GLAMIN)",
+      "status": "fail",
+      "url": "http://glamin.kr/",
+      "error": 403
+    }
+  }
+}

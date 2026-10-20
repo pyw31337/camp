@@ -52,7 +52,7 @@ export function feeTiers(prices, types = [], name = "") {
     if (t === "gc") return gc ?? (lodge ? "lodge" : none ? "site" : "gc");
     // 20만원 이상: 이름이 ‘글램핑·카라반’인 곳은 그 형태, 숙박동이 없으면 있는 형태로
     if (t === "lodge" && (GLAMP.test(name) || CARAVAN.test(name))) return GLAMP.test(name) ? "glamp" : "caravan";
-    if (t === "lodge" && !lodge) return gc ?? "lodge";
+    if (t === "lodge" && !lodge) return gc ?? (none ? null : "lodge");
     return t;
   };
   const obs = [];
@@ -68,6 +68,7 @@ export function feeTiers(prices, types = [], name = "") {
     // 이름표가 붙은 같은 금액(±5%)이 있으면 짐작은 버린다(목록 범위의 양 끝은 대개 이름표 있는 언급에서 왔다)
     if (o.est && labeled.some((l) => Math.abs(l.won - o.won) <= o.won * 0.05)) continue;
     const t = o.est ? narrow(o.t) : o.t;
+    if (!t) continue;
     const cur = acc.get(t) ?? { min: o.won, max: o.won, est: o.est };
     cur.min = Math.min(cur.min, o.won); cur.max = Math.max(cur.max, o.won); cur.est = Math.min(cur.est, o.est);
     acc.set(t, cur);
