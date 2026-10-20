@@ -59,8 +59,18 @@ function rec(p, du) {
     day: { cooking: hasBbq ? { v: "BBQ_FACILITY_MAPPED", text: "OSM에 바비큐 시설(amenity=bbq) 표시 — 이용 규정은 관리기관 확인", url: osmUrl, at } : { v: "UNKNOWN", at }, shade: { v: "UNKNOWN", at } },
   };
 }
-const P = parks.sort((a, b) => b.a - a.a).map((p) => rec(p, "park")).filter(Boolean);
+// 공식 공원(registry/urban-parks.json, collect-urban-parks.mjs)을 우선한다. 같은 공원으로 보이는 OSM 공원(이름 겹침 300m 또는 150m 안)은 뺀다.
+let U = []; try { U = JSON.parse(readFileSync(join(root, "pipeline/registry/urban-parks.json"), "utf8")); } catch {}
+const official = (U.parks ?? []).map((u) => ({ c: [u.lat, u.lng], a: u.area, name: u.name, t: {}, id: `kp${u.no}`, u }));
+const uG = grid(official, (p) => p.c);
+const parksOsm = parks.filter((p) => !near(uG, (x) => x.c, p.c, 2).some((u) => { const m = dist(u.c, p.c), a = norm(u.name), b = norm(p.name); return m < 150 || (m < Math.max(300, Math.sqrt(u.a)) && a && b && (a.includes(b) || b.includes(a))); }));
+const PO = official.sort((a, b) => b.a - a.a).map((p) => { const r = rec(p, "park"); if (!r) return null; const u = p.u, [sd, sg] = String(u.addr).split(/\s+/);
+  return { ...r, id: `park-${u.no}`, sido: sd || r.sido, sigungu: sg || r.sigungu, rg: "addr", addr: u.addr, tel: u.tel || "", osm: undefined, auto: 1, op: "LOCAL_GOVERNMENT",
+    pf: { s: `${u.se} · 면적 약 ${Math.round(u.area / 1000) / 10}만㎡${u.fac ? ` · 시설 ${u.fac.slice(0, 60)}` : ""} · 취사·그늘막 규정은 관리기관(${u.inst})에 확인`, t: ["PARK"] },
+    src: { url: U.url, label: `전국도시공원정보표준데이터(${u.inst}, 기준일 ${u.ref})`, checked_at: U.collected_at || at },
+    day: { cooking: { v: "UNKNOWN", at: U.collected_at || at }, shade: { v: "UNKNOWN", at: U.collected_at || at } } }; }).filter(Boolean);
+const P = [...PO, ...parksOsm.sort((a, b) => b.a - a.a).map((p) => rec(p, "park")).filter(Boolean)];
 const W = water.map((p) => rec(p, "water")).filter(Boolean);
 const places = [...P, ...W];
 writeFileSync(join(root, "pipeline/registry/dayuse-osm.json"), JSON.stringify({ source: "OpenStreetMap Geofabrik south-korea (ODbL)", checked_at: at, places }));
-console.log(`공원 ${P.length} · 공공물놀이 ${W.length} · 화장실 연결 ${places.filter((p) => p.nearby_toilets).length} · bbq ${places.filter((p) => p.day.cooking.v !== "UNKNOWN").length} (원천 공원 ${parks.length}, 물놀이 ${water.length}, 화장실 ${toilets.length})`);
+console.log(`공원 ${P.length}(공식 ${PO.length}·OSM ${P.length - PO.length}) · 공공물놀이 ${W.length} · 화장실 연결 ${places.filter((p) => p.nearby_toilets).length} · bbq ${places.filter((p) => p.day.cooking.v !== "UNKNOWN").length} (원천 공원 ${parks.length}, 물놀이 ${water.length}, 화장실 ${toilets.length})`);
