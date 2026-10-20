@@ -709,7 +709,10 @@
     "firewood_allowed": 2481,
     "firewood_prohibited": 165,
     "private_bathroom": 452,
-    "kids_play_features": 2722
+    "kids_play_features": 2722,
+    "with_house_rules": 670,
+    "with_no_tags": 2048,
+    "with_notices": 25
   },
   "updated_at": "2026-10-19T23:13:19.058Z",
   "operator_site_facts": {

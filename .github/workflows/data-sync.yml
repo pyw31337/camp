@@ -443,6 +443,10 @@ jobs:
           node pipeline/scripts/build-site-pricing-facts.mjs
           # 업장별 사이트·상품 타입(일반·오토·데크·복층 데크·타프존·글램핑·카라반·캠핑카·숙박동·차박·반려견 전용 등)을 근거와 함께 붙인다.
           node pipeline/scripts/build-site-types.mjs
+          # 1박 요금을 숙박 형태별(사이트·글램핑·카라반·펜션)로 나눈다 — 이름표 우선, 없으면 금액(10만원대 글램핑·카라반, 20만원 이상 펜션).
+          node pipeline/scripts/build-price-tiers.mjs
+          # 업장이 공개한 이용 규칙(금지·이용 제한·이용 수칙)·운영 안내·공지와 불가 태그(빨간 배지)를 붙인다.
+          node pipeline/scripts/build-house-rules.mjs
           # 업장 정보 커버리지(요금·입퇴실·매너타임·주차·전기 W·사이트 타입 등, 목표 2,500곳)를 meta.json에 남긴다.
           node pipeline/scripts/report-coverage.mjs
           # 모든 원천을 (캠핑장·속성·값·등급·원천·근거) 원자 사실로 풀어 묶음별 NDJSON(data/facts)으로 쓴다. 여러 에이전트의 공유 원장.

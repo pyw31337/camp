@@ -1,9 +1,20 @@
 # 인수인계
 
-> 최종 갱신: 2026-10-19 KST(플랫폼 허브 구현 확인, 작업 전파 정책 명시) — 맨 위 ‘📌 공지’부터 읽을 것<br>
+> 최종 갱신: 2026-10-19 KST(업장 이용 규칙·공지, 불가 빨간 배지, 형태별 요금) — 맨 위 ‘📌 공지’부터 읽을 것<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
 
 
+
+## 📌 업장 이용 규칙·공지 · 불가 빨간 배지 · 형태별 요금 (2026-10-19 밤, Claude → 전 에이전트)
+
+- **이용 규칙**: `pipeline/lib/house-rules.mjs` + `scripts/build-house-rules.mjs` → 상세 `d.house_rules { tags, rules[{cat: ban|limit|rule}], ops, notices }`, 목록 `c.nr`(공식 불가 태그 키). 원천은 **운영자 홈페이지 문장(operator-site-snippets·operator-deep) + 고캠핑 등록값만**. 블로그 후기는 표본 점검에서 여러 캠핑장 묶음 글의 규칙이 엉뚱한 곳에 붙어 쓰지 않는다. 이용약관·개인정보 문구, 부분 금지(수영장·객실·텐트 안·데크 위), 조건부(“…한 경우”), 후기 감상은 거른다. 공식 ‘가능’ 등록값과 어긋나는 문장 태그는 버린다.
+- **크롤러**: `crawl-operator-sites.mjs`가 금지·제한·수칙·운영 문장도 남기고(`RELEVANT` 확장), 공지 게시판 글을 `notices[{title,url,date}]`(글 주소 직접)로 저장한다(`noticeLinks`). 기존 레지스트리는 다음 `operator-sites.yml` 실행(주 1회, 또는 `max_age_days=0` 수동)부터 채워진다. 이번에 12곳만 새로 읽어 넣었다.
+- **배지**: 단순 ‘전기’ 배지 제거(W 아는 곳만), 불가사항은 빨간 `.bdg-no`. `badges(c, max, maxNo)`.
+- **형태별 요금**: `lib/price-tiers.mjs` + `scripts/build-price-tiers.mjs` → `c.fee.tiers = [[site|glamp|caravan|gc|lodge, 최저, 최고, 짐작]]`. 이름표 우선, 없으면 금액(10만 미만 사이트 · 10만~20만 글램핑·카라반 · 20만 이상 펜션·숙박동), 사이트 타입(`c.st`)·이름으로 좁힘. 7만원 미만 ‘카라반’은 개인 카라반 사이트. **요금대 필터는 사이트 요금 기준**(`campFeeMin/Max`).
+- 순서: `build-site-types` → `build-price-tiers` → `build-house-rules` (data-sync·publish-incremental 반영).
+- 고친 버그: `operatorHtml`의 ‘취소 · 환불’ 줄에서 섹션 전체 대신 요약 한 줄을 반환하던 `return`.
+- 검사: `npm --prefix pipeline test` 341개 중 339 통과·2 건너뜀, 커버리지 가드 회귀 없음, PC·모바일 상세 가로 넘침 0.
+- 현황: 불가 태그 2,048곳(반려동물 1,484 · 대형견 463 · 화기 112 · 미성년자 단독 102 · 고출력 전열기구 79 · 장작 64 · 방문객 51 …), 이용 규칙 670곳, 운영 안내 263곳, 공지 25곳(크롤 재실행 후 증가 예상), 형태별 요금 1,092곳.
 
 ## 📌 실시간 인기 섹션 (2026-10-19 밤)
 

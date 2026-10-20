@@ -7,6 +7,7 @@
   --flame: #ff4a1c; --on-flame: #fff; --flame-soft: #ffe3d8; --on-flame-soft: #b2300a;
   --cobalt: #2563eb; --on-cobalt: #fff;
   --ok: #00875a; --part: #c2410c;
+  --no: #d92d20; --no-ink: #b42318; --no-tint: #fef3f2; --no-line: #fecdca; /* 불가사항 공통 빨강(소유자 2026-10-19) */
   --content: 1320px;
   --gut: clamp(16px, 3.2vw, 56px);
   --head-h: 64px;
@@ -455,6 +456,9 @@ img { color: transparent; }
 .bdg-flame-soft { --c: var(--flame-soft); --on: var(--on-flame-soft); }
 .bdg-cobalt { --c: var(--cobalt); }
 .bdg-ink { --c: var(--ink); }
+/* 불가사항: 같은 아이콘, 공통 빨간 배지 */
+.bdg-no { --c: var(--no); --on: #fff; color: var(--no-ink); }
+.d-bdgs .bdg-no, .hr-tags .bdg-no { background: var(--no-tint); border-color: var(--no-line); }
 .bdg-danger { --c: #e53935; --on: #fff; color: #d32f2f; }
 .bdg-danger .ic { background: #e53935; color: #fff; }
 
@@ -1651,6 +1655,46 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 .rv-foot { display: flex; justify-content: space-between; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--line); }
 @media (max-width: 759px) { .rv-view { aspect-ratio: 4 / 5; } .nearby-hub .nb-rv { padding: 0 8px; } }
 
+/* ── 숙박 형태별 1박 요금(2026-10-19) ── */
+.card-price span i, .ptiers i, .card-tiers i { margin-left: 4px; padding: 1px 5px; border-radius: 6px; background: var(--soft); color: var(--ink-3); font-size: .7rem; font-style: normal; font-weight: 800; }
+.card-tiers { display: flex; flex-wrap: wrap; gap: 4px 10px; margin: 6px 0 0; font-size: .78rem; color: var(--ink-3); }
+.card-tiers .ft b { color: var(--ink-2); font-weight: 850; }
+.ptiers { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px; }
+.ptiers .pt { display: grid; gap: 2px; min-width: 120px; padding: 10px 14px; border-radius: 14px; background: var(--paper); border: 1px solid var(--line); }
+.ptiers .pt span { font-size: .78rem; font-weight: 800; color: var(--ink-3); }
+.ptiers .pt b { font-size: 1.05rem; font-weight: 900; letter-spacing: -0.02em; }
+.ptiers .pt-site { border-color: var(--accent); background: var(--accent-tint); }
+.ptiers .pt.est b { color: var(--ink-2); }
+
+/* ── 이용 규칙 · 공지(2026-10-19) ── */
+.hr-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.hr-tag { display: inline-flex; align-items: center; gap: 2px; }
+.hr-tags .bdg { box-shadow: none; height: 32px; font-size: .86rem; border: 1px solid var(--line); }
+.hr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 10px; min-width: 0; }
+.hr-col { min-width: 0; padding: 14px; border-radius: var(--r-s); background: var(--soft); }
+.hr-col h3 { display: flex; align-items: center; gap: 6px; margin: 0 0 8px; font-size: .9rem; font-weight: 850; }
+.hr-col h3 .ic { width: 1.1em; height: 1.1em; color: var(--accent); }
+.hr-col:first-child h3 .ic { color: var(--no); }
+.hr-col h3 i { margin-left: auto; font-style: normal; font-size: .76rem; color: var(--ink-3); }
+.hr-list { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.hr-list li { display: flex; align-items: flex-start; gap: 8px; font-size: .86rem; line-height: 1.5; color: var(--ink-2); }
+.hr-list li::before { content: ""; flex: none; width: 5px; height: 5px; margin-top: .6em; border-radius: 50%; background: var(--ink-3); }
+.hr-list li span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.hr-src { flex: none; display: inline-flex; align-items: center; gap: 2px; font-size: .74rem; font-weight: 800; color: var(--ink-3); text-decoration: none; white-space: nowrap; }
+.hr-src .ic { width: 12px; height: 12px; }
+.hr-src:hover { color: var(--accent); }
+.hr-more summary { margin-top: 6px; cursor: pointer; font-size: .8rem; font-weight: 800; color: var(--ink-3); }
+.hr-more .hr-list { margin-top: 6px; }
+.hr-notices { margin-top: 12px; }
+.hr-notices h3 { display: flex; align-items: center; gap: 6px; margin: 0 0 8px; font-size: .9rem; font-weight: 850; }
+.hr-notices h3 .ic { width: 1.1em; height: 1.1em; color: var(--accent); }
+.hr-notices ul { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.hr-notices li { min-width: 0; }
+.hr-notices li > a, .hr-notices li > span { display: flex; align-items: center; gap: 12px; min-height: 46px; padding: 10px 4px; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+.hr-notices li > a:hover b { color: var(--accent); }
+.hr-notices time { flex: none; font-family: var(--mono); font-size: .78rem; color: var(--ink-3); }
+.hr-notices b { flex: 1; min-width: 0; font-size: .9rem; font-weight: 750; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hr-notices li .ic { flex: none; width: 14px; height: 14px; color: var(--ink-3); }
 /* ── 콘텐츠 카드 격자(소유자 2026-10-20, context/cgrid.js) ──
    후기·캠퍼 사진·영상·축제 카드만: ~767px 기존 배치 · 768px 2단 · 1024px 3단 · 1280px 4단 · 1600px 5단.
    처음 개수는 줄이 꽉 차게(2단 4 · 3단 6 · 4단 4 · 5단 5), 나머지는 더보기로 같은 개수씩. */

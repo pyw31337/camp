@@ -11,7 +11,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { validatesAsOperatorSite } from "../lib/kakao-discovery.mjs";
-import { guideLinks, htmlToText, isClosedHost, isOperatorHost, parseRobots, relevantSentences, robotsAllows } from "../lib/operator-site.mjs";
+import { guideLinks, htmlToText, isClosedHost, isOperatorHost, noticeLinks, parseRobots, relevantSentences, robotsAllows } from "../lib/operator-site.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const camps = JSON.parse(readFileSync(join(root, "camping-atlas/public/explore/data/campgrounds.json"), "utf8"));
@@ -247,7 +247,7 @@ async function crawlOne(c) {
   const starts = startsOf(c);
   const uniq = [...new Map(starts.map((u) => [new URL(withProto(u)).hostname.replace(/^www\./, ""), u])).values()];
   if (!uniq.length) return { status: isClosedHost(c.homepage ?? "") ? "SERVICE_CLOSED" : "NO_OPERATOR_SITE", url: c.homepage ?? null, checked_at };
-  const all = [], urls = [], errors = [], ocrQueue = [];
+  const all = [], urls = [], errors = [], ocrQueue = [], notices = [];
   let renderedAny = false;
   for (const start of uniq) {
     const rules = await robotsFor(withProto(start)).catch(() => []);
@@ -265,6 +265,8 @@ async function crawlOne(c) {
     if (!r.ok) { errors.push(String(r.error)); continue; }
     urls.push(...r.pages.map((p) => p.url));
     for (const s of snippetsOf(r.pages)) if (!all.some((x) => x.text === s.text)) all.push(s);
+    // 공지 게시판 글 제목·링크·날짜(이용자가 원문을 바로 열 수 있게)
+    for (const p of r.pages) for (const n of noticeLinks(p.html, p.url)) if (!notices.some((x) => x.url === n.url)) notices.push(n);
     // 글이 적거나, 요금 문장이 하나도 없으면(요금표가 이미지인 곳) 안내 이미지를 OCR 대기열에 올린다.
     // OCR은 크롤이 끝난 뒤 따로 읽는다 — 동시 크롤과 CPU를 다투면 사이트 시간 안에 끝나지 못해 결과가 0이 되었다(2026-10-19).
     if (OCR && (all.length < 8 || !all.some((x) => /\d[\d,]*\s*(만\s*)?원/.test(x.text)))) {
@@ -278,7 +280,7 @@ async function crawlOne(c) {
     const v = validatesAsOperatorSite(c, all);
     if (!v.ok) return { status: "DISCOVERED_NOT_OPERATOR", url: urls[0], checked_at, discovered, check: v };
   }
-  return { status: all.length ? "OK" : "NO_RELEVANT_TEXT", url: urls[0], checked_at, rendered: renderedAny || undefined, discovered, pages: urls, snippets: all.slice(0, 160), ...(ocrQueue.length ? { _ocr: ocrQueue.slice(0, 8) } : {}) };
+  return { status: all.length ? "OK" : "NO_RELEVANT_TEXT", url: urls[0], checked_at, rendered: renderedAny || undefined, discovered, pages: urls, snippets: all.slice(0, 160), ...(notices.length ? { notices: notices.slice(0, 12) } : {}), ...(ocrQueue.length ? { _ocr: ocrQueue.slice(0, 8) } : {}) };
 }
 
 const fresh = (r) => r?.checked_at && Date.now() - Date.parse(r.checked_at) < maxAgeDays * 864e5;

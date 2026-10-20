@@ -100,7 +100,8 @@ export function guideLinks(html, baseUrl, max = 5) {
 }
 
 // 선택에 쓰이는 문장만 남긴다(전문 저장 금지).
-const RELEVANT = /입실|퇴실|체크\s*인|체크\s*아웃|얼리|레이트|매너\s*타임|소등|전기|전력|와트|\d\s*(?:w|kw)\b|주차|차량|차박|오토\s*캠핑|장작|숯|화로|불멍|직화|반려|애견|강아지|인원\s*추가|추가\s*인원|방문객|대여|렌탈|할인|연박|2박|샤워|온수|사이트\s*크기|\d+\s*[x×*]\s*\d+|요금|이용료|\d[\d,]*\s*원|1박|성수기|비수기|평일|주말|공휴일|와이파이|wi-?fi|매점|편의점|수영장|물놀이|트램|방방|키즈|놀이터|개수대|화장실|쓰레기|분리수거|운영\s*기간|휴장|동계|난방|환불|취소|데크|복층|타프\s*존|글램핑|카라반|캠핑카|트레일러|캐빈|방갈로|펜션|독채|오두막|하우스|코티지|솔로|백패킹|티피|설치형|사이트\s*(구성|안내|현황|종류|소개)|[A-Z]\s*(구역|존|사이트)/i;
+// 2026-10-19: 이용 규칙(금지·제한·수칙)·운영 안내 문장도 남긴다(업장 규칙 노출, build-house-rules.mjs).
+const RELEVANT = /금지|불가|삼가|사절|제한|수칙|유의\s*사항|주의\s*사항|준수|미성년|보호자|방문객|음주|고성|소음|음향|스피커|흡연|금연|폭죽|불꽃|휴장|휴무|공지|운영\s*시간|이용\s*시간|입실|퇴실|체크\s*인|체크\s*아웃|얼리|레이트|매너\s*타임|소등|전기|전력|와트|\d\s*(?:w|kw)\b|주차|차량|차박|오토\s*캠핑|장작|숯|화로|불멍|직화|반려|애견|강아지|인원\s*추가|추가\s*인원|방문객|대여|렌탈|할인|연박|2박|샤워|온수|사이트\s*크기|\d+\s*[x×*]\s*\d+|요금|이용료|\d[\d,]*\s*원|1박|성수기|비수기|평일|주말|공휴일|와이파이|wi-?fi|매점|편의점|수영장|물놀이|트램|방방|키즈|놀이터|개수대|화장실|쓰레기|분리수거|운영\s*기간|휴장|동계|난방|환불|취소|데크|복층|타프\s*존|글램핑|카라반|캠핑카|트레일러|캐빈|방갈로|펜션|독채|오두막|하우스|코티지|솔로|백패킹|티피|설치형|사이트\s*(구성|안내|현황|종류|소개)|[A-Z]\s*(구역|존|사이트)/i;
 export function relevantSentences(text, limit = 60) {
   const seen = new Set(), out = [];
   for (const s of sentences(text)) {
@@ -249,6 +250,41 @@ export function extractSiteDetails(lines) {
   if (prices.length) {
     const ns = prices.map((p) => p.amount).sort((a, b) => a - b);
     out.SITE_PRICE = { min: ns[0], max: ns.at(-1), items: prices.slice(0, 8) };
+  }
+  return out;
+}
+
+const NOTICE_TITLE = /공지|알림|안내|휴장|휴무|운영|공사|오픈|개장|폐장|예약|성수기|변경|중단|재개|이벤트|할인/;
+const NOTICE_DATE = /(20\d{2}|\d{2})\s*[-./]\s*(\d{1,2})\s*[-./]\s*(\d{1,2})/;
+/**
+ * 공지 게시판 목록에서 글 제목·링크·날짜를 꺼낸다(같은 호스트 링크만, 최대 max개).
+ * 게시판 줄은 보통 <tr>/<li> 안에 제목 링크와 날짜가 함께 있다 — 링크 뒤 300자 안의 날짜를 쓴다.
+ */
+export function noticeLinks(html, pageUrl, max = 12) {
+  const base = new URL(pageUrl), out = [], seen = new Set();
+  const src = String(html ?? "");
+  for (const m of src.matchAll(/<a\b[^>]*href\s*=\s*["']?([^"' >]+)["']?[^>]*>([\s\S]*?)<\/a>/gi)) {
+    const title = htmlToText(m[2]).replace(/\s+/g, " ").trim();
+    if (title.length < 6 || title.length > 80 || !NOTICE_TITLE.test(title) || /전체\s*보기|더\s*보기|목록|바로\s*가기|^공지\s*사항$/.test(title) || SKIP_HREF.test(m[1])) continue;
+    let u; try { u = new URL(m[1].replace(/&amp;/g, "&"), base); } catch { continue; }
+    if (u.hostname !== base.hostname || !/^https?:$/.test(u.protocol)) continue;
+    // 게시글 주소처럼 보이는 링크만(글 번호·idx·wr_id·seq·no 등)
+    if (!/(wr_id|idx|seq|no|num|uid|id|bbs|board|notice|article|view|read|post|document_srl|b_no)\b|\/\d{2,}(\/|$|\?)/i.test(u.pathname + u.search)) continue;
+    u.hash = "";
+    const key = u.toString();
+    if (seen.has(key) || key === base.toString()) continue;
+    const tail = htmlToText(src.slice(m.index + m[0].length, m.index + m[0].length + 400)).slice(0, 120);
+    const d = tail.match(NOTICE_DATE) ?? title.match(NOTICE_DATE);
+    let date = null;
+    if (d) {
+      const y = d[1].length === 2 ? `20${d[1]}` : d[1], mo = Number(d[2]), dd = Number(d[3]);
+      if (mo >= 1 && mo <= 12 && dd >= 1 && dd <= 31) date = `${y}-${String(mo).padStart(2, "0")}-${String(dd).padStart(2, "0")}`;
+    }
+    // 날짜가 없으면 [공지]·공지로 시작하는 제목만(메뉴 링크 거르기)
+    if (!date && !/^[\[［(【<]?\s*(공지|알림)/.test(title)) continue;
+    seen.add(key);
+    out.push({ title: title.replace(NOTICE_DATE, " ").replace(/\s+/g, " ").trim(), url: key, date });
+    if (out.length >= max) break;
   }
   return out;
 }
