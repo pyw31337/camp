@@ -2087,7 +2087,7 @@ async function detailView(id) {
       <div><span>${ic("file-text")}후기</span><b>${c.rv?.n ? fmt(c.rv.n) : "–"}</b></div>
       <div><span>다음 오픈</span><b class="${o ? "hot" : "muted"}">${o ? esc(o.txt) : "–"}</b></div>
     </div>
-    <nav class="d-jump" aria-label="상세 바로가기">${[["sec-price", "요금"], ["sec-usage", "이용 정보"], ["sec-rules", "이용 규칙"], ["sec-operator", "운영 안내"], ["sec-nearby", "주변"], ["sec-events", "축제·행사"], ["sec-reviews", "후기·사진"], ["sec-info", "업체 정보"]].map(([id, l]) => `<a href="#${id}" data-jump="${id}" hidden>${l}</a>`).join("")}</nav>
+    <nav class="d-jump" aria-label="상세 바로가기">${[["sec-price", "요금"], ["sec-usage", "이용 정보"], ["sec-rules", "이용 규칙"], ["sec-operator", "공지사항"], ["sec-nearby", "주변"], ["sec-events", "축제·행사"], ["sec-reviews", "후기·사진"], ["sec-info", "업체 정보"]].map(([id, l]) => `<a href="#${id}" data-jump="${id}" hidden>${l}</a>`).join("")}</nav>
     <div class="d-body">
       <div class="d-main">
         ${siteTypesHtml(c, d)}
@@ -2098,7 +2098,7 @@ async function detailView(id) {
         <section class="d-sec" data-cond hidden></section>
         <section class="d-sec" data-extras hidden></section>
         ${reviewHtml(d, c)}
-        ${operatorHtml(d)}
+        ${operatorHtml(d, c)}
         ${bookingHtml(c, d)}
         ${amenityHtml(c, d)}
         ${gcdFacilityHtml(d)}
@@ -2504,7 +2504,7 @@ function houseRulesHtml(c, d) {
 const OPERATOR_CATEGORIES = [
   ["입·퇴실", /입실|퇴실|얼리.?체크/], ["요금 · 환불", /요금|할인|환불|취소|수수료|\d+원/],
   ["주차", /주차|차량|견인|차박/], ["전기", /전기|리드선|차단/], ["불멍 · 화로", /화로|장작|숯|불씨|화재/],
-  ["반려동물", /반려동물|반려견|마리/], ["시설", /온수|화장실|휴게실|산책로|편의시설/],
+  ["반려동물", /반려동물|반려견|마리/], ["매너타임 · 소음", /매너.?타임|소음|정숙|취침|소등/], ["시설", /온수|화장실|휴게실|산책로|편의시설/],
   ["이용 규칙", /쓰레기|분리수거|외부인|준수|강제퇴장|입장/], ["사이트 이용", /일반.?사이트|오토.?캠핑|캠핑카|카라반|텐트/],
 ];
 function compactOperatorText(value) {
@@ -2525,6 +2525,18 @@ function operatorSummary(label, texts) {
     };
     const times = [...text.matchAll(/(?:입실|퇴실|체크인|체크아웃|얼리.?체크)[^.!?·]{0,28}/gi)].map((x) => clock(x[0])).filter(Boolean);
     return [...new Set(times)].slice(0, 2).join(" · ") || "입·퇴실 시간 확인";
+  }
+  if (label === "매너타임 · 소음" || label === "매너타임") {
+    const clock = (part) => {
+      const m = part.match(/(오전|오후)?\s*(\d{1,2})(?:\s*[:시]\s*(\d{2})?)?/);
+      if (!m) return "";
+      let h = Number(m[2]);
+      if (m[1] === "오후" && h < 12) h += 12;
+      if (m[1] === "오전" && h === 12) h = 0;
+      return `${String(h).padStart(2, "0")}:${String(m[3] ?? "00").padStart(2, "0")}`;
+    };
+    const times = [...text.matchAll(/(?:매너.?타임|소등|취침)[^.!?·]{0,28}/gi)].map((x) => clock(x[0])).filter(Boolean);
+    return times[0] ? `매너타임 ${times[0]}` : "매너타임 준수";
   }
   if (label === "취소 · 환불") return /당일.{0,8}(환불\s*불가|불가)/.test(text) ? "당일 취소 환불 불가" : "취소·환불 규정 확인";
   if (label === "요금 · 환불") {
@@ -2582,7 +2594,7 @@ function operatorSummary(label, texts) {
   if (label === "사이트 이용") return "사이트 이용 안내";
   return "운영 규정 확인";
 }
-function operatorHtml(d) {
+function operatorHtml(d, c) {
   const used = new Set(), grouped = new Map();
   for (const raw of d?.operator_snippets ?? []) {
     const x = typeof raw === "string" ? { text: raw } : raw;
@@ -2601,14 +2613,50 @@ function operatorHtml(d) {
   const order = new Map(["입·퇴실", "예약 · 성수기", "취소 · 환불", "인원 · 추가", "주차", "전기", "불멍 · 화로", "반려동물", "매너타임 · 소음", "시설", "이용 규칙", "사이트 이용", ...OPERATOR_CATEGORIES.map(([l]) => l)].map((label, i) => [label, i]));
   const rows = [...grouped.values()].filter((x) => x.texts.length).sort((a, b) => (order.get(a.label) ?? 99) - (order.get(b.label) ?? 99)).slice(0, 8);
   if (!rows.length) return "";
-  return `<section class="d-sec operator-sec" id="sec-operator"><div class="sec-head">${iconTitle("report", "운영자 안내 · 공지사항")}<span class="sec-note">항목별 정리</span></div><div class="operator-grid">${rows.map((x) => {
-    const source = srcTip({ g: "c", src: { label: x.image ? "운영자 안내 이미지(글자 인식)" : sourceName(x.src, "운영자 홈페이지"), url: x.url, at: x.at, quote: x.texts.join("\n"), image: x.image } }, x.label);
+
+  // 상단 이용 정보·요약 사항과 중복되는 단순 정보는 걸러낸다.
+  const us = c ? usage(c, d) : [];
+  const ti = c?.ti ?? {};
+  const f = c ? facts(c) : {};
+  const inVal = us.find(([l]) => l === "입실")?.[1]?.v ?? ti.i?.[0];
+  const outVal = us.find(([l]) => l === "퇴실")?.[1]?.v ?? ti.o?.[0];
+  const mannerVal = us.find(([l]) => l === "매너타임")?.[1]?.v ?? ti.m?.[0];
+  const powerVal = f.power?.v ?? (c?.of?.w?.v ? `${c.of.w.v}W` : null) ?? (c?.field_conditions?.power?.limit_w ? `${c.field_conditions.power.limit_w}W` : null);
+
+  const filtered = rows.map((x) => {
     const sum = operatorSummary(x.label, x.texts);
     // ‘○○ 안내’ ‘○○ 확인’ 같은 빈 요약 대신 운영자가 쓴 첫 문장을 짧게 정리해 보인다.
     const statement = x.texts.find((t) => !/(\?|까요|나요|가요|인가요)\s*$/.test(t));
     const value = /(안내|확인)$/.test(sum) && statement ? serviceText(statement, 64) || sum : sum;
+    return { ...x, sum, value };
+  }).filter((x) => {
+    // 1. 입·퇴실: 상단 이용정보에 입/퇴실 시각이 이미 있고, 공지 내용이 단순 시각 나열이거나 "확인" 문구면 제외
+    if (x.label === "입·퇴실" && (inVal || outVal)) {
+      if (/^(?:\d{1,2}:\d{2}(?:\s*·\s*\d{1,2}:\d{2})?|입·퇴실 시간 확인)$/.test(x.value)) return false;
+    }
+    // 2. 전기: 상단 요약사항에 전기 용량이 이미 있고, 공지 내용이 단순 와트수 표기나 단순 안내면 제외
+    if (x.label === "전기" && powerVal) {
+      if (/^(?:\d+(?:,\d+)?\s*[wW]|전기 이용 (?:안내|확인))$/.test(x.value)) return false;
+    }
+    // 3. 매너타임: 상단 이용정보에 매너타임이 이미 있고, 단순 시각이나 일반 안내면 제외
+    if ((x.label === "매너타임 · 소음" || x.label === "매너타임") && mannerVal) {
+      if (/^(?:\d{1,2}:\d{2}(?:\s*[~·-]\s*\d{1,2}:\d{2})?|매너타임 (?:안내|확인|\d{1,2}:\d{2})|운영 규정 확인)$/.test(x.value)) return false;
+      const mDigits = String(mannerVal).replace(/[^\d]/g, "");
+      const vDigits = String(x.value).replace(/[^\d]/g, "");
+      if (mDigits && (mDigits === vDigits || x.value.includes(String(mannerVal))) && !/경고|퇴실|환불|벌금|민원|소등|음악|금지/.test(x.value)) return false;
+    }
+    // 4. 주차: 상단 요약사항에 주차 정보가 이미 있고, 단순 주차 안내/확인이면 제외
+    if (x.label === "주차" && f.park) {
+      if (/^(?:(?:사이트 옆|외부) 주차 안내|주차 방법 확인)$/.test(x.value)) return false;
+    }
+    return true;
+  });
+
+  if (!filtered.length) return "";
+  return `<section class="d-sec operator-sec" id="sec-operator"><div class="sec-head">${iconTitle("report", "공지사항")}<span class="sec-note">항목별 정리</span></div><div class="operator-grid">${filtered.map((x) => {
+    const source = srcTip({ g: "c", src: { label: x.image ? "운영자 안내 이미지(글자 인식)" : sourceName(x.src, "운영자 홈페이지"), url: x.url, at: x.at, quote: x.texts.join("\n"), image: x.image } }, x.label);
     const opIc = /입실|퇴실/.test(x.label) ? "clock-in" : /요금|환불/.test(x.label) ? "won" : /주차/.test(x.label) ? "car" : /전기/.test(x.label) ? "bolt" : /화로|장작/.test(x.label) ? "flame" : /반려/.test(x.label) ? "paw" : /시설/.test(x.label) ? "drop" : /예약/.test(x.label) ? "calendar" : /인원/.test(x.label) ? "plus" : /매너/.test(x.label) ? "moon" : "report";
-    return `<article><span>${ic(opIc)}${esc(x.label)}</span><p>${esc(value)}</p>${source}</article>`;
+    return `<article><span>${ic(opIc)}${esc(x.label)}</span><p>${esc(x.value)}</p>${source}</article>`;
   }).join("")}</div></section>`;
 }
 // 예약 방법: 화면에는 우선순위로 고른 대표 채널 하나만 보이고, 모든 원본 채널은 데이터에 보존한다.
