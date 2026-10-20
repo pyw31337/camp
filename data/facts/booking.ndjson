@@ -6756,6 +6756,7 @@
 {"cid":"102365","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102368","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
 {"cid":"102368","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102373","attr":"BOOKING_CHANNEL","value":"naver","grade":"CONFIRMED","src":"dayuse_seed","url":"https://booking.naver.com/booking/12/bizes/1085778","at":"2026-10-20","text":"네이버 예약"}
 {"cid":"pilot-002-sureui","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"gocamping","text":"숲나들e","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032"}
 {"cid":"pilot-002-sureui","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032"}
 {"cid":"pilot-003-duruwell","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"gocamping","text":"숲나들e","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030095"}

@@ -979,7 +979,10 @@ document.addEventListener("click", (e) => {
       if (Array.isArray(x)) S.cond[k] = on ? S.cond[k].filter((y) => !x.includes(y)) : [...new Set([...S.cond[k], ...x])];
       else S.cond[k] = on ? (typeof x === "boolean" ? false : 0) : x;
     }
-    syncCondUi(); return;
+    syncCondUi();
+    // 당일 캠크닉은 홈 레일이 숙박 캠핑장 위주라 켜면 바로 당일 목록으로 옮긴다(2026-10-20 소유자).
+    if (!on && v.kind?.includes("DAY") && !location.hash.startsWith("#/list")) location.hash = listHash();
+    return;
   }
   if (e.target.closest("[data-open=date]")) {
     const input = $("[data-date-input]");
@@ -1104,7 +1107,7 @@ function homeView() {
   <section class="hero" aria-labelledby="hero-t">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-in">
-      <h1 id="hero-t"><span class="h1-a">취향대로 찾아 떠나는</span> <span class="h1-b">전국 ${fmt(S.camps.length)}개 <em>자연 속으로.</em></span></h1>
+      <h1 id="hero-t"><span class="h1-a">취향대로 찾아 떠나는</span> <span class="h1-b">전국 ${fmt(S.camps.filter((c) => !c.du).length)}개 <em>자연 속으로.</em></span></h1>
       <p class="hero-summary">숲·계곡·바다, 나만의 쉼터를 조건으로 골라 보세요</p>
       <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div><form class="finder-form" role="search" data-search>
         <label class="finder-field finder-destination"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
@@ -1271,7 +1274,7 @@ function condEval(c, k = S.cond, skip = null) {
   if (skip !== "near" && k.near) { const ctr = k._ctr; if (!ctr || !c.lat || km2(ctr, c) > k.r) return null; }
   if (skip !== "kind" && k.kind.length) {
     const hasInfo = (c.types ?? []).length > 0 || (c.st ?? []).length > 0;
-    st.kind = k.kind.some((x) => KIND[x]?.test(c)) ? "y" : k.kind.includes("DAY") || !hasInfo ? "?" : "n";
+    st.kind = k.kind.some((x) => KIND[x]?.test(c)) ? "y" : (k.kind.length === 1 && k.kind[0] === "DAY") ? "n" : k.kind.includes("DAY") || !hasInfo ? "?" : "n";
   }
   if (skip !== "pet" && k.pet) st.pet = petOk(c) ? "y" : /불가/.test(c.pets ?? "") ? "n" : "?";
   if (skip !== "w" && k.w) {
@@ -1459,7 +1462,7 @@ function dateStatus(c, d) {
   return { k: "unknown", rank: 3, icon: "calendar", txt: "운영 기간 미확인", sub: "예약처에서 확인" };
 }
 function listResults(p) {
-  const list = S.camps.filter((c) => matches(c) && condTest(c)).map((c) => ({ c, st: dateStatus(c, p.d), ce: condEval(c) }));
+  const list = S.camps.filter((c) => (!c.du || S.q || S.cond.kind.includes("DAY")) && matches(c) && condTest(c)).map((c) => ({ c, st: dateStatus(c, p.d), ce: condEval(c) }));
   const shown = S.showClosed ? list : list.filter((x) => x.st?.k !== "closed");
   const fee = (c) => campFeeMin(c) ?? Infinity;
   if (S.listSort === "fee") shown.sort((a, b) => fee(a.c) - fee(b.c) || rich(b.c) - rich(a.c));
@@ -1526,7 +1529,7 @@ function listView() {
   return `<section class="list-page" aria-labelledby="list-t">
     <div class="list-head">
       <a class="link list-back" href="#/">${ic("left")}처음으로</a>
-      <h1 id="list-t"><span data-list-area>${esc(areaLabel)}</span> 캠핑장 <b data-list-count></b></h1>
+      <h1 id="list-t"><span data-list-area>${esc(areaLabel)}</span> ${S.cond.kind.includes("DAY") ? "당일 캠크닉" : "캠핑장"} <b data-list-count></b></h1>
       <form class="finder-form list-finder-form" role="search" data-list-search>
         <label class="finder-field finder-destination"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
         <button class="finder-field finder-static finder-cond" type="button" data-open-cond><small>조건</small><b data-cond-label>${esc(condSummary())}</b></button>
@@ -2131,6 +2134,64 @@ function bookingOptions(c) {
   }
   return out;
 }
+function getAllBookingChannels(c) {
+  const seen = new Set();
+  const list = [];
+  for (const ch of bookingChannels(c)) {
+    if (ch.kind !== "online" && ch.kind !== "homepage") continue;
+    const label = bookingLabel(ch);
+    const key = label.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    list.push({
+      platform: ch.platform_id || key,
+      name: label,
+      title: `${label}에서 예약하기`,
+      url: ch.url,
+      kind: "online",
+      rank: bookingRank(ch),
+    });
+  }
+  if (c.gc_url && liveBookingUrl(c.gc_url) && !seen.has("고캠핑")) {
+    seen.add("고캠핑");
+    list.push({
+      platform: "gocamping",
+      name: "고캠핑",
+      title: "고캠핑에서 예약하기",
+      url: c.gc_url,
+      kind: "online",
+      rank: 6,
+    });
+  }
+  if (c.homepage && liveBookingUrl(c.homepage) && !seen.has("홈페이지") && !c.dl?.includes(c.homepage)) {
+    seen.add("홈페이지");
+    list.push({
+      platform: "homepage",
+      name: "공식 홈페이지",
+      title: "공식 홈페이지에서 예약하기",
+      url: c.homepage,
+      kind: "homepage",
+      rank: 5,
+    });
+  }
+  list.sort((a, b) => a.rank - b.rank);
+  const tel = telText(c.tel);
+  if (tel) {
+    const digits = tel.replace(/[^\d+]/g, "");
+    if (digits) {
+      list.push({
+        platform: "phone",
+        name: "전화 예약",
+        title: `전화로 예약 ${tel}`,
+        tel: digits,
+        telFmt: tel,
+        kind: "phone",
+        rank: 99,
+      });
+    }
+  }
+  return list;
+}
 function bookingSource(channel, label = "대표 예약 채널") {
   const evidence = Array.isArray(channel?.evidence) ? channel.evidence.join(" · ") : "";
   return sourceFact({
@@ -2189,13 +2250,13 @@ async function detailView(id) {
       <aside class="d-side">${reserveCard(c, d)}</aside>
     </header>
     ${galleryHtml(c)}
-    <nav class="d-jump" aria-label="상세 바로가기">${[["sec-price", "요금"], ["sec-usage", "이용 정보"], ["sec-rules", "이용 규칙"], ["sec-operator", "공지사항"], ["sec-nearby", "주변"], ["sec-events", "축제·행사"], ["sec-reviews", "후기·사진"], ["sec-info", "업체 정보"]].map(([id, l]) => `<a href="#${id}" data-jump="${id}" hidden>${l}</a>`).join("")}</nav>
+    <nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${[["sec-price", "요금"], ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-nearby", "주변"], ["sec-events", "축제"], ["sec-reviews", "후기"], ["sec-info", "업체"]].map(([id, l], i) => `<a href="#${id}" data-jump="${id}"${i === 0 ? " aria-current" : ""}>${l}</a>`).join("")}</div></nav>
     <div class="d-body">
       <div class="d-main">
         ${siteTypesHtml(c, d)}
         ${specSection(c, d)}
         ${priceHtml(c, d)}
-        ${us.some(([, x]) => x) ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><dl class="uses">${us.filter(([, x]) => x).map(([l, x, icon]) => `<div class="use"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${esc(wonText(detailValue(x)))}${asOfMention(x)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span></dd></div>`).join("")}</dl>${unknownLine(us.filter(([, x]) => !x).map(([l]) => l))}</section>` : ""}
+        ${us.some(([, x]) => x) ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><dl class="uses">${us.filter(([, x]) => x).map(([l, x, icon]) => `<div class="use"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${esc(wonText(detailValue(x)))}${asOfMention(x)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span></dd></div>`).join("")}</dl>${unknownLine(us.filter(([, x]) => !x).map(([l]) => l))}</section>` : `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><p class="muted" style="padding: 18px 0; color: var(--ink-3); font-size: .88rem;">등록된 상세 이용 정보가 없습니다.</p></section>`}
         ${houseRulesHtml(c, d)}
         <section class="d-sec" data-cond hidden></section>
         ${reviewHtml(d, c)}
@@ -2208,7 +2269,7 @@ async function detailView(id) {
         ${operatorMediaHtml(d)}
         ${mediaHubHtml(d, c)}
         ${nearbyHubHtml(c, d)}
-        <section class="d-sec ev-sec" id="sec-events" data-events hidden><div class="sec-head">${iconTitle("fest", "주변 축제·행사")}<span class="sec-note">30km 안 · 45일 이내</span></div><div data-events-body></div></section>
+        <section class="d-sec ev-sec" id="sec-events" data-events><div class="sec-head">${iconTitle("fest", "주변 축제·행사")}<span class="sec-note">30km 안 · 45일 이내</span></div><div data-events-body></div></section>
         ${reviewLinksHtml(d, c)}
         ${infoHtml(c)}
         ${commentsHtml(c)}
@@ -3012,46 +3073,99 @@ function mediaHubHtml(d, c) {
   const name = nameOf(c).name;
   const q = encodeURIComponent(`${name} 캠핑`);
 
-  // YouTube & 영상 목록 추출 (x.yt 또는 url 기반)
+  // 1. YouTube 영상 목록 (x.yt 또는 url 기반)
   const ytVideos = (d?.videos ?? []).map((x) => {
     const yt = x.yt || (x.url && x.url.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([A-Za-z0-9_-]{11})/)?.[1]) || null;
     return { ...x, yt };
   });
-  const v = ytVideos.slice(0, 8);
+  const ytList = ytVideos
+    .filter((x) => x.yt || (x.url && /youtube\.com|youtu\.be/i.test(x.url)) || (!isHost(x.url, /naver\./) && !isHost(x.url, /daum\.|kakao\.|tistory\.|brunch\./)))
+    .slice(0, 8);
 
-  const seen = new Set();
+  // 2. 전체 수집 글 (블로그·카페·웹) 및 사진 매핑
+  const seenPosts = new Set();
   const posts = [...(d?.reviews ?? []), ...(d?.cafe ?? []), ...(d?.web ?? [])]
-    .filter((x) => x.url && x.title && !seen.has(x.url) && seen.add(x.url))
+    .filter((x) => x.url && x.title && !seenPosts.has(x.url) && seenPosts.add(x.url))
     .sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
 
-  const naverPosts = posts.filter((x) => isHost(x.url, /naver\.com$|naver\.me$/)).slice(0, 8);
-  const daumPosts = posts.filter((x) => isHost(x.url, /daum\.net$|kakao\.com$|tistory\.com$|brunch\.co\.kr$/)).slice(0, 8);
+  const photoByUrl = new Map((d?.sns_images ?? []).filter((p) => p.url && (p.thumb || p.img)).map((p) => [p.url, p.thumb || p.img]));
 
-  const postList = (rows, label, url, key) => rows.length ? `
-    <div class="mh-posts">
-      ${rows.map((x) => `<a class="mh-post" href="${esc(x.url)}" target="_blank" rel="noopener"><b>${esc(serviceText(x.title, 60))}</b><i>${esc(sourceName(x.src, hostOf(x.url) || "원문"))}${x.date ? ` · ${esc(formatKoreanDate(x.date))}` : ""}</i>${ic("external", "line")}</a>`).join("")}
-    </div>
-    <div class="mh-more-wrap"><a class="mh-more-btn" href="${esc(url)}" target="_blank" rel="noopener">${platIc(key)}<span>${esc(label)}에서 더보기</span>${ic("right")}</a></div>
-  ` : `<div class="mh-empty"><p>${esc(name)} 관련 등록된 ${esc(label)} 글이 없습니다.</p><div class="mh-more-wrap"><a class="mh-more-btn" href="${esc(url)}" target="_blank" rel="noopener">${platIc(key)}<span>${esc(label)}에서 직접 검색하기</span>${ic("right")}</a></div></div>`;
+  // 3. 네이버: 영상 및 썸네일 글 통합 (영상 우선, 썸네일 있는 글 우선, 최신순)
+  const seenNaver = new Set();
+  const naverVideos = (d?.videos ?? []).filter((x) => x.url && isHost(x.url, /naver\.com$|naver\.me$/));
+  const naverPosts = posts.filter((x) => isHost(x.url, /naver\.com$|naver\.me$/)).map((x) => ({
+    ...x,
+    thumb: x.thumb || photoByUrl.get(x.url) || null,
+  }));
+  const naverList = [...naverVideos, ...naverPosts]
+    .filter((x) => x.url && !seenNaver.has(x.url) && seenNaver.add(x.url))
+    .sort((a, b) => (b.thumb ? 1 : 0) - (a.thumb ? 1 : 0) || String(b.date ?? "").localeCompare(String(a.date ?? "")))
+    .slice(0, 8);
 
-  const videoRail = v.length ? `
-    <div class="rail vids" data-cgrid>
-      ${v.map((x, i) => {
-        const fact = sourceFact({ src: x.yt ? "YouTube" : sourceName(x.author, "영상"), url: x.url ?? `https://www.youtube.com/watch?v=${x.yt}`, date: x.date, title: x.title }, "영상");
-        if (x.yt) {
-          return `<article class="vid-wrap"><button type="button" class="vid" data-yt="${esc(x.yt)}"><img src="https://i.ytimg.com/vi/${encodeURIComponent(x.yt)}/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14z"/></svg></span><b>${esc(serviceText(x.title, 60) || `현장 영상 ${i + 1}`)}</b><i>${esc([x.author, x.date ? formatKoreanDate(x.date) : ""].filter(Boolean).join(" · ") || "재생하기")}</i></button>${srcTip(fact, `관련 영상 ${i + 1}`)}</article>`;
-        }
-        return `<article class="vid-wrap"><a class="vid" href="${esc(x.url)}" target="_blank" rel="noopener"><img src="${esc(x.thumb || "")}" alt="" loading="lazy" decoding="async"><span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14z"/></svg></span><b>${esc(serviceText(x.title, 60) || `영상 ${i + 1}`)}</b><i>${esc([x.author, x.date ? formatKoreanDate(x.date) : ""].filter(Boolean).join(" · ") || "영상 보기")}</i></a>${srcTip(fact, `관련 영상 ${i + 1}`)}</article>`;
-      }).join("")}
-    </div>
-    <div class="mh-more-wrap"><a class="mh-more-btn" href="https://www.youtube.com/results?search_query=${q}" target="_blank" rel="noopener">${platIc("youtube")}<span>YouTube에서 더보기</span>${ic("right")}</a></div>
-  ` : `<div class="mh-empty"><p>${esc(name)} 관련 등록된 영상이 없습니다.</p><div class="mh-more-wrap"><a class="mh-more-btn" href="https://www.youtube.com/results?search_query=${q}" target="_blank" rel="noopener">${platIc("youtube")}<span>YouTube에서 영상 검색하기</span>${ic("right")}</a></div></div>`;
+  // 4. 다음/카카오: 영상 및 썸네일 글 통합 (영상 우선, 썸네일 있는 글 우선, 최신순)
+  const seenDaum = new Set();
+  const daumVideos = (d?.videos ?? []).filter((x) => x.url && isHost(x.url, /daum\.net$|kakao\.com$|tistory\.com$|brunch\.co\.kr$/));
+  const daumPosts = posts.filter((x) => isHost(x.url, /daum\.net$|kakao\.com$|tistory\.com$|brunch\.co\.kr$/)).map((x) => ({
+    ...x,
+    thumb: x.thumb || photoByUrl.get(x.url) || null,
+  }));
+  const daumList = [...daumVideos, ...daumPosts]
+    .filter((x) => x.url && !seenDaum.has(x.url) && seenDaum.add(x.url))
+    .sort((a, b) => (b.thumb ? 1 : 0) - (a.thumb ? 1 : 0) || String(b.date ?? "").localeCompare(String(a.date ?? "")))
+    .slice(0, 8);
 
-  // 내부 탭으로 목록을 전환하는 플랫폼: YouTube, 네이버, 다음
+  // 플랫폼별 동일한 카드 포맷 렌더러
+  const renderMediaRail = (items, platformKey, platformLabel, searchUrl) => {
+    if (!items.length) {
+      return `<div class="mh-empty"><p>${esc(name)} 관련 등록된 ${esc(platformLabel)} 영상이 없습니다.</p><div class="mh-more-wrap"><a class="mh-more-btn" href="${esc(searchUrl)}" target="_blank" rel="noopener">${platIc(platformKey)}<span>${esc(platformLabel)}에서 영상 검색하기</span>${ic("right")}</a></div></div>`;
+    }
+
+    const cards = items.map((x, i) => {
+      const isYt = Boolean(x.yt);
+      const fact = sourceFact({
+        src: isYt ? "YouTube" : sourceName(x.src || x.author, platformLabel),
+        url: x.url ?? (isYt ? `https://www.youtube.com/watch?v=${x.yt}` : searchUrl),
+        date: x.date,
+        title: x.title,
+      }, "영상");
+
+      const thumbUrl = isYt
+        ? `https://i.ytimg.com/vi/${encodeURIComponent(x.yt)}/hqdefault.jpg`
+        : (x.thumb || "");
+
+      const authorText = x.author || (x.src ? sourceName(x.src, hostOf(x.url) || platformLabel) : platformLabel);
+      const metaText = [authorText, x.date ? formatKoreanDate(x.date) : ""].filter(Boolean).join(" · ") || (isYt ? "재생하기" : "영상 보기");
+      const titleText = serviceText(x.title, 60) || `${platformLabel} 영상 ${i + 1}`;
+
+      const playIcon = `<span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14z"/></svg></span>`;
+
+      const inner = thumbUrl
+        ? `<img src="${esc(thumbUrl)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">${playIcon}<b>${esc(titleText)}</b><i>${esc(metaText)}</i>`
+        : `<div class="vid-noimg">${platIc(platformKey)}<span>${esc(platformLabel)}</span></div>${playIcon}<b>${esc(titleText)}</b><i>${esc(metaText)}</i>`;
+
+      if (isYt) {
+        return `<article class="vid-wrap"><button type="button" class="vid" data-yt="${esc(x.yt)}">${inner}</button>${srcTip(fact, `관련 영상 ${i + 1}`)}</article>`;
+      }
+      return `<article class="vid-wrap"><a class="vid" href="${esc(x.url)}" target="_blank" rel="noopener">${inner}</a>${srcTip(fact, `${platformLabel} 영상 ${i + 1}`)}</article>`;
+    }).join("");
+
+    return `
+      <div class="rail vids" data-cgrid>
+        ${cards}
+      </div>
+      <div class="mh-more-wrap">
+        <a class="mh-more-btn" href="${esc(searchUrl)}" target="_blank" rel="noopener">
+          ${platIc(platformKey)}<span>${esc(platformLabel)}에서 더보기</span>${ic("right")}
+        </a>
+      </div>
+    `;
+  };
+
+  // 내부 탭으로 목록을 전환하는 플랫폼: YouTube, 네이버, 다음 (동일 포맷 유지)
   const inSiteTabs = [
-    { key: "youtube", label: "YouTube", n: v.length, panel: videoRail, url: `https://www.youtube.com/results?search_query=${q}` },
-    { key: "naver", label: "네이버", n: naverPosts.length, panel: postList(naverPosts, "네이버", `https://search.naver.com/search.naver?query=${q}`, "naver"), url: `https://search.naver.com/search.naver?query=${q}` },
-    { key: "daum", label: "다음", n: daumPosts.length, panel: postList(daumPosts, "다음", `https://search.daum.net/search?q=${q}`, "daum"), url: `https://search.daum.net/search?q=${q}` },
+    { key: "youtube", label: "YouTube", n: ytList.length, panel: renderMediaRail(ytList, "youtube", "YouTube", `https://www.youtube.com/results?search_query=${q}`), url: `https://www.youtube.com/results?search_query=${q}` },
+    { key: "naver", label: "네이버", n: naverList.length, panel: renderMediaRail(naverList, "naver", "네이버", `https://search.naver.com/search.naver?query=${q}`), url: `https://search.naver.com/search.naver?query=${q}` },
+    { key: "daum", label: "다음", n: daumList.length, panel: renderMediaRail(daumList, "daum", "다음", `https://search.daum.net/search?q=${q}`), url: `https://search.daum.net/search?q=${q}` },
   ];
 
   // 외부 플랫폼 바로가기: Instagram, Facebook, TikTok (직접 수집 불가 플랫폼만 새창 이동)
@@ -3774,10 +3888,60 @@ function openWeatherModal(c, initialDate, data) {
 }
 
 function reserveDock(c) {
-  const options = bookingOptions(c);
-  const main = options[0] ?? null;
-  const label = main ? `${bookingLabel(main)}에서 예약` : "예약하기";
-  return `<div class="d-dock-in">${heartBtn(c)}${c.tel && main ? `<a class="btn ghost" href="tel:${esc(c.tel)}" aria-label="전화">${ic("phone")}</a>` : ""}${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">${esc(label)}</a>` : c.tel ? `<a class="btn primary wide" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}</div>`;
+  const options = getAllBookingChannels(c);
+  const main = options[0] ?? (c.gc_url ? { url: c.gc_url, title: "고캠핑에서 예약하기", name: "고캠핑", kind: "online" } : null);
+  const mainLabel = main ? (main.kind === "phone" ? main.title : `${main.name}에서 예약`) : "예약하기";
+  const on = isSaved(c.id);
+
+  const menuItems = options.map((opt) => {
+    if (opt.kind === "phone") {
+      return `<button type="button" class="dock-menu-item is-tel" data-tel="${esc(opt.tel)}" data-tel-fmt="${esc(opt.telFmt)}">
+        <span class="dock-menu-icon">${ic("phone")}</span>
+        <span class="dock-menu-text"><b>${esc(opt.title)}</b></span>
+        <span class="dock-menu-badge" data-tel-action>전화 걸기</span>
+      </button>`;
+    }
+    const icon = opt.platform === "naver" ? ic("search") : opt.platform === "gocamping" ? ic("tent") : ic("booking");
+    return `<a href="${esc(opt.url)}" target="_blank" rel="noopener" class="dock-menu-item">
+      <span class="dock-menu-icon">${icon}</span>
+      <span class="dock-menu-text"><b>${esc(opt.title)}</b></span>
+      <svg class="ic dock-menu-ext"><use href="#i-external"/></svg>
+    </a>`;
+  }).join("");
+
+  return `<div class="d-dock-in">
+    <button class="dock-act-btn dock-heart${on ? " on" : ""}" type="button" data-save="${esc(c.id)}" aria-pressed="${on}" aria-label="${on ? "좋아요 해제" : "좋아요"}">
+      ${ic(on ? "heart" : "heart-o")}
+      <span>좋아요</span>
+    </button>
+    <div class="dock-reserve-group">
+      ${main ? (main.kind === "phone" ? `
+        <button type="button" class="btn primary dock-reserve-main is-tel" data-tel="${esc(main.tel)}" data-tel-fmt="${esc(main.telFmt)}">
+          <span class="dock-reserve-label">${esc(mainLabel)}</span>
+        </button>
+      ` : `
+        <a class="btn primary dock-reserve-main" href="${esc(main.url)}" target="_blank" rel="noopener">
+          <span class="dock-reserve-label">${esc(mainLabel)}</span>
+        </a>
+      `) : `<button type="button" class="btn primary dock-reserve-main" disabled><span class="dock-reserve-label">예약 정보 없음</span></button>`}
+      <button type="button" class="btn primary dock-reserve-toggle" aria-expanded="false" aria-label="다른 예약 방법 목록 열기">
+        <svg class="ic dock-toggle-arrow"><use href="#i-chevron-up"/></svg>
+      </button>
+      <div class="dock-reserve-menu" hidden>
+        <div class="dock-menu-header">
+          <span class="dock-menu-title">예약 방법 선택</span>
+          <button type="button" class="dock-menu-close" aria-label="닫기">${ic("close")}</button>
+        </div>
+        <div class="dock-menu-list">
+          ${menuItems || `<div class="dock-menu-empty">등록된 예약 정보가 없습니다.</div>`}
+        </div>
+      </div>
+    </div>
+    <button class="dock-act-btn dock-share" type="button" data-dock-share aria-label="공유">
+      <svg class="ic"><use href="#i-share"/></svg>
+      <span>공유</span>
+    </button>
+  </div>`;
 }
 // 상세 보조 모듈(/conditions·/context·/operator)은 사이트 루트(/camp/)에 있다.
 function bindDetail() {
@@ -3852,25 +4016,35 @@ function bindDetail() {
   if (late.length) {
     const mo = new MutationObserver(syncJumps);
     late.forEach((t) => mo.observe(t, { attributes: true, attributeFilter: ["hidden"] }));
+    cleanup.push(() => mo.disconnect());
     if ("IntersectionObserver" in window) {
-      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) jumps.forEach((a) => a.toggleAttribute("aria-current", a.dataset.jump === e.target.id)); }), { rootMargin: "-30% 0px -60% 0px" });
+      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) jumps.forEach((a) => a.toggleAttribute("aria-current", a.dataset.jump === e.target.id)); }), { rootMargin: "-15% 0px -70% 0px" });
       late.forEach((t) => io.observe(t));
+      cleanup.push(() => io.disconnect());
     }
   }
-  $(".d-jump")?.addEventListener("click", (e) => {
+  $(".d-jump-bar, .d-jump")?.addEventListener("click", (e) => {
     const a = e.target.closest("[data-jump]");
     if (!a) return;
     e.preventDefault();
     const t = document.getElementById(a.dataset.jump);
     t?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
     t?.setAttribute("tabindex", "-1"); t?.focus({ preventScroll: true });
+    jumps.forEach((x) => x.toggleAttribute("aria-current", x === a));
   });
-  // 관련 영상 · SNS 칩: 이 자리 목록 전환(바깥 플랫폼 칩은 링크라 그대로 새 탭)
+  // 관련 영상 · SNS 탭: 이 자리 목록 전환(바깥 플랫폼 칩은 링크라 그대로 새 탭)
   $(".media-hub")?.addEventListener("click", (e) => {
     const t = e.target.closest("[data-mh-tab]");
     if (!t) return;
     $$(".media-hub [data-mh-tab]").forEach((b) => b.setAttribute("aria-selected", String(b === t)));
-    $$(".media-hub [role='tabpanel']").forEach((p) => { p.hidden = p.id !== t.getAttribute("aria-controls"); });
+    $$(".media-hub [role='tabpanel']").forEach((p) => {
+      const isTarget = p.id === t.getAttribute("aria-controls");
+      p.hidden = !isTarget;
+      if (isTarget) {
+        const grid = p.querySelector("[data-cgrid]");
+        if (grid) import(new URL(`${MOD_ROOT}context/cgrid.js`, import.meta.url).href).then((m) => m.apply(grid)).catch(() => {});
+      }
+    });
   });
   $(".nearby-hub")?.addEventListener("click", (e) => {
     const t = e.target.closest("[data-nb-tab]");
@@ -4050,6 +4224,90 @@ function bindDetail() {
     if (!b) return;
     await fetch(`${SB.url}/rest/v1/campground_comment?id=eq.${encodeURIComponent(b.dataset.cmtDel)}`, { method: "PATCH", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json" }, body: JSON.stringify({ is_deleted: true }) }).catch(() => null);
     loadComments(id);
+  });
+
+  // ── 하단 고정바 (예약 드롭업 메뉴, 전화연결/클립보드, 공유) ──
+  const isMobile = /iPhone|iPad|iPod|Android|webOS/i.test(navigator.userAgent) || (window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
+  $$("[data-tel-action]").forEach((el) => {
+    el.textContent = isMobile ? "전화 걸기" : "번호 복사";
+  });
+
+  const reserveGroup = $(".dock-reserve-group");
+  const reserveToggle = $(".dock-reserve-toggle");
+  const reserveMenu = $(".dock-reserve-menu");
+
+  const closeReserveMenu = () => {
+    if (reserveMenu) reserveMenu.hidden = true;
+    if (reserveGroup) reserveGroup.classList.remove("is-open");
+    if (reserveToggle) reserveToggle.setAttribute("aria-expanded", "false");
+  };
+
+  reserveToggle?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (!reserveMenu) return;
+    const willOpen = reserveMenu.hidden;
+    reserveMenu.hidden = !willOpen;
+    reserveGroup?.classList.toggle("is-open", willOpen);
+    reserveToggle.setAttribute("aria-expanded", String(willOpen));
+  });
+
+  $(".dock-menu-close")?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    closeReserveMenu();
+  });
+
+  document.addEventListener("click", (e) => {
+    if (reserveMenu && !reserveMenu.hidden && !e.target.closest(".dock-reserve-group")) {
+      closeReserveMenu();
+    }
+  });
+
+  reserveMenu?.addEventListener("click", (e) => {
+    if (e.target.closest("a")) closeReserveMenu();
+  });
+
+  $$(".dock-reserve-group .is-tel").forEach((btn) => {
+    btn.addEventListener("click", async (e) => {
+      e.stopPropagation();
+      const tel = btn.dataset.tel;
+      const telFmt = btn.dataset.telFmt || tel;
+      if (!tel) return;
+      if (isMobile) {
+        window.location.href = `tel:${tel}`;
+      } else {
+        try {
+          if (navigator.clipboard) {
+            await navigator.clipboard.writeText(telFmt);
+            toast(`전화번호가 복사되었습니다: ${telFmt}`);
+          } else {
+            prompt("전화번호를 복사하세요:", telFmt);
+          }
+        } catch {
+          prompt("전화번호를 복사하세요:", telFmt);
+        }
+      }
+      closeReserveMenu();
+    });
+  });
+
+  $("[data-dock-share]")?.addEventListener("click", async () => {
+    const curCamp = S.byId.get(id);
+    const title = curCamp ? `${nameOf(curCamp).name} - 모여라캠핑` : document.title;
+    const url = window.location.href;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title, text: `${title}\n${url}`, url });
+        return;
+      } catch (err) {
+        if (err.name === "AbortError") return;
+      }
+    }
+    if (navigator.clipboard) {
+      await navigator.clipboard.writeText(url);
+      toast("주소가 복사되었습니다.");
+    } else {
+      prompt("주소를 복사하세요:", url);
+    }
   });
 }
 function openLightbox(c, start) {

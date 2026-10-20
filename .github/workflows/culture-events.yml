@@ -19,6 +19,11 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+  actions: write
+
+env:
+  GH_TOKEN: ${{ github.token }}  # land-on-main.sh (gh)
 
 concurrency:
   group: culture-events-${{ github.ref }}
@@ -27,7 +32,7 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
         with:
@@ -55,5 +60,4 @@ jobs:
           git add camping-atlas/public/context/events.json
           if git diff --cached --quiet; then echo "변경 없음"; exit 0; fi
           git commit -q -m "chore(data): refresh nearby culture events"
-          git pull --rebase -X theirs origin main
-          git push origin HEAD:main
+          bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" culture-events
