@@ -449,6 +449,8 @@ jobs:
           node pipeline/scripts/build-house-rules.mjs
           # 고캠핑 상세 화면 수집본(data/gocamping-detail.ndjson, 요금표·시설정보·배치도·시설 사진)을 camps/{id}.json의 gcd로 붙인다.
           node pipeline/scripts/build-gocamping-detail.mjs
+          # 당일 나들이 장소(registry/dayuse-seed.json, 원문 URL·확인일)를 붙이고 캠크닉 이름을 통일한다.
+          node pipeline/scripts/apply-dayuse-seed.mjs
           # 열어 보니 없는 예약·홈페이지 링크(registry/link-health.json)를 c.dl로 표시해 화면 버튼에서 뺀다.
           node pipeline/scripts/build-link-health.mjs
           # 공식 사진이 없는 곳의 카드 대표 사진(registry/card-fallback.json — 검색 썸네일·원문 링크)을 c.pt로 붙인다.

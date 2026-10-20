@@ -33,6 +33,8 @@ export const SOURCES = {
   // 예약 엔진(땡큐캠핑 등) 공개 예약 화면에 업장이 등록한 사이트 정보 — build-thankq-facts.mjs의 d.booking_sites.
   booking_engine: "예약 엔진 공개 화면(업장 등록 사이트 정보)",
   // 고캠핑 상세 화면(read.do) 이용안내 요금표 — crawl-gocamping-detail.mjs → build-gocamping-detail.mjs의 d.gcd.
+  // 당일 나들이 장소(공원·민간 캠크닉) 시드 — 관리기관 공지·업장 예약 화면 원문 URL·확인일.
+  dayuse_seed: "당일 나들이 장소 원문(관리기관 공지·업장 안내)",
   gocamping_detail: "고캠핑 상세 화면(업장 등록 이용안내·요금표)",
 };
 
@@ -98,12 +100,13 @@ export function factsOf(c, d, { site = null, details = null, digest = null, kaka
   const cid = String(c.id);
   const push = (attr, value, grade, src, extra = {}) => {
     if (value === null || value === undefined || value === "" || Number.isNaN(value)) return;
-    out.push({ cid, attr, value, grade, src, url: null, at: null, ...extra });
+    // 당일 나들이 시드(registry/dayuse-seed.json) 장소는 고캠핑 등록값이 아니므로 원천을 바로잡는다.
+    out.push({ cid, attr, value, grade, src: c.du && src === "gocamping" ? "dayuse_seed" : src, url: null, at: null, ...extra });
   };
   // ── 고캠핑 등록값(CONFIRMED)
   const fc = c.field_conditions ?? {};
   // 파일럿 캠핑장은 고캠핑 링크가 없어 파일럿 원문 출처를 쓴다.
-  const gc = { url: c.gc_url ?? fc.source?.url ?? null, at: c.modified_at ?? fc.source?.checked_at ?? null };
+  const gc = { url: c.gc_url ?? fc.source?.url ?? c.src_url ?? null, at: c.modified_at ?? fc.source?.checked_at ?? c.src_at ?? null };
   const fcAt = { url: fc.source?.url ?? gc.url, at: fc.source?.checked_at ?? gc.at };
   let total = 0;
   for (const [k, n] of c.kinds ?? []) if (KIND[k] && n > 0) { push(`STAY_${KIND[k]}_SITES`, n, "CONFIRMED", "gocamping", gc); total += n; }
