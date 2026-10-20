@@ -13,6 +13,9 @@ permissions:
   pull-requests: write
   actions: write
 
+env:
+  GH_TOKEN: ${{ github.token }}  # land-on-main.sh (gh)
+
 concurrency:
   group: operator-submissions
   cancel-in-progress: false
