@@ -3270,8 +3270,10 @@ function openWeatherModal(c, initialDate, data) {
 }
 
 function reserveDock(c) {
-  const main = primaryBooking(c);
-  return `${heartBtn(c)}${c.tel ? `<a class="btn ghost" href="tel:${esc(c.tel)}" aria-label="전화">${ic("phone")}</a>` : ""}${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">예약하기</a>` : ""}`;
+  const options = bookingOptions(c);
+  const main = options[0] ?? null;
+  const label = main ? `${bookingLabel(main)}에서 예약` : "예약하기";
+  return `<div class="d-dock-in">${heartBtn(c)}${c.tel && main ? `<a class="btn ghost" href="tel:${esc(c.tel)}" aria-label="전화">${ic("phone")}</a>` : ""}${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">${esc(label)}</a>` : c.tel ? `<a class="btn primary wide" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}</div>`;
 }
 // 상세 보조 모듈(/conditions·/context·/operator)은 사이트 루트(/camp/)에 있다. 화면이 /camp/에서 뜨든 /camp/explore/에서 뜨든 같은 곳을 가리키게 한다.
 const MOD_ROOT = /\/(explore|renewal)\/[^/]*$/.test(new URL(import.meta.url).pathname) ? "../" : "./";

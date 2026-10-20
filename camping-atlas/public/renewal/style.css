@@ -552,11 +552,11 @@ img { color: transparent; }
 .car-nav.next { right: 8px; }
 
 /* ── 상세 규격화 ─────────────────────────────────────────── */
-.detail { width: 100%; max-width: var(--content); margin-left: auto; margin-right: auto; padding: 0 var(--gut) var(--page-pad-bottom); }
+.detail { width: 100%; max-width: var(--content); margin-left: auto; margin-right: auto; padding: 0 var(--gut) 96px; }
 .d-bar { display: flex; align-items: center; gap: 12px; padding: 14px 0; }
 .d-crumb { flex: 1; font-weight: 700; color: var(--ink-3); font-size: .92rem; }
-/* 상단: 왼쪽 이름·소개·배지, 오른쪽 예약 카드(2026-10-19 소유자: 오른쪽 세로 칸을 없애고 본문을 넓게) */
-.d-head { display: grid; grid-template-columns: minmax(0, 1fr) clamp(300px, 27vw, 380px); column-gap: clamp(20px, 3vw, 48px); row-gap: 16px; align-items: end; padding: 4px 0 var(--sec-gap-inner); }
+/* 상단: 이름·소개·배지 전체 너비 사용(예약은 모바일과 동일하게 하단 고정바로 통일) */
+.d-head { display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 16px; align-items: start; padding: 4px 0 var(--sec-gap-inner); }
 .d-head-main { display: grid; gap: 12px; min-width: 0; }
 .d-eyebrow { font-size: .92rem; font-weight: 700; color: var(--ink-3); }
 .d-title { font-size: clamp(2.3rem, 1.3rem + 4vw, 5rem); line-height: 1.12; letter-spacing: -0.045em; }
@@ -568,6 +568,15 @@ img { color: transparent; }
 .d-bdgs .bdg { box-shadow: none; height: 34px; font-size: .88rem; padding-right: 13px; background: var(--paper); border: 1px solid var(--line); }
 .d-bdgs .bdg .ic { width: 26px; height: 26px; padding: 5px; }
 .d-bdgs .bdg-danger { background: #ffebee; border-color: #ffcdd2; color: #d32f2f; }
+.d-bdgs .bdg.bdg-no, .hr-tags .bdg.bdg-no, .bdg.bdg-no {
+  background: #d32f2f !important;
+  border-color: #d32f2f !important;
+  color: #ffffff !important;
+}
+.d-bdgs .bdg.bdg-no .ic, .hr-tags .bdg.bdg-no .ic, .bdg.bdg-no .ic {
+  background: #ffffff !important;
+  color: #d32f2f !important;
+}
 .gallery { margin: 0 calc(var(--gut) * -1) 0; }
 .gal-grid { display: grid; gap: 6px; height: clamp(300px, 36vw, 540px); padding: 0 var(--gut); }
 .gal-grid.n1 { grid-template-columns: 1fr; }
@@ -595,8 +604,7 @@ img { color: transparent; }
 .d-sum em.vd-no { background: var(--soft); color: var(--ink-3); }
 .d-body { display: grid; grid-template-columns: minmax(0, 1fr); margin-top: var(--sec-gap-inner); }
 .d-main { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sec-gap-inner); min-width: 0; }
-.d-side { min-width: 0; }
-.d-side .reserve { padding: 16px 18px; gap: 10px; }
+.d-side { display: none !important; }
 .legend { display: inline-flex; align-items: center; gap: 4px; }
 .legend .gd { margin: 0 2px 0 6px; }
 .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr)); gap: 10px; }
@@ -660,7 +668,62 @@ img { color: transparent; }
 .rs-btns .btn.primary { flex: 1 1 100%; }
 .rs-btns .cmp-label, .rs-btns .heart-label { flex: 1; justify-content: center; height: 48px; }
 .rs-btns .btn.ghost { flex: 1; }
-.d-dock { display: none; }
+.d-dock {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px clamp(12px, 3vw, 24px) calc(10px + env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--paper) 96%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 -1px 0 var(--line);
+}
+.d-dock-in {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 600px;
+}
+.d-dock .heart {
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  flex: 0 0 48px;
+  border-radius: var(--r-s, 12px);
+  background: var(--soft);
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--line);
+}
+.d-dock .cmp { position: static; width: 48px; height: 48px; box-shadow: none; background: var(--soft); flex: 0 0 48px; }
+.d-dock .cmp.on { background: var(--ink); }
+.d-dock .btn.ghost {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  flex: 0 0 48px;
+  border-radius: var(--r-s, 12px);
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.d-dock .btn.primary {
+  flex: 1 1 auto;
+  height: 48px;
+  font-size: 1rem;
+  font-weight: 800;
+  border-radius: var(--r-s, 12px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
 
 /* ── 비교 규격화 ─────────────────────────────────────────── */
 .cmp-page { width: 100%; max-width: var(--content); margin-left: auto; margin-right: auto; padding: var(--sec-gap-inner) var(--gut) var(--page-pad-bottom); }
@@ -915,9 +978,7 @@ body.map-mode { overflow: hidden; height: 100dvh; }
   .map-list .map-more { display: none; }
   .map-page:has(.map-peek:not([hidden])) .map-list { display: none; }
   .map-peek { left: 12px; right: 12px; bottom: 12px; width: auto; }
-  /* 태블릿 이하: 예약 카드는 제목 아래 한 줄(버튼 가로 배치) */
   .d-head { grid-template-columns: minmax(0, 1fr); align-items: start; }
-  .d-side .rs-btns .btn.primary { flex: 1 1 auto; }
 }
 @media (max-width: 759px) {
   :root { --head-h: 56px; }
@@ -984,11 +1045,7 @@ body.map-mode { overflow: hidden; height: 100dvh; }
   .tile-ic .ic { width: 18px; height: 18px; }
   body[data-view="detail"] .tabbar { display: none; }
   body[data-view="detail"] { padding-bottom: 0; }
-  .d-side .rs-btns { display: none; }
-  .d-dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 900; display: flex; gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: color-mix(in srgb, var(--paper) 96%, transparent); backdrop-filter: blur(10px); box-shadow: 0 -1px 0 var(--line); }
-  .d-dock .cmp { position: static; width: 48px; height: 48px; box-shadow: none; background: var(--soft); }
-  .d-dock .cmp.on { background: var(--ink); }
-  .d-dock .btn.ghost { width: 48px; padding: 0; }
+  .d-dock { padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); }
   .sheet { margin: auto 0 0; width: 100vw; max-width: none; border-radius: 22px 22px 0 0; padding-bottom: env(safe-area-inset-bottom); }
   .cmp-table { min-width: 0; width: max-content; }
   .cmp-table thead th:not(.corner), .cmp-table td { width: 220px; min-width: 220px; }
@@ -1342,8 +1399,6 @@ a.near { color: inherit; text-decoration: none; }
   .nearby-place-icon { grid-column: auto; width: 34px; height: 34px; border-radius: 999px; justify-self: start; }
   .nearby-place-copy { grid-column: auto; }
   .nearby-place-actions { grid-column: auto; grid-row: auto; }
-  /* 모바일은 하단 예약 막대가 있으므로, 접수·오픈 정보가 없는 빈 예약 카드는 숨긴다 */
-  .d-side:not(:has(.rs-avail, .rs-open)) { display: none; }
 }
 
 /* 과거 글 기준일 표기 “(2025.09.16 기준)” — 값 오른쪽 작은 회색 */
