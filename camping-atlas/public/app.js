@@ -295,7 +295,7 @@ function reviewTopics(rows, cls, icon) {
 function reviewPickCard(c, i = 0) {
   const r = reviewMeta(c);
   return `<article class="card review-pick" data-id="${esc(c.id)}">
-    <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" aria-label="${esc(nameOf(c).name)} 자세히"></a>
+    <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="card-media review-pick-media">${carousel(c, { eager: i < 3 })}<span class="review-total">${ic("file-text")}후기 ${fmt(r.total)}</span></div>
     <div class="card-body review-pick-body"><p class="review-place">${esc(region(c))}</p><h3>${esc(nameOf(c).name)}</h3><div class="review-topics">${reviewTopics(r.rv.p, "good", "thumb-up")}${reviewTopics(r.rv.c, "watch", "alert")}</div></div>
   </article>`;
@@ -480,6 +480,11 @@ function initDraggableRails(root = document) {
       ro.observe(rail);
     }
 
+    // 브라우저 기본 링크·이미지 네이티브 드래그(URL 텍스트 고스트가 마우스에 붙는 현상) 완전 차단
+    rail.addEventListener("dragstart", (e) => {
+      e.preventDefault();
+    }, true);
+
     rail.addEventListener("pointerdown", (e) => {
       if (e.pointerType === "touch") return;
       if (e.button !== 0) return;
@@ -502,6 +507,7 @@ function initDraggableRails(root = document) {
         rail.classList.add("is-dragging");
       }
       if (hasMoved) {
+        e.preventDefault();
         const targetScroll = scrollLeft - dx;
         const maxScroll = rail.scrollWidth - rail.clientWidth;
         if (targetScroll < 0) {
@@ -586,7 +592,7 @@ function cardReviewPills(rv) {
 function card(c, i = 0) {
   const { tag } = nameOf(c), o = openingOf(c);
   return `<article class="card" data-id="${esc(c.id)}">
-    <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" aria-label="${esc(nameOf(c).name)} 자세히"></a>
+    <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="card-media">${carousel(c, { eager: i < 4 })}
       ${o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : S.avail?.has(String(c.id)) ? `<span class="sig live">${ic("check")}접수 중</span>` : ""}
       <span class="bdgs">${badges(c, 3)}</span>
@@ -639,6 +645,13 @@ document.addEventListener("click", (e) => {
   pop.style.top = `${below ? r.bottom + 8 : r.top - 8 - pop.offsetHeight}px`;
 });
 addEventListener("scroll", () => { $("#pop").hidden = true; }, { passive: true });
+
+// 레일 및 카드 내부의 링크·이미지를 마우스로 끌 때 브라우저의 기본 링크 드래그(URL 텍스트 고스트)가 시작되는 것을 완전 차단
+document.addEventListener("dragstart", (e) => {
+  if (e.target.closest(".rail, .car-track, .card-hit, .open-card, .theme-card, .tr-card, .card")) {
+    e.preventDefault();
+  }
+}, true);
 
 // 찜 토글
 document.addEventListener("click", (e) => {
@@ -726,7 +739,7 @@ function trendingCard(x) {
   }
   const reasonsHtml = reasons.length ? `<div class="tr-reasons">${reasons.slice(0, 3).map((r) => `<span class="tr-reason">${esc(r)}</span>`).join("")}</div>` : "";
   return `<article class="tr-card" data-cid="${c.id}">
-    <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" aria-label="${x.rank}위 ${esc(nameOf(c).name)} 자세히"></a>
+    <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" draggable="false" aria-label="${x.rank}위 ${esc(nameOf(c).name)} 자세히"></a>
     <span class="tr-ph">${carousel(c, { eager: x.rank <= 3, single: true })}<span class="tr-rank">${x.rank}</span>${arrow}</span>
     <div class="tr-body">
       <b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i>
@@ -755,11 +768,11 @@ function homeView() {
   const openings = S.camps.map((c) => [c, openingOf(c)]).filter(([c, o]) => o && hasPhoto(c)).sort((a, b) => a[1].dd - b[1].dd);
   const themeItems = THEMES.map(([key, label, test]) => {
     const imgSrc = themeImg(key);
-    return `<a class="theme-card" href="#/theme/${encodeURIComponent(key)}"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy"><span><b>${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
+    return `<a class="theme-card" href="#/theme/${encodeURIComponent(key)}" draggable="false"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy" draggable="false"><span><b>${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
   }).join("");
   const openingSection = openings.length ? `<section class="opens" aria-labelledby="op-t">
     <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><div class="sec-side"><a class="more-link" href="#/theme/OPEN">더보기 ${ic("arr-right")}</a></div></div>
-    <div class="rail opens-rail">${openings.map(([c, o]) => `<a class="open-card" href="#/c/${encodeURIComponent(c.id)}">${imageTag(photosOf(c)[0] ?? "", "", { sizes: "250px" })}<span class="open-dd">${esc(o.txt)}</span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))} · ${esc(o.platform ?? "")}</i></a>`).join("")}</div>
+    <div class="rail opens-rail">${openings.map(([c, o]) => `<a class="open-card" href="#/c/${encodeURIComponent(c.id)}" draggable="false">${imageTag(photosOf(c)[0] ?? "", "", { sizes: "250px" })}<span class="open-dd">${esc(o.txt)}</span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))} · ${esc(o.platform ?? "")}</i></a>`).join("")}</div>
   </section>` : "";
   const picks = reviewPicks();
   const reviewSection = picks.length ? `<section class="review-picks" aria-labelledby="review-picks-t">
@@ -3253,7 +3266,7 @@ function drawMap() {
 function mapItem(c) {
   const on = selected === String(c.id);
   return `<article class="mi${on ? " on" : ""}" data-mid="${esc(c.id)}">
-    <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" aria-label="${esc(nameOf(c).name)} 자세히"></a>
+    <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="mi-ph">${carousel(c)}</div>
     <div class="mi-b"><p class="card-meta">${esc(region(c))}${typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p><h3>${esc(nameOf(c).name)}</h3><span class="bdgs inline">${badges(c, 3)}</span></div>
     ${heartBtn(c)}
