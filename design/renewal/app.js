@@ -924,7 +924,7 @@ document.addEventListener("click", (e) => {
 });
 addEventListener("scroll", () => { $("#pop").hidden = true; }, { passive: true });
 // 상세 화면의 작은 (i)를 없애고 카드·행 전체를 눌러 원문을 연다(소유자 2026-10-20). 키보드: Tab으로 가서 Enter·Space.
-const TIP_HOST = ".tile, .stype, .pt, .ptiers, .plist li, .use, .d-line, .rs-avail, .sec-note, .amen-n, .ev-card, li, p";
+const TIP_HOST = ".tile, .stype, .pt, .ptiers, .plist li, .use, .d-line, .rs-avail, .sec-note, .amen-tile, .amen-n > div, .ev-card, li, p";
 function hostTips(root) {
   for (const ib of $$(".ib[data-tip]", root)) {
     const host = ib.closest(TIP_HOST) ?? ib.parentElement;
@@ -2263,7 +2263,6 @@ async function detailView(id) {
         ${operatorHtml(d, c)}
         ${bookingHtml(c, d)}
         ${amenityHtml(c, d)}
-        ${introHtml(d)}
         ${programsHtml(d)}
         ${layoutHtml(d, c)}
         ${operatorMediaHtml(d)}
@@ -2272,6 +2271,7 @@ async function detailView(id) {
         <section class="d-sec ev-sec" id="sec-events" data-events><div class="sec-head">${iconTitle("fest", "주변 축제·행사")}<span class="sec-note">30km 안 · 45일 이내</span></div><div data-events-body></div></section>
         ${reviewLinksHtml(d, c)}
         ${infoHtml(c)}
+        ${introHtml(d)}
         ${commentsHtml(c)}
         <section class="d-sec" data-opform-sec hidden></section>
       </div>
@@ -2393,14 +2393,20 @@ function amenityHtml(c, d) {
 
   const hasUniqueRental = rent.length > 0 && !usage(c, d).some(([l, x]) => l === "대여" && x);
 
-  const cntCards = cnt.map(([l, n, icon]) => `<div><b>${ic(icon)} ${fmt(n)}</b><span>${l}</span></div>`);
-  const ptCard = pt ? `<div><b>${ic("toilet")} ${fmt(pt)}</b><span>2km 안 공중화장실 ${tip("<b>공중화장실</b><span>행정안전부 공중화장실 표준데이터 기준, 캠핑장 2km 안 개수입니다.</span>")}</span></div>` : "";
-  const amCards = amenityItems.map((x) => `<div><b>${amenityIcon(x)}</b><span>${esc(x)}</span></div>`);
+  const cntCards = cnt.map(([l, n, icon]) => {
+    const tipText = `<b>${esc(l)}</b><span>고캠핑 등록 시설 기준, 캠핑장 내 ${esc(l)} ${fmt(n)}개입니다.${c.gc_url ? `<br><a href="${esc(c.gc_url)}" target="_blank" rel="noopener">고캠핑 원문 보기 ↗</a>` : ""}</span>`;
+    return `<div class="amen-tile"><b>${ic(icon)} ${fmt(n)}</b><span>${esc(l)}${tip(tipText)}</span></div>`;
+  });
+  const ptCard = pt ? `<div class="amen-tile"><b>${ic("toilet")} ${fmt(pt)}</b><span>2km 안 공중화장실 ${tip("<b>공중화장실</b><span>행정안전부 공중화장실 표준데이터 기준, 캠핑장 2km 안 개수입니다.</span>")}</span></div>` : "";
+  const amCards = amenityItems.map((x) => {
+    const tipText = `<b>${esc(x)}</b><span>고캠핑 등록 편의시설 정보입니다.${c.gc_url ? `<br><a href="${esc(c.gc_url)}" target="_blank" rel="noopener">고캠핑 원문 보기 ↗</a>` : ""}</span>`;
+    return `<div class="amen-tile"><b>${amenityIcon(x)}</b><span>${esc(x)}${tip(tipText)}</span></div>`;
+  });
 
   const allCards = [...cntCards, ptCard, ...amCards].filter(Boolean);
   if (!allCards.length && !hasUniqueRental) return "";
 
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("drop", "편의시설")}<span class="sec-note">${c.gc_url ? "고캠핑 등록" : "업장·관리기관 안내"} ${srcTip({ g: "c", src: { label: c.gc_url ? "고캠핑 등록 편의시설" : "업장·관리기관 안내", url: c.gc_url || c.homepage } }, "편의시설")}</span></div>
+  return `<section class="d-sec"><div class="sec-head">${iconTitle("toilet", "편의시설")}<span class="sec-note">${c.gc_url ? "고캠핑 등록" : "업장·관리기관 안내"} ${srcTip({ g: "c", src: { label: c.gc_url ? "고캠핑 등록 편의시설" : "업장·관리기관 안내", url: c.gc_url || c.homepage } }, "편의시설")}</span></div>
     ${allCards.length ? `<div class="amen-n">${allCards.join("")}</div>` : ""}
     ${hasUniqueRental ? `<p class="amen-rent"><b>${ic("cart")}대여</b>${rent.map((x) => `<span>${esc(x)}</span>`).join("")}</p>` : ""}
   </section>`;
