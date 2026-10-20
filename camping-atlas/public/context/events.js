@@ -1,6 +1,7 @@
 // 상세 화면 ‘주변 축제·행사’ 포스터 카드 — ./events.json(파이프라인 sync-culture-events.mjs)을 읽어 그린다.
 // 원천: CultureFlow(공연·전시·축제 모음) + 한국관광공사 TourAPI 축제. 포스터는 원래 주소를 그대로 쓰고(저장하지 않음)
-// 카드마다 캠핑장에서의 거리와 원문 링크를 붙이고, 출처는 칸 아래 한 줄에 모은다. 자료가 없거나 실패하면 칸을 숨긴 채 둔다.
+// 카드마다 캠핑장에서의 거리를 붙이고 카드 전체가 원문 링크다. 자료가 없거나 실패하면 칸을 숨긴 채 둔다.
+// 2026-10-20 소유자: 거리·기간을 셀렉트 2개로 고르고, 기본은 5km·7일에서 진행 중인 행사가 없으면 10km·10일 → 20km·20일 → 30km·45일로 넓힌다.
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const DOW = ["일", "월", "화", "수", "목", "금", "토"];
 const md = (iso) => { const [, m, d] = String(iso).split("-"); const w = DOW[new Date(`${iso}T00:00:00Z`).getUTCDay()]; return `${Number(m)}/${Number(d)}(${w})`; };
@@ -24,6 +25,19 @@ export function eventsFor(data, id, today = kstToday()) {
   return rows.map(([eid, d]) => ({ id: eid, km: d, e: data.ev?.[eid] })).filter((x) => x.e && x.e.e >= today)
     .map((x) => ({ ...x, state: x.e.s <= today ? "ongoing" : "upcoming", weekend: x.e.s <= wk.sun && x.e.e >= wk.sat }));
 }
+/** 거리·기간 단계(자동 확장 순서) */
+export const RANGES = [[5, 7], [10, 10], [20, 20], [30, 45]];
+export const KM_OPTS = [5, 10, 20, 30];
+export const DAY_OPTS = [7, 10, 20, 30, 45];
+/** km 안·오늘부터 days일 안에 시작(또는 진행 중)인 행사만 */
+export const inRange = (list, kmMax, days, today = kstToday()) => list.filter((x) => x.km <= kmMax && x.e.s <= addDays(today, days));
+/** 진행 중인 행사가 나오는 가장 좁은 단계(없으면 행사가 하나라도 있는 가장 좁은 단계, 그것도 없으면 가장 넓은 단계) */
+export function autoRange(list, today = kstToday()) {
+  const hit = RANGES.find(([k, d]) => inRange(list, k, d, today).some((x) => x.state === "ongoing"))
+    ?? RANGES.find(([k, d]) => inRange(list, k, d, today).length);
+  return hit ?? RANGES.at(-1);
+}
+const MAP_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 0h16v16H0z" fill="none"/><path fill="currentColor" d="M6 2.09c.133.008.266.042.388.103L9.598 3.8a1 1 0 0 0 .402.104V13.91a1 1 0 0 1-.388-.102L6.402 12.2A1 1 0 0 0 6 12.096zm7.629.459A1 1 0 0 1 15 3.477v7.98a1 1 0 0 1-.653.938L11 13.63V3.6zM5 12.4l-2.629 1.05A1 1 0 0 1 1 12.523v-7.98a1 1 0 0 1 .653-.939L5 2.37z"/></svg>`;
 const STYLE = `.ev-sec .ev-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}
 .ev-sec .ev-tabs button{height:32px;padding:0 12px;border-radius:999px;border:1px solid var(--line,#e5e5e5);background:var(--paper,#fff);color:var(--ink-2,#333);font:inherit;font-size:.8rem;font-weight:750;cursor:pointer}
 .ev-sec .ev-tabs button[aria-pressed="true"]{background:var(--ink,#111);border-color:var(--ink,#111);color:var(--paper,#fff)}
@@ -49,7 +63,14 @@ const STYLE = `.ev-sec .ev-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 1
 .ev-acts a{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:999px;background:var(--soft,#f2f2f2);color:var(--ink-2,#333);font-size:.74rem;font-weight:800;text-decoration:none}
 .ev-acts a.main{background:var(--ink,#111);color:var(--paper,#fff)}
 .ev-more{margin:12px auto 0;display:block;height:36px;padding:0 16px;border-radius:999px;border:1px solid var(--line,#e5e5e5);background:var(--paper,#fff);font:inherit;font-size:.8rem;font-weight:800;cursor:pointer}
-.ev-foot{margin-top:12px;font-size:12px;color:var(--ink-3,#667);line-height:1.5}
+.ev-hit{position:absolute;inset:0;z-index:1;border-radius:inherit}
+.ev-hit:focus-visible{outline:2px solid var(--accent,#e8590c);outline-offset:2px}
+.ev-kindrow{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ev-map{position:relative;z-index:2;display:inline-grid;place-items:center;width:28px;height:28px;border-radius:999px;background:var(--soft,#f2f2f2);color:var(--ink-2,#333);font-size:15px;text-decoration:none}
+.ev-map:hover{background:var(--ink,#111);color:var(--paper,#fff)}
+.ev-filters{display:inline-flex;gap:6px;align-items:center}
+.ev-filters select{height:32px;padding:0 28px 0 12px;border:1px solid var(--line,#e5e5e5);border-radius:999px;background:var(--paper,#fff) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23666' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 11px center;appearance:none;color:var(--ink,#111);font:inherit;font-size:.8rem;font-weight:800;cursor:pointer}
+.ev-empty{margin:4px 0 0;padding:18px;border-radius:14px;background:var(--soft,#f2f2f2);color:var(--ink-3,#666);font-size:.84rem;text-align:center}
 @media (max-width:720px){.ev-rail{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0;padding:2px 2px 10px;scrollbar-width:none;overscroll-behavior-x:contain}
 .ev-rail::-webkit-scrollbar{display:none}.ev-card{flex:0 0 min(64vw,240px);scroll-snap-align:start}.ev-card:hover{transform:none}.ev-more{display:none}}`;
 
@@ -69,31 +90,30 @@ function card(x, today, i) {
   const badges = [x.state === "ongoing" ? `<b class="on">진행 중</b>` : `<b>예정 · D-${dday(today, e.s)}</b>`, x.weekend ? `<b class="wk">이번 주말</b>` : ""].join("");
   const period = e.e && e.e !== e.s ? `${md(e.s)} ~ ${md(e.e)}` : md(e.s);
   const place = e.v || (e.a ? e.a.split(/\s+/).slice(0, 3).join(" ") : "");
-  const acts = [
-    e.cf ? `<a class="main" href="${esc(e.cf)}" target="_blank" rel="noopener">CultureFlow에서 보기</a>` : "",
-    e.u ? `<a class="${e.cf ? "" : "main"}" href="${esc(e.u)}" target="_blank" rel="noopener">${e.cf ? "원문" : "자세히 보기"}</a>` : "",
-    e.a ? `<a href="https://map.kakao.com/link/search/${encodeURIComponent(e.v || e.a)}" target="_blank" rel="noopener">지도</a>` : "",
-  ].join("");
+  // 카드 전체가 원문 링크(CultureFlow 우선, 없으면 원출처). ‘자세히 보기’ 버튼은 두지 않는다. 지도는 종류 줄 오른쪽 끝 아이콘.
+  const map = e.a || e.v ? `<a class="ev-map" href="https://map.kakao.com/link/search/${encodeURIComponent(e.v || e.a)}" target="_blank" rel="noopener" aria-label="${esc(e.t)} 지도" title="지도">${MAP_SVG}</a>` : "";
   return `<article class="ev-card" data-state="${x.state}" data-kind="${esc(e.k)}">
-  <a class="ev-poster${e.img ? "" : " noimg"}" ${href ? `href="${esc(href)}" target="_blank" rel="noopener"` : ""} aria-label="${esc(e.t)} 자세히">${poster(x)}<div class="ev-badges">${badges}</div><span class="ev-dist">${esc(km(x.km))}</span></a>
-  <div class="ev-body"><span class="ev-kind">${esc(e.k)}</span><h3>${esc(e.t)}</h3>
+  ${href ? `<a class="ev-hit" href="${esc(href)}" target="_blank" rel="noopener" aria-label="${esc(e.t)} 원문 보기"></a>` : ""}
+  <div class="ev-poster${e.img ? "" : " noimg"}">${poster(x)}<div class="ev-badges">${badges}</div><span class="ev-dist">${esc(km(x.km))}</span></div>
+  <div class="ev-body"><div class="ev-kindrow"><span class="ev-kind">${esc(e.k)}</span>${map}</div><h3>${esc(e.t)}</h3>
   <span class="ev-meta">${esc(period)}${place ? `<br>${esc(place)}` : ""} · 캠핑장에서 ${esc(km(x.km))}${e.p ? ` · ${esc(e.p)}` : ""}</span>
-  ${e.d ? `<p class="ev-desc">${esc(e.d)}</p>` : ""}
-  <div class="ev-acts">${acts}</div></div></article>`;
+  ${e.d ? `<p class="ev-desc">${esc(e.d)}</p>` : ""}</div></article>`;
 }
-export function render(data, id, today = kstToday()) {
-  const list = eventsFor(data, id, today);
-  if (!list.length) return "";
+/** opt: { km, days } — 없으면 자료 전체(30km·45일) */
+export function render(data, id, today = kstToday(), opt = null) {
+  const all = eventsFor(data, id, today);
+  if (!all.length) return "";
+  const list = opt ? inRange(all, opt.km, opt.days, today) : all;
+  if (!list.length) return `<p class="ev-empty">${opt.km}km 안·${opt.days}일 이내에는 행사가 없어요. 거리나 기간을 넓혀 보세요.</p>`;
   const on = list.filter((x) => x.state === "ongoing").length;
   const tabs = [["all", "전체", list.length], ["ongoing", "진행 중", on], ["upcoming", "예정", list.length - on]].filter(([, , n]) => n);
-  const cfAt = String(data.sources?.cf?.data_at ?? "").slice(0, 10);
   return `${tabs.length > 2 ? `<div class="ev-tabs" role="group" aria-label="행사 상태">${tabs.map(([k, l, n], i) => `<button type="button" data-ev-tab="${k}" aria-pressed="${i === 0}">${l}<i>${n}</i></button>`).join("")}</div>` : ""}
-<div class="ev-rail">${list.map((x, i) => card(x, today, i)).join("")}</div>
-<p class="ev-foot">캠핑장에서 직선 30km 안, 오늘부터 45일 안에 열리는 축제·공연·전시예요. 일정·요금은 바뀔 수 있으니 원문에서 꼭 확인하세요. 출처: <a href="${esc(data.sources?.cf?.url ?? "https://pyw31337.github.io/culture/")}" target="_blank" rel="noopener">CultureFlow</a>${cfAt ? `(${esc(cfAt)} 수집)` : ""} · <a href="${esc(data.sources?.tour?.url ?? "https://api.visitkorea.or.kr")}" target="_blank" rel="noopener">한국관광공사 TourAPI</a>. 포스터 저작권은 각 주최·원출처에 있어요. 갱신 ${esc(String(data.generated_at ?? "").slice(0, 10))}</p>`;
+<div class="ev-rail">${list.map((x, i) => card(x, today, i)).join("")}</div>`;
 }
 // 카드 수는 context/cgrid.js 규칙(태블릿부터 여러 단 · 줄이 꽉 차는 개수 · 더보기)을 따른다.
 async function bind(el) {
   const grid = el.querySelector(".ev-rail");
+  if (!grid) return;
   const cg = await import("./cgrid.js");
   let filter = "all";
   const hit = (c) => filter === "all" || c.dataset.state === filter;
@@ -104,14 +124,31 @@ async function bind(el) {
     cg.setFilter(grid, hit);
   }));
 }
-/** el: <section data-events> (안에 [data-events-body]가 있으면 거기에 그린다) */
+/** el: <section data-events> (안에 [data-events-body]가 있으면 거기에 그린다). 제목 줄의 .sec-note 자리에 거리·기간 셀렉트를 둔다. */
 export async function mount(el, camp) {
   const data = await load();
-  const html = render(data, String(camp?.id ?? ""));
-  if (!html) return;
+  const id = String(camp?.id ?? "");
+  const today = kstToday();
+  const all = eventsFor(data, id, today);
+  if (!all.length) return;
   if (!document.getElementById("ev-style")) { const s = document.createElement("style"); s.id = "ev-style"; s.textContent = STYLE; document.head.append(s); }
+  let [kmMax, days] = autoRange(all, today);
   const body = el.querySelector("[data-events-body]") ?? el;
-  body.innerHTML = html;
-  await bind(body);
+  const note = el.querySelector(".sec-head .sec-note");
+  const opts = (vals, cur, unit) => vals.map((v) => `<option value="${v}"${v === cur ? " selected" : ""}>${v}${unit}</option>`).join("");
+  const filters = document.createElement("span");
+  filters.className = "ev-filters";
+  const paint = () => {
+    filters.innerHTML = `<select data-ev-km aria-label="거리">${opts(KM_OPTS, kmMax, "km 안")}</select><select data-ev-days aria-label="기간">${opts(DAY_OPTS, days, "일 이내")}</select>`;
+  };
+  paint();
+  if (note) note.replaceWith(filters); else el.querySelector(".sec-head")?.append(filters);
+  const draw = async () => { body.innerHTML = render(data, id, today, { km: kmMax, days }); await bind(body); };
+  filters.addEventListener("change", (e) => {
+    if (e.target.matches("[data-ev-km]")) kmMax = Number(e.target.value);
+    if (e.target.matches("[data-ev-days]")) days = Number(e.target.value);
+    draw();
+  });
+  await draw();
   el.hidden = false;
 }
