@@ -1111,7 +1111,7 @@ const KINDS = [
   ["HOUSE", "숙박동·방갈로", (c) => hasFirmType(c, "HOUSE")],
   ["RV", "캠핑카·트레일러", (c) => hasFirmType(c, "RV") || c.trailer === true],
   ["CAR_CAMP", "차박", (c) => hasFirmType(c, "CAR_CAMP")],
-  ["DAY", "당일 캠크닉", dayUse],
+  ["DAY", "당일 캠프닉", dayUse],
 ];
 const KIND = Object.fromEntries(KINDS.map(([k, l, t]) => [k, { label: l, test: t }]));
 const W_OPTS = [[0, "상관없음"], [1, "전기 있음"], [600, "600W 이상"], [1100, "1,100W 이상"]];
@@ -1267,7 +1267,7 @@ function paintCondSheet() {
 // 히어로 아래 바로 쓰는 예시 조건(소유자 예시를 그대로 버튼으로)
 const PRESETS = [
   ["반려견 동반", { pet: true }], ["1,100W 이상 전기", { w: 1100 }], ["사이트 8m 이상", { size: 8 }],
-  ["글램핑·카라반", { kind: ["GLAMPING", "CARAVAN"] }], ["당일 캠크닉", { kind: ["DAY"] }], ["장작 불멍", { fire: true }],
+  ["글램핑·카라반", { kind: ["GLAMPING", "CARAVAN"] }], ["당일 캠프닉", { kind: ["DAY"] }], ["장작 불멍", { fire: true }],
 ];
 
 // ── 화면: 목록(히어로 검색 결과) ─────────────────────────────
