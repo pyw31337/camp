@@ -38,11 +38,11 @@ export function autoRange(list, today = kstToday()) {
   return hit ?? RANGES.at(-1);
 }
 const MAP_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 0h16v16H0z" fill="none"/><path fill="currentColor" d="M6 2.09c.133.008.266.042.388.103L9.598 3.8a1 1 0 0 0 .402.104V13.91a1 1 0 0 1-.388-.102L6.402 12.2A1 1 0 0 0 6 12.096zm7.629.459A1 1 0 0 1 15 3.477v7.98a1 1 0 0 1-.653.938L11 13.63V3.6zM5 12.4l-2.629 1.05A1 1 0 0 1 1 12.523v-7.98a1 1 0 0 1 .653-.939L5 2.37z"/></svg>`;
-const STYLE = `.ev-sec .ev-tabs{display:inline-flex;align-items:center;gap:3px;margin:0 0 12px;padding:4px 6px;background:var(--paper-2,#f3f4f6);border:1px solid var(--line,#e5e5e5);border-radius:999px;max-width:100%}
-.ev-sec .ev-tabs button{height:32px;padding:0 12px;border-radius:999px;border:none;background:transparent;color:var(--ink-2,#333);font:inherit;font-size:.82rem;font-weight:750;cursor:pointer;transition:all .15s ease}
-.ev-sec .ev-tabs button:hover{color:var(--ink,#111);background:rgba(0,0,0,.04)}
-.ev-sec .ev-tabs button[aria-pressed="true"]{background:var(--ink,#111);color:var(--paper,#fff);box-shadow:0 1px 4px rgba(0,0,0,.16)}
-.ev-sec .ev-tabs i{font-style:normal;opacity:.65;margin-left:3px}
+const STYLE = `.ev-sec .ev-tabs{display:flex;align-items:center;gap:16px;margin:0 0 16px;padding:0;background:transparent;border:none;border-bottom:1px solid var(--line,#e2e8f0);border-radius:0;width:100%}
+.ev-sec .ev-tabs button{height:40px;padding:0 4px;border-radius:0;border:none;border-bottom:3px solid transparent;margin-bottom:-1px;background:transparent;color:var(--ink-2,#64748b);font:inherit;font-size:.9rem;font-weight:700;cursor:pointer;transition:color var(--dur-fast,.18s) var(--ease-smooth,ease),border-color var(--dur-fast,.18s) var(--ease-smooth,ease)}
+.ev-sec .ev-tabs button:hover{color:var(--ink,#101414);background:transparent}
+.ev-sec .ev-tabs button[aria-pressed="true"],.ev-sec .ev-tabs button:focus-visible{background:transparent;color:var(--ink,#101414);font-weight:850;border-bottom-color:var(--ink,#101414);box-shadow:none;outline:none}
+.ev-sec .ev-tabs i{font-style:normal;opacity:.75;margin-left:3px}
 .ev-rail{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
 .ev-card{position:relative;display:flex;flex-direction:column;min-width:0;overflow:hidden;border:1px solid var(--line,#e5e5e5);border-radius:16px;background:var(--paper,#fff);transition:transform .2s,box-shadow .2s}
 .ev-card:hover{transform:translateY(-2px);box-shadow:var(--shadow,0 6px 20px rgba(0,0,0,.08))}
