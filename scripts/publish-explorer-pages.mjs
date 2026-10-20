@@ -4,6 +4,7 @@
 // KAKAO_JS_KEY: 브라우저에 노출되는 지도 키(카카오 개발자 콘솔의 도메인 제한으로 보호). 없으면 지도 없이 목록만.
 import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -58,9 +59,15 @@ const [renewalIndex, renewalCss, renewalApp] = await Promise.all([
   readFile(`${root}design/renewal/style.css`, "utf8"),
   readFile(`${root}design/renewal/app.js`, "utf8"),
 ]);
+// Pages CDN/PWA가 이전 CSS·JS를 계속 잡고 있어 루트에 구 UI가 남는 일을 막는다.
+// 내용이 바뀔 때만 URL이 바뀌므로 캐시 효율도 유지한다.
+const shellVersion = createHash("sha256").update(renewalCss).update(renewalApp).digest("hex").slice(0, 12);
+const versionedShell = (html) => html
+  .replace('href="./style.css"', `href="./style.css?v=${shellVersion}"`)
+  .replace('src="./app.js"', `src="./app.js?v=${shellVersion}"`);
 
 // 1. 루트 메인 화면(https://pyw31337.github.io/camp/): 어떤 리다이렉트도 없이 즉시 열리는 메인 앱 셸
-const rootIndex = renewalIndex.replace(
+const rootIndex = versionedShell(renewalIndex).replace(
   "</head>",
   `<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="kakao-js-key" content="${kakaoKey}"><meta name="supabase-url" content="${supabaseUrl}"><meta name="supabase-anon-key" content="${supabaseAnonKey}"></head>`
 );
@@ -77,7 +84,7 @@ const exploreRedirectScript = `<script>
     location.replace(target);
   })();
 </script><meta http-equiv="refresh" content="0; url=../">`;
-const exploreIndex = renewalIndex
+const exploreIndex = versionedShell(renewalIndex)
   .replace("<head>", `<head>\n    ${exploreRedirectScript}`)
   .replace(
     "</head>",
@@ -147,6 +154,10 @@ const writeUtilityPages = async (baseDir) => {
 
 await writeUtilityPages(rootOut);
 await writeUtilityPages(out);
+
+// 과거 시안 주소도 별도 UI를 유지하지 않는다. 루트 앱이 유일한 고객 주소다.
+await mkdir(`${rootOut}renewal`, { recursive: true });
+await writeFile(`${rootOut}renewal/index.html`, routePage("모여라캠핑", "#/"));
 
 if (rawTarget) {
   console.log(`메인 화면 및 탐색 화면 갱신: ${rootOut}index.html & ${out}index.html${kakaoKey ? " · 지도 키 있음" : " · 지도 키 없음"}`);

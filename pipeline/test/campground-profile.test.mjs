@@ -17,7 +17,6 @@ test("원천 우선순위: 운영자 공개 W > 고캠핑 전기 제공, 고캠�
   assert.equal(p.fields.FIRE.value, "화로대 개별(연료 미확인)");
   assert.equal(p.fields.FIRE.grade, "CONFIRMED");
 });
-
 test("후기 언급은 MENTION으로만, 요약에는 쓰지 않는다", () => {
   const d = { prices: [{ won: 50000, url: "https://blog/x", quote: "5만원", date: "2026-10-01" }, { won: 60000 }],
     spec: { fields: { CHECKIN_TIME: { values: [], mentions: [{ value: "14:00부터", count: 3, samples: [{ url: "https://blog/y", quote: "체크인 2시" }] }] } } } };
@@ -60,4 +59,3 @@ test("환불 규정 미기재 시 법정 소비자분쟁해결기준을 참고�
   assert.equal(p.fields.REFUND.source.url, "https://www.ftc.go.kr/");
   assert.equal(p.fields.REFUND.statutory, true);
 });
-

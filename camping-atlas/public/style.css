@@ -693,6 +693,7 @@ img { color: transparent; }
   align-items: center;
   gap: 12px;
   width: 100%;
+  min-width: 0;
   max-width: var(--content, 1320px);
   margin: 0 auto;
 }
@@ -948,8 +949,13 @@ img { color: transparent; }
     padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
   }
   .dock-reserve-menu {
-    width: calc(100vw - 24px);
-    right: -56px;
+    /* 버튼 그룹을 기준으로 넓히면 320px에서 메뉴가 문서 밖으로 밀린다.
+       모바일은 화면 안쪽 12px에 고정해 어떤 예약 경로 수에서도 가로폭을 넘기지 않는다. */
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: calc(68px + env(safe-area-inset-bottom));
+    width: auto;
   }
 }
 
@@ -1106,7 +1112,15 @@ body.map-mode { overflow: hidden; height: 100dvh; }
 .trow-head .rail-progress { margin-left: auto; align-self: center; }
 .trow-head h3 { font-size: clamp(1.15rem, 1rem + .5vw, 1.4rem); font-weight: 900; letter-spacing: -0.03em; }
 .trow-head h3 i { font-style: normal; font-weight: 400; font-size: .86rem; color: var(--ink-3); margin-left: 4px; }
-.trow-rail { gap: clamp(12px, 1.4vw, 20px); padding: 10px 6px 20px; margin: -8px -6px -12px; scroll-snap-type: x proximity; scroll-padding: 6px; }
+.trow-rail {
+  gap: clamp(12px, 1.4vw, 20px);
+  /* 이 레일은 내부에서만 스와이프한다. 음수 좌우 여백은 문서 폭을 12px 넓혀
+     320px 기기에서 브라우저 가로 스크롤을 만드는 원인이었다. */
+  padding: 10px 0 20px;
+  margin: -8px 0 -12px;
+  scroll-snap-type: x proximity;
+  scroll-padding: 0;
+}
 .trow-rail > .card { flex: 0 0 clamp(270px, 22vw, 330px); scroll-snap-align: start; }
 .picks { gap: 8px; padding: 0 0 var(--sec-gap-inner); }
 .pick { flex: none; display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px 0 4px; border-radius: 999px; background: var(--paper); box-shadow: var(--shadow); font-weight: 700; font-size: .88rem; white-space: nowrap; color: var(--ink-2); }
@@ -1498,6 +1512,8 @@ a.near { color: inherit; text-decoration: none; }
   align-items: center;
   gap: 16px;
   overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   margin: 4px 0 16px;
   padding: 0;
@@ -1525,6 +1541,8 @@ a.near { color: inherit; text-decoration: none; }
   font-weight: 700;
   text-decoration: none;
   cursor: pointer;
+  flex: 0 0 auto;
+  white-space: nowrap;
   transition: color var(--dur-fast) var(--ease-smooth), border-color var(--dur-fast) var(--ease-smooth);
 }
 .review-cat-chips .rmc-chip:hover {
@@ -1889,12 +1907,24 @@ a.near { color: inherit; text-decoration: none; }
 .cond-body section { display: grid; gap: 8px; }
 .cond-body h3 { margin: 0; font-size: .95rem; font-weight: 850; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
 .cond-body h3 small { color: var(--ink-3); font-size: .74rem; font-weight: 600; }
-.cond-chips, .cond-near { display: flex; flex-wrap: wrap; gap: 6px; }
+.cond-chips, .cond-near {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  min-width: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 2px 1px 6px;
+}
+.cond-chips::-webkit-scrollbar, .cond-near::-webkit-scrollbar { display: none; }
 .cond-chips .chip, .cond-near .chip { height: 34px; padding: 0 12px; font-size: .84rem; box-shadow: none; border: 1px solid var(--line); }
+.cond-chips .chip, .cond-near .chip { flex: 0 0 auto; white-space: nowrap; }
 .cond-chips .chip i, .cond-near .chip i { font-style: normal; color: var(--ink-3); font-weight: 600; font-size: .76rem; }
 .cond-chips .chip[aria-pressed="true"] i { color: inherit; opacity: .75; }
 .cond-chips .chip:disabled { opacity: .4; cursor: default; }
-.cond-near input { flex: 1 1 180px; min-width: 0; height: 34px; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--soft); color: var(--ink); font: inherit; font-size: .88rem; }
+.cond-near input { flex: 0 0 min(180px, 62vw); min-width: 0; height: 34px; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--soft); color: var(--ink); font: inherit; font-size: .88rem; }
 .cond-hint { margin: 0; color: var(--ink-2); font-size: .8rem; }
 .cond-foot { display: flex; gap: 8px; padding-top: 4px; border-top: 1px solid var(--line); padding-block: 12px 2px; }
 .cond-active { gap: 6px; }
@@ -2292,9 +2322,12 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
   position: sticky;
   top: 0;
   z-index: 800;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  /* 100vw는 세로 스크롤바 폭까지 포함한다. 상세 컨테이너의 양쪽 거터만
+     되돌려서 같은 시각 효과를 내되, 문서 자체는 넓히지 않는다. */
+  width: calc(100% + (var(--gut, 24px) * 2));
+  margin-left: calc(var(--gut, 24px) * -1);
+  margin-right: calc(var(--gut, 24px) * -1);
+  overflow: hidden;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -2303,19 +2336,23 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 }
 .d-jump-in {
   width: 100%;
-  max-width: var(--content, 1320px);
-  margin: 0 auto;
+  min-width: 0;
+  max-width: none;
+  margin: 0;
   padding: 0 var(--gut, 24px);
   display: flex;
   align-items: stretch;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 0;
   overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
 .d-jump-in::-webkit-scrollbar { display: none; }
 .d-jump-in a {
-  flex: 1 1 0;
+  flex: 0 0 auto;
+  min-width: 48px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2504,19 +2541,23 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 
 /* ── 관련 영상 · SNS: 플랫폼 탭 (2026-10-20 카테고리 스타일 전면 통일) ── */
 .media-hub .mh-tabs-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px 16px;
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
   border-bottom: 1px solid var(--line, #e2e8f0);
   margin: 0 0 16px;
 }
 .media-hub .mh-tabs {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   gap: 16px;
   overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   padding: 0;
   background: transparent;
@@ -2564,11 +2605,19 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 }
 
 .media-hub .mh-exts {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
   gap: 8px;
-  margin-bottom: 4px;
+  margin: 8px 0 4px;
+  scrollbar-width: none;
 }
+.media-hub .mh-exts::-webkit-scrollbar { display: none; }
+.media-hub .mh-exts > * { flex: 0 0 auto; white-space: nowrap; }
 .media-hub .mh-link {
   display: inline-flex;
   align-items: center;
@@ -2621,12 +2670,14 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 
 /* ── 풀위드 사이트 푸터 (Full-width Pure White Site Footer) ── */
 .site-footer {
-  width: 100vw;
+  /* 100vw에는 브라우저 세로 스크롤바 폭도 포함된다. 루트 바로 아래의
+     푸터는 100%만으로도 화면을 채우므로 뷰포트 탈출 계산을 쓰지 않는다. */
+  width: 100%;
   position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  left: auto;
+  right: auto;
+  margin-left: 0;
+  margin-right: 0;
   background: #ffffff;
   border-top: 1px solid var(--line, #e3e7e2);
   margin-top: clamp(40px, 6vw, 72px);

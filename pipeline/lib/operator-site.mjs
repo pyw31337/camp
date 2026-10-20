@@ -76,6 +76,9 @@ export function htmlToText(html) {
 const GUIDE_TEXT = /이용\s*안내|이용\s*규칙|이용\s*요금|요금|시설\s*안내|캠핑장\s*안내|사이트\s*안내|예약\s*안내|공지|유의\s*사항|주의\s*사항|faq|자주\s*묻는|오시는|소개/i;
 const GUIDE_HREF = /guide|info|rule|notice|price|fee|facility|faq|use|about|intro|board|sub0?\d|page/i;
 const SKIP_HREF = /\.(jpg|jpeg|png|gif|webp|pdf|zip|hwp|mp4)(\?|$)|^(mailto|tel|javascript):|#$/i;
+// 운영자 사이트 안이라도 이용자 후기는 플랫폼 제작물과 마찬가지로 사실 추출에 쓰지 않는다.
+// 후기는 원문 링크·임베드만 서비스에 보이고, 로봇은 운영자가 직접 공지한 이용 정보만 읽는다.
+const REVIEW_LINK = /후기|리뷰|review|guest|방문자\s*사진|포토\s*후기/i;
 
 /** 같은 호스트 안에서 이용 안내 성격의 링크·프레임을 찾는다. */
 export function guideLinks(html, baseUrl, max = 5) {
@@ -93,6 +96,7 @@ export function guideLinks(html, baseUrl, max = 5) {
   for (const m of String(html).matchAll(/<i?frame[^>]+src\s*=\s*["']?([^"' >]+)/gi)) push(m[1], 10);
   for (const m of String(html).matchAll(/<a\b[^>]*href\s*=\s*["']?([^"' >]+)["']?[^>]*>([\s\S]*?)<\/a>/gi)) {
     const text = htmlToText(m[2]).slice(0, 40);
+    if (REVIEW_LINK.test(text) || REVIEW_LINK.test(m[1])) continue;
     const score = (GUIDE_TEXT.test(text) ? 5 : 0) + (GUIDE_HREF.test(m[1]) ? 1 : 0);
     if (score) push(m[1], score);
   }
