@@ -2131,6 +2131,64 @@ function bookingOptions(c) {
   }
   return out;
 }
+function getAllBookingChannels(c) {
+  const seen = new Set();
+  const list = [];
+  for (const ch of bookingChannels(c)) {
+    if (ch.kind !== "online" && ch.kind !== "homepage") continue;
+    const label = bookingLabel(ch);
+    const key = label.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    list.push({
+      platform: ch.platform_id || key,
+      name: label,
+      title: `${label}에서 예약하기`,
+      url: ch.url,
+      kind: "online",
+      rank: bookingRank(ch),
+    });
+  }
+  if (c.gc_url && liveBookingUrl(c.gc_url) && !seen.has("고캠핑")) {
+    seen.add("고캠핑");
+    list.push({
+      platform: "gocamping",
+      name: "고캠핑",
+      title: "고캠핑에서 예약하기",
+      url: c.gc_url,
+      kind: "online",
+      rank: 6,
+    });
+  }
+  if (c.homepage && liveBookingUrl(c.homepage) && !seen.has("홈페이지") && !c.dl?.includes(c.homepage)) {
+    seen.add("홈페이지");
+    list.push({
+      platform: "homepage",
+      name: "공식 홈페이지",
+      title: "공식 홈페이지에서 예약하기",
+      url: c.homepage,
+      kind: "homepage",
+      rank: 5,
+    });
+  }
+  list.sort((a, b) => a.rank - b.rank);
+  const tel = telText(c.tel);
+  if (tel) {
+    const digits = tel.replace(/[^\d+]/g, "");
+    if (digits) {
+      list.push({
+        platform: "phone",
+        name: "전화 예약",
+        title: `전화로 예약 ${tel}`,
+        tel: digits,
+        telFmt: tel,
+        kind: "phone",
+        rank: 99,
+      });
+    }
+  }
+  return list;
+}
 function bookingSource(channel, label = "대표 예약 채널") {
   const evidence = Array.isArray(channel?.evidence) ? channel.evidence.join(" · ") : "";
   return sourceFact({
@@ -2189,13 +2247,13 @@ async function detailView(id) {
       <aside class="d-side">${reserveCard(c, d)}</aside>
     </header>
     ${galleryHtml(c)}
-    <nav class="d-jump" aria-label="상세 바로가기">${[["sec-price", "요금"], ["sec-usage", "이용 정보"], ["sec-rules", "이용 규칙"], ["sec-operator", "공지사항"], ["sec-nearby", "주변"], ["sec-events", "축제·행사"], ["sec-reviews", "후기·사진"], ["sec-info", "업체 정보"]].map(([id, l]) => `<a href="#${id}" data-jump="${id}" hidden>${l}</a>`).join("")}</nav>
+    <nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${[["sec-price", "요금"], ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-nearby", "주변"], ["sec-events", "축제"], ["sec-reviews", "후기"], ["sec-info", "업체"]].map(([id, l]) => `<a href="#${id}" data-jump="${id}">${l}</a>`).join("")}</div></nav>
     <div class="d-body">
       <div class="d-main">
         ${siteTypesHtml(c, d)}
         ${specSection(c, d)}
         ${priceHtml(c, d)}
-        ${us.some(([, x]) => x) ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><dl class="uses">${us.filter(([, x]) => x).map(([l, x, icon]) => `<div class="use"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${esc(wonText(detailValue(x)))}${asOfMention(x)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span></dd></div>`).join("")}</dl>${unknownLine(us.filter(([, x]) => !x).map(([l]) => l))}</section>` : ""}
+        ${us.some(([, x]) => x) ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><dl class="uses">${us.filter(([, x]) => x).map(([l, x, icon]) => `<div class="use"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${esc(wonText(detailValue(x)))}${asOfMention(x)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span></dd></div>`).join("")}</dl>${unknownLine(us.filter(([, x]) => !x).map(([l]) => l))}</section>` : `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><p class="muted" style="padding: 18px 0; color: var(--ink-3); font-size: .88rem;">등록된 상세 이용 정보가 없습니다.</p></section>`}
         ${houseRulesHtml(c, d)}
         <section class="d-sec" data-cond hidden></section>
         ${reviewHtml(d, c)}
@@ -2208,7 +2266,7 @@ async function detailView(id) {
         ${operatorMediaHtml(d)}
         ${mediaHubHtml(d, c)}
         ${nearbyHubHtml(c, d)}
-        <section class="d-sec ev-sec" id="sec-events" data-events hidden><div class="sec-head">${iconTitle("fest", "주변 축제·행사")}<span class="sec-note">30km 안 · 45일 이내</span></div><div data-events-body></div></section>
+        <section class="d-sec ev-sec" id="sec-events" data-events><div class="sec-head">${iconTitle("fest", "주변 축제·행사")}<span class="sec-note">30km 안 · 45일 이내</span></div><div data-events-body></div></section>
         ${reviewLinksHtml(d, c)}
         ${infoHtml(c)}
         ${commentsHtml(c)}
@@ -3774,10 +3832,60 @@ function openWeatherModal(c, initialDate, data) {
 }
 
 function reserveDock(c) {
-  const options = bookingOptions(c);
-  const main = options[0] ?? null;
-  const label = main ? `${bookingLabel(main)}에서 예약` : "예약하기";
-  return `<div class="d-dock-in">${heartBtn(c)}${c.tel && main ? `<a class="btn ghost" href="tel:${esc(c.tel)}" aria-label="전화">${ic("phone")}</a>` : ""}${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">${esc(label)}</a>` : c.tel ? `<a class="btn primary wide" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}</div>`;
+  const options = getAllBookingChannels(c);
+  const main = options[0] ?? (c.gc_url ? { url: c.gc_url, title: "고캠핑에서 예약하기", name: "고캠핑", kind: "online" } : null);
+  const mainLabel = main ? (main.kind === "phone" ? main.title : `${main.name}에서 예약`) : "예약하기";
+  const on = isSaved(c.id);
+
+  const menuItems = options.map((opt) => {
+    if (opt.kind === "phone") {
+      return `<button type="button" class="dock-menu-item is-tel" data-tel="${esc(opt.tel)}" data-tel-fmt="${esc(opt.telFmt)}">
+        <span class="dock-menu-icon">${ic("phone")}</span>
+        <span class="dock-menu-text"><b>${esc(opt.title)}</b></span>
+        <span class="dock-menu-badge" data-tel-action>전화 걸기</span>
+      </button>`;
+    }
+    const icon = opt.platform === "naver" ? ic("search") : opt.platform === "gocamping" ? ic("tent") : ic("booking");
+    return `<a href="${esc(opt.url)}" target="_blank" rel="noopener" class="dock-menu-item">
+      <span class="dock-menu-icon">${icon}</span>
+      <span class="dock-menu-text"><b>${esc(opt.title)}</b></span>
+      <svg class="ic dock-menu-ext"><use href="#i-external"/></svg>
+    </a>`;
+  }).join("");
+
+  return `<div class="d-dock-in">
+    <button class="dock-act-btn dock-heart${on ? " on" : ""}" type="button" data-save="${esc(c.id)}" aria-pressed="${on}" aria-label="${on ? "좋아요 해제" : "좋아요"}">
+      ${ic(on ? "heart" : "heart-o")}
+      <span>좋아요</span>
+    </button>
+    <div class="dock-reserve-group">
+      ${main ? (main.kind === "phone" ? `
+        <button type="button" class="btn primary dock-reserve-main is-tel" data-tel="${esc(main.tel)}" data-tel-fmt="${esc(main.telFmt)}">
+          <span class="dock-reserve-label">${esc(mainLabel)}</span>
+        </button>
+      ` : `
+        <a class="btn primary dock-reserve-main" href="${esc(main.url)}" target="_blank" rel="noopener">
+          <span class="dock-reserve-label">${esc(mainLabel)}</span>
+        </a>
+      `) : `<button type="button" class="btn primary dock-reserve-main" disabled><span class="dock-reserve-label">예약 정보 없음</span></button>`}
+      <button type="button" class="btn primary dock-reserve-toggle" aria-expanded="false" aria-label="다른 예약 방법 목록 열기">
+        <svg class="ic dock-toggle-arrow"><use href="#i-chevron-up"/></svg>
+      </button>
+      <div class="dock-reserve-menu" hidden>
+        <div class="dock-menu-header">
+          <span class="dock-menu-title">예약 방법 선택</span>
+          <button type="button" class="dock-menu-close" aria-label="닫기">${ic("close")}</button>
+        </div>
+        <div class="dock-menu-list">
+          ${menuItems || `<div class="dock-menu-empty">등록된 예약 정보가 없습니다.</div>`}
+        </div>
+      </div>
+    </div>
+    <button class="dock-act-btn dock-share" type="button" data-dock-share aria-label="공유">
+      <svg class="ic"><use href="#i-share"/></svg>
+      <span>공유</span>
+    </button>
+  </div>`;
 }
 // 상세 보조 모듈(/conditions·/context·/operator)은 사이트 루트(/camp/)에 있다.
 function bindDetail() {
@@ -3852,18 +3960,21 @@ function bindDetail() {
   if (late.length) {
     const mo = new MutationObserver(syncJumps);
     late.forEach((t) => mo.observe(t, { attributes: true, attributeFilter: ["hidden"] }));
+    cleanup.push(() => mo.disconnect());
     if ("IntersectionObserver" in window) {
-      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) jumps.forEach((a) => a.toggleAttribute("aria-current", a.dataset.jump === e.target.id)); }), { rootMargin: "-30% 0px -60% 0px" });
+      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) jumps.forEach((a) => a.toggleAttribute("aria-current", a.dataset.jump === e.target.id)); }), { rootMargin: "-15% 0px -70% 0px" });
       late.forEach((t) => io.observe(t));
+      cleanup.push(() => io.disconnect());
     }
   }
-  $(".d-jump")?.addEventListener("click", (e) => {
+  $(".d-jump-bar, .d-jump")?.addEventListener("click", (e) => {
     const a = e.target.closest("[data-jump]");
     if (!a) return;
     e.preventDefault();
     const t = document.getElementById(a.dataset.jump);
     t?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
     t?.setAttribute("tabindex", "-1"); t?.focus({ preventScroll: true });
+    jumps.forEach((x) => x.toggleAttribute("aria-current", x === a));
   });
   // 관련 영상 · SNS 칩: 이 자리 목록 전환(바깥 플랫폼 칩은 링크라 그대로 새 탭)
   $(".media-hub")?.addEventListener("click", (e) => {
@@ -4050,6 +4161,90 @@ function bindDetail() {
     if (!b) return;
     await fetch(`${SB.url}/rest/v1/campground_comment?id=eq.${encodeURIComponent(b.dataset.cmtDel)}`, { method: "PATCH", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json" }, body: JSON.stringify({ is_deleted: true }) }).catch(() => null);
     loadComments(id);
+  });
+
+  // ── 하단 고정바 (예약 드롭업 메뉴, 전화연결/클립보드, 공유) ──
+  const isMobile = /iPhone|iPad|iPod|Android|webOS/i.test(navigator.userAgent) || (window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
+  $$("[data-tel-action]").forEach((el) => {
+    el.textContent = isMobile ? "전화 걸기" : "번호 복사";
+  });
+
+  const reserveGroup = $(".dock-reserve-group");
+  const reserveToggle = $(".dock-reserve-toggle");
+  const reserveMenu = $(".dock-reserve-menu");
+
+  const closeReserveMenu = () => {
+    if (reserveMenu) reserveMenu.hidden = true;
+    if (reserveGroup) reserveGroup.classList.remove("is-open");
+    if (reserveToggle) reserveToggle.setAttribute("aria-expanded", "false");
+  };
+
+  reserveToggle?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (!reserveMenu) return;
+    const willOpen = reserveMenu.hidden;
+    reserveMenu.hidden = !willOpen;
+    reserveGroup?.classList.toggle("is-open", willOpen);
+    reserveToggle.setAttribute("aria-expanded", String(willOpen));
+  });
+
+  $(".dock-menu-close")?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    closeReserveMenu();
+  });
+
+  document.addEventListener("click", (e) => {
+    if (reserveMenu && !reserveMenu.hidden && !e.target.closest(".dock-reserve-group")) {
+      closeReserveMenu();
+    }
+  });
+
+  reserveMenu?.addEventListener("click", (e) => {
+    if (e.target.closest("a")) closeReserveMenu();
+  });
+
+  $$(".dock-reserve-group .is-tel").forEach((btn) => {
+    btn.addEventListener("click", async (e) => {
+      e.stopPropagation();
+      const tel = btn.dataset.tel;
+      const telFmt = btn.dataset.telFmt || tel;
+      if (!tel) return;
+      if (isMobile) {
+        window.location.href = `tel:${tel}`;
+      } else {
+        try {
+          if (navigator.clipboard) {
+            await navigator.clipboard.writeText(telFmt);
+            toast(`전화번호가 복사되었습니다: ${telFmt}`);
+          } else {
+            prompt("전화번호를 복사하세요:", telFmt);
+          }
+        } catch {
+          prompt("전화번호를 복사하세요:", telFmt);
+        }
+      }
+      closeReserveMenu();
+    });
+  });
+
+  $("[data-dock-share]")?.addEventListener("click", async () => {
+    const curCamp = S.byId.get(id);
+    const title = curCamp ? `${nameOf(curCamp).name} - 모여라캠핑` : document.title;
+    const url = window.location.href;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title, text: `${title}\n${url}`, url });
+        return;
+      } catch (err) {
+        if (err.name === "AbortError") return;
+      }
+    }
+    if (navigator.clipboard) {
+      await navigator.clipboard.writeText(url);
+      toast("주소가 복사되었습니다.");
+    } else {
+      prompt("주소를 복사하세요:", url);
+    }
   });
 }
 function openLightbox(c, start) {
