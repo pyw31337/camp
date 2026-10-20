@@ -28,3 +28,16 @@ test("축제 범위: 5km·7일부터, 진행 중이 없으면 10km·10일 → 20
   assert.deepEqual(autoRange(mk([["a", 25, "2026-11-20", "2026-11-21"]]), "2026-10-20"), [30, 45]);
   assert.equal(inRange(mk([["a", 3, "2026-10-29", "2026-10-29"]]), 5, 7, "2026-10-20").length, 0, "7일 뒤 시작은 7일 범위 밖");
 });
+
+test("주변 축제·행사 카드 정렬: 가장 가까운 거리(최단 거리) 순으로 맨 상단 맨 좌측(첫 카드)에 배열된다", async () => {
+  const { render } = await import("../../camping-atlas/public/context/events.js");
+  const ev = (t, s) => ({ t, s, e: "2026-10-30", k: "축제", u: "https://example.org/" });
+  // 캠핑장 데이터: 원본 순서가 14.2km, 25km, 10.9km일 때
+  const data = {
+    camps: { 99: [["far", 25.0], ["mid", 14.2], ["near", 10.9]] },
+    ev: { far: ev("먼 행사", "2026-10-20"), mid: ev("중간 행사", "2026-10-20"), near: ev("가장 가까운 행사", "2026-10-20") },
+  };
+  const html = render(data, "99", "2026-10-20");
+  const firstCardTitle = html.match(/<h3>([^<]+)<\/h3>/)?.[1];
+  assert.equal(firstCardTitle, "가장 가까운 행사", "가장 가까운 거리의 행사가 맨 처음(상단 좌측)에 위치해야 함");
+});

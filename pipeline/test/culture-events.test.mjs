@@ -58,6 +58,16 @@ test("같은 행사 합치기: 제목 키 + 기간 겹침, 빈 칸은 다른 원
   assert.deepEqual(rows.map(([id]) => id), ["cf:f1", "tour:8"]);
 });
 
+test("같은 행사 합치기: 구/군 지자체 명칭 차이(울산 중구 국가유산야행 vs 울산 국가유산 야행)도 하나로 합치고 포스터 보존", () => {
+  const ev1 = cultureEventOf({ ...base, id: "u1", source: "festival", genre: "exhibition", title: "울산 중구 국가유산야행", date: "2026.10.23 ~ 2026.10.25", image: "https://pyw31337.github.io/culture/p1.webp", lat: 35.557, lng: 129.320 }, T);
+  const ev2 = cultureEventOf({ ...base, id: "u2", source: "heritage", genre: "festival", title: "울산 국가유산 야행", date: "2026.10.23 ~ 2026.10.25", image: "", lat: 35.548, lng: 129.297 }, T);
+  const { events, alias } = mergeEvents([ev1, ev2], []);
+  assert.equal(events.length, 1);
+  assert.equal(events[0].id, "cf:u1");
+  assert.equal(events[0].img, "https://pyw31337.github.io/culture/p1.webp");
+  assert.equal(alias.get("cf:u2"), "cf:u1");
+});
+
 test("공연은 캠핑장마다 최대 3개, 축제가 먼저", () => {
   const evs = [
     ...[1, 2, 3, 4, 5].map((i) => cultureEventOf({ ...base, id: `p${i}`, source: "kopis", genre: "concert", title: `공연${i}`, date: `2026.10.2${i}` }, T)),
