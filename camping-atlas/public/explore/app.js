@@ -197,9 +197,18 @@ function noKeys(c) {
   if (k.has("NO_PET")) k.delete("BIG_DOG");
   return (c._no = NO_ORDER.filter((x) => k.has(x)));
 }
+// 방문객·지인 초대 허용 업장(운영자 공지·규칙·요금 전수 조사 기반)
+const INVITE_OK_SET = new Set([
+  "100019", "100137", "100298", "100476", "100684", "100730", "100820", "100912", "100948", "101076",
+  "101307", "101553", "101585", "101669", "101740", "101759", "102331", "1025", "1075", "2216",
+  "2272", "2304", "2587", "2733", "3375", "512", "7008", "7124", "7132", "7174",
+  "7208", "7210", "7228", "7253", "734", "7435", "7670", "7838", "7883", "7896",
+  "7901", "7928", "7934", "7967", "8196", "930",
+]);
 const noBadge = (k) => (NO_TAGS[k] ? `<span class="bdg bdg-no">${ic(NO_TAGS[k][1])}${esc(NO_TAGS[k][0])}</span>` : "");
 function badges(c, max = 4, maxNo = 2) {
   const f = facts(c), out = [];
+  if (INVITE_OK_SET.has(String(c.id))) out.push(`<span class="bdg bdg-teal">${ic("door")}초대가능</span>`);
   if (pos(f.power) && f.power.ok && f.power.w) out.push(`<span class="bdg bdg-volt">${ic("bolt")}${esc(f.power.short)}</span>`);
   if (pos(f.fire) && f.fire.kind === "FIREWOOD_OK") out.push(`<span class="bdg bdg-flame">${ic("flame")}장작</span>`);
   if (pos(f.park) && f.park.ok === true) out.push(`<span class="bdg bdg-cobalt">${ic("car")}텐트 옆</span>`);
@@ -461,7 +470,7 @@ function carousel(c, { eager = false, cls = "", single = false } = {}) {
     ? imageTag(u, alt, { eager })
     : `<img data-src="${esc(photoUrl(u))}" data-hi-src="${esc(photoHiUrl(u))}" alt="" decoding="async" draggable="false">`).join("");
   const dots = ph.length > 1 ? `<span class="car-dots" aria-hidden="true">${ph.map((_, i) => `<i${i ? "" : ' class="on"'}></i>`).join("")}</span>` : "";
-  const nav = ph.length > 1 ? `<button class="car-nav prev" type="button" aria-label="이전 사진">${ic("arr-left")}</button><button class="car-nav next" type="button" aria-label="다음 사진">${ic("arr-right")}</button>` : "";
+  const nav = ph.length > 1 ? `<button class="car-nav prev" type="button" aria-label="이전 사진">${ic("left")}</button><button class="car-nav next" type="button" aria-label="다음 사진">${ic("right")}</button>` : "";
   return `<div class="car car-multi ${cls}" data-n="${ph.length}"><div class="car-track">${slides}</div>${dots}${nav}</div>`;
 }
 function hydrate(car) {
@@ -652,18 +661,18 @@ function initDraggableRails(root = document) {
 function rowsHtml(c) {
   const f = facts(c);
   const row = (n, label, icon, x) => `<li><span class="rn">${n}</span><span class="rl">${ic(icon)}${label}</span><span class="rv${x ? "" : " none"}">${x ? esc(x.v) : "–"}</span>${x ? dot(x.g) : ""}</li>`;
-  // 04 주변·05 가격(소유자 2026-10-20): 주변은 마트·편의점·정육점 순서 고정, 가격은 ‘1박 2만~8만원’.
-  const near = nearLine(c, " "), fm = feeMain(c);
+  // 04 주변·05 가격(소유자 2026-10-20): 주변은 마트·편의점·정육점 순서 고정(' · ' 구분), 가격은 ‘2만~8만원’.
+  const near = nearLine(c, " · "), fm = feeMain(c);
   const nearX = near ? { v: near } : null;
-  const feeX = fm?.text ? { v: `1박 ${fm.text}${fm.est ? " 추정" : ""}`, g: GR(c.fee.grade) } : null;
+  const feeX = fm?.text ? { v: `${fm.text}${fm.est ? " 추정" : ""}`, g: GR(c.fee.grade) } : null;
   return `<ol class="rows">${row("01", "주차", "car", f.park)}${row("02", "전기", "bolt", f.power)}${row("03", "장작", "flame", f.fire)}${row("04", "주변", "store", nearX).replace("<li>", '<li class="r-near">')}${row("05", "가격", "won", feeX)}</ol>`;
 }
 function rowsHtmlHorizontal(c) {
   const f = facts(c), ti = c.ti ?? {};
   const row = (n, label, icon, x) => `<li><span class="rn">${n}</span><span class="rl">${ic(icon)}${label}</span><span class="rv${x ? "" : " none"}">${x ? esc(x.v) : "–"}</span>${x ? dot(x.g) : ""}</li>`;
-  const near = nearLine(c, " "), fm = feeMain(c);
+  const near = nearLine(c, " · "), fm = feeMain(c);
   const nearX = near ? { v: near } : null;
-  const feeX = fm?.text ? { v: `1박 ${fm.text}${fm.est ? " 추정" : ""}`, g: GR(c.fee?.grade) } : null;
+  const feeX = fm?.text ? { v: `${fm.text}${fm.est ? " 추정" : ""}`, g: GR(c.fee?.grade) } : null;
   const timeStr = [ti.i?.[0] ? `입실 ${ti.i[0]}` : "", ti.o?.[0] ? `퇴실 ${ti.o[0]}` : "", ti.m?.[0] ? `매너 ${ti.m[0]}부터` : ""].filter(Boolean).join(" · ");
   const timeX = timeStr ? { v: timeStr, g: ti.i?.[1] } : null;
   const petX = f.pet ? { v: f.pet.v, g: f.pet.g } : null;
@@ -975,7 +984,6 @@ function renderResults({ reset = true } = {}) {
     $("[data-res-title]").innerHTML = `<b>조건 검색</b>`;
     const themeList = THEMES.filter(([k]) => k !== "POPULAR");
     const defs = [
-      ["AVAIL", "지금 공식 접수 중", (c) => S.avail.has(String(c.id))],
       ...themeList.slice(0, 3),
       ["T:HOUSE", "캐빈·방갈로", (c) => hasType(c, "HOUSE")],
       ...themeList.slice(3, 6),

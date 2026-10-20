@@ -459,9 +459,26 @@ img { color: transparent; }
 .bdg-flame-soft { --c: var(--flame-soft); --on: var(--on-flame-soft); }
 .bdg-cobalt { --c: var(--cobalt); }
 .bdg-ink { --c: var(--ink); }
-/* 불가사항: 같은 아이콘, 공통 빨간 배지 */
-.bdg-no { --c: var(--no); --on: #fff; color: var(--no-ink); }
-.d-bdgs .bdg-no, .hr-tags .bdg-no { background: var(--no-tint); border-color: var(--no-line); }
+.bdg-teal { --c: #0d9488; }
+/* 불가사항: 빨간색 캡슐 배경, 좌측 흰색 배경에 빨간색 아이콘, 우측 흰색 텍스트로 차별화(소유자 요청) */
+.bdg-no {
+  background: #d32f2f;
+  color: #fff;
+  box-shadow: 0 1px 6px rgba(211, 47, 47, .32);
+}
+.bdg-no .ic {
+  background: #fff;
+  color: #d32f2f;
+}
+.d-bdgs .bdg-no, .hr-tags .bdg-no {
+  background: #d32f2f;
+  border-color: #d32f2f;
+  color: #fff;
+}
+.d-bdgs .bdg-no .ic, .hr-tags .bdg-no .ic {
+  background: #fff;
+  color: #d32f2f;
+}
 .bdg-danger { --c: #e53935; --on: #fff; color: #d32f2f; }
 .bdg-danger .ic { background: #e53935; color: #fff; }
 
@@ -480,10 +497,36 @@ img { color: transparent; }
 .card:has(.bdgs:not(:empty)) .car-dots { bottom: 44px; }
 .car-dots i { width: 6px; height: 6px; border-radius: 999px; background: rgba(255, 255, 255, .6); transition: width .2s; }
 .car-dots i.on { width: 16px; background: #fff; }
-.car-nav { position: absolute; top: 50%; z-index: 4; display: grid; place-items: center; width: 34px; height: 34px; margin-top: -17px; border-radius: 999px; background: rgba(255, 255, 255, .94); color: var(--ink); box-shadow: 0 2px 8px rgba(0, 0, 0, .18); opacity: 0; transition: opacity .15s, transform .15s; border: none; cursor: pointer; }
-.car-nav:hover { background: #fff; transform: scale(1.06); }
-.car-nav.prev { left: 8px; } .car-nav.next { right: 8px; }
-@media (hover: hover) { .car:hover .car-nav, .card:hover .car-nav, .review-pick:hover .car-nav { opacity: 1; } }
+.car-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin-top: -16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .92);
+  color: var(--ink);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .22);
+  opacity: .85;
+  transition: opacity .15s, transform .15s, background .15s;
+  border: none;
+  cursor: pointer;
+}
+.car-nav .ic {
+  width: 18px;
+  height: 18px;
+  color: var(--ink);
+}
+.car-nav:hover {
+  opacity: 1;
+  background: #fff;
+  transform: scale(1.08);
+}
+.car-nav.prev { left: 8px; }
+.car-nav.next { right: 8px; }
 
 /* ── 상세 규격화 ─────────────────────────────────────────── */
 .detail { width: 100%; max-width: var(--content); margin-left: auto; margin-right: auto; padding: 0 var(--gut) var(--page-pad-bottom); }
