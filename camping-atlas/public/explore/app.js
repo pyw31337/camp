@@ -312,7 +312,7 @@ const THEMES = [
   ["POPULAR", "실시간 인기", (c) => Boolean(c.m7 || c.rv?.n > 5)],
   ["FREE", "무료", isFree],
   ["WATER", "물놀이터", hasWater],
-  ["CAMPNIC", "캠크닉", (c) => (c.types ?? []).includes("캠프닉") || /캠프닉|캠크닉|데이\s*캠핑|당일/.test(c.name ?? "")],
+  ["CAMPNIC", "캠프닉", (c) => (c.types ?? []).includes("캠프닉") || /캠프닉|캠크닉|데이\s*캠핑|당일/.test(c.name ?? "")],
   ["VALLEY", "계곡", (c) => c.pf?.t?.includes("VALLEY")],
   ["FOREST", "숲", (c) => c.pf?.t?.includes("FOREST")],
   ["BEACH", "바다", (c) => c.pf?.t?.includes("BEACH") || c.th?.includes("sea")],
@@ -349,7 +349,7 @@ const THEME_SUBS = {
   POPULAR: "최근 7일간 캠퍼들 사이에서 가장 많이 언급되고 화제가 된 인기 캠핑장",
   FREE: "입장·이용료가 무료로 확인된 곳",
   WATER: "물놀이장·수영장이 있는 곳. 공공은 여름 한시 운영",
-  CAMPNIC: "숙박 없이 당일로 즐기는 민간·공공 캠크닉",
+  CAMPNIC: "숙박 없이 당일로 즐기는 민간·공공 캠프닉",
   VALLEY: "시원한 물소리와 맑은 물놀이를 즐길 수 있는 계곡 야영장",
   FOREST: "피톤치드 가득한 울창한 숲속 힐링 캠핑장",
   BEACH: "탁 트인 바다 전망과 파도 소리를 즐기는 해변 캠핑장",
@@ -1131,7 +1131,7 @@ const KINDS = [
   ["HOUSE", "숙박동·방갈로", (c) => hasFirmType(c, "HOUSE")],
   ["RV", "캠핑카·트레일러", (c) => hasFirmType(c, "RV") || c.trailer === true],
   ["CAR_CAMP", "차박", (c) => hasFirmType(c, "CAR_CAMP")],
-  ["DAY", "당일 캠크닉", dayUse],
+  ["DAY", "당일 캠프닉", dayUse],
 ];
 const KIND = Object.fromEntries(KINDS.map(([k, l, t]) => [k, { label: l, test: t }]));
 const W_OPTS = [[0, "상관없음"], [1, "전기 있음"], [600, "600W 이상"], [1100, "1,100W 이상"]];
@@ -1294,7 +1294,7 @@ function paintCondSheet() {
 // 히어로 아래 바로 쓰는 예시 조건(소유자 예시를 그대로 버튼으로)
 const PRESETS = [
   ["반려견 동반", { pet: true }], ["1,100W 이상 전기", { w: 1100 }], ["사이트 8m 이상", { size: 8 }],
-  ["글램핑·카라반", { kind: ["GLAMPING", "CARAVAN"] }], ["당일 캠크닉", { kind: ["DAY"] }], ["장작 불멍", { fire: true }],
+  ["글램핑·카라반", { kind: ["GLAMPING", "CARAVAN"] }], ["당일 캠프닉", { kind: ["DAY"] }], ["장작 불멍", { fire: true }],
 ];
 
 // ── 화면: 목록(히어로 검색 결과) ─────────────────────────────
