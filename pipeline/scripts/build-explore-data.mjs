@@ -204,7 +204,8 @@ for (const [id, d] of Object.entries(details)) {
     const layoutKeys = new Set((so.layout?.images ?? []).map((x) => photoKey(x.img ?? x.thumb)));
     const images = uniqueBy((so.image ?? []).filter((x) => (snapCamps.get(x.thumb)?.size ?? 0) < 3), (x) => photoKey(x.img ?? x.thumb), layoutKeys);
     const titleByUrl = new Map();
-    for (const r of [...(so.blog ?? []), ...(so.cafe ?? []), ...(w?.blog ?? []), ...(w?.cafe ?? []), ...(w?.web ?? [])]) {
+    const wr = web?.campgrounds?.[id]; // 아래 w(231행)는 이 블록 밖에서 선언돼 여기서 쓸 수 없다
+    for (const r of [...(so.blog ?? []), ...(so.cafe ?? []), ...(wr?.blog ?? []), ...(wr?.cafe ?? []), ...(wr?.web ?? [])]) {
       if (r.url && r.title) titleByUrl.set(r.url, r.title);
     }
     for (const img of images) {
