@@ -923,6 +923,7 @@ document.addEventListener("click", (e) => {
   pop.style.top = `${below ? r.bottom + 8 : r.top - 8 - pop.offsetHeight}px`;
 });
 addEventListener("scroll", () => { $("#pop").hidden = true; }, { passive: true });
+addEventListener("keydown", (e) => { if (e.key === "Escape") $("#pop").hidden = true; });
 // 상세 화면의 작은 (i)를 없애고 카드·행 전체를 눌러 원문을 연다(소유자 2026-10-20). 키보드: Tab으로 가서 Enter·Space.
 const TIP_HOST = ".tile, .stype, .pt, .ptiers, .plist li, .use, .d-line, .rs-avail, .sec-note, .amen-tile, .amen-n > div, .ev-card, li, p";
 function hostTips(root) {
@@ -4027,6 +4028,15 @@ function bindDetail() {
       const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) jumps.forEach((a) => a.toggleAttribute("aria-current", a.dataset.jump === e.target.id)); }), { rootMargin: "-15% 0px -70% 0px" });
       late.forEach((t) => io.observe(t));
       cleanup.push(() => io.disconnect());
+      const onScrollEnd = () => {
+        const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60;
+        if (atBottom && jumps.length) {
+          const last = jumps[jumps.length - 1];
+          jumps.forEach((a) => a.toggleAttribute("aria-current", a === last));
+        }
+      };
+      window.addEventListener("scroll", onScrollEnd, { passive: true });
+      cleanup.push(() => window.removeEventListener("scroll", onScrollEnd));
     }
   }
   $(".d-jump-bar, .d-jump")?.addEventListener("click", (e) => {
