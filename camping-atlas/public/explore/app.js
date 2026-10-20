@@ -3073,46 +3073,99 @@ function mediaHubHtml(d, c) {
   const name = nameOf(c).name;
   const q = encodeURIComponent(`${name} 캠핑`);
 
-  // YouTube & 영상 목록 추출 (x.yt 또는 url 기반)
+  // 1. YouTube 영상 목록 (x.yt 또는 url 기반)
   const ytVideos = (d?.videos ?? []).map((x) => {
     const yt = x.yt || (x.url && x.url.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([A-Za-z0-9_-]{11})/)?.[1]) || null;
     return { ...x, yt };
   });
-  const v = ytVideos.slice(0, 8);
+  const ytList = ytVideos
+    .filter((x) => x.yt || (x.url && /youtube\.com|youtu\.be/i.test(x.url)) || (!isHost(x.url, /naver\./) && !isHost(x.url, /daum\.|kakao\.|tistory\.|brunch\./)))
+    .slice(0, 8);
 
-  const seen = new Set();
+  // 2. 전체 수집 글 (블로그·카페·웹) 및 사진 매핑
+  const seenPosts = new Set();
   const posts = [...(d?.reviews ?? []), ...(d?.cafe ?? []), ...(d?.web ?? [])]
-    .filter((x) => x.url && x.title && !seen.has(x.url) && seen.add(x.url))
+    .filter((x) => x.url && x.title && !seenPosts.has(x.url) && seenPosts.add(x.url))
     .sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
 
-  const naverPosts = posts.filter((x) => isHost(x.url, /naver\.com$|naver\.me$/)).slice(0, 8);
-  const daumPosts = posts.filter((x) => isHost(x.url, /daum\.net$|kakao\.com$|tistory\.com$|brunch\.co\.kr$/)).slice(0, 8);
+  const photoByUrl = new Map((d?.sns_images ?? []).filter((p) => p.url && (p.thumb || p.img)).map((p) => [p.url, p.thumb || p.img]));
 
-  const postList = (rows, label, url, key) => rows.length ? `
-    <div class="mh-posts">
-      ${rows.map((x) => `<a class="mh-post" href="${esc(x.url)}" target="_blank" rel="noopener"><b>${esc(serviceText(x.title, 60))}</b><i>${esc(sourceName(x.src, hostOf(x.url) || "원문"))}${x.date ? ` · ${esc(formatKoreanDate(x.date))}` : ""}</i>${ic("external", "line")}</a>`).join("")}
-    </div>
-    <div class="mh-more-wrap"><a class="mh-more-btn" href="${esc(url)}" target="_blank" rel="noopener">${platIc(key)}<span>${esc(label)}에서 더보기</span>${ic("right")}</a></div>
-  ` : `<div class="mh-empty"><p>${esc(name)} 관련 등록된 ${esc(label)} 글이 없습니다.</p><div class="mh-more-wrap"><a class="mh-more-btn" href="${esc(url)}" target="_blank" rel="noopener">${platIc(key)}<span>${esc(label)}에서 직접 검색하기</span>${ic("right")}</a></div></div>`;
+  // 3. 네이버: 영상 및 썸네일 글 통합 (영상 우선, 썸네일 있는 글 우선, 최신순)
+  const seenNaver = new Set();
+  const naverVideos = (d?.videos ?? []).filter((x) => x.url && isHost(x.url, /naver\.com$|naver\.me$/));
+  const naverPosts = posts.filter((x) => isHost(x.url, /naver\.com$|naver\.me$/)).map((x) => ({
+    ...x,
+    thumb: x.thumb || photoByUrl.get(x.url) || null,
+  }));
+  const naverList = [...naverVideos, ...naverPosts]
+    .filter((x) => x.url && !seenNaver.has(x.url) && seenNaver.add(x.url))
+    .sort((a, b) => (b.thumb ? 1 : 0) - (a.thumb ? 1 : 0) || String(b.date ?? "").localeCompare(String(a.date ?? "")))
+    .slice(0, 8);
 
-  const videoRail = v.length ? `
-    <div class="rail vids" data-cgrid>
-      ${v.map((x, i) => {
-        const fact = sourceFact({ src: x.yt ? "YouTube" : sourceName(x.author, "영상"), url: x.url ?? `https://www.youtube.com/watch?v=${x.yt}`, date: x.date, title: x.title }, "영상");
-        if (x.yt) {
-          return `<article class="vid-wrap"><button type="button" class="vid" data-yt="${esc(x.yt)}"><img src="https://i.ytimg.com/vi/${encodeURIComponent(x.yt)}/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14z"/></svg></span><b>${esc(serviceText(x.title, 60) || `현장 영상 ${i + 1}`)}</b><i>${esc([x.author, x.date ? formatKoreanDate(x.date) : ""].filter(Boolean).join(" · ") || "재생하기")}</i></button>${srcTip(fact, `관련 영상 ${i + 1}`)}</article>`;
-        }
-        return `<article class="vid-wrap"><a class="vid" href="${esc(x.url)}" target="_blank" rel="noopener"><img src="${esc(x.thumb || "")}" alt="" loading="lazy" decoding="async"><span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14z"/></svg></span><b>${esc(serviceText(x.title, 60) || `영상 ${i + 1}`)}</b><i>${esc([x.author, x.date ? formatKoreanDate(x.date) : ""].filter(Boolean).join(" · ") || "영상 보기")}</i></a>${srcTip(fact, `관련 영상 ${i + 1}`)}</article>`;
-      }).join("")}
-    </div>
-    <div class="mh-more-wrap"><a class="mh-more-btn" href="https://www.youtube.com/results?search_query=${q}" target="_blank" rel="noopener">${platIc("youtube")}<span>YouTube에서 더보기</span>${ic("right")}</a></div>
-  ` : `<div class="mh-empty"><p>${esc(name)} 관련 등록된 영상이 없습니다.</p><div class="mh-more-wrap"><a class="mh-more-btn" href="https://www.youtube.com/results?search_query=${q}" target="_blank" rel="noopener">${platIc("youtube")}<span>YouTube에서 영상 검색하기</span>${ic("right")}</a></div></div>`;
+  // 4. 다음/카카오: 영상 및 썸네일 글 통합 (영상 우선, 썸네일 있는 글 우선, 최신순)
+  const seenDaum = new Set();
+  const daumVideos = (d?.videos ?? []).filter((x) => x.url && isHost(x.url, /daum\.net$|kakao\.com$|tistory\.com$|brunch\.co\.kr$/));
+  const daumPosts = posts.filter((x) => isHost(x.url, /daum\.net$|kakao\.com$|tistory\.com$|brunch\.co\.kr$/)).map((x) => ({
+    ...x,
+    thumb: x.thumb || photoByUrl.get(x.url) || null,
+  }));
+  const daumList = [...daumVideos, ...daumPosts]
+    .filter((x) => x.url && !seenDaum.has(x.url) && seenDaum.add(x.url))
+    .sort((a, b) => (b.thumb ? 1 : 0) - (a.thumb ? 1 : 0) || String(b.date ?? "").localeCompare(String(a.date ?? "")))
+    .slice(0, 8);
 
-  // 내부 탭으로 목록을 전환하는 플랫폼: YouTube, 네이버, 다음
+  // 플랫폼별 동일한 카드 포맷 렌더러
+  const renderMediaRail = (items, platformKey, platformLabel, searchUrl) => {
+    if (!items.length) {
+      return `<div class="mh-empty"><p>${esc(name)} 관련 등록된 ${esc(platformLabel)} 영상이 없습니다.</p><div class="mh-more-wrap"><a class="mh-more-btn" href="${esc(searchUrl)}" target="_blank" rel="noopener">${platIc(platformKey)}<span>${esc(platformLabel)}에서 영상 검색하기</span>${ic("right")}</a></div></div>`;
+    }
+
+    const cards = items.map((x, i) => {
+      const isYt = Boolean(x.yt);
+      const fact = sourceFact({
+        src: isYt ? "YouTube" : sourceName(x.src || x.author, platformLabel),
+        url: x.url ?? (isYt ? `https://www.youtube.com/watch?v=${x.yt}` : searchUrl),
+        date: x.date,
+        title: x.title,
+      }, "영상");
+
+      const thumbUrl = isYt
+        ? `https://i.ytimg.com/vi/${encodeURIComponent(x.yt)}/hqdefault.jpg`
+        : (x.thumb || "");
+
+      const authorText = x.author || (x.src ? sourceName(x.src, hostOf(x.url) || platformLabel) : platformLabel);
+      const metaText = [authorText, x.date ? formatKoreanDate(x.date) : ""].filter(Boolean).join(" · ") || (isYt ? "재생하기" : "영상 보기");
+      const titleText = serviceText(x.title, 60) || `${platformLabel} 영상 ${i + 1}`;
+
+      const playIcon = `<span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14z"/></svg></span>`;
+
+      const inner = thumbUrl
+        ? `<img src="${esc(thumbUrl)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">${playIcon}<b>${esc(titleText)}</b><i>${esc(metaText)}</i>`
+        : `<div class="vid-noimg">${platIc(platformKey)}<span>${esc(platformLabel)}</span></div>${playIcon}<b>${esc(titleText)}</b><i>${esc(metaText)}</i>`;
+
+      if (isYt) {
+        return `<article class="vid-wrap"><button type="button" class="vid" data-yt="${esc(x.yt)}">${inner}</button>${srcTip(fact, `관련 영상 ${i + 1}`)}</article>`;
+      }
+      return `<article class="vid-wrap"><a class="vid" href="${esc(x.url)}" target="_blank" rel="noopener">${inner}</a>${srcTip(fact, `${platformLabel} 영상 ${i + 1}`)}</article>`;
+    }).join("");
+
+    return `
+      <div class="rail vids" data-cgrid>
+        ${cards}
+      </div>
+      <div class="mh-more-wrap">
+        <a class="mh-more-btn" href="${esc(searchUrl)}" target="_blank" rel="noopener">
+          ${platIc(platformKey)}<span>${esc(platformLabel)}에서 더보기</span>${ic("right")}
+        </a>
+      </div>
+    `;
+  };
+
+  // 내부 탭으로 목록을 전환하는 플랫폼: YouTube, 네이버, 다음 (동일 포맷 유지)
   const inSiteTabs = [
-    { key: "youtube", label: "YouTube", n: v.length, panel: videoRail, url: `https://www.youtube.com/results?search_query=${q}` },
-    { key: "naver", label: "네이버", n: naverPosts.length, panel: postList(naverPosts, "네이버", `https://search.naver.com/search.naver?query=${q}`, "naver"), url: `https://search.naver.com/search.naver?query=${q}` },
-    { key: "daum", label: "다음", n: daumPosts.length, panel: postList(daumPosts, "다음", `https://search.daum.net/search?q=${q}`, "daum"), url: `https://search.daum.net/search?q=${q}` },
+    { key: "youtube", label: "YouTube", n: ytList.length, panel: renderMediaRail(ytList, "youtube", "YouTube", `https://www.youtube.com/results?search_query=${q}`), url: `https://www.youtube.com/results?search_query=${q}` },
+    { key: "naver", label: "네이버", n: naverList.length, panel: renderMediaRail(naverList, "naver", "네이버", `https://search.naver.com/search.naver?query=${q}`), url: `https://search.naver.com/search.naver?query=${q}` },
+    { key: "daum", label: "다음", n: daumList.length, panel: renderMediaRail(daumList, "daum", "다음", `https://search.daum.net/search?q=${q}`), url: `https://search.daum.net/search?q=${q}` },
   ];
 
   // 외부 플랫폼 바로가기: Instagram, Facebook, TikTok (직접 수집 불가 플랫폼만 새창 이동)
@@ -3979,12 +4032,19 @@ function bindDetail() {
     t?.setAttribute("tabindex", "-1"); t?.focus({ preventScroll: true });
     jumps.forEach((x) => x.toggleAttribute("aria-current", x === a));
   });
-  // 관련 영상 · SNS 칩: 이 자리 목록 전환(바깥 플랫폼 칩은 링크라 그대로 새 탭)
+  // 관련 영상 · SNS 탭: 이 자리 목록 전환(바깥 플랫폼 칩은 링크라 그대로 새 탭)
   $(".media-hub")?.addEventListener("click", (e) => {
     const t = e.target.closest("[data-mh-tab]");
     if (!t) return;
     $$(".media-hub [data-mh-tab]").forEach((b) => b.setAttribute("aria-selected", String(b === t)));
-    $$(".media-hub [role='tabpanel']").forEach((p) => { p.hidden = p.id !== t.getAttribute("aria-controls"); });
+    $$(".media-hub [role='tabpanel']").forEach((p) => {
+      const isTarget = p.id === t.getAttribute("aria-controls");
+      p.hidden = !isTarget;
+      if (isTarget) {
+        const grid = p.querySelector("[data-cgrid]");
+        if (grid) import(new URL(`${MOD_ROOT}context/cgrid.js`, import.meta.url).href).then((m) => m.apply(grid)).catch(() => {});
+      }
+    });
   });
   $(".nearby-hub")?.addEventListener("click", (e) => {
     const t = e.target.closest("[data-nb-tab]");
