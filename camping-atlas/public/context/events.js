@@ -1,7 +1,7 @@
 // 상세 화면 ‘주변 축제·행사’ 포스터 카드 — ./events.json(파이프라인 sync-culture-events.mjs)을 읽어 그린다.
 // 원천: CultureFlow(공연·전시·축제 모음) + 한국관광공사 TourAPI 축제. 포스터는 원래 주소를 그대로 쓰고(저장하지 않음)
 // 카드마다 캠핑장에서의 거리를 붙이고 카드 전체가 원문 링크다. 자료가 없거나 실패하면 칸을 숨긴 채 둔다.
-// 2026-10-20 소유자: 거리·기간을 셀렉트 2개로 고르고, 기본은 5km·7일에서 진행 중인 행사가 없으면 10km·10일 → 20km·20일 → 30km·45일로 넓힌다.
+// 2026-10-21 소유자: 거리·기간을 셀렉트 2개로 고르고, 기본은 5km·7일에서 결과가 없으면 10km·10일 → 20km·30일 → 30km·45일로 넓힌다.
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const DOW = ["일", "월", "화", "수", "목", "금", "토"];
 const md = (iso) => { const [, m, d] = String(iso).split("-"); const w = DOW[new Date(`${iso}T00:00:00Z`).getUTCDay()]; return `${Number(m)}/${Number(d)}(${w})`; };
@@ -26,15 +26,14 @@ export function eventsFor(data, id, today = kstToday()) {
     .map((x) => ({ ...x, state: x.e.s <= today ? "ongoing" : "upcoming", weekend: x.e.s <= wk.sun && x.e.e >= wk.sat }));
 }
 /** 거리·기간 단계(자동 확장 순서) */
-export const RANGES = [[5, 7], [10, 10], [20, 20], [30, 45]];
+export const RANGES = [[5, 7], [10, 10], [20, 30], [30, 45]];
 export const KM_OPTS = [5, 10, 20, 30];
 export const DAY_OPTS = [7, 10, 20, 30, 45];
 /** km 안·오늘부터 days일 안에 시작(또는 진행 중)인 행사만 */
 export const inRange = (list, kmMax, days, today = kstToday()) => list.filter((x) => x.km <= kmMax && x.e.s <= addDays(today, days));
-/** 진행 중인 행사가 나오는 가장 좁은 단계(없으면 행사가 하나라도 있는 가장 좁은 단계, 그것도 없으면 가장 넓은 단계) */
+/** 결과가 하나 이상 나오는 가장 좁은 단계. 기본 범위가 비어 있을 때만 자동으로 넓힌다. */
 export function autoRange(list, today = kstToday()) {
-  const hit = RANGES.find(([k, d]) => inRange(list, k, d, today).some((x) => x.state === "ongoing"))
-    ?? RANGES.find(([k, d]) => inRange(list, k, d, today).length);
+  const hit = RANGES.find(([k, d]) => inRange(list, k, d, today).length);
   return hit ?? RANGES.at(-1);
 }
 const MAP_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 0h16v16H0z" fill="none"/><path fill="currentColor" d="M6 2.09c.133.008.266.042.388.103L9.598 3.8a1 1 0 0 0 .402.104V13.91a1 1 0 0 1-.388-.102L6.402 12.2A1 1 0 0 0 6 12.096zm7.629.459A1 1 0 0 1 15 3.477v7.98a1 1 0 0 1-.653.938L11 13.63V3.6zM5 12.4l-2.629 1.05A1 1 0 0 1 1 12.523v-7.98a1 1 0 0 1 .653-.939L5 2.37z"/></svg>`;
@@ -131,6 +130,7 @@ export async function mount(el, camp) {
   const data = await load();
   const id = String(camp?.id ?? "");
   const today = kstToday();
+  const all = eventsFor(data, id, today);
   if (!all.length) {
     el.hidden = false;
     const body = el.querySelector("[data-events-body]") ?? el;
