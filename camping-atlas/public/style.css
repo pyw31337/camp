@@ -192,7 +192,7 @@ body[data-view="theme"] .top .gear-chip { background: rgba(8,18,30,.42); color: 
 .hero { position: relative; padding: clamp(28px, 5vw, 72px) 0 clamp(24px, 3.5vw, 44px); overflow: hidden; }
 .hero-bg { display: none; }
 [data-v="a"] .hero { min-height: clamp(380px, 40vw, 560px); display: flex; align-items: flex-end; }
-[data-v="a"] .hero-bg { display: block; position: absolute; inset: 0; background: url("../images/hero-campsite.webp") 70% 60% / cover no-repeat; }
+[data-v="a"] .hero-bg { display: block; position: absolute; inset: 0; background: url("./images/hero-campsite.webp") 70% 60% / cover no-repeat; }
 [data-v="a"] .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5,17,31,.88) 0%, rgba(5,17,31,.64) 38%, rgba(5,17,31,.18) 70%, rgba(5,17,31,.1)), linear-gradient(180deg, rgba(2,12,25,.28), rgba(2,12,25,.1) 48%, rgba(5,17,31,.7)); }
 .hero-in {
   position: relative; width: 100%; max-width: var(--content); margin: 0 auto; min-width: 0;
@@ -1155,9 +1155,12 @@ body.map-mode { overflow: hidden; height: 100dvh; }
 .thumb { flex: none; display: grid; gap: 4px; width: 120px; }
 .thumb img { width: 120px; height: 120px; border-radius: var(--r-s); object-fit: cover; background: var(--soft-2); }
 .thumb i { font-style: normal; font-size: .76rem; color: var(--ink-3); }
-.vid { position: relative; flex: none; width: 240px; display: grid; gap: 4px; text-align: left; }
-.vid img { width: 240px; aspect-ratio: 16 / 9; border-radius: var(--r-s); object-fit: cover; background: var(--soft-2); }
-.vid-play { position: absolute; left: 96px; top: 43px; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 999px; background: rgba(0, 0, 0, .6); color: #fff; }
+.vid { position: relative; flex: none; width: 240px; display: grid; gap: 4px; text-align: left; color: inherit; text-decoration: none; }
+.vid img { width: 240px; aspect-ratio: 16 / 9; border-radius: var(--r-s); object-fit: cover; background: var(--soft-2); transition: transform var(--dur-fast) var(--ease-smooth); }
+.vid-noimg { position: relative; width: 240px; aspect-ratio: 16 / 9; border-radius: var(--r-s); background: linear-gradient(135deg, var(--soft), var(--line)); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: var(--ink-3); font-size: .84rem; font-weight: 750; overflow: hidden; }
+.vid-play { position: absolute; left: 96px; top: 43px; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 999px; background: rgba(0, 0, 0, .6); color: #fff; transition: background var(--dur-fast) var(--ease-smooth), transform var(--dur-fast) var(--ease-spring); }
+.vid:hover .vid-play { background: rgba(0, 0, 0, .8); transform: scale(1.06); }
+.vid:hover b { color: var(--accent); }
 .vid b { font-size: .88rem; font-weight: 800; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .vid i { font-style: normal; font-size: .76rem; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .vid.playing { width: min(480px, 86vw); }
@@ -1232,7 +1235,7 @@ body.map-mode { overflow: hidden; height: 100dvh; }
   body[data-view="theme"] .top .gear-chip span { display: none; }
   .hero { padding-top: 24px; }
   [data-v="a"] .hero { min-height: 404px; padding-top: 140px; padding-bottom: 18px; }
-  [data-v="a"] .hero-bg { background-image: url("../images/hero-campsite-m.webp"); background-position: 50% 30%; background-size: cover; background-color: #091a2f; }
+  [data-v="a"] .hero-bg { background-image: url("./images/hero-campsite-m.webp"); background-position: 50% 30%; background-size: cover; background-color: #091a2f; }
   [data-v="a"] .hero-bg::after { background: linear-gradient(180deg, rgba(2,12,25,.18) 0, rgba(2,12,25,.22) 42%, rgba(2,12,25,.82) 100%); }
   .hero-in { gap: 10px; }
   .hero h1 { font-size: clamp(2.1rem, 11vw, 2.75rem); line-height: 1.04; }
@@ -2460,7 +2463,7 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 @media (min-width: 768px) {
   .rail.vids.cgrid { display: grid; grid-template-columns: repeat(var(--cg-cols, 2), minmax(0, 1fr)); overflow: visible; scroll-snap-type: none; -webkit-mask-image: none; mask-image: none; }
   .rail.vids.cgrid .vid-wrap { width: auto; min-width: 0; }
-  .rail.vids.cgrid .vid, .rail.vids.cgrid .vid img { width: 100%; }
+  .rail.vids.cgrid .vid, .rail.vids.cgrid .vid img, .rail.vids.cgrid .vid-noimg { width: 100%; }
   .rail.vids.cgrid .vid { container-type: inline-size; }
   .rail.vids.cgrid .vid-play { left: calc(50% - 24px); top: calc(28.125cqw - 24px); }
   .ev-rail.cgrid { grid-template-columns: repeat(var(--cg-cols, 2), minmax(0, 1fr)); }
