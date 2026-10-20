@@ -81,6 +81,41 @@ function formatKoreanDate(s) {
   }
   return str;
 }
+function formatRelativeDate(s, now = new Date()) {
+  if (!s) return "";
+  let d;
+  const str = String(s).trim();
+  const m = str.match(/^(\d{4})[-./](\d{1,2})[-./](\d{1,2})/);
+  if (m) {
+    d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+  } else {
+    d = new Date(s);
+  }
+  if (isNaN(d.getTime())) return "";
+
+  const diffMs = now.getTime() - d.getTime();
+  if (diffMs < 0) return "방금전";
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) return "오늘";
+  if (diffDays < 7) return `${diffDays}일전`;
+
+  const diffWeeks = Math.floor(diffDays / 7);
+  if (diffDays < 28) {
+    if (diffWeeks === 1) return "일주일전";
+    return `${diffWeeks}주전`;
+  }
+
+  const diffMonths = (now.getFullYear() - d.getFullYear()) * 12 + (now.getMonth() - d.getMonth()) - (now.getDate() < d.getDate() ? 1 : 0);
+  if (diffMonths < 12) {
+    if (diffMonths <= 1) return "한달전";
+    return `${diffMonths}개월전`;
+  }
+
+  const diffYears = Math.floor(diffMonths / 12);
+  if (diffYears <= 1) return "1년전";
+  return `${diffYears}년전`;
+}
 const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
@@ -2664,18 +2699,26 @@ function reviewLinksHtml(d, c) {
     </div>`;
 
   const seenUrl = new Set();
+  const titleByUrl = new Map();
+  for (const r of [...(d?.reviews ?? []), ...(d?.cafe ?? []), ...(d?.web ?? [])]) {
+    if (r.url && r.title) titleByUrl.set(r.url, r.title);
+  }
   const rawReviews = [...(d?.reviews ?? []), ...(d?.cafe ?? []), ...(d?.web ?? [])].filter((x) => x.url && x.title && !seenUrl.has(x.url) && seenUrl.add(x.url));
   const photos = snsImages(d);
   const photoByUrl = new Map(photos.map((x) => [x.url, x]));
-  const photoReviews = photos.filter((x) => x.url && !seenUrl.has(x.url) && seenUrl.add(x.url)).map((x, i) => ({
-    url: x.url,
-    title: x.title || `캠퍼 사진 ${i + 1}`,
-    date: x.date,
-    src: x.src || "캠퍼 사진",
-    thumb: mediaSmall(x),
-    img: mediaFull(x),
-    isPhoto: true,
-  }));
+  const photoReviews = photos.filter((x) => x.url && !seenUrl.has(x.url) && seenUrl.add(x.url)).map((x, i) => {
+    const fallbackTitle = campName ? `${campName} 캠퍼 사진 후기` : `캠퍼 사진 후기`;
+    const resolvedTitle = x.title || titleByUrl.get(x.url) || fallbackTitle;
+    return {
+      url: x.url,
+      title: resolvedTitle,
+      date: x.date,
+      src: x.src || "캠퍼 사진",
+      thumb: mediaSmall(x),
+      img: mediaFull(x),
+      isPhoto: true,
+    };
+  });
   const allItems = [...rawReviews, ...photoReviews].sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
 
   if (!allItems.length) {
@@ -2697,7 +2740,9 @@ function reviewLinksHtml(d, c) {
     const thumb = (matchedPhoto && mediaSmall(matchedPhoto)) || (x.thumb) || (canPreviewExternalMedia(x) && externalImage(x)) || apiThumb(x) || fav || campShot;
     const media = `<div class="media-card-photo">${thumb ? `<img src="${esc(thumb)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${esc(campShot || fav)}'">` : ic("file-text")}</div>`;
     const dateStr = formatKoreanDate(x.date);
-    return `<article class="review-link-card media-card"><a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${platformLabel} 후기 ${i + 1} 원문 열기">${media}<div class="media-card-body"><span class="media-card-source">${platIc(pk)}<span>${esc(platformLabel)}</span></span><b>${esc(serviceText(x.title, 54) || `방문 후기 ${i + 1}`)}</b>${summary ? `<em>${esc(summary)}</em>` : ""}${dateStr ? `<span class="media-card-date">${esc(dateStr)}</span>` : ""}</div></a>${srcTip(fact, `${platformLabel} 후기 ${i + 1}`)}</article>`;
+    const relStr = formatRelativeDate(x.date);
+    const dateHtml = dateStr ? `<span class="media-card-date"><span>${esc(dateStr)}</span>${relStr ? `<small class="date-rel">${esc(relStr)}</small>` : ""}</span>` : "";
+    return `<article class="review-link-card media-card"><a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${platformLabel} 후기 ${i + 1} 원문 열기">${media}<div class="media-card-body"><span class="media-card-source">${platIc(pk)}<span>${esc(platformLabel)}</span></span><b>${esc(serviceText(x.title, 54) || `방문 후기 ${i + 1}`)}</b>${summary ? `<em>${esc(summary)}</em>` : ""}${dateHtml}</div></a>${srcTip(fact, `${platformLabel} 후기 ${i + 1}`)}</article>`;
   }).join("");
 
   return `<section class="d-sec" id="sec-reviews"><div class="sec-head">${iconTitle("file-text", "방문후기")}<span class="sec-note">후기 ${allItems.length}건</span></div>

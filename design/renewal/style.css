@@ -1304,9 +1304,8 @@ a.near { color: inherit; text-decoration: none; }
 .media-card-source .plat-ic svg { width: 10px; height: 10px; }
 .media-card-body i { display: inline-flex; align-items: center; gap: 4px; color: var(--ink-3); font-size: .72rem; font-style: normal; font-weight: 750; }
 .media-card-body i .ic { width: 13px; height: 13px; color: var(--accent); }
-.media-card-body b { font-size: .92rem; line-height: 1.35; font-weight: 850; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.media-card-date { display: inline-flex; align-items: center; margin-top: auto; padding-top: 6px; color: var(--ink-3); font-size: .74rem; font-weight: 700; font-variant-numeric: tabular-nums; }
-.media-card-go { display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; color: var(--accent); font-size: .76rem; font-weight: 800; }
+.media-card-date { display: flex; align-items: center; justify-content: space-between; gap: 6px; width: 100%; margin-top: auto; padding-top: 6px; color: var(--ink-3); font-size: .74rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.media-card-date .date-rel { margin-left: auto; font-size: .7rem; font-weight: 400; color: var(--ink-3); opacity: .85; letter-spacing: -0.01em; white-space: nowrap; }
 .media-card-go .ic { width: 13px; height: 13px; }
 
 .nearby-places { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }

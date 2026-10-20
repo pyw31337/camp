@@ -203,6 +203,13 @@ for (const [id, d] of Object.entries(details)) {
     // 검색 사진: 같은 원본(이름 키)은 한 장만, 배치도로 이미 보인 사진과 여러 캠핑장(3곳 이상)에 똑같이 붙은 사진은 뺀다.
     const layoutKeys = new Set((so.layout?.images ?? []).map((x) => photoKey(x.img ?? x.thumb)));
     const images = uniqueBy((so.image ?? []).filter((x) => (snapCamps.get(x.thumb)?.size ?? 0) < 3), (x) => photoKey(x.img ?? x.thumb), layoutKeys);
+    const titleByUrl = new Map();
+    for (const r of [...(so.blog ?? []), ...(so.cafe ?? []), ...(w?.blog ?? []), ...(w?.cafe ?? []), ...(w?.web ?? [])]) {
+      if (r.url && r.title) titleByUrl.set(r.url, r.title);
+    }
+    for (const img of images) {
+      if (!img.title && titleByUrl.has(img.url)) img.title = titleByUrl.get(img.url);
+    }
     if (images.length) d.sns_images = images;
     if (so.vclip?.length) d.videos = so.vclip;
     if (so.layout) d.layout = so.layout;
