@@ -459,6 +459,8 @@ jobs:
           DATA_GO_KR_SERVICE_KEY="${{ github.event_name != 'pull_request' && secrets.DATA_GO_KR_SERVICE_KEY || '' }}" node pipeline/scripts/collect-urban-parks.mjs || true
           KAKAO_REST_API_KEY="${{ github.event_name != 'pull_request' && secrets.KAKAO_REST_API_KEY || '' }}" node pipeline/scripts/geocode-dayuse-osm.mjs || true
           node pipeline/scripts/apply-dayuse-seed.mjs
+          # 발행 전 상식 정리(공원에 캠핑장 요금·입퇴실 금지, 관광공사 광고 요금 제거, 숯 문구 모순, 좌표 오타). CI가 --check로 막는다.
+          node pipeline/scripts/publish-sanity.mjs
           # 열어 보니 없는 예약·홈페이지 링크(registry/link-health.json)를 c.dl로 표시해 화면 버튼에서 뺀다.
           node pipeline/scripts/build-link-health.mjs
           # 공식 사진이 없는 곳의 카드 대표 사진(registry/card-fallback.json — 검색 썸네일·원문 링크)을 c.pt로 붙인다.

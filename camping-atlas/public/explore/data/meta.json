@@ -934,41 +934,41 @@
     }
   },
   "coverage": {
-    "measured_at": "2026-10-20T09:00:05.876Z",
-    "total": 6276,
+    "measured_at": "2026-10-20T11:35:44.883Z",
+    "total": 6308,
     "goal": 2500,
     "fields": {
       "price": {
-        "any": 5406,
-        "confirmed": 3906
+        "any": 2239,
+        "confirmed": 657
       },
       "checkin": {
-        "any": 4708,
-        "confirmed": 3973
+        "any": 1552,
+        "confirmed": 817
       },
       "checkout": {
-        "any": 4667,
-        "confirmed": 3958
+        "any": 1511,
+        "confirmed": 802
       },
       "manner": {
-        "any": 4092,
-        "confirmed": 3688
+        "any": 936,
+        "confirmed": 532
       },
       "extra_fee": {
         "any": 283,
         "confirmed": 207
       },
       "refund": {
-        "any": 3975,
-        "confirmed": 3972
+        "any": 819,
+        "confirmed": 816
       },
       "parking": {
-        "any": 4683,
-        "confirmed": 4678
+        "any": 1527,
+        "confirmed": 1522
       },
       "power_w": {
-        "any": 3689,
-        "confirmed": 3622
+        "any": 533,
+        "confirmed": 466
       },
       "site_types": {
         "any": 2937,
@@ -979,7 +979,7 @@
         "confirmed": 0
       },
       "rich5": {
-        "any": 4371,
+        "any": 1215,
         "confirmed": 0
       }
     }

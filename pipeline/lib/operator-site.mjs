@@ -14,6 +14,8 @@ export const PLATFORM_HOSTS = [
   "campingtalk.me", "onda.me", "yanolja.com", "yeogi.com", "goodchoice.kr", "ticketplay.zone", "letsnowgo.com",
   "zapza.me", "penbang.com", "linktr.ee", "google.com", "booking.com", "agoda.com", "airbnb.co.kr", "airbnb.com",
   "forest.go.kr", "foresttrip.go.kr", "gocamping.or.kr", "knps.or.kr", "reservation.knps.or.kr",
+  // 관광공사 소개 페이지는 운영자 홈페이지가 아니다(광고·약관 문구가 요금·안내로 잘못 들어갔다, QA 2026-10-20).
+  "visitkorea.or.kr", "camppick.com", "campinghub.kr",
 ];
 
 export function hostOf(url) {

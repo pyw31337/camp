@@ -7,6 +7,8 @@
 
 export function detectPublicCampground(c) {
   if (!c) return null;
+  // 당일 장소(공원·물놀이터)는 야영장이 아니다 — 야영장 표준 규정을 붙이지 않는다(QA 2026-10-20).
+  if (c.du) return null;
   const name = String(c.name ?? "");
   const hp = String(c.homepage ?? "");
   const bk = String(c.booking?.primary?.url ?? "");
@@ -71,7 +73,6 @@ export function detectPublicCampground(c) {
         "입실 시간은 14:00부터이며, 퇴실 시간은 11:00까지입니다.",
         "야영장 매너타임 및 소등 시간은 22:00부터 익일 07:00까지입니다.",
         "관광진흥법 야영장 안전위생기준에 따라 전기 사용량은 600W 이하로 제한됩니다.",
-        "사이트 옆 주차 또는 전용 주차장 이용 원칙입니다.",
         "취소 및 환불은 공정거래위원회 소비자분쟁해결기준에 따라 사용예정일 10일 전 취소 시 100% 환불됩니다.",
       ].join(" "),
     };

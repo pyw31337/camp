@@ -3339,7 +3339,8 @@ function infoHtml(c) {
 // 비회원 한마디(Supabase campground_comment). 비밀번호 열은 읽지 않는다 — 지우기는 이 브라우저에서 쓴 글만.
 const SB = { url: document.querySelector('meta[name="supabase-url"]')?.content || "", key: document.querySelector('meta[name="supabase-anon-key"]')?.content || "" };
 function commentsHtml(c) {
-  if (!SB.url || !SB.key) return "";
+  // campground_comment.campground_id는 INT — 공원·당일 장소(문자 id)는 저장이 안 돼 400이 났다(QA 2026-10-20). 숫자 id만 연다.
+  if (!SB.url || !SB.key || !/^\d+$/.test(String(c.id))) return "";
   return `<section class="d-sec" id="cmt"><div class="sec-head">${iconTitle("chat-bubble", "캠퍼 한마디")}<span class="sec-note">로그인 없이</span></div>
     <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" placeholder="닉네임" required aria-label="닉네임"><textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁" required aria-label="내용"></textarea><button class="btn primary" type="submit">남기기</button></form>
     <ul class="cmts" data-cmts><li class="muted">불러오는 중…</li></ul></section>`;
@@ -3483,7 +3484,8 @@ async function fetchCampWeather(lat, lon) {
 
   try {
     const [fRes, aRes] = await Promise.all([
-      fetch(fUrl).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+      // 한 번 실패(일시 429·네트워크)하면 1.2초 뒤 한 번 더 받는다(QA 2026-10-20: 공원 상세에서 예보 실패).
+      fetch(fUrl).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((j) => j ?? new Promise((ok) => setTimeout(ok, 1200)).then(() => fetch(fUrl)).then((r) => (r.ok ? r.json() : null)).catch(() => null)),
       fetch(aUrl).then((r) => (r.ok ? r.json() : null)).catch(() => null),
     ]);
     if (!fRes || !fRes.daily) return null;
