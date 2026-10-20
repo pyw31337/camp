@@ -638,14 +638,34 @@ function initDraggableRails(root = document) {
 }
 
 // ── 카드 ─────────────────────────────────────────────────────
+// ── 카드 ─────────────────────────────────────────────────────
 function rowsHtml(c) {
   const f = facts(c);
-  const row = (n, label, x) => `<li><span class="rn">${n}</span><span class="rl">${label}</span><span class="rv${x ? "" : " none"}">${x ? esc(x.v) : "–"}</span>${x ? dot(x.g) : ""}</li>`;
+  const row = (n, label, icon, x) => `<li><span class="rn">${n}</span><span class="rl">${ic(icon)}${label}</span><span class="rv${x ? "" : " none"}">${x ? esc(x.v) : "–"}</span>${x ? dot(x.g) : ""}</li>`;
   // 04 주변·05 가격(소유자 2026-10-20): 주변은 마트·편의점·정육점 순서 고정, 가격은 ‘1박 2만~8만원’.
   const near = nearLine(c, " "), fm = feeMain(c);
   const nearX = near ? { v: near } : null;
   const feeX = fm?.text ? { v: `1박 ${fm.text}${fm.est ? " 추정" : ""}`, g: GR(c.fee.grade) } : null;
-  return `<ol class="rows">${row("01", "주차", f.park)}${row("02", "전기", f.power)}${row("03", "장작", f.fire)}${row("04", "주변", nearX).replace("<li>", '<li class="r-near">')}${row("05", "가격", feeX)}</ol>`;
+  return `<ol class="rows">${row("01", "주차", "car", f.park)}${row("02", "전기", "bolt", f.power)}${row("03", "장작", "flame", f.fire)}${row("04", "주변", "store", nearX).replace("<li>", '<li class="r-near">')}${row("05", "가격", "won", feeX)}</ol>`;
+}
+function rowsHtmlHorizontal(c) {
+  const f = facts(c), ti = c.ti ?? {};
+  const row = (n, label, icon, x) => `<li><span class="rn">${n}</span><span class="rl">${ic(icon)}${label}</span><span class="rv${x ? "" : " none"}">${x ? esc(x.v) : "–"}</span>${x ? dot(x.g) : ""}</li>`;
+  const near = nearLine(c, " "), fm = feeMain(c);
+  const nearX = near ? { v: near } : null;
+  const feeX = fm?.text ? { v: `1박 ${fm.text}${fm.est ? " 추정" : ""}`, g: GR(c.fee?.grade) } : null;
+  const timeStr = [ti.i?.[0] ? `입실 ${ti.i[0]}` : "", ti.o?.[0] ? `퇴실 ${ti.o[0]}` : "", ti.m?.[0] ? `매너 ${ti.m[0]}부터` : ""].filter(Boolean).join(" · ");
+  const timeX = timeStr ? { v: timeStr, g: ti.i?.[1] } : null;
+  const petX = f.pet ? { v: f.pet.v, g: f.pet.g } : null;
+  return `<ol class="rows rows-horiz">
+    ${row("01", "주차", "car", f.park)}
+    ${row("02", "전기", "bolt", f.power)}
+    ${row("03", "장작", "flame", f.fire)}
+    ${row("04", "반려견", "paw", petX)}
+    ${row("05", "시간", "clock", timeX)}
+    ${row("06", "주변", "store", nearX).replace("<li>", '<li class="r-near">')}
+    ${row("07", "가격", "won", feeX)}
+  </ol>`;
 }
 // 가는 길 장보기: 마트·편의점·정육점 중 5km 안에 있는 곳(LOCALDATA 인허가). 순서는 늘 마트 → 편의점 → 정육점(소유자 2026-10-20).
 function nearLine(c, sep = " · ") {
@@ -675,7 +695,7 @@ function card(c, i = 0) {
     </div>
     <div class="card-body">
       <div class="name-row"><h3 class="card-name">${esc(nameOf(c).name)}</h3>${heartBtn(c)}</div>
-      <p class="card-meta">${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
+      <p class="card-meta">${ic("pin")}${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
       ${c.st?.length ? `<p class="card-types">${ic("tent")}${esc(typeLine2(c))}</p>` : ""}
       ${rowsHtml(c)}
       ${feeMain(c)?.text && feeTiersLine(c) ? `<p class="card-tiers">${feeTiersLine(c)}</p>` : ""}
@@ -1217,9 +1237,6 @@ function siteSizeText(c) {
   const big = gs.reduce((a, g) => (Math.max(g.width_m, g.depth_m) > Math.max(a.width_m, a.depth_m) ? g : a));
   return `사이트 최대 ${big.width_m}×${big.depth_m}m`;
 }
-function listFact(label, value, g) {
-  return `<div class="lf${value ? "" : " none"}"><dt>${label}</dt><dd>${value ? `${esc(value)}${dot(g)}` : "–"}</dd></div>`;
-}
 // 켜진 조건이 이 캠핑장에서 어떻게 맞는지: ✓ 근거 · 법정 기준 · 확인 필요
 function condLine(c, ce) {
   if (!ce || !Object.keys(ce.st).length) return "";
@@ -1227,55 +1244,28 @@ function condLine(c, ce) {
   return `<p class="lrow-cond">${Object.entries(ce.st).map(([k, v]) => `<span class="cs cs-${v === "?" ? "unk" : v}">${v === "y" ? ic("check") : ""}${esc(txt[k]())}${v === "ref" ? " · 법정 기준 600W" : v === "?" ? " · 확인 필요" : ""}</span>`).join("")}</p>`;
 }
 function listRow({ c, st, ce }, i = 0) {
-  const f = facts(c), { tag } = nameOf(c), ti = c.ti ?? {}, r = reviewMeta(c), main = bookingChannels(c)[0];
-  const fee = feeMain(c)?.text ?? null;
+  const { tag } = nameOf(c), o = openingOf(c), main = bookingChannels(c)[0];
   const href = `#/c/${encodeURIComponent(c.id)}`;
-  return `<article class="lrow" data-id="${esc(c.id)}">
-    <a class="card-hit" href="${href}" draggable="false" aria-label="${esc(nameOf(c).name)} 상세 정보"></a>
-    <div class="lrow-media">
-      ${carousel(c, { eager: i < 3 })}
-      <span class="bdgs">${badges(c, 2)}</span>
+  return `<article class="card card-horizontal lrow" data-id="${esc(c.id)}">
+    <a class="card-hit" href="${href}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
+    <div class="card-media">${carousel(c, { eager: i < 3 })}
+      ${st ? `<span class="sig st-${st.k}">${ic(st.icon)}${esc(st.txt)}</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : S.avail?.has(String(c.id)) ? `<span class="sig live">${ic("check")}접수 중</span>` : ""}
+      <span class="bdgs">${badges(c, 3)}</span>
     </div>
-    <div class="lrow-body">
-      <div class="lrow-top">
-        <div class="lrow-title">
-          <p class="lrow-meta">${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}</p>
-          <h3><span class="lrow-name">${esc(nameOf(c).name)}</span></h3>
-        </div>
+    <div class="card-body">
+      <div class="name-row">
+        <h3 class="card-name">${esc(nameOf(c).name)}</h3>
         ${heartBtn(c)}
       </div>
-      ${st || condLine(c, ce) ? `
-        <div class="lrow-status-line">
-          ${st ? `<p class="lrow-date st-${st.k}">${ic(st.icon)}<b>${esc(st.txt)}</b><i>${esc(st.sub)}</i></p>` : ""}
-          ${condLine(c, ce)}
-        </div>
-      ` : ""}
-      <div class="lrow-section lrow-facts-wrap">
-        <dl class="lrow-facts">
-          ${listFact("1박", fee, GR(c.fee?.grade))}
-          ${listFact("입실", ti.i?.[0], ti.i?.[1])}
-          ${listFact("퇴실", ti.o?.[0], ti.o?.[1])}
-          ${listFact("매너타임", ti.m?.[0] ? `${ti.m[0]}부터` : null, ti.m?.[1])}
-          ${listFact("전기", f.power?.v, f.power?.g)}
-          ${listFact("주차", f.park?.v, f.park?.g)}
-          ${listFact("장작", f.fire?.v, f.fire?.g)}
-          ${listFact("반려견", f.pet?.v, f.pet?.g)}
-        </dl>
-      </div>
-      ${c.st?.length || typeLine(c) || siteSizeText(c) || nearLine(c) ? `
-        <div class="lrow-section lrow-env-wrap">
-          ${c.st?.length || typeLine(c) || siteSizeText(c) ? `<p class="lrow-line">${ic("tent")}<span>${esc([c.st?.length ? typeLine2(c) : typeLine(c), siteSizeText(c)].filter(Boolean).join(" · "))}</span></p>` : ""}
-          ${nearLine(c) ? `<p class="lrow-line">${ic("store")}<span>${esc(nearLine(c))}</span></p>` : ""}
-        </div>
-      ` : ""}
-      ${r.total || st?.url || main || c.tel ? `
-        <div class="lrow-section lrow-foot-wrap">
-          ${r.total ? `<p class="lrow-line lrow-review">${ic("heart")}<span>후기 ${fmt(r.total)}건</span>${reviewTopics(r.rv.p, "good", "heart")}${reviewTopics(r.rv.c, "watch", "down")}</p>` : ""}
-          ${st?.url || main || c.tel ? `
-            <div class="lrow-cta">
-              ${st?.url ? `<a class="btn primary" href="${esc(st.url)}" target="_blank" rel="noopener">${st.k === "vac" ? "빈자리 예약하기" : st.k === "full" ? "예약 화면 보기" : "공식 접수 보기"}</a>` : main ? `<a class="btn primary" href="${esc(main.url)}" target="_blank" rel="noopener" title="${esc(bookingLabel(main))}"><span>날짜 확인 · ${esc(bookingLabel(main))}</span></a>` : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}
-            </div>
-          ` : ""}
+      <p class="card-meta">${ic("pin")}${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
+      ${condLine(c, ce)}
+      ${c.st?.length || siteSizeText(c) ? `<p class="card-types">${ic("tent")}<span>${esc([c.st?.length ? typeLine2(c) : typeLine(c), siteSizeText(c)].filter(Boolean).join(" · "))}</span></p>` : ""}
+      ${rowsHtmlHorizontal(c)}
+      ${feeMain(c)?.text && feeTiersLine(c) ? `<p class="card-tiers">${feeTiersLine(c)}</p>` : ""}
+      ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-reviews">${cardReviewPills(c.rv)}</div>` : ""}
+      ${st?.url || main || c.tel ? `
+        <div class="card-cta">
+          ${st?.url ? `<a class="btn primary" href="${esc(st.url)}" target="_blank" rel="noopener">${st.k === "vac" ? "빈자리 예약하기" : st.k === "full" ? "예약 화면 보기" : "공식 접수 보기"}</a>` : main ? `<a class="btn primary" href="${esc(main.url)}" target="_blank" rel="noopener" title="${esc(bookingLabel(main))}">${ic("external")}<span>날짜 확인 · ${esc(bookingLabel(main))}</span></a>` : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}
         </div>
       ` : ""}
     </div>
