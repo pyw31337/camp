@@ -16,15 +16,17 @@ test("축제 카드: 캠핑장에서 거리(850m · 12.3km)를 보이고 카드�
   assert.match(html, /class="ev-map"/, "지도는 종류 줄 오른쪽 아이콘");
 });
 
-test("축제 범위: 5km·7일부터, 진행 중이 없으면 10km·10일 → 20km·20일 → 30km·45일로 넓힌다", async () => {
+test("축제 범위: 5km·7일부터, 결과가 없을 때만 10km·10일 → 20km·30일 → 30km·45일로 넓힌다", async () => {
   const { autoRange, inRange, eventsFor } = await import("../../camping-atlas/public/context/events.js");
   const ev = (s, e) => ({ t: "x", s, e, k: "축제" });
   const mk = (rows) => eventsFor({ camps: { 1: rows.map(([id, km]) => [id, km]) }, ev: Object.fromEntries(rows.map(([id, , s, e]) => [id, ev(s, e)])) }, "1", "2026-10-20");
   // 3km에 진행 중 → 5km·7일
   assert.deepEqual(autoRange(mk([["a", 3, "2026-10-01", "2026-10-30"]]), "2026-10-20"), [5, 7]);
-  // 3km는 예정뿐, 8km에 진행 중 → 10km·10일
-  assert.deepEqual(autoRange(mk([["a", 3, "2026-10-25", "2026-10-25"], ["b", 8, "2026-10-01", "2026-10-30"]]), "2026-10-20"), [10, 10]);
-  // 진행 중이 아예 없으면 행사가 있는 가장 좁은 단계
+  // 3km에 예정 행사가 하나라도 있으면 기본 5km·7일을 그대로 쓴다.
+  assert.deepEqual(autoRange(mk([["a", 3, "2026-10-25", "2026-10-25"], ["b", 8, "2026-10-01", "2026-10-30"]]), "2026-10-20"), [5, 7]);
+  // 20km 안 30일째 행사는 세 번째 범위에서 처음 보인다.
+  assert.deepEqual(autoRange(mk([["a", 18, "2026-11-17", "2026-11-18"]]), "2026-10-20"), [20, 30]);
+  // 그보다 멀고 늦은 행사는 최종 범위로 넓힌다.
   assert.deepEqual(autoRange(mk([["a", 25, "2026-11-20", "2026-11-21"]]), "2026-10-20"), [30, 45]);
   assert.equal(inRange(mk([["a", 3, "2026-10-29", "2026-10-29"]]), 5, 7, "2026-10-20").length, 0, "7일 뒤 시작은 7일 범위 밖");
 });

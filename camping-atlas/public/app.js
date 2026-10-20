@@ -453,6 +453,24 @@ function rich(c) {
   s += Math.min(Math.floor((Number(c.rv?.n) || 0) / 4), 5);
   return (c._rich = s);
 }
+// 홈의 추천 레일에는 고캠핑·운영자·발행 카탈로그의 실제 사진이 있는 곳만 쓴다.
+// 검색 결과용 후기/검색 썸네일(c.pt/c.sn)은 사진 공백을 줄이는 보조 수단으로만 쓰고,
+// 메인 진열의 대표 사진 근거로는 쓰지 않는다.
+function showcaseHasPhoto(c) {
+  return Boolean((S.photos[c.id] ?? []).length || (S.cards[c.id] ?? []).length || c.ph || c.img);
+}
+// 메인 추천 영역은 사진만 있는 장소를 전시하지 않는다. 사진 보유 업장의 정보량
+// 상위 25% 기준점의 절반을 통과한 곳만 노출한다. 검색 결과는 누락 없이 유지한다.
+let showcaseFloor = null;
+function showcaseEligible(c) {
+  if (!showcaseHasPhoto(c)) return false;
+  if (showcaseFloor == null) {
+    const scores = S.camps.filter(showcaseHasPhoto).map(rich).sort((a, b) => a - b);
+    const upperQuartile = scores[Math.max(0, Math.floor((scores.length - 1) * .75))] ?? 0;
+    showcaseFloor = Math.max(1, Math.ceil(upperQuartile * .5));
+  }
+  return rich(c) >= showcaseFloor;
+}
 // 사진이 한 장도 없는 곳은 신뢰가 낮아 일반·추천 목록에서 뒤로 보낸다(소유자 2026-10-20). 단, 이름으로 직접 찾은 곳은 그대로.
 function namedByQuery(c) {
   const q = String(S.q ?? "").replace(/\s+/g, "").toLowerCase();
@@ -473,7 +491,7 @@ function reviewMeta(c) {
 function reviewPicks() {
   return S.camps.filter((c) => {
     const r = reviewMeta(c);
-    return hasPhoto(c) && r.total >= 4 && r.positive > r.caution;
+    return showcaseEligible(c) && r.total >= 4 && r.positive > r.caution;
   }).sort((a, b) => reviewMeta(b).score - reviewMeta(a).score || rich(b) - rich(a)).slice(0, 10);
 }
 function reviewTopics(rows, cls, icon) {
@@ -676,9 +694,9 @@ function initDraggableRails(root = document) {
         rail.classList.remove("has-left-fade", "has-right-fade");
         return;
       }
-      const atStart = rail.scrollLeft <= 6;
       const atEnd = rail.scrollLeft >= max - 6;
-      rail.classList.toggle("has-left-fade", !atStart);
+      // 이미 넘긴 쪽(좌측)은 흐리게 숨기지 않는다. 다음 카드가 있는 우측만 안내한다.
+      rail.classList.remove("has-left-fade");
       rail.classList.toggle("has-right-fade", !atEnd);
     };
     rail.addEventListener("scroll", updateRailState, { passive: true });
@@ -1012,7 +1030,7 @@ function trendingShell() {
 }
 function trendingCard(x) {
   const c = S.byId.get(String(x.id));
-  if (!c) return "";
+  if (!c || !showcaseEligible(c)) return "";
   const arrow = x.trend === "up" ? `<span class="tr-tr up" aria-label="어제 ${x.prev}위에서 올라옴">▲${x.prev - x.rank}</span>` : x.trend === "down" ? `<span class="tr-tr down" aria-label="어제 ${x.prev}위에서 내려감">▼${x.rank - x.prev}</span>` : x.trend === "new" ? `<span class="tr-tr new" aria-label="새로 들어옴">NEW</span>` : "";
   const count = x.today ? `오늘 언급 <b>${fmt(x.today)}</b>건` : `7일 언급 <b>${fmt(x.week)}</b>건`;
   const srcs = Object.entries(x.by ?? {}).sort((a, b) => b[1] - a[1]).map(([k, n]) => trIcon(k, n)).join("");
@@ -1067,7 +1085,7 @@ function siteFooterHtml() {
   </footer>`;
 }
 function homeView() {
-  const openings = S.camps.map((c) => [c, openingOf(c)]).filter(([c, o]) => o && hasPhoto(c)).sort((a, b) => a[1].dd - b[1].dd);
+  const openings = S.camps.map((c) => [c, openingOf(c)]).filter(([c, o]) => o && showcaseEligible(c)).sort((a, b) => a[1].dd - b[1].dd);
   const themeItems = THEMES.map(([key, label, test]) => {
     const imgSrc = themeImg(key);
     const isWp = key === "WATER_PLAY";
@@ -2412,14 +2430,15 @@ function priceRows(c, d) {
       addStay(g.price || 0, label, "업장 등록", { g: "c", src: { label: bs.label ?? "예약 화면(업장 등록)", url: bs.url, at: bs.checked_at, quote: `${name}${g.size ? ` 규격 ${g.size[0]}m × ${g.size[1]}m` : ""}${g.price ? ` ${fmt(g.price)}원` : ""}${day ? ` · ${day} 1박` : ""}` } }, day ? `${day} 1박` : "");
     }
   }
-  // 고캠핑 상세 이용안내 요금표: 같은 행에서 같은 금액인 기간은 한 줄로 합치고, 이미 보인 금액은 뺀다.
+  // 고캠핑 상세 이용안내 요금표: 계절·요일·서비스별 원래 행을 보존한다.
+  // 금액이 같아도 주중/주말 또는 성수기/비수기의 선택 조건이 다르면 서로 다른 요금이다.
   if (d?.gcd?.fees?.length) {
-    const by = new Map();
-    for (const f of d.gcd.fees) { const k = `${f.label}|${f.won}`; if (!by.has(k)) by.set(k, { ...f, periods: [] }); by.get(k).periods.push(f.period); }
-    for (const x of by.values()) {
-      if (stayRows.some((r) => r.won === x.won)) continue;
-      const lab = serviceText(x.label.replace(/^(.+?) · \1$/, "$1"), 30);
-      addStay(x.won, `${lab} · ${x.periods.join("·")}`, "업장 등록", gcdFact(d.gcd, "고캠핑 상세 이용안내 요금표", `${x.label} ${x.periods.join("·")} ${fmt(x.won)}원`));
+    for (const x of d.gcd.fees) {
+      const lab = serviceText(String(x.label ?? "").replace(/^(.+?) · \1$/, "$1"), 44);
+      const period = serviceText(x.period, 30);
+      if (!lab && !period) continue;
+      const label = [lab || "캠핑 사이트", period].filter(Boolean).join(" · ");
+      addStay(x.won, label, "업장 등록", gcdFact(d.gcd, "고캠핑 상세 이용안내 요금표", `${x.label ?? ""} ${x.period ?? ""} ${fmt(x.won)}원`.trim()));
     }
   }
   if (!bs?.sites?.length && (d?.products ?? []).length) {
@@ -2891,6 +2910,17 @@ function layoutHtml(d, c) {
   const officialList = allImages.filter(isOfficialLayout);
   const hasOfficial = officialList.length > 0;
   const officialImg = officialList[0];
+  // 좁은 화면에서는 배치도 후보를 세로로 쌓지 않는다. 한 장씩 넘기며
+  // 라이트박스로 확대하는 동일한 순서의 가로 레일을 별도로 제공한다.
+  const mobileRail = (items) => `<div class="layout-mobile-rail rail" aria-label="시설 배치도 사진">
+    ${items.map((x, i) => {
+      const imgUrl = x.img || x.thumb;
+      return `<button type="button" class="layout-mobile-item" data-layout-open="${i}" aria-label="시설 배치도 ${i + 1} 크게 보기">
+        <img src="${esc(imgUrl)}" alt="시설 배치도 ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(x.thumb)}'){this.src='${esc(x.thumb)}'}">
+        <span>${i + 1} / ${items.length}</span>
+      </button>`;
+    }).join("")}
+  </div>`;
 
   if (hasOfficial) {
     const candidates = allImages.filter((x) => x !== officialImg).slice(0, 4);
@@ -2900,6 +2930,7 @@ function layoutHtml(d, c) {
         ${iconTitle("sitemap", "시설 배치도")}
         <span class="sec-note">고캠핑 등록 원본</span>
       </div>
+      ${mobileRail([officialImg, ...candidates])}
       <div class="layout-single-wrap">
         <button type="button" class="layout-single-btn" data-layout-open="0" aria-label="고캠핑 공식 시설 배치도 원본 크게 보기">
           <img src="${esc(mainImgUrl)}" alt="고캠핑 공식 시설 배치도" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(officialImg.thumb)}'){this.src='${esc(officialImg.thumb)}'}">
@@ -2940,6 +2971,7 @@ function layoutHtml(d, c) {
         <span class="sec-note">추정 사진 1장 (고캠핑 공식 배치도 없음)</span>
       </div>
       <p class="layout-note">고캠핑에 공식 배치도가 등록되지 않아, 캠퍼 후기 및 포토에서 찾은 시설배치도 추정 사진입니다. 사진을 누르면 라이트박스로 크게 확인하실 수 있습니다.</p>
+      ${mobileRail([single])}
       <div class="layout-single-wrap">
         <button type="button" class="layout-single-btn" data-layout-open="0" aria-label="추정 시설 배치도 원본 크게 보기">
           <img src="${esc(imgUrl)}" alt="추정 시설 배치도" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(single.thumb)}'){this.src='${esc(single.thumb)}'}">
@@ -2957,6 +2989,7 @@ function layoutHtml(d, c) {
         <span class="sec-note">추정 사진 ${candidates.length}장 (고캠핑 공식 배치도 없음)</span>
       </div>
       <p class="layout-note">고캠핑에 등록된 공식 배치도가 없습니다. 캠퍼 후기 및 포토에서 수집된 시설배치도 후보 사진들을 아래에서 직접 확인해 보세요. 카드를 누르면 라이트박스로 또렷하게 크게 열립니다.</p>
+      ${mobileRail(candidates)}
       <div class="layout-candidate-grid">
         ${candidates.map((x, i) => {
           const imgUrl = x.img || x.thumb;
@@ -3031,8 +3064,7 @@ function mediaHubHtml(d, c) {
     return { ...x, yt };
   });
   const ytList = ytVideos
-    .filter((x) => x.yt || (x.url && /youtube\.com|youtu\.be/i.test(x.url)) || (!isHost(x.url, /naver\./) && !isHost(x.url, /daum\.|kakao\.|tistory\.|brunch\./)))
-    .slice(0, 8);
+    .filter((x) => x.yt || (x.url && /youtube\.com|youtu\.be/i.test(x.url)) || (!isHost(x.url, /naver\./) && !isHost(x.url, /daum\.|kakao\.|tistory\.|brunch\./)));
 
   // 2. 전체 수집 글 (블로그·카페·웹) 및 사진 매핑
   const seenPosts = new Set();
@@ -3051,8 +3083,7 @@ function mediaHubHtml(d, c) {
   }));
   const naverList = [...naverVideos, ...naverPosts]
     .filter((x) => x.url && !seenNaver.has(x.url) && seenNaver.add(x.url))
-    .sort((a, b) => (b.thumb ? 1 : 0) - (a.thumb ? 1 : 0) || String(b.date ?? "").localeCompare(String(a.date ?? "")))
-    .slice(0, 8);
+    .sort((a, b) => (b.thumb ? 1 : 0) - (a.thumb ? 1 : 0) || String(b.date ?? "").localeCompare(String(a.date ?? "")));
 
   // 4. 다음/카카오: 영상 및 썸네일 글 통합 (영상 우선, 썸네일 있는 글 우선, 최신순)
   const seenDaum = new Set();
@@ -3063,8 +3094,7 @@ function mediaHubHtml(d, c) {
   }));
   const daumList = [...daumVideos, ...daumPosts]
     .filter((x) => x.url && !seenDaum.has(x.url) && seenDaum.add(x.url))
-    .sort((a, b) => (b.thumb ? 1 : 0) - (a.thumb ? 1 : 0) || String(b.date ?? "").localeCompare(String(a.date ?? "")))
-    .slice(0, 8);
+    .sort((a, b) => (b.thumb ? 1 : 0) - (a.thumb ? 1 : 0) || String(b.date ?? "").localeCompare(String(a.date ?? "")));
 
   // 플랫폼별 동일한 카드 포맷 렌더러
   const renderMediaRail = (items, platformKey, platformLabel, searchUrl) => {
@@ -3102,7 +3132,7 @@ function mediaHubHtml(d, c) {
     }).join("");
 
     return `
-      <div class="rail vids" data-cgrid>
+      <div class="rail vids">
         ${cards}
       </div>
       <div class="mh-more-wrap">
@@ -3212,17 +3242,16 @@ function reviewLinksHtml(d, c) {
     </section>`;
   }
 
-  const campShot = photosOf(c)[0] ? photoUrl(photosOf(c)[0]) : "";
   const cards = allItems.map((x, i) => {
     const pk = sourcePlatformKey(x);
     const platformLabel = sourcePlatformLabel(x);
     const fact = sourceFact(x, platformLabel, [x.title, x.snippet].filter(Boolean).join("\n"));
     const summary = reviewSummary(x.snippet);
-    const host = (() => { try { return new URL(x.url).hostname; } catch { return ""; } })();
-    const fav = host ? `https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=128` : "";
     const matchedPhoto = photoByUrl.get(x.url);
-    const thumb = (matchedPhoto && mediaSmall(matchedPhoto)) || (x.thumb) || (canPreviewExternalMedia(x) && externalImage(x)) || apiThumb(x) || fav || campShot;
-    const media = `<div class="media-card-photo">${thumb ? `<img src="${esc(thumb)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${esc(campShot || fav)}'">` : ic("file-text")}</div>`;
+    // 후기 썸네일은 해당 원문이 제공한 원본/허용 미리보기만 쓴다. 저해상도
+    // 파비콘이나 캠핑장 대표사진으로 바꿔 끼우면 다른 후기처럼 보일 수 있으므로 쓰지 않는다.
+    const thumb = (matchedPhoto && mediaFull(matchedPhoto)) || (canPreviewExternalMedia(x) && externalImage(x)) || apiThumb(x) || "";
+    const media = `<div class="media-card-photo${thumb ? "" : " is-empty"}">${thumb ? `<img src="${esc(thumb)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('.media-card-photo').classList.add('is-empty');this.remove()">` : ""}<span class="media-fallback">${platIc(pk)}</span></div>`;
     const dateStr = formatKoreanDate(x.date);
     const relStr = formatRelativeDate(x.date);
     const dateHtml = dateStr ? `<span class="media-card-date"><span>${esc(dateStr)}</span>${relStr ? `<small class="date-rel">${esc(relStr)}</small>` : ""}</span>` : "";
@@ -4237,6 +4266,31 @@ function bindDetail() {
     if (e.target.closest("a")) closeReserveMenu();
   });
 
+  // 모바일에서는 읽는 방향을 우선한다. 아래로 내릴 때는 고정 조작바를 접고,
+  // 위로 조금이라도 되돌리면 즉시 다시 보여 준다. 예약 메뉴가 열린 상태는 숨기지 않는다.
+  const dock = $(".d-dock");
+  if (dock && matchMedia("(max-width: 759px)").matches) {
+    // 라우트 전환이나 브라우저 복원 뒤에 남아 있을 수 있는 이전 상태를 먼저 지운다.
+    // 사용자가 아래로 읽기 시작한 뒤에만 접혀야 한다.
+    dock.classList.remove("is-retracted");
+    let lastY = Math.max(0, window.scrollY);
+    let pending = false;
+    const syncDock = () => {
+      pending = false;
+      const y = Math.max(0, window.scrollY);
+      const delta = y - lastY;
+      if (Math.abs(delta) < 8) return;
+      const menuOpen = reserveMenu && !reserveMenu.hidden;
+      dock.classList.toggle("is-retracted", delta > 0 && y > 120 && !menuOpen);
+      lastY = y;
+    };
+    const onDockScroll = () => {
+      if (!pending) { pending = true; requestAnimationFrame(syncDock); }
+    };
+    window.addEventListener("scroll", onDockScroll, { passive: true });
+    cleanup.push(() => window.removeEventListener("scroll", onDockScroll));
+  }
+
   $$(".dock-reserve-group .is-tel").forEach((btn) => {
     btn.addEventListener("click", async (e) => {
       e.stopPropagation();
@@ -4687,6 +4741,12 @@ addEventListener("keydown", (e) => {
 addEventListener("error", (e) => {
   const im = e.target;
   if (!(im instanceof HTMLImageElement)) return;
+  // 메인 추천은 깨진 대표사진을 빈 칸이나 다른 장소의 사진으로 바꾸지 않는다.
+  // 단일 사진 카드라면 해당 진열만 빼고, 검색 목록 자체는 계속 남긴다.
+  if (im.closest(".car-single")) {
+    const showcase = im.closest(".open-card, .review-pick, .tr-card");
+    if (showcase) { showcase.remove(); return; }
+  }
   // 후기 사진 원본이 막히면 검색 썸네일로 한 번 바꾼다
   const fb = PT_FB.get(im.getAttribute("src"));
   if (fb) { im.removeAttribute("srcset"); im.setAttribute("src", fb); return; }

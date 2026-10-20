@@ -2899,3 +2899,119 @@ details[open] > *:not(summary) {
   }
 }
 
+/* ── 2026-10-21 모바일 탐색 밀도·미디어 정리 ─────────────── */
+/* 한 번 넘긴 좌측은 흐리지 않고, 아직 볼 수 있는 우측만 안내한다. */
+.rail.has-left-fade:not(.has-right-fade) { -webkit-mask-image: none; mask-image: none; }
+.rail.has-left-fade.has-right-fade {
+  -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - clamp(36px, 6vw, 64px)), transparent 100%);
+  mask-image: linear-gradient(to right, #000 0, #000 calc(100% - clamp(36px, 6vw, 64px)), transparent 100%);
+}
+
+/* 아이콘은 동작을 보조할 뿐 독립 사각 버튼처럼 보이지 않게 한다. */
+.icon-btn, [data-v="b"] .icon-btn, [data-v="c"] .icon-btn {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.dock-menu-icon {
+  background: transparent;
+  border-radius: 0;
+}
+.ic { background: transparent; box-shadow: none; }
+/* 섹션 제목·규격 행의 의미 아이콘은 글머리표다. 작은 버튼/칸처럼 보이는 테두리를 두지 않는다. */
+.sec-title .ic,
+.use dt .ic,
+.rows .rl .ic,
+.d-jump .ic,
+.plist .ic {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* 후기 카드에 원문 썸네일이 없거나 실패한 경우, 다른 사진을 끼워 넣지 않는다. */
+.media-card-photo .media-fallback { display: none; }
+.media-card-photo.is-empty { display: grid; place-items: center; background: linear-gradient(145deg, var(--soft), var(--paper)); }
+.media-card-photo.is-empty .media-fallback { display: inline-grid; place-items: center; }
+.media-card-photo.is-empty .plat-ic { width: 42px; height: 42px; }
+.media-card-photo.is-empty .plat-ic svg { width: 22px; height: 22px; }
+
+/* 배치도는 모바일에서 세로 열이 아니라 한 장씩 넘기는 가로 레일이다. */
+.layout-mobile-rail { display: none; }
+
+/* 상세 앵커 메뉴는 넓은 화면에서 폭을 고르게 쓰고, 좁은 화면에서는 한 줄 스와이프를 유지한다. */
+.d-jump-in { justify-content: space-between; }
+.d-jump-in a { flex: 1 0 auto; min-width: 60px; padding-inline: clamp(10px, 1.8vw, 24px); }
+
+/* 내부/외부 플랫폼을 한 줄의 같은 스와이프 흐름으로 둔다. */
+.media-hub .mh-tabs-bar {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.media-hub .mh-tabs-bar::-webkit-scrollbar { display: none; }
+.media-hub .mh-tabs,
+.media-hub .mh-exts {
+  flex: 0 0 auto;
+  width: max-content;
+  min-width: max-content;
+  overflow: visible;
+  margin: 0;
+  scrollbar-width: auto;
+}
+.media-hub .mh-tabs { gap: 16px; }
+.media-hub .mh-exts { gap: 8px; padding: 5px 0; }
+
+/* 상세 안의 푸터도 좌·우·하단을 화면 끝까지 채운다. */
+.detail > .site-footer {
+  width: calc(100% + (var(--gut) * 2));
+  margin-right: calc(var(--gut) * -1);
+  margin-left: calc(var(--gut) * -1);
+}
+
+@media (max-width: 759px) {
+  body[data-view="detail"] .d-main { gap: 42px; }
+  body[data-view="detail"] .d-head { padding-bottom: 36px; }
+  body[data-view="detail"] .d-sec .sec-head { margin-bottom: 18px; }
+  body[data-view="detail"] .d-sec .layout-note { margin-bottom: 14px; }
+
+  .d-jump-in { justify-content: flex-start; gap: 4px; }
+  .d-jump-in a { flex: 0 0 auto; min-width: 58px; padding-inline: 12px; }
+
+  .layout-mobile-rail {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 2px 0 8px;
+    margin: 0;
+  }
+  .layout-mobile-item {
+    position: relative;
+    flex: 0 0 min(82vw, 330px);
+    min-width: 0;
+    scroll-snap-align: start;
+    overflow: hidden;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--r-s);
+    background: var(--soft);
+    aspect-ratio: 4 / 3;
+  }
+  .layout-mobile-item img { width: 100%; height: 100%; object-fit: contain; display: block; background: var(--paper); }
+  .layout-mobile-item span { position: absolute; right: 8px; bottom: 8px; padding: 4px 8px; border-radius: 999px; background: rgba(16,20,20,.72); color: #fff; font-size: .72rem; font-weight: 800; }
+  .layout-sec .layout-single-wrap,
+  .layout-sec .layout-extra-zone,
+  .layout-sec .layout-candidate-grid { display: none; }
+
+  .d-dock { transition: transform .24s var(--ease-smooth), opacity .2s var(--ease-smooth); will-change: transform; }
+  .d-dock.is-retracted { transform: translateY(calc(100% + env(safe-area-inset-bottom))); opacity: 0; pointer-events: none; }
+  .detail > .site-footer { padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
+}
+
