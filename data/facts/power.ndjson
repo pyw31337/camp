@@ -43,7 +43,7 @@
 {"cid":"231","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"236","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"267","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"267","attr":"POWER_FEE","value":5000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.sjacamping.com/guide3","at":"2026-10-19T09:29:05.919Z","quote":"(일반차량): 음식물쓰레기처리비용+전기료 5,000원","text":"5,000원"}
+{"cid":"267","attr":"POWER_FEE","value":5000,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.sjacamping.com/guide3","at":"2026-10-19T23:27:17.499Z","quote":"(일반차량): 음식물쓰레기처리비용+전기료 5,000원","text":"5,000원"}
 {"cid":"268","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"277","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"289","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}

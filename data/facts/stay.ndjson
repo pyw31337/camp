@@ -14,10 +14,10 @@
 {"cid":"10","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":40}
 {"cid":"10","attr":"STAY_CARAVAN_SITES","value":40,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"11","attr":"SITE_TOTAL","value":38,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"11","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"http://www.yangchoncamp.co.kr/","at":"2026-10-19T09:39:02.937Z","quote":"오토캠핑장 보러가기 감동과 힐링의 휴가를 보낼 수 있는"}
-{"cid":"11","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"http://www.yangchoncamp.co.kr/bbs/board.php?bo_table=gallery&wr_id=42","at":"2026-10-19T09:39:02.937Z","quote":"카라반(5)"}
-{"cid":"11","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.yangchoncamp.co.kr/","at":"2026-10-19T09:39:02.937Z","text":"펜션","quote":"펜션 하위분류"}
-{"cid":"11","attr":"SITE_TYPE","value":"RV","grade":"OPERATOR","src":"operator_homepage","url":"http://www.yangchoncamp.co.kr/bbs/board.php?bo_table=gallery&wr_id=42","at":"2026-10-19T09:39:02.937Z","quote":"C1 ~ D3 카라반 입장 사이트"}
+{"cid":"11","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"http://www.yangchoncamp.co.kr/","at":"2026-10-19T23:27:18.353Z","quote":"오토캠핑장 보러가기 감동과 힐링의 휴가를 보낼 수 있는"}
+{"cid":"11","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"http://www.yangchoncamp.co.kr/bbs/board.php?bo_table=gallery&wr_id=42","at":"2026-10-19T23:27:18.353Z","quote":"카라반(5)"}
+{"cid":"11","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.yangchoncamp.co.kr/","at":"2026-10-19T23:27:18.353Z","text":"펜션","quote":"펜션 하위분류"}
+{"cid":"11","attr":"SITE_TYPE","value":"RV","grade":"OPERATOR","src":"operator_homepage","url":"http://www.yangchoncamp.co.kr/bbs/board.php?bo_table=gallery&wr_id=42","at":"2026-10-19T23:27:18.353Z","quote":"C1 ~ D3 카라반 입장 사이트"}
 {"cid":"11","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":12}
 {"cid":"11","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":38}
 {"cid":"11","attr":"STAY_GENERAL_SITES","value":38,"grade":"CONFIRMED","src":"gocamping"}
@@ -40,11 +40,11 @@
 {"cid":"21","attr":"STAY_CARAVAN_SITES","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"21","attr":"STAY_GENERAL_SITES","value":9,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"28","attr":"SITE_TOTAL","value":22,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"28","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/28.html","at":"2026-10-19T09:04:48.251Z","quote":"청양동강리오토캠핑장"}
-{"cid":"28","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/28.html","at":"2026-10-19T09:04:48.251Z","quote":"개인 카라반과 트레일러도 수용할 수 있으며, 이 경우 이용료는 일반캠핑장과 같다."}
-{"cid":"28","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/28.html","at":"2026-10-19T09:04:48.251Z","quote":"에스글램핑"}
-{"cid":"28","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/28.html","at":"2026-10-19T09:04:48.251Z","text":"펜션","quote":"505펜션&캠핑(오공오) — 충남 공주시 캠핑장 예약·시설·반려동물 정보 | Ca"}
-{"cid":"28","attr":"SITE_TYPE","value":"RV","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/28.html","at":"2026-10-19T09:04:48.251Z","quote":"개인 카라반과 트레일러도 수용할 수 있으며, 이 경우 이용료는 일반캠핑장과 같다."}
+{"cid":"28","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/28.html","at":"2026-10-19T23:27:32.628Z","quote":"청양동강리오토캠핑장"}
+{"cid":"28","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/28.html","at":"2026-10-19T23:27:32.628Z","quote":"개인 카라반과 트레일러도 수용할 수 있으며, 이 경우 이용료는 일반캠핑장과 같다."}
+{"cid":"28","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/28.html","at":"2026-10-19T23:27:32.628Z","quote":"에스글램핑"}
+{"cid":"28","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/28.html","at":"2026-10-19T23:27:32.628Z","text":"펜션","quote":"505펜션&캠핑(오공오) — 충남 공주시 캠핑장 예약·시설·반려동물 정보 | Ca"}
+{"cid":"28","attr":"SITE_TYPE","value":"RV","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/28.html","at":"2026-10-19T23:27:32.628Z","quote":"개인 카라반과 트레일러도 수용할 수 있으며, 이 경우 이용료는 일반캠핑장과 같다."}
 {"cid":"28","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":22}
 {"cid":"28","attr":"STAY_GENERAL_SITES","value":22,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"29","attr":"SITE_TOTAL","value":31,"grade":"CONFIRMED","src":"gocamping"}
@@ -60,10 +60,10 @@
 {"cid":"29","attr":"STAY_GENERAL_SITES","value":14,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"29","attr":"STAY_GLAMPING_SITES","value":7,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"31","attr":"SITE_TOTAL","value":40,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"31","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/guide-carcamping.html","at":"2026-10-19T09:02:56.792Z","quote":"차박·오토캠핑장 에 전국 자동차야영장을 모았습니다."}
-{"cid":"31","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/31.html","at":"2026-10-19T09:02:56.792Z","quote":"카라반 가능"}
-{"cid":"31","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/31.html","at":"2026-10-19T09:02:56.792Z","quote":"⛺ 글램핑"}
-{"cid":"31","attr":"SITE_TYPE","value":"RV","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/guide-carcamping.html","at":"2026-10-19T09:02:56.792Z","quote":"개인 카라반이 들어가는 곳은 차박도 자연스럽게 받아주는 편입니다."}
+{"cid":"31","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/guide-carcamping.html","at":"2026-10-19T23:27:15.063Z","quote":"차박·오토캠핑장 에 전국 자동차야영장을 모았습니다."}
+{"cid":"31","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/31.html","at":"2026-10-19T23:27:15.063Z","quote":"카라반 가능"}
+{"cid":"31","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/31.html","at":"2026-10-19T23:27:15.063Z","quote":"⛺ 글램핑"}
+{"cid":"31","attr":"SITE_TYPE","value":"RV","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/guide-carcamping.html","at":"2026-10-19T23:27:15.063Z","quote":"개인 카라반이 들어가는 곳은 차박도 자연스럽게 받아주는 편입니다."}
 {"cid":"31","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":18}
 {"cid":"31","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":40}
 {"cid":"31","attr":"STAY_GENERAL_SITES","value":40,"grade":"CONFIRMED","src":"gocamping"}
@@ -111,9 +111,9 @@
 {"cid":"57","attr":"STAY_CARAVAN_SITES","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"57","attr":"STAY_GENERAL_SITES","value":9,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"61","attr":"SITE_TOTAL","value":15,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"61","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/guide-carcamping.html","at":"2026-10-19T09:04:16.421Z","quote":"차박·오토캠핑장 에 전국 자동차야영장을 모았습니다."}
-{"cid":"61","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/about.html","at":"2026-10-19T09:04:16.421Z","quote":"캠핑장 이름 검색과 지역·유형(일반/오토/글램핑/카라반) 필터"}
-{"cid":"61","attr":"SITE_TYPE","value":"RV","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/guide-carcamping.html","at":"2026-10-19T09:04:16.421Z","quote":"개인 카라반이 들어가는 곳은 차박도 자연스럽게 받아주는 편입니다."}
+{"cid":"61","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/guide-carcamping.html","at":"2026-10-19T23:27:24.629Z","quote":"차박·오토캠핑장 에 전국 자동차야영장을 모았습니다."}
+{"cid":"61","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/about.html","at":"2026-10-19T23:27:24.629Z","quote":"캠핑장 이름 검색과 지역·유형(일반/오토/글램핑/카라반) 필터"}
+{"cid":"61","attr":"SITE_TYPE","value":"RV","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/guide-carcamping.html","at":"2026-10-19T23:27:24.629Z","quote":"개인 카라반이 들어가는 곳은 차박도 자연스럽게 받아주는 편입니다."}
 {"cid":"61","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":14}
 {"cid":"61","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"61","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
@@ -310,8 +310,8 @@
 {"cid":"238","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/gdci/kUkj/29","at":"2023-12-11","quote":"전국 오토캠핑장, 무료 차박캠핑장. 공원 45 경북 성주군 백운동야영장 46 경북 안동"}
 {"cid":"238","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/gdci/kUkj/29","at":"2023-12-11","quote":"전국 오토캠핑장, 무료 차박캠핑장. 공원 45 경북 성주군 백운동야영장 46 경북 안동시 계명산자연휴양"}
 {"cid":"238","attr":"STAY_GENERAL_SITES","value":17,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"267","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"http://www.sjacamping.com/","at":"2026-10-19T09:29:05.919Z","quote":"고성상족암오토캠핑장"}
-{"cid":"267","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"http://www.sjacamping.com/guide1","at":"2026-10-19T09:29:05.919Z","quote":"주차요원 지시에 따라 예약된캠핑사이트에 카라반 또는 차량 주차"}
+{"cid":"267","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"http://www.sjacamping.com/","at":"2026-10-19T23:27:17.499Z","quote":"고성상족암오토캠핑장"}
+{"cid":"267","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"http://www.sjacamping.com/guide1","at":"2026-10-19T23:27:17.499Z","quote":"주차요원 지시에 따라 예약된캠핑사이트에 카라반 또는 차량 주차"}
 {"cid":"268","attr":"SITE_TOTAL","value":32,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"268","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":24}
 {"cid":"268","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":8}
@@ -487,7 +487,7 @@
 {"cid":"418","attr":"STAY_AUTO_SITES","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"418","attr":"STAY_GENERAL_SITES","value":25,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"420","attr":"SITE_TOTAL","value":14,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"420","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"http://goodtraeglamping.com/","at":"2026-10-19T09:15:07.229Z","quote":"카라반파크"}
+{"cid":"420","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"http://goodtraeglamping.com/","at":"2026-10-19T23:27:15.062Z","quote":"카라반파크"}
 {"cid":"420","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":14}
 {"cid":"420","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/richqueen24/224441727504","at":"2026-10-14","text":"펜션","quote":"주세요 굿뜨래웰빙마을 글램핑장 확인 ↙ 부여 자온대펜션 호텔보다는 아늑한 펜션에서 조용하게 하루 쉬고 싶다면 자온대펜션도 비교"}
 {"cid":"420","attr":"STAY_GLAMPING_SITES","value":14,"grade":"CONFIRMED","src":"gocamping"}
@@ -681,9 +681,9 @@
 {"cid":"596","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"596","attr":"STAY_GENERAL_SITES","value":20,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"597","attr":"SITE_TOTAL","value":80,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"597","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"http://www.handure.net/","at":"2026-10-19T09:14:09.070Z","quote":"오토캠핑 사이트 70동, 숙소 20실, 축구장과 물놀이터와 강당까지"}
-{"cid":"597","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"http://www.handure.net/","at":"2026-10-19T09:14:09.070Z","quote":"카라반 & 숙박 시설"}
-{"cid":"597","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.handure.net/","at":"2026-10-19T09:14:09.070Z","text":"펜션","quote":"카라반펜션 9실"}
+{"cid":"597","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"http://www.handure.net/","at":"2026-10-19T23:27:15.061Z","quote":"오토캠핑 사이트 70동, 숙소 20실, 축구장과 물놀이터와 강당까지"}
+{"cid":"597","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"http://www.handure.net/","at":"2026-10-19T23:27:15.061Z","quote":"카라반 & 숙박 시설"}
+{"cid":"597","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.handure.net/","at":"2026-10-19T23:27:15.061Z","text":"펜션","quote":"카라반펜션 9실"}
 {"cid":"597","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"597","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":80}
 {"cid":"597","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
@@ -849,8 +849,8 @@
 {"cid":"716","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
 {"cid":"716","attr":"STAY_AUTO_SITES","value":118,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"719","attr":"SITE_TOTAL","value":25,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"719","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://mall.goryeong.go.kr/Notice/category2","at":"2026-10-19T09:43:19.893Z","quote":"부례관광지 카라반 이용객 특별할인 행사"}
-{"cid":"719","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://mall.goryeong.go.kr/Accommodation","at":"2026-10-19T09:43:19.893Z","text":"펜션","quote":"통나무펜션 101호(8인실)"}
+{"cid":"719","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://mall.goryeong.go.kr/Notice/category2","at":"2026-10-19T23:27:23.763Z","quote":"부례관광지 카라반 이용객 특별할인 행사"}
+{"cid":"719","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://mall.goryeong.go.kr/Accommodation","at":"2026-10-19T23:27:23.763Z","text":"펜션","quote":"통나무펜션 101호(8인실)"}
 {"cid":"719","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":25}
 {"cid":"719","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":25}
 {"cid":"719","attr":"STAY_GENERAL_SITES","value":25,"grade":"CONFIRMED","src":"gocamping"}
@@ -911,7 +911,7 @@
 {"cid":"767","attr":"STAY_GENERAL_SITES","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"767","attr":"STAY_GLAMPING_SITES","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"769","attr":"SITE_TOTAL","value":111,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"769","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://www.daejeocamping.com/look/guidance","at":"2026-10-19T09:21:30.165Z","quote":"캠핑카, 카라반"}
+{"cid":"769","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://www.daejeocamping.com/look/guidance","at":"2026-10-19T23:27:15.077Z","quote":"캠핑카, 카라반"}
 {"cid":"769","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":75}
 {"cid":"769","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":36}
 {"cid":"769","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
@@ -1046,10 +1046,10 @@
 {"cid":"866","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/25671955","at":"2026-10-16T05:35:15.050Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"866","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":23}
 {"cid":"866","attr":"STAY_GENERAL_SITES","value":23,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"869","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/guide-carcamping.html","at":"2026-10-19T09:07:27.836Z","quote":"차박·오토캠핑장 에 전국 자동차야영장을 모았습니다."}
-{"cid":"869","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/869.html","at":"2026-10-19T09:07:27.836Z","quote":"다인카라반"}
-{"cid":"869","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/869.html","at":"2026-10-19T09:07:27.836Z","quote":"⛺ 글램핑"}
-{"cid":"869","attr":"SITE_TYPE","value":"RV","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/guide-carcamping.html","at":"2026-10-19T09:07:27.836Z","quote":"개인 카라반이 들어가는 곳은 차박도 자연스럽게 받아주는 편입니다."}
+{"cid":"869","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/guide-carcamping.html","at":"2026-10-19T23:27:40.645Z","quote":"차박·오토캠핑장 에 전국 자동차야영장을 모았습니다."}
+{"cid":"869","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/869.html","at":"2026-10-19T23:27:40.645Z","quote":"다인카라반"}
+{"cid":"869","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/869.html","at":"2026-10-19T23:27:40.645Z","quote":"⛺ 글램핑"}
+{"cid":"869","attr":"SITE_TYPE","value":"RV","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/guide-carcamping.html","at":"2026-10-19T23:27:40.645Z","quote":"개인 카라반이 들어가는 곳은 차박도 자연스럽게 받아주는 편입니다."}
 {"cid":"873","attr":"SITE_TOTAL","value":12,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"873","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--989a5bx9vuzab11ae0htwlp5nruo17c.kr/","at":"2026-10-19T09:35:20.754Z","text":"펜션","quote":"횡성동당미계곡캠핑장 & 동당미펜션 홈페이지"}
 {"cid":"873","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":12}
