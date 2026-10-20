@@ -1223,7 +1223,7 @@ a.near { color: inherit; text-decoration: none; }
 .layout-extra-zone { margin-top: 18px; }
 .layout-candidate-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
 .layout-cand-btn { display: flex; flex-direction: column; text-align: left; border: 1px solid var(--line); border-radius: var(--r-s); background: var(--paper); overflow: hidden; cursor: pointer; transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease; padding: 0; }
-.layout-cand-btn:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 6px 18px rgba(0,0,0,.08); }
+.layout-cand-btn:hover { transform: translateY(-2px); border-color: var(--ink-3); box-shadow: 0 6px 18px rgba(0,0,0,.08); }
 .layout-cand-photo { position: relative; width: 100%; aspect-ratio: 16 / 10; background: var(--soft-2); overflow: hidden; }
 .layout-cand-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .cand-zoom-badge { position: absolute; right: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 999px; background: rgba(16, 20, 20, .78); color: #fff; font-size: .72rem; font-weight: 700; backdrop-filter: blur(4px); }
@@ -1785,7 +1785,7 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .w-modal-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 18px; border-top: 1px solid var(--line); background: var(--paper); }
 .w-btn-windy { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); font-size: .84rem; font-weight: 750; color: var(--ink-2); text-decoration: none; }
 .w-btn-windy .ic { width: 16px; height: 16px; }
-.w-btn-windy:hover { border-color: var(--accent); color: var(--accent); }
+.w-btn-windy:hover { border-color: var(--ink-3); color: var(--ink); }
 .w-btn-close.btn { height: 40px; padding: 0 22px; }
 
 
@@ -1796,7 +1796,7 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .rs-alts { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .rs-alts > span { font-size: .74rem; font-weight: 800; color: var(--ink-3); }
 .rs-alts a { display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--ink-2); font-size: .76rem; font-weight: 800; text-decoration: none; }
-.rs-alts a:hover { border-color: var(--accent); color: var(--accent); }
+.rs-alts a:hover { border-color: var(--ink-3); color: var(--ink); }
 
 /* 1박 요금(하나로 합친 칸, 2026-10-19) */
 .price-sec .plist li { flex-wrap: wrap; }
@@ -1836,10 +1836,10 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .nearby-hub .nb-actions { display: inline-flex; align-items: center; gap: 6px; flex: none; margin-left: auto; }
 .nearby-hub .nb-rv, .nearby-hub .nb-go { display: inline-grid; place-items: center; flex: 0 0 30px; width: 30px; height: 30px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--ink-2); cursor: pointer; transition: all .2s cubic-bezier(.16, 1, .3, 1); }
 .nearby-hub .nb-rv .ic, .nearby-hub .nb-go .ic { width: 15px; height: 15px; color: var(--ink-2); }
-.nearby-hub .nb-rv:hover, .nearby-hub .nb-rv:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
-.nearby-hub .nb-rv:hover .ic { color: var(--accent); }
-.nearby-hub a.nb-row:hover .nb-go { border-color: var(--accent); color: var(--accent); }
-.nearby-hub a.nb-row:hover .nb-go .ic { color: var(--accent); }
+.nearby-hub .nb-rv:hover, .nearby-hub .nb-rv:focus-visible { border-color: var(--ink-3); color: var(--ink); outline: none; background: var(--soft); }
+.nearby-hub .nb-rv:hover .ic { color: var(--ink); }
+.nearby-hub a.nb-row:hover .nb-go { border-color: var(--ink-3); color: var(--ink); background: var(--soft); }
+.nearby-hub a.nb-row:hover .nb-go .ic { color: var(--ink); }
 .nearby-hub .nearby-note { margin: 8px 2px 0; font-size: .76rem; color: var(--ink-3); }
 
 /* 방문 후기 · 캠퍼 사진 한 칸: 사진 카드는 눌러서 크게 보기 */
@@ -2010,15 +2010,15 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 .hr-badge .bdg-i .ic { width: 15px; height: 15px; padding: 0; background: none; color: currentColor; opacity: .85; }
 .hr-list li a.hr-line { flex: 1; min-width: 0; color: inherit; text-decoration: none; overflow-wrap: anywhere; border-radius: 4px; }
 .hr-list li a.hr-line:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
-.hr-list li a.hr-line:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.hr-list li a.hr-line:focus-visible { outline: none; }
 
 /* 시설 배치도 후보: 카드 오른쪽 아래 원문 링크 아이콘(2026-10-20) */
 .layout-cand { position: relative; display: flex; }
 .layout-cand > .layout-cand-btn { flex: 1; min-width: 0; }
 .layout-single-wrap { position: relative; }
 .cand-src { position: absolute; right: 10px; bottom: 10px; z-index: 2; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 999px; color: var(--ink-2); background: var(--soft); text-decoration: none; }
-.cand-src:hover { color: var(--accent); background: var(--accent-tint); }
-.cand-src:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.cand-src:hover { color: var(--ink); background: var(--soft-2); }
+.cand-src:focus-visible { outline: none; }
 .cand-src .ic { width: 16px; height: 16px; }
 .cand-src-top { top: 12px; bottom: auto; right: 12px; background: rgba(255, 255, 255, .92); box-shadow: 0 2px 8px rgba(0, 0, 0, .15); }
 
@@ -2044,13 +2044,14 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 .media-hub .mh-post > .ic { grid-column: 2; grid-row: 1 / span 2; width: 14px; height: 14px; color: var(--ink-3); }
 .media-hub .mh-more { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; font-size: .82rem; font-weight: 800; color: var(--ink-2); text-decoration: none; }
 .media-hub .mh-more .ic { width: 14px; height: 14px; }
-.media-hub .mh-more:hover { color: var(--accent); }
+.media-hub .mh-more:hover { color: var(--ink); }
 
 /* 원문 팝업: 카드·행 전체가 눌림(소유자 2026-10-20) */
-.tip-host { cursor: pointer; transition: background-color .15s, box-shadow .15s, transform .1s; }
-.tip-host:hover { box-shadow: 0 0 0 1.5px var(--accent, #0a7a4b) inset; }
+.tip-host { cursor: pointer; transition: transform .1s; }
+.tip-host:hover { box-shadow: none; outline: none; }
 .tip-host:active { transform: scale(.985); }
-.tip-host:focus-visible { outline: 2px solid var(--accent, #0a7a4b); outline-offset: 2px; }
+.tip-host:focus { outline: none; box-shadow: none; }
+.tip-host:focus-visible { outline: none; box-shadow: none; }
 .sec-note.tip-host, p.tip-host, .use.tip-host { border-radius: 8px; }
 /* 작은 표시(확인필요·추정·업장 등록·추가 요금)는 모두 같은 캡슐 모양 */
 .badge-check, .price-sec .pl-kind, .pt span i, .ft i, .card-price i, .rows .est-tag { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; margin-left: 4px; border-radius: 999px; border: 1px solid var(--line); background: var(--soft, #f2f3f0); color: var(--ink-3); font-size: .7rem; font-weight: 800; font-style: normal; line-height: 1; white-space: nowrap; vertical-align: middle; }

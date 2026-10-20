@@ -299,20 +299,9 @@ const TH_SVG = {
   AUTO: ["0 0 24 24", '<path fill="currentColor" d="m20.77 9.16l-1.37-4.1a2.99 2.99 0 0 0-2.85-2.05H7.44a3 3 0 0 0-2.85 2.05l-1.37 4.1c-.72.3-1.23 1.02-1.23 1.84v5a2 2 0 0 0 1 1.72V20c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-2h12v2c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-2.28a2 2 0 0 0 1-1.72v-5c0-.83-.51-1.54-1.23-1.84ZM19 13.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5s1.5.67 1.5 1.5m-11 0c0 .83-.67 1.5-1.5 1.5S5 14.33 5 13.5S5.67 12 6.5 12s1.5.67 1.5 1.5M20 11v5zM7.44 5h9.12a1 1 0 0 1 .95.68L18.62 9H5.39L6.5 5.68A1 1 0 0 1 7.45 5Z"/>'],
   "T:CAR_CAMP": ["0 0 24 24", '<g fill="currentColor"><path d="M3 19.723V21a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.277A1.99 1.99 0 0 0 22 18v-3c0-.831-.507-1.542-1.228-1.845l-1.368-4.104A2.995 2.995 0 0 0 16.559 7H7.441a2.995 2.995 0 0 0-2.845 2.051l-1.368 4.104A2 2 0 0 0 2 15v3c0 .738.404 1.376 1 1.723M5.5 18a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 5.5 18m13 0a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 18.5 18M7.441 9h9.117a1 1 0 0 1 .949.684L18.613 13H5.387l1.105-3.316c.137-.409.519-.684.949-.684"/><path d="M22 7.388V5.279l-9.684-3.228a1 1 0 0 0-.658.009L2 5.572V7.7l10.015-3.642z"/></g>'],
 };
-const hasWater = (c) => (c.amenities ?? []).some((a) => /물놀이장|수영장|풀장/.test(a));
-const isFree = (c) => c.fee?.min === 0 || /무료/.test(c.fee?.text ?? "");
-const PUBLIC_OP = new Set(["LOCAL_GOVERNMENT", "NATIONAL_PARK", "NATURAL_RECREATION_FOREST", "PUBLIC_LEISURE"]);
-// 공공·국립 물놀이터는 대개 6~8월만 연다. 그 밖에는 비운영.
-const waterInSeason = (c) => {
-  if (!hasWater(c) || !PUBLIC_OP.has(c.op)) return true;
-  const m = new Date().getMonth() + 1;
-  return m >= 6 && m <= 8;
-};
+const thIc = (k) => (TH_SVG[k] ? `<svg class="th-ic" viewBox="${TH_SVG[k][0]}" aria-hidden="true">${TH_SVG[k][1]}</svg>` : "");
 const THEMES = [
   ["POPULAR", "실시간 인기", (c) => Boolean(c.m7 || c.rv?.n > 5)],
-  ["FREE", "무료", isFree],
-  ["WATER", "물놀이터", hasWater],
-  ["CAMPNIC", "캠프닉", (c) => (c.types ?? []).includes("캠프닉") || /캠프닉|캠크닉|데이\s*캠핑|당일/.test(c.name ?? "")],
   ["VALLEY", "계곡", (c) => c.pf?.t?.includes("VALLEY")],
   ["FOREST", "숲", (c) => c.pf?.t?.includes("FOREST")],
   ["BEACH", "바다", (c) => c.pf?.t?.includes("BEACH") || c.th?.includes("sea")],
@@ -344,9 +333,6 @@ const THEME_FILES = {
 const themeImg = (k) => `${ASSETS_BASE}images/themes/${THEME_FILES[k] ?? "valley.webp"}`;
 const THEME_SUBS = {
   POPULAR: "최근 7일간 캠퍼들 사이에서 가장 많이 언급되고 화제가 된 인기 캠핑장",
-  FREE: "입장·이용료가 무료로 확인된 곳",
-  WATER: "물놀이장·수영장이 있는 곳. 공공은 여름 한시 운영",
-  CAMPNIC: "숙박 없이 당일로 즐기는 민간·공공 캠프닉",
   VALLEY: "시원한 물소리와 맑은 물놀이를 즐길 수 있는 계곡 야영장",
   FOREST: "피톤치드 가득한 울창한 숲속 힐링 캠핑장",
   BEACH: "탁 트인 바다 전망과 파도 소리를 즐기는 해변 캠핑장",
