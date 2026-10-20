@@ -3,6 +3,7 @@ name: private-dayuse-weekly
 on:
   schedule: [{ cron: "0 19 * * 1" }]
   workflow_dispatch:
+  pull_request: { paths: [pipeline/scripts/discover-private-dayuse.mjs, .github/workflows/private-dayuse-weekly.yml] }
 permissions: { contents: read }
 jobs:
   discover:
