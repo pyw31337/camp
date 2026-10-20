@@ -571,11 +571,12 @@ img { color: transparent; }
 .car-nav.next { right: 8px; }
 
 /* ── 상세 규격화 ─────────────────────────────────────────── */
-.detail { width: 100%; max-width: var(--content); margin-left: auto; margin-right: auto; padding: 0 var(--gut) 96px; }
-.d-bar { display: flex; align-items: center; gap: 12px; padding: 14px 0; }
+.detail { width: 100%; max-width: 100%; margin: 0; padding: 0 0 100px; }
+.d-bar, .d-head, .gallery, .d-body { width: 100%; max-width: var(--content); margin-left: auto; margin-right: auto; padding-left: var(--gut); padding-right: var(--gut); box-sizing: border-box; }
+.d-bar { display: flex; align-items: center; gap: 12px; padding-top: 14px; padding-bottom: 14px; }
 .d-crumb { flex: 1; font-weight: 700; color: var(--ink-3); font-size: .92rem; }
 /* 상단: 이름·소개·배지 전체 너비 사용(예약은 모바일과 동일하게 하단 고정바로 통일) */
-.d-head { display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 16px; align-items: start; padding: 4px 0 var(--sec-gap-inner); }
+.d-head { display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 16px; align-items: start; padding-top: 4px; padding-bottom: var(--sec-gap-inner); }
 .d-head-main { display: grid; gap: 12px; min-width: 0; }
 .d-eyebrow { font-size: .92rem; font-weight: 700; color: var(--ink-3); }
 .d-title { font-size: clamp(2.3rem, 1.3rem + 4vw, 5rem); line-height: 1.12; letter-spacing: -0.045em; }
@@ -596,8 +597,8 @@ img { color: transparent; }
   background: #ffffff !important;
   color: #d32f2f !important;
 }
-.gallery { margin: 0 calc(var(--gut) * -1) 0; }
-.gal-grid { display: grid; gap: 6px; height: clamp(300px, 36vw, 540px); padding: 0 var(--gut); }
+.gallery { width: 100%; max-width: var(--content); margin: 0 auto; padding: 0 var(--gut); box-sizing: border-box; }
+.gal-grid { display: grid; gap: 6px; height: clamp(300px, 36vw, 540px); padding: 0; }
 .gal-grid.n1 { grid-template-columns: 1fr; }
 .gal-grid.n2 { grid-template-columns: 2fr 1fr; }
 .gal-grid.n3 { grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; }
@@ -2335,17 +2336,19 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
   position: sticky;
   top: 0;
   z-index: 800;
-  /* 100vw는 세로 스크롤바 폭까지 포함한다. 상세 컨테이너의 양쪽 거터만
-     되돌려서 같은 시각 효과를 내되, 문서 자체는 넓히지 않는다. */
-  width: calc(100% + (var(--gut, 24px) * 2));
-  margin-left: calc(var(--gut, 24px) * -1);
-  margin-right: calc(var(--gut, 24px) * -1);
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.95);
+  width: 100%;
+  margin: 0;
+  background: transparent;
+  border-bottom: 1px solid var(--line, #e2e8f0);
+  box-shadow: none;
+  box-sizing: border-box;
+  transition: background-color var(--dur-fast) var(--ease-smooth), box-shadow var(--dur-fast) var(--ease-smooth);
+}
+.d-jump-bar.is-stuck {
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--line, #e2e8f0);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 .d-jump-in {
   width: 100%;
@@ -2683,19 +2686,13 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 
 /* ── 풀위드 사이트 푸터 (Full-width Pure White Site Footer) ── */
 .site-footer {
-  /* 100vw에는 브라우저 세로 스크롤바 폭도 포함된다. 루트 바로 아래의
-     푸터는 100%만으로도 화면을 채우므로 뷰포트 탈출 계산을 쓰지 않는다. */
   width: 100%;
-  position: relative;
-  left: auto;
-  right: auto;
-  margin-left: 0;
-  margin-right: 0;
+  margin: clamp(40px, 6vw, 72px) 0 0 0;
   background: #ffffff;
   border-top: 1px solid var(--line, #e3e7e2);
-  margin-top: clamp(40px, 6vw, 72px);
   padding: clamp(32px, 4vw, 48px) 0 clamp(48px, 6vw, 72px);
   color: var(--ink-2, #4b5350);
+  box-sizing: border-box;
 }
 .site-footer-inner {
   max-width: var(--content, 1320px);
@@ -2875,7 +2872,7 @@ button, a, input, select, textarea, .btn, .chip, .bdg, .card, .tile, .stype, .nb
 }
 
 .detail {
-  animation: pageFadeUp var(--dur-mid) var(--ease-spring) both;
+  animation: pageFadeIn var(--dur-mid) var(--ease-smooth) both;
 }
 
 .d-sec {

@@ -4030,6 +4030,16 @@ function bindDetail() {
     im.addEventListener("error", swap);
     if (im.complete && !im.naturalWidth) swap();
   });
+  const jumpBar = $(".d-jump-bar");
+  if (jumpBar) {
+    const updateStuck = () => {
+      const r = jumpBar.getBoundingClientRect();
+      jumpBar.classList.toggle("is-stuck", r.top <= 1);
+    };
+    window.addEventListener("scroll", updateStuck, { passive: true });
+    updateStuck();
+    cleanup.push(() => window.removeEventListener("scroll", updateStuck));
+  }
   // 상세 바로가기: 보이는 칸만 링크를 켜고(축제 칸처럼 늦게 열리는 칸은 열릴 때 켠다), 지금 읽는 칸을 표시한다.
   const jumps = $$("[data-jump]");
   const syncJumps = () => jumps.forEach((a) => { const t = document.getElementById(a.dataset.jump); a.hidden = !t || t.hidden; });
