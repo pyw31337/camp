@@ -95,9 +95,19 @@ em { font-style: normal; color: var(--accent); }
   padding-top: 10px; padding-bottom: 16px; margin-top: -8px; margin-bottom: -10px; cursor: grab;
   -webkit-mask-image: none;
   mask-image: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.rail, .rail * {
+  -webkit-user-drag: none;
+  user-drag: none;
 }
 .rail.is-dragging { cursor: grabbing; scroll-behavior: auto !important; scroll-snap-type: none !important; user-select: none; }
 .rail.is-dragging * { pointer-events: none; }
+.card-hit, .open-card, .theme-card, .tr-card {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
 .rail::-webkit-scrollbar, .car-track::-webkit-scrollbar, .cmp-scroll::-webkit-scrollbar, .lb-track::-webkit-scrollbar { display: none; }
 
 /* ── 가로 캐러셀 가장자리 그라데이션 페이드 규격화 (Scroll Edge Gradient Mask) ── */
