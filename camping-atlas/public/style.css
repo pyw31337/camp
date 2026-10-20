@@ -1084,8 +1084,16 @@ body.map-mode { overflow: hidden; height: 100dvh; }
 .site-table td.text-price .price-val { font-variant-numeric: tabular-nums; }
 .site-table td.text-price .ib { margin-left: 2px; flex-shrink: 0; }
 
-/* ── 수집 데이터 연계(2026-10-18): 접수 중·장보기·운영자 안내·예약 방법·요금 언급·캠퍼 사진 ── */
 .sig.live { color: var(--accent); }
+.sig.closed { background: rgba(30, 41, 59, .92); color: #fff; border: 1px solid rgba(255, 255, 255, .25); box-shadow: 0 2px 8px rgba(0, 0, 0, .28); }
+.sig.closed .ic { color: #94a3b8; }
+.card.is-closed .car-track img, .card.is-closed .car-img, .card.is-closed .card-media > img { filter: grayscale(1); opacity: .88; }
+.theme-card.is-closed img { filter: grayscale(1); }
+.theme-closed-badge { position: absolute; top: 10px; right: 10px; z-index: 2; display: inline-flex; align-items: center; gap: 3px; padding: 3px 8px; border-radius: 999px; background: rgba(15, 23, 42, .88); color: #fff; font-size: .72rem; font-weight: 800; letter-spacing: -0.02em; border: 1px solid rgba(255, 255, 255, .2); backdrop-filter: blur(4px); box-shadow: 0 2px 6px rgba(0, 0, 0, .25); }
+.theme-closed-alert { display: flex; align-items: flex-start; gap: 12px; padding: 14px 18px; margin-bottom: 18px; border-radius: 14px; background: rgba(30, 41, 59, .06); border: 1px solid rgba(30, 41, 59, .15); color: var(--ink); }
+.theme-closed-alert .ic { width: 20px; height: 20px; color: var(--ink-2); flex-shrink: 0; margin-top: 2px; }
+.theme-closed-alert strong { display: block; font-size: .95rem; font-weight: 800; color: var(--ink); margin-bottom: 4px; }
+.theme-closed-alert p { margin: 0; font-size: .86rem; line-height: 1.5; color: var(--ink-2); }
 .card-near { display: flex; align-items: center; gap: 5px; font-size: .8rem; font-weight: 700; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .card-near .ic { width: 13px; height: 13px; flex: none; }
 .d-line { margin-top: 6px; font-size: 1rem; font-weight: 600; color: var(--ink-2); word-break: keep-all; }

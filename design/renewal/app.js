@@ -330,11 +330,20 @@ const TH_SVG = {
   "T:DECK": ["0 0 24 24", '<g fill="currentColor"><path d="M19 17v3a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-3z"/><path d="M11 17v3a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-3z"/><path d="M20 12a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1z"/><path d="M8.707 3.293l2 2a1 1 0 0 1 .293 .707v5h-6v-5a1 1 0 0 1 .293 -.707l2 -2a1 1 0 0 1 1.414 0"/><path d="M16.707 3.293l2 2a1 1 0 0 1 .293 .707v5h-6v-5a1 1 0 0 1 .293 -.707l2 -2a1 1 0 0 1 1.414 0"/></g>'],
   GLAMPING: ["0 0 24 24", '<path fill="currentColor" d="m20.83 20.5l1.024-2.74a1.25 1.25 0 0 0-.15-1.16l-8.79-12.47l1.195-1.695l-1.225-.865L12 2.83l-.885-1.26l-1.225.865l1.195 1.695L2.29 16.6c-.24.34-.295.77-.15 1.16l1.025 2.74h-1.17V22H22v-1.5zm-8.08 0h-1.5v-10h1.5z"/>'],
   CARAVAN: ["0 0 14 14", '<path fill="currentColor" d="M2 2C1 2 0 3 0 4v4c0 1 1 2 2 2h1.063C3.296 8.86 4.292 8 5.5 8s2.204.86 2.438 2H14s0-1-1-1h-1.5V4c0-.96-1.024-2-2-2zm.844 2A.4.4 0 0 1 3 4h2s1 0 1 1s-1 1-1 1H3S2 6 2 5c0-.75.563-.953.844-1M8 4h.5s1 0 1 1s-1 1-1 1H8S7 6 7 5s1-1 1-1M5.5 9a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3"/>'],
-  WINTER: ["0 0 448 512", '<path fill="currentColor" d="m440.3 345.2l-33.8-19.5l26-7c8.2-2.2 13.1-10.7 10.9-18.9l-4-14.9c-2.2-8.2-10.7-13.1-18.9-10.9l-70.8 19l-63.9-37l63.8-36.9l70.8 19c8.2 2.2 16.7-2.7 18.9-10.9l4-14.9c2.2-8.2-2.7-16.7-10.9-18.9l-26-7l33.8-19.5c7.4-4.3 9.9-13.7 5.7-21.1L430.4 119c-4.3-7.4-13.7-9.9-21.1-5.7l-33.8 19.5l7-26c2.2-8.2-2.7-16.7-10.9-18.9l-14.9-4c-8.2-2.2-16.7 2.7-18.9 10.9l-19 70.8l-62.8 36.2v-77.5l53.7-53.7c6.2-6.2 6.2-16.4 0-22.6l-11.3-11.3c-6.2-6.2-16.4-6.2-22.6 0L256 56.4V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v40.4l-19.7-19.7c-6.2-6.2-16.4-6.2-22.6 0L138.3 48c-6.3 6.2-6.3 16.4 0 22.6l53.7 53.7v77.5l-62.8-36.2l-19-70.8c-2.2-8.2-10.7-13.1-18.9-10.9l-14.9 4c-8.2 2.2-13.1 10.7-10.9 18.9l7 26l-33.8-19.5c-7.4-4.3-16.8-1.7-21.1 5.7L2.1 145.7c-4.3 7.4-1.7 16.8 5.7 21.1l33.8 19.5l-26 7c-8.3 2.2-13.2 10.7-11 19l4 14.9c2.2 8.2 10.7 13.1 18.9 10.9l70.8-19l63.8 36.9l-63.8 36.9l-70.8-19c-8.2-2.2-16.7 2.7-18.9 10.9l-4 14.9c-2.2 8.2 2.7 16.7 10.9 18.9l26 7l-33.8 19.6c-7.4 4.3-9.9 13.7-5.7 21.1l15.5 26.8c4.3 7.4 13.7 9.9 21.1 5.7l33.8-19.5l-7 26c-2.2 8.2 2.7 16.7 10.9 18.9l14.9 4c8.2 2.2 16.7-2.7 18.9-10.9l19-70.8l62.8-36.2v77.5l-53.7 53.7c-6.3 6.2-6.3 16.4 0 22.6l11.3 11.3c6.2 6.2 16.4 6.2 22.6 0l19.7-19.7V496c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-40.4l19.7 19.7c6.2 6.2 16.4 6.2 22.6 0l11.3-11.3c6.2-6.2 6.2-16.4 0-22.6L256 387.7v-77.5l62.8 36.2l19 70.8c2.2 8.2 10.7 13.1 18.9 10.9l14.9-4c8.2-2.2 13.1-10.7 10.9-18.9l-7-26l33.8 19.5c7.4 4.3 16.8 1.7 21.1-5.7l15.5-26.8c4.3-7.3 1.8-16.8-5.6-21"/>'],
   AUTO: ["0 0 24 24", '<path fill="currentColor" d="m20.77 9.16l-1.37-4.1a2.99 2.99 0 0 0-2.85-2.05H7.44a3 3 0 0 0-2.85 2.05l-1.37 4.1c-.72.3-1.23 1.02-1.23 1.84v5a2 2 0 0 0 1 1.72V20c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-2h12v2c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-2.28a2 2 0 0 0 1-1.72v-5c0-.83-.51-1.54-1.23-1.84ZM19 13.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5s1.5.67 1.5 1.5m-11 0c0 .83-.67 1.5-1.5 1.5S5 14.33 5 13.5S5.67 12 6.5 12s1.5.67 1.5 1.5M20 11v5zM7.44 5h9.12a1 1 0 0 1 .95.68L18.62 9H5.39L6.5 5.68A1 1 0 0 1 7.45 5Z"/>'],
+  VISITOR: ["0 0 24 24", '<path fill="currentColor" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>'],
+  PICNIC: ["0 0 24 24", '<path fill="currentColor" d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a2 2 0 0 0-2 2v2c0 .55.45 1 1 1h1v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7h1c.55 0 1-.45 1-1V9a2 2 0 0 0-2-2zm-9-1a2 2 0 0 1 4 0v1h-4V6zm7 13H7v-7h10v7z"/>'],
+  PARK: ["0 0 24 24", '<path fill="currentColor" d="M10 21v-3.4c-2.37-.36-4.27-2.13-4.83-4.46A5.5 5.5 0 0 1 8 3.32a5.5 5.5 0 0 1 8 0 5.5 5.5 0 0 1 2.83 9.82c-.56 2.33-2.46 4.1-4.83 4.46V21h-4z"/>'],
+  WATER_PLAY: ["0 0 24 24", '<g fill="currentColor"><circle cx="16.5" cy="5.5" r="2.5"/><path d="m14.29 9.38-2.61 2.62 1.42 1.41 1.9-1.9 2.5 1.49 1.43-.86-2.62-4.38a1.5 1.5 0 0 0-2.02-.38z"/><path d="M2 15c1.5 0 2.5 1 4 1s2.5-1 4-1 2.5 1 4 1 2.5-1 4-1 2.5 1 4 1v2c-1.5 0-2.5-1-4-1s-2.5 1-4 1-2.5-1-4-1-2.5 1-4 1-2.5-1-4-1H2zm0 4c1.5 0 2.5 1 4 1s2.5-1 4-1 2.5 1 4 1 2.5-1 4-1 2.5 1 4 1v2c-1.5 0-2.5-1-4-1s-2.5 1-4 1-2.5-1-4-1-2.5 1-4 1-2.5-1-4-1H2z"/></g>'],
   "T:CAR_CAMP": ["0 0 24 24", '<g fill="currentColor"><path d="M3 19.723V21a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.277A1.99 1.99 0 0 0 22 18v-3c0-.831-.507-1.542-1.228-1.845l-1.368-4.104A2.995 2.995 0 0 0 16.559 7H7.441a2.995 2.995 0 0 0-2.845 2.051l-1.368 4.104A2 2 0 0 0 2 15v3c0 .738.404 1.376 1 1.723M5.5 18a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 5.5 18m13 0a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 18.5 18M7.441 9h9.117a1 1 0 0 1 .949.684L18.613 13H5.387l1.105-3.316c.137-.409.519-.684.949-.684"/><path d="M22 7.388V5.279l-9.684-3.228a1 1 0 0 0-.658.009L2 5.572V7.7l10.015-3.642z"/></g>'],
 };
 const thIc = (k) => (TH_SVG[k] ? `<svg class="th-ic" viewBox="${TH_SVG[k][0]}" aria-hidden="true">${TH_SVG[k][1]}</svg>` : "");
+const VISITOR_IDS = new Set(["100141","101239","101366","101394","1075","1641","2146","2733","3201","467","7124","7253","7588","7741","7838","7997","3206","102320","1893","102096","101354","102293","102289","102290","101971","102271","160","922","6850","100986","102240","102202","468","2480","102188","101801","101979","100543","100546","3333","1970","2929","101426","101894","101358","6948","716","2538","102009","1473","101036","100924","101356","101868","7901","7466","101578","100376","100905","100969","100307","7272","101738","101706","100015","7314","100794","100868","101184","100468","100991","101501","101538","101487","101540","101557","3578","100576","101417","100246","100502","100606","7594","100057","101289","101303","100447","100515","100642","100658","100692","100749","101286","331","101172"]);
+const PICNIC_IDS = new Set(["100148","100199","100264","100456","100462","100628","100629","100699","100748","100804","100931","100998","101031","101111","101134","101140","101297","101335","101414","101518","101522","101606","101664","101756","101764","101801","101819","101826","101855","101939","102128","102242","1043","1318","1528","1696","190","2179","2304","2358","3105","3519","357","467","508","525","597","6951","6972","6980","7039","7124","7132","7235","7271","7768","7903","8048","8054","8206","919","1467","7709","102126","102324","8121","100342","2394","101420","2793","8150","101520","101977","102044","102272","7447","100720","101081","101889","102178","420","6753","101642","101705","102110","102125","102237","101997","102211","7542","101217","8133","100916","102170","550","101399","102121","102129","101789","101795","101295","101396","101655","101858","101805","102011","7913","101508","100223","101368","101387","101425","231","101319","101381","101550","604","3205","3375","101611","101496","101869","101600","526","101450","101356","101236","101891","101242","101206","2848","100260","101672","101818","2820","101774","1931","90","100762","100799","101114","101234","101014","101104","101184","101207","101069","101171","7932","100980","101080","101085","101100","101152","101158","101162","101180","101196","101211","101231","101613","100359","101526","100172","100138","101305","100257","100345","100522","2534","101191","101296","100668","100378","102374","102375"]);
+const isVisitorCamp = (c) => VISITOR_IDS.has(String(c.id)) || /지인|방문객|방문자|손님\s*초대/.test(`${c.name} ${c.line ?? ""} ${(c.amenities ?? []).join(" ")} ${JSON.stringify(c.pf ?? "")}`);
+const isPicnicCamp = (c) => PICNIC_IDS.has(String(c.id)) || ((/피크닉|캠크닉|바베큐|바비큐|평상|쉼터|당일\s*(캠핑|피크닉|이용)/i.test(`${c.name} ${(c.types ?? []).join(" ")} ${(c.amenities ?? []).join(" ")} ${c.pf?.s ?? ""} ${JSON.stringify(c.fee ?? "")}`)) && !/당일\s*(취소|환불)/.test(`${c.name} ${c.pf?.s ?? ""}`));
+const isParkCamp = (c) => /공원|유원지|휴양림|수변공원|생태공원|체육공원|국립공원|도립공원|군립공원|시민공원|근린공원/.test(c.name) || /공원/.test(c.addr ?? "") || ((c.fee?.min === 0 || c.pf?.p?.min === 0) && (c.op === "지자체" || c.op === "국립"));
+const isWaterPlayCamp = (c) => Boolean(c.pf?.t?.includes("WATER_PLAY") || (c.amenities ?? []).some((a) => /물놀이|수영|풀장|워터/.test(a)) || c.field_conditions?.features?.includes("SWIMMING_POOL"));
 const THEMES = [
   ["POPULAR", "실시간 인기", (c) => Boolean(c.m7 || c.rv?.n > 5)],
   ["VALLEY", "계곡", (c) => c.pf?.t?.includes("VALLEY")],
@@ -345,8 +354,11 @@ const THEMES = [
   ["PET", "반려견", (c) => c.pf?.t?.includes("PET_OK")],
   ["GLAMPING", "글램핑", (c) => c.pf?.t?.includes("GLAMPING")],
   ["CARAVAN", "카라반", (c) => c.pf?.t?.includes("CARAVAN")],
-  ["WINTER", "겨울", (c) => c.pf?.t?.includes("WINTER")],
   ["AUTO", "오토캠핑", (c) => c.pf?.t?.includes("AUTO")],
+  ["VISITOR", "지인초대", isVisitorCamp],
+  ["PICNIC", "캠크닉", isPicnicCamp],
+  ["PARK", "공원", isParkCamp],
+  ["WATER_PLAY", "물놀이터", isWaterPlayCamp],
 ];
 const THEME_FILES = {
   POPULAR: "popular.webp",
@@ -358,8 +370,11 @@ const THEME_FILES = {
   PET: "pet.webp",
   GLAMPING: "glamping.webp",
   CARAVAN: "caravan.webp",
-  WINTER: "winter.webp",
   AUTO: "auto.webp",
+  VISITOR: "comfort.webp",
+  PICNIC: "sunrise.webp",
+  PARK: "public.webp",
+  WATER_PLAY: "summer.webp",
   ALL: "valley.webp",
   OPEN: "sunrise.webp",
   AVAIL: "comfort.webp",
@@ -376,8 +391,11 @@ const THEME_SUBS = {
   PET: "사랑하는 반려견과 함께 머물 수 있는 반려견 동반 야영장",
   GLAMPING: "장비 없이도 아늑하고 편안하게 즐기는 감성 글램핑",
   CARAVAN: "독립된 캠핑 트레일러에서 특별한 낭만을 즐기는 카라반",
-  WINTER: "따뜻한 불멍과 설경을 만끽할 수 있는 동계 캠핑장",
   AUTO: "텐트 바로 옆 차량 주차로 편리한 오토캠핑장",
+  VISITOR: "지인·방문객 초대가 가능하여 함께 즐기기 좋은 캠핑장",
+  PICNIC: "숙박 부담 없이 가볍게 당일로 즐기는 피크닉·바베큐 캠핑장",
+  PARK: "부담 없이 자연을 누리는 무료 및 공공 수변·자연공원 야영장",
+  WATER_PLAY: "시원한 물놀이터와 풀장이 갖춰진 캠핑장 (여름 시즌 운영 종료 · 내년 계획을 미리 세워보세요)",
   ALL: "모여라캠핑이 엄선한 전국 다양한 테마별 캠핑장",
   OPEN: "곧 예약이 오픈되는 캠핑장 모아보기",
   AVAIL: "지금 바로 실시간 예약 접수 중인 캠핑장",
@@ -795,12 +813,13 @@ function cardReviewPills(rv) {
   if (!pros.length && !cons.length && rv.n > 0) return `<span class="c-rv-pill neutral">${ic("file-text")}후기 ${fmt(rv.n)}건</span>`;
   return [...pros, ...cons].join("");
 }
-function card(c, i = 0) {
+function card(c, i = 0, opts) {
+  const isWp = Boolean((opts && !Array.isArray(opts) && opts.isWaterPlay) || S.theme === "WATER_PLAY");
   const { tag } = nameOf(c), o = openingOf(c);
-  return `<article class="card" data-id="${esc(c.id)}">
+  return `<article class="card${isWp ? " is-closed" : ""}" data-id="${esc(c.id)}">
     <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="card-media">${carousel(c, { eager: i < 4 })}
-      ${o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : S.avail?.has(String(c.id)) ? `<span class="sig live">${ic("check")}접수 중</span>` : ""}
+      ${isWp ? `<span class="sig closed">${ic("clock")}운영종료</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : S.avail?.has(String(c.id)) ? `<span class="sig live">${ic("check")}접수 중</span>` : ""}
       <span class="bdgs">${badges(c, 3)}</span>
     </div>
     <div class="card-body">
@@ -997,7 +1016,8 @@ function homeView() {
   const openings = S.camps.map((c) => [c, openingOf(c)]).filter(([c, o]) => o && hasPhoto(c)).sort((a, b) => a[1].dd - b[1].dd);
   const themeItems = THEMES.map(([key, label, test]) => {
     const imgSrc = themeImg(key);
-    return `<a class="theme-card" href="#/theme/${encodeURIComponent(key)}" draggable="false"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy" draggable="false"><span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
+    const isWp = key === "WATER_PLAY";
+    return `<a class="theme-card${isWp ? " is-closed" : ""}" href="#/theme/${encodeURIComponent(key)}" draggable="false"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy" draggable="false">${isWp ? `<span class="theme-closed-badge">운영종료</span>` : ""}<span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
   }).join("");
   const openingSection = openings.length ? `<section class="opens" aria-labelledby="op-t">
     <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><div class="sec-side"><a class="link more-link" href="#/theme/OPEN">더보기 ${ic("right")}</a></div></div>
@@ -1069,7 +1089,7 @@ function themeRow([k, label, test], list, first, used) {
   items.forEach((c) => used.add(c.id));
   return `<section class="trow" aria-label="${esc(label)}">
     <div class="trow-head"><h3>${thIc(k)}${esc(label)} <i>${fmt(all.length)}</i></h3><button type="button" class="link more-link" data-theme-all="${k}">더보기 ${ic("right")}</button></div>
-    <div class="rail trow-rail">${items.map((c, i) => card(c, first && i < 4 ? i : 9)).join("")}</div>
+    <div class="rail trow-rail">${items.map((c, i) => card(c, first && i < 4 ? i : 9, { isWaterPlay: k === "WATER_PLAY" })).join("")}</div>
   </section>`;
 }
 const themeName = (k) => (k === "ALL" ? "전체 테마" : k === "AVAIL" ? "공식 접수 중" : k === "OPEN" ? "곧 오픈" : k === "REVIEWS" ? "긍정 후기 추천" : THEMES.find((t) => t[0] === k)?.[1] ?? k);
@@ -1098,10 +1118,11 @@ function renderResults({ reset = true } = {}) {
     const defs = [
       ...themeList.slice(0, 3),
       ["T:HOUSE", "캐빈·방갈로", (c) => hasType(c, "HOUSE")],
-      ...themeList.slice(3, 6),
+      ...themeList.slice(3, 7),
       ["T:DECK", "데크", (c) => hasType(c, "DECK")],
-      ...themeList.slice(6),
+      ...themeList.slice(7, 10),
       ["T:CAR_CAMP", "차박", (c) => hasType(c, "CAR_CAMP")],
+      ...themeList.slice(10),
     ];
     const used = new Set();
     rows.innerHTML = list.length ? defs.map((dd, i) => themeRow(dd, list, i === 0, used)).join("") : `<div class="empty">${ic("search")}<b>맞는 곳이 없어요</b><button class="btn ghost" data-clear="all">조건 지우기</button></div>`;
@@ -1485,6 +1506,7 @@ function themeView(themeKey) {
   const tSub = THEME_SUBS[themeKey] ?? "자연과 함께하는 특별한 테마 캠핑장";
   const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "AVAIL" ? (c) => S.avail?.has(String(c.id)) : themeKey === "REVIEWS" ? (c) => Boolean((c.rv?.p?.length ?? 0) >= 2 || (c.rv?.t ?? 0) >= 4) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
   const totalInTheme = S.camps.filter(testFn).length;
+  const isWp = themeKey === "WATER_PLAY";
 
   return `<section class="theme-page" aria-labelledby="tp-title">
     <div class="theme-hero" style="background-image: url('${tImg}')">
@@ -1496,6 +1518,7 @@ function themeView(themeKey) {
       </div>
     </div>
     <div class="theme-body">
+      ${isWp ? `<div class="theme-closed-alert">${ic("info")}<div><strong>여름 시즌 물놀이터 운영 종료 안내</strong><p>전국 물놀이터·야영장 수영장 정보입니다. 현재는 하절기 운영이 종료된 상태입니다. 모여라 캠핑에서 미리 시설 정보를 확인하시고 다음 시즌 피서 계획에 참고해 보세요!</p></div></div>` : ""}
       <div class="theme-tools-bar">
         <div class="rail chips theme-areas" aria-label="지역">
           ${AREAS.map(([k, l]) => `<button type="button" class="chip" data-theme-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}
@@ -1545,7 +1568,7 @@ function bindTheme(themeKey) {
     const shown = list.slice(0, pageN);
     $("[data-theme-count]").innerHTML = `총 <b>${fmt(list.length)}</b>곳`;
     grid.innerHTML = shown.length
-      ? shown.map(card).join("")
+      ? shown.map((c, i) => card(c, i, { isWaterPlay: themeKey === "WATER_PLAY" })).join("")
       : `<div class="empty">${ic("search")}<b>이 지역에는 맞는 캠핑장이 없어요</b><button class="btn ghost" type="button" data-theme-clear-area>전국 보기</button></div>`;
     $("[data-theme-more]").hidden = pageN >= list.length;
     initCarousels(grid);
