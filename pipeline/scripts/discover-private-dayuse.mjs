@@ -22,14 +22,16 @@ const strip = (s) => String(s).replace(/<\/?b>/g, "").replace(/&amp;/g, "&");
 const norm = (s) => strip(s).replace(/\s|캠핑장|바베큐장|점$/g, "");
 function add(src, d) { const k = norm(d.name) + "|" + String(d.addr).split(" ").slice(0, 3).join(" "); const c = C.get(k) ?? { ...d, hits: [], src: [] }; c.hits.push(d.kw); c.src.push(src); for (const f of ["lat", "lng", "kakao", "link", "tel", "cat2"]) c[f] ??= d[f]; C.set(k, c); }
 let kc = 0, nc = 0;
-for (const s of sgg) for (const kw of KW) {
+// 소유자가 자주 가는 업장 유형의 체인(이름 검색) — 시군구×검색어로 안 잡히는 지점 보완
+const PAIRS = [...sgg.flatMap((s) => KW.map((kw) => [s, kw])), ...["어메이징빌리지", "라그릴스", "펀앤펀캠프"].map((n) => ["", n])];
+for (const [s, kw] of PAIRS) {
   if (K) for (let p = 1; p <= 2; p++) { kc++;
-    const r = await fetch(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${encodeURIComponent(`${s} ${kw}`)}&page=${p}&size=15`, { headers: { Authorization: `KakaoAK ${K}` } });
+    const r = await fetch(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${encodeURIComponent(`${s ? s + " " : ""}${kw}`)}&page=${p}&size=15`, { headers: { Authorization: `KakaoAK ${K}` } });
     if (!r.ok) { console.log("kakao", r.status); break; } const j = await r.json();
     for (const d of j.documents ?? []) if (SIDO.test(d.address_name)) add("kakao", { name: d.place_name, cat: d.category_name, addr: d.address_name, lat: +d.y, lng: +d.x, kakao: d.place_url, tel: d.phone, kw });
     if (j.meta?.is_end) break; await sleep(40); }
   if (NI) { nc++;
-    for (const path of ["/search/v1/local", "/v1/search/local.json"]) { const r = await fetch(`https://naverapihub.apigw.ntruss.com${path}?query=${encodeURIComponent(`${s} ${kw}`)}&display=5`, { headers: { "X-NCP-APIGW-API-KEY-ID": NI, "X-NCP-APIGW-API-KEY": NS } });
+    for (const path of ["/search/v1/local", "/v1/search/local.json"]) { const r = await fetch(`https://naverapihub.apigw.ntruss.com${path}?query=${encodeURIComponent(`${s ? s + " " : ""}${kw}`)}&display=5`, { headers: { "X-NCP-APIGW-API-KEY-ID": NI, "X-NCP-APIGW-API-KEY": NS } });
       if (!r.ok) continue; const j = await r.json();
       for (const d of j.items ?? []) if (SIDO.test(d.address ?? "")) add("naver", { name: strip(d.title), cat: d.category, cat2: d.category, addr: d.address, link: d.link, kw, lat: d.mapy ? d.mapy / 1e7 : undefined, lng: d.mapx ? d.mapx / 1e7 : undefined });
       break; }
@@ -47,5 +49,8 @@ const rows = [...C.values()].map((c) => {
   const dup = Number.isFinite(c.lat) ? known.find((k) => dist(k, c) < 250 || norm(k.name) === norm(c.name)) : known.find((k) => norm(k.name) === norm(c.name));
   return { ...c, score, why, dup: dup ? `${dup.id} ${dup.name}` : null };
 }).filter((r) => r.score >= 3 && !r.dup).sort((a, b) => b.score - a.score);
+// 카카오·네이버가 같은 곳을 다른 이름·주소 표기로 줄 때(150m 안, 이름 겹침) 하나로 합친다
+for (let i = rows.length - 1; i >= 0; i--) { const r = rows[i]; const j = rows.findIndex((o, k) => k < i && Number.isFinite(o.lat) && Number.isFinite(r.lat) && dist(o, r) < 150 && (norm(o.name).includes(norm(r.name).slice(0, 4)) || norm(r.name).includes(norm(o.name).slice(0, 4))));
+  if (j >= 0) { const o = rows[j]; o.src = [...new Set([...o.src, ...r.src])]; o.kakao ??= r.kakao; o.link ??= r.link; rows.splice(i, 1); } }
 writeFileSync(out, JSON.stringify({ generated_at: new Date().toISOString(), calls: { kakao: kc, naver: nc }, sigungu: sgg.length, raw: C.size, queue: rows }, null, 1));
 console.log(`수도권 ${sgg.length}개 시군구 · 호출 카카오 ${kc}/네이버 ${nc} · 원 후보 ${C.size} · 검토 대기 ${rows.length}`);
