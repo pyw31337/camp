@@ -299,8 +299,19 @@ const TH_SVG = {
   "T:CAR_CAMP": ["0 0 24 24", '<g fill="currentColor"><path d="M3 19.723V21a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.277A1.99 1.99 0 0 0 22 18v-3c0-.831-.507-1.542-1.228-1.845l-1.368-4.104A2.995 2.995 0 0 0 16.559 7H7.441a2.995 2.995 0 0 0-2.845 2.051l-1.368 4.104A2 2 0 0 0 2 15v3c0 .738.404 1.376 1 1.723M5.5 18a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 5.5 18m13 0a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 18.5 18M7.441 9h9.117a1 1 0 0 1 .949.684L18.613 13H5.387l1.105-3.316c.137-.409.519-.684.949-.684"/><path d="M22 7.388V5.279l-9.684-3.228a1 1 0 0 0-.658.009L2 5.572V7.7l10.015-3.642z"/></g>'],
 };
 const thIc = (k) => (TH_SVG[k] ? `<svg class="th-ic" viewBox="${TH_SVG[k][0]}" aria-hidden="true">${TH_SVG[k][1]}</svg>` : "");
+const hasWater = (c) => (c.amenities ?? []).some((a) => /물놀이장|수영장|풀장/.test(a));
+const isFree = (c) => c.fee?.min === 0 || /무료/.test(c.fee?.text ?? "");
+const PUBLIC_OP = new Set(["LOCAL_GOVERNMENT", "NATIONAL_PARK", "NATURAL_RECREATION_FOREST", "PUBLIC_LEISURE"]);
+// 공공·국립 물놀이터는 대개 6~8월만 연다. 그 밖에는 비운영.
+const waterInSeason = (c) => {
+  if (!hasWater(c) || !PUBLIC_OP.has(c.op)) return true;
+  const m = new Date().getMonth() + 1;
+  return m >= 6 && m <= 8;
+};
 const THEMES = [
   ["POPULAR", "실시간 인기", (c) => Boolean(c.m7 || c.rv?.n > 5)],
+  ["FREE", "무료", isFree],
+  ["WATER", "물놀이터", hasWater],
   ["VALLEY", "계곡", (c) => c.pf?.t?.includes("VALLEY")],
   ["FOREST", "숲", (c) => c.pf?.t?.includes("FOREST")],
   ["BEACH", "바다", (c) => c.pf?.t?.includes("BEACH") || c.th?.includes("sea")],
@@ -314,6 +325,8 @@ const THEMES = [
 ];
 const THEME_FILES = {
   POPULAR: "popular.webp",
+  FREE: "comfort.webp",
+  WATER: "valley.webp",
   VALLEY: "valley.webp",
   FOREST: "forest.webp",
   BEACH: "sea.webp",
@@ -332,6 +345,8 @@ const THEME_FILES = {
 const themeImg = (k) => `${ASSETS_BASE}images/themes/${THEME_FILES[k] ?? "valley.webp"}`;
 const THEME_SUBS = {
   POPULAR: "최근 7일간 캠퍼들 사이에서 가장 많이 언급되고 화제가 된 인기 캠핑장",
+  FREE: "입장·이용료가 무료로 확인된 곳",
+  WATER: "물놀이장·수영장이 있는 곳. 공공은 여름 한시 운영",
   VALLEY: "시원한 물소리와 맑은 물놀이를 즐길 수 있는 계곡 야영장",
   FOREST: "피톤치드 가득한 울창한 숲속 힐링 캠핑장",
   BEACH: "탁 트인 바다 전망과 파도 소리를 즐기는 해변 캠핑장",
@@ -436,7 +451,9 @@ function results() {
   if (S.sort === "name") list.sort((a, b) => nameOf(a).name.localeCompare(nameOf(b).name, "ko"));
   else list.sort((a, b) => rich(b) - rich(a));
   // 사진이 한 장도 없는 곳은 뒤로(이름으로 직접 찾은 곳은 제외)
-  return list.sort((a, b) => photoLast(a) - photoLast(b));
+  list.sort((a, b) => photoLast(a) - photoLast(b));
+  // 비시즌 공공·국립 물놀이터는 맨 뒤
+  return list.sort((a, b) => Number(!waterInSeason(a)) - Number(!waterInSeason(b)));
 }
 
 // ── 사진 ─────────────────────────────────────────────────────
@@ -761,7 +778,7 @@ function cardReviewPills(rv) {
 }
 function card(c, i = 0) {
   const { tag } = nameOf(c), o = openingOf(c);
-  return `<article class="card" data-id="${esc(c.id)}">
+  return `<article class="card${hasWater(c) && !waterInSeason(c) ? " is-offseason" : ""}" data-id="${esc(c.id)}">
     <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="card-media">${carousel(c, { eager: i < 4 })}
       ${o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : S.avail?.has(String(c.id)) ? `<span class="sig live">${ic("check")}접수 중</span>` : ""}
@@ -1117,7 +1134,7 @@ const KIND = Object.fromEntries(KINDS.map(([k, l, t]) => [k, { label: l, test: t
 const W_OPTS = [[0, "상관없음"], [1, "전기 있음"], [600, "600W 이상"], [1100, "1,100W 이상"]];
 const SIZE_OPTS = [[0, "상관없음"], [6, "6m 이상"], [8, "8m 이상"], [10, "10m 이상"]];
 const R_OPTS = [10, 20, 30];
-const emptyCond = () => ({ sido: [], kind: [], pet: false, w: 0, size: 0, fire: false, park: false, near: "", r: 20 });
+const emptyCond = () => ({ sido: [], kind: [], pet: false, w: 0, size: 0, fire: false, park: false, water: false, free: false, near: "", r: 20 });
 S.cond = emptyCond();
 const km2 = (a, b) => { const R = 6371, dLa = ((b.lat - a.lat) * Math.PI) / 180, dLo = ((b.lng - a.lng) * Math.PI) / 180; const x = Math.sin(dLa / 2) ** 2 + Math.cos((a.lat * Math.PI) / 180) * Math.cos((b.lat * Math.PI) / 180) * Math.sin(dLo / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(x)); };
 // “파주 일대”: 그 시·군 캠핑장 좌표의 가운데에서 반경 r km
@@ -1150,6 +1167,8 @@ function condEval(c, k = S.cond, skip = null) {
   if (skip !== "size" && k.size) { const m = maxSide(c); st.size = m ? (m >= k.size ? "y" : "n") : "?"; }
   if (skip !== "fire" && k.fire) { const f = facts(c).fire?.kind; st.fire = f === "FIREWOOD_OK" ? "y" : f ? "n" : "?"; }
   if (skip !== "park" && k.park) { const o = facts(c).park?.ok; st.park = o === true ? "y" : o === false || o === "part" ? (o === "part" ? "?" : "n") : "?"; }
+  if (skip !== "water" && k.water) st.water = hasWater(c) ? "y" : "n";
+  if (skip !== "free" && k.free) st.free = isFree(c) ? "y" : "?";
   const vals = Object.values(st);
   if (vals.includes("n")) return null;
   return { st, unknown: vals.filter((v) => v === "?").length, ref: vals.filter((v) => v === "ref").length };
@@ -1160,7 +1179,7 @@ function condTest(c, k = S.cond, skip = null, strict = S.condStrict) {
   return Boolean(r) && (!strict || r.unknown === 0);
 }
 const COND_LABEL = { kind: "상품", pet: "반려견", w: "전기", size: "사이트 크기", fire: "장작", park: "텐트 옆 주차" };
-const condActive = (k = S.cond) => k.sido.length + k.kind.length + (k.pet ? 1 : 0) + (k.w ? 1 : 0) + (k.size ? 1 : 0) + (k.fire ? 1 : 0) + (k.park ? 1 : 0) + (k.near ? 1 : 0);
+const condActive = (k = S.cond) => k.sido.length + k.kind.length + (k.pet ? 1 : 0) + (k.w ? 1 : 0) + (k.size ? 1 : 0) + (k.fire ? 1 : 0) + (k.park ? 1 : 0) + (k.water ? 1 : 0) + (k.free ? 1 : 0) + (k.near ? 1 : 0);
 function condChips(k = S.cond) {
   const out = [];
   if (k.near) out.push(["near", `${k._ctr?.label ?? k.near} ${k.r}km 안`]);
@@ -1171,6 +1190,8 @@ function condChips(k = S.cond) {
   if (k.size) out.push(["size", `사이트 ${k.size}m 이상`]);
   if (k.fire) out.push(["fire", "장작 가능"]);
   if (k.park) out.push(["park", "텐트 옆 주차"]);
+  if (k.water) out.push(["water", "물놀이터"]);
+  if (k.free) out.push(["free", "무료"]);
   return out;
 }
 function condSummary() { const ch = condChips(); return ch.length ? (ch.length > 2 ? `${ch[0][1]} · ${ch[1][1]} 외 ${ch.length - 2}` : ch.map((x) => x[1]).join(" · ")) : "조건 추가"; }
@@ -1182,6 +1203,8 @@ function condToParams(p, k = S.cond) {
   if (k.size) p.set("size", String(k.size));
   if (k.fire) p.set("fire", "1");
   if (k.park) p.set("park", "1");
+  if (k.water) p.set("water", "1");
+  if (k.free) p.set("free", "1");
   if (k.near) { p.set("near", k.near); p.set("r", String(k.r)); }
   if (S.feeBand) p.set("fee", S.feeBand);
   if (S.condStrict) p.set("strict", "1");
@@ -1190,7 +1213,7 @@ function condFromParams(q) {
   const k = emptyCond(), list = (n) => (q.get(n) ?? "").split(",").filter(Boolean);
   k.sido = list("sido").filter((x) => SIDOS.includes(x));
   k.kind = list("kind").filter((x) => KIND[x]);
-  k.pet = q.get("pet") === "1"; k.fire = q.get("fire") === "1"; k.park = q.get("park") === "1";
+  k.pet = q.get("pet") === "1"; k.fire = q.get("fire") === "1"; k.park = q.get("park") === "1"; k.water = q.get("water") === "1"; k.free = q.get("free") === "1";
   k.w = W_OPTS.some(([v]) => v === Number(q.get("w"))) ? Number(q.get("w")) : 0;
   k.size = SIZE_OPTS.some(([v]) => v === Number(q.get("size"))) ? Number(q.get("size")) : 0;
   k.near = (q.get("near") ?? "").slice(0, 20); k.r = R_OPTS.includes(Number(q.get("r"))) ? Number(q.get("r")) : 20;
@@ -1210,7 +1233,7 @@ function condSheet() {
       if (!b) return;
       const [key, val] = b.dataset.c.split(":"), k = S.condDraft;
       if (key === "sido" || key === "kind") k[key] = k[key].includes(val) ? k[key].filter((x) => x !== val) : [...k[key], val];
-      else if (key === "pet" || key === "fire" || key === "park") k[key] = !k[key];
+      else if (key === "pet" || key === "fire" || key === "park" || key === "water" || key === "free") k[key] = !k[key];
       else if (key === "w" || key === "size" || key === "r") k[key] = Number(val);
       else if (key === "fee") S.feeDraft = S.feeDraft === val ? "" : val;
       else if (key === "strict") S.strictDraft = !S.strictDraft;
@@ -1255,6 +1278,7 @@ function paintCondSheet() {
       <section><h3>반려견</h3><div class="cond-chips">${chip("pet", 1, "동반 가능", k.pet, tally("pet", true))}</div></section>
       <section><h3>전기 <small>W 미공지인 전기 사이트는 관광진흥법 기준 600W로 봐요</small></h3><div class="cond-chips">${W_OPTS.map(([v, l]) => chip("w", v, l, k.w === v, v ? tally("w", v) : null)).join("")}</div></section>
       <section><h3>사이트 크기 <small>긴 변 기준 · 규격 미등록은 +로 함께</small></h3><div class="cond-chips">${SIZE_OPTS.map(([v, l]) => chip("size", v, l, k.size === v, v ? tally("size", v) : null)).join("")}</div></section>
+      <section><h3>물놀이·무료</h3><div class="cond-chips">${chip("water", 1, "물놀이터", k.water, tally("water", true))}${chip("free", 1, "무료", k.free, tally("free", true))}</div></section>
       <section><h3>불멍·주차</h3><div class="cond-chips">${chip("fire", 1, "장작 가능", k.fire, tally("fire", true))}${chip("park", 1, "텐트 옆 주차", k.park, tally("park", true))}</div></section>
       <section><h3>1박 요금</h3><div class="cond-chips">${[["u3", "~3만원"], ["3to5", "3~5만원"], ["5to7", "5~7만원"], ["o7", "7만원+"]].map(([v, l]) => chip("fee", v, l, S.feeDraft === v, count("fee", (c) => feeOk(c, v)))).join("")}</div></section>
     </div>
