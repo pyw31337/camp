@@ -62,7 +62,7 @@ const store = {
 
 const S = {
   stype: "", camps: [], byId: new Map(), photos: {}, cards: {}, openings: new Map(),
-  q: "", area: "all", quick: new Set(), theme: null, feeBand: store.get("mc-feeband", ""), sort: "rich", shown: 24, mode: "keyword",
+  q: "", area: "all", quick: new Set(), theme: null, feeBand: store.get("mc-feeband", ""), sort: "rec", shown: 24, mode: "keyword",
   stay: store.get("mc-stay", ""),
   saved: store.get("mc-saved", store.get("mc-compare", [])), pick: store.get("mc-pick", []), compare: store.get("mc-compare", []),
   detailCache: new Map(), homeScroll: 0,
@@ -1442,7 +1442,7 @@ function themeView(themeKey) {
         <div class="theme-subtools">
           <span class="theme-count" data-theme-count></span>
           <label class="sort">${ic("list")}<select data-theme-sort aria-label="정렬">
-            <option value="rich"${S.sort === "rich" ? " selected" : ""}>정보 많은 순</option>
+            <option value="rec"${(S.sort ?? "rec") === "rec" ? " selected" : ""}>추천순</option>
             <option value="name"${S.sort === "name" ? " selected" : ""}>이름순</option>
             <option value="fee"${S.sort === "fee" ? " selected" : ""}>요금 낮은 순</option>
           </select></label>
