@@ -32,6 +32,8 @@ export const SOURCES = {
   gocamping_best: "문화체육관광부·한국관광공사 분야별 공공 우수야영장(고캠핑 공개 목록)",
   // 예약 엔진(땡큐캠핑 등) 공개 예약 화면에 업장이 등록한 사이트 정보 — build-thankq-facts.mjs의 d.booking_sites.
   booking_engine: "예약 엔진 공개 화면(업장 등록 사이트 정보)",
+  // 고캠핑 상세 화면(read.do) 이용안내 요금표 — crawl-gocamping-detail.mjs → build-gocamping-detail.mjs의 d.gcd.
+  gocamping_detail: "고캠핑 상세 화면(업장 등록 이용안내·요금표)",
 };
 
 const ENV = { 산: "MOUNTAIN", 숲: "FOREST", 강: "RIVER", 호수: "LAKE", 계곡: "VALLEY", 해변: "BEACH", 섬: "ISLAND", 도심: "CITY" };
@@ -240,6 +242,8 @@ export function factsOf(c, d, { site = null, details = null, digest = null, kaka
       if (x.checkOut && once("co")) be("CHECKOUT_TIME", x.checkOut);
     }
   }
+  // ── 고캠핑 상세 화면 요금표(업장 등록, 평상시·성수기 × 주중·주말)
+  for (const f of d?.gcd?.fees ?? []) if (f.won >= 5000 && f.won <= 3000000) push("PRICE_NIGHT", f.won, "OPERATOR", "gocamping_detail", { url: d.gcd.url ?? null, at: d.gcd.checked_at?.slice(0, 10) ?? null, text: won(f.won), label: `${f.label} · ${f.period}`.replace(/ · $/, "") });
   for (const p of d?.prices ?? []) if (p.won >= 10000 && p.won <= 1000000) push("PRICE_MENTION", p.won, "MENTION", "review_search", { url: p.url ?? null, at: p.date ?? null, quote: p.quote ?? null, text: won(p.won), label: p.day ?? p.season ?? p.label ?? null });
   // ── 후기 장단점(주제별 건수)
   if (digest?.n) {

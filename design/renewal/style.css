@@ -1990,3 +1990,33 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 .sec-note.tip-host, p.tip-host, .use.tip-host { border-radius: 8px; }
 /* 작은 표시(확인필요·추정·업장 등록·추가 요금)는 모두 같은 캡슐 모양 */
 .badge-check, .price-sec .pl-kind, .pt span i, .ft i, .card-price i, .rows .est-tag { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; margin-left: 4px; border-radius: 999px; border: 1px solid var(--line); background: var(--soft, #f2f3f0); color: var(--ink-3); font-size: .7rem; font-weight: 800; font-style: normal; line-height: 1; white-space: nowrap; vertical-align: middle; }
+
+/* 고캠핑 상세 화면 수집본: 요금표·시설정보·내부시설(2026-10-20) */
+.gc-ptable { border: 1px solid var(--line); border-radius: var(--r-s); background: var(--paper); margin: 0 0 12px; overflow: hidden; }
+.gc-pt-head { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--soft); }
+.gc-pt-head b { font-weight: 800; }
+.gc-pt-scroll { overflow-x: auto; }
+.gc-ptable table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 460px; }
+.gc-ptable th, .gc-ptable td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+.gc-ptable thead th { font-size: 12.5px; color: var(--ink-3); font-weight: 700; }
+.gc-ptable tbody th { text-align: left; font-weight: 700; color: var(--ink-2); white-space: normal; }
+.gc-ptable td { font-variant-numeric: tabular-nums; font-weight: 800; }
+.gc-ptable tr:last-child > * { border-bottom: 0; }
+.gc-inner { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; margin-bottom: 12px; }
+.gc-inner-card { border: 1px solid var(--line); border-radius: var(--r-s); padding: 12px 14px; background: var(--paper); }
+.gc-inner-card > b { display: flex; align-items: center; gap: 6px; font-weight: 800; margin-bottom: 8px; }
+.gc-inner-card > b .ic { width: 18px; height: 18px; }
+.gcf { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; margin: 0; }
+.gcf-row { display: grid; grid-template-columns: 116px 1fr; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.gcf-row dt { color: var(--ink-3); font-size: 13px; font-weight: 700; }
+.gcf-row dd { margin: 0; font-size: 14px; color: var(--ink); }
+.gcf-row .amen { margin: 0; }
+.gc-guide { margin-top: 10px; border: 1px solid var(--line); border-radius: var(--r-s); padding: 10px 14px; }
+.gc-guide summary { cursor: pointer; font-weight: 700; }
+.gc-guide p { white-space: pre-line; color: var(--ink-2); font-size: 14px; margin: 8px 0 0; }
+@media (max-width: 759px) { .gcf { grid-template-columns: 1fr; } .gcf-row { grid-template-columns: 96px 1fr; } .gc-ptable table { font-size: 13px; min-width: 0; } .gc-ptable th, .gc-ptable td { padding: 8px; } }
+.gcp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.gcp-cell { padding: 0; border: 0; border-radius: var(--r-s); overflow: hidden; aspect-ratio: 4 / 3; background: var(--soft); cursor: zoom-in; }
+.gcp-cell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s; }
+.gcp-cell:hover img { transform: scale(1.04); }
+@media (max-width: 759px) { .gcp-grid { grid-template-columns: repeat(3, 1fr); gap: 4px; } }
