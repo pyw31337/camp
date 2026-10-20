@@ -34,7 +34,7 @@ export function apply(grid) {
     if (hit) { total++; if (visible) shown++; }
   }
   st.btn.hidden = shown >= total;
-  st.btn.textContent = `더보기 (${total - shown}개 남음)`;
+  st.btn.textContent = `${total - shown}개 더보기`;
 }
 export function setup(grid, { filter } = {}) {
   if (!grid || STATE.has(grid)) return;
