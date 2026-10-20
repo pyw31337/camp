@@ -1802,7 +1802,7 @@ function specSection(c, d) {
   const known = tiles.filter((t) => !/^<div class="tile unk/.test(t));
   const unknown = tiles.filter((t) => /^<div class="tile unk/.test(t)).map((t) => (t.match(/<span class="tile-l">([^<]*)<\/span>/) ?? [])[1]).filter(Boolean);
   if (!known.length && !unknown.length) return "";
-  return `<section class="d-sec" id="sec-spec"><div class="sec-head">${iconTitle("info", "요약 사항")}${known.length ? `<span class="sec-note">${known.length}/${tiles.length} 확인</span>` : ""}</div>${known.length ? `<div class="tiles">${known.join("")}</div>` : ""}${unknownLine(unknown)}</section>`;
+  return `<section class="d-sec" id="sec-spec"><div class="sec-head">${iconTitle("info", "요약 사항")}${known.length ? `<span class="sec-note">${known.length}/${tiles.length} 확인</span>` : ""}</div>${known.length ? `<div class="tiles">${known.join("")}</div>` : ""}${c.du ? "" : unknownLine(unknown)}</section>`;
 }
 function specTiles(c, d) {
   const f = facts(c);
