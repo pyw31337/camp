@@ -2301,9 +2301,9 @@ function layoutHtml(d, c) {
     .filter((x) => x && (x.img || x.thumb))
     .filter((x, i, arr) => arr.findIndex((y) => (y.img || y.thumb) === (x.img || x.thumb)) === i);
 
-  const posts = (d?.layout?.posts ?? []).filter((x) => x.url && x.title).slice(0, 4);
-
-  if (!allImages.length && !posts.length) return "";
+  // 후보 카드 오른쪽 아래(단일 사진은 오른쪽 위) 원문 링크 아이콘: 누르면 그 사진이 실린 글로 이동(소유자 2026-10-20)
+  const srcIcon = (x, pos = "") => (/^https?:/.test(x?.url ?? "") ? `<a class="cand-src${pos ? ` cand-src-${pos}` : ""}" href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="원문 보기" title="원문 보기">${ic("external", "line")}</a>` : "");
+  if (!allImages.length) return "";
 
   const officialList = allImages.filter(isOfficialLayout);
   const hasOfficial = officialList.length > 0;
@@ -2330,7 +2330,7 @@ function layoutHtml(d, c) {
           ${candidates.map((x, i) => {
             const imgUrl = x.img || x.thumb;
             return `
-            <button type="button" class="layout-cand-btn" data-layout-open="${i + 1}" aria-label="참고 시설배치도 ${i + 1} 크게 보기">
+            <div class="layout-cand"><button type="button" class="layout-cand-btn" data-layout-open="${i + 1}" aria-label="참고 시설배치도 ${i + 1} 크게 보기">
               <div class="layout-cand-photo">
                 <img src="${esc(imgUrl)}" alt="참고 배치도 ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(x.thumb)}'){this.src='${esc(x.thumb)}'}">
                 <span class="cand-zoom-badge">${ic("search")}크게 보기</span>
@@ -2339,7 +2339,7 @@ function layoutHtml(d, c) {
                 <b>참고 배치도 ${i + 1}</b>
                 <span>${esc(sourceName(x.src, hostOf(x.url) || "후기"))}${x.date ? ` · ${esc(String(x.date).slice(0, 7))}` : ""}</span>
               </div>
-            </button>`;
+            </button>${srcIcon(x)}</div>`;
           }).join("")}
         </div>
       </div>` : ""}
@@ -2362,11 +2362,8 @@ function layoutHtml(d, c) {
           <img src="${esc(imgUrl)}" alt="추정 시설 배치도" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(single.thumb)}'){this.src='${esc(single.thumb)}'}">
           <span class="cand-zoom-badge">${ic("search")}고화질 크게 보기</span>
         </button>
+        ${srcIcon(single, "top")}
       </div>
-      ${posts.length ? `
-      <div class="layout-links" style="margin-top: 12px;">
-        ${posts.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener"><span>${ic("layers", "line")}배치도 관련 글 ${i + 1}</span><i>${esc(serviceText(x.title, 40))} · ${esc(sourceName(x.src, hostOf(x.url) || "원문"))}</i>${ic("external", "line")}</a>`).join("")}
-      </div>` : ""}
     </section>`;
   }
 
@@ -2381,7 +2378,7 @@ function layoutHtml(d, c) {
         ${candidates.map((x, i) => {
           const imgUrl = x.img || x.thumb;
           return `
-          <button type="button" class="layout-cand-btn" data-layout-open="${i}" aria-label="시설배치도 추정 후보 ${i + 1} 원본 크게 보기">
+          <div class="layout-cand"><button type="button" class="layout-cand-btn" data-layout-open="${i}" aria-label="시설배치도 추정 후보 ${i + 1} 원본 크게 보기">
             <div class="layout-cand-photo">
               <img src="${esc(imgUrl)}" alt="배치도 후보 ${i + 1}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.src!=='${esc(x.thumb)}'){this.src='${esc(x.thumb)}'}">
               <span class="cand-zoom-badge">${ic("search")}크게 보기</span>
@@ -2390,26 +2387,14 @@ function layoutHtml(d, c) {
               <b>배치도 후보 ${i + 1}</b>
               <span>${esc(sourceName(x.src, hostOf(x.url) || "후기"))}${x.date ? ` · ${esc(String(x.date).slice(0, 7))}` : ""}${x.sure ? " · 관련도 높음" : ""}</span>
             </div>
-          </button>`;
+          </button>${srcIcon(x)}</div>`;
         }).join("")}
       </div>
-      ${posts.length ? `
-      <div class="layout-links" style="margin-top: 12px;">
-        ${posts.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener"><span>${ic("layers", "line")}배치도 관련 글 ${i + 1}</span><i>${esc(serviceText(x.title, 40))} · ${esc(sourceName(x.src, hostOf(x.url) || "원문"))}</i>${ic("external", "line")}</a>`).join("")}
-      </div>` : ""}
     </section>`;
   }
 
-  return `<section class="d-sec layout-sec">
-    <div class="sec-head">
-      ${iconTitle("layers", "시설 배치도")}
-      <span class="sec-note">고캠핑 공식 배치도 없음</span>
-    </div>
-    <p class="layout-note">고캠핑에 등록된 공식 배치도 이미지가 없습니다. 아래 캠퍼 후기 및 관련 글에서 현장 안내를 확인하실 수 있습니다.</p>
-    <div class="layout-links">
-      ${posts.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener"><span>${ic("layers", "line")}배치도 관련 글 ${i + 1}</span><i>${esc(serviceText(x.title, 40))} · ${esc(sourceName(x.src, hostOf(x.url) || "원문"))}</i>${ic("external", "line")}</a>`).join("")}
-    </div>
-  </section>`;
+  // 사진 없이 관련 글만 있는 경우는 칸을 보이지 않는다(소유자 2026-10-20: ‘배치도 관련 글’ 박스 제거)
+  return "";
 }
 // 플랫폼별 더 보기(docs/PLATFORM_HUB.md, 2026-10-19): 수집한 영상은 위 영상 칸에서 재생하고,
 // 직접 수집하지 않는 플랫폼(인스타·페이스북·틱톡 등)은 캠핑장 이름 검색 결과로 새 탭에서 연다.

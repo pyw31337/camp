@@ -1917,3 +1917,13 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 .hr-list li a.hr-line { flex: 1; min-width: 0; color: inherit; text-decoration: none; overflow-wrap: anywhere; border-radius: 4px; }
 .hr-list li a.hr-line:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 .hr-list li a.hr-line:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* 시설 배치도 후보: 카드 오른쪽 아래 원문 링크 아이콘(2026-10-20) */
+.layout-cand { position: relative; display: flex; }
+.layout-cand > .layout-cand-btn { flex: 1; min-width: 0; }
+.layout-single-wrap { position: relative; }
+.cand-src { position: absolute; right: 10px; bottom: 10px; z-index: 2; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 999px; color: var(--ink-2); background: var(--soft); text-decoration: none; }
+.cand-src:hover { color: var(--accent); background: var(--accent-tint); }
+.cand-src:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.cand-src .ic { width: 16px; height: 16px; }
+.cand-src-top { top: 12px; bottom: auto; right: 12px; background: rgba(255, 255, 255, .92); box-shadow: 0 2px 8px rgba(0, 0, 0, .15); }
