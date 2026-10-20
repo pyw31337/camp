@@ -10,6 +10,8 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+  actions: write
 
 concurrency:
   group: operator-submissions
@@ -18,7 +20,7 @@ concurrency:
 jobs:
   export:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: pipeline
@@ -41,5 +43,4 @@ jobs:
           git add pipeline/registry/operator-submissions.json
           if git diff --cached --quiet; then echo "변경 없음"; exit 0; fi
           git commit -q -m "chore(data): export approved operator submissions"
-          git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"
-          git push
+          bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" operator-submissions

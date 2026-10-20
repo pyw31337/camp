@@ -39,6 +39,8 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+  actions: write
 
 concurrency:
   # PR 검증의 장시간 보조 수집이 main의 실제 기준 카탈로그 발행을 막지 않게
@@ -490,8 +492,7 @@ jobs:
           # pull --rebase가 "unstaged changes"로 멈춘다(2026-10-20 run 39334337258: media만 바뀌고 데이터 발행 실패).
           # 이 부산물은 Pages 배포가 design/renewal로 다시 만들므로 버리고 rebase한다.
           git stash push -q -m "sync-leftovers" || true
-          git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"
-          git push
+          bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" data-sync
         env:
           KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY || secrets.KAKAO_JS_KEY }}
           MEDIA_DIR: ${{ steps.media.outputs.dir }}

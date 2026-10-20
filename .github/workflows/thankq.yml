@@ -23,6 +23,8 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+  actions: write
 
 concurrency:
   group: thankq-${{ github.ref }}
@@ -62,11 +64,7 @@ jobs:
           if [ -f ../camping-atlas/public/explore/data/vacancy.json ]; then git add ../camping-atlas/public/explore/data/vacancy.json; fi
           if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
           git commit -m "chore(data): refresh booking-engine site facts (thankq)"
-          for i in 1 2 3 4; do
-            if git pull -q --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push -q; then exit 0; fi
-            sleep $((i * 5))
-          done
-          exit 1
+          bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" thankq
       - name: Publish to the site now (incremental)
         if: always() && github.event_name != 'pull_request'
         continue-on-error: true
