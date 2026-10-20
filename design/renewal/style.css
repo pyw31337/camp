@@ -449,6 +449,8 @@ img { color: transparent; }
 .rl { color: var(--ink-3); font-weight: 600; white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; }
 .rl .ic { width: 14px; height: 14px; flex-shrink: 0; color: var(--ink-3); }
 .rv { font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rv.is-no { color: var(--no, #d32f2f); }
+.rv .rv-amp { font-weight: 400; color: var(--ink-3); }
 .rows .r-near .rv { font-weight: 700; font-size: .84rem; white-space: normal; line-height: 1.35; padding: 5px 0; }
 .rv.none { color: var(--ink-3); opacity: .4; font-weight: 400; }
 .card-reviews { display: flex; flex-wrap: wrap; gap: 4px; padding-top: 6px; border-top: 1px dashed var(--line); margin-top: 2px; }
