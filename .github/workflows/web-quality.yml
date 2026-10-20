@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: read
+  statuses: write
 
 jobs:
   lint-and-build:
@@ -32,6 +33,15 @@ jobs:
       - run: npm run install:ci
       - run: npm run lint
       - run: npm run build
+      # workflow_dispatch(데이터 봇 PR) 결과는 PR 검사 목록에 안 잡혀서, 같은 이름의 커밋 상태로도 남긴다(main 룰셋 필수 검사).
+      - name: Report commit status for bot PRs
+        if: always() && github.event_name == 'workflow_dispatch'
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          state=$([ "${{ job.status }}" = success ] && echo success || echo failure)
+          gh api -X POST "repos/${{ github.repository }}/statuses/${{ github.sha }}" -f state="$state" -f context="Lint and build" -f target_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >/dev/null
 
   rail-swipe:
     name: Rail swipe
@@ -55,3 +65,12 @@ jobs:
           (cd camping-atlas/public && python3 -m http.server 8765 >/tmp/srv.log 2>&1 &)
           sleep 2
           PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/rail-swipe-test.mjs http://127.0.0.1:8765/
+      # workflow_dispatch(데이터 봇 PR) 결과는 PR 검사 목록에 안 잡혀서, 같은 이름의 커밋 상태로도 남긴다(main 룰셋 필수 검사).
+      - name: Report commit status for bot PRs
+        if: always() && github.event_name == 'workflow_dispatch'
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          state=$([ "${{ job.status }}" = success ] && echo success || echo failure)
+          gh api -X POST "repos/${{ github.repository }}/statuses/${{ github.sha }}" -f state="$state" -f context="Rail swipe" -f target_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >/dev/null
