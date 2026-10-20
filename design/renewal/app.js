@@ -1957,7 +1957,7 @@ function nearbyCard(x) {
   const lead = photo ? `<img class="nb-thumb${x.imgU ? " nb-photo" : ""}" src="${esc(photo)}" alt="${esc(x.name)} 사진" loading="lazy" decoding="async" referrerpolicy="no-referrer"${open} onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'nb-ic',innerHTML:this.dataset.ic}))" data-ic="${esc(ic(icon))}">` : `<span class="nb-ic">${ic(icon)}</span>`;
   const credit = photo && x.imgU ? `<small class="nb-credit">사진 · ${esc(x.imgS || "블로그")}</small>` : "";
   const dist = x.summary ? "" : km(x.m);
-  const body = `${lead}<span class="nb-txt"><b>${esc(x.name)}</b><i>${esc(label)}${x.sub ? ` · ${esc(x.sub)}` : ""}${x.summary ? " · 공공데이터" : ""}</i>${credit}</span>${dist ? `<span class="nb-dist" aria-label="캠핑장에서 ${esc(dist)}">${esc(dist)}</span>` : ""}`;
+  const body = `${lead}<span class="nb-txt"><b>${esc(x.name)}</b><i>${esc(label)}${x.sub ? ` · ${esc(x.sub)}` : ""}${x.summary ? ` · ${x.summary === true ? "공공데이터" : x.summary}` : ""}</i>${credit}</span>${dist ? `<span class="nb-dist" aria-label="캠핑장에서 ${esc(dist)}">${esc(dist)}</span>` : ""}`;
   // 실제 모습: 좌표가 있으면 ‘로드뷰’(카카오 지도 로드뷰, 화면 안 팝업). 줄 자체는 지도 링크.
   const rv = x.lat && x.lng ? `<span class="nb-rv" role="button" tabindex="0" data-rv="${esc(`${x.lat},${x.lng}`)}" data-rv-name="${esc(x.name)}" aria-label="${esc(x.name)} 로드뷰 보기">${ic("roadview")}</span>` : "";
   const actions = `<span class="nb-actions">${rv}<span class="nb-go" aria-hidden="true">${ic("map")}</span></span>`;
@@ -2015,7 +2015,7 @@ function nearbyHubHtml(c, d) {
     ["vet", "동물병원", "paw", pick("VET", licensed.VET ?? [], nearby.vet ?? [])],
     ["gear", "캠핑용품", "tent", pick("GEAR", nearby.gear ?? [])],
     ["rest", "휴게소", "route", pick("REST_AREA", k(nearby.rest, /REST_AREA|SERVICE_AREA|DROWSY_SHELTER/))],
-    ["toilet", "화장실", "drop", Number(toilet.within_500m) || Number(toilet.within_2km) ? [{ type: "TOILET", name: `500m ${Number(toilet.within_500m) || 0}곳 · 2km ${Number(toilet.within_2km) || 0}곳`, m: Number(toilet.within_500m) ? 500 : 2000, summary: true }] : []],
+    ["toilet", "화장실", "drop", Number(toilet.within_500m) || Number(toilet.within_2km) ? [{ type: "TOILET", name: `500m ${Number(toilet.within_500m) || 0}곳 · 2km ${Number(toilet.within_2km) || 0}곳`, m: Number(toilet.within_500m) ? 500 : 2000, summary: (toilet.nearest ?? []).length && toilet.nearest.every((n) => n.src === "osm") ? "© OpenStreetMap" : true }] : []],
     ["tour", "관광", "pin", (nearby.tour ?? []).slice(0, 4).map((x) => entry("TOUR", x)).filter(Boolean)],
     ["food", "맛집", "meat", (nearby.food ?? []).slice(0, 4).map((x) => entry("FOOD", x)).filter(Boolean)],
     ["fuel", "주유소", "fuel", fuelPlaces(nearby.fuel ?? [], licensed.FUEL ?? licensed.GAS_STATION)],

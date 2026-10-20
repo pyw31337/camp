@@ -450,6 +450,7 @@ jobs:
           # 고캠핑 상세 화면 수집본(data/gocamping-detail.ndjson, 요금표·시설정보·배치도·시설 사진)을 camps/{id}.json의 gcd로 붙인다.
           node pipeline/scripts/build-gocamping-detail.mjs
           # 당일 나들이 장소(registry/dayuse-seed.json, 원문 URL·확인일)를 붙이고 캠크닉 이름을 통일한다.
+          KAKAO_REST_API_KEY="${{ github.event_name != 'pull_request' && secrets.KAKAO_REST_API_KEY || '' }}" node pipeline/scripts/geocode-dayuse-osm.mjs || true
           node pipeline/scripts/apply-dayuse-seed.mjs
           # 열어 보니 없는 예약·홈페이지 링크(registry/link-health.json)를 c.dl로 표시해 화면 버튼에서 뺀다.
           node pipeline/scripts/build-link-health.mjs
@@ -474,7 +475,7 @@ jobs:
           # 화면 원본(design/renewal)은 실행 시작 시점이 아니라 최신 main 것으로 발행본을 다시 쓴다(긴 실행 중 머지된 화면 변경을 되돌리지 않게).
           git checkout origin/main -- design/renewal scripts/publish-explorer-pages.mjs && node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public/explore
           node pipeline/scripts/coverage-guard.mjs "$RUNNER_TEMP/base-meta.json" camping-atlas/public/explore/data/meta.json
-          git add camping-atlas/public/data camping-atlas/public/explore data/facts pipeline/registry/naver-usage.json
+          git add camping-atlas/public/data camping-atlas/public/explore data/facts pipeline/registry/naver-usage.json pipeline/registry/dayuse-osm.json
           if git diff --cached --quiet; then
             echo "공개 데이터 변경 없음."; exit 0
           fi
