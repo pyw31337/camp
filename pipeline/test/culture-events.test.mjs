@@ -93,7 +93,7 @@ test("화면: 진행 중/예정·이번 주말 표시, 끝난 행사 숨김, 링
   assert.match(html, /예정 · D-11/);
   assert.match(html, /이번 주말/);
   assert.match(html, /가을&lt;축제&gt;/);
-  assert.match(html, /CultureFlow에서 보기/);
+  assert.match(html, /class="ev-hit" href="https:\/\/pyw31337\.github\.io\/culture\/p\/a\/"/, "카드 전체 링크는 CultureFlow 우선");
   assert.match(html, /500m/);
   assert.doesNotMatch(html, /끝남/);
   assert.equal(render(data, "999", "2026-10-19"), "");

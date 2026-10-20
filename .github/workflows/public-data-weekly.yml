@@ -33,6 +33,12 @@ jobs:
       - name: Nearest amenities from LOCALDATA licences
         continue-on-error: true
         run: node scripts/sync-nearby-licensed.mjs
+
+      - name: Campnic parks and water play candidates
+        continue-on-error: true
+        run: node scripts/collect-campnic-parks.mjs
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
       - name: Tourism photos (PhotoKorea GW)
         continue-on-error: true
         run: node scripts/sync-photo-gallery.mjs

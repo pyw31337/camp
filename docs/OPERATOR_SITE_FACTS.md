@@ -24,10 +24,12 @@ camping-atlas/public/explore/data/campgrounds.json (homepage)
   └─ scripts/crawl-operator-sites.mjs       주 1회(operator-sites.yml) · robots 준수 · 호스트별 1초 · 사이트당 ≤6쪽
        └─ registry/operator-site-snippets.json  문장(≤140자)·쪽 URL·확인 시각만. 전문 저장 금지
             ├─ scripts/build-operator-facts.mjs  → campgrounds.json의 of = { w, pk, fire, cc }  (data-sync)
-            └─ scripts/build-spec-sheet.mjs      → camps/{id}.json의 spec (입·퇴실·매너타임·인원 추가·반려동물 …)
+            ├─ scripts/build-spec-sheet.mjs      → camps/{id}.json의 spec (입·퇴실·매너타임·인원 추가·반려동물 …)
+            └─ scripts/build-house-rules.mjs     → camps/{id}.json의 house_rules(금지·이용 제한·이용 수칙·운영 안내·공지) + campgrounds.json의 nr(불가 태그)
 ```
 
 - `of.w` 전력 W(여러 값이면 낮은 값 + `max`), `of.pk` 주차(`SITE_SIDE`/`EXTERNAL`), `of.fire` 불멍(`FIREWOOD_OK`/`CHARCOAL_ONLY`/`NO_FIRE`), `of.cc` 차박(true/false).
+- 2026-10-19: 금지·제한·수칙·운영 문장도 남기고(이용 규칙), 공지 게시판 글은 `notices: [{ title, url(글 주소), date }]`로 따로 저장한다(`noticeLinks`). 이용약관·개인정보 문구는 규칙으로 쓰지 않는다.
 - 값마다 `q`(원문 문장)·`u`(그 문장이 있던 쪽 URL)·`t`(확인 시각). 120일 넘은 확인값은 쓰지 않는다.
 - 문장끼리 어긋나면(예: 사이트 옆 주차 + 외부 주차) 값을 만들지 않고 ‘확인필요’로 남긴다.
 

@@ -1,0 +1,379 @@
+{
+  "collected_at": "2026-10-20",
+  "private_day_campnic": 42,
+  "not_in_catalog": 4,
+  "sites": [
+    {
+      "id": "8121",
+      "name": "피카푸 피크닉앤글램핑 진주점",
+      "region": "경상남도 진주시",
+      "fee": "2만~22.9만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "100342",
+      "name": "골드바베큐 당일캠핑장",
+      "region": "경기도 안성시",
+      "fee": "3만~20만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "100582",
+      "name": "라온캠프닉",
+      "region": "경기도 화성시",
+      "fee": "5.5만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "100353",
+      "name": "프라이빗 캠프닉",
+      "region": "충청북도 충주시",
+      "fee": "29만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "102125",
+      "name": "몬드캠핑장",
+      "region": "충청남도 천안시",
+      "fee": null,
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101801",
+      "name": "올라봄 캠크닉",
+      "region": "경기도 화성시",
+      "fee": "10,000원",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101399",
+      "name": "스윗피크닉",
+      "region": "경기도 가평군",
+      "fee": "26.9만원",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101789",
+      "name": "구이PICK",
+      "region": "경기도 오산시",
+      "fee": null,
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101295",
+      "name": "테라피크닉",
+      "region": "경기도 파주시",
+      "fee": null,
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101499",
+      "name": "에이디디(ADD)캠핑장",
+      "region": "경상남도 사천시",
+      "fee": "5만~6만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101508",
+      "name": "주식회사 조이파크",
+      "region": "경기도 양평군",
+      "fee": "5.9만~36만원",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "100640",
+      "name": "포라카이캠프닉",
+      "region": "경상북도 포항시",
+      "fee": "2만~15만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101319",
+      "name": "숯숯",
+      "region": "충청남도 천안시",
+      "fee": null,
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101381",
+      "name": "히어위고 글램핑&바베큐",
+      "region": "충청남도 공주시",
+      "fee": "2만~10.9만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101583",
+      "name": "Lazy Joe",
+      "region": "경기도 양평군",
+      "fee": "4만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101611",
+      "name": "깨비깨비",
+      "region": "충청남도 천안시",
+      "fee": null,
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101225",
+      "name": "하늘숲빌리지글램핑",
+      "region": "경기도 가평군",
+      "fee": null,
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101600",
+      "name": "양산진수 바비큐가든",
+      "region": "경상남도 양산시",
+      "fee": null,
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101378",
+      "name": "판타스틱 캠프닉",
+      "region": "경기도 None",
+      "fee": "4만~25만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101707",
+      "name": "세모",
+      "region": "경상북도 청도군",
+      "fee": "9만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "1178",
+      "name": "미소가든펜션야영장",
+      "region": "충청북도 제천시",
+      "fee": "5.5만~10만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101236",
+      "name": "포레스트 도일",
+      "region": "경기도 평택시",
+      "fee": "2만~25만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101350",
+      "name": "짐스토리",
+      "region": "경기도 안성시",
+      "fee": null,
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "2820",
+      "name": "지오클럽",
+      "region": "부산광역시 기장군",
+      "fee": "16.9만~24.9만원",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "100808",
+      "name": "홍천태극캠핑장",
+      "region": "강원도 홍천군",
+      "fee": "4.5만~17.9만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101224",
+      "name": "도시별장",
+      "region": "경상남도 김해시",
+      "fee": "10만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "100762",
+      "name": "북한산 둘레캠프",
+      "region": "서울특별시 은평구",
+      "fee": "5만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "100800",
+      "name": "청춘별곡",
+      "region": "경상남도 진주시",
+      "fee": "3.5만~7만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "100833",
+      "name": "방목리 BBQ 캠핑장",
+      "region": "경상남도 산청군",
+      "fee": null,
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101033",
+      "name": "더히로플레이그라운드펜션&글램핑",
+      "region": "경기도 포천시",
+      "fee": "2만~11.5만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101234",
+      "name": "한코관광농원야영장",
+      "region": "경기도 용인시",
+      "fee": null,
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101014",
+      "name": "워크 안산 BBQ",
+      "region": "경기도 안산시",
+      "fee": "5만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101104",
+      "name": "워크안산 피크닉",
+      "region": "경기도 안산시",
+      "fee": "5만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101184",
+      "name": "비트윈",
+      "region": "경기도 양주시",
+      "fee": "10,000원",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101207",
+      "name": "양주 캠프랩 당일치기바베큐장",
+      "region": "경기도 양주시",
+      "fee": "2만~11만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101069",
+      "name": "운양캠프",
+      "region": "경기도 김포시",
+      "fee": "3만~32만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101171",
+      "name": "㈜어메이징캠프",
+      "region": "강원도 영월군",
+      "fee": "10만~10.9만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101649",
+      "name": "거제 순수 풀앤뷰",
+      "region": "경상남도 거제시",
+      "fee": "3만~5만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101115",
+      "name": "자호천생태학교",
+      "region": "경상북도 영천시",
+      "fee": "3만~8만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101149",
+      "name": "소꿉놀이 글램핑&캠프닉",
+      "region": "경상북도 청도군",
+      "fee": "22만원대",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "101305",
+      "name": "창바우마을 해송피크닉장",
+      "region": "경상북도 포항시",
+      "fee": "10만~25만원",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "100462",
+      "name": "인디언숲 캠프닉",
+      "region": "경기도 동두천시",
+      "fee": "6만원",
+      "source": "catalog",
+      "in_catalog": true
+    },
+    {
+      "id": "102373",
+      "name": "펀앤펀 캠프",
+      "region": "경기 파주시 문산읍",
+      "fee": "테이블 4~12만원, 몽골텐트 7~15만원",
+      "source": "https://booking.naver.com/booking/12/bizes/1085778",
+      "in_catalog": true,
+      "note": "당일 전용. 음식 반입·배달 가능. 버너 제공. 야외 수영장."
+    },
+    {
+      "id": "102374",
+      "name": "양주 삼상리마켓",
+      "region": "경기 양주시",
+      "fee": "바비큐장 당일",
+      "source": "https://m.blog.naver.com/official_lotterental/223127866396",
+      "in_catalog": true,
+      "note": "캠프닉·바비큐 당일."
+    },
+    {
+      "id": "102375",
+      "name": "용인 베리가든",
+      "region": "경기 용인시",
+      "fee": "농장 피크닉",
+      "source": "https://m.blog.naver.com/official_lotterental/223127866396",
+      "in_catalog": true,
+      "note": "아이와 당일 캠프닉."
+    },
+    {
+      "id": "102376",
+      "name": "라까시나 이태리",
+      "region": "경기 광주시",
+      "fee": "8,000~30,000원",
+      "source": "https://www.outdoornews.co.kr/news/articleView.html?idxno=34963",
+      "in_catalog": true,
+      "note": "당일 피크닉 전용."
+    }
+  ]
+}

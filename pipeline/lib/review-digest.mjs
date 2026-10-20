@@ -48,6 +48,8 @@ export const CONS = [
   ["예약 치열", /예약[^.!?\n]{0,8}(피켓팅|치열|어려|힘들|빡세|마감|광탈)/],
 ];
 // “안 좋다”“별로”처럼 장점 단어 근처의 부정은 장점으로 세지 않는다.
+// 이 글이 이곳 요금을 싸다고 말하면 ‘가격 부담’으로 세지 않는다.
+const CHEAP = /착한\s*(요금|가격)|저렴|가성비|무료|만\s*원\s*대의?\s*착한|합리적/;
 const NEGATED = /안\s*좋|별로|아쉽|않|없었|못\s*했|비추/;
 
 export const ISSUES_AND_EVENTS = [
@@ -70,7 +72,13 @@ export function topicsOf(text) {
   const s = String(text ?? "").replace(/<[^>]+>/g, " ");
   const pros = PROS.filter(([, re]) => { const m = s.match(re); return m && !NEGATED.test(s.slice(Math.max(0, m.index - 4), m.index + m[0].length + 8)); }).map(([l]) => l);
   // “시끄럽지 않았어요”“벌레도 하나도 없고”처럼 단점 단어를 부정하면 세지 않는다.
-  const cons = CONS.filter(([, re]) => { const m = s.match(re); return m && !/않|전혀|하나도|걱정\s*없|문제\s*없/.test(s.slice(Math.max(0, m.index - 4), m.index + m[0].length + 8)); }).map(([l]) => l);
+  const cons = CONS.filter(([label, re]) => {
+    const m = s.match(re);
+    if (!m || /않|전혀|하나도|걱정\s*없|문제\s*없/.test(s.slice(Math.max(0, m.index - 4), m.index + m[0].length + 8))) return false;
+    // ‘가격 부담’: “사설 캠핑장 요금이 부담스러운 분들께 1박 1~2만원대 착한 요금”처럼 다른 곳 요금과 견주며 이곳이 싸다고 한 글은 단점이 아니다.
+    if (label === "가격 부담" && (CHEAP.test(s) || /사설|다른|타\s*캠핑장|물가|요즘/.test(s.slice(Math.max(0, m.index - 20), m.index + m[0].length)))) return false;
+    return true;
+  }).map(([l]) => l);
   return { pros, cons };
 }
 

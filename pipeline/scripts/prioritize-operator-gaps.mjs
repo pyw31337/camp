@@ -25,6 +25,15 @@ const detail = (id) => {
   try { return existsSync(p) ? JSON.parse(readFileSync(p, "utf8")) : {}; } catch { return {}; }
 };
 const ageDays = (iso) => iso ? Math.max(0, (Date.now() - Date.parse(iso)) / 864e5) : Infinity;
+// 막힌 도메인·일시 실패를 매번 재시도하지 않는다. 사람처럼 결과를 기록하고,
+// 도메인 상태가 바뀔 만한 시간이 지난 뒤에만 다음 배치 후보로 되돌린다.
+const retryDays = (prior) => {
+  if (!prior?.checked_at) return 0;
+  if (["ROBOTS_DISALLOWED", "REDIRECTED_TO_PLATFORM", "DISCOVERED_NOT_OPERATOR", "NO_OPERATOR_SITE", "SERVICE_CLOSED"].includes(prior.status)) return 90;
+  if (["FETCH_FAILED", "NO_RELEVANT_TEXT", "ERROR"].includes(prior.status)) return 30;
+  return 21;
+};
+const readyForRetry = (prior) => ageDays(prior?.checked_at) >= retryDays(prior);
 const fields = (c, d) => {
   const fc = c.field_conditions ?? d.field_conditions ?? {};
   const f = [];
@@ -48,7 +57,7 @@ const rows = camps
     const score = missing.length * 10 + (missing.includes("이용 제한·수칙") ? 12 : 0) + (missing.includes("1박 요금") ? 8 : 0) + (noOfficialText ? 6 : 0) + Math.min(8, Math.floor(stale / 30));
     return { id: String(c.id), name: c.name, region: [c.sido, c.sigungu].filter(Boolean).join(" "), homepage: c.homepage ?? null, score, missing, last_checked_at: prior?.checked_at ?? null, prior_status: prior?.status ?? "NOT_CRAWLED" };
   })
-  .filter((x) => x.missing.length)
+  .filter((x) => x.missing.length && readyForRetry(registry[x.id]))
   .sort((a, b) => b.score - a.score || String(a.last_checked_at ?? "").localeCompare(String(b.last_checked_at ?? "")) || a.name.localeCompare(b.name, "ko"));
 
 const out = {
