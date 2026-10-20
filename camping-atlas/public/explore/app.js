@@ -267,15 +267,8 @@ const INVITE_OK_SET = new Set([
   "7901", "7928", "7934", "7967", "8196", "930",
 ]);
 const noBadge = (k) => (NO_TAGS[k] ? `<span class="bdg bdg-no">${ic(NO_TAGS[k][1])}${esc(NO_TAGS[k][0])}</span>` : "");
-function waterOff(c) {
-  if (!isWaterPlayCamp(c)) return false;
-  const pub = ["LOCAL_GOVERNMENT", "NATIONAL_PARK", "PUBLIC_LEISURE", "NATURAL_RECREATION_FOREST"].includes(c.op);
-  const m = new Date().getMonth() + 1;
-  return pub && (m < 6 || m > 8);
-}
 function badges(c, max = 4, maxNo = 2) {
   const f = facts(c), out = [];
-  if (waterOff(c)) out.push(`<span class="bdg bdg-no">운영종료</span>`);
   if (INVITE_OK_SET.has(String(c.id))) out.push(`<span class="bdg bdg-teal">${ic("users")}초대가능</span>`);
   if (pos(f.power) && f.power.ok && f.power.w) out.push(`<span class="bdg bdg-volt">${ic("bolt")}${esc(f.power.short)}</span>`);
   if (pos(f.fire) && f.fire.kind === "FIREWOOD_OK") out.push(`<span class="bdg bdg-flame">${ic("flame")}장작</span>`);
@@ -416,6 +409,9 @@ function matches(c, { useArea = true } = {}) {
   if (S.feeBand === "u3" && !(fMin && fMin <= 30000)) return false;
   if (S.feeBand === "3to5" && !(fMin && fMin <= 50000 && (fMax == null || fMax >= 30000))) return false;
   if (S.feeBand === "5to7" && !(fMin && fMin <= 70000 && (fMax == null || fMax >= 50000))) return false;
+  if (S.feeBand === "7to10" && !(fMin && fMin <= 100000 && (fMax == null || fMax >= 70000))) return false;
+  if (S.feeBand === "10to20" && !(fMin && fMin <= 200000 && (fMax == null || fMax >= 100000))) return false;
+  if (S.feeBand === "o20" && !(fMin && (fMin >= 200000 || (fMax && fMax >= 200000)))) return false;
   if (S.feeBand === "o7" && !(fMin && (fMin >= 70000 || (fMax && fMax >= 70000)))) return false;
   if (S.theme && S.theme !== "ALL") { const t = THEMES.find((x) => x[0] === S.theme); if (t && !t[2](c)) return false; }
   if (S.theme === "AVAIL" && !S.avail?.has(String(c.id))) return false;
@@ -497,7 +493,7 @@ function results() {
   if (S.sort === "name") list.sort((a, b) => nameOf(a).name.localeCompare(nameOf(b).name, "ko"));
   else list.sort((a, b) => rich(b) - rich(a));
   // 사진이 한 장도 없는 곳은 뒤로(이름으로 직접 찾은 곳은 제외)
-  return list.sort((a, b) => (waterOff(a) - waterOff(b)) || photoLast(a) - photoLast(b));
+  return list.sort((a, b) => photoLast(a) - photoLast(b));
 }
 
 // ── 사진 ─────────────────────────────────────────────────────
@@ -693,13 +689,13 @@ function initDraggableRails(root = document) {
     }, true);
 
     rail.addEventListener("pointerdown", (e) => {
-      if (e.pointerType === "touch") return;
       if (e.button !== 0) return;
-      // 다중 사진 썸네일 트랙(.car-multi)과 버튼, 입력창은 자체 이벤트를 처리하고,
-      // 단일 썸네일(.car-single), 카드 텍스트 영역(.card-body, .tr-body), 여백 등은 가로 레일을 드래그한다.
-      if (e.target.closest(".car-multi, .car-nav, select, input, button, a.btn, [data-save]")) return;
+      // 다중 사진 썸네일 트랙(.car-multi)과 캐러셀 버튼, 입력창, 찜 버튼은 자체 이벤트를 처리하고,
+      // 칩 버튼(.chip), 단일 썸네일(.car-single), 카드 텍스트 영역(.card-body, .tr-body), 여백 등은 가로 레일을 드래그한다.
+      if (e.target.closest(".car-multi, .car-nav, select, input, a.btn, [data-save]")) return;
       isDown = true;
       startX = e.clientX;
+      startY = e.clientY;
       scrollLeft = rail.scrollLeft;
       hasMoved = false;
       bounceX = 0;
@@ -709,9 +705,16 @@ function initDraggableRails(root = document) {
     const onPointerMove = (e) => {
       if (!isDown) return;
       const dx = e.clientX - startX;
-      if (Math.abs(dx) > 5) {
-        hasMoved = true;
-        rail.classList.add("is-dragging");
+      const dy = e.clientY - startY;
+      if (!hasMoved) {
+        if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 5) {
+          isDown = false;
+          return;
+        }
+        if (Math.abs(dx) > 5) {
+          hasMoved = true;
+          rail.classList.add("is-dragging");
+        }
       }
       if (hasMoved) {
         e.preventDefault();
@@ -1074,7 +1077,9 @@ function homeView() {
         <button type="button" class="chip fee-chip" data-fee-band="u3" aria-pressed="${S.feeBand === 'u3'}">~3만원 <i>${fmt(countOf((c) => Boolean(campFeeMin(c) && campFeeMin(c) <= 30000)))}</i></button>
         <button type="button" class="chip fee-chip" data-fee-band="3to5" aria-pressed="${S.feeBand === '3to5'}">3~5만원 <i>${fmt(countOf((c) => { const mn = campFeeMin(c), mx = campFeeMax(c); return Boolean(mn && mn <= 50000 && (mx == null || mx >= 30000)); }))}</i></button>
         <button type="button" class="chip fee-chip" data-fee-band="5to7" aria-pressed="${S.feeBand === '5to7'}">5~7만원 <i>${fmt(countOf((c) => { const mn = campFeeMin(c), mx = campFeeMax(c); return Boolean(mn && mn <= 70000 && (mx == null || mx >= 50000)); }))}</i></button>
-        <button type="button" class="chip fee-chip" data-fee-band="o7" aria-pressed="${S.feeBand === 'o7'}">7만원+ <i>${fmt(countOf((c) => { const mn = campFeeMin(c), mx = campFeeMax(c); return Boolean(mn && (mn >= 70000 || (mx && mx >= 70000))); }))}</i></button>
+        <button type="button" class="chip fee-chip" data-fee-band="7to10" aria-pressed="${S.feeBand === '7to10'}">7만원~10만원 <i>${fmt(countOf((c) => { const mn = campFeeMin(c), mx = campFeeMax(c); return Boolean(mn && mn <= 100000 && (mx == null || mx >= 70000)); }))}</i></button>
+        <button type="button" class="chip fee-chip" data-fee-band="10to20" aria-pressed="${S.feeBand === '10to20'}">10만원~20만원 <i>${fmt(countOf((c) => { const mn = campFeeMin(c), mx = campFeeMax(c); return Boolean(mn && mn <= 200000 && (mx == null || mx >= 100000)); }))}</i></button>
+        <button type="button" class="chip fee-chip" data-fee-band="o20" aria-pressed="${S.feeBand === 'o20'}">20만원+ <i>${fmt(countOf((c) => { const mn = campFeeMin(c), mx = campFeeMax(c); return Boolean(mn && (mn >= 200000 || (mx && mx >= 200000))); }))}</i></button>
       </div></div>
     </div>
     <div class="trows" data-rows></div>
@@ -1110,7 +1115,15 @@ function renderResults({ reset = true } = {}) {
   if (S.area !== "all") act.push(`<button class="chip on" data-clear="area">${esc(S.area)} ${ic("close")}</button>`);
   if (S.theme) act.push(`<button class="chip on" data-clear="theme">${esc(themeName(S.theme))} ${ic("close")}</button>`);
   if (S.feeBand) {
-    const fbLabel = { u3: "~3만원", "3to5": "3~5만원", "5to7": "5~7만원", o7: "7만원+" }[S.feeBand] ?? S.feeBand;
+    const fbLabel = {
+      u3: "~3만원",
+      "3to5": "3~5만원",
+      "5to7": "5~7만원",
+      "7to10": "7만원~10만원",
+      "10to20": "10만원~20만원",
+      o20: "20만원+",
+      o7: "7만원+",
+    }[S.feeBand] ?? S.feeBand;
     act.push(`<button class="chip on" data-clear="feeBand">${esc(fbLabel)} ${ic("close")}</button>`);
   }
   for (const k of S.quick) act.push(`<button class="chip on" data-clear="quick:${k}">${esc(QUICK[k].label)} ${ic("close")}</button>`);
@@ -1294,7 +1307,17 @@ function condSheet() {
 function paintCondSheet() {
   const dlg = $("#cond-dialog"), k = S.condDraft;
   const base = S.camps;
-  const feeOk = (c, fb) => { const mn = campFeeMin(c), mx = campFeeMax(c); return !fb || (fb === "u3" ? mn && mn <= 30000 : fb === "3to5" ? mn && mn <= 50000 && (mx == null || mx >= 30000) : fb === "5to7" ? mn && mn <= 70000 && (mx == null || mx >= 50000) : mn && (mn >= 70000 || (mx && mx >= 70000))); };
+  const feeOk = (c, fb) => {
+    const mn = campFeeMin(c), mx = campFeeMax(c);
+    if (!fb) return true;
+    if (fb === "u3") return Boolean(mn && mn <= 30000);
+    if (fb === "3to5") return Boolean(mn && mn <= 50000 && (mx == null || mx >= 30000));
+    if (fb === "5to7") return Boolean(mn && mn <= 70000 && (mx == null || mx >= 50000));
+    if (fb === "7to10") return Boolean(mn && mn <= 100000 && (mx == null || mx >= 70000));
+    if (fb === "10to20") return Boolean(mn && mn <= 200000 && (mx == null || mx >= 100000));
+    if (fb === "o20") return Boolean(mn && (mn >= 200000 || (mx && mx >= 200000)));
+    return Boolean(mn && (mn >= 70000 || (mx && mx >= 70000)));
+  };
   const strict = S.strictDraft;
   const pool = (skip) => base.filter((c) => condTest(c, k, skip, strict) && (skip === "fee" || feeOk(c, S.feeDraft)));
   const count = (skip, test) => pool(skip).reduce((n, c) => n + (test(c) ? 1 : 0), 0);
@@ -1320,7 +1343,7 @@ function paintCondSheet() {
       <section><h3>전기 <small>W 미공지인 전기 사이트는 관광진흥법 기준 600W로 봐요</small></h3><div class="cond-chips">${W_OPTS.map(([v, l]) => chip("w", v, l, k.w === v, v ? tally("w", v) : null)).join("")}</div></section>
       <section><h3>사이트 크기 <small>긴 변 기준 · 규격 미등록은 +로 함께</small></h3><div class="cond-chips">${SIZE_OPTS.map(([v, l]) => chip("size", v, l, k.size === v, v ? tally("size", v) : null)).join("")}</div></section>
       <section><h3>불멍·주차</h3><div class="cond-chips">${chip("fire", 1, "장작 가능", k.fire, tally("fire", true))}${chip("park", 1, "텐트 옆 주차", k.park, tally("park", true))}</div></section>
-      <section><h3>1박 요금</h3><div class="cond-chips">${[["u3", "~3만원"], ["3to5", "3~5만원"], ["5to7", "5~7만원"], ["o7", "7만원+"]].map(([v, l]) => chip("fee", v, l, S.feeDraft === v, count("fee", (c) => feeOk(c, v)))).join("")}</div></section>
+      <section><h3>1박 요금</h3><div class="cond-chips">${[["u3", "~3만원"], ["3to5", "3~5만원"], ["5to7", "5~7만원"], ["7to10", "7만원~10만원"], ["10to20", "10만원~20만원"], ["o20", "20만원+"]].map(([v, l]) => chip("fee", v, l, S.feeDraft === v, count("fee", (c) => feeOk(c, v)))).join("")}</div></section>
     </div>
     <p class="cond-legend">숫자는 <b>근거로 맞는 곳</b>, <em>+n</em>은 정보가 없어 ‘확인 필요’로 함께 보일 곳이에요. <button type="button" class="link" data-c="strict">${strict ? "정보 없는 곳도 함께 보기" : "확인된 곳만 보기"}</button></p>
     <div class="cond-foot"><button type="button" class="btn ghost" data-c="reset">초기화</button><button type="button" class="btn primary wide" data-c="apply">${fmt(total)}곳 보기${total !== sure ? ` <small>(확인 ${fmt(sure)})</small>` : ""}</button></div>
@@ -1437,7 +1460,7 @@ function listRow({ c, st, ce }, i = 0) {
 function listView() {
   const p = listParams();
   S.area = p.cond.sido.length ? "all" : p.area; S.q = p.q; if (p.d) S.stay = p.d;
-  S.cond = p.cond; if (["u3", "3to5", "5to7", "o7", ""].includes(p.fee)) S.feeBand = p.fee;
+  S.cond = p.cond; if (["u3", "3to5", "5to7", "7to10", "10to20", "o20", "o7", ""].includes(p.fee)) S.feeBand = p.fee;
   S.condStrict = new URLSearchParams(location.hash.split("?")[1] ?? "").get("strict") === "1";
   // 목록 화면에 보이지 않는 조건(홈의 테마·사이트 타입·빠른 조건)은 적용하지 않는다 — 보이는 조건만 결과를 바꾼다.
   S.theme = null; S.stype = null; S.quick.clear();
@@ -1454,7 +1477,7 @@ function listView() {
       </form>
       <div class="rail chips" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-list-area-k="${k}" aria-pressed="${S.area === k && !S.cond.sido.length}">${l}</button>`).join("")}</div>
       <div class="rail chips cond-active" aria-label="조건"><button type="button" class="chip cond-open" data-open-cond>${ic("list")}조건${condActive() ? ` <i>${condActive()}</i>` : ""}</button>${condChips().map(([key, l]) => `<button type="button" class="chip on" data-cond-x="${esc(key)}">${esc(l)} ${ic("close")}</button>`).join("")}${condActive() ? `<button type="button" class="chip" data-strict aria-pressed="${Boolean(S.condStrict)}">확인된 곳만</button>` : ""}</div>
-      <div class="rail chips fee-bands" aria-label="1박 요금대"><span class="fee-band-lbl">1박 요금</span>${feeChip("", "전체")}${feeChip("u3", "~3만원")}${feeChip("3to5", "3~5만원")}${feeChip("5to7", "5~7만원")}${feeChip("o7", "7만원+")}</div>
+      <div class="rail chips fee-bands" aria-label="1박 요금대"><span class="fee-band-lbl">1박 요금</span>${feeChip("", "전체")}${feeChip("u3", "~3만원")}${feeChip("3to5", "3~5만원")}${feeChip("5to7", "5~7만원")}${feeChip("7to10", "7만원~10만원")}${feeChip("10to20", "10만원~20만원")}${feeChip("o20", "20만원+")}</div>
       <div class="list-tools">
         <p class="list-date-note" data-list-note></p>
         <label class="sort">${ic("list")}<select data-list-sort aria-label="정렬">

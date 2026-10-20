@@ -93,11 +93,15 @@ em { font-style: normal; color: var(--accent); }
 /* 가로로 넘기는 줄: 스크롤바는 숨기고, 다음 내용이 살짝 보이게 */
 .rail {
   display: flex; gap: 8px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
   padding-top: 10px; padding-bottom: 16px; margin-top: -8px; margin-bottom: -10px; cursor: grab;
   -webkit-mask-image: none;
   mask-image: none;
   user-select: none;
   -webkit-user-select: none;
+}
+.rail .chip, .rail button {
+  touch-action: pan-x pan-y;
 }
 .rail, .rail * {
   -webkit-user-drag: none;
@@ -2226,6 +2230,3 @@ details[open] > *:not(summary) {
   }
 }
 
-
-.card.is-off .thumb, .card.is-off img { filter: grayscale(1); }
-.card.is-off { order: 1; }
