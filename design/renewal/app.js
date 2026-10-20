@@ -360,12 +360,14 @@ const photoHiUrl = (u) => photoUrl(u).replace(/-t\.webp(?=\?|$)/, "-l.webp");
 function imageTag(u, alt, { eager = false, sizes = "(max-width: 759px) 80vw, 320px" } = {}) {
   const src = photoUrl(u), high = photoHiUrl(u);
   const srcset = high !== src ? ` srcset="${esc(src)} 480w, ${esc(high)} 1280w" sizes="${sizes}"` : "";
-  return `<img src="${esc(src)}"${srcset} alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" draggable="false">`;
+  // 외부 원본(블로그 사진 등)은 리퍼러를 보내지 않아야 열린다
+  const ref = /^https?:/i.test(src) ? ' referrerpolicy="no-referrer"' : "";
+  return `<img src="${esc(src)}"${srcset} alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" draggable="false"${ref}>`;
 }
 // 비교·찜처럼 사진이 보조 역할인 곳은 빈 src를 만들지 않고, 사진 미보유를 중립적인 아이콘으로 표시한다.
 function campThumb(c, { alt = "", sizes } = {}) {
   const u = photosOf(c)[0];
-  if (u) return imageTag(u, alt, { sizes });
+  if (u) return imageTag(u, alt, { sizes }) + (isPt(c, u) ? ptCredit(c) : "");
   return `<span class="photo-empty" role="img" aria-label="${esc(`${nameOf(c).name} 사진 없음`)}">${ic("tent")}</span>`;
 }
 // 카드 사진: GitHub Pages 배포 단계에서 합쳐지는 고캠핑 공식 webp를 우선 사용한다.
@@ -381,6 +383,9 @@ const photoKey = (u) => {
   base = base.toLowerCase();
   return base.replace(/^thumb_\d+_/, "");
 };
+const PT_FB = new Map();
+const isPt = (c, u) => Boolean(c.pt && (u === c.pt.i || u === c.pt.t));
+const ptCredit = (c) => `<span class="pt-credit" title="${esc(c.pt?.s ? `${c.pt.s} 후기 사진` : "후기 사진")}">후기 사진</span>`;
 function photosOf(c) {
   return photosAll(c).filter((u) => !DEAD.has(photoUrl(u)));
 }
@@ -395,6 +400,9 @@ function photosAll(c) {
   else if (remote.length) list = remote;
   else if (c.ph) list = [`media/${c.ph}`];
   else if (c.img) list = [c.img];
+  // 공식 사진이 없는 곳: 캠핑장 이름으로 찾은 블로그 사진 중 배치도·안내판·야간 사진을 거른 한 장(pick-card-fallback.mjs → c.pt).
+  // 원본이 막히면 검색 썸네일로 바꾼다(PT_FB). 카드에는 ‘후기 사진’ 출처를 붙인다.
+  else if (c.pt?.i || c.pt?.t) { list = [c.pt.i || c.pt.t]; if (c.pt.i && c.pt.t) PT_FB.set(c.pt.i, c.pt.t); }
 
   const seen = new Set();
   const deduped = [];
@@ -415,7 +423,7 @@ function carousel(c, { eager = false, cls = "", single = false } = {}) {
   const alt = esc(nameOf(c).name);
   if (!ph.length) return `<div class="car car-empty ${cls}">${ic("tent")}</div>`;
   if (single || ph.length === 1) {
-    return `<div class="car car-single ${cls}"><img class="car-img" src="${esc(photoUrl(ph[0]))}" alt="${alt}" loading="${eager ? "eager" : "lazy"}" decoding="async" draggable="false"></div>`;
+    return `<div class="car car-single ${cls}"><img class="car-img" src="${esc(photoUrl(ph[0]))}" alt="${alt}" loading="${eager ? "eager" : "lazy"}" decoding="async" draggable="false"${/^https?:/i.test(photoUrl(ph[0])) ? ' referrerpolicy="no-referrer"' : ""}>${isPt(c, ph[0]) ? ptCredit(c) : ""}</div>`;
   }
   const slides = ph.map((u, i) => i === 0
     ? imageTag(u, alt, { eager })
@@ -3478,6 +3486,9 @@ addEventListener("keydown", (e) => {
 addEventListener("error", (e) => {
   const im = e.target;
   if (!(im instanceof HTMLImageElement)) return;
+  // 후기 사진 원본이 막히면 검색 썸네일로 한 번 바꾼다
+  const fb = PT_FB.get(im.getAttribute("src"));
+  if (fb) { im.removeAttribute("srcset"); im.setAttribute("src", fb); return; }
   // 검색 썸네일이 사라졌으면 그 칸을 빼고, 후기 글 카드는 아이콘 자리로 둔다.
   const thumb = im.closest(".thumb-links a");
   if (thumb) { const box = thumb.parentElement; thumb.remove(); if (!box.children.length) { const sec = box.closest(".d-sec"); box.remove(); if (sec && !sec.querySelector(".thumb-links a, .visitor-sources a, .layout-links a, .visitor-gallery button, .layout-viewer")) sec.remove(); } return; }

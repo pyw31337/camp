@@ -35,6 +35,7 @@ node pipeline/scripts/build-site-types.mjs
 node pipeline/scripts/build-price-tiers.mjs
 node pipeline/scripts/build-house-rules.mjs
 node pipeline/scripts/build-link-health.mjs
+node pipeline/scripts/build-card-fallback.mjs
 node pipeline/scripts/report-coverage.mjs
 node pipeline/scripts/build-fact-store.mjs
 node "$SRC/scripts/coverage-guard.mjs" "$BASE" "$DATA/meta.json"

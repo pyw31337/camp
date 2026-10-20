@@ -31,7 +31,7 @@ const todo = [];
 for (const u of want.keys()) {
   if (noCheck(u)) { urls[u] = { s: "UNVERIFIED", why: "자동 확인 차단 플랫폼", at: urls[u]?.at ?? null }; continue; }
   const p = urls[u];
-  if (p?.at && now - Date.parse(p.at) < maxAge && p.s === "OK") continue;
+  if (p?.at && now - Date.parse(p.at) < maxAge && (p.s === "OK" || p.s === "DEAD") && !process.argv.includes("--recheck-dead")) continue;
   todo.push(u);
 }
 // 더는 화면에 없는 링크는 지운다
@@ -56,7 +56,7 @@ async function allowed(u) {
   const x = new URL(u);
   if (!robots.has(x.origin)) {
     const r = await get(`${x.origin}/robots.txt`);
-    robots.set(x.origin, r.status === 200 && !/<html/i.test(r.html) ? parseRobots(r.html) : r.error && /ENOTFOUND|ECONNREFUSED/.test(r.error) ? "DOWN" : []);
+    robots.set(x.origin, r.status === 200 && !/<html/i.test(r.html) ? parseRobots(r.html) : r.error && /ENOTFOUND/.test(r.error) ? "DOWN" : []);
   }
   const rules = robots.get(x.origin);
   return rules === "DOWN" ? "DOWN" : robotsAllows(rules, x.pathname + x.search);
@@ -74,7 +74,7 @@ async function worker() {
     for (const u of hosts.shift()) {
       const ok = await allowed(u).catch(() => true);
       let r;
-      if (ok === "DOWN") r = { s: "DEAD", why: "서버 없음(DNS·연결 거부)" };
+      if (ok === "DOWN") r = { s: "DEAD", why: "DNS 없음(도메인 없음)" };
       else if (!ok) r = { s: "UNVERIFIED", why: "robots.txt 차단" };
       else r = merge(urls[u], judge(await get(u)));
       urls[u] = { ...r, at: new Date().toISOString(), camps: [...want.get(u)].slice(0, 5) };
