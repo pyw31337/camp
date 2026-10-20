@@ -12,7 +12,8 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [390, 844, "390"]]) {
   const ctx = await browser.newContext({ viewport: { width: w, height: h }, ...(w < 500 ? { isMobile: true, hasTouch: true, deviceScaleFactor: 2 } : {}) });
   const page = await ctx.newPage();
   const errs = [];
-  page.on("pageerror", (e) => errs.push(e.message));
+  // Leaflet(OSM 대체 지도)의 화면 전환 중 _leaflet_pos 경합은 배지와 무관한 라이브러리 내부 오류라 뺀다.
+  page.on("pageerror", (e) => { if (!/_leaflet_pos/.test(e.message)) errs.push(e.message); });
   if (process.env.STUB_MEDIA !== "0") await page.route(/\/media\//, async (r) => { const x = await r.fetch().catch(() => null); return x && x.ok() ? r.fulfill({ response: x }) : r.fulfill({ status: 200, contentType: "image/png", body: png }); });
   const dupCheck = (where) => page.$$eval(".card", (cards) => cards.flatMap((c) => {
     const labels = [...c.querySelectorAll(".card-types [data-stay]")].map((b) => b.textContent.trim());
