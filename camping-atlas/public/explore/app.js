@@ -992,7 +992,7 @@ function trendingCard(x) {
     if (c.pwr) reasons.push("전기 사용 가능");
     if (c.wp) reasons.push("물놀이·계곡 인접");
   }
-  const reasonsHtml = reasons.length ? `<div class="tr-reasons">${reasons.slice(0, 3).map((r) => `<span class="tr-reason">${esc(r)}</span>`).join("")}</div>` : "";
+  const reasonsHtml = reasons.length ? `<div class="tr-reasons">${reasons.slice(0, 3).map((r) => `<span class="tr-reason">${ic("thumb-up")}${esc(r)}</span>`).join("")}</div>` : "";
   return `<article class="tr-card" data-cid="${c.id}">
     <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" draggable="false" aria-label="${x.rank}위 ${esc(nameOf(c).name)} 자세히"></a>
     <span class="tr-ph">${carousel(c, { eager: x.rank <= 3, single: true })}<span class="tr-rank">${x.rank}</span>${arrow}</span>
