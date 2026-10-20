@@ -573,6 +573,10 @@ function photosAll(c) {
   }
   return deduped;
 }
+// ⚠️ 레일/썸네일 제스처 가드 — 이 아래(initCarousels, initDraggableRails)와 .rail/.car-track CSS를 고치면
+//    반드시 `node camping-atlas/scripts/rail-swipe-test.mjs` 를 통과시킬 것(CI 'Rail swipe' 필수 검사).
+//    과거 회귀: 5c356d35f에서 startY 미선언 → window pointermove마다 ReferenceError → 홈 레일 마우스 드래그 전부 정지.
+//    원칙: 카드 본문·한 장 사진 = 레일이 넘어감 / 여러 장 사진에서 시작 = 썸네일만 넘어감 / 세로 스와이프는 막지 않음 / 끌지 않은 클릭은 카드 열기.
 // 카드 사진 레일: 단일 사진은 .car-single로 렌더링(레일 드래그 이벤트 통과), 다중 사진은 .car-multi(스와이프 전환 및 화살표 버튼).
 function carousel(c, { eager = false, cls = "", single = false } = {}) {
   const ph = photosOf(c);

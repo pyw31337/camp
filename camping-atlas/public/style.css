@@ -90,6 +90,7 @@ em { font-style: normal; color: var(--accent); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .ic { width: 1.15em; height: 1.15em; fill: currentColor; flex: none; }
 .ic.inline { vertical-align: -0.2em; }
+/* ⚠️ .rail/.car-track 의 touch-action·overflow·scroll-snap 변경 시 camping-atlas/scripts/rail-swipe-test.mjs 통과 필수(CI Rail swipe) */
 /* 가로로 넘기는 줄: 스크롤바는 숨기고, 다음 내용이 살짝 보이게 */
 .rail {
   display: flex; gap: 8px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; -webkit-overflow-scrolling: touch;

@@ -4,11 +4,13 @@ on:
   pull_request:
     paths:
       - "camping-atlas/**"
+      - "design/renewal/**"
       - ".github/workflows/web-quality.yml"
   push:
     branches: [main]
     paths:
       - "camping-atlas/**"
+      - "design/renewal/**"
       - ".github/workflows/web-quality.yml"
 
 permissions:
@@ -31,3 +33,26 @@ jobs:
       - run: npm run install:ci
       - run: npm run lint
       - run: npm run build
+
+  rail-swipe:
+    name: Rail swipe
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: app.js 복사본 동기화 확인
+        run: |
+          for f in camping-atlas/public/app.js camping-atlas/public/renewal/app.js camping-atlas/public/explore/app.js; do
+            cmp design/renewal/app.js "$f" || { echo "::error::$f 가 design/renewal/app.js 와 다릅니다. 복사본을 맞추세요."; exit 1; }
+          done
+      - name: Install Playwright
+        run: |
+          mkdir -p /tmp/pw && cd /tmp/pw && npm init -y >/dev/null && npm i playwright@1 >/dev/null
+          npx playwright install --with-deps chromium
+      - name: 홈 레일 드래그/스와이프 회귀 테스트
+        run: |
+          (cd camping-atlas/public && python3 -m http.server 8765 >/tmp/srv.log 2>&1 &)
+          sleep 2
+          PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/rail-swipe-test.mjs http://127.0.0.1:8765/
