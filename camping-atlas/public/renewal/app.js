@@ -779,31 +779,31 @@ function initDraggableRails(root = document) {
 // ── 카드 ─────────────────────────────────────────────────────
 function rowsHtml(c) {
   const f = facts(c);
-  const row = (n, label, icon, x) => `<li><span class="rn">${n}</span><span class="rl">${ic(icon)}${label}</span><span class="rv${x ? "" : " none"}">${x ? esc(x.v) : "–"}</span>${x ? dot(x.g) : ""}</li>`;
-  // 04 주변·05 가격(소유자 2026-10-20): 주변은 마트·편의점·정육점 순서 고정(' · ' 구분), 가격은 ‘2만~8만원’.
+  const row = (label, icon, x) => `<li><span class="rl">${ic(icon)}${label}</span><span class="rv${x ? "" : " none"}">${x ? esc(x.v) : "–"}</span>${x ? dot(x.g) : ""}</li>`;
+  // 주변은 마트·편의점·정육점 순서 고정(' · ' 구분), 가격은 ‘2만~8만원’.
   const near = nearLine(c, " · "), fm = feeMain(c);
   const nearX = near ? { v: near } : null;
   const feeX = fm?.text ? { v: `${fm.text}${fm.est ? " 추정" : ""}`, g: GR(c.fee.grade) } : null;
-  return `<ol class="rows">${row("01", "주차", "car", f.park)}${row("02", "전기", "bolt", f.power)}${row("03", "장작", "flame", f.fire)}${row("04", "주변", "store", nearX).replace("<li>", '<li class="r-near">')}${row("05", "가격", "won", feeX)}</ol>`;
+  return `<ul class="rows">${row("주차", "car", f.park)}${row("전기", "bolt", f.power)}${row("장작", "flame", f.fire)}${row("주변", "store", nearX).replace("<li>", '<li class="r-near">')}${row("가격", "won", feeX)}</ul>`;
 }
 function rowsHtmlHorizontal(c) {
   const f = facts(c), ti = c.ti ?? {};
-  const row = (n, label, icon, x) => `<li><span class="rn">${n}</span><span class="rl">${ic(icon)}${label}</span><span class="rv${x ? "" : " none"}">${x ? esc(x.v) : "–"}</span>${x ? dot(x.g) : ""}</li>`;
+  const row = (label, icon, x) => `<li><span class="rl">${ic(icon)}${label}</span><span class="rv${x ? "" : " none"}">${x ? esc(x.v) : "–"}</span>${x ? dot(x.g) : ""}</li>`;
   const near = nearLine(c, " · "), fm = feeMain(c);
   const nearX = near ? { v: near } : null;
   const feeX = fm?.text ? { v: `${fm.text}${fm.est ? " 추정" : ""}`, g: GR(c.fee?.grade) } : null;
   const timeStr = [ti.i?.[0] ? `입실 ${ti.i[0]}` : "", ti.o?.[0] ? `퇴실 ${ti.o[0]}` : "", ti.m?.[0] ? `매너 ${ti.m[0]}부터` : ""].filter(Boolean).join(" · ");
   const timeX = timeStr ? { v: timeStr, g: ti.i?.[1] } : null;
   const petX = f.pet ? { v: f.pet.v, g: f.pet.g } : null;
-  return `<ol class="rows rows-horiz">
-    ${row("01", "주차", "car", f.park)}
-    ${row("02", "전기", "bolt", f.power)}
-    ${row("03", "장작", "flame", f.fire)}
-    ${row("04", "반려견", "paw", petX)}
-    ${row("05", "시간", "clock", timeX)}
-    ${row("06", "주변", "store", nearX).replace("<li>", '<li class="r-near">')}
-    ${row("07", "가격", "won", feeX)}
-  </ol>`;
+  return `<ul class="rows rows-horiz">
+    ${row("주차", "car", f.park)}
+    ${row("전기", "bolt", f.power)}
+    ${row("장작", "flame", f.fire)}
+    ${row("반려견", "paw", petX)}
+    ${row("시간", "clock", timeX)}
+    ${row("주변", "store", nearX).replace("<li>", '<li class="r-near">')}
+    ${row("가격", "won", feeX)}
+  </ul>`;
 }
 // 가는 길 장보기: 마트·편의점·정육점 중 5km 안에 있는 곳(LOCALDATA 인허가). 순서는 늘 마트 → 편의점 → 정육점(소유자 2026-10-20).
 function nearLine(c, sep = " · ") {
