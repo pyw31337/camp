@@ -1013,6 +1013,26 @@
    "pref": "‘뷰·경치 좋음’ 평이 중요한가요?"
   },
   {
+   "code": "REVIEW_PRO_WALK",
+   "group": "review",
+   "label": "후기: 산책·둘레길 좋음",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "산책·둘레길 좋음",
+   "pref": "‘산책·둘레길 좋음’ 평이 중요한가요?"
+  },
+  {
+   "code": "REVIEW_PRO_FAMILY_HEALING",
+   "group": "review",
+   "label": "후기: 가족·모임 힐링",
+   "type": "count",
+   "unit": "건",
+   "filter": "min",
+   "review_label": "가족·모임 힐링",
+   "pref": "‘가족·모임 힐링’ 평이 중요한가요?"
+  },
+  {
    "code": "REVIEW_PRO_STARS",
    "group": "review",
    "label": "후기: 별 보기 좋음",
