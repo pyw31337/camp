@@ -352,7 +352,36 @@ function matches(c, { useArea = true } = {}) {
   }
   return true;
 }
-const rich = (c) => (c.pf?.k ?? 0) * 10 + (S.photos[c.id]?.length ?? 0) + (Object.values(facts(c)).filter(filled).length);
+// 정보량 점수: 목록·추천의 기본 순서(소유자 2026-10-20 — 전기 W처럼 상세 정보가 있는 곳을 위·앞으로).
+// 전기 W 12 · 확인된 현장 조건(주차·불멍·규격·바닥·텐트·위생·온수·반려동물) 각 3 · 프로필 확인 항목(18개 중) 각 2 ·
+// 공식 사진 장당 2(최대 5장)·후기 사진 2 · 1박 요금 4 · 사이트 타입 2 · 이용 규칙 2 · 온라인 예약 3 · 후기 4건당 1(최대 5).
+const RICH_FACTS = ["park", "fire", "size", "ground", "shelter", "sanitary", "hot", "pet"];
+function rich(c) {
+  if (c._rich != null) return c._rich;
+  const f = facts(c);
+  let s = 0;
+  if (f.power?.w && filled(f.power)) s += 12; else if (filled(f.power)) s += 1;
+  for (const k of RICH_FACTS) if (filled(f[k])) s += 3;
+  s += Math.min(Number(c.pf?.k) || 0, 18) * 2;
+  const official = (S.photos[c.id]?.length ?? 0) || (c.ph || c.img ? 1 : 0);
+  s += Math.min(official, 5) * 2 + (!official && (c.pt || c.sn) ? 2 : 0);
+  if (c.fee?.min || c.pf?.p?.min) s += 4;
+  if (c.st?.length) s += 2;
+  if (c.nr?.length) s += 2;
+  if ((c.booking?.channels ?? []).some((x) => x.kind === "online")) s += 3;
+  s += Math.min(Math.floor((Number(c.rv?.n) || 0) / 4), 5);
+  return (c._rich = s);
+}
+// 사진이 한 장도 없는 곳은 신뢰가 낮아 일반·추천 목록에서 뒤로 보낸다(소유자 2026-10-20). 단, 이름으로 직접 찾은 곳은 그대로.
+function namedByQuery(c) {
+  const q = String(S.q ?? "").replace(/\s+/g, "").toLowerCase();
+  if (q.length < 2) return false;
+  const n = nameOf(c).name.replace(/\s+/g, "").toLowerCase();
+  // 지역 이름만 친 검색(“세종”, “가평”)은 업장을 직접 찾은 것이 아니다
+  const region = `${c.sido ?? ""}${c.sigungu ?? ""}`.replace(/\s+/g, "");
+  return n.includes(q) && !region.includes(q);
+}
+const photoLast = (c) => (hasPhoto(c) || namedByQuery(c) ? 0 : 1);
 // 원문을 복제하지 않고 후기에서 집계한 언급 주제와 건수만 사용한다.
 function reviewMeta(c) {
   const rv = c.rv ?? {};
@@ -381,8 +410,8 @@ function results() {
   const list = S.camps.filter((c) => matches(c));
   if (S.sort === "name") list.sort((a, b) => nameOf(a).name.localeCompare(nameOf(b).name, "ko"));
   else list.sort((a, b) => rich(b) - rich(a));
-  // 사진이 한 장도 없는 곳은 신뢰가 낮다(소유자 2026-10-20) → 결과 맨 뒤로
-  return [...list.filter(hasPhoto), ...list.filter((c) => !hasPhoto(c))];
+  // 사진이 한 장도 없는 곳은 뒤로(이름으로 직접 찾은 곳은 제외)
+  return list.sort((a, b) => photoLast(a) - photoLast(b));
 }
 
 // ── 사진 ─────────────────────────────────────────────────────
@@ -1245,10 +1274,13 @@ function listResults(p) {
   const fee = (c) => campFeeMin(c) ?? Infinity;
   if (S.listSort === "fee") shown.sort((a, b) => fee(a.c) - fee(b.c) || rich(b.c) - rich(a.c));
   else if (S.listSort === "name") shown.sort((a, b) => nameOf(a.c).name.localeCompare(nameOf(b.c).name, "ko"));
-  // 조건이 근거로 맞는 곳 → 법령 기준으로 맞는 곳 → 정보 없어 확인 필요한 곳 순, 그 안에서 날짜·정보량
-  else shown.sort((a, b) => (a.ce?.unknown ?? 0) - (b.ce?.unknown ?? 0) || (a.ce?.ref ?? 0) - (b.ce?.ref ?? 0) || (a.st?.rank ?? 5) - (b.st?.rank ?? 5) || rich(b.c) - rich(a.c));
-  // 사진이 한 장도 없는 곳은 신뢰가 낮다(소유자 2026-10-20) → 어떤 정렬이든 맨 뒤로(같은 무리 안의 순서는 그대로)
-  shown.sort((a, b) => Number(!hasPhoto(a.c)) - Number(!hasPhoto(b.c)));
+  // 조건이 근거로 맞는 곳 → 법령 기준으로 맞는 곳 → 정보 없어 확인 필요한 곳 순, 그 안에서 정보량(+오픈 임박·운영 중 가점)
+  else {
+    const stBonus = (st) => (st?.k === "soon" ? 10 : st?.k === "season" ? 4 : 0);
+    shown.sort((a, b) => (a.ce?.unknown ?? 0) - (b.ce?.unknown ?? 0) || (a.ce?.ref ?? 0) - (b.ce?.ref ?? 0) || (rich(b.c) + stBonus(b.st)) - (rich(a.c) + stBonus(a.st)));
+  }
+  // 사진이 한 장도 없는 곳은 어떤 정렬이든 뒤로(같은 무리 안의 순서는 그대로, 이름으로 직접 찾은 곳은 제외)
+  shown.sort((a, b) => photoLast(a.c) - photoLast(b.c));
   return { shown, closed: list.length - list.filter((x) => x.st?.k !== "closed").length };
 }
 // 등록 규격 중 가장 큰 사이트(가로×세로). 조건 검색의 ‘사이트 크기’와 같은 값.
@@ -1420,6 +1452,7 @@ function bindTheme(themeKey) {
     } else {
       withPhoto.sort((a, b) => rich(b) - rich(a));
     }
+    noPhoto.sort((a, b) => rich(b) - rich(a));
     return [...withPhoto, ...noPhoto];
   };
 
@@ -3383,7 +3416,7 @@ function drawMap() {
   const inB = MAP.bounds(0.15), z = MAP.zoom();
   const inView = S.camps.filter((c) => c.lat && c.lng && inB(c.lat, c.lng) && matches(c, { useArea: false }));
   const strict = MAP.bounds();
-  const visible = inView.filter((c) => strict(c.lat, c.lng)).sort((a, b2) => rich(b2) - rich(a));
+  const visible = inView.filter((c) => strict(c.lat, c.lng)).sort((a, b2) => photoLast(a) - photoLast(b2) || rich(b2) - rich(a));
   $("[data-mcount]").textContent = fmt(visible.length);
   MAP.clear();
   const cell = z >= 12 ? 0 : z >= 10 ? 60 : 90, buckets = new Map();
