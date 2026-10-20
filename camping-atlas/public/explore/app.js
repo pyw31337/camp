@@ -979,7 +979,10 @@ document.addEventListener("click", (e) => {
       if (Array.isArray(x)) S.cond[k] = on ? S.cond[k].filter((y) => !x.includes(y)) : [...new Set([...S.cond[k], ...x])];
       else S.cond[k] = on ? (typeof x === "boolean" ? false : 0) : x;
     }
-    syncCondUi(); return;
+    syncCondUi();
+    // 당일 캠크닉은 홈 레일이 숙박 캠핑장 위주라 켜면 바로 당일 목록으로 옮긴다(2026-10-20 소유자).
+    if (!on && v.kind?.includes("DAY") && !location.hash.startsWith("#/list")) location.hash = listHash();
+    return;
   }
   if (e.target.closest("[data-open=date]")) {
     const input = $("[data-date-input]");
@@ -1104,7 +1107,7 @@ function homeView() {
   <section class="hero" aria-labelledby="hero-t">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-in">
-      <h1 id="hero-t"><span class="h1-a">취향대로 찾아 떠나는</span> <span class="h1-b">전국 ${fmt(S.camps.length)}개 <em>자연 속으로.</em></span></h1>
+      <h1 id="hero-t"><span class="h1-a">취향대로 찾아 떠나는</span> <span class="h1-b">전국 ${fmt(S.camps.filter((c) => !c.du).length)}개 <em>자연 속으로.</em></span></h1>
       <p class="hero-summary">숲·계곡·바다, 나만의 쉼터를 조건으로 골라 보세요</p>
       <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div><form class="finder-form" role="search" data-search>
         <label class="finder-field finder-destination"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
@@ -1271,7 +1274,7 @@ function condEval(c, k = S.cond, skip = null) {
   if (skip !== "near" && k.near) { const ctr = k._ctr; if (!ctr || !c.lat || km2(ctr, c) > k.r) return null; }
   if (skip !== "kind" && k.kind.length) {
     const hasInfo = (c.types ?? []).length > 0 || (c.st ?? []).length > 0;
-    st.kind = k.kind.some((x) => KIND[x]?.test(c)) ? "y" : k.kind.includes("DAY") || !hasInfo ? "?" : "n";
+    st.kind = k.kind.some((x) => KIND[x]?.test(c)) ? "y" : (k.kind.length === 1 && k.kind[0] === "DAY") ? "n" : k.kind.includes("DAY") || !hasInfo ? "?" : "n";
   }
   if (skip !== "pet" && k.pet) st.pet = petOk(c) ? "y" : /불가/.test(c.pets ?? "") ? "n" : "?";
   if (skip !== "w" && k.w) {
@@ -1459,7 +1462,7 @@ function dateStatus(c, d) {
   return { k: "unknown", rank: 3, icon: "calendar", txt: "운영 기간 미확인", sub: "예약처에서 확인" };
 }
 function listResults(p) {
-  const list = S.camps.filter((c) => matches(c) && condTest(c)).map((c) => ({ c, st: dateStatus(c, p.d), ce: condEval(c) }));
+  const list = S.camps.filter((c) => (!c.du || S.q || S.cond.kind.includes("DAY")) && matches(c) && condTest(c)).map((c) => ({ c, st: dateStatus(c, p.d), ce: condEval(c) }));
   const shown = S.showClosed ? list : list.filter((x) => x.st?.k !== "closed");
   const fee = (c) => campFeeMin(c) ?? Infinity;
   if (S.listSort === "fee") shown.sort((a, b) => fee(a.c) - fee(b.c) || rich(b.c) - rich(a.c));
@@ -1526,7 +1529,7 @@ function listView() {
   return `<section class="list-page" aria-labelledby="list-t">
     <div class="list-head">
       <a class="link list-back" href="#/">${ic("left")}처음으로</a>
-      <h1 id="list-t"><span data-list-area>${esc(areaLabel)}</span> 캠핑장 <b data-list-count></b></h1>
+      <h1 id="list-t"><span data-list-area>${esc(areaLabel)}</span> ${S.cond.kind.includes("DAY") ? "당일 캠크닉" : "캠핑장"} <b data-list-count></b></h1>
       <form class="finder-form list-finder-form" role="search" data-list-search>
         <label class="finder-field finder-destination"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
         <button class="finder-field finder-static finder-cond" type="button" data-open-cond><small>조건</small><b data-cond-label>${esc(condSummary())}</b></button>
