@@ -37,6 +37,7 @@
 {"cid":"75","attr":"SITE_SIZE","value":"3×3m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=75","at":"2025-07-02T00:00:00+09:00","quote":"사이트 크기와 개수는 가로 3m 세로 3m 데크 6면, 가로 3m 세로 6m 데크 5면, 가로 7m 세로 6m 파쇄석 20면이다.","text":"3×3m"}
 {"cid":"75","attr":"SITE_SIZE","value":"3×6m","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"75","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"76","attr":"SITE_SIZE","value":"4.5×7m","grade":"MENTION","src":"review_search","url":"https://www.campingdatainfo.com/camp_main/camp_view?cId=77","quote":"사이트 크기는 가로 4.5m 세로 7m, 가로 3.5m 세로 5m, 가로 3m 세로 5m, 가로 3m 세로 4.1m로 네 가지 종류다.","text":"4.5×7m","n":2}
 {"cid":"81","attr":"SITE_SIZE","value":"8.5×8.5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"85","attr":"SITE_SIZE","value":"3×6m","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"85","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -201,6 +202,7 @@
 {"cid":"549","attr":"SITE_SIZE","value":"10×8m","grade":"CONFIRMED","src":"gocamping","count":29}
 {"cid":"563","attr":"SITE_SIZE","value":"6×9m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"563","attr":"SITE_SIZE","value":"6×9m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=563","at":"2026-01-15T00:00:00+09:00","quote":"6×9m의 제법 큰 사이즈의 사이트가 주를 이룬다.","text":"6×9m"}
+{"cid":"563","attr":"SITE_SIZE","value":"6×9m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/kayoungfly/224037013545","at":"2025-10-10","quote":"서울근교캠핑장 남양주 휴림캠핑장 총평 1.찐자연과 함께하는 캠핑 계수나무와 잣나무 2.데크존 파쇄석 단독존 등등 다양 6m x 9m 크기의 파쇄석과 데크로 된 넓은 사이트 45개가 마련되어 있어 가족 단위나 단체...","text":"6×9m","n":1}
 {"cid":"564","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"588","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"588","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -415,6 +417,7 @@
 {"cid":"1100","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"1100","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":50}
 {"cid":"1100","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1102","attr":"SITE_SIZE","value":"7×4.8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/ekkoom/224400094431","at":"2026-09-03","quote":"7*4.8m로 작지 않은 사이트지만 차를 옆에 대니...","text":"7×4.8m","n":1}
 {"cid":"1107","attr":"SITE_SIZE","value":"6×10m","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"1107","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":37}
 {"cid":"1107","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -900,6 +903,7 @@
 {"cid":"2697","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"2697","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2700","attr":"SITE_SIZE","value":"9×8m","grade":"CONFIRMED","src":"gocamping","count":123}
+{"cid":"2700","attr":"SITE_SIZE","value":"9×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/gocamping_official/224073799065","at":"2025-11-12","quote":"구분 내용 주소 경남 합천군 대양면 정양리 613 사이트 수 - 캠핑사이트(A존) - 29개 9m*8m 규격...","text":"9×8m","n":1}
 {"cid":"2703","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping","count":23}
 {"cid":"2703","attr":"SITE_SIZE","value":"5×8m","grade":"CONFIRMED","src":"gocamping","count":17}
 {"cid":"2703","attr":"SITE_SIZE","value":"5×9m","grade":"CONFIRMED","src":"gocamping","count":8}
@@ -1335,6 +1339,7 @@
 {"cid":"6953","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6959","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping","count":39}
 {"cid":"6959","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping","count":6}
+{"cid":"6959","attr":"SITE_SIZE","value":"4×4m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/fatalism4444/224447606694","at":"2026-10-20","quote":"풍광은 수려하지만 편의시설이 다소 낙후되어 있고 사이트 규격이 대부분 4*4M...","text":"4×4m","n":1}
 {"cid":"6959","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6965","attr":"SITE_SIZE","value":"7×10m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=6965","at":"2026-06-05T00:00:00+09:00","quote":"캠핑장에는 잔디 12면과 파쇄석 19면을 마련했으며, 규격은 가로 7m 세로 10m다.","text":"7×10m"}
 {"cid":"6967","attr":"SITE_SIZE","value":"4×4m","grade":"CONFIRMED","src":"gocamping","count":6}
@@ -1563,6 +1568,7 @@
 {"cid":"7353","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7375","attr":"SITE_SIZE","value":"8×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261024","at":"2026-10-20","text":"동당미마운틴 구역"}
 {"cid":"7375","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261024","at":"2026-10-20","text":"파쇄석"}
+{"cid":"7385","attr":"SITE_SIZE","value":"8×4.5m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/s_u0606/223978352191","at":"2025-08-21","quote":"2025.07.05-06 방문 땡큐캠핑 어플 예약 입실 퇴실 : 입실 13시 퇴실 12시 사이트크기: 8x4.5m 예약구역: 솔밭동 2 3시간 반을 달려 도착한 영월!...","text":"8×4.5m","n":1}
 {"cid":"7401","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"7401","attr":"SITE_SIZE","value":"10×11m","grade":"CONFIRMED","src":"gocamping","count":4}
 {"cid":"7401","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
@@ -1655,6 +1661,7 @@
 {"cid":"7750","attr":"SITE_SIZE","value":"8×5m","grade":"CONFIRMED","src":"gocamping","count":6}
 {"cid":"7750","attr":"SITE_SIZE","value":"9×8m","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"7750","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7755","attr":"SITE_SIZE","value":"6×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/kgx792/224085474050","at":"2025-11-23","quote":"양주 하늘캠핑장 양주에 있는 캠핑장을 종종 다녔지만 이번 캠핑장이 뷰가 좋았다 E5 데크 자리 (6*8m) E5의...","text":"6×8m","n":1}
 {"cid":"7755","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3658&res_dt=20261024","at":"2026-10-20","text":"데크 (5m*6m)"}
 {"cid":"7755","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3658&res_dt=20261024","at":"2026-10-20","text":"데크(1,2)/파쇄석(3)"}
 {"cid":"7757","attr":"SITE_SIZE","value":"6×6m","grade":"CONFIRMED","src":"gocamping","count":17}
@@ -1834,6 +1841,7 @@
 {"cid":"8109","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"8109","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8113","attr":"SITE_SIZE","value":"6×7m","grade":"CONFIRMED","src":"gocamping","count":39}
+{"cid":"8113","attr":"SITE_SIZE","value":"5×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/leeseol167/224448316527","at":"2026-10-20","quote":"5m x 10m 크기, 성인 4명...","text":"5×10m","n":1}
 {"cid":"8114","attr":"SITE_SIZE","value":"10×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3654&res_dt=20261024","at":"2026-10-20","text":"A 사이트(파쇄석)"}
 {"cid":"8114","attr":"SITE_SIZE","value":"20×20m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3654&res_dt=20261024","at":"2026-10-20","text":"프렌즈 존 3팀(파쇄석)"}
 {"cid":"8114","attr":"SITE_SIZE","value":"20×24m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3654&res_dt=20261024","at":"2026-10-20","text":"떼캠 존 3팀(파쇄석)"}
@@ -1911,6 +1919,7 @@
 {"cid":"100126","attr":"SITE_SIZE","value":"8×6m","grade":"OPERATOR","src":"operator_homepage","url":"https://buyeo-suribawi.or.kr/sub/page.php?page_code=info_02","at":"2026-10-20T00:57:45.907Z","quote":"데크 규격 : 8m × 6m","text":"8×6m"}
 {"cid":"100126","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"100126","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"gocamping","count":10}
+{"cid":"100126","attr":"SITE_SIZE","value":"3.5×3.5m","grade":"MENTION","src":"review_search","url":"https://nol.yanolja.com/ticket/products/21006986","quote":"- 캠핑데크 규격 가로 3.5m * 3.5m","text":"3.5×3.5m","n":1}
 {"cid":"100126","attr":"SITE_SIZE","value":"3.5×6.5m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/live983/223279773527","at":"2023-12-01","quote":"사이트 정보 -.19개 사이트 (데크+이면 사이트) 3.5*6.5m → 데크 크기 3.5*3.5m...","text":"3.5×6.5m","n":1}
 {"cid":"100126","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100128","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -2026,6 +2035,7 @@
 {"cid":"100335","attr":"SITE_SIZE","value":"14×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100337","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100338","attr":"SITE_SIZE","value":"6×4m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100338","at":"2026-07-16T00:00:00+09:00","quote":"사이트는 가로 6m 세로 4m 11면, 가로 3m 세로 2m 13면으로 이뤄졌다.","text":"6×4m"}
+{"cid":"100338","attr":"SITE_SIZE","value":"3×3m","grade":"MENTION","src":"review_search","url":"https://reconlab.kr/transport/palgongsan-camping-weather/","quote":"자동차영지 28동 + 예비 1동, 데크 3×3m(1~24번), 3.5×4.5m(25~28번)","text":"3×3m","n":1}
 {"cid":"100338","attr":"SITE_SIZE","value":"4×6m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/salley2005/223609645174","at":"2024-10-07","quote":"이번 팔공산 갓바위야영장 A-5 사이트는 데크가 그리 크지 않은 4mx6m라서 우리 4명이 야영하기엔...","text":"4×6m","n":1}
 {"cid":"100340","attr":"SITE_SIZE","value":"7×6m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100342","attr":"SITE_SIZE","value":"3×5m","grade":"CONFIRMED","src":"gocamping","count":12}
@@ -2305,6 +2315,7 @@
 {"cid":"100705","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100709","attr":"SITE_SIZE","value":"8×9m","grade":"CONFIRMED","src":"gocamping","count":30}
 {"cid":"100710","attr":"SITE_SIZE","value":"4.3×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16444&res_dt=20261024","at":"2026-10-20","text":"타프존 (개별 편의시설/에어컨/온돌룸)"}
+{"cid":"100711","attr":"SITE_SIZE","value":"5×11m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/qlstmfl123/224043392604","at":"2025-10-16","quote":"1️⃣ 독채 앞 미온수 수영장 크기 : 5m × 11m 수심 : 약 1.1m 온도 : 32~33도 이용시간...","text":"5×11m","n":1}
 {"cid":"100711","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100719","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100724","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -2450,6 +2461,7 @@
 {"cid":"100923","attr":"SITE_SIZE","value":"9×10m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100923","at":"2024-12-02T00:00:00+09:00","quote":"크기는 각각 가로 9m × 세로 10m와 가로 10m × 세로 11m이다.","text":"9×10m"}
 {"cid":"100923","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100926","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":14}
+{"cid":"100926","attr":"SITE_SIZE","value":"8×8m","grade":"MENTION","src":"review_search","url":"https://www.yeogi.com/domestic-accommodations/81348","quote":"캠핑사이트 크기 : 8x8m","text":"8×8m","n":1}
 {"cid":"100932","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100937","attr":"SITE_SIZE","value":"5×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=6906&res_dt=20261024","at":"2026-10-20","text":"A사이트"}
 {"cid":"100937","attr":"SITE_SIZE","value":"9×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=6906&res_dt=20261024","at":"2026-10-20","text":"B사이트"}
@@ -2843,6 +2855,7 @@
 {"cid":"101369","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101370","attr":"SITE_SIZE","value":"5×4m","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"101370","attr":"SITE_SIZE","value":"5×5m","grade":"CONFIRMED","src":"gocamping","count":14}
+{"cid":"101370","attr":"SITE_SIZE","value":"5×4.7m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/spykid123/224217973212","at":"2026-03-16","quote":"야영장 뿐 아니라 유원지, 계곡으로도 검색이 되는데 다른 데는 둘러보지도 못했습니다 ㅎㅎ 제주 돈내코 야영장 가격 : 데크 1박 14000원 크기 : 5x4.7m, 일부 데크 3....","text":"5×4.7m","n":1}
 {"cid":"101374","attr":"SITE_SIZE","value":"12×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=20980&res_dt=20261024","at":"2026-10-20","text":"B사이트"}
 {"cid":"101374","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=20980&res_dt=20261024","at":"2026-10-20","text":"A사이트"}
 {"cid":"101374","attr":"SITE_SIZE","value":"12×9m","grade":"CONFIRMED","src":"gocamping","count":10}
@@ -3042,6 +3055,7 @@
 {"cid":"101623","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101627","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"101627","attr":"SITE_SIZE","value":"7×9m","grade":"CONFIRMED","src":"gocamping","count":8}
+{"cid":"101627","attr":"SITE_SIZE","value":"5.5×15m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/gomnee2/223928550509","at":"2025-07-10","quote":"숲에서의 힐링 나무가 정말 예뻤던 파주오토캠핑장 나무와쉬리 느티나무와 자작나무가 있어서 따로 타프를 치지 않아도 나무 그늘로만 충분했고, 저희는 느티나무 1~4사이트를 예약했는데 사이트가 5.5m x 15m 라...","text":"5.5×15m","n":1}
 {"cid":"101629","attr":"SITE_SIZE","value":"10×12m","grade":"CONFIRMED","src":"gocamping","count":6}
 {"cid":"101632","attr":"SITE_SIZE","value":"8×9m","grade":"OPERATOR","src":"operator_homepage","url":"https://campinghub.kr/camping/101632.html","at":"2026-10-20T00:50:36.495Z","quote":"사이트 크기 8×9m","text":"8×9m"}
 {"cid":"101632","attr":"SITE_SIZE","value":"7×9m","grade":"CONFIRMED","src":"gocamping","count":7}
@@ -3513,6 +3527,8 @@
 {"cid":"102130","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102130","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102132","attr":"SITE_SIZE","value":"4×4m","grade":"CONFIRMED","src":"gocamping","count":4}
+{"cid":"102134","attr":"SITE_SIZE","value":"6×6m","grade":"MENTION","src":"review_search","url":"https://raetaeric.com/","quote":"C사이트 6×6m 35,000원 55,000원 5","text":"6×6m","n":1}
+{"cid":"102134","attr":"SITE_SIZE","value":"7×7m","grade":"MENTION","src":"review_search","url":"https://raetaeric.com/","quote":"A, B사이트 7×7m 45,000원 66,000원 10","text":"7×7m","n":1}
 {"cid":"102136","attr":"SITE_SIZE","value":"4×4m","grade":"CONFIRMED","src":"gocamping","count":4}
 {"cid":"102138","attr":"SITE_SIZE","value":"6×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=19480&res_dt=20261024","at":"2026-10-20","text":"안내 (파쇄)"}
 {"cid":"102138","attr":"SITE_SIZE","value":"6×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=19480&res_dt=20261024","at":"2026-10-20","text":"군북 (데크)"}
