@@ -390,12 +390,14 @@ const photoHiUrl = (u) => photoUrl(u).replace(/-t\.webp(?=\?|$)/, "-l.webp");
 function imageTag(u, alt, { eager = false, sizes = "(max-width: 759px) 80vw, 320px" } = {}) {
   const src = photoUrl(u), high = photoHiUrl(u);
   const srcset = high !== src ? ` srcset="${esc(src)} 480w, ${esc(high)} 1280w" sizes="${sizes}"` : "";
-  return `<img src="${esc(src)}"${srcset} alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" draggable="false">`;
+  // 외부 원본(블로그 사진 등)은 리퍼러를 보내지 않아야 열린다
+  const ref = /^https?:/i.test(src) ? ' referrerpolicy="no-referrer"' : "";
+  return `<img src="${esc(src)}"${srcset} alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" draggable="false"${ref}>`;
 }
 // 비교·찜처럼 사진이 보조 역할인 곳은 빈 src를 만들지 않고, 사진 미보유를 중립적인 아이콘으로 표시한다.
 function campThumb(c, { alt = "", sizes } = {}) {
   const u = photosOf(c)[0];
-  if (u) return imageTag(u, alt, { sizes });
+  if (u) return imageTag(u, alt, { sizes }) + (isPt(c, u) ? ptCredit(c) : "");
   return `<span class="photo-empty" role="img" aria-label="${esc(`${nameOf(c).name} 사진 없음`)}">${ic("tent")}</span>`;
 }
 // 카드 사진: GitHub Pages 배포 단계에서 합쳐지는 고캠핑 공식 webp를 우선 사용한다.
@@ -411,6 +413,9 @@ const photoKey = (u) => {
   base = base.toLowerCase();
   return base.replace(/^thumb_\d+_/, "");
 };
+const PT_FB = new Map();
+const isPt = (c, u) => Boolean(c.pt && (u === c.pt.i || u === c.pt.t));
+const ptCredit = (c) => `<span class="pt-credit" title="${esc(c.pt?.s ? `${c.pt.s} 후기 사진` : "후기 사진")}">후기 사진</span>`;
 function photosOf(c) {
   return photosAll(c).filter((u) => !DEAD.has(photoUrl(u)));
 }
@@ -425,7 +430,11 @@ function photosAll(c) {
   else if (remote.length) list = remote;
   else if (c.ph) list = [`media/${c.ph}`];
   else if (c.img) list = [c.img];
-  if (c.sn && !list.includes(c.sn)) list.push(c.sn);
+  // 공식 사진이 없는 곳: 캠핑장 이름으로 찾은 블로그 사진 중 배치도·안내판·야간 사진을 거른 한 장(pick-card-fallback.mjs → c.pt).
+  // 원본이 막히면 검색 썸네일로 바꾼다(PT_FB). 카드에는 ‘후기 사진’ 출처를 붙인다.
+  else if (c.pt?.i || c.pt?.t) { list = [c.pt.i || c.pt.t]; if (c.pt.i && c.pt.t) PT_FB.set(c.pt.i, c.pt.t); }
+  // 걸러 고른 사진(c.pt)이 없을 때만 첫 검색 썸네일(c.sn, build-explore-data)
+  else if (c.sn && !list.length) list = [c.sn];
 
   const seen = new Set();
   const deduped = [];
@@ -446,7 +455,7 @@ function carousel(c, { eager = false, cls = "", single = false } = {}) {
   const alt = esc(nameOf(c).name);
   if (!ph.length) return `<div class="car car-empty ${cls}">${ic("tent")}</div>`;
   if (single || ph.length === 1) {
-    return `<div class="car car-single ${cls}"><img class="car-img" src="${esc(photoUrl(ph[0]))}" alt="${alt}" loading="${eager ? "eager" : "lazy"}" decoding="async" draggable="false"></div>`;
+    return `<div class="car car-single ${cls}"><img class="car-img" src="${esc(photoUrl(ph[0]))}" alt="${alt}" loading="${eager ? "eager" : "lazy"}" decoding="async" draggable="false"${/^https?:/i.test(photoUrl(ph[0])) ? ' referrerpolicy="no-referrer"' : ""}>${isPt(c, ph[0]) ? ptCredit(c) : ""}</div>`;
   }
   const slides = ph.map((u, i) => i === 0
     ? imageTag(u, alt, { eager })
@@ -1726,14 +1735,20 @@ const DEAD_BOOKING = /(^|\.)ticketplay\.zone$|(^|\.)(example\.(com|org|net)|loca
 function liveBookingUrl(u) {
   try {
     const h = new URL(u).hostname;
-    return h && !DEAD_BOOKING.test(h);
+    return h && h.includes(".") && !DEAD_BOOKING.test(h); // 점 없는 호스트(“http://https////…”, 한글 키워드 주소)는 깨진 주소
   } catch { return false; }
 }
+// 네이버 예약 상세 주소(booking.naver.com/…/bizes/번호)는 고캠핑 등록값이 낡아 ‘운영하지 않는 예매 페이지’로 가는 경우가 있고,
+// robots.txt가 모든 봇을 막아 자동으로 살아 있는지 확인할 수 없다(소유자 2026-10-20). → 네이버 검색(캠핑장 이름·시군구)으로 연다.
+// 검색 결과의 플레이스 카드에 지금 쓰는 ‘예약’ 버튼이 나온다.
+const NAVER_BOOKING_DEEP = /^https?:\/\/(m\.)?booking\.naver\.com\/booking\/\d+\/bizes\/\d+/i;
+const naverSearchUrl = (c) => `https://search.naver.com/search.naver?query=${encodeURIComponent(`${c.sigungu ?? ""} ${nameOf(c).name} 예약`.trim())}`;
 function bookingChannels(c) {
   // 땡큐캠핑 엔진에서 같은 업장(이름·시군구 일치)을 찾았으면, 등록 경로에 없을 때 날짜별 예약 화면을 덧붙인다.
   const tq = c.tq?.s && !(c.booking?.channels ?? []).some((x) => /thankqcamping|camperstory/.test(x?.url ?? "")) ? [{ platform_id: "thankqcamping", platform_name: "땡큐캠핑", url: THANKQ_VIEW(c.tq.s), kind: "online", confidence: 0.7, evidence: ["땡큐캠핑 업장 검색(이름·시군구 일치)"] }] : [];
   return [...(c.booking?.channels ?? []), ...tq]
-    .filter((x) => x?.url && liveBookingUrl(x.url))
+    .filter((x) => x?.url && liveBookingUrl(x.url) && !c.dl?.includes(x.url)) // c.dl: 열어 보니 없는 링크(check-links.mjs)
+    .map((x) => (NAVER_BOOKING_DEEP.test(x.url) ? { ...x, url: naverSearchUrl(c), registered_url: x.url, evidence: [...(x.evidence ?? []), "네이버 검색에서 현재 예약 버튼으로 연결"] } : x))
     .sort((a, b) => bookingRank(a) - bookingRank(b) || Number(b.confidence ?? 0) - Number(a.confidence ?? 0));
 }
 function bookingLabel(channel) {
@@ -2464,7 +2479,7 @@ function infoHtml(c) {
   const rows = [
     ["주소", c.addr ? `<span class="address-value">${esc(c.addr)}${addressActions}</span>` : null, gcSrc("주소", c.addr)],
     ["전화", telText(c.tel) ? `<a href="tel:${esc(telText(c.tel).replace(/[^\d+]/g, ""))}">${esc(telText(c.tel))}</a>` : null, gcSrc("전화", c.tel)],
-    ["홈페이지", c.homepage ? `<a href="${esc(c.homepage)}" target="_blank" rel="noopener">${esc(hostOf(c.homepage) || c.homepage)}</a>` : null, { g: "c", src: { label: "공식 홈페이지", url: c.homepage } }],
+    ["홈페이지", c.homepage && !c.dl?.includes(c.homepage) ? `<a href="${esc(c.homepage)}" target="_blank" rel="noopener">${esc(hostOf(c.homepage) || c.homepage)}</a>` : null, { g: "c", src: { label: "공식 홈페이지", url: c.homepage } }],
     // 운영 기간(계절)은 ‘이용 정보’에 있으므로 여기서는 운영 주체·요일만 둔다.
     ["운영", [OP[c.op], (c.days ?? [])[0]].filter(Boolean).map(esc).join(" · ") || null, gcSrc("운영 정보")],
     ...registryRows(c),
@@ -3521,6 +3536,9 @@ addEventListener("keydown", (e) => {
 addEventListener("error", (e) => {
   const im = e.target;
   if (!(im instanceof HTMLImageElement)) return;
+  // 후기 사진 원본이 막히면 검색 썸네일로 한 번 바꾼다
+  const fb = PT_FB.get(im.getAttribute("src"));
+  if (fb) { im.removeAttribute("srcset"); im.setAttribute("src", fb); return; }
   // 검색 썸네일이 사라졌으면 그 칸을 빼고, 후기 글 카드는 아이콘 자리로 둔다.
   const thumb = im.closest(".thumb-links a");
   if (thumb) { const box = thumb.parentElement; thumb.remove(); if (!box.children.length) { const sec = box.closest(".d-sec"); box.remove(); if (sec && !sec.querySelector(".thumb-links a, .visitor-sources a, .layout-links a, .visitor-gallery button, .layout-viewer")) sec.remove(); } return; }

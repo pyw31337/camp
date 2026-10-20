@@ -37,7 +37,9 @@ const deadHost = (hostname) => {
 export function normalizeUrl(u) {
   const s = String(u ?? "").trim();
   if (!s || /^(tel|mailto|javascript):/i.test(s)) return null;
-  const v = /^https?:\/\//i.test(s) ? s : `http://${s.replace(/^\/+/, "")}`;
+  // 등록값에 프로토콜이 겹치거나 깨진 경우(“http://https////host”, “https//host”, “http:/host”)를 바로잡는다(2026-10-20 링크 전수 점검).
+  const pm = s.match(/^(?:https?:?\/*)+/i);
+  const v = pm ? `${/https/i.test(pm[0]) ? "https" : "http"}://${s.slice(pm[0].length).replace(/^\/+/, "")}` : `http://${s.replace(/^\/+/, "")}`;
   try {
     const url = new URL(v);
     if (!url.hostname.includes(".") || BAD_HOST.test(url.hostname) || deadHost(url.hostname)) return null;

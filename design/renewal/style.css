@@ -1844,6 +1844,9 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 .more-link { padding: 0; border: 0; background: none; box-shadow: none; border-radius: 0; height: auto; cursor: pointer; font: inherit; font-weight: 700; color: var(--ink-2); font-size: .92rem; white-space: nowrap; }
 .more-link:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 
+/* ── 공식 사진 없는 곳의 후기 사진 표시(2026-10-20) ── */
+.car-single, .lrow-media { position: relative; }
+.pt-credit { position: absolute; bottom: 10px; right: 10px; z-index: 2; padding: 2px 8px; border-radius: 999px; background: rgba(16, 20, 20, .62); color: #fff; font-size: .7rem; font-weight: 800; pointer-events: none; }
 /* 테마 아이콘(소유자 지정 SVG): 글자 왼쪽, 같은 크기·글자색 */
 .th-ic { width: 1.1em; height: 1.1em; flex: none; vertical-align: -0.18em; margin-right: .3em; color: currentColor; }
 .theme-card b .th-ic { margin-right: .25em; }
