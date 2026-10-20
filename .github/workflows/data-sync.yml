@@ -101,7 +101,9 @@ jobs:
           fi
           case "$profile" in
             media-backfill)
-              image_calls=880; max_stored_per_camp=1; nearby_calls=0; fee_calls=0; product_calls=0; collect_tour=false; collect_free=false ;;
+              # 사진만 더한다(기존 6장 유지). TourAPI 단계는 호출 0건으로 캐시만 써서 요금·상품을 직전 값대로 이어받는다
+              # (2026-10-21 run 39501816566: 1장 정리로 7,274장 삭제 + 요금 단계 생략으로 커버리지 급감).
+              image_calls=880; max_stored_per_camp=0; nearby_calls=0; fee_calls=0; product_calls=0; collect_tour=true; collect_free=false ;;
             tour-enrichment)
               image_calls=0; max_stored_per_camp=0; nearby_calls=150; fee_calls=220; product_calls=500; collect_tour=true; collect_free=false ;;
             free-audit)
@@ -170,19 +172,6 @@ jobs:
           IMAGE_MAX_DOWNLOADS: ${{ github.event_name == 'pull_request' && '20' || '1500' }}
           IMAGE_MAX_PER_CAMP: ${{ vars.IMAGE_MAX_PER_CAMP || '6' }}
           IMAGE_MAX_BYTES: '12000000'
-      - name: Publish the media branch (single commit, force push)
-        # 소유자 요청(2026-10-13)으로 공식 사진을 자체 저장한다. 권리자 요청 시 media 브랜치에서 지우고 재배포한다.
-        if: steps.images.outcome == 'success' && github.event_name != 'pull_request' && vars.GOCAMPING_IMAGES_PUBLISH != 'false'
-        working-directory: ${{ steps.media.outputs.dir }}
-        run: |
-          git add -A
-          if git rev-parse -q --verify HEAD >/dev/null && git diff --cached --quiet; then echo "이미지 변경 없음."; exit 0; fi
-          git config user.name "moyeora-camping-data-bot"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          MSG="chore(media): official campground images $(date -u +%Y-%m-%dT%H:%MZ)"
-          if git rev-parse -q --verify HEAD >/dev/null; then git commit -q --amend -m "$MSG"; else git commit -q -m "$MSG"; fi
-          git push --force origin media
-          du -sh --exclude=.git .
       - name: Restore geocode cache
         uses: actions/cache@v4
         with:
@@ -418,6 +407,7 @@ jobs:
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
       - name: Build and publish the refreshed public catalog and explorer
+        id: publish-data
         # 생성물은 마지막에 한 번만 커밋한다. 중간에 catalog를 먼저 push하면 장시간 주변 정보
         # 수집 중 들어온 main 변경과 비FF 충돌해 explorer 발행이 실패할 수 있다.
         if: always()
@@ -500,6 +490,22 @@ jobs:
           KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY || secrets.KAKAO_JS_KEY }}
           MEDIA_DIR: ${{ steps.media.outputs.dir }}
           GISCUS_CONFIG: ${{ vars.GISCUS_CONFIG }}
+      - name: Publish the media branch (single commit, force push)
+        # 소유자 요청(2026-10-13)으로 공식 사진을 자체 저장한다. 권리자 요청 시 media 브랜치에서 지우고 재배포한다.
+        if: steps.images.outcome == 'success' && steps.publish-data.outcome == 'success' && github.event_name != 'pull_request' && vars.GOCAMPING_IMAGES_PUBLISH != 'false'
+        working-directory: ${{ steps.media.outputs.dir }}
+        run: |
+          # 사이트 데이터 발행이 성공한 뒤에만, 그리고 사진이 줄지 않을 때만 덮어쓴다.
+          git fetch -q --depth=1 origin +media:refs/remotes/origin/media 2>/dev/null && git show origin/media:manifest.json > "$RUNNER_TEMP/media-prev.json" 2>/dev/null || echo '{"camps":{}}' > "$RUNNER_TEMP/media-prev.json"
+          node "$GITHUB_WORKSPACE/.github/scripts/media-guard.mjs" "$RUNNER_TEMP/media-prev.json" manifest.json
+          git add -A
+          if git rev-parse -q --verify HEAD >/dev/null && git diff --cached --quiet; then echo "이미지 변경 없음."; exit 0; fi
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          MSG="chore(media): official campground images $(date -u +%Y-%m-%dT%H:%MZ)"
+          if git rev-parse -q --verify HEAD >/dev/null; then git commit -q --amend -m "$MSG"; else git commit -q -m "$MSG"; fi
+          git push --force origin media
+          du -sh --exclude=.git .
       - name: Load the fact store into the throwaway PostgreSQL (twice)
         # data/facts(원자 사실)가 db/011 제약(확정 등급은 원천 URL 필수 등)을 지키는지 실데이터로 확인한다.
         if: always()

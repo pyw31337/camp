@@ -33,6 +33,8 @@ jobs:
       - run: npm run install:ci
       - run: npm run lint
       - run: npm run build
+      - name: Data sync safety (media/profile regression)
+        run: node --test ../pipeline/test/data-sync-safety.test.mjs
       # workflow_dispatch(데이터 봇 PR) 결과는 PR 검사 목록에 안 잡혀서, 같은 이름의 커밋 상태로도 남긴다(main 룰셋 필수 검사).
       - name: Report commit status for bot PRs
         if: always() && github.event_name == 'workflow_dispatch'

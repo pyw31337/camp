@@ -38,6 +38,10 @@ const MAX_BYTES = envNum("IMAGE_MAX_BYTES", DEFAULTS.maxBytes);
 const BUDGET = envNum("IMAGE_BUDGET_MB", 900) * 1024 * 1024;
 // 0이면 기존 갤러리를 유지한다. 초기 전국 커버리지가 부족할 때만 워크플로가 1로 준다.
 const MAX_STORED_PER_CAMP = envNum("IMAGE_MAX_STORED_PER_CAMP", 0);
+// 기존 사진을 줄이는 정리는 권리자 요청 등으로 IMAGE_ALLOW_SHRINK=1을 줄 때만 한다(2026-10-21 7,274장 삭제 사고).
+const ALLOW_SHRINK = process.env.IMAGE_ALLOW_SHRINK === "1";
+const STORED_CAP = ALLOW_SHRINK ? MAX_STORED_PER_CAMP : 0;
+if (MAX_STORED_PER_CAMP > 0 && !ALLOW_SHRINK) console.log(`IMAGE_MAX_STORED_PER_CAMP=${MAX_STORED_PER_CAMP} 무시: 기존 사진은 줄이지 않고 더하기만 합니다.`);
 
 /** MEDIA_DIR/camps 아래 파일 [{rel, size}] */
 async function listMedia() {
@@ -67,9 +71,9 @@ await mkdir(MEDIA_DIR, { recursive: true });
 const startedAt = new Date().toISOString();
 const manifestPath = join(MEDIA_DIR, "manifest.json");
 const previousManifest = await readJson(manifestPath, { camps: {} });
-const prev = limitManifestPerCamp(previousManifest, MAX_STORED_PER_CAMP);
+const prev = limitManifestPerCamp(previousManifest, STORED_CAP);
 let prePruned = 0;
-if (MAX_STORED_PER_CAMP > 0) {
+if (STORED_CAP > 0) {
   for (const f of orphanFiles(prev, (await listMedia()).map((x) => x.rel))) {
     await rm(join(MEDIA_DIR, f), { force: true });
     prePruned++;
@@ -116,7 +120,7 @@ const failuresPath = join(MEDIA_DIR, "failures.json");
 const failures = await readJson(failuresPath, {});
 const desired = desiredImages(campgrounds, cache, {
   maxPerCamp: PER_CAMP,
-  maxTotalPerCamp: MAX_STORED_PER_CAMP,
+  maxTotalPerCamp: STORED_CAP,
 });
 const { jobs, pending, alreadyDone } = planDownloads(desired, prev, { fileExists, failures, maxDownloads: MAX_DL });
 console.log(`원하는 사진 ${[...desired.values()].reduce((n, l) => n + l.length, 0)}장(${desired.size}곳), 이미 있음 ${alreadyDone}, 남은 ${pending}, 이번 실행 ${jobs.length}`);
@@ -179,7 +183,7 @@ const mergedManifest = mergeManifest(prev, desired, results, {
   preserveUnseen: true,
   refreshedImageListIds: [...refreshedImageListIds],
 });
-const manifest = limitManifestPerCamp(mergedManifest, MAX_STORED_PER_CAMP);
+const manifest = limitManifestPerCamp(mergedManifest, STORED_CAP);
 await writeJsonAtomic(manifestPath, manifest);
 await writeJsonAtomic(join(MEDIA_DIR, "hero.json"), { generated_at: startedAt, credit: IMAGE_CREDIT, thumbs: heroIndex(manifest) });
 // 원하는 목록에서 빠진 원본의 실패 기록은 버린다.
