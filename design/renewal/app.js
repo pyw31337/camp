@@ -3571,7 +3571,7 @@ function loadKakao() {
   }));
 }
 // 지도를 만든 뒤 바탕 타일이 실제로 그려졌는지 확인한다(키 거부·429면 SDK는 떠도 타일이 오지 않는다).
-function kakaoTilesOk(kakao, map, el, ms = 6000) {
+function kakaoTilesOk(kakao, map, el, ms = 10000) {
   return new Promise((ok, no) => {
     let done = false;
     const fin = (good, why) => { if (done) return; done = true; clearTimeout(t); good ? ok() : (kakaoDead = true, console.warn("[map] 카카오 타일 실패 → OSM:", why), no(new Error(why))); };
