@@ -1,0 +1,21 @@
+name: private-dayuse-weekly
+# 수도권 사설 당일 나들이 후보 찾기(주 1회). 결과는 커밋하지 않고 Actions 결과 파일(검토 큐)로만 남긴다 — 카카오·네이버 약관.
+on:
+  schedule: [{ cron: "0 19 * * 1" }]
+  workflow_dispatch:
+permissions: { contents: read }
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: node pipeline/scripts/discover-private-dayuse.mjs "$RUNNER_TEMP/review-queue.json"
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          NAVER_API_HUB_CLIENT_ID: ${{ secrets.NAVER_API_HUB_CLIENT_ID }}
+          NAVER_API_HUB_CLIENT_SECRET: ${{ secrets.NAVER_API_HUB_CLIENT_SECRET }}
+      - uses: actions/upload-artifact@v4
+        with: { name: private-dayuse-review-queue, path: "${{ runner.temp }}/review-queue.json", retention-days: 14 }
