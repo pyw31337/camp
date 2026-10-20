@@ -131,8 +131,13 @@ export async function mount(el, camp) {
   const data = await load();
   const id = String(camp?.id ?? "");
   const today = kstToday();
-  const all = eventsFor(data, id, today);
-  if (!all.length) return;
+  if (!all.length) {
+    el.hidden = false;
+    const body = el.querySelector("[data-events-body]") ?? el;
+    body.innerHTML = '<p class="muted" style="padding: 24px 0; color: var(--ink-3); text-align: center; font-size: .88rem;">가까운 30km 안에 예정된 축제·행사가 없습니다.</p>';
+    return;
+  }
+  el.hidden = false;
   if (!document.getElementById("ev-style")) { const s = document.createElement("style"); s.id = "ev-style"; s.textContent = STYLE; document.head.append(s); }
   let [kmMax, days] = autoRange(all, today);
   const body = el.querySelector("[data-events-body]") ?? el;
