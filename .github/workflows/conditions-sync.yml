@@ -30,6 +30,9 @@ permissions:
   pull-requests: write
   actions: write
 
+env:
+  GH_TOKEN: ${{ github.token }}  # land-on-main.sh (gh)
+
 concurrency:
   group: conditions-${{ github.ref }}
   cancel-in-progress: false
