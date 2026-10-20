@@ -721,7 +721,7 @@ function trendingShell() {
     <div class="sec-head">
       <h2 id="tr-t">실시간 <em>인기</em></h2>
       <div class="sec-side">
-        <a class="more-link" href="#/theme/POPULAR">더보기 ${ic("arr-right")}</a>
+        <a class="link more-link" href="#/theme/POPULAR">더보기 ${ic("right")}</a>
       </div>
     </div>
     <div class="rail trending-rail" data-tr-rail>${Array.from({ length: 4 }, () => `<div class="tr-card tr-skel" aria-hidden="true"><span class="tr-ph"></span><b></b><i></i></div>`).join("")}</div>
@@ -774,16 +774,16 @@ function homeView() {
     return `<a class="theme-card" href="#/theme/${encodeURIComponent(key)}" draggable="false"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy" draggable="false"><span><b>${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
   }).join("");
   const openingSection = openings.length ? `<section class="opens" aria-labelledby="op-t">
-    <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><div class="sec-side"><a class="more-link" href="#/theme/OPEN">더보기 ${ic("arr-right")}</a></div></div>
+    <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><div class="sec-side"><a class="link more-link" href="#/theme/OPEN">더보기 ${ic("right")}</a></div></div>
     <div class="rail opens-rail">${openings.map(([c, o]) => `<a class="open-card" href="#/c/${encodeURIComponent(c.id)}" draggable="false">${imageTag(photosOf(c)[0] ?? "", "", { sizes: "250px" })}<span class="open-dd">${esc(o.txt)}</span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))} · ${esc(o.platform ?? "")}</i></a>`).join("")}</div>
   </section>` : "";
   const picks = reviewPicks();
   const reviewSection = picks.length ? `<section class="review-picks" aria-labelledby="review-picks-t">
-    <div class="sec-head"><div><h2 id="review-picks-t">긍정 <em>후기</em></h2></div><div class="sec-side"><a class="more-link" href="#/theme/REVIEWS">더보기 ${ic("arr-right")}</a></div></div>
+    <div class="sec-head"><div><h2 id="review-picks-t">긍정 <em>후기</em></h2></div><div class="sec-side"><a class="link more-link" href="#/theme/REVIEWS">더보기 ${ic("right")}</a></div></div>
     <div class="rail review-picks-rail">${picks.map(reviewPickCard).join("")}</div>
   </section>` : "";
   const themeSection = themeItems ? `<section class="themes-catalog" aria-labelledby="theme-t">
-    <div class="sec-head"><h2 id="theme-t">테마로 <em>고르기</em></h2><div class="sec-side"><a class="more-link" href="#/theme/ALL">더보기 ${ic("arr-right")}</a></div></div>
+    <div class="sec-head"><h2 id="theme-t">테마로 <em>고르기</em></h2><div class="sec-side"><a class="link more-link" href="#/theme/ALL">더보기 ${ic("right")}</a></div></div>
     <div class="rail theme-catalog-rail">${themeItems}</div>
   </section>` : "";
   return `
@@ -842,7 +842,7 @@ function themeRow([k, label, test], list, first, used) {
   if (items.length < 3) return "";
   items.forEach((c) => used.add(c.id));
   return `<section class="trow" aria-label="${esc(label)}">
-    <div class="trow-head"><h3>${esc(label)} <i>${fmt(all.length)}</i></h3><button type="button" class="more-link" data-theme-all="${k}">더보기 ${ic("arr-right")}</button></div>
+    <div class="trow-head"><h3>${esc(label)} <i>${fmt(all.length)}</i></h3><button type="button" class="link more-link" data-theme-all="${k}">더보기 ${ic("right")}</button></div>
     <div class="rail trow-rail">${items.map((c, i) => card(c, first && i < 4 ? i : 9)).join("")}</div>
   </section>`;
 }

@@ -1675,3 +1675,6 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 .tr-src img.daum-logo { flex: 0 0 14px; width: 14px; height: 14px; padding: 0; transform-origin: center; border-radius: 4px; background: #fff; box-shadow: inset 0 0 0 1px var(--line); object-fit: contain; }
 .plat-hub .plat-ic.plat-ic-img { background: #fff; box-shadow: inset 0 0 0 1px var(--line); }
 .plat-hub .plat-ic.plat-ic-img img.daum-logo { width: 24px; height: 24px; object-fit: contain; }
+/* 홈 섹션 제목 오른쪽 '더보기'(소유자 2026-10-20): 버튼이 아니라 다른 텍스트 링크(.link, 예: 업체 정보 '고캠핑 >')와 같은 모양 + 오른쪽 '>' 아이콘. */
+.more-link { padding: 0; border: 0; background: none; box-shadow: none; border-radius: 0; height: auto; cursor: pointer; font: inherit; font-weight: 700; color: var(--ink-2); font-size: .92rem; white-space: nowrap; }
+.more-link:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
