@@ -267,6 +267,12 @@ const INVITE_OK_SET = new Set([
   "7901", "7928", "7934", "7967", "8196", "930",
 ]);
 const noBadge = (k) => (NO_TAGS[k] ? `<span class="bdg bdg-no">${ic(NO_TAGS[k][1])}${esc(NO_TAGS[k][0])}</span>` : "");
+function waterOff(c) {
+  if (!isWaterPlayCamp(c)) return false;
+  const pub = ["LOCAL_GOVERNMENT", "NATIONAL_PARK", "PUBLIC_LEISURE", "NATURAL_RECREATION_FOREST"].includes(c.op);
+  const m = new Date().getMonth() + 1;
+  return pub && (m < 6 || m > 8);
+}
 function badges(c, max = 4, maxNo = 2) {
   const f = facts(c), out = [];
   if (waterOff(c)) out.push(`<span class="bdg bdg-no">운영종료</span>`);
