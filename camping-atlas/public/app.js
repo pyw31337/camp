@@ -342,8 +342,9 @@ const VISITOR_IDS = new Set(["100141","101239","101366","101394","1075","1641","
 const PICNIC_IDS = new Set(["100148","100199","100264","100456","100462","100628","100629","100699","100748","100804","100931","100998","101031","101111","101134","101140","101297","101335","101414","101518","101522","101606","101664","101756","101764","101801","101819","101826","101855","101939","102128","102242","1043","1318","1528","1696","190","2179","2304","2358","3105","3519","357","467","508","525","597","6951","6972","6980","7039","7124","7132","7235","7271","7768","7903","8048","8054","8206","919","1467","7709","102126","102324","8121","100342","2394","101420","2793","8150","101520","101977","102044","102272","7447","100720","101081","101889","102178","420","6753","101642","101705","102110","102125","102237","101997","102211","7542","101217","8133","100916","102170","550","101399","102121","102129","101789","101795","101295","101396","101655","101858","101805","102011","7913","101508","100223","101368","101387","101425","231","101319","101381","101550","604","3205","3375","101611","101496","101869","101600","526","101450","101356","101236","101891","101242","101206","2848","100260","101672","101818","2820","101774","1931","90","100762","100799","101114","101234","101014","101104","101184","101207","101069","101171","7932","100980","101080","101085","101100","101152","101158","101162","101180","101196","101211","101231","101613","100359","101526","100172","100138","101305","100257","100345","100522","2534","101191","101296","100668","100378","102374","102375"]);
 const isVisitorCamp = (c) => VISITOR_IDS.has(String(c.id)) || /지인|방문객|방문자|손님\s*초대/.test(`${c.name} ${c.line ?? ""} ${(c.amenities ?? []).join(" ")} ${JSON.stringify(c.pf ?? "")}`);
 const isPicnicCamp = (c) => PICNIC_IDS.has(String(c.id)) || ((/피크닉|캠크닉|바베큐|바비큐|평상|쉼터|당일\s*(캠핑|피크닉|이용)/i.test(`${c.name} ${(c.types ?? []).join(" ")} ${(c.amenities ?? []).join(" ")} ${c.pf?.s ?? ""} ${JSON.stringify(c.fee ?? "")}`)) && !/당일\s*(취소|환불)/.test(`${c.name} ${c.pf?.s ?? ""}`));
-const isParkCamp = (c) => /공원|유원지|휴양림|수변공원|생태공원|체육공원|국립공원|도립공원|군립공원|시민공원|근린공원/.test(c.name) || /공원/.test(c.addr ?? "") || ((c.fee?.min === 0 || c.pf?.p?.min === 0) && (c.op === "지자체" || c.op === "국립"));
-const isWaterPlayCamp = (c) => Boolean(c.pf?.t?.includes("WATER_PLAY") || (c.amenities ?? []).some((a) => /물놀이|수영|풀장|워터/.test(a)) || c.field_conditions?.features?.includes("SWIMMING_POOL"));
+// 공원: 당일 공원(c.du=park) 또는 이름이 공원·유원지인 곳. 휴양림(숙박 유료)은 빼고(2026-10-20 소유자 P0).
+const isParkCamp = (c) => c.du === "park" || (/공원|유원지/.test(c.name) && !/휴양림/.test(c.name));
+const isWaterPlayCamp = (c) => Boolean(c.pf?.t?.includes("WATER_PLAY") || (c.amenities ?? []).some((a) => /물놀이장|물놀이터|수영장|풀장|워터/.test(a)) || c.field_conditions?.features?.includes("SWIMMING_POOL"));
 const THEMES = [
   ["POPULAR", "실시간 인기", (c) => Boolean(c.m7 || c.rv?.n > 5)],
   ["VALLEY", "계곡", (c) => c.pf?.t?.includes("VALLEY")],
@@ -1190,7 +1191,7 @@ const maxSide = (c) => (c._ms ??= Math.max(0, ...(c.field_conditions?.site_size?
 const wattsOf = (c) => (c._w ??= facts(c).power?.w ?? 0);
 const hasPower = (c) => (c._pw ??= Boolean(facts(c).power?.ok));
 const petOk = (c) => (/가능/.test(c.pets ?? "") && !/불가/.test(c.pets ?? "")) || Boolean(c.pf?.t?.includes("PET_OK"));
-const dayUse = (c) => (c.types ?? []).includes("캠프닉") || /캠프닉|캠크닉|데이\s*캠핑|당일\s*(캠핑|이용)/.test(`${c.name} ${(c.amenities ?? []).join(" ")} ${c.pf?.s ?? ""}`);
+const dayUse = (c) => Boolean(c.du) || (c.types ?? []).some((t) => t === "캠크닉" || t === "캠프닉") || /캠프닉|캠크닉|데이\s*캠핑|당일\s*(캠핑|이용)/.test(`${c.name} ${(c.amenities ?? []).join(" ")} ${c.pf?.s ?? ""}`);
 // 상품 조건은 등록·운영자 근거가 있는 타입만(후기 언급 m은 “있다”의 근거로 약하다).
 const hasFirmType = (c, k) => (c.st ?? []).some((t) => t[0] === k && t[2] !== "m");
 const KINDS = [
@@ -1201,7 +1202,7 @@ const KINDS = [
   ["HOUSE", "숙박동·방갈로", (c) => hasFirmType(c, "HOUSE")],
   ["RV", "캠핑카·트레일러", (c) => hasFirmType(c, "RV") || c.trailer === true],
   ["CAR_CAMP", "차박", (c) => hasFirmType(c, "CAR_CAMP")],
-  ["DAY", "당일 캠프닉", dayUse],
+  ["DAY", "당일 캠크닉", dayUse],
 ];
 const KIND = Object.fromEntries(KINDS.map(([k, l, t]) => [k, { label: l, test: t }]));
 const W_OPTS = [[0, "상관없음"], [1, "전기 있음"], [600, "600W 이상"], [1100, "1,100W 이상"]];
@@ -1367,7 +1368,7 @@ function paintCondSheet() {
 // 히어로 아래 바로 쓰는 예시 조건(소유자 예시를 그대로 버튼으로)
 const PRESETS = [
   ["반려견 동반", { pet: true }], ["1,100W 이상 전기", { w: 1100 }], ["사이트 8m 이상", { size: 8 }],
-  ["글램핑·카라반", { kind: ["GLAMPING", "CARAVAN"] }], ["당일 캠프닉", { kind: ["DAY"] }], ["장작 불멍", { fire: true }],
+  ["글램핑·카라반", { kind: ["GLAMPING", "CARAVAN"] }], ["당일 캠크닉", { kind: ["DAY"] }], ["장작 불멍", { fire: true }],
 ];
 
 // ── 화면: 목록(히어로 검색 결과) ─────────────────────────────
@@ -1847,6 +1848,13 @@ function extraTiles(c, d, f) {
     const isNo = Boolean(x.ok === false || /불가|금지|불가능/.test(String(x.v)));
     out.push(`<div class="tile${isNo ? " tile-no" : ""}"><span class="tile-ic">${ic(icon)}</span><span class="tile-l">${label}</span><b class="tile-v">${esc(serviceText(x.v, 48))}${asOfMention(x)}</b><span class="tile-g">${dot(x.g)}${srcTip(x, label)}</span></div>`);
   };
+  // 당일 나들이: 취사·그늘막(원문 근거가 있을 때만 값, 없으면 '미확인' — 취사 가능을 추정하지 않는다)
+  if (c.du) {
+    const ck = d?.day?.cooking, sh = d?.day?.shade;
+    const COOK = { PROHIBITED: "취사 금지", PROHIBITED_OUTSIDE_DESIGNATED: "지정 장소 외 취사 금지", ALLOWED_GRILL: "지정 바비큐장 이용", ALLOWED_BURNER: "휴대용 버너만", ALLOWED_OPEN_FIRE: "직화·숯 가능", UNKNOWN: "미확인" };
+    add("flame", "취사", ck?.url ? { v: COOK[ck.v] ?? ck.text, g: "c", src: { label: d?.du_src?.label ?? "관리기관 안내", url: ck.url, at: ck.at, quote: ck.text } } : { v: "미확인 · 관리기관에 확인", g: "m", src: { label: "근거 없음" } });
+    if (sh?.url) add("tent", "그늘막", { v: `${sh.v === "ZONE_ONLY" ? "지정 구역만" : sh.v === "PROHIBITED" ? "설치 금지" : "가능"}${sh.size ? ` · ${sh.size}` : ""}`, g: "c", src: { label: d?.du_src?.label ?? "관리기관 안내", url: sh.url, at: sh.at, quote: `${sh.season ?? ""} ${sh.hours ?? ""}`.trim() } });
+  }
   add("users", "방문객", specFact(d, "VISITOR_POLICY"));
   add("clock-in", "얼리 체크인", specFact(d, "EARLY_CHECKIN"));
   add("clock-out", "레이트 체크아웃", specFact(d, "LATE_CHECKOUT"));
@@ -2127,7 +2135,7 @@ async function detailView(id) {
       <aside class="d-side">${reserveCard(c, d)}</aside>
     </header>
     ${galleryHtml(c)}
-    <div class="d-sum">
+    <div class="d-sum"${c.du ? " hidden" : ""}>
       <div><span>확인된 규격</span><b>${known}<i>/${spec.length}</i></b></div>
       <div><span>${ic("file-text")}후기</span><b>${c.rv?.n ? fmt(c.rv.n) : "–"}</b></div>
       <div><span>다음 오픈</span><b class="${o ? "hot" : "muted"}">${o ? esc(o.txt) : "–"}</b></div>
@@ -2277,7 +2285,7 @@ function amenityHtml(c, d) {
   const allCards = [...cntCards, ptCard, ...amCards].filter(Boolean);
   if (!allCards.length && !hasUniqueRental) return "";
 
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("drop", "편의시설")}<span class="sec-note">고캠핑 등록 ${srcTip({ g: "c", src: { label: "고캠핑 등록 편의시설", url: c.gc_url } }, "편의시설")}</span></div>
+  return `<section class="d-sec"><div class="sec-head">${iconTitle("drop", "편의시설")}<span class="sec-note">${c.gc_url ? "고캠핑 등록" : "업장·관리기관 안내"} ${srcTip({ g: "c", src: { label: c.gc_url ? "고캠핑 등록 편의시설" : "업장·관리기관 안내", url: c.gc_url || c.homepage } }, "편의시설")}</span></div>
     ${allCards.length ? `<div class="amen-n">${allCards.join("")}</div>` : ""}
     ${hasUniqueRental ? `<p class="amen-rent"><b>${ic("cart")}대여</b>${rent.map((x) => `<span>${esc(x)}</span>`).join("")}</p>` : ""}
   </section>`;
@@ -2357,11 +2365,13 @@ function priceRows(c, d) {
     } else {
       const pf = profFact(PF(d, "PRICE"));
       const fee = c.fee;
-      if (pf?.v) addStay(0, "캠핑 사이트 (1박 기준)", "대표 요금", pf, "", wonText(detailValue(pf)));
+      const unit = c.du ? "당일 이용" : "캠핑 사이트 (1박 기준)";
+      if (c.du && fee && Number(fee.min) === 0 && (fee.g === "FREE" || /무료/.test(fee.text ?? ""))) addStay(0, "입장", "관리기관 안내", { g: "c", src: { label: d?.du_src?.label || "관리기관 안내", url: d?.du_src?.url || c.homepage, at: d?.du_src?.checked_at } }, "", "무료");
+      else if (pf?.v) addStay(0, unit, "대표 요금", pf, "", wonText(detailValue(pf)));
       else if (fee) {
         const lo = Number(fee.min), hi = Number(fee.max ?? fee.min);
         const range = lo > 0 ? `${fmt(lo)}${hi > lo ? `~${fmt(hi)}` : ""}원${/대\s*$/.test(fee.text ?? "") ? "대" : ""}` : wonText(fee.text ?? "");
-        addStay(0, "캠핑 사이트 (1박 기준)", "대표 요금", { g: GR(fee.grade) || "m", src: { label: sourceName(fee.basis, "요금 근거"), url: fee.url, at: fee.checked_at, quote: fee.quote } }, "", range);
+        addStay(0, unit, "대표 요금", { g: GR(fee.grade) || "m", src: { label: sourceName(fee.basis, "요금 근거"), url: fee.url, at: fee.checked_at, quote: fee.quote ?? fee.text } }, "", range);
       }
     }
   }
@@ -2531,7 +2541,7 @@ function priceHtml(c, d) {
   const allItemsHtml = `${stayItems}${extraDivider}${extraItems}`;
   const foot = bs?.url ? `<p class="st-foot">요금은 날짜마다 달라요. <a href="${esc(bs.url)}" target="_blank" rel="noopener">날짜별 예약 화면 열기</a></p>` : "";
 
-  return `<section class="d-sec price-sec" id="sec-price"><div class="sec-head">${iconTitle("won", "1박 요금")}<span class="sec-note">업장 등록 우선 · 후기는 참고</span></div>${allItemsHtml ? `<ul class="plist">${allItemsHtml}</ul>` : ""}${foot}</section>`;
+  return `<section class="d-sec price-sec" id="sec-price"><div class="sec-head">${iconTitle("won", c.du ? "이용 요금" : "1박 요금")}<span class="sec-note">업장 등록 우선 · 후기는 참고</span></div>${allItemsHtml ? `<ul class="plist">${allItemsHtml}</ul>` : ""}${foot}</section>`;
 }
 // 이용 규칙 · 공지(2026-10-19 소유자: 금지사항·이용수칙·이용제한은 업장 이용에 매우 중요 — 수집해서 노출, 공지는 눌러 바로 원문으로).
 // build-house-rules.mjs → d.house_rules { tags, rules[{cat,text,url,at}], ops, notices[{title,date,url}] }. 업장 공개 문장만(후기 제외).
