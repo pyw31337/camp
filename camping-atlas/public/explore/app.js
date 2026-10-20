@@ -2250,7 +2250,7 @@ async function detailView(id) {
       <aside class="d-side">${reserveCard(c, d)}</aside>
     </header>
     ${galleryHtml(c)}
-    <nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${[["sec-price", "요금"], ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-nearby", "주변"], ["sec-events", "축제"], ["sec-reviews", "후기"], ["sec-info", "업체"]].map(([id, l]) => `<a href="#${id}" data-jump="${id}">${l}</a>`).join("")}</div></nav>
+    <nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${[["sec-price", "요금"], ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-nearby", "주변"], ["sec-events", "축제"], ["sec-reviews", "후기"], ["sec-info", "업체"]].map(([id, l], i) => `<a href="#${id}" data-jump="${id}"${i === 0 ? " aria-current" : ""}>${l}</a>`).join("")}</div></nav>
     <div class="d-body">
       <div class="d-main">
         ${siteTypesHtml(c, d)}
