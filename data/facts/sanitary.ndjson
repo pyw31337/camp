@@ -3765,6 +3765,7 @@
 {"cid":"100753","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100753","attr":"SHOWER_COUNT","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100753","attr":"TOILET_COUNT","value":10,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100755","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"http://xn--bj0bw3p2d313dx8niqc4wb.com/","at":"2026-10-20T05:57:44.684Z","quote":"미온수풀"}
 {"cid":"100755","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100755","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100755","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
@@ -4026,7 +4027,10 @@
 {"cid":"100912","attr":"PRIVATE_BATHROOM","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/vivaldipark","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"100912","attr":"SHOWER_COUNT","value":15,"grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/vivaldipark","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"100912","attr":"TOILET_COUNT","value":15,"grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/vivaldipark","at":"2026-10-15T09:00:00+09:00"}
+{"cid":"100913","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"http://nobleglamping.com/theme/basic_slider/userguide/userguide.php","at":"2026-10-20T05:57:43.681Z","quote":"미온수 온도 : 28도~"}
 {"cid":"100913","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"100913","attr":"PRIVATE_BATHROOM","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"http://nobleglamping.com/","at":"2026-10-20T05:57:43.681Z","quote":"전 객실 깨끗한 개별 화장실이 있습니다."}
+{"cid":"100913","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100914","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100914","attr":"SHOWER_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100914","attr":"TOILET_COUNT","value":4,"grade":"CONFIRMED","src":"gocamping"}
@@ -4954,6 +4958,7 @@
 {"cid":"101381","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101381","attr":"SHOWER_COUNT","value":9,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101381","attr":"TOILET_COUNT","value":10,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101383","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"http://www.xn--2r5b1f27r1nh.com/contents/02_facility/sub01.html","at":"2026-10-20T05:57:04.805Z","quote":"개수대, 화장실, 샤워장 모두 따뜻한 온수 사용이 가능합니다."}
 {"cid":"101383","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"101384","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b14h95dtwuvlp59a.com/contents/main.html","at":"2026-10-20T01:12:52.946Z","quote":"사계절미온수풀"}
 {"cid":"101384","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
@@ -6095,8 +6100,8 @@
 {"cid":"102368","attr":"TOILET_COUNT","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102369","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"102371","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
-{"cid":"park-11470-00053","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-20","text":"제공"}
-{"cid":"park-11530-00001","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-20","text":"제공"}
+{"cid":"park-11470-00053-1fjvz","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-20","text":"제공"}
+{"cid":"park-11530-00001-zfqdi","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-20","text":"제공"}
 {"cid":"pilot-002-sureui","attr":"HOT_WATER","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032","at":"2026-10-15T09:00:00+09:00","text":"24시간"}
 {"cid":"pilot-002-sureui","attr":"SHOWER_COUNT","value":4,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-002-sureui","attr":"TOILET_COUNT","value":6,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032","at":"2026-10-15T09:00:00+09:00"}
