@@ -2226,3 +2226,6 @@ details[open] > *:not(summary) {
   }
 }
 
+
+.card.is-off .thumb, .card.is-off img { filter: grayscale(1); }
+.card.is-off { order: 1; }

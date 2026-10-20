@@ -269,6 +269,7 @@ const INVITE_OK_SET = new Set([
 const noBadge = (k) => (NO_TAGS[k] ? `<span class="bdg bdg-no">${ic(NO_TAGS[k][1])}${esc(NO_TAGS[k][0])}</span>` : "");
 function badges(c, max = 4, maxNo = 2) {
   const f = facts(c), out = [];
+  if (waterOff(c)) out.push(`<span class="bdg bdg-no">운영종료</span>`);
   if (INVITE_OK_SET.has(String(c.id))) out.push(`<span class="bdg bdg-teal">${ic("users")}초대가능</span>`);
   if (pos(f.power) && f.power.ok && f.power.w) out.push(`<span class="bdg bdg-volt">${ic("bolt")}${esc(f.power.short)}</span>`);
   if (pos(f.fire) && f.fire.kind === "FIREWOOD_OK") out.push(`<span class="bdg bdg-flame">${ic("flame")}장작</span>`);
@@ -490,7 +491,7 @@ function results() {
   if (S.sort === "name") list.sort((a, b) => nameOf(a).name.localeCompare(nameOf(b).name, "ko"));
   else list.sort((a, b) => rich(b) - rich(a));
   // 사진이 한 장도 없는 곳은 뒤로(이름으로 직접 찾은 곳은 제외)
-  return list.sort((a, b) => photoLast(a) - photoLast(b));
+  return list.sort((a, b) => (waterOff(a) - waterOff(b)) || photoLast(a) - photoLast(b));
 }
 
 // ── 사진 ─────────────────────────────────────────────────────
