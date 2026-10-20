@@ -340,39 +340,39 @@
       "in_catalog": true
     },
     {
-      "id": "",
+      "id": "102373",
       "name": "펀앤펀 캠프",
       "region": "경기 파주시 문산읍",
       "fee": "테이블 4~12만원, 몽골텐트 7~15만원",
       "source": "https://booking.naver.com/booking/12/bizes/1085778",
-      "in_catalog": false,
+      "in_catalog": true,
       "note": "당일 전용. 음식 반입·배달 가능. 버너 제공. 야외 수영장."
     },
     {
-      "id": "",
+      "id": "102374",
       "name": "양주 삼상리마켓",
       "region": "경기 양주시",
       "fee": "바비큐장 당일",
       "source": "https://m.blog.naver.com/official_lotterental/223127866396",
-      "in_catalog": false,
+      "in_catalog": true,
       "note": "캠크닉·바비큐 당일."
     },
     {
-      "id": "",
+      "id": "102375",
       "name": "용인 베리가든",
       "region": "경기 용인시",
       "fee": "농장 피크닉",
       "source": "https://m.blog.naver.com/official_lotterental/223127866396",
-      "in_catalog": false,
+      "in_catalog": true,
       "note": "아이와 당일 캠크닉."
     },
     {
-      "id": "",
+      "id": "102376",
       "name": "라까시나 이태리",
       "region": "경기 광주시",
       "fee": "8,000~30,000원",
       "source": "https://www.outdoornews.co.kr/news/articleView.html?idxno=34963",
-      "in_catalog": false,
+      "in_catalog": true,
       "note": "당일 피크닉 전용."
     }
   ]
