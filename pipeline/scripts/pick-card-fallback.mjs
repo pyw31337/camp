@@ -34,7 +34,9 @@ async function worker() {
     const path = join(dataDir, "camps", `${c.id}.json`);
     if (!existsSync(path)) continue;
     let d; try { d = JSON.parse(readFileSync(path, "utf8")); } catch { continue; }
-    const cands = orderCandidates(d.sns_images).slice(0, MAX_TRY);
+    // 후보: 이미지 검색(sns_images) → 없으면 블로그·카페 후기 글의 대표 썸네일(소유자 2026-10-20: 사진이 전혀 없으면 후기에서라도)
+    const posts = [...(d.reviews ?? []), ...(d.cafe ?? []), ...(d.web ?? [])].filter((x) => x?.thumb && x?.url).map((x) => ({ thumb: x.thumb, img: null, url: x.url, src: x.src ?? "블로그 후기", date: x.date ?? null }));
+    const cands = [...orderCandidates(d.sns_images), ...posts].slice(0, MAX_TRY + 4);
     // 지난번에 고른 사진이 아직 후보에 있으면 그대로(다시 받지 않음)
     const old = prev[c.id];
     if (old && cands.some((x) => x.thumb === old.t)) { out[c.id] = old; kept++; continue; }

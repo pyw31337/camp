@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-20T01:23:31.419Z",
+ "updated_at": "2026-10-20T01:50:20.795Z",
  "policy": "공식 사진이 없는 곳만. 카카오 검색 API 결과의 썸네일·원문 링크만 저장(이미지 재호스팅 없음). 픽셀 규칙으로 배치도·안내판·야간 사진을 거름.",
  "camps": {
   "222": {
@@ -33,6 +33,14 @@
    "s": "티스토리",
    "d": "2026-05-26",
    "at": "2026-10-20T01:23:07.243Z"
+  },
+  "655": {
+   "i": null,
+   "t": "https://search3.kakaocdn.net/argon/130x130_85_c/58A7k61at0h",
+   "u": "https://traveler-note.tistory.com/118",
+   "s": "트래블러K",
+   "d": "2024-08-02",
+   "at": "2026-10-20T01:50:18.396Z"
   },
   "672": {
    "i": "https://postfiles.pstatic.net/MjAyNjA4MjBfMTI0/MDAxNzg3MTkzOTE1NDM2.5d6m8qF_6-EivvuQYdL37f3zF51UH3-OBlVsBxVoAswg.nTrCUU2Vojcb9IntaolLTfIh01IghUE-85sYj1XbsMog.JPEG/900_20260815_134823.jpg?type=w386",
@@ -554,6 +562,14 @@
    "d": "2025-11-12",
    "at": "2026-10-20T01:23:21.546Z"
   },
+  "7484": {
+   "i": null,
+   "t": "https://search2.kakaocdn.net/argon/130x130_85_c/KbYErZO5LKZ",
+   "u": "https://traveler-note.tistory.com/140",
+   "s": "트래블러K",
+   "d": "2024-08-11",
+   "at": "2026-10-20T01:50:18.445Z"
+  },
   "7486": {
    "i": "https://postfiles.pstatic.net/MjAyMjAzMDNfMjQ4/MDAxNjQ2Mjg5MzI1NDIw.ZHy8zw6J5aIIsGPiZ4ZVm4n-UUYMbg02tRVnRrSlaA4g.YP9DjWvAXmdct-7IvsJKLP_jsN0TL1HL6fFFz0RPAWMg.JPEG.hsk7733/IMG_5343.jpg?type=w966",
    "t": "https://search3.kakaocdn.net/argon/130x130_85_c/HbBy5prTP62",
@@ -738,6 +754,14 @@
    "d": "2026-04-23",
    "at": "2026-10-20T01:23:05.161Z"
   },
+  "100047": {
+   "i": null,
+   "t": "https://search1.kakaocdn.net/argon/130x130_85_c/JdZr6WOZnWd",
+   "u": "https://blog.naver.com/tomczy554/224423819141",
+   "s": "캠핑 한스푼",
+   "d": "2026-09-27",
+   "at": "2026-10-20T01:50:19.429Z"
+  },
   "100048": {
    "i": "https://postfiles.pstatic.net/MjAyNDA1MTlfMzUg/MDAxNzE2MTAxNTAyNDI5.xoW6EVzt-bxTWQUnM6lMUbjcOpTPubfe0zjF6eMiTEog.iYuv2yZx9WqqPGCo_nQAAkIizv8CeXR8M4LllYeLGkcg.JPEG/SE-b4f0d6f6-836b-48ea-bb0f-5ca86e30241c.jpg?type=w773",
    "t": "https://search1.kakaocdn.net/argon/130x130_85_c/55DRfxtnHmy",
@@ -761,6 +785,14 @@
    "s": "네이버블로그",
    "d": "2019-06-30",
    "at": "2026-10-20T01:22:09.651Z"
+  },
+  "100239": {
+   "i": null,
+   "t": "https://search4.kakaocdn.net/argon/130x130_85_c/7YbCILmzVny",
+   "u": "https://blog.naver.com/hjstylemm/223899017397",
+   "s": "낚시, 여행, 캠핑, 숙박, 헬스, 골프, 자동차 취미",
+   "d": "2025-06-14",
+   "at": "2026-10-20T01:50:19.614Z"
   },
   "100328": {
    "i": "https://postfiles.pstatic.net/MjAyMTEyMTNfMjI0/MDAxNjM5MzYzNzUwMDU5.U0uEYplvmuygrMGWz4R0Py3UW_JYfMvw_dZh3qj08EEg.IjrbT58OdmBxA7lYvkyv9lKf8Veu35C97146X4j9wAcg.JPEG.pjp6824/Resized_20211213_104444.jpeg?type=w966",
@@ -970,6 +1002,14 @@
    "d": "2023-08-15",
    "at": "2026-10-20T01:23:29.189Z"
   },
+  "101270": {
+   "i": null,
+   "t": "https://search3.kakaocdn.net/argon/130x130_85_c/KfLv2zm1GWP",
+   "u": "https://zoozp.tistory.com/111",
+   "s": "뚜뚜와 로또",
+   "d": "2023-06-09",
+   "at": "2026-10-20T01:50:20.795Z"
+  },
   "101273": {
    "i": "https://dthumb-phinf.pstatic.net/?src=%22https%3A%2F%2Fyt3.googleusercontent.com%2FTegfWYoecmXali2PlcUkHyK2CmwZ6-KpFuYaRAcqdXZLqjF3dp-C9mpiw6Sl84umBw_Ycd6qgg%3Ds900-c-k-c0x00ffffff-no-rj%22&type=ff500_300",
    "t": "https://search2.kakaocdn.net/argon/130x130_85_c/HR5JmXFUeeh",
@@ -1057,6 +1097,14 @@
    "s": "네이버블로그",
    "d": "2026-01-22",
    "at": "2026-10-20T01:23:27.576Z"
+  },
+  "101302": {
+   "i": null,
+   "t": "https://search3.kakaocdn.net/argon/130x130_85_c/IVbQ5uDjyp6",
+   "u": "https://wecancooperation.tistory.com/125",
+   "s": "PARK's Information",
+   "d": "2024-02-17",
+   "at": "2026-10-20T01:50:19.901Z"
   },
   "101303": {
    "i": "https://postfiles.pstatic.net/MjAyNjA0MTNfNDkg/MDAxNzc2MDI3NjE5MjQ1.OvS6eusbXZK2KPiZWazfChQgG6dOF7E2tZmZzs3JHR8g.n2O4oiqElT_TedjZOu_rLbAgD1J-FsqWgCvb3DAOewAg.JPEG/08_final.jpg?type=w773",
@@ -1402,6 +1450,14 @@
    "d": "2025-11-14",
    "at": "2026-10-20T01:23:21.617Z"
   },
+  "101432": {
+   "i": null,
+   "t": "https://search4.kakaocdn.net/argon/130x130_85_c/5IwqLgYcmFt",
+   "u": "https://hotel-iu.tistory.com/6879",
+   "s": "초코초코 해피라이프",
+   "d": "2024-11-14",
+   "at": "2026-10-20T01:50:18.314Z"
+  },
   "101438": {
    "i": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDEwMTFfMjM0%2FMDAxNjAyMzQ5MzE1MDE2.WXZm0cpDrXQUOB_u8wf1UVSuFQdq66jgEhO_B2kQi3og.KubtTxJJq3KyHx334Vo-66DOewXSx-VzBPBjXvat4Hog.JPEG.alzzlvps%2FIMG_9616.JPG&type=a340",
    "t": "https://search3.kakaocdn.net/argon/130x130_85_c/IGTLqgBZ9Po",
@@ -1425,6 +1481,14 @@
    "s": "네이버블로그",
    "d": "2026-10-13",
    "at": "2026-10-20T01:23:22.069Z"
+  },
+  "101444": {
+   "i": null,
+   "t": "https://search1.kakaocdn.net/argon/130x130_85_c/Lw1Wqg1ZQDi",
+   "u": "https://blog.naver.com/qpqp9608/224333329348",
+   "s": "니조월드 ღ'ᴗ'ღ",
+   "d": "2026-07-01",
+   "at": "2026-10-20T01:50:19.674Z"
   },
   "101449": {
    "i": "https://postfiles.pstatic.net/MjAyNDA4MDVfODQg/MDAxNzIyODIxNjAwNDc4.hmvacXJQYZYpwYOWVoz65AJS1vOweJFB3VBPjqIq4aIg.-Bf-KmeB4HwV8MMIhHyl4wM1FGVStEFMNo4aXaLuJDkg.PNG/%EC%B0%BE%EC%95%84_%EC%98%A4%EC%8B%9C%EB%8A%94_%EA%B8%B8.png?type=w580",
@@ -1489,6 +1553,14 @@
    "s": "Daum카페",
    "d": "2025-01-14",
    "at": "2026-10-20T01:23:19.814Z"
+  },
+  "101477": {
+   "i": null,
+   "t": "https://search1.kakaocdn.net/argon/130x130_85_c/Jkoqdt8wmfS",
+   "u": "https://blog.naver.com/sayalone/224433928472",
+   "s": "너의 모든 순간",
+   "d": "2026-10-07",
+   "at": "2026-10-20T01:50:17.399Z"
   },
   "101480": {
    "i": "https://postfiles.pstatic.net/MjAyNTA4MThfMjMw/MDAxNzU1NTAyMTkwMTMy.YiQp6RI4pEkdVR-2EWfn9kuE4FHA2waT4XqsIYdt0RYg.XylFdtr1MwcWeF6wo_-_2omilno1aLx6ECdXy1Hlpm8g.JPEG/%EC%B0%B8%EC%83%88%EB%91%A5%EC%A7%8028.jpg?type=w773",
@@ -1745,6 +1817,14 @@
    "s": "네이버블로그",
    "d": "2026-09-30",
    "at": "2026-10-20T01:23:16.630Z"
+  },
+  "101551": {
+   "i": null,
+   "t": "https://search4.kakaocdn.net/argon/130x130_85_c/7YbCILmzVny",
+   "u": "https://blog.naver.com/hjstylemm/223899017397",
+   "s": "낚시, 여행, 캠핑, 숙박, 헬스, 골프, 자동차 취미",
+   "d": "2025-06-14",
+   "at": "2026-10-20T01:50:19.618Z"
   },
   "101553": {
    "i": "https://dthumb-phinf.pstatic.net/?src=%22https%3A%2F%2Fsearch.pstatic.net%2Fcommon%2F%3FautoRotate%3Dtrue%26quality%3D100%26type%3Df640_380%26src%3Dhttps%253A%252F%252Fldb-phinf.pstatic.net%252F20240910_132%252F1725924317280dV6jU_JPEG%252F%2525C8%2525B8%2525C0%2525FC20240805_175722.jpg%22&type=ff500_300",
@@ -2025,6 +2105,14 @@
    "s": "네이버블로그",
    "d": "2026-05-22",
    "at": "2026-10-20T01:23:11.851Z"
+  },
+  "101631": {
+   "i": null,
+   "t": "https://search2.kakaocdn.net/argon/130x130_85_c/FYWJG7OJutg",
+   "u": "https://zoozp.tistory.com/109",
+   "s": "뚜뚜와 로또",
+   "d": "2023-06-07",
+   "at": "2026-10-20T01:50:19.817Z"
   },
   "101634": {
    "i": "https://postfiles.pstatic.net/MjAyNjA3MDFfODAg/MDAxNzgyOTEyMjUxMTEy.BcKzoxkg5Ij6Ox6I71yWFKvqqWRO5NJHeom_8t9rS_Mg.RBXDEMuvG-MlTfh7Eqy9RrR2CJznLwIiy9zlC4Xc2pYg.JPEG/03_photo_3.jpg?type=w966",
@@ -2809,6 +2897,14 @@
    "s": "네이버블로그",
    "d": "2026-01-23",
    "at": "2026-10-20T01:22:52.721Z"
+  },
+  "101838": {
+   "i": null,
+   "t": "https://search4.kakaocdn.net/argon/130x130_85_c/KWZ4D9KxRwE",
+   "u": "https://blog.naver.com/yamyam_rabbit/224164571192",
+   "s": "얌얌토끼가 잘 먹고 잘 뛰는 이야기",
+   "d": "2026-01-29",
+   "at": "2026-10-20T01:50:18.387Z"
   },
   "101841": {
    "i": "https://dthumb-phinf.pstatic.net/?src=%22https%3A%2F%2Fblogthumb.pstatic.net%2FMjAyNTA5MjBfMjc3%2FMDAxNzU4MzUwOTEzMjM5.bAdyz6ko5xl_E3gGZeDcBGeOtBpkfx0IdY9uArZ1Rqcg.yspe4_I50cBg1FPibLvW4I2Jmwqismy6mxMYbSro6FUg.JPEG%2F900%25A3%25DF20250919%25A3%25DF152049.jpg%3Ftype%3Dw2%22&type=ff500_300",
@@ -3946,6 +4042,14 @@
    "d": "2026-05-11",
    "at": "2026-10-20T01:22:00.144Z"
   },
+  "102127": {
+   "i": null,
+   "t": "https://search4.kakaocdn.net/argon/130x130_85_c/HfShQM7bxc9",
+   "u": "https://blog.naver.com/dagram/224366036728",
+   "s": "Dagram",
+   "d": "2026-08-02",
+   "at": "2026-10-20T01:50:18.159Z"
+  },
   "102128": {
    "i": "https://dthumb-phinf.pstatic.net/?src=%22https%3A%2F%2Fimg.einet.info%2Fpension%2Fsites%2FP202602005%2Fbg%2Fy177146224181.jpg%22&type=ff500_300",
    "t": "https://search2.kakaocdn.net/argon/130x130_85_c/KzuwgJX7jti",
@@ -5018,6 +5122,14 @@
    "d": "2022-08-24",
    "at": "2026-10-20T01:22:07.085Z"
   },
+  "102333": {
+   "i": null,
+   "t": "https://search1.kakaocdn.net/argon/130x130_85_c/LWQn2piExHv",
+   "u": "https://blog.naver.com/placepick_amy/224403147733",
+   "s": "placepick_amy님의 블로그",
+   "d": "2026-09-09",
+   "at": "2026-10-20T01:50:17.603Z"
+  },
   "102334": {
    "i": "https://postfiles.pstatic.net/MjAyNjEwMDZfMjQw/MDAxNzkxMjkyNzAwODM0.VWfHJrDtXGIqpe4XZwG6KNCazvC5p9RpVvi-hRwkdZog.0PC7DL_VCLS2eOXCU2UdKmkNm7RkWtu8mh2qbGDQQTQg.JPEG/output%EF%BC%BF1365539512.jpg?type=w580",
    "t": "https://search2.kakaocdn.net/argon/130x130_85_c/i9m6YKV7Vl",
@@ -5177,6 +5289,14 @@
    "s": "네이버블로그",
    "d": "2026-05-22",
    "at": "2026-10-20T01:22:03.167Z"
+  },
+  "102365": {
+   "i": null,
+   "t": "https://search2.kakaocdn.net/argon/130x130_85_c/BkKjk2Qyaf7",
+   "u": "https://blog.naver.com/0513rain/224437928355",
+   "s": "청주인테리어 꿈꾸는집",
+   "d": "2026-10-11",
+   "at": "2026-10-20T01:50:16.826Z"
   },
   "102366": {
    "i": "https://postfiles.pstatic.net/MjAyNjA3MTlfNjQg/MDAxNzg0Mzg4MDg0MTAx.vLMqz_DNb0DKniVU5xQQ_0tWeoczdJzJ9I146KTwnfUg.gocPE1CK9up9PPR4DjIMfGzVLn1bzb98Y4RL8ZNeF5gg.PNG/image.png?type=w773",
