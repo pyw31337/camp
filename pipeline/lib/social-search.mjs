@@ -17,12 +17,14 @@ export const EXTRA_SEARCHES = [
   { key: "time_blog", type: "blog", suffix: "입실 퇴실", params: { sort: "accuracy", size: 15 } },
 ];
 export const SOCIAL_CACHE_VERSION = 2;
-export const CAPS = { blog: 12, cafe: 6, image: 24, vclip: 10 };
+// 방문 후기는 모은 만큼 모두 보인다(소유자 2026-10-20: “후기는 최대 갯수를 수집해서 보여주되”) → 한 번 호출에 받는 개수(size)를 API 최대치 쪽으로 올렸다.
+// 호출 수는 그대로(캠핑장당 타입별 1회)라 일일 쿼터 사용량은 늘지 않는다.
+export const CAPS = { blog: 40, cafe: 20, image: 40, vclip: 10 };
 // 타입별 1회 호출. blog·cafe는 최신 후기를 보이려고 recency, image·vclip은 엉뚱한 결과를 줄이려고 accuracy.
 export const REQUEST_PLAN = {
-  blog: { sort: "recency", size: 10 },
-  cafe: { sort: "recency", size: 10 },
-  image: { sort: "accuracy", size: 30 },
+  blog: { sort: "recency", size: 50 },
+  cafe: { sort: "recency", size: 30 },
+  image: { sort: "accuracy", size: 50 },
   vclip: { sort: "accuracy", size: 15 },
 };
 

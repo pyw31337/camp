@@ -4,7 +4,8 @@
 // 2026-10-20 소유자: 거리·기간을 셀렉트 2개로 고르고, 기본은 5km·7일에서 진행 중인 행사가 없으면 10km·10일 → 20km·20일 → 30km·45일로 넓힌다.
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const DOW = ["일", "월", "화", "수", "목", "금", "토"];
-const md = (iso) => { const [, m, d] = String(iso).split("-"); const w = DOW[new Date(`${iso}T00:00:00Z`).getUTCDay()]; return `${Number(m)}/${Number(d)}(${w})`; };
+// 날짜는 ‘2026.10.17 (토)’ 꼴(소유자 2026-10-20, 사이트 전체 공통)
+const md = (iso) => { const [y, m, d] = String(iso).split("-"); const w = DOW[new Date(`${iso}T00:00:00Z`).getUTCDay()]; return `${y}.${m}.${d} (${w})`; };
 const km = (v) => (v < 1 ? `${Math.round(v * 100) * 10}m` : `${Number(v).toFixed(1).replace(/\.0$/, "")}km`);
 const kstToday = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
 const addDays = (day, n) => new Date(Date.parse(`${day}T00:00:00Z`) + n * 864e5).toISOString().slice(0, 10);

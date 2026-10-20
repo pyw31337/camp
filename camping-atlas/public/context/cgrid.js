@@ -2,10 +2,11 @@
 // 태블릿부터 여러 단으로 깔고, 처음엔 몇 개만 보이다가 '더보기'로 같은 개수씩 늘린다.
 // 업장 기본 정보(요금·이용 정보·시설·주변시설 등)에는 쓰지 않는다 — 그런 칸은 항상 전부 보인다.
 //
-// 단 수(화면 너비): ~767px 기존 모바일 배치(제한 없음) · 768px~ 2단 · 1024px~ 3단 · 1280px~ 4단 · 1600px~ 5단
+// 단 수(화면 너비, 소유자 2026-10-20: PC는 5단, 좁을수록 줄인다): ~767px 기존 모바일 배치(제한 없음) · 768px~ 3단 · 1024px~ 4단 · 1200px~ 5단
+// 격자에 data-cg-min="2"가 있으면 좁은 화면에서도 그 단 수로 깔고 ‘N개 더보기’를 쓴다(방문 후기처럼 카드가 많은 칸).
 // 처음 개수: 짝수 단은 4나 6 중 단 수의 배수(2단→4, 4단→4, 6단→6), 홀수 단은 5를 기준으로
 //           5 이상인 단 수의 배수(3단→6, 5단→5). 그래서 첫 화면은 늘 줄이 꽉 찬다. 더보기도 같은 개수씩.
-export const BREAKS = [[1600, 5], [1280, 4], [1024, 3], [768, 2]];
+export const BREAKS = [[1200, 5], [1024, 4], [768, 3]];
 export function colsFor(w = (typeof innerWidth === "number" ? innerWidth : 0)) {
   for (const [min, n] of BREAKS) if (w >= min) return n;
   return 1;
@@ -21,7 +22,7 @@ const STATE = new WeakMap();
 export function apply(grid) {
   const st = STATE.get(grid);
   if (!st) return;
-  const cols = colsFor();
+  const cols = Math.max(colsFor(), st.min);
   const page = pageFor(cols);
   grid.style.setProperty("--cg-cols", String(cols));
   if (st.cols !== cols) { st.cols = cols; st.n = page; }
@@ -41,12 +42,14 @@ export function setup(grid, { filter } = {}) {
   grid.classList.add("cgrid");
   const wrap = document.createElement("div");
   wrap.className = "cg-more-wrap";
+  const min = Number(grid.dataset.cgMin) || 1;
+  if (min > 1) { grid.classList.add("cg-keep"); wrap.classList.add("cg-keep"); }
   const btn = document.createElement("button");
   btn.type = "button";
   btn.className = "cg-more";
   wrap.append(btn);
   grid.after(wrap);
-  STATE.set(grid, { filter, btn, cols: 0, n: 0 });
+  STATE.set(grid, { filter, btn, cols: 0, n: 0, min });
   btn.addEventListener("click", () => { const st = STATE.get(grid); st.n += pageFor(st.cols); apply(grid); });
   apply(grid);
   let t = 0;

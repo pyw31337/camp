@@ -1098,12 +1098,6 @@ a.near { color: inherit; text-decoration: none; }
 .review-block.pro b { background: rgba(255, 255, 255, .62); }
 .review-block.con { background: var(--flame-soft); color: var(--on-flame-soft); }
 .review-block.con b { background: rgba(255, 255, 255, .66); }
-.review-more-channels { margin-top: 16px; padding: 14px 16px; border-radius: var(--r-s); background: var(--soft); display: grid; gap: 10px; }
-.rmc-title { font-size: .84rem; font-weight: 850; color: var(--ink-2); display: inline-flex; align-items: center; gap: 6px; }
-.rmc-btns { display: flex; flex-wrap: wrap; gap: 8px; }
-.rmc-btn { font-size: .82rem; height: 34px; padding: 0 12px; gap: 6px; text-decoration: none; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--ink); display: inline-flex; align-items: center; }
-.rmc-btn .ic { width: 14px; height: 14px; }
-.rmc-btn:hover { border-color: var(--ink); color: var(--ink); }
 .review-empty-note { font-size: .88rem; color: var(--ink-3); margin: 0 0 12px; line-height: 1.5; }
 .layout-links, .source-list { display: grid; gap: 7px; }
 .layout-links a, .source-list a { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 8px; padding: 11px 12px; border-radius: 12px; background: var(--soft); color: var(--ink); text-decoration: none; min-width: 0; }
@@ -1207,6 +1201,15 @@ a.near { color: inherit; text-decoration: none; }
 .media-card-body b { font-size: .92rem; line-height: 1.35; font-weight: 850; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .media-card-go { display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; color: var(--accent); font-size: .76rem; font-weight: 800; }
 .media-card-go .ic { width: 13px; height: 13px; }
+.review-link-card > a > .media-card-body { display: flex; flex-direction: column; flex: 1; }
+.media-card-body .mc-src { gap: 6px; min-width: 0; }
+.media-card-body .mc-src > span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.media-card-body .mc-src .plat-ic { width: 20px; height: 20px; }
+.media-card-body .mc-src .plat-ic svg { width: 11px; height: 11px; }
+.mc-date { margin-top: auto; padding-top: 6px; color: var(--ink-3); font-size: .74rem; font-weight: 750; }
+.mh-post .plat-ic { width: 18px; height: 18px; margin-right: 4px; vertical-align: -4px; }
+.mh-post .plat-ic svg { width: 10px; height: 10px; }
+.rv-ic { flex: none; width: 17px; height: 14px; }
 
 .nearby-places { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
 .nearby-place.media-card { min-height: 0; }
@@ -1738,23 +1741,11 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .nearby-hub .nearby-note { margin: 8px 2px 0; font-size: .76rem; color: var(--ink-3); }
 
 /* 방문 후기 · 캠퍼 사진 한 칸: 사진 카드는 눌러서 크게 보기 */
-.review-links .photo-card .media-card-photo { position: relative; display: block; width: 100%; padding: 0; border: 0; background: var(--soft); cursor: zoom-in; }
-.review-links .photo-card .mc-zoom { position: absolute; right: 8px; bottom: 8px; display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 999px; background: rgba(0, 0, 0, .55); color: #fff; }
-.review-links .photo-card .mc-zoom .ic { width: 14px; height: 14px; }
-.review-links .photo-card .media-card-go { color: inherit; text-decoration: none; }
 .layout-sec .layout-main { cursor: zoom-in; }
 .lightbox .lb-cap a { color: #fff; text-decoration: underline; }
 .unk-line { display: flex; align-items: flex-start; gap: 6px; margin: 10px 2px 0; font-size: .78rem; line-height: 1.5; color: var(--ink-3); }
 .unk-line .ic { flex: 0 0 14px; width: 14px; height: 14px; margin-top: 2px; }
 .unk-line b { font-weight: 800; color: var(--ink-2); }
-.rv-sub { display: flex; align-items: center; gap: 6px; margin: 16px 2px 8px; font-size: .86rem; font-weight: 800; color: var(--ink-2); }
-.rv-sub .ic { width: 15px; height: 15px; }
-.review-links.review-photos { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
-.review-photos .media-card-photo { aspect-ratio: 1 / 1; }
-.review-photos .media-card-body { padding: 8px 10px; gap: 2px; }
-.review-photos .media-card-body b { font-size: .8rem; }
-.review-photos .media-card-body i, .review-photos .media-card-go { font-size: .7rem; }
-@media (max-width: 759px) { .review-links.review-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .layout-sec .layout-main img { width: 100%; max-height: min(560px, 70vh); object-fit: contain; background: var(--soft); }
 
 /* 상세 바로가기(2026-10-19): 긴 상세에서 요금·이용 정보·주변·후기로 바로 간다 */
@@ -1878,9 +1869,15 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 .cg-more-wrap[hidden], .cg-more-wrap:has(> .cg-more[hidden]) { display: none; }
 .cg-more { height: 38px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink-2); font: inherit; font-size: .84rem; font-weight: 800; cursor: pointer; }
 .cg-more:hover { background: var(--soft); }
-@media (max-width: 767px) { .cg-more-wrap { display: none; } }
+@media (max-width: 767px) {
+  .cg-more-wrap:not(.cg-keep) { display: none; }
+  .review-links.cg-keep { grid-template-columns: repeat(var(--cg-cols, 2), minmax(0, 1fr)); gap: 8px; }
+  .review-links.cg-keep .media-card-body { padding: 10px; }
+  .review-links.cg-keep .media-card-body b { font-size: .84rem; }
+  .review-links.cg-keep .review-link-card em { display: none; }
+}
 @media (min-width: 768px) {
-  .review-links.cgrid, .review-links.review-photos.cgrid { grid-template-columns: repeat(var(--cg-cols, 2), minmax(0, 1fr)); }
+  .review-links.cgrid { grid-template-columns: repeat(var(--cg-cols, 2), minmax(0, 1fr)); }
   .rail.vids.cgrid { display: grid; grid-template-columns: repeat(var(--cg-cols, 2), minmax(0, 1fr)); overflow: visible; scroll-snap-type: none; -webkit-mask-image: none; mask-image: none; }
   .rail.vids.cgrid .vid-wrap { width: auto; min-width: 0; }
   .rail.vids.cgrid .vid, .rail.vids.cgrid .vid img { width: 100%; }
@@ -1923,18 +1920,19 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 .cand-src-top { top: 12px; bottom: auto; right: 12px; background: rgba(255, 255, 255, .92); box-shadow: 0 2px 8px rgba(0, 0, 0, .15); }
 
 /* ── 관련 영상 · SNS: 플랫폼 칩(주변시설 칩과 같은 모양), 아이콘은 검은 바탕·흰 글리프로 통일(2026-10-20) ── */
-.media-hub .mh-tabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 0 12px; padding-bottom: 2px; }
-.media-hub .mh-tabs::-webkit-scrollbar { display: none; }
-.media-hub [data-mh-tab], .media-hub .mh-link { display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto; height: 34px; padding: 0 12px 0 5px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper, #fff); color: var(--ink-2); font: inherit; font-size: .84rem; font-weight: 800; cursor: pointer; text-decoration: none; }
-.media-hub [data-mh-tab] i { font-style: normal; font-size: .7rem; color: var(--ink-3); }
-.media-hub [data-mh-tab][aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper, #fff); }
-.media-hub [data-mh-tab][aria-selected="true"] i { color: inherit; opacity: .75; }
-.media-hub [data-mh-tab][aria-selected="true"] .plat-ic { background: var(--paper, #fff); color: var(--ink); }
-.media-hub .mh-link > .ic { width: 13px; height: 13px; color: var(--ink-3); }
-.media-hub .mh-link:hover { border-color: var(--ink-3); color: var(--ink); }
-.media-hub [data-mh-tab]:focus-visible, .media-hub .mh-link:focus-visible { outline: 2px solid var(--cobalt, #2b59ff); outline-offset: 2px; }
-.media-hub .plat-ic { display: inline-grid; place-items: center; flex: none; width: 24px; height: 24px; border-radius: 999px; background: #111; color: #fff; }
-.media-hub .plat-ic svg { width: 13px; height: 13px; }
+.media-hub .mh-tabs, .rv-hub .rv-tabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 0 12px; padding-bottom: 2px; }
+.rv-hub .rv-tabs::-webkit-scrollbar, .media-hub .mh-tabs::-webkit-scrollbar { display: none; }
+.media-hub [data-mh-tab], .media-hub .mh-link, .rv-hub [data-rv-tab], .rv-hub .mh-link { display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto; height: 34px; padding: 0 12px 0 5px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper, #fff); color: var(--ink-2); font: inherit; font-size: .84rem; font-weight: 800; cursor: pointer; text-decoration: none; }
+.media-hub [data-mh-tab] i, .rv-hub [data-rv-tab] i { font-style: normal; font-size: .7rem; color: var(--ink-3); }
+.media-hub [data-mh-tab][aria-selected="true"], .rv-hub [data-rv-tab][aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper, #fff); }
+.media-hub [data-mh-tab][aria-selected="true"] i, .rv-hub [data-rv-tab][aria-selected="true"] i { color: inherit; opacity: .75; }
+.media-hub [data-mh-tab][aria-selected="true"] .plat-ic, .rv-hub [data-rv-tab][aria-selected="true"] .plat-ic { background: var(--paper, #fff); color: var(--ink); }
+.media-hub .mh-link > .ic, .rv-hub .mh-link > .ic { width: 13px; height: 13px; color: var(--ink-3); }
+.media-hub .mh-link:hover, .rv-hub .mh-link:hover { border-color: var(--ink-3); color: var(--ink); }
+.media-hub [data-mh-tab]:focus-visible, .media-hub .mh-link:focus-visible, .rv-hub [data-rv-tab]:focus-visible, .rv-hub .mh-link:focus-visible { outline: 2px solid var(--cobalt, #2b59ff); outline-offset: 2px; }
+.plat-ic { display: inline-grid; place-items: center; flex: none; width: 24px; height: 24px; border-radius: 999px; background: #111; color: #fff; }
+.plat-ic svg { width: 13px; height: 13px; }
+.rv-hub [data-rv-tab=""] { padding-left: 12px; }
 .media-hub .mh-panel[hidden] { display: none; }
 .media-hub .mh-posts { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 6px; }
 .media-hub .mh-post { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: center; padding: 10px 12px; border-radius: 12px; background: var(--soft); color: inherit; text-decoration: none; }
@@ -1945,3 +1943,4 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 .media-hub .mh-more { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; font-size: .82rem; font-weight: 800; color: var(--ink-2); text-decoration: none; }
 .media-hub .mh-more .ic { width: 14px; height: 14px; }
 .media-hub .mh-more:hover { color: var(--accent); }
+.nearby-hub .nb-rv .rv-ic { color: var(--accent); }
