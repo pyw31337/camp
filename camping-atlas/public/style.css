@@ -1811,6 +1811,33 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .price-sec .plist li span { flex: 1 1 10em; min-width: 0; }
 .price-sec .pl-kind { font-style: normal; font-size: .72rem; font-weight: 800; color: var(--ink-3); background: var(--card, #fff); border-radius: 999px; padding: 2px 8px; }
 .price-sec .pl-m b { color: var(--ink-2); }
+.price-sec .plist .pl-divider {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 12px 2px 4px !important;
+  border-radius: 0 !important;
+  margin: 4px 0 0 !important;
+}
+.price-sec .plist .pl-divider span {
+  font-size: .8rem;
+  font-weight: 800;
+  color: var(--ink-3);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.price-sec .plist .pl-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.price-sec .plist li.pl-extra {
+  background: var(--soft);
+}
 .price-sec .st-foot { margin: 10px 2px 0; }
 
 /* 더 보기: 플랫폼 아이콘을 같은 크기·모양으로(둥근 네모 26px, 글리프 15px, 단색) */

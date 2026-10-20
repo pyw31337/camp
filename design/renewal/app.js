@@ -2227,20 +2227,37 @@ function amenityHtml(c, d) {
   </section>`;
 }
 const DAY = { weekday: "평일", weekend: "주말", holiday: "공휴일" };
-// 1박 요금은 한 곳에서만 보여 준다(소유자 2026-10-19: 이용 정보 · 사이트 표 · 요금 언급 · 운영자 안내에 세 번 나오던 요금을 하나로).
-// 순서: 업장 등록(예약 화면·시설 상품) → 대표 요금(고캠핑·운영자) → 추가 요금 → 운영자 안내 금액 → 후기 언급(확인필요).
-// 모든 줄은 ‘요금 언급’ 모양(금액 + 짧은 설명 + 근거 i)이고, 같은 금액은 한 번만 보인다.
-const WON_RE = /(\d{1,3}(?:,\d{3})+|\d{4,7})\s*원/;
+// 1박 요금: 숙박 요금(캠프 사이트·글램핑·타프존·카라반 등)을 최우선으로, 추가 요금(인원·차량·방문객 등)을 후순위로 공통되게 표시
+function parseWonAmount(s) {
+  const str = String(s || "");
+  const numRe = /(\d{1,3}(?:,\d{3})+|\d{4,7})\s*원/;
+  const m1 = str.match(numRe);
+  if (m1) return Number(m1[1].replace(/,/g, ""));
+  const manRe = /(\d+(?:\.\d+)?)\s*만\s*원?/;
+  const m2 = str.match(manRe);
+  if (m2) return Math.round(parseFloat(m2[1]) * 10000);
+  return 0;
+}
+
 function priceRows(c, d) {
-  const rows = [], seen = new Set();
-  const add = (won, label, kind, fact, extra = "", text = "") => {
-    const key = `${won}|${kind === "후기 언급" ? "" : label}`;
-    if (!won && !label && !text) return;
-    if (won && (seen.has(won) && kind === "후기 언급")) return;
-    if (seen.has(key)) return;
-    seen.add(key); if (won) seen.add(won);
-    rows.push({ won, label, kind, fact, extra, text });
+  const stayRows = [], extraRows = [];
+  const seenStay = new Set(), seenExtra = new Set();
+
+  const addStay = (won, label, kind, fact, extra = "", text = "") => {
+    const key = `${won}|${label}|${text}`;
+    if (seenStay.has(key)) return;
+    seenStay.add(key);
+    stayRows.push({ won, label, kind, fact, extra, text });
   };
+
+  const addExtra = (won, label, kind, fact, extra = "", text = "") => {
+    const key = `${label}|${won}|${text}`;
+    if (seenExtra.has(key)) return;
+    seenExtra.add(key);
+    extraRows.push({ won, label, kind, fact, extra, text, isExtra: true });
+  };
+
+  // 1. 예약 화면 실제 사이트별 요금 (오토캠핑, 글램핑, 타프존, 카라반 등 최우선)
   const bs = d?.booking_sites;
   if (bs?.sites?.length) {
     const groups = new Map();
@@ -2253,53 +2270,202 @@ function priceRows(c, d) {
     for (const g of groups.values()) {
       const ns = g.names, name = serviceText(ns.length > 2 ? `${ns[0]} ~ ${ns.at(-1)}` : ns.join(", "), 30);
       const label = [name, g.kind, `${ns.length}개`, g.size ? `${g.size[0]}×${g.size[1]}m` : "", g.floor, g.people ? String(g.people).replace(/^기준인원\s*/, "기준 ") : "", g.parking ? serviceText(String(g.parking).replace(/주차$/, " 주차"), 14) : "", g.carCamp ? "차박 가능" : "", g.pet ? "반려동물 동반" : ""].filter(Boolean).join(" · ");
-      add(g.price || 0, label, "업장 등록", { g: "c", src: { label: bs.label ?? "예약 화면(업장 등록)", url: bs.url, at: bs.checked_at, quote: `${name}${g.size ? ` 규격 ${g.size[0]}m × ${g.size[1]}m` : ""}${g.price ? ` ${fmt(g.price)}원` : ""}${day ? ` · ${day} 1박` : ""}` } }, day ? `${day} 1박` : "");
+      addStay(g.price || 0, label, "업장 등록", { g: "c", src: { label: bs.label ?? "예약 화면(업장 등록)", url: bs.url, at: bs.checked_at, quote: `${name}${g.size ? ` 규격 ${g.size[0]}m × ${g.size[1]}m` : ""}${g.price ? ` ${fmt(g.price)}원` : ""}${day ? ` · ${day} 1박` : ""}` } }, day ? `${day} 1박` : "");
     }
   } else if ((d?.products ?? []).length) {
     for (const [i, x] of d.products.entries()) {
       const label = [serviceText(x.name, 26) || `사이트 ${i + 1}`, serviceText(x.size, 20), x.base ? `기준 ${serviceText(x.base, 16)}인` : ""].filter(Boolean).join(" · ");
-      add(Number(x.price) || 0, label, "업장 등록", { g: "c", src: { label: d?.products_src?.label || "공식 시설 및 상품 등록", url: d?.products_src?.url || c.gc_url, at: d?.products_src?.checked_at, quote: `${x.name ?? ""} ${x.size ? `규격: ${x.size}` : ""} ${x.price ? `${fmt(x.price)}원` : ""}`.trim() } });
+      addStay(Number(x.price) || 0, label, "업장 등록", { g: "c", src: { label: d?.products_src?.label || "공식 시설 및 상품 등록", url: d?.products_src?.url || c.gc_url, at: d?.products_src?.checked_at, quote: `${x.name ?? ""} ${x.size ? `규격: ${x.size}` : ""} ${x.price ? `${fmt(x.price)}원` : ""}`.trim() } });
     }
   }
-  if (!rows.length) {
-    const pf = profFact(PF(d, "PRICE"));
-    const fee = c.fee;
-    if (pf?.v) add(0, "1박 기준", "대표 요금", pf, "", wonText(detailValue(pf)));
-    else if (fee) {
-      const lo = Number(fee.min), hi = Number(fee.max ?? fee.min);
-      const range = lo > 0 ? `${fmt(lo)}${hi > lo ? `~${fmt(hi)}` : ""}원${/대\s*$/.test(fee.text ?? "") ? "대" : ""}` : wonText(fee.text ?? "");
-      add(0, "1박 기준", "대표 요금", { g: GR(fee.grade) || "m", src: { label: sourceName(fee.basis, "요금 근거"), url: fee.url, at: fee.checked_at, quote: fee.quote } }, "", range);
+
+  // 2. 형태별 요금(tiers) 또는 대표 요금(c.fee / PF)
+  if (!stayRows.length) {
+    if (c.fee?.tiers?.length) {
+      for (const [k, lo, hi, est] of c.fee.tiers) {
+        const tierName = TIER_LABEL[k] || "캠핑 사이트";
+        const range = lo > 0 ? (hi > lo ? `${fmt(lo)}~${fmt(hi)}원` : `${fmt(lo)}원`) : "";
+        addStay(0, `${tierName} (1박 기준)`, "대표 요금", { g: "c", src: { label: c.fee.basis || "요금 근거", url: c.fee.url, at: c.fee.checked_at, quote: c.fee.text } }, "", range);
+      }
+    } else {
+      const pf = profFact(PF(d, "PRICE"));
+      const fee = c.fee;
+      if (pf?.v) addStay(0, "캠핑 사이트 (1박 기준)", "대표 요금", pf, "", wonText(detailValue(pf)));
+      else if (fee) {
+        const lo = Number(fee.min), hi = Number(fee.max ?? fee.min);
+        const range = lo > 0 ? `${fmt(lo)}${hi > lo ? `~${fmt(hi)}` : ""}원${/대\s*$/.test(fee.text ?? "") ? "대" : ""}` : wonText(fee.text ?? "");
+        addStay(0, "캠핑 사이트 (1박 기준)", "대표 요금", { g: GR(fee.grade) || "m", src: { label: sourceName(fee.basis, "요금 근거"), url: fee.url, at: fee.checked_at, quote: fee.quote } }, "", range);
+      }
     }
   }
-  const extra = profFact(PF(d, "EXTRA_FEE")) ?? specFact(d, "EXTRA_PERSON_FEE");
-  if (extra?.v) add(0, "인원·차량 추가", "추가 요금", extra, "", wonText(detailValue(extra)));
-  // 운영자 안내 중 금액 문장(환불·취소 규정 제외)은 여기로 옮기고, 운영자 안내 칸에서는 뺀다.
+
+  // 3. 운영자 안내 숙박 요금 (타프존, 글램핑, 카라반 등 특정 사이트 형태 요금 문장 보완)
   for (const x of d?.operator_snippets ?? []) {
     const t = typeof x === "string" ? x : x.text;
-    if ((x.cat ?? "요금 · 환불") !== "요금 · 환불" || /환불|취소|위약|수수료/.test(t)) continue;
-    const m = String(t).match(WON_RE);
-    const won = m ? Number(m[1].replace(/,/g, "")) : 0;
-    if (won < 5000) continue;
-    add(won, serviceText(String(t).replace(m[0], "").replace(/^[\s:：·\-]+|[\s:：·\-]+$/g, ""), 40) || "운영자 안내", "운영자 안내", { g: "c", src: { label: sourceName(x.src, "운영자 홈페이지"), url: x.url, at: x.date, quote: x.orig ?? t } });
-    if (rows.filter((r) => r.kind === "운영자 안내").length >= 3) break;
+    if (!t) continue;
+    if (/환불|취소|위약|수수료|보증금/.test(t)) continue;
+    const isExtra = /추가|방문객|지인|손님|인원추가|추가인원|차량추가|추가차량|차1대|트레일러|캠핑카|카라반.*추가|피크닉|당일|숯|그릴|장작|바베큐|바비큐|얼리|레이트|시간\s*연장/.test(t);
+    const isStay = /글램핑|카라반|타프|데크|파쇄석|오토|방갈로|펜션|객실|사이트|야영|1박|숙박/.test(t);
+    if (!isExtra && isStay) {
+      const won = parseWonAmount(t);
+      if (won >= 25000 && won <= 1000000) {
+        const cleanLabel = serviceText(t.replace(/(\d{1,3}(?:,\d{3})+|\d{4,7})\s*원|(\d+(?:\.\d+)?)\s*만\s*원?/g, "").replace(/^[\s:：·\-]+|[\s:：·\-]+$/g, ""), 32);
+        if (cleanLabel.length >= 2 && !stayRows.some(r => r.label && r.label.includes(cleanLabel))) {
+          addStay(won, `${cleanLabel} (1박)`, "운영자 안내", { g: "c", src: { label: sourceName(x.src, "운영자 홈페이지"), url: x.url, at: x.date, quote: x.orig ?? t } });
+        }
+      }
+    }
   }
-  let mentions = 0;
-  for (const x of d?.prices ?? []) {
-    if (!x.won || mentions >= 3) continue;
-    const before = rows.length;
-    add(x.won, [serviceText(x.label, 22), DAY[x.day], serviceText(x.season, 14)].filter(Boolean).join(" · ") || "1박", "후기 언급", sourceFact(x, "후기 원문", x.quote), asOf(x.date));
-    if (rows.length > before) mentions++;
+
+  // 4. 후기 언급: 공식 요금이 있으면 모호한 1박은 제외하고, 글램핑/타프존 등 고유 형태만 보완
+  if (stayRows.length === 0) {
+    for (const x of d?.prices ?? []) {
+      if (!x.won) continue;
+      addStay(x.won, [serviceText(x.label, 22), DAY[x.day], serviceText(x.season, 14)].filter(Boolean).join(" · ") || "1박 요금", "후기 언급", sourceFact(x, "후기 원문", x.quote), asOf(x.date));
+      if (stayRows.length >= 2) break;
+    }
+  } else {
+    for (const x of d?.prices ?? []) {
+      if (!x.won || !x.label) continue;
+      const l = String(x.label);
+      const isDistinctType = /글램핑|카라반|타프|방갈로|펜션/.test(l);
+      const alreadyHas = stayRows.some(r => r.label && r.label.includes(l));
+      if (isDistinctType && !alreadyHas) {
+        addStay(x.won, `${l} (1박 기준)`, "후기 언급", sourceFact(x, "후기 원문", x.quote), asOf(x.date));
+      }
+    }
   }
-  return { rows, bs };
+
+  // 5. 추가 요금: 인원 추가, 지인 방문(방문객), 추가 차량, 캠핑카/트레일러 등 후순위 공통 정규화
+  const extraCats = new Map();
+
+  for (const x of d?.operator_snippets ?? []) {
+    const t = typeof x === "string" ? x : x.text;
+    if (!t) continue;
+    if (/환불|취소|위약|수수료|보증금/.test(t)) continue;
+
+    const isVisitor = /방문객|지인|손님|피크닉/.test(t);
+    const isPerson = /인원\s*추가|추가\s*인원|1인\s*추가|추가인원|초과\s*인원/.test(t);
+    const isCar = /차량\s*추가|추가\s*차량|차\s*1대|추가차량|주차\s*추가/.test(t);
+    const isTrailer = /(캠핑카|카라반|트레일러|모터홈).*(추가|입장)/.test(t);
+    const isBbq = /숯|그릴|화로대|바베큐|바비큐/.test(t);
+
+    const fact = { g: "c", src: { label: sourceName(x.src, "운영자 홈페이지"), url: x.url, at: x.date, quote: x.orig ?? t } };
+
+    if (isTrailer) {
+      const won = parseWonAmount(t);
+      if (won >= 5000 && won <= 200000 && !extraCats.has("TRAILER")) {
+        extraCats.set("TRAILER", { won, label: "캠핑카 · 카라반 · 트레일러 동반 추가", kind: "추가 요금", fact });
+      }
+    }
+
+    if (isPerson || isVisitor) {
+      let pWon = 0;
+      const mP = t.match(/(?:1인|인당|인원)[^0-9]*(\d+(?:\.\d+)?)\s*만?\s*원/);
+      if (mP) pWon = mP[0].includes("만") ? Math.round(parseFloat(mP[1]) * 10000) : Number(mP[1].replace(/,/g, ""));
+      else pWon = parseWonAmount(t);
+
+      if (pWon >= 3000 && pWon <= 100000) {
+        if (!extraCats.has("PERSON")) {
+          extraCats.set("PERSON", {
+            won: pWon, minWon: pWon, maxWon: pWon,
+            label: isVisitor ? "인원 추가 · 지인 방문 (1인 기준)" : "추가 인원 (1인 기준)",
+            kind: "추가 요금", fact
+          });
+        } else {
+          const cur = extraCats.get("PERSON");
+          if (pWon < cur.minWon) cur.minWon = pWon;
+          if (pWon > cur.maxWon) cur.maxWon = pWon;
+          if (isVisitor && !cur.label.includes("방문")) cur.label = "인원 추가 · 지인 방문 (1인 기준)";
+        }
+      }
+    }
+
+    if (isCar) {
+      let cWon = 0;
+      const mC = t.match(/(?:차\s*1대|차량)[^0-9]*(\d+(?:\.\d+)?)\s*만?\s*원/);
+      if (mC) cWon = mC[0].includes("만") ? Math.round(parseFloat(mC[1]) * 10000) : Number(mC[1].replace(/,/g, ""));
+      else cWon = parseWonAmount(t);
+
+      if (cWon >= 3000 && cWon <= 100000 && !extraCats.has("CAR")) {
+        extraCats.set("CAR", { won: cWon, label: "추가 차량 (1대 기준)", kind: "추가 요금", fact });
+      }
+    }
+
+    if (isBbq && !extraCats.has("BBQ")) {
+      const won = parseWonAmount(t);
+      if (won >= 5000 && won <= 100000) {
+        extraCats.set("BBQ", { won, label: "숯 · 그릴 이용", kind: "추가 요금", fact });
+      }
+    }
+  }
+
+  // Spec facts fallback if not found in snippets
+  const extraPersonFact = profFact(PF(d, "EXTRA_FEE")) ?? specFact(d, "EXTRA_PERSON_FEE");
+  if (extraPersonFact?.v && !extraCats.has("PERSON")) {
+    const val = detailValue(extraPersonFact);
+    const won = parseWonAmount(val);
+    extraCats.set("PERSON", {
+      won, text: won ? "" : wonText(val),
+      label: "인원 추가 · 지인 방문 (1인 기준)", kind: "추가 요금", fact: extraPersonFact
+    });
+  }
+  const extraCarFact = specFact(d, "EXTRA_CAR_FEE");
+  if (extraCarFact?.v && !extraCats.has("CAR")) {
+    const val = detailValue(extraCarFact);
+    const won = parseWonAmount(val);
+    extraCats.set("CAR", {
+      won, text: won ? "" : wonText(val),
+      label: "추가 차량 (1대 기준)", kind: "추가 요금", fact: extraCarFact
+    });
+  }
+
+  // Format person range if min/max differ
+  if (extraCats.has("PERSON")) {
+    const p = extraCats.get("PERSON");
+    if (p.minWon && p.maxWon && p.minWon !== p.maxWon) {
+      p.won = 0;
+      p.text = `${fmt(p.minWon)}~${fmt(p.maxWon)}원`;
+    }
+  }
+
+  const EXTRA_ORDER = ["PERSON", "CAR", "TRAILER", "BBQ"];
+  for (const cat of EXTRA_ORDER) {
+    if (extraCats.has(cat)) {
+      const item = extraCats.get(cat);
+      addExtra(item.won, item.label, item.kind, item.fact, "", item.text || "");
+    }
+  }
+  for (const [k, item] of extraCats.entries()) {
+    if (!EXTRA_ORDER.includes(k)) {
+      addExtra(item.won, item.label, item.kind, item.fact, "", item.text || "");
+    }
+  }
+
+  const rows = [...stayRows, ...extraRows];
+  return { stayRows, extraRows, rows, bs };
 }
+
 function priceHtml(c, d) {
-  const { rows, bs } = priceRows(c, d);
+  const { stayRows, extraRows, rows, bs } = priceRows(c, d);
   const gct = gcdPriceTable(d);
   if (!rows.length && !gct) return "";
-  const li = (r, i) => `<li class="pl-${r.kind === "후기 언급" ? "m" : "c"}"><b>${r.won ? `${fmt(r.won)}원` : esc(String(r.text || "예약처 확인").replace(/(방문객)\s+\1/g, "$1"))}</b><span>${esc(r.label)}</span><i class="pl-kind">${esc(r.kind)}${r.kind === "후기 언급" ? " · 확인필요" : ""}</i>${r.extra && r.kind === "후기 언급" ? r.extra : ""}${srcTip(r.fact, `1박 요금 ${i + 1}`)}</li>`;
+
+  const renderLi = (r, i) => {
+    const isMention = r.kind === "후기 언급";
+    const badgeText = isMention ? `${r.kind} · 확인필요` : r.kind;
+    const wonDisplay = r.won ? `${fmt(r.won)}원` : esc(String(r.text || "예약처 확인").replace(/(방문객)\s+\1/g, "$1"));
+    return `<li class="pl-${isMention ? "m" : "c"}${r.isExtra ? " pl-extra" : ""}"><b>${wonDisplay}</b><span>${esc(r.label)}</span><i class="pl-kind">${esc(badgeText)}</i>${r.extra && isMention ? r.extra : ""}${r.fact ? srcTip(r.fact, `요금 정보 ${i + 1}`) : ""}</li>`;
+  };
+
+  const stayItems = stayRows.map((r, i) => renderLi({ ...r, isExtra: false }, i)).join("");
+  const extraDivider = extraRows.length && stayRows.length ? `<li class="pl-divider"><span>추가 옵션 요금 (지인 방문 · 추가 차량 등)</span></li>` : "";
+  const extraItems = extraRows.map((r, i) => renderLi({ ...r, isExtra: true }, stayRows.length + i)).join("");
+
+  const allItemsHtml = `${stayItems}${extraDivider}${extraItems}`;
   const foot = bs?.url ? `<p class="st-foot">요금은 날짜마다 달라요. <a href="${esc(bs.url)}" target="_blank" rel="noopener">날짜별 예약 화면 열기</a></p>` : "";
-  const tiers = c.fee?.tiers?.length ? `<div class="ptiers">${c.fee.tiers.map(([k, lo, hi, est]) => `<div class="pt pt-${k}${est && k !== "site" ? " est" : ""}"><span>${TIER_LABEL[k]}${est && k !== "site" ? "<i>추정</i>" : ""}</span><b>${rangeWon(lo, hi)}</b></div>`).join("")}${tip("<b>숙박 형태별 1박 요금</b><span>요금 문장에 ‘글램핑·카라반·펜션·오토·데크’ 같은 이름이 있으면 그 형태로 나눠요. 이름이 없으면 금액으로 짐작해요(10만원 미만 사이트, 10만~20만원 글램핑·카라반, 20만원 이상 펜션·숙박동). 짐작한 것은 ‘추정’으로 표시하고, 그 캠핑장에 실제로 있는 사이트 타입으로 좁혀요.</span>", "형태별 요금 기준")}</div>` : "";
-  return `<section class="d-sec price-sec" id="sec-price"><div class="sec-head">${iconTitle("won", "1박 요금")}<span class="sec-note">업장 등록 우선 · 후기는 참고</span></div>${gct}${tiers}${rows.length ? `<ul class="plist">${rows.map(li).join("")}</ul>` : ""}${foot}</section>`;
+
+  return `<section class="d-sec price-sec" id="sec-price"><div class="sec-head">${iconTitle("won", "1박 요금")}<span class="sec-note">업장 등록 우선 · 후기는 참고</span></div>${gct}${allItemsHtml ? `<ul class="plist">${allItemsHtml}</ul>` : ""}${foot}</section>`;
 }
 // 이용 규칙 · 공지(2026-10-19 소유자: 금지사항·이용수칙·이용제한은 업장 이용에 매우 중요 — 수집해서 노출, 공지는 눌러 바로 원문으로).
 // build-house-rules.mjs → d.house_rules { tags, rules[{cat,text,url,at}], ops, notices[{title,date,url}] }. 업장 공개 문장만(후기 제외).
