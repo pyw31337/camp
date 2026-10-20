@@ -853,13 +853,13 @@ const DAUM_LOGO = new URL("images/daum.svg", import.meta.url).href;
 const daumImg = (px) => `<img class="daum-logo" src="${DAUM_LOGO}" width="${px}" height="${px}" alt="" aria-hidden="true">`;
 const TR_GLYPH = {
   naver: ["네이버", '<path d="M15.6 12.8 8.1 2H2v20h6.4V11.2L15.9 22H22V2h-6.4z" transform="translate(3 3) scale(.75)"/>'],
-  daum: ["Daum", ""],
+  daum: ["Daum", '<path d="m 36,20.36 c 3.1152,0 5.6352,2.712 5.5152,5.8536 -0.1128,2.988 -2.6616,5.4264 -5.652,5.4264 h -3.9456 c -0.264,0 -0.48,-0.216 -0.48,-0.48 V 20.84 c 0,-0.264 0.216,-0.48 0.48,-0.48 h 4.08 M 36,14 h -9.6 c -0.7944,0 -1.44,0.6456 -1.44,1.44 v 21.12 c 0,0.7944 0.6456,1.44 1.44,1.44 H 36 C 42.6264,38 48,32.6264 48,26 48,19.3736 42.6264,14 36,14 Z" transform="translate(12 12) scale(.75) translate(-36.5 -26)"/>'],
   youtube: ["YouTube", '<path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/>'],
   tiktok: ["TikTok", '<path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9.1a7.4 7.4 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.2-1.6"/>'],
   instagram: ["Instagram", '<path d="M16 3a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5zm-4 5a4 4 0 1 1 0 8 4 4 0 0 1 0-8"/>'],
   facebook: ["Facebook", '<path d="M14 8h3V4h-3a5 5 0 0 0-5 5v2H7v4h2v7h4v-7h3l1-4h-4V9a1 1 0 0 1 1-1"/>'],
 };
-const trIcon = (k, n) => { const [label, path] = TR_GLYPH[k] ?? [k, ""]; return `<span class="tr-src" title="${esc(label)} ${n}건" aria-label="${esc(label)} ${n}건">${k === "daum" ? daumImg(12) : `<svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true">${path}</svg>`}<i>${fmt(n)}</i></span>`; };
+const trIcon = (k, n) => { const [label, path] = TR_GLYPH[k] ?? [k, ""]; return `<span class="tr-src" title="${esc(label)} ${n}건" aria-label="${esc(label)} ${n}건"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true">${path}</svg><i>${fmt(n)}</i></span>`; };
 function trendingShell() {
   return `<section class="trending" data-trending aria-labelledby="tr-t" aria-busy="true">
     <div class="sec-head">
