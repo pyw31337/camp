@@ -96,10 +96,9 @@ export async function mount(el, camp) {
   if (ls) extra.push(["산사태 예측", `${esc(ls[0])} · 산림청 ${esc(new Date(ls[1]).toLocaleString("ko-KR", { timeZone: "Asia/Seoul", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }))} 분석. <a href="https://sansatai.forest.go.kr/" target="_blank" rel="noopener">산사태정보시스템</a>`]);
   if (row?.[4]) extra.push(["기상특보", '이 지역에 특보가 발효 중이에요. <a href="https://www.weather.go.kr/" target="_blank" rel="noopener">기상청 확인</a>']);
   const stamp = data?.generated_at ? `${kstStamp(data.generated_at)} KST 확인 · 기상청${air ? "·에어코리아" : ""}` : "";
-  el.innerHTML = `<div class="sec-head"><div class="sec-title"><h2>주간 날씨</h2></div><span class="sec-note">이번 주말·다음 주 미리 보기</span></div>
+  el.innerHTML = `<div class="sec-head"><div class="sec-title"><h2>주간 날씨</h2></div></div>
     ${strip ? `<div class="fc-strip" role="list">${strip}</div>` : ""}
     <p class="fc-note">${esc(note)}</p>
-    <dl class="uses info">${extra.map(([l, v]) => `<div class="use"><dt>${l}</dt><dd>${v}</dd></div>`).join("")}</dl>
-    <p class="fc-note">${esc(stamp)}${stamp ? " · " : ""}예보는 바뀔 수 있어요. 일출·일몰·달은 천문 계산(±2분)</p>`;
+    <dl class="uses info">${extra.map(([l, v]) => `<div class="use"><dt>${l}</dt><dd>${v}</dd></div>`).join("")}</dl>`;
   el.hidden = false;
 }

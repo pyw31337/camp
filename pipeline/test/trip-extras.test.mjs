@@ -64,11 +64,9 @@ test("여행 참고 정보 카드: 있는 항목만 행으로", async () => {
     fest: { 1: { t: "가을 <축제>", s: "2026-10-24", e: "2026-10-26" } },
     camps: { 10: { el: 488, ev: [3, [["충전소", 2.3, 1, 37.5, 127.5]]], fe: [["1", 4.2]], cr: { "2026-10-24": 42 } }, 11: { el: 3 } } };
   const r = rowsFor(data, "10");
-  assert.deepEqual(r.map((x) => x.k), ["고도", "주변 축제·행사", "주말 관광지 붐빔"]); // 충전소는 ‘주변’ 칸으로 옮김
-  assert.match(r[0].v, /해발 약 488m.*약 3℃ 낮은/);
-  assert.match(r[1].v, /가을 &lt;축제&gt;.*10\/24\(토\)~10\/26\(월\) · 4\.2km/);
-  assert.match(r[2].v, /토 42/);
-  assert.match(rowsFor(data, "11")[0].v, /해안가 저지대/);
+  assert.deepEqual(r.map((x) => x.k), ["주변 축제·행사"]); // 고도는 시설정보, 응급실은 주변시설로 이동, 주말 붐빔 제거
+  assert.match(r[0].v, /가을 &lt;축제&gt;.*10\/24\(토\)~10\/26\(월\) · 4\.2km/);
+  assert.deepEqual(rowsFor(data, "11"), []);
   assert.deepEqual(rowsFor(data, "12"), []);
   const { evOf } = await import("../../camping-atlas/public/context/card.js");
   assert.deepEqual(evOf(data, "10"), { c5: 3, list: [{ name: "충전소", km: 2.3, fast: 1, lat: 37.5, lng: 127.5 }], source: { name: "OpenStreetMap 충전소" }, osm: true });

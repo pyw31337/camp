@@ -620,6 +620,13 @@ img { color: transparent; }
 .tile-l { font-size: .8rem; color: var(--ink-3); font-weight: 700; padding-right: 36px; }
 .tile-v { font-size: 1rem; font-weight: 850; line-height: 1.35; }
 .tile.unk .tile-v { font-weight: 500; color: var(--ink-3); font-size: .92rem; }
+.tile.tile-no { background: #d32f2f !important; color: #ffffff !important; border-color: #d32f2f !important; }
+.tile.tile-no .tile-l { color: rgba(255, 255, 255, .88) !important; }
+.tile.tile-no .tile-v { color: #ffffff !important; }
+.tile.tile-no .tile-ic { background: #ffffff !important; color: #d32f2f !important; }
+.tile.tile-no .tile-ic .ic { color: #d32f2f !important; }
+.tile.tile-no .ib { color: rgba(255, 255, 255, .85) !important; }
+.tile.tile-no .src-tip-btn { color: rgba(255, 255, 255, .85) !important; }
 .tile-g { position: absolute; top: 10px; right: 8px; display: inline-flex; align-items: center; gap: 2px; }
 [data-v="b"] .tile-g { right: 0; }
 .ib { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 999px; color: var(--ink-3); vertical-align: middle; }
@@ -1826,7 +1833,13 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .nearby-hub .nb-txt b { font-size: .9rem; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .nearby-hub .nb-txt i { font-style: normal; font-size: .74rem; color: var(--ink-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .nearby-hub .nb-dist { flex: 0 0 auto; font-size: .84rem; font-weight: 900; font-variant-numeric: tabular-nums; color: var(--ink); }
-.nearby-hub .nb-go { flex: 0 0 auto; width: 14px; height: 14px; color: var(--ink-3); }
+.nearby-hub .nb-actions { display: inline-flex; align-items: center; gap: 6px; flex: none; margin-left: auto; }
+.nearby-hub .nb-rv, .nearby-hub .nb-go { display: inline-grid; place-items: center; flex: 0 0 30px; width: 30px; height: 30px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--ink-2); cursor: pointer; transition: all .2s cubic-bezier(.16, 1, .3, 1); }
+.nearby-hub .nb-rv .ic, .nearby-hub .nb-go .ic { width: 15px; height: 15px; color: var(--ink-2); }
+.nearby-hub .nb-rv:hover, .nearby-hub .nb-rv:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
+.nearby-hub .nb-rv:hover .ic { color: var(--accent); }
+.nearby-hub a.nb-row:hover .nb-go { border-color: var(--accent); color: var(--accent); }
+.nearby-hub a.nb-row:hover .nb-go .ic { color: var(--accent); }
 .nearby-hub .nearby-note { margin: 8px 2px 0; font-size: .76rem; color: var(--ink-3); }
 
 /* 방문 후기 · 캠퍼 사진 한 칸: 사진 카드는 눌러서 크게 보기 */
@@ -1910,10 +1923,6 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 @media (max-width: 759px) { .tr-card { width: 64vw; max-width: 240px; } }
 @media (prefers-reduced-motion: reduce) { .tr-skel .tr-ph { animation: none; } }
 
-/* 주변시설 로드뷰(2026-10-19 소유자: 주변시설 실제 모습) — 줄 안 작은 버튼 + 팝업 */
-.nearby-hub .nb-rv { display: inline-flex; align-items: center; gap: 4px; flex: none; height: 28px; padding: 0 10px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--ink-2); font-size: .74rem; font-weight: 800; cursor: pointer; }
-.nearby-hub .nb-rv .ic { width: 14px; height: 14px; color: var(--accent); }
-.nearby-hub .nb-rv:hover, .nearby-hub .nb-rv:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
 dialog.rv-modal { border: 0; border-radius: var(--r); padding: 0; width: min(920px, calc(100vw - 24px)); background: var(--paper); color: var(--ink); box-shadow: var(--shadow-2); margin: auto; overflow: hidden; }
 dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: blur(4px); }
 .rv-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; align-items: center; padding: 14px 16px 10px; }
@@ -1923,7 +1932,7 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 .rv-view { position: relative; width: 100%; aspect-ratio: 16 / 10; max-height: 70vh; background: var(--soft); }
 .rv-msg { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; padding: 16px; text-align: center; color: var(--ink-2); font-weight: 700; }
 .rv-foot { display: flex; justify-content: space-between; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--line); }
-@media (max-width: 759px) { .rv-view { aspect-ratio: 4 / 5; } .nearby-hub .nb-rv { padding: 0 8px; } }
+@media (max-width: 759px) { .rv-view { aspect-ratio: 4 / 5; } }
 
 /* ── 숙박 형태별 1박 요금(2026-10-19) ── */
 .card-price span i, .ptiers i, .card-tiers i { margin-left: 4px; padding: 1px 5px; border-radius: 6px; background: var(--soft); color: var(--ink-3); font-size: .7rem; font-style: normal; font-weight: 800; }
@@ -2076,6 +2085,83 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 .gcp-cell:hover img { transform: scale(1.04); }
 @media (max-width: 759px) { .gcp-grid { grid-template-columns: repeat(3, 1fr); gap: 4px; } }
 
-/* 비시즌 공공 물놀이터: 썸네일 회색, 목록 뒤 */
-.card.is-offseason .card-media img { filter: grayscale(1); }
-.card.is-offseason .card-media::after { content: "비운영"; position: absolute; left: 8px; bottom: 8px; z-index: 2; padding: 2px 8px; border-radius: 999px; background: rgba(0,0,0,.55); color: #fff; font-size: .72rem; }
+/* ── 부드러운 전환 및 애니메이션 (2026-10-20) ── */
+:root {
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --dur-fast: 0.18s;
+  --dur-mid: 0.28s;
+}
+
+/* 주요 대화형 요소 트랜지션 기본 탑재 */
+button, a, input, select, textarea, .btn, .chip, .bdg, .card, .tile, .stype, .nb-row, .media-card, .review-link-card, .d-jump a, .nb-tabs button, .mh-tabs button {
+  transition: background-color var(--dur-fast) var(--ease-smooth),
+              color var(--dur-fast) var(--ease-smooth),
+              border-color var(--dur-fast) var(--ease-smooth),
+              box-shadow var(--dur-fast) var(--ease-smooth),
+              transform var(--dur-fast) var(--ease-spring),
+              opacity var(--dur-fast) var(--ease-smooth);
+}
+
+/* 호버 시 살짝 떠오르는 부드러운 마이크로 인터랙션 */
+.card:hover, .review-link-card:hover, .media-card:hover, .stype:hover, .tile:hover {
+  transform: translateY(-2px);
+}
+.nearby-hub a.nb-row:hover {
+  transform: translateX(2px);
+}
+
+/* 페이지 진입 및 섹션 부드러운 페이드 인 & 업 */
+@keyframes pageFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.detail {
+  animation: pageFadeUp var(--dur-mid) var(--ease-spring) both;
+}
+
+.d-sec {
+  animation: pageFadeIn var(--dur-mid) var(--ease-smooth) both;
+}
+
+/* 탭 패널 전환 애니메이션 */
+[role="tabpanel"]:not([hidden]) {
+  animation: pageFadeUp 0.22s var(--ease-spring) both;
+}
+
+/* 모달 및 다이얼로그 팝업 부드러운 애니메이션 */
+dialog[open] {
+  animation: pageFadeUp 0.25s var(--ease-spring) both;
+}
+dialog::backdrop {
+  animation: pageFadeIn 0.2s var(--ease-smooth) both;
+}
+
+/* 드롭다운 및 details/summary 부드러운 전환 */
+details > summary {
+  transition: color var(--dur-fast) var(--ease-smooth);
+}
+details[open] > *:not(summary) {
+  animation: pageFadeIn 0.22s var(--ease-smooth) both;
+}
+
+/* 접근성 미디어 쿼리 준수 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+  }
+}
+
