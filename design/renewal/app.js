@@ -156,9 +156,16 @@ const filled = (f) => f && (f.g === "v" || f.g === "c");
 const pos = (f) => f && f.g;
 function badges(c, max = 4) {
   const f = facts(c), out = [];
-  if (pos(f.power) && f.power.ok) out.push(`<span class="bdg bdg-volt">${ic("bolt")}${esc(f.power.short)}</span>`);
-  if (pos(f.fire) && f.fire.kind === "FIREWOOD_OK") out.push(`<span class="bdg bdg-flame">${ic("flame")}장작</span>`);
-  else if (pos(f.fire) && f.fire.kind === "CHARCOAL_ONLY") out.push(`<span class="bdg bdg-flame-soft">${ic("flame")}숯만</span>`);
+  // 전기는 W 데이터가 확보된 곳만 '600W', '1100W' 형태로 표시하고, 전기가 불가한 곳은 빨간색 '전기불가' 뱃지 표시. 단순 '전기' 뱃지는 제거.
+  if (pos(f.power)) {
+    if (f.power.w) out.push(`<span class="bdg bdg-volt">${ic("bolt")}${esc(f.power.short || kw(f.power.w))}</span>`);
+    else if (f.power.ok === false) out.push(`<span class="bdg bdg-danger">${ic("bolt")}전기불가</span>`);
+  }
+  if (pos(f.fire)) {
+    if (f.fire.kind === "FIREWOOD_OK") out.push(`<span class="bdg bdg-flame">${ic("flame")}장작</span>`);
+    else if (f.fire.kind === "CHARCOAL_ONLY") out.push(`<span class="bdg bdg-flame-soft">${ic("flame")}숯만</span>`);
+    else if (f.fire.kind === "NO_FIRE" || f.fire.ok === false) out.push(`<span class="bdg bdg-danger">${ic("flame")}화기불가</span>`);
+  }
   if (pos(f.park) && f.park.ok === true) out.push(`<span class="bdg bdg-cobalt">${ic("car")}텐트 옆</span>`);
   if (pos(f.pet) && f.pet.ok) out.push(`<span class="bdg bdg-ink">${ic("paw")}반려견</span>`);
   return out.slice(0, max).join("");
@@ -203,11 +210,12 @@ const QUICK = {
   pet: { label: "반려견", icon: "paw", cls: "ink", test: (c) => pos(facts(c).pet) && facts(c).pet.ok },
 };
 const THEMES = [
+  ["POPULAR", "실시간 인기", (c) => Boolean(c.m7 || c.rv?.n > 5)],
   ["VALLEY", "계곡", (c) => c.pf?.t?.includes("VALLEY")],
   ["FOREST", "숲", (c) => c.pf?.t?.includes("FOREST")],
   ["BEACH", "바다", (c) => c.pf?.t?.includes("BEACH") || c.th?.includes("sea")],
   ["LAKE", "호수·강", (c) => c.pf?.t?.includes("LAKE") || c.pf?.t?.includes("RIVER")],
-  ["FAMILY", "아이와", (c) => c.pf?.t?.includes("FAMILY")],
+  ["FAMILY", "아이랑", (c) => c.pf?.t?.includes("FAMILY")],
   ["PET", "반려견", (c) => c.pf?.t?.includes("PET_OK")],
   ["GLAMPING", "글램핑", (c) => c.pf?.t?.includes("GLAMPING")],
   ["CARAVAN", "카라반", (c) => c.pf?.t?.includes("CARAVAN")],
@@ -215,6 +223,7 @@ const THEMES = [
   ["AUTO", "오토캠핑", (c) => c.pf?.t?.includes("AUTO")],
 ];
 const THEME_FILES = {
+  POPULAR: "theme_popular.webp",
   VALLEY: "valley.webp",
   FOREST: "forest.webp",
   BEACH: "sea.webp",
@@ -232,6 +241,7 @@ const THEME_FILES = {
 };
 const themeImg = (k) => `${ASSETS_BASE}images/themes/${THEME_FILES[k] ?? "valley.webp"}`;
 const THEME_SUBS = {
+  POPULAR: "최근 7일간 캠퍼들 사이에서 가장 많이 언급되고 화제가 된 인기 캠핑장",
   VALLEY: "시원한 물소리와 맑은 물놀이를 즐길 수 있는 계곡 야영장",
   FOREST: "피톤치드 가득한 울창한 숲속 힐링 캠핑장",
   BEACH: "탁 트인 바다 전망과 파도 소리를 즐기는 해변 캠핑장",
@@ -361,17 +371,20 @@ function photosAll(c) {
   }
   return deduped;
 }
-// 카드 사진 레일: 첫 장만 바로, 나머지는 손이 닿을 때(hover·터치·스크롤) 받는다.
-function carousel(c, { eager = false, cls = "" } = {}) {
+// 카드 사진 레일: 단일 사진은 .car-single로 렌더링(레일 드래그 이벤트 통과), 다중 사진은 .car-multi(스와이프 전환 및 화살표 버튼).
+function carousel(c, { eager = false, cls = "", single = false } = {}) {
   const ph = photosOf(c);
   const alt = esc(nameOf(c).name);
   if (!ph.length) return `<div class="car car-empty ${cls}">${ic("tent")}</div>`;
+  if (single || ph.length === 1) {
+    return `<div class="car car-single ${cls}"><img class="car-img" src="${esc(photoUrl(ph[0]))}" alt="${alt}" loading="${eager ? "eager" : "lazy"}" decoding="async" draggable="false"></div>`;
+  }
   const slides = ph.map((u, i) => i === 0
     ? imageTag(u, alt, { eager })
     : `<img data-src="${esc(photoUrl(u))}" data-hi-src="${esc(photoHiUrl(u))}" alt="" decoding="async" draggable="false">`).join("");
   const dots = ph.length > 1 ? `<span class="car-dots" aria-hidden="true">${ph.map((_, i) => `<i${i ? "" : ' class="on"'}></i>`).join("")}</span>` : "";
-  const nav = ph.length > 1 ? `<button class="car-nav prev" type="button" aria-label="이전 사진" tabindex="-1">${ic("left")}</button><button class="car-nav next" type="button" aria-label="다음 사진" tabindex="-1">${ic("right")}</button>` : "";
-  return `<div class="car ${cls}" data-n="${ph.length}"><div class="car-track">${slides}</div>${dots}${nav}</div>`;
+  const nav = ph.length > 1 ? `<button class="car-nav prev" type="button" aria-label="이전 사진">${ic("arr-left")}</button><button class="car-nav next" type="button" aria-label="다음 사진">${ic("arr-right")}</button>` : "";
+  return `<div class="car car-multi ${cls}" data-n="${ph.length}"><div class="car-track">${slides}</div>${dots}${nav}</div>`;
 }
 function hydrate(car) {
   if (car.dataset.h) return;
@@ -383,11 +396,12 @@ function hydrate(car) {
     im.removeAttribute("data-src"); im.removeAttribute("data-hi-src");
   });
 }
-function initCarousels(root) {
-  for (const car of $$(".car[data-n]", root)) {
+function initCarousels(root = document) {
+  for (const car of $$(".car-multi[data-n]", root)) {
     if (car.dataset.init) continue;
-    car.dataset.init = 1;
+    car.dataset.init = "1";
     const tr = $(".car-track", car);
+    if (!tr) continue;
     let dots = $$(".car-dots i", car);
     // 깨진 사진은 그 장을 빼고, 남는 사진이 없으면 카드를 지운다(빈 썸네일 금지).
     $$("img", tr).forEach((im) => im.addEventListener("error", () => {
@@ -395,19 +409,21 @@ function initCarousels(root) {
       const left = $$("img", tr).length;
       const d = $(".car-dots", car);
       if (d) { d.lastElementChild?.remove(); dots = $$(".car-dots i", car); if (left < 2) d.remove(); }
-      if (!left) (car.closest(".card, .mi, .review-pick") ?? car).remove();
+      if (!left) (car.closest(".card, .mi, .review-pick, .tr-card") ?? car).remove();
     }, { once: true }));
     ["pointerenter", "touchstart", "focusin"].forEach((ev) => car.addEventListener(ev, () => hydrate(car), { passive: true, once: true }));
     tr.addEventListener("scroll", () => {
       hydrate(car);
-      const i = Math.round(tr.scrollLeft / tr.clientWidth);
+      const w = tr.clientWidth || 1;
+      const i = Math.round(tr.scrollLeft / w);
       dots.forEach((d, k) => d.classList.toggle("on", k === i));
     }, { passive: true });
     $$(".car-nav", car).forEach((b) => b.addEventListener("click", (e) => {
       e.preventDefault(); e.stopPropagation(); hydrate(car);
-      tr.scrollBy({ left: (b.classList.contains("next") ? 1 : -1) * tr.clientWidth, behavior: "smooth" });
+      const w = tr.clientWidth || 200;
+      tr.scrollBy({ left: (b.classList.contains("next") ? 1 : -1) * w, behavior: "smooth" });
     }));
-    // 마우스 끌기(데스크톱). 끌었으면 카드 열기를 막는다.
+    // 마우스 및 터치 끌기. 끌었으면 카드 열기를 막는다.
     let x0 = null, s0 = 0, moved = false;
     tr.addEventListener("pointerdown", (e) => {
       if (e.pointerType !== "mouse") return;
@@ -423,13 +439,14 @@ function initCarousels(root) {
     window.addEventListener("pointerup", () => {
       if (x0 === null) return;
       x0 = null; tr.classList.remove("drag");
-      tr.scrollTo({ left: Math.round(tr.scrollLeft / tr.clientWidth) * tr.clientWidth, behavior: "smooth" });
+      const w = tr.clientWidth || 1;
+      tr.scrollTo({ left: Math.round(tr.scrollLeft / w) * w, behavior: "smooth" });
     });
     tr.addEventListener("click", (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
     // 사진 레일은 카드 링크 위에 있다(가로 스와이프를 받으려고). 사진을 누르면 카드 링크로 간다.
     tr.addEventListener("click", () => {
       if (moved) return;
-      const hit = car.closest(".card, .mi, .review-pick")?.querySelector(".card-hit");
+      const hit = car.closest(".card, .mi, .review-pick, .tr-card")?.querySelector(".card-hit");
       if (hit) location.hash = hit.getAttribute("href");
     });
   }
@@ -445,36 +462,11 @@ function initDraggableRails(root = document) {
     let hasMoved = false;
     let bounceX = 0;
 
-    // 프로그레스 바 찾기 또는 헤더에 자동 연결
-    const head = rail.closest("section, .trow")?.querySelector(".sec-head, .trow-head");
-    let pBar = head?.querySelector(".rail-progress");
-    if (!pBar && head) {
-      const anchor = head.querySelector(".sec-side, .sec-note, .link, [data-theme-all]");
-      if (anchor) {
-        pBar = document.createElement("span");
-        pBar.className = "rail-progress";
-        pBar.setAttribute("aria-hidden", "true");
-        pBar.innerHTML = `<i style="width: 18%"></i>`;
-        if (anchor.classList.contains("sec-side")) {
-          anchor.prepend(pBar);
-        } else {
-          anchor.parentNode.insertBefore(pBar, anchor);
-        }
-      }
-    }
-    const fill = pBar ? (pBar.querySelector("i") || pBar) : null;
     const updateRailState = () => {
       const max = rail.scrollWidth - rail.clientWidth;
       if (max <= 6) {
-        if (pBar) pBar.style.display = "none";
         rail.classList.remove("has-left-fade", "has-right-fade");
         return;
-      }
-      if (pBar && fill) {
-        pBar.style.display = "inline-flex";
-        const ratio = Math.max(0, Math.min(1, rail.scrollLeft / max));
-        const pct = 18 + ratio * 82;
-        fill.style.width = `${pct.toFixed(1)}%`;
       }
       const atStart = rail.scrollLeft <= 6;
       const atEnd = rail.scrollLeft >= max - 6;
@@ -491,9 +483,9 @@ function initDraggableRails(root = document) {
     rail.addEventListener("pointerdown", (e) => {
       if (e.pointerType === "touch") return;
       if (e.button !== 0) return;
-      // 썸네일(.car, .car-track, .card-media, .review-pick-media)을 잡고 드래그하면 썸네일이 스와이프되고,
-      // 텍스트 영역이나 여백을 잡고 드래그할 때만 가로 레일이 스크롤된다.
-      if (e.target.closest(".car, .car-track, .car-nav, select, input, button, a.btn")) return;
+      // 다중 사진 썸네일 트랙(.car-multi)과 버튼, 입력창은 자체 이벤트를 처리하고,
+      // 단일 썸네일(.car-single), 카드 텍스트 영역(.card-body, .tr-body), 여백 등은 가로 레일을 드래그한다.
+      if (e.target.closest(".car-multi, .car-nav, select, input, button, a.btn, [data-save]")) return;
       isDown = true;
       startX = e.clientX;
       scrollLeft = rail.scrollLeft;
@@ -604,9 +596,9 @@ function card(c, i = 0) {
       <p class="card-meta">${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
       ${c.st?.length ? `<p class="card-types">${ic("tent")}${esc(typeLine2(c))}</p>` : ""}
       ${rowsHtml(c)}
-      ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-reviews">${cardReviewPills(c.rv)}</div>` : ""}
       ${nearLine(c) ? `<p class="card-near">${ic("store")}${esc(nearLine(c))}</p>` : ""}
       ${feeLabel(c.fee) ? `<p class="card-price"><span>1박</span><b>${esc(feeLabel(c.fee))}</b>${dot(GR(c.fee.grade))}</p>` : ""}
+      ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-reviews">${cardReviewPills(c.rv)}</div>` : ""}
     </div>
   </article>`;
 }
@@ -710,23 +702,38 @@ const TR_GLYPH = {
 const trIcon = (k, n) => { const [label, path] = TR_GLYPH[k] ?? [k, ""]; return `<span class="tr-src" title="${esc(label)} ${n}건" aria-label="${esc(label)} ${n}건"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true">${path}</svg><i>${fmt(n)}</i></span>`; };
 function trendingShell() {
   return `<section class="trending" data-trending aria-labelledby="tr-t" aria-busy="true">
-    <div class="sec-head"><h2 id="tr-t">실시간 <em>인기</em></h2><div class="sec-side"><span class="rail-progress" data-rail="trending-rail"><i style="width: 18%"></i></span><span class="sec-note" data-tr-note>${tip("<b>실시간 인기</b><span>최근 7일 블로그·카페·뉴스·동영상 글에서 캠핑장 이름과 지역을 맞춰 센 순위예요. 최근 글일수록 크게 세고, 광고·정보 모음 글은 뺍니다. 매일 밤 갱신돼요.</span>")}</span></div></div>
+    <div class="sec-head">
+      <h2 id="tr-t"><b>실시간 인기</b></h2>
+      <div class="sec-side">
+        <a class="more-link" href="#/theme/POPULAR">더보기 ${ic("arr-right")}</a>
+      </div>
+    </div>
     <div class="rail trending-rail" data-tr-rail>${Array.from({ length: 4 }, () => `<div class="tr-card tr-skel" aria-hidden="true"><span class="tr-ph"></span><b></b><i></i></div>`).join("")}</div>
   </section>`;
 }
 function trendingCard(x) {
   const c = S.byId.get(String(x.id));
   if (!c) return "";
-  const photo = photosOf(c)[0];
-  const thumb = photo ? imageTag(photo, "", { sizes: "220px" }) : x.samples?.find((s) => s.thumb) ? `<img src="${esc(x.samples.find((s) => s.thumb).thumb)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : `<span class="tr-noimg">${ic("tent")}</span>`;
-  const arrow = x.trend === "up" ? `<span class="tr-tr up" aria-label="어제 ${x.prev}위에서 올라옴">▲${x.prev - x.rank}</span>` : x.trend === "down" ? `<span class="tr-tr down" aria-label="어제 ${x.prev}위에서 내려감">▼${x.rank - x.prev}</span>` : x.trend === "new" ? `<span class="tr-tr new" aria-label="새로 들어옴">NEW</span>` : `<span class="tr-tr same" aria-label="어제와 같음">–</span>`;
+  const arrow = x.trend === "up" ? `<span class="tr-tr up" aria-label="어제 ${x.prev}위에서 올라옴">▲${x.prev - x.rank}</span>` : x.trend === "down" ? `<span class="tr-tr down" aria-label="어제 ${x.prev}위에서 내려감">▼${x.rank - x.prev}</span>` : x.trend === "new" ? `<span class="tr-tr new" aria-label="새로 들어옴">NEW</span>` : "";
   const count = x.today ? `오늘 언급 <b>${fmt(x.today)}</b>건` : `7일 언급 <b>${fmt(x.week)}</b>건`;
   const srcs = Object.entries(x.by ?? {}).sort((a, b) => b[1] - a[1]).map(([k, n]) => trIcon(k, n)).join("");
-  return `<a class="tr-card" href="#/c/${encodeURIComponent(c.id)}" aria-label="${x.rank}위 ${esc(nameOf(c).name)} · ${esc(region(c))} · ${x.today ? `오늘 언급 ${x.today}건` : `7일 언급 ${x.week}건`}">
-    <span class="tr-ph">${thumb}<span class="tr-rank">${x.rank}</span>${arrow}</span>
-    <b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i>
-    <span class="tr-meta"><span class="tr-count">${count}</span><span class="tr-srcs">${srcs}</span></span>
-  </a>`;
+  const reasons = (c.rv?.p ?? []).slice(0, 3).map(([t]) => t);
+  if (!reasons.length && c.tags?.length) reasons.push(...c.tags.slice(0, 3));
+  if (!reasons.length) {
+    if (c.fp) reasons.push("불멍·화로대 가능");
+    if (c.pwr) reasons.push("전기 사용 가능");
+    if (c.wp) reasons.push("물놀이·계곡 인접");
+  }
+  const reasonsHtml = reasons.length ? `<div class="tr-reasons">${reasons.slice(0, 3).map((r) => `<span class="tr-reason">${esc(r)}</span>`).join("")}</div>` : "";
+  return `<article class="tr-card" data-cid="${c.id}">
+    <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" aria-label="${x.rank}위 ${esc(nameOf(c).name)} 자세히"></a>
+    <span class="tr-ph">${carousel(c, { eager: x.rank <= 3, single: true })}<span class="tr-rank">${x.rank}</span>${arrow}</span>
+    <div class="tr-body">
+      <b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i>
+      ${reasonsHtml}
+      <span class="tr-meta"><span class="tr-count">${count}</span><span class="tr-srcs">${srcs}</span></span>
+    </div>
+  </article>`;
 }
 async function mountTrending() {
   const sec = $("[data-trending]");
@@ -738,12 +745,10 @@ async function mountTrending() {
   sec.removeAttribute("aria-busy");
   if (!cards.length) {
     rail.outerHTML = `<div class="tr-empty">${ic("broadcast")}<b>아직 집계된 글이 없어요</b><span>매일 밤 최근 7일 글을 모아 순위를 새로 매겨요.</span></div>`;
-    $("[data-rail='trending-rail']", sec)?.remove();
     return;
   }
   rail.innerHTML = cards.join("");
-  const note = $("[data-tr-note]", sec);
-  if (note && data.date) note.insertAdjacentHTML("afterbegin", `<span class="tr-asof">${esc(Number(data.date.slice(5, 7)))}/${esc(Number(data.date.slice(8, 10)))} 기준</span>`);
+  initCarousels(sec);
   initDraggableRails(sec);
 }
 function homeView() {
@@ -753,16 +758,16 @@ function homeView() {
     return `<a class="theme-card" href="#/theme/${encodeURIComponent(key)}"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy"><span><b>${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
   }).join("");
   const openingSection = openings.length ? `<section class="opens" aria-labelledby="op-t">
-    <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><div class="sec-side"><span class="rail-progress" data-rail="opens-rail"><i style="width: 18%"></i></span><a class="link" href="#/theme/OPEN">전체 보기 ${ic("right")}</a></div></div>
+    <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><div class="sec-side"><a class="more-link" href="#/theme/OPEN">더보기 ${ic("arr-right")}</a></div></div>
     <div class="rail opens-rail">${openings.map(([c, o]) => `<a class="open-card" href="#/c/${encodeURIComponent(c.id)}">${imageTag(photosOf(c)[0] ?? "", "", { sizes: "250px" })}<span class="open-dd">${esc(o.txt)}</span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))} · ${esc(o.platform ?? "")}</i></a>`).join("")}</div>
   </section>` : "";
   const picks = reviewPicks();
   const reviewSection = picks.length ? `<section class="review-picks" aria-labelledby="review-picks-t">
-    <div class="sec-head"><div><h2 id="review-picks-t">긍정 <em>후기</em></h2></div><div class="sec-side"><span class="rail-progress" data-rail="review-picks-rail"><i style="width: 18%"></i></span><a class="link" href="#/theme/REVIEWS">전체 보기 ${ic("right")}</a><span class="sec-note">${tip("<b>긍정 후기</b><span>연결된 블로그·카페 후기에서 집계한 주제와 건수입니다. 별점·실시간 인기 순위가 아니며, 원문은 상세에서 바로 열 수 있어요.</span>")}</span></div></div>
+    <div class="sec-head"><div><h2 id="review-picks-t">긍정 <em>후기</em></h2></div><div class="sec-side"><a class="more-link" href="#/theme/REVIEWS">더보기 ${ic("arr-right")}</a></div></div>
     <div class="rail review-picks-rail">${picks.map(reviewPickCard).join("")}</div>
   </section>` : "";
   const themeSection = themeItems ? `<section class="themes-catalog" aria-labelledby="theme-t">
-    <div class="sec-head"><h2 id="theme-t">테마로 <em>고르기</em></h2><div class="sec-side"><span class="rail-progress" data-rail="theme-catalog-rail"><i style="width: 18%"></i></span><a class="link" href="#/theme/ALL">전체 보기 ${ic("right")}</a></div></div>
+    <div class="sec-head"><h2 id="theme-t">테마로 <em>고르기</em></h2><div class="sec-side"><a class="more-link" href="#/theme/ALL">더보기 ${ic("arr-right")}</a></div></div>
     <div class="rail theme-catalog-rail">${themeItems}</div>
   </section>` : "";
   return `
@@ -770,10 +775,9 @@ function homeView() {
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-in">
       <h1 id="hero-t"><span class="h1-a">취향대로 찾아 떠나는</span> <span class="h1-b">전국 ${fmt(S.camps.length)}개 <em>자연 속으로.</em></span></h1>
-      <p class="hero-summary">숲·계곡·바다, 나만의 쉼터를 조건으로 골라 보세요${openings.length ? ` · 곧 예약 오픈 <b>${fmt(openings.length)}곳</b>` : ""}</p>
+      <p class="hero-summary">숲·계곡·바다, 나만의 쉼터를 조건으로 골라 보세요</p>
       <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div><form class="finder-form" role="search" data-search>
         <label class="finder-field finder-destination"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
-        <button class="finder-field finder-static" type="button" data-open="date"><small>언제</small><b data-stay-label>${esc(stayLabel())}</b></button>
         <button class="finder-field finder-static finder-cond" type="button" data-open-cond><small>조건</small><b data-cond-label>${esc(condSummary())}</b></button>
         <button class="finder-go" type="submit">${ic("search")}<span>찾기</span></button>
       </form><div class="rail chips finder-presets" aria-label="자주 찾는 조건">${PRESETS.map(([l], i) => `<button type="button" class="chip" data-preset="${i}" aria-pressed="${presetOn(i)}">${esc(l)}</button>`).join("")}</div></div>
@@ -786,13 +790,9 @@ function homeView() {
   ${themeSection}
   <section class="results" id="results" aria-labelledby="res-t">
     <div class="res-head">
-      <h2 id="res-t" data-res-title>조건 <em>검색</em></h2>
+      <h2 id="res-t" data-res-title><b>조건 검색</b></h2>
       <div class="res-tools">
         <div class="rail active-chips" data-active></div>
-        <label class="sort">${ic("list")}<select data-sort aria-label="정렬">
-          <option value="rich"${S.sort === "rich" ? " selected" : ""}>정보 많은 순</option>
-          <option value="name"${S.sort === "name" ? " selected" : ""}>이름순</option>
-        </select></label>
       </div>
     </div>
     <div class="filter-zone" aria-label="캠핑장 조건 필터">
@@ -812,7 +812,7 @@ function homeView() {
     <div class="grid" data-grid></div>
     <div class="nophoto" data-nophoto></div>
     <div class="more-wrap"><button class="btn ghost" type="button" data-more>더 보기</button></div>
-    <p class="credit">사진: 한국관광공사 고캠핑 · 정보: 각 원문(i)</p>
+    <p class="credit">Copyright © 2026 모여라 캠핑. All Rights Reserved.</p>
   </section>
 
 `;
@@ -826,7 +826,7 @@ function themeRow([k, label, test], list, first, used) {
   if (items.length < 3) return "";
   items.forEach((c) => used.add(c.id));
   return `<section class="trow" aria-label="${esc(label)}">
-    <div class="trow-head"><h3>${esc(label)} <i>${fmt(all.length)}</i></h3><button type="button" class="link" data-theme-all="${k}">모두 ${ic("right")}</button></div>
+    <div class="trow-head"><h3>${esc(label)} <i>${fmt(all.length)}</i></h3><button type="button" class="more-link" data-theme-all="${k}">더보기 ${ic("arr-right")}</button></div>
     <div class="rail trow-rail">${items.map((c, i) => card(c, first && i < 4 ? i : 9)).join("")}</div>
   </section>`;
 }
@@ -851,8 +851,17 @@ function renderResults({ reset = true } = {}) {
   const rows = $("[data-rows]"), noph = $("[data-nophoto]");
   // 둘러보기(검색어·테마·사이트 타입 없음): 테마·사이트 타입마다 한 줄씩 가로로 넘기는 줄(소유자 요청). 고르면 격자.
   if (!S.q && !S.theme && !S.stype) {
-    $("[data-res-title]").innerHTML = `조건 <em>검색</em>`;
-    const defs = [["AVAIL", "지금 공식 접수 중", (c) => S.avail.has(String(c.id))], ["ALL", "정보 많은 곳", () => true], ...THEMES.slice(0, 3), ["T:HOUSE", "캐빈·방갈로 숙박동", (c) => hasType(c, "HOUSE")], ...THEMES.slice(3, 6), ["T:DECK", "데크 사이트", (c) => hasType(c, "DECK")], ...THEMES.slice(6), ["T:CAR_CAMP", "차박", (c) => hasType(c, "CAR_CAMP")], ["T:PET_SITE", "반려견 전용 사이트", (c) => hasType(c, "PET_SITE")]];
+    $("[data-res-title]").innerHTML = `<b>조건 검색</b>`;
+    const themeList = THEMES.filter(([k]) => k !== "POPULAR");
+    const defs = [
+      ["AVAIL", "지금 공식 접수 중", (c) => S.avail.has(String(c.id))],
+      ...themeList.slice(0, 3),
+      ["T:HOUSE", "캐빈·방갈로", (c) => hasType(c, "HOUSE")],
+      ...themeList.slice(3, 6),
+      ["T:DECK", "데크", (c) => hasType(c, "DECK")],
+      ...themeList.slice(6),
+      ["T:CAR_CAMP", "차박", (c) => hasType(c, "CAR_CAMP")],
+    ];
     const used = new Set();
     rows.innerHTML = list.length ? defs.map((dd, i) => themeRow(dd, list, i === 0, used)).join("") : `<div class="empty">${ic("search")}<b>맞는 곳이 없어요</b><button class="btn ghost" data-clear="all">조건 지우기</button></div>`;
     grid.innerHTML = ""; noph.innerHTML = "";
@@ -1193,7 +1202,7 @@ function listView() {
     </div>
     <div class="lrows" data-lrows></div>
     <div class="more-wrap"><button class="btn ghost" type="button" data-list-more>더 보기</button></div>
-    <p class="credit">사진: 한국관광공사 고캠핑 · 정보: 각 원문(i)</p>
+    <p class="credit">Copyright © 2026 모여라 캠핑. All Rights Reserved.</p>
   </section>`;
 }
 function renderList({ reset = true } = {}) {
@@ -1265,7 +1274,7 @@ function themeView(themeKey) {
       </div>
       <div class="grid" data-theme-grid></div>
       <div class="more-wrap"><button class="btn ghost" type="button" data-theme-more>더 보기</button></div>
-      <p class="credit">사진: 한국관광공사 고캠핑 · 정보: 각 원문(i)</p>
+      <p class="credit">Copyright © 2026 모여라 캠핑. All Rights Reserved.</p>
     </div>
   </section>`;
 }
@@ -1357,6 +1366,7 @@ function bindHome() {
   const sentinel = $(".more-wrap");
   const io = new IntersectionObserver((es) => { if (es[0].isIntersecting && !$("[data-more]").hidden) moreResults(); }, { rootMargin: "800px" });
   io.observe(sentinel);
+  initCarousels(v);
   initDraggableRails(v);
   mountTrending();
   cleanup.push(() => { io.disconnect(); v.removeEventListener("click", homeClicks); });
