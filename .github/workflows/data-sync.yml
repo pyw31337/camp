@@ -447,6 +447,8 @@ jobs:
           node pipeline/scripts/build-price-tiers.mjs
           # 업장이 공개한 이용 규칙(금지·이용 제한·이용 수칙)·운영 안내·공지와 불가 태그(빨간 배지)를 붙인다.
           node pipeline/scripts/build-house-rules.mjs
+          # 열어 보니 없는 예약·홈페이지 링크(registry/link-health.json)를 c.dl로 표시해 화면 버튼에서 뺀다.
+          node pipeline/scripts/build-link-health.mjs
           # 업장 정보 커버리지(요금·입퇴실·매너타임·주차·전기 W·사이트 타입 등, 목표 2,500곳)를 meta.json에 남긴다.
           node pipeline/scripts/report-coverage.mjs
           # 모든 원천을 (캠핑장·속성·값·등급·원천·근거) 원자 사실로 풀어 묶음별 NDJSON(data/facts)으로 쓴다. 여러 에이전트의 공유 원장.

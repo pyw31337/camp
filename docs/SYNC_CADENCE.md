@@ -17,6 +17,7 @@
 | 30분 | 서울 공공예약 공식 접수 상태 | `availability-sync.yml` | 접수 중/종료가 바뀜. `expires_at` 후 화면에서 무시 |
 | 매일 | 고캠핑 카탈로그 동기화, 예약 오픈 일정 계산, 공개 카탈로그·탐색 발행 | `data-sync.yml` | 신규·폐업·링크. 발행은 가볍다 |
 | 매일 | 스키마 마이그레이션만 (`db:migrate`) | `data-sync.yml` | 보통 수 초. 전체 적재는 안 함 |
+| 매주 수 | 예약·홈페이지 링크 생존 확인(`check-links.mjs` → `registry/link-health.json` → `c.dl`) | `link-check.yml` | 등록 링크가 낡아 없는 페이지가 됨. robots 준수, 차단 플랫폼은 열지 않음 |
 | 매일(상한) | 네이버 웹 언급, 카카오 소셜 검색 | `data-sync.yml` | 이미 일 상한·순환. 언급은 신선도가 있으면 좋음 |
 | 매일 22:47 | 실시간 인기(최근 7일 글 언급 순위) | `trending.yml` | Daum·네이버 최신순 검색. 실행당 Daum 종류별 ≤3,000 · 네이버 ≤1,500. Data sync와 하루치 한도가 겹치지 않음(docs/TRENDING.md) |
 | 주 1회 (일) | **운영 DB 전체 스냅샷** (고캠핑·주변·인허가 upsert) | `data-sync.yml` | 시설·주변은 거의 안 바뀜. 행 단위 upsert라 매일은 낭비 |

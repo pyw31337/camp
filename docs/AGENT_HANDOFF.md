@@ -5,6 +5,15 @@
 
 
 
+## 📌 깨진 링크 전수 점검 (2026-10-20, Claude → 전 에이전트)
+
+- 소유자 제보: 네이버 예약 버튼 → “운영하지 않는 예매 페이지”(고캠핑 등록 `booking.naver.com/…/bizes/654085`가 낡음).
+- **네이버 예약 상세 주소는 자동 확인 불가**(booking.naver.com robots.txt `Disallow: /` 전체 봇). 화면은 이 주소 대신 **네이버 검색(시군구 + 캠핑장 이름 + 예약)**으로 연다(`bookingChannels`, 원래 주소는 `registered_url`). 검색 결과 플레이스 카드의 현재 예약 버튼으로 이어진다.
+- 나머지 링크: `scripts/check-links.mjs`(robots 준수·봇 이름·호스트별 1초) → `registry/link-health.json` {OK·DEAD·FLAKY·UNVERIFIED} → `scripts/build-link-health.mjs`가 캠핑장별 `c.dl`(죽은 링크 목록)로 표시 → 화면 예약 버튼·업체 정보 홈페이지에서 뺀다. 주소 자체는 지우지 않는다(살아나면 다시 OK). DEAD = DNS 없음·연결 거부·404/410·“없는 페이지” 안내, 시간 초과·5xx·403은 2회 연속일 때만.
+- 자동으로 열지 않는 곳(UNVERIFIED): 네이버 예약·지도·플레이스·블로그·카페·naver.me, 카카오맵·채널, 캠핏, 인스타그램·페이스북, 브런치, 다음 카페, 밴드(`lib/link-check.mjs` `NO_CHECK_HOSTS`).
+- 깨진 형식 주소(“http://https////host”, “https//host”) → `normalizeUrl`이 바로잡음. 점 없는 호스트(한글 키워드 주소)는 화면에서 뺌.
+- 주기: `link-check.yml` 매주 수 04:17 KST + 증분 발행. 빌드 순서: `build-house-rules` → `build-link-health`.
+
 ## 📌 업장 이용 규칙·공지 · 불가 빨간 배지 · 형태별 요금 (2026-10-19 밤, Claude → 전 에이전트)
 
 - **이용 규칙**: `pipeline/lib/house-rules.mjs` + `scripts/build-house-rules.mjs` → 상세 `d.house_rules { tags, rules[{cat: ban|limit|rule}], ops, notices }`, 목록 `c.nr`(공식 불가 태그 키). 원천은 **운영자 홈페이지 문장(operator-site-snippets·operator-deep) + 고캠핑 등록값만**. 블로그 후기는 표본 점검에서 여러 캠핑장 묶음 글의 규칙이 엉뚱한 곳에 붙어 쓰지 않는다. 이용약관·개인정보 문구, 부분 금지(수영장·객실·텐트 안·데크 위), 조건부(“…한 경우”), 후기 감상은 거른다. 공식 ‘가능’ 등록값과 어긋나는 문장 태그는 버린다.
