@@ -17,6 +17,7 @@ const byId = new Map(cat.map((c, i) => [String(c.id), i]));
 let added = 0, replaced = 0;
 for (const p of seed.places ?? []) {
   const { rules, day, src, ...rec } = p;
+  if (src?.url) { rec.src_url = src.url; rec.src_at = src.checked_at; }
   rec.types = [...new Set((rec.types ?? []).map(unify))];
   if (byId.has(rec.id)) { cat[byId.get(rec.id)] = { ...cat[byId.get(rec.id)], ...rec }; replaced++; } else { cat.push(rec); byId.set(rec.id, cat.length - 1); added++; }
   const dp = join(dataDir, "camps", `${rec.id}.json`);
