@@ -56,7 +56,8 @@
     "sync:forest": "node scripts/sync-forest-recreation.mjs",
     "sync:best": "node scripts/sync-best-campgrounds.mjs",
     "match:forest": "node scripts/match-forest-recreation.mjs",
-    "normalize:local-fees": "node scripts/normalize-local-fees.mjs"
+    "normalize:local-fees": "node scripts/normalize-local-fees.mjs",
+    "prioritize:operator-gaps": "node scripts/prioritize-operator-gaps.mjs"
   },
   "dependencies": {
     "pg": "8.23.1",

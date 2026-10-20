@@ -37,7 +37,7 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./style.css?v=352d7e931dc0" />
   <meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="kakao-js-key" content=""><meta name="supabase-url" content="https://zgnetdxqzsnmzdvoxzbw.supabase.co"><meta name="supabase-anon-key" content=""></head>
   <body>
     <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -118,19 +118,10 @@
       <a href="#/compare" data-nav="compare"><svg><use href="#i-columns"/></svg><span>비교</span><b class="nav-count" data-compare-count>0</b></a>
     </nav>
 
-    <dialog class="sheet" id="date-dialog" aria-labelledby="date-title">
-      <form method="dialog" class="sheet-in">
-        <div class="sheet-head"><h2 id="date-title">언제 갈까요?</h2><button class="icon-btn sheet-close" value="close" aria-label="닫기"><svg><use href="#i-close"/></svg></button></div>
-        <label class="date-input"><span>입실일</span><input type="date" data-date-input></label>
-        <p class="sheet-note">날짜별 잔여·결제 금액은 예약처에서 확인합니다.</p>
-        <button class="btn primary wide" value="ok">날짜 적용</button>
-      </form>
-    </dialog>
-
     <div class="pop" id="pop" role="tooltip" hidden></div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-    <script type="module" src="./app.js"></script>
+    <script type="module" src="./app.js?v=352d7e931dc0"></script>
   </body>
 </html>

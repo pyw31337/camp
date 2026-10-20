@@ -23,6 +23,7 @@
 | 주 1회 (일) | 임시 PostgreSQL 이중 적재 검증 | `data-sync.yml` | 전체 적재와 같은 날만 |
 | 주 1회 | OSM 추출, 주변 인허가 편의시설, 관광사진 | 캐시 / `public-data-weekly.yml` | 이미 주간 또는 장기 캐시 |
 | 주 2회 | trip extras (고도·충전·축제·걷기 등) | `trip-extras.yml` | 참고 정보 |
+| 주 1회·수동 소배치 | 운영자 공개 홈페이지의 빈 스펙·이용 수칙 보강 | `prioritize-operator-gaps.mjs` → `crawl-operator-sites.mjs` | 자사 호스트·robots 허용 경로만, 10~20곳씩 재개 가능한 배치. 플랫폼/로그인 화면은 제외 |
 | 안 함 | 실제 빈자리·실시간 재고 | — | 공식 API 없으면 금지. 예약은 외부로 이동 |
 
 ## 강제 전체 적재

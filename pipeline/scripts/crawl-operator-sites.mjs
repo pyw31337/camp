@@ -317,7 +317,8 @@ async function worker() {
       else result.campgrounds[c.id] = { name: c.name, ...r };
       stat[r.status] = (stat[r.status] ?? 0) + 1;
       if (++done % 25 === 0) { console.log(`  ${done}/${targets.length}`, JSON.stringify(stat)); save(); }
-      await sleep(800);
+      // 같은 호스트의 다음 업장 시작 전에도 최소 1초를 둔다(robots 허용 여부와 별개로 호스트 부담 완화).
+      await sleep(1000);
     }
   }
 }
