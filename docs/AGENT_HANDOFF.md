@@ -5,6 +5,15 @@
 
 
 
+## 📌 바깥 링크 PC·모바일 화면 맞춤 · 사진 없는 곳 뒤로 (2026-10-20, Claude)
+
+- 소유자: 모바일에서 네이버 예약이 PC 화면으로 열려 잘림. → `deviceUrl()`(design/renewal/app.js)이 바깥 링크를 누르는 순간(click·auxclick·contextmenu, 캡처 단계) 기기에 맞는 주소로 바꾼다. 화면 HTML·데이터의 주소는 그대로.
+  - 모바일: search/blog/cafe/booking.naver.com → m.*, map.naver.com 장소 → m.place.naver.com/place/{id}/home, 지도 검색 → m.map.naver.com, cafe·search.daum.net → m.*, place.map.kakao.com/{id} → /m/{id}, youtube → m.youtube.
+  - PC: 위의 반대(m.place.naver.com → map.naver.com/p/entry/place/{id} 등).
+  - 반응형이라 그대로 두는 곳(2026-10-20 확인): 고캠핑, 관광공사(visitkorea), 국립공원 예약, 캠핏, 카카오맵 link(기기별 자동 전환). 땡큐캠핑은 PC 주소도 모바일 화면으로 넘어간다(PC판 없음).
+  - 새 바깥 링크를 만들면 PC 주소로 넣고, 모바일 주소가 따로 있는 플랫폼이면 `MOBILE_HOST`에 추가할 것.
+- 사진이 한 장도 없는 곳: 카드 대체 사진 후보에 블로그·카페 후기 대표 썸네일 추가(`pick-card-fallback.mjs`), 검색 결과(`results`)·목록(`listRows`)에서 어떤 정렬이든 맨 뒤로(테마 목록은 이미 그랬음). 남은 50곳은 최근 등록이라 후기 수집 전 — 매일 소셜 수집이 채우면 다음 발행에서 사진이 붙는다.
+
 ## 📌 깨진 링크 전수 점검 (2026-10-20, Claude → 전 에이전트)
 
 - 소유자 제보: 네이버 예약 버튼 → “운영하지 않는 예매 페이지”(고캠핑 등록 `booking.naver.com/…/bizes/654085`가 낡음).

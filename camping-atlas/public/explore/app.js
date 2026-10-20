@@ -372,7 +372,8 @@ function results() {
   const list = S.camps.filter((c) => matches(c));
   if (S.sort === "name") list.sort((a, b) => nameOf(a).name.localeCompare(nameOf(b).name, "ko"));
   else list.sort((a, b) => rich(b) - rich(a));
-  return list;
+  // 사진이 한 장도 없는 곳은 신뢰가 낮다(소유자 2026-10-20) → 결과 맨 뒤로
+  return [...list.filter(hasPhoto), ...list.filter((c) => !hasPhoto(c))];
 }
 
 // ── 사진 ─────────────────────────────────────────────────────
@@ -1238,6 +1239,8 @@ function listResults(p) {
   else if (S.listSort === "name") shown.sort((a, b) => nameOf(a.c).name.localeCompare(nameOf(b.c).name, "ko"));
   // 조건이 근거로 맞는 곳 → 법령 기준으로 맞는 곳 → 정보 없어 확인 필요한 곳 순, 그 안에서 날짜·정보량
   else shown.sort((a, b) => (a.ce?.unknown ?? 0) - (b.ce?.unknown ?? 0) || (a.ce?.ref ?? 0) - (b.ce?.ref ?? 0) || (a.st?.rank ?? 5) - (b.st?.rank ?? 5) || rich(b.c) - rich(a.c));
+  // 사진이 한 장도 없는 곳은 신뢰가 낮다(소유자 2026-10-20) → 어떤 정렬이든 맨 뒤로(같은 무리 안의 순서는 그대로)
+  shown.sort((a, b) => Number(!hasPhoto(a.c)) - Number(!hasPhoto(b.c)));
   return { shown, closed: list.length - list.filter((x) => x.st?.k !== "closed").length };
 }
 // 등록 규격 중 가장 큰 사이트(가로×세로). 조건 검색의 ‘사이트 크기’와 같은 값.
@@ -3472,12 +3475,53 @@ async function route() {
   updateHeaderGlass();
 }
 addEventListener("hashchange", route);
+// ── 바깥 링크를 기기에 맞는 화면으로(소유자 2026-10-20: 모바일에서 네이버 예약이 PC 화면으로 열려 잘림) ──────────
+// 같은 글·장소라도 PC·모바일 주소가 다른 플랫폼(네이버 검색·블로그·카페·예약·지도·플레이스, 다음 카페·검색, 카카오 장소)은
+// 누르는 순간 기기에 맞는 주소로 바꾼다. 고캠핑·관광공사·국립공원·캠핏·카카오맵 링크는 한 주소가 알아서 맞춰 열린다(확인 2026-10-20).
+const IS_MOBILE = (() => { try { return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || (matchMedia("(pointer: coarse)").matches && matchMedia("(max-width: 1024px)").matches); } catch { return false; } })();
+const MOBILE_HOST = { "search.naver.com": "m.search.naver.com", "blog.naver.com": "m.blog.naver.com", "cafe.naver.com": "m.cafe.naver.com", "booking.naver.com": "m.booking.naver.com", "cafe.daum.net": "m.cafe.daum.net", "search.daum.net": "m.search.daum.net", "www.youtube.com": "m.youtube.com" };
+const PC_HOST = Object.fromEntries(Object.entries(MOBILE_HOST).map(([pc, m]) => [m, pc]));
+function deviceUrl(href, mobile = IS_MOBILE) {
+  let u; try { u = new URL(href); } catch { return href; }
+  if (!/^https?:$/.test(u.protocol)) return href;
+  const h = u.hostname.toLowerCase();
+  if (mobile) {
+    if (MOBILE_HOST[h]) { u.hostname = MOBILE_HOST[h]; return u.toString(); }
+    // 네이버 지도: 장소 → 모바일 플레이스, 검색 → 모바일 지도 검색
+    if (h === "map.naver.com") {
+      const place = u.pathname.match(/\/(?:entry\/)?place\/(\d+)/);
+      if (place) return `https://m.place.naver.com/place/${place[1]}/home`;
+      const q = u.pathname.match(/\/p\/search\/([^/]+)/);
+      if (q) return `https://m.map.naver.com/search2/search.naver?query=${q[1]}`;
+      return `https://m.map.naver.com/`;
+    }
+    const kp = h === "place.map.kakao.com" && u.pathname.match(/^\/(\d+)/);
+    if (kp) return `https://place.map.kakao.com/m/${kp[1]}`;
+    return href;
+  }
+  if (PC_HOST[h]) { u.hostname = PC_HOST[h]; return u.toString(); }
+  if (h === "m.place.naver.com" || h === "pcmap.place.naver.com") { const id = u.pathname.match(/\/(?:\w+\/)?(\d+)/); return id ? `https://map.naver.com/p/entry/place/${id[1]}` : href; }
+  if (h === "m.map.naver.com") { const q = u.searchParams.get("query"); return q ? `https://map.naver.com/p/search/${encodeURIComponent(q)}` : "https://map.naver.com/"; }
+  const km = h === "place.map.kakao.com" && u.pathname.match(/^\/m\/(\d+)/);
+  if (km) return `https://place.map.kakao.com/${km[1]}`;
+  return href;
+}
+// 모든 바깥 링크: 누르기(새 탭·가운데 클릭 포함) 직전에 주소를 바꾼다. 화면에 그린 HTML은 그대로 둔다.
+const fitLink = (e) => {
+  const a = e.target.closest?.("a[href^='http']");
+  if (!a) return;
+  const to = deviceUrl(a.href);
+  if (to !== a.href) a.href = to;
+};
+addEventListener("click", fitLink, true);
+addEventListener("auxclick", fitLink, true);
+addEventListener("contextmenu", fitLink, true);
 // 주변시설 사진을 누르면 원문 글을 연다(사진이 든 줄 자체는 지도 링크).
 addEventListener("click", (e) => {
   const im = e.target.closest?.("img[data-open]");
   if (!im) return;
   e.preventDefault(); e.stopPropagation();
-  window.open(im.dataset.open, "_blank", "noopener");
+  window.open(deviceUrl(im.dataset.open), "_blank", "noopener");
 }, true);
 // 주변시설 ‘로드뷰’: 카카오 지도 JS SDK(도메인 제한 키, 무료 한도)의 로드뷰를 팝업으로. 키·SDK가 없으면 카카오맵 로드뷰 링크를 연다.
 let kakaoSdk = null;
@@ -3515,7 +3559,7 @@ async function openRoadview(lat, lng, name) {
     });
   } catch {
     dlg.close();
-    window.open(link, "_blank", "noopener");
+    window.open(deviceUrl(link), "_blank", "noopener");
   }
 }
 addEventListener("click", (e) => {
