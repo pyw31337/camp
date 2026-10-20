@@ -1,0 +1,1087 @@
+{
+ "generated_at": "2026-10-20",
+ "note": "카탈로그(고캠핑 등)에 없는 당일 나들이 장소. 2026-10-20 다른 에이전트가 campgrounds.json에 직접 넣었던 16곳을 옮김(재현 가능하게). 각 장소 src.url·checked_at 원문 기준. 취사는 원문에 근거가 있을 때만 적음. 한강 11곳은 미래한강본부 공지·이용 규칙 원문으로 다시 확인(2026-10-20). 근거 없는 편의시설·취사 문구는 지움.",
+ "places": [
+  {
+   "id": "102373",
+   "name": "펀앤펀 캠프",
+   "sido": "경기도",
+   "sigungu": "파주시",
+   "area": "서울·경기",
+   "addr": "경기도 파주시 문산읍 방촌로 1213-20",
+   "lat": 37.9015,
+   "lng": 126.7892,
+   "tel": "010-9929-3432",
+   "homepage": "https://booking.naver.com/booking/12/bizes/1085778",
+   "op": "PRIVATE",
+   "status": "운영",
+   "types": [
+    "캠크닉"
+   ],
+   "amenities": [
+    "물놀이장",
+    "에어바운스"
+   ],
+   "fee": {
+    "min": 40000,
+    "max": 150000,
+    "text": "4만~15만원 (당일)",
+    "basis": "네이버 예약",
+    "grade": "OFFICIAL",
+    "url": "https://booking.naver.com/booking/12/bizes/1085778",
+    "checked_at": "2026-10-20"
+   },
+   "booking": {
+    "url": "https://booking.naver.com/booking/12/bizes/1085778",
+    "channels": [
+     {
+      "platform_id": "naver",
+      "platform_name": "네이버 예약",
+      "url": "https://booking.naver.com/booking/12/bizes/1085778",
+      "kind": "online",
+      "confidence": 0.95,
+      "evidence": [
+       "manual_add"
+      ]
+     }
+    ]
+   },
+   "du": "private",
+   "src": {
+    "url": "https://booking.naver.com/booking/12/bizes/1085778",
+    "label": "업장·예약 안내",
+    "checked_at": "2026-10-20"
+   },
+   "rules": [],
+   "day": {
+    "cooking": {
+     "v": "UNKNOWN",
+     "text": "미확인"
+    }
+   }
+  },
+  {
+   "id": "102374",
+   "name": "삼상리마켓 캠프닉",
+   "sido": "경기도",
+   "sigungu": "양주시",
+   "area": "서울·경기",
+   "addr": "경기도 양주시",
+   "op": "PRIVATE",
+   "status": "운영",
+   "types": [
+    "캠크닉"
+   ],
+   "amenities": [],
+   "fee": {
+    "text": "바비큐 당일",
+    "basis": "블로그 언급",
+    "grade": "MENTION",
+    "url": "https://m.blog.naver.com/official_lotterental/223127866396",
+    "checked_at": "2026-10-20"
+   },
+   "du": "private",
+   "src": {
+    "url": "https://m.blog.naver.com/official_lotterental/223127866396",
+    "label": "업장·예약 안내",
+    "checked_at": "2026-10-20"
+   },
+   "rules": [],
+   "day": {
+    "cooking": {
+     "v": "UNKNOWN",
+     "text": "미확인"
+    }
+   }
+  },
+  {
+   "id": "102375",
+   "name": "베리가든 캠프닉",
+   "sido": "경기도",
+   "sigungu": "용인시",
+   "area": "서울·경기",
+   "addr": "경기도 용인시",
+   "op": "PRIVATE",
+   "status": "운영",
+   "types": [
+    "캠크닉"
+   ],
+   "amenities": [],
+   "fee": {
+    "text": "농장 피크닉",
+    "basis": "블로그 언급",
+    "grade": "MENTION",
+    "url": "https://m.blog.naver.com/official_lotterental/223127866396",
+    "checked_at": "2026-10-20"
+   },
+   "du": "private",
+   "src": {
+    "url": "https://m.blog.naver.com/official_lotterental/223127866396",
+    "label": "업장·예약 안내",
+    "checked_at": "2026-10-20"
+   },
+   "rules": [],
+   "day": {
+    "cooking": {
+     "v": "UNKNOWN",
+     "text": "미확인"
+    }
+   }
+  },
+  {
+   "id": "102376",
+   "name": "라까시나 이태리 캠프닉",
+   "sido": "경기도",
+   "sigungu": "광주시",
+   "area": "서울·경기",
+   "addr": "경기도 광주시 도척면 추곡길 202-51",
+   "op": "PRIVATE",
+   "status": "운영",
+   "types": [
+    "캠크닉"
+   ],
+   "amenities": [],
+   "fee": {
+    "min": 8000,
+    "max": 30000,
+    "text": "8천~3만원 (당일)",
+    "basis": "기사",
+    "grade": "MENTION",
+    "url": "https://www.outdoornews.co.kr/news/articleView.html?idxno=34963",
+    "checked_at": "2026-10-20"
+   },
+   "du": "private",
+   "src": {
+    "url": "https://www.outdoornews.co.kr/news/articleView.html?idxno=34963",
+    "label": "업장·예약 안내",
+    "checked_at": "2026-10-20"
+   },
+   "rules": [],
+   "day": {
+    "cooking": {
+     "v": "UNKNOWN",
+     "text": "미확인"
+    }
+   }
+  },
+  {
+   "id": "hangang-gwangnaru",
+   "name": "광나루한강공원",
+   "sido": "서울",
+   "sigungu": "강동구",
+   "lat": 37.549,
+   "lng": 127.122,
+   "types": [
+    "공원",
+    "캠크닉"
+   ],
+   "op": "LOCAL_GOVERNMENT",
+   "amenities": [],
+   "fee": {
+    "min": 0,
+    "g": "FREE"
+   },
+   "homepage": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+   "pf": {
+    "s": "입장 무료 · 그늘막은 지정 허용구역·시간에만 · 지정 장소 외 야영·취사 금지",
+    "t": [
+     "PARK"
+    ]
+   },
+   "status": "운영",
+   "du": "park",
+   "src": {
+    "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+    "label": "미래한강본부 공지(그늘막 허용구역 2026.3.~11.)",
+    "checked_at": "2026-10-20"
+   },
+   "rules": [
+    {
+     "cat": "rule",
+     "text": "그늘막은 공원 내 지정 허용구역에서만 설치(2026.3.1.~11.30.)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "허용 시간 3~5월·9~11월 09~19시, 6~8월 09~20시 (2026.9.1.~11.30. 09~22시 연장)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "limit",
+     "text": "그늘막 규격 2m×2m 내외(4인용)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "돗자리는 기간·장소 관계없이 상시 이용 가능",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "ban",
+     "text": "지정된 장소 외의 장소에서의 야영, 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    }
+   ],
+   "day": {
+    "cooking": {
+     "v": "PROHIBITED_OUTSIDE_DESIGNATED",
+     "text": "지정된 장소 외 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    },
+    "shade": {
+     "v": "ZONE_ONLY",
+     "season": "03-01~11-30",
+     "hours": "09:00-19:00 (6~8월 20:00, 2026.9.1.~11.30. 22:00)",
+     "size": "2m×2m 내외",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    }
+   }
+  },
+  {
+   "id": "hangang-jamsil",
+   "name": "잠실한강공원",
+   "sido": "서울",
+   "sigungu": "송파구",
+   "lat": 37.517,
+   "lng": 127.086,
+   "types": [
+    "공원",
+    "캠크닉"
+   ],
+   "op": "LOCAL_GOVERNMENT",
+   "amenities": [],
+   "fee": {
+    "min": 0,
+    "g": "FREE"
+   },
+   "homepage": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+   "pf": {
+    "s": "입장 무료 · 그늘막은 지정 허용구역·시간에만 · 지정 장소 외 야영·취사 금지",
+    "t": [
+     "PARK"
+    ]
+   },
+   "status": "운영",
+   "du": "park",
+   "src": {
+    "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+    "label": "미래한강본부 공지(그늘막 허용구역 2026.3.~11.)",
+    "checked_at": "2026-10-20"
+   },
+   "rules": [
+    {
+     "cat": "rule",
+     "text": "그늘막은 공원 내 지정 허용구역에서만 설치(2026.3.1.~11.30.)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "허용 시간 3~5월·9~11월 09~19시, 6~8월 09~20시 (2026.9.1.~11.30. 09~22시 연장)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "limit",
+     "text": "그늘막 규격 2m×2m 내외(4인용)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "돗자리는 기간·장소 관계없이 상시 이용 가능",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "ban",
+     "text": "지정된 장소 외의 장소에서의 야영, 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    }
+   ],
+   "day": {
+    "cooking": {
+     "v": "PROHIBITED_OUTSIDE_DESIGNATED",
+     "text": "지정된 장소 외 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    },
+    "shade": {
+     "v": "ZONE_ONLY",
+     "season": "03-01~11-30",
+     "hours": "09:00-19:00 (6~8월 20:00, 2026.9.1.~11.30. 22:00)",
+     "size": "2m×2m 내외",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    }
+   }
+  },
+  {
+   "id": "hangang-ttukseom",
+   "name": "뚝섬한강공원",
+   "sido": "서울",
+   "sigungu": "광진구",
+   "lat": 37.529,
+   "lng": 127.066,
+   "types": [
+    "공원",
+    "캠크닉"
+   ],
+   "op": "LOCAL_GOVERNMENT",
+   "amenities": [],
+   "fee": {
+    "min": 0,
+    "g": "FREE"
+   },
+   "homepage": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+   "pf": {
+    "s": "입장 무료 · 그늘막은 지정 허용구역·시간에만 · 지정 장소 외 야영·취사 금지",
+    "t": [
+     "PARK"
+    ]
+   },
+   "status": "운영",
+   "du": "park",
+   "src": {
+    "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+    "label": "미래한강본부 공지(그늘막 허용구역 2026.3.~11.)",
+    "checked_at": "2026-10-20"
+   },
+   "rules": [
+    {
+     "cat": "rule",
+     "text": "그늘막은 공원 내 지정 허용구역에서만 설치(2026.3.1.~11.30.)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "허용 시간 3~5월·9~11월 09~19시, 6~8월 09~20시 (2026.9.1.~11.30. 09~22시 연장)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "limit",
+     "text": "그늘막 규격 2m×2m 내외(4인용)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "돗자리는 기간·장소 관계없이 상시 이용 가능",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "ban",
+     "text": "지정된 장소 외의 장소에서의 야영, 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    }
+   ],
+   "day": {
+    "cooking": {
+     "v": "PROHIBITED_OUTSIDE_DESIGNATED",
+     "text": "지정된 장소 외 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    },
+    "shade": {
+     "v": "ZONE_ONLY",
+     "season": "03-01~11-30",
+     "hours": "09:00-19:00 (6~8월 20:00, 2026.9.1.~11.30. 22:00)",
+     "size": "2m×2m 내외",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    }
+   }
+  },
+  {
+   "id": "hangang-jamwon",
+   "name": "잠원한강공원",
+   "sido": "서울",
+   "sigungu": "서초구",
+   "lat": 37.52,
+   "lng": 127.011,
+   "types": [
+    "공원",
+    "캠크닉"
+   ],
+   "op": "LOCAL_GOVERNMENT",
+   "amenities": [],
+   "fee": {
+    "min": 0,
+    "g": "FREE"
+   },
+   "homepage": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+   "pf": {
+    "s": "입장 무료 · 그늘막은 지정 허용구역·시간에만 · 지정 장소 외 야영·취사 금지",
+    "t": [
+     "PARK"
+    ]
+   },
+   "status": "운영",
+   "du": "park",
+   "src": {
+    "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+    "label": "미래한강본부 공지(그늘막 허용구역 2026.3.~11.)",
+    "checked_at": "2026-10-20"
+   },
+   "rules": [
+    {
+     "cat": "rule",
+     "text": "그늘막은 공원 내 지정 허용구역에서만 설치(2026.3.1.~11.30.)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "허용 시간 3~5월·9~11월 09~19시, 6~8월 09~20시 (2026.9.1.~11.30. 09~22시 연장)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "limit",
+     "text": "그늘막 규격 2m×2m 내외(4인용)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "돗자리는 기간·장소 관계없이 상시 이용 가능",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "ban",
+     "text": "지정된 장소 외의 장소에서의 야영, 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    }
+   ],
+   "day": {
+    "cooking": {
+     "v": "PROHIBITED_OUTSIDE_DESIGNATED",
+     "text": "지정된 장소 외 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    },
+    "shade": {
+     "v": "ZONE_ONLY",
+     "season": "03-01~11-30",
+     "hours": "09:00-19:00 (6~8월 20:00, 2026.9.1.~11.30. 22:00)",
+     "size": "2m×2m 내외",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    }
+   }
+  },
+  {
+   "id": "hangang-banpo",
+   "name": "반포한강공원",
+   "sido": "서울",
+   "sigungu": "서초구",
+   "lat": 37.51,
+   "lng": 126.995,
+   "types": [
+    "공원",
+    "캠크닉"
+   ],
+   "op": "LOCAL_GOVERNMENT",
+   "amenities": [],
+   "fee": {
+    "min": 0,
+    "g": "FREE"
+   },
+   "homepage": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+   "pf": {
+    "s": "입장 무료 · 그늘막은 지정 허용구역·시간에만 · 지정 장소 외 야영·취사 금지",
+    "t": [
+     "PARK"
+    ]
+   },
+   "status": "운영",
+   "du": "park",
+   "src": {
+    "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+    "label": "미래한강본부 공지(그늘막 허용구역 2026.3.~11.)",
+    "checked_at": "2026-10-20"
+   },
+   "rules": [
+    {
+     "cat": "rule",
+     "text": "그늘막은 공원 내 지정 허용구역에서만 설치(2026.3.1.~11.30.)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "허용 시간 3~5월·9~11월 09~19시, 6~8월 09~20시 (2026.9.1.~11.30. 09~22시 연장)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "limit",
+     "text": "그늘막 규격 2m×2m 내외(4인용)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "돗자리는 기간·장소 관계없이 상시 이용 가능",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "ban",
+     "text": "지정된 장소 외의 장소에서의 야영, 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    }
+   ],
+   "day": {
+    "cooking": {
+     "v": "PROHIBITED_OUTSIDE_DESIGNATED",
+     "text": "지정된 장소 외 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    },
+    "shade": {
+     "v": "ZONE_ONLY",
+     "season": "03-01~11-30",
+     "hours": "09:00-19:00 (6~8월 20:00, 2026.9.1.~11.30. 22:00)",
+     "size": "2m×2m 내외",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    }
+   }
+  },
+  {
+   "id": "hangang-ichon",
+   "name": "이촌한강공원",
+   "sido": "서울",
+   "sigungu": "용산구",
+   "lat": 37.517,
+   "lng": 126.971,
+   "types": [
+    "공원",
+    "캠크닉"
+   ],
+   "op": "LOCAL_GOVERNMENT",
+   "amenities": [],
+   "fee": {
+    "min": 0,
+    "g": "FREE"
+   },
+   "homepage": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+   "pf": {
+    "s": "입장 무료 · 그늘막은 지정 허용구역·시간에만 · 지정 장소 외 야영·취사 금지",
+    "t": [
+     "PARK"
+    ]
+   },
+   "status": "운영",
+   "du": "park",
+   "src": {
+    "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+    "label": "미래한강본부 공지(그늘막 허용구역 2026.3.~11.)",
+    "checked_at": "2026-10-20"
+   },
+   "rules": [
+    {
+     "cat": "rule",
+     "text": "그늘막은 공원 내 지정 허용구역에서만 설치(2026.3.1.~11.30.)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "허용 시간 3~5월·9~11월 09~19시, 6~8월 09~20시 (2026.9.1.~11.30. 09~22시 연장)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "limit",
+     "text": "그늘막 규격 2m×2m 내외(4인용)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "돗자리는 기간·장소 관계없이 상시 이용 가능",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "ban",
+     "text": "지정된 장소 외의 장소에서의 야영, 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    }
+   ],
+   "day": {
+    "cooking": {
+     "v": "PROHIBITED_OUTSIDE_DESIGNATED",
+     "text": "지정된 장소 외 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    },
+    "shade": {
+     "v": "ZONE_ONLY",
+     "season": "03-01~11-30",
+     "hours": "09:00-19:00 (6~8월 20:00, 2026.9.1.~11.30. 22:00)",
+     "size": "2m×2m 내외",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    }
+   }
+  },
+  {
+   "id": "hangang-yeouido",
+   "name": "여의도한강공원",
+   "sido": "서울",
+   "sigungu": "영등포구",
+   "lat": 37.528,
+   "lng": 126.934,
+   "types": [
+    "공원",
+    "캠크닉"
+   ],
+   "op": "LOCAL_GOVERNMENT",
+   "amenities": [],
+   "fee": {
+    "min": 0,
+    "g": "FREE"
+   },
+   "homepage": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+   "pf": {
+    "s": "입장 무료 · 그늘막은 지정 허용구역·시간에만 · 지정 장소 외 야영·취사 금지",
+    "t": [
+     "PARK"
+    ]
+   },
+   "status": "운영",
+   "du": "park",
+   "src": {
+    "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+    "label": "미래한강본부 공지(그늘막 허용구역 2026.3.~11.)",
+    "checked_at": "2026-10-20"
+   },
+   "rules": [
+    {
+     "cat": "rule",
+     "text": "그늘막은 공원 내 지정 허용구역에서만 설치(2026.3.1.~11.30.)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "허용 시간 3~5월·9~11월 09~19시, 6~8월 09~20시 (2026.9.1.~11.30. 09~22시 연장)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "limit",
+     "text": "그늘막 규격 2m×2m 내외(4인용)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "돗자리는 기간·장소 관계없이 상시 이용 가능",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "ban",
+     "text": "지정된 장소 외의 장소에서의 야영, 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    }
+   ],
+   "day": {
+    "cooking": {
+     "v": "PROHIBITED_OUTSIDE_DESIGNATED",
+     "text": "지정된 장소 외 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    },
+    "shade": {
+     "v": "ZONE_ONLY",
+     "season": "03-01~11-30",
+     "hours": "09:00-19:00 (6~8월 20:00, 2026.9.1.~11.30. 22:00)",
+     "size": "2m×2m 내외",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    }
+   }
+  },
+  {
+   "id": "hangang-mangwon",
+   "name": "망원한강공원",
+   "sido": "서울",
+   "sigungu": "마포구",
+   "lat": 37.555,
+   "lng": 126.896,
+   "types": [
+    "공원",
+    "캠크닉"
+   ],
+   "op": "LOCAL_GOVERNMENT",
+   "amenities": [],
+   "fee": {
+    "min": 0,
+    "g": "FREE"
+   },
+   "homepage": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+   "pf": {
+    "s": "입장 무료 · 그늘막은 지정 허용구역·시간에만 · 지정 장소 외 야영·취사 금지",
+    "t": [
+     "PARK"
+    ]
+   },
+   "status": "운영",
+   "du": "park",
+   "src": {
+    "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+    "label": "미래한강본부 공지(그늘막 허용구역 2026.3.~11.)",
+    "checked_at": "2026-10-20"
+   },
+   "rules": [
+    {
+     "cat": "rule",
+     "text": "그늘막은 공원 내 지정 허용구역에서만 설치(2026.3.1.~11.30.)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "허용 시간 3~5월·9~11월 09~19시, 6~8월 09~20시 (2026.9.1.~11.30. 09~22시 연장)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "limit",
+     "text": "그늘막 규격 2m×2m 내외(4인용)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "돗자리는 기간·장소 관계없이 상시 이용 가능",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "ban",
+     "text": "지정된 장소 외의 장소에서의 야영, 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    }
+   ],
+   "day": {
+    "cooking": {
+     "v": "PROHIBITED_OUTSIDE_DESIGNATED",
+     "text": "지정된 장소 외 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    },
+    "shade": {
+     "v": "ZONE_ONLY",
+     "season": "03-01~11-30",
+     "hours": "09:00-19:00 (6~8월 20:00, 2026.9.1.~11.30. 22:00)",
+     "size": "2m×2m 내외",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    }
+   }
+  },
+  {
+   "id": "hangang-nanji",
+   "name": "난지한강공원",
+   "sido": "서울",
+   "sigungu": "마포구",
+   "lat": 37.566,
+   "lng": 126.876,
+   "types": [
+    "공원",
+    "캠크닉"
+   ],
+   "op": "LOCAL_GOVERNMENT",
+   "amenities": [],
+   "fee": {
+    "min": 0,
+    "g": "FREE"
+   },
+   "homepage": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+   "pf": {
+    "s": "입장 무료 · 그늘막은 지정 허용구역·시간에만 · 지정 장소 외 야영·취사 금지",
+    "t": [
+     "PARK"
+    ]
+   },
+   "status": "운영",
+   "du": "park",
+   "src": {
+    "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+    "label": "미래한강본부 공지(그늘막 허용구역 2026.3.~11.)",
+    "checked_at": "2026-10-20"
+   },
+   "rules": [
+    {
+     "cat": "rule",
+     "text": "그늘막은 공원 내 지정 허용구역에서만 설치(2026.3.1.~11.30.)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "허용 시간 3~5월·9~11월 09~19시, 6~8월 09~20시 (2026.9.1.~11.30. 09~22시 연장)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "limit",
+     "text": "그늘막 규격 2m×2m 내외(4인용)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "돗자리는 기간·장소 관계없이 상시 이용 가능",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "ban",
+     "text": "지정된 장소 외의 장소에서의 야영, 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    }
+   ],
+   "day": {
+    "cooking": {
+     "v": "PROHIBITED_OUTSIDE_DESIGNATED",
+     "text": "지정된 장소 외 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    },
+    "shade": {
+     "v": "ZONE_ONLY",
+     "season": "03-01~11-30",
+     "hours": "09:00-19:00 (6~8월 20:00, 2026.9.1.~11.30. 22:00)",
+     "size": "2m×2m 내외",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    }
+   }
+  },
+  {
+   "id": "hangang-yanghwa",
+   "name": "양화한강공원",
+   "sido": "서울",
+   "sigungu": "영등포구",
+   "lat": 37.541,
+   "lng": 126.902,
+   "types": [
+    "공원",
+    "캠크닉"
+   ],
+   "op": "LOCAL_GOVERNMENT",
+   "amenities": [],
+   "fee": {
+    "min": 0,
+    "g": "FREE"
+   },
+   "homepage": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+   "pf": {
+    "s": "입장 무료 · 그늘막은 지정 허용구역·시간에만 · 지정 장소 외 야영·취사 금지",
+    "t": [
+     "PARK"
+    ]
+   },
+   "status": "운영",
+   "du": "park",
+   "src": {
+    "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+    "label": "미래한강본부 공지(그늘막 허용구역 2026.3.~11.)",
+    "checked_at": "2026-10-20"
+   },
+   "rules": [
+    {
+     "cat": "rule",
+     "text": "그늘막은 공원 내 지정 허용구역에서만 설치(2026.3.1.~11.30.)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "허용 시간 3~5월·9~11월 09~19시, 6~8월 09~20시 (2026.9.1.~11.30. 09~22시 연장)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "limit",
+     "text": "그늘막 규격 2m×2m 내외(4인용)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "돗자리는 기간·장소 관계없이 상시 이용 가능",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "ban",
+     "text": "지정된 장소 외의 장소에서의 야영, 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    }
+   ],
+   "day": {
+    "cooking": {
+     "v": "PROHIBITED_OUTSIDE_DESIGNATED",
+     "text": "지정된 장소 외 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    },
+    "shade": {
+     "v": "ZONE_ONLY",
+     "season": "03-01~11-30",
+     "hours": "09:00-19:00 (6~8월 20:00, 2026.9.1.~11.30. 22:00)",
+     "size": "2m×2m 내외",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    }
+   }
+  },
+  {
+   "id": "hangang-gangseo",
+   "name": "강서한강공원",
+   "sido": "서울",
+   "sigungu": "강서구",
+   "lat": 37.588,
+   "lng": 126.816,
+   "types": [
+    "공원",
+    "캠크닉"
+   ],
+   "op": "LOCAL_GOVERNMENT",
+   "amenities": [],
+   "fee": {
+    "min": 0,
+    "g": "FREE"
+   },
+   "homepage": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+   "pf": {
+    "s": "입장 무료 · 그늘막은 지정 허용구역·시간에만 · 지정 장소 외 야영·취사 금지",
+    "t": [
+     "PARK"
+    ]
+   },
+   "status": "운영",
+   "du": "park",
+   "src": {
+    "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+    "label": "미래한강본부 공지(그늘막 허용구역 2026.3.~11.)",
+    "checked_at": "2026-10-20"
+   },
+   "rules": [
+    {
+     "cat": "rule",
+     "text": "그늘막은 공원 내 지정 허용구역에서만 설치(2026.3.1.~11.30.)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "허용 시간 3~5월·9~11월 09~19시, 6~8월 09~20시 (2026.9.1.~11.30. 09~22시 연장)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "limit",
+     "text": "그늘막 규격 2m×2m 내외(4인용)",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "rule",
+     "text": "돗자리는 기간·장소 관계없이 상시 이용 가능",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    },
+    {
+     "cat": "ban",
+     "text": "지정된 장소 외의 장소에서의 야영, 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    }
+   ],
+   "day": {
+    "cooking": {
+     "v": "PROHIBITED_OUTSIDE_DESIGNATED",
+     "text": "지정된 장소 외 취사 금지",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "at": "2026-10-20"
+    },
+    "shade": {
+     "v": "ZONE_ONLY",
+     "season": "03-01~11-30",
+     "hours": "09:00-19:00 (6~8월 20:00, 2026.9.1.~11.30. 22:00)",
+     "size": "2m×2m 내외",
+     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
+     "at": "2026-10-20"
+    }
+   }
+  },
+  {
+   "id": "imjingak-peace-nuri",
+   "name": "임진각 평화누리 / 평화누리캠핑장",
+   "sido": "경기",
+   "sigungu": "파주시",
+   "lat": 37.89,
+   "lng": 126.74,
+   "types": [
+    "공원",
+    "캠크닉"
+   ],
+   "op": "LOCAL_GOVERNMENT",
+   "amenities": [],
+   "fee": {
+    "min": 0,
+    "g": "FREE"
+   },
+   "homepage": "https://ggtour.or.kr/camping/",
+   "pf": {
+    "s": "입장 무료 공원",
+    "t": [
+     "PARK"
+    ]
+   },
+   "status": "운영",
+   "du": "park",
+   "src": {
+    "url": "https://ggtour.or.kr/camping/",
+    "label": "관리기관 안내",
+    "checked_at": "2026-10-20"
+   },
+   "rules": [],
+   "day": {
+    "cooking": {
+     "v": "UNKNOWN",
+     "text": "미확인"
+    }
+   }
+  }
+ ]
+}

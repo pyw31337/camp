@@ -56,7 +56,7 @@ const seoul = seoulRaw ? matchSeoulToCampgrounds(seoulRaw.services ?? [], camps.
 const pilotFacts = await read("../registry/pilot-condition-facts.json");
 const stdCampgrounds = await read("../out/standard-campgrounds.json");
 const records = buildExploreRecords(camps, toilets, fees, seoul, notices, pilotFacts);
-// 카탈로그에 없는 당일 캠프닉(펀앤펀 등)은 레지스트리에서 붙인다. 다음 전체 빌드에서도 유지.
+// 카탈로그에 없는 당일 캠크닉(펀앤펀 등)은 레지스트리에서 붙인다. 다음 전체 빌드에서도 유지.
 const campnicExtra = await read("../registry/private-campnic.json");
 if (campnicExtra?.sites) {
   const have = new Set(records.map((r) => r.name));
@@ -71,7 +71,7 @@ if (campnicExtra?.sites) {
       addr: s.addr || s.region || "",
       op: "PRIVATE",
       status: "운영",
-      types: ["캠프닉"],
+      types: ["캠크닉"],
       amenities: [],
       fee: s.fee ? { text: s.fee, grade: "MENTION" } : null,
       booking: s.source ? { url: s.source, channels: [{ platform_id: "web", platform_name: "안내", url: s.source, kind: "online", confidence: 0.7, evidence: ["campnic_registry"] }] } : null,
