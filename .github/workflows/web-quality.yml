@@ -1,11 +1,8 @@
 name: Web quality
 
 on:
+  # 필수 검사(Lint and build, Rail swipe)라서 모든 PR에서 돈다. 경로 필터를 걸면 데이터만 바꾼 PR이 '대기 중'으로 막힌다.
   pull_request:
-    paths:
-      - "camping-atlas/**"
-      - "design/renewal/**"
-      - ".github/workflows/web-quality.yml"
   push:
     branches: [main]
     paths:
