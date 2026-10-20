@@ -2,6 +2,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
+import { reviewDetailTexts } from "../lib/detail-text-review.mjs";
 
 const p = (rel) => fileURLToPath(new URL(rel, import.meta.url));
 
@@ -94,9 +95,10 @@ for (const targetPath of targetPaths) {
       continue;
     }
 
-    // 3. 후기 추출 요금 목록 (d.prices)
-    if (d.prices?.length) {
-      const ws = d.prices
+    // 3. 후기 추출 요금 목록 (d.prices) - 장비 판매글/모음글 등 정제 후 반영
+    const cleanPrices = reviewDetailTexts(d, c).d?.prices ?? [];
+    if (cleanPrices.length) {
+      const ws = cleanPrices
         .map((x) => Number(x.won))
         .filter((n) => Number.isFinite(n) && n >= 10000 && n <= 1000000)
         .sort((a, b) => a - b);
@@ -109,8 +111,8 @@ for (const targetPath of targetPaths) {
           text: min === max ? `${min.toLocaleString()}원` : `${min.toLocaleString()}~${max.toLocaleString()}원`,
           basis: "방문자 후기 언급 1박 요금",
           grade: "MENTION",
-          url: d.prices[0]?.url || null,
-          checked_at: d.prices[0]?.date || null,
+          url: cleanPrices[0]?.url || null,
+          checked_at: cleanPrices[0]?.date || null,
         };
         injected++;
         continue;

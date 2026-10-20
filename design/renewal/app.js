@@ -2231,7 +2231,12 @@ function siteTypesHtml(c, d) {
 }
 const hostOf = (u) => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch { return ""; } };
 function introHtml(d) {
-  const t = String(d?.intro ?? "").replace(/\s+/g, " ").trim();
+  let t = String(d?.intro ?? "").replace(/\s+/g, " ").trim();
+  t = t.replace(/\s*\((?:내용\s*및\s*)?(?:사진\s*)?출처\s*:\s*[^)]+\)/gi, "");
+  t = t.replace(/\s*\[출처[^\n\]]*\]?/gi, "");
+  t = t.replace(/\s*※\s*(?:내용|사진)?\s*출처\s*:[^\n]+/gi, "");
+  t = t.replace(/\s*\(출처\s*:[^)]+\)/gi, "");
+  t = t.replace(/\s+/g, " ").trim();
   if (!t) return "";
   const fact = sourceFact({ src: "고캠핑 소개", url: d?.intro_url, date: d?.intro_at, quote: d?.intro }, "고캠핑 소개");
   return `<section class="d-sec intro-sec"><div class="sec-head">${iconTitle("spark", "업장 소개")}<span class="sec-note">고캠핑 소개 ${srcTip(fact, "업장 소개")}</span></div><div class="intro intro-full"><p class="intro-copy">${esc(t)}</p></div></section>`;
@@ -2256,9 +2261,9 @@ function amenityIcon(x) {
   return ic("check");
 }
 function amenityHtml(c, d) {
-  const a = (c.amenities ?? []).map((x) => x.replace(".", "·"));
+  const a = (c.amenities ?? []).map((x) => x.replace(".", "·")).filter((x) => !/캠핑장\s*문의|문의\s*바람/.test(x));
   const cnt = [["화장실", c.toilets, "poo"], ["샤워실", c.showers, "bath"], ["개수대", c.sinks, "fountain"]].filter(([, n]) => n > 0);
-  const rent = c.rental ?? [];
+  const rent = (c.rental ?? []).filter((x) => !/캠핑장\s*문의|문의\s*바람/.test(x));
   const pt = c.nearby_toilets?.within_2km;
   if (!a.length && !cnt.length && !rent.length) return "";
 
@@ -2563,7 +2568,7 @@ function houseRulesHtml(c, d) {
   ].filter(Boolean);
   const noticeList = notices.length ? `<div class="hr-notices"><h3>${ic("report")}공지사항</h3><ul>${notices.map((n) => `<li>${/^https?:/.test(n.url ?? "") ? `<a href="${esc(n.url)}" target="_blank" rel="noopener">` : "<span>"}${n.date ? `<time>${esc(formatKoreanDate(n.date))}</time>` : ""}<b>${esc(n.title)}</b>${n.url ? ic("external") : ""}${/^https?:/.test(n.url ?? "") ? "</a>" : "</span>"}</li>`).join("")}</ul></div>` : "";
   const at = [...rules, ...ops].map((x) => x.at).filter(Boolean).sort().at(-1);
-  return `<section class="d-sec hr-sec" id="sec-rules"><div class="sec-head">${iconTitle("alert", "이용 규칙 · 공지")}<span class="sec-note">업장이 공개한 원문${at ? ` · ${ymd(at)} 확인` : ""} ${tip("<b>이용 규칙 · 공지</b><span>운영자 홈페이지·예약 페이지와 고캠핑 등록값에서 업장이 직접 공개한 금지사항·이용 제한·이용 수칙만 모았어요. 후기 글은 쓰지 않아요. 규칙은 바뀔 수 있으니 예약 전 원문을 확인하세요. 각 줄과 공지 제목을 누르면 원래 페이지가 열리고, 빨간 배지를 누르면 근거 문장과 원문 링크가 보여요.</span>", "이용 규칙 기준")}</span></div>${tagRow}${cols.length ? `<div class="hr-grid">${cols.join("")}</div>` : ""}${noticeList}</section>`;
+  return `<section class="d-sec hr-sec" id="sec-rules"><div class="sec-head">${iconTitle("alert", "이용 규칙")}<span class="sec-note">업장이 공개한 원문${at ? ` · ${ymd(at)} 확인` : ""} ${tip("<b>이용 규칙</b><span>운영자 홈페이지·예약 페이지와 고캠핑 등록값에서 업장이 직접 공개한 금지사항·이용 제한·이용 수칙만 모았어요. 후기 글은 쓰지 않아요. 규칙은 바뀔 수 있으니 예약 전 원문을 확인하세요. 각 줄과 공지 제목을 누르면 원래 페이지가 열리고, 빨간 배지를 누르면 근거 문장과 원문 링크가 보여요.</span>", "이용 규칙 기준")}</span></div>${tagRow}${cols.length ? `<div class="hr-grid">${cols.join("")}</div>` : ""}${noticeList}</section>`;
 }
 // 운영자 원문은 말투·질문·반복이 섞여 있으므로, 예약에 필요한 항목으로 묶어 읽기 좋게 정리한다.
 // 값 자체는 바꾸지 않고 같은 항목의 짧은 원문만 합치며, 전체 원문은 작은 (i)에서 다시 열 수 있다.
@@ -2696,6 +2701,8 @@ function operatorHtml(d, c) {
     const value = /(안내|확인)$/.test(sum) && statement ? serviceText(statement, 64) || sum : sum;
     return { ...x, sum, value };
   }).filter((x) => {
+    // 실질적 정보가 없는 더미 확인 문구 제외
+    if (/^(?:운영 규정 확인|사이트 이용 안내|공지사항 확인|운영 안내|이용 안내 확인|이용 수칙 확인|확인|안내)$/.test(x.value)) return false;
     // 1. 입·퇴실: 상단 이용정보에 입/퇴실 시각이 이미 있고, 공지 내용이 단순 시각 나열이거나 "확인" 문구면 제외
     if (x.label === "입·퇴실" && (inVal || outVal)) {
       if (/^(?:\d{1,2}:\d{2}(?:\s*·\s*\d{1,2}:\d{2})?|입·퇴실 시간 확인)$/.test(x.value)) return false;
