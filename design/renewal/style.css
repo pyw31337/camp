@@ -226,7 +226,7 @@ body[data-view="home"] .top .gear-chip { background: rgba(8,18,30,.42); color: #
 [data-v="b"] .finder .chip, [data-v="c"] .finder .chip { border: 1px solid var(--line); background: var(--paper); }
 .finder .chip[aria-pressed="true"] { background: var(--sel); color: var(--on-sel); }
 .mode-panel { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; max-width: 760px; min-width: 0; }
-.finder-form { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(130px, .8fr) minmax(140px, 1fr) auto; gap: 10px; min-width: 0; }
+.finder-form { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(180px, 1fr) auto; gap: 10px; min-width: 0; }
 .finder-field select { min-width: 0; padding: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font: inherit; font-size: .86rem; font-weight: 850; appearance: none; cursor: pointer; }
 .finder-field {
   min-width: 0;
@@ -315,8 +315,7 @@ img { color: transparent; }
 .sec-head.big h1 { font-size: clamp(1.8rem, 1.2rem + 2.2vw, 3rem); font-weight: 900; }
 .sec-note { display: inline-flex; align-items: center; gap: 6px; font-size: .84rem; color: var(--ink-3); white-space: nowrap; }
 .sec-side { display: inline-flex; align-items: center; gap: 10px; margin-left: auto; }
-.rail-progress { display: inline-flex; align-items: center; width: 48px; height: 5px; border-radius: 999px; background: var(--line, rgba(0, 0, 0, 0.1)); overflow: hidden; flex: none; vertical-align: middle; }
-.rail-progress i { display: block; height: 100%; width: 18%; min-width: 18%; border-radius: 999px; background: var(--accent); transition: width 0.12s ease-out; }
+.rail-progress { display: none !important; }
 [data-v="b"] .sec-head { border-bottom: 2px solid var(--ink); padding-bottom: 8px; }
 
 /* ── 홈 메인 주요 섹션 규격화 (곧 오픈, 긍정 후기, 테마로 고르기) ────────── */
@@ -371,7 +370,7 @@ img { color: transparent; }
   border-top: 1px solid var(--line);
 }
 .res-head { display: flex; align-items: center; gap: 16px; margin-bottom: var(--sec-head-mb); flex-wrap: wrap; }
-.res-head h2 { font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem); font-weight: 300; white-space: nowrap; }
+.res-head h2 { font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem); font-weight: 900; white-space: nowrap; }
 .res-head h2 b { font-weight: 900; }
 .res-tools { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; justify-content: flex-end; }
 .active-chips { flex: 1; min-width: 0; justify-content: flex-start; }
@@ -450,9 +449,14 @@ img { color: transparent; }
 /* 불가사항: 같은 아이콘, 공통 빨간 배지 */
 .bdg-no { --c: var(--no); --on: #fff; color: var(--no-ink); }
 .d-bdgs .bdg-no, .hr-tags .bdg-no { background: var(--no-tint); border-color: var(--no-line); }
+.bdg-danger { --c: #e53935; --on: #fff; color: #d32f2f; }
+.bdg-danger .ic { background: #e53935; color: #fff; }
 
 /* ── 사진 레일(카드) ─────────────────────────────── */
 .car { position: relative; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; background: var(--soft-2); }
+.car-single { display: block; }
+.car-single img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; user-select: none; -webkit-user-drag: none; }
+.car-single::after { display: none; }
 .car-empty { display: grid; place-items: center; color: var(--ink-3); }
 .car-empty .ic { width: 40px; height: 40px; opacity: .4; }
 .car-track { position: relative; z-index: 2; display: flex; width: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; cursor: pointer; touch-action: pan-x pan-y; }
@@ -484,6 +488,7 @@ img { color: transparent; }
 .d-bdgs { display: flex; flex-wrap: wrap; gap: 6px; }
 .d-bdgs .bdg { box-shadow: none; height: 34px; font-size: .88rem; padding-right: 13px; background: var(--paper); border: 1px solid var(--line); }
 .d-bdgs .bdg .ic { width: 26px; height: 26px; padding: 5px; }
+.d-bdgs .bdg-danger { background: #ffebee; border-color: #ffcdd2; color: #d32f2f; }
 .gallery { margin: 0 calc(var(--gut) * -1) 0; }
 .gal-grid { display: grid; gap: 6px; height: clamp(300px, 36vw, 540px); padding: 0 var(--gut); }
 .gal-grid.n1 { grid-template-columns: 1fr; }
@@ -859,12 +864,12 @@ body.map-mode { overflow: hidden; height: 100dvh; }
   .hero h1 { font-size: clamp(2.1rem, 11vw, 2.75rem); line-height: 1.04; }
   .hero-summary { font-size: .72rem; }
   .finder { gap: 10px; padding: 12px; border-radius: 20px; }
-  .finder-form { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .finder-destination { grid-column: span 2; }
+  .finder-form { grid-template-columns: 1fr; gap: 8px; }
+  .finder-destination { grid-column: auto; }
   .finder-field { height: auto; min-height: 56px; padding: 9px 12px; border-radius: 14px; }
   .finder-field small { font-size: .68rem; margin-bottom: 2px; }
   .finder-field b, .finder-field input { font-size: .84rem; }
-  .finder-go { min-width: 0; height: 50px; border-radius: 14px; font-size: .88rem; grid-column: span 2; }
+  .finder-go { min-width: 0; height: 50px; border-radius: 14px; font-size: .88rem; grid-column: auto; }
   .finder-field select { font-size: .74rem; }
   .finder-regions { padding: 0 2px 2px; gap: 6px; }
   .finder-regions .chip { height: 32px; padding: 0 12px; font-size: .8rem; }
@@ -1589,8 +1594,9 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 
 /* 홈 ‘실시간 인기’(2026-10-19): 곧 오픈과 같은 레일·카드 크기, 순위 번호·변동·출처 아이콘(같은 크기) */
 .trending-rail { gap: 14px; padding: 10px 4px 18px; margin: -8px -4px -10px; }
-.tr-card { position: relative; flex: none; width: 220px; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+.tr-card { position: relative; flex: none; width: 260px; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
 .tr-ph { position: relative; display: block; width: 100%; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--r-s, 12px); background: var(--soft-2, #eee); box-shadow: var(--shadow); }
+.tr-ph .car { width: 100%; height: 100%; aspect-ratio: auto; }
 .tr-ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .2s; }
 @media (hover:hover) { .tr-card:hover .tr-ph img { transform: scale(1.03); } }
 .tr-noimg { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ink-3); }
@@ -1600,9 +1606,13 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .tr-tr.up { color: #d6336c; }
 .tr-tr.down { color: #1c7ed6; }
 .tr-tr.new { color: #fff; background: var(--accent, #0a7c4a); }
-.tr-card > b { margin-top: 10px; font-weight: 800; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.tr-card > i { margin-top: 2px; font-style: normal; font-size: .82rem; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.tr-meta { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-top: 6px; }
+.tr-body { display: flex; flex-direction: column; flex: 1; padding: 2px 2px 0; }
+.tr-body b, .tr-card > b { margin-top: 10px; font-weight: 800; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tr-body i, .tr-card > i { margin-top: 2px; font-style: normal; font-size: .82rem; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tr-reasons { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; margin-bottom: 2px; }
+.tr-reason { display: flex; align-items: flex-start; gap: 6px; font-size: .76rem; line-height: 1.35; color: var(--ink-2); }
+.tr-reason::before { content: "•"; color: var(--accent); font-weight: 900; flex: none; }
+.tr-meta { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-top: auto; padding-top: 8px; }
 .tr-count { font-size: .8rem; color: var(--ink-2); white-space: nowrap; }
 .tr-count b { font-weight: 900; color: var(--accent, #0a7c4a); }
 .tr-srcs { display: inline-flex; gap: 4px; flex-wrap: nowrap; overflow: hidden; }
@@ -1675,3 +1685,22 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 .hr-notices time { flex: none; font-family: var(--mono); font-size: .78rem; color: var(--ink-3); }
 .hr-notices b { flex: 1; min-width: 0; font-size: .9rem; font-weight: 750; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .hr-notices li .ic { flex: none; width: 14px; height: 14px; color: var(--ink-3); }
+/* ── 콘텐츠 카드 격자(소유자 2026-10-20, context/cgrid.js) ──
+   후기·캠퍼 사진·영상·축제 카드만: ~767px 기존 배치 · 768px 2단 · 1024px 3단 · 1280px 4단 · 1600px 5단.
+   처음 개수는 줄이 꽉 차게(2단 4 · 3단 6 · 4단 4 · 5단 5), 나머지는 더보기로 같은 개수씩. */
+.intro-sec .intro-full .intro-copy, .intro.intro-full p { display: block; -webkit-line-clamp: unset; overflow: visible; }
+[data-cg-hide] { display: none !important; }
+.cg-more-wrap { display: flex; justify-content: center; margin-top: 12px; }
+.cg-more-wrap[hidden], .cg-more-wrap:has(> .cg-more[hidden]) { display: none; }
+.cg-more { height: 38px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink-2); font: inherit; font-size: .84rem; font-weight: 800; cursor: pointer; }
+.cg-more:hover { background: var(--soft); }
+@media (max-width: 767px) { .cg-more-wrap { display: none; } }
+@media (min-width: 768px) {
+  .review-links.cgrid, .review-links.review-photos.cgrid { grid-template-columns: repeat(var(--cg-cols, 2), minmax(0, 1fr)); }
+  .rail.vids.cgrid { display: grid; grid-template-columns: repeat(var(--cg-cols, 2), minmax(0, 1fr)); overflow: visible; scroll-snap-type: none; -webkit-mask-image: none; mask-image: none; }
+  .rail.vids.cgrid .vid-wrap { width: auto; min-width: 0; }
+  .rail.vids.cgrid .vid, .rail.vids.cgrid .vid img { width: 100%; }
+  .rail.vids.cgrid .vid { container-type: inline-size; }
+  .rail.vids.cgrid .vid-play { left: calc(50% - 24px); top: calc(28.125cqw - 24px); }
+  .ev-rail.cgrid { grid-template-columns: repeat(var(--cg-cols, 2), minmax(0, 1fr)); }
+}
