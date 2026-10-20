@@ -39,4 +39,24 @@ for (const r of rows) {
   n.camps++; if (g.fees?.length) n.fees++; if (g.layout?.length) n.layout++; if (g.photos?.length) n.photos++; if (g.facilities?.length) n.facilities++; if (g.intro) n.intro++;
   if (g.facilities?.some((f) => /내부시설/.test(f.k))) n.inner++;
 }
+// 겨울 정보(소유자 2026-10-21) → 카탈로그 campgrounds.json에 짧게:
+//   c.win = 1 운영기간에 ‘겨울’ 있음 · 0 운영기간은 있는데 ‘겨울’ 없음(화면에선 기존 ‘동계 휴장’ 빨간 배지로 보임) · 없음 = 모름
+//   c.heat = ["g","c"] 글램핑(g)·카라반(c) 내부시설에 ‘난방’이 등록된 상품
+const catPath = join(dataDir, "campgrounds.json");
+if (existsSync(catPath)) {
+  const cat = JSON.parse(readFileSync(catPath, "utf8"));
+  const byId = new Map(rows.map((r) => [String(r.id), r]));
+  const w = { win: 0, closed: 0, heat: 0 };
+  for (const c of cat) {
+    const r = byId.get(String(c.id));
+    delete c.win; delete c.heat;
+    if (!r) continue;
+    const per = String(r.info?.["운영기간"] ?? "").trim();
+    if (per) { c.win = /겨울/.test(per) ? 1 : 0; c.win ? w.win++ : w.closed++; }
+    const heat = [["g", /글램핑\s*내부/], ["c", /카라반\s*내부/]].filter(([, re]) => (r.facilities ?? []).some((f) => re.test(f.k) && /난방/.test(`${f.v ?? ""} ${(f.items ?? []).join(" ")}`))).map(([k]) => k);
+    if (heat.length) { c.heat = heat; w.heat++; }
+  }
+  writeFileSync(catPath, JSON.stringify(cat));
+  console.log("winter →", JSON.stringify(w));
+}
 console.log("gocamping detail →", JSON.stringify({ ...n, photos_dropped_as_duplicate: dropped }));

@@ -494,6 +494,8 @@ img { color: transparent; }
 .bdg-caravan { --c: #1d4ed8; }
 .bdg-house { --c: #7c3aed; }
 .bdg-rv { --c: #475569; }
+/* 눈·영하 예보(기상청 7일) */
+.bdg-wx { --c: #0284c7; }
 .card-types.has-stay { gap: 6px; height: 24px; }
 .stay-bdgs { display: inline-flex; gap: 4px; flex: none; }
 .stay-bdgs .bdg { height: 22px; font-size: .72rem; padding: 0 8px 0 2px; gap: 4px; box-shadow: none; border: 1px solid var(--line); background: var(--paper); }

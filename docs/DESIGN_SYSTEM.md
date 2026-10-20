@@ -532,3 +532,11 @@ Pretendard Variable 한 가지. 제목 800, 본문 400~600, 숫자 `tabular-nums
 - 근거: 고캠핑 업종(`c.types`) 또는 `c.st` 등록·운영자 근거(후기 언급 `m` 제외), 트레일러는 `c.trailer`/`c.caravan`. 코드: `design/renewal/app.js` `STAYS`·`stayKinds`.
 - 위치: 홈·목록 카드 타입 줄(배지에 나온 타입은 줄 글자에서 뺌), 상세 머리 배지, 지도 팝업, 홈 ‘사이트’ 칩(숙박 상품 먼저), 목록 조건 ‘상품·이용’, 지도 빠른 칩(글램핑·카라반·방갈로).
 - 회귀 테스트: `camping-atlas/scripts/stay-badges-test.mjs`(CI Rail swipe 잡).
+
+## 겨울 기능 (2026-10-21)
+
+- 카탈로그 `c.win`(1 겨울 운영 / 0 겨울 휴장 → 기존 빨간 ‘동계 휴장’ 배지), `c.heat`(["g","c"] 글램핑·카라반 내부시설 난방) — `pipeline/scripts/build-gocamping-detail.mjs`(data-sync·publish-incremental).
+- 난방은 별도 배지 없이 숙박 배지 글자를 ‘난방 글램핑’·‘난방 카라반’으로 바꾼다(중복 금지).
+- 홈 첫 테마 줄 ‘겨울 캠핑’(WINTER): 겨울 운영 + (난방 상품 또는 W 공지 1,100W 이상). 이미지 themes/winter.webp.
+- 목록 조건 ‘겨울’ 섹션(`win=1`). 눈·영하 예보 배지 `bdg-wx`: conditions/forecast.json 7일, 카드 사진 위·상세 머리.
+- 회귀 테스트: `camping-atlas/scripts/winter-test.mjs`(CI Rail swipe 잡).
