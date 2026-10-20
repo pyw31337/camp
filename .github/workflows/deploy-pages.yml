@@ -22,9 +22,11 @@ permissions:
   pages: write
   id-token: write
 
+# 진행 중인 배포는 끊지 않는다(cancel-in-progress: false). 대기열에는 최신 1건만 남으므로 결국 최신 main이 배포된다.
+# true였을 때 데이터 자동 커밋이 몇 분마다 들어와 코드 수정 배포가 계속 취소돼 라이브 반영이 굶었다(2026-10-20 레일 고장).
 concurrency:
   group: github-pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
