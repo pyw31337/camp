@@ -16,6 +16,8 @@ const catPath = join(dataDir, "campgrounds.json");
 const cat = JSON.parse(readFileSync(catPath, "utf8"));
 const unify = (t) => (t === "캠프닉" ? "캠크닉" : t);
 for (const c of cat) if (c.types?.includes("캠프닉")) c.types = [...new Set(c.types.map(unify))];
+// 자동 수집 장소(osm-*, park-*) 중 현재 레지스트리에 없는 것은 지운다(공식 공원으로 바뀐 OSM 공원 중복 방지).
+{ const live = new Set((seed.places ?? []).map((p) => p.id)); for (let i = cat.length - 1; i >= 0; i--) if (/^(osm|park)-/.test(String(cat[i].id)) && !live.has(String(cat[i].id))) cat.splice(i, 1); }
 const byId = new Map(cat.map((c, i) => [String(c.id), i]));
 let added = 0, replaced = 0;
 for (const p of seed.places ?? []) {
