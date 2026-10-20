@@ -1662,7 +1662,7 @@ const NEARBY_LABELS = {
   PHARMACY: ["약국", "cross"], HOSPITAL: ["병원", "cross"], VET: ["동물병원", "paw"],
   DROWSY_SHELTER: ["졸음쉼터", "route"], REST_AREA: ["휴게소", "route"], TOILET: ["공중화장실", "drop"],
   TOUR: ["관광", "pin"], FOOD: ["맛집", "meat"], EV: ["전기차 충전", "bolt"],
-  OTC_MEDICINE: ["상비약", "cross"], GAS_STATION: ["주유", "fuel"], ANIMAL_HOSPITAL: ["동물병원", "paw"],
+  OTC_MEDICINE: ["상비약", "cross"], GAS_STATION: ["주유", "fuel"], ANIMAL_HOSPITAL: ["동물병원", "paw"], GEAR: ["캠핑용품", "tent"],
 };
 const FUEL_BRANDS = [[/S-?OIL|에쓰오일|에스오일/i, "S-OIL"], [/GS칼텍스|\bGS\b|^GS/i, "GS칼텍스"], [/SK에너지|\bSK\b|^SK/i, "SK에너지"], [/현대오일뱅크|오일뱅크|HD현대/i, "HD현대오일뱅크"], [/알뜰/, "알뜰주유소"], [/농협|NH/i, "농협(알뜰)"], [/E1|이원/, "E1(LPG)"], [/LPG|충전소/, "LPG"]];
 /** 주유소 이름에서 상표(정유사)를 짐작한다. 모르면 null */
@@ -1718,41 +1718,47 @@ function mountNearbyEv(ev) {
   note.hidden = false;
   group.closest(".nearby-hub")?.removeAttribute("hidden");
   const tab = $("[data-nb-tab='energy']");
-  if (tab) { tab.hidden = false; if (!$("[data-nb-tab][aria-selected='true']:not([hidden])")) tab.click(); } else group.hidden = false;
+  if (tab) {
+    tab.hidden = false;
+    const n = places.children.length;
+    if (n && !tab.querySelector("i")) tab.insertAdjacentHTML("beforeend", `<i>${n}</i>`);
+    if (!$("[data-nb-tab][aria-selected='true']:not([hidden])")) tab.click();
+  } else group.hidden = false;
 }
 function nearbyHubHtml(c, d) {
   const nearby = d?.nearby ?? {}, licensed = d?.nearby_licensed ?? {};
   const entry = (type, x = {}) => {
-    const name = x.name ?? x.n;
-    const m = Number(x.m);
+    const name = x?.name ?? x?.n;
+    const m = Number(x?.m);
     return name && Number.isFinite(m) ? { type, name, m, lat: x.lat, lng: x.lng, url: x.u, image: x.img, imgU: x.img_u, imgS: x.img_s } : null;
   };
-  const first = (type, rows) => (rows.map((x) => entry(type, x)).filter(Boolean).sort((a, b) => a.m - b.m)[0] ?? null);
-  // 상비약 판매처는 보통 같은 편의점이다. 이름이 같으면 한 칸으로 줄인다.
-  const licensedRows = Object.entries(licensed).filter(([type]) => type !== "FUEL" && type !== "GAS_STATION").map(([type, x]) => entry(type, x)).filter(Boolean)
-    .filter((x, _, all) => x.type !== "OTC_MEDICINE" || !all.some((y) => y.type === "CONVENIENCE" && y.name === x.name));
-  const local = [
-    ...licensedRows,
-    first("CONVENIENCE", nearby.conv ?? []), first("MART", nearby.mart ?? []), first("BUTCHER", (nearby.mart ?? []).filter((x) => /정육|바베큐/.test(x.k ?? ""))),
-  ].filter(Boolean);
-  const safety = [
-    first("PHARMACY", (nearby.medical ?? []).filter((x) => /약국|pharmacy|의약/.test(x.k ?? x.n ?? ""))),
-    first("HOSPITAL", (nearby.medical ?? []).filter((x) => /병원|의료원|hospital/.test(x.k ?? x.n ?? ""))),
-    first("VET", nearby.vet ?? []), first("DROWSY_SHELTER", (nearby.rest ?? []).filter((x) => x.k === "DROWSY_SHELTER")), first("REST_AREA", (nearby.rest ?? []).filter((x) => x.k === "REST_AREA")),
-  ].filter(Boolean);
+  // 한 종류에 가까운 순 최대 3곳(이름이 같으면 하나로)
+  const pick = (type, ...lists) => [...new Map(lists.flat().map((x) => entry(type, x)).filter(Boolean).sort((a, b) => a.m - b.m).map((x) => [x.name.replace(/\s+/g, ""), x])).values()].slice(0, 3);
+  const k = (arr, re) => (arr ?? []).filter((x) => re.test(`${x.k ?? ""} ${x.n ?? ""}`));
+  const conv = pick("CONVENIENCE", licensed.CONVENIENCE ?? [], nearby.conv ?? []);
+  // 상비약 판매처는 보통 같은 편의점이다 → 편의점과 이름이 같으면 약국 칸에 넣지 않는다
+  const otc = pick("OTC_MEDICINE", licensed.OTC_MEDICINE ?? []).filter((x) => !conv.some((y) => y.name === x.name));
   const toilet = c.nearby_toilets ?? {};
-  if (Number(toilet.within_500m) || Number(toilet.within_2km)) safety.push({ type: "TOILET", name: `500m ${Number(toilet.within_500m) || 0}곳 · 2km ${Number(toilet.within_2km) || 0}곳`, m: Number(toilet.within_500m) ? 500 : 2000, summary: true });
-  const leisure = [...(nearby.tour ?? []).slice(0, 4).map((x) => entry("TOUR", x)), ...(nearby.food ?? []).slice(0, 4).map((x) => entry("FOOD", x))].filter(Boolean);
-  const unique = (rows) => [...new Map(rows.map((x) => [`${x.type}:${x.name.replace(/\s+/g, "")}`, x])).values()].slice(0, 5);
-  const fuel = fuelPlaces(nearby.fuel ?? [], licensed.FUEL ?? licensed.GAS_STATION);
-  const groups = [["생활", "store", unique(local)], ["안전 · 이동", "route", unique(safety)], ["관광 · 맛집", "pin", unique(leisure)]]
-    .filter(([, , rows]) => rows.length);
-  // 주유·충전: 주유소는 상세 자료에 있고, 전기차 충전소는 /context/extras.json에서 화면이 뜬 뒤 덧붙인다(mountNearbyEv).
-  const energy = `<section class="nearby-group" id="nb-p-energy" role="tabpanel" aria-labelledby="nb-t-energy" data-energy${groups.length ? " hidden" : fuel.length ? "" : " hidden"}><div class="nearby-places" data-energy-places>${fuel.map(nearbyCard).join("")}</div><p class="nearby-note" data-energy-note hidden></p></section>`;
-  // 칩(탭)으로 한 묶음씩 본다. 주유·충전 칩은 주유소가 없으면 숨겼다가 충전소가 붙을 때 보인다(mountNearbyEv).
-  const tabs = [...groups.map(([title, icon, rows], i) => ({ key: `g${i}`, title, icon, n: rows.length })), { key: "energy", title: "주유 · 충전", icon: "fuel", n: fuel.length, hide: !fuel.length }];
+  // 소유자 2026-10-20: 생활·안전·관광 묶음 대신 마트·약국·병원·맛집·관광·주유소·충전소처럼 종류별로 나눠 보인다
+  const groups = [
+    ["conv", "편의점", "store", conv],
+    ["mart", "마트", "cart", pick("MART", licensed.MART ?? [], k(nearby.mart, /supermarket|마트|greengrocer/))],
+    ["butcher", "정육", "meat", pick("BUTCHER", licensed.BUTCHER ?? [], k(nearby.mart, /정육|바베큐|butcher/))],
+    ["pharmacy", "약국", "cross", [...pick("PHARMACY", licensed.PHARMACY ?? [], k(nearby.medical, /약국|pharmacy|의약/)), ...otc].slice(0, 3)],
+    ["hospital", "병원", "cross", pick("HOSPITAL", k(nearby.medical, /병원|의료원|hospital|clinic/))],
+    ["vet", "동물병원", "paw", pick("VET", licensed.VET ?? [], nearby.vet ?? [])],
+    ["gear", "캠핑용품", "tent", pick("GEAR", nearby.gear ?? [])],
+    ["rest", "휴게소", "route", pick("REST_AREA", k(nearby.rest, /REST_AREA|SERVICE_AREA|DROWSY_SHELTER/))],
+    ["toilet", "화장실", "drop", Number(toilet.within_500m) || Number(toilet.within_2km) ? [{ type: "TOILET", name: `500m ${Number(toilet.within_500m) || 0}곳 · 2km ${Number(toilet.within_2km) || 0}곳`, m: Number(toilet.within_500m) ? 500 : 2000, summary: true }] : []],
+    ["tour", "관광", "pin", (nearby.tour ?? []).slice(0, 4).map((x) => entry("TOUR", x)).filter(Boolean)],
+    ["food", "맛집", "meat", (nearby.food ?? []).slice(0, 4).map((x) => entry("FOOD", x)).filter(Boolean)],
+    ["fuel", "주유소", "fuel", fuelPlaces(nearby.fuel ?? [], licensed.FUEL ?? licensed.GAS_STATION)],
+  ].filter(([, , , rows]) => rows.length);
+  // 충전소: /context/extras.json에서 화면이 뜬 뒤 덧붙인다(mountNearbyEv). 그때까지 칩·칸을 숨긴다.
+  const energy = `<section class="nearby-group" id="nb-p-energy" role="tabpanel" aria-labelledby="nb-t-energy" data-energy hidden><div class="nearby-places" data-energy-places></div><p class="nearby-note" data-energy-note hidden></p></section>`;
+  const tabs = [...groups.map(([key, title, icon, rows]) => ({ key, title, icon, n: rows.length })), { key: "energy", title: "충전소", icon: "bolt", n: 0, hide: true }];
   const tabsHtml = `<div class="nb-tabs" role="tablist" aria-label="주변시설 종류">${tabs.map((t, i) => `<button type="button" role="tab" id="nb-t-${t.key}" data-nb-tab="${t.key}" aria-controls="nb-p-${t.key}" aria-selected="${i === 0 && !t.hide}"${t.hide ? " hidden" : ""}>${ic(t.icon)}${esc(t.title)}${t.n ? `<i>${t.n}</i>` : ""}</button>`).join("")}</div>`;
-  return `<section class="d-sec nearby-hub" id="sec-nearby"${groups.length || fuel.length ? "" : " hidden"}><div class="sec-head">${iconTitle("route", "주변시설")}<span class="sec-note">캠핑장에서 직선거리 ${tip("<b>주변 정보</b><span>생활·안전 시설은 인허가·공공 데이터, 관광·맛집은 한국관광공사 데이터로 연결합니다. 운영 시간과 영업 여부는 원문에서 다시 확인하세요.</span>")}</span></div>${tabsHtml}<div class="nearby-groups">${groups.map(([title, icon, rows], i) => `<section class="nearby-group" id="nb-p-g${i}" role="tabpanel" aria-labelledby="nb-t-g${i}"${i ? " hidden" : ""}><div class="nearby-places">${rows.map(nearbyCard).join("")}</div></section>`).join("")}${energy}</div></section>`;
+  return `<section class="d-sec nearby-hub" id="sec-nearby"${groups.length ? "" : " hidden"}><div class="sec-head">${iconTitle("route", "주변시설")}<span class="sec-note">캠핑장에서 직선거리 ${tip("<b>주변 정보</b><span>편의점·마트·정육·약국·동물병원·주유소는 인허가·공공 데이터, 병원·휴게소·화장실은 공공·지도 데이터, 관광·맛집은 한국관광공사 데이터로 연결합니다. 종류마다 가까운 곳 최대 3곳(관광·맛집 4곳)을 보여요. 운영 시간과 영업 여부는 원문에서 다시 확인하세요.</span>")}</span></div>${tabsHtml}<div class="nearby-groups">${groups.map(([key, , , rows], i) => `<section class="nearby-group" id="nb-p-${key}" role="tabpanel" aria-labelledby="nb-t-${key}"${i ? " hidden" : ""}><div class="nearby-places">${rows.map(nearbyCard).join("")}</div></section>`).join("")}${energy}</div></section>`;
 }
 function reviewHtml(d, c) {
   const rv = d?.rv ?? c?.rv;
@@ -1906,8 +1912,7 @@ async function detailView(id) {
         ${programsHtml(d)}
         ${layoutHtml(d, c)}
         ${operatorMediaHtml(d)}
-        ${videosHtml(d)}
-        ${platformHubHtml(d, c)}
+        ${mediaHubHtml(d, c)}
         ${nearbyHubHtml(c, d)}
         <section class="d-sec ev-sec" id="sec-events" data-events hidden><div class="sec-head">${iconTitle("calendar", "주변 축제·행사")}<span class="sec-note">30km 안 · 45일 이내</span></div><div data-events-body></div></section>
         ${reviewLinksHtml(d, c)}
@@ -2398,28 +2403,47 @@ function layoutHtml(d, c) {
 }
 // 플랫폼별 더 보기(docs/PLATFORM_HUB.md, 2026-10-19): 수집한 영상은 위 영상 칸에서 재생하고,
 // 직접 수집하지 않는 플랫폼(인스타·페이스북·틱톡 등)은 캠핑장 이름 검색 결과로 새 탭에서 연다.
-function platformHubHtml(d, c) {
+// 관련 영상 · 플랫폼(소유자 2026-10-20): ‘더 보기’ 칸을 없애고 영상 칸 제목 아래에 플랫폼 칩(주변시설 칩과 같은 모양)을 둔다.
+// 모은 글·영상이 있는 플랫폼(YouTube 영상, 네이버·다음 글)은 칩을 누르면 이 자리에서 목록을, 없는 플랫폼(인스타·페이스북·틱톡 등)은
+// 그 플랫폼의 캠핑장 이름 검색 결과를 새 탭으로 연다(자동 수집하지 않는 플랫폼). 아이콘은 모두 검은 바탕·흰 글리프.
+const PLAT_SVG = {
+  youtube: '<path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/>',
+  instagram: '<path d="M16 3a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5zm0 2H8a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3m-4 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8m0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4m4.6-3.4a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>',
+  facebook: '<path d="M14 8h3V4h-3a5 5 0 0 0-5 5v2H7v4h2v7h4v-7h3l1-4h-4V9a1 1 0 0 1 1-1"/>',
+  tiktok: '<path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9.1a7.4 7.4 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.2-1.6"/>',
+  naver: '<path d="M15.6 12.8 8.1 2H2v20h6.4V11.2L15.9 22H22V2h-6.4z" transform="translate(3 3) scale(.75)"/>',
+  daum: '<path d="M6 4h5.2a8 8 0 0 1 0 16H6zm3.2 3.1v9.8h2a4.9 4.9 0 0 0 0-9.8z"/>',
+};
+const platIc = (k) => `<span class="plat-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${PLAT_SVG[k]}</svg></span>`;
+const isHost = (u, re) => { try { return re.test(new URL(u).hostname); } catch { return false; } };
+function mediaHubHtml(d, c) {
   const name = nameOf(c).name;
   const q = encodeURIComponent(`${name} 캠핑`);
-  // 아이콘은 모두 같은 크기·모양(둥근 네모 34px, 흰 글리프 18px)으로 맞춘다(소유자 2026-10-19). 바깥 그림 파일은 쓰지 않는다.
-  const svg = (path, bg) => `<span class="plat-ic" style="--pb:${bg}"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${path}</svg></span>`;
-  const platforms = [
-    { label: "YouTube", icon: svg('<path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/>', "#ff0033"), url: `https://www.youtube.com/results?search_query=${q}`, has: (d?.videos ?? []).length > 0 },
-    { label: "Instagram", icon: svg('<path d="M16 3a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5zm0 2H8a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3m-4 3a4 4 0 1 1 0 8 4 4 0 0 1 0-8m0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4m4.6-3.4a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>', "linear-gradient(45deg,#f9a825,#e1306c 55%,#833ab4)"), url: `https://www.instagram.com/explore/search/keyword/?q=${q}` },
-    { label: "Facebook", icon: svg('<path d="M14 8h3V4h-3a5 5 0 0 0-5 5v2H7v4h2v7h4v-7h3l1-4h-4V9a1 1 0 0 1 1-1"/>', "#1877f2"), url: `https://www.facebook.com/search/posts/?q=${q}` },
-    { label: "TikTok", icon: svg('<path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9.1a7.4 7.4 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.2-1.6"/>', "#111"), url: `https://www.tiktok.com/search?q=${q}` },
-    { label: "네이버", icon: svg('<path d="M15.6 12.8 8.1 2H2v20h6.4V11.2L15.9 22H22V2h-6.4z" transform="translate(3 3) scale(.75)"/>', "#03c75a"), url: `https://search.naver.com/search.naver?query=${q}` },
-    { label: "다음", icon: `<span class="plat-ic plat-ic-img">${daumImg(18)}</span>`, url: `https://search.daum.net/search?q=${q}` },
-  ];
-  return `<section class="d-sec plat-hub"><div class="sec-head">${iconTitle("external", "더 보기")}<span class="sec-note">플랫폼별 검색</span></div><div class="plat-btns">${platforms.map((p) => `<a class="plat-btn${p.has ? " has" : ""}" href="${esc(p.url)}" target="_blank" rel="noopener" title="${esc(p.label)}에서 ${esc(name)} 검색">${p.icon}<span>${esc(p.label)}</span>${p.has ? "<i>영상 있음</i>" : ""}</a>`).join("")}</div></section>`;
-}
-function videosHtml(d) {
   const v = (d?.videos ?? []).filter((x) => x.yt).slice(0, 8);
-  if (!v.length) return "";
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("video", "관련 영상")}<span class="sec-note">YouTube</span></div><div class="rail vids" data-cgrid>${v.map((x, i) => {
+  const seen = new Set();
+  const posts = [...(d?.reviews ?? []), ...(d?.cafe ?? []), ...(d?.web ?? [])].filter((x) => x.url && x.title && !seen.has(x.url) && seen.add(x.url))
+    .sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
+  const naverPosts = posts.filter((x) => isHost(x.url, /naver\.com$|naver\.me$/)).slice(0, 6);
+  const daumPosts = posts.filter((x) => isHost(x.url, /daum\.net$|kakao\.com$|tistory\.com$/)).slice(0, 6);
+  const postList = (rows) => `<div class="mh-posts">${rows.map((x) => `<a class="mh-post" href="${esc(x.url)}" target="_blank" rel="noopener"><b>${esc(serviceText(x.title, 60))}</b><i>${esc(sourceName(x.src, hostOf(x.url) || "원문"))}${x.date ? ` · ${esc(String(x.date).slice(0, 10))}` : ""}</i>${ic("external", "line")}</a>`).join("")}</div>`;
+  const tabs = [
+    { key: "youtube", label: "YouTube", n: v.length, panel: v.length ? `__RAIL__` : null, url: `https://www.youtube.com/results?search_query=${q}` },
+    { key: "naver", label: "네이버", n: naverPosts.length, panel: naverPosts.length ? postList(naverPosts) : null, url: `https://search.naver.com/search.naver?query=${q}` },
+    { key: "daum", label: "다음", n: daumPosts.length, panel: daumPosts.length ? postList(daumPosts) : null, url: `https://search.daum.net/search?q=${q}` },
+    { key: "instagram", label: "Instagram", url: `https://www.instagram.com/explore/search/keyword/?q=${q}` },
+    { key: "facebook", label: "Facebook", url: `https://www.facebook.com/search/posts/?q=${q}` },
+    { key: "tiktok", label: "TikTok", url: `https://www.tiktok.com/search?q=${q}` },
+  ];
+  const inSite = tabs.filter((t) => t.panel);
+  const chip = (t) => t.panel
+    ? `<button type="button" role="tab" id="mh-t-${t.key}" data-mh-tab="${t.key}" aria-controls="mh-p-${t.key}" aria-selected="${t === inSite[0]}">${platIc(t.key)}${esc(t.label)}<i>${t.n}</i></button>`
+    : `<a class="mh-link" href="${esc(t.url)}" target="_blank" rel="noopener" title="${esc(t.label)}에서 ${esc(name)} 검색">${platIc(t.key)}${esc(t.label)}${ic("external", "line")}</a>`;
+  const panels = inSite.map((t, i) => `<section class="mh-panel" id="mh-p-${t.key}" role="tabpanel" aria-labelledby="mh-t-${t.key}"${i ? " hidden" : ""}>${t.panel}${t.panel === "__RAIL__" ? "" : `<a class="mh-more" href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.label)}에서 더 찾기${ic("right")}</a>`}</section>`).join("");
+  const rail = v.length ? `<div class="rail vids" data-cgrid>${v.map((x, i) => {
     const fact = sourceFact({ src: "YouTube", url: x.url ?? `https://www.youtube.com/watch?v=${x.yt}`, date: x.date, title: x.title }, "YouTube");
     return `<article class="vid-wrap"><button type="button" class="vid" data-yt="${esc(x.yt)}"><img src="https://i.ytimg.com/vi/${encodeURIComponent(x.yt)}/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14z"/></svg></span><b>${esc(serviceText(x.title, 60) || `현장 영상 ${i + 1}`)}</b><i>${esc([x.author, x.date ? String(x.date).slice(0, 7) : ""].filter(Boolean).join(" · ") || "재생하기")}</i></button>${srcTip(fact, `관련 영상 ${i + 1}`)}</article>`;
-  }).join("")}</div></section>`;
+  }).join("")}</div>` : "";
+  return `<section class="d-sec media-hub" id="sec-media"><div class="sec-head">${iconTitle("video", "관련 영상 · SNS")}<span class="sec-note">${inSite.length ? "칩을 누르면 목록 · 바깥 플랫폼은 검색 결과로" : "플랫폼별 검색"}</span></div><div class="nb-tabs mh-tabs" role="tablist" aria-label="플랫폼">${tabs.map(chip).join("")}</div>${panels.replace("__RAIL__", rail)}</section>`;
 }
 function reviewSummary(value) {
   const text = String(value ?? "").replace(/[\r\n\t]+/g, " ").replace(/\s+/g, " ").trim();
@@ -3154,6 +3178,13 @@ function bindDetail() {
     const t = document.getElementById(a.dataset.jump);
     t?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
     t?.setAttribute("tabindex", "-1"); t?.focus({ preventScroll: true });
+  });
+  // 관련 영상 · SNS 칩: 이 자리 목록 전환(바깥 플랫폼 칩은 링크라 그대로 새 탭)
+  $(".media-hub")?.addEventListener("click", (e) => {
+    const t = e.target.closest("[data-mh-tab]");
+    if (!t) return;
+    $$(".media-hub [data-mh-tab]").forEach((b) => b.setAttribute("aria-selected", String(b === t)));
+    $$(".media-hub [role='tabpanel']").forEach((p) => { p.hidden = p.id !== t.getAttribute("aria-controls"); });
   });
   $(".nearby-hub")?.addEventListener("click", (e) => {
     const t = e.target.closest("[data-nb-tab]");
