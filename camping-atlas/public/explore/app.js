@@ -247,6 +247,23 @@ const QUICK = {
   park: { label: "텐트 옆 주차", icon: "car", cls: "cobalt", test: (c) => pos(facts(c).park) && facts(c).park.ok === true },
   pet: { label: "반려견", icon: "paw", cls: "ink", test: (c) => pos(facts(c).pet) && facts(c).pet.ok },
 };
+// 테마 아이콘(소유자 2026-10-20 지정 SVG). 모두 currentColor, 글자 왼쪽 1.1em.
+const TH_SVG = {
+  VALLEY: ["0 0 24 24", '<path fill="currentColor" d="M6.18 10.95l2.54 3.175l.084 .093a1 1 0 0 0 1.403 -.01l1.637 -1.638l1.324 1.985a1 1 0 0 0 1.457 .226l3.632 -2.906l3.647 7.697a1 1 0 0 1 -.904 1.428h-18a1 1 0 0 1 -.904 -1.428zm5.82 -7.878a3.3 3.3 0 0 1 2.983 1.888l2.394 5.057l-3.15 2.52l-1.395 -2.092l-.075 -.099a1 1 0 0 0 -1.464 -.053l-1.711 1.709l-1.301 -1.627l-1.151 -1.435l1.888 -3.98a3.3 3.3 0 0 1 2.982 -1.888"/>'],
+  FOREST: ["0 0 24 24", '<path fill="currentColor" d="M15 19v1a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2v-1zm-10 -1c-.89 0 -1.337 -1.077 -.707 -1.707l2.855 -2.857l-1.464 -.487a1 1 0 0 1 -.472 -1.565l.08 -.091l3.019 -3.02l-.758 -.379a1 1 0 0 1 -.343 -1.507l.083 -.094l4 -4a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1 -.26 1.601l-.759 .379l3.02 3.02a1 1 0 0 1 -.279 1.61l-.113 .046l-1.465 .487l2.856 2.857c.603 .602 .22 1.614 -.593 1.701l-.114 .006z"/>'],
+  BEACH: ["0 0 24 24", '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.75 9.5c2.75-2 6-1.5 8 1.5L12 12.75L13.25 11c2-3 5.25-3.5 8-1.5c-2.5.25-4.5 1.5-6 3.5l-2 2.5c-.75.75-1.75.75-2.5 0l-2-2.5c-1.5-2-3.5-3.25-6-3.5m0 10.25C4 19.75 4 19 5.25 19s1.25.75 2.5.75S9 19 10.25 19s1.25.75 2.5.75S14 19 15.25 19s1.25.75 2.5.75S19 19 20.25 19"/>'],
+  "T:HOUSE": ["0 0 24 24", '<path fill="currentColor" d="M12.707 2.293l9 9c.63 .63 .184 1.707 -.707 1.707h-1v6a3 3 0 0 1 -3 3h-10a3 3 0 0 1 -3 -3v-6h-1c-.89 0 -1.337 -1.077 -.707 -1.707l9 -9a1 1 0 0 1 1.414 0m.793 8.707h-3a1.5 1.5 0 0 0 -1.5 1.5v3a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5 -1.5v-3a1.5 1.5 0 0 0 -1.5 -1.5"/>'],
+  LAKE: ["0 0 24 24", '<path fill="currentColor" d="M2 22c0-.55.45-1 1-1c.87 0 1.73-.24 2.53-.7c.29-.16.65-.17.94 0c1.59.9 3.48.9 5.06 0a.98.98 0 0 1 .94 0c1.59.9 3.48.9 5.06 0a.98.98 0 0 1 .94 0c.8.46 1.66.7 2.53.7c.55 0 1 .45 1 1s-.45 1-1 1c-1.03 0-2.06-.25-3-.75a6.36 6.36 0 0 1-6.09-.05c-1.79.87-3.92.98-5.58-.14C5.3 22.69 4.15 23 3 23c-.55 0-1-.45-1-1M12 5.5c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m9.47 12.95c-.42.14-.9.28-1.41.42c-.53-.15-1.03-.43-1.45-.77a.98.98 0 0 0-1.23 0c-.66.53-1.48.9-2.38.9s-1.72-.37-2.39-.91a.99.99 0 0 0-1.22 0c-.67.54-1.49.91-2.39.91s-1.72-.37-2.39-.91c-.35-.29-.87-.28-1.23 0c-.43.35-.92.62-1.45.77c-.51-.14-.98-.28-1.4-.42c-.92-.3-.92-1.6 0-1.9c1.21-.39 2.79-.82 4.6-1.13l1.35-4.17c.31-.95 1.32-1.47 2.27-1.16c.09.03.19.07.27.11l2.47 1.3l2.84-1.5l1.65-3.71l-.36-.93c-.1-.25-.09-.52.02-.76l.74-1.68a1 1 0 0 1 1.32-.51l1.37.61a1 1 0 0 1 .5 1.32l-.75 1.68c-.11.24-.31.43-.56.53l-.9.36l-3.72 8.34c2.33.3 4.35.84 5.82 1.31c.93.3.94 1.6.01 1.9m-6.45-5.49l-.59.31c-.58.31-1.28.31-1.86 0l-.81-.43l-.71 2.17c.31 0 .63-.01.95-.01c.71 0 1.4.03 2.07.08z"/>'],
+  FAMILY: ["0 0 24 24", '<path fill="currentColor" d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 7.046 -9.232a3 3 0 0 0 2.949 3.556a1 1 0 0 0 0 -2l-.117 -.007a1 1 0 0 1 .117 -1.993c1.726 0 3.453 .447 5 1.34zm-1.8 10.946a1 1 0 0 0 -1.414 .014a2.5 2.5 0 0 1 -3.572 0a1 1 0 0 0 -1.428 1.4a4.5 4.5 0 0 0 6.428 0a1 1 0 0 0 -.014 -1.414zm-6.19 -5.286l-.127 .007a1 1 0 0 0 .117 1.993l.127 -.007a1 1 0 0 0 -.117 -1.993zm6 0l-.127 .007a1 1 0 0 0 .117 1.993l.127 -.007a1 1 0 0 0 -.117 -1.993z"/>'],
+  PET: ["0 0 24 24", '<g fill="currentColor"><path d="M12 10c-1.32 0 -1.983 .421 -2.931 1.924l-.244 .398l-.395 .688a50.89 50.89 0 0 0 -.141 .254c-.24 .434 -.571 .753 -1.139 1.142l-.55 .365c-.94 .627 -1.432 1.118 -1.707 1.955c-.124 .338 -.196 .853 -.193 1.28c0 1.687 1.198 2.994 2.8 2.994l.242 -.006c.119 -.006 .234 -.017 .354 -.034l.248 -.043l.132 -.028l.291 -.073l.162 -.045l.57 -.17l.763 -.243l.455 -.136c.53 -.15 .94 -.222 1.283 -.222c.344 0 .753 .073 1.283 .222l.455 .136l.764 .242l.569 .171l.312 .084c.097 .024 .187 .045 .273 .062l.248 .043c.12 .017 .235 .028 .354 .034l.242 .006c1.602 0 2.8 -1.307 2.8 -3c0 -.427 -.073 -.939 -.207 -1.306c-.236 -.724 -.677 -1.223 -1.48 -1.83l-.257 -.19l-.528 -.38c-.642 -.47 -1.003 -.826 -1.253 -1.278l-.27 -.485l-.252 -.432c-1.011 -1.696 -1.618 -2.099 -3.053 -2.099z"/><path d="M19.78 7h-.03c-1.219 .02 -2.35 1.066 -2.908 2.504c-.69 1.775 -.348 3.72 1.075 4.333c.256 .109 .527 .163 .801 .163c1.231 0 2.38 -1.053 2.943 -2.504c.686 -1.774 .34 -3.72 -1.076 -4.332a2.05 2.05 0 0 0 -.804 -.164z"/><path d="M9.025 3c-.112 0 -.185 .002 -.27 .015l-.093 .016c-1.532 .206 -2.397 1.989 -2.108 3.855c.272 1.725 1.462 3.114 2.92 3.114l.187 -.005a1.26 1.26 0 0 0 .084 -.01l.092 -.016c1.533 -.206 2.397 -1.989 2.108 -3.855c-.27 -1.727 -1.46 -3.114 -2.92 -3.114z"/><path d="M14.972 3c-1.459 0 -2.647 1.388 -2.916 3.113c-.29 1.867 .574 3.65 2.174 3.867c.103 .013 .2 .02 .296 .02c1.39 0 2.543 -1.265 2.877 -2.883l.041 -.23c.29 -1.867 -.574 -3.65 -2.174 -3.867a2.154 2.154 0 0 0 -.298 -.02z"/><path d="M4.217 7c-.274 0 -.544 .054 -.797 .161c-1.426 .615 -1.767 2.562 -1.078 4.335c.563 1.451 1.71 2.504 2.941 2.504c.274 0 .544 -.054 .797 -.161c1.426 -.615 1.767 -2.562 1.078 -4.335c-.563 -1.451 -1.71 -2.504 -2.941 -2.504z"/></g>'],
+  "T:DECK": ["0 0 24 24", '<g fill="currentColor"><path d="M19 17v3a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-3z"/><path d="M11 17v3a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-3z"/><path d="M20 12a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1z"/><path d="M8.707 3.293l2 2a1 1 0 0 1 .293 .707v5h-6v-5a1 1 0 0 1 .293 -.707l2 -2a1 1 0 0 1 1.414 0"/><path d="M16.707 3.293l2 2a1 1 0 0 1 .293 .707v5h-6v-5a1 1 0 0 1 .293 -.707l2 -2a1 1 0 0 1 1.414 0"/></g>'],
+  GLAMPING: ["0 0 24 24", '<path fill="currentColor" d="m20.83 20.5l1.024-2.74a1.25 1.25 0 0 0-.15-1.16l-8.79-12.47l1.195-1.695l-1.225-.865L12 2.83l-.885-1.26l-1.225.865l1.195 1.695L2.29 16.6c-.24.34-.295.77-.15 1.16l1.025 2.74h-1.17V22H22v-1.5zm-8.08 0h-1.5v-10h1.5z"/>'],
+  CARAVAN: ["0 0 14 14", '<path fill="currentColor" d="M2 2C1 2 0 3 0 4v4c0 1 1 2 2 2h1.063C3.296 8.86 4.292 8 5.5 8s2.204.86 2.438 2H14s0-1-1-1h-1.5V4c0-.96-1.024-2-2-2zm.844 2A.4.4 0 0 1 3 4h2s1 0 1 1s-1 1-1 1H3S2 6 2 5c0-.75.563-.953.844-1M8 4h.5s1 0 1 1s-1 1-1 1H8S7 6 7 5s1-1 1-1M5.5 9a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3"/>'],
+  WINTER: ["0 0 448 512", '<path fill="currentColor" d="m440.3 345.2l-33.8-19.5l26-7c8.2-2.2 13.1-10.7 10.9-18.9l-4-14.9c-2.2-8.2-10.7-13.1-18.9-10.9l-70.8 19l-63.9-37l63.8-36.9l70.8 19c8.2 2.2 16.7-2.7 18.9-10.9l4-14.9c2.2-8.2-2.7-16.7-10.9-18.9l-26-7l33.8-19.5c7.4-4.3 9.9-13.7 5.7-21.1L430.4 119c-4.3-7.4-13.7-9.9-21.1-5.7l-33.8 19.5l7-26c2.2-8.2-2.7-16.7-10.9-18.9l-14.9-4c-8.2-2.2-16.7 2.7-18.9 10.9l-19 70.8l-62.8 36.2v-77.5l53.7-53.7c6.2-6.2 6.2-16.4 0-22.6l-11.3-11.3c-6.2-6.2-16.4-6.2-22.6 0L256 56.4V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v40.4l-19.7-19.7c-6.2-6.2-16.4-6.2-22.6 0L138.3 48c-6.3 6.2-6.3 16.4 0 22.6l53.7 53.7v77.5l-62.8-36.2l-19-70.8c-2.2-8.2-10.7-13.1-18.9-10.9l-14.9 4c-8.2 2.2-13.1 10.7-10.9 18.9l7 26l-33.8-19.5c-7.4-4.3-16.8-1.7-21.1 5.7L2.1 145.7c-4.3 7.4-1.7 16.8 5.7 21.1l33.8 19.5l-26 7c-8.3 2.2-13.2 10.7-11 19l4 14.9c2.2 8.2 10.7 13.1 18.9 10.9l70.8-19l63.8 36.9l-63.8 36.9l-70.8-19c-8.2-2.2-16.7 2.7-18.9 10.9l-4 14.9c-2.2 8.2 2.7 16.7 10.9 18.9l26 7l-33.8 19.6c-7.4 4.3-9.9 13.7-5.7 21.1l15.5 26.8c4.3 7.4 13.7 9.9 21.1 5.7l33.8-19.5l-7 26c-2.2 8.2 2.7 16.7 10.9 18.9l14.9 4c8.2 2.2 16.7-2.7 18.9-10.9l19-70.8l62.8-36.2v77.5l-53.7 53.7c-6.3 6.2-6.3 16.4 0 22.6l11.3 11.3c6.2 6.2 16.4 6.2 22.6 0l19.7-19.7V496c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-40.4l19.7 19.7c6.2 6.2 16.4 6.2 22.6 0l11.3-11.3c6.2-6.2 6.2-16.4 0-22.6L256 387.7v-77.5l62.8 36.2l19 70.8c2.2 8.2 10.7 13.1 18.9 10.9l14.9-4c8.2-2.2 13.1-10.7 10.9-18.9l-7-26l33.8 19.5c7.4 4.3 16.8 1.7 21.1-5.7l15.5-26.8c4.3-7.3 1.8-16.8-5.6-21"/>'],
+  AUTO: ["0 0 24 24", '<path fill="currentColor" d="m20.77 9.16l-1.37-4.1a2.99 2.99 0 0 0-2.85-2.05H7.44a3 3 0 0 0-2.85 2.05l-1.37 4.1c-.72.3-1.23 1.02-1.23 1.84v5a2 2 0 0 0 1 1.72V20c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-2h12v2c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-2.28a2 2 0 0 0 1-1.72v-5c0-.83-.51-1.54-1.23-1.84ZM19 13.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5s1.5.67 1.5 1.5m-11 0c0 .83-.67 1.5-1.5 1.5S5 14.33 5 13.5S5.67 12 6.5 12s1.5.67 1.5 1.5M20 11v5zM7.44 5h9.12a1 1 0 0 1 .95.68L18.62 9H5.39L6.5 5.68A1 1 0 0 1 7.45 5Z"/>'],
+  "T:CAR_CAMP": ["0 0 24 24", '<g fill="currentColor"><path d="M3 19.723V21a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.277A1.99 1.99 0 0 0 22 18v-3c0-.831-.507-1.542-1.228-1.845l-1.368-4.104A2.995 2.995 0 0 0 16.559 7H7.441a2.995 2.995 0 0 0-2.845 2.051l-1.368 4.104A2 2 0 0 0 2 15v3c0 .738.404 1.376 1 1.723M5.5 18a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 5.5 18m13 0a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 18.5 18M7.441 9h9.117a1 1 0 0 1 .949.684L18.613 13H5.387l1.105-3.316c.137-.409.519-.684.949-.684"/><path d="M22 7.388V5.279l-9.684-3.228a1 1 0 0 0-.658.009L2 5.572V7.7l10.015-3.642z"/></g>'],
+};
+const thIc = (k) => (TH_SVG[k] ? `<svg class="th-ic" viewBox="${TH_SVG[k][0]}" aria-hidden="true">${TH_SVG[k][1]}</svg>` : "");
 const THEMES = [
   ["POPULAR", "실시간 인기", (c) => Boolean(c.m7 || c.rv?.n > 5)],
   ["VALLEY", "계곡", (c) => c.pf?.t?.includes("VALLEY")],
@@ -295,6 +312,7 @@ const THEME_SUBS = {
   AVAIL: "지금 바로 실시간 예약 접수 중인 캠핑장",
   REVIEWS: "방문자들의 생생한 긍정 평가가 많은 캠핑장",
 };
+const SIDO_KW = new Set(["서울", "경기", "인천", "강원", "충북", "충남", "충청", "대전", "세종", "전북", "전남", "전라", "광주", "경북", "경남", "경상", "대구", "울산", "부산", "제주", "서울특별시", "경기도", "인천광역시", "강원특별자치도", "강원도", "충청북도", "충청남도", "대전광역시", "세종특별자치시", "전라북도", "전북특별자치도", "전라남도", "광주광역시", "경상북도", "경상남도", "대구광역시", "울산광역시", "부산광역시", "제주특별자치도", "제주도"]);
 function matches(c, { useArea = true } = {}) {
   if (useArea && S.area !== "all" && AREA_OF[sidoShort(c.sido)] !== S.area) return false;
   for (const k of S.quick) if (!QUICK[k].test(c)) return false;
@@ -308,8 +326,19 @@ function matches(c, { useArea = true } = {}) {
   if (S.theme === "OPEN" && !openingOf(c)) return false;
   if (S.stype && !hasType(c, S.stype)) return false;
   if (S.q) {
-    const hay = c._hay ??= `${c.name} ${c.addr} ${c.sido} ${c.sigungu} ${(c.env ?? []).join(" ")} ${(c.types ?? []).join(" ")} ${c.pf?.s ?? ""} ${(c.st ?? []).map(([k, , , sub]) => `${ST[k]?.label ?? ""} ${sub ?? ""}`).join(" ")} ${(c.amenities ?? []).join(" ")} ${(c.rental ?? []).join(" ")} ${c.line ?? ""}`.toLowerCase();
-    if (!S.q.toLowerCase().split(/\s+/).filter(Boolean).every((w) => hay.includes(w))) return false;
+    const words = S.q.toLowerCase().split(/\s+/).filter(Boolean);
+    const ok = words.every((w) => {
+      if (c.name && c.name.toLowerCase().includes(w)) return true;
+      if (SIDO_KW.has(w)) {
+        return (c.sido && c.sido.toLowerCase().includes(w)) ||
+               sidoShort(c.sido)?.toLowerCase() === w ||
+               (c.area && c.area.toLowerCase().includes(w)) ||
+               (AREA_OF[sidoShort(c.sido)] && AREA_OF[sidoShort(c.sido)].toLowerCase().includes(w));
+      }
+      const hay = c._hay ??= `${c.name} ${c.addr ?? ""} ${c.sido ?? ""} ${c.sigungu ?? ""} ${(c.env ?? []).join(" ")} ${(c.types ?? []).join(" ")} ${c.pf?.s ?? ""} ${(c.st ?? []).map(([k, , , sub]) => `${ST[k]?.label ?? ""} ${sub ?? ""}`).join(" ")} ${(c.amenities ?? []).join(" ")} ${(c.rental ?? []).join(" ")} ${c.line ?? ""}`.toLowerCase();
+      return hay.includes(w);
+    });
+    if (!ok) return false;
   }
   return true;
 }
@@ -360,12 +389,14 @@ const photoHiUrl = (u) => photoUrl(u).replace(/-t\.webp(?=\?|$)/, "-l.webp");
 function imageTag(u, alt, { eager = false, sizes = "(max-width: 759px) 80vw, 320px" } = {}) {
   const src = photoUrl(u), high = photoHiUrl(u);
   const srcset = high !== src ? ` srcset="${esc(src)} 480w, ${esc(high)} 1280w" sizes="${sizes}"` : "";
-  return `<img src="${esc(src)}"${srcset} alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" draggable="false">`;
+  // 외부 원본(블로그 사진 등)은 리퍼러를 보내지 않아야 열린다
+  const ref = /^https?:/i.test(src) ? ' referrerpolicy="no-referrer"' : "";
+  return `<img src="${esc(src)}"${srcset} alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" draggable="false"${ref}>`;
 }
 // 비교·찜처럼 사진이 보조 역할인 곳은 빈 src를 만들지 않고, 사진 미보유를 중립적인 아이콘으로 표시한다.
 function campThumb(c, { alt = "", sizes } = {}) {
   const u = photosOf(c)[0];
-  if (u) return imageTag(u, alt, { sizes });
+  if (u) return imageTag(u, alt, { sizes }) + (isPt(c, u) ? ptCredit(c) : "");
   return `<span class="photo-empty" role="img" aria-label="${esc(`${nameOf(c).name} 사진 없음`)}">${ic("tent")}</span>`;
 }
 // 카드 사진: GitHub Pages 배포 단계에서 합쳐지는 고캠핑 공식 webp를 우선 사용한다.
@@ -381,6 +412,9 @@ const photoKey = (u) => {
   base = base.toLowerCase();
   return base.replace(/^thumb_\d+_/, "");
 };
+const PT_FB = new Map();
+const isPt = (c, u) => Boolean(c.pt && (u === c.pt.i || u === c.pt.t));
+const ptCredit = (c) => `<span class="pt-credit" title="${esc(c.pt?.s ? `${c.pt.s} 후기 사진` : "후기 사진")}">후기 사진</span>`;
 function photosOf(c) {
   return photosAll(c).filter((u) => !DEAD.has(photoUrl(u)));
 }
@@ -395,6 +429,11 @@ function photosAll(c) {
   else if (remote.length) list = remote;
   else if (c.ph) list = [`media/${c.ph}`];
   else if (c.img) list = [c.img];
+  // 공식 사진이 없는 곳: 캠핑장 이름으로 찾은 블로그 사진 중 배치도·안내판·야간 사진을 거른 한 장(pick-card-fallback.mjs → c.pt).
+  // 원본이 막히면 검색 썸네일로 바꾼다(PT_FB). 카드에는 ‘후기 사진’ 출처를 붙인다.
+  else if (c.pt?.i || c.pt?.t) { list = [c.pt.i || c.pt.t]; if (c.pt.i && c.pt.t) PT_FB.set(c.pt.i, c.pt.t); }
+  // 걸러 고른 사진(c.pt)이 없을 때만 첫 검색 썸네일(c.sn, build-explore-data)
+  else if (c.sn && !list.length) list = [c.sn];
 
   const seen = new Set();
   const deduped = [];
@@ -415,7 +454,7 @@ function carousel(c, { eager = false, cls = "", single = false } = {}) {
   const alt = esc(nameOf(c).name);
   if (!ph.length) return `<div class="car car-empty ${cls}">${ic("tent")}</div>`;
   if (single || ph.length === 1) {
-    return `<div class="car car-single ${cls}"><img class="car-img" src="${esc(photoUrl(ph[0]))}" alt="${alt}" loading="${eager ? "eager" : "lazy"}" decoding="async" draggable="false"></div>`;
+    return `<div class="car car-single ${cls}"><img class="car-img" src="${esc(photoUrl(ph[0]))}" alt="${alt}" loading="${eager ? "eager" : "lazy"}" decoding="async" draggable="false"${/^https?:/i.test(photoUrl(ph[0])) ? ' referrerpolicy="no-referrer"' : ""}>${isPt(c, ph[0]) ? ptCredit(c) : ""}</div>`;
   }
   const slides = ph.map((u, i) => i === 0
     ? imageTag(u, alt, { eager })
@@ -447,7 +486,11 @@ function initCarousels(root = document) {
       const left = $$("img", tr).length;
       const d = $(".car-dots", car);
       if (d) { d.lastElementChild?.remove(); dots = $$(".car-dots i", car); if (left < 2) d.remove(); }
-      if (!left) (car.closest(".card, .mi, .review-pick, .tr-card") ?? car).remove();
+      if (!left) {
+        const c = car.closest(".card, .mi, .review-pick, .tr-card");
+        if (c) c.remove();
+        else car.outerHTML = `<div class="car car-empty">${ic("tent")}</div>`;
+      }
     }, { once: true }));
     ["pointerenter", "touchstart", "focusin"].forEach((ev) => car.addEventListener(ev, () => hydrate(car), { passive: true, once: true }));
     tr.addEventListener("scroll", () => {
@@ -484,7 +527,7 @@ function initCarousels(root = document) {
     // 사진 레일은 카드 링크 위에 있다(가로 스와이프를 받으려고). 사진을 누르면 카드 링크로 간다.
     tr.addEventListener("click", () => {
       if (moved) return;
-      const hit = car.closest(".card, .mi, .review-pick, .tr-card")?.querySelector(".card-hit");
+      const hit = car.closest(".card, .mi, .review-pick, .tr-card, .lrow")?.querySelector(".card-hit");
       if (hit) location.hash = hit.getAttribute("href");
     });
   }
@@ -604,15 +647,39 @@ function initDraggableRails(root = document) {
 }
 
 // ── 카드 ─────────────────────────────────────────────────────
+// ── 카드 ─────────────────────────────────────────────────────
 function rowsHtml(c) {
   const f = facts(c);
-  const row = (n, label, x) => `<li><span class="rn">${n}</span><span class="rl">${label}</span><span class="rv${x ? "" : " none"}">${x ? esc(x.v) : "–"}</span>${x ? dot(x.g) : ""}</li>`;
-  return `<ol class="rows">${row("01", "주차", f.park)}${row("02", "전기", f.power)}${row("03", "장작", f.fire)}</ol>`;
+  const row = (n, label, icon, x) => `<li><span class="rn">${n}</span><span class="rl">${ic(icon)}${label}</span><span class="rv${x ? "" : " none"}">${x ? esc(x.v) : "–"}</span>${x ? dot(x.g) : ""}</li>`;
+  // 04 주변·05 가격(소유자 2026-10-20): 주변은 마트·편의점·정육점 순서 고정, 가격은 ‘1박 2만~8만원’.
+  const near = nearLine(c, " "), fm = feeMain(c);
+  const nearX = near ? { v: near } : null;
+  const feeX = fm?.text ? { v: `1박 ${fm.text}${fm.est ? " 추정" : ""}`, g: GR(c.fee.grade) } : null;
+  return `<ol class="rows">${row("01", "주차", "car", f.park)}${row("02", "전기", "bolt", f.power)}${row("03", "장작", "flame", f.fire)}${row("04", "주변", "store", nearX).replace("<li>", '<li class="r-near">')}${row("05", "가격", "won", feeX)}</ol>`;
 }
-// 가는 길 장보기: 편의점·마트·정육점 중 5km 안 가까운 두 곳(LOCALDATA 인허가).
-function nearLine(c) {
+function rowsHtmlHorizontal(c) {
+  const f = facts(c), ti = c.ti ?? {};
+  const row = (n, label, icon, x) => `<li><span class="rn">${n}</span><span class="rl">${ic(icon)}${label}</span><span class="rv${x ? "" : " none"}">${x ? esc(x.v) : "–"}</span>${x ? dot(x.g) : ""}</li>`;
+  const near = nearLine(c, " "), fm = feeMain(c);
+  const nearX = near ? { v: near } : null;
+  const feeX = fm?.text ? { v: `1박 ${fm.text}${fm.est ? " 추정" : ""}`, g: GR(c.fee?.grade) } : null;
+  const timeStr = [ti.i?.[0] ? `입실 ${ti.i[0]}` : "", ti.o?.[0] ? `퇴실 ${ti.o[0]}` : "", ti.m?.[0] ? `매너 ${ti.m[0]}부터` : ""].filter(Boolean).join(" · ");
+  const timeX = timeStr ? { v: timeStr, g: ti.i?.[1] } : null;
+  const petX = f.pet ? { v: f.pet.v, g: f.pet.g } : null;
+  return `<ol class="rows rows-horiz">
+    ${row("01", "주차", "car", f.park)}
+    ${row("02", "전기", "bolt", f.power)}
+    ${row("03", "장작", "flame", f.fire)}
+    ${row("04", "반려견", "paw", petX)}
+    ${row("05", "시간", "clock", timeX)}
+    ${row("06", "주변", "store", nearX).replace("<li>", '<li class="r-near">')}
+    ${row("07", "가격", "won", feeX)}
+  </ol>`;
+}
+// 가는 길 장보기: 마트·편의점·정육점 중 5km 안에 있는 곳(LOCALDATA 인허가). 순서는 늘 마트 → 편의점 → 정육점(소유자 2026-10-20).
+function nearLine(c, sep = " · ") {
   const nl = c.nl ?? {};
-  return [["c", "편의점"], ["m", "마트"], ["b", "정육점"]].filter(([k]) => nl[k] && nl[k] <= 5000).sort((a, b) => nl[a[0]] - nl[b[0]]).slice(0, 2).map(([k, l]) => `${l} ${km(nl[k])}`).join(" · ");
+  return [["m", "마트"], ["c", "편의점"], ["b", "정육점"]].filter(([k]) => nl[k] && nl[k] <= 5000).map(([k, l]) => `${l} ${km(nl[k])}`).join(sep);
 }
 // 찜(하트): 카드 이름 오른쪽 회색 선 하트 → 누르면 채운 하트. 찜한 곳은 ‘찜’ 화면에서 3곳씩 나란히 비교한다.
 function isSaved(id) { return S.saved.includes(String(id)); }
@@ -637,11 +704,10 @@ function card(c, i = 0) {
     </div>
     <div class="card-body">
       <div class="name-row"><h3 class="card-name">${esc(nameOf(c).name)}</h3>${heartBtn(c)}</div>
-      <p class="card-meta">${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
+      <p class="card-meta">${ic("pin")}${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
       ${c.st?.length ? `<p class="card-types">${ic("tent")}${esc(typeLine2(c))}</p>` : ""}
       ${rowsHtml(c)}
-      ${nearLine(c) ? `<p class="card-near">${ic("store")}${esc(nearLine(c))}</p>` : ""}
-      ${feeMain(c)?.text ? `<p class="card-price"><span>${esc(feeMain(c).label)}${feeMain(c).est ? "<i>추정</i>" : ""}</span><b>${esc(feeMain(c).text)}</b>${dot(GR(c.fee.grade))}</p>${feeTiersLine(c) ? `<p class="card-tiers">${feeTiersLine(c)}</p>` : ""}` : ""}
+      ${feeMain(c)?.text && feeTiersLine(c) ? `<p class="card-tiers">${feeTiersLine(c)}</p>` : ""}
       ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-reviews">${cardReviewPills(c.rv)}</div>` : ""}
     </div>
   </article>`;
@@ -809,7 +875,7 @@ function homeView() {
   const openings = S.camps.map((c) => [c, openingOf(c)]).filter(([c, o]) => o && hasPhoto(c)).sort((a, b) => a[1].dd - b[1].dd);
   const themeItems = THEMES.map(([key, label, test]) => {
     const imgSrc = themeImg(key);
-    return `<a class="theme-card" href="#/theme/${encodeURIComponent(key)}" draggable="false"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy" draggable="false"><span><b>${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
+    return `<a class="theme-card" href="#/theme/${encodeURIComponent(key)}" draggable="false"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy" draggable="false"><span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
   }).join("");
   const openingSection = openings.length ? `<section class="opens" aria-labelledby="op-t">
     <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><div class="sec-side"><a class="link more-link" href="#/theme/OPEN">더보기 ${ic("right")}</a></div></div>
@@ -880,7 +946,7 @@ function themeRow([k, label, test], list, first, used) {
   if (items.length < 3) return "";
   items.forEach((c) => used.add(c.id));
   return `<section class="trow" aria-label="${esc(label)}">
-    <div class="trow-head"><h3>${esc(label)} <i>${fmt(all.length)}</i></h3><button type="button" class="link more-link" data-theme-all="${k}">더보기 ${ic("right")}</button></div>
+    <div class="trow-head"><h3>${thIc(k)}${esc(label)} <i>${fmt(all.length)}</i></h3><button type="button" class="link more-link" data-theme-all="${k}">더보기 ${ic("right")}</button></div>
     <div class="rail trow-rail">${items.map((c, i) => card(c, first && i < 4 ? i : 9)).join("")}</div>
   </section>`;
 }
@@ -1180,9 +1246,6 @@ function siteSizeText(c) {
   const big = gs.reduce((a, g) => (Math.max(g.width_m, g.depth_m) > Math.max(a.width_m, a.depth_m) ? g : a));
   return `사이트 최대 ${big.width_m}×${big.depth_m}m`;
 }
-function listFact(label, value, g) {
-  return `<div class="lf${value ? "" : " none"}"><dt>${label}</dt><dd>${value ? `${esc(value)}${dot(g)}` : "–"}</dd></div>`;
-}
 // 켜진 조건이 이 캠핑장에서 어떻게 맞는지: ✓ 근거 · 법정 기준 · 확인 필요
 function condLine(c, ce) {
   if (!ce || !Object.keys(ce.st).length) return "";
@@ -1190,35 +1253,30 @@ function condLine(c, ce) {
   return `<p class="lrow-cond">${Object.entries(ce.st).map(([k, v]) => `<span class="cs cs-${v === "?" ? "unk" : v}">${v === "y" ? ic("check") : ""}${esc(txt[k]())}${v === "ref" ? " · 법정 기준 600W" : v === "?" ? " · 확인 필요" : ""}</span>`).join("")}</p>`;
 }
 function listRow({ c, st, ce }, i = 0) {
-  const f = facts(c), { tag } = nameOf(c), ti = c.ti ?? {}, r = reviewMeta(c), main = bookingChannels(c)[0];
-  const fee = feeMain(c)?.text ?? null;
+  const { tag } = nameOf(c), o = openingOf(c), main = bookingChannels(c)[0];
   const href = `#/c/${encodeURIComponent(c.id)}`;
-  return `<article class="lrow" data-id="${esc(c.id)}">
-    <a class="lrow-media" href="${href}" tabindex="-1" aria-hidden="true">${campThumb(c, { sizes: "(max-width: 759px) 132px, 300px" })}<span class="bdgs">${badges(c, 2)}</span></a>
-    <div class="lrow-body">
-      <div class="lrow-top">
-        <div class="lrow-title"><p class="lrow-meta">${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}</p><h3><a href="${href}">${esc(nameOf(c).name)}</a></h3></div>
+  return `<article class="card card-horizontal lrow" data-id="${esc(c.id)}">
+    <a class="card-hit" href="${href}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
+    <div class="card-media">${carousel(c, { eager: i < 3 })}
+      ${st ? `<span class="sig st-${st.k}">${ic(st.icon)}${esc(st.txt)}</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : S.avail?.has(String(c.id)) ? `<span class="sig live">${ic("check")}접수 중</span>` : ""}
+      <span class="bdgs">${badges(c, 3)}</span>
+    </div>
+    <div class="card-body">
+      <div class="name-row">
+        <h3 class="card-name">${esc(nameOf(c).name)}</h3>
         ${heartBtn(c)}
       </div>
-      ${st ? `<p class="lrow-date st-${st.k}">${ic(st.icon)}<b>${esc(st.txt)}</b><i>${esc(st.sub)}</i></p>` : ""}
+      <p class="card-meta">${ic("pin")}${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
       ${condLine(c, ce)}
-      <dl class="lrow-facts">
-        ${listFact("1박", fee, GR(c.fee?.grade))}
-        ${listFact("입실", ti.i?.[0], ti.i?.[1])}
-        ${listFact("퇴실", ti.o?.[0], ti.o?.[1])}
-        ${listFact("매너타임", ti.m?.[0] ? `${ti.m[0]}부터` : null, ti.m?.[1])}
-        ${listFact("전기", f.power?.v, f.power?.g)}
-        ${listFact("주차", f.park?.v, f.park?.g)}
-        ${listFact("장작", f.fire?.v, f.fire?.g)}
-        ${listFact("반려견", f.pet?.v, f.pet?.g)}
-      </dl>
-      ${c.st?.length || typeLine(c) || siteSizeText(c) ? `<p class="lrow-line">${ic("tent")}<span>${esc([c.st?.length ? typeLine2(c) : typeLine(c), siteSizeText(c)].filter(Boolean).join(" · "))}</span></p>` : ""}
-      ${nearLine(c) ? `<p class="lrow-line">${ic("store")}<span>${esc(nearLine(c))}</span></p>` : ""}
-      ${r.total ? `<p class="lrow-line lrow-review">${ic("heart")}<span>후기 ${fmt(r.total)}건</span>${reviewTopics(r.rv.p, "good", "heart")}${reviewTopics(r.rv.c, "watch", "down")}</p>` : ""}
-      <div class="lrow-cta">
-        ${st?.url ? `<a class="btn primary" href="${esc(st.url)}" target="_blank" rel="noopener">${st.k === "vac" ? "빈자리 예약하기" : st.k === "full" ? "예약 화면 보기" : "공식 접수 보기"}</a>` : main ? `<a class="btn primary" href="${esc(main.url)}" target="_blank" rel="noopener" title="${esc(bookingLabel(main))}"><span>날짜 확인 · ${esc(bookingLabel(main))}</span></a>` : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}
-        <a class="btn ghost" href="${href}">자세히</a>
-      </div>
+      ${c.st?.length || siteSizeText(c) ? `<p class="card-types">${ic("tent")}<span>${esc([c.st?.length ? typeLine2(c) : typeLine(c), siteSizeText(c)].filter(Boolean).join(" · "))}</span></p>` : ""}
+      ${rowsHtmlHorizontal(c)}
+      ${feeMain(c)?.text && feeTiersLine(c) ? `<p class="card-tiers">${feeTiersLine(c)}</p>` : ""}
+      ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-reviews">${cardReviewPills(c.rv)}</div>` : ""}
+      ${st?.url || main || c.tel ? `
+        <div class="card-cta">
+          ${st?.url ? `<a class="btn primary" href="${esc(st.url)}" target="_blank" rel="noopener">${st.k === "vac" ? "빈자리 예약하기" : st.k === "full" ? "예약 화면 보기" : "공식 접수 보기"}</a>` : main ? `<a class="btn primary" href="${esc(main.url)}" target="_blank" rel="noopener" title="${esc(bookingLabel(main))}">${ic("external")}<span>날짜 확인 · ${esc(bookingLabel(main))}</span></a>` : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}
+        </div>
+      ` : ""}
     </div>
   </article>`;
 }
@@ -1231,14 +1289,13 @@ function listView() {
   S.theme = null; S.stype = null; S.quick.clear();
   const areaLabel = S.cond.near ? `${S.cond._ctr?.label ?? S.cond.near} 주변` : S.cond.sido.length ? S.cond.sido.join("·") : AREAS.find(([k]) => k === S.area)?.[1] ?? "전국";
   const feeChip = (k, l) => `<button type="button" class="chip fee-chip" data-fee-band="${k}" aria-pressed="${(S.feeBand ?? "") === k}">${l}</button>`;
-  const dateTip = tip("<b>날짜로 보기</b><span>날짜별 빈자리는 각 예약처만 알고 있어 여기서 확정하지 않아요. 공식 접수 중(그날이 이용 기간에 포함된 공공 예약), 예약 오픈 예정, 운영 기간(고캠핑·운영자 안내의 운영 계절)만 판단하고, 운영 기간 밖인 곳은 기본으로 뺍니다. 예약 가능 여부는 각 행의 예약처에서 확인하세요.</span>", "날짜 판단 기준");
   return `<section class="list-page" aria-labelledby="list-t">
     <div class="list-head">
       <a class="link list-back" href="#/">${ic("left")}처음으로</a>
       <h1 id="list-t"><span data-list-area>${esc(areaLabel)}</span> 캠핑장 <b data-list-count></b></h1>
-      <form class="list-search" role="search" data-list-search>
-        <label class="finder-field"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
-        <button class="finder-field finder-static" type="button" data-open="date"><small>언제</small><b data-stay-label>${esc(stayLabel())}</b></button>
+      <form class="finder-form list-finder-form" role="search" data-list-search>
+        <label class="finder-field finder-destination"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
+        <button class="finder-field finder-static finder-cond" type="button" data-open-cond><small>조건</small><b data-cond-label>${esc(condSummary())}</b></button>
         <button class="finder-go" type="submit">${ic("search")}<span>찾기</span></button>
       </form>
       <div class="rail chips" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-list-area-k="${k}" aria-pressed="${S.area === k && !S.cond.sido.length}">${l}</button>`).join("")}</div>
@@ -1247,12 +1304,11 @@ function listView() {
       <div class="list-tools">
         <p class="list-date-note" data-list-note></p>
         <label class="sort">${ic("list")}<select data-list-sort aria-label="정렬">
-          <option value="date"${(S.listSort ?? "date") === "date" ? " selected" : ""}>${S.stay ? "날짜 맞는 순" : "정보 많은 순"}</option>
+          <option value="rec"${(S.listSort ?? "rec") === "rec" ? " selected" : ""}>추천순</option>
           <option value="fee"${S.listSort === "fee" ? " selected" : ""}>요금 낮은 순</option>
           <option value="name"${S.listSort === "name" ? " selected" : ""}>이름순</option>
         </select></label>
       </div>
-      <p class="list-explain">${S.stay ? `<b>${esc(stayLabel())}</b> 기준 · 빈자리는 예약처에서 확인 ${dateTip}` : "날짜를 고르면 운영 기간 밖인 곳을 빼고, 공식 접수 중·오픈 예정인 곳을 먼저 보여 줘요."}</p>
     </div>
     <div class="lrows" data-lrows></div>
     <div class="more-wrap"><button class="btn ghost" type="button" data-list-more>더 보기</button></div>
@@ -1270,6 +1326,7 @@ function renderList({ reset = true } = {}) {
   $("[data-list-more]").hidden = to >= shown.length;
   const note = $("[data-list-note]");
   if (note) note.innerHTML = S.stay && (closed || S.showClosed) ? `<button type="button" class="link" data-list-closed>${S.showClosed ? "운영 기간 밖 빼기" : `운영 기간 밖 ${fmt(closed)}곳 함께 보기`}</button>` : "";
+  initCarousels(box);
 }
 function bindList() {
   renderList();
@@ -1677,14 +1734,20 @@ const DEAD_BOOKING = /(^|\.)ticketplay\.zone$|(^|\.)(example\.(com|org|net)|loca
 function liveBookingUrl(u) {
   try {
     const h = new URL(u).hostname;
-    return h && !DEAD_BOOKING.test(h);
+    return h && h.includes(".") && !DEAD_BOOKING.test(h); // 점 없는 호스트(“http://https////…”, 한글 키워드 주소)는 깨진 주소
   } catch { return false; }
 }
+// 네이버 예약 상세 주소(booking.naver.com/…/bizes/번호)는 고캠핑 등록값이 낡아 ‘운영하지 않는 예매 페이지’로 가는 경우가 있고,
+// robots.txt가 모든 봇을 막아 자동으로 살아 있는지 확인할 수 없다(소유자 2026-10-20). → 네이버 검색(캠핑장 이름·시군구)으로 연다.
+// 검색 결과의 플레이스 카드에 지금 쓰는 ‘예약’ 버튼이 나온다.
+const NAVER_BOOKING_DEEP = /^https?:\/\/(m\.)?booking\.naver\.com\/booking\/\d+\/bizes\/\d+/i;
+const naverSearchUrl = (c) => `https://search.naver.com/search.naver?query=${encodeURIComponent(`${c.sigungu ?? ""} ${nameOf(c).name} 예약`.trim())}`;
 function bookingChannels(c) {
   // 땡큐캠핑 엔진에서 같은 업장(이름·시군구 일치)을 찾았으면, 등록 경로에 없을 때 날짜별 예약 화면을 덧붙인다.
   const tq = c.tq?.s && !(c.booking?.channels ?? []).some((x) => /thankqcamping|camperstory/.test(x?.url ?? "")) ? [{ platform_id: "thankqcamping", platform_name: "땡큐캠핑", url: THANKQ_VIEW(c.tq.s), kind: "online", confidence: 0.7, evidence: ["땡큐캠핑 업장 검색(이름·시군구 일치)"] }] : [];
   return [...(c.booking?.channels ?? []), ...tq]
-    .filter((x) => x?.url && liveBookingUrl(x.url))
+    .filter((x) => x?.url && liveBookingUrl(x.url) && !c.dl?.includes(x.url)) // c.dl: 열어 보니 없는 링크(check-links.mjs)
+    .map((x) => (NAVER_BOOKING_DEEP.test(x.url) ? { ...x, url: naverSearchUrl(c), registered_url: x.url, evidence: [...(x.evidence ?? []), "네이버 검색에서 현재 예약 버튼으로 연결"] } : x))
     .sort((a, b) => bookingRank(a) - bookingRank(b) || Number(b.confidence ?? 0) - Number(a.confidence ?? 0));
 }
 function bookingLabel(channel) {
@@ -2415,7 +2478,7 @@ function infoHtml(c) {
   const rows = [
     ["주소", c.addr ? `<span class="address-value">${esc(c.addr)}${addressActions}</span>` : null, gcSrc("주소", c.addr)],
     ["전화", telText(c.tel) ? `<a href="tel:${esc(telText(c.tel).replace(/[^\d+]/g, ""))}">${esc(telText(c.tel))}</a>` : null, gcSrc("전화", c.tel)],
-    ["홈페이지", c.homepage ? `<a href="${esc(c.homepage)}" target="_blank" rel="noopener">${esc(hostOf(c.homepage) || c.homepage)}</a>` : null, { g: "c", src: { label: "공식 홈페이지", url: c.homepage } }],
+    ["홈페이지", c.homepage && !c.dl?.includes(c.homepage) ? `<a href="${esc(c.homepage)}" target="_blank" rel="noopener">${esc(hostOf(c.homepage) || c.homepage)}</a>` : null, { g: "c", src: { label: "공식 홈페이지", url: c.homepage } }],
     // 운영 기간(계절)은 ‘이용 정보’에 있으므로 여기서는 운영 주체·요일만 둔다.
     ["운영", [OP[c.op], (c.days ?? [])[0]].filter(Boolean).map(esc).join(" · ") || null, gcSrc("운영 정보")],
     ...registryRows(c),
@@ -3472,6 +3535,9 @@ addEventListener("keydown", (e) => {
 addEventListener("error", (e) => {
   const im = e.target;
   if (!(im instanceof HTMLImageElement)) return;
+  // 후기 사진 원본이 막히면 검색 썸네일로 한 번 바꾼다
+  const fb = PT_FB.get(im.getAttribute("src"));
+  if (fb) { im.removeAttribute("srcset"); im.setAttribute("src", fb); return; }
   // 검색 썸네일이 사라졌으면 그 칸을 빼고, 후기 글 카드는 아이콘 자리로 둔다.
   const thumb = im.closest(".thumb-links a");
   if (thumb) { const box = thumb.parentElement; thumb.remove(); if (!box.children.length) { const sec = box.closest(".d-sec"); box.remove(); if (sec && !sec.querySelector(".thumb-links a, .visitor-sources a, .layout-links a, .visitor-gallery button, .layout-viewer")) sec.remove(); } return; }

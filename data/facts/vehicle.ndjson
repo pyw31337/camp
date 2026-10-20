@@ -3,7 +3,7 @@
 {"cid":"10","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"10","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"11","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"11","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.yangchoncamp.co.kr/bbs/board.php?bo_table=gallery&wr_id=42","at":"2026-10-19T09:39:02.937Z","quote":"사이트 옆 주차 (안내도참고 놀이터 쪽으로 일괄주차)"}
+{"cid":"11","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.yangchoncamp.co.kr/bbs/board.php?bo_table=gallery&wr_id=42","at":"2026-10-19T23:27:18.353Z","quote":"사이트 옆 주차 (안내도참고 놀이터 쪽으로 일괄주차)"}
 {"cid":"11","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"12","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"12","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -240,7 +240,7 @@
 {"cid":"596","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"596","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"597","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"597","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"http://www.handure.net/camping","at":"2026-10-19T09:14:09.070Z","quote":"사이트 바로 옆까지 차량 진입이 가능합니다."}
+{"cid":"597","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"http://www.handure.net/camping","at":"2026-10-19T23:27:15.061Z","quote":"사이트 바로 옆까지 차량 진입이 가능합니다."}
 {"cid":"597","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"604","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"604","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}

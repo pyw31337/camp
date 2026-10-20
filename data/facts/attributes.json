@@ -461,9 +461,9 @@
    "filter": "max",
    "note": "항목별 1행. 성수기·평일 구분은 period/label",
    "coverage": {
-    "campgrounds": 390,
+    "campgrounds": 462,
     "by_grade": {
-     "OPERATOR": 1320,
+     "OPERATOR": 1542,
      "CONFIRMED": 3
     }
    }
@@ -564,9 +564,9 @@
    "pref": "일찍 들어가고 싶나요?",
    "filter": "max",
    "coverage": {
-    "campgrounds": 1444,
+    "campgrounds": 1484,
     "by_grade": {
-     "OPERATOR": 914,
+     "OPERATOR": 984,
      "MENTION": 1066,
      "CONFIRMED": 4
     }
@@ -580,10 +580,10 @@
    "pref": "늦게 나오고 싶나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 1407,
+    "campgrounds": 1445,
     "by_grade": {
-     "OPERATOR": 878,
-     "MENTION": 1035,
+     "OPERATOR": 948,
+     "MENTION": 1034,
      "CONFIRMED": 2
     }
    }
@@ -623,10 +623,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 890,
+    "campgrounds": 889,
     "by_grade": {
      "OPERATOR": 532,
-     "MENTION": 561,
+     "MENTION": 559,
      "CONFIRMED": 5
     }
    }
@@ -738,10 +738,10 @@
    "filter": "in",
    "multi": true,
    "coverage": {
-    "campgrounds": 946,
+    "campgrounds": 964,
     "by_grade": {
      "CONFIRMED": 1051,
-     "OPERATOR": 73,
+     "OPERATOR": 101,
      "VERIFIED": 30
     }
    }
@@ -753,10 +753,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 1150,
+    "campgrounds": 1177,
     "by_grade": {
      "CONFIRMED": 1713,
-     "OPERATOR": 450,
+     "OPERATOR": 567,
      "MENTION": 137,
      "VERIFIED": 39
     }
@@ -1987,9 +1987,9 @@
    "review_label": "가격 부담",
    "pref": "‘가격 부담’은(는) 피하고 싶나요?",
    "coverage": {
-    "campgrounds": 23,
+    "campgrounds": 17,
     "by_grade": {
-     "MENTION": 23
+     "MENTION": 17
     }
    }
   },
@@ -2225,9 +2225,9 @@
    "note": "직선거리. text에 상호·거리, count에 5km 안 개수. 20km 안에 없으면 행 없음",
    "pref": "편의점이 가까워야 하나요?",
    "coverage": {
-    "campgrounds": 3091,
+    "campgrounds": 3095,
     "by_grade": {
-     "CONFIRMED": 3091
+     "CONFIRMED": 3095
     }
    }
   },
@@ -2241,9 +2241,9 @@
    "note": "직선거리. text에 상호·거리, count에 5km 안 개수. 20km 안에 없으면 행 없음",
    "pref": "아이 동반·밤에 상비약을 살 곳이 필요하나요?",
    "coverage": {
-    "campgrounds": 3090,
+    "campgrounds": 3094,
     "by_grade": {
-     "CONFIRMED": 3090
+     "CONFIRMED": 3094
     }
    }
   },
@@ -2257,9 +2257,9 @@
    "note": "직선거리. text에 상호·거리, count에 5km 안 개수. 20km 안에 없으면 행 없음",
    "pref": "현지에서 장을 볼 건가요?",
    "coverage": {
-    "campgrounds": 3094,
+    "campgrounds": 3098,
     "by_grade": {
-     "CONFIRMED": 3094
+     "CONFIRMED": 3098
     }
    }
   },
@@ -2273,9 +2273,9 @@
    "note": "직선거리. text에 상호·거리, count에 5km 안 개수. 20km 안에 없으면 행 없음",
    "pref": "고기를 현지에서 살 건가요?",
    "coverage": {
-    "campgrounds": 3091,
+    "campgrounds": 3095,
     "by_grade": {
-     "CONFIRMED": 3091
+     "CONFIRMED": 3095
     }
    }
   },
@@ -2288,9 +2288,9 @@
    "filter": "max",
    "note": "직선거리. text에 상호·거리, count에 5km 안 개수. 20km 안에 없으면 행 없음",
    "coverage": {
-    "campgrounds": 3091,
+    "campgrounds": 3095,
     "by_grade": {
-     "CONFIRMED": 3091
+     "CONFIRMED": 3095
     }
    }
   },
@@ -2303,9 +2303,9 @@
    "filter": "max",
    "note": "직선거리. text에 상호·거리, count에 5km 안 개수. 20km 안에 없으면 행 없음",
    "coverage": {
-    "campgrounds": 3082,
+    "campgrounds": 3086,
     "by_grade": {
-     "CONFIRMED": 3082
+     "CONFIRMED": 3086
     }
    }
   },
@@ -2319,9 +2319,9 @@
    "note": "직선거리. text에 상호·거리, count에 5km 안 개수. 20km 안에 없으면 행 없음",
    "pref": "반려견과 가나요(비상시 동물병원)?",
    "coverage": {
-    "campgrounds": 3007,
+    "campgrounds": 3011,
     "by_grade": {
-     "CONFIRMED": 3007
+     "CONFIRMED": 3011
     }
    }
   },
@@ -2534,5 +2534,5 @@
    }
   }
  ],
- "generated_at": "2026-10-19T23:13:42.680Z"
+ "generated_at": "2026-10-20T01:19:51.971Z"
 }
