@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // 고캠핑 상세 화면 수집 → data/gocamping-detail.ndjson (출처 주소·확인 시각 포함)
 // 예의: 한 번에 하나, 요청 간 GC_DELAY_MS(기본 1200ms), robots.txt 확인(/*search* 만 금지), 캐시 GC_CACHE(기본 ~/.cache/gocamping-detail, TTL 30일).
-import fs from "node:fs"; import path from "node:path"; import os from "node:os";
+import fs from "node:fs"; import { execFile } from "node:child_process"; import path from "node:path"; import os from "node:os";
 import { parseGocampingDetail } from "../lib/gocamping-detail.mjs";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../..");
 const CAT = path.join(ROOT, "camping-atlas/public/explore/data/campgrounds.json");
@@ -23,21 +23,24 @@ const rows = new Map(); let net = 0, fail = 0, done = 0;
 async function one(id) {
   const f = path.join(CACHE, `${id}.html`); let html, at;
   if (fs.existsSync(f) && (CACHE_ONLY || Date.now() - fs.statSync(f).mtimeMs < TTL)) { html = fs.readFileSync(f, "utf8"); at = fs.statSync(f).mtime.toISOString(); }
-  else if (CACHE_ONLY) return;
+  else if (CACHE_ONLY || (fs.existsSync(f + ".gone") && Date.now() - fs.statSync(f + ".gone").mtimeMs < TTL)) return;
   else {
     net++; await sleep(DELAY);
     for (let t = 0; t < 3 && !html; t++) {
-      try { const r = await fetch(`https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=${id}`, { headers: { "user-agent": UA } });
-        if (r.status === 429 || r.status >= 500) { await sleep(10000 * (t + 1)); continue; }
-        if (r.ok) html = await r.text(); else break; } catch { await sleep(5000); }
+      // curl -m 40: Node fetch가 본문에서 멈추는 일이 있어(2026-10-20 수집 중 두 번) 시간 제한을 프로세스 단위로 건다.
+      const out = await new Promise((ok) => execFile("curl", ["-s", "-m", "40", "-A", UA, "-w", "\n%{http_code}", `https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=${id}`], { maxBuffer: 2e7 }, (e, so) => ok(e ? null : String(so))));
+      const code = out ? +out.slice(out.lastIndexOf("\n") + 1) : 0;
+      if (code === 200) html = out.slice(0, out.lastIndexOf("\n"));
+      else if (code >= 300 && code < 500) { fs.writeFileSync(f + ".gone", String(code)); break; } // 302(삭제·비공개 업장)·404는 다시 묻지 않는다
+      else { console.log(`retry ${id} code=${code}`); await sleep(10000 * (t + 1)); }
     }
-    if (!html) { fail++; return; }
+    if (!html) { if (!fs.existsSync(f + ".gone")) fail++; return; }
     fs.writeFileSync(f, html); at = new Date().toISOString();
   }
   try { const d = parseGocampingDetail(html, id); if (d.info || d.facilities) rows.set(id, { ...d, checked_at: at, source: "gocamping_detail" }); } catch { fail++; }
 }
 const queue = [...ids];
-await Promise.all(Array.from({ length: WORKERS }, async () => { while (queue.length) { await one(queue.shift()); if (++done % 100 === 0) console.log(`${done}/${ids.length} fetched=${net} fail=${fail}`); } }));
+await Promise.all(Array.from({ length: WORKERS }, async () => { while (queue.length) { const id = queue.shift(); await Promise.race([one(id), sleep(150000).then(() => { fail++; console.log(`stuck ${id}`); })]); if (++done % 100 === 0) console.log(`${done}/${ids.length} fetched=${net} fail=${fail}`); } }));
 const ordered = ids.map((id) => rows.get(id)).filter(Boolean);
 fs.writeFileSync(OUT, ordered.map((r) => JSON.stringify(r)).join("\n") + "\n");
 const cnt = (k) => ordered.filter((r) => r[k]?.length ?? (r[k] ? 1 : 0)).length;
