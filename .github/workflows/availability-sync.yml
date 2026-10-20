@@ -8,6 +8,8 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+  actions: write
 
 concurrency:
   group: reservation-status-sync-main
@@ -57,5 +59,4 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "chore(availability): refresh official application status"
           # 장시간 기준 데이터 수집과 경합할 수 있다. 이 커밋은 새 상태만 담으므로 새 결과를 우선한다.
-          git pull --rebase -X theirs origin main
-          git push
+          bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" availability
