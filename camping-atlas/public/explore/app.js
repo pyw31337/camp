@@ -7,6 +7,7 @@ const IS_SUBDIR = location.pathname.includes("/explore/") || location.pathname.i
 const ASSETS_BASE = IS_SUBDIR ? "../" : "./";
 const DATA = location.pathname.includes("/explore/") ? "./data/" : location.pathname.includes("/renewal/") ? "../explore/data/" : "./explore/data/";
 const MEDIA = IS_SUBDIR ? "../media/" : "./media/";
+const MOD_ROOT = /\/(explore|renewal)\/[^/]*$/.test(new URL(import.meta.url).pathname) ? "../" : "./";
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[m]);
@@ -79,6 +80,41 @@ function formatKoreanDate(s) {
     return `${y}.${mo}.${da} (${day})`;
   }
   return str;
+}
+function formatRelativeDate(s, now = new Date()) {
+  if (!s) return "";
+  let d;
+  const str = String(s).trim();
+  const m = str.match(/^(\d{4})[-./](\d{1,2})[-./](\d{1,2})/);
+  if (m) {
+    d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+  } else {
+    d = new Date(s);
+  }
+  if (isNaN(d.getTime())) return "";
+
+  const diffMs = now.getTime() - d.getTime();
+  if (diffMs < 0) return "방금전";
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) return "오늘";
+  if (diffDays < 7) return `${diffDays}일전`;
+
+  const diffWeeks = Math.floor(diffDays / 7);
+  if (diffDays < 28) {
+    if (diffWeeks === 1) return "일주일전";
+    return `${diffWeeks}주전`;
+  }
+
+  const diffMonths = (now.getFullYear() - d.getFullYear()) * 12 + (now.getMonth() - d.getMonth()) - (now.getDate() < d.getDate() ? 1 : 0);
+  if (diffMonths < 12) {
+    if (diffMonths <= 1) return "한달전";
+    return `${diffMonths}개월전`;
+  }
+
+  const diffYears = Math.floor(diffMonths / 12);
+  if (diffYears <= 1) return "1년전";
+  return `${diffYears}년전`;
 }
 const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
@@ -1111,7 +1147,7 @@ const KINDS = [
   ["HOUSE", "숙박동·방갈로", (c) => hasFirmType(c, "HOUSE")],
   ["RV", "캠핑카·트레일러", (c) => hasFirmType(c, "RV") || c.trailer === true],
   ["CAR_CAMP", "차박", (c) => hasFirmType(c, "CAR_CAMP")],
-  ["DAY", "당일 캠크닉", dayUse],
+  ["DAY", "당일 캠프닉", dayUse],
 ];
 const KIND = Object.fromEntries(KINDS.map(([k, l, t]) => [k, { label: l, test: t }]));
 const W_OPTS = [[0, "상관없음"], [1, "전기 있음"], [600, "600W 이상"], [1100, "1,100W 이상"]];
@@ -1267,7 +1303,7 @@ function paintCondSheet() {
 // 히어로 아래 바로 쓰는 예시 조건(소유자 예시를 그대로 버튼으로)
 const PRESETS = [
   ["반려견 동반", { pet: true }], ["1,100W 이상 전기", { w: 1100 }], ["사이트 8m 이상", { size: 8 }],
-  ["글램핑·카라반", { kind: ["GLAMPING", "CARAVAN"] }], ["당일 캠크닉", { kind: ["DAY"] }], ["장작 불멍", { fire: true }],
+  ["글램핑·카라반", { kind: ["GLAMPING", "CARAVAN"] }], ["당일 캠프닉", { kind: ["DAY"] }], ["장작 불멍", { fire: true }],
 ];
 
 // ── 화면: 목록(히어로 검색 결과) ─────────────────────────────
@@ -1616,11 +1652,21 @@ function homeClicks(e) {
 }
 
 // ── 화면: 상세 ───────────────────────────────────────────────
+let extrasCache = null;
+async function loadExtras() {
+  return (extrasCache ??= fetch(new URL(`${MOD_ROOT}context/extras.json`, import.meta.url)).then((r) => (r.ok ? r.json() : null)).catch(() => null));
+}
 async function detailOf(id) {
   if (S.detailCache.has(id)) return S.detailCache.get(id);
   let d = await fetch(`${DATA}camps/${encodeURIComponent(id)}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
   if (d) d = await reviewTexts(d, S.camps.find((c) => String(c.id) === String(id)));
   if (d?.gcd) mergeGcd(id, d);
+  const ext = await loadExtras();
+  if (ext?.camps?.[id]) {
+    d = d ?? {};
+    d.extras = ext.camps[id];
+    d.extrasSources = ext.sources;
+  }
   S.detailCache.set(id, d);
   return d;
 }
@@ -1718,8 +1764,9 @@ function specTiles(c, d) {
   return T.map(([k, i, l, cls]) => {
     let x = f[k] ?? mention[k] ?? null;
     if (k === "power" && f.power?.v === "있음" && mention.power?.v) x = mention.power;
-    const on = x && cls && x.ok !== false && !(k === "fire" && x.kind === "NO_FIRE");
-    return `<div class="tile${x ? "" : " unk"} ${on ? `t-${cls}` : ""}"><span class="tile-ic">${ic(i)}</span><span class="tile-l">${l}</span><b class="tile-v">${x ? `${esc(detailValue(x))}${asOfMention(x)}` : "확인필요"}</b>${x ? `<span class="tile-g">${dot(x.g)}${srcTip(x, l)}</span>` : ""}</div>`;
+    const isNo = Boolean(x && (x.ok === false || (k === "fire" && x.kind === "NO_FIRE") || /불가|금지|불가능/.test(detailValue(x))));
+    const on = x && cls && !isNo;
+    return `<div class="tile${x ? "" : " unk"}${isNo ? " tile-no" : on ? ` t-${cls}` : ""}"><span class="tile-ic">${ic(i)}</span><span class="tile-l">${l}</span><b class="tile-v">${x ? `${esc(detailValue(x))}${asOfMention(x)}` : "확인필요"}</b>${x ? `<span class="tile-g">${dot(x.g)}${srcTip(x, l)}</span>` : ""}</div>`;
   }).join("") + extraTiles(c, d, f);
 }
 // 자료가 있을 때만 보이는 요약 카드(없으면 칸을 만들지 않는다 · 지어내지 않는다).
@@ -1729,7 +1776,11 @@ function extraTiles(c, d, f) {
   const pick = (re, skip) => am.filter((a) => re.test(a) && !(skip && skip.test(a)));
   const names = (pairs) => { const out = []; for (const [re, label] of pairs) if (am.some((a) => re.test(a)) && !out.includes(label)) out.push(label); return out; };
   const out = [];
-  const add = (icon, label, x) => { if (x?.v) out.push(`<div class="tile"><span class="tile-ic">${ic(icon)}</span><span class="tile-l">${label}</span><b class="tile-v">${esc(serviceText(x.v, 48))}${asOfMention(x)}</b><span class="tile-g">${dot(x.g)}${srcTip(x, label)}</span></div>`); };
+  const add = (icon, label, x) => {
+    if (!x?.v) return;
+    const isNo = Boolean(x.ok === false || /불가|금지|불가능/.test(String(x.v)));
+    out.push(`<div class="tile${isNo ? " tile-no" : ""}"><span class="tile-ic">${ic(icon)}</span><span class="tile-l">${label}</span><b class="tile-v">${esc(serviceText(x.v, 48))}${asOfMention(x)}</b><span class="tile-g">${dot(x.g)}${srcTip(x, label)}</span></div>`);
+  };
   add("users", "방문객", specFact(d, "VISITOR_POLICY"));
   add("clock-in", "얼리 체크인", specFact(d, "EARLY_CHECKIN"));
   add("clock-out", "레이트 체크아웃", specFact(d, "LATE_CHECKOUT"));
@@ -1740,18 +1791,21 @@ function extraTiles(c, d, f) {
   const wifi = pick(/무선인터넷|와이파이|wifi/i);
   if (wifi.length) add("wifi", "와이파이", { v: wifi.some((a) => /일부|제한|부분/.test(a)) ? "일부 가능" : "있음", ...gc(wifi) });
   const play = names([[/놀이터|놀이방|놀이시설/, "놀이터"], [/트렘폴린|트램폴린|트램펄린|트램플린|방방이/, "트램펄린"], [/에어바운스/, "에어바운스"], [/키즈카페|키즈방/, "키즈카페"], [/모래놀이/, "모래놀이"]]);
-  if (play.length) add("users", "놀이시설", { v: play.slice(0, 3).join(" · "), ...gc(pick(/놀이|트렘|트램|방방|에어바운스|키즈/)) });
+  if (play.length) {
+    const playIcon = play.some((p) => /트램|트렘|방방/.test(p)) ? "trampoline" : "users";
+    add(playIcon, "놀이시설", { v: play.slice(0, 3).join(" · "), ...gc(pick(/놀이|트렘|트램|방방|에어바운스|키즈/)) });
+  }
   const water = names([[/물놀이장|물놀이/, "물놀이장"], [/수영장|풀장|온수풀|유수풀/, "수영장"], [/워터슬라이드/, "워터슬라이드"]]);
   if (water.length) add("swim", "물놀이", { v: water.join(" · "), ...gc(pick(/물놀이|수영|풀장|온수풀|유수풀|워터슬라이드/)) });
   const sport = names([[/운동시설|운동기구/, "운동시설"], [/운동장/, "운동장"], [/족구/, "족구장"], [/풋살/, "풋살장"], [/배드민턴/, "배드민턴"]]);
-  if (sport.length) add("users", "운동시설", { v: sport.slice(0, 3).join(" · "), ...gc(pick(/운동|족구|풋살|배드민턴/)) });
+  if (sport.length) add("sports", "운동시설", { v: sport.slice(0, 3).join(" · "), ...gc(pick(/운동|족구|풋살|배드민턴/)) });
   const walk = pick(/산책로|둘레길|탐방로/);
   if (walk.length) add("route", "산책로", { v: "있음", ...gc(walk) });
   const fw = pick(/장작판매|장작.*판매|숯판매/);
-  if (fw.length) add("flame", "장작 판매", { v: "현장 판매", ...gc(fw) });
+  if (fw.length) add("firewood", "장작 판매", { v: "현장 판매", ...gc(fw) });
   const rec = pick(/분리수거|재활용/);
   if (rec.length) add("recycle", "분리수거", { v: "분리수거장 있음", ...gc(rec) });
-  if (c.fire === "개별" && !/화로대/.test(f.fire?.v ?? "")) add("flame", "화로대", { v: "개별 화로대 지참", ...gc(["화로대: 개별"]) });
+  if (c.fire === "개별" && !/화로대/.test(f.fire?.v ?? "")) add("pit", "화로대", { v: "개별 화로대 지참", ...gc(["화로대: 개별"]) });
   // 고캠핑 상세 시설정보: 글램핑·카라반 내부시설, 장비 대여(‘캠핑장 문의’만 있으면 뺌)
   for (const [re, icon, label] of [[/글램핑 내부/, "tent", "글램핑 내부"], [/카라반 내부/, "caravan", "카라반 내부"], [/장비대여|장비 대여/, "tent", "장비 대여"]]) {
     const r = gcdFac(d, re), v = (r?.items ?? (r?.v ? [r.v] : [])).filter((x) => !/^캠핑장 문의$/.test(x));
@@ -1808,9 +1862,10 @@ function nearbyCard(x) {
   const dist = x.summary ? "" : km(x.m);
   const body = `${lead}<span class="nb-txt"><b>${esc(x.name)}</b><i>${esc(label)}${x.sub ? ` · ${esc(x.sub)}` : ""}${x.summary ? " · 공공데이터" : ""}</i>${credit}</span>${dist ? `<span class="nb-dist" aria-label="캠핑장에서 ${esc(dist)}">${esc(dist)}</span>` : ""}`;
   // 실제 모습: 좌표가 있으면 ‘로드뷰’(카카오 지도 로드뷰, 화면 안 팝업). 줄 자체는 지도 링크.
-  const rv = x.lat && x.lng ? `<span class="nb-rv" role="button" tabindex="0" data-rv="${esc(`${x.lat},${x.lng}`)}" data-rv-name="${esc(x.name)}" aria-label="${esc(x.name)} 로드뷰 보기">${ic("roadview")}로드뷰</span>` : "";
+  const rv = x.lat && x.lng ? `<span class="nb-rv" role="button" tabindex="0" data-rv="${esc(`${x.lat},${x.lng}`)}" data-rv-name="${esc(x.name)}" aria-label="${esc(x.name)} 로드뷰 보기">${ic("roadview")}</span>` : "";
+  const actions = `<span class="nb-actions">${rv}<span class="nb-go" aria-hidden="true">${ic("map")}</span></span>`;
   return map
-    ? `<a class="nearby-place nb-row" href="${esc(map)}" target="_blank" rel="noopener" aria-label="${esc(x.name)} 지도 열기 · ${esc(label)}${dist ? ` · ${esc(dist)}` : ""}">${body}${rv}${ic("map", "nb-go")}</a>`
+    ? `<a class="nearby-place nb-row" href="${esc(map)}" target="_blank" rel="noopener" aria-label="${esc(x.name)} 지도 열기 · ${esc(label)}${dist ? ` · ${esc(dist)}` : ""}">${body}${actions}</a>`
     : `<div class="nearby-place nb-row">${body}</div>`;
 }
 /** 주변 > 주유 · 충전 칸에 가까운 전기차 충전소(최대 3곳)를 덧붙인다. ev: context/card.js evFor() 결과 */
@@ -1845,13 +1900,21 @@ function nearbyHubHtml(c, d) {
   // 상비약 판매처는 보통 같은 편의점이다 → 편의점과 이름이 같으면 약국 칸에 넣지 않는다
   const otc = pick("OTC_MEDICINE", licensed.OTC_MEDICINE ?? []).filter((x) => !conv.some((y) => y.name === x.name));
   const toilet = c.nearby_toilets ?? {};
+  const er = d?.extras?.er;
+  const erList = er ? [{
+    type: "HOSPITAL",
+    name: `[응급실] ${er[0]}`,
+    m: (Number(er[1]) || 0) * 1000,
+    sub: [er[2], er[3]].filter(Boolean).join(" · "),
+    url: er[3] ? `tel:${er[3]}` : null,
+  }] : [];
   // 소유자 2026-10-20: 생활·안전·관광 묶음 대신 마트·약국·병원·맛집·관광·주유소·충전소처럼 종류별로 나눠 보인다
   const groups = [
     ["conv", "편의점", "store", conv],
     ["mart", "마트", "cart", pick("MART", licensed.MART ?? [], k(nearby.mart, /supermarket|마트|greengrocer/))],
     ["butcher", "정육", "meat", pick("BUTCHER", licensed.BUTCHER ?? [], k(nearby.mart, /정육|바베큐|butcher/))],
     ["pharmacy", "약국", "cross", [...pick("PHARMACY", licensed.PHARMACY ?? [], k(nearby.medical, /약국|pharmacy|의약/)), ...otc].slice(0, 3)],
-    ["hospital", "병원", "cross", pick("HOSPITAL", k(nearby.medical, /병원|의료원|hospital|clinic/))],
+    ["hospital", "병원", "cross", [...erList, ...pick("HOSPITAL", k(nearby.medical, /병원|의료원|hospital|clinic/))].slice(0, 3)],
     ["vet", "동물병원", "paw", pick("VET", licensed.VET ?? [], nearby.vet ?? [])],
     ["gear", "캠핑용품", "tent", pick("GEAR", nearby.gear ?? [])],
     ["rest", "휴게소", "route", pick("REST_AREA", k(nearby.rest, /REST_AREA|SERVICE_AREA|DROWSY_SHELTER/))],
@@ -1864,7 +1927,7 @@ function nearbyHubHtml(c, d) {
   const energy = `<section class="nearby-group" id="nb-p-energy" role="tabpanel" aria-labelledby="nb-t-energy" data-energy hidden><div class="nearby-places" data-energy-places></div><p class="nearby-note" data-energy-note hidden></p></section>`;
   const tabs = [...groups.map(([key, title, icon, rows]) => ({ key, title, icon, n: rows.length })), { key: "energy", title: "충전소", icon: "bolt", n: 0, hide: true }];
   const tabsHtml = `<div class="nb-tabs" role="tablist" aria-label="주변시설 종류">${tabs.map((t, i) => `<button type="button" role="tab" id="nb-t-${t.key}" data-nb-tab="${t.key}" aria-controls="nb-p-${t.key}" aria-selected="${i === 0 && !t.hide}"${t.hide ? " hidden" : ""}>${ic(t.icon)}${esc(t.title)}${t.n ? `<i>${t.n}</i>` : ""}</button>`).join("")}</div>`;
-  return `<section class="d-sec nearby-hub" id="sec-nearby"${groups.length ? "" : " hidden"}><div class="sec-head">${iconTitle("route", "주변시설")}<span class="sec-note">캠핑장에서 직선거리 ${tip("<b>주변 정보</b><span>편의점·마트·정육·약국·동물병원·주유소는 인허가·공공 데이터, 병원·휴게소·화장실은 공공·지도 데이터, 관광·맛집은 한국관광공사 데이터로 연결합니다. 종류마다 가까운 곳 최대 3곳(관광·맛집 4곳)을 보여요. 운영 시간과 영업 여부는 원문에서 다시 확인하세요.</span>")}</span></div>${tabsHtml}<div class="nearby-groups">${groups.map(([key, , , rows], i) => `<section class="nearby-group" id="nb-p-${key}" role="tabpanel" aria-labelledby="nb-t-${key}"${i ? " hidden" : ""}><div class="nearby-places">${rows.map(nearbyCard).join("")}</div></section>`).join("")}${energy}</div></section>`;
+  return `<section class="d-sec nearby-hub" id="sec-nearby"${groups.length ? "" : " hidden"}><div class="sec-head">${iconTitle("route", "주변시설")}<span class="sec-note">${tip("<b>주변 정보</b><span>편의점·마트·정육·약국·동물병원·주유소는 인허가·공공 데이터, 병원·휴게소·화장실은 공공·지도 데이터, 관광·맛집은 한국관광공사 데이터로 연결합니다. 종류마다 가까운 곳 최대 3곳(관광·맛집 4곳)을 보여요. 운영 시간과 영업 여부는 원문에서 다시 확인하세요.</span>")}</span></div>${tabsHtml}<div class="nearby-groups">${groups.map(([key, , , rows], i) => `<section class="nearby-group" id="nb-p-${key}" role="tabpanel" aria-labelledby="nb-t-${key}"${i ? " hidden" : ""}><div class="nearby-places">${rows.map(nearbyCard).join("")}</div></section>`).join("")}${energy}</div></section>`;
 }
 function reviewHtml(d, c) {
   const rv = d?.rv ?? c?.rv;
@@ -2016,7 +2079,7 @@ async function detailView(id) {
         ${reviewHtml(d, c)}
         ${operatorHtml(d)}
         ${bookingHtml(c, d)}
-        ${amenityHtml(c)}
+        ${amenityHtml(c, d)}
         ${introHtml(d)}
         ${programsHtml(d)}
         ${layoutHtml(d, c)}
@@ -2109,44 +2172,69 @@ function introHtml(d) {
 }
 function amenityIcon(x) {
   const s = String(x ?? "");
+  if (/트렘|트램|방방/i.test(s)) return ic("trampoline");
+  if (/운동|체육|족구|풋살|배드민턴/i.test(s)) return ic("sports");
+  if (/장작/i.test(s)) return ic("firewood");
+  if (/화로|바비큐/i.test(s)) return ic("pit");
   if (/인터넷|와이파이|wifi/i.test(s)) return ic("broadcast");
   if (/화장실/i.test(s)) return ic("poo");
   if (/샤워/i.test(s)) return ic("bath");
   if (/개수대/i.test(s)) return ic("fountain");
   if (/전기/i.test(s)) return ic("bolt");
-  if (/장작|화로|바비큐/i.test(s)) return ic("flame");
   if (/온수/i.test(s)) return ic("drop");
   if (/마트|매점/i.test(s)) return ic("store");
   if (/물놀이|수영/i.test(s)) return ic("fountain");
   return "";
 }
-function amenityHtml(c) {
+function amenityHtml(c, d) {
   const a = (c.amenities ?? []).map((x) => x.replace(".", "·"));
   const cnt = [["화장실", c.toilets, "poo"], ["샤워실", c.showers, "bath"], ["개수대", c.sinks, "fountain"]].filter(([, n]) => n > 0);
   const rent = c.rental ?? [];
   const pt = c.nearby_toilets?.within_2km;
   if (!a.length && !cnt.length && !rent.length) return "";
+  // 상단 요약정보(스펙 섹션)와 중복 판별: 편의시설 내용이 이미 상단에서 다뤄졌으면 섹션 자체 제거
+  const handledRe = /전기|와이파이|인터넷|wifi|장작|숯|온수|트렘|트램|방방|물놀이|수영|풀장|놀이터|놀이|산책로|둘레길|운동|족구|풋살|배드민턴|마트|매점|편의점|분리수거|재활용|화로|반려동물|애완|주차|화장실|샤워|개수대|에어바운스|키즈/i;
+  const uniqueAmenities = a.filter((item) => !handledRe.test(item));
+  const hasUniqueRental = rent.length > 0 && !usage(c, d).some(([l, x]) => l === "대여" && x);
+  if (!uniqueAmenities.length && !hasUniqueRental) return "";
   return `<section class="d-sec"><div class="sec-head">${iconTitle("drop", "편의시설")}<span class="sec-note">고캠핑 등록 ${srcTip({ g: "c", src: { label: "고캠핑 등록 편의시설", url: c.gc_url } }, "편의시설")}</span></div>
     ${cnt.length ? `<div class="amen-n">${cnt.map(([l, n, icon]) => `<div><b>${ic(icon)} ${fmt(n)}</b><span>${l}</span></div>`).join("")}${pt ? `<div><b>${ic("poo")} ${fmt(pt)}</b><span>2km 안 공중화장실 ${tip("<b>공중화장실</b><span>행정안전부 공중화장실 표준데이터 기준, 캠핑장 2km 안 개수입니다.</span>")}</span></div>` : ""}</div>` : ""}
-    ${a.length ? `<div class="amen">${a.map((x) => `<span>${amenityIcon(x)}${esc(x)}</span>`).join("")}</div>` : ""}
-    ${rent.length ? `<p class="amen-rent"><b>${ic("cart")}대여</b>${rent.map((x) => `<span>${esc(x)}</span>`).join("")}</p>` : ""}
+    ${uniqueAmenities.length ? `<div class="amen">${uniqueAmenities.map((x) => `<span>${amenityIcon(x)}${esc(x)}</span>`).join("")}</div>` : ""}
+    ${hasUniqueRental ? `<p class="amen-rent"><b>${ic("cart")}대여</b>${rent.map((x) => `<span>${esc(x)}</span>`).join("")}</p>` : ""}
   </section>`;
 }
 const DAY = { weekday: "평일", weekend: "주말", holiday: "공휴일" };
-// 1박 요금은 한 곳에서만 보여 준다(소유자 2026-10-19: 이용 정보 · 사이트 표 · 요금 언급 · 운영자 안내에 세 번 나오던 요금을 하나로).
-// 순서: 업장 등록(예약 화면·시설 상품) → 대표 요금(고캠핑·운영자) → 추가 요금 → 운영자 안내 금액 → 후기 언급(확인필요).
-// 모든 줄은 ‘요금 언급’ 모양(금액 + 짧은 설명 + 근거 i)이고, 같은 금액은 한 번만 보인다.
-const WON_RE = /(\d{1,3}(?:,\d{3})+|\d{4,7})\s*원/;
+// 1박 요금: 숙박 요금(캠프 사이트·글램핑·타프존·카라반 등)을 최우선으로, 추가 요금(인원·차량·방문객 등)을 후순위로 공통되게 표시
+function parseWonAmount(s) {
+  const str = String(s || "");
+  const numRe = /(\d{1,3}(?:,\d{3})+|\d{4,7})\s*원/;
+  const m1 = str.match(numRe);
+  if (m1) return Number(m1[1].replace(/,/g, ""));
+  const manRe = /(\d+(?:\.\d+)?)\s*만\s*원?/;
+  const m2 = str.match(manRe);
+  if (m2) return Math.round(parseFloat(m2[1]) * 10000);
+  return 0;
+}
+
 function priceRows(c, d) {
-  const rows = [], seen = new Set();
-  const add = (won, label, kind, fact, extra = "", text = "") => {
-    const key = `${won}|${kind === "후기 언급" ? "" : label}`;
-    if (!won && !label && !text) return;
-    if (won && (seen.has(won) && kind === "후기 언급")) return;
-    if (seen.has(key)) return;
-    seen.add(key); if (won) seen.add(won);
-    rows.push({ won, label, kind, fact, extra, text });
+  const stayRows = [], extraRows = [];
+  const seenStay = new Set(), seenExtra = new Set();
+
+  const addStay = (won, label, kind, fact, extra = "", text = "") => {
+    const key = `${won}|${label}|${text}`;
+    if (seenStay.has(key)) return;
+    seenStay.add(key);
+    stayRows.push({ won, label, kind, fact, extra, text });
   };
+
+  const addExtra = (won, label, kind, fact, extra = "", text = "") => {
+    const key = `${label}|${won}|${text}`;
+    if (seenExtra.has(key)) return;
+    seenExtra.add(key);
+    extraRows.push({ won, label, kind, fact, extra, text, isExtra: true });
+  };
+
+  // 1. 예약 화면 실제 사이트별 요금 (오토캠핑, 글램핑, 타프존, 카라반 등 최우선)
   const bs = d?.booking_sites;
   if (bs?.sites?.length) {
     const groups = new Map();
@@ -2159,7 +2247,7 @@ function priceRows(c, d) {
     for (const g of groups.values()) {
       const ns = g.names, name = serviceText(ns.length > 2 ? `${ns[0]} ~ ${ns.at(-1)}` : ns.join(", "), 30);
       const label = [name, g.kind, `${ns.length}개`, g.size ? `${g.size[0]}×${g.size[1]}m` : "", g.floor, g.people ? String(g.people).replace(/^기준인원\s*/, "기준 ") : "", g.parking ? serviceText(String(g.parking).replace(/주차$/, " 주차"), 14) : "", g.carCamp ? "차박 가능" : "", g.pet ? "반려동물 동반" : ""].filter(Boolean).join(" · ");
-      add(g.price || 0, label, "업장 등록", { g: "c", src: { label: bs.label ?? "예약 화면(업장 등록)", url: bs.url, at: bs.checked_at, quote: `${name}${g.size ? ` 규격 ${g.size[0]}m × ${g.size[1]}m` : ""}${g.price ? ` ${fmt(g.price)}원` : ""}${day ? ` · ${day} 1박` : ""}` } }, day ? `${day} 1박` : "");
+      addStay(g.price || 0, label, "업장 등록", { g: "c", src: { label: bs.label ?? "예약 화면(업장 등록)", url: bs.url, at: bs.checked_at, quote: `${name}${g.size ? ` 규격 ${g.size[0]}m × ${g.size[1]}m` : ""}${g.price ? ` ${fmt(g.price)}원` : ""}${day ? ` · ${day} 1박` : ""}` } }, day ? `${day} 1박` : "");
     }
   }
   // 고캠핑 상세 이용안내 요금표: 같은 행에서 같은 금액인 기간은 한 줄로 합치고, 이미 보인 금액은 뺀다.
@@ -2167,55 +2255,204 @@ function priceRows(c, d) {
     const by = new Map();
     for (const f of d.gcd.fees) { const k = `${f.label}|${f.won}`; if (!by.has(k)) by.set(k, { ...f, periods: [] }); by.get(k).periods.push(f.period); }
     for (const x of by.values()) {
-      if (rows.some((r) => r.won === x.won)) continue;
+      if (stayRows.some((r) => r.won === x.won)) continue;
       const lab = serviceText(x.label.replace(/^(.+?) · \1$/, "$1"), 30);
-      add(x.won, `${lab} · ${x.periods.join("·")}`, "업장 등록", gcdFact(d.gcd, "고캠핑 상세 이용안내 요금표", `${x.label} ${x.periods.join("·")} ${fmt(x.won)}원`));
+      addStay(x.won, `${lab} · ${x.periods.join("·")}`, "업장 등록", gcdFact(d.gcd, "고캠핑 상세 이용안내 요금표", `${x.label} ${x.periods.join("·")} ${fmt(x.won)}원`));
     }
   }
   if (!bs?.sites?.length && (d?.products ?? []).length) {
     for (const [i, x] of d.products.entries()) {
       const label = [serviceText(x.name, 26) || `사이트 ${i + 1}`, serviceText(x.size, 20), x.base ? `기준 ${serviceText(x.base, 16)}인` : ""].filter(Boolean).join(" · ");
-      add(Number(x.price) || 0, label, "업장 등록", { g: "c", src: { label: d?.products_src?.label || "공식 시설 및 상품 등록", url: d?.products_src?.url || c.gc_url, at: d?.products_src?.checked_at, quote: `${x.name ?? ""} ${x.size ? `규격: ${x.size}` : ""} ${x.price ? `${fmt(x.price)}원` : ""}`.trim() } });
+      addStay(Number(x.price) || 0, label, "업장 등록", { g: "c", src: { label: d?.products_src?.label || "공식 시설 및 상품 등록", url: d?.products_src?.url || c.gc_url, at: d?.products_src?.checked_at, quote: `${x.name ?? ""} ${x.size ? `규격: ${x.size}` : ""} ${x.price ? `${fmt(x.price)}원` : ""}`.trim() } });
     }
   }
-  if (!rows.length) {
-    const pf = profFact(PF(d, "PRICE"));
-    const fee = c.fee;
-    if (pf?.v) add(0, "1박 기준", "대표 요금", pf, "", wonText(detailValue(pf)));
-    else if (fee) {
-      const lo = Number(fee.min), hi = Number(fee.max ?? fee.min);
-      const range = lo > 0 ? `${fmt(lo)}${hi > lo ? `~${fmt(hi)}` : ""}원${/대\s*$/.test(fee.text ?? "") ? "대" : ""}` : wonText(fee.text ?? "");
-      add(0, "1박 기준", "대표 요금", { g: GR(fee.grade) || "m", src: { label: sourceName(fee.basis, "요금 근거"), url: fee.url, at: fee.checked_at, quote: fee.quote } }, "", range);
+
+  // 2. 형태별 요금(tiers) 또는 대표 요금(c.fee / PF)
+  if (!stayRows.length) {
+    if (c.fee?.tiers?.length) {
+      for (const [k, lo, hi, est] of c.fee.tiers) {
+        const tierName = TIER_LABEL[k] || "캠핑 사이트";
+        const range = lo > 0 ? (hi > lo ? `${fmt(lo)}~${fmt(hi)}원` : `${fmt(lo)}원`) : "";
+        addStay(0, `${tierName} (1박 기준)`, "대표 요금", { g: "c", src: { label: c.fee.basis || "요금 근거", url: c.fee.url, at: c.fee.checked_at, quote: c.fee.text } }, "", range);
+      }
+    } else {
+      const pf = profFact(PF(d, "PRICE"));
+      const fee = c.fee;
+      if (pf?.v) addStay(0, "캠핑 사이트 (1박 기준)", "대표 요금", pf, "", wonText(detailValue(pf)));
+      else if (fee) {
+        const lo = Number(fee.min), hi = Number(fee.max ?? fee.min);
+        const range = lo > 0 ? `${fmt(lo)}${hi > lo ? `~${fmt(hi)}` : ""}원${/대\s*$/.test(fee.text ?? "") ? "대" : ""}` : wonText(fee.text ?? "");
+        addStay(0, "캠핑 사이트 (1박 기준)", "대표 요금", { g: GR(fee.grade) || "m", src: { label: sourceName(fee.basis, "요금 근거"), url: fee.url, at: fee.checked_at, quote: fee.quote } }, "", range);
+      }
     }
   }
-  const extra = profFact(PF(d, "EXTRA_FEE")) ?? specFact(d, "EXTRA_PERSON_FEE");
-  if (extra?.v) add(0, "인원·차량 추가", "추가 요금", extra, "", wonText(detailValue(extra)));
-  // 운영자 안내 중 금액 문장(환불·취소 규정 제외)은 여기로 옮기고, 운영자 안내 칸에서는 뺀다.
+
+  // 3. 운영자 안내 숙박 요금 (타프존, 글램핑, 카라반 등 특정 사이트 형태 요금 문장 보완)
   for (const x of d?.operator_snippets ?? []) {
     const t = typeof x === "string" ? x : x.text;
-    if ((x.cat ?? "요금 · 환불") !== "요금 · 환불" || /환불|취소|위약|수수료/.test(t)) continue;
-    const m = String(t).match(WON_RE);
-    const won = m ? Number(m[1].replace(/,/g, "")) : 0;
-    if (won < 5000) continue;
-    add(won, serviceText(String(t).replace(m[0], "").replace(/^[\s:：·\-]+|[\s:：·\-]+$/g, ""), 40) || "운영자 안내", "운영자 안내", { g: "c", src: { label: sourceName(x.src, "운영자 홈페이지"), url: x.url, at: x.date, quote: x.orig ?? t } });
-    if (rows.filter((r) => r.kind === "운영자 안내").length >= 3) break;
+    if (!t) continue;
+    if (/환불|취소|위약|수수료|보증금/.test(t)) continue;
+    const isExtra = /추가|방문객|지인|손님|인원추가|추가인원|차량추가|추가차량|차1대|트레일러|캠핑카|카라반.*추가|피크닉|당일|숯|그릴|장작|바베큐|바비큐|얼리|레이트|시간\s*연장/.test(t);
+    const isStay = /글램핑|카라반|타프|데크|파쇄석|오토|방갈로|펜션|객실|사이트|야영|1박|숙박/.test(t);
+    if (!isExtra && isStay) {
+      const won = parseWonAmount(t);
+      if (won >= 25000 && won <= 1000000) {
+        const cleanLabel = serviceText(t.replace(/(\d{1,3}(?:,\d{3})+|\d{4,7})\s*원|(\d+(?:\.\d+)?)\s*만\s*원?/g, "").replace(/^[\s:：·\-]+|[\s:：·\-]+$/g, ""), 32);
+        if (cleanLabel.length >= 2 && !stayRows.some(r => r.label && r.label.includes(cleanLabel))) {
+          addStay(won, `${cleanLabel} (1박)`, "운영자 안내", { g: "c", src: { label: sourceName(x.src, "운영자 홈페이지"), url: x.url, at: x.date, quote: x.orig ?? t } });
+        }
+      }
+    }
   }
-  let mentions = 0;
-  for (const x of d?.prices ?? []) {
-    if (!x.won || mentions >= 3) continue;
-    const before = rows.length;
-    add(x.won, [serviceText(x.label, 22), DAY[x.day], serviceText(x.season, 14)].filter(Boolean).join(" · ") || "1박", "후기 언급", sourceFact(x, "후기 원문", x.quote), asOf(x.date));
-    if (rows.length > before) mentions++;
+
+  // 4. 후기 언급: 공식 요금이 있으면 모호한 1박은 제외하고, 글램핑/타프존 등 고유 형태만 보완
+  if (stayRows.length === 0) {
+    for (const x of d?.prices ?? []) {
+      if (!x.won) continue;
+      addStay(x.won, [serviceText(x.label, 22), DAY[x.day], serviceText(x.season, 14)].filter(Boolean).join(" · ") || "1박 요금", "후기 언급", sourceFact(x, "후기 원문", x.quote), asOf(x.date));
+      if (stayRows.length >= 2) break;
+    }
+  } else {
+    for (const x of d?.prices ?? []) {
+      if (!x.won || !x.label) continue;
+      const l = String(x.label);
+      const isDistinctType = /글램핑|카라반|타프|방갈로|펜션/.test(l);
+      const alreadyHas = stayRows.some(r => r.label && r.label.includes(l));
+      if (isDistinctType && !alreadyHas) {
+        addStay(x.won, `${l} (1박 기준)`, "후기 언급", sourceFact(x, "후기 원문", x.quote), asOf(x.date));
+      }
+    }
   }
-  return { rows, bs };
+
+  // 5. 추가 요금: 인원 추가, 지인 방문(방문객), 추가 차량, 캠핑카/트레일러 등 후순위 공통 정규화
+  const extraCats = new Map();
+
+  for (const x of d?.operator_snippets ?? []) {
+    const t = typeof x === "string" ? x : x.text;
+    if (!t) continue;
+    if (/환불|취소|위약|수수료|보증금/.test(t)) continue;
+
+    const isVisitor = /방문객|지인|손님|피크닉/.test(t);
+    const isPerson = /인원\s*추가|추가\s*인원|1인\s*추가|추가인원|초과\s*인원/.test(t);
+    const isCar = /차량\s*추가|추가\s*차량|차\s*1대|추가차량|주차\s*추가/.test(t);
+    const isTrailer = /(캠핑카|카라반|트레일러|모터홈).*(추가|입장)/.test(t);
+    const isBbq = /숯|그릴|화로대|바베큐|바비큐/.test(t);
+
+    const fact = { g: "c", src: { label: sourceName(x.src, "운영자 홈페이지"), url: x.url, at: x.date, quote: x.orig ?? t } };
+
+    if (isTrailer) {
+      const won = parseWonAmount(t);
+      if (won >= 5000 && won <= 200000 && !extraCats.has("TRAILER")) {
+        extraCats.set("TRAILER", { won, label: "캠핑카 · 카라반 · 트레일러 동반 추가", kind: "추가 요금", fact });
+      }
+    }
+
+    if (isPerson || isVisitor) {
+      let pWon = 0;
+      const mP = t.match(/(?:1인|인당|인원)[^0-9]*(\d+(?:\.\d+)?)\s*만?\s*원/);
+      if (mP) pWon = mP[0].includes("만") ? Math.round(parseFloat(mP[1]) * 10000) : Number(mP[1].replace(/,/g, ""));
+      else pWon = parseWonAmount(t);
+
+      if (pWon >= 3000 && pWon <= 100000) {
+        if (!extraCats.has("PERSON")) {
+          extraCats.set("PERSON", {
+            won: pWon, minWon: pWon, maxWon: pWon,
+            label: isVisitor ? "인원 추가 · 지인 방문 (1인 기준)" : "추가 인원 (1인 기준)",
+            kind: "추가 요금", fact
+          });
+        } else {
+          const cur = extraCats.get("PERSON");
+          if (pWon < cur.minWon) cur.minWon = pWon;
+          if (pWon > cur.maxWon) cur.maxWon = pWon;
+          if (isVisitor && !cur.label.includes("방문")) cur.label = "인원 추가 · 지인 방문 (1인 기준)";
+        }
+      }
+    }
+
+    if (isCar) {
+      let cWon = 0;
+      const mC = t.match(/(?:차\s*1대|차량)[^0-9]*(\d+(?:\.\d+)?)\s*만?\s*원/);
+      if (mC) cWon = mC[0].includes("만") ? Math.round(parseFloat(mC[1]) * 10000) : Number(mC[1].replace(/,/g, ""));
+      else cWon = parseWonAmount(t);
+
+      if (cWon >= 3000 && cWon <= 100000 && !extraCats.has("CAR")) {
+        extraCats.set("CAR", { won: cWon, label: "추가 차량 (1대 기준)", kind: "추가 요금", fact });
+      }
+    }
+
+    if (isBbq && !extraCats.has("BBQ")) {
+      const won = parseWonAmount(t);
+      if (won >= 5000 && won <= 100000) {
+        extraCats.set("BBQ", { won, label: "숯 · 그릴 이용", kind: "추가 요금", fact });
+      }
+    }
+  }
+
+  // Spec facts fallback if not found in snippets
+  const extraPersonFact = profFact(PF(d, "EXTRA_FEE")) ?? specFact(d, "EXTRA_PERSON_FEE");
+  if (extraPersonFact?.v && !extraCats.has("PERSON")) {
+    const val = detailValue(extraPersonFact);
+    const won = parseWonAmount(val);
+    extraCats.set("PERSON", {
+      won, text: won ? "" : wonText(val),
+      label: "인원 추가 · 지인 방문 (1인 기준)", kind: "추가 요금", fact: extraPersonFact
+    });
+  }
+  const extraCarFact = specFact(d, "EXTRA_CAR_FEE");
+  if (extraCarFact?.v && !extraCats.has("CAR")) {
+    const val = detailValue(extraCarFact);
+    const won = parseWonAmount(val);
+    extraCats.set("CAR", {
+      won, text: won ? "" : wonText(val),
+      label: "추가 차량 (1대 기준)", kind: "추가 요금", fact: extraCarFact
+    });
+  }
+
+  // Format person range if min/max differ
+  if (extraCats.has("PERSON")) {
+    const p = extraCats.get("PERSON");
+    if (p.minWon && p.maxWon && p.minWon !== p.maxWon) {
+      p.won = 0;
+      p.text = `${fmt(p.minWon)}~${fmt(p.maxWon)}원`;
+    }
+  }
+
+  const EXTRA_ORDER = ["PERSON", "CAR", "TRAILER", "BBQ"];
+  for (const cat of EXTRA_ORDER) {
+    if (extraCats.has(cat)) {
+      const item = extraCats.get(cat);
+      addExtra(item.won, item.label, item.kind, item.fact, "", item.text || "");
+    }
+  }
+  for (const [k, item] of extraCats.entries()) {
+    if (!EXTRA_ORDER.includes(k)) {
+      addExtra(item.won, item.label, item.kind, item.fact, "", item.text || "");
+    }
+  }
+
+  const rows = [...stayRows, ...extraRows];
+  return { stayRows, extraRows, rows, bs };
 }
+
 function priceHtml(c, d) {
-  const { rows, bs } = priceRows(c, d);
+  const { stayRows, extraRows, rows, bs } = priceRows(c, d);
   if (!rows.length) return "";
-  const li = (r, i) => `<li class="pl-${r.kind === "후기 언급" ? "m" : "c"}"><b>${r.won ? `${fmt(r.won)}원` : esc(String(r.text || "예약처 확인").replace(/(방문객)\s+\1/g, "$1"))}</b><span>${esc(r.label)}</span><i class="pl-kind">${esc(r.kind)}${r.kind === "후기 언급" ? " · 확인필요" : ""}</i>${r.extra && r.kind === "후기 언급" ? r.extra : ""}${srcTip(r.fact, `1박 요금 ${i + 1}`)}</li>`;
+
+  const renderLi = (r, i) => {
+    const isMention = r.kind === "후기 언급";
+    const badgeText = isMention ? `${r.kind} · 확인필요` : r.kind;
+    const wonDisplay = r.won ? `${fmt(r.won)}원` : esc(String(r.text || "예약처 확인").replace(/(방문객)\s+\1/g, "$1"));
+    return `<li class="pl-${isMention ? "m" : "c"}${r.isExtra ? " pl-extra" : ""}"><b>${wonDisplay}</b><span>${esc(r.label)}</span><i class="pl-kind">${esc(badgeText)}</i>${r.extra && isMention ? r.extra : ""}${r.fact ? srcTip(r.fact, `요금 정보 ${i + 1}`) : ""}</li>`;
+  };
+
+  const stayItems = stayRows.map((r, i) => renderLi({ ...r, isExtra: false }, i)).join("");
+  const extraDivider = extraRows.length && stayRows.length ? `<li class="pl-divider"><span>추가 옵션 요금 (지인 방문 · 추가 차량 등)</span></li>` : "";
+  const extraItems = extraRows.map((r, i) => renderLi({ ...r, isExtra: true }, stayRows.length + i)).join("");
+
+  const allItemsHtml = `${stayItems}${extraDivider}${extraItems}`;
   const foot = bs?.url ? `<p class="st-foot">요금은 날짜마다 달라요. <a href="${esc(bs.url)}" target="_blank" rel="noopener">날짜별 예약 화면 열기</a></p>` : "";
-  const tiers = c.fee?.tiers?.length ? `<div class="ptiers">${c.fee.tiers.map(([k, lo, hi, est]) => `<div class="pt pt-${k}${est && k !== "site" ? " est" : ""}"><span>${TIER_LABEL[k]}${est && k !== "site" ? "<i>추정</i>" : ""}</span><b>${rangeWon(lo, hi)}</b></div>`).join("")}${tip("<b>숙박 형태별 1박 요금</b><span>요금 문장에 ‘글램핑·카라반·펜션·오토·데크’ 같은 이름이 있으면 그 형태로 나눠요. 이름이 없으면 금액으로 짐작해요(10만원 미만 사이트, 10만~20만원 글램핑·카라반, 20만원 이상 펜션·숙박동). 짐작한 것은 ‘추정’으로 표시하고, 그 캠핑장에 실제로 있는 사이트 타입으로 좁혀요.</span>", "형태별 요금 기준")}</div>` : "";
-  return `<section class="d-sec price-sec" id="sec-price"><div class="sec-head">${iconTitle("won", "1박 요금")}<span class="sec-note">업장 등록 우선 · 후기는 참고</span></div>${tiers}<ul class="plist">${rows.map(li).join("")}</ul>${foot}</section>`;
+
+  return `<section class="d-sec price-sec" id="sec-price"><div class="sec-head">${iconTitle("won", "1박 요금")}<span class="sec-note">업장 등록 우선 · 후기는 참고</span></div>${allItemsHtml ? `<ul class="plist">${allItemsHtml}</ul>` : ""}${foot}</section>`;
 }
 // 이용 규칙 · 공지(2026-10-19 소유자: 금지사항·이용수칙·이용제한은 업장 이용에 매우 중요 — 수집해서 노출, 공지는 눌러 바로 원문으로).
 // build-house-rules.mjs → d.house_rules { tags, rules[{cat,text,url,at}], ops, notices[{title,date,url}] }. 업장 공개 문장만(후기 제외).
@@ -2232,7 +2469,7 @@ function houseRulesHtml(c, d) {
       const t = esc(compactOperatorText(x.text));
       return /^https?:/.test(x.url ?? "") ? `<li><a class="hr-line" href="${esc(x.url)}" target="_blank" rel="noopener" title="원문 보기">${t}</a></li>` : `<li><span>${t}</span></li>`;
     };
-    return `<ul class="hr-list ${cls}">${rows.slice(0, 4).map(li).join("")}</ul>${rows.length > 4 ? `<details class="hr-more"><summary>${rows.length - 4}개 더 보기</summary><ul class="hr-list ${cls}">${rows.slice(4).map(li).join("")}</ul></details>` : ""}`;
+    return `<ul class="hr-list ${cls}">${rows.map(li).join("")}</ul>`;
   };
   // 불가 배지 = 근거 팝업 버튼: (아이콘 · 이름 · i) 한 덩어리, 배지를 누르면 근거 문장·원문 보기 팝업(소유자 2026-10-20)
   const tagBtn = (t) => {
@@ -2590,7 +2827,7 @@ function mediaHubHtml(d, c) {
     const fact = sourceFact({ src: "YouTube", url: x.url ?? `https://www.youtube.com/watch?v=${x.yt}`, date: x.date, title: x.title }, "YouTube");
     return `<article class="vid-wrap"><button type="button" class="vid" data-yt="${esc(x.yt)}"><img src="https://i.ytimg.com/vi/${encodeURIComponent(x.yt)}/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14z"/></svg></span><b>${esc(serviceText(x.title, 60) || `현장 영상 ${i + 1}`)}</b><i>${esc([x.author, x.date ? formatKoreanDate(x.date) : ""].filter(Boolean).join(" · ") || "재생하기")}</i></button>${srcTip(fact, `관련 영상 ${i + 1}`)}</article>`;
   }).join("")}</div>` : "";
-  return `<section class="d-sec media-hub" id="sec-media"><div class="sec-head">${iconTitle("video", "관련 영상 · SNS")}<span class="sec-note">${inSite.length ? "칩을 누르면 목록 · 바깥 플랫폼은 검색 결과로" : "플랫폼별 검색"}</span></div><div class="nb-tabs mh-tabs" role="tablist" aria-label="플랫폼">${tabs.map(chip).join("")}</div>${panels.replace("__RAIL__", rail)}</section>`;
+  return `<section class="d-sec media-hub" id="sec-media"><div class="sec-head">${iconTitle("video", "SNS 영상")}</div><div class="nb-tabs mh-tabs" role="tablist" aria-label="플랫폼">${tabs.map(chip).join("")}</div>${panels.replace("__RAIL__", rail)}</section>`;
 }
 function reviewSummary(value) {
   const text = String(value ?? "").replace(/[\r\n\t]+/g, " ").replace(/\s+/g, " ").trim();
@@ -2615,18 +2852,26 @@ function reviewLinksHtml(d, c) {
     </div>`;
 
   const seenUrl = new Set();
+  const titleByUrl = new Map();
+  for (const r of [...(d?.reviews ?? []), ...(d?.cafe ?? []), ...(d?.web ?? [])]) {
+    if (r.url && r.title) titleByUrl.set(r.url, r.title);
+  }
   const rawReviews = [...(d?.reviews ?? []), ...(d?.cafe ?? []), ...(d?.web ?? [])].filter((x) => x.url && x.title && !seenUrl.has(x.url) && seenUrl.add(x.url));
   const photos = snsImages(d);
   const photoByUrl = new Map(photos.map((x) => [x.url, x]));
-  const photoReviews = photos.filter((x) => x.url && !seenUrl.has(x.url) && seenUrl.add(x.url)).map((x, i) => ({
-    url: x.url,
-    title: x.title || `캠퍼 사진 ${i + 1}`,
-    date: x.date,
-    src: x.src || "캠퍼 사진",
-    thumb: mediaSmall(x),
-    img: mediaFull(x),
-    isPhoto: true,
-  }));
+  const photoReviews = photos.filter((x) => x.url && !seenUrl.has(x.url) && seenUrl.add(x.url)).map((x, i) => {
+    const fallbackTitle = campName ? `${campName} 캠퍼 사진 후기` : `캠퍼 사진 후기`;
+    const resolvedTitle = x.title || titleByUrl.get(x.url) || fallbackTitle;
+    return {
+      url: x.url,
+      title: resolvedTitle,
+      date: x.date,
+      src: x.src || "캠퍼 사진",
+      thumb: mediaSmall(x),
+      img: mediaFull(x),
+      isPhoto: true,
+    };
+  });
   const allItems = [...rawReviews, ...photoReviews].sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
 
   if (!allItems.length) {
@@ -2648,7 +2893,9 @@ function reviewLinksHtml(d, c) {
     const thumb = (matchedPhoto && mediaSmall(matchedPhoto)) || (x.thumb) || (canPreviewExternalMedia(x) && externalImage(x)) || apiThumb(x) || fav || campShot;
     const media = `<div class="media-card-photo">${thumb ? `<img src="${esc(thumb)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${esc(campShot || fav)}'">` : ic("file-text")}</div>`;
     const dateStr = formatKoreanDate(x.date);
-    return `<article class="review-link-card media-card"><a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${platformLabel} 후기 ${i + 1} 원문 열기">${media}<div class="media-card-body"><span class="media-card-source">${platIc(pk)}<span>${esc(platformLabel)}</span></span><b>${esc(serviceText(x.title, 54) || `방문 후기 ${i + 1}`)}</b>${summary ? `<em>${esc(summary)}</em>` : ""}${dateStr ? `<span class="media-card-date">${esc(dateStr)}</span>` : ""}</div></a>${srcTip(fact, `${platformLabel} 후기 ${i + 1}`)}</article>`;
+    const relStr = formatRelativeDate(x.date);
+    const dateHtml = dateStr ? `<span class="media-card-date"><span>${esc(dateStr)}</span>${relStr ? `<small class="date-rel">${esc(relStr)}</small>` : ""}</span>` : "";
+    return `<article class="review-link-card media-card"><a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${platformLabel} 후기 ${i + 1} 원문 열기">${media}<div class="media-card-body"><span class="media-card-source">${platIc(pk)}<span>${esc(platformLabel)}</span></span><b>${esc(serviceText(x.title, 54) || `방문 후기 ${i + 1}`)}</b>${summary ? `<em>${esc(summary)}</em>` : ""}${dateHtml}</div></a>${srcTip(fact, `${platformLabel} 후기 ${i + 1}`)}</article>`;
   }).join("");
 
   return `<section class="d-sec" id="sec-reviews"><div class="sec-head">${iconTitle("file-text", "방문후기")}<span class="sec-note">후기 ${allItems.length}건</span></div>
@@ -2746,46 +2993,71 @@ function getWeatherDescription(code) {
   return "맑음";
 }
 
-function getWeatherIconSvg(code, size = 20) {
+function weatherIconSvg(sky, pty, size = 26) {
+  const isSnow = /눈/.test(pty ?? sky ?? "");
+  const isRain = /비|소나기|빗방울/.test(pty ?? sky ?? "");
+  const isThunder = /번개|뇌우/.test(pty ?? sky ?? "");
+  const isFog = /안개/.test(pty ?? sky ?? "");
+  const isCloudy = /흐림/.test(sky ?? "");
+  const isPartlyCloudy = /구름/.test(sky ?? "");
+
+  if (isThunder) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-lightning" aria-hidden="true"><path class="w-cloud-body" d="M7 14a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12z"/><polygon class="w-bolt" points="13 13 10 17 13 17 11 22 16 16 13 16 14 13" fill="currentColor" stroke="none"/></svg>`;
+  }
+  if (isSnow) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-snow" aria-hidden="true"><path class="w-cloud-body" d="M7 14a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12z"/><g class="w-snow-flakes"><circle class="w-flake f1" cx="8" cy="18" r="1.3" fill="currentColor"/><circle class="w-flake f2" cx="12" cy="19" r="1.3" fill="currentColor"/><circle class="w-flake f3" cx="16" cy="18" r="1.3" fill="currentColor"/></g></svg>`;
+  }
+  if (isRain) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-rain" aria-hidden="true"><path class="w-cloud-body" d="M7 14a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12z"/><g class="w-rain-drops"><line class="w-drop d1" x1="8" y1="16.5" x2="7" y2="19.5"/><line class="w-drop d2" x1="12" y1="16.5" x2="11" y2="19.5"/><line class="w-drop d3" x1="16" y1="16.5" x2="15" y2="19.5"/></g></svg>`;
+  }
+  if (isFog) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-mist" aria-hidden="true"><line class="w-mist-line m1" x1="4" y1="7" x2="20" y2="7"/><line class="w-mist-line m2" x1="6" y1="11" x2="18" y2="11"/><line class="w-mist-line m3" x1="3" y1="15" x2="21" y2="15"/><line class="w-mist-line m4" x1="7" y1="19" x2="17" y2="19"/></svg>`;
+  }
+  if (isCloudy) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-cloud" aria-hidden="true"><path class="w-cloud-body" d="M7 18a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12z"/></svg>`;
+  }
+  if (isPartlyCloudy) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-sun-cloud" aria-hidden="true"><g class="w-sun-peeking"><circle cx="16.5" cy="7.5" r="3"/><line x1="16.5" y1="2.5" x2="16.5" y2="3.8"/><line x1="20.5" y1="5.5" x2="21.7" y2="5"/><line x1="20.5" y1="9.5" x2="21.7" y2="10"/><line x1="13.5" y1="3.5" x2="12.5" y2="2.7"/></g><path class="w-cloud-body" d="M6.5 19a4.5 4.5 0 0 1-.5-8.97A5.5 5.5 0 0 1 16.5 12a4 4 0 0 1 2 7.45H6.5z"/></svg>`;
+  }
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-sun" aria-hidden="true"><circle class="w-sun-core" cx="12" cy="12" r="4.2"/><g class="w-sun-rays"><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.07" y2="4.93"/></g></svg>`;
+}
+
+function getWeatherIconSvg(code, size = 24) {
   const c = Number(code);
   if (c === 0) {
-    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-sun"><circle cx="12" cy="12" r="4"/><path d="M3 12h1m8-9v1m8 8h1m-9 8v1m-6.4-15.4l.7.7m12.1-.7l-.7.7m0 11.4l.7.7m-12.1-.7l-.7.7"/></svg>`;
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-sun" aria-hidden="true"><circle class="w-sun-core" cx="12" cy="12" r="4.2"/><g class="w-sun-rays"><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.07" y2="4.93"/></g></svg>`;
   }
-  if ([1, 2, 3].includes(c)) {
-    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-cloud"><path d="M7 18a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12"/></svg>`;
+  if ([1, 2].includes(c)) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-sun-cloud" aria-hidden="true"><g class="w-sun-peeking"><circle cx="16.5" cy="7.5" r="3"/><line x1="16.5" y1="2.5" x2="16.5" y2="3.8"/><line x1="20.5" y1="5.5" x2="21.7" y2="5"/><line x1="20.5" y1="9.5" x2="21.7" y2="10"/><line x1="13.5" y1="3.5" x2="12.5" y2="2.7"/></g><path class="w-cloud-body" d="M6.5 19a4.5 4.5 0 0 1-.5-8.97A5.5 5.5 0 0 1 16.5 12a4 4 0 0 1 2 7.45H6.5z"/></svg>`;
+  }
+  if (c === 3) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-cloud" aria-hidden="true"><path class="w-cloud-body" d="M7 18a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12z"/></svg>`;
   }
   if ([45, 48].includes(c)) {
-    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-mist"><path d="M5 5h14M5 9h14M5 13h14M5 17h14"/></svg>`;
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-mist" aria-hidden="true"><line class="w-mist-line m1" x1="4" y1="7" x2="20" y2="7"/><line class="w-mist-line m2" x1="6" y1="11" x2="18" y2="11"/><line class="w-mist-line m3" x1="3" y1="15" x2="21" y2="15"/><line class="w-mist-line m4" x1="7" y1="19" x2="17" y2="19"/></svg>`;
   }
   if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(c)) {
-    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-rain"><path d="M7 18a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12M8 22l-.5-1.5M12 22l-.5-1.5M16 22l-.5-1.5"/></svg>`;
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-rain" aria-hidden="true"><path class="w-cloud-body" d="M7 14a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12z"/><g class="w-rain-drops"><line class="w-drop d1" x1="8" y1="16.5" x2="7" y2="19.5"/><line class="w-drop d2" x1="12" y1="16.5" x2="11" y2="19.5"/><line class="w-drop d3" x1="16" y1="16.5" x2="15" y2="19.5"/></g></svg>`;
   }
   if ([71, 73, 75, 77, 85, 86].includes(c)) {
-    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-snow"><path d="M10 4l2 1l2-1M12 2v6.5M10 20l2-1l2 1M12 15.5v6.5M20 10l-1 2l1 2M15.5 12h6.5M4 10l1 2l-1 2M2 12h6.5M4.43 4.43l4.24 4.24M2.5 5.5l1.5 1.5l1.5-1.5M19.56 19.56l-4.24-4.24M18.5 17.5l1.5 1.5l1.5-1.5M19.56 4.43l-4.24 4.24M18.5 6.5l1.5-1.5l1.5 1.5M4.43 19.56l4.24-4.24M2.5 18.5l1.5-1.5l1.5 1.5"/></svg>`;
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-snow" aria-hidden="true"><path class="w-cloud-body" d="M7 14a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12z"/><g class="w-snow-flakes"><circle class="w-flake f1" cx="8" cy="18" r="1.3" fill="currentColor"/><circle class="w-flake f2" cx="12" cy="19" r="1.3" fill="currentColor"/><circle class="w-flake f3" cx="16" cy="18" r="1.3" fill="currentColor"/></g></svg>`;
   }
   if ([95, 96, 99].includes(c)) {
-    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-lightning"><path d="M7 18a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12M13 18l-2 3v-3l-2 3"/></svg>`;
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-lightning" aria-hidden="true"><path class="w-cloud-body" d="M7 14a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12z"/><polygon class="w-bolt" points="13 13 10 17 13 17 11 22 16 16 13 16 14 13" fill="currentColor" stroke="none"/></svg>`;
   }
-  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-sun"><circle cx="12" cy="12" r="4"/><path d="M3 12h1m8-9v1m8 8h1m-9 8v1m-6.4-15.4l.7.7m12.1-.7l-.7.7m0 11.4l.7.7m-12.1-.7l-.7.7"/></svg>`;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-sun" aria-hidden="true"><circle class="w-sun-core" cx="12" cy="12" r="4.2"/><g class="w-sun-rays"><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.07" y2="4.93"/></g></svg>`;
 }
 
 // 상세 ‘주간 날씨’ 칸(conditions/card.js)과 같은 기호를 쓴다(팝업·페이지 통일).
 function weatherEmoji(code) {
-  const c = Number(code);
-  if ([71, 73, 75, 77, 85, 86].includes(c)) return "❄️";
-  if ([95, 96, 99].includes(c)) return "⛈️";
-  if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(c)) return "🌧️";
-  if ([45, 48].includes(c)) return "🌫️";
-  if (c === 3) return "☁️";
-  if (c === 1 || c === 2) return "⛅";
-  return "☀️";
+  return getWeatherIconSvg(code, 26);
 }
 // 페이지 ‘주간 날씨’ 칸(기상청 단기·중기예보)의 날짜별 값. 팝업의 날짜 칸·하루 요약은 이 값을 먼저 쓴다(같은 날 숫자가 다르지 않게).
 function pageForecast() {
   const out = {};
   for (const b of $$("[data-fc-date]")) {
     const n = (v) => (v === "" || v == null ? null : Number(v));
-    out[b.dataset.fcDate] = { rel: b.dataset.fcRel, ic: b.dataset.fcIc, desc: b.dataset.fcDesc, tmin: n(b.dataset.fcTmin), tmax: n(b.dataset.fcTmax), pop: n(b.dataset.fcPop), src: b.dataset.fcSrc };
+    out[b.dataset.fcDate] = { rel: b.dataset.fcRel, sky: b.dataset.fcSky, pty: b.dataset.fcPty, desc: b.dataset.fcDesc, tmin: n(b.dataset.fcTmin), tmax: n(b.dataset.fcTmax), pop: n(b.dataset.fcPop), src: b.dataset.fcSrc };
   }
   return out;
 }
@@ -3067,14 +3339,15 @@ function openWeatherModal(c, initialDate, data) {
         ${stripDays.map((ds) => {
           const m = parseKstDate(ds), kd = kma[ds], od = data.daily[ds];
           const temp = kd?.tmax ?? od?.max;
-          return `<button type="button" class="fc-day${ds === selectedDate ? " is-active" : ""}" data-switch-date="${esc(ds)}"><span class="lbl">${esc(kd?.rel ?? m.tabLabel)}</span><span class="ic">${kd?.ic ?? (od ? weatherEmoji(od.code) : "·")}</span><span class="t">${temp != null ? `${temp}°` : "–"}</span></button>`;
+          const icon = kd?.sky || kd?.pty ? weatherIconSvg(kd.sky, kd.pty, 24) : (od ? getWeatherIconSvg(od.code, 24) : "");
+          return `<button type="button" class="fc-day${ds === selectedDate ? " is-active" : ""}" data-switch-date="${esc(ds)}"><span class="lbl">${esc(kd?.rel ?? m.tabLabel)}</span><span class="ic">${icon}</span><span class="t">${temp != null ? `${temp}°` : "–"}</span></button>`;
         }).join("")}
       </div>
       <div class="w-modal-body">
         <div class="w-highlight-card">
           <div class="w-highlight-top">
             <span class="w-highlight-desc">${esc(k?.desc || getWeatherDescription(dayItem.code))}</span>
-            <div class="w-highlight-icon">${k?.ic ?? weatherEmoji(dayItem.code)}</div>
+            <div class="w-highlight-icon">${k?.sky || k?.pty ? weatherIconSvg(k.sky, k.pty, 56) : getWeatherIconSvg(dayItem.code, 56)}</div>
           </div>
           <div class="w-highlight-main">
             <span class="w-highlight-temp">${k?.tmax ?? dayItem.max}</span>
@@ -3236,11 +3509,12 @@ function openWeatherModal(c, initialDate, data) {
 }
 
 function reserveDock(c) {
-  const main = primaryBooking(c);
-  return `${heartBtn(c)}${c.tel ? `<a class="btn ghost" href="tel:${esc(c.tel)}" aria-label="전화">${ic("phone")}</a>` : ""}${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">예약하기</a>` : ""}`;
+  const options = bookingOptions(c);
+  const main = options[0] ?? null;
+  const label = main ? `${bookingLabel(main)}에서 예약` : "예약하기";
+  return `<div class="d-dock-in">${heartBtn(c)}${c.tel && main ? `<a class="btn ghost" href="tel:${esc(c.tel)}" aria-label="전화">${ic("phone")}</a>` : ""}${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">${esc(label)}</a>` : c.tel ? `<a class="btn primary wide" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}</div>`;
 }
-// 상세 보조 모듈(/conditions·/context·/operator)은 사이트 루트(/camp/)에 있다. 화면이 /camp/에서 뜨든 /camp/explore/에서 뜨든 같은 곳을 가리키게 한다.
-const MOD_ROOT = /\/(explore|renewal)\/[^/]*$/.test(new URL(import.meta.url).pathname) ? "../" : "./";
+// 상세 보조 모듈(/conditions·/context·/operator)은 사이트 루트(/camp/)에 있다.
 function bindDetail() {
   hostTips($("#view"));
   if ("MutationObserver" in window) { const mo = new MutationObserver(() => { if ($(".ib[data-tip]", $("#view"))) hostTips($("#view")); }); mo.observe($("#view"), { childList: true, subtree: true }); cleanup.push(() => mo.disconnect()); }

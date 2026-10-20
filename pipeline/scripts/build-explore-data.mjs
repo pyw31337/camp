@@ -56,6 +56,30 @@ const seoul = seoulRaw ? matchSeoulToCampgrounds(seoulRaw.services ?? [], camps.
 const pilotFacts = await read("../registry/pilot-condition-facts.json");
 const stdCampgrounds = await read("../out/standard-campgrounds.json");
 const records = buildExploreRecords(camps, toilets, fees, seoul, notices, pilotFacts);
+// 카탈로그에 없는 당일 캠프닉(펀앤펀 등)은 레지스트리에서 붙인다. 다음 전체 빌드에서도 유지.
+const campnicExtra = await read("../registry/private-campnic.json");
+if (campnicExtra?.sites) {
+  const have = new Set(records.map((r) => r.name));
+  for (const s of campnicExtra.sites) {
+    if (s.in_catalog || have.has(s.name)) continue;
+    records.push({
+      id: s.id || `c-${s.name}`,
+      name: s.name,
+      sido: (s.region || "").split(" ")[0] || "경기도",
+      sigungu: (s.region || "").split(" ")[1] || null,
+      area: "서울·경기",
+      addr: s.addr || s.region || "",
+      op: "PRIVATE",
+      status: "운영",
+      types: ["캠프닉"],
+      amenities: [],
+      fee: s.fee ? { text: s.fee, grade: "MENTION" } : null,
+      booking: s.source ? { url: s.source, channels: [{ platform_id: "web", platform_name: "안내", url: s.source, kind: "online", confidence: 0.7, evidence: ["campnic_registry"] }] } : null,
+    });
+    have.add(s.name);
+  }
+}
+
 // 분야별 공공 우수야영장(고캠핑 공개 목록, registry/gocamping-best.json): [[연도, 분야]] 최근 연도 먼저
 const best = await read("../registry/gocamping-best.json");
 for (const r of records) {
@@ -179,6 +203,13 @@ for (const [id, d] of Object.entries(details)) {
     // 검색 사진: 같은 원본(이름 키)은 한 장만, 배치도로 이미 보인 사진과 여러 캠핑장(3곳 이상)에 똑같이 붙은 사진은 뺀다.
     const layoutKeys = new Set((so.layout?.images ?? []).map((x) => photoKey(x.img ?? x.thumb)));
     const images = uniqueBy((so.image ?? []).filter((x) => (snapCamps.get(x.thumb)?.size ?? 0) < 3), (x) => photoKey(x.img ?? x.thumb), layoutKeys);
+    const titleByUrl = new Map();
+    for (const r of [...(so.blog ?? []), ...(so.cafe ?? []), ...(w?.blog ?? []), ...(w?.cafe ?? []), ...(w?.web ?? [])]) {
+      if (r.url && r.title) titleByUrl.set(r.url, r.title);
+    }
+    for (const img of images) {
+      if (!img.title && titleByUrl.has(img.url)) img.title = titleByUrl.get(img.url);
+    }
     if (images.length) d.sns_images = images;
     if (so.vclip?.length) d.videos = so.vclip;
     if (so.layout) d.layout = so.layout;

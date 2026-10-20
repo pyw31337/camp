@@ -76,7 +76,8 @@ body { min-height: 100dvh; }
 
 .cards { display: grid; gap: 12px; }
 .card { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 14px; padding: 12px; border-radius: var(--r-2); background: var(--surface); box-shadow: var(--shadow-1); border: 1px solid var(--line); cursor: pointer; text-align: left; width: 100%; }
-.card:hover, .card[aria-current="true"] { border-color: var(--green); }
+.card:hover { box-shadow: var(--shadow-2); }
+.card[aria-current="true"] { border-color: var(--green); }
 .thumb { position: relative; width: 132px; height: 104px; border-radius: 12px; overflow: hidden; background: var(--surface-2); display: grid; place-items: center; color: var(--ink-3); }
 .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .card-body { min-width: 0; display: grid; gap: 5px; align-content: start; }
@@ -202,7 +203,7 @@ a.row .tag { flex: none; }
 .theme-group h3 { font-size: var(--fs-xs); font-weight: 700; color: var(--ink-3); letter-spacing: .02em; }
 .theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 9.5rem), 1fr)); gap: 8px; }
 .theme-tile { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 10px; align-items: center; padding: 10px 12px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); text-align: left; font: inherit; cursor: pointer; min-width: 0; }
-.theme-tile:hover { border-color: var(--green); }
+.theme-tile:hover { transform: translateY(-2px); box-shadow: var(--shadow-1); }
 .theme-tile .theme-ic { grid-row: 1 / 3; }
 .theme-tile b { font-size: var(--fs-base); font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 .theme-tile small { font-size: var(--fs-xs); font-weight: 500; color: var(--ink-3); white-space: nowrap; }
@@ -363,7 +364,7 @@ details.sub summary h4 { min-width: 0; }
 .booking-path-go.disabled { color: var(--ink-3); cursor: default; }
 .official-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: 8px; }
 .official-links a { display: flex; align-items: center; gap: 8px; min-height: 3.25rem; padding: 0 11px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2); font-size: var(--fs-sm); font-weight: 800; color: var(--ink); }
-.official-links a:hover { border-color: var(--green); }
+.official-links a:hover { border-color: var(--line-strong, #ccc); }
 .official-links span { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .official-note { padding: 9px 10px; border-radius: 12px; background: var(--surface-2); }
 .official-note summary { cursor: pointer; font-size: var(--fs-sm); font-weight: 800; }
@@ -384,7 +385,7 @@ details.sub summary h4 { min-width: 0; }
 /* 주변 정보: 사진 자료 및 로드뷰 썸네일 고화질 시각화 */
 .near-list { gap: 10px; }
 .near-card { display: grid; grid-template-columns: 5.25rem minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 10px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface-2); transition: border-color 0.15s ease, box-shadow 0.15s ease; }
-.near-card:hover { border-color: color-mix(in srgb, var(--green) 35%, var(--line)); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); }
+.near-card:hover { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); }
 .near-visual { position: relative; align-self: stretch; min-height: 5.25rem; width: 5.25rem; overflow: hidden; border-radius: 12px; background: var(--surface); cursor: pointer; display: grid; place-items: center; }
 .near-visual img { display: block; width: 100%; height: 100%; min-height: 5.25rem; object-fit: cover; transition: transform 0.2s ease; }
 .near-card:hover .near-visual img { transform: scale(1.04); }
@@ -923,7 +924,7 @@ body.detail-open .compare-bar { display: none; }
    ========================================================================== */
 .review-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15.5rem), 1fr)); gap: 14px; margin-top: 10px; }
 .review-card-vertical { display: flex; flex-direction: column; border-radius: 16px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: inherit; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; box-shadow: var(--shadow-1); }
-.review-card-vertical:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); border-color: var(--green); }
+.review-card-vertical:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); }
 .review-card-thumb { position: relative; width: 100%; aspect-ratio: 16 / 10; background: var(--surface-2); overflow: hidden; display: flex; align-items: center; justify-content: center; }
 .review-card-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
 .review-card-vertical:hover .review-card-thumb img { transform: scale(1.04); }
@@ -945,7 +946,7 @@ body.detail-open .compare-bar { display: none; }
    ========================================================================== */
 .platform-hub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13.5rem), 1fr)); gap: 10px; margin-top: 8px; }
 .platform-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; color: inherit; transition: all .15s ease; }
-.platform-card:hover { transform: translateY(-2px); border-color: var(--green); box-shadow: var(--shadow-1); }
+.platform-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-1); }
 .platform-icon { width: 2.5rem; height: 2.5rem; border-radius: 12px; display: grid; place-items: center; flex-shrink: 0; }
 .platform-icon.naver { background: #03c75a; color: #fff; }
 .platform-icon.kakao { background: #fee500; color: #191919; }
@@ -1033,7 +1034,7 @@ body.detail-open .compare-bar { display: none; }
    ========================================================================== */
 .dv-good-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)); gap: 10px; margin-top: 10px; }
 .dv-good-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); transition: all .15s ease; cursor: pointer; text-decoration: none; color: inherit; }
-.dv-good-card:hover { transform: translateY(-2px); border-color: var(--green); box-shadow: var(--shadow-1); }
+.dv-good-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-1); }
 .dv-good-ic { width: 2.25rem; height: 2.25rem; border-radius: 10px; background: var(--surface-2); display: grid; place-items: center; color: var(--green); flex-shrink: 0; }
 .dv-good-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .dv-good-text b { font-size: var(--fs-xs); font-weight: 850; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

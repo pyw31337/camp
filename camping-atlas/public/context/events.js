@@ -54,9 +54,9 @@ const STYLE = `.ev-sec .ev-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 1
 .ev-badges b{padding:3px 8px;border-radius:999px;font-size:.7rem;font-weight:850;line-height:1.3;background:rgba(17,17,17,.72);color:#fff;backdrop-filter:blur(4px)}
 .ev-badges b.on{background:#12a150}.ev-badges b.wk{background:var(--accent,#e8590c)}
 .ev-dist{position:absolute;right:8px;bottom:8px;padding:3px 8px;border-radius:999px;font-size:.7rem;font-weight:800;background:rgba(255,255,255,.92);color:#222}
-.ev-body{display:grid;gap:4px;padding:11px 12px 13px;min-width:0;flex:1}
+.ev-body{display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;gap:6px;padding:12px 12px 14px;min-width:0;flex:1}
 .ev-kind{color:var(--accent,#e8590c);font-size:.72rem;font-weight:850}
-.ev-body h3{margin:0;font-size:.93rem;line-height:1.35;font-weight:850;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ev-body h3{margin:0;font-size:.93rem;line-height:1.35;font-weight:850;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.7em}
 .ev-meta{color:var(--ink-3,#666);font-size:.76rem;line-height:1.45}
 .ev-desc{margin:2px 0 0;color:var(--ink-2,#333);font-size:.78rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .ev-acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:8px}
@@ -65,7 +65,7 @@ const STYLE = `.ev-sec .ev-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 1
 .ev-more{margin:12px auto 0;display:block;height:36px;padding:0 16px;border-radius:999px;border:1px solid var(--line,#e5e5e5);background:var(--paper,#fff);font:inherit;font-size:.8rem;font-weight:800;cursor:pointer}
 .ev-hit{position:absolute;inset:0;z-index:1;border-radius:inherit}
 .ev-hit:focus-visible{outline:2px solid var(--accent,#e8590c);outline-offset:2px}
-.ev-kindrow{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ev-kindrow{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:28px}
 .ev-map{position:relative;z-index:2;display:inline-grid;place-items:center;width:28px;height:28px;border-radius:999px;background:var(--soft,#f2f2f2);color:var(--ink-2,#333);font-size:15px;text-decoration:none}
 .ev-map:hover{background:var(--ink,#111);color:var(--paper,#fff)}
 .ev-filters{display:inline-flex;gap:6px;align-items:center}
