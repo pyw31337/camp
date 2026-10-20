@@ -1756,6 +1756,9 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .w-modal-days-strip { padding: 4px 18px 12px; border-bottom: 1px solid var(--line); }
 .weather-modal .fc-day.is-active { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .weather-modal .fc-day.is-active .lbl { color: var(--on-accent); }
+.weather-modal .fc-day.is-active .w-icon,
+.weather-modal .fc-day.is-active .w-icon [stroke] { stroke: var(--on-accent) !important; color: var(--on-accent) !important; }
+.weather-modal .fc-day.is-active .w-icon [fill]:not([fill="none"]) { fill: var(--on-accent) !important; color: var(--on-accent) !important; }
 .w-modal-body { padding: 16px 18px 20px; display: flex; flex-direction: column; gap: 12px; max-height: 70vh; overflow-y: auto; }
 .w-highlight-card { position: relative; background: var(--accent-tint); border-radius: var(--r-s); padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; }
 .w-highlight-top { display: flex; align-items: center; justify-content: space-between; }
@@ -1764,9 +1767,53 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .w-highlight-temp { font-size: 3.2rem; font-weight: 900; line-height: 1; letter-spacing: -0.04em; color: var(--ink); }
 .w-highlight-unit { font-size: 1.6rem; font-weight: 700; color: var(--ink-3); }
 .w-highlight-sub { font-size: .86rem; color: var(--ink-2); font-weight: 700; }
-.w-highlight-icon { font-size: 44px; line-height: 1; }
+.w-highlight-icon { display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; line-height: 1; }
 .w-highlight-loc { display: inline-flex; align-self: flex-start; align-items: center; gap: 4px; background: var(--paper); padding: 5px 12px; border-radius: 999px; font-size: .8rem; color: var(--ink-2); font-weight: 700; }
 .w-highlight-loc .ic { width: 14px; height: 14px; color: var(--accent); }
+
+/* ── 날씨 라인아이콘 & 움직임 애니메이션 오브제 ── */
+.w-icon { display: inline-block; vertical-align: middle; flex: none; overflow: visible; }
+.w-icon.w-sun { color: #f59e0b; }
+.w-icon.w-sun-cloud { color: #64748b; }
+.w-icon.w-sun-cloud .w-sun-peeking { color: #f59e0b; stroke: #f59e0b; }
+.w-icon.w-cloud { color: #64748b; }
+.w-icon.w-rain { color: #3b82f6; }
+.w-icon.w-snow { color: #60a5fa; }
+.w-icon.w-lightning { color: #8b5cf6; }
+.w-icon.w-lightning .w-bolt { color: #f59e0b; fill: #f59e0b; }
+.w-icon.w-mist { color: #94a3b8; }
+
+.w-icon.w-sun .w-sun-rays { transform-origin: 12px 12px; animation: w-spin 14s linear infinite; }
+.w-icon.w-sun .w-sun-core { transform-origin: 12px 12px; animation: w-pulse 3s ease-in-out infinite; }
+.w-icon.w-sun-cloud .w-sun-peeking { transform-origin: 16.5px 7.5px; animation: w-sun-peek 4s ease-in-out infinite; }
+.w-icon.w-sun-cloud .w-cloud-body { animation: w-float 3.5s ease-in-out infinite; }
+.w-icon.w-cloud .w-cloud-body { animation: w-float 4s ease-in-out infinite; }
+.w-icon.w-rain .w-cloud-body { animation: w-float 3.5s ease-in-out infinite; }
+.w-icon.w-rain .w-drop { animation: w-rain-fall 1.3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+.w-icon.w-rain .w-drop.d2 { animation-delay: 0.4s; }
+.w-icon.w-rain .w-drop.d3 { animation-delay: 0.8s; }
+.w-icon.w-snow .w-cloud-body { animation: w-float 4s ease-in-out infinite; }
+.w-icon.w-snow .w-flake { animation: w-snow-fall 2s ease-in-out infinite; }
+.w-icon.w-snow .w-flake.f2 { animation-delay: 0.65s; }
+.w-icon.w-snow .w-flake.f3 { animation-delay: 1.3s; }
+.w-icon.w-lightning .w-bolt { animation: w-bolt-flash 2.8s ease-in-out infinite; transform-origin: 13px 17px; }
+.w-icon.w-mist .w-mist-line { animation: w-mist-drift 3s ease-in-out infinite alternate; }
+.w-icon.w-mist .w-mist-line.m2 { animation-delay: 0.5s; }
+.w-icon.w-mist .w-mist-line.m3 { animation-delay: 1s; }
+.w-icon.w-mist .w-mist-line.m4 { animation-delay: 1.5s; }
+
+@keyframes w-spin { 100% { transform: rotate(360deg); } }
+@keyframes w-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+@keyframes w-sun-peek { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(0.8px, -0.8px) scale(1.08); } }
+@keyframes w-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+@keyframes w-rain-fall { 0% { opacity: 0; transform: translateY(-2.5px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(3px); } }
+@keyframes w-snow-fall { 0% { opacity: 0; transform: translateY(-2px) translateX(0); } 50% { opacity: 1; transform: translateY(2px) translateX(1px); } 100% { opacity: 0; transform: translateY(4.5px) translateX(-1px); } }
+@keyframes w-bolt-flash { 0%, 72%, 100% { opacity: 0.95; transform: scale(1); filter: none; } 76% { opacity: 0.15; transform: scale(0.92); } 82% { opacity: 1; transform: scale(1.15); filter: drop-shadow(0 0 5px #f59e0b); } 88% { opacity: 0.3; } 92% { opacity: 1; } }
+@keyframes w-mist-drift { from { transform: translateX(-2px); } to { transform: translateX(2px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .w-icon * { animation: none !important; }
+}
 .w-metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .w-metric-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-s); padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; }
 .w-metric-title { display: flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 800; color: var(--ink-3); }

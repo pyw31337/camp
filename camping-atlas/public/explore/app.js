@@ -3006,46 +3006,71 @@ function getWeatherDescription(code) {
   return "맑음";
 }
 
-function getWeatherIconSvg(code, size = 20) {
+function weatherIconSvg(sky, pty, size = 26) {
+  const isSnow = /눈/.test(pty ?? sky ?? "");
+  const isRain = /비|소나기|빗방울/.test(pty ?? sky ?? "");
+  const isThunder = /번개|뇌우/.test(pty ?? sky ?? "");
+  const isFog = /안개/.test(pty ?? sky ?? "");
+  const isCloudy = /흐림/.test(sky ?? "");
+  const isPartlyCloudy = /구름/.test(sky ?? "");
+
+  if (isThunder) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-lightning" aria-hidden="true"><path class="w-cloud-body" d="M7 14a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12z"/><polygon class="w-bolt" points="13 13 10 17 13 17 11 22 16 16 13 16 14 13" fill="currentColor" stroke="none"/></svg>`;
+  }
+  if (isSnow) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-snow" aria-hidden="true"><path class="w-cloud-body" d="M7 14a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12z"/><g class="w-snow-flakes"><circle class="w-flake f1" cx="8" cy="18" r="1.3" fill="currentColor"/><circle class="w-flake f2" cx="12" cy="19" r="1.3" fill="currentColor"/><circle class="w-flake f3" cx="16" cy="18" r="1.3" fill="currentColor"/></g></svg>`;
+  }
+  if (isRain) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-rain" aria-hidden="true"><path class="w-cloud-body" d="M7 14a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12z"/><g class="w-rain-drops"><line class="w-drop d1" x1="8" y1="16.5" x2="7" y2="19.5"/><line class="w-drop d2" x1="12" y1="16.5" x2="11" y2="19.5"/><line class="w-drop d3" x1="16" y1="16.5" x2="15" y2="19.5"/></g></svg>`;
+  }
+  if (isFog) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-mist" aria-hidden="true"><line class="w-mist-line m1" x1="4" y1="7" x2="20" y2="7"/><line class="w-mist-line m2" x1="6" y1="11" x2="18" y2="11"/><line class="w-mist-line m3" x1="3" y1="15" x2="21" y2="15"/><line class="w-mist-line m4" x1="7" y1="19" x2="17" y2="19"/></svg>`;
+  }
+  if (isCloudy) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-cloud" aria-hidden="true"><path class="w-cloud-body" d="M7 18a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12z"/></svg>`;
+  }
+  if (isPartlyCloudy) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-sun-cloud" aria-hidden="true"><g class="w-sun-peeking"><circle cx="16.5" cy="7.5" r="3"/><line x1="16.5" y1="2.5" x2="16.5" y2="3.8"/><line x1="20.5" y1="5.5" x2="21.7" y2="5"/><line x1="20.5" y1="9.5" x2="21.7" y2="10"/><line x1="13.5" y1="3.5" x2="12.5" y2="2.7"/></g><path class="w-cloud-body" d="M6.5 19a4.5 4.5 0 0 1-.5-8.97A5.5 5.5 0 0 1 16.5 12a4 4 0 0 1 2 7.45H6.5z"/></svg>`;
+  }
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-sun" aria-hidden="true"><circle class="w-sun-core" cx="12" cy="12" r="4.2"/><g class="w-sun-rays"><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.07" y2="4.93"/></g></svg>`;
+}
+
+function getWeatherIconSvg(code, size = 24) {
   const c = Number(code);
   if (c === 0) {
-    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-sun"><circle cx="12" cy="12" r="4"/><path d="M3 12h1m8-9v1m8 8h1m-9 8v1m-6.4-15.4l.7.7m12.1-.7l-.7.7m0 11.4l.7.7m-12.1-.7l-.7.7"/></svg>`;
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-sun" aria-hidden="true"><circle class="w-sun-core" cx="12" cy="12" r="4.2"/><g class="w-sun-rays"><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.07" y2="4.93"/></g></svg>`;
   }
-  if ([1, 2, 3].includes(c)) {
-    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-cloud"><path d="M7 18a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12"/></svg>`;
+  if ([1, 2].includes(c)) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-sun-cloud" aria-hidden="true"><g class="w-sun-peeking"><circle cx="16.5" cy="7.5" r="3"/><line x1="16.5" y1="2.5" x2="16.5" y2="3.8"/><line x1="20.5" y1="5.5" x2="21.7" y2="5"/><line x1="20.5" y1="9.5" x2="21.7" y2="10"/><line x1="13.5" y1="3.5" x2="12.5" y2="2.7"/></g><path class="w-cloud-body" d="M6.5 19a4.5 4.5 0 0 1-.5-8.97A5.5 5.5 0 0 1 16.5 12a4 4 0 0 1 2 7.45H6.5z"/></svg>`;
+  }
+  if (c === 3) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-cloud" aria-hidden="true"><path class="w-cloud-body" d="M7 18a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12z"/></svg>`;
   }
   if ([45, 48].includes(c)) {
-    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-mist"><path d="M5 5h14M5 9h14M5 13h14M5 17h14"/></svg>`;
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-mist" aria-hidden="true"><line class="w-mist-line m1" x1="4" y1="7" x2="20" y2="7"/><line class="w-mist-line m2" x1="6" y1="11" x2="18" y2="11"/><line class="w-mist-line m3" x1="3" y1="15" x2="21" y2="15"/><line class="w-mist-line m4" x1="7" y1="19" x2="17" y2="19"/></svg>`;
   }
   if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(c)) {
-    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-rain"><path d="M7 18a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12M8 22l-.5-1.5M12 22l-.5-1.5M16 22l-.5-1.5"/></svg>`;
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-rain" aria-hidden="true"><path class="w-cloud-body" d="M7 14a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12z"/><g class="w-rain-drops"><line class="w-drop d1" x1="8" y1="16.5" x2="7" y2="19.5"/><line class="w-drop d2" x1="12" y1="16.5" x2="11" y2="19.5"/><line class="w-drop d3" x1="16" y1="16.5" x2="15" y2="19.5"/></g></svg>`;
   }
   if ([71, 73, 75, 77, 85, 86].includes(c)) {
-    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-snow"><path d="M10 4l2 1l2-1M12 2v6.5M10 20l2-1l2 1M12 15.5v6.5M20 10l-1 2l1 2M15.5 12h6.5M4 10l1 2l-1 2M2 12h6.5M4.43 4.43l4.24 4.24M2.5 5.5l1.5 1.5l1.5-1.5M19.56 19.56l-4.24-4.24M18.5 17.5l1.5 1.5l1.5-1.5M19.56 4.43l-4.24 4.24M18.5 6.5l1.5-1.5l1.5 1.5M4.43 19.56l4.24-4.24M2.5 18.5l1.5-1.5l1.5 1.5"/></svg>`;
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-snow" aria-hidden="true"><path class="w-cloud-body" d="M7 14a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12z"/><g class="w-snow-flakes"><circle class="w-flake f1" cx="8" cy="18" r="1.3" fill="currentColor"/><circle class="w-flake f2" cx="12" cy="19" r="1.3" fill="currentColor"/><circle class="w-flake f3" cx="16" cy="18" r="1.3" fill="currentColor"/></g></svg>`;
   }
   if ([95, 96, 99].includes(c)) {
-    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-lightning"><path d="M7 18a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12M13 18l-2 3v-3l-2 3"/></svg>`;
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-lightning" aria-hidden="true"><path class="w-cloud-body" d="M7 14a4.6 4.4 0 0 1 0-9h.1a5 4.5 0 0 1 11 2h.9a4 3.5 0 0 1 0 7h-12z"/><polygon class="w-bolt" points="13 13 10 17 13 17 11 22 16 16 13 16 14 13" fill="currentColor" stroke="none"/></svg>`;
   }
-  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-sun"><circle cx="12" cy="12" r="4"/><path d="M3 12h1m8-9v1m8 8h1m-9 8v1m-6.4-15.4l.7.7m12.1-.7l-.7.7m0 11.4l.7.7m-12.1-.7l-.7.7"/></svg>`;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-icon w-sun" aria-hidden="true"><circle class="w-sun-core" cx="12" cy="12" r="4.2"/><g class="w-sun-rays"><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.07" y2="4.93"/></g></svg>`;
 }
 
 // 상세 ‘주간 날씨’ 칸(conditions/card.js)과 같은 기호를 쓴다(팝업·페이지 통일).
 function weatherEmoji(code) {
-  const c = Number(code);
-  if ([71, 73, 75, 77, 85, 86].includes(c)) return "❄️";
-  if ([95, 96, 99].includes(c)) return "⛈️";
-  if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(c)) return "🌧️";
-  if ([45, 48].includes(c)) return "🌫️";
-  if (c === 3) return "☁️";
-  if (c === 1 || c === 2) return "⛅";
-  return "☀️";
+  return getWeatherIconSvg(code, 26);
 }
 // 페이지 ‘주간 날씨’ 칸(기상청 단기·중기예보)의 날짜별 값. 팝업의 날짜 칸·하루 요약은 이 값을 먼저 쓴다(같은 날 숫자가 다르지 않게).
 function pageForecast() {
   const out = {};
   for (const b of $$("[data-fc-date]")) {
     const n = (v) => (v === "" || v == null ? null : Number(v));
-    out[b.dataset.fcDate] = { rel: b.dataset.fcRel, ic: b.dataset.fcIc, desc: b.dataset.fcDesc, tmin: n(b.dataset.fcTmin), tmax: n(b.dataset.fcTmax), pop: n(b.dataset.fcPop), src: b.dataset.fcSrc };
+    out[b.dataset.fcDate] = { rel: b.dataset.fcRel, sky: b.dataset.fcSky, pty: b.dataset.fcPty, desc: b.dataset.fcDesc, tmin: n(b.dataset.fcTmin), tmax: n(b.dataset.fcTmax), pop: n(b.dataset.fcPop), src: b.dataset.fcSrc };
   }
   return out;
 }
@@ -3327,14 +3352,15 @@ function openWeatherModal(c, initialDate, data) {
         ${stripDays.map((ds) => {
           const m = parseKstDate(ds), kd = kma[ds], od = data.daily[ds];
           const temp = kd?.tmax ?? od?.max;
-          return `<button type="button" class="fc-day${ds === selectedDate ? " is-active" : ""}" data-switch-date="${esc(ds)}"><span class="lbl">${esc(kd?.rel ?? m.tabLabel)}</span><span class="ic">${kd?.ic ?? (od ? weatherEmoji(od.code) : "·")}</span><span class="t">${temp != null ? `${temp}°` : "–"}</span></button>`;
+          const icon = kd?.sky || kd?.pty ? weatherIconSvg(kd.sky, kd.pty, 24) : (od ? getWeatherIconSvg(od.code, 24) : "");
+          return `<button type="button" class="fc-day${ds === selectedDate ? " is-active" : ""}" data-switch-date="${esc(ds)}"><span class="lbl">${esc(kd?.rel ?? m.tabLabel)}</span><span class="ic">${icon}</span><span class="t">${temp != null ? `${temp}°` : "–"}</span></button>`;
         }).join("")}
       </div>
       <div class="w-modal-body">
         <div class="w-highlight-card">
           <div class="w-highlight-top">
             <span class="w-highlight-desc">${esc(k?.desc || getWeatherDescription(dayItem.code))}</span>
-            <div class="w-highlight-icon">${k?.ic ?? weatherEmoji(dayItem.code)}</div>
+            <div class="w-highlight-icon">${k?.sky || k?.pty ? weatherIconSvg(k.sky, k.pty, 56) : getWeatherIconSvg(dayItem.code, 56)}</div>
           </div>
           <div class="w-highlight-main">
             <span class="w-highlight-temp">${k?.tmax ?? dayItem.max}</span>
