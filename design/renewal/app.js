@@ -3188,10 +3188,10 @@ function infoHtml(c) {
   const map = c.lat ? `https://map.kakao.com/link/map/${name},${c.lat},${c.lng}` : null;
   const to = c.lat ? `https://map.kakao.com/link/to/${name},${c.lat},${c.lng}` : null;
   const rv = c.lat ? `https://map.kakao.com/link/roadview/${c.lat},${c.lng}` : null;
-  const addressActions = map ? `<span class="addr-actions"><a href="${map}" target="_blank" rel="noopener">${ic("map")}지도</a><a href="${to}" target="_blank" rel="noopener">${ic("pin")}길찾기</a><a href="${rv}" target="_blank" rel="noopener">${ic("roadview")}로드뷰</a></span>` : "";
+  const addressActions = map ? `<span class="addr-actions"><a href="${map}" target="_blank" rel="noopener" title="지도" aria-label="지도">${ic("map")}</a><a href="${to}" target="_blank" rel="noopener" title="길찾기" aria-label="길찾기">${ic("directions")}</a><a href="${rv}" target="_blank" rel="noopener" title="로드뷰" aria-label="로드뷰">${ic("roadview")}</a></span>` : "";
   const gcSrc = (field, quote) => ({ g: "c", src: { label: "한국관광공사 고캠핑 등록 현황", url: c.gc_url, quote: quote ? String(quote) : null } });
   const rows = [
-    ["주소", c.addr ? `<span class="address-value">${esc(c.addr)}${addressActions}</span>` : null, gcSrc("주소", c.addr)],
+    ["주소", c.addr ? `<span class="address-value"><span class="address-text">${esc(c.addr)}</span>${addressActions}</span>` : null, gcSrc("주소", c.addr)],
     ["전화", telText(c.tel) ? `<a href="tel:${esc(telText(c.tel).replace(/[^\d+]/g, ""))}">${esc(telText(c.tel))}</a>` : null, gcSrc("전화", c.tel)],
     ["홈페이지", c.homepage && !c.dl?.includes(c.homepage) ? `<a href="${esc(c.homepage)}" target="_blank" rel="noopener">${esc(hostOf(c.homepage) || c.homepage)}</a>` : null, { g: "c", src: { label: "공식 홈페이지", url: c.homepage } }],
     // 운영 기간(계절)은 ‘이용 정보’에 있으므로 여기서는 운영 주체·요일만 둔다.
@@ -3216,7 +3216,7 @@ const SB = { url: document.querySelector('meta[name="supabase-url"]')?.content |
 function commentsHtml(c) {
   if (!SB.url || !SB.key) return "";
   return `<section class="d-sec" id="cmt"><div class="sec-head">${iconTitle("chat-bubble", "캠퍼 한마디")}<span class="sec-note">로그인 없이</span></div>
-    <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" placeholder="닉네임" required aria-label="닉네임"><textarea name="content" maxlength="500" rows="2" placeholder="다녀온 소식, 현장 팁" required aria-label="내용"></textarea><button class="btn primary" type="submit">남기기</button></form>
+    <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" placeholder="닉네임" required aria-label="닉네임"><textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁" required aria-label="내용"></textarea><button class="btn primary" type="submit">남기기</button></form>
     <ul class="cmts" data-cmts><li class="muted">불러오는 중…</li></ul></section>`;
 }
 async function loadComments(id) {
@@ -3992,7 +3992,39 @@ function bindDetail() {
     }
   }
   if (id && $("[data-cmts]")) loadComments(id);
-  $("[data-cmt]")?.addEventListener("submit", async (e) => {
+  const cmtForm = $("[data-cmt]");
+  const cmtTa = cmtForm ? $("textarea[name='content']", cmtForm) : null;
+  if (cmtTa) {
+    const syncShape = () => {
+      const hasNewline = cmtTa.value.includes("\n");
+      if (!cmtTa.dataset.resized) {
+        if (hasNewline) {
+          cmtTa.style.height = "auto";
+          cmtTa.style.height = `${Math.max(44, Math.min(240, cmtTa.scrollHeight + 2))}px`;
+        } else {
+          cmtTa.style.height = "";
+        }
+      }
+      const isExp = cmtTa.offsetHeight > 48 || hasNewline || cmtTa.scrollHeight > 48;
+      cmtTa.classList.toggle("is-expanded", isExp);
+    };
+    cmtTa.addEventListener("input", syncShape);
+    cmtTa.addEventListener("mousedown", (e) => {
+      const r = cmtTa.getBoundingClientRect();
+      if (e.clientX > r.right - 24 && e.clientY > r.bottom - 24) {
+        cmtTa.dataset.resized = "true";
+      }
+    });
+    if (window.ResizeObserver) {
+      const ro = new ResizeObserver(() => {
+        const isExp = cmtTa.offsetHeight > 48 || cmtTa.value.includes("\n") || cmtTa.scrollHeight > 48;
+        cmtTa.classList.toggle("is-expanded", isExp);
+      });
+      ro.observe(cmtTa);
+      cleanup.push(() => ro.disconnect());
+    }
+  }
+  cmtForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const f = e.target, btn = $("button", f);
     btn.disabled = true;
@@ -4001,6 +4033,9 @@ function bindDetail() {
       const row = r.ok ? (await r.json())[0] : null;
       if (row?.id) store.set("mc-my-comments", [...store.get("mc-my-comments", []), String(row.id)]);
       f.content.value = "";
+      delete f.content.dataset.resized;
+      f.content.style.height = "";
+      f.content.classList.remove("is-expanded");
       toast(r.ok ? "남겼어요" : "지금은 남기지 못했어요");
     } catch { toast("지금은 남기지 못했어요"); }
     btn.disabled = false;
