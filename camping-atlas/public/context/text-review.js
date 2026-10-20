@@ -27,36 +27,40 @@ export const nameCoreOf = (name, sigungu) => nameTokens(name, sigungu).join("");
 
 // ── 출처 분류 ─────────────────────────────────────────────────────────────
 // 운영자가 아니라 여러 캠핑장 정보를 모아 둔 사이트(디렉터리·가이드·후기 모음). 이 글은 ‘운영자 안내’ 칸에 두지 않는다.
-export const AGGREGATOR_HOST = /(^|\.)(visitkorea\.or\.kr|camppick\.com|campinghub\.kr|kimgoon\.kr|campweek\.co\.kr|campingdogam\.com|govpped\.com|5gcamp\.com|camplink\.co\.kr|camperest\.kr|noricamp\.com|triptokr\.com|ok114\.co\.kr|mom-mom\.net|ban-life\.com|lovable\.app|yapen\.co\.kr|campingkorea\.or\.kr|gbe\.kr)$/i;
+export const AGGREGATOR_HOST = /(^|\.)(visitkorea\.or\.kr|camppick\.com|campinghub\.kr|kimgoon\.kr|campweek\.co\.kr|campingdogam\.com|govpped\.com|5gcamp\.com|camplink\.co\.kr|camperest\.kr|noricamp\.com|triptokr\.com|ok114\.co\.kr|mom-mom\.net|ban-life\.com|lovable\.app|yapen\.co\.kr|campingkorea\.or\.kr|gbe\.kr|banananx\.com|tacgear\.kr|triple\.guide|waug\.com|caravanpark\.kr|mycamp\.co\.kr)$/i;
 const hostOf = (u) => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch { return ""; } };
 
 // ── 문장 판정 ─────────────────────────────────────────────────────────────
-const BOILERPLATE = /(약관|개인정보|법률|법령|정보통신|통계활용|이용자\s*대상|저작권|무단\s*(전재|복제)|copyright|all rights reserved|쿠키|로그인|회원가입|비밀번호)/i;
-const PAGE_TITLE = /(\s\|\s|\s[-–]\s[^가-힣]{0,20}$|추천\s*[-|]|^\S+\s*\|\s*\S+|#\S+\s+#\S+|캠핑장\s*정보\s*$|캠핑고고|캠퍼스토리)/;
+const BOILERPLATE = /(약관|개인정보|법률|법령|정보통신|통계활용|이용자\s*대상|저작권|무단\s*(전재|복제)|copyright|all rights reserved|쿠키|로그인|회원가입|비밀번호|designed\s*by|상호명\s*:|대표\s*:)/i;
+const PAGE_TITLE = /(\s\|\s|\s[-–—]\s[^가-힣]{0,20}$|추천\s*[-|]|^\S+\s*\|\s*\S+|#\S+\s+#\S+|캠핑장\s*정보\s*$|캠핑고고|캠퍼스토리|[>|»]|\s+>\s+|상세보기|바로가기|실시간\s*예약\s*$)/;
+const TABLE_HEADER = /(번호\s*,\s*제목|작성자\s*,\s*등록일|조회수|첨부파일)/;
 const QUESTION = /(\?|까요|나요|가요|인가요|있나요)\s*$/;
 const GENERAL_ADVICE = /(대체로|일반적으로|보통\s|가이드|입문|초보\s*캠퍼|노하우|추천과|정리했습니다|카테고리별|지자체|소비자분쟁|캠핑\s*팁|선택법|모델은|사용자에게|좋은\s*선택|구매\s*가능|참고\s*목적)/;
-const FIRST_PERSON_REVIEW = /(다녀왔|다녀온|갔었|갔다왔|좋았어요|좋았다|좋지\s*않아요|별로였|아쉬웠|재방문|또\s*가고|추천합니다|강추)/;
-const HEADING_TAIL = /(안내|정보|기준|기간|시간|규정|요금|사항|방법|이용|현황|목록|수량|여부|시작일|종료일|운영기간|안내사항|유의사항|이용안내|공지)$/;
+const FIRST_PERSON_REVIEW = /(다녀왔|다녀온|갔었|갔다왔|좋았어요|좋았다|좋지\s*않아요|별로였|아쉬웠|재방문|또\s*가고|추천합니다|강추|가보자고|달려달려|퇴근하고|짐을\s*싣고|짐싸서|도착했|도착하니|출발했|신나|꿀잼|존맛|존예|JMT|내돈내산|솔직\s*후기|블로거|이웃|서이추|방문기|체크인하고|사진\s*찍|인생샷|포토존|힐링하고|쉬다\s*왔|좋은\s*추억|다녀온\s*후기|가족들과\s*함께\s*(다녀|갔|방문)|아이들과\s*(다녀|갔|방문)|남편과|아내와|친구들과\s*(다녀|갔)|☎️|ㅋㅋ|ㅎㅎ|ㅠㅠ|ㅜㅜ|~{2,}|\.{3,}|[!?]{2,})/;
+const HEADING_TAIL = /(안내|정보|기준|기간|시간|규정|요금|사항|방법|이용|현황|목록|수량|여부|시작일|종료일|운영기간|안내사항|유의사항|이용안내|주의사항|공지사항|알림|공지)$/;
+const ROOM_STRUCTURE = /^(?:거실|방|주방|원룸|투룸|침대\d|화장실\d|욕실\d)[\d\s+겸,·/]+$/;
+const ROOM_CODE = /^(?:카라반|글램핑|오토캠핑|데크)_[가-힣\w]+$/;
+const FLUFF = /(마음의\s*진정한\s*휴식|온가족이\s*즐기는|캠핑\s*그\s*이상|대표입니다|감사의\s*말씀|방문하여\s*주신|놀러\s*오세요|환영합니다|좋은\s*추억\s*만드|행복한\s*시간|힐링의\s*공간|즐거운\s*시간\s*되)/;
 const OTHER_PLACE = /(?:^|[\s[(（"'「『])([가-힣A-Za-z][가-힣A-Za-z0-9]{1,11})\s?(오토캠핑장|캠핑장|야영장|글램핑장|캠프장)/g;
 // 이름이 아니라 앞말(조사·어미)로 끝나는 말: "인한 캠핑장", "특히 캠핑장"
 const PARTICLE_TAIL = /(은|는|이|가|을|를|에|의|로|과|와|서|한|된|인|할|면|고|며|여|히|게|도|만|및|후|중|내|쪽|별|용|형|들|등|께|요|다|지|던|운|본|엔|좋은|있는|없는|같은)$/;
 const SIDO = /^(서울|부산|대구|인천|광주|대전|울산|세종|경기|강원|충북|충남|전북|전남|경북|경남|제주|수도권|영남|호남|충청|경상|전라|강원도|경기도|제주도)$/;
-const LISTICLE = /(\d+\s*곳|BEST|TOP\s?\d|베스트|모음|리스트|총정리|비교|추천\s*\d|순위)/i;
+const LISTICLE = /(\d+\s*곳|BEST|TOP\s?\d|베스트|모음|리스트|총정리|몽땅\s*정리|비교|추천\s*\d|순위)/i;
 const NOT_A_NAME = /^(노키즈|부티크|이곳|그곳|제\d+|신생|저렴|감성|힐링|프라이빗|럭셔리|애견동반|키즈|공공|인기|이|우리|저희|해당|본|전|모든|다른|국내|일반|타|근처|주변|무료|유료|노지|사설|국립|시립|군립|도립|구립|자연휴양림|오토|가족|반려견|애견|동반|추천|베스트|최고|새|신규|기존|각|여러|일부|많은|대부분|대표|전국|사계절|계곡|바다|해변|숲속|산속|강변|호숫가|섬|도심|근교|당일|예약|이용|캠핑|글램핑|카라반|차박|동계|하계|공영|민간|개인|단체|소규모|대규모|인근)$/;
 
 /** 운영 안내 항목(칸): 앞의 것이 우선. 점수 = 맞은 낱말 수 */
 export const OPERATOR_CATS = [
   ["입·퇴실", /(입실|퇴실(?!\s*조치)|체크인|체크아웃|얼리|레이트|입촌|퇴촌|도착)/g],
-  ["요금 · 환불", /(요금|금액|할인|환불|취소|위약|수수료|입금|결제|\d[\d,]*\s*원|만\s*원)/g],
-  ["예약 · 성수기", /(예약|성수기|비수기|준성수기|변경|연기|오픈|선착순|대기)/g],
-  ["인원 · 추가", /(인원|추가\s*인원|기준\s*인원|최대\s*인원|명\s*까지|추가\s*요금|\d+\s*인(?![가-힣]))/g],
-  ["주차", /(주차|차량|견인|차박)/g],
+  ["인원 · 추가", /(인원\s*추가|추가\s*인원|기준\s*인원|최대\s*인원|초과\s*인원|인원|인당|명\s*까지|추가\s*요금|\d+\s*인(?![가-힣]))/g],
+  ["주차", /(주차|차량\s*추가|추가\s*차량|차\s*1대|차량|견인|차박)/g],
   ["전기", /(전기|리드선|차단기|와트|\d\s*w\b|\d\s*kw|암페어)/gi],
-  ["불멍 · 화로", /(화로|장작|숯|불씨|화기|모닥불|바비큐|바베큐|그릴)/g],
-  ["반려동물", /(반려동물|반려견|애견|마리|목줄|배변)/g],
-  ["매너타임 · 소음", /(매너\s*타임|소음|조용|소등|음주|고성방가|\d{1,2}\s*시\s*이후)/g],
+  ["불멍 · 화로", /(화로|장작|숯|불씨|화기|모닥불|바비큐|바베큐|그릴|Campfire)/gi],
+  ["반려동물", /(반려동물|반려견|애견|반려묘|마리|목줄|배변)/g],
+  ["매너타임 · 소음", /(매너\s*타임|소음|조용|소등|취침|음주|고성방가|\d{1,2}\s*시\s*이후)/g],
   ["시설", /(온수|화장실|샤워|개수대|매점|휴게실|수영장|놀이터|와이파이|wi-?fi|전자레인지|편의시설|세면)/gi],
-  ["이용 규칙", /(쓰레기|분리수거|외부인|방문객|준수|강제\s*퇴장|금지|불가|삼가|주의)/g],
+  ["이용 규칙", /(식기\s*반납|물품\s*반납|세척\s*후|금연|흡연|쓰레기|분리수거|외부인|방문객|준수|강제\s*퇴장|금지|불가|삼가|주의)/g],
+  ["예약 · 성수기", /(예약|성수기|비수기|준성수기|변경|연기|오픈|선착순|대기)/g],
+  ["요금 · 환불", /(요금|금액|할인|환불|취소|위약|수수료|입금|결제|\d[\d,]*\s*원|만\s*원)/g],
 ];
 export function operatorCategory(text) {
   let best = null, score = 0;
@@ -166,9 +170,12 @@ export function reviewDetailTexts(d, camp, { others = [], regions = null, common
       if (host && AGGREGATOR_HOST.test(host)) why = "운영자 안내: 정보 모음·후기 사이트 글";
       else if (common?.has(compact(x.orig ?? original))) why = "운영자 안내: 여러 캠핑장 공통 문구(사이트 틀)";
       else if (BOILERPLATE.test(text)) why = "운영자 안내: 약관·개인정보 문구";
+      else if (TABLE_HEADER.test(text)) why = "운영자 안내: 게시판 표 머리글";
       else if (PAGE_TITLE.test(text)) why = "운영자 안내: 페이지 제목·키워드";
       else if (QUESTION.test(text)) why = "운영자 안내: 질문 제목(FAQ)";
-      else if (text.replace(/\s/g, "").length < 10 || (text.length <= 18 && HEADING_TAIL.test(text.replace(/[\s:：()（）]+$/, "")))) why = "운영자 안내: 항목 이름만(내용 없음)";
+      else if (text.replace(/\s/g, "").length < 8 || (text.length <= 25 && HEADING_TAIL.test(text.replace(/[\s:：()（）]+$/, "")))) why = "운영자 안내: 항목 이름만(내용 없음)";
+      else if (ROOM_STRUCTURE.test(text) || ROOM_CODE.test(text)) why = "운영자 안내: 객실 구조·단순 코드";
+      else if (FLUFF.test(text) && !/(\d|입실|퇴실|환불|취소|금지|불가|기준|원|주차|전기|예약|마리)/.test(text)) why = "운영자 안내: 단순 인사말·홍보 문구";
       else if (GENERAL_ADVICE.test(text)) why = "운영자 안내: 일반 캠핑 안내(이 캠핑장 아님)";
       else if (FIRST_PERSON_REVIEW.test(text)) why = "운영자 안내: 방문 후기 문장";
       else if (otherPlaceIn(text, ctx.core, nameC, ctx.others, ctx.regions, { namesOnly: true })) why = "운영자 안내: 다른 업장 이야기";
@@ -180,8 +187,27 @@ export function reviewDetailTexts(d, camp, { others = [], regions = null, common
       if (text !== original.replace(/\s+/g, " ").trim()) log.normalized++;
       kept.push({ ...x, text, cat, ...(text !== original ? { orig: original } : {}) });
     }
-    log.kept += kept.length;
-    if (kept.length) out.operator_snippets = kept; else delete out.operator_snippets;
+    // 같은 카테고리 내에서 한 문장이 다른 문장의 단순 일부분(부분 중복)인 경우 긴 문장만 남긴다
+    const deduped = [];
+    for (let i = 0; i < kept.length; i++) {
+      const a = compact(kept[i].text);
+      let isSubset = false;
+      for (let j = 0; j < kept.length; j++) {
+        if (i === j) continue;
+        const b = compact(kept[j].text);
+        if (b.length > a.length && b.includes(a) && kept[i].cat === kept[j].cat) {
+          isSubset = true;
+          break;
+        }
+      }
+      if (isSubset) {
+        bump(log.removed, "운영자 안내: 같은 카테고리 부분 중복 문장");
+      } else {
+        deduped.push(kept[i]);
+      }
+    }
+    log.kept += deduped.length;
+    if (deduped.length) out.operator_snippets = deduped; else delete out.operator_snippets;
   }
 
   // 2) 사이트 타입: 정보 모음 사이트의 페이지 제목(“야영장 글램핑 카라반 오토캠핑장 추천”)에서 뽑은 종류는 근거가 아니다
@@ -205,14 +231,16 @@ export function reviewDetailTexts(d, camp, { others = [], regions = null, common
     if (list.length) out[key] = list; else delete out[key];
   }
 
-  // 4) 요금 언급: 1박 요금으로 볼 수 없는 금액, 다른 업장 문장, 같은 글의 같은 금액
+  // 4) 요금 언급: 1박 요금으로 볼 수 없는 금액, 다른 업장 문장, 같은 글의 같은 금액, 캠핑 장비/용품 글
+  const GEAR_SALE = /(출시|판매되|판매합|공동구매|구매했|구입했|체험단|내돈내산\s*리뷰|캠핑용품|에어텐트|쉘터\s*추천|텐트\s*추천|난로\s*추천|타프\s*추천|용품\s*읽기|장비\s*리뷰|제품\s*가격)/;
   if (Array.isArray(d.prices)) {
     const seen = new Set();
     const ps = d.prices.filter((p) => {
       const won = Number(p?.won);
       let why = null;
       if (!(won >= 10000 && won <= 2000000)) why = "요금 언급: 1박 요금 범위 밖";
-      else if (LISTICLE.test(p.quote ?? "")) why = "요금 언급: 여러 캠핑장 모음 글";
+      else if (LISTICLE.test(p.quote ?? "") || LISTICLE.test(p.src ?? "")) why = "요금 언급: 여러 캠핑장 모음 글";
+      else if (GEAR_SALE.test(p.quote ?? "") || GEAR_SALE.test(p.src ?? "")) why = "요금 언급: 캠핑 장비/용품 관련 글";
       else if (otherPlaceIn(p.quote ?? "", ctx.core, nameC, ctx.others, ctx.regions)) why = "요금 언급: 다른 업장 문장";
       else if (seen.has(`${p.url}|${won}`)) why = "요금 언급: 같은 글 같은 금액";
       seen.add(`${p.url}|${won}`);

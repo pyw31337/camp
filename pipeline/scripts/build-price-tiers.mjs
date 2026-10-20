@@ -6,6 +6,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { feeTiers } from "../lib/price-tiers.mjs";
+import { reviewDetailTexts } from "../lib/detail-text-review.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const dataDir = join(root, "camping-atlas/public/explore/data");
@@ -20,7 +21,8 @@ for (const c of camps) {
   const path = join(dataDir, "camps", `${c.id}.json`);
   if (existsSync(path)) {
     let d = null; try { d = JSON.parse(readFileSync(path, "utf8")); } catch {}
-    for (const p of d?.prices ?? []) obs.push({ won: p.won, label: p.label ?? null });
+    const cleanPrices = d ? (reviewDetailTexts(d, c).d?.prices ?? []) : [];
+    for (const p of cleanPrices) obs.push({ won: p.won, label: p.label ?? null });
     for (const p of d?.products ?? []) for (const v of Object.values(p.price ?? {})) if (v) obs.push({ won: v, label: p.name ?? null });
   }
   // 목록 범위(fee) 밖의 언급(다른 철·장박 요금)은 쓰지 않는다
