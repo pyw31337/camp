@@ -5652,6 +5652,7 @@
 {"cid":"100753","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100755","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100755","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"100755","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_discovered","url":"http://xn--bj0bw3p2d313dx8niqc4wb.com/theme/type1/reserve_info.php","at":"2026-10-20T05:57:44.684Z","quote":"개인화기 반입금지 (숯,장작,화로대,전기그릴,가스버너,전력기 등)"}
 {"cid":"100755","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100755","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100756","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -6053,6 +6054,7 @@
 {"cid":"100885","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100886","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100886","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"100886","attr":"FIRE_RULE","value":"NO_FIRE","grade":"OPERATOR","src":"operator_homepage","url":"https://hsvillage.co.kr/page/gramping_f.php","at":"2026-10-20T05:57:40.217Z","quote":"- 개인화기 용품 사용불가"}
 {"cid":"100886","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100887","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100887","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
@@ -7696,6 +7698,7 @@
 {"cid":"101382","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101383","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101383","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
+{"cid":"101383","attr":"FIRE_RULE","value":"CHARCOAL_ONLY","grade":"OPERATOR","src":"operator_discovered","url":"http://www.xn--2r5b1f27r1nh.com/contents/05_info/sub01.html","at":"2026-10-20T05:57:04.805Z","quote":"화로를 이용한 숯불만 가능하며, 주변의 나무 등 부산물을 수집하는 행위를 하여서는 절대 안 됩니다."}
 {"cid":"101383","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101383","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101384","attr":"BBQ_SET_FEE","value":30000,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b14h95dtwuvlp59a.com/contents/main.html","at":"2026-10-20T01:12:52.946Z","quote":"바비큐 이용요금 30,000원","text":"3만원"}
@@ -9531,8 +9534,10 @@
 {"cid":"102368","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"102368","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102368","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"park-52111-00048","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-20"}
-{"cid":"park-52111-00048","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-20"}
+{"cid":"park-52111-00048-s6njs","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-20"}
+{"cid":"park-52111-00048-s6njs","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-20"}
+{"cid":"pdu-mysticcamp-yeongjong","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://mysticcamp.co.kr","at":"2026-10-20"}
+{"cid":"pdu-mysticcamp-yeongjong","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://mysticcamp.co.kr","at":"2026-10-20"}
 {"cid":"pilot-002-sureui","attr":"CHARCOAL_ALLOWED","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-002-sureui","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032"}
 {"cid":"pilot-002-sureui","attr":"FIREWOOD_ALLOWED","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032","at":"2026-10-15T09:00:00+09:00"}

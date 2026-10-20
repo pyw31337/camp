@@ -502,9 +502,9 @@
 {"cid":"420","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/richqueen24/224441727504","at":"2026-10-14","text":"펜션","quote":"주세요 굿뜨래웰빙마을 글램핑장 확인 ↙ 부여 자온대펜션 호텔보다는 아늑한 펜션에서 조용하게 하루 쉬고 싶다면 자온대펜션도 비교"}
 {"cid":"420","attr":"STAY_GLAMPING_SITES","value":14,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"427","attr":"SITE_TOTAL","value":7,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"427","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"http://mujucaravan.com/bbs/board.php?bo_table=04_01","at":"2026-10-20T05:56:59.841Z","quote":"여러 글램핑도 가보고 햇지만"}
+{"cid":"427","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://mujucaravan.com/","at":"2026-10-20T05:56:59.841Z","text":"펜션","quote":"무주 그날 카라반펜션"}
 {"cid":"427","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":7}
-{"cid":"427","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"naver_local","url":"http://mujucaravan.com/","at":"2026-10-16T06:05:00.053Z","text":"펜션","quote":"숙박>펜션"}
-{"cid":"427","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/jds402/224440100148","at":"2026-10-13","quote":"[무주 그날카라반&글램핑]깔끔하고 친절한 무주 글램핑. 요즘 날씨, 어디론가 떠나고 싶어지죠?"}
 {"cid":"427","attr":"STAY_CARAVAN_SITES","value":7,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"434","attr":"SITE_TOTAL","value":30,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"434","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=434","at":"2026-01-14T00:00:00+09:00","quote":"그린스톤 오토캠핑장은 경북 문경시 가은읍에 위치했다. 문경시청을 기점으로 약 30km 거리"}
@@ -5240,6 +5240,8 @@
 {"cid":"7599","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://www.camppick.com/camps/b3f8dac0-1835-4586-9ac3-dd639bf7ddf1","at":"2026-10-20T00:50:28.760Z","text":"방갈로","quote":"합천 캠핑장 텐잘남파크 방갈로 H4 에어컨 히터 되는 가을 캠핑 후기"}
 {"cid":"7599","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"OPERATOR","src":"operator_homepage","url":"https://www.camppick.com/feed","at":"2026-10-20T00:50:28.760Z","quote":"개별화장실, 샤워실 컨디션이 좋지 않아요."}
 {"cid":"7603","attr":"SITE_TOTAL","value":25,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7603","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://familylandcamping.com/index.html","at":"2026-10-20T05:57:04.743Z","quote":"글램핑 캠핑장에서"}
+{"cid":"7603","attr":"SITE_TYPE","value":"RV","grade":"OPERATOR","src":"operator_homepage","url":"https://familylandcamping.com/index.html?mode=2","at":"2026-10-20T05:57:04.743Z","quote":"개인 카라반, 캠핑카, 텐트, 천막, 해먹 설치를 금합니다."}
 {"cid":"7603","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":25}
 {"cid":"7603","attr":"STAY_CARAVAN_SITES","value":25,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7606","attr":"SITE_TOTAL","value":10,"grade":"CONFIRMED","src":"gocamping"}
@@ -9272,9 +9274,10 @@
 {"cid":"100753","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
 {"cid":"100753","attr":"STAY_GENERAL_SITES","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100755","attr":"SITE_TOTAL","value":16,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100755","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0bw3p2d313dx8niqc4wb.com/","at":"2026-10-20T05:57:44.684Z","quote":"트라움 풀빌라 글램핑&카라반"}
+{"cid":"100755","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0bw3p2d313dx8niqc4wb.com/theme/type1/reserve_info.php","at":"2026-10-20T05:57:44.684Z","text":"펜션","quote":"아래 환불 규정은 고객님과 펜션의 공정한 계약이므로 동의하신다면 진행하시기 바랍니다."}
 {"cid":"100755","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"100755","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":1}
-{"cid":"100755","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/qw000412/224437110072","at":"2026-10-10","quote":"굽는건 처음이라 처음엔 엉망이었는데 두번째는 척척 죽이 맞았다 ​ 역시 10년 호흡은 남다르지 ​ ​ 내 입으로 ​ 기분만 낼 정도로 cheers ! 🍻 ​ 📍트라움풀빌라글램핑카라반/가평 ​ 이 사진을 보고 다들"}
 {"cid":"100755","attr":"STAY_GENERAL_SITES","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100755","attr":"STAY_GLAMPING_SITES","value":15,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100756","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1395705240","at":"2026-10-16T05:34:26.840Z","quote":"여행 > 숙박 > 야영,캠핑장 > 글램핑장"}
@@ -9943,9 +9946,10 @@
 {"cid":"100912","attr":"STAY_GENERAL_SITES","value":14,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100912","attr":"STAY_GLAMPING_SITES","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100913","attr":"SITE_TOTAL","value":29,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100913","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://nobleglamping.com/theme/basic_slider/userguide/userguide.php","at":"2026-10-20T05:57:43.681Z","text":"펜션","quote":"예약 후 펜션이나 객실 변경은 해당 예약 취소 후 다시 예약하셔야 합니다."}
+{"cid":"100913","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"OPERATOR","src":"operator_homepage","url":"http://nobleglamping.com/","at":"2026-10-20T05:57:43.681Z","quote":"전 객실 깨끗한 개별 화장실이 있습니다."}
 {"cid":"100913","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"100913","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":19}
-{"cid":"100913","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"naver_local","url":"http://nobleglamping.com/","at":"2026-10-16T06:35:36.205Z","text":"펜션","quote":"숙박>펜션"}
 {"cid":"100913","attr":"STAY_CARAVAN_SITES","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100913","attr":"STAY_GLAMPING_SITES","value":19,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100914","attr":"SITE_TOTAL","value":118,"grade":"CONFIRMED","src":"gocamping"}
@@ -12004,6 +12008,9 @@
 {"cid":"101381","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101381","attr":"STAY_GENERAL_SITES","value":11,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101381","attr":"STAY_GLAMPING_SITES","value":5,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101383","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--2r5b1f27r1nh.com/contents/05_info/sub01.html","at":"2026-10-20T05:57:04.805Z","quote":"오토캠핑장은 1사이트 당 텐트 1동만 설치할 수 있습니다.(타프 설치 가능) 텐트"}
+{"cid":"101383","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://www.yc.go.kr/tour/lodgingInfo/list.do?CATEGORY=L0200&mId=0501020000","at":"2026-10-20T05:57:04.805Z","quote":"채송화 글램핑"}
+{"cid":"101383","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--2r5b1f27r1nh.com/","at":"2026-10-20T05:57:04.805Z","text":"펜션","quote":"펜션명 이유캠핑장"}
 {"cid":"101383","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
 {"cid":"101383","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/innara54/224292134216","at":"2026-05-21","quote":"대구 근교에서 시설 좋고 아이 동반이 가능한 신상 캠핑장 찾으신다면 고민없이 영천 이유 캠핑장 추천드려요 #대구경북캠핑장 #대구근교키즈캠핑장 #대구태교여행 #개별샤워실캠핑장 #대구근교캠핑장추천"}
 {"cid":"101384","attr":"SITE_TOTAL","value":17,"grade":"CONFIRMED","src":"gocamping"}
@@ -13476,9 +13483,9 @@
 {"cid":"101794","attr":"SITE_TYPE","value":"DECK","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/uji5885/224041146314","at":"2025-10-14","quote":"12 데크존 8호 사이트 2박 후기 / 이지캠핑존 / ..... 이지캠핑존 이용하시"}
 {"cid":"101794","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/diverduggy/224313116805","at":"2026-06-11","quote":"네, 홍북읍의 내포캠핑스퀘어와 내포레글램핑캠핑장이 용봉산 자락과 내포신도시 가까이에 있어 산행과..."}
 {"cid":"101795","attr":"SITE_TOTAL","value":5,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101795","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://sagiri134.com/reserinfo.php","at":"2026-10-20T05:57:08.727Z","text":"펜션","quote":"상업적인 용도로 펜션 내 촬영을 삼가 주시기 바라며, 필요시 펜션에 사전 문의 부탁드립니다."}
 {"cid":"101795","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"101795","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":3}
-{"cid":"101795","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101795","at":"2026-01-17T00:00:00+09:00","text":"펜션","quote":"경산 하양에 위치한 숲 속 펜션으로, 자연에 둘러싸인 조용한 환경에서 편안한 휴식과 여유로운 시간을 즐"}
 {"cid":"101795","attr":"STAY_CARAVAN_SITES","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101795","attr":"STAY_GLAMPING_SITES","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101797","attr":"SITE_TOTAL","value":6,"grade":"CONFIRMED","src":"gocamping"}
