@@ -6,12 +6,14 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { digestReviews } from "../lib/review-digest.mjs";
+import { feeStats, sanitizeDigest } from "../lib/label-sanity.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const dataDir = join(root, "camping-atlas/public/explore/data");
 const campsPath = join(dataDir, "campgrounds.json");
 const camps = JSON.parse(readFileSync(campsPath, "utf8"));
-const count = { campgrounds: 0, with_pros: 0, with_cons: 0, reviews: 0 };
+const count = { campgrounds: 0, with_pros: 0, with_cons: 0, reviews: 0, sanity_dropped: 0 };
+const stats = feeStats(camps);
 for (const c of camps) {
   delete c.rv;
   const path = join(dataDir, "camps", `${c.id}.json`);
@@ -19,6 +21,16 @@ for (const c of camps) {
   const d = JSON.parse(readFileSync(path, "utf8"));
   const dg = digestReviews(c.name, [...(d.reviews ?? []), ...(d.cafe ?? []), ...(d.web ?? [])], { min: 1, top: 4, regions: [c.sigungu, c.sido] });
   if (!dg || !dg.n) continue;
+  // 발행 전 상식 검사: 요금·규정·반대 후기와 모순되는 라벨은 뺀다(lib/label-sanity.mjs).
+  const sane = sanitizeDigest(dg, c, stats);
+  count.sanity_dropped += sane.dropped.length;
+  dg.pros = sane.pros; dg.cons = sane.cons;
+  if (dg.details) {
+    const keep = new Set([...sane.pros, ...sane.cons].map(([t]) => t));
+    dg.details.pros = dg.details.pros.filter((x) => keep.has(x.topic));
+    dg.details.cons = dg.details.cons.filter((x) => keep.has(x.topic));
+    if (sane.dropped.length) dg.details.sanity_dropped = sane.dropped;
+  }
   c.rv = { n: dg.n, p: dg.pros.slice(0, 2), c: dg.cons.slice(0, 2) };
   d.rv = { n: dg.n, p: dg.pros, c: dg.cons, details: dg.details };
   writeFileSync(path, JSON.stringify(d));
