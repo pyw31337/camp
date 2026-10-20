@@ -300,6 +300,31 @@ function typeLine2(c) {
   const list = (other.length ? other : st).slice(0, 4);
   return list.map(([k, n, , sub]) => `${k === "HOUSE" && sub ? sub : ST[k].label}${n ? ` ${fmt(n)}` : ""}`).join(" · ");
 }
+// ── 숙박 상품 배지(소유자 2026-10-21: 겨울엔 글램핑·카라반·방갈로 유무가 중요) ─────
+// 근거: 고캠핑 업종(c.types) 또는 등록·운영자 근거 사이트 타입(c.st, 후기 언급 m 제외) · 트레일러는 고캠핑 c.trailer.
+// 배지에 나온 타입은 같은 카드의 타입 줄에서 뺀다(중복 금지).
+const firmSt = (c, k) => (c.st ?? []).find((t) => t[0] === k && t[2] !== "m");
+const HOUSE_SUB = /^(방갈로|캐빈|오두막|통나무집|코티지|트리하우스|이글루|돔하우스|캠핑하우스|독채|펜션)$/;
+const STAYS = [
+  ["GLAMPING", "glamp", "glamping", (c) => (c.types ?? []).includes("글램핑") || Boolean(firmSt(c, "GLAMPING")), () => "글램핑"],
+  ["CARAVAN", "caravan", "caravan", (c) => (c.types ?? []).includes("카라반") || Boolean(firmSt(c, "CARAVAN")), () => "카라반"],
+  ["HOUSE", "house", "home", (c) => Boolean(firmSt(c, "HOUSE")), (c) => { const sub = firmSt(c, "HOUSE")?.[3]; return HOUSE_SUB.test(sub ?? "") ? sub : "방갈로·숙박동"; }],
+  ["RV", "rv", "caravan", (c) => c.trailer === true || c.caravan === true || Boolean(firmSt(c, "RV")), () => "트레일러 입장"],
+];
+const STAY_KEYS = new Set(STAYS.map(([k]) => k));
+const stayKinds = (c) => (c._stay ??= STAYS.filter(([, , , t]) => t(c)).map(([k]) => k));
+const stayBadges = (c, max = 4) => STAYS.filter(([k]) => stayKinds(c).includes(k)).slice(0, max).map(([k, cls, icon, , label]) => `<span class="bdg bdg-stay bdg-${cls}" data-stay="${k}">${ic(icon)}${esc(label(c))}</span>`).join("");
+// 배지로 보인 타입을 뺀 나머지 타입 줄
+function typeLineRest(c) {
+  const shown = new Set(stayKinds(c));
+  const st = (c.st ?? []).filter((t) => t[0] !== "PRIVATE_BATH" && !shown.has(t[0]) && !(STAY_KEYS.has(t[0]) && t[2] === "m"));
+  const other = st.filter((t) => t[0] !== "PITCH");
+  return (other.length ? other : st).slice(0, shown.size ? 3 : 4).map(([k, n, , sub]) => `${k === "HOUSE" && sub ? sub : ST[k].label}${n ? ` ${fmt(n)}` : ""}`).join(" · ");
+}
+const typeRow = (c, extra = "") => {
+  const b = stayBadges(c), rest = [c.st?.length ? typeLineRest(c) : stayKinds(c).length ? "" : typeLine(c), extra].filter(Boolean).join(" · ");
+  return { b, rest, html: `<p class="card-types${b ? " has-stay" : ""}">${b ? `<span class="stay-bdgs">${b}</span>` : ic("tent")}${rest ? `<span>${esc(rest)}</span>` : ""}</p>` };
+};
 
 // ── 필터 ─────────────────────────────────────────────────────
 // 요금대 필터는 텐트 사이트 요금으로(글램핑·펜션 요금이 섞인 범위로 거르지 않게). 사이트 요금을 모르면 전체 범위.
@@ -312,6 +337,9 @@ const QUICK = {
   fire: { label: "장작", icon: "flame", cls: "flame", test: (c) => pos(facts(c).fire) && facts(c).fire.kind === "FIREWOOD_OK" },
   park: { label: "텐트 옆 주차", icon: "car", cls: "cobalt", test: (c) => pos(facts(c).park) && facts(c).park.ok === true },
   pet: { label: "반려견", icon: "paw", cls: "ink", test: (c) => pos(facts(c).pet) && facts(c).pet.ok },
+  glamp: { label: "글램핑", icon: "glamping", cls: "glamp", test: (c) => stayKinds(c).includes("GLAMPING") },
+  caravan: { label: "카라반", icon: "caravan", cls: "caravan", test: (c) => stayKinds(c).includes("CARAVAN") },
+  house: { label: "방갈로·숙박동", icon: "home", cls: "house", test: (c) => stayKinds(c).includes("HOUSE") },
 };
 // 테마 아이콘(소유자 2026-10-20 지정 SVG). 모두 currentColor, 글자 왼쪽 1.1em.
 const TH_SVG = {
@@ -415,7 +443,7 @@ function matches(c, { useArea = true } = {}) {
   if (S.theme && S.theme !== "ALL") { const t = THEMES.find((x) => x[0] === S.theme); if (t && !t[2](c)) return false; }
   if (S.theme === "AVAIL" && !S.avail?.has(String(c.id))) return false;
   if (S.theme === "OPEN" && !openingOf(c)) return false;
-  if (S.stype && !hasType(c, S.stype)) return false;
+  if (S.stype && !(STAY_KEYS.has(S.stype) ? stayKinds(c).includes(S.stype) : hasType(c, S.stype))) return false;
   if (S.q) {
     const words = S.q.toLowerCase().split(/\s+/).filter(Boolean);
     const ok = words.every((w) => {
@@ -892,7 +920,7 @@ function card(c, i = 0, opts) {
     <div class="card-body">
       <div class="name-row"><h3 class="card-name">${esc(nameOf(c).name)}</h3>${heartBtn(c)}</div>
       <p class="card-meta">${ic("pin")}${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}</p>
-      <p class="card-types">${ic("tent")}<span>${esc((c.st?.length ? typeLine2(c) : typeLine(c)) || "야영장")}</span></p>
+      ${(() => { const r = typeRow(c); return r.b || r.rest ? r.html : `<p class="card-types">${ic("tent")}<span>야영장</span></p>`; })()}
       ${rowsHtml(c)}
       <p class="card-tiers${feeMain(c)?.text && feeTiersLine(c) ? "" : " is-empty"}">${(feeMain(c)?.text && feeTiersLine(c)) || "&nbsp;"}</p>
       <div class="card-reviews">${cardReviewPills(c.rv, c)}</div>
@@ -1132,7 +1160,7 @@ function homeView() {
     <div class="filter-zone" aria-label="캠핑장 조건 필터">
       <div class="type-filter" aria-label="사이트 타입"><div class="rail type-chips">
         <span class="fee-band-lbl">사이트</span><button type="button" class="chip" data-stype="" aria-pressed="${!S.stype}">전체</button>
-        ${STYPES.filter(([k]) => k !== "PITCH" && k !== "PRIVATE_BATH").map(([k, l, i]) => { const n = countOf((c) => hasType(c, k)); return n ? `<button type="button" class="chip type-chip" data-stype="${k}" aria-pressed="${S.stype === k}">${ic(i)}${l} <i>${fmt(n)}</i></button>` : ""; }).join("")}
+        ${[...STYPES.filter(([k]) => STAY_KEYS.has(k)), ...STYPES.filter(([k]) => !STAY_KEYS.has(k))].filter(([k]) => k !== "PITCH" && k !== "PRIVATE_BATH").map(([k, l, i]) => { const n = countOf((c) => (STAY_KEYS.has(k) ? stayKinds(c).includes(k) : hasType(c, k))); return n ? `<button type="button" class="chip type-chip" data-stype="${k}" aria-pressed="${S.stype === k}">${ic(i)}${l} <i>${fmt(n)}</i></button>` : ""; }).join("")}
       </div></div>
       <div class="fee-filter" aria-label="1박 요금대"><div class="rail fee-bands">
         <span class="fee-band-lbl">1박 요금</span><button type="button" class="chip fee-chip" data-fee-band="" aria-pressed="${!S.feeBand}">전체</button>
@@ -1242,12 +1270,12 @@ const dayUse = (c) => (Boolean(c.du) && !c.osm && !c.auto) || (c.types ?? []).so
 // 상품 조건은 등록·운영자 근거가 있는 타입만(후기 언급 m은 “있다”의 근거로 약하다).
 const hasFirmType = (c, k) => (c.st ?? []).some((t) => t[0] === k && t[2] !== "m");
 const KINDS = [
-  ["GLAMPING", "글램핑", (c) => (c.types ?? []).includes("글램핑") || hasFirmType(c, "GLAMPING")],
-  ["CARAVAN", "카라반", (c) => (c.types ?? []).includes("카라반") || hasFirmType(c, "CARAVAN")],
+  ["GLAMPING", "글램핑", (c) => stayKinds(c).includes("GLAMPING")],
+  ["CARAVAN", "카라반", (c) => stayKinds(c).includes("CARAVAN")],
   ["AUTO", "오토캠핑", (c) => (c.types ?? []).includes("자동차야영장") || hasFirmType(c, "AUTO")],
   ["GENERAL", "일반 사이트", (c) => (c.types ?? []).includes("일반야영장") || hasFirmType(c, "PITCH")],
-  ["HOUSE", "숙박동·방갈로", (c) => hasFirmType(c, "HOUSE")],
-  ["RV", "캠핑카·트레일러", (c) => hasFirmType(c, "RV") || c.trailer === true],
+  ["HOUSE", "숙박동·방갈로", (c) => stayKinds(c).includes("HOUSE")],
+  ["RV", "캠핑카·트레일러", (c) => stayKinds(c).includes("RV")],
   ["CAR_CAMP", "차박", (c) => hasFirmType(c, "CAR_CAMP")],
   ["DAY", "당일 캠크닉", dayUse],
 ];
@@ -1462,8 +1490,11 @@ function siteSizeText(c) {
 // 켜진 조건이 이 캠핑장에서 어떻게 맞는지: ✓ 근거 · 법정 기준 · 확인 필요
 function condLine(c, ce) {
   if (!ce || !Object.keys(ce.st).length) return "";
+  // 상품 조건이 숙박 상품뿐이고 맞으면(y) 카드의 숙박 배지가 이미 보여 주므로 다시 쓰지 않는다(중복 금지).
+  const st = Object.fromEntries(Object.entries(ce.st).filter(([k, v]) => !(k === "kind" && v === "y" && S.cond.kind.every((x) => STAY_KEYS.has(x)))));
+  if (!Object.keys(st).length) return "";
   const txt = { kind: () => S.cond.kind.map((x) => KIND[x]?.label).join("·"), pet: () => "반려견", w: () => (S.cond.w === 1 ? "전기" : `전기 ${fmt(S.cond.w)}W+`), size: () => `사이트 ${S.cond.size}m+`, fire: () => "장작", park: () => "텐트 옆 주차" };
-  return `<p class="lrow-cond">${Object.entries(ce.st).map(([k, v]) => `<span class="cs cs-${v === "?" ? "unk" : v}">${v === "y" ? ic("check") : ""}${esc(txt[k]())}${v === "ref" ? " · 법정 기준 600W" : v === "?" ? " · 확인 필요" : ""}</span>`).join("")}</p>`;
+  return `<p class="lrow-cond">${Object.entries(st).map(([k, v]) => `<span class="cs cs-${v === "?" ? "unk" : v}">${v === "y" ? ic("check") : ""}${esc(txt[k]())}${v === "ref" ? " · 법정 기준 600W" : v === "?" ? " · 확인 필요" : ""}</span>`).join("")}</p>`;
 }
 function listRow({ c, ce }, i = 0) {
   const { tag } = nameOf(c), o = openingOf(c), main = bookingChannels(c)[0];
@@ -1481,7 +1512,7 @@ function listRow({ c, ce }, i = 0) {
       </div>
       <p class="card-meta">${ic("pin")}${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
       ${condLine(c, ce)}
-      ${c.st?.length || siteSizeText(c) ? `<p class="card-types">${ic("tent")}<span>${esc([c.st?.length ? typeLine2(c) : typeLine(c), siteSizeText(c)].filter(Boolean).join(" · "))}</span></p>` : ""}
+      ${(() => { const r = typeRow(c, siteSizeText(c)); return c.st?.length || r.b || siteSizeText(c) ? r.html : ""; })()}
       ${rowsHtmlHorizontal(c)}
       ${feeMain(c)?.text && feeTiersLine(c) ? `<p class="card-tiers">${feeTiersLine(c)}</p>` : ""}
       ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-reviews">${cardReviewPills(c.rv, c)}</div>` : ""}
@@ -2217,7 +2248,7 @@ async function detailView(id) {
       <p class="d-eyebrow">${esc(region(c))}${c.op && OP[c.op] ? ` · ${OP[c.op]}` : tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
       <h1 class="d-title">${titleHtml(c)}</h1>
       ${c.line ? `<p class="d-line">${esc(serviceText(c.line, 84))}${c.gc_url ? srcTip({ g: "c", src: { label: "고캠핑 소개", url: c.gc_url, quote: c.line } }, "한 줄 소개") : ""}</p>` : ""}
-      <div class="d-bdgs">${badges(c, 14, 10)}</div>
+      <div class="d-bdgs">${stayBadges(c)}${badges(c, 14, 10)}</div>
       </div>
       <aside class="d-side">${reserveCard(c, d)}</aside>
     </header>
@@ -4476,7 +4507,7 @@ function mapItem(c) {
   return `<article class="mi${on ? " on" : ""}" data-mid="${esc(c.id)}">
     <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="mi-ph">${carousel(c)}</div>
-    <div class="mi-b"><p class="card-meta">${esc(region(c))}${typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p><h3>${esc(nameOf(c).name)}</h3><span class="bdgs inline">${badges(c, 3)}</span></div>
+    <div class="mi-b"><p class="card-meta">${esc(region(c))}${!stayKinds(c).length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p><h3>${esc(nameOf(c).name)}</h3><span class="bdgs inline">${stayBadges(c, 2)}${badges(c, stayKinds(c).length ? 2 : 3)}</span></div>
     ${heartBtn(c)}
   </article>`;
 }

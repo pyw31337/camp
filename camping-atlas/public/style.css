@@ -489,6 +489,19 @@ img { color: transparent; }
 .bdg-cobalt { --c: var(--cobalt); }
 .bdg-ink { --c: var(--ink); }
 .bdg-teal { --c: #0d9488; }
+/* 숙박 상품 배지(글램핑·카라반·방갈로·트레일러) — 같은 캡슐, 색 아이콘 원 */
+.bdg-glamp { --c: #c2410c; }
+.bdg-caravan { --c: #1d4ed8; }
+.bdg-house { --c: #7c3aed; }
+.bdg-rv { --c: #475569; }
+.card-types.has-stay { gap: 6px; height: 24px; }
+.stay-bdgs { display: inline-flex; gap: 4px; flex: none; }
+.stay-bdgs .bdg { height: 22px; font-size: .72rem; padding: 0 8px 0 2px; gap: 4px; box-shadow: none; border: 1px solid var(--line); background: var(--paper); }
+.stay-bdgs .bdg .ic { width: 18px; height: 18px; padding: 3px; color: #fff; }
+.mi-b .bdg-stay { border: 1px solid var(--line); }
+.qc-glamp[aria-pressed="true"] { background: #c2410c; color: #fff; border-color: #c2410c; }
+.qc-caravan[aria-pressed="true"] { background: #1d4ed8; color: #fff; border-color: #1d4ed8; }
+.qc-house[aria-pressed="true"] { background: #7c3aed; color: #fff; border-color: #7c3aed; }
 /* 불가사항: 빨간색 캡슐 배경, 좌측 흰색 배경에 빨간색 아이콘, 우측 흰색 텍스트로 차별화(소유자 요청) */
 .bdg-no {
   background: #d32f2f;
