@@ -312,6 +312,7 @@ const THEME_SUBS = {
   AVAIL: "지금 바로 실시간 예약 접수 중인 캠핑장",
   REVIEWS: "방문자들의 생생한 긍정 평가가 많은 캠핑장",
 };
+const SIDO_KW = new Set(["서울", "경기", "인천", "강원", "충북", "충남", "충청", "대전", "세종", "전북", "전남", "전라", "광주", "경북", "경남", "경상", "대구", "울산", "부산", "제주", "서울특별시", "경기도", "인천광역시", "강원특별자치도", "강원도", "충청북도", "충청남도", "대전광역시", "세종특별자치시", "전라북도", "전북특별자치도", "전라남도", "광주광역시", "경상북도", "경상남도", "대구광역시", "울산광역시", "부산광역시", "제주특별자치도", "제주도"]);
 function matches(c, { useArea = true } = {}) {
   if (useArea && S.area !== "all" && AREA_OF[sidoShort(c.sido)] !== S.area) return false;
   for (const k of S.quick) if (!QUICK[k].test(c)) return false;
@@ -325,8 +326,19 @@ function matches(c, { useArea = true } = {}) {
   if (S.theme === "OPEN" && !openingOf(c)) return false;
   if (S.stype && !hasType(c, S.stype)) return false;
   if (S.q) {
-    const hay = c._hay ??= `${c.name} ${c.addr} ${c.sido} ${c.sigungu} ${(c.env ?? []).join(" ")} ${(c.types ?? []).join(" ")} ${c.pf?.s ?? ""} ${(c.st ?? []).map(([k, , , sub]) => `${ST[k]?.label ?? ""} ${sub ?? ""}`).join(" ")} ${(c.amenities ?? []).join(" ")} ${(c.rental ?? []).join(" ")} ${c.line ?? ""}`.toLowerCase();
-    if (!S.q.toLowerCase().split(/\s+/).filter(Boolean).every((w) => hay.includes(w))) return false;
+    const words = S.q.toLowerCase().split(/\s+/).filter(Boolean);
+    const ok = words.every((w) => {
+      if (c.name && c.name.toLowerCase().includes(w)) return true;
+      if (SIDO_KW.has(w)) {
+        return (c.sido && c.sido.toLowerCase().includes(w)) ||
+               sidoShort(c.sido)?.toLowerCase() === w ||
+               (c.area && c.area.toLowerCase().includes(w)) ||
+               (AREA_OF[sidoShort(c.sido)] && AREA_OF[sidoShort(c.sido)].toLowerCase().includes(w));
+      }
+      const hay = c._hay ??= `${c.name} ${c.addr ?? ""} ${c.sido ?? ""} ${c.sigungu ?? ""} ${(c.env ?? []).join(" ")} ${(c.types ?? []).join(" ")} ${c.pf?.s ?? ""} ${(c.st ?? []).map(([k, , , sub]) => `${ST[k]?.label ?? ""} ${sub ?? ""}`).join(" ")} ${(c.amenities ?? []).join(" ")} ${(c.rental ?? []).join(" ")} ${c.line ?? ""}`.toLowerCase();
+      return hay.includes(w);
+    });
+    if (!ok) return false;
   }
   return true;
 }
@@ -412,6 +424,7 @@ function photosAll(c) {
   else if (remote.length) list = remote;
   else if (c.ph) list = [`media/${c.ph}`];
   else if (c.img) list = [c.img];
+  if (c.sn && !list.includes(c.sn)) list.push(c.sn);
 
   const seen = new Set();
   const deduped = [];
@@ -464,7 +477,11 @@ function initCarousels(root = document) {
       const left = $$("img", tr).length;
       const d = $(".car-dots", car);
       if (d) { d.lastElementChild?.remove(); dots = $$(".car-dots i", car); if (left < 2) d.remove(); }
-      if (!left) (car.closest(".card, .mi, .review-pick, .tr-card") ?? car).remove();
+      if (!left) {
+        const c = car.closest(".card, .mi, .review-pick, .tr-card");
+        if (c) c.remove();
+        else car.outerHTML = `<div class="car car-empty">${ic("tent")}</div>`;
+      }
     }, { once: true }));
     ["pointerenter", "touchstart", "focusin"].forEach((ev) => car.addEventListener(ev, () => hydrate(car), { passive: true, once: true }));
     tr.addEventListener("scroll", () => {
@@ -501,7 +518,7 @@ function initCarousels(root = document) {
     // 사진 레일은 카드 링크 위에 있다(가로 스와이프를 받으려고). 사진을 누르면 카드 링크로 간다.
     tr.addEventListener("click", () => {
       if (moved) return;
-      const hit = car.closest(".card, .mi, .review-pick, .tr-card")?.querySelector(".card-hit");
+      const hit = car.closest(".card, .mi, .review-pick, .tr-card, .lrow")?.querySelector(".card-hit");
       if (hit) location.hash = hit.getAttribute("href");
     });
   }
@@ -1214,31 +1231,53 @@ function listRow({ c, st, ce }, i = 0) {
   const fee = feeMain(c)?.text ?? null;
   const href = `#/c/${encodeURIComponent(c.id)}`;
   return `<article class="lrow" data-id="${esc(c.id)}">
-    <a class="lrow-media" href="${href}" tabindex="-1" aria-hidden="true">${campThumb(c, { sizes: "(max-width: 759px) 132px, 300px" })}<span class="bdgs">${badges(c, 2)}</span></a>
+    <a class="card-hit" href="${href}" draggable="false" aria-label="${esc(nameOf(c).name)} 상세 정보"></a>
+    <div class="lrow-media">
+      ${carousel(c, { eager: i < 3 })}
+      <span class="bdgs">${badges(c, 2)}</span>
+    </div>
     <div class="lrow-body">
       <div class="lrow-top">
-        <div class="lrow-title"><p class="lrow-meta">${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}</p><h3><a href="${href}">${esc(nameOf(c).name)}</a></h3></div>
+        <div class="lrow-title">
+          <p class="lrow-meta">${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}</p>
+          <h3><span class="lrow-name">${esc(nameOf(c).name)}</span></h3>
+        </div>
         ${heartBtn(c)}
       </div>
-      ${st ? `<p class="lrow-date st-${st.k}">${ic(st.icon)}<b>${esc(st.txt)}</b><i>${esc(st.sub)}</i></p>` : ""}
-      ${condLine(c, ce)}
-      <dl class="lrow-facts">
-        ${listFact("1박", fee, GR(c.fee?.grade))}
-        ${listFact("입실", ti.i?.[0], ti.i?.[1])}
-        ${listFact("퇴실", ti.o?.[0], ti.o?.[1])}
-        ${listFact("매너타임", ti.m?.[0] ? `${ti.m[0]}부터` : null, ti.m?.[1])}
-        ${listFact("전기", f.power?.v, f.power?.g)}
-        ${listFact("주차", f.park?.v, f.park?.g)}
-        ${listFact("장작", f.fire?.v, f.fire?.g)}
-        ${listFact("반려견", f.pet?.v, f.pet?.g)}
-      </dl>
-      ${c.st?.length || typeLine(c) || siteSizeText(c) ? `<p class="lrow-line">${ic("tent")}<span>${esc([c.st?.length ? typeLine2(c) : typeLine(c), siteSizeText(c)].filter(Boolean).join(" · "))}</span></p>` : ""}
-      ${nearLine(c) ? `<p class="lrow-line">${ic("store")}<span>${esc(nearLine(c))}</span></p>` : ""}
-      ${r.total ? `<p class="lrow-line lrow-review">${ic("heart")}<span>후기 ${fmt(r.total)}건</span>${reviewTopics(r.rv.p, "good", "heart")}${reviewTopics(r.rv.c, "watch", "down")}</p>` : ""}
-      <div class="lrow-cta">
-        ${st?.url ? `<a class="btn primary" href="${esc(st.url)}" target="_blank" rel="noopener">${st.k === "vac" ? "빈자리 예약하기" : st.k === "full" ? "예약 화면 보기" : "공식 접수 보기"}</a>` : main ? `<a class="btn primary" href="${esc(main.url)}" target="_blank" rel="noopener" title="${esc(bookingLabel(main))}"><span>날짜 확인 · ${esc(bookingLabel(main))}</span></a>` : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}
-        <a class="btn ghost" href="${href}">자세히</a>
+      ${st || condLine(c, ce) ? `
+        <div class="lrow-status-line">
+          ${st ? `<p class="lrow-date st-${st.k}">${ic(st.icon)}<b>${esc(st.txt)}</b><i>${esc(st.sub)}</i></p>` : ""}
+          ${condLine(c, ce)}
+        </div>
+      ` : ""}
+      <div class="lrow-section lrow-facts-wrap">
+        <dl class="lrow-facts">
+          ${listFact("1박", fee, GR(c.fee?.grade))}
+          ${listFact("입실", ti.i?.[0], ti.i?.[1])}
+          ${listFact("퇴실", ti.o?.[0], ti.o?.[1])}
+          ${listFact("매너타임", ti.m?.[0] ? `${ti.m[0]}부터` : null, ti.m?.[1])}
+          ${listFact("전기", f.power?.v, f.power?.g)}
+          ${listFact("주차", f.park?.v, f.park?.g)}
+          ${listFact("장작", f.fire?.v, f.fire?.g)}
+          ${listFact("반려견", f.pet?.v, f.pet?.g)}
+        </dl>
       </div>
+      ${c.st?.length || typeLine(c) || siteSizeText(c) || nearLine(c) ? `
+        <div class="lrow-section lrow-env-wrap">
+          ${c.st?.length || typeLine(c) || siteSizeText(c) ? `<p class="lrow-line">${ic("tent")}<span>${esc([c.st?.length ? typeLine2(c) : typeLine(c), siteSizeText(c)].filter(Boolean).join(" · "))}</span></p>` : ""}
+          ${nearLine(c) ? `<p class="lrow-line">${ic("store")}<span>${esc(nearLine(c))}</span></p>` : ""}
+        </div>
+      ` : ""}
+      ${r.total || st?.url || main || c.tel ? `
+        <div class="lrow-section lrow-foot-wrap">
+          ${r.total ? `<p class="lrow-line lrow-review">${ic("heart")}<span>후기 ${fmt(r.total)}건</span>${reviewTopics(r.rv.p, "good", "heart")}${reviewTopics(r.rv.c, "watch", "down")}</p>` : ""}
+          ${st?.url || main || c.tel ? `
+            <div class="lrow-cta">
+              ${st?.url ? `<a class="btn primary" href="${esc(st.url)}" target="_blank" rel="noopener">${st.k === "vac" ? "빈자리 예약하기" : st.k === "full" ? "예약 화면 보기" : "공식 접수 보기"}</a>` : main ? `<a class="btn primary" href="${esc(main.url)}" target="_blank" rel="noopener" title="${esc(bookingLabel(main))}"><span>날짜 확인 · ${esc(bookingLabel(main))}</span></a>` : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}
+            </div>
+          ` : ""}
+        </div>
+      ` : ""}
     </div>
   </article>`;
 }
@@ -1251,14 +1290,13 @@ function listView() {
   S.theme = null; S.stype = null; S.quick.clear();
   const areaLabel = S.cond.near ? `${S.cond._ctr?.label ?? S.cond.near} 주변` : S.cond.sido.length ? S.cond.sido.join("·") : AREAS.find(([k]) => k === S.area)?.[1] ?? "전국";
   const feeChip = (k, l) => `<button type="button" class="chip fee-chip" data-fee-band="${k}" aria-pressed="${(S.feeBand ?? "") === k}">${l}</button>`;
-  const dateTip = tip("<b>날짜로 보기</b><span>날짜별 빈자리는 각 예약처만 알고 있어 여기서 확정하지 않아요. 공식 접수 중(그날이 이용 기간에 포함된 공공 예약), 예약 오픈 예정, 운영 기간(고캠핑·운영자 안내의 운영 계절)만 판단하고, 운영 기간 밖인 곳은 기본으로 뺍니다. 예약 가능 여부는 각 행의 예약처에서 확인하세요.</span>", "날짜 판단 기준");
   return `<section class="list-page" aria-labelledby="list-t">
     <div class="list-head">
       <a class="link list-back" href="#/">${ic("left")}처음으로</a>
       <h1 id="list-t"><span data-list-area>${esc(areaLabel)}</span> 캠핑장 <b data-list-count></b></h1>
-      <form class="list-search" role="search" data-list-search>
-        <label class="finder-field"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
-        <button class="finder-field finder-static" type="button" data-open="date"><small>언제</small><b data-stay-label>${esc(stayLabel())}</b></button>
+      <form class="finder-form list-finder-form" role="search" data-list-search>
+        <label class="finder-field finder-destination"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
+        <button class="finder-field finder-static finder-cond" type="button" data-open-cond><small>조건</small><b data-cond-label>${esc(condSummary())}</b></button>
         <button class="finder-go" type="submit">${ic("search")}<span>찾기</span></button>
       </form>
       <div class="rail chips" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-list-area-k="${k}" aria-pressed="${S.area === k && !S.cond.sido.length}">${l}</button>`).join("")}</div>
@@ -1267,12 +1305,11 @@ function listView() {
       <div class="list-tools">
         <p class="list-date-note" data-list-note></p>
         <label class="sort">${ic("list")}<select data-list-sort aria-label="정렬">
-          <option value="date"${(S.listSort ?? "date") === "date" ? " selected" : ""}>${S.stay ? "날짜 맞는 순" : "정보 많은 순"}</option>
+          <option value="rec"${(S.listSort ?? "rec") === "rec" ? " selected" : ""}>추천순</option>
           <option value="fee"${S.listSort === "fee" ? " selected" : ""}>요금 낮은 순</option>
           <option value="name"${S.listSort === "name" ? " selected" : ""}>이름순</option>
         </select></label>
       </div>
-      <p class="list-explain">${S.stay ? `<b>${esc(stayLabel())}</b> 기준 · 빈자리는 예약처에서 확인 ${dateTip}` : "날짜를 고르면 운영 기간 밖인 곳을 빼고, 공식 접수 중·오픈 예정인 곳을 먼저 보여 줘요."}</p>
     </div>
     <div class="lrows" data-lrows></div>
     <div class="more-wrap"><button class="btn ghost" type="button" data-list-more>더 보기</button></div>
@@ -1290,6 +1327,7 @@ function renderList({ reset = true } = {}) {
   $("[data-list-more]").hidden = to >= shown.length;
   const note = $("[data-list-note]");
   if (note) note.innerHTML = S.stay && (closed || S.showClosed) ? `<button type="button" class="link" data-list-closed>${S.showClosed ? "운영 기간 밖 빼기" : `운영 기간 밖 ${fmt(closed)}곳 함께 보기`}</button>` : "";
+  initCarousels(box);
 }
 function bindList() {
   renderList();
