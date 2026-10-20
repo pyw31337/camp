@@ -1,0 +1,5215 @@
+{
+  "generated_at": "2026-10-20T23:37:18Z",
+  "note": "사이트 규격. 재발행 때 비어 있는 곳만 이 값으로 채운다. 이미 SURVEYED면 유지.",
+  "count": 744,
+  "facts": [
+    {
+      "id": "2119",
+      "name": "얼음골 야영장",
+      "raw": "8x6",
+      "note": "8 X 6 : 50개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8103",
+      "name": "경주시종합자원화단지 별빛카라반",
+      "raw": "9x6",
+      "note": "9 X 6 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8031",
+      "name": "우리동네 캠핑장",
+      "raw": "8x5",
+      "note": "8 X 5 : 25개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8109",
+      "name": "화천 둥지캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 8개&nbsp; · &nbsp;4 X 7 : 1개&nbsp; · &nbsp;5 X 7 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100217",
+      "name": "김천실내테니스장 & 김천오토캠핑장",
+      "raw": "7x7",
+      "note": "7 X 7 : 25개&nbsp; · &nbsp;4 X 6 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2931",
+      "name": "청양동강리오토캠핑장",
+      "raw": "10x10",
+      "note": "10 X 10 : 18개&nbsp; · &nbsp;5 X 8 : 24개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8145",
+      "name": "비토어촌체험휴양마을",
+      "raw": "8x8",
+      "note": "8 X 8 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101143",
+      "name": "캠프어게인",
+      "raw": "10x10",
+      "note": "10 X 10 : 14개&nbsp; · &nbsp;10 X 8 : 16개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102331",
+      "name": "알프스캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102337",
+      "name": "글램인(GLAMIN)",
+      "raw": "4x4",
+      "note": "4 X 4 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1803",
+      "name": "송천마을 협동조합 야영장",
+      "raw": "5x7",
+      "note": "5 X 7 : 18개&nbsp; · &nbsp;4 X 4 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101934",
+      "name": "소나무 캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 23개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7763",
+      "name": "이천농업테마공원 국민여가캠핑장",
+      "raw": "5x6",
+      "note": "5 X 6 : 16개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102340",
+      "name": "캠핑 마루",
+      "raw": "8x10",
+      "note": "8 X 10 : 200개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102275",
+      "name": "술박물관 오토캠핑장",
+      "raw": "9x12",
+      "note": "9 X 12 : 24개",
+      "src": "gocamping"
+    },
+    {
+      "id": "227",
+      "name": "계곡과소나무 캠핑장",
+      "raw": "6x15",
+      "note": "6 X 15 : 10개&nbsp; · &nbsp;7 X 12 : 4개&nbsp; · &nbsp;6 X 10 : 14개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2034",
+      "name": "알멕스랜드캠핑장",
+      "raw": "7x7",
+      "note": "7 X 7 : 120개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3450",
+      "name": "해담구룡령 야영장",
+      "raw": "7x8",
+      "note": "7 X 8 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102303",
+      "name": "논배동산",
+      "raw": "4x5",
+      "note": "4 X 5 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1670",
+      "name": "설하캠핑장",
+      "raw": "4x4",
+      "note": "4 X 4 : 6개&nbsp; · &nbsp;5 X 5 : 6개&nbsp; · &nbsp;7 X 8 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102354",
+      "name": "소풍 캠핑장",
+      "raw": "3x6",
+      "note": "3 X 6 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "29",
+      "name": "80 SS 오토캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 24개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8065",
+      "name": "무지개캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102021",
+      "name": "더 쉼",
+      "raw": "10x30",
+      "note": "10 X 30 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101669",
+      "name": "캠핑엔조이",
+      "raw": "8x7",
+      "note": "8 X 7 : 44개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102166",
+      "name": "홍천제이(J)글램핑",
+      "raw": "5x9",
+      "note": "5 X 9 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "141",
+      "name": "강동그린웨이 가족캠핑장",
+      "raw": "3x5",
+      "note": "3 X 5 : 62개&nbsp; · &nbsp;6 X 7 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1648",
+      "name": "조각가 박시동 미술관",
+      "raw": "5x7",
+      "note": "5 X 7 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1930",
+      "name": "심천 하늘바람캠핑장",
+      "raw": "5x5",
+      "note": "5 X 5 : 40개&nbsp; · &nbsp;4 X 5 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2571",
+      "name": "인삼골오토캠핑장",
+      "raw": "10x10",
+      "note": "10 X 10 : 55개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6732",
+      "name": "거창 국민여가캠핑장",
+      "raw": "5x5",
+      "note": "5 X 5 : 14개&nbsp; · &nbsp;6 X 8 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100342",
+      "name": "골드바베큐 당일캠핑장",
+      "raw": "3x5",
+      "note": "3 X 5 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100510",
+      "name": "지금쉬다",
+      "raw": "9x9",
+      "note": "9 X 9 : 16개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101836",
+      "name": "가야산뷰관광농원캠핑장",
+      "raw": "9x7",
+      "note": "9 X 7 : 65개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2758",
+      "name": "주문진글램핑 오토캠핑장",
+      "raw": "3x5",
+      "note": "3 X 5 : 8개&nbsp; · &nbsp;5 X 7 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102353",
+      "name": "영지 캠프",
+      "raw": "9x9",
+      "note": "9 X 9 : 2개&nbsp; · &nbsp;9 X 10 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "387",
+      "name": "국립남해편백자연휴양림",
+      "raw": "6x4",
+      "note": "6 X 4 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "908",
+      "name": "두모마을야영장",
+      "raw": "7x7",
+      "note": "7 X 7 : 13개&nbsp; · &nbsp;7 X 8 : 8개&nbsp; · &nbsp;7 X 9 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2110",
+      "name": "양양캠핑장",
+      "raw": "5x6",
+      "note": "5 X 6 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "543",
+      "name": "나무새 캠핑장",
+      "raw": "5x8",
+      "note": "5 X 8 : 39개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102229",
+      "name": "화성에코팜테마파크 오토캠핑장",
+      "raw": "5x8",
+      "note": "5 X 8 : 70개&nbsp; · &nbsp;12 X 8 : 36개",
+      "src": "gocamping"
+    },
+    {
+      "id": "703",
+      "name": "달자캠핑장",
+      "raw": "5x6",
+      "note": "5 X 6 : 16개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2940",
+      "name": "청천화양동관광농원 초롱이 캠핑장",
+      "raw": "10x6",
+      "note": "10 X 6 : 24개&nbsp; · &nbsp;7 X 4 : 12개&nbsp; · &nbsp;6 X 4 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3326",
+      "name": "피노키오숲 자연휴양림 야영장",
+      "raw": "5x7",
+      "note": "5 X 7 : 100개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1668",
+      "name": "설악동자동차야영장",
+      "raw": "5x8",
+      "note": "5 X 8 : 113개&nbsp; · &nbsp;5 X 6 : 11개&nbsp; · &nbsp;5 X 7 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1742",
+      "name": "속초해변 국민여가 캠핑장",
+      "raw": "3x4",
+      "note": "3 X 4 : 45개&nbsp; · &nbsp;7 X 9 : 11개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3394",
+      "name": "학암포자동차야영장",
+      "raw": "3x4",
+      "note": "3 X 4 : 86개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102156",
+      "name": "마루벌캠핑장",
+      "raw": "8x10",
+      "note": "8 X 10 : 9개&nbsp; · &nbsp;7 X 11 : 14개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102319",
+      "name": "바다내음 캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 40개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3206",
+      "name": "팔봉산관광지 야영장",
+      "raw": "3x4",
+      "note": "3 X 4 : 33개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102269",
+      "name": "농업회사법인(주) 탑그린",
+      "raw": "5x7",
+      "note": "5 X 7 : 5개&nbsp; · &nbsp;4 X 5 : 5개&nbsp; · &nbsp;3 X 3 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100293",
+      "name": "캠앤캠아지트",
+      "raw": "5x8",
+      "note": "5 X 8 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101094",
+      "name": "별애드림 캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 9개&nbsp; · &nbsp;16 X 16 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "356",
+      "name": "구름포해수욕장카라반",
+      "raw": "3x4",
+      "note": "3 X 4 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7157",
+      "name": "보리산캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 5개&nbsp; · &nbsp;5 X 6 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "591",
+      "name": "내장산국립공원 내장야영장",
+      "raw": "5x6",
+      "note": "5 X 6 : 69개",
+      "src": "gocamping"
+    },
+    {
+      "id": "810",
+      "name": "덕유대자동차야영장",
+      "raw": "3x3",
+      "note": "3 X 3 : 85개&nbsp; · &nbsp;4 X 6 : 349개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101153",
+      "name": "내장산국립공원 내장호야영장",
+      "raw": "5x6",
+      "note": "5 X 6 : 38개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101246",
+      "name": "DS Camp 캠핑장",
+      "raw": "8x7",
+      "note": "8 X 7 : 21개&nbsp; · &nbsp;4 X 6 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101763",
+      "name": "춘풍원 농촌체험 휴양마을 야영장",
+      "raw": "8x12",
+      "note": "8 X 12 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102005",
+      "name": "청량산 수원캠핑장",
+      "raw": "5x8",
+      "note": "5 X 8 : 5개&nbsp; · &nbsp;5 X 6 : 4개&nbsp; · &nbsp;8 X 9 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "148",
+      "name": "강변오토캠핑장",
+      "raw": "7x6",
+      "note": "7 X 6 : 16개&nbsp; · &nbsp;6 X 8 : 18개&nbsp; · &nbsp;6 X 10 : 16개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1327",
+      "name": "별마로빌리지캠핑장",
+      "raw": "6x11",
+      "note": "6 X 11 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102034",
+      "name": "캠핑킹 관광농원",
+      "raw": "8x9",
+      "note": "8 X 9 : 31개&nbsp; · &nbsp;8 X 8 : 8개&nbsp; · &nbsp;7 X 12 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102316",
+      "name": "춘천 가평 카라반 글램핑 블루",
+      "raw": "5x7",
+      "note": "5 X 7 : 6개&nbsp; · &nbsp;3 X 4 : 10개&nbsp; · &nbsp;3 X 8 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "492",
+      "name": "기산골캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1449",
+      "name": "비학산자연휴양림야영장",
+      "raw": "4x4",
+      "note": "4 X 4 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "51",
+      "name": "Najost Camp",
+      "raw": "12x8",
+      "note": "12 X 8 : 18개",
+      "src": "gocamping"
+    },
+    {
+      "id": "129",
+      "name": "갈기산 캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "833",
+      "name": "도사곡휴양림야영장",
+      "raw": "5x5",
+      "note": "5 X 5 : 27개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1065",
+      "name": "가평명지산카라반글램핑",
+      "raw": "5x8",
+      "note": "5 X 8 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2703",
+      "name": "정읍시 국민여가캠핑장",
+      "raw": "5x8",
+      "note": "5 X 8 : 17개&nbsp; · &nbsp;5 X 9 : 8개&nbsp; · &nbsp;5 X 7 : 23개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3389",
+      "name": "학동자동차 야영장",
+      "raw": "6x8",
+      "note": "6 X 8 : 13개&nbsp; · &nbsp;8 X 11 : 7개&nbsp; · &nbsp;14 X 8 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6967",
+      "name": "다목적광장 야영장",
+      "raw": "7x7",
+      "note": "7 X 7 : 48개&nbsp; · &nbsp;8 X 7 : 16개&nbsp; · &nbsp;4 X 4 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6975",
+      "name": "동강전망자연휴양림오토캠핑장",
+      "raw": "4x5",
+      "note": "4 X 5 : 67개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102013",
+      "name": "별과달 사랑이야기",
+      "raw": "9x10",
+      "note": "9 X 10 : 4개&nbsp; · &nbsp;8 X 8 : 4개&nbsp; · &nbsp;8 X 6 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "306",
+      "name": "공릉관광지 캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 16개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1368",
+      "name": "버드하우스 캠핑장 사촌해변점(구 보물섬캠핑장)",
+      "raw": "8x7",
+      "note": "8 X 7 : 28개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101255",
+      "name": "그랜드 파파하우스야영장",
+      "raw": "4x6",
+      "note": "4 X 6 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "383",
+      "name": "국림검마산자연휴양림",
+      "raw": "3x3",
+      "note": "3 X 3 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1704",
+      "name": "소금강자동차야영장",
+      "raw": "6x6",
+      "note": "6 X 6 : 169개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7541",
+      "name": "전월산 국민여가캠핑장",
+      "raw": "5x8",
+      "note": "5 X 8 : 22개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2220",
+      "name": "승촌보캠핑장",
+      "raw": "5x5",
+      "note": "5 X 5 : 53개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2488",
+      "name": "월악산국립공원 닷돈재자동차야영장",
+      "raw": "5x7",
+      "note": "5 X 7 : 119개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6803",
+      "name": "가인야영장",
+      "raw": "8x7",
+      "note": "8 X 7 : 52개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102138",
+      "name": "아름다운 야영장",
+      "raw": "6x8",
+      "note": "6 X 8 : 24개&nbsp; · &nbsp;12 X 6 : 16개&nbsp; · &nbsp;13 X 6 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1920",
+      "name": "(주)신어산 자연숲캠핑장",
+      "raw": "5x6",
+      "note": "5 X 6 : 5개&nbsp; · &nbsp;5 X 7 : 26개&nbsp; · &nbsp;7 X 7 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2697",
+      "name": "정선 펫 캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 9개&nbsp; · &nbsp;5 X 6 : 11개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6765",
+      "name": "달서별빛캠프 캠핑장",
+      "raw": "5x9",
+      "note": "5 X 9 : 15개&nbsp; · &nbsp;4 X 6 : 15개&nbsp; · &nbsp;3 X 5 : 11개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100126",
+      "name": "수리바위 캠핑정원",
+      "raw": "6x8",
+      "note": "6 X 8 : 20개&nbsp; · &nbsp;7 X 8 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101772",
+      "name": "덕신야영장",
+      "raw": "6x8",
+      "note": "6 X 8 : 13개&nbsp; · &nbsp;8 X 12 : 7개&nbsp; · &nbsp;14 X 9 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "362",
+      "name": "구미캠핑장",
+      "raw": "9x9",
+      "note": "9 X 9 : 75개&nbsp; · &nbsp;4 X 5 : 80개",
+      "src": "gocamping"
+    },
+    {
+      "id": "689",
+      "name": "단호샌드파크 캠핑장",
+      "raw": "3x5",
+      "note": "3 X 5 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "874",
+      "name": "동막골캠핑장",
+      "raw": "5x6",
+      "note": "5 X 6 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1357",
+      "name": "병목안캠핑장",
+      "raw": "3x4",
+      "note": "3 X 4 : 50개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1601",
+      "name": "김해생림오토캠핑장",
+      "raw": "6x6",
+      "note": "6 X 6 : 71개&nbsp; · &nbsp;6 X 5 : 22개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1698",
+      "name": "세종 합강캠핑장",
+      "raw": "10x15",
+      "note": "10 X 15 : 16개&nbsp; · &nbsp;10 X 10 : 100개&nbsp; · &nbsp;5 X 10 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2533",
+      "name": "은빛초원 캠핑장",
+      "raw": "6x9",
+      "note": "6 X 9 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2563",
+      "name": "대신 오토 캠핑장",
+      "raw": "9x10",
+      "note": "9 X 10 : 85개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2564",
+      "name": "대신 웰빙 캠핑장",
+      "raw": "5x10",
+      "note": "5 X 10 : 95개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2793",
+      "name": "증산수도계곡캠핑장",
+      "raw": "3x3",
+      "note": "3 X 3 : 27개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2997",
+      "name": "충주 루루네 오토캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 51개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7573",
+      "name": "상주 감꽃마을 서울캠핑장",
+      "raw": "3x4",
+      "note": "3 X 4 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7693",
+      "name": "영암군 국민여가 캠핑장",
+      "raw": "5x4",
+      "note": "5 X 4 : 8개&nbsp; · &nbsp;7 X 5 : 15개&nbsp; · &nbsp;8 X 7 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7830",
+      "name": "내리 캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 22개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2052",
+      "name": "약수골캠프촌 오토캠핑장",
+      "raw": "10x1",
+      "note": "10 X 1 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101775",
+      "name": "캠프운악Hi",
+      "raw": "8x8",
+      "note": "8 X 8 : 18개&nbsp; · &nbsp;12 X 12 : 11개&nbsp; · &nbsp;30 X 7 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101890",
+      "name": "무봉산 자연휴양림",
+      "raw": "4x6",
+      "note": "4 X 6 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102243",
+      "name": "사계풀포레스트",
+      "raw": "9x10",
+      "note": "9 X 10 : 15개&nbsp; · &nbsp;6 X 9 : 16개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3330",
+      "name": "피플앤독 힐링캠핑장",
+      "raw": "6x6",
+      "note": "6 X 6 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100899",
+      "name": "봄날농원",
+      "raw": "7x10",
+      "note": "7 X 10 : 16개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1100",
+      "name": "무릉계곡 힐링캠프장",
+      "raw": "36x5",
+      "note": "36 X 5 : 54개&nbsp; · &nbsp;4 X 6 : 8개&nbsp; · &nbsp;4 X 6 : 50개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2963",
+      "name": "초막골생태공원 느티나무야영장",
+      "raw": "4x6",
+      "note": "4 X 6 : 47개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3436",
+      "name": "함허동천야영장",
+      "raw": "3x3",
+      "note": "3 X 3 : 26개&nbsp; · &nbsp;3 X 3 : 32개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7967",
+      "name": "천왕산 가족캠핑장",
+      "raw": "4x5",
+      "note": "4 X 5 : 12개&nbsp; · &nbsp;4 X 5 : 22개",
+      "src": "gocamping"
+    },
+    {
+      "id": "401",
+      "name": "국립황정산자연휴양림캠핑장",
+      "raw": "3x3",
+      "note": "3 X 3 : 23개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1993",
+      "name": "아산곡교천야영장",
+      "raw": "7x5",
+      "note": "7 X 5 : 6367개&nbsp; · &nbsp;7 X 5 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2239",
+      "name": "영인산자연휴양림 숲속야영장",
+      "raw": "4x5",
+      "note": "4 X 5 : 20개&nbsp; · &nbsp;5 X 6 : 21개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3370",
+      "name": "하오재캠핑장",
+      "raw": "8x10",
+      "note": "8 X 10 : 29개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101589",
+      "name": "교룡공원 숲속야영장",
+      "raw": "4x5",
+      "note": "4 X 5 : 32개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101354",
+      "name": "봄이오는 캠프",
+      "raw": "4x5",
+      "note": "4 X 5 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101486",
+      "name": "더아리웃집 모롱공간",
+      "raw": "3x10",
+      "note": "3 X 10 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102044",
+      "name": "무니 캠핑장",
+      "raw": "8x6",
+      "note": "8 X 6 : 8개&nbsp; · &nbsp;8 X 4 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101764",
+      "name": "담터 민수 캠핑장",
+      "raw": "8x5",
+      "note": "8 X 5 : 32개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102285",
+      "name": "캠프 몽림",
+      "raw": "10x7",
+      "note": "10 X 7 : 33개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3055",
+      "name": "캠프오후4시",
+      "raw": "6x15",
+      "note": "6 X 15 : 5개&nbsp; · &nbsp;10 X 10 : 2개&nbsp; · &nbsp;6 X 7 : 11개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7096",
+      "name": "화성시 향남 오토캠핑장",
+      "raw": "8x10",
+      "note": "8 X 10 : 38개&nbsp; · &nbsp;12 X 12 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7226",
+      "name": "플라워 카라반 펜션",
+      "raw": "7x7",
+      "note": "7 X 7 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100298",
+      "name": "캠핑808",
+      "raw": "7x10",
+      "note": "7 X 10 : 32개&nbsp; · &nbsp;7 X 13 : 8개&nbsp; · &nbsp;7 X 7 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101637",
+      "name": "강천섬캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 50개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101845",
+      "name": "담터 휴 글램핑&캠핑",
+      "raw": "8x8",
+      "note": "8 X 8 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101889",
+      "name": "사량도 대항해수욕장 캠핑장",
+      "raw": "4x5",
+      "note": "4 X 5 : 36개&nbsp; · &nbsp;4 X 9 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101955",
+      "name": "성불산자연휴양림 숲속캠핑장",
+      "raw": "6x6",
+      "note": "6 X 6 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "140",
+      "name": "강당골캠핑파크",
+      "raw": "6x7",
+      "note": "6 X 7 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1181",
+      "name": "미시령계곡캠핑장",
+      "raw": "3x3",
+      "note": "3 X 3 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101249",
+      "name": "백허그 캠핑장",
+      "raw": "9x8",
+      "note": "9 X 8 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101268",
+      "name": "산청 지리산반달캠핑장",
+      "raw": "9x9",
+      "note": "9 X 9 : 16개&nbsp; · &nbsp;10 X 10 : 17개&nbsp; · &nbsp;16 X 8 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101419",
+      "name": "이안힐링랜드",
+      "raw": "6x8",
+      "note": "6 X 8 : 8개&nbsp; · &nbsp;7 X 11 : 30개&nbsp; · &nbsp;8 X 13 : 18개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3483",
+      "name": "행복한나드리캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 26개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7098",
+      "name": "황방농원 캠핑장",
+      "raw": "8x6",
+      "note": "8 X 6 : 26개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100572",
+      "name": "향수 오토캠핑장",
+      "raw": "8x7",
+      "note": "8 X 7 : 35개&nbsp; · &nbsp;8 X 7 : 32개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101216",
+      "name": "요새불멍",
+      "raw": "9x8",
+      "note": "9 X 8 : 6개&nbsp; · &nbsp;8 X 8 : 5개&nbsp; · &nbsp;10 X 9 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "597",
+      "name": "너와두리농촌캠핑장",
+      "raw": "6x9",
+      "note": "6 X 9 : 13개&nbsp; · &nbsp;7 X 8 : 15개&nbsp; · &nbsp;9 X 9 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "904",
+      "name": "두리캠핑장",
+      "raw": "6x12",
+      "note": "6 X 12 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8014",
+      "name": "수도권매립지 캠핑장",
+      "raw": "6x9",
+      "note": "6 X 9 : 45개&nbsp; · &nbsp;5 X 7 : 41개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101830",
+      "name": "화성기천캠핑장",
+      "raw": "5x6",
+      "note": "5 X 6 : 7개&nbsp; · &nbsp;5 X 7 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101971",
+      "name": "아늑캠핑장",
+      "raw": "6x13",
+      "note": "6 X 13 : 12개&nbsp; · &nbsp;6 X 15 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102112",
+      "name": "뻘마당캠핑장",
+      "raw": "8x7",
+      "note": "8 X 7 : 7개&nbsp; · &nbsp;7 X 13 : 1개&nbsp; · &nbsp;9 X 7 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102097",
+      "name": "나드리 오토캠핑장",
+      "raw": "10x7",
+      "note": "10 X 7 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7750",
+      "name": "캠프 칠랙스(Camp Chillax)",
+      "raw": "10x7",
+      "note": "10 X 7 : 3개&nbsp; · &nbsp;9 X 8 : 9개&nbsp; · &nbsp;8 X 5 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100046",
+      "name": "스페셜바다캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 11개&nbsp; · &nbsp;6 X 8 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102038",
+      "name": "수안보 동그라미 캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101408",
+      "name": "에코캠핑장",
+      "raw": "4x5",
+      "note": "4 X 5 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "4",
+      "name": "주식회사 디노 담양힐링파크 지점",
+      "raw": "4x6",
+      "note": "4 X 6 : 13개&nbsp; · &nbsp;6 X 7 : 11개",
+      "src": "gocamping"
+    },
+    {
+      "id": "21",
+      "name": "천일염힐링캠프",
+      "raw": "6x6",
+      "note": "6 X 6 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "57",
+      "name": "The Star 오토캠핑장",
+      "raw": "4x4",
+      "note": "4 X 4 : 15개&nbsp; · &nbsp;4 X 8 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "85",
+      "name": "가우도카라반펜션",
+      "raw": "3x6",
+      "note": "3 X 6 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "190",
+      "name": "거북바위야영장",
+      "raw": "7x8",
+      "note": "7 X 8 : 18개",
+      "src": "gocamping"
+    },
+    {
+      "id": "301",
+      "name": "곰섬캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 100개",
+      "src": "gocamping"
+    },
+    {
+      "id": "333",
+      "name": "광주시민의 숲 야영장",
+      "raw": "6x6",
+      "note": "6 X 6 : 14개&nbsp; · &nbsp;5 X 6 : 24개&nbsp; · &nbsp;5 X 5 : 14개",
+      "src": "gocamping"
+    },
+    {
+      "id": "398",
+      "name": "국립천관산자연휴양림",
+      "raw": "3x3",
+      "note": "3 X 3 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "477",
+      "name": "금오도 야영장",
+      "raw": "4x6",
+      "note": "4 X 6 : 5개&nbsp; · &nbsp;5 X 7 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "635",
+      "name": "라군하우스",
+      "raw": "7x6",
+      "note": "7 X 6 : 6개&nbsp; · &nbsp;6 X 5 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "731",
+      "name": "대덕 관광농원",
+      "raw": "6x10",
+      "note": "6 X 10 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "964",
+      "name": "반려견호텔 랩도그빌",
+      "raw": "10x10",
+      "note": "10 X 10 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1032",
+      "name": "만정 캠핑장",
+      "raw": "5x4",
+      "note": "5 X 4 : 13개&nbsp; · &nbsp;9 X 4 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1107",
+      "name": "무안황토갯벌랜드 오토캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 37개&nbsp; · &nbsp;6 X 10 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1370",
+      "name": "보성드림캠핑장",
+      "raw": "5x5",
+      "note": "5 X 5 : 9개&nbsp; · &nbsp;5 X 6 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1647",
+      "name": "석양마을 주포",
+      "raw": "6x9",
+      "note": "6 X 9 : 21개&nbsp; · &nbsp;5 X 9 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1672",
+      "name": "섬뜰아래",
+      "raw": "6x5",
+      "note": "6 X 5 : 9개&nbsp; · &nbsp;4 X 5 : 1개&nbsp; · &nbsp;6 X 8 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1681",
+      "name": "섬진강문화학교 캠핑장",
+      "raw": "8x6",
+      "note": "8 X 6 : 28개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1849",
+      "name": "순천국민여가캠핑장",
+      "raw": "9x7",
+      "note": "9 X 7 : 4개&nbsp; · &nbsp;9 X 8 : 7개&nbsp; · &nbsp;7 X 7 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1868",
+      "name": "숲속의베리팜",
+      "raw": "4x5",
+      "note": "4 X 5 : 7개&nbsp; · &nbsp;4 X 6 : 11개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1941",
+      "name": "써니아일랜드",
+      "raw": "6x6",
+      "note": "6 X 6 : 11개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2304",
+      "name": "오시아노 오토캠핑리조트",
+      "raw": "8x10",
+      "note": "8 X 10 : 150개&nbsp; · &nbsp;6 X 8 : 10개&nbsp; · &nbsp;3 X 4 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2459",
+      "name": "웅천친수공원 야영장",
+      "raw": "4x2",
+      "note": "4 X 2 : 7개&nbsp; · &nbsp;3 X 2 : 38개&nbsp; · &nbsp;6 X 3 : 25개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2521",
+      "name": "유치 자연휴양림",
+      "raw": "4x6",
+      "note": "4 X 6 : 20개&nbsp; · &nbsp;3 X 3 : 3개&nbsp; · &nbsp;3 X 5 : 16개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2622",
+      "name": "자연애 품 캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 16개&nbsp; · &nbsp;7 X 10 : 51개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2623",
+      "name": "자연애스토리",
+      "raw": "6x12",
+      "note": "6 X 12 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2809",
+      "name": "지리산반내골오토캠핑장",
+      "raw": "3x4",
+      "note": "3 X 4 : 10개&nbsp; · &nbsp;4 X 4 : 10개&nbsp; · &nbsp;4 X 6 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2813",
+      "name": "지리산오토캠핑장",
+      "raw": "8x6",
+      "note": "8 X 6 : 31개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2879",
+      "name": "첫마을 관광타운",
+      "raw": "4x7",
+      "note": "4 X 7 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2886",
+      "name": "캠핑플래닛",
+      "raw": "10x7",
+      "note": "10 X 7 : 40개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3045",
+      "name": "캠프 예그리나",
+      "raw": "700x800",
+      "note": "700 X 800 : 32개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3231",
+      "name": "편백힐(치유의숲)",
+      "raw": "4x6",
+      "note": "4 X 6 : 23개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3319",
+      "name": "엘마르캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3345",
+      "name": "하늘바다 캠핑장",
+      "raw": "6x7",
+      "note": "6 X 7 : 35개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3434",
+      "name": "함평나비마을 서울캠핑장",
+      "raw": "10x10",
+      "note": "10 X 10 : 21개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3498",
+      "name": "해오름펜션야영장",
+      "raw": "5x4",
+      "note": "5 X 4 : 2개&nbsp; · &nbsp;5 X 7 : 3개&nbsp; · &nbsp;5 X 8 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6795",
+      "name": "목사골야영장",
+      "raw": "10x10",
+      "note": "10 X 10 : 24개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7141",
+      "name": "마루한캠핑장",
+      "raw": "7x9",
+      "note": "7 X 9 : 16개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7442",
+      "name": "회산백련지 오토캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 23개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7593",
+      "name": "시공간",
+      "raw": "4x6",
+      "note": "4 X 6 : 4개&nbsp; · &nbsp;5 X 6 : 1개&nbsp; · &nbsp;6 X 8 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7742",
+      "name": "여수자매로캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 5개&nbsp; · &nbsp;6 X 6 : 1개&nbsp; · &nbsp;7 X 8 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7749",
+      "name": "오지봉커뮤니센터 야영장",
+      "raw": "4x5",
+      "note": "4 X 5 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8012",
+      "name": "화순 고인돌 오토캠핑장",
+      "raw": "11x8",
+      "note": "11 X 8 : 41개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8019",
+      "name": "나주 죽산보 오토캠핑장",
+      "raw": "5x5",
+      "note": "5 X 5 : 41개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100002",
+      "name": "라루체 글램핑 꿈을 노래하다",
+      "raw": "8x10",
+      "note": "8 X 10 : 2개&nbsp; · &nbsp;8 X 10 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100216",
+      "name": "장흥군 수문랜드 블루투어",
+      "raw": "8x6",
+      "note": "8 X 6 : 10개&nbsp; · &nbsp;6 X 5 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100737",
+      "name": "고흥만 수변노을공원 오토캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 70개&nbsp; · &nbsp;8 X 12 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101331",
+      "name": "선택적고립캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 45개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101737",
+      "name": "우주선캠프",
+      "raw": "17x4",
+      "note": "17 X 4 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101747",
+      "name": "서진이네 오토캠핑장",
+      "raw": "4x7",
+      "note": "4 X 7 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101857",
+      "name": "기린 캠프랜드",
+      "raw": "8x6",
+      "note": "8 X 6 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101920",
+      "name": "두들랜드 관광농원",
+      "raw": "9x9",
+      "note": "9 X 9 : 2개&nbsp; · &nbsp;9 X 8 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101942",
+      "name": "장성 맑은물 캠핑장",
+      "raw": "10x10",
+      "note": "10 X 10 : 29개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101975",
+      "name": "포레스트 창평",
+      "raw": "4x7",
+      "note": "4 X 7 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102004",
+      "name": "이든관광농원 글램핑",
+      "raw": "9x5",
+      "note": "9 X 5 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102007",
+      "name": "고래캠핑장",
+      "raw": "5x5",
+      "note": "5 X 5 : 5개&nbsp; · &nbsp;5 X 8 : 17개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102030",
+      "name": "노르딕 글램핑",
+      "raw": "7x8",
+      "note": "7 X 8 : 5개&nbsp; · &nbsp;5 X 9 : 11개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102043",
+      "name": "영벽정오토캠핑장",
+      "raw": "8x9",
+      "note": "8 X 9 : 10개&nbsp; · &nbsp;9 X 10 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102125",
+      "name": "몬드캠핑장",
+      "raw": "11x13",
+      "note": "11 X 13 : 18개&nbsp; · &nbsp;6 X 10 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102145",
+      "name": "캠프그레잇",
+      "raw": "3x6",
+      "note": "3 X 6 : 10개&nbsp; · &nbsp;6 X 8 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102148",
+      "name": "천안 양지야영장",
+      "raw": "6x8",
+      "note": "6 X 8 : 20개&nbsp; · &nbsp;7 X 8 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102149",
+      "name": "경주 보문 호수 야영장",
+      "raw": "8x6",
+      "note": "8 X 6 : 8개&nbsp; · &nbsp;9 X 6 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102171",
+      "name": "높은달캠핑장",
+      "raw": "8x10",
+      "note": "8 X 10 : 5개&nbsp; · &nbsp;9 X 6 : 5개&nbsp; · &nbsp;9 X 10 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102173",
+      "name": "별들의 캠핑",
+      "raw": "10x8",
+      "note": "10 X 8 : 15개&nbsp; · &nbsp;15 X 9 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102209",
+      "name": "금산 우디즘 글램핑",
+      "raw": "3x5",
+      "note": "3 X 5 : 1개&nbsp; · &nbsp;3 X 8 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "349",
+      "name": "구룡레저타운야영장",
+      "raw": "5x7",
+      "note": "5 X 7 : 50개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102019",
+      "name": "아웃오프 글램핑",
+      "raw": "3x5",
+      "note": "3 X 5 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102234",
+      "name": "이지파크캠핑장",
+      "raw": "9x9",
+      "note": "9 X 9 : 18개&nbsp; · &nbsp;8 X 8 : 16개&nbsp; · &nbsp;9 X 13 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1024",
+      "name": "마이산 풍혈냉천 캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 10개&nbsp; · &nbsp;5 X 6 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101759",
+      "name": "캠핑요기야",
+      "raw": "8x7",
+      "note": "8 X 7 : 16개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102189",
+      "name": "다포캠핑장",
+      "raw": "850x500",
+      "note": "850 X 500 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102218",
+      "name": "신선오토캠핑장",
+      "raw": "8x9",
+      "note": "8 X 9 : 18개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1802",
+      "name": "송지호 오토 캠핑장",
+      "raw": "3x4",
+      "note": "3 X 4 : 90개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101940",
+      "name": "시인의 마을 관광농원",
+      "raw": "6x8",
+      "note": "6 X 8 : 30개&nbsp; · &nbsp;6 X 6 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "31",
+      "name": "원주느린숲캠프",
+      "raw": "4x6",
+      "note": "4 X 6 : 16개&nbsp; · &nbsp;6 X 7 : 24개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1508",
+      "name": "산울림관광농원",
+      "raw": "7x8",
+      "note": "7 X 8 : 12개&nbsp; · &nbsp;9 X 10 : 18개&nbsp; · &nbsp;8 X 8 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102095",
+      "name": "바람재 오토캠핑장",
+      "raw": "8x9",
+      "note": "8 X 9 : 16개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101906",
+      "name": "한계령 힐링 캠핑장",
+      "raw": "10x10",
+      "note": "10 X 10 : 14개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1260",
+      "name": "백도오토캠핑장",
+      "raw": "7x5",
+      "note": "7 X 5 : 28개&nbsp; · &nbsp;4 X 3 : 46개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102115",
+      "name": "신춘원 오토캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 5개&nbsp; · &nbsp;4 X 8 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "168",
+      "name": "강촌포도팬션&캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 6개&nbsp; · &nbsp;4 X 13 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1984",
+      "name": "아빠가 만든 캠핑장",
+      "raw": "8x9",
+      "note": "8 X 9 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7528",
+      "name": "고창갯벌오토캠핑&글램핑",
+      "raw": "3x6",
+      "note": "3 X 6 : 7개&nbsp; · &nbsp;5 X 5 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100177",
+      "name": "양양 고인돌 오토캠핑장",
+      "raw": "650x840",
+      "note": "650 X 840 : 12개&nbsp; · &nbsp;770 X 1000 : 12개&nbsp; · &nbsp;650 X 1000 : 21개",
+      "src": "gocamping"
+    },
+    {
+      "id": "769",
+      "name": "대저생태공원캠핑장",
+      "raw": "10x10",
+      "note": "10 X 10 : 53개&nbsp; · &nbsp;10 X 12 : 16개&nbsp; · &nbsp;12 X 12 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2968",
+      "name": "초전마을야영장",
+      "raw": "4x4",
+      "note": "4 X 4 : 24개&nbsp; · &nbsp;4 X 7 : 21개&nbsp; · &nbsp;8 X 8 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3431",
+      "name": "함양용추오토캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 28개&nbsp; · &nbsp;6 X 7 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3520",
+      "name": "호식이 캠핑장",
+      "raw": "6x7",
+      "note": "6 X 7 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101513",
+      "name": "포림관광농원",
+      "raw": "5x7",
+      "note": "5 X 7 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1043",
+      "name": "매일민박야영장",
+      "raw": "6x10",
+      "note": "6 X 10 : 29개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6790",
+      "name": "마실 캠핑장",
+      "raw": "10x10",
+      "note": "10 X 10 : 50개",
+      "src": "gocamping"
+    },
+    {
+      "id": "944",
+      "name": "또올래캠핑장",
+      "raw": "7x9",
+      "note": "7 X 9 : 100개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1336",
+      "name": "진안고원 숲 펜션&캠핑장",
+      "raw": "3x3",
+      "note": "3 X 3 : 15개&nbsp; · &nbsp;3 X 3 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1709",
+      "name": "소나무와 계곡 캠핑장",
+      "raw": "6x7",
+      "note": "6 X 7 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101278",
+      "name": "포천 서울근교 글램핑 조이풀",
+      "raw": "7x3",
+      "note": "7 X 3 : 11개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101976",
+      "name": "달빛소나타",
+      "raw": "3x6",
+      "note": "3 X 6 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "948",
+      "name": "뜨란솔 캠핑장",
+      "raw": "6x7",
+      "note": "6 X 7 : 50개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3222",
+      "name": "패밀리오토캠핑장(한국전통문화체험학교)",
+      "raw": "8x8",
+      "note": "8 X 8 : 25개&nbsp; · &nbsp;10 X 10 : 25개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8054",
+      "name": "별빛하늘 카라반 캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1503",
+      "name": "산여울캠핑장",
+      "raw": "6x7",
+      "note": "6 X 7 : 10개&nbsp; · &nbsp;7 X 8 : 17개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2372",
+      "name": "용두산오토캠핑장",
+      "raw": "4x5",
+      "note": "4 X 5 : 20개&nbsp; · &nbsp;5 X 7 : 8개&nbsp; · &nbsp;5 X 7 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6978",
+      "name": "두산 캠핑장",
+      "raw": "10x10",
+      "note": "10 X 10 : 4개&nbsp; · &nbsp;8 X 10 : 20개&nbsp; · &nbsp;8 X 8 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3369",
+      "name": "하얀여울",
+      "raw": "6x7",
+      "note": "6 X 7 : 29개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3519",
+      "name": "호수캠핑장",
+      "raw": "5x6",
+      "note": "5 X 6 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "503",
+      "name": "김삿갓휴게소 체험 캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 16개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7748",
+      "name": "KEROAIN CAMP",
+      "raw": "6x9",
+      "note": "6 X 9 : 13개&nbsp; · &nbsp;8 X 9 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1114",
+      "name": "무주 솔밭야영장",
+      "raw": "3x3",
+      "note": "3 X 3 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1684",
+      "name": "성당포구 금강체험관 야영장",
+      "raw": "4x5",
+      "note": "4 X 5 : 8개&nbsp; · &nbsp;5 X 3 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2363",
+      "name": "요기는캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 36개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100179",
+      "name": "영월가자 펜션&캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 18개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101731",
+      "name": "아르르하우스",
+      "raw": "8x7",
+      "note": "8 X 7 : 2개&nbsp; · &nbsp;20 X 30 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102132",
+      "name": "꼬리별 캠핑",
+      "raw": "4x4",
+      "note": "4 X 4 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1234",
+      "name": "밤별2 캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 30개&nbsp; · &nbsp;6 X 9 : 50개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1587",
+      "name": "새막골 캠프",
+      "raw": "8x10",
+      "note": "8 X 10 : 23개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2911",
+      "name": "청산 캠프",
+      "raw": "6x7",
+      "note": "6 X 7 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102170",
+      "name": "쉼오지캠프캠핑장",
+      "raw": "14x10",
+      "note": "14 X 10 : 5개&nbsp; · &nbsp;10 X 8 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "502",
+      "name": "김삿갓계곡캠핑장",
+      "raw": "6x4",
+      "note": "6 X 4 : 20개&nbsp; · &nbsp;5 X 6 : 35개",
+      "src": "gocamping"
+    },
+    {
+      "id": "643",
+      "name": "영월계곡 느티별캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 38개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3619",
+      "name": "영월키즈캠핑장",
+      "raw": "8x9",
+      "note": "8 X 9 : 80개",
+      "src": "gocamping"
+    },
+    {
+      "id": "913",
+      "name": "두산분교 캠핑장",
+      "raw": "9x11",
+      "note": "9 X 11 : 30개&nbsp; · &nbsp;7 X 9 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2573",
+      "name": "인제연가리오토캠핑장펜션",
+      "raw": "9x11",
+      "note": "9 X 11 : 29개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6778",
+      "name": "더좋은 펜션 캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 17개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8080",
+      "name": "평창하늘캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102136",
+      "name": "소야캠프",
+      "raw": "4x4",
+      "note": "4 X 4 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "549",
+      "name": "낙동강 레포츠밸리 강변오토캠핑장",
+      "raw": "10x8",
+      "note": "10 X 8 : 7개&nbsp; · &nbsp;10 X 8 : 29개",
+      "src": "gocamping"
+    },
+    {
+      "id": "767",
+      "name": "용인 대장금파크 캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102146",
+      "name": "히릿담터캠핑장",
+      "raw": "6x9",
+      "note": "6 X 9 : 14개&nbsp; · &nbsp;9 X 9 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101817",
+      "name": "라라랜드",
+      "raw": "6x12",
+      "note": "6 X 12 : 38개&nbsp; · &nbsp;9 X 10 : 5개&nbsp; · &nbsp;9 X 8 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102074",
+      "name": "공룡자연 팜핑장",
+      "raw": "10x9",
+      "note": "10 X 9 : 22개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2063",
+      "name": "한별마을 야영장",
+      "raw": "2x3",
+      "note": "2 X 3 : 32개&nbsp; · &nbsp;4 X 8 : 33개&nbsp; · &nbsp;3 X 6 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101888",
+      "name": "반딧불캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 5개&nbsp; · &nbsp;6 X 7 : 5개&nbsp; · &nbsp;6 X 5 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "357",
+      "name": "구리 토평 가족캠핑장",
+      "raw": "4x4",
+      "note": "4 X 4 : 28개",
+      "src": "gocamping"
+    },
+    {
+      "id": "777",
+      "name": "물소리",
+      "raw": "5x5",
+      "note": "5 X 5 : 60개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1528",
+      "name": "산정호수글램핑",
+      "raw": "3x3",
+      "note": "3 X 3 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7975",
+      "name": "양평카라반파파",
+      "raw": "3x3",
+      "note": "3 X 3 : 5개&nbsp; · &nbsp;4 X 4 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101472",
+      "name": "위고고 제천점",
+      "raw": "6x3",
+      "note": "6 X 3 : 35개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101629",
+      "name": "갤럭시엑스 호텔형 카라반 글램핑&펜션",
+      "raw": "10x12",
+      "note": "10 X 12 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "800",
+      "name": "덕동계곡오토캠핑장",
+      "raw": "10x8",
+      "note": "10 X 8 : 32개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2765",
+      "name": "상의자동차야영장",
+      "raw": "6x7",
+      "note": "6 X 7 : 24개&nbsp; · &nbsp;5 X 7 : 24개&nbsp; · &nbsp;8 X 9 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100957",
+      "name": "경주 쿠키야영장",
+      "raw": "12x8",
+      "note": "12 X 8 : 15개&nbsp; · &nbsp;12 X 9 : 15개&nbsp; · &nbsp;10 X 7 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101462",
+      "name": "단양 별마루캠핑장",
+      "raw": "5x10",
+      "note": "5 X 10 : 4개&nbsp; · &nbsp;5 X 6 : 5개&nbsp; · &nbsp;6 X 6 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "813",
+      "name": "덕유산700휠링캠프",
+      "raw": "3x4",
+      "note": "3 X 4 : 7개&nbsp; · &nbsp;8 X 5 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100764",
+      "name": "산우물 북 캠핑장",
+      "raw": "5x6",
+      "note": "5 X 6 : 10개&nbsp; · &nbsp;8 X 8 : 17개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102089",
+      "name": "개네집캠핑장",
+      "raw": "6x7",
+      "note": "6 X 7 : 13개&nbsp; · &nbsp;5 X 6 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102107",
+      "name": "더캠프 369",
+      "raw": "8x7",
+      "note": "8 X 7 : 7개&nbsp; · &nbsp;5 X 6 : 5개&nbsp; · &nbsp;4 X 4 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2700",
+      "name": "정양레포츠공원 오토캠핑장",
+      "raw": "9x8",
+      "note": "9 X 8 : 123개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6744",
+      "name": "그린오토캠핑장",
+      "raw": "7x7",
+      "note": "7 X 7 : 32개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101117",
+      "name": "양명힐링캠프",
+      "raw": "7x7",
+      "note": "7 X 7 : 3개&nbsp; · &nbsp;7 X 6 : 7개&nbsp; · &nbsp;5 X 5 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102114",
+      "name": "스테이고가수",
+      "raw": "5x6",
+      "note": "5 X 6 : 10개&nbsp; · &nbsp;4 X 6 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3482",
+      "name": "행복숲체험원 오토캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 6개&nbsp; · &nbsp;3 X 4 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101370",
+      "name": "돈내코 야영장",
+      "raw": "5x5",
+      "note": "5 X 5 : 14개&nbsp; · &nbsp;5 X 4 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101739",
+      "name": "선감 캠핑장",
+      "raw": "8x6",
+      "note": "8 X 6 : 17개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100423",
+      "name": "신불산 베이스캠프 오토캠핑장",
+      "raw": "10x9",
+      "note": "10 X 9 : 30개&nbsp; · &nbsp;15 X 9 : 2개&nbsp; · &nbsp;7 X 7 : 26개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2616",
+      "name": "자라섬 캠핑장",
+      "raw": "4x4",
+      "note": "4 X 4 : 104개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101741",
+      "name": "너우리 캠핑농원",
+      "raw": "4x6",
+      "note": "4 X 6 : 10개&nbsp; · &nbsp;5 X 7 : 28개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101743",
+      "name": "다옴 캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 4개&nbsp; · &nbsp;5 X 5 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101833",
+      "name": "마차박물관 어린이체험 캠핑장",
+      "raw": "7x7",
+      "note": "7 X 7 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101950",
+      "name": "고원힐링캠핑장",
+      "raw": "6x3",
+      "note": "6 X 3 : 9개&nbsp; · &nbsp;5 X 6 : 3개&nbsp; · &nbsp;10 X 10 : 28개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102015",
+      "name": "메종드글램",
+      "raw": "5x3",
+      "note": "5 X 3 : 14개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1499",
+      "name": "별빛캠핑장",
+      "raw": "7x9",
+      "note": "7 X 9 : 5개&nbsp; · &nbsp;6 X 8 : 13개&nbsp; · &nbsp;8 X 6 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7757",
+      "name": "가야산오토캠핑장",
+      "raw": "6x7",
+      "note": "6 X 7 : 12개&nbsp; · &nbsp;8 X 8 : 21개&nbsp; · &nbsp;6 X 6 : 17개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101101",
+      "name": "북한산 사기막야영장",
+      "raw": "5x8",
+      "note": "5 X 8 : 9개&nbsp; · &nbsp;3 X 6 : 15개&nbsp; · &nbsp;5 X 7 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1876",
+      "name": "쉬리마을 농어촌 관광 휴양단지 야영장",
+      "raw": "5x8",
+      "note": "5 X 8 : 90개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2216",
+      "name": "김포캠핑파크 주식회사",
+      "raw": "4x6",
+      "note": "4 X 6 : 50개&nbsp; · &nbsp;6 X 6 : 30개&nbsp; · &nbsp;7 X 7 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2506",
+      "name": "가평아일렛 위크팜 글램핑",
+      "raw": "4x8",
+      "note": "4 X 8 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2929",
+      "name": "청암관광농원",
+      "raw": "10x10",
+      "note": "10 X 10 : 47개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6959",
+      "name": "국립화천숲속야영장",
+      "raw": "5x6",
+      "note": "5 X 6 : 39개&nbsp; · &nbsp;5 X 7 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7029",
+      "name": "용인반딧불캠핑장",
+      "raw": "4x5",
+      "note": "4 X 5 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7080",
+      "name": "팔현야영장",
+      "raw": "5x4",
+      "note": "5 X 4 : 14개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7167",
+      "name": "숲속에안뜰 캠핑장",
+      "raw": "8x5",
+      "note": "8 X 5 : 23개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7826",
+      "name": "연천 전곡리유적 구석기 체험숲",
+      "raw": "7x7",
+      "note": "7 X 7 : 45개&nbsp; · &nbsp;6 X 5 : 6개&nbsp; · &nbsp;6 X 6 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7838",
+      "name": "가족캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 6개&nbsp; · &nbsp;8 X 12 : 14개&nbsp; · &nbsp;10 X 10 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8032",
+      "name": "약사밤나무집 캠핑장",
+      "raw": "6x4",
+      "note": "6 X 4 : 26개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8113",
+      "name": "아미캠핑장",
+      "raw": "6x7",
+      "note": "6 X 7 : 39개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100356",
+      "name": "리틀 포레스트 캠핑",
+      "raw": "3x6",
+      "note": "3 X 6 : 5개&nbsp; · &nbsp;4 X 6 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100407",
+      "name": "잣숲캠핑장",
+      "raw": "4x7",
+      "note": "4 X 7 : 8개&nbsp; · &nbsp;4 X 12 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101147",
+      "name": "예담가족캠핑장",
+      "raw": "6x7",
+      "note": "6 X 7 : 39개&nbsp; · &nbsp;10 X 2 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101295",
+      "name": "테라피크닉",
+      "raw": "10x10",
+      "note": "10 X 10 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101297",
+      "name": "바베큐존파크",
+      "raw": "3x6",
+      "note": "3 X 6 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101384",
+      "name": "인더풀 글램핑",
+      "raw": "5x5",
+      "note": "5 X 5 : 17개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101499",
+      "name": "에이디디(ADD)캠핑장",
+      "raw": "8x9",
+      "note": "8 X 9 : 2개&nbsp; · &nbsp;7 X 8 : 2개&nbsp; · &nbsp;9 X 7 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101510",
+      "name": "썬스테이",
+      "raw": "3x7",
+      "note": "3 X 7 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101563",
+      "name": "어도숲 캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101617",
+      "name": "다온숲 노을 캠핑정원",
+      "raw": "3x6",
+      "note": "3 X 6 : 4개&nbsp; · &nbsp;3 X 9 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101627",
+      "name": "나무와 쉬리",
+      "raw": "6x8",
+      "note": "6 X 8 : 5개&nbsp; · &nbsp;7 X 9 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101654",
+      "name": "하늘숲 야영장",
+      "raw": "5x5",
+      "note": "5 X 5 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101664",
+      "name": "레드우드캠핑장",
+      "raw": "7x9",
+      "note": "7 X 9 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101729",
+      "name": "글램365 가평글램핑카라반",
+      "raw": "20x20",
+      "note": "20 X 20 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101767",
+      "name": "제임스글램핑",
+      "raw": "4x6",
+      "note": "4 X 6 : 6개&nbsp; · &nbsp;5 X 6 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101791",
+      "name": "해든",
+      "raw": "6x3",
+      "note": "6 X 3 : 12개&nbsp; · &nbsp;7 X 3 : 1개&nbsp; · &nbsp;8 X 5 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101840",
+      "name": "페르마타",
+      "raw": "9x5",
+      "note": "9 X 5 : 7개&nbsp; · &nbsp;9 X 12 : 12개&nbsp; · &nbsp;9 X 5 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "277",
+      "name": "홍천고인돌오토캠핑장",
+      "raw": "4x7",
+      "note": "4 X 7 : 3개&nbsp; · &nbsp;6 X 8 : 14개",
+      "src": "gocamping"
+    },
+    {
+      "id": "400",
+      "name": "칠보산자연휴양림야영장",
+      "raw": "2x3",
+      "note": "2 X 3 : 27개&nbsp; · &nbsp;3 X 3 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "434",
+      "name": "그린스톤오토캠핑장&펜션",
+      "raw": "8x8",
+      "note": "8 X 8 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "482",
+      "name": "금오산힐링캠프",
+      "raw": "6x4",
+      "note": "6 X 4 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "633",
+      "name": "봉좌마을 캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 23개&nbsp; · &nbsp;6 X 8 : 8개&nbsp; · &nbsp;6 X 10 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "646",
+      "name": "늘편한캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1112",
+      "name": "무주 구천동 캠핑장",
+      "raw": "8x5",
+      "note": "8 X 5 : 27개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6971",
+      "name": "대관령자연휴양림야영장",
+      "raw": "3x3",
+      "note": "3 X 3 : 33개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7879",
+      "name": "구곡폭포 국민여가 캠핑장",
+      "raw": "3x4",
+      "note": "3 X 4 : 1개&nbsp; · &nbsp;7 X 4 : 1개&nbsp; · &nbsp;4 X 2 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7956",
+      "name": "삼강나루캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100357",
+      "name": "유명산 258",
+      "raw": "4x5",
+      "note": "4 X 5 : 6개&nbsp; · &nbsp;8 X 7 : 5개&nbsp; · &nbsp;7 X 7 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100577",
+      "name": "오손도손캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101403",
+      "name": "계룡산 갑사자동차야영장",
+      "raw": "5x8",
+      "note": "5 X 8 : 21개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101448",
+      "name": "법흥계곡캠핑오늘",
+      "raw": "5x10",
+      "note": "5 X 10 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101646",
+      "name": "캠프1361",
+      "raw": "7x8",
+      "note": "7 X 8 : 6개&nbsp; · &nbsp;4 X 6 : 7개&nbsp; · &nbsp;5 X 8 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101655",
+      "name": "산정원",
+      "raw": "3x6",
+      "note": "3 X 6 : 12개&nbsp; · &nbsp;3 X 8 : 2개&nbsp; · &nbsp;6 X 8 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101709",
+      "name": "내포캠핑스퀘어2",
+      "raw": "10x7",
+      "note": "10 X 7 : 4개&nbsp; · &nbsp;10 X 8 : 29개&nbsp; · &nbsp;15 X 8 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101828",
+      "name": "청산캠핑장",
+      "raw": "7x7",
+      "note": "7 X 7 : 24개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101858",
+      "name": "평창오렌지캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 8개&nbsp; · &nbsp;4 X 6 : 8개&nbsp; · &nbsp;10 X 6 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101946",
+      "name": "부곡허브농원캠핑장",
+      "raw": "4x4",
+      "note": "4 X 4 : 2개&nbsp; · &nbsp;4 X 5 : 10개&nbsp; · &nbsp;5 X 6 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101952",
+      "name": "늘편한캠핑장(2)",
+      "raw": "4x6",
+      "note": "4 X 6 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1770",
+      "name": "솔밭체육공원오토캠핑장",
+      "raw": "9x8",
+      "note": "9 X 8 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2977",
+      "name": "추억촌",
+      "raw": "4x6",
+      "note": "4 X 6 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6856",
+      "name": "연지곤지 캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7254",
+      "name": "평화누리캠핑장",
+      "raw": "8x6",
+      "note": "8 X 6 : 22개&nbsp; · &nbsp;5 X 10 : 8개&nbsp; · &nbsp;8 X 12 : 28개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100204",
+      "name": "캠프 고토일",
+      "raw": "6x8",
+      "note": "6 X 8 : 4개&nbsp; · &nbsp;6 X 10 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101290",
+      "name": "하슬라 캠핑장",
+      "raw": "9x10",
+      "note": "9 X 10 : 14개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101422",
+      "name": "유포리아 캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 13개&nbsp; · &nbsp;6 X 8 : 2개&nbsp; · &nbsp;6 X 7 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101643",
+      "name": "다올 캠핑장",
+      "raw": "8x9",
+      "note": "8 X 9 : 12개&nbsp; · &nbsp;6 X 10 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101710",
+      "name": "덕적도 자연휴양림 야영장",
+      "raw": "4x5",
+      "note": "4 X 5 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101714",
+      "name": "밤하늘별캠프",
+      "raw": "6x9",
+      "note": "6 X 9 : 17개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101721",
+      "name": "선돌느티나무캠핑마을 영농조합법인",
+      "raw": "500x600",
+      "note": "500 X 600 : 13개&nbsp; · &nbsp;1000 X 800 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101777",
+      "name": "산과 벗 캠핑장",
+      "raw": "6x9",
+      "note": "6 X 9 : 14개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101780",
+      "name": "수대울 캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 46개&nbsp; · &nbsp;7 X 20 : 1개&nbsp; · &nbsp;8 X 20 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101784",
+      "name": "계절감각글램핑엔카라반",
+      "raw": "4x9",
+      "note": "4 X 9 : 3개&nbsp; · &nbsp;3 X 10 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101805",
+      "name": "도프앙 캠핑",
+      "raw": "5x6",
+      "note": "5 X 6 : 11개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101848",
+      "name": "오후애캠핑",
+      "raw": "6x10",
+      "note": "6 X 10 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101849",
+      "name": "카라반캠핑 고요",
+      "raw": "25x25",
+      "note": "25 X 25 : 1개&nbsp; · &nbsp;15 X 20 : 2개&nbsp; · &nbsp;12 X 20 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101886",
+      "name": "홈사리캠핑장",
+      "raw": "15x7",
+      "note": "15 X 7 : 9개&nbsp; · &nbsp;8 X 8 : 5개&nbsp; · &nbsp;4 X 3 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101894",
+      "name": "명마동 캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101937",
+      "name": "캠프그린비",
+      "raw": "6x6",
+      "note": "6 X 6 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101939",
+      "name": "더 글램",
+      "raw": "4x7",
+      "note": "4 X 7 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101973",
+      "name": "고성동화캠핑장",
+      "raw": "11x8",
+      "note": "11 X 8 : 11개&nbsp; · &nbsp;12 X 7 : 8개&nbsp; · &nbsp;12 X 8 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101978",
+      "name": "스노우피크 에버랜드 캠프필드",
+      "raw": "10x10",
+      "note": "10 X 10 : 14개&nbsp; · &nbsp;9 X 11 : 26개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101994",
+      "name": "화금지 숲속캠핑장",
+      "raw": "9x9",
+      "note": "9 X 9 : 31개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102003",
+      "name": "바다요새",
+      "raw": "9x10",
+      "note": "9 X 10 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102008",
+      "name": "고슬로우 캠핑장",
+      "raw": "10x12",
+      "note": "10 X 12 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102011",
+      "name": "용오름밸리 캠핑장",
+      "raw": "6x9",
+      "note": "6 X 9 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "484",
+      "name": "금은모래 캠핑장",
+      "raw": "6x5",
+      "note": "6 X 5 : 25개&nbsp; · &nbsp;7 X 5 : 52개&nbsp; · &nbsp;8 X 7 : 74개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2031",
+      "name": "안성맞춤 캠핑장",
+      "raw": "6x9",
+      "note": "6 X 9 : 35개&nbsp; · &nbsp;5 X 7 : 12개&nbsp; · &nbsp;10 X 9 : 24개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100620",
+      "name": "영도 마리노 오토캠핑장",
+      "raw": "5x8",
+      "note": "5 X 8 : 12개&nbsp; · &nbsp;6 X 11 : 40개&nbsp; · &nbsp;9 X 13 : 11개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3056",
+      "name": "캠프원오토캠핑",
+      "raw": "12x7",
+      "note": "12 X 7 : 227개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3160",
+      "name": "통고산 자연휴양림야영장",
+      "raw": "3x3",
+      "note": "3 X 3 : 12개&nbsp; · &nbsp;3 X 3 : 10개&nbsp; · &nbsp;2 X 2 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6984",
+      "name": "몽산포 자동차 야영장",
+      "raw": "5x5",
+      "note": "5 X 5 : 155개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3633",
+      "name": "힐사이드",
+      "raw": "7x8",
+      "note": "7 X 8 : 40개&nbsp; · &nbsp;10 X 10 : 25개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101508",
+      "name": "주식회사 조이파크",
+      "raw": "9x6",
+      "note": "9 X 6 : 19개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102073",
+      "name": "코브 노마드",
+      "raw": "10x10",
+      "note": "10 X 10 : 40개&nbsp; · &nbsp;20 X 20 : 1개&nbsp; · &nbsp;8 X 8 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "889",
+      "name": "망상오토캠핑리조트",
+      "raw": "3x5",
+      "note": "3 X 5 : 41개",
+      "src": "gocamping"
+    },
+    {
+      "id": "696",
+      "name": "달궁자동차야영장",
+      "raw": "5x8",
+      "note": "5 X 8 : 78개&nbsp; · &nbsp;5 X 8 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "701",
+      "name": "LAFORESTA(라포레스타)",
+      "raw": "7x8",
+      "note": "7 X 8 : 10개&nbsp; · &nbsp;8 X 10 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6865",
+      "name": "왕송호수 캠핑장",
+      "raw": "4x4",
+      "note": "4 X 4 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7895",
+      "name": "붉은오름 자연휴양림 숲속 야영장",
+      "raw": "5x4",
+      "note": "5 X 4 : 11개&nbsp; · &nbsp;4 X 4 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3034",
+      "name": "케이 캠핑장(K캠핑장)",
+      "raw": "11x9",
+      "note": "11 X 9 : 19개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3105",
+      "name": "석산계곡 코코비발디글램핑 카라반 오토캠핑장",
+      "raw": "6x7",
+      "note": "6 X 7 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6743",
+      "name": "구학희망캠핑장",
+      "raw": "7x9",
+      "note": "7 X 9 : 5개&nbsp; · &nbsp;9 X 10 : 15개&nbsp; · &nbsp;15 X 50 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7613",
+      "name": "황산도캠핑장",
+      "raw": "3x8",
+      "note": "3 X 8 : 5개&nbsp; · &nbsp;4 X 4 : 11개&nbsp; · &nbsp;7 X 8 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101266",
+      "name": "단양 패러캠핑장",
+      "raw": "8x9",
+      "note": "8 X 9 : 2개&nbsp; · &nbsp;10 X 12 : 4개&nbsp; · &nbsp;10 X 7 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101313",
+      "name": "별빛갯벌캠핑장",
+      "raw": "8x6",
+      "note": "8 X 6 : 18개&nbsp; · &nbsp;8 X 8 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101314",
+      "name": "일월관광농원 캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 14개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101368",
+      "name": "스테이아웃",
+      "raw": "7x8",
+      "note": "7 X 8 : 10개&nbsp; · &nbsp;7 X 7 : 6개&nbsp; · &nbsp;7 X 6 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101446",
+      "name": "화봉캠핑클럽",
+      "raw": "7x7",
+      "note": "7 X 7 : 11개&nbsp; · &nbsp;6 X 5 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101468",
+      "name": "구름포해변캠핑장",
+      "raw": "8x9",
+      "note": "8 X 9 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "124",
+      "name": "각화산캠핑장",
+      "raw": "7x7",
+      "note": "7 X 7 : 7개&nbsp; · &nbsp;7 X 8 : 9개&nbsp; · &nbsp;10 X 12 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "231",
+      "name": "계룡산글램핑 동월숲",
+      "raw": "8x5",
+      "note": "8 X 5 : 18개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1173",
+      "name": "미산가족오토캠핑장",
+      "raw": "7x11",
+      "note": "7 X 11 : 12개&nbsp; · &nbsp;5 X 11 : 3개&nbsp; · &nbsp;7 X 8 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1719",
+      "name": "소백산오토캠핑장",
+      "raw": "7x10",
+      "note": "7 X 10 : 35개&nbsp; · &nbsp;4 X 7 : 3개&nbsp; · &nbsp;5 X 5 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2288",
+      "name": "맑은숲캠프",
+      "raw": "7x10",
+      "note": "7 X 10 : 17개&nbsp; · &nbsp;7 X 8 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6968",
+      "name": "단양 남천 야영장",
+      "raw": "5x7",
+      "note": "5 X 7 : 6개&nbsp; · &nbsp;6 X 9 : 15개&nbsp; · &nbsp;7 X 10 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8050",
+      "name": "무주 더 스위트 글램핑",
+      "raw": "5x10",
+      "note": "5 X 10 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101250",
+      "name": "펀펀오토캠핑장",
+      "raw": "15x7",
+      "note": "15 X 7 : 3개&nbsp; · &nbsp;10 X 8 : 17개&nbsp; · &nbsp;9 X 9 : 52개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101319",
+      "name": "숯숯",
+      "raw": "3x8",
+      "note": "3 X 8 : 1개&nbsp; · &nbsp;3 X 6 : 14개&nbsp; · &nbsp;5 X 8 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101329",
+      "name": "캠핑스테이 청포대",
+      "raw": "8x6",
+      "note": "8 X 6 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101358",
+      "name": "랜드글램핑",
+      "raw": "8x5",
+      "note": "8 X 5 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101360",
+      "name": "레이크힐 캠프",
+      "raw": "10x10",
+      "note": "10 X 10 : 20개&nbsp; · &nbsp;2 X 7 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101364",
+      "name": "캠프히어",
+      "raw": "4x5",
+      "note": "4 X 5 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101381",
+      "name": "히어위고 글램핑&바베큐",
+      "raw": "4x4",
+      "note": "4 X 4 : 11개&nbsp; · &nbsp;4 X 10 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101398",
+      "name": "마이산 가자캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 21개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101483",
+      "name": "금산 뮤지엄B캠핑장",
+      "raw": "2x8",
+      "note": "2 X 8 : 2개&nbsp; · &nbsp;2 X 9 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101524",
+      "name": "신두리 오렌지 캠핑장",
+      "raw": "8x7",
+      "note": "8 X 7 : 27개&nbsp; · &nbsp;7 X 7 : 4개&nbsp; · &nbsp;15 X 7 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101550",
+      "name": "조이포레",
+      "raw": "3x5",
+      "note": "3 X 5 : 9개&nbsp; · &nbsp;6 X 9 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101583",
+      "name": "Lazy Joe",
+      "raw": "5x10",
+      "note": "5 X 10 : 5개&nbsp; · &nbsp;4 X 7 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101591",
+      "name": "파티엔 카라반 글램핑 펜션캠핑-충남서산태안점",
+      "raw": "2x7",
+      "note": "2 X 7 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101648",
+      "name": "캠프 해놀",
+      "raw": "9x9",
+      "note": "9 X 9 : 13개&nbsp; · &nbsp;14 X 10 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "604",
+      "name": "노르딕 민박",
+      "raw": "2x4",
+      "note": "2 X 4 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1324",
+      "name": "별드림캠핑장",
+      "raw": "9x8",
+      "note": "9 X 8 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3205",
+      "name": "팔봉글램핑",
+      "raw": "2x4",
+      "note": "2 X 4 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3375",
+      "name": "하이락글램핑",
+      "raw": "6x7",
+      "note": "6 X 7 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6817",
+      "name": "블루비치 관광농원",
+      "raw": "5x10",
+      "note": "5 X 10 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6990",
+      "name": "밤골야영장",
+      "raw": "6x8",
+      "note": "6 X 8 : 22개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7407",
+      "name": "솔밭캠프",
+      "raw": "10x8",
+      "note": "10 X 8 : 32개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7930",
+      "name": "대둔산 수락오토캠핑장",
+      "raw": "15x15",
+      "note": "15 X 15 : 32개&nbsp; · &nbsp;20 X 15 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101340",
+      "name": "그린바움캠핑장",
+      "raw": "7x7",
+      "note": "7 X 7 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101376",
+      "name": "남해에코촌",
+      "raw": "7x15",
+      "note": "7 X 15 : 22개&nbsp; · &nbsp;9 X 15 : 8개&nbsp; · &nbsp;9 X 15 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101427",
+      "name": "골드문 오토캠핑장",
+      "raw": "3x9",
+      "note": "3 X 9 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101434",
+      "name": "포애뜰",
+      "raw": "7x6",
+      "note": "7 X 6 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101455",
+      "name": "큰마당 오토 캠핑장",
+      "raw": "7x12",
+      "note": "7 X 12 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101559",
+      "name": "캠핑노리",
+      "raw": "13x7",
+      "note": "13 X 7 : 13개&nbsp; · &nbsp;13 X 20 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101588",
+      "name": "신암저수지 숲속야영장",
+      "raw": "5x6",
+      "note": "5 X 6 : 13개&nbsp; · &nbsp;8 X 9 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101611",
+      "name": "깨비깨비",
+      "raw": "3x4",
+      "note": "3 X 4 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101632",
+      "name": "빨래터캠핑장",
+      "raw": "8x9",
+      "note": "8 X 9 : 8개&nbsp; · &nbsp;7 X 9 : 7개&nbsp; · &nbsp;8 X 8 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2373",
+      "name": "용두해수욕장 숲속야영장",
+      "raw": "4x5",
+      "note": "4 X 5 : 40개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101261",
+      "name": "파주 옥돌캠핑장",
+      "raw": "9x8",
+      "note": "9 X 8 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101388",
+      "name": "돌담캠핑장",
+      "raw": "7x9",
+      "note": "7 X 9 : 5개&nbsp; · &nbsp;9 X 10 : 15개&nbsp; · &nbsp;15 X 20 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101394",
+      "name": "별빛 오토캠핑장",
+      "raw": "9x5",
+      "note": "9 X 5 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101460",
+      "name": "바이올린글램핑&카라반",
+      "raw": "2x7",
+      "note": "2 X 7 : 10개&nbsp; · &nbsp;4 X 9 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101584",
+      "name": "방산면 송현리 캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101635",
+      "name": "금강호 국민여가 캠핑장",
+      "raw": "4x8",
+      "note": "4 X 8 : 13개&nbsp; · &nbsp;8 X 9 : 28개",
+      "src": "gocamping"
+    },
+    {
+      "id": "121",
+      "name": "숨쉬는고래",
+      "raw": "4x6",
+      "note": "4 X 6 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1222",
+      "name": "반딧골캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 10개&nbsp; · &nbsp;6 X 7 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101911",
+      "name": "도지캠핑",
+      "raw": "6x5",
+      "note": "6 X 5 : 14개&nbsp; · &nbsp;5 X 5 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101161",
+      "name": "초이휴캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 18개&nbsp; · &nbsp;5 X 7 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100554",
+      "name": "숩쏙캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100709",
+      "name": "THE쉼오토캠핑장",
+      "raw": "8x9",
+      "note": "8 X 9 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2263",
+      "name": "예당관광지 국민여가캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 27개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1225",
+      "name": "반딧불자연캠핑장",
+      "raw": "3x7",
+      "note": "3 X 7 : 15개&nbsp; · &nbsp;5 X 10 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1438",
+      "name": "태안 안면도 비비애견동반캠핑장",
+      "raw": "7x7",
+      "note": "7 X 7 : 14개&nbsp; · &nbsp;4 X 6 : 19개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3275",
+      "name": "포천 화적연 캠핑장",
+      "raw": "6x7",
+      "note": "6 X 7 : 16개&nbsp; · &nbsp;6 X 7 : 25개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3354",
+      "name": "하늘야영장",
+      "raw": "5x5",
+      "note": "5 X 5 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6768",
+      "name": "대가야농촌문화체험특구 캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 15개&nbsp; · &nbsp;6 X 7 : 8개&nbsp; · &nbsp;6 X 7 : 11개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7401",
+      "name": "배론의아침",
+      "raw": "10x10",
+      "note": "10 X 10 : 15개&nbsp; · &nbsp;10 X 11 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102031",
+      "name": "대운산 하늘숲 야영장",
+      "raw": "7x7",
+      "note": "7 X 7 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "716",
+      "name": "당항포관광지 오토캠핑장",
+      "raw": "8x10",
+      "note": "8 X 10 : 118개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3263",
+      "name": "포시즌파크",
+      "raw": "10x13",
+      "note": "10 X 13 : 25개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7026",
+      "name": "와룡자연휴양림 자동차야영장",
+      "raw": "7x5",
+      "note": "7 X 5 : 18개&nbsp; · &nbsp;3 X 3 : 100개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7134",
+      "name": "두리캠핑장",
+      "raw": "7x7",
+      "note": "7 X 7 : 39개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101814",
+      "name": "스므나리 캠핑장",
+      "raw": "10x10",
+      "note": "10 X 10 : 16개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101816",
+      "name": "서두물야영장",
+      "raw": "6x8",
+      "note": "6 X 8 : 10개&nbsp; · &nbsp;3 X 9 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2210",
+      "name": "열린캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 11개&nbsp; · &nbsp;5 X 8 : 10개&nbsp; · &nbsp;8 X 10 : 18개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6946",
+      "name": "(주)청보리",
+      "raw": "4x6",
+      "note": "4 X 6 : 28개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101361",
+      "name": "서천 힐링 캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102029",
+      "name": "캠프빌리지 345",
+      "raw": "4x6",
+      "note": "4 X 6 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102032",
+      "name": "(에드203) 플라네캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 16개&nbsp; · &nbsp;15 X 7 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2917",
+      "name": "청산리오토캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 10개&nbsp; · &nbsp;5 X 6 : 14개&nbsp; · &nbsp;4 X 6 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101257",
+      "name": "모아이 캠프",
+      "raw": "7x8",
+      "note": "7 X 8 : 7개&nbsp; · &nbsp;14 X 8 : 2개&nbsp; · &nbsp;12 X 9 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101898",
+      "name": "스테이지 캠핑앤풀빌라",
+      "raw": "5x7",
+      "note": "5 X 7 : 2개&nbsp; · &nbsp;6 X 7 : 4개&nbsp; · &nbsp;6 X 9 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102000",
+      "name": "노아오토캠핑장",
+      "raw": "9x8",
+      "note": "9 X 8 : 2개&nbsp; · &nbsp;9 X 9 : 6개&nbsp; · &nbsp;7 X 8 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "102039",
+      "name": "내리 솔밭 캠핑장",
+      "raw": "7x7",
+      "note": "7 X 7 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "960",
+      "name": "라포레캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1477",
+      "name": "산내들캠핑",
+      "raw": "4x6",
+      "note": "4 X 6 : 6개&nbsp; · &nbsp;5 X 6 : 13개&nbsp; · &nbsp;6 X 11 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "408",
+      "name": "국토정중앙천문대야영장",
+      "raw": "5x6",
+      "note": "5 X 6 : 38개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2078",
+      "name": "양주산막골캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 50개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6998",
+      "name": "비체올린",
+      "raw": "7x12",
+      "note": "7 X 12 : 17개",
+      "src": "gocamping"
+    },
+    {
+      "id": "343",
+      "name": "교래생태체험장",
+      "raw": "5x5",
+      "note": "5 X 5 : 25개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1473",
+      "name": "산꽃벚꽃마을 오토캠핑장",
+      "raw": "7x5",
+      "note": "7 X 5 : 35개",
+      "src": "gocamping"
+    },
+    {
+      "id": "987",
+      "name": "리버힐즈 캠핑장(푸른농원)",
+      "raw": "6x8",
+      "note": "6 X 8 : 70개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2815",
+      "name": "지리산천왕봉오토캠핑장",
+      "raw": "5x9",
+      "note": "5 X 9 : 8개&nbsp; · &nbsp;4 X 11 : 11개&nbsp; · &nbsp;6 X 7 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101470",
+      "name": "소담캠핑장",
+      "raw": "5x4",
+      "note": "5 X 4 : 9개&nbsp; · &nbsp;6 X 3 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7642",
+      "name": "십리포해수욕장 야영장",
+      "raw": "4x5",
+      "note": "4 X 5 : 21개&nbsp; · &nbsp;3 X 5 : 2개&nbsp; · &nbsp;3 X 4 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1096",
+      "name": "묘솔",
+      "raw": "11x4",
+      "note": "11 X 4 : 3개&nbsp; · &nbsp;7 X 6 : 1개&nbsp; · &nbsp;8 X 5 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6943",
+      "name": "(주)밀모빨강치마자동차야영장",
+      "raw": "6x6",
+      "note": "6 X 6 : 50개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6944",
+      "name": "(주)수동자연마을 힐링별밤수목원캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 15개&nbsp; · &nbsp;4 X 5 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101988",
+      "name": "팜스테이",
+      "raw": "4x8",
+      "note": "4 X 8 : 8개&nbsp; · &nbsp;4 X 10 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101968",
+      "name": "소프(SOPH)",
+      "raw": "10x8",
+      "note": "10 X 8 : 8개&nbsp; · &nbsp;8 X 9 : 8개&nbsp; · &nbsp;18 X 10 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101972",
+      "name": "산골도깨비 캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2704",
+      "name": "휴힐링",
+      "raw": "12x7",
+      "note": "12 X 7 : 8개&nbsp; · &nbsp;13 X 8 : 6개&nbsp; · &nbsp;7 X 8 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "500",
+      "name": "길캠프",
+      "raw": "8x9",
+      "note": "8 X 9 : 40개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3588",
+      "name": "횡성산울림오토캠핑장",
+      "raw": "9x10",
+      "note": "9 X 10 : 28개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101566",
+      "name": "BE HAPPY",
+      "raw": "5x12",
+      "note": "5 X 12 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "721",
+      "name": "지리산 당근 오토캠핑장",
+      "raw": "10x8",
+      "note": "10 X 8 : 25개&nbsp; · &nbsp;10 X 7 : 9개&nbsp; · &nbsp;7 X 8 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1139",
+      "name": "문암생태공원",
+      "raw": "5x5",
+      "note": "5 X 5 : 10개&nbsp; · &nbsp;4 X 4 : 9개&nbsp; · &nbsp;4 X 5 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8073",
+      "name": "파인트리캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 35개&nbsp; · &nbsp;5 X 5 : 3개&nbsp; · &nbsp;6 X 6 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2487",
+      "name": "월악산레트로캠핑N민박",
+      "raw": "6x5",
+      "note": "6 X 5 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2492",
+      "name": "월악산억수솔밭캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 53개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7966",
+      "name": "에코캠프",
+      "raw": "5x7",
+      "note": "5 X 7 : 23개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101056",
+      "name": "오대천 휴 캠핑클럽",
+      "raw": "9x7",
+      "note": "9 X 7 : 9개&nbsp; · &nbsp;8 X 8 : 1개&nbsp; · &nbsp;10 X 6 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2226",
+      "name": "영월 동강오토캠핑장",
+      "raw": "5x8",
+      "note": "5 X 8 : 35개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3458",
+      "name": "해바라기 캠핑장",
+      "raw": "5x6",
+      "note": "5 X 6 : 20개&nbsp; · &nbsp;6 X 7 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100042",
+      "name": "월성자연캠핑야영장",
+      "raw": "11x6",
+      "note": "11 X 6 : 8개&nbsp; · &nbsp;7 X 7 : 2개&nbsp; · &nbsp;4 X 5 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101219",
+      "name": "어게인캠핑B",
+      "raw": "10x10",
+      "note": "10 X 10 : 34개&nbsp; · &nbsp;10 X 6 : 13개&nbsp; · &nbsp;5 X 7 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2116",
+      "name": "어은돌야영장",
+      "raw": "6x8",
+      "note": "6 X 8 : 100개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2482",
+      "name": "월선캠핑장",
+      "raw": "6x15",
+      "note": "6 X 15 : 3개&nbsp; · &nbsp;7 X 15 : 9개&nbsp; · &nbsp;10 X 10 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3085",
+      "name": "캠핑코리아 카라반오토캠핑장",
+      "raw": "7x2",
+      "note": "7 X 2 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100403",
+      "name": "가든글램핑 캠핑장",
+      "raw": "5x10",
+      "note": "5 X 10 : 8개&nbsp; · &nbsp;5 X 10 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101450",
+      "name": "피구지 관광농원",
+      "raw": "4x6",
+      "note": "4 X 6 : 4개&nbsp; · &nbsp;6 X 7 : 4개&nbsp; · &nbsp;11 X 11 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "320",
+      "name": "광교호수공원 가족캠핑장",
+      "raw": "3x3",
+      "note": "3 X 3 : 20개&nbsp; · &nbsp;5 X 7 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101311",
+      "name": "SOL Camping",
+      "raw": "3x5",
+      "note": "3 X 5 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101341",
+      "name": "천안 디디글램핑",
+      "raw": "5x9",
+      "note": "5 X 9 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101356",
+      "name": "바베큐팩토리캠핑장",
+      "raw": "8x4",
+      "note": "8 X 4 : 17개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101378",
+      "name": "판타스틱 캠프닉",
+      "raw": "7x7",
+      "note": "7 X 7 : 14개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101507",
+      "name": "에버오토캠핑장",
+      "raw": "9x9",
+      "note": "9 X 9 : 80개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101534",
+      "name": "숲캠핑장",
+      "raw": "10x10",
+      "note": "10 X 10 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101608",
+      "name": "원더 포레스트",
+      "raw": "6x7",
+      "note": "6 X 7 : 21개&nbsp; · &nbsp;6 X 7 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101618",
+      "name": "화성리프레시글램핑",
+      "raw": "3x12",
+      "note": "3 X 12 : 10개&nbsp; · &nbsp;4 X 8 : 20개&nbsp; · &nbsp;10 X 8 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7131",
+      "name": "단풍숲캠핑장",
+      "raw": "7x9",
+      "note": "7 X 9 : 64개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2032",
+      "name": "안성비봉산 캠핑장",
+      "raw": "7x9",
+      "note": "7 X 9 : 46개&nbsp; · &nbsp;7 X 12 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2051",
+      "name": "약수골캠프촌 숲속캠핑장",
+      "raw": "4x4",
+      "note": "4 X 4 : 6개&nbsp; · &nbsp;4 X 6 : 18개&nbsp; · &nbsp;5 X 8 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1678",
+      "name": "섬진강 마실캠핑장",
+      "raw": "6x7",
+      "note": "6 X 7 : 12개&nbsp; · &nbsp;5 X 5 : 3개&nbsp; · &nbsp;5 X 6 : 19개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2445",
+      "name": "국립운장산자연휴양림 야영장",
+      "raw": "3x3",
+      "note": "3 X 3 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8138",
+      "name": "휴먼캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 17개&nbsp; · &nbsp;9 X 9 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101839",
+      "name": "아싸캠프I",
+      "raw": "3x7",
+      "note": "3 X 7 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101867",
+      "name": "하냥살이 낙화놀이",
+      "raw": "10x10",
+      "note": "10 X 10 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6756",
+      "name": "놀터캠핑장",
+      "raw": "6x9",
+      "note": "6 X 9 : 17개&nbsp; · &nbsp;6 X 9 : 5개&nbsp; · &nbsp;7 X 6 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2812",
+      "name": "지리산오도재 힐링 캠핑장",
+      "raw": "6x7",
+      "note": "6 X 7 : 21개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101347",
+      "name": "블루밍 캠프",
+      "raw": "7x8",
+      "note": "7 X 8 : 12개&nbsp; · &nbsp;7 X 10 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3559",
+      "name": "화이트 야영장",
+      "raw": "7x11",
+      "note": "7 X 11 : 14개&nbsp; · &nbsp;7 X 11 : 5개&nbsp; · &nbsp;7 X 11 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101620",
+      "name": "소소캠프",
+      "raw": "10x10",
+      "note": "10 X 10 : 4개&nbsp; · &nbsp;13 X 10 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101901",
+      "name": "강화 물미 캠핑장",
+      "raw": "8x12",
+      "note": "8 X 12 : 1개&nbsp; · &nbsp;7 X 8 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7171",
+      "name": "싱글벙글캠핑장",
+      "raw": "8x7",
+      "note": "8 X 7 : 17개&nbsp; · &nbsp;12 X 6 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100815",
+      "name": "호수랑 오토캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101782",
+      "name": "인북천 물빛테마공원 캠핑장",
+      "raw": "9x9",
+      "note": "9 X 9 : 22개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7192",
+      "name": "우리들캠핑장",
+      "raw": "7x10",
+      "note": "7 X 10 : 9개&nbsp; · &nbsp;8 X 9 : 6개&nbsp; · &nbsp;6 X 9 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101424",
+      "name": "장미길 테마 야영장",
+      "raw": "7x9",
+      "note": "7 X 9 : 15개&nbsp; · &nbsp;6 X 8 : 18개&nbsp; · &nbsp;7 X 8 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1776",
+      "name": "사천비토솔섬오토캠핑장",
+      "raw": "9x8",
+      "note": "9 X 8 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3016",
+      "name": "칠곡보 오토캠핑장",
+      "raw": "10x15",
+      "note": "10 X 15 : 9개&nbsp; · &nbsp;10 X 10 : 40개&nbsp; · &nbsp;10 X 80 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3597",
+      "name": "휴가를 부탁해 캠핑장",
+      "raw": "8x7",
+      "note": "8 X 7 : 13개&nbsp; · &nbsp;14 X 10 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8114",
+      "name": "일곱식구 캠핑장",
+      "raw": "8x10",
+      "note": "8 X 10 : 24개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2733",
+      "name": "제천모드니애캠핑장",
+      "raw": "7x7",
+      "note": "7 X 7 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7789",
+      "name": "행화촌자연테마파크",
+      "raw": "6x10",
+      "note": "6 X 10 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7071",
+      "name": "쿼크밸리캠프 야영장",
+      "raw": "6x11",
+      "note": "6 X 11 : 40개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101917",
+      "name": "달빛수월 캠핑장",
+      "raw": "9x8",
+      "note": "9 X 8 : 11개",
+      "src": "gocamping"
+    },
+    {
+      "id": "805",
+      "name": "덕산국민여가캠핑장",
+      "raw": "4x4",
+      "note": "4 X 4 : 62개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3202",
+      "name": "팔공산금화자연휴양림",
+      "raw": "4x4",
+      "note": "4 X 4 : 17개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100847",
+      "name": "함안군 온새미로 오토캠핑장",
+      "raw": "8x7",
+      "note": "8 X 7 : 10개&nbsp; · &nbsp;5 X 6 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101876",
+      "name": "별빛대가야캠핑장",
+      "raw": "7x10",
+      "note": "7 X 10 : 4개&nbsp; · &nbsp;10 X 10 : 2개&nbsp; · &nbsp;7 X 9 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101837",
+      "name": "화양야영장",
+      "raw": "3x4",
+      "note": "3 X 4 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "531",
+      "name": "양평꿈의글램핑",
+      "raw": "8x8",
+      "note": "8 X 8 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7590",
+      "name": "백미리 희망캠핑장",
+      "raw": "7x6",
+      "note": "7 X 6 : 15개&nbsp; · &nbsp;7 X 4 : 27개&nbsp; · &nbsp;6 X 4 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101350",
+      "name": "짐스토리",
+      "raw": "5x3",
+      "note": "5 X 3 : 9개&nbsp; · &nbsp;8 X 6 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100539",
+      "name": "운일암개미캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 16개&nbsp; · &nbsp;12 X 7 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2880",
+      "name": "첫물내기캠핑장",
+      "raw": "6x7",
+      "note": "6 X 7 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3575",
+      "name": "황매산 별쿵 캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 40개&nbsp; · &nbsp;6 X 7 : 40개",
+      "src": "gocamping"
+    },
+    {
+      "id": "704",
+      "name": "달천공원오토캠핑장",
+      "raw": "4x4",
+      "note": "4 X 4 : 31개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101660",
+      "name": "바다노을 캠핑장",
+      "raw": "4x7",
+      "note": "4 X 7 : 5개&nbsp; · &nbsp;4 X 7 : 5개&nbsp; · &nbsp;4 X 6 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2619",
+      "name": "자연과우리캠핑장",
+      "raw": "5x10",
+      "note": "5 X 10 : 4개&nbsp; · &nbsp;6 X 13 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3046",
+      "name": "캠프아이엔지",
+      "raw": "8x10",
+      "note": "8 X 10 : 29개&nbsp; · &nbsp;5 X 5 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1501",
+      "name": "아스트로마스 캠핑랜드",
+      "raw": "6x9",
+      "note": "6 X 9 : 120개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1610",
+      "name": "서당골캠핑장",
+      "raw": "6x12",
+      "note": "6 X 12 : 5개&nbsp; · &nbsp;7 X 8 : 10개&nbsp; · &nbsp;6 X 8 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1142",
+      "name": "문화관광농원청소년야영장",
+      "raw": "6x7",
+      "note": "6 X 7 : 49개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2143",
+      "name": "에브라임캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 38개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2370",
+      "name": "국립용대자연휴양림",
+      "raw": "3x3",
+      "note": "3 X 3 : 4개&nbsp; · &nbsp;3 X 3 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2762",
+      "name": "주식회사 신북리조트",
+      "raw": "4x6",
+      "note": "4 X 6 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2848",
+      "name": "참숯골",
+      "raw": "4x6",
+      "note": "4 X 6 : 4개&nbsp; · &nbsp;8 X 10 : 6개&nbsp; · &nbsp;6 X 7 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2966",
+      "name": "초원오토캠핑장",
+      "raw": "7x9",
+      "note": "7 X 9 : 24개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3014",
+      "name": "칠갑산도림휴양림캠핑장",
+      "raw": "3x3",
+      "note": "3 X 3 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3203",
+      "name": "팔리봉 캠핑장",
+      "raw": "4x5",
+      "note": "4 X 5 : 19개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3426",
+      "name": "한탄강 소나무 캠핑",
+      "raw": "10x10",
+      "note": "10 X 10 : 30개&nbsp; · &nbsp;7 X 7 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3551",
+      "name": "화암약수야영장",
+      "raw": "4x6",
+      "note": "4 X 6 : 25개&nbsp; · &nbsp;3 X 4 : 14개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100990",
+      "name": "STX오토캠핑장",
+      "raw": "4x5",
+      "note": "4 X 5 : 19개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3376",
+      "name": "(주)하이원추추파크",
+      "raw": "8x6",
+      "note": "8 X 6 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100376",
+      "name": "Little 80",
+      "raw": "6x3",
+      "note": "6 X 3 : 8개&nbsp; · &nbsp;4 X 3 : 22개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100739",
+      "name": "쌍근오토캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 16개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101880",
+      "name": "여우별 캠핑장",
+      "raw": "8x10",
+      "note": "8 X 10 : 22개&nbsp; · &nbsp;8 X 13 : 1개&nbsp; · &nbsp;10 X 10 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2094",
+      "name": "양평 몽 캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 24개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6740",
+      "name": "골짜구니 캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 17개&nbsp; · &nbsp;7 X 11 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3145",
+      "name": "태화연 오토야영장",
+      "raw": "8x9",
+      "note": "8 X 9 : 32개&nbsp; · &nbsp;11 X 8 : 5개&nbsp; · &nbsp;5 X 5 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3577",
+      "name": "황방산생태야영장",
+      "raw": "7x9",
+      "note": "7 X 9 : 18개&nbsp; · &nbsp;10 X 10 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7043",
+      "name": "입화산 참살이숲 제2오토야영장",
+      "raw": "5x6",
+      "note": "5 X 6 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2810",
+      "name": "지리산백무동파크야영장",
+      "raw": "4x6",
+      "note": "4 X 6 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "615",
+      "name": "녹색 오토캠핑장",
+      "raw": "8x10",
+      "note": "8 X 10 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "75",
+      "name": "가마실캠핑장",
+      "raw": "3x3",
+      "note": "3 X 3 : 6개&nbsp; · &nbsp;3 X 6 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6857",
+      "name": "영수야 놀자",
+      "raw": "6x7",
+      "note": "6 X 7 : 17개&nbsp; · &nbsp;5 X 6 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7971",
+      "name": "솔미캠핑장",
+      "raw": "4x5",
+      "note": "4 X 5 : 3개&nbsp; · &nbsp;4 X 6 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101077",
+      "name": "대율저수지 오토캠핑장",
+      "raw": "10x10",
+      "note": "10 X 10 : 41개&nbsp; · &nbsp;15 X 15 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101851",
+      "name": "성주 LOG 캠핑",
+      "raw": "5x8",
+      "note": "5 X 8 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101852",
+      "name": "주식회사 풀싸이드",
+      "raw": "600x800",
+      "note": "600 X 800 : 5개&nbsp; · &nbsp;1000 X 800 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101096",
+      "name": "가평뷰캠핑장",
+      "raw": "9x8",
+      "note": "9 X 8 : 10개&nbsp; · &nbsp;6 X 8 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101437",
+      "name": "갈현동화마을 오토캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 16개&nbsp; · &nbsp;8 X 9 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "315",
+      "name": "공주산림휴양마을",
+      "raw": "5x3",
+      "note": "5 X 3 : 10개&nbsp; · &nbsp;6 X 4 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1023",
+      "name": "화천마음이머무는곳",
+      "raw": "6x10",
+      "note": "6 X 10 : 12개&nbsp; · &nbsp;8 X 12 : 8개&nbsp; · &nbsp;6 X 12 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "504",
+      "name": "김천부항댐 산내들 오토캠핑장",
+      "raw": "12x10",
+      "note": "12 X 10 : 52개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101202",
+      "name": "캠프팔봉",
+      "raw": "8x10",
+      "note": "8 X 10 : 23개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101761",
+      "name": "비비드 글램핑",
+      "raw": "4x9",
+      "note": "4 X 9 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7942",
+      "name": "학현아름마을오토캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 16개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2820",
+      "name": "지오클럽",
+      "raw": "500x700",
+      "note": "500 X 700 : 11개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7039",
+      "name": "은빛물결캠핑장",
+      "raw": "7x10",
+      "note": "7 X 10 : 60개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2439",
+      "name": "운문산군립공원 소머리 야영장",
+      "raw": "6x7",
+      "note": "6 X 7 : 57개&nbsp; · &nbsp;8 X 10 : 55개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3407",
+      "name": "한다리골캠핑장",
+      "raw": "10x12",
+      "note": "10 X 12 : 42개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7486",
+      "name": "해간도캠핑장",
+      "raw": "6x11",
+      "note": "6 X 11 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "632",
+      "name": "농월정오토캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 20개&nbsp; · &nbsp;8 X 9 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1796",
+      "name": "송정 자연휴양림",
+      "raw": "3x4",
+      "note": "3 X 4 : 72개&nbsp; · &nbsp;6 X 8 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3254",
+      "name": "포레스트 소울",
+      "raw": "8x10",
+      "note": "8 X 10 : 4개&nbsp; · &nbsp;9 X 10 : 8개&nbsp; · &nbsp;10 X 10 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3291",
+      "name": "폭포골자연휴양림야영장",
+      "raw": "4x6",
+      "note": "4 X 6 : 40개&nbsp; · &nbsp;6 X 6 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101812",
+      "name": "멍 캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 7개&nbsp; · &nbsp;10 X 8 : 3개&nbsp; · &nbsp;15 X 10 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "966",
+      "name": "러브팩토리펜션캠핑장",
+      "raw": "10x10",
+      "note": "10 X 10 : 5개&nbsp; · &nbsp;5 X 10 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3412",
+      "name": "한방자연휴양림",
+      "raw": "5x5",
+      "note": "5 X 5 : 6개&nbsp; · &nbsp;5 X 8 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101774",
+      "name": "비원 바베큐&캠핑",
+      "raw": "8x5",
+      "note": "8 X 5 : 3개&nbsp; · &nbsp;7 X 5 : 3개&nbsp; · &nbsp;6 X 4 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101778",
+      "name": "도전캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 8개&nbsp; · &nbsp;8 X 10 : 2개&nbsp; · &nbsp;12 X 10 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "977",
+      "name": "로하스캠핑",
+      "raw": "8x10",
+      "note": "8 X 10 : 50개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100361",
+      "name": "펫밀리애견파크타운",
+      "raw": "8x8",
+      "note": "8 X 8 : 5개&nbsp; · &nbsp;7 X 7 : 5개&nbsp; · &nbsp;6 X 7 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1303",
+      "name": "법흥 캠핑장",
+      "raw": "9x10",
+      "note": "9 X 10 : 31개&nbsp; · &nbsp;9 X 9 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101769",
+      "name": "청풍호반 캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7036",
+      "name": "월계수 캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 27개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100630",
+      "name": "강원 홍천 알프스밸리 캠핑나라 글램독",
+      "raw": "800x900",
+      "note": "800 X 900 : 69개",
+      "src": "gocamping"
+    },
+    {
+      "id": "917",
+      "name": "북한산 둥글이네 캠핑",
+      "raw": "5x6",
+      "note": "5 X 6 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101750",
+      "name": "캠핑 유유자적",
+      "raw": "600x1000",
+      "note": "600 X 1000 : 4개&nbsp; · &nbsp;700 X 1000 : 2개&nbsp; · &nbsp;500 X 1000 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101752",
+      "name": "펫츠런파크",
+      "raw": "11x7",
+      "note": "11 X 7 : 2개&nbsp; · &nbsp;9 X 9 : 4개&nbsp; · &nbsp;20 X 9 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101753",
+      "name": "송백농원(이나투캠핑)",
+      "raw": "7x6",
+      "note": "7 X 6 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101751",
+      "name": "부라보캠프",
+      "raw": "6x8",
+      "note": "6 X 8 : 4개&nbsp; · &nbsp;7 X 9 : 3개&nbsp; · &nbsp;5 X 7 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8198",
+      "name": "캠프 포레스트",
+      "raw": "9x9",
+      "note": "9 X 9 : 48개&nbsp; · &nbsp;6 X 6 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101728",
+      "name": "모닥모닥 황매산 캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 12개&nbsp; · &nbsp;4 X 7 : 6개&nbsp; · &nbsp;5 X 6 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1931",
+      "name": "심학산야영장",
+      "raw": "3x3",
+      "note": "3 X 3 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101726",
+      "name": "양주 구암 캠핑장",
+      "raw": "9x13",
+      "note": "9 X 13 : 24개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101271",
+      "name": "THE BON(더 본)",
+      "raw": "12x11",
+      "note": "12 X 11 : 5개&nbsp; · &nbsp;10 X 12 : 4개&nbsp; · &nbsp;7 X 5 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101717",
+      "name": "팔공산캠핑랜드",
+      "raw": "8x7",
+      "note": "8 X 7 : 2개&nbsp; · &nbsp;6 X 5 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2956",
+      "name": "청화산카라반&캠핑",
+      "raw": "15x8",
+      "note": "15 X 8 : 3개&nbsp; · &nbsp;11 X 7 : 2개&nbsp; · &nbsp;7 X 8 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2621",
+      "name": "자연속 캠핑장",
+      "raw": "9x8",
+      "note": "9 X 8 : 5개&nbsp; · &nbsp;8 X 8 : 19개&nbsp; · &nbsp;7 X 8 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101696",
+      "name": "하루종암",
+      "raw": "8x8",
+      "note": "8 X 8 : 25개&nbsp; · &nbsp;7 X 8 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1311",
+      "name": "벳소캠프",
+      "raw": "6x8",
+      "note": "6 X 8 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3508",
+      "name": "호두나무캠핑장",
+      "raw": "5x5",
+      "note": "5 X 5 : 5개&nbsp; · &nbsp;9 X 5 : 13개&nbsp; · &nbsp;14 X 9 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "648",
+      "name": "늘푸른 체험학교",
+      "raw": "8x8",
+      "note": "8 X 8 : 40개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2928",
+      "name": "청송캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 50개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100880",
+      "name": "회룡농촌체험휴양마을",
+      "raw": "7x7",
+      "note": "7 X 7 : 10개&nbsp; · &nbsp;7 X 8 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100976",
+      "name": "파주 천지연캠핑장",
+      "raw": "7x15",
+      "note": "7 X 15 : 7개&nbsp; · &nbsp;7 X 16 : 1개&nbsp; · &nbsp;7 X 17 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2778",
+      "name": "중랑가족캠핑장",
+      "raw": "6x6",
+      "note": "6 X 6 : 47개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101090",
+      "name": "낭만캠핑장",
+      "raw": "6x6",
+      "note": "6 X 6 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2472",
+      "name": "원주두리캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 70개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100851",
+      "name": "동지화캠핑장",
+      "raw": "8x11",
+      "note": "8 X 11 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "640",
+      "name": "느티나무 캠핑장",
+      "raw": "6x10",
+      "note": "6 X 10 : 38개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1220",
+      "name": "반디캠프",
+      "raw": "8x8",
+      "note": "8 X 8 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101649",
+      "name": "거제 순수 풀앤뷰",
+      "raw": "12x9",
+      "note": "12 X 9 : 2개&nbsp; · &nbsp;8 X 9 : 11개&nbsp; · &nbsp;15 X 12 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101667",
+      "name": "농다리캠핑장",
+      "raw": "9x10",
+      "note": "9 X 10 : 22개&nbsp; · &nbsp;9 X 8 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1293",
+      "name": "버디버디",
+      "raw": "3x4",
+      "note": "3 X 4 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100993",
+      "name": "미리내캠핑장",
+      "raw": "6x5",
+      "note": "6 X 5 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101051",
+      "name": "474오토캠핑장",
+      "raw": "5x13",
+      "note": "5 X 13 : 1개&nbsp; · &nbsp;7 X 9 : 25개&nbsp; · &nbsp;8 X 11 : 14개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101062",
+      "name": "우니메이카 문경점",
+      "raw": "4x6",
+      "note": "4 X 6 : 7개&nbsp; · &nbsp;4 X 8 : 8개&nbsp; · &nbsp;5 X 10 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101070",
+      "name": "문장대 사계절캠핑장",
+      "raw": "8x7",
+      "note": "8 X 7 : 8개&nbsp; · &nbsp;5 X 5 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2667",
+      "name": "고성 장좌리 캠핑장",
+      "raw": "7x10",
+      "note": "7 X 10 : 21개",
+      "src": "gocamping"
+    },
+    {
+      "id": "783",
+      "name": "대호레져글램핑",
+      "raw": "5x4",
+      "note": "5 X 4 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101386",
+      "name": "해랑해관광농원 캠핑장",
+      "raw": "4x4",
+      "note": "4 X 4 : 8개&nbsp; · &nbsp;5 X 5 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101538",
+      "name": "H camping",
+      "raw": "6x10",
+      "note": "6 X 10 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2522",
+      "name": "유토피아 오토캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3477",
+      "name": "오름집",
+      "raw": "3x4",
+      "note": "3 X 4 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3432",
+      "name": "숲속애캠핑장",
+      "raw": "7x9",
+      "note": "7 X 9 : 49개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1628",
+      "name": "서천 금빛노을 서울캠핑장",
+      "raw": "4x4",
+      "note": "4 X 4 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "138",
+      "name": "강나루 오토캠핑장",
+      "raw": "9x9",
+      "note": "9 X 9 : 77개&nbsp; · &nbsp;11 X 8 : 60개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2264",
+      "name": "예손농원캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "165",
+      "name": "강촌달머리캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 21개&nbsp; · &nbsp;6 X 8 : 39개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1487",
+      "name": "산디마을 생태공원 캠핑장",
+      "raw": "5x6",
+      "note": "5 X 6 : 16개&nbsp; · &nbsp;11 X 6 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "373",
+      "name": "구시포 노을 캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 45개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101493",
+      "name": "서현농원 야영장",
+      "raw": "6x6",
+      "note": "6 X 6 : 15개&nbsp; · &nbsp;4 X 8 : 1개&nbsp; · &nbsp;5 X 7 : 1개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2610",
+      "name": "임하호 수상레저타운캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 24개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1447",
+      "name": "비토섬오토캠핑장",
+      "raw": "10x10",
+      "note": "10 X 10 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1667",
+      "name": "설뫼충효테마파크야영장",
+      "raw": "7x8",
+      "note": "7 X 8 : 100개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1999",
+      "name": "아이비오토캠핑장",
+      "raw": "8x6",
+      "note": "8 X 6 : 14개&nbsp; · &nbsp;7 X 6 : 5개&nbsp; · &nbsp;9 X 6 : 4개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3578",
+      "name": "황산문화체육공원 국민여가캠핑장",
+      "raw": "8x10",
+      "note": "8 X 10 : 36개&nbsp; · &nbsp;5 X 6 : 75개",
+      "src": "gocamping"
+    },
+    {
+      "id": "6987",
+      "name": "밀양아리랑 오토캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 200개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3262",
+      "name": "포시즌스 오토캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 70개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1258",
+      "name": "백담설화캠핑장",
+      "raw": "5x3",
+      "note": "5 X 3 : 8개&nbsp; · &nbsp;7 X 8 : 29개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2695",
+      "name": "정선골민박캠핑장",
+      "raw": "4x5",
+      "note": "4 X 5 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7027",
+      "name": "왕피천모래언덕 펜션/캠핑장",
+      "raw": "7x10",
+      "note": "7 X 10 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1723",
+      "name": "소선암 오토캠핑장",
+      "raw": "4x6",
+      "note": "4 X 6 : 9개&nbsp; · &nbsp;5 X 6 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3589",
+      "name": "횡성초보캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 28개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7214",
+      "name": "캠핑어클락",
+      "raw": "6x9",
+      "note": "6 X 9 : 18개&nbsp; · &nbsp;10 X 9 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "630",
+      "name": "아그로랜드 캠핑장",
+      "raw": "7x10",
+      "note": "7 X 10 : 43개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100879",
+      "name": "어은돌캠프캠프",
+      "raw": "6x9",
+      "note": "6 X 9 : 19개&nbsp; · &nbsp;8 X 9 : 12개&nbsp; · &nbsp;7 X 8 : 3개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2822",
+      "name": "지지벨리 유명산 오토캠핑장",
+      "raw": "4x4",
+      "note": "4 X 4 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1957",
+      "name": "아날로그데이",
+      "raw": "7x5",
+      "note": "7 X 5 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1741",
+      "name": "속리산알프스캠핑장&펜션",
+      "raw": "7x9",
+      "note": "7 X 9 : 40개",
+      "src": "gocamping"
+    },
+    {
+      "id": "525",
+      "name": "드림이벤트",
+      "raw": "8x8",
+      "note": "8 X 8 : 25개",
+      "src": "gocamping"
+    },
+    {
+      "id": "710",
+      "name": "담터오지캠핑장",
+      "raw": "5x10",
+      "note": "5 X 10 : 10개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1119",
+      "name": "무지개펜션&캠핑",
+      "raw": "4x6",
+      "note": "4 X 6 : 25개",
+      "src": "gocamping"
+    },
+    {
+      "id": "337",
+      "name": "괴강국민여가캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 52개",
+      "src": "gocamping"
+    },
+    {
+      "id": "596",
+      "name": "너와나 야영장",
+      "raw": "6x7",
+      "note": "6 X 7 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1155",
+      "name": "물마루 캠핑장",
+      "raw": "8x10",
+      "note": "8 X 10 : 4개&nbsp; · &nbsp;6 X 7 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100488",
+      "name": "북두칠성캠핑장",
+      "raw": "8x8",
+      "note": "8 X 8 : 14개&nbsp; · &nbsp;6 X 8 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2257",
+      "name": "예다움 캠핑장",
+      "raw": "5x8",
+      "note": "5 X 8 : 16개&nbsp; · &nbsp;5 X 10 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2534",
+      "name": "은사시캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 20개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2734",
+      "name": "제천워터파크캠핑랜드",
+      "raw": "6x9",
+      "note": "6 X 9 : 40개&nbsp; · &nbsp;6 X 8 : 40개&nbsp; · &nbsp;7 X 8 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2933",
+      "name": "청옥산깨비마을 야영장",
+      "raw": "6x4",
+      "note": "6 X 4 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7151",
+      "name": "백운힐링 캠핑장",
+      "raw": "5x6",
+      "note": "5 X 6 : 2개&nbsp; · &nbsp;4 X 4 : 3개&nbsp; · &nbsp;4 X 6 : 2개",
+      "src": "gocamping"
+    },
+    {
+      "id": "8017",
+      "name": "바람부리 별밤 캠핑장",
+      "raw": "5x6",
+      "note": "5 X 6 : 4개&nbsp; · &nbsp;6 X 8 : 17개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101285",
+      "name": "은광디미",
+      "raw": "6x10",
+      "note": "6 X 10 : 10개&nbsp; · &nbsp;10 X 6 : 5개&nbsp; · &nbsp;10 X 6 : 9개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1129",
+      "name": "문경수예리오토캠핑장",
+      "raw": "9x9",
+      "note": "9 X 9 : 44개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7172",
+      "name": "씨밀레자연관광농원",
+      "raw": "6x10",
+      "note": "6 X 10 : 24개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7182",
+      "name": "연미향마을 오토캠핑장",
+      "raw": "6x7",
+      "note": "6 X 7 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "719",
+      "name": "대가야역사테마관광지 캠핑장",
+      "raw": "4x3",
+      "note": "4 X 3 : 25개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2783",
+      "name": "중바위캠핑장",
+      "raw": "7x8",
+      "note": "7 X 8 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101159",
+      "name": "소구니캠핑장",
+      "raw": "6x8",
+      "note": "6 X 8 : 35개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1151",
+      "name": "물꽃 캠핑장",
+      "raw": "8x10",
+      "note": "8 X 10 : 42개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3233",
+      "name": "드래곤오토캠핑장",
+      "raw": "8x9",
+      "note": "8 X 9 : 65개&nbsp; · &nbsp;4 X 6 : 15개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2913",
+      "name": "트리독스 애견전용캠핑장",
+      "raw": "7x12",
+      "note": "7 X 12 : 11개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101191",
+      "name": "즐거운녀석들",
+      "raw": "11x15",
+      "note": "11 X 15 : 8개&nbsp; · &nbsp;11 X 12 : 6개&nbsp; · &nbsp;7 X 9 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2235",
+      "name": "영월천문대 캠핑장",
+      "raw": "5x6",
+      "note": "5 X 6 : 13개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1585",
+      "name": "상황오토캠핑장",
+      "raw": "8x10",
+      "note": "8 X 10 : 14개&nbsp; · &nbsp;7 X 10 : 19개&nbsp; · &nbsp;8 X 7 : 8개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3361",
+      "name": "하마캠핑장",
+      "raw": "5x7",
+      "note": "5 X 7 : 30개&nbsp; · &nbsp;6 X 9 : 12개",
+      "src": "gocamping"
+    },
+    {
+      "id": "814",
+      "name": "덕유캠프농장",
+      "raw": "6x9",
+      "note": "6 X 9 : 70개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101287",
+      "name": "해양대국",
+      "raw": "4x7",
+      "note": "4 X 7 : 14개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100752",
+      "name": "일랑일랑 애견캠핑 앤 카라반",
+      "raw": "12x10",
+      "note": "12 X 10 : 9개&nbsp; · &nbsp;10 X 8 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "101212",
+      "name": "옴니버스 캠핑장",
+      "raw": "7x10",
+      "note": "7 X 10 : 6개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1833",
+      "name": "수승대야영장",
+      "raw": "4x3",
+      "note": "4 X 3 : 84개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7154",
+      "name": "별빛테마마을 야영장",
+      "raw": "7x7",
+      "note": "7 X 7 : 30개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100303",
+      "name": "영월 엄둔밸리 계곡캠핑장",
+      "raw": "9x5",
+      "note": "9 X 5 : 1개&nbsp; · &nbsp;8 X 6 : 1개&nbsp; · &nbsp;8 X 6 : 7개",
+      "src": "gocamping"
+    },
+    {
+      "id": "3271",
+      "name": "포천 비둘기낭 캠핑장",
+      "raw": "8x10",
+      "note": "8 X 10 : 79개",
+      "src": "gocamping"
+    },
+    {
+      "id": "2000",
+      "name": "아이에프에이 캠프운악",
+      "raw": "5x7",
+      "note": "5 X 7 : 37개&nbsp; · &nbsp;4 X 6 : 36개&nbsp; · &nbsp;6 X 7 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "1051",
+      "name": "핫도그342애견글램핑카라반 주식회사",
+      "raw": "4x6",
+      "note": "4 X 6 : 40개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7079",
+      "name": "파인힐빌리지 캠핑장",
+      "raw": "10x12",
+      "note": "10 X 12 : 11개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7028",
+      "name": "연몽캠핑장",
+      "raw": "6x6",
+      "note": "6 X 6 : 3개&nbsp; · &nbsp;4 X 4 : 5개",
+      "src": "gocamping"
+    },
+    {
+      "id": "418",
+      "name": "굼벵이캠핑장",
+      "raw": "5x8",
+      "note": "5 X 8 : 25개",
+      "src": "gocamping"
+    },
+    {
+      "id": "7040",
+      "name": "의령나루캠프",
+      "raw": "10x10",
+      "note": "10 X 10 : 16개",
+      "src": "gocamping"
+    },
+    {
+      "id": "100893",
+      "name": "해월카라반앤캠핑",
+      "raw": "8x10",
+      "note": "8 X 10 : 20개&nbsp; · &nbsp;8 X 14 : 4개",
+      "src": "gocamping"
+    }
+  ]
+}
