@@ -1544,7 +1544,6 @@ a.near { color: inherit; text-decoration: none; }
 .cs-ref { background: var(--soft); color: var(--ink-2); border: 1px dashed var(--ink-3); }
 .cs-unk { background: transparent; color: var(--ink-3); border: 1px dashed var(--line); }
 /* 플랫폼별 더 보기(docs/PLATFORM_HUB.md) */
-.plat-hub .plat-btns { display: flex; flex-wrap: wrap; gap: 8px; }
 .plat-btn { display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink); text-decoration: none; font-size: .85rem; font-weight: 700; }
 .plat-btn .ic { width: 16px; height: 16px; }
 .plat-btn:hover { background: var(--soft); }
@@ -1709,9 +1708,6 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .price-sec .st-foot { margin: 10px 2px 0; }
 
 /* 더 보기: 플랫폼 아이콘을 같은 크기·모양으로(둥근 네모 26px, 글리프 15px, 단색) */
-.plat-hub .plat-ic { display: inline-grid; place-items: center; flex: 0 0 26px; width: 26px; height: 26px; border-radius: 8px; background: var(--ink); color: var(--paper, #fff); }
-.plat-hub .plat-btn .plat-ic svg { width: 15px; height: 15px; filter: none; color: inherit; }
-.plat-hub .plat-btn { padding-left: 7px; }
 
 /* 주변시설: 칩(탭)으로 한 묶음씩, 한 줄짜리 작은 행(2026-10-19) */
 .nearby-hub .nb-tabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 0 10px; padding-bottom: 2px; }
@@ -1895,8 +1891,6 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 
 /* 다음(Daum) 공식 아이콘(로컬 images/daum.svg): 다른 출처 아이콘과 같은 칸 크기, 짙은 글리프라 흰 바탕 위에 놓는다. */
 .tr-src img.daum-logo { flex: 0 0 14px; width: 14px; height: 14px; padding: 0; transform-origin: center; border-radius: 4px; background: #fff; box-shadow: inset 0 0 0 1px var(--line); object-fit: contain; }
-.plat-hub .plat-ic.plat-ic-img { background: #fff; box-shadow: inset 0 0 0 1px var(--line); }
-.plat-hub .plat-ic.plat-ic-img img.daum-logo { width: 24px; height: 24px; object-fit: contain; }
 /* 홈 섹션 제목 오른쪽 '더보기'(소유자 2026-10-20): 버튼이 아니라 다른 텍스트 링크(.link, 예: 업체 정보 '고캠핑 >')와 같은 모양 + 오른쪽 '>' 아이콘. */
 .more-link { padding: 0; border: 0; background: none; box-shadow: none; border-radius: 0; height: auto; cursor: pointer; font: inherit; font-weight: 700; color: var(--ink-2); font-size: .92rem; white-space: nowrap; }
 .more-link:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
@@ -1927,3 +1921,27 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 .cand-src:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .cand-src .ic { width: 16px; height: 16px; }
 .cand-src-top { top: 12px; bottom: auto; right: 12px; background: rgba(255, 255, 255, .92); box-shadow: 0 2px 8px rgba(0, 0, 0, .15); }
+
+/* ── 관련 영상 · SNS: 플랫폼 칩(주변시설 칩과 같은 모양), 아이콘은 검은 바탕·흰 글리프로 통일(2026-10-20) ── */
+.media-hub .mh-tabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 0 12px; padding-bottom: 2px; }
+.media-hub .mh-tabs::-webkit-scrollbar { display: none; }
+.media-hub [data-mh-tab], .media-hub .mh-link { display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto; height: 34px; padding: 0 12px 0 5px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper, #fff); color: var(--ink-2); font: inherit; font-size: .84rem; font-weight: 800; cursor: pointer; text-decoration: none; }
+.media-hub [data-mh-tab] i { font-style: normal; font-size: .7rem; color: var(--ink-3); }
+.media-hub [data-mh-tab][aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper, #fff); }
+.media-hub [data-mh-tab][aria-selected="true"] i { color: inherit; opacity: .75; }
+.media-hub [data-mh-tab][aria-selected="true"] .plat-ic { background: var(--paper, #fff); color: var(--ink); }
+.media-hub .mh-link > .ic { width: 13px; height: 13px; color: var(--ink-3); }
+.media-hub .mh-link:hover { border-color: var(--ink-3); color: var(--ink); }
+.media-hub [data-mh-tab]:focus-visible, .media-hub .mh-link:focus-visible { outline: 2px solid var(--cobalt, #2b59ff); outline-offset: 2px; }
+.media-hub .plat-ic { display: inline-grid; place-items: center; flex: none; width: 24px; height: 24px; border-radius: 999px; background: #111; color: #fff; }
+.media-hub .plat-ic svg { width: 13px; height: 13px; }
+.media-hub .mh-panel[hidden] { display: none; }
+.media-hub .mh-posts { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 6px; }
+.media-hub .mh-post { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: center; padding: 10px 12px; border-radius: 12px; background: var(--soft); color: inherit; text-decoration: none; }
+.media-hub .mh-post:hover { background: var(--line); }
+.media-hub .mh-post b { grid-column: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .88rem; font-weight: 750; }
+.media-hub .mh-post i { grid-column: 1; font-style: normal; font-size: .76rem; color: var(--ink-3); }
+.media-hub .mh-post > .ic { grid-column: 2; grid-row: 1 / span 2; width: 14px; height: 14px; color: var(--ink-3); }
+.media-hub .mh-more { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; font-size: .82rem; font-weight: 800; color: var(--ink-2); text-decoration: none; }
+.media-hub .mh-more .ic { width: 14px; height: 14px; }
+.media-hub .mh-more:hover { color: var(--accent); }
