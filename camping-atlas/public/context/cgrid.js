@@ -5,16 +5,14 @@
 // 단 수(화면 너비): ~767px 기존 모바일 배치(제한 없음) · 768px~ 2단 · 1024px~ 3단 · 1280px~ 4단 · 1600px~ 5단
 // 처음 개수: 짝수 단은 4나 6 중 단 수의 배수(2단→4, 4단→4, 6단→6), 홀수 단은 5를 기준으로
 //           5 이상인 단 수의 배수(3단→6, 5단→5). 그래서 첫 화면은 늘 줄이 꽉 찬다. 더보기도 같은 개수씩.
-export const BREAKS = [[1600, 5], [1280, 4], [1024, 3], [768, 2]];
+export const BREAKS = [[1024, 5], [860, 4], [640, 3], [480, 2]];
 export function colsFor(w = (typeof innerWidth === "number" ? innerWidth : 0)) {
   for (const [min, n] of BREAKS) if (w >= min) return n;
   return 1;
 }
 export function pageFor(cols) {
-  if (cols <= 1) return Infinity; // 모바일: 지금처럼 전부(세로 1단 또는 가로 넘김)
-  const base = cols % 2 === 0 ? [4, 6] : [5];
-  for (const b of base) if (b % cols === 0) return b;
-  return Math.ceil(base[0] / cols) * cols;
+  if (cols <= 1) return 3;
+  return cols;
 }
 const STATE = new WeakMap();
 /** grid: 카드 묶음 요소. 카드는 직계 자식. filter(card)가 false인 카드는 세지 않고 숨긴다(탭 필터용). */
