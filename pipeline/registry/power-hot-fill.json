@@ -1,0 +1,444 @@
+{
+  "generated_at": "2026-10-20T05:13:35.756Z",
+  "targets": 187,
+  "results": {
+    "141": {
+      "name": "강동그린웨이 가족캠핑장",
+      "status": "fail",
+      "url": "http://igangdong.or.kr/",
+      "error": "fetch failed",
+      "checked_at": "2026-10-20T05:10:54.167Z"
+    },
+    "154": {
+      "name": "강원특별자치도 산림과학연구원 집다리골자연휴양림",
+      "status": "fail",
+      "url": "http://www.xn--bb0bm7i2qgk4r.kr/",
+      "error": "fetch failed",
+      "checked_at": "2026-10-20T05:11:06.454Z"
+    },
+    "383": {
+      "name": "국림검마산자연휴양림",
+      "status": "fail",
+      "url": "https://www.huyang.go.kr/main.action",
+      "error": "fetch failed",
+      "checked_at": "2026-10-20T05:11:13.276Z"
+    },
+    "399": {
+      "name": "국립청옥산자연휴양림제1야영장",
+      "status": "fail",
+      "url": "http://www.huyang.go.kr/main.action",
+      "error": "fetch failed",
+      "checked_at": "2026-10-20T05:11:26.053Z"
+    },
+    "401": {
+      "name": "국립황정산자연휴양림캠핑장",
+      "status": "fail",
+      "url": "http://www.huyang.go.kr/main.action",
+      "error": "fetch failed",
+      "checked_at": "2026-10-20T05:11:26.055Z"
+    },
+    "427": {
+      "name": "그날카라반",
+      "status": "ok",
+      "url": "http://mujucaravan.com/",
+      "need_power": true,
+      "need_hot": false,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:10:05.971Z"
+    },
+    "483": {
+      "name": "금원산자연휴양림 야영장",
+      "status": "fail",
+      "url": "http://www.geumwonsan.or.kr/",
+      "error": "fetch failed",
+      "checked_at": "2026-10-20T05:10:04.322Z"
+    },
+    "676": {
+      "name": "다인카라반",
+      "status": "ok",
+      "url": "http://www.dyneresort.co.kr/index.php",
+      "need_power": false,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:11:07.873Z"
+    },
+    "833": {
+      "name": "도사곡휴양림야영장",
+      "status": "ok",
+      "url": "https://jsimc.or.kr/front/html/block_state.html",
+      "need_power": true,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:11:10.264Z"
+    },
+    "1208": {
+      "name": "바라산자연휴양림 야영장",
+      "status": "ok",
+      "url": "http://barasan.uw21.net/",
+      "need_power": false,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:11:27.096Z"
+    },
+    "1279": {
+      "name": "백운산 자연휴양림 야영장",
+      "status": "fail",
+      "url": "http://bwmt.gwangyang.go.kr/bmt/",
+      "error": "fetch failed",
+      "checked_at": "2026-10-20T05:12:15.205Z"
+    },
+    "1622": {
+      "name": "서울대공원야영장",
+      "status": "ok",
+      "url": "http://grandpark.seoul.go.kr/main/campingMain.do?headerId=412634",
+      "need_power": false,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:12:21.689Z"
+    },
+    "1846": {
+      "name": "순천 포라이즌 글램핑",
+      "status": "ok",
+      "url": "https://sjccglamping.co.kr/main/index.html",
+      "need_power": false,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:12:29.393Z"
+    },
+    "2044": {
+      "name": "애플 글램핑",
+      "status": "fail",
+      "url": "http://www.appleglamping.com/bbs/content.php?co_id=company",
+      "error": "fetch failed",
+      "checked_at": "2026-10-20T05:12:29.803Z"
+    },
+    "2110": {
+      "name": "양양캠핑장",
+      "status": "fail",
+      "url": "http://me2.do/FhpNyW3i",
+      "error": 404,
+      "checked_at": "2026-10-20T05:10:58.388Z"
+    },
+    "2377": {
+      "name": "양평 백운봉 자연휴양림",
+      "status": "ok",
+      "url": "http://www.ypforest.com/",
+      "need_power": true,
+      "need_hot": false,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:12:30.159Z"
+    },
+    "2459": {
+      "name": "웅천친수공원 야영장",
+      "status": "fail",
+      "url": "http://www.ystour.kr/tourism/tour/tourMUserList.do?mode=detail&cur_page=1&m2=-1&searchWord=&m3=&others=04&trSeqId=702",
+      "error": 404,
+      "checked_at": "2026-10-20T05:12:31.900Z"
+    },
+    "2697": {
+      "name": "정선 펫 캠핑장",
+      "status": "ok",
+      "url": "https://www.jsimc.or.kr/front/html/block_state.html",
+      "need_power": true,
+      "need_hot": false,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:11:21.902Z"
+    },
+    "2735": {
+      "name": "제천옛날학교캠핑장",
+      "status": "fail",
+      "url": "http://www.xn--9d0bv6dl30adnbj4pxnksb.com/default/",
+      "error": 404,
+      "checked_at": "2026-10-20T05:11:46.741Z"
+    },
+    "2764": {
+      "name": "주암 오토캠핑장",
+      "status": "ok",
+      "url": "http://www.sjcamping.co.kr/main/",
+      "need_power": false,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:12:34.081Z"
+    },
+    "2975": {
+      "name": "추암오토캠핑장",
+      "status": "fail",
+      "url": "http://www.chuamautocamping.or.kr/",
+      "error": "fetch failed",
+      "checked_at": "2026-10-20T05:11:23.878Z"
+    },
+    "3206": {
+      "name": "팔봉산관광지 야영장",
+      "status": "ok",
+      "url": "https://www.hongcheon.go.kr/palbong/",
+      "need_power": false,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:11:05.843Z"
+    },
+    "3209": {
+      "name": "팔영산 자연휴양림 야영장",
+      "status": "fail",
+      "url": "http://singihan.goheung.go.kr/",
+      "error": 500,
+      "checked_at": "2026-10-20T05:11:19.922Z"
+    },
+    "3436": {
+      "name": "함허동천야영장",
+      "status": "ok",
+      "url": "https://www.ghss.or.kr/ttreserve",
+      "need_power": false,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:11:25.651Z"
+    },
+    "7109": {
+      "name": "가마미야영장",
+      "status": "fail",
+      "url": "http://gamamibeach.co.kr/index.php",
+      "error": "fetch failed",
+      "checked_at": "2026-10-20T05:12:55.473Z"
+    },
+    "7173": {
+      "name": "아름다운글램핑장",
+      "status": "fail",
+      "url": "http://www.bcamping.co.kr/",
+      "error": 403,
+      "checked_at": "2026-10-20T05:12:56.582Z"
+    },
+    "7309": {
+      "name": "쥬라기 카라반",
+      "status": "ok",
+      "url": "http://xn--ok0b89oba438bl5t48g.com/",
+      "need_power": false,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:10:33.184Z"
+    },
+    "7315": {
+      "name": "등억알프스야영장",
+      "status": "ok",
+      "url": "https://camping.ulju.ulsan.kr/ujcamping/index_main",
+      "need_power": false,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:11:15.539Z"
+    },
+    "7424": {
+      "name": "관리도캠핑장",
+      "status": "fail",
+      "url": "https://islandcamping.imweb.me/",
+      "error": 403,
+      "checked_at": "2026-10-20T05:11:54.260Z"
+    },
+    "7566": {
+      "name": "독립기념관 캠핑장",
+      "status": "fail",
+      "url": "https://www.i815.or.kr/2018/tour/campsite.do",
+      "error": 404,
+      "checked_at": "2026-10-20T05:11:54.217Z"
+    },
+    "7763": {
+      "name": "이천농업테마공원 국민여가캠핑장",
+      "status": "fail",
+      "url": "http://2000farmpark.or.kr/",
+      "error": "fetch failed",
+      "checked_at": "2026-10-20T05:10:31.059Z"
+    },
+    "7778": {
+      "name": "포항국민여가캠핑장",
+      "status": "fail",
+      "url": "http://www.pohang.go.kr/camping",
+      "error": "fetch failed",
+      "checked_at": "2026-10-20T05:10:28.397Z"
+    },
+    "7997": {
+      "name": "고도 캠핑장",
+      "status": "ok",
+      "url": "http://daegayacaravan.com/",
+      "need_power": false,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:11:23.079Z"
+    },
+    "8012": {
+      "name": "화순 고인돌 오토캠핑장",
+      "status": "fail",
+      "url": "https://dc.hwasun.go.kr/",
+      "error": "fetch failed",
+      "checked_at": "2026-10-20T05:13:19.053Z"
+    },
+    "8145": {
+      "name": "비토어촌체험휴양마을",
+      "status": "robots",
+      "url": "http://bitoseom.co.kr/",
+      "checked_at": "2026-10-20T05:10:29.089Z"
+    },
+    "8213": {
+      "name": "무안 낙지공원 노을길 야영장",
+      "status": "ok",
+      "url": "http://www.xn--wk0bq5di5yhpam4czq.kr/default/",
+      "need_power": true,
+      "need_hot": true,
+      "power": {
+        "ok": true,
+        "quote": "3103\n W",
+        "src": "http://www.xn--wk0bq5di5yhpam4czq.kr/default/"
+      },
+      "hot": null,
+      "checked_at": "2026-10-20T05:13:21.131Z"
+    },
+    "100342": {
+      "name": "골드바베큐 당일캠핑장",
+      "status": "ok",
+      "url": "https://www.goldbbqcamp.net/",
+      "need_power": false,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:10:54.330Z"
+    },
+    "100464": {
+      "name": "(주)세기(도그팰리스)",
+      "status": "ok",
+      "url": "https://www.dogpalace.kr/",
+      "need_power": true,
+      "need_hot": true,
+      "power": null,
+      "hot": {
+        "ok": true,
+        "quote": "낭만가득 온수풀&스파",
+        "src": "https://www.dogpalace.kr/"
+      },
+      "checked_at": "2026-10-20T05:13:25.269Z"
+    },
+    "101490": {
+      "name": "성북동 숲속야영장",
+      "status": "ok",
+      "url": "https://www.hgscamp.kr:454/sbd/intro.asp",
+      "need_power": true,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:10:56.625Z"
+    },
+    "101518": {
+      "name": "정담은 캠핑&글램핑",
+      "status": "fail",
+      "url": "https://www.glamping407.co.kr/",
+      "error": "fetch failed",
+      "checked_at": "2026-10-20T05:13:26.938Z"
+    },
+    "101530": {
+      "name": "헤리티지글램핑",
+      "status": "ok",
+      "url": "https://heritageglamping.co.kr/html/index.html",
+      "need_power": true,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:10:59.659Z"
+    },
+    "101747": {
+      "name": "서진이네 오토캠핑장",
+      "status": "ok",
+      "url": "https://xn--camp-9t8pp08e2ekkte.com/",
+      "need_power": true,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:13:33.975Z"
+    },
+    "101797": {
+      "name": "누크(NOOK) 글램핑&캠핑",
+      "status": "ok",
+      "url": "http://www.nookglamping.co.kr/",
+      "need_power": true,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:11:18.072Z"
+    },
+    "101857": {
+      "name": "기린 캠프랜드",
+      "status": "ok",
+      "url": "http://kylinvillaresort.com/camping.html",
+      "need_power": false,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:13:35.355Z"
+    },
+    "101889": {
+      "name": "사량도 대항해수욕장 캠핑장",
+      "status": "ok",
+      "url": "https://sarangbeach.cafe24.com/",
+      "need_power": true,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:11:50.818Z"
+    },
+    "102070": {
+      "name": "ROCKON글램핑",
+      "status": "ok",
+      "url": "https://www.rockonglamping.co.kr/",
+      "need_power": false,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:11:52.092Z"
+    },
+    "102130": {
+      "name": "감포누리캠핑글램핑",
+      "status": "fail",
+      "url": "http://gamponuri.co.kr/",
+      "error": 403,
+      "checked_at": "2026-10-20T05:10:05.196Z"
+    },
+    "102206": {
+      "name": "오차드블리스",
+      "status": "ok",
+      "url": "https://orchardbliss.co.kr/",
+      "need_power": false,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:11:12.483Z"
+    },
+    "102229": {
+      "name": "화성에코팜테마파크 오토캠핑장",
+      "status": "ok",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/",
+      "need_power": false,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:11:02.542Z"
+    },
+    "102331": {
+      "name": "알프스캠핑장",
+      "status": "ok",
+      "url": "https://alpsvillage.kr/html/index.html",
+      "need_power": false,
+      "need_hot": true,
+      "power": null,
+      "hot": null,
+      "checked_at": "2026-10-20T05:10:30.418Z"
+    }
+  }
+}
