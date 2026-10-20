@@ -240,7 +240,7 @@ const pos = (f) => f && f.g;
 const NO_TAGS = {
   NO_POWER: ["전기 불가", "bolt"], HIGH_POWER: ["고출력 전열기구 금지", "bolt"], NO_FIRE: ["화기 불가", "flame"], NO_FIREWOOD: ["장작 불가", "flame"],
   NO_CHARCOAL: ["숯 불가", "flame"], BYO_FUEL: ["개인 장작·숯 반입 금지", "flame"], BYO_PIT: ["개인 화로대 금지", "flame"], NO_HOT_WATER: ["온수 불가", "drop"],
-  NO_PET: ["반려동물 불가", "paw"], BIG_DOG: ["대형견 불가", "paw"], NO_CARAVAN: ["개인 카라반·트레일러 불가", "caravan"], NO_EXTRA_TENT: ["추가 텐트 불가", "tent"],
+  NO_PET: ["반려견 불가", "paw"], BIG_DOG: ["반려견 제한", "paw"], NO_CARAVAN: ["개인 카라반·트레일러 불가", "caravan"], NO_EXTRA_TENT: ["추가 텐트 불가", "tent"],
   NO_FIREWORKS: ["폭죽 금지", "spark"], NO_LOUD: ["음향기기 금지", "broadcast"], NO_MINOR: ["미성년자 단독 불가", "alert"], NO_VISITOR: ["방문객 불가", "door"], NO_WINTER: ["동계 휴장", "calendar"],
 };
 const NO_ORDER = ["NO_PET", "BIG_DOG", "NO_FIRE", "NO_FIREWOOD", "NO_CHARCOAL", "BYO_FUEL", "BYO_PIT", "NO_POWER", "HIGH_POWER", "NO_HOT_WATER", "NO_CARAVAN", "NO_EXTRA_TENT", "NO_WINTER", "NO_FIREWORKS", "NO_LOUD", "NO_MINOR", "NO_VISITOR"];
@@ -871,11 +871,11 @@ function card(c, i = 0, opts) {
     </div>
     <div class="card-body">
       <div class="name-row"><h3 class="card-name">${esc(nameOf(c).name)}</h3>${heartBtn(c)}</div>
-      <p class="card-meta">${ic("pin")}${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
-      ${c.st?.length ? `<p class="card-types">${ic("tent")}${esc(typeLine2(c))}</p>` : ""}
+      <p class="card-meta">${ic("pin")}${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}</p>
+      <p class="card-types">${ic("tent")}<span>${esc((c.st?.length ? typeLine2(c) : typeLine(c)) || "야영장")}</span></p>
       ${rowsHtml(c)}
-      ${feeMain(c)?.text && feeTiersLine(c) ? `<p class="card-tiers">${feeTiersLine(c)}</p>` : ""}
-      ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-reviews">${cardReviewPills(c.rv, c)}</div>` : ""}
+      <p class="card-tiers${feeMain(c)?.text && feeTiersLine(c) ? "" : " is-empty"}">${(feeMain(c)?.text && feeTiersLine(c)) || "&nbsp;"}</p>
+      <div class="card-reviews">${cardReviewPills(c.rv, c)}</div>
     </div>
   </article>`;
 }
@@ -1850,7 +1850,7 @@ function specTiles(c, d) {
   mention.toilet = cnt(sa.toilets_count ?? c.toilets);
   mention.shower = cnt(sa.showers_count ?? c.showers);
   mention.sink = cnt(c.sinks);
-  const T = [["size", "size", "설치 공간", ""], ["park", "car", "텐트 옆 주차", "cobalt"], ["power", "bolt", "전기", "volt"], ["fire", "flame", "장작·숯", "flame"], ["ground", "layers", "바닥", ""], ["shelter", "tent", "텐트·타프", ""], ["toilet", "poo", "화장실", ""], ["shower", "bath", "샤워실", ""], ["sink", "fountain", "개수대", ""], ["hot", "drop", "온수", ""], ["pet", "paw", "반려동물", ""]];
+  const T = [["size", "size", "설치 공간", ""], ["park", "car", "텐트 옆 주차", "cobalt"], ["power", "bolt", "전기", "volt"], ["fire", "flame", "장작·숯", "flame"], ["ground", "layers", "바닥", ""], ["shelter", "tent", "텐트·타프", ""], ["toilet", "poo", "화장실", ""], ["shower", "bath", "샤워실", ""], ["sink", "fountain", "개수대", ""], ["hot", "drop", "온수", ""], ["pet", "paw", "반려견", ""]];
   return T.map(([k, i, l, cls]) => {
     let x = f[k] ?? mention[k] ?? null;
     if (k === "power" && f.power?.v === "있음" && mention.power?.v) x = mention.power;
@@ -2361,7 +2361,7 @@ function priceRows(c, d) {
     const day = bs.date ? `${mdKst(`${bs.date}T12:00:00+09:00`)}(토)` : "";
     for (const g of groups.values()) {
       const ns = g.names, name = serviceText(ns.length > 2 ? `${ns[0]} ~ ${ns.at(-1)}` : ns.join(", "), 30);
-      const label = [name, g.kind, `${ns.length}개`, g.size ? `${g.size[0]}×${g.size[1]}m` : "", g.floor, g.people ? String(g.people).replace(/^기준인원\s*/, "기준 ") : "", g.parking ? serviceText(String(g.parking).replace(/주차$/, " 주차"), 14) : "", g.carCamp ? "차박 가능" : "", g.pet ? "반려동물 동반" : ""].filter(Boolean).join(" · ");
+      const label = [name, g.kind, `${ns.length}개`, g.size ? `${g.size[0]}×${g.size[1]}m` : "", g.floor, g.people ? String(g.people).replace(/^기준인원\s*/, "기준 ") : "", g.parking ? serviceText(String(g.parking).replace(/주차$/, " 주차"), 14) : "", g.carCamp ? "차박 가능" : "", g.pet ? "반려견 동반" : ""].filter(Boolean).join(" · ");
       addStay(g.price || 0, label, "업장 등록", { g: "c", src: { label: bs.label ?? "예약 화면(업장 등록)", url: bs.url, at: bs.checked_at, quote: `${name}${g.size ? ` 규격 ${g.size[0]}m × ${g.size[1]}m` : ""}${g.price ? ` ${fmt(g.price)}원` : ""}${day ? ` · ${day} 1박` : ""}` } }, day ? `${day} 1박` : "");
     }
   }
@@ -2608,7 +2608,7 @@ function houseRulesHtml(c, d) {
 const OPERATOR_CATEGORIES = [
   ["입·퇴실", /입실|퇴실|얼리.?체크/], ["요금 · 환불", /요금|할인|환불|취소|수수료|\d+원/],
   ["주차", /주차|차량|견인|차박/], ["전기", /전기|리드선|차단/], ["불멍 · 화로", /화로|장작|숯|불씨|화재/],
-  ["반려동물", /반려동물|반려견|마리/], ["매너타임 · 소음", /매너.?타임|소음|정숙|취침|소등/], ["시설", /온수|화장실|휴게실|산책로|편의시설/],
+  ["반려견", /반려동물|반려견|마리/], ["매너타임 · 소음", /매너.?타임|소음|정숙|취침|소등/], ["시설", /온수|화장실|휴게실|산책로|편의시설/],
   ["이용 규칙", /쓰레기|분리수거|외부인|준수|강제퇴장|입장/], ["사이트 이용", /일반.?사이트|오토.?캠핑|캠핑카|카라반|텐트/],
 ];
 function compactOperatorText(value) {
@@ -2693,7 +2693,7 @@ function operatorSummary(label, texts) {
     return /없음|불가/.test(text) ? "전기 이용 불가" : "전기 이용 안내";
   }
   if (label === "불멍 · 화로") return /장작/.test(text) ? "장작 이용 안내" : /숯/.test(text) ? "숯 이용 안내" : /불가|금지/.test(text) ? "화기 이용 불가" : "화기 이용 안내";
-  if (label === "반려동물") return /불가|금지/.test(text) ? "반려동물 동반 불가" : "반려동물 동반 안내";
+  if (label === "반려견" || label === "반려동물") return /불가|금지/.test(text) ? "반려견 동반 불가" : "반려견 동반 안내";
   if (label === "시설") return "시설 이용 안내";
   if (label === "사이트 이용") return "사이트 이용 안내";
   return "운영 규정 확인";
@@ -2714,7 +2714,7 @@ function operatorHtml(d, c) {
     if (!row.url && x.url) row.url = x.url;
     grouped.set(label, row);
   }
-  const order = new Map(["입·퇴실", "예약 · 성수기", "취소 · 환불", "인원 · 추가", "주차", "전기", "불멍 · 화로", "반려동물", "매너타임 · 소음", "시설", "이용 규칙", "사이트 이용", ...OPERATOR_CATEGORIES.map(([l]) => l)].map((label, i) => [label, i]));
+  const order = new Map(["입·퇴실", "예약 · 성수기", "취소 · 환불", "인원 · 추가", "주차", "전기", "불멍 · 화로", "반려견", "매너타임 · 소음", "시설", "이용 규칙", "사이트 이용", ...OPERATOR_CATEGORIES.map(([l]) => l)].map((label, i) => [label, i]));
   const rows = [...grouped.values()].filter((x) => x.texts.length).sort((a, b) => (order.get(a.label) ?? 99) - (order.get(b.label) ?? 99)).slice(0, 8);
   if (!rows.length) return "";
 
@@ -3071,7 +3071,7 @@ function reviewLinksHtml(d, c) {
   </section>`;
 }
 // 고캠핑 등록 부가값(c.gx)·공공 우수야영장(c.best). 값이 없으면 줄을 만들지 않는다(0·미입력은 "없음"이 아니다).
-const BEST_LABEL = { ECO: "친환경", FAMILY: "가족친화", ACCESSIBLE: "교통약자 배려", PET: "반려동물 친화" };
+const BEST_LABEL = { ECO: "친환경", FAMILY: "가족친화", ACCESSIBLE: "교통약자 배려", PET: "반려견 친화" };
 function registryRows(c) {
   const g = c.gx ?? {}, sf = g.sf ?? [];
   const safety = [["소화기", sf[0]], ["방화수", sf[1]], ["방화사", sf[2]], ["화재감지기", sf[3]]].filter(([, n]) => n > 0).map(([l, n]) => `${l} ${n}`);
@@ -3966,7 +3966,7 @@ async function compareView() {
   const picker = `<div class="rail picks">${saved.map((c) => { const on = S.pick.includes(String(c.id)); return `<button type="button" class="pick${on ? " on" : ""}" data-pick="${esc(c.id)}" aria-pressed="${on}">${campThumb(c, { sizes: "36px" })}<span>${esc(nameOf(c).name)}</span>${ic(on ? "check" : "plus")}</button>`; }).join("")}</div>`;
   const ds = await Promise.all(camps.map((c) => detailOf(c.id)));
   const rowsDef = [
-    ["현장 조건", [["주차", (c) => facts(c).park, "car"], ["전기", (c) => facts(c).power, "bolt"], ["장작·숯", (c) => facts(c).fire, "flame"], ["사이트 규격", (c) => facts(c).size, "size"], ["바닥", (c) => facts(c).ground, "layers"], ["위생", (c) => facts(c).sanitary, "bath"], ["반려동물", (c) => facts(c).pet, "paw"]]],
+    ["현장 조건", [["주차", (c) => facts(c).park, "car"], ["전기", (c) => facts(c).power, "bolt"], ["장작·숯", (c) => facts(c).fire, "flame"], ["사이트 규격", (c) => facts(c).size, "size"], ["바닥", (c) => facts(c).ground, "layers"], ["위생", (c) => facts(c).sanitary, "bath"], ["반려견", (c) => facts(c).pet, "paw"]]],
     ["사이트", [["타입", (c) => (c.st?.length ? { v: typeLine2(c), g: "c", src: { label: "한국관광공사 고캠핑 등록 현황", url: c.gc_url } } : null), "tent"], ["사이트 수", (c, d) => profFact(PF(d, "TYPE")), "layers"]]],
     ["시간·요금", [["입실", (c, d) => usage(c, d)[0][1], "clock-in"], ["퇴실", (c, d) => usage(c, d)[1][1], "clock-out"], ["매너타임", (c, d) => usage(c, d)[2][1], "bed"], ["요금", (c, d) => usage(c, d)[3][1], "won"]]],
     ["시설·주변", [["편의시설", (c) => ((c.amenities ?? []).length ? { v: c.amenities.slice(0, 6).join(" · "), g: "c", src: { label: "고캠핑 등록 편의시설", url: c.gc_url } } : null), "drop"], ["대여", (c) => ((c.rental ?? []).length ? { v: c.rental.join(" · "), g: "c", src: { label: "고캠핑 등록 대여품목", url: c.gc_url } } : null), "cart"], ["편의점", (c) => (c.nl?.c ? { v: km(c.nl.c), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+편의점` : null } } : null), "store"], ["마트", (c) => (c.nl?.m ? { v: km(c.nl.m), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+마트` : null } } : null), "cart"], ["후기 장점", (c) => (c.rv?.p?.length ? { v: c.rv.p.slice(0, 2).map(([t]) => t).join(" · "), g: "m", src: { label: "방문자 후기 분석", url: c.gc_url } } : null), "thumb-up"]]],

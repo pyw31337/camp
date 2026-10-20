@@ -36,7 +36,7 @@ test("공식 ‘가능’과 어긋나는 문장 태그는 버리고, 등록값�
   const lines = [{ text: "반려동물 동반 불가입니다.", url: "https://x.kr/a", g: "c" }];
   assert.equal(houseRules(lines, [], { pet: true }).tags.length, 0);
   const h = houseRules([], [{ k: "NO_PET", g: "c", quote: "반려동물 동반: 불가능", url: "https://gc" }]);
-  assert.equal(h.tags[0].label, "반려동물 불가");
+  assert.equal(h.tags[0].label, "반려견 불가");
   // 장작·숯 둘 다 불가면 ‘화기 불가’ 하나
   const f = houseRules([{ text: "장작 사용은 금지되어 있습니다.", url: "u", g: "c" }, { text: "숯 사용 불가합니다.", url: "u", g: "c" }]);
   assert.deepEqual(f.tags.map((t) => t.k), ["NO_FIRE"]);
