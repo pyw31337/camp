@@ -251,7 +251,7 @@ export function regionShorts(regions = []) {
 /** 여러 업장을 묶은 글인가? 제목의 “N곳/추천/모음/TOP”, 본문의 여러 📍·번호 목록. */
 export function isRoundup({ title, snippet } = {}) {
   title = String(title ?? ""); snippet = String(snippet ?? "");
-  if (/(\d+\s*곳|\d+\s*선|TOP\s*\d*|BEST|베스트|추천\s*(?:캠핑장|리스트)|모음|총정리|리스트|가볼\s*만한|가볼만한)/i.test(title)) return true;
+  if (/(\d+\s*곳|\d+\s*선|TOP\s*\d*|BEST|베스트|추천\s*(?:캠핑장|리스트)|모음|총정리|리스트|가볼\s*만한\s*(?:곳\s*)?\d+|가볼만한\s*(?:곳\s*)?\d+|가볼\s*만한\s*곳들)/i.test(title)) return true;
   const pins = (snippet.match(/📍/g) ?? []).length;
   const nums = (snippet.match(/(?:^|\s)\d\.\s/g) ?? []).length;
   return pins >= 2 || nums >= 2;

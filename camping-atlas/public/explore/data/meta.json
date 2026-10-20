@@ -807,12 +807,12 @@
     }
   },
   "review_digest": {
-    "generated_at": "2026-10-20T02:35:59.215Z",
-    "campgrounds": 2709,
-    "with_pros": 2166,
-    "with_cons": 364,
-    "reviews": 26670,
-    "sanity_dropped": 475
+    "generated_at": "2026-10-20T07:23:46.324Z",
+    "campgrounds": 2718,
+    "with_pros": 2330,
+    "with_cons": 370,
+    "reviews": 27458,
+    "sanity_dropped": 434
   },
   "nearby_licensed": {
     "generated_at": "2026-10-20T02:36:00.954Z",

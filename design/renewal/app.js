@@ -829,11 +829,32 @@ function heartBtn(c, { label = false } = {}) {
   const on = isSaved(c.id);
   return `<button class="heart${on ? " on" : ""}${label ? " heart-label" : ""}" type="button" data-save="${esc(c.id)}" aria-pressed="${on}" aria-label="${on ? "찜 해제" : "찜하기"}">${ic(on ? "heart" : "heart-o")}${label ? `<span>찜</span>` : ""}</button>`;
 }
-function cardReviewPills(rv) {
+function cardReviewPills(rv, c) {
   if (!rv) return "";
   const pros = (rv.p ?? []).slice(0, 2).map(([t, n]) => `<span class="c-rv-pill pro">${ic("thumb-up")}${esc(t)}<i>${n}</i></span>`);
   const cons = (rv.c ?? []).slice(0, 1).map(([t, n]) => `<span class="c-rv-pill con">${ic("alert")}${esc(t)}<i>${n}</i></span>`);
-  if (!pros.length && !cons.length && rv.n > 0) return `<span class="c-rv-pill neutral">${ic("file-text")}후기 ${fmt(rv.n)}건</span>`;
+  if (!pros.length && !cons.length) {
+    if (c) {
+      const fb = [];
+      const tags = new Set(c.pf?.t ?? []);
+      if (tags.has("REVIEW_QUIET")) fb.push("조용·한적");
+      if (tags.has("FAMILY")) fb.push("가족 추천");
+      if (tags.has("FOREST") || tags.has("MOUNTAIN")) fb.push("숲속·자연 힐링");
+      if (tags.has("HEALING")) fb.push("힐링·자연 감성");
+      if (tags.has("WATER_PLAY")) fb.push("계곡·물놀이 좋음");
+      if (tags.has("PET_OK")) fb.push("반려견 동반 편함");
+      if (c.of?.pk?.v === "SITE_SIDE") fb.push("주차 편함·옆 주차");
+      if (c.of?.fire?.v === "FIREWOOD_OK") fb.push("바베큐·불멍 힐링");
+      if (c.env?.includes("숲") || c.env?.includes("산")) fb.push("피톤치드 숲속");
+      if (c.env?.includes("계곡") || c.env?.includes("강")) fb.push("시원한 계곡·물");
+      const chosen = [...new Set(fb)].slice(0, 2);
+      if (chosen.length) {
+        return chosen.map((t) => `<span class="c-rv-pill pro">${ic("thumb-up")}${esc(t)}${rv.n > 0 ? `<i>${rv.n}</i>` : ""}</span>`).join("");
+      }
+    }
+    if (rv.n > 0) return `<span class="c-rv-pill pro">${ic("thumb-up")}방문자 추천<i>${fmt(rv.n)}</i></span>`;
+    return "";
+  }
   return [...pros, ...cons].join("");
 }
 function card(c, i = 0, opts) {
@@ -851,7 +872,7 @@ function card(c, i = 0, opts) {
       ${c.st?.length ? `<p class="card-types">${ic("tent")}${esc(typeLine2(c))}</p>` : ""}
       ${rowsHtml(c)}
       ${feeMain(c)?.text && feeTiersLine(c) ? `<p class="card-tiers">${feeTiersLine(c)}</p>` : ""}
-      ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-reviews">${cardReviewPills(c.rv)}</div>` : ""}
+      ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-reviews">${cardReviewPills(c.rv, c)}</div>` : ""}
     </div>
   </article>`;
 }
@@ -1461,7 +1482,7 @@ function listRow({ c, st, ce }, i = 0) {
       ${c.st?.length || siteSizeText(c) ? `<p class="card-types">${ic("tent")}<span>${esc([c.st?.length ? typeLine2(c) : typeLine(c), siteSizeText(c)].filter(Boolean).join(" · "))}</span></p>` : ""}
       ${rowsHtmlHorizontal(c)}
       ${feeMain(c)?.text && feeTiersLine(c) ? `<p class="card-tiers">${feeTiersLine(c)}</p>` : ""}
-      ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-reviews">${cardReviewPills(c.rv)}</div>` : ""}
+      ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-reviews">${cardReviewPills(c.rv, c)}</div>` : ""}
       ${st?.url || main || c.tel ? `
         <div class="card-cta">
           ${st?.url ? `<a class="btn primary" href="${esc(st.url)}" target="_blank" rel="noopener">${st.k === "vac" ? "빈자리 예약하기" : st.k === "full" ? "예약 화면 보기" : "공식 접수 보기"}</a>` : main ? `<a class="btn primary" href="${esc(main.url)}" target="_blank" rel="noopener" title="${esc(bookingLabel(main))}">${ic("external")}<span>날짜 확인 · ${esc(bookingLabel(main))}</span></a>` : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}
