@@ -7,7 +7,7 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const [file, at = new Date().toISOString().slice(0, 10)] = process.argv.slice(2);
-const cat = JSON.parse(readFileSync(join(root, "camping-atlas/public/explore/data/campgrounds.json"), "utf8")).filter((c) => !String(c.id).startsWith("osm-"));
+const cat = JSON.parse(readFileSync(join(root, "camping-atlas/public/explore/data/campgrounds.json"), "utf8")).filter((c) => !/^(osm|park)-/.test(String(c.id)));
 const seedPl = JSON.parse(readFileSync(join(root, "pipeline/registry/dayuse-seed.json"), "utf8")).places;
 const R = 6371000, rad = Math.PI / 180;
 const dist = (a, b) => { const x = (b[1] - a[1]) * rad * Math.cos(((a[0] + b[0]) / 2) * rad), y = (b[0] - a[0]) * rad; return Math.hypot(x, y) * R; };
@@ -65,12 +65,12 @@ const official = (U.parks ?? []).map((u) => ({ c: [u.lat, u.lng], a: u.area, nam
 const uG = grid(official, (p) => p.c);
 const parksOsm = parks.filter((p) => !near(uG, (x) => x.c, p.c, 2).some((u) => { const m = dist(u.c, p.c), a = norm(u.name), b = norm(p.name); return m < 150 || (m < Math.max(300, Math.sqrt(u.a)) && a && b && (a.includes(b) || b.includes(a))); }));
 const PO = official.sort((a, b) => b.a - a.a).map((p) => { const r = rec(p, "park"); if (!r) return null; const u = p.u, [sd, sg] = String(u.addr).split(/\s+/);
-  return { ...r, id: `park-${u.no}`, sido: sd || r.sido, sigungu: sg || r.sigungu, rg: "addr", addr: u.addr, tel: u.tel || "", osm: undefined, auto: 1, op: "LOCAL_GOVERNMENT",
+  return { ...r, id: `park-${u.no}-${[...u.name].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) >>> 0, 7).toString(36).slice(0, 5)}`, sido: sd || r.sido, sigungu: sg || r.sigungu, rg: "addr", addr: u.addr, tel: u.tel || "", osm: undefined, auto: 1, op: "LOCAL_GOVERNMENT",
     pf: { s: `${u.se} · 면적 약 ${Math.round(u.area / 1000) / 10}만㎡${u.fac ? ` · 시설 ${u.fac.slice(0, 60)}` : ""} · 취사·그늘막 규정은 관리기관(${u.inst})에 확인`, t: ["PARK"] },
     src: { url: U.url, label: `전국도시공원정보표준데이터(${u.inst}, 기준일 ${u.ref})`, checked_at: U.collected_at || at },
     day: { cooking: { v: "UNKNOWN", at: U.collected_at || at }, shade: { v: "UNKNOWN", at: U.collected_at || at } } }; }).filter(Boolean);
 const P = [...PO, ...parksOsm.sort((a, b) => b.a - a.a).map((p) => rec(p, "park")).filter(Boolean)];
 const W = water.map((p) => rec(p, "water")).filter(Boolean);
-const places = [...P, ...W];
+const places = [...new Map([...P, ...W].map((x) => [x.id, x])).values()];
 writeFileSync(join(root, "pipeline/registry/dayuse-osm.json"), JSON.stringify({ source: "OpenStreetMap Geofabrik south-korea (ODbL)", checked_at: at, places }));
 console.log(`공원 ${P.length}(공식 ${PO.length}·OSM ${P.length - PO.length}) · 공공물놀이 ${W.length} · 화장실 연결 ${places.filter((p) => p.nearby_toilets).length} · bbq ${places.filter((p) => p.day.cooking.v !== "UNKNOWN").length} (원천 공원 ${parks.length}, 물놀이 ${water.length}, 화장실 ${toilets.length})`);
