@@ -453,6 +453,12 @@ jobs:
           node pipeline/scripts/build-link-health.mjs
           # 공식 사진이 없는 곳의 카드 대표 사진(registry/card-fallback.json — 검색 썸네일·원문 링크)을 c.pt로 붙인다.
           node pipeline/scripts/build-card-fallback.mjs
+          # 데이터 누적 정책(docs/DATA_MERGE_POLICY.md): 최신 main에 있던 값이 이번 결과에서 지워지거나 줄었으면 되살린다(리셋 금지).
+          # 더 최신·더 믿을 만한 출처로 바뀐 것은 그대로 두고 옛 값을 기록한다. 기록: pipeline/registry/merge-review.ndjson
+          if [ "${{ github.event_name }}" != "pull_request" ]; then
+            git fetch -q origin main && FG_BASE="$(mktemp -d)" && git archive origin/main camping-atlas/public/explore/data pipeline/registry | tar -x -C "$FG_BASE"
+            node pipeline/scripts/field-guard.mjs "$FG_BASE" . --heal
+          fi
           # 업장 정보 커버리지(요금·입퇴실·매너타임·주차·전기 W·사이트 타입 등, 목표 2,500곳)를 meta.json에 남긴다.
           node pipeline/scripts/report-coverage.mjs
           # 모든 원천을 (캠핑장·속성·값·등급·원천·근거) 원자 사실로 풀어 묶음별 NDJSON(data/facts)으로 쓴다. 여러 에이전트의 공유 원장.
@@ -473,6 +479,7 @@ jobs:
           git checkout origin/main -- design/renewal scripts/publish-explorer-pages.mjs && node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public/explore
           node pipeline/scripts/coverage-guard.mjs "$RUNNER_TEMP/base-meta.json" camping-atlas/public/explore/data/meta.json
           git add camping-atlas/public/data camping-atlas/public/explore data/facts pipeline/registry/naver-usage.json pipeline/registry/dayuse-osm.json pipeline/registry/urban-parks.json
+          git add pipeline/registry/merge-review.ndjson 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "공개 데이터 변경 없음."; exit 0
           fi

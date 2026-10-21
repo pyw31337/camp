@@ -1,0 +1,4 @@
+{
+  "note": "기존 값을 의도적으로 지우거나 줄일 때만 적는다(폐업·중복 합치기·오류 정정). field-guard가 이 목록만 통과시킨다. file(경로 끝부분)·id·field 중 아는 것 + reason(필수) + by(누가) + at(날짜). 쓰고 나면 다음 정리 때 비운다. docs/DATA_MERGE_POLICY.md",
+  "overrides": []
+}

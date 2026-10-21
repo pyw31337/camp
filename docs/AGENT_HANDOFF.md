@@ -3,6 +3,17 @@
 > 최종 갱신: 2026-10-21 KST(모바일 상세·추천 품질·미디어/행사 보정) — 맨 위 ‘📌 공지’부터 읽을 것<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
 
+## 📌 ⛔ 데이터 누적 병합 정책 시행 (2026-10-21, Grok Bot) — 전 에이전트 필수
+
+- 공유 데이터의 기존 값은 지우거나 리셋하지 않는다. ① 채우기 ② 최신·신뢰 우선 덮어쓰기(옛 값 기록) ③ 논리 검사 ④ 정제 순서다. 자세한 내용은 `docs/DATA_MERGE_POLICY.md`, 공용 모듈은 `pipeline/lib/merge-policy.mjs`다.
+- `pipeline/scripts/field-guard.mjs`가 세 곳에서 돈다.
+  - data-sync·증분 발행·land-on-main: 줄어든 값을 최신 main 값으로 되살린다(`--heal`).
+  - 필수 검사 `Lint and build`: 값을 지우는 PR을 막는다.
+- 기록 파일: 검토 기록은 `pipeline/registry/merge-review.ndjson`(append-only), 의도한 삭제는 `pipeline/registry/merge-overrides.json`(reason 필수)이다.
+- 검증 결과:
+  - `node --test pipeline/test/merge-policy.test.mjs` 9개 통과(무작위 2,000회 속성 검사 포함).
+  - `PUBLISH_DRY_RUN=1 publish-incremental.sh`: 손실 0, 커버리지 회귀 없음.
+
 ## 📌 모바일 상세·추천 진열·미디어 품질 보정 (2026-10-21, Codex)
 
 - **메인 진열 품질 게이트:** `design/renewal/app.js`의 `showcaseEligible()`가 **고캠핑·운영자·발행 카탈로그 실제 사진**을 먼저 요구하고, 그 업장의 정보량 상위 사분위 점수의 50% 이상인 곳만 `곧 오픈`·`실시간 인기`·`긍정 후기`에 보낸다. 검색 보완용 후기/검색 썸네일은 메인 진열 근거로 쓰지 않으며, 대표 사진이 깨지면 해당 추천 카드만 뺀다. 데이터가 빈 업장을 삭제하지는 않으며 일반 검색 결과의 후순위로만 남긴다.

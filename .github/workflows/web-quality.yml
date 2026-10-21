@@ -35,6 +35,23 @@ jobs:
       - run: npm run build
       - name: Data sync safety (media/profile regression)
         run: node --test ../pipeline/test/data-sync-safety.test.mjs
+      - name: Data merge policy (merge-policy unit/property tests)
+        run: node --test ../pipeline/test/merge-policy.test.mjs
+      # 데이터 누적 정책(docs/DATA_MERGE_POLICY.md): 이 변경이 기존 값을 지우거나 줄이면 막는다(봇 PR 포함).
+      # 의도한 정정은 pipeline/registry/merge-overrides.json에 이유를 적어야 통과한다.
+      - name: No data deletion (field-guard)
+        if: github.event_name != 'push'
+        working-directory: .
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="${{ github.event.pull_request.base.sha }}"; git fetch -q --depth=1 origin "$BASE"
+          else
+            git fetch -q --deepen=300 origin "${{ github.ref_name }}" || true
+            git fetch -q --depth=300 origin main
+            BASE="$(git merge-base origin/main HEAD || echo origin/main)"
+          fi
+          B="$(mktemp -d)"; git archive "$BASE" camping-atlas/public/explore/data pipeline/registry | tar -x -C "$B"
+          node pipeline/scripts/field-guard.mjs "$B" . --report /tmp/field-guard.json
       # workflow_dispatch(데이터 봇 PR) 결과는 PR 검사 목록에 안 잡혀서, 같은 이름의 커밋 상태로도 남긴다(main 룰셋 필수 검사).
       - name: Report commit status for bot PRs
         if: always() && github.event_name == 'workflow_dispatch'
