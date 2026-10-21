@@ -1,4 +1,5 @@
 // 캠핑장별 1박 요금 및 사이트 단서 집계 → campgrounds.json 주입
+import { isOperatorHost } from "../lib/operator-site.mjs";
 import { existsSync, readFileSync } from "node:fs";
 import { writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
@@ -32,6 +33,14 @@ for (const targetPath of targetPaths) {
   let injected = 0;
 
   for (const c of camps) {
+    // 당일 장소(공원·물놀이터)는 야영장 요금 규칙을 적용하지 않는다(QA 2026-10-20).
+    // 운영자 홈페이지라던 요금이 실은 플랫폼·소개 페이지(관광공사 광고 185,000원 등)면 지운다(QA 2026-10-20).
+    if (c.fee?.url && /운영자/.test(c.fee.basis ?? "") && !isOperatorHost(c.fee.url)) delete c.fee;
+    if (c.du === "park" || c.du === "water") {
+      // 예전 실행이 붙인 야영장 일괄 요금(조례·표준 요금, 원문 URL 없음)도 지운다 — 무료 공원이 유료로 보였다.
+      if (c.fee && /조례 기준 요금|표준 야영 요금|표준 야영장 요금/.test(c.fee.basis ?? "")) delete c.fee;
+      continue;
+    }
     const detailPath = `${campsDir}/${c.id}.json`;
     if (!existsSync(detailPath)) continue;
 
@@ -156,7 +165,7 @@ for (const targetPath of targetPaths) {
         max: 19000,
         text: "1.5만~1.9만원대",
         basis: "국립공원공단 표준 야영장 요금 (전기료 별도)",
-        grade: "CONFIRMED",
+        grade: "REFERENCE", // 업장 공지가 아닌 운영 주체 기준 참고값
         url: "https://reservation.knps.or.kr",
         checked_at: "2026-10-16",
       };
@@ -171,7 +180,7 @@ for (const targetPath of targetPaths) {
         max: 35000,
         text: "1.5만~3.5만원대",
         basis: "국·공립 자연휴양림 표준 야영 요금",
-        grade: "CONFIRMED",
+        grade: "REFERENCE", // 업장 공지가 아닌 운영 주체 기준 참고값
         url: "https://www.foresttrip.go.kr",
         checked_at: "2026-10-16",
       };
@@ -186,7 +195,7 @@ for (const targetPath of targetPaths) {
         max: 40000,
         text: "2.5만~4만원대",
         basis: "지자체 공영 야영장 조례 기준 요금",
-        grade: "CONFIRMED",
+        grade: "REFERENCE", // 업장 공지가 아닌 운영 주체 기준 참고값
         url: c.booking?.url || c.homepage || null,
         checked_at: "2026-10-16",
       };

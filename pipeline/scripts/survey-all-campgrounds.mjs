@@ -8,6 +8,7 @@ import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { extractCampConditions } from "../lib/survey-extractor.mjs";
+import { isOperatorHost } from "../lib/operator-site.mjs";
 
 const rootDir = resolve(fileURLToPath(import.meta.url), "../../..");
 const publicDataDir = join(rootDir, "camping-atlas/public/explore/data");
@@ -87,6 +88,11 @@ for (const camp of campgrounds) {
   if (op?.status === "OK" && Array.isArray(op.snippets) && op.snippets.length) {
     detail ??= {};
     detail.operator_snippets = op.snippets;
+  }
+  // 플랫폼·소개 페이지(관광공사 등) 문장은 운영자 안내가 아니다 — 예전 실행이 남긴 것도 뺀다(QA 2026-10-20).
+  if (Array.isArray(detail?.operator_snippets)) {
+    const keep = detail.operator_snippets.filter((x) => !x?.url || isOperatorHost(x.url));
+    if (keep.length !== detail.operator_snippets.length) { if (keep.length) detail.operator_snippets = keep; else delete detail.operator_snippets; }
   }
 
   // 추출 엔진 실행

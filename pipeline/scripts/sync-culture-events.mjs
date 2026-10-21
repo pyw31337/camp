@@ -37,7 +37,7 @@ if (!items.length) {
   process.exit(0);
 }
 const catalog = JSON.parse(readFileSync(join(root, "camping-atlas/public/explore/data/campgrounds.json"), "utf8"))
-  .map((c) => ({ id: String(c.id), lat: Number(c.lat), lng: Number(c.lng) })).filter((c) => Number.isFinite(c.lat) && Number.isFinite(c.lng));
+  .map((c) => ({ id: String(c.id), lat: Number(c.lat), lng: Number(c.lng) })).filter((c) => Number.isFinite(c.lat) && Number.isFinite(c.lng) && c.lat !== 0 && c.lng !== 0); // 좌표 없음(null→0)은 빼기(QA 2026-10-21)
 const extrasPath = join(outDir, "extras.json");
 const extras = existsSync(extrasPath) ? JSON.parse(readFileSync(extrasPath, "utf8")) : null;
 
