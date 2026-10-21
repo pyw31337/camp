@@ -923,6 +923,28 @@ function nearLine(c, sep = " · ") {
   return [["m", "마트"], ["c", "편의점"], ["b", "정육점"]].filter(([k]) => nl[k] && nl[k] <= 5000).map(([k, l]) => `${l} ${km(nl[k])}`).join(sep);
 }
 // 찜(하트): 카드 이름 오른쪽 회색 선 하트 → 누르면 채운 하트. 찜한 곳은 ‘찜’ 화면에서 3곳씩 나란히 비교한다.
+// ── 카탈로그 원본 행(상세·비교용) ────────────────────────────
+// 목록은 가벼운 판을 쓰고, 상세·비교를 열 때 같은 캠핑장의 원본 행(catx/{샤드}.json)을 받아 덮어쓴다 → 화면 내용은 원본과 같다.
+// 계산 캐시(c._f 등 _로 시작하는 값)는 지워 다시 계산한다. 샤드 번호는 scripts/split-catalog.mjs shardOf와 같아야 한다.
+const CATX = { v: "", n: 0, got: new Map() };
+const shardOf = (id) => { let h = 0; for (const ch of String(id)) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return h % CATX.n; };
+async function ensureFull(ids) {
+  if (!CATX.n) return;
+  const need = [...new Set(ids.map(String).filter((id) => { const c = S.byId.get(id); return c && !c.__full; }).map(shardOf))];
+  await Promise.all(need.map((n) => {
+    if (!CATX.got.has(n)) CATX.got.set(n, fetch(`${DATA}catx/${n}.json?v=${CATX.v}`).then((r) => (r.ok ? r.json() : {})).catch(() => { CATX.got.delete(n); return {}; }));
+    return CATX.got.get(n);
+  }));
+  for (const id of ids.map(String)) {
+    const c = S.byId.get(id);
+    if (!c || c.__full) continue;
+    const rec = (await CATX.got.get(shardOf(id)))?.[id];
+    if (!rec) continue;
+    for (const k of Object.keys(c)) if (k.startsWith("_")) delete c[k];
+    Object.assign(c, rec);
+    Object.defineProperty(c, "__full", { value: true, enumerable: false });
+  }
+}
 function isSaved(id) { return S.saved.includes(String(id)); }
 function heartBtn(c, { label = false } = {}) {
   const on = isSaved(c.id);
@@ -1058,7 +1080,7 @@ async function loadSharedSaves() {
     S.saved = list.map((x) => String(x.campground_id)).filter((id) => S.byId.has(id));
     store.set("mc-saved", S.saved);
     syncCompare();
-    $$(`[data-save]`).forEach((x) => { const on = isSaved(x.dataset.save); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); });
+    $$(`[data-save]`).forEach((x) => { const on = isSaved(x.dataset.save); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); x.setAttribute("aria-label", on ? "찜 해제" : "찜하기"); x.querySelector("use")?.setAttribute("href", `#i-${on ? "heart" : "heart-o"}`); });
   } catch {}
 }
 async function clientMeta() {
@@ -1107,6 +1129,23 @@ function syncCondUi() {
   $$("[data-preset]").forEach((b) => b.setAttribute("aria-pressed", String(presetOn(Number(b.dataset.preset)))));
 }
 document.addEventListener("click", (e) => {
+  const cx = e.target.closest("[data-cond-x]");
+  if (cx) {
+    const k = cx.dataset.condX;
+    if (k.startsWith("sido:")) S.cond.sido = S.cond.sido.filter((x) => x !== k.slice(5));
+    else if (k.startsWith("kind:")) S.cond.kind = S.cond.kind.filter((x) => x !== k.slice(5));
+    else if (k === "pet") S.cond.pet = false;
+    else if (k === "w") S.cond.w = 0;
+    else if (k === "size") S.cond.size = 0;
+    else if (k === "fire") S.cond.fire = false;
+    else if (k === "park") S.cond.park = false;
+    else if (k === "win") S.cond.win = false;
+    else if (k === "near") S.cond.near = "";
+    store.set("mc-cond", S.cond);
+    if (location.hash.startsWith("#/list")) { history.replaceState(null, "", listHash()); route(); }
+    else syncCondUi();
+    return;
+  }
   if (e.target.closest("[data-open-cond]")) { if (!location.hash.startsWith("#/list")) S.onCondApply = syncCondUi; condSheet(); return; }
   const pr = e.target.closest("[data-preset]");
   if (pr) {
@@ -1251,7 +1290,7 @@ function homeView() {
       <div class="list-tools-right">
         <div class="rail active-chips" data-active></div>
         <button type="button" class="chip cond-open" data-open-cond>${ic("list")}조건${condActive() ? ` <i>${condActive()}</i>` : ""}</button>
-        <label class="sort">${ic("list")}<select data-sort aria-label="정렬">
+        <label class="sort sort-plain">${ic("list")}<select data-sort aria-label="정렬">
           <option value="rec"${(S.sort ?? "rec") === "rec" ? " selected" : ""}>추천순</option>
           <option value="fee"${S.sort === "fee" ? " selected" : ""}>요금 낮은 순</option>
           <option value="name"${S.sort === "name" ? " selected" : ""}>이름순</option>
@@ -1456,6 +1495,9 @@ function condChips(k = S.cond) {
   if (k.win) out.push(["win", "겨울 운영"]);
   return out;
 }
+function condBadgeRow() {
+  return condChips().map(([k, label]) => `<button type="button" class="cond-pill" data-cond-x="${esc(k)}">${esc(label)}<span aria-hidden="true">×</span></button>`).join("");
+}
 function condSummary() { const ch = condChips(); return ch.length ? (ch.length > 2 ? `${ch[0][1]} · ${ch[1][1]} 외 ${ch.length - 2}` : ch.map((x) => x[1]).join(" · ")) : "조건 추가"; }
 function condToParams(p, k = S.cond) {
   if (k.sido.length) p.set("sido", k.sido.join(","));
@@ -1657,7 +1699,7 @@ function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAt
   const fee = (k, l) => `<button type="button" class="chip fee-chip" ${feeAttr}="${k}" aria-pressed="${feePressed(k)}">${l}</button>`;
   return `<div class="filter-mod" aria-label="지역"><span class="fee-band-lbl">지역</span><div class="rail chips">${areaChips}</div></div>
     <div class="filter-mod" aria-label="사이트"><span class="fee-band-lbl">사이트</span><div class="rail chips"><button type="button" class="chip" ${stypeAttr}="" aria-pressed="${!S.stype}">전체</button>${typeChips}</div></div>
-    <div class="filter-mod" aria-label="1박 요금"><span class="fee-band-lbl">1박 요금</span><div class="rail chips fee-bands">${fee("", "전체")}${fee("u3", "~3만원")}${fee("3to5", "3~5만원")}${fee("5to7", "5~7만원")}${fee("7to10", "7만원~10만원")}${fee("10to20", "10만원~20만원")}${fee("o20", "20만원+")}</div></div>`;
+    <div class="filter-mod" aria-label="요금"><span class="fee-band-lbl">요금</span><div class="rail chips fee-bands">${fee("", "전체")}${fee("u3", "~3만원")}${fee("3to5", "3~5만원")}${fee("5to7", "5~7만원")}${fee("7to10", "7만원~10만원")}${fee("10to20", "10만원~20만원")}${fee("o20", "20만원+")}</div></div>`;
 }
 
 function listView() {
@@ -1686,8 +1728,9 @@ function listView() {
       <div class="list-tools">
         <span class="list-result" data-list-count>검색된 결과</span>
         <div class="list-tools-right">
+          <span class="cond-pills" data-cond-pills>${condBadgeRow()}</span>
           <button type="button" class="chip cond-open" data-open-cond>${ic("list")}조건${condActive() ? ` <i>${condActive()}</i>` : ""}</button>
-          <label class="sort">${ic("list")}<select data-list-sort aria-label="정렬">
+          <label class="sort sort-plain">${ic("list")}<select data-list-sort aria-label="정렬">
             <option value="rec"${(S.listSort ?? "rec") === "rec" ? " selected" : ""}>추천순</option>
             <option value="fee"${S.listSort === "fee" ? " selected" : ""}>요금 낮은 순</option>
             <option value="name"${S.listSort === "name" ? " selected" : ""}>이름순</option>
@@ -1762,7 +1805,7 @@ function themeView(themeKey) {
         </div>
         <div class="theme-subtools">
           <span class="theme-count" data-theme-count></span>
-          <label class="sort">${ic("list")}<select data-theme-sort aria-label="정렬">
+          <label class="sort sort-plain">${ic("list")}<select data-theme-sort aria-label="정렬">
             <option value="rec"${(S.sort ?? "rec") === "rec" ? " selected" : ""}>추천순</option>
             <option value="name"${S.sort === "name" ? " selected" : ""}>이름순</option>
             <option value="fee"${S.sort === "fee" ? " selected" : ""}>요금 낮은 순</option>
@@ -2377,6 +2420,7 @@ function galleryHtml(c) {
   return `<div class="gallery">${grid}${rail}</div>`;
 }
 async function detailView(id) {
+  await ensureFull([id]);
   const c = S.byId.get(id);
   if (!c) return `<div class="empty">${ic("search")}<b>캠핑장을 찾지 못했어요</b><a class="btn ghost" href="#/">찾기로</a></div>`;
   const d = await detailOf(id);
@@ -4557,6 +4601,7 @@ function openLightboxUrls(urls, start = 0, caption = "사진") {
 
 // ── 화면: 비교 ───────────────────────────────────────────────
 async function compareView() {
+  await ensureFull(S.pick.length ? S.pick : S.saved.slice(0, 3));
   const saved = S.saved.map((id) => S.byId.get(id)).filter(Boolean);
   if (!saved.length) {
     return `<section class="cmp-page"><div class="sec-head big"><h1>찜한 <em>캠핑장</em></h1></div>
@@ -4973,7 +5018,8 @@ addEventListener("error", (e) => {
 (async function boot() {
   $("#view").innerHTML = `<div class="loading"></div>`;
   const [camps, photos, openings, cards, avail, fcast] = await Promise.all([
-    fetch(`${DATA}campgrounds.json`).then((r) => r.json()),
+    // 가벼운 판(campgrounds.lite.json, scripts/split-catalog.mjs)이 있으면 그것을, 없으면 원본을 받는다.
+    fetch(`${DATA}campgrounds.lite.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((j) => (j?.camps ? (CATX.v = j.v, CATX.n = j.n, j.camps) : fetch(`${DATA}campgrounds.json`).then((r) => r.json()))),
     fetch(`${DATA}photos.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
     fetch(`${DATA}openings.json`).then((r) => (r.ok ? r.json() : { items: [] })).catch(() => ({ items: [] })),
     fetch(`${MEDIA}cards/index.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),

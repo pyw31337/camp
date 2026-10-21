@@ -53,6 +53,8 @@ jobs:
           git fetch --depth=1 origin +media:refs/remotes/origin/media || true
           node scripts/build-renewal-data.mjs
           node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/dist/client
+          # 목록용 가벼운 카탈로그 + 상세용 원본 샤드(내용 동일, 원본 campgrounds.json도 그대로 둠)
+          node scripts/split-catalog.mjs camping-atlas/dist/client/explore/data
         env:
           KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY || secrets.KAKAO_JS_KEY }}
           SUPABASE_URL: ${{ vars.SUPABASE_URL || secrets.SUPABASE_URL || 'https://zgnetdxqzsnmzdvoxzbw.supabase.co' }}
