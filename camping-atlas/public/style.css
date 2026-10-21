@@ -3286,3 +3286,15 @@ html, body, #view { min-height: 100%; }
    → 크기를 정수 픽셀로 반올림하고 선 아이콘은 면 아이콘으로 바꿨다. */
 .ic { width: round(1.15em, 1px); height: round(1.15em, 1px); shape-rendering: geometricPrecision; }
 .chip .ic { width: round(1em, 1px); height: round(1em, 1px); }
+/* 예약 버튼 공통(카드·예약 칸·비교 표): [예약하기][▾], 목록은 버튼 아래 화면 안쪽에 고정(카드·표에 잘리지 않게) — 영우 님 2026-10-21 */
+.dock-reserve-group.rsv-inline { flex: 1 1 auto; width: 100%; height: 44px; }
+.dock-reserve-group.rsv-inline > .dock-reserve-main { flex: 1 1 auto; height: 44px; padding: 0 12px; background: var(--accent); color: var(--on-accent); }
+.dock-reserve-group.rsv-inline > .dock-reserve-toggle { flex: 0 0 42px; width: 42px; min-width: 42px; height: 44px; padding: 0; background: var(--accent); color: var(--on-accent); border-left-color: rgba(255, 255, 255, 0.3); }
+.rsv-inline .dock-toggle-arrow { transform: rotate(180deg); }
+.rsv-inline.is-open .dock-toggle-arrow { transform: rotate(0deg); }
+.rsv-inline .dock-reserve-menu, .dock-reserve-menu.rsv-float { position: fixed; bottom: auto; width: auto; z-index: 1200; }
+.dock-reserve-group.rsv-inline > .dock-reserve-main { border-radius: var(--r-s) 0 0 var(--r-s); }
+.dock-reserve-group.rsv-inline > .dock-reserve-toggle { border-radius: 0 var(--r-s) var(--r-s) 0; margin: 0; }
+.card-cta .dock-reserve-group.rsv-inline { gap: 0; }
+/* 예약 목록 글자는 자르지 않는다(말줄임 금지, 영우 님 2026-10-21) */
+.dock-menu-text b { white-space: normal; overflow: visible; text-overflow: clip; overflow-wrap: anywhere; }
