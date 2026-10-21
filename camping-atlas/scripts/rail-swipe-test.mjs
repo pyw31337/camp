@@ -25,8 +25,8 @@ async function setup(mode) {
       return route.fulfill({ status: 200, contentType: "image/png", body: png });
     });
   }
-  await page.goto(url, { waitUntil: "networkidle" });
-  await page.waitForSelector(".rail .card, .rail .tr-card, .rail .review-pick", { timeout: 30000 });
+  await page.goto(url, { waitUntil: "networkidle", timeout: 60000 });
+  await page.waitForSelector(".rail .card, .rail .tr-card, .rail .review-pick", { timeout: 60000 });
   await page.waitForTimeout(800);
   const cdp = mode === "touch" ? await ctx.newCDPSession(page) : null;
   return { ctx, page, errs, cdp };

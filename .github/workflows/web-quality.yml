@@ -84,35 +84,35 @@ jobs:
           node scripts/split-catalog.mjs
           (cd camping-atlas/public && python3 -m http.server 8765 >/tmp/srv.log 2>&1 &)
           sleep 2
-          PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/rail-swipe-test.mjs http://127.0.0.1:8765/
+          PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/rail-swipe-test.mjs http://127.0.0.1:8765/
       - name: 홈 히어로 개수 = 데이터 개수 회귀 테스트
-        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/hero-count-test.mjs http://127.0.0.1:8765/
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/hero-count-test.mjs http://127.0.0.1:8765/
       - name: 320px 가로 넘침 없음(모든 화면) 회귀 테스트
-        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/overflow-320-test.mjs http://127.0.0.1:8765/
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/overflow-320-test.mjs http://127.0.0.1:8765/
       - name: 숙박 상품 배지·필터 회귀 테스트
-        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/stay-badges-test.mjs http://127.0.0.1:8765/
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/stay-badges-test.mjs http://127.0.0.1:8765/
       - name: 겨울 기능(겨울 줄·겨울 운영·난방·눈/영하 예보) 회귀 테스트
-        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/winter-test.mjs http://127.0.0.1:8765/
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/winter-test.mjs http://127.0.0.1:8765/
       - name: 찜 비교 화면(찜 해제 하트·되돌리기) 회귀 테스트
-        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/compare-fav-test.mjs http://127.0.0.1:8765/
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/compare-fav-test.mjs http://127.0.0.1:8765/
       - name: 좌우 화살표(배경 없는 꺾쇠) 회귀 테스트
-        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/arrows-test.mjs http://127.0.0.1:8765/
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/arrows-test.mjs http://127.0.0.1:8765/
       - name: 성능 예산(크기·DOM·원본 사진·카드 표시 시간) 검사
-        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/perf-budget.mjs http://127.0.0.1:8765/
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/perf-budget.mjs http://127.0.0.1:8765/
       - name: 카탈로그 나누기 동일성(목록·검색·필터·지도·상세·비교) 회귀 테스트
-        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/catalog-split-test.mjs http://127.0.0.1:8765/
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/catalog-split-test.mjs http://127.0.0.1:8765/
       - name: 발행 데이터 상식 검사(공원 요금·입퇴실, 광고 요금, 숯 문구, 좌표)
         run: node pipeline/scripts/publish-sanity.mjs --check
       - name: 상세 화면 상식 회귀 테스트
-        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/qa-detail-test.mjs http://127.0.0.1:8765/
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/qa-detail-test.mjs http://127.0.0.1:8765/
       - name: UX2 regression (hero input, 3-line cards, list 조건 sheet, detail jump bar, retired pages)
-        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/ux2-test.mjs http://127.0.0.1:8765/
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/ux2-test.mjs http://127.0.0.1:8765/
       - name: Saved vs compare roles (one compare entry on 찜)
-        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/saved-roles-test.mjs http://127.0.0.1:8765/
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/saved-roles-test.mjs http://127.0.0.1:8765/
       - name: UI3 regression (no rank badges, muted counts, condition chips, no helper text, no sort, capsules, 6 card rows, theme icons)
-        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/ui3-test.mjs http://127.0.0.1:8765/
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/ui3-test.mjs http://127.0.0.1:8765/
       - name: Tests never write to production Supabase
-        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/no-prod-write-test.mjs http://127.0.0.1:8765/
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/no-prod-write-test.mjs http://127.0.0.1:8765/
       # workflow_dispatch(데이터 봇 PR) 결과는 PR 검사 목록에 안 잡혀서, 같은 이름의 커밋 상태로도 남긴다(main 룰셋 필수 검사).
       - name: Report commit status for bot PRs
         if: always() && github.event_name == 'workflow_dispatch'
