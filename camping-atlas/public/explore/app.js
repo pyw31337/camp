@@ -1129,6 +1129,23 @@ function syncCondUi() {
   $$("[data-preset]").forEach((b) => b.setAttribute("aria-pressed", String(presetOn(Number(b.dataset.preset)))));
 }
 document.addEventListener("click", (e) => {
+  const cx = e.target.closest("[data-cond-x]");
+  if (cx) {
+    const k = cx.dataset.condX;
+    if (k.startsWith("sido:")) S.cond.sido = S.cond.sido.filter((x) => x !== k.slice(5));
+    else if (k.startsWith("kind:")) S.cond.kind = S.cond.kind.filter((x) => x !== k.slice(5));
+    else if (k === "pet") S.cond.pet = false;
+    else if (k === "w") S.cond.w = 0;
+    else if (k === "size") S.cond.size = 0;
+    else if (k === "fire") S.cond.fire = false;
+    else if (k === "park") S.cond.park = false;
+    else if (k === "win") S.cond.win = false;
+    else if (k === "near") S.cond.near = "";
+    store.set("mc-cond", S.cond);
+    if (location.hash.startsWith("#/list")) { history.replaceState(null, "", listHash()); route(); }
+    else syncCondUi();
+    return;
+  }
   if (e.target.closest("[data-open-cond]")) { if (!location.hash.startsWith("#/list")) S.onCondApply = syncCondUi; condSheet(); return; }
   const pr = e.target.closest("[data-preset]");
   if (pr) {
@@ -1273,7 +1290,7 @@ function homeView() {
       <div class="list-tools-right">
         <div class="rail active-chips" data-active></div>
         <button type="button" class="chip cond-open" data-open-cond>${ic("list")}조건${condActive() ? ` <i>${condActive()}</i>` : ""}</button>
-        <label class="sort">${ic("list")}<select data-sort aria-label="정렬">
+        <label class="sort sort-plain">${ic("list")}<select data-sort aria-label="정렬">
           <option value="rec"${(S.sort ?? "rec") === "rec" ? " selected" : ""}>추천순</option>
           <option value="fee"${S.sort === "fee" ? " selected" : ""}>요금 낮은 순</option>
           <option value="name"${S.sort === "name" ? " selected" : ""}>이름순</option>
@@ -1478,6 +1495,9 @@ function condChips(k = S.cond) {
   if (k.win) out.push(["win", "겨울 운영"]);
   return out;
 }
+function condBadgeRow() {
+  return condChips().map(([k, label]) => `<button type="button" class="cond-pill" data-cond-x="${esc(k)}">${esc(label)}<span aria-hidden="true">×</span></button>`).join("");
+}
 function condSummary() { const ch = condChips(); return ch.length ? (ch.length > 2 ? `${ch[0][1]} · ${ch[1][1]} 외 ${ch.length - 2}` : ch.map((x) => x[1]).join(" · ")) : "조건 추가"; }
 function condToParams(p, k = S.cond) {
   if (k.sido.length) p.set("sido", k.sido.join(","));
@@ -1679,7 +1699,7 @@ function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAt
   const fee = (k, l) => `<button type="button" class="chip fee-chip" ${feeAttr}="${k}" aria-pressed="${feePressed(k)}">${l}</button>`;
   return `<div class="filter-mod" aria-label="지역"><span class="fee-band-lbl">지역</span><div class="rail chips">${areaChips}</div></div>
     <div class="filter-mod" aria-label="사이트"><span class="fee-band-lbl">사이트</span><div class="rail chips"><button type="button" class="chip" ${stypeAttr}="" aria-pressed="${!S.stype}">전체</button>${typeChips}</div></div>
-    <div class="filter-mod" aria-label="1박 요금"><span class="fee-band-lbl">1박 요금</span><div class="rail chips fee-bands">${fee("", "전체")}${fee("u3", "~3만원")}${fee("3to5", "3~5만원")}${fee("5to7", "5~7만원")}${fee("7to10", "7만원~10만원")}${fee("10to20", "10만원~20만원")}${fee("o20", "20만원+")}</div></div>`;
+    <div class="filter-mod" aria-label="요금"><span class="fee-band-lbl">요금</span><div class="rail chips fee-bands">${fee("", "전체")}${fee("u3", "~3만원")}${fee("3to5", "3~5만원")}${fee("5to7", "5~7만원")}${fee("7to10", "7만원~10만원")}${fee("10to20", "10만원~20만원")}${fee("o20", "20만원+")}</div></div>`;
 }
 
 function listView() {
@@ -1708,8 +1728,9 @@ function listView() {
       <div class="list-tools">
         <span class="list-result" data-list-count>검색된 결과</span>
         <div class="list-tools-right">
+          <span class="cond-pills" data-cond-pills>${condBadgeRow()}</span>
           <button type="button" class="chip cond-open" data-open-cond>${ic("list")}조건${condActive() ? ` <i>${condActive()}</i>` : ""}</button>
-          <label class="sort">${ic("list")}<select data-list-sort aria-label="정렬">
+          <label class="sort sort-plain">${ic("list")}<select data-list-sort aria-label="정렬">
             <option value="rec"${(S.listSort ?? "rec") === "rec" ? " selected" : ""}>추천순</option>
             <option value="fee"${S.listSort === "fee" ? " selected" : ""}>요금 낮은 순</option>
             <option value="name"${S.listSort === "name" ? " selected" : ""}>이름순</option>
@@ -1784,7 +1805,7 @@ function themeView(themeKey) {
         </div>
         <div class="theme-subtools">
           <span class="theme-count" data-theme-count></span>
-          <label class="sort">${ic("list")}<select data-theme-sort aria-label="정렬">
+          <label class="sort sort-plain">${ic("list")}<select data-theme-sort aria-label="정렬">
             <option value="rec"${(S.sort ?? "rec") === "rec" ? " selected" : ""}>추천순</option>
             <option value="name"${S.sort === "name" ? " selected" : ""}>이름순</option>
             <option value="fee"${S.sort === "fee" ? " selected" : ""}>요금 낮은 순</option>
