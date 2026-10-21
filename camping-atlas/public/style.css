@@ -3336,3 +3336,25 @@ html, body, #view { min-height: 100%; }
 .saved-cmp-hint { flex-basis: 100%; text-align: right; color: var(--ink-3, #6b7280); font-size: 12px; }
 .saved-cmp-link[data-disabled="true"] { opacity: .5; }
 @media (max-width: 760px) { .saved-cmp-hint { text-align: left; } }
+
+/* ── UI 3차(소유자 2026-10-21) ─────────────────────────────── */
+/* 캡슐 버튼 토큰: 기본 = 투명 배경 + 회색 테두리, 눌림/선택 = 검정 배경 + 흰 글자 */
+:root { --cap-bg: transparent; --cap-line: #c8ccc6; --cap-ink: var(--ink-2); --cap-on-bg: #111; --cap-on-ink: #fff; }
+:is(.chip, .cond-pill, .cmp-jump-chip, .cmp-tab, .pick, .mode) { background: var(--cap-bg) !important; border: 1px solid var(--cap-line) !important; color: var(--cap-ink) !important; box-shadow: none !important; }
+:is(.chip, .cmp-jump-chip, .cmp-tab, .pick, .mode):is([aria-pressed="true"], [aria-selected="true"], .on, .active),
+.cond-pill { background: var(--cap-on-bg) !important; border-color: var(--cap-on-bg) !important; color: var(--cap-on-ink) !important; }
+/* 배지·칩 오른쪽 숫자(예: 글램핑 951, +407)는 왼쪽 글자보다 작고 흐리게 */
+:is(.chip:not(.cond-open), .cond-pill, .c-rv-pill, .bdg, .tr-reason) > i:not(.ic), .chip > i em, .cond-chips .chip i em { font-style: normal; font-size: .78em !important; font-weight: 500 !important; color: currentColor !important; opacity: .55; margin-left: 2px; }
+.chip > i em, .cond-chips .chip i em { font-size: 1em !important; opacity: 1; }
+.cond-chips .chip[aria-pressed="true"] i { opacity: .55; }
+/* 카드 정보 6줄: 모든 줄 같은 높이(가장 긴 줄 기준), ‘…’ 없이 줄바꿈 */
+.rows.rows-6 { display: grid; grid-template-columns: 1fr !important; grid-auto-rows: 1fr; }
+.rows-6 li, [data-v="b"] .rows-6 li, [data-v="c"] .rows-6 li { height: auto; min-height: 32px; max-height: none; align-items: center; padding: 5px 0; }
+.rows-6 .rv { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; overflow-wrap: anywhere; line-height: 1.4; }
+.rows-6 .is-no .rv { color: var(--no, #d32f2f); }
+.card-tiers { height: auto !important; max-height: none !important; flex-wrap: wrap !important; white-space: normal !important; }
+.card-tiers * { text-overflow: clip !important; }
+.th-ic { fill: currentColor; }
+.cond-legend { text-align: right; }
+/* 어두운 사진 위(히어로) 캡슐: 같은 규칙(투명+테두리)이되 글자·테두리를 밝게 */
+.hero .chip:not([aria-pressed="true"]) { color: #fff !important; border-color: rgba(255, 255, 255, .55) !important; }

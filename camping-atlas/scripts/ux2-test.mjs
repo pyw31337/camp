@@ -1,7 +1,7 @@
 // UX 2차 회귀 테스트(소유자 2026-10-21 승인 ux-proposals #1·#2·#3·#8·#11·#13).
 // 실행: node camping-atlas/scripts/ux2-test.mjs [URL]
 // 1) ‘어디로’ 칸 아무 곳이나 탭 → 입력칸 포커스, 모바일 입력 글자 ≥16px
-// 2) 카드 정보 3줄(.rows-3 li 3개), 카드 안 ‘…’ 잘림 0(320px), 사진 배지로 보인 전기 W를 줄에서 반복하지 않음
+// 2) 카드 정보 줄(UI 3차부터 6줄 .rows-6 — ui3-test가 줄 이름·높이를 따로 본다), 카드 안 ‘…’ 잘림 0(320px), 사진 배지로 보인 전기 W를 줄에서 반복하지 않음
 // 3) 모바일 목록: 칩 줄 숨김 + 보이는 ‘조건’ 버튼 1개 → 조건 시트, 고른 요금·사이트는 지울 수 있는 알약 / PC는 칩 줄 그대로
 // 4) 상세 바로가기 막대: 스크롤 뒤 화면 위에 붙고(top 0), 지금 읽는 칸 표시가 따라온다, 탭하면 그 칸이 막대 아래에 온다
 // 5) guide/ → 홈, openings/ → 곧 오픈 목록, vision/ → 홈(옛 시안 공개 중단)
@@ -31,15 +31,15 @@ for (const [w, h] of [[320, 740], [390, 844], [1366, 900]]) {
   // 2) 카드 3줄·잘림·중복
   const cardCheck = async (where) => {
     const r = await page.$$eval(".card[data-id]", (cards) => cards.slice(0, 24).map((c) => {
-      const rows = c.querySelectorAll(".rows-3 > li").length;
+      const rows = c.querySelectorAll(".rows-6 > li").length;
       const cut = [...c.querySelectorAll(".card-body *")].filter((e) => { const s = getComputedStyle(e); return s.textOverflow === "ellipsis" && e.scrollWidth > e.clientWidth + 1 && e.getBoundingClientRect().width > 0; }).map((e) => e.className || e.tagName);
-      const volt = c.querySelector(".bdgs .bdg-volt"); const fac = c.querySelector(".r-fac .rv")?.textContent ?? "";
-      return { id: c.dataset.id, rows, cut, dupW: Boolean(volt && /\d+\s*W/.test(fac)), hasRows: Boolean(c.querySelector(".rows")) };
+      const volt = c.querySelector(".bdgs .bdg-volt"); const fac = c.querySelector(".r-pow .rv")?.textContent ?? "";
+      return { id: c.dataset.id, rows, cut, dupW: Boolean(volt && fac), hasRows: Boolean(c.querySelector(".rows")) };
     }));
     for (const x of r) {
-      if (x.hasRows && x.rows !== 3) fails.push(`${tag} ${where} #${x.id}: 카드 정보 줄 ${x.rows}개(3줄이어야 함)`);
+      if (x.hasRows && x.rows !== 6) fails.push(`${tag} ${where} #${x.id}: 카드 정보 줄 ${x.rows}개(6줄이어야 함)`);
       if (w === 320 && x.cut.length) fails.push(`${tag} ${where} #${x.id}: ‘…’ 잘림 ${x.cut.slice(0, 3).join(", ")}`);
-      if (x.dupW) fails.push(`${tag} ${where} #${x.id}: 사진 배지의 전기 W를 시설 줄에서 반복`);
+      if (x.dupW) fails.push(`${tag} ${where} #${x.id}: 사진 배지와 전기 줄에 전기를 두 번 보임`);
     }
     if (!r.length) fails.push(`${tag} ${where}: 카드 없음`);
   };
@@ -50,7 +50,7 @@ for (const [w, h] of [[320, 740], [390, 844], [1366, 900]]) {
   await cardCheck("목록");
   const lst = await page.evaluate(() => {
     const vis = (e) => e && getComputedStyle(e).display !== "none" && e.getBoundingClientRect().width > 0;
-    return { filters: vis(document.querySelector(".list-page .list-filters")), cond: [...document.querySelectorAll(".list-page [data-open-cond]")].filter(vis).length, pills: [...document.querySelectorAll(".list-page .cond-pill.m-only")].filter(vis).map((e) => e.textContent.replace("×", "").trim()) };
+    return { filters: vis(document.querySelector(".list-page .list-filters")), cond: [...document.querySelectorAll(".list-page [data-open-cond]")].filter(vis).length, pills: [...document.querySelectorAll(".list-page [data-cond-pills] .cond-pill")].filter(vis).map((e) => e.textContent.replace("×", "").trim()) };
   });
   if (mob) {
     if (lst.filters) fails.push(`${tag} 목록: 모바일에서 칩 줄이 펼쳐져 있음`);
@@ -59,11 +59,11 @@ for (const [w, h] of [[320, 740], [390, 844], [1366, 900]]) {
     await page.click(".list-tools [data-open-cond]"); await page.waitForTimeout(500);
     if (!(await page.evaluate(() => document.querySelector("#cond-dialog")?.open))) fails.push(`${tag} 목록: ‘조건’ → 조건 시트가 안 열림`);
     await page.keyboard.press("Escape");
-    await page.click('.list-page .cond-pill.m-only[data-fee-band=""]'); await page.waitForTimeout(1200);
+    await page.click('.list-page .cond-pill[data-fee-band=""]'); await page.waitForTimeout(1200);
     if (/fee=/.test(await page.evaluate(() => location.hash))) fails.push(`${tag} 목록: 요금 알약 × 로 지워지지 않음`);
   } else {
     if (!lst.filters) fails.push(`${tag} 목록: PC 칩 줄이 사라짐`);
-    if (lst.pills.length) fails.push(`${tag} 목록: PC에 알약이 칩 줄과 중복`);
+    if (lst.pills.includes("데크")) fails.push(`${tag} 목록: PC에 사이트 알약이 칩 줄과 중복`); // 요금은 조건 시트에서도 고르므로 UI 3차부터 PC에도 × 칩으로 보인다
   }
   // 4) 상세 바로가기
   await page.goto(`${base}#/c/${detailId}`); await page.waitForSelector(".d-jump-bar", { timeout: 30000 }); await page.waitForTimeout(2500);
