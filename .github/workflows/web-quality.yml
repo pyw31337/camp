@@ -109,6 +109,8 @@ jobs:
         run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/ux2-test.mjs http://127.0.0.1:8765/
       - name: Saved vs compare roles (one compare entry on 찜)
         run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/saved-roles-test.mjs http://127.0.0.1:8765/
+      - name: UI3 regression (no rank badges, muted counts, condition chips, no helper text, no sort, capsules, 6 card rows, theme icons)
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/ui3-test.mjs http://127.0.0.1:8765/
       - name: Tests never write to production Supabase
         run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/no-prod-write-test.mjs http://127.0.0.1:8765/
       # workflow_dispatch(데이터 봇 PR) 결과는 PR 검사 목록에 안 잡혀서, 같은 이름의 커밋 상태로도 남긴다(main 룰셋 필수 검사).

@@ -265,14 +265,16 @@ const INVITE_OK_SET = new Set([
   "7901", "7928", "7934", "7967", "8196", "930",
 ]);
 const noBadge = (k) => (NO_TAGS[k] ? `<span class="bdg bdg-no">${ic(NO_TAGS[k][1])}${esc(NO_TAGS[k][0])}</span>` : "");
-function badges(c, max = 4, maxNo = 2) {
+// rows=true(카드): 아래 정보 줄(전기·화로·주차)에 나오는 사실은 사진 배지에서 뺀다(줄이 우선, 소유자 2026-10-21).
+const ROW_NO = new Set(["NO_POWER", "NO_FIRE", "NO_FIREWOOD", "NO_CHARCOAL"]);
+function badges(c, max = 4, maxNo = 2, { rows = false } = {}) {
   const f = facts(c), out = [];
   if (INVITE_OK_SET.has(String(c.id))) out.push(`<span class="bdg bdg-teal">${ic("users")}초대가능</span>`);
-  if (pos(f.power) && f.power.ok && f.power.w) out.push(`<span class="bdg bdg-volt">${ic("bolt")}${esc(f.power.short)}</span>`);
-  if (pos(f.fire) && f.fire.kind === "FIREWOOD_OK") out.push(`<span class="bdg bdg-flame">${ic("flame")}장작</span>`);
-  if (pos(f.park) && f.park.ok === true) out.push(`<span class="bdg bdg-cobalt">${ic("car")}텐트 옆</span>`);
+  if (!rows && pos(f.power) && f.power.ok && f.power.w) out.push(`<span class="bdg bdg-volt">${ic("bolt")}${esc(f.power.short)}</span>`);
+  if (!rows && pos(f.fire) && f.fire.kind === "FIREWOOD_OK") out.push(`<span class="bdg bdg-flame">${ic("flame")}장작</span>`);
+  if (!rows && pos(f.park) && f.park.ok === true) out.push(`<span class="bdg bdg-cobalt">${ic("car")}텐트 옆</span>`);
   if (pos(f.pet) && f.pet.ok) out.push(`<span class="bdg bdg-ink">${ic("paw")}반려견</span>`);
-  const no = noKeys(c).filter((k) => NO_CARD.includes(k)).slice(0, maxNo).map(noBadge);
+  const no = noKeys(c).filter((k) => NO_CARD.includes(k) && !(rows && ROW_NO.has(k))).slice(0, maxNo).map(noBadge);
   return [...out.slice(0, Math.max(max - no.length, 1)), ...no].slice(0, max).join("");
 }
 const dot = () => "";
@@ -398,8 +400,8 @@ const QUICK = {
 const TH_SVG = {
   POPULAR: ["0 0 24 24", '<path fill="currentColor" d="M12.6 2c.6 3.6 5.9 6 5.9 12a6.5 6.5 0 0 1-13 0c0-3 1.6-5 3.2-6.3-.1 2 .8 3.4 2.1 3.6-.4-3.3.2-6.6 1.8-9.3z"/>'],
   VALLEY: ["0 0 24 24", '<path fill="currentColor" d="M6.18 10.95l2.54 3.175l.084 .093a1 1 0 0 0 1.403 -.01l1.637 -1.638l1.324 1.985a1 1 0 0 0 1.457 .226l3.632 -2.906l3.647 7.697a1 1 0 0 1 -.904 1.428h-18a1 1 0 0 1 -.904 -1.428zm5.82 -7.878a3.3 3.3 0 0 1 2.983 1.888l2.394 5.057l-3.15 2.52l-1.395 -2.092l-.075 -.099a1 1 0 0 0 -1.464 -.053l-1.711 1.709l-1.301 -1.627l-1.151 -1.435l1.888 -3.98a3.3 3.3 0 0 1 2.982 -1.888"/>'],
-  FOREST: ["0 0 24 24", '<path fill="currentColor" d="M15 19v1a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2v-1zm-10 -1c-.89 0 -1.337 -1.077 -.707 -1.707l2.855 -2.857l-1.464 -.487a1 1 0 0 1 -.472 -1.565l.08 -.091l3.019 -3.02l-.758 -.379a1 1 0 0 1 -.343 -1.507l.083 -.094l4 -4a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1 -.26 1.601l-.759 .379l3.02 3.02a1 1 0 0 1 -.279 1.61l-.113 .046l-1.465 .487l2.856 2.857c.603 .602 .22 1.614 -.593 1.701l-.114 .006z"/>'],
-  BEACH: ["0 0 24 24", '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.75 9.5c2.75-2 6-1.5 8 1.5L12 12.75L13.25 11c2-3 5.25-3.5 8-1.5c-2.5.25-4.5 1.5-6 3.5l-2 2.5c-.75.75-1.75.75-2.5 0l-2-2.5c-1.5-2-3.5-3.25-6-3.5m0 10.25C4 19.75 4 19 5.25 19s1.25.75 2.5.75S9 19 10.25 19s1.25.75 2.5.75S14 19 15.25 19s1.25.75 2.5.75S19 19 20.25 19"/>'],
+  FOREST: ["0 0 24 24", '<path fill="currentColor" d="M14.14 12h-.06c.81 0 1.28-.91.82-1.57L9.82 3.17a1 1 0 0 0-1.64 0L3.1 10.43c-.46.66.01 1.57.82 1.57h-.06L.99 16.46c-.43.66.05 1.54.84 1.54H7v2c0 1.1.9 2 2 2s2-.9 2-2v-2h5.17c.79 0 1.27-.88.84-1.54z" /><path fill="currentColor" d="M23.01 16.46L20.14 12h-.06c.81 0 1.28-.91.82-1.57l-5.08-7.26a1 1 0 0 0-1.64 0l-1.57 2.24l3.11 4.44a2.004 2.004 0 0 1-.16 2.5l2.29 3.57c.4.62.42 1.4.07 2.04c-.01.02-.02.03-.03.04h4.28c.79 0 1.27-.88.84-1.54M13 20c0 1.1.9 2 2 2s2-.9 2-2v-1h-4z" />'],
+  BEACH: ["0 0 16 16", '<path fill="currentColor" d="M11.914 1.556a4.18 4.18 0 0 0-5.694 1.52l-.152.263a.5.5 0 0 0 .183.684l2.648 1.522L7.27 8.392c-1.45.189-2.680 1.13-3.46 2.394q.13-.03.269-.035a1.5 1.5 0 0 1 1.484 1.027a.55.55 0 0 0 .192.29a.4.4 0 0 0 .235.075a.4.4 0 0 0 .228-.067a.46.46 0 0 0 .171-.247a1.5 1.5 0 0 1 2.837 0c.05.143.118.211.171.247c.062.042.14.067.229.066a.4.4 0 0 0 .234-.074a.55.55 0 0 0 .192-.29a1.5 1.5 0 0 1 1.753-.992c-.766-1.244-1.969-2.174-3.389-2.384l1.349-2.36l2.840 1.632a.5.5 0 0 0 .681-.182l.153-.264a4.14 4.14 0 0 0-1.526-5.672m-7.3 10.537a.5.5 0 0 0-.96.038c-.125.512-.358.78-.613.935c-.273.165-.628.233-1.041.233a.5.5 0 1 0 0 1c.504 0 1.066-.08 1.558-.377c.244-.148.459-.341.636-.585c.961 1.08 2.68 1.074 3.615-.019c.951 1.113 2.716 1.1 3.666-.04a2.8 2.8 0 0 0 2.142 1.021a.5.5 0 0 0 0-1c-.716 0-1.429-.468-1.664-1.201a.5.5 0 0 0-.95-.005c-.465 1.401-2.27 1.377-2.722.06a.5.5 0 0 0-.945 0c-.453 1.317-2.257 1.341-2.721-.06" />'],
   "T:HOUSE": ["0 0 24 24", '<path fill="currentColor" d="M12.707 2.293l9 9c.63 .63 .184 1.707 -.707 1.707h-1v6a3 3 0 0 1 -3 3h-10a3 3 0 0 1 -3 -3v-6h-1c-.89 0 -1.337 -1.077 -.707 -1.707l9 -9a1 1 0 0 1 1.414 0m.793 8.707h-3a1.5 1.5 0 0 0 -1.5 1.5v3a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5 -1.5v-3a1.5 1.5 0 0 0 -1.5 -1.5"/>'],
   LAKE: ["0 0 24 24", '<path fill="currentColor" d="M2 22c0-.55.45-1 1-1c.87 0 1.73-.24 2.53-.7c.29-.16.65-.17.94 0c1.59.9 3.48.9 5.06 0a.98.98 0 0 1 .94 0c1.59.9 3.48.9 5.06 0a.98.98 0 0 1 .94 0c.8.46 1.66.7 2.53.7c.55 0 1 .45 1 1s-.45 1-1 1c-1.03 0-2.06-.25-3-.75a6.36 6.36 0 0 1-6.09-.05c-1.79.87-3.92.98-5.58-.14C5.3 22.69 4.15 23 3 23c-.55 0-1-.45-1-1M12 5.5c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m9.47 12.95c-.42.14-.9.28-1.41.42c-.53-.15-1.03-.43-1.45-.77a.98.98 0 0 0-1.23 0c-.66.53-1.48.9-2.38.9s-1.72-.37-2.39-.91a.99.99 0 0 0-1.22 0c-.67.54-1.49.91-2.39.91s-1.72-.37-2.39-.91c-.35-.29-.87-.28-1.23 0c-.43.35-.92.62-1.45.77c-.51-.14-.98-.28-1.4-.42c-.92-.3-.92-1.6 0-1.9c1.21-.39 2.79-.82 4.6-1.13l1.35-4.17c.31-.95 1.32-1.47 2.27-1.16c.09.03.19.07.27.11l2.47 1.3l2.84-1.5l1.65-3.71l-.36-.93c-.1-.25-.09-.52.02-.76l.74-1.68a1 1 0 0 1 1.32-.51l1.37.61a1 1 0 0 1 .5 1.32l-.75 1.68c-.11.24-.31.43-.56.53l-.9.36l-3.72 8.34c2.33.3 4.35.84 5.82 1.31c.93.3.94 1.6.01 1.9m-6.45-5.49l-.59.31c-.58.31-1.28.31-1.86 0l-.81-.43l-.71 2.17c.31 0 .63-.01.95-.01c.71 0 1.4.03 2.07.08z"/>'],
   FAMILY: ["0 0 24 24", '<path fill="currentColor" d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 7.046 -9.232a3 3 0 0 0 2.949 3.556a1 1 0 0 0 0 -2l-.117 -.007a1 1 0 0 1 .117 -1.993c1.726 0 3.453 .447 5 1.34zm-1.8 10.946a1 1 0 0 0 -1.414 .014a2.5 2.5 0 0 1 -3.572 0a1 1 0 0 0 -1.428 1.4a4.5 4.5 0 0 0 6.428 0a1 1 0 0 0 -.014 -1.414zm-6.19 -5.286l-.127 .007a1 1 0 0 0 .117 1.993l.127 -.007a1 1 0 0 0 -.117 -1.993zm6 0l-.127 .007a1 1 0 0 0 .117 1.993l.127 -.007a1 1 0 0 0 -.117 -1.993z"/>'],
@@ -408,11 +410,11 @@ const TH_SVG = {
   GLAMPING: ["0 0 24 24", '<path fill="currentColor" d="M2 21v-3q0-.325.1-.625t.3-.575l8.35-11.25L9.6 4q-.125-.175-.175-.362T9.4 3.263t.125-.363t.275-.3q.35-.25.75-.2t.65.4l.8 1.075l.8-1.075q.25-.35.65-.4t.75.2t.4.65t-.2.75l-1.15 1.55L21.6 16.8q.2.275.3.575T22 18v3q0 .425-.287.713T21 22H3q-.425 0-.712-.288T2 21m6.225-1h7.55L12 14.725z"/>'],
   CARAVAN: ["0 0 24 24", '<path fill="currentColor" d="M5 7a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a3 3 0 0 0 3 3a3 3 0 0 0 3-3h8v-2h-2V9a2 2 0 0 0-2-2zm0 2h5v3H5zm8 0h4v3h-4zm-3 7a1 1 0 0 1 1 1a1 1 0 0 1-1 1a1 1 0 0 1-1-1a1 1 0 0 1 1-1"/>'],
   AUTO: ["0 0 24 24", '<path fill="currentColor" d="m20.77 9.16l-1.37-4.1a2.99 2.99 0 0 0-2.85-2.05H7.44a3 3 0 0 0-2.85 2.05l-1.37 4.1c-.72.3-1.23 1.02-1.23 1.84v5a2 2 0 0 0 1 1.72V20c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-2h12v2c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-2.28a2 2 0 0 0 1-1.72v-5c0-.83-.51-1.54-1.23-1.84ZM19 13.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5s1.5.67 1.5 1.5m-11 0c0 .83-.67 1.5-1.5 1.5S5 14.33 5 13.5S5.67 12 6.5 12s1.5.67 1.5 1.5M20 11v5zM7.44 5h9.12a1 1 0 0 1 .95.68L18.62 9H5.39L6.5 5.68A1 1 0 0 1 7.45 5Z"/>'],
-  VISITOR: ["0 0 24 24", '<path fill="currentColor" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>'],
-  PICNIC: ["0 0 24 24", '<path fill="currentColor" d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a2 2 0 0 0-2 2v2c0 .55.45 1 1 1h1v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7h1c.55 0 1-.45 1-1V9a2 2 0 0 0-2-2zm-9-1a2 2 0 0 1 4 0v1h-4V6zm7 13H7v-7h10v7z"/>'],
-  PARK: ["0 0 24 24", '<path fill="currentColor" d="M10 21v-3.4c-2.37-.36-4.27-2.13-4.83-4.46A5.5 5.5 0 0 1 8 3.32a5.5 5.5 0 0 1 8 0 5.5 5.5 0 0 1 2.83 9.82c-.56 2.33-2.46 4.1-4.83 4.46V21h-4z"/>'],
-  WINTER: ["0 0 24 24", '<path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M12 2v20M4 7l16 10M20 7 4 17M9 3.5l3 2 3-2M9 20.5l3-2 3 2"/>'],
-  WATER_PLAY: ["0 0 24 24", '<g fill="currentColor"><circle cx="16.5" cy="5.5" r="2.5"/><path d="m14.29 9.38-2.61 2.62 1.42 1.41 1.9-1.9 2.5 1.49 1.43-.86-2.62-4.38a1.5 1.5 0 0 0-2.02-.38z"/><path d="M2 15c1.5 0 2.5 1 4 1s2.5-1 4-1 2.5 1 4 1 2.5-1 4-1 2.5 1 4 1v2c-1.5 0-2.5-1-4-1s-2.5 1-4 1-2.5-1-4-1-2.5 1-4 1-2.5-1-4-1H2zm0 4c1.5 0 2.5 1 4 1s2.5-1 4-1 2.5 1 4 1 2.5-1 4-1 2.5 1 4 1v2c-1.5 0-2.5-1-4-1s-2.5 1-4 1-2.5-1-4-1-2.5 1-4 1-2.5-1-4-1H2z"/></g>'],
+  VISITOR: ["0 0 14 14", '<path fill="currentColor" fill-rule="evenodd" d="M9.718.338a.62.62 0 0 0-.504.722a.63.63 0 0 0 .731.503q.198-.035.398-.067c.145-.022.257.046.305.14c.476.925.9 1.838 1.194 2.782c-.378.172-.801.368-1.223.573a16 16 0 0 1-.242 1.394v.004l-.003.009q-.158.723-.416 1.454c-.144.403-.47.787-.802 1.123c-.405.41-.208 1.09.363 1.01l.445 1.702q-.85.275-1.688.65a.737.737 0 0 0-.374.98c.17.372.614.538.991.37a14.8 14.8 0 0 1 4.444-1.217a.743.743 0 0 0 .658-.82a.75.75 0 0 0-.83-.652q-.898.103-1.756.295l-.443-1.691c1.727-.695 2.728-2.506 2.388-4.305c-.29-1.527-.915-2.913-1.588-4.222A1.55 1.55 0 0 0 10.14.267q-.212.033-.422.07M4.063.352a1.58 1.58 0 0 0-1.62.808C1.746 2.467 1.095 3.852.78 5.371a3.7 3.7 0 0 0 .323 2.434a3.8 3.8 0 0 0 1.983 1.811l-.471 1.678a17 17 0 0 0-1.793-.272a.75.75 0 0 0-.147 1.493a15 15 0 0 1 2.294.402c.735.188 1.453.434 2.172.742a.75.75 0 1 0 .59-1.38a17 17 0 0 0-1.663-.61l.47-1.674c1.842.25 3.625-.82 4.24-2.548c.156-.435.278-.873.376-1.312l.002-.01c.232-1.04.328-2.092.384-3.12a1.525 1.525 0 0 0-1-1.506A20.6 20.6 0 0 0 4.063.352m3.873 5.51l.001-.006c.21-.939.3-1.912.355-2.92c.006-.101-.055-.216-.194-.268a19.3 19.3 0 0 0-4.21-1.079a.33.33 0 0 0-.342.159c-.682 1.28-1.264 2.537-1.541 3.876a3 3 0 0 0-.044.308c.934-.084 2.113-.17 3.032-.167c.888.003 2.027.089 2.925.172z" clip-rule="evenodd" />'],
+  PICNIC: ["0 0 24 24", '<path fill="currentColor" d="M5.61 6.275a.977.977 0 1 0 0 1.954h1.376c.098 0 .186.057.225.146l.625 1.534a.24.24 0 0 1 0 .244l-.342.43a.244.244 0 0 1-.293.068a4.8 4.8 0 0 0-2.08-.469c-3.76.003-6.107 4.075-4.225 7.33s6.582 3.25 8.46-.007a5 5 0 0 0 .512-1.276a.235.235 0 0 1 .234-.186h.391a.98.98 0 0 0 .791-.4l4.181-5.705a.24.24 0 0 1 .225-.097a.235.235 0 0 1 .176.205l.273.742a.244.244 0 0 1-.088.293c-3.067 2.174-2.63 6.854.786 8.423c3.416 1.57 7.25-1.148 6.901-4.892a4.884 4.884 0 0 0-4.942-4.43a5 5 0 0 0-.537 0a.234.234 0 0 1-.264-.156l-1.23-3.301a.3.3 0 0 1 0-.206a.27.27 0 0 1 .156-.117l1.71-.43a.977.977 0 0 0-.48-1.895l-2.49.626c-.42.09-.778.362-.977.742c-.195.367-.227.8-.088 1.192l.078.205c.06.13-.01.282-.146.322L9.77 8.874a.235.235 0 0 1-.302-.137l-.118-.274a.18.18 0 0 1 0-.156a.19.19 0 0 1 .147-.078a.977.977 0 0 0 0-1.954Zm-.49 11.722c-2.255.007-3.672-2.431-2.55-4.388s3.942-1.965 5.076-.015q.038.066.073.134a.27.27 0 0 1 0 .244a.26.26 0 0 1-.205.118H5.12a.977.977 0 0 0 0 1.953h2.383a.24.24 0 0 1 .205.118c.04.073.04.161 0 .234a2.93 2.93 0 0 1-2.588 1.602m4.934-3.985a.1.1 0 0 1-.098 0a.1.1 0 0 1-.078-.059a4.8 4.8 0 0 0-.85-1.846a.254.254 0 0 1 0-.303l.547-.781a.2.2 0 0 1 .107 0l2.765-.977c.1-.037.213 0 .273.088c.067.082.067.2 0 .283Zm8.791 3.985a2.93 2.93 0 0 1-2.93-2.930a2.93 2.93 0 0 1 .781-1.954a.22.22 0 0 1 .146-.137a.25.25 0 0 1 .186.156l.82 2.228c.14.386.508.644.919.644q.175 0 .342-.058a.977.977 0 0 0 .576-1.26l-.977-2.56c2.256 0 3.666 2.442 2.538 4.396a2.93 2.93 0 0 1-2.538 1.465Z" />'],
+  PARK: ["0 0 15 15", '<path fill="currentColor" d="M3 10.94V14H2v-3.05A2.37 2.37 0 0 1 .15 8.24C.97 3.41 1.77 1 2.56 1c.78 0 1.55 2.41 2.3 7.23c.19 1.26-.63 2.45-1.86 2.71M6 11h9v3h-1v-2H7v2H6zm1-3h7v2.5H7z" />'],
+  WINTER: ["0 0 50 50", '<path fill="currentColor" d="M23 47.689v-6.342l-3.357 1.992L18 42.305v-2.229l5-2.986v-4.168l-4 2.451v-4.416l-4 2.094v5.99l-1.653 1.23L12 39.160v-4.012L6.426 38.27L4 37.271v-2.529l5.685-3.17L6 29.75v-2.32l2.123-1.127l5.214 3.068l3.612-2.084l-.082-.065l-3.665-2.123l3.568-2.228l-3.577-2.083L7.98 23.84L6 22.871v-2.307l3.542-1.978L4 15.533v-2.529l2.321-1.114L12 15.087v-4.076l1.485-1.127l1.943 1.18l-.056 6.105l3.673 2.122l.033-4.311L23 17.079v-4.167l-5-2.988V7.71l1.643-1.05L23 8.652V2.324L24.994 1L27 2.324v6.328l3.906-2.031L33 7.84v1.992l-6 3.08v4.167l4-2.267v4.534l4-2.084v-6.524l1.455-.866l1.545.865v4.167l5.842-3.08L46 13.042v2.359l-5.495 3.17L44 20.525v2.254l-1.83.996l-5.327-3.158l-3.679 2.346l3.549 2.228l-3.659 2.122l3.772 1.992l5.389-2.986L44 27.535v2.15l-3.32 1.887l5.32 3.170v2.49l-2.522 1.037L38 35.281v3.955l-1.52 1.049L35 39.236v-6.002l-4-2.213v4.168l-4-2.268v4.168l5 2.986v2.359l-1.647.904L27 41.348v6.342L24.994 49zm-1.466-22.597L23.420 28h3.514l1.613-2.908L26.843 22h-3.514z" />'],
+  WATER_PLAY: ["0 0 256 256", '<path fill="currentColor" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m83.44 76A196 196 0 0 0 165 91a196 196 0 0 0-9-46.440A88.43 88.43 0 0 1 211.44 100M85 51.24a188.3 188.3 0 0 1 67.3 39.21a196.3 196.3 0 0 0-112.22 34.06A88.07 88.07 0 0 1 85 51.24m46.48 164.68a196.3 196.3 0 0 0 34.06-112.23A188.3 188.3 0 0 1 204.76 171a88.07 88.07 0 0 1-73.27 44.92Z" />'],
   "T:CAR_CAMP": ["0 0 24 24", '<g fill="currentColor"><path d="M3 19.723V21a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.277A1.99 1.99 0 0 0 22 18v-3c0-.831-.507-1.542-1.228-1.845l-1.368-4.104A2.995 2.995 0 0 0 16.559 7H7.441a2.995 2.995 0 0 0-2.845 2.051l-1.368 4.104A2 2 0 0 0 2 15v3c0 .738.404 1.376 1 1.723M5.5 18a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 5.5 18m13 0a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 18.5 18M7.441 9h9.117a1 1 0 0 1 .949.684L18.613 13H5.387l1.105-3.316c.137-.409.519-.684.949-.684"/><path d="M22 7.388V5.279l-9.684-3.228a1 1 0 0 0-.658.009L2 5.572V7.7l10.015-3.642z"/></g>'],
 };
 const thIc = (k) => (TH_SVG[k] ? `<svg class="th-ic" viewBox="${TH_SVG[k][0]}" aria-hidden="true">${TH_SVG[k][1]}</svg>` : "");
@@ -965,24 +967,26 @@ function cardRow(label, icon, x) {
 
 const mapLink = (name, lat, lng) => `https://map.kakao.com/link/map/${encodeURIComponent(name)},${lat},${lng}`;
 
-// 카드 정보 3줄(소유자 2026-10-21, ux-proposals #2): 시설(주차·전기·장작) / 시간·주변 / 요금.
-// 사진 위 배지로 이미 보인 사실은 줄에서 뺀다(중복 금지). 값은 줄바꿈을 허용해 ‘…’로 자르지 않는다. 반려견·매너타임은 상세에서.
+// 카드 정보 6줄(소유자 2026-10-21 2차): 규격 · 전기 · 화로 · 주차 · 주변 · 요금(1박). 줄 높이는 모두 같고(grid 1fr) ‘…’로 자르지 않는다.
+// 사진 배지와 겹치면 줄이 우선 — badges(..., { rows: true })가 전기·장작·주차·불가 배지를 뺀다. 규격 배지(bdg-size)도 목록 카드에서 뺐다.
+function siteSizeShort(c) {
+  const gs = (c.field_conditions?.site_size?.groups ?? []).filter((g) => g.width_m && g.depth_m);
+  if (gs.length) { const big = gs.reduce((a, g) => (Math.max(g.width_m, g.depth_m) > Math.max(a.width_m, a.depth_m) ? g : a)); return `최대 ${big.width_m}×${big.depth_m}m`; }
+  return c.tq?.mx ? `최대 ${c.tq.mx[0]}×${c.tq.mx[1]}m` : "";
+}
 function cardLines(c) {
-  const f = facts(c), ti = c.ti ?? {}, fm = feeMain(c);
-  const b = badges(c, wxAlert(c) ? 2 : 3);
-  const shown = { power: /bdg-volt/.test(b), fire: /bdg-flame|장작 불가|화기 불가/.test(b), park: /bdg-cobalt/.test(b) };
-  const fac = [
-    !shown.park && f.park?.v ? esc(f.park.v) : "",
-    !shown.power && f.power?.v ? formatRowVal("전기", f.power.v) : "",
-    !shown.fire && f.fire?.v ? `<span class="${/불가|금지/.test(f.fire.v) ? "is-no" : ""}">${esc(f.fire.v)}</span>` : "",
-  ].filter(Boolean).join(" · ");
-  const time = [ti.i?.[0] ? `입실 ${ti.i[0]}` : "", ti.o?.[0] ? `퇴실 ${ti.o[0]}` : ""].filter(Boolean).join(" · ");
-  const timeTxt = time ? (ti.i?.[1] === "r" ? `${time} (조례 기준 참고)` : time) : "";
-  const near = nearLine(c, " · ").split(" · ")[0] ?? "";
-  const tl = [timeTxt && esc(timeTxt), near && esc(near)].filter(Boolean).join(" · ");
-  const fee = fm?.text ? `<b class="rf-main">${esc(fm.text)}${fm.est ? " 추정" : ""}</b>${feeTiersLine(c)}` : "";
-  const li = (label, icon, html, cls) => `<li class="${cls}"><span class="rl">${ic(icon)}${label}</span><span class="rv${html ? "" : " none"}">${html || "–"}</span></li>`;
-  return `<ul class="rows rows-3">${li("시설", "bolt", fac, "r-fac")}${li("시간", "clock", tl, "r-time")}${li("요금", "won", fee, "r-fee")}</ul>`;
+  const f = facts(c), fm = feeMain(c);
+  const no = (v) => (v && /불가|금지|없음/.test(v) ? " is-no" : "");
+  const near = nearLine(c, " · ").split(" · ").slice(0, 2).join(" · ");
+  const rows = [
+    ["규격", "size", siteSizeShort(c) && esc(siteSizeShort(c)), "r-size"],
+    ["전기", "bolt", f.power?.v ? formatRowVal("전기", f.power.v) : "", `r-pow${no(f.power?.v)}`],
+    ["화로", "flame", f.fire?.v ? esc(f.fire.v) : "", `r-fire${no(f.fire?.v)}`],
+    ["주차", "car", f.park?.v ? esc(f.park.v) : "", `r-park${no(f.park?.v)}`],
+    ["주변", "store", near && esc(near), "r-near"],
+    ["요금", "won", fm?.text ? `${esc(fm.text)}${fm.est ? " 추정" : ""}` : "", "r-fee"],
+  ];
+  return `<ul class="rows rows-6">${rows.map(([l, i, h, cls]) => `<li class="${cls}"><span class="rl">${ic(i)}${l}</span><span class="rv${h ? "" : " none"}">${h || "–"}</span></li>`).join("")}</ul>${fm?.text && feeTiersLine(c) ? `<p class="card-tiers">${feeTiersLine(c)}</p>` : ""}`;
 }
 function rowsHtml(c) { return cardLines(c); }
 function rowsHtmlHorizontal(c) { return cardLines(c); }
@@ -1121,7 +1125,7 @@ function card(c, i = 0, opts) {
     <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="card-media">${carousel(c, { eager: i < 4 })}
       ${isWp ? `<span class="sig closed">${ic("clock")}운영종료</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : S.avail?.has(String(c.id)) ? `<span class="sig live">${ic("check")}접수 중</span>` : ""}
-      <span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3)}</span>
+      <span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3, 2, { rows: true })}</span>
     </div>
     <div class="card-body">
       <div class="card-group card-group-head">
@@ -1348,6 +1352,7 @@ function syncCompare() {
 
 function presetOn(i) { const v = PRESETS[i][1]; return Object.entries(v).every(([k, x]) => (Array.isArray(x) ? x.every((y) => S.cond[k].includes(y)) : S.cond[k] === x)); }
 function syncCondUi() {
+  if (!location.hash.startsWith("#/list")) $$("[data-cond-pills]").forEach((x) => (x.innerHTML = condBadgeRow()));
   $$("[data-cond-label]").forEach((x) => (x.textContent = condSummary()));
   $$("[data-preset]").forEach((b) => b.setAttribute("aria-pressed", String(presetOn(Number(b.dataset.preset)))));
 }
@@ -1413,7 +1418,8 @@ function trendingShell() {
 function trendingCard(x) {
   const c = S.byId.get(String(x.id));
   if (!c || !showcaseEligible(c)) return "";
-  const arrow = x.trend === "up" ? `<span class="tr-tr up" aria-label="어제 ${x.prev}위에서 올라옴">▲${x.prev - x.rank}</span>` : x.trend === "down" ? `<span class="tr-tr down" aria-label="어제 ${x.prev}위에서 내려감">▼${x.rank - x.prev}</span>` : x.trend === "new" ? `<span class="tr-tr new" aria-label="새로 들어옴">NEW</span>` : "";
+  // 순위·순위 변동 배지는 썸네일에서 뺐다(소유자 2026-10-21). 순서는 그대로 순위순.
+  const arrow = false && x.trend === "up" ? `<span class="tr-tr up" aria-label="어제 ${x.prev}위에서 올라옴">▲${x.prev - x.rank}</span>` : x.trend === "down" ? `<span class="tr-tr down" aria-label="어제 ${x.prev}위에서 내려감">▼${x.rank - x.prev}</span>` : x.trend === "new" ? `<span class="tr-tr new" aria-label="새로 들어옴">NEW</span>` : "";
   const count = x.today ? `오늘 언급 <b>${fmt(x.today)}</b>건` : `7일 언급 <b>${fmt(x.week)}</b>건`;
   const srcs = Object.entries(x.by ?? {}).sort((a, b) => b[1] - a[1]).map(([k, n]) => trIcon(k, n)).join("");
   const reasons = (c.rv?.p ?? []).slice(0, 3).map(([t]) => t);
@@ -1426,7 +1432,7 @@ function trendingCard(x) {
   const reasonsHtml = reasons.length ? `<div class="tr-reasons">${reasons.slice(0, 3).map((r) => `<span class="tr-reason">${ic("thumb-up")}${esc(r)}</span>`).join("")}</div>` : "";
   return `<article class="tr-card" data-cid="${c.id}">
     <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" draggable="false" aria-label="${x.rank}위 ${esc(nameOf(c).name)} 자세히"></a>
-    <span class="tr-ph">${carousel(c, { eager: x.rank <= 3, single: true })}<span class="tr-rank">${x.rank}</span>${arrow}</span>
+    <span class="tr-ph">${carousel(c, { eager: x.rank <= 3, single: true })}</span>
     <div class="tr-body">
       <b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i>
       ${reasonsHtml}
@@ -1522,12 +1528,8 @@ function homeView() {
       <span class="list-result" data-res-count>검색된 결과</span>
       <div class="list-tools-right">
         <div class="rail active-chips" data-active></div>
+        <span class="cond-pills" data-cond-pills>${condBadgeRow()}</span>
         <button type="button" class="chip cond-open" data-open-cond>${ic("list")}조건${condActive() ? ` <i>${condActive()}</i>` : ""}</button>
-        <label class="sort sort-plain">${ic("list")}<select data-sort aria-label="정렬">
-          <option value="rec"${(S.sort ?? "rec") === "rec" ? " selected" : ""}>추천순</option>
-          <option value="fee"${S.sort === "fee" ? " selected" : ""}>요금 낮은 순</option>
-          <option value="name"${S.sort === "name" ? " selected" : ""}>이름순</option>
-        </select></label>
       </div>
     </div>
     <div class="trows" data-rows></div>
@@ -1824,17 +1826,17 @@ function paintCondSheet() {
   dlg.innerHTML = `<div class="sheet-in cond-in">
     <div class="sheet-head"><h2 id="cond-title">조건으로 찾기</h2><button type="button" class="icon-btn sheet-close" data-c="close" aria-label="닫기">${ic("close")}</button></div>
     <div class="cond-body">
-      <section><h3>지역 <small>여러 곳 선택</small></h3><div class="cond-chips">${SIDOS.map((x) => chip("sido", x, x, k.sido.includes(x), pSido.filter((c) => sidoShort(c.sido) === x).length)).join("")}</div></section>
-      <section><h3>주변으로 <small>시·군 이름과 반경</small></h3><div class="cond-near"><input type="search" data-near value="${esc(k.near)}" placeholder="예: 파주, 가평, 양평" aria-label="시·군 이름" autocomplete="off">${R_OPTS.map((r) => chip("r", r, `${r}km`, k.r === r)).join("")}</div>${k.near ? `<p class="cond-hint">${k._ctr ? `${esc(k._ctr.label)} 가운데에서 ${k.r}km 안` : "그 이름의 시·군을 찾지 못했어요"}</p>` : ""}</section>
-      <section><h3>상품·이용 <small>하나라도 있으면</small></h3><div class="cond-chips">${KINDS.map(([x, l]) => chip("kind", x, l, k.kind.includes(x), tally("kind", [x]))).join("")}</div></section>
+      <section><h3>지역</h3><div class="cond-chips">${SIDOS.map((x) => chip("sido", x, x, k.sido.includes(x), pSido.filter((c) => sidoShort(c.sido) === x).length)).join("")}</div></section>
+      <section><h3>주변으로</h3><div class="cond-near"><input type="search" data-near value="${esc(k.near)}" placeholder="예: 파주, 가평, 양평" aria-label="시·군 이름" autocomplete="off">${R_OPTS.map((r) => chip("r", r, `${r}km`, k.r === r)).join("")}</div>${k.near ? `<p class="cond-hint">${k._ctr ? `${esc(k._ctr.label)} 가운데에서 ${k.r}km 안` : "그 이름의 시·군을 찾지 못했어요"}</p>` : ""}</section>
+      <section><h3>상품·이용</h3><div class="cond-chips">${KINDS.map(([x, l]) => chip("kind", x, l, k.kind.includes(x), tally("kind", [x]))).join("")}</div></section>
       <section><h3>반려견</h3><div class="cond-chips">${chip("pet", 1, "동반 가능", k.pet, tally("pet", true))}</div></section>
-      <section><h3>전기 <small>W 미공지인 전기 사이트는 관광진흥법 기준 600W로 봐요</small></h3><div class="cond-chips">${W_OPTS.map(([v, l]) => chip("w", v, l, k.w === v, v ? tally("w", v) : null)).join("")}</div></section>
-      <section><h3>사이트 크기 <small>긴 변 기준 · 규격 미등록은 +로 함께</small></h3><div class="cond-chips">${SIZE_OPTS.map(([v, l]) => chip("size", v, l, k.size === v, v ? tally("size", v) : null)).join("")}</div></section>
-      <section><h3>겨울 <small>고캠핑 운영기간 기준</small></h3><div class="cond-chips">${chip("win", 1, "겨울 운영", k.win, tally("win", true))}</div></section>
+      <section><h3>전기</h3><div class="cond-chips">${W_OPTS.map(([v, l]) => chip("w", v, l, k.w === v, v ? tally("w", v) : null)).join("")}</div></section>
+      <section><h3>사이트 크기</h3><div class="cond-chips">${SIZE_OPTS.map(([v, l]) => chip("size", v, l, k.size === v, v ? tally("size", v) : null)).join("")}</div></section>
+      <section><h3>겨울</h3><div class="cond-chips">${chip("win", 1, "겨울 운영", k.win, tally("win", true))}</div></section>
       <section><h3>불멍·주차</h3><div class="cond-chips">${chip("fire", 1, "장작 가능", k.fire, tally("fire", true))}${chip("park", 1, "텐트 옆 주차", k.park, tally("park", true))}</div></section>
       <section><h3>요금</h3><div class="cond-chips">${[["u3", "~3만원"], ["3to5", "3~5만원"], ["5to7", "5~7만원"], ["7to10", "7만원~10만원"], ["10to20", "10만원~20만원"], ["o20", "20만원+"]].map(([v, l]) => chip("fee", v, l, S.feeDraft === v, count("fee", (c) => feeOk(c, v)))).join("")}</div></section>
     </div>
-    <p class="cond-legend">숫자는 <b>근거로 맞는 곳</b>, <em>+n</em>은 정보가 없어 ‘확인 필요’로 함께 보일 곳이에요. <button type="button" class="link" data-c="strict">${strict ? "정보 없는 곳도 함께 보기" : "확인된 곳만 보기"}</button></p>
+    <p class="cond-legend"><button type="button" class="link" data-c="strict">${strict ? "정보 없는 곳도 함께 보기" : "확인된 곳만 보기"}</button></p>
     <div class="cond-foot"><button type="button" class="btn ghost" data-c="reset">초기화</button><button type="button" class="btn primary wide" data-c="apply">${fmt(total)}곳 보기${total !== sure ? ` <small>(확인 ${fmt(sure)})</small>` : ""}</button></div>
   </div>`;
   // 반경 입력 중에 다시 그리면 커서를 잃지 않게 되돌린다.
@@ -1903,7 +1905,7 @@ function listRow({ c, ce }, i = 0) {
     <a class="card-hit" href="${href}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="card-media">${carousel(c, { eager: i < 3 })}
       ${o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : S.avail?.has(String(c.id)) ? `<span class="sig live">${ic("check")}공식 접수 중</span>` : ""}
-      <span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3)}</span>
+      <span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3, 2, { rows: true })}</span>
     </div>
     <div class="card-body">
       <div class="card-group card-group-head">
@@ -1923,7 +1925,7 @@ function listRow({ c, ce }, i = 0) {
       </div>
       ${condLine(c, ce)}
       <div class="card-group card-group-types">
-        ${(() => { const r = typeRow(c, siteSizeText(c)); return c.st?.length || r.b || siteSizeText(c) ? r.html : ""; })()}
+        ${typeRow(c).html}
       </div>
       <div class="card-group card-group-spec">
         ${rowsHtmlHorizontal(c)}
@@ -1966,7 +1968,7 @@ function listMobilePills() {
   const st = S.stype && STYPES.find(([k]) => k === S.stype);
   if (st) out.push(`<button type="button" class="cond-pill m-only" data-list-stype="" aria-label="${esc(st[1])} 지우기">${esc(st[1])}<span aria-hidden="true">×</span></button>`);
   const FEE_L = { u3: "~3만원", "3to5": "3~5만원", "5to7": "5~7만원", "7to10": "7만원~10만원", "10to20": "10만원~20만원", o20: "20만원+", o7: "7만원+" };
-  if (S.feeBand && FEE_L[S.feeBand]) out.push(`<button type="button" class="cond-pill m-only" data-fee-band="" aria-label="요금 ${esc(FEE_L[S.feeBand])} 지우기">${esc(FEE_L[S.feeBand])}<span aria-hidden="true">×</span></button>`);
+  if (S.feeBand && FEE_L[S.feeBand]) out.push(`<button type="button" class="cond-pill" data-fee-band="" aria-label="요금 ${esc(FEE_L[S.feeBand])} 지우기">${esc(FEE_L[S.feeBand])}<span aria-hidden="true">×</span></button>`);
   return out.join("");
 }
 function listView() {
@@ -1994,11 +1996,6 @@ function listView() {
         <div class="list-tools-right">
           <span class="cond-pills" data-cond-pills>${condBadgeRow()}${listMobilePills()}</span>
           <button type="button" class="chip cond-open" data-open-cond>${ic("list")}조건${condActive() ? ` <i>${condActive()}</i>` : ""}</button>
-          <label class="sort sort-plain">${ic("list")}<select data-list-sort aria-label="정렬">
-            <option value="rec"${(S.listSort ?? "rec") === "rec" ? " selected" : ""}>추천순</option>
-            <option value="fee"${S.listSort === "fee" ? " selected" : ""}>요금 낮은 순</option>
-            <option value="name"${S.listSort === "name" ? " selected" : ""}>이름순</option>
-          </select></label>
         </div>
       </div>
     </div>
@@ -2096,11 +2093,6 @@ function themeView(themeKey) {
         </div>
         <div class="theme-subtools">
           <span class="theme-count" data-theme-count></span>
-          <label class="sort sort-plain">${ic("list")}<select data-theme-sort aria-label="정렬">
-            <option value="rec"${(S.sort ?? "rec") === "rec" ? " selected" : ""}>추천순</option>
-            <option value="name"${S.sort === "name" ? " selected" : ""}>이름순</option>
-            <option value="fee"${S.sort === "fee" ? " selected" : ""}>요금 낮은 순</option>
-          </select></label>
         </div>
       </div>
       <div class="grid" data-theme-grid></div>
