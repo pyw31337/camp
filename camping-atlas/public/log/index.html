@@ -45,19 +45,8 @@
   a { color: inherit; text-decoration: none; }
 
   /* ── 상단 헤더 ─────────────────────────────────── */
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--line);
-    padding: 10px var(--gut, 20px);
-  }
+  /* 사이트 헤더·푸터·하단 탭은 공통 틀(../shell.css)을 쓴다. 아래는 이 쪽 제목 줄(대시보드 이름 + 새로고침). */
   .header-in {
-    max-width: 1140px;
-    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -68,18 +57,8 @@
     align-items: center;
     gap: 10px;
   }
-  .brand-mark {
-    width: 32px;
-    height: 32px;
-    display: inline-grid;
-    place-items: center;
-    background: var(--volt);
-    color: #101414;
-    border-radius: 9px;
-    flex-shrink: 0;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-  }
-  .brand-mark svg { width: 18px; height: 18px; }
+  .log-head { margin-bottom: 16px; }
+  .log-head h1, .brand-title strong { margin: 0; }
   .brand-title {
     display: flex;
     flex-direction: column;
@@ -166,9 +145,11 @@
 
   /* ── 레이아웃 ───────────────────────────────────── */
   .layout {
-    max-width: 1140px;
+    width: 100%;
+    max-width: var(--content);
     margin: 0 auto;
-    padding: 24px 20px 80px;
+    padding: 24px var(--gut) var(--page-pad-bottom);
+    box-sizing: border-box;
   }
 
   /* ── 통계 카드 ─────────────────────────────────── */
@@ -809,7 +790,7 @@
   /* ── 운영 대시보드 사용성 개편(2026-10-21) ──────────────
      원칙: 탭 대상 44px 이상(--tap), 글자 12px 이상(--fs-min), 320px에서 가로 넘침 없음.
      모바일: 헤더는 한 줄(브랜드 + 아이콘 동작), TOP 캠핑장은 순위 목록, 필터는 위에 붙는 막대. */
-  :root { --tap: 44px; --fs-min: .75rem; --gut: clamp(12px, 3vw, 20px); }
+  :root { --tap: 44px; --fs-min: .75rem; }
   html, body { overflow-x: hidden; }
   .btn, .tab-pill, .select-pill, .search-input, .chip-tag { min-height: var(--tap); }
   .btn-icon { width: var(--tap); padding: 0; }
@@ -822,13 +803,12 @@
   .tab-pill .tab-badge, .chip-tag .chip-cnt { font-size: var(--fs-min); }
   .log-badge { font-size: .78rem; }
   .modal-close-btn { width: var(--tap); height: var(--tap); }
-  .control-box { position: sticky; top: 58px; z-index: 50; }
+  .control-box { position: sticky; top: 8px; z-index: 50; }
   .insights-chips { min-width: 0; }
   .chip-tag { max-width: 100%; }
   .chip-tag > span:first-child, .chip-tag { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .camp-name-link { overflow-wrap: anywhere; }
   @media (max-width: 720px) {
-    .site-header { padding: 8px var(--gut); }
     .header-in { flex-direction: row !important; align-items: center !important; gap: 8px !important; }
     .brand-title strong { font-size: .95rem; }
     .brand-title span { display: none; }
@@ -836,7 +816,7 @@
     .header-actions a.btn { display: none; }
     #btn-auto-refresh span { display: none; }
     #btn-auto-refresh { padding: 0 10px; }
-    .layout { padding: 12px var(--gut) 72px; }
+    .layout { padding-top: 12px; }
     .stats-grid { grid-template-columns: 1fr 1fr !important; gap: 8px !important; margin-bottom: 12px; }
     .stat-card { padding: 12px !important; }
     .stat-head { font-size: .8rem; margin-bottom: 4px; }
@@ -861,6 +841,8 @@
     .camp-pill-btn { min-height: 36px; }
   }
 </style>
+<!-- 공통 틀(헤더·푸터·하단 탭·본문 폭) — 앱과 같은 파일. 이 쪽 스타일보다 뒤에 둬서 틀은 항상 같다. -->
+<link rel="stylesheet" href="../shell.css?v=592f3eaad9fc">
 </head>
 <body>
 
@@ -879,11 +861,27 @@
   <symbol id="i-clock" viewBox="0 0 24 24"><path fill="currentColor" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></symbol>
 </svg>
 
-<!-- 헤더 바 -->
-<header class="site-header">
-  <div class="header-in">
+<!-- shell:header -->
+<header class="top">
+      <div class="top-in">
+        <a class="brand" href="../" aria-label="모여라캠핑 처음으로"><span class="brand-mark"><svg><use href="#shell-i-tent"/></svg></span><span>모여라캠핑</span></a>
+        <nav class="top-nav" aria-label="주요 메뉴">
+          <a href="../" data-nav="home">찾기</a>
+          <a href="../map" data-nav="map">지도</a>
+          <a href="../themes" data-nav="themes">테마</a>
+          <a href="../compare" data-nav="compare">비교 <b class="nav-count" data-compare-count hidden>0</b></a>
+          <a href="../saved" data-nav="saved">찜 <b class="nav-count" data-saved-count hidden>0</b></a>
+        </nav>
+      </div>
+    </header>
+<!-- /shell:header -->
+
+<!-- 메인 컨텐츠 영역 -->
+<main class="layout">
+  <!-- 쪽 제목 줄 -->
+  <div class="log-head">
+    <div class="header-in">
     <div class="brand-group">
-      <span class="brand-mark"><svg><use href="#i-tent"/></svg></span>
       <div class="brand-title">
         <strong>모여라캠핑 운영 대시보드 <span class="live-dot" title="실시간 활성"></span></strong>
         <span>찜 · 캠퍼 한마디 운영 기록</span>
@@ -896,14 +894,9 @@
       <button type="button" class="btn btn-icon" id="btn-refresh" title="지금 새로고침" aria-label="지금 새로고침">
         <svg id="refresh-icon"><use href="#i-refresh"/></svg>
       </button>
-      <a href="../explore/" class="btn" target="_blank" rel="noopener">탐색 화면 ↗</a>
-      <a href="../renewal/" class="btn btn-accent" target="_blank" rel="noopener">리뉴얼 시안 ↗</a>
     </div>
   </div>
-</header>
-
-<!-- 메인 컨텐츠 영역 -->
-<main class="layout">
+  </div>
 
   <!-- 상단 요약 통계 그리드 -->
   <section class="stats-grid" id="stats-grid">
@@ -1012,6 +1005,29 @@
     <button type="button" class="btn" id="btn-load-more" style="display:none; padding:8px 24px;">로그 더 보기 (30개)</button>
   </div>
 </main>
+<!-- shell:footer -->
+<footer class="site-footer">
+      <div class="site-footer-inner">
+        <div class="site-footer-brand"><span class="brand-mark"><svg><use href="#shell-i-tent"/></svg></span><strong>모여라캠핑</strong></div>
+        <p class="site-footer-desc">전국 캠핑장 조건·요금·예약 경로 안내</p>
+        <div class="site-footer-meta"><span>한국관광공사 고캠핑 데이터 기반</span><span>운영자 공개 안내와 연결 가능한 원문을 함께 제공합니다</span></div>
+        <p class="site-footer-copy">Copyright © 2026 모여라 캠핑. All Rights Reserved.</p>
+      </div>
+    </footer>
+<!-- /shell:footer -->
+<!-- shell:tabbar -->
+<nav class="tabbar" aria-label="모바일 메뉴">
+      <a href="../" data-nav="home"><svg><use href="#shell-i-search"/></svg><span>찾기</span></a>
+      <a href="../map" data-nav="map"><svg><use href="#shell-i-map"/></svg><span>지도</span></a>
+      <a href="../themes" data-nav="themes"><svg><use href="#shell-i-themes"/></svg><span>테마</span></a>
+      <a href="../compare" data-nav="compare"><svg><use href="#shell-i-compare"/></svg><span>비교</span><b class="nav-count" data-compare-count hidden>0</b></a>
+      <a href="../saved" data-nav="saved"><svg><use href="#shell-i-heart"/></svg><span>찜</span><b class="nav-count" data-saved-count hidden>0</b></a>
+    </nav>
+<!-- /shell:tabbar -->
+<!-- shell:icons -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="shell-i-tent" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M11 2.5h2l-.4.7L22 20h-20l9.4-16.8zM12 9.5 8 18h8z"/></symbol><symbol id="shell-i-search" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M10.5 2.5a8 8 0 0 1 6.4 12.8l4.6 4.6-1.8 1.8-4.6-4.6A8 8 0 1 1 10.5 2.5zm0 2.6a5.4 5.4 0 1 0 0 10.8 5.4 5.4 0 0 0 0-10.8z"/></symbol><symbol id="shell-i-map" viewBox="0 0 16 16"><path fill="currentColor" d="M5 2.223L1.235 4.576A.5.5 0 0 0 1 5v8.5a.5.5 0 0 0 .765.424L5 11.902zm1 9.586l4 2V4.191l-4-2zm8.765-.385L11 13.777v-9.68l3.235-2.021A.5.5 0 0 1 15 2.5V11a.5.5 0 0 1-.235.424"/></symbol><symbol id="shell-i-themes" viewBox="0 0 24 24"><path fill="currentColor" d="m17.402 4.723l2.718 10.142a2.75 2.75 0 0 1-1.945 3.368l-6.278 1.682a2.75 2.75 0 0 1-3.368-1.944L5.81 7.828A2.75 2.75 0 0 1 7.756 4.46l6.278-1.682a2.75 2.75 0 0 1 3.368 1.945m-6.438 3.019a1 1 0 1 0-1.932.517a1 1 0 0 0 1.932-.517m-5.163 3.917l1.762 6.57a3.73 3.73 0 0 0 1.002 1.713l-.443-.023a2.75 2.75 0 0 1-2.602-2.89zm-.925-1.479l-.355 6.796c-.037.699.12 1.363.424 1.94l-.414-.16a2.75 2.75 0 0 1-1.582-3.553z"/></symbol><symbol id="shell-i-compare" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M19.28 11.715L17.565 10H22v5.25c0 .69-.56 1.25-1.25 1.25H14V8.75c0-1.24-1.01-2.25-2.25-2.25H11V3.25c0-.69.56-1.25 1.25-1.25h8.5c.69 0 1.25.56 1.25 1.25v5.24h-4.435l1.715-1.715l-1.06-1.06l-2.645 2.645a1.26 1.26 0 0 0 0 1.77l2.645 2.645zM3.25 7.5h8.5c.69 0 1.25.56 1.25 1.25v12.01c0 .69-.56 1.25-1.25 1.25h-8.5c-.69 0-1.25-.56-1.25-1.25v-5.25h4.435L4.72 17.225l1.06 1.06l2.645-2.645a1.26 1.26 0 0 0 0-1.77L5.78 11.225l-1.06 1.06L6.435 14H2V8.75c0-.69.56-1.25 1.25-1.25" clip-rule="evenodd"/></symbol><symbol id="shell-i-heart" viewBox="0 0 24 24"><path d="M12 21.2 3.6 13A5.4 5.4 0 0 1 12 6.1a5.4 5.4 0 0 1 8.4 6.9z"/></symbol></defs></svg>
+<!-- /shell:icons -->
+<script>/* 공통 헤더의 찜·비교 숫자(앱과 같은 저장소 값) */try{const n=(k)=>{try{return JSON.parse(localStorage.getItem(k)||"[]").length}catch{return 0}};for(const[sel,k]of[["[data-saved-count]","mc-saved"],["[data-compare-count]","mc-pick"]])document.querySelectorAll(sel).forEach((b)=>{b.textContent=n(k);b.hidden=!n(k)});}catch{}</script>
 
 <!-- 기기 정보 상세 모달 다이얼로그 -->
 <dialog class="modal-sheet" id="deviceModal">

@@ -41,7 +41,7 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [320, 800, "320"]]) {
   const ep = await browser.newPage({ viewport: { width: w, height: h } });
   const png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=", "base64");
   await ep.route(/\/culture\/images\/|tong\.visitkorea|ticketimage\.interpark|kopis\.or\.kr|culture\.go\.kr/, (r) => r.fulfill({ status: 200, contentType: "image/png", body: png }));
-  await ep.goto(`${base}#/c/${process.env.EVENT_ID || "4"}`, { waitUntil: "networkidle" });
+  await ep.goto(`${base}place/${process.env.EVENT_ID || "4"}`, { waitUntil: "networkidle" });
   await ep.waitForSelector(".d-title", { timeout: 30000 });
   await ep.$eval("[data-events]", (s) => s.scrollIntoView()).catch(() => fails.push(`${tag}: 축제 칸 없음`));
   await ep.waitForSelector("[data-events] .ev-card", { timeout: 20000 }).catch(() => fails.push(`${tag}: 축제 카드 없음`));
