@@ -515,7 +515,7 @@ const THEME_SUBS = {
   CARAVAN: "독립된 캠핑 트레일러에서 특별한 낭만을 즐기는 카라반",
   AUTO: "텐트 바로 옆 차량 주차로 편리한 오토캠핑장",
   VISITOR: "지인·방문객 초대가 가능하여 함께 즐기기 좋은 캠핑장",
-  PICNIC: "숙박 부담 없이 가볍게 당일로 즐기는 피크닉·바베큐 캠핑장",
+  PICNIC: "숙박 부담 없이 가볍게 당일로 즐기는 캠크닉·바비큐 캠핑장",
   PARK: "부담 없이 자연을 누리는 무료 및 공공 수변·자연공원 야영장",
   WATER_PLAY: "시원한 물놀이터와 풀장이 갖춰진 캠핑장 (여름 시즌 운영 종료 · 내년 계획을 미리 세워보세요)",
   ALL: "모여라캠핑이 엄선한 전국 다양한 테마별 캠핑장",
@@ -619,8 +619,12 @@ function reviewPicks() {
     return showcaseEligible(c) && r.total >= 4 && r.positive > r.caution;
   }).sort((a, b) => reviewMeta(b).score - reviewMeta(a).score || rich(b) - rich(a)).slice(0, 10);
 }
+const normTopic = (t) => String(t ?? "")
+  .replace("가격 부담", "요금 부담")
+  .replace("화장실·샤워장 깨끗", "화장실·샤워실 깨끗")
+  .replace("바베큐·불멍 힐링", "바비큐·불멍 힐링");
 function reviewTopics(rows, cls, icon) {
-  return (rows ?? []).slice(0, 2).map(([topic, count]) => `<span class="review-topic ${cls}">${ic(icon)}${esc(topic)} <i>${count}</i></span>`).join("");
+  return (rows ?? []).slice(0, 2).map(([topic, count]) => `<span class="review-topic ${cls}">${ic(icon)}${esc(normTopic(topic))} <i>${count}</i></span>`).join("");
 }
 function reviewPickCard(c, i = 0) {
   const r = reviewMeta(c);
@@ -1076,7 +1080,7 @@ function cardReviewPills(rv, c) {
       if (tags.has("WATER_PLAY")) fb.push("계곡·물놀이 좋음");
       if (tags.has("PET_OK")) fb.push("반려견 동반 편함");
       if (c.of?.pk?.v === "SITE_SIDE") fb.push("주차 편함·옆 주차");
-      if (c.of?.fire?.v === "FIREWOOD_OK") fb.push("바베큐·불멍 힐링");
+      if (c.of?.fire?.v === "FIREWOOD_OK") fb.push("바비큐·불멍 힐링");
       if (c.env?.includes("숲") || c.env?.includes("산")) fb.push("피톤치드 숲속");
       if (c.env?.includes("계곡") || c.env?.includes("강")) fb.push("시원한 계곡·물");
       const chosen = [...new Set(fb)].slice(0, 2);
@@ -2366,8 +2370,8 @@ function extraTiles(c, d, f) {
     if (sh?.url) add("tent", "그늘막", { v: `${sh.v === "ZONE_ONLY" ? "지정 구역만" : sh.v === "PROHIBITED" ? "설치 금지" : "가능"}${sh.size ? ` · ${sh.size}` : ""}`, g: "c", src: { label: d?.du_src?.label ?? "관리기관 안내", url: sh.url, at: sh.at, quote: `${sh.season ?? ""} ${sh.hours ?? ""}`.trim() } });
   }
   add("users", "방문객", specFact(d, "VISITOR_POLICY"));
-  add("clock-in", "얼리 체크인", specFact(d, "EARLY_CHECKIN"));
-  add("clock-out", "레이트 체크아웃", specFact(d, "LATE_CHECKOUT"));
+  add("clock-in", "얼리 입실", specFact(d, "EARLY_CHECKIN"));
+  add("clock-out", "레이트 퇴실", specFact(d, "LATE_CHECKOUT"));
   add("bed", "최소 숙박", specFact(d, "MIN_STAY"));
   add("car", "추가 차량", specFact(d, "EXTRA_CAR_FEE"));
   const shop = pick(/매점|편의점|마트|무인카페/, /근처|주변|분\s*거리|km|미비|2km/);
@@ -2506,7 +2510,7 @@ function nearbyHubHtml(c, d) {
     ["tour", "관광", "pin", (() => {
       const list = (nearby.tour ?? []).slice(0, 4).map((x) => entry("TOUR", x)).filter(Boolean);
       const ext = d?.extras ?? {};
-      if (ext.pet) list.push({ type: "TOUR", name: "반려동물 동반 여행지", sub: "한국관광공사 등록", summary: true, url: "https://korean.visitkorea.or.kr/" });
+      if (ext.pet) list.push({ type: "TOUR", name: "반려견 동반 여행지", sub: "한국관광공사 등록", summary: true, url: "https://korean.visitkorea.or.kr/" });
       if (ext.bf) list.push({ type: "TOUR", name: "무장애 여행지", sub: "한국관광공사(휠체어·유아차)", summary: true, url: "https://korean.visitkorea.or.kr/" });
       if (ext.tr?.length) {
         for (const [n, distKm, h, kind] of ext.tr.slice(0, 3)) {
@@ -2529,7 +2533,7 @@ function reviewHtml(d, c) {
   const total = rv?.n ?? 0;
   if (!rv || (!rv.p?.length && !rv.c?.length && !total)) return "";
   const fact = { g: "m", src: { label: "블로그·카페 방문자 후기 빅데이터 분석", url: c?.gc_url || "https://www.gocamping.or.kr/" } };
-  const block = (label, rows, cls, icon) => `<div class="review-block ${cls}"><span>${ic(icon)}${label}</span><div>${rows?.length ? rows.map(([topic, count]) => `<b>${esc(topic)} <i>${count}</i></b>`).join("") : `<span class="review-empty">없음</span>`}</div></div>`;
+  const block = (label, rows, cls, icon) => `<div class="review-block ${cls}"><span>${ic(icon)}${label}</span><div>${rows?.length ? rows.map(([topic, count]) => `<b>${esc(normTopic(topic))} <i>${count}</i></b>`).join("") : `<span class="review-empty">없음</span>`}</div></div>`;
   return `<section class="d-sec review-summary"><div class="sec-head">${iconTitle("rating", "평가")}<span class="sec-note">후기 ${fmt(total)}건 분석 ${srcTip(fact, "후기 장단점 분석")}</span></div><div class="review-summary-grid">${block("장점", rv.p, "pro", "thumb-up")}${block("단점", rv.c, "con", "thumb-down")}</div></section>`;
 }
 function bookingRank(channel) {
@@ -2763,7 +2767,7 @@ function iconTitle(icon, label) { return `<div class="sec-title">${ic(icon, "lin
 // 화면에서 쓰는 문장은 데이터 원문을 그대로 반복하지 않는다. 공통 규칙으로 공백·목록기호를
 // 정리하고 한 줄 길이만 남긴다. 원문과 출처는 항상 srcTip()의 작은 i에 보관한다.
 function serviceText(value, limit = 44) {
-  const text = String(value ?? "")
+  let text = String(value ?? "")
     .replace(/<[^>]*>/g, " ")
     .replace(/[\r\n\t]+/g, " ")
     .replace(/^[\s*#·•\-–—√✓✔※▶►▷■□●○◆◇★☆>]+/, "")
@@ -2771,6 +2775,15 @@ function serviceText(value, limit = 44) {
     .replace(/\s+/g, " ")
     .trim();
   if (!text) return "";
+  text = text
+    .replace(/사이트\s*옆\s*주차/g, "텐트 옆 주차")
+    .replace(/얼리\s*체크인/g, "얼리 입실")
+    .replace(/레이트\s*체크아웃/g, "레이트 퇴실")
+    .replace(/바베큐/g, "바비큐")
+    .replace(/공동취사장|취사장/g, "개수대")
+    .replace(/샤워장/g, "샤워실")
+    .replace(/가격\s*부담/g, "요금 부담")
+    .replace(/반려동물\s*동반/g, "반려견 동반");
   const sentence = text.match(/^(.+?(?:[.!?]|다\.|요\.|함\.|됨\.))(?:\s|$)/)?.[1] ?? text;
   if (sentence.length <= limit) return sentence.replace(/[\s,;:]+$/, "");
   const cut = sentence.slice(0, limit);
@@ -2987,7 +3000,7 @@ function priceRows(c, d) {
   if (stayRows.length === 0) {
     for (const x of d?.prices ?? []) {
       if (!x.won) continue;
-      addStay(x.won, [serviceText(x.label, 22), DAY[x.day], serviceText(x.season, 14)].filter(Boolean).join(" · ") || "1박 요금", "후기 언급", sourceFact(x, "후기 원문", x.quote), asOf(x.date));
+      addStay(x.won, [serviceText(x.label, 22), DAY[x.day], serviceText(x.season, 14)].filter(Boolean).join(" · ") || "요금", "후기 언급", sourceFact(x, "후기 원문", x.quote), asOf(x.date));
       if (stayRows.length >= 2) break;
     }
   } else {
@@ -3237,7 +3250,7 @@ function operatorSummary(label, texts) {
     if (/환불|취소/.test(text)) return "취소·환불 규정 확인";
     return "이용 요금 확인";
   }
-  if (label === "주차") return /텐트.?옆|사이트.?옆/.test(text) ? "사이트 옆 주차 안내" : /외부|공용/.test(text) ? "외부 주차 안내" : "주차 방법 확인";
+  if (label === "주차") return /텐트.?옆|사이트.?옆/.test(text) ? "텐트 옆 주차 안내" : /외부|공용/.test(text) ? "외부 주차 안내" : "주차 방법 확인";
   if (label === "전기") {
     const wattMatches = [...scan.matchAll(/(?<![a-zA-Z\d,.])(\d{1,2}(?:,\d{3})+|\d{3,4}(?:\.\d+)?)\s*(?:[wW]|와트)(?![a-zA-Z])/gi)];
     const kwMatches = [...scan.matchAll(/(?<![a-zA-Z\d.])(\d+(?:\.\d+)?)\s*(?:kW|킬로와트)(?![a-zA-Z])/gi)];
@@ -4935,7 +4948,7 @@ async function compareView() {
     ["현장 조건", [["주차", (c) => facts(c).park, "car"], ["전기", (c) => facts(c).power, "bolt"], ["장작·숯", (c) => facts(c).fire, "flame"], ["사이트 규격", (c) => facts(c).size, "size"], ["바닥", (c) => facts(c).ground, "layers"], ["위생", (c) => facts(c).sanitary, "bath"], ["반려견", (c) => facts(c).pet, "paw"]]],
     ["사이트", [["타입", (c) => (c.st?.length ? { v: typeLine2(c), g: "c", src: { label: "한국관광공사 고캠핑 등록 현황", url: c.gc_url } } : null), "tent"], ["사이트 수", (c, d) => profFact(PF(d, "TYPE")), "layers"]]],
     ["시간·요금", [["입실", (c, d) => usage(c, d)[0][1], "clock-in"], ["퇴실", (c, d) => usage(c, d)[1][1], "clock-out"], ["매너타임", (c, d) => usage(c, d)[2][1], "bed"], ["요금", (c, d) => usage(c, d)[3][1], "won"]]],
-    ["시설·주변", [["편의시설", (c) => ((c.amenities ?? []).length ? { v: c.amenities.slice(0, 6).join(" · "), g: "c", src: { label: "고캠핑 등록 편의시설", url: c.gc_url } } : null), "drop"], ["대여", (c) => ((c.rental ?? []).length ? { v: c.rental.join(" · "), g: "c", src: { label: "고캠핑 등록 대여품목", url: c.gc_url } } : null), "cart"], ["편의점", (c) => (c.nl?.c ? { v: km(c.nl.c), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+편의점` : null } } : null), "store"], ["마트", (c) => (c.nl?.m ? { v: km(c.nl.m), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+마트` : null } } : null), "cart"], ["후기 장점", (c) => (c.rv?.p?.length ? { v: c.rv.p.slice(0, 2).map(([t]) => t).join(" · "), g: "m", src: { label: "방문자 후기 분석", url: c.gc_url } } : null), "thumb-up"]]],
+    ["시설·주변", [["편의시설", (c) => ((c.amenities ?? []).length ? { v: c.amenities.slice(0, 6).join(" · "), g: "c", src: { label: "고캠핑 등록 편의시설", url: c.gc_url } } : null), "drop"], ["대여", (c) => ((c.rental ?? []).length ? { v: c.rental.join(" · "), g: "c", src: { label: "고캠핑 등록 대여품목", url: c.gc_url } } : null), "cart"], ["편의점", (c) => (c.nl?.c ? { v: km(c.nl.c), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+편의점` : null } } : null), "store"], ["마트", (c) => (c.nl?.m ? { v: km(c.nl.m), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+마트` : null } } : null), "cart"], ["후기 장점", (c) => (c.rv?.p?.length ? { v: c.rv.p.slice(0, 2).map(([t]) => normTopic(t)).join(" · "), g: "m", src: { label: "방문자 후기 분석", url: c.gc_url } } : null), "thumb-up"]]],
   ];
 
   const head = camps.map((c, i) => `<th scope="col" data-col-idx="${i}"><a class="ch" href="#/c/${encodeURIComponent(c.id)}">${campThumb(c, { sizes: "64px" })}<span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></span></a><span class="ch-acts">${heartBtn(c)}<button class="icon-btn ch-x" type="button" data-pick="${esc(c.id)}" aria-label="비교에서 빼기" title="비교에서 빼기(찜은 그대로)">${ic("close")}</button></span></th>`).join("");
