@@ -69,6 +69,14 @@ jobs:
           PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/rail-swipe-test.mjs http://127.0.0.1:8765/
       - name: 숙박 상품 배지·필터 회귀 테스트
         run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/stay-badges-test.mjs http://127.0.0.1:8765/
+      - name: 겨울 기능(겨울 줄·겨울 운영·난방·눈/영하 예보) 회귀 테스트
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/winter-test.mjs http://127.0.0.1:8765/
+      - name: 찜 비교 화면(찜 해제 하트·되돌리기) 회귀 테스트
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/compare-fav-test.mjs http://127.0.0.1:8765/
+      - name: 좌우 화살표(배경 없는 꺾쇠) 회귀 테스트
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/arrows-test.mjs http://127.0.0.1:8765/
+      - name: 성능 예산(크기·DOM·원본 사진·카드 표시 시간) 검사
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/perf-budget.mjs http://127.0.0.1:8765/
       # workflow_dispatch(데이터 봇 PR) 결과는 PR 검사 목록에 안 잡혀서, 같은 이름의 커밋 상태로도 남긴다(main 룰셋 필수 검사).
       - name: Report commit status for bot PRs
         if: always() && github.event_name == 'workflow_dispatch'

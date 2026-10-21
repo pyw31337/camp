@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<title>운영 기록 · 모여라캠핑</title>
+<style>
+  :root { color-scheme: light; --ink:#1c1b18; --muted:#6b675f; --line:#e6e2d8; --paper:#f6f5f1; --card:#fff; --brand:#3d3a9c; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, -apple-system, "Apple SD Gothic Neo", sans-serif; background: var(--paper); color: var(--ink); }
+  header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background: #fff; border-bottom: 1px solid var(--line); }
+  header a { color: var(--brand); text-decoration: none; font-weight: 700; }
+  main { max-width: 980px; margin: 0 auto; padding: 20px 16px 48px; }
+  h1 { margin: 0 0 4px; font-size: 1.35rem; letter-spacing: -.02em; }
+  .lead { margin: 0 0 14px; color: var(--muted); font-size: .92rem; line-height: 1.5; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 12px 0 16px; }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+  .stat b { display: block; font-size: 1.25rem; }
+  .stat span { color: var(--muted); font-size: .8rem; }
+  .tabs { display: flex; gap: 8px; margin: 4px 0 10px; }
+  .tabs button { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 8px 14px; font-weight: 700; cursor: pointer; }
+  .tabs button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .tools input { width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: 11px 12px; font: inherit; background: #fff; margin-bottom: 12px; }
+  .list { display: flex; flex-direction: column; gap: 10px; }
+  .row { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; cursor: pointer; }
+  .row:hover { border-color: #cfc9bb; }
+  .row-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+  .when { color: var(--muted); font-size: .82rem; }
+  .badge { font-size: .75rem; font-weight: 800; border-radius: 999px; padding: 3px 8px; }
+  .badge.add { background: #e8f6ee; color: #1a7f37; }
+  .badge.remove { background: #fdecec; color: #b42318; }
+  .badge.ok { background: #eef0fb; color: var(--brand); }
+  .badge.off { background: #f3f1ec; color: #6b675f; }
+  .camp { display: block; font-weight: 800; font-size: 1.02rem; color: var(--ink); text-decoration: none; line-height: 1.35; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 8px; color: var(--muted); font-size: .84rem; align-items: center; }
+  .device { display: inline-flex; align-items: center; gap: 6px; color: var(--ink); font-weight: 700; }
+  .info { width: 18px; height: 18px; border-radius: 50%; border: 1px solid #ccc; background: #fff; color: #666; font-size: .72rem; font-weight: 800; line-height: 16px; text-align: center; cursor: pointer; padding: 0; }
+  .body { margin: 6px 0 0; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
+  .empty { padding: 36px 12px; text-align: center; color: var(--muted); }
+  .pop { position: fixed; inset: 0; background: rgba(20,18,14,.35); display: flex; align-items: flex-end; justify-content: center; z-index: 20; }
+  .pop[hidden] { display: none; }
+  .sheet { width: min(520px, 100%); background: #fff; border-radius: 16px 16px 0 0; padding: 16px 16px 24px; }
+  .sheet h3 { margin: 0 0 10px; font-size: 1rem; }
+  .kv { display: grid; grid-template-columns: 72px 1fr; gap: 6px 10px; font-size: .88rem; }
+  .kv i { color: var(--muted); font-style: normal; }
+  .kv b { font-weight: 600; word-break: break-all; }
+  @media (min-width: 720px) {
+    .pop { align-items: center; }
+    .sheet { border-radius: 16px; }
+  }
+  @media (max-width: 640px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+<header>
+  <strong>모여라캠핑 · 운영 기록</strong>
+  <a href="../explore/">← 사이트로</a>
+</header>
+<main>
+  <h1>운영 기록</h1>
+  <p class="lead">찜과 댓글을 카드로 보고, 카드를 누르면 해당 캠핑장으로 이동합니다.</p>
+  <div class="stats" id="stats"></div>
+  <div class="tabs">
+    <button type="button" class="on" data-tab="saves">찜 기록</button>
+    <button type="button" data-tab="comments">댓글 기록</button>
+  </div>
+  <input id="q" type="search" placeholder="업장 · 내용 · IP 검색" aria-label="기록 검색">
+  <div id="status" class="lead"></div>
+  <div id="list" class="list"></div>
+</main>
+<div class="pop" id="pop" hidden>
+  <div class="sheet">
+    <h3>기기 상세</h3>
+    <div class="kv" id="pop-body"></div>
+    <button type="button" id="pop-close" style="margin-top:14px;border:0;background:#1c1b18;color:#fff;border-radius:10px;padding:10px 14px;font-weight:700;">닫기</button>
+  </div>
+</div>
+<script>
+const SB = {
+  url: "https://zgnetdxqzsnmzdvoxzbw.supabase.co",
+  key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnbmV0ZHhxenNubXpkdm94emJ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIxMjUzMzIsImV4cCI6MjEwNzcwMTMzMn0.ZMsY5TT2LVTOFctHxSB7IiAuCCR3VKvX2-Y7PDdrO88"
+};
+const headers = { apikey: SB.key, Authorization: `Bearer ${SB.key}` };
+const campUrl = (id) => `../explore/#/c/${encodeURIComponent(id)}`;
+let tab = "saves", saves = [], comments = [], names = new Map();
+
+function deviceOf(ua = "", platform = "", screen = "") {
+  const u = ua.toLowerCase();
+  const p = (platform || "").toLowerCase();
+  let os = "알 수 없음";
+  let kind = "기기";
+  if (/iphone/.test(u)) { os = "iOS"; kind = "아이폰"; }
+  else if (/ipad/.test(u)) { os = "iPadOS"; kind = "아이패드"; }
+  else if (/android/.test(u)) {
+    os = "Android";
+    if (/sm-f9|sm-f7|fold|flip/.test(u)) kind = "갤럭시 폴드";
+    else if (/sm-|samsung|galaxy/.test(u)) kind = "갤럭시";
+    else kind = "안드로이드";
+  } else if (/mac os|macintosh/.test(u) || /mac/.test(p)) {
+    os = "macOS";
+    const [w, h] = (screen || "").split("x").map(Number);
+    kind = (w && h && Math.max(w, h) <= 1600 && Math.min(w, h) <= 1000) ? "맥미니" : "맥";
+  } else if (/windows/.test(u) || /win/.test(p)) { os = "Windows"; kind = "윈도우 PC"; }
+  else if (/linux/.test(u) || /linux/.test(p)) { os = "Linux"; kind = "PC"; }
+  else if (/cros/.test(u)) { os = "ChromeOS"; kind = "크롬북"; }
+  return { label: kind, os, ua, platform, screen };
+}
+function esc(s) { return String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&":"&","<":"<",">":">",'"':""" }[c])); }
+function when(s) { try { return new Date(s).toLocaleString("ko-KR", { month:"numeric", day:"numeric", hour:"2-digit", minute:"2-digit" }); } catch { return s; } }
+function nameOf(id) { return names.get(String(id)) || id; }
+
+async function loadNames() {
+  try {
+    const r = await fetch("../explore/data/campgrounds.json");
+    const camps = await r.json();
+    names = new Map(camps.map((c) => [String(c.id), c.name]));
+  } catch {}
+}
+function openInfo(d) {
+  document.getElementById("pop-body").innerHTML = `
+    <i>표시</i><b>${esc(d.label)} · ${esc(d.os)}</b>
+    <i>화면</i><b>${esc(d.screen || "-")}</b>
+    <i>플랫폼</i><b>${esc(d.platform || "-")}</b>
+    <i>UA</i><b>${esc(d.ua || "-")}</b>`;
+  document.getElementById("pop").hidden = false;
+}
+document.getElementById("pop-close").onclick = () => { document.getElementById("pop").hidden = true; };
+document.getElementById("pop").onclick = (e) => { if (e.target.id === "pop") e.currentTarget.hidden = true; };
+
+async function load() {
+  document.getElementById("status").textContent = "불러오는 중…";
+  await loadNames();
+  const [sr, cr] = await Promise.all([
+    fetch(`${SB.url}/rest/v1/save_log?select=created_at,action,campground_id,ip,language,timezone,screen,platform,user_agent&order=created_at.desc&limit=400`, { headers }),
+    fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,created_at,is_deleted&order=created_at.desc&limit=200`, { headers }),
+  ]);
+  const logs = sr.ok ? await sr.json() : [];
+  saves = logs.filter((x) => x.action !== "comment");
+  comments = cr.ok ? await cr.json() : [];
+  const cmtLogs = logs.filter((x) => x.action === "comment");
+  for (const c of comments) {
+    const t = Date.parse(c.created_at);
+    const hit = cmtLogs.find((x) => String(x.campground_id) === String(c.campground_id) && Math.abs(Date.parse(x.created_at) - t) < 120000);
+    if (hit) c._dev = hit;
+  }
+  document.getElementById("stats").innerHTML = `
+    <div class="stat"><b>${saves.length}</b><span>찜 기록</span></div>
+    <div class="stat"><b>${saves.filter((x) => x.action === "add").length}</b><span>찜</span></div>
+    <div class="stat"><b>${comments.filter((x) => !x.is_deleted).length}</b><span>댓글</span></div>
+    <div class="stat"><b>${new Set(saves.map((x) => x.ip).filter(Boolean)).size}</b><span>접속 IP</span></div>`;
+  document.getElementById("status").textContent = "";
+  render();
+}
+function render() {
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const box = document.getElementById("list");
+  if (tab === "saves") {
+    const rows = saves.filter((x) => !q || `${nameOf(x.campground_id)} ${x.campground_id} ${x.ip} ${x.user_agent}`.toLowerCase().includes(q));
+    if (!rows.length) { box.innerHTML = `<div class="empty">찜 기록이 없습니다.</div>`; return; }
+    box.innerHTML = rows.map((x) => {
+      const d = deviceOf(x.user_agent, x.platform, x.screen);
+      return `<article class="row" data-href="${campUrl(x.campground_id)}">
+        <div class="row-top"><span class="when">${when(x.created_at)}</span><span class="badge ${x.action === "add" ? "add" : "remove"}">${x.action === "add" ? "찜" : "해제"}</span></div>
+        <a class="camp" href="${campUrl(x.campground_id)}">${esc(nameOf(x.campground_id))}</a>
+        <div class="meta">
+          <span class="device">${esc(d.label)} · ${esc(d.os)} <button type="button" class="info" data-info="${esc(JSON.stringify(d))}" aria-label="기기 상세">i</button></span>
+          <span>${esc(x.ip || "-")}</span>
+        </div>
+      </article>`;
+    }).join("");
+  } else {
+    const rows = comments.filter((x) => !q || `${nameOf(x.campground_id)} ${x.nickname} ${x.content}`.toLowerCase().includes(q));
+    if (!rows.length) { box.innerHTML = `<div class="empty">댓글이 없습니다.</div>`; return; }
+    box.innerHTML = rows.map((x) => {
+      const d = x._dev ? deviceOf(x._dev.user_agent, x._dev.platform, x._dev.screen) : null;
+      return `<article class="row" data-href="${campUrl(x.campground_id)}">
+      <div class="row-top"><span class="when">${when(x.created_at)}</span><span class="badge ${x.is_deleted ? "off" : "ok"}">${x.is_deleted ? "삭제" : "게시"}</span></div>
+      <a class="camp" href="${campUrl(x.campground_id)}">${esc(nameOf(x.campground_id))}</a>
+      <p class="body">${esc(x.content || "")}</p>
+      <div class="meta">
+        <span>${esc(x.nickname || "익명")}</span>
+        ${d ? `<span class="device">${esc(d.label)} · ${esc(d.os)} <button type="button" class="info" data-info="${esc(JSON.stringify(d))}" aria-label="기기 상세">i</button></span>` : `<span>기기 정보 없음</span>`}
+      </div>
+    </article>`;
+    }).join("");
+  }
+  box.querySelectorAll(".row").forEach((el) => el.addEventListener("click", (e) => {
+    if (e.target.closest("a, button")) return;
+    location.href = el.dataset.href;
+  }));
+  box.querySelectorAll("[data-info]").forEach((b) => b.addEventListener("click", (e) => {
+    e.stopPropagation();
+    openInfo(JSON.parse(b.dataset.info));
+  }));
+}
+document.querySelectorAll("[data-tab]").forEach((b) => b.addEventListener("click", () => {
+  tab = b.dataset.tab;
+  document.querySelectorAll("[data-tab]").forEach((x) => x.classList.toggle("on", x === b));
+  render();
+}));
+document.getElementById("q").addEventListener("input", render);
+load();
+</script>
+</body>
+</html>

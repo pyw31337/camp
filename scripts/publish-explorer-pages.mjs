@@ -67,9 +67,11 @@ const versionedShell = (html) => html
   .replace('src="./app.js"', `src="./app.js?v=${shellVersion}"`);
 
 // 1. 루트 메인 화면(https://pyw31337.github.io/camp/): 어떤 리다이렉트도 없이 즉시 열리는 메인 앱 셸
+// 성능(2026-10-21): 첫 화면 데이터는 app.js를 받기 전부터 미리 받는다(app.js의 fetch와 같은 주소·같은 자격 → 캐시 재사용). 고캠핑 사진 호스트는 미리 연결.
+const rootPreload = `<link rel="preload" href="./explore/data/campgrounds.json" as="fetch" crossorigin="anonymous"><link rel="preload" href="./explore/data/photos.json" as="fetch" crossorigin="anonymous"><link rel="preconnect" href="https://gocamping.or.kr">`;
 const rootIndex = versionedShell(renewalIndex).replace(
   "</head>",
-  `<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="kakao-js-key" content="${kakaoKey}"><meta name="supabase-url" content="${supabaseUrl}"><meta name="supabase-anon-key" content="${supabaseAnonKey}"></head>`
+  `${rootPreload}<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="kakao-js-key" content="${kakaoKey}"><meta name="supabase-url" content="${supabaseUrl}"><meta name="supabase-anon-key" content="${supabaseAnonKey}"></head>`
 );
 const rootCss = renewalCss.replaceAll('url("../images/', 'url("./images/');
 await mkdir(rootOut, { recursive: true });

@@ -34,6 +34,7 @@ node pipeline/scripts/build-site-pricing-facts.mjs
 node pipeline/scripts/build-site-types.mjs
 node pipeline/scripts/build-price-tiers.mjs
 node pipeline/scripts/build-house-rules.mjs
+node pipeline/scripts/build-gocamping-detail.mjs
 node pipeline/scripts/build-link-health.mjs
 node pipeline/scripts/build-card-fallback.mjs
 node pipeline/scripts/report-coverage.mjs

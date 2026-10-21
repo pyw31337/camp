@@ -532,3 +532,29 @@ Pretendard Variable 한 가지. 제목 800, 본문 400~600, 숫자 `tabular-nums
 - 근거: 고캠핑 업종(`c.types`) 또는 `c.st` 등록·운영자 근거(후기 언급 `m` 제외), 트레일러는 `c.trailer`/`c.caravan`. 코드: `design/renewal/app.js` `STAYS`·`stayKinds`.
 - 위치: 홈·목록 카드 타입 줄(배지에 나온 타입은 줄 글자에서 뺌), 상세 머리 배지, 지도 팝업, 홈 ‘사이트’ 칩(숙박 상품 먼저), 목록 조건 ‘상품·이용’, 지도 빠른 칩(글램핑·카라반·방갈로).
 - 회귀 테스트: `camping-atlas/scripts/stay-badges-test.mjs`(CI Rail swipe 잡).
+
+## 겨울 기능 (2026-10-21)
+
+- 카탈로그 `c.win`(1 겨울 운영 / 0 겨울 휴장 → 기존 빨간 ‘동계 휴장’ 배지), `c.heat`(["g","c"] 글램핑·카라반 내부시설 난방) — `pipeline/scripts/build-gocamping-detail.mjs`(data-sync·publish-incremental).
+- 난방은 별도 배지 없이 숙박 배지 글자를 ‘난방 글램핑’·‘난방 카라반’으로 바꾼다(중복 금지).
+- 홈 첫 테마 줄 ‘겨울 캠핑’(WINTER): 겨울 운영 + (난방 상품 또는 W 공지 1,100W 이상). 이미지 themes/winter.webp.
+- 목록 조건 ‘겨울’ 섹션(`win=1`). 눈·영하 예보 배지 `bdg-wx`: conditions/forecast.json 7일, 카드 사진 위·상세 머리.
+- 회귀 테스트: `camping-atlas/scripts/winter-test.mjs`(CI Rail swipe 잡).
+
+## 찜 비교 화면 (2026-10-21)
+
+- 제목 ‘찜한 캠핑장 비교’ + 설명 줄(찜 N곳 중 M곳 비교 중). 칩: ✓/+ = 비교에 넣고 빼기(최대 3곳), 채운 하트(`heartBtn`, 사이트 공통 `mc-saved`) = 찜 해제.
+- 열 머리: 하트(찜 해제) + ×(비교에서만 빼기, 찜 유지). 찜 해제 시 `toastUndo` 되돌리기 4초. 찜 0곳이면 빈 화면 + ‘캠핑장 찾기’.
+- 회귀 테스트: `camping-atlas/scripts/compare-fav-test.mjs`.
+
+## 좌우 화살표 (2026-10-21)
+
+- 사진 캐러셀(`.car-nav`)·사진 크게 보기(`.lb-nav`) 모두 흰 원 배경·박스 그림자 없이 흰 꺾쇠만, `drop-shadow(0 1px 1.5px rgba(0,0,0,.28))`로 옅게. 새 화살표도 이 규칙을 따른다(style.css 끝 공통 규칙).
+- 회귀 테스트: `camping-atlas/scripts/arrows-test.mjs`.
+
+## 성능 규칙 (2026-10-21)
+
+- 고캠핑 원본 사진(최대 11MB)은 카드·갤러리에 직접 쓰지 않는다: `photoView()`가 `thumb/thumb_1000_` 썸네일을 쓰고, 없으면 `data-orig`로 원본 한 번 대체. 라이트박스만 원본.
+- 홈 테마 줄은 앞 4줄만 바로 그리고 나머지는 화면 1,200px 앞에서 채운다(`LAZY_FROM`, `watchLazyRows`). 레일 상태 계산은 한 프레임에 모아 읽고 쓴다(`queueRailState`).
+- Leaflet은 `defer`, 루트 index에 campgrounds/photos.json `preload`, gocamping.or.kr `preconnect`.
+- CI 예산: `camping-atlas/scripts/perf-budget.mjs`(app.js 560KB·CSS 260KB·첫 데이터 gzip 3.5MB·홈 DOM 12,000·원본 사진 0장·카드 8초).
