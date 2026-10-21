@@ -1497,7 +1497,10 @@ function homeView() {
     <div class="hero-in">
       <h1 id="hero-t"><span class="h1-a">취향대로 찾아 떠나는</span> <span class="h1-b">전국 <b class="hero-n" data-hero-total>${fmt(heroCounts().total)}</b>곳 <em>자연 속으로.</em></span></h1>
       <p class="hero-summary">캠핑장 <b data-hero-stay>${fmt(heroCounts().stay)}</b>곳 · 당일 나들이 <b data-hero-day>${fmt(heroCounts().day)}</b>곳, 조건으로 골라 보세요</p>
-      <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div>${commonFinderForm({ formAttr: "data-search", isList: false })}</div>
+      <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => {
+        const n = countOf((c) => k === "all" || AREA_OF[sidoShort(c.sido)] === k);
+        return `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}${n ? ` <i>${fmt(n)}</i>` : ""}</button>`;
+      }).join("")}</div>${commonFinderForm({ formAttr: "data-search", isList: false })}</div>
     </div>
   </section>
 
@@ -1936,7 +1939,10 @@ function listRow({ c, ce }, i = 0) {
 
 /** 지역·사이트·요금 필터 모듈 (목록·메인 공통). prefix로 data-attr 구분. */
 function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAttr = "data-fee-band", areaPressed = (k) => S.area === k, stypePressed = (k) => S.stype === k, feePressed = (k) => (S.feeBand ?? "") === k } = {}) {
-  const areaChips = AREAS.map(([k, l]) => `<button type="button" class="chip" ${areaAttr}="${k}" aria-pressed="${areaPressed(k)}">${l}</button>`).join("");
+  const areaChips = AREAS.map(([k, l]) => {
+    const n = countOf((c) => k === "all" || AREA_OF[sidoShort(c.sido)] === k);
+    return `<button type="button" class="chip" ${areaAttr}="${k}" aria-pressed="${areaPressed(k)}">${l}${n ? ` <i>${fmt(n)}</i>` : ""}</button>`;
+  }).join("");
   const typeChips = [...STYPES.filter(([k]) => STAY_KEYS.has(k)), ...STYPES.filter(([k]) => !STAY_KEYS.has(k))]
     .filter(([k]) => k !== "PITCH" && k !== "PRIVATE_BATH")
     .map(([k, l, i]) => {
@@ -2399,6 +2405,22 @@ function extraTiles(c, d, f) {
     const r = gcdFac(d, re), v = (r?.items ?? (r?.v ? [r.v] : [])).filter((x) => !/^캠핑장 문의$/.test(x));
     if (v.length) add(icon, label, { v: v.join(" · "), ...gcdFact(d.gcd, "고캠핑 상세 캠핑장 시설정보", `${r.k}: ${r.v}`) });
   }
+  // 고캠핑 안전시설 현황(소화기·화재감지기·방화수 등, 캠핑친구 벤치마킹)
+  const sf = c.gx?.sf ?? [];
+  const safetyList = [["소화기", sf[0]], ["방화수", sf[1]], ["방화사", sf[2]], ["화재감지기", sf[3]]].filter(([, n]) => n > 0).map(([l, n]) => `${l} ${n}개`);
+  const gcdSafe = gcdFac(d, /안전시설|소화기/)?.v;
+  const safeText = safetyList.length ? safetyList.join(" · ") : (gcdSafe && gcdSafe !== "정보 없음" ? gcdSafe : null);
+  if (safeText) {
+    add("flame", "안전 시설", { v: safeText, g: "c", src: { label: "고캠핑 등록 안전 시설", url: c.gc_url, quote: safeText } });
+  }
+  if (c.gx?.ins) {
+    add("check", "책임보험", { v: "영업배상책임보험 가입", g: "c", src: { label: "고캠핑 등록", url: c.gc_url, quote: "영업배상책임보험 가입" } });
+  }
+  // 사이트 간격(고캠핑 sitedStnc)
+  const siteGap = c.gx?.gap ? `${c.gx.gap}m` : gcdFac(d, /사이트\s*간격/)?.v;
+  if (siteGap && !/^0\s*m?$/i.test(String(siteGap).trim())) {
+    add("size", "사이트 간격", { v: String(siteGap).endsWith("m") || String(siteGap).endsWith("M") ? siteGap : `${siteGap}m`, g: "c", src: { label: "고캠핑 등록 사이트 간격", url: c.gc_url } });
+  }
   const rv = [c.trailer === true && "개인 트레일러", c.caravan === true && "개인 카라반"].filter(Boolean);
   if (rv.length) add("caravan", "차량 진입", { v: `${rv.join(" · ")} 입장 가능`, ...gc(rv.map((x) => `${x} 입장 가능`)) });
   return out.join("");
@@ -2517,9 +2539,23 @@ function nearbyHubHtml(c, d) {
           list.push({ type: "TOUR", name: `[걷기길] ${n}`, m: (Number(distKm) || 0) * 1000, sub: [kind, h ? `약 ${h}시간` : null].filter(Boolean).join(" · "), url: `https://map.kakao.com/link/search/${encodeURIComponent(n)}` });
         }
       }
+      if (!list.length) {
+        const gcNearby = d?.gcd?.info?.["주변이용가능시설"] ?? (c.nearby_facilities_etc?.length ? c.nearby_facilities_etc.join(", ") : "");
+        if (gcNearby) {
+          gcNearby.split(",").map((s) => s.trim()).filter(Boolean).forEach((item) => {
+            list.push({ type: "TOUR", name: item, sub: "주변 레저·명소 (고캠핑)", summary: true, url: `https://map.kakao.com/link/search/${encodeURIComponent(item)}` });
+          });
+        }
+      }
       return list;
     })()],
-    ["food", "맛집", "meat", (nearby.food ?? []).slice(0, 4).map((x) => entry("FOOD", x)).filter(Boolean)],
+    ["food", "맛집", "meat", (() => {
+      const list = (nearby.food ?? []).slice(0, 4).map((x) => entry("FOOD", x)).filter(Boolean);
+      if (!list.length && c.sigungu) {
+        list.push({ type: "FOOD", name: `${c.sigungu} 지역 맛집 둘러보기`, sub: "카카오맵 주변 맛집", summary: true, url: `https://map.kakao.com/link/search/${encodeURIComponent(c.sigungu + " 맛집")}` });
+      }
+      return list;
+    })()],
     ["fuel", "주유소", "fuel", fuelPlaces(nearby.fuel ?? [], licensed.FUEL ?? licensed.GAS_STATION)],
   ].filter(([, , , rows]) => rows.length);
   // 충전소: /context/extras.json에서 화면이 뜬 뒤 덧붙인다(mountNearbyEv). 그때까지 칩·칸을 숨긴다.
@@ -2697,6 +2733,62 @@ function galleryHtml(c) {
   const rail = `<div class="gal-rail">${carousel(c, { eager: true, cls: "car-gal" })}</div>`;
   return `<div class="gallery">${grid}${rail}</div>`;
 }
+function similarCampsHtml(c) {
+  if (!c || !S.camps?.length) return "";
+  const cLat = Number(c.lat), cLng = Number(c.lng);
+  const cTypes = new Set(c.types ?? []);
+  const cTh = new Set(c.th ?? []);
+  const candidates = S.camps.filter((x) => String(x.id) !== String(c.id) && x.lat && x.lng);
+
+  const scored = candidates.map((x) => {
+    const dist = cLat && cLng ? Math.hypot((x.lat - cLat) * 111, (x.lng - cLng) * 88) : 999;
+    let score = 0;
+    if (dist < 15) score += 50 - dist * 2;
+    else if (dist < 30) score += 20 - (dist - 15);
+    else if (x.sido === c.sido) score += 10;
+    else return null;
+
+    for (const t of (x.types ?? [])) {
+      if (cTypes.has(t)) score += 8;
+    }
+    for (const t of (x.th ?? [])) {
+      if (cTh.has(t)) score += 6;
+    }
+    if (photosOf(x).length) score += 5;
+    return { camp: x, dist, score };
+  }).filter(Boolean);
+
+  scored.sort((a, b) => b.score - a.score);
+  const top = scored.slice(0, 4);
+  if (!top.length) return "";
+
+  const cards = top.map(({ camp: x, dist }) => {
+    const ph = photosOf(x);
+    const photo = ph[0] ?? "";
+    const distText = dist < 1 ? `${Math.round(dist * 1000)}m` : `${dist.toFixed(1)}km`;
+    const fee = campFeeMin(x);
+    const feeText = fee ? `${fmt(fee)}원~` : "";
+    return `<a class="similar-camp-card" href="#/c/${encodeURIComponent(x.id)}">
+      <div class="similar-thumb-wrap">
+        ${photo ? `<img class="similar-thumb" src="${esc(photo)}" alt="${esc(nameOf(x).name)}" loading="lazy">` : `<div class="similar-thumb empty">${ic("tent")}</div>`}
+        <span class="similar-dist">${distText}</span>
+      </div>
+      <div class="similar-info">
+        <b class="similar-name">${esc(nameOf(x).name)}</b>
+        <span class="similar-meta">${esc(region(x))}${feeText ? ` · <b class="similar-fee">${feeText}</b>` : ""}</span>
+        <div class="similar-bdgs">${badges(x, 2, 0)}</div>
+      </div>
+    </a>`;
+  }).join("");
+
+  return `<section class="d-sec similar-sec" id="sec-similar">
+    <div class="sec-head">
+      ${iconTitle("tent", "이런 캠핑장은 어때요?")}
+      <span class="sec-note">근처 · 비슷한 분위기의 대안 캠핑장</span>
+    </div>
+    <div class="similar-rail">${cards}</div>
+  </section>`;
+}
 async function detailView(id) {
   if (S.byId.get(id) && String(S.byId.get(id).id) !== id) { history.replaceState(null, "", `#/c/${encodeURIComponent(S.byId.get(id).id)}`); id = String(S.byId.get(id).id); }
   await ensureFull([id]);
@@ -2720,12 +2812,13 @@ async function detailView(id) {
       <aside class="d-side">${reserveCard(c, d)}</aside>
     </header>
     ${galleryHtml(c)}
-    <nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${[["sec-price", "요금"], ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-nearby", "주변"], ["sec-events", "축제"], ["sec-reviews", "후기"], ["sec-info", "업체"]].map(([id, l], i) => `<a href="#${id}" data-jump="${id}"${i === 0 ? " aria-current" : ""}>${l}</a>`).join("")}</div></nav>
+    <nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${[["sec-price", "요금"], ["sec-weather", "날씨"], ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-nearby", "주변"], ["sec-events", "축제"], ["sec-reviews", "후기"], ["sec-similar", "추천"], ["sec-info", "업체"]].map(([id, l], i) => `<a href="#${id}" data-jump="${id}"${i === 0 ? " aria-current" : ""}>${l}</a>`).join("")}</div></nav>
     <div class="d-body">
       <div class="d-main">
         ${siteTypesHtml(c, d)}
         ${specSection(c, d)}
         ${priceHtml(c, d)}
+        ${weatherSectionHtml(c)}
         ${us.some(([, x]) => x) ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><dl class="uses">${us.filter(([, x]) => x).map(([l, x, icon]) => `<div class="use"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${esc(wonText(detailValue(x)))}${asOfMention(x)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span></dd></div>`).join("")}</dl>${unknownLine(us.filter(([, x]) => !x).map(([l]) => l))}</section>` : `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><p class="muted" style="padding: 18px 0; color: var(--ink-3); font-size: .88rem;">등록된 상세 이용 정보가 없습니다.</p></section>`}
         ${houseRulesHtml(c, d)}
         <section class="d-sec" data-cond hidden></section>
@@ -2740,6 +2833,7 @@ async function detailView(id) {
         ${nearbyHubHtml(c, d)}
         <section class="d-sec ev-sec" id="sec-events" data-events><div class="sec-head">${iconTitle("fest", "주변 축제·행사")}<span class="sec-note">30km 안 · 45일 이내</span></div><div data-events-body></div></section>
         ${reviewLinksHtml(d, c)}
+        ${similarCampsHtml(c)}
         ${infoHtml(c)}
         ${introHtml(d)}
         ${commentsHtml(c)}
@@ -4144,6 +4238,20 @@ async function initCampWeather(c) {
     </button>`;
   }).join("");
 
+  const peakWind = Math.max(...data.days.slice(0, 3).map((d) => Number(d.windSpeed) || 0), 0);
+  let windGuideHtml = "";
+  if (peakWind >= 9) {
+    windGuideHtml = `<div class="weather-wind-guide w-danger"><span class="w-guide-tag">🔴 강풍 경고</span><span class="w-guide-txt">최대 풍속 ${peakWind}m/s 예보 · 타프 설치를 자제하고 텐트 가이 스트링 팩다운을 단단히 고정하세요.</span></div>`;
+  } else if (peakWind >= 5) {
+    windGuideHtml = `<div class="weather-wind-guide w-warning"><span class="w-guide-tag">🟡 돌풍 주의</span><span class="w-guide-txt">최대 풍속 ${peakWind}m/s 예보 · 30cm 이상 장팩 사용과 모든 스트링 팩다운 체결을 권장합니다.</span></div>`;
+  } else if (peakWind > 0) {
+    windGuideHtml = `<div class="weather-wind-guide w-safe"><span class="w-guide-tag">🟢 피칭 쾌적</span><span class="w-guide-txt">최대 풍속 ${peakWind}m/s · 산들바람 수준으로 텐트 설치와 불멍에 안전하고 쾌적한 날씨입니다.</span></div>`;
+  }
+  const heroCard = $("#weather-hero-card");
+  if (heroCard && windGuideHtml && !heroCard.querySelector(".weather-wind-guide")) {
+    heroCard.insertAdjacentHTML("beforeend", windGuideHtml);
+  }
+
   container.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-wdate]");
     if (!btn) return;
@@ -4492,6 +4600,7 @@ function bindDetail() {
   const id = $(".detail")?.dataset.id;
   const currentCamp = S.byId.get(id);
   if (currentCamp?.lat && currentCamp?.lng) {
+    initCampWeather(currentCamp);
     const cond = $("[data-cond]");
     cond?.addEventListener("click", async (ev) => {
       const day = ev.target.closest("[data-fc-date]");

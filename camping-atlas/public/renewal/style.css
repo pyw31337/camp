@@ -3304,3 +3304,174 @@ html, body, #view { min-height: 100%; }
   .d-dock-in > * { min-width: 0; }
   .d-dock .icon-btn { flex: 0 0 var(--tap); width: var(--tap); }
 }
+
+/* ── 공공데이터 활용 고도화: 날씨 풍속 안전 가이드 / 유사 캠핑장 추천 / 필터 카운트 뱃지 ── */
+.weather-wind-guide {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.84rem;
+  line-height: 1.4;
+  backdrop-filter: blur(8px);
+}
+.weather-wind-guide.w-safe {
+  background: rgba(16, 185, 129, 0.22);
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  color: #ecfdf5;
+}
+.weather-wind-guide.w-warning {
+  background: rgba(245, 158, 11, 0.25);
+  border: 1px solid rgba(245, 158, 11, 0.55);
+  color: #fffbeb;
+}
+.weather-wind-guide.w-danger {
+  background: rgba(239, 68, 68, 0.3);
+  border: 1px solid rgba(239, 68, 68, 0.6);
+  color: #fef2f2;
+}
+.w-guide-tag {
+  font-weight: 850;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.25);
+  font-size: 0.76rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.w-guide-txt {
+  flex: 1;
+  font-weight: 550;
+}
+
+.similar-sec {
+  margin-top: 24px;
+}
+.similar-rail {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  padding-top: 4px;
+}
+@media (max-width: 900px) {
+  .similar-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+}
+@media (max-width: 520px) {
+  .similar-rail {
+    display: flex;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    gap: 10px;
+    padding-bottom: 6px;
+  }
+  .similar-rail::-webkit-scrollbar { display: none; }
+  .similar-camp-card {
+    flex: 0 0 210px;
+  }
+}
+.similar-camp-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r, 14px);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
+}
+.similar-camp-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-1);
+}
+.similar-thumb-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: var(--soft);
+  overflow: hidden;
+}
+.similar-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.similar-thumb.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-3);
+}
+.similar-thumb.empty .ic {
+  width: 36px;
+  height: 36px;
+}
+.similar-dist {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 750;
+  backdrop-filter: blur(4px);
+}
+.similar-info {
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.similar-name {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.similar-meta {
+  font-size: 0.78rem;
+  color: var(--ink-2);
+}
+.similar-fee {
+  color: var(--accent);
+  font-weight: 800;
+}
+.similar-bdgs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 2px;
+}
+.similar-bdgs .bdg {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+}
+
+.filter-mod .chip i,
+.finder-regions .chip i,
+.theme-areas .chip i {
+  font-style: normal;
+  color: var(--ink-3);
+  font-weight: 600;
+  font-size: .76rem;
+  margin-left: 3px;
+}
+.filter-mod .chip[aria-pressed="true"] i,
+.finder-regions .chip[aria-pressed="true"] i,
+.theme-areas .chip[aria-pressed="true"] i {
+  color: inherit;
+  opacity: .8;
+}
+
