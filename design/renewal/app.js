@@ -1024,18 +1024,49 @@ document.addEventListener("dragstart", (e) => {
   }
 }, true);
 
+// 공용 찜. 지인 목록을 서버에 두고 어느 기기에서든 같이 본다.
+async function loadSharedSaves() {
+  if (!SB.url || !SB.key) return;
+  try {
+    const r = await fetch(`${SB.url}/rest/v1/shared_save?select=campground_id,created_at&order=created_at.desc`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
+    if (!r.ok) return;
+    const list = await r.json();
+    S.saved = list.map((x) => String(x.campground_id));
+    store.set("mc-saved", S.saved);
+    syncCompare();
+    $$(`[data-save]`).forEach((x) => { const on = isSaved(x.dataset.save); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); });
+  } catch {}
+}
+async function clientMeta() {
+  let ip = "";
+  try { ip = (await (await fetch("https://api.ipify.org?format=json")).json()).ip || ""; } catch {}
+  return { user_agent: navigator.userAgent || "", ip, language: navigator.language || "", timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "", screen: `${screen.width}x${screen.height}`, platform: navigator.platform || "" };
+}
+async function pushSave(action, id) {
+  if (!SB.url || !SB.key) return;
+  const headers = { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=minimal" };
+  if (action === "add") {
+    await fetch(`${SB.url}/rest/v1/shared_save`, { method: "POST", headers, body: JSON.stringify({ campground_id: id }) });
+  } else {
+    await fetch(`${SB.url}/rest/v1/shared_save?campground_id=eq.${encodeURIComponent(id)}`, { method: "DELETE", headers });
+  }
+  const meta = await clientMeta();
+  await fetch(`${SB.url}/rest/v1/save_log`, { method: "POST", headers, body: JSON.stringify({ action, campground_id: id, ...meta }) });
+}
 // 찜 토글
 document.addEventListener("click", (e) => {
   const b = e.target.closest("[data-save]");
   if (!b) return;
   e.preventDefault(); e.stopPropagation();
   const id = String(b.dataset.save);
-  if (isSaved(id)) { S.saved = S.saved.filter((x) => x !== id); S.pick = S.pick.filter((x) => x !== id); }
+  const action = isSaved(id) ? "remove" : "add";
+  if (action === "remove") { S.saved = S.saved.filter((x) => x !== id); S.pick = S.pick.filter((x) => x !== id); }
   else { S.saved.unshift(id); toast(`찜 ${S.saved.length}곳`); }
   store.set("mc-saved", S.saved); store.set("mc-pick", S.pick);
   syncCompare();
   $$(`[data-save="${CSS.escape(id)}"]`).forEach((x) => { const on = isSaved(id); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); x.setAttribute("aria-label", on ? "찜 해제" : "찜하기"); x.querySelector("use").setAttribute("href", `#i-${on ? "heart" : "heart-o"}`); });
-  if (location.hash.startsWith("#/compare")) route();
+  pushSave(action, id);
+  if (location.hash.startsWith("#/compare") || location.hash.startsWith("#/saves-log")) route();
 });
 function syncCompare() { $$("[data-compare-count]").forEach((x) => { x.textContent = S.saved.length; x.hidden = !S.saved.length; }); }
 
@@ -4472,7 +4503,7 @@ async function compareView() {
   }).join("")}`).join("");
   const acts = camps.map((c) => { const ch = primaryBooking(c); return `<td>${ch ? `<a class="btn primary wide" href="${esc(ch.url)}" target="_blank" rel="noopener">예약</a>` : `<a class="btn ghost wide" href="#/c/${encodeURIComponent(c.id)}">자세히</a>`}</td>`; }).join("");
   return `<section class="cmp-page">
-    <div class="sec-head big"><h1>찜 ${saved.length} · <em>${camps.length}곳 비교</em></h1><span class="sec-tools"><label class="switch"><input type="checkbox" data-diff checked><span>다른 점만 강조</span></label></span></div>
+    <div class="sec-head big"><h1>찜 ${saved.length} · <em>${camps.length}곳 비교</em></h1><a class="sec-note" href="#/saves-log">기록</a><span class="sec-tools"><label class="switch"><input type="checkbox" data-diff checked><span>다른 점만 강조</span></label></span></div>
     ${picker}
     <div class="cmp-scroll"><table class="cmp-table diff-on">
       <thead><tr><th class="corner" scope="col"></th>${head}</tr></thead>
@@ -4609,6 +4640,22 @@ function bindMap() {
   cleanup.push(() => { v.removeEventListener("submit", onSubmit); v.removeEventListener("click", onClick); });
 }
 
+
+async function savesLogView() {
+  if (!SB.url || !SB.key) return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><p class="muted">서버 연결이 없습니다.</p></section>`;
+  let rows = [];
+  try {
+    const r = await fetch(`${SB.url}/rest/v1/save_log?select=created_at,action,campground_id,ip,language,timezone,screen,platform,user_agent&order=created_at.desc&limit=200`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
+    rows = r.ok ? await r.json() : [];
+  } catch {}
+  const body = rows.length ? `<table class="log-table"><thead><tr><th>시각</th><th>동작</th><th>업장</th><th>IP</th><th>기기</th></tr></thead><tbody>${rows.map((x) => {
+    const c = S.byId.get(String(x.campground_id));
+    const name = c ? nameOf(c).name : x.campground_id;
+    return `<tr><td>${esc(formatKoreanDate(x.created_at))}</td><td>${x.action === "add" ? "찜" : "해제"}</td><td>${esc(name)}</td><td>${esc(x.ip || "-")}</td><td>${esc(x.platform || "")} ${esc(x.screen || "")}<br><span class="muted">${esc((x.user_agent || "").slice(0, 80))}</span></td></tr>`;
+  }).join("")}</tbody></table>` : `<p class="muted">아직 기록이 없습니다.</p>`;
+  return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1><a class="sec-note" href="#/compare">찜 목록</a></div>${body}</section>`;
+}
+
 // ── 라우터 ───────────────────────────────────────────────────
 const cleanup = [];
 let lastRoute = "";
@@ -4617,13 +4664,14 @@ async function render() {
   TIPS.clear(); $("#pop").hidden = true;
   const h = location.hash || "#/";
   const v = $("#view");
-  const name = h.startsWith("#/c/") ? "detail" : h.startsWith("#/map") ? "map" : h.startsWith("#/compare") ? "compare" : h.startsWith("#/theme/") ? "theme" : h.startsWith("#/list") ? "list" : "home";
+  const name = h.startsWith("#/c/") ? "detail" : h.startsWith("#/map") ? "map" : h.startsWith("#/saves-log") ? "saves-log" : h.startsWith("#/compare") ? "compare" : h.startsWith("#/theme/") ? "theme" : h.startsWith("#/list") ? "list" : "home";
   $$("[data-nav]").forEach((a) => a.toggleAttribute("aria-current", a.dataset.nav === (name === "detail" || name === "list" || name === "theme" ? "home" : name)));
   document.body.dataset.view = name;
   if (name === "home") { v.innerHTML = homeView(); bindHome(); }
   else if (name === "theme") { const tk = decodeURIComponent(h.slice(8)); v.innerHTML = themeView(tk); bindTheme(tk); }
   else if (name === "detail") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await detailView(decodeURIComponent(h.slice(4))); bindDetail(); }
   else if (name === "compare") { v.innerHTML = await compareView(); bindCompare(); }
+  else if (name === "saves-log") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await savesLogView(); }
   else if (name === "list") { v.innerHTML = listView(); bindList(); }
   else { v.innerHTML = mapView(); bindMap(); }
   initDraggableRails(v);

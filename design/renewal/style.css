@@ -3027,3 +3027,7 @@ details[open] > *:not(summary) {
   .detail > .site-footer { padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
 }
 
+
+.log-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.log-table th, .log-table td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line, #e6e1d6); vertical-align: top; }
+.log-table .muted { color: var(--muted, #8a8478); font-size: 11px; }
