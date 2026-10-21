@@ -1082,7 +1082,7 @@ async function ensureFull(ids) {
     if (!rec) continue;
     for (const k of Object.keys(c)) if (k.startsWith("_")) delete c[k];
     Object.assign(c, rec);
-    cleanCampTel(c); // 샤드가 원본 전화번호로 덮으므로 다시 정리
+    cleanCampFee(c); cleanCampTel(c); // 샤드가 원본 전화번호로 덮으므로 다시 정리
     Object.defineProperty(c, "__full", { value: true, enumerable: false });
   }
 }
@@ -3982,6 +3982,24 @@ function telClean(raw) {
   if (/^0\d{2}\d{7,8}$/.test(d)) return `${d.slice(0, 3)}-${d.slice(3, d.length - 4)}-${d.slice(-4)}`;
   return null; // 걸 수 없는 번호
 }
+// t41u-1: 민간 1박 2만원 미만은 추가인원·전기·당일 요금을 잘못 읽은 값 → 표시에서 숨김(원본은 fee_raw). 국·공립·당일 이용은 실제 요금이라 하한 5천원.
+const FEE_PUB = /(국립|공립|도립|시립|군립|구립|휴양림|국립공원|자동차야영장|관광지|유원지|생태원|해수욕장|시설관리공단|과학관)/;
+function feeFloorOf(c) {
+  const pub = ["LOCAL_GOVERNMENT", "NATIONAL_PARK", "NATURAL_RECREATION_FOREST", "PUBLIC"].includes(c.op) || FEE_PUB.test(c.name ?? "") || (/^(CONFIRMED|OFFICIAL|REFERENCE)$/.test(c.fee?.grade ?? "") && /(국립공원공단|자연휴양림 표준|시설관리|시청|군청|구청|공식|공개 데이터|지자체|고캠핑)/.test(c.fee?.basis ?? ""));
+  const day = Boolean(c.du) || (c.types ?? []).some((t) => /캠크닉|캠프닉|피크닉|당일/.test(t)) || /캠크닉|캠프닉|피크닉/.test(c.name ?? "");
+  return pub || day ? 5000 : 20000;
+}
+function cleanCampFee(c) {
+  if (!c?.fee) return;
+  if (c.fee.hidden) { c.fee_raw = c.fee.fee_raw; c.fee = null; if (c.pf?.p) delete c.pf.p; return; }
+  const lo = Number(c.fee.min);
+  if (lo > 0 && lo < feeFloorOf(c)) {
+    const fl = feeFloorOf(c), t = (c.fee.tiers ?? []).filter((x) => x[1] >= fl), hi = Number(c.fee.max ?? 0);
+    c.fee_raw = c.fee;
+    if (t.length || hi >= fl) { const m = t.length ? Math.min(...t.map((x) => x[1])) : hi; c.fee = { ...c.fee, min: m, max: Math.max(hi, m), text: null, tiers: t }; if (c.pf?.p) c.pf.p = { ...c.pf.p, min: m }; }
+    else { c.fee = null; if (c.pf?.p) delete c.pf.p; }
+  }
+}
 function cleanCampTel(c) { if (!c?.tel) return; const t = telClean(c.tel); if (t !== c.tel) { c.tel_raw = c.tel; c.tel = t; } }
 const telText = (t) => String(t ?? "").trim().replace(/^[-\s]+|[-\s]+$/g, "").replace(/\s*-\s*/g, "-").replace(/-{2,}/g, "-");
 function infoHtml(c) {
@@ -5858,7 +5876,7 @@ addEventListener("error", (e) => {
     fetch(new URL(`${MOD_ROOT}conditions/forecast.json`, import.meta.url).href, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
   ]);
   S.camps = camps.filter((c) => c.status !== "폐업");
-  for (const c of S.camps) cleanCampTel(c); // 표시층 정리(원본 파일은 그대로)
+  for (const c of S.camps) { cleanCampTel(c); cleanCampFee(c); } // 표시층 정리(원본 파일은 그대로)
   S.fc = fcast;
   S.byId = new Map(S.camps.map((c) => [String(c.id), c]));
   // 중복 등록을 합친 곳(c.mg = 합쳐진 id): 예전 링크·찜도 남은 곳으로 이어 준다(QA 2026-10-21).
