@@ -814,7 +814,7 @@ function initCarousels(root = document) {
     tr.addEventListener("click", () => {
       if (moved) return;
       const hit = car.closest(".card, .mi, .review-pick, .tr-card, .lrow")?.querySelector(".card-hit");
-      if (hit) location.hash = hit.getAttribute("href");
+      if (hit) go(hit.getAttribute("href").replace(/^#/, ""));
     });
   }
 }
@@ -1337,7 +1337,7 @@ function saveCommit(id) {
   store.set("mc-saved", S.saved); store.set("mc-pick", S.pick);
   syncCompare();
   $$(`[data-save="${CSS.escape(id)}"]`).forEach((x) => { const on = isSaved(id); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); x.setAttribute("aria-label", on ? "찜 해제" : "찜하기"); x.querySelector("use").setAttribute("href", `#i-${on ? "heart" : "heart-o"}`); });
-  if (location.hash.startsWith("#/compare") || location.hash.startsWith("#/saved") || location.hash.startsWith("#/saves-log")) route();
+  if (pathOf().startsWith("/compare") || pathOf().startsWith("/saved") || pathOf().startsWith("/saves-log")) route();
 }
 function syncCompare() {
   $$("[data-compare-count]").forEach((x) => { x.textContent = S.saved.length; x.hidden = !S.saved.length; });
@@ -1363,11 +1363,11 @@ document.addEventListener("click", (e) => {
     else if (k === "win") S.cond.win = false;
     else if (k === "near") S.cond.near = "";
     store.set("mc-cond", S.cond);
-    if (location.hash.startsWith("#/list")) { history.replaceState(null, "", listHash()); route(); }
+    if (pathOf().startsWith("/list")) { history.replaceState(null, "", listHash()); route(); }
     else syncCondUi();
     return;
   }
-  if (e.target.closest("[data-open-cond]")) { if (!location.hash.startsWith("#/list")) S.onCondApply = syncCondUi; condSheet(); return; }
+  if (e.target.closest("[data-open-cond]")) { if (!pathOf().startsWith("/list")) S.onCondApply = syncCondUi; condSheet(); return; }
   const pr = e.target.closest("[data-preset]");
   if (pr) {
     const v = PRESETS[Number(pr.dataset.preset)][1], on = presetOn(Number(pr.dataset.preset));
@@ -1377,7 +1377,7 @@ document.addEventListener("click", (e) => {
     }
     syncCondUi();
     // 당일 캠크닉은 홈 레일이 숙박 캠핑장 위주라 켜면 바로 당일 목록으로 옮긴다(2026-10-20 소유자).
-    if (!on && v.kind?.includes("DAY") && !location.hash.startsWith("#/list")) location.hash = listHash();
+    if (!on && v.kind?.includes("DAY") && !pathOf().startsWith("/list")) go(listHash().replace(/^#/, ""));
     return;
   }
 });
@@ -1845,7 +1845,7 @@ const ymdKst = (t) => new Date(t).toLocaleDateString("sv-SE", { timeZone: "Asia/
 const mdKst = (s) => new Date(s).toLocaleDateString("ko-KR", { month: "numeric", day: "numeric", timeZone: "Asia/Seoul" }).replace(/\.\s?/g, "/").replace(/\/$/, "");
 const THANKQ_VIEW = (cseq, d) => `https://m.thankqcamping.com/resv/view.hbb?cseq=${encodeURIComponent(cseq)}${d ? `&res_dt=${d.replaceAll("-", "")}` : ""}`;
 function listParams() {
-  const q = new URLSearchParams(location.hash.split("?")[1] ?? "");
+  const q = new URLSearchParams(location.search);
   const area = q.get("area");
   return { area: area && AREAS.some(([k]) => k === area) ? area : "all", q: q.get("q") ?? "", cond: condFromParams(q), fee: q.get("fee") ?? "", stype: q.get("stype") ?? "" };
 }
@@ -1855,7 +1855,7 @@ function listHash({ area = S.area, q = S.q } = {}) {
   if (q) p.set("q", q);
   condToParams(p);
   const s = p.toString();
-  return `#/list${s ? `?${s}` : ""}`;
+  return `/list${s ? `?${s}` : ""}`;
 }
 function listResults(p) {
   const shown = S.camps.filter((c) => (!c.du || S.q || S.cond.kind.includes("DAY")) && matches(c) && condTest(c)).map((c) => ({ c, ce: condEval(c) }));
@@ -1953,7 +1953,7 @@ function listView() {
   const p = listParams();
   S.area = p.cond.sido.length ? "all" : p.area; S.q = p.q;
   S.cond = p.cond; if (["u3", "3to5", "5to7", "7to10", "10to20", "o20", "o7", ""].includes(p.fee)) S.feeBand = p.fee;
-  S.condStrict = new URLSearchParams(location.hash.split("?")[1] ?? "").get("strict") === "1";
+  S.condStrict = new URLSearchParams(location.search).get("strict") === "1";
   // 목록 화면에 보이는 조건만 결과를 바꾼다.
   S.theme = null; S.quick.clear();
   S.stype = p.stype || "";
@@ -2003,7 +2003,7 @@ function renderList({ reset = true } = {}) {
 function bindList() {
   renderList();
   const v = $("#view");
-  const go = () => { const h = listHash(); if (location.hash !== h) location.hash = h; else renderList(); };
+  const go = () => { const h = listHash(); if (pathOf() !== h.replace(/^#/, "")) go(h.replace(/^#/, "")); else renderList(); };
   S.onCondApply = go;
   const onSubmit = (e) => { const f = e.target.closest("[data-list-search]"); if (!f) return; e.preventDefault(); S.q = f.q.value.trim(); go(); };
   const onClick = (e) => {
@@ -2180,7 +2180,7 @@ function bindHome() {
   const v = $("#view");
   v.addEventListener("click", homeClicks);
   // 히어로 ‘찾기’: 지역·검색어·날짜를 담아 목록 화면(#/list)으로 옮겨 간다(소유자 2026-10-19).
-  v.addEventListener("submit", (e) => { const f = e.target.closest("[data-search]"); if (!f) return; e.preventDefault(); S.q = f.q.value.trim(); location.hash = listHash(); });
+  v.addEventListener("submit", (e) => { const f = e.target.closest("[data-search]"); if (!f) return; e.preventDefault(); S.q = f.q.value.trim(); go(listHash().replace(/^#/, "")); });
   v.addEventListener("change", (e) => { if (e.target.matches("[data-sort]")) { S.sort = e.target.value; renderResults(); } });
   const sentinel = $(".more-wrap");
   const io = new IntersectionObserver((es) => { if (es[0].isIntersecting && !$("[data-more]").hidden) moreResults(); }, { rootMargin: "800px" });
@@ -2204,7 +2204,7 @@ function homeClicks(e) {
       $("#results").scrollIntoView({ block: "start" });
       return;
     }
-    location.hash = `#/theme/${encodeURIComponent(k)}`;
+    go(`/theme/${encodeURIComponent(k)}`);
     return;
   }
   const st = e.target.closest("[data-stype]");
@@ -5330,21 +5330,32 @@ async function savesLogView() {
   return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><nav class="slog-links" aria-label="관련 화면"><a href="#/compare">찜 목록 보기</a><a href="../log/">운영 대시보드(/log)</a></nav>${body}</section>`;
 }
 
-// ── 라우터 ───────────────────────────────────────────────────
+// ── 라우터 (History API) ─────────────────────────────────────
 const cleanup = [];
 let lastRoute = "";
+function pathOf() {
+  const base = "/camp";
+  let p = location.pathname;
+  if (p.startsWith(base)) p = p.slice(base.length) || "/";
+  return p + location.search;
+}
+function go(path) {
+  const url = "/camp" + (path.startsWith("/") ? path : "/" + path);
+  if (location.pathname + location.search !== url) history.pushState(null, "", url);
+  route();
+}
 async function render() {
   while (cleanup.length) cleanup.pop()();
   TIPS.clear(); $("#pop").hidden = true;
-  const h = location.hash || "#/";
+  const h = pathOf();
   const v = $("#view");
-  const name = h.startsWith("#/c/") ? "detail" : h.startsWith("#/map") ? "map" : h.startsWith("#/saves-log") ? "saves-log" : h.startsWith("#/compare") ? "compare" : h.startsWith("#/saved") ? "saved" : h.startsWith("#/themes") ? "themes" : h.startsWith("#/theme/") ? "theme" : h.startsWith("#/list") ? "list" : "home";
+  const name = h.startsWith("/c/") ? "detail" : h.startsWith("/map") ? "map" : h.startsWith("/saves-log") ? "saves-log" : h.startsWith("/compare") ? "compare" : h.startsWith("/saved") ? "saved" : h.startsWith("/themes") ? "themes" : h.startsWith("/theme/") ? "theme" : h.startsWith("/list") ? "list" : "home";
   $$("[data-nav]").forEach((a) => a.toggleAttribute("aria-current", a.dataset.nav === (name === "detail" || name === "list" ? "home" : name === "theme" ? "themes" : name)));
   document.body.dataset.view = name;
   if (name === "home") { v.innerHTML = homeView(); bindHome(); }
   else if (name === "themes") { v.innerHTML = themesView(); }
-  else if (name === "theme") { const tk = decodeURIComponent(h.slice(8)); v.innerHTML = themeView(tk); bindTheme(tk); }
-  else if (name === "detail") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await detailView(decodeURIComponent(h.slice(4))); bindDetail(); }
+  else if (name === "theme") { const tk = decodeURIComponent(h.slice(7)); v.innerHTML = themeView(tk); bindTheme(tk); }
+  else if (name === "detail") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await detailView(decodeURIComponent(h.slice(3))); bindDetail(); }
   else if (name === "saves-log") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await savesLogView(); }
   else if (name === "saved") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await savedView(); bindSaved(); }
   else if (name === "compare") { v.innerHTML = await compareView(); bindCompare(); }
@@ -5363,7 +5374,7 @@ async function route() {
   else if (name !== prev || name === "detail" || name === "theme") scrollTo(0, 0);
   updateHeaderGlass();
 }
-addEventListener("hashchange", route);
+addEventListener("popstate", route);
 // ── 바깥 링크를 기기에 맞는 화면으로(소유자 2026-10-20: 모바일에서 네이버 예약이 PC 화면으로 열려 잘림) ──────────
 // 같은 글·장소라도 PC·모바일 주소가 다른 플랫폼(네이버 검색·블로그·카페·예약·지도·플레이스, 다음 카페·검색, 카카오 장소)은
 // 누르는 순간 기기에 맞는 주소로 바꾼다. 고캠핑·관광공사·국립공원·캠핏·카카오맵 링크는 한 주소가 알아서 맞춰 열린다(확인 2026-10-20).
@@ -5599,7 +5610,7 @@ addEventListener("error", (e) => {
   S.avail = new Map();
   if (avail && Date.parse(avail.expires_at) > Date.now()) for (const r of avail.records ?? []) if (r.state === "OFFICIAL_APPLICATION_OPEN") { const k = String(r.campground_id); S.avail.set(k, [...(S.avail.get(k) ?? []), { ...r, disclaimer: avail.disclaimer, source_name: avail.source?.name }]); }
   // 이전 주소(#c=1554)도 새 상세 주소로 보정해 공유 링크를 깨지 않는다.
-  const legacy = location.hash.match(/^#c=(.+)$/);
+  const legacy = pathOf().match(/^\/c\/(.+)$/) || location.hash.match(/^#c=(.+)$/);
   if (legacy) history.replaceState(null, "", `#/c/${legacy[1]}`);
   syncCompare(); updateHeaderGlass();
   route();
