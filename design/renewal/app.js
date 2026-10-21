@@ -2736,7 +2736,7 @@ async function detailView(id) {
       <div class="d-head-main">
       <p class="d-eyebrow">${esc(region(c))}${c.op && OP[c.op] ? ` · ${OP[c.op]}` : tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
       <h1 class="d-title">${titleHtml(c)}</h1>
-      ${c.line ? `<p class="d-line">${esc(serviceText(c.line, 84))}${c.gc_url ? srcTip({ g: "c", src: { label: "고캠핑 소개", url: c.gc_url, quote: c.line } }, "한 줄 소개") : ""}</p>` : ""}
+      ${c.line ? `<p class="d-line">${esc(serviceText(c.line, 400))}${c.gc_url ? srcTip({ g: "c", src: { label: "고캠핑 소개", url: c.gc_url, quote: c.line } }, "한 줄 소개") : ""}</p>` : ""}
       <div class="d-bdgs">${wxBadge(c)}${stayBadges(c)}${badges(c, 14, 10)}</div>
       </div>
       <aside class="d-side">${reserveCard(c, d)}</aside>
@@ -2805,6 +2805,8 @@ function serviceText(value, limit = 44) {
     .replace(/샤워장/g, "샤워실")
     .replace(/가격\s*부담/g, "요금 부담")
     .replace(/반려동물\s*동반/g, "반려견 동반");
+  // 상세 내용(limit 44 이상)은 중간에서 자르지 않고 전부 보인다. 아주 길면 화면에서 4줄 + 더보기(fitLongText). 짧은 이름표만 자른다(영우 님 2026-10-21).
+  if (limit >= 44) return text.replace(/[\s,;:]+$/, "");
   const sentence = text.match(/^(.+?(?:[.!?]|다\.|요\.|함\.|됨\.))(?:\s|$)/)?.[1] ?? text;
   if (sentence.length <= limit) return sentence.replace(/[\s,;:]+$/, "");
   const cut = sentence.slice(0, limit);
@@ -3349,7 +3351,7 @@ function operatorHtml(d, c) {
     const sum = operatorSummary(x.label, x.texts);
     // ‘○○ 안내’ ‘○○ 확인’ 같은 빈 요약 대신 운영자가 쓴 첫 문장을 짧게 정리해 보인다.
     const statement = x.texts.find((t) => !/(\?|까요|나요|가요|인가요)\s*$/.test(t));
-    const value = /(안내|확인)$/.test(sum) && statement ? serviceText(statement, 64) || sum : sum;
+    const value = /(안내|확인)$/.test(sum) && statement ? serviceText(statement, 200) || sum : sum;
     return { ...x, sum, value };
   }).filter((x) => {
     // 실질적 정보가 없는 더미 확인 문구 제외
@@ -3429,7 +3431,7 @@ function programsHtml(d) {
   const ft = String(d?.feature ?? "").trim();
   if (!pr.length && !ft) return "";
   const fact = sourceFact({ src: "고캠핑 등록", url: d?.feature_url, quote: [ft, ...pr].join(" · ") }, "고캠핑 등록");
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("spark", "특징·체험")}<span class="sec-note">${srcTip(fact, "특징·체험")}</span></div>${ft ? `<p class="feat">${esc(serviceText(ft, 70))}</p>` : ""}${pr.length ? `<div class="amen">${pr.slice(0, 8).map((x) => `<span>${esc(serviceText(x, 20))}</span>`).join("")}</div>` : ""}</section>`;
+  return `<section class="d-sec"><div class="sec-head">${iconTitle("spark", "특징·체험")}<span class="sec-note">${srcTip(fact, "특징·체험")}</span></div>${ft ? `<p class="feat">${esc(serviceText(ft, 400))}</p>` : ""}${pr.length ? `<div class="amen">${pr.slice(0, 8).map((x) => `<span>${esc(serviceText(x, 20))}</span>`).join("")}</div>` : ""}</section>`;
 }
 // 외부 게시물은 embed/display_rights가 명시된 경우에만 미리보기·라이트박스를 사용한다.
 // 그 외에는 플랫폼이 제공하는 원문 카드로만 열어 저작권·저장 조건을 지킨다.
@@ -3763,7 +3765,7 @@ function mediaHubHtml(d, c) {
 }
 function reviewSummary(value) {
   const text = String(value ?? "").replace(/[\r\n\t]+/g, " ").replace(/\s+/g, " ").trim();
-  const parts = text.split(/(?<=[.!?])\s+|\s{2,}/).map((x) => serviceText(x, 76)).filter(Boolean);
+  const parts = text.split(/(?<=[.!?])\s+|\s{2,}/).map((x) => serviceText(x, 400)).filter(Boolean);
   const useful = /캠핑|사이트|시설|풍경|주차|전기|화장실|샤워|반려|텐트|잔디|숲|바다|요금|입실|대여/;
   const candidate = parts.find((x) => x.length >= 12 && useful.test(x) && !/^[^가-힣A-Za-z]*(?:\d{4}[./-]\d|\d{1,2}:\d{2})/.test(x) && !/^[^\p{L}\p{N}]{1,}/u.test(x) && !/^(못|ㅋㅋ|ㅎㅎ|ㅠㅠ|\.{2,})/.test(x) && !/[가-힣]+(?:시|군|구|읍|면|리).{0,24}(?:길|로|\d)/.test(x));
   return candidate || "";
@@ -4532,8 +4534,21 @@ function reserveDock(c) {
   </div>`;
 }
 // 상세 보조 모듈(/conditions·/context·/operator)은 사이트 루트(/camp/)에 있다.
+// 긴 글: 4줄까지 보이고 넘치면 ‘더보기’(누르면 전부). 문장 중간 말줄임(…) 대신.
+const LONG_SEL = ".use-val, .tile-v, .operator-grid p, .feat, .d-line, .tips li, .hr-list li, .bo-lines";
+function fitLongText(root) {
+  for (const el of root.querySelectorAll(LONG_SEL)) {
+    if (el.dataset.fit || (el.textContent ?? "").length < 90) continue;
+    el.dataset.fit = "1"; el.classList.add("lt-clamp");
+    if (el.scrollHeight <= el.clientHeight + 2) { el.classList.remove("lt-clamp"); continue; }
+    const b = document.createElement("button"); b.type = "button"; b.className = "lt-more"; b.textContent = "더보기";
+    b.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); const open = el.classList.toggle("lt-open"); b.textContent = open ? "접기" : "더보기"; });
+    el.after(b);
+  }
+}
 function bindDetail() {
   hostTips($("#view"));
+  requestAnimationFrame(() => fitLongText($("#view")));
   if ("MutationObserver" in window) { const mo = new MutationObserver(() => { if ($(".ib[data-tip]", $("#view"))) hostTips($("#view")); }); mo.observe($("#view"), { childList: true, subtree: true }); cleanup.push(() => mo.disconnect()); }
   initCarousels($("#view"));
   const back = $("[data-back]");

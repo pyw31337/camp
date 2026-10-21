@@ -3272,3 +3272,9 @@ html, body, #view { min-height: 100%; }
 /* 예약 방법: 긴 안내는 항목마다 줄을 나눠 읽기 쉽게(소유자 2026-10-21). */
 #sec-booking .bo-lines { display: flex; flex-direction: column; gap: 4px; }
 #sec-booking .bo-lines > span { display: block; }
+
+/* 긴 글 4줄 + 더보기(영우 님 2026-10-21) */
+.lt-clamp { display: -webkit-box !important; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden; white-space: normal; overflow-wrap: anywhere; word-break: keep-all; }
+.lt-clamp.lt-open { display: block !important; -webkit-line-clamp: unset; overflow: visible; }
+.lt-more { display: inline-flex; align-items: center; min-height: var(--tap, 44px); margin: 0; padding: 0 2px; border: 0; background: none; color: var(--accent); font-size: .84rem; font-weight: 800; cursor: pointer; }
+.use-val, .tile-v, .operator-grid p, .feat, .d-line, .tips li { overflow-wrap: anywhere; word-break: keep-all; white-space: normal; }
