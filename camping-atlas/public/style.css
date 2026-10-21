@@ -3357,3 +3357,9 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 .sim-km { display: inline-flex; align-items: center; gap: 4px; font-size: .82rem; font-weight: 800; color: var(--ink-2); }
 .sim-km .ic { width: 14px; height: 14px; color: var(--accent); }
 @media (min-width: 760px) { .sim-rail { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; } .sim-rail > .sim-item { flex: none; } }
+
+/* t39 #40: 시·도/시·군·구 랜딩 */
+.region-page .region-subs { gap: 8px; padding-bottom: var(--sec-gap-inner); }
+.region-page .region-subs .chip { text-decoration: none; }
+.d-region-link { color: inherit; text-decoration: none; border-bottom: 1px dashed currentColor; }
+.d-region-link:hover { color: var(--accent); }

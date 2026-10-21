@@ -2075,6 +2075,49 @@ function themesView() {
   </section>`;
 }
 
+// ── 화면: 시·도 / 시·군·구 랜딩(t39 #40) ─────────────────────────
+// /region/경기도, /region/경기도/가평군 — 그 지역 캠핑장 목록(카드 양식은 테마 화면과 같음) + 아래 시·군·구 바로가기.
+// 검색·공유용 정적 미리보기 페이지는 scripts/publish-explorer-pages.mjs가 같은 주소에 만든다.
+const regionHref = (sido, sgg) => `${APP_BASE}region/${encodeURIComponent(sido)}${sgg ? `/${encodeURIComponent(sgg)}` : ""}`;
+// 시·도는 짧은 이름(경기·서울…)으로 맞춘다: /region/경기도 도 /region/경기 와 같은 화면.
+const regionPool = (sido, sgg) => { const sd = sidoShort(sido); return S.camps.filter((c) => sidoShort(c.sido) === sd && (!sgg || c.sigungu === sgg) && !c.du && coreBrowseEligible(c)); };
+function regionView(sido, sgg) {
+  const all = regionPool(sido, "");
+  const list = sgg ? all.filter((c) => c.sigungu === sgg) : all;
+  const counts = new Map();
+  for (const c of all) if (c.sigungu) counts.set(c.sigungu, (counts.get(c.sigungu) ?? 0) + 1);
+  const subs = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "ko"));
+  sido = sidoShort(sido);
+  const title = sgg ? `${sido} ${sgg}` : sido;
+  if (!all.length) return `<section class="cmp-page region-page"><div class="sec-head big"><h1>${esc(title || "지역")} <em>캠핑장</em></h1></div><div class="empty">${ic("pin")}<b>이 지역에 등록된 캠핑장이 없어요</b><a class="btn ghost" href="${APP_BASE}list">캠핑장 찾기</a></div></section>`;
+  return `<section class="cmp-page region-page" aria-labelledby="rg-title">
+    <div class="sec-head big"><div><h1 id="rg-title">${esc(title)} <em>캠핑장</em></h1>
+      <p class="sec-sub">${sgg ? `<a class="link" href="${regionHref(sido)}">${esc(sido)}</a> · ` : ""}<b>${fmt(list.length)}곳</b> · 사진·정보가 많은 곳부터</p></div></div>
+    <div class="rail chips region-subs" aria-label="시·군·구">
+      <a class="chip" href="${regionHref(sido)}" aria-pressed="${!sgg}">전체 ${fmt(all.length)}</a>
+      ${subs.map(([k, n]) => `<a class="chip" href="${regionHref(sido, k)}" aria-pressed="${k === sgg}">${esc(k)} ${fmt(n)}</a>`).join("")}
+    </div>
+    <div class="grid" data-region-grid></div>
+    <div class="more-wrap"><button class="btn ghost" type="button" data-region-more>더 보기</button></div>
+  </section>`;
+}
+function bindRegion(sido, sgg) {
+  sido = sidoShort(sido);
+  const list = regionPool(sido, sgg).sort((a, b) => rich(b) - rich(a)).sort((a, b) => photoLast(a) - photoLast(b));
+  let n = 24;
+  const grid = $("[data-region-grid]"), more = $("[data-region-more]");
+  if (!grid) return;
+  const draw = () => {
+    grid.innerHTML = list.slice(0, n).map((c, i) => card(c, i < 4 ? i : 9)).join("");
+    initCarousels(grid);
+    if (more) more.hidden = n >= list.length;
+  };
+  more?.addEventListener("click", () => { n += 24; draw(); });
+  draw();
+  document.title = `${sgg ? `${sido} ${sgg}` : sido} 캠핑장 ${fmt(list.length)}곳 · 모여라 캠핑`;
+  cleanup.push(() => { document.title = "모여라 캠핑 · 취향대로 찾아 떠나는 전국 캠핑장"; });
+}
+
 function themeView(themeKey) {
   const tName = themeName(themeKey);
   const tImg = themeImg(themeKey);
@@ -2742,7 +2785,7 @@ async function detailView(id) {
     <div class="d-bar"><a class="icon-btn" href="${APP_BASE}" data-back aria-label="뒤로">${ic("left")}</a><span class="d-crumb">${esc(region(c))}</span>${heartBtn(c, { label: true })}<button class="d-share" type="button" data-share-place="${esc(c.id)}" aria-label="링크 공유">${ic("share")}<span>공유</span></button></div>
     <header class="d-head">
       <div class="d-head-main">
-      <p class="d-eyebrow">${esc(region(c))}${c.op && OP[c.op] ? ` · ${OP[c.op]}` : tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
+      <p class="d-eyebrow">${c.sido && c.sigungu ? `<a class="d-region-link" href="${regionHref(sidoShort(c.sido), c.sigungu)}">${esc(region(c))}</a>` : esc(region(c))}${c.op && OP[c.op] ? ` · ${OP[c.op]}` : tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
       <h1 class="d-title">${titleHtml(c)}</h1>
       ${c.line ? `<p class="d-line">${esc(serviceText(c.line, 400))}${c.gc_url ? srcTip({ g: "c", src: { label: "고캠핑 소개", url: c.gc_url, quote: c.line } }, "한 줄 소개") : ""}</p>` : ""}
       <div class="d-bdgs">${wxBadge(c)}${stayBadges(c)}${badges(c, 14, 10)}</div>
@@ -5457,11 +5500,12 @@ async function render() {
   TIPS.clear(); $("#pop").hidden = true;
   const h = curHash();
   const v = $("#view");
-  const name = h.startsWith("#/place/") ? "detail" : h.startsWith("#/map") ? "map" : h.startsWith("#/saves-log") ? "saves-log" : h.startsWith("#/compare") ? "compare" : h.startsWith("#/saved") ? "saved" : h.startsWith("#/themes") ? "themes" : h.startsWith("#/theme/") ? "theme" : h.startsWith("#/list") ? "list" : "home";
+  const name = h.startsWith("#/place/") ? "detail" : h.startsWith("#/map") ? "map" : h.startsWith("#/saves-log") ? "saves-log" : h.startsWith("#/compare") ? "compare" : h.startsWith("#/saved") ? "saved" : h.startsWith("#/themes") ? "themes" : h.startsWith("#/region/") ? "region" : h.startsWith("#/theme/") ? "theme" : h.startsWith("#/list") ? "list" : "home";
   $$("[data-nav]").forEach((a) => a.toggleAttribute("aria-current", a.dataset.nav === (name === "detail" || name === "list" ? "home" : name === "theme" ? "themes" : name)));
   document.body.dataset.view = name;
   if (name === "home") { v.innerHTML = homeView(); bindHome(); }
   else if (name === "themes") { v.innerHTML = themesView(); }
+  else if (name === "region") { const [sd, sg] = h.slice(9).split("?")[0].split("/").map((x) => { try { return decodeURIComponent(x); } catch { return x; } }); v.innerHTML = regionView(sd, sg); bindRegion(sd, sg); }
   else if (name === "theme") { const tk = decodeURIComponent(h.slice(8).split("?")[0]); v.innerHTML = themeView(tk); bindTheme(tk); }
   else if (name === "detail") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await detailView(decodeURIComponent(h.slice(8).split("?")[0])); bindDetail(); }
   else if (name === "saves-log") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await savesLogView(); }
@@ -5485,7 +5529,7 @@ async function route() {
 }
 addEventListener("popstate", route);
 // 앱 안 링크(같은 APP_BASE의 화면 경로)는 새로고침 없이 pushState로 연다. 새 탭·수정 키·다른 페이지(/log/ 등)는 브라우저에 맡긴다.
-const APP_ROUTE = /^(?:$|\?|list(?:[/?]|$)|map\/?$|themes\/?$|theme\/|compare\/?$|saved\/?$|saves-log\/?$|place\/)/;
+const APP_ROUTE = /^(?:$|\?|list(?:[/?]|$)|map\/?$|themes\/?$|theme\/|region\/|compare\/?$|saved\/?$|saves-log\/?$|place\/)/;
 document.addEventListener("click", (e) => {
   if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
   const a = e.target.closest?.("a[href]");
