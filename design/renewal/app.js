@@ -2788,6 +2788,7 @@ async function detailView(id) {
   if (S.byId.get(id) && String(S.byId.get(id).id) !== id) { history.replaceState(null, "", `${APP_BASE}place/${encodeURIComponent(S.byId.get(id).id)}`); id = String(S.byId.get(id).id); }
   await ensureFull([id]);
   const c = S.byId.get(id);
+  if (c) pushRecent(id);
   if (!c) return `<div class="empty">${ic("search")}<b>캠핑장을 찾지 못했어요</b><a class="btn ghost" href="${APP_BASE}">찾기로</a></div>`;
   const d = await detailOf(id);
   const f = facts(c), { tag } = nameOf(c);
@@ -5261,8 +5262,26 @@ function bindCompare() {
 }
 
 // ── 화면: 찜한 캠핑장 목록 (갯수 제한 없음) ───────────────────────────
+// t39 #42 최근 본 캠핑장(이 기기에만, 12곳) + 오프라인 보관(sw.js: 네트워크 먼저, 끊기면 마지막 사본).
+const RECENT_KEY = "mc-recent", RECENT_MAX = 12;
+function pushRecent(id) { const r = store.get(RECENT_KEY, []).filter((x) => x !== String(id)); r.unshift(String(id)); store.set(RECENT_KEY, r.slice(0, RECENT_MAX)); }
+function recentHtml() {
+  const list = store.get(RECENT_KEY, []).map((id) => S.byId.get(String(id))).filter(Boolean).slice(0, 8);
+  if (!list.length) return "";
+  return `<section class="recent-sec" data-recent><div class="sec-head"><div><h2>최근 본 캠핑장</h2><p class="sec-sub">이 기기에서 열어 본 곳이에요. 찜한 곳과 최근 본 곳은 인터넷이 끊겨도 마지막으로 본 내용을 보여 줘요.</p></div></div>
+    <div class="cards-grid saved-grid">${list.map((c, i) => card(c, i)).join("")}</div></section>`;
+}
+// 찜·최근 본 곳 상세를 미리 받아 둔다(서비스 워커가 사본을 남김). 한 번에 20곳까지, 데이터 절약 모드면 건너뜀.
+function warmOffline() {
+  if (!navigator.serviceWorker?.controller || navigator.connection?.saveData) return;
+  const ids = [...new Set([...S.saved, ...store.get(RECENT_KEY, [])])].slice(0, 20);
+  for (const id of ids) fetch(`${DATA}camps/${encodeURIComponent(id)}.json`).catch(() => {});
+}
+if ("serviceWorker" in navigator && location.protocol === "https:") {
+  navigator.serviceWorker.register(`${APP_BASE}sw.js`, { scope: APP_BASE }).then(() => setTimeout(warmOffline, 4000)).catch(() => {});
+}
 async function savedView() {
-  await ensureFull(S.saved);
+  await ensureFull([...S.saved, ...store.get(RECENT_KEY, [])]);
   const saved = S.saved.map((id) => S.byId.get(id)).filter(Boolean);
   if (!saved.length) {
     return `<section class="saved-page">
@@ -5278,6 +5297,7 @@ async function savedView() {
         <p>캠핑장 카드의 하트(${ic("heart-o", "inline")})를 눌러 찜해보세요.<br>찜한 캠핑장은 갯수 제한 없이 모아서 보고, 원하는 곳들을 골라 한눈에 스펙을 비교할 수 있어요.</p>
         <a class="btn primary" href="${APP_BASE}list">캠핑장 찾기</a>
       </div>
+      ${recentHtml()}
     </section>`;
   }
 
@@ -5303,6 +5323,7 @@ async function savedView() {
     <div class="cards-grid saved-grid">
       ${saved.map((c, i) => card(c, i)).join("")}
     </div>
+    ${recentHtml()}
   </section>`;
 }
 
