@@ -41,7 +41,7 @@ node pipeline/scripts/report-coverage.mjs
 node pipeline/scripts/build-fact-store.mjs
 node "$SRC/scripts/coverage-guard.mjs" "$BASE" "$DATA/meta.json"
 
-if [ -n "${PUBLISH_DRY_RUN:-}" ]; then git status --short | head -5; echo "(시험 실행: 커밋하지 않음)"; exit 0; fi
+if [ -n "${PUBLISH_DRY_RUN:-}" ]; then { git status --short | head -5 || true; }; echo "(시험 실행: 커밋하지 않음)"; exit 0; fi
 git config user.name "moyeora-camping-data-bot"
 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 git add camping-atlas/public/explore data/facts

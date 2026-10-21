@@ -558,3 +558,8 @@ Pretendard Variable 한 가지. 제목 800, 본문 400~600, 숫자 `tabular-nums
 - 홈 테마 줄은 앞 4줄만 바로 그리고 나머지는 화면 1,200px 앞에서 채운다(`LAZY_FROM`, `watchLazyRows`). 레일 상태 계산은 한 프레임에 모아 읽고 쓴다(`queueRailState`).
 - Leaflet은 `defer`, 루트 index에 campgrounds/photos.json `preload`, gocamping.or.kr `preconnect`.
 - CI 예산: `camping-atlas/scripts/perf-budget.mjs`(app.js 560KB·CSS 260KB·첫 데이터 gzip 3.5MB·홈 DOM 12,000·원본 사진 0장·카드 8초).
+
+## 카탈로그 나누기 (2026-10-21)
+- 첫 화면은 `explore/data/campgrounds.lite.json`(목록·홈·지도·검색·필터에 필요한 값만)을 받는다. 상세·비교는 `catx/{0..63}.json?v=해시`에서 그 캠핑장 원본 행을 받아 합친 뒤 그린다(`ensureFull`). 카드에 마우스·손가락·포커스가 닿으면 샤드를 미리 받는다(`prefetchDetail`).
+- 두 파일은 배포(`scripts/split-catalog.mjs`)와 CI에서만 만든다. 저장소의 원본은 `campgrounds.json` 하나 — 데이터 작업은 원본만 고친다.
+- 목록 화면에 새 값을 쓰기 시작하면 `scripts/split-catalog.mjs`의 `HEAVY`에 그 경로가 없는지 확인한다. `catalog-split-test.mjs`가 원본과 화면이 글자 단위로 같은지 본다(17화면).

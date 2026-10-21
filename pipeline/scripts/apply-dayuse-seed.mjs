@@ -12,6 +12,8 @@ const seed = JSON.parse(readFileSync(join(root, "pipeline/registry/dayuse-seed.j
 // P1: OSM 공원·공공 물놀이(registry/dayuse-osm.json, build-dayuse-osm.mjs 산출) — 수기 시드가 우선.
 const osmPath = join(root, "pipeline/registry/dayuse-osm.json");
 if (existsSync(osmPath)) { const ids = new Set(seed.places.map((p) => p.id)); seed.places.push(...JSON.parse(readFileSync(osmPath, "utf8")).places.filter((p) => !ids.has(p.id))); }
+// 고캠핑에 없는 1박 캠핑장 수기 보강분(registry/manual-camps.json, 원문 src 포함) — 같은 방식으로 붙인다(du 없음).
+{ const mp = join(root, "pipeline/registry/manual-camps.json"); if (existsSync(mp)) { const ids = new Set(seed.places.map((p) => p.id)); seed.places.push(...JSON.parse(readFileSync(mp, "utf8")).places.filter((p) => !ids.has(p.id))); } }
 const catPath = join(dataDir, "campgrounds.json");
 const cat = JSON.parse(readFileSync(catPath, "utf8"));
 const unify = (t) => (t === "캠프닉" ? "캠크닉" : t);
@@ -25,6 +27,7 @@ for (const p of seed.places ?? []) {
   if (src?.url) { rec.src_url = src.url; rec.src_at = src.checked_at; }
   rec.types = [...new Set((rec.types ?? []).map(unify))];
   if (byId.has(rec.id)) { cat[byId.get(rec.id)] = { ...cat[byId.get(rec.id)], ...rec }; replaced++; } else { cat.push(rec); byId.set(rec.id, cat.length - 1); added++; }
+  if (!rec.du && !rules?.length && !day) continue; // 1박 수기 보강분(manual-camps)은 카탈로그 행만
   const dp = join(dataDir, "camps", `${rec.id}.json`);
   const d = existsSync(dp) ? JSON.parse(readFileSync(dp, "utf8")) : {};
   if (rules?.length) d.house_rules = { ...(d.house_rules ?? {}), rules, at: src?.checked_at };

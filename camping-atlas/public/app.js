@@ -928,12 +928,24 @@ function nearLine(c, sep = " · ") {
 // 계산 캐시(c._f 등 _로 시작하는 값)는 지워 다시 계산한다. 샤드 번호는 scripts/split-catalog.mjs shardOf와 같아야 한다.
 const CATX = { v: "", n: 0, got: new Map() };
 const shardOf = (id) => { let h = 0; for (const ch of String(id)) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return h % CATX.n; };
+function loadShard(n) {
+  if (!CATX.got.has(n)) CATX.got.set(n, fetch(`${DATA}catx/${n}.json?v=${CATX.v}`).then((r) => (r.ok ? r.json() : {})).catch(() => { CATX.got.delete(n); return {}; }));
+  return CATX.got.get(n);
+}
+// 상세 첫 열기 지연 줄이기: 카드에 손가락·마우스가 닿거나 포커스가 가면 그 캠핑장 샤드를 미리 받는다(합치기는 상세에서).
+function prefetchDetail(e) {
+  if (!CATX.n) return;
+  const a = e.target.closest?.('a[href^="#/c/"]');
+  if (!a) return;
+  const id = decodeURIComponent(a.getAttribute("href").slice(4));
+  if (S.byId.get(id) && !S.byId.get(id).__full) loadShard(shardOf(id));
+}
+for (const t of ["pointerover", "focusin", "touchstart"]) document.addEventListener(t, prefetchDetail, { passive: true, capture: true });
 async function ensureFull(ids) {
   if (!CATX.n) return;
   const need = [...new Set(ids.map(String).filter((id) => { const c = S.byId.get(id); return c && !c.__full; }).map(shardOf))];
   await Promise.all(need.map((n) => {
-    if (!CATX.got.has(n)) CATX.got.set(n, fetch(`${DATA}catx/${n}.json?v=${CATX.v}`).then((r) => (r.ok ? r.json() : {})).catch(() => { CATX.got.delete(n); return {}; }));
-    return CATX.got.get(n);
+    return loadShard(n);
   }));
   for (const id of ids.map(String)) {
     const c = S.byId.get(id);
