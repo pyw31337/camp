@@ -64,6 +64,14 @@
       "reason": "플랫폼 광고가·공원 조례 요금을 걷어낸 뒤 요금 범위가 바뀌어 형태 나누기를 다시 계산(QA R1·R2)",
       "by": "qa-audit",
       "at": "2026-10-21"
+    },
+    {
+      "file": "supabase:public.save_log",
+      "id": "90-156",
+      "field": "*",
+      "reason": "자동 테스트(Playwright)가 운영 찜 기록에 남긴 찜/해제 67건 삭제(소유자 승인). 사본 pipeline/registry/archive/save_log-test-rows-2026-10-21.json, 실행 db/016",
+      "by": "grok-bot",
+      "at": "2026-10-21"
     }
   ]
 }

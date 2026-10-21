@@ -2540,7 +2540,7 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
     height: 46px;
   }
 }
-.detail .d-sec { scroll-margin-top: 58px; }
+.detail .d-sec { scroll-margin-top: 0; } /* html scroll-padding-top(머리 높이+12px)만 쓴다 — 둘을 더하면 바로가기 뒤 칸이 126px 아래에 멈췄다 */
 .detail .d-sec:focus { outline: none; }
 .detail .use-val, .detail .tile-v, .plist b { word-break: keep-all; overflow-wrap: anywhere; }
 @media (max-width: 759px) {
@@ -3304,3 +3304,29 @@ html, body, #view { min-height: 100%; }
   .d-dock-in > * { min-width: 0; }
   .d-dock .icon-btn { flex: 0 0 var(--tap); width: var(--tap); }
 }
+/* 카드 정보 3줄(2026-10-21): 시설 / 시간·주변 / 요금. 고정 높이·말줄임 대신 줄바꿈(320px에서 ‘…’ 없음). */
+.rows-3 li, [data-v="b"] .rows-3 li, [data-v="c"] .rows-3 li { height: auto; min-height: 35px; max-height: none; align-items: start; padding: 8px 0; }
+.rows-3 .rl { line-height: 1.45; }
+.rows-3 .rv { white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.45; overflow-wrap: anywhere; }
+.rows-3 .rv .is-no { color: var(--no, #d32f2f); }
+.rows-3 .r-fee .ft { display: inline; margin-left: var(--space-xs); color: var(--ink-3); font-weight: 650; font-size: .82rem; white-space: nowrap; }
+.rows-3 .r-fee .ft b { color: var(--ink-2); font-weight: 850; }
+.card-reviews { flex-wrap: wrap; height: auto; max-height: none; row-gap: 4px; }
+.card-reviews .c-rv-pill { overflow: visible; text-overflow: clip; }
+@media (min-width: 860px) { .rows-horiz.rows-3, .rows-3 { grid-template-columns: 1fr; } }
+/* 모바일 목록: 칩 줄 접기 → ‘조건’ 버튼 하나(조건 시트). 고른 값은 지울 수 있는 알약(.m-only)으로. */
+.cond-pill.m-only { display: none; }
+@media (max-width: 760px) {
+  .list-page .list-filters { display: none; }
+  .list-page .list-finder-form .finder-cond { display: none; }
+  .list-page .list-finder-form { grid-template-columns: minmax(0, 1fr) auto; }
+  .list-page .cond-pill.m-only { display: inline-flex; }
+}
+@media (pointer: coarse) {
+  .cond-pill { position: relative; }
+  .cond-pill::after { content: ""; position: absolute; left: 50%; top: 50%; width: 100%; height: max(100%, var(--tap)); transform: translate(-50%, -50%); }
+}
+/* 히어로·목록 ‘어디로’ 칸(2026-10-21, ux-proposals #1): 칸 어디를 눌러도 바로 입력. 입력 글자 16px(아이폰 확대 방지), 입력 영역이 칸을 채운다. */
+.finder-destination { cursor: text; }
+.finder-destination input { width: 100%; min-height: 28px; }
+@media (max-width: 760px) { .finder-field.finder-destination input { font-size: 16px; } }

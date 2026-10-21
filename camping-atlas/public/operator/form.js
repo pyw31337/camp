@@ -60,6 +60,8 @@ export function mount(el, camp, sb) {
     e.preventDefault();
     const last = Number(localStorage.getItem(LAST) || 0);
     if (Date.now() - last < 10 * 60e3) { msg.textContent = "방금 보냈어요. 10분 뒤에 다시 보낼 수 있어요."; return; }
+    // 자동 테스트(navigator.webdriver)·?nowrite=1 에서는 운영 DB에 보내지 않는다.
+    if (navigator.webdriver === true || /[?&]nowrite=1\b/.test(location.search)) { msg.textContent = "테스트 모드에서는 보내지 않아요."; return; }
     const { row, error } = rowFrom(new FormData(form));
     if (error) { msg.textContent = error; return; }
     const btn = form.querySelector("button"); btn.disabled = true; msg.textContent = "보내는 중…";
