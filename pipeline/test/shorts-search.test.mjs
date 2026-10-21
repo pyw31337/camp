@@ -59,3 +59,23 @@ test("merge-collected --shorts: 상세 영상 칸에 채우기만", async () => 
   assert.equal(JSON.parse(readFileSync(join(dir, "camps", "1.json"), "utf8")).videos[0].yt, "AAAAAAAAAAA");
   assert.deepEqual(JSON.parse(readFileSync(join(dir, "camps", "2.json"), "utf8")).videos, [{ yt: "XXXXXXXXXXX", title: "원래" }]);
 });
+
+// t39 #36 정밀도 보강: 첫 수집에서 나온 오인 사례가 다시 들어오지 않게
+import { shortsMatch, refilterShorts } from "../lib/shorts-search.mjs";
+test("shortsMatch: 일반어 이름·다른 캠핑장·채널명 오인은 뺀다", () => {
+  const c = (name, sigungu) => ({ name, address: { sigungu } });
+  assert.equal(shortsMatch(c("좋은 카라반", "밀양시"), "4인 가족이 타기 좋은 카라반#shorts#캠핑카"), false);
+  assert.equal(shortsMatch(c("하우스 캠핑장", "영월군"), "#Shorts 남해 버드하우스캠핑장 사전답사"), false);
+  assert.equal(shortsMatch(c("언덕캠핑장", "고성군"), "랑리온캠핑 | 한탄강 오토캠핑장 #7 Shorts | 언덕야영지"), false);
+  assert.equal(shortsMatch(c("스플래쉬 패드", "남양주시"), "뉴질랜드 스플래쉬패드와 놀이터 무료캠핑장 #Shorts"), false);
+  assert.equal(shortsMatch(c("노을캠핑장", "통영시"), "서울에서 만 원에 캠핑 #노을캠핑장 #쇼츠"), false);
+  assert.equal(shortsMatch(c("도토리 캠핑장", "홍천군"), "도토리TV 캠핑플래닛 #캠핑장 Shorts"), false);
+  assert.equal(shortsMatch(c("동락공원", "구미시"), "캠핑대마왕 구미 동락공원 #shorts"), false); // 4자 + 장소명: 캠핑장 접미어 없음
+});
+test("shortsMatch: 고유명 + 캠핑 맥락이면 남긴다", () => {
+  const c = (name, sigungu) => ({ name, address: { sigungu } });
+  assert.equal(shortsMatch(c("북한산 사기막야영장", "고양시"), "(최초공개)북한산 사기막 야영장 현장 모습 #shorts"), true);
+  assert.equal(shortsMatch(c("임진각 평화누리 / 평화누리캠핑장", "파주시"), "임진각평화누리캠핑장 피칭영상 #shorts #camping"), true);
+  assert.equal(shortsMatch(c("합천영상테마파크", "합천군"), "캠핑대마왕 합천영상테마파크 아이와 강추 #shorts"), true);
+  assert.deepEqual(refilterShorts(c("좋은 카라반", "밀양시"), [{ title: "좋은 카라반 #캠핑 shorts" }]), []);
+});
