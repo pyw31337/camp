@@ -960,7 +960,13 @@ function card(c, i = 0, opts) {
 
 // ── 공통 UI: 토스트·(i) 말풍선 ───────────────────────────────
 let toastT;
-function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("on"), 1800); }
+// 되돌리기 토스트: 찜 해제처럼 되돌릴 수 있는 일에만(4초).
+function toastUndo(msg, undo) {
+  const t = $("#toast"); t.innerHTML = `<span>${esc(msg)}</span><button type="button" class="toast-undo" data-undo>되돌리기</button>`; t.classList.add("on", "has-act");
+  t.querySelector("[data-undo]").addEventListener("click", () => { t.classList.remove("on", "has-act"); undo(); }, { once: true });
+  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("on", "has-act"), 4000);
+}
+function toast(msg) { const t = $("#toast"); t.classList.remove("has-act"); t.textContent = msg; t.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("on"), 1800); }
 const TIPS = new Map();
 let tipN = 0;
 function tip(html, label = "자세한 정보") { const k = `t${++tipN}`; TIPS.set(k, html); return `<button class="ib" type="button" data-tip="${k}" aria-label="${esc(label)}">${ic("info")}</button>`; }
@@ -1030,13 +1036,20 @@ document.addEventListener("click", (e) => {
   if (!b) return;
   e.preventDefault(); e.stopPropagation();
   const id = String(b.dataset.save);
-  if (isSaved(id)) { S.saved = S.saved.filter((x) => x !== id); S.pick = S.pick.filter((x) => x !== id); }
-  else { S.saved.unshift(id); toast(`찜 ${S.saved.length}곳`); }
+  if (isSaved(id)) {
+    const prevSaved = [...S.saved], prevPick = [...S.pick];
+    S.saved = S.saved.filter((x) => x !== id); S.pick = S.pick.filter((x) => x !== id);
+    toastUndo(`찜에서 뺐어요 · 찜 ${S.saved.length}곳`, () => { S.saved = prevSaved; S.pick = prevPick; saveCommit(id); });
+  } else { S.saved.unshift(id); toast(`찜 ${S.saved.length}곳`); }
+  saveCommit(id);
+});
+// 찜 저장소(mc-saved·mc-pick) 반영 → 내비 숫자·같은 곳 하트 전부·비교 화면 다시 그림
+function saveCommit(id) {
   store.set("mc-saved", S.saved); store.set("mc-pick", S.pick);
   syncCompare();
   $$(`[data-save="${CSS.escape(id)}"]`).forEach((x) => { const on = isSaved(id); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); x.setAttribute("aria-label", on ? "찜 해제" : "찜하기"); x.querySelector("use").setAttribute("href", `#i-${on ? "heart" : "heart-o"}`); });
   if (location.hash.startsWith("#/compare")) route();
-});
+}
 function syncCompare() { $$("[data-compare-count]").forEach((x) => { x.textContent = S.saved.length; x.hidden = !S.saved.length; }); }
 
 function presetOn(i) { const v = PRESETS[i][1]; return Object.entries(v).every(([k, x]) => (Array.isArray(x) ? x.every((y) => S.cond[k].includes(y)) : S.cond[k] === x)); }
@@ -4449,12 +4462,13 @@ async function compareView() {
   const saved = S.saved.map((id) => S.byId.get(id)).filter(Boolean);
   if (!saved.length) {
     return `<section class="cmp-page"><div class="sec-head big"><h1>찜한 <em>캠핑장</em></h1></div>
-      <div class="empty">${ic("heart-o")}<b>이름 옆 ${ic("heart-o", "inline")}로 찜하고 나란히 비교해요</b><button class="btn primary" type="button" data-sample>예시로 보기</button></div></section>`;
+      <p class="cmp-sub">찜한 캠핑장 가운데 최대 3곳을 골라 조건을 나란히 비교하는 곳이에요.</p>
+      <div class="empty" data-cmp-empty>${ic("heart-o")}<b>아직 찜한 곳이 없어요. 캠핑장 이름 옆 ${ic("heart-o", "inline")}를 눌러 찜해 보세요</b><a class="btn ghost" href="#/list">캠핑장 찾기</a><button class="btn primary" type="button" data-sample>예시로 보기</button></div></section>`;
   }
   S.pick = S.pick.filter((id) => S.saved.includes(id));
   if (!S.pick.length) S.pick = saved.slice(0, 3).map((c) => String(c.id));
   const camps = S.pick.map((id) => S.byId.get(id)).filter(Boolean);
-  const picker = `<div class="rail picks">${saved.map((c) => { const on = S.pick.includes(String(c.id)); return `<button type="button" class="pick${on ? " on" : ""}" data-pick="${esc(c.id)}" aria-pressed="${on}">${campThumb(c, { sizes: "36px" })}<span>${esc(nameOf(c).name)}</span>${ic(on ? "check" : "plus")}</button>`; }).join("")}</div>`;
+  const picker = `<div class="rail picks">${saved.map((c) => { const on = S.pick.includes(String(c.id)); return `<span class="pick-wrap${on ? " on" : ""}"><button type="button" class="pick${on ? " on" : ""}" data-pick="${esc(c.id)}" aria-pressed="${on}" aria-label="${esc(nameOf(c).name)} ${on ? "비교에서 빼기" : "비교에 넣기"}">${campThumb(c, { sizes: "36px" })}<span>${esc(nameOf(c).name)}</span>${ic(on ? "check" : "plus")}</button>${heartBtn(c)}</span>`; }).join("")}</div>`;
   const ds = await Promise.all(camps.map((c) => detailOf(c.id)));
   const rowsDef = [
     ["현장 조건", [["주차", (c) => facts(c).park, "car"], ["전기", (c) => facts(c).power, "bolt"], ["장작·숯", (c) => facts(c).fire, "flame"], ["사이트 규격", (c) => facts(c).size, "size"], ["바닥", (c) => facts(c).ground, "layers"], ["위생", (c) => facts(c).sanitary, "bath"], ["반려견", (c) => facts(c).pet, "paw"]]],
@@ -4462,7 +4476,7 @@ async function compareView() {
     ["시간·요금", [["입실", (c, d) => usage(c, d)[0][1], "clock-in"], ["퇴실", (c, d) => usage(c, d)[1][1], "clock-out"], ["매너타임", (c, d) => usage(c, d)[2][1], "bed"], ["요금", (c, d) => usage(c, d)[3][1], "won"]]],
     ["시설·주변", [["편의시설", (c) => ((c.amenities ?? []).length ? { v: c.amenities.slice(0, 6).join(" · "), g: "c", src: { label: "고캠핑 등록 편의시설", url: c.gc_url } } : null), "drop"], ["대여", (c) => ((c.rental ?? []).length ? { v: c.rental.join(" · "), g: "c", src: { label: "고캠핑 등록 대여품목", url: c.gc_url } } : null), "cart"], ["편의점", (c) => (c.nl?.c ? { v: km(c.nl.c), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+편의점` : null } } : null), "store"], ["마트", (c) => (c.nl?.m ? { v: km(c.nl.m), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+마트` : null } } : null), "cart"], ["후기 장점", (c) => (c.rv?.p?.length ? { v: c.rv.p.slice(0, 2).map(([t]) => t).join(" · "), g: "m", src: { label: "방문자 후기 분석", url: c.gc_url } } : null), "thumb-up"]]],
   ];
-  const head = camps.map((c) => `<th scope="col"><a class="ch" href="#/c/${encodeURIComponent(c.id)}">${campThumb(c, { sizes: "64px" })}<span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></span></a><button class="icon-btn ch-x" type="button" data-pick="${esc(c.id)}" aria-label="비교에서 빼기">${ic("close")}</button></th>`).join("");
+  const head = camps.map((c) => `<th scope="col"><a class="ch" href="#/c/${encodeURIComponent(c.id)}">${campThumb(c, { sizes: "64px" })}<span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></span></a><span class="ch-acts">${heartBtn(c)}<button class="icon-btn ch-x" type="button" data-pick="${esc(c.id)}" aria-label="비교에서 빼기" title="비교에서 빼기(찜은 그대로)">${ic("close")}</button></span></th>`).join("");
   const opens = camps.map((c) => { const o = openingOf(c); const ch = primaryBooking(c); return `<td class="${o ? "hot" : ""}">${o ? `<b>${esc(o.txt)}</b> · ` : ""}${esc(ch ? bookingLabel(ch) : "–")}</td>`; }).join("");
   const body = rowsDef.map(([g, rows]) => `<tr class="grp"><th scope="rowgroup" colspan="${camps.length + 1}">${g}</th></tr>${rows.map(([l, get, rIc]) => {
     const vals = camps.map((c, i) => get(c, ds[i]));
@@ -4472,7 +4486,8 @@ async function compareView() {
   }).join("")}`).join("");
   const acts = camps.map((c) => { const ch = primaryBooking(c); return `<td>${ch ? `<a class="btn primary wide" href="${esc(ch.url)}" target="_blank" rel="noopener">예약</a>` : `<a class="btn ghost wide" href="#/c/${encodeURIComponent(c.id)}">자세히</a>`}</td>`; }).join("");
   return `<section class="cmp-page">
-    <div class="sec-head big"><h1>찜 ${saved.length} · <em>${camps.length}곳 비교</em></h1><span class="sec-tools"><label class="switch"><input type="checkbox" data-diff checked><span>다른 점만 강조</span></label></span></div>
+    <div class="sec-head big"><h1>찜한 캠핑장 <em>비교</em></h1><span class="sec-tools"><label class="switch"><input type="checkbox" data-diff checked><span>다른 점만 강조</span></label></span></div>
+    <p class="cmp-sub" data-cmp-count>찜 <b>${saved.length}</b>곳 중 <b>${camps.length}</b>곳 비교 중 · ${ic("check", "inline")} 누르면 비교에 넣고 빼요(최대 3곳) · ${ic("heart", "inline")} 끄면 찜에서 빠져요</p>
     ${picker}
     <div class="cmp-scroll"><table class="cmp-table diff-on">
       <thead><tr><th class="corner" scope="col"></th>${head}</tr></thead>

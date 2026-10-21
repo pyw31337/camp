@@ -540,3 +540,14 @@ Pretendard Variable 한 가지. 제목 800, 본문 400~600, 숫자 `tabular-nums
 - 홈 첫 테마 줄 ‘겨울 캠핑’(WINTER): 겨울 운영 + (난방 상품 또는 W 공지 1,100W 이상). 이미지 themes/winter.webp.
 - 목록 조건 ‘겨울’ 섹션(`win=1`). 눈·영하 예보 배지 `bdg-wx`: conditions/forecast.json 7일, 카드 사진 위·상세 머리.
 - 회귀 테스트: `camping-atlas/scripts/winter-test.mjs`(CI Rail swipe 잡).
+
+## 찜 비교 화면 (2026-10-21)
+
+- 제목 ‘찜한 캠핑장 비교’ + 설명 줄(찜 N곳 중 M곳 비교 중). 칩: ✓/+ = 비교에 넣고 빼기(최대 3곳), 채운 하트(`heartBtn`, 사이트 공통 `mc-saved`) = 찜 해제.
+- 열 머리: 하트(찜 해제) + ×(비교에서만 빼기, 찜 유지). 찜 해제 시 `toastUndo` 되돌리기 4초. 찜 0곳이면 빈 화면 + ‘캠핑장 찾기’.
+- 회귀 테스트: `camping-atlas/scripts/compare-fav-test.mjs`.
+
+## 좌우 화살표 (2026-10-21)
+
+- 사진 캐러셀(`.car-nav`)·사진 크게 보기(`.lb-nav`) 모두 흰 원 배경·박스 그림자 없이 흰 꺾쇠만, `drop-shadow(0 1px 1.5px rgba(0,0,0,.28))`로 옅게. 새 화살표도 이 규칙을 따른다(style.css 끝 공통 규칙).
+- 회귀 테스트: `camping-atlas/scripts/arrows-test.mjs`.
