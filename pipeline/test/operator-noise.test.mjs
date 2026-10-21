@@ -23,3 +23,10 @@ test("공지·요금·규칙 모두 같은 필터를 쓴다", () => {
   assert.ok(!/for \(const (x|raw) of d\?\.operator_snippets/.test(app));
   assert.match(app, /clean\(h\.rules\)/);
 });
+test("아이콘 글꼴 이름(recycling·local_parking)이 문장 앞에 붙어 나오지 않는다", () => {
+  const i = app.indexOf("function compactOperatorText(value)");
+  const compact = new Function(`${app.slice(i, app.indexOf("\n}\n", i) + 2)}; return compactOperatorText;`)();
+  assert.equal(compact("recycling 분리수거장"), "분리수거장");
+  assert.equal(compact("local_parking 주차장"), "주차장");
+  assert.equal(compact("A동 wifi 무료"), "A동 wifi 무료");
+});

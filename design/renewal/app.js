@@ -3218,7 +3218,7 @@ const OPERATOR_CATEGORIES = [
   ["이용 규칙", /쓰레기|분리수거|외부인|준수|강제퇴장|입장/], ["사이트 이용", /일반.?사이트|오토.?캠핑|캠핑카|카라반|텐트/],
 ];
 function compactOperatorText(value) {
-  return String(value ?? "").replace(/^[*\-·\s√✓✔※▶►▷■□●○◆◇★☆>]+/, "").replace(/\s+/g, " ").replace(/\s*([,.:])\s*(?!\d)/g, "$1 ").trim();
+  return String(value ?? "").replace(/^\s*[a-z]+(?:_[a-z]+)*\s+(?=[가-힣])/, "").replace(/^[*\-·\s√✓✔※▶►▷■□●○◆◇★☆>]+/, "").replace(/\s+/g, " ").replace(/\s*([,.:])\s*(?!\d)/g, "$1 ").trim();
 }
 function operatorSummary(label, texts) {
   const text = texts.join(" · ");
