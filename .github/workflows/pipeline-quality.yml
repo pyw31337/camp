@@ -5,11 +5,13 @@ on:
     paths:
       - "pipeline/**"
       - ".github/workflows/pipeline-quality.yml"
+      - "camping-atlas/public/explore/data/campgrounds.json"
   push:
     branches: [main]
     paths:
       - "pipeline/**"
       - ".github/workflows/pipeline-quality.yml"
+      - "camping-atlas/public/explore/data/campgrounds.json"
 
 permissions:
   contents: read
@@ -32,5 +34,7 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run validate
+      - name: 당일 장소 시드 멱등(다시 돌려도 발행 데이터 그대로)
+        run: node scripts/check-dayuse-idempotent.mjs
       - run: npm run calendar -- 90
       - run: npm run ics -- 120

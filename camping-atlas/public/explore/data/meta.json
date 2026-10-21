@@ -934,12 +934,12 @@
     }
   },
   "coverage": {
-    "measured_at": "2026-10-20T22:31:10.855Z",
-    "total": 6308,
+    "measured_at": "2026-10-21T02:15:32.953Z",
+    "total": 6309,
     "goal": 2500,
     "fields": {
       "price": {
-        "any": 5460,
+        "any": 5461,
         "confirmed": 3931
       },
       "checkin": {
@@ -963,7 +963,7 @@
         "confirmed": 4004
       },
       "parking": {
-        "any": 4723,
+        "any": 4724,
         "confirmed": 4718
       },
       "power_w": {
