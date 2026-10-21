@@ -3722,7 +3722,7 @@ function mediaHubHtml(d, c) {
   const ytVideos = (d?.videos ?? []).map((x) => {
     const yt = x.yt || (x.url && x.url.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([A-Za-z0-9_-]{11})/)?.[1]) || null;
     return { ...x, yt };
-  });
+  }).filter((x) => !HIDDEN_VIDEOS[String(c.id)]?.includes(x.yt)); // 표시층에서만 숨김(데이터는 그대로)
   const ytList = ytVideos
     .filter((x) => x.yt || (x.url && /youtube\.com|youtu\.be/i.test(x.url)) || (!isHost(x.url, /naver\./) && !isHost(x.url, /daum\.|kakao\.|tistory\.|brunch\./)));
 
@@ -4701,6 +4701,8 @@ function fitLongText(root) {
     el.after(b);
   }
 }
+// 다른 캠핑장 영상으로 판정된 항목: 데이터는 지우지 않고 화면에서만 숨긴다(t39 #36, 영우 님 2026-10-22). 원본: pipeline/registry/shorts-exclude.json
+const HIDDEN_VIDEOS = { "100278": ["MwVOrtKjy9M"] }; // 태안 더빌리지 ← ‘진천 더빌리지’ 숏츠
 // t39 #43 예약 오픈 → 캘린더(.ics). context/open-ics.js는 누를 때만 불러온다.
 document.addEventListener("click", async (e) => {
   const b = e.target.closest("[data-open-ics]");

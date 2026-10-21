@@ -8,8 +8,8 @@ import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
-import { kakaoSearch, nameCore } from "../lib/social-search.mjs";
-import { SHORTS_CACHE_VERSION, isoDurationSec, pickShortsDue, refilterShorts, shortsFromVclip, shortsFromYoutube, shortsQueries } from "../lib/shorts-search.mjs";
+import { kakaoSearch, nameCore, regionStem } from "../lib/social-search.mjs";
+import { SHORTS_CACHE_VERSION, isoDurationSec, pickShortsDue, refilterShorts, excludeMap, shortsFromVclip, shortsFromYoutube, shortsQueries } from "../lib/shorts-search.mjs";
 
 const out = fileURLToPath(new URL("../out/", import.meta.url));
 const cacheDir = fileURLToPath(new URL("../.cache/", import.meta.url));
@@ -65,6 +65,8 @@ async function main() {
   for (const c of camps) { const k = `${c.address.sido ?? ""} ${c.address.sigungu ?? ""}`; if (!coresBySigungu.has(k)) coresBySigungu.set(k, []); coresBySigungu.get(k).push(nameCore(c.name, c.address.sigungu)); }
   const coreCount = new Map();
   for (const c of camps) { const k = nameCore(c.name, c.address.sigungu).toLowerCase(); coreCount.set(k, (coreCount.get(k) ?? 0) + 1); }
+  const stems = [...new Set(camps.map((c) => regionStem(c.address.sigungu)).filter((x) => x && x.length >= 2))];
+  const excl = excludeMap(await readJson(fileURLToPath(new URL("../registry/shorts-exclude.json", import.meta.url)), {}));
   const dupOf = (c) => (coreCount.get(nameCore(c.name, c.address.sigungu).toLowerCase()) ?? 0) > 1;
   const othersOf = (c) => coresBySigungu.get(`${c.address.sido ?? ""} ${c.address.sigungu ?? ""}`) ?? [];
   const cache = await readJson(cachePath, { campgrounds: {} }); cache.campgrounds ??= {};
@@ -84,7 +86,7 @@ async function main() {
         try {
           const docs = [];
           for (const q of qs) { calls++; docs.push(...(await kakaoSearch("vclip", q, { sort: "accuracy", size: 30 }, { key: kkey }))); if (DELAY_MS) await sleep(DELAY_MS); }
-          let shorts = shortsFromVclip(c, docs, { others: othersOf(c), dup: dupOf(c) });
+          let shorts = shortsFromVclip(c, docs, { others: othersOf(c), dup: dupOf(c), stems, exclude: excl[c.id] ?? [] });
           if (ykey && !ytStopped && yt < YT_MAX) {
             try {
               yt++;
@@ -92,7 +94,7 @@ async function main() {
               const ids = (s.items ?? []).map((x) => x?.id?.videoId).filter(Boolean);
               const durs = {};
               if (ids.length) for (const v of (await ytJson(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${ids.join(",")}&key=${ykey}`)).items ?? []) durs[v.id] = isoDurationSec(v.contentDetails?.duration);
-              shorts = [...shorts, ...shortsFromYoutube(c, s.items, durs, { others: othersOf(c), dup: dupOf(c) })];
+              shorts = [...shorts, ...shortsFromYoutube(c, s.items, durs, { others: othersOf(c), dup: dupOf(c), stems, exclude: excl[c.id] ?? [] })];
             } catch (e) { ytStopped = true; warn("YouTube API 중단", e.message); }
           }
           const seen = new Set();
@@ -115,7 +117,7 @@ async function main() {
   for (const c of camps) {
     const r = cache.campgrounds[c.id];
     // 캐시는 예전 기준으로 걸렀을 수 있다 → 내보낼 때마다 엄격 판정으로 다시 거른다.
-    const sh = refilterShorts(c, r?.shorts, { others: othersOf(c), dup: dupOf(c) });
+    const sh = refilterShorts(c, r?.shorts, { others: othersOf(c), dup: dupOf(c), stems, exclude: excl[c.id] ?? [] });
     if (!sh.length) continue;
     records[c.id] = { fetched_at: r.fetched_at, shorts: sh };
     withShorts++; total += sh.length;
