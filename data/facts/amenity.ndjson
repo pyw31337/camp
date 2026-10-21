@@ -12921,6 +12921,15 @@
 {"cid":"102373","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://booking.naver.com/booking/12/bizes/1085778","at":"2026-10-20","text":"물놀이장"}
 {"cid":"102373","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://booking.naver.com/booking/12/bizes/1085778","at":"2026-10-20"}
 {"cid":"102373","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://booking.naver.com/booking/12/bizes/1085778","at":"2026-10-20","text":"에어바운스"}
+{"cid":"102377","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"gocamping","text":"개수대","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874"}
+{"cid":"102377","attr":"AMENITY_KIDS_ROOM","value":true,"grade":"CONFIRMED","src":"gocamping","text":"실내놀이터","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874"}
+{"cid":"102377","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"실내놀이터","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874"}
+{"cid":"102377","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874"}
+{"cid":"102377","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장(20m 무료 온수수영장)","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874"}
+{"cid":"102377","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874"}
+{"cid":"102377","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"매점","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874"}
+{"cid":"102377","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"와이파이(일부 안내)","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874"}
+{"cid":"102377","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874"}
 {"cid":"osm-n469713235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/469713235","at":"2026-10-20","text":"물놀이장"}
 {"cid":"osm-n469713235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/469713235","at":"2026-10-20"}
 {"cid":"osm-n2261019059","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/2261019059","at":"2026-10-20","text":"물놀이장"}

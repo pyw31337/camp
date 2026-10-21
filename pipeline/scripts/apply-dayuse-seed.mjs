@@ -6,6 +6,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { normalizeUrl } from "../lib/booking-intel.mjs";
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const dataDir = process.env.EXPLORE_DIR || join(root, "camping-atlas/public/explore/data");
 const seed = JSON.parse(readFileSync(join(root, "pipeline/registry/dayuse-seed.json"), "utf8"));
@@ -26,6 +27,8 @@ for (const p of seed.places ?? []) {
   const { rules, day, src, ...rec } = p;
   if (src?.url) { rec.src_url = src.url; rec.src_at = src.checked_at; }
   rec.types = [...new Set((rec.types ?? []).map(unify))];
+  // 홈페이지 주소는 build-link-health.mjs와 같은 규칙으로 바로잡아 둔다(다시 돌려도 결과가 같게).
+  if (rec.homepage && !/^https?:\/\/[^/\s]+\.[^/\s]+/i.test(rec.homepage)) { const u = normalizeUrl(rec.homepage); if (u) rec.homepage = u; else { rec.homepage_raw = rec.homepage; delete rec.homepage; } }
   if (byId.has(rec.id)) { cat[byId.get(rec.id)] = { ...cat[byId.get(rec.id)], ...rec }; replaced++; } else { cat.push(rec); byId.set(rec.id, cat.length - 1); added++; }
   if (!rec.du && !rules?.length && !day) continue; // 1박 수기 보강분(manual-camps)은 카탈로그 행만
   const dp = join(dataDir, "camps", `${rec.id}.json`);

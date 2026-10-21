@@ -35,6 +35,8 @@ node pipeline/scripts/build-site-types.mjs
 node pipeline/scripts/build-price-tiers.mjs
 node pipeline/scripts/build-house-rules.mjs
 node pipeline/scripts/build-gocamping-detail.mjs
+# 당일 장소 시드(원문 규칙·요약)는 프로필·이용규칙 생성 뒤에 붙인다 — data-sync와 같은 순서(빼면 시드 값이 지워졌다 되살아나기를 반복).
+node pipeline/scripts/apply-dayuse-seed.mjs
 node pipeline/scripts/build-link-health.mjs
 node pipeline/scripts/build-card-fallback.mjs
 node pipeline/scripts/report-coverage.mjs
