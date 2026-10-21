@@ -192,7 +192,7 @@ body[data-view="theme"] .top .gear-chip { background: rgba(8,18,30,.42); color: 
 .hero { position: relative; padding: clamp(28px, 5vw, 72px) 0 clamp(24px, 3.5vw, 44px); overflow: hidden; }
 .hero-bg { display: none; }
 [data-v="a"] .hero { min-height: clamp(380px, 40vw, 560px); display: flex; align-items: flex-end; }
-[data-v="a"] .hero-bg { display: block; position: absolute; inset: 0; background: url("./images/hero-campsite.webp") 70% 60% / cover no-repeat; }
+[data-v="a"] .hero-bg { display: block; position: absolute; inset: 0; background: url("../images/hero-campsite.webp") 70% 60% / cover no-repeat; }
 [data-v="a"] .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5,17,31,.88) 0%, rgba(5,17,31,.64) 38%, rgba(5,17,31,.18) 70%, rgba(5,17,31,.1)), linear-gradient(180deg, rgba(2,12,25,.28), rgba(2,12,25,.1) 48%, rgba(5,17,31,.7)); }
 .hero-in {
   position: relative; width: 100%; max-width: var(--content); margin: 0 auto; min-width: 0;
@@ -1278,7 +1278,7 @@ body.map-mode { overflow: hidden; height: 100dvh; }
   body[data-view="theme"] .top .gear-chip span { display: none; }
   .hero { padding-top: 24px; }
   [data-v="a"] .hero { min-height: 404px; padding-top: 140px; padding-bottom: 18px; }
-  [data-v="a"] .hero-bg { background-image: url("./images/hero-campsite-m.webp"); background-position: 50% 30%; background-size: cover; background-color: #091a2f; }
+  [data-v="a"] .hero-bg { background-image: url("../images/hero-campsite-m.webp"); background-position: 50% 30%; background-size: cover; background-color: #091a2f; }
   [data-v="a"] .hero-bg::after { background: linear-gradient(180deg, rgba(2,12,25,.18) 0, rgba(2,12,25,.22) 42%, rgba(2,12,25,.82) 100%); }
   .hero-in { gap: 10px; }
   .hero h1 { font-size: clamp(2.1rem, 11vw, 2.75rem); line-height: 1.04; }
@@ -1756,6 +1756,20 @@ a.near { color: inherit; text-decoration: none; }
 .list-head .chip { box-shadow: none; background: var(--paper); border: 1px solid var(--line); }
 .list-head .chip[aria-pressed="true"] { background: var(--sel); color: var(--on-sel); border-color: var(--sel); }
 .list-tools { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+/* ── 필터 모듈 (지역·사이트·요금 공통) ── */
+.filter-mod { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.filter-mod .fee-band-lbl { flex: none; width: 64px; font-size: .84rem; font-weight: 800; color: var(--ink-2); }
+.filter-mod .rail { flex: 1; min-width: 0; }
+.list-filters { margin: 4px 0 8px; padding: 4px 0 8px; border-bottom: 1px solid var(--line); }
+.list-tools-right { display: flex; align-items: center; gap: 8px; }
+.list-result { font-size: .92rem; font-weight: 700; color: var(--ink-2); }
+/* 메인 결과 툴바 */
+.results .list-tools { margin: 8px 0 16px; }
+.results .list-tools-right { flex-wrap: wrap; }
+.results .active-chips { margin: 0; }
+
+.list-tools .cond-open { height: 36px; }
+
 .list-date-note { margin: 0; }
 .lrows { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
 .card-horizontal {
@@ -3047,3 +3061,31 @@ details[open] > *:not(summary) {
 .lb-nav:hover { transform: translateY(-50%); }
 .car-nav .ic, .lb-nav .ic { width: 24px; height: 24px; color: #fff; filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, .28)); }
 @media (max-width: 759px) { .lb-nav:hover { transform: none; } }
+
+.log-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.log-table th, .log-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.log-table th { font-weight: 800; color: var(--ink-2); }
+
+html, body, #view { min-height: 100%; }
+#view { display: flex; flex-direction: column; min-height: 100dvh; }
+.list-page, .home { flex: 1; display: flex; flex-direction: column; }
+.site-footer {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-top: auto;
+  background: #ffffff;
+  border-top: 1px solid var(--line, #e3e7e2);
+  padding: clamp(32px, 4vw, 48px) 0 calc(48px + env(safe-area-inset-bottom));
+  color: var(--ink-2, #4b5350);
+  box-sizing: border-box;
+  position: relative;
+  left: 0;
+  right: 0;
+}
+.filter-mod { display: grid; gap: 6px; margin: 4px 0 8px; }
+.filter-mod .fee-band-lbl { font-size: .78rem; font-weight: 800; color: var(--ink-2); letter-spacing: -.01em; }
+.list-tools { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 4px; }
+.list-result { font-weight: 800; }
+.list-tools-right { display: flex; align-items: center; gap: 8px; }
