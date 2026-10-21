@@ -1243,6 +1243,13 @@ function siteFooterHtml() {
     </div>
   </footer>`;
 }
+function commonFinderForm({ formAttr = "data-search", isList = false } = {}) {
+  return `<form class="finder-form${isList ? " list-finder-form" : ""}" role="search" ${formAttr}>
+    <label class="finder-field finder-destination"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
+    <button class="finder-field finder-static finder-cond" type="button" data-open-cond><small>조건</small><b data-cond-label>${esc(condSummary())}</b></button>
+    <button class="finder-go" type="submit">${ic("search")}<span>찾기</span></button>
+  </form>`;
+}
 function homeView() {
   const openings = S.camps.map((c) => [c, openingOf(c)]).filter(([c, o]) => o && showcaseEligible(c)).sort((a, b) => a[1].dd - b[1].dd);
   const themeItems = THEMES.map(([key, label, test]) => {
@@ -1269,11 +1276,7 @@ function homeView() {
     <div class="hero-in">
       <h1 id="hero-t"><span class="h1-a">취향대로 찾아 떠나는</span> <span class="h1-b">전국 ${fmt(S.camps.filter((c) => !c.du).length)}개 <em>자연 속으로.</em></span></h1>
       <p class="hero-summary">숲·계곡·바다, 나만의 쉼터를 조건으로 골라 보세요</p>
-      <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div><form class="finder-form" role="search" data-search>
-        <label class="finder-field finder-destination"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
-        <button class="finder-field finder-static finder-cond" type="button" data-open-cond><small>조건</small><b data-cond-label>${esc(condSummary())}</b></button>
-        <button class="finder-go" type="submit">${ic("search")}<span>찾기</span></button>
-      </form></div>
+      <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div>${commonFinderForm({ formAttr: "data-search", isList: false })}</div>
     </div>
   </section>
 
@@ -1713,10 +1716,7 @@ function listView() {
   return `<section class="list-page">
     <div class="list-head">
       <a class="link list-back" href="#/">${ic("left")}처음으로</a>
-      <form class="finder-form list-finder-form" role="search" data-list-search>
-        <label class="finder-field finder-destination"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
-        <button class="finder-go" type="submit">${ic("search")}<span>찾기</span></button>
-      </form>
+      ${commonFinderForm({ formAttr: "data-list-search", isList: true })}
       <div class="filter-zone list-filters">
         ${filterModules({
           areaAttr: "data-list-area-k",
@@ -1751,6 +1751,8 @@ function renderList({ reset = true } = {}) {
   const from = box.children.length, to = Math.min(S.listN, shown.length);
   box.insertAdjacentHTML("beforeend", shown.slice(from, to).map((x, i) => listRow(x, from + i)).join("") || (reset ? `<p class="empty">조건에 맞는 캠핑장이 없어요. 지역이나 요금대를 바꿔 보세요.</p>` : ""));
   const rc = $("[data-list-count]"); if (rc) rc.textContent = `검색된 결과 ${fmt(shown.length)}건`;
+  const cp = $("[data-cond-pills]"); if (cp) cp.innerHTML = condBadgeRow();
+  $$("[data-cond-label]").forEach((x) => (x.textContent = condSummary()));
   $("[data-list-more]").hidden = to >= shown.length;
   initCarousels(box);
 }
