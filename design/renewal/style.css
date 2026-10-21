@@ -3272,3 +3272,10 @@ html, body, #view { min-height: 100%; }
 /* 예약 방법: 긴 안내는 항목마다 줄을 나눠 읽기 쉽게(소유자 2026-10-21). */
 #sec-booking .bo-lines { display: flex; flex-direction: column; gap: 4px; }
 #sec-booking .bo-lines > span { display: block; }
+
+/* 모바일 상세: 로고만 있는 머리 줄을 없애고 ‘< 지역 · 찜 · 공유’ 줄이 맨 위(영우 님 2026-10-21). 로고·메뉴는 하단 탭/뒤로가기로 대체. */
+@media (max-width: 759px) {
+  body[data-view="detail"] .top { display: none; }
+  body[data-view="detail"] .d-bar { padding-top: calc(10px + env(safe-area-inset-top)); }
+  html:has(body[data-view="detail"]) { scroll-padding-top: 12px; }
+}
