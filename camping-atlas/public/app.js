@@ -3646,13 +3646,15 @@ function mediaHubHtml(d, c) {
     .sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
 
   const photoByUrl = new Map((d?.sns_images ?? []).filter((p) => p.url && (p.thumb || p.img)).map((p) => [p.url, p.thumb || p.img]));
+  const bigByUrl = new Map((d?.sns_images ?? []).filter((p) => p.url && (p.img || p.thumb)).map((p) => [p.url, p.img || hiThumb(p.thumb)]));
+  const thumbPool = [...new Set([...photosOf(c).slice(0, 6).map((u) => photoUrl(u)), ...(d?.sns_images ?? []).map((p) => p.img || hiThumb(p.thumb))].filter(Boolean))];
 
   // 3. 네이버: 영상 및 썸네일 글 통합 (영상 우선, 썸네일 있는 글 우선, 최신순)
   const seenNaver = new Set();
   const naverVideos = (d?.videos ?? []).filter((x) => x.url && isHost(x.url, /naver\.com$|naver\.me$/));
   const naverPosts = posts.filter((x) => isHost(x.url, /naver\.com$|naver\.me$/)).map((x) => ({
     ...x,
-    thumb: x.thumb || photoByUrl.get(x.url) || null,
+    thumb: bigByUrl.get(x.url) || x.thumb || null,
   }));
   const naverList = [...naverVideos, ...naverPosts]
     .filter((x) => x.url && !seenNaver.has(x.url) && seenNaver.add(x.url))
@@ -3663,7 +3665,7 @@ function mediaHubHtml(d, c) {
   const daumVideos = (d?.videos ?? []).filter((x) => x.url && isHost(x.url, /daum\.net$|kakao\.com$|tistory\.com$|brunch\.co\.kr$/));
   const daumPosts = posts.filter((x) => isHost(x.url, /daum\.net$|kakao\.com$|tistory\.com$|brunch\.co\.kr$/)).map((x) => ({
     ...x,
-    thumb: x.thumb || photoByUrl.get(x.url) || null,
+    thumb: bigByUrl.get(x.url) || x.thumb || null,
   }));
   const daumList = [...daumVideos, ...daumPosts]
     .filter((x) => x.url && !seenDaum.has(x.url) && seenDaum.add(x.url))
@@ -3684,9 +3686,12 @@ function mediaHubHtml(d, c) {
         title: x.title,
       }, "영상");
 
+      // 썸네일 고화질·빈칸 없음(영우 님 2026-10-21): 유튜브 1280px(hq720) → 480px, 그 밖은 같은 글의 큰 사진 → 고화질 판 → 캠핑장 사진 순.
+      const fb = thumbPool.length ? thumbPool[i % thumbPool.length] : "";
       const thumbUrl = isYt
-        ? `https://i.ytimg.com/vi/${encodeURIComponent(x.yt)}/hqdefault.jpg`
-        : (x.thumb || "");
+        ? `https://i.ytimg.com/vi/${encodeURIComponent(x.yt)}/hq720.jpg`
+        : (bigByUrl.get(x.url) || hiThumb(x.thumb) || fb);
+      const altUrl = isYt ? `https://i.ytimg.com/vi/${encodeURIComponent(x.yt)}/hqdefault.jpg` : (x.thumb && x.thumb !== thumbUrl ? x.thumb : "");
 
       const authorText = x.author || (x.src ? sourceName(x.src, hostOf(x.url) || platformLabel) : platformLabel);
       const metaText = [authorText, x.date ? formatKoreanDate(x.date) : ""].filter(Boolean).join(" · ") || (isYt ? "재생하기" : "영상 보기");
@@ -3695,7 +3700,7 @@ function mediaHubHtml(d, c) {
       const playIcon = `<span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14z"/></svg></span>`;
 
       const inner = thumbUrl
-        ? `<img src="${esc(thumbUrl)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">${playIcon}<b>${esc(titleText)}</b><i>${esc(metaText)}</i>`
+        ? `<img src="${esc(thumbUrl)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"${altUrl ? ` data-alt="${esc(altUrl)}"` : ""}${fb && fb !== thumbUrl ? ` data-fb="${esc(fb)}"` : ""} onerror="if(this.dataset.alt){this.src=this.dataset.alt;this.dataset.alt=''}else if(this.dataset.fb){this.src=this.dataset.fb;this.dataset.fb=''}else{this.closest('.vid-wrap')?.classList.add('vid-noimg-wrap')}">${playIcon}<b>${esc(titleText)}</b><i>${esc(metaText)}</i>`
         : `<div class="vid-noimg">${platIc(platformKey)}<span>${esc(platformLabel)}</span></div>${playIcon}<b>${esc(titleText)}</b><i>${esc(metaText)}</i>`;
 
       if (isYt) {
