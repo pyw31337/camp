@@ -1,8 +1,8 @@
 {
  "version": 1,
- "generated_at": "2026-10-21T03:23:26.269Z",
+ "generated_at": "2026-10-21T17:05:20.735Z",
  "campgrounds": 6305,
- "facts": 168059,
+ "facts": 168066,
  "row": "{cid, attr, value, grade, src, url?, at?, quote?, text?, n?, period?, label?, num?, count?} — src=gocamping에서 url·at이 없으면 campgrounds.ndjson의 gc_url·gc_at",
  "files": {
   "campgrounds.ndjson": 6305,
@@ -10,11 +10,11 @@
   "power.ndjson": 2419,
   "fire.ndjson": 9523,
   "vehicle.ndjson": 6294,
-  "pet.ndjson": 3783,
+  "pet.ndjson": 3784,
   "price.ndjson": 17647,
   "fee.ndjson": 441,
-  "time.ndjson": 5957,
-  "policy.ndjson": 1069,
+  "time.ndjson": 5962,
+  "policy.ndjson": 1070,
   "sanitary.ndjson": 5964,
   "site.ndjson": 3643,
   "amenity.ndjson": 13015,
@@ -28,9 +28,9 @@
   "nearby.ndjson": 21550
  },
  "by_source": {
-  "gocamping": 90862,
+  "gocamping": 90863,
   "operator_homepage": 5616,
-  "review_search": 22780,
+  "review_search": 22785,
   "localdata": 21550,
   "kakao_local": 2591,
   "naver_local": 2109,
@@ -39,16 +39,16 @@
   "gocamping_detail": 7156,
   "booking_engine": 1976,
   "cafe_mention": 130,
-  "operator_discovered": 1429,
+  "operator_discovered": 1430,
   "kakao_web": 71,
   "pilot_verified": 280,
   "dayuse_seed": 8558,
   "local_gov": 6
  },
  "by_grade": {
-  "CONFIRMED": 126491,
-  "OPERATOR": 16137,
-  "MENTION": 25151,
+  "CONFIRMED": 126492,
+  "OPERATOR": 16138,
+  "MENTION": 25156,
   "VERIFIED": 280
  },
  "sources": {
