@@ -31,13 +31,13 @@ for (const [w, h] of [[320, 740], [390, 844], [1366, 900]]) {
   // 2) 카드 3줄·잘림·중복
   const cardCheck = async (where) => {
     const r = await page.$$eval(".card[data-id]", (cards) => cards.slice(0, 24).map((c) => {
-      const rows = c.querySelectorAll(".rows-3 > li").length;
+      const rows = c.querySelectorAll(".rows > li").length;
       const cut = [...c.querySelectorAll(".card-body *")].filter((e) => { const s = getComputedStyle(e); return s.textOverflow === "ellipsis" && e.scrollWidth > e.clientWidth + 1 && e.getBoundingClientRect().width > 0; }).map((e) => e.className || e.tagName);
       const volt = c.querySelector(".bdgs .bdg-volt"); const fac = c.querySelector(".r-fac .rv")?.textContent ?? "";
       return { id: c.dataset.id, rows, cut, dupW: Boolean(volt && /\d+\s*W/.test(fac)), hasRows: Boolean(c.querySelector(".rows")) };
     }));
     for (const x of r) {
-      if (x.hasRows && x.rows !== 3) fails.push(`${tag} ${where} #${x.id}: 카드 정보 줄 ${x.rows}개(3줄이어야 함)`);
+      if (x.hasRows && x.rows !== 6) fails.push(`${tag} ${where} #${x.id}: 카드 정보 줄 ${x.rows}개(6줄이어야 함)`);
       if (w === 320 && x.cut.length) fails.push(`${tag} ${where} #${x.id}: ‘…’ 잘림 ${x.cut.slice(0, 3).join(", ")}`);
       if (x.dupW) fails.push(`${tag} ${where} #${x.id}: 사진 배지의 전기 W를 시설 줄에서 반복`);
     }

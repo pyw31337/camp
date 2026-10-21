@@ -967,11 +967,11 @@ const mapLink = (name, lat, lng) => `https://map.kakao.com/link/map/${encodeURIC
 
 function rowsHtml(c) {
   const f = facts(c);
-  // 주변은 마트·편의점·정육점 순서 고정(' · ' 구분), 요금은 ‘2만~8만원’.
   const near = nearLine(c, " · "), fm = feeMain(c);
   const nearX = near ? { v: near } : null;
-  const feeX = fm?.text ? { v: `${fm.text}${fm.est ? " 추정" : ""}`, g: GR(c.fee.grade) } : null;
-  return `<ul class="rows">${cardRow("주차", "car", f.park)}${cardRow("전기", "bolt", f.power)}${cardRow("장작", "flame", f.fire)}${cardRow("주변", "store", nearX).replace("<li>", '<li class="r-near">')}${cardRow("요금", "won", feeX)}</ul>`;
+  const feeX = fm?.text ? { v: `${fm.text}${fm.est ? " 추정" : ""}`, g: GR(c.fee?.grade) } : null;
+  const sizeX = c.sizes?.[0] ? { v: Array.isArray(c.sizes[0]) ? `${c.sizes[0][0]}×${c.sizes[0][1]}m` : String(c.sizes[0]) } : null;
+  return `<ul class="rows">${cardRow("규격", "layers", sizeX)}${cardRow("전기", "bolt", f.power)}${cardRow("화로", "flame", f.fire)}${cardRow("주차", "car", f.park)}${cardRow("주변", "store", nearX).replace("<li>", '<li class="r-near">')}${cardRow("요금", "won", feeX)}</ul>`;
 }
 function rowsHtmlHorizontal(c) {
   const f = facts(c), ti = c.ti ?? {};
