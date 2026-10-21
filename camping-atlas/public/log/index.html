@@ -831,7 +831,7 @@
       <span class="brand-mark"><svg><use href="#i-tent"/></svg></span>
       <div class="brand-title">
         <strong>모여라캠핑 운영 대시보드 <span class="live-dot" title="실시간 활성"></span></strong>
-        <span>찜(Saves) & 캠퍼 한마디 실시간 운영 기록</span>
+        <span>찜 · 캠퍼 한마디 운영 기록</span>
       </div>
     </div>
     <div class="header-actions">
@@ -878,11 +878,11 @@
     </div>
     <div class="stat-card">
       <div class="stat-head">
-        <span>방문자 / 기기</span>
+        <span>환경 정보</span>
         <span class="stat-icon red"><svg><use href="#i-user"/></svg></span>
       </div>
-      <div class="stat-num" id="stat-unique-ips">-</div>
-      <div class="stat-sub">순수 IP 기준 · 모바일 <b id="stat-mobile-ratio">-</b>%</div>
+      <div class="stat-num" id="stat-meta-count">-</div>
+      <div class="stat-sub">화면·언어·시간대가 있는 기록</div>
     </div>
   </section>
 
@@ -921,7 +921,7 @@
     <div class="filters-row">
       <div class="search-wrap">
         <svg><use href="#i-search"/></svg>
-        <input type="search" id="q" class="search-input" placeholder="캠핑장명, 닉네임, 댓글 내용, IP, 기기 검색..." autocomplete="off">
+        <input type="search" id="q" class="search-input" placeholder="캠핑장명, 닉네임, 댓글 내용 검색" autocomplete="off">
         <button type="button" id="search-clear" class="search-clear" aria-label="검색어 지우기">✕</button>
       </div>
 
@@ -966,13 +966,6 @@
       <button type="button" class="modal-close-btn" id="modal-close-x" aria-label="닫기">✕</button>
     </div>
     <dl class="kv-table" id="modal-kv-body"></dl>
-    <div>
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-        <span style="font-size:0.78rem; font-weight:700; color:var(--ink-3);">User-Agent 원문:</span>
-        <button type="button" class="btn" id="btn-copy-ua" style="height:26px; padding:0 8px; font-size:0.74rem;">UA 복사</button>
-      </div>
-      <pre class="ua-box" id="modal-ua-box"></pre>
-    </div>
     <div style="text-align:right;">
       <button type="button" class="btn btn-primary" id="modal-close-btn">닫기</button>
     </div>
@@ -985,11 +978,37 @@
 <script>
 (() => {
   // ── Supabase 설정 ─────────────────────────────────────
-  const SB = {
-    url: "https://zgnetdxqzsnmzdvoxzbw.supabase.co",
-    key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnbmV0ZHhxenNubXpkdm94emJ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIxMjUzMzIsImV4cCI6MjEwNzcwMTMzMn0.ZMsY5TT2LVTOFctHxSB7IiAuCCR3VKvX2-Y7PDdrO88"
-  };
-  const headers = { apikey: SB.key, Authorization: `Bearer ${SB.key}` };
+  // 운영 로그가 메인 앱과 다른, 만료된 키를 갖지 않도록 현재 배포된 메인의
+  // 공개 설정을 읽는다. 키 교체 후에도 로그 화면만 멈추지 않는다.
+  const SB = { url: "", key: "" };
+  let headers = {};
+  let configPromise = null;
+  async function ensureConfig() {
+    if (SB.url && SB.key) return true;
+    if (!configPromise) configPromise = (async () => {
+      // 로컬 미리보기에는 공개 키를 저장하지 않는다. 이때만 실제 공개본의
+      // 동일 설정을 읽어 배포본과 같은 찜 기록을 검증한다.
+      const targets = [new URL("../", location.href).href];
+      if (/^(localhost|127\.0\.0\.1)$/i.test(location.hostname)) targets.push("https://pyw31337.github.io/camp/");
+      for (const target of [...new Set(targets)]) {
+        try {
+          const r = await fetch(target, { cache: "no-store" });
+          if (!r.ok) continue;
+          const doc = new DOMParser().parseFromString(await r.text(), "text/html");
+          const url = doc.querySelector('meta[name="supabase-url"]')?.content?.trim();
+          const key = doc.querySelector('meta[name="supabase-anon-key"]')?.content?.trim();
+          if (!url || !key) continue;
+          SB.url = url; SB.key = key;
+          headers = { apikey: key, Authorization: `Bearer ${key}` };
+          return true;
+        } catch { /* 다음 공개 설정 후보를 확인 */ }
+      }
+      return false;
+    })();
+    const ready = await configPromise;
+    if (!ready) configPromise = null;
+    return ready;
+  }
 
   // ── 상태 변수 ─────────────────────────────────────────
   let state = {
@@ -1178,6 +1197,20 @@
     console.warn("경량 camp-names.json 로드 실패: 폴백 가동");
   }
 
+  async function loadSaveLogs(limit = 400) {
+    const rpc = await fetch(`${SB.url}/rest/v1/rpc/safe_save_log_feed`, {
+      method: "POST",
+      headers: { ...headers, "Content-Type": "application/json" },
+      body: JSON.stringify({ row_limit: limit })
+    });
+    if (rpc.ok) return rpc.json();
+    // 017 적용 전의 운영 DB도 중단 없이 읽되, 이미 최소화한 필드만 요청한다.
+    if (rpc.status !== 404) throw new Error(`찜 기록 조회 실패 (${rpc.status})`);
+    const legacy = await fetch(`${SB.url}/rest/v1/save_log?select=created_at,action,campground_id,language,timezone,screen,platform&order=created_at.desc&limit=${encodeURIComponent(limit)}`, { headers });
+    if (!legacy.ok) throw new Error(`찜 기록 조회 실패 (${legacy.status})`);
+    return legacy.json();
+  }
+
   function nameOf(id) {
     if (!id) return "알 수 없는 캠핑장";
     return state.names.get(String(id)) || `캠핑장 #${id}`;
@@ -1189,16 +1222,16 @@
     refreshIcon.style.animation = "spin 0.8s linear infinite";
 
     try {
+      if (!await ensureConfig()) throw new Error("메인 앱의 Supabase 공개 설정을 찾지 못했습니다.");
       // 1. 이름 사전 비동기 백그라운드 준비
       const namesPromise = state.names.size ? Promise.resolve() : loadCampNames();
 
       // 2. Supabase 로그 병렬 조회
-      const [sr, cr] = await Promise.all([
-        fetch(`${SB.url}/rest/v1/save_log?select=created_at,action,campground_id,ip,language,timezone,screen,platform,user_agent&order=created_at.desc&limit=400`, { headers }),
+      const [rawSaves, cr] = await Promise.all([
+        loadSaveLogs(400),
         fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,created_at,is_deleted&order=created_at.desc&limit=200`, { headers })
       ]);
 
-      const rawSaves = sr.ok ? await sr.json() : [];
       const rawComments = cr.ok ? await cr.json() : [];
 
       await namesPromise;
@@ -1227,10 +1260,14 @@
       // 필터 적용 및 목록 렌더링
       applyFilters();
 
-      document.getElementById("last-updated-txt").textContent = `마지막 갱신: ${new Date().toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}`;
+      document.getElementById("last-updated-txt").textContent = `동기화 완료 · ${new Date().toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}`;
+      return true;
     } catch (err) {
       console.error("데이터 로드 실패:", err);
-      showToast("데이터를 불러오는 중 오류가 발생했습니다.");
+      document.getElementById("last-updated-txt").textContent = "연결 실패 · 다시 시도해 주세요";
+      document.getElementById("feed-container").innerHTML = `<div class="empty-state"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2m1 15h-2v-2h2zm0-4h-2V7h2z"/></svg><h3>기록을 불러오지 못했습니다</h3><p>연결을 확인한 뒤 새로고침해 주세요.</p></div>`;
+      showToast("기록 연결에 실패했습니다. 다시 시도해 주세요.");
+      return false;
     } finally {
       refreshIcon.style.animation = "none";
     }
@@ -1249,8 +1286,7 @@
         campName: nameOf(s.campground_id),
         createdAt: s.created_at,
         timeMs: Date.parse(s.created_at) || 0,
-        ip: s.ip || "-",
-        device: parseDevice(s.user_agent, s.platform, s.screen),
+        device: parseDevice("", s.platform, s.screen),
         raw: s
       });
     }
@@ -1266,8 +1302,7 @@
         content: c.content || "",
         createdAt: c.created_at,
         timeMs: Date.parse(c.created_at) || 0,
-        ip: c._dev ? c._dev.ip : "-",
-        device: c._dev ? parseDevice(c._dev.user_agent, c._dev.platform, c._dev.screen) : null,
+        device: c._dev ? parseDevice("", c._dev.platform, c._dev.screen) : null,
         raw: c
       });
     }
@@ -1292,10 +1327,7 @@
     const liveComments = state.comments.filter((x) => !x.is_deleted).length;
     const delComments = totalComments - liveComments;
 
-    const ips = new Set(state.saves.map((x) => x.ip).filter(Boolean));
-    const mobileCount = state.feedItems.filter((x) => x.device && x.device.type === "mobile").length;
-    const totalWithDev = state.feedItems.filter((x) => x.device).length;
-    const mobileRatio = totalWithDev > 0 ? Math.round((mobileCount / totalWithDev) * 100) : 0;
+    const metaCount = state.saves.filter((x) => x.screen || x.platform || x.timezone || x.language).length;
 
     document.getElementById("stat-total-saves").textContent = totalSaves.toLocaleString();
     document.getElementById("stat-today-saves").textContent = todaySaves.toLocaleString();
@@ -1307,8 +1339,7 @@
     document.getElementById("stat-live-comments").textContent = liveComments.toLocaleString();
     document.getElementById("stat-del-comments").textContent = delComments.toLocaleString();
 
-    document.getElementById("stat-unique-ips").textContent = ips.size.toLocaleString();
-    document.getElementById("stat-mobile-ratio").textContent = mobileRatio;
+    document.getElementById("stat-meta-count").textContent = metaCount.toLocaleString();
 
     // 탭 카운트 갱신
     document.getElementById("tab-cnt-all").textContent = state.feedItems.length;
@@ -1373,7 +1404,7 @@
 
       // 4. 검색어 필터
       if (q) {
-        const targetStr = `${item.campName} ${item.campId} ${item.nickname || ""} ${item.content || ""} ${item.ip} ${item.device?.label || ""} ${item.device?.os || ""} ${item.device?.browser || ""}`.toLowerCase();
+        const targetStr = `${item.campName} ${item.campId} ${item.nickname || ""} ${item.content || ""} ${item.device?.label || ""} ${item.device?.os || ""} ${item.device?.browser || ""}`.toLowerCase();
         if (!targetStr.includes(q)) return false;
       }
 
@@ -1479,14 +1510,6 @@
                 ` : `<span style="color:var(--ink-3);">기기 정보 없음</span>`}
               </div>
 
-              <div class="meta-right">
-                <span class="ip-pill" data-ip-click="${esc(item.ip)}" title="클릭하여 IP 복사">
-                  <span>${esc(item.ip)}</span>
-                </span>
-                ${item.ip && item.ip !== "-" ? `
-                  <button type="button" class="camp-pill-btn" data-filter-ip="${esc(item.ip)}" style="font-size:0.7rem; padding:1px 6px;">이 IP 모아보기</button>
-                ` : ""}
-              </div>
             </div>
           </article>
         `;
@@ -1503,29 +1526,6 @@
         navigator.clipboard.writeText(btn.dataset.copyId).then(() => {
           showToast(`캠핑장 ID (#${btn.dataset.copyId})가 복사되었습니다.`);
         });
-      });
-    });
-
-    box.querySelectorAll("[data-ip-click]").forEach((el) => {
-      el.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const ip = el.dataset.ipClick;
-        if (!ip || ip === "-") return;
-        navigator.clipboard.writeText(ip).then(() => {
-          showToast(`IP 주소 (${ip})가 클립보드에 복사되었습니다.`);
-        });
-      });
-    });
-
-    box.querySelectorAll("[data-filter-ip]").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const input = document.getElementById("q");
-        input.value = btn.dataset.filterIp;
-        state.q = btn.dataset.filterIp.toLowerCase();
-        document.getElementById("search-clear").classList.add("show");
-        applyFilters();
-        showToast(`IP (${btn.dataset.filterIp}) 기준 필터 적용`);
       });
     });
 
@@ -1551,14 +1551,8 @@
       <dt>플랫폼</dt><dd>${esc(d.platform || "미제공")}</dd>
     `;
 
-    document.getElementById("modal-ua-box").textContent = d.ua || "UA 정보 없음";
     modal.showModal();
   }
-
-  document.getElementById("btn-copy-ua").addEventListener("click", () => {
-    const text = document.getElementById("modal-ua-box").textContent;
-    navigator.clipboard.writeText(text).then(() => showToast("User-Agent가 복사되었습니다."));
-  });
 
   const closeModal = () => document.getElementById("deviceModal").close();
   document.getElementById("modal-close-x").addEventListener("click", closeModal);
@@ -1575,7 +1569,7 @@
       return;
     }
 
-    const headersRow = ["시각(ISO)", "유형", "캠핑장ID", "캠핑장명", "작성자", "내용", "IP", "기기명", "OS", "브라우저", "화면"];
+    const headersRow = ["시각(ISO)", "유형", "캠핑장ID", "캠핑장명", "작성자", "내용", "기기명", "OS", "브라우저", "화면"];
     const rows = items.map((it) => [
       `"${it.createdAt || ""}"`,
       `"${it.type}"`,
@@ -1583,7 +1577,6 @@
       `"${(it.campName || "").replace(/"/g, '""')}"`,
       `"${(it.nickname || "").replace(/"/g, '""')}"`,
       `"${(it.content || "").replace(/"/g, '""')}"`,
-      `"${it.ip || ""}"`,
       `"${it.device?.label || ""}"`,
       `"${it.device?.os || ""}"`,
       `"${it.device?.browser || ""}"`,
@@ -1656,9 +1649,8 @@
   });
 
   // ── 수동 및 자동 갱신 ───────────────────────────────────
-  document.getElementById("btn-refresh").addEventListener("click", () => {
-    fetchLogs();
-    showToast("새로고침되었습니다.");
+  document.getElementById("btn-refresh").addEventListener("click", async () => {
+    if (await fetchLogs()) showToast("최신 기록으로 갱신했습니다.");
   });
 
   const autoBtn = document.getElementById("btn-auto-refresh");

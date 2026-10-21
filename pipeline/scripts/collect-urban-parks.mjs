@@ -20,9 +20,23 @@ for (let page = 1; page <= 40 && all.length < total; page++) {
   total = Number(body.totalCount ?? 0); if (!items.length) break; all.push(...items);
 }
 if (all.length < total * 0.9) { console.log(`urban parks: 일부만 받음 ${all.length}/${total} — 기존 파일 유지`); process.exit(0); }
+const clean = (v) => String(v ?? "").replace(/\s+/g, " ").trim();
+const FACILITY_GROUPS = [
+  ["운동", "sport", "mvmFclty"], ["놀이", "play", "amsmtFclty"], ["편의", "convenience", "cnvnncFclty"],
+  ["문화", "culture", "cltrFclty"], ["기타", "other", "etcFclty"],
+];
 const keep = all.filter((r) => Number(r.parkAr) >= 30000 && !/어린이|소공원|묘지/.test(r.parkSe) && Number(r.latitude) > 33 && Number(r.longitude) > 124)
-  .map((r) => ({ no: r.manageNo, name: r.parkNm, se: r.parkSe, addr: r.rdnmadr || r.lnmadr, lat: +Number(r.latitude).toFixed(5), lng: +Number(r.longitude).toFixed(5), area: Number(r.parkAr),
-    fac: [r.mvmFclty, r.amsmtFclty, r.cnvnncFclty, r.cltrFclty, r.etcFclty].filter(Boolean).join(" · ").slice(0, 200), inst: r.institutionNm, tel: r.phoneNumber, ref: r.referenceDate }));
+  .map((r) => {
+    // 한 줄 요약만 남기면 공원마다 갖춘 실제 시설을 비교할 수 없었다. 원문 칸의
+    // 분류를 보존해 다음 발행에서 ‘공원 정보’ 카드와 상세로 재사용한다.
+    const facility_groups = FACILITY_GROUPS.map(([label, key, field]) => ({ key, label, text: clean(r[field]) })).filter((x) => x.text);
+    return {
+      no: r.manageNo, name: r.parkNm, se: r.parkSe, addr: r.rdnmadr || r.lnmadr,
+      lat: +Number(r.latitude).toFixed(5), lng: +Number(r.longitude).toFixed(5), area: Number(r.parkAr),
+      facility_groups, fac: facility_groups.map((x) => x.text).join(" · ").slice(0, 200),
+      inst: r.institutionNm, tel: r.phoneNumber, ref: r.referenceDate,
+    };
+  });
 // 기존 파일 위에 누적한다(DATA_MERGE_POLICY): 이번 응답에 없는 공원·빈 칸은 지우지 않고, 같은 공원은 기준일(ref)이 더 최근일 때만 바꾼다.
 const outPath = fileURLToPath(new URL("../registry/urban-parks.json", import.meta.url));
 const prev = existsSync(outPath) ? JSON.parse(readFileSync(outPath, "utf8")).parks ?? [] : [];
