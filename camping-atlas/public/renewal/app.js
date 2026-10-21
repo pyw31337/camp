@@ -1340,7 +1340,9 @@ function saveCommit(id) {
   if (location.hash.startsWith("#/compare") || location.hash.startsWith("#/saved") || location.hash.startsWith("#/saves-log")) route();
 }
 function syncCompare() {
-  $$("[data-compare-count]").forEach((x) => { x.textContent = S.saved.length; x.hidden = !S.saved.length; });
+  // 역할 분리: ‘비교’ 숫자 = 지금 비교에 고른 곳 수(없으면 숨김), ‘찜’ 숫자 = 찜한 곳 수
+  const picked = S.pick.filter((id) => S.saved.includes(id)).length;
+  $$("[data-compare-count]").forEach((x) => { x.textContent = picked; x.hidden = !picked; });
   $$("[data-saved-count]").forEach((x) => { x.textContent = S.saved.length; x.hidden = !S.saved.length; });
 }
 
@@ -5062,6 +5064,7 @@ async function compareView() {
 }
 
 function bindCompare() {
+  syncCompare();
   $("[data-diff]")?.addEventListener("change", (e) => {
     $(".cmp-table")?.classList.toggle("diff-on", e.target.checked);
     $(".cmp-cards-view")?.classList.toggle("diff-on", e.target.checked);
@@ -5310,6 +5313,7 @@ async function render() {
   return name;
 }
 async function route() {
+  syncCompare();
   const prev = lastRoute;
   if (prev === "home") S.homeScroll = scrollY;
   const name = await render();

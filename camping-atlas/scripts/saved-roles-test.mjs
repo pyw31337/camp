@@ -15,6 +15,14 @@ for (const [w, h] of [[320, 740], [390, 844], [1366, 900]]) {
   await page.goto(base); await page.waitForSelector(".card", { timeout: 30000 });
   await page.evaluate((ids) => { for (const k of Object.keys(localStorage)) if (/mc-(saved|pick)/.test(k)) localStorage.removeItem(k); localStorage.setItem("mc-saved", JSON.stringify(ids)); localStorage.setItem("mc-pick", "[]"); }, ids);
   await page.goto(`${base}#/saved`); await page.reload(); await page.waitForSelector(".saved-grid .card", { timeout: 30000 });
+  { // 내비 숫자: 찜 = 찜한 곳 수, 비교 = 고른 곳 수(0이면 숨김)
+    const nb = await page.evaluate(() => { const g = (sel) => [...document.querySelectorAll(sel)].filter((b) => b.closest("a").getBoundingClientRect().width > 0).map((b) => (b.hidden ? "" : b.textContent.trim())); return { cmp: g("[data-compare-count]"), saved: g("[data-saved-count]") }; });
+    if (!nb.saved.length || nb.saved.some((t) => t !== String(ids.length))) fails.push(`${tag} 메뉴: ‘찜’ 숫자 ${nb.saved} (찜 ${ids.length})`);
+    if (nb.cmp.some((t) => t !== "")) fails.push(`${tag} 메뉴: 고른 곳 0인데 ‘비교’ 숫자 ${nb.cmp}`);
+    await page.evaluate((p) => localStorage.setItem("mc-pick", JSON.stringify(p)), ids.slice(1, 3)); await page.reload(); await page.waitForSelector(".saved-grid .card", { timeout: 30000 });
+    const nb2 = await page.evaluate(() => [...document.querySelectorAll("[data-compare-count]")].filter((b) => b.closest("a").getBoundingClientRect().width > 0).map((b) => (b.hidden ? "" : b.textContent.trim())));
+    if (!nb2.length || nb2.some((t) => t !== "2")) fails.push(`${tag} 메뉴: 2곳 골랐는데 ‘비교’ 숫자 ${nb2}`);
+  }
   const r = await page.evaluate(() => {
     const vis = (e) => e.getBoundingClientRect().width > 0 && getComputedStyle(e).visibility !== "hidden";
     const v = document.querySelector("#view");
