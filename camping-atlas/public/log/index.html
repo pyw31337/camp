@@ -1509,8 +1509,7 @@
 
       for (const item of groupItems) {
         const d = item.device;
-        const exploreUrl = `../explore/#/c/${encodeURIComponent(item.campId)}`;
-        const renewalUrl = `../renewal/#/camp/${encodeURIComponent(item.campId)}`;
+        const exploreUrl = `../place/${encodeURIComponent(item.campId)}/`;
 
         // 뱃지 판별
         let badgeClass = "badge-add", badgeText = "+ 찜하기";
@@ -1530,12 +1529,11 @@
 
             <div class="log-main">
               <div class="camp-title-row">
-                <a class="camp-name-link" href="${exploreUrl}" target="_blank" rel="noopener" title="탐색 화면에서 보기">
+                <a class="camp-name-link" href="${exploreUrl}" target="_blank" rel="noopener" title="상세 보기">
                   ${esc(item.campName)}
                 </a>
                 <div class="camp-links">
-                  <a href="${exploreUrl}" class="camp-pill-btn primary" target="_blank" rel="noopener">탐색 ↗</a>
-                  <a href="${renewalUrl}" class="camp-pill-btn" target="_blank" rel="noopener">리뉴얼 ↗</a>
+                  <a href="${exploreUrl}" class="camp-pill-btn primary" target="_blank" rel="noopener">상세 ↗</a>
                   <button type="button" class="camp-pill-btn" data-copy-id="${esc(item.campId)}" title="캠핑장 ID 복사">#${esc(item.campId)}</button>
                 </div>
               </div>

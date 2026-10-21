@@ -72,9 +72,8 @@ jobs:
           node-version: 22
       - name: app.js 복사본 동기화 확인
         run: |
-          for f in camping-atlas/public/app.js camping-atlas/public/renewal/app.js camping-atlas/public/explore/app.js; do
-            cmp design/renewal/app.js "$f" || { echo "::error::$f 가 design/renewal/app.js 와 다릅니다. 복사본을 맞추세요."; exit 1; }
-          done
+          cmp design/renewal/app.js camping-atlas/public/app.js || { echo "::error::camping-atlas/public/app.js 가 design/renewal/app.js 와 다릅니다. 복사본을 맞추세요."; exit 1; }
+          test ! -e camping-atlas/public/explore/app.js && test ! -e camping-atlas/public/renewal/app.js || { echo "::error::explore/·renewal/ 앱 복사본은 없어야 합니다(앱은 루트 하나)."; exit 1; }
       - name: Install Playwright
         run: |
           mkdir -p /tmp/pw && cd /tmp/pw && npm init -y >/dev/null && npm i playwright@1 >/dev/null
@@ -82,6 +81,7 @@ jobs:
       - name: 홈 레일 드래그/스와이프 회귀 테스트
         run: |
           node scripts/split-catalog.mjs
+          node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public >/dev/null
           (cd camping-atlas/public && python3 -m http.server 8765 >/tmp/srv.log 2>&1 &)
           sleep 2
           PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/rail-swipe-test.mjs http://127.0.0.1:8765/
@@ -111,6 +111,8 @@ jobs:
         run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/saved-roles-test.mjs http://127.0.0.1:8765/
       - name: UI3 regression (no rank badges, muted counts, condition chips, no helper text, no sort, capsules, 6 card rows, theme icons)
         run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/ui3-test.mjs http://127.0.0.1:8765/
+      - name: Path URLs, legacy redirects, share button and OG pages
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/routes-share-test.mjs http://127.0.0.1:8765/
       - name: Map engine chooses Kakao (OSM only on real failure)
         run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/map-engine-test.mjs http://127.0.0.1:8765/
       - name: 상세 화면 소유자 요청(아이콘 네모·축제 포스터·후기 썸네일·주소 아이콘·예약방법 줄바꿈) 회귀 테스트

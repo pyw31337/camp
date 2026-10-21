@@ -45,7 +45,7 @@ for (const [w, h] of [[320, 740], [390, 844], [1366, 900]]) {
   };
   await cardCheck("홈");
   // 3) 목록 조건
-  await page.goto(`${base}#/list?fee=3to5&stype=DECK`); await page.waitForTimeout(2500);
+  await page.goto(`${base}list?fee=3to5&stype=DECK`); await page.waitForTimeout(2500);
   await page.waitForSelector(".lrows .card", { timeout: 30000 });
   await cardCheck("목록");
   const lst = await page.evaluate(() => {
@@ -60,13 +60,13 @@ for (const [w, h] of [[320, 740], [390, 844], [1366, 900]]) {
     if (!(await page.evaluate(() => document.querySelector("#cond-dialog")?.open))) fails.push(`${tag} 목록: ‘조건’ → 조건 시트가 안 열림`);
     await page.keyboard.press("Escape");
     await page.click('.list-page .cond-pill[data-fee-band=""]'); await page.waitForTimeout(1200);
-    if (/fee=/.test(await page.evaluate(() => location.hash))) fails.push(`${tag} 목록: 요금 알약 × 로 지워지지 않음`);
+    if (/fee=/.test(await page.evaluate(() => (location.pathname + location.search)))) fails.push(`${tag} 목록: 요금 알약 × 로 지워지지 않음`);
   } else {
     if (!lst.filters) fails.push(`${tag} 목록: PC 칩 줄이 사라짐`);
     if (lst.pills.includes("데크")) fails.push(`${tag} 목록: PC에 사이트 알약이 칩 줄과 중복`); // 요금은 조건 시트에서도 고르므로 UI 3차부터 PC에도 × 칩으로 보인다
   }
   // 4) 상세 바로가기
-  await page.goto(`${base}#/c/${detailId}`); await page.waitForSelector(".d-jump-bar", { timeout: 30000 }); await page.waitForTimeout(2500);
+  await page.goto(`${base}place/${detailId}`); await page.waitForSelector(".d-jump-bar", { timeout: 30000 }); await page.waitForTimeout(2500);
   await page.evaluate(() => scrollTo(0, document.getElementById("sec-rules")?.getBoundingClientRect().top + scrollY - 40)); await page.waitForTimeout(700);
   const j1 = await page.evaluate(() => ({ top: Math.round(document.querySelector(".d-jump-bar").getBoundingClientRect().top), cur: document.querySelector(".d-jump-bar [aria-current]")?.dataset.jump }));
   if (j1.top > 1) fails.push(`${tag} 상세: 바로가기 막대가 위에 붙지 않음(top ${j1.top})`);
@@ -84,7 +84,7 @@ for (const [w, h] of [[320, 740], [390, 844], [1366, 900]]) {
 // 5) 정리한 주소
 {
   const page = await browser.newPage();
-  for (const [path, want] of [["guide/", /#\/$/], ["openings/", /#\/theme\/OPEN$/], ["vision/", /#\/$/]]) {
+  for (const [path, want] of [["guide/", /:\d+\/$/], ["openings/", /\/theme\/OPEN$/], ["vision/", /:\d+\/$/]]) {
     await page.goto(base + path); await page.waitForTimeout(1500);
     const u = page.url();
     if (!want.test(u)) fails.push(`${path}: ${u} 로 감(기대 ${want})`);

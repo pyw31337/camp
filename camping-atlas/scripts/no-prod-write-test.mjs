@@ -20,12 +20,12 @@ for (const [w, h] of [[1366, 900], [390, 844]]) {
   await tap(".card [data-save]"); await tap(".card [data-save]");
   const id = await page.$eval(".card[data-id]", (e) => e.dataset.id).catch(() => null);
   const num = await page.$$eval(".card[data-id]", (cs) => cs.map((c) => c.dataset.id).find((x) => /^\d+$/.test(x))).catch(() => null);
-  await page.goto(`${base}#/c/${num ?? id}`); await page.waitForTimeout(2500);
+  await page.goto(`${base}place/${num ?? id}`); await page.waitForTimeout(2500);
   await tap(".d-head [data-save], [data-save]"); await tap(".d-head [data-save], [data-save]");
   const form = await page.$("form.cmt-form");
   if (form) { await page.fill("form.cmt-form [name=nickname]", "테스트").catch(() => {}); await page.fill("form.cmt-form [name=content]", "테스트(전송 안 됨)").catch(() => {}); await page.$eval("form.cmt-form", (f) => f.requestSubmit()).catch(() => {}); await page.waitForTimeout(800); }
-  await page.goto(`${base}#/compare`); await page.waitForTimeout(1500); await tap(".heart.on");
-  await page.goto(`${base}#/saves-log`); await page.waitForTimeout(1500);
+  await page.goto(`${base}compare`); await page.waitForTimeout(1500); await tap(".heart.on");
+  await page.goto(`${base}saves-log`); await page.waitForTimeout(1500);
   await ctx.close();
 }
 await browser.close();

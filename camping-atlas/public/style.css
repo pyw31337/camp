@@ -1245,6 +1245,10 @@ body.map-mode { overflow: hidden; height: 100dvh; }
 .heart.on:active, .heart:active { transform: scale(.9); }
 .heart.heart-label { width: auto; height: 40px; margin: 0; padding: 0 14px; gap: 6px; display: inline-flex; background: var(--soft); color: var(--ink-2); font-weight: 800; font-size: .9rem; }
 .heart.heart-label.on { color: var(--flame); background: #ffeae2; }
+/* 상세 상단 ‘공유’ — 찜 버튼과 같은 캡슐(2026-10-21) */
+.d-share { height: 40px; padding: 0 14px; gap: 6px; display: inline-flex; align-items: center; border: 0; border-radius: 999px; background: var(--soft); color: var(--ink-2); font: inherit; font-weight: 800; font-size: .9rem; cursor: pointer; }
+.d-share .ic { width: 18px; height: 18px; }
+.d-bar .d-share { margin-left: -4px; }
 .mi .heart { position: absolute; top: 6px; right: 6px; margin: 0; }
 .d-dock .heart { width: 48px; height: 48px; margin: 0; background: var(--soft); }
 .trows { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(28px, 3.5vw, 44px); min-width: 0; }

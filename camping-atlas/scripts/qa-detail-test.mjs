@@ -24,13 +24,13 @@ for (const vp of [{ width: 1366, height: 900 }, { width: 390, height: 844 }]) {
   page.on("pageerror", (e) => errs.push(e.message));
   await page.route(/supabase\.co|open-meteo\.com|dapi\.kakao|daumcdn/, (r) => r.abort());
   for (const c of cases) {
-    await page.goto(`${url}#/c/${c.id}`, { waitUntil: "domcontentloaded" });
+    await page.goto(`${url}place/${c.id}`, { waitUntil: "domcontentloaded" });
     await page.waitForFunction(() => document.querySelector(".d-sec, [class*=detail]") && document.body.innerText.length > 400, null, { timeout: 30000 }).catch(() => fails.push(`${vp.width} ${c.id}: 상세가 열리지 않음`));
     await page.waitForTimeout(1200);
     const t = await page.evaluate(() => document.body.innerText);
     for (const r of c.no ?? []) if (r.test(t)) fails.push(`${vp.width} ${c.id}: 있으면 안 되는 문구 ${r}`);
     for (const r of c.has ?? []) if (!r.test(t)) fails.push(`${vp.width} ${c.id}: 있어야 할 문구 없음 ${r}`);
-    if (c.go && !page.url().endsWith(`#/c/${c.go}`)) fails.push(`${vp.width} ${c.id}: 합친 곳(${c.go})으로 옮겨지지 않음 — ${page.url()}`);
+    if (c.go && !page.url().endsWith(`/place/${c.go}`)) fails.push(`${vp.width} ${c.id}: 합친 곳(${c.go})으로 옮겨지지 않음 — ${page.url()}`);
   }
   if (errs.length) fails.push(`${vp.width} pageerror: ${errs.slice(0, 3).join(" | ")}`);
   await ctx.close();

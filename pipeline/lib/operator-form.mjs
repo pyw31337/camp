@@ -36,7 +36,7 @@ export function publicItem(row) {
   return { id: Number(row.id), cid: String(row.campground_id), at: new Date(row.reviewed_at ?? row.created_at).toISOString(), role: row.submitter_role, evidence, fields };
 }
 /** registry 항목 → 사실 행(OPERATOR 등급, 원천 operator_form). 같은 캠핑장·속성은 가장 최근 승인만 */
-export function operatorFormFacts(items = [], pageUrl = (cid) => `https://pyw31337.github.io/camp/explore/#/c/${cid}`) {
+export function operatorFormFacts(items = [], pageUrl = (cid) => `https://pyw31337.github.io/camp/place/${cid}/`) {
   const latest = new Map();
   for (const it of [...items].sort((a, b) => a.at.localeCompare(b.at))) {
     for (const [attr, value] of Object.entries(it.fields)) latest.set(`${it.cid}|${attr}`, { cid: it.cid, attr, value, grade: "OPERATOR", src: "operator_form", url: it.evidence ?? pageUrl(it.cid), at: it.at, text: `운영자 직접 등록(${it.role === "OWNER" ? "대표" : it.role === "STAFF" ? "직원" : "위탁 운영"}) · 검토 승인` });

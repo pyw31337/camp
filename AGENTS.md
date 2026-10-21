@@ -99,7 +99,7 @@
 홈의 가로 레일(실시간 인기, 곧 오픈, 긍정 후기, 테마로 고르기, 테마 줄)은 여러 에이전트가 반복해서 고치다 깨뜨린 영역이다.
 `initCarousels`, `initDraggableRails`, `.rail`, `.car-track`, `touch-action`, `pointer*` 핸들러, `scroll-snap`을 건드리면:
 
-1. 네 복사본(`design/renewal/app.js`, `camping-atlas/public/app.js`, `camping-atlas/public/renewal/app.js`, `camping-atlas/public/explore/app.js`)을 똑같이 맞춘다.
+1. 원본은 `design/renewal/app.js` 하나, 발행본은 `camping-atlas/public/app.js` 하나다(2026-10-21부터 explore/·renewal/ 복사본 없음). 둘을 똑같이 맞춘다.
 2. `node camping-atlas/scripts/rail-swipe-test.mjs [URL]`을 로컬에서 통과시킨다(기본 URL은 `camping-atlas/public`을 띄운 `http://127.0.0.1:8765/`).
 3. CI `Web quality / Rail swipe`가 초록이어야 병합한다. 1366 마우스 드래그, 390 터치 스와이프(카드 본문·썸네일), 세로 스와이프 통과, 탭 시 카드 열림, pageerror 0을 검사한다.
 
