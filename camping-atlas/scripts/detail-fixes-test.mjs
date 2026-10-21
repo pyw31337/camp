@@ -1,4 +1,4 @@
-// 상세 화면 소유자 요청 회귀 테스트(2026-10-21): 1) 섹션 제목 아이콘 녹색 네모 없음
+// 상세 화면 소유자 요청 회귀 테스트(2026-10-21): 1) 섹션 제목 아이콘 녹색 네모 없음 2) 주변 축제 포스터가 보임
 const { chromium } = await import(process.env.PW_MODULE || "playwright");
 const base = (process.argv[2] || "http://127.0.0.1:8765/").replace(/#.*$/, "");
 const id = process.env.DETAIL_ID || "7253";
@@ -37,6 +37,20 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [320, 800, "320"]]) {
     return [...new Set(out)];
   });
   if (boxed.length) fails.push(`${tag}: 아이콘 투명 사각형에 테두리 ${boxed.slice(0, 3).join(", ")}`);
+  // 2) 주변 축제·행사: 포스터가 있는 행사는 사진이 실제로 보여야 한다(앞 8장은 바로 받기 · 깨지면 제목 카드).
+  const ep = await browser.newPage({ viewport: { width: w, height: h } });
+  const png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=", "base64");
+  await ep.route(/\/culture\/images\/|tong\.visitkorea|ticketimage\.interpark|kopis\.or\.kr|culture\.go\.kr/, (r) => r.fulfill({ status: 200, contentType: "image/png", body: png }));
+  await ep.goto(`${base}#/c/${process.env.EVENT_ID || "4"}`, { waitUntil: "networkidle" });
+  await ep.waitForSelector(".d-title", { timeout: 30000 });
+  await ep.$eval("[data-events]", (s) => s.scrollIntoView()).catch(() => fails.push(`${tag}: 축제 칸 없음`));
+  await ep.waitForSelector("[data-events] .ev-card", { timeout: 20000 }).catch(() => fails.push(`${tag}: 축제 카드 없음`));
+  await ep.waitForTimeout(1500);
+  const ev = await ep.$$eval("[data-events] .ev-card:not([hidden]) .ev-poster", (ps) => ps.map((p) => { const im = p.querySelector("img"); return im ? { ok: im.complete && im.naturalWidth > 0, eager: im.loading === "eager" } : { ok: false, noimg: true }; }));
+  const shown = ev.filter((x) => x.ok).length;
+  if (!shown) fails.push(`${tag}: 축제 포스터가 하나도 안 보임 ${JSON.stringify(ev.slice(0, 4))}`);
+  if (ev.slice(0, 4).some((x) => !x.noimg && !x.eager)) fails.push(`${tag}: 앞쪽 축제 포스터가 지연 로딩(lazy)`);
+  await ep.close();
   await page.close();
 }
 await browser.close();

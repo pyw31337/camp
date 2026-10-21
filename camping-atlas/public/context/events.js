@@ -74,13 +74,13 @@ const STYLE = `.ev-sec .ev-tabs{display:flex;align-items:center;gap:16px;margin:
 @media (max-width:720px){.ev-rail{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0;padding:2px 2px 10px;scrollbar-width:none;overscroll-behavior-x:contain}
 .ev-rail::-webkit-scrollbar{display:none}.ev-card{flex:0 0 min(64vw,240px);scroll-snap-align:start}.ev-card:hover{transform:none}.ev-more{display:none}}`;
 
-function poster(x) {
+function poster(x, i = 0) {
   const e = x.e;
   const fallback = `<span>${esc(e.t)}</span>`;
   // 포스터가 깨지면 원출처 이미지(img2)로 한 번, 그래도 안 되면 제목 카드로 바꾼다.
   const onerr = `if(this.dataset.alt){this.src=this.dataset.alt;this.removeAttribute('data-alt')}else{const p=this.parentNode;p.classList.add('noimg');p.insertAdjacentHTML('afterbegin',this.dataset.fb);this.remove()}`;
   const img = e.img
-    ? `<img src="${esc(e.img)}" alt="${esc(e.t)} 포스터" loading="lazy" decoding="async" referrerpolicy="no-referrer"${e.img2 && e.img2 !== e.img ? ` data-alt="${esc(e.img2)}"` : ""} data-fb="${esc(fallback)}" onerror="${esc(onerr)}">`
+    ? `<img src="${esc(e.img)}" alt="${esc(e.t)} 포스터" loading="${i < 8 ? "eager" : "lazy"}" decoding="async" referrerpolicy="no-referrer"${e.img2 && e.img2 !== e.img ? ` data-alt="${esc(e.img2)}"` : ""} data-fb="${esc(fallback)}" onerror="${esc(onerr)}">`
     : fallback;
   return img;
 }
@@ -94,7 +94,7 @@ function card(x, today, i) {
   const map = e.a || e.v ? `<a class="ev-map" href="https://map.kakao.com/link/search/${encodeURIComponent(e.v || e.a)}" target="_blank" rel="noopener" aria-label="${esc(e.t)} 지도" title="지도">${MAP_SVG}</a>` : "";
   return `<article class="ev-card" data-state="${x.state}" data-kind="${esc(e.k)}">
   ${href ? `<a class="ev-hit" href="${esc(href)}" target="_blank" rel="noopener" aria-label="${esc(e.t)} 원문 보기"></a>` : ""}
-  <div class="ev-poster${e.img ? "" : " noimg"}">${poster(x)}<div class="ev-badges">${badges}</div><span class="ev-dist">${esc(km(x.km))}</span></div>
+  <div class="ev-poster${e.img ? "" : " noimg"}">${poster(x, i)}<div class="ev-badges">${badges}</div><span class="ev-dist">${esc(km(x.km))}</span></div>
   <div class="ev-body"><div class="ev-kindrow"><span class="ev-kind">${esc(e.k)}</span>${map}</div><h3>${esc(e.t)}</h3>
   <span class="ev-meta">${esc(period)}${place ? `<br>${esc(place)}` : ""} · 캠핑장에서 ${esc(km(x.km))}${e.p ? ` · ${esc(e.p)}` : ""}</span>
   ${e.d ? `<p class="ev-desc">${esc(e.d)}</p>` : ""}</div></article>`;
@@ -119,6 +119,13 @@ async function bind(el) {
   let filter = "all";
   const hit = (c) => filter === "all" || c.dataset.state === filter;
   cg.setup(grid, { filter: hit });
+  // 사파리(iOS 포함)는 가로로 넘기는 칸 안의 loading="lazy" 사진을 끝내 받지 않는 경우가 있다.
+  // 앞 8장은 바로 받고, 나머지는 칸이 화면 가까이 오면 바로 받도록 바꾼다.
+  const lazy = [...grid.querySelectorAll('img[loading="lazy"]')];
+  if (lazy.length && "IntersectionObserver" in window) {
+    const io = new IntersectionObserver((es) => es.forEach((x) => { if (x.isIntersecting) { x.target.loading = "eager"; io.unobserve(x.target); } }), { rootMargin: "400px" });
+    lazy.forEach((im) => io.observe(im));
+  }
   el.querySelectorAll("[data-ev-tab]").forEach((b) => b.addEventListener("click", () => {
     filter = b.dataset.evTab;
     el.querySelectorAll("[data-ev-tab]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
