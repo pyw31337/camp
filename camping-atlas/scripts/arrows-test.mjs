@@ -21,7 +21,12 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [390, 844, "390"]]) {
   const id = await page.$eval(".card[data-id]", (c) => c.dataset.id);
   await page.goto(`${base}#/c/${encodeURIComponent(id)}`, { waitUntil: "networkidle" });
   const cell = await page.waitForSelector(".gal-cell, [data-gal]", { timeout: 20000 }).catch(() => null);
-  if (cell) { await cell.click(); await page.waitForTimeout(600); if (await page.$(".lb-nav")) { await check(page, ".lb-nav", `${tag} 사진 크게 보기`); if (shots) await page.screenshot({ path: `${shots}/arrows-lightbox-${tag}.png` }); } }
+  if (cell) {
+    // 핸들이 이미 떨어졌으면 선택자로 다시 누른다(간헐적 detach).
+    await page.click(".gal-cell, [data-gal]", { timeout: 5000 }).catch(() => {});
+    await page.waitForTimeout(600);
+    if (await page.$(".lb-nav")) { await check(page, ".lb-nav", `${tag} 사진 크게 보기`); if (shots) await page.screenshot({ path: `${shots}/arrows-lightbox-${tag}.png` }); }
+  }
   await ctx.close();
 }
 await browser.close();
