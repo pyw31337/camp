@@ -1,4 +1,4 @@
-// 상세 화면 소유자 요청 회귀 테스트(2026-10-21): 1) 섹션 제목 아이콘 녹색 네모 없음 2) 주변 축제 포스터가 보임
+// 상세 화면 소유자 요청 회귀 테스트(2026-10-21): 1) 섹션 제목 아이콘 녹색 네모 없음 2) 주변 축제 포스터가 보임 3) 방문후기 썸네일(고화질·대부분 채움)
 const { chromium } = await import(process.env.PW_MODULE || "playwright");
 const base = (process.argv[2] || "http://127.0.0.1:8765/").replace(/#.*$/, "");
 const id = process.env.DETAIL_ID || "7253";
@@ -51,6 +51,21 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [320, 800, "320"]]) {
   if (!shown) fails.push(`${tag}: 축제 포스터가 하나도 안 보임 ${JSON.stringify(ev.slice(0, 4))}`);
   if (ev.slice(0, 4).some((x) => !x.noimg && !x.eager)) fails.push(`${tag}: 앞쪽 축제 포스터가 지연 로딩(lazy)`);
   await ep.close();
+  // 3) 방문후기: 보이는 카드 대부분에 썸네일이 있고, 작은 판(130×130·type=w2/w80) 대신 고화질 주소를 쓴다.
+  const rp = await browser.newPage({ viewport: { width: w, height: h } });
+  await rp.route(/kakaocdn\.net|pstatic\.net/, (r) => r.fulfill({ status: 200, contentType: "image/png", body: png }));
+  await rp.goto(`${base}#/c/${id}`, { waitUntil: "networkidle" });
+  await rp.waitForSelector(".d-title", { timeout: 30000 });
+  for (let i = 0; i < 40 && !(await rp.$("#sec-reviews .media-card")); i++) { await rp.mouse.wheel(0, 800); await rp.waitForTimeout(150); }
+  await rp.$eval("#sec-reviews", (s) => s.scrollIntoView()).catch(() => fails.push(`${tag}: 방문후기 칸 없음`));
+  await rp.waitForTimeout(1500);
+  const rv = await rp.$$eval("#sec-reviews .media-card:not([hidden]) .media-card-photo", (ps) => ps.map((p) => p.querySelector("img")?.getAttribute("src") || ""));
+  const withImg = rv.filter(Boolean);
+  if (!rv.length) fails.push(`${tag}: 방문후기 카드 없음`);
+  else if (withImg.length / rv.length < 0.8) fails.push(`${tag}: 방문후기 썸네일 ${withImg.length}/${rv.length}만 있음`);
+  const low = withImg.filter((u) => /130x130_85_c|type=w(?:\d{1,2}|[1-5]\d\d)(?:\D|$)/.test(u));
+  if (low.length) fails.push(`${tag}: 저화질 썸네일 ${low.length}장 ${low[0]}`);
+  await rp.close();
   await page.close();
 }
 await browser.close();
