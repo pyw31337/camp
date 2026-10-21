@@ -2307,13 +2307,24 @@ function specFact(d, k) {
   const s = top.samples?.[0] ?? top.source ?? {};
   return { v: top.value, g: f.values?.length ? GR(f.grade) || "c" : "m", src: { label: s.label, url: s.url, at: s.date, quote: s.quote, image: s.image ?? top.source?.image } };
 }
+// 값 검증(영우 님 2026-10-21 '옳은 정보인지, 가치 있는 정보인지'): 레이블과 맞지 않거나 시각이 말이 안 되는 값, 내용 없는 값은 화면에서 빼고 다음 출처로 넘어간다. 원본은 보존.
+const FACT_RULES = {
+  입실: (v) => { const h = +(String(v).match(/(\d{1,2})\s*[:시]/)?.[1] ?? NaN); return h >= 9 && h <= 19; },
+  퇴실: (v) => { const h = +(String(v).match(/(\d{1,2})\s*[:시]/)?.[1] ?? NaN); return h >= 8 && h <= 17; },
+  매너타임: (v) => { const h = +(String(v).match(/(\d{1,2})\s*[:시]/)?.[1] ?? NaN); return (h >= 20 && h <= 24) || h <= 1; },
+  환불: (v) => !/^\s*(?:규정\s*있음|있음|별도|문의|확인)\s*$/.test(String(v)),
+};
+const validFact = (label, x) => (x?.v != null && x.v !== "" && (FACT_RULES[label]?.(x.v) ?? true) ? x : null);
+const firstValid = (label, ...xs) => xs.reduce((a, x) => a ?? validFact(label, x), null);
+// 상세 프로필·후기 값이 없으면 목록 데이터의 입·퇴실(c.ti / c.checkin·checkout)을 쓴다(수기 보강 캠핑장 포함).
+const tiFact = (c, k, alt) => { const v = c?.ti?.[k]?.[0] ?? c?.[alt]; return v ? { v, g: ["v", "c", "m", "r"].includes(c?.ti?.[k]?.[1]) ? c.ti[k][1] : "c", src: { label: "업장·관리기관 안내", url: c.homepage || c.gc_url || c.src?.url } } : null; };
 function usage(c, d) {
   const f = facts(c);
   return [
-    ["입실", profFact(PF(d, "CHECKIN")) ?? specFact(d, "CHECKIN_TIME"), "clock-in"],
-    ["퇴실", profFact(PF(d, "CHECKOUT")) ?? specFact(d, "CHECKOUT_TIME"), "clock-out"],
-    ["매너타임", profFact(PF(d, "MANNER")) ?? specFact(d, "MANNER_TIME"), "bed"],
-    ["환불", profFact(PF(d, "REFUND")) ?? specFact(d, "REFUND_POLICY"), "calc"],
+    ["입실", firstValid("입실", profFact(PF(d, "CHECKIN")), specFact(d, "CHECKIN_TIME"), tiFact(c, "i", "checkin")), "clock-in"],
+    ["퇴실", firstValid("퇴실", profFact(PF(d, "CHECKOUT")), specFact(d, "CHECKOUT_TIME"), tiFact(c, "o", "checkout")), "clock-out"],
+    ["매너타임", firstValid("매너타임", profFact(PF(d, "MANNER")), specFact(d, "MANNER_TIME")), "bed"],
+    ["환불", firstValid("환불", profFact(PF(d, "REFUND")), specFact(d, "REFUND_POLICY")), "calc"],
     ["운영", profFact(PF(d, "SEASON")) ?? ((c.seasons ?? []).length ? { v: (c.seasons ?? []).length === 4 ? "사계절 운영" : `${(c.seasons ?? []).join("·")} 운영`, g: "c", src: { label: "고캠핑 등록 운영 기간", url: c.gc_url } } : null), "calendar"],
     ["대여", (d?.field_conditions ?? c.field_conditions)?.rental_offers?.length ? { v: (d?.field_conditions ?? c.field_conditions).rental_offers.map((r) => r.item).slice(0, 5).join(" · "), g: "c", src: srcOf(c.field_conditions) } : (specFact(d, "RENTAL") ?? null), "cart"],
   ];
