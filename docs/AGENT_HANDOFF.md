@@ -207,3 +207,42 @@
 ## 📌 이전 공지 (클로드·제미나이)
 
 이전 인수인계 내용은 그대로 유지한다. 새 작업자는 위 공지를 먼저 읽을 것.
+
+
+## 기록: 운영 DB·댓글·인프라 연동 현황 (2026-10-16~19, AGENTS.md에서 옮김)
+
+
+1. **Supabase PostgreSQL 17 클라우드 운영 DB 완전 구축**:
+   - 연결 풀러: `aws-0-ap-southeast-2.pooler.supabase.com:5432` (세션 풀러, IPv4 호환). GitHub Secret `DATABASE_URL`, `DATABASE_SSL=true`.
+   - 전체 48개 테이블에 RLS(Row Level Security) 설정 완료, 뷰에 `security_invoker = true` 적용하여 **Supabase Security Advisor 보안 이슈 0건** 달성.
+   - 현재 DB 사용량: **39 MB / 500 MB (사용률 7.84%, 92% 이상 여유)**. 대용량 바이너리 저장 금지, 메타데이터 중심 보존.
+2. **비회원 자유 댓글 게시판 (`campground_comment`) PostgREST 실시간 양방향 연동**:
+   - 일반 캠퍼를 위해 GitHub 로그인 없는 자유 댓글창 배포 완료 (https://pyw31337.github.io/camp/).
+   - 소유자가 `SUPABASE_ANON_KEY` / `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (`sb_publishable_...`) 등록 완료.
+   - 브라우저 클라이언트가 PostgREST(`https://zgnetdxqzsnmzdvoxzbw.supabase.co/rest/v1/campground_comment`)를 통해 실시간으로 작성/조회하며, 4자리 비밀번호로 삭제 가능.
+3. **주변 생활 인프라 7종 최근접 거리 전수 연동**:
+   - 행정안전부 LOCALDATA 인허가 기준 21,574건의 최근접 거리 데이터를 카탈로그(`campgrounds.json`의 `c.nl`) 및 상세(`camps/{id}.json`의 `d.nearby_licensed`)에 전수 주입 (`pipeline/scripts/build-nearby-facts.mjs`).
+   - 카드에 `"편의점 1.0km · 마트 2.2km · 정육점 0.9km"` 노출, 상세 페이지에 로드뷰 1초 바로가기 연동.
+4. **AI 장단점 분석 1,640곳 커버리지 확장**:
+   - 자연어 캠퍼 감성 사전 확장으로 1,640개소 장단점 요약 완료. 로컬 SQLite(`db/moyeora_camping.db`) 및 Supabase PostgreSQL `review_digest`에 동기화 완료.
+5. **1박 요금 데이터 확장, 요금대 필터 및 1:1 비교함 연동 (2026-10-16)**:
+   - 후기 언급/운영자 안내/공식 소개글 요금문구/국립공원·자연휴양림·지자체 표준요금제 매핑을 종합하여 전국 **1,820곳(58.4%)의 1박 요금(`c.fee`)**을 `campgrounds.json`에 주입 (`build-site-pricing-facts.mjs`). 카드 목록에서 `3만~6만원대`, `3.5만원부터` 등 실시간 노출.
+   - 탐색 상단 필터 바에 `요금 확인`, `~3만원`, `3~5만원`, `5~7만원`, `7만원+` 5개 요금 필터 칩 신설 및 실시간 개수 집계/URL 해시 연동 완료.
+   - 캠핑장 1:1 비교 모달에 `1박 기준 요금` 비교 행 신설 및 근거 등급 뱃지 표시 완료.
+   - 상세 화면 `#sec-site`에 사이트 종류별 규격(가로×세로m), 바닥 재질, 사이트 수, 1박 요금, 주차 동선을 일목요연하게 비교하는 `sitePricingTable` 표 추가.
+   - "확인 필요" 과잉 분류 전면 개편: 오토 사이트 등록, 관광진흥법 기본 600W, 장작 판매 등 근거 있는 데이터를 메인 볼드 텍스트로 우선 노출하고, 후기 언급은 우측에 깔끔한 `<em class="grade grade-surveyed">후기·확인필요</em>` 뱃지로 부착. 카드 포스터의 불필요한 회색 점선 확인필요 배지를 정리하고 핵심 배지만 노출.
+6. **다음 단계 로드맵 및 에이전트별 분업 (2026-10-16)**:
+   - **Codex (화면/UX)**: 지도 클러스터링 및 모바일 뷰 최적화, 1:1 비교함 공유 URL 연동 고도화.
+   - **Claude (원천/사실)**: 공공데이터 원장(`public-datasets.json`)의 국립공원·휴양림 표준요금제 사실 저장소(`data/facts/`) 적재, 상가정보 API 철물·캠핑용품점 보강.
+   - **Gemini (파이프라인/DB)**: 민간/사설 야영장 추가 요금 데이터 수집 보완 및 사이트별 요금·크기·인원 1:1 정밀 매핑 고도화.
+7. **공공 야영장 표준 규정 일괄 주입 및 스펙 커버리지 대도약 (2026-10-19, Gemini)**:
+   - 전국 366개소의 국립공원, 산림청 국공립 자연휴양림, 지자체 국민여가캠핑장에 법령 및 표준 조례에 근거한 `OFFICIAL_TEXT` 표준 운영 규약 주입 (`pipeline/lib/public-standards.mjs`).
+   - 확정값(CONFIRMED) 대폭 증가: 입실 945곳(확정 597), 퇴실 911곳(확정 588), 매너타임 563곳(확정 454), 취소/환불 622곳(확정 621), 주차 1,466곳(확정 498), 전기 429곳(확정 412). 5대 핵심 스펙 충족지 389곳 → 721곳 도약.
+   - 네이버 검색 API 질의 계획(QUERY_PLAN) 정밀 타깃화: 따옴표 exact match로 스니펫 적중률 극대화.
+   - 화면 표출 시 확정값(`CONFIRMED`)은 확인필요 배지 없이 정규 값으로 바로 노출되므로, 디자인 에이전트는 해당 필드들을 핵심 카드로 적극 배치할 것.
+
+
+## 정리 기록 (2026-10-21, fix4 이후)
+- **qa/audit-1792495661 브랜치**: 미병합 커밋 1개 `19ddd477d`(2026-10-20 20:37 KST, “fix(qa): 공원에 캠핑장 요금·입퇴실 제거, 관광공사 광고 요금 제거, 숯 문구 모순·좌표 오타 정리, 문자 id 댓글 숨김 + 회귀 검사”, 1,166개 파일 — 대부분 데이터). 같은 패치는 main에 없음(내용 일부는 #159 병합 정책 작업에서 다른 방식으로 반영). 데이터를 잃지 않도록 **태그 `archive/qa-audit-1792495661`로 보존**한 뒤 브랜치만 지웠다. 되살리기: `git checkout -b qa/audit-1792495661 archive/qa-audit-1792495661`.
+- **워크플로 점검**: 22개 모두 `permissions`를 명시(쓰기 권한은 데이터 커밋 워크플로만), 데이터를 main에 쓰는 예약 워크플로는 모두 `concurrency` 그룹이 있다(card-photos는 data-sync와 같은 그룹). 최근 실행 실패 없음. 중복 잡 없음 — 브라우저 회귀는 `Web quality / Rail swipe` 한 잡에 모여 있다. 바꾼 것: 없음(배포 경로 필터는 #187에서 정리).
+- **의존성 보안**: 저장소의 Dependabot 알림이 꺼져 있어 `npm audit`로 확인. pipeline 0건. camping-atlas 30건(치명 1·높음 21) → 호환 범위 안 자동 수정(`npm audit fix`, lockfile만)으로 22건(치명 1·높음 17)으로 줄임. 남은 것은 메이저 업그레이드가 필요(next 16·vite 8·vinext 1.3·@cloudflare/vite-plugin 1.64·eslint-config-next·drizzle-kit) — 화면 빌드 체인을 바꾸므로 별도 작업으로 남김. Dependabot 알림 켜기는 저장소 설정(소유자)에서.
