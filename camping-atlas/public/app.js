@@ -1942,7 +1942,7 @@ function listRow({ c, ce }, i = 0) {
       ` : ""}
       ${main || c.tel ? `
         <div class="card-cta">
-          ${main ? reserveSplit(c, { inline: true }) : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}
+          ${main ? reserveSplit(c, { inline: true, lazy: true }) : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}
         </div>
       ` : ""}
     </div>
@@ -4483,12 +4483,8 @@ function openWeatherModal(c, initialDate, data) {
 }
 
 // 예약 버튼(공통): [예약하기 → 1순위 예약처][▾ → 모든 예약처·전화]. 상세 하단·카드·예약 칸·비교 표가 같은 버튼을 쓴다(영우 님 2026-10-21).
-function reserveSplit(c, { inline = false } = {}) {
-  const options = getAllBookingChannels(c);
-  const main = options[0] ?? (c.gc_url ? { url: c.gc_url, title: "고캠핑에서 예약하기", name: "고캠핑", kind: "online" } : null);
-  const mainLabel = "예약하기"; // 영우 님 2026-10-21: 플랫폼 이름 대신 ‘예약하기’, 누르면 1순위 예약처
-
-  const menuItems = options.map((opt) => {
+function reserveMenuItems(options) {
+  return options.map((opt) => {
     if (opt.kind === "phone") {
       return `<button type="button" class="dock-menu-item is-tel" data-tel="${esc(opt.tel)}" data-tel-fmt="${esc(opt.telFmt)}">
         <span class="dock-menu-icon">${ic("phone")}</span>
@@ -4503,8 +4499,16 @@ function reserveSplit(c, { inline = false } = {}) {
       <svg class="ic dock-menu-ext"><use href="#i-external"/></svg>
     </a>`;
   }).join("");
+}
+// lazy: 목록 카드는 가벼운 카탈로그(고캠핑·홈페이지 주소 없음)로도 같은 화면이어야 하므로, 목록은 열 때 원본을 받아 채운다.
+function reserveSplit(c, { inline = false, lazy = false } = {}) {
+  const options = lazy ? [] : getAllBookingChannels(c);
+  const lb = lazy ? bookingChannels(c)[0] : null;
+  const main = lazy ? (lb ? { url: lb.url, kind: "online" } : null) : options[0] ?? (c.gc_url ? { url: c.gc_url, title: "고캠핑에서 예약하기", name: "고캠핑", kind: "online" } : null);
+  const mainLabel = "예약하기"; // 영우 님 2026-10-21: 플랫폼 이름 대신 ‘예약하기’, 누르면 1순위 예약처
+  const menuItems = reserveMenuItems(options);
 
-  return `    <div class="dock-reserve-group${inline ? " rsv-inline" : ""}">
+  return `    <div class="dock-reserve-group${inline ? " rsv-inline" : ""}"${lazy ? ` data-rsv-lazy="${esc(c.id)}"` : ""}>
       ${main ? (main.kind === "phone" ? `
         <button type="button" class="btn primary dock-reserve-main is-tel" data-tel="${esc(main.tel)}" data-tel-fmt="${esc(main.telFmt)}">
           <span class="dock-reserve-label">${esc(mainLabel)}</span>
@@ -4523,7 +4527,7 @@ function reserveSplit(c, { inline = false } = {}) {
           <button type="button" class="dock-menu-close" aria-label="닫기">${ic("close")}</button>
         </div>
         <div class="dock-menu-list">
-          ${menuItems || `<div class="dock-menu-empty">등록된 예약 정보가 없습니다.</div>`}
+          ${lazy ? "" : menuItems || `<div class="dock-menu-empty">등록된 예약 정보가 없습니다.</div>`}
         </div>
       </div>
     </div>`;
@@ -4545,6 +4549,12 @@ document.addEventListener("click", async (e) => {
     const g = t.closest(".dock-reserve-group"), m = g._menu ?? (g._menu = g.querySelector(".dock-reserve-menu"));
     closeReserveMenus(g);
     const open = m.hidden; m.hidden = !open; g.classList.toggle("is-open", open); t.setAttribute("aria-expanded", String(open));
+    if (open && g.dataset.rsvLazy) {
+      const id = g.dataset.rsvLazy; delete g.dataset.rsvLazy;
+      try { await ensureFull([id]); } catch {}
+      const list = m.querySelector(".dock-menu-list"), cc = S.byId.get(id);
+      if (list && cc) list.innerHTML = reserveMenuItems(getAllBookingChannels(cc)) || `<div class="dock-menu-empty">등록된 예약 정보가 없습니다.</div>`;
+    }
     if (open && g.classList.contains("rsv-inline")) {
       // 카드·표는 넘침을 자르므로 목록을 화면 좌표로 띄운다. 아래 자리가 모자라면 위로 연다.
       // 카드는 transform 이 있어 fixed 기준이 카드가 되므로, 열린 동안만 body 로 옮긴다(닫으면 제자리).
