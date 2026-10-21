@@ -1,5 +1,7 @@
 # 모여라 캠핑 디자인 시스템
 
+> 2026-10-21 정리: 예전 시안 폴더(design/explore·mockup·mockup-v2·studio-v1·vision)는 지웠다. 아래에서 그 경로를 말하는 대목은 기록이며, 현재 원본은 `design/renewal/` 하나다.
+
 > 최종 갱신: 2026-10-21 KST<br>
 > 적용 범위: 홈·탐색(목록·지도·상세·비교)·테마·예약 일정·내 캠핑·가이드<br>
 > 현재 기준: **v4.4 “Poster Explorer”**. 실제 화면의 단일 소스는 `design/renewal/`이며 `scripts/publish-explorer-pages.mjs`가 `/explore/`에 발행한다. 루트(`/`)는 이 탐색 화면으로 바로 연결한다. v4.2 이전은 기록용이다.

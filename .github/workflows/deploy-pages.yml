@@ -5,9 +5,7 @@ on:
     branches: [main]
     paths:
       - "camping-atlas/**"
-      - "design/explore/**"
       - "design/renewal/**"
-      - "design/site-header.mjs"
       - "scripts/publish-explorer-pages.mjs"
       - ".github/workflows/deploy-pages.yml"
   # Data sync가 GITHUB_TOKEN으로 커밋한 데이터는 push 이벤트를 만들지 않으므로, 수집이 끝나면 다시 배포한다.

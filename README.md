@@ -15,7 +15,7 @@
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): GitHub Actions 중심 구조와 필요한 외부 서비스 제안
 - [`docs/CORE_FEATURES_UX.md`](docs/CORE_FEATURES_UX.md): 핵심 기능 3개와 무학습 UX 원칙, 레퍼런스 분석
 - [`docs/OWNER_TODO.md`](docs/OWNER_TODO.md): 서비스 소유자가 순서대로 할 일(키 발급·배포 설정)
-- [`design/mockup-v2/`](design/mockup-v2): 디자인 시안 v2 (현재 기준, `design/`에서 `npm run build`) · [`design/mockup/`](design/mockup): v1
+- [`design/renewal/`](design/renewal): 화면 원본 하나(app.js · style.css · shell.css · index.html). 발행: `node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public`
 - [`pipeline/`](pipeline): 고캠핑 수집·정규화, 예약 규칙 레지스트리, 예약 오픈 캘린더 계산, 캘린더 구독(.ics) 피드
 
 ## 협업 시작하기

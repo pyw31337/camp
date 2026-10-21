@@ -1,5 +1,7 @@
 # 핵심 기능 선정과 무학습 UX 설계
 
+> 2026-10-21 정리: 예전 시안 폴더(design/explore·mockup·mockup-v2·studio-v1·vision)는 지웠다. 아래에서 그 경로를 말하는 대목은 기록이며, 현재 원본은 `design/renewal/` 하나다.
+
 > 작성일: 2026-10-12 KST · 적용 시안: `design/mockup-v2/` (v2)<br>
 > 전제: 로그인 없이 시작하고, 운영비는 무료 범위에서 해결한다([아키텍처](./ARCHITECTURE.md)).
 
