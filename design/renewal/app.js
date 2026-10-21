@@ -2989,7 +2989,7 @@ function priceRows(c, d) {
   }
 
   // 3. 운영자 안내 숙박 요금 (타프존, 글램핑, 카라반 등 특정 사이트 형태 요금 문장 보완)
-  for (const x of d?.operator_snippets ?? []) {
+  for (const x of opSnips(d)) {
     const t = typeof x === "string" ? x : x.text;
     if (!t) continue;
     if (/환불|취소|위약|수수료|보증금/.test(t)) continue;
@@ -3028,7 +3028,7 @@ function priceRows(c, d) {
   // 5. 추가 요금: 인원 추가, 지인 방문(방문객), 추가 차량, 캠핑카/트레일러 등 후순위 공통 정규화
   const extraCats = new Map();
 
-  for (const x of d?.operator_snippets ?? []) {
+  for (const x of opSnips(d)) {
     const t = typeof x === "string" ? x : x.text;
     if (!t) continue;
     if (/환불|취소|위약|수수료|보증금/.test(t)) continue;
@@ -3162,13 +3162,14 @@ const ymd = (at) => { const t = Date.parse(at ?? ""); if (!Number.isFinite(t)) r
 function houseRulesHtml(c, d) {
   const h = d?.house_rules ?? {};
   const tags = (h.tags ?? []).filter((t) => NO_TAGS[t.k]);
-  const rules = h.rules ?? [], ops = h.ops ?? [], notices = h.notices ?? [];
+  const clean = (xs) => (xs ?? []).filter((x) => !operatorNoise(x?.text ?? x?.title));
+  const rules = clean(h.rules), ops = clean(h.ops), notices = clean(h.notices);
   if (!tags.length && !rules.length && !ops.length && !notices.length) return "";
   // 줄 전체가 원문 링크(소유자 2026-10-20: 오른쪽 ‘원문’ 버튼 대신 글줄을 누르면 원문으로)
   const list = (rows, cls) => {
     const li = (x) => {
       const t = esc(compactOperatorText(x.text));
-      return /^https?:/.test(x.url ?? "") ? `<li><a class="hr-line" href="${esc(x.url)}" target="_blank" rel="noopener" title="원문 보기">${t}</a></li>` : `<li><span>${t}</span></li>`;
+      return /^https?:/.test(x.url ?? "") ? `<li><a class="hr-line" href="${esc(textFragUrl(x.url, x.text))}" target="_blank" rel="noopener" title="원문 보기">${t}</a></li>` : `<li><span>${t}</span></li>`;
     };
     return `<ul class="hr-list ${cls}">${rows.map(li).join("")}</ul>`;
   };
@@ -3187,6 +3188,27 @@ function houseRulesHtml(c, d) {
   const at = [...rules, ...ops].map((x) => x.at).filter(Boolean).sort().at(-1);
   return `<section class="d-sec hr-sec" id="sec-rules"><div class="sec-head">${iconTitle("rules", "이용 규칙")}<span class="sec-note">${tip("<b>이용 규칙</b><span>운영자 홈페이지·예약 페이지와 고캠핑 등록값에서 업장이 직접 공개한 금지사항·이용 제한·이용 수칙만 모았어요. 후기 글은 쓰지 않아요. 규칙은 바뀔 수 있으니 예약 전 원문을 확인하세요. 각 줄과 공지 제목을 누르면 원래 페이지가 열리고, 빨간 배지를 누르면 근거 문장과 원문 링크가 보여요.</span>", "이용 규칙 기준")}</span></div>${tagRow}${cols.length ? `<div class="hr-grid">${cols.join("")}</div>` : ""}${noticeList}</section>`;
 }
+// 운영자 홈페이지에서 긁힌 글 중 캠핑과 상관없는 것(사이트 약관·결제 화면 문구·아이콘 이름·다른 사업 안내)은 화면에서 뺀다. 원본 데이터는 그대로 둔다(영우 님 2026-10-21).
+const OPERATOR_NOISE = [
+  /(?<!표준)약관|회원(?:은|이|가|의)|전기통신|기간통신|불가항력|국가비상사태|천재지변|전자우편|개인정보|서비스\s*(?:이용\s*시간|중단|중지)|사전\s*공지나\s*예고|사후\s*공지|운영정책|제\d+조|전항|본\s*사이트/,
+  /취소일\s*[:：]|결제일\s*[:：]|예약일\s*[:：]|^\s*\d{4}-\d{2}-\d{2}(?:\s+\d{1,2}:\d{2})?\s*$|취소된\s*예약|^\s*결제완료|할인\s*대상자가|할인이\s*적용되었|다시\s*결제|\((?:취소|결제완료|예약)\)\s*$/,
+  /(?:^|\s)[a-z]+_[a-z_]+(?:\s|$)/,
+  /탑승|노선|승차권|차내\s|티켓\s*분실|맹인안내견|순환형/,
+  /빠르게\s*확인해\s*주세요|함께\s*확인해\s*주세요|시설\s*별\s*이용\s*시간은\s*상이/,
+];
+const OPERATOR_KEEP = /환불|입실|퇴실|퇴소|매너.?타임|반려|화로|장작|텐트|사이트당|전기\s*(?:사용|용량)|\d+\s*W\b|주차장(?:에|으로|은)|예약할인/;
+const OPERATOR_LEGAL = /법(?:\s|$|령|률|에|의)|법\s*제|제\d+조|약관|회원(?:은|이|가|의)|개인정보|기간통신|^\s*결제완료|\((?:취소|결제완료)\)\s*$|_[a-z]/;
+const operatorNoise = (t) => { const x = String(t ?? ""); return OPERATOR_NOISE.some((re) => re.test(x)) && !(OPERATOR_KEEP.test(x) && !OPERATOR_LEGAL.test(x)); };
+const opSnips = (d) => (d?.operator_snippets ?? []).filter((x) => !operatorNoise(typeof x === "string" ? x : x?.text));
+// 원문 보기: 페이지 첫 화면이 아니라 그 문장으로 바로(텍스트 조각 링크 #:~:text=). 지원하지 않는 브라우저는 페이지만 열린다.
+const textFragUrl = (url, text) => {
+  if (!/^https?:/.test(url ?? "") || String(url).includes("#")) return url;
+  const t = String(text ?? "").replace(/\s+/g, " ").trim();
+  if (t.length < 6) return url;
+  const w = t.split(" ");
+  const frag = w.length > 8 ? `${encodeURIComponent(w.slice(0, 4).join(" "))},${encodeURIComponent(w.slice(-3).join(" "))}` : encodeURIComponent(t);
+  return `${url}#:~:text=${frag.replace(/-/g, "%2D")}`;
+};
 // 운영자 원문은 말투·질문·반복이 섞여 있으므로, 예약에 필요한 항목으로 묶어 읽기 좋게 정리한다.
 // 값 자체는 바꾸지 않고 같은 항목의 짧은 원문만 합치며, 전체 원문은 작은 (i)에서 다시 열 수 있다.
 const OPERATOR_CATEGORIES = [
@@ -3284,7 +3306,7 @@ function operatorSummary(label, texts) {
 }
 function operatorHtml(d, c) {
   const used = new Set(), grouped = new Map();
-  for (const raw of d?.operator_snippets ?? []) {
+  for (const raw of opSnips(d)) {
     const x = typeof raw === "string" ? { text: raw } : raw;
     const text = compactOperatorText(x.text);
     if (text.length < 14 || used.has(text) || /^(캠핑 이용요금|예약 취소|이용요금 환불기준|.+가능한가요)\??$/.test(text)) continue;
@@ -3344,7 +3366,7 @@ function operatorHtml(d, c) {
 
   if (!filtered.length) return "";
   return `<section class="d-sec operator-sec" id="sec-operator"><div class="sec-head">${iconTitle("report", "공지사항")}</div><div class="operator-grid">${filtered.map((x) => {
-    const source = srcTip({ g: "c", src: { label: x.image ? "운영자 안내 이미지(글자 인식)" : sourceName(x.src, "운영자 홈페이지"), url: x.url, at: x.at, quote: x.texts.join("\n"), image: x.image } }, x.label);
+    const source = srcTip({ g: "c", src: { label: x.image ? "운영자 안내 이미지(글자 인식)" : sourceName(x.src, "운영자 홈페이지"), url: textFragUrl(x.url, x.texts[0]), at: x.at, quote: x.texts.join("\n"), image: x.image } }, x.label);
     const opIc = /입실|퇴실/.test(x.label) ? "clock-in" : /요금|환불/.test(x.label) ? "won" : /주차/.test(x.label) ? "car" : /전기/.test(x.label) ? "bolt" : /화로|장작/.test(x.label) ? "flame" : /반려/.test(x.label) ? "paw" : /시설/.test(x.label) ? "drop" : /예약/.test(x.label) ? "calendar" : /인원/.test(x.label) ? "plus" : /매너/.test(x.label) ? "moon" : "report";
     return `<article><span>${ic(opIc)}${esc(x.label)}</span><p>${esc(x.value)}</p>${source}</article>`;
   }).join("")}</div></section>`;
