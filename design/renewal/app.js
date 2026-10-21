@@ -5167,7 +5167,7 @@ async function savedView() {
     return `<section class="saved-page">
       <div class="sec-head big">
         <div>
-          <h1>내가 찜한 <em>캠핑장</em></h1>
+          <h1>찜한 <em>캠핑장</em></h1>
           <p class="sec-sub">마음에 드는 캠핑장을 갯수 제한 없이 모아볼 수 있는 나만의 보관함이에요.</p>
         </div>
       </div>
@@ -5188,7 +5188,7 @@ async function savedView() {
   return `<section class="saved-page">
     <div class="sec-head big">
       <div>
-        <h1>내가 찜한 <em>캠핑장</em></h1>
+        <h1>찜한 <em>캠핑장</em></h1>
         <p class="sec-sub">찜한 캠핑장을 모아 보는 곳이에요. ${ic("heart", "inline")}를 끄면 목록에서 빠져요.</p>
       </div>
       <div class="saved-head-tools">
