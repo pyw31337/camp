@@ -209,7 +209,17 @@
      "url": "https://www.ktourmap.com/spotDetails.jsp?contentId=3010874",
      "checked_at": "2026-10-21"
     }
-   ]
+   ],
+   "ti": {
+    "i": [
+     "14:00",
+     "c"
+    ],
+    "o": [
+     "12:00",
+     "c"
+    ]
+   }
   }
  ]
 }
