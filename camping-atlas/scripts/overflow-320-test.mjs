@@ -6,7 +6,7 @@ const widths = (process.env.WIDTHS || "320").split(",").map(Number);
 const AUDIT = process.env.AUDIT === "1", shots = process.env.SHOTS_DIR || "";
 const cat = await (await fetch(`${base}explore/data/campgrounds.lite.json`)).json().catch(() => ({ camps: [] }));
 const stay = cat.camps.find((c) => !c.du)?.id ?? "2931", day = cat.camps.find((c) => c.du)?.id;
-const routes = ["", "#/list", "#/map", "#/themes", "#/theme/ALL", "#/theme/PARK", "#/compare", "#/saves-log", `#/c/${stay}`, ...(day ? [`#/c/${day}`] : []),
+const routes = ["", "#/list", "#/map", "#/themes", "#/theme/ALL", "#/theme/PARK", "#/compare", "#/saved", "#/saves-log", `#/c/${stay}`, ...(day ? [`#/c/${day}`] : []),
   "log/", "guide/", "collections/", "openings/", "passport/", "themes/", "vision/"];
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 const fails = [], report = [];
