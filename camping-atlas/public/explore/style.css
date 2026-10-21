@@ -1756,6 +1756,20 @@ a.near { color: inherit; text-decoration: none; }
 .list-head .chip { box-shadow: none; background: var(--paper); border: 1px solid var(--line); }
 .list-head .chip[aria-pressed="true"] { background: var(--sel); color: var(--on-sel); border-color: var(--sel); }
 .list-tools { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+/* ── 필터 모듈 (지역·사이트·요금 공통) ── */
+.filter-mod { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.filter-mod .fee-band-lbl { flex: none; width: 64px; font-size: .84rem; font-weight: 800; color: var(--ink-2); }
+.filter-mod .rail { flex: 1; min-width: 0; }
+.list-filters { margin: 4px 0 8px; padding: 4px 0 8px; border-bottom: 1px solid var(--line); }
+.list-tools-right { display: flex; align-items: center; gap: 8px; }
+.list-result { font-size: .92rem; font-weight: 700; color: var(--ink-2); }
+/* 메인 결과 툴바 */
+.results .list-tools { margin: 8px 0 16px; }
+.results .list-tools-right { flex-wrap: wrap; }
+.results .active-chips { margin: 0; }
+
+.list-tools .cond-open { height: 36px; }
+
 .list-date-note { margin: 0; }
 .lrows { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
 .card-horizontal {
@@ -3047,3 +3061,7 @@ details[open] > *:not(summary) {
 .lb-nav:hover { transform: translateY(-50%); }
 .car-nav .ic, .lb-nav .ic { width: 24px; height: 24px; color: #fff; filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, .28)); }
 @media (max-width: 759px) { .lb-nav:hover { transform: none; } }
+
+.log-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.log-table th, .log-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.log-table th { font-weight: 800; color: var(--ink-2); }
