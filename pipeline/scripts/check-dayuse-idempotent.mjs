@@ -15,15 +15,17 @@ cpSync(join(src, "campgrounds.json"), join(tmp, "campgrounds.json"));
 const seed = JSON.parse(readFileSync(join(root, "pipeline/registry/dayuse-seed.json"), "utf8")).places ?? [];
 const extra = ["dayuse-osm.json", "manual-camps.json"].map((f) => join(root, "pipeline/registry", f)).filter(existsSync).flatMap((f) => JSON.parse(readFileSync(f, "utf8")).places ?? []);
 const ids = [...new Set([...seed, ...extra].map((p) => String(p.id)))];
-for (const id of ids) { const f = join(src, "camps", `${id}.json`); if (existsSync(f)) cpSync(f, join(tmp, "camps", `${id}.json`)); }
-const run = () => execFileSync(process.execPath, [join(root, "pipeline/scripts/apply-dayuse-seed.mjs")], { env: { ...process.env, EXPLORE_DIR: tmp }, stdio: "pipe" });
+const copied = new Set();
+for (const id of ids) { const f = join(src, "camps", `${id}.json`); if (existsSync(f)) { cpSync(f, join(tmp, "camps", `${id}.json`)); copied.add(`${id}.json`); } }
+// 발행 순서 그대로: 시드 적용 → 발행 전 상식 정리(시·도 표기·중복 합치기 등).
+const run = () => { for (const f of ["apply-dayuse-seed.mjs", "publish-sanity.mjs"]) execFileSync(process.execPath, [join(root, "pipeline/scripts", f)], { env: { ...process.env, EXPLORE_DIR: tmp }, stdio: "pipe" }); };
 const fails = [];
 const compare = (label) => {
   const a = JSON.parse(readFileSync(join(src, "campgrounds.json"), "utf8")), b = JSON.parse(readFileSync(join(tmp, "campgrounds.json"), "utf8"));
   const m = new Map(a.map((c) => [String(c.id), JSON.stringify(c)]));
   const rows = b.filter((c) => m.get(String(c.id)) !== JSON.stringify(c));
   if (rows.length || a.length !== b.length) fails.push(`${label}: campgrounds.json 행 ${rows.length}개 바뀜(예: ${rows.slice(0, 5).map((c) => c.id).join(", ")})${a.length !== b.length ? ` · 행 수 ${a.length}→${b.length}` : ""}`);
-  const files = readdirSync(join(tmp, "camps")).filter((f) => { const o = join(src, "camps", f); return !existsSync(o) || readFileSync(o, "utf8") !== readFileSync(join(tmp, "camps", f), "utf8"); });
+  const files = readdirSync(join(tmp, "camps")).filter((f) => copied.has(f)).filter((f) => { const o = join(src, "camps", f); return !existsSync(o) || readFileSync(o, "utf8") !== readFileSync(join(tmp, "camps", f), "utf8"); });
   if (files.length) fails.push(`${label}: 상세 파일 ${files.length}개 바뀜(예: ${files.slice(0, 5).join(", ")})`);
 };
 run(); compare("1회");

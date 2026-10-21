@@ -18,7 +18,8 @@ const GOCAMPING = (c) => ({ label: "한국관광공사 고캠핑 등록값", url
 const opSource = (x) => ({ label: "운영자 홈페이지", url: x.u ?? x.url ?? null, date: x.t ?? x.date ?? null, quote: x.q ?? x.quote ?? null });
 const specSource = (v) => ({ label: v.source?.label ?? null, url: v.source?.url ?? null, date: v.source?.date ?? null, quote: v.quote ?? null });
 // 스펙 시트 등급 → 프로필 등급(운영자 홈페이지·공지 문장은 OPERATOR, 고캠핑 소개글은 CONFIRMED에 준함)
-const specGrade = (v, g) => (g === "OPERATOR" || v?.source?.kind === "operator_homepage" ? "OPERATOR" : g === "OFFICIAL_TEXT" ? "CONFIRMED" : "MENTION");
+// 지자체 공공야영장 '표준 운영조례' 일괄값(입실 14:00·600W·10일 전 환불 등)은 그 업장 공지가 아니다 → 참고값(소유자 2026-10-21).
+const specGrade = (v, g) => (v?.source?.kind === "public_standard" && /표준 운영조례/.test(v?.source?.label ?? "") ? "REFERENCE" : g === "OPERATOR" || v?.source?.kind === "operator_homepage" ? "OPERATOR" : g === "OFFICIAL_TEXT" ? "CONFIRMED" : "MENTION");
 
 function specField(spec, code) {
   const f = spec?.fields?.[code];
@@ -30,7 +31,10 @@ function specField(spec, code) {
     const x = m.samples?.[0] ?? {};
     return { value: m.value, grade: "MENTION", source: { label: m.count > 1 ? `후기 ${m.count}건` : (x.label ?? "후기 언급"), url: x.url ?? null, date: m.latest ?? x.date ?? null, quote: x.quote ?? null }, count: m.count };
   }
-  return { value: v.value, grade: specGrade(v, f.grade), source: specSource(v), conflict: f.conflict || undefined };
+  const grade = specGrade(v, f.grade);
+  // 참고값은 값 자체에도 밝혀 둔다(기존 법정 기준 참고값 '업장 미공지 · 법정 상한 600W'와 같은 형식).
+  const value = grade === "REFERENCE" && !/업장 미공지/.test(String(v.value)) ? `업장 미공지 · 조례 기준 ${v.value}` : v.value;
+  return { value, grade, source: specSource(v), conflict: f.conflict || undefined };
 }
 
 /**
@@ -144,14 +148,14 @@ export function buildProfile(c, d = null, details = null, { detailDate = null, u
   if (c.rv) set("REVIEW", [c.rv.p.map(([t]) => t).join(", "), c.rv.c.length ? `아쉬움: ${c.rv.c.map(([t]) => t).join(", ")}` : null].filter(Boolean).join(" / ") || "언급 적음", "MENTION", { label: `후기 요약 ${c.rv.n}건`, url: null, date: null }, { count: c.rv.n });
 
   const known = PROFILE_FIELDS.filter(([code]) => fields[code]).length;
-  const facts = PROFILE_FIELDS.filter(([code]) => fields[code] && fields[code].grade !== "MENTION").length;
+  const facts = PROFILE_FIELDS.filter(([code]) => fields[code] && fields[code].grade !== "MENTION" && fields[code].grade !== "REFERENCE").length;
   return { version: 1, fields, tags: tagsOf(c, fields, details, intro), summary: summaryOf(fields), score: { known, facts, total: PROFILE_FIELDS.length } };
 }
 
 // 한 줄 요약: 확인된 값(후기 언급 제외)을 고정 순서로, 최대 6조각.
 export function summaryOf(fields) {
   const parts = [];
-  const v = (k) => fields[k] && fields[k].grade !== "MENTION" ? fields[k] : null;
+  const v = (k) => fields[k] && fields[k].grade !== "MENTION" && fields[k].grade !== "REFERENCE" ? fields[k] : null; // 참고값(법정·조례 일괄값)은 요약에 쓰지 않는다
   if (v("TYPE")) parts.push(v("TYPE").value.split(" · ").slice(0, 2).join("·"));
   if (v("CHECKIN")) parts.push(`입실 ${v("CHECKIN").value.replace("부터", "")}`);
   if (v("PRICE")) parts.push(`1박 ${v("PRICE").value}`);
@@ -219,7 +223,7 @@ export function openMonthsOf(season) {
   return monthBits([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].filter((x) => !closed.includes(x)));
 }
 export function compactTimes(fields = {}) {
-  const g = (f) => (f.grade === "MENTION" ? "m" : "c");
+  const g = (f) => (f.grade === "MENTION" ? "m" : f.grade === "REFERENCE" ? "r" : "c");
   const hm = (s) => String(s ?? "").match(/\d{1,2}:\d{2}/)?.[0] ?? null;
   const out = {};
   for (const [k, code] of [["i", "CHECKIN"], ["o", "CHECKOUT"], ["m", "MANNER"]]) { const f = fields[code]; const v = f && hm(f.value); if (v) out[k] = [v, g(f)]; }

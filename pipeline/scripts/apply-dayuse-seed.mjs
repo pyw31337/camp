@@ -31,6 +31,8 @@ for (const p of seed.places ?? []) {
   // 홈페이지 주소는 build-link-health.mjs와 같은 규칙으로 바로잡아 둔다(다시 돌려도 결과가 같게).
   if (rec.homepage && !/^https?:\/\/[^/\s]+\.[^/\s]+/i.test(rec.homepage)) { const u = normalizeUrl(rec.homepage); if (u) rec.homepage = u; else { rec.homepage_raw = rec.homepage; delete rec.homepage; } }
   // 빈 값으로 기존 값을 지우지 않는다(docs/DATA_MERGE_POLICY.md ①).
+  // 요금 형태 나누기(build-price-tiers)가 붙인 tiers는 같은 범위면 그대로 둔다(멱등).
+  if (byId.has(rec.id)) { const o = cat[byId.get(rec.id)].fee; if (rec.fee && o?.tiers && o.min === rec.fee.min && o.max === rec.fee.max) rec.fee = { ...rec.fee, tiers: o.tiers }; }
   if (byId.has(rec.id)) { cat[byId.get(rec.id)] = assignNonEmpty({ ...cat[byId.get(rec.id)] }, rec); replaced++; } else { cat.push(rec); byId.set(rec.id, cat.length - 1); added++; }
   if (!rec.du && !rules?.length && !day) continue; // 1박 수기 보강분(manual-camps)은 카탈로그 행만
   const dp = join(dataDir, "camps", `${rec.id}.json`);

@@ -1,4 +1,69 @@
 {
   "note": "기존 값을 의도적으로 지우거나 줄일 때만 적는다(폐업·중복 합치기·오류 정정). field-guard가 이 목록만 통과시킨다. file(경로 끝부분)·id·field 중 아는 것 + reason(필수) + by(누가) + at(날짜). 쓰고 나면 다음 정리 때 비운다. docs/DATA_MERGE_POLICY.md",
-  "overrides": []
+  "overrides": [
+    {
+      "file": "campgrounds.json",
+      "id": "102273",
+      "field": "fee.tiers",
+      "reason": "플랫폼 광고가·공원 조례 요금을 걷어낸 뒤 요금 범위가 바뀌어 형태 나누기를 다시 계산(QA R1·R2)",
+      "by": "qa-audit",
+      "at": "2026-10-21"
+    },
+    {
+      "file": "campgrounds.json",
+      "id": "930",
+      "field": "fee.tiers",
+      "reason": "플랫폼 광고가·공원 조례 요금을 걷어낸 뒤 요금 범위가 바뀌어 형태 나누기를 다시 계산(QA R1·R2)",
+      "by": "qa-audit",
+      "at": "2026-10-21"
+    },
+    {
+      "file": "campgrounds.json",
+      "id": "102274",
+      "field": "fee.tiers",
+      "reason": "플랫폼 광고가·공원 조례 요금을 걷어낸 뒤 요금 범위가 바뀌어 형태 나누기를 다시 계산(QA R1·R2)",
+      "by": "qa-audit",
+      "at": "2026-10-21"
+    },
+    {
+      "file": "campgrounds.json",
+      "id": "101408",
+      "field": "fee.tiers",
+      "reason": "플랫폼 광고가·공원 조례 요금을 걷어낸 뒤 요금 범위가 바뀌어 형태 나누기를 다시 계산(QA R1·R2)",
+      "by": "qa-audit",
+      "at": "2026-10-21"
+    },
+    {
+      "file": "campgrounds.json",
+      "id": "301",
+      "field": "fee.tiers",
+      "reason": "플랫폼 광고가·공원 조례 요금을 걷어낸 뒤 요금 범위가 바뀌어 형태 나누기를 다시 계산(QA R1·R2)",
+      "by": "qa-audit",
+      "at": "2026-10-21"
+    },
+    {
+      "file": "campgrounds.json",
+      "id": "100805",
+      "field": "fee.tiers",
+      "reason": "플랫폼 광고가·공원 조례 요금을 걷어낸 뒤 요금 범위가 바뀌어 형태 나누기를 다시 계산(QA R1·R2)",
+      "by": "qa-audit",
+      "at": "2026-10-21"
+    },
+    {
+      "file": "campgrounds.json",
+      "id": "100227",
+      "field": "fee.tiers",
+      "reason": "플랫폼 광고가·공원 조례 요금을 걷어낸 뒤 요금 범위가 바뀌어 형태 나누기를 다시 계산(QA R1·R2)",
+      "by": "qa-audit",
+      "at": "2026-10-21"
+    },
+    {
+      "file": "campgrounds.json",
+      "id": "101456",
+      "field": "fee.tiers",
+      "reason": "플랫폼 광고가·공원 조례 요금을 걷어낸 뒤 요금 범위가 바뀌어 형태 나누기를 다시 계산(QA R1·R2)",
+      "by": "qa-audit",
+      "at": "2026-10-21"
+    }
+  ]
 }

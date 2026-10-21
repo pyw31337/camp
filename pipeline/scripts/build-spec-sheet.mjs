@@ -7,6 +7,7 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildSpecSheet, SPEC_FIELDS } from "../lib/spec-extractor.mjs";
 import { getPublicStandardDoc } from "../lib/public-standards.mjs";
+import { logReview } from "../lib/merge-policy.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const dataDir = join(root, "camping-atlas/public/explore/data");
@@ -53,6 +54,12 @@ for (const c of camps) {
   });
   const spec = buildSpecSheet({ name: c.name, regions: [c.sigungu, c.sido], docs, reviews, now });
   roundups += spec.stats.roundups_skipped;
+  // 당일 이용 공원·물놀이장은 법정·조례 표준값(입실·전기·환불 등)을 붙이지 않는다(QA R1). 지워지는 항목은 검토 기록에 남긴다.
+  const R2 = "관광공사·플랫폼 문장과 공공표준 주차 문구를 운영자 정보로 잘못 쓴 값 정정(QA R2)";
+  if (!c.du && d.spec?.fields) { if (!Object.keys(spec.fields).length) logReview({ by: "build-spec-sheet", action: "removed", file: `${c.id}.json`, id: String(c.id), field: "spec", reason: R2 });
+    else for (const [k, f] of Object.entries(d.spec.fields)) if (!spec.fields[k] || (spec.fields[k].values?.length ?? 0) < (f.values?.length ?? 0)) logReview({ by: "build-spec-sheet", action: "removed", file: `${c.id}.json`, id: String(c.id), field: `spec.fields.${k}`, reason: R2 }); }
+  if (c.du && d.spec?.fields) for (const k of Object.keys(d.spec.fields)) if (!spec.fields[k]) logReview({ by: "build-spec-sheet", action: "removed", file: `${c.id}.json`, id: String(c.id), field: `spec.fields.${k}`, reason: "당일 이용 공원·물놀이장에 캠핑장 조례 표준값이 잘못 붙음(QA R1)" });
+  if (c.du && d.spec && !Object.keys(spec.fields).length) logReview({ by: "build-spec-sheet", action: "removed", file: `${c.id}.json`, id: String(c.id), field: "spec", reason: "당일 이용 공원·물놀이장에 캠핑장 조례 표준값이 잘못 붙음(QA R1)" });
   if (Object.keys(spec.fields).length) { withAny++; d.spec = spec; } else delete d.spec;
   for (const [code, f] of Object.entries(spec.fields)) { if (f.values.length) count[code].official++; if (f.mentions.length) count[code].mention++; }
   writeFileSync(path, JSON.stringify(d));

@@ -175,7 +175,7 @@ const typeLine = (c) => (c.pf?.s ?? "").split(" · ")[0] || (c.types ?? [])[0] |
 // 등급: v=원문 대조(VERIFIED) · c=공식 등록·운영자 공개 · m=소개·후기 언급. 배지는 v·c만.
 // r = 법령·고시 기본값(업장이 공지하지 않음). 그 업장의 규정이 아니라 참고값이다(2026-10-19).
 const GR = (s) => (s === "VERIFIED" ? "v" : s === "CONFIRMED" || s === "OPERATOR" ? "c" : s === "SURVEYED" || s === "MENTION" ? "m" : s === "REFERENCE" ? "r" : null);
-const GRADE_TXT = { v: "원문 대조", c: "공식 등록", m: "소개·후기 언급", r: "법정 기준 참고(업장 미공지)" };
+const GRADE_TXT = { v: "원문 대조", c: "공식 등록", m: "소개·후기 언급", r: "법정·조례 기준 참고(업장 미공지)" };
 const kw = (w) => `${fmt(w)}W`; // 소유자: ‘600W’처럼 W로 통일
 const GROUND = { CRUSHED_STONE: "파쇄석", MIXED: "혼합", GRAVEL: "자갈", DECK: "데크", GRASS: "잔디", SAND: "모래", SOIL: "흙", CONCRETE: "콘크리트" };
 const srcOf = (fc, extra) => ({ label: fc?.source?.label || "한국관광공사 고캠핑 등록 현황", url: fc?.source?.url || "https://www.gocamping.or.kr/", at: fc?.source?.checked_at, ...extra });
@@ -300,7 +300,7 @@ function typeLine2(c) {
   const st = (c.st ?? []).filter((t) => t[0] !== "PRIVATE_BATH");
   const other = st.filter((t) => t[0] !== "PITCH");
   const list = (other.length ? other : st).slice(0, 4);
-  return list.map(([k, n, , sub]) => `${k === "HOUSE" && sub ? sub : (ST[k]?.label ?? k)}${n ? ` ${fmt(n)}` : ""}`).join(" · ");
+  return list.filter(([k]) => ST[k]).map(([k, n, , sub]) => `${k === "HOUSE" && sub ? sub : ST[k].label}${n ? ` ${fmt(n)}` : ""}`).join(" · ");
 }
 // ── 숙박 상품 배지(소유자 2026-10-21: 겨울엔 글램핑·카라반·방갈로 유무가 중요) ─────
 // 근거: 고캠핑 업종(c.types) 또는 등록·운영자 근거 사이트 타입(c.st, 후기 언급 m 제외) · 트레일러는 고캠핑 c.trailer.
@@ -351,7 +351,7 @@ function siteBadges(c, max = 5) {
   // 2. c.st의 나머지 사이트 타입 (오토캠핑, 데크, 타프존, 차박 등)
   const st = (c.st ?? []).filter((t) => t[0] !== "PRIVATE_BATH" && !shownStays.has(t[0]) && !(STAY_KEYS.has(t[0]) && t[2] === "m"));
   const other = st.filter((t) => t[0] !== "PITCH");
-  const restList = other.length ? other : st;
+  const restList = (other.length ? other : st).filter(([k]) => ST[k]); // 알 수 없는 타입 코드(GENERAL 등)는 숨긴다
 
   for (const [k, n, , sub] of restList) {
     const info = ST[k] || { label: k, icon: "tent" };
@@ -975,7 +975,8 @@ function rowsHtmlHorizontal(c) {
   const nearX = near ? { v: near } : null;
   const feeX = fm?.text ? { v: `${fm.text}${fm.est ? " 추정" : ""}`, g: GR(c.fee?.grade) } : null;
   const timeStr = [ti.i?.[0] ? `입실 ${ti.i[0]}` : "", ti.o?.[0] ? `퇴실 ${ti.o[0]}` : "", ti.m?.[0] ? `매너 ${ti.m[0]}부터` : ""].filter(Boolean).join(" · ");
-  const timeX = timeStr ? { v: timeStr, g: ti.i?.[1] } : null;
+  // 지자체 표준 조례 일괄값(r)은 그 업장 공지가 아니다 → "참고"를 붙인다(소유자 2026-10-21).
+  const timeX = timeStr ? { v: ti.i?.[1] === "r" ? `${timeStr} (조례 기준 참고)` : timeStr, g: ti.i?.[1] } : null;
   const petX = f.pet ? { v: f.pet.v, g: f.pet.g } : null;
   return `<ul class="rows rows-horiz">
     ${cardRow("주차", "car", f.park)}
@@ -2693,6 +2694,7 @@ function galleryHtml(c) {
   return `<div class="gallery">${grid}${rail}</div>`;
 }
 async function detailView(id) {
+  if (S.byId.get(id) && String(S.byId.get(id).id) !== id) { history.replaceState(null, "", `#/c/${encodeURIComponent(S.byId.get(id).id)}`); id = String(S.byId.get(id).id); }
   await ensureFull([id]);
   const c = S.byId.get(id);
   if (!c) return `<div class="empty">${ic("search")}<b>캠핑장을 찾지 못했어요</b><a class="btn ghost" href="#/">찾기로</a></div>`;
@@ -3832,7 +3834,8 @@ async function ensureSupabaseConfig() {
   return ready;
 }
 function commentsHtml(c) {
-  if (!SB.url) return "";
+  // campground_comment.campground_id는 INT — 공원·당일 장소(문자 id)는 저장이 안 돼 400이 났다(QA 2026-10-20). 숫자 id만 연다.
+  if (!SB.url || !/^\d+$/.test(String(c.id))) return "";
   return `<section class="d-sec" id="cmt"><div class="sec-head">${iconTitle("chat-bubble", "캠퍼 한마디")}<span class="sec-note">로그인 없이</span></div>
     <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" placeholder="닉네임" required aria-label="닉네임"><textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁" required aria-label="내용"></textarea><button class="btn primary" type="submit">남기기</button></form>
     <ul class="cmts" data-cmts><li class="muted">불러오는 중…</li></ul></section>`;
@@ -3977,7 +3980,8 @@ async function fetchCampWeather(lat, lon) {
 
   try {
     const [fRes, aRes] = await Promise.all([
-      fetch(fUrl).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+      // 한 번 실패(일시 429·네트워크)하면 1.2초 뒤 한 번 더 받는다(QA 2026-10-20: 공원 상세에서 예보 실패).
+      fetch(fUrl).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((j) => j ?? new Promise((ok) => setTimeout(ok, 1200)).then(() => fetch(fUrl)).then((r) => (r.ok ? r.json() : null)).catch(() => null)),
       fetch(aUrl).then((r) => (r.ok ? r.json() : null)).catch(() => null),
     ]);
     if (!fRes || !fRes.daily) return null;
@@ -5559,6 +5563,9 @@ addEventListener("error", (e) => {
   S.camps = camps.filter((c) => c.status !== "폐업");
   S.fc = fcast;
   S.byId = new Map(S.camps.map((c) => [String(c.id), c]));
+  // 중복 등록을 합친 곳(c.mg = 합쳐진 id): 예전 링크·찜도 남은 곳으로 이어 준다(QA 2026-10-21).
+  for (const c of S.camps) for (const old of c.mg ?? []) if (!S.byId.has(String(old))) S.byId.set(String(old), c);
+  { const fix = (a) => [...new Set(a.map((x) => String(S.byId.get(String(x))?.id ?? x)))]; S.saved = fix(S.saved); S.pick = fix(S.pick); }
   S.photos = photos;
   S.cards = cards?.camps ?? {};
   for (const o of openings.items ?? []) if (!S.openings.has(String(o.id)) || o.kind !== "접수 마감") S.openings.set(String(o.id), o);

@@ -22,7 +22,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const outDir = join(root, "camping-atlas/public/context");
 const outPath = join(outDir, "extras.json");
 const catalog = JSON.parse(readFileSync(join(root, "camping-atlas/public/explore/data/campgrounds.json"), "utf8"))
-  .map((c) => ({ ...c, lat: Number(c.lat), lng: Number(c.lng) })).filter((c) => Number.isFinite(c.lat) && Number.isFinite(c.lng));
+  .map((c) => ({ ...c, lat: Number(c.lat), lng: Number(c.lng) })).filter((c) => Number.isFinite(c.lat) && Number.isFinite(c.lng) && c.lat !== 0 && c.lng !== 0); // 좌표 없음(null→0)은 빼기(QA 2026-10-21)
 const elevation = JSON.parse(readFileSync(join(root, "pipeline/registry/elevation.json"), "utf8"));
 const prev = existsSync(outPath) ? JSON.parse(readFileSync(outPath, "utf8")) : null;
 const key = process.env.DATA_GO_KR_SERVICE_KEY;

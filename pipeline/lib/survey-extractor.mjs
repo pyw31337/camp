@@ -261,7 +261,7 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
     // 국립공원·자연휴양림은 산림보호법상 모닥불·장작 전면 금지 (개별 화로대 표기 시에도 숯만 허용)
     firewoodAllowed = false;
     charcoalAllowed = firePitIndividual || hasAmenity(/바베큐|숯/);
-    firePitArrangement = "산림보호구역 (장작 불가, 숯만 가능)";
+    firePitArrangement = charcoalAllowed ? "산림보호구역 (장작 불가, 숯만 가능)" : "산림보호구역 (장작 불가)";
     fireFrom = "FIELD";
   } else if (firewoodAllowedText) {
     firewoodAllowed = true;
