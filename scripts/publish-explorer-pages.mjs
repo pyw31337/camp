@@ -161,6 +161,26 @@ await writeUtilityPages(out);
 await mkdir(`${rootOut}renewal`, { recursive: true });
 await writeFile(`${rootOut}renewal/index.html`, routePage("모여라캠핑", "#/"));
 
+// 운영 기록(/log/) 및 탐색 화면을 위한 경량 캠핑장 ID-이름 사전 생성 (28MB campgrounds.json 대체)
+const campJsonSource = existsSync(`${dataDir}/campgrounds.json`) ? `${dataDir}/campgrounds.json`
+  : existsSync(`${rootOut}explore/data/campgrounds.json`) ? `${rootOut}explore/data/campgrounds.json`
+  : existsSync(`${out}data/campgrounds.json`) ? `${out}data/campgrounds.json` : null;
+
+if (campJsonSource) {
+  try {
+    const rawCamps = JSON.parse(await readFile(campJsonSource, "utf8"));
+    const campNames = Object.fromEntries(rawCamps.filter((c) => c.id && c.name).map((c) => [c.id, c.name]));
+    const campNamesJson = JSON.stringify(campNames);
+    await mkdir(`${rootOut}log`, { recursive: true });
+    await writeFile(`${rootOut}log/camp-names.json`, campNamesJson);
+    await mkdir(`${out}data`, { recursive: true });
+    await writeFile(`${out}data/camp-names.json`, campNamesJson);
+    console.log(`경량 캠핑장 사전(camp-names.json) 발행 완료 (${Object.keys(campNames).length}개 · ${Math.round(campNamesJson.length / 1024)}KB)`);
+  } catch (err) {
+    console.warn("camp-names.json 생성 중 오류:", err.message);
+  }
+}
+
 if (rawTarget) {
   console.log(`메인 화면 및 탐색 화면 갱신: ${rootOut}index.html & ${out}index.html${kakaoKey ? " · 지도 키 있음" : " · 지도 키 없음"}`);
   process.exit(0);
@@ -210,4 +230,13 @@ for (const c of camps) {
   pages++;
 }
 console.log(`공유용 캠핑장 페이지 ${pages}개`);
+
+// 운영 기록(/log/) 및 탐색 화면을 위한 경량 캠핑장 ID-이름 사전 생성 (28MB campgrounds.json 대체)
+const campNames = Object.fromEntries(camps.filter((c) => c.id && c.name).map((c) => [c.id, c.name]));
+const campNamesJson = JSON.stringify(campNames);
+await mkdir(`${rootOut}log`, { recursive: true });
+await writeFile(`${rootOut}log/camp-names.json`, campNamesJson);
+await writeFile(`${out}data/camp-names.json`, campNamesJson);
+console.log(`경량 캠핑장 사전(camp-names.json) 발행 완료 (${Object.keys(campNames).length}개 · ${Math.round(campNamesJson.length / 1024)}KB)`);
+
 console.log(`camping-atlas 루트 및 explore 발행 준비 완료${kakaoKey ? " · 지도 키 있음" : " · 지도 키 없음"}`);
