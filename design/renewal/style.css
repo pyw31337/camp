@@ -3371,3 +3371,7 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 .region-page .region-subs .chip { text-decoration: none; }
 .d-region-link { color: inherit; text-decoration: none; border-bottom: 1px dashed currentColor; }
 .d-region-link:hover { color: var(--accent); }
+
+/* t39 #42 최근 본 캠핑장 */
+.saved-page .recent-sec { margin-top: clamp(40px, 5vw, 56px); }
+.saved-page .recent-sec .sec-head h2 { font-size: clamp(20px, 2.2vw, 24px); font-weight: 800; }
