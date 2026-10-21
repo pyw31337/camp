@@ -5352,6 +5352,53 @@ async function savesLogView() {
   return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><nav class="slog-links" aria-label="관련 화면"><a href="${APP_BASE}saved">찜 목록 보기</a><a href="${APP_BASE}log/">운영 대시보드(/log)</a></nav>${body}</section>`;
 }
 
+// 모든 가로 스크롤 영역: 마우스로 끌어서 넘기기(터치는 원래 스와이프). .rail은 initDraggableRails가 따로 처리(영우 님 2026-10-21).
+const hScrollOf = (el) => {
+  for (let n = el; n && n !== document.body; n = n.parentElement) {
+    if (n.matches?.(".rail, .car-multi, input, textarea, select")) return null;
+    const ox = getComputedStyle(n).overflowX;
+    if ((ox === "auto" || ox === "scroll") && n.scrollWidth > n.clientWidth + 4) return n;
+  }
+  return null;
+};
+document.addEventListener("pointerdown", (e) => {
+  if (e.pointerType !== "mouse" || e.button !== 0) return;
+  const sc = hScrollOf(e.target);
+  if (!sc) return;
+  const x0 = e.clientX, l0 = sc.scrollLeft; let moved = false;
+  const move = (ev) => { const dx = ev.clientX - x0; if (!moved && Math.abs(dx) > 5) { moved = true; sc.classList.add("is-dragging"); } if (moved) { ev.preventDefault(); sc.scrollLeft = l0 - dx; } };
+  const up = () => {
+    removeEventListener("pointermove", move); removeEventListener("pointerup", up);
+    sc.classList.remove("is-dragging");
+    if (moved) swallowNextClick();
+  };
+  addEventListener("pointermove", move); addEventListener("pointerup", up);
+});
+document.addEventListener("dragstart", (e) => { if (hScrollOf(e.target)) e.preventDefault(); });
+// 탭으로 나뉜 칸(주변시설 마트→정육→약국…, SNS 플랫폼): 내용 칸을 좌우로 밀면 이웃 탭으로 바뀐다.
+const swallowNextClick = () => { const f = (c) => { c.preventDefault(); c.stopPropagation(); }; addEventListener("click", f, { capture: true, once: true }); setTimeout(() => removeEventListener("click", f, { capture: true }), 450); };
+let swipeStart = null;
+const swipeBegin = (target, x, y) => {
+  const panel = target.closest?.("[role='tabpanel']");
+  swipeStart = panel && !hScrollOf(target) ? { panel, x, y } : null;
+};
+const swipeEnd = (x, y) => {
+  const st = swipeStart; swipeStart = null;
+  if (!st) return;
+  const dx = x - st.x, dy = y - st.y;
+  if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+  const sec = st.panel.closest("section") ?? st.panel.parentElement;
+  const tabs = [...sec.querySelectorAll("[role='tab']:not([hidden])")];
+  const i = tabs.findIndex((t) => t.getAttribute("aria-selected") === "true");
+  const n = tabs[i + (dx < 0 ? 1 : -1)];
+  if (!n) return;
+  n.click(); n.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+  swallowNextClick();
+};
+document.addEventListener("touchstart", (e) => { const t = e.touches[0]; if (e.touches.length === 1) swipeBegin(e.target, t.clientX, t.clientY); }, { passive: true });
+document.addEventListener("touchend", (e) => { const t = e.changedTouches[0]; swipeEnd(t.clientX, t.clientY); }, { passive: true });
+document.addEventListener("pointerdown", (e) => { if (e.pointerType === "mouse" && e.button === 0) swipeBegin(e.target, e.clientX, e.clientY); });
+document.addEventListener("pointerup", (e) => { if (e.pointerType === "mouse") swipeEnd(e.clientX, e.clientY); });
 // ── 라우터 ───────────────────────────────────────────────────
 const cleanup = [];
 let lastRoute = "";

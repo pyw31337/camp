@@ -3278,3 +3278,6 @@ html, body, #view { min-height: 100%; }
 .lt-clamp.lt-open { display: block !important; -webkit-line-clamp: unset; overflow: visible; }
 .lt-more { display: inline-flex; align-items: center; min-height: var(--tap, 44px); margin: 0; padding: 0 2px; border: 0; background: none; color: var(--accent); font-size: .84rem; font-weight: 800; cursor: pointer; }
 .use-val, .tile-v, .operator-grid p, .feat, .d-line, .tips li { overflow-wrap: anywhere; word-break: keep-all; white-space: normal; }
+/* 가로 스크롤 영역 마우스 끌기·탭 칸 스와이프(영우 님 2026-10-21) */
+.is-dragging { cursor: grabbing; user-select: none; scroll-behavior: auto !important; scroll-snap-type: none !important; }
+.is-dragging * { pointer-events: none; }
