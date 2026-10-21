@@ -5058,7 +5058,7 @@ async function compareView() {
   const acts = camps.map((c) => { const ch = primaryBooking(c); return `<td>${ch ? reserveSplit(c, { inline: true }) : `<a class="btn ghost wide" href="${APP_BASE}place/${encodeURIComponent(c.id)}">자세히</a>`}</td>`; }).join("");
 
   // 모바일 특화: 세로 스펙별 모아보기 카드 뷰
-  const cardsViewHtml = `<div class="cmp-cards-view${cmpMode === "cards" ? " is-active" : ""}">
+  const cardsViewHtml = `<div class="cmp-cards-view diff-on${cmpMode === "cards" ? " is-active" : ""}">
     ${rowsDef.map(([g, rows]) => `
       <div class="cmp-spec-card">
         <div class="cmp-spec-card-head">${g}</div>
@@ -5103,18 +5103,14 @@ async function compareView() {
         <h1>찜한 캠핑장 <em>비교</em></h1>
         <p class="sec-sub">찜한 목록에서 2~5곳을 선택해 나란히 스펙을 비교할 수 있어요.</p>
       </div>
-      <span class="sec-tools">
-        <label class="switch"><input type="checkbox" data-diff checked><span>다른 점만 강조</span></label>
-        <label class="switch"><input type="checkbox" data-diff-only><span>다른 점만 보기</span></label>
-      </span>
     </div>
-    <p class="cmp-sub" data-cmp-count>찜 <b>${saved.length}</b>곳 중 <b>${camps.length}</b>곳 비교 중 (최대 5곳 선택) · ${ic("check", "inline")} 누르면 비교에 넣고 빼요 · ${ic("heart", "inline")} 끄면 찜에서 빠져요 · <a class="sec-note" href="${APP_BASE}saved">찜 목록 전체</a></p>
+    <p class="cmp-count" hidden data-cmp-count>찜 ${saved.length}곳 중 ${camps.length}곳 비교 중</p>
     ${picker}
     ${noticeLess2}
 
     <div class="cmp-view-switcher" role="tablist" aria-label="비교 보기 방식">
-      <button type="button" class="cmp-tab${cmpMode === "table" ? " active" : ""}" data-cmp-mode="table" role="tab" aria-selected="${cmpMode === "table"}">표로 전체 비교</button>
-      <button type="button" class="cmp-tab${cmpMode === "cards" ? " active" : ""}" data-cmp-mode="cards" role="tab" aria-selected="${cmpMode === "cards"}">스펙별 모아보기 (모바일 추천)</button>
+      <button type="button" class="cmp-tab${cmpMode === "table" ? " active" : ""}" data-cmp-mode="table" role="tab" aria-selected="${cmpMode === "table"}">표로 비교</button>
+      <button type="button" class="cmp-tab${cmpMode === "cards" ? " active" : ""}" data-cmp-mode="cards" role="tab" aria-selected="${cmpMode === "cards"}">스펙 비교</button>
     </div>
 
     ${jumpChips}
@@ -5132,14 +5128,6 @@ async function compareView() {
 
 function bindCompare() {
   syncCompare();
-  $("[data-diff]")?.addEventListener("change", (e) => {
-    $(".cmp-table")?.classList.toggle("diff-on", e.target.checked);
-    $(".cmp-cards-view")?.classList.toggle("diff-on", e.target.checked);
-  });
-  $("[data-diff-only]")?.addEventListener("change", (e) => {
-    $(".cmp-table")?.classList.toggle("diff-only", e.target.checked);
-    $(".cmp-cards-view")?.classList.toggle("diff-only", e.target.checked);
-  });
   $$("[data-cmp-mode]").forEach((btn) => btn.addEventListener("click", () => {
     cmpMode = btn.dataset.cmpMode;
     $$("[data-cmp-mode]").forEach((b) => {
