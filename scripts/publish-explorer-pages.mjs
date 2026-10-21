@@ -222,6 +222,31 @@ if (placeSource) {
     }
   }
   console.log(`공유 미리보기 페이지 place/{id}/ ${n}개`);
+  // 시·도 / 시·군·구 랜딩(t39 #40): region/{시도}/ · region/{시도}/{시군구}/ 에 제목·설명·canonical을 넣는다(검색·공유용). 사람은 앱의 같은 주소를 본다.
+  await rm(`${rootOut}region`, { recursive: true, force: true });
+  const groups = new Map();
+  for (const c of list) {
+    if (!c.id || !c.name || !c.sido || c.du || /^park-/.test(String(c.id))) continue; // 당일 나들이·공원 원장은 앱 지역 화면과 같이 뺀다
+    for (const k of [c.sido, c.sigungu ? `${c.sido}/${c.sigungu}` : null].filter(Boolean)) groups.set(k, (groups.get(k) ?? 0) + 1);
+  }
+  let rn = 0;
+  for (const [k, count] of groups) {
+    const [sd, sg] = k.split("/");
+    const where = sg ? `${sd} ${sg}` : sd;
+    const title = `${where} 캠핑장 ${count.toLocaleString("ko-KR")}곳 · 모여라 캠핑`;
+    const description = `${where} 캠핑장 ${count.toLocaleString("ko-KR")}곳을 한눈에 — 사이트 규격·전기·화로·주차·주변 정보와 공식 예약처`;
+    const rel = `region/${encodeURIComponent(sd)}/${sg ? `${encodeURIComponent(sg)}/` : ""}`;
+    const url = `${SITE}${rel}`;
+    const head = `<meta name="description" content="${attr(description)}"><link rel="canonical" href="${attr(url)}">`
+      + `<meta property="og:type" content="website"><meta property="og:site_name" content="모여라 캠핑"><meta property="og:locale" content="ko_KR">`
+      + `<meta property="og:title" content="${attr(title)}"><meta property="og:description" content="${attr(description)}"><meta property="og:url" content="${attr(url)}">`
+      + `<meta property="og:image" content="${attr(`${SITE}images/og-image.png`)}"><meta name="twitter:card" content="summary_large_image">`;
+    const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${attr(title)}</title>${head}${STUB_JS}</head><body><h1>${attr(where)} 캠핑장</h1><p>${attr(description)}</p></body></html>`;
+    await mkdir(`${rootOut}region/${sd}${sg ? `/${sg}` : ""}`, { recursive: true });
+    await writeFile(`${rootOut}region/${sd}${sg ? `/${sg}` : ""}/index.html`, html);
+    rn++;
+  }
+  console.log(`지역 랜딩 페이지 region/ ${rn}개`);
 }
 
 // 운영 기록(/log/) 및 탐색 화면을 위한 경량 캠핑장 ID-이름 사전 생성 (28MB campgrounds.json 대체)
