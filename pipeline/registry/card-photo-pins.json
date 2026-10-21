@@ -1,0 +1,11 @@
+{
+ "policy": "사람이 확인한 카드 대표 사진 고정(pin)과 잘못 고른 후보 제외(reject). 원본 후보 데이터는 지우지 않고 고르기만 바꾼다.",
+ "camps": {
+  "102229": {
+   "pin": { "i": "https://mblogthumb-phinf.pstatic.net/MjAyNjEwMTJfMTEy/MDAxNzkxODA0ODA2NzEz.WgAZa8fZt-jHncwE15-TZ5BJP8bDNAw9Be0YslNRqSMg.EsjxH2oZv9nSfcC75sWfUiVQlEN6gLJ8kncPxsnCLPwg.JPEG/IMG%EF%BC%BF0148.JPG?type=w800", "t": "https://mblogthumb-phinf.pstatic.net/MjAyNjEwMTJfMTEy/MDAxNzkxODA0ODA2NzEz.WgAZa8fZt-jHncwE15-TZ5BJP8bDNAw9Be0YslNRqSMg.EsjxH2oZv9nSfcC75sWfUiVQlEN6gLJ8kncPxsnCLPwg.JPEG/IMG%EF%BC%BF0148.JPG?type=w400", "u": "https://blog.naver.com/2124mj/224440293917", "s": "네이버블로그", "d": "2026-10-12" },
+   "reject": ["https://search3.kakaocdn.net/argon/130x130_85_c/Apxspld2pru"],
+   "why": "영우 님 2026-10-21: 로컬푸드 매장(마트) 사진이 대표로 나옴 → 오토캠핑장 사이트 사진으로 고정",
+   "at": "2026-10-21"
+  }
+ }
+}

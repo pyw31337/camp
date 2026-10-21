@@ -15,6 +15,8 @@ const camps = JSON.parse(readFileSync(join(dataDir, "campgrounds.json"), "utf8")
 const official = existsSync(join(dataDir, "photos.json")) ? JSON.parse(readFileSync(join(dataDir, "photos.json"), "utf8")) : {};
 const prev = existsSync(outPath) ? JSON.parse(readFileSync(outPath, "utf8")).camps ?? {} : {};
 const MAX_TRY = 10;
+const pinsPath = join(root, "pipeline/registry/card-photo-pins.json");
+const pins = existsSync(pinsPath) ? JSON.parse(readFileSync(pinsPath, "utf8")).camps ?? {} : {};
 
 async function stats(url) {
   const ctl = AbortSignal.timeout(10000);
@@ -36,7 +38,10 @@ async function worker() {
     let d; try { d = JSON.parse(readFileSync(path, "utf8")); } catch { continue; }
     // 후보: 이미지 검색(sns_images) → 없으면 블로그·카페 후기 글의 대표 썸네일(소유자 2026-10-20: 사진이 전혀 없으면 후기에서라도)
     const posts = [...(d.reviews ?? []), ...(d.cafe ?? []), ...(d.web ?? [])].filter((x) => x?.thumb && x?.url).map((x) => ({ thumb: x.thumb, img: null, url: x.url, src: x.src ?? "블로그 후기", date: x.date ?? null }));
-    const cands = [...orderCandidates(d.sns_images), ...posts].slice(0, MAX_TRY + 4);
+    const pin = pins[c.id];
+    if (pin?.pin) { out[c.id] = { ...pin.pin, at: pin.at ?? null, pinned: true }; kept++; continue; }
+    const rejected = new Set(pin?.reject ?? []);
+    const cands = [...orderCandidates(d.sns_images), ...posts].filter((x) => !rejected.has(x.thumb) && !rejected.has(x.img)).slice(0, MAX_TRY + 4);
     // 지난번에 고른 사진이 아직 후보에 있으면 그대로(다시 받지 않음)
     const old = prev[c.id];
     if (old && cands.some((x) => x.thumb === old.t)) { out[c.id] = old; kept++; continue; }
