@@ -5299,13 +5299,13 @@ async function savesLogView() {
 const cleanup = [];
 let lastRoute = "";
 function pathOf() {
-  const base = "/camp";
   let p = location.pathname;
-  if (p.startsWith(base)) p = p.slice(base.length) || "/";
+  if (p.startsWith("/camp")) p = p.slice(5) || "/";
   return p + location.search;
 }
 function go(path) {
-  const url = "/camp" + (path.startsWith("/") ? path : "/" + path);
+  const prefix = location.pathname.startsWith("/camp") ? "/camp" : "";
+  const url = prefix + (path.startsWith("/") ? path : "/" + path);
   if (location.pathname + location.search !== url) history.pushState(null, "", url);
   route();
 }
