@@ -104,7 +104,7 @@ function cardHtml(camp, index) {
   return '<article class="camp-card" data-id="' + safe(camp.id) + '">' +
     galleryHtml(camp, [camp.img].filter(Boolean), index) +
     '<div class="camp-card-body"><div class="camp-meta"><span>' + safe(compactArea(camp)) + '</span>' + (reservation ? '<span>' + safe(reservation) + '</span>' : '') + '</div>' +
-    '<a class="camp-name" href="../explore/#c=' + encodeURIComponent(camp.id) + '" title="' + safe(camp.name) + ' 상세 보기">' + safe(camp.name) + '</a>' +
+    '<a class="camp-name" href="/camp/c/' + encodeURIComponent(camp.id) + '" title="' + safe(camp.name) + ' 상세 보기">' + safe(camp.name) + '</a>' +
     '<div class="spec-lines">' + (specHtml(camp) || '<div class="spec-line"><span>형태</span><strong>' + safe(kindLabel(camp)) + '</strong></div>') + '</div>' +
     '<div class="card-actions"><a href="' + safe(bookingUrl || camp.gc_url || '#') + '" target="_blank" rel="noopener noreferrer">예약 <span>↗</span></a>' +
     '<button class="info-button" type="button" aria-expanded="false" aria-label="' + safe(camp.name) + ' 정보 기준"><i>i</i><span class="info-popover">' + safe(sourceText(camp)) + '</span></button></div></div></article>';
