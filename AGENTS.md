@@ -41,37 +41,6 @@
 3. **하드 캡(Hard Cap) 유지**: 소셜 후기 수집 등은 일일 쿼터의 절반 이하(`SOCIAL_MAX_CALLS=9100`)로 제한한다.
 4. **원클릭 점검**: `npm --prefix pipeline run check:billing` 명령으로 전체 외부 서비스 과금 안전 상태를 언제든 확인한다. 상세 규정은 `docs/EXTERNAL_SERVICES_BILLING_SAFETY.md`.
 
-## 운영 DB(Supabase) 및 비회원 자유 댓글·인프라 연동 현황 (2026-10-16, Gemini) — 전 에이전트 필독
-
-1. **Supabase PostgreSQL 17 클라우드 운영 DB 완전 구축**:
-   - 연결 풀러: `aws-0-ap-southeast-2.pooler.supabase.com:5432` (세션 풀러, IPv4 호환). GitHub Secret `DATABASE_URL`, `DATABASE_SSL=true`.
-   - 전체 48개 테이블에 RLS(Row Level Security) 설정 완료, 뷰에 `security_invoker = true` 적용하여 **Supabase Security Advisor 보안 이슈 0건** 달성.
-   - 현재 DB 사용량: **39 MB / 500 MB (사용률 7.84%, 92% 이상 여유)**. 대용량 바이너리 저장 금지, 메타데이터 중심 보존.
-2. **비회원 자유 댓글 게시판 (`campground_comment`) PostgREST 실시간 양방향 연동**:
-   - 일반 캠퍼를 위해 GitHub 로그인 없는 자유 댓글창 배포 완료 ([explore/](https://pyw31337.github.io/camp/explore/)).
-   - 소유자가 `SUPABASE_ANON_KEY` / `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (`sb_publishable_...`) 등록 완료.
-   - 브라우저 클라이언트가 PostgREST(`https://zgnetdxqzsnmzdvoxzbw.supabase.co/rest/v1/campground_comment`)를 통해 실시간으로 작성/조회하며, 4자리 비밀번호로 삭제 가능.
-3. **주변 생활 인프라 7종 최근접 거리 전수 연동**:
-   - 행정안전부 LOCALDATA 인허가 기준 21,574건의 최근접 거리 데이터를 카탈로그(`campgrounds.json`의 `c.nl`) 및 상세(`camps/{id}.json`의 `d.nearby_licensed`)에 전수 주입 (`pipeline/scripts/build-nearby-facts.mjs`).
-   - 카드에 `"편의점 1.0km · 마트 2.2km · 정육점 0.9km"` 노출, 상세 페이지에 로드뷰 1초 바로가기 연동.
-4. **AI 장단점 분석 1,640곳 커버리지 확장**:
-   - 자연어 캠퍼 감성 사전 확장으로 1,640개소 장단점 요약 완료. 로컬 SQLite(`db/moyeora_camping.db`) 및 Supabase PostgreSQL `review_digest`에 동기화 완료.
-5. **1박 요금 데이터 확장, 요금대 필터 및 1:1 비교함 연동 (2026-10-16)**:
-   - 후기 언급/운영자 안내/공식 소개글 요금문구/국립공원·자연휴양림·지자체 표준요금제 매핑을 종합하여 전국 **1,820곳(58.4%)의 1박 요금(`c.fee`)**을 `campgrounds.json`에 주입 (`build-site-pricing-facts.mjs`). 카드 목록에서 `3만~6만원대`, `3.5만원부터` 등 실시간 노출.
-   - 탐색 상단 필터 바에 `요금 확인`, `~3만원`, `3~5만원`, `5~7만원`, `7만원+` 5개 요금 필터 칩 신설 및 실시간 개수 집계/URL 해시 연동 완료.
-   - 캠핑장 1:1 비교 모달에 `1박 기준 요금` 비교 행 신설 및 근거 등급 뱃지 표시 완료.
-   - 상세 화면 `#sec-site`에 사이트 종류별 규격(가로×세로m), 바닥 재질, 사이트 수, 1박 요금, 주차 동선을 일목요연하게 비교하는 `sitePricingTable` 표 추가.
-   - "확인 필요" 과잉 분류 전면 개편: 오토 사이트 등록, 관광진흥법 기본 600W, 장작 판매 등 근거 있는 데이터를 메인 볼드 텍스트로 우선 노출하고, 후기 언급은 우측에 깔끔한 `<em class="grade grade-surveyed">후기·확인필요</em>` 뱃지로 부착. 카드 포스터의 불필요한 회색 점선 확인필요 배지를 정리하고 핵심 배지만 노출.
-6. **다음 단계 로드맵 및 에이전트별 분업 (2026-10-16)**:
-   - **Codex (화면/UX)**: 지도 클러스터링 및 모바일 뷰 최적화, 1:1 비교함 공유 URL 연동 고도화.
-   - **Claude (원천/사실)**: 공공데이터 원장(`public-datasets.json`)의 국립공원·휴양림 표준요금제 사실 저장소(`data/facts/`) 적재, 상가정보 API 철물·캠핑용품점 보강.
-   - **Gemini (파이프라인/DB)**: 민간/사설 야영장 추가 요금 데이터 수집 보완 및 사이트별 요금·크기·인원 1:1 정밀 매핑 고도화.
-7. **공공 야영장 표준 규정 일괄 주입 및 스펙 커버리지 대도약 (2026-10-19, Gemini)**:
-   - 전국 366개소의 국립공원, 산림청 국공립 자연휴양림, 지자체 국민여가캠핑장에 법령 및 표준 조례에 근거한 `OFFICIAL_TEXT` 표준 운영 규약 주입 (`pipeline/lib/public-standards.mjs`).
-   - 확정값(CONFIRMED) 대폭 증가: 입실 945곳(확정 597), 퇴실 911곳(확정 588), 매너타임 563곳(확정 454), 취소/환불 622곳(확정 621), 주차 1,466곳(확정 498), 전기 429곳(확정 412). 5대 핵심 스펙 충족지 389곳 → 721곳 도약.
-   - 네이버 검색 API 질의 계획(QUERY_PLAN) 정밀 타깃화: 따옴표 exact match로 스니펫 적중률 극대화.
-   - 화면 표출 시 확정값(`CONFIRMED`)은 확인필요 배지 없이 정규 값으로 바로 노출되므로, 디자인 에이전트는 해당 필드들을 핵심 카드로 적극 배치할 것.
-
 ## 수집 데이터 즉시 공유·발행 (2026-10-19 소유자 지시 — 모든 에이전트 공통)
 
 **“수집된 데이터는 다른 에이전트들이 즉각 알 수 있게 공유하고, 바로 사이트에 반영될 수 있게.”** 자세한 내용은 `docs/COLLECTED_DATA.md`.
@@ -81,18 +50,28 @@
 3. **회귀 금지**: 데이터를 다시 만든 커밋은 `pipeline/scripts/coverage-guard.mjs`로 항목별 커버리지가 줄지 않았는지 확인한다(max(20곳, 2%) 넘게 줄면 발행하지 않음).
 4. **원천 등록**: 사실 원천 종류를 새로 만들면 `pipeline/lib/fact-store.mjs` `SOURCES`에 등록한다(미등록이면 그날 발행 전체가 막힘).
 
-## 문서의 역할
+## 문서 지도 (2026-10-21 정리 — 핵심 4종부터)
 
-- `docs/PROJECT_PLAN.md`: 제품 범위, 단계, 수용 기준, 결정 대기 사항
-- `docs/AGENT_HANDOFF.md`: 현재 상태, 최근 검증, 다음 작업, 위험·차단 요인
-- `docs/EXTERNAL_SERVICES_BILLING_SAFETY.md`: 외부 서비스 및 API 무과금 안전 운영 지침 (필독)
-- `docs/DESIGN_SYSTEM.md`: 여행 탐색 UX, 색상·이미지 토큰, 반응형 규칙
-- `docs/캠핑장_통합검색_예약_서비스_기획_설계.md`: 도메인·예약·데이터 모델의 근거 설계
-- `docs/캠핑장_미디어_지도_투어_연동_설계.md`: 미디어·소셜·지도·날씨·여행 연동 원칙
-- `docs/FACT_STORE.md`: 원자 사실 저장소(속성 사전·등급·조합 조회·쓰기 소유권)
-- `docs/PUBLIC_DATA_PLAN.md`: 공공데이터(캠핑·편의점·사진) 목록과 활용 기획, 단계별 담당
-- `docs/KAKAO_DISCOVERY.md`: 카카오 공식 API 장소 맞춤·홈페이지 발굴
-- `docs/COLLECTED_DATA.md`: 수집 데이터 공유 위치(collected-data 브랜치)·증분 발행·회귀 검사
+| 순서 | 문서 | 언제 읽나 |
+|---|---|---|
+| 1 | `AGENTS.md`(이 파일) | 모든 작업 — 공통 규칙·문서 지도·검사 |
+| 2 | [`docs/DATA_MERGE_POLICY.md`](docs/DATA_MERGE_POLICY.md) | **데이터에 쓰는 모든 작업**(봇·수집·병합) — 지우지 않기·우선순위·field-guard |
+| 3 | [`docs/COLLECTED_DATA.md`](docs/COLLECTED_DATA.md) | 수집 데이터가 어디 있고 어떻게 발행되나(collected-data 브랜치·증분 발행·커버리지 검사) |
+| 4 | [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md) | 화면을 바꾸는 모든 작업 — 토큰·공통 틀·주소·컴포넌트 규칙(맨 아래가 최신) |
+
+그 밖에: `docs/AGENT_HANDOFF.md`(현재 상태·최근 검증·지난 기록), `docs/PROJECT_PLAN.md`(범위·결정), `docs/EXTERNAL_SERVICES_BILLING_SAFETY.md`(무과금, 필독), `docs/FACT_STORE.md`(사실 저장소), `docs/PUBLIC_DATA_PLAN.md`, `docs/KAKAO_DISCOVERY.md`, 설계 근거 2종(`docs/캠핑장_*.md`). 나머지 `docs/*`는 기능별 상세·기록이다.
+
+## 화면 코드의 자리 (2026-10-21)
+
+- 원본은 `design/renewal/` 하나(`app.js`·`style.css`·`shell.css`·`index.html`). 발행본 `camping-atlas/public/{app.js,style.css,shell.css,index.html}`은 `node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public`으로 만든다 — **발행본만 고치면 다음 배포에서 덮인다**(#181 사례).
+- 헤더·푸터·하단 탭·폭·여백은 `shell.css`와 `index.html`의 `<!-- shell:* -->` 한 곳. `/log/`에도 발행 때 그대로 들어간다.
+- 주소는 `#` 없는 경로(`/camp/map`, `/camp/place/{id}`). 공유 미리보기 `place/{id}/`는 배포 때 생성(커밋하지 않음).
+
+## 검사 (2026-10-21)
+
+- 필수 검사: `Web quality / Lint and build`, `Web quality / Rail swipe`(브라우저 회귀 전부가 이 잡 안에 있다).
+- 브라우저 회귀 전부를 로컬에서 CI와 같은 목록으로: `bash camping-atlas/scripts/run-browser-tests.sh [URL]` — 목록의 원본은 `.github/workflows/web-quality.yml` 하나다(새 테스트는 워크플로에만 추가).
+- 파이프라인: `npm --prefix pipeline test`.
 
 ## 홈 가로 레일 드래그/스와이프 가드 (필수)
 
