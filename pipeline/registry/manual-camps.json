@@ -1,5 +1,5 @@
 {
-  "note": "고캠핑 등 자동 원천에 없는 1박 캠핑장(수기 보강분). 2026-10-21: 평택캠핑성(#129에서 campgrounds.json에 직접 넣음)을 재현 가능하게 옮김. src.url·checked_at은 원문(관광안내 tripinfo) 기준. apply-dayuse-seed.mjs가 같은 방식으로 붙인다.",
+  "note": "고캠핑 등 자동 원천에 없는 1박 캠핑장의 수기 보강분. 운영자 원문이 없는 항목은 공공 관광안내를 보조 원천으로 쓰며, 가격·규칙은 확인일과 등급을 함께 보관한다.",
   "places": [
     {
       "id": "102377",
@@ -10,169 +10,53 @@
       "addr": "경기도 평택시 안골길 85-47 (도일동)",
       "lat": 37.055156,
       "lng": 127.1104547,
-      "tel": "010-6439-3318",
+      "tel": "010-8640-5481",
       "homepage": "",
-      "status": "운영중",
-      "types": [
-        "일반야영장",
-        "자동차야영장"
-      ],
-      "amenities": [
-        "전기",
-        "온수",
-        "물놀이장(20m 무료 온수수영장)",
-        "실내놀이터",
-        "매점",
-        "샤워장",
-        "개수대",
-        "세면장",
-        "수세식 화장실",
-        "와이파이(일부 안내)"
-      ],
-      "pets": "불가능",
+      "status": "운영 여부 확인 필요",
+      "types": ["일반야영장", "자동차야영장"],
+      "amenities": ["온수수영장", "실내놀이터"],
       "fee": {
-        "min": 45000,
-        "max": 45000,
-        "text": "A존(18면)·B존(26면) 각 45,000원 (캠핑카·카라반·트레일러 추가요금)",
-        "basis": "캠핏/관광안내 (2025 기준, 변동 가능)",
-        "grade": "MENTION"
+        "min": 20000,
+        "max": 30000,
+        "text": "공공 관광안내 기재 요금 2만~3만원 (변동 가능)",
+        "basis": "공공 관광안내 · 전화/예약 채널 재확인 필요",
+        "grade": "MENTION",
+        "url": "https://ontrip.kr/travel-guides/details/3010874",
+        "checked_at": "2026-10-21"
       },
       "pf": {
-        "s": "덕암산 기슭 산악형 · A존 18·B존 26 · 1박 4.5만원 · 20m 온수수영장·실내놀이터 · 반려 불가",
-        "t": [
-          "MOUNTAIN",
-          "FAMILY",
-          "WATER_PLAY",
-          "KIDS",
-          "FOREST",
-          "QUIET"
-        ],
-        "k": 7
+        "s": "덕암산 인근 · 온수수영장 · 실내놀이터",
+        "t": ["MOUNTAIN", "FAMILY", "WATER_PLAY", "KIDS"],
+        "k": 4
       },
-      "alias": [
-        "덕암호 캠핑장",
-        "덕암호캠핑장"
-      ],
+      "alias": ["덕암호 캠핑장", "덕암호캠핑장"],
       "op": "PRIVATE",
-      "kinds": [
-        [
-          "GENERAL",
-          44
-        ]
-      ],
-      "floors": [
-        [
-          "CRUSHED_STONE",
-          44
-        ]
-      ],
       "checkin": "14:00",
-      "checkout": "11:00",
-      "closed": "매주 화·수·목 (일부 안내 기준)",
-      "notes": [
-        "예약: 캠핏(Camfit) 실시간 예약 — https://camfit.co.kr/camp 에서 '덕암호' 또는 '평택캠핑성' 검색",
-        "송탄 IC 인근 덕암산 기슭 산악형 캠핑장. 숲 속 분위기, 나무로 둘러싸인 사이트 구성",
-        "20m 길이 무료 온수 수영장 + 실내놀이터 구비 (가족·아이 동반 적합)",
-        "사이트 구성: A존 18면 + B존 26면 = 총 44면 (파쇄석). 5gcamp 기준 총 58면 안내도 있음",
-        "개수대 물 사용 시간 제한: 07-09 / 11-13 / 15-16 / 17-22 (22시 이후 사용 불가)",
-        "예약: 캠핏(Camfit) 실시간 예약. 체크인 14:00 / 체크아웃 11:00 (일부 안내 12:00)",
-        "휴무: 매주 화·수·목 (일부 출처 기준, 현장·캠핏 확인 권장)",
-        "캠핑카·카라반·트레일러 추가 요금 있음. 반려동물 출입 불가 (현장 확인 권장)",
-        "부대시설: 매점, 샤워장, 개수대, 세면장, 수세식 화장실, 전기·온수 제공",
-        "매너타임 강조되는 조용한 캠핑장. 사이트 접근 경사 있음",
-        "시설 상세: 20m 무료 온수 수영장, 실내놀이터, 매점, 샤워장, 개수대(시간제한), 세면장, 수세식화장실, 전기·온수, 사이트 옆 주차(파쇄석 44면)",
-        "후기(트립인포 2023-12-12): 조용합니다. 할 것도 조금 없긴 합니다. 조용히 가족들과 고기 구워 먹고 이야기하며 1박 하기 좋습니다.",
-        "후기(유튜브 2024-04): 매너타임 엄격. 사장님이 순회 관리. 떠드는 소음은 제재, 아기 울음은 괜찮았음.",
-        "배치도·사이트 가로×세로 실측은 공개 자료에서 확인되지 않음. 면수만 확인(트립인포 A18+B26=44, 5gcamp 58면)."
-      ],
-      "field_conditions": {
-        "version": 2,
-        "status": "SURVEYED",
-        "parking": {
-          "state": "CONFIRMED",
-          "mode": "SITE_ADJACENT",
-          "tent_side": true,
-          "cart_required": false,
-          "shared_nearby": false,
-          "auto_camping_sites": 44
-        },
-        "power": {
-          "state": "CONFIRMED",
-          "available": true,
-          "statutory_standard": true
-        },
-        "ground": {
-          "state": "CONFIRMED",
-          "types": [
-            {
-              "type": "CRUSHED_STONE",
-              "count": 44
-            }
-          ]
-        },
-        "sanitary": {
-          "state": "CONFIRMED",
-          "hot_water": "제공",
-          "note": "샤워장·개수대·세면장·수세식화장실 구비. 개수대 물사용 시간제한(07-09/11-13/15-16/17-22)"
-        },
-        "features": [
-          "SWIMMING_POOL",
-          "PLAYGROUND",
-          "SHOP",
-          "FOREST",
-          "HOT_WATER",
-          "WIFI"
-        ]
-      },
+      "checkout": "12:00",
       "booking": {
-        "methods": [
-          "온라인실시간예약"
-        ],
-        "url": "https://camfit.co.kr/camp",
+        "methods": ["전화 문의"],
+        "url": "tel:01086405481",
         "channels": [
           {
-            "platform_id": "camfit",
-            "platform_name": "캠핏",
-            "url": "https://camfit.co.kr/camp",
-            "kind": "online",
-            "confidence": 0.85,
-            "evidence": [
-              "tripinfo 예약 안내",
-              "5gcamp 온라인예약 표기"
-            ]
-          },
-          {
             "platform_id": "phone",
-            "platform_name": "전화 예약",
-            "url": "tel:010-6439-3318",
+            "platform_name": "전화 문의",
+            "url": "tel:010-8640-5481",
             "kind": "phone",
-            "confidence": 0.7,
-            "evidence": [
-              "contact.tel"
-            ]
+            "confidence": 0.8,
+            "evidence": ["공공 관광안내 연락처"]
           }
         ],
-        "primary": {
-          "platform_id": "camfit",
-          "platform_name": "캠핏",
-          "url": "https://camfit.co.kr/camp",
-          "kind": "online",
-          "confidence": 0.85,
-          "evidence": [
-            "tripinfo 예약 안내"
-          ]
-        },
         "source": {
-          "label": "Tripinfo / 5gcamp 운영 안내",
-          "url": "https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874",
-          "checked_at": "2026-10-21T09:28:00+09:00",
+          "label": "공공 관광안내",
+          "url": "https://ontrip.kr/travel-guides/details/3010874",
+          "checked_at": "2026-10-21",
           "tier": "B"
         }
       },
       "ph": "camps/102377/img1.jpg",
       "img": "media/camps/102377/img1.jpg",
       "src": {
-        "url": "https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874",
+        "url": "https://ontrip.kr/travel-guides/details/3010874",
         "checked_at": "2026-10-21"
       }
     }

@@ -43,6 +43,11 @@ node pipeline/scripts/build-link-health.mjs
 node pipeline/scripts/build-card-fallback.mjs
 # 기존 값이 지워지거나 줄어든 곳은 최신 main 값으로 되살린다(채우기 우선 — 리셋 금지). 기록: pipeline/registry/merge-review.ndjson
 node "$SRC/scripts/field-guard.mjs" "$BASEROOT" . --heal
+# 자동 추출보다 구체적인 운영자·공공 원문 보정은 field-guard 뒤에 적용한다.
+# 이어서 2만원 미만의 비확정 1박 언급을 화면·필터에서 제외한다(원천·감사 기록은 유지).
+node pipeline/scripts/apply-curated-camp-facts.mjs
+node pipeline/scripts/audit-fee-outliers.mjs --apply
+node pipeline/scripts/audit-catalog-sanity.mjs
 node pipeline/scripts/report-coverage.mjs
 node pipeline/scripts/build-fact-store.mjs
 node "$SRC/scripts/coverage-guard.mjs" "$BASE" "$DATA/meta.json"

@@ -1,0 +1,247 @@
+{
+  "version": 1,
+  "updated_at": "2026-10-21T12:00:00+09:00",
+  "policy": "운영자·공공 원문을 직접 대조해, 자동 추출값보다 구체적이고 최신인 항목만 덮어쓴다. 사진은 운영자 원문 URL만 연결하며 저장하지 않는다.",
+  "camps": [
+    {
+      "id": "102229",
+      "catalog": {
+        "name": "화성에코팜테마파크 오토캠핑장",
+        "sido": "경기도",
+        "sigungu": "화성특례시",
+        "area": "서울·경기",
+        "addr": "경기도 화성특례시 서신면 영종로안길 24 (궁평리 749)",
+        "tel": "031-5180-7820",
+        "homepage": "https://hsecofarm.hscity.go.kr/",
+        "op": "LOCAL_GOVERNMENT",
+        "status": "운영",
+        "types": ["자동차야영장"],
+        "kinds": [["AUTO_PITCH", 106]],
+        "sizes": [[5, 8, 70], [12, 8, 36]],
+        "floors": [["CRUSHED_STONE", 90], ["DECK", 11], ["BLOCK", 5]],
+        "amenities": ["매점", "카페·식음", "로컬푸드", "어린이체험관", "놀이터", "일산화탄소감지기 대여"],
+        "pets": "불가능",
+        "booking": {
+          "methods": ["온라인 예약"],
+          "url": "https://hsecofarm.hscity.go.kr/reservation/",
+          "channels": [
+            {"platform_id": "public-site", "platform_name": "에코팜캠프 예약", "url": "https://hsecofarm.hscity.go.kr/reservation/", "kind": "online", "confidence": 1, "evidence": ["운영자 예약 페이지"]}
+          ],
+          "primary": {"platform_id": "public-site", "platform_name": "에코팜캠프 예약", "url": "https://hsecofarm.hscity.go.kr/reservation/", "kind": "online", "confidence": 1},
+          "source": {"label": "화성에코팜테마파크 운영자 예약", "url": "https://hsecofarm.hscity.go.kr/reservation/", "checked_at": "2026-10-21T12:00:00+09:00", "tier": "A"}
+        },
+        "img": "https://hsecofarm.hscity.go.kr/reservation/images/img/ecofarmcamping.jpg",
+        "fee": {
+          "min": 35000,
+          "max": 50000,
+          "text": "일반형 3.5만~4만원 · 확장형 4.5만~5만원 (1박)",
+          "basis": "운영자 홈페이지 이용요금",
+          "grade": "OPERATOR",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/price.do",
+          "checked_at": "2026-10-21T12:00:00+09:00"
+        },
+        "pf": {
+          "s": "오토 106 · 입실 14:00 · 전기 600W · 일반형·확장형",
+          "t": ["AUTO", "FAMILY"],
+          "k": 15,
+          "p": {"v": "3.5만~5만원", "min": 35000, "max": 50000, "g": "OPERATOR", "l": "운영자 이용요금", "u": "https://hsecofarm.hscity.go.kr/reservation/info/price.do", "a": "2026-10-21"}
+        },
+        "field_conditions": {
+          "version": 2,
+          "status": "OPERATOR",
+          "parking": {"state": "OPERATOR", "mode": "UNKNOWN", "tent_side": null, "cart_required": null, "shared_nearby": null, "drop_off_external": null, "auto_camping_sites": null},
+          "shelter_setup": {"state": "UNKNOWN", "max_tents": null, "max_tarps": null, "canopy_allowed": null, "note": null},
+          "power": {"state": "OPERATOR", "available": true, "limit_w": 600, "regulatory_reference_w": null, "breaker_capacity": null, "statutory_standard": false, "high_power_mention": null},
+          "ground": {"state": "CONFIRMED", "types": [{"type": "CRUSHED_STONE", "count": 90}, {"type": "DECK", "count": 11}, {"type": "BLOCK", "count": 5}]},
+          "charcoal": {"state": "OPERATOR", "allowed": false},
+          "firewood": {"state": "OPERATOR", "allowed": false, "sold": false},
+          "fire_pit": {"state": "OPERATOR", "arrangement": "불가"},
+          "site_size": {"state": "CONFIRMED", "groups": [{"width_m": 5, "depth_m": 8, "count": 70, "name": "일반형 A–D"}, {"width_m": 12, "depth_m": 8, "count": 36, "name": "확장형 E·F"}]},
+          "sanitary": {"state": "UNKNOWN", "toilets_count": null, "showers_count": null, "sinks_count": null, "private_bathroom": false, "private_bathroom_state": "UNKNOWN", "hot_water": null, "note": null},
+          "features": ["PLAYGROUND", "EXPERIENCE"],
+          "rental_offers": [{"item": "일산화탄소 감지기", "price_krw": 0, "note": "관제센터 무상 대여"}],
+          "source": {"label": "화성에코팜테마파크 운영자 이용안내", "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do", "checked_at": "2026-10-21T12:00:00+09:00", "tier": "A"}
+        },
+        "of": {
+          "w": {"v": 600, "u": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do", "t": "2026-10-21T12:00:00+09:00", "q": "전열기구 최대 600W"},
+          "fire": {"v": "NO_FIRE", "u": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do", "t": "2026-10-21T12:00:00+09:00", "q": "장작·숯·갈탄·펠렛 사용 금지"},
+          "pk": {"v": "UNKNOWN", "u": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do", "t": "2026-10-21T12:00:00+09:00", "q": "차량은 지정 구역을 이용"}
+        },
+        "ti": {"i": ["14:00", "c"], "o": ["11:00", "c"], "m": ["23:00", "c"]}
+      },
+      "detail": {
+        "products_src": {"label": "화성에코팜테마파크 운영자 이용요금", "url": "https://hsecofarm.hscity.go.kr/reservation/info/price.do", "checked_at": "2026-10-21T12:00:00+09:00"},
+        "gcd": {
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/price.do",
+          "checked_at": "2026-10-21T12:00:00+09:00",
+          "fees": [
+            {"label": "일반형 A–D · 5×8m", "period": "평일 1박", "won": 35000},
+            {"label": "일반형 A–D · 5×8m", "period": "주말 1박", "won": 40000},
+            {"label": "확장형 E · 12×8m", "period": "평일 1박", "won": 45000},
+            {"label": "확장형 E · 12×8m", "period": "주말 1박", "won": 50000},
+            {"label": "확장형 F · 12×8m", "period": "평일 1박", "won": 45000},
+            {"label": "확장형 F · 12×8m", "period": "주말 1박", "won": 50000}
+          ]
+        },
+        "profile": {
+          "version": 1,
+          "fields": {
+            "TYPE": {"value": "오토 106", "grade": "OPERATOR", "source": {"label": "운영자 소개", "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do", "date": "2026-10-21T12:00:00+09:00"}, "total": 106},
+            "CHECKIN": {"value": "14:00부터", "grade": "OPERATOR", "source": {"label": "운영자 이용안내", "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do", "date": "2026-10-21T12:00:00+09:00"}},
+            "CHECKOUT": {"value": "11:00까지", "grade": "OPERATOR", "source": {"label": "운영자 이용안내", "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do", "date": "2026-10-21T12:00:00+09:00"}},
+            "MANNER": {"value": "23:00~07:00", "grade": "OPERATOR", "source": {"label": "운영자 이용안내", "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do", "date": "2026-10-21T12:00:00+09:00"}},
+            "PRICE": {"value": "35,000~50,000원", "min": 35000, "max": 50000, "grade": "OPERATOR", "source": {"label": "운영자 이용요금", "url": "https://hsecofarm.hscity.go.kr/reservation/info/price.do", "date": "2026-10-21T12:00:00+09:00"}},
+            "POWER": {"value": "최대 600W", "watts": 600, "grade": "OPERATOR", "source": {"label": "운영자 이용안내", "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do", "date": "2026-10-21T12:00:00+09:00"}},
+            "PET": {"value": "동반 불가", "grade": "OPERATOR", "source": {"label": "운영자 FAQ", "url": "https://hsecofarm.hscity.go.kr/reservation/board/faq.do", "date": "2026-10-21T12:00:00+09:00"}},
+            "SITE": {"value": "일반형 5×8m · 확장형 12×8m", "grade": "OPERATOR", "source": {"label": "운영자 이용요금", "url": "https://hsecofarm.hscity.go.kr/reservation/info/price.do", "date": "2026-10-21T12:00:00+09:00"}},
+            "AMENITIES": {"value": "매점 · 카페·식음 · 로컬푸드 · 체험관", "grade": "OPERATOR", "source": {"label": "운영자 소개", "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do", "date": "2026-10-21T12:00:00+09:00"}},
+            "REFUND": {"value": "5일 전 100% · 2일 전 80% · 1일 전 60% · 당일 30%", "grade": "OPERATOR", "source": {"label": "운영자 이용요금", "url": "https://hsecofarm.hscity.go.kr/reservation/info/price.do", "date": "2026-10-21T12:00:00+09:00"}},
+            "BOOKING": {"value": "에코팜캠프 예약", "grade": "OPERATOR", "source": {"label": "운영자 예약", "url": "https://hsecofarm.hscity.go.kr/reservation/", "date": "2026-10-21T12:00:00+09:00"}}
+          },
+          "summary": "오토 106 · 입실 14:00 · 전기 600W · 일반형·확장형",
+          "score": {"known": 12, "facts": 12, "total": 18},
+          "generated_at": "2026-10-21T12:00:00+09:00"
+        },
+        "house_rules": {
+          "v": 1,
+          "tags": [],
+          "rules": [
+            {"cat": "limit", "text": "숙박 예약은 이용 전날까지", "url": "https://hsecofarm.hscity.go.kr/reservation/board/faq.do", "at": "2026-10-21T12:00:00+09:00", "src": "운영자 FAQ"},
+            {"cat": "ban", "text": "장작·숯·갈탄·펠렛·화목난로·LPG 반입 금지", "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do", "at": "2026-10-21T12:00:00+09:00", "src": "운영자 이용안내"},
+            {"cat": "limit", "text": "전열기구 최대 600W", "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do", "at": "2026-10-21T12:00:00+09:00", "src": "운영자 이용안내"},
+            {"cat": "ban", "text": "반려동물 출입 금지 (보조견 제외)", "url": "https://hsecofarm.hscity.go.kr/reservation/board/faq.do", "at": "2026-10-21T12:00:00+09:00", "src": "운영자 FAQ"},
+            {"cat": "rule", "text": "미성년자는 보호자 동반", "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do", "at": "2026-10-21T12:00:00+09:00", "src": "운영자 이용안내"},
+            {"cat": "rule", "text": "사이트 임의 변경·정원 초과 금지", "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do", "at": "2026-10-21T12:00:00+09:00", "src": "운영자 이용안내"}
+          ],
+          "ops": [
+            {"text": "차량 20km/h 이하 · 캠핑장 내 일방통행", "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do", "at": "2026-10-21T12:00:00+09:00", "src": "운영자 이용안내"},
+            {"text": "매너타임 23:00~07:00", "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do", "at": "2026-10-21T12:00:00+09:00", "src": "운영자 이용안내"}
+          ],
+          "notices": [{"title": "예약·이용 안내 원문", "date": "2026-10-21", "url": "https://hsecofarm.hscity.go.kr/reservation/board/faq.do", "at": "2026-10-21T12:00:00+09:00"}]
+        },
+        "operator_snippets": [
+          {"cat": "주차", "text": "차량은 지정 구역을 이용하세요.", "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do", "src": "운영자 이용안내", "date": "2026-10-21T12:00:00+09:00"},
+          {"cat": "시설", "text": "매점 · 카페·식음 · 로컬푸드 · 어린이체험관을 운영합니다.", "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do", "src": "운영자 소개", "date": "2026-10-21T12:00:00+09:00"}
+        ],
+        "layout": {
+          "images": [{"thumb": "https://hsecofarm.hscity.go.kr/reservation/images/img/sight@2x.jpg", "img": "https://hsecofarm.hscity.go.kr/reservation/images/img/sight@2x.jpg", "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do", "src": "운영자 제공 배치도", "official": true, "sure": true}]
+        }
+      }
+    },
+    {
+      "id": "102377",
+      "catalog": {
+        "name": "평택캠핑성",
+        "sido": "경기도",
+        "sigungu": "평택시",
+        "area": "서울·경기",
+        "addr": "경기도 평택시 안골길 85-47 (도일동)",
+        "tel": "010-8640-5481",
+        "status": "운영",
+        "types": ["일반야영장", "자동차야영장"],
+        "status": "운영 여부 확인 필요",
+        "booking": {
+          "methods": ["전화 문의"],
+          "url": "tel:01086405481",
+          "channels": [
+            {"platform_id": "phone", "platform_name": "전화 문의", "url": "tel:01086405481", "kind": "phone", "confidence": 0.8, "evidence": ["공개 관광안내 연락처"]}
+          ],
+          "primary": {"platform_id": "phone", "platform_name": "전화 문의", "url": "tel:01086405481", "kind": "phone", "confidence": 0.8},
+          "source": {"label": "공개 관광 안내", "url": "https://ontrip.kr/travel-guides/details/3010874", "checked_at": "2026-10-21T12:00:00+09:00", "tier": "C"}
+        },
+        "amenities": ["온수 수영장", "실내놀이터"],
+        "fee": {
+          "min": 20000,
+          "max": 30000,
+          "text": "2만~3만원 (공개 관광 안내 · 변동 가능)",
+          "basis": "공개 관광 안내 이용요금",
+          "grade": "MENTION",
+          "url": "https://ontrip.kr/travel-guides/details/3010874",
+          "checked_at": "2026-10-21T12:00:00+09:00"
+        },
+        "pf": {
+          "s": "덕암산 기슭 · 입실 14:00 · 온수 수영장 · 실내놀이터",
+          "t": ["MOUNTAIN", "FAMILY", "WATER_PLAY", "KIDS", "FOREST"],
+          "k": 5,
+          "p": {"v": "2만~3만원", "min": 20000, "max": 30000, "g": "MENTION", "l": "공개 관광 안내", "u": "https://ontrip.kr/travel-guides/details/3010874", "a": "2026-10-21"}
+        },
+        "checkin": "14:00",
+        "checkout": "12:00",
+        "field_conditions": {
+          "version": 2,
+          "status": "SURVEYED",
+          "parking": {"state": "SURVEYED", "mode": "UNKNOWN", "tent_side": null, "cart_required": null, "shared_nearby": null, "drop_off_external": null, "auto_camping_sites": null},
+          "shelter_setup": {"state": "UNKNOWN", "max_tents": null, "max_tarps": null, "canopy_allowed": null, "note": null},
+          "power": {"state": "UNKNOWN", "available": null, "limit_w": null, "regulatory_reference_w": null, "breaker_capacity": null, "statutory_standard": false, "high_power_mention": null},
+          "ground": {"state": "UNKNOWN", "types": []},
+          "charcoal": {"state": "UNKNOWN", "allowed": null},
+          "firewood": {"state": "UNKNOWN", "allowed": null, "sold": null},
+          "fire_pit": {"state": "UNKNOWN", "arrangement": null},
+          "site_size": {"state": "UNKNOWN", "groups": []},
+          "sanitary": {"state": "UNKNOWN", "toilets_count": null, "showers_count": null, "sinks_count": null, "private_bathroom": false, "private_bathroom_state": "UNKNOWN", "hot_water": null, "note": null},
+          "features": ["SWIMMING_POOL", "PLAYGROUND", "FOREST"],
+          "rental_offers": [],
+          "source": {"label": "공개 관광 안내", "url": "https://ontrip.kr/travel-guides/details/3010874", "checked_at": "2026-10-21T12:00:00+09:00", "tier": "C"}
+        },
+        "ti": {"i": ["14:00", "m"], "o": ["12:00", "m"]},
+        "line": "덕암산 기슭 · 20m 온수 수영장 · 실내놀이터",
+        "rv": {"n": 0, "p": [], "c": []}
+      },
+      "remove_catalog_fields": ["closed", "notes", "kinds", "floors", "st", "reviews", "env"],
+      "detail": {
+        "profile": {
+          "version": 1,
+          "fields": {
+            "CHECKIN": {"value": "14:00부터", "grade": "MENTION", "source": {"label": "공개 관광 안내", "url": "https://ontrip.kr/travel-guides/details/3010874", "date": "2026-10-21T12:00:00+09:00"}},
+            "CHECKOUT": {"value": "12:00까지", "grade": "MENTION", "source": {"label": "공개 관광 안내", "url": "https://ontrip.kr/travel-guides/details/3010874", "date": "2026-10-21T12:00:00+09:00"}},
+            "PRICE": {"value": "20,000~30,000원 (변동 가능)", "min": 20000, "max": 30000, "grade": "MENTION", "source": {"label": "공개 관광 안내", "url": "https://ontrip.kr/travel-guides/details/3010874", "date": "2026-10-21T12:00:00+09:00"}},
+            "AMENITIES": {"value": "20m 온수 수영장 · 실내놀이터", "grade": "MENTION", "source": {"label": "공개 관광 안내", "url": "https://ontrip.kr/travel-guides/details/3010874", "date": "2026-10-21T12:00:00+09:00"}},
+            "BOOKING": {"value": "예약 화면에서 최신 조건 확인", "grade": "MENTION", "source": {"label": "공개 관광 안내", "url": "https://ontrip.kr/travel-guides/details/3010874", "date": "2026-10-21T12:00:00+09:00"}}
+          },
+          "summary": "입실 14:00 · 온수 수영장 · 실내놀이터",
+          "score": {"known": 5, "facts": 5, "total": 18},
+          "generated_at": "2026-10-21T12:00:00+09:00"
+        },
+        "house_rules": {"v": 1, "tags": [], "rules": [], "ops": [], "notices": [{"title": "요금·운영 최신 확인", "date": "2026-10-21", "url": "https://ontrip.kr/travel-guides/details/3010874", "at": "2026-10-21T12:00:00+09:00"}]}
+      }
+    },
+    {
+      "id": "1993",
+      "catalog": {
+        "sizes": [[7, 5, 67]],
+        "field_conditions": {
+          "site_size": {"state": "CONFIRMED", "groups": [{"width_m": 7, "depth_m": 5, "count": 67, "name": "일반야영장"}]}
+        }
+      },
+      "detail": {
+        "profile": {
+          "fields": {
+            "SITE": {"value": "7×5m · 67면", "grade": "CONFIRMED", "source": {"label": "한국관광공사 고캠핑 등록값", "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=1993", "date": "2026-07-27T00:00:00+09:00", "quote": "일반야영장 67면 · 사이트 7×5m"}}
+          }
+        }
+      }
+    },
+    {
+      "id": "3016",
+      "catalog": {
+        "sizes": [[10, 15, 9], [10, 10, 40], [10, 8, 20], [7, 8, 30]],
+        "field_conditions": {
+          "site_size": {"state": "CONFIRMED", "groups": [{"width_m": 10, "depth_m": 15, "count": 9}, {"width_m": 10, "depth_m": 10, "count": 40}, {"width_m": 10, "depth_m": 8, "count": 20}, {"width_m": 7, "depth_m": 8, "count": 30}]}
+        }
+      },
+      "detail": {
+        "profile": {
+          "fields": {
+            "SITE": {"value": "10×15m · 10×10m · 10×8m · 7×8m", "grade": "CONFIRMED", "source": {"label": "고캠핑 운영자 소개글", "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=3016", "date": "2025-08-19T00:00:00+09:00", "quote": "10×15m 9면 · 10×10m 40면 · 10×8m 20면 · 7×8m 30면"}}
+          }
+        }
+      }
+    },
+    {
+      "id": "park-43113-00080-15jti",
+      "catalog": {},
+      "remove_catalog_fields": ["lat", "lng"],
+      "detail": {}
+    }
+  ]
+}

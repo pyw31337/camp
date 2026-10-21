@@ -1,4 +1,53 @@
 {
   "note": "기존 값을 의도적으로 지우거나 줄일 때만 적는다(폐업·중복 합치기·오류 정정). field-guard가 이 목록만 통과시킨다. file(경로 끝부분)·id·field 중 아는 것 + reason(필수) + by(누가) + at(날짜). 쓰고 나면 다음 정리 때 비운다. docs/DATA_MERGE_POLICY.md",
-  "overrides": []
+  "overrides": [
+    {
+      "file": "campgrounds.json",
+      "id": "102229",
+      "field": "fee",
+      "reason": "운영자 요금표(2026-10-21)가 후기 숫자 추출값을 대체: 일반형·확장형 35,000~50,000원",
+      "by": "Codex",
+      "at": "2026-10-21"
+    },
+    {
+      "file": "campgrounds.json",
+      "id": "102377",
+      "field": "fee",
+      "reason": "공개 관광안내 원천으로 최신 확인. 다른 플랫폼에서 단정 추출된 45,000원 대신 20,000~30,000원 참고값과 원천·확인일을 보존",
+      "by": "Codex",
+      "at": "2026-10-21"
+    },
+    {
+      "file": "campgrounds.json",
+      "id": "102377",
+      "field": "kinds/floors/notes/closed",
+      "reason": "운영자 또는 공공 원천으로 확인되지 않은 사이트 면수·바닥·휴장·후기 텍스트를 서비스 사실값에서 제거. 상세에는 원천 링크만 유지",
+      "by": "Codex",
+      "at": "2026-10-21"
+    },
+    {
+      "file": "campgrounds.json",
+      "id": "1993",
+      "field": "sizes/field_conditions.site_size",
+      "reason": "고캠핑 총 면수 67면과 맞지 않는 6,367면 자동 파싱값을 7×5m 67면으로 보정",
+      "by": "Codex",
+      "at": "2026-10-21"
+    },
+    {
+      "file": "campgrounds.json",
+      "id": "3016",
+      "field": "sizes/field_conditions.site_size",
+      "reason": "고캠핑 운영자 소개글의 10×8m 20면·7×8m 30면을 10×80m 오류값 대신 반영",
+      "by": "Codex",
+      "at": "2026-10-21"
+    },
+    {
+      "file": "campgrounds.json",
+      "id": "park-43113-00080-15jti",
+      "field": "lat/lng",
+      "reason": "대한민국 범위 밖 경도 137.20266이 들어온 공공 공원 좌표를 지도 노출에서 제외하고 원천 재확인 대기로 전환",
+      "by": "Codex",
+      "at": "2026-10-21"
+    }
+  ]
 }

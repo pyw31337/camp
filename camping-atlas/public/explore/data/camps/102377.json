@@ -1,10 +1,1 @@
-{
-  "id": "102377",
-  "photos": [
-    {"t": "camps/102377/img1.jpg"},
-    {"t": "camps/102377/img2.jpg"},
-    {"t": "camps/102377/img3.jpg"},
-    {"t": "camps/102377/img4.jpg"},
-    {"t": "camps/102377/img5.jpg"}
-  ]
-}
+{"id":"102377","photos":[{"t":"camps/102377/img1.jpg"},{"t":"camps/102377/img2.jpg"},{"t":"camps/102377/img3.jpg"},{"t":"camps/102377/img4.jpg"},{"t":"camps/102377/img5.jpg"}],"profile":{"version":1,"fields":{"CHECKIN":{"value":"14:00부터","grade":"MENTION","source":{"label":"공개 관광 안내","url":"https://ontrip.kr/travel-guides/details/3010874","date":"2026-10-21T12:00:00+09:00"}},"CHECKOUT":{"value":"12:00까지","grade":"MENTION","source":{"label":"공개 관광 안내","url":"https://ontrip.kr/travel-guides/details/3010874","date":"2026-10-21T12:00:00+09:00"}},"PRICE":{"value":"20,000~30,000원 (변동 가능)","min":20000,"max":30000,"grade":"MENTION","source":{"label":"공개 관광 안내","url":"https://ontrip.kr/travel-guides/details/3010874","date":"2026-10-21T12:00:00+09:00"}},"AMENITIES":{"value":"20m 온수 수영장 · 실내놀이터","grade":"MENTION","source":{"label":"공개 관광 안내","url":"https://ontrip.kr/travel-guides/details/3010874","date":"2026-10-21T12:00:00+09:00"}},"BOOKING":{"value":"예약 화면에서 최신 조건 확인","grade":"MENTION","source":{"label":"공개 관광 안내","url":"https://ontrip.kr/travel-guides/details/3010874","date":"2026-10-21T12:00:00+09:00"}}},"summary":"입실 14:00 · 온수 수영장 · 실내놀이터","score":{"known":5,"facts":5,"total":18},"generated_at":"2026-10-21T12:00:00+09:00"},"curated_at":"2026-10-21T12:00:00+09:00","curated_source":"operator_or_public_primary","house_rules":{"v":1,"tags":[],"notices":[{"title":"요금·운영 최신 확인","date":"2026-10-21","url":"https://ontrip.kr/travel-guides/details/3010874","at":"2026-10-21T12:00:00+09:00"}]}}
