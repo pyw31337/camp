@@ -1942,7 +1942,7 @@ function listRow({ c, ce }, i = 0) {
       ` : ""}
       ${main || c.tel ? `
         <div class="card-cta">
-          ${main ? `<a class="btn primary" href="${esc(main.url)}" target="_blank" rel="noopener" title="${esc(bookingLabel(main))}">${ic("external")}<span>${esc(bookingLabel(main))}에서 예약</span></a>` : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}
+          ${main ? reserveSplit(c, { inline: true }) : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}
         </div>
       ` : ""}
     </div>
@@ -2702,7 +2702,7 @@ function reserveCard(c) {
     ${o ? `<p class="rs-open"><b>${esc(new Date(o.at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", weekday: "short", hour: "2-digit", minute: "2-digit" }))}</b><span>${esc(o.label ?? "")}</span></p>` : ""}
     ${availHtml(c)}
     <div class="rs-btns">
-      ${main ? `<a class="btn primary wide" href="${esc(main.url)}" target="_blank" rel="noopener">${esc(bookingLabel(main))}에서 예약</a>` : ""}
+      ${main ? reserveSplit(c, { inline: true }) : ""}
       ${c.tel ? `<a class="btn ghost" href="tel:${esc(c.tel)}">${ic("phone")}전화</a>` : ""}
     </div>
     ${altHtml}
@@ -4482,11 +4482,11 @@ function openWeatherModal(c, initialDate, data) {
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
 }
 
-function reserveDock(c) {
+// 예약 버튼(공통): [예약하기 → 1순위 예약처][▾ → 모든 예약처·전화]. 상세 하단·카드·예약 칸·비교 표가 같은 버튼을 쓴다(영우 님 2026-10-21).
+function reserveSplit(c, { inline = false } = {}) {
   const options = getAllBookingChannels(c);
   const main = options[0] ?? (c.gc_url ? { url: c.gc_url, title: "고캠핑에서 예약하기", name: "고캠핑", kind: "online" } : null);
-  const mainLabel = main ? (main.kind === "phone" ? main.title : `${main.name}에서 예약`) : "예약하기";
-  const on = isSaved(c.id);
+  const mainLabel = "예약하기"; // 영우 님 2026-10-21: 플랫폼 이름 대신 ‘예약하기’, 누르면 1순위 예약처
 
   const menuItems = options.map((opt) => {
     if (opt.kind === "phone") {
@@ -4504,12 +4504,7 @@ function reserveDock(c) {
     </a>`;
   }).join("");
 
-  return `<div class="d-dock-in">
-    <button class="dock-act-btn dock-heart${on ? " on" : ""}" type="button" data-save="${esc(c.id)}" aria-pressed="${on}" aria-label="${on ? "찜 해제" : "찜하기"}">
-      ${ic(on ? "heart" : "heart-o")}
-      <span>찜</span>
-    </button>
-    <div class="dock-reserve-group">
+  return `    <div class="dock-reserve-group${inline ? " rsv-inline" : ""}">
       ${main ? (main.kind === "phone" ? `
         <button type="button" class="btn primary dock-reserve-main is-tel" data-tel="${esc(main.tel)}" data-tel-fmt="${esc(main.telFmt)}">
           <span class="dock-reserve-label">${esc(mainLabel)}</span>
@@ -4531,7 +4526,56 @@ function reserveDock(c) {
           ${menuItems || `<div class="dock-menu-empty">등록된 예약 정보가 없습니다.</div>`}
         </div>
       </div>
-    </div>
+    </div>`;
+}
+const closeReserveMenus = (except) => {
+  for (const g of document.querySelectorAll(".dock-reserve-group.is-open")) {
+    if (g === except) continue;
+    g.classList.remove("is-open");
+    const m = g._menu ?? g.querySelector(".dock-reserve-menu"); if (m) { m.hidden = true; if (m.parentNode !== g) g.appendChild(m); }
+    g.querySelector(".dock-reserve-toggle")?.setAttribute("aria-expanded", "false");
+  }
+};
+const IS_TOUCH = /iPhone|iPad|iPod|Android|webOS/i.test(navigator.userAgent) || (window.matchMedia && matchMedia("(pointer: coarse)").matches);
+addEventListener("scroll", () => { if (document.querySelector(".rsv-inline.is-open")) closeReserveMenus(); }, { passive: true, capture: true });
+document.addEventListener("click", async (e) => {
+  const t = e.target.closest?.(".dock-reserve-toggle");
+  if (t) {
+    e.preventDefault(); e.stopPropagation();
+    const g = t.closest(".dock-reserve-group"), m = g._menu ?? (g._menu = g.querySelector(".dock-reserve-menu"));
+    closeReserveMenus(g);
+    const open = m.hidden; m.hidden = !open; g.classList.toggle("is-open", open); t.setAttribute("aria-expanded", String(open));
+    if (open && g.classList.contains("rsv-inline")) {
+      // 카드·표는 넘침을 자르므로 목록을 화면 좌표로 띄운다. 아래 자리가 모자라면 위로 연다.
+      // 카드는 transform 이 있어 fixed 기준이 카드가 되므로, 열린 동안만 body 로 옮긴다(닫으면 제자리).
+      document.body.appendChild(m); m.classList.add("rsv-float");
+      const r = g.getBoundingClientRect(), W = Math.min(360, innerWidth - 24);
+      const left = Math.max(12, Math.min(r.right - W, innerWidth - 12 - W));
+      Object.assign(m.style, { left: `${left}px`, width: `${W}px`, right: "auto", top: "", bottom: "auto" });
+      const h = m.offsetHeight;
+      if (r.bottom + 8 + h > innerHeight - 72 && r.top - 8 - h > 8) m.style.top = `${r.top - 8 - h}px`; else m.style.top = `${r.bottom + 8}px`;
+    }
+    if (open) for (const el of m.querySelectorAll("[data-tel-action]")) el.textContent = IS_TOUCH ? "전화 걸기" : "번호 복사";
+    return;
+  }
+  if (e.target.closest?.(".dock-menu-close")) { e.preventDefault(); closeReserveMenus(); return; }
+  const tel = e.target.closest?.(".dock-reserve-group .is-tel, .rsv-float .is-tel");
+  if (tel) {
+    e.preventDefault(); e.stopPropagation();
+    const n = tel.dataset.tel, f = tel.dataset.telFmt || n;
+    if (n) { if (IS_TOUCH) location.href = `tel:${n}`; else { try { await navigator.clipboard.writeText(f); toast(`전화번호가 복사되었습니다: ${f}`); } catch { prompt("전화번호를 복사하세요:", f); } } }
+    closeReserveMenus(); return;
+  }
+  if (e.target.closest?.(".dock-reserve-menu a") || !e.target.closest?.(".dock-reserve-group, .dock-reserve-menu")) closeReserveMenus();
+});
+function reserveDock(c) {
+  const on = isSaved(c.id);
+  return `<div class="d-dock-in">
+    <button class="dock-act-btn dock-heart${on ? " on" : ""}" type="button" data-save="${esc(c.id)}" aria-pressed="${on}" aria-label="${on ? "찜 해제" : "찜하기"}">
+      ${ic(on ? "heart" : "heart-o")}
+      <span>찜</span>
+    </button>
+    ${reserveSplit(c)}
     <button class="dock-act-btn dock-share" type="button" data-dock-share aria-label="공유">
       <svg class="ic"><use href="#i-share"/></svg>
       <span>공유</span>
@@ -4877,39 +4921,10 @@ function bindDetail() {
     el.textContent = isMobile ? "전화 걸기" : "번호 복사";
   });
 
-  const reserveGroup = $(".dock-reserve-group");
-  const reserveToggle = $(".dock-reserve-toggle");
-  const reserveMenu = $(".dock-reserve-menu");
 
-  const closeReserveMenu = () => {
-    if (reserveMenu) reserveMenu.hidden = true;
-    if (reserveGroup) reserveGroup.classList.remove("is-open");
-    if (reserveToggle) reserveToggle.setAttribute("aria-expanded", "false");
-  };
+  const closeReserveMenu = () => closeReserveMenus();
 
-  reserveToggle?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    if (!reserveMenu) return;
-    const willOpen = reserveMenu.hidden;
-    reserveMenu.hidden = !willOpen;
-    reserveGroup?.classList.toggle("is-open", willOpen);
-    reserveToggle.setAttribute("aria-expanded", String(willOpen));
-  });
-
-  $(".dock-menu-close")?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    closeReserveMenu();
-  });
-
-  document.addEventListener("click", (e) => {
-    if (reserveMenu && !reserveMenu.hidden && !e.target.closest(".dock-reserve-group")) {
-      closeReserveMenu();
-    }
-  });
-
-  reserveMenu?.addEventListener("click", (e) => {
-    if (e.target.closest("a")) closeReserveMenu();
-  });
+  // 예약 버튼 열기·닫기는 문서 전체 위임(reserveSplit 공통 처리)으로 옮겼다.
 
   // 모바일에서는 읽는 방향을 우선한다. 아래로 내릴 때는 고정 조작바를 접고,
   // 위로 조금이라도 되돌리면 즉시 다시 보여 준다. 예약 메뉴가 열린 상태는 숨기지 않는다.
@@ -4925,7 +4940,7 @@ function bindDetail() {
       const y = Math.max(0, window.scrollY);
       const delta = y - lastY;
       if (Math.abs(delta) < 8) return;
-      const menuOpen = reserveMenu && !reserveMenu.hidden;
+      const menuOpen = !!document.querySelector(".dock-reserve-group.is-open");
       dock.classList.toggle("is-retracted", delta > 0 && y > 120 && !menuOpen);
       lastY = y;
     };
@@ -4935,30 +4950,6 @@ function bindDetail() {
     window.addEventListener("scroll", onDockScroll, { passive: true });
     cleanup.push(() => window.removeEventListener("scroll", onDockScroll));
   }
-
-  $$(".dock-reserve-group .is-tel").forEach((btn) => {
-    btn.addEventListener("click", async (e) => {
-      e.stopPropagation();
-      const tel = btn.dataset.tel;
-      const telFmt = btn.dataset.telFmt || tel;
-      if (!tel) return;
-      if (isMobile) {
-        window.location.href = `tel:${tel}`;
-      } else {
-        try {
-          if (navigator.clipboard) {
-            await navigator.clipboard.writeText(telFmt);
-            toast(`전화번호가 복사되었습니다: ${telFmt}`);
-          } else {
-            prompt("전화번호를 복사하세요:", telFmt);
-          }
-        } catch {
-          prompt("전화번호를 복사하세요:", telFmt);
-        }
-      }
-      closeReserveMenu();
-    });
-  });
 
   $$("[data-share-place], [data-dock-share]").forEach((b) => b.addEventListener("click", () => sharePlace(S.byId.get(id))));
 }
@@ -5051,7 +5042,7 @@ async function compareView() {
     return `<tr class="${diff ? "diff" : "same"}"><th scope="row">${rIc ? ic(rIc) : ""}${l}</th>${vals.map((v) => `<td class="cmp-cell"><div class="cmp-cell-inner"><span class="cmp-val">${v ? `${esc(v.v)}${dot(v.g)}` : '<span class="none">–</span>'}</span>${v ? srcTip(v, l) : ""}</div></td>`).join("")}</tr>`;
   }).join("")}`).join("");
 
-  const acts = camps.map((c) => { const ch = primaryBooking(c); return `<td>${ch ? `<a class="btn primary wide" href="${esc(ch.url)}" target="_blank" rel="noopener">예약</a>` : `<a class="btn ghost wide" href="${APP_BASE}place/${encodeURIComponent(c.id)}">자세히</a>`}</td>`; }).join("");
+  const acts = camps.map((c) => { const ch = primaryBooking(c); return `<td>${ch ? reserveSplit(c, { inline: true }) : `<a class="btn ghost wide" href="${APP_BASE}place/${encodeURIComponent(c.id)}">자세히</a>`}</td>`; }).join("");
 
   // 모바일 특화: 세로 스펙별 모아보기 카드 뷰
   const cardsViewHtml = `<div class="cmp-cards-view${cmpMode === "cards" ? " is-active" : ""}">
