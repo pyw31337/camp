@@ -923,6 +923,28 @@ function nearLine(c, sep = " · ") {
   return [["m", "마트"], ["c", "편의점"], ["b", "정육점"]].filter(([k]) => nl[k] && nl[k] <= 5000).map(([k, l]) => `${l} ${km(nl[k])}`).join(sep);
 }
 // 찜(하트): 카드 이름 오른쪽 회색 선 하트 → 누르면 채운 하트. 찜한 곳은 ‘찜’ 화면에서 3곳씩 나란히 비교한다.
+// ── 카탈로그 원본 행(상세·비교용) ────────────────────────────
+// 목록은 가벼운 판을 쓰고, 상세·비교를 열 때 같은 캠핑장의 원본 행(catx/{샤드}.json)을 받아 덮어쓴다 → 화면 내용은 원본과 같다.
+// 계산 캐시(c._f 등 _로 시작하는 값)는 지워 다시 계산한다. 샤드 번호는 scripts/split-catalog.mjs shardOf와 같아야 한다.
+const CATX = { v: "", n: 0, got: new Map() };
+const shardOf = (id) => { let h = 0; for (const ch of String(id)) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return h % CATX.n; };
+async function ensureFull(ids) {
+  if (!CATX.n) return;
+  const need = [...new Set(ids.map(String).filter((id) => { const c = S.byId.get(id); return c && !c.__full; }).map(shardOf))];
+  await Promise.all(need.map((n) => {
+    if (!CATX.got.has(n)) CATX.got.set(n, fetch(`${DATA}catx/${n}.json?v=${CATX.v}`).then((r) => (r.ok ? r.json() : {})).catch(() => { CATX.got.delete(n); return {}; }));
+    return CATX.got.get(n);
+  }));
+  for (const id of ids.map(String)) {
+    const c = S.byId.get(id);
+    if (!c || c.__full) continue;
+    const rec = (await CATX.got.get(shardOf(id)))?.[id];
+    if (!rec) continue;
+    for (const k of Object.keys(c)) if (k.startsWith("_")) delete c[k];
+    Object.assign(c, rec);
+    Object.defineProperty(c, "__full", { value: true, enumerable: false });
+  }
+}
 function isSaved(id) { return S.saved.includes(String(id)); }
 function heartBtn(c, { label = false } = {}) {
   const on = isSaved(c.id);
@@ -2377,6 +2399,7 @@ function galleryHtml(c) {
   return `<div class="gallery">${grid}${rail}</div>`;
 }
 async function detailView(id) {
+  await ensureFull([id]);
   const c = S.byId.get(id);
   if (!c) return `<div class="empty">${ic("search")}<b>캠핑장을 찾지 못했어요</b><a class="btn ghost" href="#/">찾기로</a></div>`;
   const d = await detailOf(id);
@@ -4557,6 +4580,7 @@ function openLightboxUrls(urls, start = 0, caption = "사진") {
 
 // ── 화면: 비교 ───────────────────────────────────────────────
 async function compareView() {
+  await ensureFull(S.pick.length ? S.pick : S.saved.slice(0, 3));
   const saved = S.saved.map((id) => S.byId.get(id)).filter(Boolean);
   if (!saved.length) {
     return `<section class="cmp-page"><div class="sec-head big"><h1>찜한 <em>캠핑장</em></h1></div>
@@ -4973,7 +4997,8 @@ addEventListener("error", (e) => {
 (async function boot() {
   $("#view").innerHTML = `<div class="loading"></div>`;
   const [camps, photos, openings, cards, avail, fcast] = await Promise.all([
-    fetch(`${DATA}campgrounds.json`).then((r) => r.json()),
+    // 가벼운 판(campgrounds.lite.json, scripts/split-catalog.mjs)이 있으면 그것을, 없으면 원본을 받는다.
+    fetch(`${DATA}campgrounds.lite.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((j) => (j?.camps ? (CATX.v = j.v, CATX.n = j.n, j.camps) : fetch(`${DATA}campgrounds.json`).then((r) => r.json()))),
     fetch(`${DATA}photos.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
     fetch(`${DATA}openings.json`).then((r) => (r.ok ? r.json() : { items: [] })).catch(() => ({ items: [] })),
     fetch(`${MEDIA}cards/index.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
