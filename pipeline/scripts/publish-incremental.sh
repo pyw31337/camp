@@ -39,6 +39,8 @@ node pipeline/scripts/build-house-rules.mjs
 node pipeline/scripts/build-gocamping-detail.mjs
 # 당일 장소 시드(원문 규칙·요약)는 프로필·이용규칙 생성 뒤에 붙인다 — data-sync와 같은 순서(빼면 시드 값이 지워졌다 되살아나기를 반복).
 node pipeline/scripts/apply-dayuse-seed.mjs
+# 발행 전 상식 정리(공원에 야영장 요금·입퇴실 금지, 플랫폼 광고 요금, 좌표, 시·도 표기, 중복 등록) — data-sync와 같은 자리.
+node pipeline/scripts/publish-sanity.mjs
 node pipeline/scripts/build-link-health.mjs
 node pipeline/scripts/build-card-fallback.mjs
 # 기존 값이 지워지거나 줄어든 곳은 최신 main 값으로 되살린다(채우기 우선 — 리셋 금지). 기록: pipeline/registry/merge-review.ndjson

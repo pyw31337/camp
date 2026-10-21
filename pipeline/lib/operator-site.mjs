@@ -14,6 +14,8 @@ export const PLATFORM_HOSTS = [
   "campingtalk.me", "onda.me", "yanolja.com", "yeogi.com", "goodchoice.kr", "ticketplay.zone", "letsnowgo.com",
   "zapza.me", "penbang.com", "linktr.ee", "google.com", "booking.com", "agoda.com", "airbnb.co.kr", "airbnb.com",
   "forest.go.kr", "foresttrip.go.kr", "gocamping.or.kr", "knps.or.kr", "reservation.knps.or.kr",
+  // 관광공사 소개 페이지는 운영자 홈페이지가 아니다(광고·약관 문구가 요금·안내로 잘못 들어갔다, QA 2026-10-20).
+  "visitkorea.or.kr", "camppick.com", "campinghub.kr",
 ];
 
 export function hostOf(url) {
@@ -291,4 +293,18 @@ export function noticeLinks(html, pageUrl, max = 12) {
     if (out.length >= max) break;
   }
   return out;
+}
+
+/** 수집 결과에서 플랫폼·소개 페이지(관광공사·캠핑허브 등)를 뺀다(QA 2026-10-20: 광고 요금·약관 문구가 운영자 안내로 들어감). 멱등. 바뀐 수를 돌려준다. */
+export function dropPlatformSites(campgrounds) {
+  let n = 0;
+  for (const [id, s] of Object.entries(campgrounds ?? {})) {
+    if (!s || s.status !== "OK") continue;
+    if (s.url && !isOperatorHost(s.url)) { campgrounds[id] = { name: s.name, status: "PLATFORM_PAGE", url: s.url, checked_at: s.checked_at ?? null }; n++; continue; }
+    if (Array.isArray(s.snippets)) {
+      const keep = s.snippets.filter((x) => !x?.url || isOperatorHost(x.url));
+      if (keep.length !== s.snippets.length) { s.snippets = keep; n++; if (!keep.length) campgrounds[id] = { name: s.name, status: "PLATFORM_PAGE", url: s.url, checked_at: s.checked_at ?? null }; }
+    }
+  }
+  return n;
 }

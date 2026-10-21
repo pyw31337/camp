@@ -11,7 +11,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { validatesAsOperatorSite } from "../lib/kakao-discovery.mjs";
-import { guideLinks, htmlToText, isClosedHost, isOperatorHost, noticeLinks, parseRobots, relevantSentences, robotsAllows } from "../lib/operator-site.mjs";
+import { dropPlatformSites, guideLinks, htmlToText, isClosedHost, isOperatorHost, noticeLinks, parseRobots, relevantSentences, robotsAllows } from "../lib/operator-site.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const camps = JSON.parse(readFileSync(join(root, "camping-atlas/public/explore/data/campgrounds.json"), "utf8"));
@@ -325,6 +325,7 @@ async function worker() {
   }
 }
 function save() {
+  dropPlatformSites(result.campgrounds); // 예전 수집분(keepOld)에 남은 플랫폼 페이지도 매번 뺀다
   result.generated_at = new Date().toISOString();
   result.policy = "운영자 자체 홈페이지·예약 페이지만, robots.txt 준수, 봇 이름 공개, 문장(≤140자)·원문 URL·확인 시각만 저장. 플랫폼 페이지는 수집하지 않음.";
   writeFileSync(outPath, JSON.stringify(result, (k, v) => (k === "_ocr" ? undefined : v), 1));
