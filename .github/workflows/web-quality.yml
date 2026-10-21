@@ -105,6 +105,10 @@ jobs:
         run: node pipeline/scripts/publish-sanity.mjs --check
       - name: 상세 화면 상식 회귀 테스트
         run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/qa-detail-test.mjs http://127.0.0.1:8765/
+      - name: UX2 regression (hero input, 3-line cards, list 조건 sheet, detail jump bar, retired pages)
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/ux2-test.mjs http://127.0.0.1:8765/
+      - name: Tests never write to production Supabase
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/no-prod-write-test.mjs http://127.0.0.1:8765/
       # workflow_dispatch(데이터 봇 PR) 결과는 PR 검사 목록에 안 잡혀서, 같은 이름의 커밋 상태로도 남긴다(main 룰셋 필수 검사).
       - name: Report commit status for bot PRs
         if: always() && github.event_name == 'workflow_dispatch'

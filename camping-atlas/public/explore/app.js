@@ -965,33 +965,27 @@ function cardRow(label, icon, x) {
 
 const mapLink = (name, lat, lng) => `https://map.kakao.com/link/map/${encodeURIComponent(name)},${lat},${lng}`;
 
-function rowsHtml(c) {
-  const f = facts(c);
-  // 주변은 마트·편의점·정육점 순서 고정(' · ' 구분), 요금은 ‘2만~8만원’.
-  const near = nearLine(c, " · "), fm = feeMain(c);
-  const nearX = near ? { v: near } : null;
-  const feeX = fm?.text ? { v: `${fm.text}${fm.est ? " 추정" : ""}`, g: GR(c.fee.grade) } : null;
-  return `<ul class="rows">${cardRow("주차", "car", f.park)}${cardRow("전기", "bolt", f.power)}${cardRow("장작", "flame", f.fire)}${cardRow("주변", "store", nearX).replace("<li>", '<li class="r-near">')}${cardRow("요금", "won", feeX)}</ul>`;
+// 카드 정보 3줄(소유자 2026-10-21, ux-proposals #2): 시설(주차·전기·장작) / 시간·주변 / 요금.
+// 사진 위 배지로 이미 보인 사실은 줄에서 뺀다(중복 금지). 값은 줄바꿈을 허용해 ‘…’로 자르지 않는다. 반려견·매너타임은 상세에서.
+function cardLines(c) {
+  const f = facts(c), ti = c.ti ?? {}, fm = feeMain(c);
+  const b = badges(c, wxAlert(c) ? 2 : 3);
+  const shown = { power: /bdg-volt/.test(b), fire: /bdg-flame|장작 불가|화기 불가/.test(b), park: /bdg-cobalt/.test(b) };
+  const fac = [
+    !shown.park && f.park?.v ? esc(f.park.v) : "",
+    !shown.power && f.power?.v ? formatRowVal("전기", f.power.v) : "",
+    !shown.fire && f.fire?.v ? `<span class="${/불가|금지/.test(f.fire.v) ? "is-no" : ""}">${esc(f.fire.v)}</span>` : "",
+  ].filter(Boolean).join(" · ");
+  const time = [ti.i?.[0] ? `입실 ${ti.i[0]}` : "", ti.o?.[0] ? `퇴실 ${ti.o[0]}` : ""].filter(Boolean).join(" · ");
+  const timeTxt = time ? (ti.i?.[1] === "r" ? `${time} (조례 기준 참고)` : time) : "";
+  const near = nearLine(c, " · ").split(" · ")[0] ?? "";
+  const tl = [timeTxt && esc(timeTxt), near && esc(near)].filter(Boolean).join(" · ");
+  const fee = fm?.text ? `<b class="rf-main">${esc(fm.text)}${fm.est ? " 추정" : ""}</b>${feeTiersLine(c)}` : "";
+  const li = (label, icon, html, cls) => `<li class="${cls}"><span class="rl">${ic(icon)}${label}</span><span class="rv${html ? "" : " none"}">${html || "–"}</span></li>`;
+  return `<ul class="rows rows-3">${li("시설", "bolt", fac, "r-fac")}${li("시간", "clock", tl, "r-time")}${li("요금", "won", fee, "r-fee")}</ul>`;
 }
-function rowsHtmlHorizontal(c) {
-  const f = facts(c), ti = c.ti ?? {};
-  const near = nearLine(c, " · "), fm = feeMain(c);
-  const nearX = near ? { v: near } : null;
-  const feeX = fm?.text ? { v: `${fm.text}${fm.est ? " 추정" : ""}`, g: GR(c.fee?.grade) } : null;
-  const timeStr = [ti.i?.[0] ? `입실 ${ti.i[0]}` : "", ti.o?.[0] ? `퇴실 ${ti.o[0]}` : "", ti.m?.[0] ? `매너 ${ti.m[0]}부터` : ""].filter(Boolean).join(" · ");
-  // 지자체 표준 조례 일괄값(r)은 그 업장 공지가 아니다 → "참고"를 붙인다(소유자 2026-10-21).
-  const timeX = timeStr ? { v: ti.i?.[1] === "r" ? `${timeStr} (조례 기준 참고)` : timeStr, g: ti.i?.[1] } : null;
-  const petX = f.pet ? { v: f.pet.v, g: f.pet.g } : null;
-  return `<ul class="rows rows-horiz">
-    ${cardRow("주차", "car", f.park)}
-    ${cardRow("전기", "bolt", f.power)}
-    ${cardRow("장작", "flame", f.fire)}
-    ${cardRow("반려견", "paw", petX)}
-    ${cardRow("시간", "clock", timeX)}
-    ${cardRow("주변", "store", nearX).replace("<li>", '<li class="r-near">')}
-    ${cardRow("요금", "won", feeX)}
-  </ul>`;
-}
+function rowsHtml(c) { return cardLines(c); }
+function rowsHtmlHorizontal(c) { return cardLines(c); }
 // 가는 길 장보기: 마트·편의점·정육점 중 5km 안에 있는 곳(LOCALDATA 인허가). 순서는 늘 마트 → 편의점 → 정육점(소유자 2026-10-20).
 function nearLine(c, sep = " · ") {
   const nl = c.nl ?? {};
@@ -1147,7 +1141,6 @@ function card(c, i = 0, opts) {
       </div>
       <div class="card-group card-group-spec">
         ${rowsHtml(c)}
-        ${feeMain(c)?.text && feeTiersLine(c) ? `<p class="card-tiers">${feeTiersLine(c)}</p>` : ""}
       </div>
       ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `
         <div class="card-group card-group-reviews">
@@ -1234,6 +1227,9 @@ document.addEventListener("dragstart", (e) => {
 // 저장 직후 페이지를 닫아도 운영 기록이 빠지지 않도록 실패한 기록은 이 기기에
 // 짧게 보관했다가 다음 연결 때 다시 전송한다. IP 같은 불필요한 식별 정보는 보내지 않는다.
 const SAVE_LOG_QUEUE_KEY = "mc-save-log-pending";
+// 자동 테스트(Playwright·WebDriver는 navigator.webdriver=true)와 ?nowrite=1 에서는 운영 DB(Supabase)에 절대 쓰지 않는다.
+// 찜·비교는 이 기기 안에서만 바뀌고 찜 기록·공용 찜·한마디는 보내지 않는다(2026-10-21 테스트가 운영 기록에 67건을 남긴 사고 재발 방지).
+const NO_REMOTE_WRITE = navigator.webdriver === true || /[?&]nowrite=1\b/.test(location.search);
 const SAVE_LOG_QUEUE_MAX = 24;
 const saveSyncQueue = new Map();
 function pendingSaveLogs() {
@@ -1244,6 +1240,7 @@ function queueSaveLog(row) {
   store.set(SAVE_LOG_QUEUE_KEY, [...pendingSaveLogs(), row].slice(-SAVE_LOG_QUEUE_MAX));
 }
 async function postSaveLog(row) {
+  if (NO_REMOTE_WRITE) return;
   if (!await ensureSupabaseConfig()) throw new Error("Supabase config unavailable");
   const headers = { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=minimal" };
   const r = await fetch(`${SB.url}/rest/v1/save_log`, { method: "POST", headers, body: JSON.stringify(row), keepalive: true });
@@ -1261,6 +1258,7 @@ async function readSaveLog(limit = 200) {
   return legacy.json();
 }
 async function flushPendingSaveLogs() {
+  if (NO_REMOTE_WRITE) return;
   if (!navigator.onLine || !await ensureSupabaseConfig()) return;
   const retry = [];
   for (const row of pendingSaveLogs()) {
@@ -1269,6 +1267,7 @@ async function flushPendingSaveLogs() {
   store.set(SAVE_LOG_QUEUE_KEY, retry);
 }
 async function loadSharedSaves() {
+  if (NO_REMOTE_WRITE) return; // 테스트는 이 기기 찜만 쓴다(운영 공용 찜과 섞이지 않게)
   if (!await ensureSupabaseConfig()) return;
   try {
     const r = await fetch(`${SB.url}/rest/v1/shared_save?select=campground_id,created_at&order=created_at.desc`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
@@ -1289,6 +1288,7 @@ function clientMeta() {
   };
 }
 async function syncSave(action, id) {
+  if (NO_REMOTE_WRITE) return;
   if (!await ensureSupabaseConfig()) return;
   const headers = { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=minimal" };
   const sharedUrl = action === "add"
@@ -1464,6 +1464,13 @@ function siteFooterHtml() {
     </div>
   </footer>`;
 }
+// ‘어디로’ 칸 아무 곳이나 눌러도 즉시 입력(라벨 기본 동작이 늦거나 막히는 모바일 브라우저 대비). 입력칸 자체를 누른 경우는 그대로 둔다.
+document.addEventListener("pointerdown", (e) => {
+  const f = e.target.closest?.(".finder-destination");
+  if (!f || e.target.matches("input")) return;
+  const inp = f.querySelector("input");
+  if (inp) { e.preventDefault(); inp.focus(); const n = inp.value.length; try { inp.setSelectionRange(n, n); } catch {} }
+});
 function commonFinderForm({ formAttr = "data-search", isList = false } = {}) {
   return `<form class="finder-form${isList ? " list-finder-form" : ""}" role="search" ${formAttr}>
     <label class="finder-field finder-destination"><small>어디로</small><input type="search" name="q" value="${esc(S.q)}" placeholder="전국 또는 캠핑장명" aria-label="지역 또는 캠핑장명" autocomplete="off" enterkeyhint="search"></label>
@@ -1921,7 +1928,6 @@ function listRow({ c, ce }, i = 0) {
       </div>
       <div class="card-group card-group-spec">
         ${rowsHtmlHorizontal(c)}
-        ${feeMain(c)?.text && feeTiersLine(c) ? `<p class="card-tiers">${feeTiersLine(c)}</p>` : ""}
       </div>
       ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `
         <div class="card-group card-group-reviews">
@@ -1955,6 +1961,18 @@ function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAt
     <div class="filter-mod" aria-label="요금"><span class="fee-band-lbl">요금</span><div class="rail chips fee-bands">${fee("", "전체")}${fee("u3", "~3만원")}${fee("3to5", "3~5만원")}${fee("5to7", "5~7만원")}${fee("7to10", "7만원~10만원")}${fee("10to20", "10만원~20만원")}${fee("o20", "20만원+")}</div></div>`;
 }
 
+// 모바일 목록(≤760px)은 지역·사이트·요금 칩 줄을 접고 ‘조건’ 버튼(조건 시트) 하나만 둔다(소유자 2026-10-21, ux-proposals #3).
+// 접힌 칩 줄에서 고른 값(지역 묶음·사이트 형태·요금)은 지울 수 있는 알약으로만 보인다(PC는 칩 줄에 이미 보이므로 숨김 = 중복 없음).
+function listMobilePills() {
+  const out = [];
+  const area = AREAS.find(([k]) => k === S.area && k !== "all");
+  if (area && !S.cond.sido.length) out.push(`<button type="button" class="cond-pill m-only" data-list-area-k="all" aria-label="${esc(area[1])} 지우기">${esc(area[1])}<span aria-hidden="true">×</span></button>`);
+  const st = S.stype && STYPES.find(([k]) => k === S.stype);
+  if (st) out.push(`<button type="button" class="cond-pill m-only" data-list-stype="" aria-label="${esc(st[1])} 지우기">${esc(st[1])}<span aria-hidden="true">×</span></button>`);
+  const FEE_L = { u3: "~3만원", "3to5": "3~5만원", "5to7": "5~7만원", "7to10": "7만원~10만원", "10to20": "10만원~20만원", o20: "20만원+", o7: "7만원+" };
+  if (S.feeBand && FEE_L[S.feeBand]) out.push(`<button type="button" class="cond-pill m-only" data-fee-band="" aria-label="요금 ${esc(FEE_L[S.feeBand])} 지우기">${esc(FEE_L[S.feeBand])}<span aria-hidden="true">×</span></button>`);
+  return out.join("");
+}
 function listView() {
   const p = listParams();
   S.area = p.cond.sido.length ? "all" : p.area; S.q = p.q;
@@ -1978,7 +1996,7 @@ function listView() {
       <div class="list-tools">
         <span class="list-result" data-list-count>검색된 결과</span>
         <div class="list-tools-right">
-          <span class="cond-pills" data-cond-pills>${condBadgeRow()}</span>
+          <span class="cond-pills" data-cond-pills>${condBadgeRow()}${listMobilePills()}</span>
           <button type="button" class="chip cond-open" data-open-cond>${ic("list")}조건${condActive() ? ` <i>${condActive()}</i>` : ""}</button>
           <label class="sort sort-plain">${ic("list")}<select data-list-sort aria-label="정렬">
             <option value="rec"${(S.listSort ?? "rec") === "rec" ? " selected" : ""}>추천순</option>
@@ -2001,7 +2019,7 @@ function renderList({ reset = true } = {}) {
   const from = box.children.length, to = Math.min(S.listN, shown.length);
   box.insertAdjacentHTML("beforeend", shown.slice(from, to).map((x, i) => listRow(x, from + i)).join("") || (reset ? `<p class="empty">조건에 맞는 캠핑장이 없어요. 지역이나 요금대를 바꿔 보세요.</p>` : ""));
   const rc = $("[data-list-count]"); if (rc) rc.textContent = `검색된 결과 ${fmt(shown.length)}건`;
-  const cp = $("[data-cond-pills]"); if (cp) cp.innerHTML = condBadgeRow();
+  const cp = $("[data-cond-pills]"); if (cp) cp.innerHTML = condBadgeRow() + (location.hash.startsWith("#/list") ? listMobilePills() : "");
   $$("[data-cond-label]").forEach((x) => (x.textContent = condSummary()));
   $("[data-list-more]").hidden = to >= shown.length;
   initCarousels(box);
@@ -4670,20 +4688,26 @@ function bindDetail() {
     const mo = new MutationObserver(syncJumps);
     late.forEach((t) => mo.observe(t, { attributes: true, attributeFilter: ["hidden"] }));
     cleanup.push(() => mo.disconnect());
-    if ("IntersectionObserver" in window) {
-      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) jumps.forEach((a) => a.toggleAttribute("aria-current", a.dataset.jump === e.target.id)); }), { rootMargin: "-15% 0px -70% 0px" });
-      late.forEach((t) => io.observe(t));
-      cleanup.push(() => io.disconnect());
-      const onScrollEnd = () => {
-        const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60;
-        if (atBottom && jumps.length) {
-          const last = jumps[jumps.length - 1];
-          jumps.forEach((a) => a.toggleAttribute("aria-current", a === last));
-        }
-      };
-      window.addEventListener("scroll", onScrollEnd, { passive: true });
-      cleanup.push(() => window.removeEventListener("scroll", onScrollEnd));
-    }
+    // 지금 읽는 칸 표시(소유자 2026-10-21, ux-proposals #8): 막대 바로 아래를 지난 마지막 칸을 켠다. 맨 끝이면 마지막 칸.
+    // IntersectionObserver는 빠른 스크롤·긴 칸에서 표시가 멈춰 있어(라이브 점검: 2,500px 내려도 ‘요금’) 스크롤 위치로 계산한다.
+    let raf = 0;
+    const spy = () => {
+      raf = 0;
+      const vis = jumps.filter((a) => !a.hidden);
+      if (!vis.length) return;
+      const line = Math.max(jumpBar?.getBoundingClientRect().bottom ?? 0, parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0) + 16;
+      let cur = vis[0];
+      for (const a of vis) { const t = document.getElementById(a.dataset.jump); if (t && t.getBoundingClientRect().top <= line) cur = a; }
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) cur = vis[vis.length - 1];
+      if (!cur.hasAttribute("aria-current")) {
+        jumps.forEach((a) => a.toggleAttribute("aria-current", a === cur));
+        const bar = cur.parentElement; if (bar) bar.scrollTo({ left: cur.offsetLeft - (bar.clientWidth - cur.offsetWidth) / 2, behavior: "auto" });
+      }
+    };
+    const onSpy = () => { if (!raf) raf = requestAnimationFrame(spy); };
+    window.addEventListener("scroll", onSpy, { passive: true });
+    cleanup.push(() => { window.removeEventListener("scroll", onSpy); if (raf) cancelAnimationFrame(raf); });
+    spy();
   }
   $(".d-jump-bar, .d-jump")?.addEventListener("click", (e) => {
     const a = e.target.closest("[data-jump]");
@@ -4867,6 +4891,7 @@ function bindDetail() {
   cmtForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const f = e.target, btn = $("button", f);
+    if (NO_REMOTE_WRITE) { toast("테스트 모드에서는 남기지 않아요"); return; }
     btn.disabled = true;
     try {
       const r = await fetch(`${SB.url}/rest/v1/campground_comment`, { method: "POST", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=representation" }, body: JSON.stringify({ campground_id: f.dataset.cmt, nickname: f.nickname.value.trim(), content: f.content.value.trim(), tag: "general", password_hash: crypto.randomUUID() }) });
@@ -4884,7 +4909,7 @@ function bindDetail() {
   });
   $("[data-cmts]")?.addEventListener("click", async (e) => {
     const b = e.target.closest("[data-cmt-del]");
-    if (!b) return;
+    if (!b || NO_REMOTE_WRITE) return;
     await fetch(`${SB.url}/rest/v1/campground_comment?id=eq.${encodeURIComponent(b.dataset.cmtDel)}`, { method: "PATCH", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json" }, body: JSON.stringify({ is_deleted: true }) }).catch(() => null);
     loadComments(id);
   });
