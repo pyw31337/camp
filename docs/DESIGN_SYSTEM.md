@@ -551,3 +551,10 @@ Pretendard Variable 한 가지. 제목 800, 본문 400~600, 숫자 `tabular-nums
 
 - 사진 캐러셀(`.car-nav`)·사진 크게 보기(`.lb-nav`) 모두 흰 원 배경·박스 그림자 없이 흰 꺾쇠만, `drop-shadow(0 1px 1.5px rgba(0,0,0,.28))`로 옅게. 새 화살표도 이 규칙을 따른다(style.css 끝 공통 규칙).
 - 회귀 테스트: `camping-atlas/scripts/arrows-test.mjs`.
+
+## 성능 규칙 (2026-10-21)
+
+- 고캠핑 원본 사진(최대 11MB)은 카드·갤러리에 직접 쓰지 않는다: `photoView()`가 `thumb/thumb_1000_` 썸네일을 쓰고, 없으면 `data-orig`로 원본 한 번 대체. 라이트박스만 원본.
+- 홈 테마 줄은 앞 4줄만 바로 그리고 나머지는 화면 1,200px 앞에서 채운다(`LAZY_FROM`, `watchLazyRows`). 레일 상태 계산은 한 프레임에 모아 읽고 쓴다(`queueRailState`).
+- Leaflet은 `defer`, 루트 index에 campgrounds/photos.json `preload`, gocamping.or.kr `preconnect`.
+- CI 예산: `camping-atlas/scripts/perf-budget.mjs`(app.js 560KB·CSS 260KB·첫 데이터 gzip 3.5MB·홈 DOM 12,000·원본 사진 0장·카드 8초).

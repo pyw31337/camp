@@ -583,12 +583,22 @@ const photoUrl = (u) => {
 // 목록은 480px 파생본을 우선 쓰되, 고밀도 화면에서는 같은 공식 원본의 1280px 파생본을 선택한다.
 // 외부 원문 URL은 변형하지 않아 원천의 표시 조건과 주소를 유지한다.
 const photoHiUrl = (u) => photoUrl(u).replace(/-t\.webp(?=\?|$)/, "-l.webp");
+// 성능(2026-10-21): 고캠핑 원본(최대 11MB)을 카드·갤러리에 그대로 받지 않고, 고캠핑이 같은 파일로 공개하는 1000px 썸네일(thumb_1000_)을 먼저 쓴다.
+// 썸네일이 없으면(약 25%) 아래 error 캡처에서 원본(data-orig)으로 한 번 바꾼다. 라이트박스(크게 보기)는 원본 그대로.
+const GC_ORIG = /^(https?:\/\/(?:www\.)?gocamping\.or\.kr\/upload\/camp\/\d+)\/([^/?#]+\.(?:jpe?g|png|webp))$/i;
+const photoView = (u) => { const v = photoUrl(u), m = v.match(GC_ORIG); return m ? `${m[1]}/thumb/thumb_1000_${m[2]}` : v; };
+const origAttr = (u) => { const v = photoUrl(u); return photoView(u) !== v ? ` data-orig="${esc(v)}"` : ""; };
+document.addEventListener("error", (e) => {
+  const im = e.target;
+  if (!(im instanceof HTMLImageElement) || !im.dataset.orig) return;
+  const o = im.dataset.orig; im.removeAttribute("data-orig"); e.stopImmediatePropagation(); im.src = o;
+}, true);
 function imageTag(u, alt, { eager = false, sizes = "(max-width: 759px) 80vw, 320px" } = {}) {
-  const src = photoUrl(u), high = photoHiUrl(u);
-  const srcset = high !== src ? ` srcset="${esc(src)} 480w, ${esc(high)} 1280w" sizes="${sizes}"` : "";
+  const src = photoView(u), high = photoHiUrl(u);
+  const srcset = high !== photoUrl(u) ? ` srcset="${esc(src)} 480w, ${esc(high)} 1280w" sizes="${sizes}"` : "";
   // 외부 원본(블로그 사진 등)은 리퍼러를 보내지 않아야 열린다
   const ref = /^https?:/i.test(src) ? ' referrerpolicy="no-referrer"' : "";
-  return `<img src="${esc(src)}"${srcset} alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" draggable="false"${ref}>`;
+  return `<img src="${esc(src)}"${origAttr(u)}${srcset} alt="${alt}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" draggable="false"${ref}>`;
 }
 // 비교·찜처럼 사진이 보조 역할인 곳은 빈 src를 만들지 않고, 사진 미보유를 중립적인 아이콘으로 표시한다.
 function campThumb(c, { alt = "", sizes } = {}) {
@@ -656,11 +666,11 @@ function carousel(c, { eager = false, cls = "", single = false } = {}) {
   const alt = esc(nameOf(c).name);
   if (!ph.length) return `<div class="car car-empty ${cls}">${ic("tent")}</div>`;
   if (single || ph.length === 1) {
-    return `<div class="car car-single ${cls}"><img class="car-img" src="${esc(photoUrl(ph[0]))}" alt="${alt}" loading="${eager ? "eager" : "lazy"}" decoding="async" draggable="false"${/^https?:/i.test(photoUrl(ph[0])) ? ' referrerpolicy="no-referrer"' : ""}>${isPt(c, ph[0]) ? ptCredit(c) : ""}</div>`;
+    return `<div class="car car-single ${cls}"><img class="car-img" src="${esc(photoView(ph[0]))}"${origAttr(ph[0])} alt="${alt}" loading="${eager ? "eager" : "lazy"}" decoding="async" draggable="false"${/^https?:/i.test(photoUrl(ph[0])) ? ' referrerpolicy="no-referrer"' : ""}>${isPt(c, ph[0]) ? ptCredit(c) : ""}</div>`;
   }
   const slides = ph.map((u, i) => i === 0
     ? imageTag(u, alt, { eager })
-    : `<img data-src="${esc(photoUrl(u))}" data-hi-src="${esc(photoHiUrl(u))}" alt="" decoding="async" draggable="false">`).join("");
+    : `<img data-src="${esc(photoView(u))}"${origAttr(u)} data-hi-src="${esc(photoHiUrl(u))}" alt="" decoding="async" draggable="false">`).join("");
   const dots = ph.length > 1 ? `<span class="car-dots" aria-hidden="true">${ph.map((_, i) => `<i${i ? "" : ' class="on"'}></i>`).join("")}</span>` : "";
   const nav = ph.length > 1 ? `<button class="car-nav prev" type="button" aria-label="이전 사진">${ic("left")}</button><button class="car-nav next" type="button" aria-label="다음 사진">${ic("right")}</button>` : "";
   return `<div class="car car-multi ${cls}" data-n="${ph.length}"><div class="car-track">${slides}</div>${dots}${nav}</div>`;
@@ -671,7 +681,7 @@ function hydrate(car) {
   $$("img[data-src]", car).forEach((im) => {
     const src = im.dataset.src, high = im.dataset.hiSrc;
     im.src = src;
-    if (high && high !== src) { im.srcset = `${src} 480w, ${high} 1280w`; im.sizes = "(max-width: 759px) 80vw, 320px"; }
+    if (high && high !== src && high !== im.dataset.orig) { im.srcset = `${src} 480w, ${high} 1280w`; im.sizes = "(max-width: 759px) 80vw, 320px"; }
     im.removeAttribute("data-src"); im.removeAttribute("data-hi-src");
   });
 }
@@ -734,6 +744,22 @@ function initCarousels(root = document) {
     });
   }
 }
+const RAIL_Q = new Set();
+let railRaf = 0;
+function queueRailState(rail) {
+  RAIL_Q.add(rail);
+  if (railRaf) return;
+  railRaf = requestAnimationFrame(() => {
+    railRaf = 0;
+    const items = [...RAIL_Q].map((r) => [r, r.scrollWidth - r.clientWidth, r.scrollLeft]);
+    RAIL_Q.clear();
+    for (const [r, max, left] of items) {
+      // 이미 넘긴 쪽(좌측)은 흐리게 숨기지 않는다. 다음 카드가 있는 우측만 안내한다.
+      r.classList.remove("has-left-fade");
+      r.classList.toggle("has-right-fade", max > 6 && left < max - 6);
+    }
+  });
+}
 function initDraggableRails(root = document) {
   const rails = $$(".rail", root);
   for (const rail of rails) {
@@ -746,23 +772,13 @@ function initDraggableRails(root = document) {
     let hasMoved = false;
     let bounceX = 0;
 
-    const updateRailState = () => {
-      const max = rail.scrollWidth - rail.clientWidth;
-      if (max <= 6) {
-        rail.classList.remove("has-left-fade", "has-right-fade");
-        return;
-      }
-      const atEnd = rail.scrollLeft >= max - 6;
-      // 이미 넘긴 쪽(좌측)은 흐리게 숨기지 않는다. 다음 카드가 있는 우측만 안내한다.
-      rail.classList.remove("has-left-fade");
-      rail.classList.toggle("has-right-fade", !atEnd);
-    };
+    // 성능(2026-10-21): 레일 25개가 차례로 읽고 쓰며 레이아웃을 매번 다시 계산하던 것(홈 첫 화면 ~400ms)을 한 프레임에 모아 읽은 뒤 쓴다.
+    const updateRailState = () => queueRailState(rail);
     rail.addEventListener("scroll", updateRailState, { passive: true });
-    requestAnimationFrame(updateRailState);
     if (window.ResizeObserver) {
       const ro = new ResizeObserver(updateRailState);
       ro.observe(rail);
-    }
+    } else updateRailState();
 
     // 브라우저 기본 링크·이미지 네이티브 드래그(URL 텍스트 고스트가 마우스에 붙는 현상) 완전 차단
     rail.addEventListener("dragstart", (e) => {
@@ -1225,7 +1241,33 @@ function homeView() {
 }
 // 사진이 없는 곳은 카드로 보이지 않는다(소유자: 사진 없는 썸네일 금지). 이름 검색일 때만 아래 글 목록으로 남긴다.
 const hasPhoto = (c) => photosOf(c).length > 0;
-function themeRow([k, label, test], list, first, used) {
+// 성능(2026-10-21): 홈 테마 줄 17개×16장(카드 280여 장·노드 2만 개)을 한 번에 만들지 않는다.
+// 앞 LAZY_FROM줄만 바로 그리고, 나머지는 같은 카드 목록을 정해 둔 채 화면 가까이(1,200px) 오면 채운다. 순서·중복 제거·내용은 같다.
+const LAZY_FROM = 4;
+const LAZY_ROWS = new Map();
+let lazyIO = null;
+function fillLazyRow(sec) {
+  const r = LAZY_ROWS.get(sec.dataset.lazyRow);
+  if (!r) return;
+  LAZY_ROWS.delete(sec.dataset.lazyRow);
+  const rail = $(".trow-rail", sec);
+  rail.innerHTML = r.items.map((c) => card(c, 9, { isWaterPlay: r.k === "WATER_PLAY" })).join("");
+  rail.style.minHeight = "";
+  sec.removeAttribute("data-lazy-row");
+  initCarousels(sec);
+  initDraggableRails(sec);
+}
+function watchLazyRows(root) {
+  const secs = $$("[data-lazy-row]", root);
+  if (!secs.length) return;
+  const h = $(".trow-rail", root)?.offsetHeight || 0;
+  if (h) secs.forEach((sec) => { $(".trow-rail", sec).style.minHeight = `${h}px`; });
+  if (!("IntersectionObserver" in window)) { secs.forEach(fillLazyRow); return; }
+  lazyIO?.disconnect();
+  lazyIO = new IntersectionObserver((es) => { for (const e of es) if (e.isIntersecting) { lazyIO.unobserve(e.target); fillLazyRow(e.target); } }, { rootMargin: "1200px 0px" });
+  secs.forEach((sec) => lazyIO.observe(sec));
+}
+function themeRow([k, label, test], list, first, used, idx = 0) {
   const all = list.filter(test);
   // 같은 캠핑장이 여러 줄 맨 앞에 반복되지 않게, 앞줄에 나온 곳은 뺀다.
   const items = all.filter((c) => hasPhoto(c) && !used.has(c.id)).slice(0, 16);
@@ -1233,8 +1275,8 @@ function themeRow([k, label, test], list, first, used) {
   items.forEach((c) => used.add(c.id));
   return `<section class="trow" aria-label="${esc(label)}">
     <div class="trow-head"><h3>${thIc(k)}${esc(label)} <i>${fmt(all.length)}</i></h3><button type="button" class="link more-link" data-theme-all="${k}">더보기 ${ic("right")}</button></div>
-    <div class="rail trow-rail">${items.map((c, i) => card(c, first && i < 4 ? i : 9, { isWaterPlay: k === "WATER_PLAY" })).join("")}</div>
-  </section>`;
+    <div class="rail trow-rail">${idx >= LAZY_FROM ? "" : items.map((c, i) => card(c, first && i < 4 ? i : 9, { isWaterPlay: k === "WATER_PLAY" })).join("")}</div>
+  </section>`.replace('<section class="trow"', idx >= LAZY_FROM ? `<section class="trow" data-lazy-row="${(LAZY_ROWS.set(`r${idx}`, { items, k }), `r${idx}`)}"` : '<section class="trow"');
 }
 const themeName = (k) => (k === "ALL" ? "전체 테마" : k === "AVAIL" ? "공식 접수 중" : k === "OPEN" ? "곧 오픈" : k === "REVIEWS" ? "긍정 후기 추천" : THEMES.find((t) => t[0] === k)?.[1] ?? k);
 function renderResults({ reset = true } = {}) {
@@ -1277,11 +1319,14 @@ function renderResults({ reset = true } = {}) {
       ...themeList.slice(10),
     ];
     const used = new Set();
-    rows.innerHTML = list.length ? defs.map((dd, i) => themeRow(dd, list, i === 0, used)).join("") : `<div class="empty">${ic("search")}<b>맞는 곳이 없어요</b><button class="btn ghost" data-clear="all">조건 지우기</button></div>`;
+    LAZY_ROWS.clear();
+    let shownRows = 0;
+    rows.innerHTML = list.length ? defs.map((dd, i) => { const h = themeRow(dd, list, i === 0, used, shownRows); if (h) shownRows++; return h; }).join("") : `<div class="empty">${ic("search")}<b>맞는 곳이 없어요</b><button class="btn ghost" data-clear="all">조건 지우기</button></div>`;
     grid.innerHTML = ""; noph.innerHTML = "";
     $("[data-more]").hidden = true;
     initCarousels(rows);
     initDraggableRails(rows);
+    watchLazyRows(rows);
     return;
   }
   rows.innerHTML = "";
