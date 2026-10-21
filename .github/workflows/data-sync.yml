@@ -450,6 +450,8 @@ jobs:
           KAKAO_REST_API_KEY="${{ github.event_name != 'pull_request' && secrets.KAKAO_REST_API_KEY || '' }}" node pipeline/scripts/geocode-dayuse-osm.mjs || true
           node pipeline/scripts/apply-dayuse-seed.mjs
           # 발행 전 상식 정리(공원에 캠핑장 요금·입퇴실 금지, 관광공사 광고 요금 제거, 숯 문구 모순, 좌표 오타). CI가 --check로 막는다.
+          # t41u: 수기·공식 확정 값을 재계산 위에 다시 얹는다(registry/curated-pins.json)
+          node pipeline/scripts/apply-pins.mjs
           node pipeline/scripts/publish-sanity.mjs
           # 열어 보니 없는 예약·홈페이지 링크(registry/link-health.json)를 c.dl로 표시해 화면 버튼에서 뺀다.
           node pipeline/scripts/build-link-health.mjs
@@ -461,6 +463,8 @@ jobs:
             git fetch -q origin main && FG_BASE="$(mktemp -d)" && git archive origin/main camping-atlas/public/explore/data pipeline/registry | tar -x -C "$FG_BASE"
             node pipeline/scripts/field-guard.mjs "$FG_BASE" . --heal
           fi
+          # t41u: 되살린 값에도 발행 전 상식 정리를 다시 적용(정리 규칙이 되살림보다 우선)
+          node pipeline/scripts/publish-sanity.mjs
           # 업장 정보 커버리지(요금·입퇴실·매너타임·주차·전기 W·사이트 타입 등, 목표 2,500곳)를 meta.json에 남긴다.
           node pipeline/scripts/report-coverage.mjs
           # 모든 원천을 (캠핑장·속성·값·등급·원천·근거) 원자 사실로 풀어 묶음별 NDJSON(data/facts)으로 쓴다. 여러 에이전트의 공유 원장.
