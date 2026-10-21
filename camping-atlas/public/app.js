@@ -1373,6 +1373,10 @@ function syncCompare() {
 
 function presetOn(i) { const v = PRESETS[i][1]; return Object.entries(v).every(([k, x]) => (Array.isArray(x) ? x.every((y) => S.cond[k].includes(y)) : S.cond[k] === x)); }
 function syncCondUi() {
+  // 지도: 조건 창에서 고른 조건을 지도·목록에 바로 반영하고 검색칸 오른쪽 조건 버튼 숫자를 맞춘다(t39 #22).
+  if (curHash().startsWith("#/map")) { const b = $(".msearch-cond"), n = condActive(); if (b) { b.classList.toggle("on", !!n); b.innerHTML = `${ic("list")}${n ? `<i data-mcond-n>${n}</i>` : ""}`; }
+    const hit = n && MAP ? S.camps.filter((c) => c.lat && matches(c, { useArea: false }) && condEval(c) && mapBrowseEligible(c)) : [];
+    if (hit.length) MAP.fit(hit.map((c) => [c.lat, c.lng]), { padding: 40, maxZoom: 13 }); else drawMap(); }
   if (!curHash().startsWith("#/list")) $$("[data-cond-pills]").forEach((x) => (x.innerHTML = condBadgeRow()));
   $$("[data-cond-label]").forEach((x) => (x.textContent = condSummary()));
   $$("[data-preset]").forEach((b) => b.setAttribute("aria-pressed", String(presetOn(Number(b.dataset.preset)))));
@@ -5226,7 +5230,7 @@ let MAP = null, selected = null;
 function mapView() {
   return `<section class="map-page">
     <aside class="map-panel">
-      <form class="search sm" role="search" data-msearch>${ic("search", "search-ic")}<input type="search" name="q" value="${esc(S.q)}" placeholder="지역 · 캠핑장" aria-label="검색어" autocomplete="off"></form>
+      <form class="search sm" role="search" data-msearch>${ic("search", "search-ic")}<input type="search" name="q" value="${esc(S.q)}" placeholder="지역 · 캠핑장" aria-label="검색어" autocomplete="off"><button type="button" class="msearch-cond${condActive() ? " on" : ""}" data-open-cond aria-label="조건으로 거르기">${ic("list")}${condActive() ? `<i data-mcond-n>${condActive()}</i>` : ""}</button></form>
       <div class="rail chips">${Object.entries(QUICK).map(([k, q]) => `<button type="button" class="chip qc-${q.cls}" data-mquick="${k}" aria-pressed="${S.quick.has(k)}">${ic(q.icon)}${q.label}</button>`).join("")}</div>
       <p class="map-count"><b data-mcount>0</b>곳 · 지도 안</p>
       <div class="map-list" data-mlist></div>
@@ -5247,10 +5251,10 @@ function pinLabel(c) {
 let MAP_POOL = null;
 function mapPool() {
   const ser = (v) => JSON.stringify(v instanceof Set ? [...v].sort() : v ?? null, (_, x) => (x instanceof Set ? [...x].sort() : x));
-  const key = [S.q, S.quick, S.feeBand, S.find, S.has, S.stype, S.theme].map(ser).concat([S.camps.length, DEAD.size]);
+  const key = [S.q, S.quick, S.feeBand, S.find, S.has, S.stype, S.theme, S.cond].map(ser).concat([S.camps.length, DEAD.size]);
   const k = MAP_POOL;
   if (k && k.photos === S.photos && k.cards === S.cards && k.avail === S.avail && k.key.every((v, i) => v === key[i])) return k.rows;
-  const rows = S.camps.filter((c) => c.lat && c.lng && matches(c, { useArea: false }) && mapBrowseEligible(c))
+  const rows = S.camps.filter((c) => c.lat && c.lng && matches(c, { useArea: false }) && condEval(c) && mapBrowseEligible(c))
     .map((c) => ({ c, ph: hasPhoto(c), pl: photoLast(c), r: rich(c) }));
   MAP_POOL = { key, photos: S.photos, cards: S.cards, avail: S.avail, rows };
   return rows;
@@ -5341,7 +5345,7 @@ function bindMap() {
   const v = $("#view");
   const onSubmit = (e) => {
     const f = e.target.closest("[data-msearch]"); if (!f) return; e.preventDefault(); S.q = f.q.value.trim();
-    const hit = S.camps.filter((c) => c.lat && matches(c, { useArea: false }) && mapBrowseEligible(c));
+    const hit = S.camps.filter((c) => c.lat && matches(c, { useArea: false }) && condEval(c) && mapBrowseEligible(c));
     if (!MAP) return;
     if (S.q && hit.length) MAP.fit(hit.map((c) => [c.lat, c.lng]), { padding: 40, maxZoom: 13 }); else drawMap();
   };
