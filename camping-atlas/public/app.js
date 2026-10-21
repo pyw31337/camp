@@ -3685,7 +3685,9 @@ function mediaHubHtml(d, c) {
       return `<div class="mh-empty"><p>${esc(name)} 관련 등록된 ${esc(platformLabel)} 영상이 없습니다.</p><div class="mh-more-wrap"><a class="mh-more-btn" href="${esc(searchUrl)}" target="_blank" rel="noopener">${platIc(platformKey)}<span>${esc(platformLabel)}에서 영상 검색하기</span>${ic("right")}</a></div></div>`;
     }
 
-    const cards = items.map((x, i) => {
+    // 유튜브 숏츠(t39 #36): 수집 단계에서 /shorts/ 주소 또는 60초 이하로 표시한 것(kind "short")은 세로 카드 줄로 따로 먼저 보인다.
+    const isShort = (x) => platformKey === "youtube" && (x.kind === "short" || /youtube\.com\/shorts\//i.test(x.url ?? ""));
+    const cardHtml = (x, i) => {
       const isYt = Boolean(x.yt);
       const fact = sourceFact({
         src: isYt ? "YouTube" : sourceName(x.src || x.author, platformLabel),
@@ -3697,7 +3699,7 @@ function mediaHubHtml(d, c) {
       // 썸네일 고화질·빈칸 없음(영우 님 2026-10-21): 유튜브 1280px(hq720) → 480px, 그 밖은 같은 글의 큰 사진 → 고화질 판 → 캠핑장 사진 순.
       const fb = thumbPool.length ? thumbPool[i % thumbPool.length] : "";
       const thumbUrl = isYt
-        ? `https://i.ytimg.com/vi/${encodeURIComponent(x.yt)}/hq720.jpg`
+        ? `https://i.ytimg.com/vi/${encodeURIComponent(x.yt)}/${isShort(x) ? "hqdefault" : "hq720"}.jpg` // 숏츠는 hq720이 없는 경우가 많아 회색 빈 그림이 온다
         : (bigByUrl.get(x.url) || hiThumb(x.thumb) || fb);
       const altUrl = isYt ? `https://i.ytimg.com/vi/${encodeURIComponent(x.yt)}/hqdefault.jpg` : (x.thumb && x.thumb !== thumbUrl ? x.thumb : "");
 
@@ -3715,16 +3717,23 @@ function mediaHubHtml(d, c) {
         return `<article class="vid-wrap"><button type="button" class="vid" data-yt="${esc(x.yt)}">${inner}</button>${srcTip(fact, `관련 영상 ${i + 1}`)}</article>`;
       }
       return `<article class="vid-wrap"><a class="vid" href="${esc(x.url)}" target="_blank" rel="noopener">${inner}</a>${srcTip(fact, `${platformLabel} 영상 ${i + 1}`)}</article>`;
-    }).join("");
+    };
+    const shorts = items.filter(isShort), longs = items.filter((x) => !isShort(x));
+    const shortsUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(`${name} 캠핑 #shorts`)}`;
+    const shortsHtml = shorts.length ? `<p class="mh-sub">${platIc("youtube")}Shorts <i>${shorts.length}</i></p>
+      <div class="rail vids-shorts" data-shorts>${shorts.map((x, i) => cardHtml(x, i).replace('<article class="vid-wrap">', '<article class="vid-wrap is-short">')).join("")}</div>` : "";
+    const longsHtml = longs.length ? `${shorts.length ? `<p class="mh-sub">${platIc("youtube")}영상 <i>${longs.length}</i></p>` : ""}<div class="rail vids">${longs.map((x, i) => cardHtml(x, shorts.length + i)).join("")}</div>` : "";
 
     return `
-      <div class="rail vids">
-        ${cards}
-      </div>
+      ${shortsHtml}
+      ${longsHtml}
       <div class="mh-more-wrap">
         <a class="mh-more-btn" href="${esc(searchUrl)}" target="_blank" rel="noopener">
           ${platIc(platformKey)}<span>${esc(platformLabel)}에서 더보기</span>${ic("right")}
-        </a>
+        </a>${platformKey === "youtube" ? `
+        <a class="mh-more-btn" href="${esc(shortsUrl)}" target="_blank" rel="noopener" data-shorts-more>
+          ${platIc("youtube")}<span>Shorts 더보기</span>${ic("right")}
+        </a>` : ""}
       </div>
     `;
   };
