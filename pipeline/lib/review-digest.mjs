@@ -1,4 +1,5 @@
 // 후기 요약(블로그·카페 검색 결과의 제목·요약문)에서 장점·단점을 주제별로 센다.
+import { visibleUrl } from "./link-policy.mjs";
 // 원칙(docs/CAMPGROUND_SPEC_INTEGRATION.md 5절):
 // - 후기는 ‘언급’이다. 사실 확정값이 아니라 “몇 건이 무엇을 좋다/아쉽다고 했는지”만 보인다.
 // - 이 캠핑장 이야기로 확인된 글(attributable)만, 묶음 글(“가볼 만한 곳 5곳”)은 뺀다.
@@ -100,7 +101,7 @@ export function digestReviews(name, reviews = [], { min = 1, top = 4, regions = 
     const text = `${r.title ?? ""}. ${r.snippet ?? ""}${r.body?.length ? `. ${r.body.join(". ")}` : ""}`.split(String(name ?? "").trim()).join(" ");
     const normText = text.replace(new RegExp(String(name ?? "").replace(/[^가-힣A-Za-z0-9]+/g, "|").replace(/^\||\|$/g, "").split("|").filter((t) => t.length >= 2).join("|") || "$^", "g"), " ");
     const { pros, cons } = topicsOf(normText);
-    const sample = { title: r.title ?? "후기", url: r.url ?? null, date: r.date ?? null };
+    const sample = { title: r.title ?? "후기", url: visibleUrl(r.url), date: r.date ?? null };
 
     for (const p of pros) {
       pro.set(p, (pro.get(p) ?? 0) + 1);
