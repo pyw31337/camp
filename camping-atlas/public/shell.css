@@ -1,0 +1,66 @@
+/* 모여라캠핑 공통 틀(shell) — 모든 화면(앱의 모든 경로 + /log/)이 같은 헤더·푸터·하단 탭·본문 폭을 쓴다(2026-10-21).
+   이 파일만 고치면 모든 화면이 함께 바뀐다. 화면별 CSS(style.css, log 페이지)는 여기 규칙을 덮어쓰지 않는다
+   (예외: 첫 화면·테마 화면의 사진 위 투명 헤더 — style.css의 body[data-view="home"|"theme"] .top).
+   회귀 테스트: camping-atlas/scripts/layout-shell-test.mjs (320·390·1366에서 헤더 높이·로고 위치·푸터 폭·본문 여백 비교). */
+:root {
+  --content: 1320px;                    /* 본문 최대 폭 */
+  --gut: clamp(16px, 3.2vw, 56px);      /* 본문 좌우 여백(헤더·푸터·본문 공통) */
+  --head-h: 64px;                       /* 헤더 높이(모바일 56px) */
+  --tabbar-h: 64px;                     /* 모바일 하단 탭 높이 */
+  --page-pad-bottom: clamp(48px, 5.5vw, 72px);
+  --sec-gap-inner: clamp(28px, 3.2vw, 40px);
+}
+[hidden] { display: none !important; }
+/* 쪽 뼈대: 헤더 → 본문(늘어남) → 푸터 */
+body { min-height: 100dvh; display: flex; flex-direction: column; }
+body > main { flex: 1 0 auto; }
+.shell, .shell-wrap { width: 100%; max-width: var(--content); margin-left: auto; margin-right: auto; padding-left: var(--gut); padding-right: var(--gut); box-sizing: border-box; }
+
+/* ── 헤더 ── */
+.top {
+  position: relative; z-index: 100; flex: none; height: calc(var(--head-h) + env(safe-area-inset-top));
+  width: 100%; background: var(--bg); border-bottom: 1px solid var(--line); box-sizing: border-box;
+}
+.top-in {
+  width: 100%; max-width: var(--content); height: 100%; margin-left: auto; margin-right: auto;
+  display: flex; align-items: center; justify-content: space-between; gap: clamp(12px, 3vw, 40px); padding: env(safe-area-inset-top) var(--gut) 0;
+  box-sizing: border-box;
+}
+.brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 900; font-size: 1.08rem; letter-spacing: -0.03em; white-space: nowrap; }
+.brand-mark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: var(--ink); color: var(--volt); }
+.brand-mark svg { width: 18px; height: 18px; fill: currentColor; }
+.top-nav { display: flex; gap: 4px; }
+.top-nav a { position: relative; display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; border-radius: 999px; font-weight: 700; color: var(--ink-2); white-space: nowrap; }
+.top-nav a[aria-current] { color: var(--ink); background: var(--soft); }
+.nav-count { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: var(--flame); color: #fff; font-size: .72rem; font-weight: 800; }
+.tabbar { display: none; }
+
+/* ── 푸터: 모든 화면 같은 모양·같은 여백 ── */
+.site-footer {
+  position: relative; flex: none; width: 100%; margin-top: auto; background: #fff; border-top: 1px solid var(--line);
+  padding: clamp(28px, 3.5vw, 40px) 0; color: var(--ink-2); box-sizing: border-box;
+}
+.site-footer-inner {
+  width: 100%; max-width: var(--content); margin-left: auto; margin-right: auto; padding-left: var(--gut); padding-right: var(--gut);
+  display: flex; flex-direction: column; gap: 12px; box-sizing: border-box;
+}
+.site-footer-brand { display: flex; align-items: center; gap: 8px; font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+.site-footer-brand .brand-mark { width: 24px; height: 24px; display: inline-grid; place-items: center; background: var(--volt); color: #101414; border-radius: 6px; }
+.site-footer-brand .brand-mark svg { width: 15px; height: 15px; }
+.site-footer p { margin: 0; }
+.site-footer-desc { font-size: .9rem; color: var(--ink-2); }
+.site-footer-meta { display: flex; flex-wrap: wrap; gap: 16px; font-size: .82rem; color: var(--ink-3); }
+.site-footer-copy { font-size: .8rem; color: var(--ink-3); margin-top: 8px; }
+/* 상세의 아래 고정 도크(예약·찜·공유)에 푸터 끝이 가리지 않게 */
+body[data-view="detail"] .site-footer { padding-bottom: calc(clamp(28px, 3.5vw, 40px) + 68px + env(safe-area-inset-bottom)); }
+
+@media (max-width: 759px) {
+  :root { --head-h: 56px; }
+  body { padding-bottom: calc(var(--tabbar-h) + 4px + env(safe-area-inset-bottom)); }
+  .top-nav { display: none; }
+  .tabbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 900; display: grid; grid-template-columns: repeat(5, 1fr); height: calc(var(--tabbar-h) + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom); background: color-mix(in srgb, var(--paper) 96%, transparent); backdrop-filter: blur(10px); box-shadow: 0 -1px 0 var(--line); }
+  .tabbar a, .tabbar button { position: relative; display: grid; justify-items: center; align-content: center; gap: 2px; font-size: var(--fs-min, .75rem); font-weight: 700; color: var(--ink-3); }
+  .tabbar svg { width: 24px; height: 24px; fill: currentColor; }
+  .tabbar [aria-current] { color: var(--ink); }
+  .tabbar .nav-count { position: absolute; top: 6px; left: calc(50% + 6px); min-width: 18px; height: 18px; font-size: .66rem; }
+}

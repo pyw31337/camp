@@ -37,7 +37,8 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
-    <link rel="stylesheet" href="./style.css?v=693bdbe65cfc" />
+    <link rel="stylesheet" href="./shell.css?v=592f3eaad9fc" />
+    <link rel="stylesheet" href="./style.css?v=592f3eaad9fc" />
   <link rel="preload" href="./explore/data/campgrounds.lite.json" as="fetch" crossorigin="anonymous"><link rel="preload" href="./explore/data/photos.json" as="fetch" crossorigin="anonymous"><link rel="preconnect" href="https://gocamping.or.kr"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="kakao-js-key" content=""><meta name="supabase-url" content="https://zgnetdxqzsnmzdvoxzbw.supabase.co"><meta name="supabase-anon-key" content=""></head>
   <body>
     <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -131,6 +132,7 @@
       </defs>
     </svg>
 
+    <!-- shell:header — 모든 화면 공통(발행 때 /log/ 에도 그대로 들어감). 고칠 곳은 여기 하나 -->
     <header class="top">
       <div class="top-in">
         <a class="brand" href="./" aria-label="모여라캠핑 처음으로"><span class="brand-mark"><svg><use href="#i-tent"/></svg></span><span>모여라캠핑</span></a>
@@ -138,26 +140,40 @@
           <a href="./" data-nav="home">찾기</a>
           <a href="./map" data-nav="map">지도</a>
           <a href="./themes" data-nav="themes">테마</a>
-          <a href="./compare" data-nav="compare">비교 <b class="nav-count" data-compare-count>0</b></a>
-          <a href="./saved" data-nav="saved">찜 <b class="nav-count" data-saved-count>0</b></a>
+          <a href="./compare" data-nav="compare">비교 <b class="nav-count" data-compare-count hidden>0</b></a>
+          <a href="./saved" data-nav="saved">찜 <b class="nav-count" data-saved-count hidden>0</b></a>
         </nav>
       </div>
     </header>
+    <!-- /shell:header -->
 
     <main id="view" tabindex="-1"></main>
 
+    <!-- shell:footer -->
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <div class="site-footer-brand"><span class="brand-mark"><svg><use href="#i-tent"/></svg></span><strong>모여라캠핑</strong></div>
+        <p class="site-footer-desc">전국 캠핑장 조건·요금·예약 경로 안내</p>
+        <div class="site-footer-meta"><span>한국관광공사 고캠핑 데이터 기반</span><span>운영자 공개 안내와 연결 가능한 원문을 함께 제공합니다</span></div>
+        <p class="site-footer-copy">Copyright © 2026 모여라 캠핑. All Rights Reserved.</p>
+      </div>
+    </footer>
+    <!-- /shell:footer -->
+
+    <!-- shell:tabbar -->
     <nav class="tabbar" aria-label="모바일 메뉴">
       <a href="./" data-nav="home"><svg><use href="#i-search"/></svg><span>찾기</span></a>
       <a href="./map" data-nav="map"><svg><use href="#i-map"/></svg><span>지도</span></a>
       <a href="./themes" data-nav="themes"><svg><use href="#i-themes"/></svg><span>테마</span></a>
-      <a href="./compare" data-nav="compare"><svg><use href="#i-compare"/></svg><span>비교</span><b class="nav-count" data-compare-count>0</b></a>
-      <a href="./saved" data-nav="saved"><svg><use href="#i-heart"/></svg><span>찜</span><b class="nav-count" data-saved-count>0</b></a>
+      <a href="./compare" data-nav="compare"><svg><use href="#i-compare"/></svg><span>비교</span><b class="nav-count" data-compare-count hidden>0</b></a>
+      <a href="./saved" data-nav="saved"><svg><use href="#i-heart"/></svg><span>찜</span><b class="nav-count" data-saved-count hidden>0</b></a>
     </nav>
+    <!-- /shell:tabbar -->
 
     <div class="pop" id="pop" role="tooltip" hidden></div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-    <script type="module" src="./app.js?v=693bdbe65cfc"></script>
+    <script type="module" src="./app.js?v=592f3eaad9fc"></script>
   </body>
 </html>

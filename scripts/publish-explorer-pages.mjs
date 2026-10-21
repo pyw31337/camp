@@ -54,15 +54,17 @@ const supabaseUrl = process.env.SUPABASE_URL || "https://zgnetdxqzsnmzdvoxzbw.su
 const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || "";
 
 // 원본(HTML·CSS·JS)은 design/renewal 하나만 관리하며, 여기서는 경로별 산출물만 만든다.
-const [renewalIndex, renewalCss, renewalApp] = await Promise.all([
+const [renewalIndex, shellCss, renewalCss, renewalApp] = await Promise.all([
   readFile(`${root}design/renewal/index.html`, "utf8"),
+  readFile(`${root}design/renewal/shell.css`, "utf8"),
   readFile(`${root}design/renewal/style.css`, "utf8"),
   readFile(`${root}design/renewal/app.js`, "utf8"),
 ]);
 // Pages CDN/PWA가 이전 CSS·JS를 계속 잡고 있어 루트에 구 UI가 남는 일을 막는다.
 // 내용이 바뀔 때만 URL이 바뀌므로 캐시 효율도 유지한다.
-const shellVersion = createHash("sha256").update(renewalCss).update(renewalApp).digest("hex").slice(0, 12);
+const shellVersion = createHash("sha256").update(shellCss).update(renewalCss).update(renewalApp).digest("hex").slice(0, 12);
 const versionedShell = (html) => html
+  .replace('href="./shell.css"', `href="./shell.css?v=${shellVersion}"`)
   .replace('href="./style.css"', `href="./style.css?v=${shellVersion}"`)
   .replace('src="./app.js"', `src="./app.js?v=${shellVersion}"`);
 
@@ -77,7 +79,33 @@ const rootCss = renewalCss.replaceAll('url("../images/', 'url("./images/');
 await mkdir(rootOut, { recursive: true });
 await writeFile(`${rootOut}index.html`, rootIndex);
 await writeFile(`${rootOut}style.css`, rootCss);
+await writeFile(`${rootOut}shell.css`, shellCss);
 await writeFile(`${rootOut}app.js`, renewalApp);
+
+// 1-1. 공통 틀(헤더·푸터·하단 탭)을 앱 밖 쪽(/log/)에도 그대로 넣는다. 원본은 design/renewal/index.html의 shell:* 표시 사이 하나뿐.
+const shellPart = (name) => {
+  const m = renewalIndex.match(new RegExp(`<!-- ${name}[^>]*-->([\\s\\S]*?)<!-- /${name} -->`));
+  if (!m) throw new Error(`design/renewal/index.html에 ${name} 표시가 없습니다`);
+  return m[1].trim();
+};
+const shellIcons = () => {
+  const ids = ["i-tent", "i-search", "i-map", "i-themes", "i-compare", "i-heart"];
+  const syms = ids.map((id) => renewalIndex.match(new RegExp(`<symbol id="${id}"[\\s\\S]*?</symbol>`))?.[0] ?? "").join("");
+  return `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>${syms.replaceAll('id="', 'id="shell-')}</defs></svg>`;
+};
+const SHELL_PAGES = [["log/index.html", "../"]];
+for (const [rel, up] of SHELL_PAGES) {
+  const f = `${rootOut}${rel}`;
+  if (!existsSync(f)) continue;
+  const fix = (h) => h.replaceAll('href="./', `href="${up}`).replaceAll('href="#i-', 'href="#shell-i-');
+  let html = await readFile(f, "utf8");
+  for (const name of ["shell:header", "shell:footer", "shell:tabbar"]) {
+    html = html.replace(new RegExp(`<!-- ${name} -->[\\s\\S]*?<!-- /${name} -->`), `<!-- ${name} -->\n${fix(shellPart(name))}\n<!-- /${name} -->`);
+  }
+  html = html.replace(/<!-- shell:icons -->[\s\S]*?<!-- \/shell:icons -->/, `<!-- shell:icons -->\n${shellIcons()}\n<!-- /shell:icons -->`);
+  html = html.replace(/href="\.\.\/shell\.css(\?v=[^"]*)?"/, `href="../shell.css?v=${shellVersion}"`);
+  await writeFile(f, html);
+}
 
 // 2. 앱 밖 정적 페이지는 모두 같은 ‘경로 넘김’ 페이지다(2026-10-21 해시 주소 제거).
 // 자기 경로(/camp/map, /camp/explore/c/1 …)를 ?p= 로 앱 루트에 넘기면 app.js가 원래 경로로 되돌리고(legacyRoute로 옛 주소 보정) 화면을 그린다.

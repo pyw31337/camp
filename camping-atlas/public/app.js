@@ -1477,22 +1477,7 @@ async function mountTrending() {
   initCarousels(sec);
   initDraggableRails(sec);
 }
-function siteFooterHtml() {
-  return `<footer class="site-footer">
-    <div class="site-footer-inner">
-      <div class="site-footer-brand">
-        <span class="brand-mark"><svg><use href="#i-tent"/></svg></span>
-        <strong>모여라캠핑</strong>
-      </div>
-      <p class="site-footer-desc">전국 캠핑장 조건·요금·예약 경로 안내</p>
-      <div class="site-footer-meta">
-        <span>한국관광공사 고캠핑 데이터 기반</span>
-        <span>운영자 공개 안내와 연결 가능한 원문을 함께 제공합니다</span>
-      </div>
-      <p class="site-footer-copy">Copyright © 2026 모여라 캠핑. All Rights Reserved.</p>
-    </div>
-  </footer>`;
-}
+// 푸터는 index.html의 공통 틀(shell:footer)에 한 번만 있다 — 화면마다 따로 그리지 않는다(2026-10-21).
 // ‘어디로’ 칸 아무 곳이나 눌러도 즉시 입력(라벨 기본 동작이 늦거나 막히는 모바일 브라우저 대비). 입력칸 자체를 누른 경우는 그대로 둔다.
 document.addEventListener("pointerdown", (e) => {
   const f = e.target.closest?.(".finder-destination");
@@ -1558,7 +1543,6 @@ function homeView() {
     <div class="nophoto" data-nophoto></div>
     <div class="more-wrap"><button class="btn ghost" type="button" data-more>더 보기</button></div>
   </section>
-  ${siteFooterHtml()}
 `;
 }
 // 사진이 없는 곳은 카드로 보이지 않는다(소유자: 사진 없는 썸네일 금지). 이름 검색일 때만 아래 글 목록으로 남긴다.
@@ -2022,7 +2006,6 @@ function listView() {
     </div>
     <div class="lrows" data-lrows></div>
     <div class="more-wrap"><button class="btn ghost" type="button" data-list-more>더 보기</button></div>
-    ${siteFooterHtml()}
   </section>`;
 }
 function renderList({ reset = true } = {}) {
@@ -2081,7 +2064,6 @@ function themesView() {
       <p>원하는 분위기부터 골라보세요.</p>
     </header>
     <div class="themes-grid shell">${cards}</div>
-    ${siteFooterHtml()}
   </section>`;
 }
 
@@ -2119,7 +2101,6 @@ function themeView(themeKey) {
       <div class="grid" data-theme-grid></div>
       <div class="more-wrap"><button class="btn ghost" type="button" data-theme-more>더 보기</button></div>
     </div>
-    ${siteFooterHtml()}
   </section>`;
 }
 
@@ -2779,7 +2760,6 @@ async function detailView(id) {
         <section class="d-sec" data-opform-sec hidden></section>
       </div>
     </div>
-    ${siteFooterHtml()}
     <div class="d-dock">${reserveDock(c)}</div>
   </article>`;
 }
