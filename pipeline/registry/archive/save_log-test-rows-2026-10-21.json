@@ -1,0 +1,675 @@
+{
+ "note": "2026-10-21 자동 테스트(Playwright)가 운영 save_log에 남긴 찜/해제 67건. db/016에서 삭제. 되돌리려면 이 행을 다시 넣는다. ip·user_agent 원문은 보관하지 않는다.",
+ "rows": [
+  {
+   "id": 90,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:11:35.998121+00:00",
+   "headless": false
+  },
+  {
+   "id": 91,
+   "action": "remove",
+   "campground_id": "101955",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:11:36.493225+00:00",
+   "headless": false
+  },
+  {
+   "id": 92,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:11:36.501745+00:00",
+   "headless": false
+  },
+  {
+   "id": 93,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:11:39.060278+00:00",
+   "headless": false
+  },
+  {
+   "id": 94,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:11:39.551783+00:00",
+   "headless": false
+  },
+  {
+   "id": 95,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:12:58.688555+00:00",
+   "headless": false
+  },
+  {
+   "id": 96,
+   "action": "remove",
+   "campground_id": "101955",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:12:59.336961+00:00",
+   "headless": false
+  },
+  {
+   "id": 97,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:12:59.425087+00:00",
+   "headless": false
+  },
+  {
+   "id": 98,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:13:01.374492+00:00",
+   "headless": false
+  },
+  {
+   "id": 99,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:13:01.728118+00:00",
+   "headless": false
+  },
+  {
+   "id": 100,
+   "action": "remove",
+   "campground_id": "101955",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:13:02.027319+00:00",
+   "headless": false
+  },
+  {
+   "id": 101,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:16:05.905508+00:00",
+   "headless": false
+  },
+  {
+   "id": 102,
+   "action": "remove",
+   "campground_id": "101955",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:16:06.69159+00:00",
+   "headless": false
+  },
+  {
+   "id": 103,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:16:06.821591+00:00",
+   "headless": false
+  },
+  {
+   "id": 104,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:16:08.78328+00:00",
+   "headless": false
+  },
+  {
+   "id": 105,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:16:09.506425+00:00",
+   "headless": false
+  },
+  {
+   "id": 106,
+   "action": "remove",
+   "campground_id": "101955",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:16:09.605283+00:00",
+   "headless": false
+  },
+  {
+   "id": 107,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:17:10.439468+00:00",
+   "headless": false
+  },
+  {
+   "id": 108,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:17:10.645494+00:00",
+   "headless": false
+  },
+  {
+   "id": 109,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:17:13.695715+00:00",
+   "headless": false
+  },
+  {
+   "id": 110,
+   "action": "remove",
+   "campground_id": "101955",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:17:14.138581+00:00",
+   "headless": false
+  },
+  {
+   "id": 111,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:17:14.205453+00:00",
+   "headless": false
+  },
+  {
+   "id": 112,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:17:30.618902+00:00",
+   "headless": false
+  },
+  {
+   "id": 113,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:17:33.398031+00:00",
+   "headless": false
+  },
+  {
+   "id": 114,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:17:34.145845+00:00",
+   "headless": false
+  },
+  {
+   "id": 115,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:17:39.121223+00:00",
+   "headless": false
+  },
+  {
+   "id": 116,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:17:39.63824+00:00",
+   "headless": false
+  },
+  {
+   "id": 117,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:17:41.949532+00:00",
+   "headless": false
+  },
+  {
+   "id": 118,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:17:42.490768+00:00",
+   "headless": false
+  },
+  {
+   "id": 119,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:22:11.963717+00:00",
+   "headless": false
+  },
+  {
+   "id": 120,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:22:12.470404+00:00",
+   "headless": false
+  },
+  {
+   "id": 121,
+   "action": "remove",
+   "campground_id": "101955",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:22:12.627573+00:00",
+   "headless": false
+  },
+  {
+   "id": 122,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:22:14.845516+00:00",
+   "headless": false
+  },
+  {
+   "id": 123,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:22:15.173227+00:00",
+   "headless": false
+  },
+  {
+   "id": 124,
+   "action": "remove",
+   "campground_id": "101955",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:22:15.525115+00:00",
+   "headless": false
+  },
+  {
+   "id": 125,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "Asia/Seoul",
+   "created_at": "2026-10-21T04:25:38.778101+00:00",
+   "headless": false
+  },
+  {
+   "id": 126,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "Asia/Seoul",
+   "created_at": "2026-10-21T04:25:39.596175+00:00",
+   "headless": false
+  },
+  {
+   "id": 127,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "Asia/Seoul",
+   "created_at": "2026-10-21T04:25:42.28512+00:00",
+   "headless": false
+  },
+  {
+   "id": 128,
+   "action": "remove",
+   "campground_id": "101955",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "Asia/Seoul",
+   "created_at": "2026-10-21T04:25:42.641984+00:00",
+   "headless": false
+  },
+  {
+   "id": 129,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "Asia/Seoul",
+   "created_at": "2026-10-21T04:34:55.408477+00:00",
+   "headless": false
+  },
+  {
+   "id": 130,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "Asia/Seoul",
+   "created_at": "2026-10-21T04:34:55.708464+00:00",
+   "headless": false
+  },
+  {
+   "id": 131,
+   "action": "remove",
+   "campground_id": "101955",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "Asia/Seoul",
+   "created_at": "2026-10-21T04:34:55.747702+00:00",
+   "headless": false
+  },
+  {
+   "id": 132,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "Asia/Seoul",
+   "created_at": "2026-10-21T04:34:58.46128+00:00",
+   "headless": false
+  },
+  {
+   "id": 133,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "Asia/Seoul",
+   "created_at": "2026-10-21T04:34:59.326413+00:00",
+   "headless": false
+  },
+  {
+   "id": 134,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:39:20.278216+00:00",
+   "headless": false
+  },
+  {
+   "id": 135,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:39:20.937201+00:00",
+   "headless": false
+  },
+  {
+   "id": 136,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:39:23.142854+00:00",
+   "headless": false
+  },
+  {
+   "id": 137,
+   "action": "remove",
+   "campground_id": "101955",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:39:23.898933+00:00",
+   "headless": false
+  },
+  {
+   "id": 138,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:39:23.962722+00:00",
+   "headless": false
+  },
+  {
+   "id": 139,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:39:41.227562+00:00",
+   "headless": false
+  },
+  {
+   "id": 140,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:39:44.200351+00:00",
+   "headless": false
+  },
+  {
+   "id": 141,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:39:44.427754+00:00",
+   "headless": false
+  },
+  {
+   "id": 142,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:40:06.646904+00:00",
+   "headless": false
+  },
+  {
+   "id": 143,
+   "action": "remove",
+   "campground_id": "101955",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:40:07.323326+00:00",
+   "headless": false
+  },
+  {
+   "id": 144,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:40:07.36028+00:00",
+   "headless": false
+  },
+  {
+   "id": 145,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:40:09.951063+00:00",
+   "headless": false
+  },
+  {
+   "id": 146,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:40:10.227709+00:00",
+   "headless": false
+  },
+  {
+   "id": 147,
+   "action": "remove",
+   "campground_id": "101955",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:40:10.394571+00:00",
+   "headless": false
+  },
+  {
+   "id": 148,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:41:44.27016+00:00",
+   "headless": false
+  },
+  {
+   "id": 149,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:41:45.092049+00:00",
+   "headless": false
+  },
+  {
+   "id": 150,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:41:47.555639+00:00",
+   "headless": false
+  },
+  {
+   "id": 151,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:41:48.399764+00:00",
+   "headless": false
+  },
+  {
+   "id": 152,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:44:32.736543+00:00",
+   "headless": false
+  },
+  {
+   "id": 153,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:44:33.056629+00:00",
+   "headless": false
+  },
+  {
+   "id": 154,
+   "action": "remove",
+   "campground_id": "101955",
+   "screen": "1366x900",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:44:33.417785+00:00",
+   "headless": false
+  },
+  {
+   "id": 155,
+   "action": "remove",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:44:35.70802+00:00",
+   "headless": false
+  },
+  {
+   "id": 156,
+   "action": "add",
+   "campground_id": "8149",
+   "screen": "390x844",
+   "platform": "Linux x86_64",
+   "timezone": "UTC",
+   "created_at": "2026-10-21T04:44:36.110351+00:00",
+   "headless": false
+  }
+ ]
+}
