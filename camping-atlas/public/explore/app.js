@@ -5384,15 +5384,20 @@ function loadKakao() {
     document.head.append(sc);
   }));
 }
-// 지도를 만든 뒤 바탕 타일이 실제로 그려졌는지 확인한다(키 거부·429면 SDK는 떠도 타일이 오지 않는다).
-function kakaoTilesOk(kakao, map, el, ms = 10000) {
+// 지도를 만든 뒤 바탕 타일이 막혔는지 확인한다(키 거부·429면 SDK는 떠도 타일 요청이 오류로 끝난다).
+// 2026-10-21 수정: 예전에는 10초 안에 ‘그려진 타일’을 못 보면(느린 망, 화면 밖·접힌 상세 지도, 타일을 img가 아닌 방식으로 그릴 때)
+// 실패로 보고 OSM으로 바꾼 뒤 kakaoDead를 켜 그 뒤 모든 지도가 OSM이 됐다. 이제는 타일 이미지가 실제로 오류로 끝나고
+// 하나도 그려지지 않았을 때만 OSM으로 바꾼다. 느리거나 아직 안 보이는 타일은 카카오를 그대로 둔다.
+function kakaoTilesOk(kakao, map, el, ms = 20000) {
   return new Promise((ok, no) => {
     let done = false;
-    const fin = (good, why) => { if (done) return; done = true; clearTimeout(t); good ? ok() : (kakaoDead = true, console.warn("[map] 카카오 타일 실패 → OSM:", why), no(new Error(why))); };
-    // tilesloaded는 타일이 실패해도(빈 칸) 오므로, 실제로 그림이 들어온 타일 이미지가 하나라도 있는지 본다.
-    const drawn = () => { const im = [...el.querySelectorAll("img")].filter((i) => /kakaocdn|daumcdn/.test(i.src) && /tile|map_/.test(i.src)); return !im.length ? null : im.some((i) => i.complete && i.naturalWidth > 1); };
-    const t = setTimeout(() => fin(drawn() === true, "tiles timeout"), ms);
-    kakao.maps.event.addListener(map, "tilesloaded", () => setTimeout(() => { const d = drawn(); if (d !== null) fin(d, "tiles blocked"); }, 1500));
+    const tiles = () => [...el.querySelectorAll("img")].filter((i) => /kakaocdn|daumcdn/.test(i.src) && /\/tile\/|map_/.test(i.src));
+    const state = () => { const im = tiles(); return { loaded: im.some((i) => i.complete && i.naturalWidth > 1), errored: im.filter((i) => i.complete && i.naturalWidth === 0).length, n: im.length }; };
+    const fin = (good, why) => { if (done) return; done = true; clearInterval(iv); clearTimeout(t); good ? ok() : (kakaoDead = true, console.warn("[map] 카카오 타일 실패 → OSM:", why), no(new Error(why))); };
+    const check = (final = false) => { const s = state(); if (s.loaded) return fin(true); if (s.n && s.errored >= Math.min(4, s.n) && s.errored === s.n) return fin(false, "tiles blocked"); if (final) fin(true); };
+    const iv = setInterval(check, 500);
+    const t = setTimeout(() => check(true), ms);
+    kakao.maps.event.addListener(map, "tilesloaded", () => setTimeout(check, 300));
   });
 }
 // 마커 html(위치 기준점이 왼쪽 위)을 카카오 CustomOverlay로. center=true면 가운데 기준(묶음 원).
