@@ -3338,3 +3338,10 @@ html, body, #view { min-height: 100%; }
 /* t39 #35: 상세 섹션 사이 간격 넓힘(PC 40→64px, 모바일 42→54px) */
 body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 @media (max-width: 759px) { body[data-view="detail"] .d-main { gap: 54px; } }
+
+/* t39 #37: 상세 '주변 비슷한 캠핑장' 3곳 — 홈 카드 그대로, PC 3칸 · 모바일 가로 넘김 */
+.sim-rail { gap: 14px; padding-bottom: 6px; scroll-snap-type: x mandatory; }
+.sim-rail > .sim-item { flex: 0 0 80vw; display: grid; align-content: start; gap: 6px; scroll-snap-align: start; min-width: 0; }
+.sim-km { display: inline-flex; align-items: center; gap: 4px; font-size: .82rem; font-weight: 800; color: var(--ink-2); }
+.sim-km .ic { width: 14px; height: 14px; color: var(--accent); }
+@media (min-width: 760px) { .sim-rail { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; } .sim-rail > .sim-item { flex: none; } }

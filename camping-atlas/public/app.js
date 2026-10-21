@@ -2768,6 +2768,7 @@ async function detailView(id) {
         ${operatorMediaHtml(d)}
         ${mediaHubHtml(d, c)}
         ${nearbyHubHtml(c, d)}
+        ${similarHtml(c)}
         <section class="d-sec ev-sec" id="sec-events" data-events><div class="sec-head">${iconTitle("fest", "주변 축제·행사")}</div><div data-events-body></div></section>
         ${reviewLinksHtml(d, c)}
         ${infoHtml(c)}
@@ -2778,6 +2779,25 @@ async function detailView(id) {
     </div>
     <div class="d-dock">${reserveDock(c)}</div>
   </article>`;
+}
+
+// ── 벤치마크(t39 #37): 주변 비슷한 캠핑장 3곳 ─────────────────
+// 같은 숙박 형태(오토·글램핑·카라반…)를 하나라도 가진 곳 중 40km 안에서 가까운 순. 사진 있는 곳만, 공원 원장 제외.
+function similarNearby(c, n = 3) {
+  if (!Number.isFinite(c?.lat) || !Number.isFinite(c?.lng)) return [];
+  const mine = new Set(stayKinds(c));
+  return S.camps
+    .filter((x) => String(x.id) !== String(c.id) && Number.isFinite(x.lat) && Number.isFinite(x.lng) && !isPublicPark(x) && coreBrowseEligible(x) && hasPhoto(x))
+    .map((x) => ({ x, km: km2(c, x), share: mine.size ? stayKinds(x).filter((k) => mine.has(k)).length : 1 }))
+    .filter((r) => r.km <= 40 && r.share > 0)
+    .sort((a, b) => a.km - b.km)
+    .slice(0, n);
+}
+function similarHtml(c) {
+  const rows = similarNearby(c);
+  if (!rows.length) return "";
+  return `<section class="d-sec sim-sec" id="sec-similar" data-similar><div class="sec-head">${iconTitle("tent", "주변 비슷한 캠핑장")}<span class="sec-note">같은 숙박 형태 · 40km 안 가까운 순</span></div>
+    <div class="rail sim-rail">${rows.map(({ x, km }) => `<div class="sim-item"><span class="sim-km">${ic("pin", "inline")}${km < 10 ? km.toFixed(1) : Math.round(km)}km</span>${card(x, 9)}</div>`).join("")}</div></section>`;
 }
 
 // ── 상세 보강(2026-10-18 소유자: 정보가 너무 부족) ─────────────────
