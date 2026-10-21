@@ -805,6 +805,61 @@
     .camp-title-row { flex-direction: column; align-items: flex-start; gap: 6px; }
     .log-meta { flex-direction: column; align-items: flex-start; gap: 6px; }
   }
+
+  /* ── 운영 대시보드 사용성 개편(2026-10-21) ──────────────
+     원칙: 탭 대상 44px 이상(--tap), 글자 12px 이상(--fs-min), 320px에서 가로 넘침 없음.
+     모바일: 헤더는 한 줄(브랜드 + 아이콘 동작), TOP 캠핑장은 순위 목록, 필터는 위에 붙는 막대. */
+  :root { --tap: 44px; --fs-min: .75rem; --gut: clamp(12px, 3vw, 20px); }
+  html, body { overflow-x: hidden; }
+  .btn, .tab-pill, .select-pill, .search-input, .chip-tag { min-height: var(--tap); }
+  .btn-icon { width: var(--tap); padding: 0; }
+  .camp-pill-btn { min-height: 32px; padding: 4px 10px; font-size: .8rem; position: relative; }
+  .camp-pill-btn::after, .btn-info-detail::after, .ip-pill::after { content: ""; position: absolute; left: 50%; top: 50%; width: max(100%, var(--tap)); height: max(100%, var(--tap)); transform: translate(-50%, -50%); }
+  .btn { min-width: var(--tap); }
+  .camp-name-link { display: inline-flex; align-items: center; min-height: var(--tap); }
+  .btn-info-detail { position: relative; width: 24px; height: 24px; font-size: var(--fs-min); }
+  .ip-pill { position: relative; }
+  .tab-pill .tab-badge, .chip-tag .chip-cnt { font-size: var(--fs-min); }
+  .log-badge { font-size: .78rem; }
+  .modal-close-btn { width: var(--tap); height: var(--tap); }
+  .control-box { position: sticky; top: 58px; z-index: 50; }
+  .insights-chips { min-width: 0; }
+  .chip-tag { max-width: 100%; }
+  .chip-tag > span:first-child, .chip-tag { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .camp-name-link { overflow-wrap: anywhere; }
+  @media (max-width: 720px) {
+    .site-header { padding: 8px var(--gut); }
+    .header-in { flex-direction: row !important; align-items: center !important; gap: 8px !important; }
+    .brand-title strong { font-size: .95rem; }
+    .brand-title span { display: none; }
+    .header-actions { gap: 4px; flex: none; }
+    .header-actions a.btn { display: none; }
+    #btn-auto-refresh span { display: none; }
+    #btn-auto-refresh { padding: 0 10px; }
+    .layout { padding: 12px var(--gut) 72px; }
+    .stats-grid { grid-template-columns: 1fr 1fr !important; gap: 8px !important; margin-bottom: 12px; }
+    .stat-card { padding: 12px !important; }
+    .stat-head { font-size: .8rem; margin-bottom: 4px; }
+    .stat-icon { display: none; }
+    .stat-num { font-size: 1.4rem !important; }
+    .insights-bar { flex-direction: column; align-items: stretch; gap: 8px; padding: 12px; margin-bottom: 12px; }
+    .insights-chips { flex-direction: column; align-items: stretch; gap: 6px; }
+    .chip-tag { justify-content: space-between; border-radius: 12px; padding: 0 12px; }
+    .stat-sub { display: block; }
+    .control-box { position: static; top: auto; padding: 10px 12px; gap: 8px; margin-bottom: 12px; border-radius: 14px; }
+    .tabs-row { flex-wrap: nowrap; }
+    .tabs-group { flex: 1; min-width: 0; }
+    .tab-pill { padding: 0 12px; flex: none; }
+    #btn-export-csv span { display: none; }
+    #btn-export-csv { width: var(--tap); padding: 0; flex: none; }
+    .filters-row { display: grid !important; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .filters-row .search-wrap { grid-column: 1 / -1; }
+    .select-pill { width: 100%; min-width: 0; }
+    .filter-summary { font-size: var(--fs-min); flex-wrap: wrap; gap: 4px 10px; }
+    .log-card { padding: 12px 14px; }
+    .camp-links { flex-wrap: wrap; }
+    .camp-pill-btn { min-height: 36px; }
+  }
 </style>
 </head>
 <body>
