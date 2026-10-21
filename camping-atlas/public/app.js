@@ -300,7 +300,7 @@ function typeLine2(c) {
   const st = (c.st ?? []).filter((t) => t[0] !== "PRIVATE_BATH");
   const other = st.filter((t) => t[0] !== "PITCH");
   const list = (other.length ? other : st).slice(0, 4);
-  return list.map(([k, n, , sub]) => `${k === "HOUSE" && sub ? sub : ST[k].label}${n ? ` ${fmt(n)}` : ""}`).join(" · ");
+  return list.map(([k, n, , sub]) => `${k === "HOUSE" && sub ? sub : (ST[k]?.label ?? k)}${n ? ` ${fmt(n)}` : ""}`).join(" · ");
 }
 // ── 숙박 상품 배지(소유자 2026-10-21: 겨울엔 글램핑·카라반·방갈로 유무가 중요) ─────
 // 근거: 고캠핑 업종(c.types) 또는 등록·운영자 근거 사이트 타입(c.st, 후기 언급 m 제외) · 트레일러는 고캠핑 c.trailer.
@@ -1332,9 +1332,12 @@ function saveCommit(id) {
   store.set("mc-saved", S.saved); store.set("mc-pick", S.pick);
   syncCompare();
   $$(`[data-save="${CSS.escape(id)}"]`).forEach((x) => { const on = isSaved(id); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); x.setAttribute("aria-label", on ? "찜 해제" : "찜하기"); x.querySelector("use").setAttribute("href", `#i-${on ? "heart" : "heart-o"}`); });
-  if (location.hash.startsWith("#/compare") || location.hash.startsWith("#/saves-log")) route();
+  if (location.hash.startsWith("#/compare") || location.hash.startsWith("#/saved") || location.hash.startsWith("#/saves-log")) route();
 }
-function syncCompare() { $$("[data-compare-count]").forEach((x) => { x.textContent = S.saved.length; x.hidden = !S.saved.length; }); }
+function syncCompare() {
+  $$("[data-compare-count]").forEach((x) => { x.textContent = S.saved.length; x.hidden = !S.saved.length; });
+  $$("[data-saved-count]").forEach((x) => { x.textContent = S.saved.length; x.hidden = !S.saved.length; });
+}
 
 function presetOn(i) { const v = PRESETS[i][1]; return Object.entries(v).every(([k, x]) => (Array.isArray(x) ? x.every((y) => S.cond[k].includes(y)) : S.cond[k] === x)); }
 function syncCondUi() {
@@ -4897,19 +4900,26 @@ function openLightboxUrls(urls, start = 0, caption = "사진") {
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
 }
 
-// ── 화면: 비교 ───────────────────────────────────────────────
+// ── 화면: 비교 (최대 5곳, 모바일 최적화) ───────────────────────────
+let cmpMode = "table"; // "table" | "cards"
+
 async function compareView() {
-  await ensureFull(S.pick.length ? S.pick : S.saved.slice(0, 3));
+  await ensureFull(S.pick.length ? S.pick : S.saved.slice(0, 5));
   const saved = S.saved.map((id) => S.byId.get(id)).filter(Boolean);
   if (!saved.length) {
-    return `<section class="cmp-page"><div class="sec-head big"><h1>찜한 <em>캠핑장</em></h1></div>
-      <p class="cmp-sub">찜한 캠핑장 가운데 최대 3곳을 골라 조건을 나란히 비교하는 곳이에요.</p>
+    return `<section class="cmp-page"><div class="sec-head big"><h1>찜한 캠핑장 <em>비교</em></h1></div>
+      <p class="cmp-sub">찜한 캠핑장 가운데 2~5곳을 골라 조건을 나란히 비교하는 곳이에요.</p>
       <div class="empty" data-cmp-empty>${ic("heart-o")}<b>아직 찜한 곳이 없어요. 캠핑장 이름 옆 ${ic("heart-o", "inline")}를 눌러 찜해 보세요</b><a class="btn ghost" href="#/list">캠핑장 찾기</a><button class="btn primary" type="button" data-sample>예시로 보기</button></div></section>`;
   }
   S.pick = S.pick.filter((id) => S.saved.includes(id));
-  if (!S.pick.length) S.pick = saved.slice(0, 3).map((c) => String(c.id));
+  if (!S.pick.length) S.pick = saved.slice(0, Math.min(saved.length, 5)).map((c) => String(c.id));
+  if (S.pick.length > 5) S.pick = S.pick.slice(0, 5);
   const camps = S.pick.map((id) => S.byId.get(id)).filter(Boolean);
-  const picker = `<div class="rail picks">${saved.map((c) => { const on = S.pick.includes(String(c.id)); return `<span class="pick-wrap${on ? " on" : ""}"><button type="button" class="pick${on ? " on" : ""}" data-pick="${esc(c.id)}" aria-pressed="${on}" aria-label="${esc(nameOf(c).name)} ${on ? "비교에서 빼기" : "비교에 넣기"}">${campThumb(c, { sizes: "36px" })}<span>${esc(nameOf(c).name)}</span>${ic(on ? "check" : "plus")}</button>${heartBtn(c)}</span>`; }).join("")}</div>`;
+  const picker = `<div class="rail picks">${saved.map((c) => {
+    const on = S.pick.includes(String(c.id));
+    return `<span class="pick-wrap${on ? " on" : ""}"><button type="button" class="pick${on ? " on" : ""}" data-pick="${esc(c.id)}" aria-pressed="${on}" aria-label="${esc(nameOf(c).name)} ${on ? "비교에서 빼기" : "비교에 넣기"}">${campThumb(c, { sizes: "36px" })}<span>${esc(nameOf(c).name)}</span>${ic(on ? "check" : "plus")}</button>${heartBtn(c)}</span>`;
+  }).join("")}</div>`;
+
   const ds = await Promise.all(camps.map((c) => detailOf(c.id)));
   const rowsDef = [
     ["현장 조건", [["주차", (c) => facts(c).park, "car"], ["전기", (c) => facts(c).power, "bolt"], ["장작·숯", (c) => facts(c).fire, "flame"], ["사이트 규격", (c) => facts(c).size, "size"], ["바닥", (c) => facts(c).ground, "layers"], ["위생", (c) => facts(c).sanitary, "bath"], ["반려견", (c) => facts(c).pet, "paw"]]],
@@ -4917,27 +4927,116 @@ async function compareView() {
     ["시간·요금", [["입실", (c, d) => usage(c, d)[0][1], "clock-in"], ["퇴실", (c, d) => usage(c, d)[1][1], "clock-out"], ["매너타임", (c, d) => usage(c, d)[2][1], "bed"], ["요금", (c, d) => usage(c, d)[3][1], "won"]]],
     ["시설·주변", [["편의시설", (c) => ((c.amenities ?? []).length ? { v: c.amenities.slice(0, 6).join(" · "), g: "c", src: { label: "고캠핑 등록 편의시설", url: c.gc_url } } : null), "drop"], ["대여", (c) => ((c.rental ?? []).length ? { v: c.rental.join(" · "), g: "c", src: { label: "고캠핑 등록 대여품목", url: c.gc_url } } : null), "cart"], ["편의점", (c) => (c.nl?.c ? { v: km(c.nl.c), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+편의점` : null } } : null), "store"], ["마트", (c) => (c.nl?.m ? { v: km(c.nl.m), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+마트` : null } } : null), "cart"], ["후기 장점", (c) => (c.rv?.p?.length ? { v: c.rv.p.slice(0, 2).map(([t]) => t).join(" · "), g: "m", src: { label: "방문자 후기 분석", url: c.gc_url } } : null), "thumb-up"]]],
   ];
-  const head = camps.map((c) => `<th scope="col"><a class="ch" href="#/c/${encodeURIComponent(c.id)}">${campThumb(c, { sizes: "64px" })}<span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></span></a><span class="ch-acts">${heartBtn(c)}<button class="icon-btn ch-x" type="button" data-pick="${esc(c.id)}" aria-label="비교에서 빼기" title="비교에서 빼기(찜은 그대로)">${ic("close")}</button></span></th>`).join("");
+
+  const head = camps.map((c, i) => `<th scope="col" data-col-idx="${i}"><a class="ch" href="#/c/${encodeURIComponent(c.id)}">${campThumb(c, { sizes: "64px" })}<span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></span></a><span class="ch-acts">${heartBtn(c)}<button class="icon-btn ch-x" type="button" data-pick="${esc(c.id)}" aria-label="비교에서 빼기" title="비교에서 빼기(찜은 그대로)">${ic("close")}</button></span></th>`).join("");
   const opens = camps.map((c) => { const o = openingOf(c); const ch = primaryBooking(c); return `<td class="${o ? "hot" : ""}">${o ? `<b>${esc(o.txt)}</b> · ` : ""}${esc(ch ? bookingLabel(ch) : "–")}</td>`; }).join("");
+
   const body = rowsDef.map(([g, rows]) => `<tr class="grp"><th scope="rowgroup" colspan="${camps.length + 1}">${g}</th></tr>${rows.map(([l, get, rIc]) => {
     const vals = camps.map((c, i) => get(c, ds[i]));
     const keys = vals.map((v) => v?.v ?? "");
     const diff = new Set(keys).size > 1;
-    return `<tr class="${diff ? "diff" : ""}"><th scope="row">${rIc ? ic(rIc) : ""}${l}</th>${vals.map((v) => `<td class="cmp-cell"><div class="cmp-cell-inner"><span class="cmp-val">${v ? `${esc(v.v)}${dot(v.g)}` : '<span class="none">–</span>'}</span>${v ? srcTip(v, l) : ""}</div></td>`).join("")}</tr>`;
+    return `<tr class="${diff ? "diff" : "same"}"><th scope="row">${rIc ? ic(rIc) : ""}${l}</th>${vals.map((v) => `<td class="cmp-cell"><div class="cmp-cell-inner"><span class="cmp-val">${v ? `${esc(v.v)}${dot(v.g)}` : '<span class="none">–</span>'}</span>${v ? srcTip(v, l) : ""}</div></td>`).join("")}</tr>`;
   }).join("")}`).join("");
+
   const acts = camps.map((c) => { const ch = primaryBooking(c); return `<td>${ch ? `<a class="btn primary wide" href="${esc(ch.url)}" target="_blank" rel="noopener">예약</a>` : `<a class="btn ghost wide" href="#/c/${encodeURIComponent(c.id)}">자세히</a>`}</td>`; }).join("");
+
+  // 모바일 특화: 세로 스펙별 모아보기 카드 뷰
+  const cardsViewHtml = `<div class="cmp-cards-view${cmpMode === "cards" ? " is-active" : ""}">
+    ${rowsDef.map(([g, rows]) => `
+      <div class="cmp-spec-card">
+        <div class="cmp-spec-card-head">${g}</div>
+        ${rows.map(([l, get, rIc]) => {
+          const vals = camps.map((c, i) => get(c, ds[i]));
+          const keys = vals.map((v) => v?.v ?? "");
+          const diff = new Set(keys).size > 1;
+          return `<div class="cmp-spec-row${diff ? " is-diff" : " is-same"}">
+            <div class="cmp-spec-row-head">
+              <span class="cmp-spec-label">${rIc ? ic(rIc) : ""}${l}</span>
+              ${diff ? `<span class="cmp-diff-tag">다름</span>` : ""}
+            </div>
+            <div class="cmp-card-items">
+              ${camps.map((c, i) => {
+                const v = vals[i];
+                return `<div class="cmp-card-item${diff ? " is-diff" : ""}">
+                  <span class="cmp-card-camp-name"><b>${i + 1}</b> ${esc(nameOf(c).name)}</span>
+                  <span class="cmp-card-val">${v ? `${esc(v.v)}${dot(v.g)}` : '<span class="none">–</span>'}</span>
+                </div>`;
+              }).join("")}
+            </div>
+          </div>`;
+        }).join("")}
+      </div>
+    `).join("")}
+  </div>`;
+
+  // 모바일 가로 테이블 점프 칩
+  const jumpChips = camps.length > 2 ? `<div class="cmp-jump-rail rail" aria-label="캠핑장 열로 바로가기">
+    <span class="cmp-jump-label">열 바로가기:</span>
+    ${camps.map((c, i) => `<button type="button" class="cmp-jump-chip" data-jump-col="${i}"><b>${i + 1}</b> ${esc(nameOf(c).name)}</button>`).join("")}
+  </div>` : "";
+
+  const noticeLess2 = camps.length < 2 ? `<div class="cmp-guide-banner">
+    ${ic("compare")}
+    <span>비교하려면 2곳 이상 선택해 주세요 (현재 <b>${camps.length}</b>곳 선택됨). 위 칩에서 추가할 캠핑장을 눌러주세요.</span>
+  </div>` : "";
+
   return `<section class="cmp-page">
-    <div class="sec-head big"><h1>찜한 캠핑장 <em>비교</em></h1><span class="sec-tools"><label class="switch"><input type="checkbox" data-diff checked><span>다른 점만 강조</span></label></span></div>
-    <p class="cmp-sub" data-cmp-count>찜 <b>${saved.length}</b>곳 중 <b>${camps.length}</b>곳 비교 중 · ${ic("check", "inline")} 누르면 비교에 넣고 빼요(최대 3곳) · ${ic("heart", "inline")} 끄면 찜에서 빠져요</p>
+    <div class="sec-head big">
+      <div>
+        <h1>찜한 캠핑장 <em>비교</em></h1>
+        <p class="sec-sub">찜한 목록에서 2~5곳을 선택해 나란히 스펙을 비교할 수 있어요.</p>
+      </div>
+      <span class="sec-tools">
+        <label class="switch"><input type="checkbox" data-diff checked><span>다른 점만 강조</span></label>
+        <label class="switch"><input type="checkbox" data-diff-only><span>다른 점만 보기</span></label>
+      </span>
+    </div>
+    <p class="cmp-sub" data-cmp-count>찜 <b>${saved.length}</b>곳 중 <b>${camps.length}</b>곳 비교 중 (최대 5곳 선택) · ${ic("check", "inline")} 누르면 비교에 넣고 빼요 · ${ic("heart", "inline")} 끄면 찜에서 빠져요 · <a class="sec-note" href="#/saved">찜 목록 전체</a></p>
     ${picker}
-    <div class="cmp-scroll"><table class="cmp-table diff-on">
-      <thead><tr><th class="corner" scope="col"></th>${head}</tr></thead>
-      <tbody><tr class="hotrow"><th scope="row">예약</th>${opens}</tr>${body}<tr class="acts"><th></th>${acts}</tr></tbody>
-    </table></div>
+    ${noticeLess2}
+
+    <div class="cmp-view-switcher" role="tablist" aria-label="비교 보기 방식">
+      <button type="button" class="cmp-tab${cmpMode === "table" ? " active" : ""}" data-cmp-mode="table" role="tab" aria-selected="${cmpMode === "table"}">표로 전체 비교</button>
+      <button type="button" class="cmp-tab${cmpMode === "cards" ? " active" : ""}" data-cmp-mode="cards" role="tab" aria-selected="${cmpMode === "cards"}">스펙별 모아보기 (모바일 추천)</button>
+    </div>
+
+    ${jumpChips}
+
+    <div class="cmp-scroll${cmpMode === "table" ? " is-active" : ""}">
+      <table class="cmp-table diff-on">
+        <thead><tr><th class="corner" scope="col"></th>${head}</tr></thead>
+        <tbody><tr class="hotrow"><th scope="row">예약</th>${opens}</tr>${body}<tr class="acts"><th></th>${acts}</tr></tbody>
+      </table>
+    </div>
+
+    ${cardsViewHtml}
   </section>`;
 }
+
 function bindCompare() {
-  $("[data-diff]")?.addEventListener("change", (e) => $(".cmp-table").classList.toggle("diff-on", e.target.checked));
+  $("[data-diff]")?.addEventListener("change", (e) => {
+    $(".cmp-table")?.classList.toggle("diff-on", e.target.checked);
+    $(".cmp-cards-view")?.classList.toggle("diff-on", e.target.checked);
+  });
+  $("[data-diff-only]")?.addEventListener("change", (e) => {
+    $(".cmp-table")?.classList.toggle("diff-only", e.target.checked);
+    $(".cmp-cards-view")?.classList.toggle("diff-only", e.target.checked);
+  });
+  $$("[data-cmp-mode]").forEach((btn) => btn.addEventListener("click", () => {
+    cmpMode = btn.dataset.cmpMode;
+    $$("[data-cmp-mode]").forEach((b) => {
+      const on = b.dataset.cmpMode === cmpMode;
+      b.classList.toggle("active", on);
+      b.setAttribute("aria-selected", String(on));
+    });
+    $(".cmp-scroll")?.classList.toggle("is-active", cmpMode === "table");
+    $(".cmp-cards-view")?.classList.toggle("is-active", cmpMode === "cards");
+  }));
+  $$("[data-jump-col]").forEach((btn) => btn.addEventListener("click", () => {
+    const idx = btn.dataset.jumpCol;
+    const th = $(`.cmp-table th[data-col-idx="${idx}"]`);
+    th?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }));
   $("[data-sample]")?.addEventListener("click", () => {
     S.saved = S.camps.filter((c) => facts(c).power && facts(c).fire && facts(c).park && photosOf(c).length).sort((a, b) => rich(b) - rich(a)).slice(0, 4).map((c) => String(c.id));
     S.pick = S.saved.slice(0, 3);
@@ -4946,8 +5045,133 @@ function bindCompare() {
   $$("[data-pick]").forEach((b) => b.addEventListener("click", () => {
     const id = String(b.dataset.pick);
     if (S.pick.includes(id)) S.pick = S.pick.filter((x) => x !== id);
-    else { if (S.pick.length >= 3) { toast("3곳까지 나란히 볼 수 있어요"); return; } S.pick.push(id); }
+    else {
+      if (S.pick.length >= 5) { toast("최대 5곳까지 나란히 볼 수 있어요"); return; }
+      S.pick.push(id);
+    }
     store.set("mc-pick", S.pick); route();
+  }));
+}
+
+// ── 화면: 찜한 캠핑장 목록 (갯수 제한 없음) ───────────────────────────
+async function savedView() {
+  await ensureFull(S.saved);
+  const saved = S.saved.map((id) => S.byId.get(id)).filter(Boolean);
+  if (!saved.length) {
+    return `<section class="saved-page">
+      <div class="sec-head big">
+        <div>
+          <h1>내가 찜한 <em>캠핑장</em></h1>
+          <p class="sec-sub">마음에 드는 캠핑장을 갯수 제한 없이 모아볼 수 있는 나만의 보관함이에요.</p>
+        </div>
+      </div>
+      <div class="empty" data-saved-empty>
+        ${ic("heart-o")}
+        <b>아직 찜한 캠핑장이 없어요</b>
+        <p>캠핑장 카드의 하트(${ic("heart-o", "inline")})를 눌러 찜해보세요.<br>찜한 캠핑장은 갯수 제한 없이 모아서 보고, 원하는 곳들을 골라 한눈에 스펙을 비교할 수 있어요.</p>
+        <a class="btn primary" href="#/list">캠핑장 찾기</a>
+      </div>
+    </section>`;
+  }
+
+  S.pick = S.pick.filter((id) => S.saved.includes(id));
+  const pickedCount = S.pick.length;
+
+  const cardsHtml = saved.map((c, i) => {
+    const isPicked = S.pick.includes(String(c.id));
+    return `<div class="saved-card-wrap${isPicked ? " is-picked" : ""}" data-saved-wrap="${esc(c.id)}">
+      <div class="saved-card-top-bar">
+        <button type="button" class="btn-pick-toggle${isPicked ? " on" : ""}" data-pick="${esc(c.id)}" aria-pressed="${isPicked}">
+          ${ic(isPicked ? "check" : "plus")}
+          <span>${isPicked ? "비교 중" : "비교 담기"}</span>
+        </button>
+        <span class="saved-order-label">#${i + 1}</span>
+      </div>
+      ${card(c, i)}
+    </div>`;
+  }).join("");
+
+  return `<section class="saved-page">
+    <div class="sec-head big">
+      <div>
+        <h1>내가 찜한 <em>캠핑장</em></h1>
+        <p class="sec-sub">찜한 캠핑장을 갯수 제한 없이 모아보고, 2~5곳을 골라 스펙을 나란히 비교할 수 있어요.</p>
+      </div>
+      <div class="saved-head-tools">
+        <span class="saved-count-pill">총 <b>${saved.length}</b>곳 찜함</span>
+        <a class="btn primary btn-sm saved-cmp-link" href="#/compare">
+          ${ic("compare")} <span>비교하기</span> <b class="nav-count" data-pick-badge>${pickedCount}</b>
+        </a>
+      </div>
+    </div>
+
+    <div class="saved-control-bar">
+      <div class="saved-control-info">
+        <span class="saved-control-title">비교 선택: <b data-saved-pick-count>${pickedCount}</b> / 5곳</span>
+        <span class="saved-control-desc">${pickedCount < 2 ? "2곳 이상 선택하면 나란히 비교할 수 있어요" : "선택한 캠핑장의 상세 스펙을 비교해보세요"}</span>
+      </div>
+      <div class="saved-control-actions">
+        ${pickedCount > 0 ? `<button type="button" class="btn ghost btn-sm" data-clear-pick>선택 초기화</button>` : ""}
+        <a class="btn primary btn-sm" href="#/compare" data-compare-submit ${pickedCount < 2 ? 'data-disabled="true"' : ""}>
+          ${pickedCount >= 2 ? `${pickedCount}곳 비교하기` : "비교하기"}
+        </a>
+      </div>
+    </div>
+
+    <div class="cards-grid saved-grid">
+      ${cardsHtml}
+    </div>
+
+    ${pickedCount > 0 ? `
+    <div class="saved-floating-dock">
+      <div class="saved-dock-inner">
+        <div class="saved-dock-info">
+          <span>비교 대상: <b data-dock-count>${pickedCount}</b> / 5곳 선택</span>
+          <small>${pickedCount < 2 ? "2곳 이상 선택 시 비교 가능" : "조건과 스펙을 한눈에 대조하세요"}</small>
+        </div>
+        <div class="saved-dock-actions">
+          <button type="button" class="btn ghost btn-sm" data-clear-pick>초기화</button>
+          <a class="btn primary saved-dock-go" href="#/compare" data-compare-submit ${pickedCount < 2 ? 'data-disabled="true"' : ""}>
+            ${ic("compare")} <span>${pickedCount >= 2 ? `${pickedCount}곳 비교하기` : "비교하기"}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    ` : ""}
+  </section>`;
+}
+
+function bindSaved() {
+  initCarousels($("#view"));
+  $$("[data-clear-pick]").forEach((b) => b.addEventListener("click", () => {
+    S.pick = [];
+    store.set("mc-pick", S.pick);
+    toast("비교 선택을 초기화했어요");
+    route();
+  }));
+
+  $$("[data-compare-submit]").forEach((a) => a.addEventListener("click", (e) => {
+    if (S.pick.length < 2) {
+      e.preventDefault();
+      toast("비교할 캠핑장을 2곳 이상 선택해 주세요 (최대 5곳)");
+    }
+  }));
+
+  $$(".saved-card-wrap [data-pick]").forEach((b) => b.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const id = String(b.dataset.pick);
+    if (S.pick.includes(id)) {
+      S.pick = S.pick.filter((x) => x !== id);
+    } else {
+      if (S.pick.length >= 5) {
+        toast("최대 5곳까지 비교할 수 있어요");
+        return;
+      }
+      S.pick.push(id);
+    }
+    store.set("mc-pick", S.pick);
+    route();
   }));
 }
 
@@ -5088,7 +5312,7 @@ async function render() {
   TIPS.clear(); $("#pop").hidden = true;
   const h = location.hash || "#/";
   const v = $("#view");
-  const name = h.startsWith("#/c/") ? "detail" : h.startsWith("#/map") ? "map" : h.startsWith("#/saves-log") ? "saves-log" : h.startsWith("#/compare") ? "compare" : h.startsWith("#/themes") ? "themes" : h.startsWith("#/theme/") ? "theme" : h.startsWith("#/list") ? "list" : "home";
+  const name = h.startsWith("#/c/") ? "detail" : h.startsWith("#/map") ? "map" : h.startsWith("#/saves-log") ? "saves-log" : h.startsWith("#/compare") ? "compare" : h.startsWith("#/saved") ? "saved" : h.startsWith("#/themes") ? "themes" : h.startsWith("#/theme/") ? "theme" : h.startsWith("#/list") ? "list" : "home";
   $$("[data-nav]").forEach((a) => a.toggleAttribute("aria-current", a.dataset.nav === (name === "detail" || name === "list" ? "home" : name === "theme" ? "themes" : name)));
   document.body.dataset.view = name;
   if (name === "home") { v.innerHTML = homeView(); bindHome(); }
@@ -5096,6 +5320,7 @@ async function render() {
   else if (name === "theme") { const tk = decodeURIComponent(h.slice(8)); v.innerHTML = themeView(tk); bindTheme(tk); }
   else if (name === "detail") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await detailView(decodeURIComponent(h.slice(4))); bindDetail(); }
   else if (name === "saves-log") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await savesLogView(); }
+  else if (name === "saved") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await savedView(); bindSaved(); }
   else if (name === "compare") { v.innerHTML = await compareView(); bindCompare(); }
   else if (name === "list") { v.innerHTML = listView(); bindList(); }
   else { v.innerHTML = mapView(); bindMap(); }
