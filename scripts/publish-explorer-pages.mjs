@@ -142,8 +142,11 @@ const routePage = (title, route) => `<!doctype html><html lang="ko"><head><meta 
 const writeUtilityPages = async (baseDir) => {
   const routes = [
     ["themes/index.html", "테마로 찾기", "#/themes"],
-    ["openings/index.html", "예약 오픈 일정", "#/openings"],
-    ["guide/index.html", "이용 가이드", "#/guide"],
+    // #/openings·#/guide 화면은 없어 홈이 떴다(2026-10-21 정리): 오픈 일정은 ‘곧 오픈’ 테마 목록, 가이드는 홈으로 보낸다.
+    ["openings/index.html", "예약 오픈 일정", "#/theme/OPEN"],
+    ["guide/index.html", "모여라캠핑", "#/"],
+    // 옛 디자인 시안(vision/)은 공개 주소에서 내린다(원본은 design/vision, scripts/publish-vision-mockup.mjs).
+    ["vision/index.html", "모여라캠핑", "#/"],
     ["passport/index.html", "내 캠핑 비교", "#/compare"],
     ["collections/index.html", "테마로 찾기", "#/themes"],
   ];
