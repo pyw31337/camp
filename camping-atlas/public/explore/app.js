@@ -486,7 +486,6 @@ function matches(c, { useArea = true } = {}) {
                (c.area && c.area.toLowerCase().includes(w)) ||
                (AREA_OF[sidoShort(c.sido)] && AREA_OF[sidoShort(c.sido)].toLowerCase().includes(w));
       }
-      const alias = Array.isArray(c.alias) ? c.alias.join(" ") : (c.alias ?? "");
       const hay = c._hay ??= `${c.name} ${alias} ${c.addr ?? ""} ${c.sido ?? ""} ${c.sigungu ?? ""} ${(c.env ?? []).join(" ")} ${(c.types ?? []).join(" ")} ${c.pf?.s ?? ""} ${(c.st ?? []).map(([k, , , sub]) => `${ST[k]?.label ?? ""} ${sub ?? ""}`).join(" ")} ${(c.amenities ?? []).join(" ")} ${(c.rental ?? []).join(" ")} ${c.line ?? ""}`.toLowerCase();
       return hay.includes(w);
     });
