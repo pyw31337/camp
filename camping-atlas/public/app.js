@@ -3,9 +3,9 @@
 // 원칙: 값만 짧게, 출처는 (i), 모르는 칸은 상세 규격에서만 회색 ‘확인필요’ 글자. 채운 배지는 원문 대조·공식 등록·운영자 공개 값만.
 
 // /camp/ 루트와 /camp/explore/ 및 로컬 시안 /camp/renewal/ 경로를 모두 지원한다.
-const IS_SUBDIR = location.pathname.includes("/explore/") || location.pathname.includes("/renewal/");
+const IS_SUBDIR = false; // /explore·/renewal은 /camp로 리다이렉트
 const ASSETS_BASE = IS_SUBDIR ? "../" : "./";
-const DATA = location.pathname.includes("/explore/") ? "./data/" : location.pathname.includes("/renewal/") ? "../explore/data/" : "./explore/data/";
+const DATA = "./explore/data/"; // /camp 기준
 const MEDIA = IS_SUBDIR ? "../media/" : "./media/";
 const MOD_ROOT = /\/(explore|renewal)\/[^/]*$/.test(new URL(import.meta.url).pathname) ? "../" : "./";
 const $ = (s, el = document) => el.querySelector(s);
