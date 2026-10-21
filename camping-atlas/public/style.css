@@ -3286,3 +3286,10 @@ html, body, #view { min-height: 100%; }
    → 크기를 정수 픽셀로 반올림하고 선 아이콘은 면 아이콘으로 바꿨다. */
 .ic { width: round(1.15em, 1px); height: round(1.15em, 1px); shape-rendering: geometricPrecision; }
 .chip .ic { width: round(1em, 1px); height: round(1em, 1px); }
+
+/* 모바일 상세: 로고만 있는 머리 줄을 없애고 ‘< 지역 · 찜 · 공유’ 줄이 맨 위(영우 님 2026-10-21). 로고·메뉴는 하단 탭/뒤로가기로 대체. */
+@media (max-width: 759px) {
+  body[data-view="detail"] .top { display: none; }
+  body[data-view="detail"] .d-bar { padding-top: calc(10px + env(safe-area-inset-top)); }
+  html:has(body[data-view="detail"]) { scroll-padding-top: 12px; }
+}
