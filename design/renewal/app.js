@@ -3353,6 +3353,18 @@ function operatorHtml(d, c) {
   }).join("")}</div></section>`;
 }
 // 예약 방법: 화면에는 우선순위로 고른 대표 채널 하나만 보이고, 모든 원본 채널은 데이터에 보존한다.
+// 예약 안내 글은 한 줄로 잘라 붙이지 않고 항목(줄바꿈·글머리표·번호·문장·" / ")마다 줄을 나눈다(소유자 2026-10-21).
+function bookingLines(v, { dateLike = false } = {}) {
+  const raw = String(v ?? "").replace(/<[^>]*>/g, " ").trim();
+  if (!raw) return [];
+  const parts = dateLike
+    ? raw.split(/\s+·\s+/)
+    : raw.split(/\n+|\s+\/\s+|\s*(?:^|\s)(?:[•·※▶►■●○◆-]|\d{1,2}[.)])\s+(?=\S)|(?<=[가-힣)]\.)\s+(?=\S)/);
+  // serviceText()는 첫 문장만 남겨 "12."처럼 잘리므로 여기서는 글머리표·공백만 정리한다.
+  const clean = (x) => { const t = x.replace(/^[\s*#·•\-–—※▶►■●○◆]+/, "").replace(/\s+/g, " ").trim(); return t.length > 110 ? `${t.slice(0, 108)}…` : t; };
+  return parts.map(clean).filter(Boolean);
+}
+const bookingValue = (lines) => (lines.length > 1 ? `<span class="bo-lines">${lines.map((x) => `<span>${esc(x)}</span>`).join("")}</span>` : esc(lines[0] ?? ""));
 function bookingHtml(c, d) {
   const main = primaryBooking(c);
   const g = d?.guide;
@@ -3371,8 +3383,8 @@ function bookingHtml(c, d) {
   return `<section class="d-sec" id="sec-booking"><div class="sec-head">${iconTitle("booking", "예약 방법")}${main || (pf.tips ?? []).length ? `<span class="sec-note">${main ? `대표 채널 ${srcTip(bookingSource(main), "대표 예약 채널")}` : ""}${(pf.tips ?? []).length ? srcTip(guideFact, "예약 안내") : ""}</span>` : ""}</div>
     ${o ? `<div class="bo-highlight ${o.dd <= 0 ? "bo-today" : ""}"><span class="bo-badge">${ic("clock")}${esc(o.txt ?? "오픈 예정")}</span><div class="bo-detail"><b>다음 예약 오픈</b><span>${esc([openTimeStr, o.label].filter(Boolean).join(" · ") || o.txt)}</span></div></div>` : ""}
     ${main || c.tel ? `<div class="chans">${main ? `<a class="chan" href="${esc(main.url)}" target="_blank" rel="noopener">${ic("right")}<b>${esc(bookingLabel(main))}</b><i>예약 페이지</i></a>` : ""}${c.tel ? `<a class="chan" href="tel:${esc(telText(c.tel).replace(/[^\d+]/g, ""))}">${ic("phone")}<b>전화 문의</b><i>${esc(telText(c.tel))}</i></a>` : ""}</div>` : ""}
-    ${meta.length ? `<dl class="uses">${meta.map(([l, v]) => `<div class="use"><dt>${l === "다음 오픈" ? ic("clock") : ""}${l}</dt><dd><span class="use-val${l === "다음 오픈" ? " hot" : ""}">${esc(serviceText(v, 48))}</span><span class="use-meta">${srcTip({ g: "c", src: { label: l === "다음 오픈" ? "예약 오픈 정보" : "예약 안내", url: g?.source?.url, at: g?.source?.date, quote: v } }, l)}</span></dd></div>`).join("")}</dl>` : ""}
-    ${(pf.tips ?? []).length ? `<ul class="tips">${pf.tips.slice(0, 3).map((t) => `<li>${esc(serviceText(t, 60))}</li>`).join("")}</ul>` : ""}
+    ${meta.length ? `<dl class="uses">${meta.map(([l, v]) => `<div class="use"><dt>${l === "다음 오픈" ? ic("clock") : ""}${l}</dt><dd><span class="use-val${l === "다음 오픈" ? " hot" : ""}">${bookingValue(bookingLines(v, { dateLike: l === "다음 오픈" }))}</span><span class="use-meta">${srcTip({ g: "c", src: { label: l === "다음 오픈" ? "예약 오픈 정보" : "예약 안내", url: g?.source?.url, at: g?.source?.date, quote: v } }, l)}</span></dd></div>`).join("")}</dl>` : ""}
+    ${(pf.tips ?? []).length ? `<ul class="tips">${pf.tips.slice(0, 3).flatMap((t) => bookingLines(t)).map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}
   </section>`;
 }
 function availHtml(c) {
