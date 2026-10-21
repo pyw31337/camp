@@ -5387,7 +5387,7 @@ const swipeEnd = (x, y) => {
   if (!st) return;
   const dx = x - st.x, dy = y - st.y;
   if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
-  const sec = st.panel.closest("section") ?? st.panel.parentElement;
+  const sec = st.panel.parentElement?.closest("section, .d-sec, .media-hub") ?? st.panel.parentElement; // 칸 자신이 section이라 한 단계 위에서 탭을 찾는다
   const tabs = [...sec.querySelectorAll("[role='tab']:not([hidden])")];
   const i = tabs.findIndex((t) => t.getAttribute("aria-selected") === "true");
   const n = tabs[i + (dx < 0 ? 1 : -1)];

@@ -10,5 +10,6 @@ test("모든 가로 스크롤 영역 마우스 끌기(위임)", () => {
 test("탭 칸 좌우 스와이프로 이웃 탭(주변시설 카테고리)", () => {
   assert.match(app, /closest\?\.\("\[role='tabpanel'\]"\)/);
   assert.match(app, /addEventListener\("touchend"/);
+  assert.match(app, /st\.panel\.parentElement\?\.closest\(/); // 칸(section) 자신이 아니라 바깥 섹션의 탭
   assert.match(app, /setTimeout\(\(\) => removeEventListener\("click", f, \{ capture: true \}\), 450\)/);
 });
