@@ -32,6 +32,10 @@ git show origin/collected-data:out/campground-web.json.gz | gunzip > /tmp/campgr
 
 데이터 동기화의 마지막 전체 빌드도 같은 회귀 검사를 거친다(2026-10-19: 일부만 복원된 캐시로 후기 2,686→1,272곳으로 줄어들 뻔한 사고).
 
+## 배포용 나눈 파일 (2026-10-21)
+- 원본은 `camping-atlas/public/explore/data/campgrounds.json`(압축 JSON 한 줄, `JSON.stringify` 그대로 — 들여쓰기 저장 금지). 배포 때 `scripts/split-catalog.mjs`가 목록용 `campgrounds.lite.json`과 상세용 `catx/` 샤드를 만든다(커밋하지 않음).
+- 고캠핑 등 자동 원천에 없는 1박 캠핑장은 `campgrounds.json`에 직접 넣지 말고 `pipeline/registry/manual-camps.json`에 원문 `src.url`·`checked_at`과 함께 넣는다(`apply-dayuse-seed.mjs`가 붙임). 원천 URL이 없으면 사실 원장(`build-fact-store.mjs`) 검증이 실패해 동기화가 막힌다(2026-10-21 평택캠핑성 14건).
+
 ## 다른 에이전트에게
 
 - 로컬에서 추출 규칙을 바꿔 데이터를 다시 만들 때도 커밋 전에 `node pipeline/scripts/report-coverage.mjs`로 줄어든 항목이 없는지 확인한다.
