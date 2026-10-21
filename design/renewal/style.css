@@ -3086,6 +3086,9 @@ details[open] > *:not(summary) {
   border-radius: 0;
 }
 .ic { background: transparent; box-shadow: none; }
+/* 아이콘 원본 SVG에는 크기 맞춤용 투명 사각형(<path d="M0 0h24v24H0z" fill="none">)이 들어 있다.
+   선(line) 아이콘에 stroke를 주면 그 사각형 테두리까지 그려져 녹색 네모가 생기므로 선을 끈다. */
+.ic path[d^="M0 0h"][fill="none"] { stroke: none; }
 /* 섹션 제목·규격 행의 의미 아이콘은 글머리표다. 작은 버튼/칸처럼 보이는 테두리를 두지 않는다. */
 .sec-title .ic,
 .use dt .ic,
