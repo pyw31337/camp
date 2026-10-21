@@ -7,6 +7,7 @@ import { themeCatalog } from "../lib/themes.mjs";
 import { buildBookingGuide } from "../lib/booking-intel.mjs";
 import { buildOpenings } from "../lib/openings.mjs";
 import { nameCore, refilterSocial } from "../lib/social-search.mjs";
+import { fillShorts } from "../lib/shorts-search.mjs";
 import { allocateUnique, dhashFile, photoKey, uniqueBy, uniqueByHash } from "../lib/photo-dedupe.mjs";
 import { SEOUL_DATASET_URL, matchSeoulToCampgrounds } from "../lib/seoul-yeyak.mjs";
 import { commonOperatorTexts, mergeLogs, nameCoreOf, reviewDetailTexts } from "../lib/detail-text-review.mjs";
@@ -20,6 +21,8 @@ const fees = await read("../out/tour-fees.json");
 const nearby = await read("../out/campground-nearby.json");
 const products = await read("../out/campground-products.json");
 const social = await read("../out/campground-social.json");
+// YouTube 숏츠 능동 수집(scripts/sync-shorts.mjs): 영상 칸에 ‘채우기만’ 한다.
+const shortsOut = (await read("../out/campground-shorts.json")) ?? (await read("../registry/shorts-search.json"));
 // 네이버 검색 API(블로그·카페·웹문서·지식iN) 언급 + robots 허용 블로그 본문 문장(scripts/sync-web-mentions.mjs)
 const web = await read("../out/campground-web.json");
 // 방문후기 썸네일(블로그 대표 이미지, scripts/fill-review-thumbs.mjs): 썸네일이 비어 있을 때만 채운다.
@@ -268,6 +271,21 @@ if (existsSync(prevDir)) for (const [id, d] of Object.entries(details)) {
   if (any) carried++;
 }
 if (carried) console.log(`직전 발행본에서 이어 받은 글·사진(이번 캐시에 없던 곳): ${carried}곳`);
+// 숏츠 채우기(병합 정책 ①): 이미 있는 영상은 그대로 두고, 같은 YouTube id가 없는 숏츠만 뒤에 붙인다. 줄이거나 바꾸지 않는다.
+{
+  let campsGained = 0, fromZero = 0, added = 0;
+  for (const [id, r] of Object.entries(shortsOut?.campgrounds ?? {})) {
+    const d = details[id];
+    if (!d || !r?.shorts?.length) continue;
+    const before = d.videos?.length ?? 0;
+    const f = fillShorts(d.videos ?? [], r.shorts);
+    if (!f.added.length) continue;
+    d.videos = f.videos; campsGained++; added += f.added.length; if (!before) fromZero++;
+    const rec = records.find((x) => x.id === id);
+    if (rec) rec.soc = [rec.soc?.[0] ?? 0, d.videos.length, rec.soc?.[2] ?? 0];
+  }
+  if (campsGained) console.log(`숏츠 채우기: ${campsGained}곳(영상 없던 곳 ${fromZero}곳) · ${added}개`);
+}
 for (const [id, d] of Object.entries(details)) {
   // 이미 저장한 사진(중복으로 뺀 것 포함)과 이름 키가 같은 원본 주소는 다시 보여 주지 않는다.
   const seenKeys = new Set((media?.camps?.[id] ?? []).map((x) => photoKey(x.src_url)));

@@ -1,0 +1,74 @@
+name: Shorts sync
+
+# 캠핑장별 YouTube 숏츠를 공식 API로 찾아(카카오 Daum 동영상 검색 + YOUTUBE_API_KEY가 있으면 YouTube Data API)
+# registry/shorts-search.json에 쌓고, 상세 영상 칸에 ‘채우기만’ 해서 바로 화면에 반영한다(증분 발행).
+# 영상이 하나도 없는 캠핑장부터. 한도: Daum 검색 종류별 일 20,000건 무료 — 실행당 기본 6,000건(3,000곳).
+# 매일 data-sync의 전체 빌드도 registry/shorts-search.json을 읽어 채운다(호출은 이 워크플로만). 멈추려면 저장소 변수 SHORTS_SYNC_ENABLED=off.
+on:
+  workflow_dispatch:
+    inputs:
+      max_calls:
+        description: "카카오 vclip 호출 상한 (기본 6000 = 3,000곳)"
+        required: false
+        default: "6000"
+  schedule:
+    # 매주 수·일 13:40 KST (04:40 UTC) — data-sync(03:17 KST)와 겹치지 않게
+    - cron: "40 4 * * 0,3"
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+env:
+  GH_TOKEN: ${{ github.token }}  # land-on-main.sh (gh)
+
+concurrency:
+  group: shorts-sync
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    if: vars.SHORTS_SYNC_ENABLED != 'off'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: pipeline
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: pipeline/package-lock.json
+      - run: npm ci
+      - run: node --test test/shorts-search.test.mjs
+      - name: Find YouTube Shorts per campground
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          SHORTS_MAX_CALLS: ${{ github.event.inputs.max_calls || '6000' }}
+        run: npm run sync:shorts
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: campground-shorts
+          path: |
+            pipeline/out/campground-shorts.json
+            pipeline/registry/shorts-search.json
+          if-no-files-found: ignore
+      - name: Commit registry
+        if: always()
+        run: |
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          [ -f registry/shorts-search.json ] || exit 0
+          git add registry/shorts-search.json
+          if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
+          git commit -m "chore(data): refresh YouTube shorts search"
+          bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" shorts-sync
+      - name: Publish to the site now (incremental)
+        if: always()
+        continue-on-error: true
+        run: bash scripts/publish-incremental.sh "YouTube shorts" --shorts out/campground-shorts.json

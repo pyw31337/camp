@@ -35,6 +35,7 @@
     "sync:images": "node scripts/sync-images.mjs",
     "sync:tour-products": "node scripts/sync-tour-products.mjs",
     "sync:social": "node scripts/sync-social.mjs",
+    "sync:shorts": "node scripts/sync-shorts.mjs",
     "survey:conditions": "node scripts/survey-all-campgrounds.mjs",
     "build:spec": "node scripts/build-spec-sheet.mjs",
     "build:facts": "node scripts/build-fact-store.mjs",
