@@ -250,6 +250,8 @@ function noKeys(c) {
   if (pos(f.fire) && f.fire.kind === "CHARCOAL_ONLY") k.add("NO_FIREWOOD");
   if (pos(f.power) && f.power.ok === false) k.add("NO_POWER");
   if (pos(f.pet) && /불가/.test(f.pet.v ?? "")) k.add("NO_PET");
+  if (c.win === 0) k.add("NO_WINTER");
+  if (c.win === 1) k.delete("NO_WINTER");
   if (k.has("NO_FIRE")) { k.delete("NO_FIREWOOD"); k.delete("NO_CHARCOAL"); }
   if (k.has("NO_PET")) k.delete("BIG_DOG");
   return (c._no = NO_ORDER.filter((x) => k.has(x)));
@@ -306,14 +308,37 @@ function typeLine2(c) {
 const firmSt = (c, k) => (c.st ?? []).find((t) => t[0] === k && t[2] !== "m");
 const HOUSE_SUB = /^(방갈로|캐빈|오두막|통나무집|코티지|트리하우스|이글루|돔하우스|캠핑하우스|독채|펜션)$/;
 const STAYS = [
-  ["GLAMPING", "glamp", "glamping", (c) => (c.types ?? []).includes("글램핑") || Boolean(firmSt(c, "GLAMPING")), () => "글램핑"],
-  ["CARAVAN", "caravan", "caravan", (c) => (c.types ?? []).includes("카라반") || Boolean(firmSt(c, "CARAVAN")), () => "카라반"],
+  ["GLAMPING", "glamp", "glamping", (c) => (c.types ?? []).includes("글램핑") || Boolean(firmSt(c, "GLAMPING")), (c) => (heated(c, "g") ? "난방 글램핑" : "글램핑")],
+  ["CARAVAN", "caravan", "caravan", (c) => (c.types ?? []).includes("카라반") || Boolean(firmSt(c, "CARAVAN")), (c) => (heated(c, "c") ? "난방 카라반" : "카라반")],
   ["HOUSE", "house", "home", (c) => Boolean(firmSt(c, "HOUSE")), (c) => { const sub = firmSt(c, "HOUSE")?.[3]; return HOUSE_SUB.test(sub ?? "") ? sub : "방갈로·숙박동"; }],
   ["RV", "rv", "caravan", (c) => c.trailer === true || c.caravan === true || Boolean(firmSt(c, "RV")), () => "트레일러 입장"],
 ];
 const STAY_KEYS = new Set(STAYS.map(([k]) => k));
 const stayKinds = (c) => (c._stay ??= STAYS.filter(([, , , t]) => t(c)).map(([k]) => k));
 const stayBadges = (c, max = 4) => STAYS.filter(([k]) => stayKinds(c).includes(k)).slice(0, max).map(([k, cls, icon, , label]) => `<span class="bdg bdg-stay bdg-${cls}" data-stay="${k}">${ic(icon)}${esc(label(c))}</span>`).join("");
+// ── 겨울(소유자 2026-10-21) ─────────────────────────────────
+// c.win(1 겨울 운영·0 겨울 휴장, 고캠핑 운영기간) · c.heat(["g","c"] 글램핑·카라반 내부시설 난방) — build-gocamping-detail.mjs
+// 눈·영하 예보: conditions/forecast.json(기상청 단기·중기, 하루 2회) 앞으로 7일. 영하는 최저 0°C 미만, 눈은 강수형태·하늘에 ‘눈’.
+const SNOW_IC = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 2v20M4 7l16 10M20 7 4 17M9 3.5l3 2 3-2M9 20.5l3-2 3 2"/></svg>';
+const heated = (c, k) => (c.heat ?? []).includes(k);
+const winterOpen = (c) => c.win === 1;
+function wxAlert(c) {
+  if (c._wx !== undefined) return c._wx;
+  const fc = S.fc, row = fc?.camps?.[c.id];
+  if (!row) return (c._wx = null);
+  const [g, l, t] = row, today = fc.today, days = new Map();
+  for (const [d, v] of Object.entries(fc.short?.grids?.[g] ?? {})) if (d >= today) days.set(d, { d, w: `${v[1] ?? ""} ${v[0] ?? ""}`, tmin: v[2] });
+  const L = fc.mid?.land?.[l] ?? {}, T = fc.mid?.ta?.[t] ?? {};
+  for (const d of new Set([...Object.keys(L), ...Object.keys(T)])) if (d >= today && !days.has(d)) days.set(d, { d, w: (L[d] ?? []).slice(0, 2).join(" "), tmin: (T[d] ?? [])[0] });
+  const w = [...days.values()].sort((a, b) => a.d.localeCompare(b.d)).slice(0, 7);
+  const snow = w.find((x) => /눈/.test(x.w));
+  const lows = w.map((x) => x.tmin).filter((x) => x != null && Number.isFinite(Number(x))).map(Number);
+  const min = lows.length ? Math.min(...lows) : null;
+  if (!snow && !(min != null && min < 0)) return (c._wx = null);
+  const md = (d) => `${Number(d.slice(5, 7))}/${Number(d.slice(8))}`;
+  return (c._wx = { snow: snow?.d ?? null, min: min != null && min < 0 ? min : null, txt: snow ? `눈 예보 ${md(snow.d)}${min != null && min < 0 ? ` · ${min}°` : ""}` : `영하 ${min}° 예보` });
+}
+const wxBadge = (c) => { const a = wxAlert(c); return a ? `<span class="bdg bdg-wx" data-wx>${a.snow ? SNOW_IC : ic("down")}${esc(a.txt)}</span>` : ""; };
 // 배지로 보인 타입을 뺀 나머지 타입 줄
 function typeLineRest(c) {
   const shown = new Set(stayKinds(c));
@@ -358,6 +383,7 @@ const TH_SVG = {
   VISITOR: ["0 0 24 24", '<path fill="currentColor" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>'],
   PICNIC: ["0 0 24 24", '<path fill="currentColor" d="M19 7h-3V6a4 4 0 0 0-8 0v1H5a2 2 0 0 0-2 2v2c0 .55.45 1 1 1h1v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7h1c.55 0 1-.45 1-1V9a2 2 0 0 0-2-2zm-9-1a2 2 0 0 1 4 0v1h-4V6zm7 13H7v-7h10v7z"/>'],
   PARK: ["0 0 24 24", '<path fill="currentColor" d="M10 21v-3.4c-2.37-.36-4.27-2.13-4.83-4.46A5.5 5.5 0 0 1 8 3.32a5.5 5.5 0 0 1 8 0 5.5 5.5 0 0 1 2.83 9.82c-.56 2.33-2.46 4.1-4.83 4.46V21h-4z"/>'],
+  WINTER: ["0 0 24 24", '<path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M12 2v20M4 7l16 10M20 7 4 17M9 3.5l3 2 3-2M9 20.5l3-2 3 2"/>'],
   WATER_PLAY: ["0 0 24 24", '<g fill="currentColor"><circle cx="16.5" cy="5.5" r="2.5"/><path d="m14.29 9.38-2.61 2.62 1.42 1.41 1.9-1.9 2.5 1.49 1.43-.86-2.62-4.38a1.5 1.5 0 0 0-2.02-.38z"/><path d="M2 15c1.5 0 2.5 1 4 1s2.5-1 4-1 2.5 1 4 1 2.5-1 4-1 2.5 1 4 1v2c-1.5 0-2.5-1-4-1s-2.5 1-4 1-2.5-1-4-1-2.5 1-4 1-2.5-1-4-1H2zm0 4c1.5 0 2.5 1 4 1s2.5-1 4-1 2.5 1 4 1 2.5-1 4-1 2.5 1 4 1v2c-1.5 0-2.5-1-4-1s-2.5 1-4 1-2.5-1-4-1-2.5 1-4 1-2.5-1-4-1H2z"/></g>'],
   "T:CAR_CAMP": ["0 0 24 24", '<g fill="currentColor"><path d="M3 19.723V21a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.277A1.99 1.99 0 0 0 22 18v-3c0-.831-.507-1.542-1.228-1.845l-1.368-4.104A2.995 2.995 0 0 0 16.559 7H7.441a2.995 2.995 0 0 0-2.845 2.051l-1.368 4.104A2 2 0 0 0 2 15v3c0 .738.404 1.376 1 1.723M5.5 18a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 5.5 18m13 0a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 18.5 18M7.441 9h9.117a1 1 0 0 1 .949.684L18.613 13H5.387l1.105-3.316c.137-.409.519-.684.949-.684"/><path d="M22 7.388V5.279l-9.684-3.228a1 1 0 0 0-.658.009L2 5.572V7.7l10.015-3.642z"/></g>'],
 };
@@ -373,6 +399,8 @@ const isParkCamp = (c) => c.du === "park" || (/공원|유원지/.test(c.name) &&
 const isWaterPlayCamp = (c) => c.du === "water" || (c.amenities ?? []).some((a) => /물놀이장|물놀이터|수영장|풀장|워터/.test(a));
 const THEMES = [
   ["POPULAR", "실시간 인기", (c) => Boolean(c.m7 || c.rv?.n > 5)],
+  // 겨울 캠핑: 겨울 운영 + (난방 글램핑·카라반 또는 W 공지 1,100W 이상)
+  ["WINTER", "겨울 캠핑", (c) => winterOpen(c) && (Boolean(c.heat?.length) || wattsOf(c) >= 1100)],
   ["VALLEY", "계곡", (c) => c.pf?.t?.includes("VALLEY")],
   ["FOREST", "숲", (c) => c.pf?.t?.includes("FOREST")],
   ["BEACH", "바다", (c) => c.pf?.t?.includes("BEACH") || c.th?.includes("sea")],
@@ -389,6 +417,7 @@ const THEMES = [
 ];
 const THEME_FILES = {
   POPULAR: "popular.webp",
+  WINTER: "winter.webp",
   VALLEY: "valley.webp",
   FOREST: "forest.webp",
   BEACH: "sea.webp",
@@ -409,6 +438,7 @@ const THEME_FILES = {
 };
 const themeImg = (k) => `${ASSETS_BASE}images/themes/${THEME_FILES[k] ?? "valley.webp"}`;
 const THEME_SUBS = {
+  WINTER: "겨울에도 운영하고 난방 글램핑·카라반이나 1,100W 이상 전기를 쓸 수 있는 캠핑장",
   POPULAR: "최근 7일간 캠퍼들 사이에서 가장 많이 언급되고 화제가 된 인기 캠핑장",
   VALLEY: "시원한 물소리와 맑은 물놀이를 즐길 수 있는 계곡 야영장",
   FOREST: "피톤치드 가득한 울창한 숲속 힐링 캠핑장",
@@ -915,7 +945,7 @@ function card(c, i = 0, opts) {
     <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="card-media">${carousel(c, { eager: i < 4 })}
       ${isWp ? `<span class="sig closed">${ic("clock")}운영종료</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : S.avail?.has(String(c.id)) ? `<span class="sig live">${ic("check")}접수 중</span>` : ""}
-      <span class="bdgs">${badges(c, 3)}</span>
+      <span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3)}</span>
     </div>
     <div class="card-body">
       <div class="name-row"><h3 class="card-name">${esc(nameOf(c).name)}</h3>${heartBtn(c)}</div>
@@ -1283,7 +1313,7 @@ const KIND = Object.fromEntries(KINDS.map(([k, l, t]) => [k, { label: l, test: t
 const W_OPTS = [[0, "상관없음"], [1, "전기 있음"], [600, "600W 이상"], [1100, "1,100W 이상"]];
 const SIZE_OPTS = [[0, "상관없음"], [6, "6m 이상"], [8, "8m 이상"], [10, "10m 이상"]];
 const R_OPTS = [10, 20, 30];
-const emptyCond = () => ({ sido: [], kind: [], pet: false, w: 0, size: 0, fire: false, park: false, near: "", r: 20 });
+const emptyCond = () => ({ sido: [], kind: [], pet: false, w: 0, size: 0, fire: false, park: false, win: false, near: "", r: 20 });
 S.cond = emptyCond();
 const km2 = (a, b) => { const R = 6371, dLa = ((b.lat - a.lat) * Math.PI) / 180, dLo = ((b.lng - a.lng) * Math.PI) / 180; const x = Math.sin(dLa / 2) ** 2 + Math.cos((a.lat * Math.PI) / 180) * Math.cos((b.lat * Math.PI) / 180) * Math.sin(dLo / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(x)); };
 // “파주 일대”: 그 시·군 캠핑장 좌표의 가운데에서 반경 r km
@@ -1315,6 +1345,7 @@ function condEval(c, k = S.cond, skip = null) {
   }
   if (skip !== "size" && k.size) { const m = maxSide(c); st.size = m ? (m >= k.size ? "y" : "n") : "?"; }
   if (skip !== "fire" && k.fire) { const f = facts(c).fire?.kind; st.fire = f === "FIREWOOD_OK" ? "y" : f ? "n" : "?"; }
+  if (skip !== "win" && k.win) st.win = c.win === 1 ? "y" : c.win === 0 || noKeys(c).includes("NO_WINTER") ? "n" : "?";
   if (skip !== "park" && k.park) { const o = facts(c).park?.ok; st.park = o === true ? "y" : o === false || o === "part" ? (o === "part" ? "?" : "n") : "?"; }
   const vals = Object.values(st);
   if (vals.includes("n")) return null;
@@ -1325,8 +1356,8 @@ function condTest(c, k = S.cond, skip = null, strict = S.condStrict) {
   const r = condEval(c, k, skip);
   return Boolean(r) && (!strict || r.unknown === 0);
 }
-const COND_LABEL = { kind: "상품", pet: "반려견", w: "전기", size: "사이트 크기", fire: "장작", park: "텐트 옆 주차" };
-const condActive = (k = S.cond) => k.sido.length + k.kind.length + (k.pet ? 1 : 0) + (k.w ? 1 : 0) + (k.size ? 1 : 0) + (k.fire ? 1 : 0) + (k.park ? 1 : 0) + (k.near ? 1 : 0);
+const COND_LABEL = { win: "겨울 운영", kind: "상품", pet: "반려견", w: "전기", size: "사이트 크기", fire: "장작", park: "텐트 옆 주차" };
+const condActive = (k = S.cond) => k.sido.length + k.kind.length + (k.pet ? 1 : 0) + (k.w ? 1 : 0) + (k.size ? 1 : 0) + (k.fire ? 1 : 0) + (k.park ? 1 : 0) + (k.win ? 1 : 0) + (k.near ? 1 : 0);
 function condChips(k = S.cond) {
   const out = [];
   if (k.near) out.push(["near", `${k._ctr?.label ?? k.near} ${k.r}km 안`]);
@@ -1337,6 +1368,7 @@ function condChips(k = S.cond) {
   if (k.size) out.push(["size", `사이트 ${k.size}m 이상`]);
   if (k.fire) out.push(["fire", "장작 가능"]);
   if (k.park) out.push(["park", "텐트 옆 주차"]);
+  if (k.win) out.push(["win", "겨울 운영"]);
   return out;
 }
 function condSummary() { const ch = condChips(); return ch.length ? (ch.length > 2 ? `${ch[0][1]} · ${ch[1][1]} 외 ${ch.length - 2}` : ch.map((x) => x[1]).join(" · ")) : "조건 추가"; }
@@ -1348,6 +1380,7 @@ function condToParams(p, k = S.cond) {
   if (k.size) p.set("size", String(k.size));
   if (k.fire) p.set("fire", "1");
   if (k.park) p.set("park", "1");
+  if (k.win) p.set("win", "1");
   if (k.near) { p.set("near", k.near); p.set("r", String(k.r)); }
   if (S.feeBand) p.set("fee", S.feeBand);
   if (S.condStrict) p.set("strict", "1");
@@ -1356,7 +1389,7 @@ function condFromParams(q) {
   const k = emptyCond(), list = (n) => (q.get(n) ?? "").split(",").filter(Boolean);
   k.sido = list("sido").filter((x) => SIDOS.includes(x));
   k.kind = list("kind").filter((x) => KIND[x]);
-  k.pet = q.get("pet") === "1"; k.fire = q.get("fire") === "1"; k.park = q.get("park") === "1";
+  k.pet = q.get("pet") === "1"; k.fire = q.get("fire") === "1"; k.park = q.get("park") === "1"; k.win = q.get("win") === "1";
   k.w = W_OPTS.some(([v]) => v === Number(q.get("w"))) ? Number(q.get("w")) : 0;
   k.size = SIZE_OPTS.some(([v]) => v === Number(q.get("size"))) ? Number(q.get("size")) : 0;
   k.near = (q.get("near") ?? "").slice(0, 20); k.r = R_OPTS.includes(Number(q.get("r"))) ? Number(q.get("r")) : 20;
@@ -1376,7 +1409,7 @@ function condSheet() {
       if (!b) return;
       const [key, val] = b.dataset.c.split(":"), k = S.condDraft;
       if (key === "sido" || key === "kind") k[key] = k[key].includes(val) ? k[key].filter((x) => x !== val) : [...k[key], val];
-      else if (key === "pet" || key === "fire" || key === "park") k[key] = !k[key];
+      else if (key === "pet" || key === "fire" || key === "park" || key === "win") k[key] = !k[key];
       else if (key === "w" || key === "size" || key === "r") k[key] = Number(val);
       else if (key === "fee") S.feeDraft = S.feeDraft === val ? "" : val;
       else if (key === "strict") S.strictDraft = !S.strictDraft;
@@ -1431,6 +1464,7 @@ function paintCondSheet() {
       <section><h3>반려견</h3><div class="cond-chips">${chip("pet", 1, "동반 가능", k.pet, tally("pet", true))}</div></section>
       <section><h3>전기 <small>W 미공지인 전기 사이트는 관광진흥법 기준 600W로 봐요</small></h3><div class="cond-chips">${W_OPTS.map(([v, l]) => chip("w", v, l, k.w === v, v ? tally("w", v) : null)).join("")}</div></section>
       <section><h3>사이트 크기 <small>긴 변 기준 · 규격 미등록은 +로 함께</small></h3><div class="cond-chips">${SIZE_OPTS.map(([v, l]) => chip("size", v, l, k.size === v, v ? tally("size", v) : null)).join("")}</div></section>
+      <section><h3>겨울 <small>고캠핑 운영기간 기준</small></h3><div class="cond-chips">${chip("win", 1, "겨울 운영", k.win, tally("win", true))}</div></section>
       <section><h3>불멍·주차</h3><div class="cond-chips">${chip("fire", 1, "장작 가능", k.fire, tally("fire", true))}${chip("park", 1, "텐트 옆 주차", k.park, tally("park", true))}</div></section>
       <section><h3>1박 요금</h3><div class="cond-chips">${[["u3", "~3만원"], ["3to5", "3~5만원"], ["5to7", "5~7만원"], ["7to10", "7만원~10만원"], ["10to20", "10만원~20만원"], ["o20", "20만원+"]].map(([v, l]) => chip("fee", v, l, S.feeDraft === v, count("fee", (c) => feeOk(c, v)))).join("")}</div></section>
     </div>
@@ -1493,7 +1527,7 @@ function condLine(c, ce) {
   // 상품 조건이 숙박 상품뿐이고 맞으면(y) 카드의 숙박 배지가 이미 보여 주므로 다시 쓰지 않는다(중복 금지).
   const st = Object.fromEntries(Object.entries(ce.st).filter(([k, v]) => !(k === "kind" && v === "y" && S.cond.kind.every((x) => STAY_KEYS.has(x)))));
   if (!Object.keys(st).length) return "";
-  const txt = { kind: () => S.cond.kind.map((x) => KIND[x]?.label).join("·"), pet: () => "반려견", w: () => (S.cond.w === 1 ? "전기" : `전기 ${fmt(S.cond.w)}W+`), size: () => `사이트 ${S.cond.size}m+`, fire: () => "장작", park: () => "텐트 옆 주차" };
+  const txt = { kind: () => S.cond.kind.map((x) => KIND[x]?.label).join("·"), pet: () => "반려견", w: () => (S.cond.w === 1 ? "전기" : `전기 ${fmt(S.cond.w)}W+`), size: () => `사이트 ${S.cond.size}m+`, fire: () => "장작", park: () => "텐트 옆 주차", win: () => "겨울 운영" };
   return `<p class="lrow-cond">${Object.entries(st).map(([k, v]) => `<span class="cs cs-${v === "?" ? "unk" : v}">${v === "y" ? ic("check") : ""}${esc(txt[k]())}${v === "ref" ? " · 법정 기준 600W" : v === "?" ? " · 확인 필요" : ""}</span>`).join("")}</p>`;
 }
 function listRow({ c, ce }, i = 0) {
@@ -1503,7 +1537,7 @@ function listRow({ c, ce }, i = 0) {
     <a class="card-hit" href="${href}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="card-media">${carousel(c, { eager: i < 3 })}
       ${o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : S.avail?.has(String(c.id)) ? `<span class="sig live">${ic("check")}공식 접수 중</span>` : ""}
-      <span class="bdgs">${badges(c, 3)}</span>
+      <span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3)}</span>
     </div>
     <div class="card-body">
       <div class="name-row">
@@ -2248,7 +2282,7 @@ async function detailView(id) {
       <p class="d-eyebrow">${esc(region(c))}${c.op && OP[c.op] ? ` · ${OP[c.op]}` : tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
       <h1 class="d-title">${titleHtml(c)}</h1>
       ${c.line ? `<p class="d-line">${esc(serviceText(c.line, 84))}${c.gc_url ? srcTip({ g: "c", src: { label: "고캠핑 소개", url: c.gc_url, quote: c.line } }, "한 줄 소개") : ""}</p>` : ""}
-      <div class="d-bdgs">${stayBadges(c)}${badges(c, 14, 10)}</div>
+      <div class="d-bdgs">${wxBadge(c)}${stayBadges(c)}${badges(c, 14, 10)}</div>
       </div>
       <aside class="d-side">${reserveCard(c, d)}</aside>
     </header>
@@ -4808,14 +4842,16 @@ addEventListener("error", (e) => {
 }, true);
 (async function boot() {
   $("#view").innerHTML = `<div class="loading"></div>`;
-  const [camps, photos, openings, cards, avail] = await Promise.all([
+  const [camps, photos, openings, cards, avail, fcast] = await Promise.all([
     fetch(`${DATA}campgrounds.json`).then((r) => r.json()),
     fetch(`${DATA}photos.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
     fetch(`${DATA}openings.json`).then((r) => (r.ok ? r.json() : { items: [] })).catch(() => ({ items: [] })),
     fetch(`${MEDIA}cards/index.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
     fetch(`${DATA}availability.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    fetch(new URL(`${MOD_ROOT}conditions/forecast.json`, import.meta.url).href, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
   ]);
   S.camps = camps.filter((c) => c.status !== "폐업");
+  S.fc = fcast;
   S.byId = new Map(S.camps.map((c) => [String(c.id), c]));
   S.photos = photos;
   S.cards = cards?.camps ?? {};
