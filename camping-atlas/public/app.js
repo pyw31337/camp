@@ -2979,7 +2979,8 @@ function priceRows(c, d) {
       const fee = c.fee;
       const unit = c.du ? "당일 이용" : "캠핑 사이트 (1박 기준)";
       if (c.du && fee && Number(fee.min) === 0 && (fee.g === "FREE" || /무료/.test(fee.text ?? ""))) addStay(0, "입장", "관리기관 안내", { g: "c", src: { label: d?.du_src?.label || "관리기관 안내", url: d?.du_src?.url || c.homepage, at: d?.du_src?.checked_at } }, "", "무료");
-      else if (pf?.v) addStay(0, unit, "대표 요금", pf, "", wonText(detailValue(pf)));
+      // 운영 기관·업장이 공개한 요금(OFFICIAL·OPERATOR·CONFIRMED)이 있으면 후기 기반 요약보다 먼저(영우 님 2026-10-21)
+      else if (pf?.v && !/^(OFFICIAL|OPERATOR|CONFIRMED)$/.test(fee?.grade ?? "")) addStay(0, unit, "대표 요금", pf, "", wonText(detailValue(pf)));
       else if (fee) {
         const lo = Number(fee.min), hi = Number(fee.max ?? fee.min);
         const range = lo > 0 ? `${fmt(lo)}${hi > lo ? `~${fmt(hi)}` : ""}원${/대\s*$/.test(fee.text ?? "") ? "대" : ""}` : wonText(fee.text ?? "");

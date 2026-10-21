@@ -17,3 +17,8 @@ test("화성에코팜(102229) 보강: 운영 기관 공식 요금·휴무·반�
   assert.equal(c.closed, "매주 월요일");
   assert.match(c.pets, /불가능/);
 });
+test("공식 요금이 후기 기반 요약보다 먼저 보인다", () => {
+  const app = readFileSync(new URL("../../camping-atlas/public/app.js", import.meta.url), "utf8");
+  assert.match(app, /pf\?\.v && !\/\^\(OFFICIAL\|OPERATOR\|CONFIRMED\)\$\//);
+  assert.deepEqual(camps.find((x) => x.id === "102377").ti.o, ["12:00", "c"]);
+});
