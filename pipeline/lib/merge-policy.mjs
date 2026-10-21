@@ -5,7 +5,9 @@
 // field_conditions.source.tier(A/B/C)·checked_at/확인일(at). 새 출처 구조를 만들지 않는다. 문서: docs/DATA_MERGE_POLICY.md
 
 /** 사실 저장소 등급(docs/FACT_STORE.md §3) → 점수 */
-export const GRADE_RANK = { VERIFIED: 4, OPERATOR: 3, CONFIRMED: 2, MENTION: 1 };
+// OFFICIAL(업장·운영 기관 공식 요금 등)은 OPERATOR와 같은 급, REFERENCE(법정·표준 기본값)는 후기와 같은 급.
+// t41u: 예전엔 OFFICIAL·REFERENCE가 표에 없어 0점 → 후기(MENTION)가 공식 값을 ‘더 믿을 만한 교체’로 덮었다(화성에코팜 102229).
+export const GRADE_RANK = { VERIFIED: 4, OFFICIAL: 3, OPERATOR: 3, CONFIRMED: 2, MENTION: 1, REFERENCE: 1 };
 /** 원천 코드 → 등급(사실 저장소와 같은 표). 모르는 원천은 MENTION 취급. */
 export const SRC_GRADE = {
   pilot_verified: "VERIFIED", manual: "VERIFIED", owner: "VERIFIED", operator_submission: "VERIFIED",

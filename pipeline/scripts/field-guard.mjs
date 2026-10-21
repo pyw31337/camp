@@ -66,6 +66,30 @@ const note = (l) => {
   strict.push(l);
 };
 
+// t41u: 공식·수기 확정 값 하향 금지. 출처가 OFFICIAL·VERIFIED이거나 pinned(registry/curated-pins.json)인 묶음(fee 등)·
+// 상세 프로필 항목(profile.fields.*)이 더 낮은 등급·빈 값·막연한 값(‘규정 있음’)으로 바뀌면 파생 모델이라도 손실로 보고 되살린다.
+// (화성에코팜 102229: 증분 발행의 재계산이 운영 기관 공식 요금·환불을 후기 값으로 덮었음.) 일반 등급 간 교체는 기존 규칙대로.
+const VAGUE = /^(규정 있음|있음|확인 필요|미확인|문의|별도 문의)$/;
+const PROTECT = (o) => o && typeof o === "object" && !Array.isArray(o) && (o.pinned || o.grade === "OFFICIAL" || o.grade === "VERIFIED");
+const valOf = (o) => String(o?.value ?? o?.text ?? "").trim();
+function lower(bv, nv) {
+  if (!nv || typeof nv !== "object" || isEmpty(nv.value ?? nv.text ?? nv.min)) return true;
+  if (bv.pinned && JSON.stringify(bv) !== JSON.stringify(nv)) return true;
+  const rb = Math.max(trustRank(provOf(bv)), 3), rn = trustRank(provOf(nv));
+  return rn < rb || (VAGUE.test(valOf(nv)) && !VAGUE.test(valOf(bv)));
+}
+export function downgrades(b, n) {
+  const out = [];
+  for (const [k, bv] of Object.entries(b ?? {})) if (PROTECT(bv) && !bv.hidden && lower(bv, n?.[k])) out.push({ field: k, before: 1, after: 0, kind: "downgrade" });
+  for (const [k, bv] of Object.entries(b?.profile?.fields ?? {})) if (PROTECT(bv) && lower(bv, n?.profile?.fields?.[k])) out.push({ field: `profile.fields.${k}`, before: 1, after: 0, kind: "downgrade" });
+  return out;
+}
+function takeDowngrades(file, id, b, n) {
+  const dg = downgrades(b, n).filter((l) => !overridden(file, id, l.field)).map((l) => ({ file, id, ...l }));
+  strict.push(...dg);
+  return dg;
+}
+function healDowngrades(b, n, dg) { for (const l of dg) { setPath(n, l.field, structuredClone(getPath(b, l.field))); l.healed = true; } }
 function getPath(o, f) { return f.split(".").reduce((x, k) => (x == null ? undefined : x[k]), o); }
 function setPath(o, f, v) { const ks = f.split("."); let x = o; for (const k of ks.slice(0, -1)) { if (x[k] == null || typeof x[k] !== "object") x[k] = {}; x = x[k]; } x[ks.at(-1)] = v; }
 /**
@@ -100,9 +124,11 @@ function compareSet(file, baseArr, nextArr, key, onHeal) {
       if (HEAL) { nextArr.push(structuredClone(b)); next.set(id, nextArr.at(-1)); l.healed = true; healed++; }
       continue;
     }
-    const ls = recordLosses(b, n, isVolatile).map((x) => ({ file, id, ...x }));
+    const dg = takeDowngrades(file, id, b, n), dgTop = new Set(dg.map((l) => l.field.split(".")[0]));
+    const ls = recordLosses(b, n, isVolatile).map((x) => ({ file, id, ...x })).filter((l) => !dgTop.has(l.field.split(".")[0]) || l.field.startsWith("profile"));
     cur = { b, n }; const before = strict.length; ls.forEach(note);
     const mine = strict.slice(before);
+    if (HEAL && dg.length) { healDowngrades(b, n, dg); healed++; }
     if (HEAL && mine.length) { heal(b, n, mine); mine.forEach((l) => (l.healed = true)); healed++; }
   }
   if (HEAL && healed) onHeal?.();
@@ -128,10 +154,13 @@ if (existsSync(bd)) for (const f of readdirSync(bd)) {
     if (HEAL) { writeFileSync(np, readFileSync(join(bd, f))); l.healed = true; }
     continue;
   }
+  const dg = takeDowngrades(file, id, b, n);
   const before = strict.length; cur = { b, n };
-  recordLosses(b, n, isVolatile).map((x) => ({ file, id, ...x })).forEach(note);
+  recordLosses(b, n, isVolatile).map((x) => ({ file, id, ...x })).filter((l) => !dg.some((d) => l.field === d.field || l.field.startsWith(`${d.field}.`))).forEach(note);
   const mine = strict.slice(before);
-  if (HEAL && mine.length) { heal(b, n, mine); mine.forEach((l) => (l.healed = true)); writeLike(np, n); }
+  if (HEAL && dg.length) healDowngrades(b, n, dg);
+  if (HEAL && mine.length) { heal(b, n, mine); mine.forEach((l) => (l.healed = true)); }
+  if (HEAL && (dg.length || mine.length)) writeLike(np, n);
 }
 // 3) 손으로·주기적으로 쌓는 원천(registry)
 for (const [f, k, keyFn] of [

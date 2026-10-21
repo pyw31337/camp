@@ -1,0 +1,32 @@
+{
+ "_note": "t41u: 수기·공식 확인으로 확정한 값. 재계산(증분 발행·data-sync) 뒤 apply-pins.mjs가 다시 얹고, field-guard는 pinned 값의 하향을 막는다. 근거는 merge-review.ndjson(grok-bot overwrite).",
+ "camps": {
+  "102229": {
+   "catalog": {
+    "fee": {
+     "min": 35000,
+     "max": 50000,
+     "text": "일반형 A-D(5×8m) 평일 35,000·주말 40,000원 / 확장형 E·F(12×8m) 평일 45,000·주말 50,000원 (전기 포함, 중학생 이상 초과 1인 5,000원)",
+     "basis": "화성에코팜테마파크 이용요금(운영 기관)",
+     "grade": "OFFICIAL",
+     "url": "https://hsecofarm.hscity.go.kr/reservation/info/price.do",
+     "checked_at": "2026-10-21",
+     "pinned": true
+    }
+   },
+   "detail": {
+    "profile.fields.REFUND": {
+     "value": "5일 전 100% · 2일 전 80% · 1일 전 60% · 당일 30% 환불",
+     "grade": "OPERATOR",
+     "source": {
+      "label": "운영 기관 이용요금",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/price.do",
+      "date": "2026-10-21",
+      "quote": "취소 및 환불 규정: 이용일 5일 전 취소 시 100% 환불, 2일 전 80% 환불, 1일 전 60% 환불, 이용일 당일 30% 환불 (예약 당일 취소·시설 사용 불가 시 100%)"
+     },
+     "pinned": true
+    }
+   }
+  }
+ }
+}
