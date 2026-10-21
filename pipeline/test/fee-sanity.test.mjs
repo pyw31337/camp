@@ -1,6 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, mkdtempSync, cpSync } from "node:fs";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
+import { applyFeeSanity } from "../scripts/apply-fee-sanity.mjs";
 import { sanitizeFee, isPublicCamp, feeFloor } from "../lib/fee-sanity.mjs";
 import { nightFees } from "../scripts/recheck-low-fees.mjs";
 
@@ -32,8 +35,11 @@ test("공식 홈페이지 재확인: 추가인원·전기 문장은 1박 요금�
   const f = nightFees("오토사이트 1박 45,000원\n추가인원 1인 10,000원\n전기 사용 5,000원");
   assert.deepEqual(f.map((x) => x.won), [45000]);
 });
-test("발행 카탈로그에 민간 1박 2만원 미만 요금이 남아 있지 않음", () => {
-  const all = JSON.parse(readFileSync(new URL("../../camping-atlas/public/explore/data/campgrounds.json", import.meta.url), "utf8"));
+test("배포 단계 적용 후 민간 1박 2만원 미만 요금이 남지 않음(원본 파일은 그대로)", () => {
+  const dir = mkdtempSync(join(tmpdir(), "fee-")); cpSync(new URL("../../camping-atlas/public/explore/data/campgrounds.json", import.meta.url), join(dir, "campgrounds.json"));
+  assert.ok(applyFeeSanity(dir) > 50);
+  const all = JSON.parse(readFileSync(join(dir, "campgrounds.json"), "utf8"));
+  assert.equal(all.find((c) => c.id === "362").fee.min, 15000); // 구미시 공식 요금 유지
   const bad = all.filter((c) => c.fee?.min > 0 && c.fee.min < feeFloor(c));
   assert.deepEqual(bad.map((c) => c.id), []);
 });
