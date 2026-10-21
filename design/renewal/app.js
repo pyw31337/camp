@@ -5242,12 +5242,28 @@ function pinLabel(c) {
   if (filled(f.power) && f.power.w) return [kw(f.power.w), "pin-volt"];
   return [null, ""];
 }
+// 지도 속도(영우 님 2026-10-21, t39 #21): 조건 통과·사진 여부·정렬 값은 조건·사진 자료가 바뀔 때만 계산해 둔다.
+// 예전에는 지도를 움직일 때마다 6천여 곳에 조건 검사를 다시 하고, 정렬 비교마다 사진 목록을 새로 만들어(photosAll) 한 번에 100~300ms 멈췄다.
+let MAP_POOL = null;
+function mapPool() {
+  const ser = (v) => JSON.stringify(v instanceof Set ? [...v].sort() : v ?? null, (_, x) => (x instanceof Set ? [...x].sort() : x));
+  const key = [S.q, S.quick, S.feeBand, S.find, S.has, S.stype, S.theme].map(ser).concat([S.camps.length, DEAD.size]);
+  const k = MAP_POOL;
+  if (k && k.photos === S.photos && k.cards === S.cards && k.avail === S.avail && k.key.every((v, i) => v === key[i])) return k.rows;
+  const rows = S.camps.filter((c) => c.lat && c.lng && matches(c, { useArea: false }) && mapBrowseEligible(c))
+    .map((c) => ({ c, ph: hasPhoto(c), pl: photoLast(c), r: rich(c) }));
+  MAP_POOL = { key, photos: S.photos, cards: S.cards, avail: S.avail, rows };
+  return rows;
+}
+let mapListKey = "";
 function drawMap() {
   if (!MAP) return;
   const inB = MAP.bounds(0.15), z = MAP.zoom();
-  const inView = S.camps.filter((c) => c.lat && c.lng && inB(c.lat, c.lng) && matches(c, { useArea: false }) && mapBrowseEligible(c));
+  const rowsIn = mapPool().filter((x) => inB(x.c.lat, x.c.lng));
+  const inView = rowsIn.map((x) => x.c);
   const strict = MAP.bounds();
-  const visible = inView.filter((c) => strict(c.lat, c.lng)).sort((a, b2) => photoLast(a) - photoLast(b2) || rich(b2) - rich(a));
+  const visRows = rowsIn.filter((x) => strict(x.c.lat, x.c.lng)).sort((a, b2) => a.pl - b2.pl || b2.r - a.r);
+  const visible = visRows.map((x) => x.c);
   $("[data-mcount]").textContent = fmt(visible.length);
   MAP.clear();
   const cell = z >= 12 ? 0 : z >= 10 ? 60 : 90, buckets = new Map();
@@ -5269,7 +5285,12 @@ function drawMap() {
     }
   }
   const list = $("[data-mlist]");
-  list.innerHTML = visible.filter(hasPhoto).slice(0, 40).map(mapItem).join("") + (visible.length > 40 ? `<p class="map-more">지도를 확대하면 ${fmt(visible.length - 40)}곳 더</p>` : "");
+  const top = visRows.filter((x) => x.ph).slice(0, 40).map((x) => x.c);
+  // 같은 목록이면 다시 그리지 않는다(사진 넘김 상태 유지, 지도 끌 때 멈춤 없음).
+  const lk = `${top.map((c) => c.id).join(",")}|${selected}|${visible.length}`;
+  if (lk === mapListKey && list.childElementCount) return;
+  mapListKey = lk;
+  list.innerHTML = top.map(mapItem).join("") + (visible.length > 40 ? `<p class="map-more">지도를 확대하면 ${fmt(visible.length - 40)}곳 더</p>` : "");
   initCarousels(list);
 }
 function mapItem(c) {
@@ -5293,7 +5314,7 @@ function selectPin(c) {
 }
 function bindMap() {
   document.body.classList.add("map-mode");
-  cleanup.push(() => { document.body.classList.remove("map-mode"); MAP?.remove(); MAP = null; });
+  cleanup.push(() => { document.body.classList.remove("map-mode"); MAP?.remove(); MAP = null; mapListKey = ""; });
   const el = $("#map"), opts = { center: [36.2, 127.9], zoom: innerWidth < 760 ? 6 : 7 };
   let alive = true;
   cleanup.push(() => { alive = false; });
