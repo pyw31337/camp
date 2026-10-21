@@ -3393,7 +3393,17 @@ function programsHtml(d) {
 const canPreviewExternalMedia = (x) => Boolean(x && (x.display_rights === "EMBED" || x.display_rights === "DISPLAY" || x.embed_url));
 const externalImage = (x) => x.embed_url || x.img || x.thumb;
 // 검색 API가 결과와 함께 주는 작은 썸네일(카카오 검색 CDN)은 원문 링크와 함께 보여 준다(원본 저장·확대 없음).
-const apiThumb = (x) => (/^https:\/\/search\d?\.kakaocdn\.net\//.test(String(x?.thumb ?? "")) ? x.thumb : null);
+// 후기 썸네일 고화질(소유자 2026-10-21): 카카오 검색 썸네일(130×130)은 같은 이미지의 600px 판으로,
+// 네이버 블로그 썸네일(blogthumb …?type=w2 등)은 같은 경로의 postfiles 773px 판으로 바꾼다. 실패하면 원래 주소로 한 번 더.
+const hiThumb = (u) => {
+  const s = String(u ?? "");
+  if (/^https:\/\/search\d?\.kakaocdn\.net\/argon\/130x130_85_c\//.test(s)) return s.replace("/130x130_85_c/", "/600x0_65_wr/");
+  const m = s.match(/^https?:\/\/(?:blogthumb|postfiles|mblogthumb-phinf)\.pstatic\.net(\/[^?]+)(?:\?type=(\w+))?/);
+  if (m && !/^w(?:7\d\d|[89]\d\d|\d{4})$/.test(m[2] ?? "")) return `https://postfiles.pstatic.net${m[1]}?type=w773`;
+  return s;
+};
+const thumbImg = (u, alt = "") => { const hi = hiThumb(u); return `<img src="${esc(hi)}" alt="${esc(alt)}" loading="lazy" decoding="async" referrerpolicy="no-referrer"${hi !== u ? ` data-alt="${esc(u)}"` : ""} onerror="if(this.dataset.alt){this.src=this.dataset.alt;this.removeAttribute('data-alt')}else{this.closest('.media-card-photo')?.classList.add('is-empty');this.remove()}">`; };
+const apiThumb = (x) => (/^https:\/\/(?:search\d?\.kakaocdn\.net|postfiles\.pstatic\.net|blogthumb\.pstatic\.net)\//.test(String(x?.thumb ?? "")) ? x.thumb : null);
 function thumbLinks(list, label) {
   return `<div class="thumb-links">${list.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${label} ${i + 1} 원문 열기"><img src="${esc(apiThumb(x))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"><i>${esc(sourceName(x.src, hostOf(x.url) || "원문"))}</i></a>`).join("")}</div>`;
 }
@@ -3771,7 +3781,7 @@ function reviewLinksHtml(d, c) {
     // 후기 썸네일은 해당 원문이 제공한 원본/허용 미리보기만 쓴다. 저해상도
     // 파비콘이나 캠핑장 대표사진으로 바꿔 끼우면 다른 후기처럼 보일 수 있으므로 쓰지 않는다.
     const thumb = (matchedPhoto && mediaFull(matchedPhoto)) || (canPreviewExternalMedia(x) && externalImage(x)) || apiThumb(x) || "";
-    const media = `<div class="media-card-photo${thumb ? "" : " is-empty"}">${thumb ? `<img src="${esc(thumb)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('.media-card-photo').classList.add('is-empty');this.remove()">` : ""}<span class="media-fallback">${platIc(pk)}</span></div>`;
+    const media = `<div class="media-card-photo${thumb ? "" : " is-empty"}">${thumb ? thumbImg(thumb) : ""}<span class="media-fallback">${platIc(pk)}</span></div>`;
     const dateStr = formatKoreanDate(x.date);
     const relStr = formatRelativeDate(x.date);
     const dateHtml = dateStr ? `<span class="media-card-date"><span>${esc(dateStr)}</span>${relStr ? `<small class="date-rel">${esc(relStr)}</small>` : ""}</span>` : "";

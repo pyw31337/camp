@@ -22,6 +22,8 @@ const products = await read("../out/campground-products.json");
 const social = await read("../out/campground-social.json");
 // 네이버 검색 API(블로그·카페·웹문서·지식iN) 언급 + robots 허용 블로그 본문 문장(scripts/sync-web-mentions.mjs)
 const web = await read("../out/campground-web.json");
+// 방문후기 썸네일(블로그 대표 이미지, scripts/fill-review-thumbs.mjs): 썸네일이 비어 있을 때만 채운다.
+const reviewThumbs = (await read("../registry/review-thumbs.json"))?.thumbs ?? {};
 // 제휴·운영자 제공으로 확인한 공지만 읽는다. 플랫폼 공지 페이지를 자동 수집하지 않는다.
 const notices = await read("../registry/campground-notices.json");
 // 자체 저장 공식 사진(webp, media 브랜치). 없으면 고캠핑 원본 주소를 그대로 쓴다.
@@ -234,6 +236,7 @@ for (const [id, d] of Object.entries(details)) {
   const known = new Set([...(d.reviews ?? []), ...(d.cafe ?? [])].map((x) => x.url));
   const docs = (w.docs ?? []).filter((x) => !known.has(x.url));
   if (docs.length) d.web = docs;
+  for (const x of [...(d.web ?? []), ...(d.reviews ?? []), ...(d.cafe ?? [])]) if (!x.thumb && reviewThumbs[x.url]) x.thumb = reviewThumbs[x.url];
   if (w.prices?.length) {
     const seen = new Set((d.prices ?? []).map((p) => `${p.url}|${p.won}`));
     d.prices = [...(d.prices ?? []), ...w.prices.filter((p) => !seen.has(`${p.url}|${p.won}`))]
