@@ -22,3 +22,9 @@ test("공식 요금이 후기 기반 요약보다 먼저 보인다", () => {
   assert.match(app, /pf\?\.v && !\/\^\(OFFICIAL\|OPERATOR\|CONFIRMED\)\$\//);
   assert.deepEqual(camps.find((x) => x.id === "102377").ti.o, ["12:00", "c"]);
 });
+test("화성에코팜(102229) 환불: 운영 기관 규정(5일 전 100%)", () => {
+  const d = JSON.parse(readFileSync(new URL("../../camping-atlas/public/explore/data/camps/102229.json", import.meta.url), "utf8"));
+  assert.match(d.profile.fields.REFUND.value, /^5일 전 100%/);
+  const s = JSON.parse(readFileSync(new URL("../registry/operator-site-snippets.json", import.meta.url), "utf8")).campgrounds["102229"].snippets;
+  assert.ok(s.some((x) => /5일 전 취소 시 100% 환불/.test(x.text)));
+});
