@@ -11,3 +11,4 @@ for (const f of ["camping-atlas/public/app.js", "design/renewal/app.js"]) test(`
 });
 test("#30 모바일 찜 칩 줄바꿈", () => { for (const f of ["camping-atlas/public/style.css", "design/renewal/style.css"]) assert.match(rd(f), /\.cmp-page \.picks \{ flex-wrap: wrap; overflow: visible; gap: 6px; \}.*\.pick img.*display: none;/); });
 test("#32 표 레이블 열 고정", () => { assert.match(rd("camping-atlas/public/style.css"), /\.cmp-table thead th, \.cmp-table tbody th\[scope="row"\] \{ position: sticky; left: 0; \}/); });
+test("#30b 옛 9em 칩 규칙이 다시 끼어들지 않음(리베이스 합치기 회귀)", () => { for (const f of ["camping-atlas/public/style.css", "design/renewal/style.css"]) assert.doesNotMatch(rd(f), /\.cmp-page \.picks \.pick span \{ max-width: 9em; \}/); });
