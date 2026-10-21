@@ -423,6 +423,43 @@ const isVisitorCamp = (c) => VISITOR_IDS.has(String(c.id)) || /지인|방문객|
 const isPicnicCamp = (c) => PICNIC_IDS.has(String(c.id)) || (Boolean(c.du) && !c.osm && !c.auto) || (c.types ?? []).some((t) => t === "캠크닉" || t === "캠프닉") || (/캠크닉|캠프닉|피크닉장|당일\s*(캠핑|피크닉|이용)/.test(`${c.name} ${c.pf?.s ?? ""}`) && !/당일\s*(취소|환불)/.test(`${c.name} ${c.pf?.s ?? ""}`));
 // 공원: 당일 공원(c.du=park) 또는 이름이 공원·유원지인 곳. 휴양림(숙박 유료)은 빼고(2026-10-20 소유자 P0).
 const isParkCamp = (c) => c.du === "park" || (/공원|유원지/.test(c.name) && !/휴양림/.test(c.name));
+// 도시공원 표준데이터는 나들이 후보를 넓게 찾는 원장이다. 숙박 상품의
+// 상세 스펙이 아닌 시설·주소 중심 값이 많으므로 일반 캠핑장과 같은 밀도로
+// 지도·기본 목록에 섞으면 비교 결과가 왜곡된다.
+const isPublicPark = (c) => c.du === "park";
+let publicParkCoreFloor = null;
+function publicParkEvidence(c) {
+  const day = c.day ?? {}, profile = c.park_info ?? c.park ?? {};
+  const facilities = profile.facilities ?? profile.facility_groups ?? c.park_facilities ?? "";
+  return [
+    Boolean(c.tel), Boolean(c.homepage), Boolean(c.src?.url), Boolean(c.pf?.s),
+    Array.isArray(c.amenities) && c.amenities.length > 0,
+    Array.isArray(facilities) ? facilities.length > 0 : Boolean(facilities),
+    Number.isFinite(c.nearby_toilets?.within_500m),
+    day.cooking?.v && day.cooking.v !== "UNKNOWN",
+    day.shade?.v && day.shade.v !== "UNKNOWN",
+    Boolean(c.fee?.min || c.fee?.max),
+  ].filter(Boolean).length;
+}
+function publicParkInformationComplete(c) {
+  if (publicParkCoreFloor == null) {
+    const scores = S.camps.filter((x) => !isPublicPark(x)).map(rich).sort((a, b) => a - b);
+    const median = scores[Math.floor((scores.length - 1) / 2)] ?? 0;
+    // 일반 캠핑장 정보량 중앙값의 절반 + 공원 고유 근거 5개를 모두 만족해야
+    // 기본 목록과 지도에 다시 편입한다.
+    publicParkCoreFloor = Math.max(1, Math.ceil(median * .5));
+  }
+  return hasPhoto(c) && rich(c) >= publicParkCoreFloor && publicParkEvidence(c) >= 5;
+}
+function coreBrowseEligible(c) {
+  // 직접 이름으로 찾으면 정보가 덜 찬 공원도 발견은 가능하게 하되, 일반 탐색에서는 제외한다.
+  return !isPublicPark(c) || namedByQuery(c) || publicParkInformationComplete(c);
+}
+function mapBrowseEligible(c) {
+  // 지도는 현재 화면에 보이는 후보를 비교하는 곳이므로, 이름 검색 예외 없이
+  // 정보·사진을 충분히 갖춘 공원만 핀으로 보인다.
+  return !isPublicPark(c) || publicParkInformationComplete(c);
+}
 // 물놀이터: 등록 편의시설에 물놀이장·수영장·풀장이 있는 곳과 공공 물놀이터(c.du=water)만. 계곡 '물놀이' 언급·추정 태그는 빼고(2026-10-20 P0).
 const isWaterPlayCamp = (c) => c.du === "water" || (c.amenities ?? []).some((a) => /물놀이장|물놀이터|수영장|풀장|워터/.test(a));
 const THEMES = [
@@ -594,7 +631,10 @@ function reviewPickCard(c, i = 0) {
   </article>`;
 }
 function results() {
-  const list = S.camps.filter((c) => matches(c));
+  // 도시공원 원장은 당일 나들이 맥락을 위한 별도 데이터다. 캠핑장처럼
+  // 사이트·요금·규칙·사진이 충분하지 않은 공원은 기본 탐색에 섞지 않고,
+  // 공원 테마 또는 이름으로 직접 찾았을 때만 읽게 한다.
+  const list = S.camps.filter((c) => matches(c) && (coreBrowseEligible(c) || S.theme === "PARK"));
   if (S.sort === "name") list.sort((a, b) => nameOf(a).name.localeCompare(nameOf(b).name, "ko"));
   else list.sort((a, b) => rich(b) - rich(a));
   // 사진이 한 장도 없는 곳은 뒤로(이름으로 직접 찾은 곳은 제외)
@@ -1048,6 +1088,33 @@ function cardReviewPills(rv, c) {
   }
   return [...pros, ...cons].join("");
 }
+// 사진·예약 상품이 없는 도시공원은 캠핑장 포스터를 흉내 내지 않는다.
+// 공원 테마 안에서만 공공 원장으로 확인한 관리·시설·화장실 정보를 짧게 읽힌다.
+function publicParkCard(c) {
+  const p = c.park_info ?? c.park ?? {};
+  const facility = Array.isArray(p.facilities) ? p.facilities.join(" · ") : (p.facilities ?? p.facility_groups ?? "");
+  const summary = String(c.pf?.s ?? "").split("·").map((x) => x.trim()).filter(Boolean).slice(0, 3).join(" · ");
+  const toilets = c.nearby_toilets?.within_500m;
+  const operator = p.operator ?? p.management ?? c.src?.label?.match(/\(([^,()]+)(?:,|\))/)?.[1] ?? "관리기관";
+  const source = c.src?.url ? tip(`<b>공원 정보 원천</b><span>${esc(c.src?.label ?? "공공데이터")}${c.src?.checked_at ? ` · ${esc(formatKoreanDate(c.src.checked_at))}` : ""}</span><a href="${esc(c.src.url)}" target="_blank" rel="noopener">원문 보기</a>`, "공원 정보 원천") : "";
+  const facts = [
+    summary || String(c.types?.[0] ?? "공원"),
+    facility ? `시설 ${String(facility).slice(0, 70)}` : "시설 정보 확인 중",
+    toilets != null ? `500m 화장실 ${fmt(toilets)}곳` : "화장실 위치 확인 중",
+    c.tel ? `문의 ${c.tel}` : "연락처 확인 중",
+  ];
+  return `<article class="park-card" data-id="${esc(c.id)}">
+    <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 공원 정보"></a>
+    <div class="park-card-icon">${thIc("PARK")}</div>
+    <div class="park-card-body">
+      <p class="park-card-kicker">공원 정보 ${source}</p>
+      <h3>${esc(nameOf(c).name)}</h3>
+      <p class="park-card-region">${ic("pin")}${esc(region(c))}</p>
+      <ul>${facts.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>
+    </div>
+    <span class="park-card-arrow">${ic("right")}</span>
+  </article>`;
+}
 function card(c, i = 0, opts) {
   const isWp = Boolean((opts && !Array.isArray(opts) && opts.isWaterPlay) || S.theme === "WATER_PLAY");
   const { tag } = nameOf(c), o = openingOf(c);
@@ -1159,8 +1226,45 @@ document.addEventListener("dragstart", (e) => {
 }, true);
 
 // 공용 찜. 지인 목록을 서버에 두고 어느 기기에서든 같이 본다.
+// 저장 직후 페이지를 닫아도 운영 기록이 빠지지 않도록 실패한 기록은 이 기기에
+// 짧게 보관했다가 다음 연결 때 다시 전송한다. IP 같은 불필요한 식별 정보는 보내지 않는다.
+const SAVE_LOG_QUEUE_KEY = "mc-save-log-pending";
+const SAVE_LOG_QUEUE_MAX = 24;
+const saveSyncQueue = new Map();
+function pendingSaveLogs() {
+  const rows = store.get(SAVE_LOG_QUEUE_KEY, []);
+  return Array.isArray(rows) ? rows.filter((x) => x && x.action && x.campground_id).slice(-SAVE_LOG_QUEUE_MAX) : [];
+}
+function queueSaveLog(row) {
+  store.set(SAVE_LOG_QUEUE_KEY, [...pendingSaveLogs(), row].slice(-SAVE_LOG_QUEUE_MAX));
+}
+async function postSaveLog(row) {
+  if (!await ensureSupabaseConfig()) throw new Error("Supabase config unavailable");
+  const headers = { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=minimal" };
+  const r = await fetch(`${SB.url}/rest/v1/save_log`, { method: "POST", headers, body: JSON.stringify(row), keepalive: true });
+  if (!r.ok) throw new Error(`save_log ${r.status}`);
+}
+async function readSaveLog(limit = 200) {
+  const headers = { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json" };
+  // 017 이후에는 이 최소 필드 RPC만 사용한다. 아직 017을 적용하지 않은
+  // 배포본도 끊기지 않도록 함수가 없을 때에만 기존의 안전한 필드 조회로 폴백한다.
+  const safe = await fetch(`${SB.url}/rest/v1/rpc/safe_save_log_feed`, { method: "POST", headers, body: JSON.stringify({ row_limit: limit }) });
+  if (safe.ok) return safe.json();
+  if (safe.status !== 404) throw new Error(`safe_save_log_feed ${safe.status}`);
+  const legacy = await fetch(`${SB.url}/rest/v1/save_log?select=created_at,action,campground_id,language,timezone,screen,platform&order=created_at.desc&limit=${encodeURIComponent(limit)}`, { headers });
+  if (!legacy.ok) throw new Error(`save_log ${legacy.status}`);
+  return legacy.json();
+}
+async function flushPendingSaveLogs() {
+  if (!navigator.onLine || !await ensureSupabaseConfig()) return;
+  const retry = [];
+  for (const row of pendingSaveLogs()) {
+    try { await postSaveLog(row); } catch { retry.push(row); }
+  }
+  store.set(SAVE_LOG_QUEUE_KEY, retry);
+}
 async function loadSharedSaves() {
-  if (!SB.url || !SB.key) return;
+  if (!await ensureSupabaseConfig()) return;
   try {
     const r = await fetch(`${SB.url}/rest/v1/shared_save?select=campground_id,created_at&order=created_at.desc`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
     if (!r.ok) return;
@@ -1171,22 +1275,43 @@ async function loadSharedSaves() {
     $$(`[data-save]`).forEach((x) => { const on = isSaved(x.dataset.save); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); x.setAttribute("aria-label", on ? "찜 해제" : "찜하기"); x.querySelector("use")?.setAttribute("href", `#i-${on ? "heart" : "heart-o"}`); });
   } catch {}
 }
-async function clientMeta() {
-  let ip = "";
-  try { ip = (await (await fetch("https://api.ipify.org?format=json")).json()).ip || ""; } catch {}
-  return { user_agent: navigator.userAgent || "", ip, language: navigator.language || "", timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "", screen: `${screen.width}x${screen.height}`, platform: navigator.platform || "" };
+function clientMeta() {
+  return {
+    language: navigator.language || "",
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "",
+    screen: `${screen.width}x${screen.height}`,
+    platform: navigator.platform || "",
+  };
 }
-async function pushSave(action, id) {
-  if (!SB.url || !SB.key) return;
+async function syncSave(action, id) {
+  if (!await ensureSupabaseConfig()) return;
   const headers = { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=minimal" };
-  if (action === "add") {
-    await fetch(`${SB.url}/rest/v1/shared_save`, { method: "POST", headers, body: JSON.stringify({ campground_id: id }) });
-  } else {
-    await fetch(`${SB.url}/rest/v1/shared_save?campground_id=eq.${encodeURIComponent(id)}`, { method: "DELETE", headers });
+  const sharedUrl = action === "add"
+    ? `${SB.url}/rest/v1/shared_save`
+    : `${SB.url}/rest/v1/shared_save?campground_id=eq.${encodeURIComponent(id)}`;
+  const sharedInit = action === "add"
+    ? { method: "POST", headers, body: JSON.stringify({ campground_id: id }) }
+    : { method: "DELETE", headers };
+  const row = { action, campground_id: id, ...clientMeta() };
+  const [shared, logged] = await Promise.allSettled([
+    fetch(sharedUrl, sharedInit).then((r) => { if (!r.ok && !(action === "add" && r.status === 409)) throw new Error(`shared_save ${r.status}`); }),
+    postSaveLog(row),
+  ]);
+  if (logged.status === "rejected") {
+    queueSaveLog(row);
+    console.warn("찜 운영 기록을 다음 연결 때 다시 보냅니다.", logged.reason);
   }
-  const meta = await clientMeta();
-  await fetch(`${SB.url}/rest/v1/save_log`, { method: "POST", headers, body: JSON.stringify({ action, campground_id: id, ...meta }) });
+  if (shared.status === "rejected") console.warn("공용 찜 동기화에 실패했습니다.", shared.reason);
 }
+function pushSave(action, id) {
+  // 같은 캠핑장을 빠르게 연속 탭해도 add/remove 순서가 뒤집히지 않게 직렬화한다.
+  const previous = saveSyncQueue.get(id) ?? Promise.resolve();
+  const job = previous.catch(() => {}).then(() => syncSave(action, id)).catch((error) => console.warn("찜 동기화 실패", error));
+  saveSyncQueue.set(id, job);
+  job.finally(() => { if (saveSyncQueue.get(id) === job) saveSyncQueue.delete(id); });
+  return job;
+}
+addEventListener("online", () => { flushPendingSaveLogs(); });
 // 찜 토글
 document.addEventListener("click", (e) => {
   const b = e.target.closest("[data-save]");
@@ -1487,18 +1612,23 @@ function renderResults({ reset = true } = {}) {
     return;
   }
   rows.innerHTML = "";
+  const parkTheme = S.theme === "PARK";
   const shown = list.filter(hasPhoto), bare = list.filter((c) => !hasPhoto(c));
-  const rc = $("[data-res-count]"); if (rc) rc.textContent = `검색된 결과 ${fmt(shown.length)}건`;
-  grid.innerHTML = shown.length ? shown.slice(0, S.shown).map(card).join("") : bare.length ? "" : `<div class="empty">${ic("search")}<b>맞는 곳이 없어요</b><button class="btn ghost" data-clear="all">조건 지우기</button></div>`;
-  $("[data-more]").hidden = shown.length <= S.shown;
-  noph.innerHTML = S.q && bare.length ? `<h4>사진 없는 곳 ${fmt(bare.length)}</h4><ul>${bare.slice(0, 30).map((c) => `<li><a href="#/c/${encodeURIComponent(c.id)}"><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></a>${heartBtn(c)}</li>`).join("")}</ul>` : "";
+  // 공원 테마는 사진이 없어도 공공 원장 카드로 읽힌다. 일반 목록은 사진 없는
+  // 업장을 포스터처럼 진열하지 않는 기존 원칙을 유지한다.
+  const renderable = parkTheme ? list : shown;
+  const rc = $("[data-res-count]"); if (rc) rc.textContent = `검색된 결과 ${fmt(renderable.length)}건`;
+  grid.innerHTML = renderable.length ? renderable.slice(0, S.shown).map((c, i) => isPublicPark(c) ? publicParkCard(c) : card(c, i)).join("") : bare.length ? "" : `<div class="empty">${ic("search")}<b>맞는 곳이 없어요</b><button class="btn ghost" data-clear="all">조건 지우기</button></div>`;
+  $("[data-more]").hidden = renderable.length <= S.shown;
+  noph.innerHTML = !parkTheme && S.q && bare.length ? `<h4>사진 없는 곳 ${fmt(bare.length)}</h4><ul>${bare.slice(0, 30).map((c) => `<li><a href="#/c/${encodeURIComponent(c.id)}"><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></a>${heartBtn(c)}</li>`).join("")}</ul>` : "";
   initCarousels(grid);
   initDraggableRails(grid);
 }
 function moreResults() {
-  const list = results().filter(hasPhoto), grid = $("[data-grid]");
+  const parkTheme = S.theme === "PARK";
+  const list = parkTheme ? results() : results().filter(hasPhoto), grid = $("[data-grid]");
   const from = S.shown; S.shown += 24;
-  grid.insertAdjacentHTML("beforeend", list.slice(from, S.shown).map((c, i) => card(c, from + i)).join(""));
+  grid.insertAdjacentHTML("beforeend", list.slice(from, S.shown).map((c, i) => isPublicPark(c) ? publicParkCard(c) : card(c, from + i)).join(""));
   $("[data-more]").hidden = list.length <= S.shown;
   initCarousels(grid);
   initDraggableRails(grid);
@@ -1888,10 +2018,35 @@ function bindList() {
   cleanup.push(() => { io.disconnect(); v.removeEventListener("submit", onSubmit); v.removeEventListener("click", onClick); v.removeEventListener("change", onChange); });
 }
 
+// ── 화면: 테마 모음 ───────────────────────────────────────────
+function themesView() {
+  const cards = THEMES.map(([key, label, test]) => {
+    const closed = key === "WATER_PLAY";
+    return `<a class="theme-card${closed ? " is-closed" : ""}" href="#/theme/${encodeURIComponent(key)}" draggable="false">
+      <img src="${themeImg(key)}" alt="${esc(label)}" loading="lazy" draggable="false">
+      ${closed ? `<span class="theme-closed-badge">운영종료</span>` : ""}
+      <span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span>
+    </a>`;
+  }).join("");
+  return `<section class="themes-page">
+    <header class="themes-head shell">
+      <p class="eyebrow">EXPLORE BY MOOD</p>
+      <h1>테마로 <em>고르기</em></h1>
+      <p>원하는 분위기부터 골라보세요.</p>
+    </header>
+    <div class="themes-grid shell">${cards}</div>
+    ${siteFooterHtml()}
+  </section>`;
+}
+
 function themeView(themeKey) {
   const tName = themeName(themeKey);
   const tImg = themeImg(themeKey);
-  const tSub = THEME_SUBS[themeKey] ?? "자연과 함께하는 특별한 테마 캠핑장";
+  const isParkTheme = themeKey === "PARK";
+  const tSub = isParkTheme
+    ? "공공 원천으로 확인한 공원·생활 시설입니다. 야영·취사는 관리기관에 확인하세요."
+    : (THEME_SUBS[themeKey] ?? "자연과 함께하는 특별한 테마 캠핑장");
+  const headingNoun = isParkTheme ? "공원 정보" : "캠핑장";
   const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "AVAIL" ? (c) => S.avail?.has(String(c.id)) : themeKey === "REVIEWS" ? (c) => Boolean((c.rv?.p?.length ?? 0) >= 2 || (c.rv?.t ?? 0) >= 4) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
   const totalInTheme = S.camps.filter(testFn).length;
   const isWp = themeKey === "WATER_PLAY";
@@ -1901,7 +2056,7 @@ function themeView(themeKey) {
       <div class="theme-hero-overlay"></div>
       <div class="theme-hero-content">
         <a class="link theme-back" href="#/">${ic("left")} 처음으로</a>
-        <h1 id="tp-title">${esc(tName)} <em>캠핑장</em></h1>
+        <h1 id="tp-title">${esc(tName)} <em>${headingNoun}</em></h1>
         <p class="theme-hero-sub">${esc(tSub)} · 전국 <b>${fmt(totalInTheme)}곳</b></p>
       </div>
     </div>
@@ -1936,6 +2091,13 @@ function bindTheme(themeKey) {
     if (S.area !== "all") {
       list = list.filter((c) => AREA_OF[sidoShort(c.sido)] === S.area);
     }
+    // 공원은 사진이 없는 공공 장소를 포함하는 별도 탐색 테마다. 이 경로에서는
+    // 공원 전용 정보 카드로 보이므로 사진 유무로 제거하지 않는다.
+    if (themeKey === "PARK") {
+      if (S.sort === "name") list.sort((a, b) => nameOf(a).name.localeCompare(nameOf(b).name, "ko"));
+      else list.sort((a, b) => rich(b) - rich(a));
+      return list;
+    }
     const withPhoto = list.filter(hasPhoto);
     const noPhoto = list.filter((c) => !hasPhoto(c));
     if (S.sort === "name") {
@@ -1956,7 +2118,7 @@ function bindTheme(themeKey) {
     const shown = list.slice(0, pageN);
     $("[data-theme-count]").innerHTML = `총 <b>${fmt(list.length)}</b>곳`;
     grid.innerHTML = shown.length
-      ? shown.map((c, i) => card(c, i, { isWaterPlay: themeKey === "WATER_PLAY" })).join("")
+      ? shown.map((c, i) => isPublicPark(c) ? publicParkCard(c) : card(c, i, { isWaterPlay: themeKey === "WATER_PLAY" })).join("")
       : `<div class="empty">${ic("search")}<b>이 지역에는 맞는 캠핑장이 없어요</b><button class="btn ghost" type="button" data-theme-clear-area>전국 보기</button></div>`;
     $("[data-theme-more]").hidden = pageN >= list.length;
     initCarousels(grid);
@@ -3639,8 +3801,35 @@ function infoHtml(c) {
 }
 // 비회원 한마디(Supabase campground_comment). 비밀번호 열은 읽지 않는다 — 지우기는 이 브라우저에서 쓴 글만.
 const SB = { url: document.querySelector('meta[name="supabase-url"]')?.content || "", key: document.querySelector('meta[name="supabase-anon-key"]')?.content || "" };
+let sbConfigPromise = null;
+async function ensureSupabaseConfig() {
+  if (SB.url && SB.key) return true;
+  if (sbConfigPromise) return sbConfigPromise;
+  sbConfigPromise = (async () => {
+    // Pages 빌드는 공개 키를 배포 단계에서 넣는다. 로컬 미리보기는 그 키를
+    // 저장소에 복제하지 않고, 공개 배포본의 같은 설정만 읽어 찜/댓글을 검증한다.
+    const targets = [new URL("./", location.href).href];
+    if (/^(localhost|127\.0\.0\.1)$/i.test(location.hostname)) targets.push("https://pyw31337.github.io/camp/");
+    for (const target of [...new Set(targets)]) {
+      try {
+        const r = await fetch(target, { cache: "no-store" });
+        if (!r.ok) continue;
+        const doc = new DOMParser().parseFromString(await r.text(), "text/html");
+        const url = doc.querySelector('meta[name="supabase-url"]')?.content?.trim();
+        const key = doc.querySelector('meta[name="supabase-anon-key"]')?.content?.trim();
+        if (!url || !key) continue;
+        SB.url = url; SB.key = key;
+        return true;
+      } catch { /* 다음 공개 설정 후보를 확인 */ }
+    }
+    return false;
+  })();
+  const ready = await sbConfigPromise;
+  if (!ready) sbConfigPromise = null;
+  return ready;
+}
 function commentsHtml(c) {
-  if (!SB.url || !SB.key) return "";
+  if (!SB.url) return "";
   return `<section class="d-sec" id="cmt"><div class="sec-head">${iconTitle("chat-bubble", "캠퍼 한마디")}<span class="sec-note">로그인 없이</span></div>
     <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" placeholder="닉네임" required aria-label="닉네임"><textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁" required aria-label="내용"></textarea><button class="btn primary" type="submit">남기기</button></form>
     <ul class="cmts" data-cmts><li class="muted">불러오는 중…</li></ul></section>`;
@@ -3649,6 +3838,7 @@ async function loadComments(id) {
   const box = $("[data-cmts]");
   if (!box) return;
   try {
+    if (!await ensureSupabaseConfig()) throw new Error("Supabase config unavailable");
     const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,nickname,content,created_at&campground_id=eq.${encodeURIComponent(id)}&is_deleted=eq.false&order=created_at.desc&limit=30`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
     const list = r.ok ? await r.json() : [];
     const mine = store.get("mc-my-comments", []);
@@ -4785,7 +4975,7 @@ function pinLabel(c) {
 function drawMap() {
   if (!MAP) return;
   const inB = MAP.bounds(0.15), z = MAP.zoom();
-  const inView = S.camps.filter((c) => c.lat && c.lng && inB(c.lat, c.lng) && matches(c, { useArea: false }));
+  const inView = S.camps.filter((c) => c.lat && c.lng && inB(c.lat, c.lng) && matches(c, { useArea: false }) && mapBrowseEligible(c));
   const strict = MAP.bounds();
   const visible = inView.filter((c) => strict(c.lat, c.lng)).sort((a, b2) => photoLast(a) - photoLast(b2) || rich(b2) - rich(a));
   $("[data-mcount]").textContent = fmt(visible.length);
@@ -4860,7 +5050,7 @@ function bindMap() {
   const v = $("#view");
   const onSubmit = (e) => {
     const f = e.target.closest("[data-msearch]"); if (!f) return; e.preventDefault(); S.q = f.q.value.trim();
-    const hit = S.camps.filter((c) => c.lat && matches(c, { useArea: false }));
+    const hit = S.camps.filter((c) => c.lat && matches(c, { useArea: false }) && mapBrowseEligible(c));
     if (!MAP) return;
     if (S.q && hit.length) MAP.fit(hit.map((c) => [c.lat, c.lng]), { padding: 40, maxZoom: 13 }); else drawMap();
   };
@@ -4877,16 +5067,15 @@ function bindMap() {
 
 
 async function savesLogView() {
-  if (!SB.url || !SB.key) return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><p class="muted">서버 연결이 없습니다. Supabase anon key가 필요합니다.</p><p class="muted">별도 페이지: <a href="../log/">/log</a></p></section>`;
+  if (!await ensureSupabaseConfig()) return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><p class="muted">서버 연결을 준비하지 못했어요.</p><p class="muted">별도 페이지: <a href="../log/">/log</a></p></section>`;
   let rows = [];
   try {
-    const r = await fetch(`${SB.url}/rest/v1/save_log?select=created_at,action,campground_id,ip,language,timezone,screen,platform,user_agent&order=created_at.desc&limit=200`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
-    rows = r.ok ? await r.json() : [];
+    rows = await readSaveLog(200);
   } catch {}
-  const body = rows.length ? `<table class="log-table"><thead><tr><th>시각</th><th>동작</th><th>업장</th><th>IP</th><th>기기</th></tr></thead><tbody>${rows.map((x) => {
+  const body = rows.length ? `<table class="log-table"><thead><tr><th>시각</th><th>동작</th><th>업장</th><th>환경</th></tr></thead><tbody>${rows.map((x) => {
     const c = S.byId.get(String(x.campground_id));
     const name = c ? nameOf(c).name : x.campground_id;
-    return `<tr><td>${esc(formatKoreanDate(x.created_at) || x.created_at)}</td><td>${x.action === "add" ? "찜" : "해제"}</td><td>${esc(name)}</td><td>${esc(x.ip || "-")}</td><td>${esc(x.platform || "")} ${esc(x.screen || "")}<br><span class="muted">${esc((x.user_agent || "").slice(0, 80))}</span></td></tr>`;
+    return `<tr><td>${esc(formatKoreanDate(x.created_at) || x.created_at)}</td><td>${x.action === "add" ? "찜" : "해제"}</td><td>${esc(name)}</td><td>${esc(x.platform || "미제공")} ${esc(x.screen || "")}</td></tr>`;
   }).join("")}</tbody></table>` : `<p class="muted">아직 기록이 없습니다.</p>`;
   return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1><a class="sec-note" href="#/compare">찜 목록</a> · <a class="sec-note" href="../log/">/log</a></div>${body}</section>`;
 }
@@ -4899,10 +5088,11 @@ async function render() {
   TIPS.clear(); $("#pop").hidden = true;
   const h = location.hash || "#/";
   const v = $("#view");
-  const name = h.startsWith("#/c/") ? "detail" : h.startsWith("#/map") ? "map" : h.startsWith("#/saves-log") ? "saves-log" : h.startsWith("#/compare") ? "compare" : h.startsWith("#/theme/") ? "theme" : h.startsWith("#/list") ? "list" : "home";
-  $$("[data-nav]").forEach((a) => a.toggleAttribute("aria-current", a.dataset.nav === (name === "detail" || name === "list" || name === "theme" ? "home" : name)));
+  const name = h.startsWith("#/c/") ? "detail" : h.startsWith("#/map") ? "map" : h.startsWith("#/saves-log") ? "saves-log" : h.startsWith("#/compare") ? "compare" : h.startsWith("#/themes") ? "themes" : h.startsWith("#/theme/") ? "theme" : h.startsWith("#/list") ? "list" : "home";
+  $$("[data-nav]").forEach((a) => a.toggleAttribute("aria-current", a.dataset.nav === (name === "detail" || name === "list" ? "home" : name === "theme" ? "themes" : name)));
   document.body.dataset.view = name;
   if (name === "home") { v.innerHTML = homeView(); bindHome(); }
+  else if (name === "themes") { v.innerHTML = themesView(); }
   else if (name === "theme") { const tk = decodeURIComponent(h.slice(8)); v.innerHTML = themeView(tk); bindTheme(tk); }
   else if (name === "detail") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await detailView(decodeURIComponent(h.slice(4))); bindDetail(); }
   else if (name === "saves-log") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await savesLogView(); }
@@ -4918,7 +5108,7 @@ async function route() {
   const name = await render();
   lastRoute = name;
   S.cameFromApp = Boolean(prev);
-  if (name === "home" && (prev === "detail" || prev === "theme")) scrollTo(0, S.homeScroll);
+  if (name === "home" && (prev === "detail" || prev === "theme" || prev === "themes")) scrollTo(0, S.homeScroll);
   else if (name !== prev || name === "detail" || name === "theme") scrollTo(0, 0);
   updateHeaderGlass();
 }
@@ -5131,6 +5321,7 @@ addEventListener("error", (e) => {
 }, true);
 (async function boot() {
   $("#view").innerHTML = `<div class="loading"></div>`;
+  const configReady = ensureSupabaseConfig();
   const [camps, photos, openings, cards, avail, fcast] = await Promise.all([
     // 가벼운 판(campgrounds.lite.json, scripts/split-catalog.mjs)이 있으면 그것을, 없으면 원본을 받는다.
     fetch(`${DATA}campgrounds.lite.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((j) => (j?.camps ? (CATX.v = j.v, CATX.n = j.n, j.camps) : fetch(`${DATA}campgrounds.json`).then((r) => r.json()))),
@@ -5147,7 +5338,9 @@ addEventListener("error", (e) => {
   S.cards = cards?.camps ?? {};
   for (const o of openings.items ?? []) if (!S.openings.has(String(o.id)) || o.kind !== "접수 마감") S.openings.set(String(o.id), o);
   S.saved = S.saved.filter((id) => S.byId.has(id));
+  await configReady;
   loadSharedSaves();
+  flushPendingSaveLogs();
   // 공식 접수 상태(서울 공공서비스예약 등)는 짧은 유효기간이 있다. 만료된 파일은 쓰지 않는다.
   S.avail = new Map();
   if (avail && Date.parse(avail.expires_at) > Date.now()) for (const r of avail.records ?? []) if (r.state === "OFFICIAL_APPLICATION_OPEN") { const k = String(r.campground_id); S.avail.set(k, [...(S.avail.get(k) ?? []), { ...r, disclaimer: avail.disclaimer, source_name: avail.source?.name }]); }

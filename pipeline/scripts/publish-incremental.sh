@@ -16,6 +16,8 @@ trap 'git worktree remove --force "$WT" >/dev/null 2>&1 || true' EXIT
 ln -s "$SRC/node_modules" "$WT/pipeline/node_modules"
 cd "$WT"
 DATA=camping-atlas/public/explore/data
+# 필드 단위 비교 기준: 손대기 전 최신 main 데이터(docs/DATA_MERGE_POLICY.md)
+BASEROOT="$(mktemp -d)"; git archive HEAD "$DATA" pipeline/registry | tar -x -C "$BASEROOT"
 node pipeline/scripts/report-coverage.mjs >/dev/null
 BASE="$(mktemp)"; cp "$DATA/meta.json" "$BASE"
 git checkout -q -- "$DATA/meta.json"
@@ -39,6 +41,8 @@ node pipeline/scripts/build-gocamping-detail.mjs
 node pipeline/scripts/apply-dayuse-seed.mjs
 node pipeline/scripts/build-link-health.mjs
 node pipeline/scripts/build-card-fallback.mjs
+# 기존 값이 지워지거나 줄어든 곳은 최신 main 값으로 되살린다(채우기 우선 — 리셋 금지). 기록: pipeline/registry/merge-review.ndjson
+node "$SRC/scripts/field-guard.mjs" "$BASEROOT" . --heal
 node pipeline/scripts/report-coverage.mjs
 node pipeline/scripts/build-fact-store.mjs
 node "$SRC/scripts/coverage-guard.mjs" "$BASE" "$DATA/meta.json"
@@ -46,7 +50,7 @@ node "$SRC/scripts/coverage-guard.mjs" "$BASE" "$DATA/meta.json"
 if [ -n "${PUBLISH_DRY_RUN:-}" ]; then { git status --short | head -5 || true; }; echo "(시험 실행: 커밋하지 않음)"; exit 0; fi
 git config user.name "moyeora-camping-data-bot"
 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-git add camping-atlas/public/explore data/facts
+git add camping-atlas/public/explore data/facts; git add pipeline/registry/merge-review.ndjson 2>/dev/null || true
 if git diff --cached --quiet; then echo "증분 발행: 변경 없음."; exit 0; fi
 git commit -q -m "chore(data): publish ${LABEL} now (incremental)"
 # main은 필수 검사 룰셋이 걸려 있어 직접 push하지 않고 PR로 착지시킨다(.github/scripts/land-on-main.sh).

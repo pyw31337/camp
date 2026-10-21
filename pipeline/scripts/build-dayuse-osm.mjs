@@ -65,8 +65,18 @@ const official = (U.parks ?? []).map((u) => ({ c: [u.lat, u.lng], a: u.area, nam
 const uG = grid(official, (p) => p.c);
 const parksOsm = parks.filter((p) => !near(uG, (x) => x.c, p.c, 2).some((u) => { const m = dist(u.c, p.c), a = norm(u.name), b = norm(p.name); return m < 150 || (m < Math.max(300, Math.sqrt(u.a)) && a && b && (a.includes(b) || b.includes(a))); }));
 const PO = official.sort((a, b) => b.a - a.a).map((p) => { const r = rec(p, "park"); if (!r) return null; const u = p.u, [sd, sg] = String(u.addr).split(/\s+/);
+  const groups = (u.facility_groups ?? []).filter((x) => x?.text).map((x) => ({ key: x.key, label: x.label, text: String(x.text).slice(0, 160) }));
+  const facilityText = groups.map((x) => x.text).join(" · ") || u.fac || "";
+  // 공원 원문의 시설 목록은 캠핑 가능·취사 가능의 근거가 아니다. 확인된 사실인
+  // 공중화장실·주차·매점 등 공공시설만 별도 편의 항목으로 옮기고, 이용 규칙은 UNKNOWN으로 남긴다.
+  const amenities = [
+    [/화장실/, "화장실"], [/주차/, "주차장"], [/매점|편의점/, "매점·편의점"], [/산책|둘레길/, "산책로"],
+    [/놀이터|놀이대/, "놀이터"], [/수영|물놀이|분수/, "물놀이 시설"], [/운동|체육|축구|농구|테니스/, "운동시설"],
+  ].filter(([re]) => re.test(facilityText)).map(([, label]) => label);
   return { ...r, id: `park-${u.no}-${[...u.name].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) >>> 0, 7).toString(36).slice(0, 5)}`, sido: sd || r.sido, sigungu: sg || r.sigungu, rg: "addr", addr: u.addr, tel: u.tel || "", osm: undefined, auto: 1, op: "LOCAL_GOVERNMENT",
-    pf: { s: `${u.se} · 면적 약 ${Math.round(u.area / 1000) / 10}만㎡${u.fac ? ` · 시설 ${u.fac.slice(0, 60)}` : ""} · 취사·그늘막 규정은 관리기관(${u.inst})에 확인`, t: ["PARK"] },
+    amenities: [...new Set(amenities)],
+    park_info: { category: u.se || "공원", area_m2: u.area || null, operator: u.inst || "", facilities: groups, facility_text: facilityText.slice(0, 320) },
+    pf: { s: `${u.se} · 면적 약 ${Math.round(u.area / 1000) / 10}만㎡${facilityText ? ` · 시설 ${facilityText.slice(0, 60)}` : ""} · 취사·그늘막 규정은 관리기관(${u.inst})에 확인`, t: ["PARK"] },
     src: { url: U.url, label: `전국도시공원정보표준데이터(${u.inst}, 기준일 ${u.ref})`, checked_at: U.collected_at || at },
     day: { cooking: { v: "UNKNOWN", at: U.collected_at || at }, shade: { v: "UNKNOWN", at: U.collected_at || at } } }; }).filter(Boolean);
 const P = [...PO, ...parksOsm.sort((a, b) => b.a - a.a).map((p) => rec(p, "park")).filter(Boolean)];

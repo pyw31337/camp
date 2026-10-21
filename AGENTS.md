@@ -1,5 +1,11 @@
 # 협업 에이전트 작업 규칙
 
+> ## ⛔ 필수: 데이터 누적 병합 정책 — 먼저 읽을 것 (2026-10-21 소유자 지시)
+> 공유 데이터(`explore/data`·`data/facts`·`pipeline/registry`·Supabase·media)에 쓰는 **모든 에이전트·봇**은 [`docs/DATA_MERGE_POLICY.md`](docs/DATA_MERGE_POLICY.md)를 따른다.
+> **기존 값을 지우거나 리셋하지 않는다.** 우선순위는 ① 빈 칸 채우기 ② 더 믿을 만하거나 더 최근 확인일 때만 덮어쓰기(옛 값은 기록) ③ 논리 검사(실패는 격리) ④ 서비스 표기로 정제다.
+> 코드에서는 `pipeline/lib/merge-policy.mjs`(`mergeRecord`·`mergeList`·`assignNonEmpty`·`logReview`)를 쓴다.
+> 필수 검사 `Lint and build`의 `field-guard`는 값을 지우거나 줄이는 PR을 막는다. 의도한 정정은 `pipeline/registry/merge-overrides.json`에 `reason`과 함께 적는다.
+
 이 저장소는 전국 캠핑장 데이터·예약·여행 정보 서비스를 함께 만드는 공간이다. 코드, 조사 결과, 스키마를 바꿀 때는 다음 규칙을 따른다.
 
 1. 작업 시작 전 `docs/PROJECT_PLAN.md`와 `docs/AGENT_HANDOFF.md`(맨 위 ‘📌 공지’ 먼저)를 읽고, 해당 작업이 목표·우선순위·결정 사항과 충돌하지 않는지 확인한다.

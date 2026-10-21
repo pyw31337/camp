@@ -1,7 +1,34 @@
 # 인수인계
 
-> 최종 갱신: 2026-10-21 KST(모바일 상세·추천 품질·미디어/행사 보정) — 맨 위 ‘📌 공지’부터 읽을 것<br>
+> 최종 갱신: 2026-10-21 KST(찜 기록 복구·테마 하단 탭) — 맨 위 ‘📌 공지’부터 읽을 것<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
+
+## 📌 ⛔ 데이터 누적 병합 정책 시행 (2026-10-21, Grok Bot) — 전 에이전트 필수
+
+- 공유 데이터의 기존 값은 지우거나 리셋하지 않는다. ① 채우기 ② 최신·신뢰 우선 덮어쓰기(옛 값 기록) ③ 논리 검사 ④ 정제 순서다. 자세한 내용은 `docs/DATA_MERGE_POLICY.md`, 공용 모듈은 `pipeline/lib/merge-policy.mjs`다.
+- `pipeline/scripts/field-guard.mjs`가 세 곳에서 돈다.
+  - data-sync·증분 발행·land-on-main: 줄어든 값을 최신 main 값으로 되살린다(`--heal`).
+  - 필수 검사 `Lint and build`: 값을 지우는 PR을 막는다.
+- 기록 파일: 검토 기록은 `pipeline/registry/merge-review.ndjson`(append-only), 의도한 삭제는 `pipeline/registry/merge-overrides.json`(reason 필수)이다.
+- 검증 결과:
+  - `node --test pipeline/test/merge-policy.test.mjs` 9개 통과(무작위 2,000회 속성 검사 포함).
+  - `PUBLISH_DRY_RUN=1 publish-incremental.sh`: 손실 0, 커버리지 회귀 없음.
+
+## 📌 찜 기록 복구 · 테마 하단 탭 · 공개 로그 최소화 (2026-10-21, Codex)
+
+- **원인과 복구:** `/log/`이 오래된 Supabase anon key를 HTML에 고정하고 있어 401로 기록을 전혀 읽지 못했다. 이제 매번 `/camp/` 루트의 현재 공개 설정을 읽으므로 키 교체 뒤에도 별도 화면만 멈추지 않는다. 로컬 미리보기처럼 공개 키를 빌드에 넣지 않는 경우에는 **배포된 `/camp/`의 공개 설정만** 읽어 같은 DB를 검증한다. 앱의 찜 동기화는 `shared_save`와 `save_log`를 병렬로 보내고, 로그 요청만 실패하면 최대 24건을 브라우저에 잠시 보관해 온라인 복귀 때 재전송한다. 같은 업장을 빠르게 탭해도 add/remove 순서는 직렬화한다.
+- **이전 로컬 클릭:** 최신 동기화 코드가 반영되기 전의 로컬 개발 서버에서 눌렀던 찜은 브라우저에만 남아 서버 기록을 소급 생성할 수 없다. 최신 로컬/배포본에서는 공용 찜과 로그가 함께 동기화된다. 실패 시 화면에는 연결 실패 상태가 보이고, 조용히 빈 기록처럼 보이지 않는다.
+- **공개 범위:** 신규 기록은 언어·시간대·화면 크기·플랫폼만 보낸다. IP, user-agent 원문은 보내거나 표시하지 않는다. `db/017_safe_save_log_feed.sql`은 공개 테이블 SELECT를 회수하고 최소 열만 반환하는 `safe_save_log_feed()` RPC를 추가한다. 화면은 017 적용 전에는 안전한 최소 열 SELECT로 폴백하고, 적용 후에는 RPC만 쓴다. 배포 뒤 운영 DB에 `npm --prefix pipeline run db:migrate`를 **비밀 관리 환경에서** 실행해 017을 적용할 것(현재 작업 환경에는 `DATABASE_URL` 없음).
+- **하단 탐색:** 모바일 탭은 `찾기 · 지도 · 테마 · 비교` 네 칸으로 통일했다. 테마·비교 아이콘은 소유자가 전달한 원본 SVG 경로를 심볼로 사용한다. `#/themes`는 테마별 실제 사진 썸네일 모음이며 각 카드를 누르면 해당 테마 목록으로 들어간다. 데스크톱 상단에도 같은 테마 진입점을 둔다.
+- **검증:** 발행 동기화(`publish-renewal-mockup`, `publish-explorer-pages --shell-only`), JS 문법 검사, `design-source-guard`(1), 발행본 앱 3개 원본 일치, `/log/` 인라인 JS 문법 검사, `npm --prefix pipeline test`(**367 통과·2 skip**), `check:billing`, `npm --prefix camping-atlas run build:pages`, `git diff --check`를 통과했다. 테스트에 필요한 `sharp`가 로컬 의존성 링크에서 빠진 상태는 `npm ci`로 복구해 확인했다. CUA 320px에서 테마 모음 → 계곡 목록, 4개 하단 탭, 로컬 `/log/`의 실제 39개 찜 이벤트 로드를 확인했다. DB 연결이 없는 로컬 환경에서는 017의 실제 적용 확인만 보류했다.
+
+## 📌 찜 용어 통일 · 도시공원 기본 탐색 분리 (2026-10-21, Codex)
+
+- **저장 상태:** 카드·상세 하단 막대·접근성 레이블의 `좋아요`를 모두 `찜`으로 통일했다. 저장 키는 기존 `mc-saved` 그대로라 사용자의 기존 찜 목록은 유지된다.
+- **왜 분리했나:** 현재 카탈로그의 `du=park` 도시공원은 3,139곳으로, 평균적으로 주소·좌표·공공 원천·인근 화장실은 갖췄지만 사진·사이트·요금·이용 수칙이 없는 당일 나들이 원장이다. 일반 캠핑장 3,169곳의 정보량 중앙값은 42, 공원은 18이어서 같은 기본 탐색/지도에서 함께 비교하면 판단을 흐린다.
+- **노출 계약:** 공원은 `#/theme/PARK`에서만 공원 전용 정보 카드로 전량 보인다. 일반 홈·조건 결과·지도 핀은 캠핑장 중앙값 50% 이상, 공원 고유 근거 5개 이상, 실제 사진까지 충족했을 때만 편입한다. 이름으로 직접 찾는 경우에는 상세 진입을 남긴다. 지도는 직접 이름 검색에도 품질 미달 공원을 핀으로 그리지 않는다.
+- **다음 데이터 갱신:** `collect-urban-parks.mjs`가 전국도시공원정보표준데이터의 운동·놀이·편의·문화·기타 시설군을 보존하고, `build-dayuse-osm.mjs`가 관리기관·면적·시설군·확인 가능한 공공 편의시설을 `park_info`로 넘긴다. 이 값은 취사/야영 가능을 뜻하지 않으므로 `day.cooking`·규칙은 공식 원문 전까지 `UNKNOWN`을 유지한다. 주간 `dayuse-parks-weekly`가 다음 실제 수집·발행을 수행한다.
+- **검증:** `node --check design/renewal/app.js`, 공원 수집·병합 스크립트 문법 검사, `node --test pipeline/test/design-source-guard.test.mjs`, `git diff --check` 통과. 화면 변경 뒤에는 `npm --prefix camping-atlas run build:pages` 및 CI `Rail swipe`를 다시 통과시킬 것.
 
 ## 📌 모바일 상세·추천 진열·미디어 품질 보정 (2026-10-21, Codex)
 
