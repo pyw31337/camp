@@ -3961,6 +3961,26 @@ function registryRows(c) {
   ];
 }
 // 전화번호 표기: 앞뒤 하이픈·공백을 정리한다(“1522-1861-” → “1522-1861”).
+/**
+ * 전화번호 표시 정리(t39 #45 감사, 원본 44곳): 끝 ‘-’ 떼기 · 앞 0 빠진 안심번호(507-→0507-)·지역번호(55-→055-) 보정 ·
+ * 붙어 쓴 휴대폰(010-72544579) 나누기. 자릿수가 모자라 걸 수 없는 번호(033-560-, 507-1494-419)는 null → 전화 버튼을 숨긴다.
+ */
+function telClean(raw) {
+  let t = String(raw ?? "").trim().replace(/\s+/g, "").replace(/^-+|-+$/g, "").replace(/-{2,}/g, "-");
+  if (!t) return null;
+  if (/^0\d{1,3}-\d{3,4}-\d{4}~\d$/.test(t)) return t; // 033-671-4568~9(연속 번호)
+  if (/-\d{1,3}$/.test(t)) return null; // 끝 자리가 4자리가 아니면 잘린 번호
+  if (/^507-/.test(t)) t = `0${t}`;
+  else if (/^[1-6]\d-\d{3,4}-\d{4}$/.test(t) && !/^1\d{3}/.test(t)) t = `0${t}`;
+  const d = t.replace(/[^\d]/g, "");
+  if (/^01\d{9}$/.test(d)) return `${d.slice(0, 3)}-${d.slice(3, 7)}-${d.slice(7)}`;
+  if (/^1[5-9]\d{6}$/.test(d)) return `${d.slice(0, 4)}-${d.slice(4)}`; // 대표번호 8자리
+  if (d.startsWith("050")) return /^050\d{8,9}$/.test(d) ? t : null; // 안심번호 11~12자리(적힌 모양 그대로)
+  if (d.startsWith("01")) return null; // 휴대폰인데 11자리가 아님
+  if (/^02\d{7,8}$/.test(d)) return `02-${d.slice(2, d.length - 4)}-${d.slice(-4)}`;
+  if (/^0\d{2}\d{7,8}$/.test(d)) return `${d.slice(0, 3)}-${d.slice(3, d.length - 4)}-${d.slice(-4)}`;
+  return null; // 걸 수 없는 번호
+}
 const telText = (t) => String(t ?? "").trim().replace(/^[-\s]+|[-\s]+$/g, "").replace(/\s*-\s*/g, "-").replace(/-{2,}/g, "-");
 function infoHtml(c) {
   const name = encodeURIComponent(nameOf(c).name);
@@ -5834,6 +5854,7 @@ addEventListener("error", (e) => {
     fetch(new URL(`${MOD_ROOT}conditions/forecast.json`, import.meta.url).href, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
   ]);
   S.camps = camps.filter((c) => c.status !== "폐업");
+  for (const c of S.camps) if (c.tel) { const t = telClean(c.tel); if (t !== c.tel) { c.tel_raw = c.tel; c.tel = t; } } // 표시층 정리(원본 파일은 그대로)
   S.fc = fcast;
   S.byId = new Map(S.camps.map((c) => [String(c.id), c]));
   // 중복 등록을 합친 곳(c.mg = 합쳐진 id): 예전 링크·찜도 남은 곳으로 이어 준다(QA 2026-10-21).
