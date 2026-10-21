@@ -3384,3 +3384,6 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 .stype-b > * { min-width: 0; }
 .stype-b b, .stype-b i { overflow-wrap: anywhere; }
 .stype-b .asof { white-space: normal; margin-left: 0; }
+
+/* t42u: 홈 ‘검색된 결과 N건 / 조건’ 줄과 첫 테마 레일(겨울캠핑 N · 더보기) 머리 사이가 0px로 붙어 있던 것 → 간격 */
+.res-tools + .trows { margin-top: clamp(20px, 3vw, 32px); }

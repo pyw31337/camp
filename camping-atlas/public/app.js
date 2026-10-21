@@ -3806,8 +3806,7 @@ function mediaHubHtml(d, c) {
     };
     const shorts = items.filter(isShort), longs = items.filter((x) => !isShort(x));
     const shortsUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(`${name} 캠핑 #shorts`)}`;
-    const shortsHtml = shorts.length ? `<p class="mh-sub">${platIc("youtube")}Shorts <i>${shorts.length}</i></p>
-      <div class="rail vids-shorts" data-shorts>${shorts.map((x, i) => cardHtml(x, i).replace('<article class="vid-wrap">', '<article class="vid-wrap is-short">')).join("")}</div>` : "";
+    const shortsHtml = shorts.length ? `<div class="rail vids-shorts" data-shorts>${shorts.map((x, i) => cardHtml(x, i).replace('<article class="vid-wrap">', '<article class="vid-wrap is-short">')).join("")}</div>` : "";
     const longsHtml = longs.length ? `${shorts.length ? `<p class="mh-sub">${platIc("youtube")}영상 <i>${longs.length}</i></p>` : ""}<div class="rail vids">${longs.map((x, i) => cardHtml(x, shorts.length + i)).join("")}</div>` : "";
 
     return `
@@ -5559,13 +5558,26 @@ const swallowNextClick = () => { const f = (c) => { c.preventDefault(); c.stopPr
 let swipeStart = null;
 const swipeBegin = (target, x, y) => {
   const panel = target.closest?.("[role='tabpanel']");
-  swipeStart = panel && !hScrollOf(target) ? { panel, x, y } : null;
+  if (!panel) { swipeStart = null; return; }
+  const sc = hScrollerIn(target, panel); // 칸 안 가로 캐러셀(SNS 영상 레일·주변시설 목록 등)
+  swipeStart = { panel, x, y, sc, l0: sc ? sc.scrollLeft : 0 };
 };
+// t42u: 칸 안에 가로 캐러셀이 있으면 캐러셀을 먼저 넘긴다. 이미 끝(또는 처음)에 닿은 상태에서 같은 방향으로 한 번 더 밀 때만 탭을 바꾼다.
+const hScrollerIn = (el, stop) => {
+  for (let n = el; n && n !== stop.parentElement && n !== document.body; n = n.parentElement) {
+    if (n.matches?.("input, textarea, select")) return null;
+    const ox = getComputedStyle(n).overflowX;
+    if ((ox === "auto" || ox === "scroll") && n.scrollWidth > n.clientWidth + 4) return n;
+  }
+  return null;
+};
+const atEdge = (sc, l, dir) => (dir > 0 ? l >= sc.scrollWidth - sc.clientWidth - 2 : l <= 2); // dir>0: 다음(오른쪽 끝)
 const swipeEnd = (x, y) => {
   const st = swipeStart; swipeStart = null;
   if (!st) return;
   const dx = x - st.x, dy = y - st.y;
   if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+  if (st.sc && !atEdge(st.sc, st.l0, dx < 0 ? 1 : -1)) return; // 캐러셀이 아직 넘어갈 수 있었음 → 캐러셀만
   const sec = st.panel.parentElement?.closest("section, .d-sec, .media-hub") ?? st.panel.parentElement; // 칸 자신이 section이라 한 단계 위에서 탭을 찾는다
   const tabs = [...sec.querySelectorAll("[role='tab']:not([hidden])")];
   const i = tabs.findIndex((t) => t.getAttribute("aria-selected") === "true");
