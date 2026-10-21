@@ -16,6 +16,8 @@ export const PLATFORM_HOSTS = [
   "forest.go.kr", "foresttrip.go.kr", "gocamping.or.kr", "knps.or.kr", "reservation.knps.or.kr",
   // 관광공사 소개 페이지는 운영자 홈페이지가 아니다(광고·약관 문구가 요금·안내로 잘못 들어갔다, QA 2026-10-20).
   "visitkorea.or.kr", "camppick.com", "campinghub.kr",
+  // 캠핑 안내 블로그(업장 아님): ‘전기 1,100W 기준’ 같은 일반 안내가 52곳의 업장 사실로 붙었다(t41u-2).
+  "kimgoon.kr",
 ];
 
 export function hostOf(url) {

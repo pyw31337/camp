@@ -52,6 +52,11 @@ jobs:
           fi
           B="$(mktemp -d)"; git archive "$BASE" camping-atlas/public/explore/data pipeline/registry | tar -x -C "$B"
           node pipeline/scripts/field-guard.mjs "$B" . --report /tmp/field-guard.json
+      # t41u-2: 이름표 값 상식 검사(lib/value-sanity.mjs) — 규칙 멱등 + 항목별 숨김 수가 기준(registry/value-sanity-baseline.json)보다
+      # 크게 늘면(새 데이터가 상식 밖 값을 대량으로 들여옴) 실패. 의도한 변화면 기준 파일을 함께 고친다.
+      - name: Value sanity (전기 W·요금·사이트 수·규격·시각·인원·거리)
+        working-directory: .
+        run: node pipeline/scripts/apply-value-sanity.mjs --check --baseline pipeline/registry/value-sanity-baseline.json
       # workflow_dispatch(데이터 봇 PR) 결과는 PR 검사 목록에 안 잡혀서, 같은 이름의 커밋 상태로도 남긴다(main 룰셋 필수 검사).
       - name: Report commit status for bot PRs
         if: always() && github.event_name == 'workflow_dispatch'
