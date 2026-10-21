@@ -1845,7 +1845,9 @@ const ymdKst = (t) => new Date(t).toLocaleDateString("sv-SE", { timeZone: "Asia/
 const mdKst = (s) => new Date(s).toLocaleDateString("ko-KR", { month: "numeric", day: "numeric", timeZone: "Asia/Seoul" }).replace(/\.\s?/g, "/").replace(/\/$/, "");
 const THANKQ_VIEW = (cseq, d) => `https://m.thankqcamping.com/resv/view.hbb?cseq=${encodeURIComponent(cseq)}${d ? `&res_dt=${d.replaceAll("-", "")}` : ""}`;
 function listParams() {
-  const q = new URLSearchParams(location.search);
+  // 해시 라우팅이면 해시에서, 아니면 location.search에서 쿼리 추출
+  const src = location.hash.startsWith("#/") ? location.hash.slice(location.hash.indexOf("?") + 1) : location.search.slice(1);
+  const q = new URLSearchParams(src || "");
   const area = q.get("area");
   return { area: area && AREAS.some(([k]) => k === area) ? area : "all", q: q.get("q") ?? "", cond: condFromParams(q), fee: q.get("fee") ?? "", stype: q.get("stype") ?? "" };
 }
@@ -1953,7 +1955,7 @@ function listView() {
   const p = listParams();
   S.area = p.cond.sido.length ? "all" : p.area; S.q = p.q;
   S.cond = p.cond; if (["u3", "3to5", "5to7", "7to10", "10to20", "o20", "o7", ""].includes(p.fee)) S.feeBand = p.fee;
-  S.condStrict = new URLSearchParams(location.search).get("strict") === "1";
+  const qs = location.hash.startsWith("#/") ? location.hash.slice(location.hash.indexOf("?") + 1) : location.search.slice(1); S.condStrict = new URLSearchParams(qs || "").get("strict") === "1";
   // 목록 화면에 보이는 조건만 결과를 바꾼다.
   S.theme = null; S.quick.clear();
   S.stype = p.stype || "";
