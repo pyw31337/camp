@@ -42,7 +42,7 @@ export function shortsMatch(camp, title, opt = {}) {
   if (alts.length > 1) return alts.some((n) => matchOne({ ...camp, name: n }, title, opt));
   return matchOne(camp, title, opt);
 }
-function matchOne(camp, title, { dup = false, others = [] } = {}) {
+function matchOne(camp, title, { dup = false, others = [], stems: opt_stems = [] } = {}) {
   const core = cmp(distinctiveTokens(camp?.name, camp?.address?.sigungu).join(""));
   const t = cmp(title);
   if (!core || core.length < 2 || !t.includes(core)) return false;
@@ -56,12 +56,16 @@ function matchOne(camp, title, { dup = false, others = [] } = {}) {
   const placed = core.length >= 5 && stem && t.includes(stem);
   if (!proper && !placed) return false;
   // 핵심어가 2자(“노을”)이거나 3자인데 고유명 형태가 아니거나 같은 이름이 전국에 또 있으면 제목에 시군구명도 있어야 한다.
+  // 제목이 다른 시·군 이름을 핵심어 바로 앞에 붙이면(“진천 더빌리지”, 우리는 태안) 다른 곳이다.
+  if ((opt_stems ?? []).some((st) => st && st !== stem && st.length >= 2 && t.includes(st + core))) return false;
   if ((dup || core.length <= 2 || (core.length === 3 && !proper)) && !(stem && t.includes(stem))) return false;
   if (others.some((o) => o && o.length >= 3 && o !== core && !core.includes(o) && !o.includes(core) && t.includes(o))) return false;
   return true;
 }
 /** 캐시된 숏츠를 엄격 판정으로 다시 거른다(재검색 없이). */
-export const refilterShorts = (camp, shorts, opt) => (shorts ?? []).filter((s) => shortsMatch(camp, s?.title, opt));
+export const refilterShorts = (camp, shorts, opt = {}) => (shorts ?? []).filter((s) => !(opt.exclude ?? []).includes(s?.yt) && shortsMatch(camp, s?.title, opt));
+/** registry/shorts-exclude.json → { id: [yt…] } */
+export const excludeMap = (j) => Object.fromEntries(Object.entries(j ?? {}).filter(([k]) => !k.startsWith("_")).map(([k, v]) => [k, (v ?? []).map((x) => x?.yt ?? x)]));
 
 const ctxOf = (camp, others = []) => ({ tokens: distinctiveTokens(camp?.name, camp?.address?.sigungu), stem: regionStem(camp?.address?.sigungu), others });
 

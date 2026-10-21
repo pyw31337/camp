@@ -7,8 +7,8 @@ import { themeCatalog } from "../lib/themes.mjs";
 import { buildBookingGuide } from "../lib/booking-intel.mjs";
 import { buildOpenings } from "../lib/openings.mjs";
 import { nameCore, refilterSocial } from "../lib/social-search.mjs";
-import { fillShorts, refilterShorts } from "../lib/shorts-search.mjs";
-import { nameCore as shortsNameCore } from "../lib/social-search.mjs";
+import { excludeMap, fillShorts, refilterShorts } from "../lib/shorts-search.mjs";
+import { nameCore as shortsNameCore, regionStem as shortsStem } from "../lib/social-search.mjs";
 import { allocateUnique, dhashFile, photoKey, uniqueBy, uniqueByHash } from "../lib/photo-dedupe.mjs";
 import { SEOUL_DATASET_URL, matchSeoulToCampgrounds } from "../lib/seoul-yeyak.mjs";
 import { commonOperatorTexts, mergeLogs, nameCoreOf, reviewDetailTexts } from "../lib/detail-text-review.mjs";
@@ -280,11 +280,13 @@ if (carried) console.log(`직전 발행본에서 이어 받은 글·사진(이�
   const campOf = (x) => ({ name: x?.name, address: { sigungu: x?.sigungu ?? x?.address?.sigungu } });
   const coreN = new Map();
   for (const x of records) { const k = shortsNameCore(x.name, campOf(x).address.sigungu).toLowerCase(); coreN.set(k, (coreN.get(k) ?? 0) + 1); }
+  const shortsExcl = excludeMap(await read("../registry/shorts-exclude.json"));
+  const shortsStems = [...new Set(records.map((x) => shortsStem(x.sigungu)).filter((x) => x && x.length >= 2))];
   for (const [id, r] of Object.entries(shortsOut?.campgrounds ?? {})) {
     const d = details[id], rec0 = recById.get(String(id));
     if (!d || !rec0 || !r?.shorts?.length) continue;
     const c = campOf(rec0);
-    const sh = refilterShorts(c, r.shorts, { dup: (coreN.get(shortsNameCore(c.name, c.address.sigungu).toLowerCase()) ?? 0) > 1 });
+    const sh = refilterShorts(c, r.shorts, { dup: (coreN.get(shortsNameCore(c.name, c.address.sigungu).toLowerCase()) ?? 0) > 1, stems: shortsStems, exclude: shortsExcl[id] ?? [] });
     if (!sh.length) continue;
     const before = d.videos?.length ?? 0;
     const f = fillShorts(d.videos ?? [], sh);

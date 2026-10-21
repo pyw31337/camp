@@ -79,3 +79,12 @@ test("shortsMatch: 고유명 + 캠핑 맥락이면 남긴다", () => {
   assert.equal(shortsMatch(c("합천영상테마파크", "합천군"), "캠핑대마왕 합천영상테마파크 아이와 강추 #shorts"), true);
   assert.deepEqual(refilterShorts(c("좋은 카라반", "밀양시"), [{ title: "좋은 카라반 #캠핑 shorts" }]), []);
 });
+test("숏츠: 다른 시·군 이름이 핵심어 앞에 붙으면 제외, exclude 목록 제외 (100278 진천 더빌리지)", async () => {
+  const { shortsMatch, refilterShorts, excludeMap } = await import("../lib/shorts-search.mjs");
+  const camp = { name: "더빌리지캠핑장", address: { sigungu: "태안군" } };
+  assert.equal(shortsMatch(camp, "캠핑계의 에르메스 진천 더빌리지 캠핑장 #shorts", { stems: ["진천", "태안"] }), false);
+  assert.equal(shortsMatch(camp, "태안 더빌리지 캠핑장 #shorts", { stems: ["진천", "태안"] }), true);
+  const ex = excludeMap({ _note: "x", 100278: [{ yt: "MwVOrtKjy9M" }] });
+  assert.deepEqual(ex, { 100278: ["MwVOrtKjy9M"] });
+  assert.deepEqual(refilterShorts(camp, [{ yt: "MwVOrtKjy9M", title: "태안 더빌리지 캠핑장" }], { exclude: ex["100278"] }), []);
+});
