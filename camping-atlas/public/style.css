@@ -3324,3 +3324,6 @@ html, body, #view { min-height: 100%; }
 /* 지도 빠른 조건 칩: 공통 캡슐 토큰(투명 바탕)이 지도 위에서는 꺼진 것처럼 흐려 보였다 → 지도 칸에서만 토큰을 흰 바탕·진한 글자로(t39 #22 후속). 켜짐(검정)은 공통 그대로. */
 .map-panel { --cap-bg: var(--paper); --cap-ink: var(--ink); --cap-line: rgba(16, 20, 20, .14); }
 .map-panel .chip[data-mquick]:not([aria-pressed="true"]) { box-shadow: 0 1px 4px rgba(0, 0, 0, .12) !important; }
+
+/* t39 #30: 비교 화면 모바일에서 찜 칩을 줄바꿈해 모두 보이기 */
+@media (max-width: 759px) { .cmp-page .picks { flex-wrap: wrap; overflow: visible; } .cmp-page .picks .pick span { max-width: 9em; } }
