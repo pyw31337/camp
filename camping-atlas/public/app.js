@@ -5101,13 +5101,8 @@ async function savedView() {
   const pickedCount = S.pick.length;
 
   const cardsHtml = saved.map((c, i) => {
-    const isPicked = S.pick.includes(String(c.id));
-    return `<div class="saved-card-wrap${isPicked ? " is-picked" : ""}" data-saved-wrap="${esc(c.id)}">
+    return `<div class="saved-card-wrap" data-saved-wrap="${esc(c.id)}">
       <div class="saved-card-top-bar">
-        <button type="button" class="btn-pick-toggle${isPicked ? " on" : ""}" data-pick="${esc(c.id)}" aria-pressed="${isPicked}">
-          ${ic(isPicked ? "check" : "plus")}
-          <span>${isPicked ? "비교 중" : "비교 담기"}</span>
-        </button>
         <span class="saved-order-label">#${i + 1}</span>
       </div>
       ${card(c, i)}
@@ -5118,25 +5113,12 @@ async function savedView() {
     <div class="sec-head big">
       <div>
         <h1>내가 찜한 <em>캠핑장</em></h1>
-        <p class="sec-sub">찜한 캠핑장을 갯수 제한 없이 모아보고, 2~5곳을 골라 스펙을 나란히 비교할 수 있어요.</p>
+        <p class="sec-sub">찜한 캠핑장을 모아봅니다. 비교하려면 비교 페이지에서 선택하세요.</p>
       </div>
       <div class="saved-head-tools">
         <span class="saved-count-pill">총 <b>${saved.length}</b>곳 찜함</span>
-        <a class="btn primary btn-sm saved-cmp-link" href="#/compare">
-          ${ic("compare")} <span>비교하기</span> <b class="nav-count" data-pick-badge>${pickedCount}</b>
-        </a>
-      </div>
-    </div>
-
-    <div class="saved-control-bar">
-      <div class="saved-control-info">
-        <span class="saved-control-title">비교 선택: <b data-saved-pick-count>${pickedCount}</b> / 5곳</span>
-        <span class="saved-control-desc">${pickedCount < 2 ? "2곳 이상 선택하면 나란히 비교할 수 있어요" : "선택한 캠핑장의 상세 스펙을 비교해보세요"}</span>
-      </div>
-      <div class="saved-control-actions">
-        ${pickedCount > 0 ? `<button type="button" class="btn ghost btn-sm" data-clear-pick>선택 초기화</button>` : ""}
-        <a class="btn primary btn-sm" href="#/compare" data-compare-submit ${pickedCount < 2 ? 'data-disabled="true"' : ""}>
-          ${pickedCount >= 2 ? `${pickedCount}곳 비교하기` : "비교하기"}
+        <a class="btn primary btn-sm" href="/camp/compare">
+          ${ic("compare")} <span>비교하러 가기</span>
         </a>
       </div>
     </div>
@@ -5144,23 +5126,6 @@ async function savedView() {
     <div class="cards-grid saved-grid">
       ${cardsHtml}
     </div>
-
-    ${pickedCount > 0 ? `
-    <div class="saved-floating-dock">
-      <div class="saved-dock-inner">
-        <div class="saved-dock-info">
-          <span>비교 대상: <b data-dock-count>${pickedCount}</b> / 5곳 선택</span>
-          <small>${pickedCount < 2 ? "2곳 이상 선택 시 비교 가능" : "조건과 스펙을 한눈에 대조하세요"}</small>
-        </div>
-        <div class="saved-dock-actions">
-          <button type="button" class="btn ghost btn-sm" data-clear-pick>초기화</button>
-          <a class="btn primary saved-dock-go" href="#/compare" data-compare-submit ${pickedCount < 2 ? 'data-disabled="true"' : ""}>
-            ${ic("compare")} <span>${pickedCount >= 2 ? `${pickedCount}곳 비교하기` : "비교하기"}</span>
-          </a>
-        </div>
-      </div>
-    </div>
-    ` : ""}
   </section>`;
 }
 
