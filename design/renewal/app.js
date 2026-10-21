@@ -5368,13 +5368,14 @@ document.addEventListener("pointerdown", (e) => {
   const x0 = e.clientX, l0 = sc.scrollLeft; let moved = false;
   const move = (ev) => { const dx = ev.clientX - x0; if (!moved && Math.abs(dx) > 5) { moved = true; sc.classList.add("is-dragging"); } if (moved) { ev.preventDefault(); sc.scrollLeft = l0 - dx; } };
   const up = () => {
-    removeEventListener("pointermove", move); removeEventListener("pointerup", up);
+    removeEventListener("pointermove", move, true); removeEventListener("pointerup", up, true);
     sc.classList.remove("is-dragging");
     if (moved) swallowNextClick();
   };
-  addEventListener("pointermove", move); addEventListener("pointerup", up);
+  addEventListener("pointermove", move, true); addEventListener("pointerup", up, true);
 });
-document.addEventListener("dragstart", (e) => { if (hScrollOf(e.target)) e.preventDefault(); });
+// 링크·이미지 기본 끌기가 시작되면 포인터 이벤트가 끊겨 스와이프·끌기가 안 된다 → 가로 스크롤·탭 칸 안에서는 막는다.
+document.addEventListener("dragstart", (e) => { if (hScrollOf(e.target) || e.target.closest?.("[role='tabpanel']")) e.preventDefault(); });
 // 탭으로 나뉜 칸(주변시설 마트→정육→약국…, SNS 플랫폼): 내용 칸을 좌우로 밀면 이웃 탭으로 바뀐다.
 const swallowNextClick = () => { const f = (c) => { c.preventDefault(); c.stopPropagation(); }; addEventListener("click", f, { capture: true, once: true }); setTimeout(() => removeEventListener("click", f, { capture: true }), 450); };
 let swipeStart = null;
@@ -5387,7 +5388,7 @@ const swipeEnd = (x, y) => {
   if (!st) return;
   const dx = x - st.x, dy = y - st.y;
   if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
-  const sec = st.panel.closest("section") ?? st.panel.parentElement;
+  const sec = st.panel.parentElement?.closest("section, .d-sec, .media-hub") ?? st.panel.parentElement; // 칸 자신이 section이라 한 단계 위에서 탭을 찾는다
   const tabs = [...sec.querySelectorAll("[role='tab']:not([hidden])")];
   const i = tabs.findIndex((t) => t.getAttribute("aria-selected") === "true");
   const n = tabs[i + (dx < 0 ? 1 : -1)];
@@ -5395,10 +5396,11 @@ const swipeEnd = (x, y) => {
   n.click(); n.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
   swallowNextClick();
 };
-document.addEventListener("touchstart", (e) => { const t = e.touches[0]; if (e.touches.length === 1) swipeBegin(e.target, t.clientX, t.clientY); }, { passive: true });
-document.addEventListener("touchend", (e) => { const t = e.changedTouches[0]; swipeEnd(t.clientX, t.clientY); }, { passive: true });
-document.addEventListener("pointerdown", (e) => { if (e.pointerType === "mouse" && e.button === 0) swipeBegin(e.target, e.clientX, e.clientY); });
-document.addEventListener("pointerup", (e) => { if (e.pointerType === "mouse") swipeEnd(e.clientX, e.clientY); });
+addEventListener("touchstart", (e) => { const t = e.touches[0]; if (e.touches.length === 1) swipeBegin(e.target, t.clientX, t.clientY); }, { passive: true, capture: true });
+addEventListener("touchend", (e) => { const t = e.changedTouches[0]; swipeEnd(t.clientX, t.clientY); }, { passive: true, capture: true });
+// 다른 핸들러가 전파를 멈춰도 받도록 캡처 단계에서 듣는다.
+addEventListener("pointerdown", (e) => { if (e.pointerType === "mouse" && e.button === 0) swipeBegin(e.target, e.clientX, e.clientY); }, true);
+addEventListener("pointerup", (e) => { if (e.pointerType === "mouse") swipeEnd(e.clientX, e.clientY); }, true);
 // ── 라우터 ───────────────────────────────────────────────────
 const cleanup = [];
 let lastRoute = "";
