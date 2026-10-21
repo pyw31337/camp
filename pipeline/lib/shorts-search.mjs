@@ -24,10 +24,49 @@ export function isoDurationSec(s) {
   return d * 86400 + h * 3600 + mi * 60 + se;
 }
 
+const cmp = (x) => stripHtml(x).toLowerCase().replace(/[\s#@·.,!?'"()[\]\-_/|:~]+/g, "");
+const SHORT_CAMP = /(캠핑|야영|글램핑|글램|카라반|캠프|텐트|차박|노지|오토캠|불멍|캠퍼|camp|glamp)/i;
+// 이름 자체가 장소 일반명(공원·물놀이장·호수…)이면 그 장소 영상과 섞인다 → 핵심어 바로 뒤에 캠핑 관련어가 붙어야 한다.
+const CAMP_NAME_RE = /([가-힣a-z0-9]{2,8}?)(?:오토)?(?:캠핑장|야영장|글램핑장|캠프장)/g;
+const esc = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const PLACEY = /(공원|유원지|물놀이장|수영장|해수욕장|해변|호수|저수지|댐|계곡|강변|둔치|광장|패드|놀이터|숲|섬|마을)$/;
+const NEAR = (core) => new RegExp(`${core.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}.{0,3}(캠핑|야영|글램핑|카라반|캠프|camp)`, "i");
+/**
+ * 숏츠 엄격 판정(t39 #36 정밀도 보강): 첫 수집에서 “물놀이장·호수·생태공원·채널명” 오인이 나와 기준을 올렸다.
+ * ① 핵심어가 ‘제목’에 그대로(채널명·설명만으로는 안 됨) ② 제목에 캠핑 맥락 ③ 핵심어 3자 이하·장소 일반명이면 핵심어 바로 뒤 캠핑어
+ * ④ 같은 이름(핵심어) 캠핑장이 전국에 둘 이상이면 제목에 시군구명도 ⑤ 제목에 같은 지역 다른 캠핑장 핵심어가 있으면 제외
+ */
+export function shortsMatch(camp, title, opt = {}) {
+  // “임진각 평화누리 / 평화누리캠핑장”처럼 별칭이 있으면 하나라도 맞으면 된다.
+  const alts = String(camp?.name ?? "").split("/").map((x) => x.trim()).filter(Boolean);
+  if (alts.length > 1) return alts.some((n) => matchOne({ ...camp, name: n }, title, opt));
+  return matchOne(camp, title, opt);
+}
+function matchOne(camp, title, { dup = false, others = [] } = {}) {
+  const core = cmp(distinctiveTokens(camp?.name, camp?.address?.sigungu).join(""));
+  const t = cmp(title);
+  if (!core || core.length < 2 || !t.includes(core)) return false;
+  if (!SHORT_CAMP.test(stripHtml(title))) return false;
+  const stem = cmp(regionStem(camp?.address?.sigungu));
+  // 제목이 다른 캠핑장 이름(“한탄강오토캠핑장”)을 달고 있으면 뺀다.
+  for (const m of t.matchAll(CAMP_NAME_RE)) { const pre = m[1]; if (pre !== core && pre !== stem + core && !(core.length >= 4 && pre.endsWith(core)) && !(pre.length < core.length && core.endsWith(pre))) return false; }
+  // ① 고유명 형태: 핵심어 바로 뒤에 캠핑장 접미어(“도깨비캠핑장”, “합강오토캠핑장”) — 일반어(좋은·숲에·우산)만 겹친 제목은 여기서 걸러진다.
+  const proper = new RegExp(`${esc(core)}(오토)?(캠핑장|야영장|글램핑장|글램핑|캠프장|오토캠핑)`).test(t);
+  // ② 또는 핵심어가 5자 이상이고 제목에 시군구명도 있다(“구미 동락공원”, “합천영상테마파크”).
+  const placed = core.length >= 5 && stem && t.includes(stem);
+  if (!proper && !placed) return false;
+  // 핵심어가 2자(“노을”)이거나 3자인데 고유명 형태가 아니거나 같은 이름이 전국에 또 있으면 제목에 시군구명도 있어야 한다.
+  if ((dup || core.length <= 2 || (core.length === 3 && !proper)) && !(stem && t.includes(stem))) return false;
+  if (others.some((o) => o && o.length >= 3 && o !== core && !core.includes(o) && !o.includes(core) && t.includes(o))) return false;
+  return true;
+}
+/** 캐시된 숏츠를 엄격 판정으로 다시 거른다(재검색 없이). */
+export const refilterShorts = (camp, shorts, opt) => (shorts ?? []).filter((s) => shortsMatch(camp, s?.title, opt));
+
 const ctxOf = (camp, others = []) => ({ tokens: distinctiveTokens(camp?.name, camp?.address?.sigungu), stem: regionStem(camp?.address?.sigungu), others });
 
 /** 카카오 vclip 문서 → 숏츠 항목(YouTube이고, 숏츠이고, 이 캠핑장을 가리키는 것만) */
-export function shortsFromVclip(camp, docs, { others = [] } = {}) {
+export function shortsFromVclip(camp, docs, { others = [], dup = false } = {}) {
   const ctx = ctxOf(camp, others);
   const out = [];
   for (const d of docs ?? []) {
@@ -36,14 +75,14 @@ export function shortsFromVclip(camp, docs, { others = [] } = {}) {
     const dur = v.dur;
     const short = /\/shorts\//.test(v.url) || (dur != null && dur <= SHORTS_MAX_SEC);
     if (!short) continue;
-    if (!isRelevant({ title: d?.title, contents: "", src: d?.author }, ctx)) continue;
+    if (!isRelevant({ title: d?.title, contents: "", src: d?.author }, ctx) || !shortsMatch(camp, d?.title, { dup, others })) continue;
     out.push({ ...v, kind: "short", via: "daum_vclip" });
   }
   return out;
 }
 
 /** YouTube Data API search 항목 + 길이 맵 → 숏츠 항목 */
-export function shortsFromYoutube(camp, items, durById = {}, { others = [] } = {}) {
+export function shortsFromYoutube(camp, items, durById = {}, { others = [], dup = false } = {}) {
   const ctx = ctxOf(camp, others);
   const out = [];
   for (const it of items ?? []) {
@@ -51,7 +90,7 @@ export function shortsFromYoutube(camp, items, durById = {}, { others = [] } = {
     if (!id) continue;
     const dur = durById[id];
     if (!(dur > 0 && dur <= SHORTS_MAX_SEC)) continue;
-    if (!isRelevant({ title: sn.title, contents: sn.description, src: sn.channelTitle }, ctx)) continue;
+    if (!isRelevant({ title: sn.title, contents: sn.description, src: sn.channelTitle }, ctx) || !shortsMatch(camp, sn.title, { dup, others })) continue;
     out.push({
       title: stripHtml(sn.title).slice(0, 120), url: `https://www.youtube.com/shorts/${id}`, thumb: sn.thumbnails?.high?.url ?? sn.thumbnails?.medium?.url ?? null,
       dur, author: stripHtml(sn.channelTitle) || null, date: String(sn.publishedAt ?? "").slice(0, 10) || null, yt: id, kind: "short", via: "youtube_api",
