@@ -4,6 +4,15 @@ const base = (process.argv[2] || "http://127.0.0.1:8765/").replace(/#.*$/, "");
 const id = process.env.DETAIL_ID || "7253";
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 const fails = [];
+// 배포 원본(design/renewal)도 확인: 서비스 화면은 여기서 만들어진다.
+{
+  const { readFileSync } = await import("node:fs");
+  const root = new URL("../../", import.meta.url);
+  const html = readFileSync(new URL("design/renewal/index.html", root), "utf8");
+  const css = readFileSync(new URL("design/renewal/style.css", root), "utf8");
+  if (/<path d="M0 0h\d+v\d+H0z" fill="none"\/>/.test(html)) fails.push("design/renewal/index.html: 아이콘에 투명 크기 사각형이 남아 있음");
+  if (!css.includes('.ic path[d^="M0 0h"][fill="none"] { stroke: none; }')) fails.push("design/renewal/style.css: 아이콘 사각형 선 끄기 규칙 없음");
+}
 for (const [w, h, tag] of [[1366, 900, "1366"], [320, 800, "320"]]) {
   const page = await browser.newPage({ viewport: { width: w, height: h } });
   await page.goto(`${base}#/c/${id}`, { waitUntil: "networkidle" });
@@ -22,7 +31,7 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [320, 800, "320"]]) {
       const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
       for (const n of [...clone.childNodes]) g.appendChild(n);
       svg.appendChild(g);
-      for (const p of g.querySelectorAll('path[fill="none"]')) if (/^M0 0h(\d+)v\1H0z$/.test(p.getAttribute("d") || "")) { const s = getComputedStyle(p).stroke; if (s && s !== "none") out.push(`${u.getAttribute("href")} stroke=${s}`); }
+      for (const p of g.querySelectorAll('path[fill="none"]')) if (/^M0 0h\d+v\d+H0z$/.test(p.getAttribute("d") || "")) { const s = getComputedStyle(p).stroke; if (s && s !== "none") out.push(`${u.getAttribute("href")} stroke=${s}`); }
       g.remove();
     }
     return [...new Set(out)];
