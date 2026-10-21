@@ -3375,3 +3375,9 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 /* t39 #42 최근 본 캠핑장 */
 .saved-page .recent-sec { margin-top: clamp(40px, 5vw, 56px); }
 .saved-page .recent-sec .sec-head h2 { font-size: clamp(20px, 2.2vw, 24px); font-weight: 800; }
+
+/* t39 #45 감사: 320px에서 사이트 타입 카드의 긴 출처 글자(“(2025.10.20 기준)”)가 칸 밖으로 넘쳐 가로 스크롤 생김 → 줄바꿈 허용 */
+.stype-b { grid-template-columns: minmax(0, 1fr); }
+.stype-b > * { min-width: 0; }
+.stype-b b, .stype-b i { overflow-wrap: anywhere; }
+.stype-b .asof { white-space: normal; margin-left: 0; }

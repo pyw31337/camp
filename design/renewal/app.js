@@ -2092,9 +2092,15 @@ function themesView() {
 // ── 화면: 시·도 / 시·군·구 랜딩(t39 #40) ─────────────────────────
 // /region/경기도, /region/경기도/가평군 — 그 지역 캠핑장 목록(카드 양식은 테마 화면과 같음) + 아래 시·군·구 바로가기.
 // 검색·공유용 정적 미리보기 페이지는 scripts/publish-explorer-pages.mjs가 같은 주소에 만든다.
-const regionHref = (sido, sgg) => `${APP_BASE}region/${encodeURIComponent(sido)}${sgg ? `/${encodeURIComponent(sgg)}` : ""}`;
+const regionHref = (sido, sgg) => `${APP_BASE}region/${encodeURIComponent(sido)}/${sgg ? `${encodeURIComponent(sgg)}/` : ""}`; // 끝 ‘/’: 정적 페이지로 바로(301 없이)
 // 시·도는 짧은 이름(경기·서울…)으로 맞춘다: /region/경기도 도 /region/경기 와 같은 화면.
 const regionPool = (sido, sgg) => { const sd = sidoShort(sido); return S.camps.filter((c) => sidoShort(c.sido) === sd && (!sgg || c.sigungu === sgg) && !c.du && coreBrowseEligible(c)); };
+/** UTF-8 바이트를 Latin-1로 잘못 읽은 글자(“ê²½”)면 되돌린다. 아니면 그대로. */
+function fixMojibake(x) {
+  const t = String(x ?? "");
+  if (!/[\u00c0-\u00ff][\u0080-\u00bf]/.test(t) || /[\uac00-\ud7a3]/.test(t)) return t;
+  try { return decodeURIComponent(escape(t)); } catch { return t; }
+}
 function regionView(sido, sgg) {
   const all = regionPool(sido, "");
   const list = sgg ? all.filter((c) => c.sigungu === sgg) : all;
@@ -5550,7 +5556,13 @@ async function render() {
   document.body.dataset.view = name;
   if (name === "home") { v.innerHTML = homeView(); bindHome(); }
   else if (name === "themes") { v.innerHTML = themesView(); }
-  else if (name === "region") { const [sd, sg] = h.slice(9).split("?")[0].split("/").map((x) => { try { return decodeURIComponent(x); } catch { return x; } }); v.innerHTML = regionView(sd, sg); bindRegion(sd, sg); }
+  else if (name === "region") {
+    // GitHub Pages는 끝 ‘/’ 없는 주소를 301로 돌려보내며 Location에 한글을 원시 UTF-8로 넣는다 → 브라우저가 Latin-1로 읽어 “ê²½ê¸°”가 된다(t39 #45 감사). 되돌려 읽고 주소도 고친다.
+    const [sd, sg] = h.slice(9).split("?")[0].split("/").filter(Boolean).map((x) => fixMojibake((() => { try { return decodeURIComponent(x); } catch { return x; } })()));
+    const clean = `${APP_BASE}region/${encodeURIComponent(sd ?? "")}/${sg ? `${encodeURIComponent(sg)}/` : ""}`;
+    if (sd && decodeURIComponent(location.pathname) !== decodeURIComponent(clean)) history.replaceState(history.state, "", clean + location.search);
+    v.innerHTML = regionView(sd, sg); bindRegion(sd, sg);
+  }
   else if (name === "theme") { const tk = decodeURIComponent(h.slice(8).split("?")[0]); v.innerHTML = themeView(tk); bindTheme(tk); }
   else if (name === "detail") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await detailView(decodeURIComponent(h.slice(8).split("?")[0])); bindDetail(); }
   else if (name === "saves-log") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await savesLogView(); }
