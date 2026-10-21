@@ -3375,3 +3375,6 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 /* t39 #42 최근 본 캠핑장 */
 .saved-page .recent-sec { margin-top: clamp(40px, 5vw, 56px); }
 .saved-page .recent-sec .sec-head h2 { font-size: clamp(20px, 2.2vw, 24px); font-weight: 800; }
+/* t39 #43 예약 오픈 캘린더 알림 */
+.bo-highlight .bo-ics { margin-left: auto; flex: none; white-space: nowrap; }
+@media (max-width: 759px) { .bo-highlight { flex-wrap: wrap; } .bo-highlight .bo-ics { margin-left: 0; } }
