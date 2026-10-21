@@ -3338,3 +3338,16 @@ html, body, #view { min-height: 100%; }
 /* t39 #35: 상세 섹션 사이 간격 넓힘(PC 40→64px, 모바일 42→54px) */
 body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 @media (max-width: 759px) { body[data-view="detail"] .d-main { gap: 54px; } }
+
+/* t39 #36: 유튜브 숏츠 — 세로(9:16) 카드 줄을 일반 영상 위에 따로 */
+.media-hub .mh-sub { display: flex; align-items: center; gap: 6px; margin: 4px 0 8px; font-size: .86rem; font-weight: 800; color: var(--ink-2); }
+.media-hub .mh-sub i { font-style: normal; color: var(--ink-3); font-weight: 700; }
+.media-hub .mh-sub .plat-ic { width: 18px; height: 18px; }
+.media-hub .vids + .mh-sub, .media-hub .vids-shorts + .mh-sub { margin-top: 16px; }
+.rail.vids-shorts { gap: 10px; padding-bottom: 6px; }
+.vid-wrap.is-short { width: 136px; }
+.vid-wrap.is-short .vid img, .vid-wrap.is-short .vid-noimg { width: 136px; aspect-ratio: 9 / 16; }
+.vid-wrap.is-short .vid-play { left: 44px; top: 97px; }
+.vid-wrap.is-short .vid.playing { width: min(270px, 70vw); }
+.vid-wrap.is-short .vid.playing iframe { aspect-ratio: 9 / 16; }
+.media-hub .mh-more-wrap { flex-wrap: wrap; gap: 8px; }
