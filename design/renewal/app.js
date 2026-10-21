@@ -255,7 +255,7 @@ const filled = (f) => f && (f.g === "v" || f.g === "c");
 // 불가사항(전기·장작·숯·온수·반려동물 불가 등)은 같은 아이콘에 공통 빨간 배지로 하나씩(build-house-rules.mjs → c.nr).
 const pos = (f) => f && f.g;
 const NO_TAGS = {
-  NO_POWER: ["전기 불가", "bolt"], HIGH_POWER: ["고출력 전열기구 금지", "bolt"], NO_FIRE: ["화기 불가", "flame"], NO_FIREWOOD: ["장작 불가", "flame"],
+  NO_POWER: ["전기 불가", "bolt"], HIGH_POWER: ["고출력 전열기구 금지", "bolt"], NO_FIRE: ["화기 불가", "flame"], NO_FIREWOOD: ["장작 불가", "firewood"],
   NO_CHARCOAL: ["숯 불가", "flame"], BYO_FUEL: ["개인 장작·숯 반입 금지", "flame"], BYO_PIT: ["개인 화로대 금지", "flame"], NO_HOT_WATER: ["온수 불가", "drop"],
   NO_PET: ["반려견 불가", "paw"], BIG_DOG: ["반려견 제한", "paw"], NO_CARAVAN: ["개인 카라반·트레일러 불가", "caravan"], NO_EXTRA_TENT: ["추가 텐트 불가", "tent"],
   NO_FIREWORKS: ["폭죽 금지", "spark"], NO_LOUD: ["음향기기 금지", "broadcast"], NO_MINOR: ["미성년자 단독 불가", "alert"], NO_VISITOR: ["방문객 불가", "door"], NO_WINTER: ["동계 휴장", "calendar"],
@@ -292,7 +292,7 @@ function badges(c, max = 4, maxNo = 2, { rows = false } = {}) {
   const f = facts(c), out = [];
   if (INVITE_OK_SET.has(String(c.id))) out.push(`<span class="bdg bdg-teal">${ic("users")}초대가능</span>`);
   if (!rows && pos(f.power) && f.power.ok && f.power.w) out.push(`<span class="bdg bdg-volt">${ic("bolt")}${esc(f.power.short)}</span>`);
-  if (!rows && pos(f.fire) && f.fire.kind === "FIREWOOD_OK") out.push(`<span class="bdg bdg-flame">${ic("flame")}장작</span>`);
+  if (!rows && pos(f.fire) && f.fire.kind === "FIREWOOD_OK") out.push(`<span class="bdg bdg-flame">${ic("firewood")}장작</span>`);
   if (!rows && pos(f.park) && f.park.ok === true) out.push(`<span class="bdg bdg-cobalt">${ic("car")}텐트 옆</span>`);
   if (pos(f.pet) && f.pet.ok) out.push(`<span class="bdg bdg-ink">${ic("paw")}반려견</span>`);
   const no = noKeys(c).filter((k) => NO_CARD.includes(k) && !(rows && ROW_NO.has(k))).slice(0, maxNo).map(noBadge);
@@ -410,7 +410,7 @@ const AREAS = [["all", "전국"], ["서울·경기", "서울·경기"], ["강원
 const AREA_OF = { 서울: "서울·경기", 인천: "서울·경기", 경기: "서울·경기", 강원: "강원", 충북: "충청", 충남: "충청", 대전: "충청", 세종: "충청", 전북: "전라", 전남: "전라", 광주: "전라", 경북: "경상", 경남: "경상", 대구: "경상", 부산: "경상", 울산: "경상", 제주: "제주" };
 const QUICK = {
   power: { label: "전기", icon: "bolt", cls: "volt", test: (c) => pos(facts(c).power) && facts(c).power.ok },
-  fire: { label: "장작", icon: "flame", cls: "flame", test: (c) => pos(facts(c).fire) && facts(c).fire.kind === "FIREWOOD_OK" },
+  fire: { label: "장작", icon: "firewood", cls: "flame", test: (c) => pos(facts(c).fire) && facts(c).fire.kind === "FIREWOOD_OK" },
   park: { label: "텐트 옆 주차", icon: "car", cls: "cobalt", test: (c) => pos(facts(c).park) && facts(c).park.ok === true },
   pet: { label: "반려견", icon: "paw", cls: "ink", test: (c) => pos(facts(c).pet) && facts(c).pet.ok },
   glamp: { label: "글램핑", icon: "glamping", cls: "glamp", test: (c) => stayKinds(c).includes("GLAMPING") },
