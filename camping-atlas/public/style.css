@@ -3298,3 +3298,9 @@ html, body, #view { min-height: 100%; }
 .card-cta .dock-reserve-group.rsv-inline { gap: 0; }
 /* 예약 목록 글자는 자르지 않는다(말줄임 금지, 영우 님 2026-10-21) */
 .dock-menu-text b { white-space: normal; overflow: visible; text-overflow: clip; overflow-wrap: anywhere; }
+
+/* 모바일 상세: 로고만 있는 머리 줄을 없애고 ‘< 지역 · 찜 · 공유’ 줄이 맨 위(영우 님 2026-10-21). 로고·메뉴는 하단 탭/뒤로가기로 대체. */
+@media (max-width: 759px) {
+  body[data-view="detail"] .top { display: none; }
+  body[data-view="detail"] .d-bar { padding-top: calc(10px + env(safe-area-inset-top)); }
+}
