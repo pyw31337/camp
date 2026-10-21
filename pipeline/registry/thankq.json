@@ -13365,6 +13365,10 @@
    "cseq": null,
    "checked_at": "2026-10-20T14:16:49.644Z"
   },
+  "102377": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
   "pilot-004-haengun": {
    "cseq": null,
    "checked_at": "2026-10-20T00:19:13.927Z"
@@ -25380,12 +25384,780 @@
   "park-41570-00184-68z7a": {
    "cseq": null,
    "checked_at": "2026-10-20T23:52:17.330Z"
+  },
+  "park-29200-00049-5ndun": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-29200-00055-thaqz": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41273-00038-pwr00": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-30110-00059-7flfa": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-29200-00128-moqh1": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-29200-00185-ukaw": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41287-00030-uh2q": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41461-00021-1l3aw": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43114-00092-i5zwe": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43111-00018-onb7b": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-30230-00082-55si2": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-48250-00270-1qal1": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-29200-00064-pwt1f": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-29200-00071-ywu3": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-30230-00075-15kj1": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-27710-00079-y3lj6": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41570-00007-1ud61": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-30200-00032-o2mse": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43114-00044-pa3yd": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-46840-00021-ac275": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-29200-00129-1hne0": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-29200-00187-sm8m9": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-11680-00049-agts2": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43113-00108-1kkc9": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41570-00053-18k5u": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-47840-00003-p916u": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41450-00057-1wqcq": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-46880-00002-q3i43": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-26440-00062-nieuo": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41113-00007-1vpps": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-47760-00002-p9aea": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-11470-00085-yvea": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-48121-00056-1h7nd": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-26440-00002-pq0zz": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-28260-00085-1yht7": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-11530-00014-1b148": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-26320-00072-1j7bo": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43113-00111-17003": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-46770-00002-rpr9z": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-51130-00063-12ulg": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43750-00023-1cd65": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-27710-00047-py62y": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-28185-00061-1eyfe": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41150-00078-slift": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41463-00027-1oej7": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-44270-00125-r9y4e": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-48170-00174-1uql9": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43750-00002-1ilxx": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-51110-00021-om6f4": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41281-00005-umt4": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-51230-00005-rxlsh": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41117-00023-10rrl": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41410-00011-nm6ot": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-27140-00040-1bwxv": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43113-00080-15jti": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-46840-00016-7henr": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41570-00050-h4vvg": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41271-00022-q0tkm": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41310-00005-1ym7t": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-11470-00050-ydrv": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-51130-00135-i4hwo": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-44810-00002-1g9qi": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-48860-00018-1m5jo": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-47290-00020-pfgs0": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-48250-00005-oqyda": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41150-00102-12jsw": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43113-00017-omw1k": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-52710-00020-lzr37": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-52130-00016-qa365": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-46730-00016-11xn9": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41390-00080-rtfrb": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-51170-00050-oqgra": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-46130-00107-rtjvm": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41480-00039-rapl6": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-44770-25028-19a5y": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-44250-00002-qeabb": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-11650-00006-p0yzn": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-50110-00027-yosoe": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-48170-00078-o0g0j": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43130-00010-1qem2": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-48860-00022-eo1y3": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-51810-00013-a6ufs": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-26110-00006-1gseh": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-48129-00098-1icwf": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-44270-00035-1w4jt": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41590-00206-bidit": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-44131-00022-10z7d": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-52130-00022-mt1ie": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-28200-00080-bajto": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-46860-00005-gv3la": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-30200-00042-vsy3": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41113-00038-oj3cw": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-48720-00008-jrimp": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-51150-00007-luiom": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-47250-00032-ehsxt": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-26290-00020-rpq3n": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-52710-00002-qakga": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-48129-00055-grar0": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43130-00019-1ndor": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43770-00018-nmkuz": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41310-00101-ot232": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41220-00406-g9z4v": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43800-00017-lhepu": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-31110-10007-3aim4": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41117-00010-urvw": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43114-00009-p9ijx": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43113-00101-9p3q5": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41450-00035-1st0u": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41461-00005-16xaj": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-52190-00002-10uau": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-29200-00192-11ttf": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-50130-00046-1ngm5": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41463-00007-1rb7g": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41290-00021-gqzfz": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-28110-00032-p9toc": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43112-00045-136mp": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41590-00365-1rlf2": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-52111-00090-s0lk2": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41285-00072-kcx1h": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41360-00085-12erl": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-47190-00156-nj5l0": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-46150-00104-y2asu": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-47113-00079-ayf55": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-26110-00007-kw2il": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-11740-00073-nd6fx": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-46230-00035-1b4sn": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-48127-00067-1qem2": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-30110-00023-1b8gw": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-47113-00110-ub6nr": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-46130-00140-phws5": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43114-00096-cj3wr": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-52111-00114-13mwp": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-47170-00056-5ev9o": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41461-00034-1q2hl": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-30170-00001-z74g": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-51150-00001-1mkrs": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-27710-00041-o6upk": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41570-00159-7lz3t": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-44131-00026-10xxe": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41135-00012-neo2t": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-11440-00008-pb0pd": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-29200-00090-p866v": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-29200-00088-xzm3": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-50130-00047-1na6c": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-48121-00062-12g59": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-31110-10008-p9xni": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41113-00040-1jsnw": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-46710-00124-11mpo": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41480-00012-rx6qf": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-44133-00029-qpe9b": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43111-00043-8bdiq": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-30170-00018-y347": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-47210-00002-mvdzc": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43130-00015-1590u": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-44150-00017-oocru": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-44270-00123-moh5z": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-50130-00048-pbm0u": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41150-00012-1lcpj": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41135-00022-pvkmq": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-36110-00020-1gpz8": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41590-00335-1uhap": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41590-00089-1d5a7": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41281-00114-kog5v": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-51830-00003-m7j68": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-43114-00063-asjr4": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41220-00294-1fepn": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41135-00016-nd6fx": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-30170-00002-nk865": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-51130-00084-1azin": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41430-00060-n7e0k": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-28260-00106-pwo9e": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41461-00012-qlu2h": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-47190-00003-4cve5": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-36110-00187-npywm": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41220-00407-157j7": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-27290-00038-e6naj": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41150-00086-e5v29": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-11710-00154-1imac": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-48123-00083-mqavr": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41590-00093-efxzi": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-31710-00009-pzu1i": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41281-00076-y37k": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-28185-00073-m8ss6": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-29200-00140-rtyao": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-29200-00200-11i33": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41173-00004-10rdn": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-28185-00011-pwy4k": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-47290-00018-1wglx": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41830-00026-nge50": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41480-00003-cu2al": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-41461-00001-1v1qh": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
+  },
+  "park-47130-00045-s252g": {
+   "cseq": null,
+   "checked_at": "2026-10-21T14:27:46.625Z"
   }
  },
  "sites": {
   "10": {
    "cseq": 8119,
-   "checked_at": "2026-10-21T00:49:47.000Z",
+   "checked_at": "2026-10-21T14:40:36.158Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=8119&res_dt=20261024",
    "sites": [
@@ -25666,7 +26438,7 @@
   },
   "11": {
    "cseq": 2633,
-   "checked_at": "2026-10-21T00:49:51.311Z",
+   "checked_at": "2026-10-21T14:40:40.021Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2633&res_dt=20261024",
    "sites": [
@@ -25752,7 +26524,7 @@
   },
   "21": {
    "cseq": 4323,
-   "checked_at": "2026-10-21T00:49:55.024Z",
+   "checked_at": "2026-10-21T14:40:43.505Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4323&res_dt=20261024",
    "sites": [
@@ -25812,7 +26584,7 @@
   },
   "163": {
    "cseq": 19306,
-   "checked_at": "2026-10-21T00:49:59.674Z",
+   "checked_at": "2026-10-21T14:40:48.099Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19306&res_dt=20261024",
    "sites": [
@@ -26041,7 +26813,7 @@
   },
   "357": {
    "cseq": 3270,
-   "checked_at": "2026-10-21T00:42:38.054Z",
+   "checked_at": "2026-10-21T14:34:30.297Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3270&res_dt=20261024",
    "sites": [
@@ -26123,7 +26895,7 @@
   },
   "373": {
    "cseq": 2262,
-   "checked_at": "2026-10-21T00:50:03.240Z",
+   "checked_at": "2026-10-21T14:40:51.401Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2262&res_dt=20261024",
    "sites": [
@@ -26163,7 +26935,7 @@
   },
   "379": {
    "cseq": 7434,
-   "checked_at": "2026-10-21T00:50:08.556Z",
+   "checked_at": "2026-10-21T14:40:56.197Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7434&res_dt=20261024",
    "sites": [
@@ -26353,7 +27125,7 @@
   },
   "441": {
    "cseq": 15849,
-   "checked_at": "2026-10-21T00:50:12.934Z",
+   "checked_at": "2026-10-21T14:40:59.881Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15849&res_dt=20261024",
    "sites": [
@@ -26491,13 +27263,13 @@
   },
   "448": {
    "cseq": 4284,
-   "checked_at": "2026-10-21T00:50:16.578Z",
+   "checked_at": "2026-10-21T14:41:03.121Z",
    "date": "2026-10-24",
    "sites": []
   },
   "508": {
    "cseq": 2249,
-   "checked_at": "2026-10-21T00:50:20.390Z",
+   "checked_at": "2026-10-21T14:41:08.129Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2249&res_dt=20261024",
    "sites": [
@@ -26579,13 +27351,13 @@
   },
   "526": {
    "cseq": 9042,
-   "checked_at": "2026-10-21T00:50:24.537Z",
+   "checked_at": "2026-10-21T14:41:11.186Z",
    "date": "2026-10-24",
    "sites": []
   },
   "632": {
    "cseq": 2120,
-   "checked_at": "2026-10-21T01:06:46.536Z",
+   "checked_at": "2026-10-21T14:55:22.304Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2120&res_dt=20261024",
    "sites": [
@@ -26635,7 +27407,7 @@
   },
   "721": {
    "cseq": 17660,
-   "checked_at": "2026-10-21T01:06:51.499Z",
+   "checked_at": "2026-10-21T14:55:26.627Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17660&res_dt=20261024",
    "sites": [
@@ -26723,7 +27495,7 @@
   },
   "739": {
    "cseq": 2345,
-   "checked_at": "2026-10-21T00:50:29.229Z",
+   "checked_at": "2026-10-21T14:41:15.731Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2345&res_dt=20261024",
    "sites": [
@@ -26783,7 +27555,7 @@
   },
   "767": {
    "cseq": 14363,
-   "checked_at": "2026-10-21T00:50:33.706Z",
+   "checked_at": "2026-10-21T14:41:19.861Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14363&res_dt=20261024",
    "sites": [
@@ -26859,7 +27631,7 @@
   },
   "797": {
    "cseq": 3820,
-   "checked_at": "2026-10-21T00:50:37.821Z",
+   "checked_at": "2026-10-21T14:41:23.802Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3820&res_dt=20261024",
    "sites": [
@@ -26922,7 +27694,7 @@
   },
   "824": {
    "cseq": 1907,
-   "checked_at": "2026-10-21T00:50:42.082Z",
+   "checked_at": "2026-10-21T14:41:27.610Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1907&res_dt=20261024",
    "sites": [
@@ -26978,7 +27750,7 @@
   },
   "860": {
    "cseq": 7576,
-   "checked_at": "2026-10-21T00:50:45.866Z",
+   "checked_at": "2026-10-21T14:41:31.582Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7576&res_dt=20261024",
    "sites": [
@@ -27064,7 +27836,7 @@
   },
   "873": {
    "cseq": 2878,
-   "checked_at": "2026-10-21T00:50:49.450Z",
+   "checked_at": "2026-10-21T14:41:35.634Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261024",
    "sites": [
@@ -27140,7 +27912,7 @@
   },
   "923": {
    "cseq": 2156,
-   "checked_at": "2026-10-21T00:50:55.218Z",
+   "checked_at": "2026-10-21T14:41:40.112Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2156&res_dt=20261024",
    "sites": [
@@ -27273,7 +28045,7 @@
   },
   "1042": {
    "cseq": 1925,
-   "checked_at": "2026-10-21T00:42:45.716Z",
+   "checked_at": "2026-10-21T14:34:36.062Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024",
    "sites": [
@@ -27608,7 +28380,7 @@
   },
   "1043": {
    "cseq": 17647,
-   "checked_at": "2026-10-21T00:51:01.062Z",
+   "checked_at": "2026-10-21T14:41:44.399Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17647&res_dt=20261024",
    "sites": [
@@ -27764,7 +28536,7 @@
   },
   "1075": {
    "cseq": 1832,
-   "checked_at": "2026-10-21T00:42:55.175Z",
+   "checked_at": "2026-10-21T14:34:41.755Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1832&res_dt=20261024",
    "sites": [
@@ -27965,7 +28737,7 @@
   },
   "1096": {
    "cseq": 2066,
-   "checked_at": "2026-10-21T00:51:06.020Z",
+   "checked_at": "2026-10-21T14:41:47.753Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2066&res_dt=20261024",
    "sites": [
@@ -28025,7 +28797,7 @@
   },
   "1141": {
    "cseq": 6283,
-   "checked_at": "2026-10-21T00:43:01.182Z",
+   "checked_at": "2026-10-21T14:34:45.496Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=6283&res_dt=20261024",
    "sites": [
@@ -28085,7 +28857,7 @@
   },
   "1264": {
    "cseq": 14344,
-   "checked_at": "2026-10-21T00:51:09.907Z",
+   "checked_at": "2026-10-21T14:41:51.754Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14344&res_dt=20261024",
    "sites": [
@@ -28132,13 +28904,13 @@
   },
   "1266": {
    "cseq": 19142,
-   "checked_at": "2026-10-21T00:43:04.854Z",
+   "checked_at": "2026-10-21T14:34:49.032Z",
    "date": "2026-10-24",
    "sites": []
   },
   "1324": {
    "cseq": 1843,
-   "checked_at": "2026-10-21T00:51:14.599Z",
+   "checked_at": "2026-10-21T14:41:56.232Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1843&res_dt=20261024",
    "sites": [
@@ -28242,7 +29014,7 @@
   },
   "1327": {
    "cseq": 7469,
-   "checked_at": "2026-10-21T00:51:21.718Z",
+   "checked_at": "2026-10-21T14:42:01.404Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7469&res_dt=20261024",
    "sites": [
@@ -28939,7 +29711,7 @@
   },
   "1364": {
    "cseq": 20900,
-   "checked_at": "2026-10-21T00:51:26.756Z",
+   "checked_at": "2026-10-21T14:42:06.212Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20900&res_dt=20261024",
    "sites": [
@@ -29220,7 +29992,7 @@
   },
   "1477": {
    "cseq": 968,
-   "checked_at": "2026-10-21T00:51:32.121Z",
+   "checked_at": "2026-10-21T14:42:10.146Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=968&res_dt=20261024",
    "sites": [
@@ -29347,7 +30119,7 @@
   },
   "1504": {
    "cseq": 3553,
-   "checked_at": "2026-10-21T01:06:55.752Z",
+   "checked_at": "2026-10-21T14:55:30.579Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3553&res_dt=20261024",
    "sites": [
@@ -29420,7 +30192,7 @@
   },
   "1528": {
    "cseq": 7385,
-   "checked_at": "2026-10-21T00:51:37.584Z",
+   "checked_at": "2026-10-21T14:42:14.135Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7385&res_dt=20261024",
    "sites": [
@@ -29688,7 +30460,7 @@
   },
   "1534": {
    "cseq": 1917,
-   "checked_at": "2026-10-21T00:51:44.645Z",
+   "checked_at": "2026-10-21T14:42:18.962Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1917&res_dt=20261024",
    "sites": [
@@ -29930,13 +30702,13 @@
   },
   "1631": {
    "cseq": 7427,
-   "checked_at": "2026-10-21T00:51:51.145Z",
+   "checked_at": "2026-10-21T14:42:22.556Z",
    "date": "2026-10-24",
    "sites": []
   },
   "1647": {
    "cseq": 3134,
-   "checked_at": "2026-10-21T01:06:59.477Z",
+   "checked_at": "2026-10-21T14:55:34.686Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3134&res_dt=20261024",
    "sites": [
@@ -30009,7 +30781,7 @@
   },
   "1696": {
    "cseq": 14862,
-   "checked_at": "2026-10-21T00:43:09.374Z",
+   "checked_at": "2026-10-21T14:34:53.521Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14862&res_dt=20261024",
    "sites": [
@@ -30082,7 +30854,7 @@
   },
   "1703": {
    "cseq": 589,
-   "checked_at": "2026-10-21T00:43:14.084Z",
+   "checked_at": "2026-10-21T14:34:57.787Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=589&res_dt=20261024",
    "sites": [
@@ -30180,7 +30952,7 @@
   },
   "1719": {
    "cseq": 2251,
-   "checked_at": "2026-10-21T00:51:55.337Z",
+   "checked_at": "2026-10-21T14:42:26.892Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2251&res_dt=20261024",
    "sites": [
@@ -30220,7 +30992,7 @@
   },
   "1723": {
    "cseq": 17560,
-   "checked_at": "2026-10-21T00:43:18.610Z",
+   "checked_at": "2026-10-21T14:35:01.702Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17560&res_dt=20261024",
    "sites": [
@@ -30345,7 +31117,7 @@
   },
   "1770": {
    "cseq": 13633,
-   "checked_at": "2026-10-21T00:52:00.235Z",
+   "checked_at": "2026-10-21T14:42:31.057Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13633&res_dt=20261024",
    "sites": [
@@ -30405,7 +31177,7 @@
   },
   "1878": {
    "cseq": 20210,
-   "checked_at": "2026-10-21T00:52:04.802Z",
+   "checked_at": "2026-10-21T14:42:35.222Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20210&res_dt=20261024",
    "sites": [
@@ -30543,7 +31315,7 @@
   },
   "1999": {
    "cseq": 2368,
-   "checked_at": "2026-10-21T00:52:14.036Z",
+   "checked_at": "2026-10-21T14:42:39.957Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2368&res_dt=20261024",
    "sites": [
@@ -31048,7 +31820,7 @@
   },
   "2014": {
    "cseq": 1771,
-   "checked_at": "2026-10-21T01:07:02.888Z",
+   "checked_at": "2026-10-21T14:55:37.949Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1771&res_dt=20261024",
    "sites": [
@@ -31069,7 +31841,7 @@
   },
   "2179": {
    "cseq": 354,
-   "checked_at": "2026-10-21T00:52:21.847Z",
+   "checked_at": "2026-10-21T14:42:44.770Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=354&res_dt=20261024",
    "sites": [
@@ -31119,7 +31891,7 @@
   },
   "2358": {
    "cseq": 7389,
-   "checked_at": "2026-10-21T00:52:26.411Z",
+   "checked_at": "2026-10-21T14:42:49.168Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7389&res_dt=20261024",
    "sites": [
@@ -31335,19 +32107,19 @@
   },
   "2420": {
    "cseq": 7354,
-   "checked_at": "2026-10-21T00:43:22.221Z",
+   "checked_at": "2026-10-21T14:35:05.042Z",
    "date": "2026-10-24",
    "sites": []
   },
   "2561": {
    "cseq": 17391,
-   "checked_at": "2026-10-21T00:52:29.766Z",
+   "checked_at": "2026-10-21T14:42:52.368Z",
    "date": "2026-10-24",
    "sites": []
   },
   "2573": {
    "cseq": 2601,
-   "checked_at": "2026-10-21T00:52:34.549Z",
+   "checked_at": "2026-10-21T14:42:56.830Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2601&res_dt=20261024",
    "sites": [
@@ -31413,7 +32185,7 @@
   },
   "2616": {
    "cseq": 1,
-   "checked_at": "2026-10-21T01:07:07.307Z",
+   "checked_at": "2026-10-21T14:55:42.527Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1&res_dt=20261024",
    "sites": [
@@ -31479,7 +32251,7 @@
   },
   "2619": {
    "cseq": 10019,
-   "checked_at": "2026-10-21T00:52:38.931Z",
+   "checked_at": "2026-10-21T14:43:01.097Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=10019&res_dt=20261024",
    "sites": [
@@ -31669,7 +32441,7 @@
   },
   "2704": {
    "cseq": 2657,
-   "checked_at": "2026-10-21T00:52:43.087Z",
+   "checked_at": "2026-10-21T14:43:04.986Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2657&res_dt=20261024",
    "sites": [
@@ -31738,13 +32510,13 @@
   },
   "2734": {
    "cseq": 20594,
-   "checked_at": "2026-10-21T00:43:25.839Z",
+   "checked_at": "2026-10-21T14:35:09.283Z",
    "date": "2026-10-24",
    "sites": []
   },
   "2758": {
    "cseq": 7347,
-   "checked_at": "2026-10-21T00:52:47.646Z",
+   "checked_at": "2026-10-21T14:43:09.159Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7347&res_dt=20261024",
    "sites": [
@@ -31947,7 +32719,7 @@
   },
   "2809": {
    "cseq": 7373,
-   "checked_at": "2026-10-21T00:52:54.460Z",
+   "checked_at": "2026-10-21T14:43:14.025Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7373&res_dt=20261024",
    "sites": [
@@ -32540,7 +33312,7 @@
   },
   "2815": {
    "cseq": 7409,
-   "checked_at": "2026-10-21T00:52:58.298Z",
+   "checked_at": "2026-10-21T14:43:18.016Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7409&res_dt=20261024",
    "sites": [
@@ -32652,7 +33424,7 @@
   },
   "2820": {
    "cseq": 20753,
-   "checked_at": "2026-10-21T00:53:02.971Z",
+   "checked_at": "2026-10-21T14:43:22.144Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20753&res_dt=20261024",
    "sites": [
@@ -32803,7 +33575,7 @@
   },
   "2852": {
    "cseq": 7376,
-   "checked_at": "2026-10-21T00:53:07.563Z",
+   "checked_at": "2026-10-21T14:43:26.232Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7376&res_dt=20261024",
    "sites": [
@@ -32980,7 +33752,7 @@
   },
   "2873": {
    "cseq": 20499,
-   "checked_at": "2026-10-21T00:53:12.110Z",
+   "checked_at": "2026-10-21T14:43:30.351Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20499&res_dt=20261024",
    "sites": [
@@ -33196,13 +33968,13 @@
   },
   "2958": {
    "cseq": 7513,
-   "checked_at": "2026-10-21T00:53:15.402Z",
+   "checked_at": "2026-10-21T14:43:33.516Z",
    "date": "2026-10-24",
    "sites": []
   },
   "2990": {
    "cseq": 199,
-   "checked_at": "2026-10-21T00:43:29.939Z",
+   "checked_at": "2026-10-21T14:35:13.165Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=199&res_dt=20261024",
    "sites": [
@@ -33223,7 +33995,7 @@
   },
   "3016": {
    "cseq": 2635,
-   "checked_at": "2026-10-21T00:53:19.571Z",
+   "checked_at": "2026-10-21T14:43:37.978Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2635&res_dt=20261024",
    "sites": [
@@ -33295,7 +34067,7 @@
   },
   "3034": {
    "cseq": 17897,
-   "checked_at": "2026-10-21T00:53:25.032Z",
+   "checked_at": "2026-10-21T14:43:42.825Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17897&res_dt=20261024",
    "sites": [
@@ -33428,7 +34200,7 @@
   },
   "3092": {
    "cseq": 2089,
-   "checked_at": "2026-10-21T00:53:29.240Z",
+   "checked_at": "2026-10-21T14:43:46.380Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2089&res_dt=20261024",
    "sites": [
@@ -33475,7 +34247,7 @@
   },
   "3105": {
    "cseq": 20760,
-   "checked_at": "2026-10-21T00:43:36.433Z",
+   "checked_at": "2026-10-21T14:35:18.434Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20760&res_dt=20261024",
    "sites": [
@@ -33912,7 +34684,7 @@
   },
   "3139": {
    "cseq": 1537,
-   "checked_at": "2026-10-21T01:07:14.062Z",
+   "checked_at": "2026-10-21T14:55:47.910Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1537&res_dt=20261024",
    "sites": [
@@ -34160,7 +34932,7 @@
   },
   "3198": {
    "cseq": 20778,
-   "checked_at": "2026-10-21T00:53:35.483Z",
+   "checked_at": "2026-10-21T14:43:51.500Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20778&res_dt=20261024",
    "sites": [
@@ -34701,13 +35473,13 @@
   },
   "3230": {
    "cseq": 20176,
-   "checked_at": "2026-10-21T00:53:38.879Z",
+   "checked_at": "2026-10-21T14:43:55.026Z",
    "date": "2026-10-24",
    "sites": []
   },
   "3254": {
    "cseq": 15413,
-   "checked_at": "2026-10-21T00:53:43.233Z",
+   "checked_at": "2026-10-21T14:43:59.010Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15413&res_dt=20261024",
    "sites": [
@@ -34763,7 +35535,7 @@
   },
   "3279": {
    "cseq": 20246,
-   "checked_at": "2026-10-21T00:53:47.752Z",
+   "checked_at": "2026-10-21T14:44:03.433Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20246&res_dt=20261024",
    "sites": [
@@ -34927,7 +35699,7 @@
   },
   "3330": {
    "cseq": 1896,
-   "checked_at": "2026-10-21T00:53:51.799Z",
+   "checked_at": "2026-10-21T14:44:07.657Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1896&res_dt=20261024",
    "sites": [
@@ -34993,7 +35765,7 @@
   },
   "3339": {
    "cseq": 2887,
-   "checked_at": "2026-10-21T00:53:56.672Z",
+   "checked_at": "2026-10-21T14:44:11.927Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2887&res_dt=20261024",
    "sites": [
@@ -35118,7 +35890,7 @@
   },
   "3348": {
    "cseq": 2912,
-   "checked_at": "2026-10-21T01:07:20.744Z",
+   "checked_at": "2026-10-21T14:55:52.605Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2912&res_dt=20261024",
    "sites": [
@@ -35230,7 +36002,7 @@
   },
   "3428": {
    "cseq": 1791,
-   "checked_at": "2026-10-21T00:54:01.010Z",
+   "checked_at": "2026-10-21T14:44:15.382Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1791&res_dt=20261024",
    "sites": [
@@ -35264,7 +36036,7 @@
   },
   "3432": {
    "cseq": 1776,
-   "checked_at": "2026-10-21T00:54:04.674Z",
+   "checked_at": "2026-10-21T14:44:19.823Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1776&res_dt=20261024",
    "sites": [
@@ -35336,7 +36108,7 @@
   },
   "3450": {
    "cseq": 1872,
-   "checked_at": "2026-10-21T01:07:26.307Z",
+   "checked_at": "2026-10-21T14:55:57.004Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1872&res_dt=20261024",
    "sites": [
@@ -35448,7 +36220,7 @@
   },
   "3459": {
    "cseq": 11041,
-   "checked_at": "2026-10-21T00:54:09.534Z",
+   "checked_at": "2026-10-21T14:44:23.452Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=11041&res_dt=20261024",
    "sites": [
@@ -35521,7 +36293,7 @@
   },
   "6756": {
    "cseq": 3273,
-   "checked_at": "2026-10-21T00:54:14.187Z",
+   "checked_at": "2026-10-21T14:44:27.813Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3273&res_dt=20261024",
    "sites": [
@@ -35613,7 +36385,7 @@
   },
   "6968": {
    "cseq": 3335,
-   "checked_at": "2026-10-21T01:07:31.381Z",
+   "checked_at": "2026-10-21T14:56:00.811Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3335&res_dt=20261024",
    "sites": [
@@ -35701,7 +36473,7 @@
   },
   "6972": {
    "cseq": 9524,
-   "checked_at": "2026-10-21T00:43:40.950Z",
+   "checked_at": "2026-10-21T14:35:22.160Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=9524&res_dt=20261024",
    "sites": [
@@ -35878,7 +36650,7 @@
   },
   "7008": {
    "cseq": 17305,
-   "checked_at": "2026-10-21T00:54:21.106Z",
+   "checked_at": "2026-10-21T14:44:33.138Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17305&res_dt=20261024",
    "sites": [
@@ -36096,7 +36868,7 @@
   },
   "7029": {
    "cseq": 1609,
-   "checked_at": "2026-10-21T00:54:26.279Z",
+   "checked_at": "2026-10-21T14:44:36.754Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1609&res_dt=20261024",
    "sites": [
@@ -36120,7 +36892,7 @@
   },
   "7039": {
    "cseq": 4084,
-   "checked_at": "2026-10-21T00:54:30.042Z",
+   "checked_at": "2026-10-21T14:44:41.249Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4084&res_dt=20261024",
    "sites": [
@@ -36221,7 +36993,7 @@
   },
   "7084": {
    "cseq": 3156,
-   "checked_at": "2026-10-21T00:54:34.705Z",
+   "checked_at": "2026-10-21T14:44:45.005Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3156&res_dt=20261024",
    "sites": [
@@ -36268,7 +37040,7 @@
   },
   "7124": {
    "cseq": 2561,
-   "checked_at": "2026-10-21T00:54:38.410Z",
+   "checked_at": "2026-10-21T14:44:49.266Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2561&res_dt=20261024",
    "sites": [
@@ -36324,7 +37096,7 @@
   },
   "7125": {
    "cseq": 20378,
-   "checked_at": "2026-10-21T00:54:43.321Z",
+   "checked_at": "2026-10-21T14:44:53.349Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20378&res_dt=20261024",
    "sites": [
@@ -36412,7 +37184,7 @@
   },
   "7151": {
    "cseq": 1961,
-   "checked_at": "2026-10-21T00:43:48.604Z",
+   "checked_at": "2026-10-21T14:35:27.636Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1961&res_dt=20261024",
    "sites": [
@@ -36711,7 +37483,7 @@
   },
   "7167": {
    "cseq": 1599,
-   "checked_at": "2026-10-21T00:54:47.700Z",
+   "checked_at": "2026-10-21T14:44:57.313Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1599&res_dt=20261024",
    "sites": [
@@ -36771,7 +37543,7 @@
   },
   "7171": {
    "cseq": 318,
-   "checked_at": "2026-10-21T01:07:35.505Z",
+   "checked_at": "2026-10-21T14:56:04.973Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=318&res_dt=20261024",
    "sites": [
@@ -36891,7 +37663,7 @@
   },
   "7192": {
    "cseq": 2069,
-   "checked_at": "2026-10-21T01:07:40.611Z",
+   "checked_at": "2026-10-21T14:56:09.103Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2069&res_dt=20261024",
    "sites": [
@@ -37021,7 +37793,7 @@
   },
   "7212": {
    "cseq": 2064,
-   "checked_at": "2026-10-21T00:43:54.626Z",
+   "checked_at": "2026-10-21T14:35:32.247Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2064&res_dt=20261024",
    "sites": [
@@ -37061,7 +37833,7 @@
   },
   "7216": {
    "cseq": 20060,
-   "checked_at": "2026-10-21T00:54:52.791Z",
+   "checked_at": "2026-10-21T14:45:01.587Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20060&res_dt=20261024",
    "sites": [
@@ -37197,7 +37969,7 @@
   },
   "7224": {
    "cseq": 1697,
-   "checked_at": "2026-10-21T00:43:59.371Z",
+   "checked_at": "2026-10-21T14:35:36.335Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1697&res_dt=20261024",
    "sites": [
@@ -37285,7 +38057,7 @@
   },
   "7343": {
    "cseq": 8598,
-   "checked_at": "2026-10-21T00:54:57.615Z",
+   "checked_at": "2026-10-21T14:45:05.039Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=8598&res_dt=20261024",
    "sites": [
@@ -37371,7 +38143,7 @@
   },
   "7346": {
    "cseq": 17303,
-   "checked_at": "2026-10-21T00:55:01.501Z",
+   "checked_at": "2026-10-21T14:45:09.367Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17303&res_dt=20261024",
    "sites": [
@@ -37466,7 +38238,7 @@
   },
   "7375": {
    "cseq": 2878,
-   "checked_at": "2026-10-21T00:44:04.130Z",
+   "checked_at": "2026-10-21T14:35:40.665Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261024",
    "sites": [
@@ -37542,7 +38314,7 @@
   },
   "7403": {
    "cseq": 17317,
-   "checked_at": "2026-10-21T00:44:07.928Z",
+   "checked_at": "2026-10-21T14:35:44.217Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17317&res_dt=20261024",
    "sites": [
@@ -37582,7 +38354,7 @@
   },
   "7405": {
    "cseq": 14420,
-   "checked_at": "2026-10-21T00:55:07.295Z",
+   "checked_at": "2026-10-21T14:45:14.052Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14420&res_dt=20261024",
    "sites": [
@@ -37767,19 +38539,19 @@
   },
   "7497": {
    "cseq": 7343,
-   "checked_at": "2026-10-21T00:55:11.967Z",
+   "checked_at": "2026-10-21T14:45:17.178Z",
    "date": "2026-10-24",
    "sites": []
   },
   "7593": {
    "cseq": 11948,
-   "checked_at": "2026-10-21T00:55:16.140Z",
+   "checked_at": "2026-10-21T14:45:21.215Z",
    "date": "2026-10-24",
    "sites": []
   },
   "7607": {
    "cseq": 7455,
-   "checked_at": "2026-10-21T00:55:22.059Z",
+   "checked_at": "2026-10-21T14:45:26.402Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7455&res_dt=20261024",
    "sites": [
@@ -38151,7 +38923,7 @@
   },
   "7755": {
    "cseq": 3658,
-   "checked_at": "2026-10-21T00:44:12.046Z",
+   "checked_at": "2026-10-21T14:35:48.606Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3658&res_dt=20261024",
    "sites": [
@@ -38237,7 +39009,7 @@
   },
   "7768": {
    "cseq": 16482,
-   "checked_at": "2026-10-21T00:55:26.364Z",
+   "checked_at": "2026-10-21T14:45:30.030Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16482&res_dt=20261024",
    "sites": [
@@ -38414,7 +39186,7 @@
   },
   "7782": {
    "cseq": 14536,
-   "checked_at": "2026-10-21T00:55:31.018Z",
+   "checked_at": "2026-10-21T14:45:34.024Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14536&res_dt=20261024",
    "sites": [
@@ -38565,7 +39337,7 @@
   },
   "7798": {
    "cseq": 17646,
-   "checked_at": "2026-10-21T01:07:45.239Z",
+   "checked_at": "2026-10-21T14:56:13.126Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17646&res_dt=20261024",
    "sites": [
@@ -38605,13 +39377,13 @@
   },
   "7803": {
    "cseq": 19083,
-   "checked_at": "2026-10-21T00:55:34.413Z",
+   "checked_at": "2026-10-21T14:45:37.286Z",
    "date": "2026-10-24",
    "sites": []
   },
   "7848": {
    "cseq": 2884,
-   "checked_at": "2026-10-21T00:44:16.856Z",
+   "checked_at": "2026-10-21T14:35:52.335Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2884&res_dt=20261024",
    "sites": [
@@ -38680,7 +39452,7 @@
   },
   "7880": {
    "cseq": 20127,
-   "checked_at": "2026-10-21T00:55:40.734Z",
+   "checked_at": "2026-10-21T14:45:42.930Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20127&res_dt=20261024",
    "sites": [
@@ -39117,7 +39889,7 @@
   },
   "7886": {
    "cseq": 20786,
-   "checked_at": "2026-10-21T00:55:45.103Z",
+   "checked_at": "2026-10-21T14:45:46.678Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20786&res_dt=20261024",
    "sites": [
@@ -39294,7 +40066,7 @@
   },
   "7916": {
    "cseq": 7484,
-   "checked_at": "2026-10-21T00:44:21.870Z",
+   "checked_at": "2026-10-21T14:35:56.732Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7484&res_dt=20261024",
    "sites": [
@@ -39588,7 +40360,7 @@
   },
   "7928": {
    "cseq": 7481,
-   "checked_at": "2026-10-21T00:55:50.302Z",
+   "checked_at": "2026-10-21T14:45:51.101Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7481&res_dt=20261024",
    "sites": [
@@ -39856,7 +40628,7 @@
   },
   "7932": {
    "cseq": 15505,
-   "checked_at": "2026-10-21T00:55:53.974Z",
+   "checked_at": "2026-10-21T14:45:54.416Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15505&res_dt=20261024",
    "sites": [
@@ -39916,7 +40688,7 @@
   },
   "7966": {
    "cseq": 3422,
-   "checked_at": "2026-10-21T01:07:53.095Z",
+   "checked_at": "2026-10-21T14:56:18.521Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3422&res_dt=20261024",
    "sites": [
@@ -40238,7 +41010,7 @@
   },
   "8034": {
    "cseq": 20170,
-   "checked_at": "2026-10-21T00:55:59.353Z",
+   "checked_at": "2026-10-21T14:45:58.983Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20170&res_dt=20261024",
    "sites": [
@@ -40558,7 +41330,7 @@
   },
   "8045": {
    "cseq": 3634,
-   "checked_at": "2026-10-21T01:08:00.228Z",
+   "checked_at": "2026-10-21T14:56:23.469Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3634&res_dt=20261024",
    "sites": [
@@ -40644,7 +41416,7 @@
   },
   "8049": {
    "cseq": 12844,
-   "checked_at": "2026-10-21T00:56:06.389Z",
+   "checked_at": "2026-10-21T14:46:04.086Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=12844&res_dt=20261024",
    "sites": [
@@ -41445,7 +42217,7 @@
   },
   "8054": {
    "cseq": 16641,
-   "checked_at": "2026-10-21T00:56:10.657Z",
+   "checked_at": "2026-10-21T14:46:08.159Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16641&res_dt=20261024",
    "sites": [
@@ -41557,7 +42329,7 @@
   },
   "8071": {
    "cseq": 545,
-   "checked_at": "2026-10-21T00:56:14.909Z",
+   "checked_at": "2026-10-21T14:46:12.196Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=545&res_dt=20261024",
    "sites": [
@@ -41642,7 +42414,7 @@
   },
   "8073": {
    "cseq": 3670,
-   "checked_at": "2026-10-21T01:08:05.346Z",
+   "checked_at": "2026-10-21T14:56:27.371Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3670&res_dt=20261024",
    "sites": [
@@ -41740,7 +42512,7 @@
   },
   "8080": {
    "cseq": 11298,
-   "checked_at": "2026-10-21T00:56:19.087Z",
+   "checked_at": "2026-10-21T14:46:15.960Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=11298&res_dt=20261024",
    "sites": [
@@ -41839,7 +42611,7 @@
   },
   "8086": {
    "cseq": 3894,
-   "checked_at": "2026-10-21T00:44:25.340Z",
+   "checked_at": "2026-10-21T14:35:59.732Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3894&res_dt=20261024",
    "sites": [
@@ -41863,7 +42635,7 @@
   },
   "8104": {
    "cseq": 3730,
-   "checked_at": "2026-10-21T00:44:30.386Z",
+   "checked_at": "2026-10-21T14:36:04.757Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3730&res_dt=20261024",
    "sites": [
@@ -41949,7 +42721,7 @@
   },
   "8114": {
    "cseq": 3654,
-   "checked_at": "2026-10-21T01:08:11.322Z",
+   "checked_at": "2026-10-21T14:56:31.806Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3654&res_dt=20261024",
    "sites": [
@@ -42143,7 +42915,7 @@
   },
   "8150": {
    "cseq": 12800,
-   "checked_at": "2026-10-21T00:56:24.508Z",
+   "checked_at": "2026-10-21T14:46:20.831Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=12800&res_dt=20261024",
    "sites": [
@@ -42528,7 +43300,7 @@
   },
   "8206": {
    "cseq": 13767,
-   "checked_at": "2026-10-21T00:44:34.162Z",
+   "checked_at": "2026-10-21T14:36:08.428Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13767&res_dt=20261024",
    "sites": [
@@ -42601,7 +43373,7 @@
   },
   "100013": {
    "cseq": 17846,
-   "checked_at": "2026-10-21T00:44:39.689Z",
+   "checked_at": "2026-10-21T14:36:13.205Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17846&res_dt=20261024",
    "sites": [
@@ -42619,22 +43391,6 @@
      "checkOut": "11:00"
     },
     {
-     "name": "노을존(애견동반가능)",
-     "price": 60000,
-     "size": [
-      7,
-      8
-     ],
-     "floor": null,
-     "kind": "오토캠핑",
-     "parking": "텐트옆주차",
-     "people": "성인2인, 미성년 2인",
-     "pet": true,
-     "carCamp": false,
-     "checkIn": "13:00",
-     "checkOut": "12:00"
-    },
-    {
      "name": "화이트 펜션 (커플)",
      "price": 180000,
      "size": null,
@@ -42648,20 +43404,30 @@
      "checkOut": "11:00"
     },
     {
-     "name": "배산임수 미니 데크",
-     "price": 60000,
-     "size": [
-      6.2,
-      4.2
-     ],
+     "name": "블랙 펜션 (커플,페밀리)",
+     "price": 230000,
+     "size": null,
      "floor": null,
-     "kind": "오토캠핑",
-     "parking": "텐트옆주차",
-     "people": "성인2인, 미성년 2인",
+     "kind": "펜션",
+     "parking": null,
+     "people": "성인2인, 미성년 0인",
      "pet": false,
      "carCamp": false,
-     "checkIn": "13:00",
-     "checkOut": "12:00"
+     "checkIn": "15:00",
+     "checkOut": "11:00"
+    },
+    {
+     "name": "그레이펜션 (커플,패밀리)",
+     "price": 230000,
+     "size": null,
+     "floor": null,
+     "kind": "펜션",
+     "parking": null,
+     "people": "성인2인, 미성년 0인",
+     "pet": false,
+     "carCamp": false,
+     "checkIn": "15:00",
+     "checkOut": "11:00"
     },
     {
      "name": "배산임수존(파쇄석스페셜)",
@@ -42712,30 +43478,36 @@
      "checkOut": "12:00"
     },
     {
-     "name": "블랙 펜션 (커플,페밀리)",
-     "price": 230000,
-     "size": null,
+     "name": "노을존(애견동반가능)",
+     "price": 60000,
+     "size": [
+      7,
+      8
+     ],
      "floor": null,
-     "kind": "펜션",
-     "parking": null,
-     "people": "성인2인, 미성년 0인",
-     "pet": false,
+     "kind": "오토캠핑",
+     "parking": "텐트옆주차",
+     "people": "성인2인, 미성년 2인",
+     "pet": true,
      "carCamp": false,
-     "checkIn": "15:00",
-     "checkOut": "11:00"
+     "checkIn": "13:00",
+     "checkOut": "12:00"
     },
     {
-     "name": "그레이펜션 (커플,패밀리)",
-     "price": 230000,
-     "size": null,
+     "name": "배산임수 미니 데크",
+     "price": 60000,
+     "size": [
+      6.2,
+      4.2
+     ],
      "floor": null,
-     "kind": "펜션",
-     "parking": null,
-     "people": "성인2인, 미성년 0인",
+     "kind": "오토캠핑",
+     "parking": "텐트옆주차",
+     "people": "성인2인, 미성년 2인",
      "pet": false,
      "carCamp": false,
-     "checkIn": "15:00",
-     "checkOut": "11:00"
+     "checkIn": "13:00",
+     "checkOut": "12:00"
     },
     {
      "name": "배산임수존(데크스페셜)",
@@ -42757,7 +43529,7 @@
   },
   "100069": {
    "cseq": 19976,
-   "checked_at": "2026-10-21T00:56:28.742Z",
+   "checked_at": "2026-10-21T14:46:24.466Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19976&res_dt=20261024",
    "sites": [
@@ -42921,7 +43693,7 @@
   },
   "100081": {
    "cseq": 12611,
-   "checked_at": "2026-10-21T00:56:32.280Z",
+   "checked_at": "2026-10-21T14:46:27.937Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=12611&res_dt=20261024",
    "sites": [
@@ -42968,7 +43740,7 @@
   },
   "100137": {
    "cseq": 3885,
-   "checked_at": "2026-10-21T00:56:36.269Z",
+   "checked_at": "2026-10-21T14:46:32.391Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3885&res_dt=20261024",
    "sites": [
@@ -43037,7 +43809,7 @@
   },
   "100140": {
    "cseq": 14789,
-   "checked_at": "2026-10-21T00:56:41.490Z",
+   "checked_at": "2026-10-21T14:46:36.699Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14789&res_dt=20261024",
    "sites": [
@@ -43305,7 +44077,7 @@
   },
   "100148": {
    "cseq": 17613,
-   "checked_at": "2026-10-21T00:56:45.293Z",
+   "checked_at": "2026-10-21T14:46:40.157Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17613&res_dt=20261024",
    "sites": [
@@ -43358,7 +44130,7 @@
   },
   "100166": {
    "cseq": 3890,
-   "checked_at": "2026-10-21T00:56:50.578Z",
+   "checked_at": "2026-10-21T14:46:44.907Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3890&res_dt=20261024",
    "sites": [
@@ -43508,7 +44280,7 @@
   },
   "100177": {
    "cseq": 2285,
-   "checked_at": "2026-10-21T01:08:17.520Z",
+   "checked_at": "2026-10-21T14:56:35.874Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2285&res_dt=20261024",
    "sites": [
@@ -43590,7 +44362,7 @@
   },
   "100247": {
    "cseq": 20320,
-   "checked_at": "2026-10-21T00:56:54.859Z",
+   "checked_at": "2026-10-21T14:46:48.278Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20320&res_dt=20261024",
    "sites": [
@@ -43663,7 +44435,7 @@
   },
   "100275": {
    "cseq": 9320,
-   "checked_at": "2026-10-21T00:44:44.524Z",
+   "checked_at": "2026-10-21T14:36:16.904Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=9320&res_dt=20261024",
    "sites": [
@@ -43775,7 +44547,7 @@
   },
   "100278": {
    "cseq": 4061,
-   "checked_at": "2026-10-21T00:56:59.624Z",
+   "checked_at": "2026-10-21T14:46:52.596Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4061&res_dt=20261024",
    "sites": [
@@ -43873,13 +44645,13 @@
   },
   "100286": {
    "cseq": 7511,
-   "checked_at": "2026-10-21T00:57:03.021Z",
+   "checked_at": "2026-10-21T14:46:55.797Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100311": {
    "cseq": 17604,
-   "checked_at": "2026-10-21T00:44:48.488Z",
+   "checked_at": "2026-10-21T14:36:20.552Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17604&res_dt=20261024",
    "sites": [
@@ -43935,7 +44707,7 @@
   },
   "100312": {
    "cseq": 3937,
-   "checked_at": "2026-10-21T00:44:52.254Z",
+   "checked_at": "2026-10-21T14:36:24.279Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3937&res_dt=20261024",
    "sites": [
@@ -43959,7 +44731,7 @@
   },
   "100315": {
    "cseq": 3830,
-   "checked_at": "2026-10-21T00:44:56.899Z",
+   "checked_at": "2026-10-21T14:36:28.897Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3830&res_dt=20261024",
    "sites": [
@@ -44032,7 +44804,7 @@
   },
   "100316": {
    "cseq": 4030,
-   "checked_at": "2026-10-21T00:45:00.621Z",
+   "checked_at": "2026-10-21T14:36:32.522Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4030&res_dt=20261024",
    "sites": [
@@ -44072,13 +44844,13 @@
   },
   "100323": {
    "cseq": 19715,
-   "checked_at": "2026-10-21T00:45:04.204Z",
+   "checked_at": "2026-10-21T14:36:36.185Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100324": {
    "cseq": 19589,
-   "checked_at": "2026-10-21T00:45:11.441Z",
+   "checked_at": "2026-10-21T14:36:42.560Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19589&res_dt=20261024",
    "sites": [
@@ -44328,7 +45100,7 @@
   },
   "100372": {
    "cseq": 4079,
-   "checked_at": "2026-10-21T00:45:17.257Z",
+   "checked_at": "2026-10-21T14:36:46.970Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4079&res_dt=20261024",
    "sites": [
@@ -44384,7 +45156,7 @@
   },
   "100379": {
    "cseq": 4005,
-   "checked_at": "2026-10-21T00:57:07.773Z",
+   "checked_at": "2026-10-21T14:47:00.445Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4005&res_dt=20261024",
    "sites": [
@@ -44469,7 +45241,7 @@
   },
   "100399": {
    "cseq": 3994,
-   "checked_at": "2026-10-21T00:45:21.395Z",
+   "checked_at": "2026-10-21T14:36:50.901Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3994&res_dt=20261024",
    "sites": [
@@ -44525,13 +45297,13 @@
   },
   "100419": {
    "cseq": 17678,
-   "checked_at": "2026-10-21T00:45:29.155Z",
+   "checked_at": "2026-10-21T14:36:56.842Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17678&res_dt=20261024",
    "sites": [
     {
-     "name": "1번 큰데크/숙박 2인만",
-     "price": 70000,
+     "name": "1번 큰데크",
+     "price": 90000,
      "size": [
       6,
       7
@@ -44546,8 +45318,8 @@
      "checkOut": "11:00"
     },
     {
-     "name": "2번 작은데크/숙박 2인만",
-     "price": 60000,
+     "name": "2번 작은데크",
+     "price": 80000,
      "size": [
       4.8,
       7
@@ -44562,8 +45334,8 @@
      "checkOut": "11:00"
     },
     {
-     "name": "3번 작은데크/숙박2인만",
-     "price": 60000,
+     "name": "3번 작은데크",
+     "price": 80000,
      "size": [
       4.8,
       7
@@ -44578,8 +45350,8 @@
      "checkOut": "11:00"
     },
     {
-     "name": "4번 작은데크/숙박2인만",
-     "price": 60000,
+     "name": "4번 작은데크",
+     "price": 80000,
      "size": [
       4.8,
       7
@@ -44594,8 +45366,8 @@
      "checkOut": "11:00"
     },
     {
-     "name": "5번 작은데크/숙박2인만",
-     "price": 60000,
+     "name": "5번 작은데크",
+     "price": 80000,
      "size": [
       4.8,
       7
@@ -44611,7 +45383,7 @@
     },
     {
      "name": "[나무그늘] 가호(대) 파쇄석(6m * 6m)",
-     "price": 50000,
+     "price": 70000,
      "size": [
       6,
       6
@@ -44626,8 +45398,8 @@
      "checkOut": "11:00"
     },
     {
-     "name": "6번 큰데크(불멍불편)/숙박 2인만",
-     "price": 60000,
+     "name": "6번 큰데크(불멍불편)",
+     "price": 90000,
      "size": [
       4.8,
       7
@@ -44642,8 +45414,8 @@
      "checkOut": "11:00"
     },
     {
-     "name": "7번 작은데크/숙박2인만",
-     "price": 60000,
+     "name": "7번 작은데크",
+     "price": 80000,
      "size": [
       4.8,
       7
@@ -44658,8 +45430,8 @@
      "checkOut": "11:00"
     },
     {
-     "name": "8번 작은데크/숙박2인만",
-     "price": 60000,
+     "name": "8번 작은데크",
+     "price": 80000,
      "size": [
       4.8,
       7
@@ -44674,8 +45446,8 @@
      "checkOut": "11:00"
     },
     {
-     "name": "9번 큰데크/숙박 2인만",
-     "price": 70000,
+     "name": "9번 큰데크",
+     "price": 90000,
      "size": [
       6,
       7
@@ -44690,8 +45462,8 @@
      "checkOut": "11:00"
     },
     {
-     "name": "10번 큰데크/숙박2인만",
-     "price": 70000,
+     "name": "10번 큰데크",
+     "price": 90000,
      "size": [
       6,
       7
@@ -44706,8 +45478,8 @@
      "checkOut": "11:00"
     },
     {
-     "name": "11번 큰데크/숙박2인만",
-     "price": 70000,
+     "name": "11번 큰데크",
+     "price": 90000,
      "size": [
       6,
       7
@@ -44722,8 +45494,8 @@
      "checkOut": "11:00"
     },
     {
-     "name": "12번 큰데크/숙박2인만",
-     "price": 70000,
+     "name": "12번 큰데크",
+     "price": 90000,
      "size": [
       6,
       7
@@ -44739,7 +45511,7 @@
     },
     {
      "name": "F호(중) 파쇄석 (5m * 5m)",
-     "price": 40000,
+     "price": 60000,
      "size": [
       5,
       5
@@ -44755,7 +45527,7 @@
     },
     {
      "name": "G호(중) 파쇄석(5m * 5m)",
-     "price": 40000,
+     "price": 60000,
      "size": [
       5,
       5
@@ -44771,7 +45543,7 @@
     },
     {
      "name": "A호(대) 파쇄석 (6m * 6m)",
-     "price": 50000,
+     "price": 70000,
      "size": [
       6,
       6
@@ -44781,16 +45553,32 @@
      "parking": "텐트옆주차",
      "people": "성인2인, 미성년 0인",
      "pet": true,
-     "carCamp": false,
+     "carCamp": true,
      "checkIn": "14:00",
      "checkOut": "11:00"
     },
     {
      "name": "B호(대) 파쇄석 (6m * 6m)",
-     "price": 50000,
+     "price": 70000,
      "size": [
       6,
       6
+     ],
+     "floor": null,
+     "kind": "오토캠핑",
+     "parking": "텐트옆주차",
+     "people": "성인2인, 미성년 0인",
+     "pet": true,
+     "carCamp": true,
+     "checkIn": "14:00",
+     "checkOut": "11:00"
+    },
+    {
+     "name": "라호(중) 파쇄석(5m * 5m)",
+     "price": 60000,
+     "size": [
+      5,
+      5
      ],
      "floor": null,
      "kind": "오토캠핑",
@@ -44803,7 +45591,7 @@
     },
     {
      "name": "C호(중) 파쇄석 (5m * 5m)",
-     "price": 40000,
+     "price": 60000,
      "size": [
       5,
       5
@@ -44819,7 +45607,7 @@
     },
     {
      "name": "D호(중) 파쇄석 (5m * 5m)",
-     "price": 40000,
+     "price": 60000,
      "size": [
       5,
       5
@@ -44829,13 +45617,13 @@
      "parking": "텐트옆주차",
      "people": "성인2인, 미성년 0인",
      "pet": true,
-     "carCamp": false,
+     "carCamp": true,
      "checkIn": "14:00",
      "checkOut": "11:00"
     },
     {
      "name": "E호(중) 파쇄석 (5m * 5m)",
-     "price": 40000,
+     "price": 60000,
      "size": [
       5,
       5
@@ -44851,10 +45639,90 @@
     },
     {
      "name": "[나무그늘] 나호(대) 파쇄석(6m * 6m)",
-     "price": 50000,
+     "price": 70000,
      "size": [
       6,
       6
+     ],
+     "floor": null,
+     "kind": "오토캠핑",
+     "parking": "텐트옆주차",
+     "people": "성인2인, 미성년 0인",
+     "pet": true,
+     "carCamp": false,
+     "checkIn": "14:00",
+     "checkOut": "11:00"
+    },
+    {
+     "name": "다호(중) 파쇄석(5m * 5m)",
+     "price": 60000,
+     "size": [
+      5,
+      5
+     ],
+     "floor": null,
+     "kind": "오토캠핑",
+     "parking": "텐트옆주차",
+     "people": "성인2인, 미성년 0인",
+     "pet": true,
+     "carCamp": false,
+     "checkIn": "14:00",
+     "checkOut": "11:00"
+    },
+    {
+     "name": "마호(중) 파쇄석 (5m * 5m)",
+     "price": 60000,
+     "size": [
+      5,
+      5
+     ],
+     "floor": null,
+     "kind": "오토캠핑",
+     "parking": "텐트옆주차",
+     "people": "성인2인, 미성년 0인",
+     "pet": true,
+     "carCamp": false,
+     "checkIn": "14:00",
+     "checkOut": "11:00"
+    },
+    {
+     "name": "바호(중) 파쇄석 (5m *5m)",
+     "price": 60000,
+     "size": [
+      5,
+      5
+     ],
+     "floor": null,
+     "kind": "오토캠핑",
+     "parking": "텐트옆주차",
+     "people": "성인2인, 미성년 0인",
+     "pet": true,
+     "carCamp": false,
+     "checkIn": "14:00",
+     "checkOut": "11:00"
+    },
+    {
+     "name": "사호(중) 파쇄석 (5m * 5m)",
+     "price": 60000,
+     "size": [
+      5,
+      5
+     ],
+     "floor": null,
+     "kind": "오토캠핑",
+     "parking": "텐트옆주차",
+     "people": "성인2인, 미성년 0인",
+     "pet": true,
+     "carCamp": false,
+     "checkIn": "14:00",
+     "checkOut": "11:00"
+    },
+    {
+     "name": "아호(중) 파쇄석 (5m * 5m)",
+     "price": 60000,
+     "size": [
+      5,
+      5
      ],
      "floor": null,
      "kind": "오토캠핑",
@@ -44869,13 +45737,13 @@
   },
   "100421": {
    "cseq": 7542,
-   "checked_at": "2026-10-21T00:45:35.423Z",
+   "checked_at": "2026-10-21T14:37:01.615Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100424": {
    "cseq": 3991,
-   "checked_at": "2026-10-21T00:45:42.260Z",
+   "checked_at": "2026-10-21T14:37:07.351Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024",
    "sites": [
@@ -45165,7 +46033,7 @@
   },
   "100429": {
    "cseq": 4020,
-   "checked_at": "2026-10-21T00:45:48.210Z",
+   "checked_at": "2026-10-21T14:37:11.512Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4020&res_dt=20261024",
    "sites": [
@@ -45218,7 +46086,7 @@
   },
   "100431": {
    "cseq": 7554,
-   "checked_at": "2026-10-21T00:45:52.089Z",
+   "checked_at": "2026-10-21T14:37:15.515Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7554&res_dt=20261024",
    "sites": [
@@ -45317,7 +46185,7 @@
   },
   "100432": {
    "cseq": 2123,
-   "checked_at": "2026-10-21T00:45:56.319Z",
+   "checked_at": "2026-10-21T14:37:19.854Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2123&res_dt=20261024",
    "sites": [
@@ -45377,7 +46245,7 @@
   },
   "100433": {
    "cseq": 7553,
-   "checked_at": "2026-10-21T00:46:01.033Z",
+   "checked_at": "2026-10-21T14:37:24.072Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7553&res_dt=20261024",
    "sites": [
@@ -45580,7 +46448,7 @@
   },
   "100435": {
    "cseq": 8220,
-   "checked_at": "2026-10-21T00:57:11.865Z",
+   "checked_at": "2026-10-21T14:47:04.000Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=8220&res_dt=20261024",
    "sites": [
@@ -45640,7 +46508,7 @@
   },
   "100456": {
    "cseq": 16350,
-   "checked_at": "2026-10-21T00:46:07.812Z",
+   "checked_at": "2026-10-21T14:37:29.320Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024",
    "sites": [
@@ -45982,7 +46850,7 @@
   },
   "100459": {
    "cseq": 4013,
-   "checked_at": "2026-10-21T00:46:14.911Z",
+   "checked_at": "2026-10-21T14:37:33.518Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4013&res_dt=20261024",
    "sites": [
@@ -46042,7 +46910,7 @@
   },
   "100483": {
    "cseq": 11347,
-   "checked_at": "2026-10-21T00:46:19.345Z",
+   "checked_at": "2026-10-21T14:37:37.720Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=11347&res_dt=20261024",
    "sites": [
@@ -46167,7 +47035,7 @@
   },
   "100484": {
    "cseq": 7565,
-   "checked_at": "2026-10-21T00:57:16.163Z",
+   "checked_at": "2026-10-21T14:47:08.572Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7565&res_dt=20261024",
    "sites": [
@@ -46331,7 +47199,7 @@
   },
   "100507": {
    "cseq": 2759,
-   "checked_at": "2026-10-21T00:46:23.443Z",
+   "checked_at": "2026-10-21T14:37:41.417Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2759&res_dt=20261024",
    "sites": [
@@ -46387,7 +47255,7 @@
   },
   "100508": {
    "cseq": 4051,
-   "checked_at": "2026-10-21T01:08:22.981Z",
+   "checked_at": "2026-10-21T14:56:40.464Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4051&res_dt=20261024",
    "sites": [
@@ -46549,7 +47417,7 @@
   },
   "100526": {
    "cseq": 3997,
-   "checked_at": "2026-10-21T01:08:28.239Z",
+   "checked_at": "2026-10-21T14:56:44.368Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3997&res_dt=20261024",
    "sites": [
@@ -46637,13 +47505,13 @@
   },
   "100533": {
    "cseq": 9027,
-   "checked_at": "2026-10-21T00:46:26.967Z",
+   "checked_at": "2026-10-21T14:37:45.043Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100538": {
    "cseq": 4049,
-   "checked_at": "2026-10-21T00:46:33.854Z",
+   "checked_at": "2026-10-21T14:37:50.559Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024",
    "sites": [
@@ -46844,26 +47712,10 @@
   },
   "100555": {
    "cseq": 17614,
-   "checked_at": "2026-10-21T00:46:40.192Z",
+   "checked_at": "2026-10-21T14:37:54.532Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17614&res_dt=20261024",
    "sites": [
-    {
-     "name": "그늘막 존",
-     "price": 50000,
-     "size": [
-      7,
-      8
-     ],
-     "floor": null,
-     "kind": "오토캠핑",
-     "parking": "주차장주차",
-     "people": "성인2인, 미성년 2인",
-     "pet": true,
-     "carCamp": false,
-     "checkIn": "14:00",
-     "checkOut": "14:00"
-    },
     {
      "name": "B 사이트",
      "price": 50000,
@@ -46877,6 +47729,22 @@
      "people": "성인2인, 미성년 2인",
      "pet": true,
      "carCamp": true,
+     "checkIn": "14:00",
+     "checkOut": "14:00"
+    },
+    {
+     "name": "그늘막 존",
+     "price": 50000,
+     "size": [
+      7,
+      8
+     ],
+     "floor": null,
+     "kind": "오토캠핑",
+     "parking": "주차장주차",
+     "people": "성인2인, 미성년 2인",
+     "pet": true,
+     "carCamp": false,
      "checkIn": "14:00",
      "checkOut": "14:00"
     },
@@ -46900,7 +47768,7 @@
   },
   "100584": {
    "cseq": 4097,
-   "checked_at": "2026-10-21T00:46:44.223Z",
+   "checked_at": "2026-10-21T14:37:58.241Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4097&res_dt=20261024",
    "sites": [
@@ -46956,13 +47824,13 @@
   },
   "100588": {
    "cseq": 19624,
-   "checked_at": "2026-10-21T00:57:19.390Z",
+   "checked_at": "2026-10-21T14:47:11.832Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100592": {
    "cseq": 4312,
-   "checked_at": "2026-10-21T00:57:24.459Z",
+   "checked_at": "2026-10-21T14:47:16.552Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4312&res_dt=20261024",
    "sites": [
@@ -47100,13 +47968,13 @@
   },
   "100624": {
    "cseq": 7622,
-   "checked_at": "2026-10-21T00:46:47.711Z",
+   "checked_at": "2026-10-21T14:38:01.852Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100629": {
    "cseq": 14857,
-   "checked_at": "2026-10-21T00:46:52.557Z",
+   "checked_at": "2026-10-21T14:38:06.545Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14857&res_dt=20261024",
    "sites": [
@@ -47204,7 +48072,7 @@
   },
   "100635": {
    "cseq": 7560,
-   "checked_at": "2026-10-21T00:46:56.232Z",
+   "checked_at": "2026-10-21T14:38:10.081Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7560&res_dt=20261024",
    "sites": [
@@ -47238,7 +48106,7 @@
   },
   "100639": {
    "cseq": 4023,
-   "checked_at": "2026-10-21T00:57:28.759Z",
+   "checked_at": "2026-10-21T14:47:20.610Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4023&res_dt=20261024",
    "sites": [
@@ -47339,7 +48207,7 @@
   },
   "100644": {
    "cseq": 14431,
-   "checked_at": "2026-10-21T00:57:32.843Z",
+   "checked_at": "2026-10-21T14:47:24.559Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14431&res_dt=20261024",
    "sites": [
@@ -47427,7 +48295,7 @@
   },
   "100645": {
    "cseq": 7585,
-   "checked_at": "2026-10-21T00:47:01.171Z",
+   "checked_at": "2026-10-21T14:38:14.609Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7585&res_dt=20261024",
    "sites": [
@@ -47565,7 +48433,7 @@
   },
   "100659": {
    "cseq": 4273,
-   "checked_at": "2026-10-21T00:47:06.587Z",
+   "checked_at": "2026-10-21T14:38:18.937Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4273&res_dt=20261024",
    "sites": [
@@ -47833,7 +48701,7 @@
   },
   "100665": {
    "cseq": 4008,
-   "checked_at": "2026-10-21T00:47:13.124Z",
+   "checked_at": "2026-10-21T14:38:23.691Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4008&res_dt=20261024",
    "sites": [
@@ -48097,7 +48965,7 @@
   },
   "100671": {
    "cseq": 4116,
-   "checked_at": "2026-10-21T00:47:20.002Z",
+   "checked_at": "2026-10-21T14:38:27.829Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4116&res_dt=20261024",
    "sites": [
@@ -48144,7 +49012,7 @@
   },
   "100672": {
    "cseq": 9103,
-   "checked_at": "2026-10-21T00:47:24.543Z",
+   "checked_at": "2026-10-21T14:38:32.247Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=9103&res_dt=20261024",
    "sites": [
@@ -48230,7 +49098,7 @@
   },
   "100676": {
    "cseq": 4211,
-   "checked_at": "2026-10-21T00:47:29.348Z",
+   "checked_at": "2026-10-21T14:38:36.096Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4211&res_dt=20261024",
    "sites": [
@@ -48299,7 +49167,7 @@
   },
   "100683": {
    "cseq": 13943,
-   "checked_at": "2026-10-21T00:57:37.404Z",
+   "checked_at": "2026-10-21T14:47:28.576Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13943&res_dt=20261024",
    "sites": [
@@ -48476,7 +49344,7 @@
   },
   "100697": {
    "cseq": 14348,
-   "checked_at": "2026-10-21T00:47:34.633Z",
+   "checked_at": "2026-10-21T14:38:40.229Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14348&res_dt=20261024",
    "sites": [
@@ -48580,13 +49448,13 @@
   },
   "100700": {
    "cseq": 13034,
-   "checked_at": "2026-10-21T00:47:38.396Z",
+   "checked_at": "2026-10-21T14:38:43.464Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100703": {
    "cseq": 4223,
-   "checked_at": "2026-10-21T00:47:44.131Z",
+   "checked_at": "2026-10-21T14:38:48.568Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4223&res_dt=20261024",
    "sites": [
@@ -48722,7 +49590,7 @@
   },
   "100710": {
    "cseq": 16444,
-   "checked_at": "2026-10-21T00:47:48.144Z",
+   "checked_at": "2026-10-21T14:38:51.562Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16444&res_dt=20261024",
    "sites": [
@@ -48746,7 +49614,7 @@
   },
   "100712": {
    "cseq": 4318,
-   "checked_at": "2026-10-21T00:57:41.521Z",
+   "checked_at": "2026-10-21T14:47:32.258Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4318&res_dt=20261024",
    "sites": [
@@ -48858,7 +49726,7 @@
   },
   "100724": {
    "cseq": 10126,
-   "checked_at": "2026-10-21T00:47:52.398Z",
+   "checked_at": "2026-10-21T14:38:55.930Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=10126&res_dt=20261024",
    "sites": [
@@ -48931,7 +49799,7 @@
   },
   "100728": {
    "cseq": 3805,
-   "checked_at": "2026-10-21T00:47:57.450Z",
+   "checked_at": "2026-10-21T14:39:00.160Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3805&res_dt=20261024",
    "sites": [
@@ -49004,13 +49872,13 @@
   },
   "100743": {
    "cseq": 14802,
-   "checked_at": "2026-10-21T00:48:00.831Z",
+   "checked_at": "2026-10-21T14:39:03.505Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100744": {
    "cseq": 9034,
-   "checked_at": "2026-10-21T00:48:05.541Z",
+   "checked_at": "2026-10-21T14:39:07.958Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=9034&res_dt=20261024",
    "sites": [
@@ -49096,7 +49964,7 @@
   },
   "100756": {
    "cseq": 2280,
-   "checked_at": "2026-10-21T00:57:45.048Z",
+   "checked_at": "2026-10-21T14:47:36.054Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2280&res_dt=20261024",
    "sites": [
@@ -49130,7 +49998,7 @@
   },
   "100770": {
    "cseq": 4225,
-   "checked_at": "2026-10-21T00:57:49.229Z",
+   "checked_at": "2026-10-21T14:47:40.376Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4225&res_dt=20261024",
    "sites": [
@@ -49164,7 +50032,7 @@
   },
   "100780": {
    "cseq": 4181,
-   "checked_at": "2026-10-21T00:57:54.423Z",
+   "checked_at": "2026-10-21T14:47:44.860Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4181&res_dt=20261024",
    "sites": [
@@ -49275,13 +50143,13 @@
   },
   "100825": {
    "cseq": 19350,
-   "checked_at": "2026-10-21T00:57:58.221Z",
+   "checked_at": "2026-10-21T14:47:48.078Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100846": {
    "cseq": 7581,
-   "checked_at": "2026-10-21T00:58:03.455Z",
+   "checked_at": "2026-10-21T14:47:52.970Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7581&res_dt=20261024",
    "sites": [
@@ -49484,7 +50352,7 @@
   },
   "100862": {
    "cseq": 4389,
-   "checked_at": "2026-10-21T01:08:32.198Z",
+   "checked_at": "2026-10-21T14:56:48.107Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4389&res_dt=20261024",
    "sites": [
@@ -49531,7 +50399,7 @@
   },
   "100883": {
    "cseq": 7330,
-   "checked_at": "2026-10-21T00:58:08.774Z",
+   "checked_at": "2026-10-21T14:47:56.788Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7330&res_dt=20261024",
    "sites": [
@@ -49630,7 +50498,7 @@
   },
   "100884": {
    "cseq": 4384,
-   "checked_at": "2026-10-21T01:08:35.781Z",
+   "checked_at": "2026-10-21T14:56:51.712Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4384&res_dt=20261024",
    "sites": [
@@ -49654,7 +50522,7 @@
   },
   "100891": {
    "cseq": 4249,
-   "checked_at": "2026-10-21T00:58:16.306Z",
+   "checked_at": "2026-10-21T14:48:02.144Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4249&res_dt=20261024",
    "sites": [
@@ -49883,7 +50751,7 @@
   },
   "100937": {
    "cseq": 6906,
-   "checked_at": "2026-10-21T00:58:21.263Z",
+   "checked_at": "2026-10-21T14:48:06.014Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=6906&res_dt=20261024",
    "sites": [
@@ -49923,7 +50791,7 @@
   },
   "100938": {
    "cseq": 4425,
-   "checked_at": "2026-10-21T01:08:41.700Z",
+   "checked_at": "2026-10-21T14:56:57.211Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4425&res_dt=20261024",
    "sites": [
@@ -50091,7 +50959,7 @@
   },
   "100957": {
    "cseq": 6388,
-   "checked_at": "2026-10-21T00:58:25.932Z",
+   "checked_at": "2026-10-21T14:48:10.748Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=6388&res_dt=20261024",
    "sites": [
@@ -50229,7 +51097,7 @@
   },
   "100967": {
    "cseq": 14738,
-   "checked_at": "2026-10-21T00:58:31.050Z",
+   "checked_at": "2026-10-21T14:48:14.524Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14738&res_dt=20261024",
    "sites": [
@@ -50432,13 +51300,13 @@
   },
   "100974": {
    "cseq": 13102,
-   "checked_at": "2026-10-21T00:58:34.635Z",
+   "checked_at": "2026-10-21T14:48:18.069Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100989": {
    "cseq": 18431,
-   "checked_at": "2026-10-21T01:08:46.613Z",
+   "checked_at": "2026-10-21T14:57:01.156Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18431&res_dt=20261024",
    "sites": [
@@ -50523,7 +51391,7 @@
   },
   "100996": {
    "cseq": 7332,
-   "checked_at": "2026-10-21T01:08:50.386Z",
+   "checked_at": "2026-10-21T14:57:04.533Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7332&res_dt=20261024",
    "sites": [
@@ -50563,7 +51431,7 @@
   },
   "100998": {
    "cseq": 6909,
-   "checked_at": "2026-10-21T00:48:13.108Z",
+   "checked_at": "2026-10-21T14:39:13.726Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=6909&res_dt=20261024",
    "sites": [
@@ -50920,7 +51788,7 @@
   },
   "101008": {
    "cseq": 13839,
-   "checked_at": "2026-10-21T00:58:38.791Z",
+   "checked_at": "2026-10-21T14:48:22.456Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13839&res_dt=20261024",
    "sites": [
@@ -50980,7 +51848,7 @@
   },
   "101029": {
    "cseq": 6308,
-   "checked_at": "2026-10-21T00:58:44.826Z",
+   "checked_at": "2026-10-21T14:48:27.081Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=6308&res_dt=20261024",
    "sites": [
@@ -51105,7 +51973,7 @@
   },
   "101031": {
    "cseq": 8279,
-   "checked_at": "2026-10-21T00:58:50.886Z",
+   "checked_at": "2026-10-21T14:48:30.695Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=8279&res_dt=20261024",
    "sites": [
@@ -51191,7 +52059,7 @@
   },
   "101047": {
    "cseq": 7340,
-   "checked_at": "2026-10-21T00:58:55.058Z",
+   "checked_at": "2026-10-21T14:48:34.823Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7340&res_dt=20261024",
    "sites": [
@@ -51225,7 +52093,7 @@
   },
   "101058": {
    "cseq": 14346,
-   "checked_at": "2026-10-21T00:58:59.931Z",
+   "checked_at": "2026-10-21T14:48:39.174Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14346&res_dt=20261024",
    "sites": [
@@ -51330,7 +52198,7 @@
   },
   "101077": {
    "cseq": 17108,
-   "checked_at": "2026-10-21T00:59:04.407Z",
+   "checked_at": "2026-10-21T14:48:43.058Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17108&res_dt=20261024",
    "sites": [
@@ -51431,13 +52299,13 @@
   },
   "101085": {
    "cseq": 13215,
-   "checked_at": "2026-10-21T00:59:08.146Z",
+   "checked_at": "2026-10-21T14:48:46.542Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101094": {
    "cseq": 5802,
-   "checked_at": "2026-10-21T00:59:14.812Z",
+   "checked_at": "2026-10-21T14:48:51.745Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=5802&res_dt=20261024",
    "sites": [
@@ -51633,7 +52501,7 @@
   },
   "101096": {
    "cseq": 13572,
-   "checked_at": "2026-10-21T00:59:20.150Z",
+   "checked_at": "2026-10-21T14:48:55.533Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13572&res_dt=20261024",
    "sites": [
@@ -51673,13 +52541,13 @@
   },
   "101106": {
    "cseq": 12085,
-   "checked_at": "2026-10-21T00:59:23.771Z",
+   "checked_at": "2026-10-21T14:48:59.220Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101124": {
    "cseq": 15128,
-   "checked_at": "2026-10-21T00:59:29.546Z",
+   "checked_at": "2026-10-21T14:49:04.491Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15128&res_dt=20261024",
    "sites": [
@@ -52012,7 +52880,7 @@
   },
   "101131": {
    "cseq": 13577,
-   "checked_at": "2026-10-21T00:59:33.742Z",
+   "checked_at": "2026-10-21T14:49:07.836Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13577&res_dt=20261024",
    "sites": [
@@ -52068,7 +52936,7 @@
   },
   "101138": {
    "cseq": 13579,
-   "checked_at": "2026-10-21T00:59:36.896Z",
+   "checked_at": "2026-10-21T14:49:11.471Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13579&res_dt=20261024",
    "sites": [
@@ -52092,7 +52960,7 @@
   },
   "101145": {
    "cseq": 18196,
-   "checked_at": "2026-10-21T00:59:41.444Z",
+   "checked_at": "2026-10-21T14:49:15.709Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18196&res_dt=20261024",
    "sites": [
@@ -52129,7 +52997,7 @@
   },
   "101148": {
    "cseq": 14572,
-   "checked_at": "2026-10-21T00:48:21.360Z",
+   "checked_at": "2026-10-21T14:39:18.938Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14572&res_dt=20261024",
    "sites": [
@@ -52488,7 +53356,7 @@
   },
   "101195": {
    "cseq": 14424,
-   "checked_at": "2026-10-21T00:59:45.249Z",
+   "checked_at": "2026-10-21T14:49:19.717Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14424&res_dt=20261024",
    "sites": [
@@ -52522,7 +53390,7 @@
   },
   "101198": {
    "cseq": 13574,
-   "checked_at": "2026-10-21T00:59:51.481Z",
+   "checked_at": "2026-10-21T14:49:24.405Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13574&res_dt=20261024",
    "sites": [
@@ -52668,7 +53536,7 @@
   },
   "101212": {
    "cseq": 14347,
-   "checked_at": "2026-10-21T00:48:25.549Z",
+   "checked_at": "2026-10-21T14:39:24.307Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261024",
    "sites": [
@@ -53032,7 +53900,7 @@
   },
   "101221": {
    "cseq": 14369,
-   "checked_at": "2026-10-21T00:59:56.227Z",
+   "checked_at": "2026-10-21T14:49:27.694Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14369&res_dt=20261024",
    "sites": [
@@ -53053,7 +53921,7 @@
   },
   "101245": {
    "cseq": 73,
-   "checked_at": "2026-10-21T01:00:02.808Z",
+   "checked_at": "2026-10-21T14:49:32.700Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=73&res_dt=20261024",
    "sites": [
@@ -53229,7 +54097,7 @@
   },
   "101246": {
    "cseq": 17608,
-   "checked_at": "2026-10-21T01:00:08.376Z",
+   "checked_at": "2026-10-21T14:49:36.308Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17608&res_dt=20261024",
    "sites": [
@@ -53285,7 +54153,7 @@
   },
   "101249": {
    "cseq": 16139,
-   "checked_at": "2026-10-21T01:00:12.704Z",
+   "checked_at": "2026-10-21T14:49:40.733Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16139&res_dt=20261024",
    "sites": [
@@ -53357,7 +54225,7 @@
   },
   "101251": {
    "cseq": 20262,
-   "checked_at": "2026-10-21T00:48:32.266Z",
+   "checked_at": "2026-10-21T14:39:28.587Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20262&res_dt=20261024",
    "sites": [
@@ -53378,7 +54246,7 @@
   },
   "101252": {
    "cseq": 14611,
-   "checked_at": "2026-10-21T00:48:37.400Z",
+   "checked_at": "2026-10-21T14:39:33.385Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14611&res_dt=20261024",
    "sites": [
@@ -53568,7 +54436,7 @@
   },
   "101266": {
    "cseq": 5331,
-   "checked_at": "2026-10-21T01:00:16.787Z",
+   "checked_at": "2026-10-21T14:49:44.594Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=5331&res_dt=20261024",
    "sites": [
@@ -53706,7 +54574,7 @@
   },
   "101271": {
    "cseq": 14357,
-   "checked_at": "2026-10-21T01:00:22.386Z",
+   "checked_at": "2026-10-21T14:49:49.186Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14357&res_dt=20261024",
    "sites": [
@@ -53906,7 +54774,7 @@
   },
   "101277": {
    "cseq": 14682,
-   "checked_at": "2026-10-21T00:48:41.902Z",
+   "checked_at": "2026-10-21T14:39:37.857Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14682&res_dt=20261024",
    "sites": [
@@ -54135,7 +55003,7 @@
   },
   "101282": {
    "cseq": 14423,
-   "checked_at": "2026-10-21T00:48:45.331Z",
+   "checked_at": "2026-10-21T14:39:41.137Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14423&res_dt=20261024",
    "sites": [
@@ -54159,13 +55027,13 @@
   },
   "101305": {
    "cseq": 19268,
-   "checked_at": "2026-10-21T00:48:49.269Z",
+   "checked_at": "2026-10-21T14:39:45.088Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101320": {
    "cseq": 13195,
-   "checked_at": "2026-10-21T00:48:53.657Z",
+   "checked_at": "2026-10-21T14:39:49.474Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13195&res_dt=20261024",
    "sites": [
@@ -54238,7 +55106,7 @@
   },
   "101326": {
    "cseq": 14425,
-   "checked_at": "2026-10-21T00:48:57.592Z",
+   "checked_at": "2026-10-21T14:39:53.376Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14425&res_dt=20261024",
    "sites": [
@@ -54278,7 +55146,7 @@
   },
   "101327": {
    "cseq": 16841,
-   "checked_at": "2026-10-21T01:00:27.840Z",
+   "checked_at": "2026-10-21T14:49:52.791Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16841&res_dt=20261024",
    "sites": [
@@ -54364,7 +55232,7 @@
   },
   "101335": {
    "cseq": 17261,
-   "checked_at": "2026-10-21T01:00:34.218Z",
+   "checked_at": "2026-10-21T14:49:57.923Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17261&res_dt=20261024",
    "sites": [
@@ -54905,7 +55773,7 @@
   },
   "101368": {
    "cseq": 14933,
-   "checked_at": "2026-10-21T01:00:38.887Z",
+   "checked_at": "2026-10-21T14:50:02.186Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14933&res_dt=20261024",
    "sites": [
@@ -55025,13 +55893,13 @@
   },
   "101370": {
    "cseq": 14011,
-   "checked_at": "2026-10-21T01:00:42.544Z",
+   "checked_at": "2026-10-21T14:50:05.233Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101374": {
    "cseq": 20980,
-   "checked_at": "2026-10-21T01:00:46.923Z",
+   "checked_at": "2026-10-21T14:50:09.711Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20980&res_dt=20261024",
    "sites": [
@@ -55100,7 +55968,7 @@
   },
   "101384": {
    "cseq": 15752,
-   "checked_at": "2026-10-21T01:00:51.975Z",
+   "checked_at": "2026-10-21T14:50:14.188Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15752&res_dt=20261024",
    "sites": [
@@ -55342,7 +56210,7 @@
   },
   "101399": {
    "cseq": 15758,
-   "checked_at": "2026-10-21T01:00:55.567Z",
+   "checked_at": "2026-10-21T14:50:17.500Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15758&res_dt=20261024",
    "sites": [
@@ -55402,7 +56270,7 @@
   },
   "101411": {
    "cseq": 14838,
-   "checked_at": "2026-10-21T01:01:01.392Z",
+   "checked_at": "2026-10-21T14:50:22.481Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14838&res_dt=20261024",
    "sites": [
@@ -55567,7 +56435,7 @@
   },
   "101414": {
    "cseq": 13597,
-   "checked_at": "2026-10-21T00:49:02.091Z",
+   "checked_at": "2026-10-21T14:39:57.539Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13597&res_dt=20261024",
    "sites": [
@@ -55640,7 +56508,7 @@
   },
   "101424": {
    "cseq": 14375,
-   "checked_at": "2026-10-21T01:01:06.443Z",
+   "checked_at": "2026-10-21T14:50:26.055Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14375&res_dt=20261024",
    "sites": [
@@ -55706,13 +56574,13 @@
   },
   "101446": {
    "cseq": 16390,
-   "checked_at": "2026-10-21T01:01:09.779Z",
+   "checked_at": "2026-10-21T14:50:29.482Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101447": {
    "cseq": 16355,
-   "checked_at": "2026-10-21T01:01:14.276Z",
+   "checked_at": "2026-10-21T14:50:33.780Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16355&res_dt=20261024",
    "sites": [
@@ -55768,7 +56636,7 @@
   },
   "101454": {
    "cseq": 15408,
-   "checked_at": "2026-10-21T01:01:18.297Z",
+   "checked_at": "2026-10-21T14:50:37.825Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15408&res_dt=20261024",
    "sites": [
@@ -55824,13 +56692,13 @@
   },
   "101459": {
    "cseq": 19097,
-   "checked_at": "2026-10-21T01:01:21.660Z",
+   "checked_at": "2026-10-21T14:50:41.428Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101476": {
    "cseq": 17262,
-   "checked_at": "2026-10-21T01:01:26.120Z",
+   "checked_at": "2026-10-21T14:50:45.949Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17262&res_dt=20261024",
    "sites": [
@@ -55916,7 +56784,7 @@
   },
   "101511": {
    "cseq": 15435,
-   "checked_at": "2026-10-21T01:01:30.550Z",
+   "checked_at": "2026-10-21T14:50:49.863Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15435&res_dt=20261024",
    "sites": [
@@ -55972,7 +56840,7 @@
   },
   "101518": {
    "cseq": 16129,
-   "checked_at": "2026-10-21T01:01:34.874Z",
+   "checked_at": "2026-10-21T14:50:54.129Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16129&res_dt=20261024",
    "sites": [
@@ -56048,7 +56916,7 @@
   },
   "101519": {
    "cseq": 16133,
-   "checked_at": "2026-10-21T01:01:38.288Z",
+   "checked_at": "2026-10-21T14:50:57.525Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16133&res_dt=20261024",
    "sites": [
@@ -56072,7 +56940,7 @@
   },
   "101527": {
    "cseq": 16861,
-   "checked_at": "2026-10-21T01:01:41.887Z",
+   "checked_at": "2026-10-21T14:51:01.484Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16861&res_dt=20261024",
    "sites": [
@@ -56096,13 +56964,13 @@
   },
   "101530": {
    "cseq": 16042,
-   "checked_at": "2026-10-21T01:01:46.193Z",
+   "checked_at": "2026-10-21T14:51:05.443Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101532": {
    "cseq": 16590,
-   "checked_at": "2026-10-21T01:01:53.300Z",
+   "checked_at": "2026-10-21T14:51:11.163Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16590&res_dt=20261024",
    "sites": [
@@ -56630,7 +57498,7 @@
   },
   "101539": {
    "cseq": 20949,
-   "checked_at": "2026-10-21T01:01:56.955Z",
+   "checked_at": "2026-10-21T14:51:14.613Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20949&res_dt=20261024",
    "sites": [
@@ -56677,7 +57545,7 @@
   },
   "101567": {
    "cseq": 15898,
-   "checked_at": "2026-10-21T01:02:03.598Z",
+   "checked_at": "2026-10-21T14:51:19.076Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15898&res_dt=20261024",
    "sites": [
@@ -56749,7 +57617,7 @@
   },
   "101579": {
    "cseq": 20192,
-   "checked_at": "2026-10-21T01:02:08.641Z",
+   "checked_at": "2026-10-21T14:51:23.141Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20192&res_dt=20261024",
    "sites": [
@@ -56952,7 +57820,7 @@
   },
   "101581": {
    "cseq": 4962,
-   "checked_at": "2026-10-21T01:02:12.247Z",
+   "checked_at": "2026-10-21T14:51:26.660Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4962&res_dt=20261024",
    "sites": [
@@ -56986,7 +57854,7 @@
   },
   "101587": {
    "cseq": 16635,
-   "checked_at": "2026-10-21T01:02:16.899Z",
+   "checked_at": "2026-10-21T14:51:31.175Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16635&res_dt=20261024",
    "sites": [
@@ -57124,7 +57992,7 @@
   },
   "101606": {
    "cseq": 19991,
-   "checked_at": "2026-10-21T01:02:21.893Z",
+   "checked_at": "2026-10-21T14:51:35.402Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19991&res_dt=20261024",
    "sites": [
@@ -57366,13 +58234,13 @@
   },
   "101607": {
    "cseq": 19664,
-   "checked_at": "2026-10-21T01:02:25.157Z",
+   "checked_at": "2026-10-21T14:51:38.424Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101612": {
    "cseq": 20772,
-   "checked_at": "2026-10-21T01:02:30.966Z",
+   "checked_at": "2026-10-21T14:51:43.605Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20772&res_dt=20261024",
    "sites": [
@@ -57627,7 +58495,7 @@
   },
   "101619": {
    "cseq": 17327,
-   "checked_at": "2026-10-21T01:02:35.379Z",
+   "checked_at": "2026-10-21T14:51:47.551Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17327&res_dt=20261024",
    "sites": [
@@ -57731,7 +58599,7 @@
   },
   "101620": {
    "cseq": 17109,
-   "checked_at": "2026-10-21T01:02:40.849Z",
+   "checked_at": "2026-10-21T14:51:52.028Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17109&res_dt=20261024",
    "sites": [
@@ -57884,13 +58752,13 @@
   },
   "101622": {
    "cseq": 7393,
-   "checked_at": "2026-10-21T01:02:45.409Z",
+   "checked_at": "2026-10-21T14:51:55.557Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101625": {
    "cseq": 20752,
-   "checked_at": "2026-10-21T01:02:49.923Z",
+   "checked_at": "2026-10-21T14:51:59.991Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20752&res_dt=20261024",
    "sites": [
@@ -57976,7 +58844,7 @@
   },
   "101629": {
    "cseq": 16124,
-   "checked_at": "2026-10-21T01:02:56.132Z",
+   "checked_at": "2026-10-21T14:52:04.755Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16124&res_dt=20261024",
    "sites": [
@@ -58166,7 +59034,7 @@
   },
   "101654": {
    "cseq": 7193,
-   "checked_at": "2026-10-21T01:03:01.738Z",
+   "checked_at": "2026-10-21T14:52:09.233Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7193&res_dt=20261024",
    "sites": [
@@ -58291,7 +59159,7 @@
   },
   "101657": {
    "cseq": 16356,
-   "checked_at": "2026-10-21T01:03:05.184Z",
+   "checked_at": "2026-10-21T14:52:12.624Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16356&res_dt=20261024",
    "sites": [
@@ -58312,7 +59180,7 @@
   },
   "101659": {
    "cseq": 17290,
-   "checked_at": "2026-10-21T01:03:10.023Z",
+   "checked_at": "2026-10-21T14:52:17.085Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17290&res_dt=20261024",
    "sites": [
@@ -58391,7 +59259,7 @@
   },
   "101664": {
    "cseq": 16864,
-   "checked_at": "2026-10-21T01:03:14.858Z",
+   "checked_at": "2026-10-21T14:52:20.966Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16864&res_dt=20261024",
    "sites": [
@@ -58444,7 +59312,7 @@
   },
   "101669": {
    "cseq": 16451,
-   "checked_at": "2026-10-21T01:03:19.542Z",
+   "checked_at": "2026-10-21T14:52:25.132Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16451&res_dt=20261024",
    "sites": [
@@ -58548,7 +59416,7 @@
   },
   "101670": {
    "cseq": 16138,
-   "checked_at": "2026-10-21T01:03:25.071Z",
+   "checked_at": "2026-10-21T14:52:29.247Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024",
    "sites": [
@@ -58684,7 +59552,7 @@
   },
   "101675": {
    "cseq": 16445,
-   "checked_at": "2026-10-21T01:03:30.292Z",
+   "checked_at": "2026-10-21T14:52:33.356Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16445&res_dt=20261024",
    "sites": [
@@ -58804,7 +59672,7 @@
   },
   "101687": {
    "cseq": 17163,
-   "checked_at": "2026-10-21T01:03:34.981Z",
+   "checked_at": "2026-10-21T14:52:37.281Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17163&res_dt=20261024",
    "sites": [
@@ -58955,7 +59823,7 @@
   },
   "101689": {
    "cseq": 20902,
-   "checked_at": "2026-10-21T00:49:06.956Z",
+   "checked_at": "2026-10-21T14:40:02.092Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20902&res_dt=20261024",
    "sites": [
@@ -59197,7 +60065,7 @@
   },
   "101732": {
    "cseq": 17051,
-   "checked_at": "2026-10-21T01:03:38.917Z",
+   "checked_at": "2026-10-21T14:52:41.030Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17051&res_dt=20261024",
    "sites": [
@@ -59309,7 +60177,7 @@
   },
   "101734": {
    "cseq": 20559,
-   "checked_at": "2026-10-21T00:49:11.057Z",
+   "checked_at": "2026-10-21T14:40:05.885Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20559&res_dt=20261024",
    "sites": [
@@ -59434,10 +60302,26 @@
   },
   "101743": {
    "cseq": 16872,
-   "checked_at": "2026-10-21T01:03:43.451Z",
+   "checked_at": "2026-10-21T14:52:45.073Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16872&res_dt=20261024",
    "sites": [
+    {
+     "name": "계곡 5번",
+     "price": 50000,
+     "size": [
+      6,
+      5
+     ],
+     "floor": null,
+     "kind": "오토캠핑",
+     "parking": "텐트옆주차",
+     "people": "성인2인, 미성년 2인",
+     "pet": false,
+     "carCamp": false,
+     "checkIn": "14:00",
+     "checkOut": "12:00"
+    },
     {
      "name": "계곡 6번",
      "price": 50000,
@@ -59501,28 +60385,12 @@
      "carCamp": false,
      "checkIn": "14:00",
      "checkOut": "12:00"
-    },
-    {
-     "name": "계곡 5번",
-     "price": 50000,
-     "size": [
-      6,
-      5
-     ],
-     "floor": null,
-     "kind": "오토캠핑",
-     "parking": "텐트옆주차",
-     "people": "성인2인, 미성년 2인",
-     "pet": false,
-     "carCamp": false,
-     "checkIn": "14:00",
-     "checkOut": "12:00"
     }
    ]
   },
   "101756": {
    "cseq": 17393,
-   "checked_at": "2026-10-21T00:49:15.518Z",
+   "checked_at": "2026-10-21T14:40:10.094Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17393&res_dt=20261024",
    "sites": [
@@ -59751,7 +60619,7 @@
   },
   "101766": {
    "cseq": 17130,
-   "checked_at": "2026-10-21T01:03:47.666Z",
+   "checked_at": "2026-10-21T14:52:49.283Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17130&res_dt=20261024",
    "sites": [
@@ -59928,7 +60796,7 @@
   },
   "101769": {
    "cseq": 3693,
-   "checked_at": "2026-10-21T01:03:52.725Z",
+   "checked_at": "2026-10-21T14:52:53.490Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3693&res_dt=20261024",
    "sites": [
@@ -60045,7 +60913,7 @@
   },
   "101777": {
    "cseq": 17651,
-   "checked_at": "2026-10-21T01:04:01.430Z",
+   "checked_at": "2026-10-21T14:52:58.827Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17651&res_dt=20261024",
    "sites": [
@@ -60421,7 +61289,7 @@
   },
   "101792": {
    "cseq": 16913,
-   "checked_at": "2026-10-21T01:04:08.763Z",
+   "checked_at": "2026-10-21T14:53:03.731Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16913&res_dt=20261024",
    "sites": [
@@ -60493,13 +61361,13 @@
   },
   "101795": {
    "cseq": 19118,
-   "checked_at": "2026-10-21T01:04:12.115Z",
+   "checked_at": "2026-10-21T14:53:06.817Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101819": {
    "cseq": 17320,
-   "checked_at": "2026-10-21T01:04:17.077Z",
+   "checked_at": "2026-10-21T14:53:11.453Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17320&res_dt=20261024",
    "sites": [
@@ -60549,7 +61417,7 @@
   },
   "101823": {
    "cseq": 19030,
-   "checked_at": "2026-10-21T01:04:20.979Z",
+   "checked_at": "2026-10-21T14:53:15.332Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19030&res_dt=20261024",
    "sites": [
@@ -60661,7 +61529,7 @@
   },
   "101826": {
    "cseq": 19348,
-   "checked_at": "2026-10-21T01:04:25.719Z",
+   "checked_at": "2026-10-21T14:53:19.680Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19348&res_dt=20261024",
    "sites": [
@@ -60877,7 +61745,7 @@
   },
   "101832": {
    "cseq": 17539,
-   "checked_at": "2026-10-21T01:04:30.203Z",
+   "checked_at": "2026-10-21T14:53:23.558Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17539&res_dt=20261024",
    "sites": [
@@ -61067,7 +61935,7 @@
   },
   "101845": {
    "cseq": 17316,
-   "checked_at": "2026-10-21T01:04:34.046Z",
+   "checked_at": "2026-10-21T14:53:27.160Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17316&res_dt=20261024",
    "sites": [
@@ -61104,7 +61972,7 @@
   },
   "101855": {
    "cseq": 20970,
-   "checked_at": "2026-10-21T01:04:39.522Z",
+   "checked_at": "2026-10-21T14:53:32.103Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20970&res_dt=20261024",
    "sites": [
@@ -61489,7 +62357,7 @@
   },
   "101877": {
    "cseq": 17601,
-   "checked_at": "2026-10-21T01:04:44.425Z",
+   "checked_at": "2026-10-21T14:53:36.164Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17601&res_dt=20261024",
    "sites": [
@@ -61601,7 +62469,7 @@
   },
   "101886": {
    "cseq": 17326,
-   "checked_at": "2026-10-21T01:04:48.644Z",
+   "checked_at": "2026-10-21T14:53:39.709Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17326&res_dt=20261024",
    "sites": [
@@ -61657,7 +62525,7 @@
   },
   "101898": {
    "cseq": 20139,
-   "checked_at": "2026-10-21T01:04:52.440Z",
+   "checked_at": "2026-10-21T14:53:43.540Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20139&res_dt=20261024",
    "sites": [
@@ -61691,7 +62559,7 @@
   },
   "101911": {
    "cseq": 19003,
-   "checked_at": "2026-10-21T01:04:56.194Z",
+   "checked_at": "2026-10-21T14:53:47.624Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19003&res_dt=20261024",
    "sites": [
@@ -61715,7 +62583,7 @@
   },
   "101926": {
    "cseq": 17325,
-   "checked_at": "2026-10-21T01:05:00.306Z",
+   "checked_at": "2026-10-21T14:53:51.394Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17325&res_dt=20261024",
    "sites": [
@@ -61736,7 +62604,7 @@
   },
   "101931": {
    "cseq": 149,
-   "checked_at": "2026-10-21T01:05:04.662Z",
+   "checked_at": "2026-10-21T14:53:55.666Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=149&res_dt=20261024",
    "sites": [
@@ -61776,7 +62644,7 @@
   },
   "101938": {
    "cseq": 17644,
-   "checked_at": "2026-10-21T01:05:11.542Z",
+   "checked_at": "2026-10-21T14:54:00.728Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17644&res_dt=20261024",
    "sites": [
@@ -62165,7 +63033,7 @@
   },
   "101939": {
    "cseq": 19163,
-   "checked_at": "2026-10-21T01:05:19.356Z",
+   "checked_at": "2026-10-21T14:54:05.085Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19163&res_dt=20261024",
    "sites": [
@@ -62420,7 +63288,7 @@
   },
   "101973": {
    "cseq": 18299,
-   "checked_at": "2026-10-21T01:05:23.458Z",
+   "checked_at": "2026-10-21T14:54:08.686Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18299&res_dt=20261024",
    "sites": [
@@ -62492,7 +63360,7 @@
   },
   "101981": {
    "cseq": 19678,
-   "checked_at": "2026-10-21T01:05:27.668Z",
+   "checked_at": "2026-10-21T14:54:12.727Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19678&res_dt=20261024",
    "sites": [
@@ -62617,13 +63485,13 @@
   },
   "101982": {
    "cseq": 19397,
-   "checked_at": "2026-10-21T01:05:31.243Z",
+   "checked_at": "2026-10-21T14:54:16.053Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101988": {
    "cseq": 19320,
-   "checked_at": "2026-10-21T01:05:37.452Z",
+   "checked_at": "2026-10-21T14:54:21.407Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19320&res_dt=20261024",
    "sites": [
@@ -63008,7 +63876,7 @@
   },
   "101994": {
    "cseq": 18426,
-   "checked_at": "2026-10-21T01:05:40.883Z",
+   "checked_at": "2026-10-21T14:54:24.741Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18426&res_dt=20261024",
    "sites": [
@@ -63045,7 +63913,7 @@
   },
   "102003": {
    "cseq": 19754,
-   "checked_at": "2026-10-21T01:05:45.927Z",
+   "checked_at": "2026-10-21T14:54:29.174Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19754&res_dt=20261024",
    "sites": [
@@ -63183,26 +64051,10 @@
   },
   "102011": {
    "cseq": 20062,
-   "checked_at": "2026-10-21T01:05:50.050Z",
+   "checked_at": "2026-10-21T14:54:32.853Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20062&res_dt=20261024",
    "sites": [
-    {
-     "name": "[A 구역 - 물가캠핑 ]",
-     "price": 70000,
-     "size": [
-      6.5,
-      9
-     ],
-     "floor": null,
-     "kind": "오토캠핑",
-     "parking": "주차장주차",
-     "people": "성인2인, 미성년 1인",
-     "pet": false,
-     "carCamp": false,
-     "checkIn": "13:00",
-     "checkOut": "12:00"
-    },
     {
      "name": "[B 구역- 숲속캠핑 ]",
      "price": 70000,
@@ -63215,6 +64067,22 @@
      "parking": "주차장주차",
      "people": "성인2인, 미성년 1인",
      "pet": true,
+     "carCamp": false,
+     "checkIn": "13:00",
+     "checkOut": "12:00"
+    },
+    {
+     "name": "[A 구역 - 물가캠핑 ]",
+     "price": 70000,
+     "size": [
+      6.5,
+      9
+     ],
+     "floor": null,
+     "kind": "오토캠핑",
+     "parking": "주차장주차",
+     "people": "성인2인, 미성년 1인",
+     "pet": false,
      "carCamp": false,
      "checkIn": "13:00",
      "checkOut": "12:00"
@@ -63236,7 +64104,7 @@
   },
   "102014": {
    "cseq": 19418,
-   "checked_at": "2026-10-21T01:05:54.913Z",
+   "checked_at": "2026-10-21T14:54:37.446Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19418&res_dt=20261024",
    "sites": [
@@ -63491,7 +64359,7 @@
   },
   "102015": {
    "cseq": 20017,
-   "checked_at": "2026-10-21T01:05:59.137Z",
+   "checked_at": "2026-10-21T14:54:41.085Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20017&res_dt=20261024",
    "sites": [
@@ -63681,7 +64549,7 @@
   },
   "102016": {
    "cseq": 18517,
-   "checked_at": "2026-10-21T01:06:05.293Z",
+   "checked_at": "2026-10-21T14:54:46.119Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18517&res_dt=20261024",
    "sites": [
@@ -63961,7 +64829,7 @@
   },
   "102036": {
    "cseq": 18430,
-   "checked_at": "2026-10-21T01:06:11.406Z",
+   "checked_at": "2026-10-21T14:54:50.163Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18430&res_dt=20261024",
    "sites": [
@@ -64017,7 +64885,7 @@
   },
   "102072": {
    "cseq": 20767,
-   "checked_at": "2026-10-21T01:06:15.568Z",
+   "checked_at": "2026-10-21T14:54:54.286Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20767&res_dt=20261024",
    "sites": [
@@ -64142,7 +65010,7 @@
   },
   "102095": {
    "cseq": 19770,
-   "checked_at": "2026-10-21T01:06:19.006Z",
+   "checked_at": "2026-10-21T14:54:57.809Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19770&res_dt=20261024",
    "sites": [
@@ -64166,7 +65034,7 @@
   },
   "102128": {
    "cseq": 20768,
-   "checked_at": "2026-10-21T01:06:24.430Z",
+   "checked_at": "2026-10-21T14:55:02.630Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20768&res_dt=20261024",
    "sites": [
@@ -64395,7 +65263,7 @@
   },
   "102138": {
    "cseq": 19480,
-   "checked_at": "2026-10-21T01:06:28.720Z",
+   "checked_at": "2026-10-21T14:55:06.242Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19480&res_dt=20261024",
    "sites": [
@@ -64531,7 +65399,7 @@
   },
   "102159": {
    "cseq": 20665,
-   "checked_at": "2026-10-21T00:49:19.261Z",
+   "checked_at": "2026-10-21T14:40:13.463Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20665&res_dt=20261024",
    "sites": [
@@ -64617,7 +65485,7 @@
   },
   "102167": {
    "cseq": 1605,
-   "checked_at": "2026-10-21T01:06:32.510Z",
+   "checked_at": "2026-10-21T14:55:09.825Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1605&res_dt=20261024",
    "sites": [
@@ -64641,7 +65509,7 @@
   },
   "102177": {
    "cseq": 20129,
-   "checked_at": "2026-10-21T00:49:24.792Z",
+   "checked_at": "2026-10-21T14:40:18.287Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20129&res_dt=20261024",
    "sites": [
@@ -65039,7 +65907,7 @@
   },
   "102206": {
    "cseq": 20716,
-   "checked_at": "2026-10-21T00:49:28.679Z",
+   "checked_at": "2026-10-21T14:40:21.668Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20716&res_dt=20261024",
    "sites": [
@@ -65138,7 +66006,7 @@
   },
   "102235": {
    "cseq": 19481,
-   "checked_at": "2026-10-21T00:49:34.791Z",
+   "checked_at": "2026-10-21T14:40:26.517Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19481&res_dt=20261024",
    "sites": [
@@ -65290,7 +66158,7 @@
   },
   "102236": {
    "cseq": 20430,
-   "checked_at": "2026-10-21T01:06:37.837Z",
+   "checked_at": "2026-10-21T14:55:14.933Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20430&res_dt=20261024",
    "sites": [
@@ -65449,194 +66317,194 @@
   },
   "102242": {
    "cseq": 20847,
-   "checked_at": "2026-10-21T00:49:42.149Z",
+   "checked_at": "2026-10-21T14:40:31.501Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20847&res_dt=20261024",
    "sites": [
     {
-     "name": "당일캠크닉 원룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 원룸형(입장10시30분/퇴실20시)",
      "price": 100000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 투룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 투룸형(입장10시30분/퇴실20시)",
      "price": 130000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 투룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 투룸형(입장10시30분/퇴실20시)",
      "price": 130000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 투룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 투룸형(입장10시30분/퇴실20시)",
      "price": 130000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 투룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 투룸형(입장10시30분/퇴실20시)",
      "price": 130000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 투룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 투룸형(입장10시30분/퇴실20시)",
      "price": 130000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 투룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 투룸형(입장10시30분/퇴실20시)",
      "price": 130000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 원룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 원룸형(입장10시30분/퇴실20시)",
      "price": 100000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 원룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 원룸형(입장10시30분/퇴실20시)",
      "price": 100000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 원룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 원룸형(입장10시30분/퇴실20시)",
      "price": 100000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 원룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 원룸형(입장10시30분/퇴실20시)",
      "price": 100000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 원룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 원룸형(입장10시30분/퇴실20시)",
      "price": 100000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 투룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 투룸형(입장10시30분/퇴실20시)",
      "price": 130000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 원룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 원룸형(입장10시30분/퇴실20시)",
      "price": 100000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 파라솔 대형패키지(입실10시30분/퇴실21시",
+     "name": "당일 피크닉 대형파라솔패키지(입장10시30분/퇴실20시",
      "price": 90000,
      "size": null,
      "floor": null,
@@ -65649,7 +66517,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 파라솔 대형패키지(입실10시30분/퇴실21시",
+     "name": "당일 피크닉 대형파라솔패키지(입장10시30분/퇴실20시",
      "price": 90000,
      "size": null,
      "floor": null,
@@ -65662,7 +66530,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 파라솔 대형패키지(입실10시30분/퇴실21시",
+     "name": "당일 피크닉 대형파라솔패키지(입장10시30분/퇴실20시",
      "price": 90000,
      "size": null,
      "floor": null,
@@ -65675,7 +66543,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 파라솔 대형패키지(입실10시30분/퇴실21시",
+     "name": "당일 피크닉 대형파라솔패키지(입장10시30분/퇴실20시",
      "price": 90000,
      "size": null,
      "floor": null,
@@ -65688,7 +66556,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 파라솔 대형패키지(입실10시30분/퇴실21시",
+     "name": "당일 피크닉 대형파라솔패키지(입장10시30분/퇴실20시",
      "price": 90000,
      "size": null,
      "floor": null,
@@ -65701,7 +66569,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 파라솔 대형패키지(입실10시30분/퇴실21시",
+     "name": "당일 피크닉 대형파라솔패키지(입장10시30분/퇴실20시",
      "price": 90000,
      "size": null,
      "floor": null,
@@ -65714,7 +66582,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 파라솔 대형패키지(입실10시30분/퇴실21시",
+     "name": "당일 피크닉 대형파라솔패키지(입장10시30분/퇴실20시",
      "price": 90000,
      "size": null,
      "floor": null,
@@ -65727,7 +66595,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 파라솔 대형패키지(입실10시30분/퇴실21시",
+     "name": "당일 피크닉 대형파라솔패키지(입장10시30분/퇴실20시",
      "price": 90000,
      "size": null,
      "floor": null,
@@ -65740,20 +66608,20 @@
      "checkOut": "11:00"
     },
     {
-     "name": "당일 에어컨 빵빵패키지(입실 10시30분/퇴실 21시)",
+     "name": "당일 에어컨 빵빵테이블패키지(입장10시30분/퇴실20시",
      "price": 90000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원8인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "유럽형 럭셔리 글램핑(대형)",
+     "name": "유럽형 럭셔리 초대형 글램핑(풀옵션)당일 피크닉문의",
      "price": 250000,
      "size": null,
      "floor": null,
@@ -65766,7 +66634,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "유럽형 럭셔리 글램핑(소형)",
+     "name": "유럽형 럭셔리 소형 글램핑, 당일 피크닉 별도문의",
      "price": 170000,
      "size": null,
      "floor": null,
@@ -65779,7 +66647,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "유럽형 럭셔리 글램핑(소형)",
+     "name": "유럽형 럭셔리 소형 글램핑, 당일 피크닉 별도문의",
      "price": 170000,
      "size": null,
      "floor": null,
@@ -65792,7 +66660,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "유럽형 럭셔리 글램핑(소형)",
+     "name": "유럽형 럭셔리 소형 글램핑, 당일 피크닉 별도문의",
      "price": 170000,
      "size": null,
      "floor": null,
@@ -65805,7 +66673,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "유럽형 럭셔리 글램핑(소형)",
+     "name": "유럽형 럭셔리 소형 글램핑, 당일 피크닉 별도문의",
      "price": 170000,
      "size": null,
      "floor": null,
@@ -65818,7 +66686,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "유럽형 럭셔리 글램핑(대형)",
+     "name": "유럽형 럭셔리 초대형 글램핑(풀옵션)당일 피크닉문의",
      "price": 250000,
      "size": null,
      "floor": null,
@@ -65831,7 +66699,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "유럽형 럭셔리 글램핑(대형)",
+     "name": "유럽형 럭셔리 초대형 글램핑(풀옵션)당일 피크닉문의",
      "price": 250000,
      "size": null,
      "floor": null,
@@ -65844,7 +66712,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "유럽형 럭셔리 글램핑(대형)",
+     "name": "유럽형 럭셔리 초대형 글램핑(풀옵션)당일 피크닉문의",
      "price": 250000,
      "size": null,
      "floor": null,
@@ -65857,7 +66725,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "유럽형 럭셔리 글램핑(대형)",
+     "name": "유럽형 럭셔리 초대형 글램핑(풀옵션)당일 피크닉문의",
      "price": 250000,
      "size": null,
      "floor": null,
@@ -65870,7 +66738,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "유럽형 럭셔리 글램핑(대형)",
+     "name": "유럽형 럭셔리 초대형 글램핑(풀옵션)당일 피크닉문의",
      "price": 250000,
      "size": null,
      "floor": null,
@@ -65883,7 +66751,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "유럽형 럭셔리 글램핑(대형)",
+     "name": "유럽형 럭셔리 초대형 글램핑(풀옵션)당일 피크닉문의",
      "price": 250000,
      "size": null,
      "floor": null,
@@ -65896,7 +66764,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "유럽형 럭셔리 글램핑(대형)",
+     "name": "유럽형 럭셔리 초대형 글램핑(풀옵션)당일 피크닉문의",
      "price": 250000,
      "size": null,
      "floor": null,
@@ -65909,7 +66777,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "유럽형 럭셔리 글램핑(소형)",
+     "name": "유럽형 럭셔리 소형 글램핑, 당일 피크닉 별도문의",
      "price": 170000,
      "size": null,
      "floor": null,
@@ -65922,7 +66790,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "유럽형 럭셔리 글램핑(대형)",
+     "name": "유럽형 럭셔리 초대형 글램핑(풀옵션)당일 피크닉문의",
      "price": 250000,
      "size": null,
      "floor": null,
@@ -65935,7 +66803,7 @@
      "checkOut": "11:00"
     },
     {
-     "name": "유럽형 럭셔리 글램핑(대형)",
+     "name": "유럽형 럭셔리 초대형 글램핑(풀옵션)당일 피크닉문의",
      "price": 250000,
      "size": null,
      "floor": null,
@@ -65948,104 +66816,104 @@
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 투룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 투룸형(입장10시30분/퇴실20시)",
      "price": 130000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 투룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 투룸형(입장10시30분/퇴실20시)",
      "price": 130000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 투룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 투룸형(입장10시30분/퇴실20시)",
      "price": 130000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 투룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 투룸형(입장10시30분/퇴실20시)",
      "price": 130000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 투룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 투룸형(입장10시30분/퇴실20시)",
      "price": 130000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 투룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 투룸형(입장10시30분/퇴실20시)",
      "price": 130000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 투룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 투룸형(입장10시30분/퇴실20시)",
      "price": 130000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
      "checkOut": "11:00"
     },
     {
-     "name": "당일캠크닉 투룸형(입실 10시30분/퇴실 21시)",
+     "name": "당일 피크닉 투룸형(입장10시30분/퇴실20시)",
      "price": 130000,
      "size": null,
      "floor": null,
      "kind": "펜션",
      "parking": null,
-     "people": "기준인원2인",
+     "people": "기준인원4인",
      "pet": false,
      "carCamp": false,
      "checkIn": "15:00",
@@ -66055,7 +66923,7 @@
   },
   "102331": {
    "cseq": 20913,
-   "checked_at": "2026-10-21T01:06:42.710Z",
+   "checked_at": "2026-10-21T14:55:18.041Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20913&res_dt=20261024",
    "sites": [
@@ -66079,7 +66947,7 @@
   },
   "osm-w513330739": {
    "cseq": 12923,
-   "checked_at": "2026-10-21T00:42:26.071Z",
+   "checked_at": "2026-10-21T14:34:18.608Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=12923&res_dt=20261024",
    "sites": [
@@ -66308,7 +67176,7 @@
   },
   "osm-w858869210": {
    "cseq": 4785,
-   "checked_at": "2026-10-21T00:42:30.468Z",
+   "checked_at": "2026-10-21T14:34:22.228Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4785&res_dt=20261024",
    "sites": [
@@ -66420,7 +67288,7 @@
   },
   "park-48820-00001-n71qm": {
    "cseq": 16861,
-   "checked_at": "2026-10-21T00:42:33.924Z",
+   "checked_at": "2026-10-21T14:34:25.878Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16861&res_dt=20261024",
    "sites": [
@@ -66444,7 +67312,7 @@
   },
   "park-46770-00014-qc3lb": {
    "cseq": 19772,
-   "checked_at": "2026-10-21T00:42:21.149Z",
+   "checked_at": "2026-10-21T14:34:14.198Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19772&res_dt=20261024",
    "sites": [
@@ -66499,5 +67367,5 @@
    ]
   }
  },
- "updated_at": "2026-10-21T01:08:51.929Z"
+ "updated_at": "2026-10-21T14:57:06.488Z"
 }
