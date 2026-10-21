@@ -9,5 +9,5 @@ for (const f of ["camping-atlas/public/app.js", "design/renewal/app.js"]) test(`
   assert.doesNotMatch(s, /최대 5곳 선택\) ·/, "#29 안내 문구 제거");
   assert.match(s, />표로 비교<\/button>/); assert.match(s, />스펙 비교<\/button>/, "#31");
 });
-test("#30 모바일 찜 칩 줄바꿈", () => { for (const f of ["camping-atlas/public/style.css", "design/renewal/style.css"]) assert.match(rd(f), /\.cmp-page \.picks \{ flex-wrap: wrap; overflow: visible; \}/); });
+test("#30 모바일 찜 칩 줄바꿈", () => { for (const f of ["camping-atlas/public/style.css", "design/renewal/style.css"]) assert.match(rd(f), /\.cmp-page \.picks \{ flex-wrap: wrap; overflow: visible; gap: 6px; \}.*\.pick img.*display: none;/); });
 test("#32 표 레이블 열 고정", () => { assert.match(rd("camping-atlas/public/style.css"), /\.cmp-table thead th, \.cmp-table tbody th\[scope="row"\] \{ position: sticky; left: 0; \}/); });
