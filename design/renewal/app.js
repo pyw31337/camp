@@ -2796,7 +2796,7 @@ function similarNearby(c, n = 3) {
 function similarHtml(c) {
   const rows = similarNearby(c);
   if (!rows.length) return "";
-  return `<section class="d-sec sim-sec" id="sec-similar" data-similar><div class="sec-head">${iconTitle("tent", "주변 비슷한 캠핑장")}<span class="sec-note">같은 숙박 형태 · 40km 안 가까운 순</span></div>
+  return `<section class="d-sec sim-sec" id="sec-similar" data-similar><div class="sec-head">${iconTitle("tent", "주변 비슷한 캠핑장")}</div><p class="layout-note">같은 숙박 형태 · 40km 안에서 가까운 순이에요.</p>
     <div class="rail sim-rail">${rows.map(({ x, km }) => `<div class="sim-item"><span class="sim-km">${ic("pin", "inline")}${km < 10 ? km.toFixed(1) : Math.round(km)}km</span>${card(x, 9)}</div>`).join("")}</div></section>`;
 }
 
