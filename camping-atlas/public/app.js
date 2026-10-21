@@ -1082,7 +1082,7 @@ async function ensureFull(ids) {
     if (!rec) continue;
     for (const k of Object.keys(c)) if (k.startsWith("_")) delete c[k];
     Object.assign(c, rec);
-    cleanCampFee(c); cleanCampTel(c); // 샤드가 원본 전화번호로 덮으므로 다시 정리
+    cleanCampTel(c); cleanCampFee(c); // 샤드가 원본 전화번호로 덮으므로 다시 정리
     Object.defineProperty(c, "__full", { value: true, enumerable: false });
   }
 }

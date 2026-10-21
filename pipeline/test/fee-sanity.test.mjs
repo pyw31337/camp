@@ -39,5 +39,5 @@ test("발행 카탈로그에 민간 1박 2만원 미만 요금이 남아 있지 
 });
 test("앱 표시층도 같은 하한(원본은 fee_raw)", () => {
   const s = readFileSync(new URL("../../camping-atlas/public/app.js", import.meta.url), "utf8");
-  assert.match(s, /function cleanCampFee/); assert.match(s, /cleanCampFee\(c\); cleanCampTel\(c\)/);
+  assert.match(s, /function cleanCampFee/); assert.match(s, /cleanCampTel\(c\); cleanCampFee\(c\)/);
 });
