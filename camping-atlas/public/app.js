@@ -941,6 +941,34 @@ function prefetchDetail(e) {
   if (S.byId.get(id) && !S.byId.get(id).__full) loadShard(shardOf(id));
 }
 for (const t of ["pointerover", "focusin", "touchstart"]) document.addEventListener(t, prefetchDetail, { passive: true, capture: true });
+// 화면에 보이는 카드의 샤드를 브라우저가 한가할 때 미리 받는다(동시 2개). 데이터 절약·2G면 하지 않는다.
+const IDLE_PF = { q: [], busy: 0, max: 2, io: null };
+const idleOk = () => { const n = navigator.connection; return !(n && (n.saveData || /2g/.test(n.effectiveType || ""))); };
+const onIdle = (fn) => (window.requestIdleCallback ? requestIdleCallback(fn, { timeout: 2000 }) : setTimeout(fn, 200));
+function pumpIdle() {
+  while (IDLE_PF.busy < IDLE_PF.max && IDLE_PF.q.length) {
+    const n = IDLE_PF.q.shift();
+    if (CATX.got.has(n)) continue;
+    IDLE_PF.busy++;
+    onIdle(() => loadShard(n).finally(() => { IDLE_PF.busy--; pumpIdle(); }));
+  }
+}
+function watchIdlePrefetch() {
+  if (!("IntersectionObserver" in window) || !idleOk()) return;
+  IDLE_PF.io = new IntersectionObserver((es) => {
+    if (!CATX.n) return;
+    for (const e of es) {
+      if (!e.isIntersecting) continue;
+      IDLE_PF.io.unobserve(e.target);
+      const id = decodeURIComponent(e.target.getAttribute("href").slice(4)), n = shardOf(id);
+      if (!CATX.got.has(n) && !IDLE_PF.q.includes(n)) IDLE_PF.q.push(n);
+    }
+    pumpIdle();
+  }, { rootMargin: "200px 0px" });
+  const scan = (root) => root.querySelectorAll?.('a.card-hit[href^="#/c/"]').forEach((a) => IDLE_PF.io.observe(a));
+  scan(document);
+  new MutationObserver((ms) => { for (const m of ms) for (const nd of m.addedNodes) if (nd.nodeType === 1) scan(nd); }).observe(document.body, { childList: true, subtree: true });
+}
 async function ensureFull(ids) {
   if (!CATX.n) return;
   const need = [...new Set(ids.map(String).filter((id) => { const c = S.byId.get(id); return c && !c.__full; }).map(shardOf))];
@@ -5056,4 +5084,6 @@ addEventListener("error", (e) => {
   if (legacy) history.replaceState(null, "", `#/c/${legacy[1]}`);
   syncCompare(); updateHeaderGlass();
   route();
+  // 첫 화면을 그린 뒤 한가할 때(최대 2초 뒤) 보이는 카드 샤드 미리 받기를 켠다.
+  onIdle(watchIdlePrefetch);
 })();
