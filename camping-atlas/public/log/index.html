@@ -896,8 +896,8 @@
       <button type="button" class="btn btn-icon" id="btn-refresh" title="지금 새로고침" aria-label="지금 새로고침">
         <svg id="refresh-icon"><use href="#i-refresh"/></svg>
       </button>
-      <a href="../explore/" class="btn" target="_blank" rel="noopener">탐색 화면 ↗</a>
-      <a href="../renewal/" class="btn btn-accent" target="_blank" rel="noopener">리뉴얼 시안 ↗</a>
+      <a href="/camp/" class="btn" target="_blank" rel="noopener">탐색 화면 ↗</a>
+      <a href="/camp/" class="btn btn-accent" target="_blank" rel="noopener">리뉴얼 시안 ↗</a>
     </div>
   </div>
 </header>
@@ -1509,8 +1509,8 @@
 
       for (const item of groupItems) {
         const d = item.device;
-        const exploreUrl = `../explore/#/c/${encodeURIComponent(item.campId)}`;
-        const renewalUrl = `../renewal/#/camp/${encodeURIComponent(item.campId)}`;
+        const exploreUrl = `/camp/c/${encodeURIComponent(item.campId)}`;
+        const renewalUrl = `/camp/c/${encodeURIComponent(item.campId)}`;
 
         // 뱃지 판별
         let badgeClass = "badge-add", badgeText = "+ 찜하기";
