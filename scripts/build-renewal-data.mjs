@@ -56,7 +56,9 @@ for (const f of readdirSync(join(dataDir, 'camps'))) {
   const own = d.photos?.[0];
   // 자체 호스팅 사진은 원본 고캠핑 대표 사진과 같은 장면이다. 대표 사진 키로 묶어 중복을 막는다.
   if (own?.t) add(`media/${own.t}`, c?.img ? key(c.img) : key(own.t));
+  else if (c?.ph && !official(c.ph)) add(`media/${c.ph}`, key(c.ph));
   else if (c?.img && official(c.img)) add(c.img, key(c.img));
+  else if (c?.img && String(c.img).startsWith("media/")) add(c.img, key(c.img));
   if (c?.ph) seen.add(key(c.ph));
   // 이미 정제된 카드 사진 키를 seen에 등록하여 중복을 방지
   for (const cardPath of dedupedReg[id] ?? []) seen.add(key(cardPath));
