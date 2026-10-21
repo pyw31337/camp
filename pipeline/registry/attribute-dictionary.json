@@ -31,7 +31,7 @@
   "power": "전기",
   "fire": "불·화기",
   "vehicle": "주차·차량",
-  "pet": "반려동물",
+  "pet": "반려견",
   "price": "요금",
   "fee": "추가 요금",
   "time": "이용 시간",
@@ -276,7 +276,7 @@
   {
    "code": "PET_POLICY",
    "group": "pet",
-   "label": "반려동물 동반",
+   "label": "반려견 동반",
    "type": "enum",
    "enum": {
     "ALLOWED": "동반 가능",
@@ -290,7 +290,7 @@
   {
    "code": "PET_FEE",
    "group": "pet",
-   "label": "반려동물 추가 요금",
+   "label": "반려견 추가 요금",
    "type": "krw",
    "unit": "원",
    "filter": "max"
@@ -368,14 +368,14 @@
   {
    "code": "EARLY_CHECKIN",
    "group": "time",
-   "label": "얼리 체크인",
+   "label": "얼리 입실",
    "type": "text",
    "filter": "has"
   },
   {
    "code": "LATE_CHECKOUT",
    "group": "time",
-   "label": "레이트 체크아웃",
+   "label": "레이트 퇴실",
    "type": "text",
    "filter": "has"
   },
@@ -1495,7 +1495,7 @@
     "ECO": "친환경",
     "FAMILY": "가족친화",
     "ACCESSIBLE": "교통약자 배려",
-    "PET": "반려동물 친화"
+    "PET": "반려견 친화"
    },
    "filter": "in",
    "pref": "공공 우수야영장으로 선정된 곳을 원하나요?",
