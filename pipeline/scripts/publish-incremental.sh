@@ -13,6 +13,8 @@ WT="${RUNNER_TEMP:-/tmp}/publish-main-$$"
 git fetch -q origin main
 git worktree add -q --detach "$WT" origin/main
 trap 'git worktree remove --force "$WT" >/dev/null 2>&1 || true' EXIT
+# main에 pipeline/node_modules 심볼릭 링크가 들어 있어도(4ac26477e) 실패하지 않게: 작업 사본의 링크만 바꾼다.
+rm -f "$WT/pipeline/node_modules"
 ln -s "$SRC/node_modules" "$WT/pipeline/node_modules"
 cd "$WT"
 DATA=camping-atlas/public/explore/data
