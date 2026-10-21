@@ -5299,14 +5299,23 @@ async function savesLogView() {
 const cleanup = [];
 let lastRoute = "";
 function pathOf() {
+  // 해시가 있으면 해시 우선 (테스트·레거시 호환)
+  if (location.hash.startsWith("#/")) return location.hash.slice(1) + location.search;
   let p = location.pathname;
   if (p.startsWith("/camp")) p = p.slice(5) || "/";
   return p + location.search;
 }
 function go(path) {
-  const prefix = location.pathname.startsWith("/camp") ? "/camp" : "";
-  const url = prefix + (path.startsWith("/") ? path : "/" + path);
-  if (location.pathname + location.search !== url) history.pushState(null, "", url);
+  const p = path.startsWith("/") ? path : "/" + path;
+  // 로컬 테스트(루트)에서는 해시로, /camp 아래에서는 경로로
+  if (!location.pathname.startsWith("/camp") && !location.pathname.includes("/explore") && !location.pathname.includes("/renewal")) {
+    const hash = "#" + p;
+    if (location.hash !== hash) history.pushState(null, "", hash);
+  } else {
+    const prefix = location.pathname.startsWith("/camp") ? "/camp" : "";
+    const url = prefix + p;
+    if (location.pathname + location.search !== url) history.pushState(null, "", url);
+  }
   route();
 }
 async function render() {
