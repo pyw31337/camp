@@ -456,15 +456,26 @@ img { color: transparent; }
 @media (max-width: 559px) { .park-card { grid-template-columns: 27px minmax(0, 1fr) 16px; gap: 12px; padding: 16px; } .park-card-icon { width: 27px; height: 27px; } .park-card-icon .th-ic { width: 24px; height: 24px; } }
 [data-v="b"] .card { overflow: visible; }
 [data-v="b"] .card-media .car { border-radius: 4px; }
-.card-body { display: grid; gap: 6px; padding: 16px 18px 16px; }
+.card-body { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px 14px; }
 [data-v="a"] .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); }
 [data-v="b"] .card-body { padding: 12px 0 4px; }
 [data-v="c"] .card-body { padding: 12px 14px 14px; }
-.card-name { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.3; height: 2.6em; min-height: 2.6em; max-height: 2.6em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-[data-v="b"] .card-name { font-size: 1.3rem; font-weight: 900; line-height: 1.25; height: 2.5em; min-height: 2.5em; max-height: 2.5em; }
-.card-meta { display: flex; align-items: center; flex-wrap: nowrap; gap: 4px 6px; font-size: .86rem; color: var(--ink-3); line-height: 20px; height: 20px; min-height: 20px; max-height: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-group { display: flex; flex-direction: column; min-width: 0; }
+.card-group-head { gap: 4px; }
+.card-group-types { gap: 4px; }
+.card-group-spec { gap: 2px; }
+.card-group-reviews { margin-top: 0; }
+.card-name { font-size: 1.12rem; font-weight: 850; letter-spacing: -0.03em; line-height: 1.28; height: auto; min-height: 0; max-height: 2.6em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin: 0; }
+[data-v="b"] .card-name { font-size: 1.25rem; font-weight: 900; line-height: 1.25; height: auto; min-height: 0; max-height: 2.5em; }
+.card-meta-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 24px; }
+.card-meta { display: flex; align-items: center; gap: 4px; font-size: .84rem; color: var(--ink-3); line-height: 1.3; min-width: 0; overflow: hidden; margin: 0; }
 .card-meta > .ic { width: 14px; height: 14px; color: var(--ink-3); flex-shrink: 0; }
-.rows { display: grid; margin-top: 4px; padding: 0; list-style: none; }
+.card-meta-txt { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-meta-actions { display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0; position: relative; z-index: 3; }
+.c-act-btn { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; padding: 0; border-radius: 6px; border: 1px solid var(--line); background: var(--paper); color: var(--ink-3); cursor: pointer; text-decoration: none; box-sizing: border-box; transition: all .15s ease; }
+.c-act-btn:hover { background: var(--soft); color: var(--ink); border-color: var(--line-strong, #b0b8b4); }
+.c-act-btn .ic { width: 14px; height: 14px; }
+.rows { display: grid; margin-top: 0; padding: 0; list-style: none; }
 .rows li { display: grid; grid-template-columns: 54px minmax(0, 1fr); align-items: center; gap: 16px; height: 35px; min-height: 35px; max-height: 35px; border-top: 1px solid var(--line); font-size: .89rem; box-sizing: border-box; }
 [data-v="b"] .rows li { border-top-style: solid; height: 38px; min-height: 38px; max-height: 38px; }
 [data-v="c"] .rows li { height: 35px; min-height: 35px; max-height: 35px; border-top-style: solid; }
@@ -476,7 +487,7 @@ img { color: transparent; }
 .rv .rv-amp { font-weight: 400; color: var(--ink-3); }
 .rows .r-near .rv { font-weight: 700; font-size: .84rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 35px; padding: 0; }
 .rv.none { color: var(--ink-3); opacity: .4; font-weight: 400; }
-.card-reviews { display: flex; align-items: center; flex-wrap: nowrap; gap: 4px; height: 28px; min-height: 28px; max-height: 28px; padding-top: 6px; border-top: 1px dashed var(--line); margin-top: 2px; overflow: hidden; box-sizing: border-box; }
+.card-reviews { display: flex; align-items: center; flex-wrap: nowrap; gap: 4px; height: 26px; min-height: 26px; max-height: 26px; padding-top: 6px; border-top: 1px dashed var(--line); margin-top: 2px; overflow: hidden; box-sizing: border-box; }
 .c-rv-pill { display: inline-flex; align-items: center; gap: 3px; max-width: 100%; padding: 2px 7px; border-radius: 999px; font-size: .74rem; font-weight: 750; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .c-rv-pill .ic { width: 11px; height: 11px; flex-shrink: 0; }
 .c-rv-pill i { font-style: normal; font-size: .68rem; opacity: .75; margin-left: 1px; }
@@ -511,16 +522,22 @@ img { color: transparent; }
 .bdg-cobalt { --c: var(--cobalt); }
 .bdg-ink { --c: var(--ink); }
 .bdg-teal { --c: #0d9488; }
-/* 숙박 상품 배지(글램핑·카라반·방갈로·트레일러) — 같은 캡슐, 색 아이콘 원 */
+/* 숙박 상품 배지(글램핑·카라반·방갈로·트레일러·오토캠핑·데크 등) — 같은 캡슐, 색 아이콘 원 */
 .bdg-glamp { --c: #c2410c; }
 .bdg-caravan { --c: #1d4ed8; }
 .bdg-house { --c: #7c3aed; }
 .bdg-rv { --c: #475569; }
+.bdg-auto { --c: #059669; }
+.bdg-deck { --c: #854d0e; }
+.bdg-tarp { --c: #0284c7; }
+.bdg-car { --c: #0891b2; }
+.bdg-site { --c: #64748b; }
+.bdg-size { --c: #4b5563; }
 /* 눈·영하 예보(기상청 7일) */
 .bdg-wx { --c: #0284c7; }
-.card-types.has-stay { gap: 6px; height: 24px; }
-.stay-bdgs { display: inline-flex; gap: 4px; flex: none; }
-.stay-bdgs .bdg { height: 22px; font-size: .72rem; padding: 0 8px 0 2px; gap: 4px; box-shadow: none; border: 1px solid var(--line); background: var(--paper); }
+.card-types.has-stay { gap: 4px; min-height: 22px; height: auto; }
+.stay-bdgs { display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; }
+.stay-bdgs .bdg { height: 22px; font-size: .74rem; font-weight: 700; padding: 0 8px 0 2px; gap: 4px; box-shadow: none; border: 1px solid var(--line); background: var(--paper); border-radius: 999px; color: var(--ink); }
 .stay-bdgs .bdg .ic { width: 18px; height: 18px; padding: 3px; color: #fff; }
 .mi-b .bdg-stay { border: 1px solid var(--line); }
 .qc-glamp[aria-pressed="true"] { background: #c2410c; color: #fff; border-color: #c2410c; }
@@ -1150,7 +1167,7 @@ body.map-mode { overflow: hidden; height: 100dvh; }
 
 
 /* ── 찜(하트)·테마 줄·사진 없는 곳 (2026-10-16 소유자 피드백) ── */
-.name-row { display: flex; align-items: flex-start; gap: 8px; min-height: 2.85em; }
+.name-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; min-height: 0; }
 .name-row .card-name { flex: 1; min-width: 0; }
 .heart { position: relative; z-index: 3; display: inline-grid; place-items: center; flex: none; width: 32px; height: 32px; margin: -4px -6px 0 0; border-radius: 999px; color: #a3aaa6; transition: color .15s, transform .15s; }
 .heart .ic { width: 22px; height: 22px; }
@@ -2520,7 +2537,7 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 /* ── 숙박 형태별 1박 요금(2026-10-19) ── */
 .card-price span i, .ptiers i, .card-tiers i { margin-left: 4px; padding: 1px 5px; border-radius: 6px; background: var(--soft); color: var(--ink-3); font-size: .7rem; font-style: normal; font-weight: 800; }
 .card-tiers { display: flex; align-items: center; flex-wrap: nowrap; gap: 4px 10px; height: 24px; min-height: 24px; max-height: 24px; margin: 4px 0 0; font-size: .78rem; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.card-tiers.is-empty { visibility: hidden; }
+.card-tiers.is-empty { display: none !important; }
 .card-tiers .ft b { color: var(--ink-2); font-weight: 850; }
 .ptiers { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px; }
 .ptiers .pt { display: grid; gap: 2px; min-width: 120px; padding: 10px 14px; border-radius: 14px; background: var(--paper); border: 1px solid var(--line); }

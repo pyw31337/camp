@@ -33,9 +33,9 @@ const rangeWon = (lo, hi) => `${manWon(lo)}${hi > lo ? `~${manWon(hi)}` : ""}원
 function feeMain(c) {
   if (!c.fee) return null;
   const t = visibleTiers(c);
-  if (!t.length) return { label: "1박", text: feeLabel(c.fee) };
+  if (!t.length) return { label: "요금", text: feeLabel(c.fee) };
   const main = tierOf(c, "site") ?? t[0];
-  return { label: `1박 ${TIER_LABEL[main[0]]}`, text: `${rangeWon(main[1], main[2])}${/대\s*$/.test(c.fee.text ?? "") ? "대" : ""}` };
+  return { label: `${TIER_LABEL[main[0]]} 요금`, text: `${rangeWon(main[1], main[2])}${/대\s*$/.test(c.fee.text ?? "") ? "대" : ""}` };
 }
 /** 대표 요금 외에 원문에 형태가 확인된 요금만 추가로 보인다. */
 function feeTiersLine(c) {
@@ -339,16 +339,44 @@ function wxAlert(c) {
   return (c._wx = { snow: snow?.d ?? null, min: min != null && min < 0 ? min : null, txt: snow ? `눈 예보 ${md(snow.d)}${min != null && min < 0 ? ` · ${min}°` : ""}` : `영하 ${min}° 예보` });
 }
 const wxBadge = (c) => { const a = wxAlert(c); return a ? `<span class="bdg bdg-wx" data-wx>${a.snow ? SNOW_IC : ic("down")}${esc(a.txt)}</span>` : ""; };
-// 배지로 보인 타입을 뺀 나머지 타입 줄
-function typeLineRest(c) {
-  const shown = new Set(stayKinds(c));
-  const st = (c.st ?? []).filter((t) => t[0] !== "PRIVATE_BATH" && !shown.has(t[0]) && !(STAY_KEYS.has(t[0]) && t[2] === "m"));
+// ── 사이트·숙박 상품 뱃지 (오토캠핑, 데크, 카라반, 트레일러 등 전수 뱃지화) ──
+function siteBadges(c, max = 5) {
+  const list = [];
+  // 1. 숙박 형태(글램핑, 카라반, 방갈로·숙박동, 트레일러 입장)
+  for (const [k, cls, icon, test, label] of STAYS) {
+    if (test(c)) list.push({ k, cls: `bdg-${cls}`, icon, label: label(c) });
+  }
+  const shownStays = new Set(list.map((x) => x.k));
+
+  // 2. c.st의 나머지 사이트 타입 (오토캠핑, 데크, 타프존, 차박 등)
+  const st = (c.st ?? []).filter((t) => t[0] !== "PRIVATE_BATH" && !shownStays.has(t[0]) && !(STAY_KEYS.has(t[0]) && t[2] === "m"));
   const other = st.filter((t) => t[0] !== "PITCH");
-  return (other.length ? other : st).slice(0, shown.size ? 3 : 4).map(([k, n, , sub]) => `${k === "HOUSE" && sub ? sub : ST[k].label}${n ? ` ${fmt(n)}` : ""}`).join(" · ");
+  const restList = other.length ? other : st;
+
+  for (const [k, n, , sub] of restList) {
+    const info = ST[k] || { label: k, icon: "tent" };
+    const label = `${k === "HOUSE" && sub ? sub : info.label}${n ? ` ${fmt(n)}` : ""}`;
+    const cls = k === "AUTO" ? "bdg-auto" : (k === "DECK" || k === "DUPLEX_DECK") ? "bdg-deck" : k === "TARP_ZONE" ? "bdg-tarp" : k === "CAR_CAMP" ? "bdg-car" : "bdg-site";
+    list.push({ k, cls, icon: info.icon || "tent", label });
+  }
+
+  // 3. 둘 다 없으면 typeLine fallback
+  if (!list.length) {
+    const tl = typeLine(c);
+    if (tl) {
+      tl.split(" · ").slice(0, 3).forEach((lbl) => {
+        list.push({ k: "PITCH", cls: "bdg-site", icon: "tent", label: lbl });
+      });
+    } else {
+      list.push({ k: "PITCH", cls: "bdg-site", icon: "tent", label: "야영장" });
+    }
+  }
+
+  return list.slice(0, max).map((b) => `<span class="bdg bdg-stay ${b.cls}" data-stay="${b.k}">${ic(b.icon)}${esc(b.label)}</span>`).join("");
 }
 const typeRow = (c, extra = "") => {
-  const b = stayBadges(c), rest = [c.st?.length ? typeLineRest(c) : stayKinds(c).length ? "" : typeLine(c), extra].filter(Boolean).join(" · ");
-  return { b, rest, html: `<p class="card-types${b ? " has-stay" : ""}">${b ? `<span class="stay-bdgs">${b}</span>` : ic("tent")}${rest ? `<span>${esc(rest)}</span>` : ""}</p>` };
+  const b = siteBadges(c) + (extra ? `<span class="bdg bdg-stay bdg-size">${ic("size")}${esc(extra)}</span>` : "");
+  return { b: true, rest: "", html: `<div class="card-types has-stay"><div class="stay-bdgs">${b}</div></div>` };
 };
 
 // ── 필터 ─────────────────────────────────────────────────────
@@ -931,13 +959,15 @@ function cardRow(label, icon, x) {
   return `<li><span class="rl">${ic(icon)}${label}</span><span class="rv${x ? "" : " none"}${isNo ? " is-no" : ""}">${valHtml}</span>${x ? dot(x.g) : ""}</li>`;
 }
 
+const mapLink = (name, lat, lng) => `https://map.kakao.com/link/map/${encodeURIComponent(name)},${lat},${lng}`;
+
 function rowsHtml(c) {
   const f = facts(c);
-  // 주변은 마트·편의점·정육점 순서 고정(' · ' 구분), 가격은 ‘2만~8만원’.
+  // 주변은 마트·편의점·정육점 순서 고정(' · ' 구분), 요금은 ‘2만~8만원’.
   const near = nearLine(c, " · "), fm = feeMain(c);
   const nearX = near ? { v: near } : null;
   const feeX = fm?.text ? { v: `${fm.text}${fm.est ? " 추정" : ""}`, g: GR(c.fee.grade) } : null;
-  return `<ul class="rows">${cardRow("주차", "car", f.park)}${cardRow("전기", "bolt", f.power)}${cardRow("장작", "flame", f.fire)}${cardRow("주변", "store", nearX).replace("<li>", '<li class="r-near">')}${cardRow("가격", "won", feeX)}</ul>`;
+  return `<ul class="rows">${cardRow("주차", "car", f.park)}${cardRow("전기", "bolt", f.power)}${cardRow("장작", "flame", f.fire)}${cardRow("주변", "store", nearX).replace("<li>", '<li class="r-near">')}${cardRow("요금", "won", feeX)}</ul>`;
 }
 function rowsHtmlHorizontal(c) {
   const f = facts(c), ti = c.ti ?? {};
@@ -954,7 +984,7 @@ function rowsHtmlHorizontal(c) {
     ${cardRow("반려견", "paw", petX)}
     ${cardRow("시간", "clock", timeX)}
     ${cardRow("주변", "store", nearX).replace("<li>", '<li class="r-near">')}
-    ${cardRow("가격", "won", feeX)}
+    ${cardRow("요금", "won", feeX)}
   </ul>`;
 }
 // 가는 길 장보기: 마트·편의점·정육점 중 5km 안에 있는 곳(LOCALDATA 인허가). 순서는 늘 마트 → 편의점 → 정육점(소유자 2026-10-20).
@@ -1095,12 +1125,30 @@ function card(c, i = 0, opts) {
       <span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3)}</span>
     </div>
     <div class="card-body">
-      <div class="name-row"><h3 class="card-name">${esc(nameOf(c).name)}</h3>${heartBtn(c)}</div>
-      <p class="card-meta">${ic("pin")}${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}</p>
-      ${(() => { const r = typeRow(c); return r.b || r.rest ? r.html : `<p class="card-types">${ic("tent")}<span>야영장</span></p>`; })()}
-      ${rowsHtml(c)}
-      <p class="card-tiers${feeMain(c)?.text && feeTiersLine(c) ? "" : " is-empty"}">${(feeMain(c)?.text && feeTiersLine(c)) || "&nbsp;"}</p>
-      <div class="card-reviews">${cardReviewPills(c.rv, c)}</div>
+      <div class="card-group card-group-head">
+        <div class="name-row"><h3 class="card-name">${esc(nameOf(c).name)}</h3>${heartBtn(c)}</div>
+        <div class="card-meta-row">
+          <p class="card-meta">${ic("pin")}<span class="card-meta-txt">${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}</span></p>
+          <div class="card-meta-actions">
+            ${c.lat && c.lng ? `
+              <button type="button" class="c-act-btn" data-rv="${c.lat},${c.lng}" data-rv-name="${esc(nameOf(c).name)}" title="카카오 로드뷰 보기" aria-label="로드뷰">${ic("roadview")}</button>
+              <a class="c-act-btn" href="${esc(mapLink(nameOf(c).name, c.lat, c.lng))}" target="_blank" rel="noopener" title="카카오 지도에서 보기" aria-label="지도">${ic("map")}</a>
+            ` : ""}
+          </div>
+        </div>
+      </div>
+      <div class="card-group card-group-types">
+        ${typeRow(c).html}
+      </div>
+      <div class="card-group card-group-spec">
+        ${rowsHtml(c)}
+        ${feeMain(c)?.text && feeTiersLine(c) ? `<p class="card-tiers">${feeTiersLine(c)}</p>` : ""}
+      </div>
+      ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `
+        <div class="card-group card-group-reviews">
+          <div class="card-reviews">${cardReviewPills(c.rv, c)}</div>
+        </div>
+      ` : ""}
     </div>
   </article>`;
 }
@@ -1767,7 +1815,7 @@ function paintCondSheet() {
       <section><h3>사이트 크기 <small>긴 변 기준 · 규격 미등록은 +로 함께</small></h3><div class="cond-chips">${SIZE_OPTS.map(([v, l]) => chip("size", v, l, k.size === v, v ? tally("size", v) : null)).join("")}</div></section>
       <section><h3>겨울 <small>고캠핑 운영기간 기준</small></h3><div class="cond-chips">${chip("win", 1, "겨울 운영", k.win, tally("win", true))}</div></section>
       <section><h3>불멍·주차</h3><div class="cond-chips">${chip("fire", 1, "장작 가능", k.fire, tally("fire", true))}${chip("park", 1, "텐트 옆 주차", k.park, tally("park", true))}</div></section>
-      <section><h3>1박 요금</h3><div class="cond-chips">${[["u3", "~3만원"], ["3to5", "3~5만원"], ["5to7", "5~7만원"], ["7to10", "7만원~10만원"], ["10to20", "10만원~20만원"], ["o20", "20만원+"]].map(([v, l]) => chip("fee", v, l, S.feeDraft === v, count("fee", (c) => feeOk(c, v)))).join("")}</div></section>
+      <section><h3>요금</h3><div class="cond-chips">${[["u3", "~3만원"], ["3to5", "3~5만원"], ["5to7", "5~7만원"], ["7to10", "7만원~10만원"], ["10to20", "10만원~20만원"], ["o20", "20만원+"]].map(([v, l]) => chip("fee", v, l, S.feeDraft === v, count("fee", (c) => feeOk(c, v)))).join("")}</div></section>
     </div>
     <p class="cond-legend">숫자는 <b>근거로 맞는 곳</b>, <em>+n</em>은 정보가 없어 ‘확인 필요’로 함께 보일 곳이에요. <button type="button" class="link" data-c="strict">${strict ? "정보 없는 곳도 함께 보기" : "확인된 곳만 보기"}</button></p>
     <div class="cond-foot"><button type="button" class="btn ghost" data-c="reset">초기화</button><button type="button" class="btn primary wide" data-c="apply">${fmt(total)}곳 보기${total !== sure ? ` <small>(확인 ${fmt(sure)})</small>` : ""}</button></div>
@@ -1841,16 +1889,34 @@ function listRow({ c, ce }, i = 0) {
       <span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3)}</span>
     </div>
     <div class="card-body">
-      <div class="name-row">
-        <h3 class="card-name">${esc(nameOf(c).name)}</h3>
-        ${heartBtn(c)}
+      <div class="card-group card-group-head">
+        <div class="name-row">
+          <h3 class="card-name">${esc(nameOf(c).name)}</h3>
+          ${heartBtn(c)}
+        </div>
+        <div class="card-meta-row">
+          <p class="card-meta">${ic("pin")}<span class="card-meta-txt">${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</span></p>
+          <div class="card-meta-actions">
+            ${c.lat && c.lng ? `
+              <button type="button" class="c-act-btn" data-rv="${c.lat},${c.lng}" data-rv-name="${esc(nameOf(c).name)}" title="카카오 로드뷰 보기" aria-label="로드뷰">${ic("roadview")}</button>
+              <a class="c-act-btn" href="${esc(mapLink(nameOf(c).name, c.lat, c.lng))}" target="_blank" rel="noopener" title="카카오 지도에서 보기" aria-label="지도">${ic("map")}</a>
+            ` : ""}
+          </div>
+        </div>
       </div>
-      <p class="card-meta">${ic("pin")}${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
       ${condLine(c, ce)}
-      ${(() => { const r = typeRow(c, siteSizeText(c)); return c.st?.length || r.b || siteSizeText(c) ? r.html : ""; })()}
-      ${rowsHtmlHorizontal(c)}
-      ${feeMain(c)?.text && feeTiersLine(c) ? `<p class="card-tiers">${feeTiersLine(c)}</p>` : ""}
-      ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-reviews">${cardReviewPills(c.rv, c)}</div>` : ""}
+      <div class="card-group card-group-types">
+        ${(() => { const r = typeRow(c, siteSizeText(c)); return c.st?.length || r.b || siteSizeText(c) ? r.html : ""; })()}
+      </div>
+      <div class="card-group card-group-spec">
+        ${rowsHtmlHorizontal(c)}
+        ${feeMain(c)?.text && feeTiersLine(c) ? `<p class="card-tiers">${feeTiersLine(c)}</p>` : ""}
+      </div>
+      ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `
+        <div class="card-group card-group-reviews">
+          <div class="card-reviews">${cardReviewPills(c.rv, c)}</div>
+        </div>
+      ` : ""}
       ${main || c.tel ? `
         <div class="card-cta">
           ${main ? `<a class="btn primary" href="${esc(main.url)}" target="_blank" rel="noopener" title="${esc(bookingLabel(main))}">${ic("external")}<span>${esc(bookingLabel(main))}에서 예약</span></a>` : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}
@@ -3059,7 +3125,7 @@ function priceHtml(c, d) {
   const allItemsHtml = `${stayItems}${extraDivider}${extraItems}`;
   const foot = bs?.url ? `<p class="st-foot">요금은 날짜마다 달라요. <a href="${esc(bs.url)}" target="_blank" rel="noopener">날짜별 예약 화면 열기</a></p>` : "";
 
-  return `<section class="d-sec price-sec" id="sec-price"><div class="sec-head">${iconTitle("won", c.du ? "이용 요금" : "1박 요금")}<span class="sec-note">업장 등록 우선 · 후기는 참고</span></div>${allItemsHtml ? `<ul class="plist">${allItemsHtml}</ul>` : ""}${foot}</section>`;
+  return `<section class="d-sec price-sec" id="sec-price"><div class="sec-head">${iconTitle("won", "요금")}<span class="sec-note">업장 등록 우선 · 후기는 참고</span></div>${allItemsHtml ? `<ul class="plist">${allItemsHtml}</ul>` : ""}${foot}</section>`;
 }
 // 이용 규칙 · 공지(2026-10-19 소유자: 금지사항·이용수칙·이용제한은 업장 이용에 매우 중요 — 수집해서 노출, 공지는 눌러 바로 원문으로).
 // build-house-rules.mjs → d.house_rules { tags, rules[{cat,text,url,at}], ops, notices[{title,date,url}] }. 업장 공개 문장만(후기 제외).
@@ -5207,10 +5273,16 @@ async function openRoadview(lat, lng, name) {
 }
 addEventListener("click", (e) => {
   const b = e.target.closest?.("[data-rv]");
-  if (!b) return;
-  e.preventDefault(); e.stopPropagation();
-  const [lat, lng] = b.dataset.rv.split(",");
-  openRoadview(lat, lng, b.dataset.rvName || "주변 장소");
+  if (b) {
+    e.preventDefault(); e.stopPropagation();
+    const [lat, lng] = b.dataset.rv.split(",");
+    openRoadview(lat, lng, b.dataset.rvName || "주변 장소");
+    return;
+  }
+  const a = e.target.closest?.(".c-act-btn");
+  if (a) {
+    e.stopPropagation();
+  }
 }, true);
 addEventListener("keydown", (e) => {
   const b = e.target.closest?.("[data-rv]");
