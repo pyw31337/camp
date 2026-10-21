@@ -3302,5 +3302,4 @@ html, body, #view { min-height: 100%; }
 @media (max-width: 759px) {
   body[data-view="detail"] .top { display: none; }
   body[data-view="detail"] .d-bar { padding-top: calc(10px + env(safe-area-inset-top)); }
-  html:has(body[data-view="detail"]) { scroll-padding-top: 12px; }
 }
