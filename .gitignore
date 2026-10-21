@@ -10,3 +10,4 @@ site/
 # 배포·CI에서 생성(scripts/split-catalog.mjs)
 camping-atlas/public/explore/data/campgrounds.lite.json
 camping-atlas/public/explore/data/catx/
+camping-atlas/public/place/

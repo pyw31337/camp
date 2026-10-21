@@ -79,27 +79,16 @@ await writeFile(`${rootOut}index.html`, rootIndex);
 await writeFile(`${rootOut}style.css`, rootCss);
 await writeFile(`${rootOut}app.js`, renewalApp);
 
-// 2. /explore/ 경로: 구 주소로 들어온 사용자를 https://pyw31337.github.io/camp/ 단일 주소로 자동 연결
-const exploreRedirectScript = `<script>
-  (function() {
-    var target = "../" + location.search + location.hash;
-    location.replace(target);
-  })();
-</script><meta http-equiv="refresh" content="0; url=../">`;
-const exploreIndex = versionedShell(renewalIndex)
-  .replace("<head>", `<head>\n    ${exploreRedirectScript}`)
-  .replace(
-    "</head>",
-    `<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="kakao-js-key" content="${kakaoKey}"><meta name="supabase-url" content="${supabaseUrl}"><meta name="supabase-anon-key" content="${supabaseAnonKey}"></head>`
-  )
-  .replaceAll('href="./manifest.webmanifest"', 'href="../manifest.webmanifest"')
-  .replaceAll('href="./favicon.svg"', 'href="../favicon.svg"')
-  .replaceAll('href="./images/', 'href="../images/');
-
+// 2. 앱 밖 정적 페이지는 모두 같은 ‘경로 넘김’ 페이지다(2026-10-21 해시 주소 제거).
+// 자기 경로(/camp/map, /camp/explore/c/1 …)를 ?p= 로 앱 루트에 넘기면 app.js가 원래 경로로 되돌리고(legacyRoute로 옛 주소 보정) 화면을 그린다.
+// GitHub Pages는 서버 리라이트가 없어서 이 방식(404.html 포함)을 쓴다. 검색·공유 미리보기용 메타는 place/{id}/ 페이지에 따로 넣는다.
+const STUB_JS = `<script>(function(){var B=location.pathname.indexOf("/camp/")===0?"/camp/":"/";var p=location.pathname.slice(B.length).replace(/index\\.html$/,"").replace(/\\/+$/,"");location.replace(B+"?p="+encodeURIComponent(p)+(location.search?"&q="+encodeURIComponent(location.search.slice(1)):"")+location.hash);})();</script>`;
+const stubPage = (title, extraHead = "") => `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${title}</title><meta name="robots" content="noindex">${extraHead}${STUB_JS}</head><body><p><a href="/camp/">모여라 캠핑으로 가기</a></p></body></html>`;
+const exploreIndex = stubPage("모여라 캠핑");
 await mkdir(out, { recursive: true });
 await writeFile(`${out}index.html`, exploreIndex);
-await writeFile(`${out}style.css`, renewalCss);
-await writeFile(`${out}app.js`, renewalApp);
+// 앱 복사본(explore/app.js·style.css, renewal/)은 더 쓰지 않는다 — 앱은 루트 하나뿐.
+await rm(`${out}app.js`, { force: true }); await rm(`${out}style.css`, { force: true });
 await cp(`${root}design/renewal/data/photos.json`, `${rootOut}data/photos.json`);
 if (existsSync(`${root}design/renewal/data/vacancy.json`)) {
   await cp(`${root}design/renewal/data/vacancy.json`, `${rootOut}data/vacancy.json`);
@@ -137,32 +126,75 @@ const copyBrandImages = async (destDir) => {
 await copyBrandImages(rootOut);
 await copyBrandImages(out);
 
-// 보조 주소도 독립된 옛 UI를 만들지 않고, 실제 A 포스터 앱의 해시 화면으로 보낸다.
-const routePage = (title, route) => `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${title} · 모여라 캠핑</title><meta http-equiv="refresh" content="0; url=../${route}"><script>location.replace(${JSON.stringify(`../${route}`)})</script></head><body><a href="../${route}">${title} 보기</a></body></html>`;
+// 화면 경로(새로고침·북마크용)와 옛 보조 주소(guide·openings·vision·passport·collections·renewal)는 모두 같은 넘김 페이지.
+// 넘김 뒤 앱이 옛 주소를 새 화면으로 보정한다(openings → theme/OPEN 등). 404.html도 같은 페이지라 모르는 경로·옛 공유 링크(/explore/c/1)도 살아난다.
+const themesBlock = renewalApp.slice(renewalApp.indexOf("const THEMES = ["), renewalApp.indexOf("];", renewalApp.indexOf("const THEMES = [")));
+const THEME_KEYS = [...themesBlock.matchAll(/^  \["([A-Z_]+)", /gm)].map((m) => m[1]);
+const ROUTE_STUBS = ["list", "map", "themes", "compare", "saved", "saves-log", ...["ALL", "OPEN", "AVAIL", "REVIEWS", ...THEME_KEYS].map((k) => `theme/${k}`),
+  "guide", "openings", "vision", "passport", "collections", "renewal"];
 const writeUtilityPages = async (baseDir) => {
-  const routes = [
-    ["themes/index.html", "테마로 찾기", "#/themes"],
-    // #/openings·#/guide 화면은 없어 홈이 떴다(2026-10-21 정리): 오픈 일정은 ‘곧 오픈’ 테마 목록, 가이드는 홈으로 보낸다.
-    ["openings/index.html", "예약 오픈 일정", "#/theme/OPEN"],
-    ["guide/index.html", "모여라캠핑", "#/"],
-    // 옛 디자인 시안(vision/)은 공개 주소에서 내린다(원본은 design/vision, scripts/publish-vision-mockup.mjs).
-    ["vision/index.html", "모여라캠핑", "#/"],
-    ["passport/index.html", "내 캠핑 비교", "#/compare"],
-    ["collections/index.html", "테마로 찾기", "#/themes"],
-  ];
-  for (const [relative, title, route] of routes) {
-    const file = `${baseDir}${relative}`;
-    await mkdir(file.slice(0, file.lastIndexOf("/")), { recursive: true });
-    await writeFile(file, routePage(title, route));
+  for (const r of ROUTE_STUBS) {
+    await rm(`${baseDir}${r}`, { recursive: true, force: true });
+    await mkdir(`${baseDir}${r}`, { recursive: true });
+    await writeFile(`${baseDir}${r}/index.html`, stubPage("모여라 캠핑"));
   }
+  await writeFile(`${baseDir}404.html`, stubPage("모여라 캠핑"));
 };
-
 await writeUtilityPages(rootOut);
-await writeUtilityPages(out);
+// 예전 explore/ 아래 보조 주소·공유 페이지(explore/c/)는 지운다. 404.html이 explore/c/{id} → place/{id}로 보낸다.
+for (const d of ["c", "themes", "openings", "guide", "vision", "passport", "collections"]) await rm(`${out}${d}`, { recursive: true, force: true });
 
-// 과거 시안 주소도 별도 UI를 유지하지 않는다. 루트 앱이 유일한 고객 주소다.
-await mkdir(`${rootOut}renewal`, { recursive: true });
-await writeFile(`${rootOut}renewal/index.html`, routePage("모여라캠핑", "#/"));
+// 3. 공유 미리보기(카카오톡·페이스북·X 등): 캠핑장마다 place/{id}/index.html 에 Open Graph·트위터 카드·canonical을 넣는다.
+// 크롤러는 JS를 돌리지 않으므로 이 정적 메타를 읽고, 사람은 넘김 스크립트로 앱의 같은 주소(/camp/place/{id})를 본다(meta refresh는 쓰지 않음).
+const SITE = (process.env.SITE_URL ?? "https://pyw31337.github.io/camp/").replace(/\/?$/, "/");
+const attr = (v) => String(v ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const placeSource = [`${rootOut}explore/data/campgrounds.json`, `${dataDir}/campgrounds.json`].find((f) => existsSync(f));
+if (placeSource) {
+  const raw = JSON.parse(await readFile(placeSource, "utf8"));
+  const list = Array.isArray(raw) ? raw : raw.camps ?? [];
+  const photoFile = [`${rootOut}data/photos.json`, `${root}design/renewal/data/photos.json`].find((f) => existsSync(f));
+  const photos = photoFile ? JSON.parse(await readFile(photoFile, "utf8")) : {};
+  const https = (u) => String(u ?? "").replace(/^http:\/\//, "https://");
+  const imageOf = (c) => {
+    const p = photos[c.id] ?? [];
+    // 고캠핑 720px 대표 사진(jpg·약 100KB)을 먼저 — 카카오 스크래퍼가 webp·수 MB 원본을 놓칠 수 있어서.
+    if (/gocamping\.or\.kr\/upload/.test(c.img ?? "")) return https(c.img);
+    const full = p.find((u) => /^https?:\/\/gocamping\.or\.kr\/upload\/camp\/\d+\/[^/]+\.(jpe?g|png)$/i.test(u));
+    if (full) return https(full);
+    const media = p.find((u) => String(u).startsWith("media/")) ?? (c.ph ? `media/${c.ph}` : "");
+    if (media) return SITE + media.replace(/-t\.webp$/, "-l.webp");
+    return `${SITE}images/og-image.png`;
+  };
+  const typesOf = (c) => (Array.isArray(c.types) ? c.types : String(c.types ?? "").match(/[가-힣A-Za-z]+/g) ?? []).map((t) => t.replace(/야영장$/, "").replace(/^자동차$/, "오토").replace(/^카라반$/, "카라반").replace(/^글램핑$/, "글램핑")).filter(Boolean);
+  const feeOf = (c) => (typeof c.fee === "object" ? c.fee?.text : String(c.fee ?? "").match(/'text': '([^']+)'/)?.[1]) ?? "";
+  await rm(`${rootOut}place`, { recursive: true, force: true });
+  let n = 0;
+  for (const c of list) {
+    if (!c.id || !c.name) continue;
+    const id = String(c.id);
+    const where = [c.sido, c.sigungu].filter(Boolean).join(" ");
+    const kinds = typesOf(c).join("·");
+    const fee = feeOf(c);
+    const title = `${c.name} · 모여라 캠핑`;
+    const description = [`${where}${kinds ? ` ${kinds}` : ""}${c.du ? " 당일 나들이" : " 캠핑장"}`, fee ? `1박 ${fee}` : "", "사이트 규격·전기·화로·주차·주변 정보와 공식 예약처를 한눈에"].filter(Boolean).join(" · ").slice(0, 150);
+    const url = `${SITE}place/${encodeURIComponent(id)}/`;
+    const image = imageOf(c);
+    const head = `<meta name="description" content="${attr(description)}"><link rel="canonical" href="${attr(url)}">`
+      + `<meta property="og:type" content="website"><meta property="og:site_name" content="모여라 캠핑"><meta property="og:locale" content="ko_KR">`
+      + `<meta property="og:title" content="${attr(title)}"><meta property="og:description" content="${attr(description)}"><meta property="og:url" content="${attr(url)}">`
+      + `<meta property="og:image" content="${attr(image)}"><meta property="og:image:secure_url" content="${attr(image)}"><meta property="og:image:alt" content="${attr(c.name)}">`
+      + `<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${attr(title)}"><meta name="twitter:description" content="${attr(description)}"><meta name="twitter:image" content="${attr(image)}">`;
+    const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${attr(title)}</title>${head}${STUB_JS}</head><body><h1>${attr(c.name)}</h1><p>${attr(description)}</p><p><a href="${attr(url)}">모여라 캠핑에서 보기</a></p></body></html>`;
+    // 중복 등록을 합친 옛 id(c.mg)도 같은 미리보기(canonical은 남은 곳) — 예전에 공유된 링크 보호.
+    for (const pid of [id, ...(c.mg ?? []).map(String)]) {
+      if (pid !== id && list.some((x) => String(x.id) === pid)) continue;
+      await mkdir(`${rootOut}place/${pid}`, { recursive: true });
+      await writeFile(`${rootOut}place/${pid}/index.html`, html);
+      n++;
+    }
+  }
+  console.log(`공유 미리보기 페이지 place/{id}/ ${n}개`);
+}
 
 // 운영 기록(/log/) 및 탐색 화면을 위한 경량 캠핑장 ID-이름 사전 생성 (28MB campgrounds.json 대체)
 const campJsonSource = existsSync(`${dataDir}/campgrounds.json`) ? `${dataDir}/campgrounds.json`
@@ -199,40 +231,8 @@ const galleryReg = `${root}pipeline/registry/photo-gallery.json`;
 if (existsSync(galleryReg)) await cp(galleryReg, `${out}data/photo-gallery.json`);
 if (existsSync(`${dataDir}/camps`)) await cp(`${dataDir}/camps`, `${out}data/camps`, { recursive: true });
 
-// 공유용 정적 페이지: 캠핑장마다 c/{id}/ 에 오픈그래프·트위터 카드 메타를 넣고, 사람은 탐색 화면 상세로 보낸다.
-const SITE = (process.env.SITE_URL ?? "https://pyw31337.github.io/camp/").replace(/\/?$/, "/");
-const attr = (v) => String(v ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const camps = JSON.parse(await readFile(`${dataDir}/campgrounds.json`, "utf8"));
-const KIND = { AUTO_PITCH: "오토캠핑", PITCH: "일반 캠핑", GLAMPING: "글램핑", CARAVAN_RENTAL: "카라반", RV_PITCH: "개인 카라반" };
-const page = ({ url, title, description, image, redirect }) => `<!doctype html>
-<html lang="ko"><head><meta charset="utf-8">
-<title>${attr(title)}</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="${attr(description)}">
-<link rel="canonical" href="${attr(url)}">
-<meta property="og:type" content="website"><meta property="og:site_name" content="모여라 캠핑"><meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="${attr(title)}"><meta property="og:description" content="${attr(description)}"><meta property="og:url" content="${attr(url)}">
-${image ? `<meta property="og:image" content="${attr(image)}"><meta name="twitter:image" content="${attr(image)}">` : ""}
-<meta name="twitter:card" content="${image ? "summary_large_image" : "summary"}"><meta name="twitter:title" content="${attr(title)}"><meta name="twitter:description" content="${attr(description)}">
-<meta http-equiv="refresh" content="0; url=${attr(redirect)}">
-<script>location.replace(${JSON.stringify(redirect)});</script>
-</head><body><p><a href="${attr(redirect)}">${attr(title)} 보기</a></p></body></html>
-`;
-let pages = 0;
-for (const c of camps) {
-  const where = [c.sido, c.sigungu].filter(Boolean).join(" ");
-  const kinds = (c.kinds ?? []).map(([k]) => KIND[k]).filter(Boolean).join("·");
-  const description = [c.line, where, kinds, "사이트 크기·시설·주변 정보와 공식 예약처 바로가기"].filter(Boolean).join(" · ").slice(0, 160);
-  const dir = `${out}c/${c.id}/`;
-  await mkdir(dir, { recursive: true });
-  await writeFile(`${dir}index.html`, page({ url: `${SITE}c/${c.id}/`, title: `${c.name} · 모여라 캠핑`, description, image: c.img ? c.img.replace(/^http:/, "https:") : null, redirect: `../../#/c/${c.id}` }));
-  // 루트 c/{id}/ 도 함께 생성하여 루트 공유 링크도 완벽 지원
-  const rootCampDir = `${rootOut}c/${c.id}/`;
-  await mkdir(rootCampDir, { recursive: true });
-  await writeFile(`${rootCampDir}index.html`, page({ url: `${SITE}c/${c.id}/`, title: `${c.name} · 모여라 캠핑`, description, image: c.img ? c.img.replace(/^http:/, "https:") : null, redirect: `../../#/c/${c.id}` }));
-  pages++;
-}
-console.log(`공유용 캠핑장 페이지 ${pages}개`);
+// (예전 c/{id}/ 공유 페이지는 place/{id}/ 로 바뀌었다 — 위 3번)
 
 // 운영 기록(/log/) 및 탐색 화면을 위한 경량 캠핑장 ID-이름 사전 생성 (28MB campgrounds.json 대체)
 const campNames = Object.fromEntries(camps.filter((c) => c.id && c.name).map((c) => [c.id, c.name]));

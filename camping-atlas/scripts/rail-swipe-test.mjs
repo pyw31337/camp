@@ -120,10 +120,10 @@ for (const mode of ["mouse", "touch"]) {
     await first.evaluate((r) => (r.scrollLeft = 0));
     await page.waitForTimeout(300);
     const p4 = await points(first);
-    const h0 = await page.evaluate(() => location.hash);
+    const h0 = await page.evaluate(() => location.pathname);
     if (mode === "touch") await page.touchscreen.tap(p4.body.x, p4.body.y); else await page.mouse.click(p4.body.x, p4.body.y);
     await page.waitForTimeout(800);
-    const h1 = await page.evaluate(() => location.hash);
+    const h1 = await page.evaluate(() => location.pathname);
     if (h1 === h0) fails.push(`${mode}: 레일 카드를 눌러도 열리지 않음`);
   }
   if (tested < Math.min(3, ids.length)) fails.push(`${mode}: 레일 테스트 수 부족(${tested})`);

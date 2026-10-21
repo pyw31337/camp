@@ -6,7 +6,7 @@ const widths = (process.env.WIDTHS || "320").split(",").map(Number);
 const AUDIT = process.env.AUDIT === "1", shots = process.env.SHOTS_DIR || "";
 const cat = await (await fetch(`${base}explore/data/campgrounds.lite.json`)).json().catch(() => ({ camps: [] }));
 const stay = cat.camps.find((c) => !c.du)?.id ?? "2931", day = cat.camps.find((c) => c.du)?.id;
-const routes = ["", "#/list", "#/map", "#/themes", "#/theme/ALL", "#/theme/PARK", "#/compare", "#/saved", "#/saves-log", `#/c/${stay}`, ...(day ? [`#/c/${day}`] : []),
+const routes = ["", "list", "map", "themes", "theme/ALL", "theme/PARK", "compare", "saved", "saves-log", `place/${stay}`, ...(day ? [`place/${day}`] : []),
   "log/", "collections/", "passport/", "themes/"];
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 const fails = [], report = [];
@@ -40,9 +40,9 @@ for (const w of widths) {
       }
       return out;
     }, { w, AUDIT });
-    const tag = `${w} ${route || "#/"}`;
+    const tag = `${w} ${route || "/"}`;
     if (r.sw > w + 1) fails.push(`${tag}: 가로 넘침 ${r.sw}px > ${w}px — ${r.over.join(", ")}`);
-    if (AUDIT) report.push({ w, route: route || "#/", sw: r.sw, over: r.over, small: [...new Set(r.small)].slice(0, 40), smallN: r.small.length, tiny: [...new Set(r.tiny)].slice(0, 30), tinyN: r.tiny.length, cut: r.cut.slice(0, 20), cutN: r.cut.length });
+    if (AUDIT) report.push({ w, route: route || "/", sw: r.sw, over: r.over, small: [...new Set(r.small)].slice(0, 40), smallN: r.small.length, tiny: [...new Set(r.tiny)].slice(0, 30), tinyN: r.tiny.length, cut: r.cut.slice(0, 20), cutN: r.cut.length });
     if (shots) await page.screenshot({ path: `${shots}/${process.env.SHOT_PREFIX || "ux"}-${w}-${(route || "home").replace(/[^a-z0-9]+/gi, "_").replace(/^_|_$/g, "") || "home"}.png`, fullPage: true }).catch(() => {});
   }
   await ctx.close();

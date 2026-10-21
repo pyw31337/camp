@@ -13,7 +13,7 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [390, 844, "390"]]) {
   page.on("pageerror", (e) => { if (!/_leaflet_pos/.test(e.message)) errs.push(e.message); });
   if (process.env.STUB_MEDIA !== "0") await page.route(/\/media\//, async (r) => { const x = await r.fetch().catch(() => null); return x && x.ok() ? r.fulfill({ response: x }) : r.fulfill({ status: 200, contentType: "image/png", body: png }); });
   const saved = () => page.evaluate(() => { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/mc-saved/.test(k)) return JSON.parse(localStorage.getItem(k)); } return []; });
-  await page.goto(`${base}#/compare`, { waitUntil: "networkidle" });
+  await page.goto(`${base}compare`, { waitUntil: "networkidle" });
   await page.waitForSelector("[data-sample], .cmp-table", { timeout: 30000 });
   // 빈 화면
   if (!(await page.$("[data-cmp-empty]"))) fails.push(`${tag}: 찜 0곳 빈 화면 없음`);

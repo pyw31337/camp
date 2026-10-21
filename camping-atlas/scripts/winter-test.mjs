@@ -30,7 +30,7 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [390, 844, "390"]]) {
   const expect = await page.evaluate(async () => { const r = await fetch("./conditions/forecast.json"); if (!r.ok) return false; const j = await r.json(); return Object.values(j.short?.grids ?? {}).some((g) => Object.entries(g).some(([d, v]) => d >= j.today && ((v[2] != null && v[2] < 0) || /눈/.test(`${v[0]} ${v[1]}`)))); });
   if (expect && !wx) fails.push(`${tag} 홈: 눈·영하 예보 배지 없음`);
   // 3) 목록 겨울 운영(확인된 곳만) → 모두 c.win=1, 조건 줄에 같은 글자 중복 허용(조건 확인 표시)
-  await page.goto(`${base}#/list?win=1&strict=1`, { waitUntil: "networkidle" });
+  await page.goto(`${base}list?win=1&strict=1`, { waitUntil: "networkidle" });
   await page.waitForSelector(".card", { timeout: 30000 });
   const lids = await page.$$eval(".card[data-id]", (cs) => cs.map((c) => c.dataset.id));
   const lbad = lids.filter((id) => cat[id]?.[0] !== 1);
@@ -41,7 +41,7 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [390, 844, "390"]]) {
   // 4) 난방 글램핑 상세
   const hid = Object.entries(cat).find(([, v]) => v[1].includes("g"))?.[0];
   if (hid) {
-    await page.goto(`${base}#/c/${encodeURIComponent(hid)}`, { waitUntil: "networkidle" });
+    await page.goto(`${base}place/${encodeURIComponent(hid)}`, { waitUntil: "networkidle" });
     await page.waitForSelector(".d-bdgs", { timeout: 20000 });
     const t = await page.$eval(".d-bdgs", (e) => e.textContent);
     if (!/난방 글램핑/.test(t)) fails.push(`${tag} 상세(${hid}): 난방 글램핑 배지 없음`);

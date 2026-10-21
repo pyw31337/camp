@@ -17,15 +17,15 @@ async function run(useLite, ids) {
   const out = {};
   if (!ids) ids = await p.evaluate(() => [...new Set([...document.querySelectorAll(".card[data-id]")].map((c) => c.dataset.id))].slice(0, 3));
   for (const h of PAGES) {
-    await p.evaluate((x) => (location.hash = x), h); await p.waitForTimeout(h === "#/map" ? 2500 : 900);
+    await p.evaluate((x) => { history.pushState(null, "", x); dispatchEvent(new PopStateEvent("popstate")); }, new URL(h.replace(/^#\//, ""), url).href); await p.waitForTimeout(h === "#/map" ? 2500 : 900);
     if (h === "#/") for (let i = 0; i < 25; i++) { await p.mouse.wheel(0, 1600); await p.waitForTimeout(60); }
     out[h] = clean(await p.$eval(h === "#/map" ? ".map-panel" : "#view", (e) => e.innerHTML));
     if (h.startsWith("#/list?win")) { await p.click("[data-open-cond]"); await p.waitForTimeout(500); out[`${h} 조건창`] = clean(await p.$eval("#cond-dialog", (e) => e.innerHTML)); await p.keyboard.press("Escape"); }
   }
   if (ids.length < 3) throw new Error("카드 id를 못 찾음");
-  for (const id of ids) { await p.evaluate((x) => (location.hash = `#/c/${x}`), id); await p.waitForSelector(".d-title"); await p.waitForTimeout(1200); out[`상세 ${id}`] = clean(await p.$eval("#view", (e) => e.innerHTML)); }
+  for (const id of ids) { await p.evaluate((x) => { history.pushState(null, "", x); dispatchEvent(new PopStateEvent("popstate")); }, new URL(`place/${id}`, url).href); await p.waitForSelector(".d-title"); await p.waitForTimeout(1200); out[`상세 ${id}`] = clean(await p.$eval("#view", (e) => e.innerHTML)); }
   await p.addInitScript((x) => { localStorage.setItem("mc-saved", JSON.stringify(x)); localStorage.setItem("mc-pick", JSON.stringify(x)); }, ids);
-  await p.goto(url + "#/compare", { waitUntil: "domcontentloaded" }); await p.reload(); await p.waitForSelector("[data-cmp-count]", { state: "attached", timeout: 15000 }).catch(async (e) => { console.error(p.url(), ids, await p.evaluate(() => [localStorage.getItem("mc-saved"), document.querySelectorAll(".card").length])); throw e; }); await p.waitForTimeout(1200);
+  await p.goto(url + "compare", { waitUntil: "domcontentloaded" }); await p.reload(); await p.waitForSelector("[data-cmp-count]", { state: "attached", timeout: 15000 }).catch(async (e) => { console.error(p.url(), ids, await p.evaluate(() => [localStorage.getItem("mc-saved"), document.querySelectorAll(".card").length])); throw e; }); await p.waitForTimeout(1200);
   out["비교"] = clean(await p.$eval("#view", (e) => e.innerHTML));
   await ctx.close();
   return { out, ids, errs, liteHits, shardHits };

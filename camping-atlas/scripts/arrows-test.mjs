@@ -19,7 +19,7 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [390, 844, "390"]]) {
   await check(page, ".car-nav", `${tag} 홈`);
   if (shots) { const el = await page.$(".rail .card"); await el.scrollIntoViewIfNeeded(); await el.hover(); await page.waitForTimeout(300); await el.screenshot({ path: `${shots}/arrows-card-${tag}.png` }); }
   const id = await page.$eval(".card[data-id]", (c) => c.dataset.id);
-  await page.goto(`${base}#/c/${encodeURIComponent(id)}`, { waitUntil: "networkidle" });
+  await page.goto(`${base}place/${encodeURIComponent(id)}`, { waitUntil: "networkidle" });
   const cell = await page.waitForSelector(".gal-cell, [data-gal]", { timeout: 20000 }).catch(() => null);
   if (cell) {
     // 핸들이 이미 떨어졌으면 선택자로 다시 누른다(간헐적 detach).

@@ -63,7 +63,7 @@ for (const [w, h] of [[320, 740], [390, 844], [1366, 900]]) {
   }
   if (!cards.some((x) => x.vis)) fails.push(`${tag} 홈: 보이는 카드 없음`);
   // 목록 + 조건 칩
-  await page.goto(`${base}#/list?sido=${encodeURIComponent("인천")}&w=600`); await page.waitForSelector(".lrow", { timeout: 30000 }); await page.waitForTimeout(800);
+  await page.goto(`${base}list?sido=${encodeURIComponent("인천")}&w=600`); await page.waitForSelector(".lrow", { timeout: 30000 }); await page.waitForTimeout(800);
   if (await page.$("[data-sort], [data-list-sort], [data-theme-sort]")) fails.push(`${tag} 목록: 정렬 선택 남음`);
   const pills = await page.evaluate(() => {
     const cond = [...document.querySelectorAll(".list-tools [data-open-cond]")].find((b) => b.getBoundingClientRect().width > 0);
@@ -76,7 +76,7 @@ for (const [w, h] of [[320, 740], [390, 844], [1366, 900]]) {
     else if (!p.x || !p.left || !p.before) fails.push(`${tag} 목록: ‘${want}’ 칩이 ×·‘조건’ 왼쪽 조건을 못 지킴 ${JSON.stringify(p)}`);
   }
   await page.click('.list-page .cond-pill[data-cond-x="w"]'); await page.waitForTimeout(1000);
-  if (/[?&]w=/.test(await page.evaluate(() => location.hash))) fails.push(`${tag} 목록: ‘600W 이상 ×’로 조건이 안 지워짐`);
+  if (/[?&]w=/.test(await page.evaluate(() => (location.pathname + location.search)))) fails.push(`${tag} 목록: ‘600W 이상 ×’로 조건이 안 지워짐`);
   if (!mob) { await capCheck(page, ".list-page .filter-zone .chip", "목록 칩", tag); await countCheck(page, ".list-page .type-chip > i", "사이트 칩", tag); }
   // 조건 시트
   await page.click(".list-tools [data-open-cond]"); await page.waitForSelector("#cond-dialog[open]");
@@ -86,11 +86,11 @@ for (const [w, h] of [[320, 740], [390, 844], [1366, 900]]) {
   if (!(await countCheck(page, "#cond-dialog .cond-chips .chip > i", "조건 시트", tag))) fails.push(`${tag} 조건 시트: 숫자 칩 없음`);
   await page.keyboard.press("Escape");
   // 테마 화면: 정렬 없음 + 아이콘
-  await page.goto(`${base}#/theme/FOREST`); await page.waitForTimeout(1500);
+  await page.goto(`${base}theme/FOREST`); await page.waitForTimeout(1500);
   if (await page.$("[data-sort], [data-list-sort], [data-theme-sort]")) fails.push(`${tag} 테마: 정렬 선택 남음`);
   if (await page.evaluate(() => /추천순|이름순|요금 낮은/.test(document.querySelector("#view").textContent))) fails.push(`${tag} 테마: 정렬 글자 남음`);
   if (w === 1366) {
-    await page.goto(`${base}#/themes`); await page.waitForSelector(".theme-card");
+    await page.goto(`${base}themes`); await page.waitForSelector(".theme-card");
     const ics = await page.evaluate(() => Object.fromEntries([...document.querySelectorAll(".theme-card")].map((a) => [decodeURIComponent(a.getAttribute("href").split("/").pop()), { vb: a.querySelector("svg.th-ic")?.getAttribute("viewBox"), fill: a.querySelector("svg.th-ic") ? getComputedStyle(a.querySelector("svg.th-ic path, svg.th-ic g")).fill : "", ink: getComputedStyle(a.querySelector("svg.th-ic")?.parentElement ?? a).color }])));
     for (const [k, vb] of Object.entries(ICONS)) {
       if (!ics[k]) { fails.push(`테마 ${k}: 카드 없음`); continue; }

@@ -2,12 +2,33 @@
 // 데이터는 탐색 화면과 같은 공개 파일을 읽는다(../explore/data). 사진 색인은 scripts/build-renewal-data.mjs.
 // 원칙: 값만 짧게, 출처는 (i), 모르는 칸은 상세 규격에서만 회색 ‘확인필요’ 글자. 채운 배지는 원문 대조·공식 등록·운영자 공개 값만.
 
-// /camp/ 루트와 /camp/explore/ 및 로컬 시안 /camp/renewal/ 경로를 모두 지원한다.
-const IS_SUBDIR = location.pathname.includes("/explore/") || location.pathname.includes("/renewal/");
-const ASSETS_BASE = IS_SUBDIR ? "../" : "./";
-const DATA = location.pathname.includes("/explore/") ? "./data/" : location.pathname.includes("/renewal/") ? "../explore/data/" : "./explore/data/";
-const MEDIA = IS_SUBDIR ? "../media/" : "./media/";
+// 주소(2026-10-21): 해시(#/) 없이 경로로 — /camp/, /camp/map, /camp/place/{id} … (History API).
+// APP_BASE = 앱 루트 경로(/camp/ · 로컬 미리보기는 /). 데이터·사진·링크는 모두 이 절대 경로를 쓴다(깊은 주소에서도 깨지지 않게).
 const MOD_ROOT = /\/(explore|renewal)\/[^/]*$/.test(new URL(import.meta.url).pathname) ? "../" : "./";
+const APP_BASE = new URL(MOD_ROOT, import.meta.url).pathname;
+const IS_SUBDIR = false;
+const ASSETS_BASE = APP_BASE;
+const DATA = `${APP_BASE}explore/data/`;
+const MEDIA = `${APP_BASE}media/`;
+// 화면 판단은 예전처럼 "#/경로?쿼리" 문자열로 한다(curHash). 주소창은 APP_BASE + 경로다(toPath).
+const curHash = () => { const p = location.pathname.startsWith(APP_BASE) ? location.pathname.slice(APP_BASE.length) : ""; return `#/${p.replace(/\/+$/, "")}${location.search}`; };
+const toPath = (h) => APP_BASE + String(h ?? "").replace(/^#?\/?/, "");
+// 옛 주소 보정: #/c/1 → place/1, #/openings → theme/OPEN 등(공유된 옛 링크 유지)
+const legacyRoute = (r) => String(r ?? "").replace(/^\/+/, "").replace(/index\.html$/, "").replace(/^(explore|renewal)\/(?=.)/, "").replace(/^c\//, "place/").replace(/^camp\//, "place/").replace(/^openings\/?$/, "theme/OPEN").replace(/^(guide|vision|explore|renewal)\/?$/, "").replace(/^passport\/?$/, "compare").replace(/^collections\/?$/, "themes");
+function nav(h, { replace = false } = {}) {
+  const u = toPath(h);
+  if (u !== location.pathname + location.search) history[replace ? "replaceState" : "pushState"](null, "", u);
+  route();
+}
+// 정적 페이지(404.html·place/{id}/ 등)가 ?p=경로&q=쿼리 로 넘겨 주면 원래 주소로 되돌린다. 옛 해시 주소도 경로로 바꾼다.
+(() => {
+  const u = new URL(location.href);
+  if (u.searchParams.has("p")) { const q = u.searchParams.get("q"); history.replaceState(null, "", APP_BASE + legacyRoute(u.searchParams.get("p")) + (q ? `?${q}` : "") + location.hash); }
+  if (location.hash.startsWith("#/")) history.replaceState(null, "", APP_BASE + legacyRoute(location.hash.slice(2)));
+  else if (/^#c=/.test(location.hash)) history.replaceState(null, "", `${APP_BASE}place/${location.hash.slice(3)}`);
+})();
+// index.html의 머리말·아래 탭 링크(./map 등)는 깊은 주소(/camp/place/1)에서도 맞도록 절대 경로로 바꾼다.
+for (const a of document.querySelectorAll('a[href^="./"]')) { const r = a.getAttribute("href").slice(2); if (!/\.(?:svg|png|webmanifest|json)$/.test(r)) a.setAttribute("href", APP_BASE + r); }
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[m]);
@@ -631,7 +652,7 @@ function reviewTopics(rows, cls, icon) {
 function reviewPickCard(c, i = 0) {
   const r = reviewMeta(c);
   return `<article class="card review-pick" data-id="${esc(c.id)}">
-    <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
+    <a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="card-media review-pick-media">${carousel(c, { eager: i < 3 })}<span class="review-total">${ic("file-text")}후기 ${fmt(r.total)}</span></div>
     <div class="card-body review-pick-body"><p class="review-place">${esc(region(c))}</p><h3>${esc(nameOf(c).name)}</h3><div class="review-topics">${reviewTopics(r.rv.p, "good", "thumb-up")}${reviewTopics(r.rv.c, "watch", "alert")}</div></div>
   </article>`;
@@ -816,7 +837,7 @@ function initCarousels(root = document) {
     tr.addEventListener("click", () => {
       if (moved) return;
       const hit = car.closest(".card, .mi, .review-pick, .tr-card, .lrow")?.querySelector(".card-hit");
-      if (hit) location.hash = hit.getAttribute("href");
+      if (hit) nav(hit.getAttribute("href").slice(APP_BASE.length));
     });
   }
 }
@@ -1008,9 +1029,9 @@ function loadShard(n) {
 // 상세 첫 열기 지연 줄이기: 카드에 손가락·마우스가 닿거나 포커스가 가면 그 캠핑장 샤드를 미리 받는다(합치기는 상세에서).
 function prefetchDetail(e) {
   if (!CATX.n) return;
-  const a = e.target.closest?.('a[href^="#/c/"]');
+  const a = e.target.closest?.('a[href*="/place/"]');
   if (!a) return;
-  const id = decodeURIComponent(a.getAttribute("href").slice(4));
+  const id = decodeURIComponent(a.getAttribute("href").split("/place/")[1] ?? "");
   if (S.byId.get(id) && !S.byId.get(id).__full) loadShard(shardOf(id));
 }
 for (const t of ["pointerover", "focusin", "touchstart"]) document.addEventListener(t, prefetchDetail, { passive: true, capture: true });
@@ -1033,12 +1054,12 @@ function watchIdlePrefetch() {
     for (const e of es) {
       if (!e.isIntersecting) continue;
       IDLE_PF.io.unobserve(e.target);
-      const id = decodeURIComponent(e.target.getAttribute("href").slice(4)), n = shardOf(id);
+      const id = decodeURIComponent(e.target.getAttribute("href").split("/place/")[1] ?? ""), n = shardOf(id);
       if (!CATX.got.has(n) && !IDLE_PF.q.includes(n)) IDLE_PF.q.push(n);
     }
     pumpIdle();
   }, { rootMargin: "200px 0px" });
-  const scan = (root) => root.querySelectorAll?.('a.card-hit[href^="#/c/"]').forEach((a) => IDLE_PF.io.observe(a));
+  const scan = (root) => root.querySelectorAll?.('a.card-hit[href*="/place/"]').forEach((a) => IDLE_PF.io.observe(a));
   scan(document);
   new MutationObserver((ms) => { for (const m of ms) for (const nd of m.addedNodes) if (nd.nodeType === 1) scan(nd); }).observe(document.body, { childList: true, subtree: true });
 }
@@ -1107,7 +1128,7 @@ function publicParkCard(c) {
     c.tel ? `문의 ${c.tel}` : "연락처 확인 중",
   ];
   return `<article class="park-card" data-id="${esc(c.id)}">
-    <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 공원 정보"></a>
+    <a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 공원 정보"></a>
     <div class="park-card-icon">${thIc("PARK")}</div>
     <div class="park-card-body">
       <p class="park-card-kicker">공원 정보 ${source}</p>
@@ -1122,7 +1143,7 @@ function card(c, i = 0, opts) {
   const isWp = Boolean((opts && !Array.isArray(opts) && opts.isWaterPlay) || S.theme === "WATER_PLAY");
   const { tag } = nameOf(c), o = openingOf(c);
   return `<article class="card${isWp ? " is-closed" : ""}" data-id="${esc(c.id)}">
-    <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
+    <a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="card-media">${carousel(c, { eager: i < 4 })}
       ${isWp ? `<span class="sig closed">${ic("clock")}운영종료</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : S.avail?.has(String(c.id)) ? `<span class="sig live">${ic("check")}접수 중</span>` : ""}
       <span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3, 2, { rows: true })}</span>
@@ -1341,7 +1362,7 @@ function saveCommit(id) {
   store.set("mc-saved", S.saved); store.set("mc-pick", S.pick);
   syncCompare();
   $$(`[data-save="${CSS.escape(id)}"]`).forEach((x) => { const on = isSaved(id); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); x.setAttribute("aria-label", on ? "찜 해제" : "찜하기"); x.querySelector("use").setAttribute("href", `#i-${on ? "heart" : "heart-o"}`); });
-  if (location.hash.startsWith("#/compare") || location.hash.startsWith("#/saved") || location.hash.startsWith("#/saves-log")) route();
+  if (curHash().startsWith("#/compare") || curHash().startsWith("#/saved") || curHash().startsWith("#/saves-log")) route();
 }
 function syncCompare() {
   // 역할 분리: ‘비교’ 숫자 = 지금 비교에 고른 곳 수(없으면 숨김), ‘찜’ 숫자 = 찜한 곳 수
@@ -1352,7 +1373,7 @@ function syncCompare() {
 
 function presetOn(i) { const v = PRESETS[i][1]; return Object.entries(v).every(([k, x]) => (Array.isArray(x) ? x.every((y) => S.cond[k].includes(y)) : S.cond[k] === x)); }
 function syncCondUi() {
-  if (!location.hash.startsWith("#/list")) $$("[data-cond-pills]").forEach((x) => (x.innerHTML = condBadgeRow()));
+  if (!curHash().startsWith("#/list")) $$("[data-cond-pills]").forEach((x) => (x.innerHTML = condBadgeRow()));
   $$("[data-cond-label]").forEach((x) => (x.textContent = condSummary()));
   $$("[data-preset]").forEach((b) => b.setAttribute("aria-pressed", String(presetOn(Number(b.dataset.preset)))));
 }
@@ -1370,11 +1391,11 @@ document.addEventListener("click", (e) => {
     else if (k === "win") S.cond.win = false;
     else if (k === "near") S.cond.near = "";
     store.set("mc-cond", S.cond);
-    if (location.hash.startsWith("#/list")) { history.replaceState(null, "", listHash()); route(); }
+    if (curHash().startsWith("#/list")) { history.replaceState(null, "", toPath(listHash())); route(); }
     else syncCondUi();
     return;
   }
-  if (e.target.closest("[data-open-cond]")) { if (!location.hash.startsWith("#/list")) S.onCondApply = syncCondUi; condSheet(); return; }
+  if (e.target.closest("[data-open-cond]")) { if (!curHash().startsWith("#/list")) S.onCondApply = syncCondUi; condSheet(); return; }
   const pr = e.target.closest("[data-preset]");
   if (pr) {
     const v = PRESETS[Number(pr.dataset.preset)][1], on = presetOn(Number(pr.dataset.preset));
@@ -1384,7 +1405,7 @@ document.addEventListener("click", (e) => {
     }
     syncCondUi();
     // 당일 캠크닉은 홈 레일이 숙박 캠핑장 위주라 켜면 바로 당일 목록으로 옮긴다(2026-10-20 소유자).
-    if (!on && v.kind?.includes("DAY") && !location.hash.startsWith("#/list")) location.hash = listHash();
+    if (!on && v.kind?.includes("DAY") && !curHash().startsWith("#/list")) nav(listHash());
     return;
   }
 });
@@ -1409,7 +1430,7 @@ function trendingShell() {
     <div class="sec-head">
       <h2 id="tr-t">실시간 <em>인기</em></h2>
       <div class="sec-side">
-        <a class="link more-link" href="#/theme/POPULAR">더보기 ${ic("right")}</a>
+        <a class="link more-link" href="${APP_BASE}theme/POPULAR">더보기 ${ic("right")}</a>
       </div>
     </div>
     <div class="rail trending-rail" data-tr-rail>${Array.from({ length: 4 }, () => `<div class="tr-card tr-skel" aria-hidden="true"><span class="tr-ph"></span><b></b><i></i></div>`).join("")}</div>
@@ -1431,7 +1452,7 @@ function trendingCard(x) {
   }
   const reasonsHtml = reasons.length ? `<div class="tr-reasons">${reasons.slice(0, 3).map((r) => `<span class="tr-reason">${ic("thumb-up")}${esc(r)}</span>`).join("")}</div>` : "";
   return `<article class="tr-card" data-cid="${c.id}">
-    <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" draggable="false" aria-label="${x.rank}위 ${esc(nameOf(c).name)} 자세히"></a>
+    <a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${x.rank}위 ${esc(nameOf(c).name)} 자세히"></a>
     <span class="tr-ph">${carousel(c, { eager: x.rank <= 3, single: true })}</span>
     <div class="tr-body">
       <b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i>
@@ -1491,19 +1512,19 @@ function homeView() {
   const themeItems = THEMES.map(([key, label, test]) => {
     const imgSrc = themeImg(key);
     const isWp = key === "WATER_PLAY";
-    return `<a class="theme-card${isWp ? " is-closed" : ""}" href="#/theme/${encodeURIComponent(key)}" draggable="false"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy" draggable="false">${isWp ? `<span class="theme-closed-badge">운영종료</span>` : ""}<span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
+    return `<a class="theme-card${isWp ? " is-closed" : ""}" href="${APP_BASE}theme/${encodeURIComponent(key)}" draggable="false"><img src="${imgSrc}" alt="${esc(label)}" loading="lazy" draggable="false">${isWp ? `<span class="theme-closed-badge">운영종료</span>` : ""}<span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
   }).join("");
   const openingSection = openings.length ? `<section class="opens" aria-labelledby="op-t">
-    <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><div class="sec-side"><a class="link more-link" href="#/theme/OPEN">더보기 ${ic("right")}</a></div></div>
-    <div class="rail opens-rail">${openings.map(([c, o]) => `<a class="open-card" href="#/c/${encodeURIComponent(c.id)}" draggable="false">${imageTag(photosOf(c)[0] ?? "", "", { sizes: "250px" })}<span class="open-dd">${esc(o.txt)}</span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))} · ${esc(o.platform ?? "")}</i></a>`).join("")}</div>
+    <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><div class="sec-side"><a class="link more-link" href="${APP_BASE}theme/OPEN">더보기 ${ic("right")}</a></div></div>
+    <div class="rail opens-rail">${openings.map(([c, o]) => `<a class="open-card" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false">${imageTag(photosOf(c)[0] ?? "", "", { sizes: "250px" })}<span class="open-dd">${esc(o.txt)}</span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))} · ${esc(o.platform ?? "")}</i></a>`).join("")}</div>
   </section>` : "";
   const picks = reviewPicks();
   const reviewSection = picks.length ? `<section class="review-picks" aria-labelledby="review-picks-t">
-    <div class="sec-head"><div><h2 id="review-picks-t">긍정 <em>후기</em></h2></div><div class="sec-side"><a class="link more-link" href="#/theme/REVIEWS">더보기 ${ic("right")}</a></div></div>
+    <div class="sec-head"><div><h2 id="review-picks-t">긍정 <em>후기</em></h2></div><div class="sec-side"><a class="link more-link" href="${APP_BASE}theme/REVIEWS">더보기 ${ic("right")}</a></div></div>
     <div class="rail review-picks-rail">${picks.map(reviewPickCard).join("")}</div>
   </section>` : "";
   const themeSection = themeItems ? `<section class="themes-catalog" aria-labelledby="theme-t">
-    <div class="sec-head"><h2 id="theme-t">테마로 <em>고르기</em></h2><div class="sec-side"><a class="link more-link" href="#/theme/ALL">더보기 ${ic("right")}</a></div></div>
+    <div class="sec-head"><h2 id="theme-t">테마로 <em>고르기</em></h2><div class="sec-side"><a class="link more-link" href="${APP_BASE}theme/ALL">더보기 ${ic("right")}</a></div></div>
     <div class="rail theme-catalog-rail">${themeItems}</div>
   </section>` : "";
   return `
@@ -1639,7 +1660,7 @@ function renderResults({ reset = true } = {}) {
   const rc = $("[data-res-count]"); if (rc) rc.textContent = `검색된 결과 ${fmt(renderable.length)}건`;
   grid.innerHTML = renderable.length ? renderable.slice(0, S.shown).map((c, i) => isPublicPark(c) ? publicParkCard(c) : card(c, i)).join("") : bare.length ? "" : `<div class="empty">${ic("search")}<b>맞는 곳이 없어요</b><button class="btn ghost" data-clear="all">조건 지우기</button></div>`;
   $("[data-more]").hidden = renderable.length <= S.shown;
-  noph.innerHTML = !parkTheme && S.q && bare.length ? `<h4>사진 없는 곳 ${fmt(bare.length)}</h4><ul>${bare.slice(0, 30).map((c) => `<li><a href="#/c/${encodeURIComponent(c.id)}"><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></a>${heartBtn(c)}</li>`).join("")}</ul>` : "";
+  noph.innerHTML = !parkTheme && S.q && bare.length ? `<h4>사진 없는 곳 ${fmt(bare.length)}</h4><ul>${bare.slice(0, 30).map((c) => `<li><a href="${APP_BASE}place/${encodeURIComponent(c.id)}"><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></a>${heartBtn(c)}</li>`).join("")}</ul>` : "";
   initCarousels(grid);
   initDraggableRails(grid);
 }
@@ -1856,7 +1877,7 @@ const ymdKst = (t) => new Date(t).toLocaleDateString("sv-SE", { timeZone: "Asia/
 const mdKst = (s) => new Date(s).toLocaleDateString("ko-KR", { month: "numeric", day: "numeric", timeZone: "Asia/Seoul" }).replace(/\.\s?/g, "/").replace(/\/$/, "");
 const THANKQ_VIEW = (cseq, d) => `https://m.thankqcamping.com/resv/view.hbb?cseq=${encodeURIComponent(cseq)}${d ? `&res_dt=${d.replaceAll("-", "")}` : ""}`;
 function listParams() {
-  const q = new URLSearchParams(location.hash.split("?")[1] ?? "");
+  const q = new URLSearchParams(curHash().split("?")[1] ?? "");
   const area = q.get("area");
   return { area: area && AREAS.some(([k]) => k === area) ? area : "all", q: q.get("q") ?? "", cond: condFromParams(q), fee: q.get("fee") ?? "", stype: q.get("stype") ?? "" };
 }
@@ -1900,7 +1921,7 @@ function condLine(c, ce) {
 }
 function listRow({ c, ce }, i = 0) {
   const { tag } = nameOf(c), o = openingOf(c), main = bookingChannels(c)[0];
-  const href = `#/c/${encodeURIComponent(c.id)}`;
+  const href = `${APP_BASE}place/${encodeURIComponent(c.id)}`;
   return `<article class="card card-horizontal lrow" data-id="${esc(c.id)}">
     <a class="card-hit" href="${href}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="card-media">${carousel(c, { eager: i < 3 })}
@@ -1975,13 +1996,13 @@ function listView() {
   const p = listParams();
   S.area = p.cond.sido.length ? "all" : p.area; S.q = p.q;
   S.cond = p.cond; if (["u3", "3to5", "5to7", "7to10", "10to20", "o20", "o7", ""].includes(p.fee)) S.feeBand = p.fee;
-  S.condStrict = new URLSearchParams(location.hash.split("?")[1] ?? "").get("strict") === "1";
+  S.condStrict = new URLSearchParams(curHash().split("?")[1] ?? "").get("strict") === "1";
   // 목록 화면에 보이는 조건만 결과를 바꾼다.
   S.theme = null; S.quick.clear();
   S.stype = p.stype || "";
   return `<section class="list-page">
     <div class="list-head">
-      <a class="link list-back" href="#/">${ic("left")}처음으로</a>
+      <a class="link list-back" href="${APP_BASE}">${ic("left")}처음으로</a>
       ${commonFinderForm({ formAttr: "data-list-search", isList: true })}
       <div class="filter-zone list-filters">
         ${filterModules({
@@ -2012,7 +2033,7 @@ function renderList({ reset = true } = {}) {
   const from = box.children.length, to = Math.min(S.listN, shown.length);
   box.insertAdjacentHTML("beforeend", shown.slice(from, to).map((x, i) => listRow(x, from + i)).join("") || (reset ? `<p class="empty">조건에 맞는 캠핑장이 없어요. 지역이나 요금대를 바꿔 보세요.</p>` : ""));
   const rc = $("[data-list-count]"); if (rc) rc.textContent = `검색된 결과 ${fmt(shown.length)}건`;
-  const cp = $("[data-cond-pills]"); if (cp) cp.innerHTML = condBadgeRow() + (location.hash.startsWith("#/list") ? listMobilePills() : "");
+  const cp = $("[data-cond-pills]"); if (cp) cp.innerHTML = condBadgeRow() + (curHash().startsWith("#/list") ? listMobilePills() : "");
   $$("[data-cond-label]").forEach((x) => (x.textContent = condSummary()));
   $("[data-list-more]").hidden = to >= shown.length;
   initCarousels(box);
@@ -2020,7 +2041,7 @@ function renderList({ reset = true } = {}) {
 function bindList() {
   renderList();
   const v = $("#view");
-  const go = () => { const h = listHash(); if (location.hash !== h) location.hash = h; else renderList(); };
+  const go = () => { const h = listHash(); if (curHash() !== h) nav(h); else renderList(); };
   S.onCondApply = go;
   const onSubmit = (e) => { const f = e.target.closest("[data-list-search]"); if (!f) return; e.preventDefault(); S.q = f.q.value.trim(); go(); };
   const onClick = (e) => {
@@ -2047,7 +2068,7 @@ function bindList() {
 function themesView() {
   const cards = THEMES.map(([key, label, test]) => {
     const closed = key === "WATER_PLAY";
-    return `<a class="theme-card${closed ? " is-closed" : ""}" href="#/theme/${encodeURIComponent(key)}" draggable="false">
+    return `<a class="theme-card${closed ? " is-closed" : ""}" href="${APP_BASE}theme/${encodeURIComponent(key)}" draggable="false">
       <img src="${themeImg(key)}" alt="${esc(label)}" loading="lazy" draggable="false">
       ${closed ? `<span class="theme-closed-badge">운영종료</span>` : ""}
       <span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span>
@@ -2080,7 +2101,7 @@ function themeView(themeKey) {
     <div class="theme-hero" style="background-image: url('${tImg}')">
       <div class="theme-hero-overlay"></div>
       <div class="theme-hero-content">
-        <a class="link theme-back" href="#/">${ic("left")} 처음으로</a>
+        <a class="link theme-back" href="${APP_BASE}">${ic("left")} 처음으로</a>
         <h1 id="tp-title">${esc(tName)} <em>${headingNoun}</em></h1>
         <p class="theme-hero-sub">${esc(tSub)} · 전국 <b>${fmt(totalInTheme)}곳</b></p>
       </div>
@@ -2192,7 +2213,7 @@ function bindHome() {
   const v = $("#view");
   v.addEventListener("click", homeClicks);
   // 히어로 ‘찾기’: 지역·검색어·날짜를 담아 목록 화면(#/list)으로 옮겨 간다(소유자 2026-10-19).
-  v.addEventListener("submit", (e) => { const f = e.target.closest("[data-search]"); if (!f) return; e.preventDefault(); S.q = f.q.value.trim(); location.hash = listHash(); });
+  v.addEventListener("submit", (e) => { const f = e.target.closest("[data-search]"); if (!f) return; e.preventDefault(); S.q = f.q.value.trim(); nav(listHash()); });
   v.addEventListener("change", (e) => { if (e.target.matches("[data-sort]")) { S.sort = e.target.value; renderResults(); } });
   const sentinel = $(".more-wrap");
   const io = new IntersectionObserver((es) => { if (es[0].isIntersecting && !$("[data-more]").hidden) moreResults(); }, { rootMargin: "800px" });
@@ -2216,7 +2237,7 @@ function homeClicks(e) {
       $("#results").scrollIntoView({ block: "start" });
       return;
     }
-    location.hash = `#/theme/${encodeURIComponent(k)}`;
+    nav(`#/theme/${encodeURIComponent(k)}`);
     return;
   }
   const st = e.target.closest("[data-stype]");
@@ -2710,10 +2731,10 @@ function galleryHtml(c) {
   return `<div class="gallery">${grid}${rail}</div>`;
 }
 async function detailView(id) {
-  if (S.byId.get(id) && String(S.byId.get(id).id) !== id) { history.replaceState(null, "", `#/c/${encodeURIComponent(S.byId.get(id).id)}`); id = String(S.byId.get(id).id); }
+  if (S.byId.get(id) && String(S.byId.get(id).id) !== id) { history.replaceState(null, "", `${APP_BASE}place/${encodeURIComponent(S.byId.get(id).id)}`); id = String(S.byId.get(id).id); }
   await ensureFull([id]);
   const c = S.byId.get(id);
-  if (!c) return `<div class="empty">${ic("search")}<b>캠핑장을 찾지 못했어요</b><a class="btn ghost" href="#/">찾기로</a></div>`;
+  if (!c) return `<div class="empty">${ic("search")}<b>캠핑장을 찾지 못했어요</b><a class="btn ghost" href="${APP_BASE}">찾기로</a></div>`;
   const d = await detailOf(id);
   const f = facts(c), { tag } = nameOf(c);
   const spec = ["size", "park", "power", "fire", "ground", "shelter", "sanitary", "hot", "pet"];
@@ -2721,7 +2742,7 @@ async function detailView(id) {
   const o = openingOf(c);
   const us = usage(c, d);
   return `<article class="detail" data-id="${esc(c.id)}">
-    <div class="d-bar"><a class="icon-btn" href="#/" data-back aria-label="뒤로">${ic("left")}</a><span class="d-crumb">${esc(region(c))}</span>${heartBtn(c, { label: true })}</div>
+    <div class="d-bar"><a class="icon-btn" href="${APP_BASE}" data-back aria-label="뒤로">${ic("left")}</a><span class="d-crumb">${esc(region(c))}</span>${heartBtn(c, { label: true })}<button class="d-share" type="button" data-share-place="${esc(c.id)}" aria-label="링크 공유">${ic("share")}<span>공유</span></button></div>
     <header class="d-head">
       <div class="d-head-main">
       <p class="d-eyebrow">${esc(region(c))}${c.op && OP[c.op] ? ` · ${OP[c.op]}` : tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
@@ -3838,7 +3859,7 @@ async function ensureSupabaseConfig() {
   sbConfigPromise = (async () => {
     // Pages 빌드는 공개 키를 배포 단계에서 넣는다. 로컬 미리보기는 그 키를
     // 저장소에 복제하지 않고, 공개 배포본의 같은 설정만 읽어 찜/댓글을 검증한다.
-    const targets = [new URL("./", location.href).href];
+    const targets = [new URL(APP_BASE, location.href).href];
     if (/^(localhost|127\.0\.0\.1)$/i.test(location.hostname)) targets.push("https://pyw31337.github.io/camp/");
     for (const target of [...new Set(targets)]) {
       try {
@@ -4888,25 +4909,24 @@ function bindDetail() {
     });
   });
 
-  $("[data-dock-share]")?.addEventListener("click", async () => {
-    const curCamp = S.byId.get(id);
-    const title = curCamp ? `${nameOf(curCamp).name} - 모여라캠핑` : document.title;
-    const url = window.location.href;
-    if (navigator.share) {
-      try {
-        await navigator.share({ title, text: `${title}\n${url}`, url });
-        return;
-      } catch (err) {
-        if (err.name === "AbortError") return;
-      }
-    }
-    if (navigator.clipboard) {
-      await navigator.clipboard.writeText(url);
-      toast("주소가 복사되었습니다.");
-    } else {
-      prompt("주소를 복사하세요:", url);
-    }
-  });
+  $$("[data-share-place], [data-dock-share]").forEach((b) => b.addEventListener("click", () => sharePlace(S.byId.get(id))));
+}
+// 공유 주소는 언제나 정적 미리보기 페이지(place/{id}/) — 카카오톡 등이 Open Graph 메타(사진·이름·요약)를 읽는다.
+const placeUrl = (id) => new URL(`${APP_BASE}place/${encodeURIComponent(id)}/`, location.origin).href;
+async function sharePlace(c) {
+  if (!c) return;
+  const url = placeUrl(c.id);
+  const title = `${nameOf(c).name} · 모여라 캠핑`;
+  // 휴대폰(터치)에서는 시스템 공유 시트, 그 밖에서는 복사.
+  if (navigator.share && matchMedia("(pointer: coarse)").matches) {
+    try { await navigator.share({ title, url }); return; } catch (err) { if (err?.name === "AbortError") return; }
+  }
+  try { await navigator.clipboard.writeText(url); }
+  catch {
+    const t = document.createElement("textarea"); t.value = url; t.setAttribute("readonly", ""); t.style.cssText = "position:fixed;opacity:0";
+    document.body.append(t); t.select(); try { document.execCommand("copy"); } catch {} t.remove();
+  }
+  toast("링크를 복사했어요");
 }
 function openLightbox(c, start) {
   const base = photosOf(c), have = new Set(base.map(photoName));
@@ -4951,7 +4971,7 @@ async function compareView() {
   if (!saved.length) {
     return `<section class="cmp-page"><div class="sec-head big"><h1>찜한 캠핑장 <em>비교</em></h1></div>
       <p class="cmp-sub">찜한 캠핑장 가운데 2~5곳을 골라 조건을 나란히 비교하는 곳이에요.</p>
-      <div class="empty" data-cmp-empty>${ic("heart-o")}<b>아직 찜한 곳이 없어요. 캠핑장 이름 옆 ${ic("heart-o", "inline")}를 눌러 찜해 보세요</b><a class="btn ghost" href="#/list">캠핑장 찾기</a><button class="btn primary" type="button" data-sample>예시로 보기</button></div></section>`;
+      <div class="empty" data-cmp-empty>${ic("heart-o")}<b>아직 찜한 곳이 없어요. 캠핑장 이름 옆 ${ic("heart-o", "inline")}를 눌러 찜해 보세요</b><a class="btn ghost" href="${APP_BASE}list">캠핑장 찾기</a><button class="btn primary" type="button" data-sample>예시로 보기</button></div></section>`;
   }
   S.pick = S.pick.filter((id) => S.saved.includes(id));
   if (!S.pick.length) S.pick = saved.slice(0, Math.min(saved.length, 5)).map((c) => String(c.id));
@@ -4970,7 +4990,7 @@ async function compareView() {
     ["시설·주변", [["편의시설", (c) => ((c.amenities ?? []).length ? { v: c.amenities.slice(0, 6).join(" · "), g: "c", src: { label: "고캠핑 등록 편의시설", url: c.gc_url } } : null), "drop"], ["대여", (c) => ((c.rental ?? []).length ? { v: c.rental.join(" · "), g: "c", src: { label: "고캠핑 등록 대여품목", url: c.gc_url } } : null), "cart"], ["편의점", (c) => (c.nl?.c ? { v: km(c.nl.c), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+편의점` : null } } : null), "store"], ["마트", (c) => (c.nl?.m ? { v: km(c.nl.m), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+마트` : null } } : null), "cart"], ["후기 장점", (c) => (c.rv?.p?.length ? { v: c.rv.p.slice(0, 2).map(([t]) => normTopic(t)).join(" · "), g: "m", src: { label: "방문자 후기 분석", url: c.gc_url } } : null), "thumb-up"]]],
   ];
 
-  const head = camps.map((c, i) => `<th scope="col" data-col-idx="${i}"><a class="ch" href="#/c/${encodeURIComponent(c.id)}">${campThumb(c, { sizes: "64px" })}<span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></span></a><span class="ch-acts">${heartBtn(c)}<button class="icon-btn ch-x" type="button" data-pick="${esc(c.id)}" aria-label="비교에서 빼기" title="비교에서 빼기(찜은 그대로)">${ic("close")}</button></span></th>`).join("");
+  const head = camps.map((c, i) => `<th scope="col" data-col-idx="${i}"><a class="ch" href="${APP_BASE}place/${encodeURIComponent(c.id)}">${campThumb(c, { sizes: "64px" })}<span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></span></a><span class="ch-acts">${heartBtn(c)}<button class="icon-btn ch-x" type="button" data-pick="${esc(c.id)}" aria-label="비교에서 빼기" title="비교에서 빼기(찜은 그대로)">${ic("close")}</button></span></th>`).join("");
   const opens = camps.map((c) => { const o = openingOf(c); const ch = primaryBooking(c); return `<td class="${o ? "hot" : ""}">${o ? `<b>${esc(o.txt)}</b> · ` : ""}${esc(ch ? bookingLabel(ch) : "–")}</td>`; }).join("");
 
   const body = rowsDef.map(([g, rows]) => `<tr class="grp"><th scope="rowgroup" colspan="${camps.length + 1}">${g}</th></tr>${rows.map(([l, get, rIc]) => {
@@ -4980,7 +5000,7 @@ async function compareView() {
     return `<tr class="${diff ? "diff" : "same"}"><th scope="row">${rIc ? ic(rIc) : ""}${l}</th>${vals.map((v) => `<td class="cmp-cell"><div class="cmp-cell-inner"><span class="cmp-val">${v ? `${esc(v.v)}${dot(v.g)}` : '<span class="none">–</span>'}</span>${v ? srcTip(v, l) : ""}</div></td>`).join("")}</tr>`;
   }).join("")}`).join("");
 
-  const acts = camps.map((c) => { const ch = primaryBooking(c); return `<td>${ch ? `<a class="btn primary wide" href="${esc(ch.url)}" target="_blank" rel="noopener">예약</a>` : `<a class="btn ghost wide" href="#/c/${encodeURIComponent(c.id)}">자세히</a>`}</td>`; }).join("");
+  const acts = camps.map((c) => { const ch = primaryBooking(c); return `<td>${ch ? `<a class="btn primary wide" href="${esc(ch.url)}" target="_blank" rel="noopener">예약</a>` : `<a class="btn ghost wide" href="${APP_BASE}place/${encodeURIComponent(c.id)}">자세히</a>`}</td>`; }).join("");
 
   // 모바일 특화: 세로 스펙별 모아보기 카드 뷰
   const cardsViewHtml = `<div class="cmp-cards-view${cmpMode === "cards" ? " is-active" : ""}">
@@ -5033,7 +5053,7 @@ async function compareView() {
         <label class="switch"><input type="checkbox" data-diff-only><span>다른 점만 보기</span></label>
       </span>
     </div>
-    <p class="cmp-sub" data-cmp-count>찜 <b>${saved.length}</b>곳 중 <b>${camps.length}</b>곳 비교 중 (최대 5곳 선택) · ${ic("check", "inline")} 누르면 비교에 넣고 빼요 · ${ic("heart", "inline")} 끄면 찜에서 빠져요 · <a class="sec-note" href="#/saved">찜 목록 전체</a></p>
+    <p class="cmp-sub" data-cmp-count>찜 <b>${saved.length}</b>곳 중 <b>${camps.length}</b>곳 비교 중 (최대 5곳 선택) · ${ic("check", "inline")} 누르면 비교에 넣고 빼요 · ${ic("heart", "inline")} 끄면 찜에서 빠져요 · <a class="sec-note" href="${APP_BASE}saved">찜 목록 전체</a></p>
     ${picker}
     ${noticeLess2}
 
@@ -5112,7 +5132,7 @@ async function savedView() {
         ${ic("heart-o")}
         <b>아직 찜한 캠핑장이 없어요</b>
         <p>캠핑장 카드의 하트(${ic("heart-o", "inline")})를 눌러 찜해보세요.<br>찜한 캠핑장은 갯수 제한 없이 모아서 보고, 원하는 곳들을 골라 한눈에 스펙을 비교할 수 있어요.</p>
-        <a class="btn primary" href="#/list">캠핑장 찾기</a>
+        <a class="btn primary" href="${APP_BASE}list">캠핑장 찾기</a>
       </div>
     </section>`;
   }
@@ -5130,7 +5150,7 @@ async function savedView() {
       </div>
       <div class="saved-head-tools">
         <span class="saved-count-pill">총 <b>${saved.length}</b>곳 찜함</span>
-        <a class="btn primary btn-sm saved-cmp-link" href="#/compare" data-saved-compare${saved.length < 2 ? ' data-disabled="true"' : ""}>
+        <a class="btn primary btn-sm saved-cmp-link" href="${APP_BASE}compare" data-saved-compare${saved.length < 2 ? ' data-disabled="true"' : ""}>
           ${ic("compare")} <span>비교하기</span>
         </a>
         <small class="saved-cmp-hint">${cmpHint}</small>
@@ -5203,7 +5223,7 @@ function drawMap() {
 function mapItem(c) {
   const on = selected === String(c.id);
   return `<article class="mi${on ? " on" : ""}" data-mid="${esc(c.id)}">
-    <a class="card-hit" href="#/c/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
+    <a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="mi-ph">${carousel(c)}</div>
     <div class="mi-b"><p class="card-meta">${esc(region(c))}${!stayKinds(c).length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p><h3>${esc(nameOf(c).name)}</h3><span class="bdgs inline">${stayBadges(c, 2)}${badges(c, stayKinds(c).length ? 2 : 3)}</span></div>
     ${heartBtn(c)}
@@ -5265,7 +5285,7 @@ function bindMap() {
 
 
 async function savesLogView() {
-  if (!await ensureSupabaseConfig()) return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><p class="muted">서버 연결을 준비하지 못했어요.</p><p class="muted">별도 페이지: <a href="../log/">/log</a></p></section>`;
+  if (!await ensureSupabaseConfig()) return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><p class="muted">서버 연결을 준비하지 못했어요.</p><p class="muted">별도 페이지: <a href="${APP_BASE}log/">/log</a></p></section>`;
   let rows = [];
   try {
     rows = await readSaveLog(200);
@@ -5276,9 +5296,9 @@ async function savesLogView() {
     const c = S.byId.get(String(x.campground_id));
     const name = c ? nameOf(c).name : x.campground_id;
     const add = x.action === "add";
-    return `<li><span class="slog-act ${add ? "add" : "rm"}">${add ? "찜" : "해제"}</span>${c ? `<a class="slog-name" href="#/c/${esc(c.id)}">${esc(name)}</a>` : `<span class="slog-name">${esc(name)}</span>`}<time class="slog-time" datetime="${esc(x.created_at)}">${esc(formatKoreanDate(x.created_at) || x.created_at)} ${esc(new Date(x.created_at).toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Seoul" }))}</time><span class="slog-env">${esc(x.platform || "기기 정보 없음")} ${esc(x.screen || "")}</span></li>`;
+    return `<li><span class="slog-act ${add ? "add" : "rm"}">${add ? "찜" : "해제"}</span>${c ? `<a class="slog-name" href="${APP_BASE}place/${esc(c.id)}">${esc(name)}</a>` : `<span class="slog-name">${esc(name)}</span>`}<time class="slog-time" datetime="${esc(x.created_at)}">${esc(formatKoreanDate(x.created_at) || x.created_at)} ${esc(new Date(x.created_at).toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Seoul" }))}</time><span class="slog-env">${esc(x.platform || "기기 정보 없음")} ${esc(x.screen || "")}</span></li>`;
   }).join("")}</ul>` : `<p class="muted">아직 기록이 없습니다.</p>`;
-  return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><nav class="slog-links" aria-label="관련 화면"><a href="#/saved">찜 목록 보기</a><a href="../log/">운영 대시보드(/log)</a></nav>${body}</section>`;
+  return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><nav class="slog-links" aria-label="관련 화면"><a href="${APP_BASE}saved">찜 목록 보기</a><a href="${APP_BASE}log/">운영 대시보드(/log)</a></nav>${body}</section>`;
 }
 
 // ── 라우터 ───────────────────────────────────────────────────
@@ -5287,15 +5307,15 @@ let lastRoute = "";
 async function render() {
   while (cleanup.length) cleanup.pop()();
   TIPS.clear(); $("#pop").hidden = true;
-  const h = location.hash || "#/";
+  const h = curHash();
   const v = $("#view");
-  const name = h.startsWith("#/c/") ? "detail" : h.startsWith("#/map") ? "map" : h.startsWith("#/saves-log") ? "saves-log" : h.startsWith("#/compare") ? "compare" : h.startsWith("#/saved") ? "saved" : h.startsWith("#/themes") ? "themes" : h.startsWith("#/theme/") ? "theme" : h.startsWith("#/list") ? "list" : "home";
+  const name = h.startsWith("#/place/") ? "detail" : h.startsWith("#/map") ? "map" : h.startsWith("#/saves-log") ? "saves-log" : h.startsWith("#/compare") ? "compare" : h.startsWith("#/saved") ? "saved" : h.startsWith("#/themes") ? "themes" : h.startsWith("#/theme/") ? "theme" : h.startsWith("#/list") ? "list" : "home";
   $$("[data-nav]").forEach((a) => a.toggleAttribute("aria-current", a.dataset.nav === (name === "detail" || name === "list" ? "home" : name === "theme" ? "themes" : name)));
   document.body.dataset.view = name;
   if (name === "home") { v.innerHTML = homeView(); bindHome(); }
   else if (name === "themes") { v.innerHTML = themesView(); }
-  else if (name === "theme") { const tk = decodeURIComponent(h.slice(8)); v.innerHTML = themeView(tk); bindTheme(tk); }
-  else if (name === "detail") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await detailView(decodeURIComponent(h.slice(4))); bindDetail(); }
+  else if (name === "theme") { const tk = decodeURIComponent(h.slice(8).split("?")[0]); v.innerHTML = themeView(tk); bindTheme(tk); }
+  else if (name === "detail") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await detailView(decodeURIComponent(h.slice(8).split("?")[0])); bindDetail(); }
   else if (name === "saves-log") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await savesLogView(); }
   else if (name === "saved") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await savedView(); bindSaved(); }
   else if (name === "compare") { v.innerHTML = await compareView(); bindCompare(); }
@@ -5315,7 +5335,20 @@ async function route() {
   else if (name !== prev || name === "detail" || name === "theme") scrollTo(0, 0);
   updateHeaderGlass();
 }
-addEventListener("hashchange", route);
+addEventListener("popstate", route);
+// 앱 안 링크(같은 APP_BASE의 화면 경로)는 새로고침 없이 pushState로 연다. 새 탭·수정 키·다른 페이지(/log/ 등)는 브라우저에 맡긴다.
+const APP_ROUTE = /^(?:$|\?|list(?:[/?]|$)|map\/?$|themes\/?$|theme\/|compare\/?$|saved\/?$|saves-log\/?$|place\/)/;
+document.addEventListener("click", (e) => {
+  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const a = e.target.closest?.("a[href]");
+  if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+  const u = new URL(a.href, location.href);
+  if (u.origin !== location.origin || !u.pathname.startsWith(APP_BASE)) return;
+  const rest = u.pathname.slice(APP_BASE.length) + u.search;
+  if (!APP_ROUTE.test(rest)) return;
+  e.preventDefault();
+  nav(`#/${rest}`);
+});
 // ── 바깥 링크를 기기에 맞는 화면으로(소유자 2026-10-20: 모바일에서 네이버 예약이 PC 화면으로 열려 잘림) ──────────
 // 같은 글·장소라도 PC·모바일 주소가 다른 플랫폼(네이버 검색·블로그·카페·예약·지도·플레이스, 다음 카페·검색, 카카오 장소)은
 // 누르는 순간 기기에 맞는 주소로 바꾼다. 고캠핑·관광공사·국립공원·캠핏·카카오맵 링크는 한 주소가 알아서 맞춰 열린다(확인 2026-10-20).
@@ -5556,8 +5589,6 @@ addEventListener("error", (e) => {
   S.avail = new Map();
   if (avail && Date.parse(avail.expires_at) > Date.now()) for (const r of avail.records ?? []) if (r.state === "OFFICIAL_APPLICATION_OPEN") { const k = String(r.campground_id); S.avail.set(k, [...(S.avail.get(k) ?? []), { ...r, disclaimer: avail.disclaimer, source_name: avail.source?.name }]); }
   // 이전 주소(#c=1554)도 새 상세 주소로 보정해 공유 링크를 깨지 않는다.
-  const legacy = location.hash.match(/^#c=(.+)$/);
-  if (legacy) history.replaceState(null, "", `#/c/${legacy[1]}`);
   syncCompare(); updateHeaderGlass();
   route();
   // 첫 화면을 그린 뒤 한가할 때(최대 2초 뒤) 보이는 카드 샤드 미리 받기를 켠다.
