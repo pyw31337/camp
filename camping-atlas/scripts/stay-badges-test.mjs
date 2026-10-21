@@ -35,7 +35,7 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [390, 844, "390"]]) {
     if (hr.bad.length) fails.push(`${tag} 홈 칩: 배지 없는 결과 ${hr.bad.slice(0, 5).join(",")}`);
   }
   // 3) 목록 조건(상품=글램핑)
-  await page.goto(`${base}#/list?kind=GLAMPING&strict=1`, { waitUntil: "networkidle" });
+  await page.goto(`${base}list?kind=GLAMPING&strict=1`, { waitUntil: "networkidle" });
   await page.waitForSelector(".card", { timeout: 30000 });
   {
     const r = await page.$$eval(".card[data-id]", (cs) => ({ n: cs.length, bad: cs.filter((c) => !c.querySelector('[data-stay="GLAMPING"]')).map((c) => c.dataset.id) }));
@@ -47,13 +47,13 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [390, 844, "390"]]) {
     if (shots) await page.screenshot({ path: `${shots}/stay-badges-list-${tag}.png` });
     // 4) 상세
     const id = await page.$eval(".card[data-id]", (c) => c.dataset.id);
-    await page.goto(`${base}#/c/${encodeURIComponent(id)}`, { waitUntil: "networkidle" });
+    await page.goto(`${base}c/${encodeURIComponent(id)}`, { waitUntil: "networkidle" });
     await page.waitForSelector(".d-bdgs", { timeout: 20000 });
     if (!(await page.$('.d-bdgs [data-stay="GLAMPING"]'))) fails.push(`${tag} 상세(${id}): 글램핑 배지 없음`);
     if (shots) await page.screenshot({ path: `${shots}/stay-badges-detail-${tag}.png` });
   }
   // 5) 지도 칩
-  await page.goto(`${base}#/map`, { waitUntil: "domcontentloaded" });
+  await page.goto(`${base}map`, { waitUntil: "domcontentloaded" });
   await page.waitForTimeout(1500);
   for (const k of ["glamp", "caravan", "house"]) if (!(await page.$(`[data-mquick="${k}"]`))) fails.push(`${tag} 지도: ${k} 칩 없음`);
   if (errs.length) fails.push(`${tag} pageerror: ${errs.slice(0, 3).join(" | ")}`);
