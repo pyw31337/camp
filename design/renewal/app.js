@@ -256,7 +256,7 @@ const filled = (f) => f && (f.g === "v" || f.g === "c");
 const pos = (f) => f && f.g;
 const NO_TAGS = {
   NO_POWER: ["전기 불가", "bolt"], HIGH_POWER: ["고출력 전열기구 금지", "bolt"], NO_FIRE: ["화기 불가", "flame"], NO_FIREWOOD: ["장작 불가", "firewood"],
-  NO_CHARCOAL: ["숯 불가", "flame"], BYO_FUEL: ["개인 장작·숯 반입 금지", "flame"], BYO_PIT: ["개인 화로대 금지", "flame"], NO_HOT_WATER: ["온수 불가", "drop"],
+  NO_CHARCOAL: ["숯 불가", "flame"], BYO_FUEL: ["개인 장작·숯 반입 금지", "flame"], BYO_PIT: ["개인 화로대 금지", "flame"], NO_HOT_WATER: ["온수 불가", "hotwater"],
   NO_PET: ["반려견 불가", "paw"], BIG_DOG: ["반려견 제한", "paw"], NO_CARAVAN: ["개인 카라반·트레일러 불가", "caravan"], NO_EXTRA_TENT: ["추가 텐트 불가", "tent"],
   NO_FIREWORKS: ["폭죽 금지", "spark"], NO_LOUD: ["음향기기 금지", "broadcast"], NO_MINOR: ["미성년자 단독 불가", "alert"], NO_VISITOR: ["방문객 불가", "door"], NO_WINTER: ["동계 휴장", "calendar"],
 };
@@ -2402,7 +2402,7 @@ function extraTiles(c, d, f) {
   if (wifi.length) add("wifi", "와이파이", { v: wifi.some((a) => /일부|제한|부분/.test(a)) ? "일부 가능" : "있음", ...gc(wifi) });
   const play = names([[/놀이터|놀이방|놀이시설/, "놀이터"], [/트렘폴린|트램폴린|트램펄린|트램플린|방방이/, "트램펄린"], [/에어바운스/, "에어바운스"], [/키즈카페|키즈방/, "키즈카페"], [/모래놀이/, "모래놀이"]]);
   if (play.length) {
-    const playIcon = play.some((p) => /트램|트렘|방방/.test(p)) ? "trampoline" : "users";
+    const playIcon = play.some((p) => /트램|트렘|방방/.test(p)) ? "trampoline" : "playground";
     add(playIcon, "놀이시설", { v: play.slice(0, 3).join(" · "), ...gc(pick(/놀이|트렘|트램|방방|에어바운스|키즈/)) });
   }
   const water = names([[/물놀이장|물놀이/, "물놀이장"], [/수영장|풀장|온수풀|유수풀/, "수영장"], [/워터슬라이드/, "워터슬라이드"]]);
@@ -2430,8 +2430,8 @@ const km = (m) => (m < 1000 ? `${Math.round(m / 10) * 10}m` : `${(m / 1000).toFi
 const NEARBY_LABELS = {
   CONVENIENCE: ["편의점", "store"], MART: ["마트", "cart"], BUTCHER: ["정육", "meat"], FUEL: ["주유", "fuel"],
   PHARMACY: ["약국", "cross"], HOSPITAL: ["병원", "cross"], VET: ["동물병원", "paw"],
-  DROWSY_SHELTER: ["졸음쉼터", "route"], REST_AREA: ["휴게소", "route"], TOILET: ["공중화장실", "toilet"],
-  TOUR: ["관광", "pin"], FOOD: ["맛집", "meat"], EV: ["전기차 충전", "bolt"],
+  DROWSY_SHELTER: ["졸음쉼터", "restarea"], REST_AREA: ["휴게소", "restarea"], TOILET: ["공중화장실", "toilet"],
+  TOUR: ["관광", "tour"], FOOD: ["맛집", "food"], EV: ["전기차 충전", "bolt"],
   OTC_MEDICINE: ["상비약", "cross"], GAS_STATION: ["주유", "fuel"], ANIMAL_HOSPITAL: ["동물병원", "paw"], GEAR: ["캠핑용품", "tent"],
 };
 const FUEL_BRANDS = [[/S-?OIL|에쓰오일|에스오일/i, "S-OIL"], [/GS칼텍스|\bGS\b|^GS/i, "GS칼텍스"], [/SK에너지|\bSK\b|^SK/i, "SK에너지"], [/현대오일뱅크|오일뱅크|HD현대/i, "HD현대오일뱅크"], [/알뜰/, "알뜰주유소"], [/농협|NH/i, "농협(알뜰)"], [/E1|이원/, "E1(LPG)"], [/LPG|충전소/, "LPG"]];
@@ -2527,9 +2527,9 @@ function nearbyHubHtml(c, d) {
     ["hospital", "병원", "cross", [...erList, ...pick("HOSPITAL", k(nearby.medical, /병원|의료원|hospital|clinic/))].slice(0, 3)],
     ["vet", "동물병원", "paw", pick("VET", licensed.VET ?? [], nearby.vet ?? [])],
     ["gear", "캠핑용품", "tent", pick("GEAR", nearby.gear ?? [])],
-    ["rest", "휴게소", "route", pick("REST_AREA", k(nearby.rest, /REST_AREA|SERVICE_AREA|DROWSY_SHELTER/))],
+    ["rest", "휴게소", "restarea", pick("REST_AREA", k(nearby.rest, /REST_AREA|SERVICE_AREA|DROWSY_SHELTER/))],
     ["toilet", "화장실", "toilet", Number(toilet.within_500m) || Number(toilet.within_2km) ? [{ type: "TOILET", name: `500m ${Number(toilet.within_500m) || 0}곳 · 2km ${Number(toilet.within_2km) || 0}곳`, m: Number(toilet.within_500m) ? 500 : 2000, summary: (toilet.nearest ?? []).length && toilet.nearest.every((n) => n.src === "osm") ? "© OpenStreetMap" : true }] : []],
-    ["tour", "관광", "pin", (() => {
+    ["tour", "관광", "tour", (() => {
       const list = (nearby.tour ?? []).slice(0, 4).map((x) => entry("TOUR", x)).filter(Boolean);
       const ext = d?.extras ?? {};
       if (ext.pet) list.push({ type: "TOUR", name: "반려견 동반 여행지", sub: "한국관광공사 등록", summary: true, url: "https://korean.visitkorea.or.kr/" });
@@ -2541,7 +2541,7 @@ function nearbyHubHtml(c, d) {
       }
       return list;
     })()],
-    ["food", "맛집", "meat", (nearby.food ?? []).slice(0, 4).map((x) => entry("FOOD", x)).filter(Boolean)],
+    ["food", "맛집", "food", (nearby.food ?? []).slice(0, 4).map((x) => entry("FOOD", x)).filter(Boolean)],
     ["fuel", "주유소", "fuel", fuelPlaces(nearby.fuel ?? [], licensed.FUEL ?? licensed.GAS_STATION)],
   ].filter(([, , , rows]) => rows.length);
   // 충전소: /context/extras.json에서 화면이 뜬 뒤 덧붙인다(mountNearbyEv). 그때까지 칩·칸을 숨긴다.
@@ -2847,7 +2847,7 @@ function siteTypesHtml(c, d) {
     const x = { v: meta.label, g: GRADE_OF[t.grade] ?? "c", src: { label: SRC_LABEL[t.src] ?? t.src, url: t.url, at: t.at, quote: t.quote } };
     return `<div class="stype"><span class="stype-ic">${ic(meta.icon)}</span><span class="stype-b"><b>${esc(t.code === "HOUSE" && t.sub ? `${meta.label} · ${t.sub}` : meta.label)}</b><i>${t.count ? `${fmt(t.count)}${unit}` : t.grade === "OPERATOR" ? "운영자 안내" : t.grade === "MENTION" ? "후기 언급" : "있음"}${t.grade === "MENTION" ? asOf(t.at) : ""}</i></span><span class="tile-g">${dot(x.g)}${srcTip(x, meta.label)}</span></div>`;
   }).join("");
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("tent", "사이트 타입")}</div><div class="stypes">${tiles}</div></section>`;
+  return `<section class="d-sec"><div class="sec-head">${iconTitle("sitetype", "사이트 타입")}</div><div class="stypes">${tiles}</div></section>`;
 }
 const hostOf = (u) => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch { return ""; } };
 function introHtml(d) {
@@ -2859,7 +2859,7 @@ function introHtml(d) {
   t = t.replace(/\s+/g, " ").trim();
   if (!t) return "";
   const fact = sourceFact({ src: "고캠핑 소개", url: d?.intro_url, date: d?.intro_at, quote: d?.intro }, "고캠핑 소개");
-  return `<section class="d-sec intro-sec"><div class="sec-head">${iconTitle("spark", "업장 소개")}<span class="sec-note">${srcTip(fact, "업장 소개")}</span></div><div class="intro intro-full"><p class="intro-copy">${esc(t)}</p></div></section>`;
+  return `<section class="d-sec intro-sec"><div class="sec-head">${iconTitle("company", "업체 소개")}<span class="sec-note">${srcTip(fact, "업체 소개")}</span></div><div class="intro intro-full"><p class="intro-copy">${esc(t)}</p></div></section>`;
 }
 function amenityIcon(x) {
   const s = String(x ?? "");
@@ -2872,10 +2872,10 @@ function amenityIcon(x) {
   if (/샤워/i.test(s)) return ic("bath");
   if (/개수대/i.test(s)) return ic("fountain");
   if (/전기/i.test(s)) return ic("bolt");
-  if (/온수/i.test(s)) return ic("drop");
+  if (/온수/i.test(s)) return ic("hotwater");
   if (/마트|매점|편의점|카페/i.test(s)) return ic("store");
   if (/물놀이|수영|풀장/i.test(s)) return ic("swim");
-  if (/놀이터|놀이|키즈/i.test(s)) return ic("users");
+  if (/놀이터|놀이|키즈/i.test(s)) return ic("playground");
   if (/산책로|둘레길/i.test(s)) return ic("route");
   if (/분리수거|재활용/i.test(s)) return ic("recycle");
   return ic("check");
@@ -2908,7 +2908,7 @@ function amenityHtml(c, d) {
   const allCards = [...cntCards, ptCard, ...amCards].filter(Boolean);
   if (!allCards.length && !hasUniqueRental) return "";
 
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("toilet", "편의시설")}<span class="sec-note">${srcTip({ g: "c", src: { label: c.gc_url ? "고캠핑 등록 편의시설" : "업장·관리기관 안내", url: c.gc_url || c.homepage } }, "편의시설")}</span></div>
+  return `<section class="d-sec"><div class="sec-head">${iconTitle("amenity", "편의시설")}<span class="sec-note">${srcTip({ g: "c", src: { label: c.gc_url ? "고캠핑 등록 편의시설" : "업장·관리기관 안내", url: c.gc_url || c.homepage } }, "편의시설")}</span></div>
     ${allCards.length ? `<div class="amen-n">${allCards.join("")}</div>` : ""}
     ${hasUniqueRental ? `<p class="amen-rent"><b>${ic("cart")}대여</b>${rent.map((x) => `<span>${esc(x)}</span>`).join("")}</p>` : ""}
   </section>`;
@@ -3431,7 +3431,7 @@ function programsHtml(d) {
   const ft = String(d?.feature ?? "").trim();
   if (!pr.length && !ft) return "";
   const fact = sourceFact({ src: "고캠핑 등록", url: d?.feature_url, quote: [ft, ...pr].join(" · ") }, "고캠핑 등록");
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("spark", "특징·체험")}<span class="sec-note">${srcTip(fact, "특징·체험")}</span></div>${ft ? `<p class="feat">${esc(serviceText(ft, 400))}</p>` : ""}${pr.length ? `<div class="amen">${pr.slice(0, 8).map((x) => `<span>${esc(serviceText(x, 20))}</span>`).join("")}</div>` : ""}</section>`;
+  return `<section class="d-sec"><div class="sec-head">${iconTitle("experience", "특징·체험")}<span class="sec-note">${srcTip(fact, "특징·체험")}</span></div>${ft ? `<p class="feat">${esc(serviceText(ft, 400))}</p>` : ""}${pr.length ? `<div class="amen">${pr.slice(0, 8).map((x) => `<span>${esc(serviceText(x, 20))}</span>`).join("")}</div>` : ""}</section>`;
 }
 // 외부 게시물은 embed/display_rights가 명시된 경우에만 미리보기·라이트박스를 사용한다.
 // 그 외에는 플랫폼이 제공하는 원문 카드로만 열어 저작권·저장 조건을 지킨다.
