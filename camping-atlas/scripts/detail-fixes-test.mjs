@@ -15,7 +15,7 @@ const fails = [];
 }
 for (const [w, h, tag] of [[1366, 900, "1366"], [320, 800, "320"]]) {
   const page = await browser.newPage({ viewport: { width: w, height: h } });
-  await page.goto(`${base}#/c/${id}`, { waitUntil: "networkidle" });
+  await page.goto(`${base}place/${id}`, { waitUntil: "networkidle" });
   await page.waitForSelector(".d-sec .sec-title .ic", { timeout: 30000 });
   // 아래 섹션은 화면에 들어올 때 그려지므로 끝까지 내린다.
   for (let i = 0; i < 40; i++) { await page.mouse.wheel(0, 800); await page.waitForTimeout(120); }
