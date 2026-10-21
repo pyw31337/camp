@@ -174,7 +174,15 @@
       "src": {
         "url": "https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874",
         "checked_at": "2026-10-21"
-      }
+      },
+      "st": [
+        [
+          "AUTO",
+          44,
+          "c",
+          "파쇄석"
+        ]
+      ]
     }
   ]
 }
