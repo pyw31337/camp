@@ -3357,3 +3357,12 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 .sim-km { display: inline-flex; align-items: center; gap: 4px; font-size: .82rem; font-weight: 800; color: var(--ink-2); }
 .sim-km .ic { width: 14px; height: 14px; color: var(--accent); }
 @media (min-width: 760px) { .sim-rail { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; } .sim-rail > .sim-item { flex: none; } }
+
+/* t39 #39: 후기 추천 사이트 번호 */
+.sp-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.sp-item { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 12px; align-items: center; min-width: 168px; padding: 12px 16px; border-radius: var(--r-s); background: var(--paper); box-shadow: var(--shadow); color: inherit; text-decoration: none; }
+.sp-item b { grid-row: 1 / span 2; font-size: 1.5rem; font-weight: 900; letter-spacing: -.02em; color: var(--accent); }
+.sp-item span { font-size: .9rem; font-weight: 800; }
+.sp-item i { font-style: normal; font-size: .78rem; color: var(--ink-3); display: inline-flex; align-items: center; gap: 4px; }
+.sp-item i .ic { width: 12px; height: 12px; }
+.sp-item:hover { transform: translateY(-1px); }

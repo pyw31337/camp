@@ -2765,6 +2765,7 @@ async function detailView(id) {
         ${amenityHtml(c, d)}
         ${programsHtml(d)}
         ${layoutHtml(d, c)}
+        <section class="d-sec site-picks-sec" id="sec-site-picks" data-site-picks hidden></section>
         ${operatorMediaHtml(d)}
         ${mediaHubHtml(d, c)}
         ${nearbyHubHtml(c, d)}
@@ -4666,6 +4667,15 @@ function bindDetail() {
   }));
   const id = $(".detail")?.dataset.id;
   const currentCamp = S.byId.get(id);
+  // 벤치마크(t39 #39): 후기 글에서 ‘명당’·‘사이트 추천’으로 나온 사이트 번호(context/site-picks.js). 없으면 칸을 숨긴 채 둔다.
+  const spEl = $("[data-site-picks]");
+  if (spEl && id) Promise.all([import(new URL(`${MOD_ROOT}context/site-picks.js`, import.meta.url).href), detailOf(id)]).then(([m, d]) => {
+    const picks = m.sitePicks(d);
+    if (!picks.length || !spEl.isConnected) return;
+    spEl.innerHTML = `<div class="sec-head">${iconTitle("sitetype", "후기 추천 사이트")}</div><p class="layout-note">후기 글에 ‘명당’·‘사이트 추천’으로 나온 번호예요. 눌러서 원문을 확인하세요.</p>
+      <div class="sp-list">${picks.map((x) => `<a class="sp-item" href="${esc(x.src[0].url)}" target="_blank" rel="noopener" title="${esc(x.src[0].title)}"><b>${esc(/^\d+$/.test(x.site) ? `${x.site}번` : x.site)}</b><span>${esc(x.tags.join(" · ") || "추천")}</span><i>후기 ${x.posts}곳 ${ic("external", "line")}</i></a>`).join("")}</div>`;
+    spEl.hidden = false;
+  }).catch(() => {});
   if (currentCamp?.lat && currentCamp?.lng) {
     const cond = $("[data-cond]");
     cond?.addEventListener("click", async (ev) => {
