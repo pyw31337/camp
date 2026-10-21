@@ -49,7 +49,7 @@ const STYLE = `.fc-strip{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;
 .fc-day.is-today,.fc-day.we{background:var(--accent-soft,#eef7f0);border-color:var(--accent,#2f855a)}
 .fc-day .ic{display:flex;align-items:center;justify-content:center;height:30px;margin:1px 0}
 .fc-day .t{font-weight:750;font-size:15px}
-.fc-day .lbl{display:block;font-size:11px;font-weight:800;color:var(--ink-2,#374151)}
+.fc-day .lbl{display:block;font-size:12px;font-weight:800;color:var(--ink-2,#374151)}
 .fc-note{font-size:12px;color:var(--muted,#6b7280);margin:4px 0 0}
 .w-icon{display:inline-block;vertical-align:middle;flex:none;overflow:visible}
 .w-icon.w-sun{color:#f59e0b}

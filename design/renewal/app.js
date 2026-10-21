@@ -1491,8 +1491,8 @@ function homeView() {
   <section class="hero" aria-labelledby="hero-t">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-in">
-      <h1 id="hero-t"><span class="h1-a">취향대로 찾아 떠나는</span> <span class="h1-b">전국 ${fmt(S.camps.filter((c) => !c.du).length)}개 <em>자연 속으로.</em></span></h1>
-      <p class="hero-summary">숲·계곡·바다, 나만의 쉼터를 조건으로 골라 보세요</p>
+      <h1 id="hero-t"><span class="h1-a">취향대로 찾아 떠나는</span> <span class="h1-b">전국 <b class="hero-n" data-hero-total>${fmt(heroCounts().total)}</b>곳 <em>자연 속으로.</em></span></h1>
+      <p class="hero-summary">캠핑장 <b data-hero-stay>${fmt(heroCounts().stay)}</b>곳 · 당일 나들이 <b data-hero-day>${fmt(heroCounts().day)}</b>곳, 조건으로 골라 보세요</p>
       <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div>${commonFinderForm({ formAttr: "data-search", isList: false })}</div>
     </div>
   </section>
@@ -3833,6 +3833,12 @@ async function ensureSupabaseConfig() {
   if (!ready) sbConfigPromise = null;
   return ready;
 }
+// 홈 히어로 개수 — 매 동기화 뒤 배포되는 목록 카탈로그(campgrounds.lite.json)에서 바로 센다. 숙박(캠핑장)=du 없음, 당일 나들이=du.
+// CI(hero-count-test)가 화면 숫자 == 카탈로그 개수를 검사한다.
+function heroCounts() {
+  const day = S.camps.reduce((n, c) => n + (c.du ? 1 : 0), 0);
+  return { total: S.camps.length, stay: S.camps.length - day, day };
+}
 function commentsHtml(c) {
   // campground_comment.campground_id는 INT — 공원·당일 장소(문자 id)는 저장이 안 돼 400이 났다(QA 2026-10-20). 숫자 id만 연다.
   if (!SB.url || !/^\d+$/.test(String(c.id))) return "";
@@ -5300,12 +5306,15 @@ async function savesLogView() {
   try {
     rows = await readSaveLog(200);
   } catch {}
-  const body = rows.length ? `<table class="log-table"><thead><tr><th>시각</th><th>동작</th><th>업장</th><th>환경</th></tr></thead><tbody>${rows.map((x) => {
+  const adds = rows.filter((x) => x.action === "add").length;
+  const body = rows.length ? `<div class="slog-sum"><span>최근 <b>${fmt(rows.length)}</b>건</span><span>찜 <b>${fmt(adds)}</b></span><span>해제 <b>${fmt(rows.length - adds)}</b></span></div>
+    <ul class="slog-list">${rows.map((x) => {
     const c = S.byId.get(String(x.campground_id));
     const name = c ? nameOf(c).name : x.campground_id;
-    return `<tr><td>${esc(formatKoreanDate(x.created_at) || x.created_at)}</td><td>${x.action === "add" ? "찜" : "해제"}</td><td>${esc(name)}</td><td>${esc(x.platform || "미제공")} ${esc(x.screen || "")}</td></tr>`;
-  }).join("")}</tbody></table>` : `<p class="muted">아직 기록이 없습니다.</p>`;
-  return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1><a class="sec-note" href="#/compare">찜 목록</a> · <a class="sec-note" href="../log/">/log</a></div>${body}</section>`;
+    const add = x.action === "add";
+    return `<li><span class="slog-act ${add ? "add" : "rm"}">${add ? "찜" : "해제"}</span>${c ? `<a class="slog-name" href="#/c/${esc(c.id)}">${esc(name)}</a>` : `<span class="slog-name">${esc(name)}</span>`}<time class="slog-time" datetime="${esc(x.created_at)}">${esc(formatKoreanDate(x.created_at) || x.created_at)} ${esc(new Date(x.created_at).toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Seoul" }))}</time><span class="slog-env">${esc(x.platform || "기기 정보 없음")} ${esc(x.screen || "")}</span></li>`;
+  }).join("")}</ul>` : `<p class="muted">아직 기록이 없습니다.</p>`;
+  return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><nav class="slog-links" aria-label="관련 화면"><a href="#/compare">찜 목록 보기</a><a href="../log/">운영 대시보드(/log)</a></nav>${body}</section>`;
 }
 
 // ── 라우터 ───────────────────────────────────────────────────
