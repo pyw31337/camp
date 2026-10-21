@@ -3721,6 +3721,7 @@
 {"cid":"102218","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"102221","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/delosk888/224410774571","at":"2026-09-14","quote":"최대 4인 런드리룸 운영 애견동반 불가(현재는..) WonderWood Glamping 경기도 포천시 이동면 화동로1823번길 18 원더우드 간판 방면 진입 포천 원더우드 글램핑은 8,000여 평의 부지를 힐링공간으로 재탄생 시킨 곳…","text":"동반 불가","n":1}
 {"cid":"102229","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"https://hsecofarm.hscity.go.kr/reservation/","at":"2026-10-20T00:54:29.391Z","quote":"반려동물 동승 불가(맹인안내견 제외)","text":"동반 불가"}
+{"cid":"102229","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능(장애인 보조견 예외)"}
 {"cid":"102229","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/2124mj/224440293917","at":"2026-10-13","quote":"에코팜 테마파크 체크인 14시 ~ 체크아웃 11시 매너타임 23시 ~ 07시 예약 공식 홈페이지 당일이용가능(11시 ~ 20시) 반려동물 동반 불가 화성에코팜테마파크오토캠핑장 경기도 화성시 만세구 서신면 영종로안길 24 제1주차장 https://hs…","text":"동반 불가","n":1}
 {"cid":"102231","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/dlwngml238/224404216257","at":"2026-09-08","quote":"캠핑,다시또여기 || 밀양 애견동반 가능한 물놀이 당일 캠핑장.","text":"동반 가능","n":1}
 {"cid":"102235","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/yellowmango13/224309895861","at":"2026-06-08","quote":"가평 숲에캠핑장 예약 방법 | 반려견 동반 가능한 서울 근교 캠핑장 .....","text":"동반 가능","n":1}
@@ -3774,7 +3775,7 @@
 {"cid":"102368","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"102369","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"https://camping.kimgoon.kr/about","at":"2026-10-20T00:48:02.964Z","quote":"반려견·반려묘 동반 가능 캠핑장 모음","text":"동반 가능"}
 {"cid":"102371","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"https://camping.kimgoon.kr/about","at":"2026-10-20T00:47:45.252Z","quote":"반려견·반려묘 동반 가능 캠핑장 모음","text":"동반 가능"}
-{"cid":"102377","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874"}
+{"cid":"102377","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"pdu-lagrills-yongin","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-10-21","text":"가능(소형견)"}
 {"cid":"pilot-002-sureui","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032"}
 {"cid":"pilot-003-duruwell","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030095"}
