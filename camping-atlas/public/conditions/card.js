@@ -87,6 +87,7 @@ const STYLE = `.fc-strip{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;
 @keyframes w-snow-fall{0%{opacity:0;transform:translateY(-2px) translateX(0)}50%{opacity:1;transform:translateY(2px) translateX(1px)}100%{opacity:0;transform:translateY(4.5px) translateX(-1px)}}
 @keyframes w-bolt-flash{0%,72%,100%{opacity:0.95;transform:scale(1);filter:none}76%{opacity:0.15;transform:scale(0.92)}82%{opacity:1;transform:scale(1.15);filter:drop-shadow(0 0 5px #f59e0b)}88%{opacity:0.3}92%{opacity:1}}
 @keyframes w-mist-drift{from{transform:translateX(-2px)}to{transform:translateX(2px)}}
+.fc-wind{font-weight:800}.fc-wind-high,.fc-wind-severe{color:#c0392b}
 @media (prefers-reduced-motion:reduce){.w-icon *{animation:none!important}}`;
 function injectStyle() { if (typeof document === "undefined" || document.getElementById("fc-style")) return; const s = document.createElement("style"); s.id = "fc-style"; s.textContent = STYLE; document.head.appendChild(s); }
 
@@ -104,6 +105,16 @@ export function daysFor(data, id, today = kstNow()) {
     out.set(d, { d, sky: l[1] ?? l[0] ?? null, sky_am: l[0] ?? null, pty: null, tmin: t[0] ?? null, tmax: t[1] ?? null, pop: l[2] ?? null, src: "mid" });
   }
   return [...out.values()].sort((a, b) => a.d.localeCompare(b.d)).slice(0, 11);
+}
+// 벤치마크(t39 #38): 풍속 안전팁. 기상청 단기예보 최대 풍속(wsd, m/s) 기준 — 기상청 바람 구분(4~9 약간 강함, 9~14 강함, 14 이상 매우 강함).
+/** @returns {null | {d:string, w:number, level:"mid"|"high"|"severe", text:string}} */
+export function windTip(days) {
+  let top = null;
+  for (const x of days ?? []) { const w = Number(x?.wsd); if (Number.isFinite(w) && (!top || w > top.w)) top = { d: x.d, w }; }
+  if (!top || top.w < 4) return null;
+  if (top.w >= 14) return { ...top, level: "severe", text: "매우 강한 바람 — 텐트·타프 설치를 미루고 캠핑장에 운영 여부를 확인하세요." };
+  if (top.w >= 9) return { ...top, level: "high", text: "강한 바람 — 타프는 내리고, 팩은 단단한 것으로 더 박고 스트링을 모두 거세요. 화로는 쓰지 마세요." };
+  return { ...top, level: "mid", text: "바람이 다소 강해요 — 팩·스트링을 보강하고 화로 불티를 조심하세요." };
 }
 function weekendLabel(d, today) {
   const w = dow(d);
@@ -159,6 +170,8 @@ export async function mount(el, camp) {
   }
   const ls = data.landslide?.[String(camp?.id ?? "")];
   if (ls) extra.push(["산사태 예측", `${esc(ls[0])} · 산림청 ${esc(new Date(ls[1]).toLocaleString("ko-KR", { timeZone: "Asia/Seoul", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }))} 분석. <a href="https://sansatai.forest.go.kr/" target="_blank" rel="noopener">산사태정보시스템</a>`]);
+  const wt = windTip(days);
+  if (wt) extra.push([`바람 안전`, `<span class="fc-wind fc-wind-${wt.level}">최대 ${esc(wt.w)} m/s</span> ${esc(wt.text)} <span class="muted">${esc(relOf(wt.d))} · 기상청 단기예보</span>`]);
   if (row?.[4]) extra.push(["기상특보", '이 지역에 특보가 발효 중이에요. <a href="https://www.weather.go.kr/" target="_blank" rel="noopener">기상청 확인</a>']);
   const stamp = data?.generated_at ? `${kstStamp(data.generated_at)} KST 확인 · 기상청${air ? "·에어코리아" : ""}` : "";
   el.innerHTML = `<div class="sec-head"><div class="sec-title"><svg class="ic line"><use href="#i-weather"/></svg><h2>주간 날씨</h2></div></div>
