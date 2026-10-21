@@ -22,6 +22,9 @@ const VK = /(^|\.)visitkorea\.or\.kr$/i;
 const host = (u) => { try { return new URL(u).hostname; } catch { return ""; } };
 import { badCoord, sidoStd } from "../lib/geo-sanity.mjs";
 import { SITE_TYPE_LABEL } from "../lib/site-types.mjs";
+import { logReview } from "../lib/merge-policy.mjs";
+// 지우는 값은 병합 정책(docs/DATA_MERGE_POLICY.md)대로 검토 기록에 이유와 함께 남긴다 → field-guard가 정당한 정정으로 통과시킨다.
+const rm = (id, field, reason, file = "campgrounds.json") => { if (!CHECK) logReview({ action: "removed", file, id: String(id), field, reason, by: "publish-sanity" }); };
 const DUP = (() => { try { return JSON.parse(readFileSync(`${root}pipeline/registry/duplicate-camps.json`, "utf8")).pairs ?? []; } catch { return []; } })();
 const isDay = (c) => c.du === "park" || c.du === "water";
 const issues = {};
@@ -30,17 +33,17 @@ const hit = (k, id) => { (issues[k] ??= []).push(id); };
 const camps = JSON.parse(readFileSync(catPath, "utf8"));
 for (const c of camps) {
   if (isDay(c)) {
-    if (c.fee && c.fee.g !== "FREE" && (BLANKET.test(c.fee.basis ?? "") || !c.fee.url)) { hit("R1 당일 장소 일괄 요금", c.id); delete c.fee; }
+    if (c.fee && c.fee.g !== "FREE" && (BLANKET.test(c.fee.basis ?? "") || !c.fee.url)) { hit("R1 당일 장소 일괄 요금", c.id); rm(c.id, "fee", "당일 장소(공원·물놀이터)에 붙은 야영장 조례 일괄 요금 — 무료 공원이 유료로 보임(QA 2026-10-20 R1)"); delete c.fee; }
     // 야영장 표준값(14:00/11:00·참고값)만 지운다 — 예약 화면 등 그 장소 원문 시간은 둔다.
-    if (c.ti && (c.ti.i?.[1] === "r" || (c.ti.i?.[0] === "14:00" && c.ti.o?.[0] === "11:00" && !c.fee?.url))) { hit("R1 당일 장소 입·퇴실", c.id); delete c.ti; }
+    if (c.ti && (c.ti.i?.[1] === "r" || (c.ti.i?.[0] === "14:00" && c.ti.o?.[0] === "11:00" && !c.fee?.url))) { hit("R1 당일 장소 입·퇴실", c.id); rm(c.id, "ti", "당일 장소에 붙은 야영장 표준 입·퇴실 시각(QA R1)"); delete c.ti; }
   }
-  if (c.fee?.url && VK.test(host(c.fee.url)) && /운영자/.test(c.fee.basis ?? "")) { hit("R2 관광공사 광고 요금", c.id); delete c.fee; }
+  if (c.fee?.url && VK.test(host(c.fee.url)) && /운영자/.test(c.fee.basis ?? "")) { hit("R2 관광공사 광고 요금", c.id); rm(c.id, "fee", "관광공사 소개 페이지 광고(제주 원데이투어 185,000원 등)를 운영자 요금으로 잘못 수집(QA R2)"); delete c.fee; }
   if (c.fee && BLANKET.test(c.fee.basis ?? "") && c.fee.grade !== "REFERENCE") { hit("R3 일괄 요금 공식 표기", c.id); c.fee.grade = "REFERENCE"; }
   const fc = c.field_conditions;
   if (fc?.fire_pit?.arrangement && /숯만 가능/.test(fc.fire_pit.arrangement) && fc.charcoal?.allowed === false) {
     hit("R4 숯 문구 모순", c.id); fc.fire_pit.arrangement = fc.fire_pit.arrangement.replace(/,?\s*숯만 가능/, "").replace(/\(\s*/, "(").trim();
   }
-  if (badCoord(c)) { hit("R5 좌표 오류", c.id); c.lat = null; c.lng = null; }
+  if (badCoord(c)) { hit("R5 좌표 오류", c.id); rm(c.id, "lat", `좌표가 시·도(${c.sido}) 범위 밖 — 오타(QA R5)`); rm(c.id, "lng", "좌표 오타(QA R5)"); c.lat = null; c.lng = null; }
   // R9 사이트 타입 코드는 사전(lib/site-types.mjs)에 있는 것만 — 모르는 코드는 화면 오류(비교 화면 pageerror)를 낸다. GENERAL은 일반(PITCH).
   if (Array.isArray(c.st) && c.st.some((t) => !SITE_TYPE_LABEL[t[0]])) {
     hit("R9 모르는 사이트 타입", c.id);
@@ -54,7 +57,7 @@ for (const c of camps) {
 for (const { keep, drop } of DUP) {
   const i = camps.findIndex((c) => String(c.id) === String(drop)), k = camps.find((c) => String(c.id) === String(keep));
   if (i < 0 || !k) continue;
-  hit("R7 중복 등록", drop);
+  hit("R7 중복 등록", drop); rm(drop, "*", `같은 곳 중복 등록 — ${keep}로 합침(registry/duplicate-camps.json)`);
   const d = camps[i];
   for (const [key, v] of Object.entries(d)) if (k[key] == null && v != null && key !== "id") k[key] = v; // 남는 행에 없는 값만 채운다
   k.mg = [...new Set([...(k.mg ?? []), String(drop)])];
@@ -95,7 +98,7 @@ for (const id of noGeo) {
   if (!existsSync(f)) continue;
   const d = dirty.find(([p]) => p === f)?.[1] ?? JSON.parse(readFileSync(f, "utf8"));
   if (!d.nearby && !d.nearby_licensed) continue;
-  delete d.nearby; delete d.nearby_licensed; hit("R5 좌표 없는 곳 주변 정보", id);
+  delete d.nearby; delete d.nearby_licensed; hit("R5 좌표 없는 곳 주변 정보", id); rm(id, "nearby", "틀린 좌표로 구한 주변 시설(QA R5)", `camps/${id}.json`);
   if (!dirty.some(([p]) => p === f)) dirty.push([f, d]);
 }
 const ctxDir = `${dataDir}/../../context`, ctxDirty = [];

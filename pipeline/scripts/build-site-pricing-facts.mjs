@@ -1,5 +1,6 @@
 // 캠핑장별 1박 요금 및 사이트 단서 집계 → campgrounds.json 주입
 import { isOperatorHost } from "../lib/operator-site.mjs";
+import { logReview } from "../lib/merge-policy.mjs";
 import { existsSync, readFileSync } from "node:fs";
 import { writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
@@ -35,10 +36,10 @@ for (const targetPath of targetPaths) {
   for (const c of camps) {
     // 당일 장소(공원·물놀이터)는 야영장 요금 규칙을 적용하지 않는다(QA 2026-10-20).
     // 운영자 홈페이지라던 요금이 실은 플랫폼·소개 페이지(관광공사 광고 185,000원 등)면 지운다(QA 2026-10-20).
-    if (c.fee?.url && /운영자/.test(c.fee.basis ?? "") && !isOperatorHost(c.fee.url)) delete c.fee;
+    if (c.fee?.url && /운영자/.test(c.fee.basis ?? "") && !isOperatorHost(c.fee.url)) { logReview({ action: "removed", file: "campgrounds.json", id: String(c.id), field: "fee", reason: "관광공사·캠핑허브 등 플랫폼 페이지 금액(광고 185,000원 등)을 운영자 요금으로 잘못 수집(QA R2)", by: "build-site-pricing-facts" }); delete c.fee; }
     if (c.du === "park" || c.du === "water") {
       // 예전 실행이 붙인 야영장 일괄 요금(조례·표준 요금, 원문 URL 없음)도 지운다 — 무료 공원이 유료로 보였다.
-      if (c.fee && /조례 기준 요금|표준 야영 요금|표준 야영장 요금/.test(c.fee.basis ?? "")) delete c.fee;
+      if (c.fee && /조례 기준 요금|표준 야영 요금|표준 야영장 요금/.test(c.fee.basis ?? "")) { logReview({ action: "removed", file: "campgrounds.json", id: String(c.id), field: "fee", reason: "당일 장소(공원·물놀이터)에 붙은 야영장 조례 일괄 요금 — 무료 공원이 유료로 보임(QA R1)", by: "build-site-pricing-facts" }); delete c.fee; }
       continue;
     }
     const detailPath = `${campsDir}/${c.id}.json`;

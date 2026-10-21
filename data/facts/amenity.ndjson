@@ -389,7 +389,6 @@
 {"cid":"400","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"401","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"401","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"401","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"408","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"408","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"408","attr":"AMENITY_STARGAZING","value":true,"grade":"CONFIRMED","src":"gocamping","text":"천문대"}
@@ -502,7 +501,6 @@
 {"cid":"492","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"500","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"500","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"502","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"502","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"502","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"502","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
@@ -769,11 +767,9 @@
 {"cid":"704","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"704","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"어란아 놀이기구 소량 에어바운스"}
 {"cid":"704","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"710","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://m.thankqcamping.com/","at":"2026-10-20T01:28:32.605Z","quote":"사이트간격도 넓고 캠장님도 친절하고 화장실 샤워실 개별이면서 엄청 깨끗하게 관리하셔서 화장실 갈때마다 기분좋았어요~ 개수대도 관리 잘 되어있답니다~ 보더콜리 강아지 루시가 너무 귀엽고 예뻐서 자꾸 생각납니다~~ 아이들이랑 공놀이를 아주 열심히 하더라…"}
 {"cid":"710","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"710","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"710","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"710","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"710","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"716","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"716","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1481,7 +1477,6 @@
 {"cid":"1369","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"1369","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1369","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
-{"cid":"1369","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1369","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"1370","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1370","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
@@ -2356,14 +2351,12 @@
 {"cid":"2394","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
 {"cid":"2394","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"2394","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2399","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://m.thankqcamping.com/","at":"2026-10-20T01:16:58.301Z","quote":"사이트간격도 넓고 캠장님도 친절하고 화장실 샤워실 개별이면서 엄청 깨끗하게 관리하셔서 화장실 갈때마다 기분좋았어요~ 개수대도 관리 잘 되어있답니다~ 보더콜리 강아지 루시가 너무 귀엽고 예뻐서 자꾸 생각납니다~~ 아이들이랑 공놀이를 아주 열심히 하더라…"}
 {"cid":"2399","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"2399","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2399","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"2399","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2399","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"2399","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
-{"cid":"2399","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2399","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"2399","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2399","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
@@ -3670,7 +3663,6 @@
 {"cid":"3636","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"3636","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3636","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"6721","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6731","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://www.shsi.or.kr/PageLink.do?tempParam1=&link=forward:/PageContent.do&menuNo=030000&subMenuNo=020700&thirdMenuNo=020701","at":"2026-10-20T00:57:41.871Z","quote":"P 생태상상놀이터"}
 {"cid":"6731","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"6731","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3737,7 +3729,6 @@
 {"cid":"6771","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"6773","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6773","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"6778","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6778","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"6778","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"6786","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
@@ -3985,7 +3976,6 @@
 {"cid":"7051","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7051","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7053","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7057","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7058","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.baekuncamp.co.kr/bbs/board1","at":"2026-10-16T05:42:26.587Z","quote":"수영장 운영계획"}
 {"cid":"7058","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"7058","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4482,7 +4472,6 @@
 {"cid":"7274","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7279","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7279","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7286","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7287","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7288","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7304","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4607,7 +4596,6 @@
 {"cid":"7490","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://xn--hy1b58lpofnseb9al4xvxlrb.com/facilities/","at":"2026-10-20T01:27:14.947Z","quote":"WIFI 무료 제공"}
 {"cid":"7492","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7492","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7493","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7494","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"7494","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7494","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
@@ -4697,7 +4685,6 @@
 {"cid":"7566","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"7566","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7566","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
-{"cid":"7566","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7567","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7567","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"7567","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4827,7 +4814,6 @@
 {"cid":"7670","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"7693","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"7693","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7693","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://korean.visitkorea.or.kr/common/login/dgtourcard-login.do?redirectUrl=%2Fdgtourcard%2Fbiz%2Fmpage%2FmpageMain.do","at":"2026-10-19T09:12:09.188Z","quote":"ACCESS_NETWORK_STATE 와이파이를 통한 네트워크 연결"}
 {"cid":"7693","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"7706","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"7706","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4919,7 +4905,6 @@
 {"cid":"7752","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7752","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://rosemoss1glamping.kr/reservation.html","at":"2026-10-20T01:17:03.701Z","quote":"※ 장작 11,000원 (편의점 구매)"}
 {"cid":"7752","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://rosemoss1glamping.kr/reservation.html","at":"2026-10-20T01:17:03.701Z","quote":"- 와이파이 보유"}
-{"cid":"7755","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7755","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"7757","attr":"AMENITY_DUMP_STATION","value":true,"grade":"CONFIRMED","src":"gocamping","text":"오수처리장 / 생태연못"}
 {"cid":"7757","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
@@ -4963,7 +4948,6 @@
 {"cid":"7784","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"7784","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7784","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"7785","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7786","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7786","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"7786","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8804,15 +8788,6 @@
 {"cid":"100874","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"100874","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100874","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"100875","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"카페"}
-{"cid":"100875","attr":"AMENITY_KIDS_ROOM","value":true,"grade":"CONFIRMED","src":"gocamping","text":"키즈카페"}
-{"cid":"100875","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100875","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
-{"cid":"100875","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100875","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"100875","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
-{"cid":"100875","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100875","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100876","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"카페"}
 {"cid":"100876","attr":"AMENITY_KIDS_ROOM","value":true,"grade":"CONFIRMED","src":"gocamping","text":"키즈카페"}
 {"cid":"100876","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
@@ -9846,7 +9821,6 @@
 {"cid":"101130","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://ddglamping.com/contents/main.html","at":"2026-10-20T01:20:32.752Z","quote":"Market & Cafe 매점 & 카페"}
 {"cid":"101130","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101130","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"101131","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101131","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"101134","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"101134","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -10539,7 +10513,6 @@
 {"cid":"101290","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101292","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101292","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101294","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101294","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101295","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"카페"}
 {"cid":"101295","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://xn--bj1b32gh10atzab8l.kr/g5/theme/t01/html/introduce.php","at":"2026-10-20T01:12:52.405Z","quote":"넓은 천연잔디 놀이터"}
@@ -11121,7 +11094,6 @@
 {"cid":"101447","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101447","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101448","attr":"AMENITY_DUMP_STATION","value":true,"grade":"CONFIRMED","src":"gocamping","text":"덤프스테이션"}
-{"cid":"101448","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101448","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101450","attr":"AMENITY_BBQ","value":true,"grade":"CONFIRMED","src":"gocamping","text":"바베큐장"}
 {"cid":"101450","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
@@ -11846,7 +11818,6 @@
 {"cid":"101712","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://sagyedom.com/web3/","at":"2026-10-20T01:18:01.835Z","quote":"내부 : 간이매점, 탈의실, 보드게임 무료 대여, 유아용품 비치"}
 {"cid":"101712","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101712","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://sagyedom.com/web3/02facilities.html","at":"2026-10-20T01:18:01.835Z","quote":"○ TV, 에어컨, Wifi"}
-{"cid":"101714","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101714","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101714","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"101714","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -12760,8 +12731,6 @@
 {"cid":"102178","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102179","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"http://www.xn--3h3bokv4bg3dn5azzwnvmt5m.kr/","at":"2026-10-20T01:09:23.543Z","quote":"취사를 위한 개수대가 준비되어 있습니다."}
 {"cid":"102180","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102186","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102186","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"102187","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102189","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"102189","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -12864,14 +12833,12 @@
 {"cid":"102285","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102285","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"102286","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102289","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102289","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102295","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102298","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102303","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"102303","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"102307","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102309","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102315","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102316","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"카페 및 실내휴식공간"}
 {"cid":"102316","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
@@ -12903,7 +12870,6 @@
 {"cid":"102340","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102340","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"102340","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"102342","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102346","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102346","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102348","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://xn--oi2bp5sdra72k93co0mw7f.kr/","at":"2026-10-20T00:52:10.956Z","quote":"바다뷰 매점"}
@@ -12918,9 +12884,9 @@
 {"cid":"102368","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"102368","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102368","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
-{"cid":"102373","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://booking.naver.com/booking/12/bizes/1085778","at":"2026-10-20","text":"물놀이장"}
-{"cid":"102373","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://booking.naver.com/booking/12/bizes/1085778","at":"2026-10-20"}
-{"cid":"102373","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://booking.naver.com/booking/12/bizes/1085778","at":"2026-10-20","text":"에어바운스"}
+{"cid":"102373","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://booking.naver.com/booking/12/bizes/1085778","at":"2026-10-21","text":"물놀이장"}
+{"cid":"102373","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://booking.naver.com/booking/12/bizes/1085778","at":"2026-10-21"}
+{"cid":"102373","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://booking.naver.com/booking/12/bizes/1085778","at":"2026-10-21","text":"에어바운스"}
 {"cid":"102377","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"gocamping","text":"개수대","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874"}
 {"cid":"102377","attr":"AMENITY_KIDS_ROOM","value":true,"grade":"CONFIRMED","src":"gocamping","text":"실내놀이터","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874"}
 {"cid":"102377","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"실내놀이터","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874"}
@@ -12930,113 +12896,113 @@
 {"cid":"102377","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"매점","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874"}
 {"cid":"102377","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"와이파이(일부 안내)","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874"}
 {"cid":"102377","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874"}
-{"cid":"osm-n469713235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/469713235","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n469713235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/469713235","at":"2026-10-20"}
-{"cid":"osm-n2261019059","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/2261019059","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n2261019059","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/2261019059","at":"2026-10-20"}
-{"cid":"osm-n3784282405","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/3784282405","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n3784282405","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/3784282405","at":"2026-10-20"}
-{"cid":"osm-n4718068520","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/4718068520","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n4718068520","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/4718068520","at":"2026-10-20"}
-{"cid":"osm-n4788237649","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/4788237649","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n4788237649","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/4788237649","at":"2026-10-20"}
-{"cid":"osm-n5321238121","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/5321238121","at":"2026-10-20"}
-{"cid":"osm-n5321238121","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/5321238121","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n5321238121","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/5321238121","at":"2026-10-20"}
-{"cid":"osm-n7165750885","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/7165750885","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n7165750885","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/7165750885","at":"2026-10-20"}
-{"cid":"osm-n9404261678","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/9404261678","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n9404261678","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/9404261678","at":"2026-10-20"}
-{"cid":"osm-n9548742587","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/9548742587","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n9548742587","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/9548742587","at":"2026-10-20"}
-{"cid":"osm-n9976524284","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/9976524284","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n9976524284","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/9976524284","at":"2026-10-20"}
-{"cid":"osm-n10651918639","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/10651918639","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n10651918639","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/10651918639","at":"2026-10-20"}
-{"cid":"osm-n11050464235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/11050464235","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n11050464235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/11050464235","at":"2026-10-20"}
-{"cid":"osm-n12120242227","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/12120242227","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n12120242227","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/12120242227","at":"2026-10-20"}
-{"cid":"osm-n12157043861","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/12157043861","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n12157043861","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/12157043861","at":"2026-10-20"}
-{"cid":"osm-n12385060572","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/12385060572","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n12385060572","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/12385060572","at":"2026-10-20"}
-{"cid":"osm-n13013815946","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/13013815946","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n13013815946","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/13013815946","at":"2026-10-20"}
-{"cid":"osm-n14219544690","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/14219544690","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n14219544690","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/14219544690","at":"2026-10-20"}
-{"cid":"osm-n14219544691","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/14219544691","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n14219544691","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/14219544691","at":"2026-10-20"}
-{"cid":"osm-n14219544692","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/14219544692","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-n14219544692","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/14219544692","at":"2026-10-20"}
-{"cid":"osm-r6033901","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/6033901","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-r6033901","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/6033901","at":"2026-10-20"}
-{"cid":"osm-w471345995","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/471345995","at":"2026-10-20"}
-{"cid":"osm-w473600235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/473600235","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w473600235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/473600235","at":"2026-10-20"}
-{"cid":"osm-w474308751","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/474308751","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w474308751","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/474308751","at":"2026-10-20"}
-{"cid":"osm-w475055852","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/475055852","at":"2026-10-20"}
-{"cid":"osm-w532458435","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/532458435","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w532458435","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/532458435","at":"2026-10-20"}
-{"cid":"osm-w567223458","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/567223458","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w567223458","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/567223458","at":"2026-10-20"}
-{"cid":"osm-w605846535","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/605846535","at":"2026-10-20"}
-{"cid":"osm-w605846538","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/605846538","at":"2026-10-20"}
-{"cid":"osm-w682668137","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/682668137","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w682668137","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/682668137","at":"2026-10-20"}
-{"cid":"osm-w692391492","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/692391492","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w692391492","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/692391492","at":"2026-10-20"}
-{"cid":"osm-w693915512","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/693915512","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w693915512","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/693915512","at":"2026-10-20"}
-{"cid":"osm-w702360473","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/702360473","at":"2026-10-20"}
-{"cid":"osm-w721842605","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/721842605","at":"2026-10-20"}
-{"cid":"osm-w892201616","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/892201616","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w892201616","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/892201616","at":"2026-10-20"}
-{"cid":"osm-w922330292","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/922330292","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w922330292","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/922330292","at":"2026-10-20"}
-{"cid":"osm-w979805595","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/979805595","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w979805595","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/979805595","at":"2026-10-20"}
-{"cid":"osm-w993628269","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/993628269","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w993628269","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/993628269","at":"2026-10-20"}
-{"cid":"osm-w1090875966","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1090875966","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w1090875966","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1090875966","at":"2026-10-20"}
-{"cid":"osm-w1103368287","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1103368287","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w1103368287","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1103368287","at":"2026-10-20"}
-{"cid":"osm-w1103368294","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1103368294","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w1103368294","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1103368294","at":"2026-10-20"}
-{"cid":"osm-w1103368295","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1103368295","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w1103368295","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1103368295","at":"2026-10-20"}
-{"cid":"osm-w1117495317","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1117495317","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w1117495317","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1117495317","at":"2026-10-20"}
-{"cid":"osm-w1137541006","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1137541006","at":"2026-10-20"}
-{"cid":"osm-w1137541006","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1137541006","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w1137541006","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1137541006","at":"2026-10-20"}
-{"cid":"osm-w1221372063","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1221372063","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w1221372063","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1221372063","at":"2026-10-20"}
-{"cid":"osm-w1416629021","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1416629021","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w1416629021","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1416629021","at":"2026-10-20"}
-{"cid":"osm-w1420846625","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1420846625","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w1420846625","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1420846625","at":"2026-10-20"}
-{"cid":"osm-w1447606327","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1447606327","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w1447606327","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1447606327","at":"2026-10-20"}
-{"cid":"osm-w1479628828","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1479628828","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w1479628828","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1479628828","at":"2026-10-20"}
-{"cid":"osm-w1548091041","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1548091041","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w1548091041","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1548091041","at":"2026-10-20"}
-{"cid":"osm-w1562524233","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1562524233","at":"2026-10-20","text":"물놀이장"}
-{"cid":"osm-w1562524233","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1562524233","at":"2026-10-20"}
-{"cid":"pdu-amazing-gimpo","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://kpv.amazingticket.site","at":"2026-10-20","text":"매점"}
-{"cid":"pdu-amazing-gimpo","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://kpv.amazingticket.site","at":"2026-10-20","text":"무료와이파이"}
-{"cid":"pdu-amazing-paju","attr":"AMENITY_BBQ","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-10-20","text":"실내 바베큐장"}
-{"cid":"pdu-amazing-paju","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-10-20","text":"키즈카페"}
-{"cid":"pdu-amazing-paju","attr":"AMENITY_KIDS_ROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-10-20","text":"키즈카페"}
-{"cid":"pdu-amazing-paju","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-10-20","text":"물놀이장"}
-{"cid":"pdu-amazing-paju","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-10-20"}
-{"cid":"pdu-amazing-paju","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-10-20","text":"에어바운스"}
-{"cid":"pdu-lagrills-yongin","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-10-20"}
-{"cid":"pdu-lagrills-yongin","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-10-20","text":"수영장"}
-{"cid":"pdu-lagrills-yongin","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-10-20"}
+{"cid":"osm-n469713235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/469713235","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n469713235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/469713235","at":"2026-10-21"}
+{"cid":"osm-n2261019059","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/2261019059","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n2261019059","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/2261019059","at":"2026-10-21"}
+{"cid":"osm-n3784282405","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/3784282405","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n3784282405","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/3784282405","at":"2026-10-21"}
+{"cid":"osm-n4718068520","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/4718068520","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n4718068520","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/4718068520","at":"2026-10-21"}
+{"cid":"osm-n4788237649","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/4788237649","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n4788237649","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/4788237649","at":"2026-10-21"}
+{"cid":"osm-n5321238121","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/5321238121","at":"2026-10-21"}
+{"cid":"osm-n5321238121","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/5321238121","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n5321238121","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/5321238121","at":"2026-10-21"}
+{"cid":"osm-n7165750885","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/7165750885","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n7165750885","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/7165750885","at":"2026-10-21"}
+{"cid":"osm-n9404261678","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/9404261678","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n9404261678","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/9404261678","at":"2026-10-21"}
+{"cid":"osm-n9548742587","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/9548742587","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n9548742587","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/9548742587","at":"2026-10-21"}
+{"cid":"osm-n9976524284","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/9976524284","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n9976524284","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/9976524284","at":"2026-10-21"}
+{"cid":"osm-n10651918639","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/10651918639","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n10651918639","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/10651918639","at":"2026-10-21"}
+{"cid":"osm-n11050464235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/11050464235","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n11050464235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/11050464235","at":"2026-10-21"}
+{"cid":"osm-n12120242227","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/12120242227","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n12120242227","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/12120242227","at":"2026-10-21"}
+{"cid":"osm-n12157043861","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/12157043861","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n12157043861","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/12157043861","at":"2026-10-21"}
+{"cid":"osm-n12385060572","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/12385060572","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n12385060572","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/12385060572","at":"2026-10-21"}
+{"cid":"osm-n13013815946","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/13013815946","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n13013815946","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/13013815946","at":"2026-10-21"}
+{"cid":"osm-n14219544690","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/14219544690","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n14219544690","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/14219544690","at":"2026-10-21"}
+{"cid":"osm-n14219544691","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/14219544691","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n14219544691","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/14219544691","at":"2026-10-21"}
+{"cid":"osm-n14219544692","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/14219544692","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-n14219544692","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/14219544692","at":"2026-10-21"}
+{"cid":"osm-r6033901","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/6033901","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-r6033901","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/6033901","at":"2026-10-21"}
+{"cid":"osm-w471345995","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/471345995","at":"2026-10-21"}
+{"cid":"osm-w473600235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/473600235","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w473600235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/473600235","at":"2026-10-21"}
+{"cid":"osm-w474308751","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/474308751","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w474308751","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/474308751","at":"2026-10-21"}
+{"cid":"osm-w475055852","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/475055852","at":"2026-10-21"}
+{"cid":"osm-w532458435","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/532458435","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w532458435","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/532458435","at":"2026-10-21"}
+{"cid":"osm-w567223458","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/567223458","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w567223458","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/567223458","at":"2026-10-21"}
+{"cid":"osm-w605846535","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/605846535","at":"2026-10-21"}
+{"cid":"osm-w605846538","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/605846538","at":"2026-10-21"}
+{"cid":"osm-w682668137","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/682668137","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w682668137","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/682668137","at":"2026-10-21"}
+{"cid":"osm-w692391492","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/692391492","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w692391492","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/692391492","at":"2026-10-21"}
+{"cid":"osm-w693915512","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/693915512","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w693915512","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/693915512","at":"2026-10-21"}
+{"cid":"osm-w702360473","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/702360473","at":"2026-10-21"}
+{"cid":"osm-w721842605","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/721842605","at":"2026-10-21"}
+{"cid":"osm-w892201616","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/892201616","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w892201616","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/892201616","at":"2026-10-21"}
+{"cid":"osm-w922330292","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/922330292","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w922330292","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/922330292","at":"2026-10-21"}
+{"cid":"osm-w979805595","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/979805595","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w979805595","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/979805595","at":"2026-10-21"}
+{"cid":"osm-w993628269","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/993628269","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w993628269","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/993628269","at":"2026-10-21"}
+{"cid":"osm-w1090875966","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1090875966","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w1090875966","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1090875966","at":"2026-10-21"}
+{"cid":"osm-w1103368287","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1103368287","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w1103368287","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1103368287","at":"2026-10-21"}
+{"cid":"osm-w1103368294","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1103368294","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w1103368294","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1103368294","at":"2026-10-21"}
+{"cid":"osm-w1103368295","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1103368295","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w1103368295","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1103368295","at":"2026-10-21"}
+{"cid":"osm-w1117495317","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1117495317","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w1117495317","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1117495317","at":"2026-10-21"}
+{"cid":"osm-w1137541006","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1137541006","at":"2026-10-21"}
+{"cid":"osm-w1137541006","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1137541006","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w1137541006","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1137541006","at":"2026-10-21"}
+{"cid":"osm-w1221372063","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1221372063","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w1221372063","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1221372063","at":"2026-10-21"}
+{"cid":"osm-w1416629021","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1416629021","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w1416629021","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1416629021","at":"2026-10-21"}
+{"cid":"osm-w1420846625","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1420846625","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w1420846625","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1420846625","at":"2026-10-21"}
+{"cid":"osm-w1447606327","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1447606327","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w1447606327","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1447606327","at":"2026-10-21"}
+{"cid":"osm-w1479628828","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1479628828","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w1479628828","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1479628828","at":"2026-10-21"}
+{"cid":"osm-w1548091041","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1548091041","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w1548091041","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1548091041","at":"2026-10-21"}
+{"cid":"osm-w1562524233","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1562524233","at":"2026-10-21","text":"물놀이장"}
+{"cid":"osm-w1562524233","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1562524233","at":"2026-10-21"}
+{"cid":"pdu-amazing-gimpo","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://kpv.amazingticket.site","at":"2026-10-21","text":"매점"}
+{"cid":"pdu-amazing-gimpo","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://kpv.amazingticket.site","at":"2026-10-21","text":"무료와이파이"}
+{"cid":"pdu-amazing-paju","attr":"AMENITY_BBQ","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-10-21","text":"실내 바베큐장"}
+{"cid":"pdu-amazing-paju","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-10-21","text":"키즈카페"}
+{"cid":"pdu-amazing-paju","attr":"AMENITY_KIDS_ROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-10-21","text":"키즈카페"}
+{"cid":"pdu-amazing-paju","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-10-21","text":"물놀이장"}
+{"cid":"pdu-amazing-paju","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-10-21"}
+{"cid":"pdu-amazing-paju","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-10-21","text":"에어바운스"}
+{"cid":"pdu-lagrills-yongin","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-10-21"}
+{"cid":"pdu-lagrills-yongin","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-10-21","text":"수영장"}
+{"cid":"pdu-lagrills-yongin","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-10-21"}
 {"cid":"pilot-002-sureui","attr":"AMENITY_TRAIL","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-003-duruwell","attr":"AMENITY_TRAIL","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030095","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-004-haengun","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/haengun","at":"2026-10-15T09:00:00+09:00"}
