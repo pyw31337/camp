@@ -576,3 +576,9 @@ Pretendard Variable 한 가지. 제목 800, 본문 400~600, 숫자 `tabular-nums
 - **정리한 주소**: `guide/` → 홈, `openings/` → `#/theme/OPEN`, `vision/` → 홈(옛 시안은 공개 메뉴·사이트에서 내림, 원본은 design/vision에 보관).
 - **테스트는 실제 기록을 남기지 않는다**: `navigator.webdriver`(Playwright) 또는 `?nowrite=1`이면 찜 기록·공유 찜·후기·업체 제보를 Supabase에 쓰지 않는다. `no-prod-write-test.mjs`가 CI에서 확인.
 - 회귀 테스트: `camping-atlas/scripts/ux2-test.mjs`.
+
+## 찜·비교 역할 (2026-10-21)
+- **찜 `#/saved`** — 찜한 캠핑장을 모아 보고 관리하는 곳. 카드 목록, 하트로 빼기, 카드를 눌러 상세 열기. 비교로 가는 길은 **맨 위 ‘비교하기’ 하나**(2곳 이상 찜했을 때). 지난번 고른 곳이 있으면 그대로, 없으면 처음 5곳이 골라진 채 비교 화면이 열린다. 찜 화면에는 비교 고르기 버튼·바·하단 독을 두지 않는다.
+- **비교 `#/compare`** — 찜한 곳 가운데 2~5곳을 골라(위쪽 칩) 나란히 보는 곳. 열 머리의 하트로 찜 해제, ×로 비교에서만 빼기. ‘찜 목록 전체’ 링크로 찜 화면에 돌아간다.
+- **메뉴** — ‘비교’(골라진 곳 수)와 ‘찜’(찜한 곳 수)은 각각 자기 화면 하나로만 간다. 찜 기록(`#/saves-log`)의 ‘찜 목록 보기’는 `#/saved`.
+- 회귀 테스트: `camping-atlas/scripts/saved-roles-test.mjs`.

@@ -3330,3 +3330,9 @@ html, body, #view { min-height: 100%; }
 .finder-destination { cursor: text; }
 .finder-destination input { width: 100%; min-height: 28px; }
 @media (max-width: 760px) { .finder-field.finder-destination input { font-size: 16px; } }
+
+/* 찜 화면: 위쪽 ‘비교하기’ 하나만(역할 분리, 2026-10-21) */
+.saved-head-tools { flex-wrap: wrap; }
+.saved-cmp-hint { flex-basis: 100%; text-align: right; color: var(--ink-3, #6b7280); font-size: 12px; }
+.saved-cmp-link[data-disabled="true"] { opacity: .5; }
+@media (max-width: 760px) { .saved-cmp-hint { text-align: left; } }

@@ -5122,105 +5122,36 @@ async function savedView() {
     </section>`;
   }
 
+  // 역할(DESIGN_SYSTEM.md ‘찜·비교 역할’): 찜 = 찜한 곳 모아보기·관리(하트로 빼기, 눌러서 상세).
+  // 비교할 곳 고르기·나란히 보기는 비교 화면만 한다 → 여기선 위쪽 ‘비교하기’ 하나만 둔다.
   S.pick = S.pick.filter((id) => S.saved.includes(id));
   const pickedCount = S.pick.length;
-
-  const cardsHtml = saved.map((c, i) => {
-    const isPicked = S.pick.includes(String(c.id));
-    return `<div class="saved-card-wrap${isPicked ? " is-picked" : ""}" data-saved-wrap="${esc(c.id)}">
-      <div class="saved-card-top-bar">
-        <button type="button" class="btn-pick-toggle${isPicked ? " on" : ""}" data-pick="${esc(c.id)}" aria-pressed="${isPicked}">
-          ${ic(isPicked ? "check" : "plus")}
-          <span>${isPicked ? "비교 중" : "비교 담기"}</span>
-        </button>
-        <span class="saved-order-label">#${i + 1}</span>
-      </div>
-      ${card(c, i)}
-    </div>`;
-  }).join("");
-
+  const cmpHint = saved.length < 2 ? "2곳 이상 찜하면 비교할 수 있어요" : pickedCount >= 2 ? `지난번 고른 ${pickedCount}곳으로 열려요` : `처음 ${Math.min(saved.length, 5)}곳이 골라진 채로 열려요`;
   return `<section class="saved-page">
     <div class="sec-head big">
       <div>
         <h1>내가 찜한 <em>캠핑장</em></h1>
-        <p class="sec-sub">찜한 캠핑장을 갯수 제한 없이 모아보고, 2~5곳을 골라 스펙을 나란히 비교할 수 있어요.</p>
+        <p class="sec-sub">찜한 캠핑장을 모아 보는 곳이에요. ${ic("heart", "inline")}를 끄면 목록에서 빠져요.</p>
       </div>
       <div class="saved-head-tools">
         <span class="saved-count-pill">총 <b>${saved.length}</b>곳 찜함</span>
-        <a class="btn primary btn-sm saved-cmp-link" href="#/compare">
-          ${ic("compare")} <span>비교하기</span> <b class="nav-count" data-pick-badge>${pickedCount}</b>
+        <a class="btn primary btn-sm saved-cmp-link" href="#/compare" data-saved-compare${saved.length < 2 ? ' data-disabled="true"' : ""}>
+          ${ic("compare")} <span>비교하기</span>
         </a>
+        <small class="saved-cmp-hint">${cmpHint}</small>
       </div>
     </div>
-
-    <div class="saved-control-bar">
-      <div class="saved-control-info">
-        <span class="saved-control-title">비교 선택: <b data-saved-pick-count>${pickedCount}</b> / 5곳</span>
-        <span class="saved-control-desc">${pickedCount < 2 ? "2곳 이상 선택하면 나란히 비교할 수 있어요" : "선택한 캠핑장의 상세 스펙을 비교해보세요"}</span>
-      </div>
-      <div class="saved-control-actions">
-        ${pickedCount > 0 ? `<button type="button" class="btn ghost btn-sm" data-clear-pick>선택 초기화</button>` : ""}
-        <a class="btn primary btn-sm" href="#/compare" data-compare-submit ${pickedCount < 2 ? 'data-disabled="true"' : ""}>
-          ${pickedCount >= 2 ? `${pickedCount}곳 비교하기` : "비교하기"}
-        </a>
-      </div>
-    </div>
-
     <div class="cards-grid saved-grid">
-      ${cardsHtml}
+      ${saved.map((c, i) => card(c, i)).join("")}
     </div>
-
-    ${pickedCount > 0 ? `
-    <div class="saved-floating-dock">
-      <div class="saved-dock-inner">
-        <div class="saved-dock-info">
-          <span>비교 대상: <b data-dock-count>${pickedCount}</b> / 5곳 선택</span>
-          <small>${pickedCount < 2 ? "2곳 이상 선택 시 비교 가능" : "조건과 스펙을 한눈에 대조하세요"}</small>
-        </div>
-        <div class="saved-dock-actions">
-          <button type="button" class="btn ghost btn-sm" data-clear-pick>초기화</button>
-          <a class="btn primary saved-dock-go" href="#/compare" data-compare-submit ${pickedCount < 2 ? 'data-disabled="true"' : ""}>
-            ${ic("compare")} <span>${pickedCount >= 2 ? `${pickedCount}곳 비교하기` : "비교하기"}</span>
-          </a>
-        </div>
-      </div>
-    </div>
-    ` : ""}
   </section>`;
 }
 
 function bindSaved() {
   initCarousels($("#view"));
-  $$("[data-clear-pick]").forEach((b) => b.addEventListener("click", () => {
-    S.pick = [];
-    store.set("mc-pick", S.pick);
-    toast("비교 선택을 초기화했어요");
-    route();
-  }));
-
-  $$("[data-compare-submit]").forEach((a) => a.addEventListener("click", (e) => {
-    if (S.pick.length < 2) {
-      e.preventDefault();
-      toast("비교할 캠핑장을 2곳 이상 선택해 주세요 (최대 5곳)");
-    }
-  }));
-
-  $$(".saved-card-wrap [data-pick]").forEach((b) => b.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const id = String(b.dataset.pick);
-    if (S.pick.includes(id)) {
-      S.pick = S.pick.filter((x) => x !== id);
-    } else {
-      if (S.pick.length >= 5) {
-        toast("최대 5곳까지 비교할 수 있어요");
-        return;
-      }
-      S.pick.push(id);
-    }
-    store.set("mc-pick", S.pick);
-    route();
-  }));
+  $("[data-saved-compare]")?.addEventListener("click", (e) => {
+    if (S.saved.length < 2) { e.preventDefault(); toast("2곳 이상 찜하면 비교할 수 있어요"); }
+  });
 }
 
 // ── 화면: 지도 ───────────────────────────────────────────────
@@ -5352,7 +5283,7 @@ async function savesLogView() {
     const add = x.action === "add";
     return `<li><span class="slog-act ${add ? "add" : "rm"}">${add ? "찜" : "해제"}</span>${c ? `<a class="slog-name" href="#/c/${esc(c.id)}">${esc(name)}</a>` : `<span class="slog-name">${esc(name)}</span>`}<time class="slog-time" datetime="${esc(x.created_at)}">${esc(formatKoreanDate(x.created_at) || x.created_at)} ${esc(new Date(x.created_at).toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Seoul" }))}</time><span class="slog-env">${esc(x.platform || "기기 정보 없음")} ${esc(x.screen || "")}</span></li>`;
   }).join("")}</ul>` : `<p class="muted">아직 기록이 없습니다.</p>`;
-  return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><nav class="slog-links" aria-label="관련 화면"><a href="#/compare">찜 목록 보기</a><a href="../log/">운영 대시보드(/log)</a></nav>${body}</section>`;
+  return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><nav class="slog-links" aria-label="관련 화면"><a href="#/saved">찜 목록 보기</a><a href="../log/">운영 대시보드(/log)</a></nav>${body}</section>`;
 }
 
 // ── 라우터 ───────────────────────────────────────────────────
