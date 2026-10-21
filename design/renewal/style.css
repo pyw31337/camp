@@ -3328,3 +3328,9 @@ html, body, #view { min-height: 100%; }
 
 /* t39 #30: 비교 화면 모바일에서 찜 칩을 줄바꿈해 모두 보이기 */
 @media (max-width: 759px) { .cmp-page .picks { flex-wrap: wrap; overflow: visible; } .cmp-page .picks .pick span { max-width: 9em; } }
+
+/* t39 #34: 아직 안 채운 홈 테마 줄 자리 높이(JS로 재지 않음) */
+.trow[data-lazy-row] .trow-rail { min-height: 754px; }
+@media (max-width: 759px) { .trow[data-lazy-row] .trow-rail { min-height: 962px; } }
+.trows > .trow:nth-child(n+3) { content-visibility: auto; contain-intrinsic-size: auto 774px; }
+@media (max-width: 759px) { .trows > .trow:nth-child(n+3) { contain-intrinsic-size: auto 979px; } }

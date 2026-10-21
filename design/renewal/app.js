@@ -719,8 +719,14 @@ const photoKey = (u) => {
 const PT_FB = new Map();
 const isPt = (c, u) => Boolean(c.pt && (u === c.pt.i || u === c.pt.t));
 const ptCredit = (c) => `<span class="pt-credit" title="${esc(c.pt?.s ? `${c.pt.s} 후기 사진` : "후기 사진")}">후기 사진</span>`;
+// 성능(t39 #34): 화면 전환마다 같은 캠핑장 사진 목록을 수천 번 다시 만들지 않게 기억한다.
+// 사진 자료(S.photos·S.cards)가 바뀌거나 깨진 사진(DEAD)이 늘면 통째로 비운다. 결과는 그대로(복사본을 돌려준다).
+let PH_MEMO = new Map(), PH_SIG = [];
 function photosOf(c) {
-  return photosAll(c).filter((u) => !DEAD.has(photoUrl(u)));
+  if (PH_SIG[0] !== S.photos || PH_SIG[1] !== S.cards || PH_SIG[2] !== DEAD.size) { PH_MEMO = new Map(); PH_SIG = [S.photos, S.cards, DEAD.size]; }
+  let r = PH_MEMO.get(c.id);
+  if (!r || r.c !== c || r.p !== S.photos[c.id] || r.o !== S.cards[c.id]) { r = { c, p: S.photos[c.id], o: S.cards[c.id], v: photosAll(c).filter((u) => !DEAD.has(photoUrl(u))) }; PH_MEMO.set(c.id, r); }
+  return r.v.slice();
 }
 function photosAll(c) {
   const p = S.photos[c.id] ?? [];
@@ -1570,8 +1576,7 @@ function fillLazyRow(sec) {
 function watchLazyRows(root) {
   const secs = $$("[data-lazy-row]", root);
   if (!secs.length) return;
-  const h = $(".trow-rail", root)?.offsetHeight || 0;
-  if (h) secs.forEach((sec) => { $(".trow-rail", sec).style.minHeight = `${h}px`; });
+  // 자리 높이는 CSS(.trow[data-lazy-row] .trow-rail)가 잡는다 → 여기서 레이아웃을 강제로 계산하지 않는다(t39 #34).
   if (!("IntersectionObserver" in window)) { secs.forEach(fillLazyRow); return; }
   lazyIO?.disconnect();
   lazyIO = new IntersectionObserver((es) => { for (const e of es) if (e.isIntersecting) { lazyIO.unobserve(e.target); fillLazyRow(e.target); } }, { rootMargin: "1200px 0px" });
