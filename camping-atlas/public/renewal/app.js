@@ -3922,9 +3922,9 @@ function reserveDock(c) {
   }).join("");
 
   return `<div class="d-dock-in">
-    <button class="dock-act-btn dock-heart${on ? " on" : ""}" type="button" data-save="${esc(c.id)}" aria-pressed="${on}" aria-label="${on ? "좋아요 해제" : "좋아요"}">
+    <button class="dock-act-btn dock-heart${on ? " on" : ""}" type="button" data-save="${esc(c.id)}" aria-pressed="${on}" aria-label="${on ? "찜 해제" : "찜하기"}">
       ${ic(on ? "heart" : "heart-o")}
-      <span>좋아요</span>
+      <span>찜</span>
     </button>
     <div class="dock-reserve-group">
       ${main ? (main.kind === "phone" ? `
