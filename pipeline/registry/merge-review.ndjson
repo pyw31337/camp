@@ -26086,3 +26086,4 @@
 {"at": "2026-10-21T09:11:36.744106+00:00", "by": "grok-bot", "action": "fill", "file": "manual-camps.json", "id": "102377", "field": "gc_url,notes,src_extra", "reason": "영우 님 2026-10-21 정보 보강: 고캠핑 c_no=808·캠프픽·블로그·TourAPI"}
 {"at": "2026-10-21T09:11:36.744106+00:00", "by": "grok-bot", "action": "overwrite", "file": "campgrounds.json", "id": "102229", "field": "fee", "reason": "영우 님 2026-10-21 정보 보강: 후기 언급(MENTION) 2.5만~5만 → 운영 기관 이용요금표(OFFICIAL)"}
 {"at": "2026-10-21T09:11:36.744106+00:00", "by": "grok-bot", "action": "fill", "file": "campgrounds.json", "id": "102229", "field": "checkin,checkout,closed,pets,notes,src_extra", "reason": "영우 님 2026-10-21 정보 보강: 운영 기관 홈페이지·FAQ·고캠핑 원문"}
+{"at": "2026-10-21T10:48:39.186112+00:00", "by": "grok-bot", "action": "overwrite", "file": "camps/102229.json", "id": "102229", "field": "profile.REFUND", "reason": "'규정 있음'(내용 없음) → 운영 기관 이용요금표 취소·환불 규정. 원문 문장은 operator-site-snippets.json에 추가해 다음 동기화에도 같은 값"}

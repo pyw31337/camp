@@ -217227,7 +217227,8 @@
     "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
     "https://hsecofarm.hscity.go.kr/reservation/info/location.do",
     "https://hsecofarm.hscity.go.kr/reservation/board/list.do",
-    "https://hsecofarm.hscity.go.kr/reservation/board/list.do?gubun=notice"
+    "https://hsecofarm.hscity.go.kr/reservation/board/list.do?gubun=notice",
+    "https://hsecofarm.hscity.go.kr/reservation/info/price.do"
    ],
    "snippets": [
     {
@@ -217517,6 +217518,12 @@
     {
      "text": "[공지] 캠핑장 예약 일정 안내",
      "url": "https://hsecofarm.hscity.go.kr/reservation/board/list.do"
+    },
+    {
+     "text": "취소 및 환불 규정: 이용일 5일 전 취소 시 100% 환불, 2일 전 80% 환불, 1일 전 60% 환불, 이용일 당일 30% 환불 (예약 당일 취소·시설 사용 불가 시 100%)",
+     "url": "https://hsecofarm.hscity.go.kr/reservation/info/price.do",
+     "date": "2026-10-21",
+     "src": "운영 기관 이용요금"
     }
    ]
   },
