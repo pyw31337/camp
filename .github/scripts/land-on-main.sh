@@ -29,6 +29,16 @@ for i in 1 2 3 4 5; do
   if git rev-parse -q --verify "refs/remotes/origin/${BR}" >/dev/null && ! git merge-base --is-ancestor "origin/${BR}" origin/main; then
     git merge -q --no-edit -X ours "origin/${BR}" -m "merge previous ${BR}" || { git merge --abort || true; git push -q --force origin "HEAD:refs/heads/${BR}" && { pushed=1; break; }; }
   fi
+  # 충돌을 '새 결과 우선'으로 풀면 그사이 main에 들어온 다른 에이전트의 값이 지워질 수 있다.
+  # 최신 main에 있던 값이 줄어든 곳은 되살려 한 커밋 더 얹는다(docs/DATA_MERGE_POLICY.md).
+  if [ -f pipeline/scripts/field-guard.mjs ]; then
+    FGB="$(mktemp -d)"; git archive origin/main camping-atlas/public/explore/data pipeline/registry | tar -x -C "$FGB"
+    node pipeline/scripts/field-guard.mjs "$FGB" . --heal || true
+    rm -rf "$FGB"
+    git add -u camping-atlas/public/explore/data pipeline/registry 2>/dev/null || true
+    git add camping-atlas/public/explore/data/camps pipeline/registry/merge-review.ndjson 2>/dev/null || true
+    git diff --cached --quiet || git commit -q -m "fix(data): 최신 main 값 보존(field-guard 복원)"
+  fi
   if git push -q origin "HEAD:refs/heads/${BR}" 2>/dev/null || git push -q --force-with-lease="${BR}" origin "HEAD:refs/heads/${BR}"; then pushed=1; break; fi
   sleep $((i * 7))
 done
