@@ -3304,3 +3304,6 @@ html, body, #view { min-height: 100%; }
   body[data-view="detail"] .top { display: none; }
   body[data-view="detail"] .d-bar { padding-top: calc(10px + env(safe-area-inset-top)); }
 }
+
+/* ‘캠핑장 운영자이신가요? 정보 바로잡기’ 아래 여백 확대(영우 님 2026-10-21, t39 #19) */
+.d-sec[data-opform-sec] { margin-bottom: clamp(36px, 6vw, 64px); }
