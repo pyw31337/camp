@@ -5866,7 +5866,14 @@ addEventListener("error", (e) => {
   { const fix = (a) => [...new Set(a.map((x) => String(S.byId.get(String(x))?.id ?? x)))]; S.saved = fix(S.saved); S.pick = fix(S.pick); }
   S.photos = photos;
   S.cards = cards?.camps ?? {};
-  for (const o of openings.items ?? []) if (!S.openings.has(String(o.id)) || o.kind !== "접수 마감") S.openings.set(String(o.id), o);
+  // 캠핑장마다 ‘가장 가까운 앞으로의’ 오픈 하나(t39 #45 감사: 뒤 항목이 덮어써 10.28 대신 11.4가 보이던 문제). 접수 마감은 다른 항목이 없을 때만.
+  { const now = Date.now(), better = (o, cur) => {
+      if (!cur) return true;
+      const fut = (x) => x.kind !== "접수 마감" && Date.parse(x.at) >= now;
+      if (fut(o) !== fut(cur)) return fut(o);
+      return fut(o) ? Date.parse(o.at) < Date.parse(cur.at) : false;
+    };
+    for (const o of openings.items ?? []) { const id = String(o.id); if (better(o, S.openings.get(id))) S.openings.set(id, o); } }
   S.saved = S.saved.filter((id) => S.byId.has(id));
   await configReady;
   loadSharedSaves();
