@@ -113,6 +113,8 @@ jobs:
         run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/ui3-test.mjs http://127.0.0.1:8765/
       - name: Map engine chooses Kakao (OSM only on real failure)
         run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs node camping-atlas/scripts/map-engine-test.mjs http://127.0.0.1:8765/
+      - name: 상세 화면 소유자 요청(아이콘 네모·축제 포스터·후기 썸네일·주소 아이콘·예약방법 줄바꿈) 회귀 테스트
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/detail-fixes-test.mjs http://127.0.0.1:8765/
       - name: Tests never write to production Supabase
         run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/no-prod-write-test.mjs http://127.0.0.1:8765/
       # workflow_dispatch(데이터 봇 PR) 결과는 PR 검사 목록에 안 잡혀서, 같은 이름의 커밋 상태로도 남긴다(main 룰셋 필수 검사).
