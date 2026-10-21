@@ -3335,3 +3335,7 @@ html, body, #view { min-height: 100%; }
 @media (max-width: 759px) { .trow[data-lazy-row] .trow-rail { min-height: 962px; } }
 .trows > .trow:nth-child(n+3) { content-visibility: auto; contain-intrinsic-size: auto 774px; }
 @media (max-width: 759px) { .trows > .trow:nth-child(n+3) { contain-intrinsic-size: auto 979px; } }
+
+/* t39 #35: 상세 섹션 사이 간격 넓힘(PC 40→64px, 모바일 42→54px) */
+body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
+@media (max-width: 759px) { body[data-view="detail"] .d-main { gap: 54px; } }
