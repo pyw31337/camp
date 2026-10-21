@@ -1729,6 +1729,14 @@ a.near { color: inherit; text-decoration: none; }
 .address-value { display: flex; flex: 1 1 auto; flex-wrap: nowrap; align-items: center; width: 100%; min-width: 0; }
 .address-value .address-text { flex: 1 1 auto; min-width: 0; }
 .address-value .addr-actions { flex: none; margin-left: auto; }
+@media (max-width: 420px) {
+  /* 좁은 화면: 아이콘을 조금 줄여 주소 글자가 한 글자씩 끊기지 않게 한다(단어 단위 줄바꿈). */
+  .address-value .address-text { overflow-wrap: normal; word-break: keep-all; }
+  .uses.info .use { grid-template-columns: 64px minmax(0, 1fr); }
+  .address-value .addr-actions { gap: 0; }
+  .address-value .addr-actions a { width: 24px; height: 24px; }
+  .address-value .addr-actions .ic { width: 15px; height: 15px; }
+}
 
 .sheet-close { width: 30px; height: 30px; box-shadow: none; background: var(--soft); }
 .sheet-close svg { width: 16px; height: 16px; }

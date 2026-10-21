@@ -67,9 +67,9 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [320, 800, "320"]]) {
   if (low.length) fails.push(`${tag}: 저화질 썸네일 ${low.length}장 ${low[0]}`);
   await rp.close();
   // 4) 업체 정보: 지도·길찾기·로드뷰 아이콘은 주소와 같은 줄(세로로 겹침), 값 칸 오른쪽 끝.
-  const ad = await page.$eval("#sec-info .address-value", (v) => { const a = v.querySelector(".addr-actions").getBoundingClientRect(), t = v.querySelector(".address-text").getBoundingClientRect(), r = v.getBoundingClientRect(); return { right: Math.round(r.right - a.right), overlap: a.top < t.bottom && a.bottom > t.top }; }).catch(() => null);
+  const ad = await page.$eval("#sec-info .address-value", (v) => { const a = v.querySelector(".addr-actions").getBoundingClientRect(), t = v.querySelector(".address-text").getBoundingClientRect(), r = v.getBoundingClientRect(); return { right: Math.round(r.right - a.right), overlap: a.top < t.bottom && a.bottom > t.top, lines: Math.round(t.height / parseFloat(getComputedStyle(v.querySelector('.address-text')).lineHeight || '20')) }; }).catch(() => null);
   if (!ad) fails.push(`${tag}: 주소 줄 없음`);
-  else { if (ad.right > 2) fails.push(`${tag}: 주소 아이콘이 오른쪽 끝이 아님(${ad.right}px)`); if (!ad.overlap) fails.push(`${tag}: 주소 아이콘이 다른 줄로 내려감`); }
+  else { if (ad.right > 2) fails.push(`${tag}: 주소 아이콘이 오른쪽 끝이 아님(${ad.right}px)`); if (!ad.overlap) fails.push(`${tag}: 주소 아이콘이 다른 줄로 내려감`); if (ad.lines > 4) fails.push(`${tag}: 주소가 ${ad.lines}줄로 잘게 끊김`); }
   await page.close();
 }
 await browser.close();
