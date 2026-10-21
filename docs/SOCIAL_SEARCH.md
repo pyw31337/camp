@@ -77,5 +77,6 @@
   - 카카오(Daum) 동영상 검색 `vclip` — `이름 쇼츠`, `이름 shorts` 2회/곳, `KAKAO_REST_API_KEY`. 실행당 `SHORTS_MAX_CALLS`(기본 6000 = 3,000곳).
   - YouTube Data API v3 — `YOUTUBE_API_KEY` Secret이 있을 때만. `search.list`(videoDuration=short, 100단위) + `videos.list`(길이, 1단위), 실행당 `YT_MAX_SEARCHES`(기본 80곳, 일 10,000단위 안).
 - 통과 조건: YouTube 영상 · 숏츠(`/shorts/` 주소 또는 길이 ≤ 180초) · 제목(+설명)에 캠핑장 핵심어와 캠핑 맥락(`isRelevant`, 일반 후기와 같은 규칙).
-- 캐시 `pipeline/.cache/shorts-search.json`(30일), 출력 `pipeline/out/campground-shorts.json`, 공유 브랜치 `collected-data`에 함께 저장.
+- 기록 `pipeline/registry/shorts-search.json`(저장소에 커밋, 30일마다 다시 확인; 숏츠 없는 곳은 확인 시각만), 출력 `pipeline/out/campground-shorts.json`.
+- 실행: `Shorts sync` 워크플로(수동 + 매주 수·일, 호출 6000). 매일 data-sync 전체 빌드는 이 기록을 읽어 채운다. 따로 돌린 결과는 증분 발행(`publish-incremental.sh --shorts`)으로 바로 화면에 붙는다.
 - 화면 데이터: `build-explore-data.mjs`가 `videos`에 **채우기만** 한다(같은 YouTube id가 이미 있으면 건너뜀, 기존 영상은 그대로). 화면은 `kind: "short"`를 Shorts 세로 카드 줄로 보인다.

@@ -1,7 +1,7 @@
 // 캠핑장별 YouTube 숏츠 능동 수집 → out/campground-shorts.json (t39 #36 보강)
 // - 카카오(Daum) 동영상 검색(vclip) ‘이름 쇼츠’·‘이름 shorts’ 2회/곳. KAKAO_REST_API_KEY. 숏츠(/shorts/ 또는 ≤180초)이고 이름이 맞는 것만.
 // - YOUTUBE_API_KEY가 있으면 YouTube Data API search.list(videoDuration=short, 100단위) + videos.list(길이, 1단위)도 쓴다(일 10,000단위 → YT_MAX_SEARCHES 기본 80곳).
-// - 영상이 하나도 없는 캠핑장부터. 캐시 .cache/shorts-search.json(SHORTS_MAX_AGE_DAYS 기본 30일). 한도·인증 오류면 즉시 멈춤.
+// - 영상이 하나도 없는 캠핑장부터. 캐시 registry/shorts-search.json(SHORTS_MAX_AGE_DAYS 기본 30일). 한도·인증 오류면 즉시 멈춤.
 // - 화면 데이터에는 build-explore-data가 ‘채우기만’ 한다(이미 있는 영상은 그대로, 없는 숏츠만 덧붙임).
 // 키가 없거나 네트워크가 실패해도 캐시로 결과를 쓰고 exit 0.
 import { existsSync } from "node:fs";
@@ -13,10 +13,13 @@ import { SHORTS_CACHE_VERSION, isoDurationSec, pickShortsDue, shortsFromVclip, s
 
 const out = fileURLToPath(new URL("../out/", import.meta.url));
 const cacheDir = fileURLToPath(new URL("../.cache/", import.meta.url));
-const cachePath = `${cacheDir}shorts-search.json`;
+// 캐시는 저장소에 커밋한다(registry): 매일 실행·수동 실행·증분 발행이 같은 기록을 이어 쓴다. 숏츠가 없는 곳은 확인 시각만.
+const cachePath = fileURLToPath(new URL("../registry/shorts-search.json", import.meta.url));
 const warn = (t, m) => console.log(`::warning title=${t}::${m}`);
 const readJson = async (p, fb) => { try { return JSON.parse(await readFile(p, "utf8")); } catch { return fb; } };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// 한 줄에 한 곳(커밋 차이를 작게)
+const dumpCache = (c) => `{"campgrounds":{\n${Object.entries(c.campgrounds).map(([k, v]) => `${JSON.stringify(k)}:${JSON.stringify(v)}`).join(",\n")}\n}}\n`;
 const envNum = (k, d) => { const n = Number(process.env[k] ?? d); return Number.isFinite(n) ? n : d; };
 const MAX_AGE_DAYS = envNum("SHORTS_MAX_AGE_DAYS", 30);
 const MAX_CALLS = envNum("SHORTS_MAX_CALLS", 6000);
@@ -91,9 +94,9 @@ async function main() {
           }
           const seen = new Set();
           shorts = shorts.filter((x) => !seen.has(x.yt) && seen.add(x.yt)).slice(0, 12);
-          cache.campgrounds[c.id] = { v: SHORTS_CACHE_VERSION, fetched_at: fetchedAt, queries: qs, shorts };
+          cache.campgrounds[c.id] = shorts.length ? { v: SHORTS_CACHE_VERSION, fetched_at: fetchedAt, shorts } : { v: SHORTS_CACHE_VERSION, fetched_at: fetchedAt };
           ok++;
-          if (++since >= 100) { since = 0; await writeFile(cachePath, JSON.stringify(cache)); }
+          if (++since >= 100) { since = 0; await writeFile(cachePath, dumpCache(cache)); }
         } catch (e) {
           failed++; firstError ??= e.message;
           if (e.code === "RATE_LIMIT" || e.code === "AUTH" || failed >= 20) stopped = e;
@@ -101,7 +104,7 @@ async function main() {
       }
     };
     await Promise.all(Array.from({ length: Math.min(CONCURRENCY, batch.length) }, worker));
-    await writeFile(cachePath, JSON.stringify(cache));
+    await writeFile(cachePath, dumpCache(cache));
     if (stopped) warn("카카오 숏츠 검색 중단", stopped.message); else if (firstError) warn("일부 숏츠 검색 실패", `${failed}곳 · ${firstError}`);
   }
   const records = {};

@@ -22,7 +22,7 @@ const nearby = await read("../out/campground-nearby.json");
 const products = await read("../out/campground-products.json");
 const social = await read("../out/campground-social.json");
 // YouTube 숏츠 능동 수집(scripts/sync-shorts.mjs): 영상 칸에 ‘채우기만’ 한다.
-const shortsOut = await read("../out/campground-shorts.json");
+const shortsOut = (await read("../out/campground-shorts.json")) ?? (await read("../registry/shorts-search.json"));
 // 네이버 검색 API(블로그·카페·웹문서·지식iN) 언급 + robots 허용 블로그 본문 문장(scripts/sync-web-mentions.mjs)
 const web = await read("../out/campground-web.json");
 // 방문후기 썸네일(블로그 대표 이미지, scripts/fill-review-thumbs.mjs): 썸네일이 비어 있을 때만 채운다.

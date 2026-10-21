@@ -26,11 +26,6 @@ on:
           - media-backfill
           - tour-enrichment
           - free-audit
-      shorts_max_calls:
-        description: "YouTube 숏츠 검색(카카오 vclip) 최대 호출 수 (기본 6000 = 3,000곳)"
-        required: false
-        default: "6000"
-        type: string
       naver_mention_max_calls:
         description: "네이버 웹 언급 최대 호출 수 (기본 8000). 같은 날 다시 돌릴 때는 일 한도 25,000의 절반(12,500) 안에서 남은 만큼만"
         required: false
@@ -243,7 +238,7 @@ jobs:
         run: |
           if git ls-remote --exit-code --heads origin collected-data >/dev/null 2>&1; then
             git fetch -q --depth=1 origin +collected-data:refs/remotes/origin/collected-data
-            for f in social-search web-mentions shorts-search; do
+            for f in social-search web-mentions; do
               if git cat-file -e "origin/collected-data:cache/$f.json.gz" 2>/dev/null; then
                 git show "origin/collected-data:cache/$f.json.gz" | gunzip > ".cache/$f.json.branch"
                 # 브랜치 쪽이 더 크면(더 많이 쌓였으면) 그것을 쓴다.
@@ -261,16 +256,6 @@ jobs:
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           SOCIAL_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '9100' }}
-      - name: Sync YouTube Shorts per campground (Kakao vclip + optional YouTube Data API)
-        # 일반 영상이 없어도 관련 숏츠가 있는 곳(영우 님 2026-10-22). 영상 없는 곳부터 ‘이름 쇼츠/shorts’ 2회/곳, 공식 API만(YouTube 화면 긁기 없음).
-        # 이름 관련성 검사 통과·숏츠(/shorts/ 또는 ≤180초)만. 화면 데이터에는 build-explore-data가 채우기만 한다.
-        continue-on-error: true
-        timeout-minutes: 25
-        run: npm run sync:shorts
-        env:
-          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-          SHORTS_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || (github.event_name == 'workflow_dispatch' && inputs.shorts_max_calls) || '6000' }}
       - name: Sync web mentions (NAVER search blog·cafe·web·kin + robots-allowed blog text)
         # 네이버 검색 API(HUB, 한시 무료 월 775,000건) 요약과 robots가 허용한 블로그(티스토리 등) 본문의 사실 문장.
         # 캠핑장당 7회, 14일 순환. 한 실행 8,000회(일 한도 25,000의 절반 미만). naver-guard가 0원 확인·월 예산·402 즉시 중단.
@@ -299,11 +284,11 @@ jobs:
             git worktree add -q --detach "$DIR" && git -C "$DIR" switch -q --orphan collected-data
           fi
           mkdir -p "$DIR/cache" "$DIR/out"
-          for f in social-search web-mentions shorts-search; do [ -s ".cache/$f.json" ] && gzip -9c ".cache/$f.json" > "$DIR/cache/$f.json.gz"; done
-          for f in campground-social campground-web campground-shorts; do [ -s "out/$f.json" ] && gzip -9c "out/$f.json" > "$DIR/out/$f.json.gz"; done
+          for f in social-search web-mentions; do [ -s ".cache/$f.json" ] && gzip -9c ".cache/$f.json" > "$DIR/cache/$f.json.gz"; done
+          for f in campground-social campground-web; do [ -s "out/$f.json" ] && gzip -9c "out/$f.json" > "$DIR/out/$f.json.gz"; done
           node -e '
             const fs=require("fs"),z=require("zlib");const m={updated_at:new Date().toISOString(),run:process.env.RUN_URL,files:{}};
-            for(const f of ["out/campground-social.json.gz","out/campground-web.json.gz","out/campground-shorts.json.gz"]){const p=process.argv[1]+"/"+f;if(!fs.existsSync(p))continue;
+            for(const f of ["out/campground-social.json.gz","out/campground-web.json.gz"]){const p=process.argv[1]+"/"+f;if(!fs.existsSync(p))continue;
               const j=JSON.parse(z.gunzipSync(fs.readFileSync(p)));const c=j.campgrounds??{};m.files[f]={campgrounds:Object.keys(c).length,bytes:fs.statSync(p).size};}
             fs.writeFileSync(process.argv[1]+"/MANIFEST.json",JSON.stringify(m,null,1));' "$DIR"
           cp ../docs/COLLECTED_DATA.md "$DIR/README.md" 2>/dev/null || true

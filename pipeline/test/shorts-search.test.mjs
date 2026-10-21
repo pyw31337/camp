@@ -44,3 +44,18 @@ test("대상 순서: 영상 없는 곳 먼저, 최근 캐시는 건너뜀", () =
   const cache = { c: { v: 1, fetched_at: "2026-10-20T00:00:00Z" } };
   assert.deepEqual(pickShortsDue(camps, cache, (id) => id === "a", 30, now).map((x) => x.id), ["b", "a"]);
 });
+test("merge-collected --shorts: 상세 영상 칸에 채우기만", async () => {
+  const { mkdtempSync, mkdirSync, writeFileSync, readFileSync } = await import("node:fs");
+  const { tmpdir } = await import("node:os");
+  const { join } = await import("node:path");
+  const { execFileSync } = await import("node:child_process");
+  const dir = mkdtempSync(join(tmpdir(), "shorts-")); mkdirSync(join(dir, "camps"));
+  writeFileSync(join(dir, "camps", "1.json"), JSON.stringify({ name: "a" }));
+  writeFileSync(join(dir, "camps", "2.json"), JSON.stringify({ videos: [{ yt: "XXXXXXXXXXX", title: "원래" }] }));
+  const sh = join(dir, "s.json");
+  writeFileSync(sh, JSON.stringify({ campgrounds: { 1: { shorts: [{ yt: "AAAAAAAAAAA", url: "https://youtube.com/shorts/AAAAAAAAAAA", kind: "short" }] }, 2: { shorts: [{ yt: "XXXXXXXXXXX" }] }, 3: { fetched_at: "x" } } }));
+  const out = execFileSync("node", [new URL("../scripts/merge-collected.mjs", import.meta.url).pathname, "--shorts", sh, "--data", dir], { encoding: "utf8" });
+  assert.match(out, /숏츠 병합: 1곳\(영상 없던 곳 1곳\) · 숏츠 1개/);
+  assert.equal(JSON.parse(readFileSync(join(dir, "camps", "1.json"), "utf8")).videos[0].yt, "AAAAAAAAAAA");
+  assert.deepEqual(JSON.parse(readFileSync(join(dir, "camps", "2.json"), "utf8")).videos, [{ yt: "XXXXXXXXXXX", title: "원래" }]);
+});
