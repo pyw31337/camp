@@ -2107,7 +2107,7 @@
 {"cid":"1986","attr":"PROGRAM_EVENT","value":"할로윈파티,크리스마스파티","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1986","attr":"PROGRAM_EXPERIENCE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1987","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1993","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://camping.asanfmc.or.kr/main/index.php?m_cd=6","at":"2026-10-20T00:59:00.619Z","quote":"※ 화장실, 개수대는 동절기(12월~2월) ·평일에 일부 폐쇄될 수 있습니다.","period":"12월~2월"}
+{"cid":"1993","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://camping.asanfmc.or.kr/main/index.php?m_cd=6","at":"2026-10-20T00:59:00.619Z","quote":"※ 화장실, 개수대는 동절기(12월~2월) &middot;평일에 일부 폐쇄될 수 있습니다.","period":"12월~2월"}
 {"cid":"1993","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1993","attr":"PROGRAM_EVENT","value":"봄, 가을 행사(상하반기 1회)","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1993","attr":"PROGRAM_EXPERIENCE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4183,6 +4183,7 @@
 {"cid":"7028","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7028","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"7028","attr":"PROGRAM_EXPERIENCE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7029","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7034","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7034","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7035","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://worecs.co.kr/","at":"2026-10-20T01:03:57.050Z","quote":"부대시설(개수대)"}
@@ -12943,6 +12944,7 @@
 {"cid":"101899","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101899","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
 {"cid":"101900","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101902","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101902","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101903","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101903","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
