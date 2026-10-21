@@ -3328,3 +3328,7 @@ html, body, #view { min-height: 100%; }
 
 /* t39 #30: 비교 화면 모바일에서 찜 칩을 줄바꿈해 모두 보이기 */
 @media (max-width: 759px) { .cmp-page .picks { flex-wrap: wrap; overflow: visible; gap: 6px; } .cmp-page .picks .pick-wrap { padding-right: 2px; } .cmp-page .picks .pick { height: 34px; gap: 4px; padding: 0 6px 0 10px; font-size: .8rem; } .cmp-page .picks .pick img, .cmp-page .picks .pick .photo-empty { display: none; } .cmp-page .picks .pick span { max-width: 5.5em; } .cmp-page .picks .pick .ic { width: 14px; height: 14px; } .cmp-page .picks .heart { width: 26px; height: 26px; } .cmp-page .picks .heart .ic { width: 15px; height: 15px; } }
+
+/* t39 #35: 상세 섹션 사이 간격 넓힘(PC 40→64px, 모바일 42→54px) */
+body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
+@media (max-width: 759px) { body[data-view="detail"] .d-main { gap: 54px; } }
