@@ -1082,7 +1082,7 @@ async function ensureFull(ids) {
     if (!rec) continue;
     for (const k of Object.keys(c)) if (k.startsWith("_")) delete c[k];
     Object.assign(c, rec);
-    cleanCampTel(c); // 샤드가 원본 전화번호로 덮으므로 다시 정리
+    cleanCampTel(c); cleanCampFee(c); // 샤드가 원본 전화번호로 덮으므로 다시 정리
     Object.defineProperty(c, "__full", { value: true, enumerable: false });
   }
 }
@@ -3981,6 +3981,11 @@ function telClean(raw) {
   if (/^0\d{2}\d{7,8}$/.test(d)) return `${d.slice(0, 3)}-${d.slice(3, d.length - 4)}-${d.slice(-4)}`;
   return null; // 걸 수 없는 번호
 }
+// t41u-1: 배포 단계(apply-fee-sanity)가 비현실 요금(민간 1박 2만원 미만)에 hidden 표시 → 화면에서만 숨김(원본은 fee_raw).
+// 판정은 배포 단계 한 곳에서만 한다(목록용 가벼운 카탈로그와 상세가 같은 값을 보이게).
+function cleanCampFee(c) {
+  if (c?.fee?.hidden) { c.fee_raw = c.fee.fee_raw; c.fee = null; if (c.pf?.p) delete c.pf.p; }
+}
 function cleanCampTel(c) { if (!c?.tel) return; const t = telClean(c.tel); if (t !== c.tel) { c.tel_raw = c.tel; c.tel = t; } }
 const telText = (t) => String(t ?? "").trim().replace(/^[-\s]+|[-\s]+$/g, "").replace(/\s*-\s*/g, "-").replace(/-{2,}/g, "-");
 function infoHtml(c) {
@@ -5870,7 +5875,7 @@ addEventListener("error", (e) => {
     fetch(new URL(`${MOD_ROOT}conditions/forecast.json`, import.meta.url).href, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
   ]);
   S.camps = camps.filter((c) => c.status !== "폐업");
-  for (const c of S.camps) cleanCampTel(c); // 표시층 정리(원본 파일은 그대로)
+  for (const c of S.camps) { cleanCampTel(c); cleanCampFee(c); } // 표시층 정리(원본 파일은 그대로)
   S.fc = fcast;
   S.byId = new Map(S.camps.map((c) => [String(c.id), c]));
   // 중복 등록을 합친 곳(c.mg = 합쳐진 id): 예전 링크·찜도 남은 곳으로 이어 준다(QA 2026-10-21).

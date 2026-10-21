@@ -1,0 +1,299 @@
+{
+  "_note": "t41u-1 하한 미만 1박 요금 재확인(업장 공식 홈페이지). build가 OFFICIAL로 덮어씀, 원본은 fee_raw",
+  "generated_at": "2026-10-21T20:21:51.131Z",
+  "targets": 68,
+  "results": {
+    "160": {
+      "name": "큐브 빌리지 글램핑",
+      "status": "no_official_site"
+    },
+    "630": {
+      "name": "아그로랜드 캠핑장",
+      "status": "fail",
+      "url": "http://www.agroland.co.kr/"
+    },
+    "922": {
+      "name": "장선해변 캠핑장",
+      "status": "no_official_site"
+    },
+    "987": {
+      "name": "리버힐즈 캠핑장(푸른농원)",
+      "status": "fail",
+      "url": "http://www.riverhills.kr/"
+    },
+    "2538": {
+      "name": "엘리시안 강촌 캠핑파크",
+      "status": "fail",
+      "url": "https://www.elysian.co.kr/gangchon/restaurant/restaurant.asp?facility_id=FCT00000000000000201"
+    },
+    "2915": {
+      "name": "청산별곡",
+      "status": "no_official_site"
+    },
+    "3016": {
+      "name": "칠곡보 오토캠핑장",
+      "status": "no_fee_text",
+      "url": "https://camp.xticket.kr/web/main?shopEncode=3b8dfd4fe83ef398626319d169929b5df473aafca57da427af869db901ce8b86",
+      "fees": [],
+      "checked_at": "2026-10-21"
+    },
+    "3487": {
+      "name": "향림오토캠핑장",
+      "status": "fail",
+      "url": "http://www.hrimflower.com/html/index.html"
+    },
+    "6850": {
+      "name": "뮤지엄비치캠프",
+      "status": "no_official_site"
+    },
+    "6948": {
+      "name": "평창 반딧불캠핑장",
+      "status": "fail",
+      "url": "http://www.fireflycamping.com/default/"
+    },
+    "7272": {
+      "name": "우성낚시&캠핑",
+      "status": "no_official_site"
+    },
+    "7901": {
+      "name": "캠프포레",
+      "status": "fail",
+      "url": "http://xn--om2b562bixd85a.kr/"
+    },
+    "8034": {
+      "name": "우니메이카 캠핑장",
+      "status": "no_official_site"
+    },
+    "8113": {
+      "name": "아미캠핑장",
+      "status": "no_official_site"
+    },
+    "100015": {
+      "name": "더예감스테이",
+      "status": "no_official_site"
+    },
+    "100246": {
+      "name": "펫앤트리",
+      "status": "fail",
+      "url": "http://xn--oy2b97sqwkz1a.com/"
+    },
+    "100307": {
+      "name": "포레스트힐링캠프",
+      "status": "no_fee_text",
+      "url": "https://forest-healing-camp.revrun.kr/",
+      "fees": [],
+      "checked_at": "2026-10-21"
+    },
+    "100376": {
+      "name": "Little 80",
+      "status": "no_official_site"
+    },
+    "100447": {
+      "name": "현대야영장",
+      "status": "no_official_site"
+    },
+    "100501": {
+      "name": "남서야영장",
+      "status": "no_official_site"
+    },
+    "100502": {
+      "name": "알프스캠핑",
+      "status": "no_official_site"
+    },
+    "100515": {
+      "name": "더 상상 글램핑",
+      "status": "fail",
+      "url": "http://xn--bj0b14h95deyla0072a.com//"
+    },
+    "100576": {
+      "name": "보물섬 글램핑",
+      "status": "no_official_site"
+    },
+    "100606": {
+      "name": "산내캠핑일기",
+      "status": "fail",
+      "url": "http://sannae.kr/"
+    },
+    "100642": {
+      "name": "주식회사 대부도펜션시티",
+      "status": "no_official_site"
+    },
+    "100658": {
+      "name": "물왕호수캠핑",
+      "status": "no_official_site"
+    },
+    "100682": {
+      "name": "양평힐링계곡캠핑장",
+      "status": "no_official_site"
+    },
+    "100692": {
+      "name": "풀꽃이랑 캠핑장",
+      "status": "no_official_site"
+    },
+    "100749": {
+      "name": "한솔 스테이",
+      "status": "no_official_site"
+    },
+    "100794": {
+      "name": "코알라캠핑장",
+      "status": "no_official_site"
+    },
+    "100868": {
+      "name": "다문188캠핑장",
+      "status": "no_official_site"
+    },
+    "100905": {
+      "name": "리라 캠프",
+      "status": "no_official_site"
+    },
+    "100986": {
+      "name": "디노글램핑",
+      "status": "no_official_site"
+    },
+    "100991": {
+      "name": "하우스 캠핑장",
+      "status": "no_official_site"
+    },
+    "101172": {
+      "name": "캠프 파지립",
+      "status": "no_official_site"
+    },
+    "101184": {
+      "name": "비트윈",
+      "status": "no_official_site"
+    },
+    "101286": {
+      "name": "백룡야영장",
+      "status": "no_official_site"
+    },
+    "101289": {
+      "name": "CAMP699",
+      "status": "fail",
+      "url": "https://camp699inje.imweb.me/"
+    },
+    "101303": {
+      "name": "애플망고",
+      "status": "no_official_site"
+    },
+    "101354": {
+      "name": "봄이오는 캠프",
+      "status": "no_official_site"
+    },
+    "101356": {
+      "name": "바베큐팩토리캠핑장",
+      "status": "no_official_site"
+    },
+    "101358": {
+      "name": "랜드글램핑",
+      "status": "fail",
+      "url": "http://xn--bj0b23klocpb358u.com/"
+    },
+    "101417": {
+      "name": "모든날오토캠핑장",
+      "status": "no_official_site"
+    },
+    "101426": {
+      "name": "양주 장흥 브이아이피 캠핑장",
+      "status": "no_official_site"
+    },
+    "101501": {
+      "name": "도깨비캠핑장",
+      "status": "no_official_site"
+    },
+    "101538": {
+      "name": "H camping",
+      "status": "no_official_site"
+    },
+    "101540": {
+      "name": "해뜨고 달뜨고",
+      "status": "no_official_site"
+    },
+    "101557": {
+      "name": "웅포야영장",
+      "status": "no_official_site"
+    },
+    "101578": {
+      "name": "팜데이",
+      "status": "no_official_site"
+    },
+    "101706": {
+      "name": "음성농촌관광농원(농업회사법인 하나주식회사)",
+      "status": "no_official_site"
+    },
+    "101738": {
+      "name": "휴파티",
+      "status": "no_official_site"
+    },
+    "101801": {
+      "name": "올라봄 캠크닉",
+      "status": "no_official_site"
+    },
+    "101868": {
+      "name": "캠프 스테이",
+      "status": "no_official_site"
+    },
+    "101888": {
+      "name": "반딧불캠핑장",
+      "status": "no_official_site"
+    },
+    "101971": {
+      "name": "아늑캠핑장",
+      "status": "no_official_site"
+    },
+    "101979": {
+      "name": "호수마루 캠핑장",
+      "status": "no_official_site"
+    },
+    "102009": {
+      "name": "스위스캠핑장",
+      "status": "no_official_site"
+    },
+    "102096": {
+      "name": "고소바위 게으른 캠핑장",
+      "status": "no_official_site"
+    },
+    "102137": {
+      "name": "순천에코캠핑장",
+      "status": "no_official_site"
+    },
+    "102188": {
+      "name": "뉴월드 파크골프 캠핑장",
+      "status": "no_official_site"
+    },
+    "102202": {
+      "name": "고요의 시간",
+      "status": "no_official_site"
+    },
+    "102240": {
+      "name": "삼척활기캠핑장",
+      "status": "no_official_site"
+    },
+    "102271": {
+      "name": "화랑의 언덕 캠핑장",
+      "status": "no_official_site"
+    },
+    "102289": {
+      "name": "청주별마당캠핑장",
+      "status": "no_official_site"
+    },
+    "102290": {
+      "name": "도마령캠핑장",
+      "status": "no_official_site"
+    },
+    "102320": {
+      "name": "용담 813",
+      "status": "no_official_site"
+    },
+    "102376": {
+      "name": "라까시나 이태리 캠프닉",
+      "status": "no_official_site"
+    },
+    "pdu-amazing-paju": {
+      "name": "어메이징빌리지 파주",
+      "status": "no_fee_text",
+      "url": "https://pj.amazingticket.site",
+      "fees": [],
+      "checked_at": "2026-10-21"
+    }
+  }
+}
