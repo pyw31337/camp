@@ -3314,3 +3314,9 @@ html, body, #view { min-height: 100%; }
 .msearch-cond .ic { width: 20px; height: 20px; }
 .msearch-cond.on { background: var(--sel); color: var(--on-sel); }
 .msearch-cond i { position: absolute; top: -2px; right: -2px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font: 800 11px/18px inherit; font-style: normal; text-align: center; box-sizing: border-box; }
+
+/* 지도 카드: 카드 = 지도 초점, 이름 = 상세(t39 #23 #24). 이름은 말줄임 없이 전부. */
+.mi { cursor: pointer; }
+.mi-b h3 { display: block; -webkit-line-clamp: unset; overflow: visible; }
+.mi-name { color: inherit; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+.mi-name:hover { text-decoration-color: currentColor; }

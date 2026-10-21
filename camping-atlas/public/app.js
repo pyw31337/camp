@@ -5299,10 +5299,10 @@ function drawMap() {
 }
 function mapItem(c) {
   const on = selected === String(c.id);
-  return `<article class="mi${on ? " on" : ""}" data-mid="${esc(c.id)}">
-    <a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
+  // 지도 카드(영우 님 2026-10-21, t39 #23 #24): 카드를 누르면 지도가 그 캠핑장으로 확대·초점, 이름을 누르면 상세로.
+  return `<article class="mi${on ? " on" : ""}" data-mid="${esc(c.id)}" tabindex="0" aria-label="${esc(nameOf(c).name)} 지도에서 보기">
     <div class="mi-ph">${carousel(c)}</div>
-    <div class="mi-b"><p class="card-meta">${esc(region(c))}${!stayKinds(c).length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p><h3>${esc(nameOf(c).name)}</h3><span class="bdgs inline">${stayBadges(c, 2)}${badges(c, stayKinds(c).length ? 2 : 3)}</span></div>
+    <div class="mi-b"><p class="card-meta">${esc(region(c))}${!stayKinds(c).length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p><h3><a class="mi-name" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false">${esc(nameOf(c).name)}</a></h3><span class="bdgs inline">${stayBadges(c, 2)}${badges(c, stayKinds(c).length ? 2 : 3)}</span></div>
     ${heartBtn(c)}
   </article>`;
 }
@@ -5353,11 +5353,12 @@ function bindMap() {
     const q = e.target.closest("[data-mquick]");
     if (q) { const k = q.dataset.mquick; if (S.quick.has(k)) S.quick.delete(k); else S.quick.add(k); q.setAttribute("aria-pressed", String(S.quick.has(k))); drawMap(); return; }
     if (e.target.closest("[data-peek-x]")) { selected = null; $("[data-peek]").hidden = true; drawMap(); return; }
-    const it = e.target.closest(".map-list .mi");
-    if (it && !e.target.closest("[data-save]") && innerWidth >= 900 && !e.target.closest(".card-hit")) { const c = S.byId.get(it.dataset.mid); MAP?.setView(c.lat, c.lng, Math.max(MAP.zoom(), 12)); selectPin(c); }
+    const it = e.target.closest(".map-list .mi, .map-peek .mi");
+    if (it && !e.target.closest("[data-save], a, .car-nav, button")) { const c = S.byId.get(it.dataset.mid); if (c) { MAP?.setView(c.lat, c.lng, Math.max(MAP.zoom(), 14)); selectPin(c); } }
   };
-  v.addEventListener("submit", onSubmit); v.addEventListener("click", onClick);
-  cleanup.push(() => { v.removeEventListener("submit", onSubmit); v.removeEventListener("click", onClick); });
+  const onKey = (e) => { if (e.key === "Enter" && e.target.matches?.(".mi")) onClick(e); };
+  v.addEventListener("submit", onSubmit); v.addEventListener("click", onClick); v.addEventListener("keydown", onKey);
+  cleanup.push(() => { v.removeEventListener("submit", onSubmit); v.removeEventListener("click", onClick); v.removeEventListener("keydown", onKey); });
 }
 
 
