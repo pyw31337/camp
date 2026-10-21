@@ -2063,7 +2063,6 @@ function themesView() {
   }).join("");
   return `<section class="themes-page">
     <header class="themes-head shell">
-      <p class="eyebrow">EXPLORE BY MOOD</p>
       <h1>테마로 <em>고르기</em></h1>
       <p>원하는 분위기부터 골라보세요.</p>
     </header>
