@@ -4395,6 +4395,7 @@ function bindDetail() {
       const r = await fetch(`${SB.url}/rest/v1/campground_comment`, { method: "POST", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=representation" }, body: JSON.stringify({ campground_id: f.dataset.cmt, nickname: f.nickname.value.trim(), content: f.content.value.trim(), tag: "general", password_hash: crypto.randomUUID() }) });
       const row = r.ok ? (await r.json())[0] : null;
       if (row?.id) store.set("mc-my-comments", [...store.get("mc-my-comments", []), String(row.id)]);
+      if (r.ok) pushSave("comment", String(f.dataset.cmt));
       f.content.value = "";
       delete f.content.dataset.resized;
       f.content.style.height = "";
