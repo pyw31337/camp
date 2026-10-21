@@ -1399,6 +1399,7 @@ document.addEventListener("click", (e) => {
     else if (k === "fire") S.cond.fire = false;
     else if (k === "park") S.cond.park = false;
     else if (k === "win") S.cond.win = false;
+    else if (k in COND_BOOL) S.cond[k] = false;
     else if (k === "near") S.cond.near = "";
     store.set("mc-cond", S.cond);
     if (curHash().startsWith("#/list")) { history.replaceState(null, "", toPath(listHash())); route(); }
@@ -1691,7 +1692,16 @@ const KIND = Object.fromEntries(KINDS.map(([k, l, t]) => [k, { label: l, test: t
 const W_OPTS = [[0, "상관없음"], [1, "전기 있음"], [600, "600W 이상"], [1100, "1,100W 이상"]];
 const SIZE_OPTS = [[0, "상관없음"], [6, "6m 이상"], [8, "8m 이상"], [10, "10m 이상"]];
 const R_OPTS = [10, 20, 30];
-const emptyCond = () => ({ sido: [], kind: [], pet: false, w: 0, size: 0, fire: false, park: false, win: false, near: "", r: 20 });
+const emptyCond = () => ({ sido: [], kind: [], pet: false, w: 0, size: 0, fire: false, park: false, win: false, dump: false, sun: false, leaf: false, spring: false, summer: false, near: "", r: 20 });
+// t39 #41 계절·풍경·차박 조건(고캠핑 테마 th · 부대시설). 근거가 있으면 y, 테마 정보는 있는데 없으면 n, 정보 없으면 ?(아래 ‘확인 필요’).
+// 보험(영업배상책임)은 목록 카탈로그에 값이 없어(고캠핑 등록 0곳) 조건으로 두지 않는다 — 상세 ‘보험’ 줄에만.
+const COND_BOOL = {
+  dump: ["덤프스테이션", (c) => ((c.amenities ?? []).includes("덤프스테이션") ? "y" : "?")],
+  sun: ["일출 명소", (c) => (c.th?.includes("sunrise") ? "y" : c.th?.length ? "n" : "?")],
+  leaf: ["단풍 명소", (c) => (c.th?.includes("autumn") ? "y" : c.th?.length ? "n" : "?")],
+  spring: ["봄꽃", (c) => (c.th?.includes("spring") ? "y" : c.th?.length ? "n" : "?")],
+  summer: ["여름 물놀이", (c) => (c.th?.includes("summer") ? "y" : c.th?.length ? "n" : "?")],
+};
 S.cond = emptyCond();
 const km2 = (a, b) => { const R = 6371, dLa = ((b.lat - a.lat) * Math.PI) / 180, dLo = ((b.lng - a.lng) * Math.PI) / 180; const x = Math.sin(dLa / 2) ** 2 + Math.cos((a.lat * Math.PI) / 180) * Math.cos((b.lat * Math.PI) / 180) * Math.sin(dLo / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(x)); };
 // “파주 일대”: 그 시·군 캠핑장 좌표의 가운데에서 반경 r km
@@ -1724,6 +1734,7 @@ function condEval(c, k = S.cond, skip = null) {
   if (skip !== "size" && k.size) { const m = maxSide(c); st.size = m ? (m >= k.size ? "y" : "n") : "?"; }
   if (skip !== "fire" && k.fire) { const f = facts(c).fire?.kind; st.fire = f === "FIREWOOD_OK" ? "y" : f ? "n" : "?"; }
   if (skip !== "win" && k.win) st.win = c.win === 1 ? "y" : c.win === 0 || noKeys(c).includes("NO_WINTER") ? "n" : "?";
+  for (const [b, [, t]] of Object.entries(COND_BOOL)) if (skip !== b && k[b]) st[b] = t(c);
   if (skip !== "park" && k.park) { const o = facts(c).park?.ok; st.park = o === true ? "y" : o === false || o === "part" ? (o === "part" ? "?" : "n") : "?"; }
   const vals = Object.values(st);
   if (vals.includes("n")) return null;
@@ -1734,8 +1745,8 @@ function condTest(c, k = S.cond, skip = null, strict = S.condStrict) {
   const r = condEval(c, k, skip);
   return Boolean(r) && (!strict || r.unknown === 0);
 }
-const COND_LABEL = { win: "겨울 운영", kind: "상품", pet: "반려견", w: "전기", size: "사이트 크기", fire: "장작", park: "텐트 옆 주차" };
-const condActive = (k = S.cond) => k.sido.length + k.kind.length + (k.pet ? 1 : 0) + (k.w ? 1 : 0) + (k.size ? 1 : 0) + (k.fire ? 1 : 0) + (k.park ? 1 : 0) + (k.win ? 1 : 0) + (k.near ? 1 : 0);
+const COND_LABEL = { dump: "덤프스테이션", sun: "일출 명소", leaf: "단풍 명소", spring: "봄꽃", summer: "여름 물놀이", win: "겨울 운영", kind: "상품", pet: "반려견", w: "전기", size: "사이트 크기", fire: "장작", park: "텐트 옆 주차" };
+const condActive = (k = S.cond) => k.sido.length + k.kind.length + (k.pet ? 1 : 0) + (k.w ? 1 : 0) + (k.size ? 1 : 0) + (k.fire ? 1 : 0) + (k.park ? 1 : 0) + (k.win ? 1 : 0) + Object.keys(COND_BOOL).filter((b) => k[b]).length + (k.near ? 1 : 0);
 function condChips(k = S.cond) {
   const out = [];
   if (k.near) out.push(["near", `${k._ctr?.label ?? k.near} ${k.r}km 안`]);
@@ -1747,6 +1758,7 @@ function condChips(k = S.cond) {
   if (k.fire) out.push(["fire", "장작 가능"]);
   if (k.park) out.push(["park", "텐트 옆 주차"]);
   if (k.win) out.push(["win", "겨울 운영"]);
+  for (const [b, [l]] of Object.entries(COND_BOOL)) if (k[b]) out.push([b, l]);
   return out;
 }
 function condBadgeRow() {
@@ -1762,6 +1774,7 @@ function condToParams(p, k = S.cond) {
   if (k.fire) p.set("fire", "1");
   if (k.park) p.set("park", "1");
   if (k.win) p.set("win", "1");
+  for (const b of Object.keys(COND_BOOL)) if (k[b]) p.set(b, "1");
   if (k.near) { p.set("near", k.near); p.set("r", String(k.r)); }
   if (S.feeBand) p.set("fee", S.feeBand);
   if (S.stype) p.set("stype", S.stype);
@@ -1772,6 +1785,7 @@ function condFromParams(q) {
   k.sido = list("sido").filter((x) => SIDOS.includes(x));
   k.kind = list("kind").filter((x) => KIND[x]);
   k.pet = q.get("pet") === "1"; k.fire = q.get("fire") === "1"; k.park = q.get("park") === "1"; k.win = q.get("win") === "1";
+  for (const b of Object.keys(COND_BOOL)) k[b] = q.get(b) === "1";
   k.w = W_OPTS.some(([v]) => v === Number(q.get("w"))) ? Number(q.get("w")) : 0;
   k.size = SIZE_OPTS.some(([v]) => v === Number(q.get("size"))) ? Number(q.get("size")) : 0;
   k.near = (q.get("near") ?? "").slice(0, 20); k.r = R_OPTS.includes(Number(q.get("r"))) ? Number(q.get("r")) : 20;
@@ -1791,7 +1805,7 @@ function condSheet() {
       if (!b) return;
       const [key, val] = b.dataset.c.split(":"), k = S.condDraft;
       if (key === "sido" || key === "kind") k[key] = k[key].includes(val) ? k[key].filter((x) => x !== val) : [...k[key], val];
-      else if (key === "pet" || key === "fire" || key === "park" || key === "win") k[key] = !k[key];
+      else if (key === "pet" || key === "fire" || key === "park" || key === "win" || key in COND_BOOL) k[key] = !k[key];
       else if (key === "w" || key === "size" || key === "r") k[key] = Number(val);
       else if (key === "fee") S.feeDraft = S.feeDraft === val ? "" : val;
       else if (key === "strict") S.strictDraft = !S.strictDraft;
@@ -1846,8 +1860,8 @@ function paintCondSheet() {
       <section><h3>반려견</h3><div class="cond-chips">${chip("pet", 1, "동반 가능", k.pet, tally("pet", true))}</div></section>
       <section><h3>전기</h3><div class="cond-chips">${W_OPTS.map(([v, l]) => chip("w", v, l, k.w === v, v ? tally("w", v) : null)).join("")}</div></section>
       <section><h3>사이트 크기</h3><div class="cond-chips">${SIZE_OPTS.map(([v, l]) => chip("size", v, l, k.size === v, v ? tally("size", v) : null)).join("")}</div></section>
-      <section><h3>겨울</h3><div class="cond-chips">${chip("win", 1, "겨울 운영", k.win, tally("win", true))}</div></section>
-      <section><h3>불멍·주차</h3><div class="cond-chips">${chip("fire", 1, "장작 가능", k.fire, tally("fire", true))}${chip("park", 1, "텐트 옆 주차", k.park, tally("park", true))}</div></section>
+      <section><h3>계절·풍경</h3><div class="cond-chips">${chip("win", 1, "겨울 운영", k.win, tally("win", true))}${["spring", "summer", "leaf", "sun"].map((b) => chip(b, 1, COND_BOOL[b][0], k[b], tally(b, true))).join("")}</div></section>
+      <section><h3>불멍·주차</h3><div class="cond-chips">${chip("fire", 1, "장작 가능", k.fire, tally("fire", true))}${chip("park", 1, "텐트 옆 주차", k.park, tally("park", true))}${chip("dump", 1, "덤프스테이션", k.dump, tally("dump", true))}</div></section>
       <section><h3>요금</h3><div class="cond-chips">${[["u3", "~3만원"], ["3to5", "3~5만원"], ["5to7", "5~7만원"], ["7to10", "7만원~10만원"], ["10to20", "10만원~20만원"], ["o20", "20만원+"]].map(([v, l]) => chip("fee", v, l, S.feeDraft === v, count("fee", (c) => feeOk(c, v)))).join("")}</div></section>
     </div>
     <p class="cond-legend"><button type="button" class="link" data-c="strict">${strict ? "정보 없는 곳도 함께 보기" : "확인된 곳만 보기"}</button></p>
@@ -1909,7 +1923,7 @@ function condLine(c, ce) {
   // 상품 조건이 숙박 상품뿐이고 맞으면(y) 카드의 숙박 배지가 이미 보여 주므로 다시 쓰지 않는다(중복 금지).
   const st = Object.fromEntries(Object.entries(ce.st).filter(([k, v]) => !(k === "kind" && v === "y" && S.cond.kind.every((x) => STAY_KEYS.has(x)))));
   if (!Object.keys(st).length) return "";
-  const txt = { kind: () => S.cond.kind.map((x) => KIND[x]?.label).join("·"), pet: () => "반려견", w: () => (S.cond.w === 1 ? "전기" : `전기 ${fmt(S.cond.w)}W+`), size: () => `사이트 ${S.cond.size}m+`, fire: () => "장작", park: () => "텐트 옆 주차", win: () => "겨울 운영" };
+  const txt = { kind: () => S.cond.kind.map((x) => KIND[x]?.label).join("·"), pet: () => "반려견", w: () => (S.cond.w === 1 ? "전기" : `전기 ${fmt(S.cond.w)}W+`), size: () => `사이트 ${S.cond.size}m+`, fire: () => "장작", park: () => "텐트 옆 주차", win: () => "겨울 운영", ...Object.fromEntries(Object.entries(COND_BOOL).map(([b, [l]]) => [b, () => l])) };
   return `<p class="lrow-cond">${Object.entries(st).map(([k, v]) => `<span class="cs cs-${v === "?" ? "unk" : v}">${v === "y" ? ic("check") : ""}${esc(txt[k]())}${v === "ref" ? " · 법정 기준 600W" : v === "?" ? " · 확인 필요" : ""}</span>`).join("")}</p>`;
 }
 function listRow({ c, ce }, i = 0) {
