@@ -68,3 +68,14 @@
 ## 환경 변수
 
 `KAKAO_REST_API_KEY`, `SOCIAL_MAX_CALLS`(기본 4000, 0이면 호출 없음), `SOCIAL_MAX_AGE_DAYS`(14), `SOCIAL_DROP_AGE_DAYS`(45), `SOCIAL_CONCURRENCY`(4), `SOCIAL_DELAY_MS`(120).
+
+## YouTube 숏츠 능동 수집 (2026-10-22)
+
+- 스크립트: `pipeline/scripts/sync-shorts.mjs` (`npm run sync:shorts`), 규칙: `pipeline/lib/shorts-search.mjs`, 테스트: `pipeline/test/shorts-search.test.mjs`.
+- 이유: 일반 영상 검색에는 안 잡히지만 관련 숏츠는 있는 캠핑장이 많다. 영상이 하나도 없는 곳부터 찾는다.
+- 출처(공식 API만, YouTube 검색 화면을 긁지 않음):
+  - 카카오(Daum) 동영상 검색 `vclip` — `이름 쇼츠`, `이름 shorts` 2회/곳, `KAKAO_REST_API_KEY`. 실행당 `SHORTS_MAX_CALLS`(기본 6000 = 3,000곳).
+  - YouTube Data API v3 — `YOUTUBE_API_KEY` Secret이 있을 때만. `search.list`(videoDuration=short, 100단위) + `videos.list`(길이, 1단위), 실행당 `YT_MAX_SEARCHES`(기본 80곳, 일 10,000단위 안).
+- 통과 조건: YouTube 영상 · 숏츠(`/shorts/` 주소 또는 길이 ≤ 180초) · 제목(+설명)에 캠핑장 핵심어와 캠핑 맥락(`isRelevant`, 일반 후기와 같은 규칙).
+- 캐시 `pipeline/.cache/shorts-search.json`(30일), 출력 `pipeline/out/campground-shorts.json`, 공유 브랜치 `collected-data`에 함께 저장.
+- 화면 데이터: `build-explore-data.mjs`가 `videos`에 **채우기만** 한다(같은 YouTube id가 이미 있으면 건너뜀, 기존 영상은 그대로). 화면은 `kind: "short"`를 Shorts 세로 카드 줄로 보인다.
