@@ -1,5 +1,5 @@
 // 성능 예산(소유자 2026-10-21 “빠르고 쾌적하게”) — 넘으면 CI 실패.
-// 1) 크기: app.js·style.css(원본), 첫 화면 데이터(campgrounds·photos·forecast, gzip 추정) 상한.
+// 1) 크기: app.js·style.css(원본), 첫 화면 데이터(campgrounds.lite·photos·forecast, gzip 추정) 상한.
 // 2) 홈: DOM 노드·첫 화면 원격 원본 사진(고캠핑 11MB급 원본) 수, 카드 표시 시간, 아래로 내리면 늦게 채우는 테마 줄이 모두 채워지는지.
 // 실행: node camping-atlas/scripts/perf-budget.mjs [URL]
 import { readFileSync, statSync } from "node:fs";
@@ -8,9 +8,12 @@ import { fileURLToPath } from "node:url";
 const root = fileURLToPath(new URL("../../", import.meta.url));
 const fails = [];
 const KB = (n) => Math.round(n / 1024);
-const BUDGET = { appJs: 560, css: 260, dataGz: 3500, nodes: 12000, cardsMs: 8000, origImgs: 0 };
+const BUDGET = { appJs: 560, css: 260, dataGz: 2600, nodes: 12000, cardsMs: 8000, origImgs: 0 };
 const app = statSync(`${root}design/renewal/app.js`).size, css = statSync(`${root}design/renewal/style.css`).size;
-const dataGz = ["camping-atlas/public/explore/data/campgrounds.json", "camping-atlas/public/explore/data/photos.json", "camping-atlas/public/conditions/forecast.json"].reduce((a, f) => a + gzipSync(readFileSync(`${root}${f}`), { level: 6 }).length, 0);
+import { existsSync } from "node:fs";
+const liteP = existsSync(`${root}camping-atlas/public/explore/data/campgrounds.lite.json`) ? "camping-atlas/public/explore/data/campgrounds.lite.json" : null;
+if (!liteP) fails.push("campgrounds.lite.json 없음(node scripts/split-catalog.mjs 먼저)");
+const dataGz = [liteP ?? "camping-atlas/public/explore/data/campgrounds.json", "camping-atlas/public/explore/data/photos.json", "camping-atlas/public/conditions/forecast.json"].reduce((a, f) => a + gzipSync(readFileSync(`${root}${f}`), { level: 6 }).length, 0);
 console.log(`app.js ${KB(app)}KB · style.css ${KB(css)}KB · 첫 데이터 gzip ${KB(dataGz)}KB`);
 if (KB(app) > BUDGET.appJs) fails.push(`app.js ${KB(app)}KB > ${BUDGET.appJs}KB`);
 if (KB(css) > BUDGET.css) fails.push(`style.css ${KB(css)}KB > ${BUDGET.css}KB`);
