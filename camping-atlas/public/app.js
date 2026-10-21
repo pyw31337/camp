@@ -3415,7 +3415,7 @@ function bookingHtml(c, d) {
   const guideFact = sourceFact({ src: g?.source?.label ?? g?.source, url: g?.source?.url, date: g?.source?.date, quote: (pf.tips ?? []).join("\n") }, "예약 안내");
   return `<section class="d-sec" id="sec-booking"><div class="sec-head">${iconTitle("booking", "예약 방법")}${main || (pf.tips ?? []).length ? `<span class="sec-note">${main ? srcTip(bookingSource(main), "대표 예약 채널") : ""}${(pf.tips ?? []).length ? srcTip(guideFact, "예약 안내") : ""}</span>` : ""}</div>
     ${o ? `<div class="bo-highlight ${o.dd <= 0 ? "bo-today" : ""}"><span class="bo-badge">${ic("clock")}${esc(o.txt ?? "오픈 예정")}</span><div class="bo-detail"><b>다음 예약 오픈</b><span>${esc([openTimeStr, o.label].filter(Boolean).join(" · ") || o.txt)}</span></div></div>` : ""}
-    ${main || c.tel ? `<div class="chans">${main ? `<a class="chan" href="${esc(main.url)}" target="_blank" rel="noopener">${ic("right")}<b>${esc(bookingLabel(main))}</b><i>예약 페이지</i></a>` : ""}${c.tel ? `<a class="chan" href="tel:${esc(telText(c.tel).replace(/[^\d+]/g, ""))}">${ic("phone")}<b>전화 문의</b><i>${esc(telText(c.tel))}</i></a>` : ""}</div>` : ""}
+    ${main || c.tel ? `<div class="chans">${main ? `<a class="chan" href="${esc(main.url)}" target="_blank" rel="noopener">${ic(/네이버/.test(bookingLabel(main)) ? "naver" : "booking")}<b>${esc(bookingLabel(main))}</b><i>예약 페이지</i></a>` : ""}${c.tel ? `<a class="chan" href="tel:${esc(telText(c.tel).replace(/[^\d+]/g, ""))}">${ic("phone")}<b>전화 문의</b><i>${esc(telText(c.tel))}</i></a>` : ""}</div>` : ""}
     ${meta.length ? `<dl class="uses">${meta.map(([l, v]) => `<div class="use"><dt>${l === "다음 오픈" ? ic("clock") : ""}${l}</dt><dd><span class="use-val${l === "다음 오픈" ? " hot" : ""}">${bookingValue(bookingLines(v, { dateLike: l === "다음 오픈" }))}</span><span class="use-meta">${srcTip({ g: "c", src: { label: l === "다음 오픈" ? "예약 오픈 정보" : "예약 안내", url: g?.source?.url, at: g?.source?.date, quote: v } }, l)}</span></dd></div>`).join("")}</dl>` : ""}
     ${(pf.tips ?? []).length ? `<ul class="tips">${pf.tips.slice(0, 3).flatMap((t) => bookingLines(t)).map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}
   </section>`;
@@ -4492,7 +4492,7 @@ function reserveMenuItems(options) {
         <span class="dock-menu-badge" data-tel-action>전화 걸기</span>
       </button>`;
     }
-    const icon = opt.platform === "naver" ? ic("search") : opt.platform === "gocamping" ? ic("tent") : ic("booking");
+    const icon = /naver|네이버/i.test(`${opt.platform} ${opt.name}`) ? ic("naver") : opt.platform === "gocamping" ? ic("tent") : ic("booking");
     return `<a href="${esc(opt.url)}" target="_blank" rel="noopener" class="dock-menu-item">
       <span class="dock-menu-icon">${icon}</span>
       <span class="dock-menu-text"><b>${esc(opt.title)}</b></span>
