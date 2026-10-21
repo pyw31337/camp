@@ -59,7 +59,7 @@ for (const [w, h] of [[320, 740], [390, 844], [1366, 900]]) {
     await page.click(".list-tools [data-open-cond]"); await page.waitForTimeout(500);
     if (!(await page.evaluate(() => document.querySelector("#cond-dialog")?.open))) fails.push(`${tag} 목록: ‘조건’ → 조건 시트가 안 열림`);
     await page.keyboard.press("Escape");
-    await page.click('.list-page .cond-pill.m-only[data-fee-band=""]'); await page.waitForTimeout(1200);
+    await page.click('.list-page .cond-pill[data-cond-x="feeBand"]'); await page.waitForTimeout(1200);
     if (/fee=/.test(await page.evaluate(() => location.hash))) fails.push(`${tag} 목록: 요금 알약 × 로 지워지지 않음`);
   } else {
     if (!lst.filters) fails.push(`${tag} 목록: PC 칩 줄이 사라짐`);

@@ -1722,10 +1722,19 @@ function condChips(k = S.cond) {
   if (k.fire) out.push(["fire", "장작 가능"]);
   if (k.park) out.push(["park", "텐트 옆 주차"]);
   if (k.win) out.push(["win", "겨울 운영"]);
+  // 요금·사이트 타입도 알약으로
+  if (S.feeBand) {
+    const feeLabel = { u3: "~3만원", "3to5": "3~5만원", "5to7": "5~7만원", "7to10": "7만원~10만원", "10to20": "10만원~20만원", o20: "20만원+" }[S.feeBand] ?? S.feeBand;
+    out.push(["feeBand", feeLabel]);
+  }
+  if (S.stype) {
+    const stypeLabel = { DECK: "데크", GRASS: "잔디", GRAVEL: "파쇄석", SOIL: "흙" }[S.stype] ?? S.stype;
+    out.push(["stype", stypeLabel]);
+  }
   return out;
 }
 function condBadgeRow() {
-  return condChips().map(([k, label]) => `<button type="button" class="cond-pill" data-cond-x="${esc(k)}">${esc(label)}<span aria-hidden="true">×</span></button>`).join("");
+  return condChips().map(([k, label]) => `<button type="button" class="cond-pill m-only" data-cond-x="${esc(k)}" data-fee-band="${k === "feeBand" ? "" : ""}">${esc(label)}<span aria-hidden="true">×</span></button>`).join("");
 }
 function condSummary() { const ch = condChips(); return ch.length ? (ch.length > 2 ? `${ch[0][1]} · ${ch[1][1]} 외 ${ch.length - 2}` : ch.map((x) => x[1]).join(" · ")) : "조건 추가"; }
 function condToParams(p, k = S.cond) {
