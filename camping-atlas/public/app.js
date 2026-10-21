@@ -1080,7 +1080,7 @@ async function loadSharedSaves() {
     S.saved = list.map((x) => String(x.campground_id)).filter((id) => S.byId.has(id));
     store.set("mc-saved", S.saved);
     syncCompare();
-    $$(`[data-save]`).forEach((x) => { const on = isSaved(x.dataset.save); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); });
+    $$(`[data-save]`).forEach((x) => { const on = isSaved(x.dataset.save); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); x.setAttribute("aria-label", on ? "찜 해제" : "찜하기"); x.querySelector("use")?.setAttribute("href", `#i-${on ? "heart" : "heart-o"}`); });
   } catch {}
 }
 async function clientMeta() {

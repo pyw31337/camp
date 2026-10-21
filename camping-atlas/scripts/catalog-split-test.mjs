@@ -12,7 +12,7 @@ async function run(useLite, ids) {
   let liteHits = 0, shardHits = 0;
   await p.route(/campgrounds\.lite\.json/, (r) => (useLite ? (liteHits++, r.continue()) : r.fulfill({ status: 404, body: "" })));
   await p.route(/\/catx\//, (r) => { shardHits++; return r.continue(); });
-  await p.route(/(\/media\/|gocamping\.or\.kr|kakao|daumcdn|tile|open-meteo)/, (r) => r.abort());
+  await p.route(/(\/media\/|supabase|gocamping\.or\.kr|kakao|daumcdn|tile|open-meteo)/, (r) => r.abort());
   await p.goto(url, { waitUntil: "domcontentloaded" }); await p.waitForSelector(".card");
   const out = {};
   if (!ids) ids = await p.evaluate(() => [...new Set([...document.querySelectorAll(".card[data-id]")].map((c) => c.dataset.id))].slice(0, 3));
