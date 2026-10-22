@@ -566,7 +566,6 @@
 {"cid":"2166","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"2167","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"2171","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
-{"cid":"2171","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/qhfka4785/222908386421","at":"2022-10-23","quote":"아참, 철원여울애꽃물들인 캠핑장은 애견동반도 가능합니다.","text":"동반 가능","n":1}
 {"cid":"2177","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"2179","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"https://www.yjcharmsoot.co.kr/sub/index.php?code=reservation_info","at":"2026-10-20T00:53:35.451Z","quote":"소형 반려견 (5kg 이하) 은 동반 가능하나, 펜션 및 황토방 등 실내 출입은 불가합니다.","text":"동반 가능 (5kg 이하)"}
 {"cid":"2179","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
@@ -3804,7 +3803,7 @@
 {"cid":"102369","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"https://camping.kimgoon.kr/about","at":"2026-10-20T00:48:02.964Z","quote":"반려견·반려묘 동반 가능 캠핑장 모음","text":"동반 가능"}
 {"cid":"102371","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"https://camping.kimgoon.kr/about","at":"2026-10-20T00:47:45.252Z","quote":"반려견·반려묘 동반 가능 캠핑장 모음","text":"동반 가능"}
 {"cid":"102377","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
-{"cid":"pdu-lagrills-yongin","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-10-21","text":"가능(소형견)"}
+{"cid":"pdu-lagrills-yongin","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-10-22","text":"가능(소형견)"}
 {"cid":"pilot-002-sureui","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032"}
 {"cid":"pilot-003-duruwell","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030095"}
 {"cid":"pilot-004-haengun","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능","url":"https://camfit.co.kr/camp/haengun"}

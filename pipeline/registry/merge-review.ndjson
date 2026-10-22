@@ -26094,3 +26094,8 @@
 {"at":"2026-10-21T22:10:34.116Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"park-43113-00080-15jti","field":"lat","reason":"좌표가 시·도(충청북도) 범위 밖 — 오타(QA R5)"}
 {"at":"2026-10-21T22:10:34.116Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"park-43113-00080-15jti","field":"lng","reason":"좌표 오타(QA R5)"}
 {"at":"2026-10-21T22:10:35.170Z","by":"publish-sanity","action":"removed","file":"camps/100714.json","id":"100714","field":"nearby","reason":"틀린 좌표로 구한 주변 시설(QA R5)"}
+{"at":"2026-10-22T00:36:33.156Z","by":"build-spec-sheet","action":"removed","file":"2171.json","id":"2171","field":"spec.fields.PET_POLICY","reason":"관광공사·플랫폼 문장과 공공표준 주차 문구를 운영자 정보로 잘못 쓴 값 정정(QA R2)"}
+{"at":"2026-10-22T00:36:33.156Z","by":"build-spec-sheet","action":"removed","file":"2171.json","id":"2171","field":"spec.fields.SITE_SIZE","reason":"관광공사·플랫폼 문장과 공공표준 주차 문구를 운영자 정보로 잘못 쓴 값 정정(QA R2)"}
+{"at":"2026-10-22T00:37:07.266Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"park-43113-00080-15jti","field":"lat","reason":"좌표가 시·도(충청북도) 범위 밖 — 오타(QA R5)"}
+{"at":"2026-10-22T00:37:07.266Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"park-43113-00080-15jti","field":"lng","reason":"좌표 오타(QA R5)"}
+{"at":"2026-10-22T00:37:08.325Z","by":"publish-sanity","action":"removed","file":"camps/100714.json","id":"100714","field":"nearby","reason":"틀린 좌표로 구한 주변 시설(QA R5)"}
