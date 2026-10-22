@@ -16,7 +16,13 @@ export function decodeDisplayEntities(value) {
       .replace(/&(?:amp;)?#0*183;?/gi, "·")
       .replace(/&(?:amp;)?#x0*b7;?/gi, "·")
       .replace(/&(?:amp;)?#0*8226;?/gi, "·")
-      .replace(/&(?:amp;)?#x0*2022;?/gi, "·");
+      .replace(/&(?:amp;)?#x0*2022;?/gi, "·")
+      // 표시용 HTML 엔티티는 텍스트 레이어에서만 복원한다.
+      .replace(/&quot;?/gi, '"')
+      .replace(/&apos;?/gi, "'")
+      .replace(/&lt;?/gi, "<")
+      .replace(/&gt;?/gi, ">")
+      .replace(/&amp;?/gi, "&");
     if (next === s) break;
     s = next;
   }
