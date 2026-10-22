@@ -523,6 +523,12 @@ jobs:
         # data/facts(원자 사실)가 db/011 제약(확정 등급은 원천 URL 필수 등)을 지키는지 실데이터로 확인한다.
         if: always()
         run: |
+          # land-on-main은 긴 수집 중 rebase·PR 검증을 수행한다. 러너의 npm 링크가
+          # 그 과정 뒤 사라진 경우에도, 마지막 DB 검증을 모듈 누락으로 끝내지 않는다.
+          if ! node -e 'require.resolve("pg")' >/dev/null 2>&1; then
+            echo "::notice title=Pipeline dependencies restored::pg 모듈이 없어 검증 전에 npm ci를 다시 실행합니다."
+            npm ci
+          fi
           if [ ! -f ../data/facts/manifest.json ]; then echo "::notice::사실 저장소가 없어 건너뜁니다."; exit 0; fi
           npm run db:migrate
           node scripts/import-facts-postgres.mjs

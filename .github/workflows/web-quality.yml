@@ -3,6 +3,11 @@ name: Web quality
 on:
   # 데이터 봇 PR(GITHUB_TOKEN)은 pull_request 이벤트를 만들지 않으므로 land-on-main.sh가 이걸로 검사를 돌린다.
   workflow_dispatch:
+    inputs:
+      baseline_sha:
+        description: "Data-bot field guard baseline commit (set by land-on-main)"
+        required: false
+        type: string
   # 필수 검사(Lint and build, Rail swipe)라서 모든 PR에서 돈다. 경로 필터를 걸면 데이터만 바꾼 PR이 '대기 중'으로 막힌다.
   pull_request:
   push:
@@ -45,6 +50,11 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             BASE="${{ github.event.pull_request.base.sha }}"; git fetch -q --depth=1 origin "$BASE"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ inputs.baseline_sha }}" ]; then
+            # Data bot은 방금 field-guard --heal을 한 main 기준을 함께 넘긴다.
+            # 그 뒤 다른 자동 수집 PR이 main에 합쳐져도, 실행 중인 봇 결과를 '새 main을
+            # 지웠다'고 오판하지 않는다. 실제 병합 전에는 land-on-main이 다시 rebase한다.
+            BASE="${{ inputs.baseline_sha }}"; git fetch -q --depth=1 origin "$BASE"
           else
             git fetch -q --deepen=300 origin "${{ github.ref_name }}" || true
             git fetch -q --depth=300 origin main

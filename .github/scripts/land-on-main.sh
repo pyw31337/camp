@@ -22,8 +22,12 @@ if ! git diff --quiet || ! git diff --cached --quiet; then
   git stash push -q -m "land-leftovers" && trap 'git stash pop -q || echo "::warning::land-leftovers stash 복원 실패"' EXIT
 fi
 pushed=""
+baseline_sha=""
 for i in 1 2 3 4 5; do
   git fetch -q origin main
+  # field-guard 복원과 뒤따르는 workflow_dispatch 검증은 같은 main 스냅샷을 기준으로 한다.
+  # 수집 중 다른 봇이 main을 전진시켜도 이미 검증한 값을 거짓 손실로 판단하지 않는다.
+  baseline_sha="$(git rev-parse origin/main)"
   git fetch -q origin "+refs/heads/${BR}:refs/remotes/origin/${BR}" 2>/dev/null || true
   # 새 결과(이 실행의 커밋)를 최신 main 위로 옮긴다. 충돌은 새 결과 우선.
   git rebase -q -X theirs origin/main
@@ -53,7 +57,7 @@ if [ -z "$PR" ]; then
   PR="$(gh pr list -R "$REPO" --head "$BR" --base main --state open --json number -q '.[0].number')"
 fi
 echo "PR #${PR} ← ${BR} @ ${SHA:0:9}"
-gh workflow run web-quality.yml -R "$REPO" --ref "$BR"
+gh workflow run web-quality.yml -R "$REPO" --ref "$BR" -f baseline_sha="$baseline_sha"
 deadline=$(( $(date +%s) + ${LAND_TIMEOUT_SEC:-1800} ))
 poll="${LAND_POLL_SEC:-15}"
 run_id=""
