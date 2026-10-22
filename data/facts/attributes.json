@@ -434,7 +434,7 @@
     "campgrounds": 2745,
     "by_grade": {
      "CONFIRMED": 2747,
-     "MENTION": 667,
+     "MENTION": 666,
      "OPERATOR": 380
     }
    }
@@ -756,11 +756,11 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 1188,
+    "campgrounds": 1187,
     "by_grade": {
      "CONFIRMED": 1717,
      "OPERATOR": 541,
-     "MENTION": 171,
+     "MENTION": 170,
      "VERIFIED": 39
     }
    }
@@ -2569,5 +2569,5 @@
    }
   }
  ],
- "generated_at": "2026-10-21T22:10:44.815Z"
+ "generated_at": "2026-10-22T00:37:17.675Z"
 }
