@@ -1477,7 +1477,7 @@ function saveCommit(id) {
 }
 function syncCompare() {
   // 역할 분리: ‘비교’ 숫자 = 지금 비교에 고른 곳 수(없으면 숨김), ‘찜’ 숫자 = 찜한 곳 수
-  const picked = S.pick.filter((id) => S.saved.includes(id)).length;
+  const picked = 0;
   $$("[data-compare-count]").forEach((x) => { x.textContent = picked; x.hidden = !picked; });
   $$("[data-saved-count]").forEach((x) => { x.textContent = S.saved.length; x.hidden = !S.saved.length; });
 }
@@ -5286,18 +5286,17 @@ function openLightboxUrls(urls, start = 0, caption = "사진") {
 let cmpMode = "table"; // "table" | "cards"
 
 async function compareView() {
-  await ensureFull(S.pick.length ? S.pick : S.saved.slice(0, 5));
+  const selected = S.pick.filter((id) => S.saved.includes(id));
+  await ensureFull(selected.length ? selected : S.saved.slice(0, 5));
   const saved = S.saved.map((id) => S.byId.get(id)).filter(Boolean);
-  if (!saved.length) {
-    return `<section class="cmp-page"><div class="sec-head big"><h1>찜한 캠핑장 <em>비교</em></h1></div>
-      <p class="cmp-sub">찜한 캠핑장 가운데 2~5곳을 골라 조건을 나란히 비교하는 곳이에요.</p>
-      <div class="empty" data-cmp-empty>${ic("heart-o")}<b>아직 찜한 곳이 없어요. 캠핑장 이름 옆 ${ic("heart-o", "inline")}를 눌러 찜해 보세요</b><a class="btn ghost" href="${APP_BASE}list">캠핑장 찾기</a><button class="btn primary" type="button" data-sample>예시로 보기</button></div></section>`;
-  }
-  S.pick = S.pick.filter((id) => S.saved.includes(id));
-  if (!S.pick.length) S.pick = saved.slice(0, Math.min(saved.length, 5)).map((c) => String(c.id));
-  if (S.pick.length > 5) S.pick = S.pick.slice(0, 5);
-  const camps = S.pick.map((id) => S.byId.get(id)).filter(Boolean);
-  const picker = `<div class="rail picks">${saved.map((c) => {
+  const demo = !saved.length;
+  const demoCamps = demo
+    ? S.camps.filter((c) => photosOf(c).length && facts(c).power && facts(c).fire).sort((a, b) => rich(b) - rich(a)).slice(0, 2)
+    : [];
+  if (demo) await ensureFull(demoCamps.map((c) => String(c.id)));
+  if (!demo) S.pick = selected.length ? selected.slice(0, 5) : saved.slice(0, Math.min(saved.length, 5)).map((c) => String(c.id));
+  const camps = demo ? demoCamps : S.pick.map((id) => S.byId.get(id)).filter(Boolean);
+  const picker = demo ? `<div class="cmp-demo-note">찜한 캠핑장이 없어 대표 정보가 있는 2곳을 예시로 보여드려요.</div>` : `<div class="rail picks">${saved.map((c) => {
     const on = S.pick.includes(String(c.id));
     return `<span class="pick-wrap${on ? " on" : ""}"><button type="button" class="pick${on ? " on" : ""}" data-pick="${esc(c.id)}" aria-pressed="${on}" aria-label="${esc(nameOf(c).name)} ${on ? "비교에서 빼기" : "비교에 넣기"}">${campThumb(c, { sizes: "36px" })}<span>${esc(nameOf(c).name)}</span>${ic(on ? "check" : "plus")}</button>${heartBtn(c)}</span>`;
   }).join("")}</div>`;
@@ -5370,9 +5369,9 @@ async function compareView() {
         <p class="sec-sub">찜한 목록에서 2~5곳을 선택해 나란히 스펙을 비교할 수 있어요.</p>
       </div>
     </div>
-    <p class="cmp-count" hidden data-cmp-count>찜 ${saved.length}곳 중 ${camps.length}곳 비교 중</p>
+    <p class="cmp-count"${demo ? "" : " hidden"} data-cmp-count>${demo ? "예시 비교 2곳" : `찜 ${saved.length}곳 중 ${camps.length}곳 비교 중`}</p>
     ${picker}
-    ${noticeLess2}
+    ${demo ? "" : noticeLess2}
 
     <div class="cmp-view-switcher" role="tablist" aria-label="비교 보기 방식">
       <button type="button" class="cmp-tab${cmpMode === "table" ? " active" : ""}" data-cmp-mode="table" role="tab" aria-selected="${cmpMode === "table"}">표로 비교</button>
