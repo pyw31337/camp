@@ -3461,3 +3461,12 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 
 /* ‘불가·금지’ 값은 어디서나 빨간 글씨(소유자 2026-10-22) */
 .no-txt, .plist b.is-no { color: var(--no, #d32f2f); }
+
+/* 상세 상단 줄: 뒤로는 왼쪽 끝, 찜·공유는 오른쪽 끝(소유자 2026-10-22) */
+.d-bar-acts { display: inline-flex; align-items: center; gap: 8px; margin-left: auto; }
+.d-bar .d-bar-acts .d-share { margin-left: 0; }
+/* 원문·근거 팝업 오른쪽 위 닫기(X). 같은 카드를 다시 눌러도 닫힌다(소유자 2026-10-22) */
+.pop { padding-right: 40px; }
+.pop .pop-x { position: absolute; top: 8px; right: 8px; display: inline-grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 999px; background: var(--soft); color: var(--ink-2); cursor: pointer; }
+.pop .pop-x .ic { width: 14px; height: 14px; }
+.pop .pop-x:hover { background: var(--line); color: var(--ink); }

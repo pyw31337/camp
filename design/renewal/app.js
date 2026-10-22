@@ -1272,11 +1272,15 @@ document.addEventListener("click", (e) => {
 });
 document.addEventListener("click", (e) => {
   const b = e.target.closest("[data-tip]"), pop = $("#pop");
+  if (e.target.closest("[data-pop-close]")) { e.preventDefault(); pop.hidden = true; pop._src = null; return; }
   if (!b) { if (!e.target.closest("#pop")) pop.hidden = true; return; }
   const a = e.target.closest("a, button:not([data-tip])");
   if (a && a !== b && b.contains(a)) return; // 카드 안의 링크·다른 버튼은 그대로 동작
   e.preventDefault(); e.stopPropagation();
-  pop.innerHTML = TIPS.get(b.dataset.tip) ?? "";
+  // 같은 카드·버튼을 다시 누르면 닫힌다(토글, 소유자 2026-10-22)
+  if (!pop.hidden && pop._src === b) { pop.hidden = true; pop._src = null; return; }
+  pop._src = b;
+  pop.innerHTML = `<button type="button" class="pop-x" data-pop-close aria-label="닫기">${ic("close")}</button>${TIPS.get(b.dataset.tip) ?? ""}`;
   pop.hidden = false;
   const r = b.getBoundingClientRect(), pw = Math.min(300, innerWidth - 24);
   pop.style.width = `${pw}px`;
@@ -2884,7 +2888,7 @@ async function detailView(id) {
   const o = openingOf(c);
   const us = usage(c, d);
   return `<article class="detail" data-id="${esc(c.id)}">
-    <div class="d-bar"><a class="icon-btn" href="${APP_BASE}" data-back aria-label="뒤로">${ic("left")}</a>${heartBtn(c, { label: true })}<button class="d-share" type="button" data-share-place="${esc(c.id)}" aria-label="링크 공유">${ic("share")}<span>공유</span></button></div>
+    <div class="d-bar"><a class="icon-btn" href="${APP_BASE}" data-back aria-label="뒤로">${ic("left")}</a><span class="d-bar-acts">${heartBtn(c, { label: true })}<button class="d-share" type="button" data-share-place="${esc(c.id)}" aria-label="링크 공유">${ic("share")}<span>공유</span></button></span></div>
     <header class="d-head">
       <div class="d-head-main">
       <p class="d-eyebrow">${c.sido && c.sigungu ? `<a class="d-region-link" href="${regionHref(sidoShort(c.sido), c.sigungu)}">${esc(region(c))}</a>` : esc(region(c))}${c.op && OP[c.op] ? ` · ${OP[c.op]}` : tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
