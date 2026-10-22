@@ -194,9 +194,9 @@
    "pref": "전기가 꼭 필요하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 2343,
+    "campgrounds": 2303,
     "by_grade": {
-     "CONFIRMED": 2322,
+     "CONFIRMED": 2282,
      "VERIFIED": 21
     }
    }
@@ -274,9 +274,9 @@
    "type": "bool",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 2630,
+    "campgrounds": 2728,
     "by_grade": {
-     "CONFIRMED": 2609,
+     "CONFIRMED": 2707,
      "VERIFIED": 21
     }
    }
@@ -288,9 +288,9 @@
    "type": "bool",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 2630,
+    "campgrounds": 2728,
     "by_grade": {
-     "CONFIRMED": 2609,
+     "CONFIRMED": 2707,
      "VERIFIED": 21
     }
    }
@@ -567,9 +567,9 @@
    "pref": "일찍 들어가고 싶나요?",
    "filter": "max",
    "coverage": {
-    "campgrounds": 1691,
+    "campgrounds": 1796,
     "by_grade": {
-     "REFERENCE": 347,
+     "REFERENCE": 453,
      "MENTION": 1531,
      "CONFIRMED": 4,
      "OPERATOR": 628
@@ -584,9 +584,9 @@
    "pref": "늦게 나오고 싶나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 1644,
+    "campgrounds": 1749,
     "by_grade": {
-     "REFERENCE": 340,
+     "REFERENCE": 446,
      "MENTION": 1492,
      "CONFIRMED": 2,
      "OPERATOR": 595
@@ -629,9 +629,9 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 1027,
+    "campgrounds": 1132,
     "by_grade": {
-     "REFERENCE": 359,
+     "REFERENCE": 465,
      "MENTION": 872,
      "CONFIRMED": 6,
      "OPERATOR": 123
@@ -660,9 +660,9 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 713,
+    "campgrounds": 819,
     "by_grade": {
-     "REFERENCE": 362,
+     "REFERENCE": 468,
      "OPERATOR": 693,
      "MENTION": 19
     }
@@ -706,9 +706,9 @@
    "pref": "온수 샤워가 필요하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 2148,
+    "campgrounds": 2109,
     "by_grade": {
-     "CONFIRMED": 2127,
+     "CONFIRMED": 2088,
      "OPERATOR": 128,
      "VERIFIED": 21
     }
@@ -722,9 +722,9 @@
    "pref": "개별 화장실이 있는 곳을 원하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 330,
+    "campgrounds": 329,
     "by_grade": {
-     "CONFIRMED": 321,
+     "CONFIRMED": 320,
      "OPERATOR": 47,
      "VERIFIED": 2
     }
@@ -811,9 +811,9 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 1690,
+    "campgrounds": 1687,
     "by_grade": {
-     "CONFIRMED": 2900,
+     "CONFIRMED": 2897,
      "OPERATOR": 256,
      "VERIFIED": 4
     }
@@ -828,9 +828,9 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 1267,
+    "campgrounds": 1266,
     "by_grade": {
-     "CONFIRMED": 2127,
+     "CONFIRMED": 2126,
      "OPERATOR": 72,
      "VERIFIED": 6
     }
@@ -2575,5 +2575,5 @@
    }
   }
  ],
- "generated_at": "2026-10-22T15:09:13.483Z"
+ "generated_at": "2026-10-22T15:38:16.161Z"
 }
