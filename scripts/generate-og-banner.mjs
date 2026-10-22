@@ -68,10 +68,7 @@ const overlaySvg = Buffer.from(`
 
     <!-- 3. 서브 카피 -->
     <text x="0" y="278" font-family="'Pretendard', sans-serif" font-size="21" font-weight="600" fill="rgba(255,255,255,0.88)" letter-spacing="-0.02em">
-      전국 3,500+ 캠핑장 실시간 오픈 일정과
-    </text>
-    <text x="0" y="312" font-family="'Pretendard', sans-serif" font-size="21" font-weight="600" fill="rgba(255,255,255,0.88)" letter-spacing="-0.02em">
-      검증된 현장 스펙 · 솔직 후기 한눈에 비교
+      공식 스펙과 후기 신호를 한눈에 비교하는 캠핑장 탐색 서비스
     </text>
 
     <!-- 4. 특화 피처 태그 칩들 -->
