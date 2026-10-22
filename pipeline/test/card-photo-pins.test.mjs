@@ -24,3 +24,8 @@ test("제외(reject)한 사진은 다시 고르지 않는다", () => {
 test("화성에코팜(102229) 대표 사진이 로컬푸드 매장 사진이 아니다", () => {
   assert.notEqual(fb["102229"].t, "https://search3.kakaocdn.net/argon/130x130_85_c/Apxspld2pru");
 });
+test("궁평해윰(101800) 대표 사진은 드라마 장면이 아니라 현장 표지 사진이다", () => {
+  assert.equal(fb["101800"].t, "https://search1.kakaocdn.net/argon/130x130_85_c/8iZcUygdZjd");
+  assert.notEqual(fb["101800"].t, "https://search4.kakaocdn.net/argon/130x130_85_c/DOBaQpTaO0V");
+  assert.equal(fb["101800"].u, "https://laball-e.tistory.com/21");
+});

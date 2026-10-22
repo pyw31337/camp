@@ -61,7 +61,7 @@ test("응답 정리: 단기·중기·미세먼지·물때·오류 판별", () =>
   assert.equal(apiProblem(200, '{"response":{"header":{"resultCode":"03","resultMsg":"NO_DATA"}}}'), null);
 });
 
-test("주간 날씨 카드: 단기만 있을 때·중기까지 있을 때 문구와 주말 표시", async () => {
+test("주간 날씨 카드: 단기·중기 범위와 주말 정보를 카드로만 표시", async () => {
   const base = { generated_at: "2026-10-21T20:41:00Z", today: "2026-10-22", camps: { 9: ["93,131", "11D20000", "11D20501", "d:강원", 0] },
     short: { grids: { "93,131": { "2026-10-22": ["맑음", null, 8, 19, 10, 2], "2026-10-23": ["흐림", "비", 9, 15, 70, 6], "2026-10-24": ["구름많음", null, 7, 17, 20, 3], "2026-10-25": ["맑음", null, 5, 18, 0, 2] } } },
     air: { "d:강원": { pm10: 20, pm25: 9, grade: 1, stations: 39 } } };
@@ -72,7 +72,7 @@ test("주간 날씨 카드: 단기만 있을 때·중기까지 있을 때 문구
   const el = { hidden: true, innerHTML: "" };
   await mount(el, { id: "9", lat: 37.75, lng: 128.9 });
   assert.equal(el.hidden, false);
-  assert.match(el.innerHTML, /오늘부터 4일 예보예요/);
+  assert.doesNotMatch(el.innerHTML, /오늘부터 \d+일 예보예요/);
   assert.match(el.innerHTML, /이번 주말/);
   assert.match(el.innerHTML, /일출 \d\d:\d\d/);
   assert.match(el.innerHTML, /강원 측정소 39곳 중앙값/);

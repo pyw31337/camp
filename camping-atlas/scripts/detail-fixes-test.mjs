@@ -66,9 +66,11 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [320, 800, "320"]]) {
   const low = withImg.filter((u) => /130x130_85_c|type=w(?:\d{1,2}|[1-5]\d\d)(?:\D|$)/.test(u));
   if (low.length) fails.push(`${tag}: 저화질 썸네일 ${low.length}장 ${low[0]}`);
   await rp.close();
-  // 4) 업체 정보: 지도·길찾기·로드뷰 아이콘은 주소와 같은 줄(세로로 겹침), 값 칸 오른쪽 끝.
-  const ad = await page.$eval("#sec-info .address-value", (v) => { const a = v.querySelector(".addr-actions").getBoundingClientRect(), t = v.querySelector(".address-text").getBoundingClientRect(), r = v.getBoundingClientRect(); return { right: Math.round(r.right - a.right), overlap: a.top < t.bottom && a.bottom > t.top, lines: Math.round(t.height / parseFloat(getComputedStyle(v.querySelector('.address-text')).lineHeight || '20')) }; }).catch(() => null);
+  // 4) 업체 정보: 넓은 화면은 주소 오른쪽에 행동 아이콘을 붙이고, 320px는 주소 한 줄 아래에 분리한다.
+  //    주소 자체의 내부 가로 스크롤은 문서 가로 넘침과 다르며, 아이콘을 주소 끝에 억지로 붙이지 않는다.
+  const ad = await page.$eval("#sec-info .address-value", (v) => { const a = v.querySelector(".addr-actions").getBoundingClientRect(), t = v.querySelector(".address-text").getBoundingClientRect(), r = v.getBoundingClientRect(); return { right: Math.round(r.right - a.right), overlap: a.top < t.bottom && a.bottom > t.top, below: a.top >= t.bottom, lines: Math.round(t.height / parseFloat(getComputedStyle(v.querySelector('.address-text')).lineHeight || '20')) }; }).catch(() => null);
   if (!ad) fails.push(`${tag}: 주소 줄 없음`);
+  else if (w <= 320) { if (!ad.below) fails.push(`${tag}: 주소 행동 아이콘이 주소 아래 줄로 분리되지 않음`); if (ad.lines > 2) fails.push(`${tag}: 주소가 ${ad.lines}줄로 잘게 끊김`); }
   else { if (ad.right > 2) fails.push(`${tag}: 주소 아이콘이 오른쪽 끝이 아님(${ad.right}px)`); if (!ad.overlap) fails.push(`${tag}: 주소 아이콘이 다른 줄로 내려감`); if (ad.lines > 4) fails.push(`${tag}: 주소가 ${ad.lines}줄로 잘게 끊김`); }
   // 5) 예약 방법: 긴 안내를 첫 문장만 잘라 보이지 않고("12.", "야영장은 추첨제.") 항목마다 줄을 나눈다.
   const bp = await browser.newPage({ viewport: { width: w, height: h } });

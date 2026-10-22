@@ -1739,6 +1739,26 @@ a.near { color: inherit; text-decoration: none; }
   .address-value .addr-actions .ic { width: 15px; height: 15px; }
 }
 
+/* 주소 자체는 한 줄로 보되, 문서 폭이 아니라 주소 줄 안에서만 스크롤한다.
+   지도·길찾기·로드뷰는 주소 아래의 별도 행동 줄로 내려 모바일에서 읽을 자리를 지킨다. */
+@media (max-width: 759px) {
+  .use .use-val:has(> .address-value) { min-width: 0; }
+  .address-value { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 8px; }
+  .address-value .address-text {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .address-value .address-text::-webkit-scrollbar { display: none; }
+  .address-value .addr-actions { justify-self: start; margin: 0; gap: 4px; }
+}
+
 .sheet-close { width: 30px; height: 30px; box-shadow: none; background: var(--soft); }
 .sheet-close svg { width: 16px; height: 16px; }
 .lb-nav { position: fixed; top: 50%; z-index: 3; width: 44px; height: 44px; transform: translateY(-50%); background: rgba(255,255,255,.92); color: var(--ink); }
@@ -2616,7 +2636,7 @@ dialog.rv-modal::backdrop { background: rgba(16, 20, 20, .6); backdrop-filter: b
 .hr-list li span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 .hr-more summary { margin-top: 6px; cursor: pointer; font-size: .8rem; font-weight: 800; color: var(--ink-3); }
 .hr-more .hr-list { margin-top: 6px; }
-.hr-notices { margin-top: 12px; }
+.hr-notices { margin-top: 12px; padding: 14px; border-radius: var(--r-s); background: var(--soft); }
 .hr-notices h3 { display: flex; align-items: center; gap: 6px; margin: 0 0 8px; font-size: .9rem; font-weight: 850; }
 .hr-notices h3 .ic { width: round(1.1em, 1px); height: round(1.1em, 1px); color: var(--accent); }
 .hr-notices ul { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
@@ -3055,7 +3075,7 @@ details[open] > *:not(summary) {
   scrollbar-width: auto;
 }
 .media-hub .mh-tabs { gap: 16px; }
-.media-hub .mh-exts { gap: 8px; padding: 5px 0; }
+.media-hub .mh-exts { align-items: center; gap: 8px; padding: 0; }
 
 
 @media (max-width: 759px) {
@@ -3412,9 +3432,22 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 .lightbox .lb-x { position: fixed; top: calc(12px + env(safe-area-inset-top)); right: calc(12px + env(safe-area-inset-right)); z-index: 12; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; background: rgba(8,10,10,.72); color: #fff; box-shadow: 0 4px 18px rgba(0,0,0,.32); }
 .lightbox .lb-x .ic { width: 22px; height: 22px; }
 
-/* 탭은 클릭 전용, 가로 스와이프는 영상 카드에만 남긴다. */
-.media-hub .mh-tabs-bar { display: block; min-width: 0; max-width: 100%; overflow: hidden; }
-.media-hub .mh-tabs { display: flex; width: 100%; min-width: 0; overflow: visible; }
-.media-hub .mh-tabs [data-mh-tab] { flex: 1 1 0; justify-content: center; min-width: 0; }
-.media-hub .mh-exts { display: flex; max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; }
-.media-hub .mh-exts::-webkit-scrollbar { display: none; }
+/* 플랫폼은 한 줄의 레일이다. 전환은 탭을 눌러서만 하고, 영상 카드 스와이프와 섞지 않는다. */
+.media-hub .mh-tabs-bar {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.media-hub .mh-tabs-bar::-webkit-scrollbar { display: none; }
+.media-hub .mh-tabs,
+.media-hub .mh-exts { display: flex; flex: 0 0 auto; width: max-content; min-width: max-content; overflow: visible; margin: 0; }
+.media-hub .mh-tabs { gap: 16px; }
+.media-hub .mh-tabs [data-mh-tab] { flex: 0 0 auto; justify-content: flex-start; min-width: auto; }
+.media-hub .mh-exts { gap: 8px; padding: 5px 0; }
+.media-hub .mh-link { white-space: nowrap; }
