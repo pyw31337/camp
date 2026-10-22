@@ -632,12 +632,14 @@ function wordHit(c, w) {
   const hay = c._hayN ??= sq(`${c.name} ${alias} ${c.addr ?? ""} ${c.sido ?? ""} ${c.sigungu ?? ""} ${(c.env ?? []).join(" ")} ${(c.types ?? []).join(" ")} ${c.pf?.s ?? ""} ${(c.st ?? []).map(([k, , , sub]) => `${ST[k]?.label ?? ""} ${sub ?? ""}`).join(" ")} ${(c.amenities ?? []).join(" ")} ${(c.rental ?? []).join(" ")} ${c.line ?? ""}`);
   return hay.includes(w);
 }
-// 정보량 점수: 목록·추천의 기본 순서(소유자 2026-10-20 — 전기 W처럼 상세 정보가 있는 곳을 위·앞으로).
+// 정보량 점수: 목록·추천의 기본 순서(소유자 2026-10-20 — 전기 W처럼 상세 정보가 있는 곳을 위·앞으로). c.iq가 없을 때(옛 카탈로그)의 화면 계산.
 // 전기 W 12 · 확인된 현장 조건(주차·불멍·규격·바닥·텐트·위생·온수·반려동물) 각 3 · 프로필 확인 항목(18개 중) 각 2 ·
 // 공식 사진 장당 2(최대 5장)·후기 사진 2 · 1박 요금 4 · 사이트 타입 2 · 이용 규칙 2 · 온라인 예약 3 · 후기 4건당 1(최대 5).
 const RICH_FACTS = ["park", "fire", "size", "ground", "shelter", "sanitary", "hot", "pet"];
 function rich(c) {
   if (c._rich != null) return c._rich;
+  // 파이프라인 정보량 점수(c.iq, pipeline/lib/info-score.mjs — 신뢰도 반영·표준 조례 기본값 제외, 모든 에이전트 공통)가 있으면 그것을 쓴다(2026-10-23).
+  if (Number.isFinite(c.iq)) return (c._rich = c.iq);
   const f = facts(c);
   let s = 0;
   if (f.power?.w && filled(f.power)) s += 12; else if (filled(f.power)) s += 1;
@@ -3048,7 +3050,7 @@ async function detailView(id) {
 }
 
 // ── 벤치마크(t39 #37): 주변 비슷한 캠핑장 3곳 ─────────────────
-// 같은 숙박 형태(오토·글램핑·카라반…)를 하나라도 가진 곳 중 40km 안에서 가까운 순. 사진 있는 곳만, 공원 원장 제외.
+// 같은 숙박 형태(오토·글램핑·카라반…)를 하나라도 가진 곳 중 40km 안 가까운 10곳에서 정보량 점수 순. 사진 있는 곳만, 공원 원장 제외.
 // 추천(주변 캠핑장)은 업장 정보가 어느 정도 있는 곳만(소유자 2026-10-22: 정보도 거의 없고 사진은 남의 음식 사진인 곳이 추천됨).
 // 전화·홈페이지·소개·요금·사이트 종류·편의시설·규격·후기 중 2가지 이상. 검색·지도 목록에서는 빼지 않는다.
 const infoRich = (x) => (x._ir ??= [x.tel, x.homepage, x.line, x.fee, x.st?.length, x.amenities?.length, x.sizes?.length, x.rv?.n].filter(Boolean).length >= 2);
@@ -3060,6 +3062,9 @@ function similarNearby(c, n = 3) {
     .map((x) => ({ x, km: km2(c, x), share: mine.size ? stayKinds(x).filter((k) => mine.has(k)).length : 1 }))
     .filter((r) => r.km <= 40 && r.share > 0)
     .sort((a, b) => a.km - b.km)
+    .slice(0, Math.max(n, 10))
+    // 가까운 10곳 안에서는 정보량 점수가 높은 곳을 먼저(소유자 2026-10-23: 정보가 많은 업체를 배열 맨 앞에)
+    .sort((a, b) => rich(b.x) - rich(a.x) || a.km - b.km)
     .slice(0, n);
 }
 function similarHtml(c) {

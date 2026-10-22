@@ -14,3 +14,8 @@
 - 작업 전 `node pipeline/scripts/agent-board.mjs list`로 다른 에이전트의 선점·질문을 확인하고, 바꿀 파일을 `claim`한다.
 - 값이 엇갈리면 `data/quality/review-queue.json` → 원문 대조 → `quality-decide.mjs`로 판정한다(원문 URL 필수).
 - 매일 `data/quality/REPORT.md`가 신뢰도·충돌·회귀를 알려 준다.
+
+**필수: 정보량 점수 정렬** — [`AGENTS.md`](AGENTS.md) 📢 2026-10-23
+
+- 목록·추천의 기본 순서는 카탈로그 `c.iq`(0~100, `pipeline/lib/info-score.mjs`) 높은 순이다. 자체 점수를 만들지 않는다.
+- 다음 수집 우선순위는 `data/quality/info-score.json`의 `next_priorities`를 본다.

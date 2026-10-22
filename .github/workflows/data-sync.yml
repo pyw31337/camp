@@ -479,6 +479,8 @@ jobs:
           node pipeline/scripts/build-fact-store.mjs
           # 데이터 품질 장부(docs/DATA_QUALITY_PROCESS.md): 신뢰도·확증·충돌 대기열·어제 대비 회귀를 data/quality에 남긴다(회귀는 경고).
           node pipeline/scripts/quality-ledger.mjs
+          # 업장 정보량 점수(lib/info-score.mjs, 0~100) → 카탈로그 c.iq. 목록·추천의 기본 순서(정보가 많은 업장 먼저).
+          node pipeline/scripts/apply-info-score.mjs
           # PR은 생성만 검사한다. main은 catalog·explorer를 원자적으로 갱신한다.
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             echo "PR에서는 공개 생성물을 커밋하지 않습니다."; exit 0

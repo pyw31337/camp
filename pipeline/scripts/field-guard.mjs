@@ -31,7 +31,7 @@ const VOLATILE = [
   /(^|\.)(dl|img_dup|updated_at|generated_at|fetched_at|checked_at|social_checked_at|web_checked_at|sanity_dropped)$/,
 ];
 // 원천에서 매번 다시 계산하는 읽기 모델 — 규칙이 바뀌면 정당하게 줄 수 있어 경고만(원천 값은 엄격 검사가 지킨다).
-const DERIVED = /^(pf|rv|profile|nl|st|line|om|sn|pt|th|soc|nr|ti|win|heat|themes|env|kinds|sizes|floors|seasons|days|fire|toilets|sinks|showers|rental|tq|of|nearby_licensed|nearby\.rest|nearby\.public|operator_snippets|site_types|house_rules|field_conditions)(\.|$)/;
+const DERIVED = /^(iq|pf|rv|profile|nl|st|line|om|sn|pt|th|soc|nr|ti|win|heat|themes|env|kinds|sizes|floors|seasons|days|fire|toilets|sinks|showers|rental|tq|of|nearby_licensed|nearby\.rest|nearby\.public|operator_snippets|site_types|house_rules|field_conditions)(\.|$)/;
 const isVolatile = (f) => VOLATILE.some((re) => re.test(f));
 
 const ov = read(join(nextRoot, "pipeline/registry/merge-overrides.json")) ?? { overrides: [] };

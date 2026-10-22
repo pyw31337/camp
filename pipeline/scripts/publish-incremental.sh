@@ -60,6 +60,7 @@ node pipeline/scripts/publish-sanity.mjs
 node pipeline/scripts/report-coverage.mjs
 node pipeline/scripts/build-fact-store.mjs
 node pipeline/scripts/quality-ledger.mjs
+node pipeline/scripts/apply-info-score.mjs
 node "$SRC/scripts/coverage-guard.mjs" "$BASE" "$DATA/meta.json"
 
 if [ -n "${PUBLISH_DRY_RUN:-}" ]; then { git status --short | head -5 || true; }; echo "(시험 실행: 커밋하지 않음)"; exit 0; fi

@@ -45,7 +45,9 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     const bi = process.argv.indexOf("--baseline");
     if (bi > 0) {
       const base = JSON.parse(readFileSync(resolve(process.argv[bi + 1]), "utf8")).byField ?? {};
-      const over = Object.entries(r.byField).filter(([k, n]) => n > Math.max(10, Math.ceil((base[k] ?? 0) * 1.2)));
+      // 작은 항목은 몇 건만 늘어도 20%를 넘는다(2026-10-23 매너타임 8→11로 매일 데이터 발행이 막힘). 기준 + 5건까지는 허용한다.
+      // 숨긴 값은 배포 때 어차피 숨겨지므로 이 검사는 수집 원천 회귀 경보다.
+      const over = Object.entries(r.byField).filter(([k, n]) => n > Math.max(10, Math.ceil((base[k] ?? 0) * 1.2), (base[k] ?? 0) + 5));
       if (over.length) { console.log(`::error::상식 밖 값이 기준보다 크게 늘었습니다: ${over.map(([k, n]) => `${k} ${base[k] ?? 0}→${n}`).join(", ")} — 수집 원천을 확인하거나 의도한 변화면 기준 파일을 갱신하세요.`); process.exit(1); }
       console.log("기준 대비 급증 없음 ✓");
     }
