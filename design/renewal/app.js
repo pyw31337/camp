@@ -1273,6 +1273,10 @@ document.addEventListener("click", (e) => {
 });
 document.addEventListener("click", (e) => {
   const b = e.target.closest("[data-tip]"), pop = $("#pop");
+  // 영상 카드는 article 전체에 출처 tip이 승격될 수 있지만, 썸네일·재생 버튼의
+  // 클릭은 반드시 영상 핸들러(YouTube iframe 삽입/외부 링크)가 먼저 처리한다.
+  // 문서 위임 핸들러가 먼저 실행되면 원문 팝업이 재생을 가로막는다.
+  if (e.target.closest?.(".vid-wrap .vid")) return;
   if (e.target.closest("[data-pop-close]")) { e.preventDefault(); pop.hidden = true; pop._src = null; return; }
   if (!b) { if (!e.target.closest("#pop")) pop.hidden = true; return; }
   const a = e.target.closest("a, button:not([data-tip])");
