@@ -677,6 +677,7 @@ img { color: transparent; }
 .use dd:not(:has(> .use-val)) { display: block; overflow-wrap: anywhere; }
 .use dd:not(:has(> .use-val)) small, .use dd:not(:has(> .use-val)) .muted { margin-left: 4px; font-weight: 600; color: var(--ink-3); }
 .use .use-val { flex: 1 1 auto; min-width: 0; word-break: keep-all; display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.use .fact-note { flex-basis: 100%; color: var(--ink-3); font-size: .72rem; font-weight: 450; line-height: 1.35; }
 .use .use-meta { display: inline-flex; align-items: center; gap: 4px; margin-left: auto; flex-shrink: 0; }
 .use.unk dd { color: var(--ink-3); font-weight: 400; font-size: .92rem; }
 .nears { gap: 10px; padding-bottom: 4px; }

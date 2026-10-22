@@ -2942,7 +2942,7 @@ async function detailView(id) {
         ${siteTypesHtml(c, d)}
         ${specSection(c, d)}
         ${priceHtml(c, d)}
-        ${us.some(([, x]) => x) ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><dl class="uses">${us.filter(([, x]) => x).map(([l, x, icon]) => `<div class="use"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${esc(wonText(detailValue(x)))}${asOfMention(x)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span></dd></div>`).join("")}</dl></section>` : `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><p class="muted" style="padding: 18px 0; color: var(--ink-3); font-size: .88rem;">등록된 상세 이용 정보가 없습니다.</p></section>`}
+        ${us.some(([, x]) => x) ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><dl class="uses">${us.filter(([, x]) => x).map(([l, x, icon]) => `<div class="use"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${factValueHtml({ ...x, v: wonText(detailValue(x)) })}${asOfMention(x)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span></dd></div>`).join("")}</dl></section>` : `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><p class="muted" style="padding: 18px 0; color: var(--ink-3); font-size: .88rem;">등록된 상세 이용 정보가 없습니다.</p></section>`}
         ${houseRulesHtml(c, d)}
         <section class="d-sec" data-cond hidden></section>
         ${reviewHtml(d, c)}
@@ -3053,6 +3053,18 @@ function sourceFact(item, fallback = "원문", quote) {
   };
 }
 function detailValue(x, fallback = "확인필요") { return x?.v ? serviceText(x.v, 48) || fallback : fallback; }
+// 핵심 값(시간·요금·규격)과 근거성 보조 문구를 분리해 핵심 정보가 먼저 읽히게 한다.
+function factValueHtml(x, fallback = "확인필요") {
+  const text = detailValue(x, fallback);
+  const parts = text.split(/\s*·\s*/).filter(Boolean);
+  const notes = parts.filter((p) => /업장\s*미공지|법정|조례|기준\s*참고|참고값/.test(p));
+  if (!notes.length) return esc(text);
+  const main = parts.filter((p) => !notes.includes(p));
+  const valueParts = main.length ? main : (parts.find((p) => /\d/.test(p)) ? [parts.find((p) => /\d/.test(p))] : [parts[0] || fallback]);
+  const value = valueParts.join(" · ");
+  const noteParts = parts.filter((p) => !valueParts.includes(p) && /업장\s*미공지|법정|조례|기준\s*참고|참고값/.test(p));
+  return `${esc(value)}${noteParts.length ? `<span class="fact-note">${esc(noteParts.join(" · "))}</span>` : ""}`;
+}
 function siteTypesHtml(c, d) {
   const list = d?.site_types ?? (c.st ?? []).map(([code, count, g, sub]) => ({ code, count, sub, grade: g === "o" ? "OPERATOR" : "CONFIRMED" }));
   if (!list.length) return "";
