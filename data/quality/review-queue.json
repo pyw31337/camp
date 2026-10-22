@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-10-22T21:20:46.697Z",
+ "generated_at": "2026-10-22T22:29:55.122Z",
  "how_to_resolve": "원문을 대조해 data/quality/decisions.ndjson에 {cid, attr, value, url, why, by, at} 한 줄을 덧붙인다(docs/DATA_QUALITY_PROCESS.md 4단계).",
- "count": 84,
+ "count": 86,
  "items": [
   {
    "cid": "2179",
@@ -195,6 +195,55 @@
       "url": "https://leports.sailing-blog.click/3279",
       "at": "2026-09-22",
       "quote": "자연휴양림 등 무주를 대표하는 관광지가 즐비하다.※ 반려견 동반 불가능 ⊙ 양지뜰캠핑장 - 홈페이지 http://www.무주양지뜰.com - 주소 전북특별자치도 무주군 보안길 88양지뜰캠핑장은 전북 무주군 설천면 삼공리에 자리 잡았다."
+     }
+    ]
+   }
+  },
+  {
+   "cid": "8071",
+   "name": "벨하우스",
+   "attr": "CHECKIN_TIME",
+   "label": "입실 시각",
+   "ui": true,
+   "top": {
+    "value": "15:00",
+    "confidence": 0.99,
+    "sources": 2,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "operator_homepage",
+      "url": "http://www.xn--il3bm3i1wd13t.com/reservation.php?id=2",
+      "at": "2026-10-20T01:18:46.971Z",
+      "quote": "이용시간 : 입실 15:00"
+     },
+     {
+      "grade": "OPERATOR",
+      "src": "booking_engine",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=545&res_dt=20261024",
+      "at": "2026-10-22",
+      "quote": ""
+     }
+    ]
+   },
+   "rival": {
+    "value": "13:00",
+    "confidence": 0.935,
+    "sources": 2,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "operator_homepage",
+      "url": "http://www.xn--il3bm3i1wd13t.com/reservation.php?id=2",
+      "at": "2026-10-20T01:18:46.971Z",
+      "quote": "이용시간 : 입실 13:00"
+     },
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/kimping_site/224056941020",
+      "at": "2025-10-28",
+      "quote": "2) 입실 13시"
      }
     ]
    }
@@ -1098,55 +1147,13 @@
   {
    "cid": "8071",
    "name": "벨하우스",
-   "attr": "CHECKIN_TIME",
-   "label": "입실 시각",
-   "ui": true,
-   "top": {
-    "value": "15:00",
-    "confidence": 0.99,
-    "sources": 2,
-    "evidence": [
-     {
-      "grade": "OPERATOR",
-      "src": "operator_homepage",
-      "url": "http://www.xn--il3bm3i1wd13t.com/reservation.php?id=2",
-      "at": "2026-10-20T01:18:46.971Z",
-      "quote": "이용시간 : 입실 15:00"
-     },
-     {
-      "grade": "OPERATOR",
-      "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=545&res_dt=20261024",
-      "at": "2026-10-22",
-      "quote": ""
-     }
-    ]
-   },
-   "rival": {
-    "value": "13:00",
-    "confidence": 0.9,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "OPERATOR",
-      "src": "operator_homepage",
-      "url": "http://www.xn--il3bm3i1wd13t.com/reservation.php?id=2",
-      "at": "2026-10-20T01:18:46.971Z",
-      "quote": "이용시간 : 입실 13:00"
-     }
-    ]
-   }
-  },
-  {
-   "cid": "8071",
-   "name": "벨하우스",
    "attr": "CHECKOUT_TIME",
    "label": "퇴실 시각",
    "ui": true,
    "top": {
     "value": "11:00",
-    "confidence": 0.99,
-    "sources": 2,
+    "confidence": 0.994,
+    "sources": 3,
     "evidence": [
      {
       "grade": "OPERATOR",
@@ -2188,8 +2195,8 @@
    "ui": true,
    "top": {
     "value": "ALLOWED",
-    "confidence": 0.85,
-    "sources": 1,
+    "confidence": 0.918,
+    "sources": 2,
     "evidence": [
      {
       "grade": "CONFIRMED",
@@ -2197,6 +2204,13 @@
       "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7139",
       "at": "2025-09-03T00:00:00+09:00",
       "quote": "세미나를 위한 넓은 홀(사용 예약 유선문의)이 있으며 반려견 입장이 가능한 캠핑장이다."
+     },
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/zzzzzz_y/224382969898",
+      "at": "2026-08-19",
+      "quote": "가평 글램핑 애견동반 가능한 리즈밸리글램핑펜션."
      }
     ]
    },
@@ -3105,6 +3119,41 @@
    }
   },
   {
+   "cid": "721",
+   "name": "지리산 당근 오토캠핑장",
+   "attr": "PET_POLICY",
+   "label": "반려견 동반",
+   "ui": true,
+   "top": {
+    "value": "NOT_ALLOWED",
+    "confidence": 0.85,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "CONFIRMED",
+      "src": "gocamping",
+      "url": null,
+      "at": null,
+      "quote": "불가능"
+     }
+    ]
+   },
+   "rival": {
+    "value": "ALLOWED",
+    "confidence": 0.6,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/yeoreumoutdoor/224446368924",
+      "at": "2026-10-19",
+      "quote": "저희는 강아지 여름이와 함께 방문해서 애견동반이 가능한 라7번..."
+     }
+    ]
+   }
+  },
+  {
    "cid": "2622",
    "name": "자연애 품 캠핑장",
    "attr": "PET_POLICY",
@@ -3135,6 +3184,41 @@
       "url": "https://blog.naver.com/unn123123/224440191638",
       "at": "2026-10-13",
       "quote": "광주근교 전남 애견동반 가능한 곡성 자연애품 캠핑장 명당 사이트 비교 C9 후기."
+     }
+    ]
+   }
+  },
+  {
+   "cid": "6733",
+   "name": "경포대카라반",
+   "attr": "PET_POLICY",
+   "label": "반려견 동반",
+   "ui": true,
+   "top": {
+    "value": "NOT_ALLOWED",
+    "confidence": 0.85,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "CONFIRMED",
+      "src": "gocamping",
+      "url": null,
+      "at": null,
+      "quote": "불가능"
+     }
+    ]
+   },
+   "rival": {
+    "value": "ALLOWED",
+    "confidence": 0.6,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/flyyeonji/224266719144",
+      "at": "2026-04-27",
+      "quote": "경포대 인근에 위치한 카라반 숙소로, 애견동반이 가능하다는 점에서..."
      }
     ]
    }
