@@ -56,12 +56,13 @@ node "$SRC/scripts/field-guard.mjs" "$BASEROOT" . --heal
 node pipeline/scripts/publish-sanity.mjs
 node pipeline/scripts/report-coverage.mjs
 node pipeline/scripts/build-fact-store.mjs
+node pipeline/scripts/quality-ledger.mjs
 node "$SRC/scripts/coverage-guard.mjs" "$BASE" "$DATA/meta.json"
 
 if [ -n "${PUBLISH_DRY_RUN:-}" ]; then { git status --short | head -5 || true; }; echo "(시험 실행: 커밋하지 않음)"; exit 0; fi
 git config user.name "moyeora-camping-data-bot"
 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-git add camping-atlas/public/explore data/facts; git add pipeline/registry/merge-review.ndjson 2>/dev/null || true
+git add camping-atlas/public/explore data/facts data/quality; git add pipeline/registry/merge-review.ndjson 2>/dev/null || true
 if git diff --cached --quiet; then echo "증분 발행: 변경 없음."; exit 0; fi
 git commit -q -m "chore(data): publish ${LABEL} now (incremental)"
 # main은 필수 검사 룰셋이 걸려 있어 직접 push하지 않고 PR로 착지시킨다(.github/scripts/land-on-main.sh).

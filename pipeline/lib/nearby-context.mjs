@@ -3,7 +3,7 @@
 // 거리는 모두 직선거리(m)이며 도로 거리·소요 시간이 아니다. 영업 여부·영업시간은 원천에서 보장하지 않는다.
 
 import { GridIndex, inKorea } from "./geo.mjs";
-import { normalizePublicPoi } from "./kdata-public.mjs";
+import { normalizePublicPoi } from "./public-poi.mjs";
 
 export const TOUR_BASE = "https://apis.data.go.kr/B551011/KorService2";
 // 12 관광지, 14 문화시설, 28 레포츠, 38 쇼핑, 39 음식점
@@ -16,7 +16,7 @@ export const SOURCES = {
   tour: { id: "tourapi-kor2", name: "한국관광공사 TourAPI 4.0(KorService2) 지역기반 관광정보", url: "https://www.data.go.kr/data/15101578/openapi.do", tier: "B", license: "공공누리(한국관광공사) — 이미지 이용 조건은 항목별 cpyrhtDivCd 확인" },
   osm: { id: "osm-shops", name: "OpenStreetMap(Overpass API) 마트·편의점·주유소·약국·병원", url: "https://www.openstreetmap.org/copyright", tier: "C", license: `ODbL 1.0 — ${OSM_ATTRIBUTION}` },
   rest: { id: "rest-stops", name: "휴게소·졸음쉼터(한국도로공사·전국졸음쉼터표준데이터·OpenStreetMap)", url: "https://github.com/pyw31337/camp/blob/main/pipeline/scripts/sync-rest-stops.mjs", tier: "B", license: `공공데이터 이용 조건 · ${OSM_ATTRIBUTION}` },
-  public: { id: "kdata-public", name: "알잘 공공데이터 공개 색인(공공시설 발견·원문 연결)", url: "https://k-data.aljal.kr/", tier: "C", license: "원문 공개 데이터의 링크·좌표·요약 필드만 사용" },
+  public: { id: "datagokr-public", name: "공공데이터포털 표준데이터(휴양림·박물관미술관·공공시설개방)", url: "https://www.data.go.kr/", tier: "A", license: "공공누리·공공데이터 이용 조건(출처 표시)" },
 };
 
 const clean = (v) => {

@@ -2780,9 +2780,10 @@ function nearbyHubHtml(c, d) {
     sub: [er[2], er[3]].filter(Boolean).join(" · "),
     url: er[3] ? `tel:${er[3]}` : null,
   }] : [];
-  const publicLabels = { forest: ["휴양림", "trees"], rest: ["공공시설", "building"], indoorplay: ["실내놀이터", "baby"], pool: ["수영장", "water"], leisure: ["레포츠", "activity"], museum: ["박물관", "museum"] };
+  // 아이콘은 스프라이트(#i-…)에 있는 것만(없는 id는 빈 칸으로 보인다)
+  const publicLabels = { forest: ["휴양림", "th:FOREST"], rest: ["휴게소", "restarea"], indoorplay: ["실내놀이터", "playground"], pool: ["수영장", "swim"], leisure: ["레포츠", "sports"], museum: ["박물관", "experience"] };
   const publicGroups = Object.entries(nearby.public ?? {}).map(([kind, rows]) => {
-    const [title, icon] = publicLabels[kind] ?? ["공공시설", "building"];
+    const [title, icon] = publicLabels[kind] ?? ["공공시설", "amenity"];
     return [`public-${kind}`, title, icon, rows.map((x) => entry(`PUBLIC_${kind.toUpperCase()}`, x)).filter(Boolean)];
   }).filter(([, , , rows]) => rows.length);
   // 소유자 2026-10-20: 생활·안전·관광 묶음 대신 마트·약국·병원·맛집·관광·주유소·충전소처럼 종류별로 나눠 보인다

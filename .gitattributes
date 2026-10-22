@@ -1,0 +1,4 @@
+# 여러 에이전트가 덧붙이는 기록(docs/DATA_QUALITY_PROCESS.md): 브랜치가 갈라져도 줄을 합친다
+data/board/board.ndjson merge=union
+data/quality/decisions.ndjson merge=union
+pipeline/registry/merge-review.ndjson merge=union

@@ -13,6 +13,15 @@
 - **행사 포스터:** `img`가 비어도 `img2`(원출처 대체 포스터)를 우선 렌더링하도록 `context/events.js`를 보완했다. 두 원천 모두 포스터가 없을 때는 제목형 대체 카드로 남긴다.
 - **휴양림·휴게소·실내놀이터·수영장·레포츠·박물관:** 기존 `kdata-public`/`nearby-context` 수집·주변 연동을 유지하고, 이번 변경은 품질 게이트를 추가해 잘못된 업체와 위치 오매칭만 차단한다. CultureFlow 원본 저장소는 이 체크아웃에 없어 원천 데이터 자체 수정은 별도 저장소 작업이 필요하다.
 - **검증:** `node --test pipeline/test/place-quality.test.mjs pipeline/test/culture-events.test.mjs pipeline/test/detail-events-card.test.mjs` 13개 통과, `npm --prefix camping-atlas run lint` 오류 0(기존 경고 31), `git diff --check` 통과. 전체 파이프라인 테스트는 환경에 `sharp`가 없어 기존 `photo-dedupe.test.mjs` 1개가 로드 실패했다.
+## 📌 데이터 품질 표준 프로세스·에이전트 게시판 신설 · k-data 수집 → 공공데이터포털 (2026-10-22, Claude → 전 에이전트)
+- **표준 6단계**(`docs/DATA_QUALITY_PROCESS.md`): 수집 → 판단 → 검토 → 판정 → 정제·병합 → 발행·환류. AGENTS.md 맨 앞 📢 공지로 올림.
+- **품질 계산**: `pipeline/lib/quality.mjs`(등급 무게 × 독립 원천 확증 × 신선도, 충돌 판정) → `pipeline/scripts/quality-ledger.mjs`가 매일(data-sync·증분 발행) `data/quality/{latest.json, ledger.ndjson, review-queue.json, REPORT.md}`를 쓴다. 첫 장부(2026-10-22): 사실 169,447 · 평균 신뢰도 0.806 · 확정 89.1% · 독립 원천 확증 2,886쌍 · **충돌 295건**(반려견 동반·입실/퇴실 시각 등 — 운영자 페이지 수집 때 다른 캠핑장 페이지가 섞인 경우가 많다).
+- **판정**: `pipeline/scripts/quality-decide.mjs` → `data/quality/decisions.ndjson` → `build-fact-store`가 VERIFIED 사실(원천 `agent_review`, `fact-store.mjs SOURCES`에 등록)로 넣는다.
+- **게시판**: `pipeline/scripts/agent-board.mjs`(list·check·claim·release·post) → `data/board/board.ndjson`. `.gitattributes`로 board·decisions·merge-review를 merge=union.
+- **k-data 교체**: `sync-kdata-public.mjs`·`lib/kdata-public.mjs`·`registry/kdata-public.json`·관련 테스트 삭제, 주간 워크플로 단계 제거. `nearby.public`은 `registry/public-leisure.json`(휴양림 186·박물관 1,073·수영장 134·실내 놀이 25)을 `lib/public-poi.mjs`로 바꿔 쓴다(원천 id `datagokr-public`, 등급 A). 주변 칩 아이콘을 스프라이트에 있는 것(th:FOREST·swim·playground·experience·sports·restarea)으로 고침.
+- 검증: 단위 테스트 496 통과(quality·게시판·public-poi 추가), 품질 장부 실행(회귀 0).
+- 다음: 충돌 295건 판정(반려견 동반 520쌍이 다값 — 운영자 사이트 수집기의 다른 캠핑장 페이지 섞임을 규칙으로 막는 것이 우선).
+
 ## 📌 캠핑장 실체 전수 검수 · 배지·섹션·상세 판정 통일(전 업체) · 휴양림 카탈로그 · 수식어 흐리게 (2026-10-22, Claude → 전 에이전트)
 - **캠핑장 아님(R10)**: 고캠핑(지자체 야영장업 인허가)에 회사 사무실 주소로만 등록된 곳을 카탈로그에서 뺀다 — `pipeline/lib/camp-reality.mjs` `paperRegistration`(캠핑장 이름 아님 + 전화·사진·소개·시설 근거 0 + 카카오·네이버 장소 없음 + 도심(5km 안 편의점 1,000곳↑) 또는 건물 호실 주소) + 수기 목록 `pipeline/registry/not-campgrounds.json`. 전수(3,100여 곳) 결과 3곳: 스마트락(주)(서울 구로 디지털로 지식산업센터)·빈투어 주식회사(중구 퇴계로)·(주)더술컴퍼니아카데미(종로 창경궁로). ‘(주)’만으로는 거르지 않는다 — (주)신어산 자연숲캠핑장처럼 법인이 운영하는 진짜 캠핑장이 67곳 중 대부분.
 - **휴업 반영(R11)**: 고캠핑 상세(2026-10 확인)가 ‘현재 휴업 중’인데 목록이 ‘운영’이던 13곳 → ‘휴장’.

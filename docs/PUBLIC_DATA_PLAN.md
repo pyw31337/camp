@@ -1,6 +1,6 @@
 # 공공데이터(캠핑·편의점) 수집·활용 기획 (2026-10-16)
 
-> 2026-10-22 추가: 전국휴양림표준데이터·공공시설 보강 경로로 `k-data.aljal.kr` 공개 색인을 사용한다. 자연휴양림·휴게소·실내놀이터·수영장·레포츠·박물관은 `pipeline/scripts/sync-kdata-public.mjs`가 사이트맵과 상세 페이지에서 좌표·주소·운영 표·원문 링크만 누적하며, 원문 링크가 없는 값은 확정 사실로 표시하지 않는다. 캠핑장 주변 계산에는 `nearby.public` 범주로 최대 3곳씩 연결한다. 공식 원문(숲나들e·도로공사·지자체·공공데이터포털)이 확인되면 더 높은 신뢰 등급으로 병합한다.
+> 2026-10-22 정정(소유자): `k-data.aljal.kr` 공개 색인 수집(`sync-kdata-public`)은 robots.txt가 AI 크롤러를 막아 폐지했다. 휴양림·박물관미술관·공공시설개방(수영장·실내 놀이)은 공공데이터포털 표준데이터(`sync-public-leisure.mjs` → `registry/public-leisure.json` → `lib/public-poi.mjs`)로, 휴게소·졸음쉼터는 `sync:rest-stops`로 받아 주변 `nearby.public`에 연결한다. 처리 절차는 `docs/DATA_QUALITY_PROCESS.md`.
 
 > 대상: 소유자가 지정한 data.go.kr 데이터셋·검색 결과(키워드 `캠핑`, `편의점` × 파일·API·표준·연계).<br>
 > 목록 원장: `pipeline/registry/public-datasets.json` (88개, 데이터셋마다 활용처·우선순위·채울 속성).<br>

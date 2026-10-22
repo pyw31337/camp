@@ -105,6 +105,24 @@ if (forestMatchesReg?.matches?.length) {
   }
 }
 
+// 품질 검토 판정(data/quality/decisions.ndjson, docs/DATA_QUALITY_PROCESS.md): 원문을 대조해 확정한 값은 VERIFIED 사실로 넣는다.
+// 형식이 틀린 판정은 발행을 막지 않고 경고만 남긴다(판정 파일은 여러 에이전트가 덧붙이므로).
+{
+  const p = join(root, "data/quality/decisions.ndjson");
+  if (existsSync(p)) {
+    const latest = new Map();
+    for (const line of readFileSync(p, "utf8").split("\n")) { if (!line.trim()) continue; try { const x = JSON.parse(line); if (x.cid && x.attr) latest.set(`${x.cid}|${x.attr}`, x); } catch {} }
+    let ok = 0;
+    for (const x of latest.values()) {
+      if (x.retract) continue;
+      const f = { cid: String(x.cid), attr: x.attr, value: x.value, grade: "VERIFIED", src: "agent_review", url: x.url, at: x.at, quote: x.why, label: x.by };
+      const e = validateFacts([f]);
+      if (e.length) { console.log(`::warning title=검토 판정 형식 오류::${e[0]}`); continue; }
+      facts.push(f); ok++;
+    }
+    console.log(`검토 판정 → 사실 ${ok}건`);
+  }
+}
 const errs = validateFacts(facts);
 if (errs.length) {
   console.error(`사실 검증 실패 ${errs.length}건:\n${errs.slice(0, 20).join("\n")}`);
