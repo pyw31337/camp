@@ -8,7 +8,8 @@ import { innerCodes } from "./gocamping.mjs";
 
 export const DICTIONARY = JSON.parse(readFileSync(fileURLToPath(new URL("../registry/attribute-dictionary.json", import.meta.url)), "utf8"));
 export const ATTR = new Map(DICTIONARY.attributes.map((a) => [a.code, a]));
-export const GRADE_RANK = { VERIFIED: 4, OPERATOR: 3, CONFIRMED: 2, MENTION: 1 };
+// REFERENCE: 법정·표준 조례 기준 참고값(업장 미공지). 확정값처럼 쓰지 않는다 — 조회 기본 최소 등급(MENTION)보다 낮다(2026-10-22). DB grade_rank가 smallint라 정수 0.
+export const GRADE_RANK = { VERIFIED: 4, OPERATOR: 3, CONFIRMED: 2, MENTION: 1, REFERENCE: 0 };
 
 // 원천 코드 → 사람이 읽는 이름
 export const SOURCES = {
@@ -38,6 +39,8 @@ export const SOURCES = {
   gocamping_detail: "고캠핑 상세 화면(업장 등록 이용안내·요금표)",
   // 데이터 품질 표준(docs/DATA_QUALITY_PROCESS.md) 4단계 ‘검토’의 판정 — data/quality/decisions.ndjson. 원문 근거 URL 필수.
   agent_review: "에이전트·운영자 검토 판정(원문 대조, 품질 검토 대기열)",
+  // 공공 야영장 표준 운영규정(lib/public-standards.mjs). 업장이 공지하지 않은 기본값이라 REFERENCE로만 넣는다.
+  public_standard: "공공 야영장 표준 운영규정(업장 미공지 참고값)",
 };
 
 const ENV = { 산: "MOUNTAIN", 숲: "FOREST", 강: "RIVER", 호수: "LAKE", 계곡: "VALLEY", 해변: "BEACH", 섬: "ISLAND", 도심: "CITY" };
@@ -221,7 +224,8 @@ export function factsOf(c, d, { site = null, details = null, digest = null, kaka
     if (!ATTR.has(code)) continue;
     for (const v of f.values ?? []) {
       const kind = v.source?.kind;
-      const [grade, src] = kind === "gocamping_intro" ? ["CONFIRMED", "gocamping_intro"] : ["OPERATOR", site?.discovered ? "operator_discovered" : "operator_homepage"];
+      // 2026-10-22: 표준 운영규정(public_standard)이 운영자 홈페이지(OPERATOR)로 들어가 349곳의 입퇴실 시각이 업장 공지처럼 쓰이고 충돌을 만들었다.
+      const [grade, src] = kind === "gocamping_intro" ? ["CONFIRMED", "gocamping_intro"] : kind === "public_standard" ? ["REFERENCE", "public_standard"] : ["OPERATOR", site?.discovered ? "operator_discovered" : "operator_homepage"];
       const value = ATTR.get(code).type === "time" ? hhmm(v.value) ?? v.value : code === "PET_POLICY" ? petCode(v.value) : v.value;
       push(code, value, grade, src, { url: v.source?.url ?? null, at: v.source?.date ?? null, quote: v.quote ?? null, text: v.value, period: v.period ?? undefined });
     }
@@ -296,7 +300,7 @@ export function validateFacts(facts) {
   for (const f of facts) {
     const a = ATTR.get(f.attr);
     if (!a) { errs.push(`${f.cid} 사전에 없는 속성 ${f.attr}`); continue; }
-    if (!GRADE_RANK[f.grade]) errs.push(`${f.cid} ${f.attr} 등급 ${f.grade}`);
+    if (!(f.grade in GRADE_RANK)) errs.push(`${f.cid} ${f.attr} 등급 ${f.grade}`);
     if (!SOURCES[f.src]) errs.push(`${f.cid} ${f.attr} 원천 ${f.src}`);
     if (f.grade !== "MENTION" && !f.url) errs.push(`${f.cid} ${f.attr} 원천 URL 없음`);
     const t = a.type, v = f.value;

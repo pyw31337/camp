@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 // 상세 주변시설의 공공시설(nearby.public)·휴게소(nearby.rest)를 지금 데이터로 다시 맞춘다. 멱등.
 // - public: 공공데이터포털 표준데이터(registry/public-leisure.json → lib/public-poi.mjs) — 휴양림·박물관·수영장·실내 놀이
-// - rest: 이미 있는 목록에서 같은 이름 500m 안 중복을 하나로(상행·하행은 따로)
+// - rest: 이미 있는 목록에서 같은 이름 500m 안 중복을 하나로(상행·하행은 따로), 휴게 시설이 아닌 이름(정자·주유소·관공서 등, restStopNameOk)은 뺀다
 // 정기 갱신은 sync-nearby-context.mjs → build-explore-data.mjs가 같은 규칙(lib/nearby-context.mjs)으로 만든다. 이 스크립트는 그 사이를 메운다.
 import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { NEARBY_RULES, buildNearbyIndexes, dedupeHits, nearbyFor } from "../lib/nearby-context.mjs";
 import { publicLeisureRecords } from "../lib/public-poi.mjs";
+import { restStopNameOk } from "../lib/rest-stops.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const dataDir = process.env.EXPLORE_DIR || join(root, "camping-atlas/public/explore/data");
@@ -26,7 +27,7 @@ for (const f of readdirSync(join(dataDir, "camps"))) {
   if (pub || d.nearby) d.nearby ??= {};
   if (pub) { d.nearby.public = pub; withPublic++; } else if (d.nearby) delete d.nearby.public;
   if (d.nearby?.rest?.length) {
-    const hits = d.nearby.rest.map((x) => ({ point: { name: x.n ?? x.name }, distance_m: x.m ?? x.distance_m, x }));
+    const hits = d.nearby.rest.filter((x) => restStopNameOk(x.n ?? x.name)).map((x) => ({ point: { name: x.n ?? x.name }, distance_m: x.m ?? x.distance_m, x }));
     const kept = dedupeHits(hits, NEARBY_RULES.rest.limit).map((h) => h.x);
     if (kept.length !== d.nearby.rest.length) { d.nearby.rest = kept; restFixed++; }
   }

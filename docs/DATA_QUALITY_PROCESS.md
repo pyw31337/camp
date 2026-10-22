@@ -21,8 +21,8 @@ Claude·Codex·Gemini·Grok 등 어떤 에이전트든, 사람이 직접 넣는 
 |---|---|---|---|---|
 | 1 | **수집** | 원천에서 원문을 가져온다. 새 원천 종류는 먼저 등록한다. | `collected-data` 브랜치 캐시, `pipeline/registry/*.json` | ① 경로 규칙(아래 ‘수집 경로’) ② 무과금(`check:billing`) ③ 원천 등록(`fact-store.mjs SOURCES`, 공공데이터는 `public-datasets.json`) ④ 원문 URL·확인 시각 |
 | 2 | **판단(추출)** | 원문을 원자 사실로 쪼갠다. 형식은 `{cid, attr, value, grade, src, url, at, quote}`이다. | `data/facts/*.ndjson` (`build-fact-store.mjs`) | 속성 사전(`attributes.json`)에 있는 속성·형식만 허용. MENTION이 아니면 URL 필수(`validateFacts`) |
-| 3 | **검토(교차검증)** | 신뢰도·확증·충돌을 계산하고 상식 검사를 돌린다. | `data/quality/latest.json`, `review-queue.json` | 상식 검사: `publish-sanity`(공원 요금·광고 요금·좌표 오류·중복 등록·**캠핑장 아님**·휴업 등), `value-sanity`, `camp-reality`(서류상 등록·무관 업종 이름·무관 지도 분류), **후기 사진 내용 판정**(`photo-judge`: 음식·인물·차 안 사진 숨김) |
-| 4 | **판정** | 대기열의 충돌을 원문과 대조해 확정한다. 반복되는 오류는 규칙으로 올린다. | `data/quality/decisions.ndjson` → VERIFIED 사실 | 원문 근거 URL 필수, 속성 형식 검증(`quality-decide.mjs`). 거둘 때는 `--retract` |
+| 3 | **검토(교차검증)** | 신뢰도·확증·충돌을 계산하고 상식 검사를 돌린다. | `data/quality/latest.json`, `review-queue.json` | 상식 검사: `publish-sanity`(공원 요금·광고 요금·좌표 오류·중복 등록·**캠핑장 아님**·휴업 등), `value-sanity`, `camp-reality`(서류상 등록·무관 업종 이름·무관 지도 분류), **후기 사진 내용 판정**(`photo-judge`: 음식·인물·차 안 사진 숨김), **글 내용 판정**(`text-judge`: 식당·광고·부동산·무관 주제 글 숨김), **사실 정제**(`fact-refine`: 다른 업장 페이지 섞임·범위 좁은 금지·홍보 제목·숙박형/성수기 한정 시각) |
+| 4 | **판정** | 대기열의 충돌을 원문과 대조해 확정한다. 반복되는 오류는 규칙으로 올린다. | `data/quality/decisions.ndjson` → VERIFIED 사실 | 원문 근거 URL 필수, 속성 형식 검증(`quality-decide.mjs`). 거둘 때는 `--retract`. 업장 원문의 분명한 규칙 문장 vs 고캠핑 등록값은 `quality-auto-decide.mjs`(`--dry` 미리보기)로 판정할 수 있다 |
 | 5 | **정제·병합** | 기존 값을 지우지 않고 합친다. 서비스 표기도 정리한다. | 발행 데이터(`camping-atlas/public/explore/data`) | `DATA_MERGE_POLICY.md`: ① 빈칸 채우기 ② 더 믿을 만하거나 최근일 때만 덮어쓰기(옛 값 기록) ③ 논리 검사 ④ 표기 정제. 수기 확정값은 `curated-pins.json` |
 | 6 | **발행·환류** | 회귀 검사 후 발행하고, 장부와 보고서를 남긴다. | 커밋, `data/quality/ledger.ndjson`, `REPORT.md` | `field-guard`(값 손실 금지), `coverage-guard`(커버리지 회귀 금지), `publish-sanity --check`, `quality-ledger`(회귀 경고) |
 
@@ -35,7 +35,7 @@ Claude·Codex·Gemini·Grok 등 어떤 에이전트든, 사람이 직접 넣는 
 | OFFICIAL / OFFICIAL_TEXT | 기관 공식 문서·표준 규정 | 0.88 |
 | CONFIRMED | 고캠핑·공공데이터 등록값 | 0.85 |
 | MENTION | 후기·게시글 언급(같은 글 n번 언급 시 0.6까지) | 0.35 |
-| REFERENCE | 법정·조례 기준 참고값(업장 미공지) | 0.15 |
+| REFERENCE | 법정·조례 기준 참고값(업장 미공지). 원천 `public_standard`. 조회·확정에 쓰지 않는다 | 0.15 |
 
 상태 판정은 아래 기준을 따른다.
 - **VERIFIED**: 신뢰도 0.95 이상
@@ -44,6 +44,21 @@ Claude·Codex·Gemini·Grok 등 어떤 에이전트든, 사람이 직접 넣는 
 - **SINGLE**: 원천 하나, 신뢰도 0.5 이상 0.85 미만
 - **WEAK**: 신뢰도 0.5 미만
 - **CONFLICT**: 신뢰도 0.6 이상인 다른 값이 있음
+
+## 2026-10-22 첫 대기열 정리 기록(295 → 84건)
+
+| 원인 | 건수(대략) | 규칙 |
+|---|---:|---|
+| 같은 예약 플랫폼의 다른 업장 페이지 섞임(detail_id가 다름) | 57 | `fact-refine` `tenantFilter` |
+| 범위가 좁은 금지(애견 입수·카라반 내부·대형견·고양이)를 ‘동반 불가’로 읽음 | 50 | `refinePet` → 빼거나 SMALL_ONLY |
+| 일부 객실·구역만 허용(“A·B사이트에 가능”, “표기된 객실만”)을 ‘동반 가능’으로 읽음 | 60 | `refinePet` → ZONE_ONLY |
+| 홍보·목록 제목(“동반 가능 캠핑장 모음”) | 48 | `refinePet` → 뺌 |
+| 공공 표준 운영규정(기본값)이 운영자 홈페이지(OPERATOR)로 들어감 — 입퇴실 349곳 | — | `fact-store` → REFERENCE·`public_standard` |
+| 숙박형(카라반·글램핑)·성수기·당일 이용 시각 | 285(범위 표시) | `timeScope` → 대표값 경쟁에서 제외 |
+| ‘가능 / 소형견만 / 지정 구역만’은 모순 아님 | — | `quality.compatible` |
+| 업장 원문 규칙 vs 고캠핑 등록값 | 69 판정 | `quality-auto-decide.mjs` |
+
+뺀 값·바꾼 값은 `data/quality/refine-log.json`에 원래 값·원문·이유와 함께 남는다. 남은 84건은 업장 원문끼리 엇갈리거나(입퇴실 시각 개정 전후 등) 고캠핑 등록값과 소개글이 엇갈리는 경우로, 사람·에이전트 판정 대상이다.
 
 ## 매일 흐름(KST)
 

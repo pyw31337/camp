@@ -140,3 +140,9 @@ test("Overpass: 모든 서버 실패 시 직전 성공 응답(캐시)을 쓰고,
   await writeFile(path, "{}");
   await assert.rejects(overpassCached("q", path, { ...opts, fetchImpl: empty }));
 });
+
+test("휴게 시설이 아닌 이름(정자·주유소·관공서·퀵서비스)은 휴게소로 쓰지 않는다(2026-10-22)", async () => {
+  const { restStopNameOk } = await import("../lib/rest-stops.mjs");
+  for (const n of ["공원방문자센터", "태양주유소 Taeyang Juyuso", "GS주유소", "정자", "돌 정자", "팔각정자", "Pavilion", "와동 주민센터", "서대문퀵서비스", "참누리아파트경비실", "퇴산리 노모당", "강원도춘천교육지원청 창의교육지원센터"]) assert.equal(restStopNameOk(n), false, n);
+  for (const n of ["시흥", "청평나루", "죽령휴게소", "유성 만남의 광장", "광주방향 졸음쉼터", "", null]) assert.equal(restStopNameOk(n), true, String(n));
+});

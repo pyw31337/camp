@@ -30,6 +30,7 @@ try {
   const cols = ["external_campground_id", "campground_id", "attr", "value_json", "value_num", "value_text", "grade", "grade_rank", "source_code", "source_url", "observed_at", "quote", "display_text", "mentions", "period", "label", "extra_num"];
   const rows = [];
   for (const [cid, byAttr] of facts) for (const list of byAttr.values()) for (const f of list) {
+    if (f.grade === "REFERENCE") continue; // 표준 조례 기본값(업장 미공지)은 조회 DB에 넣지 않는다(사실 파일에만, 2026-10-22)
     const v = f.value;
     const at = f.at && !Number.isNaN(Date.parse(f.at)) ? f.at : null;
     rows.push([cid, internal.get(cid) ?? null, f.attr, JSON.stringify(v), typeof v === "number" ? v : typeof v === "boolean" ? (v ? 1 : 0) : null,

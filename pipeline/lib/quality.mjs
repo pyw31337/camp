@@ -49,10 +49,15 @@ export function assess(facts, def, now = Date.now()) {
     .sort((a, b) => b.confidence - a.confidence || b.sources - a.sources);
   const top = ranked[0];
   if (!top) return null;
-  const rival = singleValued(def) ? ranked.slice(1).find((r) => numericClose(def, r.value, top.value) === false && r.confidence >= 0.6) : null;
+  const rival = singleValued(def) ? ranked.slice(1).find((r) => numericClose(def, r.value, top.value) === false && !compatible(def, r.value, top.value) && r.confidence >= 0.6) : null;
   const confidence = Math.round(top.confidence * 1000) / 1000;
   const status = rival ? "CONFLICT" : confidence >= 0.95 ? "VERIFIED" : confidence >= 0.85 ? "CONFIRMED" : top.sources >= 2 ? "CORROBORATED" : confidence < 0.5 ? "WEAK" : "SINGLE";
   return { value: top.value, confidence, sources: top.sources, status, ...(rival ? { rival: { value: rival.value, confidence: Math.round(rival.confidence * 1000) / 1000, sources: rival.sources } } : {}) };
+}
+// 서로 모순이 아닌 값 묶음: “동반 가능”과 “소형견만”·“지정 구역만”은 같은 방향(허용)의 자세함 차이다. 충돌은 허용 ↔ 불가뿐(2026-10-22).
+const COMPATIBLE = { PET_POLICY: [["ALLOWED", "SMALL_ONLY", "ZONE_ONLY"]] };
+export function compatible(def, a, b) {
+  return (COMPATIBLE[def?.code] ?? []).some((g) => g.includes(a) && g.includes(b));
 }
 // 숫자 속성은 20% 안이면 같은 값으로 본다(사이트 수 52 vs 50). 숫자가 아니면 그냥 다른 값.
 function numericClose(def, a, b) {

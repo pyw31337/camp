@@ -455,6 +455,8 @@ jobs:
           node pipeline/scripts/apply-public-nearby.mjs
           # 후기 사진 내용 판정(registry/photo-judgments.json) → 걸러진 사진에 ng 표시(화면 갤러리·대표에서 숨김)
           node pipeline/scripts/apply-photo-judgments.mjs
+          # 텍스트 내용 판정(registry/text-judgments.json) → 무관한 후기·카페·웹·영상 글에 ng 표시(화면 목록에서 숨김)
+          node pipeline/scripts/apply-text-judgments.mjs
           # 발행 전 상식 정리(공원에 캠핑장 요금·입퇴실 금지, 관광공사 광고 요금 제거, 숯 문구 모순, 좌표 오타). CI가 --check로 막는다.
           # t41u: 수기·공식 확정 값을 재계산 위에 다시 얹는다(registry/curated-pins.json)
           node pipeline/scripts/apply-pins.mjs

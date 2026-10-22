@@ -270,6 +270,7 @@
 {"cid":"379","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"379","attr":"PHONE","value":"063-322-2771","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"383","attr":"HOMEPAGE","value":"https://www.huyang.go.kr/main.action","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"383","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"VERIFIED","src":"agent_review","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0184","at":"2026-10-22T15:07:15.845Z","quote":"업장 원문 “국립자연휴양림”이 gocamping 값(\"UNKNOWN\")보다 1차 원천","label":"Claude(원문 대조·규칙)"}
 {"cid":"383","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0184","at":"2026-10-22T08:26:02.555Z","text":"국립자연휴양림"}
 {"cid":"383","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"383","attr":"PHONE","value":"054-682-9009","grade":"CONFIRMED","src":"gocamping"}
@@ -303,6 +304,7 @@
 {"cid":"399","attr":"HOMEPAGE","value":"http://www.huyang.go.kr/main.action","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"399","attr":"HOMEPAGE","value":"http://www.huyang.go.kr/main.action","grade":"CONFIRMED","src":"naver_local","url":"http://www.huyang.go.kr/main.action","at":"2026-10-16T06:09:34.118Z","text":"숙박>캠핑,야영장"}
 {"cid":"399","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/13576330","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/13576330","at":"2026-10-16T05:32:55.627Z","text":"여행 > 숙박 > 야영,캠핑장"}
+{"cid":"399","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"VERIFIED","src":"agent_review","url":"https://www.foresttrip.go.kr","at":"2026-10-22T15:07:15.845Z","quote":"업장 원문 “국립자연휴양림”이 gocamping 값(\"UNKNOWN\")보다 1차 원천","label":"Claude(원문 대조·규칙)"}
 {"cid":"399","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-22T08:26:02.555Z","text":"국립자연휴양림"}
 {"cid":"399","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"399","attr":"PHONE","value":"054-672-1051","grade":"CONFIRMED","src":"gocamping"}
@@ -693,6 +695,7 @@
 {"cid":"812","attr":"HOMEPAGE","value":"http://www.huyang.go.kr/main.action","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"812","attr":"HOMEPAGE","value":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0141","grade":"CONFIRMED","src":"naver_local","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0141","at":"2026-10-16T06:07:27.022Z","text":"자연명소>휴양림,산림욕장"}
 {"cid":"812","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/26622191","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/26622191","at":"2026-10-16T05:32:39.746Z","text":"여행 > 관광,명소 > 자연휴양림"}
+{"cid":"812","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"VERIFIED","src":"agent_review","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0141","at":"2026-10-22T15:07:15.845Z","quote":"업장 원문 “국립자연휴양림”이 gocamping 값(\"UNKNOWN\")보다 1차 원천","label":"Claude(원문 대조·규칙)"}
 {"cid":"812","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"operator_homepage","url":"http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0141","at":"2026-10-22T08:26:02.555Z","text":"국립자연휴양림"}
 {"cid":"812","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"812","attr":"PHONE","value":"063-322-1097","grade":"CONFIRMED","src":"gocamping"}
@@ -2096,6 +2099,7 @@
 {"cid":"2778","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/2073358160","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/2073358160","at":"2026-10-16T05:36:21.065Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"2778","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2778","attr":"PHONE","value":"010-3316-8138","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/2073358160","at":"2026-10-16T05:36:21.065Z"}
+{"cid":"2782","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"VERIFIED","src":"agent_review","url":"https://www.foresttrip.go.kr","at":"2026-10-22T15:07:15.845Z","quote":"업장 원문 “국립자연휴양림”이 gocamping 값(\"UNKNOWN\")보다 1차 원천","label":"Claude(원문 대조·규칙)"}
 {"cid":"2782","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-22T08:26:02.555Z","text":"국립자연휴양림"}
 {"cid":"2782","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2782","attr":"PHONE","value":"031-771-1766","grade":"CONFIRMED","src":"gocamping"}
@@ -3502,6 +3506,7 @@
 {"cid":"7272","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7272","attr":"PHONE","value":"010-2709-4580","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7274","attr":"HOMEPAGE","value":"http://www.huyang.go.kr/forest/contentIntro.action?dprtmId=0187","grade":"CONFIRMED","src":"naver_local","url":"http://www.huyang.go.kr/forest/contentIntro.action?dprtmId=0187","at":"2026-10-16T06:21:03.955Z","text":"숙박>캠핑,야영장"}
+{"cid":"7274","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"VERIFIED","src":"agent_review","url":"https://www.foresttrip.go.kr","at":"2026-10-22T15:07:15.845Z","quote":"업장 원문 “국립자연휴양림”이 gocamping 값(\"UNKNOWN\")보다 1차 원천","label":"Claude(원문 대조·규칙)"}
 {"cid":"7274","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"operator_homepage","url":"https://www.foresttrip.go.kr","at":"2026-10-22T08:26:02.555Z","text":"국립자연휴양림"}
 {"cid":"7274","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7274","attr":"PHONE","value":"041-953-2230","grade":"CONFIRMED","src":"gocamping"}
