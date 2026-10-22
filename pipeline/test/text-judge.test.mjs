@@ -23,3 +23,10 @@ test("협찬·수수료 고지 + 캠핑 낱말 없음은 광고", () => {
 test("관련 분류가 1위면 남긴다", () => {
   assert.equal(decide(s({ camp: 0.9 }), {}).ok, true);
 });
+test("이름 일치는 대소문자·띄어쓰기·법인 표기·지점명을 무시한다", async () => {
+  const { nameHit } = await import("../lib/text-judge.mjs");
+  assert.equal(nameHit("(주)드윌레저캠프 양촌지점", "[경남] 드윌레저캠프 마산 양촌지점 나태지옥 수영장"), true);
+  assert.equal(nameHit("강촌IC 힐링캠프", "일반 |강원 펜션| 강촌ic힐링캠프 (강원 춘천) - G마켓"), true);
+  assert.equal(nameHit("DS Camp 캠핑장", "내가 지금까지 작성한 태그 Donors camp, door chain"), false);
+  assert.equal(nameHit("캠프여주", "여주제일고등학교 진로캠프"), false);
+});

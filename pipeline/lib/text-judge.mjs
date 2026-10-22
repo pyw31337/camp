@@ -6,7 +6,7 @@
 
 export const MODEL = "Xenova/multilingual-e5-small";
 /** 규칙이 바뀌면 올린다 → 캐시(registry/text-judgments.json)의 옛 판정은 다시 한다 */
-export const RULE_VERSION = 1;
+export const RULE_VERSION = 1; // 이름 일치(nameHit)는 반영 단계(apply-text-judgments)에서도 다시 본다
 
 // 관련(캠핑·야외 숙박·여행) 예시와 무관 예시. 무관 분류만 숨김 대상이다.
 export const PROTOS = {
@@ -25,7 +25,18 @@ const BAD = new Set(["food", "ad", "estate", "other"]);
 const SHORT = { food: "식당·음식 글", ad: "광고·판매 글", estate: "부동산 글", other: "캠핑과 무관한 글" };
 
 const norm = (s) => String(s ?? "").replace(/<[^>]+>/g, " ").replace(/&[a-z#0-9]+;/gi, " ").replace(/\s+/g, " ").trim();
-const nameKey = (s) => String(s ?? "").replace(/\(.*?\)|\[.*?\]/g, "").replace(/(오토|가족|글램핑|카라반)?\s*(캠핑장|야영장|캠핑|글램핑|카라반|휴양림)$/g, "").replace(/\s+/g, "");
+// 캠핑장 이름 일치: 대소문자·띄어쓰기·법인 표기·지점명을 무시하고, 이름 전체 또는 가장 긴 낱말(3자 이상)이 글에 있으면 일치
+// 2026-10-22: “(주)드윌레저캠프 양촌지점”, “강촌IC 힐링캠프”의 예약 판매 페이지를 이름 불일치로 광고로 판정했다.
+const squash = (s) => String(s ?? "").toLowerCase().replace(/\(주\)|㈜|주식회사|\[.*?\]/g, "").replace(/[^0-9a-z가-힣]/g, "");
+const GENERIC = /^(오토|가족|글램핑|카라반|캠핑장|야영장|캠핑|캠프|camp|camping|휴양림|자연휴양림|펜션|리조트|\S{1,3}지점|\S{1,3}점)$/i;
+export function nameHit(name, text) {
+  const t = squash(text);
+  if (!t) return false;
+  const full = squash(String(name ?? "").replace(/(지점|점)$/g, "")).replace(/(오토|가족)?(캠핑장|야영장|캠핑|글램핑|카라반|휴양림)$/g, "");
+  if (full.length >= 2 && t.includes(full)) return true;
+  const words = String(name ?? "").replace(/\(주\)|㈜|주식회사/g, " ").split(/[\s()·,/]+/).map(squash).filter((w) => w.length >= 3 && !GENERIC.test(w));
+  return words.some((w) => t.includes(w));
+}
 
 /** 점수({분류: 유사도}) → 판정 { ok, top, margin, why } */
 export function decide(scores, { nameHit = false, campWords = false, sponsored = false } = {}) {
@@ -62,9 +73,7 @@ export async function textJudge({ cacheDir } = {}) {
     const qs = await E(texts, "query");
     return items.map((x, i) => {
       const scores = Object.fromEntries(Object.entries(protos).map(([k, vs]) => [k, Math.max(...vs.map((v) => dot(qs[i], v)))]));
-      const key = nameKey(x.camp);
-      const nameHit = key.length >= 2 && texts[i].replace(/\s+/g, "").includes(key);
-      return decide(scores, { nameHit, campWords: CAMP_WORDS.test(texts[i]), sponsored: SPONSORED.test(texts[i]) });
+      return decide(scores, { nameHit: nameHit(x.camp, texts[i]), campWords: CAMP_WORDS.test(texts[i]), sponsored: SPONSORED.test(texts[i]) });
     });
   };
 }
