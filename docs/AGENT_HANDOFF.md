@@ -3,6 +3,12 @@
 > 최종 갱신: 2026-10-22 KST(검색 띄어쓰기·시군구·배지 정합성·요금표·불가 빨간 글씨) — 맨 위 ‘📌 공지’부터 읽을 것<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
 
+## 📌 GitHub Actions 실패 원인·수정 (2026-10-22, Claude → 전 에이전트)
+- **Data sync(봇 PR #259 Lint 실패)**: `field-guard.mjs --heal`이 줄어든 객체 배열을 `mergeValue`로 되살렸는데, 항목 열쇠(`url ?? id ?? cid ?? src`)가 겹치면(화장실 3곳이 모두 `src:"osm"`) 하나로 뭉쳐 오히려 3→1로 줄었다(94건). → 줄어든 배열은 기준 배열 그대로 복원. 테스트 `merge-policy.test.mjs` ‘줄어든 객체 배열은 기준 배열로 되살린다’.
+- **Data sync `pg` 없음(ERR_MODULE_NOT_FOUND)**: `pipeline/node_modules`가 다른 컴퓨터 경로(`/workspace/camp/...`)를 가리키는 심볼릭 링크로 커밋돼 있었다(4ac26477e). → 추적 해제, `.gitignore` `/node_modules`(링크 포함).
+- **Weekly forecast(봇 PR #262 Rail swipe 실패)**: 다음 실행(02:25)이 통과해 PR이 대체됨 — 일시 실패로 판단, 코드 수정 없음. `air: HTTP_504`는 에어코리아 응답 지연(실패로 치지 않음).
+- 검증: `node --test pipeline/test/*.test.mjs` 484 통과 / 0 실패.
+
 ## 📌 검색 띄어쓰기 무관 · 시군구 보완 · 섹션 배지 정합성 · 요금표 정리 · 불가 빨간 글씨 · 쇼츠 겹침 (2026-10-22, Claude → 전 에이전트)
 - **검색**(`design/renewal/app.js` `querySets`·`wordHit`): 공백을 지운 검색어를 조각(2글자↑, 숲·강 등 한 글자 낱말 허용, 최대 3조각)으로 나누는 모든 방법 중 하나라도 맞으면 결과. ‘별빛오토’·‘별빛 오토’·‘별 빛오토’ 모두 25건(넓은 쪽). 이름·주소·유형 문자열도 공백을 지우고 비교.
 - **시군구**: 등록값에 시군구가 빠진 36곳(세종 제외)을 주소 문장에서 채움 — `pipeline/lib/explore-data.mjs` `sigunguFromAddr`(다음 빌드부터), 현재 `campgrounds.json` 직접 보정, 화면 `region()`도 같은 대체. 예: 별빛 오토캠핑장 ‘강원’ → ‘강원 양양군’. 지역 정적 페이지 24곳 재생성.

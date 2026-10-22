@@ -112,3 +112,15 @@ test("field-guard: 더 최신 확인일의 같은 등급 값이 묶음을 바꾸
   const next = repo([{ id: "1", fee: { min: 4, grade: "CONFIRMED", checked_at: "2026-10-20" } }]);
   const r = run(base, next); assert.equal(r.status, 0, r.stdout); assert.match(r.stdout, /교체/);
 });
+
+test("field-guard --heal: 줄어든 객체 배열은 기준 배열로 되살린다(항목 열쇠가 겹쳐도 뭉치지 않음, 2026-10-22 data-sync 실패 재현)", () => {
+  const t3 = [{ name: "공중화장실", m: 48, src: "osm" }, { name: "공중화장실", m: 183, src: "osm" }, { name: "화장실", m: 211, src: "osm" }];
+  const base = repo([{ id: "1", nearby_toilets: { within_2km: 13, within_500m: 5, nearest: t3 } }], { 1: { layout: { images: [{ thumb: "a", src: "blog" }, { thumb: "b", src: "blog" }] } } });
+  const next = repo([{ id: "1", nearby_toilets: { within_2km: 13, within_500m: 5, nearest: t3.slice(0, 2) } }], { 1: { layout: { images: [{ thumb: "a", src: "blog" }] } } });
+  assert.equal(run(base, next).status, 1);
+  assert.equal(run(base, next, "--heal").status, 0);
+  const cat = JSON.parse(readFileSync(join(next, "camping-atlas/public/explore/data/campgrounds.json"), "utf8"));
+  assert.equal(cat[0].nearby_toilets.nearest.length, 3, "3→2를 되살리며 3→1로 뭉치면 안 된다");
+  assert.equal(JSON.parse(readFileSync(join(next, "camping-atlas/public/explore/data/camps/1.json"), "utf8")).layout.images.length, 2);
+  assert.equal(run(base, next).status, 0, "되살린 뒤 검사는 통과");
+});
