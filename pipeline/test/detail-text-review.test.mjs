@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { aboutCamp, commonOperatorTexts, nameTokens, normalizeTimes, normalizeWon, operatorCategory, reviewDetailTexts } from "../lib/detail-text-review.mjs";
+import { aboutCamp, commonOperatorTexts, decodeDisplayEntities, isOperatorContentNoise, nameTokens, normalizeTimes, normalizeWon, operatorCategory, reviewDetailTexts } from "../lib/detail-text-review.mjs";
 
 test("화면 사본이 같다", () => {
   assert.equal(readFileSync(new URL("../lib/detail-text-review.mjs", import.meta.url), "utf8"), readFileSync(new URL("../../camping-atlas/public/context/text-review.js", import.meta.url), "utf8"), "화면 사본(public/context/text-review.js)을 같이 고치세요");
@@ -10,6 +10,12 @@ test("화면 사본이 같다", () => {
 test("표기: 시각 14:00, 금액 130,000원", () => {
   assert.equal(normalizeTimes("입실 오후 2시 퇴실 11시, 매너타임 22시 이후, 2시간, 12시반, 춘천시"), "입실 14:00 퇴실 11:00, 매너타임 22:00 이후, 2시간, 12:30, 춘천시");
   assert.equal(normalizeWon("13만원 2만5천원 130000원 13만원대 5천원"), "130,000원 25,000원 130,000원 13만원대 5,000원");
+});
+
+test("표기: HTML 목록 기호를 정제하고 공용 포털 푸터를 격리한다", () => {
+  assert.equal(decodeDisplayEntities("입&middot;퇴실&nbsp;안내"), "입·퇴실 안내");
+  assert.equal(isOperatorContentNoise("(12416) 경기도 가평군 가평읍 문화로 153 가평군시설관리공단"), true);
+  assert.equal(isOperatorContentNoise("대관행사 기간에는 사이트 주변 차량 통행이 제한될 수 있습니다."), false);
 });
 
 test("운영 안내 항목: 낱말이 가장 많이 맞는 칸", () => {

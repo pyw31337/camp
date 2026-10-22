@@ -8,6 +8,7 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { normalizeUrl } from "../lib/booking-intel.mjs";
 import { assignNonEmpty, logReview } from "../lib/merge-policy.mjs";
+import { sidoStd } from "../lib/geo-sanity.mjs";
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const dataDir = process.env.EXPLORE_DIR || join(root, "camping-atlas/public/explore/data");
 const seed = JSON.parse(readFileSync(join(root, "pipeline/registry/dayuse-seed.json"), "utf8"));
@@ -28,6 +29,10 @@ for (const p of seed.places ?? []) {
   const { rules, day, src, ...rec } = p;
   if (src?.url) { rec.src_url = src.url; rec.src_at = src.checked_at; }
   rec.types = [...new Set((rec.types ?? []).map(unify))];
+  // publish-sanity의 광역시·도 표기 규칙을 여기서도 먼저 적용한다.
+  // OSM/당일 나들이 시드가 “경기도”처럼 긴 표기를 다시 넣으면 매 발행마다
+  // 목록 전체가 바뀌므로, 시드와 발행 단계가 같은 표기를 사용해야 한다.
+  if (rec.sido) rec.sido = sidoStd(rec);
   // 홈페이지 주소는 build-link-health.mjs와 같은 규칙으로 바로잡아 둔다(다시 돌려도 결과가 같게).
   if (rec.homepage && !/^https?:\/\/[^/\s]+\.[^/\s]+/i.test(rec.homepage)) { const u = normalizeUrl(rec.homepage); if (u) rec.homepage = u; else { rec.homepage_raw = rec.homepage; delete rec.homepage; } }
   // 빈 값으로 기존 값을 지우지 않는다(docs/DATA_MERGE_POLICY.md ①).

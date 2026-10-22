@@ -217,7 +217,8 @@ export function mergeList(oldList = [], newList = [], key, ctx = {}) {
 
 import { appendFileSync as _append } from "node:fs";
 import { fileURLToPath as _f2p } from "node:url";
-export const REVIEW_LOG_PATH = _f2p(new URL("../registry/merge-review.ndjson", import.meta.url));
+// 검사 스크립트는 임시 파일을 넘겨 레지스트리를 더럽히지 않는다.
+export const REVIEW_LOG_PATH = process.env.MERGE_REVIEW_LOG_PATH || _f2p(new URL("../registry/merge-review.ndjson", import.meta.url));
 /**
  * 검토 기록(append-only)에 한 줄 남긴다. action: removed(정당한 삭제 — field-guard가 통과시킴, reason 필수)·
  * rejected/quarantined(논리 검사 실패로 격리)·superseded(더 최신 값으로 교체, previous 보관)·restored.

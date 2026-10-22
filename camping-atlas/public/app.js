@@ -31,7 +31,20 @@ function nav(h, { replace = false } = {}) {
 for (const a of document.querySelectorAll('a[href^="./"]')) { const r = a.getAttribute("href").slice(2); if (!/\.(?:svg|png|webmanifest|json)$/.test(r)) a.setAttribute("href", APP_BASE + r); }
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
-const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[m]);
+// 원천의 가운뎃점·공백 엔티티만 읽기 쉬운 문자로 바꾼다. HTML 태그/기타 엔티티는
+// 해석하지 않아 원문을 화면에 넣을 때의 XSS 경계를 그대로 지킨다.
+function displayText(value) {
+  let s = String(value ?? "");
+  for (let i = 0; i < 2; i++) {
+    const next = s.replace(/&(?:amp;)?middot;?/gi, "·").replace(/&(?:amp;)?nbsp;?/gi, " ")
+      .replace(/&(?:amp;)?#0*183;?/gi, "·").replace(/&(?:amp;)?#x0*b7;?/gi, "·")
+      .replace(/&(?:amp;)?#0*8226;?/gi, "·").replace(/&(?:amp;)?#x0*2022;?/gi, "·");
+    if (next === s) break;
+    s = next;
+  }
+  return s.replace(/\u00a0/g, " ").replace(/[∙⋅•]/g, "·");
+}
+const esc = (s) => displayText(s).replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[m]);
 const fmt = (n) => Number(n).toLocaleString("ko-KR");
 // 카드·목록의 1박 요금 표기를 한 형식으로: 4만~5만원, 2만~2.5만원대(후기 언급처럼 어림값이면 ‘대’).
 const manWon = (n) => (n % 10000 === 0 ? `${n / 10000}만` : n >= 10000 ? `${(n / 10000).toFixed(1).replace(/\.0$/, "")}만` : `${Math.round(n / 1000)}천`);
@@ -1195,13 +1208,30 @@ function toast(msg) { const t = $("#toast"); t.classList.remove("has-act"); t.te
 const TIPS = new Map();
 let tipN = 0;
 function tip(html, label = "자세한 정보") { const k = `t${++tipN}`; TIPS.set(k, html); return `<button class="ib" type="button" data-tip="${k}" aria-label="${esc(label)}">${ic("info")}</button>`; }
+// 앵커가 있으면 그대로, 아니면 Chrome/Safari Text Fragment로 근거 문장부터 연다.
+// 원문 사이트가 Text Fragment를 지원하지 않아도 같은 페이지를 열며, (i)의 인용문은 남는다.
+function sourceLocationUrl(source = {}) {
+  const raw = String(source.url ?? "");
+  if (!/^https?:\/\//i.test(raw)) return "";
+  try {
+    const u = new URL(raw);
+    const anchor = String(source.anchor ?? source.locator?.anchor ?? "").replace(/^#/, "").replace(/[^A-Za-z0-9_.:-]/g, "");
+    if (anchor) { u.hash = anchor; return u.toString(); }
+    if (u.hash) return u.toString();
+    const quote = displayText(source.text_fragment ?? source.locator?.text ?? source.quote ?? "").replace(/\s+/g, " ").trim().slice(0, 120);
+    if (quote.length >= 8) return `${u.origin}${u.pathname}${u.search}#:~:text=${encodeURIComponent(quote)}`;
+    return u.toString();
+  } catch { return raw; }
+}
 function srcTip(x, label) {
   if (!x) return "";
   const s = x.src ?? {};
   const d = s.at ? formatKoreanDate(s.at) : "";
   // 운영자 안내 이미지에서 글자 인식(OCR)으로 읽은 값이면 원본 이미지를 함께 보인다 — 인식이 틀릴 수 있으니 눈으로 확인(소유자 2026-10-19).
   const img = s.image ? `<button type="button" class="tip-img" data-ocr-img="${esc(s.image)}" aria-label="원본 이미지 크게 보기"><img src="${esc(s.image)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.tip-img').classList.add('is-broken')"><span>${ic("search")}원본 이미지 크게 보기</span></button><small class="tip-note">글자 인식 결과라 틀릴 수 있어요. 이미지를 확인하세요. <a href="${esc(s.image)}" target="_blank" rel="noopener">이미지 새 창</a></small>` : "";
-  return tip(`<b>${esc(label)}</b><span>${GRADE_TXT[x.g] ?? ""}${s.label ? ` · ${esc(s.label)}` : ""}${d ? ` · ${esc(d)}` : ""}</span>${img}${s.quote ? `<q>${esc(String(s.quote).slice(0, 240))}</q>` : ""}${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">원문 보기</a>` : ""}`, `${label} 근거`);
+  const sourceUrl = sourceLocationUrl(s);
+  const exact = sourceUrl && sourceUrl !== s.url;
+  return tip(`<b>${esc(label)}</b><span>${GRADE_TXT[x.g] ?? ""}${s.label ? ` · ${esc(s.label)}` : ""}${d ? ` · ${esc(d)}` : ""}</span>${img}${s.quote ? `<q>${esc(String(s.quote).slice(0, 240))}</q>` : ""}${sourceUrl ? `<a href="${esc(sourceUrl)}" target="_blank" rel="noopener">${exact ? "근거 문장 열기" : "원문 보기"}</a>` : ""}`, `${label} 근거`);
 }
 // (i) 안의 원본 안내 이미지 → 크게 보기
 document.addEventListener("click", (e) => {
@@ -2939,7 +2969,10 @@ function siteTypesHtml(c, d) {
     const meta = ST[t.code] ?? { label: t.code, icon: "tent" };
     const unit = t.code === "GLAMPING" || t.code === "CARAVAN" || t.code === "HOUSE" ? "동" : "면";
     const x = { v: meta.label, g: GRADE_OF[t.grade] ?? "c", src: { label: SRC_LABEL[t.src] ?? t.src, url: t.url, at: t.at, quote: t.quote } };
-    return `<div class="stype"><span class="stype-ic">${ic(meta.icon)}</span><span class="stype-b"><b>${esc(t.code === "HOUSE" && t.sub ? `${meta.label} · ${t.sub}` : meta.label)}</b><i>${t.count ? `${fmt(t.count)}${unit}` : t.grade === "OPERATOR" ? "운영자 안내" : t.grade === "MENTION" ? "후기 언급" : "있음"}${t.grade === "MENTION" ? asOf(t.at) : ""}</i></span><span class="tile-g">${dot(x.g)}${srcTip(x, meta.label)}</span></div>`;
+    // 320px의 2열 카드도 낱글자씩 쪼개지지 않게 한다. 복합 명칭은 가운데점에서만
+    // 줄바꿈 기회를 주므로 “오토캠핑”은 한 단어로, “숙박·특별휴양”은 읽기 좋게 나뉜다.
+    const label = esc(t.code === "HOUSE" && t.sub ? `${meta.label} · ${t.sub}` : meta.label).replace(/·/g, "·<wbr>");
+    return `<div class="stype"><span class="stype-ic">${ic(meta.icon)}</span><span class="stype-b"><b>${label}</b><i>${t.count ? `${fmt(t.count)}${unit}` : t.grade === "OPERATOR" ? "운영자 안내" : t.grade === "MENTION" ? "후기 언급" : "있음"}${t.grade === "MENTION" ? asOf(t.at) : ""}</i></span><span class="tile-g">${dot(x.g)}${srcTip(x, meta.label)}</span></div>`;
   }).join("");
   return `<section class="d-sec"><div class="sec-head">${iconTitle("sitetype", "사이트 타입")}</div><div class="stypes">${tiles}</div></section>`;
 }
@@ -3500,18 +3533,13 @@ function bookingHtml(c, d) {
   const openTimeStr = o?.at ? new Date(o.at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", weekday: "short", hour: "2-digit", minute: "2-digit" }) : "";
   const meta = [
     o ? ["다음 오픈", [o.txt, openTimeStr, o.label].filter(Boolean).join(" · ")] : null,
-    ["오픈 주기", pf.opening],
-    ["결제", pf.payment],
-    ["취소", pf.cancel],
-    ["대기", pf.waitlist]
+    ["오픈 주기", pf.opening]
   ].filter(Boolean).filter(([, v]) => v && !/운영자 안내에 따름|홈페이지마다 다름|홈페이지\s*(공지|예약\s*안내)|일정을 따른다/.test(v));
-  if (!main && !c.tel && !meta.length && !(pf.tips ?? []).length && !o) return "";
-  const guideFact = sourceFact({ src: g?.source?.label ?? g?.source, url: g?.source?.url, date: g?.source?.date, quote: (pf.tips ?? []).join("\n") }, "예약 안내");
-  return `<section class="d-sec" id="sec-booking"><div class="sec-head">${iconTitle("booking", "예약 방법")}${main || (pf.tips ?? []).length ? `<span class="sec-note">${main ? srcTip(bookingSource(main), "대표 예약 채널") : ""}${(pf.tips ?? []).length ? srcTip(guideFact, "예약 안내") : ""}</span>` : ""}</div>
+  if (!main && !c.tel && !meta.length && !o) return "";
+  return `<section class="d-sec" id="sec-booking"><div class="sec-head">${iconTitle("booking", "예약 방법")}${main ? `<span class="sec-note">${srcTip(bookingSource(main), "대표 예약 채널")}</span>` : ""}</div>
     ${o ? `<div class="bo-highlight ${o.dd <= 0 ? "bo-today" : ""}"><span class="bo-badge">${ic("clock")}${esc(o.txt ?? "오픈 예정")}</span><div class="bo-detail"><b>다음 예약 오픈</b><span>${esc([openTimeStr, o.label].filter(Boolean).join(" · ") || o.txt)}</span></div><button type="button" class="btn ghost btn-sm bo-ics" data-open-ics="${esc(String(c.id))}">${ic("clock")}캘린더 알림</button></div>` : ""}
     ${main || c.tel ? `<div class="chans">${main ? `<a class="chan" href="${esc(main.url)}" target="_blank" rel="noopener">${ic(/네이버/.test(bookingLabel(main)) ? "naver" : "booking")}<b>${esc(bookingLabel(main))}</b><i>예약 페이지</i></a>` : ""}${c.tel ? `<a class="chan" href="tel:${esc(telText(c.tel).replace(/[^\d+]/g, ""))}">${ic("phone")}<b>전화 문의</b><i>${esc(telText(c.tel))}</i></a>` : ""}</div>` : ""}
     ${meta.length ? `<dl class="uses">${meta.map(([l, v]) => `<div class="use"><dt>${l === "다음 오픈" ? ic("clock") : ""}${l}</dt><dd><span class="use-val${l === "다음 오픈" ? " hot" : ""}">${bookingValue(bookingLines(v, { dateLike: l === "다음 오픈" }))}</span><span class="use-meta">${srcTip({ g: "c", src: { label: l === "다음 오픈" ? "예약 오픈 정보" : "예약 안내", url: g?.source?.url, at: g?.source?.date, quote: v } }, l)}</span></dd></div>`).join("")}</dl>` : ""}
-    ${(pf.tips ?? []).length ? `<ul class="tips">${pf.tips.slice(0, 3).flatMap((t) => bookingLines(t)).map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}
   </section>`;
 }
 function availHtml(c) {
@@ -4351,61 +4379,35 @@ async function initCampWeather(c) {
 }
 
 function renderHourlyTimeline(hourlyList, tab, isToday, nowHour) {
-  const colWidth = 52;
-  const totalWidth = hourlyList.length * colWidth;
-
-  if (tab === "weather") {
-    const temps = hourlyList.map((h) => h.temp);
-    const minT = Math.min(...temps);
-    const maxT = Math.max(...temps);
-    const spanT = Math.max(2, maxT - minT);
-    const chartHeight = 58;
-
-    const points = hourlyList.map((h, idx) => {
-      const x = idx * colWidth + colWidth / 2;
-      const y = 18 + ((maxT - h.temp) / spanT) * (chartHeight - 26);
-      return { x, y, temp: h.temp, code: h.code, time: h.time };
-    });
-
-    const pathD = points.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
-
-    return `<div style="display:flex; flex-direction:column; min-width:${totalWidth}px;">
-      <svg width="${totalWidth}" height="${chartHeight}" style="overflow:visible; display:block;">
-        <path d="${pathD}" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        ${points.map((p) => `
-          <circle cx="${p.x}" cy="${p.y}" r="3" fill="currentColor"/>
-          <text x="${p.x}" y="${p.y - 6}" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">${p.temp}°</text>
-        `).join("")}
-      </svg>
-      <div class="w-hourly-bottom-row">
-        ${hourlyList.map((h) => {
-          const hourNum = parseInt(h.time.split(":")[0], 10);
-          const isNow = isToday && hourNum === nowHour;
-          return `<div class="w-hourly-col${isNow ? " is-now" : ""}">
-            <div style="height:20px; display:flex; align-items:center; justify-content:center; font-size:15px;">${weatherEmoji(h.code)}</div>
-            <span class="w-hour-label">${hourNum}시</span>
-          </div>`;
-        }).join("")}
-      </div>
-    </div>`;
-  }
-
-  return `<div style="display:flex; min-width:${totalWidth}px;">
-    ${hourlyList.map((h) => {
-      const hourNum = parseInt(h.time.split(":")[0], 10);
-      const isNow = isToday && hourNum === nowHour;
-      let valText = "";
-      if (tab === "precip") valText = `${h.precip}mm\n(${h.precipProb}%)`;
-      else if (tab === "wind") valText = `${h.windSpeed ?? "-"}m/s`;
-      else if (tab === "humidity") valText = `${h.humidity}%`;
-      else if (tab === "air") valText = h.pm10 ? `${h.pm10}/${h.pm2_5}` : "-";
-      else if (tab === "uv") valText = h.uv != null ? `${h.uv}` : "-";
-
-      return `<div class="w-hourly-col${isNow ? " is-now" : ""}">
-        <span class="w-hourly-val" style="white-space:pre-line; height:32px; display:flex; align-items:center; justify-content:center;">${valText}</span>
-        <span class="w-hour-label">${hourNum}시</span>
-      </div>`;
-    }).join("")}
+  const colWidth = 52, totalWidth = hourlyList.length * colWidth, chartHeight = 74;
+  const config = {
+    weather: { key: "temp", unit: "°", label: "기온", color: "#2b59ff" },
+    precip: { key: "precip", unit: "mm", label: "강수량", color: "#0ea5e9", bars: true },
+    wind: { key: "windSpeed", unit: "m/s", label: "풍속", color: "#8b5cf6" },
+    humidity: { key: "humidity", unit: "%", label: "습도", color: "#00a879" },
+    air: { key: "pm10", unit: "㎍", label: "미세먼지", color: "#f59e0b" },
+    uv: { key: "uv", unit: "", label: "자외선", color: "#f97316" },
+  }[tab] ?? { key: "temp", unit: "°", label: "기온", color: "#2b59ff" };
+  const num = (v) => Number.isFinite(Number(v)) ? Number(v) : 0;
+  const values = hourlyList.map((h) => num(h[config.key]));
+  const max = Math.max(1, ...values), min = config.bars ? 0 : Math.min(...values);
+  const span = Math.max(config.key === "temp" ? 2 : 1, max - min);
+  const points = values.map((value, idx) => ({ x: idx * colWidth + colWidth / 2, y: 13 + ((max - value) / span) * (chartHeight - 31), value }));
+  const path = points.map((p, i) => `${i ? "L" : "M"}${p.x} ${p.y}`).join(" ");
+  const label = (h, value) => {
+    if (tab === "weather") return `${value}°`;
+    if (tab === "precip") return `${value}mm · ${num(h.precipProb)}%`;
+    if (tab === "air") return h.pm10 != null ? `${value}/${h.pm2_5 ?? "–"}` : "–";
+    return `${value}${config.unit}`;
+  };
+  return `<div class="w-chart" style="--w-chart:${config.color}; min-width:${totalWidth}px;">
+    <div class="w-chart-head"><span>${config.label}</span>${tab === "precip" ? "<small>막대: 강수량 · 숫자: 확률</small>" : ""}</div>
+    <svg width="${totalWidth}" height="${chartHeight}" viewBox="0 0 ${totalWidth} ${chartHeight}" aria-label="시간별 ${config.label} 그래프" role="img">
+      <path class="w-chart-grid" d="M0 ${chartHeight - 11}H${totalWidth}" />
+      ${config.bars ? points.map((p) => `<rect x="${p.x - 9}" y="${p.y}" width="18" height="${chartHeight - 11 - p.y}" rx="4" class="w-chart-bar"/>`).join("") : `<path d="${path}" class="w-chart-line"/>${points.map((p) => `<circle cx="${p.x}" cy="${p.y}" r="3" class="w-chart-dot"/>`).join("")}`}
+      ${points.map((p, i) => `<text x="${p.x}" y="${Math.max(10, p.y - 7)}" text-anchor="middle" class="w-chart-label">${esc(label(hourlyList[i], p.value))}</text>`).join("")}
+    </svg>
+    <div class="w-hourly-bottom-row">${hourlyList.map((h) => { const hourNum = parseInt(h.time.split(":")[0], 10), isNow = isToday && hourNum === nowHour; return `<div class="w-hourly-col${isNow ? " is-now" : ""}">${tab === "weather" ? `<span class="w-hourly-icon">${weatherEmoji(h.code)}</span>` : `<span class="w-hourly-val">${esc(label(h, num(h[config.key])))}</span>`}<span class="w-hour-label">${hourNum}시</span></div>`; }).join("")}</div>
   </div>`;
 }
 
@@ -4884,6 +4886,10 @@ function bindDetail() {
   $(".media-hub")?.addEventListener("click", (e) => {
     const t = e.target.closest("[data-mh-tab]");
     if (!t) return;
+    // 탭은 눌러서만 전환한다. 같은 섹션의 영상 레일 스와이프가 탭 전환으로
+    // 번지지 않도록 이벤트 경계를 명확히 둔다.
+    e.preventDefault();
+    e.stopPropagation();
     $$(".media-hub [data-mh-tab]").forEach((b) => b.setAttribute("aria-selected", String(b === t)));
     $$(".media-hub [role='tabpanel']").forEach((p) => {
       const isTarget = p.id === t.getAttribute("aria-controls");
@@ -4894,6 +4900,7 @@ function bindDetail() {
       }
     });
   });
+  $(".media-hub .mh-tabs-bar")?.addEventListener("pointerdown", (e) => e.stopPropagation(), { passive: true });
   $(".nearby-hub")?.addEventListener("click", (e) => {
     const t = e.target.closest("[data-nb-tab]");
     if (!t) return;

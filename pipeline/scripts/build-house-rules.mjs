@@ -60,7 +60,7 @@ for (const c of camps) {
   const lines = [];
   for (const reg of [sites[c.id], deep[c.id]]) {
     if (reg?.status !== "OK") continue;
-    for (const s of reg.snippets ?? []) lines.push({ text: s.text, url: s.url ?? reg.url, at: reg.checked_at ?? null, g: "c", src: "운영자 홈페이지" });
+    for (const s of reg.snippets ?? []) lines.push({ text: s.text, url: s.url ?? reg.url, at: reg.checked_at ?? null, g: "c", src: "운영자 홈페이지", ...(s.locator ? { locator: s.locator } : {}) });
   }
   const h = houseRules(lines, structuredOf(c), positivesOf(c));
   // 크롤러가 게시판에서 직접 찾은 공지 글(제목·글 주소·날짜)이 먼저, 문장에서 찾은 공지는 그 뒤에(같은 제목은 하나로)
