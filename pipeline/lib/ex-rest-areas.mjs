@@ -5,6 +5,7 @@ export const EX_SOURCE = {
   location: `${EX_BASE}locationinfo/locationinfoRest`,
   convenience: `${EX_BASE}business/conveniServiceArea`,
   fuel: `${EX_BASE}business/curStateStation`,
+  best_food: `${EX_BASE}restinfo/restBestfoodList`,
 };
 const OIL_BRAND = { AD: "알뜰주유소", SK: "SK에너지", GS: "GS칼텍스", S: "S-OIL", HD: "HD현대오일뱅크", E1: "E1" };
 const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -57,9 +58,17 @@ export async function fetchExAll(path, key, { fetchImpl = fetch, wait = pause } 
   return rows;
 }
 
-export function buildExServiceAreas({ location, convenience, fuel, checkedAt }) {
+export function buildExServiceAreas({ location, convenience, fuel, bestFood = [], checkedAt }) {
   const conveniences = new Map(convenience.map((item) => [item.serviceAreaCode, item]));
   const fuels = new Map(fuel.map((item) => [baseName(item.serviceAreaName), item]));
+  const foods = new Map();
+  for (const item of bestFood) {
+    const key = item.code ?? baseName(item.area);
+    if (!key) continue;
+    const list = foods.get(key) ?? [];
+    if (!list.some((x) => x.menu === item.menu && x.price === item.price)) list.push({ menu: item.menu, price: item.price });
+    foods.set(key, list);
+  }
   const available = (value, fee) => ({ available: value, fee: value === false ? null : fee });
   const result = [];
   for (const item of location) {
@@ -68,6 +77,7 @@ export function buildExServiceAreas({ location, convenience, fuel, checkedAt }) 
     const detail = conveniences.get(item.serviceAreaCode);
     const facilities = String(detail?.convenience ?? "").split("|").filter(Boolean);
     const station = fuels.get(baseName(item.unitName));
+    const best = foods.get(item.serviceAreaCode) ?? foods.get(baseName(item.unitName)) ?? [];
     const known = Boolean(detail);
     const has = (label) => facilities.includes(label);
     const prices = station ? { gasoline: won(station.gasolinePrice), diesel: won(station.diselPrice), lpg: station.lpgYn === "Y" ? won(station.lpgPrice) : null } : null;
@@ -81,9 +91,35 @@ export function buildExServiceAreas({ location, convenience, fuel, checkedAt }) 
         pharmacy: available(known ? has("약국") : null, "PAID"), fuel: available(station ? true : null, "PAID"),
       },
       extras: facilities.filter((facility) => !["수유실", "샤워실", "세탁실", "수면실", "약국"].includes(facility)),
+      best_foods: best.slice(0, 5).map((x) => ({ ...x, source_url: EX_SOURCE.best_food, checked_at: checkedAt, tier: "A" })),
       fuel: station ? { station: station.serviceAreaName, brand: OIL_BRAND[station.oilCompany] ?? station.oilCompany ?? null, prices_krw_per_l: prices, checked_at: checkedAt, source_url: EX_SOURCE.fuel, tier: "A" } : null,
       source: { id: "ex-openapi", tier: "A", title: "한국도로공사 고속도로 공공데이터 포털", url: EX_SOURCE.location, checked_at: checkedAt },
     });
   }
   return result;
+}
+
+/**
+ * 한국도로공사 대표 메뉴 응답을 휴게소별로 붙일 수 있는 작은 목록으로 정규화한다.
+ * API 버전에 따라 필드명이 조금씩 달라서, 이름·코드·메뉴·가격 후보를 보수적으로 읽는다.
+ * 원문에 없는 값은 만들지 않고, 매칭되지 않은 메뉴도 버리지 않는다(다음 병합에서 재사용).
+ */
+export function normalizeBestFoods(rows = []) {
+  const value = (row, names) => {
+    for (const name of names) {
+      const key = Object.keys(row ?? {}).find((k) => k.toLowerCase() === name.toLowerCase());
+      if (key && row[key] != null && String(row[key]).trim()) return String(row[key]).trim();
+    }
+    return null;
+  };
+  const out = [];
+  for (const row of rows) {
+    const code = value(row, ["serviceAreaCode", "svarCd", "휴게소코드"]);
+    const area = value(row, ["serviceAreaName", "svarNm", "휴게소명", "unitName"]);
+    const menu = value(row, ["foodName", "menuName", "대표메뉴", "메뉴명"]);
+    const price = won(value(row, ["price", "foodPrice", "대표메뉴가격", "가격"]));
+    if (!code && !area || !menu) continue;
+    out.push({ code: code ?? null, area: area ?? null, menu, price, source_url: EX_SOURCE.best_food });
+  }
+  return out;
 }

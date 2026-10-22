@@ -57,10 +57,12 @@
     "db:import-supabase": "node scripts/import-all-to-supabase.mjs",
     "check:billing": "node scripts/check-external-services-billing.mjs",
     "sync:forest": "node scripts/sync-forest-recreation.mjs",
+    "sync:kdata-public": "node scripts/sync-kdata-public.mjs",
     "sync:best": "node scripts/sync-best-campgrounds.mjs",
     "match:forest": "node scripts/match-forest-recreation.mjs",
     "normalize:local-fees": "node scripts/normalize-local-fees.mjs",
-    "prioritize:operator-gaps": "node scripts/prioritize-operator-gaps.mjs"
+    "prioritize:operator-gaps": "node scripts/prioritize-operator-gaps.mjs",
+    "audit:public-data": "node scripts/audit-public-data.mjs"
   },
   "dependencies": {
     "pg": "8.23.1",

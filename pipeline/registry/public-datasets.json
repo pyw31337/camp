@@ -1264,6 +1264,80 @@
    "url": "https://www.data.go.kr/data/15076642/openapi.do"
   },
   {
+   "status": "in_use",
+   "id": "15076352",
+   "kind": "API",
+   "title": "환경부_전기자동차 충전소 정보",
+   "org": "한국환경공단",
+   "category": "nearby",
+   "use": "캠핑장 반경 10km 충전소·급속 여부·좌표 → 상세 주변 충전소 탭",
+   "priority": "P0",
+   "url": "https://www.data.go.kr/data/15076352/openapi.do",
+   "code": "pipeline/scripts/sync-trip-extras.mjs · camping-atlas/public/context/extras.json",
+   "note": "DATA_GO_KR_SERVICE_KEY가 없거나 전국 응답이 부분 수집되면 기존 OSM 캐시를 유지한다."
+  },
+  {
+   "status": "in_use",
+   "id": "15000563",
+   "kind": "API",
+   "title": "국립중앙의료원_응급의료기관 정보",
+   "org": "국립중앙의료원",
+   "category": "nearby",
+   "use": "캠핑장 주변 가장 가까운 응급실(기관명·거리·전화) → 주변 병원",
+   "priority": "P0",
+   "url": "https://www.data.go.kr/data/15000563/openapi.do",
+   "code": "pipeline/scripts/sync-trip-extras.mjs · camping-atlas/public/context/extras.json"
+  },
+  {
+   "status": "in_use",
+   "id": "15135102",
+   "kind": "API",
+   "title": "한국관광공사_반려동물 동반여행",
+   "org": "한국관광공사",
+   "category": "theme",
+   "use": "캠핑장과 같은 반려동물 동반 여행지·동반 조건 → 상세 여행 참고",
+   "priority": "P1",
+   "url": "https://www.data.go.kr/data/15135102/openapi.do",
+   "code": "pipeline/scripts/sync-trip-extras.mjs · camping-atlas/public/context/extras.json"
+  },
+  {
+   "status": "in_use",
+   "id": "15101897",
+   "kind": "API",
+   "title": "한국관광공사_무장애 여행정보",
+   "org": "한국관광공사",
+   "category": "theme",
+   "use": "휠체어·유아차 등 무장애 여행지 연결 → 상세 여행 참고",
+   "priority": "P1",
+   "url": "https://www.data.go.kr/data/15101897/openapi.do",
+   "code": "pipeline/scripts/sync-trip-extras.mjs · camping-atlas/public/context/extras.json"
+  },
+  {
+   "status": "in_use",
+   "id": "15101974",
+   "kind": "API",
+   "title": "한국관광공사_두루누비 코스 정보",
+   "org": "한국관광공사",
+   "category": "nearby",
+   "use": "캠핑장 시군의 걷기·자전거 코스 → 주변 여행 참고",
+   "priority": "P1",
+   "url": "https://www.data.go.kr/data/15101974/openapi.do",
+   "code": "pipeline/scripts/sync-trip-extras.mjs · camping-atlas/public/context/extras.json"
+  },
+  {
+   "status": "in_use",
+   "id": "15128555",
+   "kind": "API",
+   "title": "한국관광공사_관광지 집중률 예측",
+   "org": "한국관광공사",
+   "category": "analytics",
+   "use": "시군 관광지 상대 혼잡도(예측)를 주말 참고 정보로 표시",
+   "priority": "P2",
+   "url": "https://www.data.go.kr/data/15128555/openapi.do",
+   "code": "pipeline/scripts/sync-trip-extras.mjs · camping-atlas/public/context/extras.json",
+   "note": "실시간 예약 가능 여부나 절대 방문객 수가 아닌 상대 지표로만 표시한다."
+  },
+  {
    "status": "planned",
    "id": "85049",
    "kind": "LINKED",
@@ -1285,6 +1359,31 @@
    "priority": "P0",
    "url": "https://www.localdata.go.kr/",
    "code": "pipeline/lib/nearby-licensed.mjs, scripts/sync-nearby-licensed.mjs"
+  },
+  {
+   "status": "in_use",
+   "id": "kdata-public",
+   "kind": "LINKED",
+   "title": "알잘 공공데이터 공개 색인(휴양림·휴게소·실내놀이터·수영장·레포츠·박물관)",
+   "org": "공개 색인(원문 연결)",
+   "category": "nearby",
+   "use": "좌표·주소·운영 표·원문 링크를 캠핑장 주변 공공시설로 연결",
+   "priority": "P1",
+   "url": "https://k-data.aljal.kr/",
+   "code": "pipeline/scripts/sync-kdata-public.mjs · pipeline/lib/kdata-public.mjs"
+  },
+  {
+   "status": "in_use",
+   "id": "ex-openapi",
+   "kind": "API",
+   "title": "한국도로공사 고속도로 공공데이터 OpenAPI",
+   "org": "한국도로공사",
+   "category": "route",
+   "use": "휴게소 위치·편의시설·주유 가격·대표 메뉴를 가는 길 정보로 연결",
+   "priority": "P1",
+   "url": "https://data.ex.co.kr/openapi/",
+   "code": "pipeline/scripts/sync-rest-stops.mjs · pipeline/lib/ex-rest-areas.mjs",
+   "note": "EX_API_KEY가 없으면 공식 호출을 생략하고 졸음쉼터·OSM 캐시만 유지한다."
   }
  ],
  "related_plan": "docs/PUBLIC_DATA_INTEGRATION_PLAN.md (Gemini) — 표준·연계·사진·노지 수집 설계. 이 원장은 그 문서와 함께 쓰는 데이터셋별 활용·우선순위 목록이다.",

@@ -134,8 +134,14 @@ const restPois = (restRaw?.stops ?? []).map(normalizeRestStop).filter(Boolean);
 if (!restRaw) warn("휴게소 없음", "out/rest-stops.json 없음(sync:rest-stops 먼저) — rest 비움");
 console.log(`휴게소·졸음쉼터 ${restPois.length}곳`);
 
+// k-data 공개 색인: 휴양림·실내놀이터·수영장·레포츠·박물관 등은
+// 별도 수집기가 원문 URL·확인 시각과 함께 누적한다. 원장이 없으면 기존 주변 결과만 유지한다.
+const publicRaw = await readJson(`${fileURLToPath(new URL("../registry/kdata-public.json", import.meta.url))}`, null);
+const publicPois = (publicRaw?.records ?? []).filter((x) => Number.isFinite(Number(x.lat)) && Number.isFinite(Number(x.lng)));
+console.log(`공공시설 공개 색인 ${publicPois.length}곳`);
+
 // 4) 계산·기록
-const nearby = computeNearby(campgrounds, { tour: tourPois, osm: osmPois, rest: restPois });
+const nearby = computeNearby(campgrounds, { tour: tourPois, osm: osmPois, rest: restPois, public: publicPois });
 const filled = Object.fromEntries(Object.keys(NEARBY_RULES).map((k) => [k, Object.values(nearby).filter((n) => n[k]?.length).length]));
 console.log(`주변 맥락 ${Object.keys(nearby).length}곳 · 분류별 1건 이상: ${JSON.stringify(filled)}`);
 
@@ -143,6 +149,7 @@ const sources = [
   { ...SOURCES.tour, fetched_at: tourDates.at(-1) ?? null, oldest_fetched_at: tourDates[0] ?? null, coverage: Object.fromEntries(Object.keys(TOUR_TYPES).map((t) => [t, tourCache.types[t]?.items?.length ?? null])) },
   { ...SOURCES.osm, fetched_at: osmDates.at(-1) ?? null, oldest_fetched_at: osmDates[0] ?? null, attribution: OSM_ATTRIBUTION, coverage: { tiles_total: tiles.length, tiles_cached: usedTiles.length, pois: osmPois.length } },
   { ...SOURCES.rest, fetched_at: restRaw?.generated_at ?? null, coverage: { stops: restPois.length } },
+  { ...SOURCES.public, fetched_at: publicRaw?.generated_at ?? null, coverage: { records: publicPois.length, categories: [...new Set(publicPois.map((x) => x.category))] } },
 ];
 await writeFile(`${out}campground-nearby.json`, JSON.stringify({
   generated_at: fetchedAt,

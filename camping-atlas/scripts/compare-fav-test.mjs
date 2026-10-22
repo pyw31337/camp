@@ -18,7 +18,12 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [390, 844, "390"]]) {
   // 빈 화면
   if (!(await page.$("[data-cmp-empty]"))) fails.push(`${tag}: 찜 0곳 빈 화면 없음`);
   if (!/찜한 캠핑장/.test(await page.$eval(".cmp-page h1", (e) => e.textContent))) fails.push(`${tag}: 제목에 ‘찜한 캠핑장’ 없음`);
-  await page.click("[data-sample]"); await page.waitForSelector(".cmp-table");
+  await page.click("[data-sample]");
+  // route()는 비동기로 비교표를 다시 그린다. 기존 데모 표가 남아 있는 동안
+  // waitForSelector('.cmp-table')가 즉시 끝나면 모바일에서 이전 열 수를 읽는
+  // 레이스가 생긴다. 데모 버튼이 사라진 뒤 새 표를 검사한다.
+  await page.waitForSelector("[data-sample]", { state: "detached", timeout: 30000 });
+  await page.waitForSelector(".cmp-table");
   const s0 = await saved();
   if (s0.length < 4) fails.push(`${tag}: 예시 찜 ${s0.length}곳`);
   if (shots) await page.screenshot({ path: `${shots}/compare-${tag}.png` });
@@ -35,12 +40,11 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [390, 844, "390"]]) {
   const s2 = await saved();
   if (s2.includes(hid) || s2.length !== s0.length - 1) fails.push(`${tag}: 칩 하트로(비교 중인 곳) 찜 해제 안 됨`);
   if (await page.$(`.cmp-table [data-save="${hid}"], .picks [data-save="${hid}"]`)) fails.push(`${tag}: 해제한 곳이 칩·열에 남음`);
-  // 내비 숫자(역할 분리): 찜 = 찜한 곳 수, 비교 = 지금 고른 곳(열) 수
+  // 내비 숫자: 찜 수만 표시한다. 비교 선택 수는 화면 안에서만 확인한다.
   const badge = await page.$eval("[data-saved-count]", (e) => e.textContent.trim()).catch(() => "");
   if (badge !== String(s2.length)) fails.push(`${tag}: ‘찜’ 내비 숫자 ${badge} ≠ ${s2.length}`);
   const cols2 = await page.$$eval(".cmp-table thead th:not(.corner)", (t) => t.length);
-  const cbadge = await page.$eval("[data-compare-count]", (e) => (e.hidden ? "" : e.textContent.trim())).catch(() => "");
-  if (cbadge !== (cols2 ? String(cols2) : "")) fails.push(`${tag}: ‘비교’ 내비 숫자 ${cbadge} ≠ 고른 곳 ${cols2}`);
+  if (await page.$("[data-compare-count]")) fails.push(`${tag}: ‘비교’ 내비 숫자 뱃지가 남아 있음`);
   if (!new RegExp(`찜\\s*${s2.length}\\s*곳`).test(await page.$eval("[data-cmp-count]", (e) => e.textContent))) fails.push(`${tag}: 설명 숫자 미갱신`);
   // 되돌리기
   const undo = await page.$("#toast [data-undo]");

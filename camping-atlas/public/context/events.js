@@ -113,7 +113,9 @@ export function render(data, id, today = kstToday(), opt = null) {
   const all = eventsFor(data, id, today);
   if (!all.length) return "";
   const list = (opt ? inRange(all, opt.km, opt.days, today) : [...all])
-    .sort((a, b) => a.km - b.km || (a.state === "ongoing" ? 0 : 1) - (b.state === "ongoing" ? 0 : 1) || a.e.s.localeCompare(b.e.s));
+    // 포스터가 있는 행사를 먼저 보여 주고, 같은 상태에서는 거리순을 유지한다.
+    // 포스터 없는 행사를 숨기지는 않아 행사 정보 자체가 사라지지 않는다.
+    .sort((a, b) => Number(!a.e.img && !a.e.img2) - Number(!b.e.img && !b.e.img2) || a.km - b.km || (a.state === "ongoing" ? 0 : 1) - (b.state === "ongoing" ? 0 : 1) || a.e.s.localeCompare(b.e.s));
   if (!list.length) return `<p class="ev-empty">${opt.km}km 안·${opt.days}일 이내에는 행사가 없어요. 거리나 기간을 넓혀 보세요.</p>`;
   const on = list.filter((x) => x.state === "ongoing").length;
   const tabs = [["all", "전체", list.length], ["ongoing", "진행 중", on], ["upcoming", "예정", list.length - on]].filter(([, , n]) => n);
