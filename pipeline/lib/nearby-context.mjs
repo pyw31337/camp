@@ -213,6 +213,18 @@ export function rankTour(sightHits, shopHits, limit) {
   return [...main, ...[...shopHits].sort((a, b) => score(a) - score(b)).slice(0, limit - main.length)];
 }
 
+/** 같은 곳 두 번 금지: 이름(공백·괄호 무시)이 같고 500m 안이면 하나만(2026-10-22 ‘가평 휴게소 (상행)’ 두 번 — 도로공사·OSM 중복). 상행·하행은 다른 곳. */
+export function dedupeHits(hits, limit) {
+  const key = (h) => String(h.point.name ?? h.point.n ?? "").replace(/[\s()[\]·]/g, "").toLowerCase();
+  const out = [];
+  for (const h of hits) {
+    if (out.some((o) => key(o) === key(h) && Math.abs(o.distance_m - h.distance_m) <= 500)) continue;
+    out.push(h);
+    if (out.length >= limit) break;
+  }
+  return out;
+}
+
 /** 캠핑장 한 곳의 주변 맥락 */
 export function nearbyFor(lat, lng, idx, rules = NEARBY_RULES) {
   const tourExtra = (p) => ({ type: p.type, addr: p.addr, image: p.image, tel: p.tel, url: tourDetailUrl(p.id) });
@@ -230,12 +242,12 @@ export function nearbyFor(lat, lng, idx, rules = NEARBY_RULES) {
     const er = hospitals.find((h) => h.point.emergency === true);
     if (er) medical.push(er);
   }
-  const rest = idx.rest.within(lat, lng, rules.rest.radius_m, rules.rest.limit).map((h) => toItem(h, SOURCES.rest.id, {
+  const rest = dedupeHits(idx.rest.within(lat, lng, rules.rest.radius_m, rules.rest.limit * 3), rules.rest.limit).map((h) => toItem(h, SOURCES.rest.id, {
     road: h.point.road, addr: h.point.address,
     facts: h.point.best_foods?.length ? { 대표메뉴: h.point.best_foods.map((x) => `${x.menu}${x.price ? ` ${x.price.toLocaleString()}원` : ""}`).join(" · ") } : undefined,
   }));
   const publicByKind = {};
-  for (const h of idx.public.within(lat, lng, rules.public.radius_m)) {
+  for (const h of dedupeHits(idx.public.within(lat, lng, rules.public.radius_m), Infinity)) {
     const kind = h.point.kind || "public";
     (publicByKind[kind] ??= []).push(toItem(h, SOURCES.public.id, {
       addr: h.point.addr, image: h.point.image, facts: h.point.facts, url: h.point.url, source: h.point.source,

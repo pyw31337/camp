@@ -21,7 +21,7 @@ Claude·Codex·Gemini·Grok 등 어떤 에이전트든, 사람이 직접 넣는 
 |---|---|---|---|---|
 | 1 | **수집** | 원천에서 원문을 가져온다. 새 원천 종류는 먼저 등록한다. | `collected-data` 브랜치 캐시, `pipeline/registry/*.json` | ① 경로 규칙(아래 ‘수집 경로’) ② 무과금(`check:billing`) ③ 원천 등록(`fact-store.mjs SOURCES`, 공공데이터는 `public-datasets.json`) ④ 원문 URL·확인 시각 |
 | 2 | **판단(추출)** | 원문을 원자 사실로 쪼갠다. 형식은 `{cid, attr, value, grade, src, url, at, quote}`이다. | `data/facts/*.ndjson` (`build-fact-store.mjs`) | 속성 사전(`attributes.json`)에 있는 속성·형식만 허용. MENTION이 아니면 URL 필수(`validateFacts`) |
-| 3 | **검토(교차검증)** | 신뢰도·확증·충돌을 계산하고 상식 검사를 돌린다. | `data/quality/latest.json`, `review-queue.json` | 상식 검사: `publish-sanity`(공원 요금·광고 요금·좌표 오류·중복 등록·**캠핑장 아님**·휴업 등), `value-sanity`, `camp-reality` |
+| 3 | **검토(교차검증)** | 신뢰도·확증·충돌을 계산하고 상식 검사를 돌린다. | `data/quality/latest.json`, `review-queue.json` | 상식 검사: `publish-sanity`(공원 요금·광고 요금·좌표 오류·중복 등록·**캠핑장 아님**·휴업 등), `value-sanity`, `camp-reality`(서류상 등록·무관 업종 이름·무관 지도 분류), **후기 사진 내용 판정**(`photo-judge`: 음식·인물·차 안 사진 숨김) |
 | 4 | **판정** | 대기열의 충돌을 원문과 대조해 확정한다. 반복되는 오류는 규칙으로 올린다. | `data/quality/decisions.ndjson` → VERIFIED 사실 | 원문 근거 URL 필수, 속성 형식 검증(`quality-decide.mjs`). 거둘 때는 `--retract` |
 | 5 | **정제·병합** | 기존 값을 지우지 않고 합친다. 서비스 표기도 정리한다. | 발행 데이터(`camping-atlas/public/explore/data`) | `DATA_MERGE_POLICY.md`: ① 빈칸 채우기 ② 더 믿을 만하거나 최근일 때만 덮어쓰기(옛 값 기록) ③ 논리 검사 ④ 표기 정제. 수기 확정값은 `curated-pins.json` |
 | 6 | **발행·환류** | 회귀 검사 후 발행하고, 장부와 보고서를 남긴다. | 커밋, `data/quality/ledger.ndjson`, `REPORT.md` | `field-guard`(값 손실 금지), `coverage-guard`(커버리지 회귀 금지), `publish-sanity --check`, `quality-ledger`(회귀 경고) |

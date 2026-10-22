@@ -11,11 +11,22 @@ const OFFICE = /타워|빌딩|오피스텔|지식산업센터|벤처|\d+\s*층|\
 const OWN = ["tel", "img", "line", "kinds", "sizes", "amenities", "ph"];
 export const ownEvidence = (c) => OWN.filter((f) => c[f] != null && c[f] !== "" && !(Array.isArray(c[f]) && !c[f].length));
 
-/** 서류상 등록(캠핑장 아님)이면 이유 문자열, 아니면 null. kakao·naver는 registry 항목, n5는 5km 안 편의점 수. */
+// 캠핑과 무관한 업종 이름(소유자 2026-10-22: ‘스마트락(주)은 샷시 만드는 업체’). 캠핑장 낱말이 없을 때만 본다.
+export const INDUSTRY_WORD = /샷시|새시|섀시|창호|도어락|스마트락|건설|건축|인테리어|산업|공업|무역|물산|상사|테크|시스템|전자|기계|철강|금속|물류|컨설팅|부동산|세무|법무|의원|병원|학원|보험|증권|통신|소프트|엔지니어링|광고|제약|화학|플라스틱/;
+// 지도 장소 분류가 캠핑과 무관한 업종(제조·건설·부동산·사무 서비스 등)
+const UNRELATED_CAT = /제조|공장|건설|건축|인테리어|창호|철물|부동산|사무|법률|세무|회계|금융|보험|의료|병원|학교|학원|자동차정비|주유소|물류|택배|IT|소프트웨어|전자/;
+
+/** 서류상 등록이거나 캠핑과 무관한 업체면 이유 문자열, 아니면 null. kakao·naver는 registry 항목, n5는 5km 안 편의점 수. */
 export function paperRegistration(c, { kakao = null, naver = null, n5 = null } = {}) {
   if (c.du || /^rf-/.test(String(c.id))) return null;
   if (CAMP_WORD.test(c.name ?? "")) return null;
-  if (ownEvidence(c).length) return null;
+  const evid = ownEvidence(c).length;
+  // 업종 이름 + 근거 거의 없음(전화 하나 정도) → 캠핑장 아님
+  if (INDUSTRY_WORD.test(c.name ?? "") && evid <= 1) return `이름이 캠핑과 무관한 업종(${c.name.match(INDUSTRY_WORD)[0]})이고 캠핑장 근거(사진·소개·시설)가 없음`;
+  // 지도 장소 분류가 무관 업종 + 업장 근거 없음
+  const cats = [kakao?.place?.category, naver?.place?.category].filter(Boolean).join(" ");
+  if (cats && UNRELATED_CAT.test(cats) && !/캠핑|야영|숙박|여행|레저|체험/.test(cats) && evid <= 1) return `지도 장소 분류가 캠핑과 무관(${cats})하고 캠핑장 근거가 없음`;
+  if (evid) return null;
   if (kakao?.place || naver?.place?.phone || naver?.place?.link) return null;
   const urban = (n5 ?? 0) >= 1000, office = OFFICE.test(c.addr ?? "");
   if (!urban && !office) return null;
