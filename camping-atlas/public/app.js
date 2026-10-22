@@ -1384,17 +1384,18 @@ async function flushPendingSaveLogs() {
   store.set(SAVE_LOG_QUEUE_KEY, retry);
 }
 async function loadSharedSaves() {
-  if (NO_REMOTE_WRITE) return; // 테스트는 이 기기 찜만 쓴다(운영 공용 찜과 섞이지 않게)
-  if (!await ensureSupabaseConfig()) return;
+  if (NO_REMOTE_WRITE) return false; // 테스트는 이 기기 찜만 쓴다(운영 공용 찜과 섞이지 않게)
+  if (!await ensureSupabaseConfig()) return false;
   try {
     const r = await fetch(`${SB.url}/rest/v1/shared_save?select=campground_id,created_at&order=created_at.desc`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
-    if (!r.ok) return;
+    if (!r.ok) return false;
     const list = await r.json();
     S.saved = list.map((x) => String(x.campground_id)).filter((id) => S.byId.has(id));
     store.set("mc-saved", S.saved);
     syncCompare();
     $$(`[data-save]`).forEach((x) => { const on = isSaved(x.dataset.save); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); x.setAttribute("aria-label", on ? "찜 해제" : "찜하기"); x.querySelector("use")?.setAttribute("href", `#i-${on ? "heart" : "heart-o"}`); });
-  } catch {}
+    return true;
+  } catch { return false; }
 }
 function clientMeta() {
   return {
@@ -1424,6 +1425,20 @@ async function syncSave(action, id) {
     console.warn("찜 운영 기록을 다음 연결 때 다시 보냅니다.", logged.reason);
   }
   if (shared.status === "rejected") console.warn("공용 찜 동기화에 실패했습니다.", shared.reason);
+}
+const VIEW_LOG_SEEN = new Map();
+async function postViewLog(id) {
+  if (NO_REMOTE_WRITE || !id) return;
+  const key = String(id), now = Date.now();
+  // 상세 화면의 재렌더(찜·공유·뒤로가기 등)마다 중복 집계하지 않고, 같은 탭에서는 30분마다 한 번 기록한다.
+  if (now - (VIEW_LOG_SEEN.get(key) || 0) < 30 * 60 * 1000) return;
+  VIEW_LOG_SEEN.set(key, now);
+  try {
+    if (!await ensureSupabaseConfig()) return;
+    const headers = { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=minimal" };
+    const r = await fetch(`${SB.url}/rest/v1/view_log`, { method: "POST", headers, body: JSON.stringify({ campground_id: key, path: location.pathname, ...clientMeta() }), keepalive: true });
+    if (!r.ok) throw new Error(`view_log ${r.status}`);
+  } catch (error) { console.warn("조회 기록 동기화에 실패했습니다.", error); }
 }
 function pushSave(action, id) {
   // 같은 캠핑장을 빠르게 연속 탭해도 add/remove 순서가 뒤집히지 않게 직렬화한다.
@@ -2900,6 +2915,7 @@ async function detailView(id) {
   const c = S.byId.get(id);
   if (c) pushRecent(id);
   if (!c) return `<div class="empty">${ic("search")}<b>캠핑장을 찾지 못했어요</b><a class="btn ghost" href="${APP_BASE}">찾기로</a></div>`;
+  postViewLog(id);
   const d = await detailOf(id);
   const f = facts(c), { tag } = nameOf(c);
   const spec = ["size", "park", "power", "fire", "ground", "shelter", "sanitary", "hot", "pet"];
@@ -5720,7 +5736,7 @@ async function render() {
   else if (name === "theme") { const tk = decodeURIComponent(h.slice(8).split("?")[0]); v.innerHTML = themeView(tk); bindTheme(tk); }
   else if (name === "detail") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await detailView(decodeURIComponent(h.slice(8).split("?")[0])); bindDetail(); }
   else if (name === "saves-log") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await savesLogView(); }
-  else if (name === "saved") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await savedView(); bindSaved(); }
+  else if (name === "saved") { v.innerHTML = `<div class="loading"></div>`; await loadSharedSaves(); v.innerHTML = await savedView(); bindSaved(); }
   else if (name === "compare") { v.innerHTML = await compareView(); bindCompare(); }
   else if (name === "list") { v.innerHTML = listView(); bindList(); }
   else { v.innerHTML = mapView(); bindMap(); }
@@ -5994,7 +6010,9 @@ addEventListener("error", (e) => {
     for (const o of openings.items ?? []) { const id = String(o.id); if (better(o, S.openings.get(id))) S.openings.set(id, o); } }
   S.saved = S.saved.filter((id) => S.byId.has(id));
   await configReady;
-  loadSharedSaves();
+  // /saved가 로컬 찜으로 먼저 그려졌다가 서버 찜으로 뒤늦게 바뀌는 경합을 막는다.
+  // 서버 목록을 먼저 확정한 뒤 첫 route를 렌더링해 어느 기기에서나 같은 목록을 본다.
+  await loadSharedSaves();
   flushPendingSaveLogs();
   // 공식 접수 상태(서울 공공서비스예약 등)는 짧은 유효기간이 있다. 만료된 파일은 쓰지 않는다.
   S.avail = new Map();
