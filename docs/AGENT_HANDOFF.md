@@ -6,7 +6,7 @@
 ## 📌 공공 휴양림·주변 공공시설 누적 수집기 (2026-10-22, Codex)
 - **원천 분석:** `k-data.aljal.kr`의 사이트맵과 상세 페이지 구조를 확인했다. 자연휴양림 212곳, 휴게소 248곳, 실내놀이터·수영장·레포츠·박물관 목록도 공개 상세 URL로 제공된다. 원문 HTML을 저장하지 않고 이름·주소·좌표·운영 표·사진 링크·공식 원문 링크만 저장한다.
 - **수집기:** `pipeline/lib/kdata-public.mjs`와 `pipeline/scripts/sync-kdata-public.mjs`를 추가했다. `npm run sync:kdata-public`는 기본 호스트 간 1초 지연, 기존 원장 합집합 병합, 확인 시각·원문 URL 기록을 적용한다. 현재 자연휴양림 211건을 `pipeline/registry/kdata-public.json`에 누적했다. 나머지 범주는 주간 워크플로에서 이어 수집한다.
-- **주변 연동:** `nearby-context`가 `forest·rest·indoorplay·pool·leisure·museum`을 캠핑장별 최대 3곳의 `nearby.public`로 계산하고, 상세 주변시설에 범주별 탭으로 노출할 수 있게 했다. 기존 관광·생활·휴게소 배열은 그대로 유지한다.
+- **주변 연동:** `nearby-context`가 `forest·rest·indoorplay·pool·leisure·museum`을 캠핑장별 최대 3곳의 `nearby.public`로 계산하고, 상세 주변시설에 범주별 탭으로 노출할 수 있게 했다. 공공시설 카드에는 주소와 운영 표의 짧은 요약만 보이며 쿠키·개인정보 같은 공용 푸터 문구는 제외한다. 기존 관광·생활·휴게소 배열은 그대로 유지한다.
 - **휴양림 원장 보호:** `sync-forest-recreation.mjs`가 기존 `forest-recreation-collected.json`과 `forest-recreation.json`을 합쳐 쓰도록 수정했다. 수집 실패나 일부 응답으로 기존 값이 줄지 않는다.
 - **검증:** `kdata-public`·`kdata-nearby`·`nearby-context` 테스트 10개 통과, 원본/발행본 앱 동기화, Node 문법 검사 통과. 전체 주변 재계산은 최신 `out/campgrounds.json`이 있는 데이터 발행 단계에서 실행한다.
 
