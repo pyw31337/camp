@@ -47,11 +47,13 @@ test("공식과 150m 안에서 겹치는 OSM 쉼터는 버린다", () => {
 });
 
 test("한국도로공사 휴게소: 코드로 편의시설을, 이름으로 주유 가격을 연결한다", async () => {
-  const { buildExServiceAreas } = await import("../lib/ex-rest-areas.mjs");
+  const { buildExServiceAreas, normalizeBestFoods } = await import("../lib/ex-rest-areas.mjs");
+  const bestFood = normalizeBestFoods([{ serviceAreaCode: "A00002", foodName: "돈까스", price: "9,000원" }]);
   const [stop] = buildExServiceAreas({
     location: [{ unitName: "기흥(부산)휴게소", routeName: "경부선", xValue: "127.12", yValue: "37.25", serviceAreaCode: "A00002" }],
     convenience: [{ serviceAreaCode: "A00002", convenience: "수유실|샤워실|농산물판매장", telNo: "031" }],
     fuel: [{ serviceAreaName: "기흥(부산)주유소", oilCompany: "AD", lpgYn: "N", gasolinePrice: "1,839원", diselPrice: "1,836원" }],
+    bestFood,
     checkedAt: "2026-10-13T09:00:00+09:00",
   });
   assert.equal(stop.direction, "부산");
@@ -59,6 +61,7 @@ test("한국도로공사 휴게소: 코드로 편의시설을, 이름으로 주�
   assert.deepEqual(stop.extras, ["농산물판매장"]);
   assert.deepEqual(stop.fuel.prices_krw_per_l, { gasoline: 1839, diesel: 1836, lpg: null });
   assert.equal(stop.fuel.brand, "알뜰주유소");
+  assert.deepEqual(stop.best_foods[0], { menu: "돈까스", price: 9000, source_url: "https://data.ex.co.kr/openapi/restinfo/restBestfoodList", checked_at: "2026-10-13T09:00:00+09:00", tier: "A" });
 });
 
 test("경로 주변 시설을 출발지부터 거리순으로", () => {

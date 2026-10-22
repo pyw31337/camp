@@ -143,7 +143,11 @@ export function dedupeById(items) {
 /** out/rest-stops.json의 stops → {id, kind, name, lat, lng, road} */
 export function normalizeRestStop(s) {
   if (!s || !inKorea(s.lat, s.lng)) return null;
-  return { id: String(s.id), kind: s.kind ?? "REST", name: s.name ?? null, lat: s.lat, lng: s.lng, road: s.road ?? null };
+  return {
+    id: String(s.id), kind: s.kind ?? "REST", name: s.name ?? null, lat: s.lat, lng: s.lng,
+    road: s.road ?? null, address: s.address ?? null, facilities: s.facilities ?? null,
+    fuel: s.fuel ?? null, best_foods: Array.isArray(s.best_foods) ? s.best_foods.slice(0, 5) : [],
+  };
 }
 
 // ─── 주변 계산 ────────────────────────────────────────────────────────────
@@ -225,7 +229,10 @@ export function nearbyFor(lat, lng, idx, rules = NEARBY_RULES) {
     const er = hospitals.find((h) => h.point.emergency === true);
     if (er) medical.push(er);
   }
-  const rest = idx.rest.within(lat, lng, rules.rest.radius_m, rules.rest.limit).map((h) => toItem(h, SOURCES.rest.id, { road: h.point.road }));
+  const rest = idx.rest.within(lat, lng, rules.rest.radius_m, rules.rest.limit).map((h) => toItem(h, SOURCES.rest.id, {
+    road: h.point.road, addr: h.point.address,
+    facts: h.point.best_foods?.length ? { 대표메뉴: h.point.best_foods.map((x) => `${x.menu}${x.price ? ` ${x.price.toLocaleString()}원` : ""}`).join(" · ") } : undefined,
+  }));
   const publicByKind = {};
   for (const h of idx.public.within(lat, lng, rules.public.radius_m)) {
     const kind = h.point.kind || "public";

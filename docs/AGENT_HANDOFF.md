@@ -360,6 +360,11 @@
    - 화면 표출 시 확정값(`CONFIRMED`)은 확인필요 배지 없이 정규 값으로 바로 노출되므로, 디자인 에이전트는 해당 필드들을 핵심 카드로 적극 배치할 것.
 
 
+## 정리 기록 (2026-10-22, 공공 원천 감사)
+- `public-datasets.json`의 원장 누락을 보완해 환경부 충전소(15076352), 국립중앙의료원 응급실(15000563), 반려동물(15135102), 무장애(15101897), 두루누비(15101974), 관광지 집중률(15128555)을 `in_use`로 등록했다. 실제 실행 모듈은 기존 `sync:extras`이며, 키가 없으면 캐시/OSM으로 안전하게 폴백한다.
+- 한국도로공사 대표 메뉴 API(`restinfo/restBestfoodList`)를 `sync:rest-stops`에 연결했다. 휴게소 레코드에 원문 URL·확인 시각·신뢰등급과 함께 최대 5개 대표 메뉴/가격을 병합하며, 기존 값은 줄이지 않는다. `EX_API_KEY`가 없으면 기존 휴게소 결과를 유지한다.
+- `pipeline/scripts/audit-public-data.mjs`와 `npm --prefix pipeline run audit:public-data`를 추가했다. 현재 발행 캐시별 connected/fallback/empty 상태와 커버리지를 `pipeline/out/public-data-audit.json`에 기록한다.
+
 ## 정리 기록 (2026-10-21, fix4 이후)
 - **qa/audit-1792495661 브랜치**: 미병합 커밋 1개 `19ddd477d`(2026-10-20 20:37 KST, “fix(qa): 공원에 캠핑장 요금·입퇴실 제거, 관광공사 광고 요금 제거, 숯 문구 모순·좌표 오타 정리, 문자 id 댓글 숨김 + 회귀 검사”, 1,166개 파일 — 대부분 데이터). 같은 패치는 main에 없음(내용 일부는 #159 병합 정책 작업에서 다른 방식으로 반영). 데이터를 잃지 않도록 **태그 `archive/qa-audit-1792495661`로 보존**한 뒤 브랜치만 지웠다. 되살리기: `git checkout -b qa/audit-1792495661 archive/qa-audit-1792495661`.
 - **워크플로 점검**: 22개 모두 `permissions`를 명시(쓰기 권한은 데이터 커밋 워크플로만), 데이터를 main에 쓰는 예약 워크플로는 모두 `concurrency` 그룹이 있다(card-photos는 data-sync와 같은 그룹). 최근 실행 실패 없음. 중복 잡 없음 — 브라우저 회귀는 `Web quality / Rail swipe` 한 잡에 모여 있다. 바꾼 것: 없음(배포 경로 필터는 #187에서 정리).
