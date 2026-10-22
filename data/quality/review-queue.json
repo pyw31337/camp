@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-22T15:38:39.171Z",
+ "generated_at": "2026-10-22T21:20:46.697Z",
  "how_to_resolve": "원문을 대조해 data/quality/decisions.ndjson에 {cid, attr, value, url, why, by, at} 한 줄을 덧붙인다(docs/DATA_QUALITY_PROCESS.md 4단계).",
  "count": 84,
  "items": [
@@ -1368,6 +1368,27 @@
    "label": "퇴실 시각",
    "ui": true,
    "top": {
+    "value": "12:00",
+    "confidence": 0.935,
+    "sources": 2,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "booking_engine",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18431&res_dt=20261024",
+      "at": "2026-10-22",
+      "quote": ""
+     },
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/aroma0101/224279049273",
+      "at": "2026-05-08",
+      "quote": "#포근마루캠핑장 경기 양주시 장흥면 권율로 156-116 0507-1468-5288 입실 14:00/퇴실 12:00 네이버예약 -기본 사이트 60,000원 -2가족사이트 110..."
+     }
+    ]
+   },
+   "rival": {
     "value": "11:00",
     "confidence": 0.9,
     "sources": 1,
@@ -1378,20 +1399,6 @@
       "url": "https://www.marucamp.kr/",
       "at": "2026-10-20T01:17:10.735Z",
       "quote": "체크아웃 11:00"
-     }
-    ]
-   },
-   "rival": {
-    "value": "12:00",
-    "confidence": 0.9,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "OPERATOR",
-      "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18431&res_dt=20261024",
-      "at": "2026-10-22",
-      "quote": ""
      }
     ]
    }
@@ -1586,7 +1593,7 @@
    "ui": true,
    "top": {
     "value": "15:00",
-    "confidence": 0.931,
+    "confidence": 0.93,
     "sources": 2,
     "evidence": [
      {
@@ -1894,7 +1901,7 @@
    "ui": true,
    "top": {
     "value": "15:00",
-    "confidence": 0.994,
+    "confidence": 0.996,
     "sources": 3,
     "evidence": [
      {
@@ -2902,7 +2909,7 @@
    },
    "rival": {
     "value": "ZONE_ONLY",
-    "confidence": 0.767,
+    "confidence": 0.766,
     "sources": 1,
     "evidence": [
      {

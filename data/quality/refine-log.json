@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-22T15:38:16.161Z",
+ "generated_at": "2026-10-22T21:20:33.693Z",
  "rule": "pipeline/lib/fact-refine.mjs",
- "dropped": 187,
- "recoded": 89,
- "scoped": 285,
+ "dropped": 193,
+ "recoded": 92,
+ "scoped": 307,
  "items": [
   {
    "cid": "102118",
@@ -1594,6 +1594,16 @@
    "why": "홍보·목록 제목(규칙 아님)"
   },
   {
+   "cid": "2538",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://emespic.tistory.com/75",
+   "quote": "산책로, 숲속놀이터, 잔디광장, 강변 자전거도로도 기재돼 있고 반려동물은 출입 불가로 표시돼 있어요.",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
    "cid": "101985",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -1615,6 +1625,16 @@
    "why": "일부 객실·구역만 허용"
   },
   {
+   "cid": "101954",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "http://triplecaravan.com/sub5.html",
+   "quote": "반려동물 입실 불가능 카라반&오토캠핑장 외에 반려동물 동반 시 입실이 거부되며, 해당 사유로 환불받을 수 없습니다.",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
    "cid": "7752",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -1626,11 +1646,52 @@
    "why": "일부 객실·구역만 허용"
   },
   {
+   "cid": "101372",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/ex_shilarateh/224284097229",
+   "quote": "퇴실 11:00 반려동물 동반 불가 내부 화장실 주차 가능 펜션, 카라반, 글램핑",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "92",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/ker2992/224374958334",
+   "quote": "글램핑 가능 애견동반 불가 캠핑장 입구에...",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "1491",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://triple.guide/hotels/09bd8a1c-30a9-4a08-b863-e3387a10bb7d",
+   "quote": "● 반려동물 입실 가능 펜션 외에 반려동물 동반 시 입실이 거부될 수 있으며, 해당 사유로 환불받을 수 없습니다.",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
+  },
+  {
    "cid": "7561",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
    "src": "operator_discovered",
    "url": "https://wawoopark.co.kr/",
+   "quote": "카라반 6동(애견동반불가)",
+   "action": "drop",
+   "why": "일부 구역·객실만의 금지를 동반 불가로 읽음"
+  },
+  {
+   "cid": "7561",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://wawoopark.co.kr/reservation.html",
    "quote": "카라반 6동(애견동반불가)",
    "action": "drop",
    "why": "일부 구역·객실만의 금지를 동반 불가로 읽음"
@@ -1665,6 +1726,38 @@
    "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
    "action": "drop",
    "why": "홍보·목록 제목(규칙 아님)"
+  },
+  {
+   "cid": "101225",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/loyya30/224036502831",
+   "quote": "가평 캠핑장 하늘숲빌리지글램핑과 관련된 자주 묻는 질문으로는, 반려동물 동반이 불가하다는 점과 늦은 입실 시 사전 문의가...",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "61",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/sop1503/224401962359",
+   "quote": "[경남글램핑 추천] 애견 동반 가능, 무한리필 바베큐 월명글램핑.",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
+  },
+  {
+   "cid": "2815",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "SMALL_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/hye_9410/224296926712",
+   "quote": "체크인 : 오후 2:00 체크아웃 : 오후 12:00 반려동물 동반 가능 (10kg 미만 중/소형견까지 가능.",
+   "action": "recode",
+   "why": "크기 제한 있는 허용"
   },
   {
    "cid": "101031",
