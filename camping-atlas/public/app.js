@@ -5605,6 +5605,8 @@ function drawMap() {
   const visRows = rowsIn.filter((x) => strict(x.c.lat, x.c.lng)).sort((a, b2) => a.pl - b2.pl || b2.r - a.r);
   const visible = visRows.map((x) => x.c);
   $("[data-mcount]").textContent = fmt(visible.length);
+  const headerCount = $("[data-map-header-count]");
+  if (headerCount) { headerCount.textContent = `${fmt(visible.length)}곳 지도 안`; headerCount.hidden = false; }
   MAP.clear();
   const cell = z >= 12 ? 0 : z >= 10 ? 60 : 90, buckets = new Map();
   for (const c of inView) {
@@ -5635,10 +5637,16 @@ function drawMap() {
 }
 function mapItem(c) {
   const on = selected === String(c.id);
+  const f = facts(c), fm = feeMain(c);
+  const specs = [
+    siteSizeShort(c) ? `<span>${ic("size")}${esc(siteSizeShort(c))}</span>` : "",
+    f.power?.v ? `<span>${ic("bolt")}${esc(f.power.v)}</span>` : "",
+    fm?.text ? `<span>${ic("won")}${esc(fm.text)}</span>` : "",
+  ].filter(Boolean).join("");
   // 지도 카드(영우 님 2026-10-21, t39 #23 #24): 카드를 누르면 지도가 그 캠핑장으로 확대·초점, 이름을 누르면 상세로.
   return `<article class="mi${on ? " on" : ""}" data-mid="${esc(c.id)}" tabindex="0" aria-label="${esc(nameOf(c).name)} 지도에서 보기">
     <div class="mi-ph">${carousel(c)}</div>
-    <div class="mi-b"><p class="card-meta">${esc(region(c))}${!stayKinds(c).length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p><h3><a class="mi-name" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false">${esc(nameOf(c).name)}</a></h3><span class="bdgs inline">${stayBadges(c, 2)}${badges(c, stayKinds(c).length ? 2 : 3)}</span></div>
+    <div class="mi-b"><p class="card-meta">${esc(region(c))}${!stayKinds(c).length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p><h3><a class="mi-name" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false">${esc(nameOf(c).name)}</a></h3><div class="mi-types">${typeRow(c).html}</div><span class="bdgs inline">${wxBadge(c)}${stayBadges(c, 2)}${badges(c, stayKinds(c).length ? 2 : 3)}</span>${specs ? `<div class="mi-specs">${specs}</div>` : ""}</div>
     ${heartBtn(c)}
   </article>`;
 }
@@ -5654,7 +5662,7 @@ function selectPin(c) {
 }
 function bindMap() {
   document.body.classList.add("map-mode");
-  cleanup.push(() => { document.body.classList.remove("map-mode"); MAP?.remove(); MAP = null; mapListKey = ""; });
+  cleanup.push(() => { document.body.classList.remove("map-mode"); const headerCount = $("[data-map-header-count]"); if (headerCount) headerCount.hidden = true; MAP?.remove(); MAP = null; mapListKey = ""; });
   const el = $("#map"), opts = { center: [36.2, 127.9], zoom: innerWidth < 760 ? 6 : 7 };
   let alive = true;
   cleanup.push(() => { alive = false; });
