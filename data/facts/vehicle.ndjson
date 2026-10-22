@@ -789,7 +789,6 @@
 {"cid":"2022","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2022","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2031","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2031","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"https://www.anseong.go.kr/tourPortal/camp/contents.do?mId=0104010000","at":"2026-10-20T01:14:15.526Z","quote":"일반, 데크캠핑장 이용자는 주차장 주차 후 캠핑 장비를 개별 운반하셔야 합니다.(차량 진입 불가)"}
 {"cid":"2031","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2032","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2032","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3161,8 +3160,6 @@
 {"cid":"100612","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100613","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100613","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100614","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100614","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100615","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100615","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030022","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"100615","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -4084,8 +4081,6 @@
 {"cid":"101152","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101153","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101153","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101154","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101154","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101155","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101155","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101156","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -4200,8 +4195,6 @@
 {"cid":"101211","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101212","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101212","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101213","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101213","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101214","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101214","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101215","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}

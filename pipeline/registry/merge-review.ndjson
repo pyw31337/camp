@@ -26187,3 +26187,11 @@
 {"at":"2026-10-22T10:08:32.033Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"park-43113-00080-15jti","field":"lng","reason":"좌표 오타(QA R5)"}
 {"at":"2026-10-22T10:09:11.937Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"park-43113-00080-15jti","field":"lat","reason":"좌표가 시·도(충북) 범위 밖 — 오타(QA R5)"}
 {"at":"2026-10-22T10:09:11.938Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"park-43113-00080-15jti","field":"lng","reason":"좌표 오타(QA R5)"}
+{"at":"2026-10-22T15:22:25.605Z","by":"build-spec-sheet","action":"removed","file":"2031.json","id":"2031","field":"spec.fields.PARKING","reason":"관광공사·플랫폼 문장과 공공표준 주차 문구를 운영자 정보로 잘못 쓴 값 정정(QA R2)"}
+{"at":"2026-10-22T15:23:29.204Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"park-43113-00080-15jti","field":"lat","reason":"좌표가 시·도(충북) 범위 밖 — 오타(QA R5)"}
+{"at":"2026-10-22T15:23:29.205Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"park-43113-00080-15jti","field":"lng","reason":"좌표 오타(QA R5)"}
+{"at":"2026-10-22T15:23:31.590Z","by":"publish-sanity","action":"removed","file":"camps/100714.json","id":"100714","field":"nearby","reason":"틀린 좌표로 구한 주변 시설(QA R5)"}
+{"at":"2026-10-22T15:23:39.248Z","by":"Booking engine site facts (thankq)","run":"39796048393","action":"restored","file":"camping-atlas/public/explore/data/campgrounds.json","id":"6817","field":"fee.tiers","before":1,"after":0}
+{"at":"2026-10-22T15:23:39.248Z","by":"Booking engine site facts (thankq)","run":"39796048393","action":"restored","file":"camping-atlas/public/explore/data/campgrounds.json","id":"100313","field":"fee.tiers","before":1,"after":0}
+{"at":"2026-10-22T15:23:39.248Z","by":"Booking engine site facts (thankq)","run":"39796048393","action":"restored","file":"camping-atlas/public/explore/data/campgrounds.json","id":"6942","field":"fee.tiers","before":4,"after":2}
+{"at":"2026-10-22T15:23:39.248Z","by":"Booking engine site facts (thankq)","run":"39796048393","action":"restored","file":"camping-atlas/public/explore/data/campgrounds.json","id":"100360","field":"fee.tiers","before":2,"after":0}

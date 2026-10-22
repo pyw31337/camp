@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-10-22T10:32:19.160Z",
+ "generated_at": "2026-10-22T15:23:56.701Z",
  "how_to_resolve": "원문을 대조해 data/quality/decisions.ndjson에 {cid, attr, value, url, why, by, at} 한 줄을 덧붙인다(docs/DATA_QUALITY_PROCESS.md 4단계).",
- "count": 295,
+ "count": 294,
  "items": [
   {
    "cid": "7029",
@@ -5121,42 +5121,7 @@
       "grade": "CONFIRMED",
       "src": "operator_homepage",
       "url": "http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0184",
-      "at": "2026-10-19T04:56:00.479Z",
-      "quote": "국립자연휴양림"
-     }
-    ]
-   },
-   "rival": {
-    "value": "UNKNOWN",
-    "confidence": 0.85,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "CONFIRMED",
-      "src": "gocamping",
-      "url": null,
-      "at": null,
-      "quote": ""
-     }
-    ]
-   }
-  },
-  {
-   "cid": "387",
-   "name": "국립남해편백자연휴양림",
-   "attr": "OPERATOR_TYPE",
-   "label": "운영 주체",
-   "ui": true,
-   "top": {
-    "value": "NATURAL_RECREATION_FOREST",
-    "confidence": 0.85,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "CONFIRMED",
-      "src": "operator_homepage",
-      "url": "http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0192",
-      "at": "2026-10-19T04:56:00.479Z",
+      "at": "2026-10-22T08:26:02.555Z",
       "quote": "국립자연휴양림"
      }
     ]
@@ -5205,7 +5170,7 @@
       "grade": "CONFIRMED",
       "src": "operator_homepage",
       "url": "https://www.foresttrip.go.kr",
-      "at": "2026-10-19T04:56:00.479Z",
+      "at": "2026-10-22T08:26:02.555Z",
       "quote": "국립자연휴양림"
      }
     ]
@@ -5226,7 +5191,7 @@
       "grade": "CONFIRMED",
       "src": "operator_homepage",
       "url": "https://www.foresttrip.go.kr",
-      "at": "2026-10-19T04:56:00.479Z",
+      "at": "2026-10-22T08:26:02.555Z",
       "quote": "국립자연휴양림"
      }
     ]
@@ -5261,7 +5226,7 @@
       "grade": "CONFIRMED",
       "src": "operator_homepage",
       "url": "http://www.foresttrip.go.kr/indvz/main.do?hmpgId=0141",
-      "at": "2026-10-19T04:56:00.479Z",
+      "at": "2026-10-22T08:26:02.555Z",
       "quote": "국립자연휴양림"
      }
     ]
@@ -5296,7 +5261,7 @@
       "grade": "CONFIRMED",
       "src": "operator_homepage",
       "url": "https://www.foresttrip.go.kr",
-      "at": "2026-10-19T04:56:00.479Z",
+      "at": "2026-10-22T08:26:02.555Z",
       "quote": "국립자연휴양림"
      }
     ]
@@ -5331,7 +5296,7 @@
       "grade": "CONFIRMED",
       "src": "operator_homepage",
       "url": "https://www.foresttrip.go.kr",
-      "at": "2026-10-19T04:56:00.479Z",
+      "at": "2026-10-22T08:26:02.555Z",
       "quote": "국립자연휴양림"
      }
     ]
@@ -11126,7 +11091,7 @@
      {
       "grade": "OPERATOR",
       "src": "operator_homepage",
-      "url": "http://siseol.dssiseol.or.kr/bisulsan/html/main.html",
+      "url": "https://www.foresttrip.go.kr",
       "at": "2026-01-01",
       "quote": "입실 시간은 14:00부터이며, 퇴실 시간은 11:00까지입니다."
      }
