@@ -71,7 +71,7 @@ const TAG_RULES = [
   ["NO_FIREWORKS", re(`(폭죽|불꽃\\s*놀이|풍등)[^.]{0,16}(${NEG}|삼가|자제)`)],
   ["NO_LOUD", re(`(음향\\s*기기|스피커|앰프|노래방\\s*기기|악기|고성\\s*방가)[^.]{0,16}(${NEG}|삼가|자제)`)],
   ["NO_MINOR", re(`미성년자?[^.]{0,30}(${NEG}|보호자\\s*(미\\s*)?동반|동의서)`)],
-  ["NO_VISITOR", re(`(방문객|외부인|외부\\s*방문|지인\\s*방문|방문\\s*차량)[^.]{0,16}(${NEG}|제한)`), (s) => /초과|인원은/.test(s)],
+  ["NO_VISITOR", re(`(방문객|외부인|외부\\s*방문|지인\\s*방문|방문\\s*차량)[^.]{0,16}(${NEG}|제한)`), (s, m) => /초과|포함|사전/.test(s.slice(Math.max(0, m.index - 12), m.index + m[0].length))],
   ["NO_WINTER", re(`(동계|겨울)\\s*(시즌|기간|철)?\\s*(에는\\s*)?(운영\\s*(하지|안|중단)|휴장|캠핑\\s*${NEG})`)],
 ];
 
@@ -82,7 +82,7 @@ export function noTagsOf(text, { official = true } = {}) {
   const out = [];
   for (const [k, rx, skip] of TAG_RULES) {
     const m = s.match(rx);
-    if (!m || skip?.(s)) continue;
+    if (!m || skip?.(s, m)) continue;
     // 부분 금지는 맞은 자리 앞 24자 안의 공간·조건 단어로 본다(“수영장은 애견 이용 불가”)
     const before = s.slice(Math.max(0, m.index - 24), m.index + m[0].length);
     const after = s.slice(m.index, m.index + m[0].length + 10);

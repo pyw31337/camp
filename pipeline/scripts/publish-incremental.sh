@@ -42,6 +42,8 @@ node pipeline/scripts/build-house-rules.mjs
 node pipeline/scripts/build-gocamping-detail.mjs
 # 당일 장소 시드(원문 규칙·요약)는 프로필·이용규칙 생성 뒤에 붙인다 — data-sync와 같은 순서(빼면 시드 값이 지워졌다 되살아나기를 반복).
 node pipeline/scripts/apply-dayuse-seed.mjs
+# 공공데이터 여가 시설(휴양림 카탈로그·주변 여가 시설) — data-sync와 같은 자리
+node pipeline/scripts/build-public-leisure.mjs
 # 발행 전 상식 정리(공원에 야영장 요금·입퇴실 금지, 플랫폼 광고 요금, 좌표, 시·도 표기, 중복 등록) — data-sync와 같은 자리.
 # t41u: 수기·공식 확정 값(registry/curated-pins.json)을 재계산 위에 다시 얹는다
 node pipeline/scripts/apply-pins.mjs

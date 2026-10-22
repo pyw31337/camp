@@ -91,7 +91,8 @@ const band = (n) => {
   const m = Math.floor(n / 10000);
   return m < 1 ? `${Math.round(n / 1000)}천원` : `${m}만원`;
 };
-const ic = (id, cls = "") => `<svg class="ic ${cls}" aria-hidden="true"><use href="#i-${id}"/></svg>`;
+// "th:키"면 테마 아이콘(TH_SVG)을 같은 크기로 쓴다(스프라이트에 없는 휴양림 등).
+const ic = (id, cls = "") => (String(id).startsWith("th:") ? thIc(String(id).slice(3)).replace('class="th-ic"', `class="ic th-ic ${cls}"`) : `<svg class="ic ${cls}" aria-hidden="true"><use href="#i-${id}"/></svg>`);
 const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
 function formatKoreanDate(s) {
   if (!s) return "";
@@ -316,11 +317,14 @@ function badges(c, max = 4, maxNo = 2, { rows = false, theme = null } = {}) {
     fire: pos(f.fire) && f.fire.kind === "FIREWOOD_OK" ? `<span class="bdg bdg-flame">${ic("firewood")}장작</span>` : "",
     pet: pet ? `<span class="bdg bdg-ink">${ic("paw")}반려견${smallDog ? "(소형)" : ""}</span>` : "",
     park: !rows && pos(f.park) && f.park.ok === true ? `<span class="bdg bdg-cobalt">${ic("car")}텐트 옆</span>` : "",
+    // 겨울 섹션 근거(전수 검수 2026-10-22): W를 모르는 난방 글램핑·카라반도 섹션 배지가 보이게 ‘난방’
+    heat: c.heat?.length ? `<span class="bdg bdg-flame">${ic("hotwater")}난방</span>` : "",
+    rf: c.rf ? `<span class="bdg bdg-teal">${ic("th:FOREST")}${esc(/^(국립|공립|사립)$/.test(c.rf) ? `${c.rf} 휴양림` : "휴양림")}</span>` : "",
   };
   // 섹션 배지를 맨 앞에(잘리지 않게)
-  const lead = theme === "PET" ? "pet" : theme === "VISITOR" ? "invite" : theme === "WINTER" ? "w" : null;
+  const lead = theme === "PET" ? "pet" : theme === "VISITOR" ? "invite" : theme === "WINTER" ? (wattsOf(c) >= 1100 && B.w ? "w" : B.heat ? "heat" : "w") : theme === "REC_FOREST" ? "rf" : null;
   if (lead && B[lead]) out.push(B[lead]);
-  for (const k of ["invite", "w", "fire", "pet", "park"]) if (k !== lead && B[k]) out.push(B[k]);
+  for (const k of ["rf", "invite", "w", "fire", "pet", "park"]) if (k !== lead && B[k]) out.push(B[k]);
   const no = noKeys(c).filter((k) => NO_CARD.includes(k) && !(k === "BIG_DOG" && pet)).slice(0, maxNo).map(noBadge);
   const top = out.slice(0, max);
   return `${top.join("")}${top.length && no.length ? '<i class="bdg-br" aria-hidden="true"></i>' : ""}${no.join("")}`;
@@ -465,6 +469,7 @@ const TH_SVG = {
   WATER_PLAY: ["0 0 256 256", '<path fill="currentColor" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m83.44 76A196 196 0 0 0 165 91a196 196 0 0 0-9-46.440A88.43 88.43 0 0 1 211.44 100M85 51.24a188.3 188.3 0 0 1 67.3 39.21a196.3 196.3 0 0 0-112.22 34.06A88.07 88.07 0 0 1 85 51.24m46.48 164.68a196.3 196.3 0 0 0 34.06-112.23A188.3 188.3 0 0 1 204.76 171a88.07 88.07 0 0 1-73.27 44.92Z" />'],
   "T:CAR_CAMP": ["0 0 24 24", '<g fill="currentColor"><path d="M3 19.723V21a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.277A1.99 1.99 0 0 0 22 18v-3c0-.831-.507-1.542-1.228-1.845l-1.368-4.104A2.995 2.995 0 0 0 16.559 7H7.441a2.995 2.995 0 0 0-2.845 2.051l-1.368 4.104A2 2 0 0 0 2 15v3c0 .738.404 1.376 1 1.723M5.5 18a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 5.5 18m13 0a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 18.5 18M7.441 9h9.117a1 1 0 0 1 .949.684L18.613 13H5.387l1.105-3.316c.137-.409.519-.684.949-.684"/><path d="M22 7.388V5.279l-9.684-3.228a1 1 0 0 0-.658.009L2 5.572V7.7l10.015-3.642z"/></g>'],
 };
+TH_SVG.REC_FOREST = TH_SVG.FOREST;
 const thIc = (k) => (TH_SVG[k] ? `<svg class="th-ic" viewBox="${TH_SVG[k][0]}" aria-hidden="true">${TH_SVG[k][1]}</svg>` : "");
 const VISITOR_IDS = new Set(["100141","101239","101366","101394","1075","1641","2146","2733","3201","467","7124","7253","7588","7741","7838","7997","3206","102320","1893","102096","101354","102293","102289","102290","101971","102271","160","922","6850","100986","102240","102202","468","2480","102188","101801","101979","100543","100546","3333","1970","2929","101426","101894","101358","6948","716","2538","102009","1473","101036","100924","101356","101868","7901","7466","101578","100376","100905","100969","100307","7272","101738","101706","100015","7314","100794","100868","101184","100468","100991","101501","101538","101487","101540","101557","3578","100576","101417","100246","100502","100606","7594","100057","101289","101303","100447","100515","100642","100658","100692","100749","101286","331","101172"]);
 const PICNIC_IDS = new Set(["100148","100199","100264","100456","100462","100628","100629","100699","100748","100804","100931","100998","101031","101111","101134","101140","101297","101335","101414","101518","101522","101606","101664","101756","101764","101801","101819","101826","101855","101939","102128","102242","1043","1318","1528","1696","190","2179","2304","2358","3105","3519","357","467","508","525","597","6951","6972","6980","7039","7124","7132","7235","7271","7768","7903","8048","8054","8206","919","1467","7709","102126","102324","8121","100342","2394","101420","2793","8150","101520","101977","102044","102272","7447","100720","101081","101889","102178","420","6753","101642","101705","102110","102125","102237","101997","102211","7542","101217","8133","100916","102170","550","101399","102121","102129","101789","101795","101295","101396","101655","101858","101805","102011","7913","101508","100223","101368","101387","101425","231","101319","101381","101550","604","3205","3375","101611","101496","101869","101600","526","101450","101356","101236","101891","101242","101206","2848","100260","101672","101818","2820","101774","1931","90","100762","100799","101114","101234","101014","101104","101184","101207","101069","101171","7932","100980","101080","101085","101100","101152","101158","101162","101180","101196","101211","101231","101613","100359","101526","100172","100138","101305","100257","100345","100522","2534","101191","101296","100668","100378","102374","102375"]);
@@ -518,6 +523,8 @@ const THEMES = [
   ["WINTER", "겨울 캠핑", (c) => winterOpen(c) && (Boolean(c.heat?.length) || wattsOf(c) >= 1100)],
   ["VALLEY", "계곡", (c) => c.pf?.t?.includes("VALLEY")],
   ["FOREST", "숲", (c) => c.pf?.t?.includes("FOREST")],
+  // 휴양림(소유자 2026-10-22): 전국휴양림표준데이터의 국립·공립·사립 휴양림(build-public-leisure.mjs → c.rf)과 고캠핑의 휴양림 야영장
+  ["REC_FOREST", "휴양림", (c) => Boolean(c.rf) || c.op === "NATURAL_RECREATION_FOREST" || /휴양림/.test(c.name ?? "")],
   ["BEACH", "바다", (c) => c.pf?.t?.includes("BEACH") || c.th?.includes("sea")],
   ["LAKE", "호수·강", (c) => c.pf?.t?.includes("LAKE") || c.pf?.t?.includes("RIVER")],
   ["FAMILY", "아이랑", (c) => c.pf?.t?.includes("FAMILY")],
@@ -535,6 +542,7 @@ const THEME_FILES = {
   WINTER: "winter.webp",
   VALLEY: "valley.webp",
   FOREST: "forest.webp",
+  REC_FOREST: "forest.webp",
   BEACH: "sea.webp",
   LAKE: "lake.webp",
   FAMILY: "kids.webp",
@@ -557,6 +565,7 @@ const THEME_SUBS = {
   POPULAR: "최근 7일간 캠퍼들 사이에서 가장 많이 언급되고 화제가 된 인기 캠핑장",
   VALLEY: "시원한 물소리와 맑은 물놀이를 즐길 수 있는 계곡 야영장",
   FOREST: "피톤치드 가득한 울창한 숲속 힐링 캠핑장",
+  REC_FOREST: "국립·공립·사립 자연휴양림(산림청 전국휴양림표준데이터)과 휴양림 야영장",
   BEACH: "탁 트인 바다 전망과 파도 소리를 즐기는 해변 캠핑장",
   LAKE: "잔잔한 호수와 강변의 평화로운 자연을 담은 캠핑장",
   FAMILY: "아이들이 마음껏 뛰어놀기 좋은 가족 맞춤형 캠핑장",
@@ -1313,8 +1322,25 @@ function redNo(root) {
     frag.append(t.slice(last)); n.replaceWith(frag);
   }
 }
+// 수식어 흐리게(소유자 2026-10-22): ‘업장 미공지 · 조례 기준 14:00 부터’에서 앞 설명은 얇은 회색(.qual),
+// 실제 값(‘14:00 부터’)이 눈에 먼저 들어오게. 값·출처는 그대로 두고 표시만 바꾼다.
+const QUAL_RE = /(?:\(?업장\s*미공지\)?\s*·?\s*)?(?:법정|조례|표준)\s*(?:기준|상한)(?:\s*참고)?(?:\s*\(업장\s*미공지\))?\s*·?\s*|\(?업장\s*미공지\)?\s*·?\s*/g;
+const QUAL_SKIP = "script, style, textarea, input, select, option, .qual, .fact-note, .sec-title, h1, h2";
+function softQual(root) {
+  if (!root?.querySelectorAll) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: (n) => (/업장\s*미공지|(?:법정|조례|표준)\s*(?:기준|상한)/.test(n.nodeValue) && !n.parentElement?.closest(QUAL_SKIP) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT) });
+  const hits = []; for (let n = w.nextNode(); n; n = w.nextNode()) hits.push(n);
+  for (const n of hits) {
+    const t = n.nodeValue, frag = document.createDocumentFragment(); let last = 0;
+    for (const m of t.matchAll(QUAL_RE)) {
+      if (!m[0].trim()) continue;
+      frag.append(t.slice(last, m.index)); const sp = document.createElement("span"); sp.className = "qual"; sp.textContent = m[0]; frag.append(sp); last = m.index + m[0].length;
+    }
+    frag.append(t.slice(last)); n.replaceWith(frag);
+  }
+}
 let redNoQ = false;
-const redNoObs = typeof MutationObserver !== "undefined" ? new MutationObserver(() => { if (redNoQ) return; redNoQ = true; requestAnimationFrame(() => { redNoQ = false; redNo(document.querySelector("#view")); redNo(document.querySelector("#pop")); }); }) : null;
+const redNoObs = typeof MutationObserver !== "undefined" ? new MutationObserver(() => { if (redNoQ) return; redNoQ = true; requestAnimationFrame(() => { redNoQ = false; for (const el of [document.querySelector("#view"), document.querySelector("#pop")]) { softQual(el); redNo(el); } }); }) : null;
 const startRedNo = () => { for (const el of [document.querySelector("#view"), document.querySelector("#pop")]) if (el && redNoObs) redNoObs.observe(el, { childList: true, subtree: true }); };
 if (document.readyState === "loading") addEventListener("DOMContentLoaded", startRedNo); else startRedNo();
 // 상세 화면의 작은 (i)를 없애고 카드·행 전체를 눌러 원문을 연다(소유자 2026-10-20). 키보드: Tab으로 가서 Enter·Space.
@@ -2569,14 +2595,29 @@ function specTiles(c, d) {
   const T = [["size", "size", "설치 공간", ""], ["park", "car", "텐트 옆 주차", "cobalt"], ["power", "bolt", "전기", "volt"], ["fire", "flame", "장작·숯", "flame"], ["ground", "layers", "바닥", ""], ["shelter", "tent", "텐트·타프", ""], ["toilet", "toilet", "화장실", ""], ["shower", "bath", "샤워실", ""], ["sink", "fountain", "개수대", ""], ["hot", "drop", "온수", ""], ["pet", "paw", "반려견", ""]];
   return T.map(([k, i, l, cls]) => {
     let x = f[k] ?? mention[k] ?? null;
-    if (k === "pet") x = normNo(x);
+    // 반려견 칸은 카드 배지·반려견 섹션과 같은 판정(전수 검수 2026-10-22): 업장 규칙 ‘반려견 불가’가 있으면 불가,
+    // 카드가 ‘반려견’이면(공식 가능) 후기·다른 페이지의 ‘불가’ 언급으로 뒤집지 않는다.
+    if (k === "pet") {
+      const nk = noKeys(c);
+      if (nk.includes("NO_PET")) { const t = d?.house_rules?.tags?.find((y) => y.k === "NO_PET"); x = { v: "불가", g: t?.g ?? "c", src: { label: t?.src ?? "업장 이용 규칙", url: t?.url, at: t?.at, quote: t?.quote } }; }
+      else if (petAllowed(c) && x && /불가|금지/.test(detailValue(x))) x = f.pet?.ok ? f.pet : { v: nk.includes("BIG_DOG") ? "소형견 동반 가능" : "동반 가능", g: "c", src: { label: "고캠핑·업장 등록 분류(반려견 동반)", url: c.gc_url ?? c.homepage } };
+      x = normNo(x);
+    }
     if (k === "power" && f.power?.v === "있음" && mention.power?.v) x = mention.power;
     const isNo = Boolean(x && (x.ok === false || (k === "fire" && x.kind === "NO_FIRE") || /불가|금지|불가능/.test(detailValue(x))));
     const on = x && cls && !isNo;
-    return `<div class="tile${x ? "" : " unk"}${isNo ? " tile-no" : on ? ` t-${cls}` : ""}"><span class="tile-ic">${ic(i)}</span><span class="tile-l">${l}</span><b class="tile-v">${x ? `${esc(detailValue(x))}${asOfMention(x)}` : "확인필요"}</b>${x ? `<span class="tile-g">${dot(x.g)}${srcTip(x, l)}</span>` : ""}</div>`;
+    return `<div class="tile${x ? "" : " unk"}${isNo ? " tile-no" : on ? ` t-${cls}` : ""}"><span class="tile-ic">${ic(i)}</span><span class="tile-l">${l}</span><b class="tile-v">${x ? `${factValueHtml(x)}${asOfMention(x)}` : "확인필요"}</b>${x ? `<span class="tile-g">${dot(x.g)}${srcTip(x, l)}</span>` : ""}</div>`;
   }).join("") + extraTiles(c, d, f);
 }
 // 자료가 있을 때만 보이는 요약 카드(없으면 칸을 만들지 않는다 · 지어내지 않는다).
+// 방문객 칸은 카드 ‘초대가능’·지인초대 섹션과 같은 판정(전수 검수 2026-10-22): 업장 규칙 ‘방문객 불가’면 불가,
+// ‘최대 인원 초과 시 방문객 불가’는 조건부라 ‘인원 초과 시 불가’로 보인다.
+function visitorFact(c, d) {
+  const x = specFact(d, "VISITOR_POLICY");
+  if (noKeys(c).includes("NO_VISITOR")) { const t = d?.house_rules?.tags?.find((y) => y.k === "NO_VISITOR"); return { v: "불가", g: t?.g ?? "c", src: { label: t?.src ?? "업장 이용 규칙", url: t?.url, at: t?.at, quote: t?.quote } }; }
+  if (x && /불가|금지/.test(String(x.v)) && /초과\s*(시|하|할|일|되)/.test(d?.spec?.fields?.VISITOR_POLICY?.values?.[0]?.quote ?? x.src?.quote ?? "")) return { ...x, v: "인원 초과 시 불가" };
+  return x;
+}
 function extraTiles(c, d, f) {
   const am = (c.amenities ?? []).map(String);
   const gc = (items) => ({ g: "c", src: { label: "한국관광공사 고캠핑 등록 편의시설", url: c.gc_url, quote: items.join(" · ") } });
@@ -2595,7 +2636,17 @@ function extraTiles(c, d, f) {
     add("flame", "취사", ck?.url ? { v: COOK[ck.v] ?? ck.text, g: "c", src: { label: d?.du_src?.label ?? "관리기관 안내", url: ck.url, at: ck.at, quote: ck.text } } : { v: "미확인 · 관리기관에 확인", g: "m", src: { label: "근거 없음" } });
     if (sh?.url) add("tent", "그늘막", { v: `${sh.v === "ZONE_ONLY" ? "지정 구역만" : sh.v === "PROHIBITED" ? "설치 금지" : "가능"}${sh.size ? ` · ${sh.size}` : ""}`, g: "c", src: { label: d?.du_src?.label ?? "관리기관 안내", url: sh.url, at: sh.at, quote: `${sh.season ?? ""} ${sh.hours ?? ""}`.trim() } });
   }
-  add("users", "방문객", specFact(d, "VISITOR_POLICY"));
+  // 휴양림 표준데이터(소유자 2026-10-22, build-public-leisure.mjs → d.rf): 기관이 공개한 값만, 원천·기준일과 함께
+  if (d?.rf) {
+    const r = d.rf, rfFact = (v) => ({ v, g: "c", src: { label: r.src?.label ?? "전국휴양림표준데이터", url: r.src?.url, at: r.src?.at } });
+    if (r.cls) add("th:FOREST", "휴양림 구분", rfFact(`${r.cls} 휴양림`));
+    if (r.fee) add("won", "입장료", rfFact(r.fee));
+    if (r.stay) add("bed", "숙박", rfFact(r.stay));
+    if (r.fac) add("amenity", "주요 시설", rfFact(r.fac));
+    if (r.cap) add("users", "수용 인원", rfFact(/\d$/.test(String(r.cap)) ? `${fmt(r.cap)}명` : r.cap));
+    if (r.inst) add("company", "관리 기관", rfFact(r.inst));
+  }
+  add("users", "방문객", visitorFact(c, d));
   add("clock-in", "얼리 입실", specFact(d, "EARLY_CHECKIN"));
   add("clock-out", "레이트 퇴실", specFact(d, "LATE_CHECKOUT"));
   add("bed", "최소 숙박", specFact(d, "MIN_STAY"));
@@ -3077,12 +3128,13 @@ function detailValue(x, fallback = "확인필요") { return x?.v ? serviceText(x
 // 핵심 값(시간·요금·규격)과 근거성 보조 문구를 분리해 핵심 정보가 먼저 읽히게 한다.
 function factValueHtml(x, fallback = "확인필요") {
   const text = detailValue(x, fallback);
-  const parts = text.split(/\s*·\s*/).filter(Boolean);
+  // ‘조례 기준 14:00 부터’처럼 수식어가 값 앞에 붙은 조각은 수식어와 값으로 나눈다(소유자 2026-10-22: 값이 더 잘 보이게)
+  const parts = text.split(/\s*·\s*/).filter(Boolean).flatMap((p) => { const m = p.match(/^((?:업장\s*미공지|(?:법정|조례|표준)\s*(?:기준|상한)(?:\s*참고)?)\s*)+(?=\S)/); return m && p.slice(m[0].length).trim() ? [m[0].trim(), p.slice(m[0].length).trim()] : [p]; });
   const notes = parts.filter((p) => /업장\s*미공지|법정|조례|기준\s*참고|참고값/.test(p));
   if (!notes.length) return esc(text);
   const main = parts.filter((p) => !notes.includes(p));
   const valueParts = main.length ? main : (parts.find((p) => /\d/.test(p)) ? [parts.find((p) => /\d/.test(p))] : [parts[0] || fallback]);
-  const value = valueParts.join(" · ");
+  const value = valueParts.map((p) => clockText(p) ?? p).join(" · ");
   const noteParts = parts.filter((p) => !valueParts.includes(p) && /업장\s*미공지|법정|조례|기준\s*참고|참고값/.test(p));
   return `${esc(value)}${noteParts.length ? `<span class="fact-note">${esc(noteParts.join(" · "))}</span>` : ""}`;
 }
