@@ -48,55 +48,15 @@ const overlaySvg = Buffer.from(`
   <rect width="1200" height="630" fill="url(#vignette)"/>
   <rect width="1200" height="630" fill="url(#bottomShadow)"/>
 
-  <!-- 좌측 컨텐츠 그룹 -->
-  <g transform="translate(72, 70)">
-    <!-- 1. 브랜드 헤더 (로고 마크 + 서비스명) -->
+  <!-- 좌측 컨텐츠 그룹: 작은 미리보기에서도 읽히는 최소 구성 -->
+  <g transform="translate(72, 86)">
     <g transform="translate(0, 0)">
-      <rect width="52" height="52" rx="14" fill="#0b131f" stroke="rgba(255,255,255,0.14)" stroke-width="1.5"/>
-      <image href="data:image/png;base64,${faviconData}" x="5" y="5" width="42" height="42" preserveAspectRatio="xMidYMid meet"/>
-
-      <text x="68" y="38" font-family="'Kim jung chul Script', 'Cafe24 Supermagic', 'NanumBarunpenOTF', cursive" font-size="36" font-weight="700" font-style="italic" fill="#ffffff" stroke="#c8ff00" stroke-opacity="0.2" stroke-width="3" paint-order="stroke" letter-spacing="-0.04em">렛츠 캠핑</text>
-      <rect x="236" y="16" width="68" height="26" rx="13" fill="#c8ff00"/>
-      <text x="270" y="34" font-family="'Pretendard', sans-serif" font-size="13" font-weight="900" fill="#080e18" text-anchor="middle">OFFICIAL</text>
+      <rect width="58" height="58" rx="16" fill="#0b131f" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+      <image href="data:image/png;base64,${faviconData}" x="5" y="5" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
     </g>
-
-    <!-- 2. 메인 헤드카피 -->
-    <text x="0" y="148" font-family="'Pretendard', sans-serif" font-size="52" font-weight="900" fill="#ffffff" letter-spacing="-0.04em">이번 주말,</text>
-    <text x="0" y="214" font-family="'Pretendard', sans-serif" font-size="56" font-weight="900" fill="#ffffff" letter-spacing="-0.04em">
-      <tspan fill="#c8ff00">빈자리</tspan>부터.
-    </text>
-
-    <!-- 3. 서브 카피 -->
-    <text x="0" y="278" font-family="'Gmarket Sans TTF', 'Pretendard', 'Apple SD Gothic Neo', sans-serif" font-size="21" font-weight="700" fill="rgba(255,255,255,0.94)" letter-spacing="-0.02em">
-      공식 스펙과 후기 신호를 한눈에 비교하는 캠핑장 탐색 서비스
-    </text>
-
-    <!-- 4. 특화 피처 태그 칩들 -->
-    <g transform="translate(0, 360)">
-      <!-- 칩 1: 실시간 예약 오픈 -->
-      <g transform="translate(0, 0)" filter="url(#badgeShadow)">
-        <rect width="144" height="40" rx="20" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/>
-        <circle cx="20" cy="20" r="5" fill="#ff4a1c"/>
-        <text x="32" y="25" font-family="'Pretendard', sans-serif" font-size="15" font-weight="800" fill="#ffffff">실시간 곧 오픈</text>
-      </g>
-      <!-- 칩 2: 데크·전기 규격 -->
-      <g transform="translate(154, 0)" filter="url(#badgeShadow)">
-        <rect width="146" height="40" rx="20" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/>
-        <circle cx="20" cy="20" r="5" fill="#c8ff00"/>
-        <text x="32" y="25" font-family="'Pretendard', sans-serif" font-size="15" font-weight="800" fill="#ffffff">데크·전기 검증</text>
-      </g>
-      <!-- 칩 3: 긍정 후기 분석 -->
-      <g transform="translate(310, 0)" filter="url(#badgeShadow)">
-        <rect width="148" height="40" rx="20" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/>
-        <circle cx="20" cy="20" r="5" fill="#38bdf8"/>
-        <text x="32" y="25" font-family="'Pretendard', sans-serif" font-size="15" font-weight="800" fill="#ffffff">방문자 후기 분석</text>
-      </g>
-    </g>
-
-    <!-- 5. 하단 URL & 출처 라벨 -->
-    <g transform="translate(0, 444)">
-      <text x="0" y="16" font-family="'Pretendard', sans-serif" font-size="16" font-weight="700" fill="rgba(255,255,255,0.55)" letter-spacing="0.02em">pyw31337.github.io/camp</text>
-    </g>
+    <text x="0" y="190" font-family="'TmonMonsori', 'NanumSquare Neo OTF', sans-serif" font-size="78" font-weight="900" fill="#ffffff" stroke="#c8ff00" stroke-opacity="0.22" stroke-width="4" paint-order="stroke" letter-spacing="-0.06em">Let's 캠핑</text>
+    <rect x="2" y="218" width="478" height="3" rx="1.5" fill="#c8ff00" opacity="0.9"/>
+    <text x="0" y="266" font-family="'Gmarket Sans TTF', 'Pretendard', 'Apple SD Gothic Neo', sans-serif" font-size="28" font-weight="800" fill="#ffffff" letter-spacing="-0.04em">스펙과 후기를 한눈에 비교탐색</text>
   </g>
 </svg>
 `);
