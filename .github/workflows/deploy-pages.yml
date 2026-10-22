@@ -54,6 +54,8 @@ jobs:
           # 목록용 가벼운 카탈로그 + 상세용 원본 샤드(내용 동일, 원본 campgrounds.json도 그대로 둠)
           # t41u: 비현실 값(민간 1박 2만원 미만 요금 등) 표시값 보정 — 원본은 *_raw로 보관
           node pipeline/scripts/apply-fee-sanity.mjs --data camping-atlas/dist/client/explore/data
+          # t41u-2: 이름표 값 상식 범위(전기 W·사이트 수·규격·입퇴실·매너타임·인원·거리 등, lib/value-sanity.mjs) 밖은 화면에서만 숨김(_hid에 보관)
+          node pipeline/scripts/apply-value-sanity.mjs --data camping-atlas/dist/client/explore/data
           node scripts/split-catalog.mjs camping-atlas/dist/client/explore/data
         env:
           KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY || secrets.KAKAO_JS_KEY }}
