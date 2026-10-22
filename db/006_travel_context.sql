@@ -128,11 +128,11 @@ INSERT INTO data_source (
    'https://www.data.go.kr/data/15013117/standard.do', 'A',
    'https://www.data.go.kr/data/15013117/standard.do',
    '분기 갱신 및 월초 전국 병합 시차가 있어 무료 후보 발견용으로만 사용. 공식 운영기관 근거 전에는 확정 무료·취사로 표시하지 않음.', false, 7776000),
-  ('booking-rule-registry', '모여라 캠핑 예약 규칙 레지스트리', '모여라 캠핑',
+  ('booking-rule-registry', '렛츠 캠핑 예약 규칙 레지스트리', '렛츠 캠핑',
    'https://github.com/pyw31337/camp/tree/main/pipeline/registry', 'B',
    'https://github.com/pyw31337/camp/tree/main/pipeline/registry',
    '사람이 공식 원문을 검토해 등록한 계산 규칙. 원문 URL·등급·확인일을 각 버전에 보존.', true, 86400),
-  ('free-site-registry', '모여라 캠핑 무료 캠프 후보 레지스트리', '모여라 캠핑',
+  ('free-site-registry', '렛츠 캠핑 무료 캠프 후보 레지스트리', '렛츠 캠핑',
    'https://github.com/pyw31337/camp/tree/main/pipeline/registry', 'B',
    'https://github.com/pyw31337/camp/tree/main/pipeline/registry',
    '무료·취사·화장실의 각 근거를 보관하는 내부 검토 레지스트리. 후보와 확정 사실을 구분하며 원문 검토 전 공개 확정값으로 사용하지 않는다.', true, 86400)

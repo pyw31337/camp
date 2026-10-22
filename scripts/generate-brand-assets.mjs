@@ -1,4 +1,4 @@
-import { writeFile, mkdir } from "node:fs/promises";
+import { writeFile, mkdir, copyFile, readFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 
@@ -9,7 +9,7 @@ const root = fileURLToPath(new URL("../", import.meta.url));
 const publicDir = `${root}camping-atlas/public/`;
 const imagesDir = `${root}camping-atlas/public/images/`;
 
-// 모여라캠핑 공식 파비콘 SVG
+// 렛츠 캠핑 공식 파비콘 SVG
 // 다크 나이트 스퀘어 + 네온 볼트 텐트 + 따스한 앰비언트 모닥불 조명
 const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
@@ -50,6 +50,26 @@ const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512
 
 await mkdir(publicDir, { recursive: true });
 await mkdir(imagesDir, { recursive: true });
+
+// 확정된 Let's Camp 브랜드 원본이 있으면 이를 기준으로 모든 아이콘을 생성한다.
+// 생성된 시안을 다시 예전 SVG로 덮어쓰지 않도록 원본을 저장소에서 관리한다.
+const brandSource = `${root}assets/branding/`;
+const appSource = `${brandSource}lets-camp-app-icon-source.png`;
+const faviconSource = `${brandSource}lets-camp-favicon-source.png`;
+try {
+  await sharp(appSource).resize(512, 512, { fit: "cover" }).png().toFile(`${imagesDir}icon-512.png`);
+  await sharp(appSource).resize(192, 192, { fit: "cover" }).png().toFile(`${imagesDir}icon-192.png`);
+  await sharp(appSource).resize(180, 180, { fit: "cover" }).png().toFile(`${imagesDir}apple-touch-icon.png`);
+  await copyFile(faviconSource, `${imagesDir}favicon-transparent.png`);
+  await sharp(faviconSource).resize(32, 32, { fit: "contain" }).png().toFile(`${publicDir}favicon.png`);
+  const faviconData = (await readFile(faviconSource)).toString("base64");
+  await writeFile(`${publicDir}favicon.svg`, `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><image href="data:image/png;base64,${faviconData}" width="512" height="512" preserveAspectRatio="xMidYMid meet"/></svg>`);
+  console.log("✓ Let's Camp 브랜드 아이콘 생성 완료");
+  process.exit(0);
+} catch (err) {
+  if (err?.code !== "ENOENT") throw err;
+  console.log("::notice::확정 브랜드 원본이 없어 기존 생성 경로를 사용합니다.");
+}
 
 // 1. SVG 파비콘 저장
 await writeFile(`${publicDir}favicon.svg`, faviconSvg);

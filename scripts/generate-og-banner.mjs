@@ -6,15 +6,16 @@ const require = createRequire(import.meta.url);
 const sharp = require("../pipeline/node_modules/sharp");
 
 const root = fileURLToPath(new URL("../", import.meta.url));
-const bgPath = "/Users/pyw31337/.gemini/antigravity/brain/0a724a31-52e4-4aea-b8ee-075794563492/og_korean_camping_banner_1792400697665.jpg";
+const bgPath = `${root}assets/branding/lets-camp-og-background.png`;
 const outDir = `${root}camping-atlas/public/images/`;
+const faviconData = (await readFile(`${root}assets/branding/lets-camp-favicon-source.png`)).toString("base64");
 
 // 1200 x 630 비율에 맞게 배경 리사이즈 및 크롭
 const baseImage = await sharp(bgPath)
   .resize(1200, 630, { fit: "cover", position: "center" })
   .toBuffer();
 
-// 감각적인 오버레이 SVG (좌측 어두운 그라디언트 + 모여라캠핑 로고 + 타이포그래피 + 칩)
+// 감각적인 오버레이 SVG (좌측 어두운 그라디언트 + 렛츠 캠핑 로고 + 타이포그래피 + 칩)
 const overlaySvg = Buffer.from(`
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -52,12 +53,9 @@ const overlaySvg = Buffer.from(`
     <!-- 1. 브랜드 헤더 (로고 마크 + 서비스명) -->
     <g transform="translate(0, 0)">
       <rect width="52" height="52" rx="14" fill="#0b131f" stroke="rgba(255,255,255,0.14)" stroke-width="1.5"/>
-      <!-- 미니멀 텐트 마크 -->
-      <path d="M23 8 h6 l-1.2 2.1 L43 38 H9 L24 10 Z" fill="url(#voltGrad)"/>
-      <path d="M26 21 L17 37 H35 Z" fill="#0b131f"/>
-      <path d="M26 27 C27 30 29 32 29 34.5 A3 3 0 0 1 23 34.5 C23 32 25 30 26 27 Z" fill="url(#fireGrad)"/>
+      <image href="data:image/png;base64,${faviconData}" x="5" y="5" width="42" height="42" preserveAspectRatio="xMidYMid meet"/>
 
-      <text x="68" y="36" font-family="'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif" font-size="28" font-weight="900" fill="#ffffff" letter-spacing="-0.03em">모여라 캠핑</text>
+      <text x="68" y="36" font-family="'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif" font-size="28" font-weight="900" fill="#ffffff" letter-spacing="-0.03em">렛츠 캠핑</text>
       <rect x="236" y="16" width="68" height="26" rx="13" fill="#c8ff00"/>
       <text x="270" y="34" font-family="'Pretendard', sans-serif" font-size="13" font-weight="900" fill="#080e18" text-anchor="middle">OFFICIAL</text>
     </g>

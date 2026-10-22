@@ -20,10 +20,10 @@ const { events } = buildCalendar(registry, from, addDays(from, days));
 const outDir = fileURLToPath(new URL("../out/ics/", import.meta.url));
 await mkdir(outDir, { recursive: true });
 
-const feeds = [{ file: "all.ics", name: "모여라 캠핑 · 전체 예약 오픈", events }];
+const feeds = [{ file: "all.ics", name: "렛츠 캠핑 · 전체 예약 오픈", events }];
 for (const p of registry.providers) {
   const evs = events.filter((e) => e.provider_id === p.id);
-  if (evs.length) feeds.push({ file: `provider-${p.id}.ics`, name: `모여라 캠핑 · ${p.name}`, events: evs });
+  if (evs.length) feeds.push({ file: `provider-${p.id}.ics`, name: `렛츠 캠핑 · ${p.name}`, events: evs });
 }
 for (const f of feeds) {
   await writeFile(`${outDir}${f.file}`, buildIcs(f.events, { name: f.name, description: "예약 오픈 일정. 각 일정의 출처와 확인 필요 여부를 설명에서 확인하세요." }));

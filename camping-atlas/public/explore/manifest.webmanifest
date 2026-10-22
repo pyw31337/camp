@@ -1,6 +1,6 @@
 {
-  "name": "모여라 캠핑",
-  "short_name": "모여라 캠핑",
+  "name": "렛츠 캠핑",
+  "short_name": "렛츠 캠핑",
   "description": "전국 3,500+ 캠핑장 실시간 오픈 일정, 데크 규격·전기 용량 등 검증된 스펙과 솔직 후기 한눈에 비교",
   "lang": "ko",
   "start_url": "./",
@@ -10,9 +10,9 @@
   "theme_color": "#09121d",
   "icons": [
     {
-      "src": "./favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "./images/favicon-transparent.png",
+      "sizes": "32x32",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {

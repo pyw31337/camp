@@ -1,4 +1,4 @@
-// 모여라캠핑 리뉴얼 시안 (design/renewal → /camp/renewal/). 기획: docs/RENEWAL_PLAN.md
+// 렛츠 캠핑 리뉴얼 시안 (design/renewal → /camp/renewal/). 기획: docs/RENEWAL_PLAN.md
 // 데이터는 탐색 화면과 같은 공개 파일을 읽는다(../explore/data). 사진 색인은 scripts/build-renewal-data.mjs.
 // 원칙: 값만 짧게, 출처는 (i), 모르는 칸은 상세 규격에서만 회색 ‘확인필요’ 글자. 채운 배지는 원문 대조·공식 등록·운영자 공개 값만.
 
@@ -578,7 +578,7 @@ const THEME_SUBS = {
   PICNIC: "숙박 부담 없이 가볍게 당일로 즐기는 캠크닉·바비큐 캠핑장",
   PARK: "부담 없이 자연을 누리는 무료 및 공공 수변·자연공원 야영장",
   WATER_PLAY: "시원한 물놀이터와 풀장이 갖춰진 캠핑장 (여름 시즌 운영 종료 · 내년 계획을 미리 세워보세요)",
-  ALL: "모여라캠핑이 엄선한 전국 다양한 테마별 캠핑장",
+  ALL: "렛츠 캠핑이 엄선한 전국 다양한 테마별 캠핑장",
   OPEN: "곧 예약이 오픈되는 캠핑장 모아보기",
   AVAIL: "지금 바로 실시간 예약 접수 중인 캠핑장",
   REVIEWS: "방문자들의 생생한 긍정 평가가 많은 캠핑장",
@@ -2281,8 +2281,8 @@ function bindRegion(sido, sgg) {
   };
   more?.addEventListener("click", () => { n += 24; draw(); });
   draw();
-  document.title = `${sgg ? `${sido} ${sgg}` : sido} 캠핑장 ${fmt(list.length)}곳 · 모여라 캠핑`;
-  cleanup.push(() => { document.title = "모여라 캠핑 · 취향대로 찾아 떠나는 전국 캠핑장"; });
+  document.title = `${sgg ? `${sido} ${sgg}` : sido} 캠핑장 ${fmt(list.length)}곳 · 렛츠 캠핑`;
+  cleanup.push(() => { document.title = "렛츠 캠핑 · 취향대로 찾아 떠나는 전국 캠핑장"; });
 }
 
 function themeView(themeKey) {
@@ -2307,7 +2307,7 @@ function themeView(themeKey) {
       </div>
     </div>
     <div class="theme-body">
-      ${isWp ? `<div class="theme-closed-alert">${ic("info")}<div><strong>여름 시즌 물놀이터 운영 종료 안내</strong><p>전국 물놀이터·야영장 수영장 정보입니다. 현재는 하절기 운영이 종료된 상태입니다. 모여라 캠핑에서 미리 시설 정보를 확인하시고 다음 시즌 피서 계획에 참고해 보세요!</p></div></div>` : ""}
+      ${isWp ? `<div class="theme-closed-alert">${ic("info")}<div><strong>여름 시즌 물놀이터 운영 종료 안내</strong><p>전국 물놀이터·야영장 수영장 정보입니다. 현재는 하절기 운영이 종료된 상태입니다. 렛츠 캠핑에서 미리 시설 정보를 확인하시고 다음 시즌 피서 계획에 참고해 보세요!</p></div></div>` : ""}
       <div class="theme-tools-bar">
         <div class="rail chips theme-areas" aria-label="지역">
           ${AREAS.map(([k, l]) => `<button type="button" class="chip" data-theme-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}
@@ -5357,7 +5357,7 @@ const placeUrl = (id) => new URL(`${APP_BASE}place/${encodeURIComponent(id)}/`, 
 async function sharePlace(c) {
   if (!c) return;
   const url = placeUrl(c.id);
-  const title = `${nameOf(c).name} · 모여라 캠핑`;
+  const title = `${nameOf(c).name} · 렛츠 캠핑`;
   // 휴대폰(터치)에서는 시스템 공유 시트, 그 밖에서는 복사.
   if (navigator.share && matchMedia("(pointer: coarse)").matches) {
     try { await navigator.share({ title, url }); return; } catch (err) { if (err?.name === "AbortError") return; }
