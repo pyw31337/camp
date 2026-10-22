@@ -3471,6 +3471,10 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 
 /* ‘불가·금지’ 값은 어디서나 빨간 글씨(소유자 2026-10-22) */
 .no-txt, .plist b.is-no { color: var(--no, #d32f2f); }
+/* 수식어(업장 미공지·조례 기준·법정 상한)는 얇은 회색 — 값이 먼저 보이게(소유자 2026-10-22) */
+.qual { font-weight: 400; color: var(--ink-3); font-size: .9em; letter-spacing: -.01em; }
+.qual .no-txt { color: inherit; }
+.tile-v .fact-note { display: block; margin-top: 2px; color: var(--ink-3); font-size: .72rem; font-weight: 400; line-height: 1.35; }
 
 /* 상세 상단 줄: 뒤로는 왼쪽 끝, 찜·공유는 오른쪽 끝(소유자 2026-10-22) */
 .d-bar-acts { display: inline-flex; align-items: center; gap: 8px; margin-left: auto; }

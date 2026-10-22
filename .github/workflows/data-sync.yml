@@ -449,6 +449,8 @@ jobs:
           DATA_GO_KR_SERVICE_KEY="${{ github.event_name != 'pull_request' && secrets.DATA_GO_KR_SERVICE_KEY || '' }}" node pipeline/scripts/collect-urban-parks.mjs || true
           KAKAO_REST_API_KEY="${{ github.event_name != 'pull_request' && secrets.KAKAO_REST_API_KEY || '' }}" node pipeline/scripts/geocode-dayuse-osm.mjs || true
           node pipeline/scripts/apply-dayuse-seed.mjs
+          # 전국휴양림표준데이터(registry/public-leisure.json): 국립·공립·사립 휴양림을 카탈로그에 연결·추가, 상세 휴양림 정보(2026-10-22).
+          node pipeline/scripts/build-public-leisure.mjs
           # 발행 전 상식 정리(공원에 캠핑장 요금·입퇴실 금지, 관광공사 광고 요금 제거, 숯 문구 모순, 좌표 오타). CI가 --check로 막는다.
           # t41u: 수기·공식 확정 값을 재계산 위에 다시 얹는다(registry/curated-pins.json)
           node pipeline/scripts/apply-pins.mjs

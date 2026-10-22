@@ -129,3 +129,8 @@ Gemini가 같은 날 `docs/PUBLIC_DATA_INTEGRATION_PLAN.md`와 모듈 `pipeline/
 | [한국도로공사 OpenAPI](https://data.ex.co.kr/guidedown/openoasis_guide.pdf) | 휴게소 위치·편의시설·유가에 더해 대표 메뉴 API를 병합하도록 확장 | 가는 길 휴게소 카드의 대표 메뉴·가격(키가 있을 때만) |
 
 실행 결과는 `pipeline/out/public-data-audit.json`에 `connected/fallback/empty`로 남긴다. 공식 API 키가 없는 로컬 실행에서 데이터를 만들어 내지 않으며, 직전 캐시나 OSM 보조 자료를 사용했다는 사실을 화면 원천 등급으로 구분한다. 대표 메뉴도 `EX_API_KEY`가 제공될 때만 수집하고, 메뉴·가격이 없는 휴게소에 값을 추정하지 않는다.
+
+### 6-2. 전국휴양림표준데이터 → 카탈로그(2026-10-22, Claude)
+- `pipeline/scripts/sync-public-leisure.mjs`(주간) → `registry/public-leisure.json`: 휴양림 186(tn_pubr_public_rcrfrst_api, 국유림/공유림/사유림 → 국립/공립/사립), 박물관·미술관 1,073, 공공시설개방(수영장·실내 놀이, 이름 규칙 `lib/leisure-filter.mjs`).
+- `build-public-leisure.mjs`(data-sync): 휴양림을 카탈로그에 연결·추가하고 상세 `d.rf`를 둔다. 주변 칩은 `nearby.public`이 맡는다.
+- 휴게소·관광지 표준데이터는 인증키 미등록(‘등록되지 않은 서비스키’) — 공공데이터포털에서 활용 신청 필요.
