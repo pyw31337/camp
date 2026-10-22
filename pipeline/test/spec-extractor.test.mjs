@@ -92,3 +92,12 @@ test("후기 귀속: 이름에 붙은 지명(가평물의나라)을 떼고도 �
   assert.equal(attributable({ title: "물의나라 캠핑장 후기", snippet: "" }, "가평물의나라 오토캠핑장"), false); // 지역을 모르면 예전처럼
   assert.deepEqual(nameTokens("경주캠핑장", ["경주시"]), ["경주"]); // 지명만 남는 이름은 늘리지 않는다
 });
+
+test("매너타임: 시작은 밤만 — 퇴실 시각·시설 이용 시간을 매너타임으로 읽지 않는다(2026-10-23)", async () => {
+  const { extractFromSentence } = await import("../lib/spec-extractor.mjs");
+  const mt = (t) => extractFromSentence(t).filter((o) => o.code === "MANNER_TIME").map((o) => o.value);
+  assert.deepEqual(mt("체크인 : 낮 12:00 체크아웃 : 오후 6:00 매너타임 안내"), []);
+  assert.deepEqual(mt("개수대와 샤워장도 매너타임엔 문닫습니다 오전7시-밤10시 사이에만 이용가능"), []);
+  assert.deepEqual(mt("매너타임: 22시-익일 8시"), ["22:00~08:00"]);
+  assert.deepEqual(mt("밤 11시부터 매너타임이 적용됩니다"), ["23:00부터"]);
+});
