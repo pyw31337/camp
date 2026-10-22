@@ -300,29 +300,30 @@ const INVITE_OK_SET = new Set([
   "7901", "7928", "7934", "7967", "8196", "930",
 ]);
 const noBadge = (k) => (NO_TAGS[k] ? `<span class="bdg bdg-no">${ic(NO_TAGS[k][1])}${esc(NO_TAGS[k][0])}</span>` : "");
-// rows=true(카드): 아래 정보 줄(전기·화로·주차)에 나오는 사실은 사진 배지에서 뺀다(줄이 우선, 소유자 2026-10-21).
-const ROW_NO = new Set(["NO_POWER", "NO_FIRE", "NO_FIREWOOD", "NO_CHARCOAL"]);
 // 배지 정합성(소유자 2026-10-22): 섹션과 배지는 같은 판정을 쓴다 — 반려견 섹션 카드엔 늘 ‘반려견’, 지인초대 섹션엔 ‘초대가능’.
 // ‘반려견’과 ‘반려견 제한’(중·대형견 금지)을 같이 붙이지 않는다: 동반 가능하면 ‘반려견(소형)’ 한 개로. 동반 불가면 가능 배지·반려견 섹션에서 뺀다.
 // 전기 W를 아는 곳은 사진 배지에도 ‘500W’(아래 정보 줄과 별개로 늘 보인다).
 const petAllowed = (c) => (c._pa ??= !noKeys(c).includes("NO_PET") && Boolean((pos(facts(c).pet) && facts(c).pet.ok) || c.pf?.t?.includes("PET_OK") || (/가능/.test(c.pets ?? "") && !/불가/.test(c.pets ?? ""))));
 const inviteOk = (c) => (c._io ??= !noKeys(c).includes("NO_VISITOR") && (INVITE_OK_SET.has(String(c.id)) || isVisitorCamp(c)));
+// 사진 배지 두 줄(소유자 2026-10-22): 윗줄은 긍정 배지(초대가능·600W·장작·반려견 등, 섹션 배지가 맨 앞),
+// 아랫줄은 부정 배지(반려견 불가·장작 불가·화기 불가 등). 줄바꿈은 .bdg-br(폭 100%)로.
 function badges(c, max = 4, maxNo = 2, { rows = false, theme = null } = {}) {
   const f = facts(c), out = [], pet = petAllowed(c), smallDog = pet && (c.nr ?? []).includes("BIG_DOG");
   const B = {
     invite: inviteOk(c) ? `<span class="bdg bdg-teal">${ic("users")}초대가능</span>` : "",
     // 법령 기본값(r: 업장이 공지하지 않은 600W 참고값)은 배지로 올리지 않는다
     w: pos(f.power) && f.power.g !== "r" && f.power.ok && f.power.w ? `<span class="bdg bdg-volt">${ic("bolt")}${esc(f.power.short)}</span>` : "",
+    fire: pos(f.fire) && f.fire.kind === "FIREWOOD_OK" ? `<span class="bdg bdg-flame">${ic("firewood")}장작</span>` : "",
     pet: pet ? `<span class="bdg bdg-ink">${ic("paw")}반려견${smallDog ? "(소형)" : ""}</span>` : "",
+    park: !rows && pos(f.park) && f.park.ok === true ? `<span class="bdg bdg-cobalt">${ic("car")}텐트 옆</span>` : "",
   };
   // 섹션 배지를 맨 앞에(잘리지 않게)
   const lead = theme === "PET" ? "pet" : theme === "VISITOR" ? "invite" : theme === "WINTER" ? "w" : null;
   if (lead && B[lead]) out.push(B[lead]);
-  for (const k of ["w", "invite", "pet"]) if (k !== lead && B[k]) out.push(B[k]);
-  if (!rows && pos(f.fire) && f.fire.kind === "FIREWOOD_OK") out.push(`<span class="bdg bdg-flame">${ic("firewood")}장작</span>`);
-  if (!rows && pos(f.park) && f.park.ok === true) out.push(`<span class="bdg bdg-cobalt">${ic("car")}텐트 옆</span>`);
-  const no = noKeys(c).filter((k) => NO_CARD.includes(k) && !(rows && ROW_NO.has(k)) && !(k === "BIG_DOG" && pet)).slice(0, maxNo).map(noBadge);
-  return [...out.slice(0, Math.max(max - no.length, lead ? 1 : 1)), ...no].slice(0, max).join("");
+  for (const k of ["invite", "w", "fire", "pet", "park"]) if (k !== lead && B[k]) out.push(B[k]);
+  const no = noKeys(c).filter((k) => NO_CARD.includes(k) && !(k === "BIG_DOG" && pet)).slice(0, maxNo).map(noBadge);
+  const top = out.slice(0, max);
+  return `${top.join("")}${top.length && no.length ? '<i class="bdg-br" aria-hidden="true"></i>' : ""}${no.join("")}`;
 }
 const dot = () => "";
 

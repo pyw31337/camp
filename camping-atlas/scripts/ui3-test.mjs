@@ -53,13 +53,14 @@ for (const [w, h] of [[320, 740], [390, 844], [1366, 900]]) {
     const cut = [...c.querySelectorAll(".card-body *")].filter((e) => { const s = getComputedStyle(e); return s.textOverflow === "ellipsis" && e.scrollWidth > e.clientWidth + 1 && e.getBoundingClientRect().width > 0; }).map((e) => e.className || e.tagName);
     const bd = [...c.querySelectorAll(".bdgs .bdg")].map((b) => b.className + ":" + b.textContent.trim());
     return { id: c.dataset.id, labels: lis.map((li) => li.querySelector(".rl")?.textContent.trim()), hs, cut, vis: lis.length && lis[0].getBoundingClientRect().width > 0,
-      dup: bd.filter((x) => /bdg-(volt|flame|cobalt|size)|장작|화기|숯|전기/.test(x)) };
+      // 2026-10-22 소유자: 사진 배지는 윗줄 긍정(초대가능·600W·장작 등)·아랫줄 부정(불가). 정보 줄과 겹쳐도 된다(10-21 중복 금지 규칙 대체).
+      order: bd.findIndex((x) => /bdg-no/.test(x)) >= 0 && bd.slice(bd.findIndex((x) => /bdg-no/.test(x))).some((x) => !/bdg-no|bdg-wx|w-alert/.test(x)) ? bd : [] };
   }));
   for (const c of cards.filter((x) => x.vis)) {
     if (c.labels.join() !== ROWS.join()) fails.push(`${tag} 카드 #${c.id}: 줄 ${c.labels.join("·")} (기대 ${ROWS.join("·")})`);
     if (Math.max(...c.hs) - Math.min(...c.hs) > 1) fails.push(`${tag} 카드 #${c.id}: 줄 높이 다름 ${c.hs.join("/")}`);
     if (w === 320 && c.cut.length) fails.push(`${tag} 카드 #${c.id}: ‘…’ 잘림 ${c.cut.slice(0, 2).join(",")}`);
-    if (c.dup.length) fails.push(`${tag} 카드 #${c.id}: 사진 배지가 정보 줄과 중복 ${c.dup.join(",")}`);
+    if (c.order.length) fails.push(`${tag} 카드 #${c.id}: 부정 배지 뒤에 긍정 배지 ${c.order.join(",")}`);
   }
   if (!cards.some((x) => x.vis)) fails.push(`${tag} 홈: 보이는 카드 없음`);
   // 목록 + 조건 칩
