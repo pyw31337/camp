@@ -28,12 +28,24 @@ export const FACILITY_LABEL = {
 const yesNo = (v) => (v == null ? null : /^(yes|y|유|있음|o|1|true)$/i.test(String(v).trim()) ? true : /^(no|n|무|없음|x|0|false)$/i.test(String(v).trim()) ? false : null);
 const facility = (available, feeOverride) => ({ available, fee: available === false ? null : feeOverride ?? null });
 
+// OpenStreetMap에는 정자·주유소·관공서·퀵서비스 등이 휴게 시설(highway=services/rest_area)로 잘못 표시된 곳이 있다.
+// 이름이 이런 업종이면 휴게소·쉼터로 쓰지 않는다(2026-10-22 소유자: 휴게소 정보 정제, 예: ‘공원방문자센터’·‘태양주유소’가 휴게소로 나옴).
+const NOT_REST = /주유소|juyuso|충전소|퀵서비스|경비실|주민센터|행정복지센터|교육지원청|방문자센터|센터$|서비스\s*\S*점$|오토큐|타이어|딤채|riders|노모당|노인정|경로당|매표소|안전지대|아파트|^(돌\s*|팔각)?정자$|팔각정$|^pavilion$|^휴게실$|연합진흥/i;
+/** 휴게소·쉼터로 쓸 수 있는 이름인가 */
+export function restStopNameOk(name) {
+  const n = String(name ?? "").trim();
+  if (!n) return true; // 이름 없는 공식 쉼터는 기본 이름으로 표시
+  if (/휴게소|쉼터|만남의\s*광장/.test(n)) return true;
+  return !NOT_REST.test(n);
+}
+
 export function normalizeOsmStop(el) {
   const lat = el.lat ?? el.center?.lat;
   const lng = el.lon ?? el.center?.lon;
   if (!inKorea(lat, lng)) return null;
   const t = el.tags ?? {};
   const name = t["name:ko"] || t.name || null;
+  if (!restStopNameOk(name)) return null;
   const isService = t.highway === "services";
   const kind = isService ? "SERVICE_AREA" : /졸음/.test(name ?? "") ? "DROWSY_SHELTER" : "REST_AREA";
   const fee = (k) => (t[`${k}:fee`] === "yes" ? "PAID" : t[`${k}:fee`] === "no" ? "FREE" : FACILITY_FEE[k]);

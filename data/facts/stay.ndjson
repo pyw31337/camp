@@ -2833,10 +2833,6 @@
 {"cid":"2704","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"2704","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":13}
 {"cid":"2704","attr":"STAY_AUTO_SITES","value":20,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2709","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=1000835","at":"2026-10-19T02:49:43.136Z","quote":"용인호수오토캠핑장 - 캠프위크"}
-{"cid":"2709","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=1000835","at":"2026-10-19T02:49:43.136Z","quote":"카라반 팬션 방갈로 글램핑"}
-{"cid":"2709","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=1000835","at":"2026-10-19T02:49:43.136Z","quote":"카라반 팬션 방갈로 글램핑"}
-{"cid":"2709","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=1000835","at":"2026-10-19T02:49:43.136Z","text":"방갈로","quote":"카라반 팬션 방갈로 글램핑"}
 {"cid":"2729","attr":"SITE_TOTAL","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2729","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":6}
 {"cid":"2729","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/144258465","at":"2026-10-16T05:36:04.939Z","text":"펜션","quote":"여행 > 숙박 > 펜션"}
@@ -3299,9 +3295,7 @@
 {"cid":"3092","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/tkup76/224435819766","at":"2026-10-09","quote":"[캠핑] 고파미르tn600 베스티블과 춘천박사마을글램핑 오토캠핑장(fea..... 예약정보 : 춘천도시공사 매월 15일 오후2"}
 {"cid":"3092","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/Gangwonblood/saFr/7","at":"2022-10-26","text":"펜션","quote":"헌혈봉사회들의 첫 입소를 시작으로 전국 에서 20여 명의 회원이 집결지인 ‘캠핑하는 집’ 펜션에 집결했다. 전헌협 이지연 회장의 인사말에 '이번 춘천마라톤 은 3.."}
 {"cid":"3092","attr":"STAY_GENERAL_SITES","value":9,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"3100","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=1000048&ptype=web","at":"2026-10-19T02:21:14.477Z","quote":"다음 장군바위 오토캠핑장"}
 {"cid":"3100","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3003100","at":"2026-10-19T02:21:14.477Z","quote":"인근에 가볼만한 관광지는 홍련암, 낙산사, 외옹치항이 있고, 주변에 다른 캠핑장으로 코레일 낙산연수원, 단아하우스, 그랑블루 글램핑야영장, 적은리캠프장, 뉴욕카라반이 있습니다."}
-{"cid":"3100","attr":"SITE_TYPE","value":"DECK","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100239&ptype=web","at":"2026-10-19T02:21:14.477Z","quote":"석교리 야영장은 강원 양양군 강현면에 위치하고 있으며 데크 사이트가 총 33개로 구성되어 있고,"}
 {"cid":"3100","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3003100","at":"2026-10-19T02:21:14.477Z","quote":"인근에 가볼만한 관광지는 홍련암, 낙산사, 외옹치항이 있고, 주변에 다른 캠핑장으로 코레일 낙산연수원, 단아하우스, 그랑블루 글램핑야영장, 적은리캠프장, 뉴욕카라반이 있습니다."}
 {"cid":"3100","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3003100","at":"2026-10-19T02:21:14.477Z","text":"방갈로","quote":"카라반 팬션 방갈로 글램핑"}
 {"cid":"3105","attr":"SITE_TOTAL","value":31,"grade":"CONFIRMED","src":"gocamping"}
@@ -4294,7 +4288,6 @@
 {"cid":"7028","attr":"STAY_GENERAL_SITES","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7028","attr":"STAY_GLAMPING_SITES","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7029","attr":"SITE_TOTAL","value":13,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7029","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=1000832&ptype=web","at":"2026-10-20T01:02:52.266Z","quote":"다음 구봉산오토캠핑장"}
 {"cid":"7029","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3007029","at":"2026-10-20T01:02:52.266Z","quote":"카라반 팬션 방갈로 글램핑"}
 {"cid":"7029","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3007029","at":"2026-10-20T01:02:52.266Z","quote":"인근에 가볼만한 관광지는 용인 학일마을, 용인 웬떡마을, 예지촌이 있고, 주변에 다른 캠핑장으로 용인블루캠핑장, 풀무골 글램핑장, 용인청룡캠핑장, 주원캠핑장, 용인힐링캠핑장이 있습니다."}
 {"cid":"7029","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3007029","at":"2026-10-20T01:02:52.266Z","text":"방갈로","quote":"카라반 팬션 방갈로 글램핑"}
@@ -4332,7 +4325,6 @@
 {"cid":"7046","attr":"STAY_GENERAL_SITES","value":26,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7051","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3007051","at":"2026-10-20T01:03:35.831Z","quote":"제천공전자연 캠핑장은 충북 제천시 봉양읍에 위치하고 있으며 인근에 가볼만한 관광지는 화동강목판본, 제천 자양영당, 박달재자연휴양림이 있고, 주변에 다른 캠핑장으로 산내들 오토캠핑장, 하이락 글램핑장, 박달재옛길캠핑장"}
 {"cid":"7051","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3007051","at":"2026-10-20T01:03:35.831Z","quote":"제천공전자연 캠핑장은 충북 제천시 봉양읍에 위치하고 있으며 인근에 가볼만한 관광지는 화동강목판본, 제천 자양영당, 박달재자연휴양림이 있고, 주변에 다른 캠핑장으로 산내들 오토캠핑장, 하이락 글램핑장, 박달재옛길캠핑장"}
-{"cid":"7051","attr":"SITE_TYPE","value":"DECK","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3001216&ptype=web","at":"2026-10-20T01:03:35.831Z","quote":"데크 사이트가 총 52개로 구성되어 있고, 화장실, 샤워실, 취사장 등의 편의시설을"}
 {"cid":"7051","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3007051","at":"2026-10-20T01:03:35.831Z","quote":"제천공전자연 캠핑장은 충북 제천시 봉양읍에 위치하고 있으며 인근에 가볼만한 관광지는 화동강목판본, 제천 자양영당, 박달재자연휴양림이 있고, 주변에 다른 캠핑장으로 산내들 오토캠핑장, 하이락 글램핑장, 박달재옛길캠핑장"}
 {"cid":"7051","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3007051","at":"2026-10-20T01:03:35.831Z","text":"방갈로","quote":"카라반 팬션 방갈로 글램핑"}
 {"cid":"7053","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1159134463","at":"2026-10-16T05:33:22.947Z","quote":"여행 > 숙박 > 야영,캠핑장 > 글램핑장"}
@@ -6724,7 +6716,7 @@
 {"cid":"100126","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
 {"cid":"100126","attr":"STAY_AUTO_SITES","value":30,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100128","attr":"SITE_TOTAL","value":14,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100128","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100128","at":"2026-05-14T00:00:00+09:00","quote":"조용하고 한적한 소나무숲속에서 진짜 &apos;쉼&apos;을 경험해 보세요 법흥계곡 소나무 숲속 오토캠핑장 영월 법흥계곡을 끼고 있는 오토캠핑장이다. 캠핑장 주변으로 키카 큰 소"}
+{"cid":"100128","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100128","at":"2026-05-14T00:00:00+09:00","quote":"조용하고 한적한 소나무숲속에서 진짜 '쉼'을 경험해 보세요 법흥계곡 소나무 숲속 오토캠핑장 영월 법흥계곡을 끼고 있는 오토캠핑장이다. 캠핑장 주변으로 키카 큰 소"}
 {"cid":"100128","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"100128","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":14}
 {"cid":"100128","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
@@ -6975,9 +6967,7 @@
 {"cid":"100239","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://romance-dal315.tistory.com/308","at":"2025-10-14","quote":"양양군 라라플레이스&글램핑 강원도 양양군 현북면 하광정리 608-6 강원도 양양군 럼버잭 캠핑 1"}
 {"cid":"100239","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/412","at":"2024-06-17","text":"펜션","quote":"강원도 특별자치도 추천 오토캠핑장 야영장 카라반 관광농원 자연휴양림 체험장 글램핑장 산장 펜션.... Base Camp 강원특별자치도 양양군 강현면 진미로54번길 1"}
 {"cid":"100240","attr":"SITE_TOTAL","value":5,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100240","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3000953&ptype=web","at":"2026-10-20T01:01:33.885Z","quote":"다음 휴파크 오토캠핑장"}
 {"cid":"100240","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100240","at":"2026-10-20T01:01:33.885Z","quote":"카라반 팬션 방갈로 글램핑"}
-{"cid":"100240","attr":"SITE_TYPE","value":"DECK","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3007446&ptype=web","at":"2026-10-20T01:01:33.885Z","quote":"데크 사이트가 총 38개로 구성되어 있고, 전기, 온수 등의 편의시설을 이용할 수"}
 {"cid":"100240","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100240","at":"2026-10-20T01:01:33.885Z","text":"방갈로","quote":"카라반 팬션 방갈로 글램핑"}
 {"cid":"100240","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"100240","attr":"STAY_GLAMPING_SITES","value":5,"grade":"CONFIRMED","src":"gocamping"}
@@ -7377,7 +7367,6 @@
 {"cid":"100322","attr":"STAY_GENERAL_SITES","value":22,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100322","attr":"STAY_GLAMPING_SITES","value":7,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100323","attr":"SITE_TOTAL","value":17,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100323","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100244&ptype=web","at":"2026-10-19T01:45:26.540Z","quote":"인근에 가볼만한 관광지는 포천향교, 포천 반월성, 왕산사가 있고, 주변에 다른 캠핑장으로 울미숲야영장, 수원산 오토캠핑장, 토일관광농원, 캠프오후4시, 부부송 캠핑장이 있습니다."}
 {"cid":"100323","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100323","at":"2026-10-19T01:45:26.540Z","quote":"카라반 팬션 방갈로 글램핑"}
 {"cid":"100323","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100323","at":"2026-10-19T01:45:26.540Z","quote":"카라반 팬션 방갈로 글램핑"}
 {"cid":"100323","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100323","at":"2026-10-19T01:45:26.540Z","text":"방갈로","quote":"카라반 팬션 방갈로 글램핑"}
@@ -9037,7 +9026,6 @@
 {"cid":"100709","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능 · 개인 카라반 입장 가능"}
 {"cid":"100709","attr":"STAY_AUTO_SITES","value":30,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100710","attr":"SITE_TOTAL","value":20,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100710","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?qtype=TT&detail_id=3100688&ptype=web","at":"2026-10-20T01:05:15.972Z","quote":"인근에 가볼만한 관광지는 용문산전투전적비, 쁘띠프랑스, 가평별묘가 있고, 주변에 다른 캠핑장으로 캠프힐 캠핑장, 링크독애견파크 글램핑&오토캠핑장, 원캠프, 탐선골캠핑장, 엄소리 캠핑장이 있습니다."}
 {"cid":"100710","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100710","at":"2026-10-20T01:05:15.972Z","text":"펜션","quote":"가평다온캠핑장은 경기 가평군 조종면에 위치하고 있으며 인근에 가볼만한 관광지는 조종천계곡, 운악산 두부마을, 현등사가 있고, 주변에 다른 캠핑장으로 루체른, 녹천캠핑, 새연카라반리조트, 솔밭펜션캠핑장, 가평 현리 솔"}
 {"cid":"100710","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"100710","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":17}
@@ -9433,7 +9421,6 @@
 {"cid":"100801","attr":"STAY_AUTO_SITES","value":35,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100802","attr":"SITE_TOTAL","value":16,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100802","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100802","at":"2026-10-20T01:03:50.479Z","quote":"카라반 팬션 방갈로 글램핑"}
-{"cid":"100802","attr":"SITE_TYPE","value":"DECK","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=1002001&ptype=web","at":"2026-10-20T01:03:50.479Z","quote":"밤별생각 낮달이야기는 충북 제천시 백운면에 위치하고 있으며 데크 사이트가 총 15개로 구성되어 있고, 전기, 온수, 장작판매 등의 편의시설을"}
 {"cid":"100802","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100802","at":"2026-10-20T01:03:50.479Z","quote":"카라반 팬션 방갈로 글램핑"}
 {"cid":"100802","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100802","at":"2026-10-20T01:03:50.479Z","text":"펜션","quote":"208덕동 캠핑장은 충북 제천시 백운면에 위치하고 있으며 인근에 가볼만한 관광지는 덕동생태숲, 덕동계곡, 심밭골관광농원이 있고, 주변에 다른 캠핑장으로 발자크펜션캠핑장, 덕동계곡 발자크펜션 캠프장, 평산 오토캠핑 야"}
 {"cid":"100802","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":16}
@@ -12075,11 +12062,6 @@
 {"cid":"101410","attr":"STAY_GENERAL_SITES","value":9,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101410","attr":"STAY_RV_SITES","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101411","attr":"SITE_TOTAL","value":113,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101411","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?qtype=TT&detail_id=1001435&ptype=web","at":"2026-10-20T01:04:17.953Z","quote":"인근에 가볼만한 관광지는 가지산 탄산유황온천, 석남사계곡, 석남사가 있고, 주변에 다른 캠핑장으로 가지산 오토캠핑장, 캠핑월드, 더캠프, 천리안 캠프힐, 숲속에 오토캠핑장이 있습니다."}
-{"cid":"101411","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100819","at":"2026-10-20T01:04:17.953Z","quote":"카라반 팬션 방갈로 글램핑"}
-{"cid":"101411","attr":"SITE_TYPE","value":"DECK","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?qtype=TT&detail_id=1001435&ptype=web","at":"2026-10-20T01:04:17.953Z","quote":"데크 사이트가 구성되어 있고, 전기, 온수, 장작판매, Wi-Fi 등의 편의시설을"}
-{"cid":"101411","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100819","at":"2026-10-20T01:04:17.953Z","quote":"인근에 가볼만한 관광지는 여적암, 속리산조각공원, 삼가저수지가 있고, 주변에 다른 캠핑장으로 속리산 사내리 야영장, 속리산풍경캠핑장, 오렌지캠프, 보은글램핑, 북암농촌체험관이 있습니다."}
-{"cid":"101411","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100819","at":"2026-10-20T01:04:17.953Z","text":"방갈로","quote":"카라반 팬션 방갈로 글램핑"}
 {"cid":"101411","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":113}
 {"cid":"101411","attr":"STAY_GENERAL_SITES","value":113,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101412","attr":"SITE_TOTAL","value":26,"grade":"CONFIRMED","src":"gocamping"}
@@ -12158,8 +12140,8 @@
 {"cid":"101427","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1587482656","at":"2026-10-16T05:34:48.988Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"101427","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"101427","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
-{"cid":"101427","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/37","at":"2026-07-20","quote":"글램핑&middot;카라반. 오솔길 오토 캠핑장. 플레이스씨 글램핑. 트리독스 애견전용캠핑장. 요"}
-{"cid":"101427","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/37","at":"2026-07-20","quote":"일반야영장&middot;글램핑. 글램핑&middot;카라반. 오솔길 오토 캠핑장. 플레이스씨 글램핑."}
+{"cid":"101427","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/37","at":"2026-07-20","quote":"글램핑·카라반. 오솔길 오토 캠핑장. 플레이스씨 글램핑. 트리독스 애견전용캠핑장. 요"}
+{"cid":"101427","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/37","at":"2026-07-20","quote":"일반야영장·글램핑. 글램핑·카라반. 오솔길 오토 캠핑장. 플레이스씨 글램핑."}
 {"cid":"101427","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://allqworld.tistory.com/5098","at":"2025-09-18","text":"펜션","quote":"(경상북도 경주 펜션) 경주 조이풀빌라앤키즈펜션 (Gyeongju joypoolvilla &"}
 {"cid":"101427","attr":"STAY_GENERAL_SITES","value":9,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101429","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1559825098","at":"2026-10-16T05:33:36.679Z","quote":"여행 > 숙박 > 야영,캠핑장 > 글램핑장"}
@@ -12210,8 +12192,6 @@
 {"cid":"101442","attr":"STAY_RV_SITES","value":13,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101444","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--h49a69znpeseq4zkuextkvlkpzd.com/","at":"2026-10-20T01:28:01.668Z","text":"펜션","quote":"월성무지개펜션캠핑 | 깨끗한 물이 흐르는 월성계곡 옆 펜션&캠핑"}
 {"cid":"101446","attr":"SITE_TOTAL","value":15,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101446","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--dm2b95g82rrwb37jlsb.com/reservation.php?id=1","at":"2026-10-20T01:14:56.704Z","quote":"차박사이트"}
-{"cid":"101446","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--dm2b95g82rrwb37jlsb.com/reservation.php?id=1","at":"2026-10-20T01:14:56.704Z","text":"펜션","quote":"화봉펜션"}
 {"cid":"101446","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101446","at":"2025-12-19T00:00:00+09:00","quote":"일반 파쇄석이 아닌 몽돌이 깔린 차박 가능한 오토캠핑장과, 데크별 주차가 가능한 넓은 데크 오토캠핑장도 함께 마련되어 있습니다"}
 {"cid":"101446","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":4}
 {"cid":"101446","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":15}
@@ -12396,9 +12376,7 @@
 {"cid":"101491","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101491","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/oilil_ililo/223902124212","at":"2025-06-17","quote":"​ ​ 오늘은 고기를 먹고 싶어서 고민을 하다가 이왕이면 카라반이나 글램핑 중 고민 하다가 ​ 갬성 있는 곳을 발견 했지 모예요 감포송아캠핑장 ​"}
 {"cid":"101491","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/theslowb/223884314127","at":"2025-06-01","text":"펜션","quote":"경주 감포송아카라반펜션 ㅣ 오류고아라해변 바로 앞 깨끗한 카라반 내돈내산 후기. 안전한지 놀거"}
-{"cid":"101492","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100193&ptype=web","at":"2026-10-20T01:04:04.877Z","quote":"이전 장항오토캠핑장"}
 {"cid":"101492","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=1001810","at":"2026-10-20T01:04:04.877Z","quote":"카라반 팬션 방갈로 글램핑"}
-{"cid":"101492","attr":"SITE_TYPE","value":"DECK","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100193&ptype=web","at":"2026-10-20T01:04:04.877Z","quote":"파라다이스스파도고 카라반캠핑장은 충남 아산시 도고면 기곡리에 위치하고 있으며 잔디, 데크 사이트가 총 30개로 구성되어 있고, 전기, 온수, 화장실, 샤워실, 취사장"}
 {"cid":"101492","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=1001810","at":"2026-10-20T01:04:04.877Z","quote":"카라반 팬션 방갈로 글램핑"}
 {"cid":"101492","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=1001810","at":"2026-10-20T01:04:04.877Z","text":"방갈로","quote":"카라반 팬션 방갈로 글램핑"}
 {"cid":"101492","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
@@ -12840,7 +12818,7 @@
 {"cid":"101631","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dsyhome/224264145530","at":"2026-04-24","text":"펜션","quote":"펜션 홈페이지제작 및 캠핑장예약시스템 안내도 배치도 이용 업체소개. 충청북도"}
 {"cid":"101632","attr":"SITE_TOTAL","value":22,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101632","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":22}
-{"cid":"101632","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/37","at":"2026-07-20","quote":"글램핑&middot;카라반. 오솔길 오토 캠핑장. 플레이스씨 글램핑. 트리독스 애견전용캠핑장. 요"}
+{"cid":"101632","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/37","at":"2026-07-20","quote":"글램핑·카라반. 오솔길 오토 캠핑장. 플레이스씨 글램핑. 트리독스 애견전용캠핑장. 요"}
 {"cid":"101632","attr":"STAY_AUTO_SITES","value":22,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101633","attr":"SITE_TOTAL","value":9,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101633","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":9}
@@ -14087,7 +14065,7 @@
 {"cid":"102019","attr":"STAY_GLAMPING_SITES","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102021","attr":"SITE_TOTAL","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102021","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":3}
-{"cid":"102021","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102021","at":"2026-09-15T00:00:00+09:00","quote":"&quot;* 충북 음성, 미국식 에어스트림에서 즐기는 5성급 프라이빗 글램핑 * 푸른 잔디밭에서 내 아이(댕댕이)와 함께 타는 클래식 에어스트림 감"}
+{"cid":"102021","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102021","at":"2026-09-15T00:00:00+09:00","quote":"\"* 충북 음성, 미국식 에어스트림에서 즐기는 5성급 프라이빗 글램핑 * 푸른 잔디밭에서 내 아이(댕댕이)와 함께 타는 클래식 에어스트림 감"}
 {"cid":"102021","attr":"STAY_CARAVAN_SITES","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102022","attr":"SITE_TOTAL","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102022","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":4}
@@ -14414,9 +14392,7 @@
 {"cid":"102166","attr":"STAY_AUTO_SITES","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102166","attr":"STAY_GLAMPING_SITES","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102167","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=1001754","at":"2026-10-20T01:02:13.159Z","quote":"파랑새오토캠핑장 - 캠프위크"}
-{"cid":"102167","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100137&ptype=web","at":"2026-10-20T01:02:13.159Z","quote":"카라반 팬션 방갈로 글램핑"}
 {"cid":"102167","attr":"SITE_TYPE","value":"DECK","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=1001754","at":"2026-10-20T01:02:13.159Z","quote":"부엉캠핑클럽은 전북 완주군 운주면에 위치하고 있으며 데크 사이트가 구성되어 있고, 전기, 온수, 장작판매, Wi-Fi 등의 편의시설을"}
-{"cid":"102167","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=3100137&ptype=web","at":"2026-10-20T01:02:13.159Z","quote":"카라반 팬션 방갈로 글램핑"}
 {"cid":"102167","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://campweek.co.kr/detail_info_1.php?detail_id=1001754","at":"2026-10-20T01:02:13.159Z","text":"펜션","quote":"인근에 가볼만한 관광지는 대둔산도립공원, 대둔산자연휴양림, 남이자연휴양림이 있고, 주변에 다른 캠핑장으로 부엉캠핑클럽, 대둔산 부엉바위 오토캠핑장, 들꽃펜션 오토캠핑장, 대둔산 그린시티 오토캠핑장, 대둔산캠핑펜션오토"}
 {"cid":"102168","attr":"SITE_TOTAL","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102168","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://camping.kimgoon.kr/campings/102168","at":"2026-10-20T00:49:46.083Z","quote":"학현아름마을오토캠핑장"}

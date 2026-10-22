@@ -918,7 +918,6 @@
 {"cid":"2022","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"2022","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2022","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2031","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.anseong.go.kr/tourPortal/camp/contents.do?mId=0104010000","at":"2026-10-20T01:14:15.526Z","quote":"편의시설 : 냉장고, TV, 2구전기쿡탑, 전기판넬, 전기온수기(50L), 에어컨, 온풍기, 전자레인지,"}
 {"cid":"2031","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"2031","attr":"SHOWER_COUNT","value":29,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2031","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}

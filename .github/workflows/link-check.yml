@@ -30,7 +30,7 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 150
+    timeout-minutes: 200
     defaults:
       run:
         working-directory: pipeline
@@ -59,6 +59,18 @@ jobs:
         run: node scripts/judge-review-photos.mjs
         env:
           PHOTO_JUDGE_MAX: "3000"
+      # 텍스트 내용 판정(lib/text-judge.mjs, 2026-10-22): 후기·카페·웹문서·영상 제목 중 식당·광고·부동산·무관 주제 글을 숨김 표시. 무료·로컬 CPU 모델.
+      - uses: actions/cache@v4
+        with:
+          path: pipeline/.cache/hf-text
+          key: hf-multilingual-e5-small-v1
+      - name: Judge review texts (batch, resumable)
+        continue-on-error: true
+        timeout-minutes: 40
+        run: node scripts/judge-texts.mjs
+        env:
+          TEXT_JUDGE_MAX: "20000"
+          HF_CACHE: .cache/hf-text
       # 공식 사진이 없는 곳의 카드 사진: 상세의 검색 썸네일(130px)을 잠깐 받아 배치도·안내판·야간 사진과 음식·인물 사진을 거른다(저장 없음).
       - name: Pick card photos for places without official photos
         continue-on-error: true
@@ -72,6 +84,7 @@ jobs:
           git add registry/link-health.json
           [ -f registry/card-fallback.json ] && git add registry/card-fallback.json
           [ -f registry/photo-judgments.json ] && git add registry/photo-judgments.json
+          [ -f registry/text-judgments.json ] && git add registry/text-judgments.json
           if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
           git commit -m "chore(data): refresh link health"
           bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" link-check

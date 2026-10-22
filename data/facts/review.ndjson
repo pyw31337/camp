@@ -1159,6 +1159,7 @@
 {"cid":"2015","attr":"REVIEW_PRO_QUIET","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/smart-777/223892739547","at":"2025-06-09","n":1,"text":"조용·한적"}
 {"cid":"2022","attr":"REVIEW_COUNT","value":7,"grade":"MENTION","src":"review_search","n":7}
 {"cid":"2022","attr":"REVIEW_PRO_FAMILY_HEALING","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/tmdrms126/224433365197","at":"2026-10-06","n":1,"text":"가족·모임 힐링"}
+{"cid":"2032","attr":"REVIEW_COUNT","value":1,"grade":"MENTION","src":"review_search","n":1}
 {"cid":"2033","attr":"REVIEW_CON_NARROW_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/amindfulday/224424088986","at":"2026-09-27","n":1,"text":"사이트 좁음"}
 {"cid":"2033","attr":"REVIEW_COUNT","value":9,"grade":"MENTION","src":"review_search","n":9}
 {"cid":"2033","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://brunch.co.kr/@woouiso/623","at":"2026-08-13","n":1,"text":"시설 깔끔·쾌적"}
@@ -4713,7 +4714,6 @@
 {"cid":"100613","attr":"REVIEW_COUNT","value":1,"grade":"MENTION","src":"review_search","n":1}
 {"cid":"100613","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/adid1985/224424905982","at":"2026-09-28","n":1,"text":"시설 깔끔·쾌적"}
 {"cid":"100613","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/adid1985/224424905982","at":"2026-09-28","n":1,"text":"사이트 넓음"}
-{"cid":"100614","attr":"REVIEW_COUNT","value":3,"grade":"MENTION","src":"review_search","n":3}
 {"cid":"100615","attr":"REVIEW_COUNT","value":1,"grade":"MENTION","src":"review_search","n":1}
 {"cid":"100616","attr":"REVIEW_COUNT","value":7,"grade":"MENTION","src":"review_search","n":7}
 {"cid":"100616","attr":"REVIEW_PRO_FAMILY_HEALING","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/jejefam_/224311680969","at":"2026-06-10","n":1,"text":"가족·모임 힐링"}
@@ -6355,7 +6355,6 @@
 {"cid":"101212","attr":"REVIEW_PRO_PET_FRIENDLY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/nhyeonge/224423192844","at":"2026-09-26","n":1,"text":"반려견 동반 편함"}
 {"cid":"101212","attr":"REVIEW_PRO_STARS","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/panda_rucy/224435755637","at":"2026-10-08","n":1,"text":"별 보기 좋음"}
 {"cid":"101212","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/kloi25/224417358802","at":"2026-09-28","n":1,"text":"사이트 넓음"}
-{"cid":"101213","attr":"REVIEW_COUNT","value":1,"grade":"MENTION","src":"review_search","n":1}
 {"cid":"101214","attr":"REVIEW_COUNT","value":8,"grade":"MENTION","src":"review_search","n":8}
 {"cid":"101214","attr":"REVIEW_PRO_CLEAN_FACILITY","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/chzhclq18/224429818110","at":"2026-10-02","n":2,"text":"시설 깔끔·쾌적"}
 {"cid":"101214","attr":"REVIEW_PRO_FAMILY_HEALING","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/y_haneul90/224427204696","at":"2026-09-30","n":1,"text":"가족·모임 힐링"}

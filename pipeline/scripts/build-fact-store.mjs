@@ -13,6 +13,7 @@ import { fileURLToPath } from "node:url";
 import { ATTR, DICTIONARY, GRADE_RANK, SOURCES, factsOf, validateFacts } from "../lib/fact-store.mjs";
 import { CATEGORIES as NEARBY_CATS } from "../lib/nearby-licensed.mjs";
 import { extractSiteDetails, hostOf } from "../lib/operator-site.mjs";
+import { refineCampFacts } from "../lib/fact-refine.mjs";
 import { digestReviews } from "../lib/review-digest.mjs";
 import { operatorFormFacts } from "../lib/operator-form.mjs";
 
@@ -103,6 +104,22 @@ if (forestMatchesReg?.matches?.length) {
       facts.push({ cid, attr: "PHONE", value: m.phone, grade: "CONFIRMED", src: "operator_homepage", url, at });
     }
   }
+}
+
+// 사실 정제(lib/fact-refine.mjs): 다른 업장 페이지 섞임·범위가 좁은 금지·홍보 제목은 빼거나 바로잡고, 숙박형·성수기 한정 입퇴실 시각에는 범위를 붙인다.
+// 뺀 값과 바꾼 값은 data/quality/refine-log.json에 이유와 함께 남긴다(병합 정책: 지운 값은 기록).
+{
+  const byCid = new Map();
+  for (const f of facts) (byCid.get(f.cid) ?? byCid.set(f.cid, []).get(f.cid)).push(f);
+  const campById = new Map(camps.map((c) => [String(c.id), c]));
+  const refined = [], log = [];
+  for (const [cid, list] of byCid) { const r = refineCampFacts(list, { id: cid, homepage: campById.get(cid)?.homepage ?? sites[cid]?.url ?? null }); for (const f of r.facts) refined.push(f); for (const x of r.log) log.push(x); }
+  facts.length = 0; for (const f of refined) facts.push(f);
+  const qd = join(root, "data/quality");
+  mkdirSync(qd, { recursive: true });
+  const count = (a) => log.filter((x) => x.action === a).length;
+  writeFileSync(join(qd, "refine-log.json"), `${JSON.stringify({ generated_at: now, rule: "pipeline/lib/fact-refine.mjs", dropped: count("drop"), recoded: count("recode"), scoped: refined.filter((f) => f.scope).length, items: log }, null, 1)}\n`);
+  console.log(`사실 정제: 뺌 ${count("drop")} · 바로잡음 ${count("recode")} · 범위 표시 ${refined.filter((f) => f.scope).length}`);
 }
 
 // 품질 검토 판정(data/quality/decisions.ndjson, docs/DATA_QUALITY_PROCESS.md): 원문을 대조해 확정한 값은 VERIFIED 사실로 넣는다.

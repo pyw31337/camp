@@ -2374,7 +2374,6 @@
 {"cid":"100800","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100801","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100802","attr":"SITE_SIZE","value":"9.5×11m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100802","at":"2024-12-02T00:00:00+09:00","quote":"바닥은 모두 파쇄석으로 이루어졌으며, 크기는 가로 9.5m × 세로 11m, 가로 10m × 세로 12m 등 다양하다.","text":"9.5×11m"}
-{"cid":"100804","attr":"SITE_SIZE","value":"3.5×2m","grade":"OPERATOR","src":"operator_discovered","url":"http://daltopoolvilla.kr/facility.html?id=78441871-7245-42c2-bce8-8419f407de19","at":"2026-10-16T07:00:11.724Z","quote":"- 수영장 크기 : 3.5m*2m","text":"3.5×2m"}
 {"cid":"100815","attr":"SITE_SIZE","value":"7×8m","grade":"OPERATOR","src":"operator_homepage","url":"https://campingdogam.com/camp/100815/","at":"2026-10-20T00:50:19.269Z","quote":"사이트 크기 7×8m 30면","text":"7×8m"}
 {"cid":"100815","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"gocamping","count":30}
 {"cid":"100816","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}

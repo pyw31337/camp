@@ -29,6 +29,7 @@ const groups = new Map();
 for (const f of readdirSync(factsDir).filter((x) => x.endsWith(".ndjson") && x !== "campgrounds.ndjson")) {
   for (const r of readNd(join(factsDir, f))) {
     if (!r.attr || r.cid == null) continue;
+    if (r.scope) continue; // 숙박형·성수기 한정 값은 대표값 경쟁에서 뺀다(lib/fact-refine.mjs)
     const k = `${r.cid}|${r.attr}`;
     (groups.get(k) ?? groups.set(k, []).get(k)).push(r);
   }

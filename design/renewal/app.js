@@ -3785,7 +3785,7 @@ const mediaFull = (x) => externalImage(x) || apiThumb(x);
 const mediaSmall = (x) => apiThumb(x) || externalImage(x);
 const layoutImages = (d) => (d?.layout?.images ?? []).filter((x) => (x.img || x.thumb || x.url)).filter((x, i, all) => all.findIndex((y) => (y.img || y.thumb || y.url) === (x.img || x.thumb || x.url)) === i).slice(0, 6);
 // ng: 사진 내용 판정에서 걸러진 후기 사진(음식·인물·차 안 등, apply-photo-judgments.mjs) — 갤러리·대표에서 뺀다(2026-10-22)
-const snsOk = (x) => x && !x.ng;
+const snsOk = (x) => x && !x.ng; // ng: 내용 판정(사진 lib/photo-judge · 글 lib/text-judge)으로 숨긴 항목 — 데이터는 남아 있다
 const snsImages = (d) => (d?.sns_images ?? []).filter((x) => snsOk(x) && x.url && mediaFull(x));
 
 const isOfficialLayout = (x) => Boolean(x && (x.official || /gocamping\.or\.kr|mgocamping/i.test(x.img || x.url || "") || x.src === "고캠핑" || x.src === "한국관광공사"));
@@ -3956,7 +3956,7 @@ function mediaHubHtml(d, c) {
   const videoQ = encodeURIComponent(name);
 
   // 1. YouTube 영상 목록 (x.yt 또는 url 기반)
-  const ytVideos = (d?.videos ?? []).map((x) => {
+  const ytVideos = (d?.videos ?? []).filter(snsOk).map((x) => {
     const yt = x.yt || (x.url && x.url.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([A-Za-z0-9_-]{11})/)?.[1]) || null;
     return { ...x, yt };
   }).filter((x) => !HIDDEN_VIDEOS[String(c.id)]?.includes(x.yt)); // 표시층에서만 숨김(데이터는 그대로)
@@ -3966,7 +3966,7 @@ function mediaHubHtml(d, c) {
   // 2. 전체 수집 글 (블로그·카페·웹) 및 사진 매핑
   const seenPosts = new Set();
   const posts = [...(d?.reviews ?? []), ...(d?.cafe ?? []), ...(d?.web ?? [])]
-    .filter((x) => x.url && x.title && !seenPosts.has(x.url) && seenPosts.add(x.url))
+    .filter((x) => snsOk(x) && x.url && x.title && !seenPosts.has(x.url) && seenPosts.add(x.url))
     .sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
 
   const photoByUrl = new Map((d?.sns_images ?? []).filter((p) => snsOk(p) && p.url && (p.thumb || p.img)).map((p) => [p.url, p.thumb || p.img]));
@@ -3975,7 +3975,7 @@ function mediaHubHtml(d, c) {
 
   // 3. 네이버: 영상 및 썸네일 글 통합 (영상 우선, 썸네일 있는 글 우선, 최신순)
   const seenNaver = new Set();
-  const naverVideos = (d?.videos ?? []).filter((x) => x.url && isHost(x.url, /naver\.com$|naver\.me$/));
+  const naverVideos = (d?.videos ?? []).filter((x) => snsOk(x) && x.url && isHost(x.url, /naver\.com$|naver\.me$/));
   const naverPosts = posts.filter((x) => isHost(x.url, /naver\.com$|naver\.me$/)).map((x) => ({
     ...x,
     thumb: bigByUrl.get(x.url) || x.thumb || null,
@@ -3986,7 +3986,7 @@ function mediaHubHtml(d, c) {
 
   // 4. 다음/카카오: 영상 및 썸네일 글 통합 (영상 우선, 썸네일 있는 글 우선, 최신순)
   const seenDaum = new Set();
-  const daumVideos = (d?.videos ?? []).filter((x) => x.url && isHost(x.url, /daum\.net$|kakao\.com$|tistory\.com$|brunch\.co\.kr$/));
+  const daumVideos = (d?.videos ?? []).filter((x) => snsOk(x) && x.url && isHost(x.url, /daum\.net$|kakao\.com$|tistory\.com$|brunch\.co\.kr$/));
   const daumPosts = posts.filter((x) => isHost(x.url, /daum\.net$|kakao\.com$|tistory\.com$|brunch\.co\.kr$/)).map((x) => ({
     ...x,
     thumb: bigByUrl.get(x.url) || x.thumb || null,
@@ -4146,7 +4146,7 @@ function reviewLinksHtml(d, c) {
   for (const r of [...(d?.reviews ?? []), ...(d?.cafe ?? []), ...(d?.web ?? [])]) {
     if (r.url && r.title) titleByUrl.set(r.url, r.title);
   }
-  const rawReviews = [...(d?.reviews ?? []), ...(d?.cafe ?? []), ...(d?.web ?? [])].filter((x) => x.url && x.title && !seenUrl.has(x.url) && seenUrl.add(x.url));
+  const rawReviews = [...(d?.reviews ?? []), ...(d?.cafe ?? []), ...(d?.web ?? [])].filter((x) => snsOk(x) && x.url && x.title && !seenUrl.has(x.url) && seenUrl.add(x.url));
   const photos = snsImages(d);
   const photoByUrl = new Map(photos.map((x) => [x.url, x]));
   const photoReviews = photos.filter((x) => x.url && !seenUrl.has(x.url) && seenUrl.add(x.url)).map((x, i) => {

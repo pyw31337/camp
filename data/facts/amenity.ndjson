@@ -1996,7 +1996,6 @@
 {"cid":"2022","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"족구장"}
 {"cid":"2022","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"2022","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2031","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.anseong.go.kr/tourPortal/camp/contents.do?mId=0702000000","at":"2026-10-20T01:14:15.526Z","quote":"어린이놀이터"}
 {"cid":"2031","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2031","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"2031","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8374,7 +8373,6 @@
 {"cid":"100752","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"100752","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100752","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
-{"cid":"100753","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--sk4bt5i0ylgd44g.kr/facility02.html?id=3","at":"2026-10-20T01:32:51.618Z","quote":"개수대&냉장실"}
 {"cid":"100753","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"100753","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100755","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"http://xn--bj0bw3p2d313dx8niqc4wb.com/","at":"2026-10-20T05:57:44.684Z","quote":"초대형 수영장2"}
@@ -11067,7 +11065,6 @@
 {"cid":"101443","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101444","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--h49a69znpeseq4zkuextkvlkpzd.com/?page_id=1282","at":"2026-10-20T01:28:01.668Z","quote":"TV,에어컨,주방용품,욕실용품,와이파이"}
 {"cid":"101446","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"화봉커피 카페 / B 개러지 / 24마켓 / 샤워장 / 개수대 / 화장실"}
-{"cid":"101446","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--dm2b95g82rrwb37jlsb.com/reservation.php?id=1","at":"2026-10-20T01:14:56.704Z","quote":"개수대&화장실"}
 {"cid":"101446","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"gocamping","text":"화봉커피 카페 / B 개러지 / 24마켓 / 샤워장 / 개수대 / 화장실"}
 {"cid":"101446","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
 {"cid":"101446","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
