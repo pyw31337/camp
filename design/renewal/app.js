@@ -5353,7 +5353,7 @@ async function compareView() {
   if (demo) await ensureFull(demoCamps.map((c) => String(c.id)));
   if (!demo) S.pick = selected.length ? selected.slice(0, 5) : saved.slice(0, Math.min(saved.length, 5)).map((c) => String(c.id));
   const camps = demo ? demoCamps : S.pick.map((id) => S.byId.get(id)).filter(Boolean);
-  const picker = demo ? `<div class="cmp-demo-note">찜한 캠핑장이 없어 대표 정보가 있는 2곳을 예시로 보여드려요.</div>` : `<div class="rail picks">${saved.map((c) => {
+  const picker = demo ? `<div class="cmp-demo-note" data-cmp-empty>찜한 캠핑장이 없어 대표 정보가 있는 2곳을 예시로 보여드려요.<button type="button" class="btn ghost btn-sm" data-sample>대표 캠핑장으로 시작하기</button></div>` : `<div class="rail picks">${saved.map((c) => {
     const on = S.pick.includes(String(c.id));
     return `<span class="pick-wrap${on ? " on" : ""}"><button type="button" class="pick${on ? " on" : ""}" data-pick="${esc(c.id)}" aria-pressed="${on}" aria-label="${esc(nameOf(c).name)} ${on ? "비교에서 빼기" : "비교에 넣기"}">${campThumb(c, { sizes: "36px" })}<span>${esc(nameOf(c).name)}</span>${ic(on ? "check" : "plus")}</button>${heartBtn(c)}</span>`;
   }).join("")}</div>`;
