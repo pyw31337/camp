@@ -1,5 +1,9 @@
 # 인수인계
 
+## 📌 PR #278 Actions 실패 원인 및 데이터 보호 예외 (2026-10-22, Codex)
+- Web quality / Lint and build의 field-guard가 요금 상식값 감사 커밋의 의도적인 fee.* 정제를 기존 값 삭제로 오인하던 원인을 확인했다. 65개 레코드의 fee 최상위 묶음에만 정정 사유·검토일이 있는 pipeline/registry/merge-overrides.json 예외를 추가했으며 원문은 fee_raw·검토 기록에 보존한다.
+- 별도 재현 검사 node pipeline/scripts/field-guard.mjs /tmp/camp-base .에서 손실 0건을 확인했다. 다음 작업자는 Actions 최신 실행의 Web quality·Data sync가 모두 성공한 뒤 PR #278을 머지한다.
+
 ## 📌 상식값·요금 미스매치·표시 엔티티 전수 점검 (2026-10-22, Codex)
 - 구조화된 전력 제한값 전수 검사에서 400W 미만은 0건이었다.
 - 민간 1박 2만원 미만 요금 65건을 `fee_raw`에 원본 보존한 채 대체 근거로 보정하거나 표시에서 숨겼다. 이후 표시되는 2만원 미만 값은 공식 공공요금 또는 캠크닉·당일 이용 예외만 남았다.
