@@ -61,7 +61,12 @@ const seoulRaw = await read("../out/seoul-yeyak.json");
 const seoul = seoulRaw ? matchSeoulToCampgrounds(seoulRaw.services ?? [], camps.campgrounds ?? []) : new Map();
 const pilotFacts = await read("../registry/pilot-condition-facts.json");
 const stdCampgrounds = await read("../out/standard-campgrounds.json");
+const entityQuality = await read("../registry/entity-quality.json");
 const records = buildExploreRecords(camps, toilets, fees, seoul, notices, pilotFacts);
+for (const r of records) {
+  const q = entityQuality?.camps?.[String(r.id)];
+  if (q) r.quality = q;
+}
 // 카탈로그에 없는 당일 캠크닉(펀앤펀 등)은 레지스트리에서 붙인다. 다음 전체 빌드에서도 유지.
 const campnicExtra = await read("../registry/private-campnic.json");
 if (campnicExtra?.sites) {
@@ -352,3 +357,4 @@ await writeFile(p("../out/explore/openings.json"), JSON.stringify({ generated_at
 console.log(`예약 오픈 목록 ${openings.length}건 · 캠핑장 ${new Set(openings.map((o) => o.id)).size}곳`);
 // 목록 파일은 예약 안내(다음 오픈)까지 붙인 뒤에 쓴다.
 await writeFile(p("../out/explore/campgrounds.json"), JSON.stringify(records.map(compact)));
+if (entityQuality) await writeFile(p("../out/explore/entity-quality.json"), JSON.stringify(entityQuality));

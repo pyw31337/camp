@@ -96,6 +96,8 @@ export function tourEventsOf(extras, today) {
     if (!f?.t || !f.s || (f.e ?? f.s) < today) continue;
     ev.set(`tour:${id}`, {
       id: `tour:${id}`, title: f.t, s: f.s, e: f.e ?? f.s, kind: "축제", venue: null, addr: f.a ?? null,
+      lat: Number.isFinite(Number(f.lat)) ? Number(f.lat) : null,
+      lng: Number.isFinite(Number(f.lng)) ? Number(f.lng) : null,
       img: https(f.img), img2: null, desc: null, price: null,
       url: `https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=${encodeURIComponent(id)}`, cf: null, src: SOURCE_NAME.tour, origin: "tour",
     });
@@ -176,7 +178,13 @@ export function eventsNear(camp, idx, { tourNear = [], alias = new Map(), byId =
   for (const h of idx.within(camp.lat, camp.lng, radiusM)) hits.set(h.point.id, Math.round(h.distance_m / 100) / 10);
   for (const [id, km] of tourNear) {
     const k = alias.get(id) ?? id;
-    if (byId.has(k) && !hits.has(k)) hits.set(k, km);
+    const e = byId.get(k);
+    // extras.json의 과거 거리 캐시는 잘못 매칭될 수 있다. 행사 자체 좌표로
+    // 다시 계산해 반경을 넘거나 좌표가 없는 행사는 캠핑장에 붙이지 않는다.
+    if (!e || !Number.isFinite(e.lat) || !Number.isFinite(e.lng)) continue;
+    const actual = haversineM(camp.lat, camp.lng, e.lat, e.lng);
+    if (actual > radiusM || !Number.isFinite(actual)) continue;
+    if (!hits.has(k)) hits.set(k, Math.round(actual / 100) / 10);
   }
   const rank = (id) => { const e = byId.get(id); return [KIND_RANK[e.kind] ?? 4, e.s <= today ? 0 : 1, e.s, hits.get(id)]; };
   const cmp = (a, b) => { const x = rank(a), y = rank(b); for (let i = 0; i < x.length; i++) if (x[i] !== y[i]) return x[i] < y[i] ? -1 : 1; return 0; };

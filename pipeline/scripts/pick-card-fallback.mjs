@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { looksLikePlace, orderCandidates, pixelStats } from "../lib/card-fallback.mjs";
 import { RULE_VERSION, photoJudge } from "../lib/photo-judge.mjs";
+import { photoContextScore } from "../lib/place-quality.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const dataDir = join(root, "camping-atlas/public/explore/data");
@@ -18,6 +19,8 @@ const prev = existsSync(outPath) ? JSON.parse(readFileSync(outPath, "utf8")).cam
 const MAX_TRY = 10;
 const pinsPath = join(root, "pipeline/registry/card-photo-pins.json");
 const pins = existsSync(pinsPath) ? JSON.parse(readFileSync(pinsPath, "utf8")).camps ?? {} : {};
+const qualityPath = join(root, "pipeline/registry/entity-quality.json");
+const quality = existsSync(qualityPath) ? JSON.parse(readFileSync(qualityPath, "utf8")).camps ?? {} : {};
 
 // 사진 내용 판정(CLIP, lib/photo-judge.mjs): 음식·인물·차 안·글 캡처는 대표 사진으로 쓰지 않는다(2026-10-22 여우하우 대게 사진).
 // 판정은 registry/photo-judgments.json에 URL별로 남겨 다시 받지 않는다. 판정기가 없으면(모듈 미설치) 픽셀 규칙만 쓴다.
@@ -51,11 +54,16 @@ async function worker() {
     if (!existsSync(path)) continue;
     let d; try { d = JSON.parse(readFileSync(path, "utf8")); } catch { continue; }
     // 후보: 이미지 검색(sns_images) → 없으면 블로그·카페 후기 글의 대표 썸네일(소유자 2026-10-20: 사진이 전혀 없으면 후기에서라도)
-    const posts = [...(d.reviews ?? []), ...(d.cafe ?? []), ...(d.web ?? [])].filter((x) => x?.thumb && x?.url).map((x) => ({ thumb: x.thumb, img: null, url: x.url, src: x.src ?? "블로그 후기", date: x.date ?? null }));
+    const posts = [...(d.reviews ?? []), ...(d.cafe ?? []), ...(d.web ?? [])]
+      .filter((x) => x?.thumb && x?.url)
+      .map((x) => ({ thumb: x.thumb, img: null, url: x.url, src: x.src ?? "블로그 후기", date: x.date ?? null, title: x.title ?? "", snippet: x.snippet ?? "" }));
     const pin = pins[c.id];
     if (pin?.pin) { out[c.id] = { ...pin.pin, at: pin.at ?? null, pinned: true }; kept++; continue; }
     const rejected = new Set(pin?.reject ?? []);
-    const cands = [...orderCandidates(d.sns_images), ...posts].filter((x) => !rejected.has(x.thumb) && !rejected.has(x.img)).slice(0, MAX_TRY + 4);
+    const contextual = [...(d.sns_images ?? []), ...posts].map((x) => ({ ...x, ...photoContextScore({ title: x.title, snippet: x.snippet, source: x.src, campName: c.name }) }));
+    // 텍스트 근거가 없는 검색 이미지는 대표 카드로 승격하지 않는다. 원문 후기의 캠핑장 맥락이 있는 사진만 사용한다.
+    const cands = orderCandidates(contextual.filter((x) => x.status === "ACCEPTED"))
+      .filter((x) => !rejected.has(x.thumb) && !rejected.has(x.img)).slice(0, MAX_TRY + 4);
     // 지난번에 고른 사진이 아직 후보에 있으면 그대로(다시 받지 않음)
     const old = prev[c.id];
     if (old && cands.some((x) => x.thumb === old.t) && (await contentOk(old.t))) { out[c.id] = old; kept++; continue; }
@@ -64,7 +72,7 @@ async function worker() {
       const st = await stats(x.thumb).catch(() => null);
       if (looksLikePlace(st) && (await contentOk(x.thumb))) { hit = x; break; }
     }
-    if (hit) { out[c.id] = { i: hit.img ?? null, t: hit.thumb, u: hit.url, s: hit.src ?? null, d: hit.date ?? null, at: new Date().toISOString() }; picked++; }
+    if (hit) { out[c.id] = { i: hit.img ?? null, t: hit.thumb, u: hit.url, s: hit.src ?? null, d: hit.date ?? null, quality: "context_verified", at: new Date().toISOString() }; picked++; }
     else none++;
   }
 }

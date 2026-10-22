@@ -44,7 +44,7 @@ test("소개: 자동 틀 문장은 버리고 길면 문장 끝에서 자른다",
 test("같은 행사 합치기: 제목 키 + 기간 겹침, 빈 칸은 다른 원천으로 채움", () => {
   assert.equal(titleKey("제15회 경산 대추축제 (2026)"), titleKey("경산대추축제"));
   const cf = [cultureEventOf({ ...base, id: "f1", source: "festival", genre: "exhibition", title: "제15회 경산대추축제", date: "2026.10.16 ~ 2026.10.25", image: "", address: "경상북도 경산시 남산면 1" }, T)];
-  const extras = { fest: { 9: { t: "경산 대추축제", s: "2026-10-16", e: "2026-10-25", a: "경북 경산시 남산면 대추로 1", img: "http://tong.visitkorea.or.kr/p.jpg" }, 8: { t: "다른 축제", s: "2026-10-20", e: "2026-10-21" } }, camps: { 100: { fe: [["9", 3.2], ["8", 12]] } } };
+  const extras = { fest: { 9: { t: "경산 대추축제", s: "2026-10-16", e: "2026-10-25", a: "경북 경산시 남산면 대추로 1", img: "http://tong.visitkorea.or.kr/p.jpg", lat: 37.501, lng: 127.501 }, 8: { t: "다른 축제", s: "2026-10-20", e: "2026-10-21", lat: 37.58, lng: 127.58 } }, camps: { 100: { fe: [["9", 3.2], ["8", 12]] } } };
   const tour = tourEventsOf(extras, T);
   assert.equal(tour.events.length, 2);
   const { events, alias } = mergeEvents(cf, tour.events);
@@ -56,6 +56,14 @@ test("같은 행사 합치기: 제목 키 + 기간 겹침, 빈 칸은 다른 원
   const idx = new GridIndex(events.filter((e) => Number.isFinite(e.lat)), 0.1);
   const rows = eventsNear({ id: "100", lat: 37.5, lng: 127.5 }, idx, { tourNear: tour.near["100"], alias, byId, today: T });
   assert.deepEqual(rows.map(([id]) => id), ["cf:f1", "tour:8"]);
+});
+
+test("오래된 관광공사 거리 캐시가 실제 좌표 반경을 벗어나면 행사에 붙이지 않는다", () => {
+  const extras = { fest: { far: { t: "광주 행사", s: "2026-10-20", e: "2026-10-21", lat: 35.15, lng: 126.85 } }, camps: { 1: { fe: [["far", 1]] } } };
+  const tour = tourEventsOf(extras, T);
+  const byId = new Map(tour.events.map((e) => [e.id, e]));
+  const rows = eventsNear({ lat: 37.48, lng: 126.83 }, new GridIndex([], 0.1), { tourNear: tour.near["1"], byId, today: T });
+  assert.deepEqual(rows, []);
 });
 
 test("같은 행사 합치기: 구/군 지자체 명칭 차이(울산 중구 국가유산야행 vs 울산 국가유산 야행)도 하나로 합치고 포스터 보존", () => {
@@ -115,7 +123,7 @@ test("같은 제목이라도 다른 지역 공연은 합치지 않는다(순회 
   assert.deepEqual(regionOf("전남광주통합특별시 광산구 광산로68번길 13"), ["광주", "광산구"]);
   assert.deepEqual(regionOf("광주 광산구 광산로68번길 13"), ["광주", "광산구"]);
   const gwangju = cultureEventOf({ ...base, id: "p1", source: "kopis", genre: "musical", title: "페인터즈", date: "2026.10.23 ~ 2026.10.24", lat: 35.139, lng: 126.793, address: "광주 광산구 광산로68번길 13" }, T);
-  const extras = { fest: { 3481597: { t: "페인터즈", s: "2022-11-01", e: "2026-12-31", a: "서울특별시 중구 정동길 3 (정동)" } }, camps: { 7967: { fe: [["3481597", 15.7]] } } };
+  const extras = { fest: { 3481597: { t: "페인터즈", s: "2022-11-01", e: "2026-12-31", a: "서울특별시 중구 정동길 3 (정동)", lat: 37.5663, lng: 126.9707 } }, camps: { 7967: { fe: [["3481597", 15.7]] } } };
   const tour = tourEventsOf(extras, T);
   const { events, alias } = mergeEvents([gwangju], tour.events);
   assert.equal(events.length, 2);

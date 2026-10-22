@@ -88,8 +88,9 @@ function poster(x, i = 0) {
   const fallback = `<span>${esc(e.t)}</span>`;
   // 포스터가 깨지면 원출처 이미지(img2)로 한 번, 그래도 안 되면 제목 카드로 바꾼다.
   const onerr = `if(this.dataset.alt){this.src=this.dataset.alt;this.removeAttribute('data-alt')}else{const p=this.parentNode;p.classList.add('noimg');p.insertAdjacentHTML('afterbegin',this.dataset.fb);this.remove()}`;
-  const img = e.img
-    ? `<img src="${esc(e.img)}" alt="${esc(e.t)} 포스터" loading="${i < 8 ? "eager" : "lazy"}" decoding="async" referrerpolicy="no-referrer"${e.img2 && e.img2 !== e.img ? ` data-alt="${esc(e.img2)}"` : ""} data-fb="${esc(fallback)}" onerror="${esc(onerr)}">`
+  const src = e.img || e.img2;
+  const img = src
+    ? `<img src="${esc(src)}" alt="${esc(e.t)} 포스터" loading="${i < 8 ? "eager" : "lazy"}" decoding="async" referrerpolicy="no-referrer"${e.img && e.img2 && e.img2 !== e.img ? ` data-alt="${esc(e.img2)}"` : ""} data-fb="${esc(fallback)}" onerror="${esc(onerr)}">`
     : fallback;
   return img;
 }
@@ -103,7 +104,7 @@ function card(x, today, i) {
   const map = e.a || e.v ? `<a class="ev-map" href="https://map.kakao.com/link/search/${encodeURIComponent(e.v || e.a)}" target="_blank" rel="noopener" aria-label="${esc(e.t)} 지도" title="지도">${MAP_SVG}</a>` : "";
   return `<article class="ev-card" data-state="${x.state}" data-kind="${esc(e.k)}">
   ${href ? `<a class="ev-hit" href="${esc(href)}" target="_blank" rel="noopener" aria-label="${esc(e.t)} 원문 보기"></a>` : ""}
-  <div class="ev-poster${e.img ? "" : " noimg"}">${poster(x, i)}<div class="ev-badges">${badges}</div><span class="ev-dist">${esc(km(x.km))}</span></div>
+  <div class="ev-poster${e.img || e.img2 ? "" : " noimg"}">${poster(x, i)}<div class="ev-badges">${badges}</div><span class="ev-dist">${esc(km(x.km))}</span></div>
   <div class="ev-body"><div class="ev-kindrow"><span class="ev-kind">${esc(e.k)}</span>${map}</div><h3>${esc(e.t)}</h3>
   <span class="ev-meta">${esc(period)}${place ? `<br>${esc(place)}` : ""} · 캠핑장에서 ${esc(km(x.km))}${e.p ? ` · ${esc(e.p)}` : ""}</span>
   ${e.d ? `<p class="ev-desc">${esc(e.d)}</p>` : ""}</div></article>`;

@@ -29,6 +29,7 @@ body > main { flex: 1 0 auto; }
 .brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 900; font-size: 1.08rem; letter-spacing: -0.03em; white-space: nowrap; }
 .brand-mark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: var(--ink); color: var(--volt); }
 .brand-mark svg { width: 18px; height: 18px; fill: currentColor; }
+.map-header-count { display: none; color: var(--ink-2); font-size: .78rem; font-weight: 800; white-space: nowrap; margin-left: auto; }
 .top-nav { display: flex; gap: 4px; }
 .top-nav a { position: relative; display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; border-radius: 999px; font-weight: 700; color: var(--ink-2); white-space: nowrap; }
 .top-nav a[aria-current] { color: var(--ink); background: var(--soft); }
@@ -58,6 +59,7 @@ body[data-view="detail"] .site-footer { padding-bottom: calc(clamp(28px, 3.5vw, 
   :root { --head-h: 56px; }
   body { padding-bottom: calc(var(--tabbar-h) + 4px + env(safe-area-inset-bottom)); }
   .top-nav { display: none; }
+  body.map-mode .map-header-count { display: inline-flex; align-items: center; margin-left: auto; margin-right: 0; }
   .tabbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 900; display: grid; grid-template-columns: repeat(5, 1fr); height: calc(var(--tabbar-h) + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom); background: color-mix(in srgb, var(--paper) 96%, transparent); backdrop-filter: blur(10px); box-shadow: 0 -1px 0 var(--line); }
   .tabbar a, .tabbar button { position: relative; display: grid; justify-items: center; align-content: center; gap: 2px; font-size: var(--fs-min, .75rem); font-weight: 700; color: var(--ink-3); }
   .tabbar svg { width: 24px; height: 24px; fill: currentColor; }
