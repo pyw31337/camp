@@ -16,6 +16,9 @@ const now = new Date().toISOString();
 const read = (p, fallback) => existsSync(p) ? JSON.parse(readFileSync(p, "utf8")) : fallback;
 const camps = read(catalogPath, []);
 const registry = read(registryPath, { campgrounds: {} });
+// 변경이 없는 검사까지 원장에 새 시각을 쓰면, 무의미한 diff가 계속 생긴다.
+// 정제 결과가 실제로 달라진 경우에만 generated_at을 갱신한다.
+const registryBefore = JSON.stringify(registry);
 const fold = (s) => decodeDisplayEntities(s).toLowerCase().replace(/[^0-9a-z가-힣]/gi, "");
 const hostOf = (url) => { try { return new URL(String(url)).hostname.replace(/^www\./, ""); } catch { return ""; } };
 const homesPerHost = new Map();
@@ -59,6 +62,17 @@ function rowsOf(c, rows, type, target, title = false) {
     if (ok) kept.push(row); else quarantine(target, type, row, why);
   }
   return kept;
+}
+// `dayuse-seed.json`은 공공 기관 원문 URL·확인일을 적은 별도 사실 원장이다.
+// 이 장소의 피크닉/취사 규칙은 이름에 “캠핑”이 없다는 이유로 공용 포털 오염과
+// 혼동하면 안 된다. 시드 적용 결과를 그대로 보존해야 다음 발행도 멱등이다.
+function seededDayuseRows(rows, title = false) {
+  const key = title ? "title" : "text";
+  return (rows ?? []).map((raw) => {
+    const row = typeof raw === "string" ? { [key]: raw } : { ...raw };
+    row[key] = decodeDisplayEntities(row[key]).replace(/\s+/g, " ").trim();
+    return row;
+  }).filter((row) => row[key]);
 }
 function cleanProfile(c, detail, target) {
   const profile = detail.profile;
@@ -104,7 +118,12 @@ for (const c of camps) {
   if (op.length) detail.operator_snippets = op; else delete detail.operator_snippets;
   const h = detail.house_rules;
   if (h) {
-    for (const key of ["rules", "ops"]) { const clean = rowsOf(c, h[key], `house_${key}`, quarantineTarget); stats.rules += (h[key]?.length ?? 0) - clean.length; if (clean.length) h[key] = clean; else delete h[key]; }
+    const isSeededDayuse = Boolean(c.du && detail.du_src?.url);
+    for (const key of ["rules", "ops"]) {
+      const clean = isSeededDayuse ? seededDayuseRows(h[key]) : rowsOf(c, h[key], `house_${key}`, quarantineTarget);
+      stats.rules += (h[key]?.length ?? 0) - clean.length;
+      if (clean.length) h[key] = clean; else delete h[key];
+    }
     const notices = rowsOf(c, h.notices, "house_notices", quarantineTarget, true); stats.notices += (h.notices?.length ?? 0) - notices.length;
     if (notices.length) h.notices = notices; else delete h.notices;
     if (!(h.tags?.length || h.rules?.length || h.ops?.length || h.notices?.length)) delete detail.house_rules;
@@ -113,5 +132,8 @@ for (const c of camps) {
   if (!reg && quarantineTarget.integrity_quarantine.length && apply) { registry.campgrounds ??= {}; registry.campgrounds[id] = quarantineTarget; }
   if (JSON.stringify(detail) !== before) { stats.details++; if (apply) writeFileSync(path, JSON.stringify(detail)); }
 }
-if (apply) { registry.generated_at = now; writeFileSync(registryPath, JSON.stringify(registry, null, 1)); }
+if (apply && JSON.stringify(registry) !== registryBefore) {
+  registry.generated_at = now;
+  writeFileSync(registryPath, JSON.stringify(registry, null, 1));
+}
 console.log(`${apply ? "적용" : "점검"}: 상세 ${stats.details} · 운영자 ${stats.registry} · 안내 ${stats.detail} · 규칙 ${stats.rules} · 공지 ${stats.notices} · 프로필 ${stats.profile}`);
