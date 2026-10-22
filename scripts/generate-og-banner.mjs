@@ -55,7 +55,7 @@ const overlaySvg = Buffer.from(`
       <rect width="52" height="52" rx="14" fill="#0b131f" stroke="rgba(255,255,255,0.14)" stroke-width="1.5"/>
       <image href="data:image/png;base64,${faviconData}" x="5" y="5" width="42" height="42" preserveAspectRatio="xMidYMid meet"/>
 
-      <text x="68" y="36" font-family="'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif" font-size="28" font-weight="900" fill="#ffffff" letter-spacing="-0.03em">렛츠 캠핑</text>
+      <text x="68" y="38" font-family="'Kim jung chul Script', 'Cafe24 Supermagic', 'NanumBarunpenOTF', cursive" font-size="36" font-weight="700" font-style="italic" fill="#ffffff" stroke="#c8ff00" stroke-opacity="0.2" stroke-width="3" paint-order="stroke" letter-spacing="-0.04em">렛츠 캠핑</text>
       <rect x="236" y="16" width="68" height="26" rx="13" fill="#c8ff00"/>
       <text x="270" y="34" font-family="'Pretendard', sans-serif" font-size="13" font-weight="900" fill="#080e18" text-anchor="middle">OFFICIAL</text>
     </g>
@@ -67,7 +67,7 @@ const overlaySvg = Buffer.from(`
     </text>
 
     <!-- 3. 서브 카피 -->
-    <text x="0" y="278" font-family="'Pretendard', sans-serif" font-size="21" font-weight="600" fill="rgba(255,255,255,0.88)" letter-spacing="-0.02em">
+    <text x="0" y="278" font-family="'Gmarket Sans TTF', 'Pretendard', 'Apple SD Gothic Neo', sans-serif" font-size="21" font-weight="700" fill="rgba(255,255,255,0.94)" letter-spacing="-0.02em">
       공식 스펙과 후기 신호를 한눈에 비교하는 캠핑장 탐색 서비스
     </text>
 
