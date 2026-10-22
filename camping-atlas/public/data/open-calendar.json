@@ -1,41 +1,11 @@
 {
-  "generated_at": "2026-10-18T20:43:22.417Z",
+  "generated_at": "2026-10-22T21:58:43.983Z",
   "registry_version": 1,
   "range": {
-    "from": "2026-10-19T00:00:00+09:00",
-    "to": "2027-02-15T23:59:00+09:00"
+    "from": "2026-10-23T00:00:00+09:00",
+    "to": "2027-02-19T23:59:00+09:00"
   },
   "events": [
-    {
-      "id": "foresttrip-national-weekday-fcfs:OPEN:2026-10-21T09:00:00+09:00",
-      "rule_id": "foresttrip-national-weekday-fcfs",
-      "provider_id": "foresttrip",
-      "campground_ids": [],
-      "type": "OPEN",
-      "at": "2026-10-21T09:00:00+09:00",
-      "date": "2026-10-21",
-      "time_known": true,
-      "label": "국립자연휴양림 비수기 주중 선착순 오픈",
-      "stay": {
-        "from": "2026-11-30",
-        "to": "2026-12-06",
-        "day_types": [
-          "SUN",
-          "MON",
-          "TUE",
-          "WED",
-          "THU"
-        ]
-      },
-      "note": null,
-      "source": {
-        "url": "https://www.foresttrip.go.kr/pot/cc/fa/selectFaqBbrssListView.do?bbrssMsterId=BBRSSMSTER_00000002&ctgryCd=&hmpgId=FRIP&nowPage=1&srwrd=%EC%A3%BC%EC%A4%91&twbbsId=",
-        "title": "숲나들e 자주 묻는 질문 — 주중 예약",
-        "checked_at": "2026-10-12",
-        "tier": "B"
-      },
-      "needs_verification": false
-    },
     {
       "id": "foresttrip-national-weekday-fcfs:OPEN:2026-10-28T09:00:00+09:00",
       "rule_id": "foresttrip-national-weekday-fcfs",
@@ -1005,6 +975,36 @@
         "tier": "C"
       },
       "needs_verification": true
+    },
+    {
+      "id": "foresttrip-national-weekday-fcfs:OPEN:2027-02-17T09:00:00+09:00",
+      "rule_id": "foresttrip-national-weekday-fcfs",
+      "provider_id": "foresttrip",
+      "campground_ids": [],
+      "type": "OPEN",
+      "at": "2027-02-17T09:00:00+09:00",
+      "date": "2027-02-17",
+      "time_known": true,
+      "label": "국립자연휴양림 비수기 주중 선착순 오픈",
+      "stay": {
+        "from": "2027-03-29",
+        "to": "2027-04-04",
+        "day_types": [
+          "SUN",
+          "MON",
+          "TUE",
+          "WED",
+          "THU"
+        ]
+      },
+      "note": null,
+      "source": {
+        "url": "https://www.foresttrip.go.kr/pot/cc/fa/selectFaqBbrssListView.do?bbrssMsterId=BBRSSMSTER_00000002&ctgryCd=&hmpgId=FRIP&nowPage=1&srwrd=%EC%A3%BC%EC%A4%91&twbbsId=",
+        "title": "숲나들e 자주 묻는 질문 — 주중 예약",
+        "checked_at": "2026-10-12",
+        "tier": "B"
+      },
+      "needs_verification": false
     }
   ],
   "recurring": [
