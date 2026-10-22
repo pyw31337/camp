@@ -935,7 +935,7 @@
 {"cid":"7944","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7953","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7956","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7956","attr":"POWER_MAX_W","value":500,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--939ap9fowi7mi22il0kvxl.kr/?page_id=6445","at":"2026-10-20T01:13:32.193Z","quote":"• 전기콘센트는 3구이며 전력은 500W입니다.","text":"최대 500W"}
+{"cid":"7956","attr":"POWER_MAX_W","value":500,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--939ap9fowi7mi22il0kvxl.kr/?page_id=6445","at":"2026-10-20T01:13:32.193Z","quote":"· 전기콘센트는 3구이며 전력은 500W입니다.","text":"최대 500W"}
 {"cid":"7958","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7961","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7963","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -958,7 +958,7 @@
 {"cid":"8008","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8012","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8014","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"8014","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://noeuljin.com/page/%EC%9D%B4%EC%9A%A9%EC%95%88%EB%82%B4/","at":"2026-10-20T01:01:11.133Z","quote":"• 캠핑사이트의 전기 사용량은 600W까지 이며, 전기차 충전은 금지합니다.","text":"최대 600W"}
+{"cid":"8014","attr":"POWER_MAX_W","value":600,"grade":"OPERATOR","src":"operator_homepage","url":"https://noeuljin.com/page/%EC%9D%B4%EC%9A%A9%EC%95%88%EB%82%B4/","at":"2026-10-20T01:01:11.133Z","quote":"· 캠핑사이트의 전기 사용량은 600W까지 이며, 전기차 충전은 금지합니다.","text":"최대 600W"}
 {"cid":"8015","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8017","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8019","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2255,7 +2255,6 @@
 {"cid":"101892","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101894","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101898","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101902","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101905","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101906","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101909","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}

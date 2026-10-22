@@ -1692,7 +1692,7 @@
 {"cid":"7251","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7251","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7253","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7253","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://www.bestfield.kr/content/110","at":"2026-10-20T00:52:36.352Z","quote":"• 주차는 각 텐트당 1대씩 텐트옆에 주차 가능 (추가 차량은 외부주차장 이용)"}
+{"cid":"7253","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://www.bestfield.kr/content/110","at":"2026-10-20T00:52:36.352Z","quote":"· 주차는 각 텐트당 1대씩 텐트옆에 주차 가능 (추가 차량은 외부주차장 이용)"}
 {"cid":"7253","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7254","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7254","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2134,7 +2134,7 @@
 {"cid":"7946","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7953","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7953","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7956","attr":"CAR_CAMPING","value":false,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--939ap9fowi7mi22il0kvxl.kr/?page_id=6445","at":"2026-10-20T01:13:32.193Z","quote":"• 주차장에 쉘터, 타프등 설치가능하나 추가인원께서 텐트/차박등을 이용한 숙박은 허용안됩니다."}
+{"cid":"7956","attr":"CAR_CAMPING","value":false,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--939ap9fowi7mi22il0kvxl.kr/?page_id=6445","at":"2026-10-20T01:13:32.193Z","quote":"· 주차장에 쉘터, 타프등 설치가능하나 추가인원께서 텐트/차박등을 이용한 숙박은 허용안됩니다."}
 {"cid":"7956","attr":"CARAVAN_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7956","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7958","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
