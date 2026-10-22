@@ -2693,7 +2693,8 @@ function nearbyHubHtml(c, d) {
   const entry = (type, x = {}) => {
     const name = x?.name ?? x?.n;
     const m = Number(x?.m ?? x?.distance_m);
-    return name && Number.isFinite(m) ? { type, name, m, lat: x.lat, lng: x.lng, url: x.u ?? x.url, image: x.img ?? x.image, imgU: x.img_u, imgS: x.img_s, sub: x.addr ?? x.sub, summary: x.facts } : null;
+    const factSummary = Object.entries(x.facts ?? {}).filter(([k]) => !/쿠키|개인정보|출처|원문/.test(k)).slice(0, 2).map(([k, v]) => `${k} ${v}`).join(" · ");
+    return name && Number.isFinite(m) ? { type, name, m, lat: x.lat, lng: x.lng, url: x.u ?? x.url, image: x.img ?? x.image, imgU: x.img_u, imgS: x.img_s, sub: x.addr ?? x.sub, summary: factSummary || undefined } : null;
   };
   // 한 종류에 가까운 순 최대 3곳(이름이 같으면 하나로)
   const pick = (type, ...lists) => [...new Map(lists.flat().map((x) => entry(type, x)).filter(Boolean).sort((a, b) => a.m - b.m).map((x) => [x.name.replace(/\s+/g, ""), x])).values()].slice(0, 3);
