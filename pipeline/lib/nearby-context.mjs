@@ -143,11 +143,12 @@ export function dedupeById(items) {
 /** out/rest-stops.json의 stops → {id, kind, name, lat, lng, road} */
 export function normalizeRestStop(s) {
   if (!s || !inKorea(s.lat, s.lng)) return null;
-  return {
-    id: String(s.id), kind: s.kind ?? "REST", name: s.name ?? null, lat: s.lat, lng: s.lng,
-    road: s.road ?? null, address: s.address ?? null, facilities: s.facilities ?? null,
-    fuel: s.fuel ?? null, best_foods: Array.isArray(s.best_foods) ? s.best_foods.slice(0, 5) : [],
-  };
+  const out = { id: String(s.id), kind: s.kind ?? "REST", name: s.name ?? null, lat: s.lat, lng: s.lng, road: s.road ?? null };
+  if (s.address) out.address = s.address;
+  if (s.facilities && typeof s.facilities === "object" && Object.keys(s.facilities).length) out.facilities = s.facilities;
+  if (s.fuel) out.fuel = s.fuel;
+  if (Array.isArray(s.best_foods) && s.best_foods.length) out.best_foods = s.best_foods.slice(0, 5);
+  return out;
 }
 
 // ─── 주변 계산 ────────────────────────────────────────────────────────────
