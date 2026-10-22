@@ -3931,6 +3931,21 @@ function mediaHubHtml(d, c) {
     .filter((x) => x.url && !seenDaum.has(x.url) && seenDaum.add(x.url))
     .sort((a, b) => (b.thumb ? 1 : 0) - (a.thumb ? 1 : 0) || String(b.date ?? "").localeCompare(String(a.date ?? "")));
 
+  // 공식 임베드 주소가 있는 네이버TV·카카오TV 영상만 페이지 안에서 재생한다.
+  // 네이버 블로그/카페와 일반 다음 글은 iframe 차단 경계가 있어 원문 링크로 유지한다.
+  const videoEmbedUrl = (x, platformKey) => {
+    const u = String(x?.url ?? "");
+    if (platformKey === "naver") {
+      const id = u.match(/(?:tv\.naver\.com\/(?:v|embed)\/)([0-9]+)/i)?.[1];
+      return id ? `https://tv.naver.com/embed/${id}` : "";
+    }
+    if (platformKey === "daum") {
+      const id = u.match(/(?:cliplink\/|\/v\/)([0-9]+)/i)?.[1];
+      return id ? `https://tv.kakao.com/embed/player/cliplink/${id}` : "";
+    }
+    return "";
+  };
+
   // 플랫폼별 동일한 카드 포맷 렌더러
   const renderMediaRail = (items, platformKey, platformLabel, searchUrl) => {
     if (!items.length) {
@@ -3965,8 +3980,12 @@ function mediaHubHtml(d, c) {
         ? `<img src="${esc(thumbUrl)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"${altUrl ? ` data-alt="${esc(altUrl)}"` : ""}${fb && fb !== thumbUrl ? ` data-fb="${esc(fb)}"` : ""} onerror="if(this.dataset.alt){this.src=this.dataset.alt;this.dataset.alt=''}else if(this.dataset.fb){this.src=this.dataset.fb;this.dataset.fb=''}else{this.closest('.vid-wrap')?.classList.add('vid-noimg-wrap')}">${playIcon}<b>${esc(titleText)}</b><i>${esc(metaText)}</i>`
         : `<div class="vid-noimg">${platIc(platformKey)}<span>${esc(platformLabel)}</span></div>${playIcon}<b>${esc(titleText)}</b><i>${esc(metaText)}</i>`;
 
+      const embedUrl = !isYt ? videoEmbedUrl(x, platformKey) : "";
       if (isYt) {
         return `<article class="vid-wrap"><button type="button" class="vid" data-yt="${esc(x.yt)}">${inner}</button>${srcTip(fact, `관련 영상 ${i + 1}`)}</article>`;
+      }
+      if (embedUrl) {
+        return `<article class="vid-wrap"><button type="button" class="vid" data-inline-video="${esc(embedUrl)}">${inner}</button>${srcTip(fact, `${platformLabel} 영상 ${i + 1}`)}</article>`;
       }
       return `<article class="vid-wrap"><a class="vid" href="${esc(x.url)}" target="_blank" rel="noopener">${inner}</a>${srcTip(fact, `${platformLabel} 영상 ${i + 1}`)}</article>`;
     };
@@ -4910,6 +4929,13 @@ function bindDetail() {
     const wrap = b.closest(".vid-wrap");
     b.outerHTML = `<div class="vid playing"><iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(b.dataset.yt)}?autoplay=1" title="영상" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>`;
     // 넓어진 쇼츠 칸이 줄 안에서 다 보이게(옆 칸은 밀려난다)
+    if (wrap?.classList.contains("is-short")) setTimeout(() => wrap.scrollIntoView({ behavior: "smooth", inline: "nearest", block: "nearest" }), 220);
+  }));
+  $$("[data-inline-video]").forEach((b) => b.addEventListener("click", () => {
+    const wrap = b.closest(".vid-wrap");
+    const src = b.dataset.inlineVideo;
+    if (!src) return;
+    b.outerHTML = `<div class="vid playing"><iframe src="${esc(src)}?autoplay=1" title="영상" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>`;
     if (wrap?.classList.contains("is-short")) setTimeout(() => wrap.scrollIntoView({ behavior: "smooth", inline: "nearest", block: "nearest" }), 220);
   }));
   const id = $(".detail")?.dataset.id;
