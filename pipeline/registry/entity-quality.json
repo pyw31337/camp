@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "updated_at": "2026-10-22",
+  "policy": "원장 레코드는 보존하고, 명백한 비캠핑 업체는 기본 탐색·지도·주변 추천에서 격리한다.",
+  "camps": {
+    "101213": {
+      "status": "REJECTED",
+      "reason": "camping_operator_name_mismatch",
+      "note": "스마트락(주)·샷시/창호 업체로 확인되어 캠핑장 목록에서 격리. 원장과 직접 검색 결과에서는 보존.",
+      "checked_at": "2026-10-22"
+    },
+    "100419": {
+      "photo_status": "REVIEW",
+      "photo_reason": "fallback_review_photo_without_place_context",
+      "note": "공식 사진이 없어 후기 대표사진을 사용하던 레코드. 음식·인물 사진 오매칭 가능성을 해소할 때까지 카드 대표사진에서 보류.",
+      "checked_at": "2026-10-22"
+    }
+  }
+}

@@ -1,5 +1,13 @@
 # 인수인계
 
+## 📌 업체·후기사진·행사 위치 품질 게이트 (2026-10-22, Codex)
+- **비캠핑 업체 격리:** `pipeline/lib/place-quality.mjs`와 `pipeline/registry/entity-quality.json`을 추가했다. `스마트락(주)`처럼 이름·업종이 창호/제조업인 레코드는 원장 데이터를 삭제하지 않고 `REJECTED`로 표시해 기본 탐색·지도·주변 캠핑장 추천에서 제외한다. 직접 검색은 계속 가능하다.
+- **후기사진 검증:** 카드 대체사진 후보에 후기 제목·본문의 캠핑장명/캠핑 맥락을 요구하고 음식·식당·인물 단서를 감점한다. 근거가 없는 후보는 `REVIEW`로 남기며 카드 대표사진으로 승격하지 않는다. `여우하우야영장(100419)`은 기존 후기 대표사진을 검토 상태로 격리해 대게 등 오매칭 이미지가 기본 카드에 다시 나타나지 않게 했다.
+- **행사 위치:** `eventsNear()`가 `extras.json`의 과거 거리값을 그대로 신뢰하지 않고 행사 좌표와 캠핑장 좌표를 재계산해 30km 밖 행사를 버린다. 따라서 구로 캠핑장에 광주 행사가 붙는 유형을 발행 단계에서 차단한다. 좌표 없는 관광공사 행사도 자동 연결하지 않는다.
+- **행사 포스터:** `img`가 비어도 `img2`(원출처 대체 포스터)를 우선 렌더링하도록 `context/events.js`를 보완했다. 두 원천 모두 포스터가 없을 때는 제목형 대체 카드로 남긴다.
+- **휴양림·휴게소·실내놀이터·수영장·레포츠·박물관:** 기존 `kdata-public`/`nearby-context` 수집·주변 연동을 유지하고, 이번 변경은 품질 게이트를 추가해 잘못된 업체와 위치 오매칭만 차단한다. CultureFlow 원본 저장소는 이 체크아웃에 없어 원천 데이터 자체 수정은 별도 저장소 작업이 필요하다.
+- **검증:** `node --test pipeline/test/place-quality.test.mjs pipeline/test/culture-events.test.mjs pipeline/test/detail-events-card.test.mjs` 13개 통과, `npm --prefix camping-atlas run lint` 오류 0(기존 경고 31), `git diff --check` 통과. 전체 파이프라인 테스트는 환경에 `sharp`가 없어 기존 `photo-dedupe.test.mjs` 1개가 로드 실패했다.
+
 ## 📌 PR #278 Actions 실패 원인 및 데이터 보호 예외 (2026-10-22, Codex)
 - Web quality / Lint and build의 field-guard가 요금 상식값 감사 커밋의 의도적인 fee.* 정제를 기존 값 삭제로 오인하던 원인을 확인했다. 65개 레코드의 fee 최상위 묶음에만 정정 사유·검토일이 있는 pipeline/registry/merge-overrides.json 예외를 추가했으며 원문은 fee_raw·검토 기록에 보존한다.
 - 별도 재현 검사 node pipeline/scripts/field-guard.mjs /tmp/camp-base .에서 손실 0건을 확인했다. 다음 작업자는 Actions 최신 실행의 Web quality·Data sync가 모두 성공한 뒤 PR #278을 머지한다.

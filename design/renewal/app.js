@@ -503,7 +503,8 @@ function publicParkInformationComplete(c) {
 }
 function coreBrowseEligible(c) {
   // 직접 이름으로 찾으면 정보가 덜 찬 공원도 발견은 가능하게 하되, 일반 탐색에서는 제외한다.
-  return !isPublicPark(c) || namedByQuery(c) || publicParkInformationComplete(c);
+  const rejectedEntity = c?.quality?.status === "REJECTED";
+  return (!rejectedEntity || namedByQuery(c)) && (!isPublicPark(c) || namedByQuery(c) || publicParkInformationComplete(c));
 }
 function mapBrowseEligible(c) {
   // 지도는 현재 화면에 보이는 후보를 비교하는 곳이므로, 이름 검색 예외 없이
@@ -783,9 +784,13 @@ function photosAll(c) {
   else if (c.img) list = [c.img];
   // 공식 사진이 없는 곳: 캠핑장 이름으로 찾은 블로그 사진 중 배치도·안내판·야간 사진을 거른 한 장(pick-card-fallback.mjs → c.pt).
   // 원본이 막히면 검색 썸네일로 바꾼다(PT_FB). 카드에는 ‘후기 사진’ 출처를 붙인다.
-  else if (c.pt?.i || c.pt?.t) { list = [c.pt.i || c.pt.t]; if (c.pt.i && c.pt.t) PT_FB.set(c.pt.i, c.pt.t); }
+  else if (c.pt?.i || c.pt?.t) {
+    if (c.quality?.photo_status !== "REVIEW" && c.quality?.photo_status !== "REJECTED") {
+      list = [c.pt.i || c.pt.t]; if (c.pt.i && c.pt.t) PT_FB.set(c.pt.i, c.pt.t);
+    }
+  }
   // 걸러 고른 사진(c.pt)이 없을 때만 첫 검색 썸네일(c.sn, build-explore-data)
-  else if (c.sn && !list.length) list = [c.sn];
+  else if (c.sn && !list.length && c.quality?.photo_status !== "REVIEW" && c.quality?.photo_status !== "REJECTED") list = [c.sn];
 
   const seen = new Set();
   const deduped = [];
@@ -2995,7 +3000,7 @@ function similarNearby(c, n = 3) {
   if (!Number.isFinite(c?.lat) || !Number.isFinite(c?.lng)) return [];
   const mine = new Set(stayKinds(c));
   return S.camps
-    .filter((x) => String(x.id) !== String(c.id) && Number.isFinite(x.lat) && Number.isFinite(x.lng) && !isPublicPark(x) && coreBrowseEligible(x) && hasPhoto(x))
+    .filter((x) => String(x.id) !== String(c.id) && Number.isFinite(x.lat) && Number.isFinite(x.lng) && !isPublicPark(x) && coreBrowseEligible(x) && x?.quality?.status !== "REJECTED" && hasPhoto(x))
     .map((x) => ({ x, km: km2(c, x), share: mine.size ? stayKinds(x).filter((k) => mine.has(k)).length : 1 }))
     .filter((r) => r.km <= 40 && r.share > 0)
     .sort((a, b) => a.km - b.km)
@@ -6042,7 +6047,7 @@ addEventListener("error", (e) => {
 (async function boot() {
   $("#view").innerHTML = `<div class="loading"></div>`;
   const configReady = ensureSupabaseConfig();
-  const [camps, photos, openings, cards, avail, fcast] = await Promise.all([
+  const [camps, photos, openings, cards, avail, fcast, entityQuality] = await Promise.all([
     // 가벼운 판(campgrounds.lite.json, scripts/split-catalog.mjs)이 있으면 그것을, 없으면 원본을 받는다.
     fetch(`${DATA}campgrounds.lite.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((j) => (j?.camps ? (CATX.v = j.v, CATX.n = j.n, j.camps) : fetch(`${DATA}campgrounds.json`).then((r) => r.json()))),
     fetch(`${DATA}photos.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
@@ -6050,8 +6055,10 @@ addEventListener("error", (e) => {
     fetch(`${MEDIA}cards/index.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
     fetch(`${DATA}availability.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
     fetch(new URL(`${MOD_ROOT}conditions/forecast.json`, import.meta.url).href, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    fetch(`${DATA}entity-quality.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
   ]);
   S.camps = camps.filter((c) => c.status !== "폐업");
+  for (const c of S.camps) if (entityQuality?.[String(c.id)]) c.quality = { ...(c.quality ?? {}), ...entityQuality[String(c.id)] };
   for (const c of S.camps) { cleanCampTel(c); cleanCampFee(c); } // 표시층 정리(원본 파일은 그대로)
   S.fc = fcast;
   S.byId = new Map(S.camps.map((c) => [String(c.id), c]));
