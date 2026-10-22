@@ -34,12 +34,13 @@ for (const [w, h] of [[320, 740], [390, 844], [1366, 900]]) {
       const rows = c.querySelectorAll(".rows-6 > li").length;
       const cut = [...c.querySelectorAll(".card-body *")].filter((e) => { const s = getComputedStyle(e); return s.textOverflow === "ellipsis" && e.scrollWidth > e.clientWidth + 1 && e.getBoundingClientRect().width > 0; }).map((e) => e.className || e.tagName);
       const volt = c.querySelector(".bdgs .bdg-volt"); const fac = c.querySelector(".r-pow .rv")?.textContent ?? "";
-      return { id: c.dataset.id, rows, cut, dupW: Boolean(volt && fac), hasRows: Boolean(c.querySelector(".rows")) };
+      // 2026-10-22 소유자: 전기 줄에 ‘최대 500W’처럼 W가 있으면 사진 배지에도 ‘500W’가 있어야 한다(2026-10-21 ‘두 번 보이지 않게’ 규칙을 대체).
+      return { id: c.dataset.id, rows, cut, missW: Boolean(/\d\s*k?W/.test(fac) && !/법정|기준/.test(fac) && !volt), hasRows: Boolean(c.querySelector(".rows")) };
     }));
     for (const x of r) {
       if (x.hasRows && x.rows !== 6) fails.push(`${tag} ${where} #${x.id}: 카드 정보 줄 ${x.rows}개(6줄이어야 함)`);
       if (w === 320 && x.cut.length) fails.push(`${tag} ${where} #${x.id}: ‘…’ 잘림 ${x.cut.slice(0, 3).join(", ")}`);
-      if (x.dupW) fails.push(`${tag} ${where} #${x.id}: 사진 배지와 전기 줄에 전기를 두 번 보임`);
+      if (x.missW) fails.push(`${tag} ${where} #${x.id}: 전기 줄에 W가 있는데 사진 배지에 W가 없음`);
     }
     if (!r.length) fails.push(`${tag} ${where}: 카드 없음`);
   };
