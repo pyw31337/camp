@@ -86,6 +86,11 @@ while :; do
       jobs="$(gh api "repos/${REPO}/actions/runs/${run_id}/jobs?per_page=100" -q '[.jobs[] | select(.name=="Lint and build" or .name=="Rail swipe") | {n:.name,s:.status,c:.conclusion}]')"
       ok=$(echo "$jobs" | jq '[.[] | select(.s=="completed" and .c=="success") | .n] | unique | length')
       if [ "$conclusion" = "success" ] && [ "$ok" = 2 ]; then break; fi
+      # 실행은 ‘성공’인데 작업 목록이 아직 진행 중으로 보이는 순간이 있다(API 지연, 2026-10-22 날씨 예보 PR #289가 이걸로 실패 처리됨).
+      # 작업 중 실패가 없으면 잠시 뒤 다시 읽는다.
+      if [ "$conclusion" = "success" ] && [ "$(echo "$jobs" | jq '[.[] | select(.c=="failure" or .c=="cancelled")] | length')" = 0 ] && [ "${jobs_retry:-0}" -lt 8 ]; then
+        jobs_retry=$(( ${jobs_retry:-0} + 1 )); sleep "$poll"; continue
+      fi
       clear_pending_pr_runs
       echo "::error::방금 요청한 Web quality 실행이 실패했습니다 — PR #${PR}를 열어둡니다 (run #${run_id}, workflow=${conclusion}): ${jobs}"
       exit 1
