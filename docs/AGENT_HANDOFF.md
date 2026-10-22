@@ -1,5 +1,10 @@
 # 인수인계
 
+## 📌 공공데이터 원장 감사 보완 (2026-10-22, Codex)
+- `pipeline/registry/public-datasets.json`에 `datagokr-public`을 `in_use`로 등록해 감사 스크립트가 실제 연결된 공공데이터포털 표준데이터(휴양림·박물관·미술관·수영장·실내 놀이)를 원천과 연결하도록 보완했다.
+- robots.txt로 자동 수집을 중단한 `kdata-public`은 삭제하지 않고 `retired`로 명시했다. 기존 캐시·원문 링크는 보존하며, 신규 수집은 `sync-public-leisure.mjs`만 사용한다.
+- `npm --prefix pipeline run audit:public-data` 기준 공공 여가 데이터 1,466건(휴양림·박물관·수영장·실내 놀이)이 연결되어 있고, 도로공사 휴게소 API는 `EX_API_KEY` 미설정 환경에서 기존 캐시/대체 원천을 유지한다.
+
 ## 📌 값 상식 검사 기준 보강 (2026-10-22, Codex)
 - `pipeline/lib/value-sanity.mjs`의 전기 제한 하한을 **400W**로 고정했다. 400W 미만은 서비스 표시에서 숨기고 `_hid`에 원본과 사유를 보존한다.
 - `pipeline/test/value-sanity.test.mjs`가 400W 미만·600W·1100W 유지 규칙을 검증한다. 실제 발행 데이터에서 400W 미만 값이 새로 유입되면 배포 단계의 상식 검사와 기준선 검사가 차단한다.
@@ -25,7 +30,7 @@
 - **후기사진 검증:** 카드 대체사진 후보에 후기 제목·본문의 캠핑장명/캠핑 맥락을 요구하고 음식·식당·인물 단서를 감점한다. 근거가 없는 후보는 `REVIEW`로 남기며 카드 대표사진으로 승격하지 않는다. `여우하우야영장(100419)`은 기존 후기 대표사진을 검토 상태로 격리해 대게 등 오매칭 이미지가 기본 카드에 다시 나타나지 않게 했다.
 - **행사 위치:** `eventsNear()`가 `extras.json`의 과거 거리값을 그대로 신뢰하지 않고 행사 좌표와 캠핑장 좌표를 재계산해 30km 밖 행사를 버린다. 따라서 구로 캠핑장에 광주 행사가 붙는 유형을 발행 단계에서 차단한다. 좌표 없는 관광공사 행사도 자동 연결하지 않는다.
 - **행사 포스터:** `img`가 비어도 `img2`(원출처 대체 포스터)를 우선 렌더링하도록 `context/events.js`를 보완했다. 두 원천 모두 포스터가 없을 때는 제목형 대체 카드로 남긴다.
-- **휴양림·휴게소·실내놀이터·수영장·레포츠·박물관:** 기존 `kdata-public`/`nearby-context` 수집·주변 연동을 유지하고, 이번 변경은 품질 게이트를 추가해 잘못된 업체와 위치 오매칭만 차단한다. CultureFlow 원본 저장소는 이 체크아웃에 없어 원천 데이터 자체 수정은 별도 저장소 작업이 필요하다.
+- **휴양림·휴게소·실내놀이터·수영장·레포츠·박물관:** `datagokr-public`/`nearby-context` 수집·주변 연동을 유지하고, robots 차단으로 폐지한 `kdata-public`은 캐시만 보존한다. 품질 게이트로 잘못된 업체와 위치 오매칭을 차단한다. CultureFlow 원본 저장소는 이 체크아웃에 없어 원천 데이터 자체 수정은 별도 저장소 작업이 필요하다.
 - **검증:** `node --test pipeline/test/place-quality.test.mjs pipeline/test/culture-events.test.mjs pipeline/test/detail-events-card.test.mjs` 13개 통과, `npm --prefix camping-atlas run lint` 오류 0(기존 경고 31), `git diff --check` 통과. 전체 파이프라인 테스트는 환경에 `sharp`가 없어 기존 `photo-dedupe.test.mjs` 1개가 로드 실패했다.
 ## 📌 데이터 품질 표준 프로세스·에이전트 게시판 신설 · k-data 수집 → 공공데이터포털 (2026-10-22, Claude → 전 에이전트)
 - **표준 6단계**(`docs/DATA_QUALITY_PROCESS.md`): 수집 → 판단 → 검토 → 판정 → 정제·병합 → 발행·환류. AGENTS.md 맨 앞 📢 공지로 올림.

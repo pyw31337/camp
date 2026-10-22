@@ -1361,7 +1361,7 @@
    "code": "pipeline/lib/nearby-licensed.mjs, scripts/sync-nearby-licensed.mjs"
   },
   {
-   "status": "in_use",
+   "status": "retired",
    "id": "kdata-public",
    "kind": "LINKED",
    "title": "알잘 공공데이터 공개 색인(휴양림·휴게소·실내놀이터·수영장·레포츠·박물관)",
@@ -1370,7 +1370,21 @@
    "use": "좌표·주소·운영 표·원문 링크를 캠핑장 주변 공공시설로 연결",
    "priority": "P1",
    "url": "https://k-data.aljal.kr/",
-   "code": "pipeline/scripts/sync-kdata-public.mjs · pipeline/lib/kdata-public.mjs"
+   "code": "pipeline/scripts/sync-kdata-public.mjs · pipeline/lib/kdata-public.mjs",
+   "note": "2026-10-22 폐지: robots.txt가 AI 크롤러를 차단해 자동 수집을 중단함. 동일 범주는 datagokr-public 공공데이터포털 표준데이터로 대체. 기존 캐시·원문 링크는 보존한다."
+  },
+  {
+   "status": "in_use",
+   "id": "datagokr-public",
+   "kind": "API",
+   "title": "공공데이터포털 표준데이터(전국휴양림·박물관미술관·공공시설개방)",
+   "org": "공공데이터포털·산림청·지자체",
+   "category": "nearby",
+   "use": "국립·공립·사립 휴양림과 박물관·미술관·수영장·실내 놀이시설을 주변 정보로 연결",
+   "priority": "P0",
+   "url": "https://www.data.go.kr/",
+   "code": "pipeline/scripts/sync-public-leisure.mjs · pipeline/lib/public-poi.mjs",
+   "attrs": ["FOREST_CLASS", "FACILITY_KIND", "ADDRESS", "COORDINATES", "PHONE", "HOMEPAGE", "FEE"]
   },
   {
    "status": "in_use",
