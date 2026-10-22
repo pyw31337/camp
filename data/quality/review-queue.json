@@ -14003,7 +14003,7 @@
    "label": "반려견 동반",
    "ui": true,
    "top": {
-    "value": "NOT_ALLOWED",
+    "value": "AIRCON",
     "confidence": 0.85,
     "sources": 1,
     "evidence": [
@@ -14012,13 +14012,13 @@
       "src": "gocamping",
       "url": null,
       "at": null,
-      "quote": "불가능"
+      "quote": "침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"
      }
     ]
    },
    "rival": {
-    "value": "ALLOWED",
-    "confidence": 0.6,
+    "value": "BED",
+    "confidence": 0.85,
     "sources": 1,
     "evidence": [
      {

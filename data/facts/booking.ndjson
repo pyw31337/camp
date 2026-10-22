@@ -3200,7 +3200,7 @@
 {"cid":"100177","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-23T06:58:00+09:00"}
 {"cid":"100177","attr":"BOOKING_CHANNEL","value":"thankqcamping","grade":"CONFIRMED","src":"gocamping","text":"땡큐캠핑","at":"2026-10-23T06:58:00+09:00"}
 {"cid":"100177","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100179","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-19T05:43:00+09:00"}
+{"cid":"100179","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-23T05:49:00+09:00"}
 {"cid":"100179","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100181","attr":"BOOKING_CHANNEL","value":"homepage","grade":"CONFIRMED","src":"gocamping","text":"캠핑장 자체 홈페이지","at":"2026-10-23T06:58:00+09:00"}
 {"cid":"100181","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","at":"2026-10-23T06:58:00+09:00"}

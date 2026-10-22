@@ -2034,8 +2034,18 @@
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
    "src": "review_search",
-   "url": "https://solaryeon.tistory.com/164",
-   "quote": "칼조네, 고르곤졸라, 까 solaryeon.tistory.com 2026.07.27 - [여행 기록] - 태안 가든글램핑 캠핑장 후기 l 쉼표 (애견불가, 개별욕실) 타입 리뷰 태안 가든글램핑 캠핑장 후기 l 쉼표…",
+   "url": "https://blog.naver.com/camwoori/224295748913",
+   "quote": "individualRoom), 매점, 수영장 체크인/체크아웃 캠핏에서 확인해주세요 매너타임 22:00 ~ 08:00 반려동물 불가 (H-1, H-2, S-2 모두 펫 불가) 주변 관광지...생각보다 훨씬 알차거든요.",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "101356",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/je_c_park/224429410554",
+   "quote": "(단, 15kg 초과 반려견 출입 제한, 매점 입장 불가, 매너벨트 필수!) 일주…",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
