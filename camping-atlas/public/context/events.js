@@ -33,8 +33,17 @@ export const DAY_OPTS = [7, 10, 20, 30, 45];
 export const inRange = (list, kmMax, days, today = kstToday()) => list.filter((x) => x.km <= kmMax && x.e.s <= addDays(today, days));
 /** 결과가 하나 이상 나오는 가장 좁은 단계. 기본 범위가 비어 있을 때만 자동으로 넓힌다. */
 export function autoRange(list, today = kstToday()) {
-  const hit = RANGES.find(([k, d]) => inRange(list, k, d, today).length);
-  return hit ?? RANGES.at(-1);
+  const hits = RANGES.map(([k, d]) => [k, d, inRange(list, k, d, today)]);
+  const first = hits.find(([, , rows]) => rows.length);
+  if (!first) return RANGES.at(-1);
+  // 가장 가까운 범위에 포스터 없는 행사만 있으면, 포스터가 있는 다음
+  // 범위까지 자동 확장한다. 행사 자체는 보존하되 상세에서 포스터를
+  // 우선 보여 주기 위한 표시 규칙이다.
+  if (!first[2].some((x) => x.e?.img || x.e?.img2)) {
+    const posterRange = hits.find(([, , rows]) => rows.some((x) => x.e?.img || x.e?.img2));
+    if (posterRange) return posterRange.slice(0, 2);
+  }
+  return first.slice(0, 2);
 }
 const MAP_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 0h16v16H0z" fill="none"/><path fill="currentColor" d="M6 2.09c.133.008.266.042.388.103L9.598 3.8a1 1 0 0 0 .402.104V13.91a1 1 0 0 1-.388-.102L6.402 12.2A1 1 0 0 0 6 12.096zm7.629.459A1 1 0 0 1 15 3.477v7.98a1 1 0 0 1-.653.938L11 13.63V3.6zM5 12.4l-2.629 1.05A1 1 0 0 1 1 12.523v-7.98a1 1 0 0 1 .653-.939L5 2.37z"/></svg>`;
 const STYLE = `.ev-sec .ev-tabs{display:flex;align-items:center;gap:16px;margin:0 0 16px;padding:0;background:transparent;border:none;border-bottom:1px solid var(--line,#e2e8f0);border-radius:0;width:100%}

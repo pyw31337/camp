@@ -9,7 +9,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
 import {
-  EXTRA_SEARCHES, SOCIAL_CACHE_VERSION, buildLayout, extractPriceMentions, normalizeDoc, isRelevant, distinctiveTokens, regionStem,
+  EXTRA_SEARCHES, SOCIAL_CACHE_VERSION, buildLayout, buildVideoQuery, extractPriceMentions, normalizeDoc, isRelevant, distinctiveTokens, regionStem,
   REQUEST_PLAN, SEARCH_TYPES, SOURCE, buildQuery, buildSocialRecord, isStale, kakaoSearch, nameCore, pickDue, summarize,
 } from "../lib/social-search.mjs";
 
@@ -87,13 +87,17 @@ async function main() {
       while (i < batch.length && !stopped) {
         const c = batch[i++];
         const query = buildQuery(c);
+        // 동영상은 이름 자체로 검색해야 YouTube 색인 결과를 넓게 얻는다.
+        // 블로그·카페·이미지는 지역 보정어가 유용하지만, vclip에는
+        // '캠핑'을 덧붙이면 자연휴양림·숲속야영장 영상이 누락된다.
+        const videoQuery = buildVideoQuery(c);
         if (!query) continue;
         const raw = {};
         try {
           for (const type of SEARCH_TYPES) {
             if (stopped) throw stopped;
             calls++;
-            raw[type] = await search(type, query);
+            raw[type] = await search(type, type === "vclip" ? videoQuery : query);
             if (DELAY_MS) await sleep(DELAY_MS);
           }
           for (const x of EXTRA_SEARCHES) {
