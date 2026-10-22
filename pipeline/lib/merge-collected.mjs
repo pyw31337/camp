@@ -38,6 +38,38 @@ export function mergeWebMentions(d, w, bodies = {}) {
 }
 
 /**
+ * 카카오 다음 소셜 검색(sync-social 출력 한 캠핑장분)을 상세에 덧붙인다 — 채우기만(기존 항목·순서 그대로, 새 URL만 뒤에).
+ * build-explore-data는 고캠핑 원본이 있는 곳만 소셜을 붙이므로, 휴양림·지자체·OSM 장소는 이 병합으로 영상·후기가 들어간다(2026-10-23).
+ * @param {object} d 상세 JSON(제자리 변경)
+ * @param {{blog?:object[], cafe?:object[], image?:object[], vclip?:object[], fetched_at?:string}} so
+ * @param {{sharedThumb?: (thumb:string)=>boolean}} [opt] 여러 캠핑장에 똑같이 붙은 검색 사진(매칭 의심)을 거르는 함수
+ * @returns {{videos:number, posts:number, images:number}} 새로 더한 수
+ */
+export function mergeSocial(d, so, { sharedThumb = () => false } = {}) {
+  const added = { videos: 0, posts: 0, images: 0 };
+  if (!d || !so) return added;
+  // 고캠핑 업장은 build-explore-data가 재검사(refilterSocial)·사진 중복 제거를 거쳐 붙인다 — 그 결과를 우회하지 않는다.
+  // 소셜이 한 번도 붙지 않은 곳과, 이 병합으로 붙인 곳(social_merged)만 채운다.
+  if (d.social_checked_at && !d.social_merged) return added;
+  const ytId = (x) => x?.yt || String(x?.url ?? "").match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([A-Za-z0-9_-]{11})/)?.[1] || null;
+  const fill = (field, items, keyOf, count) => {
+    const cur = d[field] ?? [];
+    const seen = new Set(cur.map(keyOf).filter(Boolean));
+    const fresh = (items ?? []).filter((x) => { const k = keyOf(x); if (!k || seen.has(k)) return false; seen.add(k); return true; });
+    if (!fresh.length) return;
+    d[field] = [...cur, ...fresh];
+    added[count] += fresh.length;
+  };
+  fill("videos", so.vclip, (x) => ytId(x) ?? x?.url, "videos");
+  const postKnown = new Set([...(d.reviews ?? []), ...(d.cafe ?? []), ...(d.web ?? [])].map((x) => x.url));
+  fill("reviews", (so.blog ?? []).filter((x) => !postKnown.has(x.url)), (x) => x?.url, "posts");
+  fill("cafe", (so.cafe ?? []).filter((x) => !postKnown.has(x.url)), (x) => x?.url, "posts");
+  fill("sns_images", (so.image ?? []).filter((x) => x?.thumb && !sharedThumb(x.thumb)), (x) => x?.img ?? x?.thumb, "images");
+  if (so.fetched_at && (!d.social_checked_at || so.fetched_at > d.social_checked_at)) { d.social_checked_at = so.fetched_at; d.social_merged = true; }
+  return added;
+}
+
+/**
  * 커버리지 회귀 검사: 항목마다 값이 있는 캠핑장 수가 기준보다 많이 줄었으면 실패 목록을 돌려준다.
  * 허용 감소 폭은 max(20곳, 2%) — 폐업 정리·중복 제거 같은 정상 감소는 지나가게.
  */

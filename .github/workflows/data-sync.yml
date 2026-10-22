@@ -306,7 +306,7 @@ jobs:
         # 커버리지가 줄면 커밋하지 않는다. 사이트는 main 푸시로 곧바로 다시 배포된다.
         if: always() && github.event_name != 'pull_request'
         continue-on-error: true
-        run: bash scripts/publish-incremental.sh "Naver web mentions" --web out/campground-web.json
+        run: bash scripts/publish-incremental.sh "Naver web mentions" --web out/campground-web.json --social out/campground-social.json
       - name: Sync rest areas and drowsy shelters
         continue-on-error: true
         run: npm run sync:rest-stops
@@ -453,6 +453,8 @@ jobs:
           node pipeline/scripts/build-public-leisure.mjs
           # 주변 공공시설(휴양림·박물관·수영장·실내 놀이, 공공데이터포털)·휴게소 중복 정리(2026-10-22)
           node pipeline/scripts/apply-public-nearby.mjs
+          # 카카오 다음 소셜 검색(영상·후기·사진)을 고캠핑 밖 장소(휴양림·지자체·OSM)에도 채운다 — 상세 SNS 영상 칸(2026-10-23). 내용 판정보다 먼저.
+          node pipeline/scripts/merge-collected.mjs --social pipeline/out/campground-social.json
           # 후기 사진 내용 판정(registry/photo-judgments.json) → 걸러진 사진에 ng 표시(화면 갤러리·대표에서 숨김)
           node pipeline/scripts/apply-photo-judgments.mjs
           # 텍스트 내용 판정(registry/text-judgments.json) → 무관한 후기·카페·웹·영상 글에 ng 표시(화면 목록에서 숨김)

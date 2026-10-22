@@ -30,6 +30,8 @@ body > main { flex: 1 0 auto; }
 .brand-mark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: var(--ink); color: var(--volt); }
 .brand-mark svg { width: 18px; height: 18px; fill: currentColor; }
 .map-header-count { display: none; color: var(--ink-2); font-size: .78rem; font-weight: 800; white-space: nowrap; margin-left: auto; }
+/* 지도 안 개수는 머리글 한 곳에만(소유자 2026-10-23: 지도 패널의 같은 표시는 지움) — 데스크톱에서도 보인다 */
+body.map-mode .map-header-count:not([hidden]) { display: inline-flex; align-items: center; }
 .top-nav { display: flex; gap: 4px; }
 .top-nav a { position: relative; display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; border-radius: 999px; font-weight: 700; color: var(--ink-2); white-space: nowrap; }
 .top-nav a[aria-current] { color: var(--ink); background: var(--soft); }
