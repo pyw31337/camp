@@ -12,6 +12,7 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { validatesAsOperatorSite } from "../lib/kakao-discovery.mjs";
 import { dropPlatformSites, guideLinks, htmlToText, isClosedHost, isOperatorHost, noticeLinks, parseRobots, relevantSentences, robotsAllows } from "../lib/operator-site.mjs";
+import { isOperatorContentNoise, nameTokens } from "../lib/detail-text-review.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const camps = JSON.parse(readFileSync(join(root, "camping-atlas/public/explore/data/campgrounds.json"), "utf8"));
@@ -228,7 +229,7 @@ async function ocrImages(picked, rules, out = [], deadline = Date.now() + 150000
         const priceLine = /\d[\d,]*\s*(만\s*)?원/;
         for (const s of ocrSentences(best)) {
           const keep = priceLine.test(s) ? [s] : relevantSentences(s, 2);
-          for (const k of keep) if (k.length >= 6 && /[가-힣]{2}/.test(k)) out.push({ text: k, url: img.page, image: img.url, ocr: true });
+          for (const k of keep) if (k.length >= 6 && /[가-힣]{2}/.test(k) && !isOperatorContentNoise(k)) out.push({ text: k, url: img.page, image: img.url, ocr: true, locator: { text: k.slice(0, 120) } });
         }
       } catch {}
     }
@@ -236,9 +237,27 @@ async function ocrImages(picked, rules, out = [], deadline = Date.now() + 150000
   return out;
 }
 
-const snippetsOf = (pages) => {
+const fold = (s) => String(s ?? "").toLowerCase().replace(/[^0-9a-z가-힣]/gi, "");
+// 공용 공단·지자체 포털에서 다른 시설 공지/푸터가 섞이지 않도록, 페이지 자체가 이 업장을
+// 가리키는지 먼저 확인한다. 공용 포털의 URL·query는 다른 시설과 재사용되므로
+// 페이지 본문/제목에서 이 캠핑장 이름이 확인될 때만 쓴다.
+function pageBelongsToCamp(c, page) {
+  const text = fold(`${page?.url ?? ""} ${page?.text ?? ""}`);
+  const tokens = nameTokens(c.name, c.sigungu).map(fold).filter((x) => x.length >= 2);
+  const whole = fold(c.name);
+  if (whole.length >= 4 && text.includes(whole)) return true;
+  if (tokens.length >= 2 && tokens.every((t) => text.includes(t))) return true;
+  return false;
+}
+const snippetsOf = (pages, camp) => {
   const out = [];
-  for (const p of pages) for (const s of relevantSentences(p.text, 80)) if (!out.some((x) => x.text === s)) out.push({ text: s, url: p.url });
+  for (const p of pages) {
+    if (!pageBelongsToCamp(camp, p)) continue;
+    for (const s of relevantSentences(p.text, 80)) {
+      if (isOperatorContentNoise(s) || out.some((x) => x.text === s)) continue;
+      out.push({ text: s, url: p.url, locator: { text: s.slice(0, 120) } });
+    }
+  }
   return out.slice(0, 160);
 };
 
@@ -254,23 +273,23 @@ async function crawlOne(c) {
     if (!robotsAllows(rules, new URL(withProto(start)).pathname)) { errors.push("ROBOTS_DISALLOWED"); continue; }
     let r = await staticSite(start, rules);
     let rendered = null; // 렌더링한 페이지(이미지 태그가 자바스크립트로 그려지는 사이트의 OCR용)
-    const thin = r.ok && snippetsOf(r.pages).length < 3;
+    const thin = r.ok && snippetsOf(r.pages, c).length < 3;
     const retriable = !r.ok && /^(403|429|5\d\d|timeout|UND_ERR|render)/.test(String(r.error));
     if (RENDER && (thin || retriable)) {
       const rr = await within(120000, renderSite(r.ok ? r.url : withProto(start), rules), "render").catch((e) => ({ ok: false, error: `render:${e.message}` }));
-      if (process.env.CRAWL_DEBUG) console.log("  render", start, rr.ok, rr.error ?? "", rr.ok ? snippetsOf(rr.pages).length : 0);
+      if (process.env.CRAWL_DEBUG) console.log("  render", start, rr.ok, rr.error ?? "", rr.ok ? snippetsOf(rr.pages, c).length : 0);
       if (rr.ok) rendered = rr;
-      if (rr.ok && snippetsOf(rr.pages).length > (r.ok ? snippetsOf(r.pages).length : 0)) { r = rr; renderedAny = true; }
+      if (rr.ok && snippetsOf(rr.pages, c).length > (r.ok ? snippetsOf(r.pages, c).length : 0)) { r = rr; renderedAny = true; }
     }
     if (!r.ok) { errors.push(String(r.error)); continue; }
     urls.push(...r.pages.map((p) => p.url));
-    for (const s of snippetsOf(r.pages)) if (!all.some((x) => x.text === s.text)) all.push(s);
+    for (const s of snippetsOf(r.pages, c)) if (!all.some((x) => x.text === s.text)) all.push(s);
     // 공지 게시판 글 제목·링크·날짜(이용자가 원문을 바로 열 수 있게)
-    for (const p of r.pages) for (const n of noticeLinks(p.html, p.url)) if (!notices.some((x) => x.url === n.url)) notices.push(n);
+    for (const p of r.pages) if (pageBelongsToCamp(c, p)) for (const n of noticeLinks(p.html, p.url)) if (!notices.some((x) => x.url === n.url)) notices.push({ ...n, locator: { text: n.title.slice(0, 120) } });
     // 글이 적거나, 요금 문장이 하나도 없으면(요금표가 이미지인 곳) 안내 이미지를 OCR 대기열에 올린다.
     // OCR은 크롤이 끝난 뒤 따로 읽는다 — 동시 크롤과 CPU를 다투면 사이트 시간 안에 끝나지 못해 결과가 0이 되었다(2026-10-19).
     if (OCR && (all.length < 8 || !all.some((x) => /\d[\d,]*\s*(만\s*)?원/.test(x.text)))) {
-      for (const img of guideImages([...r.pages, ...(rendered?.pages ?? [])])) if (!ocrQueue.some((q) => q.url === img.url)) ocrQueue.push(img);
+      for (const img of guideImages([...r.pages, ...(rendered?.pages ?? [])].filter((p) => pageBelongsToCamp(c, p)))) if (!ocrQueue.some((q) => q.url === img.url)) ocrQueue.push(img);
     }
   }
   if (!urls.length) return { status: errors.includes("ROBOTS_DISALLOWED") ? "ROBOTS_DISALLOWED" : errors.some((e) => /platform_redirect/.test(e)) ? "REDIRECTED_TO_PLATFORM" : "FETCH_FAILED", url: withProto(uniq[0]), checked_at, error: errors.join(",") || null };

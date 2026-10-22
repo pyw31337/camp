@@ -3,7 +3,18 @@
 // 등급: c = 운영자 홈페이지·고캠핑 등록(업장 공개) · m = 블로그·웹 후기 언급(화면에서 ‘후기’로 구분, 카드 배지에는 안 씀).
 // 불가 태그는 보수적으로: 시설 전체에 대한 단정문만 받는다(수영장·객실·텐트 안 같은 부분 금지, 질문, 후기 감상은 버린다).
 
-const SQUASH = (s) => String(s ?? "").replace(/\s+/g, " ").trim();
+// HTML 전문을 저장하지는 않지만 운영자 사이트에서 남은 안전한 문자 엔티티는 화면 전에 정제한다.
+const SQUASH = (value) => {
+  let s = String(value ?? "");
+  for (let i = 0; i < 2; i++) {
+    const next = s.replace(/&(?:amp;)?middot;?/gi, "·").replace(/&(?:amp;)?nbsp;?/gi, " ")
+      .replace(/&(?:amp;)?#0*183;?/gi, "·").replace(/&(?:amp;)?#x0*b7;?/gi, "·")
+      .replace(/&(?:amp;)?#0*8226;?/gi, "·").replace(/&(?:amp;)?#x0*2022;?/gi, "·");
+    if (next === s) break;
+    s = next;
+  }
+  return s.replace(/\u00a0/g, " ").replace(/[∙⋅•]/g, "·").replace(/\s+/g, " ").trim();
+};
 
 /** 불가 태그 사전: 화면은 같은 아이콘에 빨간 공통 배지로 하나씩 나열한다. */
 export const NO_TAGS = {
@@ -158,13 +169,13 @@ export function houseRules(lines, structured = [], positives = {}) {
     if (seen.has(key)) continue;
     seen.add(key);
     // 후기 스니펫은 여러 정보가 한 줄에 섞여 있어 태그만 쓰고, 목록에는 운영자 문장만 올린다.
-    for (const k of noTagsOf(text, { official: ln.g !== "m" })) putTag(k, { k, g: ln.g, quote: text.slice(0, 160), url: ln.url, at: ln.at ?? null, src: ln.src ?? null });
+    for (const k of noTagsOf(text, { official: ln.g !== "m" })) putTag(k, { k, g: ln.g, quote: text.slice(0, 160), url: ln.url, at: ln.at ?? null, src: ln.src ?? null, ...(ln.locator ? { locator: ln.locator } : {}) });
     if (ln.g === "m") continue;
     const n = noticeOf(text);
-    if (n) { notices.push({ ...n, url: ln.url, at: ln.at ?? null }); continue; }
+    if (n) { notices.push({ ...n, url: ln.url, at: ln.at ?? null, ...(ln.locator ? { locator: ln.locator } : {}) }); continue; }
     const cat = ruleCategory(text);
-    if (cat) { rules.push({ cat, text: text.slice(0, 160), url: ln.url, at: ln.at ?? null, src: ln.src ?? null }); continue; }
-    if (isOpsLine(text)) ops.push({ text: text.slice(0, 160), url: ln.url, at: ln.at ?? null, src: ln.src ?? null });
+    if (cat) { rules.push({ cat, text: text.slice(0, 160), url: ln.url, at: ln.at ?? null, src: ln.src ?? null, ...(ln.locator ? { locator: ln.locator } : {}) }); continue; }
+    if (isOpsLine(text)) ops.push({ text: text.slice(0, 160), url: ln.url, at: ln.at ?? null, src: ln.src ?? null, ...(ln.locator ? { locator: ln.locator } : {}) });
   }
   // 거의 같은 문장(앞 18자 같음) 하나로
   const uniq = (arr, f) => { const s = new Set(); return arr.filter((x) => { const k = norm(f(x)).slice(0, 18); if (s.has(k)) return false; s.add(k); return true; }); };

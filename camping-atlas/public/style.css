@@ -3379,11 +3379,42 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 .bo-highlight .bo-ics { margin-left: auto; flex: none; white-space: nowrap; }
 @media (max-width: 759px) { .bo-highlight { flex-wrap: wrap; } .bo-highlight .bo-ics { margin-left: 0; } }
 
-/* t39 #45 감사: 320px에서 사이트 타입 카드의 긴 출처 글자(“(2025.10.20 기준)”)가 칸 밖으로 넘쳐 가로 스크롤 생김 → 줄바꿈 허용 */
+/* 사이트 타입: 320px에서 낱글자 분해 대신 단어 단위의 읽기 쉬운 두 줄을 쓴다.
+   이전의 anywhere는 가로 넘침은 막았지만 ‘오 토 캠 핑’처럼 의미 단위를 깨뜨렸다. */
 .stype-b { grid-template-columns: minmax(0, 1fr); }
 .stype-b > * { min-width: 0; }
-.stype-b b, .stype-b i { overflow-wrap: anywhere; }
-.stype-b .asof { white-space: normal; margin-left: 0; }
+.stype-b b, .stype-b i { word-break: keep-all; overflow-wrap: normal; }
+.stype-b .asof { white-space: normal; overflow-wrap: anywhere; margin-left: 0; }
+@media (max-width: 420px) {
+  .stype { gap: 8px; min-height: 78px; padding: 10px; }
+  .stype-ic { width: 32px; height: 32px; }
+  .stype-ic .ic { width: 16px; height: 16px; }
+  .stype-b { align-content: start; padding-right: 0; }
+  .stype-b b { font-size: .93rem; line-height: 1.28; }
+  .stype-b i { font-size: .78rem; line-height: 1.35; }
+  /* 출처는 이 작은 요약 카드보다 상세 i에서 확인한다. 본문 폭을 빼앗지 않는다. */
+  .stype .tile-g { display: none; }
+}
 
 /* t42u: 홈 ‘검색된 결과 N건 / 조건’ 줄과 첫 테마 레일(겨울캠핑 N · 더보기) 머리 사이가 0px로 붙어 있던 것 → 간격 */
 .res-tools + .trows { margin-top: clamp(20px, 3vw, 32px); }
+
+/* 상세 신뢰·날씨 보정: 모든 시간별 값은 동일한 그래프 문법으로 읽힌다. */
+.w-chart { display: flex; flex-direction: column; gap: 6px; color: var(--w-chart, var(--accent)); }
+.w-chart-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; color: var(--ink); font-size: .78rem; font-weight: 800; }
+.w-chart-head small { color: var(--ink-3); font-weight: 600; }
+.w-chart-grid { stroke: var(--line); stroke-width: 1; }
+.w-chart-line { fill: none; stroke: var(--w-chart); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.w-chart-dot, .w-chart-bar { fill: var(--w-chart); }
+.w-chart-label { fill: var(--ink-2); font-size: 10px; font-weight: 800; }
+
+/* 원본 사진은 어떤 배경에서도 바로 닫을 수 있게 안전영역에 고정한다. */
+.lightbox .lb-x { position: fixed; top: calc(12px + env(safe-area-inset-top)); right: calc(12px + env(safe-area-inset-right)); z-index: 12; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; background: rgba(8,10,10,.72); color: #fff; box-shadow: 0 4px 18px rgba(0,0,0,.32); }
+.lightbox .lb-x .ic { width: 22px; height: 22px; }
+
+/* 탭은 클릭 전용, 가로 스와이프는 영상 카드에만 남긴다. */
+.media-hub .mh-tabs-bar { display: block; min-width: 0; max-width: 100%; overflow: hidden; }
+.media-hub .mh-tabs { display: flex; width: 100%; min-width: 0; overflow: visible; }
+.media-hub .mh-tabs [data-mh-tab] { flex: 1 1 0; justify-content: center; min-width: 0; }
+.media-hub .mh-exts { display: flex; max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; }
+.media-hub .mh-exts::-webkit-scrollbar { display: none; }
