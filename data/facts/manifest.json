@@ -1,37 +1,37 @@
 {
  "version": 1,
- "generated_at": "2026-10-22T02:55:06.947Z",
- "campgrounds": 6305,
- "facts": 169447,
+ "generated_at": "2026-10-22T15:23:44.311Z",
+ "campgrounds": 6404,
+ "facts": 170318,
  "row": "{cid, attr, value, grade, src, url?, at?, quote?, text?, n?, period?, label?, num?, count?} — src=gocamping에서 url·at이 없으면 campgrounds.ndjson의 gc_url·gc_at",
  "files": {
-  "campgrounds.ndjson": 6305,
+  "campgrounds.ndjson": 6404,
   "stay.ndjson": 14953,
-  "power.ndjson": 2418,
-  "fire.ndjson": 9521,
-  "vehicle.ndjson": 6294,
-  "pet.ndjson": 3854,
-  "price.ndjson": 18145,
+  "power.ndjson": 2378,
+  "fire.ndjson": 9710,
+  "vehicle.ndjson": 6287,
+  "pet.ndjson": 3852,
+  "price.ndjson": 18137,
   "fee.ndjson": 471,
-  "time.ndjson": 6532,
-  "policy.ndjson": 1077,
-  "sanitary.ndjson": 5962,
+  "time.ndjson": 6850,
+  "policy.ndjson": 1182,
+  "sanitary.ndjson": 5921,
   "site.ndjson": 3663,
-  "amenity.ndjson": 12997,
+  "amenity.ndjson": 12992,
   "env.ndjson": 4056,
   "theme.ndjson": 5088,
-  "season.ndjson": 18685,
+  "season.ndjson": 18774,
   "booking.ndjson": 6772,
-  "operator.ndjson": 16543,
-  "review.ndjson": 9442,
+  "operator.ndjson": 16838,
+  "review.ndjson": 9441,
   "rental.ndjson": 1424,
-  "nearby.ndjson": 21550
+  "nearby.ndjson": 21529
  },
  "by_source": {
-  "gocamping": 90843,
-  "operator_homepage": 5568,
-  "review_search": 24022,
-  "localdata": 21550,
+  "gocamping": 91325,
+  "operator_homepage": 5979,
+  "review_search": 24021,
+  "localdata": 21529,
   "kakao_local": 2591,
   "naver_local": 2110,
   "gocamping_intro": 781,
@@ -46,9 +46,9 @@
   "local_gov": 6
  },
  "by_grade": {
-  "CONFIRMED": 126479,
-  "OPERATOR": 16088,
-  "MENTION": 26600,
+  "CONFIRMED": 126940,
+  "OPERATOR": 16499,
+  "MENTION": 26599,
   "VERIFIED": 280
  },
  "sources": {
@@ -70,7 +70,8 @@
   "gocamping_best": "문화체육관광부·한국관광공사 분야별 공공 우수야영장(고캠핑 공개 목록)",
   "booking_engine": "예약 엔진 공개 화면(업장 등록 사이트 정보)",
   "dayuse_seed": "당일 나들이 장소 원문(관리기관 공지·업장 안내)",
-  "gocamping_detail": "고캠핑 상세 화면(업장 등록 이용안내·요금표)"
+  "gocamping_detail": "고캠핑 상세 화면(업장 등록 이용안내·요금표)",
+  "agent_review": "에이전트·운영자 검토 판정(원문 대조, 품질 검토 대기열)"
  },
  "guide": "docs/FACT_STORE.md"
 }

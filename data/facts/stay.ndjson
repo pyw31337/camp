@@ -6724,7 +6724,7 @@
 {"cid":"100126","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
 {"cid":"100126","attr":"STAY_AUTO_SITES","value":30,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100128","attr":"SITE_TOTAL","value":14,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100128","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100128","at":"2026-05-14T00:00:00+09:00","quote":"조용하고 한적한 소나무숲속에서 진짜 &apos;쉼&apos;을 경험해 보세요 법흥계곡 소나무 숲속 오토캠핑장 영월 법흥계곡을 끼고 있는 오토캠핑장이다. 캠핑장 주변으로 키카 큰 소"}
+{"cid":"100128","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100128","at":"2026-05-14T00:00:00+09:00","quote":"조용하고 한적한 소나무숲속에서 진짜 '쉼'을 경험해 보세요 법흥계곡 소나무 숲속 오토캠핑장 영월 법흥계곡을 끼고 있는 오토캠핑장이다. 캠핑장 주변으로 키카 큰 소"}
 {"cid":"100128","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"100128","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":14}
 {"cid":"100128","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
@@ -12158,8 +12158,8 @@
 {"cid":"101427","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1587482656","at":"2026-10-16T05:34:48.988Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"101427","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"101427","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
-{"cid":"101427","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/37","at":"2026-07-20","quote":"글램핑&middot;카라반. 오솔길 오토 캠핑장. 플레이스씨 글램핑. 트리독스 애견전용캠핑장. 요"}
-{"cid":"101427","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/37","at":"2026-07-20","quote":"일반야영장&middot;글램핑. 글램핑&middot;카라반. 오솔길 오토 캠핑장. 플레이스씨 글램핑."}
+{"cid":"101427","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/37","at":"2026-07-20","quote":"글램핑·카라반. 오솔길 오토 캠핑장. 플레이스씨 글램핑. 트리독스 애견전용캠핑장. 요"}
+{"cid":"101427","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/37","at":"2026-07-20","quote":"일반야영장·글램핑. 글램핑·카라반. 오솔길 오토 캠핑장. 플레이스씨 글램핑. 트리독스 애"}
 {"cid":"101427","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://allqworld.tistory.com/5098","at":"2025-09-18","text":"펜션","quote":"(경상북도 경주 펜션) 경주 조이풀빌라앤키즈펜션 (Gyeongju joypoolvilla &"}
 {"cid":"101427","attr":"STAY_GENERAL_SITES","value":9,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101429","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1559825098","at":"2026-10-16T05:33:36.679Z","quote":"여행 > 숙박 > 야영,캠핑장 > 글램핑장"}
@@ -12840,7 +12840,7 @@
 {"cid":"101631","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dsyhome/224264145530","at":"2026-04-24","text":"펜션","quote":"펜션 홈페이지제작 및 캠핑장예약시스템 안내도 배치도 이용 업체소개. 충청북도"}
 {"cid":"101632","attr":"SITE_TOTAL","value":22,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101632","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":22}
-{"cid":"101632","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/37","at":"2026-07-20","quote":"글램핑&middot;카라반. 오솔길 오토 캠핑장. 플레이스씨 글램핑. 트리독스 애견전용캠핑장. 요"}
+{"cid":"101632","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/37","at":"2026-07-20","quote":"글램핑·카라반. 오솔길 오토 캠핑장. 플레이스씨 글램핑. 트리독스 애견전용캠핑장. 요"}
 {"cid":"101632","attr":"STAY_AUTO_SITES","value":22,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101633","attr":"SITE_TOTAL","value":9,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101633","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":9}
@@ -14087,7 +14087,7 @@
 {"cid":"102019","attr":"STAY_GLAMPING_SITES","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102021","attr":"SITE_TOTAL","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102021","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":3}
-{"cid":"102021","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102021","at":"2026-09-15T00:00:00+09:00","quote":"&quot;* 충북 음성, 미국식 에어스트림에서 즐기는 5성급 프라이빗 글램핑 * 푸른 잔디밭에서 내 아이(댕댕이)와 함께 타는 클래식 에어스트림 감"}
+{"cid":"102021","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102021","at":"2026-09-15T00:00:00+09:00","quote":"\"* 충북 음성, 미국식 에어스트림에서 즐기는 5성급 프라이빗 글램핑 * 푸른 잔디밭에서 내 아이(댕댕이)와 함께 타는 클래식 에어스트림 감"}
 {"cid":"102021","attr":"STAY_CARAVAN_SITES","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102022","attr":"SITE_TOTAL","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102022","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":4}
