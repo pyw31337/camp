@@ -609,3 +609,9 @@ Pretendard Variable 한 가지. 제목 800, 본문 400~600, 숫자 `tabular-nums
 - **공통 틀(shell)**: 헤더·푸터·모바일 하단 탭·본문 폭(`--content`)·좌우 여백(`--gut`)·헤더 높이(`--head-h`)는 `design/renewal/shell.css` 하나에만 있다. 마크업도 `design/renewal/index.html`의 `<!-- shell:header|footer|tabbar -->` 사이 하나뿐이고, 발행 스크립트가 `/log/`에 그대로 넣는다. 화면별 CSS는 이 규칙을 덮어쓰지 않는다(예외: 첫 화면·테마의 사진 위 투명 헤더). 푸터는 화면마다 그리지 않고 틀에 한 번만 있다(지도·비교·찜·찜 기록·/log/에도 같은 푸터). 회귀: `layout-shell-test.mjs`(10개 경로 × 320·390·1366).
 - **주소**: `#` 없는 경로 — `/camp/`, `/camp/list?…`, `/camp/map`, `/camp/themes`, `/camp/theme/FOREST`, `/camp/compare`, `/camp/saved`, `/camp/saves-log`, `/camp/place/{id}`. 앱 안 이동은 pushState(새로고침 없음). GitHub Pages는 서버 리라이트가 없어서 화면 경로 폴더의 넘김 페이지와 `404.html`이 `?p=경로`로 앱 루트에 넘기고 앱이 원래 경로로 되돌린다. 옛 링크(`#/c/1`, `explore/#/c/1`, `explore/c/1/`, `renewal/`, `guide/`, `vision/`, `openings/`, `passport/`, `collections/`)는 새 경로로 이어진다. 화면에 `#/` 링크를 만들지 않는다. 회귀: `routes-share-test.mjs`.
 - **공유**: 상세 위쪽 ‘찜’ 오른쪽 ‘공유’(같은 캡슐). 누르면 `https://pyw31337.github.io/camp/place/{id}/`를 복사하고 ‘링크를 복사했어요’. 터치 기기는 시스템 공유 시트. 이 주소는 배포 때 만드는 정적 미리보기 페이지라 카카오톡·페이스북·X가 사진(og:image, https 절대주소, 고캠핑 720px jpg 우선)·이름(og:title)·요약(og:description: 지역·유형·1박 요금)을 읽는다. meta refresh는 쓰지 않는다(스크래퍼가 메타를 잃음).
+
+## 비교표 (2026-10-22 소유자)
+- 행 제목은 한두 글자로 짧게: 현장 · 주차 · 전기 · 장작 · 규격 · 바닥 · 위생 · 동물 / 사이트 · 타입 · 면수 / 정보 · 입실 · 퇴실 · 매너 · 요금 / 주변 · 편의(편의시설) · 대여 · 편의(편의점, 아이콘으로 구분) · 마트 · 후기.
+- 제목 칸은 왼쪽에 고정하지 않는다 — 제목과 업체 칸이 한 표로 함께 가로 스크롤. 모바일 제목 칸 폭 64px(업체 칸이 더 보이게).
+- 칸의 (i)는 없앤다. 칸 전체(`.cmp-cell`)를 누르면 출처·원문 팝업(`hostTips`).
+- ‘확인필요’·요금 추정 등 작은 배지는 캡슐(`border-radius: 999px`).

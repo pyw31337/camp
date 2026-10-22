@@ -1259,7 +1259,7 @@ document.addEventListener("click", (e) => {
 addEventListener("scroll", () => { $("#pop").hidden = true; }, { passive: true });
 addEventListener("keydown", (e) => { if (e.key === "Escape") $("#pop").hidden = true; });
 // 상세 화면의 작은 (i)를 없애고 카드·행 전체를 눌러 원문을 연다(소유자 2026-10-20). 키보드: Tab으로 가서 Enter·Space.
-const TIP_HOST = ".tile, .stype, .pt, .ptiers, .plist li, .use, .d-line, .rs-avail, .sec-note, .amen-tile, .amen-n > div, .ev-card, li, p";
+const TIP_HOST = ".cmp-cell, .tile, .stype, .pt, .ptiers, .plist li, .use, .d-line, .rs-avail, .sec-note, .amen-tile, .amen-n > div, .ev-card, li, p";
 function hostTips(root) {
   for (const ib of $$(".ib[data-tip]", root)) {
     const host = ib.closest(TIP_HOST) ?? ib.parentElement;
@@ -5193,11 +5193,12 @@ async function compareView() {
   }).join("")}</div>`;
 
   const ds = await Promise.all(camps.map((c) => detailOf(c.id)));
+  // 행 제목은 짧게(소유자 2026-10-22: 현장·장작·규격·동물·면수·정보·매너·주변·편의·후기) — 모바일에서 제목 칸을 좁혀 업체 칸을 넓힌다.
   const rowsDef = [
-    ["현장 조건", [["주차", (c) => facts(c).park, "car"], ["전기", (c) => facts(c).power, "bolt"], ["장작·숯", (c) => facts(c).fire, "flame"], ["사이트 규격", (c) => facts(c).size, "size"], ["바닥", (c) => facts(c).ground, "layers"], ["위생", (c) => facts(c).sanitary, "bath"], ["반려견", (c) => facts(c).pet, "paw"]]],
-    ["사이트", [["타입", (c) => (c.st?.length ? { v: typeLine2(c), g: "c", src: { label: "한국관광공사 고캠핑 등록 현황", url: c.gc_url } } : null), "tent"], ["사이트 수", (c, d) => profFact(PF(d, "TYPE")), "layers"]]],
-    ["시간·요금", [["입실", (c, d) => usage(c, d)[0][1], "clock-in"], ["퇴실", (c, d) => usage(c, d)[1][1], "clock-out"], ["매너타임", (c, d) => usage(c, d)[2][1], "bed"], ["요금", (c, d) => usage(c, d)[3][1], "won"]]],
-    ["시설·주변", [["편의시설", (c) => ((c.amenities ?? []).length ? { v: c.amenities.slice(0, 6).join(" · "), g: "c", src: { label: "고캠핑 등록 편의시설", url: c.gc_url } } : null), "drop"], ["대여", (c) => ((c.rental ?? []).length ? { v: c.rental.join(" · "), g: "c", src: { label: "고캠핑 등록 대여품목", url: c.gc_url } } : null), "cart"], ["편의점", (c) => (c.nl?.c ? { v: km(c.nl.c), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+편의점` : null } } : null), "store"], ["마트", (c) => (c.nl?.m ? { v: km(c.nl.m), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+마트` : null } } : null), "cart"], ["후기 장점", (c) => (c.rv?.p?.length ? { v: c.rv.p.slice(0, 2).map(([t]) => normTopic(t)).join(" · "), g: "m", src: { label: "방문자 후기 분석", url: c.gc_url } } : null), "thumb-up"]]],
+    ["현장", [["주차", (c) => facts(c).park, "car"], ["전기", (c) => facts(c).power, "bolt"], ["장작", (c) => facts(c).fire, "flame"], ["규격", (c) => facts(c).size, "size"], ["바닥", (c) => facts(c).ground, "layers"], ["위생", (c) => facts(c).sanitary, "bath"], ["동물", (c) => facts(c).pet, "paw"]]],
+    ["사이트", [["타입", (c) => (c.st?.length ? { v: typeLine2(c), g: "c", src: { label: "한국관광공사 고캠핑 등록 현황", url: c.gc_url } } : null), "tent"], ["면수", (c, d) => profFact(PF(d, "TYPE")), "layers"]]],
+    ["정보", [["입실", (c, d) => usage(c, d)[0][1], "clock-in"], ["퇴실", (c, d) => usage(c, d)[1][1], "clock-out"], ["매너", (c, d) => usage(c, d)[2][1], "bed"], ["요금", (c, d) => usage(c, d)[3][1], "won"]]],
+    ["주변", [["편의", (c) => ((c.amenities ?? []).length ? { v: c.amenities.slice(0, 6).join(" · "), g: "c", src: { label: "고캠핑 등록 편의시설", url: c.gc_url } } : null), "drop"], ["대여", (c) => ((c.rental ?? []).length ? { v: c.rental.join(" · "), g: "c", src: { label: "고캠핑 등록 대여품목", url: c.gc_url } } : null), "cart"], ["편의", (c) => (c.nl?.c ? { v: km(c.nl.c), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+편의점` : null } } : null), "store"], ["마트", (c) => (c.nl?.m ? { v: km(c.nl.m), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+마트` : null } } : null), "cart"], ["후기", (c) => (c.rv?.p?.length ? { v: c.rv.p.slice(0, 2).map(([t]) => normTopic(t)).join(" · "), g: "m", src: { label: "방문자 후기 분석", url: c.gc_url } } : null), "thumb-up"]]],
   ];
 
   const head = camps.map((c, i) => `<th scope="col" data-col-idx="${i}"><a class="ch" href="${APP_BASE}place/${encodeURIComponent(c.id)}">${campThumb(c, { sizes: "64px" })}<span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></span></a><span class="ch-acts">${heartBtn(c)}<button class="icon-btn ch-x" type="button" data-pick="${esc(c.id)}" aria-label="비교에서 빼기" title="비교에서 빼기(찜은 그대로)">${ic("close")}</button></span></th>`).join("");
@@ -5293,6 +5294,7 @@ function bindCompare() {
     $(".cmp-scroll")?.classList.toggle("is-active", cmpMode === "table");
     $(".cmp-cards-view")?.classList.toggle("is-active", cmpMode === "cards");
   }));
+  hostTips($("#view")); // 비교표 칸도 (i) 대신 칸 전체를 눌러 출처·원문(소유자 2026-10-22)
   $$("[data-jump-col]").forEach((btn) => btn.addEventListener("click", () => {
     const idx = btn.dataset.jumpCol;
     const th = $(`.cmp-table th[data-col-idx="${idx}"]`);
