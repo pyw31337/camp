@@ -9,7 +9,7 @@
 - **모바일 가독성:** 320px에서 주소는 자체 가로 스와이프 가능한 한 줄로만 보이며 지도·길찾기·로드뷰는 바로 아래 행동 줄로 분리했다. 물때 예보지점과 바람 원천은 별도 블록으로 내려 읽기 쉽게 했고, SNS 플랫폼은 `유튜브·네이버·다음·인스타그램·페이스북·틱톡` 한 줄 레일로 통일했다. 영상 카드의 좌우 스와이프는 더 이상 플랫폼 탭을 바꾸지 않으며, 플랫폼 전환은 탭 클릭만 가능하다.
 - **아이콘·대표 사진:** 약국은 병원 십자와 다른 전용 면 아이콘을 쓴다. `(주)궁평해윰캠핑장`(101800)의 기존 카드 사진은 MBC 드라마 장면임을 원본으로 확인해 제외했다. 차량 외벽의 `궁평리어촌체험·휴양 마을` 표기가 보이는 현장 사진으로 교체하고, `card-photo-pins.json`에 고정/제외 규칙과 회귀 테스트를 추가했다. 외부 원본은 저장·재호스팅하지 않으며 원문 링크를 유지한다.
 - **보강 경로:** `docs/OPERATOR_GAP_ROBOT.md`에 저품질 대표 사진의 사람 검수·고정 규칙과, 정보량 부족 업장의 `공공 원천 → 직접 운영 도메인 발견 → robots 허용 운영 페이지 사실 추출 → 보강 대기` 순서를 추가했다. 차단된 플랫폼/후기를 운영 사실의 확정 근거로 우회하지 않는다.
-- **검증:** `node --check design/renewal/app.js`, `node --check camping-atlas/public/app.js`, `node --check camping-atlas/public/conditions/card.js`, `node --test pipeline/test/card-photo-pins.test.mjs`(4/4), `npm --prefix camping-atlas run build:pages`, `npm --prefix pipeline run check:billing`, `git diff --check` 통과. CUA 320px에서 문서 폭 `305=305`, 중복 헤더 없음, 정확한 궁평해윰 현장 사진, 한 줄 SNS 탭, 주소/행동 줄 분리를 확인했다.
+- **검증:** `node --check design/renewal/app.js`, `node --check camping-atlas/public/app.js`, `node --check camping-atlas/public/conditions/card.js`, `node --test pipeline/test/card-photo-pins.test.mjs`(4/4), `npm --prefix camping-atlas run build:pages`, `npm --prefix pipeline run check:billing`, `git diff --check` 통과. CUA 320px에서 문서 폭 `305=305`, 중복 헤더 없음, 정확한 궁평해윰 현장 사진, 한 줄 SNS 탭, 주소/행동 줄 분리를 확인했다. 예보 안내를 없앤 뒤 CI가 과거 안내 문구를 요구해 실패한 회귀 테스트는 ‘카드만 표시하고 장문은 없음’으로 즉시 갱신했으며, 전체 파이프라인 테스트는 해당 수정 후 479 통과·2 skip이었다. 로컬의 나머지 1건은 깨진 의존성 링크 때문에 `sharp`를 못 읽는 `photo-dedupe`이며 CI 의존성 설치 환경에서 재확인한다.
 
 ## 📌 GitHub Actions 자동 착지·날씨 회귀 안정화 (2026-10-22, Codex)
 
