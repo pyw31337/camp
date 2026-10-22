@@ -1477,8 +1477,6 @@ function saveCommit(id) {
 }
 function syncCompare() {
   // 역할 분리: ‘비교’ 숫자 = 지금 비교에 고른 곳 수(없으면 숨김), ‘찜’ 숫자 = 찜한 곳 수
-  const picked = 0;
-  $$("[data-compare-count]").forEach((x) => { x.textContent = picked; x.hidden = !picked; });
   $$("[data-saved-count]").forEach((x) => { x.textContent = S.saved.length; x.hidden = !S.saved.length; });
 }
 
