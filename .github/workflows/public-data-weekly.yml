@@ -44,6 +44,11 @@ jobs:
         run: node scripts/collect-campnic-parks.mjs
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+      - name: Public leisure (전국휴양림·박물관미술관·공공시설개방 표준데이터)
+        continue-on-error: true
+        run: node scripts/sync-public-leisure.mjs
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
       - name: Tourism photos (PhotoKorea GW)
         continue-on-error: true
         run: node scripts/sync-photo-gallery.mjs
@@ -59,7 +64,7 @@ jobs:
         run: |
           git config user.name "moyeora-camping-data-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add registry/nearby-licensed.json registry/photo-gallery.json registry/kdata-public.json 2>/dev/null || git add registry/nearby-licensed.json
+          git add registry/nearby-licensed.json registry/photo-gallery.json registry/kdata-public.json registry/public-leisure.json 2>/dev/null || git add registry/nearby-licensed.json
           if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
           git commit -m "chore(data): refresh nearby amenities and tourism photos"
           bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" public-weekly

@@ -47,3 +47,10 @@ test("게시판 공지 링크·날짜", () => {
   <tr><td><a href="/about.php">오시는 길 안내</a></td></tr></table>`;
   assert.deepEqual(noticeLinks(html, "https://camp.example.kr/bbs/board.php?bo_table=notice"), [{ title: "2026 동계 휴장 안내", url: "https://camp.example.kr/bbs/board.php?bo_table=notice&wr_id=33", date: "2026-10-01" }]);
 });
+
+test("방문객 불가: ‘예약자 외 방문객 불가’는 태그, ‘최대 인원 초과 시 방문객 불가’는 조건부라 태그 아님(전수 검수 2026-10-22)", () => {
+  assert.ok(noTagsOf("예약자 외 방문객 입장 불가(잠깐 들린 것도 안됨)최대 인원은 반드시 지켜주시기 바랍니다.").includes("NO_VISITOR"));
+  assert.ok(!noTagsOf("최대인원(4명) 초과시 예약인원외 방문객 방문 절대 불가합니다").includes("NO_VISITOR"));
+  for (const t of ["※방문객 인원은 최대인원을 초과하실 수 없습니다.", "1동 인원은 방문객을 포함 4인으로 제한하고 있습니다.", "총 인원(방문객 포함)은 최대 인원을 초과할 수 없습니다.", "기준 인원을 초과한 방문객은 입장이 제한됩니다.", "★예약된 인원 외 지인방문 등으로 인한 인원 초과는 절대 불가합니다", "사전 고지 없던 방문객은 입실이 불가합니다."]) assert.ok(!noTagsOf(t).includes("NO_VISITOR"), t);
+  for (const t of ["캠핑장 내 사고 예방 및 대처를 위해 지정 인원 이외 방문객과 추가 인원은 이용하실 수 없습니다.", "최대인원을 초과해서는 입실할 수 없으며 다른 손님들의 편안한 휴식을 위하여 예약된 인원 외의 친구 및 지인, 기타 외부인의 출입을 제한합니다."]) assert.ok(noTagsOf(t).includes("NO_VISITOR"), t);
+});
