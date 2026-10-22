@@ -96,6 +96,12 @@ export function buildQuery(campground) {
   return parts.join(" ");
 }
 
+// 동영상은 보정어를 붙이지 않은 시설명 그대로 검색한다.
+export const buildVideoQuery = (campground) => {
+  const name = cleanName(campground?.name);
+  return name || null;
+};
+
 /** 다른 캠핑장 이름과의 오인 방지에 쓰는 ‘핵심어’(고유 토큰을 이어 붙인 것) */
 export const nameCore = (name, sigungu) => distinctiveTokens(name, sigungu).join("");
 

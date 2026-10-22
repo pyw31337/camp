@@ -3838,6 +3838,7 @@ const isHost = (u, re) => { try { return re.test(new URL(u).hostname); } catch {
 function mediaHubHtml(d, c) {
   const name = nameOf(c).name;
   const q = encodeURIComponent(`${name} 캠핑`);
+  const videoQ = encodeURIComponent(name);
 
   // 1. YouTube 영상 목록 (x.yt 또는 url 기반)
   const ytVideos = (d?.videos ?? []).map((x) => {
@@ -3919,7 +3920,7 @@ function mediaHubHtml(d, c) {
       return `<article class="vid-wrap"><a class="vid" href="${esc(x.url)}" target="_blank" rel="noopener">${inner}</a>${srcTip(fact, `${platformLabel} 영상 ${i + 1}`)}</article>`;
     };
     const shorts = items.filter(isShort), longs = items.filter((x) => !isShort(x));
-    const shortsUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(`${name} 캠핑 #shorts`)}`;
+    const shortsUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(`${name} #shorts`)}`;
     const shortsHtml = shorts.length ? `<div class="rail vids-shorts" data-shorts>${shorts.map((x, i) => cardHtml(x, i).replace('<article class="vid-wrap">', '<article class="vid-wrap is-short">')).join("")}</div>` : "";
     const longsHtml = longs.length ? `${shorts.length ? `<p class="mh-sub">${platIc("youtube")}영상 <i>${longs.length}</i></p>` : ""}<div class="rail vids">${longs.map((x, i) => cardHtml(x, shorts.length + i)).join("")}</div>` : "";
 
@@ -3939,7 +3940,7 @@ function mediaHubHtml(d, c) {
 
   // 내부 탭으로 목록을 전환하는 플랫폼: YouTube, 네이버, 다음 (동일 포맷 유지)
   const inSiteTabs = [
-    { key: "youtube", label: "유튜브", n: ytList.length, panel: renderMediaRail(ytList, "youtube", "유튜브", `https://www.youtube.com/results?search_query=${q}`), url: `https://www.youtube.com/results?search_query=${q}` },
+    { key: "youtube", label: "유튜브", n: ytList.length, panel: renderMediaRail(ytList, "youtube", "유튜브", `https://www.youtube.com/results?search_query=${videoQ}`), url: `https://www.youtube.com/results?search_query=${videoQ}` },
     { key: "naver", label: "네이버", n: naverList.length, panel: renderMediaRail(naverList, "naver", "네이버", `https://search.naver.com/search.naver?query=${q}`), url: `https://search.naver.com/search.naver?query=${q}` },
     { key: "daum", label: "다음", n: daumList.length, panel: renderMediaRail(daumList, "daum", "다음", `https://search.daum.net/search?q=${q}`), url: `https://search.daum.net/search?q=${q}` },
   ];

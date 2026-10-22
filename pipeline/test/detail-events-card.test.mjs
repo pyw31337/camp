@@ -31,6 +31,18 @@ test("축제 범위: 5km·7일부터, 결과가 없을 때만 10km·10일 → 20
   assert.equal(inRange(mk([["a", 3, "2026-10-29", "2026-10-29"]]), 5, 7, "2026-10-20").length, 0, "7일 뒤 시작은 7일 범위 밖");
 });
 
+test("행사 자동 범위: 가까운 범위에 포스터가 없으면 포스터 있는 범위로 넓힌다", async () => {
+  const { autoRange, eventsFor } = await import("../../camping-atlas/public/context/events.js");
+  const data = {
+    camps: { 2: [["plain", 12], ["poster", 28]] },
+    ev: {
+      plain: { t: "행사", s: "2026-10-20", e: "2026-10-25", k: "행사" },
+      poster: { t: "포스터 행사", s: "2026-10-22", e: "2026-10-24", k: "축제", img: "https://example.com/poster.jpg" },
+    },
+  };
+  assert.deepEqual(autoRange(eventsFor(data, "2", "2026-10-20"), "2026-10-20"), [30, 45]);
+});
+
 test("주변 축제·행사 카드 정렬: 가장 가까운 거리(최단 거리) 순으로 맨 상단 맨 좌측(첫 카드)에 배열된다", async () => {
   const { render } = await import("../../camping-atlas/public/context/events.js");
   const ev = (t, s) => ({ t, s, e: "2026-10-30", k: "축제", u: "https://example.org/" });
