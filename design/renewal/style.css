@@ -1924,11 +1924,14 @@ a.near { color: inherit; text-decoration: none; }
   width: 36px;
   height: 36px;
 }
+/* 검색 결과 카드도 메인 카드처럼 사진 아래쪽에 한 줄로(소유자 2026-10-22: 위·아래로 흩어지던 배지) */
 .card-horizontal .card-media .bdgs {
   position: absolute;
-  top: 10px;
+  top: auto;
+  bottom: 10px;
   left: 10px;
-  z-index: 2;
+  right: 10px;
+  z-index: 3;
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
@@ -1938,6 +1941,7 @@ a.near { color: inherit; text-decoration: none; }
 .card-horizontal .card-media .car-dots {
   z-index: 3;
 }
+.card-horizontal:has(.bdgs:not(:empty)) .car-dots { bottom: 44px; }
 
 .card-horizontal .card-body {
   display: flex;
@@ -3369,6 +3373,9 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 .vid-wrap.is-short .vid img, .vid-wrap.is-short .vid-noimg { width: 136px; aspect-ratio: 9 / 16; }
 .vid-wrap.is-short .vid-play { left: 44px; top: 97px; }
 .vid-wrap.is-short .vid.playing { width: min(270px, 70vw); }
+/* 재생 중인 쇼츠는 감싸는 칸째 넓혀 옆 썸네일을 밀어낸다(겹침 방지, 소유자 2026-10-22) */
+.vid-wrap.is-short { flex: 0 0 auto; transition: width .2s ease; }
+.vid-wrap.is-short:has(.vid.playing) { width: min(270px, 70vw); }
 .vid-wrap.is-short .vid.playing iframe { aspect-ratio: 9 / 16; }
 .media-hub .mh-more-wrap { flex-wrap: wrap; gap: 8px; }
 /* t39 #37: 상세 '주변 비슷한 캠핑장' 3곳 — 홈 카드 그대로, PC 3칸 · 모바일 가로 넘김 */
@@ -3451,3 +3458,6 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 .media-hub .mh-tabs [data-mh-tab] { flex: 0 0 auto; justify-content: flex-start; min-width: auto; }
 .media-hub .mh-exts { gap: 8px; padding: 5px 0; }
 .media-hub .mh-link { white-space: nowrap; }
+
+/* ‘불가·금지’ 값은 어디서나 빨간 글씨(소유자 2026-10-22) */
+.no-txt, .plist b.is-no { color: var(--no, #d32f2f); }
