@@ -5,7 +5,7 @@ import { sanitizeCampValues, sanitizeDetailValues, RANGES } from "../lib/value-s
 import { isOperatorHost } from "../lib/operator-site.mjs";
 
 const run = (c) => { const hits = []; sanitizeCampValues(c, (f) => hits.push(f)); return hits; };
-test("전기 W: 300 미만·3000 초과 숨김, 600·1100 유지", () => {
+test("전기 W: 400 미만·3000 초과 숨김, 600·1100 유지", () => {
   const c = { field_conditions: { power: { limit_w: 100 } }, of: { w: { v: 5000, u: "https://x.kr" } } };
   assert.deepEqual(run(c).sort(), ["전기 W", "전기 W"]);
   assert.equal(c.field_conditions.power.limit_w, null); assert.equal(c.of.w, undefined);

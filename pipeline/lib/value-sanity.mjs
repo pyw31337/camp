@@ -3,7 +3,7 @@
 import { feeFloor } from "./fee-sanity.mjs";
 
 export const RANGES = {
-  power_w: [300, 3000],          // 전기 W: 300W 미만·3kW 초과는 오기(법정 600W, 고용량 1~2kW)
+  power_w: [400, 3000],          // 전기 W: 400W 미만·3kW 초과는 오기(법정 600W, 고용량 1~2kW)
   breaker_a: [3, 30],            // 차단기 A
   site_count: [1, 1000],         // 형태별 사이트 수
   site_m: [2, 30],               // 사이트 가로·세로(m)
