@@ -26220,3 +26220,4 @@
 {"at":"2026-10-22T22:29:44.853Z","by":"Data sync","run":"39858505956","action":"restored","file":"camping-atlas/public/explore/data/campgrounds.json","id":"6733","field":"fee.tiers","before":1,"after":0}
 {"at":"2026-10-22T22:29:44.853Z","by":"Data sync","run":"39858505956","action":"restored","file":"camping-atlas/public/explore/data/campgrounds.json","id":"7171","field":"fee.tiers","before":2,"after":0}
 {"at":"2026-10-22T22:29:44.853Z","by":"Data sync","run":"39858505956","action":"restored","file":"camping-atlas/public/explore/data/campgrounds.json","id":"100360","field":"fee.tiers","before":2,"after":0}
+{"at":"2026-10-22T22:30:02.657Z","by":"Data sync","run":"39858505956","action":"superseded","file":"camping-atlas/public/explore/data/campgrounds.json","id":"7544","field":"fee","previous":{"min":50000,"g":"NIGHT","note":"파쇄석 50,000원 · 데크 60,000원","src":"naver-booking"}}
