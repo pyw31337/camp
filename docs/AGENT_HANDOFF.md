@@ -3,6 +3,14 @@
 > 최종 갱신: 2026-10-22 KST(운영자 원문 오염 격리·상세 신뢰 검수) — 맨 위 ‘📌 공지’부터 읽을 것<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
 
+## 📌 GitHub Actions 자동 착지·날씨 회귀 안정화 (2026-10-22, Codex)
+
+- **반복 실패 원인:** 최근 실패 35건을 워크플로·실행 로그 단위로 다시 분류했다. 데이터/날씨 자동 갱신이 만든 봇 PR의 `Web quality / Rail swipe` 한 건이 실패하면, 같은 실행의 자동 병합 단계가 실패하며 `Weekly forecast`·`Data sync`도 연쇄 실패로 보였다. `Weekly forecast`의 직접 실패는 날씨 API의 비치명 오류가 아니라, 겨울 화면 검증의 잘못된 전역 조건이었다. `Data sync`의 이전 `pg` 모듈 누락은 현재 `pipeline` 의존성·lockfile의 `pg 8.23.1`로 해소됐고 최신 main의 PostgreSQL schema verification·Pipeline quality는 성공했다.
+- **수정:** `.github/scripts/land-on-main.sh`는 이제 커밋 전체의 동명 상태를 훑지 않고, 방금 `workflow_dispatch`한 `Web quality` 실행 ID(같은 SHA·이벤트)를 찾아 그 실행의 `Lint and build`·`Rail swipe` 두 잡이 모두 성공했을 때만 병합한다. 과거/중복 상태가 새 자동 갱신을 실패로 오인하지 않는다.
+- **날씨 검증:** `winter-test.mjs`는 전국 어딘가의 영하/눈을 근거로 홈의 임의 카드에 배지를 요구하던 조건을 제거했다. 실제 홈에 진열된 각 카드의 해당 지역·단기/중기 예보를 화면의 `data-wx` 배지와 1:1 대조한다. 따라서 추천 카드 구성이 달라져도 거짓 실패 없이, 표시가 틀린 카드는 계속 잡는다.
+- **로컬 경로 호환:** 파이프라인 테스트의 `file:` URL 경로를 `fileURLToPath()`으로 변환했다. 한글 경로에서 `%EC…`가 그대로 Node 인자로 넘어가 `field-guard`·`merge-collected`를 못 찾던 로컬 5개 실패를 방지한다.
+- **검증:** `npm --prefix pipeline ci && npm --prefix pipeline test` **482 통과 · 2 skip**, `npm --prefix pipeline run check:billing`, `npm --prefix camping-atlas run lint`(기존 경고 30, 오류 0), `bash -n .github/scripts/land-on-main.sh`, `node --check camping-atlas/scripts/winter-test.mjs`, 로컬 Chrome의 `winter-test.mjs` 통과. 다음 단계는 이 변경을 main에 병합한 뒤 `Weekly forecast`와 `Data sync`를 수동 실행해 실제 자동 PR 착지까지 확인하는 것이다.
+
 ## 📌 ⛔ 데이터 누적 병합 정책 시행 (2026-10-21, Grok Bot) — 전 에이전트 필수
 
 - 공유 데이터의 기존 값은 지우거나 리셋하지 않는다. ① 채우기 ② 최신·신뢰 우선 덮어쓰기(옛 값 기록) ③ 논리 검사 ④ 정제 순서다. 자세한 내용은 `docs/DATA_MERGE_POLICY.md`, 공용 모듈은 `pipeline/lib/merge-policy.mjs`다.
