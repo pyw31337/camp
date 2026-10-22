@@ -1,6 +1,6 @@
 // 캠핑장별 YouTube 숏츠 능동 수집 → out/campground-shorts.json (t39 #36 보강)
 // - 카카오(Daum) 동영상 검색(vclip) ‘이름 쇼츠’·‘이름 shorts’ 2회/곳. KAKAO_REST_API_KEY. 숏츠(/shorts/ 또는 ≤180초)이고 이름이 맞는 것만.
-// - YOUTUBE_API_KEY가 있으면 YouTube Data API search.list(videoDuration=short, 100단위) + videos.list(길이, 1단위)도 쓴다(일 10,000단위 → YT_MAX_SEARCHES 기본 80곳).
+// - YOUTUBE_API_KEY가 있으면 YouTube Data API search.list(videoDuration=short, 100단위) + videos.list(길이, 1단위)도 쓴다(일 10,000단위의 절반 이하 → YT_MAX_SEARCHES 기본 45곳 ≈ 4,550단위, AGENTS.md 무과금 원칙).
 // - 영상이 하나도 없는 캠핑장부터. 캐시 registry/shorts-search.json(SHORTS_MAX_AGE_DAYS 기본 30일). 한도·인증 오류면 즉시 멈춤.
 // - 화면 데이터에는 build-explore-data가 ‘채우기만’ 한다(이미 있는 영상은 그대로, 없는 숏츠만 덧붙임).
 // 키가 없거나 네트워크가 실패해도 캐시로 결과를 쓰고 exit 0.
@@ -23,7 +23,7 @@ const dumpCache = (c) => `{"campgrounds":{\n${Object.entries(c.campgrounds).map(
 const envNum = (k, d) => { const n = Number(process.env[k] ?? d); return Number.isFinite(n) ? n : d; };
 const MAX_AGE_DAYS = envNum("SHORTS_MAX_AGE_DAYS", 30);
 const MAX_CALLS = envNum("SHORTS_MAX_CALLS", 6000);
-const YT_MAX = envNum("YT_MAX_SEARCHES", 80);
+const YT_MAX = envNum("YT_MAX_SEARCHES", 45);
 const DELAY_MS = envNum("SHORTS_DELAY_MS", 120);
 const CONCURRENCY = Math.max(1, envNum("SHORTS_CONCURRENCY", 4));
 
