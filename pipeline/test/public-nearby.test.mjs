@@ -27,3 +27,10 @@ test("공공데이터포털 표준데이터(public-leisure.json) → 주변 공�
   assert.equal(rs[0].source.checked_at, "2024-11-12");
   assert.equal(rs[1].kind, "indoorplay");
 });
+
+test("주변 휴게소·공공시설은 같은 이름 500m 안 중복을 하나로(상행·하행은 따로)", async () => {
+  const { dedupeHits } = await import("../lib/nearby-context.mjs");
+  const h = (name, d) => ({ point: { name }, distance_m: d });
+  const out = dedupeHits([h("가평 휴게소 (상행)", 4144), h("가평 휴게소(상행)", 4159), h("가평 휴게소 (하행)", 4196), h("설악 휴게소", 9000)], 3);
+  assert.deepEqual(out.map((x) => x.point.name), ["가평 휴게소 (상행)", "가평 휴게소 (하행)", "설악 휴게소"]);
+});

@@ -3043,11 +3043,14 @@ async function detailView(id) {
 
 // ── 벤치마크(t39 #37): 주변 비슷한 캠핑장 3곳 ─────────────────
 // 같은 숙박 형태(오토·글램핑·카라반…)를 하나라도 가진 곳 중 40km 안에서 가까운 순. 사진 있는 곳만, 공원 원장 제외.
+// 추천(주변 캠핑장)은 업장 정보가 어느 정도 있는 곳만(소유자 2026-10-22: 정보도 거의 없고 사진은 남의 음식 사진인 곳이 추천됨).
+// 전화·홈페이지·소개·요금·사이트 종류·편의시설·규격·후기 중 2가지 이상. 검색·지도 목록에서는 빼지 않는다.
+const infoRich = (x) => (x._ir ??= [x.tel, x.homepage, x.line, x.fee, x.st?.length, x.amenities?.length, x.sizes?.length, x.rv?.n].filter(Boolean).length >= 2);
 function similarNearby(c, n = 3) {
   if (!Number.isFinite(c?.lat) || !Number.isFinite(c?.lng)) return [];
   const mine = new Set(stayKinds(c));
   return S.camps
-    .filter((x) => String(x.id) !== String(c.id) && Number.isFinite(x.lat) && Number.isFinite(x.lng) && !isPublicPark(x) && coreBrowseEligible(x) && hasPhoto(x))
+    .filter((x) => String(x.id) !== String(c.id) && Number.isFinite(x.lat) && Number.isFinite(x.lng) && !isPublicPark(x) && coreBrowseEligible(x) && hasPhoto(x) && infoRich(x))
     .map((x) => ({ x, km: km2(c, x), share: mine.size ? stayKinds(x).filter((k) => mine.has(k)).length : 1 }))
     .filter((r) => r.km <= 40 && r.share > 0)
     .sort((a, b) => a.km - b.km)
@@ -3775,7 +3778,9 @@ function operatorMediaHtml(d) {
 const mediaFull = (x) => externalImage(x) || apiThumb(x);
 const mediaSmall = (x) => apiThumb(x) || externalImage(x);
 const layoutImages = (d) => (d?.layout?.images ?? []).filter((x) => (x.img || x.thumb || x.url)).filter((x, i, all) => all.findIndex((y) => (y.img || y.thumb || y.url) === (x.img || x.thumb || x.url)) === i).slice(0, 6);
-const snsImages = (d) => (d?.sns_images ?? []).filter((x) => x.url && mediaFull(x));
+// ng: 사진 내용 판정에서 걸러진 후기 사진(음식·인물·차 안 등, apply-photo-judgments.mjs) — 갤러리·대표에서 뺀다(2026-10-22)
+const snsOk = (x) => x && !x.ng;
+const snsImages = (d) => (d?.sns_images ?? []).filter((x) => snsOk(x) && x.url && mediaFull(x));
 
 const isOfficialLayout = (x) => Boolean(x && (x.official || /gocamping\.or\.kr|mgocamping/i.test(x.img || x.url || "") || x.src === "고캠핑" || x.src === "한국관광공사"));
 
@@ -3958,9 +3963,9 @@ function mediaHubHtml(d, c) {
     .filter((x) => x.url && x.title && !seenPosts.has(x.url) && seenPosts.add(x.url))
     .sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
 
-  const photoByUrl = new Map((d?.sns_images ?? []).filter((p) => p.url && (p.thumb || p.img)).map((p) => [p.url, p.thumb || p.img]));
-  const bigByUrl = new Map((d?.sns_images ?? []).filter((p) => p.url && (p.img || p.thumb)).map((p) => [p.url, p.img || hiThumb(p.thumb)]));
-  const thumbPool = [...new Set([...photosOf(c).slice(0, 6).map((u) => photoUrl(u)), ...(d?.sns_images ?? []).map((p) => p.img || hiThumb(p.thumb))].filter(Boolean))];
+  const photoByUrl = new Map((d?.sns_images ?? []).filter((p) => snsOk(p) && p.url && (p.thumb || p.img)).map((p) => [p.url, p.thumb || p.img]));
+  const bigByUrl = new Map((d?.sns_images ?? []).filter((p) => snsOk(p) && p.url && (p.img || p.thumb)).map((p) => [p.url, p.img || hiThumb(p.thumb)]));
+  const thumbPool = [...new Set([...photosOf(c).slice(0, 6).map((u) => photoUrl(u)), ...(d?.sns_images ?? []).filter(snsOk).map((p) => p.img || hiThumb(p.thumb))].filter(Boolean))];
 
   // 3. 네이버: 영상 및 썸네일 글 통합 (영상 우선, 썸네일 있는 글 우선, 최신순)
   const seenNaver = new Set();
@@ -5141,7 +5146,7 @@ function bindDetail() {
   }));
   $$('[data-external-media="sns"]').forEach((b) => b.addEventListener("click", async () => {
     const d = await detailOf(id);
-    const rows = (d?.sns_images ?? []).filter((x) => x?.url && canPreviewExternalMedia(x) && externalImage(x));
+    const rows = (d?.sns_images ?? []).filter((x) => snsOk(x) && x?.url && canPreviewExternalMedia(x) && externalImage(x));
     const idx = Math.min(Number(b.dataset.index) || 0, Math.max(0, rows.length - 1));
     if (rows.length) openLightboxUrls(rows.map(externalImage), idx, "캠퍼 사진 · 원문 제공 이미지");
   }));

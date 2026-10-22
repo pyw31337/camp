@@ -43,8 +43,8 @@ test("소개: 자동 틀 문장은 버리고 길면 문장 끝에서 자른다",
 
 test("같은 행사 합치기: 제목 키 + 기간 겹침, 빈 칸은 다른 원천으로 채움", () => {
   assert.equal(titleKey("제15회 경산 대추축제 (2026)"), titleKey("경산대추축제"));
-  const cf = [cultureEventOf({ ...base, id: "f1", source: "festival", genre: "exhibition", title: "제15회 경산대추축제", date: "2026.10.16 ~ 2026.10.25", image: "" }, T)];
-  const extras = { fest: { 9: { t: "경산 대추축제", s: "2026-10-16", e: "2026-10-25", img: "http://tong.visitkorea.or.kr/p.jpg" }, 8: { t: "다른 축제", s: "2026-10-20", e: "2026-10-21" } }, camps: { 100: { fe: [["9", 3.2], ["8", 12]] } } };
+  const cf = [cultureEventOf({ ...base, id: "f1", source: "festival", genre: "exhibition", title: "제15회 경산대추축제", date: "2026.10.16 ~ 2026.10.25", image: "", address: "경상북도 경산시 남산면 1" }, T)];
+  const extras = { fest: { 9: { t: "경산 대추축제", s: "2026-10-16", e: "2026-10-25", a: "경북 경산시 남산면 대추로 1", img: "http://tong.visitkorea.or.kr/p.jpg" }, 8: { t: "다른 축제", s: "2026-10-20", e: "2026-10-21" } }, camps: { 100: { fe: [["9", 3.2], ["8", 12]] } } };
   const tour = tourEventsOf(extras, T);
   assert.equal(tour.events.length, 2);
   const { events, alias } = mergeEvents(cf, tour.events);
@@ -107,4 +107,25 @@ test("화면: 진행 중/예정·이번 주말 표시, 끝난 행사 숨김, 링
   assert.match(html, /500m/);
   assert.doesNotMatch(html, /끝남/);
   assert.equal(render(data, "999", "2026-10-19"), "");
+});
+
+test("같은 제목이라도 다른 지역 공연은 합치지 않는다(순회 공연 ‘페인터즈’ 서울 정동 vs 광주 광산, 2026-10-22)", async () => {
+  const { regionOf } = await import("../lib/culture-events.mjs");
+  assert.deepEqual(regionOf("서울특별시 중구 정동길 3 (정동)"), ["서울", "중구"]);
+  assert.deepEqual(regionOf("전남광주통합특별시 광산구 광산로68번길 13"), ["광주", "광산구"]);
+  assert.deepEqual(regionOf("광주 광산구 광산로68번길 13"), ["광주", "광산구"]);
+  const gwangju = cultureEventOf({ ...base, id: "p1", source: "kopis", genre: "musical", title: "페인터즈", date: "2026.10.23 ~ 2026.10.24", lat: 35.139, lng: 126.793, address: "광주 광산구 광산로68번길 13" }, T);
+  const extras = { fest: { 3481597: { t: "페인터즈", s: "2022-11-01", e: "2026-12-31", a: "서울특별시 중구 정동길 3 (정동)" } }, camps: { 7967: { fe: [["3481597", 15.7]] } } };
+  const tour = tourEventsOf(extras, T);
+  const { events, alias } = mergeEvents([gwangju], tour.events);
+  assert.equal(events.length, 2);
+  assert.equal(alias.size, 0);
+  // 구로 캠핑장(7967)에는 광주 공연이 아니라 서울 정동 항목이 보인다
+  const byId = new Map(events.map((e) => [e.id, e]));
+  const idx = new GridIndex(events.filter((e) => Number.isFinite(e.lat)), 0.1);
+  const rows = eventsNear({ id: "7967", lat: 37.48, lng: 126.84 }, idx, { tourNear: tour.near["7967"], alias, byId, today: T });
+  assert.deepEqual(rows.map(([id]) => id), ["tour:3481597"]);
+  // 주소를 모르면 합치지 않는다
+  const noAddr = tourEventsOf({ fest: { 1: { t: "페인터즈", s: "2026-10-01", e: "2026-12-31" } } }, T);
+  assert.equal(mergeEvents([gwangju], noAddr.events).alias.size, 0);
 });

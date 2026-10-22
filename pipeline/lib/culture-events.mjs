@@ -119,6 +119,18 @@ export function coreTitle(s) {
     .replace(/(광산|유성|대덕|울주)구?/g, "");
 }
 const overlaps = (a, b) => a.s <= b.e && b.s <= a.e;
+// 주소 → [시·도, 시·군·구] (좌표 없는 관광공사 축제를 합칠 때 같은 지역인지 보려고)
+const SIDO_SHORT = [["서울", /^서울/], ["부산", /^부산/], ["대구", /^대구/], ["인천", /^인천/], ["광주", /^광주/], ["대전", /^대전/], ["울산", /^울산/], ["세종", /^세종/], ["경기", /^경기/], ["강원", /^강원/], ["충북", /^(충북|충청북)/], ["충남", /^(충남|충청남)/], ["전북", /^(전북|전라북)/], ["전남", /^(전남|전라남)/], ["경북", /^(경북|경상북)/], ["경남", /^(경남|경상남)/], ["제주", /^제주/]];
+export function regionOf(addr) {
+  const t = String(addr ?? "").trim().split(/\s+/);
+  if (!t[0]) return null;
+  let sido = SIDO_SHORT.find(([, re]) => re.test(t[0]))?.[0] ?? null;
+  // 전남광주통합특별시: 광산·서·북·남·동구는 광주, 나머지는 전남
+  if (/^전남광주/.test(t[0])) sido = /^(광산구|서구|북구|남구|동구)$/.test(t[1] ?? "") ? "광주" : "전남";
+  if (!sido) return null;
+  const sgg = sido === "세종" ? "세종" : (t[1] ?? "").replace(/[^가-힣]/g, "") || null;
+  return [sido, sgg];
+}
 /** 같은 행사인지: 제목 키가 같거나 한쪽이 다른 쪽을 품고(4자↑, 구/군 정규화 포함), 기간이 겹친다. 좌표가 둘 다 있으면 5km 안. */
 export function sameEvent(a, b) {
   if (!overlaps(a, b)) return false;
@@ -131,7 +143,11 @@ export function sameEvent(a, b) {
   }
   if (!titleHit) return false;
   if (Number.isFinite(a.lat) && Number.isFinite(b.lat)) return haversineM(a.lat, a.lng, b.lat, b.lng) <= 5000;
-  return true;
+  // 좌표가 한쪽이라도 없으면 주소의 시·도와 시·군·구가 같아야 같은 행사(2026-10-22: 순회 공연 ‘페인터즈’의
+  // 서울 정동 관광공사 항목이 광주 광산문화예술회관 공연과 합쳐져, 서울 캠핑장에 광주 공연이 보였다). 지역을 모르면 합치지 않는다.
+  const ra = regionOf(a.addr), rb = regionOf(b.addr);
+  if (!ra || !rb) return false;
+  return ra[0] === rb[0] && (!ra[1] || !rb[1] || ra[1] === rb[1]);
 }
 /** 두 원천을 합친다: CultureFlow 쪽을 기본으로(소개·포스터가 더 많음) 빈 칸만 관광공사 값으로 채운다. 반환: {events, alias(옛 id → 남긴 id)} */
 export function mergeEvents(cfEvents, tourEvents) {

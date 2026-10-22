@@ -7,6 +7,7 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { looksLikePlace, orderCandidates, pixelStats } from "../lib/card-fallback.mjs";
+import { RULE_VERSION, photoJudge } from "../lib/photo-judge.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const dataDir = join(root, "camping-atlas/public/explore/data");
@@ -18,6 +19,19 @@ const MAX_TRY = 10;
 const pinsPath = join(root, "pipeline/registry/card-photo-pins.json");
 const pins = existsSync(pinsPath) ? JSON.parse(readFileSync(pinsPath, "utf8")).camps ?? {} : {};
 
+// 사진 내용 판정(CLIP, lib/photo-judge.mjs): 음식·인물·차 안·글 캡처는 대표 사진으로 쓰지 않는다(2026-10-22 여우하우 대게 사진).
+// 판정은 registry/photo-judgments.json에 URL별로 남겨 다시 받지 않는다. 판정기가 없으면(모듈 미설치) 픽셀 규칙만 쓴다.
+const judgPath = join(root, "pipeline/registry/photo-judgments.json");
+const judg = existsSync(judgPath) ? JSON.parse(readFileSync(judgPath, "utf8")).photos ?? {} : {};
+const judge = await photoJudge({ cacheDir: process.env.HF_CACHE || join(root, "pipeline/.cache/hf") });
+if (!judge) console.log("::warning::사진 내용 판정기(@huggingface/transformers) 없음 — 픽셀 규칙만 적용");
+let judged = 0, refused = 0;
+async function contentOk(url) {
+  if (!judge || !url) return true;
+  if (judg[url]?.v === RULE_VERSION) return judg[url].ok;
+  try { const v = await judge(url); judg[url] = { ...v, at: new Date().toISOString().slice(0, 10) }; judged++; if (!v.ok) refused++; return v.ok; }
+  catch { return true; } // 받지 못한 사진은 판정하지 않는다(픽셀 단계에서 이미 걸러짐)
+}
 async function stats(url) {
   const ctl = AbortSignal.timeout(10000);
   const r = await fetch(url, { signal: ctl, headers: { "user-agent": "MoyeoraCampBot/1.0 (+https://github.com/pyw31337/camp)" } });
@@ -44,16 +58,18 @@ async function worker() {
     const cands = [...orderCandidates(d.sns_images), ...posts].filter((x) => !rejected.has(x.thumb) && !rejected.has(x.img)).slice(0, MAX_TRY + 4);
     // 지난번에 고른 사진이 아직 후보에 있으면 그대로(다시 받지 않음)
     const old = prev[c.id];
-    if (old && cands.some((x) => x.thumb === old.t)) { out[c.id] = old; kept++; continue; }
+    if (old && cands.some((x) => x.thumb === old.t) && (await contentOk(old.t))) { out[c.id] = old; kept++; continue; }
     let hit = null;
     for (const x of cands) {
       const st = await stats(x.thumb).catch(() => null);
-      if (looksLikePlace(st)) { hit = x; break; }
+      if (looksLikePlace(st) && (await contentOk(x.thumb))) { hit = x; break; }
     }
     if (hit) { out[c.id] = { i: hit.img ?? null, t: hit.thumb, u: hit.url, s: hit.src ?? null, d: hit.date ?? null, at: new Date().toISOString() }; picked++; }
     else none++;
   }
 }
-await Promise.all(Array.from({ length: 8 }, worker));
+await Promise.all(Array.from({ length: judge ? 2 : 8 }, worker));
+writeFileSync(judgPath, `${JSON.stringify({ updated_at: new Date().toISOString(), model: "Xenova/clip-vit-base-patch32", rule: "lib/photo-judge.mjs decide() — NEG(음식·인물·차 안·글 캡처 등) 확률 합 0.5↑ 또는 1위 NEG·0.4↑이면 대표 사진에서 제외", photos: judg }, null, 0)}\n`);
+console.log(`사진 내용 판정: 새로 ${judged}장 · 걸러냄 ${refused}장 (누적 ${Object.keys(judg).length}장)`);
 writeFileSync(outPath, `${JSON.stringify({ updated_at: new Date().toISOString(), policy: "공식 사진이 없는 곳만. 카카오 검색 API 결과의 썸네일·원문 링크만 저장(이미지 재호스팅 없음). 픽셀 규칙으로 배치도·안내판·야간 사진을 거름.", camps: out }, null, 1)}\n`);
 console.log(`카드 대체 사진: 대상 ${need.length}곳 · 새로 고름 ${picked} · 유지 ${kept} · 맞는 사진 없음 ${none}`);
