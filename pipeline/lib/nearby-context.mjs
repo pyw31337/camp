@@ -3,6 +3,7 @@
 // 거리는 모두 직선거리(m)이며 도로 거리·소요 시간이 아니다. 영업 여부·영업시간은 원천에서 보장하지 않는다.
 
 import { GridIndex, inKorea } from "./geo.mjs";
+import { normalizePublicPoi } from "./kdata-public.mjs";
 
 export const TOUR_BASE = "https://apis.data.go.kr/B551011/KorService2";
 // 12 관광지, 14 문화시설, 28 레포츠, 38 쇼핑, 39 음식점
@@ -15,6 +16,7 @@ export const SOURCES = {
   tour: { id: "tourapi-kor2", name: "한국관광공사 TourAPI 4.0(KorService2) 지역기반 관광정보", url: "https://www.data.go.kr/data/15101578/openapi.do", tier: "B", license: "공공누리(한국관광공사) — 이미지 이용 조건은 항목별 cpyrhtDivCd 확인" },
   osm: { id: "osm-shops", name: "OpenStreetMap(Overpass API) 마트·편의점·주유소·약국·병원", url: "https://www.openstreetmap.org/copyright", tier: "C", license: `ODbL 1.0 — ${OSM_ATTRIBUTION}` },
   rest: { id: "rest-stops", name: "휴게소·졸음쉼터(한국도로공사·전국졸음쉼터표준데이터·OpenStreetMap)", url: "https://github.com/pyw31337/camp/blob/main/pipeline/scripts/sync-rest-stops.mjs", tier: "B", license: `공공데이터 이용 조건 · ${OSM_ATTRIBUTION}` },
+  public: { id: "kdata-public", name: "알잘 공공데이터 공개 색인(공공시설 발견·원문 연결)", url: "https://k-data.aljal.kr/", tier: "C", license: "원문 공개 데이터의 링크·좌표·요약 필드만 사용" },
 };
 
 const clean = (v) => {
@@ -156,6 +158,7 @@ export const NEARBY_RULES = {
   gear: { radius_m: 20000, limit: 2 },
   medical: { radius_m: 20000 },
   rest: { radius_m: 40000, limit: 3 },
+  public: { radius_m: 30000, limit: 3 },
 };
 
 const toItem = ({ point: p, distance_m }, source, extra = {}) => {
@@ -168,7 +171,7 @@ const toItem = ({ point: p, distance_m }, source, extra = {}) => {
  * POI 목록으로 분류별 격자 색인을 만든다.
  * @param {{tour?: object[], osm?: object[], rest?: object[]}} pois 정규화된 레코드
  */
-export function buildNearbyIndexes({ tour = [], osm = [], rest = [] } = {}) {
+export function buildNearbyIndexes({ tour = [], osm = [], rest = [], public: publicPois = [] } = {}) {
   const sightseeing = [], shopping = [], food = [];
   for (const p of tour) {
     if (!p || p.cat3 === TOUR_CAMPSITE_CAT3) continue;
@@ -178,6 +181,7 @@ export function buildNearbyIndexes({ tour = [], osm = [], rest = [] } = {}) {
     else if (p.type in TOUR_TYPES) sightseeing.push(q);
   }
   const by = (kinds) => new GridIndex(osm.filter((p) => p && kinds.includes(p.kind)));
+  const publicIndex = new GridIndex(publicPois.map(normalizePublicPoi).filter(Boolean));
   return {
     sightseeing: new GridIndex(sightseeing),
     shopping: new GridIndex(shopping),
@@ -189,6 +193,7 @@ export function buildNearbyIndexes({ tour = [], osm = [], rest = [] } = {}) {
     pharmacy: by(["pharmacy"]),
     hospital: by(["hospital"]),
     rest: new GridIndex(rest.filter(Boolean)),
+    public: publicIndex,
   };
 }
 
@@ -221,11 +226,19 @@ export function nearbyFor(lat, lng, idx, rules = NEARBY_RULES) {
     if (er) medical.push(er);
   }
   const rest = idx.rest.within(lat, lng, rules.rest.radius_m, rules.rest.limit).map((h) => toItem(h, SOURCES.rest.id, { road: h.point.road }));
+  const publicByKind = {};
+  for (const h of idx.public.within(lat, lng, rules.public.radius_m)) {
+    const kind = h.point.kind || "public";
+    (publicByKind[kind] ??= []).push(toItem(h, SOURCES.public.id, {
+      addr: h.point.addr, image: h.point.image, facts: h.point.facts, url: h.point.url, source: h.point.source,
+    }));
+  }
+  for (const rows of Object.values(publicByKind)) rows.sort((a, b) => a.distance_m - b.distance_m).splice(rules.public.limit);
   return {
     tour, food,
     mart: pick("mart"), conv: pick("conv"), fuel: pick("fuel"), gear: pick("gear"),
     medical: medical.sort((a, b) => a.distance_m - b.distance_m).map(osmItem),
-    rest,
+    rest, ...(Object.keys(publicByKind).length ? { public: publicByKind } : {}),
   };
 }
 

@@ -3,6 +3,13 @@
 > 최종 갱신: 2026-10-22 KST(핵심 이용값·보조 기준 문구 시각 분리) — 맨 위 ‘📌 공지’부터 읽을 것<br>
 > 다음 작업자는 이 문서를 먼저 읽고 작업 종료 시 업데이트한다.
 
+## 📌 공공 휴양림·주변 공공시설 누적 수집기 (2026-10-22, Codex)
+- **원천 분석:** `k-data.aljal.kr`의 사이트맵과 상세 페이지 구조를 확인했다. 자연휴양림 212곳, 휴게소 248곳, 실내놀이터·수영장·레포츠·박물관 목록도 공개 상세 URL로 제공된다. 원문 HTML을 저장하지 않고 이름·주소·좌표·운영 표·사진 링크·공식 원문 링크만 저장한다.
+- **수집기:** `pipeline/lib/kdata-public.mjs`와 `pipeline/scripts/sync-kdata-public.mjs`를 추가했다. `npm run sync:kdata-public`는 기본 호스트 간 1초 지연, 기존 원장 합집합 병합, 확인 시각·원문 URL 기록을 적용한다. 현재 자연휴양림 211건을 `pipeline/registry/kdata-public.json`에 누적했다. 나머지 범주는 주간 워크플로에서 이어 수집한다.
+- **주변 연동:** `nearby-context`가 `forest·rest·indoorplay·pool·leisure·museum`을 캠핑장별 최대 3곳의 `nearby.public`로 계산하고, 상세 주변시설에 범주별 탭으로 노출할 수 있게 했다. 기존 관광·생활·휴게소 배열은 그대로 유지한다.
+- **휴양림 원장 보호:** `sync-forest-recreation.mjs`가 기존 `forest-recreation-collected.json`과 `forest-recreation.json`을 합쳐 쓰도록 수정했다. 수집 실패나 일부 응답으로 기존 값이 줄지 않는다.
+- **검증:** `kdata-public`·`kdata-nearby`·`nearby-context` 테스트 10개 통과, 원본/발행본 앱 동기화, Node 문법 검사 통과. 전체 주변 재계산은 최신 `out/campgrounds.json`이 있는 데이터 발행 단계에서 실행한다.
+
 ## 📌 핵심 이용값·보조 기준 문구 시각 분리 (2026-10-22, Codex)
 - **표시:** 상세 이용 정보에서 `14:00부터`·요금·규격 같은 핵심 값은 기존의 진한 굵기를 유지하고, `업장 미공지`·`법정/조례 기준`·`참고값` 같은 근거성 보조 문구는 별도 줄의 작은 회색·얇은 글씨로 표시한다. 숫자나 시간값이 보조 문구에 포함된 경우에도 같은 값을 중복 표시하지 않는다.
 - **범위:** 사실 저장소와 원문은 변경하지 않고 이용 정보 UI(`factValueHtml`)만 정제했다. 발행본 `camping-atlas/public`은 원본과 동기화했다.
