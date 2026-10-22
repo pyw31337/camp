@@ -1,0 +1,4 @@
+{
+  "101213": { "status": "REJECTED", "reason": "camping_operator_name_mismatch" },
+  "100419": { "photo_status": "REVIEW", "photo_reason": "fallback_review_photo_without_place_context" }
+}
