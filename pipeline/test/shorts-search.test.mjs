@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { fileURLToPath } from "node:url";
 import { fillShorts, isoDurationSec, pickShortsDue, shortsFromVclip, shortsFromYoutube, shortsQueries } from "../lib/shorts-search.mjs";
 
 const camp = { id: "1", name: "명학산캠핑장", address: { sido: "경기도", sigungu: "파주시" } };
@@ -54,7 +55,7 @@ test("merge-collected --shorts: 상세 영상 칸에 채우기만", async () => 
   writeFileSync(join(dir, "camps", "2.json"), JSON.stringify({ videos: [{ yt: "XXXXXXXXXXX", title: "원래" }] }));
   const sh = join(dir, "s.json");
   writeFileSync(sh, JSON.stringify({ campgrounds: { 1: { shorts: [{ yt: "AAAAAAAAAAA", url: "https://youtube.com/shorts/AAAAAAAAAAA", kind: "short" }] }, 2: { shorts: [{ yt: "XXXXXXXXXXX" }] }, 3: { fetched_at: "x" } } }));
-  const out = execFileSync("node", [new URL("../scripts/merge-collected.mjs", import.meta.url).pathname, "--shorts", sh, "--data", dir], { encoding: "utf8" });
+  const out = execFileSync("node", [fileURLToPath(new URL("../scripts/merge-collected.mjs", import.meta.url)), "--shorts", sh, "--data", dir], { encoding: "utf8" });
   assert.match(out, /숏츠 병합: 1곳\(영상 없던 곳 1곳\) · 숏츠 1개/);
   assert.equal(JSON.parse(readFileSync(join(dir, "camps", "1.json"), "utf8")).videos[0].yt, "AAAAAAAAAAA");
   assert.deepEqual(JSON.parse(readFileSync(join(dir, "camps", "2.json"), "utf8")).videos, [{ yt: "XXXXXXXXXXX", title: "원래" }]);

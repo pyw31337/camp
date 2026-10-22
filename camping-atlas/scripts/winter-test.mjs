@@ -25,10 +25,33 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [390, 844, "390"]]) {
     if (bad.length) fails.push(`${tag} 홈 겨울 줄: 겨울 운영 아님 ${bad.slice(0, 5)}`);
     if (shots) { await row.scrollIntoViewIfNeeded(); await page.waitForTimeout(400); await page.screenshot({ path: `${shots}/winter-home-${tag}.png` }); }
   }
-  // 2) 눈·영하 예보 배지: 예보에 해당하는 곳이 있으면 카드 어딘가에 보여야
-  const wx = await page.$$eval(".card [data-wx]", (b) => b.length);
-  const expect = await page.evaluate(async () => { const r = await fetch("./conditions/forecast.json"); if (!r.ok) return false; const j = await r.json(); return Object.values(j.short?.grids ?? {}).some((g) => Object.entries(g).some(([d, v]) => d >= j.today && ((v[2] != null && v[2] < 0) || /눈/.test(`${v[0]} ${v[1]}`)))); });
-  if (expect && !wx) fails.push(`${tag} 홈: 눈·영하 예보 배지 없음`);
+  // 2) 눈·영하 예보 배지: 홈에 실제로 진열된 카드별 예보와 대조한다.
+  // 전국 어딘가의 영하를 근거로 홈의 무관한 카드에 배지를 요구하면 추천 카드 조합에 따라 거짓 실패가 난다.
+  const wxMismatch = await page.evaluate(async () => {
+    const r = await fetch("./conditions/forecast.json");
+    if (!r.ok) return [];
+    const f = await r.json();
+    const hasAlert = (id) => {
+      const row = f.camps?.[id];
+      if (!row) return false;
+      const [grid, land, ta] = row;
+      const days = new Map();
+      for (const [d, v] of Object.entries(f.short?.grids?.[grid] ?? {})) {
+        if (d >= f.today) days.set(d, { d, weather: `${v[1] ?? ""} ${v[0] ?? ""}`, min: v[2] });
+      }
+      const L = f.mid?.land?.[land] ?? {}, T = f.mid?.ta?.[ta] ?? {};
+      for (const d of new Set([...Object.keys(L), ...Object.keys(T)])) {
+        if (d >= f.today && !days.has(d)) days.set(d, { d, weather: (L[d] ?? []).slice(0, 2).join(" "), min: (T[d] ?? [])[0] });
+      }
+      return [...days.values()].sort((a, b) => a.d.localeCompare(b.d)).slice(0, 7).some((d) => Number(d.min) < 0 || /눈/.test(d.weather));
+    };
+    return [...document.querySelectorAll(".card[data-id]")].flatMap((card) => {
+      const expected = hasAlert(card.dataset.id);
+      const rendered = Boolean(card.querySelector("[data-wx]"));
+      return expected === rendered ? [] : [`${card.dataset.id}: expected=${expected}, rendered=${rendered}`];
+    });
+  });
+  if (wxMismatch.length) fails.push(`${tag} 홈: 눈·영하 예보 배지 불일치 ${wxMismatch.slice(0, 5).join("; ")}`);
   // 3) 목록 겨울 운영(확인된 곳만) → 모두 c.win=1, 조건 줄에 같은 글자 중복 허용(조건 확인 표시)
   await page.goto(`${base}list?win=1&strict=1`, { waitUntil: "networkidle" });
   await page.waitForSelector(".card", { timeout: 30000 });

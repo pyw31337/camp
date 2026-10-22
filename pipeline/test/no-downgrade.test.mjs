@@ -4,9 +4,11 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { execFileSync, spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { trustRank } from "../lib/merge-policy.mjs";
 
-const FG = new URL("../scripts/field-guard.mjs", import.meta.url).pathname;
+// URL.pathname은 한글 경로에서 %EC… 인코딩 문자열이 된다. 로컬 경로·CI 모두에서 실행되게 파일 경로로 변환한다.
+const FG = fileURLToPath(new URL("../scripts/field-guard.mjs", import.meta.url));
 const D = "camping-atlas/public/explore/data";
 function tree(cat, det) {
   const r = mkdtempSync(join(tmpdir(), "fg-"));
