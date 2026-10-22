@@ -42,6 +42,10 @@ node pipeline/scripts/build-house-rules.mjs
 node pipeline/scripts/build-gocamping-detail.mjs
 # 당일 장소 시드(원문 규칙·요약)는 프로필·이용규칙 생성 뒤에 붙인다 — data-sync와 같은 순서(빼면 시드 값이 지워졌다 되살아나기를 반복).
 node pipeline/scripts/apply-dayuse-seed.mjs
+# 공공데이터 여가 시설(휴양림 카탈로그·주변 여가 시설) — data-sync와 같은 자리
+node pipeline/scripts/build-public-leisure.mjs
+node pipeline/scripts/apply-public-nearby.mjs
+node pipeline/scripts/apply-photo-judgments.mjs
 # 발행 전 상식 정리(공원에 야영장 요금·입퇴실 금지, 플랫폼 광고 요금, 좌표, 시·도 표기, 중복 등록) — data-sync와 같은 자리.
 # t41u: 수기·공식 확정 값(registry/curated-pins.json)을 재계산 위에 다시 얹는다
 node pipeline/scripts/apply-pins.mjs
@@ -54,12 +58,13 @@ node "$SRC/scripts/field-guard.mjs" "$BASEROOT" . --heal
 node pipeline/scripts/publish-sanity.mjs
 node pipeline/scripts/report-coverage.mjs
 node pipeline/scripts/build-fact-store.mjs
+node pipeline/scripts/quality-ledger.mjs
 node "$SRC/scripts/coverage-guard.mjs" "$BASE" "$DATA/meta.json"
 
 if [ -n "${PUBLISH_DRY_RUN:-}" ]; then { git status --short | head -5 || true; }; echo "(시험 실행: 커밋하지 않음)"; exit 0; fi
 git config user.name "moyeora-camping-data-bot"
 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-git add camping-atlas/public/explore data/facts; git add pipeline/registry/merge-review.ndjson 2>/dev/null || true
+git add camping-atlas/public/explore data/facts data/quality; git add pipeline/registry/merge-review.ndjson 2>/dev/null || true
 if git diff --cached --quiet; then echo "증분 발행: 변경 없음."; exit 0; fi
 git commit -q -m "chore(data): publish ${LABEL} now (incremental)"
 # main은 필수 검사 룰셋이 걸려 있어 직접 push하지 않고 PR로 착지시킨다(.github/scripts/land-on-main.sh).

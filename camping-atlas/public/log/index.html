@@ -842,7 +842,7 @@
   }
 </style>
 <!-- 공통 틀(헤더·푸터·하단 탭·본문 폭) — 앱과 같은 파일. 이 쪽 스타일보다 뒤에 둬서 틀은 항상 같다. -->
-<link rel="stylesheet" href="../shell.css?v=592f3eaad9fc">
+<link rel="stylesheet" href="../shell.css?v=2b0ef7139e58">
 </head>
 <body>
 
@@ -869,7 +869,7 @@
           <a href="../" data-nav="home">찾기</a>
           <a href="../map" data-nav="map">지도</a>
           <a href="../themes" data-nav="themes">테마</a>
-          <a href="../compare" data-nav="compare">비교 <b class="nav-count" data-compare-count hidden>0</b></a>
+          <a href="../compare" data-nav="compare">비교</a>
           <a href="../saved" data-nav="saved">찜 <b class="nav-count" data-saved-count hidden>0</b></a>
         </nav>
       </div>
@@ -926,6 +926,14 @@
     </div>
     <div class="stat-card">
       <div class="stat-head">
+        <span>상세 진입</span>
+        <span class="stat-icon blue"><svg><use href="#i-search"/></svg></span>
+      </div>
+      <div class="stat-num" id="stat-views">-</div>
+      <div class="stat-sub">진입 업장 <b id="stat-view-camps">-</b>곳</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-head">
         <span>환경 정보</span>
         <span class="stat-icon red"><svg><use href="#i-user"/></svg></span>
       </div>
@@ -936,7 +944,7 @@
 
   <!-- 빠른 인기 캠핑장 인사이트 바 -->
   <section class="insights-bar" id="insights-bar">
-    <span class="insights-label">🔥 최근 반응 TOP 캠핑장:</span>
+    <span class="insights-label">🔥 많이 눌러본 업장:</span>
     <div class="insights-chips" id="top-camps-chips">
       <span class="chip-tag" style="opacity:0.6;">데이터 집계 중…</span>
     </div>
@@ -957,6 +965,9 @@
         </button>
         <button type="button" class="tab-pill" data-tab="comments">
           <span>댓글</span> <span class="tab-badge" id="tab-cnt-comments">0</span>
+        </button>
+        <button type="button" class="tab-pill" data-tab="views">
+          <span>상세 진입</span> <span class="tab-badge" id="tab-cnt-views">0</span>
         </button>
       </div>
 
@@ -1020,14 +1031,14 @@
       <a href="../" data-nav="home"><svg><use href="#shell-i-search"/></svg><span>찾기</span></a>
       <a href="../map" data-nav="map"><svg><use href="#shell-i-map"/></svg><span>지도</span></a>
       <a href="../themes" data-nav="themes"><svg><use href="#shell-i-themes"/></svg><span>테마</span></a>
-      <a href="../compare" data-nav="compare"><svg><use href="#shell-i-compare"/></svg><span>비교</span><b class="nav-count" data-compare-count hidden>0</b></a>
+      <a href="../compare" data-nav="compare"><svg><use href="#shell-i-compare"/></svg><span>비교</span></a>
       <a href="../saved" data-nav="saved"><svg><use href="#shell-i-heart"/></svg><span>찜</span><b class="nav-count" data-saved-count hidden>0</b></a>
     </nav>
 <!-- /shell:tabbar -->
 <!-- shell:icons -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="shell-i-tent" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M11 2.5h2l-.4.7L22 20h-20l9.4-16.8zM12 9.5 8 18h8z"/></symbol><symbol id="shell-i-search" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M10.5 2.5a8 8 0 0 1 6.4 12.8l4.6 4.6-1.8 1.8-4.6-4.6A8 8 0 1 1 10.5 2.5zm0 2.6a5.4 5.4 0 1 0 0 10.8 5.4 5.4 0 0 0 0-10.8z"/></symbol><symbol id="shell-i-map" viewBox="0 0 16 16"><path fill="currentColor" d="M5 2.223L1.235 4.576A.5.5 0 0 0 1 5v8.5a.5.5 0 0 0 .765.424L5 11.902zm1 9.586l4 2V4.191l-4-2zm8.765-.385L11 13.777v-9.68l3.235-2.021A.5.5 0 0 1 15 2.5V11a.5.5 0 0 1-.235.424"/></symbol><symbol id="shell-i-themes" viewBox="0 0 24 24"><path fill="currentColor" d="m17.402 4.723l2.718 10.142a2.75 2.75 0 0 1-1.945 3.368l-6.278 1.682a2.75 2.75 0 0 1-3.368-1.944L5.81 7.828A2.75 2.75 0 0 1 7.756 4.46l6.278-1.682a2.75 2.75 0 0 1 3.368 1.945m-6.438 3.019a1 1 0 1 0-1.932.517a1 1 0 0 0 1.932-.517m-5.163 3.917l1.762 6.57a3.73 3.73 0 0 0 1.002 1.713l-.443-.023a2.75 2.75 0 0 1-2.602-2.89zm-.925-1.479l-.355 6.796c-.037.699.12 1.363.424 1.94l-.414-.16a2.75 2.75 0 0 1-1.582-3.553z"/></symbol><symbol id="shell-i-compare" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M19.28 11.715L17.565 10H22v5.25c0 .69-.56 1.25-1.25 1.25H14V8.75c0-1.24-1.01-2.25-2.25-2.25H11V3.25c0-.69.56-1.25 1.25-1.25h8.5c.69 0 1.25.56 1.25 1.25v5.24h-4.435l1.715-1.715l-1.06-1.06l-2.645 2.645a1.26 1.26 0 0 0 0 1.77l2.645 2.645zM3.25 7.5h8.5c.69 0 1.25.56 1.25 1.25v12.01c0 .69-.56 1.25-1.25 1.25h-8.5c-.69 0-1.25-.56-1.25-1.25v-5.25h4.435L4.72 17.225l1.06 1.06l2.645-2.645a1.26 1.26 0 0 0 0-1.77L5.78 11.225l-1.06 1.06L6.435 14H2V8.75c0-.69.56-1.25 1.25-1.25" clip-rule="evenodd"/></symbol><symbol id="shell-i-heart" viewBox="0 0 24 24"><path d="M12 21.2 3.6 13A5.4 5.4 0 0 1 12 6.1a5.4 5.4 0 0 1 8.4 6.9z"/></symbol></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="shell-i-tent" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M11 2.5h2l-.4.7L22 20h-20l9.4-16.8zM12 9.5 8 18h8z"/></symbol><symbol id="shell-i-search" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M10.5 2.5a8 8 0 0 1 6.4 12.8l4.6 4.6-1.8 1.8-4.6-4.6A8 8 0 1 1 10.5 2.5zm0 2.6a5.4 5.4 0 1 0 0 10.8 5.4 5.4 0 0 0 0-10.8z"/></symbol><symbol id="shell-i-map" viewBox="-0.43 -0.43 16.87 16.87"><path fill="currentColor" d="M5 2.223L1.235 4.576A.5.5 0 0 0 1 5v8.5a.5.5 0 0 0 .765.424L5 11.902zm1 9.586l4 2V4.191l-4-2zm8.765-.385L11 13.777v-9.68l3.235-2.021A.5.5 0 0 1 15 2.5V11a.5.5 0 0 1-.235.424"/></symbol><symbol id="shell-i-themes" viewBox="0.98 0.83 21.02 21.02"><path fill="currentColor" d="m17.402 4.723l2.718 10.142a2.75 2.75 0 0 1-1.945 3.368l-6.278 1.682a2.75 2.75 0 0 1-3.368-1.944L5.81 7.828A2.75 2.75 0 0 1 7.756 4.46l6.278-1.682a2.75 2.75 0 0 1 3.368 1.945m-6.438 3.019a1 1 0 1 0-1.932.517a1 1 0 0 0 1.932-.517m-5.163 3.917l1.762 6.57a3.73 3.73 0 0 0 1.002 1.713l-.443-.023a2.75 2.75 0 0 1-2.602-2.89zm-.925-1.479l-.355 6.796c-.037.699.12 1.363.424 1.94l-.414-.16a2.75 2.75 0 0 1-1.582-3.553z"/></symbol><symbol id="shell-i-compare" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M19.28 11.715L17.565 10H22v5.25c0 .69-.56 1.25-1.25 1.25H14V8.75c0-1.24-1.01-2.25-2.25-2.25H11V3.25c0-.69.56-1.25 1.25-1.25h8.5c.69 0 1.25.56 1.25 1.25v5.24h-4.435l1.715-1.715l-1.06-1.06l-2.645 2.645a1.26 1.26 0 0 0 0 1.77l2.645 2.645zM3.25 7.5h8.5c.69 0 1.25.56 1.25 1.25v12.01c0 .69-.56 1.25-1.25 1.25h-8.5c-.69 0-1.25-.56-1.25-1.25v-5.25h4.435L4.72 17.225l1.06 1.06l2.645-2.645a1.26 1.26 0 0 0 0-1.77L5.78 11.225l-1.06 1.06L6.435 14H2V8.75c0-.69.56-1.25 1.25-1.25" clip-rule="evenodd"/></symbol><symbol id="shell-i-heart" viewBox="0 0 24 24"><path d="M12 21.2 3.6 13A5.4 5.4 0 0 1 12 6.1a5.4 5.4 0 0 1 8.4 6.9z"/></symbol></defs></svg>
 <!-- /shell:icons -->
-<script>/* 공통 헤더의 찜·비교 숫자(앱과 같은 저장소 값) */try{const n=(k)=>{try{return JSON.parse(localStorage.getItem(k)||"[]").length}catch{return 0}};for(const[sel,k]of[["[data-saved-count]","mc-saved"],["[data-compare-count]","mc-pick"]])document.querySelectorAll(sel).forEach((b)=>{b.textContent=n(k);b.hidden=!n(k)});}catch{}</script>
+<script>/* 공통 헤더의 찜 숫자만 표시한다. 비교는 개인 선택 상태를 숫자로 노출하지 않는다. */try{const n=()=>{try{return JSON.parse(localStorage.getItem("mc-saved")||"[]").length}catch{return 0}};document.querySelectorAll("[data-saved-count]").forEach((b)=>{b.textContent=n();b.hidden=!n()});}catch{}</script>
 
 <!-- 기기 정보 상세 모달 다이얼로그 -->
 <dialog class="modal-sheet" id="deviceModal">
@@ -1083,7 +1094,7 @@
 
   // ── 상태 변수 ─────────────────────────────────────────
   let state = {
-    tab: "all",           // all | adds | removes | comments
+    tab: "all",           // all | adds | removes | comments | views
     q: "",                // 검색어
     dateRange: "all",     // all | today | 3d | 7d
     deviceFilter: "all",  // all | mobile | desktop | bot
@@ -1092,6 +1103,8 @@
     timer: null,
     names: new Map(),     // campground_id -> name
     saves: [],
+    views: [],
+    viewCounts: [],
     comments: [],
     feedItems: [],
     filteredItems: []
@@ -1282,6 +1295,28 @@
     return legacy.json();
   }
 
+  async function loadViewLogs(limit = 800) {
+    const rpc = await fetch(`${SB.url}/rest/v1/rpc/safe_view_log_feed`, {
+      method: "POST", headers: { ...headers, "Content-Type": "application/json" },
+      body: JSON.stringify({ row_limit: limit })
+    });
+    if (rpc.ok) return rpc.json();
+    if (rpc.status !== 404) throw new Error(`조회 기록 조회 실패 (${rpc.status})`);
+    const legacy = await fetch(`${SB.url}/rest/v1/view_log?select=created_at,campground_id,entry_source,path,language,timezone,screen,platform&entry_source=eq.list&order=created_at.desc&limit=${encodeURIComponent(limit)}`, { headers });
+    if (legacy.ok) return legacy.json();
+    // 018만 적용된 구형 DB에서는 목록 진입을 식별할 수 없으므로 빈 결과로 둔다.
+    return [];
+  }
+
+  async function loadViewCounts(limit = 3000) {
+    const rpc = await fetch(`${SB.url}/rest/v1/rpc/safe_list_detail_counts`, {
+      method: "POST", headers: { ...headers, "Content-Type": "application/json" },
+      body: JSON.stringify({ row_limit: limit })
+    });
+    if (rpc.ok) return rpc.json();
+    return [];
+  }
+
   function nameOf(id) {
     if (!id) return "알 수 없는 캠핑장";
     return state.names.get(String(id)) || `캠핑장 #${id}`;
@@ -1298,8 +1333,10 @@
       const namesPromise = state.names.size ? Promise.resolve() : loadCampNames();
 
       // 2. Supabase 로그 병렬 조회
-      const [rawSaves, cr] = await Promise.all([
+      const [rawSaves, rawViews, rawViewCounts, cr] = await Promise.all([
         loadSaveLogs(400),
+        loadViewLogs(800).catch(() => []),
+        loadViewCounts(3000).catch(() => []),
         fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,created_at,is_deleted&order=created_at.desc&limit=200`, { headers })
       ]);
 
@@ -1309,6 +1346,13 @@
 
       // 찜 기록과 댓글 분리
       state.saves = rawSaves.filter((x) => x.action !== "comment");
+      state.views = (Array.isArray(rawViews) ? rawViews : []).filter((x) => x.entry_source === "list");
+      state.viewCounts = Array.isArray(rawViewCounts) ? rawViewCounts : [];
+      if (!state.viewCounts.length && state.views.length) {
+        const counts = new Map();
+        for (const v of state.views) counts.set(String(v.campground_id), (counts.get(String(v.campground_id)) || 0) + 1);
+        state.viewCounts = [...counts.entries()].map(([campground_id, view_count]) => ({ campground_id, view_count, last_view_at: state.views.find((v) => String(v.campground_id) === campground_id)?.created_at })).sort((a, b) => b.view_count - a.view_count);
+      }
       state.comments = rawComments;
 
       // 댓글에 매칭되는 기기 로그 연계
@@ -1378,6 +1422,20 @@
       });
     }
 
+    // 목록 카드에서 상세로 들어간 아이템만 표시
+    for (const v of state.views) {
+      items.push({
+        id: `v-${v.created_at}-${v.campground_id}`,
+        type: "view",
+        campId: String(v.campground_id),
+        campName: nameOf(v.campground_id),
+        createdAt: v.created_at,
+        timeMs: Date.parse(v.created_at) || 0,
+        device: parseDevice("", v.platform, v.screen),
+        raw: v
+      });
+    }
+
     // 최신순 정렬
     items.sort((a, b) => b.timeMs - a.timeMs);
     state.feedItems = items;
@@ -1399,6 +1457,8 @@
     const delComments = totalComments - liveComments;
 
     const metaCount = state.saves.filter((x) => x.screen || x.platform || x.timezone || x.language).length;
+    const totalViews = state.viewCounts.reduce((sum, x) => sum + Number(x.view_count || 0), 0);
+    const viewCamps = state.viewCounts.length;
 
     document.getElementById("stat-total-saves").textContent = totalSaves.toLocaleString();
     document.getElementById("stat-today-saves").textContent = todaySaves.toLocaleString();
@@ -1411,22 +1471,23 @@
     document.getElementById("stat-del-comments").textContent = delComments.toLocaleString();
 
     document.getElementById("stat-meta-count").textContent = metaCount.toLocaleString();
+    document.getElementById("stat-views").textContent = totalViews.toLocaleString();
+    document.getElementById("stat-view-camps").textContent = viewCamps.toLocaleString();
 
     // 탭 카운트 갱신
     document.getElementById("tab-cnt-all").textContent = state.feedItems.length;
     document.getElementById("tab-cnt-adds").textContent = addSaves;
     document.getElementById("tab-cnt-removes").textContent = removeSaves;
     document.getElementById("tab-cnt-comments").textContent = totalComments;
+    document.getElementById("tab-cnt-views").textContent = totalViews;
   }
 
   // ── 인기 캠핑장 칩 ─────────────────────────────────────
   function renderTopCamps() {
-    const counts = new Map();
-    for (const item of state.feedItems) {
-      if (!item.campId) continue;
-      counts.set(item.campId, (counts.get(item.campId) || 0) + 1);
-    }
-    const sorted = Array.from(counts.entries()).sort((a, b) => b[1] - a[1]).slice(0, 5);
+    const sorted = state.viewCounts
+      .map((x) => [String(x.campground_id), Number(x.view_count || 0)])
+      .filter(([, count]) => count > 0)
+      .slice(0, 10);
     const box = document.getElementById("top-camps-chips");
     if (!sorted.length) {
       box.innerHTML = `<span style="font-size:0.8rem; color:var(--ink-3);">기록 없음</span>`;
@@ -1462,6 +1523,7 @@
       if (tab === "adds" && item.type !== "add") return false;
       if (tab === "removes" && item.type !== "remove") return false;
       if (tab === "comments" && item.type !== "comment" && item.type !== "deleted") return false;
+      if (tab === "views" && item.type !== "view") return false;
 
       // 2. 날짜 필터
       if (dateRange === "today" && (now - item.timeMs > 86400000)) return false;
@@ -1493,7 +1555,7 @@
     const loadMoreBtn = document.getElementById("btn-load-more");
 
     const items = state.filteredItems;
-    countTxt.textContent = `조회 결과 ${items.length.toLocaleString()}건 (전체 ${state.feedItems.length.toLocaleString()}건 중)`;
+      countTxt.textContent = `진입 결과 ${items.length.toLocaleString()}건 (전체 ${state.feedItems.length.toLocaleString()}건 중)`;
 
     if (!items.length) {
       box.innerHTML = `
@@ -1532,6 +1594,7 @@
         if (item.type === "remove") { badgeClass = "badge-remove"; badgeText = "- 찜해제"; }
         else if (item.type === "comment") { badgeClass = "badge-comment"; badgeText = "💬 댓글"; }
         else if (item.type === "deleted") { badgeClass = "badge-deleted"; badgeText = "🗑 삭제됨"; }
+        else if (item.type === "view") { badgeClass = "badge-comment"; badgeText = "↗ 상세 진입"; }
 
         html += `
           <article class="log-card" data-camp-id="${esc(item.campId)}">

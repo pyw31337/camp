@@ -3,7 +3,9 @@
 # 사용: 커밋을 만든 뒤  bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" <label>
 #  - 같은 label은 브랜치 bot/data-<label> 하나와 열린 PR 하나로 모인다(하루 PR 수를 줄임).
 #  - GITHUB_TOKEN으로 만든 PR은 워크플로를 깨우지 않으므로 web-quality.yml을 workflow_dispatch로 직접 돌리고,
-#    두 검사가 그 커밋에서 성공하면 바로 병합(merge commit)한다. 실패·시간초과면 PR을 열어둔 채 실패로 끝낸다.
+#    **방금 요청한 실행**의 Lint and build·Rail swipe가 모두 성공하면 바로 병합(merge commit)한다.
+#    커밋 상태 전체를 읽으면 과거/중복 실행의 실패 상태를 새 실행 실패로 오인할 수 있으므로 쓰지 않는다.
+#    실패·시간초과면 PR을 열어둔 채 실패로 끝낸다.
 # 필요 권한: contents: write, pull-requests: write, actions: write
 set -euo pipefail
 LABEL="${1:?label}"
@@ -20,8 +22,12 @@ if ! git diff --quiet || ! git diff --cached --quiet; then
   git stash push -q -m "land-leftovers" && trap 'git stash pop -q || echo "::warning::land-leftovers stash 복원 실패"' EXIT
 fi
 pushed=""
+baseline_sha=""
 for i in 1 2 3 4 5; do
   git fetch -q origin main
+  # field-guard 복원과 뒤따르는 workflow_dispatch 검증은 같은 main 스냅샷을 기준으로 한다.
+  # 수집 중 다른 봇이 main을 전진시켜도 이미 검증한 값을 거짓 손실로 판단하지 않는다.
+  baseline_sha="$(git rev-parse origin/main)"
   git fetch -q origin "+refs/heads/${BR}:refs/remotes/origin/${BR}" 2>/dev/null || true
   # 새 결과(이 실행의 커밋)를 최신 main 위로 옮긴다. 충돌은 새 결과 우선.
   git rebase -q -X theirs origin/main
@@ -51,16 +57,32 @@ if [ -z "$PR" ]; then
   PR="$(gh pr list -R "$REPO" --head "$BR" --base main --state open --json number -q '.[0].number')"
 fi
 echo "PR #${PR} ← ${BR} @ ${SHA:0:9}"
-gh workflow run web-quality.yml -R "$REPO" --ref "$BR"
+gh workflow run web-quality.yml -R "$REPO" --ref "$BR" -f baseline_sha="$baseline_sha"
 deadline=$(( $(date +%s) + ${LAND_TIMEOUT_SEC:-1800} ))
+poll="${LAND_POLL_SEC:-15}"
+run_id=""
 while :; do
-  sleep 30
-  st="$(gh api "repos/${REPO}/commits/${SHA}/check-runs?per_page=100" -q '[.check_runs[]|select(.name=="Lint and build" or .name=="Rail swipe")|{n:.name,s:.status,c:.conclusion}]')"
-  ok=$(echo "$st" | jq '[.[]|select(.s=="completed" and .c=="success")|.n]|unique|length')
-  bad=$(echo "$st" | jq '[.[]|select(.s=="completed" and .c!="success")]|length')
-  if [ "$ok" = 2 ]; then break; fi
-  if [ "$bad" != 0 ]; then echo "::error::필수 검사 실패 — PR #${PR}를 열어둡니다: $st"; exit 1; fi
+  # workflow_dispatch는 실행 ID를 돌려주지 않는다. 같은 SHA·이벤트인 가장 최근 실행만 잡는다.
+  # PR 체크/상태 API는 과거에 남은 같은 이름의 결과까지 섞일 수 있으므로 여기서는 사용하지 않는다.
+  if [ -z "$run_id" ]; then
+    run_id="$(gh api "repos/${REPO}/actions/workflows/web-quality.yml/runs?event=workflow_dispatch&branch=${BR}&per_page=100" 2>/dev/null \
+      | jq -r --arg sha "$SHA" '[.workflow_runs[] | select(.head_sha == $sha)] | sort_by(.created_at) | last | .id // empty')"
+    if [ -n "$run_id" ]; then echo "Web quality 실행 #${run_id} 확인"; fi
+  fi
+  if [ -n "$run_id" ]; then
+    run="$(gh api "repos/${REPO}/actions/runs/${run_id}")"
+    status="$(echo "$run" | jq -r '.status')"
+    conclusion="$(echo "$run" | jq -r '.conclusion // empty')"
+    if [ "$status" = "completed" ]; then
+      jobs="$(gh api "repos/${REPO}/actions/runs/${run_id}/jobs?per_page=100" -q '[.jobs[] | select(.name=="Lint and build" or .name=="Rail swipe") | {n:.name,s:.status,c:.conclusion}]')"
+      ok=$(echo "$jobs" | jq '[.[] | select(.s=="completed" and .c=="success") | .n] | unique | length')
+      if [ "$conclusion" = "success" ] && [ "$ok" = 2 ]; then break; fi
+      echo "::error::방금 요청한 Web quality 실행이 실패했습니다 — PR #${PR}를 열어둡니다 (run #${run_id}, workflow=${conclusion}): ${jobs}"
+      exit 1
+    fi
+  fi
   [ "$(date +%s)" -lt "$deadline" ] || { echo "::error::필수 검사 시간초과 — PR #${PR}"; exit 1; }
+  sleep "$poll"
 done
 for i in 1 2 3 4; do
   if gh pr merge "$PR" -R "$REPO" --merge --match-head-commit "$SHA"; then echo "병합 완료: PR #${PR}"; exit 0; fi

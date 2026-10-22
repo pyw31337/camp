@@ -449,6 +449,12 @@ jobs:
           DATA_GO_KR_SERVICE_KEY="${{ github.event_name != 'pull_request' && secrets.DATA_GO_KR_SERVICE_KEY || '' }}" node pipeline/scripts/collect-urban-parks.mjs || true
           KAKAO_REST_API_KEY="${{ github.event_name != 'pull_request' && secrets.KAKAO_REST_API_KEY || '' }}" node pipeline/scripts/geocode-dayuse-osm.mjs || true
           node pipeline/scripts/apply-dayuse-seed.mjs
+          # 전국휴양림표준데이터(registry/public-leisure.json): 국립·공립·사립 휴양림을 카탈로그에 연결·추가, 상세 휴양림 정보(2026-10-22).
+          node pipeline/scripts/build-public-leisure.mjs
+          # 주변 공공시설(휴양림·박물관·수영장·실내 놀이, 공공데이터포털)·휴게소 중복 정리(2026-10-22)
+          node pipeline/scripts/apply-public-nearby.mjs
+          # 후기 사진 내용 판정(registry/photo-judgments.json) → 걸러진 사진에 ng 표시(화면 갤러리·대표에서 숨김)
+          node pipeline/scripts/apply-photo-judgments.mjs
           # 발행 전 상식 정리(공원에 캠핑장 요금·입퇴실 금지, 관광공사 광고 요금 제거, 숯 문구 모순, 좌표 오타). CI가 --check로 막는다.
           # t41u: 수기·공식 확정 값을 재계산 위에 다시 얹는다(registry/curated-pins.json)
           node pipeline/scripts/apply-pins.mjs
@@ -469,6 +475,8 @@ jobs:
           node pipeline/scripts/report-coverage.mjs
           # 모든 원천을 (캠핑장·속성·값·등급·원천·근거) 원자 사실로 풀어 묶음별 NDJSON(data/facts)으로 쓴다. 여러 에이전트의 공유 원장.
           node pipeline/scripts/build-fact-store.mjs
+          # 데이터 품질 장부(docs/DATA_QUALITY_PROCESS.md): 신뢰도·확증·충돌 대기열·어제 대비 회귀를 data/quality에 남긴다(회귀는 경고).
+          node pipeline/scripts/quality-ledger.mjs
           # PR은 생성만 검사한다. main은 catalog·explorer를 원자적으로 갱신한다.
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             echo "PR에서는 공개 생성물을 커밋하지 않습니다."; exit 0
@@ -484,7 +492,7 @@ jobs:
           # 화면 원본(design/renewal)은 실행 시작 시점이 아니라 최신 main 것으로 발행본을 다시 쓴다(긴 실행 중 머지된 화면 변경을 되돌리지 않게).
           git checkout origin/main -- design/renewal scripts/publish-explorer-pages.mjs && node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public/explore
           node pipeline/scripts/coverage-guard.mjs "$RUNNER_TEMP/base-meta.json" camping-atlas/public/explore/data/meta.json
-          git add camping-atlas/public/data camping-atlas/public/explore data/facts pipeline/registry/naver-usage.json pipeline/registry/dayuse-osm.json pipeline/registry/urban-parks.json
+          git add camping-atlas/public/data camping-atlas/public/explore data/facts data/quality pipeline/registry/naver-usage.json pipeline/registry/dayuse-osm.json pipeline/registry/urban-parks.json
           git add pipeline/registry/merge-review.ndjson 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "공개 데이터 변경 없음."; exit 0
@@ -523,6 +531,12 @@ jobs:
         # data/facts(원자 사실)가 db/011 제약(확정 등급은 원천 URL 필수 등)을 지키는지 실데이터로 확인한다.
         if: always()
         run: |
+          # land-on-main은 긴 수집 중 rebase·PR 검증을 수행한다. 러너의 npm 링크가
+          # 그 과정 뒤 사라진 경우에도, 마지막 DB 검증을 모듈 누락으로 끝내지 않는다.
+          if ! node -e 'require.resolve("pg")' >/dev/null 2>&1; then
+            echo "::notice title=Pipeline dependencies restored::pg 모듈이 없어 검증 전에 npm ci를 다시 실행합니다."
+            npm ci
+          fi
           if [ ! -f ../data/facts/manifest.json ]; then echo "::notice::사실 저장소가 없어 건너뜁니다."; exit 0; fi
           npm run db:migrate
           node scripts/import-facts-postgres.mjs

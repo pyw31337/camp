@@ -52,13 +52,17 @@
     "build:nearby-facts": "node scripts/build-nearby-facts.mjs",
     "build:db": "node scripts/build-database.mjs",
     "build:pricing-facts": "node scripts/build-site-pricing-facts.mjs",
+    "audit:operator-content": "node scripts/audit-operator-content.mjs --apply",
+    "sanitize:display-text": "node scripts/sanitize-display-text.mjs --apply",
     "db:import-supabase": "node scripts/import-all-to-supabase.mjs",
     "check:billing": "node scripts/check-external-services-billing.mjs",
     "sync:forest": "node scripts/sync-forest-recreation.mjs",
+    "sync:public-leisure": "node scripts/sync-public-leisure.mjs",
     "sync:best": "node scripts/sync-best-campgrounds.mjs",
     "match:forest": "node scripts/match-forest-recreation.mjs",
     "normalize:local-fees": "node scripts/normalize-local-fees.mjs",
-    "prioritize:operator-gaps": "node scripts/prioritize-operator-gaps.mjs"
+    "prioritize:operator-gaps": "node scripts/prioritize-operator-gaps.mjs",
+    "audit:public-data": "node scripts/audit-public-data.mjs"
   },
   "dependencies": {
     "pg": "8.23.1",

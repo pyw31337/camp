@@ -207,10 +207,11 @@ if (placeSource) {
     const description = [`${where}${kinds ? ` ${kinds}` : ""}${c.du ? " 당일 나들이" : " 캠핑장"}`, fee ? `1박 ${fee}` : "", "사이트 규격·전기·화로·주차·주변 정보와 공식 예약처를 한눈에"].filter(Boolean).join(" · ").slice(0, 150);
     const url = `${SITE}place/${encodeURIComponent(id)}/`;
     const image = imageOf(c);
-    const head = `<meta name="description" content="${attr(description)}"><link rel="canonical" href="${attr(url)}">`
+    const imageType = /\.png(?:\?|$)/i.test(image) ? "image/png" : /\.webp(?:\?|$)/i.test(image) ? "image/webp" : "image/jpeg";
+    const head = `<meta name="description" content="${attr(description)}"><link rel="canonical" href="${attr(url)}"><link rel="icon" type="image/svg+xml" href="${attr(`${SITE}favicon.svg`)}"><link rel="apple-touch-icon" sizes="180x180" href="${attr(`${SITE}images/apple-touch-icon.png`)}"><link rel="manifest" href="${attr(`${SITE}manifest.webmanifest`)}">`
       + `<meta property="og:type" content="website"><meta property="og:site_name" content="모여라 캠핑"><meta property="og:locale" content="ko_KR">`
       + `<meta property="og:title" content="${attr(title)}"><meta property="og:description" content="${attr(description)}"><meta property="og:url" content="${attr(url)}">`
-      + `<meta property="og:image" content="${attr(image)}"><meta property="og:image:secure_url" content="${attr(image)}"><meta property="og:image:alt" content="${attr(c.name)}">`
+      + `<meta property="og:image" content="${attr(image)}"><meta property="og:image:secure_url" content="${attr(image)}"><meta property="og:image:type" content="${imageType}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${attr(c.name)}">`
       + `<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${attr(title)}"><meta name="twitter:description" content="${attr(description)}"><meta name="twitter:image" content="${attr(image)}">`;
     const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${attr(title)}</title>${head}${STUB_JS}</head><body><h1>${attr(c.name)}</h1><p>${attr(description)}</p><p><a href="${attr(url)}">모여라 캠핑에서 보기</a></p></body></html>`;
     // 중복 등록을 합친 옛 id(c.mg)도 같은 미리보기(canonical은 남은 곳) — 예전에 공유된 링크 보호.
@@ -275,6 +276,7 @@ if (rawTarget) {
 }
 
 await cp(`${dataDir}/campgrounds.json`, `${out}data/campgrounds.json`);
+if (existsSync(`${dataDir}/entity-quality.json`)) await cp(`${dataDir}/entity-quality.json`, `${out}data/entity-quality.json`);
 await cp(`${dataDir}/meta.json`, `${out}data/meta.json`);
 if (existsSync(`${dataDir}/featured.json`)) await cp(`${dataDir}/featured.json`, `${out}data/featured.json`);
 if (existsSync(`${dataDir}/openings.json`)) await cp(`${dataDir}/openings.json`, `${out}data/openings.json`);

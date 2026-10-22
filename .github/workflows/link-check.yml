@@ -30,7 +30,7 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 150
     defaults:
       run:
         working-directory: pipeline
@@ -45,7 +45,21 @@ jobs:
       - run: node --test test/link-check.test.mjs test/card-fallback.test.mjs
       - name: Check links
         run: node scripts/check-links.mjs --max-age-days "${{ github.event.inputs.max_age_days || '7' }}"
-      # 공식 사진이 없는 곳의 카드 사진: 상세의 검색 썸네일(130px)을 잠깐 받아 배치도·안내판·야간 사진을 거른다(저장 없음).
+      # 후기 사진 내용 판정(CLIP, lib/photo-judge.mjs, 2026-10-22): 음식·인물·차 안·글 캡처는 대표·갤러리에서 뺀다. 무료·로컬 CPU 모델.
+      - name: Install photo judge (transformers.js)
+        continue-on-error: true
+        run: npm i --no-save @huggingface/transformers@3.8.1
+      - uses: actions/cache@v4
+        with:
+          path: pipeline/.cache/hf
+          key: hf-clip-vit-base-patch32-v1
+      - name: Judge review photos (batch, resumable)
+        continue-on-error: true
+        timeout-minutes: 50
+        run: node scripts/judge-review-photos.mjs
+        env:
+          PHOTO_JUDGE_MAX: "3000"
+      # 공식 사진이 없는 곳의 카드 사진: 상세의 검색 썸네일(130px)을 잠깐 받아 배치도·안내판·야간 사진과 음식·인물 사진을 거른다(저장 없음).
       - name: Pick card photos for places without official photos
         continue-on-error: true
         run: node scripts/pick-card-fallback.mjs
@@ -57,6 +71,7 @@ jobs:
           [ -f registry/link-health.json ] || exit 0
           git add registry/link-health.json
           [ -f registry/card-fallback.json ] && git add registry/card-fallback.json
+          [ -f registry/photo-judgments.json ] && git add registry/photo-judgments.json
           if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
           git commit -m "chore(data): refresh link health"
           bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" link-check

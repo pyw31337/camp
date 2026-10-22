@@ -36,6 +36,8 @@ export const SOURCES = {
   // 당일 나들이 장소(공원·민간 캠크닉) 시드 — 관리기관 공지·업장 예약 화면 원문 URL·확인일.
   dayuse_seed: "당일 나들이 장소 원문(관리기관 공지·업장 안내)",
   gocamping_detail: "고캠핑 상세 화면(업장 등록 이용안내·요금표)",
+  // 데이터 품질 표준(docs/DATA_QUALITY_PROCESS.md) 4단계 ‘검토’의 판정 — data/quality/decisions.ndjson. 원문 근거 URL 필수.
+  agent_review: "에이전트·운영자 검토 판정(원문 대조, 품질 검토 대기열)",
 };
 
 const ENV = { 산: "MOUNTAIN", 숲: "FOREST", 강: "RIVER", 호수: "LAKE", 계곡: "VALLEY", 해변: "BEACH", 섬: "ISLAND", 도심: "CITY" };

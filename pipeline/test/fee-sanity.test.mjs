@@ -37,7 +37,12 @@ test("공식 홈페이지 재확인: 추가인원·전기 문장은 1박 요금�
 });
 test("배포 단계 적용 후 민간 1박 2만원 미만 요금이 남지 않음(원본 파일은 그대로)", () => {
   const dir = mkdtempSync(join(tmpdir(), "fee-")); cpSync(new URL("../../camping-atlas/public/explore/data/campgrounds.json", import.meta.url), join(dir, "campgrounds.json"));
-  assert.ok(applyFeeSanity(dir) > 50);
+  const before = JSON.parse(readFileSync(join(dir, "campgrounds.json"), "utf8"));
+  const badBefore = before.filter((c) => c.fee?.min > 0 && c.fee.min < feeFloor(c)).length;
+  const changed = applyFeeSanity(dir);
+  // 이미 발행 단계에서 정제된 스냅샷은 0건이어도 정상이다. 아직 원본 저가 행이
+  // 남아 있는 스냅샷에서는 모든 행이 한 번에 정제됐는지를 검증한다.
+  assert.equal(changed, badBefore);
   const all = JSON.parse(readFileSync(join(dir, "campgrounds.json"), "utf8"));
   assert.equal(all.find((c) => c.id === "362").fee.min, 15000); // 구미시 공식 요금 유지
   const bad = all.filter((c) => c.fee?.min > 0 && c.fee.min < feeFloor(c));

@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
-  CAPS, buildQuery, buildSocialRecord, distinctiveTokens, isRelevant, refilterSocial, reviewScore, kakaoSearch, nameCore, normalizeDoc,
+  CAPS, buildQuery, buildVideoQuery, buildSocialRecord, distinctiveTokens, isRelevant, refilterSocial, reviewScore, kakaoSearch, nameCore, normalizeDoc,
   normalizeImage, normalizeVclip, pickDue, regionStem, searchUrl, stripHtml, summarize, youtubeId,
 } from "../lib/social-search.mjs";
 
@@ -58,6 +58,11 @@ test("buildQuery: 법인 접두어 제거, 시군구 약칭, 일반어 없으면
   assert.equal(buildQuery({ name: "(주)솔바람 오토캠핑장", address: { sigungu: "양평군" } }), "솔바람 오토캠핑장 양평");
   assert.equal(buildQuery({ name: "옥화자연휴양림 국민여가오토캠핑장", address: { sigungu: "청주시 상당구" } }), "옥화자연휴양림 국민여가오토캠핑장 청주");
   assert.equal(buildQuery({ name: "  " }), null);
+});
+
+test("buildVideoQuery: 동영상은 시설명만 검색한다", () => {
+  assert.equal(buildVideoQuery({ name: "봉황자연휴양림 숲속야영장", address: { sigungu: "충주시" } }), "봉황자연휴양림 숲속야영장");
+  assert.equal(buildVideoQuery({ name: "  " }), null);
 });
 
 test("isRelevant: 이름 포함·광고·짧은 이름·다른 캠핑장 제목", () => {

@@ -1,5 +1,7 @@
 # 공공데이터(캠핑·편의점) 수집·활용 기획 (2026-10-16)
 
+> 2026-10-22 정정(소유자): `k-data.aljal.kr` 공개 색인 수집(`sync-kdata-public`)은 robots.txt가 AI 크롤러를 막아 폐지했다. 휴양림·박물관미술관·공공시설개방(수영장·실내 놀이)은 공공데이터포털 표준데이터(`sync-public-leisure.mjs` → `registry/public-leisure.json` → `lib/public-poi.mjs`)로, 휴게소·졸음쉼터는 `sync:rest-stops`로 받아 주변 `nearby.public`에 연결한다. 처리 절차는 `docs/DATA_QUALITY_PROCESS.md`.
+
 > 대상: 소유자가 지정한 data.go.kr 데이터셋·검색 결과(키워드 `캠핑`, `편의점` × 파일·API·표준·연계).<br>
 > 목록 원장: `pipeline/registry/public-datasets.json` (88개, 데이터셋마다 활용처·우선순위·채울 속성).<br>
 > 모든 에이전트(Claude·Codex·Gemini) 공통 기준. 데이터는 사실 저장소(`docs/FACT_STORE.md`)로 들어가고, 화면은 거기서 읽는다.
@@ -113,3 +115,22 @@ Gemini가 같은 날 `docs/PUBLIC_DATA_INTEGRATION_PLAN.md`와 모듈 `pipeline/
 - 오래된 기준일(예: 2020년)은 값 옆에 기준 연도를 보인다. 최신 원천과 충돌하면 둘 다 남긴다.
 - 공공누리 사진은 출처(촬영자·한국관광공사)를 화면에 표시한다. 1유형 외 유형(변경 금지·상업 금지)은 따로 표시한다.
 - 과거 예약 통계는 “붐빔 경향”으로만 쓰고 빈자리·예약 가능으로 표시하지 않는다.
+
+## 6. 2026-10-22 공공 원천 추가 감사 및 연결
+
+이번 감사에서 기존 화면에 이미 연결된 여행 참고 데이터와 원천 원장의 누락을 맞췄다. `public-datasets.json`에 아래 API를 `in_use`로 등록하고, `pipeline/scripts/audit-public-data.mjs`가 발행 캐시의 실제 커버리지를 점검한다.
+
+| 원천 | 현재 연결 | 화면 사용처 |
+| --- | --- | --- |
+| [환경부 전기자동차 충전소 정보(15076352)](https://www.data.go.kr/data/15076352/openapi.do) | `sync:extras`가 전국 응답을 완주했을 때 공식 충전소, 실패·키 없음이면 OSM 캐시 | 상세 주변 `충전소` 탭, 급속/완속·거리 |
+| [국립중앙의료원 응급의료기관(15000563)](https://www.data.go.kr/data/15000563/openapi.do) | 캠핑장별 가장 가까운 응급실과 전화·거리 | 상세 주변 `병원` 탭 |
+| [반려동물 동반(15135102)](https://www.data.go.kr/data/15135102/openapi.do), [무장애 여행(15101897)](https://www.data.go.kr/data/15101897/openapi.do) | 캠핑장 좌표·이름 매칭 후 상세 참고 정보 | 반려견·무장애 여행 참고 |
+| [두루누비(15101974)](https://www.data.go.kr/data/15101974/openapi.do), [관광지 집중률(15128555)](https://www.data.go.kr/data/15128555/openapi.do) | 시군 매칭·상대 지표(절대 방문객/예약 가능으로 표시하지 않음) | 걷기길·주말 혼잡 참고 |
+| [한국도로공사 OpenAPI](https://data.ex.co.kr/guidedown/openoasis_guide.pdf) | 휴게소 위치·편의시설·유가에 더해 대표 메뉴 API를 병합하도록 확장 | 가는 길 휴게소 카드의 대표 메뉴·가격(키가 있을 때만) |
+
+실행 결과는 `pipeline/out/public-data-audit.json`에 `connected/fallback/empty`로 남긴다. 공식 API 키가 없는 로컬 실행에서 데이터를 만들어 내지 않으며, 직전 캐시나 OSM 보조 자료를 사용했다는 사실을 화면 원천 등급으로 구분한다. 대표 메뉴도 `EX_API_KEY`가 제공될 때만 수집하고, 메뉴·가격이 없는 휴게소에 값을 추정하지 않는다.
+
+### 6-2. 전국휴양림표준데이터 → 카탈로그(2026-10-22, Claude)
+- `pipeline/scripts/sync-public-leisure.mjs`(주간) → `registry/public-leisure.json`: 휴양림 186(tn_pubr_public_rcrfrst_api, 국유림/공유림/사유림 → 국립/공립/사립), 박물관·미술관 1,073, 공공시설개방(수영장·실내 놀이, 이름 규칙 `lib/leisure-filter.mjs`).
+- `build-public-leisure.mjs`(data-sync): 휴양림을 카탈로그에 연결·추가하고 상세 `d.rf`를 둔다. 주변 칩은 `nearby.public`이 맡는다.
+- 휴게소·관광지 표준데이터는 인증키 미등록(‘등록되지 않은 서비스키’) — 공공데이터포털에서 활용 신청 필요.

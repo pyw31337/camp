@@ -7,6 +7,7 @@ import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
+import { publicLeisureRecords } from "../lib/public-poi.mjs";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
 import { OVERPASS_SERVERS, loadOsmExtract } from "../lib/overpass.mjs";
 import {
@@ -134,8 +135,14 @@ const restPois = (restRaw?.stops ?? []).map(normalizeRestStop).filter(Boolean);
 if (!restRaw) warn("휴게소 없음", "out/rest-stops.json 없음(sync:rest-stops 먼저) — rest 비움");
 console.log(`휴게소·졸음쉼터 ${restPois.length}곳`);
 
+// 공공데이터포털 표준데이터(휴양림·박물관미술관·공공시설개방 수영장·실내 놀이): sync-public-leisure.mjs가 주간으로 받는다.
+// 2026-10-22 소유자: k-data 공개 색인(robots.txt가 AI 크롤러를 막음) 수집을 공공데이터포털로 교체.
+const publicRaw = await readJson(`${fileURLToPath(new URL("../registry/public-leisure.json", import.meta.url))}`, null);
+const publicPois = publicLeisureRecords(publicRaw);
+console.log(`공공시설 공개 색인 ${publicPois.length}곳`);
+
 // 4) 계산·기록
-const nearby = computeNearby(campgrounds, { tour: tourPois, osm: osmPois, rest: restPois });
+const nearby = computeNearby(campgrounds, { tour: tourPois, osm: osmPois, rest: restPois, public: publicPois });
 const filled = Object.fromEntries(Object.keys(NEARBY_RULES).map((k) => [k, Object.values(nearby).filter((n) => n[k]?.length).length]));
 console.log(`주변 맥락 ${Object.keys(nearby).length}곳 · 분류별 1건 이상: ${JSON.stringify(filled)}`);
 
@@ -143,6 +150,7 @@ const sources = [
   { ...SOURCES.tour, fetched_at: tourDates.at(-1) ?? null, oldest_fetched_at: tourDates[0] ?? null, coverage: Object.fromEntries(Object.keys(TOUR_TYPES).map((t) => [t, tourCache.types[t]?.items?.length ?? null])) },
   { ...SOURCES.osm, fetched_at: osmDates.at(-1) ?? null, oldest_fetched_at: osmDates[0] ?? null, attribution: OSM_ATTRIBUTION, coverage: { tiles_total: tiles.length, tiles_cached: usedTiles.length, pois: osmPois.length } },
   { ...SOURCES.rest, fetched_at: restRaw?.generated_at ?? null, coverage: { stops: restPois.length } },
+  { ...SOURCES.public, fetched_at: publicRaw?.collected_at ?? null, coverage: { records: publicPois.length, categories: [...new Set(publicPois.map((x) => x.category))] } },
 ];
 await writeFile(`${out}campground-nearby.json`, JSON.stringify({
   generated_at: fetchedAt,

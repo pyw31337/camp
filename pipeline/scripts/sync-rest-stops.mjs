@@ -3,7 +3,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
-import { EX_SOURCE, buildExServiceAreas, fetchExAll } from "../lib/ex-rest-areas.mjs";
+import { EX_SOURCE, buildExServiceAreas, fetchExAll, normalizeBestFoods } from "../lib/ex-rest-areas.mjs";
 import { overpassCached } from "../lib/overpass.mjs";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
 import { FACILITY_FEE, enrichWithNearby, mergeStops, normalizeDrowsyShelter, normalizeOsmStop } from "../lib/rest-stops.mjs";
@@ -45,18 +45,22 @@ if (key) {
 // 예제 키나 비공식 값을 실서비스 가격으로 저장하지 않는다.
 let exCount = 0;
 let exFuel = 0;
+let exBestFood = 0;
 if (process.env.EX_API_KEY) {
   try {
-    const [location, convenience, fuel] = await Promise.all([
+    const [location, convenience, fuel, bestFoodRaw] = await Promise.all([
       fetchExAll("locationinfo/locationinfoRest", process.env.EX_API_KEY),
       fetchExAll("business/conveniServiceArea", process.env.EX_API_KEY),
       fetchExAll("business/curStateStation", process.env.EX_API_KEY),
+      fetchExAll("restinfo/restBestfoodList", process.env.EX_API_KEY),
     ]);
-    const serviceAreas = buildExServiceAreas({ location, convenience, fuel, checkedAt: fetchedAt });
+    const bestFood = normalizeBestFoods(bestFoodRaw);
+    const serviceAreas = buildExServiceAreas({ location, convenience, fuel, bestFood, checkedAt: fetchedAt });
     exCount = serviceAreas.length;
     exFuel = serviceAreas.filter((stop) => stop.fuel).length;
+    exBestFood = serviceAreas.filter((stop) => stop.best_foods?.length).length;
     official.push(...serviceAreas);
-    console.log(`한국도로공사 휴게소 ${exCount}곳, 주유 가격 연결 ${exFuel}곳`);
+    console.log(`한국도로공사 휴게소 ${exCount}곳, 주유 가격 연결 ${exFuel}곳, 대표 메뉴 연결 ${exBestFood}곳`);
   } catch (error) { warn("한국도로공사 OpenAPI 호출 실패", error.message); }
 } else {
   warn("EX_API_KEY 없음", "공식 휴게소·주유 가격 수집을 건너뜁니다. OSM·졸음쉼터 데이터만 사용합니다.");
@@ -87,6 +91,6 @@ await writeFile(`${out}rest-stops.json`, JSON.stringify({
   notes: "fee: FREE=무료, PAID=유료, null=시설마다 다름(현장·공식 확인). 졸음쉼터는 모두 무료. 주유 가격은 fuel.checked_at 시점의 한국도로공사 공시가.",
   sources: EX_SOURCE,
   attribution: ["한국도로공사 고속도로 공공데이터 포털", "전국졸음쉼터표준데이터(한국도로공사)", "© OpenStreetMap contributors (ODbL)"],
-  ex_service_areas: exCount, ex_with_fuel_price: exFuel,
+  ex_service_areas: exCount, ex_with_fuel_price: exFuel, ex_with_best_food: exBestFood,
   count: merged.length, by_kind: byKind, stops: merged,
 }));

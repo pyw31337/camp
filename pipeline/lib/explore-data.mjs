@@ -166,7 +166,7 @@ export function buildExploreRecords(camps, toilets, fees, seoul = new Map(), not
       id,
       name: c.name,
       sido: c.address?.sido ?? null,
-      sigungu: c.address?.sigungu ?? null,
+      sigungu: c.address?.sigungu || sigunguFromAddr([c.address?.line1, c.address?.line2].filter(Boolean).join(" ")),
       area: areaOf(c.address?.sido),
       addr: [c.address?.line1, c.address?.line2].filter(Boolean).join(" ") || null,
       lat: Math.round(c.location.lat * 1e6) / 1e6,
@@ -350,4 +350,10 @@ export function buildProviders(registry, calendar, now = new Date()) {
     rules: (registry.rules ?? []).filter((r) => r.provider_id === p.id).map((r) => ({ id: r.id, label: r.label, summary: r.summary, source: r.source })),
     events: upcoming.filter((e) => e.provider_id === p.id).slice(0, 12).map((e) => ({ type: e.type, at: e.at, time_known: e.time_known, label: e.label, stay: e.stay ?? null, needs_verification: e.needs_verification, source: e.source })),
   }));
+}
+
+/** 주소 문장에서 시·군·구를 꺼낸다(등록값에 시군구가 빠진 곳이 카드에 ‘강원’만 보이던 문제, 소유자 2026-10-22). 세종처럼 없으면 null. */
+export function sigunguFromAddr(addr) {
+  const m = String(addr ?? "").trim().match(/^\S+\s+(\S+?(?:시|군|구))(?:\s|$)/);
+  return m ? m[1] : null;
 }

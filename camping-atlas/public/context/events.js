@@ -33,8 +33,17 @@ export const DAY_OPTS = [7, 10, 20, 30, 45];
 export const inRange = (list, kmMax, days, today = kstToday()) => list.filter((x) => x.km <= kmMax && x.e.s <= addDays(today, days));
 /** 결과가 하나 이상 나오는 가장 좁은 단계. 기본 범위가 비어 있을 때만 자동으로 넓힌다. */
 export function autoRange(list, today = kstToday()) {
-  const hit = RANGES.find(([k, d]) => inRange(list, k, d, today).length);
-  return hit ?? RANGES.at(-1);
+  const hits = RANGES.map(([k, d]) => [k, d, inRange(list, k, d, today)]);
+  const first = hits.find(([, , rows]) => rows.length);
+  if (!first) return RANGES.at(-1);
+  // 가장 가까운 범위에 포스터 없는 행사만 있으면, 포스터가 있는 다음
+  // 범위까지 자동 확장한다. 행사 자체는 보존하되 상세에서 포스터를
+  // 우선 보여 주기 위한 표시 규칙이다.
+  if (!first[2].some((x) => x.e?.img || x.e?.img2)) {
+    const posterRange = hits.find(([, , rows]) => rows.some((x) => x.e?.img || x.e?.img2));
+    if (posterRange) return posterRange.slice(0, 2);
+  }
+  return first.slice(0, 2);
 }
 const MAP_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 0h16v16H0z" fill="none"/><path fill="currentColor" d="M6 2.09c.133.008.266.042.388.103L9.598 3.8a1 1 0 0 0 .402.104V13.91a1 1 0 0 1-.388-.102L6.402 12.2A1 1 0 0 0 6 12.096zm7.629.459A1 1 0 0 1 15 3.477v7.98a1 1 0 0 1-.653.938L11 13.63V3.6zM5 12.4l-2.629 1.05A1 1 0 0 1 1 12.523v-7.98a1 1 0 0 1 .653-.939L5 2.37z"/></svg>`;
 const STYLE = `.ev-sec .ev-tabs{display:flex;align-items:center;gap:16px;margin:0 0 16px;padding:0;background:transparent;border:none;border-bottom:1px solid var(--line,#e2e8f0);border-radius:0;width:100%}
@@ -79,8 +88,9 @@ function poster(x, i = 0) {
   const fallback = `<span>${esc(e.t)}</span>`;
   // 포스터가 깨지면 원출처 이미지(img2)로 한 번, 그래도 안 되면 제목 카드로 바꾼다.
   const onerr = `if(this.dataset.alt){this.src=this.dataset.alt;this.removeAttribute('data-alt')}else{const p=this.parentNode;p.classList.add('noimg');p.insertAdjacentHTML('afterbegin',this.dataset.fb);this.remove()}`;
-  const img = e.img
-    ? `<img src="${esc(e.img)}" alt="${esc(e.t)} 포스터" loading="${i < 8 ? "eager" : "lazy"}" decoding="async" referrerpolicy="no-referrer"${e.img2 && e.img2 !== e.img ? ` data-alt="${esc(e.img2)}"` : ""} data-fb="${esc(fallback)}" onerror="${esc(onerr)}">`
+  const src = e.img || e.img2;
+  const img = src
+    ? `<img src="${esc(src)}" alt="${esc(e.t)} 포스터" loading="${i < 8 ? "eager" : "lazy"}" decoding="async" referrerpolicy="no-referrer"${e.img && e.img2 && e.img2 !== e.img ? ` data-alt="${esc(e.img2)}"` : ""} data-fb="${esc(fallback)}" onerror="${esc(onerr)}">`
     : fallback;
   return img;
 }
@@ -94,7 +104,7 @@ function card(x, today, i) {
   const map = e.a || e.v ? `<a class="ev-map" href="https://map.kakao.com/link/search/${encodeURIComponent(e.v || e.a)}" target="_blank" rel="noopener" aria-label="${esc(e.t)} 지도" title="지도">${MAP_SVG}</a>` : "";
   return `<article class="ev-card" data-state="${x.state}" data-kind="${esc(e.k)}">
   ${href ? `<a class="ev-hit" href="${esc(href)}" target="_blank" rel="noopener" aria-label="${esc(e.t)} 원문 보기"></a>` : ""}
-  <div class="ev-poster${e.img ? "" : " noimg"}">${poster(x, i)}<div class="ev-badges">${badges}</div><span class="ev-dist">${esc(km(x.km))}</span></div>
+  <div class="ev-poster${e.img || e.img2 ? "" : " noimg"}">${poster(x, i)}<div class="ev-badges">${badges}</div><span class="ev-dist">${esc(km(x.km))}</span></div>
   <div class="ev-body"><div class="ev-kindrow"><span class="ev-kind">${esc(e.k)}</span>${map}</div><h3>${esc(e.t)}</h3>
   <span class="ev-meta">${esc(period)}${place ? `<br>${esc(place)}` : ""} · 캠핑장에서 ${esc(km(x.km))}${e.p ? ` · ${esc(e.p)}` : ""}</span>
   ${e.d ? `<p class="ev-desc">${esc(e.d)}</p>` : ""}</div></article>`;
@@ -104,7 +114,9 @@ export function render(data, id, today = kstToday(), opt = null) {
   const all = eventsFor(data, id, today);
   if (!all.length) return "";
   const list = (opt ? inRange(all, opt.km, opt.days, today) : [...all])
-    .sort((a, b) => a.km - b.km || (a.state === "ongoing" ? 0 : 1) - (b.state === "ongoing" ? 0 : 1) || a.e.s.localeCompare(b.e.s));
+    // 포스터가 있는 행사를 먼저 보여 주고, 같은 상태에서는 거리순을 유지한다.
+    // 포스터 없는 행사를 숨기지는 않아 행사 정보 자체가 사라지지 않는다.
+    .sort((a, b) => Number(!a.e.img && !a.e.img2) - Number(!b.e.img && !b.e.img2) || a.km - b.km || (a.state === "ongoing" ? 0 : 1) - (b.state === "ongoing" ? 0 : 1) || a.e.s.localeCompare(b.e.s));
   if (!list.length) return `<p class="ev-empty">${opt.km}km 안·${opt.days}일 이내에는 행사가 없어요. 거리나 기간을 넓혀 보세요.</p>`;
   const on = list.filter((x) => x.state === "ongoing").length;
   const tabs = [["all", "전체", list.length], ["ongoing", "진행 중", on], ["upcoming", "예정", list.length - on]].filter(([, , n]) => n);

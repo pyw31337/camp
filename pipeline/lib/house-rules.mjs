@@ -3,7 +3,18 @@
 // 등급: c = 운영자 홈페이지·고캠핑 등록(업장 공개) · m = 블로그·웹 후기 언급(화면에서 ‘후기’로 구분, 카드 배지에는 안 씀).
 // 불가 태그는 보수적으로: 시설 전체에 대한 단정문만 받는다(수영장·객실·텐트 안 같은 부분 금지, 질문, 후기 감상은 버린다).
 
-const SQUASH = (s) => String(s ?? "").replace(/\s+/g, " ").trim();
+// HTML 전문을 저장하지는 않지만 운영자 사이트에서 남은 안전한 문자 엔티티는 화면 전에 정제한다.
+const SQUASH = (value) => {
+  let s = String(value ?? "");
+  for (let i = 0; i < 2; i++) {
+    const next = s.replace(/&(?:amp;)?middot;?/gi, "·").replace(/&(?:amp;)?nbsp;?/gi, " ")
+      .replace(/&(?:amp;)?#0*183;?/gi, "·").replace(/&(?:amp;)?#x0*b7;?/gi, "·")
+      .replace(/&(?:amp;)?#0*8226;?/gi, "·").replace(/&(?:amp;)?#x0*2022;?/gi, "·");
+    if (next === s) break;
+    s = next;
+  }
+  return s.replace(/\u00a0/g, " ").replace(/[∙⋅•]/g, "·").replace(/\s+/g, " ").trim();
+};
 
 /** 불가 태그 사전: 화면은 같은 아이콘에 빨간 공통 배지로 하나씩 나열한다. */
 export const NO_TAGS = {
@@ -60,7 +71,7 @@ const TAG_RULES = [
   ["NO_FIREWORKS", re(`(폭죽|불꽃\\s*놀이|풍등)[^.]{0,16}(${NEG}|삼가|자제)`)],
   ["NO_LOUD", re(`(음향\\s*기기|스피커|앰프|노래방\\s*기기|악기|고성\\s*방가)[^.]{0,16}(${NEG}|삼가|자제)`)],
   ["NO_MINOR", re(`미성년자?[^.]{0,30}(${NEG}|보호자\\s*(미\\s*)?동반|동의서)`)],
-  ["NO_VISITOR", re(`(방문객|외부인|외부\\s*방문|지인\\s*방문|방문\\s*차량)[^.]{0,16}(${NEG}|제한)`), (s) => /초과|인원은/.test(s)],
+  ["NO_VISITOR", re(`(방문객|외부인|외부\\s*방문|지인\\s*방문|방문\\s*차량)[^.]{0,16}(${NEG}|제한)`), (s, m) => /초과|포함|사전/.test(s.slice(Math.max(0, m.index - 12), m.index + m[0].length))],
   ["NO_WINTER", re(`(동계|겨울)\\s*(시즌|기간|철)?\\s*(에는\\s*)?(운영\\s*(하지|안|중단)|휴장|캠핑\\s*${NEG})`)],
 ];
 
@@ -71,7 +82,7 @@ export function noTagsOf(text, { official = true } = {}) {
   const out = [];
   for (const [k, rx, skip] of TAG_RULES) {
     const m = s.match(rx);
-    if (!m || skip?.(s)) continue;
+    if (!m || skip?.(s, m)) continue;
     // 부분 금지는 맞은 자리 앞 24자 안의 공간·조건 단어로 본다(“수영장은 애견 이용 불가”)
     const before = s.slice(Math.max(0, m.index - 24), m.index + m[0].length);
     const after = s.slice(m.index, m.index + m[0].length + 10);
@@ -158,13 +169,13 @@ export function houseRules(lines, structured = [], positives = {}) {
     if (seen.has(key)) continue;
     seen.add(key);
     // 후기 스니펫은 여러 정보가 한 줄에 섞여 있어 태그만 쓰고, 목록에는 운영자 문장만 올린다.
-    for (const k of noTagsOf(text, { official: ln.g !== "m" })) putTag(k, { k, g: ln.g, quote: text.slice(0, 160), url: ln.url, at: ln.at ?? null, src: ln.src ?? null });
+    for (const k of noTagsOf(text, { official: ln.g !== "m" })) putTag(k, { k, g: ln.g, quote: text.slice(0, 160), url: ln.url, at: ln.at ?? null, src: ln.src ?? null, ...(ln.locator ? { locator: ln.locator } : {}) });
     if (ln.g === "m") continue;
     const n = noticeOf(text);
-    if (n) { notices.push({ ...n, url: ln.url, at: ln.at ?? null }); continue; }
+    if (n) { notices.push({ ...n, url: ln.url, at: ln.at ?? null, ...(ln.locator ? { locator: ln.locator } : {}) }); continue; }
     const cat = ruleCategory(text);
-    if (cat) { rules.push({ cat, text: text.slice(0, 160), url: ln.url, at: ln.at ?? null, src: ln.src ?? null }); continue; }
-    if (isOpsLine(text)) ops.push({ text: text.slice(0, 160), url: ln.url, at: ln.at ?? null, src: ln.src ?? null });
+    if (cat) { rules.push({ cat, text: text.slice(0, 160), url: ln.url, at: ln.at ?? null, src: ln.src ?? null, ...(ln.locator ? { locator: ln.locator } : {}) }); continue; }
+    if (isOpsLine(text)) ops.push({ text: text.slice(0, 160), url: ln.url, at: ln.at ?? null, src: ln.src ?? null, ...(ln.locator ? { locator: ln.locator } : {}) });
   }
   // 거의 같은 문장(앞 18자 같음) 하나로
   const uniq = (arr, f) => { const s = new Set(); return arr.filter((x) => { const k = norm(f(x)).slice(0, 18); if (s.has(k)) return false; s.add(k); return true; }); };

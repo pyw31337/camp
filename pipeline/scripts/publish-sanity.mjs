@@ -9,6 +9,8 @@
 //  R4 '숯만 가능' 문구와 숯 불가(charcoal.allowed=false)가 함께 있으면 문구를 사실에 맞춘다.
 //  R5 좌표가 한국 밖이거나 시·도 범위를 크게 벗어나면(오타) 지도에 잘못 찍히지 않게 좌표를 비운다.
 //  R6 시·도는 화면과 같은 짧은 이름(서울·경기·강원…)으로 통일. '전남광주통합특별시'는 광주 5개 구면 광주, 나머지는 전남(2026-10-21 소유자).
+//  R10 캠핑장 아님(서류상 등록: 도심 사무실 주소·근거 없음 — lib/camp-reality.mjs, registry/not-campgrounds.json)은 카탈로그에서 뺀다.
+//  R11 고캠핑 상세(2026-10 확인)가 ‘현재 휴업 중’인데 목록이 ‘운영’이면 ‘휴장’으로 맞춘다.
 //  R7 같은 곳 중복 등록(registry/duplicate-camps.json — 주소·좌표·전화로 확인한 쌍만)은 하나로 합치고 남는 행에 mg(합친 id)를 남긴다.
 import { existsSync, readFileSync, writeFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -23,6 +25,7 @@ const host = (u) => { try { return new URL(u).hostname; } catch { return ""; } }
 import { badCoord, sidoStd } from "../lib/geo-sanity.mjs";
 import { SITE_TYPE_LABEL } from "../lib/site-types.mjs";
 import { logReview } from "../lib/merge-policy.mjs";
+import { paperRegistration } from "../lib/camp-reality.mjs";
 // 지우는 값은 병합 정책(docs/DATA_MERGE_POLICY.md)대로 검토 기록에 이유와 함께 남긴다 → field-guard가 정당한 정정으로 통과시킨다.
 const rm = (id, field, reason, file = "campgrounds.json") => { if (!CHECK) logReview({ action: "removed", file, id: String(id), field, reason, by: "publish-sanity" }); };
 const DUP = (() => { try { return JSON.parse(readFileSync(`${root}pipeline/registry/duplicate-camps.json`, "utf8")).pairs ?? []; } catch { return []; } })();
@@ -63,8 +66,23 @@ for (const { keep, drop } of DUP) {
   k.mg = [...new Set([...(k.mg ?? []), String(drop)])];
   camps.splice(i, 1);
 }
-// 상세 파일: 당일 장소의 법정·표준 스펙, 관광공사 광고 요금
 const campsDir = `${dataDir}/camps`;
+// R10·R11 캠핑장 실체·휴업(전수 검수 2026-10-22)
+{
+  const reg = (p) => { try { return JSON.parse(readFileSync(`${root}pipeline/registry/${p}`, "utf8")); } catch { return {}; } };
+  const K = reg("kakao-places.json").campgrounds ?? {}, N = reg("naver-places.json").campgrounds ?? {};
+  const NOT = new Map((reg("not-campgrounds.json").items ?? []).map((x) => [String(x.id), x.why]));
+  const detail = (id) => { try { return JSON.parse(readFileSync(`${campsDir}/${id}.json`, "utf8")); } catch { return null; } };
+  for (let i = camps.length - 1; i >= 0; i--) {
+    const c = camps[i], id = String(c.id);
+    if (c.du) continue;
+    const d = detail(id);
+    const why = NOT.get(id) ?? paperRegistration(c, { kakao: K[id], naver: N[id], n5: d?.nearby_licensed?.CONVENIENCE?.n5 });
+    if (why) { hit("R10 캠핑장 아님(서류상 등록)", id); rm(id, "*", `캠핑장 아님 — ${why}`); camps.splice(i, 1); continue; }
+    if (c.status === "운영" && /휴업/.test(d?.gcd?.info?.["운영기간"] ?? "")) { hit("R11 고캠핑 휴업 반영", id); c.status = "휴장"; }
+  }
+}
+// 상세 파일: 당일 장소의 법정·표준 스펙, 관광공사 광고 요금
 const byId = new Map(camps.map((c) => [String(c.id), c]));
 const dirty = [];
 if (existsSync(campsDir)) for (const f of readdirSync(campsDir)) {

@@ -31,7 +31,7 @@ const VOLATILE = [
   /(^|\.)(dl|img_dup|updated_at|generated_at|fetched_at|checked_at|social_checked_at|web_checked_at|sanity_dropped)$/,
 ];
 // 원천에서 매번 다시 계산하는 읽기 모델 — 규칙이 바뀌면 정당하게 줄 수 있어 경고만(원천 값은 엄격 검사가 지킨다).
-const DERIVED = /^(pf|rv|profile|nl|st|line|om|sn|pt|th|soc|nr|ti|win|heat|themes|env|kinds|sizes|floors|seasons|days|fire|toilets|sinks|showers|rental|tq|of|nearby_licensed|operator_snippets|site_types|house_rules|field_conditions)(\.|$)/;
+const DERIVED = /^(pf|rv|profile|nl|st|line|om|sn|pt|th|soc|nr|ti|win|heat|themes|env|kinds|sizes|floors|seasons|days|fire|toilets|sinks|showers|rental|tq|of|nearby_licensed|nearby\.rest|nearby\.public|operator_snippets|site_types|house_rules|field_conditions)(\.|$)/;
 const isVolatile = (f) => VOLATILE.some((re) => re.test(f));
 
 const ov = read(join(nextRoot, "pipeline/registry/merge-overrides.json")) ?? { overrides: [] };
@@ -104,6 +104,9 @@ function heal(base, next, list) {
     if (ls.some((l) => l.field === t) || leafCount(no) < leafCount(bo)) { next[t] = structuredClone(bo); continue; }
     for (const l of ls) {
       const ov = getPath(base, l.field), nv = getPath(next, l.field);
+      // 줄어든 배열은 기준 배열로 되돌린다. 항목 합치기(mergeValue)는 항목 열쇠가 겹치면(예: 화장실 3곳이 모두 src "osm")
+      // 하나로 뭉쳐 오히려 더 줄였다(2026-10-22 data-sync 실패: nearby_toilets.nearest 3→2를 되살린다며 3→1).
+      if (Array.isArray(ov) && (!Array.isArray(nv) || nv.length < ov.length)) { setPath(next, l.field, structuredClone(ov)); continue; }
       setPath(next, l.field, isEmpty(nv) ? structuredClone(ov) : mergeValue(nv, ov, { field: l.field }).value);
     }
   }

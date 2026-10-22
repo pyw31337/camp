@@ -18,7 +18,8 @@ const ids = [...new Set([...seed, ...extra].map((p) => String(p.id)))];
 const copied = new Set();
 for (const id of ids) { const f = join(src, "camps", `${id}.json`); if (existsSync(f)) { cpSync(f, join(tmp, "camps", `${id}.json`)); copied.add(`${id}.json`); } }
 // 발행 순서 그대로: 시드 적용 → 발행 전 상식 정리(시·도 표기·중복 합치기 등).
-const run = () => { for (const f of ["apply-dayuse-seed.mjs", "publish-sanity.mjs"]) execFileSync(process.execPath, [join(root, "pipeline/scripts", f)], { env: { ...process.env, EXPLORE_DIR: tmp }, stdio: "pipe" }); };
+// publish-sanity의 검토 로그도 임시 영역에 둔다. 검사는 읽기 전용이어야 한다.
+const run = () => { for (const f of ["apply-dayuse-seed.mjs", "publish-sanity.mjs"]) execFileSync(process.execPath, [join(root, "pipeline/scripts", f)], { env: { ...process.env, EXPLORE_DIR: tmp, MERGE_REVIEW_LOG_PATH: join(tmp, "merge-review.ndjson") }, stdio: "pipe" }); };
 const fails = [];
 const compare = (label) => {
   const a = JSON.parse(readFileSync(join(src, "campgrounds.json"), "utf8")), b = JSON.parse(readFileSync(join(tmp, "campgrounds.json"), "utf8"));

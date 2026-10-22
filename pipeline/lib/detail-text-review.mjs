@@ -6,7 +6,29 @@
 const LEGAL = /(주식회사|유한회사|농업회사법인|영농조합법인|사회적협동조합|협동조합|\(주\)|\(유\)|㈜)/g;
 const GENERIC = ["오토캠핑장", "캠핑장", "야영장", "캠핑", "캠프", "글램핑", "카라반", "오토", "펜션", "관광농원", "국민여가", "캠프펜션", "the", "더"];
 const GENERIC_SUFFIX = new RegExp(`(${GENERIC.filter((g) => g.length >= 2 && g !== "the").sort((a, b) => b.length - a.length).join("|")})+$`, "i");
-const compact = (s) => String(s ?? "").replace(/<[^>]*>/g, "").toLowerCase().replace(/[\s·.,\-_()[\]'"!?~&|/:;]/g, "");
+/** 화면/파생 데이터에서만 쓰는 안전한 문자 정제. HTML 구조 문자는 해석하지 않는다. */
+export function decodeDisplayEntities(value) {
+  let s = String(value ?? "");
+  for (let i = 0; i < 2; i++) {
+    const next = s
+      .replace(/&(?:amp;)?middot;?/gi, "·")
+      .replace(/&(?:amp;)?nbsp;?/gi, " ")
+      .replace(/&(?:amp;)?#0*183;?/gi, "·")
+      .replace(/&(?:amp;)?#x0*b7;?/gi, "·")
+      .replace(/&(?:amp;)?#0*8226;?/gi, "·")
+      .replace(/&(?:amp;)?#x0*2022;?/gi, "·")
+      // 표시용 HTML 엔티티는 텍스트 레이어에서만 복원한다.
+      .replace(/&quot;?/gi, '"')
+      .replace(/&apos;?/gi, "'")
+      .replace(/&lt;?/gi, "<")
+      .replace(/&gt;?/gi, ">")
+      .replace(/&amp;?/gi, "&");
+    if (next === s) break;
+    s = next;
+  }
+  return s.replace(/\u00a0/g, " ").replace(/[∙⋅•]/g, "·");
+}
+const compact = (s) => decodeDisplayEntities(s).replace(/<[^>]*>/g, "").toLowerCase().replace(/[\s·.,\-_()[\]'"!?~&|/:;]/g, "");
 const stemOf = (sigungu) => { const s = String(sigungu ?? "").trim().split(/\s+/)[0] ?? ""; return s.length > 2 ? s.replace(/(시|군|구)$/, "") : s; };
 
 /** 이름의 고유 토큰(일반어·지역명 제외, 소문자) */
@@ -94,7 +116,16 @@ export function normalizeWon(text) {
     .replace(/(\d+)\s*천\s*원/g, (m, a) => `${(Number(a) * 1000).toLocaleString("en-US")}원`)
     .replace(/(?<![\d,])(\d{4,9})\s*원/g, (m, a) => `${Number(a).toLocaleString("en-US")}원`);
 }
-const tidy = (s) => normalizeWon(normalizeTimes(String(s ?? "").replace(/^[\s*#·•\-–—√✓✔※▶►▷■□●○◆◇★☆>ㅁ]+/, "").replace(/^\d{1,2}\s+(?=[가-힣])/, "").replace(/\s+/g, " ").trim()));
+const tidy = (s) => normalizeWon(normalizeTimes(decodeDisplayEntities(s).replace(/^[\s*#·•\-–—√✓✔※▶►▷■□●○◆◇★☆>ㅁ]+/, "").replace(/^\d{1,2}\s+(?=[가-힣])/, "").replace(/\s+/g, " ").trim()));
+
+// 기관 공용 포털의 푸터·다른 시설 게시판은 업장 규칙이 아니다. 원문은 레지스트리의 quarantine에
+// 보존하되 공개 스펙·공지에서는 격리한다. 실제 업장 주소/연락처는 별도 구조화 필드에 남긴다.
+const FOOTER_OR_ADDRESS = /(\(\s*\d{5}\s*\)\s*)?(?:서울특별시|[가-힣]+(?:특별자치도|특별시|광역시|도))\s*[가-힣]+(?:시|군|구)[^.!?]{0,80}(?:로|길)\s*\d+|\b(?:tel|fax)\s*[:：]|시설관리공단\s*(?:\||$)/i;
+const PORTAL_NOISE = /(?:이동식\s*화장실\s*임차|가정용\s*생활공구\s*무료대여|파크골프장\s*화장실|관광취약계층.*우선예약|이사장\s*선임절차|강습\s*회원\s*선정)/;
+export function isOperatorContentNoise(value) {
+  const s = decodeDisplayEntities(value).replace(/\s+/g, " ").trim();
+  return FOOTER_OR_ADDRESS.test(s) || PORTAL_NOISE.test(s);
+}
 
 // ── 이 캠핑장 이야기인가 ──────────────────────────────────────────────────
 // namesOnly: 운영자 글은 말투가 다양해 "○○ 캠핑장" 꼴만으로는 판정하지 않고, 같은 지역 다른 캠핑장 이름이 나올 때만 본다.
@@ -169,6 +200,7 @@ export function reviewDetailTexts(d, camp, { others = [], regions = null, common
       let why = null;
       if (host && AGGREGATOR_HOST.test(host)) why = "운영자 안내: 정보 모음·후기 사이트 글";
       else if (common?.has(compact(x.orig ?? original))) why = "운영자 안내: 여러 캠핑장 공통 문구(사이트 틀)";
+      else if (isOperatorContentNoise(text)) why = "운영자 안내: 공용 포털 푸터·다른 시설 문구";
       else if (BOILERPLATE.test(text)) why = "운영자 안내: 약관·개인정보 문구";
       else if (TABLE_HEADER.test(text)) why = "운영자 안내: 게시판 표 머리글";
       else if (PAGE_TITLE.test(text)) why = "운영자 안내: 페이지 제목·키워드";
