@@ -2531,10 +2531,10 @@ const km = (m) => (m < 1000 ? `${Math.round(m / 10) * 10}m` : `${(m / 1000).toFi
 // 생활·안전·관광을 한 섹션으로 묶는다. 관광 사진은 한국관광공사 원본 URL이 있는 항목만 직접 보인다.
 const NEARBY_LABELS = {
   CONVENIENCE: ["편의점", "store"], MART: ["마트", "cart"], BUTCHER: ["정육", "meat"], FUEL: ["주유", "fuel"],
-  PHARMACY: ["약국", "cross"], HOSPITAL: ["병원", "cross"], VET: ["동물병원", "paw"],
+  PHARMACY: ["약국", "pharmacy"], HOSPITAL: ["병원", "cross"], VET: ["동물병원", "paw"],
   DROWSY_SHELTER: ["졸음쉼터", "restarea"], REST_AREA: ["휴게소", "restarea"], TOILET: ["공중화장실", "toilet"],
   TOUR: ["관광", "tour"], FOOD: ["맛집", "food"], EV: ["전기차 충전", "bolt"],
-  OTC_MEDICINE: ["상비약", "cross"], GAS_STATION: ["주유", "fuel"], ANIMAL_HOSPITAL: ["동물병원", "paw"], GEAR: ["캠핑용품", "tent"],
+  OTC_MEDICINE: ["상비약", "pharmacy"], GAS_STATION: ["주유", "fuel"], ANIMAL_HOSPITAL: ["동물병원", "paw"], GEAR: ["캠핑용품", "tent"],
 };
 const FUEL_BRANDS = [[/S-?OIL|에쓰오일|에스오일/i, "S-OIL"], [/GS칼텍스|\bGS\b|^GS/i, "GS칼텍스"], [/SK에너지|\bSK\b|^SK/i, "SK에너지"], [/현대오일뱅크|오일뱅크|HD현대/i, "HD현대오일뱅크"], [/알뜰/, "알뜰주유소"], [/농협|NH/i, "농협(알뜰)"], [/E1|이원/, "E1(LPG)"], [/LPG|충전소/, "LPG"]];
 /** 주유소 이름에서 상표(정유사)를 짐작한다. 모르면 null */
@@ -2625,7 +2625,7 @@ function nearbyHubHtml(c, d) {
     ["conv", "편의점", "store", conv],
     ["mart", "마트", "cart", pick("MART", licensed.MART ?? [], k(nearby.mart, /supermarket|마트|greengrocer/))],
     ["butcher", "정육", "meat", pick("BUTCHER", licensed.BUTCHER ?? [], k(nearby.mart, /정육|바베큐|butcher/))],
-    ["pharmacy", "약국", "cross", [...pick("PHARMACY", licensed.PHARMACY ?? [], k(nearby.medical, /약국|pharmacy|의약/)), ...otc].slice(0, 3)],
+    ["pharmacy", "약국", "pharmacy", [...pick("PHARMACY", licensed.PHARMACY ?? [], k(nearby.medical, /약국|pharmacy|의약/)), ...otc].slice(0, 3)],
     ["hospital", "병원", "cross", [...erList, ...pick("HOSPITAL", k(nearby.medical, /병원|의료원|hospital|clinic/))].slice(0, 3)],
     ["vet", "동물병원", "paw", pick("VET", licensed.VET ?? [], nearby.vet ?? [])],
     ["gear", "캠핑용품", "tent", pick("GEAR", nearby.gear ?? [])],
@@ -2834,7 +2834,7 @@ async function detailView(id) {
   const o = openingOf(c);
   const us = usage(c, d);
   return `<article class="detail" data-id="${esc(c.id)}">
-    <div class="d-bar"><a class="icon-btn" href="${APP_BASE}" data-back aria-label="뒤로">${ic("left")}</a><span class="d-crumb">${esc(region(c))}</span>${heartBtn(c, { label: true })}<button class="d-share" type="button" data-share-place="${esc(c.id)}" aria-label="링크 공유">${ic("share")}<span>공유</span></button></div>
+    <div class="d-bar"><a class="icon-btn" href="${APP_BASE}" data-back aria-label="뒤로">${ic("left")}</a>${heartBtn(c, { label: true })}<button class="d-share" type="button" data-share-place="${esc(c.id)}" aria-label="링크 공유">${ic("share")}<span>공유</span></button></div>
     <header class="d-head">
       <div class="d-head-main">
       <p class="d-eyebrow">${c.sido && c.sigungu ? `<a class="d-region-link" href="${regionHref(sidoShort(c.sido), c.sigungu)}">${esc(region(c))}</a>` : esc(region(c))}${c.op && OP[c.op] ? ` · ${OP[c.op]}` : tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
@@ -2845,7 +2845,7 @@ async function detailView(id) {
       <aside class="d-side">${reserveCard(c, d)}</aside>
     </header>
     ${galleryHtml(c)}
-    <nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${[["sec-price", "요금"], ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-nearby", "주변"], ["sec-events", "축제"], ["sec-reviews", "후기"], ["sec-info", "업체"]].map(([id, l], i) => `<a href="#${id}" data-jump="${id}"${i === 0 ? " aria-current" : ""}>${l}</a>`).join("")}</div></nav>
+    <nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${[["sec-price", "요금"], ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-nearby", "주변"], ["sec-events", "행사"], ["sec-reviews", "후기"], ["sec-info", "업체"]].map(([id, l], i) => `<a href="#${id}" data-jump="${id}"${i === 0 ? " aria-current" : ""}>${l}</a>`).join("")}</div></nav>
     <div class="d-body">
       <div class="d-main">
         ${siteTypesHtml(c, d)}
@@ -2865,7 +2865,7 @@ async function detailView(id) {
         ${mediaHubHtml(d, c)}
         ${nearbyHubHtml(c, d)}
         ${similarHtml(c)}
-        <section class="d-sec ev-sec" id="sec-events" data-events><div class="sec-head">${iconTitle("fest", "주변 축제·행사")}</div><div data-events-body></div></section>
+        <section class="d-sec ev-sec" id="sec-events" data-events><div class="sec-head">${iconTitle("fest", "행사")}</div><div data-events-body></div></section>
         ${reviewLinksHtml(d, c)}
         ${infoHtml(c)}
         ${introHtml(d)}
@@ -2892,7 +2892,7 @@ function similarNearby(c, n = 3) {
 function similarHtml(c) {
   const rows = similarNearby(c);
   if (!rows.length) return "";
-  return `<section class="d-sec sim-sec" id="sec-similar" data-similar><div class="sec-head">${iconTitle("tent", "주변 비슷한 캠핑장")}</div><p class="layout-note">같은 숙박 형태 · 40km 안에서 가까운 순이에요.</p>
+  return `<section class="d-sec sim-sec" id="sec-similar" data-similar><div class="sec-head">${iconTitle("tent", "주변 캠핑장")}</div>
     <div class="rail sim-rail">${rows.map(({ x, km }) => `<div class="sim-item"><span class="sim-km">${ic("pin", "inline")}${km < 10 ? km.toFixed(1) : Math.round(km)}km</span>${card(x, 9)}</div>`).join("")}</div></section>`;
 }
 
@@ -3853,16 +3853,16 @@ function mediaHubHtml(d, c) {
 
   // 내부 탭으로 목록을 전환하는 플랫폼: YouTube, 네이버, 다음 (동일 포맷 유지)
   const inSiteTabs = [
-    { key: "youtube", label: "YouTube", n: ytList.length, panel: renderMediaRail(ytList, "youtube", "YouTube", `https://www.youtube.com/results?search_query=${q}`), url: `https://www.youtube.com/results?search_query=${q}` },
+    { key: "youtube", label: "유튜브", n: ytList.length, panel: renderMediaRail(ytList, "youtube", "유튜브", `https://www.youtube.com/results?search_query=${q}`), url: `https://www.youtube.com/results?search_query=${q}` },
     { key: "naver", label: "네이버", n: naverList.length, panel: renderMediaRail(naverList, "naver", "네이버", `https://search.naver.com/search.naver?query=${q}`), url: `https://search.naver.com/search.naver?query=${q}` },
     { key: "daum", label: "다음", n: daumList.length, panel: renderMediaRail(daumList, "daum", "다음", `https://search.daum.net/search?q=${q}`), url: `https://search.daum.net/search?q=${q}` },
   ];
 
   // 외부 플랫폼 바로가기: Instagram, Facebook, TikTok (직접 수집 불가 플랫폼만 새창 이동)
   const extTabs = [
-    { key: "instagram", label: "Instagram", url: `https://www.instagram.com/explore/search/keyword/?q=${q}` },
-    { key: "facebook", label: "Facebook", url: `https://www.facebook.com/search/posts/?q=${q}` },
-    { key: "tiktok", label: "TikTok", url: `https://www.tiktok.com/search?q=${q}` },
+    { key: "instagram", label: "인스타그램", url: `https://www.instagram.com/explore/search/keyword/?q=${q}` },
+    { key: "facebook", label: "페이스북", url: `https://www.facebook.com/search/posts/?q=${q}` },
+    { key: "tiktok", label: "틱톡", url: `https://www.tiktok.com/search?q=${q}` },
   ];
 
   const defaultTab = inSiteTabs.find((t) => t.n > 0) || inSiteTabs[0];
@@ -3944,7 +3944,7 @@ function reviewLinksHtml(d, c) {
   const allItems = [...rawReviews, ...photoReviews].sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
 
   if (!allItems.length) {
-    return `<section class="d-sec" id="sec-reviews"><div class="sec-head">${iconTitle("review-bubble", "방문후기")}</div>
+    return `<section class="d-sec" id="sec-reviews"><div class="sec-head">${iconTitle("review-bubble", "후기")}</div>
       ${catChips}
       <p class="review-empty-note">연동된 본문 후기가 적은 곳입니다. 위 공식 검색 채널에서 최신 방문자 후기를 바로 확인하세요.</p>
     </section>`;
@@ -3966,7 +3966,7 @@ function reviewLinksHtml(d, c) {
     return `<article class="review-link-card media-card"><a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${platformLabel} 후기 ${i + 1} 원문 열기">${media}<div class="media-card-body"><span class="media-card-source">${platIc(pk)}<span>${esc(platformLabel)}</span></span><b>${esc(serviceText(x.title, 54) || `방문 후기 ${i + 1}`)}</b>${summary ? `<em>${esc(summary)}</em>` : ""}${dateHtml}</div></a>${srcTip(fact, `${platformLabel} 후기 ${i + 1}`)}</article>`;
   }).join("");
 
-  return `<section class="d-sec" id="sec-reviews"><div class="sec-head">${iconTitle("review-bubble", "방문후기")}</div>
+  return `<section class="d-sec" id="sec-reviews"><div class="sec-head">${iconTitle("review-bubble", "후기")}</div>
     ${catChips}
     <div class="review-links" data-cgrid>${cards}</div>
   </section>`;
@@ -5571,6 +5571,8 @@ let swipeStart = null;
 const swipeBegin = (target, x, y) => {
   const panel = target.closest?.("[role='tabpanel']");
   if (!panel) { swipeStart = null; return; }
+  // 영상 카드 레일은 영상 목록만 움직인다. 플랫폼 전환은 탭을 직접 눌러서만 한다.
+  if (panel.closest?.(".media-hub")) { swipeStart = null; return; }
   const sc = hScrollerIn(target, panel); // 칸 안 가로 캐러셀(SNS 영상 레일·주변시설 목록 등)
   swipeStart = { panel, x, y, sc, l0: sc ? sc.scrollLeft : 0 };
 };
