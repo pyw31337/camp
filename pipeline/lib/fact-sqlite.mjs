@@ -40,6 +40,7 @@ export function writeSqlite(path, { registry, facts, attributes }) {
   const rank = { VERIFIED: 4, OPERATOR: 3, CONFIRMED: 2, MENTION: 1 };
   const f = db.prepare("INSERT INTO fact (cid,attr,value_json,value_num,value_text,grade,grade_rank,src,url,observed_at,quote,display,mentions,period,label,extra_num) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
   for (const x of facts) {
+    if (!rank[x.grade]) continue; // REFERENCE(표준 조례 기본값)는 조회 DB에 넣지 않는다
     const v = x.value;
     const num = typeof v === "number" ? v : typeof v === "boolean" ? (v ? 1 : 0) : null;
     const txt = typeof v === "string" ? v : null;

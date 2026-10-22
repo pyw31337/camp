@@ -2,7 +2,7 @@
 
 ## 📌 검토 대기열 정리(295→84) · 글 내용 판정 AI · 휴게소 이름 정제 (2026-10-23, Claude → 전 에이전트)
 - **사실 정제**(`pipeline/lib/fact-refine.mjs`, `build-fact-store`에서 판정 전 실행): ① 같은 예약 플랫폼의 다른 업장 페이지(detail_id 다름) 섞임 제거 ② 범위가 좁은 금지(애견 입수·카라반 내부·대형견)·일부 구역 허용·홍보 제목을 바로 읽기 ③ 숙박형·성수기·당일 이용 입퇴실 시각에 `scope` 표시(품질 장부의 대표값 경쟁에서 제외). 뺀·바꾼 값은 `data/quality/refine-log.json`.
-- **표준 운영규정은 참고값**: 공공 야영장 표준 운영규정(`public-standards.mjs`)이 사실 저장소에 운영자 홈페이지(OPERATOR)로 들어가 349곳 입퇴실이 업장 공지처럼 쓰였다 → `REFERENCE` 등급·`public_standard` 원천. `GRADE_RANK.REFERENCE = 0.5`(조회 기본 최소 등급 MENTION보다 낮음). 품질 장부의 MANNER_TIME·REFUND_POLICY·입퇴실 신뢰도 하락 경고는 이 정정 때문이다(의도된 변화).
+- **표준 운영규정은 참고값**: 공공 야영장 표준 운영규정(`public-standards.mjs`)이 사실 저장소에 운영자 홈페이지(OPERATOR)로 들어가 349곳 입퇴실이 업장 공지처럼 쓰였다 → `REFERENCE` 등급·`public_standard` 원천. `GRADE_RANK.REFERENCE = 0`(DB smallint)(조회 기본 최소 등급 MENTION보다 낮음). 품질 장부의 MANNER_TIME·REFUND_POLICY·입퇴실 신뢰도 하락 경고는 이 정정 때문이다(의도된 변화).
 - **호환 값**: 반려견 ‘가능·소형견만·지정 구역만’은 충돌로 보지 않는다(`quality.compatible`).
 - **자동 판정**: `quality-auto-decide.mjs` — 업장 원문의 분명한 규칙 문장 vs 고캠핑 등록값 69건을 decisions.ndjson에 기록(by `Claude(원문 대조·규칙)`). 질문·후기 말투·시설 목록 문장은 사람 판정으로 남긴다.
 - **글 내용 판정 AI**(`pipeline/lib/text-judge.mjs`): 무료 로컬 다국어 임베딩(Xenova/multilingual-e5-small) + 분류별 예시 문장. 후기·카페·웹·영상 제목 중 캠핑장 이름이 없고 식당·광고·부동산·무관 주제가 1위인 글을 `ng` 표시 → 화면 목록에서 숨김(`snsOk`). 다국어 NLI(mDeBERTa xnli)는 한국어에서 무작위 수준이라 쓰지 않았다. `judge-texts.mjs`(주간 link-check, 2만 건씩 이어서) → `registry/text-judgments.json` → `apply-text-judgments.mjs`(data-sync·증분 발행).

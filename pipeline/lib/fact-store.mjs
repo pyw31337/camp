@@ -8,8 +8,8 @@ import { innerCodes } from "./gocamping.mjs";
 
 export const DICTIONARY = JSON.parse(readFileSync(fileURLToPath(new URL("../registry/attribute-dictionary.json", import.meta.url)), "utf8"));
 export const ATTR = new Map(DICTIONARY.attributes.map((a) => [a.code, a]));
-// REFERENCE: 법정·표준 조례 기준 참고값(업장 미공지). 확정값처럼 쓰지 않는다 — 조회 기본 최소 등급(MENTION)보다 낮다(2026-10-22).
-export const GRADE_RANK = { VERIFIED: 4, OPERATOR: 3, CONFIRMED: 2, MENTION: 1, REFERENCE: 0.5 };
+// REFERENCE: 법정·표준 조례 기준 참고값(업장 미공지). 확정값처럼 쓰지 않는다 — 조회 기본 최소 등급(MENTION)보다 낮다(2026-10-22). DB grade_rank가 smallint라 정수 0.
+export const GRADE_RANK = { VERIFIED: 4, OPERATOR: 3, CONFIRMED: 2, MENTION: 1, REFERENCE: 0 };
 
 // 원천 코드 → 사람이 읽는 이름
 export const SOURCES = {
@@ -300,7 +300,7 @@ export function validateFacts(facts) {
   for (const f of facts) {
     const a = ATTR.get(f.attr);
     if (!a) { errs.push(`${f.cid} 사전에 없는 속성 ${f.attr}`); continue; }
-    if (!GRADE_RANK[f.grade]) errs.push(`${f.cid} ${f.attr} 등급 ${f.grade}`);
+    if (!(f.grade in GRADE_RANK)) errs.push(`${f.cid} ${f.attr} 등급 ${f.grade}`);
     if (!SOURCES[f.src]) errs.push(`${f.cid} ${f.attr} 원천 ${f.src}`);
     if (f.grade !== "MENTION" && !f.url) errs.push(`${f.cid} ${f.attr} 원천 URL 없음`);
     const t = a.type, v = f.value;
