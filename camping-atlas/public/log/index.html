@@ -926,11 +926,11 @@
     </div>
     <div class="stat-card">
       <div class="stat-head">
-        <span>상세 조회</span>
+        <span>상세 진입</span>
         <span class="stat-icon blue"><svg><use href="#i-search"/></svg></span>
       </div>
       <div class="stat-num" id="stat-views">-</div>
-      <div class="stat-sub">조회 업장 <b id="stat-view-camps">-</b>곳</div>
+      <div class="stat-sub">진입 업장 <b id="stat-view-camps">-</b>곳</div>
     </div>
     <div class="stat-card">
       <div class="stat-head">
@@ -944,7 +944,7 @@
 
   <!-- 빠른 인기 캠핑장 인사이트 바 -->
   <section class="insights-bar" id="insights-bar">
-    <span class="insights-label">🔥 최근 반응 TOP 캠핑장:</span>
+    <span class="insights-label">🔥 많이 눌러본 업장:</span>
     <div class="insights-chips" id="top-camps-chips">
       <span class="chip-tag" style="opacity:0.6;">데이터 집계 중…</span>
     </div>
@@ -967,7 +967,7 @@
           <span>댓글</span> <span class="tab-badge" id="tab-cnt-comments">0</span>
         </button>
         <button type="button" class="tab-pill" data-tab="views">
-          <span>조회</span> <span class="tab-badge" id="tab-cnt-views">0</span>
+          <span>상세 진입</span> <span class="tab-badge" id="tab-cnt-views">0</span>
         </button>
       </div>
 
@@ -1104,6 +1104,7 @@
     names: new Map(),     // campground_id -> name
     saves: [],
     views: [],
+    viewCounts: [],
     comments: [],
     feedItems: [],
     filteredItems: []
@@ -1301,9 +1302,19 @@
     });
     if (rpc.ok) return rpc.json();
     if (rpc.status !== 404) throw new Error(`조회 기록 조회 실패 (${rpc.status})`);
-    const legacy = await fetch(`${SB.url}/rest/v1/view_log?select=created_at,campground_id,path,language,timezone,screen,platform&order=created_at.desc&limit=${encodeURIComponent(limit)}`, { headers });
-    if (!legacy.ok) throw new Error(`조회 기록 조회 실패 (${legacy.status})`);
-    return legacy.json();
+    const legacy = await fetch(`${SB.url}/rest/v1/view_log?select=created_at,campground_id,entry_source,path,language,timezone,screen,platform&entry_source=eq.list&order=created_at.desc&limit=${encodeURIComponent(limit)}`, { headers });
+    if (legacy.ok) return legacy.json();
+    // 018만 적용된 구형 DB에서는 목록 진입을 식별할 수 없으므로 빈 결과로 둔다.
+    return [];
+  }
+
+  async function loadViewCounts(limit = 3000) {
+    const rpc = await fetch(`${SB.url}/rest/v1/rpc/safe_list_detail_counts`, {
+      method: "POST", headers: { ...headers, "Content-Type": "application/json" },
+      body: JSON.stringify({ row_limit: limit })
+    });
+    if (rpc.ok) return rpc.json();
+    return [];
   }
 
   function nameOf(id) {
@@ -1322,9 +1333,10 @@
       const namesPromise = state.names.size ? Promise.resolve() : loadCampNames();
 
       // 2. Supabase 로그 병렬 조회
-      const [rawSaves, rawViews, cr] = await Promise.all([
+      const [rawSaves, rawViews, rawViewCounts, cr] = await Promise.all([
         loadSaveLogs(400),
         loadViewLogs(800).catch(() => []),
+        loadViewCounts(3000).catch(() => []),
         fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,created_at,is_deleted&order=created_at.desc&limit=200`, { headers })
       ]);
 
@@ -1334,7 +1346,13 @@
 
       // 찜 기록과 댓글 분리
       state.saves = rawSaves.filter((x) => x.action !== "comment");
-      state.views = Array.isArray(rawViews) ? rawViews : [];
+      state.views = (Array.isArray(rawViews) ? rawViews : []).filter((x) => x.entry_source === "list");
+      state.viewCounts = Array.isArray(rawViewCounts) ? rawViewCounts : [];
+      if (!state.viewCounts.length && state.views.length) {
+        const counts = new Map();
+        for (const v of state.views) counts.set(String(v.campground_id), (counts.get(String(v.campground_id)) || 0) + 1);
+        state.viewCounts = [...counts.entries()].map(([campground_id, view_count]) => ({ campground_id, view_count, last_view_at: state.views.find((v) => String(v.campground_id) === campground_id)?.created_at })).sort((a, b) => b.view_count - a.view_count);
+      }
       state.comments = rawComments;
 
       // 댓글에 매칭되는 기기 로그 연계
@@ -1404,7 +1422,7 @@
       });
     }
 
-    // 상세 조회 아이템
+    // 목록 카드에서 상세로 들어간 아이템만 표시
     for (const v of state.views) {
       items.push({
         id: `v-${v.created_at}-${v.campground_id}`,
@@ -1439,8 +1457,8 @@
     const delComments = totalComments - liveComments;
 
     const metaCount = state.saves.filter((x) => x.screen || x.platform || x.timezone || x.language).length;
-    const totalViews = state.views.length;
-    const viewCamps = new Set(state.views.map((x) => String(x.campground_id))).size;
+    const totalViews = state.viewCounts.reduce((sum, x) => sum + Number(x.view_count || 0), 0);
+    const viewCamps = state.viewCounts.length;
 
     document.getElementById("stat-total-saves").textContent = totalSaves.toLocaleString();
     document.getElementById("stat-today-saves").textContent = todaySaves.toLocaleString();
@@ -1466,12 +1484,10 @@
 
   // ── 인기 캠핑장 칩 ─────────────────────────────────────
   function renderTopCamps() {
-    const counts = new Map();
-    for (const item of state.feedItems) {
-      if (!item.campId) continue;
-      counts.set(item.campId, (counts.get(item.campId) || 0) + 1);
-    }
-    const sorted = Array.from(counts.entries()).sort((a, b) => b[1] - a[1]).slice(0, 5);
+    const sorted = state.viewCounts
+      .map((x) => [String(x.campground_id), Number(x.view_count || 0)])
+      .filter(([, count]) => count > 0)
+      .slice(0, 10);
     const box = document.getElementById("top-camps-chips");
     if (!sorted.length) {
       box.innerHTML = `<span style="font-size:0.8rem; color:var(--ink-3);">기록 없음</span>`;
@@ -1539,7 +1555,7 @@
     const loadMoreBtn = document.getElementById("btn-load-more");
 
     const items = state.filteredItems;
-    countTxt.textContent = `조회 결과 ${items.length.toLocaleString()}건 (전체 ${state.feedItems.length.toLocaleString()}건 중)`;
+      countTxt.textContent = `진입 결과 ${items.length.toLocaleString()}건 (전체 ${state.feedItems.length.toLocaleString()}건 중)`;
 
     if (!items.length) {
       box.innerHTML = `
@@ -1578,7 +1594,7 @@
         if (item.type === "remove") { badgeClass = "badge-remove"; badgeText = "- 찜해제"; }
         else if (item.type === "comment") { badgeClass = "badge-comment"; badgeText = "💬 댓글"; }
         else if (item.type === "deleted") { badgeClass = "badge-deleted"; badgeText = "🗑 삭제됨"; }
-        else if (item.type === "view") { badgeClass = "badge-comment"; badgeText = "👁 조회"; }
+        else if (item.type === "view") { badgeClass = "badge-comment"; badgeText = "↗ 상세 진입"; }
 
         html += `
           <article class="log-card" data-camp-id="${esc(item.campId)}">

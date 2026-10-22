@@ -1431,8 +1431,20 @@ async function syncSave(action, id) {
   if (shared.status === "rejected") console.warn("공용 찜 동기화에 실패했습니다.", shared.reason);
 }
 const VIEW_LOG_SEEN = new Map();
-async function postViewLog(id) {
-  if (NO_REMOTE_WRITE || !id) return;
+let pendingListDetailEntry = null;
+// 상세 진입은 목록 카드에서 실제로 눌러 들어온 경우만 기록한다. 주소 직접 접근,
+// 새로고침·상세 내부 재렌더는 인기 목록의 분모에 섞지 않는다.
+document.addEventListener("click", (e) => {
+  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const a = e.target.closest?.('a[href*="/place/"]');
+  if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+  const fromList = a.classList.contains("card-hit") || a.closest(".card, .mi, .review-pick, .tr-card, .lrow, [data-list-entry]");
+  if (!fromList) return;
+  const m = a.href.match(/\/place\/([^/?#]+)/);
+  if (m) pendingListDetailEntry = { id: decodeURIComponent(m[1]), at: Date.now() };
+}, true);
+async function postViewLog(id, source = "") {
+  if (NO_REMOTE_WRITE || !id || source !== "list") return;
   const key = String(id), now = Date.now();
   // 상세 화면의 재렌더(찜·공유·뒤로가기 등)마다 중복 집계하지 않고, 같은 탭에서는 30분마다 한 번 기록한다.
   if (now - (VIEW_LOG_SEEN.get(key) || 0) < 30 * 60 * 1000) return;
@@ -1440,7 +1452,7 @@ async function postViewLog(id) {
   try {
     if (!await ensureSupabaseConfig()) return;
     const headers = { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=minimal" };
-    const r = await fetch(`${SB.url}/rest/v1/view_log`, { method: "POST", headers, body: JSON.stringify({ campground_id: key, path: location.pathname, ...clientMeta() }), keepalive: true });
+    const r = await fetch(`${SB.url}/rest/v1/view_log`, { method: "POST", headers, body: JSON.stringify({ campground_id: key, entry_source: "list", path: location.pathname, ...clientMeta() }), keepalive: true });
     if (!r.ok) throw new Error(`view_log ${r.status}`);
   } catch (error) { console.warn("조회 기록 동기화에 실패했습니다.", error); }
 }
@@ -2924,7 +2936,9 @@ async function detailView(id) {
   const c = S.byId.get(id);
   if (c) pushRecent(id);
   if (!c) return `<div class="empty">${ic("search")}<b>캠핑장을 찾지 못했어요</b><a class="btn ghost" href="${APP_BASE}">찾기로</a></div>`;
-  postViewLog(id);
+  const listEntry = pendingListDetailEntry && pendingListDetailEntry.id === String(id) && Date.now() - pendingListDetailEntry.at < 15000;
+  pendingListDetailEntry = null;
+  postViewLog(id, listEntry ? "list" : "direct");
   const d = await detailOf(id);
   const f = facts(c), { tag } = nameOf(c);
   const spec = ["size", "park", "power", "fire", "ground", "shelter", "sanitary", "hot", "pet"];
