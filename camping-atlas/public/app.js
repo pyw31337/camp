@@ -259,7 +259,7 @@ function facts(c) {
   if (sa.hot_water) out.hot = { v: sa.hot_water === "제공" ? "있음" : sa.hot_water, g: GR(sa.state) || "c", src: srcOf(fc) };
   if (sa.private_bathroom) out.bath = { v: "개별 욕실", g: "c" };
   // 반려동물(고캠핑 등록)
-  if (c.pets) out.pet = { v: /가능/.test(c.pets) && !/불가/.test(c.pets) ? "동반 가능" : c.pets === "불가능" ? "동반 불가" : c.pets, ok: /가능/.test(c.pets) && !/불가/.test(c.pets), g: "c", src: { label: "한국관광공사 고캠핑 등록값", url: c.gc_url } };
+  if (c.pets) out.pet = { v: /가능/.test(c.pets) && !/불가/.test(c.pets) ? "동반 가능" : /불가|금지/.test(c.pets) ? "불가" : c.pets, ok: /가능/.test(c.pets) && !/불가/.test(c.pets), g: "c", src: { label: "한국관광공사 고캠핑 등록값", url: c.gc_url } };
   return (c._f = out);
 }
 const filled = (f) => f && (f.g === "v" || f.g === "c");
@@ -740,7 +740,7 @@ function imageTag(u, alt, { eager = false, sizes = "(max-width: 759px) 80vw, 320
 // 비교·찜처럼 사진이 보조 역할인 곳은 빈 src를 만들지 않고, 사진 미보유를 중립적인 아이콘으로 표시한다.
 function campThumb(c, { alt = "", sizes } = {}) {
   const u = photosOf(c)[0];
-  if (u) return imageTag(u, alt, { sizes }) + (isPt(c, u) ? ptCredit(c) : "");
+  if (u) return imageTag(u, alt, { sizes });
   return `<span class="photo-empty" role="img" aria-label="${esc(`${nameOf(c).name} 사진 없음`)}">${ic("tent")}</span>`;
 }
 // 카드 사진: GitHub Pages 배포 단계에서 합쳐지는 고캠핑 공식 webp를 우선 사용한다.
@@ -758,7 +758,7 @@ const photoKey = (u) => {
 };
 const PT_FB = new Map();
 const isPt = (c, u) => Boolean(c.pt && (u === c.pt.i || u === c.pt.t));
-const ptCredit = (c) => `<span class="pt-credit" title="${esc(c.pt?.s ? `${c.pt.s} 후기 사진` : "후기 사진")}">후기 사진</span>`;
+// ‘후기 사진’ 출처 배지는 붙이지 않는다(소유자 2026-10-22). 출처는 상세 사진 원문 링크에 남는다.
 // 성능(t39 #34): 화면 전환마다 같은 캠핑장 사진 목록을 수천 번 다시 만들지 않게 기억한다.
 // 사진 자료(S.photos·S.cards)가 바뀌거나 깨진 사진(DEAD)이 늘면 통째로 비운다. 결과는 그대로(복사본을 돌려준다).
 let PH_MEMO = new Map(), PH_SIG = [];
@@ -809,7 +809,7 @@ function carousel(c, { eager = false, cls = "", single = false } = {}) {
   const alt = esc(nameOf(c).name);
   if (!ph.length) return `<div class="car car-empty ${cls}">${ic("tent")}</div>`;
   if (single || ph.length === 1) {
-    return `<div class="car car-single ${cls}"><img class="car-img" src="${esc(photoView(ph[0]))}"${origAttr(ph[0])} alt="${alt}" loading="${eager ? "eager" : "lazy"}" decoding="async" draggable="false"${/^https?:/i.test(photoUrl(ph[0])) ? ' referrerpolicy="no-referrer"' : ""}>${isPt(c, ph[0]) ? ptCredit(c) : ""}</div>`;
+    return `<div class="car car-single ${cls}"><img class="car-img" src="${esc(photoView(ph[0]))}"${origAttr(ph[0])} alt="${alt}" loading="${eager ? "eager" : "lazy"}" decoding="async" draggable="false"${/^https?:/i.test(photoUrl(ph[0])) ? ' referrerpolicy="no-referrer"' : ""}></div>`;
   }
   const slides = ph.map((u, i) => i === 0
     ? imageTag(u, alt, { eager })
@@ -2474,7 +2474,24 @@ const validFact = (label, x) => (x?.v != null && x.v !== "" && (FACT_RULES[label
 const firstValid = (label, ...xs) => xs.reduce((a, x) => a ?? validFact(label, x), null);
 // 상세 프로필·후기 값이 없으면 목록 데이터의 입·퇴실(c.ti / c.checkin·checkout)을 쓴다(수기 보강 캠핑장 포함).
 const tiFact = (c, k, alt) => { const v = c?.ti?.[k]?.[0] ?? c?.[alt]; return v ? { v, g: ["v", "c", "m", "r"].includes(c?.ti?.[k]?.[1]) ? c.ti[k][1] : "c", src: { label: "업장·관리기관 안내", url: c.homepage || c.gc_url || c.src?.url } } : null; };
+// 같은 뜻 다른 표기를 하나로(소유자 2026-10-22): ‘14:00부터’·‘14시’·‘오후 2시’ → ‘14:00’, 짧은 ‘불가능’·‘동반 불가’ → ‘불가’.
+function clockText(v) {
+  const t = String(v ?? "").trim();
+  let m = t.match(/^(오전|오후)?\s*(\d{1,2})\s*(?::\s*(\d{2})|시\s*(\d{1,2})?\s*분?|시)\s*(부터|이후|까지|이전|~)?\s*$/);
+  if (!m) return null;
+  let h = Number(m[2]); const mm = Number(m[3] ?? m[4] ?? 0);
+  if (m[1] === "오후" && h < 12) h += 12;
+  if (m[1] === "오전" && h === 12) h = 0;
+  return h <= 24 && mm < 60 ? `${String(h).padStart(2, "0")}:${String(mm).padStart(2, "0")}` : null;
+}
+const normClock = (x) => { const t = x?.v != null && clockText(detailValue(x)); return t ? { ...x, v: t } : x; };
+const normNo = (x) => (x?.v != null && String(detailValue(x)).length <= 10 && /불가|금지/.test(detailValue(x)) && !/만|외|소형|중형|대형|kg/.test(detailValue(x)) ? { ...x, v: "불가" } : x);
 function usage(c, d) {
+  const u = usageRaw(c, d);
+  u[0][1] = normClock(u[0][1]); u[1][1] = normClock(u[1][1]);
+  return u;
+}
+function usageRaw(c, d) {
   const f = facts(c);
   return [
     ["입실", firstValid("입실", profFact(PF(d, "CHECKIN")), specFact(d, "CHECKIN_TIME"), tiFact(c, "i", "checkin")), "clock-in"],
@@ -2522,6 +2539,7 @@ function specTiles(c, d) {
   const T = [["size", "size", "설치 공간", ""], ["park", "car", "텐트 옆 주차", "cobalt"], ["power", "bolt", "전기", "volt"], ["fire", "flame", "장작·숯", "flame"], ["ground", "layers", "바닥", ""], ["shelter", "tent", "텐트·타프", ""], ["toilet", "toilet", "화장실", ""], ["shower", "bath", "샤워실", ""], ["sink", "fountain", "개수대", ""], ["hot", "drop", "온수", ""], ["pet", "paw", "반려견", ""]];
   return T.map(([k, i, l, cls]) => {
     let x = f[k] ?? mention[k] ?? null;
+    if (k === "pet") x = normNo(x);
     if (k === "power" && f.power?.v === "있음" && mention.power?.v) x = mention.power;
     const isNo = Boolean(x && (x.ok === false || (k === "fire" && x.kind === "NO_FIRE") || /불가|금지|불가능/.test(detailValue(x))));
     const on = x && cls && !isNo;
@@ -5265,13 +5283,13 @@ async function compareView() {
   const ds = await Promise.all(camps.map((c) => detailOf(c.id)));
   // 행 제목은 짧게(소유자 2026-10-22: 현장·장작·규격·동물·면수·정보·매너·주변·편의·후기) — 모바일에서 제목 칸을 좁혀 업체 칸을 넓힌다.
   const rowsDef = [
-    ["현장", [["주차", (c) => facts(c).park, "car"], ["전기", (c) => facts(c).power, "bolt"], ["장작", (c) => facts(c).fire, "flame"], ["규격", (c) => facts(c).size, "size"], ["바닥", (c) => facts(c).ground, "layers"], ["위생", (c) => facts(c).sanitary, "bath"], ["동물", (c) => facts(c).pet, "paw"]]],
+    ["현장", [["주차", (c) => facts(c).park, "car"], ["전기", (c) => facts(c).power, "bolt"], ["장작", (c) => facts(c).fire, "flame"], ["규격", (c) => facts(c).size, "size"], ["바닥", (c) => facts(c).ground, "layers"], ["위생", (c) => facts(c).sanitary, "bath"], ["동물", (c) => normNo(facts(c).pet), "paw"]]],
     ["사이트", [["타입", (c) => (c.st?.length ? { v: typeLine2(c), g: "c", src: { label: "한국관광공사 고캠핑 등록 현황", url: c.gc_url } } : null), "tent"], ["면수", (c, d) => profFact(PF(d, "TYPE")), "layers"]]],
-    ["정보", [["입실", (c, d) => usage(c, d)[0][1], "clock-in"], ["퇴실", (c, d) => usage(c, d)[1][1], "clock-out"], ["매너", (c, d) => usage(c, d)[2][1], "bed"], ["요금", (c, d) => usage(c, d)[3][1], "won"]]],
+    ["정보", [["입실", (c, d) => usage(c, d)[0][1], "clock-in"], ["퇴실", (c, d) => usage(c, d)[1][1], "clock-out"], ["매너", (c, d) => usage(c, d)[2][1], "bed"], ["요금", (c) => { const fm = feeMain(c); return fm?.text ? { v: fm.text, g: GR(c.fee?.grade) || "c", src: { label: c.fee?.basis || "요금 근거", url: c.fee?.url, at: c.fee?.checked_at, quote: c.fee?.quote ?? c.fee?.text } } : null; }, "won"], ["환불", (c, d) => usage(c, d)[3][1], "calc"]]],
     ["주변", [["시설", (c) => ((c.amenities ?? []).length ? { v: c.amenities.slice(0, 6).join(" · "), g: "c", src: { label: "고캠핑 등록 편의시설", url: c.gc_url } } : null), "drop"], ["대여", (c) => ((c.rental ?? []).length ? { v: c.rental.join(" · "), g: "c", src: { label: "고캠핑 등록 대여품목", url: c.gc_url } } : null), "cart"], ["편의", (c) => (c.nl?.c ? { v: km(c.nl.c), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+편의점` : null } } : null), "store"], ["마트", (c) => (c.nl?.m ? { v: km(c.nl.m), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+마트` : null } } : null), "cart"], ["후기", (c) => (c.rv?.p?.length ? { v: c.rv.p.slice(0, 2).map(([t]) => normTopic(t)).join(" · "), g: "m", src: { label: "방문자 후기 분석", url: c.gc_url } } : null), "thumb-up"]]],
   ];
 
-  const head = camps.map((c, i) => `<th scope="col" data-col-idx="${i}"><a class="ch" href="${APP_BASE}place/${encodeURIComponent(c.id)}">${campThumb(c, { sizes: "64px" })}<span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></span></a><span class="ch-acts">${heartBtn(c)}<button class="icon-btn ch-x" type="button" data-pick="${esc(c.id)}" aria-label="비교에서 빼기" title="비교에서 빼기(찜은 그대로)">${ic("close")}</button></span></th>`).join("");
+  const head = camps.map((c, i) => `<th scope="col" data-col-idx="${i}"><a class="ch" href="${APP_BASE}place/${encodeURIComponent(c.id)}">${campThumb(c, { sizes: "64px" })}<span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></span></a><span class="ch-acts"><button class="icon-btn ch-x" type="button" data-pick="${esc(c.id)}" aria-label="비교에서 빼기" title="비교에서 빼기(찜은 그대로)">${ic("close")}</button></span></th>`).join("");
   const opens = camps.map((c) => { const o = openingOf(c); const ch = primaryBooking(c); return `<td class="${o ? "hot" : ""}">${o ? `<b>${esc(o.txt)}</b> · ` : ""}${esc(ch ? bookingLabel(ch) : "–")}</td>`; }).join("");
 
   const body = rowsDef.map(([g, rows]) => `<tr class="grp"><th scope="rowgroup" colspan="${camps.length + 1}">${g}</th></tr>${rows.map(([l, get, rIc]) => {

@@ -28,11 +28,12 @@ for (const [w, h, tag] of [[1366, 900, "1366"], [390, 844, "390"]]) {
   const s1 = await saved(), cols1 = await page.$$eval(".cmp-table thead th:not(.corner)", (t) => t.length);
   if (s1.length !== s0.length) fails.push(`${tag}: ×가 찜까지 지움`);
   if (cols1 !== cols0 - 1) fails.push(`${tag}: ×로 열이 안 빠짐 ${cols0}→${cols1}`);
-  // 열 머리 하트 = 찜 해제
-  const hid = await page.$eval(".cmp-table thead .ch-acts .heart.on", (b) => b.dataset.save);
-  await page.click(".cmp-table thead .ch-acts .heart.on"); await page.waitForTimeout(300);
+  // 표 열 머리에는 하트를 두지 않는다(소유자 2026-10-22: 표에서는 × 빼기만). 찜 해제는 위 칩 하트로.
+  if (await page.$(".cmp-table thead .heart")) fails.push(`${tag}: 표 열 머리에 찜 하트가 남음`);
+  const hid = await page.$eval(".picks .pick-wrap.on .heart.on", (b) => b.dataset.save);
+  await page.click(`.picks .heart[data-save="${hid}"]`); await page.waitForTimeout(300);
   const s2 = await saved();
-  if (s2.includes(hid) || s2.length !== s0.length - 1) fails.push(`${tag}: 열 하트로 찜 해제 안 됨`);
+  if (s2.includes(hid) || s2.length !== s0.length - 1) fails.push(`${tag}: 칩 하트로(비교 중인 곳) 찜 해제 안 됨`);
   if (await page.$(`.cmp-table [data-save="${hid}"], .picks [data-save="${hid}"]`)) fails.push(`${tag}: 해제한 곳이 칩·열에 남음`);
   // 내비 숫자(역할 분리): 찜 = 찜한 곳 수, 비교 = 지금 고른 곳(열) 수
   const badge = await page.$eval("[data-saved-count]", (e) => e.textContent.trim()).catch(() => "");
