@@ -15,10 +15,12 @@
 
 | 작업 | 언제 | 결과 파일 | 피하는 CI 시간(같은 파일) |
 |---|---|---|---|
-| `nearby-photos` 주변시설 검색 사진 판독: CLIP + 간판 글자 + 비전 모델. 통과한 사진만 상세 ‘주변시설’에 붙는다 | 20시간마다 | `pipeline/registry/nearby-photos.json` (`j.by: "mac"`) | 금 05:23 |
-| `review-photos` 후기 사진 판정 밀린 것 전부(음식·인물·차 안 사진 숨김) | 20시간마다 | `photo-judgments.json` | 화 04:17 |
-| `texts` 후기·카페·웹문서 글 판정 밀린 것 전부(식당·광고·부동산 글 숨김) | 20시간마다 | `text-judgments.json` | 화 04:17 |
+| `nearby-photos` 주변시설 검색 사진 판독: CLIP + 간판 글자 + 비전 모델. 통과한 사진만 상세 ‘주변시설’에 붙는다 | 4시간마다(밀린 것 이어서) | `pipeline/registry/nearby-photos.json` (`j.by: "mac"`) | 금 05:23 |
+| `review-photos` 후기 사진 판정 밀린 것 전부(음식·인물·차 안 사진 숨김) | 6시간마다 | `photo-judgments.json` | 화 04:17 |
+| `texts` 후기·카페·웹문서 글 판정 밀린 것 전부(식당·광고·부동산 글 숨김) | 6시간마다 | `text-judgments.json` | 화 04:17 |
 | `operator-sites` 운영자 홈페이지 다시 읽기 + 요금표 이미지 Apple Vision OCR | 주말·공휴일, 6일마다 | `operator-site-snippets.json` | 일 03:41 |
+| `operator-gaps` 정보가 빠진 캠핑장 150곳(요금·이용 수칙 우선) 운영자 홈페이지 깊게 읽기 | 주말·공휴일, 2일마다 | `operator-deep.json` | — |
+| `gocamping-detail` 고캠핑 상세 다시 읽기(겨울 운영·난방·시설, 30일 캐시·1초 간격) | 주말·공휴일, 6일마다 | `data/gocamping-detail.ndjson` | — |
 
 결과는 데이터 봇과 같은 길(`.github/scripts/land-on-main.sh`)로 올린다: 최신 main 위로 옮기고, 줄어든 값은 field-guard가 되살리고, 검사(Lint and build·Rail swipe) 통과 후 병합. 다음 `data-sync`(매일 03:17)가 화면에 반영한다.
 

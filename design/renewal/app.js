@@ -1439,6 +1439,29 @@ function flushPendingSaveLogs() {
     } finally { flushingSaveLogs = null; }
   })());
 }
+// ── 찜: 낙관적 UI + 이 기기 보관(소유자 2026-10-23) ─────────────────────
+// 누르면 하트·찜 목록이 바로 바뀌고(이 기기 mc-saved), 서버(공용 찜 — 모든 사용자가 같은 목록)에는 뒤에서 보낸다.
+// 서버에 아직 닿지 않은 동작은 mc-save-ops에 남겨 두었다가 다시 보낸다(첫 화면·연결 복구·탭 복귀).
+// 서버 목록을 읽을 때 이 대기 동작을 덧입혀, 서버 저장이 늦거나 실패해도 방금 한 찜이 사라져 보이지 않게 한다
+// (예전엔 서버 목록이 이 기기 찜을 덮어써 하트가 꺼져 보였고, 사용자가 다시 ‘찜하기’를 눌렀다). 비교(mc-pick)는 기기마다 따로.
+const SAVE_OPS_KEY = "mc-save-ops";
+const SAVE_OP_TTL = 14 * 864e5; // 2주 넘게 못 보낸 동작은 버린다(서버가 계속 거절하는 경우)
+function pendingSaveOps() {
+  const rows = store.get(SAVE_OPS_KEY, []);
+  return Array.isArray(rows) ? rows.filter((x) => x && x.id && (x.action === "add" || x.action === "remove") && Date.now() - (x.at || 0) < SAVE_OP_TTL) : [];
+}
+// 캠핑장마다 마지막 의도 하나만 남긴다(찜→해제를 빨리 누르면 ‘해제’만)
+function setSaveOp(id, action) { store.set(SAVE_OPS_KEY, [...pendingSaveOps().filter((x) => x.id !== id), { id, action, at: Date.now() }]); }
+function clearSaveOp(id, action) { store.set(SAVE_OPS_KEY, pendingSaveOps().filter((x) => !(x.id === id && x.action === action))); }
+function withPendingOps(list) {
+  let out = [...list];
+  for (const o of pendingSaveOps()) { out = out.filter((x) => x !== o.id); if (o.action === "add") out.unshift(o.id); }
+  return out;
+}
+function retryPendingSaveOps() { for (const o of pendingSaveOps()) if (!saveSyncQueue.has(o.id)) pushSave(o.action, o.id); }
+function paintSaveButtons() {
+  $$(`[data-save]`).forEach((x) => { const on = isSaved(x.dataset.save); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); x.setAttribute("aria-label", on ? "찜 해제" : "찜하기"); x.querySelector("use")?.setAttribute("href", `#i-${on ? "heart" : "heart-o"}`); });
+}
 async function loadSharedSaves() {
   if (NO_REMOTE_WRITE) return false; // 테스트는 이 기기 찜만 쓴다(운영 공용 찜과 섞이지 않게)
   if (!await ensureSupabaseConfig()) return false;
@@ -1446,11 +1469,12 @@ async function loadSharedSaves() {
     const r = await fetch(`${SB.url}/rest/v1/shared_save?select=campground_id,created_at&order=created_at.desc`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
     if (!r.ok) return false;
     const list = await r.json();
-    S.saved = list.map((x) => String(x.campground_id)).filter((id) => S.byId.has(id));
+    const before = S.saved.join(",");
+    S.saved = withPendingOps(list.map((x) => String(x.campground_id))).filter((id) => S.byId.has(id));
     store.set("mc-saved", S.saved);
     syncCompare();
-    $$(`[data-save]`).forEach((x) => { const on = isSaved(x.dataset.save); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); x.setAttribute("aria-label", on ? "찜 해제" : "찜하기"); x.querySelector("use")?.setAttribute("href", `#i-${on ? "heart" : "heart-o"}`); });
-    return true;
+    paintSaveButtons();
+    return before !== S.saved.join(",") ? "changed" : true;
   } catch { return false; }
 }
 function clientMeta() {
@@ -1483,13 +1507,15 @@ async function syncSave(action, id) {
       if (!r.ok) throw new Error(`shared_save ${r.status}`);
       if (action === "remove") unchanged = !(await r.json().catch(() => [1])).length;
     }).then(() => ({ status: "fulfilled" }), (reason) => ({ status: "rejected", reason }));
+  // 공용 찜이 실패하면 기록도 미룬다 — 대기 동작(mc-save-ops)을 다시 보낼 때 찜과 기록을 함께 보낸다(따로 보내면 기록이 두 번 감).
+  if (shared.status === "rejected") { console.warn("공용 찜 동기화 실패 — 다음 연결 때 다시 보냅니다.", shared.reason); return; }
+  clearSaveOp(id, action); // 서버에 반영됨(이미 같은 상태였어도) → 대기 동작 지움
   if (unchanged) return;
   const [logged] = await Promise.allSettled([postSaveLog(row)]);
   if (logged.status === "rejected") {
     queueSaveLog(row);
     console.warn("찜 운영 기록을 다음 연결 때 다시 보냅니다.", logged.reason);
   }
-  if (shared.status === "rejected") console.warn("공용 찜 동기화에 실패했습니다.", shared.reason);
 }
 const VIEW_LOG_SEEN = new Map();
 let pendingListDetailEntry = null;
@@ -1518,6 +1544,7 @@ async function postViewLog(id, source = "") {
   } catch (error) { console.warn("조회 기록 동기화에 실패했습니다.", error); }
 }
 function pushSave(action, id) {
+  if (action === "add" || action === "remove") setSaveOp(id, action); // 서버에 닿기 전까지 이 기기에 의도를 남긴다
   // 같은 캠핑장을 빠르게 연속 탭해도 add/remove 순서가 뒤집히지 않게 직렬화한다.
   const previous = saveSyncQueue.get(id) ?? Promise.resolve();
   const job = previous.catch(() => {}).then(() => syncSave(action, id)).catch((error) => console.warn("찜 동기화 실패", error));
@@ -1525,13 +1552,14 @@ function pushSave(action, id) {
   job.finally(() => { if (saveSyncQueue.get(id) === job) saveSyncQueue.delete(id); });
   return job;
 }
-addEventListener("online", () => { flushPendingSaveLogs(); });
+addEventListener("online", () => { retryPendingSaveOps(); flushPendingSaveLogs(); });
 // 오래 열어 둔 탭으로 돌아오면 공용 찜을 다시 읽어 하트를 서버 상태와 맞춘다(다른 기기에서 바꾼 찜을 모른 채 다시 누르는 일 방지). 1분에 한 번까지.
 let sharedSavesAt = Date.now();
 document.addEventListener("visibilitychange", () => {
   if (document.hidden || Date.now() - sharedSavesAt < 60e3) return;
   sharedSavesAt = Date.now();
-  loadSharedSaves().then((ok) => { if (ok && (curHash().startsWith("#/saved") || curHash().startsWith("#/compare"))) route(); });
+  retryPendingSaveOps();
+  loadSharedSaves().then((ok) => { if (ok === "changed" && (curHash().startsWith("#/saved") || curHash().startsWith("#/compare"))) route(); });
 });
 // 찜 토글
 document.addEventListener("click", (e) => {
@@ -5976,7 +6004,8 @@ async function render() {
   else if (name === "theme") { const tk = decodeURIComponent(h.slice(8).split("?")[0]); v.innerHTML = themeView(tk); bindTheme(tk); }
   else if (name === "detail") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await detailView(decodeURIComponent(h.slice(8).split("?")[0])); bindDetail(); }
   else if (name === "saves-log") { v.innerHTML = `<div class="loading"></div>`; v.innerHTML = await savesLogView(); }
-  else if (name === "saved") { v.innerHTML = `<div class="loading"></div>`; await loadSharedSaves(); v.innerHTML = await savedView(); bindSaved(); }
+  // 찜 목록은 이 기기 찜으로 바로 그리고, 서버(공용 찜)를 읽어 달라졌을 때만 다시 그린다(서버가 느려도 기다리지 않음).
+  else if (name === "saved") { v.innerHTML = await savedView(); bindSaved(); loadSharedSaves().then((ok) => { if (ok === "changed" && curHash().startsWith("#/saved")) route(); }); }
   else if (name === "compare") { v.innerHTML = await compareView(); bindCompare(); }
   else if (name === "list") { v.innerHTML = listView(); bindList(); }
   else { v.innerHTML = mapView(); bindMap(); }
@@ -6252,8 +6281,11 @@ addEventListener("error", (e) => {
   S.saved = S.saved.filter((id) => S.byId.has(id));
   await configReady;
   // /saved가 로컬 찜으로 먼저 그려졌다가 서버 찜으로 뒤늦게 바뀌는 경합을 막는다.
-  // 서버 목록을 먼저 확정한 뒤 첫 route를 렌더링해 어느 기기에서나 같은 목록을 본다.
-  await loadSharedSaves();
+  // 서버 목록을 먼저 확정하되 1.5초까지만 기다린다. 늦으면 이 기기 찜(+대기 동작)으로 먼저 그리고, 서버 목록이 오면 하트·찜 목록을 맞춘다.
+  S.saved = withPendingOps(S.saved);
+  const sharedLoad = loadSharedSaves();
+  await Promise.race([sharedLoad, new Promise((r) => setTimeout(r, 1500))]);
+  sharedLoad.then((ok) => { retryPendingSaveOps(); if (ok === "changed" && (curHash().startsWith("#/saved") || curHash().startsWith("#/compare"))) route(); });
   flushPendingSaveLogs();
   // 이전 주소(#c=1554)도 새 상세 주소로 보정해 공유 링크를 깨지 않는다.
   syncCompare(); updateHeaderGlass();
