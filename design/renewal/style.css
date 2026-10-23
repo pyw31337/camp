@@ -3373,6 +3373,8 @@ html, body, #view { min-height: 100%; }
   body:is([data-view="map"], [data-view="themes"], [data-view="compare"], [data-view="saved"]) { --head-h: 0px; }
   body:is([data-view="map"], [data-view="themes"], [data-view="compare"], [data-view="saved"]) .top { display: none; }
   body:is([data-view="map"], [data-view="themes"], [data-view="compare"], [data-view="saved"]) #view { padding-top: env(safe-area-inset-top); }
+  /* 푸터도 ‘찾기’에서만(소유자 2026-10-23) */
+  body:is([data-view="map"], [data-view="themes"], [data-view="compare"], [data-view="saved"]) .site-footer { display: none; }
   body[data-view="detail"] .d-bar { padding-top: calc(10px + env(safe-area-inset-top)); }
 }
 
