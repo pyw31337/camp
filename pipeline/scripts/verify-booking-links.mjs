@@ -8,7 +8,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { judgePage, nameIndex, signalsOf } from "../lib/booking-verify.mjs";
+import { isPlatformRoot, judgePage, nameIndex, signalsOf } from "../lib/booking-verify.mjs";
 import { noCheck } from "../lib/link-check.mjs";
 import { parseRobots, robotsAllows } from "../lib/operator-site.mjs";
 
@@ -47,6 +47,7 @@ for (const c of camps) {
 const now = Date.now();
 const todo = [];
 for (const [k, x] of want) {
+  if (isPlatformRoot(x.u)) { pairs[k] = { v: "PLATFORM_ROOT", why: "예약 플랫폼 첫 화면(업장 페이지 아님)", kind: x.kind, at: new Date().toISOString() }; continue; }
   if (noCheck(x.u)) { pairs[k] = { v: "UNVERIFIED", why: "자동 확인 차단 플랫폼", at: pairs[k]?.at ?? null }; continue; }
   if (health[x.u]?.s === "DEAD") { pairs[k] = { v: "DEAD", why: health[x.u].why, at: health[x.u].at }; continue; }
   const p = pairs[k];

@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { HIDE_VERDICTS, judgePage, nameIndex, signalsOf } from "../lib/booking-verify.mjs";
+import { HIDE_VERDICTS, isPlatformRoot, judgePage, nameIndex, signalsOf } from "../lib/booking-verify.mjs";
 
 const camps = [
   { id: 1, name: "달빛고운 병곡캠핑장", sigungu: "거창군", addr: "경상남도 거창군 북상면 병곡길 12", tel: "055-111-2222" },
@@ -51,4 +51,10 @@ test("예약 상세 주소가 첫 화면으로 튕기거나 다른 사이트로 
   assert.equal(judge(c, { url: "http://www.allkorea.co.kr/res/realtime.html?year=2014", final: "http://www.allkorea.co.kr/", title: "", text: filler }), "STALE_DEEP");
   assert.equal(judge(c, { url: "https://www.gomsem.co.kr/blank", final: "https://dreamwas.com/plugin/search.php?s=blank", title: "blank : 검색결과 | 드림워즈", text: filler }), "LEFT_SITE");
   assert.equal(judge(c, { url: "https://reservation.knps.or.kr/", title: "국립공원공단 예약시스템", text: filler }), "PORTAL");
+});
+
+test("예약 플랫폼 첫 화면은 업장 페이지가 아니다(주소만으로)", () => {
+  for (const u of ["https://camfit.co.kr/", "http://www.camfit.co.kr", "https://booking.naver.com/", "https://m.thankqcamping.com/"]) assert.ok(isPlatformRoot(u), u);
+  for (const u of ["https://camfit.co.kr/camp/64085297977d29001ed4701e", "https://camfit.co.kr/search/result?camp=숲에안기다", "https://www.sineosan.com/", "https://cafe.naver.com/dotoricamp"]) assert.ok(!isPlatformRoot(u), u);
+  assert.ok(HIDE_VERDICTS.has("PLATFORM_ROOT"));
 });
