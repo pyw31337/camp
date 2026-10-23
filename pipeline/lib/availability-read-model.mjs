@@ -6,7 +6,9 @@ export const OBSERVED_UNAVAILABLE = "OBSERVED_UNAVAILABLE";
 export const OBSERVATION_FAILED = "OBSERVATION_FAILED";
 
 export const AVAILABILITY_SCHEMA_VERSION = 2;
-export const DEFAULT_STATUS_TTL_MINUTES = 75;
+// 2026-10-23: 75분이었으나 GitHub 스케줄(*/30)이 실제로는 3~5시간에 한 번만 돌아 대부분 시간에 만료돼 화면에서 사라졌다.
+// 접수 상태는 접수 기간(receipt) 단위로 바뀌므로 12시간 + 접수 마감 시각 중 이른 쪽까지 보인다.
+export const DEFAULT_STATUS_TTL_MINUTES = 720;
 export const DEFAULT_OBSERVATION_TTL_MINUTES = 1440; // 24시간
 
 const iso = (value) => {
@@ -15,6 +17,7 @@ const iso = (value) => {
 };
 
 const plusMinutes = (value, minutes) => new Date(Date.parse(value) + minutes * 60000).toISOString();
+const earlier = (a, b) => (b && Date.parse(b) < Date.parse(a) ? b : a);
 
 export const OBSERVATION_APPROVALS = new Set(["APPROVED_LIVE", "APPROVED_OBSERVATION"]);
 const OBSERVATION_STATES = new Set([OBSERVED_AVAILABLE, OBSERVED_UNAVAILABLE, OBSERVATION_FAILED]);
@@ -115,7 +118,7 @@ export function buildAvailabilityReadModel({
         dataset_url: service.source_url,
         source_tier: service.tier ?? "A",
         observed_at,
-        expires_at: plusMinutes(generated_at, ttlMinutes),
+        expires_at: earlier(plusMinutes(generated_at, ttlMinutes), iso(service.receipt?.to)),
         match_confidence: service.match_score ?? null,
         remaining_count: null,
         inventory_verified: false,

@@ -2,8 +2,9 @@ name: Reservation status sync
 
 on:
   # GitHub Actions 스케줄은 지연될 수 있으므로 화면은 expires_at을 반드시 확인한다.
+  # 2026-10-23: */30은 실제로 3~5시간에 한 번만 돌았고 매번 봇 PR·화면 검사를 만들었다. 3시간마다로 바꾸고 유효시간을 12시간으로 늘렸다.
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "11 */3 * * *"
   workflow_dispatch:
 
 permissions:

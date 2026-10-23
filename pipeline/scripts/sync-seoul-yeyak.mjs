@@ -28,6 +28,9 @@ const services = raw.filter(isCampingService).map((row) => normalizeSeoulService
 const byStatus = services.reduce((acc, s) => ({ ...acc, [s.status ?? "?"]: (acc[s.status ?? "?"] ?? 0) + 1 }), {});
 console.log(`캠핑 관련 예약 상품 ${services.length}건 · 상태 ${JSON.stringify(byStatus)} · 좌표 ${services.filter((s) => s.lat != null).length}건`);
 for (const s of services.slice(0, 5)) console.log(`  예: ${s.status} | ${s.place} | ${s.name} | 접수 ${s.receipt.from ?? "-"} ~ ${s.receipt.to ?? "-"}`);
+// 네트워크 일시 오류(fetch failed·시간 초과)만이면 실패로 끝내지 않는다 — 이전 공개본을 유지하고 다음 실행에서 다시(2026-10-23, 60회 중 1회 빨간 실행).
+const transient = errors.length && errors.every((e) => /fetch failed|timeout|timed out|ECONNRESET|ETIMEDOUT|EAI_AGAIN|5\d\d/i.test(String(e?.message ?? e)));
+if (!used && transient) { console.log("::warning title=서울 공공예약 일시 오류::네트워크 오류로 이번에는 건너뜁니다(이전 공개본 유지)."); process.exit(0); }
 if (!used) { console.log("::error title=서울 공공예약 실패::모든 서비스 호출 실패(키 승인 대기·오타 확인)"); process.exit(errors.length ? 1 : 0); }
 const outDir = fileURLToPath(new URL("../out/", import.meta.url));
 await mkdir(outDir, { recursive: true });

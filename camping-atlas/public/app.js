@@ -6168,7 +6168,8 @@ addEventListener("error", (e) => {
   flushPendingSaveLogs();
   // 공식 접수 상태(서울 공공서비스예약 등)는 짧은 유효기간이 있다. 만료된 파일은 쓰지 않는다.
   S.avail = new Map();
-  if (avail && Date.parse(avail.expires_at) > Date.now()) for (const r of avail.records ?? []) if (r.state === "OFFICIAL_APPLICATION_OPEN") { const k = String(r.campground_id); S.avail.set(k, [...(S.avail.get(k) ?? []), { ...r, disclaimer: avail.disclaimer, source_name: avail.source?.name }]); }
+  // 레코드마다 만료(접수 마감 시각 이하)를 본다 — 접수가 끝난 상품은 보이지 않는다.
+  if (avail && Date.parse(avail.expires_at) > Date.now()) for (const r of avail.records ?? []) if (r.state === "OFFICIAL_APPLICATION_OPEN" && !(Date.parse(r.expires_at) <= Date.now()) && !(Date.parse(r.receipt?.to) <= Date.now())) { const k = String(r.campground_id); S.avail.set(k, [...(S.avail.get(k) ?? []), { ...r, disclaimer: avail.disclaimer, source_name: avail.source?.name }]); }
   // 이전 주소(#c=1554)도 새 상세 주소로 보정해 공유 링크를 깨지 않는다.
   syncCompare(); updateHeaderGlass();
   route();
