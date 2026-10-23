@@ -1,5 +1,12 @@
 # 인수인계
 
+## 📌 맥미니 야간·주말 작업(nightshift) (2026-10-23, Claude)
+
+- 소유자 맥미니가 평일 18~08시·주말·공휴일에 쉰다 → `local/macmini/`(설치 `install.sh`, 설명 `README.md`). launchd가 15분마다 깨우고 `nightshift.mjs`가 시간·기존 로컬 작업(launchd·cron·`~/.letscamp/avoid.txt`)·부하를 보고 작업 하나를 돌린다. 기존 작업이 시작되면 양보.
+- 작업: 주변 사진 판독(CLIP + Apple Vision 간판 글자 + Ollama qwen2.5vl, `scripts/judge-nearby-photos-mac.mjs`, `j.by:"mac"`), 후기 사진·글 판정 밀린 것, 주말 운영자 홈페이지 + Apple Vision OCR(`OCR_ENGINE=apple`).
+- 결과는 `land-on-main.sh`(label `macmini-*`)로 올린다. 같은 파일을 쓰는 CI 시각(금 05:23·화 04:17·일 03:41)은 피해서 끝낸다. CI 판독(`judge-nearby-photos.mjs`)은 `by:"mac"`을 덮어쓰지 않고, `build-nearby-photos`는 맥 판독에 종류 검사를 생략한다(업체 이름으로 확인).
+- 순수 로직: `pipeline/lib/nightshift.mjs`, `pipeline/lib/mac-vision.mjs` (테스트 `test/nightshift.test.mjs`).
+
 ## 📌 지도: 숙박 종류 마커 · 확대 버튼 제거 · 모바일 머리 줄은 ‘찾기’에서만 (2026-10-23, Claude)
 
 - 지도 글램핑·카라반·방갈로 칩을 누르면 마커에 그 숙박 종류(난방 여부·방갈로 세부 이름·동 수)가 칩과 같은 색으로 나온다(`MAP_STAY_KEYS`, `.pin-glamp/-caravan/-house`).

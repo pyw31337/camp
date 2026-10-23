@@ -29,7 +29,10 @@ for (const c of order) {
   if (queue.length >= MAX) break;
 }
 let done = 0, bad = 0;
+// 맥미니 야간 작업(local/macmini)은 끝낼 시각을 넘겨준다 — 그 전에 멈추고 저장(다음 밤에 이어서)
+const DEADLINE = Number(process.env.NIGHTSHIFT_DEADLINE) || Infinity;
 for (const u of queue.slice(0, MAX)) {
+  if (Date.now() > DEADLINE - 120e3) break;
   try { const v = await judge(u); judg[u] = { ...v, at: new Date().toISOString().slice(0, 10) }; done++; if (!v.ok) bad++; } catch {}
   if (done % 500 === 0) writeFileSync(judgPath, `${JSON.stringify({ updated_at: new Date().toISOString(), model: "Xenova/clip-vit-base-patch32", rule: "lib/photo-judge.mjs decide()", photos: judg })}\n`);
 }

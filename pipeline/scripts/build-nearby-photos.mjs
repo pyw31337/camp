@@ -32,7 +32,7 @@ for (const f of readdirSync(dir)) {
     if (x.img_by === "search") { delete x.img; delete x.img_u; delete x.img_s; delete x.img_by; changed = true; }
     if (x.img) return;
     const p = places[placeKey(name, x.lat, x.lng)];
-    if (!p || p.none || !p.t || !p.j?.ok || p.j.v !== NEARBY_RULE_VERSION || !fitsKind(kind, p.j.top)) return;
+    if (!p || p.none || !p.t || !p.j?.ok || p.j.v !== NEARBY_RULE_VERSION || (p.j.by !== "mac" && !fitsKind(kind, p.j.top))) return; // 맥 판독은 업체 이름으로 장면을 확인했다
     Object.assign(x, { img: p.t, img_u: p.u ?? null, img_s: p.s ?? null, img_by: "search" });
     changed = true; attached++;
   };
