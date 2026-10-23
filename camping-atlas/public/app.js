@@ -2744,7 +2744,10 @@ function mountNearbyEv(ev) {
   const group = $("[data-energy]");
   if (!ev || !group) return;
   const places = group.querySelector("[data-energy-places]");
-  places.insertAdjacentHTML("beforeend", ev.list.map((x) => nearbyCard({ type: "EV", name: x.name || "이름 없는 충전소", m: x.km * 1000, lat: x.lat, lng: x.lng, sub: x.fast === 1 ? "급속" : x.fast === 0 ? "완속" : "" })).join(""));
+  // 아파트·입주민 전용 충전소는 외부인이 못 쓴다(원천의 이용 제한 표시로 다음 갱신부터 빠지며, 그 전까지 이름으로 거른다)
+  const open = ev.list.filter((x) => !/아파트|APT|오피스텔|입주민|빌라|맨션/i.test(x.name ?? ""));
+  if (!open.length) return;
+  places.insertAdjacentHTML("beforeend", open.map((x) => nearbyCard({ type: "EV", name: x.name || "이름 없는 충전소", m: x.km * 1000, lat: x.lat, lng: x.lng, sub: x.fast === 1 ? "급속" : x.fast === 0 ? "완속" : "" })).join(""));
   group.closest(".nearby-hub")?.removeAttribute("hidden");
   const tab = $("[data-nb-tab='energy']");
   if (tab) {
@@ -2789,7 +2792,7 @@ function nearbyHubHtml(c, d) {
   const pub = (kinds) => publicGroups.filter(([key]) => kinds.includes(key.replace("public-", ""))).flatMap(([, , , rows]) => rows);
   const otherPublic = publicGroups.filter(([key]) => !["forest", "indoorplay", "pool", "museum"].includes(key.replace("public-", "")));
   // 화장실: 2km 안 전부(상세 toilet_list) — 없으면 카탈로그의 가까운 3곳
-  const toiletRows = (d?.toilet_list ?? toilet.nearest ?? []).map((t) => entry("TOILET", { name: t.name, m: t.m, lat: t.lat, lng: t.lng, addr: t.h24 ? "24시간" : t.addr })).filter(Boolean);
+  const toiletRows = (d?.toilet_list ?? toilet.nearest ?? []).map((t) => entry("TOILET", { name: t.name, m: t.m, lat: t.lat, lng: t.lng, addr: [t.addr, t.h24 ? "24시간" : null].filter(Boolean).join(" · ") || null })).filter(Boolean);
   const tourRows = (() => {
     const list = (nearby.tour ?? []).slice(0, 4).map((x) => entry("TOUR", x)).filter(Boolean);
     const ext = d?.extras ?? {};
@@ -2805,16 +2808,19 @@ function nearbyHubHtml(c, d) {
   const groups = [
     ["conv", "편의점", "store", byDist(conv, pick("MART", licensed.MART ?? [], k(nearby.mart, /supermarket|마트|greengrocer/)), pick("BUTCHER", licensed.BUTCHER ?? [], k(nearby.mart, /정육|바베큐|butcher/)), pick("GEAR", nearby.gear ?? []))],
     ["hospital", "병원", "cross", [...erList, ...byDist([...pick("PHARMACY", licensed.PHARMACY ?? [], k(nearby.medical, /약국|pharmacy|의약/)), ...otc].slice(0, 3), pick("HOSPITAL", k(nearby.medical, /병원|의료원|hospital|clinic/)).slice(0, 3), pick("VET", licensed.VET ?? [], nearby.vet ?? []))]],
-    ["rest", "휴게소", "restarea", pick("REST_AREA", k(nearby.rest, /REST_AREA|SERVICE_AREA|DROWSY_SHELTER/))],
-    ...otherPublic,
-    ["toilet", "화장실", "toilet", toiletRows],
     ["tour", "관광", "tour", byDist(pub(["museum", "pool", "indoorplay", "forest"]), tourRows)],
     ["food", "맛집", "food", (nearby.food ?? []).slice(0, 4).map((x) => entry("FOOD", x)).filter(Boolean)],
+    ["toilet", "화장실", "toilet", toiletRows],
     ["fuel", "주유소", "fuel", fuelPlaces(nearby.fuel ?? [], licensed.FUEL ?? licensed.GAS_STATION)],
+    ["rest", "휴게소", "restarea", pick("REST_AREA", k(nearby.rest, /REST_AREA|SERVICE_AREA|DROWSY_SHELTER/))],
+    ...otherPublic,
   ].filter(([, , , rows]) => rows.length);
   // 충전소: /context/extras.json에서 화면이 뜬 뒤 덧붙인다(mountNearbyEv). 그때까지 칩·칸을 숨긴다.
   const energy = `<section class="nearby-group" id="nb-p-energy" role="tabpanel" aria-labelledby="nb-t-energy" data-energy hidden><div class="nearby-places" data-energy-places></div><p class="nearby-note" data-energy-note hidden></p></section>`;
-  const tabs = [...groups.map(([key, title, icon, rows]) => ({ key, title, icon, n: rows.length })), { key: "energy", title: "충전소", icon: "bolt", n: 0, hide: true }];
+  // 탭 순서(소유자 2026-10-23): 편의점·병원·관광·맛집·화장실·주유소·충전소·휴게소(·그 밖의 공공시설)
+  const tabs = groups.map(([key, title, icon, rows]) => ({ key, title, icon, n: rows.length }));
+  const at = tabs.findIndex((t) => !["conv", "hospital", "tour", "food", "toilet", "fuel"].includes(t.key));
+  tabs.splice(at < 0 ? tabs.length : at, 0, { key: "energy", title: "충전소", icon: "bolt", n: 0, hide: true });
   const tabsHtml = `<div class="nb-tabs" role="tablist" aria-label="주변시설 종류">${tabs.map((t, i) => `<button type="button" role="tab" id="nb-t-${t.key}" data-nb-tab="${t.key}" aria-controls="nb-p-${t.key}" aria-selected="${i === 0 && !t.hide}"${t.hide ? " hidden" : ""}>${ic(t.icon)}${esc(t.title)}${t.n ? `<i>${t.n}</i>` : ""}</button>`).join("")}</div>`;
   return `<section class="d-sec nearby-hub" id="sec-nearby"${groups.length ? "" : " hidden"}><div class="sec-head">${iconTitle("nearby-hub", "주변시설")}<span class="sec-note">${tip("<b>주변 정보</b><span>편의점·마트·정육·약국·동물병원·주유소는 인허가·공공 데이터, 병원·휴게소·화장실은 공공·지도 데이터, 관광·맛집은 한국관광공사 데이터, 휴양림·수영장·실내놀이터·레포츠·박물관은 공개 공공시설 색인과 원문 링크로 연결합니다. 종류마다 가까운 곳 최대 3곳(관광·맛집 4곳)을 보여요. 운영 시간과 영업 여부는 원문에서 다시 확인하세요.</span>")}</span></div>${tabsHtml}<div class="nearby-groups">${groups.map(([key, , , rows], i) => `<section class="nearby-group" id="nb-p-${key}" role="tabpanel" aria-labelledby="nb-t-${key}"${i ? " hidden" : ""}><div class="nearby-places">${rows.map(nearbyCard).join("")}</div></section>`).join("")}${energy}</div></section>`;
 }

@@ -14,6 +14,13 @@ const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const dataDir = process.env.EXPLORE_DIR || join(root, "camping-atlas/public/explore/data");
 const reg = JSON.parse(readFileSync(join(root, "pipeline/registry/public-leisure.json"), "utf8"));
 const idx = buildNearbyIndexes({ public: publicLeisureRecords(reg) });
+// 관광공사 공식 사진(sync-nearby-context가 같은 시설로 확인한 것만, registry/public-poi-photos.json)
+const photoPath = join(root, "pipeline/registry/public-poi-photos.json");
+const photos = existsSync(photoPath) ? JSON.parse(readFileSync(photoPath, "utf8")).photos ?? {} : {};
+const withPhoto = (list) => Object.fromEntries(Object.entries(list).map(([k, rows]) => [k, rows.map((x) => {
+  const ph = photos[x.source_id];
+  return ph ? { ...x, img: ph.img, img_u: `https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=${ph.contentid}`, img_s: "한국관광공사" } : x;
+})]));
 const cat = JSON.parse(readFileSync(join(dataDir, "campgrounds.json"), "utf8"));
 const byId = new Map(cat.map((c) => [String(c.id), c]));
 let withPublic = 0, restFixed = 0, changed = 0;
@@ -25,7 +32,7 @@ for (const f of readdirSync(join(dataDir, "camps"))) {
   const before = JSON.stringify([d.nearby?.public ?? null, d.nearby?.rest ?? null]);
   const pub = nearbyFor(c.lat, c.lng, idx, NEARBY_RULES).public;
   if (pub || d.nearby) d.nearby ??= {};
-  if (pub) { d.nearby.public = pub; withPublic++; } else if (d.nearby) delete d.nearby.public;
+  if (pub) { d.nearby.public = withPhoto(pub); withPublic++; } else if (d.nearby) delete d.nearby.public;
   if (d.nearby?.rest?.length) {
     const hits = d.nearby.rest.filter((x) => restStopNameOk(x.n ?? x.name)).map((x) => ({ point: { name: x.n ?? x.name }, distance_m: x.m ?? x.distance_m, x }));
     const kept = dedupeHits(hits, NEARBY_RULES.rest.limit).map((h) => h.x);

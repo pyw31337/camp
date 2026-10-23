@@ -444,6 +444,8 @@ img { color: transparent; }
 .card-group-types { gap: 4px; }
 .card-group-spec { gap: 2px; }
 .card-group-reviews { margin-top: 0; }
+/* 요금 줄과 후기 줄 사이(소유자 2026-10-23: 여백이 많다): 목록 아래 여백 16px → 2px */
+.card-group-spec:has(+ .card-group-reviews) .rows { margin-bottom: 2px; }
 .card-name { font-size: 1.12rem; font-weight: 850; letter-spacing: -0.03em; line-height: 1.28; height: auto; min-height: 0; max-height: 2.6em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin: 0; }
 [data-v="b"] .card-name { font-size: 1.25rem; font-weight: 900; line-height: 1.25; height: auto; min-height: 0; max-height: 2.5em; }
 .card-meta-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 24px; }
