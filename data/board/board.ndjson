@@ -13,3 +13,4 @@
 {"id":"mvkp0teu-codexnig","at":"2026-10-23T08:13:34.567Z","agent":"codex-nightshift","kind":"claim","topic":null,"text":"nightshift 직접 실행 시 ~/.letscamp/env 자동 로드","files":["local/macmini/nightshift.mjs"]}
 {"id":"mvkp1hw9-codexnig","at":"2026-10-23T08:14:06.297Z","agent":"codex-nightshift","kind":"release","topic":null,"text":"env 자동 로드 패치 완료","reply":"mvkp0teu-codexnig"}
 {"id":"mvkpekqe-codexnig","at":"2026-10-23T08:24:16.502Z","agent":"codex-nightshift","kind":"claim","topic":null,"text":"nightshift 수동 실행 환경변수 문서 인수인계","files":["docs/AGENT_HANDOFF.md"]}
+{"id":"mvkx6x1k-codexnig","at":"2026-10-23T12:02:16.136Z","agent":"codex-nightshift","kind":"release","topic":null,"text":"로컬 정리·백업 및 문서 반영 완료","reply":"mvkpekqe-codexnig"}
