@@ -160,7 +160,7 @@ const store = {
 
 const S = {
   stype: "", camps: [], byId: new Map(), photos: {}, cards: {}, openings: new Map(),
-  q: "", area: "all", quick: new Set(), theme: null, feeBand: store.get("mc-feeband", ""), sort: "rec", shown: 24, mode: "keyword",
+  q: "", area: [], quick: new Set(), theme: null, feeBand: store.get("mc-feeband", ""), sort: "rec", shown: 24, mode: "keyword",
   saved: store.get("mc-saved", store.get("mc-compare", [])), pick: store.get("mc-pick", []), compare: store.get("mc-compare", []),
   detailCache: new Map(), homeScroll: 0,
 };
@@ -437,8 +437,13 @@ const typeRow = (c, extra = "") => {
 // 요금대 필터는 텐트 사이트 요금으로(글램핑·펜션 요금이 섞인 범위로 거르지 않게). 사이트 요금을 모르면 전체 범위.
 const campFeeMin = (c) => tierOf(c, "site")?.[1] ?? c.fee?.min ?? c.pf?.p?.min;
 const campFeeMax = (c) => tierOf(c, "site")?.[2] ?? c.fee?.max ?? c.pf?.p?.max ?? campFeeMin(c);
-const AREAS = [["all", "전국"], ["서울·경기", "서울·경기"], ["강원", "강원"], ["충청", "충청"], ["전라", "전라"], ["경상", "경상"], ["제주", "제주"]];
-const AREA_OF = { 서울: "서울·경기", 인천: "서울·경기", 경기: "서울·경기", 강원: "강원", 충북: "충청", 충남: "충청", 대전: "충청", 세종: "충청", 전북: "전라", 전남: "전라", 광주: "전라", 경북: "경상", 경남: "경상", 대구: "경상", 부산: "경상", 울산: "경상", 제주: "제주" };
+const AREAS = [["all", "전국"], ["서울", "서울"], ["경기", "경기"], ["인천", "인천"], ["강원", "강원"], ["충청", "충청"], ["전라", "전라"], ["경상", "경상"], ["제주", "제주"]];
+const AREA_OF = { 서울: "서울", 인천: "인천", 경기: "경기", 강원: "강원", 충북: "충청", 충남: "충청", 대전: "충청", 세종: "충청", 전북: "전라", 전남: "전라", 광주: "전라", 경북: "경상", 경남: "경상", 대구: "경상", 부산: "경상", 울산: "경상", 제주: "제주" };
+const areaValues = () => Array.isArray(S.area) ? S.area : (S.area && S.area !== "all" ? [S.area] : []);
+const areaPressed = (k) => k === "all" ? areaValues().length === 0 : areaValues().includes(k);
+const areaMatches = (c) => { const selected = areaValues(); return !selected.length || selected.includes(AREA_OF[sidoShort(c.sido)]); };
+const areaLabel = () => areaValues().map((k) => AREAS.find(([id]) => id === k)?.[1] ?? k).join(" · ");
+function toggleArea(k) { S.area = k === "all" ? [] : (areaPressed(k) ? areaValues().filter((x) => x !== k) : [...areaValues(), k]); }
 const QUICK = {
   power: { label: "전기", icon: "bolt", cls: "volt", test: (c) => pos(facts(c).power) && facts(c).power.ok },
   fire: { label: "장작", icon: "firewood", cls: "flame", test: (c) => pos(facts(c).fire) && facts(c).fire.kind === "FIREWOOD_OK" },
@@ -583,7 +588,7 @@ const THEME_SUBS = {
 };
 const SIDO_KW = new Set(["서울", "경기", "인천", "강원", "충북", "충남", "충청", "대전", "세종", "전북", "전남", "전라", "광주", "경북", "경남", "경상", "대구", "울산", "부산", "제주", "서울특별시", "경기도", "인천광역시", "강원특별자치도", "강원도", "충청북도", "충청남도", "대전광역시", "세종특별자치시", "전라북도", "전북특별자치도", "전라남도", "광주광역시", "경상북도", "경상남도", "대구광역시", "울산광역시", "부산광역시", "제주특별자치도", "제주도"]);
 function matches(c, { useArea = true, quick = S.quick } = {}) {
-  if (useArea && S.area !== "all" && AREA_OF[sidoShort(c.sido)] !== S.area) return false;
+  if (useArea && !areaMatches(c)) return false;
   for (const k of quick) if (!QUICK[k].test(c)) return false;
   const fMin = campFeeMin(c), fMax = campFeeMax(c);
   if (S.feeBand === "u3" && !(fMin && fMin <= 30000)) return false;
@@ -1740,7 +1745,7 @@ function homeView() {
     <div class="hero-in">
       <h1 id="hero-t"><span class="h1-a">취향대로 찾아 떠나는</span> <span class="h1-b">전국 <b class="hero-n" data-hero-total>${fmt(heroCounts().total)}</b>곳 <em>자연 속으로.</em></span></h1>
       <p class="hero-summary">캠핑장 <b data-hero-stay>${fmt(heroCounts().stay)}</b>곳 · 당일 나들이 <b data-hero-day>${fmt(heroCounts().day)}</b>곳, 조건으로 골라 보세요</p>
-      <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div>${commonFinderForm({ formAttr: "data-search", isList: false })}</div>
+      <div class="finder"><div class="rail chips finder-regions" aria-label="지역 · 여러 곳 선택 가능">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${areaPressed(k)}">${l}</button>`).join("")}</div>${commonFinderForm({ formAttr: "data-search", isList: false })}</div>
     </div>
   </section>
 
@@ -1813,7 +1818,7 @@ function renderResults({ reset = true } = {}) {
   if (reset) S.shown = 24;
   const act = [];
   if (S.q) act.push(`<button class="chip on" data-clear="q">“${esc(S.q)}” ${ic("close")}</button>`);
-  if (S.area !== "all") act.push(`<button class="chip on" data-clear="area">${esc(S.area)} ${ic("close")}</button>`);
+  if (areaValues().length) act.push(`<button class="chip on" data-clear="area">${esc(areaLabel())} ${ic("close")}</button>`);
   if (S.theme) act.push(`<button class="chip on" data-clear="theme">${esc(themeName(S.theme))} ${ic("close")}</button>`);
   if (S.feeBand) {
     const fbLabel = {
@@ -2096,12 +2101,13 @@ const mdKst = (s) => new Date(s).toLocaleDateString("ko-KR", { month: "numeric",
 const THANKQ_VIEW = (cseq, d) => `https://m.thankqcamping.com/resv/view.hbb?cseq=${encodeURIComponent(cseq)}${d ? `&res_dt=${d.replaceAll("-", "")}` : ""}`;
 function listParams() {
   const q = new URLSearchParams(curHash().split("?")[1] ?? "");
-  const area = q.get("area");
-  return { area: area && AREAS.some(([k]) => k === area) ? area : "all", q: q.get("q") ?? "", cond: condFromParams(q), fee: q.get("fee") ?? "", stype: q.get("stype") ?? "" };
+  const areas = (q.get("area") ?? "").split(",").filter((x) => AREAS.some(([k]) => k === x && k !== "all"));
+  return { area: areas, q: q.get("q") ?? "", cond: condFromParams(q), fee: q.get("fee") ?? "", stype: q.get("stype") ?? "" };
 }
 function listHash({ area = S.area, q = S.q } = {}) {
   const p = new URLSearchParams();
-  if (area && area !== "all") p.set("area", area);
+  const areas = Array.isArray(area) ? area : (area && area !== "all" ? [area] : []);
+  if (areas.length) p.set("area", areas.join(","));
   if (q) p.set("q", q);
   condToParams(p);
   const s = p.toString();
@@ -2184,8 +2190,8 @@ function listRow({ c, ce }, i = 0) {
 }
 
 /** 지역·사이트·요금 필터 모듈 (목록·메인 공통). prefix로 data-attr 구분. */
-function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAttr = "data-fee-band", areaPressed = (k) => S.area === k, stypePressed = (k) => S.stype === k, feePressed = (k) => (S.feeBand ?? "") === k } = {}) {
-  const areaChips = AREAS.map(([k, l]) => `<button type="button" class="chip" ${areaAttr}="${k}" aria-pressed="${areaPressed(k)}">${l}</button>`).join("");
+function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAttr = "data-fee-band", areaPressed: isAreaPressed = areaPressed, stypePressed = (k) => S.stype === k, feePressed = (k) => (S.feeBand ?? "") === k } = {}) {
+  const areaChips = AREAS.map(([k, l]) => `<button type="button" class="chip" ${areaAttr}="${k}" aria-pressed="${isAreaPressed(k)}">${l}</button>`).join("");
   const typeChips = [...STYPES.filter(([k]) => STAY_KEYS.has(k)), ...STYPES.filter(([k]) => !STAY_KEYS.has(k))]
     .filter(([k]) => k !== "PITCH" && k !== "PRIVATE_BATH")
     .map(([k, l, i]) => {
@@ -2193,7 +2199,7 @@ function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAt
       return n ? `<button type="button" class="chip type-chip" ${stypeAttr}="${k}" aria-pressed="${stypePressed(k)}">${ic(i)}${l} <i>${fmt(n)}</i></button>` : "";
     }).join("");
   const fee = (k, l) => `<button type="button" class="chip fee-chip" ${feeAttr}="${k}" aria-pressed="${feePressed(k)}">${l}</button>`;
-  return `<div class="filter-mod" aria-label="지역"><span class="fee-band-lbl">지역</span><div class="rail chips">${areaChips}</div></div>
+  return `<div class="filter-mod" aria-label="지역 · 여러 곳 선택 가능"><span class="fee-band-lbl">지역</span><div class="rail chips">${areaChips}</div></div>
     <div class="filter-mod" aria-label="사이트"><span class="fee-band-lbl">사이트</span><div class="rail chips"><button type="button" class="chip" ${stypeAttr}="" aria-pressed="${!S.stype}">전체</button>${typeChips}</div></div>
     <div class="filter-mod" aria-label="요금"><span class="fee-band-lbl">요금</span><div class="rail chips fee-bands">${fee("", "전체")}${fee("u3", "~3만원")}${fee("3to5", "3~5만원")}${fee("5to7", "5~7만원")}${fee("7to10", "7만원~10만원")}${fee("10to20", "10만원~20만원")}${fee("o20", "20만원+")}</div></div>`;
 }
@@ -2202,8 +2208,7 @@ function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAt
 // 접힌 칩 줄에서 고른 값(지역 묶음·사이트 형태·요금)은 지울 수 있는 알약으로만 보인다(PC는 칩 줄에 이미 보이므로 숨김 = 중복 없음).
 function listMobilePills() {
   const out = [];
-  const area = AREAS.find(([k]) => k === S.area && k !== "all");
-  if (area && !S.cond.sido.length) out.push(`<button type="button" class="cond-pill m-only" data-list-area-k="all" aria-label="${esc(area[1])} 지우기">${esc(area[1])}<span aria-hidden="true">×</span></button>`);
+  if (areaValues().length && !S.cond.sido.length) out.push(`<button type="button" class="cond-pill m-only" data-list-area-k="all" aria-label="${esc(areaLabel())} 지우기">${esc(areaLabel())}<span aria-hidden="true">×</span></button>`);
   const st = S.stype && STYPES.find(([k]) => k === S.stype);
   if (st) out.push(`<button type="button" class="cond-pill m-only" data-list-stype="" aria-label="${esc(st[1])} 지우기">${esc(st[1])}<span aria-hidden="true">×</span></button>`);
   const FEE_L = { u3: "~3만원", "3to5": "3~5만원", "5to7": "5~7만원", "7to10": "7만원~10만원", "10to20": "10만원~20만원", o20: "20만원+", o7: "7만원+" };
@@ -2212,7 +2217,7 @@ function listMobilePills() {
 }
 function listView() {
   const p = listParams();
-  S.area = p.cond.sido.length ? "all" : p.area; S.q = p.q;
+  S.area = p.cond.sido.length ? [] : p.area; S.q = p.q;
   S.cond = p.cond; if (["u3", "3to5", "5to7", "7to10", "10to20", "o20", "o7", ""].includes(p.fee)) S.feeBand = p.fee;
   S.condStrict = new URLSearchParams(curHash().split("?")[1] ?? "").get("strict") === "1";
   // 목록 화면에 보이는 조건만 결과를 바꾼다.
@@ -2227,7 +2232,7 @@ function listView() {
           areaAttr: "data-list-area-k",
           stypeAttr: "data-list-stype",
           feeAttr: "data-fee-band",
-          areaPressed: (k) => S.area === k && !S.cond.sido.length,
+          areaPressed: (k) => areaPressed(k) && !S.cond.sido.length,
         })}
       </div>
       <div class="list-tools">
@@ -2263,7 +2268,7 @@ function bindList() {
   const onSubmit = (e) => { const f = e.target.closest("[data-list-search]"); if (!f) return; e.preventDefault(); S.q = f.q.value.trim(); go(); };
   const onClick = (e) => {
     const a = e.target.closest("[data-list-area-k]");
-    if (a) { S.area = a.dataset.listAreaK; S.cond.sido = []; go(); return; }
+    if (a) { toggleArea(a.dataset.listAreaK); S.cond.sido = []; go(); return; }
     const st = e.target.closest("[data-list-stype]");
     if (st) { S.stype = st.dataset.listStype || ""; go(); return; }
     const x = e.target.closest("[data-cond-x]");
@@ -2373,8 +2378,8 @@ function themeView(themeKey) {
     <div class="theme-body">
       ${isWp ? `<div class="theme-closed-alert">${ic("info")}<div><strong>여름 시즌 물놀이터 운영 종료 안내</strong><p>전국 물놀이터·야영장 수영장 정보입니다. 현재는 하절기 운영이 종료된 상태입니다. 렛츠 캠핑에서 미리 시설 정보를 확인하시고 다음 시즌 피서 계획에 참고해 보세요!</p></div></div>` : ""}
       <div class="theme-tools-bar">
-        <div class="rail chips theme-areas" aria-label="지역">
-          ${AREAS.map(([k, l]) => `<button type="button" class="chip" data-theme-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}
+        <div class="rail chips theme-areas" aria-label="지역 · 여러 곳 선택 가능">
+          ${AREAS.map(([k, l]) => `<button type="button" class="chip" data-theme-area="${k}" aria-pressed="${areaPressed(k)}">${l}</button>`).join("")}
         </div>
         <div class="theme-subtools">
           <span class="theme-count" data-theme-count></span>
@@ -2392,9 +2397,7 @@ function bindTheme(themeKey) {
   let pageN = 24;
   const getThemeList = () => {
     let list = S.camps.filter(testFn);
-    if (S.area !== "all") {
-      list = list.filter((c) => AREA_OF[sidoShort(c.sido)] === S.area);
-    }
+    if (areaValues().length) list = list.filter(areaMatches);
     // 공원은 사진이 없는 공공 장소를 포함하는 별도 탐색 테마다. 이 경로에서는
     // 공원 전용 정보 카드로 보이므로 사진 유무로 제거하지 않는다.
     if (themeKey === "PARK") {
@@ -2436,15 +2439,15 @@ function bindTheme(themeKey) {
   const onClick = (e) => {
     const a = e.target.closest("[data-theme-area]");
     if (a) {
-      S.area = a.dataset.themeArea;
-      $$("[data-theme-area]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.themeArea === S.area)));
+      toggleArea(a.dataset.themeArea);
+      $$("[data-theme-area]").forEach((x) => x.setAttribute("aria-pressed", String(areaPressed(x.dataset.themeArea))));
       pageN = 24;
       renderThemeGrid();
       return;
     }
     if (e.target.closest("[data-theme-clear-area]")) {
-      S.area = "all";
-      $$("[data-theme-area]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.themeArea === "all")));
+      S.area = [];
+      $$("[data-theme-area]").forEach((x) => x.setAttribute("aria-pressed", String(areaPressed(x.dataset.themeArea))));
       pageN = 24;
       renderThemeGrid();
       return;
@@ -2488,7 +2491,7 @@ function bindHome() {
 }
 function homeClicks(e) {
   const a = e.target.closest("[data-area]");
-  if (a) { S.area = a.dataset.area; $$("[data-area]").forEach((x) => x.setAttribute("aria-pressed", String(x === a))); renderResults(); return; }
+  if (a) { toggleArea(a.dataset.area); $$("[data-area]").forEach((x) => x.setAttribute("aria-pressed", String(areaPressed(x.dataset.area)))); renderResults(); return; }
   const t = e.target.closest("[data-theme]");
   if (t) { S.theme = S.theme === t.dataset.theme ? null : t.dataset.theme; $$("[data-theme]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.theme === S.theme))); renderResults(); return; }
   const all = e.target.closest("[data-theme-all]");
@@ -2518,10 +2521,10 @@ function homeClicks(e) {
   const cl = e.target.closest("[data-clear]");
   if (cl) {
     const k = cl.dataset.clear;
-    if (k === "q") S.q = ""; else if (k === "area") S.area = "all"; else if (k === "theme") S.theme = null; else if (k === "stype") S.stype = "";
+    if (k === "q") S.q = ""; else if (k === "area") S.area = []; else if (k === "theme") S.theme = null; else if (k === "stype") S.stype = "";
     else if (k === "feeBand") { S.feeBand = ""; store.set("mc-feeband", ""); $$("[data-fee-band]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.feeBand === ""))); }
     else if (k.startsWith("quick:")) S.quick.delete(k.slice(6));
-    else { S.q = ""; S.area = "all"; S.theme = null; S.stype = ""; S.quick.clear(); S.feeBand = ""; store.set("mc-feeband", ""); $$("[data-fee-band]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.feeBand === ""))); }
+    else { S.q = ""; S.area = []; S.theme = null; S.stype = ""; S.quick.clear(); S.feeBand = ""; store.set("mc-feeband", ""); $$("[data-fee-band]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.feeBand === ""))); }
     const keep = scrollY; render(); scrollTo(0, keep);
     return;
   }
@@ -5863,7 +5866,7 @@ function bindMap() {
   const start = (adapter) => {
     MAP = adapter;
     el.dataset.engine = adapter.kind;
-    if (S.area !== "all") { const pts = S.camps.filter((c) => AREA_OF[sidoShort(c.sido)] === S.area && c.lat).map((c) => [c.lat, c.lng]); if (pts.length) MAP.fit(pts); }
+    if (areaValues().length) { const pts = S.camps.filter((c) => areaMatches(c) && c.lat).map((c) => [c.lat, c.lng]); if (pts.length) MAP.fit(pts); }
     MAP.onMove(drawMap);
     MAP.onClick(() => { selected = null; $("[data-peek]").hidden = true; drawMap(); });
     drawMap();
