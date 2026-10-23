@@ -30,7 +30,9 @@ for (const c of camps) {
 const save = () => writeFileSync(judgPath, `${JSON.stringify({ updated_at: new Date().toISOString(), model: MODEL, rule: "lib/text-judge.mjs decide() — 캠핑장 이름이 없고 식당·광고·부동산·무관 주제가 1위인 글은 숨김", texts: judg })}\n`);
 let done = 0, bad = 0;
 const today = new Date().toISOString().slice(0, 10);
+const DEADLINE = Number(process.env.NIGHTSHIFT_DEADLINE) || Infinity; // 맥미니 야간 작업이 넘겨주는 끝낼 시각
 for (let i = 0; i < Math.min(queue.length, MAX); i += BATCH) {
+  if (Date.now() > DEADLINE - 120e3) break;
   const part = queue.slice(i, Math.min(i + BATCH, MAX));
   const out = await judge(part);
   part.forEach((x, j) => { judg[x.key] = { ...out[j], at: today }; done++; if (!out[j].ok) bad++; });

@@ -194,7 +194,9 @@ async function ocrImages(picked, rules, out = [], deadline = Date.now() + 150000
   const { ocrScore, ocrSentences } = await import("../lib/ocr.mjs");
   // OMP_THREAD_LIMIT=1: tesseract가 프로세스마다 여러 스레드를 띄우면 동시 OCR끼리 서로 느려져 시간 초과로 0줄이 된다.
   const run = (args) => new Promise((ok) => execFile("tesseract", args, { timeout: 90000, maxBuffer: 4e6, env: { ...process.env, OMP_THREAD_LIMIT: "1" } }, (e, out) => ok(e ? null : String(out))));
-  tesseractOk ??= (await run(["--version"])) !== null;
+  // 맥미니(OCR_ENGINE=apple): Apple Vision 글자 인식이 한글 요금표를 tesseract보다 잘 읽는다(lib/mac-vision.mjs). 없으면 tesseract.
+  const apple = process.env.OCR_ENGINE === "apple" ? await import("../lib/mac-vision.mjs").then((m) => (m.visionAvailable() ? m.appleVision : null)).catch(() => null) : null;
+  tesseractOk ??= apple ? true : (await run(["--version"])) !== null;
   if (!tesseractOk) return [];
   sharpMod ??= await import("sharp").then((m) => m.default).catch(() => false);
   const dir = await mkdtemp(join(tmpdir(), "ocr-"));
@@ -221,8 +223,8 @@ async function ocrImages(picked, rules, out = [], deadline = Date.now() + 150000
         } else await writeFile(raw, buf);
         // 원본 psm6 · 전처리 psm6 · 전처리 psm4 중 요금·시간 단서가 가장 많은 결과를 쓴다.
         // 원본 결과에 요금 단서가 충분하면(점수 15↑) 전처리 판독은 건너뛴다(시간 절약).
-        const texts = [await run([raw, "-", "-l", "kor+eng", "--psm", "6"])];
-        if (sharpMod && !(ocrScore(texts[0] ?? "") >= 15)) for (const psm of ["6", "4"]) if (left() > 20000) texts.push(await run([pre, "-", "-l", "kor+eng", "--psm", psm]));
+        const texts = apple ? [(await apple(raw))?.text ?? null] : [await run([raw, "-", "-l", "kor+eng", "--psm", "6"])];
+        if (!apple && sharpMod && !(ocrScore(texts[0] ?? "") >= 15)) for (const psm of ["6", "4"]) if (left() > 20000) texts.push(await run([pre, "-", "-l", "kor+eng", "--psm", psm]));
         texts.splice(0, texts.length, ...texts.filter(Boolean));
         const best = texts.sort((a, b) => ocrScore(b) - ocrScore(a))[0] ?? "";
         if (process.env.CRAWL_DEBUG) console.log("  ocr", img.url, "runs", texts.length, "len", best.length);
