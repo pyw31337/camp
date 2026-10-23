@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T08:56:46.136Z",
+  "generated_at": "2026-10-23T12:36:20.447Z",
   "policy": "operator hosts only, robots respected, sentences and image urls",
   "campgrounds": {
     "146": {
@@ -60,6 +60,11 @@
       "pages": [],
       "snippets": [],
       "images": []
+    },
+    "2472": {
+      "status": "SKIPPED",
+      "reason": "not operator host",
+      "url": "http://cafe.naver.com/dooricamp8469"
     },
     "2931": {
       "status": "OK",
@@ -1411,6 +1416,11 @@
         }
       ]
     },
+    "101093": {
+      "status": "SKIPPED",
+      "reason": "not operator host",
+      "url": "https://cafe.naver.com/alice80"
+    },
     "101150": {
       "status": "OK",
       "name": "THE 숨 FOREST",
@@ -1598,6 +1608,399 @@
       "pages": [],
       "snippets": [],
       "images": []
+    },
+    "102221": {
+      "status": "SKIPPED",
+      "reason": "not operator host",
+      "url": null
+    },
+    "102229": {
+      "status": "OK",
+      "name": "화성에코팜테마파크 오토캠핑장",
+      "url": "https://hsecofarm.hscity.go.kr/",
+      "checked_at": "2026-10-23T12:36:27.975Z",
+      "pages": [
+        "https://hsecofarm.hscity.go.kr/",
+        "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
+        "https://hsecofarm.hscity.go.kr/reservation/info/location.do",
+        "https://hsecofarm.hscity.go.kr/reservation/board/list.do",
+        "https://hsecofarm.hscity.go.kr/reservation/board/list.do?gubun=notice"
+      ],
+      "snippets": [
+        {
+          "text": "이용요금",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "공지사항",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "예약확인/취소",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "[공지] 화성에코팜테마파크 캠핑장 예약 취소 오류 안내",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "[필독] 화성에코팜테마파크 캠핑장 이용 안내 및 수칙",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "[공지] 화성에코팜테마파크 캠핑장 26년 11월 일정 및 예약 안내",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "[공지] 화성에코팜테마파크 캠핑장 26년 11월 개방 사이트 안내",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "[필독] 화성에코팜테마파크 캠핑장 예약 유의사항",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "평일 09:00 ~ 18:00",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "운영시간",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "평일 18:00",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "주말 20:00",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "캠핑장 휴무일",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "테마파크 내 시설 별 이용 시간은 상이할 수 있습니다.",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "캠핑장 입실은 14:00, 퇴실은 다음날 11:00입니다",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "기상 상황과 시설 점검 일정에 따라 운영시간이 조정될 수 있습니다.",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "세부 일정은 공지사항과 예약 화면을 함께 확인해 주세요.",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "할인이 적용되었습니다",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "65세 할인 적용",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "8,000원 4,000원 (예약)",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "할인 대상자가 아닙니다.",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "취소된 예약입니다.",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "취소일 : 2024-06-12 17:52",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "8,000원 (취소)",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "결제완료된 예약은 할인이 적용되지 않습니다.",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "취소 후 다시 결제하시기 바랍니다.",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "8,000원 (결제완료)",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "운영자는 필요한 경우 별도로 운영정책을 공지 안내할 수 있으며, 본 약관과 운영정책이 중첩될 경우 운영정책이 우선 적용됩니다.",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "사후에 공지 또는 전자우편 등으로 안내합니다.",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "회원은 본 약관, 공지사항, 운영정책 및 관계 법령을 준수하여야 하며, 사이트의 업무를 방해하거나 명예를 손상하는 행위를 해서는 안 됩니다.",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "제9조 서비스 이용 시간",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "서비스 이용 시간은 업무상 또는 기술상 특별한 지장이 없는 한 연중무휴 1일 24시간을 원칙으로 합니다.",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "사이트는 다음 경우 사전 공지나 예고 없이 서비스를 일시적 혹은 영구적으로 중단할 수 있습니다.",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "국가비상사태, 정전, 천재지변 등 불가항력",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "전기통신사업법에 규정된 기간통신사업자의 전기통신 서비스 중지",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "전항에 의한 서비스 중단의 경우 사이트는 사전에 공지사항 등을 통하여 회원에게 통지합니다.",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "단, 통제할 수 없는 사유는 사후공지로 대신합니다.",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "제11조 서비스 이용 제한",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "회원은 다음 각호에 해당하는 행위를 하여서는 아니 되며, 해당 행위를 한 경우 사이트는 서비스 이용 제한 및 적법한 조치를 할 수 있으며 이용계약을 해지하거나 기간을 정하여",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "사이트 운영자가 불가피한 사정으로 본 사이트를 중단하게 될 경우, 회원에게 사전 공지를 하고 게시물의 이전이 쉽도록 모든 조치를 하기 위해 노력합니다.",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "주차대수",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
+        },
+        {
+          "text": "머무는 방식에 맞춰 선택할 수 있도록 일반형 A-D, 확장형 E, F 구역으로 나뉜 체류형 캠핑 공간입니다.",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
+        },
+        {
+          "text": "오토캠핑장",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
+        },
+        {
+          "text": "모험놀이터",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
+        },
+        {
+          "text": "1주차장",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
+        },
+        {
+          "text": "2주차장",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
+        },
+        {
+          "text": "어린이놀이터A",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
+        },
+        {
+          "text": "어린이놀이터B",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
+        },
+        {
+          "text": "어린이놀이터C",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
+        },
+        {
+          "text": "local_parking 주차장",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
+        },
+        {
+          "text": "wc 화장실",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
+        },
+        {
+          "text": "recycling 분리수거장",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
+        },
+        {
+          "text": "수유실, 화장실, 편의점(미정)",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
+        },
+        {
+          "text": "수유실, 화장실 등 생활편의를 위한 공간",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
+        },
+        {
+          "text": "시설 운영과 방문객 안내를 담당하는 관리 공간입니다.",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
+        },
+        {
+          "text": "방문 차량을 위한 주차 공간입니다.",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
+        },
+        {
+          "text": "어린이놀이터",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
+        },
+        {
+          "text": "회원이 받은 손해가 천재지변 등 불가항력적이거나 회원의 고의 또는 과실로 인하여 발생한 때에는 손해배상을 하지 않습니다.",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/location.do"
+        },
+        {
+          "text": "운영자는 사이트 기반 및 타 통신업자가 제공하는 전기통신 서비스 장애의 경우 책임이 면제되며 서비스 기반 관련 손해는 사이트 이용약관에 준합니다.",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/location.do"
+        },
+        {
+          "text": "운영자는 설비 관리/점검/보수/교체, 소프트웨어 운용 과정에서 중대한 과실 없이 발생한 장애 및 불가항력 사유로 인한 회원 손해에 대하여 책임지지 않습니다.",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/location.do"
+        },
+        {
+          "text": "보호조치: 내부관리계획, 접근권한 제한, 안전한 저장·전송, 처리기록 보관, 위·변조 방지, 보관시설 잠금장치",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/location.do"
+        },
+        {
+          "text": "제11조 개인정보이용 제한 및 제3자 공개의 거부",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/location.do"
+        },
+        {
+          "text": "19,500원",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/location.do"
+        },
+        {
+          "text": "순환형 바다노선/인천레트로 노선은 하루 3회,순환형 통합권은 하루 5회의 탑승횟수 제한이 있습니다.",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/location.do"
+        },
+        {
+          "text": "차내 음식물 반입 및 음주 행위 금지",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/location.do"
+        },
+        {
+          "text": "반려동물 동승 불가(맹인안내견 제외)",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/location.do"
+        },
+        {
+          "text": "티켓 분실 및 훼손 시 재발급이 불가",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/info/location.do"
+        },
+        {
+          "text": "화성에코팜테마파크 공지사항",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/board/list.do"
+        },
+        {
+          "text": "방문 전 꼭 확인해야 할 공지와 이용 정보를 빠르게 확인해 주세요.",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/board/list.do"
+        },
+        {
+          "text": "[공지] 화성에코팜테마파크 캠핑장 26년 10월 개방 사이트 안내",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/board/list.do"
+        },
+        {
+          "text": "[공지] 화성에코팜테마파크 캠핑장 26년 10월 일정 및 예약 안내",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/board/list.do"
+        },
+        {
+          "text": "[공지] 캠핑장 예약 일정 안내",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/board/list.do"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://hsecofarm.hscity.go.kr/reservation/common/getThumbImage.do?atchFileId=FILE_41186599beee4ef",
+          "page": "https://hsecofarm.hscity.go.kr/reservation/",
+          "alt": "양도양수금지",
+          "layout": false
+        },
+        {
+          "url": "https://hsecofarm.hscity.go.kr/reservation/common/getThumbImage.do?atchFileId=FILE_7b107a7b47804ea",
+          "page": "https://hsecofarm.hscity.go.kr/reservation/",
+          "alt": "11월 예약 안내",
+          "layout": true
+        },
+        {
+          "url": "https://hsecofarm.hscity.go.kr/reservation/common/getThumbImage.do?atchFileId=FILE_3e75e177d174406",
+          "page": "https://hsecofarm.hscity.go.kr/reservation/",
+          "alt": "캠핑카_카라반 구역 팝업",
+          "layout": false
+        },
+        {
+          "url": "https://hsecofarm.hscity.go.kr/reservation/global/images/img/auth3.png",
+          "page": "https://hsecofarm.hscity.go.kr/reservation/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://hsecofarm.hscity.go.kr/reservation/global/images/img/qrcode.svg",
+          "page": "https://hsecofarm.hscity.go.kr/reservation/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://hsecofarm.hscity.go.kr/reservation/global/images/img/ticket.svg",
+          "page": "https://hsecofarm.hscity.go.kr/reservation/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "https://hsecofarm.hscity.go.kr/reservation/images/img/ecofarmcamping.jpg",
+          "page": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
+          "alt": "에코팜캠프",
+          "layout": false
+        },
+        {
+          "url": "https://hsecofarm.hscity.go.kr/reservation/images/img/ecotower.jpg",
+          "page": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
+          "alt": "전망대",
+          "layout": false
+        },
+        {
+          "url": "https://hsecofarm.hscity.go.kr/reservation/images/img/indoor.jpg",
+          "page": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
+          "alt": "체험프로그램",
+          "layout": false
+        },
+        {
+          "url": "https://hsecofarm.hscity.go.kr/reservation/images/img/natrual.jpg",
+          "page": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
+          "alt": "자연체험놀이공간",
+          "layout": false
+        },
+        {
+          "url": "https://hsecofarm.hscity.go.kr/reservation/images/img/exper.jpg",
+          "page": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
+          "alt": "농업/농촌 체험공간",
+          "layout": false
+        },
+        {
+          "url": "https://hsecofarm.hscity.go.kr/reservation/images/img/food.jpg",
+          "page": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
+          "alt": "편의시설",
+          "layout": true
+        },
+        {
+          "url": "https://hsecofarm.hscity.go.kr/reservation/images/img/sight@2x.jpg",
+          "page": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
+          "alt": "",
+          "layout": false
+        }
+      ]
+    },
+    "102270": {
+      "status": "SKIPPED",
+      "reason": "not operator host",
+      "url": "https://myeongrangstay.letsnowgo.com/"
     },
     "102331": {
       "status": "OK",
@@ -1985,6 +2388,11 @@
       "pages": [],
       "snippets": [],
       "images": []
+    },
+    "102377": {
+      "status": "SKIPPED",
+      "reason": "not operator host",
+      "url": null
     }
   }
 }
