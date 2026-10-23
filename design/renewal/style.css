@@ -1163,7 +1163,7 @@ body.map-mode { overflow: hidden; height: 100dvh; }
 .pin-part { background: #fff; color: var(--ink); }
 .pin-volt { background: var(--volt); color: var(--on-volt); }
 /* 조건 마커(소유자 2026-10-23): 기본은 업장 이름(흰 바탕), 조건 칩을 누르면 그 값. 불가는 빨간 바탕 흰 글자(배지 .bdg-no와 같은 색) */
-.pin-name { height: 26px; padding: 0 10px; background: #fff; color: var(--ink); font-size: .74rem; font-weight: 800; }
+.pin.pin-name { height: 26px; padding: 0 10px; background: #fff; color: var(--ink); font-size: .74rem; font-weight: 800; }
 .pin-flame { background: var(--flame); color: #fff; }
 .pin-ink { background: var(--ink); color: #fff; }
 .pin-cobalt { background: var(--cobalt); color: #fff; }
@@ -1678,7 +1678,7 @@ a.near { color: inherit; text-decoration: none; }
 .review-cat-chips .rmc-chip[aria-pressed="true"],
 .review-cat-chips .rmc-chip:focus-visible {
   background: transparent !important;
-  color: var(--ink, #101414);
+  color: var(--ink, #101414) !important; /* 전역 칩 선택 색(흰 글자)보다 우선: 후기 채널은 밑줄 탭 */
   font-weight: 850;
   border-bottom-color: var(--ink, #101414) !important;
   box-shadow: none !important;
@@ -1686,6 +1686,7 @@ a.near { color: inherit; text-decoration: none; }
 }
 .review-cat-chips .rmc-chip .plat-ic { width: 18px; height: 18px; }
 .review-cat-chips .rmc-chip .plat-ic svg { width: 10px; height: 10px; }
+.review-cat-chips .rmc-chip i { font-style: normal; font-size: .76rem; font-weight: 700; color: var(--ink-3); }
 
 .review-links { display: grid; grid-template-columns: repeat(var(--cg-cols, 1), minmax(0, 1fr)); gap: 12px; }
 .review-link-card.media-card { position: relative; }

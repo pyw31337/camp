@@ -50,6 +50,7 @@ const STYLE = `.fc-strip{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;
 .fc-day .t{font-weight:750;font-size:15px}
 .fc-day .lbl{display:block;font-size:12px;font-weight:800;color:var(--ink-2,#374151)}
 .fc-detail-meta{display:block;margin:4px 0 0;color:var(--muted,#6b7280);font-size:12px;font-weight:600;line-height:1.45}
+.fc-dt-sub{font-size:.82em;font-weight:600;color:var(--muted,#6b7280);margin-left:2px}
 .w-icon{display:inline-block;vertical-align:middle;flex:none;overflow:visible}
 .w-icon.w-sun{color:#f59e0b}
 .w-icon.w-sun-cloud{color:#64748b}
@@ -152,7 +153,7 @@ export async function mount(el, camp) {
   const t = dow(today), sat = addDays(today, t === 6 ? 0 : t === 0 ? -1 : 6 - t);
   const sun = sunTimes(sat, camp.lat, camp.lng), moon = moonPhase(sat);
   const extra = [];
-  if (sun.sunrise) extra.push([`이번 주말 해`, `일출 ${sun.sunrise} · 일몰 ${sun.sunset} <span class="muted">${md(sat)} 토</span>`]);
+  if (sun.sunrise) extra.push([`이번 주말 해`, `일출 ${sun.sunrise} · 일몰 ${sun.sunset} <span class="fc-detail-meta">${md(sat)} 토</span>`]);
   extra.push(["토요일 밤 달", `${esc(moon.label)} (밝기 ${Math.round(moon.illum * 100)}%)${moon.dark_sky ? " · 별 보기 좋은 밤" : ""}`]);
   const row = data?.camps?.[camp.id], air = row?.[3] ? data.air?.[row[3]] : null;
   if (air?.grade) extra.push(["미세먼지(지금)", `${AIR[air.grade]} <span class="muted">${row[3].startsWith("s:") ? `${esc(row[3].slice(2))} 측정소` : `${esc(row[3].slice(2))} 측정소 ${air.stations}곳 중앙값`} · PM10 ${air.pm10 ?? "–"} · PM2.5 ${air.pm25 ?? "–"}</span>`]);
@@ -160,7 +161,7 @@ export async function mount(el, camp) {
   if (td) {
     const dd = td.days?.[sat] ? sat : td.days?.[today] ? today : Object.keys(td.days ?? {}).sort()[0];
     const list = td.days?.[dd] ?? [];
-    if (list.length) extra.push([`물때 ${md(dd)} ${dd === sat ? "토" : dd === today ? "오늘" : ""}`.trim(), `${list.map(([t, ty, h]) => `${esc(ty)} ${esc(t)}${h != null ? `(${esc(h)}cm)` : ""}`).join(" · ")} <span class="fc-detail-meta">${esc(td.name)} 예보지점${row[6] != null ? ` · ${esc(row[6])}km` : ""}</span>`]);
+    if (list.length) extra.push([`물때 <span class="fc-dt-sub">${`${md(dd)} ${dd === sat ? "토" : dd === today ? "오늘" : ""}`.trim()}</span>`, `${list.map(([t, ty, h]) => `${esc(ty)} ${esc(t)}${h != null ? `(${esc(h)}cm)` : ""}`).join(" · ")} <span class="fc-detail-meta">${esc(td.name)} 예보지점${row[6] != null ? ` · ${esc(row[6])}km` : ""}</span>`]);
   }
   const ls = data.landslide?.[String(camp?.id ?? "")];
   if (ls) extra.push(["산사태 예측", `${esc(ls[0])} · 산림청 ${esc(new Date(ls[1]).toLocaleString("ko-KR", { timeZone: "Asia/Seoul", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }))} 분석. <a href="https://sansatai.forest.go.kr/" target="_blank" rel="noopener">산사태정보시스템</a>`]);

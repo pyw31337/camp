@@ -3,7 +3,8 @@
 import { GridIndex } from "./geo.mjs";
 
 export const NEARBY_RADIUS_M = 2000;
-export const NEARBY_LIMIT = 5;
+// 상세 화면이 2km 안 화장실을 모두 보인다(소유자 2026-10-23: ‘2km 22곳’을 목록으로). 카탈로그에는 가까운 3곳만 싣는다(explore-data).
+export const NEARBY_LIMIT = 60;
 
 /**
  * @param {{id:string, lat:number, lng:number}[]} campgrounds
@@ -25,6 +26,8 @@ export function linkNearbyToilets(campgrounds, toilets, { radiusM = NEARBY_RADIU
         toilet_id: t.id,
         name: t.name,
         distance_m,
+        lat: t.lat ?? null,
+        lng: t.lng ?? null,
         distance_note: t.source === "osm" ? "OpenStreetMap 좌표 기준 직선거리" : "주소 지오코딩 기준 직선거리(실제 동선·위치와 다를 수 있음)",
         open_hours: t.open_hours,
         open_24h: t.open_24h,

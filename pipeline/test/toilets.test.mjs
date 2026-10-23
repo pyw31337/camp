@@ -66,11 +66,12 @@ test("지오코딩: 한도 초과면 즉시 멈추고 남은 건수를 알린다
   assert.match(r.stopped, /한도/);
 });
 
-test("캠핑장별 주변 화장실: 거리순 5곳, 500m·2km 개수, 300m 통계", () => {
+test("캠핑장별 주변 화장실: 2km 안 전부 거리순(상한 60), 500m·2km 개수, 300m 통계", () => {
   const toilets = Array.from({ length: 7 }, (_, i) => ({ id: `t${i}`, name: `화장실${i}`, lat: 37.5 + i * 0.002, lng: 127, open_24h: i === 0 }));
   const { byCampground, stats } = linkNearbyToilets([{ id: "c1", lat: 37.5, lng: 127 }, { id: "c2", lat: 35, lng: 129 }], toilets);
   const c1 = byCampground.c1;
-  assert.equal(c1.nearest.length, 5);
+  assert.equal(c1.nearest.length, 7);
+  assert.equal(c1.nearest[6].lat, 37.512);
   assert.equal(c1.nearest[0].toilet_id, "t0");
   assert.equal(c1.nearest[0].distance_m, 0);
   assert.equal(c1.count_500m, 3); // 0, 222, 444m

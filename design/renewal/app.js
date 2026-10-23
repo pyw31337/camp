@@ -2692,6 +2692,7 @@ const NEARBY_LABELS = {
   PHARMACY: ["약국", "pharmacy"], HOSPITAL: ["병원", "cross"], VET: ["동물병원", "paw"],
   DROWSY_SHELTER: ["졸음쉼터", "restarea"], REST_AREA: ["휴게소", "restarea"], TOILET: ["공중화장실", "toilet"],
   TOUR: ["관광", "tour"], FOOD: ["맛집", "food"], EV: ["전기차 충전", "bolt"],
+  PUBLIC_FOREST: ["휴양림", "th:FOREST"], PUBLIC_INDOORPLAY: ["실내놀이터", "playground"], PUBLIC_POOL: ["수영장", "swim"], PUBLIC_MUSEUM: ["박물관", "experience"], PUBLIC_LEISURE: ["레포츠", "sports"], PUBLIC_REST: ["휴게소", "restarea"],
   OTC_MEDICINE: ["상비약", "pharmacy"], GAS_STATION: ["주유", "fuel"], ANIMAL_HOSPITAL: ["동물병원", "paw"], GEAR: ["캠핑용품", "tent"],
 };
 const FUEL_BRANDS = [[/S-?OIL|에쓰오일|에스오일/i, "S-OIL"], [/GS칼텍스|\bGS\b|^GS/i, "GS칼텍스"], [/SK에너지|\bSK\b|^SK/i, "SK에너지"], [/현대오일뱅크|오일뱅크|HD현대/i, "HD현대오일뱅크"], [/알뜰/, "알뜰주유소"], [/농협|NH/i, "농협(알뜰)"], [/E1|이원/, "E1(LPG)"], [/LPG|충전소/, "LPG"]];
@@ -2730,7 +2731,7 @@ function nearbyCard(x) {
   const lead = photo ? `<img class="nb-thumb${x.imgU ? " nb-photo" : ""}" src="${esc(photo)}" alt="${esc(x.name)} 사진" loading="lazy" decoding="async" referrerpolicy="no-referrer"${open} onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'nb-ic',innerHTML:this.dataset.ic}))" data-ic="${esc(ic(icon))}">` : `<span class="nb-ic">${ic(icon)}</span>`;
   const credit = photo && x.imgU ? `<small class="nb-credit">사진 · ${esc(x.imgS || "블로그")}</small>` : "";
   const dist = x.summary ? "" : km(x.m);
-  const body = `${lead}<span class="nb-txt"><b>${esc(x.name)}</b><i>${esc(label)}${x.sub ? ` · ${esc(x.sub)}` : ""}${x.summary ? ` · ${x.summary === true ? "공공데이터" : x.summary}` : ""}</i>${credit}</span>${dist ? `<span class="nb-dist" aria-label="캠핑장에서 ${esc(dist)}">${esc(dist)}</span>` : ""}`;
+  const body = `${lead}<span class="nb-txt"><b>${esc(x.name)}</b><i>${esc(label)}${x.sub ? ` · ${esc(x.sub)}` : ""}${x.summary && x.summary !== true ? ` · ${x.summary}` : ""}</i>${credit}</span>${dist ? `<span class="nb-dist" aria-label="캠핑장에서 ${esc(dist)}">${esc(dist)}</span>` : ""}`;
   // 실제 모습: 좌표가 있으면 ‘로드뷰’(카카오 지도 로드뷰, 화면 안 팝업). 줄 자체는 지도 링크.
   const rv = x.lat && x.lng ? `<span class="nb-rv" role="button" tabindex="0" data-rv="${esc(`${x.lat},${x.lng}`)}" data-rv-name="${esc(x.name)}" aria-label="${esc(x.name)} 로드뷰 보기">${ic("roadview")}</span>` : "";
   const actions = `<span class="nb-actions">${rv}<span class="nb-go" aria-hidden="true">${ic("map")}</span></span>`;
@@ -2744,9 +2745,6 @@ function mountNearbyEv(ev) {
   if (!ev || !group) return;
   const places = group.querySelector("[data-energy-places]");
   places.insertAdjacentHTML("beforeend", ev.list.map((x) => nearbyCard({ type: "EV", name: x.name || "이름 없는 충전소", m: x.km * 1000, lat: x.lat, lng: x.lng, sub: x.fast === 1 ? "급속" : x.fast === 0 ? "완속" : "" })).join(""));
-  const note = group.querySelector("[data-energy-note]");
-  note.innerHTML = `충전소 5km 안 ${ev.c5}곳 · 출처 ${ev.source ? `<a href="${esc(ev.source.url)}" target="_blank" rel="noopener">${esc(ev.source.name)}</a>` : "공개자료"}${ev.osm ? " (지도 공개자료라 실제로는 더 가까이 있을 수 있어요)" : ""}`;
-  note.hidden = false;
   group.closest(".nearby-hub")?.removeAttribute("hidden");
   const tab = $("[data-nb-tab='energy']");
   if (tab) {
@@ -2785,30 +2783,32 @@ function nearbyHubHtml(c, d) {
     const [title, icon] = publicLabels[kind] ?? ["공공시설", "amenity"];
     return [`public-${kind}`, title, icon, rows.map((x) => entry(`PUBLIC_${kind.toUpperCase()}`, x)).filter(Boolean)];
   }).filter(([, , , rows]) => rows.length);
-  // 소유자 2026-10-20: 생활·안전·관광 묶음 대신 마트·약국·병원·맛집·관광·주유소·충전소처럼 종류별로 나눠 보인다
-  const groups = [
-    ["conv", "편의점", "store", conv],
-    ["mart", "마트", "cart", pick("MART", licensed.MART ?? [], k(nearby.mart, /supermarket|마트|greengrocer/))],
-    ["butcher", "정육", "meat", pick("BUTCHER", licensed.BUTCHER ?? [], k(nearby.mart, /정육|바베큐|butcher/))],
-    ["pharmacy", "약국", "pharmacy", [...pick("PHARMACY", licensed.PHARMACY ?? [], k(nearby.medical, /약국|pharmacy|의약/)), ...otc].slice(0, 3)],
-    ["hospital", "병원", "cross", [...erList, ...pick("HOSPITAL", k(nearby.medical, /병원|의료원|hospital|clinic/))].slice(0, 3)],
-    ["vet", "동물병원", "paw", pick("VET", licensed.VET ?? [], nearby.vet ?? [])],
-    ["gear", "캠핑용품", "tent", pick("GEAR", nearby.gear ?? [])],
-    ["rest", "휴게소", "restarea", pick("REST_AREA", k(nearby.rest, /REST_AREA|SERVICE_AREA|DROWSY_SHELTER/))],
-    ...publicGroups,
-    ["toilet", "화장실", "toilet", Number(toilet.within_500m) || Number(toilet.within_2km) ? [{ type: "TOILET", name: `500m ${Number(toilet.within_500m) || 0}곳 · 2km ${Number(toilet.within_2km) || 0}곳`, m: Number(toilet.within_500m) ? 500 : 2000, summary: (toilet.nearest ?? []).length && toilet.nearest.every((n) => n.src === "osm") ? "© OpenStreetMap" : true }] : []],
-    ["tour", "관광", "tour", (() => {
-      const list = (nearby.tour ?? []).slice(0, 4).map((x) => entry("TOUR", x)).filter(Boolean);
-      const ext = d?.extras ?? {};
-      if (ext.pet) list.push({ type: "TOUR", name: "반려견 동반 여행지", sub: "한국관광공사 등록", summary: true, url: "https://korean.visitkorea.or.kr/" });
-      if (ext.bf) list.push({ type: "TOUR", name: "무장애 여행지", sub: "한국관광공사(휠체어·유아차)", summary: true, url: "https://korean.visitkorea.or.kr/" });
-      if (ext.tr?.length) {
-        for (const [n, distKm, h, kind] of ext.tr.slice(0, 3)) {
-          list.push({ type: "TOUR", name: `[걷기길] ${n}`, m: (Number(distKm) || 0) * 1000, sub: [kind, h ? `약 ${h}시간` : null].filter(Boolean).join(" · "), url: `https://map.kakao.com/link/search/${encodeURIComponent(n)}` });
-        }
+  // 소유자 2026-10-23: 탭은 편의점(편의점·마트·정육·캠핑용품)·병원(약국·병원·동물병원)·관광(박물관·수영장·실내놀이터·휴양림·관광지)으로 묶는다.
+  // 묶어도 줄마다 원래 종류(마트·약국·휴양림 …)는 그대로 보인다. 탭 안은 가까운 순.
+  const byDist = (...lists) => lists.flat().filter(Boolean).sort((a, b) => (a.m ?? 1e9) - (b.m ?? 1e9));
+  const pub = (kinds) => publicGroups.filter(([key]) => kinds.includes(key.replace("public-", ""))).flatMap(([, , , rows]) => rows);
+  const otherPublic = publicGroups.filter(([key]) => !["forest", "indoorplay", "pool", "museum"].includes(key.replace("public-", "")));
+  // 화장실: 2km 안 전부(상세 toilet_list) — 없으면 카탈로그의 가까운 3곳
+  const toiletRows = (d?.toilet_list ?? toilet.nearest ?? []).map((t) => entry("TOILET", { name: t.name, m: t.m, lat: t.lat, lng: t.lng, addr: t.h24 ? "24시간" : t.addr })).filter(Boolean);
+  const tourRows = (() => {
+    const list = (nearby.tour ?? []).slice(0, 4).map((x) => entry("TOUR", x)).filter(Boolean);
+    const ext = d?.extras ?? {};
+    if (ext.pet) list.push({ type: "TOUR", name: "반려견 동반 여행지", sub: "한국관광공사 등록", summary: true, url: "https://korean.visitkorea.or.kr/" });
+    if (ext.bf) list.push({ type: "TOUR", name: "무장애 여행지", sub: "한국관광공사(휠체어·유아차)", summary: true, url: "https://korean.visitkorea.or.kr/" });
+    if (ext.tr?.length) {
+      for (const [n, distKm, h, kind] of ext.tr.slice(0, 3)) {
+        list.push({ type: "TOUR", name: `[걷기길] ${n}`, m: (Number(distKm) || 0) * 1000, sub: [kind, h ? `약 ${h}시간` : null].filter(Boolean).join(" · "), url: `https://map.kakao.com/link/search/${encodeURIComponent(n)}` });
       }
-      return list;
-    })()],
+    }
+    return list;
+  })();
+  const groups = [
+    ["conv", "편의점", "store", byDist(conv, pick("MART", licensed.MART ?? [], k(nearby.mart, /supermarket|마트|greengrocer/)), pick("BUTCHER", licensed.BUTCHER ?? [], k(nearby.mart, /정육|바베큐|butcher/)), pick("GEAR", nearby.gear ?? []))],
+    ["hospital", "병원", "cross", [...erList, ...byDist([...pick("PHARMACY", licensed.PHARMACY ?? [], k(nearby.medical, /약국|pharmacy|의약/)), ...otc].slice(0, 3), pick("HOSPITAL", k(nearby.medical, /병원|의료원|hospital|clinic/)).slice(0, 3), pick("VET", licensed.VET ?? [], nearby.vet ?? []))]],
+    ["rest", "휴게소", "restarea", pick("REST_AREA", k(nearby.rest, /REST_AREA|SERVICE_AREA|DROWSY_SHELTER/))],
+    ...otherPublic,
+    ["toilet", "화장실", "toilet", toiletRows],
+    ["tour", "관광", "tour", byDist(pub(["museum", "pool", "indoorplay", "forest"]), tourRows)],
     ["food", "맛집", "food", (nearby.food ?? []).slice(0, 4).map((x) => entry("FOOD", x)).filter(Boolean)],
     ["fuel", "주유소", "fuel", fuelPlaces(nearby.fuel ?? [], licensed.FUEL ?? licensed.GAS_STATION)],
   ].filter(([, , , rows]) => rows.length);
@@ -4128,12 +4128,12 @@ function reviewLinksHtml(d, c) {
   const daumSearch = `https://search.daum.net/search?w=blog&q=${q}`;
   const kakaoMap = c?.lat && c?.lng ? `https://map.kakao.com/link/search/${encodeURIComponent(campName)}` : `https://map.kakao.com/link/search/${q}`;
   const gcReview = c?.gc_url || "https://www.gocamping.or.kr/";
-  const catChips = `
-    <div class="rail chips review-cat-chips" aria-label="후기 채널 바로가기">
-      <a class="chip rmc-chip" href="${naverSearch}" target="_blank" rel="noopener">${platIc("naver")}네이버</a>
-      <a class="chip rmc-chip" href="${daumSearch}" target="_blank" rel="noopener">${platIc("kakao")}카카오</a>
-      <a class="chip rmc-chip" href="${kakaoMap}" target="_blank" rel="noopener">${platIc("kakaomap")}카카오맵</a>
-      ${c?.gc_url ? `<a class="chip rmc-chip" href="${esc(gcReview)}" target="_blank" rel="noopener">${platIc("gocamping")}고캠핑</a>` : ""}
+  // 후기 채널 탭(소유자 2026-10-23): 누르면 아래 카드가 그 채널 글로 바뀐다. 모은 글이 없는 채널은 원문 검색 링크를 보인다.
+  const channels = [["naver", "네이버", naverSearch], ["kakao", "카카오", daumSearch], ["kakaomap", "카카오맵", kakaoMap], ...(c?.gc_url ? [["gocamping", "고캠핑", gcReview]] : [])];
+  const catChips = (counts) => `
+    <div class="rail chips review-cat-chips" role="tablist" aria-label="후기 채널">
+      <button type="button" class="chip rmc-chip" data-rv-pk="all" aria-pressed="true">전체${counts ? `<i>${counts.all}</i>` : ""}</button>
+      ${channels.map(([pk, label, href]) => `<button type="button" class="chip rmc-chip" data-rv-pk="${pk}" data-rv-href="${esc(href)}" data-rv-label="${label}" aria-pressed="false">${platIc(pk)}${label}${counts?.[pk] ? `<i>${counts[pk]}</i>` : ""}</button>`).join("")}
     </div>`;
 
   const seenUrl = new Set();
@@ -4161,8 +4161,8 @@ function reviewLinksHtml(d, c) {
 
   if (!allItems.length) {
     return `<section class="d-sec" id="sec-reviews"><div class="sec-head">${iconTitle("review-bubble", "후기")}</div>
-      ${catChips}
-      <p class="review-empty-note">연동된 본문 후기가 적은 곳입니다. 위 공식 검색 채널에서 최신 방문자 후기를 바로 확인하세요.</p>
+      ${catChips(null)}
+      <p class="review-empty-note" data-rv-empty>연동된 본문 후기가 적은 곳입니다. 채널을 누르면 그 채널의 최신 방문자 후기를 열어요.</p>
     </section>`;
   }
 
@@ -4179,11 +4179,14 @@ function reviewLinksHtml(d, c) {
     const dateStr = formatKoreanDate(x.date);
     const relStr = formatRelativeDate(x.date);
     const dateHtml = dateStr ? `<span class="media-card-date"><span>${esc(dateStr)}</span>${relStr ? `<small class="date-rel">${esc(relStr)}</small>` : ""}</span>` : "";
-    return `<article class="review-link-card media-card"><a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${platformLabel} 후기 ${i + 1} 원문 열기">${media}<div class="media-card-body"><span class="media-card-source">${platIc(pk)}<span>${esc(platformLabel)}</span></span><b>${esc(serviceText(x.title, 54) || `방문 후기 ${i + 1}`)}</b>${summary ? `<em>${esc(summary)}</em>` : ""}${dateHtml}</div></a>${srcTip(fact, `${platformLabel} 후기 ${i + 1}`)}</article>`;
+    return `<article class="review-link-card media-card" data-pk="${pk}"><a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${platformLabel} 후기 ${i + 1} 원문 열기">${media}<div class="media-card-body"><span class="media-card-source">${platIc(pk)}<span>${esc(platformLabel)}</span></span><b>${esc(serviceText(x.title, 54) || `방문 후기 ${i + 1}`)}</b>${summary ? `<em>${esc(summary)}</em>` : ""}${dateHtml}</div></a>${srcTip(fact, `${platformLabel} 후기 ${i + 1}`)}</article>`;
   }).join("");
 
+  const counts = { all: allItems.length };
+  for (const x of allItems) { const pk = sourcePlatformKey(x); counts[pk] = (counts[pk] ?? 0) + 1; }
   return `<section class="d-sec" id="sec-reviews"><div class="sec-head">${iconTitle("review-bubble", "후기")}</div>
-    ${catChips}
+    ${catChips(counts)}
+    <p class="review-empty-note" data-rv-empty hidden></p>
     <div class="review-links" data-cgrid>${cards}</div>
   </section>`;
 }
@@ -5127,6 +5130,17 @@ function bindDetail() {
     });
   });
   $(".media-hub .mh-tabs-bar")?.addEventListener("pointerdown", (e) => e.stopPropagation(), { passive: true });
+  // 후기 채널 탭: 카드 격자(cgrid)에 채널 필터를 건다. 모은 글이 없으면 그 채널 검색을 새 창으로 연다.
+  $("#sec-reviews")?.addEventListener("click", (e) => {
+    const t = e.target.closest("[data-rv-pk]");
+    if (!t) return;
+    const sec = t.closest("#sec-reviews"), grid = sec.querySelector(".review-links"), pk = t.dataset.rvPk, empty = sec.querySelector("[data-rv-empty]");
+    const n = pk === "all" ? (grid?.children.length ?? 0) : (grid ? [...grid.children].filter((x) => x.dataset.pk === pk).length : 0);
+    if (!n && pk !== "all") { window.open(t.dataset.rvHref, "_blank", "noopener"); return; }
+    sec.querySelectorAll("[data-rv-pk]").forEach((b) => b.setAttribute("aria-pressed", String(b === t)));
+    if (empty && grid) empty.hidden = true;
+    if (grid) import(new URL(`${MOD_ROOT}context/cgrid.js`, import.meta.url).href).then((m) => m.setFilter(grid, pk === "all" ? null : (x) => x.dataset.pk === pk)).catch(() => {});
+  });
   $(".nearby-hub")?.addEventListener("click", (e) => {
     const t = e.target.closest("[data-nb-tab]");
     if (!t) return;
