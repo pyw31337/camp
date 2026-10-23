@@ -1,4 +1,4 @@
-# 모여라캠핑 리뉴얼 시안 기획 (2026-10-16, Claude)
+# 렛츠 캠핑 리뉴얼 시안 기획 (2026-10-16, Claude)
 
 > 운영 주소: https://pyw31337.github.io/camp/ (A 포스터, 2026-10-20 소유자 승인)
 > 소스: `design/renewal/` → `node scripts/publish-explorer-pages.mjs` → `camping-atlas/public/{index.html,explore/}`(생성물, 손으로 고치지 않음). `/explore/`은 기존 공유 링크 호환 주소이며, `/renewal/`은 같은 소스를 확인하는 보조 주소다.

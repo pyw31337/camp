@@ -111,8 +111,8 @@ for (const [rel, up] of SHELL_PAGES) {
 // 자기 경로(/camp/map, /camp/explore/c/1 …)를 ?p= 로 앱 루트에 넘기면 app.js가 원래 경로로 되돌리고(legacyRoute로 옛 주소 보정) 화면을 그린다.
 // GitHub Pages는 서버 리라이트가 없어서 이 방식(404.html 포함)을 쓴다. 검색·공유 미리보기용 메타는 place/{id}/ 페이지에 따로 넣는다.
 const STUB_JS = `<script>(function(){var B=location.pathname.indexOf("/camp/")===0?"/camp/":"/";var p=location.pathname.slice(B.length).replace(/index\\.html$/,"").replace(/\\/+$/,"");location.replace(B+"?p="+encodeURIComponent(p)+(location.search?"&q="+encodeURIComponent(location.search.slice(1)):"")+location.hash);})();</script>`;
-const stubPage = (title, extraHead = "") => `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${title}</title><meta name="robots" content="noindex">${extraHead}${STUB_JS}</head><body><p><a href="/camp/">모여라 캠핑으로 가기</a></p></body></html>`;
-const exploreIndex = stubPage("모여라 캠핑");
+const stubPage = (title, extraHead = "") => `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${title}</title><meta name="robots" content="noindex">${extraHead}${STUB_JS}</head><body><p><a href="/camp/">렛츠 캠핑으로 가기</a></p></body></html>`;
+const exploreIndex = stubPage("렛츠 캠핑");
 await mkdir(out, { recursive: true });
 await writeFile(`${out}index.html`, exploreIndex);
 // 앱 복사본(explore/app.js·style.css, renewal/)은 더 쓰지 않는다 — 앱은 루트 하나뿐.
@@ -164,9 +164,9 @@ const writeUtilityPages = async (baseDir) => {
   for (const r of ROUTE_STUBS) {
     await rm(`${baseDir}${r}`, { recursive: true, force: true });
     await mkdir(`${baseDir}${r}`, { recursive: true });
-    await writeFile(`${baseDir}${r}/index.html`, stubPage("모여라 캠핑"));
+    await writeFile(`${baseDir}${r}/index.html`, stubPage("렛츠 캠핑"));
   }
-  await writeFile(`${baseDir}404.html`, stubPage("모여라 캠핑"));
+  await writeFile(`${baseDir}404.html`, stubPage("렛츠 캠핑"));
 };
 await writeUtilityPages(rootOut);
 // 예전 explore/ 아래 보조 주소·공유 페이지(explore/c/)는 지운다. 404.html이 explore/c/{id} → place/{id}로 보낸다.
@@ -175,6 +175,7 @@ for (const d of ["c", "themes", "openings", "guide", "vision", "passport", "coll
 // 3. 공유 미리보기(카카오톡·페이스북·X 등): 캠핑장마다 place/{id}/index.html 에 Open Graph·트위터 카드·canonical을 넣는다.
 // 크롤러는 JS를 돌리지 않으므로 이 정적 메타를 읽고, 사람은 넘김 스크립트로 앱의 같은 주소(/camp/place/{id})를 본다(meta refresh는 쓰지 않음).
 const SITE = (process.env.SITE_URL ?? "https://pyw31337.github.io/camp/").replace(/\/?$/, "/");
+const OG_IMAGE = `${SITE}images/og-image.jpg?v=20261023`;
 const attr = (v) => String(v ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const placeSource = [`${rootOut}explore/data/campgrounds.json`, `${dataDir}/campgrounds.json`].find((f) => existsSync(f));
 if (placeSource) {
@@ -191,7 +192,7 @@ if (placeSource) {
     if (full) return https(full);
     const media = p.find((u) => String(u).startsWith("media/")) ?? (c.ph ? `media/${c.ph}` : "");
     if (media) return SITE + media.replace(/-t\.webp$/, "-l.webp");
-    return `${SITE}images/og-image.png`;
+    return OG_IMAGE;
   };
   const typesOf = (c) => (Array.isArray(c.types) ? c.types : String(c.types ?? "").match(/[가-힣A-Za-z]+/g) ?? []).map((t) => t.replace(/야영장$/, "").replace(/^자동차$/, "오토").replace(/^카라반$/, "카라반").replace(/^글램핑$/, "글램핑")).filter(Boolean);
   const feeOf = (c) => (typeof c.fee === "object" ? c.fee?.text : String(c.fee ?? "").match(/'text': '([^']+)'/)?.[1]) ?? "";
@@ -203,17 +204,17 @@ if (placeSource) {
     const where = [c.sido, c.sigungu].filter(Boolean).join(" ");
     const kinds = typesOf(c).join("·");
     const fee = feeOf(c);
-    const title = `${c.name} · 모여라 캠핑`;
+    const title = `${c.name} · 렛츠 캠핑`;
     const description = [`${where}${kinds ? ` ${kinds}` : ""}${c.du ? " 당일 나들이" : " 캠핑장"}`, fee ? `1박 ${fee}` : "", "사이트 규격·전기·화로·주차·주변 정보와 공식 예약처를 한눈에"].filter(Boolean).join(" · ").slice(0, 150);
     const url = `${SITE}place/${encodeURIComponent(id)}/`;
     const image = imageOf(c);
     const imageType = /\.png(?:\?|$)/i.test(image) ? "image/png" : /\.webp(?:\?|$)/i.test(image) ? "image/webp" : "image/jpeg";
-    const head = `<meta name="description" content="${attr(description)}"><link rel="canonical" href="${attr(url)}"><link rel="icon" type="image/svg+xml" href="${attr(`${SITE}favicon.svg`)}"><link rel="apple-touch-icon" sizes="180x180" href="${attr(`${SITE}images/apple-touch-icon.png`)}"><link rel="manifest" href="${attr(`${SITE}manifest.webmanifest`)}">`
-      + `<meta property="og:type" content="website"><meta property="og:site_name" content="모여라 캠핑"><meta property="og:locale" content="ko_KR">`
+    const head = `<meta name="description" content="${attr(description)}"><link rel="canonical" href="${attr(url)}"><link rel="icon" type="image/png" href="${attr(`${SITE}favicon.png`)}"><link rel="apple-touch-icon" sizes="180x180" href="${attr(`${SITE}images/apple-touch-icon.png`)}"><link rel="manifest" href="${attr(`${SITE}manifest.webmanifest`)}">`
+      + `<meta property="og:type" content="website"><meta property="og:site_name" content="렛츠 캠핑"><meta property="og:locale" content="ko_KR">`
       + `<meta property="og:title" content="${attr(title)}"><meta property="og:description" content="${attr(description)}"><meta property="og:url" content="${attr(url)}">`
       + `<meta property="og:image" content="${attr(image)}"><meta property="og:image:secure_url" content="${attr(image)}"><meta property="og:image:type" content="${imageType}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${attr(c.name)}">`
       + `<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${attr(title)}"><meta name="twitter:description" content="${attr(description)}"><meta name="twitter:image" content="${attr(image)}">`;
-    const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${attr(title)}</title>${head}${STUB_JS}</head><body><h1>${attr(c.name)}</h1><p>${attr(description)}</p><p><a href="${attr(url)}">모여라 캠핑에서 보기</a></p></body></html>`;
+    const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${attr(title)}</title>${head}${STUB_JS}</head><body><h1>${attr(c.name)}</h1><p>${attr(description)}</p><p><a href="${attr(url)}">렛츠 캠핑에서 보기</a></p></body></html>`;
     // 중복 등록을 합친 옛 id(c.mg)도 같은 미리보기(canonical은 남은 곳) — 예전에 공유된 링크 보호.
     for (const pid of [id, ...(c.mg ?? []).map(String)]) {
       if (pid !== id && list.some((x) => String(x.id) === pid)) continue;
@@ -234,14 +235,14 @@ if (placeSource) {
   for (const [k, count] of groups) {
     const [sd, sg] = k.split("/");
     const where = sg ? `${sd} ${sg}` : sd;
-    const title = `${where} 캠핑장 ${count.toLocaleString("ko-KR")}곳 · 모여라 캠핑`;
+    const title = `${where} 캠핑장 ${count.toLocaleString("ko-KR")}곳 · 렛츠 캠핑`;
     const description = `${where} 캠핑장 ${count.toLocaleString("ko-KR")}곳을 한눈에 — 사이트 규격·전기·화로·주차·주변 정보와 공식 예약처`;
     const rel = `region/${encodeURIComponent(sd)}/${sg ? `${encodeURIComponent(sg)}/` : ""}`;
     const url = `${SITE}${rel}`;
     const head = `<meta name="description" content="${attr(description)}"><link rel="canonical" href="${attr(url)}">`
-      + `<meta property="og:type" content="website"><meta property="og:site_name" content="모여라 캠핑"><meta property="og:locale" content="ko_KR">`
+      + `<meta property="og:type" content="website"><meta property="og:site_name" content="렛츠 캠핑"><meta property="og:locale" content="ko_KR">`
       + `<meta property="og:title" content="${attr(title)}"><meta property="og:description" content="${attr(description)}"><meta property="og:url" content="${attr(url)}">`
-      + `<meta property="og:image" content="${attr(`${SITE}images/og-image.png`)}"><meta name="twitter:card" content="summary_large_image">`;
+      + `<meta property="og:image" content="${attr(OG_IMAGE)}"><meta name="twitter:card" content="summary_large_image">`;
     const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${attr(title)}</title>${head}${STUB_JS}</head><body><h1>${attr(where)} 캠핑장</h1><p>${attr(description)}</p></body></html>`;
     await mkdir(`${rootOut}region/${sd}${sg ? `/${sg}` : ""}`, { recursive: true });
     await writeFile(`${rootOut}region/${sd}${sg ? `/${sg}` : ""}/index.html`, html);
