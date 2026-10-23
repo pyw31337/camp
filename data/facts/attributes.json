@@ -178,11 +178,11 @@
    "filter": "in",
    "note": "count가 있으면 면·동 수. text는 세부 이름(방갈로·캐빈 등). 원천: 고캠핑 등록값·소개글, 카카오/네이버 분류, 운영자 홈페이지 문장(lib/site-types.mjs)",
    "coverage": {
-    "campgrounds": 2988,
+    "campgrounds": 2989,
     "by_grade": {
      "CONFIRMED": 5666,
      "MENTION": 3166,
-     "OPERATOR": 1024
+     "OPERATOR": 1025
     }
    }
   },
@@ -368,9 +368,9 @@
    "pref": "차를 텐트 옆에 대야 하나요?",
    "filter": "in",
    "coverage": {
-    "campgrounds": 64,
+    "campgrounds": 65,
     "by_grade": {
-     "OPERATOR": 43,
+     "OPERATOR": 44,
      "VERIFIED": 21
     }
    }
@@ -493,10 +493,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 292,
+    "campgrounds": 293,
     "by_grade": {
      "MENTION": 157,
-     "OPERATOR": 179,
+     "OPERATOR": 180,
      "CONFIRMED": 3
     }
    }
@@ -661,10 +661,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 823,
+    "campgrounds": 824,
     "by_grade": {
      "REFERENCE": 468,
-     "OPERATOR": 693,
+     "OPERATOR": 695,
      "MENTION": 26
     }
    }
@@ -796,10 +796,10 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 1018,
+    "campgrounds": 1019,
     "by_grade": {
      "CONFIRMED": 894,
-     "OPERATOR": 189
+     "OPERATOR": 190
     }
    }
   },
@@ -2576,5 +2576,5 @@
    }
   }
  ],
- "generated_at": "2026-10-23T19:45:18.412Z"
+ "generated_at": "2026-10-23T23:45:59.428Z"
 }

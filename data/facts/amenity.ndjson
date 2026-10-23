@@ -13063,6 +13063,7 @@
 {"cid":"pdu-lagrills-yongin","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-10-23"}
 {"cid":"pdu-lagrills-yongin","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-10-23","text":"수영장"}
 {"cid":"pdu-lagrills-yongin","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-10-23"}
+{"cid":"pdu-rooftopthesim-goyang","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.rooftopthesim.com/","at":"2026-10-23T23:40:09.904Z","quote":"매점휴게실"}
 {"cid":"pilot-002-sureui","attr":"AMENITY_TRAIL","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-003-duruwell","attr":"AMENITY_TRAIL","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030095","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-004-haengun","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/haengun","at":"2026-10-15T09:00:00+09:00"}

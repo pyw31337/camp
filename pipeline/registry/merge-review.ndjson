@@ -26439,3 +26439,17 @@
 {"at":"2026-10-23T19:45:13.343Z","by":"Saved camps priority collection","run":"40009315505","action":"restored","file":"camping-atlas/public/explore/data/camps/101065.json","id":"101065","field":"spec.fields.MANNER_TIME.mentions","before":3,"after":2}
 {"at":"2026-10-23T19:45:13.343Z","by":"Saved camps priority collection","run":"40009315505","action":"restored","file":"camping-atlas/public/explore/data/camps/101955.json","id":"101955","field":"spec.fields.MANNER_TIME.mentions","before":2,"after":1}
 {"at":"2026-10-23T19:45:13.343Z","by":"Saved camps priority collection","run":"40009315505","action":"restored","file":"camping-atlas/public/explore/data/camps/102229.json","id":"102229","field":"spec.fields.CHECKOUT_TIME.mentions","before":2,"after":1}
+{"at":"2026-10-23T23:42:28.024Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"osm-w574907274","field":"ti","reason":"당일 장소에 붙은 야영장 표준 입·퇴실 시각(QA R1)"}
+{"at":"2026-10-23T23:42:28.025Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"osm-w799013764","field":"ti","reason":"당일 장소에 붙은 야영장 표준 입·퇴실 시각(QA R1)"}
+{"at":"2026-10-23T23:42:28.025Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"osm-w469023536","field":"ti","reason":"당일 장소에 붙은 야영장 표준 입·퇴실 시각(QA R1)"}
+{"at":"2026-10-23T23:42:28.026Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"osm-w734439882","field":"ti","reason":"당일 장소에 붙은 야영장 표준 입·퇴실 시각(QA R1)"}
+{"at":"2026-10-23T23:42:28.026Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"osm-w435230360","field":"ti","reason":"당일 장소에 붙은 야영장 표준 입·퇴실 시각(QA R1)"}
+{"at":"2026-10-23T23:42:28.026Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"osm-w470895444","field":"ti","reason":"당일 장소에 붙은 야영장 표준 입·퇴실 시각(QA R1)"}
+{"at":"2026-10-23T23:42:28.026Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"osm-w779169455","field":"ti","reason":"당일 장소에 붙은 야영장 표준 입·퇴실 시각(QA R1)"}
+{"at":"2026-10-23T23:45:48.726Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"osm-w574907274","field":"ti","reason":"당일 장소에 붙은 야영장 표준 입·퇴실 시각(QA R1)"}
+{"at":"2026-10-23T23:45:48.727Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"osm-w799013764","field":"ti","reason":"당일 장소에 붙은 야영장 표준 입·퇴실 시각(QA R1)"}
+{"at":"2026-10-23T23:45:48.727Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"osm-w469023536","field":"ti","reason":"당일 장소에 붙은 야영장 표준 입·퇴실 시각(QA R1)"}
+{"at":"2026-10-23T23:45:48.727Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"osm-w734439882","field":"ti","reason":"당일 장소에 붙은 야영장 표준 입·퇴실 시각(QA R1)"}
+{"at":"2026-10-23T23:45:48.727Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"osm-w435230360","field":"ti","reason":"당일 장소에 붙은 야영장 표준 입·퇴실 시각(QA R1)"}
+{"at":"2026-10-23T23:45:48.727Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"osm-w470895444","field":"ti","reason":"당일 장소에 붙은 야영장 표준 입·퇴실 시각(QA R1)"}
+{"at":"2026-10-23T23:45:48.727Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"osm-w779169455","field":"ti","reason":"당일 장소에 붙은 야영장 표준 입·퇴실 시각(QA R1)"}

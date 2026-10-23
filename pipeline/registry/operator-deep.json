@@ -1,34 +1,734 @@
 {
-  "generated_at": "2026-10-23T19:15:42.791Z",
+  "generated_at": "2026-10-23T23:39:45.212Z",
   "policy": "operator hosts only, robots respected, sentences and image urls",
   "campgrounds": {
     "146": {
       "status": "OK",
       "name": "강변사리 캠핑장",
       "url": "http://www.gang42.com/",
-      "checked_at": "2026-10-19T08:54:58.145Z",
+      "checked_at": "2026-10-23T23:40:34.431Z",
       "pages": [
-        "http://www.gang42.com/"
+        "http://www.gang42.com/",
+        "http://www.gang42.com/theme/gang42/sub/sub1/",
+        "http://www.gang42.com/theme/gang42/sub/sub1/index2.php",
+        "http://www.gang42.com/theme/gang42/sub/sub1/index3.php",
+        "http://www.gang42.com/theme/gang42/sub/sub1/index4.php",
+        "http://www.gang42.com/bbs/board.php?bo_table=notify",
+        "http://www.gang42.com/theme/gang42/sub/sub5/list/camp/camp1",
+        "http://www.gang42.com/theme/gang42/sub/sub1/index1.php",
+        "http://www.gang42.com/theme/gang42/sub/sub2/",
+        "http://www.gang42.com/theme/gang42/sub/sub2/index1.php"
       ],
-      "snippets": [],
-      "images": []
+      "snippets": [
+        {
+          "text": "안녕하세요 강변사리 캠핑장,글램핑장 이용 안내입니다",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "글램핑 한 동 이용은 최대 5인 기준이며",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "글램핑장에는 침대와 전기밥솥,전자렌지,커피포트,휴대용가스렌지1구(부탄가스 미포함),소형냉장고,",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "와이파이가 되며 텔레비젼은 없습니다.",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "바닥은 전기필름 난방이며 냉난방기 와 선풍기가 2대 있습니다",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "글램핑장에는 더블침대 이불만 세팅되어 있습니다",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "추가이불은 대여비를 받고 빌려 드림니다 (1인당 5천원)",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "캠핑장과 글램핑장의 입실시간은 오후2시 퇴실시간은 오전11시 입니다",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "초과인원이나 손님 초대시 추가요금 있습니다",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "입실시간과 퇴실시간을 꼭 지켜주십시요",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "시간초과시 시간당 글램핑장은 오천원, 텐트는 삼천원 추가요금이 있습니다",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "캠핑장과 글램핑장의 매너타임은 오후 11시부터 이며 이후 조명등은 소등합니다",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "바베큐세트는 2만원(그릴,장작,석쇠,장갑)이며 장작은 1망 1만원에 판매합니다",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "글램핑장은 공동 화장실과 샤워장을 이용합니다",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "캐러밴과 에어컨부착 텐트트레일러 요금은",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "1박에 4만원으로",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "그외는 입장불가입니다.",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "캐러밴및 텐트트레일러 고객님께서는 입금시",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "1박 4만원 요금을 입금해 주시기 바랍니다",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "예약이 취소됩니다",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "글램핑장과 캠핑장에 빠른 입실을 원하시는 손님들께",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "추가요금 안내 드립니다",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "글램핑장은 1시간당 1만원, 캠핑장은 1시간당 3,000 원",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "추가요금이 있사오니 이용에 참고하시기 바랍니다",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "공지게시판",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "캠핑 ⦁ 글램핑&체험",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "캠핑 ⦁ 글램핑소개",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "캠핑 ⦁ 글램핑예약",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "예약조회/취소",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "캠핑 ⦁ 글램핑",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "캠핑/글램핑 예약",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "캠핑을 이용하시는 분들을 위한 주차공간이 마련되어 있습니다.",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "편리하게 이용하실 수 있는 깨끗한 화장실과 샤워실이 구비되어 있습니다.",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "매점이 구비되어 있어 편안한 휴식이 가능하고 각종 먹거리를 판매합니다.",
+          "url": "http://www.gang42.com/"
+        },
+        {
+          "text": "물우마을은 마을 앞 섬진강의 물 때문에 걱정이 떠나지 않는다 하여 이름이 붙여졌고 두무마을은 마을 뒷산인 회문산 목탁봉에서 중이 말을 들고 춤췄다는 설화로 인해 붙여진 이름입니다.",
+          "url": "http://www.gang42.com/theme/gang42/sub/sub1/"
+        },
+        {
+          "text": "특히 구담마을에는 영화 의 영화촬영지가 유명하고 매년 봄 마을을 뒤덮는 매화로 많은 관광객들이 찾는 곳입니다.",
+          "url": "http://www.gang42.com/theme/gang42/sub/sub1/"
+        },
+        {
+          "text": "적용에 따른 규정과 원칙을 반드시 준수해야 합니다.",
+          "url": "http://www.gang42.com/theme/gang42/sub/sub1/index2.php"
+        },
+        {
+          "text": "뒷산인 회문산 목탁봉에서 중이 말을 들고 춤췄다는 설화로 인해",
+          "url": "http://www.gang42.com/theme/gang42/sub/sub1/index4.php"
+        },
+        {
+          "text": "매화로 많은 관광객들이 찾는 곳입니다.",
+          "url": "http://www.gang42.com/theme/gang42/sub/sub1/index4.php"
+        },
+        {
+          "text": "강변사리 공지게시판 1 페이지 | 강변사리마을",
+          "url": "http://www.gang42.com/bbs/board.php?bo_table=notify"
+        },
+        {
+          "text": "주민과 방문객이 함께하는 강변사리마을센터 개소식 및 강변락락 파티이벤트",
+          "url": "http://www.gang42.com/bbs/board.php?bo_table=notify"
+        },
+        {
+          "text": "글램핑장",
+          "url": "http://www.gang42.com/theme/gang42/sub/sub5/list/camp/camp1"
+        },
+        {
+          "text": "또 한국전쟁 전후의 한 마을 이야기를 담은「아름다운 시절」의 영화촬영지로도 유명하고 나무데크를 따라 섬진강이 눈앞에 펼쳐져 있어 새벽녘 안개가 낄 무렵에는 신비롭고 아름다운 경관을 볼 수 있습니다.",
+          "url": "http://www.gang42.com/theme/gang42/sub/sub2/"
+        },
+        {
+          "text": "지금은 시인이 살고 있지 않지만 그를 찾는 많은 방문객을 위해 시인의 어머니는 항상 관란헌의 방문을 열어놓고 손님을 기다리고 있습니다.",
+          "url": "http://www.gang42.com/theme/gang42/sub/sub2/"
+        }
+      ],
+      "images": [
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/ico_call.png",
+          "page": "http://www.gang42.com/",
+          "alt": "캠핑예약",
+          "layout": false
+        },
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/ico_chair.png",
+          "page": "http://www.gang42.com/",
+          "alt": "체험예약",
+          "layout": false
+        },
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/ico_car.png",
+          "page": "http://www.gang42.com/",
+          "alt": "오시는길",
+          "layout": false
+        },
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/auto_camping.png",
+          "page": "http://www.gang42.com/",
+          "alt": "캠프슬라이드이미지",
+          "layout": false
+        },
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/main_add_img1-2.jpg",
+          "page": "http://www.gang42.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rabi2016001.cafe24.com/theme/gang42/img/main_add_img1.jpg",
+          "page": "http://www.gang42.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/main_add_img1.jpg",
+          "page": "http://www.gang42.com/",
+          "alt": "캠프슬라이드이미지",
+          "layout": false
+        },
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/main_add_img2.jpg",
+          "page": "http://www.gang42.com/",
+          "alt": "캠프슬라이드이미지",
+          "layout": false
+        },
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/main_add_img3.jpg",
+          "page": "http://www.gang42.com/",
+          "alt": "캠프슬라이드이미지",
+          "layout": false
+        },
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/main_add_img1-5.jpg",
+          "page": "http://www.gang42.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rabi2016001.cafe24.com/theme/gang42/img/main_add_img2.jpg",
+          "page": "http://www.gang42.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rabi2016001.cafe24.com/theme/gang42/img/main_add_img3.jpg",
+          "page": "http://www.gang42.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/m_slide_img1.jpg",
+          "page": "http://www.gang42.com/",
+          "alt": "섬진강 자전거여행",
+          "layout": false
+        },
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/m_slide_img2.jpg",
+          "page": "http://www.gang42.com/",
+          "alt": "섬진강 풍경",
+          "layout": false
+        },
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/m_slide_img3.jpg",
+          "page": "http://www.gang42.com/",
+          "alt": "섬진강 축제",
+          "layout": false
+        },
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/m_slide_img4.jpg",
+          "page": "http://www.gang42.com/",
+          "alt": "강변사리마을 특산품",
+          "layout": false
+        },
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/m_slide_img5.jpg",
+          "page": "http://www.gang42.com/",
+          "alt": "숙박안내",
+          "layout": true
+        },
+        {
+          "url": "http://rabi2016001.cafe24.com/theme/gang42/img/local_food_banner.png",
+          "page": "http://www.gang42.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://rabi2016001.cafe24.com/theme/gang42/img/acommodation_banner.png",
+          "page": "http://www.gang42.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/m_park_img1-5.jpg",
+          "page": "http://www.gang42.com/",
+          "alt": "주차시설",
+          "layout": true
+        },
+        {
+          "url": "http://rabi2016001.cafe24.com/theme/gang42/img/ico_chair.png",
+          "page": "http://www.gang42.com/",
+          "alt": "편의시설",
+          "layout": true
+        },
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/m_trail_img1-1.jpg",
+          "page": "http://www.gang42.com/",
+          "alt": "산책로",
+          "layout": false
+        },
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/m_toillet_img1-2-1.jpg",
+          "page": "http://www.gang42.com/",
+          "alt": "샤워장",
+          "layout": false
+        },
+        {
+          "url": "http://www.gang42.com/theme/gang42/img/m_cafe_img.jpg",
+          "page": "http://www.gang42.com/",
+          "alt": "카페테리아",
+          "layout": false
+        }
+      ]
     },
     "427": {
       "status": "OK",
       "name": "그날카라반",
       "url": "http://mujucaravan.com/",
-      "checked_at": "2026-10-19T08:54:41.438Z",
+      "checked_at": "2026-10-23T23:40:12.835Z",
       "pages": [
-        "http://mujucaravan.com/"
+        "http://mujucaravan.com/",
+        "http://mujucaravan.com/bbs/board.php?bo_table=01_03",
+        "http://mujucaravan.com/01_02.htm",
+        "http://mujucaravan.com/bbs/board.php?bo_table=04_01",
+        "http://mujucaravan.com/bbs/board.php?bo_table=04_02",
+        "http://mujucaravan.com/bbs/board.php?bo_table=05_01",
+        "http://mujucaravan.com/bbs/board.php?bo_table=01_03&amp;sop=and&amp;sst=wr_datetime&amp;sod=desc&amp;sfl=&amp;stx=&amp;page=1",
+        "http://mujucaravan.com/bbs/board.php?bo_table=01_03&amp;sop=and&amp;sst=wr_hit&amp;sod=desc&amp;sfl=&amp;stx=&amp;page=1",
+        "http://mujucaravan.com/bbs/board.php?bo_table=01_03&amp;wr_id=1",
+        "http://mujucaravan.com/bbs/board.php?bo_table=04_01&amp;wr_id=9576",
+        "http://mujucaravan.com/bbs/board.php?bo_table=04_01&amp;wr_id=9575",
+        "http://mujucaravan.com/bbs/board.php?bo_table=04_01&amp;wr_id=9574",
+        "http://mujucaravan.com/bbs/board.php?bo_table=04_01&amp;wr_id=9573",
+        "http://mujucaravan.com/bbs/board.php?bo_table=04_02&amp;wr_id=7",
+        "http://mujucaravan.com/bbs/board.php?bo_table=04_02&amp;wr_id=6",
+        "http://mujucaravan.com/bbs/board.php?bo_table=04_02&amp;wr_id=5"
       ],
-      "snippets": [],
-      "images": []
+      "snippets": [
+        {
+          "text": "무주 그날 카라반펜션",
+          "url": "http://mujucaravan.com/"
+        },
+        {
+          "text": "그날 카라반&펜션",
+          "url": "http://mujucaravan.com/"
+        },
+        {
+          "text": "카라반 그날",
+          "url": "http://mujucaravan.com/"
+        },
+        {
+          "text": "공지사항",
+          "url": "http://mujucaravan.com/"
+        },
+        {
+          "text": "무소음트렌치 무소음그레이팅 첫 도입, 어떤 변…",
+          "url": "http://mujucaravan.com/"
+        },
+        {
+          "text": "무주카라반&펜션 그날",
+          "url": "http://mujucaravan.com/"
+        },
+        {
+          "text": "상호 : 그날카라반 ㅣ 대표자 이명수 ㅣ 대표전화 010-5426-3658",
+          "url": "http://mujucaravan.com/"
+        },
+        {
+          "text": "공지사항 1 페이지 | 그날 카라반&펜션",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=01_03"
+        },
+        {
+          "text": "공지사항 1 페이지",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=01_03"
+        },
+        {
+          "text": "공지사항 목록",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=01_03"
+        },
+        {
+          "text": "무주카라반 & 펜션이 오픈되었습니다.",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=01_03"
+        },
+        {
+          "text": "이용후기 1 페이지 | 그날 카라반&펜션",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "무소음트렌치 무소음그레이팅 첫 도입, 어떤 변화가 있을까요?",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "지하실 리모델링을 고려 중인데, 무소음트렌치 무소음그레이팅을 알게 되었습니다.",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "요금은 주대 10만원·TC 1…",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "무소음트렌치 무소음그레이팅 선택 시 혼동되는 부분 해결 부탁드려도 될까요?",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "집 근처 도로 공사로 인해 무소음트렌치 무소음그레이팅을 고려 중입니다.",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "무소음트렌치 무소음그레이팅에 대한 정보가 많지만 실...",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "눈오는 카라반여행",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "조용했던 카라반이었어요",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "갑자기 잡힌 여행으로 카라반에서 묵고 싶어서",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "5/30-5/31 1박2일 머물었습니다.",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "카라반은 처음이라 엄청 기대했는데, 기대 이상이였어요~ 체크인 시간보다 일찍 도착해서 차에서 쉬고 있었는데, 사장님께서 그늘로 차 옮겨서 있으라고 배려 해주시고, 또 조금 일찍 체…",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "넓고 쾌적하고 조용하고 따뜻하고 너무 좋았습니다^^ 카라반은 처음 이용하는데 너무 좋아서 다른 곳은 이용하기 두려울 정도예요ㅎㅎ 카라반은 앞으로 여기만 이용할 것 같아요 잘 쉬다 …",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "무주 그날 카라반에서 즐거운 시간 보냈어요!",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "저희는 6월 9일에 1박2일로 무주로 카라반 여행을 다녀왔습니당!!",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "첫 커플 여행지로 카라반 여행을 가고&nb…",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "장마, 태풍 그리고 카라반",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "태풍 쁘라삐룬과 장마가 겹쳐서 비가 많이 오던 7월2일 그날 카라반을 갔습니당!ㅋㅋㅋㅋㅋ의지의 한국인...비도 오고 바람도 불고 해서 수영장이 할까 걱정했는데 다행이 …",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "여자친구와 600일 기념으로 그 날 카라반을 다녀왔는데 정말 맘에 들었어요!!",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "카라반 여행을 계획하던 중 마음에 드는 곳이 없어 포기하려던 찰나 무주 그날 카라반을 찾게 됐습니다.무주에 갈 계획은 없었지만 후기를 보고 바로 결정하게 됐습니다 !갑작스럽게 하루…",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "남친과 1박2일 그날",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "무주 그날 카라반.",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "♥️ 무주 '그날 카라반' 500일 여행 ♥️",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "남자친구랑 500일 기념으로 처음으로 카라반 여행을 가게 되었는데 예약 전 문자부터 사장님이 너무 친절하셔서 기분 좋게 예약했던거 같아요 도착했을때 주차 할 곳도 직접 알려주시고 …",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "여자친구와 인생 카라반 캠핑 즐기고 왓습니다❤️",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "여러 글램핑도 가보고 햇지만",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "이번에 “그날” 카라반에서 정말 재미있게 놀다왔습니다!!!!!",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "먼저 카라반이 이렇게 넓을수있나에 한번 놀라고 이렇게 깨끗하고 시설이 좋을수있나에 또한번 놀랐어요!!",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "즐거운 추억을 안겨준 그날 카라반♥",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "카라반을 한번도 이용해보지 않아 이용하기 불편하지않을까 고민했는데그런 고민은 괜히 했다 싶을 정도로 너무 편안했던 카라반이었어요뜨거운 물도 너무 잘나오고 난방시설도 좋았고 무엇보다…",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "카라반도깔끔하고 수영장에서도재미있게놀고 베드민턴도빌려주셔서치고",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "2017.08.01~08.02 카라반여행♡",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "2017.08.01~08.02 무주로의 여행...♡이번여름에 여자친구와 어디로 놀러갈지 생각하다가 찾게된 카라반 팬션!!이번에는 평범한 팬션말고 특별한 곳에 가보고싶어 카라반 팬…",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "14,15일 1박했습니다.",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "그날카라반 덕분에 기분좋게 여름휴가 보냈어요!",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "# 그날 카라반 풍경 저희는 8월 6-7일 1박으로 머물다 간 손님입니다!",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "8월9일~~11일(2박3일)",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_01"
+        },
+        {
+          "text": "포토스토리 1 페이지 | 그날 카라반&펜션",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_02"
+        },
+        {
+          "text": "새로 준비한 유아수영장",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_02"
+        },
+        {
+          "text": "유아수영장 추가...",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=04_02"
+        },
+        {
+          "text": "주변관광 1 페이지 | 그날 카라반&펜션",
+          "url": "http://mujucaravan.com/bbs/board.php?bo_table=05_01"
+        }
+      ],
+      "images": [
+        {
+          "url": "http://mujucaravan.com/img/main/title_1.jpg",
+          "page": "http://mujucaravan.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/img/main/room_01.jpg",
+          "page": "http://mujucaravan.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/img/main/room_02.jpg",
+          "page": "http://mujucaravan.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/img/main/room_03.jpg",
+          "page": "http://mujucaravan.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/img/main/room_04.jpg",
+          "page": "http://mujucaravan.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/img/main/room_05.jpg",
+          "page": "http://mujucaravan.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/img/main/room_06.jpg",
+          "page": "http://mujucaravan.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/img/main/title_2.jpg",
+          "page": "http://mujucaravan.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/img/common/site_01.jpg",
+          "page": "http://mujucaravan.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/img/common/site_02.jpg",
+          "page": "http://mujucaravan.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/img/common/site_03.jpg",
+          "page": "http://mujucaravan.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/img/common/site_04.jpg",
+          "page": "http://mujucaravan.com/",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/img/sub/img/s_t01_03.jpg",
+          "page": "http://mujucaravan.com/bbs/board.php?bo_table=01_03",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/img/sub/img/s_t01_02.jpg",
+          "page": "http://mujucaravan.com/01_02.htm",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/img/sub/01/02.jpg",
+          "page": "http://mujucaravan.com/01_02.htm",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/img/sub/img/s_t04_01.jpg",
+          "page": "http://mujucaravan.com/bbs/board.php?bo_table=04_01",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/data/file/04_01/thumb-3718220755_QAu62Cz7_219f0b8d1f3d90a175a657b4871d28b0d839f990_230x230.jpg",
+          "page": "http://mujucaravan.com/bbs/board.php?bo_table=04_01",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/data/file/04_01/thumb-3696609101_WYjyhZ6t_c79f8fbfa27b19afbf36d3068bfb760aa5f0fb0b_230x230.jpg",
+          "page": "http://mujucaravan.com/bbs/board.php?bo_table=04_01",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/data/file/04_01/thumb-1988278084_6SROowMQ_034b7731af6ceef3e4ae93d610e396a3015dc6a2_230x230.jpg",
+          "page": "http://mujucaravan.com/bbs/board.php?bo_table=04_01",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/data/editor/1906/thumb-2e6065bd46ad8cdddf37a2b2fb562465_1560907493_1464_230x230.jpg",
+          "page": "http://mujucaravan.com/bbs/board.php?bo_table=04_01",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/data/file/04_01/thumb-2083932051_V8XPYsO1_93f66b42f6e0d7260f8f2f3594a7ea9796b21037_230x230.jpg",
+          "page": "http://mujucaravan.com/bbs/board.php?bo_table=04_01",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/data/editor/1807/thumb-8543e954bb51f9891b31e3303526b4e2_1532430012_3685_230x230.jpg",
+          "page": "http://mujucaravan.com/bbs/board.php?bo_table=04_01",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/data/editor/1807/thumb-0aa915b6ba6db18213080cf1c9202174_1530630699_7208_230x230.jpg",
+          "page": "http://mujucaravan.com/bbs/board.php?bo_table=04_01",
+          "alt": "",
+          "layout": false
+        },
+        {
+          "url": "http://mujucaravan.com/data/editor/1805/thumb-17745c700d4afc1323cdb71da140b993_1527605052_3785_230x230.jpg",
+          "page": "http://mujucaravan.com/bbs/board.php?bo_table=04_01",
+          "alt": "",
+          "layout": false
+        }
+      ]
     },
     "483": {
       "status": "FETCH_FAILED",
       "name": "금원산자연휴양림 야영장",
       "url": "http://www.geumwonsan.or.kr/",
-      "checked_at": "2026-10-19T08:53:00.029Z",
+      "checked_at": "2026-10-23T23:39:45.280Z",
       "pages": [],
       "snippets": [],
       "images": []
@@ -47,7 +747,7 @@
       "status": "FETCH_FAILED",
       "name": "영월 외룡 캠핑장",
       "url": "http://www.orcamping.co.kr/",
-      "checked_at": "2026-10-19T08:56:47.147Z",
+      "checked_at": "2026-10-23T23:39:45.303Z",
       "pages": [],
       "snippets": [],
       "images": []
@@ -227,7 +927,7 @@
       "status": "OK",
       "name": "에스글램핑",
       "url": "https://www.sglamping.com/index.html",
-      "checked_at": "2026-10-19T08:53:06.218Z",
+      "checked_at": "2026-10-23T23:39:49.843Z",
       "pages": [
         "https://www.sglamping.com/index.html",
         "https://www.sglamping.com/overview.html",
@@ -488,6 +1188,10 @@
           "url": "https://www.sglamping.com/customer.html"
         },
         {
+          "text": "√ 보호자를 동반하지 않은 미성년자의 이용은 불가합니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
           "text": "√ 반려동물 동반 이용은 불가합니다.",
           "url": "https://www.sglamping.com/customer.html"
         },
@@ -497,6 +1201,14 @@
         },
         {
           "text": "√ 환불로 인한 분쟁소지가 없도록 예약 전 환불 규정을 반드시 읽어주세요.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "이용수칙",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 텐트 내 바비큐 이용 금지",
           "url": "https://www.sglamping.com/customer.html"
         },
         {
@@ -520,7 +1232,19 @@
           "url": "https://www.sglamping.com/customer.html"
         },
         {
+          "text": "√ 놀이시설 이용시 반드시 보호자를 동반하여 주시기 바라며 안전사고에 유의하여 주십시오.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "이용시간",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
           "text": "√ 에어바운스 이용은 우천시 제한되며 6월-8월까지는 어린이수영장으로 대체되어 운영됩니다.",
+          "url": "https://www.sglamping.com/customer.html"
+        },
+        {
+          "text": "√ 아이들은 반드시 보호자를 동반하여 이용하여야 합니다.",
           "url": "https://www.sglamping.com/customer.html"
         },
         {
@@ -549,30 +1273,6 @@
         },
         {
           "text": "성인수영장",
-          "url": "https://www.sglamping.com/customer.html"
-        },
-        {
-          "text": "어린이수영장",
-          "url": "https://www.sglamping.com/customer.html"
-        },
-        {
-          "text": "숯 이용 최소 30분 전에 사무실에 연락 부탁드립니다.",
-          "url": "https://www.sglamping.com/customer.html"
-        },
-        {
-          "text": "20,000 원",
-          "url": "https://www.sglamping.com/customer.html"
-        },
-        {
-          "text": "장작세트",
-          "url": "https://www.sglamping.com/customer.html"
-        },
-        {
-          "text": "15,000 원 ( 장작 10,000원",
-          "url": "https://www.sglamping.com/customer.html"
-        },
-        {
-          "text": "화로대 대여 5,000원 )",
           "url": "https://www.sglamping.com/customer.html"
         },
         {
@@ -744,7 +1444,7 @@
       "status": "OK",
       "name": "경주시종합자원화단지 별빛카라반",
       "url": "http://www.xn--oi2bv4eitat0ab45dqwcn8f.kr/intro/intro.php",
-      "checked_at": "2026-10-19T08:54:44.032Z",
+      "checked_at": "2026-10-23T23:40:15.579Z",
       "pages": [
         "http://www.xn--oi2bv4eitat0ab45dqwcn8f.kr/intro/intro.php"
       ],
@@ -769,7 +1469,7 @@
       "status": "OK",
       "name": "글로우",
       "url": "http://www.glowglam.co.kr/",
-      "checked_at": "2026-10-19T08:53:13.031Z",
+      "checked_at": "2026-10-23T23:39:58.003Z",
       "pages": [
         "http://www.glowglam.co.kr/",
         "http://glowglam.co.kr/glow_guide.php",
@@ -783,6 +1483,10 @@
         },
         {
           "text": "글로우A(개별수영장)",
+          "url": "http://www.glowglam.co.kr/"
+        },
+        {
+          "text": "공지사항",
           "url": "http://www.glowglam.co.kr/"
         },
         {
@@ -818,6 +1522,10 @@
           "url": "http://glowglam.co.kr/glow_guide.php"
         },
         {
+          "text": "최선을 다하기 위해 공지를 하여 알려드리고 있습니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
           "text": "온가족이 함께하는 힐링쉼터, 공주시 글램핑장입니다.",
           "url": "http://glowglam.co.kr/glow_notice.php"
         },
@@ -846,6 +1554,10 @@
           "url": "http://glowglam.co.kr/glow_notice.php"
         },
         {
+          "text": "반입 불가 품목이 어떻게 되나요?",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
           "text": "숯 종류, 외부 장작, 전기&가스난로, 튀김기, 에어프라이어, 폭죽, 촛불, 총 무기 장난감, 개인 미니 풀장 등",
           "url": "http://glowglam.co.kr/glow_notice.php"
         },
@@ -863,6 +1575,10 @@
         },
         {
           "text": "* 반려동물의 출입은 불가합니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 튀김기, 에어프라이어, 자이글 등 사용 금지",
           "url": "http://glowglam.co.kr/glow_notice.php"
         },
         {
@@ -886,6 +1602,10 @@
           "url": "http://glowglam.co.kr/glow_notice.php"
         },
         {
+          "text": "- 객실, 바베큐장은 절대 금연 구역으로 흡연 시 정화비용 10만원 청구합니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
           "text": "- 반입한 쓰레기는 꼭!",
           "url": "http://glowglam.co.kr/glow_notice.php"
         },
@@ -898,7 +1618,19 @@
           "url": "http://glowglam.co.kr/glow_notice.php"
         },
         {
+          "text": "- 현장 상황에 따라 원하는 객실 및 바베큐장 배정이 제한될 수 있습니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
           "text": "- 중복 예약 발생 시 100% 환불 해 드립니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 객실 및 바베큐장, 잔디광장은 금연구역입니다.",
+          "url": "http://glowglam.co.kr/glow_notice.php"
+        },
+        {
+          "text": "- 사전에 협의되지 않은 상업적 촬영 및 드론 촬영은 불가합니다.",
           "url": "http://glowglam.co.kr/glow_notice.php"
         },
         {
@@ -930,9 +1662,9 @@
           "layout": false
         },
         {
-          "url": "http://glowglam.co.kr/plugin/weather/img/light/%ED%95%B4.png",
+          "url": "http://glowglam.co.kr/plugin/weather/img/light/%EA%B5%AC%EB%A6%84%EB%B9%84.png",
           "page": "http://glowglam.co.kr/glowglam.php",
-          "alt": "맑음",
+          "alt": "비",
           "layout": false
         },
         {
@@ -1061,7 +1793,7 @@
       "status": "OK",
       "name": "주식회사 라하",
       "url": "http://rahaglamping.com/",
-      "checked_at": "2026-10-19T08:54:48.093Z",
+      "checked_at": "2026-10-23T23:40:19.137Z",
       "pages": [
         "http://rahaglamping.com/",
         "http://rahaglamping.com/about",
@@ -1173,6 +1905,10 @@
           "url": "http://rahaglamping.com/reserve"
         },
         {
+          "text": "이용시간: 10:00 ~ 22:00",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
           "text": "1회(약 3시간) 2인 기준, 통대여 40,000원",
           "url": "http://rahaglamping.com/reserve"
         },
@@ -1221,7 +1957,15 @@
           "url": "http://rahaglamping.com/reserve"
         },
         {
+          "text": "운영시간 : 09:00 ~ 22:00",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
           "text": "실내(객실, 사우나 등) 절대 금연이며, 적발시 강제퇴실 및 청소비와 익일 객실료가 청구됩니다.",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "향이나 초, 모기향, 가스버너 등 화기에 관련된 제품은 실내 사용을 금지하고 있습니다.(무단 사용으로 화재 발생 시 민형사상 책임이 있습니다.)",
           "url": "http://rahaglamping.com/reserve"
         },
         {
@@ -1233,7 +1977,15 @@
           "url": "http://rahaglamping.com/reserve"
         },
         {
+          "text": "바비큐 이용시 개별 장비 및 개인 화기는 사용 불가합니다.",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
           "text": "예약 후 이용일자 및 객실 변경은 해당예약 취소 후 다시 재예약하셔야 합니다.(예약변경을 위한 취소시에도 취소수수료가 부과되오니 신중하게 예약하시기 바랍니다.)",
+          "url": "http://rahaglamping.com/reserve"
+        },
+        {
+          "text": "밤 10시 이후, 쾌적한 휴식을 위하여 무분별한 오락, 음주 및 고성방가를 자제하여 주시기 바랍니다.",
           "url": "http://rahaglamping.com/reserve"
         },
         {
@@ -1246,26 +1998,6 @@
         },
         {
           "text": "펜션이용시 아동을 포함한 고객분의 안전에 유의하여 주시고, 본인 부주의로 인한 안전사고에 대해서는 숙소에서 책임지지 않습니다.",
-          "url": "http://rahaglamping.com/reserve"
-        },
-        {
-          "text": "퇴실시 음식물을 비롯한 모든 쓰레기는 분리수거해 주시고, 사용하신 주방기구는 세척해 주시기 바랍니다.",
-          "url": "http://rahaglamping.com/reserve"
-        },
-        {
-          "text": "환불기준",
-          "url": "http://rahaglamping.com/reserve"
-        },
-        {
-          "text": "환불은 입금자와 동일한 예금주에 한하여 가능합니다.",
-          "url": "http://rahaglamping.com/reserve"
-        },
-        {
-          "text": "취소 수수료는 결제일이 아닌 입실일 기준으로 적용됩니다.",
-          "url": "http://rahaglamping.com/reserve"
-        },
-        {
-          "text": "예약 완료 후 날짜 및 객실변경은 입실일 10일 이전에만 가능합니다.",
           "url": "http://rahaglamping.com/reserve"
         }
       ],
@@ -1425,7 +2157,7 @@
       "status": "OK",
       "name": "THE 숨 FOREST",
       "url": "http://xn--9m1b62gfwkhoae75dzub.com/",
-      "checked_at": "2026-10-19T08:54:56.560Z",
+      "checked_at": "2026-10-23T23:40:24.971Z",
       "pages": [
         "http://xn--9m1b62gfwkhoae75dzub.com/",
         "http://xn--9m1b62gfwkhoae75dzub.com/about.html",
@@ -1453,6 +2185,10 @@
         },
         {
           "text": "공용 샤워 시설",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/"
+        },
+        {
+          "text": "공지사항",
           "url": "http://xn--9m1b62gfwkhoae75dzub.com/"
         },
         {
@@ -1548,6 +2284,14 @@
           "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
         },
         {
+          "text": "3) 객실 내에서는 금연입니다.",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "5) 오후 10시 이후의 바비큐장 이용 및 고성방가는 타 객실손님을 위하여 금하오니 양해 바랍니다.",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
           "text": "6) 집기 파손 시에는 펜션지기에게 알려주시기 바랍니다.",
           "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
         },
@@ -1561,6 +2305,10 @@
         },
         {
           "text": "04 환불규정",
+          "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
+        },
+        {
+          "text": "1) 올바른 예약문화의 정착을 위하여 불가피한 조치이오니 양해 부탁드립니다.",
           "url": "http://xn--9m1b62gfwkhoae75dzub.com/charge.html"
         },
         {
@@ -1601,13 +2349,215 @@
       "images": []
     },
     "102130": {
-      "status": "FETCH_FAILED",
+      "status": "OK",
       "name": "감포누리캠핑글램핑",
       "url": "http://gamponuri.co.kr/",
-      "checked_at": "2026-10-19T08:56:47.273Z",
-      "pages": [],
-      "snippets": [],
-      "images": []
+      "checked_at": "2026-10-23T23:39:54.371Z",
+      "pages": [
+        "http://gamponuri.co.kr/"
+      ],
+      "snippets": [
+        {
+          "text": "감포누리 캠핑글램핑",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "공지사항 사이트에서 보내는 중요한 공지를 실시간으로 알려줍니다.",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "감포누리 캠핑글램핑장",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "감포누리의 모든 객실은 수영장을 품고 있습니다.",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "왼쪽엔 하얀 돔 글램핑, 오른쪽엔 황토빛 프리미엄 객실 — 그 중심에 길이 25m, 타원형의 청량한 수영장이 펼쳐집니다.",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "타원형 수영장",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "아프리카 사파리를 모티브로 한 이국적인 글램핑.",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "바로 앞에 있는 수영장에 첨벙, 천혜의 숲속에서 소중한 가족,연인,지인들과 친목의 시간을 즐겨 보세요.",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "품격 있는 공간 구성과 세련된 인테리어가 돋보이는 프리미엄 독채 캐빈.",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "하얀 백봉오골계와 거위가 노니는 평화로운 풍경",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "토끼, 강아지, 고양이와 함께하는 힐링 타임",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "\"숲속 글램핑에서 자고, 아침에 북카페에서 커피 한 잔… 정말 꿈같은 하루였어요.",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "포레스트 글램핑",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "포레스트 카라반",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "프리미엄 캐빈",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "자가 차량",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "주차 안내",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "캠핑장 내 무료 주차 가능 (사이트별 1대)",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "전화로 문의하기",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "© 2026 감포누리 캠핑글램핑장",
+          "url": "http://gamponuri.co.kr/"
+        },
+        {
+          "text": "상호명: 감포누리 캠핑글램핑장 대표자: 박성민 사업장주소: 경북 경주시 감포읍 노동길 206 (노동리) 감포누리캠핑글램핑 연락처: 010-8557-6641 사업자등록번호: 856-11-02810 통신판매업신고번호: 제2026-경북경주-0156호 대표…",
+          "url": "http://gamponuri.co.kr/"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://gamponuri.co.kr/common/img/default_profile.png",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "프로필 정보수정",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20260406/ac21952d95175.png",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "감포누리",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20260608/259b5c62cb295.jpg",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "감포누리 수영장",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20260406/c7acd40ce12ae.jpg",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "감포누리 1",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20261013/3197632cc348c.jpg",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "감포누리 2",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20260427/1f69b3b7de7e1.jpg",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "감포누리 3",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20260427/54c493c024c70.jpg",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "감포누리 4",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20260427/13da435325fdb.jpg",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "감포누리 5",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20260608/fd0e0685e0709.jpg",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "사파리",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20260720/37369b320bf25.jpg",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "캠프닉",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20260521/2213179bdfdba.jpg",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "오페라",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20260427/67702166917dd.png",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "치킨과 생맥주",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20260917/82e6c327a8953.jpg",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "펫존 2",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20260427/d2533e8b76591.jpg",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "펫존 3",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20260406/61888cde5c934.jpg",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "감은사지 삼층석탑",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20260406/699144a479c8c.jpg",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "문무대왕릉",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20260406/560fe832eac16.jpg",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "감포항",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20260406/ba70c37eeb33a.jpg",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "경주 보문단지",
+          "layout": false
+        },
+        {
+          "url": "https://cdn.imweb.me/thumbnail/20260406/1abd9a2b7ca3b.jpg",
+          "page": "https://gamponuri.co.kr/",
+          "alt": "울산 포항 근교",
+          "layout": false
+        }
+      ]
     },
     "102221": {
       "status": "SKIPPED",

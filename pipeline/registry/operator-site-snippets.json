@@ -248175,47 +248175,181 @@
    }
   },
   "hangang-gwangnaru": {
-   "status": "QUARANTINED",
-   "integrity_quarantine": [
+   "name": "광나루한강공원",
+   "status": "OK",
+   "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+   "checked_at": "2026-10-23T23:40:03.687Z",
+   "pages": [
+    "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+    "https://hangang.seoul.go.kr/www/park/list.do?mid=426",
+    "https://hangang.seoul.go.kr/www/contents/645.do?mid=429",
+    "https://hangang.seoul.go.kr/www/contents/650.do?mid=432",
+    "https://hangang.seoul.go.kr/www/contents/651.do?mid=444",
+    "https://hangang.seoul.go.kr/www/contents/653.do?mid=447",
+    "https://hangang.seoul.go.kr/www/contents/654.do?mid=449",
+    "https://hangang.seoul.go.kr/www/contents/656.do?mid=452"
+   ],
+   "snippets": [
     {
-     "key": "house_rules|https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604|그늘막은 공원 내 지정 허용구역에서만 설치(2026.3.1.~11.30.)",
-     "type": "house_rules",
-     "reason": "공유 포털에서 업장 식별 근거 없음",
-     "text": "그늘막은 공원 내 지정 허용구역에서만 설치(2026.3.1.~11.30.)",
-     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
-     "audited_at": "2026-10-21T20:57:42.741Z"
-    },
-    {
-     "key": "house_rules|https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604|허용 시간 3~5월·9~11월 09~19시, 6~8월 09~20시 (2026.9.1.~11.30. 09~22시 연장)",
-     "type": "house_rules",
-     "reason": "공유 포털에서 업장 식별 근거 없음",
-     "text": "허용 시간 3~5월·9~11월 09~19시, 6~8월 09~20시 (2026.9.1.~11.30. 09~22시 연장)",
-     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
-     "audited_at": "2026-10-21T20:57:42.741Z"
-    },
-    {
-     "key": "house_rules|https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604|그늘막 규격 2m×2m 내외(4인용)",
-     "type": "house_rules",
-     "reason": "공유 포털에서 업장 식별 근거 없음",
-     "text": "그늘막 규격 2m×2m 내외(4인용)",
-     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
-     "audited_at": "2026-10-21T20:57:42.741Z"
-    },
-    {
-     "key": "house_rules|https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604|돗자리는 기간·장소 관계없이 상시 이용 가능",
-     "type": "house_rules",
-     "reason": "공유 포털에서 업장 식별 근거 없음",
-     "text": "돗자리는 기간·장소 관계없이 상시 이용 가능",
-     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
-     "audited_at": "2026-10-21T20:57:42.741Z"
-    },
-    {
-     "key": "house_rules|https://hangang.seoul.go.kr/www/contents/646.do?mid=427|지정된 장소 외의 장소에서의 야영, 취사 금지",
-     "type": "house_rules",
-     "reason": "공유 포털에서 업장 식별 근거 없음",
-     "text": "지정된 장소 외의 장소에서의 야영, 취사 금지",
+     "text": "한강공원 금지행위(과태료) < 금지행위(과태료) < 한강공원 소개 < 한강공원 < 미래한강본부, 한강공원",
      "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
-     "audited_at": "2026-10-21T20:57:42.741Z"
+     "locator": {
+      "text": "한강공원 금지행위(과태료) < 금지행위(과태료) < 한강공원 소개 < 한강공원 < 미래한강본부, 한강공원"
+     }
+    },
+    {
+     "text": "금지행위(과태료)",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "금지행위(과태료)"
+     }
+    },
+    {
+     "text": "광나루 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "광나루 주차정보"
+     }
+    },
+    {
+     "text": "잠실 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "잠실 주차정보"
+     }
+    },
+    {
+     "text": "뚝섬 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "뚝섬 주차정보"
+     }
+    },
+    {
+     "text": "잠원 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "잠원 주차정보"
+     }
+    },
+    {
+     "text": "이촌 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "이촌 주차정보"
+     }
+    },
+    {
+     "text": "반포 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "반포 주차정보"
+     }
+    },
+    {
+     "text": "망원 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "망원 주차정보"
+     }
+    },
+    {
+     "text": "여의도 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "여의도 주차정보"
+     }
+    },
+    {
+     "text": "난지 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "난지 주차정보"
+     }
+    },
+    {
+     "text": "강서 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "강서 주차정보"
+     }
+    },
+    {
+     "text": "양화 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "양화 주차정보"
+     }
+    },
+    {
+     "text": "수영장·물놀이장",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "수영장·물놀이장"
+     }
+    },
+    {
+     "text": "장소사용(수영장) 신청",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "장소사용(수영장) 신청"
+     }
+    },
+    {
+     "text": "공지사항 새소식",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "공지사항 새소식"
+     }
+    },
+    {
+     "text": "자전거 - 자전거대여점",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "자전거 - 자전거대여점"
+     }
+    },
+    {
+     "text": "- 물놀이장분수(난지)",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "- 물놀이장분수(난지)"
+     }
+    },
+    {
+     "text": "수상레저스포츠 이용안내 - 활동안내 및 준수사항",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "수상레저스포츠 이용안내 - 활동안내 및 준수사항"
+     }
+    },
+    {
+     "text": "- 장소사용(점용)요금",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "- 장소사용(점용)요금"
+     }
+    },
+    {
+     "text": "장소사용(수영장) 신청 - 장소사용(수영장) 신청방법",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "장소사용(수영장) 신청 - 장소사용(수영장) 신청방법"
+     }
+    },
+    {
+     "text": "- 수영장 사용 준수사항",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "- 수영장 사용 준수사항"
+     }
+    },
+    {
+     "text": "알림마당 공지사항 새소식",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "알림마당 공지사항 새소식"
+     }
     }
    ]
   },
@@ -248625,51 +248759,982 @@
    ]
   },
   "hangang-gangseo": {
-   "status": "QUARANTINED",
-   "integrity_quarantine": [
+   "name": "강서한강공원",
+   "status": "OK",
+   "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+   "checked_at": "2026-10-23T23:40:17.089Z",
+   "pages": [
+    "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+    "https://hangang.seoul.go.kr/www/park/list.do?mid=426",
+    "https://hangang.seoul.go.kr/www/contents/645.do?mid=429",
+    "https://hangang.seoul.go.kr/www/contents/650.do?mid=432",
+    "https://hangang.seoul.go.kr/www/contents/651.do?mid=444",
+    "https://hangang.seoul.go.kr/www/contents/653.do?mid=447",
+    "https://hangang.seoul.go.kr/www/contents/654.do?mid=449",
+    "https://hangang.seoul.go.kr/www/contents/656.do?mid=452"
+   ],
+   "snippets": [
     {
-     "key": "house_rules|https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604|그늘막은 공원 내 지정 허용구역에서만 설치(2026.3.1.~11.30.)",
-     "type": "house_rules",
-     "reason": "공유 포털에서 업장 식별 근거 없음",
-     "text": "그늘막은 공원 내 지정 허용구역에서만 설치(2026.3.1.~11.30.)",
-     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
-     "audited_at": "2026-10-21T20:57:42.741Z"
-    },
-    {
-     "key": "house_rules|https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604|허용 시간 3~5월·9~11월 09~19시, 6~8월 09~20시 (2026.9.1.~11.30. 09~22시 연장)",
-     "type": "house_rules",
-     "reason": "공유 포털에서 업장 식별 근거 없음",
-     "text": "허용 시간 3~5월·9~11월 09~19시, 6~8월 09~20시 (2026.9.1.~11.30. 09~22시 연장)",
-     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
-     "audited_at": "2026-10-21T20:57:42.741Z"
-    },
-    {
-     "key": "house_rules|https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604|그늘막 규격 2m×2m 내외(4인용)",
-     "type": "house_rules",
-     "reason": "공유 포털에서 업장 식별 근거 없음",
-     "text": "그늘막 규격 2m×2m 내외(4인용)",
-     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
-     "audited_at": "2026-10-21T20:57:42.741Z"
-    },
-    {
-     "key": "house_rules|https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604|돗자리는 기간·장소 관계없이 상시 이용 가능",
-     "type": "house_rules",
-     "reason": "공유 포털에서 업장 식별 근거 없음",
-     "text": "돗자리는 기간·장소 관계없이 상시 이용 가능",
-     "url": "https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604",
-     "audited_at": "2026-10-21T20:57:42.741Z"
-    },
-    {
-     "key": "house_rules|https://hangang.seoul.go.kr/www/contents/646.do?mid=427|지정된 장소 외의 장소에서의 야영, 취사 금지",
-     "type": "house_rules",
-     "reason": "공유 포털에서 업장 식별 근거 없음",
-     "text": "지정된 장소 외의 장소에서의 야영, 취사 금지",
+     "text": "한강공원 금지행위(과태료) < 금지행위(과태료) < 한강공원 소개 < 한강공원 < 미래한강본부, 한강공원",
      "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
-     "audited_at": "2026-10-21T20:57:42.741Z"
+     "locator": {
+      "text": "한강공원 금지행위(과태료) < 금지행위(과태료) < 한강공원 소개 < 한강공원 < 미래한강본부, 한강공원"
+     }
+    },
+    {
+     "text": "금지행위(과태료)",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "금지행위(과태료)"
+     }
+    },
+    {
+     "text": "광나루 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "광나루 주차정보"
+     }
+    },
+    {
+     "text": "잠실 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "잠실 주차정보"
+     }
+    },
+    {
+     "text": "뚝섬 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "뚝섬 주차정보"
+     }
+    },
+    {
+     "text": "잠원 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "잠원 주차정보"
+     }
+    },
+    {
+     "text": "이촌 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "이촌 주차정보"
+     }
+    },
+    {
+     "text": "반포 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "반포 주차정보"
+     }
+    },
+    {
+     "text": "망원 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "망원 주차정보"
+     }
+    },
+    {
+     "text": "여의도 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "여의도 주차정보"
+     }
+    },
+    {
+     "text": "난지 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "난지 주차정보"
+     }
+    },
+    {
+     "text": "강서 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "강서 주차정보"
+     }
+    },
+    {
+     "text": "양화 주차정보",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "양화 주차정보"
+     }
+    },
+    {
+     "text": "수영장·물놀이장",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "수영장·물놀이장"
+     }
+    },
+    {
+     "text": "장소사용(수영장) 신청",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "장소사용(수영장) 신청"
+     }
+    },
+    {
+     "text": "공지사항 새소식",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "공지사항 새소식"
+     }
+    },
+    {
+     "text": "자전거 - 자전거대여점",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "자전거 - 자전거대여점"
+     }
+    },
+    {
+     "text": "- 물놀이장분수(난지)",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "- 물놀이장분수(난지)"
+     }
+    },
+    {
+     "text": "수상레저스포츠 이용안내 - 활동안내 및 준수사항",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "수상레저스포츠 이용안내 - 활동안내 및 준수사항"
+     }
+    },
+    {
+     "text": "- 장소사용(점용)요금",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "- 장소사용(점용)요금"
+     }
+    },
+    {
+     "text": "장소사용(수영장) 신청 - 장소사용(수영장) 신청방법",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "장소사용(수영장) 신청 - 장소사용(수영장) 신청방법"
+     }
+    },
+    {
+     "text": "- 수영장 사용 준수사항",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "- 수영장 사용 준수사항"
+     }
+    },
+    {
+     "text": "알림마당 공지사항 새소식",
+     "url": "https://hangang.seoul.go.kr/www/contents/646.do?mid=427",
+     "locator": {
+      "text": "알림마당 공지사항 새소식"
+     }
+    }
+   ]
+  },
+  "imjingak-peace-nuri": {
+   "name": "임진각 평화누리 / 평화누리캠핑장",
+   "status": "NO_RELEVANT_TEXT",
+   "url": "https://ggtour.or.kr/camping/main.web",
+   "checked_at": "2026-10-23T23:40:03.731Z",
+   "pages": [
+    "https://ggtour.or.kr/camping/main.web"
+   ],
+   "snippets": []
+  },
+  "osm-w1181262295": {
+   "name": "DMZ생태평화공원",
+   "status": "FETCH_FAILED",
+   "url": "https://www.cwg.go.kr/dmz_tracking/index.do",
+   "checked_at": "2026-10-23T23:40:04.808Z",
+   "error": "UNABLE_TO_VERIFY_LEAF_SIGNATURE"
+  },
+  "osm-w1185185173": {
+   "name": "진해해양공원",
+   "status": "NO_RELEVANT_TEXT",
+   "url": "http://marinepark.cwsisul.or.kr/",
+   "checked_at": "2026-10-23T23:40:07.925Z",
+   "pages": [
+    "http://marinepark.cwsisul.or.kr/"
+   ],
+   "snippets": []
+  },
+  "pdu-rooftopthesim-goyang": {
+   "name": "루프탑 더 쉼 (셀프 바베큐·당일 글램핑)",
+   "status": "OK",
+   "url": "https://www.rooftopthesim.com/",
+   "checked_at": "2026-10-23T23:40:09.904Z",
+   "pages": [
+    "https://www.rooftopthesim.com/",
+    "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=1",
+    "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_1&wr_id=1",
+    "https://www.rooftopthesim.com/bbs/board.php?bo_table=w2_1&wr_id=1",
+    "https://www.rooftopthesim.com/bbs/board.php?bo_table=w5_1",
+    "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&amp;wr_id=2",
+    "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+    "https://www.rooftopthesim.com/bbs/board.php?bo_table=w2_2&wr_id=1"
+   ],
+   "snippets": [
+    {
+     "text": "루프탑 더 쉼 셀프바베큐 글램핑",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "루프탑 더 쉼 셀프바베큐 글램핑"
+     }
+    },
+    {
+     "text": "퇴실 방법",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "퇴실 방법"
+     }
+    },
+    {
+     "text": "대형화로대",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "대형화로대"
+     }
+    },
+    {
+     "text": "매점휴게실",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "매점휴게실"
+     }
+    },
+    {
+     "text": "공지 사항",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "공지 사항"
+     }
+    },
+    {
+     "text": "-&emsp;퇴실 방법",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "-&emsp;퇴실 방법"
+     }
+    },
+    {
+     "text": "-&emsp;대형화로대",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "-&emsp;대형화로대"
+     }
+    },
+    {
+     "text": "-&emsp;매점휴게실",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "-&emsp;매점휴게실"
+     }
+    },
+    {
+     "text": "-&emsp;공지 사항",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "-&emsp;공지 사항"
+     }
+    },
+    {
+     "text": "셀프 바베큐 & 당일 글램핑",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "셀프 바베큐 & 당일 글램핑"
+     }
+    },
+    {
+     "text": "개별냉난방완비, 2~5인 이용",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "개별냉난방완비, 2~5인 이용"
+     }
+    },
+    {
+     "text": "개별냉난방완비, 2~8인 이용",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "개별냉난방완비, 2~8인 이용"
+     }
+    },
+    {
+     "text": "개별냉난방완비, 10~12인 이용",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "개별냉난방완비, 10~12인 이용"
+     }
+    },
+    {
+     "text": "글램핑안내",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "글램핑안내"
+     }
+    },
+    {
+     "text": "깨끗하고 편안한 감성 글램핑",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "깨끗하고 편안한 감성 글램핑"
+     }
+    },
+    {
+     "text": "공지/이벤트",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "공지/이벤트"
+     }
+    },
+    {
+     "text": "글램핑장 추천 주변관광지",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "글램핑장 추천 주변관광지"
+     }
+    },
+    {
+     "text": "경기 고양시 일산서구 한류월드로 300 4F 루프탑더쉼 셀프바베큐 당일글램핑",
+     "url": "https://www.rooftopthesim.com/",
+     "locator": {
+      "text": "경기 고양시 일산서구 한류월드로 300 4F 루프탑더쉼 셀프바베큐 당일글램핑"
+     }
+    },
+    {
+     "text": "루프탑 더쉼 소개 > 루프탑 더쉼 | 루프탑 더 쉼 셀프바베큐 글램핑",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=1",
+     "locator": {
+      "text": "루프탑 더쉼 소개 > 루프탑 더쉼 | 루프탑 더 쉼 셀프바베큐 글램핑"
+     }
+    },
+    {
+     "text": "도심 속에서 즐기는 당일 글램핑, 다 같이 모여 즐기는 셀프 바베큐",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=1",
+     "locator": {
+      "text": "도심 속에서 즐기는 당일 글램핑, 다 같이 모여 즐기는 셀프 바베큐"
+     }
+    },
+    {
+     "text": "탁트인 전망과 힐링 감성의 글램핑이 있는 곳",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=1",
+     "locator": {
+      "text": "탁트인 전망과 힐링 감성의 글램핑이 있는 곳"
+     }
+    },
+    {
+     "text": "루프탑 더쉼은 프라이빗한 휴식을 강조한 사계절 당일글램핑, 셀프바베큐장 입니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=1",
+     "locator": {
+      "text": "루프탑 더쉼은 프라이빗한 휴식을 강조한 사계절 당일글램핑, 셀프바베큐장 입니다."
+     }
+    },
+    {
+     "text": "오시는 길 > 오시는 길 | 루프탑 더 쉼 셀프바베큐 글램핑",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_1&wr_id=1",
+     "locator": {
+      "text": "오시는 길 > 오시는 길 | 루프탑 더 쉼 셀프바베큐 글램핑"
+     }
+    },
+    {
+     "text": "경기 고양시 일산서구 한류월드로 300 고양 원마운트 4F, 루프탑더쉼 셀프바베큐 당일글램핑",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_1&wr_id=1",
+     "locator": {
+      "text": "경기 고양시 일산서구 한류월드로 300 고양 원마운트 4F, 루프탑더쉼 셀프바베큐 당일글램핑"
+     }
+    },
+    {
+     "text": "예약 방법 > 예약 방법 | 루프탑 더 쉼 셀프바베큐 글램핑",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w2_1&wr_id=1",
+     "locator": {
+      "text": "예약 방법 > 예약 방법 | 루프탑 더 쉼 셀프바베큐 글램핑"
+     }
+    },
+    {
+     "text": "글램핑 선택",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w2_1&wr_id=1",
+     "locator": {
+      "text": "글램핑 선택"
+     }
+    },
+    {
+     "text": "이용하고 싶으신 글램핑을 선택 해 주세요.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w2_1&wr_id=1",
+     "locator": {
+      "text": "이용하고 싶으신 글램핑을 선택 해 주세요."
+     }
+    },
+    {
+     "text": "매진일 경우 만실이므로 예약이 불가 합니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w2_1&wr_id=1",
+     "locator": {
+      "text": "매진일 경우 만실이므로 예약이 불가 합니다."
+     }
+    },
+    {
+     "text": "결제 전 취소 환불 정책을 꼭 확인 해 주세요.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w2_1&wr_id=1",
+     "locator": {
+      "text": "결제 전 취소 환불 정책을 꼭 확인 해 주세요."
+     }
+    },
+    {
+     "text": "(당일 취소 불가)",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w2_1&wr_id=1",
+     "locator": {
+      "text": "(당일 취소 불가)"
+     }
+    },
+    {
+     "text": "* 예약 전 취소 환불 규정을 꼭 확인해주세요!",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w2_1&wr_id=1",
+     "locator": {
+      "text": "* 예약 전 취소 환불 규정을 꼭 확인해주세요!"
+     }
+    },
+    {
+     "text": "공지사항 1 페이지 | 루프탑 더 쉼 셀프바베큐 글램핑",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w5_1",
+     "locator": {
+      "text": "공지사항 1 페이지 | 루프탑 더 쉼 셀프바베큐 글램핑"
+     }
+    },
+    {
+     "text": "> 공지사항 1 페이지",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w5_1",
+     "locator": {
+      "text": "> 공지사항 1 페이지"
+     }
+    },
+    {
+     "text": "공지사항",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w5_1",
+     "locator": {
+      "text": "공지사항"
+     }
+    },
+    {
+     "text": "공지사항 목록",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w5_1",
+     "locator": {
+      "text": "공지사항 목록"
+     }
+    },
+    {
+     "text": "[최대 50%할인] 친구와 함께라면",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w5_1",
+     "locator": {
+      "text": "[최대 50%할인] 친구와 함께라면"
+     }
+    },
+    {
+     "text": "신년 맞이 깜짝 할인이벤트",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w5_1",
+     "locator": {
+      "text": "신년 맞이 깜짝 할인이벤트"
+     }
+    },
+    {
+     "text": "25년 추석 맞이 특가할인",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w5_1",
+     "locator": {
+      "text": "25년 추석 맞이 특가할인"
+     }
+    },
+    {
+     "text": "[2주년이벤트] 고객 감사 파격 할인",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w5_1",
+     "locator": {
+      "text": "[2주년이벤트] 고객 감사 파격 할인"
+     }
+    },
+    {
+     "text": "[25년 패키지] 글램핑 X 워터파크 예약 오픈",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w5_1",
+     "locator": {
+      "text": "[25년 패키지] 글램핑 X 워터파크 예약 오픈"
+     }
+    },
+    {
+     "text": "루프탑 더쉼 안내 > 루프탑 더쉼 | 루프탑 더 쉼 셀프바베큐 글램핑",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "루프탑 더쉼 안내 > 루프탑 더쉼 | 루프탑 더 쉼 셀프바베큐 글램핑"
+     }
+    },
+    {
+     "text": "- 루프탑 더쉼은 바베큐 캠핑장으로 2023 최신형 글램핑에서 바베큐를 즐기실 수 있는 셀프바베큐 당일글램핑장 입니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 루프탑 더쉼은 바베큐 캠핑장으로 2023 최신형 글램핑에서 바베큐를 즐기실 수 있는 셀프바베큐 당일글램핑장 입니다."
+     }
+    },
+    {
+     "text": "- 객실 이용료는 루프탑 더쉼 이용을 위한 별도 요금이며, 이용 후 환불 되지 않습니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 객실 이용료는 루프탑 더쉼 이용을 위한 별도 요금이며, 이용 후 환불 되지 않습니다."
+     }
+    },
+    {
+     "text": "- 바베큐 및 식음은 매점에서 셀프로 구매하셔야 하며, 입실 하신 객실에서 이용 하시면 됩니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 바베큐 및 식음은 매점에서 셀프로 구매하셔야 하며, 입실 하신 객실에서 이용 하시면 됩니다."
+     }
+    },
+    {
+     "text": "- 외부 음식은 반입을 절대 금지하고 있습니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 외부 음식은 반입을 절대 금지하고 있습니다."
+     }
+    },
+    {
+     "text": "- 예약 취소 시 취소 일시에 따라 수수료가 발생하오니 꼭 취소 수수료 확인 후 예약해주시기 바랍니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 예약 취소 시 취소 일시에 따라 수수료가 발생하오니 꼭 취소 수수료 확인 후 예약해주시기 바랍니다."
+     }
+    },
+    {
+     "text": "- 주차는 꼭 원마운트 지하 주차장에 해주시기 바랍니다.(외부 지상 주차장 이용시 주차 등록 불가)",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 주차는 꼭 원마운트 지하 주차장에 해주시기 바랍니다.(외부 지상 주차장 이용시 주차 등록 불가)"
+     }
+    },
+    {
+     "text": "- 원마운트 지하주차장에 주차 후 1층 매표소로 이동 후, 안내물에 따라 4F 루프탑 더쉼 까지 계단으로 올라오시면 됩니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 원마운트 지하주차장에 주차 후 1층 매표소로 이동 후, 안내물에 따라 4F 루프탑 더쉼 까지 계단으로 올라오시면 됩니다."
+     }
+    },
+    {
+     "text": "입실 방법",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "입실 방법"
+     }
+    },
+    {
+     "text": "- 4F 도착 후 안쪽에 있는 루프탑 푸드 매점으로 오시면 직원이 입실을 도와드립니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 4F 도착 후 안쪽에 있는 루프탑 푸드 매점으로 오시면 직원이 입실을 도와드립니다."
+     }
+    },
+    {
+     "text": "- 매점에서 식음 구매 후 객실로 이동하시어 이용하시면 됩니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 매점에서 식음 구매 후 객실로 이동하시어 이용하시면 됩니다."
+     }
+    },
+    {
+     "text": "- 불판, 가위, 집게, 컵, 앞접시, 기본 소스는 입실 시 제공해 드립니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 불판, 가위, 집게, 컵, 앞접시, 기본 소스는 입실 시 제공해 드립니다."
+     }
+    },
+    {
+     "text": "- 루프탑 더쉼은 셀프 바베큐장으로 퇴실시 꼭 정리를 부탁 드립니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 루프탑 더쉼은 셀프 바베큐장으로 퇴실시 꼭 정리를 부탁 드립니다."
+     }
+    },
+    {
+     "text": "- 음식물은 음식물 쓰레기 봉투에 모아 묶은 뒤 분리 수거장에 배출하여 주시기 바랍니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 음식물은 음식물 쓰레기 봉투에 모아 묶은 뒤 분리 수거장에 배출하여 주시기 바랍니다."
+     }
+    },
+    {
+     "text": "- 재활용 및 일반 쓰레기는 분리하여 분리 수거장에 배출하여 주시기 바랍니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 재활용 및 일반 쓰레기는 분리하여 분리 수거장에 배출하여 주시기 바랍니다."
+     }
+    },
+    {
+     "text": "- 무료 주차 등록은 퇴실 시 매점에서 직원이 도와드립니다.(최대 6시간)",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 무료 주차 등록은 퇴실 시 매점에서 직원이 도와드립니다.(최대 6시간)"
+     }
+    },
+    {
+     "text": "글램핑 안내",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "글램핑 안내"
+     }
+    },
+    {
+     "text": "- 인원 추가 비용은 무료입니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 인원 추가 비용은 무료입니다."
+     }
+    },
+    {
+     "text": "- 캠핑 테이블, 테이블보(식탁보), 캠핑 의자, 캠핑 버너, 정글 침대, 블루투스 스피커, 냉온풍기, 서큘레이터, 아이스 박스, 감성 조명, 감성 커튼이 구비 되어 있습니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 캠핑 테이블, 테이블보(식탁보), 캠핑 의자, 캠핑 버너, 정글 침대, 블루투스 스피커, 냉온풍기, 서큘레이터, 아이스 박스, 감성 조명, 감성 커튼이 구비 되어 있습니다."
+     }
+    },
+    {
+     "text": "매점 안내",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "매점 안내"
+     }
+    },
+    {
+     "text": "유의사항",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "유의사항"
+     }
+    },
+    {
+     "text": "이용 시 유의사항",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "이용 시 유의사항"
+     }
+    },
+    {
+     "text": "- 루프탑 더쉼은 일반 음식점으로 외부음식 반입이 절대 금지됩니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 루프탑 더쉼은 일반 음식점으로 외부음식 반입이 절대 금지됩니다."
+     }
+    },
+    {
+     "text": "- 외부음식 반입 및 적발시 즉시 퇴실 조치 되며, 이로 인한 객실 사용료 등 환불은 불가합니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 외부음식 반입 및 적발시 즉시 퇴실 조치 되며, 이로 인한 객실 사용료 등 환불은 불가합니다."
+     }
+    },
+    {
+     "text": "- 루프탑 더쉼 객실 내외부, 매점 및 통로, 계단 등 모든 구역은 절대 금연 구역입니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 루프탑 더쉼 객실 내외부, 매점 및 통로, 계단 등 모든 구역은 절대 금연 구역입니다."
+     }
+    },
+    {
+     "text": "- 흡연은 별도 마련된 흡연 구역을 이용해 주시기 바랍니다.(매점 문의)",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 흡연은 별도 마련된 흡연 구역을 이용해 주시기 바랍니다.(매점 문의)"
+     }
+    },
+    {
+     "text": "- 흡연 적발 시 과태료 부과 및 즉시 퇴실 조치 되며, 이로 인한 객실 사용료 등 환불은 불가합니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 흡연 적발 시 과태료 부과 및 즉시 퇴실 조치 되며, 이로 인한 객실 사용료 등 환불은 불가합니다."
+     }
+    },
+    {
+     "text": "- 반려동물은 다른 객실 및 다른 손님들을 위해 동반하실 수 없으니 양해 바랍니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 반려동물은 다른 객실 및 다른 손님들을 위해 동반하실 수 없으니 양해 바랍니다."
+     }
+    },
+    {
+     "text": "취소 후 다시 구매해 주시기 바랍니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "취소 후 다시 구매해 주시기 바랍니다."
+     }
+    },
+    {
+     "text": "- 실시간 예약 특성상 중복예약이 발생할 수 있으며, 중복예약 시 예약이 취소될 수 있습니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2",
+     "locator": {
+      "text": "- 실시간 예약 특성상 중복예약이 발생할 수 있으며, 중복예약 시 예약이 취소될 수 있습니다."
+     }
+    },
+    {
+     "text": "'원마운트 주차장'을 목적지로 설정해주세요.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w2_2&wr_id=1",
+     "locator": {
+      "text": "'원마운트 주차장'을 목적지로 설정해주세요."
+     }
+    },
+    {
+     "text": "주소는 '고양시 일산서구 한류월드로 300 원마운트' 입니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w2_2&wr_id=1",
+     "locator": {
+      "text": "주소는 '고양시 일산서구 한류월드로 300 원마운트' 입니다."
+     }
+    },
+    {
+     "text": "주차장은 원마운트 지하 1층, 지하 2층에 있습니다.(지상 주차장 없음)",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w2_2&wr_id=1",
+     "locator": {
+      "text": "주차장은 원마운트 지하 1층, 지하 2층에 있습니다.(지상 주차장 없음)"
+     }
+    },
+    {
+     "text": "전기차 충전소는 지하로 들어오기 전 1층에 있습니다.",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w2_2&wr_id=1",
+     "locator": {
+      "text": "전기차 충전소는 지하로 들어오기 전 1층에 있습니다."
+     }
+    },
+    {
+     "text": "루프탑더쉼 도착 후 체크인",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w2_2&wr_id=1",
+     "locator": {
+      "text": "루프탑더쉼 도착 후 체크인"
+     }
+    },
+    {
+     "text": "유의 사항",
+     "url": "https://www.rooftopthesim.com/bbs/board.php?bo_table=w2_2&wr_id=1",
+     "locator": {
+      "text": "유의 사항"
+     }
+    }
+   ]
+  },
+  "osm-w477417220": {
+   "name": "경주 동궁과 월지",
+   "status": "OK",
+   "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+   "checked_at": "2026-10-23T23:44:42.825Z",
+   "pages": [
+    "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+    "https://gjfmc.or.kr/gjsiseol/bbs/boardListView.do;jsessionid=9C831C3D0AEA2544E3C15DD38D567E89?menuNo=411&amp;classId=NOTICE",
+    "https://gjfmc.or.kr/",
+    "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do;jsessionid=9C831C3D0AEA2544E3C15DD38D567E89?menuNo=111&amp;classId=HEALTH&amp;itemId=T0000029",
+    "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do;jsessionid=9C831C3D0AEA2544E3C15DD38D567E89?menuNo=121&amp;classId=HEALTH&amp;itemId=T0000030",
+    "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do;jsessionid=9C831C3D0AEA2544E3C15DD38D567E89?menuNo=131&amp;classId=HEALTH&amp;itemId=T0000031",
+    "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do;jsessionid=9C831C3D0AEA2544E3C15DD38D567E89?menuNo=151&amp;classId=HEALTH&amp;itemId=T0000001"
+   ],
+   "snippets": [
+    {
+     "text": "석굴암주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "석굴암주차장"
+     }
+    },
+    {
+     "text": "불국사주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "불국사주차장"
+     }
+    },
+    {
+     "text": "서남산주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "서남산주차장"
+     }
+    },
+    {
+     "text": "공영주차장관리 시민복지",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "공영주차장관리 시민복지"
+     }
+    },
+    {
+     "text": "증진을 위한 주차시설",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "증진을 위한 주차시설"
+     }
+    },
+    {
+     "text": "제1공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "제1공영주차장"
+     }
+    },
+    {
+     "text": "제2공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "제2공영주차장"
+     }
+    },
+    {
+     "text": "성동시장공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "성동시장공영주차장"
+     }
+    },
+    {
+     "text": "중심상가공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "중심상가공영주차장"
+     }
+    },
+    {
+     "text": "시청사주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "시청사주차장"
+     }
+    },
+    {
+     "text": "경주역공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "경주역공영주차장"
+     }
+    },
+    {
+     "text": "성건동공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "성건동공영주차장"
+     }
+    },
+    {
+     "text": "터미널옆공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "터미널옆공영주차장"
+     }
+    },
+    {
+     "text": "동천동 공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "동천동 공영주차장"
+     }
+    },
+    {
+     "text": "대릉원(황남지구)공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "대릉원(황남지구)공영주차장"
+     }
+    },
+    {
+     "text": "노상주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "노상주차장"
+     }
+    },
+    {
+     "text": "중앙시장 제1공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "중앙시장 제1공영주차장"
+     }
+    },
+    {
+     "text": "중앙시장 제2공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "중앙시장 제2공영주차장"
+     }
+    },
+    {
+     "text": "봉황대공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "봉황대공영주차장"
+     }
+    },
+    {
+     "text": "포석로 공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "포석로 공영주차장"
+     }
+    },
+    {
+     "text": "황남생활문화센터 공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "황남생활문화센터 공영주차장"
+     }
+    },
+    {
+     "text": "숭문대공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "숭문대공영주차장"
+     }
+    },
+    {
+     "text": "쪽샘지구임시공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "쪽샘지구임시공영주차장"
+     }
+    },
+    {
+     "text": "국립경주박물관공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "국립경주박물관공영주차장"
+     }
+    },
+    {
+     "text": "월주차 대기자 현황",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "월주차 대기자 현황"
+     }
+    },
+    {
+     "text": "공지사항",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "공지사항"
+     }
+    },
+    {
+     "text": "시청사공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "시청사공영주차장"
+     }
+    },
+    {
+     "text": "신경주역공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "신경주역공영주차장"
+     }
+    },
+    {
+     "text": "성건동 공영주차장",
+     "url": "https://gjfmc.or.kr/gjsiseol/facility/facilityTab1.do",
+     "locator": {
+      "text": "성건동 공영주차장"
+     }
     }
    ]
   }
  },
- "generated_at": "2026-10-23T19:12:11.496Z",
+ "generated_at": "2026-10-23T23:44:55.954Z",
  "policy": "운영자 자체 홈페이지·예약 페이지만, robots.txt 준수, 봇 이름 공개, 문장(≤140자)·원문 URL·확인 시각만 저장. 플랫폼 페이지는 수집하지 않음."
 }

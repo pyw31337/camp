@@ -2,7 +2,7 @@
 // 공개 운영자 정보 보강 대상의 우선순위를 만든다.
 // 수집은 하지 않는다. crawl-operator-sites.mjs에 넘길 ID만 만들며,
 // 실제 수집기는 운영자 자체 호스트·robots.txt·1초 이상 간격 규칙을 다시 적용한다.
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { isClosedHost, isOperatorHost } from "../lib/operator-site.mjs";
@@ -15,6 +15,7 @@ const registry = existsSync(registryPath) ? JSON.parse(readFileSync(registryPath
 const arg = (key, fallback) => { const i = process.argv.indexOf(key); return i >= 0 ? process.argv[i + 1] ?? fallback : fallback; };
 const limit = Math.max(1, Number(arg("--limit", "20")) || 20);
 const outPath = resolve(arg("--out", join(root, "pipeline/out/operator-gap-priority.json")));
+mkdirSync(resolve(outPath, ".."), { recursive: true });
 
 const hasOperatorStart = (c) => {
   const urls = [c.homepage, c.booking?.url, ...(c.booking?.channels ?? []).map((x) => x?.url)].filter(Boolean);
@@ -37,6 +38,26 @@ const readyForRetry = (prior) => ageDays(prior?.checked_at) >= retryDays(prior);
 const fields = (c, d) => {
   const fc = c.field_conditions ?? d.field_conditions ?? {};
   const f = [];
+  const text = `${c.name ?? ""} ${c.line ?? ""} ${c.pf?.s ?? ""} ${(c.types ?? []).join(" ")}`;
+  const isPark = c.du === "park" || /공원|유원지/.test(text);
+  const isPicnic = !isPark && (c.du === "private" || (c.types ?? []).some((x) => /캠크닉|캠프닉/.test(x)) || /캠크닉|캠프닉|당일 이용/.test(text));
+  const p = c.park_info ?? c.park ?? {};
+  const profile = d.profile?.fields ?? {};
+  if (isPark) {
+    if (!(Array.isArray(p.facilities) ? p.facilities.length : p.facilities || p.facility_groups) && !(c.amenities ?? []).length) f.push("공원 시설");
+    if (c.nearby_toilets?.within_500m == null && !c.toilets && !c.showers) f.push("화장실·편의");
+    if (!(p.operator ?? p.management) && !c.tel) f.push("관리기관·연락처");
+    if (!profile.RULES?.value && !c.day?.cooking?.v && !c.day?.shade?.v && !/금지|불가|제한|수칙|규칙/.test(text)) f.push("이용 규칙");
+    return f;
+  }
+  if (isPicnic) {
+    if (!/\b\d{1,2}:\d{2}\s*[~〜-]\s*\d{1,2}:\d{2}\b/.test(text)) f.push("운영 시간");
+    if (!(c.fee?.min > 0 || c.fee?.g === "FREE" || c.fee?.text || c.fee?.label || profile.PRICE_DAY?.value)) f.push("당일 이용료");
+    if (!(c.amenities ?? []).length && !(c.field_conditions?.features ?? []).length) f.push("시설");
+    if (!(c.booking?.url || (c.booking?.channels ?? []).length || c.homepage)) f.push("예약 경로");
+    if (!profile.RULES?.value && !c.day?.cooking?.v && !c.day?.shade?.v && !/금지|불가|제한|수칙|규칙/.test(text)) f.push("이용 규칙");
+    return f;
+  }
   if (!(c.fee?.min > 0) && !(d.profile?.fields?.PRICE?.value)) f.push("1박 요금");
   if (!fc.power?.limit_w && !d.profile?.fields?.POWER_W?.value) f.push("전기 제한");
   if (!fc.site_size?.groups?.length && !(c.sizes ?? []).length) f.push("사이트 규격");

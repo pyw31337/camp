@@ -6279,6 +6279,7 @@
 {"cid":"102371","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102372","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102372","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"pdu-rooftopthesim-goyang","attr":"PARKING_MODE","value":"EXTERNAL","grade":"OPERATOR","src":"operator_homepage","url":"https://www.rooftopthesim.com/bbs/board.php?bo_table=w1_c&wr_id=2","at":"2026-10-23T23:40:09.904Z","quote":"- 원마운트 지하주차장에 주차 후 1층 매표소로 이동 후, 안내물에 따라 4F 루프탑 더쉼 까지 계단으로 올라오시면 됩니다."}
 {"cid":"pilot-002-sureui","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-003-duruwell","attr":"PARKING_MODE","value":"SHARED_NEARBY","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030095","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-004-haengun","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/haengun","at":"2026-10-15T09:00:00+09:00"}
