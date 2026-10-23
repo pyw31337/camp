@@ -1,5 +1,5 @@
 {
-  "note": "기존 값을 의도적으로 지우거나 줄일 때만 적는다(폐업·중복 합치기·오류 정정). field-guard가 이 목록만 통과시킨다. file(경로 끝부분)·id·field 중 아는 것 + reason(필수) + by(누가) + at(날짜). 쓰고 나면 다음 정리 때 비운다. docs/DATA_MERGE_POLICY.md",
+  "note": "기존 값을 의도적으로 지우거나 줄일 때만 적는다(폐업·중복 합치기·오류 정정). field-guard가 이 목록만 통과시킨다. file(경로 끝부분)·id·field 중 아는 것 + reason(필수) + by(누가) + at(날짜). 쓰고 나면 다음 정리 때 비운다. docs/DATA_MERGE_POLICY.md coverage_acks: 발행 커버리지(coverage-guard)의 검토된 감소 — field·after(줄어든 뒤 값)·reason·at, 기록 후 14일만 유효.",
   "overrides": [
     {
       "file": "campgrounds.json",
@@ -598,6 +598,32 @@
       "id": "platform=Linux x86_64 & screen∈{1366x900,390x844} & id≤209",
       "field": "*",
       "reason": "에이전트·자동 테스트(헤드리스 리눅스 브라우저)가 운영 찜 기록에 남긴 141건 삭제(소유자 요청 2026-10-23). 사본 pipeline/registry/archive/save_log-agent-rows-2026-10-23.json, 실행 db/022",
+      "by": "claude",
+      "at": "2026-10-23"
+    },
+    {
+      "file": "operator-site-snippets.json",
+      "id": "813,2124,2359,3047,7348,7389,7677,100188,100200,100202,100445,100502,100619,100723,100749,100918,101194,101203,101286,101297,101330,101473,101484,101544,101693,101780,101802,101843,101853,101878,101892,101934,101949,101985,101987,102028,102035,102101,102168,102290,102307,102311,102321,102325,102330,102339,102357,102358,102362,102364,102369,102371",
+      "field": "status,snippets",
+      "reason": "camping.kimgoon.kr(캠핑 안내 블로그)는 플랫폼·잘못된 출처(lib/operator-site.mjs·value-sanity BAD_SOURCE)인데, 그 글이 52곳의 운영자 홈페이지 사실(‘전기 1,100W 기준’ 같은 일반 안내·환불 규정)로 붙어 있었다. dropPlatformSites 정리로 빠지며 환불·전기 W 보유 수가 줄었다. 원본 사본 pipeline/registry/archive/operator-snippets-kimgoon-2026-10-23.json",
+      "by": "claude",
+      "at": "2026-10-23"
+    }
+  ],
+  "coverage_acks": [
+    {
+      "field": "refund",
+      "before": 887,
+      "after": 839,
+      "reason": "camping.kimgoon.kr(캠핑 안내 블로그)는 플랫폼·잘못된 출처(lib/operator-site.mjs·value-sanity BAD_SOURCE)인데, 그 글이 52곳의 운영자 홈페이지 사실(‘전기 1,100W 기준’ 같은 일반 안내·환불 규정)로 붙어 있었다. dropPlatformSites 정리로 빠지며 환불·전기 W 보유 수가 줄었다. 원본 사본 pipeline/registry/archive/operator-snippets-kimgoon-2026-10-23.json",
+      "by": "claude",
+      "at": "2026-10-23"
+    },
+    {
+      "field": "power_w",
+      "before": 673,
+      "after": 626,
+      "reason": "camping.kimgoon.kr(캠핑 안내 블로그)는 플랫폼·잘못된 출처(lib/operator-site.mjs·value-sanity BAD_SOURCE)인데, 그 글이 52곳의 운영자 홈페이지 사실(‘전기 1,100W 기준’ 같은 일반 안내·환불 규정)로 붙어 있었다. dropPlatformSites 정리로 빠지며 환불·전기 W 보유 수가 줄었다. 원본 사본 pipeline/registry/archive/operator-snippets-kimgoon-2026-10-23.json",
       "by": "claude",
       "at": "2026-10-23"
     }

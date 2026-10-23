@@ -1,5 +1,11 @@
 # 인수인계
 
+## 📌 커버리지 가드: 검토된 감소 기록(coverage_acks) · kimgoon.kr 52곳 정리 (2026-10-23, Claude)
+
+- 찜 우선 수집이 `crawl-operator-sites`를 돌리면서 `dropPlatformSites`가 camping.kimgoon.kr(플랫폼·BAD_SOURCE) 기록 52곳을 PLATFORM_PAGE로 바꿨다. 그 결과 환불(887→839)과 전기 W(673→626) 보유 수가 줄어 증분 발행이 막혔다.
+  - 잘못된 출처를 정리한 것이 맞으므로 원본 사본을 `pipeline/registry/archive/operator-snippets-kimgoon-2026-10-23.json`에 두고, merge-overrides와 merge-review에 기록했다.
+- `coverage-guard`가 `merge-overrides.json`의 `coverage_acks`(field·after·reason·at)를 읽는다. 기록한 값까지만, 기록 후 14일 동안 통과한다. 의도한 감소가 아니면 지금처럼 막는다.
+
 ## 📌 찜한 업장 우선 수집 · 로그 화면 비밀번호 · 소유자 할 일 코덱스 프롬프트 (2026-10-23, Claude)
 
 - **찜 우선 수집**:
