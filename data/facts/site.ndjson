@@ -1137,6 +1137,8 @@
 {"cid":"3254","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"3254","attr":"SITE_SIZE","value":"8×10m","grade":"CONFIRMED","src":"gocamping","count":4}
 {"cid":"3254","attr":"SITE_SIZE","value":"9×10m","grade":"CONFIRMED","src":"gocamping","count":8}
+{"cid":"3254","attr":"SITE_SIZE","value":"10×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/camt-log/224096632203","at":"2025-12-03","quote":"80,000원 (10mX8m) (사이트 배치도) 저희는 제일 아래 C4,C5 사이트로...","text":"10×8m","n":1}
+{"cid":"3254","attr":"SITE_SIZE","value":"9×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/camper_jin/224435508159","at":"2026-10-08","quote":"이용사이트 : A3 (9m x 10m)","text":"9×10m","n":2}
 {"cid":"3254","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=15413&res_dt=20261024","at":"2026-10-23","text":"파쇄석"}
 {"cid":"3262","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping","count":70}
 {"cid":"3262","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -1414,6 +1416,7 @@
 {"cid":"7039","attr":"SITE_SIZE","value":"8×15m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4084&res_dt=20261024","at":"2026-10-23","text":"크다(두가족)"}
 {"cid":"7039","attr":"SITE_SIZE","value":"7×10m","grade":"CONFIRMED","src":"gocamping","count":60}
 {"cid":"7039","attr":"SITE_SIZE","value":"7×10m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7039","at":"2025-05-21T00:00:00+09:00","quote":"사이트 전체 넓이는 기본 7m×10m 으로 타 캠핑장에 비해 넉넉하다.","text":"7×10m"}
+{"cid":"7039","attr":"SITE_SIZE","value":"6×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/kate_zz/224104219085","at":"2025-12-10","quote":"오랜만에 캠핑와서 이런 공기를 만끽하니 힐링된다 ☺️ 서울에서 접근성이 좋은 가평캠핑장 가평 은빛물결캠핑장 방문해보세요 연중무휴 겨울장박 가능 - 사이트 크기 물결 6*10m 은빛 고요 6*8m 은빛 크다 7*12m...","text":"6×10m","n":1}
 {"cid":"7039","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7040","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping","count":16}
 {"cid":"7043","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping","count":12}
@@ -1455,6 +1458,10 @@
 {"cid":"7125","attr":"SITE_SIZE","value":"6×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=20378&res_dt=20261024","at":"2026-10-23","text":"[계곡존]"}
 {"cid":"7125","attr":"SITE_SIZE","value":"7×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=20378&res_dt=20261024","at":"2026-10-23","text":"[암벽존]"}
 {"cid":"7129","attr":"SITE_SIZE","value":"8×9m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7129","at":"2025-06-09T00:00:00+09:00","quote":"바닥은 모두 파쇄석으로 이뤄졌으며, 사이트 크기는 가로 8m 세로 9m 12면, 가로 7.5m 세로 7.5m 5면, 가로 8m 세로 10m 10면으로 세 종류다.","text":"8×9m"}
+{"cid":"7129","attr":"SITE_SIZE","value":"6.4×8m","grade":"MENTION","src":"review_search","url":"https://camplink.co.kr:444/index/0booking/order.php?camplink=evergreen&no=1470&select=2026-09-25","quote":"▶ A구역 3번 자리 선택 ( 규격: 6.4m*8m, 일자: 2026-09-25 ) * 아래 장소 리스트에서 원하는 예약 장소를 고르신 후 오른쪽 체크박스를 선택 바랍니다.","text":"6.4×8m","n":3}
+{"cid":"7129","attr":"SITE_SIZE","value":"6.5×8m","grade":"MENTION","src":"review_search","url":"https://camplink.co.kr:444/index/0booking/order.php?camplink=evergreen&no=1489&select=2026-09-16","quote":"▶ D구역 23번 자리 선택 ( 규격: 6.5m*8m, 일자: 2026-09-16 ) * 아래 장소 리스트에서 원하는 예약 장소를 고르신 후 오른쪽 체크박스를 선택 바랍니다.","text":"6.5×8m","n":2}
+{"cid":"7129","attr":"SITE_SIZE","value":"7×7.3m","grade":"MENTION","src":"review_search","url":"https://camplink.co.kr:444/index/0booking/order.php?camplink=evergreen&no=1479&select=2026-09-26","quote":"▶ B구역 12번 자리 선택 ( 규격: 7m*7.3m, 일자: 2026-09-26 ) * 아래 장소 리스트에서 원하는 예약 장소를 고르신 후 오른쪽 체크박스를 선택 바랍니다.","text":"7×7.3m","n":2}
+{"cid":"7129","attr":"SITE_SIZE","value":"8×9.5m","grade":"MENTION","src":"review_search","url":"https://camplink.co.kr:444/index/0booking/order.php?camplink=evergreen&no=2707&select=2026-09-26","quote":"▶ C구역 13번 자리 선택 ( 규격: 8m*9.5m, 일자: 2026-09-26 ) * 아래 장소 리스트에서 원하는 예약 장소를 고르신 후 오른쪽 체크박스를 선택 바랍니다.","text":"8×9.5m","n":2}
 {"cid":"7131","attr":"SITE_SIZE","value":"7×9m","grade":"CONFIRMED","src":"gocamping","count":64}
 {"cid":"7132","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7134","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping","count":39}
@@ -3288,6 +3295,7 @@
 {"cid":"101817","attr":"SITE_SIZE","value":"9×10m","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"101817","attr":"SITE_SIZE","value":"9×8m","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"101819","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17320&res_dt=20261024","at":"2026-10-23","text":"*오토캠핑* 파쇄석/8mX8m"}
+{"cid":"101819","attr":"SITE_SIZE","value":"8×8m","grade":"MENTION","src":"review_search","url":"https://gtour.gmarket.co.kr/TourV2/Item?goodscode=4815991433","quote":"오토캠핑-8(파쇄석/8mX8m) 예약즉시확정 조식불포함 기준인원 3인/최대 4인 객실정보 70,000원 66,500원 쿠폰적용가 모모펜션(마운틴뷰...","text":"8×8m","n":1}
 {"cid":"101828","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping","count":24}
 {"cid":"101828","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101830","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping","count":7}
@@ -3301,6 +3309,7 @@
 {"cid":"101840","attr":"SITE_SIZE","value":"9×12m","grade":"CONFIRMED","src":"gocamping","count":12}
 {"cid":"101840","attr":"SITE_SIZE","value":"9×5m","grade":"CONFIRMED","src":"gocamping","count":7}
 {"cid":"101840","attr":"SITE_SIZE","value":"9×5m","grade":"CONFIRMED","src":"gocamping","count":5}
+{"cid":"101844","attr":"SITE_SIZE","value":"5×7m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/ja2464106/224286856212","at":"2026-05-15","quote":"경북 성주군 금수강산면 무학리에 위치한 캠핑장 으로 성주댐 상류에 위치하고 있습니다 규모는 캠핑 데크죤 9개 (5m x 7m) 와 블럭죤 (5m x 7m) 1개 총 10개를 운영 중 입니다 관리동에는 세척장, 화장실 샤워장이...","text":"5×7m","n":1}
 {"cid":"101845","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17316&res_dt=20261024","at":"2026-10-23","text":"오토캠핑존-파쇄석"}
 {"cid":"101845","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"101846","attr":"SITE_SIZE","value":"3×3m","grade":"CONFIRMED","src":"gocamping"}
@@ -3677,6 +3686,7 @@
 {"cid":"102365","attr":"SITE_SIZE","value":"6×5m","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"102365","attr":"SITE_SIZE","value":"9×8m","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"102365","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"osm-w472545129","attr":"SITE_SIZE","value":"10×12m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/472545129","at":"2026-10-23"}
 {"cid":"osm-w1378241447","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1378241447","at":"2026-10-23"}
 {"cid":"osm-w1378241447","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/smurfshouse/224434528939","at":"2026-10-07","quote":"구미 낙동강 체육공원은 주말 나들이로 피크닉 즐기기에도 좋고, 예쁜 꽃구경도 하기 좋은 곳이며...내 야외물놀이장 옆) 시설: 오토캠핑 사이트 50면 사이트 크기: 10m × 10m 입실·퇴실: 오후 2시 ~ 다음 날 오전…","text":"10×10m","n":1}
 {"cid":"park-46770-00014-qc3lb","attr":"SITE_SIZE","value":"6×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=19772&res_dt=20261024","at":"2026-10-23","text":"해변 캠핑장 1~37"}

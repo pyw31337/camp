@@ -144,6 +144,7 @@
 {"cid":"502","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"503","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"504","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
+{"cid":"504","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/asd0743/224309198105","at":"2026-06-08","quote":"경북 캠핑장 추천 애견동반 가능한 넓고 깨끗한 “산내들오토캠핑.....","text":"동반 가능","n":1}
 {"cid":"507","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"508","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"508","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/nyamkong_daily/224422735888","at":"2026-09-25","quote":"출발시간 오후 12시 김포한강오토캠핑장(애견동반불가) 동네에서 김포까지는...","text":"동반 불가","n":1}
@@ -224,6 +225,7 @@
 {"cid":"722","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"722","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/slpineppo/223459875158","at":"2024-05-27","quote":"대관령솔내음캠핑장 강원 강릉시 성산면 삼포암길 48 대관령솔내음 0507-1361-7491 ⏰️ 입실 14:00 퇴실 11:00 ⭐️ 강아지 동반 가능 주차...","text":"동반 가능","n":1}
 {"cid":"725","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
+{"cid":"725","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/rindoooong/223566623655","at":"2024-08-30","quote":"내돈내산 양주 대궐오토캠핑장 마장호수근처 애견동반 가능 수영장.....","text":"동반 가능","n":4}
 {"cid":"731","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"731","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=731","at":"2026-06-30T00:00:00+09:00","quote":"텃밭엔 강아지가 있고 강아지와 어울릴 수 있는 반려동물 출입이 가능하다.","text":"동반 가능"}
 {"cid":"731","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://leports.sailing-blog.click/4694","at":"2026-05-26","quote":"※ 반려동물 동반 불가","text":"동반 불가","n":1}
@@ -299,6 +301,7 @@
 {"cid":"978","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"987","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"1023","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
+{"cid":"1023","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://daylifehappy.tistory.com/4011","at":"2025-06-30","quote":"반려동물 동반 불가능","text":"동반 불가","n":1}
 {"cid":"1024","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"1024","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/tanglylog/224414620812","at":"2026-09-17","quote":"전북글램핑 애견동반 가능 진안 마이산 풍혈냉천 캠핑장 추천 자연 .....","text":"동반 가능","n":2}
 {"cid":"1025","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
@@ -606,6 +609,7 @@
 {"cid":"2230","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"2230","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/shiaru/224420816621","at":"2026-09-23","quote":"참고로, 애견동반 캠핑은 불가입니다.","text":"동반 불가","n":1}
 {"cid":"2232","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
+{"cid":"2232","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/spotnote2006/224362347815","at":"2026-08-02","quote":"캠핑장은 반려동물 동반이 가능하다는 안내가 있고, 펜션은 반려동물 동반이 불가하다고 적혀...","text":"동반 가능","n":3}
 {"cid":"2235","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"2239","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"2249","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
@@ -854,6 +858,7 @@
 {"cid":"3233","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/camfit/224330907153","at":"2026-06-29","quote":"반려견 동반도 가능합니다.","text":"동반 가능","n":1}
 {"cid":"3252","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"3254","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
+{"cid":"3254","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/jack7488/224425932160","at":"2026-09-29","quote":"저희 부부는 항상 추석당일에 양가를 모두 다녀오기 때문에 남는 휴일을 이용해서 캠핑을 다녀왔습니다 : ) 이번 캠핑장은 가평에 위치한 \"포레스트 소울\" 서뉴가 인터넷을 통해 찾은 캠핑장이고, 애견동반가능...","text":"동반 가능","n":5}
 {"cid":"3262","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"3262","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=3262","at":"2024-08-07T00:00:00+09:00","quote":"반려견동반 입장이 가능하며, 인근에 가볼만한 관광지로는 포천 허브아일랜드, 소요산 토속음식마을, 신북 리조트 스프링 폴이 있다.","text":"동반 가능"}
 {"cid":"3263","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
@@ -909,6 +914,7 @@
 {"cid":"3395","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"3397","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"3407","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
+{"cid":"3407","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/happyroros/224038824103","at":"2025-10-12","quote":"0139 캠핑사이트 55000~80000원 텐트 옆 주차가능 ❗️반려동물 동반가능 수도권에서 2시간 이내로 도착 가능한 원주캠핑장 한다리골캠핑장...","text":"동반 가능","n":1}
 {"cid":"3412","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"https://campingdogam.com/camp/3412/","at":"2026-10-19T02:30:26.249Z","quote":"반려동물 불가능","text":"동반 불가"}
 {"cid":"3412","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"3417","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
@@ -923,6 +929,8 @@
 {"cid":"3440","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"3440","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/dijju/224438526343","at":"2026-10-12","quote":"반려동물 동반 입실 불가","text":"동반 불가","n":1}
 {"cid":"3445","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
+{"cid":"3445","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/skfk701/223953019126","at":"2025-07-30","quote":"남해 항도몽돌야영장 솔직후기, 애견동반 가능.","text":"동반 가능","n":1}
+{"cid":"3445","attr":"PET_POLICY","value":"ZONE_ONLY","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/skfk701/223953019126","at":"2025-07-30","quote":"총평 : ⭐️⭐️⭐️⭐️ 애견동반 가능한 남해 스노클링 명소, 캠핑카 전용 사이트도 있고 오션뷰가 넘 좋아요 ＊캠핑카 전용 사이트 (B-18) 추천!","text":"지정 구역만 동반","n":1}
 {"cid":"3450","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"3454","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"3458","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
@@ -1509,7 +1517,7 @@
 {"cid":"7934","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"7935","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7942","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
-{"cid":"7942","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://hcm-story.tistory.com/2063","at":"2026-03-11","quote":"각 캠핑장의 캐라반, 글램핑 시설 유무, 강아지 같은 반려동물과 동반 가능한지 등을 확인해 보세요.","text":"동반 가능","n":1}
+{"cid":"7942","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://hcm-story.tistory.com/2063","at":"2026-03-11","quote":"각 캠핑장의 캐라반, 글램핑 시설 유무, 강아지 같은 반려동물과 동반 가능한지 등을 확인해 보세요.","text":"동반 가능","n":3}
 {"cid":"7944","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7945","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7946","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
@@ -1845,6 +1853,7 @@
 {"cid":"100275","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"100276","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"100278","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
+{"cid":"100278","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://hcm-story.tistory.com/2055","at":"2026-03-09","quote":"각 캠핑장의 캐라반, 글램핑 시설 유무, 강아지 같은 반려동물과 동반 가능한지 등을 확인해 보세요.","text":"동반 가능","n":1}
 {"cid":"100279","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"100280","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"100280","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.vibebuilder.kr/36","at":"2026-07-15","quote":"경북 반려동물 가능 캠핑장.","text":"동반 가능","n":3}
@@ -2178,6 +2187,7 @@
 {"cid":"100588","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.vibebuilder.kr/28","at":"2026-07-13","quote":"경기도 반려동물 가능 캠핑장.","text":"동반 가능","n":1}
 {"cid":"100589","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"100590","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
+{"cid":"100591","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/rindoooong/223232010024","at":"2023-10-10","quote":"연천 아미골캠핑장 시골 할아버지집 놀러온느낌 휴식하고온 캠핑 애견동반가능 경기 연천군 미산면 숭의전로222번길 133 야생초마을아미골 0507-1425-0181 입실 14:00 퇴실 12:00 안녕하세요~ 보기보기 입니다.","text":"동반 가능","n":1}
 {"cid":"100592","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"100594","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"100594","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.vibebuilder.kr/34","at":"2026-07-13","quote":"경남 반려동물 가능 캠핑장.","text":"동반 가능","n":3}
@@ -2888,7 +2898,7 @@
 {"cid":"101180","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"101181","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101182","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
-{"cid":"101182","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/rnwlsdksm/224413190637","at":"2026-09-16","quote":"애견 카페도 있고 유치원도 있다 신기한 곳이다 정말 애견인들이 좋아할만한 곳 강아지 구명쪼끼 ㅜ 대여 가능 ㅋㅋ귀여워 배변봉투도 있다 잼보리캠프 강원특별자치도 인제군 인제읍 자작나무숲길 1061-19 애견동반캠핑장 여기 너무 강추 대 가족도 올 수 …","text":"동반 가능","n":2}
+{"cid":"101182","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/rnwlsdksm/224413190637","at":"2026-09-16","quote":"애견 카페도 있고 유치원도 있다 신기한 곳이다 정말 애견인들이 좋아할만한 곳 강아지 구명쪼끼 ㅜ 대여 가능 ㅋㅋ귀여워 배변봉투도 있다 잼보리캠프 강원특별자치도 인제군 인제읍 자작나무숲길 1061-19 애견동반캠핑장 여기 너무 강추 대 가족도 올 수 …","text":"동반 가능","n":4}
 {"cid":"101183","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"101184","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"101185","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
@@ -2920,6 +2930,7 @@
 {"cid":"101200","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101201","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101202","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
+{"cid":"101202","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/shiaru/224048567681","at":"2025-10-21","quote":"캠프팔봉은 애견동반과 지인초대가 불가하며, 방문객 초대는 부모님만 가능합니다.","text":"동반 불가","n":1}
 {"cid":"101203","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101204","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"101205","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
@@ -2988,6 +2999,7 @@
 {"cid":"101250","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.vibebuilder.kr/36","at":"2026-07-15","quote":"경북 반려동물 가능 캠핑장.","text":"동반 가능","n":4}
 {"cid":"101251","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101252","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
+{"cid":"101252","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/lookks152/224380541884","at":"2026-08-16","quote":"[내돈내산] 애견동반 가능한 바베큐 카라반 거제 캠프빌리지 솔직후.....","text":"동반 가능","n":6}
 {"cid":"101253","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"101254","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101255","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
@@ -3408,6 +3420,7 @@
 {"cid":"101590","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/tonglab_/224411471756","at":"2026-09-14","quote":"강원도 양양 : 죽도야영장&캠핑장 🏕 바다 바로 앞에서 즐기는 캠핑 애견동반가능 캠핑장 레리꼬.","text":"동반 가능","n":1}
 {"cid":"101591","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101592","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
+{"cid":"101592","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/jjeong_log/224349544817","at":"2026-07-17","quote":"포레스트사운드캠핑장 주소 : 경기도 포천시 신북면 포천로 1724 체크인 : 오후 1시 체크아웃 : 오후 12시 매너타임 : 오후 11시 ~ 오전 8시 반려동물 동반 가능 오토캠핑, 글램핑...","text":"동반 가능","n":3}
 {"cid":"101593","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101594","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"101595","attr":"PET_FEE","value":20000,"grade":"OPERATOR","src":"operator_homepage","url":"https://sunjedahm.com/reservation/information/","at":"2026-10-20T01:19:54.591Z","quote":"반려동물 추가 입실: 1마리 추가 시 2만 원의 비용이 부과되며, 최대 3마리까지 추가 가능합니다.","text":"2만원"}
@@ -3620,8 +3633,9 @@
 {"cid":"101830","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"101830","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/loyya30/224071676610","at":"2025-11-11","quote":"특히 반려동물은 입장이 불가하니 주의하세요.","text":"동반 불가","n":2}
 {"cid":"101831","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/roseline_0202/224363950573","at":"2026-07-31","quote":"26년 여름휴가는 글램핑으로 #해핑글램핑 #포천애견동반글램핑 #포천애견동반펜션 우리가 예약한곳은 패밀리 룸~~101호배정 더블침대3개 침구랑 컨디션 너무좋고ㅋㅋ 에어컨키니 시원하고 강아지도 가능한곳...","text":"동반 가능","n":1}
+{"cid":"101832","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hab2t_610/223979792115","at":"2025-08-22","quote":"매너타임은 밤 11시부터 시작되며, 반려동물 동반이 불가한지라 더욱 청결하게 관리가 되고 있는 것...","text":"동반 불가","n":1}
 {"cid":"101833","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
-{"cid":"101834","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/sikdorakfunfun/224426868288","at":"2026-09-30","quote":"설렌다 날씨도 넘좋 애견동반은 되는데 차박 안되어서 아숩 우리는 B4존 선택쓰 펜스있어서 좋음 모나팜캠핑장 충청남도 아산시 순천향로 623-22 모나팜 캠핑장 내돈내산 인증 방문 모나팜캠핑장 충청남도 아산시 신인동 454 더보기 [애견동반가능 B1~…","text":"동반 가능","n":1}
+{"cid":"101834","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/sikdorakfunfun/224426868288","at":"2026-09-30","quote":"설렌다 날씨도 넘좋 애견동반은 되는데 차박 안되어서 아숩 우리는 B4존 선택쓰 펜스있어서 좋음 모나팜캠핑장 충청남도 아산시 순천향로 623-22 모나팜 캠핑장 내돈내산 인증 방문 모나팜캠핑장 충청남도 아산시 신인동 454 더보기 [애견동반가능 B1~…","text":"동반 가능","n":7}
 {"cid":"101837","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
 {"cid":"101838","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"101839","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
@@ -3891,6 +3905,8 @@
 {"cid":"osm-w435230360","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/kej9543210/224332170169","at":"2026-06-30","quote":") *매너타임 오후10시부터 오전8시까지 *반려견 동반가능 (9kg미만 소형견) 캠핏 | 부곡...울집에서 35분정도 걸림!","text":"동반 가능 (9kg미만)","n":1}
 {"cid":"osm-w474196879","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/jinji0603/224298850319","at":"2026-05-28","quote":"하지만 너무...원, 주중(월,화,수,목) 9만원 - 반려견 동반 불가 - 입실 13:00/ 퇴실 12:00(일요일 퇴실 18:00 이전…","text":"동반 불가","n":1}
 {"cid":"osm-w670224291","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/jiniyam9292/223236907683","at":"2023-10-15","quote":"전주 숙소 _ 가성비 독채 펜션 애견 동반 가능한 에어비앤비 (노래방, LP).","text":"동반 가능","n":2}
+{"cid":"osm-w779169455","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/w150404/223925082091","at":"2025-07-07","quote":"공휴일 전날 운영 35,000 반려동물 출입 불가 카라반 및 캠핑카 출입 금…","text":"동반 불가","n":1}
+{"cid":"osm-w806340494","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/o3o_xiah/223772346194","at":"2025-02-24","quote":"파주 키즈 풀빌라워라벨 애견동반 가능한 가족여행 숙소.","text":"동반 가능","n":1}
 {"cid":"osm-w899193999","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/109ming/224246617529","at":"2026-04-09","quote":"날씨가 좋아서 아주 만족했던 구미캠핑장 카라반 이용 후기입니다 입실: 오후 2시 퇴실: 오전 11시 체크인 시 예약자 신분증 지참 사용료 감면 시 증빙서류 지참 전구역 금연 반려동물 출입 금지 부대시설은 따로 찍지 않아…","text":"동반 불가","n":1}
 {"cid":"osm-w1346307038","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/dud06120/223905807616","at":"2025-06-20","quote":"‍🦺 객실 애견동반 가능 (1마리 당 2/3만원 추가요금…","text":"동반 가능 (1마리까지)","n":1}
 {"cid":"osm-w1378241447","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/sooso_han_/224427127564","at":"2026-10-01","quote":"외부 음식은 반입 금지지만 반려견 동반은 가능하고, 글램핑 느낌을 낼 수 있는...안내사항을 확인해요.","text":"동반 가능","n":1}
