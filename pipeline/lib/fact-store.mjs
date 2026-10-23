@@ -13,7 +13,7 @@ export const GRADE_RANK = { VERIFIED: 4, OPERATOR: 3, CONFIRMED: 2, MENTION: 1, 
 
 // 원천 코드 → 사람이 읽는 이름
 export const SOURCES = {
-  pilot_verified: "모여라캠핑 파일럿 원문 대조",
+  pilot_verified: "렛츠 캠핑 파일럿 원문 대조",
   operator_homepage: "운영자 홈페이지",
   operator_discovered: "운영자 홈페이지(카카오 검색으로 발굴)",
   operator_form: "운영자 셀프 등록(사이트 제출·소유자 검토 승인)",

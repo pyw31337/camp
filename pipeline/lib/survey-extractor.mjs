@@ -128,7 +128,7 @@ export function extractCampConditions(camp, detail = null, pilotFact = null) {
       features: pilotFact.features ?? [],
       rental_offers: pilotFact.rental_offers ?? [],
       source: {
-        label: "모여라캠핑 파일럿 검증 (공식 원문 대조)",
+        label: "렛츠 캠핑 파일럿 검증 (공식 원문 대조)",
         url: pilotFact.evidence?.source_url ?? null,
         checked_at: pilotFact.evidence?.observed_at ?? null,
         tier: "A",

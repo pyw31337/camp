@@ -28,7 +28,7 @@ flowchart TD
     API_PHOTO["4. 관광사진 정보_GW (15101914)<br/>포토코리아 10만장"] -->|"공공누리 1유형 고해상도 원본 사진"| MEDIA["고화질 갤러리 및 로드뷰 썸네일"]
     API_FIRE["5. 전력거래소 화재발생경보"] -->|"산불조심기간, 화기 통제 경보"| ALERT["실시간 화기 안전 알림"]
     
-    SPEC --> EX["모여라캠핑 서비스 (explore)"]
+    SPEC --> EX["렛츠 캠핑 서비스 (explore)"]
     NATURE --> EX
     FREE --> EX
     MEDIA --> EX

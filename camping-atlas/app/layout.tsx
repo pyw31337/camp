@@ -7,7 +7,7 @@ import "./site-header.css";
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "모여라 캠핑 | 전국 캠핑장 정보 허브",
+  title: "렛츠 캠핑 | 전국 캠핑장 정보 허브",
   description: "전국 캠핑장 정보·예약 방식·여행 판단 정보를 출처와 수집 시각으로 비교하는 서비스 프로토타입",
   other: {
     "codex-preview": "development",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     // PWA에서는 상태 표시 영역까지 히어로가 이어진다. 실제 조작부는 공통
     // 헤더의 safe-area inset 아래에서 시작하므로 노치·상태 아이콘과 겹치지 않는다.
     statusBarStyle: "black-translucent",
-    title: "모여라 캠핑",
+    title: "렛츠 캠핑",
   },
 };
 

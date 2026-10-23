@@ -3,7 +3,7 @@
 > 2026-10-21 정리: 예전 시안 폴더(design/explore·mockup·mockup-v2·studio-v1·vision)는 지웠다. 아래에서 그 경로를 말하는 대목은 기록이며, 현재 원본은 `design/renewal/` 하나다.
 
 > 최종 갱신: 2026-10-22 KST<br>
-> 제품명: 모여라 캠핑<br>
+> 제품명: 렛츠 캠핑<br>
 > 상태: (2026-10-19) 전국 3,116개 캠핑장 통합 데이터베이스(moyeora_camping.db) 구축 및 AI 장단점·운영이슈 분석 완료 · data.go.kr 8대 공공데이터(야영 4종 + 화장실 4종) 전수 연계 완료 · 캠핏/네이버 우선 예약 CTA, 주변 POI 썸네일·로드뷰, 플랫폼 허브(유튜브 인라인 재생), AI 세로형 후기 카드, 고해상도 라이트박스 및 중복제거 고도화 · GitHub Pages 공개 파일럿(camping-atlas/) + 전국 기준 데이터 파이프라인 구현 · 고캠핑 3,111곳 현장 조건 전수 표기, 서비스 주소 GitHub Pages(https://pyw31337.github.io/camp/) 하나로 통일, 루트와 /camp/explore/가 같은 탐색 셸을 제공
 
 ## 제품 목표

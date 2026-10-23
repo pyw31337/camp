@@ -15,7 +15,7 @@ const publicDataDir = join(rootDir, "camping-atlas/public/explore/data");
 const distDataDir = join(rootDir, "camping-atlas/dist/client/explore/data");
 const campsDir = join(publicDataDir, "camps");
 
-console.log("=== 모여라캠핑 전국 3,116개 캠핑장 현장 조건 전수조사 시작 ===");
+console.log("=== 렛츠 캠핑 전국 3,116개 캠핑장 현장 조건 전수조사 시작 ===");
 
 // 1. 파일럿 검증 레지스트리 로드
 const pilotFactsPath = join(rootDir, "pipeline/registry/pilot-condition-facts.json");
