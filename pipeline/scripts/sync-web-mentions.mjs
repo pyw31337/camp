@@ -7,6 +7,7 @@
 // 환경: NAVER_API_HUB_CLIENT_ID/SECRET, NAVER_MENTION_MAX_CALLS(기본 8000), WEB_MAX_AGE_DAYS(14), BODY_MINUTES(25), SEARCH_MINUTES(15), BODY_MAX(2500)
 // 키가 없거나 실패해도 캐시로 출력하고 exit 0.
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { isDueWithPriority, prioritize, priorityIds } from "../lib/priority.mjs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { naverGet } from "../lib/naver-discovery.mjs";
@@ -80,8 +81,10 @@ async function naverPhase() {
   }
   const plan = QUERY_PLAN.filter((q) => paths[q.type]);
   if (!plan.length) { persist(); warn("네이버 검색 경로 없음", "HUB Application의 검색 API 선택을 확인하세요."); return; }
-  const due = camps.filter((c) => isStale(cache.campgrounds[c.id]?.fetched_at, MAX_AGE))
-    .sort((a, b) => String(cache.campgrounds[a.id]?.fetched_at ?? "").localeCompare(String(cache.campgrounds[b.id]?.fetched_at ?? "")));
+  // 찜한 업장 우선(lib/priority.mjs): 맨 앞에, 하루만 지나도 다시 확인
+  const prio = priorityIds();
+  const due = prioritize(camps.filter((c) => (prio.has(String(c.id)) ? isDueWithPriority(c.id, cache.campgrounds[c.id]?.fetched_at, MAX_AGE, prio) : isStale(cache.campgrounds[c.id]?.fetched_at, MAX_AGE)))
+    .sort((a, b) => String(cache.campgrounds[a.id]?.fetched_at ?? "").localeCompare(String(cache.campgrounds[b.id]?.fetched_at ?? ""))), (c) => c.id, prio);
   console.log(`갱신 대상 ${due.length}곳 · 캠핑장당 ${plan.length}회`);
   let done = 0, stop = null;
   // 검색 단계 시간 상한: 워크플로 단계 시간 제한(50분)에 걸려 out/campground-web.json을 못 쓰고 끝나지 않게(2026-10-19 run 39200981608).

@@ -321,7 +321,8 @@ const hasSite = (c) => startsOf(c).length > 0;
 // 죽은 사이트였는데 새로 발굴된 홈페이지가 생긴 곳은 확인 주기와 무관하게 바로 읽는다.
 const newlyFound = (c) => { const r = prev.campgrounds[c.id]; return Boolean(discoveredOf(c) && r && r.status !== "OK" && !r.discovered && startsOf(c).includes(discoveredOf(c))); };
 const doneSince = (r) => SINCE && (r?.last_attempt?.at ?? r?.checked_at ?? "") >= SINCE;
-const targets = camps.filter((c) => hasSite(c) && (!only || only.has(String(c.id))) && !doneSince(prev.campgrounds[c.id]) && (only || !fresh(prev.campgrounds[c.id]) || retryable(prev.campgrounds[c.id]) || newlyFound(c))).slice(0, limit);
+// 찜한 업장은 맨 앞(lib/priority.mjs) — --limit에 잘려도 찜한 곳은 읽힌다.
+const targets = prioritize(camps.filter((c) => hasSite(c) && (!only || only.has(String(c.id))) && !doneSince(prev.campgrounds[c.id]) && (only || !fresh(prev.campgrounds[c.id]) || retryable(prev.campgrounds[c.id]) || newlyFound(c)))).slice(0, limit);
 console.log(`운영자 사이트 대상 ${targets.length}곳 (동시 ${concurrency}${RENDER ? " · 렌더링 폴백" : ""})`);
 let done = 0;
 const stat = {};

@@ -34,8 +34,9 @@ const DEAD = new Set(["FETCH_FAILED", "SERVICE_CLOSED", "NO_OPERATOR_SITE"]);
 const needsHomepage = (c) => !hasOperatorSite(c) || DEAD.has(sites[c.id]?.status);
 const stale = (t) => !t || (Date.now() - Date.parse(t)) / 864e5 > MAX_AGE;
 
-const queue = camps.filter((c) => (!only || only.has(String(c.id))) && (only || stale(store[c.id]?.checked_at)))
-  .sort((a, b) => (Date.parse(store[a.id]?.checked_at ?? "") || 0) - (Date.parse(store[b.id]?.checked_at ?? "") || 0));
+// 찜한 업장은 맨 앞(lib/priority.mjs) — 한도가 먼저 닿아도 찜한 곳은 확인된다.
+const queue = prioritize(camps.filter((c) => (!only || only.has(String(c.id))) && (only || stale(store[c.id]?.checked_at)))
+  .sort((a, b) => (Date.parse(store[a.id]?.checked_at ?? "") || 0) - (Date.parse(store[b.id]?.checked_at ?? "") || 0)));
 let calls = 0, stop = null, done = 0;
 const stat = { place: 0, web: 0 };
 

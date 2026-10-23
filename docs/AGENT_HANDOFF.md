@@ -1,5 +1,20 @@
 # 인수인계
 
+## 📌 찜한 업장 우선 수집 · 로그 화면 비밀번호 · 소유자 할 일 코덱스 프롬프트 (2026-10-23, Claude)
+
+- **찜 우선 수집**:
+  - `pipeline/lib/priority.mjs`는 우선 목록을 만든다. 출처는 `PRIORITY_IDS`와 `data/priority/saved-camps.json`(공용 찜 스냅숏, `scripts/sync-saved-priority.mjs`)이다.
+  - 매일 수집기 5종(discover-kakao, discover-naver, crawl-operator-sites, sync-social, sync-web-mentions)은 찜한 곳을 대기열 맨 앞에 둔다. 후기와 웹 언급은 찜한 곳을 1일 주기로 다시 확인한다.
+  - 별도 워크플로 `saved-priority.yml`이 3시간마다 찜한 곳만 다시 수집한 뒤 바로 증분 발행한다. 대상 수집원은 카카오·네이버 장소, 운영자 홈페이지(렌더링·OCR·깊게 읽기), 다음, 네이버다.
+  - 맥미니 야간 작업에 `saved-first`(12시간마다)를 추가했다.
+- **collected-data 캐시**: 두 실행이 겹쳐도 지워지지 않게 `scripts/merge-collected-cache.mjs`로 캠핑장별로 합친다(더 최근 확인이 이김). `data-sync`도 저장 전에 같은 방식으로 합친다.
+- **로그 화면 비밀번호**: `/log/`는 입장 화면이 먼저 나오고, 비밀번호는 처음 0602다.
+  - 열쇠 버튼으로 바꾸고, 잠그기 버튼으로 다시 잠근다. 이 탭에서는 12시간 동안 통과된다.
+  - 서버 쪽은 `db/023_log_auth.sql`이다. bcrypt로 저장하고 anon은 표를 읽지 못하며, RPC는 `log_auth_check`·`log_auth_set`이고 10번 틀리면 10분 잠긴다.
+  - SQL을 적용하기 전에는 0602 해시와 비교하는 대체 경로만 있고, 바꾸기 기능은 막혀 있다.
+  - 정직한 한계: 정적 페이지라서 018을 적용하기 전에는 공개 키로 데이터 API를 직접 읽을 수 있다.
+- **소유자 할 일**은 `local/macmini/CODEX_OWNER_TODO_PROMPT.md`에 있다. Supabase 토큰 하나를 받아 Management API로 018~023을 적용하고, 확인·맥 정리·야간 작업 점검·보고까지 한다.
+
 ## 📌 운영 기록 대시보드 v2 · 에이전트 기록 삭제 SQL · 매일 발행 막힘 수정 (2026-10-23, Claude)
 
 - `/log/`: 기록 종류 메뉴를 사이트 머리글 바로 아래 고정 메뉴 막대(.subnav)로. 지표(14일 선 그래프·지난 7일 대비 증감), 14일 쌓기 막대, 기록 구성·기기 도넛, 24시간 시계, 관심 흐름(상세 진입→찜→한마디), 많이 본 업장·지금 찜된 곳(공용 찜). 메뉴를 바꾸면 그래프도 그 종류만.

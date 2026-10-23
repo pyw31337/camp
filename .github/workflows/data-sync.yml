@@ -286,12 +286,21 @@ jobs:
         run: |
           DIR="$RUNNER_TEMP/collected"
           if git ls-remote --exit-code --heads origin collected-data >/dev/null 2>&1; then
+            git fetch -q --depth=1 origin +collected-data:refs/remotes/origin/collected-data
             git worktree add -q -B collected-data "$DIR" origin/collected-data
           else
             git worktree add -q --detach "$DIR" && git -C "$DIR" switch -q --orphan collected-data
           fi
           mkdir -p "$DIR/cache" "$DIR/out"
-          for f in social-search web-mentions; do [ -s ".cache/$f.json" ] && gzip -9c ".cache/$f.json" > "$DIR/cache/$f.json.gz"; done
+          # 그사이 찜 우선 수집(saved-priority.yml)이 브랜치에 쓴 결과를 지우지 않게 캠핑장별로 합친다(더 최근 확인이 이김).
+          for f in social-search web-mentions; do
+            [ -s ".cache/$f.json" ] || continue
+            if git -C "$DIR" cat-file -e "HEAD:cache/$f.json.gz" 2>/dev/null; then
+              git -C "$DIR" show "HEAD:cache/$f.json.gz" | gunzip > "$RUNNER_TEMP/$f.branch.json" \
+                && node scripts/merge-collected-cache.mjs ".cache/$f.json" "$RUNNER_TEMP/$f.branch.json" ".cache/$f.json" || true
+            fi
+            gzip -9c ".cache/$f.json" > "$DIR/cache/$f.json.gz"
+          done
           for f in campground-social campground-web; do [ -s "out/$f.json" ] && gzip -9c "out/$f.json" > "$DIR/out/$f.json.gz"; done
           node -e '
             const fs=require("fs"),z=require("zlib");const m={updated_at:new Date().toISOString(),run:process.env.RUN_URL,files:{}};

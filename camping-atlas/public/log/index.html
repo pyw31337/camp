@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <title>렛츠 캠핑 · 운영 기록 대시보드</title>
+<meta name="robots" content="noindex, nofollow">
+<script>/* 비밀번호 확인 전에는 기록을 그리지 않는다(이 탭에서 확인했으면 12시간 통과). */try{const t=Number(sessionStorage.getItem("mc-log-auth")||0);if(!(t>Date.now()))document.documentElement.classList.add("log-locked")}catch{document.documentElement.classList.add("log-locked")}</script>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
@@ -295,6 +297,44 @@
     .r-act { grid-column: 2; }
     .csv-label { display: none; }
   }
+  /* ── 비밀번호 입장 화면 · 비밀번호 바꾸기(소유자 2026-10-23) ── */
+  .log-locked .subnav, .log-locked main.layout { visibility: hidden; }
+  .gate { position: fixed; inset: 0; z-index: 150; display: grid; place-items: center; padding: 24px 16px; background: radial-gradient(120% 80% at 50% 0%, var(--accent-tint), var(--bg) 60%); opacity: 0; pointer-events: none; transition: opacity .3s var(--ease); }
+  .gate[hidden] { display: none; }
+  .log-locked .gate, .gate.show { opacity: 1; pointer-events: auto; }
+  .gate[data-mode="reset"] { background: rgba(16,20,20,.42); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  .gate-card { position: relative; width: min(380px, 100%); background: var(--paper); border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow-m); padding: 28px 24px 22px; text-align: center; transform: translateY(14px) scale(.98); transition: transform .45s var(--spring); }
+  .gate-card[hidden] { display: none; }
+  .gate.show .gate-card { transform: none; }
+  .gate-ic { width: 56px; height: 56px; margin: 0 auto 14px; border-radius: 18px; display: grid; place-items: center; background: var(--accent-tint); color: var(--accent); }
+  .gate-ic svg { width: 28px; height: 28px; fill: currentColor; }
+  .gate h2 { margin: 0; font-size: 1.15rem; font-weight: 850; letter-spacing: -.03em; }
+  .gate p.sub { margin: 6px 0 18px; color: var(--ink-3); font-size: .86rem; }
+  .gate form { display: grid; gap: 10px; text-align: left; }
+  .gate label.fl { font-size: .78rem; font-weight: 750; color: var(--ink-2); }
+  .pw { position: relative; display: flex; align-items: center; }
+  .pw input { width: 100%; min-height: var(--tap); padding: 0 46px 0 14px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--bg); font-size: 1.05rem; font-weight: 700; letter-spacing: .18em; outline: none; transition: border-color .2s var(--ease), background .2s var(--ease), box-shadow .2s var(--ease); }
+  .pw input::placeholder { letter-spacing: 0; font-weight: 500; color: var(--ink-3); font-size: .9rem; }
+  .pw input:focus { border-color: var(--accent); background: var(--paper); box-shadow: 0 0 0 4px var(--accent-tint); }
+  .pw input:disabled { opacity: .55; }
+  .pw-eye { position: absolute; right: 4px; width: 38px; height: 38px; border: 0; background: none; border-radius: 10px; display: grid; place-items: center; color: var(--ink-3); cursor: pointer; transition: color .2s var(--ease), background .2s var(--ease); }
+  .pw-eye:hover { color: var(--ink); background: var(--line-2); }
+  .gate .btn-go { min-height: var(--tap); border: 0; border-radius: 12px; background: var(--ink); color: #fff; font-weight: 800; font-size: .95rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-top: 4px; transition: transform .15s var(--ease), background .2s var(--ease), opacity .2s; }
+  .gate .btn-go:hover { background: #000; } .gate .btn-go:active { transform: scale(.98); }
+  .gate .btn-go[disabled] { opacity: .6; cursor: not-allowed; }
+  .gate .btn-go .spin { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,.35); border-top-color: #fff; display: none; animation: gspin .7s linear infinite; }
+  .gate .btn-go.busy .spin { display: inline-block; }
+  @keyframes gspin { to { transform: rotate(360deg); } }
+  .gate .msg { min-height: 1.3em; margin: 2px 0 0; font-size: .8rem; font-weight: 700; color: var(--flame); }
+  .gate .msg.ok { color: var(--accent); }
+  .gate .note { margin: 14px 0 0; padding: 10px 12px; border-radius: 12px; background: var(--bg); color: var(--ink-3); font-size: .76rem; text-align: left; display: flex; gap: 8px; }
+  .gate .note[hidden] { display: none; }
+  .gate .note svg { width: 15px; height: 15px; flex: none; fill: currentColor; margin-top: 2px; }
+  .gate .link { display: inline-block; margin-top: 14px; color: var(--ink-3); font-size: .8rem; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; transition: color .2s var(--ease); }
+  .gate .link:hover { color: var(--ink); }
+  .gate-card.shake { animation: gshake .42s var(--ease); }
+  @keyframes gshake { 20%, 60% { transform: translateX(-8px); } 40%, 80% { transform: translateX(8px); } }
+  .gate-x { position: absolute; top: 14px; right: 14px; }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 1ms !important; animation-delay: 0ms !important; transition-duration: 1ms !important; } }
 </style>
 <!-- 공통 틀(헤더·푸터·하단 탭·본문 폭) — 앱과 같은 파일. 이 쪽 스타일보다 뒤에 둬서 틀은 항상 같다. -->
@@ -337,6 +377,10 @@
   <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 5l7 8h-5v6h-4v-6H5z"/></symbol>
   <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 19l-7-8h5V5h4v6h5z"/></symbol>
   <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M11 4h2v12l4-4 1.4 1.4L12 19.8 5.6 13.4 7 12l4 4z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V11a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5m-3 5a3 3 0 1 1 6 0v3H9zm3 8a2 2 0 0 1 1 3.73V19h-2v-1.27A2 2 0 0 1 12 14"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><path d="M7 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4m5.65-4A6 6 0 1 0 12.65 14H17v4h4v-4h2v-4z"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10m0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6"/></symbol>
+  <symbol id="i-logout" viewBox="0 0 24 24"><path d="M10.09 15.59 11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67zM19 3H5a2 2 0 0 0-2 2v4h2V5h14v14H5v-4H3v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2"/></symbol>
 </defs></svg>
 
 <!-- shell:header -->
@@ -368,6 +412,8 @@
     <div class="subnav-act">
       <span class="live"><span class="live-dot" id="live-dot"></span><span id="last-updated-txt">불러오는 중</span></span>
       <label class="sw" title="30초마다 자동 갱신"><input type="checkbox" id="auto-refresh" role="switch" checked><span class="sw-track"><span class="sw-thumb"></span></span><span class="sw-label">자동</span></label>
+      <button type="button" class="btn btn-icon" id="btn-pw" aria-label="비밀번호 바꾸기" title="비밀번호 바꾸기"><svg class="ic"><use href="#i-key"/></svg></button>
+      <button type="button" class="btn btn-icon" id="btn-lock" aria-label="잠그기" title="잠그기(다시 비밀번호 입력)"><svg class="ic"><use href="#i-logout"/></svg></button>
       <button type="button" class="btn btn-icon" id="btn-refresh" aria-label="지금 새로고침" title="지금 새로고침"><svg class="ic" id="refresh-icon"><use href="#i-refresh"/></svg></button>
     </div>
   </div>
@@ -486,6 +532,39 @@
   </div>
 </dialog>
 <div class="toast" id="toast" role="status"></div>
+
+<!-- 비밀번호 입장 화면 · 비밀번호 바꾸기 창(db/023_log_auth.sql) -->
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+  <div class="gate-card" id="gate-login">
+    <div class="gate-ic"><svg><use href="#i-lock"/></svg></div>
+    <h2 id="gate-title">운영 기록은 비밀번호가 필요해요</h2>
+    <p class="sub">관리자만 볼 수 있는 화면이에요.</p>
+    <form id="login-form" autocomplete="off">
+      <label class="fl" for="pw-in">비밀번호</label>
+      <div class="pw"><input id="pw-in" type="password" inputmode="numeric" autocomplete="current-password" placeholder="비밀번호 입력" required><button type="button" class="pw-eye" data-eye="pw-in" aria-label="비밀번호 보기"><svg class="ic"><use href="#i-eye"/></svg></button></div>
+      <p class="msg" id="login-msg" role="alert"></p>
+      <button class="btn-go" type="submit"><span class="spin"></span><span>들어가기</span></button>
+    </form>
+    <a class="link" href="../">처음 화면으로</a>
+  </div>
+  <div class="gate-card" id="gate-reset" hidden>
+    <button type="button" class="btn btn-icon gate-x" id="reset-close" aria-label="닫기"><svg class="ic"><use href="#i-close"/></svg></button>
+    <div class="gate-ic"><svg><use href="#i-key"/></svg></div>
+    <h2>비밀번호 바꾸기</h2>
+    <p class="sub">지금 비밀번호를 확인한 뒤 바꿔요.</p>
+    <form id="reset-form" autocomplete="off">
+      <label class="fl" for="pw-old">지금 비밀번호</label>
+      <div class="pw"><input id="pw-old" type="password" autocomplete="current-password" required><button type="button" class="pw-eye" data-eye="pw-old" aria-label="비밀번호 보기"><svg class="ic"><use href="#i-eye"/></svg></button></div>
+      <label class="fl" for="pw-new">새 비밀번호(4자 이상)</label>
+      <div class="pw"><input id="pw-new" type="password" autocomplete="new-password" minlength="4" maxlength="64" required><button type="button" class="pw-eye" data-eye="pw-new" aria-label="비밀번호 보기"><svg class="ic"><use href="#i-eye"/></svg></button></div>
+      <label class="fl" for="pw-new2">새 비밀번호 한 번 더</label>
+      <div class="pw"><input id="pw-new2" type="password" autocomplete="new-password" minlength="4" maxlength="64" required></div>
+      <p class="msg" id="reset-msg" role="alert"></p>
+      <button class="btn-go" type="submit"><span class="spin"></span><span>바꾸기</span></button>
+    </form>
+    <p class="note" id="reset-note" hidden><svg><use href="#i-info"/></svg><span>비밀번호 바꾸기는 서버 설정(db/023_log_auth.sql)을 적용한 뒤부터 쓸 수 있어요. 지금은 처음 비밀번호로만 들어갈 수 있어요.</span></p>
+  </div>
+</div>
 
 <script>
 (() => {
@@ -941,8 +1020,86 @@
   const auto = $("#auto-refresh");
   function setAuto(on) { clearInterval(state.timer); if (on) state.timer = setInterval(() => fetchLogs(), 30000); $("#live-dot").classList.toggle("off", !on); }
   auto.addEventListener("change", () => { setAuto(auto.checked); showToast(`자동 갱신을 ${auto.checked ? "켰어요" : "껐어요"}`); });
-  setAuto(true);
-  fetchLogs();
+
+  // ── 비밀번호(소유자 2026-10-23: 처음 0602, 이 화면에서 바꾸기) ──
+  // 서버 함수 log_auth_check/log_auth_set(db/023_log_auth.sql: bcrypt, 10번 틀리면 10분 잠금)으로 확인한다.
+  // 서버 함수가 아직 없으면(SQL 미적용) 처음 비밀번호의 SHA-256과 비교하고, 바꾸기는 막는다.
+  const FALLBACK_SHA256 = "32625be384ed05129315617a65f0b070e7b35a4257bdd11e0d98185c6f0cecfe";
+  const AUTH_KEY = "mc-log-auth", AUTH_HOURS = 12;
+  const root = document.documentElement, gate = $("#gate"), loginCard = $("#gate-login"), resetCard = $("#gate-reset");
+  let started = false, serverAuth = null; // null=모름, true=서버 함수 있음, false=없음
+  const sha256 = async (t) => [...new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)))].map((b) => b.toString(16).padStart(2, "0")).join("");
+  async function rpc(name, body) {
+    if (!await ensureConfig()) return { error: "config" };
+    try {
+      const r = await fetch(`${SB.url}/rest/v1/rpc/${name}`, { method: "POST", headers: { ...headers, "Content-Type": "application/json" }, body: JSON.stringify(body) });
+      if (r.status === 404) return { missing: true };
+      if (!r.ok) return { error: r.status };
+      return { value: await r.json() };
+    } catch { return { error: "network" }; }
+  }
+  async function checkPw(pw) {
+    const r = await rpc("log_auth_check", { pw });
+    if (r.missing || r.error === "config") { serverAuth = r.missing ? false : serverAuth; return (await sha256(pw)) === FALLBACK_SHA256; }
+    if (r.error) throw new Error("서버에 연결하지 못했어요. 잠시 뒤 다시 해 주세요.");
+    serverAuth = true; return r.value === true;
+  }
+  const busy = (form, on) => { const b = $(".btn-go", form); b.disabled = on; b.classList.toggle("busy", on); };
+  const shake = (card) => { card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake"); };
+  const hideGate = () => { gate.classList.remove("show"); setTimeout(() => { if (!gate.classList.contains("show")) gate.hidden = true; }, 320); };
+  function startDashboard() { if (started) return; started = true; setAuto(auto.checked); fetchLogs(); }
+  function unlock() {
+    try { sessionStorage.setItem(AUTH_KEY, String(Date.now() + AUTH_HOURS * 36e5)); } catch {}
+    root.classList.remove("log-locked"); hideGate(); startDashboard();
+  }
+  function showGate(mode) {
+    gate.hidden = false; gate.dataset.mode = mode; loginCard.hidden = mode !== "login"; resetCard.hidden = mode !== "reset";
+    requestAnimationFrame(() => requestAnimationFrame(() => gate.classList.add("show")));
+    setTimeout(() => { const f = $(mode === "login" ? "#pw-in" : "#pw-old"); if (!f.disabled) f.focus({ preventScroll: true }); }, 80);
+  }
+  $$(".pw-eye").forEach((b) => b.addEventListener("click", () => {
+    const i = $(`#${b.dataset.eye}`); i.type = i.type === "password" ? "text" : "password";
+    b.setAttribute("aria-label", i.type === "password" ? "비밀번호 보기" : "비밀번호 가리기"); i.focus();
+  }));
+  $("#login-form").addEventListener("submit", async (e) => {
+    e.preventDefault(); const form = e.currentTarget, msg = $("#login-msg"), input = $("#pw-in");
+    msg.className = "msg"; msg.textContent = ""; busy(form, true);
+    try {
+      if (await checkPw(input.value)) { msg.className = "msg ok"; msg.textContent = "확인했어요"; input.value = ""; unlock(); }
+      else { msg.textContent = "비밀번호가 맞지 않아요(10번 틀리면 10분 동안 잠겨요)"; shake(loginCard); input.select(); }
+    } catch (err) { msg.textContent = err.message; }
+    busy(form, false);
+  });
+  $("#btn-pw").addEventListener("click", async () => {
+    $("#reset-form").reset(); $("#reset-msg").textContent = "";
+    showGate("reset");
+    if (serverAuth === null) { const r = await rpc("log_auth_check", { pw: "" }); if (r.missing) serverAuth = false; else if (!r.error) serverAuth = true; }
+    const off = serverAuth === false;
+    $("#reset-note").hidden = !off; $$("#reset-form input, #reset-form .btn-go").forEach((x) => { x.disabled = off; });
+  });
+  const closeReset = () => { hideGate(); $("#btn-pw").focus({ preventScroll: true }); };
+  $("#reset-close").addEventListener("click", closeReset);
+  gate.addEventListener("keydown", (e) => { if (e.key === "Escape" && gate.dataset.mode === "reset") closeReset(); });
+  gate.addEventListener("click", (e) => { if (e.target === gate && gate.dataset.mode === "reset") closeReset(); });
+  $("#reset-form").addEventListener("submit", async (e) => {
+    e.preventDefault(); const form = e.currentTarget, msg = $("#reset-msg");
+    const oldPw = $("#pw-old").value, a = $("#pw-new").value, b = $("#pw-new2").value;
+    msg.className = "msg";
+    if (a.length < 4) { msg.textContent = "새 비밀번호는 4자 이상이어야 해요"; return shake(resetCard); }
+    if (a !== b) { msg.textContent = "새 비밀번호 두 칸이 서로 달라요"; return shake(resetCard); }
+    if (a === oldPw) { msg.textContent = "지금 비밀번호와 같아요"; return shake(resetCard); }
+    busy(form, true);
+    const r = await rpc("log_auth_set", { old_pw: oldPw, new_pw: a });
+    busy(form, false);
+    if (r.missing) { serverAuth = false; $("#reset-note").hidden = false; msg.textContent = "서버 설정이 아직 적용되지 않았어요"; return; }
+    if (r.error) { msg.textContent = "서버에 연결하지 못했어요. 잠시 뒤 다시 해 주세요."; return; }
+    if (r.value !== true) { msg.textContent = "지금 비밀번호가 맞지 않아요(10번 틀리면 10분 동안 잠겨요)"; return shake(resetCard); }
+    msg.className = "msg ok"; msg.textContent = "바꿨어요";
+    setTimeout(() => { closeReset(); showToast("비밀번호를 바꿨어요. 다음 입장부터 새 비밀번호를 써요"); }, 500);
+  });
+  $("#btn-lock").addEventListener("click", () => { try { sessionStorage.removeItem(AUTH_KEY); } catch {} location.reload(); });
+
+  if (root.classList.contains("log-locked")) showGate("login"); else { gate.hidden = true; startDashboard(); }
 })();
 </script>
 </body>

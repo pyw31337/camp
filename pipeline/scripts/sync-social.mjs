@@ -8,6 +8,7 @@ import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
+import { isDueWithPriority, priorityIds } from "../lib/priority.mjs";
 import {
   EXTRA_SEARCHES, SOCIAL_CACHE_VERSION, buildLayout, buildVideoQuery, extractPriceMentions, normalizeDoc, isRelevant, distinctiveTokens, regionStem,
   REQUEST_PLAN, SEARCH_TYPES, SOURCE, buildQuery, buildSocialRecord, isStale, kakaoSearch, nameCore, pickDue, summarize,
@@ -74,7 +75,11 @@ async function main() {
   const cache = await readJson(cachePath, { campgrounds: {} });
   cache.campgrounds ??= {};
   const key = process.env.KAKAO_REST_API_KEY;
-  const due = pickDue(camps, cache.campgrounds, MAX_AGE_DAYS);
+  // 찜한 업장 우선(lib/priority.mjs): 맨 앞에, 하루만 지나도 다시 확인
+  const prio = priorityIds();
+  const prioDue = camps.filter((c) => prio.has(String(c.id)) && ((cache.campgrounds[c.id]?.v ?? 1) < SOCIAL_CACHE_VERSION || isDueWithPriority(c.id, cache.campgrounds[c.id]?.fetched_at, MAX_AGE_DAYS, prio)));
+  const due = [...prioDue, ...pickDue(camps, cache.campgrounds, MAX_AGE_DAYS).filter((c) => !prio.has(String(c.id)))];
+  if (prioDue.length) console.log(`찜한 업장 우선 ${prioDue.length}곳`);
   console.log(`캠핑장 ${camps.length}곳 · 갱신 대상 ${due.length}곳(캐시 ${Object.keys(cache.campgrounds).length}곳, 기준 ${MAX_AGE_DAYS}일)`);
 
   let calls = 0, ok = 0, failed = 0, streak = 0, stopped = null, firstError = null;
