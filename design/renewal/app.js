@@ -1189,10 +1189,10 @@ function publicParkCard(c) {
   const operator = p.operator ?? p.management ?? c.src?.label?.match(/\(([^,()]+)(?:,|\))/)?.[1] ?? "관리기관";
   const source = c.src?.url ? tip(`<b>공원 정보 원천</b><span>${esc(c.src?.label ?? "공공데이터")}${c.src?.checked_at ? ` · ${esc(formatKoreanDate(c.src.checked_at))}` : ""}</span><a href="${esc(c.src.url)}" target="_blank" rel="noopener">원문 보기</a>`, "공원 정보 원천") : "";
   const facts = [
-    summary || String(c.types?.[0] ?? "공원"),
-    facility ? `시설 ${String(facility).slice(0, 70)}` : "시설 정보 확인 중",
-    toilets != null ? `500m 화장실 ${fmt(toilets)}곳` : "화장실 위치 확인 중",
-    c.tel ? `문의 ${c.tel}` : "연락처 확인 중",
+    ["이용", summary || String(c.types?.[0] ?? "공원")],
+    ["시설", facility ? String(facility).slice(0, 70) : "확인 필요"],
+    ["편의", toilets != null ? `500m 화장실 ${fmt(toilets)}곳` : "화장실 위치 확인 중"],
+    ["관리", c.tel ? `${operator} · ${c.tel}` : operator],
   ];
   return `<article class="park-card" data-id="${esc(c.id)}">
     <a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 공원 정보"></a>
@@ -1201,12 +1201,81 @@ function publicParkCard(c) {
       <p class="park-card-kicker">공원 정보 ${source}</p>
       <h3>${esc(nameOf(c).name)}</h3>
       <p class="park-card-region">${ic("pin")}${esc(region(c))}</p>
-      <ul>${facts.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>
+      <ul>${facts.map(([l, x]) => `<li><b>${esc(l)}</b><span>${esc(x)}</span></li>`).join("")}</ul>
     </div>
     <span class="park-card-arrow">${ic("right")}</span>
   </article>`;
 }
+function dayUseText(c) {
+  const text = String(c.pf?.s ?? "");
+  const m = text.match(/\b\d{1,2}:\d{2}\s*[~〜-]\s*\d{1,2}:\d{2}\b/);
+  return m?.[0]?.replace(/\s+/g, "") ?? "운영시간 확인 필요";
+}
+function dayFeeText(c) {
+  if (c.fee?.g === "FREE") return "무료";
+  const raw = c.fee?.text ?? c.fee?.label;
+  if (raw) return serviceText(raw, 56);
+  if (c.fee?.min != null) return `${fmt(c.fee.min)}원부터`;
+  return "요금 확인 필요";
+}
+function dayFacilityText(c) {
+  const labels = {
+    SWIMMING_POOL: "수영장", AIR_BOUNCE: "에어바운스", KIDS_CAFE: "키즈카페",
+    INDOOR_BBQ: "실내 바비큐", PLAYGROUND: "놀이터", STORE: "매점",
+    WIFI: "와이파이", SHOWER: "샤워실", TOILET: "화장실", PARKING: "주차장",
+  };
+  const vals = [...(c.amenities ?? []), ...(c.field_conditions?.features ?? [])]
+    .map(String).map((x) => labels[x] ?? x.replace(/_/g, " ")).filter(Boolean);
+  return [...new Set(vals)].slice(0, 4).join(" · ") || "시설 확인 필요";
+}
+function dayRuleText(c) {
+  const d = c.day ?? {};
+  const out = [];
+  if (d.cooking?.v && d.cooking.v !== "UNKNOWN") out.push({ PROHIBITED: "취사 금지", PROHIBITED_OUTSIDE_DESIGNATED: "지정 장소만 취사", ALLOWED_GRILL: "지정 바비큐장", ALLOWED_BURNER: "버너만 가능", ALLOWED_OPEN_FIRE: "직화·숯 가능" }[d.cooking.v] ?? d.cooking.text);
+  if (d.shade?.v && d.shade.v !== "UNKNOWN") out.push({ ZONE_ONLY: "그늘막 지정 구역", PROHIBITED: "그늘막 설치 금지" }[d.shade.v] ?? "그늘막 가능");
+  return out.filter(Boolean).join(" · ") || "이용 규칙 확인 필요";
+}
+function picnicCard(c, i = 0, opts) {
+  const source = c.homepage || c.booking?.url || c.src_url;
+  const rows = [["이용", "당일 캠크닉"], ["운영", dayUseText(c)], ["요금", dayFeeText(c)], ["시설", dayFacilityText(c)], ["규칙", dayRuleText(c)]];
+  return `<article class="card day-card" data-id="${esc(c.id)}">
+    <a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 캠크닉 정보"></a>
+    <div class="card-media">${carousel(c, { eager: i < 4 })}<span class="day-card-badge">${thIc("PICNIC")}당일 이용</span></div>
+    <div class="card-body">
+      <div class="card-group card-group-head"><div class="name-row"><h3 class="card-name">${esc(nameOf(c).name)}</h3>${heartBtn(c)}</div><div class="card-meta-row"><p class="card-meta">${ic("pin")}<span class="card-meta-txt">${esc(region(c))}</span></p>${source ? `<a class="c-act-btn" href="${esc(source)}" target="_blank" rel="noopener" aria-label="공식 정보 열기">${ic("external")}</a>` : ""}</div></div>
+      <div class="day-profile-label">민간 캠크닉 · 숙박 요금과 다른 당일 이용 기준</div>
+      <ul class="rows day-profile-rows">${rows.map(([l, v]) => `<li><span class="rl">${esc(l)}</span><b class="rv">${esc(v)}</b></li>`).join("")}</ul>
+    </div>
+  </article>`;
+}
+function classificationProfileHtml(c, d) {
+  if (!isPicnicCamp(c) && !isPublicPark(c)) return "";
+  const p = c.park_info ?? c.park ?? {};
+  const facility = Array.isArray(p.facilities) ? p.facilities.join(" · ") : (p.facilities ?? p.facility_groups ?? "");
+  const toilets = c.nearby_toilets?.within_500m;
+  const operator = p.operator ?? p.management ?? "관리기관 확인 필요";
+  const rows = isPublicPark(c)
+    ? [
+      ["이용 방식", c.fee?.g === "FREE" ? "무료 공원 이용" : "공원·당일 이용"],
+      ["시설", facility || dayFacilityText(c)],
+      ["편의", toilets != null ? `500m 이내 화장실 ${fmt(toilets)}곳` : "화장실 위치 확인 필요"],
+      ["관리", c.tel ? `${operator} · ${c.tel}` : operator],
+      ["규칙", dayRuleText(c)],
+    ]
+    : [
+      ["이용 방식", "당일 캠크닉"],
+      ["운영 시간", dayUseText(c)],
+      ["요금 기준", dayFeeText(c)],
+      ["시설", dayFacilityText(c)],
+      ["이용 규칙", dayRuleText(c)],
+      ["예약", bookingChannels(c)[0] ? bookingLabel(bookingChannels(c)[0]) : "예약 방법 확인 필요"],
+    ];
+  const title = isPublicPark(c) ? "공원 이용 정보" : "캠크닉 이용 정보";
+  return `<section class="d-sec classification-sec" id="sec-profile"><div class="sec-head">${iconTitle("summary", title)}</div><dl class="classification-grid">${rows.map(([l, v]) => `<div><dt>${esc(l)}</dt><dd>${esc(serviceText(v, 90) || "확인 필요")}</dd></div>`).join("")}</dl></section>`;
+}
 function card(c, i = 0, opts) {
+  if (isPublicPark(c)) return publicParkCard(c);
+  if (isPicnicCamp(c)) return picnicCard(c, i, opts);
   const isWp = Boolean((opts && !Array.isArray(opts) && opts.isWaterPlay) || S.theme === "WATER_PLAY");
   const theme = (opts && !Array.isArray(opts) && opts.theme) || S.theme || null;
   const { tag } = nameOf(c), o = openingOf(c);
@@ -3122,6 +3191,7 @@ async function detailView(id) {
       <div class="d-main">
         ${siteTypesHtml(c, d)}
         ${specSection(c, d)}
+        ${classificationProfileHtml(c, d)}
         ${priceHtml(c, d)}
         ${us.some(([, x]) => x) ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><dl class="uses">${us.filter(([, x]) => x).map(([l, x, icon]) => `<div class="use"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${factValueHtml({ ...x, v: wonText(detailValue(x)) })}${asOfMention(x)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span></dd></div>`).join("")}</dl></section>` : `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><p class="muted" style="padding: 18px 0; color: var(--ink-3); font-size: .88rem;">등록된 상세 이용 정보가 없습니다.</p></section>`}
         ${houseRulesHtml(c, d)}
