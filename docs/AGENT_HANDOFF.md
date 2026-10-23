@@ -1,5 +1,32 @@
 # 인수인계
 
+## 📌 예약 링크 정밀 검수(업장 일치) (2026-10-23, Claude)
+
+- 소유자 요청: 404만 볼 게 아니라, 예약하기로 이동한 페이지가 정말 그 업장 예약인지 확인한다. 무관한 곳이 더러 있었다.
+- `lib/booking-verify.mjs`의 `judgePage`와 `scripts/verify-booking-links.mjs`가 화면에 보이는 (업장, 예약·홈페이지 주소) 쌍을 열어 판정한다. 결과는 `registry/booking-verify.json`에 쌓인다.
+  - robots.txt를 지킨다.
+  - 글이 없는 화면은 Playwright로 그려서 iframe 안까지 읽는다.
+  - 네이버·카카오·캠핏처럼 자동 접근을 막은 곳은 열지 않는다(UNVERIFIED).
+- 판정 기준:
+  - 이 업장의 이름(카탈로그·네이버·카카오), 전화, 도로명+번지 중 하나가 페이지에 있으면 MATCH.
+  - 숨김 판정(`HIDE_VERDICTS`):
+
+    | 판정 | 뜻 |
+    |---|---|
+    | PARKED | 도메인 판매 화면 |
+    | CLOSED | 서비스 종료 안내. **네이버 modoo!는 2025-06-26 종료**되어 *.modoo.at 링크 265개·124곳이 해당한다 |
+    | HIJACKED | 도박·광고 사이트로 바뀜 |
+    | ERROR_PAGE | 오류 화면 |
+    | OTHER_PLACE | 제목에 다른 업장 이름. 같은 사이트를 쓰는 업장은 제외 |
+    | STALE_DEEP | 예약 상세 주소가 사이트 첫 화면으로 튕김 |
+    | LEFT_SITE | 다른 사이트로 넘어갔고 이 업장 단서가 없음 |
+
+  - 숨기지 않는 판정: BLOCKED(호스팅 봇 확인 `ckattempt`·403), GEO_BLOCK, THIN, NO_SIGNAL, PORTAL(국립공원·숲나들e 통합 예약 첫 화면).
+  - MOVED: 캠퍼스토리 r2·r4·r6이 "예약페이지 주소가 변경되었습니다"를 띄우는 경우다. 안내된 새 주소를 한 번 더 열어 판정한다.
+- 화면 반영: `build-link-health.mjs`가 숨김 판정 주소를 `c.dl`에 넣는다. MOVED는 채널 주소를 새 주소로 바꾸고 원래 주소는 `registered_url`로 남긴다.
+- 주기: 주간 `link-check.yml`에서 돈다(14일 캐시, 수동 실행 때 `verify_max_age_days=0`이면 전부 다시).
+- `deploy-pages.yml`이 "Link check" 완료 뒤에도 다시 배포한다. GITHUB_TOKEN으로 병합하면 push 이벤트가 생기지 않기 때문이다.
+
 ## 📌 커버리지 가드: 검토된 감소 기록(coverage_acks) · kimgoon.kr 52곳 정리 (2026-10-23, Claude)
 
 - 찜 우선 수집이 `crawl-operator-sites`를 돌리면서 `dropPlatformSites`가 camping.kimgoon.kr(플랫폼·BAD_SOURCE) 기록 52곳을 PLATFORM_PAGE로 바꿨다. 그 결과 환불(887→839)과 전기 W(673→626) 보유 수가 줄어 증분 발행이 막혔다.
