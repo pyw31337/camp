@@ -5553,8 +5553,17 @@ function pushRecent(id) { const r = store.get(RECENT_KEY, []).filter((x) => x !=
 function recentHtml() {
   const list = store.get(RECENT_KEY, []).map((id) => S.byId.get(String(id))).filter(Boolean).slice(0, 8);
   if (!list.length) return "";
-  return `<section class="recent-sec" data-recent><div class="sec-head"><div><h2>최근 본 캠핑장</h2><p class="sec-sub">이 기기에서 열어 본 곳이에요. 찜한 곳과 최근 본 곳은 인터넷이 끊겨도 마지막으로 본 내용을 보여 줘요.</p></div></div>
-    <div class="cards-grid saved-grid">${list.map((c, i) => card(c, i)).join("")}</div></section>`;
+  return `<section class="recent-sec" data-recent><div class="sec-head"><div><span class="recent-kicker">기록</span><h2>최근 본 캠핑장</h2><p class="sec-sub">최근에 열어 본 곳을 간단히 모아봤어요.</p></div></div>
+    <div class="recent-grid">${list.map((c) => recentCard(c)).join("")}</div></section>`;
+}
+function recentCard(c) {
+  const photo = photosOf(c)[0];
+  const fee = feeLabel(c) || "요금 확인 중";
+  return `<article class="recent-card" data-id="${esc(c.id)}">
+    <a class="recent-card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" aria-label="${esc(nameOf(c).name)} 자세히"></a>
+    <div class="recent-card-photo">${photo ? imageTag(photo, "", { loading: "lazy", sizes: "96px" }) : `<span class="recent-card-empty">${ic("tent")}</span>`}</div>
+    <div class="recent-card-body"><h3>${esc(nameOf(c).name)}</h3><p>${ic("pin")}${esc(region(c))}</p><strong>${esc(fee)}</strong></div>
+  </article>`;
 }
 // 찜·최근 본 곳 상세를 미리 받아 둔다(서비스 워커가 사본을 남김). 한 번에 20곳까지, 데이터 절약 모드면 건너뜀.
 function warmOffline() {
@@ -5589,8 +5598,6 @@ async function savedView() {
   // 역할(DESIGN_SYSTEM.md ‘찜·비교 역할’): 찜 = 찜한 곳 모아보기·관리(하트로 빼기, 눌러서 상세).
   // 비교할 곳 고르기·나란히 보기는 비교 화면만 한다 → 여기선 위쪽 ‘비교하기’ 하나만 둔다.
   S.pick = S.pick.filter((id) => S.saved.includes(id));
-  const pickedCount = S.pick.length;
-  const cmpHint = saved.length < 2 ? "2곳 이상 찜하면 비교할 수 있어요" : pickedCount >= 2 ? `지난번 고른 ${pickedCount}곳으로 열려요` : `처음 ${Math.min(saved.length, 5)}곳이 골라진 채로 열려요`;
   return `<section class="saved-page">
     <div class="sec-head big">
       <div>
@@ -5598,11 +5605,9 @@ async function savedView() {
         <p class="sec-sub">찜한 캠핑장을 모아 보는 곳이에요. ${ic("heart", "inline")}를 끄면 목록에서 빠져요.</p>
       </div>
       <div class="saved-head-tools">
-        <span class="saved-count-pill">총 <b>${saved.length}</b>곳 찜함</span>
         <a class="btn primary btn-sm saved-cmp-link" href="${APP_BASE}compare" data-saved-compare${saved.length < 2 ? ' data-disabled="true"' : ""}>
           ${ic("compare")} <span>비교하기</span>
         </a>
-        <small class="saved-cmp-hint">${cmpHint}</small>
       </div>
     </div>
     <div class="cards-grid saved-grid">
