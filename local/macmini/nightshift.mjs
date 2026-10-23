@@ -34,6 +34,10 @@ const log = (...a) => { const line = `[${new Date().toISOString()}] ${a.join(" "
 // avoid: 같은 파일을 쓰는 CI 작업 시각(한국 시간). 그 시간에 걸리지 않게 끝낸다(겹치면 한쪽 결과가 덮일 수 있음).
 const H = (h, m = 0) => h * 60 + m;
 const JOBS = [
+  // 찜한 업장 우선(2026-10-23 소유자: “찜한 업장에 수집 가중치”) — 맨 앞, 12시간마다.
+  { id: "saved-first", title: "찜한 업장 운영자 홈페이지 다시 읽기 + 깊게 읽기(Apple Vision OCR)", everyHours: 12, minMinutes: 20, maxMinutes: 90,
+    setup: ["npx", "playwright", "install", "chromium"], cmd: ["bash", "scripts/saved-priority-local.sh"], env: { OCR_ENGINE: "apple" },
+    files: ["pipeline/registry/operator-site-snippets.json", "pipeline/registry/operator-deep.json", "data/priority/saved-camps.json"] },
   { id: "nearby-photos", title: "주변시설 사진 판독(Apple Vision 간판 글자 + 로컬 비전 모델)", everyHours: 4, minMinutes: 45, maxMinutes: 360,
     avoid: [{ dow: 5, hm: H(5, 23), minutes: 200 }], cmd: ["node", "scripts/judge-nearby-photos-mac.mjs"], files: ["pipeline/registry/nearby-photos.json"] },
   { id: "review-photos", title: "후기 사진 판정 밀린 것 전부(CLIP)", everyHours: 6, minMinutes: 60, maxMinutes: 300,

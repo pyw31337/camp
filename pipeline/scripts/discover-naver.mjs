@@ -8,6 +8,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { prioritize } from "../lib/priority.mjs";
 import { LOCAL_PATHS, NAVER_HUB_BASE, localUrl, matchNaver, naverGet, queryOf } from "../lib/naver-discovery.mjs";
 import { isClosedHost, isOperatorHost } from "../lib/operator-site.mjs";
 import { distinctiveTokens } from "../lib/social-search.mjs";
@@ -69,7 +70,7 @@ if (!path) { persistUsage(); console.log("::error title=네이버 지역 검색 
 if (PROBE) { persistUsage(); process.exit(0); }
 
 const stale = (t) => !t || (Date.now() - Date.parse(t)) / 864e5 > MAX_AGE;
-const queue = camps.filter((c) => c.name && (!only || only.has(String(c.id))) && (only || stale(store[c.id]?.checked_at)));
+const queue = prioritize(camps.filter((c) => c.name && (!only || only.has(String(c.id))) && (only || stale(store[c.id]?.checked_at)))); // 찜한 업장 먼저
 let done = 0, stop = null;
 const stat = { matched: 0, operatorLink: 0 };
 for (const c of queue) {
@@ -119,7 +120,7 @@ const needsHome = (c) => {
   return dead && !hasLead && !tried && (!c.homepage || st === "FETCH_FAILED" || st === "SERVICE_CLOSED");
 };
 let webPath = null, webDone = 0, webFound = 0;
-const webQueue = camps.filter((c) => c.name && (!only || only.has(String(c.id))) && needsHome(c));
+const webQueue = prioritize(camps.filter((c) => c.name && (!only || only.has(String(c.id))) && needsHome(c)));
 const WEB_MAX = Math.min(Number(process.env.NAVER_WEB_HOME_MAX ?? 1500), MAX_CALLS - calls);
 for (const p of WEB_PATHS) { if (WEB_MAX <= 0 || !webQueue.length) break; try { calls++; await naverGet(`${NAVER_HUB_BASE}${p}?${new URLSearchParams({ query: queryOf(webQueue[0]), display: "1" })}`, { id, secret }); webPath = p; break; } catch (e) { if (e.code === "BILLING") { stop = "BILLING"; break; } } }
 for (const c of webPath ? webQueue : []) {

@@ -1,0 +1,137 @@
+name: Saved camps priority collection
+
+# 찜한 업장 우선 수집(소유자 2026-10-23: “찜 메뉴의 찜한 업체들을 우선적으로, 별도로 추가 수집 · 수집 가중치 · 최대한 빠르게”).
+# 공용 찜(모든 사용자) 목록을 읽어 그 업장만 3시간마다 모든 수집원으로 다시 확인하고 바로 발행한다.
+#  - 카카오·네이버 장소 맞춤/홈페이지 발굴(--only) → 운영자 홈페이지(렌더링·OCR) + 깊게 읽기 → 다음 블로그·카페·사진·영상 → 네이버 블로그·카페·웹문서
+#  - 업장 수가 적어 호출이 작다(업장당 카카오 약 11회·네이버 약 7회). 한 번에 최대 PRIORITY_MAX_CAMPS곳(기본 40).
+#  - 매일 수집(data-sync)도 같은 목록(data/priority/saved-camps.json)을 맨 앞에 두고 하루 주기로 다시 본다(lib/priority.mjs).
+on:
+  schedule:
+    - cron: "11 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+env:
+  GH_TOKEN: ${{ github.token }}
+
+concurrency:
+  group: saved-priority
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: pipeline
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: pipeline/package-lock.json
+      - run: npm ci
+      - name: Read saved camps (shared saves, read-only)
+        id: ids
+        run: |
+          node scripts/sync-saved-priority.mjs
+          IDS="$(node -e 'const j=require("../data/priority/saved-camps.json");console.log(j.ids.slice(0,Number(process.env.MAXC||40)).join(","))')"
+          echo "ids=$IDS" >> "$GITHUB_OUTPUT"
+          echo "찜한 업장: ${IDS:-없음}"
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL || secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY || secrets.SUPABASE_ANON_KEY || vars.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
+          MAXC: ${{ vars.PRIORITY_MAX_CAMPS || '40' }}
+      - name: Match places and homepages (Kakao · Naver, saved only)
+        if: steps.ids.outputs.ids != ''
+        continue-on-error: true
+        run: |
+          node scripts/discover-kakao.mjs --only "${{ steps.ids.outputs.ids }}" --max-calls 400 || true
+          node scripts/discover-naver.mjs --only "${{ steps.ids.outputs.ids }}" --max-calls 300 || true
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          NAVER_API_HUB_CLIENT_ID: ${{ secrets.NAVER_API_HUB_CLIENT_ID }}
+          NAVER_API_HUB_CLIENT_SECRET: ${{ secrets.NAVER_API_HUB_CLIENT_SECRET }}
+          NAVER_API_ENABLED: ${{ vars.NAVER_API_ENABLED }}
+          NAVER_MONTHLY_CAP: ${{ vars.NAVER_MONTHLY_CAP }}
+      - run: npx playwright install --with-deps chromium
+        if: steps.ids.outputs.ids != ''
+        continue-on-error: true
+      - name: Install Korean OCR (tesseract)
+        if: steps.ids.outputs.ids != ''
+        continue-on-error: true
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq tesseract-ocr tesseract-ocr-kor >/dev/null
+      - name: Read operator homepages (saved only, render + OCR) and deep pages
+        if: steps.ids.outputs.ids != ''
+        continue-on-error: true
+        timeout-minutes: 40
+        run: |
+          node scripts/crawl-operator-sites.mjs --only "${{ steps.ids.outputs.ids }}" --concurrency 4 --render --retry-failed --ocr --max-age-days 0 || true
+          node scripts/crawl-operator-deep.mjs --only "${{ steps.ids.outputs.ids }}" --limit 40 --max-pages 16 || true
+      - name: Restore shared collected caches
+        if: steps.ids.outputs.ids != ''
+        continue-on-error: true
+        run: |
+          mkdir -p .cache
+          git fetch -q --depth=1 origin +collected-data:refs/remotes/origin/collected-data
+          for f in social-search web-mentions; do git show "origin/collected-data:cache/$f.json.gz" | gunzip > ".cache/$f.json" || true; done
+      - name: Social search (Kakao Daum blog·cafe·image·video, saved first)
+        if: steps.ids.outputs.ids != ''
+        continue-on-error: true
+        run: npm run sync:social
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          SOCIAL_MAX_CALLS: "500"
+          PRIORITY_MAX_AGE_DAYS: "0.1"
+      - name: Web mentions (Naver blog·cafe·web, saved first)
+        if: steps.ids.outputs.ids != ''
+        continue-on-error: true
+        timeout-minutes: 20
+        run: node scripts/sync-web-mentions.mjs
+        env:
+          NAVER_API_HUB_CLIENT_ID: ${{ secrets.NAVER_API_HUB_CLIENT_ID }}
+          NAVER_API_HUB_CLIENT_SECRET: ${{ secrets.NAVER_API_HUB_CLIENT_SECRET }}
+          NAVER_API_ENABLED: ${{ vars.NAVER_API_ENABLED }}
+          NAVER_MONTHLY_CAP: ${{ vars.NAVER_MONTHLY_CAP }}
+          NAVER_MENTION_MAX_CALLS: "400"
+          PRIORITY_MAX_AGE_DAYS: "0.1"
+          SEARCH_MINUTES: "8"
+          BODY_MINUTES: "8"
+      - name: Save caches back to the shared branch (merge, newer wins per camp)
+        if: steps.ids.outputs.ids != ''
+        continue-on-error: true
+        run: |
+          DIR="$RUNNER_TEMP/collected"
+          git fetch -q --depth=1 origin +collected-data:refs/remotes/origin/collected-data
+          git worktree add -q -B collected-data "$DIR" origin/collected-data
+          for f in social-search web-mentions; do
+            [ -s ".cache/$f.json" ] || continue
+            git -C "$DIR" show "HEAD:cache/$f.json.gz" | gunzip > "$RUNNER_TEMP/$f.branch.json" || echo '{}' > "$RUNNER_TEMP/$f.branch.json"
+            node scripts/merge-collected-cache.mjs ".cache/$f.json" "$RUNNER_TEMP/$f.branch.json" "$RUNNER_TEMP/$f.merged.json"
+            gzip -9c "$RUNNER_TEMP/$f.merged.json" > "$DIR/cache/$f.json.gz"
+          done
+          cd "$DIR" && git add -A
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git diff --cached --quiet && exit 0
+          git commit -q --amend -m "chore(collected): social·web mention caches $(date -u +%Y-%m-%dT%H:%MZ) (+saved priority)"
+          git push -q --force-with-lease=collected-data origin collected-data
+      - name: Commit registries
+        if: always() && steps.ids.outputs.ids != ''
+        run: |
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for f in registry/kakao-places.json registry/naver-places.json registry/naver-usage.json registry/operator-site-snippets.json registry/operator-deep.json ../data/priority/saved-camps.json; do [ -f "$f" ] && git add "$f"; done
+          if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
+          git commit -m "chore(data): saved camps priority refresh"
+          bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" saved-priority
+      - name: Publish to the site now (incremental)
+        if: always() && steps.ids.outputs.ids != '' && github.event_name != 'pull_request'
+        continue-on-error: true
+        run: bash scripts/publish-incremental.sh "saved camps priority" --web out/campground-web.json --social out/campground-social.json
