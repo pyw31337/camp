@@ -50,6 +50,8 @@ for (const w of [320, 390, 1366]) {
     // 모바일 지도·테마·비교·찜도 머리 줄을 숨긴다(소유자 2026-10-23: 머리 줄은 ‘찾기’에서만, 메뉴는 하단 탭).
     const mDetail = w < 760 && (r.startsWith("place/") || NO_HEAD.includes(r));
     if (mDetail && m.head?.height) fails.push(`${tag}: 모바일 ${r}에 로고 머리 줄이 보임`);
+    // 모바일 지도·테마·비교·찜은 푸터도 숨긴다(소유자 2026-10-23)
+    if (w < 760 && NO_HEAD.includes(r) && m.ftW) fails.push(`${tag}: 모바일 ${r}에 푸터가 보임`);
     if (!m.aligned && r !== "map" && !mDetail) fails.push(`${tag}: 본문 왼쪽 여백이 로고(${m.brand?.left}px)와 맞는 상자가 없음`);
     if (w < 760 && !r.startsWith("place/") && !m.tab) fails.push(`${tag}: 하단 탭 없음`);
     seen.push([tag, m]);
@@ -57,7 +59,8 @@ for (const w of [320, 390, 1366]) {
   const [t0, ref] = seen[0];
   for (const [tag, m] of seen.slice(1)) {
     if (!(w < 760 && (/ \/place\//.test(tag) || NO_HEAD.includes(tag.split(" /")[1])))) for (const k of ["head", "brand"]) if (JSON.stringify(m[k]) !== JSON.stringify(ref[k])) fails.push(`${tag}: ${k} ${JSON.stringify(m[k])} ≠ ${t0} ${JSON.stringify(ref[k])}`);
-    for (const k of ["nav", "finLeft", "finW", "ftW", "ftText"]) if (m[k] !== ref[k]) fails.push(`${tag}: 푸터/메뉴 ${k} ${m[k]} ≠ ${t0} ${ref[k]}`);
+    const noFoot = w < 760 && NO_HEAD.includes(tag.split(" /")[1]);
+    for (const k of noFoot ? ["nav"] : ["nav", "finLeft", "finW", "ftW", "ftText"]) if (m[k] !== ref[k]) fails.push(`${tag}: 푸터/메뉴 ${k} ${m[k]} ≠ ${t0} ${ref[k]}`);
   }
   if (ref.finLeft !== ref.brand?.left) fails.push(`${w}: 푸터 내용 시작(${ref.finLeft}) ≠ 로고(${ref.brand?.left})`);
   await ctx.close();
