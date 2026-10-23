@@ -5678,8 +5678,16 @@ function mapView() {
 // 지도 마커 글자(소유자 2026-10-23): 기본은 업장 이름. 전기·장작·반려견·주차 조건 칩을 누르면 그 조건 값으로
 // (600W · 장작/숯만/화기 불가 · 반려견/반려견 불가 · 텐트 옆/공용 주차). 불가는 빨간 바탕 흰 글자(배지와 같은 규칙).
 // 업장이 공지하지 않은 법령 기본값(g: "r")은 표시하지 않는다.
-const MAP_LABEL_KEYS = ["power", "fire", "pet", "park"];
+// 2026-10-23 추가: 글램핑·카라반·방갈로 칩도 마커에 그 숙박 종류(난방 여부·방갈로 세부 이름·동 수)를 보인다. 색은 칩·배지와 같다.
+const MAP_STAY_KEYS = { glamp: "GLAMPING", caravan: "CARAVAN", house: "HOUSE" };
+const MAP_LABEL_KEYS = ["power", "fire", "pet", "park", ...Object.keys(MAP_STAY_KEYS)];
 function mapLabelValue(c, k) {
+  if (MAP_STAY_KEYS[k]) {
+    const st = STAYS.find(([sk]) => sk === MAP_STAY_KEYS[k]);
+    if (!st || !stayKinds(c).includes(st[0])) return null;
+    const n = Number(firmSt(c, st[0])?.[1]);
+    return [`${st[4](c)}${n > 0 && n < 1000 ? ` ${fmt(n)}동` : ""}`, `pin-${st[1]}`];
+  }
   const f = facts(c), x = f[k];
   if (!pos(x) || x.g === "r") return null;
   if (k === "power") return x.ok ? [x.w ? kw(x.w) : "전기", "pin-volt"] : ["전기 불가", "pin-no"];
@@ -6056,7 +6064,7 @@ const k2z = (lv) => 19 - lv, z2k = (z) => Math.max(1, Math.min(14, 19 - z));
 /** 지도 탭 어댑터: drawMap 등은 이 공통 함수만 쓴다. */
 function leafletAdapter(el, opts) {
   const m = L.map(el, { zoomControl: false, attributionControl: true, minZoom: 6, maxZoom: 17 }).setView(opts.center, opts.zoom);
-  L.control.zoom({ position: "bottomright" }).addTo(m);
+  // 확대·축소 버튼은 아래 카드와 겹쳐 뺀다(소유자 2026-10-23). 모바일·태블릿은 두 손가락, PC는 마우스 휠로.
   // 지도 바탕: OpenStreetMap 표준 타일(무료·출처 표시). 화면에서는 CSS로 채도를 낮춘다.
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(m);
   const layer = L.layerGroup().addTo(m);
@@ -6077,7 +6085,7 @@ function leafletAdapter(el, opts) {
 function kakaoAdapter(kakao, el, opts) {
   const m = new kakao.maps.Map(el, { center: new kakao.maps.LatLng(...opts.center), level: z2k(opts.zoom) });
   m.setMinLevel?.(z2k(17)); m.setMaxLevel?.(z2k(6));
-  m.addControl(new kakao.maps.ZoomControl(), kakao.maps.ControlPosition.BOTTOMRIGHT);
+  m.setZoomable?.(true); // 확대·축소 버튼 없음(카드와 겹침, 소유자 2026-10-23) — 두 손가락·마우스 휠로
   let ovs = [];
   return {
     kind: "kakao", map: m,

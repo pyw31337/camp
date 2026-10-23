@@ -1170,6 +1170,10 @@ body.map-mode { overflow: hidden; height: 100dvh; }
 .pin-ink { background: var(--ink); color: #fff; }
 .pin-cobalt { background: var(--cobalt); color: #fff; }
 .pin-no { background: #d32f2f; color: #fff; }
+/* 숙박 종류 마커(2026-10-23): 칩·배지(.bdg-glamp 등)와 같은 색 */
+.pin-glamp { background: #c2410c; color: #fff; }
+.pin-caravan { background: #1d4ed8; color: #fff; }
+.pin-house { background: #7c3aed; color: #fff; }
 .pin.on { background: var(--ink); color: #fff; height: 36px; font-size: .9rem; padding: 0 14px; z-index: 2; box-shadow: 0 0 0 3px #fff, 0 6px 16px rgba(0, 0, 0, .3); }
 .pdot { position: absolute; width: 12px; height: 12px; border-radius: 50%; background: var(--ink); border: 2px solid #fff; transform: translate(-50%, -50%); box-shadow: 0 1px 4px rgba(0, 0, 0, .3); }
 .cl { display: grid; place-items: center; width: var(--s); height: var(--s); border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: .82rem; box-shadow: 0 0 0 4px rgba(16, 20, 20, .16), 0 3px 10px rgba(0, 0, 0, .2); font-family: var(--font); }
@@ -3365,6 +3369,10 @@ html, body, #view { min-height: 100%; }
 /* 모바일 상세: 로고만 있는 머리 줄을 없애고 ‘< 지역 · 찜 · 공유’ 줄이 맨 위(영우 님 2026-10-21). 로고·메뉴는 하단 탭/뒤로가기로 대체. */
 @media (max-width: 759px) {
   body[data-view="detail"] .top { display: none; }
+  /* 상단 머리 줄(로고·‘N곳 지도 안’)은 ‘찾기’에서만(소유자 2026-10-23). 지도·테마·비교·찜은 하단 탭이 메뉴를 맡는다. */
+  body:is([data-view="map"], [data-view="themes"], [data-view="compare"], [data-view="saved"]) { --head-h: 0px; }
+  body:is([data-view="map"], [data-view="themes"], [data-view="compare"], [data-view="saved"]) .top { display: none; }
+  body:is([data-view="map"], [data-view="themes"], [data-view="compare"], [data-view="saved"]) #view { padding-top: env(safe-area-inset-top); }
   body[data-view="detail"] .d-bar { padding-top: calc(10px + env(safe-area-inset-top)); }
 }
 
@@ -3584,11 +3592,17 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 .map-canvas .pin.pin-ink,
 .map-canvas .pin.pin-cobalt,
 .map-canvas .pin.pin-no,
+.map-canvas .pin.pin-glamp,
+.map-canvas .pin.pin-caravan,
+.map-canvas .pin.pin-house,
 .map-peek .pin.pin-hot,
 .map-peek .pin.pin-flame,
 .map-peek .pin.pin-ink,
 .map-peek .pin.pin-cobalt,
-.map-peek .pin.pin-no {
+.map-peek .pin.pin-no,
+.map-peek .pin.pin-glamp,
+.map-peek .pin.pin-caravan,
+.map-peek .pin.pin-house {
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
   text-shadow: 0 1px 1px rgba(0, 0, 0, .18);
