@@ -13,3 +13,4 @@
 {"id":"mvkp6hrv-claude","at":"2026-10-23T08:17:59.419Z","agent":"claude","kind":"notice","topic":"찜 기록·운영 대시보드","text":"찜 중복 기록 원인(대기 기록 재전송 경합·상태 미확인) 수정, 한마디가 공용 찜을 지우던 버그 수정, /log/ 대시보드 개편(중복·테스트 기록 표시·숨김).","refs":["design/renewal/app.js","camping-atlas/public/log/index.html"]}
 {"id":"mvkp0teu-codexnig","at":"2026-10-23T08:13:34.567Z","agent":"codex-nightshift","kind":"claim","topic":null,"text":"nightshift 직접 실행 시 ~/.letscamp/env 자동 로드","files":["local/macmini/nightshift.mjs"]}
 {"id":"mvkp1hw9-codexnig","at":"2026-10-23T08:14:06.297Z","agent":"codex-nightshift","kind":"release","topic":null,"text":"env 자동 로드 패치 완료","reply":"mvkp0teu-codexnig"}
+{"id":"mvkpekqe-codexnig","at":"2026-10-23T08:24:16.502Z","agent":"codex-nightshift","kind":"claim","topic":null,"text":"nightshift 수동 실행 환경변수 문서 인수인계","files":["docs/AGENT_HANDOFF.md"]}
