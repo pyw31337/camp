@@ -10,6 +10,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { prioritize } from "../lib/priority.mjs";
 import { validatesAsOperatorSite } from "../lib/kakao-discovery.mjs";
 import { dropPlatformSites, guideLinks, htmlToText, isClosedHost, isOperatorHost, noticeLinks, parseRobots, relevantSentences, robotsAllows } from "../lib/operator-site.mjs";
 import { isOperatorContentNoise, nameTokens } from "../lib/detail-text-review.mjs";

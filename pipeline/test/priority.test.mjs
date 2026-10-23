@@ -16,3 +16,14 @@ test("isDueWithPriority: 찜한 업장은 짧은 주기로 다시 확인", () =>
   assert.equal(isDueWithPriority("8", twoDaysAgo, 30, ids, now), false);
   assert.equal(isDueWithPriority("8", undefined, 30, ids, now), true);
 });
+
+test("prioritize·isDueWithPriority를 쓰는 수집기는 import가 있다(2026-10-23 런타임 ReferenceError 재발 방지)", async () => {
+  const { readdirSync, readFileSync } = await import("node:fs");
+  const dir = new URL("../scripts/", import.meta.url);
+  for (const f of readdirSync(dir).filter((x) => x.endsWith(".mjs"))) {
+    const src = readFileSync(new URL(f, dir), "utf8");
+    for (const fn of ["prioritize", "isDueWithPriority", "priorityIds"]) {
+      if (new RegExp(`\\b${fn}\\(`).test(src)) assert.match(src, new RegExp(`^import \\{[^}]*\\b${fn}\\b[^}]*\\} from "\\.\\./lib/priority\\.mjs";`, "m"), `${f}: ${fn} import 없음`);
+    }
+  }
+});
