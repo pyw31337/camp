@@ -481,6 +481,7 @@ jobs:
           node pipeline/scripts/apply-pins.mjs
           node pipeline/scripts/publish-sanity.mjs
           # 열어 보니 없는 예약·홈페이지 링크(registry/link-health.json)를 c.dl로 표시해 화면 버튼에서 뺀다.
+          node pipeline/scripts/build-portal-links.mjs
           node pipeline/scripts/build-link-health.mjs
           # 공식 사진이 없는 곳의 카드 대표 사진(registry/card-fallback.json — 검색 썸네일·원문 링크)을 c.pt로 붙인다.
           node pipeline/scripts/build-card-fallback.mjs

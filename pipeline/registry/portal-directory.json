@@ -1,0 +1,1646 @@
+{
+ "note": "공용 예약 사이트의 업장별 주소(숲나들e 휴양림 페이지·국립공원 야영장 안내 페이지). scripts/sync-portal-directory.mjs가 갱신하고 scripts/build-portal-links.mjs가 예약 버튼을 메인 화면 대신 이 주소로 바꾼다.",
+ "updated_at": "2026-10-23T21:06:50.175Z",
+ "foresttrip": [
+  {
+   "id": "0103",
+   "name": "산음 자연휴양림",
+   "short": "산음",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0103"
+  },
+  {
+   "id": "0104",
+   "name": "아세안 자연휴양림",
+   "short": "아세안",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0104"
+  },
+  {
+   "id": "0224",
+   "name": "운악산 자연휴양림",
+   "short": "운악산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0224"
+  },
+  {
+   "id": "0101",
+   "name": "유명산 자연휴양림",
+   "short": "유명산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0101"
+  },
+  {
+   "id": "0108",
+   "name": "중미산 자연휴양림",
+   "short": "중미산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0108"
+  },
+  {
+   "id": "0303",
+   "name": "무의도 자연휴양림",
+   "short": "무의도",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0303"
+  },
+  {
+   "id": "ID02030019",
+   "name": "강씨봉 자연휴양림",
+   "short": "강씨봉",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030019"
+  },
+  {
+   "id": "ID02030001",
+   "name": "고대산 자연휴양림",
+   "short": "고대산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030001"
+  },
+  {
+   "id": "ID02030071",
+   "name": "석모도자연휴양림",
+   "short": "석모도",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030071"
+  },
+  {
+   "id": "ID02030092",
+   "name": "서운산자연휴양림",
+   "short": "서운산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030092"
+  },
+  {
+   "id": "ID02030079",
+   "name": "양평쉬자파크",
+   "short": "양평쉬자파크",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030079"
+  },
+  {
+   "id": "ID02030087",
+   "name": "양평 백운봉 자연휴양림",
+   "short": "양평 백운봉",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030087"
+  },
+  {
+   "id": "ID02030031",
+   "name": "용인 자연휴양림",
+   "short": "용인",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030031"
+  },
+  {
+   "id": "ID02030065",
+   "name": "의왕바라산자연휴양림",
+   "short": "바라산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030065"
+  },
+  {
+   "id": "CBMNT",
+   "name": "천보산 자연휴양림",
+   "short": "천보산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=CBMNT"
+  },
+  {
+   "id": "ID02030050",
+   "name": "축령산자연휴양림",
+   "short": "축령산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030050"
+  },
+  {
+   "id": "ID02030099",
+   "name": "칼봉산자연휴양림",
+   "short": "칼봉산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030099"
+  },
+  {
+   "id": "ID02030023",
+   "name": "동두천자연휴양림",
+   "short": "동두천",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030023"
+  },
+  {
+   "id": "ID02030118",
+   "name": "무봉산자연휴양림",
+   "short": "무봉산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030118"
+  },
+  {
+   "id": "ID02030123",
+   "name": "신암저수지숲속야영장",
+   "short": "신암저수지",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030123"
+  },
+  {
+   "id": "ID02030127",
+   "name": "덕적도자연휴양림",
+   "short": "덕적도",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030127"
+  },
+  {
+   "id": "ID02030129",
+   "name": "수락산동막골자연휴양림",
+   "short": "수락산동막골",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030129"
+  },
+  {
+   "id": "ID04030004",
+   "name": "설매재자연휴양림",
+   "short": "설매재",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID04030004"
+  },
+  {
+   "id": "ID04030007",
+   "name": "청평자연휴양림",
+   "short": "청평",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID04030007"
+  },
+  {
+   "id": "ID04030105",
+   "name": "강화자연휴양림",
+   "short": "강화",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID04030105"
+  },
+  {
+   "id": "0300",
+   "name": "상당산성 자연휴양림",
+   "short": "상당산성",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0300"
+  },
+  {
+   "id": "0115",
+   "name": "속리산 자연휴양림",
+   "short": "속리산 말티재",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0115"
+  },
+  {
+   "id": "0242",
+   "name": "황정산 자연휴양림",
+   "short": "황정산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0242"
+  },
+  {
+   "id": "ID02030042",
+   "name": "계명산자연휴양림",
+   "short": "계명산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030042"
+  },
+  {
+   "id": "ID02030055",
+   "name": "문성자연휴양림",
+   "short": "문성",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030055"
+  },
+  {
+   "id": "ID02030062",
+   "name": "박달재자연휴양림",
+   "short": "박달재",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030062"
+  },
+  {
+   "id": "ID02030016",
+   "name": "백야 자연휴양림",
+   "short": "백야",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030016"
+  },
+  {
+   "id": "ID02030051",
+   "name": "봉황자연휴양림",
+   "short": "봉황",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030051"
+  },
+  {
+   "id": "ID02030033",
+   "name": "생거진천자연휴양림",
+   "short": "생거진천",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030033"
+  },
+  {
+   "id": "ID02030070",
+   "name": "성불산자연휴양림",
+   "short": "성불산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030070"
+  },
+  {
+   "id": "ID02030009",
+   "name": "소백산 자연휴양림",
+   "short": "소백산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030009"
+  },
+  {
+   "id": "ID02030041",
+   "name": "소선암자연휴양림",
+   "short": "소선암",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030041"
+  },
+  {
+   "id": "ID02030035",
+   "name": "속리산숲체험휴양마을",
+   "short": "속리산 숲체험",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030035"
+  },
+  {
+   "id": "ID02030017",
+   "name": "수레의산 자연휴양림",
+   "short": "수레의산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030017"
+  },
+  {
+   "id": "ID02030054",
+   "name": "옥화자연휴양림",
+   "short": "옥화",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030054"
+  },
+  {
+   "id": "ID02030036",
+   "name": "장령산자연휴양림",
+   "short": "장령산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030036"
+  },
+  {
+   "id": "ID02030008",
+   "name": "조령산 자연휴양림",
+   "short": "조령산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030008"
+  },
+  {
+   "id": "ID02030089",
+   "name": "좌구산휴양랜드",
+   "short": "좌구산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030089"
+  },
+  {
+   "id": "ID02030032",
+   "name": "충북알프스자연휴양림",
+   "short": "충북알프스",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032"
+  },
+  {
+   "id": "ID02030107",
+   "name": "민주지산자연휴양림",
+   "short": "민주지산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030107"
+  },
+  {
+   "id": "ID02030110",
+   "name": "옥전자연휴양림",
+   "short": "옥전",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030110"
+  },
+  {
+   "id": "ID02030132",
+   "name": "미원별빛자연휴양림",
+   "short": "미원별빛",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030132"
+  },
+  {
+   "id": "0191",
+   "name": "오서산 자연휴양림",
+   "short": "오서산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0191"
+  },
+  {
+   "id": "0220",
+   "name": "용현 자연휴양림",
+   "short": "용현",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0220"
+  },
+  {
+   "id": "0187",
+   "name": "희리산 자연휴양림",
+   "short": "희리산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0187"
+  },
+  {
+   "id": "0305",
+   "name": "희리산 자연휴양림",
+   "short": "금산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0305"
+  },
+  {
+   "id": "ID02030011",
+   "name": "공주산림휴양마을",
+   "short": "공주산림",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030011"
+  },
+  {
+   "id": "ID02030063",
+   "name": "금산산림문화타운",
+   "short": "금산산림문화타운",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030063"
+  },
+  {
+   "id": "ID02030007",
+   "name": "만수산자연휴양림",
+   "short": "만수산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030007"
+  },
+  {
+   "id": "ID02030028",
+   "name": "봉수산자연휴양림",
+   "short": "봉수산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030028"
+  },
+  {
+   "id": "ID02030078",
+   "name": "성주산자연휴양림",
+   "short": "성주산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030078"
+  },
+  {
+   "id": "ID02030086",
+   "name": "안면도자연휴양림",
+   "short": "안면도",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030086"
+  },
+  {
+   "id": "ID02030034",
+   "name": "양촌자연휴양림",
+   "short": "양촌",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030034"
+  },
+  {
+   "id": "ID02030012",
+   "name": "영인산 자연휴양림",
+   "short": "영인산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030012"
+  },
+  {
+   "id": "ID02030080",
+   "name": "용봉산자연휴양림",
+   "short": "용봉산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030080"
+  },
+  {
+   "id": "ID02030044",
+   "name": "칠갑산자연휴양림",
+   "short": "칠갑산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030044"
+  },
+  {
+   "id": "ID02030040",
+   "name": "태학산 자연휴양림",
+   "short": "태학산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030040"
+  },
+  {
+   "id": "ID02030106",
+   "name": "장태산 자연휴양림",
+   "short": "장태산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030106"
+  },
+  {
+   "id": "ID02030111",
+   "name": "만인산 자연휴양림",
+   "short": "만인산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030111"
+  },
+  {
+   "id": "ID02030130",
+   "name": "원산도 자연휴양림",
+   "short": "원산도",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030130"
+  },
+  {
+   "id": "0141",
+   "name": "덕유산 자연휴양림",
+   "short": "덕유산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0141"
+  },
+  {
+   "id": "0189",
+   "name": "변산 자연휴양림",
+   "short": "변산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0189"
+  },
+  {
+   "id": "0194",
+   "name": "운장산 자연휴양림",
+   "short": "운장산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0194"
+  },
+  {
+   "id": "0188",
+   "name": "회문산 자연휴양림",
+   "short": "회문산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0188"
+  },
+  {
+   "id": "0301",
+   "name": "신시도 자연휴양림",
+   "short": "신시도",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0301"
+  },
+  {
+   "id": "ID02030025",
+   "name": "고산자연휴양림",
+   "short": "고산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030025"
+  },
+  {
+   "id": "ID02030074",
+   "name": "데미샘 자연휴양림",
+   "short": "데미샘",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030074"
+  },
+  {
+   "id": "ID02030082",
+   "name": "방화동자연휴양림",
+   "short": "방화동휴양림",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030082"
+  },
+  {
+   "id": "ID02030084",
+   "name": "와룡자연휴양림",
+   "short": "와룡",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030084"
+  },
+  {
+   "id": "ID02030108",
+   "name": "무주향로산자연휴양림",
+   "short": "향로산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030108"
+  },
+  {
+   "id": "ID02030119",
+   "name": "선암자연휴양림",
+   "short": "선암",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030119"
+  },
+  {
+   "id": "ID02030122",
+   "name": "성수산왕의숲자연휴양림",
+   "short": "성수산왕의숲",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030122"
+  },
+  {
+   "id": "ID02030131",
+   "name": "내장산자연휴양림",
+   "short": "내장산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030131"
+  },
+  {
+   "id": "ID04030003",
+   "name": "남원자연휴양림",
+   "short": "남원",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID04030003"
+  },
+  {
+   "id": "0200",
+   "name": "낙안민속 자연휴양림",
+   "short": "낙안민속",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0200"
+  },
+  {
+   "id": "0181",
+   "name": "방장산 자연휴양림",
+   "short": "방장산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0181"
+  },
+  {
+   "id": "0201",
+   "name": "진도 자연휴양림",
+   "short": "진도",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0201"
+  },
+  {
+   "id": "0196",
+   "name": "천관산 자연휴양림",
+   "short": "천관산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0196"
+  },
+  {
+   "id": "ID02030061",
+   "name": "광양백운산자연휴양림",
+   "short": "광양 백운산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030061"
+  },
+  {
+   "id": "ID02030045",
+   "name": "흑석산자연휴양림",
+   "short": "흑석산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030045"
+  },
+  {
+   "id": "ID02030098",
+   "name": "백아산자연휴양림",
+   "short": "백아산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030098"
+  },
+  {
+   "id": "ID02030097",
+   "name": "봉황산자연휴양림",
+   "short": "여수 봉황산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030097"
+  },
+  {
+   "id": "ID02030058",
+   "name": "순천자연휴양림",
+   "short": "순천",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030058"
+  },
+  {
+   "id": "ID02030021",
+   "name": "완도 자연휴양림",
+   "short": "완도",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030021"
+  },
+  {
+   "id": "ID02030090",
+   "name": "제암산자연휴양림",
+   "short": "제암산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030090"
+  },
+  {
+   "id": "ID02030060",
+   "name": "주작산자연휴양림",
+   "short": "주작산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030060"
+  },
+  {
+   "id": "ID02030069",
+   "name": "팔영산자연휴양림",
+   "short": "팔영산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030069"
+  },
+  {
+   "id": "ID02030088",
+   "name": "한천자연휴양림",
+   "short": "한천",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030088"
+  },
+  {
+   "id": "ID02030091",
+   "name": "산수유자연휴양림",
+   "short": "산수유",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030091"
+  },
+  {
+   "id": "ID02030121",
+   "name": "기찬자연휴양림",
+   "short": "기찬",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030121"
+  },
+  {
+   "id": "ID04030010",
+   "name": "무등산편백자연휴양림",
+   "short": "무등산편백",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID04030010"
+  },
+  {
+   "id": "0113",
+   "name": "가리왕산 자연휴양림",
+   "short": "가리왕산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0113"
+  },
+  {
+   "id": "0244",
+   "name": "검봉산 자연휴양림",
+   "short": "검봉산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0244"
+  },
+  {
+   "id": "0111",
+   "name": "대관령 자연휴양림",
+   "short": "대관령",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0111"
+  },
+  {
+   "id": "0243",
+   "name": "두타산(평창) 자연휴양림",
+   "short": "두타산(평창)",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0243"
+  },
+  {
+   "id": "0112",
+   "name": "미천골 자연휴양림",
+   "short": "미천골",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0112"
+  },
+  {
+   "id": "0109",
+   "name": "방태산 자연휴양림",
+   "short": "방태산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0109"
+  },
+  {
+   "id": "0223",
+   "name": "백운산 자연휴양림",
+   "short": "백운산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0223"
+  },
+  {
+   "id": "0110",
+   "name": "복주산 자연휴양림",
+   "short": "복주산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0110"
+  },
+  {
+   "id": "0107",
+   "name": "삼봉 자연휴양림",
+   "short": "삼봉",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0107"
+  },
+  {
+   "id": "0102",
+   "name": "용대 자연휴양림",
+   "short": "용대",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0102"
+  },
+  {
+   "id": "0222",
+   "name": "용화산 자연휴양림",
+   "short": "용화산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0222"
+  },
+  {
+   "id": "0106",
+   "name": "청태산 자연휴양림",
+   "short": "청태산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0106"
+  },
+  {
+   "id": "0116",
+   "name": "화천숲속 야영장",
+   "short": "화천숲속",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0116"
+  },
+  {
+   "id": "0306",
+   "name": "진부령 자연휴양림",
+   "short": "진부령",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0306"
+  },
+  {
+   "id": "ID02030002",
+   "name": "가리산 자연휴양림",
+   "short": "가리산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030002"
+  },
+  {
+   "id": "ID02030096",
+   "name": "강원숲체험장",
+   "short": "강원숲체험장",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030096"
+  },
+  {
+   "id": "ID02030095",
+   "name": "광치자연휴양림",
+   "short": "광치",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030095"
+  },
+  {
+   "id": "ID02030005",
+   "name": "철원 두루웰 숲속문화촌",
+   "short": "두루웰",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030005"
+  },
+  {
+   "id": "ID02030067",
+   "name": "망경대산자연휴양림",
+   "short": "영월 망경대산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030067"
+  },
+  {
+   "id": "ID02030049",
+   "name": "송이밸리자연휴양림",
+   "short": "송이밸리",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030049"
+  },
+  {
+   "id": "ID02030043",
+   "name": "집다리골자연휴양림",
+   "short": "집다리골",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030043"
+  },
+  {
+   "id": "ID02030024",
+   "name": "치악산자연휴양림",
+   "short": "치악산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030024"
+  },
+  {
+   "id": "ID02030022",
+   "name": "태백고원 자연휴양림",
+   "short": "태백고원",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030022"
+  },
+  {
+   "id": "ID02030003",
+   "name": "평창자연휴양림",
+   "short": "평창",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030003"
+  },
+  {
+   "id": "ID02030018",
+   "name": "하추 자연휴양림",
+   "short": "하추",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030018"
+  },
+  {
+   "id": "ID02030100",
+   "name": "임해 자연휴양림",
+   "short": "강릉임해",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030100"
+  },
+  {
+   "id": "ID02030120",
+   "name": "갯골 자연휴양림",
+   "short": "갯골",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030120"
+  },
+  {
+   "id": "ID02030125",
+   "name": "춘천숲자연휴양림",
+   "short": "춘천숲",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030125"
+  },
+  {
+   "id": "ID02030104",
+   "name": "삼척활기자연휴양림",
+   "short": "삼척활기",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030104"
+  },
+  {
+   "id": "0184",
+   "name": "검마산 자연휴양림",
+   "short": "검마산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0184"
+  },
+  {
+   "id": "0245",
+   "name": "대야산 자연휴양림",
+   "short": "대야산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0245"
+  },
+  {
+   "id": "0195",
+   "name": "운문산 자연휴양림",
+   "short": "운문산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0195"
+  },
+  {
+   "id": "0183",
+   "name": "청옥산 자연휴양림",
+   "short": "청옥산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0183"
+  },
+  {
+   "id": "0182",
+   "name": "칠보산 자연휴양림",
+   "short": "칠보산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0182"
+  },
+  {
+   "id": "0193",
+   "name": "통고산 자연휴양림",
+   "short": "통고산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0193"
+  },
+  {
+   "id": "0304",
+   "name": "김천숲속야영장",
+   "short": "김천숲속",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0304"
+  },
+  {
+   "id": "ID02030073",
+   "name": "구수곡자연휴양림",
+   "short": "구수곡",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030073"
+  },
+  {
+   "id": "ID02030064",
+   "name": "군위 장곡자연휴양림",
+   "short": "군위 장곡",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030064"
+  },
+  {
+   "id": "ID02030075",
+   "name": "금봉자연휴양림",
+   "short": "금봉",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030075"
+  },
+  {
+   "id": "ID02030004",
+   "name": "독용산성자연휴양림",
+   "short": "독용산성",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030004"
+  },
+  {
+   "id": "ID02030026",
+   "name": "미숭산자연휴양림",
+   "short": "미숭산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030026"
+  },
+  {
+   "id": "ID02030093",
+   "name": "비슬산자연휴양림",
+   "short": "비슬산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030093"
+  },
+  {
+   "id": "ID02030052",
+   "name": "비학산 자연휴양림",
+   "short": "비학산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030052"
+  },
+  {
+   "id": "ID02030039",
+   "name": "성주봉자연휴양림",
+   "short": "상주 성주봉",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030039"
+  },
+  {
+   "id": "ID02030076",
+   "name": "송정자연휴양림",
+   "short": "송정",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030076"
+  },
+  {
+   "id": "ID02030030",
+   "name": "수도산자연휴양림",
+   "short": "수도산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030030"
+  },
+  {
+   "id": "ID02030029",
+   "name": "안동계명산자연휴양림",
+   "short": "안동계명산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030029"
+  },
+  {
+   "id": "ID02030020",
+   "name": "안동호반 자연휴양림",
+   "short": "안동호반",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030020"
+  },
+  {
+   "id": "ID02030057",
+   "name": "영양에코둥지",
+   "short": "영양에코둥지 (흥림산)",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030057"
+  },
+  {
+   "id": "ID02030066",
+   "name": "옥성자연휴양림",
+   "short": "옥성",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030066"
+  },
+  {
+   "id": "ID02030081",
+   "name": "운주산승마자연휴양림",
+   "short": "운주산승마",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030081"
+  },
+  {
+   "id": "ID02030010",
+   "name": "청송자연휴양림",
+   "short": "청송",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030010"
+  },
+  {
+   "id": "ID02030027",
+   "name": "토함산자연휴양림",
+   "short": "토함산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030027"
+  },
+  {
+   "id": "ID02030006",
+   "name": "팔공산금화자연휴양림",
+   "short": "팔공산금화",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030006"
+  },
+  {
+   "id": "ID02030094",
+   "name": "화원자연휴양림",
+   "short": "화원",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030094"
+  },
+  {
+   "id": "ID02030102",
+   "name": "문수산자연휴양림",
+   "short": "문수산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030102"
+  },
+  {
+   "id": "ID02030105",
+   "name": "보현산자연휴양림",
+   "short": "보현산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030105"
+  },
+  {
+   "id": "ID02030116",
+   "name": "청도자연휴양림",
+   "short": "청도",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030116"
+  },
+  {
+   "id": "ID04030009",
+   "name": "학가산자연휴양림",
+   "short": "학가산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID04030009"
+  },
+  {
+   "id": "0192",
+   "name": "남해편백 자연휴양림",
+   "short": "남해편백",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0192"
+  },
+  {
+   "id": "0202",
+   "name": "달음산 자연휴양림",
+   "short": "달음산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0202"
+  },
+  {
+   "id": "0105",
+   "name": "신불산 자연휴양림",
+   "short": "신불산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0105"
+  },
+  {
+   "id": "0190",
+   "name": "지리산 자연휴양림",
+   "short": "지리산",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0190"
+  },
+  {
+   "id": "0302",
+   "name": "용지봉 자연휴양림",
+   "short": "용지봉",
+   "kind": "national",
+   "page": "https://www.foresttrip.go.kr/0302"
+  },
+  {
+   "id": "ID02030059",
+   "name": "거제자연휴양림",
+   "short": "거제",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030059"
+  },
+  {
+   "id": "ID02030072",
+   "name": "구재봉자연휴양림",
+   "short": "구재봉",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030072"
+  },
+  {
+   "id": "ID02030077",
+   "name": "금원산자연휴양림",
+   "short": "금원산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030077"
+  },
+  {
+   "id": "ID02030046",
+   "name": "대봉산자연휴양림",
+   "short": "대봉산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030046"
+  },
+  {
+   "id": "ID02030038",
+   "name": "대운산자연휴양림",
+   "short": "대운산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030038"
+  },
+  {
+   "id": "ID02030048",
+   "name": "산삼자연휴양림",
+   "short": "산삼",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030048"
+  },
+  {
+   "id": "ID02030037",
+   "name": "산청한방자연휴양림",
+   "short": "산청한방",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030037"
+  },
+  {
+   "id": "ID02030068",
+   "name": "오도산자연휴양림",
+   "short": "오도산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030068"
+  },
+  {
+   "id": "ID02030047",
+   "name": "용추자연휴양림",
+   "short": "용추",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030047"
+  },
+  {
+   "id": "ID02030015",
+   "name": "화왕산자연휴양림",
+   "short": "화왕산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030015"
+  },
+  {
+   "id": "ID02030103",
+   "name": "하동편백자연휴양림",
+   "short": "하동편백",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030103"
+  },
+  {
+   "id": "ID02030109",
+   "name": "거창항노화힐링랜드",
+   "short": "거창항노화",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030109"
+  },
+  {
+   "id": "ID02030112",
+   "name": "사천케이블카 힐링랜드",
+   "short": "사천케이블카",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030112"
+  },
+  {
+   "id": "ID02030113",
+   "name": "자굴산자연휴양림",
+   "short": "자굴산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030113"
+  },
+  {
+   "id": "ID02030114",
+   "name": "월아산자연휴양림",
+   "short": "진주 월아산",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030114"
+  },
+  {
+   "id": "ID02030115",
+   "name": "도래재자연휴양림",
+   "short": "밀양 도래재",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030115"
+  },
+  {
+   "id": "ID02030117",
+   "name": "대봉캠핑랜드",
+   "short": "대봉캠핑랜드",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030117"
+  },
+  {
+   "id": "ID02030124",
+   "name": "갈모봉자연휴양림",
+   "short": "갈모봉",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030124"
+  },
+  {
+   "id": "ID02030126",
+   "name": "거창산림레퍼츠파크",
+   "short": "거창레포츠",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030126"
+  },
+  {
+   "id": "ID04030008",
+   "name": "덕원자연휴양림",
+   "short": "덕원",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID04030008"
+  },
+  {
+   "id": "ID02030056",
+   "name": "교래자연휴양림",
+   "short": "교래",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030056"
+  },
+  {
+   "id": "ID02030014",
+   "name": "붉은오름자연휴양림",
+   "short": "붉은오름",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030014"
+  },
+  {
+   "id": "ID02030013",
+   "name": "서귀포자연휴양림",
+   "short": "서귀포",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030013"
+  },
+  {
+   "id": "ID02030053",
+   "name": "제주절물자연휴양림",
+   "short": "제주 절물",
+   "kind": "public",
+   "page": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030053"
+  },
+  {
+   "id": "ID04030001",
+   "name": "피노키오 자연휴양림",
+   "short": "피노키오",
+   "kind": "public",
+   "page": "https://pinocchio.foresttrip.go.kr"
+  },
+  {
+   "id": "ID04030002",
+   "name": "횡성 자연휴양림",
+   "short": "횡성",
+   "kind": "public",
+   "page": "https://hsrf.foresttrip.go.kr"
+  }
+ ],
+ "knps": [
+  {
+   "parkId": "B13",
+   "park": "가야산",
+   "deptId": "B131002",
+   "name": "백운동",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B13&deptId=B131002"
+  },
+  {
+   "parkId": "B13",
+   "park": "가야산",
+   "deptId": "B131001",
+   "name": "삼정",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B13&deptId=B131001"
+  },
+  {
+   "parkId": "B13",
+   "park": "가야산",
+   "deptId": "B131003",
+   "name": "치인",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B13&deptId=B131003"
+  },
+  {
+   "parkId": "B16",
+   "park": "계룡산",
+   "deptId": "B161004",
+   "name": "갑사",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B16&deptId=B161004"
+  },
+  {
+   "parkId": "B16",
+   "park": "계룡산",
+   "deptId": "B161001",
+   "name": "동학사",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B16&deptId=B161001"
+  },
+  {
+   "parkId": "B04",
+   "park": "내장산",
+   "deptId": "B041001",
+   "name": "가인",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B04&deptId=B041001"
+  },
+  {
+   "parkId": "B04",
+   "park": "내장산",
+   "deptId": "B042001",
+   "name": "내장",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B04&deptId=B042001"
+  },
+  {
+   "parkId": "B04",
+   "park": "내장산",
+   "deptId": "B042004",
+   "name": "내장호",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B04&deptId=B042004"
+  },
+  {
+   "parkId": "B09",
+   "park": "다도해해상",
+   "deptId": "B091004",
+   "name": "구계등",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B09&deptId=B091004"
+  },
+  {
+   "parkId": "B09",
+   "park": "다도해해상",
+   "deptId": "B092003",
+   "name": "시목",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B09&deptId=B092003"
+  },
+  {
+   "parkId": "B09",
+   "park": "다도해해상",
+   "deptId": "B091003",
+   "name": "염포",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B09&deptId=B091003"
+  },
+  {
+   "parkId": "B09",
+   "park": "다도해해상",
+   "deptId": "B091001",
+   "name": "팔영산",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B09&deptId=B091001"
+  },
+  {
+   "parkId": "B05",
+   "park": "덕유산",
+   "deptId": "B051002",
+   "name": "덕유대1",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B05&deptId=B051002"
+  },
+  {
+   "parkId": "B05",
+   "park": "덕유산",
+   "deptId": "B051007",
+   "name": "덕유대2",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B05&deptId=B051007"
+  },
+  {
+   "parkId": "B05",
+   "park": "덕유산",
+   "deptId": "B051006",
+   "name": "덕유대3",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B05&deptId=B051006"
+  },
+  {
+   "parkId": "B17",
+   "park": "무등산",
+   "deptId": "B172002",
+   "name": "도원",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B17&deptId=B172002"
+  },
+  {
+   "parkId": "B18",
+   "park": "변산반도",
+   "deptId": "B181002",
+   "name": "고사포1",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B18&deptId=B181002"
+  },
+  {
+   "parkId": "B18",
+   "park": "변산반도",
+   "deptId": "B181004",
+   "name": "고사포2",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B18&deptId=B181004"
+  },
+  {
+   "parkId": "B18",
+   "park": "변산반도",
+   "deptId": "B181005",
+   "name": "직소천",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B18&deptId=B181005"
+  },
+  {
+   "parkId": "B14",
+   "park": "북한산",
+   "deptId": "B141003",
+   "name": "사기막",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B14&deptId=B141003"
+  },
+  {
+   "parkId": "B03",
+   "park": "설악산",
+   "deptId": "B031005",
+   "name": "설악동",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B03&deptId=B031005"
+  },
+  {
+   "parkId": "B12",
+   "park": "소백산",
+   "deptId": "B122001",
+   "name": "남천",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B12&deptId=B122001"
+  },
+  {
+   "parkId": "B12",
+   "park": "소백산",
+   "deptId": "B121001",
+   "name": "삼가",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B12&deptId=B121001"
+  },
+  {
+   "parkId": "B06",
+   "park": "오대산",
+   "deptId": "B061001",
+   "name": "소금강산",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B06&deptId=B061001"
+  },
+  {
+   "parkId": "B11",
+   "park": "월악산",
+   "deptId": "B111003",
+   "name": "닷돈재1",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111003"
+  },
+  {
+   "parkId": "B11",
+   "park": "월악산",
+   "deptId": "B111001",
+   "name": "닷돈재2",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111001"
+  },
+  {
+   "parkId": "B11",
+   "park": "월악산",
+   "deptId": "B111007",
+   "name": "덕주",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111007"
+  },
+  {
+   "parkId": "B11",
+   "park": "월악산",
+   "deptId": "B111002",
+   "name": "송계",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111002"
+  },
+  {
+   "parkId": "B11",
+   "park": "월악산",
+   "deptId": "B111004",
+   "name": "용하",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111004"
+  },
+  {
+   "parkId": "B11",
+   "park": "월악산",
+   "deptId": "B111008",
+   "name": "하선암",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111008"
+  },
+  {
+   "parkId": "B20",
+   "park": "월출산",
+   "deptId": "B201001",
+   "name": "천황",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B20&deptId=B201001"
+  },
+  {
+   "parkId": "B07",
+   "park": "주왕산",
+   "deptId": "B071001",
+   "name": "상의",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B07&deptId=B071001"
+  },
+  {
+   "parkId": "B01",
+   "park": "지리산",
+   "deptId": "B011005",
+   "name": "내원",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B01&deptId=B011005"
+  },
+  {
+   "parkId": "B01",
+   "park": "지리산",
+   "deptId": "B012005",
+   "name": "달궁1",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B01&deptId=B012005"
+  },
+  {
+   "parkId": "B01",
+   "park": "지리산",
+   "deptId": "B012002",
+   "name": "달궁2",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B01&deptId=B012002"
+  },
+  {
+   "parkId": "B01",
+   "park": "지리산",
+   "deptId": "B012003",
+   "name": "덕동",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B01&deptId=B012003"
+  },
+  {
+   "parkId": "B01",
+   "park": "지리산",
+   "deptId": "B011007",
+   "name": "백무동",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B01&deptId=B011007"
+  },
+  {
+   "parkId": "B01",
+   "park": "지리산",
+   "deptId": "B011006",
+   "name": "소막골",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B01&deptId=B011006"
+  },
+  {
+   "parkId": "B01",
+   "park": "지리산",
+   "deptId": "B012010",
+   "name": "학천",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B01&deptId=B012010"
+  },
+  {
+   "parkId": "B10",
+   "park": "치악산",
+   "deptId": "B101001",
+   "name": "구룡",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B10&deptId=B101001"
+  },
+  {
+   "parkId": "B10",
+   "park": "치악산",
+   "deptId": "B101002",
+   "name": "금대",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B10&deptId=B101002"
+  },
+  {
+   "parkId": "B22",
+   "park": "태백산",
+   "deptId": "B221004",
+   "name": "소도",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B22&deptId=B221004"
+  },
+  {
+   "parkId": "B08",
+   "park": "태안해안",
+   "deptId": "B081002",
+   "name": "몽산포",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B08&deptId=B081002"
+  },
+  {
+   "parkId": "B08",
+   "park": "태안해안",
+   "deptId": "B081001",
+   "name": "학암포",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B08&deptId=B081001"
+  },
+  {
+   "parkId": "B25",
+   "park": "팔공산",
+   "deptId": "B252001",
+   "name": "갓바위",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B25&deptId=B252001"
+  },
+  {
+   "parkId": "B25",
+   "park": "팔공산",
+   "deptId": "B251001",
+   "name": "도학",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B25&deptId=B251001"
+  },
+  {
+   "parkId": "B02",
+   "park": "한려해상",
+   "deptId": "B022003",
+   "name": "덕신",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B02&deptId=B022003"
+  },
+  {
+   "parkId": "B02",
+   "park": "한려해상",
+   "deptId": "B021001",
+   "name": "학동",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B02&deptId=B021001"
+  }
+ ]
+}

@@ -54,6 +54,11 @@ jobs:
       - name: Install Chromium (render script-drawn booking pages)
         continue-on-error: true
         run: npx playwright install --with-deps chromium
+      # 공용 예약 사이트(숲나들e·국립공원) 업장 목록 갱신 → 예약 버튼을 메인 대신 업장 페이지로(build-portal-links.mjs)
+      - name: Refresh public booking portal directory
+        continue-on-error: true
+        timeout-minutes: 15
+        run: node scripts/sync-portal-directory.mjs
       - name: Verify booking links belong to the camp
         continue-on-error: true
         timeout-minutes: 120
@@ -96,6 +101,7 @@ jobs:
           [ -f registry/link-health.json ] || exit 0
           git add registry/link-health.json
           [ -f registry/booking-verify.json ] && git add registry/booking-verify.json
+          [ -f registry/portal-directory.json ] && git add registry/portal-directory.json
           [ -f registry/card-fallback.json ] && git add registry/card-fallback.json
           [ -f registry/photo-judgments.json ] && git add registry/photo-judgments.json
           [ -f registry/text-judgments.json ] && git add registry/text-judgments.json
