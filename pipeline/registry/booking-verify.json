@@ -16895,8 +16895,8 @@
    "at": "2026-10-23T20:56:12.206Z"
   },
   "7071|https://quarkvalley.camp/": {
-   "v": "LEFT_SITE",
-   "why": "다른 사이트로 이동(cafe.naver.com) · ��ũ�븮 ķ�� : ���̹� ī��",
+   "v": "NO_SIGNAL",
+   "why": "운영자 네이버 카페로 이동(정상) — 판정 규칙 수정 반영",
    "title": "��ũ�븮 ķ�� : ���̹� ī��",
    "final": "https://cafe.naver.com/quarkvalleycamp",
    "kind": "homepage",

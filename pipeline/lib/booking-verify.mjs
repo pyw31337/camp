@@ -2,6 +2,7 @@
 // 무관한 곳이 더러 있다”). 열린 페이지에 이 업장의 이름·전화·도로명 주소가 있는지, 다른 업장 이름이 대신 있는지,
 // 도메인 판매·오류 화면·첫 화면으로 튕긴 낡은 주소인지 판정한다. 열기는 scripts/verify-booking-links.mjs(robots.txt 준수).
 import { nameTokens, nameCoreOf } from "./detail-text-review.mjs";
+import { noCheck } from "./link-check.mjs";
 
 /** 화면 버튼에서 뺄 판정(c.dl에 붙는다). 나머지는 남긴다. */
 export const HIDE_VERDICTS = new Set(["PARKED", "ERROR_PAGE", "OTHER_PLACE", "STALE_DEEP", "CLOSED", "HIJACKED", "LEFT_SITE", "PLATFORM_ROOT"]);
@@ -102,8 +103,9 @@ export function judgePage({ camp, sig, page, index, sameSiteIds }) {
   }
   const orig = page.url ?? "";
   if (!isRootish(orig) && isRootish(page.final ?? orig) && new URL(orig).hostname === finalHost) return { v: "STALE_DEEP", why: `예약 주소가 사이트 첫 화면으로 이동(${finalHost})` };
-  // 다른 사이트로 넘어갔고 이 업장 단서가 없다(호스팅 회사 검색 화면 등) → 업장 페이지가 아님
+  // 다른 사이트로 넘어갔고 이 업장 단서가 없다(호스팅 회사 검색 화면 등) → 업장 페이지가 아님.
+  // 운영자 자신의 네이버 카페·블로그·인스타그램으로 넘어가는 홈페이지는 정상(2026-10-23 쿼크밸리 → 카페).
   const site = (h) => h.replace(/^(www|m)\./, "").split(".").slice(-2).join(".");
-  try { if (site(new URL(orig).hostname) !== site(finalHost) && !/camperstory|thankqcamping/.test(finalHost)) return { v: "LEFT_SITE", why: `다른 사이트로 이동(${finalHost})${title ? ` · ${title.slice(0, 30)}` : ""}` }; } catch {}
+  try { if (site(new URL(orig).hostname) !== site(finalHost) && !/camperstory|thankqcamping/.test(finalHost) && !noCheck(page.final ?? "")) return { v: "LEFT_SITE", why: `다른 사이트로 이동(${finalHost})${title ? ` · ${title.slice(0, 30)}` : ""}` }; } catch {}
   return { v: "NO_SIGNAL", why: `이 업장 이름·전화·주소가 페이지에 없음${title ? `(제목: ${title.slice(0, 40)})` : ""}` };
 }

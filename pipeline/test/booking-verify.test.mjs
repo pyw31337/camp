@@ -51,6 +51,8 @@ test("예약 상세 주소가 첫 화면으로 튕기거나 다른 사이트로 
   assert.equal(judge(c, { url: "http://www.allkorea.co.kr/res/realtime.html?year=2014", final: "http://www.allkorea.co.kr/", title: "", text: filler }), "STALE_DEEP");
   assert.equal(judge(c, { url: "https://www.gomsem.co.kr/blank", final: "https://dreamwas.com/plugin/search.php?s=blank", title: "blank : 검색결과 | 드림워즈", text: filler }), "LEFT_SITE");
   assert.equal(judge(c, { url: "https://reservation.knps.or.kr/", title: "국립공원공단 예약시스템", text: filler }), "PORTAL");
+  // 운영자 자신의 네이버 카페로 넘어가는 홈페이지는 숨기지 않는다
+  assert.equal(judge(c, { url: "https://quarkvalley.camp/", final: "https://cafe.naver.com/quarkvalley", title: "카페", text: filler }), "NO_SIGNAL");
 });
 
 test("예약 플랫폼 첫 화면은 업장 페이지가 아니다(주소만으로)", () => {
