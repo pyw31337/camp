@@ -441,3 +441,9 @@
 - **qa/audit-1792495661 브랜치**: 미병합 커밋 1개 `19ddd477d`(2026-10-20 20:37 KST, “fix(qa): 공원에 캠핑장 요금·입퇴실 제거, 관광공사 광고 요금 제거, 숯 문구 모순·좌표 오타 정리, 문자 id 댓글 숨김 + 회귀 검사”, 1,166개 파일 — 대부분 데이터). 같은 패치는 main에 없음(내용 일부는 #159 병합 정책 작업에서 다른 방식으로 반영). 데이터를 잃지 않도록 **태그 `archive/qa-audit-1792495661`로 보존**한 뒤 브랜치만 지웠다. 되살리기: `git checkout -b qa/audit-1792495661 archive/qa-audit-1792495661`.
 - **워크플로 점검**: 22개 모두 `permissions`를 명시(쓰기 권한은 데이터 커밋 워크플로만), 데이터를 main에 쓰는 예약 워크플로는 모두 `concurrency` 그룹이 있다(card-photos는 data-sync와 같은 그룹). 최근 실행 실패 없음. 중복 잡 없음 — 브라우저 회귀는 `Web quality / Rail swipe` 한 잡에 모여 있다. 바꾼 것: 없음(배포 경로 필터는 #187에서 정리).
 - **의존성 보안**: 저장소의 Dependabot 알림이 꺼져 있어 `npm audit`로 확인. pipeline 0건. camping-atlas 30건(치명 1·높음 21) → 호환 범위 안 자동 수정(`npm audit fix`, lockfile만)으로 22건(치명 1·높음 17)으로 줄임. 남은 것은 메이저 업그레이드가 필요(next 16·vite 8·vinext 1.3·@cloudflare/vite-plugin 1.64·eslint-config-next·drizzle-kit) — 화면 빌드 체인을 바꾸므로 별도 작업으로 남김. Dependabot 알림 켜기는 저장소 설정(소유자)에서.
+## 📌 찜 화면 정보 위계·공통 배지 보정 (2026-10-23, Codex)
+- 찜 화면 헤더의 중복 숫자 문구(`총 N곳 찜함`)와 비교 선택 안내 문구를 제거하고, `비교하기`만 오른쪽 끝에 남겼다. 찜 수는 공통 헤더의 숫자 뱃지로만 확인한다.
+- `최근 본 캠핑장`은 찜 목록과 같은 대형 카드 대신 사진·이름·지역·요금만 담은 작은 기록 카드로 분리해 시각적 우선순위를 낮췄다.
+- 주소 아래 사이트 타입 배지는 사진 위 배지와 같은 공통 `.bdg` 모듈의 색 아이콘 원·흰 캡슐 규칙을 유지하도록 크기·그림자·간격을 동기화했다.
+- 원본 `design/renewal/`과 발행본 `camping-atlas/public/`을 함께 갱신했다. `node --check`, `npm --prefix camping-atlas run lint`, `git diff --check` 통과. Playwright는 로컬 `playwright` 패키지가 없어 실행하지 못했으며 CI에서 회귀검사한다.
+
