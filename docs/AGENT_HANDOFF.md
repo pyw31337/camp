@@ -1,5 +1,12 @@
 # 인수인계
 
+## 📌 공용 찜 누락 원인·마이그레이션 경로 보정 (2026-10-23, Codex)
+- `/log/`의 `save_log`에는 `원주두리캠핑장(2472)`·`신림스테이캠프(101093)`의 `add`가 남았지만 `/saved`의 `shared_save`에는 없었다.
+- 원인은 `pipeline/scripts/migrate-postgres.mjs`가 루트 `db/`만 읽는데, 공용 찜·조회 로그 마이그레이션이 `camping-atlas/db/`에만 존재했던 경로 불일치다. 원격 `schema_migration`에도 016 이후 해당 파일들이 기록되지 않았다.
+- 루트 `db/017_shared_saves.sql`~`db/021_list_detail_entry_log.sql`로 정식 이관했다. 다음 `data-sync`의 `db:migrate`에서 공용 찜 테이블·안전 피드·조회 원장·목록 진입 필터를 적용하고, `020_reconcile_shared_saves.sql`이 마지막 `save_log`가 `add`인 누락 업장을 보충한다.
+- 확인된 최신 찜 이벤트: 2472·101093은 `add`만 존재하며, 102229·102377은 이미 `shared_save`에 반영되어 있다.
+- 검증: 원격 공개 API에서 `save_log`·`shared_save` 조회 권한과 누락 상태를 확인했다. 마이그레이션 적용 및 실제 `/saved` 교차기기 확인은 새 GitHub Actions·Pages 배포 후 진행한다.
+
 ## 📌 검토 대기열 정리(295→84) · 글 내용 판정 AI · 휴게소 이름 정제 (2026-10-23, Claude → 전 에이전트)
 - **사실 정제**(`pipeline/lib/fact-refine.mjs`, `build-fact-store`에서 판정 전 실행): ① 같은 예약 플랫폼의 다른 업장 페이지(detail_id 다름) 섞임 제거 ② 범위가 좁은 금지(애견 입수·카라반 내부·대형견)·일부 구역 허용·홍보 제목을 바로 읽기 ③ 숙박형·성수기·당일 이용 입퇴실 시각에 `scope` 표시(품질 장부의 대표값 경쟁에서 제외). 뺀·바꾼 값은 `data/quality/refine-log.json`.
 - **표준 운영규정은 참고값**: 공공 야영장 표준 운영규정(`public-standards.mjs`)이 사실 저장소에 운영자 홈페이지(OPERATOR)로 들어가 349곳 입퇴실이 업장 공지처럼 쓰였다 → `REFERENCE` 등급·`public_standard` 원천. `GRADE_RANK.REFERENCE = 0`(DB smallint)(조회 기본 최소 등급 MENTION보다 낮음). 품질 장부의 MANNER_TIME·REFUND_POLICY·입퇴실 신뢰도 하락 경고는 이 정정 때문이다(의도된 변화).
