@@ -51,7 +51,7 @@ for (const [k, x] of want) {
   if (noCheck(x.u)) { pairs[k] = { v: "UNVERIFIED", why: "자동 확인 차단 플랫폼", at: pairs[k]?.at ?? null }; continue; }
   if (health[x.u]?.s === "DEAD") { pairs[k] = { v: "DEAD", why: health[x.u].why, at: health[x.u].at }; continue; }
   const p = pairs[k];
-  if (p?.at && now - Date.parse(p.at) < maxAge && !["THIN", "ERROR", undefined].includes(p.v)) continue;
+  if (p?.at && now - Date.parse(p.at) < maxAge && !["THIN", "ERROR", "LEFT_SITE", undefined].includes(p.v)) continue;
   todo.push(k);
 }
 if (!only) for (const k of Object.keys(pairs)) if (!want.has(k)) delete pairs[k];
