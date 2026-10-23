@@ -10,6 +10,7 @@
 - [`camping-atlas/`](camping-atlas): 공개 Sites 프로토타입
 - [공개 프로토타입](https://moyeora-camping.magicsiren32.chatgpt.site): 모여라 캠핑 화면
 - [GitHub Pages](https://pyw31337.github.io/camp/): `main` 푸시로 갱신되는 정적 파일럿
+- [Let's Pick 소개·다운로드](https://pyw31337.github.io/camp/lets-pick/): 브라우저 확장 프로그램 안내와 GitHub ZIP 다운로드
 - [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md): 여행 검색 UX, 색상, 이미지, 반응형 기준
 - [`docs/RESEARCH_DATA_TO_UX.md`](docs/RESEARCH_DATA_TO_UX.md): 데이터 원천별로 보여 줄 수 있는 것과 핵심 베네핏
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): GitHub Actions 중심 구조와 필요한 외부 서비스 제안
