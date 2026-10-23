@@ -54,6 +54,7 @@ node pipeline/scripts/apply-text-judgments.mjs
 # t41u: 수기·공식 확정 값(registry/curated-pins.json)을 재계산 위에 다시 얹는다
 node pipeline/scripts/apply-pins.mjs
 node pipeline/scripts/publish-sanity.mjs
+node pipeline/scripts/build-portal-links.mjs
 node pipeline/scripts/build-link-health.mjs
 node pipeline/scripts/build-card-fallback.mjs
 # 기존 값이 지워지거나 줄어든 곳은 최신 main 값으로 되살린다(채우기 우선 — 리셋 금지). 기록: pipeline/registry/merge-review.ndjson
