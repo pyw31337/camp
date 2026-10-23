@@ -103,3 +103,6 @@
 3. CI `Web quality / Rail swipe`가 초록이어야 병합한다. 1366 마우스 드래그, 390 터치 스와이프(카드 본문·썸네일), 세로 스와이프 통과, 탭 시 카드 열림, pageerror 0을 검사한다.
 
 동작 원칙: 카드 본문이나 사진 한 장 위에서 가로로 끌면 레일이 넘어간다. 여러 장 사진 위에서 시작하면 썸네일만 넘어간다. 세로 스와이프는 절대 막지 않는다. 끌지 않은 클릭은 카드를 연다.
+
+## 새 PC·로컬 정리
+- 백지 PC에서 시작: `docs/SETUP_NEW_PC.md`. 로컬 정리·깃 백업: `node scripts/local-maintenance.mjs report|backup|clean` (기본 미리 보기, `--apply`로 실행).

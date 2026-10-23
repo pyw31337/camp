@@ -1,5 +1,10 @@
 # 인수인계
 
+## 📌 로컬 정리·깃 백업 도구 · 새 PC 시작 안내 (2026-10-23, Claude)
+
+- `scripts/local-maintenance.mjs`: `report`(추적·깃에 없는 새 파일·다시 만들 수 있는 것·.git 크기), `backup --apply`(깃에 없는 작업·stash·안 올린 커밋을 `backup/<기기>-<날짜>` 브랜치로 — 작업 폴더·main은 그대로, 비밀·50MB 초과 제외), `clean --apply`(node_modules·빌드·캐시·OS 찌꺼기·git gc·병합된 로컬 브랜치만). 기본은 미리 보기, 전후 기록은 `~/.letscamp/maintenance/`.
+- `docs/SETUP_NEW_PC.md`: 새 PC에서 백지로 시작(부분 클론, npm ci, 미리 보기, 검사, 비밀 목록). 맥에서 정리·백업은 `local/macmini/CODEX_CLEANUP_PROMPT.md`.
+
 ## 📌 찜 낙관적 UI·이 기기 보관 + 맥미니 주말 작업 확대 (2026-10-23, Claude)
 
 - 찜: 누르면 하트·찜 목록이 바로 바뀌고(이 기기 `mc-saved`), 서버에 닿기 전 동작은 `mc-save-ops`(캠핑장별 마지막 의도, 2주)에 남아 첫 화면·연결 복구·탭 복귀 때 다시 보낸다. 서버 목록(`shared_save`, 모든 사용자 공용)을 읽을 때 대기 동작을 덧입혀 하트가 꺼져 보이지 않게 한다. 첫 화면·찜 화면은 서버를 최대 1.5초만 기다린다. 공용 찜이 실패하면 기록(save_log)도 미뤄 함께 보낸다(기록 두 번 방지). 비교(`mc-pick`)는 기기마다.
