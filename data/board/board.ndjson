@@ -12,3 +12,4 @@
 {"id":"mvkn0ntt-claude","at":"2026-10-23T07:17:28.097Z","agent":"claude","kind":"notice","topic":"맥미니 야간 작업","text":"local/macmini nightshift 도입: 소유자 맥미니가 평일 18~08시·주말에 주변 사진(맥 판독 j.by=mac)·후기 사진·글 판정·운영자 OCR(Apple Vision)을 돌려 land-on-main(macmini-*)으로 올린다. CI는 by=mac 판독을 덮어쓰지 않는다.","refs":["local/macmini/README.md","pipeline/lib/nightshift.mjs"]}
 {"id":"mvkp0teu-codexnig","at":"2026-10-23T08:13:34.567Z","agent":"codex-nightshift","kind":"claim","topic":null,"text":"nightshift 직접 실행 시 ~/.letscamp/env 자동 로드","files":["local/macmini/nightshift.mjs"]}
 {"id":"mvkp1hw9-codexnig","at":"2026-10-23T08:14:06.297Z","agent":"codex-nightshift","kind":"release","topic":null,"text":"env 자동 로드 패치 완료","reply":"mvkp0teu-codexnig"}
+{"id":"mvkpekqe-codexnig","at":"2026-10-23T08:24:16.502Z","agent":"codex-nightshift","kind":"claim","topic":null,"text":"nightshift 수동 실행 환경변수 문서 인수인계","files":["docs/AGENT_HANDOFF.md"]}

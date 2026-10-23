@@ -6,6 +6,7 @@
 - 작업: 주변 사진 판독(CLIP + Apple Vision 간판 글자 + Ollama qwen2.5vl, `scripts/judge-nearby-photos-mac.mjs`, `j.by:"mac"`), 후기 사진·글 판정 밀린 것, 주말 운영자 홈페이지 + Apple Vision OCR(`OCR_ENGINE=apple`).
 - 결과는 `land-on-main.sh`(label `macmini-*`)로 올린다. 같은 파일을 쓰는 CI 시각(금 05:23·화 04:17·일 03:41)은 피해서 끝낸다. CI 판독(`judge-nearby-photos.mjs`)은 `by:"mac"`을 덮어쓰지 않고, `build-nearby-photos`는 맥 판독에 종류 검사를 생략한다(업체 이름으로 확인).
 - 순수 로직: `pipeline/lib/nightshift.mjs`, `pipeline/lib/mac-vision.mjs` (테스트 `test/nightshift.test.mjs`).
+- 직접 `node local/macmini/nightshift.mjs --force ...`로 실행해도 `~/.letscamp/env`의 `LOCAL_VLM_MODEL`을 자동으로 읽는다. launchd와 수동 실행이 같은 Ollama 모델을 사용한다(PR #328).
 
 ## 📌 지도: 숙박 종류 마커 · 확대 버튼 제거 · 모바일 머리 줄은 ‘찾기’에서만 (2026-10-23, Claude)
 
