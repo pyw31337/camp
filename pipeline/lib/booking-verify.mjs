@@ -4,9 +4,16 @@
 import { nameTokens, nameCoreOf } from "./detail-text-review.mjs";
 
 /** 화면 버튼에서 뺄 판정(c.dl에 붙는다). 나머지는 남긴다. */
-export const HIDE_VERDICTS = new Set(["PARKED", "ERROR_PAGE", "OTHER_PLACE", "STALE_DEEP", "CLOSED", "HIJACKED", "LEFT_SITE"]);
+export const HIDE_VERDICTS = new Set(["PARKED", "ERROR_PAGE", "OTHER_PLACE", "STALE_DEEP", "CLOSED", "HIJACKED", "LEFT_SITE", "PLATFORM_ROOT"]);
 /** 새 주소로 바꿔 보여 줄 판정(옛 예약 엔진 주소 → 안내된 새 주소) */
 export const MOVED = "MOVED";
+
+// 여러 업장을 파는 예약 플랫폼의 첫 화면(캠핏·네이버 예약·땡큐캠핑 등) — 업장 주소가 아니라 플랫폼 홈으로 간다.
+// 자동 확인을 막은 플랫폼이어도 주소만으로 판정한다(열지 않음).
+const PLATFORM_HOST = /^(www\.|m\.)?(camfit\.co\.kr|campfit\.co\.kr|booking\.naver\.com|map\.naver\.com|naver\.com|place\.naver\.com|thankqcamping\.com|camperstory\.com|r\.camperstory\.com|booking\.ddnayo\.com|ddnayo\.com|yapen\.co\.kr|tickets\.interpark\.com|campingtalk\.me|camp\.xticket\.kr|camplink\.co\.kr|yanolja\.com|goodchoice\.kr|map\.kakao\.com|gocamping\.or\.kr|cafe\.naver\.com|instagram\.com)$/i;
+export function isPlatformRoot(u) {
+  try { const x = new URL(u); return PLATFORM_HOST.test(x.hostname) && /^\/?(index\.\w+|main(\.\w+)?)?$/i.test(x.pathname) && !x.search; } catch { return false; }
+}
 
 const flat = (s) => String(s ?? "").toLowerCase().replace(/\s+/g, "");
 const digits = (s) => String(s ?? "").replace(/\D/g, "");
@@ -53,6 +60,7 @@ const isRootish = (u) => { try { const x = new URL(u); return /^\/?(index\.\w+|m
  *  MATCH(이 업장) · PORTAL(공공 통합 예약 창구) · PARKED(도메인 판매·만료) · ERROR_PAGE(오류·없는 화면)
  *  OTHER_PLACE(다른 업장 이름만 있음) · STALE_DEEP(예약 상세 주소가 사이트 첫 화면으로 튕기고 이 업장 단서 없음)
  *  CLOSED(서비스 종료 안내) · HIJACKED(도박·광고 사이트로 바뀜) · MOVED(주소 변경 안내 → to) · BLOCKED(봇 확인·403)
+ *  PLATFORM_ROOT(예약 플랫폼 첫 화면 — 이 업장 페이지가 아님, 주소만으로 판정)
  *  LEFT_SITE(다른 사이트로 넘어가고 이 업장 단서 없음)
  *  GEO_BLOCK(해외 접속 차단 — 국내 사람에게는 열린다) · THIN(글이 거의 없어 판단 불가) · NO_SIGNAL(이 업장 단서 없음 — 검토 대기)
  */
