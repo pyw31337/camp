@@ -11,5 +11,5 @@ test("지도 다시 그리기는 미리 계산한 목록(mapPool)을 쓰고, 정
 });
 test("mapPool 은 조건·사진 자료가 바뀌면 다시 계산", () => {
   const p = body("mapPool");
-  for (const k of ["S.q", "S.quick", "S.feeBand", "S.find", "S.has", "S.stype", "S.theme", "S.photos", "S.cards", "S.avail", "DEAD.size"]) assert.ok(p.includes(k), k);
+  for (const k of ["S.q", "S.quick", "S.feeBand", "S.find", "S.has", "S.stype", "S.theme", "S.photos", "S.cards", "DEAD.size"]) assert.ok(p.includes(k), k);
 });

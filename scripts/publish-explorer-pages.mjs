@@ -40,10 +40,6 @@ if (rawTarget && !existsSync(`${out}data/campgrounds.json`) && !existsSync(`${ro
   process.exit(0);
 }
 
-// 공식 접수 상태는 30분마다 독립 갱신된다. 일일 카탈로그 발행이 원천 장애를
-// 이유로 이 짧은 TTL 파일을 지우면 오래된 상태를 보일 수 있으므로, 성공한 새
-// 파일이 없을 땐 이전 파일을 그대로 보존한다(브라우저는 expires_at 이후 무시).
-const previousAvailability = !rawTarget && existsSync(`${out}data/availability.json`) ? await readFile(`${out}data/availability.json`) : null;
 if (!rawTarget) {
   await rm(out, { recursive: true, force: true });
   await mkdir(`${out}data`, { recursive: true });
@@ -158,7 +154,7 @@ await copyBrandImages(out);
 // 넘김 뒤 앱이 옛 주소를 새 화면으로 보정한다(openings → theme/OPEN 등). 404.html도 같은 페이지라 모르는 경로·옛 공유 링크(/explore/c/1)도 살아난다.
 const themesBlock = renewalApp.slice(renewalApp.indexOf("const THEMES = ["), renewalApp.indexOf("];", renewalApp.indexOf("const THEMES = [")));
 const THEME_KEYS = [...themesBlock.matchAll(/^  \["([A-Z_]+)", /gm)].map((m) => m[1]);
-const ROUTE_STUBS = ["list", "map", "themes", "compare", "saved", "saves-log", ...["ALL", "OPEN", "AVAIL", "REVIEWS", ...THEME_KEYS].map((k) => `theme/${k}`),
+const ROUTE_STUBS = ["list", "map", "themes", "compare", "saved", "saves-log", ...["ALL", "OPEN", "REVIEWS", ...THEME_KEYS].map((k) => `theme/${k}`),
   "guide", "openings", "vision", "passport", "collections", "renewal"];
 const writeUtilityPages = async (baseDir) => {
   for (const r of ROUTE_STUBS) {
@@ -281,8 +277,6 @@ if (existsSync(`${dataDir}/entity-quality.json`)) await cp(`${dataDir}/entity-qu
 await cp(`${dataDir}/meta.json`, `${out}data/meta.json`);
 if (existsSync(`${dataDir}/featured.json`)) await cp(`${dataDir}/featured.json`, `${out}data/featured.json`);
 if (existsSync(`${dataDir}/openings.json`)) await cp(`${dataDir}/openings.json`, `${out}data/openings.json`);
-if (existsSync(`${dataDir}/availability.json`)) await cp(`${dataDir}/availability.json`, `${out}data/availability.json`);
-else if (previousAvailability) await writeFile(`${out}data/availability.json`, previousAvailability);
 const galleryReg = `${root}pipeline/registry/photo-gallery.json`;
 if (existsSync(galleryReg)) await cp(galleryReg, `${out}data/photo-gallery.json`);
 if (existsSync(`${dataDir}/camps`)) await cp(`${dataDir}/camps`, `${out}data/camps`, { recursive: true });

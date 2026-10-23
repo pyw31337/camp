@@ -1,5 +1,11 @@
 # 인수인계
 
+## 📌 예약 ‘공식 접수 중’ 기능 제거 (2026-10-23, 소유자 요청)
+- 전국 6,404곳 중 서울 공공 6곳만 제공돼 의미가 없다는 소유자 판단으로 없앴다.
+- 지운 것: `availability-sync.yml`(3시간마다), `explore/data/availability.json`, 화면의 ‘접수 중’ 표시·‘공식 접수 중’ 테마(`/theme/AVAIL`)·상세 접수 상품 목록.
+- 남긴 것: data-sync의 `sync:seoul-yeyak`(카탈로그 `seoul` 칸, 화면 미노출)과 `lib/availability-read-model.mjs`(테스트·원장 검증용).
+- 같은 기능을 되살리지 말 것. 전국 단위 실시간 빈자리 원천이 생기면 소유자에게 먼저 묻는다.
+
 ## 📌 상태 배지·지도 핀 대비 전수 보정 (2026-10-23, Codex)
 - 지도 조건 핀과 카드·상세의 `bdg-no`(장작 불가·전기 불가·반려견 불가 등)에 전용 대비 규칙을 추가했다. 불가 상태는 빨강 바탕·흰 글자, 아이콘은 흰 원·빨강으로 고정하고, 지도 SDK가 상속하는 `color`·`line-height`를 덮어써 텍스트가 배경에 묻히거나 잘리지 않게 했다.
 - 원본 `design/renewal/style.css`를 수정한 뒤 `publish-explorer-pages.mjs --shell-only camping-atlas/public`로 발행본을 동기화했다.

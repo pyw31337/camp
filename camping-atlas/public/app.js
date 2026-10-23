@@ -557,7 +557,6 @@ const THEME_FILES = {
   WATER_PLAY: "summer.webp",
   ALL: "valley.webp",
   OPEN: "sunrise.webp",
-  AVAIL: "comfort.webp",
   REVIEWS: "forest.webp",
 };
 const themeImg = (k) => `${ASSETS_BASE}images/themes/${THEME_FILES[k] ?? "valley.webp"}`;
@@ -580,7 +579,6 @@ const THEME_SUBS = {
   WATER_PLAY: "시원한 물놀이터와 풀장이 갖춰진 캠핑장 (여름 시즌 운영 종료 · 내년 계획을 미리 세워보세요)",
   ALL: "렛츠 캠핑이 엄선한 전국 다양한 테마별 캠핑장",
   OPEN: "곧 예약이 오픈되는 캠핑장 모아보기",
-  AVAIL: "지금 바로 실시간 예약 접수 중인 캠핑장",
   REVIEWS: "방문자들의 생생한 긍정 평가가 많은 캠핑장",
 };
 const SIDO_KW = new Set(["서울", "경기", "인천", "강원", "충북", "충남", "충청", "대전", "세종", "전북", "전남", "전라", "광주", "경북", "경남", "경상", "대구", "울산", "부산", "제주", "서울특별시", "경기도", "인천광역시", "강원특별자치도", "강원도", "충청북도", "충청남도", "대전광역시", "세종특별자치시", "전라북도", "전북특별자치도", "전라남도", "광주광역시", "경상북도", "경상남도", "대구광역시", "울산광역시", "부산광역시", "제주특별자치도", "제주도"]);
@@ -596,7 +594,6 @@ function matches(c, { useArea = true, quick = S.quick } = {}) {
   if (S.feeBand === "o20" && !(fMin && (fMin >= 200000 || (fMax && fMax >= 200000)))) return false;
   if (S.feeBand === "o7" && !(fMin && (fMin >= 70000 || (fMax && fMax >= 70000)))) return false;
   if (S.theme && S.theme !== "ALL") { const t = THEMES.find((x) => x[0] === S.theme); if (t && !t[2](c)) return false; }
-  if (S.theme === "AVAIL" && !S.avail?.has(String(c.id))) return false;
   if (S.theme === "OPEN" && !openingOf(c)) return false;
   if (S.stype && !(STAY_KEYS.has(S.stype) ? stayKinds(c).includes(S.stype) : hasType(c, S.stype))) return false;
   if (S.q && !querySets(S.q).some((set) => set.every((w) => wordHit(c, w)))) return false;
@@ -1211,7 +1208,7 @@ function card(c, i = 0, opts) {
   return `<article class="card${isWp ? " is-closed" : ""}" data-id="${esc(c.id)}">
     <a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="card-media">${carousel(c, { eager: i < 4 })}
-      ${isWp ? `<span class="sig closed">${ic("clock")}운영종료</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : S.avail?.has(String(c.id)) ? `<span class="sig live">${ic("check")}접수 중</span>` : ""}
+      ${isWp ? `<span class="sig closed">${ic("clock")}운영종료</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : ""}
       <span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3, 2, { rows: true, theme })}</span>
     </div>
     <div class="card-body">
@@ -1352,7 +1349,7 @@ const redNoObs = typeof MutationObserver !== "undefined" ? new MutationObserver(
 const startRedNo = () => { for (const el of [document.querySelector("#view"), document.querySelector("#pop")]) if (el && redNoObs) redNoObs.observe(el, { childList: true, subtree: true }); };
 if (document.readyState === "loading") addEventListener("DOMContentLoaded", startRedNo); else startRedNo();
 // 상세 화면의 작은 (i)를 없애고 카드·행 전체를 눌러 원문을 연다(소유자 2026-10-20). 키보드: Tab으로 가서 Enter·Space.
-const TIP_HOST = ".cmp-cell, .tile, .stype, .pt, .ptiers, .plist li, .use, .d-line, .rs-avail, .sec-note, .amen-tile, .amen-n > div, .ev-card, li, p";
+const TIP_HOST = ".cmp-cell, .tile, .stype, .pt, .ptiers, .plist li, .use, .d-line, .sec-note, .amen-tile, .amen-n > div, .ev-card, li, p";
 function hostTips(root) {
   for (const ib of $$(".ib[data-tip]", root)) {
     const host = ib.closest(TIP_HOST) ?? ib.parentElement;
@@ -1743,7 +1740,7 @@ function themeRow([k, label, test], list, first, used, idx = 0) {
     <div class="rail trow-rail">${idx >= LAZY_FROM ? "" : items.map((c, i) => card(c, first && i < 4 ? i : 9, { isWaterPlay: k === "WATER_PLAY", theme: k })).join("")}</div>
   </section>`.replace('<section class="trow"', idx >= LAZY_FROM ? `<section class="trow" data-lazy-row="${(LAZY_ROWS.set(`r${idx}`, { items, k }), `r${idx}`)}"` : '<section class="trow"');
 }
-const themeName = (k) => (k === "ALL" ? "전체 테마" : k === "AVAIL" ? "공식 접수 중" : k === "OPEN" ? "곧 오픈" : k === "REVIEWS" ? "긍정 후기 추천" : THEMES.find((t) => t[0] === k)?.[1] ?? k);
+const themeName = (k) => (k === "ALL" ? "전체 테마" : k === "OPEN" ? "곧 오픈" : k === "REVIEWS" ? "긍정 후기 추천" : THEMES.find((t) => t[0] === k)?.[1] ?? k);
 function renderResults({ reset = true } = {}) {
   const grid = $("[data-grid]");
   if (!grid) return;
@@ -2081,7 +2078,7 @@ function listRow({ c, ce }, i = 0) {
   return `<article class="card card-horizontal lrow" data-id="${esc(c.id)}">
     <a class="card-hit" href="${href}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="card-media">${carousel(c, { eager: i < 3 })}
-      ${o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : S.avail?.has(String(c.id)) ? `<span class="sig live">${ic("check")}공식 접수 중</span>` : ""}
+      ${o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : ""}
       <span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3, 2, { rows: true, theme: S.theme })}</span>
     </div>
     <div class="card-body">
@@ -2295,7 +2292,7 @@ function themeView(themeKey) {
     ? "공공 원천으로 확인한 공원·생활 시설입니다. 야영·취사는 관리기관에 확인하세요."
     : (THEME_SUBS[themeKey] ?? "자연과 함께하는 특별한 테마 캠핑장");
   const headingNoun = isParkTheme ? "공원 정보" : "캠핑장";
-  const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "AVAIL" ? (c) => S.avail?.has(String(c.id)) : themeKey === "REVIEWS" ? (c) => Boolean((c.rv?.p?.length ?? 0) >= 2 || (c.rv?.t ?? 0) >= 4) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
+  const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "REVIEWS" ? (c) => Boolean((c.rv?.p?.length ?? 0) >= 2 || (c.rv?.t ?? 0) >= 4) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
   const totalInTheme = S.camps.filter(testFn).length;
   const isWp = themeKey === "WATER_PLAY";
 
@@ -2325,7 +2322,7 @@ function themeView(themeKey) {
 }
 
 function bindTheme(themeKey) {
-  const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "AVAIL" ? (c) => S.avail?.has(String(c.id)) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
+  const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
 
   let pageN = 24;
   const getThemeList = () => {
@@ -2971,7 +2968,6 @@ function reserveCard(c) {
   return `<div class="reserve">
     <div class="rs-top"><span>${esc(main ? bookingLabel(main) : "예약")}${main ? " · 1순위" : ""}</span>${o ? `<span class="rs-dd">${esc(o.txt ?? o.kind)}</span>` : ""}</div>
     ${o ? `<p class="rs-open"><b>${esc(new Date(o.at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", weekday: "short", hour: "2-digit", minute: "2-digit" }))}</b><span>${esc(o.label ?? "")}</span></p>` : ""}
-    ${availHtml(c)}
     <div class="rs-btns">
       ${main ? reserveSplit(c, { inline: true }) : ""}
       ${c.tel ? `<a class="btn ghost" href="tel:${esc(c.tel)}">${ic("phone")}전화</a>` : ""}
@@ -3745,12 +3741,6 @@ function bookingHtml(c, d) {
     ${main || c.tel ? `<div class="chans">${main ? `<a class="chan" href="${esc(main.url)}" target="_blank" rel="noopener">${ic(/네이버/.test(bookingLabel(main)) ? "naver" : "booking")}<b>${esc(bookingLabel(main))}</b><i>예약 페이지</i></a>` : ""}${c.tel ? `<a class="chan" href="tel:${esc(telText(c.tel).replace(/[^\d+]/g, ""))}">${ic("phone")}<b>전화 문의</b><i>${esc(telText(c.tel))}</i></a>` : ""}</div>` : ""}
     ${meta.length ? `<dl class="uses">${meta.map(([l, v]) => `<div class="use"><dt>${l === "다음 오픈" ? ic("clock") : ""}${l}</dt><dd><span class="use-val${l === "다음 오픈" ? " hot" : ""}">${bookingValue(bookingLines(v, { dateLike: l === "다음 오픈" }))}</span><span class="use-meta">${srcTip({ g: "c", src: { label: l === "다음 오픈" ? "예약 오픈 정보" : "예약 안내", url: g?.source?.url, at: g?.source?.date, quote: v } }, l)}</span></dd></div>`).join("")}</dl>` : ""}
   </section>`;
-}
-function availHtml(c) {
-  const rs = S.avail?.get(String(c.id)) ?? [];
-  if (!rs.length) return "";
-  const dt = (s) => new Date(s).toLocaleDateString("ko-KR", { month: "numeric", day: "numeric", timeZone: "Asia/Seoul" }).replace(/\.\s?/g, "/").replace(/\/$/, "");
-  return `<div class="rs-avail"><p><b>${ic("check")}공식 접수 중</b>${tip(`<b>${esc(rs[0].source_name ?? "공식 접수 상태")}</b><span>${esc(rs[0].disclaimer ?? "")}</span>`)}</p>${rs.slice(0, 3).map((r) => `<a href="${esc(r.source_url)}" target="_blank" rel="noopener"><span>${esc(r.product_name.replace(/\(.*?\)\s*/, ""))}</span><i>접수 ~${dt(r.receipt?.to)} · 이용 ${dt(r.use?.from)}~${dt(r.use?.to)}</i></a>`).join("")}</div>`;
 }
 function programsHtml(d) {
   const pr = String(d?.programs ?? "").split(/[,·\n]/).map((x) => x.trim()).filter(Boolean);
@@ -5669,12 +5659,12 @@ function mapPool() {
   const ser = (v) => JSON.stringify(v instanceof Set ? [...v].sort() : v ?? null, (_, x) => (x instanceof Set ? [...x].sort() : x));
   const key = [S.q, S.quick, S.mapLabel, S.feeBand, S.find, S.has, S.stype, S.theme, S.cond].map(ser).concat([S.camps.length, DEAD.size]);
   const k = MAP_POOL;
-  if (k && k.photos === S.photos && k.cards === S.cards && k.avail === S.avail && k.key.every((v, i) => v === key[i])) return k.rows;
+  if (k && k.photos === S.photos && k.cards === S.cards && k.key.every((v, i) => v === key[i])) return k.rows;
   // 지도에서 전기·장작·반려견·주차 칩은 ‘그 정보가 알려진 곳’만 남기고 마커에 값을 보인다(불가 포함). 나머지 칩은 목록과 같은 거르기.
   const labelKeys = [...S.quick].filter((k) => MAP_LABEL_KEYS.includes(k)), quick = new Set([...S.quick].filter((k) => !MAP_LABEL_KEYS.includes(k)));
   const rows = S.camps.filter((c) => c.lat && c.lng && matches(c, { useArea: false, quick }) && labelKeys.every((k) => mapLabelValue(c, k)) && condEval(c) && mapBrowseEligible(c))
     .map((c) => ({ c, ph: hasPhoto(c), pl: photoLast(c), r: rich(c) }));
-  MAP_POOL = { key, photos: S.photos, cards: S.cards, avail: S.avail, rows };
+  MAP_POOL = { key, photos: S.photos, cards: S.cards, rows };
   return rows;
 }
 let mapListKey = "";
@@ -6137,13 +6127,12 @@ addEventListener("error", (e) => {
 (async function boot() {
   $("#view").innerHTML = `<div class="loading"></div>`;
   const configReady = ensureSupabaseConfig();
-  const [camps, photos, openings, cards, avail, fcast, entityQuality] = await Promise.all([
+  const [camps, photos, openings, cards, fcast, entityQuality] = await Promise.all([
     // 가벼운 판(campgrounds.lite.json, scripts/split-catalog.mjs)이 있으면 그것을, 없으면 원본을 받는다.
     fetch(`${DATA}campgrounds.lite.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((j) => (j?.camps ? (CATX.v = j.v, CATX.n = j.n, j.camps) : fetch(`${DATA}campgrounds.json`).then((r) => r.json()))),
     fetch(`${DATA}photos.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
     fetch(`${DATA}openings.json`).then((r) => (r.ok ? r.json() : { items: [] })).catch(() => ({ items: [] })),
     fetch(`${MEDIA}cards/index.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
-    fetch(`${DATA}availability.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null),
     fetch(new URL(`${MOD_ROOT}conditions/forecast.json`, import.meta.url).href, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
     fetch(`${DATA}entity-quality.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
   ]);
@@ -6171,10 +6160,6 @@ addEventListener("error", (e) => {
   // 서버 목록을 먼저 확정한 뒤 첫 route를 렌더링해 어느 기기에서나 같은 목록을 본다.
   await loadSharedSaves();
   flushPendingSaveLogs();
-  // 공식 접수 상태(서울 공공서비스예약 등)는 짧은 유효기간이 있다. 만료된 파일은 쓰지 않는다.
-  S.avail = new Map();
-  // 레코드마다 만료(접수 마감 시각 이하)를 본다 — 접수가 끝난 상품은 보이지 않는다.
-  if (avail && Date.parse(avail.expires_at) > Date.now()) for (const r of avail.records ?? []) if (r.state === "OFFICIAL_APPLICATION_OPEN" && !(Date.parse(r.expires_at) <= Date.now()) && !(Date.parse(r.receipt?.to) <= Date.now())) { const k = String(r.campground_id); S.avail.set(k, [...(S.avail.get(k) ?? []), { ...r, disclaimer: avail.disclaimer, source_name: avail.source?.name }]); }
   // 이전 주소(#c=1554)도 새 상세 주소로 보정해 공유 링크를 깨지 않는다.
   syncCompare(); updateHeaderGlass();
   route();
