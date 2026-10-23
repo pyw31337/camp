@@ -3849,7 +3849,7 @@
 {"cid":"102365","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"102368","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"102377","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
-{"cid":"pdu-lagrills-yongin","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-10-22","text":"가능(소형견)"}
+{"cid":"pdu-lagrills-yongin","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-10-23","text":"가능(소형견)"}
 {"cid":"pilot-002-sureui","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032"}
 {"cid":"pilot-003-duruwell","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030095"}
 {"cid":"pilot-004-haengun","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능","url":"https://camfit.co.kr/camp/haengun"}

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-22T22:29:55.122Z",
+ "generated_at": "2026-10-23T00:33:36.144Z",
  "how_to_resolve": "원문을 대조해 data/quality/decisions.ndjson에 {cid, attr, value, url, why, by, at} 한 줄을 덧붙인다(docs/DATA_QUALITY_PROCESS.md 4단계).",
  "count": 86,
  "items": [
@@ -25,7 +25,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=354&res_dt=20261024",
-      "at": "2026-10-22",
+      "at": "2026-10-23",
       "quote": ""
      }
     ]
@@ -221,7 +221,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=545&res_dt=20261024",
-      "at": "2026-10-22",
+      "at": "2026-10-23",
       "quote": ""
      }
     ]
@@ -508,7 +508,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261024",
-      "at": "2026-10-22",
+      "at": "2026-10-23",
       "quote": ""
      },
      {
@@ -718,7 +718,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=354&res_dt=20261024",
-      "at": "2026-10-22",
+      "at": "2026-10-23",
       "quote": ""
      }
     ]
@@ -753,7 +753,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=10019&res_dt=20261024",
-      "at": "2026-10-22",
+      "at": "2026-10-23",
       "quote": ""
      }
     ]
@@ -774,7 +774,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7373&res_dt=20261024",
-      "at": "2026-10-22",
+      "at": "2026-10-23",
       "quote": ""
      },
      {
@@ -816,7 +816,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17897&res_dt=20261024",
-      "at": "2026-10-22",
+      "at": "2026-10-23",
       "quote": ""
      }
     ]
@@ -851,7 +851,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20246&res_dt=20261024",
-      "at": "2026-10-22",
+      "at": "2026-10-23",
       "quote": ""
      }
     ]
@@ -1166,7 +1166,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=545&res_dt=20261024",
-      "at": "2026-10-22",
+      "at": "2026-10-23",
       "quote": ""
      }
     ]
@@ -1383,7 +1383,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18431&res_dt=20261024",
-      "at": "2026-10-22",
+      "at": "2026-10-23",
       "quote": ""
      },
      {
@@ -1495,7 +1495,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261024",
-      "at": "2026-10-22",
+      "at": "2026-10-23",
       "quote": ""
      }
     ]
@@ -1544,7 +1544,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261024",
-      "at": "2026-10-22",
+      "at": "2026-10-23",
       "quote": ""
      }
     ]
@@ -1572,7 +1572,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14682&res_dt=20261024",
-      "at": "2026-10-22",
+      "at": "2026-10-23",
       "quote": ""
      }
     ]
@@ -1922,7 +1922,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19348&res_dt=20261024",
-      "at": "2026-10-22",
+      "at": "2026-10-23",
       "quote": ""
      }
     ]
@@ -3105,7 +3105,7 @@
    },
    "rival": {
     "value": "ALLOWED",
-    "confidence": 0.718,
+    "confidence": 0.717,
     "sources": 1,
     "evidence": [
      {
