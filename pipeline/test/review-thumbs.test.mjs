@@ -23,3 +23,14 @@ test("공공시설 공식 사진: 400m 안·이름 겹침일 때만", async () =
   assert.equal(matchTourPhoto({ name: "국립 유명산자연휴양림", lat: 37.60, lng: 127.48 }, tour), null); // 2km 밖
   assert.equal(matchTourPhoto({ name: "가평체육센터 수영장", lat: 37.58, lng: 127.48 }, tour), null); // 이름 안 겹침
 });
+
+test("주변 사진 판독: 가게 모습이 뚜렷하고 시설 종류와 맞을 때만", async () => {
+  const { decideNearby, fitsKind, NPOS, NNEG } = await import("../lib/nearby-photo-judge.mjs");
+  const ok = decideNearby([{ label: NPOS[0], score: 0.5 }, { label: NPOS[1], score: 0.25 }, { label: NNEG[0], score: 0.05 }]);
+  assert.equal(ok.ok, true);
+  assert.equal(decideNearby([{ label: NNEG[4], score: 0.6 }, { label: NPOS[0], score: 0.3 }]).ok, false); // 배너
+  assert.equal(decideNearby([{ label: NPOS[0], score: 0.4 }, { label: NPOS[1], score: 0.3 }, { label: NNEG[1], score: 0.15 }]).ok, false); // 인물 섞임
+  assert.equal(fitsKind("fuel", "a photo of a gas station"), true);
+  assert.equal(fitsKind("fuel", "a photo of a public toilet building"), false);
+  assert.equal(fitsKind("vet", "a photo of a hospital, clinic or pharmacy building"), true);
+});
