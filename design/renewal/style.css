@@ -426,13 +426,30 @@ img { color: transparent; }
 .park-card-kicker { display: flex; align-items: center; gap: 4px; min-height: 16px; margin: 0; color: var(--ink-3); font-size: var(--fs-min); font-weight: 800; letter-spacing: .02em; }
 .park-card-kicker .ib { position: relative; z-index: 2; color: var(--ink-3); }
 .park-card h3 { margin: 0; color: var(--ink); font-size: 1.06rem; font-weight: 850; line-height: 1.35; }
+.park-card-title { display: flex; align-items: flex-start; gap: 8px; min-width: 0; }
+.park-card-title h3 { min-width: 0; flex: 1; }
+.park-card-title .heart { position: relative; z-index: 2; flex: 0 0 auto; }
 .park-card-region { display: flex; align-items: center; min-width: 0; gap: 5px; margin: 0; color: var(--ink-3); font-size: .82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .park-card-region .ic { width: 13px; height: 13px; flex: 0 0 auto; }
 .park-card ul { display: grid; gap: 3px; margin: 5px 0 0; padding: 0; list-style: none; color: var(--ink-2); font-size: .79rem; line-height: 1.45; }
-.park-card li { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.park-card li { display: flex; align-items: baseline; gap: 8px; min-width: 0; overflow: hidden; }
+.park-card li b { flex: 0 0 32px; color: var(--ink-3); font-size: .72rem; font-weight: 800; }
+.park-card li span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .park-card-arrow { align-self: center; color: var(--ink-3); }
 .park-card-arrow .ic { width: 16px; height: 16px; }
 @media (max-width: 559px) { .park-card { grid-template-columns: 27px minmax(0, 1fr) 16px; gap: 12px; padding: 16px; } .park-card-icon { width: 27px; height: 27px; } .park-card-icon .th-ic { width: 24px; height: 24px; } }
+.day-card .card-media { position: relative; }
+.day-card-badge { position: absolute; left: 10px; bottom: 10px; z-index: 2; display: inline-flex; align-items: center; gap: 5px; min-height: 26px; padding: 0 9px; border-radius: 999px; background: rgba(0, 137, 97, .94); color: #fff; font-size: .74rem; font-weight: 850; box-shadow: 0 2px 8px rgba(0,0,0,.14); }
+.day-card-badge .th-ic { width: 14px; height: 14px; }
+.day-profile-label { color: var(--ink-3); font-size: .73rem; line-height: 1.45; font-weight: 650; }
+.day-profile-rows { margin-top: 0; }
+.day-profile-rows li { min-height: 32px; }
+.day-profile-rows .rv { min-width: 0; line-height: 1.35; white-space: normal; word-break: keep-all; }
+.classification-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0; }
+.classification-grid > div { min-width: 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); }
+.classification-grid dt { margin: 0 0 5px; color: var(--ink-3); font-size: .75rem; font-weight: 800; }
+.classification-grid dd { margin: 0; color: var(--ink); font-size: .9rem; font-weight: 750; line-height: 1.45; word-break: keep-all; }
+@media (max-width: 559px) { .classification-grid { grid-template-columns: 1fr; gap: 7px; } .classification-grid > div { padding: 11px 12px; } }
 [data-v="b"] .card { overflow: visible; }
 [data-v="b"] .card-media .car { border-radius: 4px; }
 .card-body { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px 14px; }
