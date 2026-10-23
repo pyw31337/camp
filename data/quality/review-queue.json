@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-23T13:03:50.290Z",
+ "generated_at": "2026-10-23T15:00:08.264Z",
  "how_to_resolve": "원문을 대조해 data/quality/decisions.ndjson에 {cid, attr, value, url, why, by, at} 한 줄을 덧붙인다(docs/DATA_QUALITY_PROCESS.md 4단계).",
  "count": 86,
  "items": [
@@ -2958,7 +2958,7 @@
    },
    "rival": {
     "value": "ALLOWED",
-    "confidence": 0.749,
+    "confidence": 0.748,
     "sources": 1,
     "evidence": [
      {
@@ -2993,7 +2993,7 @@
    },
    "rival": {
     "value": "ALLOWED",
-    "confidence": 0.732,
+    "confidence": 0.731,
     "sources": 2,
     "evidence": [
      {

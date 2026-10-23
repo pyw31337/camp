@@ -178,11 +178,11 @@
    "filter": "in",
    "note": "count가 있으면 면·동 수. text는 세부 이름(방갈로·캐빈 등). 원천: 고캠핑 등록값·소개글, 카카오/네이버 분류, 운영자 홈페이지 문장(lib/site-types.mjs)",
    "coverage": {
-    "campgrounds": 2945,
+    "campgrounds": 2926,
     "by_grade": {
-     "CONFIRMED": 5661,
-     "MENTION": 2862,
-     "OPERATOR": 1273
+     "CONFIRMED": 5666,
+     "MENTION": 2901,
+     "OPERATOR": 1024
     }
    }
   },
@@ -431,11 +431,11 @@
    "pref": "반려견과 함께 가나요? 크기는?",
    "filter": "in",
    "coverage": {
-    "campgrounds": 2727,
+    "campgrounds": 2726,
     "by_grade": {
      "CONFIRMED": 2743,
      "MENTION": 774,
-     "OPERATOR": 275,
+     "OPERATOR": 270,
      "VERIFIED": 64
     }
    }
@@ -525,8 +525,9 @@
    "coverage": {
     "campgrounds": 40,
     "by_grade": {
-     "OPERATOR": 29,
-     "MENTION": 11
+     "OPERATOR": 28,
+     "MENTION": 11,
+     "CONFIRMED": 1
     }
    }
   },
@@ -2575,5 +2576,5 @@
    }
   }
  ],
- "generated_at": "2026-10-23T13:03:37.109Z"
+ "generated_at": "2026-10-23T14:59:55.313Z"
 }

@@ -1,13 +1,13 @@
 {
- "generated_at": "2026-10-23T13:03:50.290Z",
- "date": "2026-10-23",
+ "generated_at": "2026-10-23T15:00:08.264Z",
+ "date": "2026-10-24",
  "totals": {
   "campgrounds": 6404,
-  "facts": 172108,
-  "pairs": 136326,
+  "facts": 171898,
+  "pairs": 136306,
   "mean_confidence": 0.795,
   "confirmed_pct": 87.6,
-  "corroborated": 2993,
+  "corroborated": 2991,
   "conflicts": 86,
   "decisions": 69
  },
@@ -467,7 +467,7 @@
   "VISITOR_POLICY": {
    "coverage": 40,
    "coverage_pct": 0.6,
-   "mean_confidence": 0.745,
+   "mean_confidence": 0.744,
    "confirmed_pct": 72.5,
    "corroborated": 0,
    "conflicts": 0,
@@ -756,17 +756,17 @@
    }
   },
   "PET_POLICY": {
-   "coverage": 2727,
+   "coverage": 2726,
    "coverage_pct": 42.6,
    "mean_confidence": 0.853,
    "confirmed_pct": 95.1,
-   "corroborated": 523,
+   "corroborated": 521,
    "conflicts": 41,
    "weak": 85,
    "status": {
     "CONFLICT": 41,
-    "CONFIRMED": 2331,
-    "VERIFIED": 262,
+    "CONFIRMED": 2333,
+    "VERIFIED": 259,
     "WEAK": 85,
     "SINGLE": 8
    }
@@ -1516,17 +1516,17 @@
    }
   },
   "SITE_TYPE": {
-   "coverage": 2945,
-   "coverage_pct": 46,
-   "mean_confidence": 0.807,
-   "confirmed_pct": 89.3,
+   "coverage": 2926,
+   "coverage_pct": 45.7,
+   "mean_confidence": 0.803,
+   "confirmed_pct": 88.7,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 309,
+   "weak": 323,
    "status": {
-    "CONFIRMED": 2629,
-    "WEAK": 309,
-    "SINGLE": 7
+    "CONFIRMED": 2595,
+    "WEAK": 323,
+    "SINGLE": 8
    }
   },
   "STAY_CARAVAN_SITES": {
@@ -1873,54 +1873,5 @@
    }
   }
  },
- "regressions": [
-  {
-   "attr": "VISITOR_POLICY",
-   "kind": "confidence",
-   "from": 0.791,
-   "to": 0.745
-  },
-  {
-   "attr": "EXTRA_PERSON_FEE",
-   "kind": "confidence",
-   "from": 0.689,
-   "to": 0.668
-  },
-  {
-   "attr": "REFUND_POLICY",
-   "kind": "confidence",
-   "from": 0.893,
-   "to": 0.498
-  },
-  {
-   "attr": "CHECKIN_TIME",
-   "kind": "confidence",
-   "from": 0.67,
-   "to": 0.52
-  },
-  {
-   "attr": "CHECKOUT_TIME",
-   "kind": "confidence",
-   "from": 0.674,
-   "to": 0.522
-  },
-  {
-   "attr": "MANNER_TIME",
-   "kind": "confidence",
-   "from": 0.615,
-   "to": 0.355
-  },
-  {
-   "attr": "EARLY_CHECKIN",
-   "kind": "confidence",
-   "from": 0.574,
-   "to": 0.539
-  },
-  {
-   "attr": "MIN_STAY",
-   "kind": "confidence",
-   "from": 0.591,
-   "to": 0.562
-  }
- ]
+ "regressions": []
 }
