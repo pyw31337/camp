@@ -8,7 +8,9 @@ import { homedir } from "node:os";
 import { join } from "node:path";
 
 export const VISION_BIN = process.env.VISION_OCR_BIN || join(homedir(), ".letscamp/bin/vision-ocr");
-export const VLM_MODEL = process.env.LOCAL_VLM_MODEL || "qwen2.5vl:7b";
+// 설정(~/.letscamp/env의 LOCAL_VLM_MODEL)이 없거나 그 모델이 없으면 받아 둔 qwen2.5vl 계열 아무거나 쓴다
+// (2026-10-23 맥미니 8GB: :3b만 받았는데 env를 안 읽은 실행에서 기본 :7b를 찾다 ‘비전 모델 X’가 됨).
+export let VLM_MODEL = process.env.LOCAL_VLM_MODEL || "qwen2.5vl:7b";
 const OLLAMA = process.env.OLLAMA_HOST || "http://127.0.0.1:11434";
 
 const run = (args, timeout = 60000) => new Promise((ok) => execFile(VISION_BIN, args, { timeout, maxBuffer: 8e6 }, (e, out) => ok(e ? null : String(out))));
@@ -48,7 +50,10 @@ export async function vlmAvailable() {
   if (vlmOk !== null) return vlmOk;
   try {
     const r = await fetch(`${OLLAMA}/api/tags`, { signal: AbortSignal.timeout(3000) });
-    vlmOk = r.ok && ((await r.json()).models ?? []).some((m) => m.name === VLM_MODEL || m.name === `${VLM_MODEL}:latest`);
+    const names = r.ok ? ((await r.json()).models ?? []).map((m) => m.name) : [];
+    const pick = names.find((n) => n === VLM_MODEL || n === `${VLM_MODEL}:latest`) ?? names.find((n) => /^qwen2\.5vl/.test(n)) ?? names.find((n) => /vl|llava|vision/i.test(n));
+    if (pick) VLM_MODEL = pick;
+    vlmOk = Boolean(pick);
   } catch { vlmOk = false; }
   return vlmOk;
 }

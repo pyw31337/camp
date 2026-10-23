@@ -34,16 +34,21 @@ const log = (...a) => { const line = `[${new Date().toISOString()}] ${a.join(" "
 // avoid: 같은 파일을 쓰는 CI 작업 시각(한국 시간). 그 시간에 걸리지 않게 끝낸다(겹치면 한쪽 결과가 덮일 수 있음).
 const H = (h, m = 0) => h * 60 + m;
 const JOBS = [
-  { id: "nearby-photos", title: "주변시설 사진 판독(Apple Vision 간판 글자 + 로컬 비전 모델)", everyHours: 20, minMinutes: 45, maxMinutes: 360,
+  { id: "nearby-photos", title: "주변시설 사진 판독(Apple Vision 간판 글자 + 로컬 비전 모델)", everyHours: 4, minMinutes: 45, maxMinutes: 360,
     avoid: [{ dow: 5, hm: H(5, 23), minutes: 200 }], cmd: ["node", "scripts/judge-nearby-photos-mac.mjs"], files: ["pipeline/registry/nearby-photos.json"] },
-  { id: "review-photos", title: "후기 사진 판정 밀린 것 전부(CLIP)", everyHours: 20, minMinutes: 60, maxMinutes: 300,
+  { id: "review-photos", title: "후기 사진 판정 밀린 것 전부(CLIP)", everyHours: 6, minMinutes: 60, maxMinutes: 300,
     avoid: [{ dow: 2, hm: H(4, 17), minutes: 200 }], cmd: ["node", "scripts/judge-review-photos.mjs"], env: { PHOTO_JUDGE_MAX: "40000" }, files: ["pipeline/registry/photo-judgments.json"] },
-  { id: "texts", title: "후기·카페·웹문서 글 판정 밀린 것 전부", everyHours: 20, minMinutes: 30, maxMinutes: 180,
+  { id: "texts", title: "후기·카페·웹문서 글 판정 밀린 것 전부", everyHours: 6, minMinutes: 30, maxMinutes: 180,
     avoid: [{ dow: 2, hm: H(4, 17), minutes: 200 }], cmd: ["node", "scripts/judge-texts.mjs"], env: { TEXT_JUDGE_MAX: "200000", HF_CACHE: ".cache/hf-text" }, files: ["pipeline/registry/text-judgments.json"] },
   { id: "operator-sites", title: "운영자 홈페이지 다시 읽기 + 요금표 이미지 Apple Vision OCR", everyHours: 24 * 6, dayOffOnly: true, minMinutes: 240, maxMinutes: 600,
     avoid: [{ dow: 0, hm: H(3, 41), minutes: 240 }], setup: ["npx", "playwright", "install", "chromium"],
     cmd: ["node", "scripts/crawl-operator-sites.mjs", "--concurrency", "4", "--render", "--retry-failed", "--ocr", "--max-age-days", "10"], env: { OCR_ENGINE: "apple" },
     files: ["pipeline/registry/operator-site-snippets.json"] },
+  // 주말·공휴일 추가(2026-10-23 소유자: “토·일·월 08시까지 로컬 자원을 최대한”): CI에 없는 무거운 수집 두 가지.
+  { id: "operator-gaps", title: "정보 빠진 캠핑장 150곳 운영자 홈페이지 깊게 읽기(요금·이용 수칙)", everyHours: 48, dayOffOnly: true, minMinutes: 60, maxMinutes: 360,
+    cmd: ["bash", "scripts/crawl-operator-gaps.sh"], files: ["pipeline/registry/operator-deep.json"] },
+  { id: "gocamping-detail", title: "고캠핑 상세 다시 읽기(겨울 운영·난방·시설, 30일 캐시)", everyHours: 24 * 6, dayOffOnly: true, minMinutes: 90, maxMinutes: 300,
+    cmd: ["node", "scripts/crawl-gocamping-detail.mjs"], files: ["data/gocamping-detail.ndjson"] },
 ];
 
 // ── 지금 돌려도 되나 ───────────────────────────────────────────

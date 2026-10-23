@@ -1,5 +1,31 @@
 # 인수인계
 
+## 📌 운영 기록 대시보드 v2 · 에이전트 기록 삭제 SQL · 매일 발행 막힘 수정 (2026-10-23, Claude)
+
+- `/log/`: 기록 종류 메뉴를 사이트 머리글 바로 아래 고정 메뉴 막대(.subnav)로. 지표(14일 선 그래프·지난 7일 대비 증감), 14일 쌓기 막대, 기록 구성·기기 도넛, 24시간 시계, 관심 흐름(상세 진입→찜→한마디), 많이 본 업장·지금 찜된 곳(공용 찜). 메뉴를 바꾸면 그래프도 그 종류만.
+- 에이전트·헤드리스 브라우저 찜 기록 141건 삭제: `db/022_delete_agent_save_log_rows.sql`(사본 `pipeline/registry/archive/save_log-agent-rows-2026-10-23.json`, merge-overrides 기록). **저장소 db:migrate는 CI 임시 DB에만 적용** — 운영 Supabase는 대시보드 SQL Editor에서 실행해야 한다.
+- 10/23 매일 발행 실패 원인: value-sanity 매너타임 범위(20~24시)가 추출기(20시~01시)보다 좁아 ‘01:00부터’를 위반으로 세어 급증 판정 → 범위 20~25(01시)로 맞춤.
+
+## 📌 로컬 정리·깃 백업 도구 · 새 PC 시작 안내 (2026-10-23, Claude)
+
+- `scripts/local-maintenance.mjs`: `report`(추적·깃에 없는 새 파일·다시 만들 수 있는 것·.git 크기), `backup --apply`(깃에 없는 작업·stash·안 올린 커밋을 `backup/<기기>-<날짜>` 브랜치로 — 작업 폴더·main은 그대로, 비밀·50MB 초과 제외), `clean --apply`(node_modules·빌드·캐시·OS 찌꺼기·git gc·병합된 로컬 브랜치만). 기본은 미리 보기, 전후 기록은 `~/.letscamp/maintenance/`.
+- `docs/SETUP_NEW_PC.md`: 새 PC에서 백지로 시작(부분 클론, npm ci, 미리 보기, 검사, 비밀 목록). 맥에서 정리·백업은 `local/macmini/CODEX_CLEANUP_PROMPT.md`.
+
+## 📌 찜 낙관적 UI·이 기기 보관 + 맥미니 주말 작업 확대 (2026-10-23, Claude)
+
+- 찜: 누르면 하트·찜 목록이 바로 바뀌고(이 기기 `mc-saved`), 서버에 닿기 전 동작은 `mc-save-ops`(캠핑장별 마지막 의도, 2주)에 남아 첫 화면·연결 복구·탭 복귀 때 다시 보낸다. 서버 목록(`shared_save`, 모든 사용자 공용)을 읽을 때 대기 동작을 덧입혀 하트가 꺼져 보이지 않게 한다. 첫 화면·찜 화면은 서버를 최대 1.5초만 기다린다. 공용 찜이 실패하면 기록(save_log)도 미뤄 함께 보낸다(기록 두 번 방지). 비교(`mc-pick`)는 기기마다.
+  회귀: `camping-atlas/scripts/save-optimistic-test.mjs`(가짜 서버, 운영 DB 안 닿음 · web-quality에 추가).
+- 맥미니 nightshift: 밀린 판독은 4~6시간마다 이어서, 주말·공휴일엔 `operator-gaps`(정보 빠진 150곳 운영자 홈페이지 깊게 읽기, `scripts/crawl-operator-gaps.sh`)·`gocamping-detail`(고캠핑 상세) 추가. `crawl-operator-deep.mjs`는 10곳마다 저장·마감 시각 존중·재시도 실패 시 예전 결과 보존.
+
+## 📌 찜 중복 기록 원인 수정 · 운영 기록(/log/) 대시보드 개편 (2026-10-23, Claude)
+
+- 찜 상태인데 ‘찜하기’가 또 기록된 원인(10/23 10:16 원주두리캠핑장, 같은 아이폰): 대기 기록 다시 보내기가 ① 첫 화면·online 이벤트에서 동시에 돌고 ② 다 보낸 뒤에야 대기열을 비워 화면이 닫히면 이미 보낸 기록을 또 보냄 ③ 공용 찜 상태를 확인하지 않음.
+  → `flushPendingSaveLogs` 한 번에 하나·한 건마다 대기열에서 제거·공용 찜 상태와 같으면 버림. `syncSave`는 공용 찜을 먼저 바꾸고 상태가 실제로 바뀐 때만 기록(409·삭제 0건이면 기록 안 함). 탭으로 돌아오면 공용 찜 다시 읽기.
+  → 덤으로 고침: 한마디(comment)가 `syncSave`를 타며 그 캠핑장의 공용 찜을 지우던 버그.
+- `/log/`(camping-atlas/public/log/index.html, 원본이 곧 이 파일): 밑줄 탭(미끄러지는 막대), 지표 5칸(세어 올라감), 14일 쌓기 막대, 많이 본 업장·기기 분포 옆 패널, 표 모양 행. 드롭다운·체크박스·스위치는 직접 그림(시스템 UI 없음), 아이콘 전부 SVG, 열기·닫기·목록 바뀜 모두 움직임(움직임 줄이기 설정 존중).
+  기록 중 같은 캠핑장에 바로 앞과 같은 동작은 ‘중복’으로 표시·집계 제외, 자동 테스트(리눅스+UTC) 기록은 ‘테스트 기록 숨기기’로 기본 숨김.
+- 앱의 남은 글자 아이콘(▲▼↗📍)도 SVG로.
+
 ## 📌 맥미니 야간·주말 작업(nightshift) (2026-10-23, Claude)
 
 - 소유자 맥미니가 평일 18~08시·주말·공휴일에 쉰다 → `local/macmini/`(설치 `install.sh`, 설명 `README.md`). launchd가 15분마다 깨우고 `nightshift.mjs`가 시간·기존 로컬 작업(launchd·cron·`~/.letscamp/avoid.txt`)·부하를 보고 작업 하나를 돌린다. 기존 작업이 시작되면 양보.

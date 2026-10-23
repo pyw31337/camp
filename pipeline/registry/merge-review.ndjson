@@ -26250,6 +26250,7 @@
 {"at":"2026-10-23T02:25:01.360Z","by":"Shorts sync","run":"39888327972","action":"restored","file":"camping-atlas/public/explore/data/camps/100895.json","id":"100895","field":"spec.fields.MANNER_TIME.mentions","before":3,"after":2}
 {"at":"2026-10-23T02:25:01.360Z","by":"Shorts sync","run":"39888327972","action":"restored","file":"camping-atlas/public/explore/data/camps/101065.json","id":"101065","field":"spec.fields.MANNER_TIME.mentions","before":3,"after":2}
 {"at":"2026-10-23T02:25:01.360Z","by":"Shorts sync","run":"39888327972","action":"restored","file":"camping-atlas/public/explore/data/camps/101955.json","id":"101955","field":"spec.fields.MANNER_TIME.mentions","before":2,"after":1}
+{"at":"2026-10-23T08:42:40.100Z","by":"claude","action":"removed","file":"supabase:public.save_log","id":"agent-linux-headless","field":"*","reason":"에이전트·자동 테스트 기록 141건 삭제(소유자 요청, db/022, 사본 archive/save_log-agent-rows-2026-10-23.json)"}
 {"at":"2026-10-23T08:24:04.720Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"park-43113-00080-15jti","field":"lat","reason":"좌표가 시·도(충북) 범위 밖 — 오타(QA R5)"}
 {"at":"2026-10-23T08:24:04.721Z","by":"publish-sanity","action":"removed","file":"campgrounds.json","id":"park-43113-00080-15jti","field":"lng","reason":"좌표 오타(QA R5)"}
 {"at":"2026-10-23T08:24:07.298Z","by":"publish-sanity","action":"removed","file":"camps/100714.json","id":"100714","field":"nearby","reason":"틀린 좌표로 구한 주변 시설(QA R5)"}

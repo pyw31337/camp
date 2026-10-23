@@ -96,10 +96,18 @@ async function crawlCamp(c) {
 const targets = camps.filter((c) => only.size ? only.has(String(c.id)) : c.homepage && isOperatorHost(c.homepage)).slice(0, limit);
 const prev = existsSync(outPath) ? JSON.parse(readFileSync(outPath, "utf8")) : { campgrounds: {} };
 const result = { generated_at: new Date().toISOString(), policy: "operator hosts only, robots respected, sentences and image urls", campgrounds: { ...prev.campgrounds } };
+// 맥미니 야간 작업용(2026-10-23): 끝낼 시각(NIGHTSHIFT_DEADLINE) 전에 멈추고, 10곳마다 저장한다.
+// 다시 읽기가 실패하면 예전에 읽어 둔 내용을 지우지 않는다(docs/DATA_MERGE_POLICY.md) — 실패 시각만 남긴다.
+const DEADLINE = Number(process.env.NIGHTSHIFT_DEADLINE) || Infinity;
+const save = () => writeFileSync(outPath, JSON.stringify(result, null, 2));
+let n = 0;
 for (const c of targets) {
+  if (Date.now() > DEADLINE - 120e3) { console.log("시간 다 됨 — 다음에 이어서"); break; }
   process.stdout.write(`crawl ${c.id} ${c.name}\n`);
-  result.campgrounds[c.id] = await crawlCamp(c);
-  process.stdout.write(`  ${result.campgrounds[c.id].status} pages=${result.campgrounds[c.id].pages?.length || 0} images=${result.campgrounds[c.id].images?.length || 0} snippets=${result.campgrounds[c.id].snippets?.length || 0}\n`);
+  const got = await crawlCamp(c), old = result.campgrounds[c.id];
+  result.campgrounds[c.id] = got.status !== "OK" && old?.status === "OK" ? { ...old, last_failed_at: got.checked_at } : got;
+  process.stdout.write(`  ${got.status} pages=${got.pages?.length || 0} images=${got.images?.length || 0} snippets=${got.snippets?.length || 0}\n`);
+  if (++n % 10 === 0) save();
 }
-writeFileSync(outPath, JSON.stringify(result, null, 2));
+save();
 console.log("wrote", outPath, "camps", targets.length);

@@ -592,6 +592,14 @@
       "reason": "2026-10-22 요금 상식값 감사에서 민간 1박 2만원 미만·혼합 요금 원천을 재분류하거나 표시에서 숨겼다. 원문 근거는 fee_raw·검토 기록에 보존하고, 화면용 fee와 파생 tiers만 정제했다.",
       "by": "qa-audit",
       "at": "2026-10-22"
+    },
+    {
+      "file": "supabase:public.save_log",
+      "id": "platform=Linux x86_64 & screen∈{1366x900,390x844} & id≤209",
+      "field": "*",
+      "reason": "에이전트·자동 테스트(헤드리스 리눅스 브라우저)가 운영 찜 기록에 남긴 141건 삭제(소유자 요청 2026-10-23). 사본 pipeline/registry/archive/save_log-agent-rows-2026-10-23.json, 실행 db/022",
+      "by": "claude",
+      "at": "2026-10-23"
     }
   ]
 }
