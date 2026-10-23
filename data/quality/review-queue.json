@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-10-23T15:00:08.264Z",
+ "generated_at": "2026-10-23T16:15:23.110Z",
  "how_to_resolve": "원문을 대조해 data/quality/decisions.ndjson에 {cid, attr, value, url, why, by, at} 한 줄을 덧붙인다(docs/DATA_QUALITY_PROCESS.md 4단계).",
- "count": 86,
+ "count": 88,
  "items": [
   {
    "cid": "2179",
@@ -731,6 +731,27 @@
    "label": "입실 시각",
    "ui": true,
    "top": {
+    "value": "15:00",
+    "confidence": 0.94,
+    "sources": 2,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "booking_engine",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=10019&res_dt=20261024",
+      "at": "2026-10-23",
+      "quote": ""
+     },
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://www.yeogi.com/domestic-accommodations/58533",
+      "at": null,
+      "quote": "입실 15:00·퇴실 11:00"
+     }
+    ]
+   },
+   "rival": {
     "value": "14:00",
     "confidence": 0.9,
     "sources": 1,
@@ -741,20 +762,6 @@
       "url": "http://www.naturalwe.com/include/reservation.php?biz_code=P202104022&tab=2",
       "at": "2026-10-20T01:20:35.068Z",
       "quote": "입실시간 : 14시~22시"
-     }
-    ]
-   },
-   "rival": {
-    "value": "15:00",
-    "confidence": 0.9,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "OPERATOR",
-      "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=10019&res_dt=20261024",
-      "at": "2026-10-23",
-      "quote": ""
      }
     ]
    }
@@ -3254,6 +3261,76 @@
       "url": "https://blog.naver.com/zzamidiary/224434409831",
       "at": "2026-10-09",
       "quote": "[진주 숙소 추천] 애견 동반 가능한 글램핑 \"피카푸피크닉앤글램핑\"."
+     }
+    ]
+   }
+  },
+  {
+   "cid": "100133",
+   "name": "한별 도그파크",
+   "attr": "PET_POLICY",
+   "label": "반려견 동반",
+   "ui": true,
+   "top": {
+    "value": "NOT_ALLOWED",
+    "confidence": 0.85,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "CONFIRMED",
+      "src": "gocamping",
+      "url": null,
+      "at": null,
+      "quote": "불가능"
+     }
+    ]
+   },
+   "rival": {
+    "value": "ALLOWED",
+    "confidence": 0.6,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/so_captain/224247602672",
+      "at": "2026-04-10",
+      "quote": "반려견의 체급에 따라 구역이 분리되어 있어 안전한 놀이가 가능하며 전용 수영장과 목욕실 등 위생 시설이 완비되어 있습니다."
+     }
+    ]
+   }
+  },
+  {
+   "cid": "797",
+   "name": "스테리움 제천",
+   "attr": "CHECKIN_TIME",
+   "label": "입실 시각",
+   "ui": true,
+   "top": {
+    "value": "14:00",
+    "confidence": 0.9,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "booking_engine",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3820&res_dt=20261024",
+      "at": "2026-10-23",
+      "quote": ""
+     }
+    ]
+   },
+   "rival": {
+    "value": "15:00",
+    "confidence": 0.6,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/xofla1228/224392533170",
+      "at": "2026-08-27",
+      "quote": "있다면 스테리움 제천 카라반 A 강추 드릴게요 🌿🌲🤍 ☁ 체크인 15시"
      }
     ]
    }
