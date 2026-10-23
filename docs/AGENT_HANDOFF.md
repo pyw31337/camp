@@ -1,5 +1,13 @@
 # 인수인계
 
+## 📌 지도: 숙박 종류 마커 · 확대 버튼 제거 · 모바일 머리 줄은 ‘찾기’에서만 (2026-10-23, Claude)
+
+- 지도 글램핑·카라반·방갈로 칩을 누르면 마커에 그 숙박 종류(난방 여부·방갈로 세부 이름·동 수)가 칩과 같은 색으로 나온다(`MAP_STAY_KEYS`, `.pin-glamp/-caravan/-house`).
+- 지도 확대·축소 버튼(Leaflet·카카오 ZoomControl) 제거 — 카드와 겹침. 모바일·태블릿은 두 손가락, PC는 마우스 휠.
+- 759px 이하에서 지도·테마·비교·찜 화면은 상단 머리 줄(로고·‘N곳 지도 안’)을 숨긴다(하단 탭이 메뉴). PC·태블릿은 머리 줄이 메뉴라 유지.
+- 주변시설 아이콘(소유자 제공): 동물병원 `vet`, 정육 `meat`(교체), 휴양림 `forest`, 레포츠 `leports`, 실외놀이터 `playout`, 키즈카페 `kidscafe`, 전통시장 `market`, 온천 `onsen`. 관광·공공 시설은 이름으로 고른다(`NEARBY_ICON_RULES`). 캠핑장 놀이시설은 `playout`.
+- `nearby-photos.yml`: 판독기(@huggingface/transformers)를 설치하지 않아 판독이 조용히 건너뛰어졌다 → 설치 단계 추가, 판독기 없으면 오류로 표시.
+
 ## 📌 주변시설: 검색 사진 판독 켬 · 브랜드 표식 · 주소 제거 · 아이콘 (2026-10-23, Claude)
 - **검색 사진**: `judge-nearby-photos`(CLIP, `lib/nearby-photo-judge.mjs`)가 `registry/nearby-photos.json` 항목에 판정 `j`를 적는다. `build-nearby-photos`는 판독을 통과하고 시설 종류와 장면이 맞는 사진만 붙인다(기본 켬, 끄려면 `NEARBY_SEARCH_PHOTOS=off`). 표본 160장에서 통과분의 약 85%가 실제 가게 모습이었다. 판독은 `nearby-photos.yml`(매주 금 05:23 KST)에서 이어서 한다.
 - **브랜드 표식**: 사진이 없는 편의점·마트·주유소 체인(GS25·CU·세븐일레븐·이마트24·하나로·S-OIL·SK 등)은 브랜드 색 글자 표식을 보인다(`BRAND_MARKS`, 이미지 파일 아님).

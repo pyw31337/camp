@@ -51,6 +51,9 @@ jobs:
           NEARBY_PHOTO_MAX_CALLS: ${{ github.event.inputs.max_calls || '4000' }}
         run: node scripts/collect-nearby-photos.mjs
       # 검색 사진 판독(2026-10-23 다시 켬): 가게·건물 모습이고 시설 종류와 맞는 사진만 붙인다(lib/nearby-photo-judge.mjs). 이어서 처리.
+      # 판독기는 package.json에 없다(무거워서) — link-check.yml과 같이 이 작업에서만 설치한다. 빠지면 판독이 조용히 건너뛰어진다.
+      - name: Install photo judge (transformers.js)
+        run: npm i --no-save @huggingface/transformers@3.8.1
       - uses: actions/cache@v4
         with:
           path: pipeline/.cache/hf
