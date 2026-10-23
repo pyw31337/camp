@@ -2229,7 +2229,7 @@ function themesView() {
   return `<section class="themes-page">
     <header class="themes-head shell">
       <h1>테마로 <em>고르기</em></h1>
-      <p>원하는 분위기부터 골라보세요.</p>
+      <p class="sec-sub">원하는 분위기부터 골라보세요.</p>
     </header>
     <div class="themes-grid shell">${cards}</div>
   </section>`;
@@ -5502,7 +5502,7 @@ async function compareView() {
     <div class="sec-head big">
       <div>
         <h1>찜한 캠핑장 <em>비교</em></h1>
-        <p class="sec-sub">찜한 목록에서 2~5곳을 선택해 나란히 스펙을 비교할 수 있어요.</p>
+        <p class="sec-sub">찜 업체 최대 5곳을 비교할 수 있어요.</p>
       </div>
     </div>
     <p class="cmp-count"${demo ? "" : " hidden"} data-cmp-count>${demo ? "예시 비교 2곳" : `찜 ${saved.length}곳 중 ${camps.length}곳 비교 중`}</p>
@@ -5597,7 +5597,7 @@ async function savedView() {
       <div class="sec-head big">
         <div>
           <h1>찜한 <em>캠핑장</em></h1>
-          <p class="sec-sub">마음에 드는 캠핑장을 갯수 제한 없이 모아볼 수 있는 나만의 보관함이에요.</p>
+          <p class="sec-sub">관심 업체들이에요.</p>
         </div>
       </div>
       <div class="empty" data-saved-empty>
@@ -5617,11 +5617,11 @@ async function savedView() {
     <div class="sec-head big">
       <div>
         <h1>찜한 <em>캠핑장</em></h1>
-        <p class="sec-sub">찜한 캠핑장을 모아 보는 곳이에요. ${ic("heart", "inline")}를 끄면 목록에서 빠져요.</p>
+        <p class="sec-sub">관심 업체들이에요.</p>
       </div>
       <div class="saved-head-tools">
         <a class="btn primary btn-sm saved-cmp-link" href="${APP_BASE}compare" data-saved-compare${saved.length < 2 ? ' data-disabled="true"' : ""}>
-          ${ic("compare")} <span>비교하기</span>
+          ${ic("compare")} <span class="lbl-full">비교하기</span><span class="lbl-short">비교</span>
         </a>
       </div>
     </div>

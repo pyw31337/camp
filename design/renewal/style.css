@@ -2126,7 +2126,7 @@ a.near { color: inherit; text-decoration: none; }
 .themes-head .eyebrow { margin: 0 0 8px; }
 .themes-head h1 { margin: 0; font-size: clamp(1.8rem, 1.2rem + 2.2vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -.04em; }
 .themes-head h1 em { color: var(--accent); font-style: normal; }
-.themes-head p:not(.eyebrow) { margin: 10px 0 0; color: var(--ink-2); font-weight: 650; }
+.themes-head p:not(.eyebrow):not(.sec-sub) { margin: 10px 0 0; color: var(--ink-2); font-weight: 650; }
 .themes-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.5vw, 20px); padding-bottom: clamp(52px, 7vw, 96px); }
 .themes-grid .theme-card { width: 100%; min-width: 0; aspect-ratio: 5 / 4; }
 .theme-hero { position: relative; background-size: cover; background-position: center 38%; border-radius: 0; overflow: hidden; min-height: 250px; padding-top: calc(var(--head-h) + env(safe-area-inset-top)); display: flex; align-items: flex-end; color: #fff; }
@@ -3600,4 +3600,21 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 .map-canvas .pin.pin-no::after,
 .map-peek .pin.pin-no::after {
   background: #d32f2f !important;
+}
+
+/* 테마 소개 문구는 비교·찜 화면의 sec-sub와 같은 모양(소유자 2026-10-23) */
+.themes-head .sec-sub { margin: 0; }
+/* 찜: 제목·설명은 왼쪽, ‘비교하기’는 오른쪽에 한 줄로(모바일은 ‘비교’) */
+.saved-page .sec-head.big { flex-wrap: nowrap; align-items: center; gap: 12px; }
+.saved-page .saved-head-tools { width: auto; flex: none; }
+.saved-cmp-link .lbl-short { display: none; }
+@media (max-width: 600px) {
+  .saved-cmp-link .lbl-full { display: none; }
+  .saved-cmp-link .lbl-short { display: inline; }
+}
+/* 지도 카드 스펙 줄(규격·전기·요금): 한 줄 가로 스크롤일 때 항목이 줄어들어 글자가 겹치던 것(320px, 소유자 2026-10-23) */
+.map-peek .mi-specs > span, .map-list .mi-specs > span { flex: none; white-space: nowrap; }
+@media (max-width: 360px) {
+  .map-list .mi, .map-peek .mi { grid-template-columns: 72px minmax(0, 1fr); gap: 8px; }
+  .map-list .mi-ph .car, .map-peek .mi-ph .car { height: 72px; }
 }
