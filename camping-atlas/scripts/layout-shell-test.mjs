@@ -8,6 +8,7 @@ const png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR
 const camps = await (await fetch(`${base}explore/data/campgrounds.json`)).json().catch(() => []);
 const id = String((Array.isArray(camps) ? camps : camps.camps ?? [])[0]?.id ?? "483");
 const ROUTES = ["", "list", "map", "themes", "theme/FOREST", "compare", "saved", "saves-log", `place/${id}`, "log/"];
+const NO_HEAD = ["map", "themes", "compare", "saved"];
 const fails = [];
 for (const w of [320, 390, 1366]) {
   const ctx = await browser.newContext({ viewport: { width: w, height: 800 } });
@@ -46,15 +47,16 @@ for (const w of [320, 390, 1366]) {
     if (m.footers !== 1) fails.push(`${tag}: 푸터 ${m.footers}개`);
     if (m.sw > m.vw) fails.push(`${tag}: 가로 넘침 ${m.sw}>${m.vw}`);
     // 모바일 상세는 로고 머리 줄을 숨긴다(영우 님 2026-10-21, t39 #12) — 숨겨졌는지만 본다.
-    const mDetail = w < 760 && r.startsWith("place/");
-    if (mDetail && m.head?.height) fails.push(`${tag}: 모바일 상세에 로고 머리 줄이 보임`);
+    // 모바일 지도·테마·비교·찜도 머리 줄을 숨긴다(소유자 2026-10-23: 머리 줄은 ‘찾기’에서만, 메뉴는 하단 탭).
+    const mDetail = w < 760 && (r.startsWith("place/") || NO_HEAD.includes(r));
+    if (mDetail && m.head?.height) fails.push(`${tag}: 모바일 ${r}에 로고 머리 줄이 보임`);
     if (!m.aligned && r !== "map" && !mDetail) fails.push(`${tag}: 본문 왼쪽 여백이 로고(${m.brand?.left}px)와 맞는 상자가 없음`);
     if (w < 760 && !r.startsWith("place/") && !m.tab) fails.push(`${tag}: 하단 탭 없음`);
     seen.push([tag, m]);
   }
   const [t0, ref] = seen[0];
   for (const [tag, m] of seen.slice(1)) {
-    if (!(w < 760 && / \/place\//.test(tag))) for (const k of ["head", "brand"]) if (JSON.stringify(m[k]) !== JSON.stringify(ref[k])) fails.push(`${tag}: ${k} ${JSON.stringify(m[k])} ≠ ${t0} ${JSON.stringify(ref[k])}`);
+    if (!(w < 760 && (/ \/place\//.test(tag) || NO_HEAD.includes(tag.split(" /")[1])))) for (const k of ["head", "brand"]) if (JSON.stringify(m[k]) !== JSON.stringify(ref[k])) fails.push(`${tag}: ${k} ${JSON.stringify(m[k])} ≠ ${t0} ${JSON.stringify(ref[k])}`);
     for (const k of ["nav", "finLeft", "finW", "ftW", "ftText"]) if (m[k] !== ref[k]) fails.push(`${tag}: 푸터/메뉴 ${k} ${m[k]} ≠ ${t0} ${ref[k]}`);
   }
   if (ref.finLeft !== ref.brand?.left) fails.push(`${w}: 푸터 내용 시작(${ref.finLeft}) ≠ 로고(${ref.brand?.left})`);
