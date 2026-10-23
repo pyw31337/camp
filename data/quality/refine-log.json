@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-10-23T13:03:37.109Z",
+ "generated_at": "2026-10-23T14:59:55.313Z",
  "rule": "pipeline/lib/fact-refine.mjs",
- "dropped": 195,
+ "dropped": 148,
  "recoded": 101,
  "scoped": 351,
  "items": [
@@ -17,26 +17,6 @@
    "why": "일부 객실·구역만 허용"
   },
   {
-   "cid": "102371",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
-   "cid": "102362",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "102362",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -45,36 +25,6 @@
    "quote": "아쉽지만 김해 루미테라 베이커리 카페는 반려동물 동반이 불가한...",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
-   "cid": "102369",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
-   "cid": "101934",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
-   "cid": "102364",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "8111",
@@ -108,26 +58,6 @@
    "why": "일부 객실·구역만 허용"
   },
   {
-   "cid": "102307",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
-   "cid": "102358",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "2179",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -137,16 +67,6 @@
    "quote": "소형 반려견 (5kg 이하) 은 동반 가능하나, 펜션 및 황토방 등 실내 출입은 불가합니다.",
    "action": "recode",
    "why": "크기 제한 있는 허용"
-  },
-  {
-   "cid": "102357",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "8157",
@@ -201,26 +121,6 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
-   "cid": "102339",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
-   "cid": "102330",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "1327",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -240,26 +140,6 @@
    "quote": "반려견은 캠핑장만 가능",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
-  },
-  {
-   "cid": "102325",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
-   "cid": "102321",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "1065",
@@ -293,26 +173,6 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
-   "cid": "100202",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
-   "cid": "102311",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "102243",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -342,16 +202,6 @@
    "quote": "️김해 상동 숲속 야영장️ 주소: 김해시 상동면 장척로 462번 길 111 입실시간 14:00 퇴실 시간 11:00 기준 인원: 4인 (최대 4인) 매너 타임 21:00-07:00 반려동물 입장불가 매점❌ 1박 이용료: 40,000원 상동...",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
-   "cid": "102290",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "101081",
@@ -405,16 +255,6 @@
    "quote": "반려견 15Kg 미만 최대 2마리까지 가능",
    "action": "recode",
    "why": "크기 제한 있는 허용"
-  },
-  {
-   "cid": "101203",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "101500",
@@ -741,16 +581,6 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
-   "cid": "102168",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "8068",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -845,16 +675,6 @@
    "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
   },
   {
-   "cid": "101484",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "100070",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -863,16 +683,6 @@
    "quote": "퇴실: 11시 방, 주방데크 분리 반려동물 불가 수영장, 갯벌체험 & 신두리모래안은 신두57...",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
-   "cid": "101987",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "978",
@@ -1093,16 +903,6 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
-   "cid": "813",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "101111",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -1111,16 +911,6 @@
    "quote": "램핑객실 애견동반 불가능하며, 동반시 환불없이 퇴실처리 됩니다.",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
-   "cid": "102101",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "1356",
@@ -1307,26 +1097,6 @@
    "quote": "반려동물 동반 불가이며 근처에 여러 가지 조형물과 야생초화원, 생태연못, 놀이터, 폭포, 다목적 잔디광장, 억새밭 등 다양한 볼거리가 있는 생태공원이 근처에 있어 함께 둘러보기 좋다.",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
-   "cid": "101780",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
-   "cid": "7389",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "7913",
@@ -1534,26 +1304,6 @@
    "why": "일부 구역·객실만의 금지를 동반 불가로 읽음"
   },
   {
-   "cid": "102028",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
-   "cid": "101802",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "3100",
    "attr": "SITE_TYPE",
    "value": "AUTO",
@@ -1574,26 +1324,6 @@
    "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
   },
   {
-   "cid": "101544",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
-   "cid": "2359",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "2538",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -1602,16 +1332,6 @@
    "quote": "산책로, 숲속놀이터, 잔디광장, 강변 자전거도로도 기재돼 있고 반려동물은 출입 불가로 표시돼 있어요.",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
-   "cid": "101985",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "7063",
@@ -1708,26 +1428,6 @@
    "why": "크기 제한 있는 허용"
   },
   {
-   "cid": "7348",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
-   "cid": "102035",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "101225",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -1792,16 +1492,6 @@
    "why": "크기 제한 있는 허용"
   },
   {
-   "cid": "101949",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "7858",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -1811,16 +1501,6 @@
    "quote": "반려동물 입실 가능 펜션 외에 반려동물 동반 시 입실이 거부될 수 있으며, 해당 사유로 환불 받을 수 없습니다.",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
-  },
-  {
-   "cid": "100188",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "3025",
@@ -1854,16 +1534,6 @@
    "quote": "초락나무 글램핑 (애견동반 가능)",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
-  },
-  {
-   "cid": "100619",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "7815",
@@ -1947,16 +1617,6 @@
    "quote": "애견동반존 운영 주의사항 : 캠핑장내 목줄 착용필수 (사고 시 견주책임, 애견용품개별지참) 중, 대형견 객실내 출입금지, 맹견 금지 숙박 업소는 법적으로 청소년 혼숙이 금지되어 있습니다.",
    "action": "recode",
    "why": "크기 제한(대형견 불가 등)을 동반 불가로 읽음"
-  },
-  {
-   "cid": "101693",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "101347",
@@ -2084,16 +1744,6 @@
    "why": "홍보·목록 제목(규칙 아님)"
   },
   {
-   "cid": "7677",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "101084",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -2126,16 +1776,6 @@
    "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
   },
   {
-   "cid": "3047",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "7051",
    "attr": "SITE_TYPE",
    "value": "DECK",
@@ -2166,16 +1806,6 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
-   "cid": "101892",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "101568",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -2196,26 +1826,6 @@
    "quote": "울산 아이와 가볼 만한 \"황방산생태야영장\" 2박 3일 가족캠핑 솔직후기 (114번, 애견동반가능).",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
-  },
-  {
-   "cid": "101853",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
-   "cid": "101878",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "101881",
@@ -2353,26 +1963,6 @@
    "quote": "전사이트 애견 1견이 동반(10kg 미만) 가능합니다.",
    "action": "recode",
    "why": "크기 제한 있는 허용"
-  },
-  {
-   "cid": "100918",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
-   "cid": "101194",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "100802",
@@ -2575,16 +2165,6 @@
    "why": "일부 객실·구역만 허용"
   },
   {
-   "cid": "101473",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "100248",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -2649,16 +2229,6 @@
    "quote": "· 반려동물 입실 가능 펜션 외에 반려동물 동반 시 입실이 거부될 수 있으며, 해당 사유로 환불 받을 수 없습니다.",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
-  },
-  {
-   "cid": "2124",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "101411",
@@ -2739,16 +2309,6 @@
    "quote": "경기도 양주시 백석읍 기산로 614 수영장, 바베큐장, 키즈, 카라반, 단체 ☎ 031-871-6699 여우별꽃캠핑장 경기도 양주시 백석읍 기산로 614 네이버 예약 :: 여우별꽃캠핑장 * 모든구역 애견동반불가합니다.",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
-   "cid": "100723",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "100382",
@@ -2835,16 +2395,6 @@
    "why": "일부 객실·구역만 허용"
   },
   {
-   "cid": "100445",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "100511",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -2907,16 +2457,6 @@
    "why": "크기 제한 있는 허용"
   },
   {
-   "cid": "100749",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "100753",
    "attr": "AMENITY_DISHWASH",
    "value": true,
@@ -2955,16 +2495,6 @@
    "quote": "+ 입실은 오후 2시부터 입실이 가능하며, 퇴실은 오전 11시까지입니다.",
    "action": "drop",
    "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
-  },
-  {
-   "cid": "101286",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "src": "operator_homepage",
-   "url": "https://camping.kimgoon.kr/about",
-   "quote": "반려견·반려묘 동반 가능 캠핑장 모음",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "2709",

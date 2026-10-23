@@ -1,21 +1,12 @@
-# 데이터 품질 보고 — 2026-10-23
+# 데이터 품질 보고 — 2026-10-24
 
 자동 생성(pipeline/scripts/quality-ledger.mjs). 기준·절차는 [docs/DATA_QUALITY_PROCESS.md](../../docs/DATA_QUALITY_PROCESS.md).
 
-- 사실 172,108건 · (캠핑장×속성) 136,326쌍 · 캠핑장 6,404곳
-- 평균 신뢰도 **0.795** (-0.011) · 확정 비율 **87.6%** (-1.5)
-- 독립 원천 2곳↑ 확증 2,993쌍 (+107) · 충돌(검토 대기) **86** (-209) · 검토 판정 누적 69
+- 사실 171,898건 · (캠핑장×속성) 136,306쌍 · 캠핑장 6,404곳
+- 평균 신뢰도 **0.795** (+0) · 확정 비율 **87.6%** (+0)
+- 독립 원천 2곳↑ 확증 2,991쌍 (-2) · 충돌(검토 대기) **86** (+0) · 검토 판정 누적 69
 
-## ⚠ 어제보다 나빠진 속성 8개
-
-- VISITOR_POLICY confidence: 0.791 → 0.745
-- EXTRA_PERSON_FEE confidence: 0.689 → 0.668
-- REFUND_POLICY confidence: 0.893 → 0.498
-- CHECKIN_TIME confidence: 0.67 → 0.52
-- CHECKOUT_TIME confidence: 0.674 → 0.522
-- MANNER_TIME confidence: 0.615 → 0.355
-- EARLY_CHECKIN confidence: 0.574 → 0.539
-- MIN_STAY confidence: 0.591 → 0.562
+## 회귀 없음
 
 ## 신뢰도가 낮은 속성(커버리지 50곳↑) — 다음 수집 우선순위
 
