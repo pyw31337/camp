@@ -3536,3 +3536,65 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
   .map-list .bdg { font-size: .68rem; flex: none; }
   .map-list .mi-specs { border-top: 0; padding-top: 0; margin-top: 0; }
 }
+
+/* ── 상태 배지·지도 핀 대비 보정(소유자 2026-10-23) ─────────────────────
+   지도 SDK/카드 변형의 상속 규칙이 글자색과 줄높이를 덮어써서
+   ‘장작 불가’·‘전기 불가’가 배경에 묻히는 회귀를 막는다. 불가 상태는
+   항상 동일한 빨강 바탕·흰 글자, 아이콘은 흰 원·빨강으로 고정한다. */
+.bdg.bdg-no,
+.bdg.bdg-no > :not(.ic),
+.bdg.bdg-no > span:not(.ic),
+.bdg.bdg-no > b,
+.bdg.bdg-no > strong {
+  background: #d32f2f !important;
+  border-color: #d32f2f !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+.bdg.bdg-no .ic,
+.bdg.bdg-no > .ic {
+  background: #fff !important;
+  color: #d32f2f !important;
+  -webkit-text-fill-color: #d32f2f !important;
+}
+
+/* 지도 마커는 카카오/리플로우 컨테이너의 line-height·color 상속과 무관하게
+   중앙 정렬·최소 폭·고대비를 보장한다. */
+.map-canvas .pin,
+.map-canvas .pin.pin-hot,
+.map-canvas .pin.pin-flame,
+.map-canvas .pin.pin-ink,
+.map-canvas .pin.pin-cobalt,
+.map-canvas .pin.pin-no,
+.map-peek .pin,
+.detail-map-pin {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: max-content;
+  line-height: 1.2 !important;
+  text-align: center !important;
+  font-family: var(--font) !important;
+}
+.map-canvas .pin.pin-hot,
+.map-canvas .pin.pin-flame,
+.map-canvas .pin.pin-ink,
+.map-canvas .pin.pin-cobalt,
+.map-canvas .pin.pin-no,
+.map-peek .pin.pin-hot,
+.map-peek .pin.pin-flame,
+.map-peek .pin.pin-ink,
+.map-peek .pin.pin-cobalt,
+.map-peek .pin.pin-no {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .18);
+}
+.map-canvas .pin.pin-no,
+.map-peek .pin.pin-no {
+  background: #d32f2f !important;
+}
+.map-canvas .pin.pin-no::after,
+.map-peek .pin.pin-no::after {
+  background: #d32f2f !important;
+}

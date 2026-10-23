@@ -6,6 +6,11 @@
 - 남긴 것: data-sync의 `sync:seoul-yeyak`(카탈로그 `seoul` 칸, 화면 미노출)과 `lib/availability-read-model.mjs`(테스트·원장 검증용).
 - 같은 기능을 되살리지 말 것. 전국 단위 실시간 빈자리 원천이 생기면 소유자에게 먼저 묻는다.
 
+## 📌 상태 배지·지도 핀 대비 전수 보정 (2026-10-23, Codex)
+- 지도 조건 핀과 카드·상세의 `bdg-no`(장작 불가·전기 불가·반려견 불가 등)에 전용 대비 규칙을 추가했다. 불가 상태는 빨강 바탕·흰 글자, 아이콘은 흰 원·빨강으로 고정하고, 지도 SDK가 상속하는 `color`·`line-height`를 덮어써 텍스트가 배경에 묻히거나 잘리지 않게 했다.
+- 원본 `design/renewal/style.css`를 수정한 뒤 `publish-explorer-pages.mjs --shell-only camping-atlas/public`로 발행본을 동기화했다.
+- 검증: 원본·발행본 `node --check` 통과, `git diff --check` 통과. CI의 Lint/build·Rail swipe는 PR에서 확인한다.
+
 ## 📌 예약 현황(서울 공공예약 ‘공식 접수 중’)이 화면에서 사라지던 원인 (2026-10-23, Claude)
 - `availability-sync`는 서울 공공서비스예약 Open API의 캠핑 상품(현재 34개 · 매칭 7곳 · 접수 중 6곳)만 읽는다. 화면에는 카드 ‘접수 중’ 표시와 ‘지금 접수 중’ 테마로만 나온다.
 - 유효시간이 75분이었는데, GitHub 스케줄 `*/30`이 실제로는 3~5시간에 한 번만 돌았다. 그래서 하루 대부분 만료 상태로 아무것도 안 보였다.
