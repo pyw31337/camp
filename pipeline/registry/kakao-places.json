@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-10-20T00:47:31.123Z",
+ "generated_at": "2026-10-23T13:34:38.163Z",
  "source": {
   "label": "카카오 로컬 키워드 검색 · Daum 웹 검색(공식 REST API)",
   "docs": [
@@ -17393,7 +17393,7 @@
    "homepage": null
   },
   "2472": {
-   "checked_at": "2026-10-16T05:36:27.170Z",
+   "checked_at": "2026-10-23T13:34:37.271Z",
    "place": {
     "id": "898560745",
     "name": "원주두리캠핑장",
@@ -17411,7 +17411,56 @@
      "distance_m": 4
     }
    },
-   "candidates": [],
+   "candidates": [
+    {
+     "host": "ojigo.kr",
+     "url": "https://ojigo.kr/camping/2472",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "원주두리캠핑장",
+       "url": "https://ojigo.kr/camping/2472"
+      }
+     ]
+    },
+    {
+     "host": "campingdogam.com",
+     "url": "https://campingdogam.com/camp/2472/",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "원주두리캠핑장 — 강원 원주시 캠핑장",
+       "url": "https://campingdogam.com/camp/2472/"
+      }
+     ]
+    },
+    {
+     "host": "fclh.purpleo.co.kr",
+     "url": "https://fclh.purpleo.co.kr/view/52809",
+     "score": 4,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "두리 총153명이 열람하였으며, 0개의 리뷰가 있습니다. 리뷰작성 0",
+       "url": "https://fclh.purpleo.co.kr/view/52809"
+      }
+     ]
+    },
+    {
+     "host": "zzims.kr",
+     "url": "http://www.zzims.kr/home/camp_info.html?znum=639",
+     "score": 4,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "캠핑장   감악산 캠핑숲 강원도 (423) 원주시 (33) 신림면 (18)",
+       "url": "http://www.zzims.kr/home/camp_info.html?znum=639"
+      }
+     ]
+    }
+   ],
    "needs_homepage": true,
    "homepage": null
   },
@@ -76061,7 +76110,7 @@
    "homepage": null
   },
   "101093": {
-   "checked_at": "2026-10-16T05:36:28.099Z",
+   "checked_at": "2026-10-23T13:34:37.477Z",
    "place": null,
    "candidates": [
     {
@@ -76085,6 +76134,30 @@
       {
        "title": "신림스테이캠프 — 계곡, 물놀이장, 오토캠핑장 — 강원 원주시 신림면",
        "url": "https://opendatflow.com/camping-sites/4122"
+      }
+     ]
+    },
+    {
+     "host": "dokdokplace.kr",
+     "url": "https://dokdokplace.kr/stores/i1/i101/i10104/gangwonstate/wonju-si/",
+     "score": 4,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "강원특별자치도 원주시 캠핑 글램핑 상가 목록",
+       "url": "https://dokdokplace.kr/stores/i1/i101/i10104/gangwonstate/wonju-si/"
+      }
+     ]
+    },
+    {
+     "host": "local.114-service.co.kr",
+     "url": "https://local.114-service.co.kr/map/detail/MA0101202307A0042087",
+     "score": 4,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "[신림스테이캠프] 강원특별자치도 원주시 신림면 캠핑/글램핑 위치 · 업종 · 주소 정보 - 타운커넥트",
+       "url": "https://local.114-service.co.kr/map/detail/MA0101202307A0042087"
       }
      ]
     }
@@ -113753,7 +113826,7 @@
    "homepage": null
   },
   "102221": {
-   "checked_at": "2026-10-16T05:33:50.325Z",
+   "checked_at": "2026-10-23T13:34:36.276Z",
    "place": null,
    "candidates": [
     {
@@ -113902,7 +113975,7 @@
    "homepage": null
   },
   "102229": {
-   "checked_at": "2026-10-16T05:32:32.831Z",
+   "checked_at": "2026-10-23T13:34:36.274Z",
    "place": null,
    "candidates": [],
    "needs_homepage": false,
@@ -114719,7 +114792,7 @@
    "homepage": null
   },
   "102270": {
-   "checked_at": "2026-10-16T05:32:51.610Z",
+   "checked_at": "2026-10-23T13:34:36.275Z",
    "place": null,
    "candidates": [],
    "needs_homepage": true,
@@ -117631,6 +117704,13 @@
      ]
     }
    ],
+   "needs_homepage": true,
+   "homepage": null
+  },
+  "102377": {
+   "checked_at": "2026-10-23T13:34:36.252Z",
+   "place": null,
+   "candidates": [],
    "needs_homepage": true,
    "homepage": null
   },
