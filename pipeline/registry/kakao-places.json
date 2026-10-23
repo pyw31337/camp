@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-10-23T13:34:38.163Z",
+ "generated_at": "2026-10-23T14:24:14.795Z",
  "source": {
   "label": "카카오 로컬 키워드 검색 · Daum 웹 검색(공식 REST API)",
   "docs": [
@@ -17393,7 +17393,7 @@
    "homepage": null
   },
   "2472": {
-   "checked_at": "2026-10-23T13:34:37.271Z",
+   "checked_at": "2026-10-23T14:24:13.881Z",
    "place": {
     "id": "898560745",
     "name": "원주두리캠핑장",
@@ -76110,7 +76110,7 @@
    "homepage": null
   },
   "101093": {
-   "checked_at": "2026-10-23T13:34:37.477Z",
+   "checked_at": "2026-10-23T14:24:14.292Z",
    "place": null,
    "candidates": [
     {
@@ -113826,7 +113826,7 @@
    "homepage": null
   },
   "102221": {
-   "checked_at": "2026-10-23T13:34:36.276Z",
+   "checked_at": "2026-10-23T14:24:12.925Z",
    "place": null,
    "candidates": [
     {
@@ -113975,7 +113975,7 @@
    "homepage": null
   },
   "102229": {
-   "checked_at": "2026-10-23T13:34:36.274Z",
+   "checked_at": "2026-10-23T14:24:12.924Z",
    "place": null,
    "candidates": [],
    "needs_homepage": false,
@@ -114792,7 +114792,7 @@
    "homepage": null
   },
   "102270": {
-   "checked_at": "2026-10-23T13:34:36.275Z",
+   "checked_at": "2026-10-23T14:24:12.925Z",
    "place": null,
    "candidates": [],
    "needs_homepage": true,
@@ -117708,7 +117708,7 @@
    "homepage": null
   },
   "102377": {
-   "checked_at": "2026-10-23T13:34:36.252Z",
+   "checked_at": "2026-10-23T14:24:12.902Z",
    "place": null,
    "candidates": [],
    "needs_homepage": true,

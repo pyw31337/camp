@@ -45107,7 +45107,7 @@
    "name": "원주두리캠핑장",
    "status": "OK",
    "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
-   "checked_at": "2026-10-23T13:35:19.477Z",
+   "checked_at": "2026-10-23T14:24:51.588Z",
    "discovered": true,
    "pages": [
     "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
@@ -244694,7 +244694,7 @@
    "name": "WonderWood Glamping(원더우드 글램핑)",
    "status": "FETCH_FAILED",
    "url": "https://camping.hansangsoo.com/camp/102221.html",
-   "checked_at": "2026-10-23T13:35:19.476Z",
+   "checked_at": "2026-10-23T14:24:51.587Z",
    "error": "403"
   },
   "102222": {
@@ -245074,7 +245074,7 @@
     }
    ],
    "last_attempt": {
-    "at": "2026-10-23T13:35:19.454Z",
+    "at": "2026-10-23T14:24:51.564Z",
     "status": "NO_RELEVANT_TEXT",
     "error": null
    }
@@ -248159,7 +248159,7 @@
    "name": "평택캠핑성",
    "status": "FETCH_FAILED",
    "url": "https://platformdodam.com/children-play-facilities/3019",
-   "checked_at": "2026-10-23T13:35:19.477Z",
+   "checked_at": "2026-10-23T14:24:51.589Z",
    "error": "403"
   },
   "pilot-007-soeggol": {
@@ -248670,6 +248670,6 @@
    ]
   }
  },
- "generated_at": "2026-10-23T13:37:14.119Z",
+ "generated_at": "2026-10-23T14:25:21.070Z",
  "policy": "운영자 자체 홈페이지·예약 페이지만, robots.txt 준수, 봇 이름 공개, 문장(≤140자)·원문 URL·확인 시각만 저장. 플랫폼 페이지는 수집하지 않음."
 }
