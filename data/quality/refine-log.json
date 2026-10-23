@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-23T08:24:20.035Z",
+ "generated_at": "2026-10-23T13:03:37.109Z",
  "rule": "pipeline/lib/fact-refine.mjs",
- "dropped": 194,
- "recoded": 100,
- "scoped": 333,
+ "dropped": 195,
+ "recoded": 101,
+ "scoped": 351,
  "items": [
   {
    "cid": "102118",
@@ -2021,6 +2021,27 @@
    "quote": "서울 근처 남양주 계곡 캠핑장, 폭포가 쏟아지는 쿼크밸리캠핑장 명당 SR 사이트 (애견동반 가능).",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
+  },
+  {
+   "cid": "101876",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/thtnr80/224289185438",
+   "quote": "SKY존-5.6번 사이트 (SKY존만 애견동반 가능함) SKY존 왼쪽 5번 , 우측 6번 입실:13:00, 퇴실:12:00 매너타임...",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
+  },
+  {
+   "cid": "101919",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/kyungeun1102/224123411077",
+   "quote": "오토캠핑, 개별화장실, 히노끼탕, 온수풀 수영상, 하계 메인 수영장 반려동물 불가 \" \" \" \" 입구...",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
    "cid": "100804",

@@ -921,6 +921,8 @@
 {"cid":"2704","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2733","attr":"SITE_SIZE","value":"6×6m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=2733","at":"2025-08-18T00:00:00+09:00","quote":"캠핑장에는 일반 야영장 10면만 운영중에 있으며 갖추고 있으며 사이트 크기 가로 7m 세로 7m인 데크 3면, 사이트 크기 6m*6m 5면,, 파쇄석 2면으로.","text":"6×6m"}
 {"cid":"2733","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping","count":10}
+{"cid":"2733","attr":"SITE_SIZE","value":"6×6m","grade":"MENTION","src":"review_search","url":"https://leports.sailing-blog.click/3046","at":"2026-03-06","quote":"사이트 크기는 가로 6m 세로 6m다.","text":"6×6m","n":2}
+{"cid":"2733","attr":"SITE_SIZE","value":"7×8m","grade":"MENTION","src":"review_search","url":"https://sailing-blog.click/5973","at":"2026-04-14","quote":"사이트 크기는 모두 가로 7m 세로 8m이다.","text":"7×8m","n":1}
 {"cid":"2733","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2734","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":40}
 {"cid":"2734","attr":"SITE_SIZE","value":"6×9m","grade":"CONFIRMED","src":"gocamping","count":40}
@@ -1043,6 +1045,7 @@
 {"cid":"3016","attr":"SITE_SIZE","value":"10×15m","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"3016","attr":"SITE_SIZE","value":"10×15m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=3016","at":"2025-08-19T00:00:00+09:00","quote":"사이트 크기는 가로 10m 세로 15m 9면, 가로 10m 세로 10m 40면, 가로 10m 세로 8m 20면, 가로 7m 세로 8m 30면으로 네 종류다.","text":"10×15m"}
 {"cid":"3016","attr":"SITE_SIZE","value":"10×80m","grade":"CONFIRMED","src":"gocamping","count":20}
+{"cid":"3016","attr":"SITE_SIZE","value":"3.5×7m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/marin0728/224436959269","at":"2026-10-10","quote":"▫️입실시간 14시 퇴실시간 12시 ▫️D4 ▫️사이트크기 규격 3.5m*7.0m...","text":"3.5×7m","n":1}
 {"cid":"3016","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3034","attr":"SITE_SIZE","value":"14×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17897&res_dt=20261024","at":"2026-10-23","text":"B-4, B-5 두가족 데크사이트"}
 {"cid":"3034","attr":"SITE_SIZE","value":"16×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17897&res_dt=20261024","at":"2026-10-23","text":"B-7:두가족사이트"}
@@ -1176,6 +1179,7 @@
 {"cid":"3376","attr":"SITE_SIZE","value":"8×6m","grade":"CONFIRMED","src":"gocamping","count":30}
 {"cid":"3379","attr":"SITE_SIZE","value":"3×4m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3379","attr":"SITE_SIZE","value":"3×4m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=3379","at":"2026-06-30T00:00:00+09:00","quote":"하조오토캠핑장 내에는 40여 개의 캠핑 사이트가 있으며, 3m×4m 크기의 나무 테크와 3m×5m 크기의 나무 테크에 관광객들은 대형텐트를 설치할 수 있으며 전기 역시 사용할 수 있다.","text":"3×4m"}
+{"cid":"3383","attr":"SITE_SIZE","value":"4×6m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/bentaboo/223999802866","at":"2025-09-08","quote":"하추자연휴양림 숲나들e 예약 야영장 안내 야영데크: 총 15면, 4m×6m...","text":"4×6m","n":1}
 {"cid":"3389","attr":"SITE_SIZE","value":"14×8m","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"3389","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":13}
 {"cid":"3389","attr":"SITE_SIZE","value":"8×11m","grade":"CONFIRMED","src":"gocamping","count":7}
@@ -1856,6 +1860,7 @@
 {"cid":"8114","attr":"SITE_SIZE","value":"8×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3654&res_dt=20261024","at":"2026-10-23","text":"B 사이트(파쇄석)"}
 {"cid":"8114","attr":"SITE_SIZE","value":"8×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3654&res_dt=20261024","at":"2026-10-23","text":"C 사이트(잔디)"}
 {"cid":"8114","attr":"SITE_SIZE","value":"8×10m","grade":"CONFIRMED","src":"gocamping","count":24}
+{"cid":"8114","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hj870114/224048680390","at":"2025-10-21","quote":"일곱식구캠핑장 할로윈캠핑 캠핑장 정보 전북 정읍시 칠보면 행단1길 153 출처_땡큐캠핑 - 사이트 크기 A사이트 10*10m B사이트 8*10m(사이트내주차불가) C사이트 8*9m(사이트내주차불가) D사이트 8*10m G사이트 10...","text":"10×10m","n":1}
 {"cid":"8114","attr":"SITE_SURFACE","value":"GRASS","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3654&res_dt=20261024","at":"2026-10-23","text":"잔디"}
 {"cid":"8114","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3654&res_dt=20261024","at":"2026-10-23","text":"파쇄석"}
 {"cid":"8122","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -3004,7 +3009,7 @@
 {"cid":"101517","attr":"SITE_SIZE","value":"9×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101517","attr":"SITE_SIZE","value":"9×7m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/bd0111/224067409370","at":"2025-11-07","quote":"강원 횡성군 서원면 옥계6길 25 ⛺️파쇄석5 (9m*7m) 🅿️사이트 옆 주…","text":"9×7m","n":1}
 {"cid":"101518","attr":"SITE_SIZE","value":"6×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16129&res_dt=20261024","at":"2026-10-23","text":"오토캠핑 데크"}
-{"cid":"101518","attr":"SITE_SIZE","value":"6×6m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/grmn0821/223588441805","at":"2024-09-19","quote":"퇴실 11:00 ⋁ 매너 타임 : 22:00 ⋁ 데크사이즈 : 6M*6M (데크 6개 , 글램핑 10개, 바베큐장10개) 예약은...","text":"6×6m","n":1}
+{"cid":"101518","attr":"SITE_SIZE","value":"6×6m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/grmn0821/223588441805","at":"2024-09-19","quote":"퇴실 11:00 ⋁ 매너 타임 : 22:00 ⋁ 데크사이즈 : 6M*6M (데크 6개 , 글램핑 10개, 바베큐장10개) 예약은...","text":"6×6m","n":2}
 {"cid":"101518","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101519","attr":"SITE_SIZE","value":"5×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16133&res_dt=20261024","at":"2026-10-23","text":"독채 사이트"}
 {"cid":"101520","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -3314,6 +3319,8 @@
 {"cid":"101876","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"101876","attr":"SITE_SIZE","value":"7×10m","grade":"CONFIRMED","src":"gocamping","count":4}
 {"cid":"101876","attr":"SITE_SIZE","value":"7×9m","grade":"CONFIRMED","src":"gocamping","count":1}
+{"cid":"101876","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/qkqhaw/224037489879","at":"2025-10-11","quote":"A-1 사이트(10mX10m , 파쇄석)","text":"10×10m","n":1}
+{"cid":"101876","attr":"SITE_SIZE","value":"7×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/qkqhaw/224037489879","at":"2025-10-11","quote":"B-1,6 사이트(7mX8m , 파쇄석)","text":"7×8m","n":1}
 {"cid":"101880","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"101880","attr":"SITE_SIZE","value":"8×10m","grade":"CONFIRMED","src":"gocamping","count":22}
 {"cid":"101880","attr":"SITE_SIZE","value":"8×13m","grade":"CONFIRMED","src":"gocamping","count":1}
@@ -3355,6 +3362,7 @@
 {"cid":"101916","attr":"SITE_SURFACE","value":"DECK","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030122","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"101916","attr":"SITE_SURFACE","value":"GRAVEL","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030122","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"101917","attr":"SITE_SIZE","value":"9×8m","grade":"CONFIRMED","src":"gocamping","count":11}
+{"cid":"101917","attr":"SITE_SIZE","value":"9×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/jjww6530/224035708217","at":"2025-10-09","quote":"퇴실 11시 달빛수월 안내도 사이트 면적 9*8m 바닥 파쇄석 주차 사이트 옆 캠핑카, 트레일러 진입가능 이용수칙 인원...","text":"9×8m","n":1}
 {"cid":"101920","attr":"SITE_SIZE","value":"9×8m","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"101920","attr":"SITE_SIZE","value":"9×9m","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"101928","attr":"SITE_SIZE","value":"3×4m","grade":"OPERATOR","src":"operator_discovered","url":"http://ongillglamping.com/reserve","at":"2026-10-20T01:06:49.138Z","quote":"수영장크기 : 3M * 4M, 수심 약 100cm","text":"3×4m"}
@@ -3676,5 +3684,7 @@
 {"cid":"pilot-007-soeggol","attr":"SITE_SURFACE","value":"GRAVEL","grade":"VERIFIED","src":"pilot_verified","url":"https://booking.naver.com/booking/3/bizes/soeggol","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-009-ninehills","attr":"SITE_SIZE","value":"7×8m","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/ninehills","at":"2026-10-15T09:00:00+09:00","text":"데크힐 B구역","count":20}
 {"cid":"pilot-009-ninehills","attr":"SITE_SIZE","value":"8×9m","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/ninehills","at":"2026-10-15T09:00:00+09:00","text":"플레이 오토 A구역","count":40}
+{"cid":"pilot-009-ninehills","attr":"SITE_SIZE","value":"7×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/redcase7878/224417949366","at":"2026-09-20","quote":"개별 샤워장 운영 용인 나인힐스 캠핑장 파쇄석/데크 혼합 7m x 8m 주말 기준 1박 5만 5천 원 600W 이하...편의시설 이용 시간이 엄격하게 제한되는 경향이 있습니다.","text":"7×8m","n":1}
+{"cid":"pilot-009-ninehills","attr":"SITE_SIZE","value":"8×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/redcase7878/224417949366","at":"2026-09-20","quote":"8m x 8m 잔디/파쇄석 주말 기준 1박 3만 원 600W 이하","text":"8×8m","n":1}
 {"cid":"pilot-009-ninehills","attr":"SITE_SURFACE","value":"DECK","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/ninehills","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-009-ninehills","attr":"SITE_SURFACE","value":"GRAVEL","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/ninehills","at":"2026-10-15T09:00:00+09:00"}

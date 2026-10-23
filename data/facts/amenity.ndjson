@@ -12870,6 +12870,8 @@
 {"cid":"102377","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"매점"}
 {"cid":"102377","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"와이파이(일부 안내)"}
 {"cid":"102377","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"hangang-nanji","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-10-23"}
+{"cid":"hangang-ttukseom","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-10-23"}
 {"cid":"osm-n469713235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/469713235","at":"2026-10-23","text":"물놀이장"}
 {"cid":"osm-n469713235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/469713235","at":"2026-10-23"}
 {"cid":"osm-n2261019059","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/2261019059","at":"2026-10-23","text":"물놀이장"}
@@ -12911,14 +12913,24 @@
 {"cid":"osm-n14219544692","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/14219544692","at":"2026-10-23"}
 {"cid":"osm-r6033901","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/6033901","at":"2026-10-23","text":"물놀이장"}
 {"cid":"osm-r6033901","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/6033901","at":"2026-10-23"}
+{"cid":"osm-r11313014","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/11313014","at":"2026-10-23"}
+{"cid":"osm-r14696524","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/14696524","at":"2026-10-23"}
+{"cid":"osm-w468696651","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/468696651","at":"2026-10-23"}
 {"cid":"osm-w471345995","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/471345995","at":"2026-10-23"}
 {"cid":"osm-w473600235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/473600235","at":"2026-10-23","text":"물놀이장"}
 {"cid":"osm-w473600235","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/473600235","at":"2026-10-23"}
+{"cid":"osm-w474196879","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/474196879","at":"2026-10-23"}
+{"cid":"osm-w474196879","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/474196879","at":"2026-10-23"}
 {"cid":"osm-w474308751","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/474308751","at":"2026-10-23","text":"물놀이장"}
 {"cid":"osm-w474308751","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/474308751","at":"2026-10-23"}
 {"cid":"osm-w475055852","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/475055852","at":"2026-10-23"}
+{"cid":"osm-w489293262","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/489293262","at":"2026-10-23"}
+{"cid":"osm-w489293262","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/489293262","at":"2026-10-23"}
 {"cid":"osm-w532458435","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/532458435","at":"2026-10-23","text":"물놀이장"}
 {"cid":"osm-w532458435","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/532458435","at":"2026-10-23"}
+{"cid":"osm-w545987826","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/545987826","at":"2026-10-23"}
+{"cid":"osm-w545987826","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/545987826","at":"2026-10-23"}
+{"cid":"osm-w545987826","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/545987826","at":"2026-10-23"}
 {"cid":"osm-w567223458","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/567223458","at":"2026-10-23","text":"물놀이장"}
 {"cid":"osm-w567223458","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/567223458","at":"2026-10-23"}
 {"cid":"osm-w605846535","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/605846535","at":"2026-10-23"}
@@ -12931,8 +12943,13 @@
 {"cid":"osm-w693915512","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/693915512","at":"2026-10-23"}
 {"cid":"osm-w702360473","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/702360473","at":"2026-10-23"}
 {"cid":"osm-w721842605","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/721842605","at":"2026-10-23"}
+{"cid":"osm-w734708227","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/734708227","at":"2026-10-23"}
+{"cid":"osm-w734708227","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/734708227","at":"2026-10-23"}
 {"cid":"osm-w892201616","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/892201616","at":"2026-10-23","text":"물놀이장"}
 {"cid":"osm-w892201616","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/892201616","at":"2026-10-23"}
+{"cid":"osm-w899193999","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/899193999","at":"2026-10-23"}
+{"cid":"osm-w899193999","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/899193999","at":"2026-10-23"}
+{"cid":"osm-w899193999","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/899193999","at":"2026-10-23"}
 {"cid":"osm-w922330292","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/922330292","at":"2026-10-23","text":"물놀이장"}
 {"cid":"osm-w922330292","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/922330292","at":"2026-10-23"}
 {"cid":"osm-w979805595","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/979805595","at":"2026-10-23","text":"물놀이장"}
@@ -12952,6 +12969,8 @@
 {"cid":"osm-w1137541006","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1137541006","at":"2026-10-23"}
 {"cid":"osm-w1137541006","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1137541006","at":"2026-10-23","text":"물놀이장"}
 {"cid":"osm-w1137541006","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1137541006","at":"2026-10-23"}
+{"cid":"osm-w1187215466","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1187215466","at":"2026-10-23"}
+{"cid":"osm-w1205462338","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1205462338","at":"2026-10-23"}
 {"cid":"osm-w1221372063","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1221372063","at":"2026-10-23","text":"물놀이장"}
 {"cid":"osm-w1221372063","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1221372063","at":"2026-10-23"}
 {"cid":"osm-w1416629021","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1416629021","at":"2026-10-23","text":"물놀이장"}
@@ -12962,6 +12981,7 @@
 {"cid":"osm-w1447606327","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1447606327","at":"2026-10-23"}
 {"cid":"osm-w1479628828","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1479628828","at":"2026-10-23","text":"물놀이장"}
 {"cid":"osm-w1479628828","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1479628828","at":"2026-10-23"}
+{"cid":"osm-w1509669851","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1509669851","at":"2026-10-23"}
 {"cid":"osm-w1548091041","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1548091041","at":"2026-10-23","text":"물놀이장"}
 {"cid":"osm-w1548091041","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1548091041","at":"2026-10-23"}
 {"cid":"osm-w1562524233","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1562524233","at":"2026-10-23","text":"물놀이장"}
