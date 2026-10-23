@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-10-23T14:24:14.795Z",
+ "generated_at": "2026-10-23T15:40:03.417Z",
  "source": {
   "label": "카카오 로컬 키워드 검색 · Daum 웹 검색(공식 REST API)",
   "docs": [
@@ -37,6 +37,7 @@
   "dokdokplace.kr",
   "donahouse.kr",
   "easysearch.kr",
+  "enjoeat.com",
   "enolja.com",
   "ezday.co.kr",
   "fclh.purpleo.co.kr",
@@ -17393,7 +17394,7 @@
    "homepage": null
   },
   "2472": {
-   "checked_at": "2026-10-23T14:24:13.881Z",
+   "checked_at": "2026-10-23T15:40:02.542Z",
    "place": {
     "id": "898560745",
     "name": "원주두리캠핑장",
@@ -76110,7 +76111,7 @@
    "homepage": null
   },
   "101093": {
-   "checked_at": "2026-10-23T14:24:14.292Z",
+   "checked_at": "2026-10-23T15:40:02.906Z",
    "place": null,
    "candidates": [
     {
@@ -113826,7 +113827,7 @@
    "homepage": null
   },
   "102221": {
-   "checked_at": "2026-10-23T14:24:12.925Z",
+   "checked_at": "2026-10-23T15:40:01.456Z",
    "place": null,
    "candidates": [
     {
@@ -113838,6 +113839,18 @@
       {
        "title": "WonderWood Glamping(원더우드 글램핑) — 경기 포천시 캠핑장",
        "url": "https://campingdogam.com/camp/102221/"
+      }
+     ]
+    },
+    {
+     "host": "enjoeat.com",
+     "url": "https://enjoeat.com/camping/102221",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "WonderWood Glamping(원더우드 글램핑) – 포천시 일반야영장 시설·날씨",
+       "url": "https://enjoeat.com/camping/102221"
       }
      ]
     },
@@ -113975,7 +113988,7 @@
    "homepage": null
   },
   "102229": {
-   "checked_at": "2026-10-23T14:24:12.924Z",
+   "checked_at": "2026-10-23T15:40:01.453Z",
    "place": null,
    "candidates": [],
    "needs_homepage": false,
@@ -114792,9 +114805,22 @@
    "homepage": null
   },
   "102270": {
-   "checked_at": "2026-10-23T14:24:12.925Z",
+   "checked_at": "2026-10-23T15:40:01.454Z",
    "place": null,
-   "candidates": [],
+   "candidates": [
+    {
+     "host": "enjoeat.com",
+     "url": "https://enjoeat.com/camping/102270",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "명랑가출 – 양평군 일반야영장 예약·시설·날씨",
+       "url": "https://enjoeat.com/camping/102270"
+      }
+     ]
+    }
+   ],
    "needs_homepage": true,
    "homepage": null
   },
@@ -117708,7 +117734,7 @@
    "homepage": null
   },
   "102377": {
-   "checked_at": "2026-10-23T14:24:12.902Z",
+   "checked_at": "2026-10-23T15:40:01.425Z",
    "place": null,
    "candidates": [],
    "needs_homepage": true,
