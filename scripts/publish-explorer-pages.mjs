@@ -191,7 +191,7 @@ if (placeSource) {
     if (full) return https(full);
     const media = p.find((u) => String(u).startsWith("media/")) ?? (c.ph ? `media/${c.ph}` : "");
     if (media) return SITE + media.replace(/-t\.webp$/, "-l.webp");
-    return `${SITE}images/og-image.png`;
+    return `${SITE}images/og-image.jpg`;
   };
   const typesOf = (c) => (Array.isArray(c.types) ? c.types : String(c.types ?? "").match(/[가-힣A-Za-z]+/g) ?? []).map((t) => t.replace(/야영장$/, "").replace(/^자동차$/, "오토").replace(/^카라반$/, "카라반").replace(/^글램핑$/, "글램핑")).filter(Boolean);
   const feeOf = (c) => (typeof c.fee === "object" ? c.fee?.text : String(c.fee ?? "").match(/'text': '([^']+)'/)?.[1]) ?? "";
@@ -241,7 +241,7 @@ if (placeSource) {
     const head = `<meta name="description" content="${attr(description)}"><link rel="canonical" href="${attr(url)}">`
       + `<meta property="og:type" content="website"><meta property="og:site_name" content="렛츠 캠핑"><meta property="og:locale" content="ko_KR">`
       + `<meta property="og:title" content="${attr(title)}"><meta property="og:description" content="${attr(description)}"><meta property="og:url" content="${attr(url)}">`
-      + `<meta property="og:image" content="${attr(`${SITE}images/og-image.png`)}"><meta name="twitter:card" content="summary_large_image">`;
+      + `<meta property="og:image" content="${attr(`${SITE}images/og-image.jpg`)}"><meta name="twitter:card" content="summary_large_image">`;
     const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${attr(title)}</title>${head}${STUB_JS}</head><body><h1>${attr(where)} 캠핑장</h1><p>${attr(description)}</p></body></html>`;
     await mkdir(`${rootOut}region/${sd}${sg ? `/${sg}` : ""}`, { recursive: true });
     await writeFile(`${rootOut}region/${sd}${sg ? `/${sg}` : ""}/index.html`, html);
