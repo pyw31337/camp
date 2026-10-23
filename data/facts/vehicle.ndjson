@@ -130,6 +130,8 @@
 {"cid":"349","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"350","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"350","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"355","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"355","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"356","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"356","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"357","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -288,6 +290,8 @@
 {"cid":"689","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"696","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"696","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"697","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"697","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"698","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"698","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"699","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -763,6 +767,8 @@
 {"cid":"1940","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1941","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1941","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1949","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1949","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1957","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1957","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://analogday.co.kr/","at":"2026-10-20T01:27:53.029Z","quote":"개별사이트 바로옆 주차가능"}
 {"cid":"1957","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2289,6 +2295,8 @@
 {"cid":"8137","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8138","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8138","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"8142","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"8142","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8145","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8145","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8149","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -2418,6 +2426,8 @@
 {"cid":"100114","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100117","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100117","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100122","attr":"CARAVAN_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100122","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100126","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100126","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100128","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
@@ -6279,6 +6289,14 @@
 {"cid":"102371","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102372","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102372","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102373","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102373","at":"2026-10-19T00:00:00+09:00"}
+{"cid":"102373","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102373","at":"2026-10-19T00:00:00+09:00"}
+{"cid":"102374","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102374","at":"2026-10-19T00:00:00+09:00"}
+{"cid":"102374","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102374","at":"2026-10-19T00:00:00+09:00"}
+{"cid":"102375","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102375","at":"2026-10-19T00:00:00+09:00"}
+{"cid":"102375","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102375","at":"2026-10-19T00:00:00+09:00"}
+{"cid":"102376","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102376","at":"2026-10-19T00:00:00+09:00"}
+{"cid":"102376","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102376","at":"2026-10-19T00:00:00+09:00"}
 {"cid":"pilot-002-sureui","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-003-duruwell","attr":"PARKING_MODE","value":"SHARED_NEARBY","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030095","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-004-haengun","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/haengun","at":"2026-10-15T09:00:00+09:00"}
