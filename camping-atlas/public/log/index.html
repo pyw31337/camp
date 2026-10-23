@@ -8,858 +8,265 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
+  /* 운영 기록 대시보드(소유자 2026-10-23 개편): 밑줄 탭 메뉴 · 대시보드 배치 · 모든 아이콘 SVG ·
+     시스템 UI 없음(드롭다운·체크박스·스위치 직접 그림) · 모든 동작에 움직임(줄어듦 설정 존중). */
   :root {
     color-scheme: light;
     --font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
-    --ink: #101414;
-    --ink-2: #4b5350;
-    --ink-3: #747c78;
-    --bg: #f5f6f4;
-    --paper: #ffffff;
-    --line: #e3e7e2;
-    --line-subtle: #edf0ec;
-    --accent: #00875a;
-    --accent-tint: #e6f6ee;
-    --volt: #c8ff00;
-    --flame: #e54b2c;
-    --flame-tint: #fef0ec;
-    --cobalt: #2563eb;
-    --cobalt-tint: #eff6ff;
-    --r: 16px;
-    --r-s: 10px;
-    --shadow-s: 0 1px 3px rgba(16, 20, 20, 0.04), 0 4px 12px rgba(16, 20, 20, 0.03);
-    --shadow-m: 0 4px 16px rgba(16, 20, 20, 0.08);
+    --ink: #101414; --ink-2: #4b5350; --ink-3: #747c78;
+    --bg: #f5f6f4; --paper: #fff; --line: #e3e7e2; --line-2: #edf0ec;
+    --accent: #00875a; --accent-tint: #e6f6ee; --volt: #c8ff00;
+    --flame: #e54b2c; --flame-tint: #fef0ec;
+    --cobalt: #2563eb; --cobalt-tint: #eff6ff;
+    --violet: #7c3aed; --violet-tint: #f3eefe;
+    --r: 16px; --r-s: 10px; --tap: 44px; --fs-min: .75rem;
+    --shadow-s: 0 1px 3px rgba(16,20,20,.04), 0 4px 12px rgba(16,20,20,.03);
+    --shadow-m: 0 8px 28px rgba(16,20,20,.12);
+    --ease: cubic-bezier(.2,.8,.2,1); --spring: cubic-bezier(.16,1,.3,1);
   }
   *, *::before, *::after { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: var(--font);
-    background: var(--bg);
-    color: var(--ink);
-    line-height: 1.55;
-    letter-spacing: -0.015em;
-    -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
-  }
-  button, input, select { font: inherit; color: inherit; }
-  a { color: inherit; text-decoration: none; }
-
-  /* ── 상단 헤더 ─────────────────────────────────── */
-  /* 사이트 헤더·푸터·하단 탭은 공통 틀(../shell.css)을 쓴다. 아래는 이 쪽 제목 줄(대시보드 이름 + 새로고침). */
-  .header-in {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-  .brand-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .log-head { margin-bottom: 16px; }
-  .log-head h1, .brand-title strong { margin: 0; }
-  .brand-title {
-    display: flex;
-    flex-direction: column;
-  }
-  .brand-title strong {
-    font-size: 1.05rem;
-    font-weight: 850;
-    line-height: 1.2;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .brand-title span {
-    font-size: 0.76rem;
-    color: var(--ink-3);
-    font-weight: 500;
-  }
-  .live-dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    background: #00875a;
-    border-radius: 50%;
-    box-shadow: 0 0 0 0 rgba(0, 135, 90, 0.7);
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 135, 90, 0.7); }
-    70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(0, 135, 90, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 135, 90, 0); }
-  }
-
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    height: 36px;
-    padding: 0 12px;
-    font-size: 0.84rem;
-    font-weight: 700;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: var(--paper);
-    color: var(--ink-2);
-    cursor: pointer;
-    transition: all 0.15s ease;
-    white-space: nowrap;
-    text-decoration: none;
-  }
-  .btn:hover {
-    background: var(--bg);
-    color: var(--ink);
-    border-color: #cfd4ce;
-  }
-  .btn.active, .btn-primary {
-    background: var(--ink);
-    color: #fff;
-    border-color: var(--ink);
-  }
-  .btn.active:hover, .btn-primary:hover {
-    background: #252b28;
-    color: #fff;
-  }
-  .btn-accent {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-  }
-  .btn-accent:hover {
-    background: #00734c;
-    color: #fff;
-  }
-  .btn-icon {
-    width: 36px;
-    padding: 0;
-  }
-  .btn-icon svg { width: 16px; height: 16px; }
-
-  /* ── 레이아웃 ───────────────────────────────────── */
-  .layout {
-    width: 100%;
-    max-width: var(--content);
-    margin: 0 auto;
-    padding: 24px var(--gut) var(--page-pad-bottom);
-    box-sizing: border-box;
-  }
-
-  /* ── 통계 카드 ─────────────────────────────────── */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  .stat-card {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--r);
-    padding: 16px 18px;
-    box-shadow: var(--shadow-s);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-  }
-  .stat-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-m);
-  }
-  .stat-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    color: var(--ink-3);
-    font-size: 0.82rem;
-    font-weight: 700;
-  }
-  .stat-icon {
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    display: grid;
-    place-items: center;
-    background: var(--bg);
-    color: var(--ink-2);
-  }
-  .stat-icon.green { background: var(--accent-tint); color: var(--accent); }
-  .stat-icon.red { background: var(--flame-tint); color: var(--flame); }
-  .stat-icon.blue { background: var(--cobalt-tint); color: var(--cobalt); }
-  .stat-icon.volt { background: #f5fce0; color: #526b00; }
-  .stat-icon svg { width: 16px; height: 16px; }
-  .stat-num {
-    font-size: 1.85rem;
-    font-weight: 850;
-    line-height: 1.1;
-    color: var(--ink);
-    letter-spacing: -0.03em;
-    margin-bottom: 4px;
-  }
-  .stat-sub {
-    font-size: 0.78rem;
-    color: var(--ink-3);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .stat-sub b { color: var(--ink-2); font-weight: 700; }
-
-  /* ── 퀵 인사이트 바 (TOP 캠핑장 칩) ─────────────── */
-  .insights-bar {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--r);
-    padding: 12px 16px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    box-shadow: var(--shadow-s);
-  }
-  .insights-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.82rem;
-    font-weight: 800;
-    color: var(--ink-2);
-    white-space: nowrap;
-  }
-  .insights-chips {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    flex: 1;
-  }
-  .chip-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 4px 10px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--ink-2);
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-  .chip-tag:hover {
-    background: var(--accent-tint);
-    color: var(--accent);
-    border-color: #b7e5ce;
-  }
-  .chip-tag .chip-cnt {
-    display: inline-block;
-    background: rgba(0,0,0,0.06);
-    color: var(--ink-2);
-    border-radius: 999px;
-    padding: 1px 6px;
-    font-size: 0.72rem;
-  }
-
-  /* ── 컨트롤 툴바 (탭, 검색, 필터) ──────────────── */
-  .control-box {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--r);
-    padding: 14px 16px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow-s);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .tabs-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .tabs-group {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  .tabs-group::-webkit-scrollbar { display: none; }
-  .tab-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    height: 36px;
-    padding: 0 14px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: var(--bg);
-    color: var(--ink-2);
-    font-size: 0.86rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    white-space: nowrap;
-  }
-  .tab-pill:hover {
-    background: #eaece8;
-    color: var(--ink);
-  }
-  .tab-pill.on {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-  }
-  .tab-pill .tab-badge {
-    background: rgba(0,0,0,0.08);
-    padding: 1px 6px;
-    border-radius: 999px;
-    font-size: 0.74rem;
-  }
-  .tab-pill.on .tab-badge {
-    background: rgba(255,255,255,0.25);
-    color: #fff;
-  }
-
-  .filters-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .search-wrap {
-    position: relative;
-    flex: 1;
-    min-width: 240px;
-  }
-  .search-wrap svg {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
-    color: var(--ink-3);
-    pointer-events: none;
-  }
-  .search-input {
-    width: 100%;
-    height: 38px;
-    padding: 0 32px 0 36px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: var(--bg);
-    color: var(--ink);
-    font-size: 0.86rem;
-    outline: none;
-    transition: all 0.15s ease;
-  }
-  .search-input:focus {
-    background: #fff;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(0, 135, 90, 0.12);
-  }
-  .search-clear {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    border: 0;
-    background: #cdd2cc;
-    color: #fff;
-    border-radius: 50%;
-    font-size: 11px;
-    display: none;
-    place-items: center;
-    cursor: pointer;
-  }
-  .search-clear.show { display: grid; }
-
-  .select-pill {
-    height: 38px;
-    padding: 0 12px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: var(--bg);
-    color: var(--ink-2);
-    font-size: 0.82rem;
-    font-weight: 700;
-    outline: none;
-    cursor: pointer;
-  }
-  .select-pill:focus { border-color: var(--accent); }
-
-  .filter-summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 0.8rem;
-    color: var(--ink-3);
-    padding: 0 4px;
-  }
-
-  /* ── 피드 목록 ─────────────────────────────────── */
-  .feed-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .date-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .date-divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 12px 0 4px;
-    color: var(--ink-3);
-    font-size: 0.84rem;
-    font-weight: 800;
-  }
-  .date-divider::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-  }
-  .log-card {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--r);
-    padding: 16px 18px;
-    box-shadow: var(--shadow-s);
-    transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .log-card:hover {
-    border-color: #cfd4ce;
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-m);
-  }
-  .log-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-  }
-  .log-time {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    color: var(--ink-3);
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
-  .log-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.74rem;
-    font-weight: 850;
-    border-radius: 999px;
-    padding: 3px 10px;
-    line-height: 1.3;
-  }
-  .badge-add { background: var(--accent-tint); color: var(--accent); }
-  .badge-remove { background: var(--flame-tint); color: var(--flame); }
-  .badge-comment { background: var(--cobalt-tint); color: var(--cobalt); }
-  .badge-deleted { background: #f0eee8; color: var(--ink-3); }
-
-  .log-main {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .camp-title-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .camp-name-link {
-    font-size: 1.06rem;
-    font-weight: 850;
-    color: var(--ink);
-    line-height: 1.35;
-    transition: color 0.12s ease;
-  }
-  .camp-name-link:hover {
-    color: var(--accent);
-    text-decoration: underline;
-  }
-  .camp-links {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .camp-pill-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.74rem;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 6px;
-    background: var(--bg);
-    color: var(--ink-2);
-    border: 1px solid var(--line);
-    text-decoration: none;
-    transition: all 0.12s ease;
-  }
-  .camp-pill-btn:hover {
-    background: #e5e9e4;
-    color: var(--ink);
-  }
-  .camp-pill-btn.primary {
-    background: var(--accent-tint);
-    color: var(--accent);
-    border-color: #b7e5ce;
-  }
-
-  /* 댓글 본문 박스 */
-  .comment-box {
-    background: var(--bg);
-    border-left: 3px solid var(--cobalt);
-    border-radius: 4px 10px 10px 4px;
-    padding: 10px 14px;
-    margin: 4px 0 2px;
-    font-size: 0.92rem;
-    line-height: 1.5;
-    color: var(--ink);
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
-  .comment-box.is-deleted {
-    opacity: 0.6;
-    text-decoration: line-through;
-    border-left-color: var(--ink-3);
-  }
-
-  .log-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px 14px;
-    padding-top: 6px;
-    border-top: 1px solid var(--line-subtle);
-    font-size: 0.8rem;
-    color: var(--ink-3);
-  }
-  .meta-left, .meta-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .device-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 700;
-    color: var(--ink-2);
-    background: var(--bg);
-    padding: 3px 8px;
-    border-radius: 6px;
-    border: 1px solid var(--line);
-  }
-  .device-pill svg { width: 13px; height: 13px; color: var(--ink-3); }
-  .btn-info-detail {
-    border: 0;
-    background: rgba(0,0,0,0.06);
-    color: var(--ink-2);
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    font-size: 10px;
-    font-weight: 800;
-    cursor: pointer;
-    display: inline-grid;
-    place-items: center;
-    padding: 0;
-    margin-left: 2px;
-    transition: background 0.15s ease;
-  }
-  .btn-info-detail:hover {
-    background: var(--ink);
-    color: #fff;
-  }
-  .ip-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.78rem;
-    background: var(--bg);
-    padding: 2px 7px;
-    border-radius: 6px;
-    cursor: pointer;
-    border: 1px solid transparent;
-    transition: all 0.12s ease;
-  }
-  .ip-pill:hover {
-    border-color: var(--line);
-    background: #eef1ec;
-    color: var(--ink);
-  }
-
-  /* ── 스켈레톤 및 빈 상태 ─────────────────────────── */
-  .skeleton-card {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--r);
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .skeleton-line {
-    height: 14px;
-    background: linear-gradient(90deg, #ecefe9 25%, #f6f8f5 50%, #ecefe9 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-    border-radius: 6px;
-  }
-  @keyframes shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
-  .empty-state {
-    background: var(--paper);
-    border: 1px dashed var(--line);
-    border-radius: var(--r);
-    padding: 56px 20px;
-    text-align: center;
-    color: var(--ink-3);
-  }
-  .empty-state svg {
-    width: 44px;
-    height: 44px;
-    color: #b0b7af;
-    margin-bottom: 12px;
-  }
-  .empty-state h3 {
-    margin: 0 0 6px;
-    font-size: 1.05rem;
-    color: var(--ink);
-  }
-  .empty-state p { margin: 0; font-size: 0.88rem; }
-
-  /* ── 모달 다이얼로그 ────────────────────────────── */
-  dialog.modal-sheet {
-    border: 0;
-    border-radius: 20px;
-    padding: 0;
-    width: min(540px, calc(100vw - 32px));
-    box-shadow: 0 16px 48px rgba(16, 20, 20, 0.22);
-    background: var(--paper);
-    color: var(--ink);
-  }
-  dialog.modal-sheet::backdrop {
-    background: rgba(16, 20, 20, 0.45);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-  }
-  .modal-in {
-    padding: 22px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .modal-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-  .modal-head h3 {
-    margin: 0;
-    font-size: 1.15rem;
-    font-weight: 850;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .modal-close-btn {
-    width: 32px;
-    height: 32px;
-    border: 0;
-    background: var(--bg);
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 16px;
-    display: grid;
-    place-items: center;
-    color: var(--ink-2);
-  }
-  .modal-close-btn:hover { background: #e3e7e1; color: var(--ink); }
-
-  .kv-table {
-    display: grid;
-    grid-template-columns: 86px 1fr;
-    gap: 8px 12px;
-    font-size: 0.88rem;
-    background: var(--bg);
-    padding: 14px 16px;
-    border-radius: 12px;
-    border: 1px solid var(--line);
-  }
-  .kv-table dt {
-    color: var(--ink-3);
-    font-weight: 700;
-  }
-  .kv-table dd {
-    margin: 0;
-    font-weight: 600;
-    word-break: break-all;
-    color: var(--ink);
-  }
-  .ua-box {
-    background: #181d1b;
-    color: #e0e6e2;
-    padding: 12px 14px;
-    border-radius: 10px;
-    font-family: ui-monospace, Menlo, Consolas, monospace;
-    font-size: 0.76rem;
-    line-height: 1.45;
-    word-break: break-all;
-    max-height: 120px;
-    overflow-y: auto;
-  }
-
-  /* ── 토스트 메시지 ──────────────────────────────── */
-  .toast-box {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%) translateY(30px);
-    background: #101414;
-    color: #fff;
-    padding: 10px 18px;
-    border-radius: 999px;
-    font-size: 0.86rem;
-    font-weight: 700;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 200;
-  }
-  .toast-box.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-
-  /* ── 반응형 미디어 쿼리 ─────────────────────────── */
-  @media (max-width: 840px) {
-    .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 560px) {
-    .header-in { flex-direction: column; align-items: stretch; gap: 10px; }
-    .brand-group { justify-content: space-between; }
-    .header-actions { justify-content: flex-end; }
-    .stats-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-    .stat-card { padding: 12px 14px; }
-    .stat-num { font-size: 1.5rem; }
-    .camp-title-row { flex-direction: column; align-items: flex-start; gap: 6px; }
-    .log-meta { flex-direction: column; align-items: flex-start; gap: 6px; }
-  }
-
-  /* ── 운영 대시보드 사용성 개편(2026-10-21) ──────────────
-     원칙: 탭 대상 44px 이상(--tap), 글자 12px 이상(--fs-min), 320px에서 가로 넘침 없음.
-     모바일: 헤더는 한 줄(브랜드 + 아이콘 동작), TOP 캠핑장은 순위 목록, 필터는 위에 붙는 막대. */
-  :root { --tap: 44px; --fs-min: .75rem; }
   html, body { overflow-x: hidden; }
-  .btn, .tab-pill, .select-pill, .search-input, .chip-tag { min-height: var(--tap); }
-  .btn-icon { width: var(--tap); padding: 0; }
-  .camp-pill-btn { min-height: 32px; padding: 4px 10px; font-size: .8rem; position: relative; }
-  .camp-pill-btn::after, .btn-info-detail::after, .ip-pill::after { content: ""; position: absolute; left: 50%; top: 50%; width: max(100%, var(--tap)); height: max(100%, var(--tap)); transform: translate(-50%, -50%); }
-  .btn { min-width: var(--tap); }
-  .camp-name-link { display: inline-flex; align-items: center; min-height: var(--tap); }
-  .btn-info-detail { position: relative; width: 24px; height: 24px; font-size: var(--fs-min); }
-  .ip-pill { position: relative; }
-  .tab-pill .tab-badge, .chip-tag .chip-cnt { font-size: var(--fs-min); }
-  .log-badge { font-size: .78rem; }
-  .modal-close-btn { width: var(--tap); height: var(--tap); }
-  .control-box { position: sticky; top: 8px; z-index: 50; }
-  .insights-chips { min-width: 0; }
-  .chip-tag { max-width: 100%; }
-  .chip-tag > span:first-child, .chip-tag { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .camp-name-link { overflow-wrap: anywhere; }
+  body { margin: 0; font-family: var(--font); background: var(--bg); color: var(--ink); line-height: 1.5; letter-spacing: -.015em; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+  button, input { font: inherit; color: inherit; }
+  a { color: inherit; text-decoration: none; }
+  svg.ic { width: 16px; height: 16px; flex: none; fill: currentColor; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .layout { width: 100%; max-width: var(--content); margin: 0 auto; padding: 24px var(--gut) var(--page-pad-bottom); }
+
+  /* ── 제목 줄 ── */
+  .log-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+  .log-head h1 { margin: 0; font-size: 1.35rem; font-weight: 850; display: flex; align-items: center; gap: 10px; letter-spacing: -.03em; }
+  .log-head p { margin: 2px 0 0; color: var(--ink-3); font-size: .84rem; }
+  .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 0 rgba(0,135,90,.6); animation: pulse 2s infinite; }
+  .live-dot.off { background: var(--ink-3); animation: none; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 7px rgba(0,135,90,0); } 100% { box-shadow: 0 0 0 0 rgba(0,135,90,0); } }
+  .head-actions { display: flex; align-items: center; gap: 8px; flex: none; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink-2); font-size: .84rem; font-weight: 750; cursor: pointer; white-space: nowrap; transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease), transform .15s var(--ease); }
+  .btn:hover { background: var(--bg); color: var(--ink); }
+  .btn:active { transform: scale(.96); }
+  .btn-icon { width: 40px; padding: 0; }
+  .btn .ic.spin { animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── 스위치(자동 갱신) · 체크박스 — 시스템 UI 대신 직접 그림 ── */
+  .sw, .ck { position: relative; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; cursor: pointer; user-select: none; font-size: .84rem; font-weight: 750; color: var(--ink-2); }
+  .sw input, .ck input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+  .sw-track { position: relative; width: 38px; height: 22px; border-radius: 999px; background: #d5dad4; transition: background .25s var(--ease); }
+  .sw-thumb { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: transform .3s var(--spring); }
+  .sw input:checked + .sw-track { background: var(--accent); }
+  .sw input:checked + .sw-track .sw-thumb { transform: translateX(16px); }
+  .sw input:focus-visible + .sw-track, .ck input:focus-visible + .ck-box { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .ck-box { width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid #c3c9c2; background: #fff; display: grid; place-items: center; transition: background .2s var(--ease), border-color .2s var(--ease); }
+  .ck-box svg { width: 13px; height: 13px; fill: none; stroke: #fff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 20; stroke-dashoffset: 20; transition: stroke-dashoffset .3s var(--ease) .05s; }
+  .ck input:checked + .ck-box { background: var(--accent); border-color: var(--accent); }
+  .ck input:checked + .ck-box svg { stroke-dashoffset: 0; }
+
+  /* ── 지표 타일 ── */
+  .kpis { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .kpi { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; box-shadow: var(--shadow-s); display: grid; gap: 6px; transition: transform .2s var(--ease), box-shadow .2s var(--ease); }
+  .kpi:hover { transform: translateY(-2px); box-shadow: var(--shadow-m); }
+  .kpi-head { display: flex; align-items: center; justify-content: space-between; font-size: .8rem; font-weight: 750; color: var(--ink-3); }
+  .kpi-ic { width: 28px; height: 28px; border-radius: 9px; display: grid; place-items: center; }
+  .kpi-ic svg { width: 15px; height: 15px; fill: currentColor; }
+  .kpi-num { font-size: 1.75rem; font-weight: 850; letter-spacing: -.03em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .kpi-sub { font-size: .78rem; color: var(--ink-3); }
+  .kpi-sub b { color: var(--ink-2); }
+  .t-add { background: var(--accent-tint); color: var(--accent); }
+  .t-rm { background: var(--flame-tint); color: var(--flame); }
+  .t-cmt { background: var(--cobalt-tint); color: var(--cobalt); }
+  .t-view { background: var(--violet-tint); color: var(--violet); }
+  .t-dup { background: #f0eee8; color: var(--ink-3); }
+
+  /* ── 대시보드 배치 ── */
+  .dash { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; align-items: start; }
+  .panel { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow-s); }
+  .panel-h { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 16px 0; }
+  .panel-h { flex-wrap: wrap; }
+  .panel-h h2 { white-space: nowrap; margin: 0; font-size: .95rem; font-weight: 850; display: flex; align-items: center; gap: 6px; }
+  .panel-b { padding: 12px 16px 16px; }
+  .dash > * { min-width: 0; }
+  .side { display: grid; gap: 16px; position: sticky; top: 12px; }
+
+  /* 14일 막대 그래프 */
+  .chart-wrap { margin-bottom: 16px; }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: .76rem; color: var(--ink-3); font-weight: 700; }
+  .legend i { display: inline-block; width: 9px; height: 9px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+  .chart { width: 100%; height: 150px; display: block; }
+  .chart .bar { transform-box: fill-box; transform-origin: bottom; animation: grow .6s var(--spring) both; animation-delay: calc(var(--d, 0) * 25ms); }
+  @keyframes grow { from { transform: scaleY(0); } }
+  .chart text { font-size: 10px; fill: var(--ink-3); font-family: var(--font); }
+
+  /* ── 밑줄 탭 메뉴 ── */
+  .feed-panel { overflow: visible; }
+  .utabs { position: relative; display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid var(--line); padding: 0 8px; }
+  .utabs::-webkit-scrollbar { display: none; }
+  .utab { position: relative; flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 50px; padding: 0 12px; border: 0; background: none; cursor: pointer; font-size: .9rem; font-weight: 750; color: var(--ink-3); transition: color .2s var(--ease); }
+  .utab:hover { color: var(--ink); }
+  .utab[aria-selected="true"] { color: var(--ink); }
+  .utab b { font-size: var(--fs-min); font-weight: 800; padding: 1px 7px; border-radius: 999px; background: var(--bg); color: var(--ink-3); transition: background .2s, color .2s; font-variant-numeric: tabular-nums; }
+  .utab[aria-selected="true"] b { background: var(--ink); color: #fff; }
+  .utab:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; border-radius: 8px; }
+  .utabs-ink { position: absolute; left: 0; bottom: -1px; height: 3px; width: 0; border-radius: 3px 3px 0 0; background: var(--ink); transition: transform .35s var(--spring), width .35s var(--spring); pointer-events: none; }
+
+  /* 검색·드롭다운 */
+  .tools { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 12px 16px; border-bottom: 1px solid var(--line-2); }
+  .search { position: relative; flex: 1 1 220px; min-width: 0; }
+  .search > .ic { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--ink-3); pointer-events: none; }
+  .search input { width: 100%; height: 40px; padding: 0 38px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); outline: none; font-size: .86rem; transition: background .2s, border-color .2s, box-shadow .2s; -webkit-appearance: none; appearance: none; }
+  .search input::-webkit-search-cancel-button { display: none; }
+  .search input:focus { background: #fff; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,135,90,.12); }
+  .search-clear { position: absolute; right: 6px; top: 50%; width: 28px; height: 28px; border: 0; border-radius: 50%; background: transparent; color: var(--ink-3); display: grid; place-items: center; cursor: pointer; transform: translateY(-50%) scale(.6); opacity: 0; pointer-events: none; transition: opacity .2s var(--ease), transform .25s var(--spring), background .2s; }
+  .search-clear.show { opacity: 1; transform: translateY(-50%) scale(1); pointer-events: auto; }
+  .search-clear:hover { background: var(--line-2); color: var(--ink); }
+  .dd { position: relative; }
+  .dd-btn { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); color: var(--ink-2); font-size: .84rem; font-weight: 750; cursor: pointer; white-space: nowrap; transition: background .2s, border-color .2s; }
+  .dd-btn:hover, .dd[data-open] .dd-btn { background: #fff; border-color: #cfd4ce; }
+  .dd-btn.set { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .dd-caret { transition: transform .3s var(--spring); }
+  .dd[data-open] .dd-caret { transform: rotate(180deg); }
+  .dd-menu { position: absolute; z-index: 60; top: calc(100% + 6px); right: 0; min-width: 190px; margin: 0; padding: 6px; list-style: none; background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow-m); opacity: 0; transform: translateY(-6px) scale(.97); transform-origin: top right; pointer-events: none; transition: opacity .18s var(--ease), transform .25s var(--spring); }
+  .dd[data-open] .dd-menu { opacity: 1; transform: none; pointer-events: auto; }
+  .dd-opt { display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 10px; border-radius: 9px; font-size: .86rem; font-weight: 650; color: var(--ink-2); cursor: pointer; outline: none; transition: background .15s; }
+  .dd-opt:hover, .dd-opt:focus { background: var(--bg); color: var(--ink); }
+  .dd-opt .ic { color: var(--ink-3); }
+  .radio { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #c3c9c2; display: grid; place-items: center; flex: none; transition: border-color .2s; }
+  .radio::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); transform: scale(0); transition: transform .25s var(--spring); }
+  .dd-opt[aria-selected="true"] { color: var(--ink); }
+  .dd-opt[aria-selected="true"] .radio { border-color: var(--accent); }
+  .dd-opt[aria-selected="true"] .radio::after { transform: scale(1); }
+  .cks { display: flex; gap: 4px 14px; flex-wrap: wrap; }
+  .sum { display: flex; align-items: center; justify-content: space-between; gap: 6px 12px; flex-wrap: wrap; padding: 8px 16px; font-size: .78rem; color: var(--ink-3); border-bottom: 1px solid var(--line-2); }
+
+  /* ── 피드(표 모양 행) ── */
+  .feed { padding: 4px 0 8px; min-height: 120px; transition: opacity .14s var(--ease); }
+  .feed.leaving { opacity: 0; }
+  .day { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 8px; padding: 10px 16px 6px; background: linear-gradient(#fff 70%, rgba(255,255,255,0)); font-size: .78rem; font-weight: 800; color: var(--ink-3); }
+  .day span:last-child { margin-left: auto; font-weight: 700; }
+  .row { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; align-items: center; gap: 4px 12px; padding: 10px 16px; border-top: 1px solid var(--line-2); transition: background .2s; }
+  .row:hover { background: #fafbf9; }
+  .row.enter { animation: rowIn .45s var(--spring) both; animation-delay: calc(var(--i, 0) * 28ms); }
+  .row.fresh { animation: rowIn .45s var(--spring) both, flash 1.6s var(--ease) .2s; }
+  @keyframes rowIn { from { opacity: 0; transform: translateY(8px); } }
+  @keyframes flash { 0%, 100% { background: transparent; } 30% { background: #fff7cc; } }
+  .row.dup { opacity: .55; }
+  .tchip { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; }
+  .tchip svg { width: 16px; height: 16px; fill: currentColor; }
+  .r-main { min-width: 0; display: grid; gap: 2px; }
+  .r-title { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .r-name { font-weight: 800; font-size: .95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color .15s; }
+  .r-name:hover { color: var(--accent); }
+  .tag { flex: none; font-size: var(--fs-min); font-weight: 800; padding: 1px 7px; border-radius: 999px; }
+  .r-meta { display: flex; align-items: center; gap: 6px 10px; flex-wrap: wrap; font-size: .78rem; color: var(--ink-3); }
+  .r-meta .ic { width: 13px; height: 13px; }
+  .r-meta span { display: inline-flex; align-items: center; gap: 4px; }
+  .r-cmt { margin-top: 4px; padding: 8px 12px; background: var(--bg); border-left: 3px solid var(--cobalt); border-radius: 4px 10px 10px 4px; font-size: .88rem; color: var(--ink); white-space: pre-wrap; word-break: break-word; }
+  .r-cmt.del { opacity: .6; text-decoration: line-through; border-left-color: var(--ink-3); }
+  .r-act { display: flex; align-items: center; gap: 4px; }
+  .mini { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-width: 32px; height: 32px; padding: 0 8px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--ink-2); font-size: .76rem; font-weight: 750; cursor: pointer; transition: background .15s, color .15s, transform .15s var(--ease); }
+  .mini:hover { background: var(--bg); color: var(--ink); }
+  .mini:active { transform: scale(.94); }
+  .mini .ic { width: 14px; height: 14px; }
+  .more { display: flex; justify-content: center; padding: 8px 16px 16px; }
+  .empty { padding: 48px 20px; text-align: center; color: var(--ink-3); animation: rowIn .4s var(--spring) both; }
+  .empty svg { width: 40px; height: 40px; fill: #b0b7af; }
+  .empty h3 { margin: 8px 0 4px; font-size: 1rem; color: var(--ink); }
+  .empty p { margin: 0; font-size: .86rem; }
+  .skel { height: 44px; margin: 10px 16px; border-radius: 10px; background: linear-gradient(90deg, #ecefe9 25%, #f6f8f5 50%, #ecefe9 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+  @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+  /* ── 옆 패널: 순위·기기 ── */
+  .rank { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  .rank button { width: 100%; display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; align-items: center; gap: 8px; min-height: 40px; padding: 4px 8px; border: 0; border-radius: 10px; background: none; cursor: pointer; text-align: left; transition: background .15s; }
+  .rank button:hover { background: var(--bg); }
+  .rank .n { width: 22px; height: 22px; border-radius: 7px; display: grid; place-items: center; font-size: .72rem; font-weight: 850; background: var(--bg); color: var(--ink-2); }
+  .rank li:nth-child(-n+3) .n { background: var(--ink); color: #fff; }
+  .rank .nm { min-width: 0; display: grid; gap: 3px; }
+  .rank .nm span { font-size: .84rem; font-weight: 750; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .meter { height: 4px; border-radius: 4px; background: var(--line-2); overflow: hidden; }
+  .meter i { display: block; height: 100%; width: var(--w); border-radius: 4px; background: var(--violet); transform-origin: left; animation: fill .7s var(--spring) both; animation-delay: calc(var(--i, 0) * 40ms); }
+  @keyframes fill { from { transform: scaleX(0); } }
+  .rank .c { font-size: .76rem; font-weight: 800; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .devs { display: grid; gap: 10px; }
+  .dev { display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; align-items: center; gap: 8px; font-size: .82rem; font-weight: 700; color: var(--ink-2); }
+  .dev .meter i { background: var(--accent); }
+  .dev .nm { display: grid; gap: 4px; }
+
+  /* ── 기기 정보 창 ── */
+  dialog.sheet { border: 0; border-radius: 20px; padding: 0; width: min(480px, calc(100vw - 32px)); box-shadow: 0 16px 48px rgba(16,20,20,.22); color: var(--ink); }
+  dialog.sheet[open] { animation: popIn .32s var(--spring); }
+  dialog.sheet.closing { animation: popOut .18s var(--ease) forwards; }
+  dialog.sheet::backdrop { background: rgba(16,20,20,.45); backdrop-filter: blur(6px); animation: fadeIn .25s var(--ease); }
+  dialog.sheet.closing::backdrop { animation: fadeOut .18s var(--ease) forwards; }
+  @keyframes popIn { from { opacity: 0; transform: translateY(12px) scale(.96); } }
+  @keyframes popOut { to { opacity: 0; transform: translateY(8px) scale(.97); } }
+  @keyframes fadeIn { from { opacity: 0; } }
+  @keyframes fadeOut { to { opacity: 0; } }
+  .sheet-in { padding: 20px 22px; display: grid; gap: 14px; }
+  .sheet-h { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .sheet-h h3 { margin: 0; font-size: 1.08rem; font-weight: 850; display: flex; align-items: center; gap: 8px; }
+  .kv { display: grid; grid-template-columns: 88px 1fr; gap: 8px 12px; margin: 0; padding: 14px 16px; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; font-size: .88rem; }
+  .kv dt { color: var(--ink-3); font-weight: 700; }
+  .kv dd { margin: 0; font-weight: 650; word-break: break-all; }
+
+  .toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); z-index: 200; padding: 10px 18px; border-radius: 999px; background: var(--ink); color: #fff; font-size: .86rem; font-weight: 700; box-shadow: 0 8px 24px rgba(0,0,0,.25); opacity: 0; transform: translate(-50%, 20px); pointer-events: none; transition: opacity .22s var(--ease), transform .35s var(--spring); }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  @media (max-width: 1080px) { .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); } .dash { grid-template-columns: 1fr; } .side { position: static; grid-template-columns: 1fr 1fr; } }
   @media (max-width: 720px) {
-    .header-in { flex-direction: row !important; align-items: center !important; gap: 8px !important; }
-    .brand-title strong { font-size: .95rem; }
-    .brand-title span { display: none; }
-    .header-actions { gap: 4px; flex: none; }
-    .header-actions a.btn { display: none; }
-    #btn-auto-refresh span { display: none; }
-    #btn-auto-refresh { padding: 0 10px; }
-    .layout { padding-top: 12px; }
-    .stats-grid { grid-template-columns: 1fr 1fr !important; gap: 8px !important; margin-bottom: 12px; }
-    .stat-card { padding: 12px !important; }
-    .stat-head { font-size: .8rem; margin-bottom: 4px; }
-    .stat-icon { display: none; }
-    .stat-num { font-size: 1.4rem !important; }
-    .insights-bar { flex-direction: column; align-items: stretch; gap: 8px; padding: 12px; margin-bottom: 12px; }
-    .insights-chips { flex-direction: column; align-items: stretch; gap: 6px; }
-    .chip-tag { justify-content: space-between; border-radius: 12px; padding: 0 12px; }
-    .stat-sub { display: block; }
-    .control-box { position: static; top: auto; padding: 10px 12px; gap: 8px; margin-bottom: 12px; border-radius: 14px; }
-    .tabs-row { flex-wrap: nowrap; }
-    .tabs-group { flex: 1; min-width: 0; }
-    .tab-pill { padding: 0 12px; flex: none; }
-    #btn-export-csv span { display: none; }
-    #btn-export-csv { width: var(--tap); padding: 0; flex: none; }
-    .filters-row { display: grid !important; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .filters-row .search-wrap { grid-column: 1 / -1; }
-    .select-pill { width: 100%; min-width: 0; }
-    .filter-summary { font-size: var(--fs-min); flex-wrap: wrap; gap: 4px 10px; }
-    .log-card { padding: 12px 14px; }
-    .camp-links { flex-wrap: wrap; }
-    .camp-pill-btn { min-height: 36px; }
+    .layout { padding-top: 14px; }
+    .log-head h1 { font-size: 1.1rem; }
+    .log-head p, .sw-label { display: none; }
+    .kpis { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .kpi { padding: 12px; }
+    .kpi-num { font-size: 1.35rem; }
+    .kpi:last-child { grid-column: 1 / -1; }
+    .side { grid-template-columns: 1fr; }
+    .tools { padding: 10px 12px; }
+    .search { flex-basis: 100%; }
+    .dd { flex: 1; }
+    .dd-btn { width: 100%; justify-content: space-between; }
+    .dd-menu { left: 0; right: auto; min-width: 100%; transform-origin: top left; }
+    .dd:last-of-type .dd-menu { left: auto; right: 0; }
+    .row { grid-template-columns: 30px minmax(0, 1fr); padding: 10px 12px; }
+    .tchip { width: 30px; height: 30px; }
+    .r-act { grid-column: 2; }
+    .csv-label { display: none; }
   }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 1ms !important; animation-delay: 0ms !important; transition-duration: 1ms !important; } }
 </style>
 <!-- 공통 틀(헤더·푸터·하단 탭·본문 폭) — 앱과 같은 파일. 이 쪽 스타일보다 뒤에 둬서 틀은 항상 같다. -->
-<link rel="stylesheet" href="../shell.css?v=6dfd2b8281c5">
+<link rel="stylesheet" href="../shell.css?v=4c418d4b11d5">
 </head>
 <body>
 
-<!-- 아이콘 정의 -->
-<svg style="display:none;" aria-hidden="true">
-  <symbol id="i-tent" viewBox="0 0 24 24"><path fill-rule="evenodd" fill="currentColor" d="M11 2.5h2l-.4.7L22 20h-20l9.4-16.8zM12 9.5 8 18h8z"/></symbol>
-  <symbol id="i-heart" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></symbol>
-  <symbol id="i-comment" viewBox="0 0 24 24"><path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></symbol>
-  <symbol id="i-user" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></symbol>
-  <symbol id="i-device" viewBox="0 0 24 24"><path fill="currentColor" d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></symbol>
-  <symbol id="i-desktop" viewBox="0 0 24 24"><path fill="currentColor" d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10z"/></symbol>
-  <symbol id="i-refresh" viewBox="0 0 24 24"><path fill="currentColor" d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></symbol>
-  <symbol id="i-search" viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></symbol>
-  <symbol id="i-download" viewBox="0 0 24 24"><path fill="currentColor" d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></symbol>
-  <symbol id="i-link" viewBox="0 0 24 24"><path fill="currentColor" d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></symbol>
-  <symbol id="i-clock" viewBox="0 0 24 24"><path fill="currentColor" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></symbol>
-</svg>
+<!-- 아이콘(모두 SVG) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z"/></symbol>
+  <symbol id="i-heart-off" viewBox="0 0 24 24"><path d="M2.8 2.8 1.4 4.2l2.3 2.3A5.4 5.4 0 0 0 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32c.9-.82 1.75-1.6 2.53-2.35l3.8 3.8 1.42-1.42zM16.5 3c-1.74 0-3.41.81-4.5 2.09A6 6 0 0 0 8.9 3.3l11.6 11.6C21.4 13.4 22 11.97 22 10.5 22 6.4 19.6 3 16.5 3"/></symbol>
+  <symbol id="i-comment" viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2M6 9h12v2H6zm8 5H6v-2h8zm4-6H6V6h12z"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M9 3v1H4v2h1v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1V4h-5V3zm-2 3h10v13H7zm2 2v9h2V8zm4 0v9h2V8z"/></symbol>
+  <symbol id="i-enter" viewBox="0 0 24 24"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3zm5 16H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2z"/></symbol>
+  <symbol id="i-dup" viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m0 16H8V7h11z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8m0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M17 1H7a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2m-5 21a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5m5-4H7V4h10z"/></symbol>
+  <symbol id="i-tablet" viewBox="0 0 24 24"><path d="M19 1H5a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2m-7 21a1 1 0 1 1 0-2 1 1 0 0 1 0 2m7-3H5V4h14z"/></symbol>
+  <symbol id="i-desktop" viewBox="0 0 24 24"><path d="M21 2H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h7l-2 3v1h8v-1l-2-3h7a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2m0 12H3V4h18z"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 1 3.73V7h5a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-8a3 3 0 0 1 3-3h5V5.73A2 2 0 0 1 12 2M9 12a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m6 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/></symbol>
+  <symbol id="i-unknown" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20m1 17h-2v-2h2zm2.07-7.75-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5a4 4 0 0 1 1.17-2.83l1.24-1.26A2 2 0 1 0 10 9H8a4 4 0 1 1 7.07 2.25"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M17.65 6.35A8 8 0 1 0 19.73 14h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.5 6.5 0 1 0 14 15.5l.27.28v.79l5 4.99L20.49 19zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></symbol>
+  <symbol id="i-caret" viewBox="0 0 24 24"><path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 16H5V10h14zM7 12h5v5H7z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7zM5 18v2h14v-2z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20m0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16m.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20m1 15h-2v-6h2zm0-8h-2V7h2z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12.6 2c.6 3.6 5.9 6 5.9 12a6.5 6.5 0 0 1-13 0c0-3 1.6-5 3.2-6.3-.1 2 .8 3.4 2.1 3.6-.4-3.3.2-6.6 1.8-9.3z"/></symbol>
+  <symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 3 9 7H5v2h3.75l-.5 6H4v2h4.05l-.5 4h2l.5-4h4l-.5 4h2l.5-4H20v-2h-3.75l.5-6H21V7h-4.05l.5-4h-2l-.5 4h-4l.5-4zm.75 6h4l-.5 6h-4z"/></symbol>
+</defs></svg>
 
 <!-- shell:header -->
 <header class="top">
@@ -877,146 +284,82 @@
     </header>
 <!-- /shell:header -->
 
-<!-- 메인 컨텐츠 영역 -->
 <main class="layout">
-  <!-- 쪽 제목 줄 -->
   <div class="log-head">
-    <div class="header-in">
-    <div class="brand-group">
-      <div class="brand-title">
-        <strong>렛츠 캠핑 운영 대시보드 <span class="live-dot" title="실시간 활성"></span></strong>
-        <span>찜 · 캠퍼 한마디 운영 기록</span>
-      </div>
+    <div>
+      <h1>운영 대시보드 <span class="live-dot" id="live-dot" title="자동 갱신 중"></span></h1>
+      <p>찜 · 캠퍼 한마디 · 상세 진입 기록 <span id="last-updated-txt">· 불러오는 중</span></p>
     </div>
-    <div class="header-actions">
-      <button type="button" class="btn" id="btn-auto-refresh" title="30초마다 자동 갱신">
-        <span>자동 갱신</span> <b id="auto-state" style="color:var(--accent);">ON</b>
-      </button>
-      <button type="button" class="btn btn-icon" id="btn-refresh" title="지금 새로고침" aria-label="지금 새로고침">
-        <svg id="refresh-icon"><use href="#i-refresh"/></svg>
-      </button>
+    <div class="head-actions">
+      <label class="sw" title="30초마다 자동 갱신"><input type="checkbox" id="auto-refresh" role="switch" checked><span class="sw-track"><span class="sw-thumb"></span></span><span class="sw-label">자동 갱신</span></label>
+      <button type="button" class="btn btn-icon" id="btn-refresh" aria-label="지금 새로고침" title="지금 새로고침"><svg class="ic" id="refresh-icon"><use href="#i-refresh"/></svg></button>
     </div>
   </div>
-  </div>
 
-  <!-- 상단 요약 통계 그리드 -->
-  <section class="stats-grid" id="stats-grid">
-    <div class="stat-card">
-      <div class="stat-head">
-        <span>총 찜 이벤트</span>
-        <span class="stat-icon green"><svg><use href="#i-heart"/></svg></span>
-      </div>
-      <div class="stat-num" id="stat-total-saves">-</div>
-      <div class="stat-sub">오늘 발생 <b id="stat-today-saves">-</b>건</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-head">
-        <span>찜 증감 분석</span>
-        <span class="stat-icon volt"><svg><use href="#i-heart"/></svg></span>
-      </div>
-      <div class="stat-num" id="stat-add-saves">-</div>
-      <div class="stat-sub">추가 <b id="stat-add-ratio">-</b>% · 해제 <b id="stat-remove-saves">-</b>건</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-head">
-        <span>캠퍼 한마디 (댓글)</span>
-        <span class="stat-icon blue"><svg><use href="#i-comment"/></svg></span>
-      </div>
-      <div class="stat-num" id="stat-comments">-</div>
-      <div class="stat-sub">정상 게시 <b id="stat-live-comments">-</b>건 · 삭제 <b id="stat-del-comments">-</b>건</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-head">
-        <span>상세 진입</span>
-        <span class="stat-icon blue"><svg><use href="#i-search"/></svg></span>
-      </div>
-      <div class="stat-num" id="stat-views">-</div>
-      <div class="stat-sub">진입 업장 <b id="stat-view-camps">-</b>곳</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-head">
-        <span>환경 정보</span>
-        <span class="stat-icon red"><svg><use href="#i-user"/></svg></span>
-      </div>
-      <div class="stat-num" id="stat-meta-count">-</div>
-      <div class="stat-sub">화면·언어·시간대가 있는 기록</div>
-    </div>
+  <section class="kpis" aria-label="요약">
+    <div class="kpi"><div class="kpi-head"><span>찜 추가</span><span class="kpi-ic t-add"><svg><use href="#i-heart"/></svg></span></div><div class="kpi-num" data-kpi="adds">-</div><div class="kpi-sub">오늘 <b data-kpi="addsToday">-</b>건</div></div>
+    <div class="kpi"><div class="kpi-head"><span>찜 해제</span><span class="kpi-ic t-rm"><svg><use href="#i-heart-off"/></svg></span></div><div class="kpi-num" data-kpi="removes">-</div><div class="kpi-sub">오늘 <b data-kpi="removesToday">-</b>건</div></div>
+    <div class="kpi"><div class="kpi-head"><span>캠퍼 한마디</span><span class="kpi-ic t-cmt"><svg><use href="#i-comment"/></svg></span></div><div class="kpi-num" data-kpi="comments">-</div><div class="kpi-sub">게시 <b data-kpi="liveComments">-</b> · 삭제 <b data-kpi="delComments">-</b></div></div>
+    <div class="kpi"><div class="kpi-head"><span>상세 진입</span><span class="kpi-ic t-view"><svg><use href="#i-enter"/></svg></span></div><div class="kpi-num" data-kpi="views">-</div><div class="kpi-sub">업장 <b data-kpi="viewCamps">-</b>곳</div></div>
+    <div class="kpi"><div class="kpi-head"><span>중복 기록</span><span class="kpi-ic t-dup"><svg><use href="#i-dup"/></svg></span></div><div class="kpi-num" data-kpi="dups">-</div><div class="kpi-sub">이미 같은 상태에서 다시 온 기록(집계 제외)</div></div>
   </section>
 
-  <!-- 빠른 인기 캠핑장 인사이트 바 -->
-  <section class="insights-bar" id="insights-bar">
-    <span class="insights-label">🔥 많이 눌러본 업장:</span>
-    <div class="insights-chips" id="top-camps-chips">
-      <span class="chip-tag" style="opacity:0.6;">데이터 집계 중…</span>
-    </div>
-  </section>
+  <div class="dash">
+    <div>
+      <section class="panel chart-wrap">
+        <div class="panel-h"><h2><svg class="ic"><use href="#i-chart"/></svg>최근 14일</h2>
+          <div class="legend"><span><i style="background:var(--accent)"></i>찜 추가</span><span><i style="background:var(--flame)"></i>찜 해제</span><span><i style="background:var(--cobalt)"></i>한마디</span><span><i style="background:var(--violet)"></i>상세 진입</span></div></div>
+        <div class="panel-b"><svg class="chart" id="chart" viewBox="0 0 700 150" role="img" aria-label="최근 14일 활동"></svg></div>
+      </section>
 
-  <!-- 컨트롤 박스 (탭 + 검색창 + 필터) -->
-  <section class="control-box">
-    <div class="tabs-row">
-      <div class="tabs-group" role="tablist">
-        <button type="button" class="tab-pill on" data-tab="all">
-          <span>전체 피드</span> <span class="tab-badge" id="tab-cnt-all">0</span>
-        </button>
-        <button type="button" class="tab-pill" data-tab="adds">
-          <span>찜 추가</span> <span class="tab-badge" id="tab-cnt-adds">0</span>
-        </button>
-        <button type="button" class="tab-pill" data-tab="removes">
-          <span>찜 해제</span> <span class="tab-badge" id="tab-cnt-removes">0</span>
-        </button>
-        <button type="button" class="tab-pill" data-tab="comments">
-          <span>댓글</span> <span class="tab-badge" id="tab-cnt-comments">0</span>
-        </button>
-        <button type="button" class="tab-pill" data-tab="views">
-          <span>상세 진입</span> <span class="tab-badge" id="tab-cnt-views">0</span>
-        </button>
-      </div>
-
-      <button type="button" class="btn" id="btn-export-csv" title="현재 조회 중인 로그를 CSV로 저장">
-        <svg style="width:14px;height:14px;"><use href="#i-download"/></svg>
-        <span>CSV 내보내기</span>
-      </button>
-    </div>
-
-    <div class="filters-row">
-      <div class="search-wrap">
-        <svg><use href="#i-search"/></svg>
-        <input type="search" id="q" class="search-input" placeholder="캠핑장명, 닉네임, 댓글 내용 검색" autocomplete="off">
-        <button type="button" id="search-clear" class="search-clear" aria-label="검색어 지우기">✕</button>
-      </div>
-
-      <select id="filter-date" class="select-pill" aria-label="기간 필터">
-        <option value="all">전체 기간</option>
-        <option value="today">오늘 (24시간)</option>
-        <option value="3d">최근 3일</option>
-        <option value="7d">최근 7일</option>
-      </select>
-
-      <select id="filter-device" class="select-pill" aria-label="기기 필터">
-        <option value="all">모든 기기</option>
-        <option value="mobile">📱 모바일 (아이폰/갤럭시 등)</option>
-        <option value="desktop">💻 데스크톱 (PC/Mac)</option>
-        <option value="bot">🤖 봇 / 테스트</option>
-      </select>
+      <section class="panel feed-panel">
+        <div class="utabs" role="tablist" aria-label="기록 종류" id="tabs">
+          <button type="button" class="utab" role="tab" aria-selected="true" data-tab="all"><span>전체 피드</span><b id="tab-cnt-all">0</b></button>
+          <button type="button" class="utab" role="tab" aria-selected="false" data-tab="adds"><span>찜 추가</span><b id="tab-cnt-adds">0</b></button>
+          <button type="button" class="utab" role="tab" aria-selected="false" data-tab="removes"><span>찜 해제</span><b id="tab-cnt-removes">0</b></button>
+          <button type="button" class="utab" role="tab" aria-selected="false" data-tab="comments"><span>댓글</span><b id="tab-cnt-comments">0</b></button>
+          <button type="button" class="utab" role="tab" aria-selected="false" data-tab="views"><span>상세 진입</span><b id="tab-cnt-views">0</b></button>
+          <span class="utabs-ink" aria-hidden="true"></span>
+        </div>
+        <div class="tools">
+          <label class="search"><span class="sr">검색</span><svg class="ic"><use href="#i-search"/></svg>
+            <input type="search" id="q" placeholder="캠핑장명, 닉네임, 댓글 내용" autocomplete="off">
+            <button type="button" id="search-clear" class="search-clear" aria-label="검색어 지우기"><svg class="ic"><use href="#i-close"/></svg></button></label>
+          <div class="dd" data-dd="dateRange">
+            <button type="button" class="dd-btn" aria-haspopup="listbox" aria-expanded="false"><svg class="ic"><use href="#i-calendar"/></svg><span class="dd-val">전체 기간</span><svg class="ic dd-caret"><use href="#i-caret"/></svg></button>
+            <ul class="dd-menu" role="listbox" aria-label="기간">
+              <li class="dd-opt" role="option" tabindex="-1" data-v="all" aria-selected="true"><span class="radio"></span>전체 기간</li>
+              <li class="dd-opt" role="option" tabindex="-1" data-v="today" aria-selected="false"><span class="radio"></span>오늘(24시간)</li>
+              <li class="dd-opt" role="option" tabindex="-1" data-v="3d" aria-selected="false"><span class="radio"></span>최근 3일</li>
+              <li class="dd-opt" role="option" tabindex="-1" data-v="7d" aria-selected="false"><span class="radio"></span>최근 7일</li>
+            </ul>
+          </div>
+          <div class="dd" data-dd="deviceFilter">
+            <button type="button" class="dd-btn" aria-haspopup="listbox" aria-expanded="false"><svg class="ic"><use href="#i-desktop"/></svg><span class="dd-val">모든 기기</span><svg class="ic dd-caret"><use href="#i-caret"/></svg></button>
+            <ul class="dd-menu" role="listbox" aria-label="기기">
+              <li class="dd-opt" role="option" tabindex="-1" data-v="all" aria-selected="true"><span class="radio"></span>모든 기기</li>
+              <li class="dd-opt" role="option" tabindex="-1" data-v="mobile" aria-selected="false"><span class="radio"></span><svg class="ic"><use href="#i-phone"/></svg>모바일</li>
+              <li class="dd-opt" role="option" tabindex="-1" data-v="desktop" aria-selected="false"><span class="radio"></span><svg class="ic"><use href="#i-desktop"/></svg>데스크톱</li>
+              <li class="dd-opt" role="option" tabindex="-1" data-v="bot" aria-selected="false"><span class="radio"></span><svg class="ic"><use href="#i-bot"/></svg>봇·테스트</li>
+            </ul>
+          </div>
+          <button type="button" class="btn" id="btn-export-csv" title="지금 보이는 기록을 CSV로 저장"><svg class="ic"><use href="#i-download"/></svg><span class="csv-label">CSV</span></button>
+        </div>
+        <div class="sum"><span id="filtered-count-txt">불러오는 중…</span>
+          <span class="cks"><label class="ck"><input type="checkbox" id="hide-bot" checked><span class="ck-box"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg></span><span>테스트 기록 숨기기</span></label>
+          <label class="ck"><input type="checkbox" id="hide-dup" checked><span class="ck-box"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg></span><span>중복 기록 숨기기</span></label></span></div>
+        <div class="feed" id="feed-container" aria-live="polite"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+        <div class="more"><button type="button" class="btn" id="btn-load-more" hidden>30개 더 보기</button></div>
+      </section>
     </div>
 
-    <div class="filter-summary">
-      <span id="filtered-count-txt">조회 중…</span>
-      <span id="last-updated-txt">마지막 갱신: -</span>
-    </div>
-  </section>
-
-  <!-- 실시간 로그 피드 -->
-  <section class="feed-wrap" id="feed-container">
-    <div class="skeleton-card"><div class="skeleton-line" style="width:30%;"></div><div class="skeleton-line" style="width:70%;"></div><div class="skeleton-line" style="width:40%;"></div></div>
-    <div class="skeleton-card"><div class="skeleton-line" style="width:25%;"></div><div class="skeleton-line" style="width:60%;"></div><div class="skeleton-line" style="width:50%;"></div></div>
-  </section>
-
-  <!-- 더 보기 버튼 -->
-  <div style="text-align:center; margin-top:24px;">
-    <button type="button" class="btn" id="btn-load-more" style="display:none; padding:8px 24px;">로그 더 보기 (30개)</button>
+    <aside class="side">
+      <section class="panel"><div class="panel-h"><h2><svg class="ic"><use href="#i-flame"/></svg>많이 본 업장</h2></div><div class="panel-b"><ol class="rank" id="top-camps"><li class="skel" style="margin:0"></li></ol></div></section>
+      <section class="panel"><div class="panel-h"><h2><svg class="ic"><use href="#i-phone"/></svg>기기 분포</h2></div><div class="panel-b"><div class="devs" id="devices"><div class="skel" style="margin:0"></div></div></div></section>
+    </aside>
   </div>
 </main>
+
 <!-- shell:footer -->
 <footer class="site-footer">
       <div class="site-footer-inner">
@@ -1041,36 +384,24 @@
 <!-- /shell:icons -->
 <script>/* 공통 헤더의 찜 숫자만 표시한다. 비교는 개인 선택 상태를 숫자로 노출하지 않는다. */try{const n=()=>{try{return JSON.parse(localStorage.getItem("mc-saved")||"[]").length}catch{return 0}};document.querySelectorAll("[data-saved-count]").forEach((b)=>{b.textContent=n();b.hidden=!n()});}catch{}</script>
 
-<!-- 기기 정보 상세 모달 다이얼로그 -->
-<dialog class="modal-sheet" id="deviceModal">
-  <div class="modal-in">
-    <div class="modal-head">
-      <h3><span id="modal-dev-icon">📱</span> <span id="modal-dev-title">기기 상세 정보</span></h3>
-      <button type="button" class="modal-close-btn" id="modal-close-x" aria-label="닫기">✕</button>
-    </div>
-    <dl class="kv-table" id="modal-kv-body"></dl>
-    <div style="text-align:right;">
-      <button type="button" class="btn btn-primary" id="modal-close-btn">닫기</button>
-    </div>
+<dialog class="sheet" id="deviceModal" aria-labelledby="modal-dev-title">
+  <div class="sheet-in">
+    <div class="sheet-h"><h3><svg class="ic" id="modal-dev-icon"><use href="#i-phone"/></svg><span id="modal-dev-title">기기 정보</span></h3>
+      <button type="button" class="btn btn-icon" id="modal-close-x" aria-label="닫기"><svg class="ic"><use href="#i-close"/></svg></button></div>
+    <dl class="kv" id="modal-kv-body"></dl>
   </div>
 </dialog>
-
-<!-- 토스트 메시지 -->
-<div class="toast-box" id="toast"></div>
+<div class="toast" id="toast" role="status"></div>
 
 <script>
 (() => {
-  // ── Supabase 설정 ─────────────────────────────────────
-  // 운영 로그가 메인 앱과 다른, 만료된 키를 갖지 않도록 현재 배포된 메인의
-  // 공개 설정을 읽는다. 키 교체 후에도 로그 화면만 멈추지 않는다.
+  // ── Supabase 설정: 배포된 메인의 공개 설정을 읽는다(키 교체 후에도 이 화면만 멈추지 않게) ──
   const SB = { url: "", key: "" };
   let headers = {};
   let configPromise = null;
   async function ensureConfig() {
     if (SB.url && SB.key) return true;
     if (!configPromise) configPromise = (async () => {
-      // 로컬 미리보기에는 공개 키를 저장하지 않는다. 이때만 실제 공개본의
-      // 동일 설정을 읽어 배포본과 같은 찜 기록을 검증한다.
       const targets = [new URL("../", location.href).href];
       if (/^(localhost|127\.0\.0\.1)$/i.test(location.hostname)) targets.push("https://pyw31337.github.io/camp/");
       for (const target of [...new Set(targets)]) {
@@ -1081,10 +412,9 @@
           const url = doc.querySelector('meta[name="supabase-url"]')?.content?.trim();
           const key = doc.querySelector('meta[name="supabase-anon-key"]')?.content?.trim();
           if (!url || !key) continue;
-          SB.url = url; SB.key = key;
-          headers = { apikey: key, Authorization: `Bearer ${key}` };
+          SB.url = url; SB.key = key; headers = { apikey: key, Authorization: `Bearer ${key}` };
           return true;
-        } catch { /* 다음 공개 설정 후보를 확인 */ }
+        } catch { /* 다음 후보 */ }
       }
       return false;
     })();
@@ -1093,721 +423,345 @@
     return ready;
   }
 
-  // ── 상태 변수 ─────────────────────────────────────────
-  let state = {
-    tab: "all",           // all | adds | removes | comments | views
-    q: "",                // 검색어
-    dateRange: "all",     // all | today | 3d | 7d
-    deviceFilter: "all",  // all | mobile | desktop | bot
-    pageLimit: 30,        // 가상 페이징
-    autoRefresh: true,
-    timer: null,
-    names: new Map(),     // campground_id -> name
-    saves: [],
-    views: [],
-    viewCounts: [],
-    comments: [],
-    feedItems: [],
-    filteredItems: []
-  };
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const MOTION = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const state = { tab: "all", q: "", dateRange: "all", deviceFilter: "all", hideDup: true, hideBot: true, pageLimit: 30, timer: null,
+    names: new Map(), saves: [], views: [], viewCounts: [], comments: [], feedItems: [], filteredItems: [], shown: new Set(), loaded: false };
+  const esc = (s) => String(s ?? "").replace(/[&<>'"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" }[c]));
+  const icon = (id, cls = "ic") => `<svg class="${cls}"><use href="#i-${id}"/></svg>`;
 
-  // ── 유틸리티: HTML 이스케이프 ───────────────────────────
-  function esc(s) {
-    return String(s ?? "").replace(/[&<>'"]/g, (c) => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
-    }[c]));
-  }
-
-  // ── 유틸리티: 토스트 메시지 ─────────────────────────────
   let toastTimer = null;
-  function showToast(msg) {
-    const t = document.getElementById("toast");
-    t.textContent = msg;
-    t.classList.add("show");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+  function showToast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 2200); }
+
+  // 숫자가 바뀔 때 세어 올라가게(움직임 줄이기 설정이면 바로)
+  function countTo(el, to) {
+    const from = Number(el.dataset.n ?? 0) || 0; el.dataset.n = to;
+    if (!MOTION || from === to) { el.textContent = to.toLocaleString(); return; }
+    const t0 = performance.now(), dur = 600;
+    const step = (t) => { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.textContent = Math.round(from + (to - from) * e).toLocaleString(); if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
   }
 
-  // ── 기기 및 브라우저 파서 ───────────────────────────────
-  function parseDevice(ua = "", platform = "", screen = "") {
-    const u = (ua || "").toLowerCase();
-    const p = (platform || "").toLowerCase();
-    let os = "알 수 없음";
-    let kind = "기기";
-    let type = "other"; // mobile | desktop | bot
-    let icon = "📱";
-
-    // 봇 / Headless 판별
-    if (/headlesschrome|bot|crawler|spider|wget|curl/.test(u)) {
-      os = "자동화/봇";
-      kind = "Headless Test";
-      type = "bot";
-      icon = "🤖";
-    }
-    // 모바일 기기
-    else if (/iphone/.test(u)) {
-      os = "iOS";
-      kind = "아이폰";
-      type = "mobile";
-      icon = "📱";
-    } else if (/ipad/.test(u)) {
-      os = "iPadOS";
-      kind = "아이패드";
-      type = "tablet";
-      icon = "📟";
-    } else if (/android/.test(u)) {
-      os = "Android";
-      type = /tablet/.test(u) ? "tablet" : "mobile";
-      icon = type === "tablet" ? "📟" : "📱";
-      if (/sm-f9|sm-f7|fold|flip/.test(u)) kind = "갤럭시 폴드/플립";
-      else if (/sm-|samsung|galaxy/.test(u)) kind = "갤럭시";
-      else kind = "안드로이드";
-    }
-    // 데스크톱 기기
-    else if (/mac os|macintosh/.test(u) || /mac/.test(p)) {
-      os = "macOS";
-      type = "desktop";
-      icon = "💻";
-      const [w, h] = (screen || "").split("x").map(Number);
-      kind = (w && h && Math.max(w, h) <= 1600 && Math.min(w, h) <= 1000) ? "맥 (작은화면)" : "Mac";
-    } else if (/windows/.test(u) || /win/.test(p)) {
-      os = "Windows";
-      kind = "윈도우 PC";
-      type = "desktop";
-      icon = "💻";
-    } else if (/linux/.test(u) || /linux/.test(p)) {
-      os = "Linux";
-      kind = "리눅스 PC";
-      type = "desktop";
-      icon = "💻";
-    } else if (/cros/.test(u)) {
-      os = "ChromeOS";
-      kind = "크롬북";
-      type = "desktop";
-      icon = "💻";
-    }
-
-    // 브라우저 및 인앱 감지
+  // ── 기기·브라우저 ──
+  // 자동 테스트(CI 브라우저)는 리눅스 + 협정세계시(UTC)로 남는다 → 봇·테스트로 분류
+  function parseDevice(ua = "", platform = "", screen = "", tz = "") {
+    const u = (ua || "").toLowerCase(), p = (platform || "").toLowerCase();
+    let os = "알 수 없음", kind = "기기", type = "other", ic = "unknown";
+    if (/headlesschrome|bot|crawler|spider|wget|curl/.test(u) || (/linux/.test(p) && tz === "UTC")) { os = "자동화/봇"; kind = "자동 테스트"; type = "bot"; ic = "bot"; }
+    else if (/iphone/.test(u) || /iphone/.test(p)) { os = "iOS"; kind = "아이폰"; type = "mobile"; ic = "phone"; }
+    else if (/ipad/.test(u) || /ipad/.test(p)) { os = "iPadOS"; kind = "아이패드"; type = "tablet"; ic = "tablet"; }
+    else if (/android/.test(u) || /android|arm/.test(p)) { os = "Android"; type = "mobile"; ic = "phone"; kind = "안드로이드"; }
+    else if (/mac os|macintosh/.test(u) || /mac/.test(p)) { os = "macOS"; type = "desktop"; ic = "desktop"; kind = "Mac"; }
+    else if (/windows/.test(u) || /win/.test(p)) { os = "Windows"; kind = "윈도우 PC"; type = "desktop"; ic = "desktop"; }
+    else if (/linux/.test(u) || /linux/.test(p)) { os = "Linux"; kind = "리눅스 PC"; type = "desktop"; ic = "desktop"; }
     let browser = "브라우저";
-    if (/kakaotalk/.test(u)) browser = "카카오톡 인앱";
-    else if (/naver\(inapp/.test(u) || /naverapp/.test(u)) browser = "네이버 앱";
-    else if (/instagram/.test(u)) browser = "인스타그램 인앱";
-    else if (/edg\//.test(u)) browser = "Edge";
-    else if (/samsungbrowser/.test(u)) browser = "삼성 인터넷";
-    else if (/whale\//.test(u)) browser = "웨일";
-    else if (/chrome\//.test(u)) browser = "Chrome";
-    else if (/safari\//.test(u) && !/chrome/.test(u)) browser = "Safari";
-    else if (/firefox\//.test(u)) browser = "Firefox";
-
-    return { label: kind, os, browser, type, icon, ua, platform, screen };
+    if (/kakaotalk/.test(u)) browser = "카카오톡 인앱"; else if (/naver\(inapp|naverapp/.test(u)) browser = "네이버 앱"; else if (/instagram/.test(u)) browser = "인스타그램 인앱";
+    else if (/edg\//.test(u)) browser = "Edge"; else if (/samsungbrowser/.test(u)) browser = "삼성 인터넷"; else if (/whale\//.test(u)) browser = "웨일"; else if (/chrome\//.test(u)) browser = "Chrome"; else if (/safari\//.test(u)) browser = "Safari"; else if (/firefox\//.test(u)) browser = "Firefox";
+    return { label: kind, os, browser, type, ic, platform, screen };
   }
 
-  // ── 시간 포맷팅 ─────────────────────────────────────────
-  function formatRelativeTime(dateStr) {
-    try {
-      const now = Date.now();
-      const past = Date.parse(dateStr);
-      const diffSec = Math.floor((now - past) / 1000);
-      if (diffSec < 45) return "방금 전";
-      if (diffSec < 3600) return `${Math.floor(diffSec / 60)}분 전`;
-      if (diffSec < 86400) return `${Math.floor(diffSec / 3600)}시간 전`;
-      const days = Math.floor(diffSec / 86400);
-      if (days < 7) return `${days}일 전`;
-      return new Date(past).toLocaleDateString("ko-KR", { month: "numeric", day: "numeric" });
-    } catch {
-      return dateStr;
-    }
+  // ── 시간 ──
+  function rel(dateStr) {
+    const s = Math.floor((Date.now() - Date.parse(dateStr)) / 1000);
+    if (s < 45) return "방금 전"; if (s < 3600) return `${Math.floor(s / 60)}분 전`; if (s < 86400) return `${Math.floor(s / 3600)}시간 전`;
+    const d = Math.floor(s / 86400); return d < 7 ? `${d}일 전` : new Date(dateStr).toLocaleDateString("ko-KR", { month: "numeric", day: "numeric" });
   }
-
-  function formatDateGroupKey(dateStr) {
-    try {
-      const d = new Date(dateStr);
-      const today = new Date();
-      const isToday = d.toDateString() === today.toDateString();
-      const yesterday = new Date();
-      yesterday.setDate(today.getDate() - 1);
-      const isYesterday = d.toDateString() === yesterday.toDateString();
-
-      const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-      const dayName = daysOfWeek[d.getDay()];
-
-      if (isToday) return `오늘 · ${d.getMonth() + 1}월 ${d.getDate()}일 (${dayName})`;
-      if (isYesterday) return `어제 · ${d.getMonth() + 1}월 ${d.getDate()}일 (${dayName})`;
-      return `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일 (${dayName})`;
-    } catch {
-      return "기록";
-    }
+  const dayKey = (t) => { const d = new Date(t); return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`; };
+  function dayLabel(dateStr) {
+    const d = new Date(dateStr), today = new Date(), y = new Date(); y.setDate(today.getDate() - 1);
+    const w = "일월화수목금토"[d.getDay()], md = `${d.getMonth() + 1}월 ${d.getDate()}일 (${w})`;
+    return d.toDateString() === today.toDateString() ? `오늘 · ${md}` : d.toDateString() === y.toDateString() ? `어제 · ${md}` : `${d.getFullYear()}년 ${md}`;
   }
+  const clock = (dateStr) => new Date(dateStr).toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false });
 
-  function formatTimeOnly(dateStr) {
-    try {
-      return new Date(dateStr).toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false });
-    } catch {
-      return "";
-    }
-  }
-
-  // ── 캠핑장 이름 조회 (초고속 캐시 & 경량 JSON 연동) ─────
+  // ── 캠핑장 이름(경량 사전, 하루 캐시) ──
   async function loadCampNames() {
-    // 1. LocalStorage 캐시 확인 (24시간 유효)
-    const CACHE_KEY = "mc_camp_names_v2";
-    try {
-      const cached = localStorage.getItem(CACHE_KEY);
-      if (cached) {
-        const { timestamp, data } = JSON.parse(cached);
-        if (Date.now() - timestamp < 86400000 && data) {
-          state.names = new Map(Object.entries(data));
-          return;
-        }
-      }
-    } catch {}
-
-    // 2. 경량 camp-names.json 파일 시도 (~160KB)
-    const paths = ["./camp-names.json", "../explore/data/camp-names.json"];
-    for (const p of paths) {
-      try {
-        const res = await fetch(p);
-        if (res.ok) {
-          const data = await res.json();
-          state.names = new Map(Object.entries(data));
-          try {
-            localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data }));
-          } catch {}
-          return;
-        }
-      } catch {}
+    const KEY = "mc_camp_names_v2";
+    try { const c = JSON.parse(localStorage.getItem(KEY) || "null"); if (c && Date.now() - c.timestamp < 864e5 && c.data) { state.names = new Map(Object.entries(c.data)); return; } } catch {}
+    for (const p of ["./camp-names.json", "../explore/data/camp-names.json"]) {
+      try { const r = await fetch(p); if (!r.ok) continue; const data = await r.json(); state.names = new Map(Object.entries(data)); try { localStorage.setItem(KEY, JSON.stringify({ timestamp: Date.now(), data })); } catch {} return; } catch {}
     }
+  }
+  const nameOf = (id) => (id ? state.names.get(String(id)) || `캠핑장 #${id}` : "알 수 없는 캠핑장");
 
-    // 3. 최후 폴백 (로그에 등장하는 ID들만 단건 조회 or ID 표시)
-    console.warn("경량 camp-names.json 로드 실패: 폴백 가동");
+  async function rpcOr(name, body, legacyUrl) {
+    const r = await fetch(`${SB.url}/rest/v1/rpc/${name}`, { method: "POST", headers: { ...headers, "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    if (r.ok) return r.json();
+    if (r.status !== 404 || !legacyUrl) return [];
+    const l = await fetch(`${SB.url}/rest/v1/${legacyUrl}`, { headers });
+    return l.ok ? l.json() : [];
   }
 
-  async function loadSaveLogs(limit = 400) {
-    const rpc = await fetch(`${SB.url}/rest/v1/rpc/safe_save_log_feed`, {
-      method: "POST",
-      headers: { ...headers, "Content-Type": "application/json" },
-      body: JSON.stringify({ row_limit: limit })
-    });
-    if (rpc.ok) return rpc.json();
-    // 017 적용 전의 운영 DB도 중단 없이 읽되, 이미 최소화한 필드만 요청한다.
-    if (rpc.status !== 404) throw new Error(`찜 기록 조회 실패 (${rpc.status})`);
-    const legacy = await fetch(`${SB.url}/rest/v1/save_log?select=created_at,action,campground_id,language,timezone,screen,platform&order=created_at.desc&limit=${encodeURIComponent(limit)}`, { headers });
-    if (!legacy.ok) throw new Error(`찜 기록 조회 실패 (${legacy.status})`);
-    return legacy.json();
-  }
-
-  async function loadViewLogs(limit = 800) {
-    const rpc = await fetch(`${SB.url}/rest/v1/rpc/safe_view_log_feed`, {
-      method: "POST", headers: { ...headers, "Content-Type": "application/json" },
-      body: JSON.stringify({ row_limit: limit })
-    });
-    if (rpc.ok) return rpc.json();
-    if (rpc.status !== 404) throw new Error(`조회 기록 조회 실패 (${rpc.status})`);
-    const legacy = await fetch(`${SB.url}/rest/v1/view_log?select=created_at,campground_id,entry_source,path,language,timezone,screen,platform&entry_source=eq.list&order=created_at.desc&limit=${encodeURIComponent(limit)}`, { headers });
-    if (legacy.ok) return legacy.json();
-    // 018만 적용된 구형 DB에서는 목록 진입을 식별할 수 없으므로 빈 결과로 둔다.
-    return [];
-  }
-
-  async function loadViewCounts(limit = 3000) {
-    const rpc = await fetch(`${SB.url}/rest/v1/rpc/safe_list_detail_counts`, {
-      method: "POST", headers: { ...headers, "Content-Type": "application/json" },
-      body: JSON.stringify({ row_limit: limit })
-    });
-    if (rpc.ok) return rpc.json();
-    return [];
-  }
-
-  function nameOf(id) {
-    if (!id) return "알 수 없는 캠핑장";
-    return state.names.get(String(id)) || `캠핑장 #${id}`;
-  }
-
-  // ── 데이터 로드 (Supabase 병렬 호출) ────────────────────
+  // ── 불러오기 ──
   async function fetchLogs() {
-    const refreshIcon = document.getElementById("refresh-icon");
-    refreshIcon.style.animation = "spin 0.8s linear infinite";
-
+    const ri = $("#refresh-icon"); ri.classList.add("spin");
     try {
-      if (!await ensureConfig()) throw new Error("메인 앱의 Supabase 공개 설정을 찾지 못했습니다.");
-      // 1. 이름 사전 비동기 백그라운드 준비
-      const namesPromise = state.names.size ? Promise.resolve() : loadCampNames();
-
-      // 2. Supabase 로그 병렬 조회
-      const [rawSaves, rawViews, rawViewCounts, cr] = await Promise.all([
-        loadSaveLogs(400),
-        loadViewLogs(800).catch(() => []),
-        loadViewCounts(3000).catch(() => []),
-        fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,created_at,is_deleted&order=created_at.desc&limit=200`, { headers })
+      if (!await ensureConfig()) throw new Error("공개 설정을 찾지 못함");
+      const names = state.names.size ? Promise.resolve() : loadCampNames();
+      const [saves, views, counts, cr] = await Promise.all([
+        rpcOr("safe_save_log_feed", { row_limit: 400 }, "save_log?select=created_at,action,campground_id,language,timezone,screen,platform&order=created_at.desc&limit=400"),
+        rpcOr("safe_view_log_feed", { row_limit: 800 }, "view_log?select=created_at,campground_id,entry_source,path,language,timezone,screen,platform&entry_source=eq.list&order=created_at.desc&limit=800").catch(() => []),
+        rpcOr("safe_list_detail_counts", { row_limit: 3000 }).catch(() => []),
+        fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,created_at,is_deleted&order=created_at.desc&limit=200`, { headers }),
       ]);
-
-      const rawComments = cr.ok ? await cr.json() : [];
-
-      await namesPromise;
-
-      // 찜 기록과 댓글 분리
-      state.saves = rawSaves.filter((x) => x.action !== "comment");
-      state.views = (Array.isArray(rawViews) ? rawViews : []).filter((x) => x.entry_source === "list");
-      state.viewCounts = Array.isArray(rawViewCounts) ? rawViewCounts : [];
+      const comments = cr.ok ? await cr.json() : [];
+      await names;
+      state.saves = saves.filter((x) => x.action !== "comment");
+      state.views = (views || []).filter((x) => x.entry_source === "list");
+      state.viewCounts = counts || [];
       if (!state.viewCounts.length && state.views.length) {
-        const counts = new Map();
-        for (const v of state.views) counts.set(String(v.campground_id), (counts.get(String(v.campground_id)) || 0) + 1);
-        state.viewCounts = [...counts.entries()].map(([campground_id, view_count]) => ({ campground_id, view_count, last_view_at: state.views.find((v) => String(v.campground_id) === campground_id)?.created_at })).sort((a, b) => b.view_count - a.view_count);
+        const m = new Map(); for (const v of state.views) m.set(String(v.campground_id), (m.get(String(v.campground_id)) || 0) + 1);
+        state.viewCounts = [...m].map(([campground_id, view_count]) => ({ campground_id, view_count })).sort((a, b) => b.view_count - a.view_count);
       }
-      state.comments = rawComments;
-
-      // 댓글에 매칭되는 기기 로그 연계
-      const cmtLogs = rawSaves.filter((x) => x.action === "comment");
-      for (const c of state.comments) {
-        const t = Date.parse(c.created_at);
-        const hit = cmtLogs.find((x) => String(x.campground_id) === String(c.campground_id) && Math.abs(Date.parse(x.created_at) - t) < 180000);
-        if (hit) c._dev = hit;
-      }
-
-      // 통합 피드 아이템 생성
-      buildFeedItems();
-
-      // 상단 지표 계산 및 렌더링
-      renderStats();
-
-      // 인기 캠핑장 칩 렌더링
-      renderTopCamps();
-
-      // 필터 적용 및 목록 렌더링
-      applyFilters();
-
-      document.getElementById("last-updated-txt").textContent = `동기화 완료 · ${new Date().toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}`;
+      const cmtLogs = saves.filter((x) => x.action === "comment");
+      for (const c of comments) { const t = Date.parse(c.created_at); const hit = cmtLogs.find((x) => String(x.campground_id) === String(c.campground_id) && Math.abs(Date.parse(x.created_at) - t) < 180000); if (hit) c._dev = hit; }
+      state.comments = comments;
+      buildFeedItems(); renderStats(); renderChart(); renderTop(); renderDevices(); applyFilters(state.loaded ? "refresh" : "swap");
+      state.loaded = true;
+      $("#last-updated-txt").textContent = `· ${new Date().toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })} 갱신`;
       return true;
     } catch (err) {
-      console.error("데이터 로드 실패:", err);
-      document.getElementById("last-updated-txt").textContent = "연결 실패 · 다시 시도해 주세요";
-      document.getElementById("feed-container").innerHTML = `<div class="empty-state"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2m1 15h-2v-2h2zm0-4h-2V7h2z"/></svg><h3>기록을 불러오지 못했습니다</h3><p>연결을 확인한 뒤 새로고침해 주세요.</p></div>`;
-      showToast("기록 연결에 실패했습니다. 다시 시도해 주세요.");
+      console.error(err);
+      $("#last-updated-txt").textContent = "· 연결 실패";
+      $("#feed-container").innerHTML = `<div class="empty">${icon("info")}<h3>기록을 불러오지 못했어요</h3><p>연결을 확인한 뒤 새로고침해 주세요.</p></div>`;
       return false;
-    } finally {
-      refreshIcon.style.animation = "none";
-    }
+    } finally { ri.classList.remove("spin"); }
   }
 
-  // ── 통합 피드 리스트 구성 ──────────────────────────────
+  // ── 통합 피드 · 중복 표시 ──
+  // 중복: 같은 캠핑장에 대해 바로 앞 기록과 같은 동작(찜 상태에서 다시 ‘찜’, 해제 상태에서 다시 ‘해제’).
+  // 화면이 오래 열려 있었거나 다른 기기에서 바뀐 상태로 누르거나, 보내기 재시도가 한 번 더 간 경우다. 집계에서 뺀다.
   function buildFeedItems() {
     const items = [];
-
-    // 찜 아이템
-    for (const s of state.saves) {
-      items.push({
-        id: `s-${s.created_at}-${s.campground_id}`,
-        type: s.action === "add" ? "add" : "remove",
-        campId: String(s.campground_id),
-        campName: nameOf(s.campground_id),
-        createdAt: s.created_at,
-        timeMs: Date.parse(s.created_at) || 0,
-        device: parseDevice("", s.platform, s.screen),
-        raw: s
-      });
+    const last = new Map();
+    for (const s of [...state.saves].sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at))) {
+      const id = String(s.campground_id), type = s.action === "add" ? "add" : "remove";
+      const dup = last.get(id) === type;
+      last.set(id, type);
+      items.push({ id: `s-${s.created_at}-${id}-${type}`, type, dup, campId: id, campName: nameOf(id), createdAt: s.created_at, timeMs: Date.parse(s.created_at) || 0, device: parseDevice("", s.platform, s.screen, s.timezone) });
     }
-
-    // 댓글 아이템
-    for (const c of state.comments) {
-      items.push({
-        id: `c-${c.id}`,
-        type: c.is_deleted ? "deleted" : "comment",
-        campId: String(c.campground_id),
-        campName: nameOf(c.campground_id),
-        nickname: c.nickname || "익명 캠퍼",
-        content: c.content || "",
-        createdAt: c.created_at,
-        timeMs: Date.parse(c.created_at) || 0,
-        device: c._dev ? parseDevice("", c._dev.platform, c._dev.screen) : null,
-        raw: c
-      });
-    }
-
-    // 목록 카드에서 상세로 들어간 아이템만 표시
-    for (const v of state.views) {
-      items.push({
-        id: `v-${v.created_at}-${v.campground_id}`,
-        type: "view",
-        campId: String(v.campground_id),
-        campName: nameOf(v.campground_id),
-        createdAt: v.created_at,
-        timeMs: Date.parse(v.created_at) || 0,
-        device: parseDevice("", v.platform, v.screen),
-        raw: v
-      });
-    }
-
-    // 최신순 정렬
+    for (const c of state.comments) items.push({ id: `c-${c.id}`, type: c.is_deleted ? "deleted" : "comment", campId: String(c.campground_id), campName: nameOf(c.campground_id), nickname: c.nickname || "익명 캠퍼", content: c.content || "", createdAt: c.created_at, timeMs: Date.parse(c.created_at) || 0, device: c._dev ? parseDevice("", c._dev.platform, c._dev.screen, c._dev.timezone) : null });
+    for (const v of state.views) items.push({ id: `v-${v.created_at}-${v.campground_id}`, type: "view", campId: String(v.campground_id), campName: nameOf(v.campground_id), createdAt: v.created_at, timeMs: Date.parse(v.created_at) || 0, device: parseDevice("", v.platform, v.screen, v.timezone) });
     items.sort((a, b) => b.timeMs - a.timeMs);
     state.feedItems = items;
   }
 
-  // ── 통계 계산 ───────────────────────────────────────────
+  // ── 지표 ──
   function renderStats() {
-    const now = Date.now();
-    const oneDayAgo = now - 86400000;
-
-    const totalSaves = state.saves.length;
-    const todaySaves = state.saves.filter((x) => (Date.parse(x.created_at) || 0) >= oneDayAgo).length;
-    const addSaves = state.saves.filter((x) => x.action === "add").length;
-    const removeSaves = state.saves.filter((x) => x.action === "remove").length;
-    const addRatio = totalSaves > 0 ? Math.round((addSaves / totalSaves) * 100) : 0;
-
-    const totalComments = state.comments.length;
-    const liveComments = state.comments.filter((x) => !x.is_deleted).length;
-    const delComments = totalComments - liveComments;
-
-    const metaCount = state.saves.filter((x) => x.screen || x.platform || x.timezone || x.language).length;
-    const totalViews = state.viewCounts.reduce((sum, x) => sum + Number(x.view_count || 0), 0);
-    const viewCamps = state.viewCounts.length;
-
-    document.getElementById("stat-total-saves").textContent = totalSaves.toLocaleString();
-    document.getElementById("stat-today-saves").textContent = todaySaves.toLocaleString();
-    document.getElementById("stat-add-saves").textContent = addSaves.toLocaleString();
-    document.getElementById("stat-add-ratio").textContent = addRatio;
-    document.getElementById("stat-remove-saves").textContent = removeSaves.toLocaleString();
-
-    document.getElementById("stat-comments").textContent = totalComments.toLocaleString();
-    document.getElementById("stat-live-comments").textContent = liveComments.toLocaleString();
-    document.getElementById("stat-del-comments").textContent = delComments.toLocaleString();
-
-    document.getElementById("stat-meta-count").textContent = metaCount.toLocaleString();
-    document.getElementById("stat-views").textContent = totalViews.toLocaleString();
-    document.getElementById("stat-view-camps").textContent = viewCamps.toLocaleString();
-
-    // 탭 카운트 갱신
-    document.getElementById("tab-cnt-all").textContent = state.feedItems.length;
-    document.getElementById("tab-cnt-adds").textContent = addSaves;
-    document.getElementById("tab-cnt-removes").textContent = removeSaves;
-    document.getElementById("tab-cnt-comments").textContent = totalComments;
-    document.getElementById("tab-cnt-views").textContent = totalViews;
+    // 집계는 중복을 빼고, ‘테스트 기록 숨기기’가 켜져 있으면 자동 테스트(CI 브라우저) 기록도 뺀다
+    const day = Date.now() - 864e5, real = state.feedItems.filter((x) => !x.dup && !(state.hideBot && x.device?.type === "bot"));
+    const n = (f) => real.filter(f).length;
+    const set = (k, v) => $$(`[data-kpi="${k}"]`).forEach((el) => countTo(el, v));
+    set("adds", n((x) => x.type === "add")); set("addsToday", n((x) => x.type === "add" && x.timeMs >= day));
+    set("removes", n((x) => x.type === "remove")); set("removesToday", n((x) => x.type === "remove" && x.timeMs >= day));
+    set("comments", state.comments.length); set("liveComments", state.comments.filter((c) => !c.is_deleted).length); set("delComments", state.comments.filter((c) => c.is_deleted).length);
+    const views = state.viewCounts.reduce((s, x) => s + Number(x.view_count || 0), 0);
+    set("views", views); set("viewCamps", state.viewCounts.length); set("dups", state.feedItems.filter((x) => x.dup && !(state.hideBot && x.device?.type === "bot")).length);
+    const cnt = (f) => (state.hideDup ? real : state.feedItems.filter((x) => !(state.hideBot && x.device?.type === "bot"))).filter(f).length;
+    countTo($("#tab-cnt-all"), cnt(() => true)); countTo($("#tab-cnt-adds"), cnt((x) => x.type === "add")); countTo($("#tab-cnt-removes"), cnt((x) => x.type === "remove"));
+    countTo($("#tab-cnt-comments"), state.comments.length); countTo($("#tab-cnt-views"), state.views.length);
   }
 
-  // ── 인기 캠핑장 칩 ─────────────────────────────────────
-  function renderTopCamps() {
-    const sorted = state.viewCounts
-      .map((x) => [String(x.campground_id), Number(x.view_count || 0)])
-      .filter(([, count]) => count > 0)
-      .slice(0, 10);
-    const box = document.getElementById("top-camps-chips");
-    if (!sorted.length) {
-      box.innerHTML = `<span style="font-size:0.8rem; color:var(--ink-3);">기록 없음</span>`;
-      return;
-    }
-
-    const medals = ["🥇", "🥈", "🥉", "4.", "5."];
-    box.innerHTML = sorted.map(([id, cnt], i) => `
-      <button type="button" class="chip-tag" data-filter-camp="${esc(nameOf(id))}" title="${esc(nameOf(id))} 모아보기">
-        <span>${medals[i]} ${esc(nameOf(id))}</span>
-        <span class="chip-cnt">${cnt}회</span>
-      </button>
-    `).join("");
-
-    box.querySelectorAll("[data-filter-camp]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const input = document.getElementById("q");
-        input.value = btn.dataset.filterCamp;
-        state.q = btn.dataset.filterCamp.toLowerCase();
-        document.getElementById("search-clear").classList.add("show");
-        applyFilters();
-      });
+  // ── 14일 막대(쌓기) ──
+  function renderChart() {
+    const days = [...Array(14)].map((_, i) => { const d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - 13 + i); return d; });
+    const S = ["add", "remove", "comment", "view"], C = { add: "var(--accent)", remove: "var(--flame)", comment: "var(--cobalt)", view: "var(--violet)" };
+    const grid = days.map((d) => { const k = dayKey(d); const o = { add: 0, remove: 0, comment: 0, view: 0 }; for (const x of state.feedItems) if (!x.dup && !(state.hideBot && x.device?.type === "bot") && dayKey(x.timeMs) === k) o[x.type === "deleted" ? "comment" : x.type]++; return o; });
+    const max = Math.max(1, ...grid.map((o) => S.reduce((s, k) => s + o[k], 0)));
+    const W = Math.max(200, Math.round($("#chart").clientWidth || 700)), H = 150, base = 128, top = 20, bw = W / 14 * 0.56;
+    let out = `<line x1="0" x2="${W}" y1="${base + .5}" y2="${base + .5}" stroke="var(--line)"/>`;
+    grid.forEach((o, i) => {
+      const x = (i + 0.5) * (W / 14) - bw / 2; let y = base;
+      const tot = S.reduce((s, k) => s + o[k], 0);
+      for (const k of S) { if (!o[k]) continue; const h = (o[k] / max) * (base - top); y -= h; out += `<rect class="bar" style="--d:${i}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="3" fill="${C[k]}"><title>${days[i].getMonth() + 1}/${days[i].getDate()} · ${{ add: "찜 추가", remove: "찜 해제", comment: "한마디", view: "상세 진입" }[k]} ${o[k]}건</title></rect>`; }
+      if (i % 2 === 1 || i === 13) out += `<text x="${(i + 0.5) * (W / 14)}" y="${H - 4}" text-anchor="middle">${days[i].getMonth() + 1}/${days[i].getDate()}</text>`;
+      if (tot) out += `<text x="${(i + 0.5) * (W / 14)}" y="${(y - 3).toFixed(1)}" text-anchor="middle" style="font-weight:700;fill:var(--ink-2)">${tot}</text>`;
     });
+    $("#chart").setAttribute("viewBox", `0 0 ${W} ${H}`);
+    $("#chart").innerHTML = out;
   }
 
-  // ── 필터링 로직 ─────────────────────────────────────────
-  function applyFilters() {
-    const { tab, q, dateRange, deviceFilter } = state;
-    const now = Date.now();
+  // ── 옆 패널 ──
+  function renderTop() {
+    const list = state.viewCounts.map((x) => [String(x.campground_id), Number(x.view_count || 0)]).filter(([, c]) => c > 0).slice(0, 10);
+    const box = $("#top-camps");
+    if (!list.length) { box.innerHTML = `<li class="kpi-sub">기록 없음</li>`; return; }
+    const max = list[0][1];
+    box.innerHTML = list.map(([id, c], i) => `<li><button type="button" data-filter-camp="${esc(nameOf(id))}" title="${esc(nameOf(id))} 기록만 보기"><span class="n">${i + 1}</span><span class="nm"><span>${esc(nameOf(id))}</span><span class="meter"><i style="--w:${Math.max(6, (c / max) * 100)}%;--i:${i}"></i></span></span><span class="c">${c}회</span></button></li>`).join("");
+  }
+  function renderDevices() {
+    const m = new Map(); let total = 0;
+    for (const x of state.feedItems) { if (x.dup || !x.device || (state.hideBot && x.device.type === "bot")) continue; const k = x.device.type; m.set(k, (m.get(k) || 0) + 1); total++; }
+    const L = { mobile: ["phone", "모바일"], desktop: ["desktop", "데스크톱"], tablet: ["tablet", "태블릿"], bot: ["bot", "봇·테스트"], other: ["unknown", "알 수 없음"] };
+    const rows = [...m].sort((a, b) => b[1] - a[1]);
+    $("#devices").innerHTML = rows.length ? rows.map(([k, n], i) => `<div class="dev">${icon(L[k][0])}<span class="nm"><span>${L[k][1]}</span><span class="meter"><i style="--w:${(n / total) * 100}%;--i:${i}"></i></span></span><span class="c">${Math.round((n / total) * 100)}%</span></div>`).join("") : `<span class="kpi-sub">기록 없음</span>`;
+  }
 
-    let filtered = state.feedItems.filter((item) => {
-      // 1. 탭 필터
-      if (tab === "adds" && item.type !== "add") return false;
-      if (tab === "removes" && item.type !== "remove") return false;
-      if (tab === "comments" && item.type !== "comment" && item.type !== "deleted") return false;
-      if (tab === "views" && item.type !== "view") return false;
-
-      // 2. 날짜 필터
-      if (dateRange === "today" && (now - item.timeMs > 86400000)) return false;
-      if (dateRange === "3d" && (now - item.timeMs > 86400000 * 3)) return false;
-      if (dateRange === "7d" && (now - item.timeMs > 86400000 * 7)) return false;
-
-      // 3. 기기 필터
-      if (deviceFilter === "mobile" && item.device?.type !== "mobile") return false;
-      if (deviceFilter === "desktop" && item.device?.type !== "desktop") return false;
-      if (deviceFilter === "bot" && item.device?.type !== "bot") return false;
-
-      // 4. 검색어 필터
-      if (q) {
-        const targetStr = `${item.campName} ${item.campId} ${item.nickname || ""} ${item.content || ""} ${item.device?.label || ""} ${item.device?.os || ""} ${item.device?.browser || ""}`.toLowerCase();
-        if (!targetStr.includes(q)) return false;
-      }
-
+  // ── 거르기 ──
+  function applyFilters(mode = "swap") {
+    const { tab, q, dateRange, deviceFilter, hideDup } = state, now = Date.now();
+    const lim = { today: 1, "3d": 3, "7d": 7 }[dateRange];
+    state.filteredItems = state.feedItems.filter((it) => {
+      if (hideDup && it.dup) return false;
+      if (state.hideBot && it.device?.type === "bot") return false;
+      if (tab === "adds" && it.type !== "add") return false;
+      if (tab === "removes" && it.type !== "remove") return false;
+      if (tab === "comments" && it.type !== "comment" && it.type !== "deleted") return false;
+      if (tab === "views" && it.type !== "view") return false;
+      if (lim && now - it.timeMs > lim * 864e5) return false;
+      if (deviceFilter !== "all" && it.device?.type !== deviceFilter) return false;
+      if (q && !`${it.campName} ${it.campId} ${it.nickname || ""} ${it.content || ""} ${it.device?.label || ""} ${it.device?.os || ""}`.toLowerCase().includes(q)) return false;
       return true;
     });
-
-    state.filteredItems = filtered;
-    renderFeed();
+    renderStats();
+    renderFeed(mode);
   }
 
-  // ── 피드 렌더링 ─────────────────────────────────────────
-  function renderFeed() {
-    const box = document.getElementById("feed-container");
-    const countTxt = document.getElementById("filtered-count-txt");
-    const loadMoreBtn = document.getElementById("btn-load-more");
-
-    const items = state.filteredItems;
-      countTxt.textContent = `진입 결과 ${items.length.toLocaleString()}건 (전체 ${state.feedItems.length.toLocaleString()}건 중)`;
-
-    if (!items.length) {
-      box.innerHTML = `
-        <div class="empty-state">
-          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-          <h3>조건에 일치하는 기록이 없습니다</h3>
-          <p>검색어나 필터 조건을 변경해 보세요.</p>
-        </div>`;
-      loadMoreBtn.style.display = "none";
-      return;
-    }
-
-    // 페이징 슬라이스
-    const visible = items.slice(0, state.pageLimit);
-    loadMoreBtn.style.display = items.length > state.pageLimit ? "inline-block" : "none";
-
-    // 날짜별 그룹핑
-    const groups = new Map();
-    for (const it of visible) {
-      const gKey = formatDateGroupKey(it.createdAt);
-      if (!groups.has(gKey)) groups.set(gKey, []);
-      groups.get(gKey).push(it);
-    }
-
-    let html = "";
-    for (const [dateHeader, groupItems] of groups.entries()) {
-      html += `<div class="date-group">`;
-      html += `<div class="date-divider"><span>${esc(dateHeader)}</span></div>`;
-
-      for (const item of groupItems) {
-        const d = item.device;
-        const exploreUrl = `../place/${encodeURIComponent(item.campId)}/`;
-
-        // 뱃지 판별
-        let badgeClass = "badge-add", badgeText = "+ 찜하기";
-        if (item.type === "remove") { badgeClass = "badge-remove"; badgeText = "- 찜해제"; }
-        else if (item.type === "comment") { badgeClass = "badge-comment"; badgeText = "💬 댓글"; }
-        else if (item.type === "deleted") { badgeClass = "badge-deleted"; badgeText = "🗑 삭제됨"; }
-        else if (item.type === "view") { badgeClass = "badge-comment"; badgeText = "↗ 상세 진입"; }
-
-        html += `
-          <article class="log-card" data-camp-id="${esc(item.campId)}">
-            <div class="log-top">
-              <span class="log-time" title="${esc(item.createdAt)}">
-                <svg style="width:13px;height:13px;"><use href="#i-clock"/></svg>
-                ${formatRelativeTime(item.createdAt)} · ${formatTimeOnly(item.createdAt)}
-              </span>
-              <span class="log-badge ${badgeClass}">${badgeText}</span>
-            </div>
-
-            <div class="log-main">
-              <div class="camp-title-row">
-                <a class="camp-name-link" href="${exploreUrl}" target="_blank" rel="noopener" title="상세 보기">
-                  ${esc(item.campName)}
-                </a>
-                <div class="camp-links">
-                  <a href="${exploreUrl}" class="camp-pill-btn primary" target="_blank" rel="noopener">상세 ↗</a>
-                  <button type="button" class="camp-pill-btn" data-copy-id="${esc(item.campId)}" title="캠핑장 ID 복사">#${esc(item.campId)}</button>
-                </div>
-              </div>
-
-              ${item.content ? `
-                <div class="comment-box ${item.type === "deleted" ? "is-deleted" : ""}">
-                  ${esc(item.content)}
-                </div>
-              ` : ""}
-            </div>
-
-            <div class="log-meta">
-              <div class="meta-left">
-                ${item.nickname ? `
-                  <span style="font-weight:700; color:var(--ink-2); display:inline-flex; align-items:center; gap:4px;">
-                    <svg style="width:13px;height:13px;"><use href="#i-user"/></svg>
-                    ${esc(item.nickname)}
-                  </span>
-                ` : ""}
-
-                ${d ? `
-                  <span class="device-pill">
-                    <span>${d.icon}</span>
-                    <span>${esc(d.label)} · ${esc(d.browser)}</span>
-                    <button type="button" class="btn-info-detail" data-device-info="${esc(JSON.stringify(d))}" aria-label="기기 상세">i</button>
-                  </span>
-                ` : `<span style="color:var(--ink-3);">기기 정보 없음</span>`}
-              </div>
-
-            </div>
-          </article>
-        `;
+  // ── 피드 그리기: swap(사라졌다 나타남·차례로), append(새로 붙은 것만), refresh(새로 온 기록만 반짝) ──
+  const TYPE = {
+    add: ["heart", "t-add", "찜 추가"], remove: ["heart-off", "t-rm", "찜 해제"], comment: ["comment", "t-cmt", "한마디"],
+    deleted: ["trash", "t-dup", "삭제된 한마디"], view: ["enter", "t-view", "상세 진입"],
+  };
+  function rowHtml(it, cls, i) {
+    const [ic, tc, label] = TYPE[it.type], d = it.device, url = `../place/${encodeURIComponent(it.campId)}/`;
+    return `<div class="row ${cls}${it.dup ? " dup" : ""}" style="--i:${Math.min(i, 14)}" data-id="${esc(it.id)}">
+      <span class="tchip ${tc}" title="${label}">${icon(ic, "")}</span>
+      <div class="r-main">
+        <div class="r-title"><a class="r-name" href="${url}" target="_blank" rel="noopener">${esc(it.campName)}</a><span class="tag ${tc}">${label}</span>${it.dup ? `<span class="tag t-dup" title="이미 같은 상태였는데 다시 기록됨(화면이 오래 열려 있었거나 재전송)">중복</span>` : ""}</div>
+        <div class="r-meta"><span title="${esc(it.createdAt)}">${icon("clock")}${rel(it.createdAt)} · ${clock(it.createdAt)}</span>${it.nickname ? `<span>${icon("user")}${esc(it.nickname)}</span>` : ""}${d ? `<span>${icon(d.ic)}${esc(d.label)}</span>` : ""}</div>
+        ${it.content ? `<div class="r-cmt${it.type === "deleted" ? " del" : ""}">${esc(it.content)}</div>` : ""}
+      </div>
+      <div class="r-act">
+        <a class="mini" href="${url}" target="_blank" rel="noopener" aria-label="상세 열기">${icon("enter")}</a>
+        <button type="button" class="mini" data-copy-id="${esc(it.campId)}" title="ID 복사">${icon("hash")}${esc(it.campId)}</button>
+        ${d ? `<button type="button" class="mini" data-device-info="${esc(JSON.stringify(d))}" aria-label="기기 정보">${icon("info")}</button>` : ""}
+      </div></div>`;
+  }
+  function renderFeed(mode = "swap") {
+    const box = $("#feed-container"), items = state.filteredItems, more = $("#btn-load-more");
+    $("#filtered-count-txt").textContent = `${items.length.toLocaleString()}건 보는 중 · 전체 ${state.feedItems.length.toLocaleString()}건`;
+    const draw = () => {
+      if (!items.length) { box.innerHTML = `<div class="empty">${icon("search")}<h3>조건에 맞는 기록이 없어요</h3><p>검색어나 기간·기기를 바꿔 보세요.</p></div>`; more.hidden = true; return; }
+      const visible = items.slice(0, state.pageLimit);
+      more.hidden = items.length <= state.pageLimit;
+      let html = "", cur = "", i = 0;
+      const perDay = new Map(); for (const it of visible) { const k = dayKey(it.timeMs); perDay.set(k, (perDay.get(k) || 0) + 1); }
+      for (const it of visible) {
+        const k = dayKey(it.timeMs);
+        if (k !== cur) { cur = k; html += `<div class="day"><span>${esc(dayLabel(it.createdAt))}</span><span>${perDay.get(k)}건</span></div>`; }
+        const isNew = !state.shown.has(it.id);
+        const cls = mode === "swap" ? "enter" : isNew ? (mode === "refresh" ? "fresh" : "enter") : "";
+        html += rowHtml(it, cls, mode === "swap" ? i : isNew ? i : 0);
+        if (mode === "swap" || isNew) i++;
       }
-      html += `</div>`;
-    }
-
-    box.innerHTML = html;
-
-    // 이벤트 바인딩
-    box.querySelectorAll("[data-copy-id]").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        navigator.clipboard.writeText(btn.dataset.copyId).then(() => {
-          showToast(`캠핑장 ID (#${btn.dataset.copyId})가 복사되었습니다.`);
-        });
-      });
-    });
-
-    box.querySelectorAll("[data-device-info]").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        openDeviceModal(JSON.parse(btn.dataset.deviceInfo));
-      });
-    });
+      box.innerHTML = html;
+      visible.forEach((it) => state.shown.add(it.id));
+    };
+    if (mode === "swap" && MOTION && box.querySelector(".row, .empty")) { box.classList.add("leaving"); setTimeout(() => { draw(); box.classList.remove("leaving"); }, 140); }
+    else draw();
   }
 
-  // ── 기기 모달 ───────────────────────────────────────────
-  function openDeviceModal(d) {
-    const modal = document.getElementById("deviceModal");
-    document.getElementById("modal-dev-icon").textContent = d.icon || "📱";
-    document.getElementById("modal-dev-title").textContent = `${d.label} (${d.os})`;
+  // ── 동작 연결(한 번만, 이벤트 위임) ──
+  $("#feed-container").addEventListener("click", (e) => {
+    const cp = e.target.closest("[data-copy-id]");
+    if (cp) { navigator.clipboard?.writeText(cp.dataset.copyId).then(() => showToast(`#${cp.dataset.copyId} 복사했어요`)); return; }
+    const di = e.target.closest("[data-device-info]");
+    if (di) openDevice(JSON.parse(di.dataset.deviceInfo));
+  });
+  $("#top-camps").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-filter-camp]"); if (!b) return;
+    $("#q").value = b.dataset.filterCamp; state.q = b.dataset.filterCamp.toLowerCase(); $("#search-clear").classList.add("show"); state.pageLimit = 30; applyFilters();
+    $(".feed-panel").scrollIntoView({ behavior: MOTION ? "smooth" : "auto", block: "start" });
+  });
 
-    document.getElementById("modal-kv-body").innerHTML = `
-      <dt>기기 구분</dt><dd>${esc(d.label)}</dd>
-      <dt>운영체제</dt><dd>${esc(d.os)}</dd>
-      <dt>브라우저</dt><dd>${esc(d.browser)}</dd>
-      <dt>화면 해상도</dt><dd>${esc(d.screen || "미제공")}</dd>
-      <dt>플랫폼</dt><dd>${esc(d.platform || "미제공")}</dd>
-    `;
-
-    modal.showModal();
+  // 기기 정보 창(열림·닫힘 움직임)
+  const modal = $("#deviceModal");
+  function openDevice(d) {
+    $("#modal-dev-icon use").setAttribute("href", `#i-${d.ic || "unknown"}`);
+    $("#modal-dev-title").textContent = `${d.label} (${d.os})`;
+    $("#modal-kv-body").innerHTML = `<dt>기기</dt><dd>${esc(d.label)}</dd><dt>운영체제</dt><dd>${esc(d.os)}</dd><dt>브라우저</dt><dd>${esc(d.browser)}</dd><dt>화면</dt><dd>${esc(d.screen || "미제공")}</dd><dt>플랫폼</dt><dd>${esc(d.platform || "미제공")}</dd>`;
+    modal.classList.remove("closing"); modal.showModal();
   }
+  function closeDevice() {
+    if (!modal.open) return;
+    if (!MOTION) return modal.close();
+    modal.classList.add("closing");
+    modal.addEventListener("animationend", () => { modal.classList.remove("closing"); modal.close(); }, { once: true });
+  }
+  $("#modal-close-x").addEventListener("click", closeDevice);
+  modal.addEventListener("click", (e) => { if (e.target === modal) closeDevice(); });
+  modal.addEventListener("cancel", (e) => { e.preventDefault(); closeDevice(); });
 
-  const closeModal = () => document.getElementById("deviceModal").close();
-  document.getElementById("modal-close-x").addEventListener("click", closeModal);
-  document.getElementById("modal-close-btn").addEventListener("click", closeModal);
-  document.getElementById("deviceModal").addEventListener("click", (e) => {
-    if (e.target.id === "deviceModal") closeModal();
+  // 밑줄 탭: 막대가 고른 탭으로 미끄러진다
+  const tabs = $("#tabs"), ink = $(".utabs-ink");
+  function moveInk(animate = true) {
+    const on = $('.utab[aria-selected="true"]', tabs); if (!on) return;
+    if (!animate) ink.style.transition = "none";
+    ink.style.width = `${on.offsetWidth - 16}px`; ink.style.transform = `translateX(${on.offsetLeft + 8}px)`;
+    if (!animate) { ink.offsetWidth; ink.style.transition = ""; }
+  }
+  tabs.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-tab]"); if (!b || b.getAttribute("aria-selected") === "true") return;
+    $$(".utab", tabs).forEach((x) => x.setAttribute("aria-selected", String(x === b)));
+    b.scrollIntoView({ behavior: MOTION ? "smooth" : "auto", inline: "center", block: "nearest" });
+    moveInk(); state.tab = b.dataset.tab; state.pageLimit = 30; applyFilters();
   });
-
-  // ── CSV 내보내기 ────────────────────────────────────────
-  document.getElementById("btn-export-csv").addEventListener("click", () => {
-    const items = state.filteredItems;
-    if (!items.length) {
-      showToast("내보낼 로그가 없습니다.");
-      return;
-    }
-
-    const headersRow = ["시각(ISO)", "유형", "캠핑장ID", "캠핑장명", "작성자", "내용", "기기명", "OS", "브라우저", "화면"];
-    const rows = items.map((it) => [
-      `"${it.createdAt || ""}"`,
-      `"${it.type}"`,
-      `"${it.campId}"`,
-      `"${(it.campName || "").replace(/"/g, '""')}"`,
-      `"${(it.nickname || "").replace(/"/g, '""')}"`,
-      `"${(it.content || "").replace(/"/g, '""')}"`,
-      `"${it.device?.label || ""}"`,
-      `"${it.device?.os || ""}"`,
-      `"${it.device?.browser || ""}"`,
-      `"${it.device?.screen || ""}"`
-    ]);
-
-    const csvContent = "\uFEFF" + [headersRow.join(","), ...rows.map((r) => r.join(","))].join("\r\n");
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `moyeora_camping_log_${new Date().toISOString().slice(0, 10)}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
-    showToast("CSV 파일 다운로드가 시작되었습니다.");
+  tabs.addEventListener("keydown", (e) => {
+    if (!["ArrowLeft", "ArrowRight"].includes(e.key)) return;
+    const all = $$(".utab", tabs), i = all.indexOf(document.activeElement); if (i < 0) return;
+    const n = all[(i + (e.key === "ArrowRight" ? 1 : all.length - 1)) % all.length]; n.focus(); n.click(); e.preventDefault();
   });
+  let rz = null;
+  addEventListener("resize", () => { moveInk(false); clearTimeout(rz); rz = setTimeout(() => state.loaded && renderChart(), 200); });
+  document.fonts?.ready.then(() => moveInk(false));
+  moveInk(false);
 
-  // ── 탭 전환 ─────────────────────────────────────────────
-  document.querySelectorAll("[data-tab]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll("[data-tab]").forEach((b) => b.classList.toggle("on", b === btn));
-      state.tab = btn.dataset.tab;
-      state.pageLimit = 30; // 탭 전환 시 페이징 초기화
-      applyFilters();
+  // 드롭다운(직접 그림): 열기·닫기 움직임, 바깥 누르면 닫힘, 위·아래·Enter·Esc
+  function closeAllDd(except) { $$(".dd[data-open]").forEach((d) => { if (d !== except) { d.removeAttribute("data-open"); $(".dd-btn", d).setAttribute("aria-expanded", "false"); } }); }
+  $$(".dd").forEach((dd) => {
+    const btn = $(".dd-btn", dd), key = dd.dataset.dd, opts = $$(".dd-opt", dd);
+    const open = (v) => { closeAllDd(dd); dd.toggleAttribute("data-open", v); btn.setAttribute("aria-expanded", String(v)); if (v) ($(".dd-opt[aria-selected=true]", dd) || opts[0]).focus({ preventScroll: true }); };
+    btn.addEventListener("click", () => open(!dd.hasAttribute("data-open")));
+    const pick = (o) => {
+      opts.forEach((x) => x.setAttribute("aria-selected", String(x === o)));
+      $(".dd-val", dd).textContent = o.textContent.trim(); btn.classList.toggle("set", o.dataset.v !== "all");
+      state[key] = o.dataset.v; state.pageLimit = 30; open(false); btn.focus(); applyFilters();
+    };
+    opts.forEach((o) => o.addEventListener("click", () => pick(o)));
+    dd.addEventListener("keydown", (e) => {
+      const i = opts.indexOf(document.activeElement);
+      if (e.key === "Escape") { open(false); btn.focus(); }
+      else if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); if (!dd.hasAttribute("data-open")) return open(true); opts[(i + (e.key === "ArrowDown" ? 1 : opts.length - 1)) % opts.length].focus(); }
+      else if ((e.key === "Enter" || e.key === " ") && i >= 0) { e.preventDefault(); pick(opts[i]); }
     });
   });
+  document.addEventListener("click", (e) => { if (!e.target.closest(".dd")) closeAllDd(); });
 
-  // ── 검색 디바운스 ───────────────────────────────────────
-  let debounceTimer = null;
-  const searchInput = document.getElementById("q");
-  const clearBtn = document.getElementById("search-clear");
+  // 검색(입력 멈추면 거름)
+  let deb = null; const qi = $("#q"), clr = $("#search-clear");
+  qi.addEventListener("input", () => { const v = qi.value.trim(); clr.classList.toggle("show", Boolean(v)); clearTimeout(deb); deb = setTimeout(() => { state.q = v.toLowerCase(); state.pageLimit = 30; applyFilters(); }, 160); });
+  clr.addEventListener("click", () => { qi.value = ""; clr.classList.remove("show"); state.q = ""; state.pageLimit = 30; applyFilters(); qi.focus(); });
 
-  searchInput.addEventListener("input", (e) => {
-    const val = e.target.value.trim();
-    clearBtn.classList.toggle("show", Boolean(val));
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-      state.q = val.toLowerCase();
-      state.pageLimit = 30;
-      applyFilters();
-    }, 120);
+  $("#hide-dup").addEventListener("change", (e) => { state.hideDup = e.target.checked; state.pageLimit = 30; applyFilters(); });
+  $("#hide-bot").addEventListener("change", (e) => { state.hideBot = e.target.checked; state.pageLimit = 30; renderChart(); renderDevices(); applyFilters(); });
+  $("#btn-load-more").addEventListener("click", () => { state.pageLimit += 30; renderFeed("append"); });
+  $("#btn-refresh").addEventListener("click", async () => { if (await fetchLogs()) showToast("최신 기록으로 갱신했어요"); });
+
+  // CSV
+  $("#btn-export-csv").addEventListener("click", () => {
+    const items = state.filteredItems; if (!items.length) return showToast("내보낼 기록이 없어요");
+    const q = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+    const rows = [["시각(ISO)", "유형", "중복", "캠핑장ID", "캠핑장명", "작성자", "내용", "기기", "OS", "화면"], ...items.map((it) => [it.createdAt, it.type, it.dup ? "Y" : "", it.campId, it.campName, it.nickname, it.content, it.device?.label, it.device?.os, it.device?.screen])];
+    const blob = new Blob(["﻿" + rows.map((r) => r.map(q).join(",")).join("\r\n")], { type: "text/csv;charset=utf-8;" });
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `letscamp_log_${new Date().toISOString().slice(0, 10)}.csv`; a.click(); URL.revokeObjectURL(a.href);
+    showToast("CSV 파일을 내려받아요");
   });
 
-  clearBtn.addEventListener("click", () => {
-    searchInput.value = "";
-    clearBtn.classList.remove("show");
-    state.q = "";
-    state.pageLimit = 30;
-    applyFilters();
-    searchInput.focus();
-  });
-
-  // ── 기간 및 기기 셀렉트 필터 ────────────────────────────
-  document.getElementById("filter-date").addEventListener("change", (e) => {
-    state.dateRange = e.target.value;
-    state.pageLimit = 30;
-    applyFilters();
-  });
-
-  document.getElementById("filter-device").addEventListener("change", (e) => {
-    state.deviceFilter = e.target.value;
-    state.pageLimit = 30;
-    applyFilters();
-  });
-
-  // ── 더 보기 ─────────────────────────────────────────────
-  document.getElementById("btn-load-more").addEventListener("click", () => {
-    state.pageLimit += 30;
-    renderFeed();
-  });
-
-  // ── 수동 및 자동 갱신 ───────────────────────────────────
-  document.getElementById("btn-refresh").addEventListener("click", async () => {
-    if (await fetchLogs()) showToast("최신 기록으로 갱신했습니다.");
-  });
-
-  const autoBtn = document.getElementById("btn-auto-refresh");
-  const autoState = document.getElementById("auto-state");
-
-  function setAutoRefresh(enable) {
-    state.autoRefresh = enable;
-    autoState.textContent = enable ? "ON" : "OFF";
-    autoState.style.color = enable ? "var(--accent)" : "var(--ink-3)";
-    autoBtn.classList.toggle("active", enable);
-
-    clearInterval(state.timer);
-    if (enable) {
-      state.timer = setInterval(fetchLogs, 30000);
-    }
-  }
-
-  autoBtn.addEventListener("click", () => {
-    setAutoRefresh(!state.autoRefresh);
-    showToast(`실시간 자동 갱신이 ${state.autoRefresh ? "켜졌습니다" : "꺼졌습니다"}.`);
-  });
-
-  // ── 초기화 실행 ─────────────────────────────────────────
-  setAutoRefresh(true);
+  // 자동 갱신(30초)
+  const auto = $("#auto-refresh");
+  function setAuto(on) { clearInterval(state.timer); if (on) state.timer = setInterval(() => fetchLogs(), 30000); $("#live-dot").classList.toggle("off", !on); }
+  auto.addEventListener("change", () => { setAuto(auto.checked); showToast(`자동 갱신을 ${auto.checked ? "켰어요" : "껐어요"}`); });
+  setAuto(true);
   fetchLogs();
 })();
 </script>
