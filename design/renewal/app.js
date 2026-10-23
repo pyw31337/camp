@@ -1199,7 +1199,7 @@ function publicParkCard(c) {
     <div class="park-card-icon">${thIc("PARK")}</div>
     <div class="park-card-body">
       <p class="park-card-kicker">공원 정보 ${source}</p>
-      <h3>${esc(nameOf(c).name)}</h3>
+      <div class="park-card-title"><h3>${esc(nameOf(c).name)}</h3>${heartBtn(c)}</div>
       <p class="park-card-region">${ic("pin")}${esc(region(c))}</p>
       <ul>${facts.map(([l, x]) => `<li><b>${esc(l)}</b><span>${esc(x)}</span></li>`).join("")}</ul>
     </div>

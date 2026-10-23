@@ -426,6 +426,9 @@ img { color: transparent; }
 .park-card-kicker { display: flex; align-items: center; gap: 4px; min-height: 16px; margin: 0; color: var(--ink-3); font-size: var(--fs-min); font-weight: 800; letter-spacing: .02em; }
 .park-card-kicker .ib { position: relative; z-index: 2; color: var(--ink-3); }
 .park-card h3 { margin: 0; color: var(--ink); font-size: 1.06rem; font-weight: 850; line-height: 1.35; }
+.park-card-title { display: flex; align-items: flex-start; gap: 8px; min-width: 0; }
+.park-card-title h3 { min-width: 0; flex: 1; }
+.park-card-title .heart { position: relative; z-index: 2; flex: 0 0 auto; }
 .park-card-region { display: flex; align-items: center; min-width: 0; gap: 5px; margin: 0; color: var(--ink-3); font-size: .82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .park-card-region .ic { width: 13px; height: 13px; flex: 0 0 auto; }
 .park-card ul { display: grid; gap: 3px; margin: 5px 0 0; padding: 0; list-style: none; color: var(--ink-2); font-size: .79rem; line-height: 1.45; }
