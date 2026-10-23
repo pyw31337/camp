@@ -629,10 +629,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 1234,
+    "campgrounds": 1235,
     "by_grade": {
      "REFERENCE": 465,
-     "MENTION": 1047,
+     "MENTION": 1061,
      "CONFIRMED": 6,
      "OPERATOR": 123
     }
@@ -2575,5 +2575,5 @@
    }
   }
  ],
- "generated_at": "2026-10-23T00:33:23.736Z"
+ "generated_at": "2026-10-23T02:25:06.235Z"
 }

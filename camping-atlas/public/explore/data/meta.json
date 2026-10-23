@@ -714,9 +714,9 @@
     "with_no_tags": 2180,
     "with_notices": 140
   },
-  "updated_at": "2026-10-23T00:32:00.832Z",
+  "updated_at": "2026-10-23T02:23:40.882Z",
   "operator_site_facts": {
-    "generated_at": "2026-10-23T00:32:01.357Z",
+    "generated_at": "2026-10-23T02:23:41.431Z",
     "campgrounds": 202,
     "w": 106,
     "pk": 53,
@@ -728,7 +728,7 @@
     "sites_read": 883
   },
   "spec_sheet": {
-    "generated_at": "2026-10-23T00:32:01.607Z",
+    "generated_at": "2026-10-23T02:23:41.699Z",
     "campgrounds_with_spec": 2303,
     "roundup_reviews_skipped": 4871,
     "fields": {
@@ -750,7 +750,7 @@
       },
       "MANNER_TIME": {
         "official": 583,
-        "mention": 784
+        "mention": 785
       },
       "MIN_STAY": {
         "official": 23,
@@ -807,7 +807,7 @@
     }
   },
   "review_digest": {
-    "generated_at": "2026-10-23T00:32:14.672Z",
+    "generated_at": "2026-10-23T02:23:55.904Z",
     "campgrounds": 2842,
     "with_pros": 2551,
     "with_cons": 537,
@@ -815,12 +815,12 @@
     "sanity_dropped": 628
   },
   "nearby_licensed": {
-    "generated_at": "2026-10-23T00:32:17.349Z",
+    "generated_at": "2026-10-23T02:23:58.629Z",
     "campgrounds": 3109,
     "details": 3109
   },
   "profiles": {
-    "generated_at": "2026-10-23T00:32:21.036Z",
+    "generated_at": "2026-10-23T02:24:02.376Z",
     "total": 6404,
     "fields": {
       "TYPE": {
@@ -836,7 +836,7 @@
         "facts": 644
       },
       "MANNER": {
-        "any": 1000,
+        "any": 1001,
         "facts": 349
       },
       "PRICE": {
@@ -934,7 +934,7 @@
     }
   },
   "coverage": {
-    "measured_at": "2026-10-23T00:33:23.242Z",
+    "measured_at": "2026-10-23T02:25:05.731Z",
     "total": 6404,
     "goal": 2500,
     "fields": {
@@ -951,7 +951,7 @@
         "confirmed": 856
       },
       "manner": {
-        "any": 1234,
+        "any": 1235,
         "confirmed": 583
       },
       "extra_fee": {
@@ -979,7 +979,7 @@
         "confirmed": 0
       },
       "rich5": {
-        "any": 1550,
+        "any": 1552,
         "confirmed": 0
       }
     }
