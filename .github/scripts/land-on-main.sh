@@ -50,6 +50,15 @@ for i in 1 2 3 4 5; do
 done
 [ -n "$pushed" ] || { echo "::error::${BR} push 실패"; exit 1; }
 SHA="$(git rev-parse HEAD)"
+# GITHUB_TOKEN으로 연 봇 PR의 pull_request 실행은 승인 대기(action_required)로 작업 없이 멈춰 있다가 PR이 닫히면 '실패'로 바뀌어
+# 매번 빨간 알림을 보낸다(2026-10-23 소유자: “왜 반복적으로 에러가 나는거야?”). 실제 검사는 아래 workflow_dispatch 실행이다.
+# 승인 대기 실행은 이미 ‘completed’라 취소가 안 되므로(409) 작업이 0개인 것만 지운다(빈 기록).
+clear_pending_pr_runs() {
+  gh api "repos/${REPO}/actions/runs?event=pull_request&branch=${BR}&status=action_required&per_page=100" -q '.workflow_runs[].id' 2>/dev/null \
+    | while read -r id; do
+        [ "$(gh api "repos/${REPO}/actions/runs/${id}/jobs" -q '.total_count' 2>/dev/null)" = "0" ] && gh api -X DELETE "repos/${REPO}/actions/runs/${id}" >/dev/null 2>&1 || true
+      done
+}
 PR="$(gh pr list -R "$REPO" --head "$BR" --base main --state open --json number -q '.[0].number')"
 if [ -z "$PR" ]; then
   gh pr create -R "$REPO" --head "$BR" --base main --title "chore(data): ${LABEL} 자동 갱신" \
@@ -77,13 +86,20 @@ while :; do
       jobs="$(gh api "repos/${REPO}/actions/runs/${run_id}/jobs?per_page=100" -q '[.jobs[] | select(.name=="Lint and build" or .name=="Rail swipe") | {n:.name,s:.status,c:.conclusion}]')"
       ok=$(echo "$jobs" | jq '[.[] | select(.s=="completed" and .c=="success") | .n] | unique | length')
       if [ "$conclusion" = "success" ] && [ "$ok" = 2 ]; then break; fi
+      # 실행은 ‘성공’인데 작업 목록이 아직 진행 중으로 보이는 순간이 있다(API 지연, 2026-10-22 날씨 예보 PR #289가 이걸로 실패 처리됨).
+      # 작업 중 실패가 없으면 잠시 뒤 다시 읽는다.
+      if [ "$conclusion" = "success" ] && [ "$(echo "$jobs" | jq '[.[] | select(.c=="failure" or .c=="cancelled")] | length')" = 0 ] && [ "${jobs_retry:-0}" -lt 8 ]; then
+        jobs_retry=$(( ${jobs_retry:-0} + 1 )); sleep "$poll"; continue
+      fi
+      clear_pending_pr_runs
       echo "::error::방금 요청한 Web quality 실행이 실패했습니다 — PR #${PR}를 열어둡니다 (run #${run_id}, workflow=${conclusion}): ${jobs}"
       exit 1
     fi
   fi
-  [ "$(date +%s)" -lt "$deadline" ] || { echo "::error::필수 검사 시간초과 — PR #${PR}"; exit 1; }
+  [ "$(date +%s)" -lt "$deadline" ] || { clear_pending_pr_runs; echo "::error::필수 검사 시간초과 — PR #${PR}"; exit 1; }
   sleep "$poll"
 done
+clear_pending_pr_runs
 for i in 1 2 3 4; do
   if gh pr merge "$PR" -R "$REPO" --merge --match-head-commit "$SHA"; then echo "병합 완료: PR #${PR}"; exit 0; fi
   sleep $((i * 10))

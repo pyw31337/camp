@@ -28,7 +28,9 @@ for (const vp of [{ width: 1366, height: 900 }, { width: 390, height: 844 }]) {
     await page.waitForFunction(() => document.querySelector(".d-sec, [class*=detail]") && document.body.innerText.length > 400, null, { timeout: 30000 }).catch(() => fails.push(`${vp.width} ${c.id}: 상세가 열리지 않음`));
     await page.waitForTimeout(1200);
     const t = await page.evaluate(() => document.body.innerText);
-    for (const r of c.no ?? []) if (r.test(t)) fails.push(`${vp.width} ${c.id}: 있으면 안 되는 문구 ${r}`);
+    // ‘없어야 할 문구’는 이 업장 자신의 정보만 본다: 주변 캠핑장 등 다른 업장 카드(article.card)는 뺀다(2026-10-23, 정보량 순 추천으로 요금 있는 이웃 카드가 보임)
+    const own = await page.evaluate(() => { const b = document.body.cloneNode(true); b.querySelectorAll("article.card").forEach((e) => e.remove()); document.documentElement.append(b); b.hidden = false; const x = b.innerText; b.remove(); return x; });
+    for (const r of c.no ?? []) if (r.test(own)) fails.push(`${vp.width} ${c.id}: 있으면 안 되는 문구 ${r}`);
     for (const r of c.has ?? []) if (!r.test(t)) fails.push(`${vp.width} ${c.id}: 있어야 할 문구 없음 ${r}`);
     if (c.go && !page.url().endsWith(`/place/${c.go}`)) fails.push(`${vp.width} ${c.id}: 합친 곳(${c.go})으로 옮겨지지 않음 — ${page.url()}`);
   }

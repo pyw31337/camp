@@ -39,25 +39,27 @@ process.exit(0);
 
 async function main() {
   const fetchedAt = toKstIso(nowInKst());
+  // 검색 대상 = 고캠핑 원본(out/campgrounds.json) ∪ 발행 카탈로그 전체(휴양림·지자체·OSM·당일 장소 포함).
+  // 2026-10-23(소유자: 상세 SNS 영상에 유튜브가 하나도 안 나옴): 고캠핑 3,128곳만 검색해 카탈로그 6,404곳 중 3,276곳은
+  // 영상·후기 검색을 한 번도 하지 않았다. 캐시 없는 곳부터 돌기 때문에(pickDue) 새로 넣은 곳이 먼저 검색된다.
   const campPath = `${out}campgrounds.json`;
-  let camps = [];
+  const byId = new Map();
   if (existsSync(campPath)) {
     const { campgrounds = [] } = await readJson(campPath, {});
-    camps = campgrounds
-      .map((c) => ({ id: String(c?.external_id?.id ?? ""), name: c?.name, address: c?.address ?? {} }))
-      .filter((c) => c.id && c.name);
-  } else {
-    const fallbackPath = fileURLToPath(new URL("../../camping-atlas/public/explore/data/campgrounds.json", import.meta.url));
-    if (existsSync(fallbackPath)) {
-      const raw = await readJson(fallbackPath, []);
-      const list = Array.isArray(raw) ? raw : (raw.campgrounds ?? []);
-      camps = list.map((c) => ({
-        id: String(c?.id ?? ""),
-        name: c?.name,
-        address: { sido: c?.sido, sigungu: c?.sigungu }
-      })).filter((c) => c.id && c.name);
+    for (const c of campgrounds) {
+      const id = String(c?.external_id?.id ?? "");
+      if (id && c?.name) byId.set(id, { id, name: c.name, address: c.address ?? {} });
     }
   }
+  const catalogPath = fileURLToPath(new URL("../../camping-atlas/public/explore/data/campgrounds.json", import.meta.url));
+  if (existsSync(catalogPath)) {
+    const raw = await readJson(catalogPath, []);
+    for (const c of Array.isArray(raw) ? raw : (raw.campgrounds ?? [])) {
+      const id = String(c?.id ?? "");
+      if (id && c?.name && !byId.has(id)) byId.set(id, { id, name: c.name, address: { sido: c.sido, sigungu: c.sigungu } });
+    }
+  }
+  const camps = [...byId.values()];
   if (!camps.length) { warn("소셜 검색 건너뜀", "캠핑장 카탈로그 없음(sync:gocamping 또는 explore 데이터 필요)"); return; }
 
   // 같은 시군구 다른 캠핑장 핵심어(제목이 다른 곳을 가리키는 글 거르기)

@@ -584,9 +584,9 @@ const THEME_SUBS = {
   REVIEWS: "방문자들의 생생한 긍정 평가가 많은 캠핑장",
 };
 const SIDO_KW = new Set(["서울", "경기", "인천", "강원", "충북", "충남", "충청", "대전", "세종", "전북", "전남", "전라", "광주", "경북", "경남", "경상", "대구", "울산", "부산", "제주", "서울특별시", "경기도", "인천광역시", "강원특별자치도", "강원도", "충청북도", "충청남도", "대전광역시", "세종특별자치시", "전라북도", "전북특별자치도", "전라남도", "광주광역시", "경상북도", "경상남도", "대구광역시", "울산광역시", "부산광역시", "제주특별자치도", "제주도"]);
-function matches(c, { useArea = true } = {}) {
+function matches(c, { useArea = true, quick = S.quick } = {}) {
   if (useArea && S.area !== "all" && AREA_OF[sidoShort(c.sido)] !== S.area) return false;
-  for (const k of S.quick) if (!QUICK[k].test(c)) return false;
+  for (const k of quick) if (!QUICK[k].test(c)) return false;
   const fMin = campFeeMin(c), fMax = campFeeMax(c);
   if (S.feeBand === "u3" && !(fMin && fMin <= 30000)) return false;
   if (S.feeBand === "3to5" && !(fMin && fMin <= 50000 && (fMax == null || fMax >= 30000))) return false;
@@ -632,12 +632,14 @@ function wordHit(c, w) {
   const hay = c._hayN ??= sq(`${c.name} ${alias} ${c.addr ?? ""} ${c.sido ?? ""} ${c.sigungu ?? ""} ${(c.env ?? []).join(" ")} ${(c.types ?? []).join(" ")} ${c.pf?.s ?? ""} ${(c.st ?? []).map(([k, , , sub]) => `${ST[k]?.label ?? ""} ${sub ?? ""}`).join(" ")} ${(c.amenities ?? []).join(" ")} ${(c.rental ?? []).join(" ")} ${c.line ?? ""}`);
   return hay.includes(w);
 }
-// 정보량 점수: 목록·추천의 기본 순서(소유자 2026-10-20 — 전기 W처럼 상세 정보가 있는 곳을 위·앞으로).
+// 정보량 점수: 목록·추천의 기본 순서(소유자 2026-10-20 — 전기 W처럼 상세 정보가 있는 곳을 위·앞으로). c.iq가 없을 때(옛 카탈로그)의 화면 계산.
 // 전기 W 12 · 확인된 현장 조건(주차·불멍·규격·바닥·텐트·위생·온수·반려동물) 각 3 · 프로필 확인 항목(18개 중) 각 2 ·
 // 공식 사진 장당 2(최대 5장)·후기 사진 2 · 1박 요금 4 · 사이트 타입 2 · 이용 규칙 2 · 온라인 예약 3 · 후기 4건당 1(최대 5).
 const RICH_FACTS = ["park", "fire", "size", "ground", "shelter", "sanitary", "hot", "pet"];
 function rich(c) {
   if (c._rich != null) return c._rich;
+  // 파이프라인 정보량 점수(c.iq, pipeline/lib/info-score.mjs — 신뢰도 반영·표준 조례 기본값 제외, 모든 에이전트 공통)가 있으면 그것을 쓴다(2026-10-23).
+  if (Number.isFinite(c.iq)) return (c._rich = c.iq);
   const f = facts(c);
   let s = 0;
   if (f.power?.w && filled(f.power)) s += 12; else if (filled(f.power)) s += 1;
@@ -3048,7 +3050,7 @@ async function detailView(id) {
 }
 
 // ── 벤치마크(t39 #37): 주변 비슷한 캠핑장 3곳 ─────────────────
-// 같은 숙박 형태(오토·글램핑·카라반…)를 하나라도 가진 곳 중 40km 안에서 가까운 순. 사진 있는 곳만, 공원 원장 제외.
+// 같은 숙박 형태(오토·글램핑·카라반…)를 하나라도 가진 곳 중 40km 안 가까운 10곳에서 정보량 점수 순. 사진 있는 곳만, 공원 원장 제외.
 // 추천(주변 캠핑장)은 업장 정보가 어느 정도 있는 곳만(소유자 2026-10-22: 정보도 거의 없고 사진은 남의 음식 사진인 곳이 추천됨).
 // 전화·홈페이지·소개·요금·사이트 종류·편의시설·규격·후기 중 2가지 이상. 검색·지도 목록에서는 빼지 않는다.
 const infoRich = (x) => (x._ir ??= [x.tel, x.homepage, x.line, x.fee, x.st?.length, x.amenities?.length, x.sizes?.length, x.rv?.n].filter(Boolean).length >= 2);
@@ -3060,6 +3062,9 @@ function similarNearby(c, n = 3) {
     .map((x) => ({ x, km: km2(c, x), share: mine.size ? stayKinds(x).filter((k) => mine.has(k)).length : 1 }))
     .filter((r) => r.km <= 40 && r.share > 0)
     .sort((a, b) => a.km - b.km)
+    .slice(0, Math.max(n, 10))
+    // 가까운 10곳 안에서는 정보량 점수가 높은 곳을 먼저(소유자 2026-10-23: 정보가 많은 업체를 배열 맨 앞에)
+    .sort((a, b) => rich(b.x) - rich(a.x) || a.km - b.km)
     .slice(0, n);
 }
 function similarHtml(c) {
@@ -5626,29 +5631,43 @@ function mapView() {
     <aside class="map-panel">
       <form class="search sm" role="search" data-msearch>${ic("search", "search-ic")}<input type="search" name="q" value="${esc(S.q)}" placeholder="지역 · 캠핑장" aria-label="검색어" autocomplete="off"><button type="button" class="msearch-cond${condActive() ? " on" : ""}" data-open-cond aria-label="조건으로 거르기">${ic("list")}${condActive() ? `<i data-mcond-n>${condActive()}</i>` : ""}</button></form>
       <div class="rail chips">${Object.entries(QUICK).map(([k, q]) => `<button type="button" class="chip qc-${q.cls}" data-mquick="${k}" aria-pressed="${S.quick.has(k)}">${ic(q.icon)}${q.label}</button>`).join("")}</div>
-      <p class="map-count"><b data-mcount>0</b>곳 · 지도 안</p>
       <div class="map-list" data-mlist></div>
     </aside>
     <div class="map-canvas" id="map"></div>
     <div class="map-peek" data-peek hidden></div>
   </section>`;
 }
+// 지도 마커 글자(소유자 2026-10-23): 기본은 업장 이름. 전기·장작·반려견·주차 조건 칩을 누르면 그 조건 값으로
+// (600W · 장작/숯만/화기 불가 · 반려견/반려견 불가 · 텐트 옆/공용 주차). 불가는 빨간 바탕 흰 글자(배지와 같은 규칙).
+// 업장이 공지하지 않은 법령 기본값(g: "r")은 표시하지 않는다.
+const MAP_LABEL_KEYS = ["power", "fire", "pet", "park"];
+function mapLabelValue(c, k) {
+  const f = facts(c), x = f[k];
+  if (!pos(x) || x.g === "r") return null;
+  if (k === "power") return x.ok ? [x.w ? kw(x.w) : "전기", "pin-volt"] : ["전기 불가", "pin-no"];
+  if (k === "fire") return x.kind === "FIREWOOD_OK" ? ["장작", "pin-flame"] : x.kind === "CHARCOAL_ONLY" ? ["숯만", "pin-flame"] : x.kind === "NO_FIRE" ? ["화기 불가", "pin-no"] : null;
+  if (k === "pet") return x.ok ? [petAllowed(c) && (c.nr ?? []).includes("BIG_DOG") ? "반려견(소형)" : "반려견", "pin-ink"] : ["반려견 불가", "pin-no"];
+  if (k === "park") return x.ok === true ? ["텐트 옆 주차", "pin-cobalt"] : x.ok === "part" ? ["일부 텐트 옆", "pin-cobalt"] : [x.short ?? "외부 주차", "pin-part"];
+  return null;
+}
+const mapLabelKey = () => (MAP_LABEL_KEYS.includes(S.mapLabel) && S.quick.has(S.mapLabel) ? S.mapLabel : [...S.quick].reverse().find((k) => MAP_LABEL_KEYS.includes(k)) ?? null);
 function pinLabel(c) {
-  const o = openingOf(c);
-  if (o) return [o.txt, "pin-hot"];
-  const f = facts(c);
-  if (filled(f.power) && f.power.w) return [kw(f.power.w), "pin-volt"];
-  return [null, ""];
+  const k = mapLabelKey();
+  if (k) return mapLabelValue(c, k) ?? [null, ""];
+  const name = nameOf(c).name;
+  return [name.length > 10 ? `${name.slice(0, 10)}…` : name, openingOf(c) ? "pin-hot" : "pin-name"];
 }
 // 지도 속도(영우 님 2026-10-21, t39 #21): 조건 통과·사진 여부·정렬 값은 조건·사진 자료가 바뀔 때만 계산해 둔다.
 // 예전에는 지도를 움직일 때마다 6천여 곳에 조건 검사를 다시 하고, 정렬 비교마다 사진 목록을 새로 만들어(photosAll) 한 번에 100~300ms 멈췄다.
 let MAP_POOL = null;
 function mapPool() {
   const ser = (v) => JSON.stringify(v instanceof Set ? [...v].sort() : v ?? null, (_, x) => (x instanceof Set ? [...x].sort() : x));
-  const key = [S.q, S.quick, S.feeBand, S.find, S.has, S.stype, S.theme, S.cond].map(ser).concat([S.camps.length, DEAD.size]);
+  const key = [S.q, S.quick, S.mapLabel, S.feeBand, S.find, S.has, S.stype, S.theme, S.cond].map(ser).concat([S.camps.length, DEAD.size]);
   const k = MAP_POOL;
   if (k && k.photos === S.photos && k.cards === S.cards && k.avail === S.avail && k.key.every((v, i) => v === key[i])) return k.rows;
-  const rows = S.camps.filter((c) => c.lat && c.lng && matches(c, { useArea: false }) && condEval(c) && mapBrowseEligible(c))
+  // 지도에서 전기·장작·반려견·주차 칩은 ‘그 정보가 알려진 곳’만 남기고 마커에 값을 보인다(불가 포함). 나머지 칩은 목록과 같은 거르기.
+  const labelKeys = [...S.quick].filter((k) => MAP_LABEL_KEYS.includes(k)), quick = new Set([...S.quick].filter((k) => !MAP_LABEL_KEYS.includes(k)));
+  const rows = S.camps.filter((c) => c.lat && c.lng && matches(c, { useArea: false, quick }) && labelKeys.every((k) => mapLabelValue(c, k)) && condEval(c) && mapBrowseEligible(c))
     .map((c) => ({ c, ph: hasPhoto(c), pl: photoLast(c), r: rich(c) }));
   MAP_POOL = { key, photos: S.photos, cards: S.cards, avail: S.avail, rows };
   return rows;
@@ -5662,7 +5681,6 @@ function drawMap() {
   const strict = MAP.bounds();
   const visRows = rowsIn.filter((x) => strict(x.c.lat, x.c.lng)).sort((a, b2) => a.pl - b2.pl || b2.r - a.r);
   const visible = visRows.map((x) => x.c);
-  $("[data-mcount]").textContent = fmt(visible.length);
   const headerCount = $("[data-map-header-count]");
   if (headerCount) { headerCount.textContent = `${fmt(visible.length)}곳 지도 안`; headerCount.hidden = false; }
   MAP.clear();
@@ -5680,7 +5698,7 @@ function drawMap() {
       MAP.add(lat, lng, `<span class="cl" style="--s:${size}px">${n}</span>`, { center: true, size, onClick: () => MAP.setView(lat, lng, Math.min(z + 2, 14)) });
     } else {
       const c = arr[0], [t, cls] = pinLabel(c), on = selected === String(c.id);
-      const html = t || on ? `<span class="pin ${cls}${on ? " on" : ""}">${esc(on ? nameOf(c).name.slice(0, 14) : t)}</span>` : `<span class="pdot"></span>`;
+      const html = t || on ? `<span class="pin ${on && !mapLabelKey() ? "" : cls}${on ? " on" : ""}">${esc(on && !mapLabelKey() ? nameOf(c).name.slice(0, 14) : t)}</span>` : `<span class="pdot"></span>`;
       MAP.add(c.lat, c.lng, html, { z: on ? 1000 : t ? 100 : 0, onClick: () => selectPin(c) });
     }
   }
@@ -5704,7 +5722,7 @@ function mapItem(c) {
   // 지도 카드(영우 님 2026-10-21, t39 #23 #24): 카드를 누르면 지도가 그 캠핑장으로 확대·초점, 이름을 누르면 상세로.
   return `<article class="mi${on ? " on" : ""}" data-mid="${esc(c.id)}" tabindex="0" aria-label="${esc(nameOf(c).name)} 지도에서 보기">
     <div class="mi-ph">${carousel(c)}</div>
-    <div class="mi-b"><p class="card-meta">${esc(region(c))}${!stayKinds(c).length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p><h3><a class="mi-name" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false">${esc(nameOf(c).name)}</a></h3><div class="mi-types">${typeRow(c).html}</div><span class="bdgs inline">${wxBadge(c)}${stayBadges(c, 2)}${badges(c, stayKinds(c).length ? 2 : 3)}</span>${specs ? `<div class="mi-specs">${specs}</div>` : ""}</div>
+    <div class="mi-b"><p class="card-meta">${esc(region(c))}${!stayKinds(c).length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p><h3><a class="mi-name" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false">${esc(nameOf(c).name)}</a></h3><div class="mi-types">${typeRow(c).html}</div><span class="bdgs inline">${wxBadge(c)}${badges(c, 3)}</span>${specs ? `<div class="mi-specs">${specs}</div>` : ""}</div>
     ${heartBtn(c)}
   </article>`;
 }
@@ -5753,7 +5771,7 @@ function bindMap() {
   };
   const onClick = (e) => {
     const q = e.target.closest("[data-mquick]");
-    if (q) { const k = q.dataset.mquick; if (S.quick.has(k)) S.quick.delete(k); else S.quick.add(k); q.setAttribute("aria-pressed", String(S.quick.has(k))); drawMap(); return; }
+    if (q) { const k = q.dataset.mquick; if (S.quick.has(k)) S.quick.delete(k); else { S.quick.add(k); if (MAP_LABEL_KEYS.includes(k)) S.mapLabel = k; } q.setAttribute("aria-pressed", String(S.quick.has(k))); mapListKey = ""; drawMap(); return; }
     if (e.target.closest("[data-peek-x]")) { selected = null; $("[data-peek]").hidden = true; drawMap(); return; }
     const it = e.target.closest(".map-list .mi, .map-peek .mi");
     if (it && !e.target.closest("[data-save], a, .car-nav, button")) { const c = S.byId.get(it.dataset.mid); if (c) { MAP?.setView(c.lat, c.lng, Math.max(MAP.zoom(), 14)); selectPin(c); } }
@@ -6150,7 +6168,8 @@ addEventListener("error", (e) => {
   flushPendingSaveLogs();
   // 공식 접수 상태(서울 공공서비스예약 등)는 짧은 유효기간이 있다. 만료된 파일은 쓰지 않는다.
   S.avail = new Map();
-  if (avail && Date.parse(avail.expires_at) > Date.now()) for (const r of avail.records ?? []) if (r.state === "OFFICIAL_APPLICATION_OPEN") { const k = String(r.campground_id); S.avail.set(k, [...(S.avail.get(k) ?? []), { ...r, disclaimer: avail.disclaimer, source_name: avail.source?.name }]); }
+  // 레코드마다 만료(접수 마감 시각 이하)를 본다 — 접수가 끝난 상품은 보이지 않는다.
+  if (avail && Date.parse(avail.expires_at) > Date.now()) for (const r of avail.records ?? []) if (r.state === "OFFICIAL_APPLICATION_OPEN" && !(Date.parse(r.expires_at) <= Date.now()) && !(Date.parse(r.receipt?.to) <= Date.now())) { const k = String(r.campground_id); S.avail.set(k, [...(S.avail.get(k) ?? []), { ...r, disclaimer: avail.disclaimer, source_name: avail.source?.name }]); }
   // 이전 주소(#c=1554)도 새 상세 주소로 보정해 공유 링크를 깨지 않는다.
   syncCompare(); updateHeaderGlass();
   route();

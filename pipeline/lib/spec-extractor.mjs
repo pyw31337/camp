@@ -137,17 +137,21 @@ export function extractFromSentence(s, { year = new Date().getFullYear() } = {})
   if (/레이트\s*체크아웃|늦은\s*퇴실|퇴실\s*연장|연장\s*퇴실|레이트\s*퇴실/.test(s)) { const f = feeOrRule(s.slice(s.search(/레이트|늦은|연장/))); if (f) out.push({ code: "LATE_CHECKOUT", value: f.text, norm: f.text }); }
 
   // 매너타임 / 소등
+  // 시작은 밤(20시~새벽 1시)만 받는다(lib/value-sanity 범위와 같음). 2026-10-23: “개수대는 매너타임엔 문닫습니다 오전7시-밤10시”를
+  // 07:00~22:00으로, “체크아웃 : 오후 6:00 매너타임…”을 18:00부터로 읽어 상식 검사가 매일 발행을 막았다.
+  const nightStart = (a) => a != null && (a >= 20 * 60 || a <= 60);
   const mtRange = s.match(new RegExp(String.raw`(?:매너\s*타임|소등\s*(?:시간)?|정숙\s*시간|취침\s*시간)[^0-9\n]{0,20}?${CLOCK}\s*(?:부터)?\s*(?:[~\-–]\s*(?:익일\s*|다음\s*날\s*)?|(?:부터\s+)?(?:익일\s*|다음\s*날\s*))\s*${CLOCK}`, "i"));
   if (mtRange) {
     const a = parseClock(mtRange[1] ?? (Number(mtRange[2]) <= 12 && Number(mtRange[2]) >= 8 ? "오후" : null), mtRange[2], mtRange[3], "manner");
     const b = parseClock(mtRange[4] ?? "오전", mtRange[5], mtRange[6], "any");
-    if (a != null && b != null) out.push({ code: "MANNER_TIME", value: `${hhmm(a)}~${hhmm(b)}`, norm: `${hhmm(a)}~${hhmm(b)}` });
+    if (nightStart(a) && b != null) out.push({ code: "MANNER_TIME", value: `${hhmm(a)}~${hhmm(b)}`, norm: `${hhmm(a)}~${hhmm(b)}` });
   } else {
     const mtSingle = s.match(new RegExp(String.raw`(?:매너\s*타임|소등\s*(?:시간)?|정숙\s*시간)[^0-9\n]{0,16}?${CLOCK}`, "i"))
-      ?? s.match(new RegExp(String.raw`${CLOCK}\s*(?:부터)?\s*(?:는|은)?\s*(?:매너\s*타임|소등)`, "i"));
+      // 역순(“밤 11시부터 매너타임”)은 그 시각이 입실·퇴실 시각이 아닐 때만
+      ?? s.match(new RegExp(String.raw`(?<!(?:퇴실|체크아웃|입실|체크인|check\s*-?(?:out|in))[^0-9\n]{0,6})${CLOCK}\s*(?:부터)?\s*(?:는|은)?\s*(?:매너\s*타임|소등)`, "i"));
     if (mtSingle && !/24시간/.test(s)) {
       const a = parseClock(mtSingle[1] ?? (Number(mtSingle[2]) <= 12 && Number(mtSingle[2]) >= 8 ? "오후" : null), mtSingle[2], mtSingle[3], "manner");
-      if (a != null && a >= 18 * 60) {
+      if (nightStart(a)) {
         out.push({ code: "MANNER_TIME", value: `${hhmm(a)}부터`, norm: `${hhmm(a)}~07:00` });
       }
     }

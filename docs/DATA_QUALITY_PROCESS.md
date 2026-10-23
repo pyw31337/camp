@@ -60,6 +60,18 @@ Claude·Codex·Gemini·Grok 등 어떤 에이전트든, 사람이 직접 넣는 
 
 뺀 값·바꾼 값은 `data/quality/refine-log.json`에 원래 값·원문·이유와 함께 남는다. 남은 84건은 업장 원문끼리 엇갈리거나(입퇴실 시각 개정 전후 등) 고캠핑 등록값과 소개글이 엇갈리는 경우로, 사람·에이전트 판정 대상이다.
 
+## 정보량 점수(2026-10-23) — 목록 순서와 다음 수집 우선순위
+
+| 항목 | 내용 |
+|---|---|
+| 계산 | `pipeline/lib/info-score.mjs` `scoreCamp`. 속성 가중치 × 신뢰도(`quality.assess`), 묶음 보너스(편의시설·환경), 사진(공식 장당 2·최대 5장, 없으면 후기 사진 3), 후기 수(로그, 최대 6), 후기 장단점 요약 2 → 0~100 정규화 |
+| 제외 | REFERENCE(표준 조례 기본값), `scope`(숙박형·성수기·당일 한정), 충돌은 ×0.5 |
+| 발행 | `apply-info-score.mjs` — data-sync·증분 발행에서 `quality-ledger` 뒤. 카탈로그 `c.iq`, `data/quality/info-score.json`(분포·`next_priorities`·업장별 빈 항목) |
+| 화면 | `rich(c)`가 `c.iq`를 쓴다. 목록·추천·지역 목록 기본 순서, 주변 캠핑장은 가까운 10곳 안에서 점수 순 |
+| 검사 | `iq`는 field-guard의 파생 값(줄어도 경고만). 테스트 `pipeline/test/info-score.test.mjs` |
+
+점수는 수집 결과일 뿐이다. 점수를 올리려고 값을 만들지 않는다(기본값·추정값은 REFERENCE로만 넣는다).
+
 ## 매일 흐름(KST)
 
 | 시각 | 단계 | 워크플로 |

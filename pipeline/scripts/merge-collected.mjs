@@ -1,18 +1,20 @@
 #!/usr/bin/env node
 // 새로 모은 웹 언급(out/campground-web.json)을 발행된 상세 데이터에 덧붙인다(지우지 않음).
-// 사용: node scripts/merge-collected.mjs [--web <campground-web.json>] [--shorts <campground-shorts.json>] [--data <explore data dir>]
+// 사용: node scripts/merge-collected.mjs [--web <campground-web.json>] [--shorts <campground-shorts.json>] [--social <campground-social.json>] [--data <explore data dir>]
+// 소셜(--social): 카카오 다음 검색의 영상·후기·카페·사진 중 상세에 없는 것만 덧붙인다(고캠핑 밖 휴양림·지자체·OSM 장소용, 2026-10-23).
 // 숏츠(--shorts): 영상(videos)에 같은 YouTube id가 없는 숏츠만 덧붙인다(채우기만, 기존 영상 그대로).
 // 증분 발행(publish-incremental.sh)이 최신 main 작업 트리에서 부른다.
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { mergeWebMentions } from "../lib/merge-collected.mjs";
+import { mergeSocial, mergeWebMentions } from "../lib/merge-collected.mjs";
 import { fillShorts } from "../lib/shorts-search.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const arg = (n, d = null) => { const i = process.argv.indexOf(n); return i > -1 ? process.argv[i + 1] : d; };
 const webPath = arg("--web");
 const shortsPath = arg("--shorts");
+const socialPath = arg("--social");
 const dataDir = resolve(arg("--data", join(root, "camping-atlas/public/explore/data")));
 if (shortsPath && existsSync(shortsPath)) {
   const sh = JSON.parse(readFileSync(shortsPath, "utf8"));
@@ -33,6 +35,26 @@ if (shortsPath && existsSync(shortsPath)) {
   // 목록 카탈로그의 영상 수(soc[1])도 상세에 맞춘다(t39 #45 감사: 숏츠만 붙고 목록엔 ‘영상 0’이 남던 32곳). 늘리기만 한다.
   syncVideoCounts(dataDir);
   if (process.env.GITHUB_STEP_SUMMARY) writeFileSync(process.env.GITHUB_STEP_SUMMARY, `### 숏츠 화면 반영\n\n- 숏츠가 새로 붙은 캠핑장: ${t.camps}곳\n- 그중 영상이 하나도 없던 곳: ${t.fromZero}곳\n- 붙인 숏츠: ${t.added}개\n`, { flag: "a" });
+}
+if (socialPath && existsSync(socialPath)) {
+  const so = JSON.parse(readFileSync(socialPath, "utf8"));
+  // 같은 검색 사진이 3곳 이상에 붙으면 매칭이 의심스럽다(build-explore-data와 같은 기준)
+  const thumbCamps = new Map();
+  for (const [cid, r] of Object.entries(so.campgrounds ?? {})) for (const x of r.image ?? []) if (x.thumb) thumbCamps.set(x.thumb, (thumbCamps.get(x.thumb) ?? 0) + 1);
+  const sharedThumb = (t) => (thumbCamps.get(t) ?? 0) >= 3;
+  const t = { camps: 0, fromZero: 0, videos: 0, posts: 0, images: 0 };
+  for (const [id, r] of Object.entries(so.campgrounds ?? {})) {
+    const p = join(dataDir, "camps", `${id}.json`);
+    if (!existsSync(p)) continue;
+    const d = JSON.parse(readFileSync(p, "utf8"));
+    const before = d.videos?.length ?? 0, checked = d.social_checked_at;
+    const a = mergeSocial(d, r, { sharedThumb });
+    if (!a.videos && !a.posts && !a.images && checked === d.social_checked_at) continue;
+    writeFileSync(p, JSON.stringify(d));
+    t.camps++; t.videos += a.videos; t.posts += a.posts; t.images += a.images; if (!before && a.videos) t.fromZero++;
+  }
+  console.log(`소셜 병합: ${t.camps}곳 · 영상 ${t.videos}(영상 없던 곳 ${t.fromZero}곳) · 글 ${t.posts} · 사진 ${t.images}`);
+  syncVideoCounts(dataDir);
 }
 if (!webPath) process.exit(0);
 if (!webPath || !existsSync(webPath)) { console.log(`웹 언급 파일이 없어 건너뜁니다: ${webPath}`); process.exit(0); }
@@ -57,7 +79,7 @@ export function syncVideoCounts(dir) {
     if (!cache.has(id)) { const p = join(dir, "camps", `${id}.json`); let n = null; if (existsSync(p)) { try { n = (JSON.parse(readFileSync(p, "utf8")).videos ?? []).length; } catch {} } cache.set(id, n); }
     return cache.get(id);
   };
-  const fix = (c) => { if (!c || !Array.isArray(c.soc)) return false; const n = vids(String(c.id)); if (n == null || n <= (c.soc[1] ?? 0)) return false; c.soc = [c.soc[0] ?? 0, n, c.soc[2] ?? 0]; return true; };
+  const fix = (c) => { if (!c?.id) return false; const s = Array.isArray(c.soc) ? c.soc : [0, 0, 0]; const n = vids(String(c.id)); if (n == null || n <= (s[1] ?? 0)) return false; c.soc = [s[0] ?? 0, n, s[2] ?? 0]; return true; };
   const files = ["campgrounds.json", "campgrounds.lite.json"].map((f) => join(dir, f));
   const cx = join(dir, "catx");
   if (existsSync(cx)) for (const f of readdirSync(cx)) if (f.endsWith(".json")) files.push(join(cx, f));

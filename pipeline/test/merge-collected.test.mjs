@@ -26,3 +26,22 @@ test("커버리지 회귀 검사: max(20곳, 2%) 넘게 줄면 실패", () => {
   const drops = coverageDrops(base, { fields: { reviews: { any: 1272 }, price: { any: 1243 }, manner: { any: 30 } } });
   assert.deepEqual(drops.map((x) => x.field), ["reviews", "price"]);
 });
+
+test("mergeSocial: 소셜이 없던 장소에 영상·글·사진을 채우고, 고캠핑 빌드 결과는 건드리지 않는다", async () => {
+  const { mergeSocial } = await import("../lib/merge-collected.mjs");
+  const so = {
+    fetched_at: "2026-10-23T10:00:00+09:00",
+    vclip: [{ url: "https://www.youtube.com/watch?v=AAAAAAAAAAA", title: "휴양림 캠핑 브이로그" }, { url: "https://youtu.be/AAAAAAAAAAA", title: "같은 영상" }],
+    blog: [{ url: "https://blog.example/1", title: "후기" }],
+    image: [{ thumb: "https://t/1.jpg", url: "https://blog.example/1" }, { thumb: "https://t/shared.jpg", url: "x" }],
+  };
+  const d = { web: [{ url: "https://blog.example/1", title: "이미 있는 글" }] };
+  const a = mergeSocial(d, so, { sharedThumb: (t) => t.endsWith("shared.jpg") });
+  assert.deepEqual(a, { videos: 1, posts: 0, images: 1 });
+  assert.equal(d.videos.length, 1);
+  assert.equal(d.social_merged, true);
+  assert.deepEqual(mergeSocial(d, so, { sharedThumb: (t) => t.endsWith("shared.jpg") }), { videos: 0, posts: 0, images: 0 }); // 멱등
+  const gc = { social_checked_at: "2026-10-19T00:00:00+09:00", videos: [] }; // build-explore-data가 붙인 고캠핑 상세
+  assert.deepEqual(mergeSocial(gc, so), { videos: 0, posts: 0, images: 0 });
+  assert.equal(gc.videos.length, 0);
+});

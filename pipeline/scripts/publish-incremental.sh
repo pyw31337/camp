@@ -3,11 +3,11 @@
 # 최신 main의 코드로 다시 계산해 바로 커밋·푸시한다. 사이트(GitHub Pages)는 main 푸시로 곧바로 다시 배포된다.
 # - 실행 시작 시점의 오래된 코드·일부만 복원된 캐시로 전체를 다시 만들지 않는다(다른 에이전트의 최신 데이터를 보존).
 # - 커버리지가 줄면(coverage-guard) 커밋하지 않는다.
-# 사용(pipeline 디렉터리에서): bash scripts/publish-incremental.sh "<라벨>" [--web out/campground-web.json] [--shorts out/campground-shorts.json]
+# 사용(pipeline 디렉터리에서): bash scripts/publish-incremental.sh "<라벨>" [--web out/campground-web.json] [--shorts out/campground-shorts.json] [--social out/campground-social.json]
 set -euo pipefail
 LABEL="${1:-collected data}"; shift || true
-WEB=""; SHORTS=""
-while [ $# -gt 0 ]; do case "$1" in --web) WEB="$(realpath "$2")"; shift 2;; --shorts) SHORTS="$(realpath "$2")"; shift 2;; *) shift;; esac; done
+WEB=""; SHORTS=""; SOCIAL=""
+while [ $# -gt 0 ]; do case "$1" in --web) WEB="$(realpath "$2")"; shift 2;; --shorts) SHORTS="$(realpath "$2")"; shift 2;; --social) SOCIAL="$(realpath "$2")"; shift 2;; *) shift;; esac; done
 SRC="$(pwd)"
 WT="${RUNNER_TEMP:-/tmp}/publish-main-$$"
 git fetch -q origin main
@@ -26,6 +26,8 @@ git checkout -q -- "$DATA/meta.json"
 
 [ -n "$WEB" ] && node "$SRC/scripts/merge-collected.mjs" --web "$WEB" --data "$DATA"
 [ -n "$SHORTS" ] && node "$SRC/scripts/merge-collected.mjs" --shorts "$SHORTS" --data "$DATA"
+# 고캠핑 밖 장소(휴양림·지자체·OSM)의 영상·후기·사진 — 소셜이 붙은 적 없는 곳만 채운다(2026-10-23)
+[ -n "$SOCIAL" ] && [ -s "$SOCIAL" ] && node "$SRC/scripts/merge-collected.mjs" --social "$SOCIAL" --data "$DATA"
 # 파생 정보는 최신 main의 규칙으로 다시 계산한다(최종 빌드 단계와 같은 순서).
 node pipeline/scripts/survey-all-campgrounds.mjs >/dev/null
 node pipeline/scripts/build-operator-facts.mjs
@@ -60,6 +62,7 @@ node pipeline/scripts/publish-sanity.mjs
 node pipeline/scripts/report-coverage.mjs
 node pipeline/scripts/build-fact-store.mjs
 node pipeline/scripts/quality-ledger.mjs
+node pipeline/scripts/apply-info-score.mjs
 node "$SRC/scripts/coverage-guard.mjs" "$BASE" "$DATA/meta.json"
 
 if [ -n "${PUBLISH_DRY_RUN:-}" ]; then { git status --short | head -5 || true; }; echo "(시험 실행: 커밋하지 않음)"; exit 0; fi
