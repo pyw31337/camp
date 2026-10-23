@@ -7,6 +7,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { prioritize } from "../lib/priority.mjs";
 import { DISCOVERY_VERSION, hasOperatorSite, homepageCandidates, kakaoGet, localUrl, looksLikeArticle, ARTICLE_TITLE, matchPlace, pickHomepages, webUrl } from "../lib/kakao-discovery.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
