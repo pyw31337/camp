@@ -5,11 +5,16 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { normalizeUrl } from "../lib/booking-intel.mjs";
+import { HIDE_VERDICTS } from "../lib/booking-verify.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const path = join(root, "camping-atlas/public/explore/data/campgrounds.json");
 const regPath = join(root, "pipeline/registry/link-health.json");
 const health = existsSync(regPath) ? JSON.parse(readFileSync(regPath, "utf8")).urls ?? {} : {};
+// 예약 링크 정밀 검수(verify-booking-links.mjs): 업장별 (id|주소) 판정 — 다른 업장·도메인 판매·서비스 종료·도박 사이트 등은 숨긴다
+const verifyPath = join(root, "pipeline/registry/booking-verify.json");
+const verify = existsSync(verifyPath) ? JSON.parse(readFileSync(verifyPath, "utf8")).pairs ?? {} : {};
+let wrong = 0, moved = 0;
 const camps = JSON.parse(readFileSync(path, "utf8"));
 let n = 0, links = 0, fixed = 0;
 for (const c of camps) {
@@ -22,9 +27,16 @@ for (const c of camps) {
     if (u) ch.url = u; else ch.url = null;
   }
   if (c.booking?.channels) c.booking.channels = c.booking.channels.filter((ch) => ch.url);
+  // 옛 예약 엔진 주소(주소 변경 안내) → 안내된 새 주소. 원래 주소는 registered_url로 남긴다(지우지 않음).
+  for (const ch of c.booking?.channels ?? []) {
+    const src = ch.registered_url ?? ch.url, r = verify[`${c.id}|${src}`];
+    if (r?.v === "MOVED" && r.to && !HIDE_VERDICTS.has(r.then)) { if (ch.url !== r.to) moved++; ch.registered_url = src; ch.url = r.to; }
+  }
   const mine = new Set([c.homepage, c.booking?.url, ...(c.booking?.channels ?? []).map((x) => x.url)].filter(Boolean));
-  const dead = [...mine].filter((u) => health[u]?.s === "DEAD");
+  const bad = (u) => HIDE_VERDICTS.has(verify[`${c.id}|${u}`]?.v);
+  const dead = [...mine].filter((u) => health[u]?.s === "DEAD" || bad(u));
+  wrong += [...mine].filter((u) => health[u]?.s !== "DEAD" && bad(u)).length;
   if (dead.length) { c.dl = dead; n++; links += dead.length; } else delete c.dl;
 }
 writeFileSync(path, JSON.stringify(camps));
-console.log(`깨진 링크 표시: ${n}곳 · ${links}개 · 홈페이지 주소 형식 바로잡음 ${fixed}곳`);
+console.log(`깨진 링크 표시: ${n}곳 · ${links}개(그중 업장 불일치·종료·판매 등 ${wrong}개) · 새 예약 주소로 바꿈 ${moved}개 · 홈페이지 주소 형식 바로잡음 ${fixed}곳`);

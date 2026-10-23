@@ -14,6 +14,10 @@ on:
         description: "이 일수 안에 OK였던 링크는 건너뜀 (기본 7)"
         required: false
         default: "7"
+      verify_max_age_days:
+        description: "예약 링크 정밀 검수: 이 일수 안에 판정한 쌍은 건너뜀 (기본 14, 0이면 전부 다시)"
+        required: false
+        default: "14"
 
 permissions:
   contents: write
@@ -42,9 +46,18 @@ jobs:
           cache: npm
           cache-dependency-path: pipeline/package-lock.json
       - run: npm ci
-      - run: node --test test/link-check.test.mjs test/card-fallback.test.mjs
+      - run: node --test test/link-check.test.mjs test/card-fallback.test.mjs test/booking-verify.test.mjs
       - name: Check links
         run: node scripts/check-links.mjs --max-age-days "${{ github.event.inputs.max_age_days || '7' }}"
+      # 예약 링크 정밀 검수(소유자 2026-10-23: 404만이 아니라 ‘열린 페이지가 정말 그 업장 예약인지’).
+      # 업장 이름·전화·주소 확인, 다른 업장·도메인 판매·서비스 종료(modoo!)·도박 사이트·옛 예약 엔진 주소 → registry/booking-verify.json
+      - name: Install Chromium (render script-drawn booking pages)
+        continue-on-error: true
+        run: npx playwright install --with-deps chromium
+      - name: Verify booking links belong to the camp
+        continue-on-error: true
+        timeout-minutes: 120
+        run: node scripts/verify-booking-links.mjs --max-age-days "${{ github.event.inputs.verify_max_age_days || '14' }}"
       # 후기 사진 내용 판정(CLIP, lib/photo-judge.mjs, 2026-10-22): 음식·인물·차 안·글 캡처는 대표·갤러리에서 뺀다. 무료·로컬 CPU 모델.
       - name: Install photo judge (transformers.js)
         continue-on-error: true
@@ -82,6 +95,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           [ -f registry/link-health.json ] || exit 0
           git add registry/link-health.json
+          [ -f registry/booking-verify.json ] && git add registry/booking-verify.json
           [ -f registry/card-fallback.json ] && git add registry/card-fallback.json
           [ -f registry/photo-judgments.json ] && git add registry/photo-judgments.json
           [ -f registry/text-judgments.json ] && git add registry/text-judgments.json
