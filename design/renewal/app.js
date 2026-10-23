@@ -464,7 +464,7 @@ const TH_SVG = {
   AUTO: ["0 0 24 24", '<path fill="currentColor" d="m20.77 9.16l-1.37-4.1a2.99 2.99 0 0 0-2.85-2.05H7.44a3 3 0 0 0-2.85 2.05l-1.37 4.1c-.72.3-1.23 1.02-1.23 1.84v5a2 2 0 0 0 1 1.72V20c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-2h12v2c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-2.28a2 2 0 0 0 1-1.72v-5c0-.83-.51-1.54-1.23-1.84ZM19 13.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5s1.5.67 1.5 1.5m-11 0c0 .83-.67 1.5-1.5 1.5S5 14.33 5 13.5S5.67 12 6.5 12s1.5.67 1.5 1.5M20 11v5zM7.44 5h9.12a1 1 0 0 1 .95.68L18.62 9H5.39L6.5 5.68A1 1 0 0 1 7.45 5Z"/>'],
   VISITOR: ["0 0 14 14", '<path fill="currentColor" fill-rule="evenodd" d="M9.718.338a.62.62 0 0 0-.504.722a.63.63 0 0 0 .731.503q.198-.035.398-.067c.145-.022.257.046.305.14c.476.925.9 1.838 1.194 2.782c-.378.172-.801.368-1.223.573a16 16 0 0 1-.242 1.394v.004l-.003.009q-.158.723-.416 1.454c-.144.403-.47.787-.802 1.123c-.405.41-.208 1.09.363 1.01l.445 1.702q-.85.275-1.688.65a.737.737 0 0 0-.374.98c.17.372.614.538.991.37a14.8 14.8 0 0 1 4.444-1.217a.743.743 0 0 0 .658-.82a.75.75 0 0 0-.83-.652q-.898.103-1.756.295l-.443-1.691c1.727-.695 2.728-2.506 2.388-4.305c-.29-1.527-.915-2.913-1.588-4.222A1.55 1.55 0 0 0 10.14.267q-.212.033-.422.07M4.063.352a1.58 1.58 0 0 0-1.62.808C1.746 2.467 1.095 3.852.78 5.371a3.7 3.7 0 0 0 .323 2.434a3.8 3.8 0 0 0 1.983 1.811l-.471 1.678a17 17 0 0 0-1.793-.272a.75.75 0 0 0-.147 1.493a15 15 0 0 1 2.294.402c.735.188 1.453.434 2.172.742a.75.75 0 1 0 .59-1.38a17 17 0 0 0-1.663-.61l.47-1.674c1.842.25 3.625-.82 4.24-2.548c.156-.435.278-.873.376-1.312l.002-.01c.232-1.04.328-2.092.384-3.12a1.525 1.525 0 0 0-1-1.506A20.6 20.6 0 0 0 4.063.352m3.873 5.51l.001-.006c.21-.939.3-1.912.355-2.92c.006-.101-.055-.216-.194-.268a19.3 19.3 0 0 0-4.21-1.079a.33.33 0 0 0-.342.159c-.682 1.28-1.264 2.537-1.541 3.876a3 3 0 0 0-.044.308c.934-.084 2.113-.17 3.032-.167c.888.003 2.027.089 2.925.172z" clip-rule="evenodd" />'],
   PICNIC: ["0 0 24 24", '<path fill="currentColor" d="M5.61 6.275a.977.977 0 1 0 0 1.954h1.376c.098 0 .186.057.225.146l.625 1.534a.24.24 0 0 1 0 .244l-.342.43a.244.244 0 0 1-.293.068a4.8 4.8 0 0 0-2.08-.469c-3.76.003-6.107 4.075-4.225 7.33s6.582 3.25 8.46-.007a5 5 0 0 0 .512-1.276a.235.235 0 0 1 .234-.186h.391a.98.98 0 0 0 .791-.4l4.181-5.705a.24.24 0 0 1 .225-.097a.235.235 0 0 1 .176.205l.273.742a.244.244 0 0 1-.088.293c-3.067 2.174-2.63 6.854.786 8.423c3.416 1.57 7.25-1.148 6.901-4.892a4.884 4.884 0 0 0-4.942-4.43a5 5 0 0 0-.537 0a.234.234 0 0 1-.264-.156l-1.23-3.301a.3.3 0 0 1 0-.206a.27.27 0 0 1 .156-.117l1.71-.43a.977.977 0 0 0-.48-1.895l-2.49.626c-.42.09-.778.362-.977.742c-.195.367-.227.8-.088 1.192l.078.205c.06.13-.01.282-.146.322L9.77 8.874a.235.235 0 0 1-.302-.137l-.118-.274a.18.18 0 0 1 0-.156a.19.19 0 0 1 .147-.078a.977.977 0 0 0 0-1.954Zm-.49 11.722c-2.255.007-3.672-2.431-2.55-4.388s3.942-1.965 5.076-.015q.038.066.073.134a.27.27 0 0 1 0 .244a.26.26 0 0 1-.205.118H5.12a.977.977 0 0 0 0 1.953h2.383a.24.24 0 0 1 .205.118c.04.073.04.161 0 .234a2.93 2.93 0 0 1-2.588 1.602m4.934-3.985a.1.1 0 0 1-.098 0a.1.1 0 0 1-.078-.059a4.8 4.8 0 0 0-.85-1.846a.254.254 0 0 1 0-.303l.547-.781a.2.2 0 0 1 .107 0l2.765-.977c.1-.037.213 0 .273.088c.067.082.067.2 0 .283Zm8.791 3.985a2.93 2.93 0 0 1-2.93-2.930a2.93 2.93 0 0 1 .781-1.954a.22.22 0 0 1 .146-.137a.25.25 0 0 1 .186.156l.82 2.228c.14.386.508.644.919.644q.175 0 .342-.058a.977.977 0 0 0 .576-1.26l-.977-2.56c2.256 0 3.666 2.442 2.538 4.396a2.93 2.93 0 0 1-2.538 1.465Z" />'],
-  PARK: ["0 0 15 15", '<path fill="currentColor" d="M3 10.94V14H2v-3.05A2.37 2.37 0 0 1 .15 8.24C.97 3.41 1.77 1 2.56 1c.78 0 1.55 2.41 2.3 7.23c.19 1.26-.63 2.45-1.86 2.71M6 11h9v3h-1v-2H7v2H6zm1-3h7v2.5H7z" />'],
+  PARK: ["0 0 15 15", '<path fill="currentColor" d="M13.5 3v3h1v2.75h.5v1.5h-.5V13h-1v-2.75h-1v1.25h-1v-1.25h-8v1.25h-1v-1.25h-1V13h-1v-2.75H0v-1.5h.5V6h1V3zm0 4v1h-1v.75h1zm-2 1h-8v.75h8zm-10-1v1.75h1V8h-1z" />'],
   WINTER: ["0 0 50 50", '<path fill="currentColor" d="M23 47.689v-6.342l-3.357 1.992L18 42.305v-2.229l5-2.986v-4.168l-4 2.451v-4.416l-4 2.094v5.99l-1.653 1.23L12 39.160v-4.012L6.426 38.27L4 37.271v-2.529l5.685-3.17L6 29.75v-2.32l2.123-1.127l5.214 3.068l3.612-2.084l-.082-.065l-3.665-2.123l3.568-2.228l-3.577-2.083L7.98 23.84L6 22.871v-2.307l3.542-1.978L4 15.533v-2.529l2.321-1.114L12 15.087v-4.076l1.485-1.127l1.943 1.18l-.056 6.105l3.673 2.122l.033-4.311L23 17.079v-4.167l-5-2.988V7.71l1.643-1.05L23 8.652V2.324L24.994 1L27 2.324v6.328l3.906-2.031L33 7.84v1.992l-6 3.08v4.167l4-2.267v4.534l4-2.084v-6.524l1.455-.866l1.545.865v4.167l5.842-3.08L46 13.042v2.359l-5.495 3.17L44 20.525v2.254l-1.83.996l-5.327-3.158l-3.679 2.346l3.549 2.228l-3.659 2.122l3.772 1.992l5.389-2.986L44 27.535v2.15l-3.32 1.887l5.32 3.170v2.49l-2.522 1.037L38 35.281v3.955l-1.52 1.049L35 39.236v-6.002l-4-2.213v4.168l-4-2.268v4.168l5 2.986v2.359l-1.647.904L27 41.348v6.342L24.994 49zm-1.466-22.597L23.420 28h3.514l1.613-2.908L26.843 22h-3.514z" />'],
   WATER_PLAY: ["0 0 256 256", '<path fill="currentColor" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m83.44 76A196 196 0 0 0 165 91a196 196 0 0 0-9-46.440A88.43 88.43 0 0 1 211.44 100M85 51.24a188.3 188.3 0 0 1 67.3 39.21a196.3 196.3 0 0 0-112.22 34.06A88.07 88.07 0 0 1 85 51.24m46.48 164.68a196.3 196.3 0 0 0 34.06-112.23A188.3 188.3 0 0 1 204.76 171a88.07 88.07 0 0 1-73.27 44.92Z" />'],
   "T:CAR_CAMP": ["0 0 24 24", '<g fill="currentColor"><path d="M3 19.723V21a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.277A1.99 1.99 0 0 0 22 18v-3c0-.831-.507-1.542-1.228-1.845l-1.368-4.104A2.995 2.995 0 0 0 16.559 7H7.441a2.995 2.995 0 0 0-2.845 2.051l-1.368 4.104A2 2 0 0 0 2 15v3c0 .738.404 1.376 1 1.723M5.5 18a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 5.5 18m13 0a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 18.5 18M7.441 9h9.117a1 1 0 0 1 .949.684L18.613 13H5.387l1.105-3.316c.137-.409.519-.684.949-.684"/><path d="M22 7.388V5.279l-9.684-3.228a1 1 0 0 0-.658.009L2 5.572V7.7l10.015-3.642z"/></g>'],
@@ -2692,7 +2692,7 @@ const NEARBY_LABELS = {
   PHARMACY: ["약국", "pharmacy"], HOSPITAL: ["병원", "cross"], VET: ["동물병원", "paw"],
   DROWSY_SHELTER: ["졸음쉼터", "restarea"], REST_AREA: ["휴게소", "restarea"], TOILET: ["공중화장실", "toilet"],
   TOUR: ["관광", "tour"], FOOD: ["맛집", "food"], EV: ["전기차 충전", "bolt"],
-  PUBLIC_FOREST: ["휴양림", "th:FOREST"], PUBLIC_INDOORPLAY: ["실내놀이터", "playground"], PUBLIC_POOL: ["수영장", "swim"], PUBLIC_MUSEUM: ["박물관", "experience"], PUBLIC_LEISURE: ["레포츠", "sports"], PUBLIC_REST: ["휴게소", "restarea"],
+  PUBLIC_FOREST: ["휴양림", "th:FOREST"], PUBLIC_INDOORPLAY: ["실내놀이터", "playground"], PUBLIC_POOL: ["수영장", "swim"], PUBLIC_MUSEUM: ["박물관", "museum"], PUBLIC_LEISURE: ["레포츠", "sports"], PUBLIC_REST: ["휴게소", "restarea"],
   OTC_MEDICINE: ["상비약", "pharmacy"], GAS_STATION: ["주유", "fuel"], ANIMAL_HOSPITAL: ["동물병원", "paw"], GEAR: ["캠핑용품", "tent"],
 };
 const FUEL_BRANDS = [[/S-?OIL|에쓰오일|에스오일/i, "S-OIL"], [/GS칼텍스|\bGS\b|^GS/i, "GS칼텍스"], [/SK에너지|\bSK\b|^SK/i, "SK에너지"], [/현대오일뱅크|오일뱅크|HD현대/i, "HD현대오일뱅크"], [/알뜰/, "알뜰주유소"], [/농협|NH/i, "농협(알뜰)"], [/E1|이원/, "E1(LPG)"], [/LPG|충전소/, "LPG"]];
@@ -2722,15 +2722,32 @@ const isOfficialTourImage = (u) => /^https:\/\/(?:[\w-]+\.)?(?:visitkorea\.or\.k
 // 위경도(WGS84) → 다음 지도 좌표(WCONGNAMUL = GRS80 TM(38N 127E, FE 200000, FN 500000) × 2.5).
 // 2026-10-19: 위경도를 그대로 넘겨 모든 주변시설 썸네일이 바다(빈 하늘색)로 나오던 것을 고쳤다. 서울시청으로 위치 확인.
 // 주변시설 한 줄: 아이콘 · 이름 · 종류 · 캠핑장에서 직선거리(850m / 1.2km) · 지도. 빈 지도 그림 대신 작게 줄였다(소유자 2026-10-19).
+// 프랜차이즈 브랜드 표식 [글자, 바탕색, 글자색] — 이름 앞부분으로 고른다(지점명은 무시)
+const BRAND_MARKS = [
+  [/^(GS25|지에스25)/i, "GS25", "#0aa1dd", "#fff"], [/^(CU|씨유)(\b|\s|[가-힣])/i, "CU", "#652d90", "#b4d334"], [/^(세븐일레븐|7-?eleven)/i, "7-ELEVEN", "#00795f", "#fff"],
+  [/^(이마트24|emart24)/i, "emart24", "#ffd400", "#2b2b2b"], [/^(미니스톱|ministop)/i, "MINISTOP", "#004098", "#fff"], [/^(하나로마트|농협하나로|nh하나로)/i, "하나로", "#0b8c3a", "#fff"],
+  [/^(이마트에브리데이|이마트 에브리데이)/i, "emart", "#ffd400", "#2b2b2b"], [/^(롯데마트|롯데슈퍼)/i, "LOTTE", "#e60012", "#fff"], [/^(홈플러스)/i, "Home+", "#e2001a", "#fff"],
+  [/^(노브랜드)/i, "no brand", "#ffd700", "#2b2b2b"], [/^(다이소)/i, "DAISO", "#e60012", "#fff"], [/^(올리브영)/i, "OLIVE", "#9ac31c", "#fff"],
+  [/^(S-?OIL|에쓰오일|에스오일)/i, "S-OIL", "#ffd500", "#1a1a1a"], [/^(GS칼텍스|GS)(\b|\s|[가-힣])/i, "GS", "#00a0e2", "#ff8200"], [/^(SK)(\b|\s|[가-힣])/i, "SK", "#ea002c", "#ff7a00"],
+  [/^(현대오일뱅크|HD현대오일뱅크|오일뱅크)/i, "HD", "#00a650", "#fff"], [/^알뜰/, "알뜰", "#2d7d46", "#fff"],
+];
+function brandMark(name) {
+  const n = String(name ?? "").trim();
+  for (const [re, t, b, f] of BRAND_MARKS) if (re.test(n)) return [t, b, f];
+  return null;
+}
 function nearbyCard(x) {
-  const [label, icon] = NEARBY_LABELS[x.type] ?? [x.type, "pin"];
+  const [label, baseIcon] = NEARBY_LABELS[x.type] ?? [x.type, "pin"];
+  const icon = x.icon ?? baseIcon;
   const map = x.lat && x.lng ? `https://map.kakao.com/link/map/${encodeURIComponent(x.name)},${x.lat},${x.lng}` : x.url;
   const photo = x.image && /^https?:\/\//.test(x.image) ? x.image : "";
   // 실제 모습 사진(검색 API 썸네일 · 관광공사 사진): 64px로 보이고, 사진을 누르면 원문 글로 간다(줄 전체는 지도 링크).
   const open = x.imgU ? ` data-open="${esc(x.imgU)}" title="사진 원문 보기${x.imgS ? ` · ${esc(x.imgS)}` : ""}"` : "";
-  const lead = photo ? `<img class="nb-thumb${x.imgU ? " nb-photo" : ""}" src="${esc(photo)}" alt="${esc(x.name)} 사진" loading="lazy" decoding="async" referrerpolicy="no-referrer"${open} onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'nb-ic',innerHTML:this.dataset.ic}))" data-ic="${esc(ic(icon))}">` : `<span class="nb-ic">${ic(icon)}</span>`;
+  // 사진이 없는 프랜차이즈는 브랜드 글자 표식(브랜드 색)으로(소유자 2026-10-23: “업체 로고를 보여주도록”)
+  const brand = !photo ? brandMark(x.name) : null;
+  const lead = brand ? `<span class="nb-logo" style="--lb:${brand[1]};--lf:${brand[2]}" aria-hidden="true">${esc(brand[0])}</span>` : photo ? `<img class="nb-thumb${x.imgU ? " nb-photo" : ""}" src="${esc(photo)}" alt="${esc(x.name)} 사진" loading="lazy" decoding="async" referrerpolicy="no-referrer"${open} onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'nb-ic',innerHTML:this.dataset.ic}))" data-ic="${esc(ic(icon))}">` : `<span class="nb-ic">${ic(icon)}</span>`;
   const credit = photo && x.imgU ? `<small class="nb-credit">사진 · ${esc(x.imgS || "블로그")}</small>` : "";
-  const dist = x.summary ? "" : km(x.m);
+  const dist = x.summary === true || !Number.isFinite(x.m) ? "" : km(x.m);
   const body = `${lead}<span class="nb-txt"><b>${esc(x.name)}</b><i>${esc(label)}${x.sub ? ` · ${esc(x.sub)}` : ""}${x.summary && x.summary !== true ? ` · ${x.summary}` : ""}</i>${credit}</span>${dist ? `<span class="nb-dist" aria-label="캠핑장에서 ${esc(dist)}">${esc(dist)}</span>` : ""}`;
   // 실제 모습: 좌표가 있으면 ‘로드뷰’(카카오 지도 로드뷰, 화면 안 팝업). 줄 자체는 지도 링크.
   const rv = x.lat && x.lng ? `<span class="nb-rv" role="button" tabindex="0" data-rv="${esc(`${x.lat},${x.lng}`)}" data-rv-name="${esc(x.name)}" aria-label="${esc(x.name)} 로드뷰 보기">${ic("roadview")}</span>` : "";
@@ -2762,8 +2779,12 @@ function nearbyHubHtml(c, d) {
   const entry = (type, x = {}) => {
     const name = x?.name ?? x?.n;
     const m = Number(x?.m ?? x?.distance_m);
-    const factSummary = Object.entries(x.facts ?? {}).filter(([k]) => !/쿠키|개인정보|출처|원문/.test(k)).slice(0, 2).map(([k, v]) => `${k} ${v}`).join(" · ");
-    return name && Number.isFinite(m) ? { type, name, m, lat: x.lat, lng: x.lng, url: x.u ?? x.url, image: x.img ?? x.image, imgU: x.img_u, imgS: x.img_s, sub: x.addr ?? x.sub, summary: factSummary || undefined } : null;
+    // 소유자 2026-10-23: 주소는 지도로 보면 되니 빼고 딱 필요한 정보만 — 구분·유형(‘기타’ 제외)과 짧은 입장료
+    const f = x.facts ?? {};
+    const factSummary = [f["구분"] ?? (f["유형"] && f["유형"] !== "기타" ? f["유형"] : null), f["입장료"] && String(f["입장료"]).length <= 8 ? `입장료 ${f["입장료"]}` : null].filter(Boolean).join(" · ");
+    // 아이콘: 미술관·갤러리는 갤러리, 이름에 ‘공원’이 있는 관광지는 공원
+    const icon = /미술관|갤러리|아트센터/.test(`${name} ${f["유형"] ?? ""}`) ? "gallery" : type === "TOUR" && /공원/.test(name ?? "") ? "park" : undefined;
+    return name && Number.isFinite(m) ? { type, name, m, lat: x.lat, lng: x.lng, url: x.u ?? x.url, image: x.img ?? x.image, imgU: x.img_u, imgS: x.img_s, sub: x.sub && !/[시군구읍면동로길]\s*\d|번지|\(.+동\)/.test(x.sub) ? x.sub : undefined, summary: factSummary || undefined, icon } : null;
   };
   // 한 종류에 가까운 순 최대 3곳(이름이 같으면 하나로)
   const pick = (type, ...lists) => [...new Map(lists.flat().map((x) => entry(type, x)).filter(Boolean).sort((a, b) => a.m - b.m).map((x) => [x.name.replace(/\s+/g, ""), x])).values()].slice(0, 3);
@@ -2777,11 +2798,11 @@ function nearbyHubHtml(c, d) {
     type: "HOSPITAL",
     name: `[응급실] ${er[0]}`,
     m: (Number(er[1]) || 0) * 1000,
-    sub: [er[2], er[3]].filter(Boolean).join(" · "),
+    sub: er[2] || undefined, // 전화번호는 빼고 응급의료기관 구분만(전화는 줄을 누르면 연결)
     url: er[3] ? `tel:${er[3]}` : null,
   }] : [];
   // 아이콘은 스프라이트(#i-…)에 있는 것만(없는 id는 빈 칸으로 보인다)
-  const publicLabels = { forest: ["휴양림", "th:FOREST"], rest: ["휴게소", "restarea"], indoorplay: ["실내놀이터", "playground"], pool: ["수영장", "swim"], leisure: ["레포츠", "sports"], museum: ["박물관", "experience"] };
+  const publicLabels = { forest: ["휴양림", "th:FOREST"], rest: ["휴게소", "restarea"], indoorplay: ["실내놀이터", "playground"], pool: ["수영장", "swim"], leisure: ["레포츠", "sports"], museum: ["박물관", "museum"] };
   const publicGroups = Object.entries(nearby.public ?? {}).map(([kind, rows]) => {
     const [title, icon] = publicLabels[kind] ?? ["공공시설", "amenity"];
     return [`public-${kind}`, title, icon, rows.map((x) => entry(`PUBLIC_${kind.toUpperCase()}`, x)).filter(Boolean)];
@@ -2789,10 +2810,12 @@ function nearbyHubHtml(c, d) {
   // 소유자 2026-10-23: 탭은 편의점(편의점·마트·정육·캠핑용품)·병원(약국·병원·동물병원)·관광(박물관·수영장·실내놀이터·휴양림·관광지)으로 묶는다.
   // 묶어도 줄마다 원래 종류(마트·약국·휴양림 …)는 그대로 보인다. 탭 안은 가까운 순.
   const byDist = (...lists) => lists.flat().filter(Boolean).sort((a, b) => (a.m ?? 1e9) - (b.m ?? 1e9));
-  const pub = (kinds) => publicGroups.filter(([key]) => kinds.includes(key.replace("public-", ""))).flatMap(([, , , rows]) => rows);
+  // 같은 시설이 프로그램별로 여러 줄(‘…체육센터(수영 자유수영 화목)’ 등) → 괄호 앞 이름·위치가 같으면 하나로
+  const pub = (kinds) => [...new Map(publicGroups.filter(([key]) => kinds.includes(key.replace("public-", ""))).flatMap(([, , , rows]) => rows)
+    .map((x) => [`${x.name.replace(/\s*\(.*$/, "")}|${Math.round((x.lat ?? 0) * 1000)}`, { ...x, name: x.name.replace(/\s*\((?:수영|자유수영|강습)[^)]*\)\s*$/, "") }])).values()];
   const otherPublic = publicGroups.filter(([key]) => !["forest", "indoorplay", "pool", "museum"].includes(key.replace("public-", "")));
   // 화장실: 2km 안 전부(상세 toilet_list) — 없으면 카탈로그의 가까운 3곳
-  const toiletRows = (d?.toilet_list ?? toilet.nearest ?? []).map((t) => entry("TOILET", { name: t.name, m: t.m, lat: t.lat, lng: t.lng, addr: [t.addr, t.h24 ? "24시간" : null].filter(Boolean).join(" · ") || null })).filter(Boolean);
+  const toiletRows = (d?.toilet_list ?? toilet.nearest ?? []).map((t) => entry("TOILET", { name: t.name, m: t.m, lat: t.lat, lng: t.lng, sub: t.h24 ? "24시간" : undefined })).filter(Boolean);
   const tourRows = (() => {
     const list = (nearby.tour ?? []).slice(0, 4).map((x) => entry("TOUR", x)).filter(Boolean);
     const ext = d?.extras ?? {};

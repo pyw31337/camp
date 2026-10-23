@@ -1,5 +1,11 @@
 # 인수인계
 
+## 📌 주변시설: 검색 사진 판독 켬 · 브랜드 표식 · 주소 제거 · 아이콘 (2026-10-23, Claude)
+- **검색 사진**: `judge-nearby-photos`(CLIP, `lib/nearby-photo-judge.mjs`)가 `registry/nearby-photos.json` 항목에 판정 `j`를 적는다. `build-nearby-photos`는 판독을 통과하고 시설 종류와 장면이 맞는 사진만 붙인다(기본 켬, 끄려면 `NEARBY_SEARCH_PHOTOS=off`). 표본 160장에서 통과분의 약 85%가 실제 가게 모습이었다. 판독은 `nearby-photos.yml`(매주 금 05:23 KST)에서 이어서 한다.
+- **브랜드 표식**: 사진이 없는 편의점·마트·주유소 체인(GS25·CU·세븐일레븐·이마트24·하나로·S-OIL·SK 등)은 브랜드 색 글자 표식을 보인다(`BRAND_MARKS`, 이미지 파일 아님).
+- **줄 정보**: 주소는 빼고 종류·구분·짧은 입장료만 보인다. 응급실 전화번호도 뺀다. 같은 시설이 프로그램별로 여러 줄이면 하나로 합친다. 부가 정보가 있는 줄도 거리를 보인다.
+- **아이콘**(소유자 제공): 박물관 `i-museum`, 미술관·갤러리 `i-gallery`, 수영장 `i-swim`(교체), 공원 `i-park`(이름에 ‘공원’이 있는 관광지 + 공원 테마).
+
 ## 📌 주변시설 사진·충전소 이용 제한·카카오 후기 썸네일 (2026-10-23, Claude)
 - **충전소**: 환경부 충전소 정보의 이용 제한(`limitYn=Y`, 예: 아파트 입주민 전용·비공개)은 목록에서 뺀다. OSM은 `access=private·customers·residents`를 뺀다(`sync-trip-extras`). 원천이 갱신되기 전까지 화면은 아파트·오피스텔·입주민 이름을 거른다. 표시 중이던 18,882곳 중 11%가 이에 해당했다.
 - **관광 칸 사진**: 휴양림·박물관·수영장·실내 놀이(공공 표준데이터, 사진 없음)를 관광공사 TourAPI 목록과 400m 안·이름 겹침으로 맞춰 공식 사진을 붙인다. `registry/public-poi-photos.json`은 `sync-nearby-context`가 만들고 `apply-public-nearby`가 붙인다.

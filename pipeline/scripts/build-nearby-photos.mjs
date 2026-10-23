@@ -6,6 +6,7 @@ import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { placeKey } from "../lib/nearby-photos.mjs";
+import { NEARBY_RULE_VERSION, fitsKind } from "../lib/nearby-photo-judge.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const dir = join(root, "camping-atlas/public/explore/data/camps");
@@ -13,7 +14,9 @@ const regPath = join(root, "pipeline/registry/nearby-photos.json");
 // 2026-10-19 첫 실행 표본 점검: 블로그 대표 썸네일 24장 중 실제 가게 모습은 5장뿐(안내문·배너·관계없는 풍경이 대부분).
 // 엉뚱한 사진은 신뢰를 해치므로 기본은 붙이지 않고(이미 붙은 검색 사진은 걷어 냄), 실제 모습은 상세의 ‘로드뷰’로 보인다.
 // 규칙을 개선해 다시 켤 때만 NEARBY_SEARCH_PHOTOS=on.
-const enabled = process.env.NEARBY_SEARCH_PHOTOS === "on";
+// 2026-10-23 다시 켬: 사진 판독(lib/nearby-photo-judge.mjs, judge-nearby-photos.mjs)을 통과하고 시설 종류와 장면이 맞는 사진만 붙인다.
+// 표본 160장: 통과·종류 맞음 13장 중 11장이 실제 가게 모습. 끄려면 NEARBY_SEARCH_PHOTOS=off.
+const enabled = process.env.NEARBY_SEARCH_PHOTOS !== "off";
 const places = enabled && existsSync(regPath) ? JSON.parse(readFileSync(regPath, "utf8")).places ?? {} : {};
 
 let files = 0, attached = 0;
@@ -21,7 +24,7 @@ for (const f of readdirSync(dir)) {
   const path = join(dir, f);
   let d; try { d = JSON.parse(readFileSync(path, "utf8")); } catch { continue; }
   let changed = false;
-  const touch = (x) => {
+  const touch = (x, kind) => {
     if (!x || typeof x !== "object") return;
     const name = x.name ?? x.n;
     if (!name || !Number.isFinite(Number(x.lat))) return;
@@ -29,12 +32,13 @@ for (const f of readdirSync(dir)) {
     if (x.img_by === "search") { delete x.img; delete x.img_u; delete x.img_s; delete x.img_by; changed = true; }
     if (x.img) return;
     const p = places[placeKey(name, x.lat, x.lng)];
-    if (!p || p.none || !p.t) return;
+    if (!p || p.none || !p.t || !p.j?.ok || p.j.v !== NEARBY_RULE_VERSION || !fitsKind(kind, p.j.top)) return;
     Object.assign(x, { img: p.t, img_u: p.u ?? null, img_s: p.s ?? null, img_by: "search" });
     changed = true; attached++;
   };
-  for (const x of Object.values(d.nearby_licensed ?? {})) touch(x);
-  for (const rows of Object.values(d.nearby ?? {})) if (Array.isArray(rows)) rows.forEach(touch);
+  const LIC_KIND = { CONVENIENCE: "conv", MART: "mart", BUTCHER: "butcher", PHARMACY: "pharmacy", OTC_MEDICINE: "pharmacy", VET: "vet", FUEL: "fuel", GAS_STATION: "fuel" };
+  for (const [k, x] of Object.entries(d.nearby_licensed ?? {})) for (const y of Array.isArray(x) ? x : [x]) touch(y, LIC_KIND[k] ?? k);
+  for (const [k, rows] of Object.entries(d.nearby ?? {})) if (Array.isArray(rows)) rows.forEach((x) => touch(x, k));
   if (changed) { writeFileSync(path, JSON.stringify(d)); files++; }
 }
 console.log(`주변시설 검색 사진: ${attached}곳 연결 · 상세 ${files}개 갱신 · 등록부 ${Object.values(places).filter((p) => !p.none).length}곳`);
