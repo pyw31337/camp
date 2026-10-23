@@ -164,6 +164,9 @@ const guides = new Map();
 for (const [id, d] of Object.entries(details)) {
   const c = byId.get(id), fee = fees?.records?.[id], rec = recById.get(id);
   const std = stdCampgrounds?.records?.[id];
+  // 2km 안 공중화장실 전부(가까운 순) — 상세 주변시설 ‘화장실’ 목록. 카탈로그 nearby_toilets에는 개수와 가까운 3곳만 있다.
+  const tl = toilets?.campgrounds?.[id]?.nearest;
+  if (tl?.length) d.toilet_list = tl.map((t) => ({ name: t.name, m: t.distance_m, lat: t.lat ?? null, lng: t.lng ?? null, h24: t.open_24h ?? null, addr: t.address ?? null, src: t.source ?? "mois" }));
   if (std) {
     if (std.specs) d.std_specs = std.specs;
     if (std.nature && Object.values(std.nature).some(Boolean)) d.nature = std.nature;
