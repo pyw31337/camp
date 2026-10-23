@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-23T14:59:55.313Z",
+ "generated_at": "2026-10-23T16:15:11.546Z",
  "rule": "pipeline/lib/fact-refine.mjs",
- "dropped": 148,
- "recoded": 101,
- "scoped": 351,
+ "dropped": 154,
+ "recoded": 103,
+ "scoped": 379,
  "items": [
   {
    "cid": "102118",
@@ -1755,6 +1755,17 @@
    "why": "일부 객실·구역만 허용"
   },
   {
+   "cid": "100866",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://triple.guide/hotels/27cbb6fd-a921-41fa-a27d-aed5ed048aa7?checkIn=2025-05-10&checkOut=2025-05-11&numberOfAdults=2&agesOfChildren&skipInitialCache=true&regionId=0ded63bc-cf3e-4d4f-8d3a-861c76a0cdc0&_triple_no_navbar=true",
+   "quote": "· 반려동물 입실 가능 펜션 외에 반려동물 동반 시 입실이 거부될 수 있으며, 해당 사유로 환불받을 수 없습니다.",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
+  },
+  {
    "cid": "101130",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -1764,6 +1775,16 @@
    "quote": "애견 추가 요금 (글램핑5호만 가능) : 소형 애견(7kg 이하) 1마리 15,000원(최대 2마리까지)",
    "action": "recode",
    "why": "크기 제한 있는 허용"
+  },
+  {
+   "cid": "2619",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://www.yeogi.com/domestic-accommodations/58533",
+   "quote": "넓이 약 5M*7M/가족,커플 전용 캠핑/지인,모임 2객실 예약 불가/애견동반불가",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
    "cid": "2005",
@@ -1806,6 +1827,16 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
+   "cid": "100069",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/shushushuha/224253036507",
+   "quote": "[메이플글램핑 1호점] 히노끼탕 있는 포천글램핑 가족캠핑 추천 무료 주차 가능 입실 15:00 퇴실 11:00 애견 동반 불가 개인 화로 불가 개인 버너 가능 인원 추가 1인 30000원 셀프 바베큐 25000원 셀프 불멍 15000원...",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
    "cid": "101568",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -1826,6 +1857,16 @@
    "quote": "울산 아이와 가볼 만한 \"황방산생태야영장\" 2박 3일 가족캠핑 솔직후기 (114번, 애견동반가능).",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
+  },
+  {
+   "cid": "101851",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/hi_yangtori/224404843154",
+   "quote": "퇴실 12시] 입 퇴실시간 준수 (추가 요금이 부과 될 수 있음 ) - 사이트 옆 주차 1-7번 사이트는 캠핑장 바깥도로로 주차 하기 - 매너타임 23시-8시 - 반려동물 금지...",
+   "action": "drop",
+   "why": "일부 구역·객실만의 금지를 동반 불가로 읽음"
   },
   {
    "cid": "101881",
@@ -2593,6 +2634,47 @@
    "src": "review_search",
    "url": "https://blog.naver.com/dong_e910/224437106685",
    "quote": "전기사용료 5천원 주차가능,매점없음 반려동물 동반 금지 앵봉산가족캠핑장(@angbong_camping)",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "osm-r7004603",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://neweveryinfo.com/124",
+   "quote": "필수 전기릴선(오토캠핑), 데크팩 등 장비 챙기기 반려동물 출입 불가, 매너타임(23:00~07:00) 엄수 매점 운영시간(9:00~22:00) 참고, 식재료·생필품 넉넉히...임진각 평화누리공원, 헤이리 예술마을 등 차량 20분 내외 파주 출판도시…",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "osm-w435230360",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/happysmile122/224395270381",
+   "quote": "매점 관리실 옆 내부 매점 운영...반려동물 동반 입장 불가",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "osm-w435230360",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "SMALL_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/kej9543210/224332170169",
+   "quote": ") *매너타임 오후10시부터 오전8시까지 *반려견 동반가능 (9kg미만 소형견) 캠핏 | 부곡...울집에서 35분정도 걸림!",
+   "action": "recode",
+   "why": "크기 제한 있는 허용"
+  },
+  {
+   "cid": "osm-w1365121769",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/ihhihh/224321886584",
+   "quote": "시설 트램폴린, 샤워실, 매점, 놀이터 매너타임 23:00 ~ 07:00 체크인/아웃 캠핏에서 확인해주세요 반려동물 펫 불가 (전 사이트 기준) 주변 관광지 바다향기수목원, 갯벌체험, 구봉도 해루질체험, 유리섬박물관, 종이박물관 예약 캠핏 앱/웹 예…",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   }
