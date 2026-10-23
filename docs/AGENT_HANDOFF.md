@@ -1,5 +1,12 @@
 # 인수인계
 
+# 📌 맥미니 nightshift 설치·운영 (2026-10-23, Codex)
+
+- `local/macmini/` 설치·실행 파일을 `main`에 정식 반영하는 작업을 진행 중이다. `main`에 파일이 없는 저장소를 만났을 때는 `claude/zealous-johnson-an2enq` 준비 브랜치를 자동 사용하고, 이후 `main`으로 전환한다.
+- 맥미니 로컬 시험은 8GB 환경에서 `qwen2.5vl:3b`, Apple Vision OCR, CLIP을 준비했다. 사진 30장 중 5장 통과·간판 일치 2장을 기록했고, 결과 PR #324는 필수 검사 통과 후 병합됐다.
+- 설치·자동 실행은 `~/.letscamp`, `~/Library/LaunchAgents/com.letscamp.nightshift.plist`만 사용한다. 화면 코드와 기존 사실값은 이 작업에서 변경하지 않는다.
+- 설치 파일 변경 검사는 `bash -n local/macmini/install.sh`, `node --check local/macmini/nightshift.mjs`, `swiftc -parse local/macmini/vision-ocr.swift`로 확인한다.
+
 ## 📌 지도: 숙박 종류 마커 · 확대 버튼 제거 · 모바일 머리 줄은 ‘찾기’에서만 (2026-10-23, Claude)
 
 - 지도 글램핑·카라반·방갈로 칩을 누르면 마커에 그 숙박 종류(난방 여부·방갈로 세부 이름·동 수)가 칩과 같은 색으로 나온다(`MAP_STAY_KEYS`, `.pin-glamp/-caravan/-house`).
