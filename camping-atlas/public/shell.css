@@ -26,7 +26,7 @@ body > main { flex: 1 0 auto; }
   display: flex; align-items: center; justify-content: space-between; gap: clamp(12px, 3vw, 40px); padding: env(safe-area-inset-top) var(--gut) 0;
   box-sizing: border-box;
 }
-.brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 900; font-size: 1.08rem; letter-spacing: -0.03em; white-space: nowrap; }
+.brand { display: inline-flex; align-items: center; gap: 8px; width: 109px; flex: 0 0 109px; font-weight: 900; font-size: 1.08rem; letter-spacing: -0.03em; white-space: nowrap; }
 .brand-mark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: var(--ink); color: var(--volt); }
 .brand-mark svg { width: 18px; height: 18px; fill: currentColor; }
 .map-header-count { display: none; color: var(--ink-2); font-size: .78rem; font-weight: 800; white-space: nowrap; margin-left: auto; }
