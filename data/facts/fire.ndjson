@@ -9489,6 +9489,12 @@
 {"cid":"102368","attr":"FIRE_PIT","value":"INDIVIDUAL","grade":"CONFIRMED","src":"gocamping","text":"개별"}
 {"cid":"102368","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102368","attr":"FIREWOOD_SOLD","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"hangang-nanji","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-10-23"}
+{"cid":"hangang-nanji","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-10-23"}
+{"cid":"osm-w489293262","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/489293262","at":"2026-10-23"}
+{"cid":"osm-w489293262","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/489293262","at":"2026-10-23"}
+{"cid":"osm-w1187215466","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1187215466","at":"2026-10-23"}
+{"cid":"osm-w1187215466","attr":"FIREWOOD_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1187215466","at":"2026-10-23"}
 {"cid":"park-52111-00048-s6njs","attr":"CHARCOAL_ALLOWED","value":false,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-23"}
 {"cid":"park-52111-00048-s6njs","attr":"FIREWOOD_ALLOWED","value":false,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-23"}
 {"cid":"pdu-mysticcamp-yeongjong","attr":"CHARCOAL_ALLOWED","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://mysticcamp.co.kr","at":"2026-10-23"}
