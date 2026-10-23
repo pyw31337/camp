@@ -3159,6 +3159,16 @@ function galleryHtml(c) {
   const rail = `<div class="gal-rail">${carousel(c, { eager: true, cls: "car-gal" })}</div>`;
   return `<div class="gallery">${grid}${rail}</div>`;
 }
+function specialPlaceAside(c, d) {
+  if (!isPublicPark(c)) return reserveCard(c, d);
+  const source = c.homepage || c.src?.url || c.src_url;
+  return `<div class="reserve special-aside"><div class="rs-top"><span>공원 이용 안내</span></div><p class="rs-open"><b>당일 이용</b><span>입장·시설 운영은 공식 안내를 확인하세요.</span></p><div class="rs-btns">${source ? `<a class="btn primary" href="${esc(source)}" target="_blank" rel="noopener">${ic("external")}공식 안내</a>` : ""}${c.tel ? `<a class="btn ghost" href="tel:${esc(c.tel)}">${ic("phone")}전화</a>` : ""}</div></div>`;
+}
+function specialJumpItems(c) {
+  if (isPublicPark(c)) return [["sec-profile", "이용"], ["sec-rules", "규칙"], ["sec-nearby", "주변"], ["sec-events", "행사"], ["sec-info", "업체"]];
+  if (isPicnicCamp(c)) return [["sec-profile", "이용"], ["sec-rules", "규칙"], ["sec-nearby", "주변"], ["sec-events", "행사"], ["sec-reviews", "후기"], ["sec-info", "업체"]];
+  return [["sec-price", "요금"], ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-nearby", "주변"], ["sec-events", "행사"], ["sec-reviews", "후기"], ["sec-info", "업체"]];
+}
 async function detailView(id) {
   if (S.byId.get(id) && String(S.byId.get(id).id) !== id) { history.replaceState(null, "", `${APP_BASE}place/${encodeURIComponent(S.byId.get(id).id)}`); id = String(S.byId.get(id).id); }
   await ensureFull([id]);
@@ -3174,6 +3184,10 @@ async function detailView(id) {
   const known = spec.filter((k) => f[k]).length;
   const o = openingOf(c);
   const us = usage(c, d);
+  const park = isPublicPark(c), picnic = isPicnicCamp(c) && !park, special = park || picnic;
+  const jumps = specialJumpItems(c);
+  const hasPrice = Boolean(c.fee?.g === "FREE" || c.fee?.min != null || c.fee?.max != null || c.fee?.text || c.fee?.label || d?.price || d?.prices?.length);
+  const hasBooking = bookingOptions(c).length > 0;
   return `<article class="detail" data-id="${esc(c.id)}">
     <div class="d-bar"><a class="icon-btn" href="${APP_BASE}" data-back aria-label="뒤로">${ic("left")}</a><span class="d-bar-acts">${heartBtn(c, { label: true })}<button class="d-share" type="button" data-share-place="${esc(c.id)}" aria-label="링크 공유">${ic("share")}<span>공유</span></button></span></div>
     <header class="d-head">
@@ -3183,30 +3197,30 @@ async function detailView(id) {
       ${c.line ? `<p class="d-line">${esc(serviceText(c.line, 400))}${c.gc_url ? srcTip({ g: "c", src: { label: "고캠핑 소개", url: c.gc_url, quote: c.line } }, "한 줄 소개") : ""}</p>` : ""}
       <div class="d-bdgs">${wxBadge(c)}${stayBadges(c)}${badges(c, 14, 10)}</div>
       </div>
-      <aside class="d-side">${reserveCard(c, d)}</aside>
+      <aside class="d-side">${specialPlaceAside(c, d)}</aside>
     </header>
     ${galleryHtml(c)}
-    <nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${[["sec-price", "요금"], ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-nearby", "주변"], ["sec-events", "행사"], ["sec-reviews", "후기"], ["sec-info", "업체"]].map(([id, l], i) => `<a href="#${id}" data-jump="${id}"${i === 0 ? " aria-current" : ""}>${l}</a>`).join("")}</div></nav>
+    <nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${jumps.map(([id, l], i) => `<a href="#${id}" data-jump="${id}"${i === 0 ? " aria-current" : ""}>${l}</a>`).join("")}</div></nav>
     <div class="d-body">
       <div class="d-main">
-        ${siteTypesHtml(c, d)}
-        ${specSection(c, d)}
+        ${special ? "" : siteTypesHtml(c, d)}
+        ${special ? "" : specSection(c, d)}
         ${classificationProfileHtml(c, d)}
-        ${priceHtml(c, d)}
-        ${us.some(([, x]) => x) ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><dl class="uses">${us.filter(([, x]) => x).map(([l, x, icon]) => `<div class="use"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${factValueHtml({ ...x, v: wonText(detailValue(x)) })}${asOfMention(x)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span></dd></div>`).join("")}</dl></section>` : `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><p class="muted" style="padding: 18px 0; color: var(--ink-3); font-size: .88rem;">등록된 상세 이용 정보가 없습니다.</p></section>`}
+        ${(!special || hasPrice) ? priceHtml(c, d) : ""}
+        ${special ? "" : (us.some(([, x]) => x) ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><dl class="uses">${us.filter(([, x]) => x).map(([l, x, icon]) => `<div class="use"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${factValueHtml({ ...x, v: wonText(detailValue(x)) })}${asOfMention(x)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span></dd></div>`).join("")}</dl></section>` : `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><p class="muted" style="padding: 18px 0; color: var(--ink-3); font-size: .88rem;">등록된 상세 이용 정보가 없습니다.</p></section>`)}
         ${houseRulesHtml(c, d)}
         <section class="d-sec" data-cond hidden></section>
         ${reviewHtml(d, c)}
         ${operatorHtml(d, c)}
-        ${bookingHtml(c, d)}
+        ${hasBooking ? bookingHtml(c, d) : ""}
         ${amenityHtml(c, d)}
-        ${programsHtml(d)}
-        ${layoutHtml(d, c)}
+        ${park ? "" : programsHtml(d)}
+        ${park ? "" : layoutHtml(d, c)}
         <section class="d-sec site-picks-sec" id="sec-site-picks" data-site-picks hidden></section>
         ${operatorMediaHtml(d)}
         ${mediaHubHtml(d, c)}
         ${nearbyHubHtml(c, d)}
-        ${similarHtml(c)}
+        ${park ? "" : similarHtml(c)}
         <section class="d-sec ev-sec" id="sec-events" data-events><div class="sec-head">${iconTitle("fest", "행사")}</div><div data-events-body></div></section>
         ${reviewLinksHtml(d, c)}
         ${infoHtml(c)}
