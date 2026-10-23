@@ -10,8 +10,8 @@
   "theme_color": "#09121d",
   "icons": [
     {
-      "src": "./images/favicon-transparent.png",
-      "sizes": "32x32",
+      "src": "./images/favicon-128.png",
+      "sizes": "128x128",
       "type": "image/png",
       "purpose": "any maskable"
     },

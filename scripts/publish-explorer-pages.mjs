@@ -175,6 +175,7 @@ for (const d of ["c", "themes", "openings", "guide", "vision", "passport", "coll
 // 3. 공유 미리보기(카카오톡·페이스북·X 등): 캠핑장마다 place/{id}/index.html 에 Open Graph·트위터 카드·canonical을 넣는다.
 // 크롤러는 JS를 돌리지 않으므로 이 정적 메타를 읽고, 사람은 넘김 스크립트로 앱의 같은 주소(/camp/place/{id})를 본다(meta refresh는 쓰지 않음).
 const SITE = (process.env.SITE_URL ?? "https://pyw31337.github.io/camp/").replace(/\/?$/, "/");
+const OG_IMAGE = `${SITE}images/og-image.jpg?v=20261023`;
 const attr = (v) => String(v ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const placeSource = [`${rootOut}explore/data/campgrounds.json`, `${dataDir}/campgrounds.json`].find((f) => existsSync(f));
 if (placeSource) {
@@ -191,7 +192,7 @@ if (placeSource) {
     if (full) return https(full);
     const media = p.find((u) => String(u).startsWith("media/")) ?? (c.ph ? `media/${c.ph}` : "");
     if (media) return SITE + media.replace(/-t\.webp$/, "-l.webp");
-    return `${SITE}images/og-image.jpg`;
+    return OG_IMAGE;
   };
   const typesOf = (c) => (Array.isArray(c.types) ? c.types : String(c.types ?? "").match(/[가-힣A-Za-z]+/g) ?? []).map((t) => t.replace(/야영장$/, "").replace(/^자동차$/, "오토").replace(/^카라반$/, "카라반").replace(/^글램핑$/, "글램핑")).filter(Boolean);
   const feeOf = (c) => (typeof c.fee === "object" ? c.fee?.text : String(c.fee ?? "").match(/'text': '([^']+)'/)?.[1]) ?? "";
@@ -241,7 +242,7 @@ if (placeSource) {
     const head = `<meta name="description" content="${attr(description)}"><link rel="canonical" href="${attr(url)}">`
       + `<meta property="og:type" content="website"><meta property="og:site_name" content="렛츠 캠핑"><meta property="og:locale" content="ko_KR">`
       + `<meta property="og:title" content="${attr(title)}"><meta property="og:description" content="${attr(description)}"><meta property="og:url" content="${attr(url)}">`
-      + `<meta property="og:image" content="${attr(`${SITE}images/og-image.jpg`)}"><meta name="twitter:card" content="summary_large_image">`;
+      + `<meta property="og:image" content="${attr(OG_IMAGE)}"><meta name="twitter:card" content="summary_large_image">`;
     const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>${attr(title)}</title>${head}${STUB_JS}</head><body><h1>${attr(where)} 캠핑장</h1><p>${attr(description)}</p></body></html>`;
     await mkdir(`${rootOut}region/${sd}${sg ? `/${sg}` : ""}`, { recursive: true });
     await writeFile(`${rootOut}region/${sd}${sg ? `/${sg}` : ""}/index.html`, html);

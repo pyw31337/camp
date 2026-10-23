@@ -61,6 +61,8 @@ try {
   await sharp(appSource).resize(192, 192, { fit: "cover" }).png().toFile(`${imagesDir}icon-192.png`);
   await sharp(appSource).resize(180, 180, { fit: "cover" }).png().toFile(`${imagesDir}apple-touch-icon.png`);
   await copyFile(faviconSource, `${imagesDir}favicon-transparent.png`);
+  await sharp(faviconSource).resize(128, 128, { fit: "contain" }).png().toFile(`${imagesDir}favicon-128.png`);
+  await sharp(faviconSource).resize(64, 64, { fit: "contain" }).png().toFile(`${imagesDir}favicon-64.png`);
   await sharp(faviconSource).resize(32, 32, { fit: "contain" }).png().toFile(`${publicDir}favicon.png`);
   const faviconData = (await readFile(faviconSource)).toString("base64");
   await writeFile(`${publicDir}favicon.svg`, `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><image href="data:image/png;base64,${faviconData}" width="512" height="512" preserveAspectRatio="xMidYMid meet"/></svg>`);
