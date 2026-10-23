@@ -13,8 +13,15 @@ import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repo = resolve(here, "../..");
-const { budgetOf, clashesWith, idle, isDayOff, kst, pickJob, window } = await import(join(repo, "pipeline/lib/nightshift.mjs"));
 const home = join(homedir(), ".letscamp");
+// launchd는 plist에서 env를 읽지만, 사용자가 README의 명령을 직접 실행할 때도
+// 같은 로컬 비전 모델을 쓰도록 간단한 export 설정을 먼저 적용한다.
+const envFile = join(home, "env");
+if (existsSync(envFile)) for (const raw of readFileSync(envFile, "utf8").split("\n")) {
+  const m = raw.trim().match(/^export\s+([A-Z_][A-Z0-9_]*)=(.*)$/);
+  if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^['"]|['"]$/g, "");
+}
+const { budgetOf, clashesWith, idle, isDayOff, kst, pickJob, window } = await import(join(repo, "pipeline/lib/nightshift.mjs"));
 mkdirSync(join(home, "logs"), { recursive: true });
 const arg = (k) => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : null; };
 const DRY = process.argv.includes("--dry-run"), FORCE = arg("--force");
