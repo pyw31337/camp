@@ -11,7 +11,7 @@ const regPath = join(root, "pipeline/registry/nearby-photos.json");
 const MAX = Number(process.env.NEARBY_JUDGE_MAX ?? 3000);
 if (!existsSync(regPath)) process.exit(0);
 const judge = await nearbyPhotoJudge({ cacheDir: process.env.HF_CACHE || join(root, "pipeline/.cache/hf") });
-if (!judge) { console.log("::warning::판독기(@huggingface/transformers) 없음 — 건너뜀"); process.exit(0); }
+if (!judge) { console.log("::error::판독기(@huggingface/transformers) 없음 — 워크플로에서 설치해야 한다"); process.exit(1); }
 const reg = JSON.parse(readFileSync(regPath, "utf8"));
 const todo = Object.entries(reg.places ?? {}).filter(([, e]) => e.t && e.j?.v !== NEARBY_RULE_VERSION).slice(0, MAX);
 let n = 0, ok = 0, fail = 0;

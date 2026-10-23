@@ -2662,7 +2662,7 @@ function extraTiles(c, d, f) {
   if (wifi.length) add("wifi", "와이파이", { v: wifi.some((a) => /일부|제한|부분/.test(a)) ? "일부 가능" : "있음", ...gc(wifi) });
   const play = names([[/놀이터|놀이방|놀이시설/, "놀이터"], [/트렘폴린|트램폴린|트램펄린|트램플린|방방이/, "트램펄린"], [/에어바운스/, "에어바운스"], [/키즈카페|키즈방/, "키즈카페"], [/모래놀이/, "모래놀이"]]);
   if (play.length) {
-    const playIcon = play.some((p) => /트램|트렘|방방/.test(p)) ? "trampoline" : "playground";
+    const playIcon = play.some((p) => /트램|트렘|방방/.test(p)) ? "trampoline" : play.some((p) => /키즈카페/.test(p)) && play.length === 1 ? "kidscafe" : "playout";
     add(playIcon, "놀이시설", { v: play.slice(0, 3).join(" · "), ...gc(pick(/놀이|트렘|트램|방방|에어바운스|키즈/)) });
   }
   const water = names([[/물놀이장|물놀이/, "물놀이장"], [/수영장|풀장|온수풀|유수풀/, "수영장"], [/워터슬라이드/, "워터슬라이드"]]);
@@ -2689,11 +2689,11 @@ const km = (m) => (m < 1000 ? `${Math.round(m / 10) * 10}m` : `${(m / 1000).toFi
 // 생활·안전·관광을 한 섹션으로 묶는다. 관광 사진은 한국관광공사 원본 URL이 있는 항목만 직접 보인다.
 const NEARBY_LABELS = {
   CONVENIENCE: ["편의점", "store"], MART: ["마트", "cart"], BUTCHER: ["정육", "meat"], FUEL: ["주유", "fuel"],
-  PHARMACY: ["약국", "pharmacy"], HOSPITAL: ["병원", "cross"], VET: ["동물병원", "paw"],
+  PHARMACY: ["약국", "pharmacy"], HOSPITAL: ["병원", "cross"], VET: ["동물병원", "vet"],
   DROWSY_SHELTER: ["졸음쉼터", "restarea"], REST_AREA: ["휴게소", "restarea"], TOILET: ["공중화장실", "toilet"],
   TOUR: ["관광", "tour"], FOOD: ["맛집", "food"], EV: ["전기차 충전", "bolt"],
-  PUBLIC_FOREST: ["휴양림", "th:FOREST"], PUBLIC_INDOORPLAY: ["실내놀이터", "playground"], PUBLIC_POOL: ["수영장", "swim"], PUBLIC_MUSEUM: ["박물관", "museum"], PUBLIC_LEISURE: ["레포츠", "sports"], PUBLIC_REST: ["휴게소", "restarea"],
-  OTC_MEDICINE: ["상비약", "pharmacy"], GAS_STATION: ["주유", "fuel"], ANIMAL_HOSPITAL: ["동물병원", "paw"], GEAR: ["캠핑용품", "tent"],
+  PUBLIC_FOREST: ["휴양림", "forest"], PUBLIC_INDOORPLAY: ["실내놀이터", "playground"], PUBLIC_POOL: ["수영장", "swim"], PUBLIC_MUSEUM: ["박물관", "museum"], PUBLIC_LEISURE: ["레포츠", "leports"], PUBLIC_REST: ["휴게소", "restarea"],
+  OTC_MEDICINE: ["상비약", "pharmacy"], GAS_STATION: ["주유", "fuel"], ANIMAL_HOSPITAL: ["동물병원", "vet"], GEAR: ["캠핑용품", "tent"],
 };
 const FUEL_BRANDS = [[/S-?OIL|에쓰오일|에스오일/i, "S-OIL"], [/GS칼텍스|\bGS\b|^GS/i, "GS칼텍스"], [/SK에너지|\bSK\b|^SK/i, "SK에너지"], [/현대오일뱅크|오일뱅크|HD현대/i, "HD현대오일뱅크"], [/알뜰/, "알뜰주유소"], [/농협|NH/i, "농협(알뜰)"], [/E1|이원/, "E1(LPG)"], [/LPG|충전소/, "LPG"]];
 /** 주유소 이름에서 상표(정유사)를 짐작한다. 모르면 null */
@@ -2774,6 +2774,13 @@ function mountNearbyEv(ev) {
     if (!$("[data-nb-tab][aria-selected='true']:not([hidden])")) tab.click();
   } else group.hidden = false;
 }
+const NEARBY_ICON_RULES = [
+  [/미술관|갤러리|아트센터/, "gallery"], [/키즈카페|키즈파크/, "kidscafe"], [/실내\s*놀이|플레이\s*센터/, "playground"], [/놀이터|어린이\s*놀이/, "playout"],
+  [/온천|스파|찜질|사우나/, "onsen"], [/전통\s*시장|재래\s*시장|오일장|5일장|[가-힣]시장$|장터/, "market"],
+  [/레포츠|레저|짚라인|집라인|래프팅|패러|카트|루지|서핑|번지/, "leports"], [/수목원|휴양림|숲|생태원/, "forest"], [/공원/, "park"],
+];
+// 관광·공공 시설에만 쓴다(맛집 이름의 ‘시장’·‘숲’ 같은 말로 아이콘이 바뀌지 않게).
+const nearbyIcon = (type, text) => (type === "TOUR" || /^PUBLIC_/.test(type) ? NEARBY_ICON_RULES.find(([re]) => re.test(text))?.[1] : undefined);
 function nearbyHubHtml(c, d) {
   const nearby = d?.nearby ?? {}, licensed = d?.nearby_licensed ?? {};
   const entry = (type, x = {}) => {
@@ -2782,8 +2789,8 @@ function nearbyHubHtml(c, d) {
     // 소유자 2026-10-23: 주소는 지도로 보면 되니 빼고 딱 필요한 정보만 — 구분·유형(‘기타’ 제외)과 짧은 입장료
     const f = x.facts ?? {};
     const factSummary = [f["구분"] ?? (f["유형"] && f["유형"] !== "기타" ? f["유형"] : null), f["입장료"] && String(f["입장료"]).length <= 8 ? `입장료 ${f["입장료"]}` : null].filter(Boolean).join(" · ");
-    // 아이콘: 미술관·갤러리는 갤러리, 이름에 ‘공원’이 있는 관광지는 공원
-    const icon = /미술관|갤러리|아트센터/.test(`${name} ${f["유형"] ?? ""}`) ? "gallery" : type === "TOUR" && /공원/.test(name ?? "") ? "park" : undefined;
+    // 아이콘(소유자 제공 2026-10-23): 이름·유형으로 더 맞는 그림을 고른다. 못 고르면 종류 기본 아이콘.
+    const icon = nearbyIcon(type, `${name ?? ""} ${f["유형"] ?? ""}`);
     return name && Number.isFinite(m) ? { type, name, m, lat: x.lat, lng: x.lng, url: x.u ?? x.url, image: x.img ?? x.image, imgU: x.img_u, imgS: x.img_s, sub: x.sub && !/[시군구읍면동로길]\s*\d|번지|\(.+동\)/.test(x.sub) ? x.sub : undefined, summary: factSummary || undefined, icon } : null;
   };
   // 한 종류에 가까운 순 최대 3곳(이름이 같으면 하나로)
@@ -2802,7 +2809,7 @@ function nearbyHubHtml(c, d) {
     url: er[3] ? `tel:${er[3]}` : null,
   }] : [];
   // 아이콘은 스프라이트(#i-…)에 있는 것만(없는 id는 빈 칸으로 보인다)
-  const publicLabels = { forest: ["휴양림", "th:FOREST"], rest: ["휴게소", "restarea"], indoorplay: ["실내놀이터", "playground"], pool: ["수영장", "swim"], leisure: ["레포츠", "sports"], museum: ["박물관", "museum"] };
+  const publicLabels = { forest: ["휴양림", "forest"], rest: ["휴게소", "restarea"], indoorplay: ["실내놀이터", "playground"], pool: ["수영장", "swim"], leisure: ["레포츠", "leports"], museum: ["박물관", "museum"] };
   const publicGroups = Object.entries(nearby.public ?? {}).map(([kind, rows]) => {
     const [title, icon] = publicLabels[kind] ?? ["공공시설", "amenity"];
     return [`public-${kind}`, title, icon, rows.map((x) => entry(`PUBLIC_${kind.toUpperCase()}`, x)).filter(Boolean)];
