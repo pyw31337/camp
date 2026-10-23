@@ -77,9 +77,19 @@ $$;
 
 REVOKE ALL ON FUNCTION public.safe_view_log_feed(INTEGER) FROM PUBLIC;
 REVOKE ALL ON FUNCTION public.safe_view_counts(INTEGER) FROM PUBLIC;
-GRANT EXECUTE ON FUNCTION public.safe_view_log_feed(INTEGER) TO anon, authenticated;
-GRANT EXECUTE ON FUNCTION public.safe_view_counts(INTEGER) TO anon, authenticated;
 REVOKE ALL ON FUNCTION public.safe_list_detail_counts(INTEGER) FROM PUBLIC;
-GRANT EXECUTE ON FUNCTION public.safe_list_detail_counts(INTEGER) TO anon, authenticated;
+DO $$
+BEGIN
+  IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'anon') THEN
+    GRANT EXECUTE ON FUNCTION public.safe_view_log_feed(INTEGER) TO anon;
+    GRANT EXECUTE ON FUNCTION public.safe_view_counts(INTEGER) TO anon;
+    GRANT EXECUTE ON FUNCTION public.safe_list_detail_counts(INTEGER) TO anon;
+  END IF;
+  IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'authenticated') THEN
+    GRANT EXECUTE ON FUNCTION public.safe_view_log_feed(INTEGER) TO authenticated;
+    GRANT EXECUTE ON FUNCTION public.safe_view_counts(INTEGER) TO authenticated;
+    GRANT EXECUTE ON FUNCTION public.safe_list_detail_counts(INTEGER) TO authenticated;
+  END IF;
+END $$;
 
 COMMIT;

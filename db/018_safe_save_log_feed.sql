@@ -35,9 +35,25 @@ $$;
 -- 과거 로그의 ip/user_agent 컬럼은 운영 DB에만 보존한다. 공개 클라이언트는
 -- 위 함수의 최소 필드만 읽을 수 있다.
 DROP POLICY IF EXISTS "Public read save log" ON public.save_log;
-REVOKE SELECT ON public.save_log FROM anon, authenticated;
+DO $$
+BEGIN
+  IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'anon') THEN
+    REVOKE SELECT ON public.save_log FROM anon;
+  END IF;
+  IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'authenticated') THEN
+    REVOKE SELECT ON public.save_log FROM authenticated;
+  END IF;
+END $$;
 
 REVOKE ALL ON FUNCTION public.safe_save_log_feed(INTEGER) FROM PUBLIC;
-GRANT EXECUTE ON FUNCTION public.safe_save_log_feed(INTEGER) TO anon, authenticated;
+DO $$
+BEGIN
+  IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'anon') THEN
+    GRANT EXECUTE ON FUNCTION public.safe_save_log_feed(INTEGER) TO anon;
+  END IF;
+  IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'authenticated') THEN
+    GRANT EXECUTE ON FUNCTION public.safe_save_log_feed(INTEGER) TO authenticated;
+  END IF;
+END $$;
 
 COMMIT;
