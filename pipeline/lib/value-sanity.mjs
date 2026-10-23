@@ -9,7 +9,7 @@ export const RANGES = {
   site_m: [2, 30],               // 사이트 가로·세로(m)
   checkin_h: [9, 20],            // 입실 시각(시)
   checkout_h: [8, 16],           // 퇴실 시각(시)
-  manner_start_h: [20, 24],      // 매너타임 시작(20~24시, 0시=24)
+  manner_start_h: [20, 25],      // 매너타임 시작(20~01시, 0시=24·1시=25) — spec-extractor nightStart와 같은 범위(2026-10-23: 01:00부터를 위반으로 잘못 세어 매일 발행이 막힘)
   manner_end_h: [5, 10],         // 매너타임 끝
   people: [1, 20],               // 기준·최대 인원
   pet_kg: [1, 60],               // 반려견 무게 제한
@@ -53,7 +53,7 @@ export function sanitizeCampValues(c, report) {
   }
   if (c.ti?.i && !inR(hourOf(c.ti.i[0]), RANGES.checkin_h)) hide(c, "ti.i", "입실 시각 범위 밖", report, "입실 시각");
   if (c.ti?.o && !inR(hourOf(c.ti.o[0]), RANGES.checkout_h)) hide(c, "ti.o", "퇴실 시각 범위 밖", report, "퇴실 시각");
-  if (c.ti?.m) { const h = hourOf(c.ti.m[0]); if (h != null && !inR(h === 0 ? 24 : h, RANGES.manner_start_h)) hide(c, "ti.m", "매너타임 시작 범위 밖", report, "매너타임"); }
+  if (c.ti?.m) { const h = hourOf(c.ti.m[0]); if (h != null && !inR(h <= 1 ? h + 24 : h, RANGES.manner_start_h)) hide(c, "ti.m", "매너타임 시작 범위 밖", report, "매너타임"); }
   if (c.ti && !c.ti.i && !c.ti.o && !c.ti.m) delete c.ti;
   for (const k of ["toilets", "showers", "sinks"]) if (c[k] != null && !inR(c[k], RANGES.sanitary)) hide(c, k, "편의시설 수 범위 밖", report, "화장실·샤워 수");
   if (Array.isArray(c.days)) for (let i = c.days.length - 1; i >= 0; i--) if (!DAYS_OK.has(c.days[i])) hide(c, `days.${i}`, "운영일 코드값(표기 아님)", report, "운영기간·운영일");
@@ -82,7 +82,7 @@ export function sanitizeDetailValues(d, c, report) {
   if (f.CHECKOUT && hourOf(val("CHECKOUT")) != null && !inR(hourOf(val("CHECKOUT")), RANGES.checkout_h)) hide(d, "profile.fields.CHECKOUT", "퇴실 시각 범위 밖", report, "퇴실 시각");
   if (f.MANNER) {
     const t = [...val("MANNER").matchAll(/(\d{1,2}):(\d{2})/g)].map((m) => Number(m[1]));
-    const s = t[0] === 0 ? 24 : t[0], e = t[1];
+    const s = t[0] != null && t[0] <= 1 ? t[0] + 24 : t[0], e = t[1];
     if ((s != null && !inR(s, RANGES.manner_start_h)) || (e != null && !inR(e, RANGES.manner_end_h))) hide(d, "profile.fields.MANNER", "매너타임 범위 밖", report, "매너타임");
   }
   if (f.PET) for (const m of val("PET").matchAll(/(\d+)\s*kg/g)) if (!inR(Number(m[1]), RANGES.pet_kg)) { hide(d, "profile.fields.PET", "반려견 kg 범위 밖", report, "반려동물 kg"); break; }

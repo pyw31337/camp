@@ -26250,3 +26250,4 @@
 {"at":"2026-10-23T02:25:01.360Z","by":"Shorts sync","run":"39888327972","action":"restored","file":"camping-atlas/public/explore/data/camps/100895.json","id":"100895","field":"spec.fields.MANNER_TIME.mentions","before":3,"after":2}
 {"at":"2026-10-23T02:25:01.360Z","by":"Shorts sync","run":"39888327972","action":"restored","file":"camping-atlas/public/explore/data/camps/101065.json","id":"101065","field":"spec.fields.MANNER_TIME.mentions","before":3,"after":2}
 {"at":"2026-10-23T02:25:01.360Z","by":"Shorts sync","run":"39888327972","action":"restored","file":"camping-atlas/public/explore/data/camps/101955.json","id":"101955","field":"spec.fields.MANNER_TIME.mentions","before":2,"after":1}
+{"at":"2026-10-23T08:42:40.100Z","by":"claude","action":"removed","file":"supabase:public.save_log","id":"agent-linux-headless","field":"*","reason":"에이전트·자동 테스트 기록 141건 삭제(소유자 요청, db/022, 사본 archive/save_log-agent-rows-2026-10-23.json)"}

@@ -1,5 +1,11 @@
 # 인수인계
 
+## 📌 운영 기록 대시보드 v2 · 에이전트 기록 삭제 SQL · 매일 발행 막힘 수정 (2026-10-23, Claude)
+
+- `/log/`: 기록 종류 메뉴를 사이트 머리글 바로 아래 고정 메뉴 막대(.subnav)로. 지표(14일 선 그래프·지난 7일 대비 증감), 14일 쌓기 막대, 기록 구성·기기 도넛, 24시간 시계, 관심 흐름(상세 진입→찜→한마디), 많이 본 업장·지금 찜된 곳(공용 찜). 메뉴를 바꾸면 그래프도 그 종류만.
+- 에이전트·헤드리스 브라우저 찜 기록 141건 삭제: `db/022_delete_agent_save_log_rows.sql`(사본 `pipeline/registry/archive/save_log-agent-rows-2026-10-23.json`, merge-overrides 기록). **저장소 db:migrate는 CI 임시 DB에만 적용** — 운영 Supabase는 대시보드 SQL Editor에서 실행해야 한다.
+- 10/23 매일 발행 실패 원인: value-sanity 매너타임 범위(20~24시)가 추출기(20시~01시)보다 좁아 ‘01:00부터’를 위반으로 세어 급증 판정 → 범위 20~25(01시)로 맞춤.
+
 ## 📌 로컬 정리·깃 백업 도구 · 새 PC 시작 안내 (2026-10-23, Claude)
 
 - `scripts/local-maintenance.mjs`: `report`(추적·깃에 없는 새 파일·다시 만들 수 있는 것·.git 크기), `backup --apply`(깃에 없는 작업·stash·안 올린 커밋을 `backup/<기기>-<날짜>` 브랜치로 — 작업 폴더·main은 그대로, 비밀·50MB 초과 제외), `clean --apply`(node_modules·빌드·캐시·OS 찌꺼기·git gc·병합된 로컬 브랜치만). 기본은 미리 보기, 전후 기록은 `~/.letscamp/maintenance/`.

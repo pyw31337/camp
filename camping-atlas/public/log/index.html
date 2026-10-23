@@ -212,12 +212,74 @@
   .toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); z-index: 200; padding: 10px 18px; border-radius: 999px; background: var(--ink); color: #fff; font-size: .86rem; font-weight: 700; box-shadow: 0 8px 24px rgba(0,0,0,.25); opacity: 0; transform: translate(-50%, 20px); pointer-events: none; transition: opacity .22s var(--ease), transform .35s var(--spring); }
   .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
-  @media (max-width: 1080px) { .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); } .dash { grid-template-columns: 1fr; } .side { position: static; grid-template-columns: 1fr 1fr; } }
+
+  /* ── v2(소유자 2026-10-23): 머리글 바로 아래 메뉴 막대 + 대시보드 인포그래픽 ── */
+  .subnav { position: sticky; top: 0; z-index: 90; background: rgba(255,255,255,.92); backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid var(--line); }
+  .subnav-in { max-width: var(--content); margin: 0 auto; padding: 0 var(--gut); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .subnav .utabs { border-bottom: 0; padding: 0; flex: 1; min-width: 0; }
+  .subnav .utab { min-height: 54px; }
+  .subnav .utab .ic { width: 16px; height: 16px; opacity: .7; transition: opacity .2s, transform .3s var(--spring); }
+  .subnav .utab[aria-selected="true"] .ic { opacity: 1; transform: scale(1.12); }
+  .subnav-act { display: flex; align-items: center; gap: 8px; flex: none; }
+  .live { display: inline-flex; align-items: center; gap: 6px; font-size: .76rem; font-weight: 700; color: var(--ink-3); white-space: nowrap; }
+  .log-head { justify-content: flex-start; gap: 14px; margin: 4px 0 18px; }
+  .hero-ic { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: linear-gradient(135deg, var(--ink), #2b3532); color: var(--volt); box-shadow: 0 6px 18px rgba(16,20,20,.18); flex: none; }
+  .hero-ic svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .kpi { position: relative; overflow: hidden; }
+  .kpi-head { justify-content: flex-start; gap: 8px; }
+  .kpi-head .delta { margin-left: auto; }
+  .delta { display: inline-flex; align-items: center; gap: 2px; font-size: .74rem; font-weight: 800; padding: 2px 7px; border-radius: 999px; background: var(--bg); color: var(--ink-3); }
+  .delta svg { width: 12px; height: 12px; fill: currentColor; }
+  .delta.up { background: var(--accent-tint); color: var(--accent); }
+  .delta.down { background: var(--flame-tint); color: var(--flame); }
+  .spark { width: 100%; height: 32px; display: block; overflow: visible; }
+  .spark path.line { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 400; stroke-dashoffset: 400; animation: draw 1s var(--ease) forwards; }
+  .spark path.area { opacity: .14; animation: fadeIn .8s var(--ease) both; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .t-saved { background: #fff6d6; color: #a15c00; }
+  .meter.big { height: 8px; margin: 6px 0 2px; }
+  .meter.big i { background: linear-gradient(90deg, #f7b500, #e58a00); }
+  .grid-a { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; margin-bottom: 16px; }
+  .grid-b { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .grid-a > *, .grid-b > * { min-width: 0; }
+  .donut-wrap { display: grid; grid-template-columns: 120px minmax(0, 1fr); align-items: center; gap: 14px; }
+  .donut { width: 120px; height: 120px; }
+  .donut circle.seg { fill: none; stroke-width: 16; transform: rotate(-90deg); transform-origin: 60px 60px; transition: stroke-dasharray .8s var(--spring), stroke-dashoffset .8s var(--spring), opacity .2s; }
+  .donut .ctr { font-size: 20px; font-weight: 850; fill: var(--ink); font-family: var(--font); }
+  .donut .ctr-s { font-size: 9px; font-weight: 700; fill: var(--ink-3); font-family: var(--font); }
+  .dlegend { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; font-size: .8rem; font-weight: 700; color: var(--ink-2); }
+  .dlegend li { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; align-items: center; gap: 8px; animation: rowIn .4s var(--spring) both; animation-delay: calc(var(--i, 0) * 50ms); }
+  .dlegend i { width: 10px; height: 10px; border-radius: 3px; }
+  .dlegend b { font-variant-numeric: tabular-nums; color: var(--ink); }
+  .clock { width: 100%; max-width: 230px; height: auto; display: block; margin: 0 auto; }
+  .clock .hb { transform-box: fill-box; transform-origin: center bottom; animation: grow .6s var(--spring) both; animation-delay: calc(var(--d, 0) * 18ms); }
+  .clock text { font-size: 9px; font-weight: 700; fill: var(--ink-3); font-family: var(--font); }
+  .hint { font-size: .76rem; font-weight: 700; color: var(--ink-3); }
+  .funnel { display: grid; gap: 8px; }
+  .fstep { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; align-items: center; gap: 10px; animation: rowIn .45s var(--spring) both; animation-delay: calc(var(--i, 0) * 80ms); }
+  .fstep .tchip { width: 30px; height: 30px; }
+  .fbar { height: 26px; border-radius: 8px; background: var(--line-2); overflow: hidden; position: relative; }
+  .fbar i { position: absolute; inset: 0 auto 0 0; width: var(--w); border-radius: 8px; transform-origin: left; animation: fill .8s var(--spring) both; animation-delay: calc(var(--i, 0) * 80ms + 100ms); }
+  .fbar span { position: relative; z-index: 1; display: flex; align-items: center; height: 100%; padding-left: 10px; font-size: .78rem; font-weight: 800; color: var(--ink); }
+  .fstep .c { font-size: .8rem; font-weight: 850; font-variant-numeric: tabular-nums; }
+  .fconv { font-size: .74rem; color: var(--ink-3); font-weight: 700; padding-left: 40px; margin-top: -4px; display: flex; align-items: center; gap: 4px; }
+  .fconv svg { width: 12px; height: 12px; fill: currentColor; }
+  .saved-rank .n { background: #fff6d6; color: #a15c00; }
+  .saved-rank li:nth-child(-n+3) .n { background: #f7b500; color: #fff; }
+  .feed-panel .panel-h { padding-bottom: 8px; }
+  @media (max-width: 1080px) { .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); } .dash, .grid-a { grid-template-columns: 1fr; } .grid-b { grid-template-columns: 1fr 1fr; } .grid-b > :last-child { grid-column: 1 / -1; } .side { position: static; grid-template-columns: 1fr 1fr; } }
   @media (max-width: 720px) {
     .layout { padding-top: 14px; }
     .log-head h1 { font-size: 1.1rem; }
     .log-head p, .sw-label { display: none; }
     .kpis { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .grid-b { grid-template-columns: 1fr; }
+    .subnav-in { padding: 0 0 0 4px; }
+    .subnav .utab span { font-size: .84rem; }
+    .live { display: none; }
+    .hero-ic { width: 40px; height: 40px; }
+    .donut-wrap { grid-template-columns: 104px minmax(0, 1fr); }
+    .donut { width: 104px; height: 104px; }
     .kpi { padding: 12px; }
     .kpi-num { font-size: 1.35rem; }
     .kpi:last-child { grid-column: 1 / -1; }
@@ -266,6 +328,15 @@
   <symbol id="i-chart" viewBox="0 0 24 24"><path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z"/></symbol>
   <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12.6 2c.6 3.6 5.9 6 5.9 12a6.5 6.5 0 0 1-13 0c0-3 1.6-5 3.2-6.3-.1 2 .8 3.4 2.1 3.6-.4-3.3.2-6.6 1.8-9.3z"/></symbol>
   <symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 3 9 7H5v2h3.75l-.5 6H4v2h4.05l-.5 4h2l.5-4h4l-.5 4h2l.5-4H20v-2h-3.75l.5-6H21V7h-4.05l.5-4h-2l-.5 4h-4l.5-4zm.75 6h4l-.5 6h-4z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z"/></symbol>
+  <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></symbol>
+  <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6 2h12a1 1 0 0 1 1 1v19l-7-4-7 4V3a1 1 0 0 1 1-1"/></symbol>
+  <symbol id="i-donut" viewBox="0 0 24 24"><path d="M11 2.05V8.1A4 4 0 0 0 8.1 11H2.05A10 10 0 0 1 11 2.05M13 2.05A10 10 0 0 1 21.95 11H15.9A4 4 0 0 0 13 8.1zM2.05 13H8.1A4 4 0 0 0 11 15.9v6.05A10 10 0 0 1 2.05 13m11 2.9A4 4 0 0 0 15.9 13h6.05A10 10 0 0 1 13 21.95z"/></symbol>
+  <symbol id="i-funnel" viewBox="0 0 24 24"><path d="M3 4h18l-7 8.5V19l-4 2v-8.5z"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M3 5h2v2H3zm4 0h14v2H7zM3 11h2v2H3zm4 0h14v2H7zm-4 6h2v2H3zm4 0h14v2H7z"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 5l7 8h-5v6h-4v-6H5z"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 19l-7-8h5V5h4v6h5z"/></symbol>
+  <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M11 4h2v12l4-4 1.4 1.4L12 19.8 5.6 13.4 7 12l4 4z"/></symbol>
 </defs></svg>
 
 <!-- shell:header -->
@@ -284,48 +355,73 @@
     </header>
 <!-- /shell:header -->
 
-<main class="layout">
-  <div class="log-head">
-    <div>
-      <h1>운영 대시보드 <span class="live-dot" id="live-dot" title="자동 갱신 중"></span></h1>
-      <p>찜 · 캠퍼 한마디 · 상세 진입 기록 <span id="last-updated-txt">· 불러오는 중</span></p>
+<nav class="subnav" aria-label="운영 기록 메뉴">
+  <div class="subnav-in">
+    <div class="utabs" role="tablist" aria-label="기록 종류" id="tabs">
+      <button type="button" class="utab" role="tab" aria-selected="true" data-tab="all"><svg class="ic"><use href="#i-grid"/></svg><span>전체 피드</span><b id="tab-cnt-all">0</b></button>
+      <button type="button" class="utab" role="tab" aria-selected="false" data-tab="adds"><svg class="ic"><use href="#i-heart"/></svg><span>찜 추가</span><b id="tab-cnt-adds">0</b></button>
+      <button type="button" class="utab" role="tab" aria-selected="false" data-tab="removes"><svg class="ic"><use href="#i-heart-off"/></svg><span>찜 해제</span><b id="tab-cnt-removes">0</b></button>
+      <button type="button" class="utab" role="tab" aria-selected="false" data-tab="comments"><svg class="ic"><use href="#i-comment"/></svg><span>댓글</span><b id="tab-cnt-comments">0</b></button>
+      <button type="button" class="utab" role="tab" aria-selected="false" data-tab="views"><svg class="ic"><use href="#i-enter"/></svg><span>상세 진입</span><b id="tab-cnt-views">0</b></button>
+      <span class="utabs-ink" aria-hidden="true"></span>
     </div>
-    <div class="head-actions">
-      <label class="sw" title="30초마다 자동 갱신"><input type="checkbox" id="auto-refresh" role="switch" checked><span class="sw-track"><span class="sw-thumb"></span></span><span class="sw-label">자동 갱신</span></label>
+    <div class="subnav-act">
+      <span class="live"><span class="live-dot" id="live-dot"></span><span id="last-updated-txt">불러오는 중</span></span>
+      <label class="sw" title="30초마다 자동 갱신"><input type="checkbox" id="auto-refresh" role="switch" checked><span class="sw-track"><span class="sw-thumb"></span></span><span class="sw-label">자동</span></label>
       <button type="button" class="btn btn-icon" id="btn-refresh" aria-label="지금 새로고침" title="지금 새로고침"><svg class="ic" id="refresh-icon"><use href="#i-refresh"/></svg></button>
     </div>
   </div>
+</nav>
+
+<main class="layout">
+  <div class="log-head">
+    <div class="hero-ic"><svg><use href="#i-pulse"/></svg></div>
+    <div><h1>운영 대시보드</h1><p>찜 · 캠퍼 한마디 · 상세 진입 — 사람이 남긴 기록만(자동 테스트·중복 제외)</p></div>
+  </div>
 
   <section class="kpis" aria-label="요약">
-    <div class="kpi"><div class="kpi-head"><span>찜 추가</span><span class="kpi-ic t-add"><svg><use href="#i-heart"/></svg></span></div><div class="kpi-num" data-kpi="adds">-</div><div class="kpi-sub">오늘 <b data-kpi="addsToday">-</b>건</div></div>
-    <div class="kpi"><div class="kpi-head"><span>찜 해제</span><span class="kpi-ic t-rm"><svg><use href="#i-heart-off"/></svg></span></div><div class="kpi-num" data-kpi="removes">-</div><div class="kpi-sub">오늘 <b data-kpi="removesToday">-</b>건</div></div>
-    <div class="kpi"><div class="kpi-head"><span>캠퍼 한마디</span><span class="kpi-ic t-cmt"><svg><use href="#i-comment"/></svg></span></div><div class="kpi-num" data-kpi="comments">-</div><div class="kpi-sub">게시 <b data-kpi="liveComments">-</b> · 삭제 <b data-kpi="delComments">-</b></div></div>
-    <div class="kpi"><div class="kpi-head"><span>상세 진입</span><span class="kpi-ic t-view"><svg><use href="#i-enter"/></svg></span></div><div class="kpi-num" data-kpi="views">-</div><div class="kpi-sub">업장 <b data-kpi="viewCamps">-</b>곳</div></div>
-    <div class="kpi"><div class="kpi-head"><span>중복 기록</span><span class="kpi-ic t-dup"><svg><use href="#i-dup"/></svg></span></div><div class="kpi-num" data-kpi="dups">-</div><div class="kpi-sub">이미 같은 상태에서 다시 온 기록(집계 제외)</div></div>
+    <div class="kpi" data-k="add"><div class="kpi-head"><span class="kpi-ic t-add"><svg><use href="#i-heart"/></svg></span><span>찜 추가</span><span class="delta" data-delta="add"></span></div><div class="kpi-num" data-kpi="adds">-</div><svg class="spark" data-spark="add" viewBox="0 0 120 32" preserveAspectRatio="none"></svg><div class="kpi-sub">오늘 <b data-kpi="addsToday">-</b>건</div></div>
+    <div class="kpi" data-k="remove"><div class="kpi-head"><span class="kpi-ic t-rm"><svg><use href="#i-heart-off"/></svg></span><span>찜 해제</span><span class="delta" data-delta="remove"></span></div><div class="kpi-num" data-kpi="removes">-</div><svg class="spark" data-spark="remove" viewBox="0 0 120 32" preserveAspectRatio="none"></svg><div class="kpi-sub">오늘 <b data-kpi="removesToday">-</b>건</div></div>
+    <div class="kpi" data-k="comment"><div class="kpi-head"><span class="kpi-ic t-cmt"><svg><use href="#i-comment"/></svg></span><span>캠퍼 한마디</span><span class="delta" data-delta="comment"></span></div><div class="kpi-num" data-kpi="comments">-</div><svg class="spark" data-spark="comment" viewBox="0 0 120 32" preserveAspectRatio="none"></svg><div class="kpi-sub">게시 <b data-kpi="liveComments">-</b> · 삭제 <b data-kpi="delComments">-</b></div></div>
+    <div class="kpi" data-k="view"><div class="kpi-head"><span class="kpi-ic t-view"><svg><use href="#i-enter"/></svg></span><span>상세 진입</span><span class="delta" data-delta="view"></span></div><div class="kpi-num" data-kpi="views">-</div><svg class="spark" data-spark="view" viewBox="0 0 120 32" preserveAspectRatio="none"></svg><div class="kpi-sub">업장 <b data-kpi="viewCamps">-</b>곳</div></div>
+    <div class="kpi" data-k="saved"><div class="kpi-head"><span class="kpi-ic t-saved"><svg><use href="#i-bookmark"/></svg></span><span>지금 찜된 곳</span></div><div class="kpi-num" data-kpi="savedNow">-</div><div class="meter big"><i id="saved-meter" style="--w:0%"></i></div><div class="kpi-sub">찜 추가 대비 유지 <b data-kpi="keepRate">-</b>%</div></div>
   </section>
 
-  <div class="dash">
-    <div>
-      <section class="panel chart-wrap">
-        <div class="panel-h"><h2><svg class="ic"><use href="#i-chart"/></svg>최근 14일</h2>
-          <div class="legend"><span><i style="background:var(--accent)"></i>찜 추가</span><span><i style="background:var(--flame)"></i>찜 해제</span><span><i style="background:var(--cobalt)"></i>한마디</span><span><i style="background:var(--violet)"></i>상세 진입</span></div></div>
-        <div class="panel-b"><svg class="chart" id="chart" viewBox="0 0 700 150" role="img" aria-label="최근 14일 활동"></svg></div>
-      </section>
+  <div class="grid-a">
+    <section class="panel">
+      <div class="panel-h"><h2><svg class="ic"><use href="#i-chart"/></svg>최근 14일 활동</h2>
+        <div class="legend"><span><i style="background:var(--accent)"></i>찜 추가</span><span><i style="background:var(--flame)"></i>찜 해제</span><span><i style="background:var(--cobalt)"></i>한마디</span><span><i style="background:var(--violet)"></i>상세 진입</span></div></div>
+      <div class="panel-b"><svg class="chart" id="chart" viewBox="0 0 700 170" role="img" aria-label="최근 14일 활동"></svg></div>
+    </section>
+    <section class="panel">
+      <div class="panel-h"><h2><svg class="ic"><use href="#i-donut"/></svg>기록 구성</h2></div>
+      <div class="panel-b donut-wrap"><svg class="donut" id="donut-type" viewBox="0 0 120 120" role="img" aria-label="기록 종류 비율"></svg><ul class="dlegend" id="donut-type-legend"></ul></div>
+    </section>
+  </div>
 
-      <section class="panel feed-panel">
-        <div class="utabs" role="tablist" aria-label="기록 종류" id="tabs">
-          <button type="button" class="utab" role="tab" aria-selected="true" data-tab="all"><span>전체 피드</span><b id="tab-cnt-all">0</b></button>
-          <button type="button" class="utab" role="tab" aria-selected="false" data-tab="adds"><span>찜 추가</span><b id="tab-cnt-adds">0</b></button>
-          <button type="button" class="utab" role="tab" aria-selected="false" data-tab="removes"><span>찜 해제</span><b id="tab-cnt-removes">0</b></button>
-          <button type="button" class="utab" role="tab" aria-selected="false" data-tab="comments"><span>댓글</span><b id="tab-cnt-comments">0</b></button>
-          <button type="button" class="utab" role="tab" aria-selected="false" data-tab="views"><span>상세 진입</span><b id="tab-cnt-views">0</b></button>
-          <span class="utabs-ink" aria-hidden="true"></span>
-        </div>
-        <div class="tools">
-          <label class="search"><span class="sr">검색</span><svg class="ic"><use href="#i-search"/></svg>
-            <input type="search" id="q" placeholder="캠핑장명, 닉네임, 댓글 내용" autocomplete="off">
-            <button type="button" id="search-clear" class="search-clear" aria-label="검색어 지우기"><svg class="ic"><use href="#i-close"/></svg></button></label>
-          <div class="dd" data-dd="dateRange">
+  <div class="grid-b">
+    <section class="panel">
+      <div class="panel-h"><h2><svg class="ic"><use href="#i-clock"/></svg>시간대별 활동</h2><span class="hint" id="peak-hour"></span></div>
+      <div class="panel-b"><svg class="clock" id="clock" viewBox="0 0 220 220" role="img" aria-label="24시간 활동"></svg></div>
+    </section>
+    <section class="panel">
+      <div class="panel-h"><h2><svg class="ic"><use href="#i-funnel"/></svg>관심 흐름</h2></div>
+      <div class="panel-b"><div class="funnel" id="funnel"></div></div>
+    </section>
+    <section class="panel">
+      <div class="panel-h"><h2><svg class="ic"><use href="#i-phone"/></svg>기기</h2></div>
+      <div class="panel-b donut-wrap"><svg class="donut" id="donut-dev" viewBox="0 0 120 120" role="img" aria-label="기기 비율"></svg><ul class="dlegend" id="donut-dev-legend"></ul></div>
+    </section>
+  </div>
+
+  <div class="dash">
+    <section class="panel feed-panel">
+      <div class="panel-h"><h2><svg class="ic"><use href="#i-list"/></svg><span id="feed-title">전체 피드</span></h2></div>
+      <div class="tools">
+        <label class="search"><span class="sr">검색</span><svg class="ic"><use href="#i-search"/></svg>
+          <input type="search" id="q" placeholder="캠핑장명, 닉네임, 댓글 내용" autocomplete="off">
+          <button type="button" id="search-clear" class="search-clear" aria-label="검색어 지우기"><svg class="ic"><use href="#i-close"/></svg></button></label>
+        <div class="dd" data-dd="dateRange">
             <button type="button" class="dd-btn" aria-haspopup="listbox" aria-expanded="false"><svg class="ic"><use href="#i-calendar"/></svg><span class="dd-val">전체 기간</span><svg class="ic dd-caret"><use href="#i-caret"/></svg></button>
             <ul class="dd-menu" role="listbox" aria-label="기간">
               <li class="dd-opt" role="option" tabindex="-1" data-v="all" aria-selected="true"><span class="radio"></span>전체 기간</li>
@@ -343,19 +439,17 @@
               <li class="dd-opt" role="option" tabindex="-1" data-v="bot" aria-selected="false"><span class="radio"></span><svg class="ic"><use href="#i-bot"/></svg>봇·테스트</li>
             </ul>
           </div>
-          <button type="button" class="btn" id="btn-export-csv" title="지금 보이는 기록을 CSV로 저장"><svg class="ic"><use href="#i-download"/></svg><span class="csv-label">CSV</span></button>
-        </div>
-        <div class="sum"><span id="filtered-count-txt">불러오는 중…</span>
-          <span class="cks"><label class="ck"><input type="checkbox" id="hide-bot" checked><span class="ck-box"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg></span><span>테스트 기록 숨기기</span></label>
-          <label class="ck"><input type="checkbox" id="hide-dup" checked><span class="ck-box"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg></span><span>중복 기록 숨기기</span></label></span></div>
-        <div class="feed" id="feed-container" aria-live="polite"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
-        <div class="more"><button type="button" class="btn" id="btn-load-more" hidden>30개 더 보기</button></div>
-      </section>
-    </div>
-
+        <button type="button" class="btn" id="btn-export-csv" title="지금 보이는 기록을 CSV로 저장"><svg class="ic"><use href="#i-download"/></svg><span class="csv-label">CSV</span></button>
+      </div>
+      <div class="sum"><span id="filtered-count-txt">불러오는 중…</span>
+        <span class="cks"><label class="ck"><input type="checkbox" id="hide-bot" checked><span class="ck-box"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg></span><span>테스트 기록 숨기기</span></label>
+        <label class="ck"><input type="checkbox" id="hide-dup" checked><span class="ck-box"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg></span><span>중복 기록 숨기기</span></label></span></div>
+      <div class="feed" id="feed-container" aria-live="polite"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+      <div class="more"><button type="button" class="btn" id="btn-load-more" hidden>30개 더 보기</button></div>
+    </section>
     <aside class="side">
       <section class="panel"><div class="panel-h"><h2><svg class="ic"><use href="#i-flame"/></svg>많이 본 업장</h2></div><div class="panel-b"><ol class="rank" id="top-camps"><li class="skel" style="margin:0"></li></ol></div></section>
-      <section class="panel"><div class="panel-h"><h2><svg class="ic"><use href="#i-phone"/></svg>기기 분포</h2></div><div class="panel-b"><div class="devs" id="devices"><div class="skel" style="margin:0"></div></div></div></section>
+      <section class="panel"><div class="panel-h"><h2><svg class="ic"><use href="#i-heart"/></svg>지금 찜된 곳</h2></div><div class="panel-b"><ol class="rank saved-rank" id="saved-camps"><li class="skel" style="margin:0"></li></ol></div></section>
     </aside>
   </div>
 </main>
@@ -426,7 +520,7 @@
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const MOTION = !matchMedia("(prefers-reduced-motion: reduce)").matches;
   const state = { tab: "all", q: "", dateRange: "all", deviceFilter: "all", hideDup: true, hideBot: true, pageLimit: 30, timer: null,
-    names: new Map(), saves: [], views: [], viewCounts: [], comments: [], feedItems: [], filteredItems: [], shown: new Set(), loaded: false };
+    names: new Map(), shared: [], saves: [], views: [], viewCounts: [], comments: [], feedItems: [], filteredItems: [], shown: new Set(), loaded: false };
   const esc = (s) => String(s ?? "").replace(/[&<>'"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" }[c]));
   const icon = (id, cls = "ic") => `<svg class="${cls}"><use href="#i-${id}"/></svg>`;
 
@@ -443,11 +537,11 @@
   }
 
   // ── 기기·브라우저 ──
-  // 자동 테스트(CI 브라우저)는 리눅스 + 협정세계시(UTC)로 남는다 → 봇·테스트로 분류
+  // 자동 테스트·에이전트(헤드리스 브라우저)는 리눅스 데스크톱 + UTC 또는 테스트 화면 크기(1366x900·390x844)로 남는다 → 봇·테스트로 분류
   function parseDevice(ua = "", platform = "", screen = "", tz = "") {
     const u = (ua || "").toLowerCase(), p = (platform || "").toLowerCase();
     let os = "알 수 없음", kind = "기기", type = "other", ic = "unknown";
-    if (/headlesschrome|bot|crawler|spider|wget|curl/.test(u) || (/linux/.test(p) && tz === "UTC")) { os = "자동화/봇"; kind = "자동 테스트"; type = "bot"; ic = "bot"; }
+    if (/headlesschrome|bot|crawler|spider|wget|curl/.test(u) || (/linux x86_64/.test(p) && (tz === "UTC" || ["1366x900", "390x844"].includes(screen)))) { os = "자동화/봇"; kind = "자동 테스트"; type = "bot"; ic = "bot"; }
     else if (/iphone/.test(u) || /iphone/.test(p)) { os = "iOS"; kind = "아이폰"; type = "mobile"; ic = "phone"; }
     else if (/ipad/.test(u) || /ipad/.test(p)) { os = "iPadOS"; kind = "아이패드"; type = "tablet"; ic = "tablet"; }
     else if (/android/.test(u) || /android|arm/.test(p)) { os = "Android"; type = "mobile"; ic = "phone"; kind = "안드로이드"; }
@@ -504,6 +598,7 @@
         rpcOr("safe_list_detail_counts", { row_limit: 3000 }).catch(() => []),
         fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,created_at,is_deleted&order=created_at.desc&limit=200`, { headers }),
       ]);
+      state.shared = await fetch(`${SB.url}/rest/v1/shared_save?select=campground_id,created_at&order=created_at.desc`, { headers }).then((r) => (r.ok ? r.json() : [])).catch(() => []);
       const comments = cr.ok ? await cr.json() : [];
       await names;
       state.saves = saves.filter((x) => x.action !== "comment");
@@ -516,7 +611,7 @@
       const cmtLogs = saves.filter((x) => x.action === "comment");
       for (const c of comments) { const t = Date.parse(c.created_at); const hit = cmtLogs.find((x) => String(x.campground_id) === String(c.campground_id) && Math.abs(Date.parse(x.created_at) - t) < 180000); if (hit) c._dev = hit; }
       state.comments = comments;
-      buildFeedItems(); renderStats(); renderChart(); renderTop(); renderDevices(); applyFilters(state.loaded ? "refresh" : "swap");
+      buildFeedItems(); renderAll(); applyFilters(state.loaded ? "refresh" : "swap");
       state.loaded = true;
       $("#last-updated-txt").textContent = `· ${new Date().toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })} 갱신`;
       return true;
@@ -566,7 +661,8 @@
   function renderChart() {
     const days = [...Array(14)].map((_, i) => { const d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - 13 + i); return d; });
     const S = ["add", "remove", "comment", "view"], C = { add: "var(--accent)", remove: "var(--flame)", comment: "var(--cobalt)", view: "var(--violet)" };
-    const grid = days.map((d) => { const k = dayKey(d); const o = { add: 0, remove: 0, comment: 0, view: 0 }; for (const x of state.feedItems) if (!x.dup && !(state.hideBot && x.device?.type === "bot") && dayKey(x.timeMs) === k) o[x.type === "deleted" ? "comment" : x.type]++; return o; });
+    const only = TAB_TYPE[state.tab];
+    const grid = days.map((d) => { const k = dayKey(d); const o = { add: 0, remove: 0, comment: 0, view: 0 }; for (const x of humanItems()) if (dayKey(x.timeMs) === k) { const t = x.type === "deleted" ? "comment" : x.type; if (!only || only === t) o[t]++; } return o; });
     const max = Math.max(1, ...grid.map((o) => S.reduce((s, k) => s + o[k], 0)));
     const W = Math.max(200, Math.round($("#chart").clientWidth || 700)), H = 150, base = 128, top = 20, bw = W / 14 * 0.56;
     let out = `<line x1="0" x2="${W}" y1="${base + .5}" y2="${base + .5}" stroke="var(--line)"/>`;
@@ -581,6 +677,94 @@
     $("#chart").innerHTML = out;
   }
 
+  // ── v2 인포그래픽(2026-10-23) ──
+  const TAB_TYPE = { adds: "add", removes: "remove", comments: "comment", views: "view" };
+  const COLOR = { add: "var(--accent)", remove: "var(--flame)", comment: "var(--cobalt)", view: "var(--violet)" };
+  const LABEL = { add: "찜 추가", remove: "찜 해제", comment: "한마디", view: "상세 진입" };
+  // 사람이 남긴 기록만(중복 빼고, ‘테스트 기록 숨기기’면 자동 테스트도 빼고)
+  const humanItems = () => state.feedItems.filter((x) => !x.dup && !(state.hideBot && x.device?.type === "bot"));
+  const typeOf = (x) => (x.type === "deleted" ? "comment" : x.type);
+  function renderAll() { renderStats(); renderSparks(); renderChart(); renderDonuts(); renderClock(); renderFunnel(); renderTop(); renderSaved(); }
+
+  // 지표 칸: 14일 선 그래프 + 지난 7일 대비 증감
+  function renderSparks() {
+    const items = humanItems(), day0 = new Date(); day0.setHours(0, 0, 0, 0);
+    for (const t of ["add", "remove", "comment", "view"]) {
+      const v = [...Array(14)].map((_, i) => { const d = new Date(day0); d.setDate(d.getDate() - 13 + i); const k = dayKey(d); return items.filter((x) => typeOf(x) === t && dayKey(x.timeMs) === k).length; });
+      const max = Math.max(1, ...v), pts = v.map((n, i) => [i * (120 / 13), 30 - (n / max) * 26]);
+      const line = pts.map(([x, y], i) => `${i ? "L" : "M"}${x.toFixed(1)},${y.toFixed(1)}`).join("");
+      const el = $(`[data-spark="${t}"]`);
+      if (el) el.innerHTML = `<path class="area" d="${line}L120,32L0,32Z" fill="${COLOR[t]}"/><path class="line" d="${line}" stroke="${COLOR[t]}"/><circle cx="${pts[13][0]}" cy="${pts[13][1]}" r="2.6" fill="${COLOR[t]}"/>`;
+      const now = v.slice(7).reduce((a, b) => a + b, 0), prev = v.slice(0, 7).reduce((a, b) => a + b, 0);
+      const dEl = $(`[data-delta="${t}"]`);
+      if (dEl) {
+        const diff = now - prev;
+        dEl.className = `delta ${diff > 0 ? "up" : diff < 0 ? "down" : ""}`;
+        dEl.title = `최근 7일 ${now}건 · 그 전 7일 ${prev}건`;
+        dEl.innerHTML = diff ? `${icon(diff > 0 ? "up" : "down", "")}${Math.abs(diff)}` : "–";
+      }
+    }
+    // 지금 찜된 곳(공용 찜) · 찜 추가 대비 유지율
+    const saved = state.shared.length, adds = items.filter((x) => x.type === "add").length;
+    countTo($('[data-kpi="savedNow"]'), saved);
+    const keep = adds ? Math.min(100, Math.round((saved / adds) * 100)) : 0;
+    countTo($('[data-kpi="keepRate"]'), keep);
+    $("#saved-meter").style.setProperty("--w", `${keep}%`);
+  }
+
+  // 도넛: 기록 구성(종류) · 기기
+  function donut(el, legend, parts, center, sub) {
+    const total = parts.reduce((a, p) => a + p.n, 0) || 1, R = 46, C = 2 * Math.PI * R;
+    let off = 0, out = `<circle cx="60" cy="60" r="${R}" fill="none" stroke="var(--line-2)" stroke-width="16"/>`;
+    parts.forEach((p) => { const len = (p.n / total) * C; out += `<circle class="seg" cx="60" cy="60" r="${R}" stroke="${p.c}" stroke-dasharray="0 ${C}" data-da="${len.toFixed(2)} ${(C - len).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}" style="opacity:${p.dim ? .25 : 1}"><title>${p.l} ${p.n}건</title></circle>`; off += len; });
+    out += `<text class="ctr" x="60" y="62" text-anchor="middle">${center}</text><text class="ctr-s" x="60" y="76" text-anchor="middle">${sub}</text>`;
+    el.innerHTML = out;
+    requestAnimationFrame(() => requestAnimationFrame(() => el.querySelectorAll(".seg").forEach((c) => c.setAttribute("stroke-dasharray", c.dataset.da))));
+    legend.innerHTML = parts.map((p, i) => `<li style="--i:${i};opacity:${p.dim ? .45 : 1}"><i style="background:${p.c}"></i><span>${p.l}</span><b>${Math.round((p.n / total) * 100)}%</b></li>`).join("");
+  }
+  function renderDonuts() {
+    const items = humanItems(), only = TAB_TYPE[state.tab];
+    const parts = ["add", "remove", "comment", "view"].map((t) => ({ l: LABEL[t], c: COLOR[t], n: items.filter((x) => typeOf(x) === t).length, dim: only && only !== t })).filter((p) => p.n);
+    donut($("#donut-type"), $("#donut-type-legend"), parts, items.length.toLocaleString(), "건");
+    const L = { mobile: ["모바일", "#00875a"], desktop: ["데스크톱", "#2563eb"], tablet: ["태블릿", "#7c3aed"], bot: ["봇·테스트", "#9aa19d"], other: ["알 수 없음", "#c9cfc8"] };
+    const m = new Map(); for (const x of items) if (x.device) m.set(x.device.type, (m.get(x.device.type) || 0) + 1);
+    const dparts = [...m].sort((a, b) => b[1] - a[1]).map(([k, n]) => ({ l: L[k][0], c: L[k][1], n }));
+    donut($("#donut-dev"), $("#donut-dev-legend"), dparts, dparts.length ? `${Math.round((dparts[0].n / dparts.reduce((a, p) => a + p.n, 0)) * 100)}%` : "–", dparts[0]?.l ?? "");
+  }
+
+  // 24시간 시계(방사형 막대): 언제 많이 쓰나
+  function renderClock() {
+    const only = TAB_TYPE[state.tab], h = Array(24).fill(0);
+    for (const x of humanItems()) if (!only || typeOf(x) === only) h[new Date(x.timeMs).getHours()]++;
+    const max = Math.max(1, ...h), cx = 110, cy = 110, r0 = 44, r1 = 96;
+    let out = `<circle cx="${cx}" cy="${cy}" r="${r0 - 6}" fill="var(--bg)"/><circle cx="${cx}" cy="${cy}" r="${r1}" fill="none" stroke="var(--line-2)" stroke-dasharray="2 4"/>`;
+    h.forEach((n, i) => {
+      const a = (i / 24) * 2 * Math.PI - Math.PI / 2, len = 4 + (n / max) * (r1 - r0 - 4);
+      const x = cx + Math.cos(a) * r0, y = cy + Math.sin(a) * r0, deg = (i / 24) * 360;
+      // 회전은 바깥 g에(안쪽 막대의 자라는 움직임이 CSS transform이라 같은 요소에 두면 회전이 지워진다)
+      out += `<g transform="rotate(${deg} ${x.toFixed(1)} ${y.toFixed(1)})"><rect class="hb" style="--d:${i}" x="${(x - 4).toFixed(1)}" y="${(y - len).toFixed(1)}" width="8" height="${len.toFixed(1)}" rx="3" fill="${n ? (only ? COLOR[only] : "var(--ink)") : "var(--line)"}" opacity="${n ? .35 + .65 * (n / max) : 1}"><title>${i}시 ${n}건</title></rect></g>`;
+    });
+    for (const [i, t] of [[0, "0시"], [6, "6시"], [12, "12시"], [18, "18시"]]) { const a = (i / 24) * 2 * Math.PI - Math.PI / 2; out += `<text x="${cx + Math.cos(a) * (r1 + 11)}" y="${cy + Math.sin(a) * (r1 + 11) + 3}" text-anchor="middle">${t}</text>`; }
+    const peak = h.indexOf(Math.max(...h));
+    out += `<text x="${cx}" y="${cy - 2}" text-anchor="middle" style="font-size:18px;font-weight:850;fill:var(--ink)">${Math.max(...h) ? `${peak}시` : "–"}</text><text x="${cx}" y="${cy + 13}" text-anchor="middle">가장 활발</text>`;
+    $("#clock").innerHTML = out;
+    $("#peak-hour").textContent = Math.max(...h) ? `${peak}시대 ${h[peak]}건` : "";
+  }
+
+  // 관심 흐름: 상세 진입 → 찜 → 한마디(같은 기간·사람 기록)
+  function renderFunnel() {
+    const items = humanItems(), views = state.views.length ? items.filter((x) => x.type === "view").length : state.viewCounts.reduce((s, x) => s + Number(x.view_count || 0), 0);
+    const steps = [["enter", "t-view", "상세 진입", views, "var(--violet)"], ["heart", "t-add", "찜 추가", items.filter((x) => x.type === "add").length, "var(--accent)"], ["comment", "t-cmt", "한마디", items.filter((x) => typeOf(x) === "comment").length, "var(--cobalt)"]];
+    const max = Math.max(1, ...steps.map((s) => s[3]));
+    $("#funnel").innerHTML = steps.map(([ic, tc, l, n, c], i) => `${i ? `<div class="fconv">${icon("arrow-down", "")}${steps[i - 1][3] ? `${Math.round((n / steps[i - 1][3]) * 100)}%` : "–"}</div>` : ""}<div class="fstep" style="--i:${i}"><span class="tchip ${tc}">${icon(ic, "")}</span><div class="fbar"><i style="--w:${Math.max(4, (n / max) * 100)}%;background:${c};opacity:.22"></i><span>${l}</span></div><span class="c">${n.toLocaleString()}</span></div>`).join("");
+  }
+
+  // 지금 찜된 곳(공용 찜 — 모든 사용자)
+  function renderSaved() {
+    const box = $("#saved-camps"), list = state.shared.slice(0, 10);
+    box.innerHTML = list.length ? list.map((x, i) => `<li><button type="button" data-filter-camp="${esc(nameOf(x.campground_id))}" title="${esc(nameOf(x.campground_id))} 기록만 보기"><span class="n">${i + 1}</span><span class="nm"><span>${esc(nameOf(x.campground_id))}</span><span class="kpi-sub">${rel(x.created_at)} 찜</span></span><span class="c" style="color:var(--flame)">${icon("heart")}</span></button></li>`).join("") : `<li class="kpi-sub">찜한 곳이 없어요</li>`;
+  }
+
   // ── 옆 패널 ──
   function renderTop() {
     const list = state.viewCounts.map((x) => [String(x.campground_id), Number(x.view_count || 0)]).filter(([, c]) => c > 0).slice(0, 10);
@@ -589,13 +773,7 @@
     const max = list[0][1];
     box.innerHTML = list.map(([id, c], i) => `<li><button type="button" data-filter-camp="${esc(nameOf(id))}" title="${esc(nameOf(id))} 기록만 보기"><span class="n">${i + 1}</span><span class="nm"><span>${esc(nameOf(id))}</span><span class="meter"><i style="--w:${Math.max(6, (c / max) * 100)}%;--i:${i}"></i></span></span><span class="c">${c}회</span></button></li>`).join("");
   }
-  function renderDevices() {
-    const m = new Map(); let total = 0;
-    for (const x of state.feedItems) { if (x.dup || !x.device || (state.hideBot && x.device.type === "bot")) continue; const k = x.device.type; m.set(k, (m.get(k) || 0) + 1); total++; }
-    const L = { mobile: ["phone", "모바일"], desktop: ["desktop", "데스크톱"], tablet: ["tablet", "태블릿"], bot: ["bot", "봇·테스트"], other: ["unknown", "알 수 없음"] };
-    const rows = [...m].sort((a, b) => b[1] - a[1]);
-    $("#devices").innerHTML = rows.length ? rows.map(([k, n], i) => `<div class="dev">${icon(L[k][0])}<span class="nm"><span>${L[k][1]}</span><span class="meter"><i style="--w:${(n / total) * 100}%;--i:${i}"></i></span></span><span class="c">${Math.round((n / total) * 100)}%</span></div>`).join("") : `<span class="kpi-sub">기록 없음</span>`;
-  }
+
 
   // ── 거르기 ──
   function applyFilters(mode = "swap") {
@@ -668,6 +846,8 @@
     const di = e.target.closest("[data-device-info]");
     if (di) openDevice(JSON.parse(di.dataset.deviceInfo));
   });
+  $("#saved-camps").addEventListener("click", (e) => { const b = e.target.closest("[data-filter-camp]"); if (b) $("#top-camps").dispatchEvent(new CustomEvent("pick", { detail: b.dataset.filterCamp })); });
+  $("#top-camps").addEventListener("pick", (e) => { $("#q").value = e.detail; state.q = e.detail.toLowerCase(); $("#search-clear").classList.add("show"); state.pageLimit = 30; applyFilters(); $(".feed-panel").scrollIntoView({ behavior: MOTION ? "smooth" : "auto", block: "start" }); });
   $("#top-camps").addEventListener("click", (e) => {
     const b = e.target.closest("[data-filter-camp]"); if (!b) return;
     $("#q").value = b.dataset.filterCamp; state.q = b.dataset.filterCamp.toLowerCase(); $("#search-clear").classList.add("show"); state.pageLimit = 30; applyFilters();
@@ -704,7 +884,7 @@
     const b = e.target.closest("[data-tab]"); if (!b || b.getAttribute("aria-selected") === "true") return;
     $$(".utab", tabs).forEach((x) => x.setAttribute("aria-selected", String(x === b)));
     b.scrollIntoView({ behavior: MOTION ? "smooth" : "auto", inline: "center", block: "nearest" });
-    moveInk(); state.tab = b.dataset.tab; state.pageLimit = 30; applyFilters();
+    moveInk(); state.tab = b.dataset.tab; state.pageLimit = 30; $("#feed-title").textContent = b.querySelector("span").textContent; renderChart(); renderDonuts(); renderClock(); applyFilters();
   });
   tabs.addEventListener("keydown", (e) => {
     if (!["ArrowLeft", "ArrowRight"].includes(e.key)) return;
@@ -743,7 +923,7 @@
   clr.addEventListener("click", () => { qi.value = ""; clr.classList.remove("show"); state.q = ""; state.pageLimit = 30; applyFilters(); qi.focus(); });
 
   $("#hide-dup").addEventListener("change", (e) => { state.hideDup = e.target.checked; state.pageLimit = 30; applyFilters(); });
-  $("#hide-bot").addEventListener("change", (e) => { state.hideBot = e.target.checked; state.pageLimit = 30; renderChart(); renderDevices(); applyFilters(); });
+  $("#hide-bot").addEventListener("change", (e) => { state.hideBot = e.target.checked; state.pageLimit = 30; renderAll(); applyFilters(); });
   $("#btn-load-more").addEventListener("click", () => { state.pageLimit += 30; renderFeed("append"); });
   $("#btn-refresh").addEventListener("click", async () => { if (await fetchLogs()) showToast("최신 기록으로 갱신했어요"); });
 
