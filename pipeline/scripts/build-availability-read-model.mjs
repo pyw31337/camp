@@ -1,9 +1,9 @@
-// 최신 서울 공공예약 원천을 탐색 화면의 짧은 TTL 상태 파일로 발행한다.
+// 최신 서울 공공예약 원천을 탐색 화면의 상태 파일로 발행한다(유효시간: lib 기본 12시간 · 접수 마감 이하).
 // 원본 응답 전체는 공개하지 않고, 매칭된 캠핑 상품의 접수 상태·이용 기간·원문 링크만 남긴다.
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { buildAvailabilityReadModel } from "../lib/availability-read-model.mjs";
+import { DEFAULT_STATUS_TTL_MINUTES, buildAvailabilityReadModel } from "../lib/availability-read-model.mjs";
 
 const p = (rel) => fileURLToPath(new URL(rel, import.meta.url));
 const readJson = async (path) => JSON.parse(await readFile(path, "utf8"));
@@ -26,7 +26,7 @@ const model = buildAvailabilityReadModel({
   observationsPayload,
   campgrounds: Array.isArray(campgrounds) ? campgrounds : campgrounds.campgrounds,
   generatedAt: new Date().toISOString(),
-  ttlMinutes: Number(process.env.AVAILABILITY_STATUS_TTL_MINUTES ?? 75),
+  ttlMinutes: Number(process.env.AVAILABILITY_STATUS_TTL_MINUTES ?? DEFAULT_STATUS_TTL_MINUTES),
   observationTtlMinutes: Number(process.env.AVAILABILITY_OBSERVATION_TTL_MINUTES ?? 1440),
 });
 
