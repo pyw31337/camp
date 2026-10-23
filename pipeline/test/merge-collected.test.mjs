@@ -27,6 +27,20 @@ test("커버리지 회귀 검사: max(20곳, 2%) 넘게 줄면 실패", () => {
   assert.deepEqual(drops.map((x) => x.field), ["reviews", "price"]);
 });
 
+test("커버리지 회귀 검사: 검토 기록(coverage_acks)이 있는 감소만 기록 값까지 14일 동안 통과", () => {
+  const base = { fields: { refund: { any: 887 }, power_w: { any: 673 } } };
+  const next = { fields: { refund: { any: 839 }, power_w: { any: 626 } } };
+  const now = Date.parse("2026-10-23T15:00:00Z");
+  const acks = [{ field: "refund", after: 839, reason: "잘못된 출처 정리", at: "2026-10-23" }];
+  assert.deepEqual(coverageDrops(base, next, acks, now).map((x) => x.field), ["power_w"]);
+  // 기록보다 더 줄면 다시 막는다
+  assert.deepEqual(coverageDrops(base, { fields: { refund: { any: 700 }, power_w: { any: 673 } } }, acks, now).map((x) => x.field), ["refund"]);
+  // 14일이 지나면 기록은 효력이 없다
+  assert.deepEqual(coverageDrops(base, next, acks, Date.parse("2026-11-10T00:00:00Z")).map((x) => x.field), ["refund", "power_w"]);
+  // 이유 없는 기록은 무시
+  assert.deepEqual(coverageDrops(base, next, [{ field: "refund", after: 839, at: "2026-10-23" }], now).map((x) => x.field), ["refund", "power_w"]);
+});
+
 test("mergeSocial: 소셜이 없던 장소에 영상·글·사진을 채우고, 고캠핑 빌드 결과는 건드리지 않는다", async () => {
   const { mergeSocial } = await import("../lib/merge-collected.mjs");
   const so = {

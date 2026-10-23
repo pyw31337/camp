@@ -73,12 +73,15 @@ export function mergeSocial(d, so, { sharedThumb = () => false } = {}) {
  * 커버리지 회귀 검사: 항목마다 값이 있는 캠핑장 수가 기준보다 많이 줄었으면 실패 목록을 돌려준다.
  * 허용 감소 폭은 max(20곳, 2%) — 폐업 정리·중복 제거 같은 정상 감소는 지나가게.
  */
-export function coverageDrops(base, next) {
+export function coverageDrops(base, next, acks = [], now = Date.now()) {
   const drops = [];
   for (const [k, b] of Object.entries(base?.fields ?? {})) {
     const n = next?.fields?.[k]?.any ?? 0;
     const allow = Math.max(20, Math.round(b.any * 0.02));
-    if (b.any - n > allow) drops.push({ field: k, before: b.any, after: n });
+    if (b.any - n <= allow) continue;
+    // 검토한 의도적 감소(merge-overrides.json coverage_acks): 기록한 값까지만, 기록 후 14일 동안 통과.
+    const ack = acks.find((a) => a?.field === k && a.reason && n >= Number(a.after) - allow && now - Date.parse(a.at) < 14 * 864e5);
+    if (!ack) drops.push({ field: k, before: b.any, after: n });
   }
   return drops;
 }
