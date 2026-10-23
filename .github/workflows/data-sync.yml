@@ -413,9 +413,8 @@ jobs:
         if: always()
         run: |
           npm run build:explore
-          # 서울 Open API가 응답한 경우에만 짧은 TTL의 공식 접수 상태를 붙인다.
-          # 원천이 없거나 실패하면 직전 상태 파일을 보존하되, 화면은 expires_at 이후 이를 무시한다.
-          if [ -s out/seoul-yeyak.json ]; then npm run build:availability; else echo "::notice::서울 공공예약 원천이 없어 상태 파일을 새로 만들지 않습니다."; fi
+          # 예약 ‘공식 접수 중’ 표시(availability.json)는 2026-10-23 소유자 요청으로 없앴다(전국 6,404곳 중 서울 공공 6곳뿐).
+          # 서울 공공예약 원천(sync:seoul-yeyak)은 카탈로그 seoul 칸 유지를 위해 계속 읽는다(화면 미노출).
           cd .. && node scripts/publish-explorer-pages.mjs
           # 공개 카탈로그의 현장 조건을 같은 추출 규칙(survey-extractor)으로 다시 계산한다.
           # 이 단계를 빼면 다음 동기화가 전수조사 등급(SURVEYED/CONFIRMED)과 파일럿 VERIFIED 구분을 잃는다.
