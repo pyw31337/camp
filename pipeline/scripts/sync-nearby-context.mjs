@@ -7,7 +7,7 @@ import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { fetchDataGoKr } from "../lib/datagokr.mjs";
-import { publicLeisureRecords } from "../lib/public-poi.mjs";
+import { matchTourPhoto, publicLeisureRecords } from "../lib/public-poi.mjs";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
 import { OVERPASS_SERVERS, loadOsmExtract } from "../lib/overpass.mjs";
 import {
@@ -68,6 +68,19 @@ else {
   await writeFile(tourCachePath, JSON.stringify(tourCache));
 }
 const tourPois = Object.values(tourCache.types).flatMap((t) => t.items ?? []);
+// 공공시설(휴양림·박물관·수영장·실내 놀이)의 관광공사 공식 사진 → registry/public-poi-photos.json(apply-public-nearby가 붙인다)
+{
+  const regPath = fileURLToPath(new URL("../registry/public-leisure.json", import.meta.url));
+  if (existsSync(regPath) && tourPois.length) {
+    const photos = {};
+    for (const p of publicLeisureRecords(JSON.parse(await readFile(regPath, "utf8")))) {
+      const hit = matchTourPhoto(p, tourPois);
+      if (hit) photos[p.id] = hit;
+    }
+    await writeFile(fileURLToPath(new URL("../registry/public-poi-photos.json", import.meta.url)), `${JSON.stringify({ generated_at: fetchedAt, rule: "lib/public-poi.mjs matchTourPhoto(400m·이름 겹침)", photos })}\n`);
+    console.log(`공공시설 관광공사 사진: ${Object.keys(photos).length}곳`);
+  }
+}
 const tourDates = Object.values(tourCache.types).map((t) => t.fetched_at).filter(Boolean).sort();
 console.log(`TourAPI 호출 ${tourCalls}건, 사용 POI ${tourPois.length}건(유형 ${Object.keys(tourCache.types).join(",") || "없음"})`);
 

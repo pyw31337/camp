@@ -32,7 +32,8 @@ export function festivalsNear(camp, festIdx, limit = 3, radiusM = FEST_RADIUS_M)
 }
 /** OSM 추출본 요소 → 충전소 점 */
 export function chargersOf(elements = []) {
-  return elements.filter((e) => e?.tags?.amenity === "charging_station" && Number.isFinite(e.lat) && Number.isFinite(e.lon))
+  // access=private·customers·residents(입주민 전용 등)는 외부인이 못 쓴다
+  return elements.filter((e) => e?.tags?.amenity === "charging_station" && Number.isFinite(e.lat) && Number.isFinite(e.lon) && !/^(private|customers|residents|no|permit)$/.test(e.tags.access ?? ""))
     .map((e) => ({ lat: e.lat, lng: e.lon, name: e.tags.name || e.tags.operator || e.tags.brand || null, fast: osmFast(e.tags) }));
 }
 /** OSM 태그로 본 급속 여부: DC 커넥터(CCS·차데모·테슬라)가 있으면 true, 완속 커넥터만 있으면 false, 모르면 null */

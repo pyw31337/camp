@@ -47,6 +47,7 @@ node pipeline/scripts/apply-dayuse-seed.mjs
 # 공공데이터 여가 시설(휴양림 카탈로그·주변 여가 시설) — data-sync와 같은 자리
 node pipeline/scripts/build-public-leisure.mjs
 node pipeline/scripts/apply-public-nearby.mjs
+node pipeline/scripts/apply-review-thumbs.mjs
 node pipeline/scripts/apply-photo-judgments.mjs
 node pipeline/scripts/apply-text-judgments.mjs
 # 발행 전 상식 정리(공원에 야영장 요금·입퇴실 금지, 플랫폼 광고 요금, 좌표, 시·도 표기, 중복 등록) — data-sync와 같은 자리.

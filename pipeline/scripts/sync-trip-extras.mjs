@@ -108,7 +108,9 @@ const evOfficial = await step("ev_official", async () => {
       if (it.delYn === "Y") continue;
       const lat = Number(it.lat), lng = Number(it.lng);
       if (!it.statId || !Number.isFinite(lat) || !Number.isFinite(lng) || !lat || !lng) continue;
-      const s = seen.get(it.statId) ?? { lat, lng, name: it.statNm || null, fast: false };
+      const s = seen.get(it.statId) ?? { lat, lng, name: it.statNm || null, fast: false, limited: false };
+      // 이용자 제한(limitYn=Y, 예: 아파트 ‘입주민 외 이용불가’·비공개)은 외부 캠퍼가 쓸 수 없다 → 목록에서 뺀다(소유자 2026-10-23).
+      if (it.limitYn === "Y") s.limited = true;
       // 충전기 타입: 02=AC완속, 08=DC콤보(완속) 외에는 급속(01·03~07·09·10)
       if (/^(0[1-7]|09|10)$/.test(String(it.chgerType ?? "")) && it.chgerType !== "02") s.fast = true;
       seen.set(it.statId, s);
@@ -118,8 +120,9 @@ const evOfficial = await step("ev_official", async () => {
   // 전국 목록이 중간에 끊기면(호출 상한·오류) 일부 지역만 비어 보이므로 OSM으로 대신한다.
   if (total && n < total * 0.95) return fail("ev_official", `PARTIAL ${n}/${total}`);
   if (!seen.size) return fail("ev_official", `NO_DATA 응답 ${n}건 · 필드 ${fields}`);
-  status.ev_official = `OK 충전소 ${seen.size}곳(충전기 ${n}기)`;
-  return [...seen.values()];
+  const open = [...seen.values()].filter((x) => !x.limited);
+  status.ev_official = `OK 충전소 ${open.length}곳(이용 제한 ${seen.size - open.length}곳 제외 · 충전기 ${n}기)`;
+  return open;
 });
 const evOsm = evOfficial ? null : await step("ev_osm", async () => {
   const p = process.env.OSM_EXTRACT;

@@ -55,3 +55,25 @@ export function normalizePublicPoi(item) {
     source: item.source?.label ?? "공공데이터포털 표준데이터",
   };
 }
+
+// ── 공공시설 공식 사진(소유자 2026-10-23: 주변시설 ‘관광’ 칸에 썸네일) ──
+// 휴양림·박물관·수영장·실내 놀이 표준데이터에는 사진이 없다. 관광공사 TourAPI 목록(사진 포함)에서
+// 400m 안이고 이름이 겹치는 같은 시설을 찾아 그 대표 사진을 쓴다. 이름이 안 겹치면 쓰지 않는다(다른 곳 사진 금지).
+const coreName = (s) => String(s ?? "").replace(/\(.*?\)|\[.*?\]/g, "").replace(/\s+/g, "").replace(/(국립|공립|사립|시립|도립|군립|구립)/g, "").toLowerCase();
+const distM = (a, b) => Math.hypot((a.lat - b.lat) * 111000, (a.lng - b.lng) * 88000 * Math.cos(((a.lat ?? 36) * Math.PI) / 180) / Math.cos((36 * Math.PI) / 180));
+/** 같은 시설의 관광공사 항목(사진 있음) 또는 null. tour: normalizeTourPoi 결과 배열 */
+export function matchTourPhoto(poi, tour, { radiusM = 400 } = {}) {
+  const a = coreName(poi?.name);
+  if (a.length < 3) return null;
+  let best = null;
+  for (const t of tour ?? []) {
+    if (!t?.image || !Number.isFinite(t.lat)) continue;
+    if (Math.abs(t.lat - poi.lat) > 0.01 || Math.abs(t.lng - poi.lng) > 0.012) continue;
+    const d = distM(poi, t);
+    if (d > radiusM) continue;
+    const b = coreName(t.title);
+    if (b.length < 3 || !(a.includes(b) || b.includes(a))) continue;
+    if (!best || d < best.d) best = { d, t };
+  }
+  return best ? { img: best.t.image, contentid: best.t.id, title: best.t.title } : null;
+}
