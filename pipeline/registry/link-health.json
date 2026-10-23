@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-20T22:28:11.451Z",
+ "updated_at": "2026-10-23T20:45:30.049Z",
  "policy": "robots.txt 준수·봇 이름 공개·호스트별 1초 간격. 자동 확인이 막힌 플랫폼은 열지 않음(UNVERIFIED).",
  "urls": {
   "https://naver.me/xMn4Y4iw": {
@@ -5648,7 +5648,7 @@
   "http://www.myeonghakcamp.com/bbs/board.php?bo_table=0502": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:23:26.021Z",
+   "at": "2026-10-23T20:40:28.859Z",
    "camps": [
     "1066"
    ]
@@ -5680,7 +5680,7 @@
   "http://www.orcamping.co.kr/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:26.186Z",
+   "at": "2026-10-23T20:40:29.813Z",
    "camps": [
     "2230"
    ]
@@ -5861,7 +5861,7 @@
   "http://bitoseom.co.kr/?m=B&s=B": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:29.491Z",
+   "at": "2026-10-23T20:40:34.208Z",
    "camps": [
     "8145"
    ]
@@ -5909,7 +5909,7 @@
   "http://bitoseom.co.kr/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:30.490Z",
+   "at": "2026-10-23T20:40:35.208Z",
    "camps": [
     "8145"
    ]
@@ -5924,8 +5924,8 @@
   },
   "http://camping.junggu.ulsan.kr/05_menu/01.php": {
    "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:23:46.186Z",
+   "why": "ECONNRESET",
+   "at": "2026-10-23T20:40:34.923Z",
    "camps": [
     "7204",
     "3145",
@@ -5999,7 +5999,7 @@
   "https://camp.xticket.kr/web/main?shopEncode=8918d7dcb333ee50b6d26bbef7501b526cd576f4a91f2f5bf82278f6096f486f": {
    "s": "FLAKY",
    "why": "fetch failed",
-   "at": "2026-10-20T22:23:33.502Z",
+   "at": "2026-10-23T20:40:37.684Z",
    "camps": [
     "8103"
    ]
@@ -6019,7 +6019,7 @@
   "http://siseol.dssiseol.or.kr/bisulsan/camp/online_List_all_t2.php": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:29.735Z",
+   "at": "2026-10-23T20:40:33.460Z",
    "camps": [
     "1441"
    ]
@@ -6027,7 +6027,7 @@
   "http://www.knps.or.kr/front/portal/open/campingfacList.do?menuNo=7020014": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:33.217Z",
+   "at": "2026-10-23T20:40:41.171Z",
    "camps": [
     "810",
     "1715"
@@ -6043,8 +6043,8 @@
   },
   "http://camping.junggu.ulsan.kr/": {
    "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:23:57.679Z",
+   "why": "ECONNRESET",
+   "at": "2026-10-23T20:40:37.684Z",
    "camps": [
     "7204",
     "3145",
@@ -6085,9 +6085,9 @@
    ]
   },
   "https://www.knps.or.kr/": {
-   "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:23:55.182Z",
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:41:02.298Z",
    "camps": [
     "3389",
     "101101",
@@ -6097,7 +6097,7 @@
   "http://siseol.dssiseol.or.kr/bisulsan/html/main.html": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:30.736Z",
+   "at": "2026-10-23T20:40:34.460Z",
    "camps": [
     "1441"
    ]
@@ -6121,7 +6121,7 @@
   "http://www.knps.or.kr/portal/main/contents.do?menuNo=7020043": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:56.183Z",
+   "at": "2026-10-23T20:41:03.298Z",
    "camps": [
     "1704"
    ]
@@ -6153,7 +6153,7 @@
   "http://www.knps.or.kr/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:57.184Z",
+   "at": "2026-10-23T20:41:04.298Z",
    "camps": [
     "1704",
     "1718",
@@ -6196,7 +6196,7 @@
   "https://camp.xticket.kr/web/main?shopEncode=5f9422e223671b122a7f2c94f4e15c6f71cd1a49141314cf19adccb98162b5b0": {
    "s": "FLAKY",
    "why": "fetch failed",
-   "at": "2026-10-20T22:23:38.086Z",
+   "at": "2026-10-23T20:40:42.292Z",
    "camps": [
     "141"
    ]
@@ -6204,7 +6204,7 @@
   "http://www.riverguide.go.kr/campingTour/areaCamp.do?RIVER_CD=RVRK&FAC_NO=1231": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:29.062Z",
+   "at": "2026-10-23T20:40:31.721Z",
    "camps": [
     "2571"
    ]
@@ -6244,7 +6244,7 @@
   "http://www.riverguide.go.kr/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:30.062Z",
+   "at": "2026-10-23T20:40:32.721Z",
    "camps": [
     "2220"
    ]
@@ -6292,7 +6292,7 @@
   "http://www.knps.or.kr/knpshp/visit/reservation/camp.jsp?menuid=P10610&depth=3": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:58.183Z",
+   "at": "2026-10-23T20:41:05.299Z",
    "camps": [
     "2488",
     "2765",
@@ -6303,7 +6303,7 @@
   "http://www.riverguide.go.kr/camp/saengrim/index.do": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:31.061Z",
+   "at": "2026-10-23T20:40:33.721Z",
    "camps": [
     "1601"
    ]
@@ -6319,7 +6319,7 @@
   "http://www.riverguide.go.kr/camp/duri/index.do": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:32.062Z",
+   "at": "2026-10-23T20:40:34.721Z",
    "camps": [
     "7134"
    ]
@@ -6391,7 +6391,7 @@
   "https://camp.xticket.kr/web/main?shopEncode=f27ad3485cf140b64341e2cc975c376d14561a12aca07349ae393d97379882c7": {
    "s": "FLAKY",
    "why": "fetch failed",
-   "at": "2026-10-20T22:23:42.656Z",
+   "at": "2026-10-23T20:40:46.873Z",
    "camps": [
     "6765"
    ]
@@ -6689,7 +6689,7 @@
   "https://camp.xticket.kr/web/main?shopEncode=08f2d6ac872d55a829cd62de5a910ff0922eeb57506d4ddbe021224fce47d006": {
    "s": "FLAKY",
    "why": "fetch failed",
-   "at": "2026-10-20T22:23:47.296Z",
+   "at": "2026-10-23T20:40:51.494Z",
    "camps": [
     "100274"
    ]
@@ -6705,7 +6705,7 @@
   "http://seorak.knps.or.kr/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:31.338Z",
+   "at": "2026-10-23T20:40:34.015Z",
    "camps": [
     "1668"
    ]
@@ -6865,7 +6865,7 @@
   "https://camp.xticket.kr/web/main?shopEncode=a12d6508ae5ea0562923cb1f2762761f3413ab4c988a6c8aa92ea7873e263bec": {
    "s": "FLAKY",
    "why": "fetch failed",
-   "at": "2026-10-20T22:23:51.883Z",
+   "at": "2026-10-23T20:40:56.123Z",
    "camps": [
     "101167"
    ]
@@ -6873,7 +6873,7 @@
   "https://gccamp.kr:59427/reservation/guide.htm": {
    "s": "FLAKY",
    "why": "연결 거부",
-   "at": "2026-10-20T22:23:30.808Z",
+   "at": "2026-10-23T20:40:34.985Z",
    "camps": [
     "6732"
    ]
@@ -6937,7 +6937,7 @@
   "http://river.cheongyang.go.kr/reservation.asp?location=002_01": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:23:46.186Z",
+   "at": "2026-10-23T20:40:49.702Z",
    "camps": [
     "2931"
    ]
@@ -6985,7 +6985,7 @@
   "https://wolmyeong612.cafe24.com/612/bbs/board.php?bo_table=booking&cp_code=#none": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:23:32.603Z",
+   "at": "2026-10-23T20:40:34.174Z",
    "camps": [
     "100255"
    ]
@@ -7001,7 +7001,7 @@
   "http://jiri.knps.or.kr/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:32.792Z",
+   "at": "2026-10-23T20:40:34.545Z",
    "camps": [
     "804",
     "6764"
@@ -7040,9 +7040,9 @@
    ]
   },
   "https://gccamp.kr/": {
-   "s": "UNVERIFIED",
-   "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:23:34.092Z",
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:40:38.484Z",
    "camps": [
     "6732"
    ]
@@ -7115,7 +7115,7 @@
   "https://www.hgscamp.kr:454/sbd/intro.asp": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:23:47.686Z",
+   "at": "2026-10-23T20:40:49.702Z",
    "camps": [
     "101490"
    ]
@@ -7155,7 +7155,7 @@
   "http://familypicnic.blog.me/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:23:46.186Z",
+   "at": "2026-10-23T20:40:49.702Z",
    "camps": [
     "7110"
    ]
@@ -7219,7 +7219,7 @@
   "http://igangdong.or.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:23:46.186Z",
+   "at": "2026-10-23T20:40:49.701Z",
    "camps": [
     "141"
    ]
@@ -7276,7 +7276,7 @@
   "http://dosa.jsimc.or.kr/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:23:35.871Z",
+   "at": "2026-10-23T20:40:39.756Z",
    "camps": [
     "833"
    ]
@@ -7284,7 +7284,7 @@
   "http://www.thestonehill.com/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:23:34.811Z",
+   "at": "2026-10-23T20:40:36.178Z",
    "camps": [
     "1893"
    ]
@@ -7372,7 +7372,7 @@
   "https://starville.ninebridges.co.kr/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:35.331Z",
+   "at": "2026-10-23T20:40:36.699Z",
    "camps": [
     "8170"
    ]
@@ -7396,7 +7396,7 @@
   "https://www.sjfmc.or.kr/camping/sub02_01.do": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:38.725Z",
+   "at": "2026-10-23T20:40:39.039Z",
    "camps": [
     "7541"
    ]
@@ -7437,7 +7437,7 @@
   "https://cheongpyeongsa.ticketplay.zone/portal/index": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:38.941Z",
+   "at": "2026-10-23T20:40:40.264Z",
    "camps": [
     "8159"
    ]
@@ -7453,7 +7453,7 @@
   "https://www.sjfmc.or.kr/camping.do": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:39.728Z",
+   "at": "2026-10-23T20:40:40.039Z",
    "camps": [
     "1698"
    ]
@@ -7541,7 +7541,7 @@
   "http://singihan.goheung.go.kr/orderP.php": {
    "s": "FLAKY",
    "why": "HTTP 500",
-   "at": "2026-10-20T22:23:41.139Z",
+   "at": "2026-10-23T20:40:42.796Z",
    "camps": [
     "3209"
    ]
@@ -7549,7 +7549,7 @@
   "http://river.cheongyang.go.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:23:57.678Z",
+   "at": "2026-10-23T20:41:01.185Z",
    "camps": [
     "2931"
    ]
@@ -7589,7 +7589,7 @@
   "http://singihan.goheung.go.kr/": {
    "s": "FLAKY",
    "why": "HTTP 500",
-   "at": "2026-10-20T22:23:42.295Z",
+   "at": "2026-10-23T20:40:43.955Z",
    "camps": [
     "3209"
    ]
@@ -7603,9 +7603,9 @@
    ]
   },
   "https://www.foresttrip.go.kr/rep/or/sssn/fcfsRsrvtPssblGoodsDetls.do?hmpgId=ID02030051&menuId=001001": {
-   "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:19.592Z",
+   "s": "UNVERIFIED",
+   "why": "HTTP 401(봇 차단)",
+   "at": "2026-10-23T20:42:12.452Z",
    "camps": [
     "8149"
    ]
@@ -7621,7 +7621,7 @@
   "http://gsglamping.com/content/03reservation/02_01.php": {
    "s": "FLAKY",
    "why": "EAI_AGAIN",
-   "at": "2026-10-20T22:23:43.777Z",
+   "at": "2026-10-23T20:40:48.689Z",
    "camps": [
     "76"
    ]
@@ -7653,7 +7653,7 @@
   "https://tickets.interpark.com/goods/21009223": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:45.946Z",
+   "at": "2026-10-23T20:40:42.187Z",
    "camps": [
     "2837"
    ]
@@ -7693,7 +7693,7 @@
   "https://tickets.interpark.com/contents/search?keyword=%EC%B2%9C%EC%99%95%EC%82%B0%EA%B0%80%EC%A1%B1%EC%BA%A0%ED%95%91%EC%9E%A5": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:46.946Z",
+   "at": "2026-10-23T20:40:43.187Z",
    "camps": [
     "7967"
    ]
@@ -7718,7 +7718,7 @@
   "https://tickets.interpark.com/goods/22016459": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:47.947Z",
+   "at": "2026-10-23T20:40:44.187Z",
    "camps": [
     "2200"
    ]
@@ -7734,7 +7734,7 @@
   "https://tickets.interpark.com/goods/20003623,%20%EB%B0%94%EB%B9%84%ED%81%90(%EB%86%80%ED%8B%B0%EC%BC%93)%20%20https://tickets.interpark.com/goods/21001160": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:48.948Z",
+   "at": "2026-10-23T20:40:45.187Z",
    "camps": [
     "357"
    ]
@@ -7758,7 +7758,7 @@
   "https://tickets.interpark.com/goods/20004468": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:49.949Z",
+   "at": "2026-10-23T20:40:46.188Z",
    "camps": [
     "2031"
    ]
@@ -7782,7 +7782,7 @@
   "https://tickets.interpark.com/goods/20004637": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:50.948Z",
+   "at": "2026-10-23T20:40:47.189Z",
    "camps": [
     "7913"
    ]
@@ -7790,7 +7790,7 @@
   "http://gsglamping.com/": {
    "s": "FLAKY",
    "why": "EAI_AGAIN",
-   "at": "2026-10-20T22:23:50.057Z",
+   "at": "2026-10-23T20:40:59.171Z",
    "camps": [
     "76"
    ]
@@ -7894,7 +7894,7 @@
   "http://gahak.haenam.go.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:23:52.684Z",
+   "at": "2026-10-23T20:40:54.194Z",
    "camps": [
     "123"
    ]
@@ -7909,8 +7909,8 @@
   },
   "http://www.hantan.co.kr/index.php?PageID=ht_a03_b01": {
    "s": "FLAKY",
-   "why": "HTTP 405",
-   "at": "2026-10-20T22:23:57.565Z",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:41:01.684Z",
    "camps": [
     "3423"
    ]
@@ -7926,7 +7926,7 @@
   "https://sjfmc.moonhwain.net:451/rsvc/rsv_srm.html?b_id=jeonwolsan#": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:36.759Z",
+   "at": "2026-10-23T20:40:37.635Z",
    "camps": [
     "7541"
    ]
@@ -7999,7 +7999,7 @@
   "http://dscamp.co.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:23:53.182Z",
+   "at": "2026-10-23T20:40:51.698Z",
    "camps": [
     "722"
    ]
@@ -8015,7 +8015,7 @@
   "https://camping.ubimc.or.kr/main.do?bid=2": {
    "s": "FLAKY",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
-   "at": "2026-10-20T22:23:54.992Z",
+   "at": "2026-10-23T20:40:52.265Z",
    "camps": [
     "100082"
    ]
@@ -8023,7 +8023,7 @@
   "https://strawberry.mainticket.co.kr/strawberry/strawberry.aspx?companycode=0047&shopcode=0001": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:01.173Z",
+   "at": "2026-10-23T20:41:00.186Z",
    "camps": [
     "1601"
    ]
@@ -8071,7 +8071,7 @@
   "https://camping.ubimc.or.kr/main.do?bid=1": {
    "s": "FLAKY",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
-   "at": "2026-10-20T22:23:58.077Z",
+   "at": "2026-10-23T20:41:03.196Z",
    "camps": [
     "7963"
    ]
@@ -8152,7 +8152,7 @@
   "https://www.danhosand.or.kr:1002/coding/sub4/sub2.asp": {
    "s": "FLAKY",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
-   "at": "2026-10-20T22:23:44.905Z",
+   "at": "2026-10-23T20:40:44.674Z",
    "camps": [
     "689"
    ]
@@ -8200,7 +8200,7 @@
   "https://strawberry.mainticket.co.kr/strawberry/strawberry.aspx?companycode=0048&shopcode=0001": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:12.665Z",
+   "at": "2026-10-23T20:41:11.678Z",
    "camps": [
     "1208"
    ]
@@ -8273,7 +8273,7 @@
   "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=16014395": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:56.250Z",
+   "at": "2026-10-23T20:41:00.159Z",
    "camps": [
     "3120"
    ]
@@ -8281,7 +8281,7 @@
   "http://www.thatscamping.co.kr/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:23:56.208Z",
+   "at": "2026-10-23T20:41:01.568Z",
    "camps": [
     "56"
    ]
@@ -8289,7 +8289,7 @@
   "http://www.instargram.com/damteo_oz_glamping": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:57.776Z",
+   "at": "2026-10-23T20:41:04.845Z",
    "camps": [
     "100068"
    ]
@@ -8305,7 +8305,7 @@
   "http://www.theariut.com/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:23:57.563Z",
+   "at": "2026-10-23T20:41:03.416Z",
    "camps": [
     "101486"
    ]
@@ -8319,17 +8319,17 @@
    ]
   },
   "https://www.foresttrip.go.kr/rep/or/sssn/fcfsRsrvtPssblGoodsDetls.do?hmpgId=ID02030116&menuId=001001": {
-   "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:31.084Z",
+   "s": "UNVERIFIED",
+   "why": "HTTP 401(봇 차단)",
+   "at": "2026-10-23T20:42:14.890Z",
    "camps": [
     "100411"
    ]
   },
   "https://www.namwon.go.kr/reserve/index.do?menuUid=9be51b1391d6df5e01920d03041d4c2c&historyPage=1&beginDateStr=2025-10-29&endDateStr=2025-10-30": {
    "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:12.665Z",
+   "why": "HTTP 400",
+   "at": "2026-10-23T20:41:02.908Z",
    "camps": [
     "101589"
    ]
@@ -8345,7 +8345,7 @@
   "https://sjfmc.moonhwain.net:451/rsvc/rsv_srm.html?b_id=hapgang": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:37.759Z",
+   "at": "2026-10-23T20:40:38.635Z",
    "camps": [
     "1698"
    ]
@@ -8353,7 +8353,7 @@
   "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=14009928": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:57.249Z",
+   "at": "2026-10-23T20:41:01.158Z",
    "camps": [
     "92"
    ]
@@ -8377,7 +8377,7 @@
   "http://www.gys.or.kr/subpage/index/274": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:58.425Z",
+   "at": "2026-10-23T20:41:04.063Z",
    "camps": [
     "3120"
    ]
@@ -8393,7 +8393,7 @@
   "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=20010339": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:58.249Z",
+   "at": "2026-10-23T20:41:02.159Z",
    "camps": [
     "3005"
    ]
@@ -8424,8 +8424,8 @@
   },
   "http://www.namwon.go.kr/reserve/facilitie/room/scheduleAll.do?facilitieSid=7&menuCd=DOM_000000502001004000&contentsSid=5455&cpath=%2Freserve": {
    "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:34.648Z",
+   "why": "HTTP 400",
+   "at": "2026-10-23T20:41:14.763Z",
    "camps": [
     "6965"
    ]
@@ -8441,7 +8441,7 @@
   "http://xn--299a941ap1h.com/content/03reservation/02_01.php": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:58.978Z",
+   "at": "2026-10-23T20:41:03.369Z",
    "camps": [
     "1318"
    ]
@@ -8449,7 +8449,7 @@
   "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=18006149": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:59.251Z",
+   "at": "2026-10-23T20:41:03.161Z",
    "camps": [
     "7154"
    ]
@@ -8521,15 +8521,15 @@
   "http://xn--299a941ap1h.com/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:23:59.979Z",
+   "at": "2026-10-23T20:41:04.368Z",
    "camps": [
     "1318"
    ]
   },
   "https://www.foresttrip.go.kr/rep/or/sssn/fcfsRsrvtPssblGoodsDetls.do?hmpgId=ID02030022&menuId=001001": {
-   "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:42.576Z",
+   "s": "UNVERIFIED",
+   "why": "HTTP 401(봇 차단)",
+   "at": "2026-10-23T20:42:17.172Z",
    "camps": [
     "100615"
    ]
@@ -8545,7 +8545,7 @@
   "https://mirihae.com/dytc/camping/Q49993865": {
    "s": "FLAKY",
    "why": "timeout",
-   "at": "2026-10-20T22:26:48.042Z",
+   "at": "2026-10-23T20:43:50.537Z",
    "camps": [
     "1723"
    ]
@@ -8569,7 +8569,7 @@
   "http://www.buyun2fv.com/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:02.470Z",
+   "at": "2026-10-23T20:41:06.299Z",
    "camps": [
     "101344"
    ]
@@ -8633,7 +8633,7 @@
   "https://booking.ddnayo.com/booking-calendar-status?accommodationId=100443": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:02.075Z",
+   "at": "2026-10-23T20:41:05.912Z",
    "camps": [
     "101249"
    ]
@@ -8681,7 +8681,7 @@
   "https://booking.ddnayo.com/booking-calendar-status?accommodationId=104946": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:03.976Z",
+   "at": "2026-10-23T20:41:13.715Z",
    "camps": [
     "101756"
    ]
@@ -8697,7 +8697,7 @@
   "http://eanhealingland.com/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:03.085Z",
+   "at": "2026-10-23T20:41:09.709Z",
    "camps": [
     "101419"
    ]
@@ -8737,7 +8737,7 @@
   "https://booking.ddnayo.com/booking-calendar-status?accommodationId=104388": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:09.292Z",
+   "at": "2026-10-23T20:41:17.293Z",
    "camps": [
     "8054"
    ]
@@ -8761,7 +8761,7 @@
   "https://www.puc.or.kr/business/jinweepark.do": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:08.169Z",
+   "at": "2026-10-23T20:41:01.684Z",
    "camps": [
     "2837"
    ]
@@ -8793,7 +8793,7 @@
   "https://booking.ddnayo.com/booking-calendar-status?accommodationId=15281": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:15.450Z",
+   "at": "2026-10-23T20:41:22.361Z",
    "camps": [
     "100711"
    ]
@@ -8801,7 +8801,7 @@
   "https://www.ddnayo.com/RsvSys/Calendar.aspx?id_hotel=5015&sslcvt=1": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:03.529Z",
+   "at": "2026-10-23T20:41:10.360Z",
    "camps": [
     "3227"
    ]
@@ -8841,7 +8841,7 @@
   "https://booking.ddnayo.com/booking-calendar-status?accommodationId=13543": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:19.283Z",
+   "at": "2026-10-23T20:41:23.927Z",
    "camps": [
     "7956"
    ]
@@ -8865,7 +8865,7 @@
   "http://www.ddnayo.com/RsvSys/Calendar.aspx?id_hotel=6178": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:14.819Z",
+   "at": "2026-10-23T20:41:17.427Z",
    "camps": [
     "6721"
    ]
@@ -8897,7 +8897,7 @@
   "https://booking.ddnayo.com/booking-calendar?accommodationId=104609": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:20.498Z",
+   "at": "2026-10-23T20:41:26.102Z",
    "camps": [
     "101724"
    ]
@@ -8913,7 +8913,7 @@
   "http://www.ddnayo.com/RsvSys/Calendar.aspx?id_hotel=4342": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:19.022Z",
+   "at": "2026-10-23T20:41:22.299Z",
    "camps": [
     "3201"
    ]
@@ -8929,7 +8929,7 @@
   "http://newpension.logosweb.or.kr/reservation/reservation2.php?id=mulnaechigi": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:04.191Z",
+   "at": "2026-10-23T20:41:10.332Z",
    "camps": [
     "1152"
    ]
@@ -8953,7 +8953,7 @@
   "https://booking.ddnayo.com/booking-calendar-status?accommodationId=105634": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:22.334Z",
+   "at": "2026-10-23T20:41:27.338Z",
    "camps": [
     "101989"
    ]
@@ -8961,7 +8961,7 @@
   "http://www.ddnayo.com/RsvSys/?id_hotel=151": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:20.080Z",
+   "at": "2026-10-23T20:41:23.817Z",
    "camps": [
     "7839"
    ]
@@ -9009,7 +9009,7 @@
   "https://booking.ddnayo.com/booking-calendar-status?accommodationId=103943": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:23.442Z",
+   "at": "2026-10-23T20:41:32.449Z",
    "camps": [
     "101358"
    ]
@@ -9017,7 +9017,7 @@
   "https://www.ddnayo.com/RsvSys/Calendar.aspx?id_hotel=8402&sslcvt=1": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:21.279Z",
+   "at": "2026-10-23T20:41:25.507Z",
    "camps": [
     "1632"
    ]
@@ -9041,7 +9041,7 @@
   "https://booking.ddnayo.com/booking-calendar?accommodationId=103731": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:25.895Z",
+   "at": "2026-10-23T20:41:34.108Z",
    "camps": [
     "101483"
    ]
@@ -9057,7 +9057,7 @@
   "https://www.ddnayo.com/RsvSys/Calendar.aspx?id_hotel=11860": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:22.436Z",
+   "at": "2026-10-23T20:41:27.212Z",
    "camps": [
     "7828"
    ]
@@ -9081,7 +9081,7 @@
   "http://www.1894.or.kr/n_camp/reservation/": {
    "s": "FLAKY",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
-   "at": "2026-10-20T22:24:18.040Z",
+   "at": "2026-10-23T20:41:22.706Z",
    "camps": [
     "100819"
    ]
@@ -9097,7 +9097,7 @@
   "https://booking.ddnayo.com/booking-calendar-status?accommodationId=14370": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:30.253Z",
+   "at": "2026-10-23T20:41:38.507Z",
    "camps": [
     "100040"
    ]
@@ -9121,7 +9121,7 @@
   "http://www.danhosand.or.kr:1002/cording/main.asp": {
    "s": "FLAKY",
    "why": "ECONNRESET",
-   "at": "2026-10-20T22:23:53.596Z",
+   "at": "2026-10-23T20:41:02.715Z",
    "camps": [
     "689"
    ]
@@ -9159,9 +9159,9 @@
    ]
   },
   "https://booking.ddnayo.com/booking-calendar-status?accommodationId=13714": {
-   "s": "UNVERIFIED",
-   "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:31.951Z",
+   "s": "FLAKY",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:41:49.640Z",
    "camps": [
     "100278"
    ]
@@ -9231,9 +9231,9 @@
    ]
   },
   "https://booking.ddnayo.com/booking-calendar-status?accommodationId=15613": {
-   "s": "UNVERIFIED",
-   "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:33.062Z",
+   "s": "FLAKY",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:42:01.129Z",
    "camps": [
     "100755"
    ]
@@ -9249,7 +9249,7 @@
   "http://www.1894.or.kr/": {
    "s": "FLAKY",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
-   "at": "2026-10-20T22:24:20.472Z",
+   "at": "2026-10-23T20:41:26.537Z",
    "camps": [
     "100819"
    ]
@@ -9289,7 +9289,7 @@
   "https://booking.ddnayo.com/booking-calendar-status?accommodationId=15138&groupId=": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:34.990Z",
+   "at": "2026-10-23T20:42:10.304Z",
    "camps": [
     "100468"
    ]
@@ -9337,7 +9337,7 @@
   "https://booking.ddnayo.com/booking-calendar-status?accommodationId=104279": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:37.088Z",
+   "at": "2026-10-23T20:42:18.746Z",
    "camps": [
     "101657"
    ]
@@ -9369,7 +9369,7 @@
   "http://www.dokdocamping.com/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:06.554Z",
+   "at": "2026-10-23T20:41:10.650Z",
    "camps": [
     "1681"
    ]
@@ -9401,7 +9401,7 @@
   "https://booking.ddnayo.com/booking-calendar-status?accommodationId=100400": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:40.951Z",
+   "at": "2026-10-23T20:42:23.133Z",
    "camps": [
     "101012"
    ]
@@ -9441,7 +9441,7 @@
   "https://booking.ddnayo.com/booking-calendar-status?accommodationId=100394": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:45.412Z",
+   "at": "2026-10-23T20:42:30.770Z",
    "camps": [
     "101085"
    ]
@@ -9473,7 +9473,7 @@
   "https://booking.ddnayo.com/booking-calendar-status?accommodationId=12770&groupId=": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:49.258Z",
+   "at": "2026-10-23T20:42:34.556Z",
    "camps": [
     "7916"
    ]
@@ -9601,7 +9601,7 @@
   "http://campyegreena.com/test-booking-system/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:19.479Z",
+   "at": "2026-10-23T20:41:17.680Z",
    "camps": [
     "3045"
    ]
@@ -9649,7 +9649,7 @@
   "http://campyegreena.com/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:21.013Z",
+   "at": "2026-10-23T20:41:18.837Z",
    "camps": [
     "3045"
    ]
@@ -9689,7 +9689,7 @@
   "http://www.hcmcamping.com/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:33.150Z",
+   "at": "2026-10-23T20:41:32.165Z",
    "camps": [
     "3471"
    ]
@@ -9768,8 +9768,8 @@
   },
   "http://www.campingzone.co.kr/BOOKING/reserv/reservation_step_01.asp?member_id=TheALL": {
    "s": "FLAKY",
-   "why": "EAI_AGAIN",
-   "at": "2026-10-20T22:24:25.834Z",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:41:26.669Z",
    "camps": [
     "2622"
    ]
@@ -9817,7 +9817,7 @@
   "http://www.mulnaechigi.com/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:19.658Z",
+   "at": "2026-10-23T20:41:23.672Z",
    "camps": [
     "1152"
    ]
@@ -9912,8 +9912,8 @@
   },
   "http://www.campingzone.co.kr/BOOKING/reserv/reservation_step_01.asp?member_id=campingoak": {
    "s": "FLAKY",
-   "why": "EAI_AGAIN",
-   "at": "2026-10-20T22:24:36.857Z",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:41:38.157Z",
    "camps": [
     "7228"
    ]
@@ -9921,7 +9921,7 @@
   "http://www.jayeoncaravan.com/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:24.536Z",
+   "at": "2026-10-23T20:41:23.421Z",
    "camps": [
     "7843"
    ]
@@ -9993,7 +9993,7 @@
   "http://getbol.muan.go.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:22.655Z",
+   "at": "2026-10-23T20:41:24.671Z",
    "camps": [
     "1107"
    ]
@@ -10009,7 +10009,7 @@
   "http://bwmt.gwangyang.go.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:24.155Z",
+   "at": "2026-10-23T20:41:25.171Z",
    "camps": [
     "1279"
    ]
@@ -10025,7 +10025,7 @@
   "http://ok.yeosu.go.kr/ok/home/bongForest/BongForest_camp_rsvInsertCalView.do?menuId=OKONLINE0205030000": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:24.654Z",
+   "at": "2026-10-23T20:41:25.171Z",
    "camps": [
     "1389"
    ]
@@ -10049,7 +10049,7 @@
   "http://yeyak.suncheon.go.kr/yeyak/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:24.654Z",
+   "at": "2026-10-23T20:41:26.170Z",
    "camps": [
     "1849"
    ]
@@ -10057,7 +10057,7 @@
   "http://www.campingzone.co.kr/BOOKING/reserv/reservation_step_01.asp?member_id=susanac": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:48.132Z",
+   "at": "2026-10-23T20:41:49.641Z",
    "camps": [
     "1830"
    ]
@@ -10161,7 +10161,7 @@
   "http://www.jangtaesan.or.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:28.151Z",
+   "at": "2026-10-23T20:41:27.168Z",
    "camps": [
     "2670"
    ]
@@ -10201,7 +10201,7 @@
   "http://tour.muan.go.kr/lotus": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:41.641Z",
+   "at": "2026-10-23T20:41:38.157Z",
    "camps": [
     "7442"
    ]
@@ -10209,7 +10209,7 @@
   "http://jindo.go.kr/sambyeolcho": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:30.152Z",
+   "at": "2026-10-23T20:41:32.664Z",
    "camps": [
     "2825"
    ]
@@ -10313,7 +10313,7 @@
   "http://gamamibeach.co.kr/book_caravan.php": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:34.648Z",
+   "at": "2026-10-23T20:41:32.165Z",
    "camps": [
     "7109"
    ]
@@ -10377,7 +10377,7 @@
   "https://ezp2.kr/r/rev_make.php?pen_code=h5397&s_yy=2024&s_mm=7&s_group_num=497&s_room_num=&in_day=&stay_period=1": {
    "s": "FLAKY",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
-   "at": "2026-10-20T22:24:30.670Z",
+   "at": "2026-10-23T20:41:27.740Z",
    "camps": [
     "100758"
    ]
@@ -10393,7 +10393,7 @@
   "http://bwmt.gwangyang.go.kr/bmt/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:35.649Z",
+   "at": "2026-10-23T20:41:36.657Z",
    "camps": [
     "1279"
    ]
@@ -10401,7 +10401,7 @@
   "https://caravanpark.kr/product/view?pension_id=elpark205": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:30.856Z",
+   "at": "2026-10-23T20:41:32.155Z",
    "camps": [
     "100881"
    ]
@@ -10409,7 +10409,7 @@
   "http://ok.yeosu.go.kr/ok/stay/woongcheon/reservation/page.ok": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:36.148Z",
+   "at": "2026-10-23T20:41:36.657Z",
    "camps": [
     "2459"
    ]
@@ -10441,7 +10441,7 @@
   "https://caravanpark.kr/rsv/status?pension_id=elpark246&link=no&manual=no": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:31.856Z",
+   "at": "2026-10-23T20:41:33.156Z",
    "camps": [
     "101612"
    ]
@@ -10465,7 +10465,7 @@
   "http://yeyak.suncheon.go.kr/yeyak/stay/camp/0011/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:36.148Z",
+   "at": "2026-10-23T20:41:37.659Z",
    "camps": [
     "1849"
    ]
@@ -10473,7 +10473,7 @@
   "https://caravanpark.kr/product/view?pension_id=elpark242": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:32.857Z",
+   "at": "2026-10-23T20:41:34.156Z",
    "camps": [
     "101537"
    ]
@@ -10505,7 +10505,7 @@
   "http://www.solnaeum0099.modoo.at/": {
    "s": "FLAKY",
    "why": "timeout",
-   "at": "2026-10-20T22:24:51.475Z",
+   "at": "2026-10-23T20:41:45.763Z",
    "camps": [
     "7444"
    ]
@@ -10537,7 +10537,7 @@
   "http://www.narospacecamp.com/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:37.759Z",
+   "at": "2026-10-23T20:41:35.029Z",
    "camps": [
     "101737"
    ]
@@ -10551,9 +10551,9 @@
    ]
   },
   "https://glamping407.co.kr/bbs/board.php?bo_table=reservation": {
-   "s": "FLAKY",
-   "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
-   "at": "2026-10-20T22:24:35.884Z",
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:41:34.039Z",
    "camps": [
     "101518"
    ]
@@ -10608,17 +10608,17 @@
    ]
   },
   "https://www.glamping407.co.kr/": {
-   "s": "FLAKY",
-   "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
-   "at": "2026-10-20T22:24:37.355Z",
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:41:34.861Z",
    "camps": [
     "101518"
    ]
   },
   "http://www.1004cam.modoo.at/": {
    "s": "FLAKY",
-   "why": "timeout",
-   "at": "2026-10-20T22:24:53.609Z",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:41:49.640Z",
    "camps": [
     "7896"
    ]
@@ -10754,15 +10754,15 @@
   "https://dc.hwasun.go.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:44.638Z",
+   "at": "2026-10-23T20:41:50.141Z",
    "camps": [
     "8012"
    ]
   },
   "http://www.urbanstream.co.kr/": {
    "s": "FLAKY",
-   "why": "인증서 오류",
-   "at": "2026-10-20T22:24:50.186Z",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:41:49.640Z",
    "camps": [
     "102147"
    ]
@@ -10818,7 +10818,7 @@
   "http://gamamibeach.co.kr/index.php": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:46.136Z",
+   "at": "2026-10-23T20:41:43.651Z",
    "camps": [
     "7109"
    ]
@@ -10866,7 +10866,7 @@
   "https://gwgs.pubcamping.kr/@song/index": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:46.052Z",
+   "at": "2026-10-23T20:41:39.518Z",
    "camps": [
     "1802"
    ]
@@ -10898,7 +10898,7 @@
   "https://gwgs.pubcamping.kr/@baekdo/index": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:47.052Z",
+   "at": "2026-10-23T20:41:40.518Z",
    "camps": [
     "1260"
    ]
@@ -10954,7 +10954,7 @@
   "https://gwgs.pubcamping.kr/@oho/index": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:48.053Z",
+   "at": "2026-10-23T20:41:41.519Z",
    "camps": [
     "100496"
    ]
@@ -10969,8 +10969,8 @@
   },
   "https://eden797.com/Reservation": {
    "s": "FLAKY",
-   "why": "인증서 오류",
-   "at": "2026-10-20T22:24:52.718Z",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:41:51.139Z",
    "camps": [
     "101513"
    ]
@@ -10978,7 +10978,7 @@
   "https://gwgs.pubcamping.kr/@myeongpa/index": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:49.054Z",
+   "at": "2026-10-23T20:41:42.519Z",
    "camps": [
     "7594"
    ]
@@ -10993,8 +10993,8 @@
   },
   "https://eden797.com/": {
    "s": "FLAKY",
-   "why": "인증서 오류",
-   "at": "2026-10-20T22:24:57.990Z",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:42:02.628Z",
    "camps": [
     "101513"
    ]
@@ -11002,7 +11002,7 @@
   "https://gwgs.pubcamping.kr/@jajakdo/index": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:50.054Z",
+   "at": "2026-10-23T20:41:43.519Z",
    "camps": [
     "100033"
    ]
@@ -11114,7 +11114,7 @@
   "https://www.lovingyoutourcaravan.com/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:51.693Z",
+   "at": "2026-10-23T20:41:42.755Z",
    "camps": [
     "8054"
    ]
@@ -11178,7 +11178,7 @@
   "https://www.suncheon.go.kr/tour/worcation/0004/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:24:47.633Z",
+   "at": "2026-10-23T20:41:48.143Z",
    "camps": [
     "100824"
    ]
@@ -11202,7 +11202,7 @@
   "http://www.mujusolbat.com/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:52.083Z",
+   "at": "2026-10-23T20:41:46.019Z",
    "camps": [
     "1114"
    ]
@@ -11250,7 +11250,7 @@
   "https://linktr.ee/yeoncamp": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:53.384Z",
+   "at": "2026-10-23T20:41:52.132Z",
    "camps": [
     "2573"
    ]
@@ -11280,9 +11280,9 @@
    ]
   },
   "http://www.satgatpension.com/": {
-   "s": "UNVERIFIED",
-   "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:57.303Z",
+   "s": "FLAKY",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:42:02.128Z",
    "camps": [
     "7607"
    ]
@@ -11306,7 +11306,7 @@
   "http://mj9000.com/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:24:53.611Z",
+   "at": "2026-10-23T20:41:52.518Z",
    "camps": [
     "379"
    ]
@@ -11337,8 +11337,8 @@
   },
   "http://www.bambyul.co.kr/default/app/app_online.php": {
    "s": "FLAKY",
-   "why": "인증서 오류",
-   "at": "2026-10-20T22:25:09.237Z",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:42:04.625Z",
    "camps": [
     "1234"
    ]
@@ -11354,7 +11354,7 @@
   "http://windvalley88.com/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:06.112Z",
+   "at": "2026-10-23T20:41:56.631Z",
    "camps": [
     "100712"
    ]
@@ -11376,9 +11376,9 @@
    ]
   },
   "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=%EC%86%8C%EC%95%BC%EC%BA%A0%ED%94%84&ackey=c25q4sil": {
-   "s": "UNVERIFIED",
-   "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:54.591Z",
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:07.149Z",
    "camps": [
     "102136"
    ]
@@ -11418,15 +11418,15 @@
   "http://www.xn--2r5b1f27r1nh.com/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:07.437Z",
+   "at": "2026-10-23T20:42:08.989Z",
    "camps": [
     "101383"
    ]
   },
   "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=%EA%B0%80%ED%99%942372&ackey=d0gztx0s": {
-   "s": "UNVERIFIED",
-   "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:55.591Z",
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:09.198Z",
    "camps": [
     "101325"
    ]
@@ -11440,25 +11440,25 @@
    ]
   },
   "https://www.dssiseol.or.kr/pages/sisul/page.html?mc=1193": {
-   "s": "UNVERIFIED",
-   "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:57.239Z",
+   "s": "FLAKY",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:42:07.622Z",
    "camps": [
     "549"
    ]
   },
   "http://www.bambyul.co.kr/": {
    "s": "FLAKY",
-   "why": "인증서 오류",
-   "at": "2026-10-20T22:25:20.477Z",
+   "why": "timeout",
+   "at": "2026-10-23T20:42:20.626Z",
    "camps": [
     "1234"
    ]
   },
   "https://search.naver.com/search.naver?sm=tab_sug.top&where=nexearch&query=%EC%82%B0%EC%B2%AD+%EC%98%A4%EC%8A%A4%ED%85%8C%EC%9D%B4&oquery=%EA%B3%A0%EC%BA%A0%ED%95%91&tqi=i5MQjsprvOsssiyMSZRsssssskd-479645&acq=dhtmxpdl&acr=5&qdt=0": {
-   "s": "UNVERIFIED",
-   "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:56.590Z",
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:11.388Z",
    "camps": [
     "100683"
    ]
@@ -11488,9 +11488,9 @@
    ]
   },
   "https://search.naver.com/search.naver?where=nexearch&sm=top_sly.hst&fbm=0&acr=2&ie=utf8&query=%ED%8E%AB%EB%B0%80%EB%A6%AC%EC%95%A0%EA%B2%AC%ED%8C%8C%ED%81%AC%ED%83%80%EC%9A%B4": {
-   "s": "UNVERIFIED",
-   "why": "robots.txt 차단",
-   "at": "2026-10-20T22:24:57.591Z",
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:12.951Z",
    "camps": [
     "100361"
    ]
@@ -11506,7 +11506,7 @@
   "http://www.dssiseol.or.kr/pages/sisul/page.html?mc=0635": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:25:07.763Z",
+   "at": "2026-10-23T20:42:14.526Z",
    "camps": [
     "550"
    ]
@@ -11546,7 +11546,7 @@
   "http://www.dssiseol.or.kr/pages/reservation/page.html?mc=0451": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:25:08.763Z",
+   "at": "2026-10-23T20:42:15.527Z",
    "camps": [
     "550"
    ]
@@ -11658,7 +11658,7 @@
   "http://wcpark.gunwi.go.kr/page/reservation": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:01.117Z",
+   "at": "2026-10-23T20:41:55.632Z",
    "camps": [
     "7256"
    ]
@@ -11666,7 +11666,7 @@
   "http://susanac.eplus-m.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:03.614Z",
+   "at": "2026-10-23T20:41:56.631Z",
    "camps": [
     "1830"
    ]
@@ -11746,7 +11746,7 @@
   "https://hcjypark.com/yeyak": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:13.054Z",
+   "at": "2026-10-23T20:42:10.433Z",
    "camps": [
     "2700"
    ]
@@ -11770,7 +11770,7 @@
   "https://hcjypark.com/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:14.215Z",
+   "at": "2026-10-23T20:42:11.589Z",
    "camps": [
     "2700"
    ]
@@ -11792,9 +11792,9 @@
    ]
   },
   "https://knps.or.kr/": {
-   "s": "UNVERIFIED",
-   "why": "robots.txt 차단",
-   "at": "2026-10-20T22:25:10.316Z",
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:11.957Z",
    "camps": [
     "1717"
    ]
@@ -11826,7 +11826,7 @@
   "https://maisondeglam.co.kr/res": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:14.649Z",
+   "at": "2026-10-23T20:42:14.151Z",
    "camps": [
     "102015"
    ]
@@ -11962,7 +11962,7 @@
   "https://guriuc.or.kr/cmsManage/contents.do?cmsSeq=101": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:15.099Z",
+   "at": "2026-10-23T20:42:11.619Z",
    "camps": [
     "357"
    ]
@@ -11978,7 +11978,7 @@
   "http://www.cheongam.co.kr/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:25:14.217Z",
+   "at": "2026-10-23T20:42:11.401Z",
    "camps": [
     "2929"
    ]
@@ -12002,7 +12002,7 @@
   "https://www.yeoncheon.go.kr/reserve/contents.do?key=4963": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:25:15.164Z",
+   "at": "2026-10-23T20:42:12.898Z",
    "camps": [
     "7826"
    ]
@@ -12026,7 +12026,7 @@
   "http://hanbyul.net/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:13.600Z",
+   "at": "2026-10-23T20:42:11.618Z",
    "camps": [
     "2063"
    ]
@@ -12042,7 +12042,7 @@
   "http://www.aramirresort.com/reserve.html?reserve=rv": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:21.763Z",
+   "at": "2026-10-23T20:42:21.746Z",
    "camps": [
     "7908"
    ]
@@ -12058,7 +12058,7 @@
   "http://wcpark.gunwi.go.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:12.602Z",
+   "at": "2026-10-23T20:42:07.122Z",
    "camps": [
     "7256"
    ]
@@ -12066,7 +12066,7 @@
   "http://www.aramirresort.com/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:25.384Z",
+   "at": "2026-10-23T20:42:29.394Z",
    "camps": [
     "7908"
    ]
@@ -12082,7 +12082,7 @@
   "https://banam.zapza.me/Home/realtime/R10100/productSearch": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:25:21.066Z",
+   "at": "2026-10-23T20:42:19.621Z",
    "camps": [
     "101041"
    ]
@@ -12258,7 +12258,7 @@
   "http://www.gucheondongcamp.com/default/app/app_01.php": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:22.888Z",
+   "at": "2026-10-23T20:42:20.024Z",
    "camps": [
     "1112"
    ]
@@ -12282,7 +12282,7 @@
   "http://www.gucheondongcamp.com/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:24.046Z",
+   "at": "2026-10-23T20:42:21.183Z",
    "camps": [
     "1112"
    ]
@@ -12315,7 +12315,7 @@
   "https://tfmc.huyang.co.kr:452/reservation.asp?wloc=B01": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:25.587Z",
+   "at": "2026-10-23T20:42:14.114Z",
    "camps": [
     "101950"
    ]
@@ -12340,7 +12340,7 @@
   "https://www.gjgcamp2.com/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:23.051Z",
+   "at": "2026-10-23T20:42:20.454Z",
    "camps": [
     "101301"
    ]
@@ -12348,7 +12348,7 @@
   "https://gugog.ticketplay.zone/portal/index": {
    "s": "FLAKY",
    "why": "연결 거부",
-   "at": "2026-10-20T22:25:25.424Z",
+   "at": "2026-10-23T20:42:24.547Z",
    "camps": [
     "7879"
    ]
@@ -12452,7 +12452,7 @@
   "http://mongsanporesort.cafe24.com/?page_id=951": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:23.729Z",
+   "at": "2026-10-23T20:42:21.061Z",
    "camps": [
     "1095"
    ]
@@ -12484,7 +12484,7 @@
   "https://www.jgcamp.kr:456/introduce.asp?location=001": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:29.084Z",
+   "at": "2026-10-23T20:42:18.611Z",
    "camps": [
     "2794"
    ]
@@ -12523,8 +12523,8 @@
   },
   "http://lucerneglamping.com/": {
    "s": "FLAKY",
-   "why": "EAI_AGAIN",
-   "at": "2026-10-20T22:25:32.142Z",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:42:30.596Z",
    "camps": [
     "100711"
    ]
@@ -12637,7 +12637,7 @@
   "http://www.donghwacamping.com/": {
    "s": "FLAKY",
    "why": "인증서 오류",
-   "at": "2026-10-20T22:25:32.696Z",
+   "at": "2026-10-23T20:42:35.278Z",
    "camps": [
     "101973"
    ]
@@ -12803,9 +12803,9 @@
    ]
   },
   "http://sbfarmcamp.com/": {
-   "s": "UNVERIFIED",
-   "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:26.057Z",
+   "s": "FLAKY",
+   "why": "HTTP 502",
+   "at": "2026-10-23T20:42:29.595Z",
    "camps": [
     "101259"
    ]
@@ -12891,9 +12891,9 @@
    ]
   },
   "https://www.pyeongtaek.go.kr/camp/main.do": {
-   "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:44.075Z",
+   "s": "UNVERIFIED",
+   "why": "robots.txt 차단",
+   "at": "2026-10-23T20:42:22.757Z",
    "camps": [
     "1736"
    ]
@@ -13045,7 +13045,7 @@
   "http://xn--hy1bu3c77uzvhzui.com/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:27.148Z",
+   "at": "2026-10-23T20:42:23.138Z",
    "camps": [
     "3071"
    ]
@@ -13133,7 +13133,7 @@
   "http://xn--bj0b46pgtl9jdc7t.kr/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:28.112Z",
+   "at": "2026-10-23T20:42:25.817Z",
    "camps": [
     "7502"
    ]
@@ -13333,7 +13333,7 @@
   "http://rete573.com/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:33.776Z",
+   "at": "2026-10-23T20:42:35.560Z",
    "camps": [
     "100040"
    ]
@@ -13413,7 +13413,7 @@
   "https://www.elysian.co.kr/gangchon/restaurant/restaurant.asp?facility_id=FCT00000000000000201": {
    "s": "FLAKY",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
-   "at": "2026-10-20T22:25:34.180Z",
+   "at": "2026-10-23T20:42:33.904Z",
    "camps": [
     "2538"
    ]
@@ -13469,7 +13469,7 @@
   "https://instargram.com/flaner_camp": {
    "s": "FLAKY",
    "why": "인증서 오류",
-   "at": "2026-10-20T22:25:33.525Z",
+   "at": "2026-10-23T20:42:33.855Z",
    "camps": [
     "102032"
    ]
@@ -13501,7 +13501,7 @@
   "http://www.xn--9i2br6olaa779ch8o.com/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:34.177Z",
+   "at": "2026-10-23T20:42:34.327Z",
    "camps": [
     "1491"
    ]
@@ -13517,7 +13517,7 @@
   "https://mountainandcompanioncamping.co.kr/pages/history": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:42.077Z",
+   "at": "2026-10-23T20:42:34.593Z",
    "camps": [
     "101777"
    ]
@@ -13557,7 +13557,7 @@
   "http://www.jgcamp.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:51.071Z",
+   "at": "2026-10-23T20:42:40.586Z",
    "camps": [
     "2794"
    ]
@@ -13565,7 +13565,7 @@
   "http://www.xn--299ayvs34asler5hkqbr0af7j7vnoqhb1k.com/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:25:33.739Z",
+   "at": "2026-10-23T20:42:33.232Z",
    "camps": [
     "100475",
     "101233"
@@ -13638,7 +13638,7 @@
   "http://gangchonfarm.com/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:35.701Z",
+   "at": "2026-10-23T20:42:34.382Z",
    "camps": [
     "163"
    ]
@@ -13646,7 +13646,7 @@
   "http://yanggu.ticketplay.zone/portal/index": {
    "s": "FLAKY",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
-   "at": "2026-10-20T22:25:37.963Z",
+   "at": "2026-10-23T20:42:39.145Z",
    "camps": [
     "408"
    ]
@@ -13676,9 +13676,9 @@
    ]
   },
   "https://www.geumsan.go.kr/cherrycamping/": {
-   "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:55.569Z",
+   "s": "UNVERIFIED",
+   "why": "robots.txt 차단",
+   "at": "2026-10-23T20:42:35.143Z",
    "camps": [
     "1473"
    ]
@@ -13692,9 +13692,9 @@
    ]
   },
   "https://xn--oy2bi2kooa32ynkgykiq7c.com/": {
-   "s": "UNVERIFIED",
-   "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:37.185Z",
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:42.345Z",
    "camps": [
     "2815"
    ]
@@ -13718,7 +13718,7 @@
   "http://xn--oy2b27mhsar7i4qbz53booc.kr/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:37.492Z",
+   "at": "2026-10-23T20:42:38.347Z",
    "camps": [
     "7642"
    ]
@@ -13750,7 +13750,7 @@
   "https://dongback.brsisul.or.kr:451/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:47.074Z",
+   "at": "2026-10-23T20:42:42.084Z",
    "camps": [
     "2373"
    ]
@@ -13911,7 +13911,7 @@
   "https://www.cjfmc.or.kr/camping/cjcamp/campsite": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:25:38.203Z",
+   "at": "2026-10-23T20:42:37.301Z",
    "camps": [
     "100812"
    ]
@@ -13967,7 +13967,7 @@
   "https://www.cjfmc.or.kr/camp/index.html": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:25:39.204Z",
+   "at": "2026-10-23T20:42:38.304Z",
    "camps": [
     "100812"
    ]
@@ -14023,7 +14023,7 @@
   "https://mountainandcompanioncamping.co.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:53.570Z",
+   "at": "2026-10-23T20:42:46.079Z",
    "camps": [
     "101777"
    ]
@@ -14071,7 +14071,7 @@
   "http://www.violinglamping.co.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:47.575Z",
+   "at": "2026-10-23T20:42:42.584Z",
    "camps": [
     "101460"
    ]
@@ -14119,7 +14119,7 @@
   "http://www.suwonudc.co.kr/ggcamping": {
    "s": "FLAKY",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
-   "at": "2026-10-20T22:25:42.216Z",
+   "at": "2026-10-23T20:42:41.506Z",
    "camps": [
     "320"
    ]
@@ -14239,7 +14239,7 @@
   "http://humanauto.co.kr/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:41.647Z",
+   "at": "2026-10-23T20:42:39.392Z",
    "camps": [
     "8138"
    ]
@@ -14255,7 +14255,7 @@
   "http://healingcampjnl.com/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:25:41.317Z",
+   "at": "2026-10-23T20:42:38.568Z",
    "camps": [
     "100386"
    ]
@@ -14303,7 +14303,7 @@
   "http://www.goldpetresort.kr/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:42.328Z",
+   "at": "2026-10-23T20:42:41.196Z",
    "camps": [
     "8049"
    ]
@@ -14359,7 +14359,7 @@
   "http://xn--bj0bw3p2dq74gd1h.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:49.072Z",
+   "at": "2026-10-23T20:42:44.581Z",
    "camps": [
     "101372"
    ]
@@ -14390,8 +14390,8 @@
   },
   "https://waterthema.co.kr/bbs/reservation.php": {
    "s": "FLAKY",
-   "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
-   "at": "2026-10-20T22:25:43.500Z",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:42:51.070Z",
    "camps": [
     "101782"
    ]
@@ -14431,7 +14431,7 @@
   "http://www.andongtour.com/sub3/sub3_1.htm": {
    "s": "FLAKY",
    "why": "HTTP 520",
-   "at": "2026-10-20T22:25:44.218Z",
+   "at": "2026-10-23T20:42:50.918Z",
    "camps": [
     "238"
    ]
@@ -14470,8 +14470,8 @@
   },
   "https://waterthema.co.kr/": {
    "s": "FLAKY",
-   "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
-   "at": "2026-10-20T22:25:45.110Z",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:43:02.562Z",
    "camps": [
     "101782"
    ]
@@ -14486,8 +14486,8 @@
   },
   "http://www.andongtour.com/": {
    "s": "FLAKY",
-   "why": "HTTP 520",
-   "at": "2026-10-20T22:25:45.562Z",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:43:02.064Z",
    "camps": [
     "238"
    ]
@@ -14565,9 +14565,9 @@
    ]
   },
   "http://www.xn--bj0bw3p2d48lc56b.com/": {
-   "s": "UNVERIFIED",
-   "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:49.432Z",
+   "s": "FLAKY",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:42:51.070Z",
    "camps": [
     "7539"
    ]
@@ -14759,7 +14759,7 @@
   "http://tour.hadong.go.kr/02feel/03_05.asp": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:56.069Z",
+   "at": "2026-10-23T20:42:56.068Z",
    "camps": [
     "3357"
    ]
@@ -14799,7 +14799,7 @@
   "http://gaya.knps.or.kr/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:25:49.767Z",
+   "at": "2026-10-23T20:42:52.528Z",
    "camps": [
     "7067"
    ]
@@ -14847,7 +14847,7 @@
   "https://www.choochoopark.com/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:59.567Z",
+   "at": "2026-10-23T20:43:02.563Z",
    "camps": [
     "3376"
    ]
@@ -14879,7 +14879,7 @@
   "http://rest.gyeongju.go.kr/reservation/login.php": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:07.065Z",
+   "at": "2026-10-23T20:43:03.062Z",
    "camps": [
     "3157"
    ]
@@ -14927,7 +14927,7 @@
   "http://rest.gyeongju.go.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:18.556Z",
+   "at": "2026-10-23T20:43:14.557Z",
    "camps": [
     "3157"
    ]
@@ -14950,8 +14950,8 @@
   },
   "http://daegwolcamp.imweb.me/": {
    "s": "FLAKY",
-   "why": "timeout",
-   "at": "2026-10-20T22:26:20.434Z",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:43:04.062Z",
    "camps": [
     "725"
    ]
@@ -14967,7 +14967,7 @@
   "https://kukmincamp.boeun.go.kr/bbs/board.php?bo_table=reservation&mode=info": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:09.564Z",
+   "at": "2026-10-23T20:43:04.062Z",
    "camps": [
     "101025"
    ]
@@ -15007,7 +15007,7 @@
   "http://haegeumgang.co.kr/sub05_03.php": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:06.064Z",
+   "at": "2026-10-23T20:43:00.565Z",
    "camps": [
     "7091"
    ]
@@ -15015,7 +15015,7 @@
   "http://www.eoeundol.net/theme/sample06/html/reservation.php": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:25:59.068Z",
+   "at": "2026-10-23T20:42:56.068Z",
    "camps": [
     "2116",
     "100330"
@@ -15032,7 +15032,7 @@
   "https://kukmincamp.boeun.go.kr/main.php": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:21.052Z",
+   "at": "2026-10-23T20:43:15.557Z",
    "camps": [
     "101025"
    ]
@@ -15096,7 +15096,7 @@
   "http://www.xn--oi2b18fzskqwa69s07fhpa.com/index.php": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:07.565Z",
+   "at": "2026-10-23T20:43:04.561Z",
    "camps": [
     "8209"
    ]
@@ -15118,9 +15118,9 @@
    ]
   },
   "http://www.wangsancamp.co.kr/": {
-   "s": "UNVERIFIED",
-   "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:25:58.672Z",
+   "s": "FLAKY",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:43:06.562Z",
    "camps": [
     "100377"
    ]
@@ -15192,7 +15192,7 @@
   "http://xn--vk1bv68awvau5dk8ix7k60b.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:06.564Z",
+   "at": "2026-10-23T20:43:01.063Z",
    "camps": [
     "100637"
    ]
@@ -15288,7 +15288,7 @@
   "http://haegeumgang.co.kr/sub02_04.php": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:17.555Z",
+   "at": "2026-10-23T20:43:12.059Z",
    "camps": [
     "7091"
    ]
@@ -15312,7 +15312,7 @@
   "http://www.laforet130.com/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:17.555Z",
+   "at": "2026-10-23T20:43:13.060Z",
    "camps": [
     "101284"
    ]
@@ -15320,7 +15320,7 @@
   "https://cheonghwasancamp.imweb.me/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:18.054Z",
+   "at": "2026-10-23T20:43:14.059Z",
    "camps": [
     "2956"
    ]
@@ -15384,7 +15384,7 @@
   "http://xn--bj0b46pfrh10hs6awy7bdhb.com/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:19.054Z",
+   "at": "2026-10-23T20:43:18.053Z",
    "camps": [
     "100286"
    ]
@@ -15424,7 +15424,7 @@
   "http://baboglamping.co.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:20.052Z",
+   "at": "2026-10-23T20:43:24.048Z",
    "camps": [
     "7494"
    ]
@@ -15432,7 +15432,7 @@
   "http://museumnamhae@naver.com/": {
    "s": "FLAKY",
    "why": "Request cannot be constructed from a URL that includes crede",
-   "at": "2026-10-20T22:26:10.062Z",
+   "at": "2026-10-23T20:43:14.059Z",
    "camps": [
     "8086"
    ]
@@ -15536,7 +15536,7 @@
   "http://www.xn--9d0b43h4yg0qv71iwjbnza.com/plugin/_ypension101/status.index.php?mode=step1": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:20.052Z",
+   "at": "2026-10-23T20:43:24.547Z",
    "camps": [
     "648"
    ]
@@ -15582,9 +15582,9 @@
    ]
   },
   "http://www.jakgacamp.kr/": {
-   "s": "UNVERIFIED",
-   "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:26:27.831Z",
+   "s": "FLAKY",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:43:28.544Z",
    "camps": [
     "100829"
    ]
@@ -15616,7 +15616,7 @@
   "http://www.xn--9d0b43h4yg0qv71iwjbnza.com/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:31.542Z",
+   "at": "2026-10-23T20:43:36.035Z",
    "camps": [
     "648"
    ]
@@ -15624,7 +15624,7 @@
   "http://www.eoeundol.net/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:10.561Z",
+   "at": "2026-10-23T20:43:07.561Z",
    "camps": [
     "2116",
     "100330"
@@ -15849,7 +15849,7 @@
   "http://xn--bj0bw3p2d313dx8niqc4wb.com/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:32.541Z",
+   "at": "2026-10-23T20:43:30.042Z",
    "camps": [
     "100755"
    ]
@@ -16138,7 +16138,7 @@
   "http://pension.x-y.net/prs/skins/skin-ex/index.html?mode=window&pensionId=sogeumgang&menuId=": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:15.556Z",
+   "at": "2026-10-23T20:43:08.061Z",
    "camps": [
     "1703"
    ]
@@ -16232,9 +16232,9 @@
    ]
   },
   "http://gjgcamp2.com/": {
-   "s": "UNVERIFIED",
-   "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:26:29.432Z",
+   "s": "FLAKY",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:43:36.035Z",
    "camps": [
     "101647"
    ]
@@ -16250,7 +16250,7 @@
   "http://nobleglamping.com/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:32.040Z",
+   "at": "2026-10-23T20:43:29.544Z",
    "camps": [
     "100913"
    ]
@@ -16312,9 +16312,9 @@
    ]
   },
   "http://www.ycfamilypark.com/": {
-   "s": "UNVERIFIED",
-   "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:26:38.893Z",
+   "s": "FLAKY",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:43:36.035Z",
    "camps": [
     "101453"
    ]
@@ -16410,7 +16410,7 @@
   "http://www.wavesunset.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:21.552Z",
+   "at": "2026-10-23T20:43:26.047Z",
    "camps": [
     "101008"
    ]
@@ -16442,7 +16442,7 @@
   "http://eoeundol.net/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:28.545Z",
+   "at": "2026-10-23T20:43:26.545Z",
    "camps": [
     "101223"
    ]
@@ -16560,9 +16560,9 @@
    ]
   },
   "http://www.marine-camping.co.kr/reserve.html": {
-   "s": "UNVERIFIED",
-   "why": "robots.txt 차단",
-   "at": "2026-10-20T22:26:31.612Z",
+   "s": "FLAKY",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:43:37.535Z",
    "camps": [
     "100266"
    ]
@@ -16608,9 +16608,9 @@
    ]
   },
   "http://www.marine-camping.co.kr/": {
-   "s": "UNVERIFIED",
-   "why": "robots.txt 차단",
-   "at": "2026-10-20T22:26:32.611Z",
+   "s": "FLAKY",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:43:49.020Z",
    "camps": [
     "100266"
    ]
@@ -16698,7 +16698,7 @@
   "http://www.sanddune.co.kr/reserve/index.php": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:26:39.103Z",
+   "at": "2026-10-23T20:43:39.244Z",
    "camps": [
     "7027"
    ]
@@ -16730,7 +16730,7 @@
   "http://dscamp.kr/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:26:35.671Z",
+   "at": "2026-10-23T20:43:43.910Z",
    "camps": [
     "3627"
    ]
@@ -16762,7 +16762,7 @@
   "http://www.sanddune.co.kr/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:26:40.147Z",
+   "at": "2026-10-23T20:43:40.276Z",
    "camps": [
     "7027"
    ]
@@ -16832,9 +16832,9 @@
    ]
   },
   "http://tongpensionapplecamping.co.kr/": {
-   "s": "UNVERIFIED",
-   "why": "robots.txt 차단",
-   "at": "2026-10-20T22:26:37.801Z",
+   "s": "FLAKY",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:43:48.520Z",
    "camps": [
     "101447"
    ]
@@ -16842,7 +16842,7 @@
   "https://ioms.foresttrip.go.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:39.533Z",
+   "at": "2026-10-23T20:43:34.038Z",
    "camps": [
     "1184"
    ]
@@ -17210,7 +17210,7 @@
   "https://www.cnstc.or.kr/gjcamping/main/member/login.action?q=67186b77773f38debc028c1b1fedbb0ca0bbd7900fa0b5b8f393f748aab61c60": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:40.033Z",
+   "at": "2026-10-23T20:43:35.038Z",
    "camps": [
     "101166"
    ]
@@ -17241,8 +17241,8 @@
   },
   "http://camping.iksan.go.kr/": {
    "s": "FLAKY",
-   "why": "HTTP 502",
-   "at": "2026-10-20T22:26:47.815Z",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:43:50.522Z",
    "camps": [
     "2460"
    ]
@@ -17442,7 +17442,7 @@
   "https://camp.dytc.or.kr:452/": {
    "s": "FLAKY",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
-   "at": "2026-10-20T22:26:39.820Z",
+   "at": "2026-10-23T20:43:41.316Z",
    "camps": [
     "1723"
    ]
@@ -17450,7 +17450,7 @@
   "http://www.munduri.co.kr/home/reservePage.do": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:54.515Z",
+   "at": "2026-10-23T20:43:56.017Z",
    "camps": [
     "100457"
    ]
@@ -17466,7 +17466,7 @@
   "http://www.haman.go.kr/main/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:41.530Z",
+   "at": "2026-10-23T20:43:36.535Z",
    "camps": [
     "138"
    ]
@@ -17474,7 +17474,7 @@
   "http://www.munduri.co.kr/index.jsp": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:06.003Z",
+   "at": "2026-10-23T20:44:07.510Z",
    "camps": [
     "100457"
    ]
@@ -17513,8 +17513,8 @@
   },
   "https://www.simchuncampingland.com/reservation/reserlist": {
    "s": "FLAKY",
-   "why": "인증서 오류",
-   "at": "2026-10-20T22:26:47.020Z",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:43:50.522Z",
    "camps": [
     "100257"
    ]
@@ -17570,7 +17570,7 @@
   "https://www.bookingplay.co.kr/partner/item/2818/calendar_main/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:26:43.586Z",
+   "at": "2026-10-23T20:43:42.861Z",
    "camps": [
     "100503"
    ]
@@ -17586,7 +17586,7 @@
   "http://xn--bj0b46p1nc8ujd70a.com/main.html": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:00.507Z",
+   "at": "2026-10-23T20:43:58.016Z",
    "camps": [
     "100503"
    ]
@@ -17602,7 +17602,7 @@
   "https://www.simchuncampingland.com/index": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:58.010Z",
+   "at": "2026-10-23T20:44:02.015Z",
    "camps": [
     "100257"
    ]
@@ -17650,7 +17650,7 @@
   "https://www.sangju.go.kr/tour/sights/detail.tc?mn=4105&pageSeq=2695&pageIndex=&idx=714&fromList=1&paramIdx=TOU0050005&skin=list&searchCondition=1&searchKeyword=": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:57.511Z",
+   "at": "2026-10-23T20:43:54.021Z",
    "camps": [
     "100494"
    ]
@@ -17690,7 +17690,7 @@
   "https://doldam-camp.imweb.me/Reservation": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:02.006Z",
+   "at": "2026-10-23T20:44:02.015Z",
    "camps": [
     "100586"
    ]
@@ -17712,9 +17712,9 @@
    ]
   },
   "http://xn--bj0b46p1mnckn6d.com/reserinfo.php": {
-   "s": "UNVERIFIED",
-   "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:26:58.626Z",
+   "s": "FLAKY",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "at": "2026-10-23T20:43:54.519Z",
    "camps": [
     "100561"
    ]
@@ -17746,7 +17746,7 @@
   "http://xn--bj0b46p1mnckn6d.com/prolog_2.php": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:10.004Z",
+   "at": "2026-10-23T20:44:06.013Z",
    "camps": [
     "100561"
    ]
@@ -17858,7 +17858,7 @@
   "http://www.poolbeachcaravan.com/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:02.006Z",
+   "at": "2026-10-23T20:44:03.016Z",
    "camps": [
     "100635"
    ]
@@ -17954,15 +17954,15 @@
   "http://www.xn--9y2bn0k9ybo6gsoa784avxlmle.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:03.505Z",
+   "at": "2026-10-23T20:44:04.513Z",
    "camps": [
     "2534"
    ]
   },
   "https://fleurglamping.imweb.me/reservation": {
-   "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:05.503Z",
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:09.295Z",
    "camps": [
     "100776"
    ]
@@ -17970,7 +17970,7 @@
   "http://www.jchclub.co.kr/camping/reserve_guide.html?pid=24": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:05.503Z",
+   "at": "2026-10-23T20:44:05.513Z",
    "camps": [
     "2734"
    ]
@@ -18032,9 +18032,9 @@
    ]
   },
   "http://goldoceanglamping.com/": {
-   "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:10.004Z",
+   "s": "UNVERIFIED",
+   "why": "HTTP 403(봇 차단)",
+   "at": "2026-10-23T20:44:10.040Z",
    "camps": [
     "101322"
    ]
@@ -18082,15 +18082,15 @@
   "http://www.haehaegogo.com/": {
    "s": "FLAKY",
    "why": "timeout",
-   "at": "2026-10-20T22:27:18.005Z",
+   "at": "2026-10-23T20:44:17.515Z",
    "camps": [
     "101316"
    ]
   },
   "http://happy.pen-ple.com/reservation/reserve.php?ps_code=5d06f8a024db": {
-   "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:10.004Z",
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:12.785Z",
    "camps": [
     "7227"
    ]
@@ -18162,7 +18162,7 @@
   "http://xn--9t4bi8e0skupa.kr/": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:27:14.416Z",
+   "at": "2026-10-23T20:44:08.847Z",
    "camps": [
     "101291"
    ]
@@ -18186,15 +18186,15 @@
   "http://hamacamping.netfu1234.gethompy.com/netfu_rpension/res/realtime.html": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:27:13.149Z",
+   "at": "2026-10-23T20:44:09.666Z",
    "camps": [
     "3361"
    ]
   },
   "https://www.cleanwatercamp.modoo.at/": {
    "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:09.505Z",
+   "why": "인증서 오류",
+   "at": "2026-10-23T20:44:09.597Z",
    "camps": [
     "6980"
    ]
@@ -18234,7 +18234,7 @@
   "https://choripunggyeong1.campingt.me/3568/home/index": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:27:13.001Z",
+   "at": "2026-10-23T20:44:10.295Z",
    "camps": [
     "100269"
    ]
@@ -18282,7 +18282,7 @@
   "https://choripunggyeong1.campingt.me/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:27:14.002Z",
+   "at": "2026-10-23T20:44:11.295Z",
    "camps": [
     "100269"
    ]
@@ -18330,7 +18330,7 @@
   "http://campwithpet.campingt.me/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:27:15.597Z",
+   "at": "2026-10-23T20:44:12.826Z",
    "camps": [
     "100595"
    ]
@@ -18418,7 +18418,7 @@
   "http://naerincheon.co.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:01.506Z",
+   "at": "2026-10-23T20:43:58.515Z",
    "camps": [
     "100568"
    ]
@@ -18522,7 +18522,7 @@
   "https://farmhousecamp.com/": {
    "s": "FLAKY",
    "why": "인증서 오류",
-   "at": "2026-10-20T22:27:17.461Z",
+   "at": "2026-10-23T20:44:13.796Z",
    "camps": [
     "2709"
    ]
@@ -18586,7 +18586,7 @@
   "https://hwarangcamp.ansanuc.net/index.do": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:27:17.895Z",
+   "at": "2026-10-23T20:44:12.803Z",
    "camps": [
     "2022"
    ]
@@ -18650,7 +18650,7 @@
   "https://www.coupang.com/np/search?q=%EA%B0%80%ED%8F%89+%EC%84%B8%EB%9D%BC%ED%95%8C+%EA%B8%80%EB%9E%A8%ED%95%91&channel=relate": {
    "s": "UNVERIFIED",
    "why": "HTTP 403(봇 차단)",
-   "at": "2026-10-20T22:27:19.976Z",
+   "at": "2026-10-23T20:44:14.458Z",
    "camps": [
     "1696"
    ]
@@ -18722,7 +18722,7 @@
   "https://jindongri.zapza.me/": {
    "s": "UNVERIFIED",
    "why": "robots.txt 차단",
-   "at": "2026-10-20T22:27:18.186Z",
+   "at": "2026-10-23T20:44:13.318Z",
    "camps": [
     "8175"
    ]
@@ -18778,15 +18778,15 @@
   "http://www.mjdcamp.kr/reservation.asp?location=002": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:19.495Z",
+   "at": "2026-10-23T20:44:16.002Z",
    "camps": [
     "1141"
    ]
   },
   "http://songhotour.yd21.go.kr/": {
-   "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:35.478Z",
+   "s": "UNVERIFIED",
+   "why": "robots.txt 차단",
+   "at": "2026-10-23T20:44:14.724Z",
    "camps": [
     "1807"
    ]
@@ -18794,7 +18794,7 @@
   "http://www.xn--2z1bu2wkvcf5b.com/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:31.483Z",
+   "at": "2026-10-23T20:44:23.992Z",
    "camps": [
     "100462"
    ]
@@ -18802,7 +18802,7 @@
   "https://www.the-village.co.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:37.478Z",
+   "at": "2026-10-23T20:44:31.485Z",
    "camps": [
     "8137"
    ]
@@ -18810,7 +18810,7 @@
   "http://www.cyfarm.kr/index.php": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:34.979Z",
+   "at": "2026-10-23T20:44:26.489Z",
    "camps": [
     "100700"
    ]
@@ -18818,7 +18818,7 @@
   "https://www.geochang.go.kr/ssd/Index.do": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:35.979Z",
+   "at": "2026-10-23T20:44:29.488Z",
    "camps": [
     "1833"
    ]
@@ -18826,7 +18826,7 @@
   "http://www.mjdcamp.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:30.986Z",
+   "at": "2026-10-23T20:44:27.490Z",
    "camps": [
     "1141"
    ]
@@ -18875,7 +18875,7 @@
   "https://daeposup.modoo.at//": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:19.553Z",
+   "at": "2026-10-23T20:43:23.047Z",
    "camps": [
     "100521"
    ]
@@ -18883,7 +18883,7 @@
   "http://www.riocaravan.com/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:26:51.521Z",
+   "at": "2026-10-23T20:43:51.021Z",
    "camps": [
     "100383"
    ]
@@ -18931,7 +18931,7 @@
   "https://www.bisco.or.kr/northportwaterfrontpark": {
    "s": "FLAKY",
    "why": "ECONNRESET",
-   "at": "2026-10-20T22:27:25.784Z",
+   "at": "2026-10-23T20:44:18.052Z",
    "camps": [
     "osm-w1562454530"
    ]
@@ -18989,9 +18989,9 @@
    ]
   },
   "https://www.dh.go.kr/mubu/index.do": {
-   "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:38.478Z",
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:16.901Z",
    "camps": [
     "osm-w545987826"
    ]
@@ -19005,9 +19005,9 @@
    ]
   },
   "http://juknokwon.go.kr/": {
-   "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:39.977Z",
+   "s": "DEAD",
+   "why": "DNS 없음",
+   "at": "2026-10-23T20:44:31.315Z",
    "camps": [
     "osm-w513330739"
    ]
@@ -19021,9 +19021,9 @@
    ]
   },
   "https://royaltombs.cha.go.kr/html/HtmlPage.do?pg=/new/html/portal_01_08_01.jsp&mn=RT_01_08": {
-   "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:41.476Z",
+   "s": "DEAD",
+   "why": "DNS 없음(도메인 없음)",
+   "at": "2026-10-23T20:44:14.902Z",
    "camps": [
     "osm-r5493161"
    ]
@@ -19039,7 +19039,7 @@
   "https://www.cwg.go.kr/dmz_tracking/index.do": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:42.474Z",
+   "at": "2026-10-23T20:44:31.485Z",
    "camps": [
     "osm-w1181262295"
    ]
@@ -19125,17 +19125,17 @@
    ]
   },
   "https://www.hanam.go.kr/www/contents.do?key=3356": {
-   "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:47.466Z",
+   "s": "UNVERIFIED",
+   "why": "robots.txt 차단",
+   "at": "2026-10-23T20:44:17.023Z",
    "camps": [
     "osm-r14567012"
    ]
   },
   "https://royaltombs.cha.go.kr/html/HtmlPage.do?pg=/new/html/portal_01_09_01.jsp&mn=RT_01_09": {
-   "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:52.960Z",
+   "s": "DEAD",
+   "why": "DNS 없음(도메인 없음)",
+   "at": "2026-10-23T20:44:15.902Z",
    "camps": [
     "osm-w346902903"
    ]
@@ -19143,28 +19143,737 @@
   "http://sunsa.gangdong.go.kr/": {
    "s": "FLAKY",
    "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:53.960Z",
+   "at": "2026-10-23T20:44:39.973Z",
    "camps": [
     "osm-w419363587"
    ]
   },
   "https://www.hanam.go.kr/www/selectMisaWaterParkResveWeb.do?key=8024": {
-   "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:27:58.955Z",
+   "s": "UNVERIFIED",
+   "why": "robots.txt 차단",
+   "at": "2026-10-23T20:44:18.022Z",
    "camps": [
     "osm-n12120242227"
    ]
   },
   "https://www.hanam.go.kr/www/contents.do?key=8023": {
-   "s": "FLAKY",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
-   "at": "2026-10-20T22:28:10.449Z",
+   "s": "UNVERIFIED",
+   "why": "robots.txt 차단",
+   "at": "2026-10-23T20:44:19.022Z",
    "camps": [
     "osm-n14219544690",
     "osm-n14219544691",
     "osm-n14219544692",
     "osm-w1562524233"
+   ]
+  },
+  "https://camfit.co.kr/camp": {
+   "s": "UNVERIFIED",
+   "why": "자동 확인 차단 플랫폼",
+   "at": null
+  },
+  "http://www.knps.or.kr/front/portal/visit/visitCourseMain.do?parkId=121300&parkNavGb=park_facView&vnewsId=172": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:40:40.171Z",
+   "camps": [
+    "462"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030121": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:19.586Z",
+   "camps": [
+    "rf-1lrjzjs"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0187": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:22.291Z",
+   "camps": [
+    "rf-1x439ps"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030078": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:24.789Z",
+   "camps": [
+    "rf-1q3492f"
+   ]
+  },
+  "http://www.foresttrip.go.kr/": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:36.462Z",
+   "camps": [
+    "rf-ixkoe7",
+    "rf-1i5joiz",
+    "rf-14xm2hg"
+   ]
+  },
+  "http://www.paradisespa.co.kr/Information/camping.asp?MM=1&SM=5#": {
+   "s": "DEAD",
+   "why": "HTTP 404",
+   "at": "2026-10-23T20:42:38.380Z",
+   "camps": [
+    "3175"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030004": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:39.606Z",
+   "camps": [
+    "rf-1gch2ur"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030048": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:42.336Z",
+   "camps": [
+    "rf-144vpey",
+    "rf-jp2ov6"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030074": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:44.892Z",
+   "camps": [
+    "rf-1kjtgns"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030072": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:47.475Z",
+   "camps": [
+    "rf-xuijdf",
+    "rf-e3hldf"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030103": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:50.060Z",
+   "camps": [
+    "rf-14i1rvd"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030003": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:53.049Z",
+   "camps": [
+    "rf-5xcmjw"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030049": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:56.282Z",
+   "camps": [
+    "rf-193f9fc"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030066": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:42:58.662Z",
+   "camps": [
+    "rf-141ncxi"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030081": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:43:01.469Z",
+   "camps": [
+    "rf-16hq2oh"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0195": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:43:04.032Z",
+   "camps": [
+    "rf-1av9n1a"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030047": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:43:06.480Z",
+   "camps": [
+    "rf-1053f1y",
+    "rf-aws6r"
+   ]
+  },
+  "https://www.foresttrip.go.kr": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:43:07.647Z",
+   "camps": [
+    "rf-2c2987"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030050": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:43:10.048Z",
+   "camps": [
+    "rf-13wnp4l"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030019": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:43:12.434Z",
+   "camps": [
+    "rf-7o15ds"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030002": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:43:14.732Z",
+   "camps": [
+    "rf-1ii2c47"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030023": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:43:17.779Z",
+   "camps": [
+    "rf-38krg6"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030039": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:43:20.571Z",
+   "camps": [
+    "rf-vd74sa"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030064": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:43:23.133Z",
+   "camps": [
+    "rf-dduwm3"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:43:25.720Z",
+   "camps": [
+    "rf-19p0vcl"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030035": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:43:30.797Z",
+   "camps": [
+    "rf-ltxy5k"
+   ]
+  },
+  "http://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030059": {
+   "s": "FLAKY",
+   "why": "timeout",
+   "at": "2026-10-23T20:43:46.797Z",
+   "camps": [
+    "rf-1m1v3jf"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030034": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:43:58.538Z",
+   "camps": [
+    "rf-qoprz2"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030100": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:01.502Z",
+   "camps": [
+    "rf-6pvc6h"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030067": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:04.243Z",
+   "camps": [
+    "rf-vj0bcw"
+   ]
+  },
+  "http://www.foresttrip.go.kr": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:12.828Z",
+   "camps": [
+    "rf-adiipu",
+    "rf-xslvy9"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030055": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:15.220Z",
+   "camps": [
+    "rf-j0w9y0"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030042": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:17.576Z",
+   "camps": [
+    "rf-11mwq63"
+   ]
+  },
+  "http://hwawon.dssiseol.or.kr/hwawon/html/main.html": {
+   "s": "UNVERIFIED",
+   "why": "robots.txt 차단",
+   "at": "2026-10-23T20:44:19.710Z",
+   "camps": [
+    "rf-cpx1a2"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030110": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:19.910Z",
+   "camps": [
+    "rf-5nj7ox"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030062": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:22.331Z",
+   "camps": [
+    "rf-171ecj6"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030007": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:24.774Z",
+   "camps": [
+    "rf-6erh5d"
+   ]
+  },
+  "https://gsforesttown.foresttrip.go.kr": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:24.825Z",
+   "camps": [
+    "rf-kfbqip"
+   ]
+  },
+  "http://jucheon.com/": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:25.509Z",
+   "camps": [
+    "rf-1j68bms"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030044": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:27.183Z",
+   "camps": [
+    "rf-eilpwf"
+   ]
+  },
+  "https://hoengseong.fowi.or.kr/": {
+   "s": "FLAKY",
+   "why": "연결 거부",
+   "at": "2026-10-23T20:44:27.240Z",
+   "camps": [
+    "rf-1ffgtai"
+   ]
+  },
+  "https://www.chungbuk.go.kr/forest/contents.do?key=2110": {
+   "s": "FLAKY",
+   "why": "ECONNRESET",
+   "at": "2026-10-23T20:44:29.058Z",
+   "camps": [
+    "rf-s1vjrv"
+   ]
+  },
+  "https://bhforest.foresttrip.go.kr": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:29.592Z",
+   "camps": [
+    "rf-1h06gg8"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030009": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:29.656Z",
+   "camps": [
+    "rf-12jntoy"
+   ]
+  },
+  "https://www.anseong.go.kr/tourPortal/anseongforest/main.do": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:31.681Z",
+   "camps": [
+    "rf-1esu2lk"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030080": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:31.902Z",
+   "camps": [
+    "rf-1k9afni"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030030": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:34.319Z",
+   "camps": [
+    "rf-1dg0cf5"
+   ]
+  },
+  "http://healingland.foresttrip.go.kr/": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:34.384Z",
+   "camps": [
+    "rf-1e5z6aq"
+   ]
+  },
+  "http://www.gm.go.kr/pt/user/bbs/BD_selectBbs.do?q_bbsCode=2298&q_bbscttSn=20190218155830749": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:35.253Z",
+   "camps": [
+    "rf-not5bp"
+   ]
+  },
+  "http://www.eumseong.go.kr/forest": {
+   "s": "FLAKY",
+   "why": "HTTP 400",
+   "at": "2026-10-23T20:44:36.260Z",
+   "camps": [
+    "rf-1ub41x7",
+    "rf-1xmqyui"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030099": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:36.577Z",
+   "camps": [
+    "rf-1qtu3gf"
+   ]
+  },
+  "http://www.fes-artvalley.com/": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:36.916Z",
+   "camps": [
+    "rf-1i3ht74"
+   ]
+  },
+  "http://www.daejeon.go.kr/par/index.do": {
+   "s": "UNVERIFIED",
+   "why": "robots.txt 차단",
+   "at": "2026-10-23T20:44:37.856Z",
+   "camps": [
+    "rf-zysmxs"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID04030007": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:38.858Z",
+   "camps": [
+    "rf-qw604l"
+   ]
+  },
+  "http://www.ijinsan.co.kr/": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:38.910Z",
+   "camps": [
+    "rf-12tr8dy"
+   ]
+  },
+  "http://csong.foresttrip.go.kr/": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:39.543Z",
+   "camps": [
+    "rf-axdspj"
+   ]
+  },
+  "http://foresttrip.go.kr/": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:40.195Z",
+   "camps": [
+    "rf-indei4",
+    "rf-1udhj6l"
+   ]
+  },
+  "https://www.mgtpcr.or.kr": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:40.276Z",
+   "camps": [
+    "rf-lz3ylf"
+   ]
+  },
+  "http://www.kookmang.co.kr/": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:41.056Z",
+   "camps": [
+    "rf-kg4m5r"
+   ]
+  },
+  "https://www.foresttrip.go.kr/pot/rm/fa/selectFcltsArmpListView.do?hmpgId=ID02030079&menuId=002002001": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:41.086Z",
+   "camps": [
+    "rf-10bgq84"
+   ]
+  },
+  "https://www.shinan.go.kr/home/tour/theme_tour/theme_tour_17/theme_tour_17_04/page.wscms": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:41.540Z",
+   "camps": [
+    "rf-18uzdpk"
+   ]
+  },
+  "https://seogwipo.go.kr/healing/index.htm": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:41.681Z",
+   "camps": [
+    "rf-19o61p1"
+   ]
+  },
+  "http://www.cfmc.or.kr/_taehaksan/": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:42.377Z",
+   "camps": [
+    "rf-11s4exc"
+   ]
+  },
+  "https://tour.muju.go.kr/bandiland/contents.do?key=399": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:42.662Z",
+   "camps": [
+    "rf-1j9pje3"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID04030004": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:43.366Z",
+   "camps": [
+    "rf-n8pkdd"
+   ]
+  },
+  "https://foresttrip.go.kr/indvz/main.do?hmpgId=0301": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:44.114Z",
+   "camps": [
+    "rf-dipj9"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030036": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:45.748Z",
+   "camps": [
+    "rf-o51wj"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030028": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:48.015Z",
+   "camps": [
+    "rf-1sruoc8"
+   ]
+  },
+  "http://www.hakasan.co.kr/": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:48.587Z",
+   "camps": [
+    "rf-1tnjahc"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0188": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:50.196Z",
+   "camps": [
+    "rf-q783zj"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0189": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:52.420Z",
+   "camps": [
+    "rf-1ku10vi"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030057": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:54.610Z",
+   "camps": [
+    "rf-1r4889r"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030102": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:56.963Z",
+   "camps": [
+    "rf-1qroeie"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030124": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:44:59.192Z",
+   "camps": [
+    "rf-f5i808"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0104": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:45:01.538Z",
+   "camps": [
+    "rf-1kcsvr8"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030098": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:45:03.891Z",
+   "camps": [
+    "rf-1tq4l88"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030088": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:45:06.226Z",
+   "camps": [
+    "rf-s7nsj6"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0181": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:45:08.705Z",
+   "camps": [
+    "rf-5w7m1m"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030059": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:45:11.071Z",
+   "camps": [
+    "rf-9hmhpy"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030109": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:45:13.368Z",
+   "camps": [
+    "rf-1nvmy5k"
+   ]
+  },
+  "https://www.foresttrip.go.kr/pot/rm/ug/selectFcltUseGdncView.do?hmpgId=ID02030124&menuId=004002005&ruleId=205": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:45:15.218Z",
+   "camps": [
+    "rf-1jhve91"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0302": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:45:17.641Z",
+   "camps": [
+    "rf-k2mq51"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0190": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:45:19.979Z",
+   "camps": [
+    "rf-bi3phi"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID04030008": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:45:22.298Z",
+   "camps": [
+    "rf-13vmkr6"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID04030006": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:45:24.582Z",
+   "camps": [
+    "rf-dxxfss"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030053": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:45:26.759Z",
+   "camps": [
+    "rf-1t1yxsb"
+   ]
+  },
+  "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030013": {
+   "s": "OK",
+   "why": "HTTP 200",
+   "at": "2026-10-23T20:45:29.048Z",
+   "camps": [
+    "rf-enl4wf"
    ]
   }
  }
