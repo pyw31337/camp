@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-23T16:15:11.546Z",
+ "generated_at": "2026-10-23T19:45:18.412Z",
  "rule": "pipeline/lib/fact-refine.mjs",
- "dropped": 154,
+ "dropped": 156,
  "recoded": 103,
- "scoped": 379,
+ "scoped": 390,
  "items": [
   {
    "cid": "102118",
@@ -1921,6 +1921,16 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
+   "cid": "632",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/sin5772/224328768326",
+   "quote": "000원 - 와이파이 o - 놀이터 o - 계곡 o - 숙박형 캐빈하우스 o - 반려견 동반불가 카라반캠핑_전국일주...",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
    "cid": "1311",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -2675,6 +2685,16 @@
    "src": "review_search",
    "url": "https://blog.naver.com/ihhihh/224321886584",
    "quote": "시설 트램폴린, 샤워실, 매점, 놀이터 매너타임 23:00 ~ 07:00 체크인/아웃 캠핏에서 확인해주세요 반려동물 펫 불가 (전 사이트 기준) 주변 관광지 바다향기수목원, 갯벌체험, 구봉도 해루질체험, 유리섬박물관, 종이박물관 예약 캠핏 앱/웹 예…",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "osm-w610095375",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/hsansls/224038268196",
+   "quote": "애견 동반으로 내부 이용 시에는 방바닥을 꼭 닦은 후 퇴실하기 털갈이 또는 털 빠짐 심한 반려견은 입실 불가 아침 일찍 오시는 분들 카운터...옆에는 아이스크림도 판매 중이고요~ 화장실은 건물의 층마다 있어요.",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   }

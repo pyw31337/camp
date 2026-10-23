@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-10-23T16:15:23.110Z",
+ "generated_at": "2026-10-23T19:45:31.614Z",
  "how_to_resolve": "원문을 대조해 data/quality/decisions.ndjson에 {cid, attr, value, url, why, by, at} 한 줄을 덧붙인다(docs/DATA_QUALITY_PROCESS.md 4단계).",
- "count": 88,
+ "count": 89,
  "items": [
   {
    "cid": "2179",
@@ -3331,6 +3331,41 @@
       "url": "https://blog.naver.com/xofla1228/224392533170",
       "at": "2026-08-27",
       "quote": "있다면 스테리움 제천 카라반 A 강추 드릴게요 🌿🌲🤍 ☁ 체크인 15시"
+     }
+    ]
+   }
+  },
+  {
+   "cid": "7039",
+   "name": "은빛물결캠핑장",
+   "attr": "CHECKIN_TIME",
+   "label": "입실 시각",
+   "ui": true,
+   "top": {
+    "value": "13:00",
+    "confidence": 0.9,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "booking_engine",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4084&res_dt=20261024",
+      "at": "2026-10-23",
+      "quote": ""
+     }
+    ]
+   },
+   "rival": {
+    "value": "14:00",
+    "confidence": 0.6,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/ykey1130/224309200186",
+      "at": "2026-06-08",
+      "quote": "※입실시간 : 2시 ~ 퇴실시간 1시 (★입실시간이 1시였으면 참 좋겠다 ㅋㅋ)"
      }
     ]
    }

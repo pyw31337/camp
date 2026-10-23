@@ -5904,6 +5904,7 @@
 {"cid":"102377","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"osm-r15731759","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/relation/15731759","at":"2026-10-23","text":"제공"}
 {"cid":"osm-w470895444","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/470895444","at":"2026-10-23"}
+{"cid":"osm-w472545129","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/472545129","at":"2026-10-23","text":"제공"}
 {"cid":"osm-w474196879","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/474196879","at":"2026-10-23"}
 {"cid":"osm-w734439882","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/734439882","at":"2026-10-23","text":"제공"}
 {"cid":"osm-w1171495739","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1171495739","at":"2026-10-23"}
