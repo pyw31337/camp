@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-10-23T22:44:45.412Z",
+ "generated_at": "2026-10-24T01:39:16.644Z",
  "how_to_resolve": "원문을 대조해 data/quality/decisions.ndjson에 {cid, attr, value, url, why, by, at} 한 줄을 덧붙인다(docs/DATA_QUALITY_PROCESS.md 4단계).",
- "count": 832,
+ "count": 837,
  "items": [
   {
    "cid": "2179",
@@ -25,7 +25,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=354&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      }
     ]
@@ -74,7 +74,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=545&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      }
     ]
@@ -466,7 +466,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=545&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      }
     ]
@@ -627,7 +627,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7373&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      },
      {
@@ -1075,7 +1075,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=354&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      }
     ]
@@ -1096,7 +1096,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=10019&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      },
      {
@@ -1138,7 +1138,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17897&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      }
     ]
@@ -1194,7 +1194,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20246&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      }
     ]
@@ -1523,7 +1523,7 @@
    "ui": true,
    "top": {
     "value": "15:00",
-    "confidence": 0.95,
+    "confidence": 0.96,
     "sources": 2,
     "evidence": [
      {
@@ -1564,6 +1564,27 @@
    "label": "퇴실 시각",
    "ui": true,
    "top": {
+    "value": "12:00",
+    "confidence": 0.918,
+    "sources": 2,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "operator_homepage",
+      "url": "http://dusonggreen.kr/html/reservation.html",
+      "at": "2026-10-20T01:25:09.315Z",
+      "quote": "퇴실 : 오후 12시"
+     },
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/44kmgdd44/222955825519",
+      "at": "2022-12-14",
+      "quote": "있음 입실시간 : 2시 퇴실시간 : 12시 본관에는 세미나실과 아이들..."
+     }
+    ]
+   },
+   "rival": {
     "value": "11:00",
     "confidence": 0.9,
     "sources": 1,
@@ -1574,20 +1595,6 @@
       "url": "http://dusonggreen.kr/html/reservation.html",
       "at": "2026-10-20T01:25:09.315Z",
       "quote": "퇴실 : 오전 11시"
-     }
-    ]
-   },
-   "rival": {
-    "value": "12:00",
-    "confidence": 0.9,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "OPERATOR",
-      "src": "operator_homepage",
-      "url": "http://dusonggreen.kr/html/reservation.html",
-      "at": "2026-10-20T01:25:09.315Z",
-      "quote": "퇴실 : 오후 12시"
      }
     ]
    }
@@ -1628,7 +1635,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18431&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      }
     ]
@@ -1802,6 +1809,27 @@
    "label": "입실 시각",
    "ui": true,
    "top": {
+    "value": "13:00",
+    "confidence": 0.95,
+    "sources": 2,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "operator_homepage",
+      "url": "https://www.graega.com/rooms/7091",
+      "at": "2026-10-20T01:10:42.401Z",
+      "quote": "체크인 13:00 ~ 체크아웃 12:00"
+     },
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://www.graega.com/rooms/7091",
+      "at": null,
+      "quote": "[입퇴실 시간] - 입실 : 13시 - 퇴실 : 12시 - 퇴실 시간은 12시를 원칙으로 하되 다음 예약자가 비어있을 경우 추가요금 3만원 (6시까지 이용 후 퇴실 가능) [인원 설명] - 인원 : 기준4인"
+     }
+    ]
+   },
+   "rival": {
     "value": "10:00",
     "confidence": 0.9,
     "sources": 1,
@@ -1812,20 +1840,6 @@
       "url": "https://www.graega.com/rooms/7091",
       "at": "2026-10-20T01:10:42.401Z",
       "quote": "- 당일 방문자는 관리자와 사전 협의된 인원만 가능, 추가요금 사전 입금 후 오전 10시 입실 오후 7시전 퇴실하셔야합니다."
-     }
-    ]
-   },
-   "rival": {
-    "value": "13:00",
-    "confidence": 0.9,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "OPERATOR",
-      "src": "operator_homepage",
-      "url": "https://www.graega.com/rooms/7091",
-      "at": "2026-10-20T01:10:42.401Z",
-      "quote": "체크인 13:00 ~ 체크아웃 12:00"
      }
     ]
    }
@@ -2041,7 +2055,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19348&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      }
     ]
@@ -6474,6 +6488,41 @@
       "url": null,
       "at": null,
       "quote": "침대,에어컨,냉장고,난방기구,취사도구,내부화장실,내부샤워실"
+     }
+    ]
+   }
+  },
+  {
+   "cid": "1925",
+   "name": "신화가족목공체험 캠핑소",
+   "attr": "INNER_AMENITY",
+   "label": "글램핑·카라반 내부시설",
+   "ui": true,
+   "top": {
+    "value": "AIRCON",
+    "confidence": 0.85,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "CONFIRMED",
+      "src": "gocamping",
+      "url": null,
+      "at": null,
+      "quote": "침대,에어컨,냉장고,난방기구,취사도구"
+     }
+    ]
+   },
+   "rival": {
+    "value": "BED",
+    "confidence": 0.85,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "CONFIRMED",
+      "src": "gocamping",
+      "url": null,
+      "at": null,
+      "quote": "침대,에어컨,냉장고,난방기구,취사도구"
      }
     ]
    }
@@ -18794,41 +18843,6 @@
   {
    "cid": "100561",
    "name": "서천 장항글램핑장",
-   "attr": "INNER_AMENITY",
-   "label": "글램핑·카라반 내부시설",
-   "ui": true,
-   "top": {
-    "value": "AIRCON",
-    "confidence": 0.85,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "CONFIRMED",
-      "src": "gocamping",
-      "url": null,
-      "at": null,
-      "quote": "침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"
-     }
-    ]
-   },
-   "rival": {
-    "value": "BED",
-    "confidence": 0.85,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "CONFIRMED",
-      "src": "gocamping",
-      "url": null,
-      "at": null,
-      "quote": "침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"
-     }
-    ]
-   }
-  },
-  {
-   "cid": "100566",
-   "name": "스테이 인터뷰 금산",
    "attr": "INNER_AMENITY",
    "label": "글램핑·카라반 내부시설",
    "ui": true,

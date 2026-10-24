@@ -883,6 +883,9 @@
 {"cid":"1920","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"1920","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1920","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1925","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"1925","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1925","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1930","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"1930","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1930","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
@@ -3914,6 +3917,9 @@
 {"cid":"100843","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"100843","attr":"SHOWER_COUNT","value":17,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100843","attr":"TOILET_COUNT","value":17,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100844","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"100844","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100844","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100845","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100846","attr":"HOT_WATER","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://bonita-caravan.com/","at":"2026-10-16T05:46:30.687Z","quote":"4계절 온수수영장"}
 {"cid":"100846","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}

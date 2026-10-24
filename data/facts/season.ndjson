@@ -2015,6 +2015,12 @@
 {"cid":"1920","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1920","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1920","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1925","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1925","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1925","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1925","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1925","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1925","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1930","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1930","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1930","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -9578,6 +9584,12 @@
 {"cid":"100843","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100843","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100843","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100844","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100844","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100844","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100844","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100844","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100844","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100845","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100845","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100845","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -15510,6 +15522,7 @@
 {"cid":"102375","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102375","at":"2026-10-19T00:00:00+09:00"}
 {"cid":"102376","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102376","at":"2026-10-19T00:00:00+09:00"}
 {"cid":"102377","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102378","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"hangang-banpo","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-10-20"}
 {"cid":"hangang-gangseo","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-10-20"}
 {"cid":"hangang-gwangnaru","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-10-20"}
