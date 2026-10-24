@@ -10,7 +10,7 @@
 //   IMAGE_MAX_PER_CAMP      캠핑장당 imageList 추가 사진 상한(기본 6)
 //   IMAGE_BUDGET_MB         camps/ 전체 용량 상한(기본 900MB, GitHub Pages 사이트 1GB 제한 안). 넘으면 새 다운로드 중단
 //   IMAGE_MAX_BYTES         원본 1장 최대 바이트(기본 8MB, 넘으면 건너뜀)
-//   IMAGE_PRUNE             "0"이면 매니페스트가 참조하지 않는 파일을 지우지 않음(기본 지움)
+//   IMAGE_PRUNE             "0"이면 매니페스트가 참조하지 않는 파일을 지우지 않음(기본 지움 — 단 IMAGE_ALLOW_SHRINK=1일 때만, .tmp는 늘 지움)
 import { existsSync } from "node:fs";
 import { mkdir, readFile, readdir, rename, rm, stat, writeFile } from "node:fs/promises";
 import { dirname, join, relative, resolve, sep } from "node:path";
@@ -193,9 +193,14 @@ await writeJsonAtomic(failuresPath, failures);
 
 // 5) 정리(매니페스트가 참조하지 않는 파일)
 let pruned = prePruned;
+// 매니페스트에 없는 사진 파일도 화면 데이터가 가리킬 수 있다(누적 병합으로 남은 옛 사진 경로).
+// 그래서 사진 파일 정리도 줄이는 정리로 보고 IMAGE_ALLOW_SHRINK=1일 때만 한다
+// (2026-10-24 run 40045989901: 매니페스트 밖 7,274장을 지워 Pages 배포가 사진 누락으로 막힘).
 if (PRUNE) {
   const files = (await listMedia()).map((f) => f.rel);
-  for (const f of orphanFiles(manifest, files)) { await rm(join(MEDIA_DIR, f), { force: true }); pruned++; }
+  const orphans = orphanFiles(manifest, files);
+  if (ALLOW_SHRINK) for (const f of orphans) { await rm(join(MEDIA_DIR, f), { force: true }); pruned++; }
+  else if (orphans.length) console.log(`매니페스트 밖 사진 ${orphans.length}개는 지우지 않음(IMAGE_ALLOW_SHRINK=1일 때만 정리)`);
   for (const f of files.filter((x) => x.endsWith(".tmp"))) await rm(join(MEDIA_DIR, f), { force: true });
 }
 

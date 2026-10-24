@@ -542,7 +542,10 @@ jobs:
         run: |
           # 사이트 데이터 발행이 성공한 뒤에만, 그리고 사진이 줄지 않을 때만 덮어쓴다.
           git fetch -q --depth=1 origin +media:refs/remotes/origin/media 2>/dev/null && git show origin/media:manifest.json > "$RUNNER_TEMP/media-prev.json" 2>/dev/null || echo '{"camps":{}}' > "$RUNNER_TEMP/media-prev.json"
-          node "$GITHUB_WORKSPACE/.github/scripts/media-guard.mjs" "$RUNNER_TEMP/media-prev.json" manifest.json
+          # 매니페스트 밖 사진 파일도 화면 데이터가 가리킬 수 있어 파일 목록도 비교한다(2026-10-24 7,274장 삭제).
+          git ls-tree -r --name-only origin/media -- camps > "$RUNNER_TEMP/media-prev-files.txt" 2>/dev/null || : > "$RUNNER_TEMP/media-prev-files.txt"
+          find camps -name '*.webp' > "$RUNNER_TEMP/media-next-files.txt" 2>/dev/null || : > "$RUNNER_TEMP/media-next-files.txt"
+          node "$GITHUB_WORKSPACE/.github/scripts/media-guard.mjs" "$RUNNER_TEMP/media-prev.json" manifest.json "$RUNNER_TEMP/media-prev-files.txt" "$RUNNER_TEMP/media-next-files.txt"
           git add -A
           if git rev-parse -q --verify HEAD >/dev/null && git diff --cached --quiet; then echo "이미지 변경 없음."; exit 0; fi
           git config user.name "moyeora-camping-data-bot"
