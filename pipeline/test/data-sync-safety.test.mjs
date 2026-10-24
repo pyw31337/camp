@@ -2,7 +2,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { compareManifests } from "../../.github/scripts/media-guard.mjs";
+import { compareManifests, lostFiles } from "../../.github/scripts/media-guard.mjs";
 
 const wf = readFileSync(new URL("../../.github/workflows/data-sync.yml", import.meta.url), "utf8");
 const profile = (name) => {
@@ -40,4 +40,18 @@ test("media guard는 사진 감소를 잡는다", () => {
   const prev = { camps: { a: [e(1), e(2), e(3)], b: [e(4)] } };
   assert.equal(compareManifests(prev, { camps: { a: [e(1), e(2), e(3), e(5)], b: [e(4)] } }).lostPhotos, 0);
   assert.equal(compareManifests(prev, { camps: { a: [e(1)], b: [e(4)] } }).lostPhotos, 2);
+});
+
+test("media guard는 매니페스트 밖 사진 파일이 사라지는 것도 잡는다(2026-10-24)", () => {
+  assert.deepEqual(lostFiles(["camps/10/a-t.webp", "camps/10/b-t.webp", "manifest.json"], ["camps/10/a-t.webp"]), ["camps/10/b-t.webp"]);
+  assert.deepEqual(lostFiles(["camps/10/a-t.webp"], ["camps/10/a-t.webp", "camps/11/c-t.webp"]), []);
+  for (const f of ["data-sync.yml", "card-photos.yml"]) {
+    const y = readFileSync(new URL(`../../.github/workflows/${f}`, import.meta.url), "utf8");
+    assert.match(y, /media-guard\.mjs"[^\n]*media-prev-files\.txt[^\n]*media-next-files\.txt/, f);
+  }
+});
+
+test("sync-images는 매니페스트 밖 사진 파일을 IMAGE_ALLOW_SHRINK 없이 지우지 않는다", () => {
+  const src = readFileSync(new URL("../scripts/sync-images.mjs", import.meta.url), "utf8");
+  assert.match(src, /if \(ALLOW_SHRINK\) for \(const f of orphans\)/);
 });

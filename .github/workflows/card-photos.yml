@@ -53,6 +53,11 @@ jobs:
         run: |
           git add -A
           if git diff --cached --quiet; then echo "카드 사진 변경 없음."; echo "changed=false" >> "$GITHUB_ENV"; exit 0; fi
+          # 공식 사진(camps/)이 사라지는 푸시는 막는다(data-sync와 같은 검사, 2026-10-24 7,274장 삭제).
+          git show origin/media:manifest.json > "$RUNNER_TEMP/media-prev.json" 2>/dev/null || echo '{"camps":{}}' > "$RUNNER_TEMP/media-prev.json"
+          git ls-tree -r --name-only origin/media -- camps > "$RUNNER_TEMP/media-prev-files.txt" 2>/dev/null || : > "$RUNNER_TEMP/media-prev-files.txt"
+          find camps -name '*.webp' > "$RUNNER_TEMP/media-next-files.txt" 2>/dev/null || : > "$RUNNER_TEMP/media-next-files.txt"
+          node "$GITHUB_WORKSPACE/.github/scripts/media-guard.mjs" "$RUNNER_TEMP/media-prev.json" manifest.json "$RUNNER_TEMP/media-prev-files.txt" "$RUNNER_TEMP/media-next-files.txt"
           git config user.name "moyeora-camping-data-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -q --amend -m "chore(media): official campground images $(date -u +%Y-%m-%dT%H:%MZ)"
