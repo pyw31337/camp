@@ -636,7 +636,6 @@
 {"cid":"1534","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1534","attr":"TRAILER_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1547","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1547","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_discovered","url":"https://www.nakdongcamping.com/","at":"2026-10-20T01:18:15.585Z","quote":"이로 인해 사이트 내 주차할 시 진입로의 경사가 가파르기 때문에 자동차 하부와 사이트 높이에 주의하시기 바랍니다."}
 {"cid":"1547","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1554","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1554","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2639,6 +2638,7 @@
 {"cid":"100309","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100309","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100311","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100311","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"OPERATOR","src":"operator_homepage","url":"https://jejucampingstory.com/","at":"2026-10-24T22:27:27.059Z","quote":"백패킹 사이트는 차량 진입 가능 여부도 함께 안내합니다."}
 {"cid":"100311","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100312","attr":"CARAVAN_ALLOWED","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100312","attr":"TRAILER_ALLOWED","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -6310,3 +6310,4 @@
 {"cid":"pilot-004-haengun","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/haengun","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-007-soeggol","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"VERIFIED","src":"pilot_verified","url":"https://booking.naver.com/booking/3/bizes/soeggol","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-009-ninehills","attr":"PARKING_MODE","value":"SITE_SIDE","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/ninehills","at":"2026-10-15T09:00:00+09:00"}
+{"cid":"rf-18uzdpk","attr":"CAR_CAMPING","value":false,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.shinan.go.kr/home/tour/theme_tour/theme_tour_17/theme_tour_17_04/page.wscms","at":"2026-10-24T23:07:56.253Z","quote":"장작(불멍) 사용 금지, 차박 이용 금지입니다."}
