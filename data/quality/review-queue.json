@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-10-23T22:44:45.412Z",
+ "generated_at": "2026-10-24T01:27:04.782Z",
  "how_to_resolve": "원문을 대조해 data/quality/decisions.ndjson에 {cid, attr, value, url, why, by, at} 한 줄을 덧붙인다(docs/DATA_QUALITY_PROCESS.md 4단계).",
- "count": 832,
+ "count": 838,
  "items": [
   {
    "cid": "2179",
@@ -25,7 +25,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=354&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      }
     ]
@@ -74,7 +74,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=545&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      }
     ]
@@ -466,7 +466,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=545&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      }
     ]
@@ -489,6 +489,55 @@
       "url": "https://blog.naver.com/sparkplug220/224353267045",
       "at": "2026-07-21",
       "quote": "입실 13시, 퇴실 12시 …"
+     }
+    ]
+   }
+  },
+  {
+   "cid": "100989",
+   "name": "포근마루캠핑장",
+   "attr": "CHECKOUT_TIME",
+   "label": "퇴실 시각",
+   "ui": true,
+   "top": {
+    "value": "11:00",
+    "confidence": 0.935,
+    "sources": 2,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "operator_homepage",
+      "url": "https://www.marucamp.kr/",
+      "at": "2026-10-20T01:17:10.735Z",
+      "quote": "체크아웃 11:00"
+     },
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/d_a_o_e_/224259799987",
+      "at": "2026-04-21",
+      "quote": "[ 입퇴실시간 안내 ] ☞ 입실 오후 2시, ☞ 퇴실 오전 11시 요…"
+     }
+    ]
+   },
+   "rival": {
+    "value": "12:00",
+    "confidence": 0.935,
+    "sources": 2,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "booking_engine",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18431&res_dt=20261024",
+      "at": "2026-10-24",
+      "quote": ""
+     },
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/aroma0101/224279049273",
+      "at": "2026-05-08",
+      "quote": "#포근마루캠핑장 경기 양주시 장흥면 권율로 156-116 0507-1468-5288 입실 14:00/퇴실 12:00 네이버예약 -기본 사이트 60,000원 -2가족사이트 110..."
      }
     ]
    }
@@ -627,7 +676,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7373&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      },
      {
@@ -1075,7 +1124,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=354&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      }
     ]
@@ -1096,7 +1145,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=10019&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      },
      {
@@ -1138,7 +1187,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17897&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      }
     ]
@@ -1194,7 +1243,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20246&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      }
     ]
@@ -1523,7 +1572,7 @@
    "ui": true,
    "top": {
     "value": "15:00",
-    "confidence": 0.95,
+    "confidence": 0.96,
     "sources": 2,
     "evidence": [
      {
@@ -1564,6 +1613,27 @@
    "label": "퇴실 시각",
    "ui": true,
    "top": {
+    "value": "12:00",
+    "confidence": 0.918,
+    "sources": 2,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "operator_homepage",
+      "url": "http://dusonggreen.kr/html/reservation.html",
+      "at": "2026-10-20T01:25:09.315Z",
+      "quote": "퇴실 : 오후 12시"
+     },
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/44kmgdd44/222955825519",
+      "at": "2022-12-14",
+      "quote": "있음 입실시간 : 2시 퇴실시간 : 12시 본관에는 세미나실과 아이들..."
+     }
+    ]
+   },
+   "rival": {
     "value": "11:00",
     "confidence": 0.9,
     "sources": 1,
@@ -1574,62 +1644,6 @@
       "url": "http://dusonggreen.kr/html/reservation.html",
       "at": "2026-10-20T01:25:09.315Z",
       "quote": "퇴실 : 오전 11시"
-     }
-    ]
-   },
-   "rival": {
-    "value": "12:00",
-    "confidence": 0.9,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "OPERATOR",
-      "src": "operator_homepage",
-      "url": "http://dusonggreen.kr/html/reservation.html",
-      "at": "2026-10-20T01:25:09.315Z",
-      "quote": "퇴실 : 오후 12시"
-     }
-    ]
-   }
-  },
-  {
-   "cid": "100989",
-   "name": "포근마루캠핑장",
-   "attr": "CHECKOUT_TIME",
-   "label": "퇴실 시각",
-   "ui": true,
-   "top": {
-    "value": "11:00",
-    "confidence": 0.935,
-    "sources": 2,
-    "evidence": [
-     {
-      "grade": "OPERATOR",
-      "src": "operator_homepage",
-      "url": "https://www.marucamp.kr/",
-      "at": "2026-10-20T01:17:10.735Z",
-      "quote": "체크아웃 11:00"
-     },
-     {
-      "grade": "MENTION",
-      "src": "review_search",
-      "url": "https://blog.naver.com/d_a_o_e_/224259799987",
-      "at": "2026-04-21",
-      "quote": "[ 입퇴실시간 안내 ] ☞ 입실 오후 2시, ☞ 퇴실 오전 11시 요…"
-     }
-    ]
-   },
-   "rival": {
-    "value": "12:00",
-    "confidence": 0.9,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "OPERATOR",
-      "src": "booking_engine",
-      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18431&res_dt=20261024",
-      "at": "2026-10-23",
-      "quote": ""
      }
     ]
    }
@@ -1802,6 +1816,27 @@
    "label": "입실 시각",
    "ui": true,
    "top": {
+    "value": "13:00",
+    "confidence": 0.95,
+    "sources": 2,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "operator_homepage",
+      "url": "https://www.graega.com/rooms/7091",
+      "at": "2026-10-20T01:10:42.401Z",
+      "quote": "체크인 13:00 ~ 체크아웃 12:00"
+     },
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://www.graega.com/rooms/7091",
+      "at": null,
+      "quote": "[입퇴실 시간] - 입실 : 13시 - 퇴실 : 12시 - 퇴실 시간은 12시를 원칙으로 하되 다음 예약자가 비어있을 경우 추가요금 3만원 (6시까지 이용 후 퇴실 가능) [인원 설명] - 인원 : 기준4인"
+     }
+    ]
+   },
+   "rival": {
     "value": "10:00",
     "confidence": 0.9,
     "sources": 1,
@@ -1812,20 +1847,6 @@
       "url": "https://www.graega.com/rooms/7091",
       "at": "2026-10-20T01:10:42.401Z",
       "quote": "- 당일 방문자는 관리자와 사전 협의된 인원만 가능, 추가요금 사전 입금 후 오전 10시 입실 오후 7시전 퇴실하셔야합니다."
-     }
-    ]
-   },
-   "rival": {
-    "value": "13:00",
-    "confidence": 0.9,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "OPERATOR",
-      "src": "operator_homepage",
-      "url": "https://www.graega.com/rooms/7091",
-      "at": "2026-10-20T01:10:42.401Z",
-      "quote": "체크인 13:00 ~ 체크아웃 12:00"
      }
     ]
    }
@@ -2041,7 +2062,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19348&res_dt=20261024",
-      "at": "2026-10-23",
+      "at": "2026-10-24",
       "quote": ""
      }
     ]
@@ -2414,48 +2435,6 @@
       "url": null,
       "at": null,
       "quote": "가능(소형견)"
-     }
-    ]
-   }
-  },
-  {
-   "cid": "1621",
-   "name": "서울 YMCA 다락원 캠프장",
-   "attr": "PET_POLICY",
-   "label": "반려견 동반",
-   "ui": true,
-   "top": {
-    "value": "ALLOWED",
-    "confidence": 0.945,
-    "sources": 2,
-    "evidence": [
-     {
-      "grade": "OPERATOR",
-      "src": "operator_homepage",
-      "url": "https://ggtour.or.kr/travel-info/tourism-info/72661573-746a-11ee-b910-0242ac120002",
-      "at": "2026-10-19T02:22:35.543Z",
-      "quote": "이것저것 꼼꼼하게 따져서 예약한곳이 바로 이곳입니다 평화로49번길 63 서울YMCA 다락원캠프장 ☎️ 010-****-**** 외부음식 반입 가능 애견동반 가능 피크닉 텐트와 가까운 제1주차장에 주차를 했어요 체크인은..."
-     },
-     {
-      "grade": "MENTION",
-      "src": "review_search",
-      "url": "https://blog.naver.com/gogoego/224446617733",
-      "at": "2026-10-19",
-      "quote": "애견 동반 가능한 서울 가을 캠크닉 즐기기 '피카푸 피크닉앤글램핑....."
-     }
-    ]
-   },
-   "rival": {
-    "value": "NOT_ALLOWED",
-    "confidence": 0.85,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "CONFIRMED",
-      "src": "gocamping",
-      "url": null,
-      "at": null,
-      "quote": "불가능"
      }
     ]
    }
@@ -18857,6 +18836,41 @@
       "url": null,
       "at": null,
       "quote": "침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"
+     }
+    ]
+   }
+  },
+  {
+   "cid": "100568",
+   "name": "내린천 글램핑",
+   "attr": "INNER_AMENITY",
+   "label": "글램핑·카라반 내부시설",
+   "ui": true,
+   "top": {
+    "value": "AIRCON",
+    "confidence": 0.85,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "CONFIRMED",
+      "src": "gocamping",
+      "url": null,
+      "at": null,
+      "quote": "침대,TV,에어컨,냉장고,유무선인터넷,난방기구"
+     }
+    ]
+   },
+   "rival": {
+    "value": "BED",
+    "confidence": 0.85,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "CONFIRMED",
+      "src": "gocamping",
+      "url": null,
+      "at": null,
+      "quote": "침대,TV,에어컨,냉장고,유무선인터넷,난방기구"
      }
     ]
    }
