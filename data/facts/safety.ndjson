@@ -745,6 +745,8 @@
 {"cid":"1911","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"1920","attr":"SAFETY_EXTINGUISHER","value":18,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1920","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
+{"cid":"1925","attr":"SAFETY_EXTINGUISHER","value":15,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1925","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"1930","attr":"SAFETY_EXTINGUISHER","value":22,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1930","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"1931","attr":"SAFETY_EXTINGUISHER","value":20,"grade":"CONFIRMED","src":"gocamping"}
@@ -3420,6 +3422,8 @@
 {"cid":"100843","attr":"SAFETY_EXTINGUISHER","value":19,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100843","attr":"SAFETY_FIRE_SENSOR","value":19,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100843","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
+{"cid":"100844","attr":"SAFETY_EXTINGUISHER","value":11,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100844","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"100845","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"100846","attr":"SAFETY_EXTINGUISHER","value":15,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100846","attr":"SAFETY_FIRE_SENSOR","value":15,"grade":"CONFIRMED","src":"gocamping"}
@@ -5872,3 +5876,5 @@
 {"cid":"102374","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102374","at":"2026-10-19T00:00:00+09:00","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"102375","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102375","at":"2026-10-19T00:00:00+09:00","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"102376","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102376","at":"2026-10-19T00:00:00+09:00","text":"영업배상책임보험 가입(고캠핑 등록)"}
+{"cid":"102377","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
+{"cid":"102378","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
