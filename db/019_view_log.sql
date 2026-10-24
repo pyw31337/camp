@@ -35,7 +35,9 @@ BEGIN
   END IF;
 END $$;
 
-CREATE OR REPLACE FUNCTION public.safe_view_log_feed(row_limit INTEGER DEFAULT 500)
+-- 운영 DB에는 021의 새 반환 형태가 먼저 들어가 있을 수 있다(2026-10-23 수동 적용) — 반환 형태가 다르면 CREATE OR REPLACE가 실패하므로 지우고 만든다.
+DROP FUNCTION IF EXISTS public.safe_view_log_feed(INTEGER);
+CREATE FUNCTION public.safe_view_log_feed(row_limit INTEGER DEFAULT 500)
 RETURNS TABLE (
   created_at TIMESTAMPTZ,
   campground_id TEXT,
