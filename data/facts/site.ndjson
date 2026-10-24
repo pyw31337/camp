@@ -6,8 +6,8 @@
 {"cid":"11","attr":"SITE_SIZE","value":"6×7m","grade":"OPERATOR","src":"operator_homepage","url":"http://www.yangchoncamp.co.kr/bbs/board.php?bo_table=gallery&wr_id=42","at":"2026-10-20T01:26:48.561Z","quote":"나무가 있는 사이트는 6*7m 정도 됩니다.","text":"6×7m"}
 {"cid":"11","attr":"SITE_SIZE","value":"6×8m","grade":"OPERATOR","src":"operator_homepage","url":"http://www.yangchoncamp.co.kr/bbs/board.php?bo_table=gallery&wr_id=42","at":"2026-10-20T01:26:48.561Z","quote":"파쇄석(6*8m) :","text":"6×8m"}
 {"cid":"11","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"11","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2633&res_dt=20261024","at":"2026-10-23","text":"데크(6mX8m)"}
-{"cid":"11","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2633&res_dt=20261024","at":"2026-10-23","text":"파쇄석"}
+{"cid":"11","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2633&res_dt=20261024","at":"2026-10-24","text":"데크(6mX8m)"}
+{"cid":"11","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2633&res_dt=20261024","at":"2026-10-24","text":"파쇄석"}
 {"cid":"11","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"21","attr":"AREA_TOTAL_M2","value":3000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"21","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
@@ -75,6 +75,7 @@
 {"cid":"129","attr":"AREA_TOTAL_M2","value":3600,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"129","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping","count":12}
 {"cid":"129","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"131","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=185&res_dt=20261024","at":"2026-10-24","text":"파쇄석 / 마사토"}
 {"cid":"138","attr":"AREA_TOTAL_M2","value":53500,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"138","attr":"SITE_SIZE","value":"11×8m","grade":"CONFIRMED","src":"gocamping","count":60}
 {"cid":"138","attr":"SITE_SIZE","value":"9×9m","grade":"CONFIRMED","src":"gocamping","count":77}
@@ -143,8 +144,11 @@
 {"cid":"277","attr":"SITE_SIZE","value":"3×6m","grade":"MENTION","src":"review_search","url":"https://accommodations.sailing-blog.click/1646","at":"2026-04-28","quote":"풀빌라 객실에는 3m x 6m 크기의 개별 수영장과 2.5m x 2.5m 크기의 개별 자쿠지가 구비되어 있으며, 글램핑 객실은 개별 자쿠지와 공용 수영장을 이용할 수 있다.","text":"3×6m","n":1}
 {"cid":"277","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"301","attr":"AREA_TOTAL_M2","value":13223,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"301","attr":"SITE_SIZE","value":"9.5×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=941&res_dt=20261024","at":"2026-10-24","text":"차박, 노지(2구역)"}
 {"cid":"301","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":100}
 {"cid":"301","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=301","at":"2026-06-30T00:00:00+09:00","quote":"사이트 크기는 가로 6m 세로 8m로 모두 동일하다.","text":"6×8m"}
+{"cid":"301","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=941&res_dt=20261024","at":"2026-10-24","text":"데크, 선착순 자리배정"}
+{"cid":"301","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=941&res_dt=20261024","at":"2026-10-24","text":"파쇄석, 마사토, 선착순 자리배정"}
 {"cid":"301","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"306","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":16}
 {"cid":"306","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
@@ -187,7 +191,7 @@
 {"cid":"356","attr":"SITE_SIZE","value":"3×4m","grade":"MENTION","src":"review_search","url":"https://blogsailing.com/3147","at":"2026-08-24","quote":"사이트 크기는 가로 3m 세로 4m이다.","text":"3×4m","n":1}
 {"cid":"357","attr":"AREA_TOTAL_M2","value":4822,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"357","attr":"SITE_GAP_M","value":1,"grade":"CONFIRMED","src":"gocamping","text":"1m"}
-{"cid":"357","attr":"SITE_SIZE","value":"4×4m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3270&res_dt=20261024","at":"2026-10-23","text":"A구역 (오토캠핑)"}
+{"cid":"357","attr":"SITE_SIZE","value":"4×4m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3270&res_dt=20261024","at":"2026-10-24","text":"A구역 (오토캠핑)"}
 {"cid":"357","attr":"SITE_SIZE","value":"4×4m","grade":"CONFIRMED","src":"gocamping","count":28}
 {"cid":"357","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"362","attr":"AREA_TOTAL_M2","value":71367,"grade":"CONFIRMED","src":"gocamping"}
@@ -197,7 +201,7 @@
 {"cid":"362","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"373","attr":"AREA_TOTAL_M2","value":4000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"373","attr":"SITE_GAP_M","value":4,"grade":"CONFIRMED","src":"gocamping","text":"4m"}
-{"cid":"373","attr":"SITE_SIZE","value":"6×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2262&res_dt=20261024","at":"2026-10-23","text":"캠핑존 - 예약 후 선착순 (기준 인원 확인 필수 / 방문객 입장 불가)"}
+{"cid":"373","attr":"SITE_SIZE","value":"6×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2262&res_dt=20261024","at":"2026-10-24","text":"캠핑존 - 예약 후 선착순 (기준 인원 확인 필수 / 방문객 입장 불가)"}
 {"cid":"373","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":45}
 {"cid":"373","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"379","attr":"AREA_TOTAL_M2","value":2300,"grade":"CONFIRMED","src":"gocamping"}
@@ -280,10 +284,10 @@
 {"cid":"504","attr":"SITE_SIZE","value":"12×10m","grade":"CONFIRMED","src":"gocamping","count":52}
 {"cid":"504","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"508","attr":"AREA_TOTAL_M2","value":22083,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"508","attr":"SITE_SIZE","value":"3.9×3.8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2249&res_dt=20261024","at":"2026-10-23","text":"알록달록캠크닉(에어텐트)"}
-{"cid":"508","attr":"SITE_SIZE","value":"7×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2249&res_dt=20261024","at":"2026-10-23","text":"오토캠핑(수영장앞)"}
-{"cid":"508","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2249&res_dt=20261024","at":"2026-10-23","text":"오토캠핑"}
-{"cid":"508","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2249&res_dt=20261024","at":"2026-10-23","text":"파쇄석 / 사이트 크기: 8x8"}
+{"cid":"508","attr":"SITE_SIZE","value":"3.9×3.8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2249&res_dt=20261024","at":"2026-10-24","text":"알록달록캠크닉(에어텐트)"}
+{"cid":"508","attr":"SITE_SIZE","value":"7×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2249&res_dt=20261024","at":"2026-10-24","text":"오토캠핑(수영장앞)"}
+{"cid":"508","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2249&res_dt=20261024","at":"2026-10-24","text":"오토캠핑"}
+{"cid":"508","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2249&res_dt=20261024","at":"2026-10-24","text":"파쇄석 / 사이트 크기: 8x8"}
 {"cid":"525","attr":"AREA_TOTAL_M2","value":2800,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"525","attr":"SITE_SIZE","value":"7×7m","grade":"OPERATOR","src":"operator_homepage","url":"https://noricamp.com/price/budget","at":"2026-10-19T01:44:23.672Z","quote":"자동차 야영장은 파쇄석으로 이뤄졌으며, 사이트 크기는 가로 7m 세로 7m다.","text":"7×7m"}
 {"cid":"525","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":25}
@@ -408,7 +412,12 @@
 {"cid":"704","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"710","attr":"AREA_TOTAL_M2","value":1000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"710","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
+{"cid":"710","attr":"SITE_SIZE","value":"4.3×7.3m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2047&res_dt=20261024","at":"2026-10-24","text":"캠핑4구역"}
+{"cid":"710","attr":"SITE_SIZE","value":"4.7×7.2m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2047&res_dt=20261024","at":"2026-10-24","text":"캠핑1구역"}
+{"cid":"710","attr":"SITE_SIZE","value":"4.7×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2047&res_dt=20261024","at":"2026-10-24","text":"캠핑2구역"}
 {"cid":"710","attr":"SITE_SIZE","value":"5×10m","grade":"CONFIRMED","src":"gocamping","count":10}
+{"cid":"710","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2047&res_dt=20261024","at":"2026-10-24","text":"4.7x7.3데크(차박불가)"}
+{"cid":"710","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2047&res_dt=20261024","at":"2026-10-24","text":"파쇄석(1번은데크(4.3x7.3)차박불가)"}
 {"cid":"710","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"716","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
 {"cid":"716","attr":"SITE_SIZE","value":"8×10m","grade":"CONFIRMED","src":"gocamping","count":118}
@@ -435,13 +444,13 @@
 {"cid":"739","attr":"SITE_GAP_M","value":1,"grade":"CONFIRMED","src":"gocamping","text":"1m"}
 {"cid":"739","attr":"SITE_SIZE","value":"5×4m","grade":"CONFIRMED","src":"gocamping","count":11}
 {"cid":"739","attr":"SITE_SIZE","value":"4×5m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hyuni_0510/224314119680","at":"2026-06-12","quote":"완주 대둔산글램핑 캠핑장 전북 완주군 운주면 원장선로 42-209 대둔산글램핑캠핑장 4m x 5m, 데크, 텐트 옆 주차...","text":"4×5m","n":3}
-{"cid":"739","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2345&res_dt=20261024","at":"2026-10-23","text":"데크존/4m*5m"}
-{"cid":"739","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2345&res_dt=20261024","at":"2026-10-23","text":"파쇄석존/5m*6m"}
+{"cid":"739","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2345&res_dt=20261024","at":"2026-10-24","text":"데크존/4m*5m"}
+{"cid":"739","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2345&res_dt=20261024","at":"2026-10-24","text":"파쇄석존/5m*6m"}
 {"cid":"739","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"763","attr":"SITE_SIZE","value":"3.4×3.4m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"767","attr":"AREA_TOTAL_M2","value":3300,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"767","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
-{"cid":"767","attr":"SITE_SIZE","value":"70×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14363&res_dt=20261024","at":"2026-10-23","text":"캠핑존(대장금파크 관람료 포함)"}
+{"cid":"767","attr":"SITE_SIZE","value":"70×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14363&res_dt=20261024","at":"2026-10-24","text":"캠핑존(대장금파크 관람료 포함)"}
 {"cid":"767","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"769","attr":"AREA_TOTAL_M2","value":50850,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"769","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping","count":53}
@@ -459,9 +468,9 @@
 {"cid":"789","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"789","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"797","attr":"SITE_SIZE","value":"10×10m","grade":"OPERATOR","src":"operator_discovered","url":"https://strm.co.kr/comm/faq.php","at":"2026-10-16T05:49:44.594Z","quote":"오토캠핑장의 이용 인원은 4명을 정원으로 하며, A존(10M X 10M)과 B존(7M X 7M)의 규격을 초과하는 텐트는 설치할 수 없습니다.(차량 주차 포함)","text":"10×10m"}
-{"cid":"797","attr":"SITE_SIZE","value":"10×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3820&res_dt=20261024","at":"2026-10-23","text":"오토캠핑(파쇄석 or 지주석)"}
+{"cid":"797","attr":"SITE_SIZE","value":"10×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3820&res_dt=20261024","at":"2026-10-24","text":"오토캠핑(파쇄석 or 지주석)"}
 {"cid":"797","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"797","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3820&res_dt=20261024","at":"2026-10-23","text":"파쇄석(10mX10m)"}
+{"cid":"797","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3820&res_dt=20261024","at":"2026-10-24","text":"파쇄석(10mX10m)"}
 {"cid":"800","attr":"AREA_TOTAL_M2","value":8264,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"800","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
 {"cid":"800","attr":"SITE_SIZE","value":"10×8m","grade":"CONFIRMED","src":"gocamping","count":32}
@@ -484,16 +493,16 @@
 {"cid":"818","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"819","attr":"AREA_TOTAL_M2","value":5000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"819","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"824","attr":"SITE_SIZE","value":"7×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1907&res_dt=20261024","at":"2026-10-23","text":"도둑골"}
-{"cid":"824","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1907&res_dt=20261024","at":"2026-10-23","text":"입구데크1,2 : 7*9M/ 수영장앞1~5 : 7*10M"}
-{"cid":"824","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1907&res_dt=20261024","at":"2026-10-23","text":"파쇄석/36,38~46사이트차량진입불가"}
+{"cid":"824","attr":"SITE_SIZE","value":"7×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1907&res_dt=20261024","at":"2026-10-24","text":"도둑골"}
+{"cid":"824","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1907&res_dt=20261024","at":"2026-10-24","text":"입구데크1,2 : 7*9M/ 수영장앞1~5 : 7*10M"}
+{"cid":"824","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1907&res_dt=20261024","at":"2026-10-24","text":"파쇄석/36,38~46사이트차량진입불가"}
 {"cid":"833","attr":"SITE_SIZE","value":"5×5m","grade":"CONFIRMED","src":"gocamping","count":27}
 {"cid":"833","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"855","attr":"SITE_SIZE","value":"6×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"866","attr":"AREA_TOTAL_M2","value":3114,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"866","attr":"SITE_SIZE","value":"5×8m","grade":"CONFIRMED","src":"gocamping","count":23}
-{"cid":"873","attr":"SITE_SIZE","value":"8×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261024","at":"2026-10-23","text":"동당미마운틴 구역"}
-{"cid":"873","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261024","at":"2026-10-23","text":"파쇄석"}
+{"cid":"873","attr":"SITE_SIZE","value":"8×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261024","at":"2026-10-24","text":"동당미마운틴 구역"}
+{"cid":"873","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261024","at":"2026-10-24","text":"파쇄석"}
 {"cid":"874","attr":"AREA_TOTAL_M2","value":3300,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"874","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"874","attr":"SITE_SIZE","value":"5×7m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hi999yo/223794069598","at":"2025-03-13","quote":"사이트크기 5m*7m 가격정보 비수기 3만원 성수기 4만원(7,8월) 입퇴실시간 입실~12시.퇴실11시 시간을 꼭 지켜주시기바랍니다!","text":"5×7m","n":1}
@@ -517,12 +526,12 @@
 {"cid":"917","attr":"AREA_TOTAL_M2","value":1000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"917","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"923","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
-{"cid":"923","attr":"SITE_SIZE","value":"10×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2156&res_dt=20261024","at":"2026-10-23","text":"계곡 2동"}
-{"cid":"923","attr":"SITE_SIZE","value":"10×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2156&res_dt=20261024","at":"2026-10-23","text":"정자 1동"}
-{"cid":"923","attr":"SITE_SIZE","value":"12×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2156&res_dt=20261024","at":"2026-10-23","text":"계곡3동(차박,캠핑카,카라반예약가능)"}
-{"cid":"923","attr":"SITE_SIZE","value":"13×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2156&res_dt=20261024","at":"2026-10-23","text":"계곡 1동"}
+{"cid":"923","attr":"SITE_SIZE","value":"10×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2156&res_dt=20261024","at":"2026-10-24","text":"계곡 2동"}
+{"cid":"923","attr":"SITE_SIZE","value":"10×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2156&res_dt=20261024","at":"2026-10-24","text":"정자 1동"}
+{"cid":"923","attr":"SITE_SIZE","value":"12×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2156&res_dt=20261024","at":"2026-10-24","text":"계곡3동(차박,캠핑카,카라반예약가능)"}
+{"cid":"923","attr":"SITE_SIZE","value":"13×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2156&res_dt=20261024","at":"2026-10-24","text":"계곡 1동"}
 {"cid":"923","attr":"SITE_SIZE","value":"8×12m","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1by4vdqp.com/?ckattempt=1","at":"2026-10-20T01:24:15.914Z","quote":"8m X 12m의 크기로 사이트옆 주차가능합니다.1번~4번사이트와 5번~8번사이트 사이는 차량통행 구간입니다.","text":"8×12m"}
-{"cid":"923","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2156&res_dt=20261024","at":"2026-10-23","text":"정자 3동"}
+{"cid":"923","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2156&res_dt=20261024","at":"2026-10-24","text":"정자 3동"}
 {"cid":"923","attr":"SITE_SIZE","value":"8×12m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"930","attr":"AREA_TOTAL_M2","value":9000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"931","attr":"AREA_TOTAL_M2","value":1000,"grade":"CONFIRMED","src":"gocamping"}
@@ -565,30 +574,30 @@
 {"cid":"1032","attr":"SITE_SIZE","value":"9×4m","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"1032","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1042","attr":"AREA_TOTAL_M2","value":33000,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1042","attr":"SITE_SIZE","value":"10.5×4.4m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-23","text":"물레방아데크(독립)사이트"}
-{"cid":"1042","attr":"SITE_SIZE","value":"10×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-23","text":"연못사이트 (타프죤,테크)"}
-{"cid":"1042","attr":"SITE_SIZE","value":"11×13m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-23","text":"목련두가족사이트"}
-{"cid":"1042","attr":"SITE_SIZE","value":"12×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-23","text":"행운사이트"}
-{"cid":"1042","attr":"SITE_SIZE","value":"20×17m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-23","text":"선녀탕두가족사이트"}
-{"cid":"1042","attr":"SITE_SIZE","value":"6.3×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-23","text":"뷰사이트 3단"}
-{"cid":"1042","attr":"SITE_SIZE","value":"6×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-23","text":"느티나무 / 하루종일 그늘"}
-{"cid":"1042","attr":"SITE_SIZE","value":"7×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-23","text":"단풍나무사이트"}
-{"cid":"1042","attr":"SITE_SIZE","value":"7×12m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-23","text":"산딸기 사이트(그늘많음)"}
-{"cid":"1042","attr":"SITE_SIZE","value":"7×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-23","text":"밤나무 데크 사이트"}
-{"cid":"1042","attr":"SITE_SIZE","value":"8.5×3m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-23","text":"계곡 작은사이트"}
-{"cid":"1042","attr":"SITE_SIZE","value":"8×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-23","text":"별채마당사이트"}
-{"cid":"1042","attr":"SITE_SIZE","value":"8×11m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-23","text":"계곡 큰 사이트"}
-{"cid":"1042","attr":"SITE_SIZE","value":"8×15m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-23","text":"캐슬사이트"}
-{"cid":"1042","attr":"SITE_SIZE","value":"8×7.5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-23","text":"뷰 사이트 1단"}
-{"cid":"1042","attr":"SITE_SIZE","value":"9×12m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-23","text":"숲속사이트 (2가족독립)"}
-{"cid":"1042","attr":"SITE_SIZE","value":"9×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-23","text":"뷰사이트 2단"}
+{"cid":"1042","attr":"SITE_SIZE","value":"10.5×4.4m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-24","text":"물레방아데크(독립)사이트"}
+{"cid":"1042","attr":"SITE_SIZE","value":"10×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-24","text":"연못사이트 (타프죤,테크)"}
+{"cid":"1042","attr":"SITE_SIZE","value":"11×13m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-24","text":"목련두가족사이트"}
+{"cid":"1042","attr":"SITE_SIZE","value":"12×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-24","text":"행운사이트"}
+{"cid":"1042","attr":"SITE_SIZE","value":"20×17m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-24","text":"선녀탕두가족사이트"}
+{"cid":"1042","attr":"SITE_SIZE","value":"6.3×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-24","text":"뷰사이트 3단"}
+{"cid":"1042","attr":"SITE_SIZE","value":"6×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-24","text":"느티나무 / 하루종일 그늘"}
+{"cid":"1042","attr":"SITE_SIZE","value":"7×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-24","text":"단풍나무사이트"}
+{"cid":"1042","attr":"SITE_SIZE","value":"7×12m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-24","text":"산딸기 사이트(그늘많음)"}
+{"cid":"1042","attr":"SITE_SIZE","value":"7×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-24","text":"밤나무 데크 사이트"}
+{"cid":"1042","attr":"SITE_SIZE","value":"8.5×3m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-24","text":"계곡 작은사이트"}
+{"cid":"1042","attr":"SITE_SIZE","value":"8×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-24","text":"별채마당사이트"}
+{"cid":"1042","attr":"SITE_SIZE","value":"8×11m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-24","text":"계곡 큰 사이트"}
+{"cid":"1042","attr":"SITE_SIZE","value":"8×15m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-24","text":"캐슬사이트"}
+{"cid":"1042","attr":"SITE_SIZE","value":"8×7.5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-24","text":"뷰 사이트 1단"}
+{"cid":"1042","attr":"SITE_SIZE","value":"9×12m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-24","text":"숲속사이트 (2가족독립)"}
+{"cid":"1042","attr":"SITE_SIZE","value":"9×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024","at":"2026-10-24","text":"뷰사이트 2단"}
 {"cid":"1042","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1043","attr":"AREA_TOTAL_M2","value":7000,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1043","attr":"SITE_SIZE","value":"5.8×11m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17647&res_dt=20261024","at":"2026-10-23","text":"A구역(파쇄석)애견동반가능"}
-{"cid":"1043","attr":"SITE_SIZE","value":"5×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17647&res_dt=20261024","at":"2026-10-23","text":"지붕데크"}
-{"cid":"1043","attr":"SITE_SIZE","value":"5×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17647&res_dt=20261024","at":"2026-10-23","text":"C구역(마사토)"}
-{"cid":"1043","attr":"SITE_SIZE","value":"6×14m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17647&res_dt=20261024","at":"2026-10-23","text":"B구역 파쇄석, 애견동반가능"}
-{"cid":"1043","attr":"SITE_SIZE","value":"9×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17647&res_dt=20261024","at":"2026-10-23","text":"B구역 데크 (애견동반가능)"}
+{"cid":"1043","attr":"SITE_SIZE","value":"5.8×11m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17647&res_dt=20261024","at":"2026-10-24","text":"A구역(파쇄석)애견동반가능"}
+{"cid":"1043","attr":"SITE_SIZE","value":"5×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17647&res_dt=20261024","at":"2026-10-24","text":"지붕데크"}
+{"cid":"1043","attr":"SITE_SIZE","value":"5×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17647&res_dt=20261024","at":"2026-10-24","text":"C구역(마사토)"}
+{"cid":"1043","attr":"SITE_SIZE","value":"6×14m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17647&res_dt=20261024","at":"2026-10-24","text":"B구역 파쇄석, 애견동반가능"}
+{"cid":"1043","attr":"SITE_SIZE","value":"9×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17647&res_dt=20261024","at":"2026-10-24","text":"B구역 데크 (애견동반가능)"}
 {"cid":"1043","attr":"SITE_SIZE","value":"6×10m","grade":"CONFIRMED","src":"gocamping","count":29}
 {"cid":"1051","attr":"AREA_TOTAL_M2","value":9917,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1051","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":40}
@@ -605,9 +614,9 @@
 {"cid":"1065","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1066","attr":"AREA_TOTAL_M2","value":6000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1066","attr":"SITE_SIZE","value":"6×7m","grade":"CONFIRMED","src":"gocamping","count":35}
-{"cid":"1075","attr":"SITE_SIZE","value":"5×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1832&res_dt=20261024","at":"2026-10-23","text":"1캠프 저수지 옆(1캠프 9번~10번)"}
-{"cid":"1075","attr":"SITE_SIZE","value":"5×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1832&res_dt=20261024","at":"2026-10-23","text":"1캠프 파쇄석 (1~6번)"}
-{"cid":"1075","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1832&res_dt=20261024","at":"2026-10-23","text":"파쇄석(5mX7m)"}
+{"cid":"1075","attr":"SITE_SIZE","value":"5×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1832&res_dt=20261024","at":"2026-10-24","text":"1캠프 저수지 옆(1캠프 9번~10번)"}
+{"cid":"1075","attr":"SITE_SIZE","value":"5×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1832&res_dt=20261024","at":"2026-10-24","text":"1캠프 파쇄석 (1~6번)"}
+{"cid":"1075","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1832&res_dt=20261024","at":"2026-10-24","text":"파쇄석(5mX7m)"}
 {"cid":"1085","attr":"AREA_TOTAL_M2","value":6000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1085","attr":"SITE_GAP_M","value":2,"grade":"CONFIRMED","src":"gocamping","text":"2m"}
 {"cid":"1085","attr":"SITE_SIZE","value":"10×7m","grade":"CONFIRMED","src":"gocamping"}
@@ -620,7 +629,7 @@
 {"cid":"1096","attr":"SITE_SIZE","value":"7×6m","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"1096","attr":"SITE_SIZE","value":"8×5m","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"1096","attr":"SITE_SIZE","value":"11×4.5m","grade":"MENTION","src":"review_search","url":"https://blogsailing.com/5080","at":"2025-12-09","quote":"사이트 크기와 개수는 가로 11m 세로 4.5m 3면, 가로 7m 세로 6.5m 1면, 가로 8m 세로 5.5m 3면이다.","text":"11×4.5m","n":1}
-{"cid":"1096","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2066&res_dt=20261024","at":"2026-10-23","text":"파쇄석"}
+{"cid":"1096","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2066&res_dt=20261024","at":"2026-10-24","text":"파쇄석"}
 {"cid":"1100","attr":"AREA_TOTAL_M2","value":5000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1100","attr":"SITE_SIZE","value":"36×5m","grade":"CONFIRMED","src":"gocamping","count":54}
 {"cid":"1100","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":8}
@@ -737,13 +746,13 @@
 {"cid":"1321","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1321","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1324","attr":"AREA_TOTAL_M2","value":5990,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1324","attr":"SITE_SIZE","value":"13×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1843&res_dt=20261024","at":"2026-10-23","text":"파쇄석A2[이용수칙 필독]커플/차박가능"}
-{"cid":"1324","attr":"SITE_SIZE","value":"14×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1843&res_dt=20261024","at":"2026-10-23","text":"파쇄석A1[이용수칙 필독]커플/차박가능"}
-{"cid":"1324","attr":"SITE_SIZE","value":"5×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1843&res_dt=20261024","at":"2026-10-23","text":"차광막하우스타프A4[이용수칙 필독]커플"}
-{"cid":"1324","attr":"SITE_SIZE","value":"6×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1843&res_dt=20261024","at":"2026-10-23","text":"차광막하우스타프C2[이용수칙 필독]커플"}
-{"cid":"1324","attr":"SITE_SIZE","value":"6×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1843&res_dt=20261024","at":"2026-10-23","text":"차광막하우스타프C1[이용수칙 필독]커플"}
+{"cid":"1324","attr":"SITE_SIZE","value":"13×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1843&res_dt=20261024","at":"2026-10-24","text":"파쇄석A2[이용수칙 필독]커플/차박가능"}
+{"cid":"1324","attr":"SITE_SIZE","value":"14×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1843&res_dt=20261024","at":"2026-10-24","text":"파쇄석A1[이용수칙 필독]커플/차박가능"}
+{"cid":"1324","attr":"SITE_SIZE","value":"5×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1843&res_dt=20261024","at":"2026-10-24","text":"차광막하우스타프A4[이용수칙 필독]커플"}
+{"cid":"1324","attr":"SITE_SIZE","value":"6×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1843&res_dt=20261024","at":"2026-10-24","text":"차광막하우스타프C2[이용수칙 필독]커플"}
+{"cid":"1324","attr":"SITE_SIZE","value":"6×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1843&res_dt=20261024","at":"2026-10-24","text":"차광막하우스타프C1[이용수칙 필독]커플"}
 {"cid":"1324","attr":"SITE_SIZE","value":"9×8m","grade":"CONFIRMED","src":"gocamping","count":13}
-{"cid":"1324","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1843&res_dt=20261024","at":"2026-10-23","text":"파쇄석:14M x 8M"}
+{"cid":"1324","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1843&res_dt=20261024","at":"2026-10-24","text":"파쇄석:14M x 8M"}
 {"cid":"1327","attr":"AREA_TOTAL_M2","value":12000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1327","attr":"SITE_SIZE","value":"6×11m","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"1336","attr":"SITE_SIZE","value":"3×3m","grade":"CONFIRMED","src":"gocamping","count":15}
@@ -793,14 +802,14 @@
 {"cid":"1475","attr":"AREA_TOTAL_M2","value":2521,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1475","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1477","attr":"AREA_TOTAL_M2","value":3745,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1477","attr":"SITE_SIZE","value":"4×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=968&res_dt=20261024","at":"2026-10-23","text":"냇가존 타프데크사이트"}
-{"cid":"1477","attr":"SITE_SIZE","value":"5×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=968&res_dt=20261024","at":"2026-10-23","text":"냇가존 타프데크사이트(냇가뷰)"}
-{"cid":"1477","attr":"SITE_SIZE","value":"7×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=968&res_dt=20261024","at":"2026-10-23","text":"냇가뷰파쇄석사이트"}
-{"cid":"1477","attr":"SITE_SIZE","value":"7×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=968&res_dt=20261024","at":"2026-10-23","text":"메타존파쇄석사이트"}
+{"cid":"1477","attr":"SITE_SIZE","value":"4×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=968&res_dt=20261024","at":"2026-10-24","text":"냇가존 타프데크사이트"}
+{"cid":"1477","attr":"SITE_SIZE","value":"5×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=968&res_dt=20261024","at":"2026-10-24","text":"냇가존 타프데크사이트(냇가뷰)"}
+{"cid":"1477","attr":"SITE_SIZE","value":"7×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=968&res_dt=20261024","at":"2026-10-24","text":"냇가뷰파쇄석사이트"}
+{"cid":"1477","attr":"SITE_SIZE","value":"7×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=968&res_dt=20261024","at":"2026-10-24","text":"메타존파쇄석사이트"}
 {"cid":"1477","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":6}
 {"cid":"1477","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping","count":13}
 {"cid":"1477","attr":"SITE_SIZE","value":"6×11m","grade":"CONFIRMED","src":"gocamping","count":1}
-{"cid":"1477","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=968&res_dt=20261024","at":"2026-10-23","text":"타프+데크존"}
+{"cid":"1477","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=968&res_dt=20261024","at":"2026-10-24","text":"타프+데크존"}
 {"cid":"1477","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1477","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1477","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
@@ -921,8 +930,8 @@
 {"cid":"1698","attr":"SITE_SIZE","value":"5×10m","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"1698","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1698","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1703","attr":"SITE_SIZE","value":"6×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=589&res_dt=20261024","at":"2026-10-23","text":"오토캠핑장 4번사이트"}
-{"cid":"1703","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=589&res_dt=20261024","at":"2026-10-23","text":"데크존"}
+{"cid":"1703","attr":"SITE_SIZE","value":"6×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=589&res_dt=20261024","at":"2026-10-24","text":"오토캠핑장 4번사이트"}
+{"cid":"1703","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=589&res_dt=20261024","at":"2026-10-24","text":"데크존"}
 {"cid":"1703","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1704","attr":"AREA_TOTAL_M2","value":31140,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1704","attr":"SITE_SIZE","value":"6×6m","grade":"CONFIRMED","src":"gocamping","count":169}
@@ -940,8 +949,8 @@
 {"cid":"1718","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1719","attr":"AREA_TOTAL_M2","value":4958,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1719","attr":"SITE_GAP_M","value":1,"grade":"CONFIRMED","src":"gocamping","text":"1m"}
-{"cid":"1719","attr":"SITE_SIZE","value":"5×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2251&res_dt=20261024","at":"2026-10-23","text":"오토캠핑 데크(21~23)"}
-{"cid":"1719","attr":"SITE_SIZE","value":"7×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2251&res_dt=20261024","at":"2026-10-23","text":"오토캠핑 파쇄석"}
+{"cid":"1719","attr":"SITE_SIZE","value":"5×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2251&res_dt=20261024","at":"2026-10-24","text":"오토캠핑 데크(21~23)"}
+{"cid":"1719","attr":"SITE_SIZE","value":"7×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2251&res_dt=20261024","at":"2026-10-24","text":"오토캠핑 파쇄석"}
 {"cid":"1719","attr":"SITE_SIZE","value":"4×7m","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"1719","attr":"SITE_SIZE","value":"5×5m","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"1719","attr":"SITE_SIZE","value":"7×10m","grade":"CONFIRMED","src":"gocamping","count":35}
@@ -961,7 +970,7 @@
 {"cid":"1742","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1770","attr":"AREA_TOTAL_M2","value":13845,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1770","attr":"SITE_SIZE","value":"9×8m","grade":"CONFIRMED","src":"gocamping","count":13}
-{"cid":"1770","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=13633&res_dt=20261024","at":"2026-10-23","text":"파쇄석/수영장 크기 10 *35m (대형수영장)"}
+{"cid":"1770","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=13633&res_dt=20261024","at":"2026-10-24","text":"파쇄석/수영장 크기 10 *35m (대형수영장)"}
 {"cid":"1770","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1776","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
 {"cid":"1776","attr":"SITE_SIZE","value":"9×8m","grade":"CONFIRMED","src":"gocamping","count":30}
@@ -1667,6 +1676,7 @@
 {"cid":"3205","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3206","attr":"SITE_SIZE","value":"3×4m","grade":"CONFIRMED","src":"gocamping","count":33}
 {"cid":"3206","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3210","attr":"SITE_SIZE","value":"6×5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3210","attr":"SITE_SIZE","value":"6×5m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hamageddon/224433707262","at":"2026-10-07","quote":"화장실, 샤워장, 개수대, 전기, WIFI 다도해해상국립공원 팔영산야영장 전남광주통합특별시 고흥군 점암면 팔봉길 11-12 목재데크(6X5m)영지: A1~7, A10~12…","text":"6×5m","n":1}
 {"cid":"3210","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3222","attr":"AREA_TOTAL_M2","value":2114,"grade":"CONFIRMED","src":"gocamping"}
@@ -1850,7 +1860,7 @@
 {"cid":"3511","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3519","attr":"AREA_TOTAL_M2","value":1800,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3519","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping","count":10}
-{"cid":"3519","attr":"SITE_SIZE","value":"8×8.5m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/cutedahee100/224438824188","at":"2026-10-12","quote":"파주 마장호수 휴 캠핑장 날짜: 26.10/1-10/3 (2박3일) 가격: 1박 20,000원 (주말 25,000) 사이트: 10번 (8m x 8.5m) - 자동차 주차공간포함 파쇄석","text":"8×8.5m","n":1}
+{"cid":"3519","attr":"SITE_SIZE","value":"8×8.5m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/cutedahee100/224438824188","at":"2026-10-12","quote":"파주 마장호수 휴 캠핑장 날짜: 26.10/1-10/3 (2박3일) 가격: 1박 20,000원 (주말 25,000) 사이트: 10번 (8m x 8.5m) - 자동차 주차공간포함 파쇄석","text":"8×8.5m","n":2}
 {"cid":"3520","attr":"AREA_TOTAL_M2","value":6600,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3520","attr":"SITE_SIZE","value":"6×7m","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"3529","attr":"AREA_TOTAL_M2","value":29057,"grade":"CONFIRMED","src":"gocamping"}
@@ -2191,12 +2201,12 @@
 {"cid":"7143","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
 {"cid":"7151","attr":"AREA_TOTAL_M2","value":3677,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7151","attr":"SITE_GAP_M","value":2,"grade":"CONFIRMED","src":"gocamping","text":"2m"}
-{"cid":"7151","attr":"SITE_SIZE","value":"13×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1961&res_dt=20261024","at":"2026-10-23","text":"솔숲데크 16"}
-{"cid":"7151","attr":"SITE_SIZE","value":"5×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1961&res_dt=20261024","at":"2026-10-23","text":"계곡힐링데크1(몽골 천막)"}
+{"cid":"7151","attr":"SITE_SIZE","value":"13×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1961&res_dt=20261024","at":"2026-10-24","text":"솔숲데크 16"}
+{"cid":"7151","attr":"SITE_SIZE","value":"5×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1961&res_dt=20261024","at":"2026-10-24","text":"계곡힐링데크1(몽골 천막)"}
 {"cid":"7151","attr":"SITE_SIZE","value":"4×4m","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"7151","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"7151","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping","count":2}
-{"cid":"7151","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1961&res_dt=20261024","at":"2026-10-23","text":"5M x 6M/데크존"}
+{"cid":"7151","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1961&res_dt=20261024","at":"2026-10-24","text":"5M x 6M/데크존"}
 {"cid":"7151","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7152","attr":"AREA_TOTAL_M2","value":10000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7152","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
@@ -2285,8 +2295,8 @@
 {"cid":"7205","attr":"AREA_TOTAL_M2","value":10000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7206","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7206","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7206","at":"2024-04-15T00:00:00+09:00","quote":"장수자연관광농원 캠핑장은 동물 이름으로 사이트 존을 구분하는데 최고층 호랑이사이트 존부터 토끼사이트 존까지 파쇄석을 기본으로 사이트 사이즈는 7m×7m 100면과 80면을 운영한다.","text":"7×7m"}
-{"cid":"7206","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1676&res_dt=20261024","at":"2026-10-23","text":"파쇄석. 7,8번 13-9m. 9,10번 13-9m, 11,12번 13-9m, 13,14번 13-8.5m"}
-{"cid":"7206","attr":"SITE_SURFACE","value":"SOIL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1676&res_dt=20261024","at":"2026-10-23","text":"마사토사이트(주말,공휴일만운영)"}
+{"cid":"7206","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1676&res_dt=20261024","at":"2026-10-24","text":"파쇄석. 7,8번 13-9m. 9,10번 13-9m, 11,12번 13-9m, 13,14번 13-8.5m"}
+{"cid":"7206","attr":"SITE_SURFACE","value":"SOIL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1676&res_dt=20261024","at":"2026-10-24","text":"마사토사이트(주말,공휴일만운영)"}
 {"cid":"7207","attr":"AREA_TOTAL_M2","value":160,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7207","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7208","attr":"AREA_TOTAL_M2","value":6000,"grade":"CONFIRMED","src":"gocamping"}
@@ -2299,8 +2309,8 @@
 {"cid":"7210","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7212","attr":"AREA_TOTAL_M2","value":3000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7212","attr":"SITE_GAP_M","value":2,"grade":"CONFIRMED","src":"gocamping","text":"2m"}
-{"cid":"7212","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2064&res_dt=20261024","at":"2026-10-23","text":"CAMP 사이트"}
-{"cid":"7212","attr":"SITE_SURFACE","value":"GRASS","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2064&res_dt=20261024","at":"2026-10-23","text":"8X9 /마사토/인조잔디 운동장앞"}
+{"cid":"7212","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2064&res_dt=20261024","at":"2026-10-24","text":"CAMP 사이트"}
+{"cid":"7212","attr":"SITE_SURFACE","value":"GRASS","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2064&res_dt=20261024","at":"2026-10-24","text":"8X9 /마사토/인조잔디 운동장앞"}
 {"cid":"7214","attr":"AREA_TOTAL_M2","value":8000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7214","attr":"SITE_SIZE","value":"10×9m","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"7214","attr":"SITE_SIZE","value":"6×9m","grade":"CONFIRMED","src":"gocamping","count":18}
@@ -2312,13 +2322,13 @@
 {"cid":"7216","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7218","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7222","attr":"AREA_TOTAL_M2","value":2000,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7224","attr":"SITE_SIZE","value":"14×12m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1697&res_dt=20261024","at":"2026-10-23","text":"A사이트 2팀지정"}
-{"cid":"7224","attr":"SITE_SIZE","value":"3.6×5.4m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1697&res_dt=20261024","at":"2026-10-23","text":"* A사이트(데크)"}
-{"cid":"7224","attr":"SITE_SIZE","value":"9×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1697&res_dt=20261024","at":"2026-10-23","text":"* A사이트(파쇄석)"}
-{"cid":"7224","attr":"SITE_SIZE","value":"9×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1697&res_dt=20261024","at":"2026-10-23","text":"* B사이트(데크)"}
+{"cid":"7224","attr":"SITE_SIZE","value":"14×12m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1697&res_dt=20261024","at":"2026-10-24","text":"A사이트 2팀지정"}
+{"cid":"7224","attr":"SITE_SIZE","value":"3.6×5.4m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1697&res_dt=20261024","at":"2026-10-24","text":"* A사이트(데크)"}
+{"cid":"7224","attr":"SITE_SIZE","value":"9×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1697&res_dt=20261024","at":"2026-10-24","text":"* A사이트(파쇄석)"}
+{"cid":"7224","attr":"SITE_SIZE","value":"9×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1697&res_dt=20261024","at":"2026-10-24","text":"* B사이트(데크)"}
 {"cid":"7224","attr":"SITE_SIZE","value":"3×6m","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7224","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1697&res_dt=20261024","at":"2026-10-23","text":"데크"}
-{"cid":"7224","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1697&res_dt=20261024","at":"2026-10-23","text":"파쇄석"}
+{"cid":"7224","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1697&res_dt=20261024","at":"2026-10-24","text":"데크"}
+{"cid":"7224","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=1697&res_dt=20261024","at":"2026-10-24","text":"파쇄석"}
 {"cid":"7226","attr":"AREA_TOTAL_M2","value":2000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7226","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"7226","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -2379,8 +2389,8 @@
 {"cid":"7353","attr":"AREA_TOTAL_M2","value":9283,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7353","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7359","attr":"AREA_TOTAL_M2","value":3210,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7375","attr":"SITE_SIZE","value":"8×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261024","at":"2026-10-23","text":"동당미마운틴 구역"}
-{"cid":"7375","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261024","at":"2026-10-23","text":"파쇄석"}
+{"cid":"7375","attr":"SITE_SIZE","value":"8×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261024","at":"2026-10-24","text":"동당미마운틴 구역"}
+{"cid":"7375","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261024","at":"2026-10-24","text":"파쇄석"}
 {"cid":"7380","attr":"AREA_TOTAL_M2","value":1118,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7380","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7380","attr":"SITE_SIZE","value":"5×6m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/thaekst/224279051976","at":"2026-05-09","quote":"사이트 크기: 5m x 6m","text":"5×6m","n":1}
@@ -2395,7 +2405,7 @@
 {"cid":"7402","attr":"SITE_SIZE","value":"5×8m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7402","at":"2025-10-02T00:00:00+09:00","quote":"바닥은 배수가 탁월하고 습하지 않은 콩자갈으로 이뤄졌으며, 사이트 크기는 가로 5m 세로 8m다.","text":"5×8m"}
 {"cid":"7402","attr":"SITE_SIZE","value":"5×8m","grade":"MENTION","src":"review_search","url":"https://blogsailing.com/4675","at":"2025-12-11","quote":"바닥은 배수가 탁월하고 습하지 않은 콩자갈으로 이뤄졌으며, 사이트 크기는 가로 5m 세로 8m다.","text":"5×8m","n":1}
 {"cid":"7403","attr":"AREA_TOTAL_M2","value":132,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"7403","attr":"SITE_SIZE","value":"7×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17317&res_dt=20261024","at":"2026-10-23","text":"카라반.캠핑카,폴딩트레일러"}
+{"cid":"7403","attr":"SITE_SIZE","value":"7×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17317&res_dt=20261024","at":"2026-10-24","text":"카라반.캠핑카,폴딩트레일러"}
 {"cid":"7403","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7403","at":"2025-08-20T00:00:00+09:00","quote":"캠핑장에는 파쇄석으로 이뤄진 가로 7m 세로 8m의 일반야영장 10면을 마련했다.","text":"7×8m"}
 {"cid":"7405","attr":"AREA_TOTAL_M2","value":120,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7405","attr":"SITE_SIZE","value":"6×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14420&res_dt=20261024","at":"2026-10-24","text":"SITE Free"}
@@ -2407,7 +2417,7 @@
 {"cid":"7407","attr":"AREA_TOTAL_M2","value":16528,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7407","attr":"SITE_GAP_M","value":4,"grade":"CONFIRMED","src":"gocamping","text":"4m"}
 {"cid":"7407","attr":"SITE_SIZE","value":"10×8m","grade":"CONFIRMED","src":"gocamping","count":32}
-{"cid":"7407","attr":"SITE_SIZE","value":"6×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/xd_ox/224359877093","at":"2026-07-28","quote":"위치 : 충북 괴산군 칠성면 쌍곡로 322 ⏰ 체크인 : 입촌일 14시 ~ 체크아웃 : 퇴촌일 12시 ⛺️ 사이트 크기 : 6*8m 🤫 매너타임 : 21시 ~ 익일 08시 🎡 부대시설 : 쌍곡계곡, 매점, 개수대, 샤워실, 전자렌지, 물놀이 기구/캠…","text":"6×8m","n":1}
+{"cid":"7407","attr":"SITE_SIZE","value":"6×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/xd_ox/224359877093","at":"2026-07-28","quote":"위치 : 충북 괴산군 칠성면 쌍곡로 322 ⏰ 체크인 : 입촌일 14시 ~ 체크아웃 : 퇴촌일 12시 ⛺️ 사이트 크기 : 6*8m 🤫 매너타임 : 21시 ~ 익일 08시 🎡 부대시설 : 쌍곡계곡, 매점, 개수대, 샤워실, 전자렌지, 물놀이 기구/캠…","text":"6×8m","n":2}
 {"cid":"7414","attr":"AREA_TOTAL_M2","value":1800,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7424","attr":"AREA_TOTAL_M2","value":3376,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7430","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -2564,8 +2574,8 @@
 {"cid":"7752","attr":"AREA_TOTAL_M2","value":2260,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7755","attr":"AREA_TOTAL_M2","value":10000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7755","attr":"SITE_SIZE","value":"6×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/kgx792/224085474050","at":"2025-11-23","quote":"양주 하늘캠핑장 양주에 있는 캠핑장을 종종 다녔지만 이번 캠핑장이 뷰가 좋았다 E5 데크 자리 (6*8m) E5의...","text":"6×8m","n":1}
-{"cid":"7755","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3658&res_dt=20261024","at":"2026-10-23","text":"데크 (5m*6m)"}
-{"cid":"7755","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3658&res_dt=20261024","at":"2026-10-23","text":"데크(1,2)/파쇄석(3)"}
+{"cid":"7755","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3658&res_dt=20261024","at":"2026-10-24","text":"데크 (5m*6m)"}
+{"cid":"7755","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3658&res_dt=20261024","at":"2026-10-24","text":"데크(1,2)/파쇄석(3)"}
 {"cid":"7757","attr":"AREA_TOTAL_M2","value":31673,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7757","attr":"SITE_SIZE","value":"6×6m","grade":"CONFIRMED","src":"gocamping","count":17}
 {"cid":"7757","attr":"SITE_SIZE","value":"6×7m","grade":"CONFIRMED","src":"gocamping","count":12}
@@ -2625,7 +2635,7 @@
 {"cid":"7846","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7848","attr":"AREA_TOTAL_M2","value":19210,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7848","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
-{"cid":"7848","attr":"SITE_SIZE","value":"8×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2884&res_dt=20261024","at":"2026-10-23","text":"B구역(대형)"}
+{"cid":"7848","attr":"SITE_SIZE","value":"8×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2884&res_dt=20261024","at":"2026-10-24","text":"B구역(대형)"}
 {"cid":"7848","attr":"SITE_SIZE","value":"5.3×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7848","attr":"SITE_SIZE","value":"5.3×7m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/pizza486/223108429762","at":"2023-05-22","quote":"장소 : 괴산 화양동야영장 사이트 : 24번/25 사이트 (5.3m X 7.0m) 정원 : 4명+4명 비용 : 60,000원 (2사이트) 이용시간 : 입실 13:00 ~ 퇴실 12:00 매너타임 : 23:00~07:00 날씨 : 맑음, 더움, 시원,…","text":"5.3×7m","n":1}
 {"cid":"7848","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
@@ -2768,7 +2778,7 @@
 {"cid":"8003","attr":"SITE_GAP_M","value":6,"grade":"CONFIRMED","src":"gocamping","text":"6m"}
 {"cid":"8003","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8006","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"8006","attr":"SITE_SIZE","value":"7×7m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/lovely_dduyeoni/223702137013","at":"2024-12-22","quote":"전구역 파쇄석 7m x 7m…","text":"7×7m","n":1}
+{"cid":"8006","attr":"SITE_SIZE","value":"7×7m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/lovely_dduyeoni/223702137013","at":"2024-12-22","quote":"전구역 파쇄석 7m x 7m…","text":"7×7m","n":2}
 {"cid":"8007","attr":"AREA_TOTAL_M2","value":1500,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8007","attr":"SITE_GAP_M","value":2,"grade":"CONFIRMED","src":"gocamping","text":"2m"}
 {"cid":"8008","attr":"AREA_TOTAL_M2","value":677,"grade":"CONFIRMED","src":"gocamping"}
@@ -2863,7 +2873,7 @@
 {"cid":"8084","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
 {"cid":"8084","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8086","attr":"AREA_TOTAL_M2","value":9808,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"8086","attr":"SITE_SIZE","value":"5×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3894&res_dt=20261024","at":"2026-10-23","text":"카라반, 캠핑카 사이트"}
+{"cid":"8086","attr":"SITE_SIZE","value":"5×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3894&res_dt=20261024","at":"2026-10-24","text":"카라반, 캠핑카 사이트"}
 {"cid":"8086","attr":"SITE_SIZE","value":"9×8m","grade":"MENTION","src":"review_search","url":"https://sites.google.com/view/namhaecamping/%ED%99%88/%EC%BA%A0%ED%95%91%EC%9E%A5-%EC%95%88%EB%82%B4","quote":"- 캠핑사이트 18면 (사이드주차 포함 9×8m","text":"9×8m","n":1}
 {"cid":"8087","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=8087","at":"2026-08-26T00:00:00+09:00","quote":"사이트 크기는 가로 6m 세로 8m다.","text":"6×8m"}
 {"cid":"8087","attr":"SITE_SIZE","value":"3×3m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/tripnb/223965527126","at":"2025-08-12","quote":"동구 팔공산로 237길 47, 도심에서 약 30분 사이트 구성 데크 소형 25면(3×3m), 대형 4면(3.5×4.5m), 총 29면 이용 시간 입실 13:00~21:00, 퇴실 익일...","text":"3×3m","n":4}
@@ -2875,8 +2885,8 @@
 {"cid":"8103","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
 {"cid":"8103","attr":"SITE_SIZE","value":"9×6m","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"8103","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"8104","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3730&res_dt=20261024","at":"2026-10-23","text":"데크"}
-{"cid":"8104","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3730&res_dt=20261024","at":"2026-10-23","text":"데크,파쇄석"}
+{"cid":"8104","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3730&res_dt=20261024","at":"2026-10-24","text":"데크"}
+{"cid":"8104","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3730&res_dt=20261024","at":"2026-10-24","text":"데크,파쇄석"}
 {"cid":"8106","attr":"AREA_TOTAL_M2","value":3800,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8106","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8109","attr":"SITE_GAP_M","value":4,"grade":"CONFIRMED","src":"gocamping","text":"4m"}
@@ -2963,10 +2973,10 @@
 {"cid":"100010","attr":"SITE_SIZE","value":"6×9m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100010","at":"2025-09-04T00:00:00+09:00","quote":"사이트 크기는 가로 6m 세로 9m다.","text":"6×9m"}
 {"cid":"100010","attr":"SITE_SIZE","value":"5×7m","grade":"MENTION","src":"review_search","url":"https://sailing-blog.click/1806","at":"2025-09-26","quote":"사이트 크기와 개수는 가로 5m 세로 7m 9면, 가로 4m 세로 5m 3면이다.","text":"5×7m","n":1}
 {"cid":"100010","attr":"SITE_SIZE","value":"6×9m","grade":"MENTION","src":"review_search","url":"https://leports.sailing-blog.click/4586","at":"2026-01-30","quote":"사이트 크기는 가로 6m, 세로 9m다.","text":"6×9m","n":2}
-{"cid":"100013","attr":"SITE_SIZE","value":"5×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17846&res_dt=20261024","at":"2026-10-23","text":"배산임수존(데크스페셜)"}
-{"cid":"100013","attr":"SITE_SIZE","value":"6.2×4.2m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17846&res_dt=20261024","at":"2026-10-23","text":"배산임수 미니 데크"}
-{"cid":"100013","attr":"SITE_SIZE","value":"7×11m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17846&res_dt=20261024","at":"2026-10-23","text":"배산임수존(파쇄석스페셜)"}
-{"cid":"100013","attr":"SITE_SIZE","value":"7×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17846&res_dt=20261024","at":"2026-10-23","text":"노을존(애견동반가능)"}
+{"cid":"100013","attr":"SITE_SIZE","value":"5×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17846&res_dt=20261024","at":"2026-10-24","text":"배산임수존(데크스페셜)"}
+{"cid":"100013","attr":"SITE_SIZE","value":"6.2×4.2m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17846&res_dt=20261024","at":"2026-10-24","text":"배산임수 미니 데크"}
+{"cid":"100013","attr":"SITE_SIZE","value":"7×11m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17846&res_dt=20261024","at":"2026-10-24","text":"배산임수존(파쇄석스페셜)"}
+{"cid":"100013","attr":"SITE_SIZE","value":"7×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17846&res_dt=20261024","at":"2026-10-24","text":"노을존(애견동반가능)"}
 {"cid":"100013","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100015","attr":"SITE_SIZE","value":"10×9.5m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100015","at":"2025-01-22T00:00:00+09:00","quote":"사이트 크기는 가로 10m 세로 9.5m 등 다양하다.","text":"10×9.5m"}
 {"cid":"100015","attr":"SITE_SIZE","value":"11×8.5m","grade":"CONFIRMED","src":"gocamping"}
@@ -3158,28 +3168,28 @@
 {"cid":"100307","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100309","attr":"SITE_SIZE","value":"5×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100309","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100311","attr":"SITE_SIZE","value":"3.5×4.5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17604&res_dt=20261024","at":"2026-10-23","text":"소나무숲 백패킹[파쇄석]"}
-{"cid":"100311","attr":"SITE_SIZE","value":"4×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17604&res_dt=20261024","at":"2026-10-23","text":"소나무숲 백패킹[데크]"}
-{"cid":"100311","attr":"SITE_SIZE","value":"6×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17604&res_dt=20261024","at":"2026-10-23","text":"오토캠핑Zone"}
+{"cid":"100311","attr":"SITE_SIZE","value":"3.5×4.5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17604&res_dt=20261024","at":"2026-10-24","text":"소나무숲 백패킹[파쇄석]"}
+{"cid":"100311","attr":"SITE_SIZE","value":"4×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17604&res_dt=20261024","at":"2026-10-24","text":"소나무숲 백패킹[데크]"}
+{"cid":"100311","attr":"SITE_SIZE","value":"6×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17604&res_dt=20261024","at":"2026-10-24","text":"오토캠핑Zone"}
 {"cid":"100311","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100311","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100312","attr":"SITE_SIZE","value":"9×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3937&res_dt=20261024","at":"2026-10-23","text":"호노골"}
+{"cid":"100312","attr":"SITE_SIZE","value":"9×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3937&res_dt=20261024","at":"2026-10-24","text":"호노골"}
 {"cid":"100314","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100315","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3830&res_dt=20261024","at":"2026-10-23","text":"전체10x10m / 데크6x4m"}
-{"cid":"100315","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3830&res_dt=20261024","at":"2026-10-23","text":"파쇄석 / 사이트별 규격 상이함"}
+{"cid":"100315","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3830&res_dt=20261024","at":"2026-10-24","text":"전체10x10m / 데크6x4m"}
+{"cid":"100315","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3830&res_dt=20261024","at":"2026-10-24","text":"파쇄석 / 사이트별 규격 상이함"}
 {"cid":"100315","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100316","attr":"SITE_SIZE","value":"7×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4030&res_dt=20261024","at":"2026-10-23","text":"B존"}
-{"cid":"100316","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4030&res_dt=20261024","at":"2026-10-23","text":"A존"}
-{"cid":"100316","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4030&res_dt=20261024","at":"2026-10-23","text":"파쇄석"}
+{"cid":"100316","attr":"SITE_SIZE","value":"7×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4030&res_dt=20261024","at":"2026-10-24","text":"B존"}
+{"cid":"100316","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4030&res_dt=20261024","at":"2026-10-24","text":"A존"}
+{"cid":"100316","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4030&res_dt=20261024","at":"2026-10-24","text":"파쇄석"}
 {"cid":"100319","attr":"SITE_SIZE","value":"4.5×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100321","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100322","attr":"AREA_TOTAL_M2","value":19260,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100323","attr":"AREA_TOTAL_M2","value":8057,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100323","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100324","attr":"AREA_TOTAL_M2","value":4590,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100324","attr":"SITE_SIZE","value":"5×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=19589&res_dt=20261024","at":"2026-10-23","text":"풀타프존 208호"}
-{"cid":"100324","attr":"SITE_SIZE","value":"5×12m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=19589&res_dt=20261024","at":"2026-10-23","text":"풀타프존 201호"}
-{"cid":"100324","attr":"SITE_SIZE","value":"5×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=19589&res_dt=20261024","at":"2026-10-23","text":"풀타프존 202호"}
+{"cid":"100324","attr":"SITE_SIZE","value":"5×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=19589&res_dt=20261024","at":"2026-10-24","text":"풀타프존 208호"}
+{"cid":"100324","attr":"SITE_SIZE","value":"5×12m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=19589&res_dt=20261024","at":"2026-10-24","text":"풀타프존 201호"}
+{"cid":"100324","attr":"SITE_SIZE","value":"5×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=19589&res_dt=20261024","at":"2026-10-24","text":"풀타프존 202호"}
 {"cid":"100325","attr":"AREA_TOTAL_M2","value":3589,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100329","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100333","attr":"AREA_TOTAL_M2","value":1293,"grade":"CONFIRMED","src":"gocamping"}
@@ -3237,9 +3247,9 @@
 {"cid":"100371","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100371","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100372","attr":"AREA_TOTAL_M2","value":29113,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100372","attr":"SITE_SIZE","value":"8×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4079&res_dt=20261024","at":"2026-10-23","text":"느티나무존"}
-{"cid":"100372","attr":"SITE_SIZE","value":"8×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4079&res_dt=20261024","at":"2026-10-23","text":"버드나무존"}
-{"cid":"100372","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4079&res_dt=20261024","at":"2026-10-23","text":"8m x 5m, 파쇄석"}
+{"cid":"100372","attr":"SITE_SIZE","value":"8×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4079&res_dt=20261024","at":"2026-10-24","text":"느티나무존"}
+{"cid":"100372","attr":"SITE_SIZE","value":"8×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4079&res_dt=20261024","at":"2026-10-24","text":"버드나무존"}
+{"cid":"100372","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4079&res_dt=20261024","at":"2026-10-24","text":"8m x 5m, 파쇄석"}
 {"cid":"100372","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100375","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100376","attr":"AREA_TOTAL_M2","value":8861,"grade":"CONFIRMED","src":"gocamping"}
@@ -3266,9 +3276,9 @@
 {"cid":"100389","attr":"AREA_TOTAL_M2","value":2999,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100389","attr":"SITE_SIZE","value":"4.5×7m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100389","at":"2026-03-18T00:00:00+09:00","quote":"사이트 크기는 가로 4.5m 세로 7m다.","text":"4.5×7m"}
 {"cid":"100389","attr":"SITE_SIZE","value":"4.5×7m","grade":"MENTION","src":"review_search","url":"https://blogsailing.com/6764","at":"2026-03-20","quote":"사이트 크기는 가로 4.5m 세로 7m다.","text":"4.5×7m","n":2}
-{"cid":"100399","attr":"SITE_SIZE","value":"7×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3994&res_dt=20261024","at":"2026-10-23","text":"A 사이트"}
-{"cid":"100399","attr":"SITE_SIZE","value":"8×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3994&res_dt=20261024","at":"2026-10-23","text":"B사이트"}
-{"cid":"100399","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3994&res_dt=20261024","at":"2026-10-23","text":"파쇄석"}
+{"cid":"100399","attr":"SITE_SIZE","value":"7×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3994&res_dt=20261024","at":"2026-10-24","text":"A 사이트"}
+{"cid":"100399","attr":"SITE_SIZE","value":"8×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3994&res_dt=20261024","at":"2026-10-24","text":"B사이트"}
+{"cid":"100399","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3994&res_dt=20261024","at":"2026-10-24","text":"파쇄석"}
 {"cid":"100400","attr":"SITE_SIZE","value":"6×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100403","attr":"AREA_TOTAL_M2","value":6611,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100403","attr":"SITE_GAP_M","value":10,"grade":"CONFIRMED","src":"gocamping","text":"10m"}
@@ -3288,10 +3298,10 @@
 {"cid":"100411","attr":"SITE_SURFACE","value":"DECK","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030116","at":"2026-10-16T09:00:00+09:00"}
 {"cid":"100412","attr":"SITE_SIZE","value":"12×4.2m","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hy1bu3cab2np9y7v8a.com/reservation.html","at":"2026-10-20T01:10:36.109Z","quote":"- 수영장 크기: 12M x 4.2M x 수심 80CM","text":"12×4.2m"}
 {"cid":"100412","attr":"SITE_SIZE","value":"12×4.2m","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100419","attr":"SITE_SIZE","value":"4.8×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17678&res_dt=20261024","at":"2026-10-23","text":"2번 작은데크"}
-{"cid":"100419","attr":"SITE_SIZE","value":"5×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17678&res_dt=20261024","at":"2026-10-23","text":"F호(중) 파쇄석 (5m * 5m)"}
-{"cid":"100419","attr":"SITE_SIZE","value":"6×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17678&res_dt=20261024","at":"2026-10-23","text":"[나무그늘] 가호(대) 파쇄석(6m * 6m)"}
-{"cid":"100419","attr":"SITE_SIZE","value":"6×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17678&res_dt=20261024","at":"2026-10-23","text":"1번 큰데크"}
+{"cid":"100419","attr":"SITE_SIZE","value":"4.8×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17678&res_dt=20261024","at":"2026-10-24","text":"2번 작은데크"}
+{"cid":"100419","attr":"SITE_SIZE","value":"5×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17678&res_dt=20261024","at":"2026-10-24","text":"F호(중) 파쇄석 (5m * 5m)"}
+{"cid":"100419","attr":"SITE_SIZE","value":"6×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17678&res_dt=20261024","at":"2026-10-24","text":"[나무그늘] 가호(대) 파쇄석(6m * 6m)"}
+{"cid":"100419","attr":"SITE_SIZE","value":"6×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17678&res_dt=20261024","at":"2026-10-24","text":"1번 큰데크"}
 {"cid":"100420","attr":"SITE_SIZE","value":"17×9m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100421","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100422","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -3299,17 +3309,17 @@
 {"cid":"100423","attr":"SITE_SIZE","value":"10×9m","grade":"CONFIRMED","src":"gocamping","count":30}
 {"cid":"100423","attr":"SITE_SIZE","value":"15×9m","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"100423","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping","count":26}
-{"cid":"100424","attr":"SITE_SIZE","value":"4.5×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-23","text":"숲속데크 1단지 (4.5*10) 1-10"}
-{"cid":"100424","attr":"SITE_SIZE","value":"4×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-23","text":"숲속데크 2단지 (4*10) 2-27"}
-{"cid":"100424","attr":"SITE_SIZE","value":"4×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-23","text":"숲속데크 2단지 (4*5) 2-24"}
-{"cid":"100424","attr":"SITE_SIZE","value":"4×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-23","text":"데크 2단지 (4*6)"}
-{"cid":"100424","attr":"SITE_SIZE","value":"5×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-23","text":"숲속데크 3단지 (5*10) 3-41"}
-{"cid":"100424","attr":"SITE_SIZE","value":"5×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-23","text":"숲속데크 2단지 (5*5) 2-21"}
-{"cid":"100424","attr":"SITE_SIZE","value":"5×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-23","text":"숲속데크 1단지 (5*6)"}
-{"cid":"100424","attr":"SITE_SIZE","value":"5×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-23","text":"숲속데크 1단지 (5*7)"}
-{"cid":"100424","attr":"SITE_SIZE","value":"6×12m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-23","text":"숲속데크 3단지 (6*12) 3-49"}
-{"cid":"100424","attr":"SITE_SIZE","value":"6×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-23","text":"숲속데크 3단지 (5*7/6*6)"}
-{"cid":"100424","attr":"SITE_SIZE","value":"7×12m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-23","text":"숲속데크 1단지 (7*12) 1-7"}
+{"cid":"100424","attr":"SITE_SIZE","value":"4.5×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-24","text":"숲속데크 1단지 (4.5*10) 1-10"}
+{"cid":"100424","attr":"SITE_SIZE","value":"4×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-24","text":"숲속데크 2단지 (4*10) 2-27"}
+{"cid":"100424","attr":"SITE_SIZE","value":"4×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-24","text":"숲속데크 2단지 (4*5) 2-24"}
+{"cid":"100424","attr":"SITE_SIZE","value":"4×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-24","text":"데크 2단지 (4*6)"}
+{"cid":"100424","attr":"SITE_SIZE","value":"5×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-24","text":"숲속데크 3단지 (5*10) 3-41"}
+{"cid":"100424","attr":"SITE_SIZE","value":"5×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-24","text":"숲속데크 2단지 (5*5) 2-21"}
+{"cid":"100424","attr":"SITE_SIZE","value":"5×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-24","text":"숲속데크 1단지 (5*6)"}
+{"cid":"100424","attr":"SITE_SIZE","value":"5×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-24","text":"숲속데크 1단지 (5*7)"}
+{"cid":"100424","attr":"SITE_SIZE","value":"6×12m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-24","text":"숲속데크 3단지 (6*12) 3-49"}
+{"cid":"100424","attr":"SITE_SIZE","value":"6×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-24","text":"숲속데크 3단지 (5*7/6*6)"}
+{"cid":"100424","attr":"SITE_SIZE","value":"7×12m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024","at":"2026-10-24","text":"숲속데크 1단지 (7*12) 1-7"}
 {"cid":"100424","attr":"SITE_SIZE","value":"6×10m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100424","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100425","attr":"SITE_SIZE","value":"7×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/misssungjin/224279740449","at":"2026-05-09","quote":"퇴실 12시 18번 사이트 : 7X8M 기준인원 4명 50,000...","text":"7×8m","n":1}
@@ -3317,10 +3327,10 @@
 {"cid":"100426","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100427","attr":"AREA_TOTAL_M2","value":4667,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100428","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100429","attr":"SITE_SIZE","value":"7.5×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4020&res_dt=20261024","at":"2026-10-23","text":"물새구역"}
-{"cid":"100429","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4020&res_dt=20261024","at":"2026-10-23","text":"7.5 x (8~9)m/자갈바닥(파쇄석)"}
+{"cid":"100429","attr":"SITE_SIZE","value":"7.5×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4020&res_dt=20261024","at":"2026-10-24","text":"물새구역"}
+{"cid":"100429","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4020&res_dt=20261024","at":"2026-10-24","text":"7.5 x (8~9)m/자갈바닥(파쇄석)"}
 {"cid":"100431","attr":"SITE_SIZE","value":"5×7m","grade":"MENTION","src":"review_search","url":"https://softly2.tistory.com/883","at":"2026-08-19","quote":"오토캠핑 초보자라면 전기 사용량 제한(5kWh/일)과 주차 공간 크기(5m×7m)를 반드시 확인해야 합니다.","text":"5×7m","n":1}
-{"cid":"100432","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2123&res_dt=20261024","at":"2026-10-23","text":"파쇄석"}
+{"cid":"100432","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2123&res_dt=20261024","at":"2026-10-24","text":"파쇄석"}
 {"cid":"100434","attr":"SITE_SURFACE","value":"SOIL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100435","attr":"AREA_TOTAL_M2","value":616,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100439","attr":"SITE_SIZE","value":"6×25m","grade":"OPERATOR","src":"operator_discovered","url":"http://jajaknamoo.co.kr/html/reserve.php?cate=01","at":"2026-10-20T01:22:23.135Z","quote":"6*25M, 데크 포함 약 size 12m×30m","text":"6×25m"}
@@ -3329,18 +3339,18 @@
 {"cid":"100450","attr":"AREA_TOTAL_M2","value":9941,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100450","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100451","attr":"AREA_TOTAL_M2","value":2099,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100456","attr":"SITE_SIZE","value":"11×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-23","text":"당일 캠프닉존"}
-{"cid":"100456","attr":"SITE_SIZE","value":"4×3m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-23","text":"프라이빗존"}
-{"cid":"100456","attr":"SITE_SIZE","value":"4×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-23","text":"타프존02(애견울타리)"}
-{"cid":"100456","attr":"SITE_SIZE","value":"6×10.5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-23","text":"잔디사이트(애견울타리)"}
-{"cid":"100456","attr":"SITE_SIZE","value":"6×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-23","text":"파쇄석01"}
-{"cid":"100456","attr":"SITE_SIZE","value":"7×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-23","text":"파쇄석05"}
-{"cid":"100456","attr":"SITE_SIZE","value":"7×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-23","text":"타프존01(애견울타리)"}
-{"cid":"100456","attr":"SITE_SIZE","value":"8×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-23","text":"파쇄석06"}
-{"cid":"100456","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-23","text":"파쇄석09"}
-{"cid":"100456","attr":"SITE_SIZE","value":"8×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-23","text":"파쇄석04"}
-{"cid":"100456","attr":"SITE_SIZE","value":"9.5×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-23","text":"데크"}
-{"cid":"100456","attr":"SITE_SIZE","value":"9×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-23","text":"파쇄석10"}
+{"cid":"100456","attr":"SITE_SIZE","value":"11×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-24","text":"당일 캠프닉존"}
+{"cid":"100456","attr":"SITE_SIZE","value":"4×3m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-24","text":"프라이빗존"}
+{"cid":"100456","attr":"SITE_SIZE","value":"4×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-24","text":"타프존02(애견울타리)"}
+{"cid":"100456","attr":"SITE_SIZE","value":"6×10.5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-24","text":"잔디사이트(애견울타리)"}
+{"cid":"100456","attr":"SITE_SIZE","value":"6×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-24","text":"파쇄석01"}
+{"cid":"100456","attr":"SITE_SIZE","value":"7×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-24","text":"파쇄석05"}
+{"cid":"100456","attr":"SITE_SIZE","value":"7×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-24","text":"타프존01(애견울타리)"}
+{"cid":"100456","attr":"SITE_SIZE","value":"8×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-24","text":"파쇄석06"}
+{"cid":"100456","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-24","text":"파쇄석09"}
+{"cid":"100456","attr":"SITE_SIZE","value":"8×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-24","text":"파쇄석04"}
+{"cid":"100456","attr":"SITE_SIZE","value":"9.5×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-24","text":"데크"}
+{"cid":"100456","attr":"SITE_SIZE","value":"9×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024","at":"2026-10-24","text":"파쇄석10"}
 {"cid":"100456","attr":"SITE_SIZE","value":"4×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100456","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100457","attr":"SITE_SIZE","value":"7×9m","grade":"CONFIRMED","src":"gocamping"}
@@ -3384,9 +3394,9 @@
 {"cid":"100502","attr":"SITE_SIZE","value":"5×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100502","attr":"SITE_SIZE","value":"5×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/maxcamp/224382915767","at":"2026-08-19","quote":"야영장 입실시간 14시 퇴실 시간 13시 이용요금 성수기 30000원 비수기 25000원 평일 17000원 모든 사이트 데크사이트 사이트 크기 5m*8m 야영장 전구역 장작 화목난로 불멍 불가!~ 가스버너 숯 사용 가능 특이사항 다자녀 할인 50% …","text":"5×8m","n":1}
 {"cid":"100504","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100507","attr":"SITE_SIZE","value":"10×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2759&res_dt=20261024","at":"2026-10-23","text":"@파쇄석 캠핑사이트 C존"}
-{"cid":"100507","attr":"SITE_SIZE","value":"4×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2759&res_dt=20261024","at":"2026-10-23","text":"메타세콰이어숲(차박/텐트)"}
-{"cid":"100507","attr":"SITE_SIZE","value":"7×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2759&res_dt=20261024","at":"2026-10-23","text":"NEW 숲속 캠핑사이트"}
+{"cid":"100507","attr":"SITE_SIZE","value":"10×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2759&res_dt=20261024","at":"2026-10-24","text":"@파쇄석 캠핑사이트 C존"}
+{"cid":"100507","attr":"SITE_SIZE","value":"4×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2759&res_dt=20261024","at":"2026-10-24","text":"메타세콰이어숲(차박/텐트)"}
+{"cid":"100507","attr":"SITE_SIZE","value":"7×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=2759&res_dt=20261024","at":"2026-10-24","text":"NEW 숲속 캠핑사이트"}
 {"cid":"100507","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100508","attr":"SITE_SIZE","value":"6×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4051&res_dt=20261024","at":"2026-10-24","text":"B데크"}
 {"cid":"100508","attr":"SITE_SIZE","value":"6×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4051&res_dt=20261024","at":"2026-10-24","text":"강자갈C (타프 존)"}
@@ -3413,14 +3423,14 @@
 {"cid":"100533","attr":"SITE_SIZE","value":"3.6×6m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100533","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100538","attr":"AREA_TOTAL_M2","value":3300,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100538","attr":"SITE_SIZE","value":"10×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024","at":"2026-10-23","text":"A2,"}
-{"cid":"100538","attr":"SITE_SIZE","value":"4.5×7.7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024","at":"2026-10-23","text":"A8"}
-{"cid":"100538","attr":"SITE_SIZE","value":"4.5×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024","at":"2026-10-23","text":"B3"}
-{"cid":"100538","attr":"SITE_SIZE","value":"4.5×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024","at":"2026-10-23","text":"B2"}
-{"cid":"100538","attr":"SITE_SIZE","value":"4×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024","at":"2026-10-23","text":"B1"}
-{"cid":"100538","attr":"SITE_SIZE","value":"9×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024","at":"2026-10-23","text":"A1"}
-{"cid":"100538","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024","at":"2026-10-23","text":"데크 (가로 4.5*세로 8)"}
-{"cid":"100538","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024","at":"2026-10-23","text":"파쇄석 가로9*세로7(주차미포함)"}
+{"cid":"100538","attr":"SITE_SIZE","value":"10×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024","at":"2026-10-24","text":"A2,"}
+{"cid":"100538","attr":"SITE_SIZE","value":"4.5×7.7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024","at":"2026-10-24","text":"A8"}
+{"cid":"100538","attr":"SITE_SIZE","value":"4.5×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024","at":"2026-10-24","text":"B3"}
+{"cid":"100538","attr":"SITE_SIZE","value":"4.5×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024","at":"2026-10-24","text":"B2"}
+{"cid":"100538","attr":"SITE_SIZE","value":"4×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024","at":"2026-10-24","text":"B1"}
+{"cid":"100538","attr":"SITE_SIZE","value":"9×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024","at":"2026-10-24","text":"A1"}
+{"cid":"100538","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024","at":"2026-10-24","text":"데크 (가로 4.5*세로 8)"}
+{"cid":"100538","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024","at":"2026-10-24","text":"파쇄석 가로9*세로7(주차미포함)"}
 {"cid":"100539","attr":"AREA_TOTAL_M2","value":3191,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100539","attr":"SITE_SIZE","value":"12×7m","grade":"CONFIRMED","src":"gocamping","count":2}
 {"cid":"100539","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":16}
@@ -3435,8 +3445,8 @@
 {"cid":"100548","attr":"SITE_SIZE","value":"8×9m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/miri0329/224024267562","at":"2025-09-28","quote":"네이버 예약 가능 사이트 : 8m X 9m 바닥 : 파쇄석 (대형 텐트 설치 가능) 이용시간 : 입실14:00","text":"8×9m","n":1}
 {"cid":"100554","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
 {"cid":"100554","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":8}
-{"cid":"100554","attr":"SITE_SIZE","value":"6×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/nopqda/223938016972","at":"2025-07-18","quote":"논산 숩쏙캠핑장 까페 충청남도 논산시 벌곡면 벌곡로330번길 29-44 ***-****-**** 사이트크기 6m×10m 1박 40000원 (13시 입실, 12시퇴실) 주차장에서 수레로 짐 옮김 숩쏙캠핑장 충청남도 논산시 벌곡면 벌곡로330번길 29-…","text":"6×10m","n":2}
-{"cid":"100555","attr":"SITE_SIZE","value":"7×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17614&res_dt=20261024","at":"2026-10-23","text":"그늘막 존"}
+{"cid":"100554","attr":"SITE_SIZE","value":"6×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/nopqda/223938016972","at":"2025-07-18","quote":"논산 숩쏙캠핑장 까페 충청남도 논산시 벌곡면 벌곡로330번길 29-44 ***-****-**** 사이트크기 6m×10m 1박 40000원 (13시 입실, 12시퇴실) 주차장에서 수레로 짐 옮김 숩쏙캠핑장 충청남도 논산시 벌곡면 벌곡로330번길 29-…","text":"6×10m","n":3}
+{"cid":"100555","attr":"SITE_SIZE","value":"7×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17614&res_dt=20261024","at":"2026-10-24","text":"그늘막 존"}
 {"cid":"100555","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100555","attr":"SITE_SIZE","value":"7×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/eimsoob-/224431584121","at":"2026-10-05","quote":"스마일캠핑장 B-05 번 사이트 09/24(목)~09/26(토) 추석연휴 2박3일 사이트 크기: 파쇄석 7m x 8m 입실 14:00 퇴실 14:00 매너타임 …","text":"7×8m","n":1}
 {"cid":"100556","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -3457,10 +3467,10 @@
 {"cid":"100583","attr":"SITE_SIZE","value":"6×4m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100583","attr":"SITE_SIZE","value":"6×4m","grade":"MENTION","src":"review_search","url":"https://andocamping.nammyeon.kr/","quote":"6 x 4m 사이즈 데크","text":"6×4m","n":1}
 {"cid":"100583","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100584","attr":"SITE_SIZE","value":"11×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4097&res_dt=20261024","at":"2026-10-23","text":"두가족(1번)"}
-{"cid":"100584","attr":"SITE_SIZE","value":"5×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4097&res_dt=20261024","at":"2026-10-23","text":"캠핑사이트"}
-{"cid":"100584","attr":"SITE_SIZE","value":"5×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4097&res_dt=20261024","at":"2026-10-23","text":"차박,캠핑카사이트"}
-{"cid":"100584","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4097&res_dt=20261024","at":"2026-10-23","text":"파쇄석(5mX9m)"}
+{"cid":"100584","attr":"SITE_SIZE","value":"11×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4097&res_dt=20261024","at":"2026-10-24","text":"두가족(1번)"}
+{"cid":"100584","attr":"SITE_SIZE","value":"5×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4097&res_dt=20261024","at":"2026-10-24","text":"캠핑사이트"}
+{"cid":"100584","attr":"SITE_SIZE","value":"5×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4097&res_dt=20261024","at":"2026-10-24","text":"차박,캠핑카사이트"}
+{"cid":"100584","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4097&res_dt=20261024","at":"2026-10-24","text":"파쇄석(5mX9m)"}
 {"cid":"100585","attr":"SITE_SIZE","value":"8×10m","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/daehoesan","at":"2026-10-15T09:00:00+09:00","text":"파쇄석 오토 A구역","count":35}
 {"cid":"100585","attr":"SITE_SIZE","value":"8×9m","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/daehoesan","at":"2026-10-15T09:00:00+09:00","text":"가족 잔디 B구역","count":20}
 {"cid":"100585","attr":"SITE_SURFACE","value":"GRASS","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/daehoesan","at":"2026-10-15T09:00:00+09:00"}
@@ -3495,9 +3505,9 @@
 {"cid":"100628","attr":"AREA_TOTAL_M2","value":12894,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100628","attr":"SITE_GAP_M","value":1,"grade":"CONFIRMED","src":"gocamping","text":"1m"}
 {"cid":"100628","attr":"SITE_SIZE","value":"7×7m","grade":"OPERATOR","src":"operator_homepage","url":"https://noricamp.com/price/budget","at":"2026-10-20T01:26:31.333Z","quote":"자동차 야영장은 파쇄석으로 이뤄졌으며, 사이트 크기는 가로 7m 세로 7m다.","text":"7×7m"}
-{"cid":"100629","attr":"SITE_SIZE","value":"8×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14857&res_dt=20261024","at":"2026-10-23","text":"H사이트(섶다리마을/뒤팀없을시 15시퇴실)"}
-{"cid":"100629","attr":"SITE_SIZE","value":"8×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14857&res_dt=20261024","at":"2026-10-23","text":"W사이트(섶다리마을/뒤팀없을시 15시퇴실)"}
-{"cid":"100629","attr":"SITE_SIZE","value":"8×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14857&res_dt=20261024","at":"2026-10-23","text":"타프존((섶다리마을/뒤팀없을시 15시퇴실)"}
+{"cid":"100629","attr":"SITE_SIZE","value":"8×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14857&res_dt=20261024","at":"2026-10-24","text":"H사이트(섶다리마을/뒤팀없을시 15시퇴실)"}
+{"cid":"100629","attr":"SITE_SIZE","value":"8×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14857&res_dt=20261024","at":"2026-10-24","text":"W사이트(섶다리마을/뒤팀없을시 15시퇴실)"}
+{"cid":"100629","attr":"SITE_SIZE","value":"8×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14857&res_dt=20261024","at":"2026-10-24","text":"타프존((섶다리마을/뒤팀없을시 15시퇴실)"}
 {"cid":"100630","attr":"AREA_TOTAL_M2","value":33057,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100630","attr":"SITE_SIZE","value":"8×9m","grade":"CONFIRMED","src":"gocamping","count":69}
 {"cid":"100631","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -3527,15 +3537,15 @@
 {"cid":"100662","attr":"AREA_TOTAL_M2","value":2826,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100662","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
 {"cid":"100664","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100665","attr":"SITE_SIZE","value":"6×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4008&res_dt=20261024","at":"2026-10-23","text":"데크1"}
-{"cid":"100665","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4008&res_dt=20261024","at":"2026-10-23","text":"데크석(6mX8m)"}
-{"cid":"100671","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4116&res_dt=20261024","at":"2026-10-23","text":"2사이트 별 1개씩 개별개수대 구비/넓은 규격/파쇄석"}
+{"cid":"100665","attr":"SITE_SIZE","value":"6×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4008&res_dt=20261024","at":"2026-10-24","text":"데크1"}
+{"cid":"100665","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4008&res_dt=20261024","at":"2026-10-24","text":"데크석(6mX8m)"}
+{"cid":"100671","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4116&res_dt=20261024","at":"2026-10-24","text":"2사이트 별 1개씩 개별개수대 구비/넓은 규격/파쇄석"}
 {"cid":"100672","attr":"AREA_TOTAL_M2","value":3889,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100675","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100675","attr":"SITE_SIZE","value":"7×7m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/jmin2080/224300222216","at":"2026-05-29","quote":"내돈내산 인증 방문 을수골별빛계곡 강원특별자치도 홍천군 내면 광원리 493-1 더보기 18번 사이트(7m*7m) 2026.05.예약 출처 : MiNi 정말 몇 년 만의 캠핑...26 '18번 사이트' 입소시간 14:00 퇴소시간 12:00 매너타임 …","text":"7×7m","n":1}
-{"cid":"100676","attr":"SITE_SIZE","value":"10×15m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4211&res_dt=20261024","at":"2026-10-23","text":"대형사이트"}
-{"cid":"100676","attr":"SITE_SIZE","value":"7×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4211&res_dt=20261024","at":"2026-10-23","text":"잔디사이트(선착순존)"}
-{"cid":"100676","attr":"SITE_SIZE","value":"9×13m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4211&res_dt=20261024","at":"2026-10-23","text":"프리미엄사이트"}
+{"cid":"100676","attr":"SITE_SIZE","value":"10×15m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4211&res_dt=20261024","at":"2026-10-24","text":"대형사이트"}
+{"cid":"100676","attr":"SITE_SIZE","value":"7×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4211&res_dt=20261024","at":"2026-10-24","text":"잔디사이트(선착순존)"}
+{"cid":"100676","attr":"SITE_SIZE","value":"9×13m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4211&res_dt=20261024","at":"2026-10-24","text":"프리미엄사이트"}
 {"cid":"100676","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100677","attr":"AREA_TOTAL_M2","value":3971,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100677","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -3550,22 +3560,22 @@
 {"cid":"100685","attr":"SITE_SIZE","value":"6.5×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100685","attr":"SITE_SIZE","value":"6.5×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/lush_s2_/224082383098","at":"2025-11-20","quote":"이번 기록은 무려 1년전..!!ㅎㅎ 24년 10월 다녀온 #제천백운썬밸리 #캠핑장 #7번사이트 후기입니다!ㅋㅋㅋ 백운썬밸리캠핑장 충청북도 제천시 백운면 구학산로 600 백운썬밸리캠핑장 7번 사이트 : 6.5m * 8m (정자 제외) 입실…","text":"6.5×8m","n":1}
 {"cid":"100686","attr":"AREA_TOTAL_M2","value":160,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100697","attr":"SITE_SIZE","value":"9×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14348&res_dt=20261024","at":"2026-10-23","text":"아라오캠 1동/카라반/캠핑카 전용"}
+{"cid":"100697","attr":"SITE_SIZE","value":"9×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14348&res_dt=20261024","at":"2026-10-24","text":"아라오캠 1동/카라반/캠핑카 전용"}
 {"cid":"100699","attr":"SITE_SIZE","value":"8×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/pyengupgrade/224352622264","at":"2026-07-21","quote":"숯, 장작 가능 사이트 파쇄석 8m x 8m 배전반은 사이트마다 있음 매점있음 개수대에 전자렌지 있음 입실 오후2시 퇴실 오전 11시 수영장 시설 좋음 여전히...","text":"8×8m","n":1}
 {"cid":"100700","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100701","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100703","attr":"SITE_SIZE","value":"10×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4223&res_dt=20261024","at":"2026-10-23","text":"C [1~4] 구역"}
-{"cid":"100703","attr":"SITE_SIZE","value":"12×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4223&res_dt=20261024","at":"2026-10-23","text":"B [1,3] 구역"}
-{"cid":"100703","attr":"SITE_SIZE","value":"7×11m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4223&res_dt=20261024","at":"2026-10-23","text":"C [5~11]구역"}
-{"cid":"100703","attr":"SITE_SIZE","value":"8.5×7.5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4223&res_dt=20261024","at":"2026-10-23","text":"B [9~15]구역"}
-{"cid":"100703","attr":"SITE_SIZE","value":"8.5×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4223&res_dt=20261024","at":"2026-10-23","text":"B[18~24]구역"}
-{"cid":"100703","attr":"SITE_SIZE","value":"8×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4223&res_dt=20261024","at":"2026-10-23","text":"A[1~8]구역"}
-{"cid":"100703","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4223&res_dt=20261024","at":"2026-10-23","text":"A [13~18] 조용한 소형견 동반 가능"}
+{"cid":"100703","attr":"SITE_SIZE","value":"10×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4223&res_dt=20261024","at":"2026-10-24","text":"C [1~4] 구역"}
+{"cid":"100703","attr":"SITE_SIZE","value":"12×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4223&res_dt=20261024","at":"2026-10-24","text":"B [1,3] 구역"}
+{"cid":"100703","attr":"SITE_SIZE","value":"7×11m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4223&res_dt=20261024","at":"2026-10-24","text":"C [5~11]구역"}
+{"cid":"100703","attr":"SITE_SIZE","value":"8.5×7.5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4223&res_dt=20261024","at":"2026-10-24","text":"B [9~15]구역"}
+{"cid":"100703","attr":"SITE_SIZE","value":"8.5×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4223&res_dt=20261024","at":"2026-10-24","text":"B[18~24]구역"}
+{"cid":"100703","attr":"SITE_SIZE","value":"8×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4223&res_dt=20261024","at":"2026-10-24","text":"A[1~8]구역"}
+{"cid":"100703","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=4223&res_dt=20261024","at":"2026-10-24","text":"A [13~18] 조용한 소형견 동반 가능"}
 {"cid":"100704","attr":"SITE_SIZE","value":"10×6m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100705","attr":"SITE_SIZE","value":"7×9m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/pizza486/223269476771","at":"2023-11-20","quote":"일시 : 2023년 11월 18일(토) ~19일(일) 1박 2일 장소 : 청주 초정216캠핑장 사이트 : 15번 사이트 (7m X 9m) 정원 : 4명 비용 : 50,000원 이용시간 : 입실 14:00 ~ 퇴실 12:00 매너타임 : 23:00~0…","text":"7×9m","n":1}
 {"cid":"100705","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100709","attr":"SITE_SIZE","value":"8×9m","grade":"CONFIRMED","src":"gocamping","count":30}
-{"cid":"100710","attr":"SITE_SIZE","value":"4.3×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16444&res_dt=20261024","at":"2026-10-23","text":"타프존 (개별 편의시설/에어컨/온돌룸)"}
+{"cid":"100710","attr":"SITE_SIZE","value":"4.3×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16444&res_dt=20261024","at":"2026-10-24","text":"타프존 (개별 편의시설/에어컨/온돌룸)"}
 {"cid":"100711","attr":"SITE_SIZE","value":"5×11m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/qlstmfl123/224043392604","at":"2025-10-16","quote":"1️⃣ 독채 앞 미온수 수영장 크기 : 5m × 11m 수심 : 약 1.1m 온도 : 32~33도 이용시간...","text":"5×11m","n":1}
 {"cid":"100711","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100713","attr":"AREA_TOTAL_M2","value":3059,"grade":"CONFIRMED","src":"gocamping"}
@@ -3574,8 +3584,8 @@
 {"cid":"100719","attr":"SITE_SURFACE","value":"GRAVEL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100724","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100725","attr":"AREA_TOTAL_M2","value":1970,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100728","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3805&res_dt=20261024","at":"2026-10-23","text":"데크(3m×3.6m)"}
-{"cid":"100728","attr":"SITE_SURFACE","value":"GRASS","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3805&res_dt=20261024","at":"2026-10-23","text":"잔디(6mX8m)"}
+{"cid":"100728","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3805&res_dt=20261024","at":"2026-10-24","text":"데크(3m×3.6m)"}
+{"cid":"100728","attr":"SITE_SURFACE","value":"GRASS","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3805&res_dt=20261024","at":"2026-10-24","text":"잔디(6mX8m)"}
 {"cid":"100730","attr":"SITE_SIZE","value":"12×10m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100730","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100733","attr":"AREA_TOTAL_M2","value":995,"grade":"CONFIRMED","src":"gocamping"}
@@ -3839,13 +3849,13 @@
 {"cid":"100996","attr":"SITE_SIZE","value":"8×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=7332&res_dt=20261024","at":"2026-10-24","text":"오토캠핑존"}
 {"cid":"100996","attr":"SITE_SIZE","value":"7×9m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100996","at":"2024-12-02T00:00:00+09:00","quote":"바닥은 파쇄석으로 이루어졌으며, 크기는 가로 7m × 세로 9m로 널찍하다.","text":"7×9m"}
 {"cid":"100998","attr":"AREA_TOTAL_M2","value":2939,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100998","attr":"SITE_SIZE","value":"2.5×3.5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=6909&res_dt=20261024","at":"2026-10-23","text":"정자2번"}
-{"cid":"100998","attr":"SITE_SIZE","value":"2×3m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=6909&res_dt=20261024","at":"2026-10-23","text":"정자1번"}
-{"cid":"100998","attr":"SITE_SIZE","value":"4×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=6909&res_dt=20261024","at":"2026-10-23","text":"7번"}
-{"cid":"100998","attr":"SITE_SIZE","value":"4×4m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=6909&res_dt=20261024","at":"2026-10-23","text":"6번"}
-{"cid":"100998","attr":"SITE_SIZE","value":"4×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=6909&res_dt=20261024","at":"2026-10-23","text":"17번"}
-{"cid":"100998","attr":"SITE_SIZE","value":"5×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=6909&res_dt=20261024","at":"2026-10-23","text":"평상1번"}
-{"cid":"100998","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=6909&res_dt=20261024","at":"2026-10-23","text":"데크(5mX5m)"}
+{"cid":"100998","attr":"SITE_SIZE","value":"2.5×3.5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=6909&res_dt=20261024","at":"2026-10-24","text":"정자2번"}
+{"cid":"100998","attr":"SITE_SIZE","value":"2×3m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=6909&res_dt=20261024","at":"2026-10-24","text":"정자1번"}
+{"cid":"100998","attr":"SITE_SIZE","value":"4×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=6909&res_dt=20261024","at":"2026-10-24","text":"7번"}
+{"cid":"100998","attr":"SITE_SIZE","value":"4×4m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=6909&res_dt=20261024","at":"2026-10-24","text":"6번"}
+{"cid":"100998","attr":"SITE_SIZE","value":"4×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=6909&res_dt=20261024","at":"2026-10-24","text":"17번"}
+{"cid":"100998","attr":"SITE_SIZE","value":"5×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=6909&res_dt=20261024","at":"2026-10-24","text":"평상1번"}
+{"cid":"100998","attr":"SITE_SURFACE","value":"DECK","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=6909&res_dt=20261024","at":"2026-10-24","text":"데크(5mX5m)"}
 {"cid":"100999","attr":"AREA_TOTAL_M2","value":5000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100999","attr":"SITE_SIZE","value":"8×9m","grade":"OPERATOR","src":"operator_homepage","url":"https://www.camperest.kr/campsite/100999","at":"2026-10-19T09:06:29.859Z","quote":"파쇄석 12개 사이트 (8x9m).","text":"8×9m"}
 {"cid":"100999","attr":"SITE_SIZE","value":"8×9m","grade":"CONFIRMED","src":"gocamping"}
@@ -4087,11 +4097,11 @@
 {"cid":"101210","attr":"SITE_SIZE","value":"3.6×5.5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101212","attr":"AREA_TOTAL_M2","value":5207,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101212","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
-{"cid":"101212","attr":"SITE_SIZE","value":"6×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261024","at":"2026-10-23","text":"10번 2층 버스 카라반"}
-{"cid":"101212","attr":"SITE_SIZE","value":"7×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261024","at":"2026-10-23","text":"15번 몽골 텐트"}
-{"cid":"101212","attr":"SITE_SIZE","value":"7×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261024","at":"2026-10-23","text":"12번 캠핑사이트"}
+{"cid":"101212","attr":"SITE_SIZE","value":"6×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261024","at":"2026-10-24","text":"10번 2층 버스 카라반"}
+{"cid":"101212","attr":"SITE_SIZE","value":"7×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261024","at":"2026-10-24","text":"15번 몽골 텐트"}
+{"cid":"101212","attr":"SITE_SIZE","value":"7×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261024","at":"2026-10-24","text":"12번 캠핑사이트"}
 {"cid":"101212","attr":"SITE_SIZE","value":"7×10m","grade":"CONFIRMED","src":"gocamping","count":6}
-{"cid":"101212","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261024","at":"2026-10-23","text":"7m x 9m / 파쇄석"}
+{"cid":"101212","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261024","at":"2026-10-24","text":"7m x 9m / 파쇄석"}
 {"cid":"101214","attr":"SITE_SIZE","value":"3×3m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101214","attr":"SITE_SIZE","value":"3×3m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/chzhclq18/224427190755","at":"2026-09-30","quote":"저희는 약 3m×3m 크기의 어드벤처 8T/C를 설치하고, 앞에 테이블과 의자를 놓았어요.","text":"3×3m","n":1}
 {"cid":"101215","attr":"AREA_TOTAL_M2","value":2889,"grade":"CONFIRMED","src":"gocamping"}
@@ -4210,7 +4220,7 @@
 {"cid":"101278","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101279","attr":"AREA_TOTAL_M2","value":3720,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101281","attr":"AREA_TOTAL_M2","value":4413,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101282","attr":"SITE_SIZE","value":"8×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14423&res_dt=20261024","at":"2026-10-23","text":"*파쇄석"}
+{"cid":"101282","attr":"SITE_SIZE","value":"8×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14423&res_dt=20261024","at":"2026-10-24","text":"*파쇄석"}
 {"cid":"101282","attr":"SITE_SIZE","value":"8×10m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101283","attr":"AREA_TOTAL_M2","value":2918,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101283","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -4266,9 +4276,9 @@
 {"cid":"101319","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101319","attr":"SITE_SURFACE","value":"GRASS","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101323","attr":"AREA_TOTAL_M2","value":5795,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101326","attr":"SITE_SIZE","value":"10×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14425&res_dt=20261024","at":"2026-10-23","text":"오토캠핑 B존"}
-{"cid":"101326","attr":"SITE_SIZE","value":"8×11m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14425&res_dt=20261024","at":"2026-10-23","text":"오토캠핑 A존"}
-{"cid":"101326","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14425&res_dt=20261024","at":"2026-10-23","text":"파쇄석"}
+{"cid":"101326","attr":"SITE_SIZE","value":"10×10m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14425&res_dt=20261024","at":"2026-10-24","text":"오토캠핑 B존"}
+{"cid":"101326","attr":"SITE_SIZE","value":"8×11m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14425&res_dt=20261024","at":"2026-10-24","text":"오토캠핑 A존"}
+{"cid":"101326","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14425&res_dt=20261024","at":"2026-10-24","text":"파쇄석"}
 {"cid":"101329","attr":"AREA_TOTAL_M2","value":2314,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101329","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
 {"cid":"101329","attr":"SITE_SIZE","value":"8×6m","grade":"CONFIRMED","src":"gocamping","count":13}
@@ -4532,7 +4542,7 @@
 {"cid":"101468","attr":"AREA_TOTAL_M2","value":8264,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101468","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
 {"cid":"101468","attr":"SITE_SIZE","value":"8×9m","grade":"CONFIRMED","src":"gocamping","count":20}
-{"cid":"101468","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/paldoculjang/224439230056","at":"2026-10-14","quote":"구름포해변캠핑장 충청남도 태안군 소원면 의항리 154 [사이트 정보 안내 - 등나무존, 두가족] 유형: 오토캠핑 기본 크기: 10m X 10m 바닥","text":"10×10m","n":1}
+{"cid":"101468","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/paldoculjang/224439230056","at":"2026-10-14","quote":"구름포해변캠핑장 충청남도 태안군 소원면 의항리 154 [사이트 정보 안내 - 등나무존, 두가족] 유형: 오토캠핑 기본 크기: 10m X 10m 바닥","text":"10×10m","n":2}
 {"cid":"101469","attr":"AREA_TOTAL_M2","value":3000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101470","attr":"AREA_TOTAL_M2","value":790,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101470","attr":"SITE_GAP_M","value":1,"grade":"CONFIRMED","src":"gocamping","text":"1m"}
@@ -4616,6 +4626,7 @@
 {"cid":"101526","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101527","attr":"AREA_TOTAL_M2","value":3869,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101527","attr":"SITE_SIZE","value":"12×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16861&res_dt=20261024","at":"2026-10-24","text":"오토캠핑존-1번~11번(파쇄석)"}
+{"cid":"101527","attr":"SITE_SIZE","value":"10×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/wkyeon_/224159363455","at":"2026-01-25","quote":"45,000원 캠핑사이트, 기준 4인 (최대 8인) 설명파쇄석,10m x 8m,최소 2박 영업시간 입실 14:00, 퇴실 12:00 캠핑장 분위기 이름 그대로 ‘힐링’이라는 단어가 잘 어울리는 곳.","text":"10×8m","n":1}
 {"cid":"101534","attr":"AREA_TOTAL_M2","value":454,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101534","attr":"SITE_GAP_M","value":1,"grade":"CONFIRMED","src":"gocamping","text":"1m"}
 {"cid":"101534","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping","count":7}
@@ -4652,7 +4663,7 @@
 {"cid":"101569","attr":"AREA_TOTAL_M2","value":17731,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101570","attr":"AREA_TOTAL_M2","value":9500,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101570","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101570","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/fastrabbit_/224035659560","at":"2025-10-09","quote":"60,000 오토캠핑 (사이트 내 주차) 10m x 10m 차박 가능 , 트레일러, 캠핑...","text":"10×10m","n":2}
+{"cid":"101570","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/dms2499/224141787646","at":"2026-01-10","quote":"12:00 캠핑사이트 파쇄석 10mx10m 전화문의 : 010-****-**** 네이버 예약 가능, 캠핏으로 예약 가능 캠핏...","text":"10×10m","n":3}
 {"cid":"101574","attr":"AREA_TOTAL_M2","value":940,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101576","attr":"SITE_SIZE","value":"6×6m","grade":"OPERATOR","src":"operator_discovered","url":"https://chojeonseaforestglamping.kr/reservation.html","at":"2026-10-20T01:26:17.148Z","quote":"- 수영장 크기: 6m x 6m x 70cm","text":"6×6m"}
 {"cid":"101576","attr":"SITE_SIZE","value":"6×6m","grade":"CONFIRMED","src":"gocamping"}
@@ -4803,14 +4814,14 @@
 {"cid":"101669","attr":"SITE_SIZE","value":"9×5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16451&res_dt=20261024","at":"2026-10-24","text":"C존(파쇄석)"}
 {"cid":"101669","attr":"SITE_SIZE","value":"8×7m","grade":"CONFIRMED","src":"gocamping","count":44}
 {"cid":"101669","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101670","attr":"SITE_SIZE","value":"3.5×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024","at":"2026-10-23","text":"데크사이트 B-1"}
-{"cid":"101670","attr":"SITE_SIZE","value":"3.6×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024","at":"2026-10-23","text":"데크사이트 B-2"}
-{"cid":"101670","attr":"SITE_SIZE","value":"3×6.5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024","at":"2026-10-23","text":"이지캠핑 B-3"}
-{"cid":"101670","attr":"SITE_SIZE","value":"3×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024","at":"2026-10-23","text":"이지캠핑 A-3"}
-{"cid":"101670","attr":"SITE_SIZE","value":"3×7.4m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024","at":"2026-10-23","text":"데크사이트 A-1"}
-{"cid":"101670","attr":"SITE_SIZE","value":"4×4.4m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024","at":"2026-10-23","text":"이지캠핑 B-4"}
-{"cid":"101670","attr":"SITE_SIZE","value":"4×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024","at":"2026-10-23","text":"데크사이트 A-2"}
-{"cid":"101670","attr":"SITE_SIZE","value":"6×7.5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024","at":"2026-10-23","text":"파쇄석사이트 A존(A-4)"}
+{"cid":"101670","attr":"SITE_SIZE","value":"3.5×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024","at":"2026-10-24","text":"데크사이트 B-1"}
+{"cid":"101670","attr":"SITE_SIZE","value":"3.6×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024","at":"2026-10-24","text":"데크사이트 B-2"}
+{"cid":"101670","attr":"SITE_SIZE","value":"3×6.5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024","at":"2026-10-24","text":"이지캠핑 B-3"}
+{"cid":"101670","attr":"SITE_SIZE","value":"3×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024","at":"2026-10-24","text":"이지캠핑 A-3"}
+{"cid":"101670","attr":"SITE_SIZE","value":"3×7.4m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024","at":"2026-10-24","text":"데크사이트 A-1"}
+{"cid":"101670","attr":"SITE_SIZE","value":"4×4.4m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024","at":"2026-10-24","text":"이지캠핑 B-4"}
+{"cid":"101670","attr":"SITE_SIZE","value":"4×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024","at":"2026-10-24","text":"데크사이트 A-2"}
+{"cid":"101670","attr":"SITE_SIZE","value":"6×7.5m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024","at":"2026-10-24","text":"파쇄석사이트 A존(A-4)"}
 {"cid":"101672","attr":"AREA_TOTAL_M2","value":9358,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101672","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101673","attr":"AREA_TOTAL_M2","value":3462,"grade":"CONFIRMED","src":"gocamping"}
@@ -5496,6 +5507,7 @@
 {"cid":"102138","attr":"SITE_SIZE","value":"13×6m","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"102138","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":24}
 {"cid":"102138","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102142","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102145","attr":"AREA_TOTAL_M2","value":2470,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102145","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
 {"cid":"102145","attr":"SITE_SIZE","value":"3×6m","grade":"CONFIRMED","src":"gocamping","count":10}
@@ -5580,7 +5592,7 @@
 {"cid":"102234","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":16}
 {"cid":"102234","attr":"SITE_SIZE","value":"9×13m","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"102234","attr":"SITE_SIZE","value":"9×9m","grade":"CONFIRMED","src":"gocamping","count":18}
-{"cid":"102235","attr":"SITE_SIZE","value":"10×12m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=19481&res_dt=20261024","at":"2026-10-23","text":"A1 (방갈로+개별화장실)"}
+{"cid":"102235","attr":"SITE_SIZE","value":"10×12m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=19481&res_dt=20261024","at":"2026-10-24","text":"A1 (방갈로+개별화장실)"}
 {"cid":"102236","attr":"AREA_TOTAL_M2","value":10000,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102236","attr":"SITE_SIZE","value":"11×7m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=20430&res_dt=20261024","at":"2026-10-24","text":"C사이트"}
 {"cid":"102236","attr":"SITE_SIZE","value":"12×19m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=20430&res_dt=20261024","at":"2026-10-24","text":"P-1 두가족 사이트"}
@@ -5611,7 +5623,7 @@
 {"cid":"102285","attr":"SITE_SIZE","value":"10×7m","grade":"CONFIRMED","src":"gocamping","count":33}
 {"cid":"102292","attr":"SITE_SIZE","value":"7×7m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/yoonloveworld/224443393856","at":"2026-10-16","quote":"7m×7m 크기의 파쇄석 오토캠핑 사이트가 마련되어...","text":"7×7m","n":1}
 {"cid":"102293","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102293","attr":"SITE_SIZE","value":"7×7m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/yoonloveworld/224443393856","at":"2026-10-16","quote":"7m×7m 크기의 파쇄석…","text":"7×7m","n":1}
+{"cid":"102293","attr":"SITE_SIZE","value":"7×7m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/yoonloveworld/224443393856","at":"2026-10-16","quote":"7m×7m 크기의 파쇄석…","text":"7×7m","n":2}
 {"cid":"102295","attr":"SITE_SIZE","value":"6×3.3m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/lucas74song/224410060456","at":"2026-09-13","quote":"장골캠핑장 개장 이후 허용된 구역 외의 장소에서 야영금지를 주민과 부녀회에서 계도 중.) 장골해수욕장 야영장은 데크당 4만원의 비용이 들기는 했지만 데크사이즈가 커서(6m*3.3m 추정.","text":"6×3.3m","n":1}
 {"cid":"102303","attr":"AREA_TOTAL_M2","value":5360,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102303","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
@@ -5621,6 +5633,7 @@
 {"cid":"102308","attr":"SITE_SIZE","value":"6×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/shatte_/224359558885","at":"2026-07-27","quote":"야영 사이트 : 총 16면 (6×8m 10면, 5×7m 6면) ⚠️ 바닥 파쇄석...","text":"6×8m","n":1}
 {"cid":"102310","attr":"SITE_SIZE","value":"4×5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102310","attr":"SITE_SIZE","value":"4×5m","grade":"MENTION","src":"review_search","url":"https://darumdeck.tistory.com/5","at":"2026-10-12","quote":"규모: 데크 4m x 5m, 전동 시스템파고라 3m x 4m","text":"4×5m","n":2}
+{"cid":"102315","attr":"SITE_SIZE","value":"8×8.5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102315","attr":"SITE_SIZE","value":"8×8.5m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/cutedahee100/224438824188","at":"2026-10-12","quote":"파주 마장호수 휴 캠핑장 날짜: 26.10/1-10/3 (2박3일) 가격: 1박 20,000원 (주말 25,000) 사이트: 10번 (8m x 8.5m) - 자동차 주차공간포함 파쇄석","text":"8×8.5m","n":1}
 {"cid":"102316","attr":"AREA_TOTAL_M2","value":6280,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102316","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
@@ -5662,9 +5675,37 @@
 {"cid":"102365","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102368","attr":"AREA_TOTAL_M2","value":1732,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102368","attr":"SITE_GAP_M","value":1,"grade":"CONFIRMED","src":"gocamping","text":"1m"}
-{"cid":"park-46770-00014-qc3lb","attr":"SITE_SIZE","value":"6×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=19772&res_dt=20261024","at":"2026-10-23","text":"해변 캠핑장 1~37"}
-{"cid":"park-46770-00014-qc3lb","attr":"SITE_SIZE","value":"8×12m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=19772&res_dt=20261024","at":"2026-10-23","text":"노을 캠핑장 1~20"}
-{"cid":"park-48820-00001-n71qm","attr":"SITE_SIZE","value":"12×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16861&res_dt=20261024","at":"2026-10-23","text":"오토캠핑존-1번~11번(파쇄석)"}
+{"cid":"osm-w256957046","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/256957046","at":"2026-10-24"}
+{"cid":"osm-w256957046","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/smurfshouse/224434528939","at":"2026-10-07","quote":"구미 낙동강 체육공원은 주말 나들이로 피크닉 즐기기에도 좋고, 예쁜 꽃구경도 하기 좋은 곳이며...내 야외물놀이장 옆) 시설: 오토캠핑 사이트 50면 사이트 크기: 10m × 10m 입실·퇴실: 오후 2시 ~ 다음 날 오전…","text":"10×10m","n":1}
+{"cid":"osm-w469937424","attr":"SITE_SIZE","value":"4×5m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/469937424","at":"2026-10-24"}
+{"cid":"osm-w472545129","attr":"SITE_SIZE","value":"10×12m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/472545129","at":"2026-10-24"}
+{"cid":"osm-w618430553","attr":"SITE_SIZE","value":"9×9m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/618430553","at":"2026-10-24"}
+{"cid":"osm-w736741880","attr":"SITE_SIZE","value":"4×5m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/736741880","at":"2026-10-24"}
+{"cid":"osm-w751220519","attr":"SITE_SIZE","value":"10×9m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/751220519","at":"2026-10-24"}
+{"cid":"osm-w751220519","attr":"SITE_SIZE","value":"10×9m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/juddy-_-/224434079754","at":"2026-10-07","quote":"비발디캠핑파크 설악오색점 강원특별자치도...사이트(10x9m), 카라반·대형 텐트 가능, 체크인 13:00","text":"10×9m","n":1}
+{"cid":"osm-w775718528","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/775718528","at":"2026-10-24"}
+{"cid":"osm-w775718528","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/smurfshouse/224434528939","at":"2026-10-07","quote":"구미 낙동강 체육공원은 주말 나들이로 피크닉 즐기기에도 좋고, 예쁜 꽃구경도 하기 좋은 곳이며...내 야외물놀이장 옆) 시설: 오토캠핑 사이트 50면 사이트 크기: 10m × 10m 입실·퇴실: 오후 2시 ~ 다음 날 오전…","text":"10×10m","n":1}
+{"cid":"osm-w789142544","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/789142544","at":"2026-10-24"}
+{"cid":"osm-w1188029707","attr":"SITE_SIZE","value":"3×4m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1188029707","at":"2026-10-24"}
+{"cid":"osm-w1378241447","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1378241447","at":"2026-10-24"}
+{"cid":"osm-w1378241447","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/smurfshouse/224434528939","at":"2026-10-07","quote":"구미 낙동강 체육공원은 주말 나들이로 피크닉 즐기기에도 좋고, 예쁜 꽃구경도 하기 좋은 곳이며...내 야외물놀이장 옆) 시설: 오토캠핑 사이트 50면 사이트 크기: 10m × 10m 입실·퇴실: 오후 2시 ~ 다음 날 오전…","text":"10×10m","n":1}
+{"cid":"park-31170-00001-iqdsx","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-24"}
+{"cid":"park-31170-00001-iqdsx","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/wdw27/224402483348","at":"2026-09-07","quote":"입·퇴실 시간 입실 : 오후 2시 퇴실 : 다음 날 오후 1시 오토캠핑장 사이트 크기는 10m × 10m, 사이트당 차량은 1대까지 이용 가능하고 정원은 4명이에요.","text":"10×10m","n":1}
+{"cid":"park-41220-00288-pes2l","attr":"SITE_SIZE","value":"7.5×5m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-24"}
+{"cid":"park-41285-00035-11naf","attr":"SITE_SIZE","value":"7.5×8m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-24"}
+{"cid":"park-41285-00036-11naf","attr":"SITE_SIZE","value":"7.5×8m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-24"}
+{"cid":"park-46110-00030-vd3n","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-24"}
+{"cid":"park-46110-00030-vd3n","attr":"SITE_SIZE","value":"7×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/ziiloliiz/224440788968","at":"2026-10-13","quote":"7m x 8m, 파쇄석, 텐트 옆 주차 ⏰️ 입실오후 2:00, 퇴실오전 11:00 …","text":"7×8m","n":1}
+{"cid":"park-46770-00014-qc3lb","attr":"SITE_SIZE","value":"6×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=19772&res_dt=20261024","at":"2026-10-24","text":"해변 캠핑장 1~37"}
+{"cid":"park-46770-00014-qc3lb","attr":"SITE_SIZE","value":"8×12m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=19772&res_dt=20261024","at":"2026-10-24","text":"노을 캠핑장 1~20"}
+{"cid":"park-47210-00035-ndg48","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-24"}
+{"cid":"park-47210-00035-ndg48","attr":"SITE_SIZE","value":"5×6m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/haeyada/224133332166","at":"2026-01-04","quote":"오토캠핑장 12번 사이트 번호 5x6m 데크202번 예약 맞은편 데크106번 교환 입실.퇴실 시간 14시 ~ 11시 사이트 이용기간 2박 3일 전자렌지 전자렌지 있음 정수기...있음 여름엔 깨끗한 계곡을 즐길 수 있을 듯함 화천 평화의댐 댐하류공원쪽…","text":"5×6m","n":1}
+{"cid":"park-48820-00001-n71qm","attr":"SITE_SIZE","value":"12×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16861&res_dt=20261024","at":"2026-10-24","text":"오토캠핑존-1번~11번(파쇄석)"}
+{"cid":"park-48820-00001-n71qm","attr":"SITE_SIZE","value":"10×8m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-24"}
+{"cid":"park-48820-00001-n71qm","attr":"SITE_SIZE","value":"10×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/wkyeon_/224159363455","at":"2026-01-25","quote":"남산공원 힐링캠핑장 경상남도 고성군 고성읍 남산로 6-60 처음 가는 캠핑이다 보니...기준 4인 (최대 8인) 설명파쇄석,10m x 8m,최소 2박 영업시간 입실 14:00, 퇴실 12:00 🌳 …","text":"10×8m","n":1}
+{"cid":"park-48840-00001-n71qm","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-24"}
+{"cid":"park-51790-00005-1majq","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-24"}
+{"cid":"park-51790-00005-1majq","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/smurfshouse/224434528939","at":"2026-10-07","quote":"구미 낙동강 체육공원은 주말 나들이로 피크닉 즐기기에도 좋고, 예쁜 꽃구경도 하기 좋은 곳이며...내 야외물놀이장 옆) 시설: 오토캠핑 사이트 50면 사이트 크기: 10m × 10m 입실·퇴실: 오후 2시 ~ 다음 날 오전…","text":"10×10m","n":1}
 {"cid":"pilot-002-sureui","attr":"SITE_SIZE","value":"6×6m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032","at":"2026-10-15T09:00:00+09:00","text":"청소년야영장존 (B1~B14 데크)","count":14}
 {"cid":"pilot-002-sureui","attr":"SITE_SIZE","value":"7×8m","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032","at":"2026-10-15T09:00:00+09:00","text":"국민여가존 (A1~A16 오토)","count":16}
 {"cid":"pilot-002-sureui","attr":"SITE_SURFACE","value":"DECK","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032","at":"2026-10-15T09:00:00+09:00"}
