@@ -43,6 +43,8 @@
 {"cid":"11","attr":"SITE_TYPE","value":"RV","grade":"OPERATOR","src":"operator_homepage","url":"http://www.yangchoncamp.co.kr/bbs/board.php?bo_table=gallery&wr_id=42","at":"2026-10-20T01:26:48.561Z","quote":"C1 ~ D3 카라반 입장 사이트"}
 {"cid":"11","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":12}
 {"cid":"11","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":38}
+{"cid":"11","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/111","at":"2023-06-09","quote":"최신 경남 차박가능 오토캠핑장(자동차 야영장, 글램핑장, 펜션, 캠..... 60 양촌여울"}
+{"cid":"11","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://topsell.tistory.com/229","at":"2024-05-13","quote":"전국 야영장, 캠핑장, 오토캠핑장, 글램핑장 총정리. (주)양촌여울체험캠프 일반야영장,자동차야영장 경상남도 창원시"}
 {"cid":"11","attr":"STAY_GENERAL_SITES","value":38,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"12","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ddakzzilove/224439457633","at":"2026-10-12","quote":"춘천 카라반 캠핑장 어반슬로우시티 2박 3일 솔직후기(오토캠핑 R2 리버뷰 & 카라"}
 {"cid":"12","attr":"SITE_TYPE","value":"DECK","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/94_sujin/224434639426","at":"2026-10-07","quote":"참고!! ​ ​ ​ UN4 데크 사이트, 넓고 깨끗한 자리 ​ ​ 이번 춘천 캠핑장 캠핑에서 이용한 어반슬로우"}
@@ -534,6 +536,7 @@
 {"cid":"337","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=337","at":"2024-05-02T00:00:00+09:00","quote":"캠핑장에는 잔디로 이뤄진 일반 야영장 52면과 개인카라반 사이트 5면을 배치했다. 사이트 크기는 가로 7m 세로 8이다. 화로대"}
 {"cid":"337","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":52}
 {"cid":"337","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","count":5}
+{"cid":"337","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/goesan-gun/223464325346","at":"2024-05-31","quote":"괴강국민여가캠핑장은 오토캠핑장으로... 사이트는 파쇄석과 주차공간이 있고 600w 전기분전반, 소화기"}
 {"cid":"337","attr":"STAY_GENERAL_SITES","value":52,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"337","attr":"STAY_RV_SITES","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"343","attr":"SITE_TOTAL","value":25,"grade":"CONFIRMED","src":"gocamping"}
@@ -641,7 +644,9 @@
 {"cid":"373","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/78904651","at":"2026-10-16T05:36:54.021Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"373","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=373","at":"2024-08-28T00:00:00+09:00","quote":"4,000평 넓은 면적에 개인 카라반 사이트 45면으로 이루어져 있으며 바닥은 맨흙이다. 이곳은 이름처럼 노"}
 {"cid":"373","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","count":45}
+{"cid":"373","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/1styijilog/224295154476","at":"2026-05-24","quote":"[경남 산청] 차박 캠핑 @ 황매산 미리내파크 오토캠핑장 (가격, 인원 ..... 야무지게 온천"}
 {"cid":"373","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/kimberry_/224437076462","at":"2026-10-10","quote":"노을캠핑장 국내 오토캠핑 글램핑 카라반 등 이벤트 캠핑여행상품을 지금 바로 실시간으로 예약하세요. m."}
+{"cid":"373","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/machaviewkorea/224432007953","at":"2026-10-05","text":"펜션","quote":"고창 숙박 추천 7곳｜호텔부터 한옥·펜션까지 고창 여행 숙소 정리. 바다와 노을 여행 → 구시포해수욕장 주변 펜"}
 {"cid":"373","attr":"STAY_RV_SITES","value":45,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"379","attr":"SITE_TOTAL","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"379","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":10}
@@ -1024,6 +1029,8 @@
 {"cid":"596","attr":"SITE_TOTAL","value":20,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"596","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=596","at":"2024-04-19T00:00:00+09:00","text":"펜션","quote":"펜션"}
 {"cid":"596","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":20}
+{"cid":"596","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://romance-dal315.tistory.com/308","at":"2025-10-14","quote":"대관령솔내음오토캠핑장. 소금강마을에코센터 오토캠핑장. 솔향강릉오토캠핑장. 안목커피거리카라반캠"}
+{"cid":"596","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://romance-dal315.tistory.com/308","at":"2025-10-14","quote":"주문진글램핑오토캠핑장. 고라니 오토캠핑장. 고성 탑 글램핑 농원. 광민이네 오토캠핑"}
 {"cid":"596","attr":"STAY_GENERAL_SITES","value":20,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"597","attr":"SITE_TOTAL","value":80,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"597","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"http://www.handure.net/","at":"2026-10-20T01:00:45.717Z","quote":"오토캠핑 사이트 70동, 숙소 20실, 축구장과 물놀이터와 강당까지"}
@@ -1092,6 +1099,8 @@
 {"cid":"628","attr":"STAY_GLAMPING_SITES","value":11,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"630","attr":"SITE_TOTAL","value":43,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"630","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":43}
+{"cid":"630","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/information-store/224373059118","at":"2026-08-09","quote":"[8월 애견동반 글램핑 총정리] 독채 펜스 울타리 & 애견 전용 수영장 ..... 입실 15:"}
+{"cid":"630","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/information-store/224373059118","at":"2026-08-09","text":"독채","quote":"[8월 애견동반 글램핑 총정리] 독채 펜스 울타리 & 애견 전용 수영장 ..... 입실 15:00·퇴실 11"}
 {"cid":"630","attr":"STAY_GENERAL_SITES","value":43,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"632","attr":"SITE_TOTAL","value":27,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"632","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":22}
@@ -1205,6 +1214,7 @@
 {"cid":"677","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://hcm-story.tistory.com/2051","at":"2026-03-08","quote":"편의점 7 천안 디디글램핑 일반야영장, 글램핑 전기,무선인터넷,장…. 천안 동남구 캠핑장 33곳"}
 {"cid":"677","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://hcm-story.tistory.com/2051","at":"2026-03-08","text":"트리하우스","quote":"천안 트리하우스"}
 {"cid":"684","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://campmaniaa.tistory.com/978","at":"2026-10-07","quote":"충북 단양 온달오토캠핑장 사전 예약 할인 조건 | 이 타이밍에 하면 요금이 달라집니다. 그룹 캠"}
+{"cid":"684","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://topsell.tistory.com/255","at":"2024-05-29","quote":"캠핑장도 지역 특색에 맞는 야영장, 글램핑, 카라반, 오토캠핑장등 다양한 형태의 캠핑장이 있습니다.. GO(지오)"}
 {"cid":"689","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,난방기구"}
 {"cid":"689","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,TV,에어컨,냉장고,난방기구,취사도구,내부화장실"}
 {"cid":"689","attr":"INNER_AMENITY","value":"BED","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,난방기구"}
@@ -1282,6 +1292,7 @@
 {"cid":"710","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":6}
 {"cid":"710","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"710","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"710","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/poohmin91/224004304564","at":"2025-09-11","quote":"[캠핑기록 #8] 담터오지캠핑장 차박캠핑 : 1박 2일 후기. 담터오지캠핑장 경기 포천시 관인면 담터길 409"}
 {"cid":"710","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/2724853/224380601295","at":"2026-08-16","quote":"내돈내산 솔직후기 경기북부 포천 담터계곡 담터오지글램핑계곡캠핑장 시설 깨끗하고 아이들 물놀이하기.... 지도 담터오지글램핑 m"}
 {"cid":"710","attr":"STAY_GENERAL_SITES","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"716","attr":"SITE_TOTAL","value":118,"grade":"CONFIRMED","src":"gocamping"}
@@ -1360,6 +1371,8 @@
 {"cid":"766","attr":"SITE_TOTAL","value":69,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"766","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":69}
 {"cid":"766","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"766","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dmsrud2815/223671229932","at":"2024-11-24","quote":"아이들과 놀기 좋은 캠핑장 “합천 대장경 오토캠핑장” 대장경오토캠핑장 경상남도 합천군 가야면 가야산로 1199 대장경 오토캠핑장 - 가격 45,000원 - 매너타임 22시 ~8시 - 기준인원 4명 (성인2명, 미성년"}
+{"cid":"766","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/travel-infoarchive12/224373226337","at":"2026-08-09","quote":"6️⃣ 고창갯벌오토캠핑&글램핑 산보다 체험을 좋아하는 아이에게..."}
 {"cid":"766","attr":"STAY_AUTO_SITES","value":69,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"767","attr":"SITE_TOTAL","value":21,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"767","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":10}
@@ -1851,6 +1864,8 @@
 {"cid":"1042","attr":"SITE_TOTAL","value":60,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1042","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":60}
 {"cid":"1042","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"1042","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://camping-note.tistory.com/6","at":"2026-09-01","text":"통나무집","quote":"오토캠핑 데크 90개에 통나무집 10동을 갖췄고, 이용료는 평일 3만 원, 주말 4만 원 수준으로 알려"}
+{"cid":"1042","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/moodoftheday7/224351188544","at":"2026-07-19","quote":"장점 - 타프존 - 수영장 넓음 - 놀이방 있음 단점 - 노후화된 시설 - 관리 안됨"}
 {"cid":"1042","attr":"STAY_AUTO_SITES","value":60,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1043","attr":"SITE_TOTAL","value":37,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1043","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":37}
@@ -1909,6 +1924,7 @@
 {"cid":"1066","attr":"STAY_GENERAL_SITES","value":35,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1075","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--hj2b21db3q1a410gxnk.com/sub/menu3_1.php","at":"2026-10-20T01:28:11.297Z","quote":"카라반, 트레일러는 예약하시기 전에 예약문의 바랍니다."}
 {"cid":"1075","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.xn--hj2b21db3q1a410gxnk.com/","at":"2026-10-20T01:28:11.297Z","text":"펜션","quote":"펜션/임대트레일러"}
+{"cid":"1075","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/ssaumjil/EnXF/221","at":"2018-02-28","quote":"야영장 O O 충청북도 괴산군 모래재캠핑장 O 충청북도 괴산군 강변오토캠핑장 O 충청북도 제천시 덕동 산마루캠핑장 O 충청북도 괴산군 도레미 캠핑장"}
 {"cid":"1085","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,에어컨,냉장고"}
 {"cid":"1085","attr":"INNER_AMENITY","value":"BED","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,에어컨,냉장고"}
 {"cid":"1085","attr":"INNER_AMENITY","value":"FRIDGE","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,에어컨,냉장고"}
@@ -1990,6 +2006,9 @@
 {"cid":"1119","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://isum.incheon.go.kr/spot/view.do?spotSn=2408080076&key=2407020020","at":"2026-10-19T02:42:30.204Z","text":"펜션","quote":"무지개펜션&캠핑"}
 {"cid":"1119","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":25}
 {"cid":"1119","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"1119","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/434","at":"2024-07-13","quote":"인천시 추천 오토캠핑장 야영장 카라반 관광농원 자연휴양림 체험..... 산장 펜션 테마파크등의"}
+{"cid":"1119","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/434","at":"2024-07-13","quote":"인천시 추천 오토캠핑장 야영장 카라반 관광농원 자연휴양림 체험..... 산장 펜션 테마파크등의 위치와 주소"}
+{"cid":"1119","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/434","at":"2024-07-13","quote":"강화무지개글램핑 인천광역시 강화군 양도면 인산리 224-9번지... 355-20 무지개"}
 {"cid":"1119","attr":"STAY_GENERAL_SITES","value":25,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1129","attr":"SITE_TOTAL","value":44,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1129","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":44}
@@ -2042,6 +2061,7 @@
 {"cid":"1155","attr":"SITE_TOTAL","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1155","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"1155","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://sailing-blog.click/5883","at":"2026-02-23","quote":"일반 오토캠핑 사이트와 별도로, 이지 사이트라고 해서 타프, 텐트, 냉난방 용품이 포함된 사"}
+{"cid":"1155","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://hongun.tistory.com/486","at":"2020-10-21","quote":"전국각지의 캠핑장 모음 전국팔도의 캠핑장 1000개 모음 글램핑장 오..... 망상오토캠핑리조트 제2오토캠핑장 강원도 동해시 망상동 무"}
 {"cid":"1155","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://leports.sailing-blog.click/675","at":"2026-08-11","text":"펜션","quote":"슬로우캠프는 강원도 치악산 동남쪽 영월 무릉도원면 운학리에 위치한 100% 황토 전통 흙집 펜션이다.. 캠핑장은 2025년 5월 리뉴얼을 통해 각 8m &times;"}
 {"cid":"1155","attr":"STAY_GENERAL_SITES","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1173","attr":"SITE_TOTAL","value":40,"grade":"CONFIRMED","src":"gocamping"}
@@ -2146,6 +2166,7 @@
 {"cid":"1258","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"1258","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":37}
 {"cid":"1258","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"1258","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://worldofinfo.tistory.com/2874","at":"2025-02-07","quote":"구만동오토캠핑장 소개. 부대시설: 전기,무선인터넷,장작판매,온수,트렘폴린,놀이터,운동시"}
 {"cid":"1258","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/goguma4354/224262218898","at":"2026-04-24","quote":"강원도 글램핑 캠핑장 백담설화캠핑장 깨끗하고 조용한 휴식 공간. 캠핑장 배치도와 사이"}
 {"cid":"1258","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/forest-bee/224025183619","at":"2025-09-29","text":"펜션","quote":"펜션의 밤조명이 이쁘더라공...ㅎ_ㅎ 여기 숙소 어디냥.... 인제에서 속초"}
 {"cid":"1258","attr":"STAY_GENERAL_SITES","value":37,"grade":"CONFIRMED","src":"gocamping"}
@@ -2414,6 +2435,7 @@
 {"cid":"1447","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"1447","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"1447","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=1447","at":"2024-08-08T00:00:00+09:00","text":"펜션","quote":"비토섬 오토캠핑장은 글램핑, 카라반, 펜션, 야영장이 함께 있는 바다 전망이 좋은 리조트형 캠핑장이다. 카라반과"}
+{"cid":"1447","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/summer_2382/224104874540","at":"2025-12-10","quote":"사천 애견동반캠핑장 개별화장실이 있는 오션뷰 비토섬 오토캠핑장. 사장님도 잠깐 야간 매너타임 안내 해"}
 {"cid":"1447","attr":"STAY_AUTO_SITES","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1447","attr":"STAY_CARAVAN_SITES","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1447","attr":"STAY_GLAMPING_SITES","value":8,"grade":"CONFIRMED","src":"gocamping"}
@@ -2436,6 +2458,7 @@
 {"cid":"1467","attr":"SITE_TOTAL","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1467","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"1467","attr":"STAY_GENERAL_SITES","value":8,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1468","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ai_nerimi/223857968689","at":"2025-05-07","quote":"[남해] 차박 여행, 사촌해수욕장 노지 캠핑장 차박 캠핑 추천. #남해일몰 뷰로 유명한 #사촌해수욕장 안쪽에 #사촌해변야영장.."}
 {"cid":"1468","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/bushman75/224427502477","at":"2026-09-30","text":"펜션","quote":"남해애견동반펜션 아크로펜션, 사촌해수욕장 오션뷰에 반한 남해독채펜션. 되었답니다. ​"}
 {"cid":"1473","attr":"SITE_TOTAL","value":35,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1473","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/970162301","at":"2026-10-16T05:35:06.239Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
@@ -2467,6 +2490,8 @@
 {"cid":"1487","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"http://www.sandicamp.com/page/sub1_1","at":"2026-10-20T01:26:43.544Z","quote":"카라반 및 캠핑카 이용 시 사전에 문의하여 주시기 바랍니다."}
 {"cid":"1487","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":17}
 {"cid":"1487","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"1487","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/160","at":"2023-08-10","quote":"최신 대구, 부산, 대전, 광주, 인천, 서울특별시 차박가능 오토캠핑..... (장동) 산디마을 생태공원 오토캠핑장 대전광역시 대덕"}
+{"cid":"1487","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/160","at":"2023-08-10","quote":"최신 대구, 부산, 대전, 광주, 인천, 서울특별시 차박가능 오토캠핑장(자동차 야영장, 글램핑장, 펜션, 캠프, 카라반, 체험장, 테마파크, 관광농원, 자연휴양림)위"}
 {"cid":"1487","attr":"STAY_GENERAL_SITES","value":17,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1490","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/ssaumjil/EnXF/221","at":"2018-02-28","quote":"화천군 산방환담 휴양림 야영장 O 강원도 평창군 계방산 오토캠핑장 O O 강원도 영월군 섬지골 캠핑장 O O 강원도 횡성군 청태산자연휴양"}
 {"cid":"1490","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/eunwqa63089/223750312590","at":"2025-02-06","quote":"국민여가캠핑장 산방환담 평화의댐오토캠핑장 화천에코스쿨 생태체험장 횡성군 국립자연휴양림관리소 써니힐글램핑 클럽프리모 횡성 별빛마을 캠핑장 위에 리스트 참고하시어 2025년 즐거"}
@@ -2607,6 +2632,7 @@
 {"cid":"1628","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"1628","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"1628","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/besttutor/224444750339","at":"2026-10-17","quote":"오토캠핑장 별바다부산 나이트마켓 연꽃단지 주말 먹거리장터는 낮 12시부터 오후 8"}
+{"cid":"1628","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/caruna1/224436638838","at":"2026-10-09","quote":"전라권 서천 금빛노을 서울캠핑장 소요 별&숲 테마파크 함평 나비마을 서울캠핑장 청원산 가족캠핑장 경상권 영천시 별빛테마마을 야영장·글램핑장 영천 치산관광지 캠핑장 상주 감꽃마을 서울캠핑장 부산항 힐링 야영장"}
 {"cid":"1628","attr":"STAY_GENERAL_SITES","value":15,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1631","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구"}
 {"cid":"1631","attr":"INNER_AMENITY","value":"BED","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구"}
@@ -2633,6 +2659,7 @@
 {"cid":"1632","attr":"SITE_TOTAL","value":28,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1632","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"1632","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":13}
+{"cid":"1632","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://hotel-iu.tistory.com/2068","at":"2024-05-13","text":"펜션","quote":"3: 해뜨는비치하우스펜션. 상호명: 해뜨는비치하우스펜션. 소개글: 가족과 함께오면 좋은펜션"}
 {"cid":"1632","attr":"STAY_CARAVAN_SITES","value":15,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1632","attr":"STAY_GLAMPING_SITES","value":13,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1641","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"OPERATOR","src":"operator_homepage","url":"http://bujacamping.co.kr/default/app/app_info.php?topmenu=3&amp;submenu=1","at":"2026-10-20T01:09:32.738Z","quote":"C-4 (대형견,차박가능) 49㎡ 2/4명 60,000 60,000 60,000 60,000 6"}
@@ -2791,6 +2818,7 @@
 {"cid":"1719","attr":"STAY_GENERAL_SITES","value":36,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1719","attr":"STAY_GLAMPING_SITES","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1723","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/24372324","at":"2026-10-16T05:37:01.756Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
+{"cid":"1723","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/sigint/224427709104","at":"2026-10-01","text":"통나무집","quote":"충북 단양 소선암자연휴양림 통나무집-두악산3인실 숙박 후기. 단양가족여행으로 1박하고 온 소선암자연휴양림"}
 {"cid":"1736","attr":"SITE_TOTAL","value":45,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1736","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":45}
 {"cid":"1736","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/enabler84/224442484039","at":"2026-10-15","quote":"​ 소풍정원은 사이트 옆에 차를 대는 오토캠핑장이 아니어서 지정 주차 후…"}
@@ -2989,6 +3017,9 @@
 {"cid":"1925","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"1925","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"1925","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"1925","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://tourbook.tistory.com/1773","at":"2022-12-21","quote":"천사봉 오토 캠핑장. 글램핑 앤 카라반. 플라워 카라반 펜션. the 休 글램핑. 여주참숯"}
+{"cid":"1925","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://daylifehappy.tistory.com/2822","at":"2024-08-11","quote":"트라움 풀 빌라 글램핑&카라반 [경기도 가평군] (0). 트라움 풀 빌라 글램핑&카라반 [경기도 가평"}
+{"cid":"1925","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://tourbook.tistory.com/1773","at":"2022-12-21","text":"펜션","quote":"플라워 카라반 펜션. the 休 글램핑. 여주참숯마을 캠핑장. 연천 한여울팜파크 글램핑장."}
 {"cid":"1925","attr":"STAY_GENERAL_SITES","value":15,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1925","attr":"STAY_GLAMPING_SITES","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1930","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
@@ -3073,6 +3104,9 @@
 {"cid":"1999","attr":"SITE_TOTAL","value":23,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1999","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":23}
 {"cid":"1999","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"1999","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/111","at":"2023-06-09","quote":"최신 경남 차박가능 오토캠핑장(자동차 야영장, 글램핑장, 펜션, 캠..... 47 아이비오"}
+{"cid":"1999","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/34","at":"2026-07-13","quote":"수영장이 있는 힐링 캠핑장 ✅ ✅ ✅ ***-****-**** 얼음골까투리 펜션&캠핑장 밀양시 일반야영장 반려견 동반이 가능한 얼음골 까투리캠핑장, ✅ ✅ ✅ 055-356-8887 아이비오토캠핑장 밀양시 일반야영장"}
+{"cid":"1999","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/34","at":"2026-07-13","quote":"일반야영장&middot;글램핑. 일반야영장&middot;카라반. 호수랑 오토캠핑장. 그랜드 파파하우스"}
 {"cid":"1999","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/34","at":"2026-07-13","text":"펜션","quote":"수영장이 있는 힐링 캠핑장 ✅ ✅ ✅ ***-****-**** 얼음골까투리 펜션&캠핑장 밀양시 일반야영장 반려견 동반이 가능한 얼음골 까투리캠핑장, ✅"}
 {"cid":"1999","attr":"STAY_AUTO_SITES","value":23,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2000","attr":"INNER_AMENITY","value":"HEATER","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"난방기구"}
@@ -3276,6 +3310,8 @@
 {"cid":"2124","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":300}
 {"cid":"2124","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/loveis1248/224285053597","at":"2026-05-14","quote":"의성 빙계얼음골 야영장 오토캠핑장. 빙계얼음골 야영장 ​ 예전에 맘에 드는 캠핑장 여기저기 검색해서 지도"}
 {"cid":"2124","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/somooncare/224436506388","at":"2026-10-09","quote":"의성 빙계얼음골야영장 카라반 6인용 1박 후기 | 부모님과 아이들 함께한 가족여행. 빙계얼음골야영장"}
+{"cid":"2124","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://hongun.tistory.com/486","at":"2020-10-21","quote":"전국각지의 캠핑장 모음 전국팔도의 캠핑장 1000개 모음 글램핑장 오..... 203-2 얼음골야영장 강원도 양양군 서면 얼음골길 45"}
+{"cid":"2124","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ddoyam_m/224357061104","at":"2026-07-25","text":"펜션","quote":"고성캠핑 경남계곡캠핑장 고성얼음골야영장 캠핑장&펜션. 고성 얼음골캠핑장&펜션 26. 06 Information 주소 : 경"}
 {"cid":"2124","attr":"STAY_GENERAL_SITES","value":300,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2143","attr":"SITE_TOTAL","value":38,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2143","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://www.5gcamp.com/?c=camp&uid=3121&page=view","at":"2026-10-19T02:27:15.463Z","quote":"경기도연천 접근이 용이한 곳에 위치한 깨끗하고 큰나무 그늘이 많은 조용한 가족전용 오토캠핑장입니다."}
@@ -3511,6 +3547,9 @@
 {"cid":"2264","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":7}
 {"cid":"2264","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":25}
 {"cid":"2264","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"2264","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://sailing-blog.click/4468","at":"2024-10-21","quote":"16,000제곱미터 가까이 되는 면적에 10개의 데크 사이트가 있는 일반야영장, 글램핑 10동, 카라반 2대로 글램핑장뿐만 아니라 카라반 숙박과 캠핑도 가능하다.. 또한 글램"}
+{"cid":"2264","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://sailing-blog.click/4468","at":"2024-10-21","quote":"⊙ 산정호수 가족글램핑장. 산정호수 가족글램핑장은 이름처럼 포천 산정호수 내에 자리하는 곳으로"}
+{"cid":"2264","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/blocklionpapa/224412018802","at":"2026-09-15","text":"펜션","quote":"오토캠핑 기준 입실 13시, 퇴실 12시(펜션 이용 시 14시/11시)입니다. 예약은..."}
 {"cid":"2264","attr":"STAY_GENERAL_SITES","value":25,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2266","attr":"SITE_TOTAL","value":17,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2266","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":17}
@@ -3714,8 +3753,8 @@
 {"cid":"2464","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.littlejsb.com/103","at":"2025-04-21","text":"펜션","quote":"운영 형태 : 오토캠핑장, 펜션 병행 운영. 운영 기간 : 연중무휴. 입실/퇴실 시간 : 입실 13:0"}
 {"cid":"2464","attr":"STAY_GENERAL_SITES","value":50,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2472","attr":"SITE_TOTAL","value":70,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2472","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/%ec%98%88%ec%95%bd%ec%95%88%eb%82%b4/","at":"2026-10-23T23:52:07.831Z","quote":"캠핑카, 카라반, 텐트라반, 투폴딩 트레일러는 진입 불가 입니다."}
-{"cid":"2472","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/","at":"2026-10-23T23:52:07.831Z","text":"방갈로","quote":"방갈로전용"}
+{"cid":"2472","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/%ec%98%88%ec%95%bd%ec%95%88%eb%82%b4/","at":"2026-10-24T15:55:52.224Z","quote":"캠핑카, 카라반, 텐트라반, 투폴딩 트레일러는 진입 불가 입니다."}
+{"cid":"2472","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/","at":"2026-10-24T15:55:52.224Z","text":"방갈로","quote":"방갈로전용"}
 {"cid":"2472","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":70}
 {"cid":"2472","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/ichean.camp/VwG0/5","at":"2020-07-02","quote":"033-636-7700 - 화천/딴산유원지 : ***-****-****, 물놀이(계곡) - 원주/두리오토캠핑장 : 033-765-8569, 선착순(50%)/예약(50%), 펜션(예약"}
 {"cid":"2472","attr":"STAY_GENERAL_SITES","value":70,"grade":"CONFIRMED","src":"gocamping"}
@@ -4079,6 +4118,7 @@
 {"cid":"2751","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://slave0.tistory.com/2024","at":"2026-09-30","quote":"충북 증평군 캠핑장 가을 단풍 글램핑 예약 바로가기 | 좌구산 자리 예약 이 버튼이 가장 빠르다. 환불 불가"}
 {"cid":"2751","attr":"STAY_AUTO_SITES","value":11,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2755","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.thebestcamp.co.kr/home/","at":"2026-10-20T01:26:07.167Z","text":"펜션","quote":"주막거리 펜션 H 인기글 편백나무로 되어 있어 은은한 향이 좋은 펜션입니다.원룸형 구"}
+{"cid":"2755","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://canon3210.tistory.com/16121832","at":"2026-06-18","quote":"안국사 입구 통과 ▼ 영주 소백산 오토캠핑장 ▼ 남대리 쪽으로... ▼ 남대교회 통과 ▼ 남대리경로당 통과 ▼ 스톤"}
 {"cid":"2755","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/nuroongji_camper/224297792194","at":"2026-05-27","quote":"​위드옵션스토리 첫 정캠! 카라반·트레일러 유저들의 뜨거운 영주 주막거리캠프. 스텝으로 활동을 하셨습니다"}
 {"cid":"2758","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,난방기구,취사도구,내부화장실,내부샤워실"}
 {"cid":"2758","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,TV,에어컨,냉장고,난방기구,취사도구"}
@@ -4956,6 +4996,8 @@
 {"cid":"3262","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":70}
 {"cid":"3262","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":29}
 {"cid":"3262","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"3262","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/toryne_camping/224445860184","at":"2026-10-19","quote":"경기도 포천시 신북면 탑신로 1259-68 예약방법 : 그래가 앱 반려동물불가능 / 계곡캠핑 / 단풍캠핑 설경캠핑 / 할로윈캠핑 / 차박캠핑 포시즌스오토캠핑장만의 사이트정보 출처 : 그래가앱 포시즌스캠핑장의..."}
+{"cid":"3262","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/30","at":"2026-07-13","quote":"야영장 ✅ ✅ ✅ ***-****-**** 포시즌스 오토캠핑장 포천시 일반야영장 캠핑을 통해 건강한 행복을 느낄 수 있는 곳 ✅ ✅ ✅ 031-535-8585 포천두꺼비 포천시 자동차야영장,글램핑 ✅ ✅ ✅ 0507"}
 {"cid":"3262","attr":"STAY_AUTO_SITES","value":70,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3263","attr":"SITE_TOTAL","value":25,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3263","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://camplink.co.kr:444/","at":"2026-10-20T01:02:24.214Z","quote":"청운오토캠핑장"}
@@ -5300,6 +5342,8 @@
 {"cid":"3440","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":19}
 {"cid":"3440","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/jeju8253/224446980580","at":"2026-10-19","quote":"경상도 합천 여행 합천호 글램핑 경남 오토 캠핑장 추천. 다른 시설은 없어 조용한 편이지만 합천 해피캠핑장 바로 옆 도로"}
 {"cid":"3440","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/172062/224387786474","at":"2026-08-23","quote":"합천 바람흔적글램핑카라반 비추 및 업체에서 신고하는 이유. 듣지도 못했다 누군가는 무서워할 수도"}
+{"cid":"3440","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/pxmxxn/224450145368","at":"2026-10-22","text":"펜션","quote":"글램핑 처음 해봤는데 신기하다 내부는 완전 그냥 펜션같음 동생이 고기를 구워주었어요 덜 익었지만... 내가..."}
+{"cid":"3440","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/drone-pliot/224387691458","at":"2026-08-23","quote":"합천 글램핑 추천 H글램핑 바베큐 무제한 개별화장실 편리한 시설. 아침에 일출을 보며 합천의 일정은 마무리 :) 일반 캠핑"}
 {"cid":"3440","attr":"STAY_GLAMPING_SITES","value":19,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3445","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=3445","at":"2025-06-10T00:00:00+09:00","quote":"맑고 투명한 바다와 바닷가 솔 숲에 위치한 야영장은 데크 사이트와 오토캠핑 사이트가 있다. 밤이면 방파제에 조명이 아름답게 들어온다. 방파제를 따라 걷다"}
 {"cid":"3445","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=3445","at":"2025-06-10T00:00:00+09:00","quote":"맑고 투명한 바다와 바닷가 솔 숲에 위치한 야영장은 데크 사이트와 오토캠핑 사이트가 있다. 밤이면 방파제에 조명이 아름답게 들어온다."}
@@ -5449,6 +5493,7 @@
 {"cid":"3556","attr":"SITE_TOTAL","value":7,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3556","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":7}
 {"cid":"3556","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":7}
+{"cid":"3556","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/pianovella/224446196611","at":"2026-10-19","quote":"화왕산 자연휴양림 카라반 예약 꿀팁! 10만원 요금과 우선예약 공략. 경상남도 창녕의 맑은 숲을"}
 {"cid":"3556","attr":"STAY_GENERAL_SITES","value":7,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3559","attr":"SITE_TOTAL","value":22,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3559","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/25017400","at":"2026-10-16T05:35:24.156Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
@@ -5522,6 +5567,7 @@
 {"cid":"3589","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":12}
 {"cid":"3589","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":28}
 {"cid":"3589","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"3589","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://mikishome.com/929","at":"2026-10-20","quote":"캠핑을 처음 경험한다면 텐트와 침구를 대여하거나 장비가 갖춰진 글램핑 시설을 이용해 보는 것도 좋습니다.. 1박 2일 캠핑 실제 여행비는?."}
 {"cid":"3589","attr":"STAY_CARAVAN_SITES","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3589","attr":"STAY_GENERAL_SITES","value":28,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3597","attr":"SITE_TOTAL","value":14,"grade":"CONFIRMED","src":"gocamping"}
@@ -5580,10 +5626,13 @@
 {"cid":"3622","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"3622","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"3622","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"3622","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/yjsince1990/224048849838","at":"2025-10-21","text":"펜션","quote":"포근한게 좋긴 좋았어요 횡성 캠핑장으로 힐링스토리 강추드립니다 #횡성캠핑 #횡성차박 #횡성여행 #횡성가족여행 #횡성두가족사이트 #횡성캠핑장 #횡성힐링스토리 #횡성우중캠핑 #횡성펜션 #횡성가족캠핑"}
 {"cid":"3622","attr":"STAY_GENERAL_SITES","value":20,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3627","attr":"SITE_TOTAL","value":45,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3627","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":40}
 {"cid":"3627","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","count":5}
+{"cid":"3627","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ckll9000/224424999235","at":"2026-09-28","quote":"내장산로 390 063-538-7955 ​ -무녀도 오토캠핑장 - 4기 주소: 전북특별자치도 군산시 옥도면 무녀도2길 42 ​ -동상"}
+{"cid":"3627","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ho_doo20/224010171618","at":"2025-09-16","quote":"차박캠핑_동상힐링캠핑장. 차박 캠핑 !!! 시작합니다~! 평일이라 하늘도 푸르고"}
 {"cid":"3627","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/5004yurim/224386644560","at":"2026-08-22","text":"펜션","quote":"완주 동상계곡 인근의 펜션, 글램핑장, 캠핑장 등…"}
 {"cid":"3627","attr":"STAY_GENERAL_SITES","value":40,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3627","attr":"STAY_RV_SITES","value":5,"grade":"CONFIRMED","src":"gocamping"}
@@ -5817,10 +5866,14 @@
 {"cid":"6841","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":7}
 {"cid":"6841","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":28}
 {"cid":"6841","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"6841","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/pick_with_mdnew/224415408865","at":"2026-09-18","quote":"대구가족캠핑장 #군위캠프301 #청도참나무숲캠핑장 #경산모골캠핑장 #합천소리길오토캠핑장 #금호강오토캠핑장 #단풍캠핑 #카라반캠핑..."}
+{"cid":"6841","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/13651486/223987605588","at":"2025-08-29","text":"방갈로","quote":"#구름아래캠핑장 #청도캠핑장 #경북캠핑장 #오토캠핑장 #방갈로캠핑..."}
 {"cid":"6841","attr":"STAY_GENERAL_SITES","value":28,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6841","attr":"STAY_GLAMPING_SITES","value":7,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6842","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ly1bj4veoaz8n90af0f.kr/","at":"2026-10-20T01:27:36.451Z","text":"펜션","quote":"캠핑도 즐기고, 펜션도 즐기고!!"}
 {"cid":"6842","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"6842","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://koreavisit.tistory.com/1393","at":"2023-08-12","quote":"횡성 캠핑장, 야영장, 글램핑장, 오토캠핑장 업체, 주소 총정리. 횡성군 숲속야영장 횡성대피소 강원 횡성군 우천면"}
+{"cid":"6842","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://koreavisit.tistory.com/1393","at":"2023-08-12","quote":"횡성 캠핑장, 야영장, 글램핑장, 오토캠핑장 업체, 주소 총정리. 횡성군 숲속야영장 횡성대피소 강원"}
 {"cid":"6850","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://travleap.com/detail/570?lang=ko","at":"2026-10-20T01:03:55.144Z","quote":"뮤지엄비치캠프 (카라반)"}
 {"cid":"6850","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/outofgear/223902825203","at":"2025-06-18","quote":"전남 글램핑 1004뮤지엄파크 뮤지엄 비치캠프 카라반c2. 작년 12월에 다녀왔던"}
 {"cid":"6856","attr":"SITE_TOTAL","value":12,"grade":"CONFIRMED","src":"gocamping"}
@@ -6127,6 +6180,7 @@
 {"cid":"7058","attr":"STAY_CARAVAN_SITES","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7058","attr":"STAY_GENERAL_SITES","value":13,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7059","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7059","at":"2024-06-03T00:00:00+09:00","quote":"천보산휴양림 내에 위치한 오토캠핑장으로 총 9개의 야영데크가 있다. 8개의 야영데크와 1개의 야영데크 스페"}
+{"cid":"7059","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/lhs850825/223343098844","at":"2024-02-03","quote":"포천 캠핑 글램핑 대신 천보산 자연휴양림 암벽등반 등산코스 추천. 저도 이번에 휴양림을"}
 {"cid":"7059","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/traveler_miroo/224422017405","at":"2026-09-24","text":"독채","quote":"천보산자연휴양림, 숲속 독채에서 피톤치드 느끼며 휴식하는 가족 여행지. 입실 14:00~22:00"}
 {"cid":"7060","attr":"SITE_TOTAL","value":25,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7060","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":25}
@@ -6215,6 +6269,7 @@
 {"cid":"7104","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":44}
 {"cid":"7104","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7104","at":"2024-10-24T00:00:00+09:00","quote":"캠핑장 전제 사이트는 카라반이며 사이즈는 3.5m×7.5m 크기 20면을 운영 중이다. 호수의 전망"}
 {"cid":"7104","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":13}
+{"cid":"7104","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/tayadikimi/222692271264","at":"2022-04-05","text":"펜션","quote":"더스퀘어24 펜션 + 남이섬 여행..... #가평여행 #가평1박2일 #태교여행 #24주"}
 {"cid":"7104","attr":"STAY_AUTO_SITES","value":44,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7108","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
 {"cid":"7108","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
@@ -6290,6 +6345,7 @@
 {"cid":"7124","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":47}
 {"cid":"7124","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능 · 개인 카라반 입장 가능"}
 {"cid":"7124","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/yesdashi/224412444190","at":"2026-09-15","quote":"내소힐링캠프 전북특별자치도 부안군 진서면 석포리 314-3 ​ ​ 📍내소힐링캠프📍 ✔️ 위치 : 부안군 진서면 석포리 314-3 ✔️입소 13:00 ✔️퇴소 12:00 내소힐링캠프 부안캠핑장, 전북캠핑장, 전남캠"}
+{"cid":"7124","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/starship116/224323943221","at":"2026-06-22","quote":"변산반도여행 중 또들린 전북캠핑장, 내소힐링캠프 (PV5 차박 캠핑 ..... 내소힐링캠프 전북 부안군 진서면 석포리 314-3 부안숙소로"}
 {"cid":"7124","attr":"STAY_GENERAL_SITES","value":47,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7125","attr":"SITE_TOTAL","value":43,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7125","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/11967169","at":"2026-10-16T05:34:19.886Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
@@ -6402,6 +6458,9 @@
 {"cid":"7155","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":42}
 {"cid":"7155","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7155","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"7155","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/inculent/224441102534","at":"2026-10-14","quote":"차량 1대는 사이트 앞 주차가능 (추가 차량은 현장결제, 주차장 이용) ​ 😴 매너타임 22:00 ~ 08:00 (23시 취침시간) ​ 📌 카라반, 캠핑카, 트레일러 진입가능 (1박...금지) ​ 📌 장박 문의"}
+{"cid":"7155","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://mom-mom.net/travel/properties/690a24f8cc8a39b08e4c69b1?checkin=2026-05-08&checkout=2026-05-09","quote":"남양주 별빛캠핑장을 아이와 함께 간다면? ; 글램핑·카라반은 기준 인원을 초과하면 아동·유아(0~13세까지)도 1인 1박당"}
+{"cid":"7155","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://mom-mom.net/travel/properties/690a24f8cc8a39b08e4c69b1?checkin=2026-05-08&checkout=2026-05-09","text":"펜션","quote":"남양주 별빛캠핑장 회원전용 특가, 아이와 함께 방문후기 | 키즈 호텔, 리조트, 펜션, 글램핑 예약은 맘맘. 글램핑·카라반은 기준 인원을 초과하면 아동·유아"}
 {"cid":"7155","attr":"STAY_AUTO_SITES","value":42,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7155","attr":"STAY_GENERAL_SITES","value":42,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7157","attr":"SITE_TOTAL","value":8,"grade":"CONFIRMED","src":"gocamping"}
@@ -6660,6 +6719,8 @@
 {"cid":"7212","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"7212","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
 {"cid":"7212","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/gdci/kUkj/29","at":"2023-12-11","quote":"전국 오토캠핑장, 무료 차박캠핑장. 화천군 캠플레이 237 강원 화천군 평화의댐 238 강원 화천군 화"}
+{"cid":"7212","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/aindaindaddy/223857051231","at":"2025-05-07","quote":"피크닉이 제격이며, 겨울에는 따뜻한 차박이 가능한 캠플레이의 카라반을 이용하면 쾌적한 캠핑이 가능합니다. #반려동물캠핑장 #애견동반캠핑 #"}
+{"cid":"7212","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/gdci/kUkj/29","at":"2023-12-11","text":"펜션","quote":"화천군 캠플레이 237 강원 화천군 평화의댐 238 강원 화천군 화천그린오토펜션캠핑장 239 강원 화천군 화천생활체육공원 240 강원 횡성군 농거리강변"}
 {"cid":"7212","attr":"SITE_TYPE","value":"PET_SITE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/slow-happiness/224404250290","at":"2026-09-08","quote":"가을 반려견 동반 캠핑장 BEST 7｜단풍 보며 산책하기 좋은 서울 근교 애견캠핑장. 허용 범위는 예약 전 최신 이용규정을 확인해주세요. 🐾 2. 가평"}
 {"cid":"7212","attr":"STAY_AUTO_SITES","value":15,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7214","attr":"SITE_TOTAL","value":28,"grade":"CONFIRMED","src":"gocamping"}
@@ -6905,10 +6966,20 @@
 {"cid":"7281","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/158","at":"2023-08-08","quote":"최신 전남 차박가능 오토캠핑장(자동차 야영장, 글램핑장, 펜션, 캠..... 가능한 오토캠핑 zoozp.tistory.com"}
 {"cid":"7281","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/158","at":"2023-08-08","text":"펜션","quote":"최신 전남 차박가능 오토캠핑장(자동차 야영장, 글램핑장, 펜션, 캠..... 가능한 오토캠핑 zoozp.tistory.com [출처"}
 {"cid":"7286","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1607359206","at":"2026-10-16T05:36:57.946Z","quote":"여행 > 숙박 > 야영,캠핑장 > 글램핑장"}
+{"cid":"7286","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/smartme2/224419388835","at":"2026-09-22","quote":"관광농원 밀양 엄마랑놀자 키즈글램핑 구만동펜션오토캠핑장 무수캠핑장 문장대오토캠핑장 곡성 아리솔 영월달과별캠핑장 춘천하늘캠핑장"}
+{"cid":"7286","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/111","at":"2023-06-09","quote":"최신 경남 차박가능 오토캠핑장(자동차 야영장, 글램핑장, 펜션, 캠..... 18 밀양 엄"}
+{"cid":"7286","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/smartme2/224419388835","at":"2026-09-22","text":"펜션","quote":"가을 여행 캠핑장 경북 영주 풍기소재 비로오토파크캠핑장&펜션 홈..... 관광농원 밀양 엄마랑놀자 키즈글램핑 구만동펜션오토캠핑장 무"}
 {"cid":"7287","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1444525845","at":"2026-10-16T05:36:58.092Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
+{"cid":"7287","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/111","at":"2023-06-09","quote":"최신 경남 차박가능 오토캠핑장(자동차 야영장, 글램핑장, 펜션, 캠..... 구조라항캠핑장"}
+{"cid":"7287","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dailydamda_/223661382161","at":"2024-11-15","quote":"리뷰시작! 궁농오토캠핑장 이용시간 입실 14:00 퇴실 11:00 ​ 매너타임 오후 10시 50 ​ 캠핑장 카라반 이용요금 주말 공휴일 금액동일 일반텐트 차박...궁농오토캠핑장 경상남도"}
+{"cid":"7287","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://topsell.tistory.com/223","at":"2024-05-10","quote":"경상남도에 있는 캠핑장, 글램핑장, 오토캠핑장등을 지역명 가나다순으로 총정리했습니다.. 반려동물 해수욕"}
+{"cid":"7287","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://leports.sailing-blog.click/2557","at":"2026-09-29","text":"펜션","quote":"[경상남도 산청군] 지리산 노을 펜션 (0)"}
 {"cid":"7288","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/198834112","at":"2026-10-16T05:36:58.152Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
+{"cid":"7288","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/kkyuni_dad/224430057726","at":"2026-10-03","quote":"놀이시설 ​ 캠핑요기야 📍 경북 김천시 증산면 주요시설 : 수영장, 계곡 물놀이, 어린이 놀이시설, 체험시설, 카라반 ​ 경상남도​ ​ 거장산오토캠핑장 📍 경남 의령군 주요시설 : 오토캠"}
 {"cid":"7304","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://www.incheoncamp.co.kr/bbs/board.php?bo_table=room&sca=%EC%BA%90%EB%B9%88%ED%85%90%ED%8A%B8&top=2&sub=2&room=1","at":"2026-10-20T01:16:48.155Z","text":"캐빈","quote":"캐빈텐트"}
 {"cid":"7304","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/juan0916/224426400442","at":"2026-09-30","quote":"전용 캠핑·글램핑장'은 반려인과 반려견 모두에게 잊지 못할 추억을... 놀이터' 인천 남"}
+{"cid":"7305","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://hcm-story.tistory.com/1824","at":"2026-02-26","quote":"일반야영장, 자동차야영장, 카라반. 전기,온수,물놀이장,놀이터. 전기,무선인터넷,장작판매,온수,놀이터,운"}
+{"cid":"7305","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://hcm-story.tistory.com/1824","at":"2026-02-26","quote":"편의점 3 낙조힐링캠핑장 - - 4 노을빛바다애글램핑 자동차야영장, 글램핑 전기,무선인터넷,장작판매,온수,물놀이장,놀이터 5"}
 {"cid":"7309","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ok0b89oba438bl5t48g.com/","at":"2026-10-20T00:52:42.673Z","quote":"쥬라기카라반 | 수려한 자연 경관을 자랑하는 쥬라기카라반으로 놀러오세요."}
 {"cid":"7309","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--ok0b89oba438bl5t48g.com/","at":"2026-10-20T00:52:42.673Z","text":"펜션","quote":"펜션소개"}
 {"cid":"7309","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blogsailing.com/4747","at":"2026-06-18","quote":"[인천광역시 강화군] 강화 힐링숲 글램핑 (0). [인천광역시 강화군] 강화 힐링숲 글램핑. 사이트 소개 및 문"}
@@ -7135,11 +7206,16 @@
 {"cid":"7470","attr":"SITE_TOTAL","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7470","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=7470","at":"2024-07-04T00:00:00+09:00","text":"방갈로","quote":"방갈로펜션9동, 캠핑데크3동"}
 {"cid":"7470","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":3}
+{"cid":"7470","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/36","at":"2026-07-15","quote":"골드문 오토캠핑장. 나정고운모래해변 오토캠핑장. 일반야영장,글램핑. 일반야영장,카라반,글"}
+{"cid":"7470","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/36","at":"2026-07-15","quote":"일반야영장,카라반,글램핑. 깊은 산속 자연친화적 글램핑과 오토캠핑장. 대형 수영장이 돋보"}
+{"cid":"7470","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/36","at":"2026-07-15","quote":"0507-1453-4433 소백산마을 캠핑장 영주시 자동차야영장 대규모 시설과 천연 물놀이장이 압권 ✅ ✅ ✅ 054-631-0047 소백산 꽃가람야영장 영주시 일반야영장 ✅ · · ***-****-**** 캠프공존"}
+{"cid":"7470","attr":"SITE_TYPE","value":"PET_SITE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/h25253/223065205035","at":"2023-04-05","quote":"쉼터 소백산꽃가람야영장 경북영주오토캠핑장 영주애견캠핑장 영주반려견캠핑장 영주방갈로캠핑장... 여기는 소백산자락이라서 평소보다"}
 {"cid":"7470","attr":"STAY_GENERAL_SITES","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7471","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1558609467","at":"2026-10-16T05:36:54.981Z","quote":"여행 > 숙박 > 야영,캠핑장 > 글램핑장"}
 {"cid":"7471","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/qhd2401/224282305663","at":"2026-05-11","quote":"25개월 아기랑캠핑_영천 글램코티지 오토캠핑장_C3사이트. ㅠㅠㅠ 진짜 너무 신나서 뛰었움... 글램코티지 경상북도"}
 {"cid":"7471","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/placepick_amy/224379119553","at":"2026-08-15","text":"코티지","quote":"글램코티지 직접 이용해보니 편했던 구성과 분위기. 될 것 같고, 특히 자연 속에서"}
 {"cid":"7476","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/mimi-log/222486546755","at":"2021-08-28","quote":"있길래 아침에 엄마랑 산책겸 걸어봤는데 계~속 올라가면 청도수리덤 오토캠핑장도 나왔다. 👆🏻이곳 이층이 우리가 머무르는 곳이…"}
+{"cid":"7476","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://tourbook.tistory.com/1777","at":"2022-12-22","quote":"의성 청도 칠곡 포항시 ✔ 카라반캠핑 해변야영장 노지캠핑 글램핑 휴양림 오토캠핑 차박... 138 삼계리주말농원캠핑장 경상북도 청도군"}
 {"cid":"7476","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/sgyoung3532/221622854766","at":"2019-08-20","text":"펜션","quote":"청도 삼계리계곡 주말농원 펜션 물놀이 야유회장소로 훌륭하네요.. 하고 왔네요♡ 삼계리주말농원민박 경상"}
 {"cid":"7483","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ami1762/224426727682","at":"2026-09-30","quote":"봉화 개별화장실 개별샤워장 계곡이 있는 애견 동반 완전 깨끗한 봉..... 봉화별캠핑장"}
 {"cid":"7484","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://ysj-disegno.tistory.com/92","at":"2023-08-27","quote":"- 대구시 북구 검단동 458-4 (금호강 오토캠핑장). - 대구시 동구 지경길 17-4 (팔공블루마운틴 글램핑장). - 대"}
@@ -7160,6 +7236,7 @@
 {"cid":"7488","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/migi22_/223733910859","at":"2025-01-22","text":"펜션","quote":"(25년 1월 방문) 양산 글램핑 펜션 캠프라임 원동 미나리삼겹살 맛집 방문후기. 캠프라임 경상남도 양산시 원"}
 {"cid":"7490","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://slave0.tistory.com/2029","at":"2026-10-01","quote":"경남 남해 앵강 오토캠핑장 글램핑 봄 예약 처음 도전했더니 이랬습니다 _ 사전예약 바로가기. 이"}
 {"cid":"7490","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://slave0.tistory.com/2029","at":"2026-10-01","quote":"경남 남해 앵강 오토캠핑장 글램핑 봄 예약 처음 도전했더니 이랬습니다 _ 사전예약 바로가기. 이 발생할"}
+{"cid":"7490","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://slave0.tistory.com/2029","at":"2026-10-01","text":"캐빈","quote":"이 발생할 수 있으며, 캐빈은 독립 화장실과 주방 시설이 포함되어 있어 장기 여행 시 편리합니다."}
 {"cid":"7492","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/hjstylemm/223069122676","at":"2023-04-09","quote":"국치길 297-10 (인평동) 매물도야영장 경상남도 통영시 한산면 당금길 50-9 조개섬 야영장 경상남도 하동군 고전면 월진길 115-77 하동노량투다리오토캠핑장 경상남도 하동군 금남면 노량해안길 129 지리산 하루"}
 {"cid":"7492","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blogsailing.com/4364","at":"2025-04-01","quote":"[경상남도 산청군] 지리산리조트 글램핑 (0). [경상남도 산청군] 경호강 카라반 (0). [경상남도 남해군]"}
 {"cid":"7492","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://traveler-note.tistory.com/170","at":"2024-08-22","text":"트리하우스","quote":"⊙ 구재봉자연휴양림 경남 하동군 적량면 서리 산276, 휴양관/숲속의집/트리하우스/모노레일. ⊙ 조개섬야영장 경남 하동군 고전면 전도리 671-1, 일반"}
@@ -7167,6 +7244,7 @@
 {"cid":"7493","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/gdci/kUkj/29","at":"2023-12-11","quote":"전국 오토캠핑장, 무료 차박캠핑장. 산청군 경호강캠핑장 53 경남 산청군 남강오토캠핑장 54 경남 산청"}
 {"cid":"7493","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/sancheonggun/224359120413","at":"2026-07-27","quote":"​ 일반 오토캠핑뿐 아니라 글램핑과 카라반도 마련돼 있어 장비를 갖춘 캠퍼부…"}
 {"cid":"7493","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/sancheonggun/224359120413","at":"2026-07-27","quote":"국내 캠핑장 추천 43곳 모음 계곡부터 글램핑까지 산청에서. 1153번길 92 📞 ***-****-**** 경호강변"}
+{"cid":"7493","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://5engin.tistory.com/4","at":"2026-06-01","text":"펜션","quote":"기본적인 텐트 야영 외에도, 글램핑, 카라반, 펜션 등 여…. 래프팅 예약 방법과 요금 안내. 이번 섹션에서는 경호강의 아"}
 {"cid":"7493","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/mojeul_camping/224323959102","at":"2026-06-23","quote":"우리가족 여름 캠핑은 여기! 산청경호강&캠프627 수영장과 시원한 타프존 D, E사이트 총정리. blog.naver.com 그리고 프라이빗한 F"}
 {"cid":"7494","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
 {"cid":"7494","attr":"INNER_AMENITY","value":"BED","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
@@ -7488,6 +7566,7 @@
 {"cid":"7621","attr":"INNER_AMENITY","value":"PRIVATE_TOILET","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"}
 {"cid":"7621","attr":"SITE_TOTAL","value":14,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7621","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":14}
+{"cid":"7621","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/littlecosmo_/224349850232","at":"2026-07-18","text":"펜션","quote":"원래는 캠핑 자주 다니는데 둘째가 아직 어려서 텐트 치는 캠핑은 부담스럽고, 그렇다고 펜션만 가기에는 아쉬워서 글램핑을 찾다가 예약…"}
 {"cid":"7621","attr":"STAY_GLAMPING_SITES","value":14,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7628","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷"}
 {"cid":"7628","attr":"INNER_AMENITY","value":"BED","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷"}
@@ -7705,6 +7784,10 @@
 {"cid":"7741","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":7}
 {"cid":"7741","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":45}
 {"cid":"7741","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능 · 개인 카라반 입장 가능"}
+{"cid":"7741","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/412","at":"2024-06-17","quote":"강원도 특별자치도 추천 오토캠핑장 야영장 카라반 관광농원 자연..... 자연휴양림 체험장 글램핑장 산장"}
+{"cid":"7741","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/412","at":"2024-06-17","quote":"강원도 특별자치도 추천 오토캠핑장 야영장 카라반 관광농원 자연..... 자연휴양림 체험장 글램핑장 산장 펜션 테마파크등"}
+{"cid":"7741","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/412","at":"2024-06-17","quote":"자연휴양림 체험장 글램핑장 산장 펜션 테마파크등의 위치와 주소 그리고 사업장명에 대한... 5"}
+{"cid":"7741","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/412","at":"2024-06-17","text":"펜션","quote":"자연휴양림 체험장 글램핑장 산장 펜션 테마파크등의 위치와 주소 그리고 사업장명에 대한... 5 보광농촌체험휴"}
 {"cid":"7741","attr":"STAY_GENERAL_SITES","value":45,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7742","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
 {"cid":"7742","attr":"INNER_AMENITY","value":"BED","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
@@ -7803,6 +7886,9 @@
 {"cid":"7760","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"7760","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/26927323","at":"2026-10-16T05:37:10.734Z","quote":"여행 > 숙박 > 야영,캠핑장 > 글램핑장"}
 {"cid":"7760","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":20}
+{"cid":"7760","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://sailing-blog.click/5908","at":"2026-03-11","quote":"캠퍼들의 편안한 캠핑을 위해 오토캠핑존 사이트를 정비하여 보다 넓은 사이트 이용이 가능하다.. 샤워실과 화장실"}
+{"cid":"7760","attr":"SITE_TYPE","value":"DECK","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/mmmmming30/224117574097","at":"2025-12-21","quote":"양평 노산팔경캠핑장 / 타프+데크존 / 우중캠핑. #양평캠핑장 #노산팔경 #노산팔경캠핑장 크으 날 좋다 다"}
+{"cid":"7760","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/kimping_site/223244947447","at":"2023-10-24","text":"펜션","quote":"11월 캠핑장 알아보기_수도권 근교 펜션 캠핑장. 캠핑 일정은 이번엔 주말 1박으로 가기로 했고, 네이버로 우선"}
 {"cid":"7760","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/rojbi77/224440573875","at":"2026-10-13","quote":"com/rojbi77/224275010430 양평 노산팔경 캠핑장, 5월 우중 캠핑도 끄떡없는 타프존 명당 후기 (아이와 함께) 이 포스팅…"}
 {"cid":"7760","attr":"STAY_CARAVAN_SITES","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7760","attr":"STAY_GENERAL_SITES","value":20,"grade":"CONFIRMED","src":"gocamping"}
@@ -8012,6 +8098,8 @@
 {"cid":"7836","attr":"INNER_AMENITY","value":"INTERNET","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,에어컨,냉장고,유무선인터넷,난방기구"}
 {"cid":"7836","attr":"SITE_TOTAL","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7836","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":10}
+{"cid":"7836","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/kpj2325/224425823991","at":"2026-10-06","quote":"#안성커플글램핑 #안성수영장글램핑 #안성카라반 #럭셔리안성M글램핑 #안성맞춤캠핑장 #안성다목적야영장 #풀무골글램핑 #"}
+{"cid":"7836","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ttpttl2002/223582235747","at":"2024-09-12","text":"펜션","quote":"레스토랑, 캠핑장과 펜션이 있어 나름 가볼 만한 곳이라고 짐작할 수 있는 곳이지만, 결론부터 말"}
 {"cid":"7836","attr":"STAY_GLAMPING_SITES","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7838","attr":"SITE_TOTAL","value":29,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7838","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://jh2085.cafe24.com/default/app/app_info.php?topmenu=3&submenu=1","at":"2026-10-20T01:12:29.628Z","quote":"* 카라반 트레일러(에어컨.온풍기 사용)는 1박당 5만원입니다."}
@@ -8135,6 +8223,7 @@
 {"cid":"7862","attr":"SITE_TOTAL","value":13,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7862","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":13}
 {"cid":"7862","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":10}
+{"cid":"7862","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://hcm-story.tistory.com/2070","at":"2026-03-12","quote":"■ 캠핑장 주요시설 부대시설 상세 보기 1 충주반딧불 오토캠핑장 자동차야영장, 카라반 전기,무선인터넷,장작판…. 충주 캠핑장 56곳 - 주요시설, 반려동물"}
 {"cid":"7862","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/banggok-toto/224434562657","at":"2026-10-07","quote":"주변에는 행복숲 체험원, 초원오토캠핑장, 큰집글램핑, 하너미 캠핑장 등 캠핑·숙박시설도 여럿 자리하고 있어, 당일 코스보다"}
 {"cid":"7862","attr":"STAY_AUTO_SITES","value":13,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7868","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구"}
@@ -8718,6 +8807,8 @@
 {"cid":"7997","attr":"STAY_CARAVAN_SITES","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7997","attr":"STAY_GENERAL_SITES","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8002","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/289960751","at":"2026-10-16T05:36:59.201Z","text":"펜션","quote":"여행 > 숙박 > 펜션"}
+{"cid":"8002","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://rankro.tistory.com/878","at":"2022-11-18","quote":"편의점 29 배티하우스 경상남도 합천군 쌍책면 황강옥전로 1062-50 30 합천라온오토캠핑장 경상남도…. 강나루 오토캠핑장. 전기, 와이파이, 장작판매, 온수, 놀"}
+{"cid":"8002","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/hjstylemm/223069122676","at":"2023-04-09","quote":"합천군 삼가면 동리외초길 223 배티하우스 경상남도 합천군 쌍책면 황강옥전로 1062-50 합천은하수글램핑&카라반 경상남도 합천군 용주면 고품길 42 합천휴테마...경상남도 합천군 용주"}
 {"cid":"8002","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://worldofinfo.tistory.com/2922","at":"2025-02-08","quote":"글램핑스토리 소개"}
 {"cid":"8003","attr":"SITE_TOTAL","value":63,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8003","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":20}
@@ -8848,6 +8939,7 @@
 {"cid":"8033","attr":"SITE_TOTAL","value":22,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8033","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":22}
 {"cid":"8033","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능 · 개인 카라반 입장 가능"}
+{"cid":"8033","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/yuniyuni_74/223874981862","at":"2025-05-23","text":"펜션","quote":"- 매점 xxx - 캠핑장 입실 13:00 / 퇴실 12:00 - 펜션은 입실 15:00 / 퇴실 11:00 - 캠핑 비용 1일 40,000원"}
 {"cid":"8033","attr":"STAY_AUTO_SITES","value":22,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8034","attr":"SITE_TOTAL","value":20,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8034","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":20}
@@ -8985,6 +9077,7 @@
 {"cid":"8070","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":38}
 {"cid":"8070","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능 · 개인 카라반 입장 가능"}
 {"cid":"8070","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/pleisure/223758094864","at":"2025-02-12","quote":"강원도 애견 출입 가능한 카라반 캠핑장 19곳. 주요시설 : 일반야영장(파쇄석29면) - 개인 카라반"}
+{"cid":"8070","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://koreavisit.tistory.com/1385","at":"2023-08-04","quote":"인제 캠핑장, 야영장, 글램핑장, 오토캠핑장 업체, 주소 총정리. 강원도 인제군 선바위야영장 강원 인"}
 {"cid":"8070","attr":"STAY_AUTO_SITES","value":38,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8071","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구"}
 {"cid":"8071","attr":"INNER_AMENITY","value":"BED","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구"}
@@ -9349,7 +9442,9 @@
 {"cid":"8190","attr":"SITE_TOTAL","value":24,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8190","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":24}
 {"cid":"8190","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"naver_local","url":"http://avilatheoasis.com","at":"2026-10-16T06:40:56.907Z","text":"펜션","quote":"숙박>펜션"}
+{"cid":"8190","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/34","at":"2026-07-13","quote":"호수랑 오토캠핑장. 그랜드 파파하우스야영장"}
 {"cid":"8190","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/34","at":"2026-07-13","quote":"일반야영장&middot;카라반. 호수랑 오토캠핑장. 그랜드 파파하우스야영장"}
+{"cid":"8190","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/rather7511/224047524558","at":"2025-10-21","quote":"각 방에는 개별 화장실과 샤워실이..."}
 {"cid":"8190","attr":"STAY_GLAMPING_SITES","value":24,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8194","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=8194","at":"2026-06-30T00:00:00+09:00","text":"펜션","quote":"오션뷰가 환상적인 보성 지중해 야영장은 펜션과 캠핑장 두 가지 모두 가능해 두 팀이 동시에 즐길 수 있는 게 가장"}
 {"cid":"8194","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
@@ -9551,6 +9646,7 @@
 {"cid":"100019","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":28}
 {"cid":"100019","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
 {"cid":"100019","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/33","at":"2026-07-13","quote":"대율저수지 오토캠핑장. 섬진강향가오토캠핑장. 섬진강변에서 낭만 캠핑을 즐길 수 있는 향가오토"}
+{"cid":"100019","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/421","at":"2024-06-27","quote":"- 전라북도 차박 가능한 곳은 아래 이전글 참고.. └ [고창군] 오토 캠핑장 주소와 명칭."}
 {"cid":"100019","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/33","at":"2026-07-13","quote":"고요하고 조용한 휴식을 취할 수 있는 ✅ ✅ ✅ 보다더캠핑 고창군 자동차야영장 ✅ ✅ ✅ 063-561-2553 버드글램핑 군산시 글램핑 ✅ ✅ ✅ 063-446-3355 양지뜰캠핑장 무주군 자"}
 {"cid":"100019","attr":"STAY_GENERAL_SITES","value":28,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100021","attr":"SITE_TOTAL","value":50,"grade":"CONFIRMED","src":"gocamping"}
@@ -9597,6 +9693,7 @@
 {"cid":"100036","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100036","at":"2024-09-23T00:00:00+09:00","quote":"카라반과 트레일러 동반 입장이 가능하다. 반려동물은 대형견이든 소형견이든 모두"}
 {"cid":"100036","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"100036","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"100036","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://topsell.tistory.com/252","at":"2024-05-27","quote":"공주시 웰니스 권역 야영장 충남 공주시 우성면 무성산로 296 공주시 이안숲속오토캠핑장 충청남도 공주시 반포면 수목원길 25 공주시 일월관광농원 캠핑장 충남"}
 {"cid":"100036","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/32","at":"2026-07-13","quote":"계룡산글램핑 동월숲. 청정하고 아름다운 숲속에서 즐기는 힐링 글램핑. 일반야영장,글"}
 {"cid":"100036","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/32","at":"2026-07-13","text":"펜션","quote":"카라반캠핑장 · ✅ ✅ 505펜션&캠핑(오공오) 공주시 일반야영장 워터파크가 부럽지 않은 물놀이 시설을"}
 {"cid":"100036","attr":"STAY_GENERAL_SITES","value":20,"grade":"CONFIRMED","src":"gocamping"}
@@ -9757,6 +9854,8 @@
 {"cid":"100074","attr":"SITE_TOTAL","value":32,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100074","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":24}
 {"cid":"100074","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":8}
+{"cid":"100074","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/bgoklovemini0A0/RXBK/73","at":"2026-05-02","quote":"오토캠핑장으로 하산... ▲하산등로의 소류지... ▲대둔산캠핑랜드... ▲산행.."}
+{"cid":"100074","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/prettyk628/224363228207","at":"2026-07-30","text":"펜션","quote":"전북 완주 대둔산 캠핑펜션 오토캠핑장 가족 캠핑 후기. 일단 대둔산 캠핑랜드와 헷갈리면 안됨 캠핑"}
 {"cid":"100074","attr":"STAY_CARAVAN_SITES","value":24,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100074","attr":"STAY_GLAMPING_SITES","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100080","attr":"SITE_TOTAL","value":8,"grade":"CONFIRMED","src":"gocamping"}
@@ -9790,6 +9889,7 @@
 {"cid":"100096","attr":"SITE_TOTAL","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100096","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":6}
 {"cid":"100096","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/tomczy554/224423819141","at":"2026-09-27","quote":"​ 요금이 안 올라온 12곳 더모스트 글램핑·젠틀펫 파라다이스·비해피 글램핑·모닥 글램핑 같은 글램핑 4곳과 불정 자연휴양림(카라반...캠핑장 예약 페이지나 전화로 직접 확인하셔야 합니다. 문경에서 제일"}
+{"cid":"100096","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/nayeon4664/224246345947","at":"2026-04-09","text":"펜션","quote":"요즘 웬만한 펜션이나 캠핑장 가면 바베큐 비용만 2~3만 원씩 하잖아요? 그런데 여기는"}
 {"cid":"100096","attr":"STAY_GLAMPING_SITES","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100098","attr":"SITE_TYPE","value":"DECK","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/kimnana-s2/224406895777","at":"2026-09-10","quote":"사천 케이블카 자연휴양림 야양데크 캠핑후기 화장실 주방 샤워시..... 밥하기 귀찮으신 분들 여기 강추합니다"}
 {"cid":"100098","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/als1891/224445724333","at":"2026-10-18","text":"캐빈","quote":"팁✨️ [사천바다케이블카 일반 캐빈 왕복 요금] ▪︎대인(만 13세... (택 1 한 번 더) 전체 금액"}
@@ -9918,6 +10018,8 @@
 {"cid":"100137","attr":"STAY_AUTO_SITES","value":16,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100138","attr":"SITE_TOTAL","value":15,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100138","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":15}
+{"cid":"100138","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/36","at":"2026-07-15","quote":"골드문 오토캠핑장. 나정고운모래해변 오토캠핑장. 일반야영장,글램핑. 일반야영장,카라반,글"}
+{"cid":"100138","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/36","at":"2026-07-15","quote":"일반야영장,카라반,글램핑. 깊은 산속 자연친화적 글램핑과 오토캠핑장. 대형 수영장이 돋보"}
 {"cid":"100138","attr":"STAY_GLAMPING_SITES","value":15,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100140","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"}
 {"cid":"100140","attr":"INNER_AMENITY","value":"BED","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"}
@@ -10280,6 +10382,7 @@
 {"cid":"100246","attr":"SITE_TOTAL","value":13,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100246","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--oy2b97sqwkz1a.com/?page_id=6445","at":"2026-10-20T01:28:58.439Z","text":"펜션","quote":"22시 이후 입실하실 경우 펜션으로 사전 연락 부탁드립니다."}
 {"cid":"100246","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":13}
+{"cid":"100246","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/byul-da-bom/224430181942","at":"2026-10-03","quote":"몽산포오토캠핑장 충남 태안 몽산포해변 인근, 오토캠핑 어은돌오토캠핑장 충남 태안 바닷가"}
 {"cid":"100246","attr":"STAY_GLAMPING_SITES","value":13,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100247","attr":"SITE_TOTAL","value":88,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100247","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":36}
@@ -10288,6 +10391,7 @@
 {"cid":"100247","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100247","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","count":22}
 {"cid":"100247","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/pt_hjs/224439206039","at":"2026-10-12","quote":"아이와 함께 남한산성 캠핑식당, 서울근교 당일치기 글램핑식당:: 뜨락바베큐(여름에는 수영장 무료이용). 먹고 야외에서 시간을 보"}
+{"cid":"100247","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/leeyoungim916/224382488389","at":"2026-08-19","text":"펜션","quote":"남한산성 계곡펜션 무릉도원 1박2일 숙박비교. 매너타임(야간 소음 자제 시간)이 설정된"}
 {"cid":"100247","attr":"STAY_AUTO_SITES","value":36,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100247","attr":"STAY_GENERAL_SITES","value":30,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100247","attr":"STAY_RV_SITES","value":22,"grade":"CONFIRMED","src":"gocamping"}
@@ -10302,6 +10406,7 @@
 {"cid":"100248","attr":"SITE_TOTAL","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100248","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://www.sj-haelim.com/reserve","at":"2026-10-20T01:27:33.908Z","text":"펜션","quote":"- 펜션의 집기 및 시설 모두 깨끗하게 사용부탁드리며 심각한 기물 파손, 침구류"}
 {"cid":"100248","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":10}
+{"cid":"100248","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ysufriend/224339650995","at":"2026-07-07","quote":"글램핑, 카라반, 펜션 등 다양한 숙소를 다녀봤고 풀빌라도 처음은..."}
 {"cid":"100248","attr":"STAY_CARAVAN_SITES","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100250","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/130056220","at":"2026-10-16T05:33:03.038Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"100250","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/jhmsoul/224315650628","at":"2026-06-14","quote":"앞쪽 주차장은 차박 캠핑으로 오는 분들도 많아서 그 분들에게도 정말 최고의 화장실이 아닐까 생각"}
@@ -10450,6 +10555,8 @@
 {"cid":"100263","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1229160067","at":"2026-10-16T05:37:14.357Z","text":"펜션","quote":"여행 > 숙박 > 펜션"}
 {"cid":"100263","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100263","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"100263","attr":"SITE_TYPE","value":"PET_SITE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/chh7662/224422463494","at":"2026-10-01","quote":"춘천 반려동물 캠핑장 추천 | 금옥골숲속작은마을 에티켓 & 준비물 ..... 반려동물동반캠핑"}
+{"cid":"100263","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/chh7662/224444575760","at":"2026-10-21","quote":"춘천글램핑 #춘천캠핑장 #비오는날글램핑 #비오는날캠핑 #글램핑준비물 #글램핑여행 #춘천가족여행 #춘천숙소 #아이와글램핑 #가족캠핑 #금옥골숲속작은마을 #춘천숙소추천 #춘천금옥골숲속작은마을 #타프존캠핑장"}
 {"cid":"100263","attr":"STAY_AUTO_SITES","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100263","attr":"STAY_CARAVAN_SITES","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100263","attr":"STAY_GLAMPING_SITES","value":4,"grade":"CONFIRMED","src":"gocamping"}
@@ -10468,12 +10575,14 @@
 {"cid":"100266","attr":"SITE_TOTAL","value":43,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100266","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"OPERATOR","src":"operator_homepage","url":"http://www.marine-camping.co.kr/special.html","at":"2026-10-15T23:32:02.871Z","quote":"남성 전용 샤워실&화장실이 마련되어 있습니다."}
 {"cid":"100266","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":43}
+{"cid":"100266","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/eat-trip-yumy/224040069675","at":"2025-10-14","quote":"안면도 캠핑 완전정복｜오토·글램핑·바다뷰 별 추천 총정리. 캠핑장명 위치 특징 참고사항 안면도마린오토캠핑"}
 {"cid":"100266","attr":"STAY_AUTO_SITES","value":43,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100267","attr":"SITE_TOTAL","value":25,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100267","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":25}
 {"cid":"100267","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100267","at":"2024-04-19T00:00:00+09:00","quote":"카라반과 트레일러 동반 입장이 가능하다."}
 {"cid":"100267","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":13}
 {"cid":"100267","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"100267","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/happyphotographer/224217785780","at":"2026-03-16","quote":"주말 차박 캠핑, 오토캠핑장에서 쏘렌토 MQ4 차박 캠핑, 경상북도교..... 많은 캠"}
 {"cid":"100267","attr":"STAY_AUTO_SITES","value":25,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100268","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"에어컨,냉장고,유무선인터넷,난방기구"}
 {"cid":"100268","attr":"INNER_AMENITY","value":"FRIDGE","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"에어컨,냉장고,유무선인터넷,난방기구"}
@@ -10515,12 +10624,14 @@
 {"cid":"100271","attr":"SITE_TOTAL","value":44,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100271","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":44}
 {"cid":"100271","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"100271","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/boin45/Htsu/34","at":"2015-07-30","quote":"do/xJeRY8JU 포천 산정호수카라반캠핑장 http://me2.do/GHUARujA 가평 참마당캠핑장..."}
 {"cid":"100271","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/nks620/224434024308","at":"2026-10-07","quote":"찾으면 손해?! 🎃2026 가을 애견동반 캠핑장·할로윈 캠핑장 추천 BEST｜글램핑·오토캠핑·펜션 예약.... 사이트 위치 🚗 차량 추가 🐶 반려견 추"}
 {"cid":"100271","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/you_dimi/224440469221","at":"2026-10-15","text":"방갈로","quote":"대구캠프닉 어디로 갈까? 대구아이랑가볼만한곳 가창상상포레스트 방갈로 바비큐 후기. 꾸며져 있었어요. ​ 벽면부터 천장까지 나무 느낌으로 마"}
 {"cid":"100271","attr":"STAY_AUTO_SITES","value":44,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100272","attr":"SITE_TOTAL","value":23,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100272","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":18}
 {"cid":"100272","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","count":5}
+{"cid":"100272","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ysufriend/224412733763","at":"2026-09-15","text":"펜션","quote":"괴산 더하루만 캠핑장 - 넓은 사이트 깔끔한 펜션동 계곡뷰캠핑장, ..... 좀 더 기대가 됩니다 늦게 예약하는 바람에"}
 {"cid":"100272","attr":"STAY_AUTO_SITES","value":18,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100272","attr":"STAY_RV_SITES","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100273","attr":"SITE_TOTAL","value":22,"grade":"CONFIRMED","src":"gocamping"}
@@ -10538,6 +10649,7 @@
 {"cid":"100275","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":14}
 {"cid":"100275","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100275","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"100275","attr":"SITE_TYPE","value":"EQUIPPED","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/yes_wecamp/224152003445","at":"2026-01-19","quote":"설중캠을 꿈꾸었던 청풍호뷰 마린힐캠핑장 (카힐트나돔, 텐티피 사..... ㅋㅋㅋㅋㅋ 몸 달궈줄 연료 짱짱하게 준비해두고 이번엔 딸래미"}
 {"cid":"100275","attr":"STAY_AUTO_SITES","value":14,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100276","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"}
 {"cid":"100276","attr":"INNER_AMENITY","value":"BED","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"}
@@ -10583,6 +10695,7 @@
 {"cid":"100280","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":4}
 {"cid":"100280","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"naver_local","url":"https://www.camfit.co.kr/camp/64de1add333fbc001ed2c9b3","at":"2026-10-16T06:42:56.853Z","text":"펜션","quote":"숙박>펜션"}
 {"cid":"100280","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"100280","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/36","at":"2026-07-15","quote":"카라반 캠핑장 영덕군 자동차야영장,카라반 동해를 바라보며 즐기는 낭만적인 캠핑 ✅ ✅ ✅ 0507-1325-5538 달토 풀 글램핑 영덕군 일반야영장,글램핑 모든 객실...야영장,글램핑 깔끔함이 돋보이는"}
 {"cid":"100280","attr":"STAY_AUTO_SITES","value":34,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100281","attr":"SITE_TOTAL","value":26,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100281","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":26}
@@ -10604,6 +10717,8 @@
 {"cid":"100284","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"100284","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100284","at":"2024-04-19T00:00:00+09:00","quote":"카라반과 트레일러는 평일에만 출입할 수 있다. 관리소에서는 릴선과 화로대를 대"}
 {"cid":"100284","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"100284","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://hcm-story.tistory.com/2063","at":"2026-03-11","quote":"각 캠핑장의 캐라반, 글램핑 시설 유무, 강아지 같은 반려동물과 동반 가능한지 등을 확인해 보세요."}
+{"cid":"100284","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://niceturtle1.tistory.com/1150","at":"2024-06-20","text":"캐빈","quote":"3km 구간을 왕복 운행하며, 투명한 크리스탈 캐빈에서 청풍호의 절경을 감상할 수 있습니다.. 주차장이 넓어 편리하며, 월"}
 {"cid":"100284","attr":"STAY_AUTO_SITES","value":15,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100285","attr":"SITE_TOTAL","value":14,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100285","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":14}
@@ -10655,6 +10770,7 @@
 {"cid":"100289","attr":"SITE_TOTAL","value":66,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100289","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":66}
 {"cid":"100289","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"100289","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/veloura__/224451537592","at":"2026-10-23","quote":"천안 아산 캠핑장 추천 BEST 10｜오토캠핑부터 감성 글램핑까지. 저도 다음 주에 아산 가델캠핑장에 갈 예정이라 이번 캠핑이 벌써"}
 {"cid":"100289","attr":"STAY_AUTO_SITES","value":66,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100291","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://campingdogam.com/camp/100291/","at":"2026-10-19T02:47:35.410Z","quote":"유형별로는 글램핑 45곳, 카라반 33곳, 오토캠핑 42곳이고, 반려동물 동반은 49곳, 겨울 운영은 9"}
 {"cid":"100291","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://campingdogam.com/camp/100291/","at":"2026-10-19T02:47:35.410Z","quote":"썬오브글램핑 — 경기 포천시 캠핑장 | 캠핑도감 캠핑도감 ."}
@@ -10687,6 +10803,7 @@
 {"cid":"100295","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"100295","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100295","at":"2024-04-19T00:00:00+09:00","text":"방갈로","quote":"캠핑장에는 파쇄석과 데크로 이루어진 오토캠핑 사이트 14면과 카라반 1대, 방갈로 2개 동이 마련되어 있다. 사이트 크기는 파쇄석 6.5x8, 데크 4."}
 {"cid":"100295","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"100295","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/32","at":"2026-07-13","quote":"1468-2520 오즈캠핑 보령시 일반야영장,글램핑 원산도에 있는 최고급 시설의 글램핑과 일반야영장 · ✅ ✅ 041-93"}
 {"cid":"100295","attr":"STAY_AUTO_SITES","value":14,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100295","attr":"STAY_CARAVAN_SITES","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100296","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구"}
@@ -10724,6 +10841,7 @@
 {"cid":"100301","attr":"SITE_TOTAL","value":32,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100301","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":32}
 {"cid":"100301","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"100301","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/36","at":"2026-07-15","quote":"일반야영장,카라반,글램핑. 깊은 산속 자연친화적 글램핑과 오토캠핑장. 대형 수영장이 돋보"}
 {"cid":"100301","attr":"STAY_AUTO_SITES","value":32,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100302","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"}
 {"cid":"100302","attr":"INNER_AMENITY","value":"BED","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"}
@@ -11241,6 +11359,8 @@
 {"cid":"100371","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"100371","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"100371","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"100371","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/yeonjuu77/224383192805","at":"2026-08-19","quote":"서산 벌천포 오토캠핑장 내돈내산 1박2일[노지차박가능]. 캠핑 가자!!!! 신난다~~ 바다는 동해지!! 하면서 무조건 동해로"}
+{"cid":"100371","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/marthos_po/224395974816","at":"2026-09-02","quote":"추석 여행, 카라반 가지고 예약 없이 캠핑할 수 있는 곳. 추석 여행 예약 없이 카라반 캠"}
 {"cid":"100371","attr":"STAY_AUTO_SITES","value":50,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100371","attr":"STAY_GLAMPING_SITES","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100372","attr":"SITE_TOTAL","value":40,"grade":"CONFIRMED","src":"gocamping"}
@@ -11270,6 +11390,8 @@
 {"cid":"100379","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/tomczy554/224433089763","at":"2026-10-06","text":"펜션","quote":"반려동물 출입이 「가능」으로 등록된 곳은 도둑골 신규와 계곡 좋은 펜션 야영장 두 곳입니다. 다른 5곳(신박힐링캠프·지리산둥지 캠핑장·하동노량"}
 {"cid":"100380","attr":"SITE_TOTAL","value":18,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100380","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":18}
+{"cid":"100380","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/sotong8611/224428324134","at":"2026-10-03","quote":"서울 근교 오토캠핑장 추천, 전기·온수·샤워장 완비된 수도권 명품..... 선사하며, 매너타"}
+{"cid":"100380","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/entiremind/224429799753","at":"2026-10-02","quote":"가족 캠핑 글램핑이나 카라반을 선호하는 분 서울 근교에서 1박을..."}
 {"cid":"100380","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/plete/224266696274","at":"2026-05-04","quote":"함 강천캠핑장 경기도 여주시 강천면 강천로 265 '사이트 전경' ​ 전 사이트 '타프존' 잔디 광장이 있는 활기찬 A 사이트와 프라이빗한 B 사이트로 구성 되"}
 {"cid":"100380","attr":"STAY_GENERAL_SITES","value":18,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100381","attr":"SITE_TOTAL","value":45,"grade":"CONFIRMED","src":"gocamping"}
@@ -12159,7 +12281,9 @@
 {"cid":"100517","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"100517","attr":"STAY_AUTO_SITES","value":20,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100517","attr":"STAY_GLAMPING_SITES","value":8,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100518","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/smartme2/224441816123","at":"2026-10-15","quote":"캠핑장 야영장 글램핑장 카라반 배치도 기반 홈페이지 제작 사례. 수가해수욕장 야영장(바베큐장) 인천시"}
 {"cid":"100518","attr":"SITE_TYPE","value":"DECK","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/mg9511/224433084911","at":"2026-10-06","quote":"서울근교 인천 캠핑장 추천 : 수기해수욕장 야영장 _ 데크존 10번 (체크인, 부대시설, 명당자리, 옹진.... 선택하세요! 입실일"}
+{"cid":"100518","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/smartme2/224441816123","at":"2026-10-15","quote":"캠핑장 야영장 글램핑장 카라반 배치도 기반 홈페이지 제작 사례. 수가해수욕장 야영장(바베큐장"}
 {"cid":"100518","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ddae0203/224440830073","at":"2026-10-14","text":"펜션","quote":"신시모도 여행 펜션 앞 갯벌체험 가능한 아이와 가볼만한곳 추천. 급으로 펜션 예약을 하고"}
 {"cid":"100519","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/cjsdhkdtks/69AG/467","at":"2015-02-02","quote":"광광공사 선정 전국 오토캠핑장 모음.. 광역시 계양구 귤현동 23-1 ● 7 옹암해수욕장 캠핑장 인천"}
 {"cid":"100519","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/434","at":"2024-07-13","quote":"인천시 추천 오토캠핑장 야영장 카라반 관광농원 자연휴양림 체험..... 최신자료 : 2024-05-31 인천"}
@@ -12322,6 +12446,8 @@
 {"cid":"100538","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/154304823","at":"2026-10-16T05:37:10.525Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"100538","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"100538","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":15}
+{"cid":"100538","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/netysu/224378653851","at":"2026-08-14","quote":"경남 남해 애견동반 차박지 BEST 3! 강아지와 바다 보며 차박 캠핑 즐..... 경남 남해 애견동반 차박지 BEST 3! 강아지와 바다 보"}
+{"cid":"100538","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/hjstylemm/223905969778","at":"2025-06-20","quote":"경상남도 남해군 설천면 남해대로 4110-9, 설천초등학교덕신분교 명도그 오토캠핑장 경상남도 남해군 설천면 설천로 176-187, 명도그 오토캠핑장 남해 더왕 글램핑장 경상남도 남해군 설천면 설천로 224-79 남해"}
 {"cid":"100538","attr":"STAY_CARAVAN_SITES","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100538","attr":"STAY_GENERAL_SITES","value":15,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100539","attr":"SITE_TOTAL","value":18,"grade":"CONFIRMED","src":"gocamping"}
@@ -12558,7 +12684,10 @@
 {"cid":"100575","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"100575","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100575","attr":"STAY_GENERAL_SITES","value":10,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100576","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ehdhksrn/224099882670","at":"2025-12-12","quote":"별보기좋은곳 #밤하늘캠핑 #캠핑장추천 #별멍 #오토캠핑장 #글램핑"}
 {"cid":"100576","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/yongsunmi/224440254545","at":"2026-10-15","quote":"밤하늘 별이 총총, 무한 바베큐 지리산 산청 월명 글램핑. 돼서 '6시 내고향'에서나 들어본 도시 산청을 다녀왔는데 정말 좋았어"}
+{"cid":"100576","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/flfsp25/224399094296","at":"2026-09-03","text":"독채","quote":"​ 독채부터 잔디밭까지 머무는 공간 살펴봐요 객실은 독채와 복층 형태를 비롯해"}
+{"cid":"100576","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/rje5789a/223962169259","at":"2025-08-08","quote":"남해 숙소 보물섬 글램핑(수영장, 바베큐 무한리필, 개별 화장실) 내..... 남해 보물섬 글램핑 내돈내산 후기 인생 첫 글램핑을 친구"}
 {"cid":"100577","attr":"SITE_TOTAL","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100577","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"100577","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
@@ -12753,6 +12882,7 @@
 {"cid":"100604","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/439","at":"2024-07-24","text":"펜션","quote":"경기도 포천시 추천 오토캠핑장 야영장 카라반 관광농원 자연휴양림 체험장 글램핑장 산장 펜션 테마.... 1196번길 112 개울가에캠핑관광농원 경기도 포천시 신북"}
 {"cid":"100604","attr":"STAY_AUTO_SITES","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100605","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/qkrdbwls120/224438365918","at":"2026-10-11","quote":"포항 북구 죽장면 독채펜션 오토캠핑장 에덴펜션 후기 포항 숙소 추천 내돈내산💸. 입실가능 데크사이트, 자갈"}
+{"cid":"100605","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/namhae_gun/224100845058","at":"2025-12-08","quote":"#남해에덴캠핑장 #에덴캠핑장 #남해캠핑 #남해글램핑 #남해여행 #남해바다 #남해죽방렴 #창선면가볼만한곳 #남해숙소 #바다캠"}
 {"cid":"100605","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/qkrdbwls120/224438365918","at":"2026-10-11","text":"독채","quote":"포항 북구 죽장면 독채펜션 오토캠핑장 에덴펜션 후기 포항 숙소 추천 내돈내산💸. 입실가능 데"}
 {"cid":"100606","attr":"SITE_TOTAL","value":37,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100606","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://sannae.kr/","at":"2026-10-20T01:30:07.780Z","quote":"2,700평 부지/37사이트/카라반 및 캠핑카 전용사이트 보유"}
@@ -12913,6 +13043,7 @@
 {"cid":"100628","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"OPERATOR","src":"operator_homepage","url":"https://noricamp.com/price","at":"2026-10-20T01:26:31.333Z","quote":"개별 화장실과 바비큐 데크, 프라이빗 풀과 넓은 객실까지."}
 {"cid":"100628","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":44}
 {"cid":"100628","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능"}
+{"cid":"100628","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/auswjddml/224362814319","at":"2026-08-01","quote":"밀양 얼음골 아이오닉9 차박 캠핑 비타민팜 오토캠핑장 가동1. 샤워는 한번만 하니까요^-^ 관리자분이 너"}
 {"cid":"100628","attr":"STAY_AUTO_SITES","value":44,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100629","attr":"SITE_TOTAL","value":16,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100629","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100629","at":"2024-01-22T00:00:00+09:00","text":"펜션","quote":"펜션과 함께 캠핑장을 운영하고 있으며, 아이들을위한 트램펄린 같은 놀이시설도"}
@@ -13379,6 +13510,7 @@
 {"cid":"100689","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":11}
 {"cid":"100689","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100689","attr":"STAY_GLAMPING_SITES","value":11,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100691","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://worldofinfo.tistory.com/2932","at":"2025-02-09","quote":"통영오토캠핑장 소개"}
 {"cid":"100692","attr":"SITE_TOTAL","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100692","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":8}
 {"cid":"100692","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/36","at":"2026-07-15","quote":"일반야영장,카라반,글램핑. 깊은 산속 자연친화적 글램핑과 오토캠핑장. 대형 수영장이 돋보"}
@@ -13813,7 +13945,9 @@
 {"cid":"100741","attr":"STAY_CARAVAN_SITES","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100741","attr":"STAY_GLAMPING_SITES","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100742","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100742","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/jeyouly/224401051805","at":"2026-09-04","text":"방갈로","quote":"2박 3일 있느라 하루 세끼 잘 챙겨 먹었습니다~ㅎㅎ 가을은 짧으니 또 부지런히 캠핑다녀봐야 겠어요~!^0^ #가평물소리캠핑장 #방갈로있는캠핑장 #가평계곡캠핑장 #가평운악산캠핑장 #가평캠핑장추천..."}
 {"cid":"100742","attr":"SITE_TYPE","value":"PET_SITE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/oneday-log/224259964831","at":"2026-04-21","quote":"가평 # 물소리캠핑장 / 키즈, 애견 캠핑장 추천. 이쁜짓 해야하는 랑이. 벚꽃캠핑장이라고 해서 기대하고 간 가평"}
+{"cid":"100742","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dms4307/224377313379","at":"2026-08-13","quote":"요즘 캠핑에 빠져있는 은호네 가평에 너무 좋았던 캠핑장 소개합니다 !! :) 예약할땐 타프존 아니었는데 ,,가기전에 설치되서 운이 좋았음 지금보니 12-19번 사이"}
 {"cid":"100743","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"}
 {"cid":"100743","attr":"INNER_AMENITY","value":"BED","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"}
 {"cid":"100743","attr":"INNER_AMENITY","value":"COOKWARE","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"}
@@ -14700,6 +14834,7 @@
 {"cid":"100879","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":4}
 {"cid":"100879","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":31}
 {"cid":"100879","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","count":12}
+{"cid":"100879","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/yamyam1003/224051028997","at":"2025-10-23","quote":"[두번째 캠핑] 태안 어은돌 캠프캠프 10월 타프존 캠핑장 후기/ 해수..... 갯벌체험 #어은돌캠프캠프 #태안타프존 #캠"}
 {"cid":"100879","attr":"STAY_GENERAL_SITES","value":31,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100879","attr":"STAY_GLAMPING_SITES","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100879","attr":"STAY_RV_SITES","value":12,"grade":"CONFIRMED","src":"gocamping"}
@@ -15558,6 +15693,10 @@
 {"cid":"100995","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"100995","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"100995","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100995","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/439","at":"2024-07-24","quote":"경기도 포천시 추천 오토캠핑장 야영장 카라반 관광농원 자연휴양..... 112 개울가에캠핑관광농원 경"}
+{"cid":"100995","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/439","at":"2024-07-24","quote":"경기도 포천시 추천 오토캠핑장 야영장 카라반 관광농원 자연휴양..... 112 개울가에캠핑관광농원 경기도 포천시 신"}
+{"cid":"100995","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/439","at":"2024-07-24","text":"펜션","quote":"경기도 포천시 추천 오토캠핑장 야영장 카라반 관광농원 자연휴양림 체험장 글램핑장 산장 펜션 테마파크 위치와 주소 정보. 경기도 포천시 내에 야영에 적합한 시설 및"}
+{"cid":"100995","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/iuy04/224065184599","at":"2025-11-05","quote":"[포천 캠핑] 급하게 타프존을 찾아간 개울가에캠핑관광농원. 장 소 - 개울가에캠핑관광농원 주 소 -"}
 {"cid":"100995","attr":"STAY_GENERAL_SITES","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100995","attr":"STAY_GLAMPING_SITES","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100996","attr":"SITE_TOTAL","value":10,"grade":"CONFIRMED","src":"gocamping"}
@@ -16623,6 +16762,7 @@
 {"cid":"101146","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101146","at":"2024-06-12T00:00:00+09:00","quote":"글램핑 (프리미엄 어매니티, 개인 온수풀장) 프리미엄 오토캠핑장 (개별 샤워장"}
 {"cid":"101146","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101146","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능 · 개인 카라반 입장 가능"}
+{"cid":"101146","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/easy_zero/224407286139","at":"2026-09-10","text":"펜션","quote":"충남 천안 숙소 당일 글램핑 가능한 키즈 가족 펜션 몽키캠핑장. 다녀온 천안 숙소 몽키캠핑장을 소개해드렸어요. 숙박은 물론"}
 {"cid":"101147","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
 {"cid":"101147","attr":"INNER_AMENITY","value":"BED","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
 {"cid":"101147","attr":"INNER_AMENITY","value":"COOKWARE","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
@@ -17533,6 +17673,7 @@
 {"cid":"101267","attr":"SITE_TOTAL","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101267","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":6}
 {"cid":"101267","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101267","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/a_gyeong/223890208130","at":"2025-06-06","text":"방갈로","quote":"모임 역시 갑자기 2주 전 캠핑 잡아버리기⛺️ ​ 단양 충북이라 멀 거라 생각했는데 안동에서 1시간 대구에서 2시간 거리 폭포가든 : 소원 앞마당 사이트 ​ 오토캠핑장과 숙소가 같이 있는 곳을 찾다가 단양까지 가게 "}
 {"cid":"101267","attr":"STAY_AUTO_SITES","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101268","attr":"SITE_TOTAL","value":34,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101268","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":34}
@@ -17973,6 +18114,7 @@
 {"cid":"101342","attr":"STAY_GENERAL_SITES","value":25,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101343","attr":"SITE_TOTAL","value":17,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101343","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":17}
+{"cid":"101343","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/digitaljjange/224339140104","at":"2026-07-07","quote":"강릉 가볼만한 곳 TOP 4!? 수영장 캠핑장부터 연곡 솔향기 카라반, 노..... [유메모리 캠핑장] 특징 강릉에서 역대급 규모의 대형 수"}
 {"cid":"101343","attr":"STAY_GENERAL_SITES","value":17,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101344","attr":"SITE_TOTAL","value":30,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101344","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":30}
@@ -18001,6 +18143,7 @@
 {"cid":"101351","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/anjoo_eat/224440354933","at":"2026-10-13","quote":"거제 펜션&거제 글램핑 추천ㅣ바다뷰 최고 캠핑장 (어메이징캠프&리조트 거제장목점). 없습니당."}
 {"cid":"101351","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/anjoo_eat/224440354933","at":"2026-10-13","text":"펜션","quote":"거제 펜션&거제 글램핑 추천ㅣ바다뷰 최고 캠핑장 (어메이징캠프&리조트 거제장목점)"}
 {"cid":"101351","attr":"SITE_TYPE","value":"PET_SITE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/mc7777777/224434075461","at":"2026-10-07","quote":"대구 근교 애견캠핑장 추천, 어메이징 애견캠프 삼겹살&목살제공 몸만가는 캠핑 후기. 목줄 없"}
+{"cid":"101351","attr":"SITE_TYPE","value":"RV","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/naeun4949/224424990009","at":"2026-09-28","quote":"거창 어메이징애견캠프 신상 ‘트레일러 존’ 오픈! 원룸·투룸 가..... 거창 어메이징캠프에 트레일러 텐트 들어"}
 {"cid":"101352","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/kimjoow0n11/224367153172","at":"2026-08-03","quote":"94%EC%B2%9C-%EA%B2%BD%EC%A3%BC-%EB%8B%A4%EB%8B%A4%EA%B8%80%EB%9E%A8%ED%95%91 경상도 캠핑장 추천 - 경주 다다글램핑 소개 다다글램핑은 경상북도 경주시에 위"}
 {"cid":"101352","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/hello1913/223865110377","at":"2025-05-14","text":"펜션","quote":"경주여행 색다른 돔 형식 숙소, 펜션과 글램핑이 다 되는 다다글램..... 있을거 다 있고 회가 진짜 괜찮았"}
 {"cid":"101353","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/onldm/224438676152","at":"2026-10-12","text":"독채","quote":"싶은 분 ​ 💚 연근차나 연잎차 같은 메뉴를 맛보고 싶은 분 ​ 💚 가족끼리 독채 셀프 바베큐를 계획하고 있는 분 ​ 🔻궁금하신 분들 참고하세요~🔻"}
@@ -18010,6 +18153,8 @@
 {"cid":"101354","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/gdci/kUkj/29","at":"2023-12-11","quote":"전국 오토캠핑장, 무료 차박캠핑장. 171 경기 양주시 봄이오는캠프 172 경기 양주시"}
 {"cid":"101354","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/gdci/kUkj/29","at":"2023-12-11","quote":"전국 오토캠핑장, 무료 차박캠핑장. 171 경기 양주시 봄이오는캠프 172 경기 양주시 부광농원 캠핑장"}
 {"cid":"101354","attr":"STAY_GENERAL_SITES","value":22,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101355","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/kimsoojin326/224329383647","at":"2026-06-28","text":"펜션","quote":"외부음식 반입가능한 애견 동반 캠핑수영장 아산 재리캠핑장 펜션..... 오후2시 입실, 오후12시 퇴실 아산재리캠핑장 천안에서는 30"}
+{"cid":"101355","attr":"SITE_TYPE","value":"PET_SITE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/yhcw511/224407316776","at":"2026-09-11","quote":"1번자리였는데 생각보다 작은자리였어요 #아산재리캠핑 #캠크닉 #애견캠핑장 재리캠핑에 지인도 옆 텐트로 예약해서 애들은 지인이랑 놀고 신랑은 짐"}
 {"cid":"101355","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/gayoungi0617/224431744612","at":"2026-10-05","quote":"[충남 아산] 아산 재리캠핑 16번 사이트 내돈내산 후기 | 타프존•에어컨 있는 캠핑장 추천. 내돈내산 인증 방문 재리캠핑 충청남도 아산시"}
 {"cid":"101356","attr":"SITE_TOTAL","value":17,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101356","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":17}
@@ -18120,6 +18265,7 @@
 {"cid":"101367","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"101367","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"101367","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/nyamkong_daily/224432379917","at":"2026-10-05","quote":"아이오닉9 차박캠핑 세번째 | 평창 육백마지기 별이가득한 애견동반 캠핑장 후기. 더클라우드"}
+{"cid":"101367","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ddhydd/224353513124","at":"2026-07-21","text":"독채","quote":"평창 더클라우드 글램핑 | 조용하고 평화로웠던 평창 독채펜션 여름..... 육백마지기 근처 시원했던 자연 속 힐링 고산에서 즐기"}
 {"cid":"101367","attr":"STAY_GENERAL_SITES","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101367","attr":"STAY_GLAMPING_SITES","value":15,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101368","attr":"SITE_TOTAL","value":23,"grade":"CONFIRMED","src":"gocamping"}
@@ -18207,9 +18353,15 @@
 {"cid":"101378","attr":"STAY_GLAMPING_SITES","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101378","attr":"STAY_RV_SITES","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101379","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101379","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/hjstylemm/223942733405","at":"2025-07-22","quote":"난지섬 쭈꾸미 캠핑장 충청남도 당진시 석문면 난지2길 84 당진난지도 국민여가캠핑장 충청남도 당진시 석문면 난지도리 701 아람치야영장 충청남도 당진시 석문면 산단9로 56 왜목오토캠핑장 충청남도 당진시 석문면 왜목"}
+{"cid":"101379","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/jenny9709/224057628786","at":"2025-10-29","quote":"오토캠핑 11:30 / 카라반 14:00 체크아웃: 오토캠핑/카라반 11:00 매너타임: 22:30"}
+{"cid":"101379","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ohjesus00/223829966197","at":"2025-04-11","quote":"난지섬 쭈꾸미 캠핑장 충남 당진시 석문면 난지2길 84 충청남도 당진시 당진난지도 국민여가캠핑장 충청남도 당진시 석문면 난지도리 701 충청남도 당진시 당진해양캠핑공원 충청남도 당진시 신평면 산정길 112 충청남도 "}
+{"cid":"101379","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/yamyam_rabbit/224097107684","at":"2025-12-03","text":"캐빈","quote":"74 난지섬 쭈꾸미 캠핑장 충청남도 당진시 석문면 난지도리 373-33 75 캠핑스테이 청포대 충청남도 태안군 남면 양잠리 1230-24 76 몽산포그린캠핑장 충청남도 태안군 남면 신장리 433-10 77 캐빈..."}
 {"cid":"101380","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/doongpooh/224439829898","at":"2026-10-13","quote":"차박이나 카라반이 가능한 구역. ​ ​ 바로 한단위의 B1, B2 사이트. 여긴 일행끼"}
 {"cid":"101380","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ruby12170/224402421592","at":"2026-09-06","quote":"​ 청평글램핑, 청평캠핑장, 청평카라반, 청평캠핑을 찾아보고 있다면 시설만 보고…"}
+{"cid":"101380","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/luckyone0617/224416026324","at":"2026-09-18","text":"독채","quote":"& & & 전화번호: 0507-1375-1744 기타정보: 스파, 독채, 개별바비큐, 2인실, 카라반, 오토캠핑, 데크, 수영장 #서울근교카라"}
 {"cid":"101380","attr":"SITE_TYPE","value":"PET_SITE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/doongpooh/224439829898","at":"2026-10-13","quote":"가평 청평 애견캠핑장 개별 울타리 펫밀리 캠프온 A4, A1후기. 차박이나 카라반이 가능한"}
+{"cid":"101380","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/soyeomool/224346002323","at":"2026-07-14","quote":"가평 캠핑장 청평호수뷰 개별화장실이 있는 캠프게이트. ️ 캠프게이트 청평호수뷰 가평 캠핑장 캠프게이트 청"}
 {"cid":"101381","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
 {"cid":"101381","attr":"INNER_AMENITY","value":"BED","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
 {"cid":"101381","attr":"INNER_AMENITY","value":"COOKWARE","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
@@ -18254,6 +18406,7 @@
 {"cid":"101384","attr":"STAY_CARAVAN_SITES","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101384","attr":"STAY_GLAMPING_SITES","value":13,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101385","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dusghk300/224431446625","at":"2026-10-04","quote":"가평 프라이빗한 글램핑&당일치기 캠핑 추천, 불멍 즐길수 있는 캠프 아리울. 가평 글램핑 프라"}
+{"cid":"101385","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/flfsp25/224118068504","at":"2026-01-01","text":"독채","quote":"​ 이곳은 풀램핑을 즐길 수 있는 독채 글램핑장으로, 사계절 내내 수영과 바베큐를 동시에 즐길 수 있는 장점이"}
 {"cid":"101386","attr":"SITE_TOTAL","value":13,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101386","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":13}
 {"cid":"101386","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":13}
@@ -18301,6 +18454,9 @@
 {"cid":"101395","attr":"SITE_TOTAL","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101395","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"101395","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":1}
+{"cid":"101395","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/kpj2325/224426083803","at":"2026-10-09","quote":"우선이라면 주문진 글램핑 오토캠핑장, 반려견과 조용하게 쉬고 싶다면 스테이123, 조금 색다른 커플 숙소를"}
+{"cid":"101395","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/412","at":"2024-06-17","quote":"강원도 특별자치도 추천 오토캠핑장 야영장 카라반 관광농원 자연..... 안목커피거리카라반캠핑 강원특별자치도 강릉시 구정"}
+{"cid":"101395","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/jhkim6281/223514544084","at":"2024-07-16","text":"펜션","quote":"강릉펜션 강릉캠핑장 숙소 스테이123. 주소 강원 강릉시 구정면 구정중앙로 15"}
 {"cid":"101395","attr":"STAY_GENERAL_SITES","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101395","attr":"STAY_GLAMPING_SITES","value":5,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101396","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
@@ -18318,6 +18474,9 @@
 {"cid":"101396","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/camfit/224355850500","at":"2026-07-24","text":"독채","quote":"#춘천글램핑 #춘천북한강글램핑 #춘천수영장글램핑 #남산면글램핑 #춘천커플글램핑 #북한강캠핑장 #춘천바베큐글램핑 #강원글램핑추천 #춘천독채글램핑 #춘천럭셔리캠핑 #캠핑후기 #솔직리뷰 #캠핑스타그램 #캠핏 #방문"}
 {"cid":"101396","attr":"STAY_GLAMPING_SITES","value":12,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101397","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/today-car/224444539964","at":"2026-10-17","quote":"“차 세우고 조금만 걸으면 서해 노을” 태안 학암포오토캠핑장, 가을 예약·명당·요금 총정리. 앞으로 붉은 노을이 펼쳐진다면, 정말"}
+{"cid":"101397","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/jbgokr/224429456355","at":"2026-10-02","quote":"(일) 미식프로그램, 시식판매, 요리대회, 카라반 캠핑 등 부안... 일원 무주국가유산야행 2026.10.3.(토)~10"}
+{"cid":"101397","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/wjswnekdma/224314935507","at":"2026-06-21","quote":"[전북 여행] 몸만 가도 완벽해! '전북 글램핑' BEST 5: 낭만과 편의를 ..... 캠핑은 하고 싶지만, 무거운"}
+{"cid":"101397","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/red-glow/224442817788","at":"2026-10-15","quote":"타프존. 어후, 춥다~ 하고 벚나무를 보니 단풍이 살~ 들고 있네. .. 오늘"}
 {"cid":"101398","attr":"SITE_TOTAL","value":21,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101398","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":21}
 {"cid":"101398","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101398","at":"2025-12-18T00:00:00+09:00","quote":"자동차 야영장과 독채형 펜션을 함께 운영해 이용 목적에 따라 선택이 가능하며, 개인 카라반과 트레일러 출입이 가능한 오토캠핑장으로 편리한 캠핑 환경을 제공합니다."}
@@ -18413,13 +18572,16 @@
 {"cid":"101410","attr":"STAY_RV_SITES","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101411","attr":"SITE_TOTAL","value":113,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101411","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":113}
+{"cid":"101411","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/o9o9o9o9o9oo/224350690139","at":"2026-07-19","quote":"장소＆사이트 고릴라캠핑 인 속리산 충청북도 보은군 속리산면 사내1길 13-12 고릴라캠핑 in 속리산 ​ 타프존캠핑장에서 즐기는 편리함 이번 캠핑에서 가장 만족...있었습니다. Pre"}
 {"cid":"101411","attr":"STAY_GENERAL_SITES","value":113,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101412","attr":"SITE_TOTAL","value":26,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101412","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--989a5b18vjuk7pm99bn7sszfbsj.com/","at":"2026-10-20T01:28:07.968Z","quote":"백담계곡오토캠핑장"}
 {"cid":"101412","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":26}
+{"cid":"101412","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/people-over-profit/224362517343","at":"2026-07-30","text":"펜션","quote":"편의시설 계곡 주변으로 펜션, 오토캠핑장, 민박, 향토 음식점 등이... 백담계곡(인제) 특징 및"}
 {"cid":"101412","attr":"STAY_GENERAL_SITES","value":26,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101413","attr":"SITE_TOTAL","value":50,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101413","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":50}
+{"cid":"101413","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dosz/224410987890","at":"2026-09-14","quote":"양평 엘모로 캠핑파크 개별 화장실 겨울 장박 캠핑장 추천. 양평 엘모로 캠핑파크는 개별 화장실과 샤워실,"}
 {"cid":"101413","attr":"STAY_GENERAL_SITES","value":50,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101414","attr":"SITE_TOTAL","value":12,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101414","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":2}
@@ -18432,14 +18594,17 @@
 {"cid":"101415","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":4}
 {"cid":"101415","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"101415","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/spxl1010/224259189701","at":"2026-04-20","quote":"남이섬 근처 가평 캠핑장 오토캠핑장 추천 제이와이카라반캠핑장"}
+{"cid":"101415","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/noonoo_324/223938638344","at":"2025-07-18","quote":"[가평] 제이와이카라반캠핑장 - 가평 글램핑 내돈내산 후기(가격,주..... ✅️ 가평역/터미널 픽업가능(전화예약)"}
 {"cid":"101415","attr":"STAY_CARAVAN_SITES","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101415","attr":"STAY_GENERAL_SITES","value":15,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101416","attr":"SITE_TOTAL","value":34,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101416","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":34}
 {"cid":"101416","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101416","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능 · 개인 카라반 입장 가능"}
+{"cid":"101416","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/jm_0513_/224444015662","at":"2026-10-19","quote":"홍성 내포캠핑스퀘어 내포캠핑스퀘어는 오토캠핑과 타프 사이트 등을 갖춘 홍성 캠핑장이에요. 이곳은 캠핑장 자체 토요일 체험 상품에"}
 {"cid":"101416","attr":"STAY_AUTO_SITES","value":34,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101417","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/869973760","at":"2026-10-16T05:37:04.663Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
+{"cid":"101417","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dlrkgus387/224442360509","at":"2026-10-15","quote":"경남 고성군 회화면 구만로 1126-7 #개별화장실캠핑장 #매너타임11시 #부산근교캠핑 #경남오토캠핑 안녕하세요 :) 가을"}
 {"cid":"101417","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/mogumogu82/224277107313","at":"2026-05-07","quote":"고성 모든날캠핑장 B3 타프존 (사이트 사진, 명당 추천). 어떻게 가지,,,,라는 생각이 드는 곳이"}
 {"cid":"101418","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://hcm-story.tistory.com/1808","at":"2026-02-22","quote":"80 SS 오토캠핑장. 일반야영장, 자동차야영장, 글램핑. 전기,무선인터넷,장작판매,온수,물"}
 {"cid":"101418","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://hcm-story.tistory.com/1808","at":"2026-02-22","quote":"시설 2 캠프(camp)301 일반야영장, 카라반 전기,무선인터넷,장작판매,온수,물놀이장,놀이터,운동시설,마트.편의점…."}
@@ -18535,6 +18700,7 @@
 {"cid":"101436","attr":"SITE_TOTAL","value":20,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101436","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":6}
 {"cid":"101436","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":20}
+{"cid":"101436","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/30","at":"2026-07-13","quote":"사계절 내내 편하고 쉽게 찾을 수 있는 도심 속 힐 ✅ ✅ ✅ 0507-1319-1616 포도길 캠핑장 안성시 일반야영장 ✅ ✅ ✅ 0507-1418-1931 안성허브마을캠핑장 안성시 글램핑 ✅ ✅ ✅ 031-671"}
 {"cid":"101436","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/daw994/224108391671","at":"2025-12-13","quote":"안성 캠핑장 : 포도길캠핑장 / 서울 근교 타프존 캠핑장 / 경기도 조용한 캠핑장. 올해는 진짜 왜그렇게 바빴는지 캠핑을"}
 {"cid":"101436","attr":"STAY_GENERAL_SITES","value":20,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101437","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/310905606","at":"2026-10-16T05:35:48.774Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
@@ -18543,6 +18709,7 @@
 {"cid":"101437","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/smartme2/223982937009","at":"2025-08-25","quote":"힐링아일랜드 갈현동화마을오토캠핑장 시간의바깥캠핑장 노랑카라반 두모마을 남해금산오토 성주은모래비치 송정솔바람야영장..."}
 {"cid":"101437","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/diverduggy/224312978265","at":"2026-06-11","quote":"삼동면의 시선글램핑과 갈현동화마을 오토캠핑장이 동부 해안 관광지 접근에 유리합니다. 캠핑객"}
 {"cid":"101437","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/smartme2/223982937009","at":"2025-08-25","text":"펜션","quote":"비교불가 만족만할 남해펜션 호텔형 리조트 신상글램핑 블루모어..... kr/ 캠핑장홈페이지 전문제"}
+{"cid":"101438","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/myungsun4462/223847875391","at":"2025-04-27","quote":"캠핑일기(9)️_ 25년 첫캠핑은 가족캠 (청도 아이고오토캠핑장). 갑자기 캠핑 이야기를 하지 뭐야 다담주 가자 했더니 그래 라길래 괜"}
 {"cid":"101438","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/skytrail70/224437845199","at":"2026-10-11","quote":"고령 더360캠핑장 N번째 솔로차박캠핑_일출맛집(26.9.2…"}
 {"cid":"101438","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/6uoarue/224365744322","at":"2026-08-02","quote":"경북 캠핑장 추천/ 고령 The360캠핑장 - B3 사이트 후기(카라반캠핑, 가야산 뷰, 여름캠핑 추천). 있었던 캠핑장이라 꼭 소개해 드리고"}
 {"cid":"101439","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://peridotpoolvillage.kr/sub2_room1.htm","at":"2026-10-19T02:41:05.586Z","text":"독채","quote":"독채 럭셔리거실"}
@@ -18588,9 +18755,17 @@
 {"cid":"101442","attr":"STAY_GENERAL_SITES","value":13,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101442","attr":"STAY_RV_SITES","value":13,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101443","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101443","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/159","at":"2023-08-09","quote":"최신 제주도 차박가능 오토캠핑장(자동차 야영장, 글램핑장, 펜션, ..... 19-36 일랑일랑 애견캠"}
+{"cid":"101443","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/159","at":"2023-08-09","quote":"최신 제주도 차박가능 오토캠핑장(자동차 야영장, 글램핑장, 펜션, ..... 19-36 일랑"}
+{"cid":"101443","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/nhyeonge/224406783458","at":"2026-09-11","quote":"​ 캠핑부터 방갈로까지 고르기 일랑일랑 애견캠핑 인 제주는 오토캠핑, 카라반, 글램핑, 방갈로를 운영해요. ​ 데크와 파쇄석 사이트도 있어 텐트 설"}
+{"cid":"101443","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/nhyeonge/224406783458","at":"2026-09-11","quote":"​ 캠핑부터 방갈로까지 고르기 일랑일랑 애견캠핑 인 제주는 오토캠핑, 카라반, 글램핑, 방갈로를 운영해요. ​ 데크와 파쇄석 사이트도 있어 텐트 설치 방식이"}
 {"cid":"101443","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/nhyeonge/224406783458","at":"2026-09-11","text":"방갈로","quote":"​ 캠핑부터 방갈로까지 고르기 일랑일랑 애견캠핑 인 제주는 오토캠핑, 카라반, 글램핑, 방"}
 {"cid":"101443","attr":"SITE_TYPE","value":"PET_SITE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/hi2547225/224425156328","at":"2026-09-28","quote":"ㅠㅠㅠㅠ ​ ​ ​ 부모님을 배웅하고 다시 자유의 몸이 된 저는 제주 애월에 있는 일랑일랑 애견캠핑장으로 갑니다! ​ 일랑일랑 애견캠핑 인 제주 제주특별자치도 제주시 애월읍"}
 {"cid":"101444","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--h49a69znpeseq4zkuextkvlkpzd.com/","at":"2026-10-20T01:28:01.668Z","text":"펜션","quote":"월성무지개펜션캠핑 | 깨끗한 물이 흐르는 월성계곡 옆 펜션&캠핑"}
+{"cid":"101444","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/thegadakr/224406748831","at":"2026-09-10","quote":"5 월성 무지개 펜션 앤 캠핑 북상면 경상남도 거창군 북상면 계수나무길 97 거창한 밤 캠핑장 가조면 경상남도 거창군 가조면 조금실길 589 수승대 오토캠핑장 위천면 경상남도 거창군 위천면 은하리길 100 거창 국민"}
+{"cid":"101444","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/nullpozam/223221272556","at":"2023-09-25","quote":"부산 경남 캠핑장 야영장 차박 가능한곳. 2187 월성계곡 강가펜션 캠핑장 거창군 북상면 덕유월성로 212"}
+{"cid":"101444","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://richcat.tistory.com/19993","at":"2024-03-07","quote":"286 무지개카라반 경상남도 사천시 대포동 176 055-834-1008 0 5157.3."}
+{"cid":"101444","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://richcat.tistory.com/19993","at":"2024-03-07","quote":"쉼표 글램핑&캠핑. 수승대 오토캠핑장. 남산공원 오토캠핑장. 경상남도 고성군 고성읍"}
 {"cid":"101446","attr":"SITE_TOTAL","value":15,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101446","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101446","at":"2025-12-19T00:00:00+09:00","quote":"일반 파쇄석이 아닌 몽돌이 깔린 차박 가능한 오토캠핑장과, 데크별 주차가 가능한 넓은 데크 오토캠핑장도 함께 마련되어 있습니다"}
 {"cid":"101446","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":4}
@@ -18618,6 +18793,10 @@
 {"cid":"101450","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/slowtempo1216/223710159659","at":"2024-12-31","quote":"태안오토캠핑장 프라이빗 넓은간격 피구지 캠핑장 추천 (꿀정보O). 피구지 캠핑장 주소"}
 {"cid":"101450","attr":"STAY_GENERAL_SITES","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101450","attr":"STAY_GLAMPING_SITES","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101451","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/seulbi_hi/223832011685","at":"2025-04-15","quote":"충북 신생 진천 오토캠핑장 맑을청 후기 정보. 곳은 진천 오토캠핑장 맑을청캠핑장이고요 처음에 예약"}
+{"cid":"101452","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/bbmmbbaa/224431306725","at":"2026-10-04","quote":"#자연과숲캠핑장 #강화도자연과숲캠핑장 #자연과숲 #강화도캠핑장 #강화캠핑장 #강화도캠핑 #강화도캠핑장추천 #강화캠핑장추천 #인천캠핑장 #인천캠핑장추천 #강화도오토캠핑장 #강화도캠핑여행 #강화도여행..."}
+{"cid":"101452","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/hiawa1018/224231840548","at":"2026-03-27","quote":"인천 강화군 내가면 고비고개로 515-1 📞 0507-1322-9938 ⏱ 입실 시간: 12:00, 퇴실 시간: 11:00 ✔️ 차박, 파쇄석, 카라반, 단체, 오토캠핑, 반려동물, 잔디, 계곡...벚꽃캠핑명당추천"}
+{"cid":"101452","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/5447997/222199693749","at":"2021-01-07","text":"펜션","quote":"펜션과 함께 운영하는..."}
 {"cid":"101453","attr":"SITE_TOTAL","value":20,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101453","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/85429677","at":"2026-10-16T05:36:43.343Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"101453","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":3}
@@ -18744,6 +18923,7 @@
 {"cid":"101466","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101466","at":"2024-08-22T00:00:00+09:00","quote":"람보캠핑장은 아름다운 청풍호반이 한눈에 내려다 보이는 곳에 위치하고 있으며 청풍체험글램핑㈜에서 직영 운영하며 사계절 테마가 숨쉬고 있는 럭셔리 캠핑장 으로 개별"}
 {"cid":"101466","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"101466","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dsyhome/224429033972","at":"2026-10-02","quote":"야영장 람보캠핑장 돌배야영장 홈페이지제작 경포대,강릉 여행 카라반캠핑장 어은돌송림캠핑장 청도 숲속에서 오토캠핑장화양동관광농원 오토캠핑모바일홈페이지제작 모바일예약시스템 홈페이지제작 홈페"}
+{"cid":"101466","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dsyhome/224429033972","at":"2026-10-02","quote":"야영장 람보캠핑장 돌배야영장 홈페이지제작 경포대,강릉 여행 카라반캠핑장 어은돌송림캠핑장 청도 숲속에서 오토캠핑장화양동관광농원 오토캠핑모바"}
 {"cid":"101466","attr":"STAY_GENERAL_SITES","value":15,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101467","attr":"SITE_TOTAL","value":11,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101467","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":11}
@@ -18816,11 +18996,15 @@
 {"cid":"101476","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101476","attr":"STAY_GLAMPING_SITES","value":7,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101477","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/myomi_0/223260269734","at":"2023-11-09","text":"펜션","quote":"전남펜션 미니멀스테이 화순 자연의미학 / 정우웨딩숙박권이벤트. 이서면으로 수만리"}
+{"cid":"101480","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://romance-dal315.tistory.com/308","at":"2025-10-14","quote":"대관령솔내음오토캠핑장. 소금강마을에코센터 오토캠핑장. 솔향강릉오토캠핑장. 안목커피거리카라반캠"}
+{"cid":"101480","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/154","at":"2023-08-04","quote":"최신 강원도 차박가능 오토캠핑장(자동차 야영장, 글램핑장, 펜션, ..... - 자동차 야영"}
 {"cid":"101480","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://romance-dal315.tistory.com/308","at":"2025-10-14","quote":"여가 캠핑장 강원 속초시 해오름로 186 (조양동) 강원도 속초시 수푸로 카라반 강원특별자치도 속초시 장성천길 61-25 (장사동) 강원도 속초시 참새"}
+{"cid":"101480","attr":"SITE_TYPE","value":"DECK","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/hunterfish/223638401741","at":"2024-10-29","quote":"같아요 참새둥지야영장 데크존 첫날은 일마치고 출발하느라 늦은시간 도착해서 급 피곤해서 대충..."}
 {"cid":"101480","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://romance-dal315.tistory.com/308","at":"2025-10-14","quote":"주문진글램핑오토캠핑장. 고라니 오토캠핑장. 고성 탑 글램핑 농원. 광민이네 오토캠핑"}
 {"cid":"101480","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/jss03260/224307865302","at":"2026-06-06","text":"펜션","quote":"(일) 3박4일 속초- 강릉 여행 우리의 연애 초반,,,! ​ 10월은 캠핑의 계절~ ​ 1박은 속초 참새둥지 야영장에서 캠핑! 2박은 강릉 오션힐 펜션에서 묵기로하고 예볼리 타고 속초로 출발했다~! 예쁘고 조용한 "}
 {"cid":"101481","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/jijjuri/224360947307","at":"2026-07-28","quote":"경남 창원 근교 아이랑 가기 좋은 위더스캠핑장(계모임 , 카라반 가족여행). 안녕하세요 오늘은 마산 진전 적석산에 위치하고 있는 위더스"}
 {"cid":"101481","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://leports.sailing-blog.click/4543","at":"2026-06-04","quote":"me/ - 주소 경상남도 창녕군 박진로 627 위더스글램핑(낙동강 위더스 럭셔리글램핑)은 경남 창녕군 남지읍 반포리에 자리 잡았다"}
+{"cid":"101481","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/gxrhuieezj/223596372665","at":"2024-09-25","text":"펜션","quote":"경남 창원 마산 위더스 캠핑장 펜션 카라반 대형 수영장. 그래서 오늘은 부산과 진주에서 대략 1시간 내외"}
 {"cid":"101483","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
 {"cid":"101483","attr":"INNER_AMENITY","value":"BED","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
 {"cid":"101483","attr":"INNER_AMENITY","value":"COOKWARE","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
@@ -19002,6 +19186,7 @@
 {"cid":"101518","attr":"STAY_GENERAL_SITES","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101518","attr":"STAY_GLAMPING_SITES","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101519","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101519","at":"2024-08-21T00:00:00+09:00","text":"독채","quote":"10명(최대12명 이하)가 이용가능한 독채캠핑장입니다. 2~3 가족간 캠핑 3대가 함께하는 캠핑 소규모 동호회 캠"}
+{"cid":"101519","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/trytry_chu/224101993744","at":"2025-12-08","quote":"인천 개별 화장실 있는 독채 캠핑장 너아라캠핑장 2박3일. 일곱번째 캠핑 (2) 너아라캠"}
 {"cid":"101520","attr":"SITE_TOTAL","value":15,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101520","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101520","at":"2026-07-23T00:00:00+09:00","quote":"또한 국립 최초 반려견 동반 야영장으로 오토캠핑장에는 반려견 실종 방지를 위한 울타리가 있으며, 소형 및 대형반려견을 나"}
 {"cid":"101520","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":9}
@@ -19017,6 +19202,8 @@
 {"cid":"101523","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":28}
 {"cid":"101523","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능 · 개인 카라반 입장 가능"}
 {"cid":"101523","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/mama670/224103136512","at":"2025-12-09","quote":"충남 보령 캠핑장 대천힐링캠핑장 조기입실 가능한 감성 바다뷰 오토캠핑장 명당. 보령 캠핑장 대천힐링캠핑장 조기입실 가능한 감성 바다뷰 오토캠핑"}
+{"cid":"101523","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/blackholeee/223872282286","at":"2025-05-20","quote":"이용가격 / 사이트 하나당 기준2인(최대4인) / 6만원~7만원 <카라반 설치시 +5,000원> 매너타임..."}
+{"cid":"101523","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://triple.guide/hotels/1860f362-9385-4e48-98fd-121461d91bb8?checkIn=2024-02-17&checkOut=2024-02-18&numberOfAdults=2&agesOfChildren&skipInitialCache=true&_triple_no_navbar=true","text":"펜션","quote":"보령(대천) 파라다이스 펜션,모텔 - 트리플 숙소. 무료취소 19 일반실 퀸베드 1개 최대 3인 금"}
 {"cid":"101523","attr":"STAY_GENERAL_SITES","value":28,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101524","attr":"SITE_TOTAL","value":36,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101524","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1627648276","at":"2026-10-16T05:34:46.710Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
@@ -19025,6 +19212,7 @@
 {"cid":"101524","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/go0022/224440395212","at":"2026-10-14","quote":"태안 키즈캠핑장 신두리 오렌지캠핑장 타프존 D7 아이와 다녀온 후기. 캠핑을 떠날 때는 캠핑장 시설도 중요하지만"}
 {"cid":"101524","attr":"STAY_GENERAL_SITES","value":36,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101525","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101525","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/footneki-v/224435361844","at":"2026-10-15","quote":"#제천캠핑장 #리아띠캠핑장 #제천리아띠캠핑장 #리아띠캠핑 #제천캠핑장추천 #충북캠핑장 #충북캠핑장추천 #제천오토캠핑장 #제천가족캠핑 #제천아이와캠핑 #제천키즈캠핑장 #제천수영장캠핑장 #수영"}
 {"cid":"101525","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://myblog21033.tistory.com/1","at":"2026-10-01","quote":"캠퍼디는 풀타프존있움!. 팬히터 대여가능!"}
 {"cid":"101526","attr":"SITE_TOTAL","value":19,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101526","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":19}
@@ -19063,12 +19251,17 @@
 {"cid":"101535","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/941424527","at":"2026-10-16T05:36:52.256Z","quote":"여행 > 숙박 > 야영,캠핑장 > 글램핑장"}
 {"cid":"101535","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101536","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--qz2b0zc8k0wgbkr.jdweb.kr/?ckattempt=1","at":"2026-10-20T01:26:28.585Z","text":"펜션","quote":"맑은물펜션"}
+{"cid":"101536","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/rianse/224160077986","at":"2026-01-26","quote":"오토 캠핑장(사이트 내 주차 가능) - 체크인 오후 2시 / 체크아웃 오전 11시"}
+{"cid":"101536","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/jy5nej22loimqh/224370049721","at":"2026-08-06","quote":"포천 산정호수주변펜션, 이색적인 2인 3인 4인 카라반. 계곡은 1급수 맑은 물이 단지 내로 흐르는 환경이라 물놀이를... 코"}
+{"cid":"101536","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/jja03127/224423883222","at":"2026-09-27","quote":"포천글램핑 서울 근교에서 조용히 묵기 좋은 숙소 추천. 있는 포천은 언제나 매력적"}
 {"cid":"101537","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1447031649","at":"2026-10-16T05:36:52.475Z","quote":"여행 > 숙박 > 야영,캠핑장 > 카라반"}
 {"cid":"101537","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/wowoa3/224156524855","at":"2026-01-23","quote":"여러분, 글램핑이나 카라반 좋아하시나요? 저는 캠퍼수준은 아니지만 텐트 또는 카라반에서"}
 {"cid":"101538","attr":"SITE_TOTAL","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101538","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"101538","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101538","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/pym45/110143471718","at":"2012-07-25","quote":"net/h/bambeol/ 합소오토캠핑장 - 경기도 가평군 설악면 가일리 283-4번지 / 031)584-758"}
 {"cid":"101538","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/design-jieum/224436437548","at":"2026-10-13","quote":"캠핑장 홈페이지 제작, 가평 계곡 글램핑 '배치도에서 내 자리 고르는' 홈페이지. 입실, 매너타임, 소등, 퇴실"}
+{"cid":"101538","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://88100.tistory.com/152","at":"2020-10-22","text":"방갈로","quote":"캠핑장에는 오토캠핑용 구역과 함께 텐트 없이 숙박 가능한 방갈로가 2 동 있다 .. 무료 와이파이도 이용할 수 있지만 , 나무가 워낙"}
 {"cid":"101538","attr":"STAY_GENERAL_SITES","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101539","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"naver_local","url":"https://blog.naver.com/akraudrl","at":"2026-10-16T06:16:12.651Z","text":"펜션","quote":"숙박>펜션"}
 {"cid":"101539","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/seon_mom/224381559250","at":"2026-08-17","quote":"상세정보 🕑 체크인15시 체크아웃11시 🅿️ 주차가능 ​ 그루잠펜션&캠핑 경기도 가평군 상면 물골길 175-79 가평 그루잠펜션 ​ 가평 그루잠펜션은 ✔️세모집 ✔️글램핑 ✔️캠핑존 ✔️독체펜션 이렇게 운영하고 "}
@@ -19104,13 +19297,19 @@
 {"cid":"101550","attr":"STAY_GLAMPING_SITES","value":11,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101551","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://romance-dal315.tistory.com/308","at":"2025-10-14","quote":"양구군 청춘양구 소양호 뱃길 나루터 강원특별자치도 양구군 양구읍 소양호로 2522 강원도 양양군 279캠핑장 강원 양양군 현북면 어성전길 279 강원도 양양군 Base Camp 강원 양양군 강현면 장재터로 337 강"}
 {"cid":"101551","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://romance-dal315.tistory.com/308","at":"2025-10-14","quote":"강릉 금진리321카라반. 강원 강릉시 옥계면 헌화로 247-11. 대관령솔내음오토캠핑장. 소금"}
+{"cid":"101551","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://romance-dal315.tistory.com/308","at":"2025-10-14","quote":"주문진글램핑오토캠핑장. 고라니 오토캠핑장. 고성 탑 글램핑 농원. 광민이네 오토캠핑"}
 {"cid":"101553","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://hwawoo.cpground.co.kr/","at":"2026-10-20T01:26:37.409Z","quote":"오토캠핑존"}
 {"cid":"101553","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://hwawoo.cpground.co.kr/","at":"2026-10-20T01:26:37.409Z","quote":"30여개의 파쇄석 사이트, 타프존, RV존, 카라반까지, 취향대로 선택하시고 캠핑의 진정한 즐거움을 누리시기 바랍니다."}
 {"cid":"101553","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"OPERATOR","src":"operator_homepage","url":"https://hwawoo.cpground.co.kr/","at":"2026-10-20T01:26:37.409Z","quote":"개별샤워실"}
 {"cid":"101553","attr":"SITE_TYPE","value":"RV","grade":"OPERATOR","src":"operator_homepage","url":"https://hwawoo.cpground.co.kr/","at":"2026-10-20T01:26:37.409Z","quote":"30여개의 파쇄석 사이트, 타프존, RV존, 카라반까지, 취향대로 선택하시고 캠핑의 진정한 즐거움을 누리시기 바랍"}
 {"cid":"101553","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"OPERATOR","src":"operator_homepage","url":"https://hwawoo.cpground.co.kr/","at":"2026-10-20T01:26:37.409Z","quote":"30여개의 파쇄석 사이트, 타프존, RV존, 카라반까지, 취향대로 선택하시고 캠핑의 진정한 즐거움을 누리"}
 {"cid":"101554","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/971239385","at":"2026-10-16T05:36:53.090Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
+{"cid":"101554","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/115","at":"2023-06-13","quote":"최신 경기도 차박가능 오토캠핑장(자동차 야영장, 글램핑장, 펜션, ..... 최신자료 : 2"}
+{"cid":"101554","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://worldofinfo.tistory.com/2909","at":"2025-02-07","quote":"주요시설: 자동차야영장 5개, 카라반 1개. 부대시설: 전기,무선인터넷,장작판매,온수,물놀이장. 안성내츄럴리"}
 {"cid":"101554","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://worldofinfo.tistory.com/2909","at":"2025-02-07","quote":"주요시설: 일반야영장 34개, 자동차야영장 24개, 글램핑 10개, 카라반 7개. 부대시설: 전기,무선인터넷,장작판매,온수,물놀이"}
+{"cid":"101554","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/115","at":"2023-06-13","text":"펜션","quote":"최신 경기도 차박가능 오토캠핑장(자동차 야영장, 글램핑장, 펜션, ..... 최신자료 : 2025-02-24 경기 지역 오토캠핑장, 자"}
+{"cid":"101555","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/gys5107/223364648898","at":"2024-02-25","quote":"충북 괴산 오토캠핑장::타닥타닥 캠핑장 궁금하면 드루와 (2박3일 캠..... ° 입실 14"}
+{"cid":"101555","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/noblione/224398725459","at":"2026-09-02","quote":"(목) 1 82 테슬라 모델y 주니퍼 차박캠핑용품 리뷰 2탄(추가물"}
 {"cid":"101555","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dugodwhdk12/224410557048","at":"2026-09-13","quote":"카라반, 글램핑, 풀옵션글램핑 | 15:00 ~ 11:00 오토캠핑 | 13:"}
 {"cid":"101555","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dugodwhdk12/224410557048","at":"2026-09-13","quote":"카라반, 글램핑, 풀옵션글램핑 | 15:00 ~ 11:00 오토캠핑 | 13:00 ~"}
 {"cid":"101556","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
@@ -19171,6 +19370,9 @@
 {"cid":"101566","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/409","at":"2024-06-12","text":"펜션","quote":"경상북도 추천 오토캠핑장 야영장 카라반 관광농원 자연휴양림 체험장 글램핑장 산장 펜션 테마파크.... 조룡길 865 국립김천숲속야영장 김천시 대항면 대룡로"}
 {"cid":"101566","attr":"STAY_GLAMPING_SITES","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101567","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/306706233","at":"2026-10-16T05:36:53.675Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
+{"cid":"101567","attr":"SITE_TYPE","value":"DECK","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/wuder_archive/224452404523","at":"2026-10-24","quote":"3만 원에 노을 맛집 데크 사이트에 특산물 꾸러미까지? 서해 선셋캠..... 충청남도 서해 선셋캠핑 ■"}
+{"cid":"101567","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/healthy-power/224430891804","at":"2026-10-04","quote":"보령 오천 글램핑 숙소 추천, 더반힐글램핑(애견동반,개별 바베큐,..... 확인 입실 1"}
+{"cid":"101567","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/healthy-power/224430891804","at":"2026-10-04","text":"펜션","quote":"보령데이트 #보령여행 #충남글램핑 #충남숙소 #충남펜션 #서해숙소 #서해글램핑 #바다뷰글램핑..."}
 {"cid":"101568","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://triple.guide/hotels/104552eb-5870-4755-96a4-172d501e656a","at":"2026-10-20T01:21:08.013Z","quote":"[한 줄 소개] 설악산 끝자락에서 캠핑과 글램핑을 즐길 수 있습니다 [예약 공지] 예약 인원에서 인원이 추가되는 경우"}
 {"cid":"101568","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://triple.guide/hotels/104552eb-5870-4755-96a4-172d501e656a","at":"2026-10-20T01:21:08.013Z","text":"펜션","quote":"양양 눈펜션"}
 {"cid":"101569","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
@@ -19200,9 +19402,14 @@
 {"cid":"101574","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":3}
 {"cid":"101574","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":1}
 {"cid":"101574","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dynnn1112/224432203202","at":"2026-10-05","quote":"맛있더 글램핑은 먹으러 오는거죠! 솥뚜껑으로 즐겨보아요 저 호일은 꽃게 ㅎ-ㅎ 가을"}
+{"cid":"101574","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/whsthfl/224223199281","at":"2026-03-20","quote":"대구 여행 | 대구 팔공산 카라반 캄비오캠핑장 개별화장실 감성 글..... 카라반 캄비오캠핑장은 대구 동구 팔공로에 위치하고 있"}
 {"cid":"101574","attr":"STAY_CARAVAN_SITES","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101574","attr":"STAY_GENERAL_SITES","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101575","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/sungdo-/224424849455","at":"2026-09-28","quote":"남파랑캠핑장 14번사이트 남해 오토캠핑장 인디언즈8.0 에어타프 개봉기. 먹기 삼천포용궁수산시장에서 포장해 온"}
+{"cid":"101575","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/anne961033/224426828677","at":"2026-09-30","quote":"25 (금) 👣 장소 - 남파랑 & 스테이 캠핑장, 경남 남해군 창선면 흥선로 1462, 1번 사이트 ( 개인적으로 차박 가능한 1번 사이트가 뷰와 소음 최소화로 좋은거 같음) 👣 비용 - 5만"}
+{"cid":"101575","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/smartme2/223982937009","at":"2025-08-25","quote":"버드하우스캠핑장 작가캠핑 가반나야영장 마음껏남해 남파랑캠핑장&스테이 힐링아일랜드 별천지캠핑장 남해에덴캠핑장 힐링아일랜드 갈현동화마을오토캠핑장 시간의바깥캠핑장 노랑카라반 두모마을..."}
+{"cid":"101575","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/smartme2/223982937009","at":"2025-08-25","quote":"비교불가 만족만할 남해펜션 호텔형 리조트 신상글램핑 블루모어..... 버드하우스캠핑장 작가캠핑 가반나야영장 마음껏남해 남파"}
+{"cid":"101575","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/steve2680/224326306307","at":"2026-06-25","text":"독채","quote":"가성비와 낭만을 모두 잡은남해숙소 남해민박독채 홍현스테이. 6월ㅜㅜ 캠핑 좋아하고 바베큐 좋아하는 아이들에게 단 하루"}
 {"cid":"101576","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"https://chojeonseaforestglamping.kr/","at":"2026-10-20T01:26:17.148Z","quote":"푸른 바다가 맞이하는 곳, 남해 초전바다숲글램핑에서 사랑하는 이들과 함께 즐기며 프라이빗한 시간을 즐길 수 있습니다."}
 {"cid":"101577","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/heeee_k/224440334078","at":"2026-10-13","quote":"15시 ~ 17시 브레이크타임 🅿️ 주차장⭕️ 외부음식 반입금지 (케이크,이유식은 ok) 중소형견 15kg이하까지만 출입 가능 산오바베큐 경기도 여주시 금사면 금품1로 468 1층 산오마켓 안녕하세요~! 주말에 여"}
 {"cid":"101577","attr":"SITE_TYPE","value":"PET_SITE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/paper55_/224187243215","at":"2026-02-18","quote":"서울근교 경기도 여주 반려견캠핑장 바베큐 내돈내산 후기. 함께 여주 반려견동반 캠핑장 ‘산오마켓’에 다녀"}
@@ -19223,9 +19430,14 @@
 {"cid":"101580","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1622959142","at":"2026-10-16T05:36:48.551Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"101580","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/yamyam_rabbit/223871572894","at":"2025-05-20","quote":"06-03 63 (주)지에스웹 야영장 플라움 경상남도 김해시 한림면 신천리 119-2 경상남도 김해시 한림면 김해대로1499번길 25-19 2023-06-15 64 갈화오토캠핑장 경상남도 남해군 고현면 갈화리 222"}
 {"cid":"101581","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/haeroo/224436998345","at":"2026-10-10","quote":"태안 몽산포 오토 캠핑장 해수욕장 해루질 조개잡이. 시점에 맞춰 들어가는 걸 추천해요. ​ 해수"}
+{"cid":"101581","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/life_log1111/224448161281","at":"2026-10-20","quote":"몽산포 캠핑장 국립공원 요금｜전기 600W·차박 가능 영지·사이트 이..... 몽산포 해변 주변에는 상호에 몽산포가 들어가는"}
 {"cid":"101581","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://beauty-joy.tistory.com/1741","at":"2026-10-19","quote":"자라섬 캠핑장은 오토캠핑과 카라반 등 다양한 형태의 숙박을 선택할 수 있어 캠핑 경험이 많지 않은 분들도"}
+{"cid":"101581","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://beauty-joy.tistory.com/1741","at":"2026-10-19","quote":"충주호캠핑월드는 호수 전망을 중심으로 캠핑과 글램핑을 즐길 수 있는 곳으로 알려져 있습니다.. 다만 해안가 캠핑은 강풍과"}
+{"cid":"101581","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ssmmku/224441724782","at":"2026-10-14","text":"펜션","quote":"몽산포펜션 몽산포아델 하늘방, 애견동반 가능한 해루질 숙소 후기. 정보 ⏰ 입실"}
 {"cid":"101582","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://soopurocaravan.kr/","at":"2026-10-16T07:03:55.474Z","text":"독채","quote":"독채/ 침대룸 거실 주방 화장실"}
 {"cid":"101582","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1641071601","at":"2026-10-16T05:36:48.837Z","quote":"여행 > 숙박 > 야영,캠핑장 > 카라반"}
+{"cid":"101582","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dpwlenen47/224017393106","at":"2025-09-22","quote":"[속초]수푸로카라반_프라이빗 카라반 글램핑 숙소 추천(내돈내산). 속초 수푸로카라반을 강력 추천합니다!! 날이 좋"}
+{"cid":"101582","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"MENTION","src":"blog_mention","url":"https://mom-mom.net/travel/properties/681e280b6050f3e0a35b952d?checkin=2026-07-15&checkout=2026-07-16","quote":"강원특별자치도 속초시 장성천길 61-25에 위치한 속초 수푸로카라반은 카라반, 캠핑, 금연객실, 개별바베큐, 공용주방, 불멍, 글램핑, 주차가능, 개별 화장실을 보유한 아이와 가기 좋은 펜션이에요. 지금 맘맘 앱에서"}
 {"cid":"101583","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,에어컨,냉장고,유무선인터넷,난방기구,취사도구"}
 {"cid":"101583","attr":"INNER_AMENITY","value":"BED","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,에어컨,냉장고,유무선인터넷,난방기구,취사도구"}
 {"cid":"101583","attr":"INNER_AMENITY","value":"COOKWARE","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,에어컨,냉장고,유무선인터넷,난방기구,취사도구"}
@@ -19273,6 +19485,7 @@
 {"cid":"101586","attr":"STAY_GLAMPING_SITES","value":14,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101587","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101587","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/vernie222/224420994047","at":"2026-09-24","quote":"가평 오토캠핑장 펜스와 텐트까지 있는 까사힐395 경기도 애견동반 캠핑장 추천. 텐트가"}
+{"cid":"101587","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://mom-mom.net/travel/properties/676443b714901aece21b2761","quote":"경기도 가평군 청평면 솥틀로 54-85에 위치한 가평 까사 힐 395 캠핑장은 패밀리, 바베큐, 반려동물 동반 가능, 캠핑, 주차가능, 금연객실, 글램핑, 독채펜션, 매점/편의점을 보유한 아이와 가기 좋은 펜션이에요"}
 {"cid":"101587","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/bab_bab_bab/224401276641","at":"2026-09-04","text":"독채","quote":"\"이번 주말 뭐 하고 쉴까?\" 캠핑 vs 독채 펜션, 서울 근교 여행지 비교. 서울 근교에서 제대로 쉬고 싶다면 자연"}
 {"cid":"101587","attr":"SITE_TYPE","value":"PET_SITE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/alsdud4358/224410443294","at":"2026-09-13","quote":"가평 애견캠핑장 까사힐395 프라이빗 울타리 개별화장실 솔직후기. ​ 날씨가 선선해지면"}
 {"cid":"101587","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/hotfrappuccino/224431210058","at":"2026-10-04","quote":"경기도 가평 애견동반 캠핑장 까사힐395 풀타프존 개별화장실·냉장고·에어컨 내돈내산. 퇴실 11시 🏕️ 사이트 : 1B"}
@@ -19289,6 +19502,7 @@
 {"cid":"101589","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://tt.jobemma.com/733","at":"2026-10-13","quote":"쾌적한 오토캠핑 사이트부터 감성 글램핑, 차박까지 다채로운 야영 형태를 지원하는 명품 휴양 공간은 남원 숲속"}
 {"cid":"101589","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://kesamo.co.kr/1178","at":"2026-10-13","text":"돔하우스","quote":"6시 내고향 전북 남원 캠핑장 추천 교룡공원 숲속야영장 돔하우스 예약방법 전북 남원 캠핑장 추천｜교룡공원 숲속야영장 전북특별자치도 남원"}
 {"cid":"101589","attr":"STAY_GENERAL_SITES","value":32,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101590","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dsyhome/224429033972","at":"2026-10-02","quote":"카라반 죽도야영장 람보캠핑장 돌배야영장 홈페이지제작 경포대,강릉 여행 카라반캠핑장 어은돌송림캠핑장 청도 숲속에서 오토캠핑장화양동관광농원 오토캠핑모바일홈페이지제작 모바일예약시스템 홈페이지제작 홈페"}
 {"cid":"101590","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dsyhome/224429033972","at":"2026-10-02","quote":"카라반 죽도야영장 람보캠핑장 돌배야영장 홈페이지제작 경포대,강릉 여행 카라반캠"}
 {"cid":"101591","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
 {"cid":"101591","attr":"INNER_AMENITY","value":"BED","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
@@ -19337,7 +19551,9 @@
 {"cid":"101596","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/camwoori/224382524423","at":"2026-08-19","quote":"청주 오토캠핑장 제제캠프, 가족 캠핑 초보자 강추 — 프라이빗 전체대관. 에디터의 솔직"}
 {"cid":"101596","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/subeeeen_/224361028553","at":"2026-07-28","quote":"전체대관 캠핑장 제제캠핑 청주근교캠핑 글램핑장 추천. 전체대관 할 수 있는 제제캠핑장에 다녀왔는데 이곳에서 청첩장"}
 {"cid":"101597","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"naver_local","url":"https://www.camfit.co.kr/camp/675a58ef28c477001d97c113","at":"2026-10-16T06:39:36.312Z","text":"펜션","quote":"숙박>펜션"}
+{"cid":"101597","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ye_rimi____/224131572069","at":"2026-01-02","quote":"#밀양캠핑도래 #밀양캠핑장 #밀양오토캠핑장 #밀양신상캠핑장 #경남캠핑장 #경남오토캠핑장 #오토캠핑 #데크캠핑 #파"}
 {"cid":"101597","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/yura1668/224415668950","at":"2026-09-18","quote":"울산근교글램핑 추천 ! 밀양 캠핑도래글램핑 다녀온 후기. 안녕하세요 ㅎ 오늘은 오랜만"}
+{"cid":"101598","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/g_eyex/224115593886","at":"2025-12-19","quote":"올린다 미얀ㅠ 하크베리빌 호텔 글램핑 리조트 경상남도 사천시 석양길 160 하크베리빌 경남 사천 여행:하크베"}
 {"cid":"101599","attr":"SITE_TOTAL","value":32,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101599","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"101599","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":22}
@@ -19350,6 +19566,9 @@
 {"cid":"101600","attr":"STAY_GLAMPING_SITES","value":16,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101601","attr":"SITE_TOTAL","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101601","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":8}
+{"cid":"101601","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/115","at":"2023-06-13","quote":"최신 경기도 차박가능 오토캠핑장(자동차 야영장, 글램핑장, 펜션, ..... 파주발랑캠핑타운"}
+{"cid":"101601","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/115","at":"2023-06-13","quote":"최신 경기도 차박가능 오토캠핑장(자동차 야영장, 글램핑장, 펜션, ..... 파주발랑캠핑타운 파주시 적성면 윗배우니길 68 캠"}
+{"cid":"101601","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://zoozp.tistory.com/115","at":"2023-06-13","text":"펜션","quote":"최신 경기도 차박가능 오토캠핑장(자동차 야영장, 글램핑장, 펜션, ..... 파주발랑캠핑타운 파주시 적성면 윗배우니길 68 캠핑엔조이"}
 {"cid":"101601","attr":"STAY_AUTO_SITES","value":8,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101602","attr":"SITE_TOTAL","value":9,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101602","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":9}
@@ -19391,6 +19610,7 @@
 {"cid":"101610","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101610","at":"2024-11-04T00:00:00+09:00","quote":"일반야영장이지만, 자동차도 싸이트 바로 옆에 주차가 가능하며 카라반정박도 가능합니다."}
 {"cid":"101610","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":70}
 {"cid":"101610","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능 · 개인 카라반 입장 가능"}
+{"cid":"101610","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.vibebuilder.kr/34","at":"2026-07-13","quote":"호수랑 오토캠핑장. 그랜드 파파하우스야영장"}
 {"cid":"101610","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/djalrud/224417123747","at":"2026-09-20","quote":"포천 파인트리 글램핑 카라반 마트 수영장 아이랑 여행. 추천드립니다. ​ 캠핑장에서 걸어서"}
 {"cid":"101610","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dsyhome/224264145530","at":"2026-04-24","text":"펜션","quote":"펜션 홈페이지제작 및 캠핑장예약시스템 안내도 배치도 이용 업체소개. 충청북도"}
 {"cid":"101610","attr":"STAY_GENERAL_SITES","value":70,"grade":"CONFIRMED","src":"gocamping"}
@@ -19400,6 +19620,7 @@
 {"cid":"101611","attr":"SITE_TOTAL","value":9,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101611","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"101611","attr":"STAY_GLAMPING_SITES","value":9,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101612","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://caravanpark.kr/place/elpark246","quote":"차박&오토캠핑장 카라반캠핑장 애견동반가능 청주 도심과 자연이 어우러져 있는곳! 청주에"}
 {"cid":"101612","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/nhyeonge/224410366127","at":"2026-09-13","quote":"반려동물과 함께 펜스가 있는 카라반 공간에서 쉬고 싶다면, 청주캠핑장 초정힐링캠핑장은 숙소 형태와 바비큐"}
 {"cid":"101612","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/chanjo85/224378575622","at":"2026-08-14","quote":"청주 캠핑장 및 글램핑 추천 BEST 10. 있어 불편함 없이 아름다운 호수 낙조를 감상할 수"}
 {"cid":"101613","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dsyhome/224264145530","at":"2026-04-24","quote":"충청북도 제천시] 팜데이 [경상남도 거창군] 거창산림레포츠파크 [전라남도 완도군] 해변 야영장 [충청남도 태안군] 몽산포해변캠핑장 [경기도 이천시] 솔바비큐 야영장 [경기도 양평군] 아리아글램핑 [경상북도 경주시] "}
@@ -19409,6 +19630,7 @@
 {"cid":"101614","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101616","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://starlightcamping.net/contents/main.html","at":"2026-10-20T01:25:54.232Z","text":"펜션","quote":"별빛담은펜션"}
 {"cid":"101616","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/2015371768","at":"2026-10-16T05:36:44.661Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
+{"cid":"101616","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://mom-mom.net/travel/properties/678fc564130b90bf861e79b1?checkin=2026-07-15&checkout=2026-07-16","quote":"가평 별빛담은 회원전용 특가, 아이와 함께 방문후기 | 키즈 호텔, 리조트, 펜션, 글램핑 예약은 맘맘. 주차가능, 개별바베큐, 바베큐, 와이파이, 공용주방, 계"}
 {"cid":"101617","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
 {"cid":"101617","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,에어컨,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
 {"cid":"101617","attr":"INNER_AMENITY","value":"BED","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
@@ -19497,6 +19719,7 @@
 {"cid":"101624","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/gdci/kUkj/32","at":"2023-12-19","quote":"전국오토캠핑장 추가. 공원 - 공원이용료 간현 관광지 야영장 강원도 원주시 지정면 간"}
 {"cid":"101624","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/pilcon/7daP/2602","at":"2024-07-27","quote":"전국 차박캠핑장 소개. 화장실, 개수대) 원주시 지정면 간현리 1056-5 치악산자연"}
 {"cid":"101624","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/cjdthfah99/224425785640","at":"2026-09-29","quote":"치악산 자연휴양림 카라반 3호 후기｜작은 폭포 옆 바베큐. 휴양림 입실 안내 & 유의해야 할 점"}
+{"cid":"101624","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/charlespc/224407193874","at":"2026-09-10","text":"통나무집","quote":"​ 치악산자연휴양림은 야영장이 없고 숲속의집,통나무집,카라반,황토방 으로 운영된다. 늘 전국의 자연휴양림과 국립공원에 올 때"}
 {"cid":"101625","attr":"SITE_TOTAL","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101625","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":6}
 {"cid":"101625","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
@@ -19504,6 +19727,7 @@
 {"cid":"101625","attr":"STAY_CARAVAN_SITES","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101626","attr":"SITE_TYPE","value":"GLAMPING","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--202-hb9li00bnmpfs5a.com/","at":"2026-10-20T01:25:59.853Z","quote":"숲202글램핑"}
 {"cid":"101626","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--202-hb9li00bnmpfs5a.com/sub4.php?num=4_1","at":"2026-10-20T01:25:59.853Z","text":"펜션","quote":"예약 인원에서 인원이 추가되는 경우 펜션에 미리 연락을 주시기 바랍니다."}
+{"cid":"101626","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://triple.guide/hotels/06c97072-5fb0-4287-b9e4-43a6447eb5e3","quote":"카라반&글램핑 옆 1대 주차가능 이용날짜 변경 후 취소시 환불불가입니다. 폭죽"}
 {"cid":"101627","attr":"SITE_TOTAL","value":13,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101627","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":13}
 {"cid":"101627","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/camfit/224321874823","at":"2026-06-20","quote":"파주 오토캠핑장 선택, 나무와쉬리가 정답일까? — 자작나무 숲 힐링 캠핑. 기본 정보"}
@@ -19543,6 +19767,7 @@
 {"cid":"101633","attr":"SITE_TOTAL","value":9,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101633","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"101633","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/lovely_hae/224417558562","at":"2026-09-20","quote":"[양주] 힐링캠프 글램핑장. 되는 코코 조합에 캠핑장이나 글램핑장에서 자는건 무리라고 생각이 들"}
+{"cid":"101633","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://caravanpark.kr/place/elparke304","text":"펜션","quote":"캠핑, 펜션 종합 예약 사이트입니다."}
 {"cid":"101633","attr":"STAY_GENERAL_SITES","value":9,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101634","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/camfit/224444849780","at":"2026-10-18","quote":"남해 오토캠핑장 오시오캠프, 봄 갈대숲 힐링 캠핑 가성비 강추 🏕️. 미리 연락하면"}
 {"cid":"101635","attr":"SITE_TOTAL","value":41,"grade":"CONFIRMED","src":"gocamping"}
@@ -22328,6 +22553,9 @@
 {"cid":"102368","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102368","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"개인 카라반 입장 가능"}
 {"cid":"102368","attr":"STAY_AUTO_SITES","value":8,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102378","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/suckbong1/224376552480","at":"2026-08-12","quote":"태안 바다드림 오토캠핑장 후기｜마검포해수욕장 솔밭 38번 사이트 ..... 무엇보다 가장 큰 장"}
+{"cid":"102378","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/taeanoceanhill/224445036936","at":"2026-10-17","quote":"태안 오토캠핑, 펜션, 방갈로, 글램핑, 카라반 추천 — 태안 바다드..... 한눈에 핵심정보 충남 태안군에 위치한 태"}
+{"cid":"102378","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/taeanoceanhill/224445036936","at":"2026-10-17","quote":"태안 오토캠핑, 펜션, 방갈로, 글램핑, 카라반 추천 — 태안 바다드..... 한눈에 핵심정보 충남 태안군에"}
 {"cid":"102378","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/delosk888/224362036216","at":"2026-07-29","text":"펜션","quote":"태안 바다드림캠핑장 펜션 마검포해수욕장 갯벌체험 해루질까지. 엔돌핑입니다. 오늘은 물놀이 및 갯"}
 {"cid":"pilot-002-sureui","attr":"SITE_TOTAL","value":30,"grade":"CONFIRMED","src":"gocamping","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032"}
 {"cid":"pilot-002-sureui","attr":"STAY_AUTO_SITES","value":30,"grade":"CONFIRMED","src":"gocamping","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032"}

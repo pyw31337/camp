@@ -1,39 +1,29 @@
-# 데이터 품질 보고 — 2026-10-24
+# 데이터 품질 보고 — 2026-10-25
 
 자동 생성(pipeline/scripts/quality-ledger.mjs). 기준·절차는 [docs/DATA_QUALITY_PROCESS.md](../../docs/DATA_QUALITY_PROCESS.md).
 
-- 사실 207,634건 · (캠핑장×속성) 162,152쌍 · 캠핑장 6,412곳
-- 평균 신뢰도 **0.781** (-0.014) · 확정 비율 **83.8%** (-3.8)
-- 독립 원천 2곳↑ 확증 3,599쌍 (+606) · 충돌(검토 대기) **837** (+751) · 검토 판정 누적 69
+- 사실 208,796건 · (캠핑장×속성) 162,404쌍 · 캠핑장 6,412곳
+- 평균 신뢰도 **0.78** (-0.001) · 확정 비율 **83.7%** (-0.1)
+- 독립 원천 2곳↑ 확증 3,692쌍 (+93) · 충돌(검토 대기) **841** (+4) · 검토 판정 누적 69
 
-## ⚠ 어제보다 나빠진 속성 11개
+## ⚠ 어제보다 나빠진 속성 1개
 
-- EXTRA_PERSON_FEE confidence: 0.668 → 0.6
-- VISITOR_POLICY confidence: 0.745 → 0.612
-- EXTRA_CAR_FEE confidence: 0.681 → 0.599
-- DISCOUNT confidence: 0.458 → 0.431
-- CHARCOAL_ALLOWED coverage: 2731 → 2663
-- FIREWOOD_ALLOWED coverage: 2731 → 2663
-- SEASONAL_CLOSURE confidence: 0.9 → 0.86
-- CHECKIN_TIME conflicts: 30 → 36
-- EARLY_CHECKIN confidence: 0.539 → 0.476
-- LATE_CHECKOUT confidence: 0.563 → 0.489
-- MIN_STAY confidence: 0.562 → 0.49
+- POWER_MAX_A confidence: 0.9 → 0.717
 
 ## 신뢰도가 낮은 속성(커버리지 50곳↑) — 다음 수집 우선순위
 
 | 속성 | 커버리지 | 평균 신뢰도 | 확정 % | 충돌 |
 |---|---:|---:|---:|---:|
-| 후기에 나온 요금 (PRICE_MENTION) | 2416 | 0.367 | 0 | 0 |
-| 매너타임 (MANNER_TIME) | 1811 | 0.375 | 6.6 | 0 |
-| 할인 대상 (DISCOUNT) | 56 | 0.431 | 14.3 | 0 |
-| 얼리 입실 (EARLY_CHECKIN) | 154 | 0.476 | 23.4 | 0 |
-| 레이트 퇴실 (LATE_CHECKOUT) | 104 | 0.489 | 26 | 0 |
-| 연박·최소 숙박 (MIN_STAY) | 86 | 0.49 | 26.7 | 0 |
-| 취소·환불 규정 (REFUND_POLICY) | 831 | 0.498 | 45.6 | 0 |
-| 퇴실 시각 (CHECKOUT_TIME) | 2327 | 0.519 | 22.6 | 13 |
-| 입실 시각 (CHECKIN_TIME) | 2330 | 0.52 | 21.6 | 36 |
-| 차량 추가 요금 (EXTRA_CAR_FEE) | 102 | 0.599 | 45.1 | 0 |
+| 후기에 나온 요금 (PRICE_MENTION) | 2458 | 0.368 | 0 | 0 |
+| 매너타임 (MANNER_TIME) | 1862 | 0.378 | 6.5 | 0 |
+| 할인 대상 (DISCOUNT) | 59 | 0.427 | 13.6 | 0 |
+| 얼리 입실 (EARLY_CHECKIN) | 162 | 0.47 | 22.2 | 0 |
+| 연박·최소 숙박 (MIN_STAY) | 91 | 0.48 | 25.3 | 0 |
+| 레이트 퇴실 (LATE_CHECKOUT) | 108 | 0.484 | 25 | 0 |
+| 취소·환불 규정 (REFUND_POLICY) | 833 | 0.497 | 45.5 | 0 |
+| 퇴실 시각 (CHECKOUT_TIME) | 2366 | 0.523 | 22.4 | 13 |
+| 입실 시각 (CHECKIN_TIME) | 2366 | 0.524 | 21.4 | 36 |
+| 인원 추가 요금 (EXTRA_PERSON_FEE) | 368 | 0.593 | 43.8 | 0 |
 
 ## 검토 대기열 상위 10건 (전체 data/quality/review-queue.json)
 
