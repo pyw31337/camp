@@ -26605,9 +26605,9 @@
  "sites": {
   "10": {
    "cseq": 8119,
-   "checked_at": "2026-10-24T13:24:09.777Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=8119&res_dt=20261024",
+   "checked_at": "2026-10-24T23:20:05.845Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=8119&res_dt=20261031",
    "sites": [
     {
      "name": "아메리칸드림",
@@ -26886,9 +26886,9 @@
   },
   "11": {
    "cseq": 2633,
-   "checked_at": "2026-10-24T13:24:13.627Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2633&res_dt=20261024",
+   "checked_at": "2026-10-24T23:20:09.663Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2633&res_dt=20261031",
    "sites": [
     {
      "name": "데크사이트",
@@ -26972,9 +26972,9 @@
   },
   "21": {
    "cseq": 4323,
-   "checked_at": "2026-10-24T13:24:17.370Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4323&res_dt=20261024",
+   "checked_at": "2026-10-24T23:20:13.256Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4323&res_dt=20261031",
    "sites": [
     {
      "name": "가족형 카라반",
@@ -27032,9 +27032,9 @@
   },
   "131": {
    "cseq": 185,
-   "checked_at": "2026-10-24T13:17:30.414Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=185&res_dt=20261024",
+   "checked_at": "2026-10-24T23:13:05.758Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=185&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑장",
@@ -27053,9 +27053,9 @@
   },
   "163": {
    "cseq": 19306,
-   "checked_at": "2026-10-24T13:24:21.905Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19306&res_dt=20261024",
+   "checked_at": "2026-10-24T23:20:17.453Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19306&res_dt=20261031",
    "sites": [
     {
      "name": "글램핑 5동",
@@ -27282,9 +27282,9 @@
   },
   "301": {
    "cseq": 941,
-   "checked_at": "2026-10-24T13:17:34.692Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=941&res_dt=20261024",
+   "checked_at": "2026-10-24T23:13:10.086Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=941&res_dt=20261031",
    "sites": [
     {
      "name": "노지(1구역)",
@@ -27345,9 +27345,9 @@
   },
   "357": {
    "cseq": 3270,
-   "checked_at": "2026-10-24T13:18:26.509Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3270&res_dt=20261024",
+   "checked_at": "2026-10-24T23:14:03.420Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3270&res_dt=20261031",
    "sites": [
     {
      "name": "이지캠핑",
@@ -27427,9 +27427,9 @@
   },
   "373": {
    "cseq": 2262,
-   "checked_at": "2026-10-24T13:24:25.194Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2262&res_dt=20261024",
+   "checked_at": "2026-10-24T23:20:21.139Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2262&res_dt=20261031",
    "sites": [
     {
      "name": "캠핑존 - 예약 후 선착순 (기준 인원 확인 필수 / 방문객 입장 불가)",
@@ -27467,13 +27467,13 @@
   },
   "379": {
    "cseq": 7434,
-   "checked_at": "2026-10-24T13:24:29.605Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7434&res_dt=20261024",
+   "checked_at": "2026-10-24T23:20:25.555Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7434&res_dt=20261031",
    "sites": [
     {
      "name": "커플카라반8호",
-     "price": 151000,
+     "price": 159000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -27525,7 +27525,7 @@
     },
     {
      "name": "럭셔리카라반10호",
-     "price": 188600,
+     "price": 199000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -27538,7 +27538,7 @@
     },
     {
      "name": "커플카라반6호",
-     "price": 151000,
+     "price": 159000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -27657,13 +27657,13 @@
   },
   "441": {
    "cseq": 15849,
-   "checked_at": "2026-10-24T13:24:33.539Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15849&res_dt=20261024",
+   "checked_at": "2026-10-24T23:20:29.518Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15849&res_dt=20261031",
    "sites": [
     {
      "name": "New글램핑",
-     "price": 298000,
+     "price": 318000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -27676,7 +27676,7 @@
     },
     {
      "name": "New글램핑",
-     "price": 298000,
+     "price": 318000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -27689,7 +27689,7 @@
     },
     {
      "name": "New글램핑",
-     "price": 298000,
+     "price": 318000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -27702,7 +27702,7 @@
     },
     {
      "name": "New글램핑",
-     "price": 298000,
+     "price": 318000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -27715,7 +27715,7 @@
     },
     {
      "name": "New글램핑",
-     "price": 298000,
+     "price": 318000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -27728,7 +27728,7 @@
     },
     {
      "name": "New글램핑",
-     "price": 298000,
+     "price": 318000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -27741,7 +27741,7 @@
     },
     {
      "name": "New글램핑",
-     "price": 298000,
+     "price": 318000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -27754,7 +27754,7 @@
     },
     {
      "name": "New글램핑",
-     "price": 298000,
+     "price": 318000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -27767,7 +27767,7 @@
     },
     {
      "name": "New글램핑",
-     "price": 298000,
+     "price": 318000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -27780,7 +27780,7 @@
     },
     {
      "name": "New글램핑",
-     "price": 298000,
+     "price": 318000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -27795,15 +27795,15 @@
   },
   "448": {
    "cseq": 4284,
-   "checked_at": "2026-10-24T13:24:37.143Z",
+   "checked_at": "2026-10-24T23:20:32.837Z",
    "date": "2026-10-24",
    "sites": []
   },
   "508": {
    "cseq": 2249,
-   "checked_at": "2026-10-24T13:24:41.416Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2249&res_dt=20261024",
+   "checked_at": "2026-10-24T23:20:37.586Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2249&res_dt=20261031",
    "sites": [
     {
      "name": "낭만한강(카라반)",
@@ -27883,15 +27883,15 @@
   },
   "526": {
    "cseq": 9042,
-   "checked_at": "2026-10-24T13:24:45.152Z",
+   "checked_at": "2026-10-24T23:20:40.856Z",
    "date": "2026-10-24",
    "sites": []
   },
   "632": {
    "cseq": 2120,
-   "checked_at": "2026-10-24T13:38:31.125Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2120&res_dt=20261024",
+   "checked_at": "2026-10-24T23:34:44.279Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2120&res_dt=20261031",
    "sites": [
     {
      "name": "농월정 오토캠핑",
@@ -27939,9 +27939,9 @@
   },
   "710": {
    "cseq": 2047,
-   "checked_at": "2026-10-24T13:17:38.710Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2047&res_dt=20261024",
+   "checked_at": "2026-10-24T23:13:14.320Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2047&res_dt=20261031",
    "sites": [
     {
      "name": "캠핑1구역",
@@ -28050,9 +28050,9 @@
   },
   "721": {
    "cseq": 17660,
-   "checked_at": "2026-10-24T13:38:35.108Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17660&res_dt=20261024",
+   "checked_at": "2026-10-24T23:34:48.643Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17660&res_dt=20261031",
    "sites": [
     {
      "name": "캠핑존 가열",
@@ -28138,9 +28138,9 @@
   },
   "739": {
    "cseq": 2345,
-   "checked_at": "2026-10-24T13:24:49.561Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2345&res_dt=20261024",
+   "checked_at": "2026-10-24T23:20:45.323Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2345&res_dt=20261031",
    "sites": [
     {
      "name": "데크존",
@@ -28198,9 +28198,9 @@
   },
   "767": {
    "cseq": 14363,
-   "checked_at": "2026-10-24T13:24:53.528Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14363&res_dt=20261024",
+   "checked_at": "2026-10-24T23:20:49.531Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14363&res_dt=20261031",
    "sites": [
     {
      "name": "VIP카라반",
@@ -28274,9 +28274,9 @@
   },
   "797": {
    "cseq": 3820,
-   "checked_at": "2026-10-24T13:24:57.540Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3820&res_dt=20261024",
+   "checked_at": "2026-10-24T23:20:53.362Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3820&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑(파쇄석 or 지주석)",
@@ -28337,15 +28337,15 @@
   },
   "800": {
    "cseq": 1908,
-   "checked_at": "2026-10-24T13:17:42.306Z",
+   "checked_at": "2026-10-24T23:13:17.565Z",
    "date": "2026-10-24",
    "sites": []
   },
   "824": {
    "cseq": 1907,
-   "checked_at": "2026-10-24T13:25:01.462Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1907&res_dt=20261024",
+   "checked_at": "2026-10-24T23:20:57.295Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1907&res_dt=20261031",
    "sites": [
     {
      "name": "도둑골",
@@ -28399,9 +28399,9 @@
   },
   "860": {
    "cseq": 7576,
-   "checked_at": "2026-10-24T13:25:05.497Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7576&res_dt=20261024",
+   "checked_at": "2026-10-24T23:21:01.312Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7576&res_dt=20261031",
    "sites": [
     {
      "name": "만복대",
@@ -28485,9 +28485,9 @@
   },
   "873": {
    "cseq": 2878,
-   "checked_at": "2026-10-24T13:25:09.375Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261024",
+   "checked_at": "2026-10-24T23:21:05.271Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261031",
    "sites": [
     {
      "name": "동당미마운틴 구역",
@@ -28561,15 +28561,15 @@
   },
   "913": {
    "cseq": 1607,
-   "checked_at": "2026-10-24T13:17:46.309Z",
+   "checked_at": "2026-10-24T23:13:21.584Z",
    "date": "2026-10-24",
    "sites": []
   },
   "923": {
    "cseq": 2156,
-   "checked_at": "2026-10-24T13:25:13.883Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2156&res_dt=20261024",
+   "checked_at": "2026-10-24T23:21:09.803Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2156&res_dt=20261031",
    "sites": [
     {
      "name": "계곡 1동",
@@ -28700,15 +28700,15 @@
   },
   "930": {
    "cseq": 1419,
-   "checked_at": "2026-10-24T13:17:50.118Z",
+   "checked_at": "2026-10-24T23:13:25.365Z",
    "date": "2026-10-24",
    "sites": []
   },
   "1042": {
    "cseq": 1925,
-   "checked_at": "2026-10-24T13:18:31.761Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261024",
+   "checked_at": "2026-10-24T23:14:08.933Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1925&res_dt=20261031",
    "sites": [
     {
      "name": "산딸기 사이트(그늘많음)",
@@ -29041,9 +29041,9 @@
   },
   "1043": {
    "cseq": 17647,
-   "checked_at": "2026-10-24T13:25:17.925Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17647&res_dt=20261024",
+   "checked_at": "2026-10-24T23:21:14.050Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17647&res_dt=20261031",
    "sites": [
     {
      "name": "A구역(파쇄석)애견동반가능",
@@ -29197,9 +29197,9 @@
   },
   "1075": {
    "cseq": 1832,
-   "checked_at": "2026-10-24T13:18:35.511Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1832&res_dt=20261024",
+   "checked_at": "2026-10-24T23:14:14.304Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1832&res_dt=20261031",
    "sites": [
     {
      "name": "1캠프 파쇄석 (1~6번)",
@@ -29398,9 +29398,9 @@
   },
   "1096": {
    "cseq": 2066,
-   "checked_at": "2026-10-24T13:25:21.518Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2066&res_dt=20261024",
+   "checked_at": "2026-10-24T23:21:17.337Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2066&res_dt=20261031",
    "sites": [
     {
      "name": "캠핑존 (1~7)",
@@ -29458,9 +29458,9 @@
   },
   "1141": {
    "cseq": 6283,
-   "checked_at": "2026-10-24T13:18:38.917Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=6283&res_dt=20261024",
+   "checked_at": "2026-10-24T23:14:18.063Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=6283&res_dt=20261031",
    "sites": [
     {
      "name": "패밀리하우스",
@@ -29518,9 +29518,9 @@
   },
   "1264": {
    "cseq": 14344,
-   "checked_at": "2026-10-24T13:25:25.507Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14344&res_dt=20261024",
+   "checked_at": "2026-10-24T23:21:21.283Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14344&res_dt=20261031",
    "sites": [
     {
      "name": "패밀리 스카이 카라반(4인 기준)",
@@ -29565,15 +29565,15 @@
   },
   "1266": {
    "cseq": 19142,
-   "checked_at": "2026-10-24T13:18:42.734Z",
+   "checked_at": "2026-10-24T23:14:21.718Z",
    "date": "2026-10-24",
    "sites": []
   },
   "1324": {
    "cseq": 1843,
-   "checked_at": "2026-10-24T13:25:29.668Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1843&res_dt=20261024",
+   "checked_at": "2026-10-24T23:21:25.721Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1843&res_dt=20261031",
    "sites": [
     {
      "name": "파쇄석A1[이용수칙 필독]커플/차박가능",
@@ -29675,9 +29675,9 @@
   },
   "1327": {
    "cseq": 7469,
-   "checked_at": "2026-10-24T13:25:34.397Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7469&res_dt=20261024",
+   "checked_at": "2026-10-24T23:21:30.637Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7469&res_dt=20261031",
    "sites": [
     {
      "name": "C동2 (특-벚꽃)",
@@ -30372,9 +30372,9 @@
   },
   "1364": {
    "cseq": 20900,
-   "checked_at": "2026-10-24T13:25:37.849Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20900&res_dt=20261024",
+   "checked_at": "2026-10-24T23:21:34.717Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20900&res_dt=20261031",
    "sites": [
     {
      "name": "그린1(가족룸1)",
@@ -30653,9 +30653,9 @@
   },
   "1477": {
    "cseq": 968,
-   "checked_at": "2026-10-24T13:25:41.901Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=968&res_dt=20261024",
+   "checked_at": "2026-10-24T23:21:38.718Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=968&res_dt=20261031",
    "sites": [
     {
      "name": "복층형 펜션",
@@ -30780,9 +30780,9 @@
   },
   "1504": {
    "cseq": 3553,
-   "checked_at": "2026-10-24T13:38:39.260Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3553&res_dt=20261024",
+   "checked_at": "2026-10-24T23:34:52.601Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3553&res_dt=20261031",
    "sites": [
     {
      "name": "A사이트",
@@ -30853,9 +30853,9 @@
   },
   "1528": {
    "cseq": 7385,
-   "checked_at": "2026-10-24T13:25:45.831Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7385&res_dt=20261024",
+   "checked_at": "2026-10-24T23:21:42.668Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7385&res_dt=20261031",
    "sites": [
     {
      "name": "[당일이용-숙박불가]카라반2,3,4호(7시간 이용권)",
@@ -30924,7 +30924,7 @@
     },
     {
      "name": "C1 - 글램핑",
-     "price": 109000,
+     "price": 139000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -30937,7 +30937,7 @@
     },
     {
      "name": "C2 - 글램핑",
-     "price": 109000,
+     "price": 139000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -30950,7 +30950,7 @@
     },
     {
      "name": "C3 - 글램핑",
-     "price": 109000,
+     "price": 139000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -30963,7 +30963,7 @@
     },
     {
      "name": "C4 - 글램핑",
-     "price": 109000,
+     "price": 139000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -30976,7 +30976,7 @@
     },
     {
      "name": "C5 - 글램핑",
-     "price": 109000,
+     "price": 139000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -30989,7 +30989,7 @@
     },
     {
      "name": "C6 - 글램핑",
-     "price": 109000,
+     "price": 139000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -31002,7 +31002,7 @@
     },
     {
      "name": "C7 - 글램핑",
-     "price": 109000,
+     "price": 139000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -31015,7 +31015,7 @@
     },
     {
      "name": "C8 - 글램핑",
-     "price": 109000,
+     "price": 139000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -31028,7 +31028,7 @@
     },
     {
      "name": "C9 - 글램핑",
-     "price": 109000,
+     "price": 139000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -31041,7 +31041,7 @@
     },
     {
      "name": "C10 - 글램핑(애완견 동반)",
-     "price": 109000,
+     "price": 139000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -31054,7 +31054,7 @@
     },
     {
      "name": "카라반2호(소형)",
-     "price": 109000,
+     "price": 139000,
      "size": null,
      "floor": null,
      "kind": "카라반",
@@ -31067,7 +31067,7 @@
     },
     {
      "name": "카라반3호(소형)",
-     "price": 109000,
+     "price": 139000,
      "size": null,
      "floor": null,
      "kind": "카라반",
@@ -31080,7 +31080,7 @@
     },
     {
      "name": "카라반4호(소형)",
-     "price": 109000,
+     "price": 139000,
      "size": null,
      "floor": null,
      "kind": "카라반",
@@ -31093,7 +31093,7 @@
     },
     {
      "name": "카라반1호(대형)",
-     "price": 129000,
+     "price": 159000,
      "size": null,
      "floor": null,
      "kind": "카라반",
@@ -31106,7 +31106,7 @@
     },
     {
      "name": "카라반5호(대형)",
-     "price": 129000,
+     "price": 159000,
      "size": null,
      "floor": null,
      "kind": "카라반",
@@ -31121,9 +31121,9 @@
   },
   "1534": {
    "cseq": 1917,
-   "checked_at": "2026-10-24T13:25:50.594Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1917&res_dt=20261024",
+   "checked_at": "2026-10-24T23:21:47.658Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1917&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑 존 1",
@@ -31363,15 +31363,15 @@
   },
   "1631": {
    "cseq": 7427,
-   "checked_at": "2026-10-24T13:25:53.299Z",
+   "checked_at": "2026-10-24T23:21:51.191Z",
    "date": "2026-10-24",
    "sites": []
   },
   "1647": {
    "cseq": 3134,
-   "checked_at": "2026-10-24T13:38:43.322Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3134&res_dt=20261024",
+   "checked_at": "2026-10-24T23:34:56.592Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3134&res_dt=20261031",
    "sites": [
     {
      "name": "바다뷰 석양방등(4인실)",
@@ -31442,9 +31442,9 @@
   },
   "1696": {
    "cseq": 14862,
-   "checked_at": "2026-10-24T13:18:46.951Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14862&res_dt=20261024",
+   "checked_at": "2026-10-24T23:14:25.882Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14862&res_dt=20261031",
    "sites": [
     {
      "name": "패밀리동(가족팀과친구팀4인까지 가능)",
@@ -31515,9 +31515,9 @@
   },
   "1703": {
    "cseq": 589,
-   "checked_at": "2026-10-24T13:18:51.004Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=589&res_dt=20261024",
+   "checked_at": "2026-10-24T23:14:30.238Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=589&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑장",
@@ -31613,9 +31613,9 @@
   },
   "1719": {
    "cseq": 2251,
-   "checked_at": "2026-10-24T13:25:57.353Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2251&res_dt=20261024",
+   "checked_at": "2026-10-24T23:21:55.504Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2251&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑 파쇄석",
@@ -31653,9 +31653,9 @@
   },
   "1723": {
    "cseq": 17560,
-   "checked_at": "2026-10-24T13:18:55.171Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17560&res_dt=20261024",
+   "checked_at": "2026-10-24T23:14:34.092Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17560&res_dt=20261031",
    "sites": [
     {
      "name": "두악산(복층독채)",
@@ -31778,9 +31778,9 @@
   },
   "1770": {
    "cseq": 13633,
-   "checked_at": "2026-10-24T13:26:01.623Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13633&res_dt=20261024",
+   "checked_at": "2026-10-24T23:21:59.618Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13633&res_dt=20261031",
    "sites": [
     {
      "name": "*수영장사이트* 차박가능/그늘막",
@@ -31838,9 +31838,9 @@
   },
   "1878": {
    "cseq": 20210,
-   "checked_at": "2026-10-24T13:26:05.597Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20210&res_dt=20261024",
+   "checked_at": "2026-10-24T23:22:03.849Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20210&res_dt=20261031",
    "sites": [
     {
      "name": "2층선셋라운지 1호",
@@ -31976,9 +31976,9 @@
   },
   "1999": {
    "cseq": 2368,
-   "checked_at": "2026-10-24T13:26:11.336Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2368&res_dt=20261024",
+   "checked_at": "2026-10-24T23:22:10.061Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2368&res_dt=20261031",
    "sites": [
     {
      "name": "리버라인 1번",
@@ -32481,9 +32481,9 @@
   },
   "2014": {
    "cseq": 1771,
-   "checked_at": "2026-10-24T13:38:46.954Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1771&res_dt=20261024",
+   "checked_at": "2026-10-24T23:34:59.748Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1771&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑사이트",
@@ -32502,9 +32502,9 @@
   },
   "2179": {
    "cseq": 354,
-   "checked_at": "2026-10-24T13:26:14.706Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=354&res_dt=20261024",
+   "checked_at": "2026-10-24T23:22:15.026Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=354&res_dt=20261031",
    "sites": [
     {
      "name": "피크닉 E존",
@@ -32552,9 +32552,9 @@
   },
   "2358": {
    "cseq": 7389,
-   "checked_at": "2026-10-24T13:26:18.952Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7389&res_dt=20261024",
+   "checked_at": "2026-10-24T23:22:19.422Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7389&res_dt=20261031",
    "sites": [
     {
      "name": "단층글램핑_4",
@@ -32768,27 +32768,27 @@
   },
   "2399": {
    "cseq": 1865,
-   "checked_at": "2026-10-24T13:17:54.124Z",
+   "checked_at": "2026-10-24T23:13:29.362Z",
    "date": "2026-10-24",
    "sites": []
   },
   "2420": {
    "cseq": 7354,
-   "checked_at": "2026-10-24T13:18:58.693Z",
+   "checked_at": "2026-10-24T23:14:37.711Z",
    "date": "2026-10-24",
    "sites": []
   },
   "2561": {
    "cseq": 17391,
-   "checked_at": "2026-10-24T13:26:22.441Z",
+   "checked_at": "2026-10-24T23:22:22.668Z",
    "date": "2026-10-24",
    "sites": []
   },
   "2573": {
    "cseq": 2601,
-   "checked_at": "2026-10-24T13:26:26.770Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2601&res_dt=20261024",
+   "checked_at": "2026-10-24T23:22:27.130Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2601&res_dt=20261031",
    "sites": [
     {
      "name": "아침자리(zone)",
@@ -32852,9 +32852,9 @@
   },
   "2616": {
    "cseq": 1,
-   "checked_at": "2026-10-24T13:38:51.278Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1&res_dt=20261024",
+   "checked_at": "2026-10-24T23:35:04.282Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1&res_dt=20261031",
    "sites": [
     {
      "name": "사이트 A",
@@ -32918,9 +32918,9 @@
   },
   "2619": {
    "cseq": 10019,
-   "checked_at": "2026-10-24T13:26:30.848Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=10019&res_dt=20261024",
+   "checked_at": "2026-10-24T23:22:31.359Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=10019&res_dt=20261031",
    "sites": [
     {
      "name": "C105(2층)",
@@ -33108,9 +33108,9 @@
   },
   "2704": {
    "cseq": 2657,
-   "checked_at": "2026-10-24T13:26:34.864Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2657&res_dt=20261024",
+   "checked_at": "2026-10-24T23:22:35.115Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2657&res_dt=20261031",
    "sites": [
     {
      "name": "데크존",
@@ -33177,15 +33177,15 @@
   },
   "2734": {
    "cseq": 20594,
-   "checked_at": "2026-10-24T13:19:02.532Z",
+   "checked_at": "2026-10-24T23:14:41.666Z",
    "date": "2026-10-24",
    "sites": []
   },
   "2758": {
    "cseq": 7347,
-   "checked_at": "2026-10-24T13:26:38.980Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7347&res_dt=20261024",
+   "checked_at": "2026-10-24T23:22:39.598Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7347&res_dt=20261031",
    "sites": [
     {
      "name": "글램핑 패밀리형_6",
@@ -33386,15 +33386,15 @@
   },
   "2783": {
    "cseq": 2045,
-   "checked_at": "2026-10-24T13:17:58.122Z",
+   "checked_at": "2026-10-24T23:13:33.385Z",
    "date": "2026-10-24",
    "sites": []
   },
   "2809": {
    "cseq": 7373,
-   "checked_at": "2026-10-24T13:26:43.674Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7373&res_dt=20261024",
+   "checked_at": "2026-10-24T23:22:44.533Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7373&res_dt=20261031",
    "sites": [
     {
      "name": "카라반1",
@@ -33985,9 +33985,9 @@
   },
   "2815": {
    "cseq": 7409,
-   "checked_at": "2026-10-24T13:26:47.010Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7409&res_dt=20261024",
+   "checked_at": "2026-10-24T23:22:47.945Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7409&res_dt=20261031",
    "sites": [
     {
      "name": "냇가펜션",
@@ -34097,9 +34097,9 @@
   },
   "2820": {
    "cseq": 20753,
-   "checked_at": "2026-10-24T13:26:51.015Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20753&res_dt=20261024",
+   "checked_at": "2026-10-24T23:22:52.042Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20753&res_dt=20261031",
    "sites": [
     {
      "name": "2층 온돌형 오션뷰 3번방",
@@ -34248,13 +34248,13 @@
   },
   "2852": {
    "cseq": 7376,
-   "checked_at": "2026-10-24T13:26:55.064Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7376&res_dt=20261024",
+   "checked_at": "2026-10-24T23:22:56.219Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7376&res_dt=20261031",
    "sites": [
     {
      "name": "VIP 프리미엄 글램핑",
-     "price": 239000,
+     "price": 279000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -34267,7 +34267,7 @@
     },
     {
      "name": "VIP 프리미엄 글램핑",
-     "price": 239000,
+     "price": 279000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -34280,7 +34280,7 @@
     },
     {
      "name": "VIP 프리미엄 글램핑",
-     "price": 239000,
+     "price": 279000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -34293,7 +34293,7 @@
     },
     {
      "name": "VIP 프리미엄 글램핑",
-     "price": 239000,
+     "price": 279000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -34306,7 +34306,7 @@
     },
     {
      "name": "VIP 프리미엄 글램핑",
-     "price": 239000,
+     "price": 279000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -34319,7 +34319,7 @@
     },
     {
      "name": "VIP 프리미엄 글램핑",
-     "price": 239000,
+     "price": 279000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -34332,7 +34332,7 @@
     },
     {
      "name": "VIP 프리미엄 글램핑",
-     "price": 239000,
+     "price": 279000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -34345,7 +34345,7 @@
     },
     {
      "name": "VIP 프리미엄 글램핑",
-     "price": 239000,
+     "price": 279000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -34358,7 +34358,7 @@
     },
     {
      "name": "VIP 프리미엄 글램핑",
-     "price": 239000,
+     "price": 279000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -34371,7 +34371,7 @@
     },
     {
      "name": "VIP 프리미엄 글램핑",
-     "price": 239000,
+     "price": 279000,
      "size": null,
      "floor": null,
      "kind": "글램핑",
@@ -34384,7 +34384,7 @@
     },
     {
      "name": "감성VIP카라반(FOREST)",
-     "price": 219000,
+     "price": 269000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -34397,7 +34397,7 @@
     },
     {
      "name": "감성VIP카라반(FOREST)",
-     "price": 219000,
+     "price": 269000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -34425,9 +34425,9 @@
   },
   "2873": {
    "cseq": 20499,
-   "checked_at": "2026-10-24T13:26:59.035Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20499&res_dt=20261024",
+   "checked_at": "2026-10-24T23:23:00.111Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20499&res_dt=20261031",
    "sites": [
     {
      "name": "천하6",
@@ -34641,15 +34641,15 @@
   },
   "2958": {
    "cseq": 7513,
-   "checked_at": "2026-10-24T13:27:02.455Z",
+   "checked_at": "2026-10-24T23:23:03.357Z",
    "date": "2026-10-24",
    "sites": []
   },
   "2990": {
    "cseq": 199,
-   "checked_at": "2026-10-24T13:19:06.628Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=199&res_dt=20261024",
+   "checked_at": "2026-10-24T23:14:45.591Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=199&res_dt=20261031",
    "sites": [
     {
      "name": "숲속글램핑[입실시자리지정]",
@@ -34668,9 +34668,9 @@
   },
   "3016": {
    "cseq": 2635,
-   "checked_at": "2026-10-24T13:27:06.812Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2635&res_dt=20261024",
+   "checked_at": "2026-10-24T23:23:07.843Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2635&res_dt=20261031",
    "sites": [
     {
      "name": "C사이트",
@@ -34740,9 +34740,9 @@
   },
   "3034": {
    "cseq": 17897,
-   "checked_at": "2026-10-24T13:27:11.069Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17897&res_dt=20261024",
+   "checked_at": "2026-10-24T23:23:12.483Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17897&res_dt=20261031",
    "sites": [
     {
      "name": "A-1, A-3 두가족 사이트(독립공간)",
@@ -34873,9 +34873,9 @@
   },
   "3092": {
    "cseq": 2089,
-   "checked_at": "2026-10-24T13:27:14.722Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2089&res_dt=20261024",
+   "checked_at": "2026-10-24T23:23:15.759Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2089&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑존",
@@ -34920,9 +34920,9 @@
   },
   "3105": {
    "cseq": 20760,
-   "checked_at": "2026-10-24T13:19:11.788Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20760&res_dt=20261024",
+   "checked_at": "2026-10-24T23:14:50.994Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20760&res_dt=20261031",
    "sites": [
     {
      "name": "노블럭셔리룸",
@@ -35357,9 +35357,9 @@
   },
   "3139": {
    "cseq": 1537,
-   "checked_at": "2026-10-24T13:38:56.234Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1537&res_dt=20261024",
+   "checked_at": "2026-10-24T23:35:09.239Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1537&res_dt=20261031",
    "sites": [
     {
      "name": "반려견 캠핑장",
@@ -35605,9 +35605,9 @@
   },
   "3198": {
    "cseq": 20778,
-   "checked_at": "2026-10-24T13:27:19.462Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20778&res_dt=20261024",
+   "checked_at": "2026-10-24T23:23:21.032Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20778&res_dt=20261031",
    "sites": [
     {
      "name": "방갈로(현장랜덤2)",
@@ -36146,15 +36146,15 @@
   },
   "3230": {
    "cseq": 20176,
-   "checked_at": "2026-10-24T13:27:22.641Z",
+   "checked_at": "2026-10-24T23:23:24.005Z",
    "date": "2026-10-24",
    "sites": []
   },
   "3254": {
    "cseq": 15413,
-   "checked_at": "2026-10-24T13:27:26.830Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15413&res_dt=20261024",
+   "checked_at": "2026-10-24T23:23:28.187Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15413&res_dt=20261031",
    "sites": [
     {
      "name": "노키즈 전용 캠핑존 A",
@@ -36208,9 +36208,9 @@
   },
   "3279": {
    "cseq": 20246,
-   "checked_at": "2026-10-24T13:27:30.880Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20246&res_dt=20261024",
+   "checked_at": "2026-10-24T23:23:32.887Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20246&res_dt=20261031",
    "sites": [
     {
      "name": "수피야A(복층, 수영장 앞)",
@@ -36372,9 +36372,9 @@
   },
   "3330": {
    "cseq": 1896,
-   "checked_at": "2026-10-24T13:27:34.822Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1896&res_dt=20261024",
+   "checked_at": "2026-10-24T23:23:36.447Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1896&res_dt=20261031",
    "sites": [
     {
      "name": "소형견 데크울타리(2인2견기준)",
@@ -36438,9 +36438,9 @@
   },
   "3339": {
    "cseq": 2887,
-   "checked_at": "2026-10-24T13:27:39.153Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2887&res_dt=20261024",
+   "checked_at": "2026-10-24T23:23:41.133Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2887&res_dt=20261031",
    "sites": [
     {
      "name": "구름길 사이트",
@@ -36563,9 +36563,9 @@
   },
   "3348": {
    "cseq": 2912,
-   "checked_at": "2026-10-24T13:38:59.752Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2912&res_dt=20261024",
+   "checked_at": "2026-10-24T23:35:13.532Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2912&res_dt=20261031",
    "sites": [
     {
      "name": "대형 (L)",
@@ -36675,9 +36675,9 @@
   },
   "3428": {
    "cseq": 1791,
-   "checked_at": "2026-10-24T13:27:42.604Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1791&res_dt=20261024",
+   "checked_at": "2026-10-24T23:23:44.210Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1791&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑사이트 한자리존[2박우선]",
@@ -36709,9 +36709,9 @@
   },
   "3432": {
    "cseq": 1776,
-   "checked_at": "2026-10-24T13:27:46.805Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1776&res_dt=20261024",
+   "checked_at": "2026-10-24T23:23:48.517Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1776&res_dt=20261031",
    "sites": [
     {
      "name": "1캠프장",
@@ -36781,9 +36781,9 @@
   },
   "3450": {
    "cseq": 1872,
-   "checked_at": "2026-10-24T13:39:03.588Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1872&res_dt=20261024",
+   "checked_at": "2026-10-24T23:35:17.719Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1872&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑 A사이트",
@@ -36893,9 +36893,9 @@
   },
   "3459": {
    "cseq": 11041,
-   "checked_at": "2026-10-24T13:27:50.670Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=11041&res_dt=20261024",
+   "checked_at": "2026-10-24T23:23:52.407Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=11041&res_dt=20261031",
    "sites": [
     {
      "name": "해솔길1호",
@@ -36966,9 +36966,9 @@
   },
   "6756": {
    "cseq": 3273,
-   "checked_at": "2026-10-24T13:27:54.929Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3273&res_dt=20261024",
+   "checked_at": "2026-10-24T23:23:56.788Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3273&res_dt=20261031",
    "sites": [
     {
      "name": "파쇄석사이트",
@@ -37058,9 +37058,9 @@
   },
   "6968": {
    "cseq": 3335,
-   "checked_at": "2026-10-24T13:39:07.396Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3335&res_dt=20261024",
+   "checked_at": "2026-10-24T23:35:21.198Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3335&res_dt=20261031",
    "sites": [
     {
      "name": "캠핑 A존",
@@ -37146,9 +37146,9 @@
   },
   "6972": {
    "cseq": 9524,
-   "checked_at": "2026-10-24T13:19:15.065Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=9524&res_dt=20261024",
+   "checked_at": "2026-10-24T23:14:54.876Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=9524&res_dt=20261031",
    "sites": [
     {
      "name": "101호[온돌,개별바베큐]",
@@ -37323,9 +37323,9 @@
   },
   "7008": {
    "cseq": 17305,
-   "checked_at": "2026-10-24T13:27:59.441Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17305&res_dt=20261024",
+   "checked_at": "2026-10-24T23:24:01.523Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17305&res_dt=20261031",
    "sites": [
     {
      "name": "풍경(11평형)",
@@ -37541,9 +37541,9 @@
   },
   "7029": {
    "cseq": 1609,
-   "checked_at": "2026-10-24T13:28:02.542Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1609&res_dt=20261024",
+   "checked_at": "2026-10-24T23:24:04.810Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1609&res_dt=20261031",
    "sites": [
     {
      "name": "*파쇄석 사이트(야자수매트)*",
@@ -37565,13 +37565,13 @@
   },
   "7039": {
    "cseq": 4084,
-   "checked_at": "2026-10-24T13:28:06.953Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4084&res_dt=20261024",
+   "checked_at": "2026-10-24T23:24:09.431Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4084&res_dt=20261031",
    "sites": [
     {
      "name": "물결",
-     "price": 70000,
+     "price": 60000,
      "size": [
       7,
       10
@@ -37587,7 +37587,7 @@
     },
     {
      "name": "은빛 고요",
-     "price": 70000,
+     "price": 60000,
      "size": [
       7,
       9
@@ -37666,9 +37666,9 @@
   },
   "7084": {
    "cseq": 3156,
-   "checked_at": "2026-10-24T13:28:10.790Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3156&res_dt=20261024",
+   "checked_at": "2026-10-24T23:24:13.110Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3156&res_dt=20261031",
    "sites": [
     {
      "name": "A구역",
@@ -37713,9 +37713,9 @@
   },
   "7124": {
    "cseq": 2561,
-   "checked_at": "2026-10-24T13:28:14.770Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2561&res_dt=20261024",
+   "checked_at": "2026-10-24T23:24:17.156Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2561&res_dt=20261031",
    "sites": [
     {
      "name": "프리미엄 타프존",
@@ -37769,9 +37769,9 @@
   },
   "7125": {
    "cseq": 20378,
-   "checked_at": "2026-10-24T13:28:18.859Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20378&res_dt=20261024",
+   "checked_at": "2026-10-24T23:24:21.427Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20378&res_dt=20261031",
    "sites": [
     {
      "name": "[암벽존]",
@@ -37857,9 +37857,9 @@
   },
   "7151": {
    "cseq": 1961,
-   "checked_at": "2026-10-24T13:19:19.995Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1961&res_dt=20261024",
+   "checked_at": "2026-10-24T23:15:00.476Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1961&res_dt=20261031",
    "sites": [
     {
      "name": "계곡힐링데크1(몽골 천막)",
@@ -38156,9 +38156,9 @@
   },
   "7167": {
    "cseq": 1599,
-   "checked_at": "2026-10-24T13:28:22.839Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1599&res_dt=20261024",
+   "checked_at": "2026-10-24T23:24:25.351Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1599&res_dt=20261031",
    "sites": [
     {
      "name": "캠핑파쇄사이트A",
@@ -38216,9 +38216,9 @@
   },
   "7171": {
    "cseq": 318,
-   "checked_at": "2026-10-24T13:39:11.614Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=318&res_dt=20261024",
+   "checked_at": "2026-10-24T23:35:25.377Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=318&res_dt=20261031",
    "sites": [
     {
      "name": "1캠A존",
@@ -38336,9 +38336,9 @@
   },
   "7192": {
    "cseq": 2069,
-   "checked_at": "2026-10-24T13:39:15.773Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2069&res_dt=20261024",
+   "checked_at": "2026-10-24T23:35:29.642Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2069&res_dt=20261031",
    "sites": [
     {
      "name": "글램핑",
@@ -38466,15 +38466,15 @@
   },
   "7200": {
    "cseq": 1651,
-   "checked_at": "2026-10-24T13:18:02.188Z",
+   "checked_at": "2026-10-24T23:13:37.453Z",
    "date": "2026-10-24",
    "sites": []
   },
   "7206": {
    "cseq": 1676,
-   "checked_at": "2026-10-24T13:18:07.463Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1676&res_dt=20261024",
+   "checked_at": "2026-10-24T23:13:43.357Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1676&res_dt=20261031",
    "sites": [
     {
      "name": "곰돌이(두가족)",
@@ -38688,9 +38688,9 @@
   },
   "7212": {
    "cseq": 2064,
-   "checked_at": "2026-10-24T13:19:22.770Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2064&res_dt=20261024",
+   "checked_at": "2026-10-24T23:15:04.515Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2064&res_dt=20261031",
    "sites": [
     {
      "name": "CAMP 사이트",
@@ -38728,7 +38728,7 @@
   },
   "7216": {
    "cseq": 20060,
-   "checked_at": "2026-10-24T13:28:26.447Z",
+   "checked_at": "2026-10-24T23:24:28.662Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20060&res_dt=20261024",
    "sites": [
@@ -38864,9 +38864,9 @@
   },
   "7224": {
    "cseq": 1697,
-   "checked_at": "2026-10-24T13:19:26.980Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1697&res_dt=20261024",
+   "checked_at": "2026-10-24T23:15:08.862Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1697&res_dt=20261031",
    "sites": [
     {
      "name": "A사이트 2팀지정",
@@ -38952,9 +38952,9 @@
   },
   "7343": {
    "cseq": 8598,
-   "checked_at": "2026-10-24T13:28:30.699Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=8598&res_dt=20261024",
+   "checked_at": "2026-10-24T23:24:33.152Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=8598&res_dt=20261031",
    "sites": [
     {
      "name": "디망쉬(1층단독원룸형)",
@@ -39038,9 +39038,9 @@
   },
   "7346": {
    "cseq": 17303,
-   "checked_at": "2026-10-24T13:28:35.057Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17303&res_dt=20261024",
+   "checked_at": "2026-10-24T23:24:37.522Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17303&res_dt=20261031",
    "sites": [
     {
      "name": "1학년",
@@ -39133,9 +39133,9 @@
   },
   "7375": {
    "cseq": 2878,
-   "checked_at": "2026-10-24T13:19:31.031Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261024",
+   "checked_at": "2026-10-24T23:15:12.910Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261031",
    "sites": [
     {
      "name": "동당미마운틴 구역",
@@ -39209,9 +39209,9 @@
   },
   "7403": {
    "cseq": 17317,
-   "checked_at": "2026-10-24T13:19:34.753Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17317&res_dt=20261024",
+   "checked_at": "2026-10-24T23:15:16.730Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17317&res_dt=20261031",
    "sites": [
     {
      "name": "카라반.캠핑카,폴딩트레일러",
@@ -39249,9 +39249,9 @@
   },
   "7405": {
    "cseq": 14420,
-   "checked_at": "2026-10-24T13:28:39.228Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14420&res_dt=20261024",
+   "checked_at": "2026-10-24T23:24:42.129Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14420&res_dt=20261031",
    "sites": [
     {
      "name": "SITE 1",
@@ -39434,19 +39434,19 @@
   },
   "7497": {
    "cseq": 7343,
-   "checked_at": "2026-10-24T13:28:42.519Z",
+   "checked_at": "2026-10-24T23:24:45.511Z",
    "date": "2026-10-24",
    "sites": []
   },
   "7593": {
    "cseq": 11948,
-   "checked_at": "2026-10-24T13:28:46.486Z",
+   "checked_at": "2026-10-24T23:24:49.500Z",
    "date": "2026-10-24",
    "sites": []
   },
   "7607": {
    "cseq": 7455,
-   "checked_at": "2026-10-24T13:28:51.343Z",
+   "checked_at": "2026-10-24T23:24:53.531Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7455&res_dt=20261024",
    "sites": [
@@ -39818,9 +39818,9 @@
   },
   "7755": {
    "cseq": 3658,
-   "checked_at": "2026-10-24T13:19:39.114Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3658&res_dt=20261024",
+   "checked_at": "2026-10-24T23:15:20.951Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3658&res_dt=20261031",
    "sites": [
     {
      "name": "A동",
@@ -39904,9 +39904,9 @@
   },
   "7768": {
    "cseq": 16482,
-   "checked_at": "2026-10-24T13:28:54.903Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16482&res_dt=20261024",
+   "checked_at": "2026-10-24T23:24:58.135Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16482&res_dt=20261031",
    "sites": [
     {
      "name": "글램핑4(랜덤배정)성인3인이상/2객실이상사전문의필수",
@@ -40081,9 +40081,9 @@
   },
   "7782": {
    "cseq": 14536,
-   "checked_at": "2026-10-24T13:28:58.874Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14536&res_dt=20261024",
+   "checked_at": "2026-10-24T23:25:02.185Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14536&res_dt=20261031",
    "sites": [
     {
      "name": "OPERA 1(간이NO넓은욕실,스탠드에어컨,지퍼형)",
@@ -40232,9 +40232,9 @@
   },
   "7798": {
    "cseq": 17646,
-   "checked_at": "2026-10-24T13:39:19.222Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17646&res_dt=20261024",
+   "checked_at": "2026-10-24T23:35:32.878Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17646&res_dt=20261031",
    "sites": [
     {
      "name": "파쇄(자갈)존",
@@ -40272,15 +40272,15 @@
   },
   "7803": {
    "cseq": 19083,
-   "checked_at": "2026-10-24T13:29:02.512Z",
+   "checked_at": "2026-10-24T23:25:05.507Z",
    "date": "2026-10-24",
    "sites": []
   },
   "7848": {
    "cseq": 2884,
-   "checked_at": "2026-10-24T13:19:43.029Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2884&res_dt=20261024",
+   "checked_at": "2026-10-24T23:15:24.892Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2884&res_dt=20261031",
    "sites": [
     {
      "name": "B구역(대형)",
@@ -40347,9 +40347,9 @@
   },
   "7880": {
    "cseq": 20127,
-   "checked_at": "2026-10-24T13:29:07.397Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20127&res_dt=20261024",
+   "checked_at": "2026-10-24T23:25:11.029Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20127&res_dt=20261031",
    "sites": [
     {
      "name": "디럭스 D7",
@@ -40784,9 +40784,9 @@
   },
   "7886": {
    "cseq": 20786,
-   "checked_at": "2026-10-24T13:29:10.911Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20786&res_dt=20261024",
+   "checked_at": "2026-10-24T23:25:14.540Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20786&res_dt=20261031",
    "sites": [
     {
      "name": "카라반4인실(랜덤배정)4",
@@ -40961,9 +40961,9 @@
   },
   "7916": {
    "cseq": 7484,
-   "checked_at": "2026-10-24T13:19:47.273Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7484&res_dt=20261024",
+   "checked_at": "2026-10-24T23:15:29.215Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7484&res_dt=20261031",
    "sites": [
     {
      "name": "A동 복층형 1호",
@@ -41175,7 +41175,7 @@
     },
     {
      "name": "B동 1호",
-     "price": 179100,
+     "price": 199000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -41188,7 +41188,7 @@
     },
     {
      "name": "B동 2호",
-     "price": 179100,
+     "price": 199000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -41201,7 +41201,7 @@
     },
     {
      "name": "B동 3호",
-     "price": 179100,
+     "price": 199000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -41214,7 +41214,7 @@
     },
     {
      "name": "B동 4호",
-     "price": 179100,
+     "price": 199000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -41227,7 +41227,7 @@
     },
     {
      "name": "B동 5호",
-     "price": 179100,
+     "price": 199000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -41240,7 +41240,7 @@
     },
     {
      "name": "B동 6호",
-     "price": 179100,
+     "price": 199000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -41255,9 +41255,9 @@
   },
   "7928": {
    "cseq": 7481,
-   "checked_at": "2026-10-24T13:29:15.038Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7481&res_dt=20261024",
+   "checked_at": "2026-10-24T23:25:18.851Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7481&res_dt=20261031",
    "sites": [
     {
      "name": "F2",
@@ -41523,9 +41523,9 @@
   },
   "7932": {
    "cseq": 15505,
-   "checked_at": "2026-10-24T13:29:18.674Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15505&res_dt=20261024",
+   "checked_at": "2026-10-24T23:25:22.101Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15505&res_dt=20261031",
    "sites": [
     {
      "name": "복층펜션( A.B.C.D동)",
@@ -41583,9 +41583,9 @@
   },
   "7966": {
    "cseq": 3422,
-   "checked_at": "2026-10-24T13:39:24.349Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3422&res_dt=20261024",
+   "checked_at": "2026-10-24T23:35:38.531Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3422&res_dt=20261031",
    "sites": [
     {
      "name": "타프-02",
@@ -41905,9 +41905,9 @@
   },
   "8034": {
    "cseq": 20170,
-   "checked_at": "2026-10-24T13:29:23.165Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20170&res_dt=20261024",
+   "checked_at": "2026-10-24T23:25:26.908Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20170&res_dt=20261031",
    "sites": [
     {
      "name": "B-4(타프존 3m x 4m)",
@@ -42225,9 +42225,9 @@
   },
   "8045": {
    "cseq": 3634,
-   "checked_at": "2026-10-24T13:39:27.504Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3634&res_dt=20261024",
+   "checked_at": "2026-10-24T23:35:43.064Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3634&res_dt=20261031",
    "sites": [
     {
      "name": "A사이트",
@@ -42311,9 +42311,9 @@
   },
   "8049": {
    "cseq": 12844,
-   "checked_at": "2026-10-24T13:29:27.948Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=12844&res_dt=20261024",
+   "checked_at": "2026-10-24T23:25:31.688Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=12844&res_dt=20261031",
    "sites": [
     {
      "name": "소형견 스탠다드 콘도 1층(랜덤배정)",
@@ -43112,9 +43112,9 @@
   },
   "8054": {
    "cseq": 16641,
-   "checked_at": "2026-10-24T13:29:30.924Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16641&res_dt=20261024",
+   "checked_at": "2026-10-24T23:25:35.525Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16641&res_dt=20261031",
    "sites": [
     {
      "name": "카라반 1호 -블루",
@@ -43224,9 +43224,9 @@
   },
   "8071": {
    "cseq": 545,
-   "checked_at": "2026-10-24T13:29:34.985Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=545&res_dt=20261024",
+   "checked_at": "2026-10-24T23:25:39.798Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=545&res_dt=20261031",
    "sites": [
     {
      "name": "이지캠핑",
@@ -43309,9 +43309,9 @@
   },
   "8073": {
    "cseq": 3670,
-   "checked_at": "2026-10-24T13:39:31.553Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3670&res_dt=20261024",
+   "checked_at": "2026-10-24T23:35:47.175Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3670&res_dt=20261031",
    "sites": [
     {
      "name": "A 캠핑존 데크 (두가족전용)",
@@ -43407,9 +43407,9 @@
   },
   "8080": {
    "cseq": 11298,
-   "checked_at": "2026-10-24T13:29:38.858Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=11298&res_dt=20261024",
+   "checked_at": "2026-10-24T23:25:43.501Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=11298&res_dt=20261031",
    "sites": [
     {
      "name": "103호",
@@ -43506,9 +43506,9 @@
   },
   "8086": {
    "cseq": 3894,
-   "checked_at": "2026-10-24T13:19:50.752Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3894&res_dt=20261024",
+   "checked_at": "2026-10-24T23:15:32.275Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3894&res_dt=20261031",
    "sites": [
     {
      "name": "카라반, 캠핑카 사이트",
@@ -43530,9 +43530,9 @@
   },
   "8104": {
    "cseq": 3730,
-   "checked_at": "2026-10-24T13:19:55.132Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3730&res_dt=20261024",
+   "checked_at": "2026-10-24T23:15:36.967Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3730&res_dt=20261031",
    "sites": [
     {
      "name": "쏘가리",
@@ -43616,9 +43616,9 @@
   },
   "8114": {
    "cseq": 3654,
-   "checked_at": "2026-10-24T13:39:35.484Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3654&res_dt=20261024",
+   "checked_at": "2026-10-24T23:35:51.670Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3654&res_dt=20261031",
    "sites": [
     {
      "name": "일곱하우스(팬션)",
@@ -43810,9 +43810,9 @@
   },
   "8150": {
    "cseq": 12800,
-   "checked_at": "2026-10-24T13:29:43.394Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=12800&res_dt=20261024",
+   "checked_at": "2026-10-24T23:25:48.312Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=12800&res_dt=20261031",
    "sites": [
     {
      "name": "A1 - 럭셔리 일반 (오션뷰)",
@@ -44195,9 +44195,9 @@
   },
   "8206": {
    "cseq": 13767,
-   "checked_at": "2026-10-24T13:19:58.775Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13767&res_dt=20261024",
+   "checked_at": "2026-10-24T23:15:40.805Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13767&res_dt=20261031",
    "sites": [
     {
      "name": "오페라 글램핑 1박 (유아동반가족팀,커플팀,친구는 2인만가능)",
@@ -44268,9 +44268,9 @@
   },
   "100013": {
    "cseq": 17846,
-   "checked_at": "2026-10-24T13:20:03.443Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17846&res_dt=20261024",
+   "checked_at": "2026-10-24T23:15:45.407Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17846&res_dt=20261031",
    "sites": [
     {
      "name": "우드펜션 (커플)",
@@ -44286,22 +44286,6 @@
      "checkOut": "11:00"
     },
     {
-     "name": "노을존(애견동반가능)",
-     "price": 60000,
-     "size": [
-      7,
-      8
-     ],
-     "floor": null,
-     "kind": "오토캠핑",
-     "parking": "텐트옆주차",
-     "people": "성인2인, 미성년 2인",
-     "pet": true,
-     "carCamp": false,
-     "checkIn": "13:00",
-     "checkOut": "12:00"
-    },
-    {
      "name": "화이트 펜션 (커플)",
      "price": 180000,
      "size": null,
@@ -44315,20 +44299,30 @@
      "checkOut": "11:00"
     },
     {
-     "name": "배산임수 미니 데크",
-     "price": 60000,
-     "size": [
-      6.2,
-      4.2
-     ],
+     "name": "블랙 펜션 (커플,페밀리)",
+     "price": 230000,
+     "size": null,
      "floor": null,
-     "kind": "오토캠핑",
-     "parking": "텐트옆주차",
-     "people": "성인2인, 미성년 2인",
+     "kind": "펜션",
+     "parking": null,
+     "people": "성인2인, 미성년 0인",
      "pet": false,
      "carCamp": false,
-     "checkIn": "13:00",
-     "checkOut": "12:00"
+     "checkIn": "15:00",
+     "checkOut": "11:00"
+    },
+    {
+     "name": "그레이펜션 (커플,패밀리)",
+     "price": 230000,
+     "size": null,
+     "floor": null,
+     "kind": "펜션",
+     "parking": null,
+     "people": "성인2인, 미성년 0인",
+     "pet": false,
+     "carCamp": false,
+     "checkIn": "15:00",
+     "checkOut": "11:00"
     },
     {
      "name": "배산임수존(파쇄석스페셜)",
@@ -44379,30 +44373,36 @@
      "checkOut": "12:00"
     },
     {
-     "name": "블랙 펜션 (커플,페밀리)",
-     "price": 230000,
-     "size": null,
+     "name": "노을존(애견동반가능)",
+     "price": 60000,
+     "size": [
+      7,
+      8
+     ],
      "floor": null,
-     "kind": "펜션",
-     "parking": null,
-     "people": "성인2인, 미성년 0인",
-     "pet": false,
+     "kind": "오토캠핑",
+     "parking": "텐트옆주차",
+     "people": "성인2인, 미성년 2인",
+     "pet": true,
      "carCamp": false,
-     "checkIn": "15:00",
-     "checkOut": "11:00"
+     "checkIn": "13:00",
+     "checkOut": "12:00"
     },
     {
-     "name": "그레이펜션 (커플,패밀리)",
-     "price": 230000,
-     "size": null,
+     "name": "배산임수 미니 데크",
+     "price": 60000,
+     "size": [
+      6.2,
+      4.2
+     ],
      "floor": null,
-     "kind": "펜션",
-     "parking": null,
-     "people": "성인2인, 미성년 0인",
+     "kind": "오토캠핑",
+     "parking": "텐트옆주차",
+     "people": "성인2인, 미성년 2인",
      "pet": false,
      "carCamp": false,
-     "checkIn": "15:00",
-     "checkOut": "11:00"
+     "checkIn": "13:00",
+     "checkOut": "12:00"
     },
     {
      "name": "배산임수존(데크스페셜)",
@@ -44424,9 +44424,9 @@
   },
   "100069": {
    "cseq": 19976,
-   "checked_at": "2026-10-24T13:29:46.993Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19976&res_dt=20261024",
+   "checked_at": "2026-10-24T23:25:51.960Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19976&res_dt=20261031",
    "sites": [
     {
      "name": "프라이빗글램핑(A~D)",
@@ -44588,9 +44588,9 @@
   },
   "100081": {
    "cseq": 12611,
-   "checked_at": "2026-10-24T13:29:50.782Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=12611&res_dt=20261024",
+   "checked_at": "2026-10-24T23:25:55.341Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=12611&res_dt=20261031",
    "sites": [
     {
      "name": "201호",
@@ -44635,9 +44635,9 @@
   },
   "100137": {
    "cseq": 3885,
-   "checked_at": "2026-10-24T13:29:54.976Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3885&res_dt=20261024",
+   "checked_at": "2026-10-24T23:25:59.870Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3885&res_dt=20261031",
    "sites": [
     {
      "name": "카라반,캠핑카,모터홈 오토캠 파쇄석 5x6 자리",
@@ -44704,9 +44704,9 @@
   },
   "100140": {
    "cseq": 14789,
-   "checked_at": "2026-10-24T13:29:59.146Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14789&res_dt=20261024",
+   "checked_at": "2026-10-24T23:26:04.072Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14789&res_dt=20261031",
    "sites": [
     {
      "name": "101동 디럭스",
@@ -44972,9 +44972,9 @@
   },
   "100148": {
    "cseq": 17613,
-   "checked_at": "2026-10-24T13:30:02.876Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17613&res_dt=20261024",
+   "checked_at": "2026-10-24T23:26:07.528Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17613&res_dt=20261031",
    "sites": [
     {
      "name": "파쇄석사이트",
@@ -45025,9 +45025,9 @@
   },
   "100166": {
    "cseq": 3890,
-   "checked_at": "2026-10-24T13:30:07.359Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3890&res_dt=20261024",
+   "checked_at": "2026-10-24T23:26:12.325Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3890&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑 1 (7.4X11.5 m) (차박 X)",
@@ -45175,9 +45175,9 @@
   },
   "100177": {
    "cseq": 2285,
-   "checked_at": "2026-10-24T13:39:39.460Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2285&res_dt=20261024",
+   "checked_at": "2026-10-24T23:35:55.374Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2285&res_dt=20261031",
    "sites": [
     {
      "name": "소형 데크",
@@ -45257,9 +45257,9 @@
   },
   "100247": {
    "cseq": 20320,
-   "checked_at": "2026-10-24T13:30:10.821Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20320&res_dt=20261024",
+   "checked_at": "2026-10-24T23:26:15.597Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20320&res_dt=20261031",
    "sites": [
     {
      "name": "스카이",
@@ -45330,9 +45330,9 @@
   },
   "100275": {
    "cseq": 9320,
-   "checked_at": "2026-10-24T13:20:07.256Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=9320&res_dt=20261024",
+   "checked_at": "2026-10-24T23:15:48.874Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=9320&res_dt=20261031",
    "sites": [
     {
      "name": "갤럭시(양면호수조망)",
@@ -45442,9 +45442,9 @@
   },
   "100278": {
    "cseq": 4061,
-   "checked_at": "2026-10-24T13:30:15.036Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4061&res_dt=20261024",
+   "checked_at": "2026-10-24T23:26:19.916Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4061&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑 (파쇄석)",
@@ -45540,15 +45540,15 @@
   },
   "100286": {
    "cseq": 7511,
-   "checked_at": "2026-10-24T13:30:18.605Z",
+   "checked_at": "2026-10-24T23:26:23.173Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100311": {
    "cseq": 17604,
-   "checked_at": "2026-10-24T13:20:10.991Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17604&res_dt=20261024",
+   "checked_at": "2026-10-24T23:15:52.682Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17604&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑Zone",
@@ -45602,9 +45602,9 @@
   },
   "100312": {
    "cseq": 3937,
-   "checked_at": "2026-10-24T13:20:14.757Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3937&res_dt=20261024",
+   "checked_at": "2026-10-24T23:15:56.341Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3937&res_dt=20261031",
    "sites": [
     {
      "name": "호노골",
@@ -45626,9 +45626,9 @@
   },
   "100315": {
    "cseq": 3830,
-   "checked_at": "2026-10-24T13:20:19.127Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3830&res_dt=20261024",
+   "checked_at": "2026-10-24T23:16:00.988Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3830&res_dt=20261031",
    "sites": [
     {
      "name": "A~C 사이트",
@@ -45699,9 +45699,9 @@
   },
   "100316": {
    "cseq": 4030,
-   "checked_at": "2026-10-24T13:20:22.791Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4030&res_dt=20261024",
+   "checked_at": "2026-10-24T23:16:04.597Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4030&res_dt=20261031",
    "sites": [
     {
      "name": "A존",
@@ -45739,15 +45739,15 @@
   },
   "100323": {
    "cseq": 19715,
-   "checked_at": "2026-10-24T13:20:26.681Z",
+   "checked_at": "2026-10-24T23:16:08.282Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100324": {
    "cseq": 19589,
-   "checked_at": "2026-10-24T13:20:31.940Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19589&res_dt=20261024",
+   "checked_at": "2026-10-24T23:16:14.115Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19589&res_dt=20261031",
    "sites": [
     {
      "name": "102호",
@@ -45995,9 +45995,9 @@
   },
   "100372": {
    "cseq": 4079,
-   "checked_at": "2026-10-24T13:20:34.982Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4079&res_dt=20261024",
+   "checked_at": "2026-10-24T23:16:18.010Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4079&res_dt=20261031",
    "sites": [
     {
      "name": "버드나무존",
@@ -46051,9 +46051,9 @@
   },
   "100379": {
    "cseq": 4005,
-   "checked_at": "2026-10-24T13:30:23.062Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4005&res_dt=20261024",
+   "checked_at": "2026-10-24T23:26:27.911Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4005&res_dt=20261031",
    "sites": [
     {
      "name": "A사이트 (캠핑사이트)",
@@ -46136,9 +46136,9 @@
   },
   "100399": {
    "cseq": 3994,
-   "checked_at": "2026-10-24T13:20:39.028Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3994&res_dt=20261024",
+   "checked_at": "2026-10-24T23:16:21.982Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3994&res_dt=20261031",
    "sites": [
     {
      "name": "A 사이트",
@@ -46192,9 +46192,9 @@
   },
   "100419": {
    "cseq": 17678,
-   "checked_at": "2026-10-24T13:20:44.640Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17678&res_dt=20261024",
+   "checked_at": "2026-10-24T23:16:28.413Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17678&res_dt=20261031",
    "sites": [
     {
      "name": "1번 큰데크",
@@ -46632,15 +46632,15 @@
   },
   "100421": {
    "cseq": 7542,
-   "checked_at": "2026-10-24T13:20:47.702Z",
+   "checked_at": "2026-10-24T23:16:32.826Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100424": {
    "cseq": 3991,
-   "checked_at": "2026-10-24T13:20:52.959Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261024",
+   "checked_at": "2026-10-24T23:16:38.777Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3991&res_dt=20261031",
    "sites": [
     {
      "name": "데크 2단지 (4*6)",
@@ -46928,9 +46928,9 @@
   },
   "100429": {
    "cseq": 4020,
-   "checked_at": "2026-10-24T13:20:55.972Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4020&res_dt=20261024",
+   "checked_at": "2026-10-24T23:16:42.677Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4020&res_dt=20261031",
    "sites": [
     {
      "name": "물새구역",
@@ -46981,9 +46981,9 @@
   },
   "100431": {
    "cseq": 7554,
-   "checked_at": "2026-10-24T13:21:00.090Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7554&res_dt=20261024",
+   "checked_at": "2026-10-24T23:16:46.730Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7554&res_dt=20261031",
    "sites": [
     {
      "name": "카약1동",
@@ -47080,9 +47080,9 @@
   },
   "100432": {
    "cseq": 2123,
-   "checked_at": "2026-10-24T13:21:04.062Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2123&res_dt=20261024",
+   "checked_at": "2026-10-24T23:16:50.707Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2123&res_dt=20261031",
    "sites": [
     {
      "name": "A사이트",
@@ -47140,9 +47140,9 @@
   },
   "100433": {
    "cseq": 7553,
-   "checked_at": "2026-10-24T13:21:08.288Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7553&res_dt=20261024",
+   "checked_at": "2026-10-24T23:16:55.035Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7553&res_dt=20261031",
    "sites": [
     {
      "name": "단층 A(랜덤배정)",
@@ -47343,9 +47343,9 @@
   },
   "100435": {
    "cseq": 8220,
-   "checked_at": "2026-10-24T13:30:26.810Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=8220&res_dt=20261024",
+   "checked_at": "2026-10-24T23:26:31.465Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=8220&res_dt=20261031",
    "sites": [
     {
      "name": "C동",
@@ -47403,9 +47403,9 @@
   },
   "100456": {
    "cseq": 16350,
-   "checked_at": "2026-10-24T13:21:13.211Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261024",
+   "checked_at": "2026-10-24T23:17:00.479Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16350&res_dt=20261031",
    "sites": [
     {
      "name": "바퀴집1",
@@ -47745,9 +47745,9 @@
   },
   "100459": {
    "cseq": 4013,
-   "checked_at": "2026-10-24T13:21:16.366Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4013&res_dt=20261024",
+   "checked_at": "2026-10-24T23:17:04.930Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4013&res_dt=20261031",
    "sites": [
     {
      "name": "A존 (A1 ~ A7)",
@@ -47805,9 +47805,9 @@
   },
   "100483": {
    "cseq": 11347,
-   "checked_at": "2026-10-24T13:21:20.415Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=11347&res_dt=20261024",
+   "checked_at": "2026-10-24T23:17:08.920Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=11347&res_dt=20261031",
    "sites": [
     {
      "name": "글램핑8(중형)",
@@ -47930,13 +47930,13 @@
   },
   "100484": {
    "cseq": 7565,
-   "checked_at": "2026-10-24T13:30:31.026Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7565&res_dt=20261024",
+   "checked_at": "2026-10-24T23:26:35.895Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7565&res_dt=20261031",
    "sites": [
     {
      "name": "G2(오션뷰)",
-     "price": 190000,
+     "price": 230000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -47949,7 +47949,7 @@
     },
     {
      "name": "G3(오션뷰)",
-     "price": 190000,
+     "price": 230000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -47962,7 +47962,7 @@
     },
     {
      "name": "G4(오션뷰)",
-     "price": 190000,
+     "price": 230000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -48066,7 +48066,7 @@
     },
     {
      "name": "P1(풀글램핑)",
-     "price": 120000,
+     "price": 220000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -48079,7 +48079,7 @@
     },
     {
      "name": "C1(FULL 글램핑)",
-     "price": 180000,
+     "price": 220000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -48094,9 +48094,9 @@
   },
   "100507": {
    "cseq": 2759,
-   "checked_at": "2026-10-24T13:21:24.337Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2759&res_dt=20261024",
+   "checked_at": "2026-10-24T23:17:12.687Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2759&res_dt=20261031",
    "sites": [
     {
      "name": "@파쇄석 캠핑사이트 C존",
@@ -48150,9 +48150,9 @@
   },
   "100508": {
    "cseq": 4051,
-   "checked_at": "2026-10-24T13:39:43.877Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4051&res_dt=20261024",
+   "checked_at": "2026-10-24T23:35:59.944Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4051&res_dt=20261031",
    "sites": [
     {
      "name": "텐트형 글렘핑 (A1)",
@@ -48312,9 +48312,9 @@
   },
   "100526": {
    "cseq": 3997,
-   "checked_at": "2026-10-24T13:39:47.619Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3997&res_dt=20261024",
+   "checked_at": "2026-10-24T23:36:03.743Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3997&res_dt=20261031",
    "sites": [
     {
      "name": "S존_1",
@@ -48400,15 +48400,15 @@
   },
   "100533": {
    "cseq": 9027,
-   "checked_at": "2026-10-24T13:21:28.012Z",
+   "checked_at": "2026-10-24T23:17:16.290Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100538": {
    "cseq": 4049,
-   "checked_at": "2026-10-24T13:21:33.022Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261024",
+   "checked_at": "2026-10-24T23:17:21.797Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4049&res_dt=20261031",
    "sites": [
     {
      "name": "A1",
@@ -48607,26 +48607,10 @@
   },
   "100555": {
    "cseq": 17614,
-   "checked_at": "2026-10-24T13:21:36.223Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17614&res_dt=20261024",
+   "checked_at": "2026-10-24T23:17:25.365Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17614&res_dt=20261031",
    "sites": [
-    {
-     "name": "그늘막 존",
-     "price": 50000,
-     "size": [
-      7,
-      8
-     ],
-     "floor": null,
-     "kind": "오토캠핑",
-     "parking": "주차장주차",
-     "people": "성인2인, 미성년 2인",
-     "pet": true,
-     "carCamp": false,
-     "checkIn": "14:00",
-     "checkOut": "14:00"
-    },
     {
      "name": "B 사이트",
      "price": 50000,
@@ -48640,6 +48624,22 @@
      "people": "성인2인, 미성년 2인",
      "pet": true,
      "carCamp": true,
+     "checkIn": "14:00",
+     "checkOut": "14:00"
+    },
+    {
+     "name": "그늘막 존",
+     "price": 50000,
+     "size": [
+      7,
+      8
+     ],
+     "floor": null,
+     "kind": "오토캠핑",
+     "parking": "주차장주차",
+     "people": "성인2인, 미성년 2인",
+     "pet": true,
+     "carCamp": false,
      "checkIn": "14:00",
      "checkOut": "14:00"
     },
@@ -48663,9 +48663,9 @@
   },
   "100584": {
    "cseq": 4097,
-   "checked_at": "2026-10-24T13:21:40.304Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4097&res_dt=20261024",
+   "checked_at": "2026-10-24T23:17:29.332Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4097&res_dt=20261031",
    "sites": [
     {
      "name": "차박,캠핑카사이트",
@@ -48719,15 +48719,15 @@
   },
   "100588": {
    "cseq": 19624,
-   "checked_at": "2026-10-24T13:30:34.643Z",
+   "checked_at": "2026-10-24T23:26:39.392Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100592": {
    "cseq": 4312,
-   "checked_at": "2026-10-24T13:30:39.012Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4312&res_dt=20261024",
+   "checked_at": "2026-10-24T23:26:43.905Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4312&res_dt=20261031",
    "sites": [
     {
      "name": "1동 - 지난, (온돌)",
@@ -48863,15 +48863,15 @@
   },
   "100624": {
    "cseq": 7622,
-   "checked_at": "2026-10-24T13:21:44.064Z",
+   "checked_at": "2026-10-24T23:17:32.967Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100629": {
    "cseq": 14857,
-   "checked_at": "2026-10-24T13:21:48.436Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14857&res_dt=20261024",
+   "checked_at": "2026-10-24T23:17:37.716Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14857&res_dt=20261031",
    "sites": [
     {
      "name": "H사이트(섶다리마을/뒤팀없을시 15시퇴실)",
@@ -48967,9 +48967,9 @@
   },
   "100635": {
    "cseq": 7560,
-   "checked_at": "2026-10-24T13:21:52.098Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7560&res_dt=20261024",
+   "checked_at": "2026-10-24T23:17:41.156Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7560&res_dt=20261031",
    "sites": [
     {
      "name": "풀비치카라반1",
@@ -49001,9 +49001,9 @@
   },
   "100639": {
    "cseq": 4023,
-   "checked_at": "2026-10-24T13:30:42.814Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4023&res_dt=20261024",
+   "checked_at": "2026-10-24T23:26:48.175Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4023&res_dt=20261031",
    "sites": [
     {
      "name": "카라반",
@@ -49102,9 +49102,9 @@
   },
   "100644": {
    "cseq": 14431,
-   "checked_at": "2026-10-24T13:30:47.173Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14431&res_dt=20261024",
+   "checked_at": "2026-10-24T23:26:51.871Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14431&res_dt=20261031",
    "sites": [
     {
      "name": "1번 사이트",
@@ -49190,9 +49190,9 @@
   },
   "100645": {
    "cseq": 7585,
-   "checked_at": "2026-10-24T13:21:56.380Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7585&res_dt=20261024",
+   "checked_at": "2026-10-24T23:17:45.610Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7585&res_dt=20261031",
    "sites": [
     {
      "name": "카라반1호(기준2/최대3인,애견동반,개별마당/휀스)",
@@ -49328,13 +49328,13 @@
   },
   "100659": {
    "cseq": 4273,
-   "checked_at": "2026-10-24T13:22:00.730Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4273&res_dt=20261024",
+   "checked_at": "2026-10-24T23:17:49.983Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4273&res_dt=20261031",
    "sites": [
     {
      "name": "신축자쿠지1001호/BBQ포함",
-     "price": 253300,
+     "price": 298000,
      "size": null,
      "floor": "40.0",
      "kind": "오토캠핑",
@@ -49347,7 +49347,7 @@
     },
     {
      "name": "신축자쿠지1002호/BBQ포함",
-     "price": 253300,
+     "price": 298000,
      "size": null,
      "floor": "40.0",
      "kind": "오토캠핑",
@@ -49360,7 +49360,7 @@
     },
     {
      "name": "신축자쿠지1003호/BBQ포함",
-     "price": 253300,
+     "price": 298000,
      "size": null,
      "floor": "40.0",
      "kind": "오토캠핑",
@@ -49373,7 +49373,7 @@
     },
     {
      "name": "신축자쿠지1004호/BBQ제공",
-     "price": 253300,
+     "price": 298000,
      "size": null,
      "floor": "40.0",
      "kind": "오토캠핑",
@@ -49386,7 +49386,7 @@
     },
     {
      "name": "신축카라반1005호/BBQ제공",
-     "price": 253300,
+     "price": 298000,
      "size": null,
      "floor": "40.0",
      "kind": "오토캠핑",
@@ -49399,7 +49399,7 @@
     },
     {
      "name": "신축카라반1006호/BBQ제공",
-     "price": 253300,
+     "price": 298000,
      "size": null,
      "floor": "40.0",
      "kind": "오토캠핑",
@@ -49412,7 +49412,7 @@
     },
     {
      "name": "신축자쿠지1008호/BBQ제공",
-     "price": 253300,
+     "price": 298000,
      "size": null,
      "floor": "40.0",
      "kind": "오토캠핑",
@@ -49516,7 +49516,7 @@
     },
     {
      "name": "신축자쿠지1016호/BBQ제공",
-     "price": 253300,
+     "price": 298000,
      "size": null,
      "floor": "40.0",
      "kind": "오토캠핑",
@@ -49529,7 +49529,7 @@
     },
     {
      "name": "신축자쿠지1017호/BBQ제공",
-     "price": 253300,
+     "price": 298000,
      "size": null,
      "floor": "40.0",
      "kind": "오토캠핑",
@@ -49555,7 +49555,7 @@
     },
     {
      "name": "신축자쿠지1019호BBQ제공",
-     "price": 253300,
+     "price": 298000,
      "size": null,
      "floor": "40.0",
      "kind": "오토캠핑",
@@ -49568,7 +49568,7 @@
     },
     {
      "name": "신축자쿠지1020호/BBQ제공",
-     "price": 253300,
+     "price": 298000,
      "size": null,
      "floor": "40.0",
      "kind": "오토캠핑",
@@ -49581,7 +49581,7 @@
     },
     {
      "name": "신축자쿠지1021호/BBQ제공",
-     "price": 253300,
+     "price": 298000,
      "size": null,
      "floor": "40.0",
      "kind": "오토캠핑",
@@ -49596,9 +49596,9 @@
   },
   "100665": {
    "cseq": 4008,
-   "checked_at": "2026-10-24T13:22:05.284Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4008&res_dt=20261024",
+   "checked_at": "2026-10-24T23:17:54.690Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4008&res_dt=20261031",
    "sites": [
     {
      "name": "데크1",
@@ -49860,9 +49860,9 @@
   },
   "100671": {
    "cseq": 4116,
-   "checked_at": "2026-10-24T13:22:08.487Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4116&res_dt=20261024",
+   "checked_at": "2026-10-24T23:17:58.437Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4116&res_dt=20261031",
    "sites": [
     {
      "name": "VIP카라반 (호텔급)",
@@ -49907,9 +49907,9 @@
   },
   "100672": {
    "cseq": 9103,
-   "checked_at": "2026-10-24T13:22:12.535Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=9103&res_dt=20261024",
+   "checked_at": "2026-10-24T23:18:02.860Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=9103&res_dt=20261031",
    "sites": [
     {
      "name": "A사이트(강자갈/차박가능)",
@@ -49993,9 +49993,9 @@
   },
   "100676": {
    "cseq": 4211,
-   "checked_at": "2026-10-24T13:22:16.409Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4211&res_dt=20261024",
+   "checked_at": "2026-10-24T23:18:06.717Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4211&res_dt=20261031",
    "sites": [
     {
      "name": "5성급 글램핑",
@@ -50062,9 +50062,9 @@
   },
   "100683": {
    "cseq": 13943,
-   "checked_at": "2026-10-24T13:30:51.042Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13943&res_dt=20261024",
+   "checked_at": "2026-10-24T23:26:56.115Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13943&res_dt=20261031",
    "sites": [
     {
      "name": "럭셔리글램핑(랜덤배정)",
@@ -50239,9 +50239,9 @@
   },
   "100697": {
    "cseq": 14348,
-   "checked_at": "2026-10-24T13:22:20.593Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14348&res_dt=20261024",
+   "checked_at": "2026-10-24T23:18:10.873Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14348&res_dt=20261031",
    "sites": [
     {
      "name": "아라오캠 1동/카라반/캠핑카 전용",
@@ -50343,15 +50343,15 @@
   },
   "100700": {
    "cseq": 13034,
-   "checked_at": "2026-10-24T13:22:24.080Z",
+   "checked_at": "2026-10-24T23:18:14.075Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100703": {
    "cseq": 4223,
-   "checked_at": "2026-10-24T13:22:28.682Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4223&res_dt=20261024",
+   "checked_at": "2026-10-24T23:18:19.005Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4223&res_dt=20261031",
    "sites": [
     {
      "name": "A[1~8]구역",
@@ -50485,9 +50485,9 @@
   },
   "100710": {
    "cseq": 16444,
-   "checked_at": "2026-10-24T13:22:32.167Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16444&res_dt=20261024",
+   "checked_at": "2026-10-24T23:18:22.152Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16444&res_dt=20261031",
    "sites": [
     {
      "name": "타프존 (개별 편의시설/에어컨/온돌룸)",
@@ -50509,9 +50509,9 @@
   },
   "100712": {
    "cseq": 4318,
-   "checked_at": "2026-10-24T13:30:55.167Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4318&res_dt=20261024",
+   "checked_at": "2026-10-24T23:26:59.627Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4318&res_dt=20261031",
    "sites": [
     {
      "name": "C1(복층)",
@@ -50621,9 +50621,9 @@
   },
   "100724": {
    "cseq": 10126,
-   "checked_at": "2026-10-24T13:22:36.277Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=10126&res_dt=20261024",
+   "checked_at": "2026-10-24T23:18:26.489Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=10126&res_dt=20261031",
    "sites": [
     {
      "name": "8호",
@@ -50694,9 +50694,9 @@
   },
   "100728": {
    "cseq": 3805,
-   "checked_at": "2026-10-24T13:22:40.654Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3805&res_dt=20261024",
+   "checked_at": "2026-10-24T23:18:30.756Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3805&res_dt=20261031",
    "sites": [
     {
      "name": "데크사이트",
@@ -50767,13 +50767,13 @@
   },
   "100743": {
    "cseq": 14802,
-   "checked_at": "2026-10-24T13:22:44.299Z",
+   "checked_at": "2026-10-24T23:18:34.330Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100744": {
    "cseq": 9034,
-   "checked_at": "2026-10-24T13:22:48.507Z",
+   "checked_at": "2026-10-24T23:18:38.300Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=9034&res_dt=20261024",
    "sites": [
@@ -50859,9 +50859,9 @@
   },
   "100756": {
    "cseq": 2280,
-   "checked_at": "2026-10-24T13:30:58.908Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2280&res_dt=20261024",
+   "checked_at": "2026-10-24T23:27:03.673Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2280&res_dt=20261031",
    "sites": [
     {
      "name": "이지캠핑 2층",
@@ -50893,9 +50893,9 @@
   },
   "100770": {
    "cseq": 4225,
-   "checked_at": "2026-10-24T13:31:02.976Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4225&res_dt=20261024",
+   "checked_at": "2026-10-24T23:27:07.702Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4225&res_dt=20261031",
    "sites": [
     {
      "name": "데크",
@@ -50927,9 +50927,9 @@
   },
   "100780": {
    "cseq": 4181,
-   "checked_at": "2026-10-24T13:31:06.882Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4181&res_dt=20261024",
+   "checked_at": "2026-10-24T23:27:12.232Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4181&res_dt=20261031",
    "sites": [
     {
      "name": "1구역 글램핑",
@@ -51038,15 +51038,15 @@
   },
   "100825": {
    "cseq": 19350,
-   "checked_at": "2026-10-24T13:31:10.803Z",
+   "checked_at": "2026-10-24T23:27:15.176Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100846": {
    "cseq": 7581,
-   "checked_at": "2026-10-24T13:31:15.237Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7581&res_dt=20261024",
+   "checked_at": "2026-10-24T23:27:19.923Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7581&res_dt=20261031",
    "sites": [
     {
      "name": "로얄스위트 R-01",
@@ -51247,9 +51247,9 @@
   },
   "100862": {
    "cseq": 4389,
-   "checked_at": "2026-10-24T13:39:51.354Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4389&res_dt=20261024",
+   "checked_at": "2026-10-24T23:36:07.269Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4389&res_dt=20261031",
    "sites": [
     {
      "name": "A구역",
@@ -51294,9 +51294,9 @@
   },
   "100883": {
    "cseq": 7330,
-   "checked_at": "2026-10-24T13:31:19.327Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7330&res_dt=20261024",
+   "checked_at": "2026-10-24T23:27:24.083Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7330&res_dt=20261031",
    "sites": [
     {
      "name": "B구역",
@@ -51393,9 +51393,9 @@
   },
   "100884": {
    "cseq": 4384,
-   "checked_at": "2026-10-24T13:39:55.123Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4384&res_dt=20261024",
+   "checked_at": "2026-10-24T23:36:10.936Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4384&res_dt=20261031",
    "sites": [
     {
      "name": "초롱별 사이트",
@@ -51417,9 +51417,9 @@
   },
   "100891": {
    "cseq": 4249,
-   "checked_at": "2026-10-24T13:31:23.876Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4249&res_dt=20261024",
+   "checked_at": "2026-10-24T23:27:29.090Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4249&res_dt=20261031",
    "sites": [
     {
      "name": "글램핑 L1",
@@ -51646,9 +51646,9 @@
   },
   "100937": {
    "cseq": 6906,
-   "checked_at": "2026-10-24T13:31:26.786Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=6906&res_dt=20261024",
+   "checked_at": "2026-10-24T23:27:33.188Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=6906&res_dt=20261031",
    "sites": [
     {
      "name": "A사이트",
@@ -51686,9 +51686,9 @@
   },
   "100938": {
    "cseq": 4425,
-   "checked_at": "2026-10-24T13:39:59.853Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4425&res_dt=20261024",
+   "checked_at": "2026-10-24T23:36:16.077Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4425&res_dt=20261031",
    "sites": [
     {
      "name": "A존",
@@ -51854,9 +51854,9 @@
   },
   "100957": {
    "cseq": 6388,
-   "checked_at": "2026-10-24T13:31:31.023Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=6388&res_dt=20261024",
+   "checked_at": "2026-10-24T23:27:37.559Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=6388&res_dt=20261031",
    "sites": [
     {
      "name": "JELLY 1(SPA,애견동반가능)",
@@ -51992,13 +51992,13 @@
   },
   "100967": {
    "cseq": 14738,
-   "checked_at": "2026-10-24T13:31:35.214Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14738&res_dt=20261024",
+   "checked_at": "2026-10-24T23:27:41.594Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14738&res_dt=20261031",
    "sites": [
     {
      "name": "A2(오션뷰)",
-     "price": 219000,
+     "price": 239000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -52011,7 +52011,7 @@
     },
     {
      "name": "A3(오션뷰)",
-     "price": 219000,
+     "price": 239000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -52024,7 +52024,7 @@
     },
     {
      "name": "A4(오션뷰)",
-     "price": 219000,
+     "price": 239000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -52037,7 +52037,7 @@
     },
     {
      "name": "A5(오션뷰)",
-     "price": 219000,
+     "price": 239000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -52050,7 +52050,7 @@
     },
     {
      "name": "B14(오션뷰)",
-     "price": 219000,
+     "price": 239000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -52063,7 +52063,7 @@
     },
     {
      "name": "A6",
-     "price": 189000,
+     "price": 229000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -52076,7 +52076,7 @@
     },
     {
      "name": "A7",
-     "price": 189000,
+     "price": 229000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -52089,7 +52089,7 @@
     },
     {
      "name": "A8",
-     "price": 179000,
+     "price": 229000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -52102,7 +52102,7 @@
     },
     {
      "name": "A9",
-     "price": 189000,
+     "price": 229000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -52115,7 +52115,7 @@
     },
     {
      "name": "A10",
-     "price": 189000,
+     "price": 229000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -52128,7 +52128,7 @@
     },
     {
      "name": "A11",
-     "price": 189000,
+     "price": 229000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -52141,7 +52141,7 @@
     },
     {
      "name": "A12",
-     "price": 189000,
+     "price": 219000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -52154,7 +52154,7 @@
     },
     {
      "name": "A13",
-     "price": 189000,
+     "price": 219000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -52167,7 +52167,7 @@
     },
     {
      "name": "B15",
-     "price": 199000,
+     "price": 229000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -52180,7 +52180,7 @@
     },
     {
      "name": "B16",
-     "price": 199000,
+     "price": 229000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -52195,15 +52195,15 @@
   },
   "100974": {
    "cseq": 13102,
-   "checked_at": "2026-10-24T13:31:38.666Z",
+   "checked_at": "2026-10-24T23:27:44.902Z",
    "date": "2026-10-24",
    "sites": []
   },
   "100989": {
    "cseq": 18431,
-   "checked_at": "2026-10-24T13:40:03.491Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18431&res_dt=20261024",
+   "checked_at": "2026-10-24T23:36:19.645Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18431&res_dt=20261031",
    "sites": [
     {
      "name": "아랫마루존",
@@ -52286,9 +52286,9 @@
   },
   "100996": {
    "cseq": 7332,
-   "checked_at": "2026-10-24T13:40:07.204Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7332&res_dt=20261024",
+   "checked_at": "2026-10-24T23:36:23.241Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7332&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑존",
@@ -52326,9 +52326,9 @@
   },
   "100998": {
    "cseq": 6909,
-   "checked_at": "2026-10-24T13:22:53.493Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=6909&res_dt=20261024",
+   "checked_at": "2026-10-24T23:18:44.429Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=6909&res_dt=20261031",
    "sites": [
     {
      "name": "정자1번",
@@ -52670,9 +52670,9 @@
   },
   "101008": {
    "cseq": 13839,
-   "checked_at": "2026-10-24T13:31:42.846Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13839&res_dt=20261024",
+   "checked_at": "2026-10-24T23:27:49.079Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13839&res_dt=20261031",
    "sites": [
     {
      "name": "C구역",
@@ -52730,9 +52730,9 @@
   },
   "101029": {
    "cseq": 6308,
-   "checked_at": "2026-10-24T13:31:47.418Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=6308&res_dt=20261024",
+   "checked_at": "2026-10-24T23:27:54.128Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=6308&res_dt=20261031",
    "sites": [
     {
      "name": "PINE존 1~10번 (소나무숲)",
@@ -52855,9 +52855,9 @@
   },
   "101031": {
    "cseq": 8279,
-   "checked_at": "2026-10-24T13:31:50.873Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=8279&res_dt=20261024",
+   "checked_at": "2026-10-24T23:27:57.394Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=8279&res_dt=20261031",
    "sites": [
     {
      "name": "201호(키즈)",
@@ -52941,9 +52941,9 @@
   },
   "101047": {
    "cseq": 7340,
-   "checked_at": "2026-10-24T13:31:54.766Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7340&res_dt=20261024",
+   "checked_at": "2026-10-24T23:28:01.302Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7340&res_dt=20261031",
    "sites": [
     {
      "name": "이루다 돔 글램핑",
@@ -52975,9 +52975,9 @@
   },
   "101058": {
    "cseq": 14346,
-   "checked_at": "2026-10-24T13:31:59.368Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14346&res_dt=20261024",
+   "checked_at": "2026-10-24T23:28:05.785Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14346&res_dt=20261031",
    "sites": [
     {
      "name": "카라반",
@@ -53080,9 +53080,9 @@
   },
   "101077": {
    "cseq": 17108,
-   "checked_at": "2026-10-24T13:32:03.311Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17108&res_dt=20261024",
+   "checked_at": "2026-10-24T23:28:09.757Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17108&res_dt=20261031",
    "sites": [
     {
      "name": "텐트 사이트",
@@ -53181,15 +53181,15 @@
   },
   "101085": {
    "cseq": 13215,
-   "checked_at": "2026-10-24T13:32:06.689Z",
+   "checked_at": "2026-10-24T23:28:12.978Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101094": {
    "cseq": 5802,
-   "checked_at": "2026-10-24T13:32:11.612Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=5802&res_dt=20261024",
+   "checked_at": "2026-10-24T23:28:18.473Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=5802&res_dt=20261031",
    "sites": [
     {
      "name": "12. 염소 자리 카라반 B타입",
@@ -53383,9 +53383,9 @@
   },
   "101096": {
    "cseq": 13572,
-   "checked_at": "2026-10-24T13:32:14.788Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13572&res_dt=20261024",
+   "checked_at": "2026-10-24T23:28:22.203Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13572&res_dt=20261031",
    "sites": [
     {
      "name": "A존[1박예약가능 존 A8~A10]",
@@ -53423,15 +53423,15 @@
   },
   "101106": {
    "cseq": 12085,
-   "checked_at": "2026-10-24T13:32:18.686Z",
+   "checked_at": "2026-10-24T23:28:25.695Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101124": {
    "cseq": 15128,
-   "checked_at": "2026-10-24T13:32:23.431Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15128&res_dt=20261024",
+   "checked_at": "2026-10-24T23:28:30.904Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15128&res_dt=20261031",
    "sites": [
     {
      "name": "103 동(반려견)",
@@ -53762,9 +53762,9 @@
   },
   "101131": {
    "cseq": 13577,
-   "checked_at": "2026-10-24T13:32:26.992Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13577&res_dt=20261024",
+   "checked_at": "2026-10-24T23:28:34.164Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13577&res_dt=20261031",
    "sites": [
     {
      "name": "A구역",
@@ -53818,9 +53818,9 @@
   },
   "101138": {
    "cseq": 13579,
-   "checked_at": "2026-10-24T13:32:30.752Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13579&res_dt=20261024",
+   "checked_at": "2026-10-24T23:28:37.810Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13579&res_dt=20261031",
    "sites": [
     {
      "name": "태기산 오토캠핑",
@@ -53842,9 +53842,9 @@
   },
   "101145": {
    "cseq": 18196,
-   "checked_at": "2026-10-24T13:32:34.819Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18196&res_dt=20261024",
+   "checked_at": "2026-10-24T23:28:42.060Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18196&res_dt=20261031",
    "sites": [
     {
      "name": "캠핑존A (개별 화장실, 샤워실)",
@@ -53879,9 +53879,9 @@
   },
   "101148": {
    "cseq": 14572,
-   "checked_at": "2026-10-24T13:22:57.237Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14572&res_dt=20261024",
+   "checked_at": "2026-10-24T23:18:49.807Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14572&res_dt=20261031",
    "sites": [
     {
      "name": "황토찜질 카라반펜션 (특실)1",
@@ -54238,9 +54238,9 @@
   },
   "101195": {
    "cseq": 14424,
-   "checked_at": "2026-10-24T13:32:38.790Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14424&res_dt=20261024",
+   "checked_at": "2026-10-24T23:28:46.047Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14424&res_dt=20261031",
    "sites": [
     {
      "name": "A사이트",
@@ -54272,9 +54272,9 @@
   },
   "101198": {
    "cseq": 13574,
-   "checked_at": "2026-10-24T13:32:43.440Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13574&res_dt=20261024",
+   "checked_at": "2026-10-24T23:28:50.944Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13574&res_dt=20261031",
    "sites": [
     {
      "name": "백일홍 1번~5번",
@@ -54418,9 +54418,9 @@
   },
   "101212": {
    "cseq": 14347,
-   "checked_at": "2026-10-24T13:23:02.079Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261024",
+   "checked_at": "2026-10-24T23:18:55.342Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261031",
    "sites": [
     {
      "name": "1호 돔글램핑",
@@ -54782,9 +54782,9 @@
   },
   "101221": {
    "cseq": 14369,
-   "checked_at": "2026-10-24T13:32:46.770Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14369&res_dt=20261024",
+   "checked_at": "2026-10-24T23:28:53.904Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14369&res_dt=20261031",
    "sites": [
     {
      "name": "[D존 커플] 자쿠지 글램핑 카라반",
@@ -54803,9 +54803,9 @@
   },
   "101245": {
    "cseq": 73,
-   "checked_at": "2026-10-24T13:32:51.512Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=73&res_dt=20261024",
+   "checked_at": "2026-10-24T23:28:58.935Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=73&res_dt=20261031",
    "sites": [
     {
      "name": "타프존(with멍뭉이)",
@@ -54845,22 +54845,6 @@
      "size": [
       10,
       15
-     ],
-     "floor": null,
-     "kind": "오토캠핑",
-     "parking": "텐트옆주차",
-     "people": "성인4인, 미성년 4인",
-     "pet": true,
-     "carCamp": true,
-     "checkIn": "13:00",
-     "checkOut": "12:00"
-    },
-    {
-     "name": "A8(두가족사이트 with 멍뭉이)",
-     "price": 100000,
-     "size": [
-      13,
-      10
      ],
      "floor": null,
      "kind": "오토캠핑",
@@ -54979,9 +54963,9 @@
   },
   "101246": {
    "cseq": 17608,
-   "checked_at": "2026-10-24T13:32:55.000Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17608&res_dt=20261024",
+   "checked_at": "2026-10-24T23:29:02.289Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17608&res_dt=20261031",
    "sites": [
     {
      "name": "DS camp",
@@ -55035,9 +55019,9 @@
   },
   "101249": {
    "cseq": 16139,
-   "checked_at": "2026-10-24T13:32:59.063Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16139&res_dt=20261024",
+   "checked_at": "2026-10-24T23:29:06.369Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16139&res_dt=20261031",
    "sites": [
     {
      "name": "A존(차박형)",
@@ -55107,9 +55091,9 @@
   },
   "101251": {
    "cseq": 20262,
-   "checked_at": "2026-10-24T13:23:05.137Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20262&res_dt=20261024",
+   "checked_at": "2026-10-24T23:18:59.489Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20262&res_dt=20261031",
    "sites": [
     {
      "name": "독채",
@@ -55128,9 +55112,9 @@
   },
   "101252": {
    "cseq": 14611,
-   "checked_at": "2026-10-24T13:23:09.581Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14611&res_dt=20261024",
+   "checked_at": "2026-10-24T23:19:04.109Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14611&res_dt=20261031",
    "sites": [
     {
      "name": "카라반 102",
@@ -55318,9 +55302,9 @@
   },
   "101266": {
    "cseq": 5331,
-   "checked_at": "2026-10-24T13:33:03.033Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=5331&res_dt=20261024",
+   "checked_at": "2026-10-24T23:29:10.552Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=5331&res_dt=20261031",
    "sites": [
     {
      "name": "[하늘동]노대바람",
@@ -55456,9 +55440,9 @@
   },
   "101271": {
    "cseq": 14357,
-   "checked_at": "2026-10-24T13:33:07.568Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14357&res_dt=20261024",
+   "checked_at": "2026-10-24T23:29:15.297Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14357&res_dt=20261031",
    "sites": [
     {
      "name": "A1",
@@ -55656,9 +55640,9 @@
   },
   "101277": {
    "cseq": 14682,
-   "checked_at": "2026-10-24T13:23:13.695Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14682&res_dt=20261024",
+   "checked_at": "2026-10-24T23:19:08.893Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14682&res_dt=20261031",
    "sites": [
     {
      "name": "글램핑1호",
@@ -55885,9 +55869,9 @@
   },
   "101282": {
    "cseq": 14423,
-   "checked_at": "2026-10-24T13:23:17.142Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14423&res_dt=20261024",
+   "checked_at": "2026-10-24T23:19:11.796Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14423&res_dt=20261031",
    "sites": [
     {
      "name": "*파쇄석",
@@ -55909,15 +55893,15 @@
   },
   "101305": {
    "cseq": 19268,
-   "checked_at": "2026-10-24T13:23:21.130Z",
+   "checked_at": "2026-10-24T23:19:15.937Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101320": {
    "cseq": 13195,
-   "checked_at": "2026-10-24T13:23:25.494Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13195&res_dt=20261024",
+   "checked_at": "2026-10-24T23:19:20.150Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13195&res_dt=20261031",
    "sites": [
     {
      "name": "독채2호(플스,블루레이시네마)",
@@ -55973,7 +55957,7 @@
     },
     {
      "name": "독채5,6호(키즈펜션)",
-     "price": 550000,
+     "price": 522500,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -55988,9 +55972,9 @@
   },
   "101326": {
    "cseq": 14425,
-   "checked_at": "2026-10-24T13:23:29.240Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14425&res_dt=20261024",
+   "checked_at": "2026-10-24T23:19:24.076Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14425&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑 A존",
@@ -56028,9 +56012,9 @@
   },
   "101327": {
    "cseq": 16841,
-   "checked_at": "2026-10-24T13:33:10.867Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16841&res_dt=20261024",
+   "checked_at": "2026-10-24T23:29:18.718Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16841&res_dt=20261031",
    "sites": [
     {
      "name": "카라반1호(오션뷰)",
@@ -56086,7 +56070,7 @@
     },
     {
      "name": "카라반5(하프오션뷰)",
-     "price": 159000,
+     "price": 219000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -56099,7 +56083,7 @@
     },
     {
      "name": "카라반6(하프오션뷰)",
-     "price": 159000,
+     "price": 219000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -56114,13 +56098,13 @@
   },
   "101335": {
    "cseq": 17261,
-   "checked_at": "2026-10-24T13:33:15.778Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17261&res_dt=20261024",
+   "checked_at": "2026-10-24T23:29:23.781Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17261&res_dt=20261031",
    "sites": [
     {
      "name": "윈드E동1호(개별화장실이용)",
-     "price": 119200,
+     "price": 149000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -56159,7 +56143,7 @@
     },
     {
      "name": "윈드E동4호(개별화장실이용)",
-     "price": 119200,
+     "price": 149000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -56172,7 +56156,7 @@
     },
     {
      "name": "윈드E동3호(개별화장실이용)",
-     "price": 119200,
+     "price": 149000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -56185,7 +56169,7 @@
     },
     {
      "name": "윈드E동2호(개별화장실이용)",
-     "price": 119200,
+     "price": 149000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -56406,7 +56390,7 @@
     },
     {
      "name": "오토캠핑힐B동3호((개별화장실,개별개수대)",
-     "price": 64000,
+     "price": 80000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -56419,7 +56403,7 @@
     },
     {
      "name": "오토캠핑힐B동2호((개별화장실,개별개수대)",
-     "price": 64000,
+     "price": 80000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -56432,7 +56416,7 @@
     },
     {
      "name": "오토캠핑힐B동1호((개별화장실,개별개수대)",
-     "price": 64000,
+     "price": 80000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -56510,7 +56494,7 @@
     },
     {
      "name": "윈드A동 2호(당일치기 글램핑/공용화장실)",
-     "price": 47200,
+     "price": 59000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -56523,7 +56507,7 @@
     },
     {
      "name": "윈드A동 3호(당일치기 글램핑/공용화장실)",
-     "price": 47200,
+     "price": 59000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -56536,7 +56520,7 @@
     },
     {
      "name": "윈드A동 1호(당일치기 글램핑/공용화장실)",
-     "price": 47200,
+     "price": 59000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -56549,7 +56533,7 @@
     },
     {
      "name": "윈드A동 4호(당일치기 글램핑/공용화장실)",
-     "price": 47200,
+     "price": 59000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -56562,7 +56546,7 @@
     },
     {
      "name": "윈드A동 5호(당일치기 글램핑/공용화장실)",
-     "price": 47200,
+     "price": 59000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -56614,7 +56598,7 @@
     },
     {
      "name": "차박2호",
-     "price": 56000,
+     "price": 70000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -56627,7 +56611,7 @@
     },
     {
      "name": "차박1호",
-     "price": 56000,
+     "price": 70000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -56640,7 +56624,7 @@
     },
     {
      "name": "차박3호",
-     "price": 56000,
+     "price": 70000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -56655,9 +56639,9 @@
   },
   "101368": {
    "cseq": 14933,
-   "checked_at": "2026-10-24T13:33:19.270Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14933&res_dt=20261024",
+   "checked_at": "2026-10-24T23:29:27.608Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14933&res_dt=20261031",
    "sites": [
     {
      "name": "[D1-D4] 어울림존",
@@ -56775,15 +56759,15 @@
   },
   "101370": {
    "cseq": 14011,
-   "checked_at": "2026-10-24T13:33:22.732Z",
+   "checked_at": "2026-10-24T23:29:30.681Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101374": {
    "cseq": 20980,
-   "checked_at": "2026-10-24T13:33:26.890Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20980&res_dt=20261024",
+   "checked_at": "2026-10-24T23:29:35.108Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20980&res_dt=20261031",
    "sites": [
     {
      "name": "편의시설",
@@ -56850,9 +56834,9 @@
   },
   "101384": {
    "cseq": 15752,
-   "checked_at": "2026-10-24T13:33:31.315Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15752&res_dt=20261024",
+   "checked_at": "2026-10-24T23:29:39.627Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15752&res_dt=20261031",
    "sites": [
     {
      "name": "A-1",
@@ -57092,13 +57076,13 @@
   },
   "101399": {
    "cseq": 15758,
-   "checked_at": "2026-10-24T13:33:34.864Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15758&res_dt=20261024",
+   "checked_at": "2026-10-24T23:29:42.952Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15758&res_dt=20261031",
    "sites": [
     {
      "name": "글램핑 -4(랜덤배정)",
-     "price": 215200,
+     "price": 269000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -57111,7 +57095,7 @@
     },
     {
      "name": "글램핑 -1(랜덤배정)",
-     "price": 215200,
+     "price": 269000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -57124,7 +57108,7 @@
     },
     {
      "name": "글램핑 -2(랜덤배정)",
-     "price": 215200,
+     "price": 269000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -57137,7 +57121,7 @@
     },
     {
      "name": "글램핑 -3(랜덤배정)",
-     "price": 215200,
+     "price": 269000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -57152,9 +57136,9 @@
   },
   "101411": {
    "cseq": 14838,
-   "checked_at": "2026-10-24T13:33:39.513Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14838&res_dt=20261024",
+   "checked_at": "2026-10-24T23:29:47.868Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14838&res_dt=20261031",
    "sites": [
     {
      "name": "타프존",
@@ -57317,9 +57301,9 @@
   },
   "101414": {
    "cseq": 13597,
-   "checked_at": "2026-10-24T13:23:33.713Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13597&res_dt=20261024",
+   "checked_at": "2026-10-24T23:19:28.417Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=13597&res_dt=20261031",
    "sites": [
     {
      "name": "[당일Day] 캠프닉불멍모닥불(11:00~15:30)",
@@ -57390,9 +57374,9 @@
   },
   "101424": {
    "cseq": 14375,
-   "checked_at": "2026-10-24T13:33:43.067Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14375&res_dt=20261024",
+   "checked_at": "2026-10-24T23:29:51.185Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14375&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑존 (8m x 10m)",
@@ -57456,15 +57440,15 @@
   },
   "101446": {
    "cseq": 16390,
-   "checked_at": "2026-10-24T13:33:46.823Z",
+   "checked_at": "2026-10-24T23:29:54.726Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101447": {
    "cseq": 16355,
-   "checked_at": "2026-10-24T13:33:51.050Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16355&res_dt=20261024",
+   "checked_at": "2026-10-24T23:29:59.075Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16355&res_dt=20261031",
    "sites": [
     {
      "name": "애플존 1번~5번, 15번~17번",
@@ -57518,9 +57502,9 @@
   },
   "101454": {
    "cseq": 15408,
-   "checked_at": "2026-10-24T13:33:55.041Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15408&res_dt=20261024",
+   "checked_at": "2026-10-24T23:30:03.092Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15408&res_dt=20261031",
    "sites": [
     {
      "name": "A존",
@@ -57574,15 +57558,15 @@
   },
   "101459": {
    "cseq": 19097,
-   "checked_at": "2026-10-24T13:33:58.738Z",
+   "checked_at": "2026-10-24T23:30:06.712Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101476": {
    "cseq": 17262,
-   "checked_at": "2026-10-24T13:34:02.954Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17262&res_dt=20261024",
+   "checked_at": "2026-10-24T23:30:11.172Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17262&res_dt=20261031",
    "sites": [
     {
      "name": "3동",
@@ -57666,9 +57650,9 @@
   },
   "101511": {
    "cseq": 15435,
-   "checked_at": "2026-10-24T13:34:07.057Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15435&res_dt=20261024",
+   "checked_at": "2026-10-24T23:30:15.126Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15435&res_dt=20261031",
    "sites": [
     {
      "name": "해구역",
@@ -57722,9 +57706,9 @@
   },
   "101518": {
    "cseq": 16129,
-   "checked_at": "2026-10-24T13:34:11.089Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16129&res_dt=20261024",
+   "checked_at": "2026-10-24T23:30:19.418Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16129&res_dt=20261031",
    "sites": [
     {
      "name": "정담은 글램핑",
@@ -57798,9 +57782,9 @@
   },
   "101519": {
    "cseq": 16133,
-   "checked_at": "2026-10-24T13:34:14.832Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16133&res_dt=20261024",
+   "checked_at": "2026-10-24T23:30:22.805Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16133&res_dt=20261031",
    "sites": [
     {
      "name": "독채 사이트",
@@ -57822,9 +57806,9 @@
   },
   "101527": {
    "cseq": 16861,
-   "checked_at": "2026-10-24T13:34:18.727Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16861&res_dt=20261024",
+   "checked_at": "2026-10-24T23:30:26.751Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16861&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑존-1번~11번(파쇄석)",
@@ -57846,15 +57830,15 @@
   },
   "101530": {
    "cseq": 16042,
-   "checked_at": "2026-10-24T13:34:22.778Z",
+   "checked_at": "2026-10-24T23:30:30.727Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101532": {
    "cseq": 16590,
-   "checked_at": "2026-10-24T13:34:27.752Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16590&res_dt=20261024",
+   "checked_at": "2026-10-24T23:30:36.323Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16590&res_dt=20261031",
    "sites": [
     {
      "name": "203 프리미엄 사파리",
@@ -58380,9 +58364,9 @@
   },
   "101539": {
    "cseq": 20949,
-   "checked_at": "2026-10-24T13:34:30.919Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20949&res_dt=20261024",
+   "checked_at": "2026-10-24T23:30:39.453Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20949&res_dt=20261031",
    "sites": [
     {
      "name": "펜션",
@@ -58427,9 +58411,9 @@
   },
   "101567": {
    "cseq": 15898,
-   "checked_at": "2026-10-24T13:34:35.119Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15898&res_dt=20261024",
+   "checked_at": "2026-10-24T23:30:44.134Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15898&res_dt=20261031",
    "sites": [
     {
      "name": "데크사이트",
@@ -58499,9 +58483,9 @@
   },
   "101579": {
    "cseq": 20192,
-   "checked_at": "2026-10-24T13:34:39.313Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20192&res_dt=20261024",
+   "checked_at": "2026-10-24T23:30:48.113Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20192&res_dt=20261031",
    "sites": [
     {
      "name": "리버 프런트 - 더블사이즈*2",
@@ -58702,9 +58686,9 @@
   },
   "101581": {
    "cseq": 4962,
-   "checked_at": "2026-10-24T13:34:42.799Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4962&res_dt=20261024",
+   "checked_at": "2026-10-24T23:30:51.652Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4962&res_dt=20261031",
    "sites": [
     {
      "name": "은모래",
@@ -58736,9 +58720,9 @@
   },
   "101587": {
    "cseq": 16635,
-   "checked_at": "2026-10-24T13:34:47.297Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16635&res_dt=20261024",
+   "checked_at": "2026-10-24T23:30:55.880Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16635&res_dt=20261031",
    "sites": [
     {
      "name": "까사힐1A(애견동반가능)",
@@ -58874,9 +58858,9 @@
   },
   "101606": {
    "cseq": 19991,
-   "checked_at": "2026-10-24T13:34:51.325Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19991&res_dt=20261024",
+   "checked_at": "2026-10-24T23:31:00.174Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19991&res_dt=20261031",
    "sites": [
     {
      "name": "스탠다드글램핑",
@@ -59116,15 +59100,15 @@
   },
   "101607": {
    "cseq": 19664,
-   "checked_at": "2026-10-24T13:34:54.776Z",
+   "checked_at": "2026-10-24T23:31:03.235Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101612": {
    "cseq": 20772,
-   "checked_at": "2026-10-24T13:34:59.498Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20772&res_dt=20261024",
+   "checked_at": "2026-10-24T23:31:08.454Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20772&res_dt=20261031",
    "sites": [
     {
      "name": "세종감성카라반3호",
@@ -59377,9 +59361,9 @@
   },
   "101619": {
    "cseq": 17327,
-   "checked_at": "2026-10-24T13:35:03.422Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17327&res_dt=20261024",
+   "checked_at": "2026-10-24T23:31:12.072Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17327&res_dt=20261031",
    "sites": [
     {
      "name": "데크-7",
@@ -59481,9 +59465,9 @@
   },
   "101620": {
    "cseq": 17109,
-   "checked_at": "2026-10-24T13:35:07.556Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17109&res_dt=20261024",
+   "checked_at": "2026-10-24T23:31:16.468Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17109&res_dt=20261031",
    "sites": [
     {
      "name": "1(sky blue)",
@@ -59634,15 +59618,15 @@
   },
   "101622": {
    "cseq": 7393,
-   "checked_at": "2026-10-24T13:35:10.786Z",
+   "checked_at": "2026-10-24T23:31:19.472Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101625": {
    "cseq": 20752,
-   "checked_at": "2026-10-24T13:35:15.155Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20752&res_dt=20261024",
+   "checked_at": "2026-10-24T23:31:23.714Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20752&res_dt=20261031",
    "sites": [
     {
      "name": "프리미엄카라반(랜덤배정6)",
@@ -59726,9 +59710,9 @@
   },
   "101629": {
    "cseq": 16124,
-   "checked_at": "2026-10-24T13:35:19.873Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16124&res_dt=20261024",
+   "checked_at": "2026-10-24T23:31:28.956Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16124&res_dt=20261031",
    "sites": [
     {
      "name": "호텔형 카라반 G01호",
@@ -59916,9 +59900,9 @@
   },
   "101654": {
    "cseq": 7193,
-   "checked_at": "2026-10-24T13:35:23.136Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7193&res_dt=20261024",
+   "checked_at": "2026-10-24T23:31:32.707Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7193&res_dt=20261031",
    "sites": [
     {
      "name": "들꽃방1",
@@ -60041,9 +60025,9 @@
   },
   "101657": {
    "cseq": 16356,
-   "checked_at": "2026-10-24T13:35:26.994Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16356&res_dt=20261024",
+   "checked_at": "2026-10-24T23:31:36.153Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16356&res_dt=20261031",
    "sites": [
     {
      "name": "웨스턴마차 (스파)",
@@ -60062,9 +60046,9 @@
   },
   "101659": {
    "cseq": 17290,
-   "checked_at": "2026-10-24T13:35:31.442Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17290&res_dt=20261024",
+   "checked_at": "2026-10-24T23:31:40.767Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17290&res_dt=20261031",
    "sites": [
     {
      "name": "A사이트",
@@ -60141,9 +60125,9 @@
   },
   "101664": {
    "cseq": 16864,
-   "checked_at": "2026-10-24T13:35:35.104Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16864&res_dt=20261024",
+   "checked_at": "2026-10-24T23:31:44.463Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16864&res_dt=20261031",
    "sites": [
     {
      "name": "레드사이트",
@@ -60194,9 +60178,9 @@
   },
   "101669": {
    "cseq": 16451,
-   "checked_at": "2026-10-24T13:35:39.235Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16451&res_dt=20261024",
+   "checked_at": "2026-10-24T23:31:48.873Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16451&res_dt=20261031",
    "sites": [
     {
      "name": "A존(파쇄석)",
@@ -60298,9 +60282,9 @@
   },
   "101670": {
    "cseq": 16138,
-   "checked_at": "2026-10-24T13:35:43.504Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261024",
+   "checked_at": "2026-10-24T23:31:53.029Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16138&res_dt=20261031",
    "sites": [
     {
      "name": "데크사이트 A-1",
@@ -60434,9 +60418,9 @@
   },
   "101675": {
    "cseq": 16445,
-   "checked_at": "2026-10-24T13:35:47.282Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16445&res_dt=20261024",
+   "checked_at": "2026-10-24T23:31:56.928Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16445&res_dt=20261031",
    "sites": [
     {
      "name": "석양 A존(펫존)",
@@ -60554,9 +60538,9 @@
   },
   "101687": {
    "cseq": 17163,
-   "checked_at": "2026-10-24T13:35:51.220Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17163&res_dt=20261024",
+   "checked_at": "2026-10-24T23:32:00.978Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17163&res_dt=20261031",
    "sites": [
     {
      "name": "돔글램핑1 (2인초과시 추가금 현장결제))",
@@ -60705,9 +60689,9 @@
   },
   "101689": {
    "cseq": 20902,
-   "checked_at": "2026-10-24T13:23:37.734Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20902&res_dt=20261024",
+   "checked_at": "2026-10-24T23:19:32.663Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20902&res_dt=20261031",
    "sites": [
     {
      "name": "오션뷰캠비치 1호",
@@ -60947,9 +60931,9 @@
   },
   "101732": {
    "cseq": 17051,
-   "checked_at": "2026-10-24T13:35:55.347Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17051&res_dt=20261024",
+   "checked_at": "2026-10-24T23:32:04.552Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17051&res_dt=20261031",
    "sites": [
     {
      "name": "103호,개별테라스BBQ,개별사워실",
@@ -61059,9 +61043,9 @@
   },
   "101734": {
    "cseq": 20559,
-   "checked_at": "2026-10-24T13:23:41.493Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20559&res_dt=20261024",
+   "checked_at": "2026-10-24T23:19:36.223Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20559&res_dt=20261031",
    "sites": [
     {
      "name": "루미너스 1동 (무한BBQ , 8kg미만 애견동반가능)",
@@ -61184,10 +61168,26 @@
   },
   "101743": {
    "cseq": 16872,
-   "checked_at": "2026-10-24T13:35:59.019Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16872&res_dt=20261024",
+   "checked_at": "2026-10-24T23:32:08.754Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16872&res_dt=20261031",
    "sites": [
+    {
+     "name": "계곡 5번",
+     "price": 50000,
+     "size": [
+      6,
+      5
+     ],
+     "floor": null,
+     "kind": "오토캠핑",
+     "parking": "텐트옆주차",
+     "people": "성인2인, 미성년 2인",
+     "pet": false,
+     "carCamp": false,
+     "checkIn": "14:00",
+     "checkOut": "12:00"
+    },
     {
      "name": "계곡 6번",
      "price": 50000,
@@ -61251,30 +61251,14 @@
      "carCamp": false,
      "checkIn": "14:00",
      "checkOut": "12:00"
-    },
-    {
-     "name": "계곡 5번",
-     "price": 50000,
-     "size": [
-      6,
-      5
-     ],
-     "floor": null,
-     "kind": "오토캠핑",
-     "parking": "텐트옆주차",
-     "people": "성인2인, 미성년 2인",
-     "pet": false,
-     "carCamp": false,
-     "checkIn": "14:00",
-     "checkOut": "12:00"
     }
    ]
   },
   "101756": {
    "cseq": 17393,
-   "checked_at": "2026-10-24T13:23:45.580Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17393&res_dt=20261024",
+   "checked_at": "2026-10-24T23:19:40.513Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17393&res_dt=20261031",
    "sites": [
     {
      "name": "프리미엄 12",
@@ -61501,9 +61485,9 @@
   },
   "101766": {
    "cseq": 17130,
-   "checked_at": "2026-10-24T13:36:03.414Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17130&res_dt=20261024",
+   "checked_at": "2026-10-24T23:32:12.796Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17130&res_dt=20261031",
    "sites": [
     {
      "name": "디럭스 카라반 (랜덤배정)",
@@ -61678,9 +61662,9 @@
   },
   "101769": {
    "cseq": 3693,
-   "checked_at": "2026-10-24T13:36:07.479Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3693&res_dt=20261024",
+   "checked_at": "2026-10-24T23:32:16.918Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3693&res_dt=20261031",
    "sites": [
     {
      "name": "S구역 프리미엄존(개별화장실,개별개수대,노키즈존)",
@@ -61795,9 +61779,9 @@
   },
   "101777": {
    "cseq": 17651,
-   "checked_at": "2026-10-24T13:36:12.119Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17651&res_dt=20261024",
+   "checked_at": "2026-10-24T23:32:22.316Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17651&res_dt=20261031",
    "sites": [
     {
      "name": "A구역 1",
@@ -62171,9 +62155,9 @@
   },
   "101792": {
    "cseq": 16913,
-   "checked_at": "2026-10-24T13:36:15.159Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16913&res_dt=20261024",
+   "checked_at": "2026-10-24T23:32:26.840Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16913&res_dt=20261031",
    "sites": [
     {
      "name": "리버백담 A구역",
@@ -62243,15 +62227,15 @@
   },
   "101795": {
    "cseq": 19118,
-   "checked_at": "2026-10-24T13:36:18.814Z",
+   "checked_at": "2026-10-24T23:32:30.220Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101819": {
    "cseq": 17320,
-   "checked_at": "2026-10-24T13:36:23.144Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17320&res_dt=20261024",
+   "checked_at": "2026-10-24T23:32:34.621Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17320&res_dt=20261031",
    "sites": [
     {
      "name": "*오토캠핑* 파쇄석/8mX8m",
@@ -62299,9 +62283,9 @@
   },
   "101823": {
    "cseq": 19030,
-   "checked_at": "2026-10-24T13:36:27.179Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19030&res_dt=20261024",
+   "checked_at": "2026-10-24T23:32:38.681Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19030&res_dt=20261031",
    "sites": [
     {
      "name": "1동",
@@ -62411,9 +62395,9 @@
   },
   "101826": {
    "cseq": 19348,
-   "checked_at": "2026-10-24T13:36:31.304Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19348&res_dt=20261024",
+   "checked_at": "2026-10-24T23:32:42.982Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19348&res_dt=20261031",
    "sites": [
     {
      "name": "카라반랜덤",
@@ -62627,9 +62611,9 @@
   },
   "101832": {
    "cseq": 17539,
-   "checked_at": "2026-10-24T13:36:35.258Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17539&res_dt=20261024",
+   "checked_at": "2026-10-24T23:32:46.946Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17539&res_dt=20261031",
    "sites": [
     {
      "name": "글램핑 5호",
@@ -62817,9 +62801,9 @@
   },
   "101845": {
    "cseq": 17316,
-   "checked_at": "2026-10-24T13:36:38.933Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17316&res_dt=20261024",
+   "checked_at": "2026-10-24T23:32:50.546Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17316&res_dt=20261031",
    "sites": [
     {
      "name": "휴글램핑",
@@ -62854,9 +62838,9 @@
   },
   "101855": {
    "cseq": 20970,
-   "checked_at": "2026-10-24T13:36:43.630Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20970&res_dt=20261024",
+   "checked_at": "2026-10-24T23:32:55.523Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20970&res_dt=20261031",
    "sites": [
     {
      "name": "캠핑사이트 벽돌데크",
@@ -63239,9 +63223,9 @@
   },
   "101877": {
    "cseq": 17601,
-   "checked_at": "2026-10-24T13:36:47.638Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17601&res_dt=20261024",
+   "checked_at": "2026-10-24T23:32:59.393Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17601&res_dt=20261031",
    "sites": [
     {
      "name": "G01",
@@ -63351,9 +63335,9 @@
   },
   "101886": {
    "cseq": 17326,
-   "checked_at": "2026-10-24T13:36:51.007Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17326&res_dt=20261024",
+   "checked_at": "2026-10-24T23:33:02.738Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17326&res_dt=20261031",
    "sites": [
     {
      "name": "A존",
@@ -63407,7 +63391,7 @@
   },
   "101898": {
    "cseq": 20139,
-   "checked_at": "2026-10-24T13:36:54.829Z",
+   "checked_at": "2026-10-24T23:33:06.342Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20139&res_dt=20261024",
    "sites": [
@@ -63441,9 +63425,9 @@
   },
   "101911": {
    "cseq": 19003,
-   "checked_at": "2026-10-24T13:36:58.889Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19003&res_dt=20261024",
+   "checked_at": "2026-10-24T23:33:10.436Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19003&res_dt=20261031",
    "sites": [
     {
      "name": "애견캠핑",
@@ -63465,9 +63449,9 @@
   },
   "101926": {
    "cseq": 17325,
-   "checked_at": "2026-10-24T13:37:02.857Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17325&res_dt=20261024",
+   "checked_at": "2026-10-24T23:33:14.429Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17325&res_dt=20261031",
    "sites": [
     {
      "name": "소형 카라반(27번사이트)",
@@ -63486,9 +63470,9 @@
   },
   "101931": {
    "cseq": 149,
-   "checked_at": "2026-10-24T13:37:07.081Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=149&res_dt=20261024",
+   "checked_at": "2026-10-24T23:33:18.676Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=149&res_dt=20261031",
    "sites": [
     {
      "name": "A구역 (오토캠핑)",
@@ -63526,9 +63510,9 @@
   },
   "101938": {
    "cseq": 17644,
-   "checked_at": "2026-10-24T13:37:11.808Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17644&res_dt=20261024",
+   "checked_at": "2026-10-24T23:33:23.529Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17644&res_dt=20261031",
    "sites": [
     {
      "name": "A구역 1 (애견동반불가)",
@@ -63915,9 +63899,9 @@
   },
   "101939": {
    "cseq": 19163,
-   "checked_at": "2026-10-24T13:37:15.456Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19163&res_dt=20261024",
+   "checked_at": "2026-10-24T23:33:27.275Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19163&res_dt=20261031",
    "sites": [
     {
      "name": "[풀 프론트]101동",
@@ -64170,9 +64154,9 @@
   },
   "101973": {
    "cseq": 18299,
-   "checked_at": "2026-10-24T13:37:19.200Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18299&res_dt=20261024",
+   "checked_at": "2026-10-24T23:33:30.776Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18299&res_dt=20261031",
    "sites": [
     {
      "name": "A 구역",
@@ -64242,9 +64226,9 @@
   },
   "101981": {
    "cseq": 19678,
-   "checked_at": "2026-10-24T13:37:23.169Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19678&res_dt=20261024",
+   "checked_at": "2026-10-24T23:33:35.002Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19678&res_dt=20261031",
    "sites": [
     {
      "name": "카라반A(랜덤배정)",
@@ -64367,15 +64351,15 @@
   },
   "101982": {
    "cseq": 19397,
-   "checked_at": "2026-10-24T13:37:26.854Z",
+   "checked_at": "2026-10-24T23:33:38.372Z",
    "date": "2026-10-24",
    "sites": []
   },
   "101988": {
    "cseq": 19320,
-   "checked_at": "2026-10-24T13:37:31.664Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19320&res_dt=20261024",
+   "checked_at": "2026-10-24T23:33:43.498Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19320&res_dt=20261031",
    "sites": [
     {
      "name": "글램핑A",
@@ -64758,9 +64742,9 @@
   },
   "101994": {
    "cseq": 18426,
-   "checked_at": "2026-10-24T13:37:34.960Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18426&res_dt=20261024",
+   "checked_at": "2026-10-24T23:33:46.675Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18426&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑존",
@@ -64795,9 +64779,9 @@
   },
   "102003": {
    "cseq": 19754,
-   "checked_at": "2026-10-24T13:37:39.230Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19754&res_dt=20261024",
+   "checked_at": "2026-10-24T23:33:51.039Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19754&res_dt=20261031",
    "sites": [
     {
      "name": "스웨덴 카베 Yosea B-2",
@@ -64933,26 +64917,10 @@
   },
   "102011": {
    "cseq": 20062,
-   "checked_at": "2026-10-24T13:37:43.161Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20062&res_dt=20261024",
+   "checked_at": "2026-10-24T23:33:54.775Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20062&res_dt=20261031",
    "sites": [
-    {
-     "name": "[A 구역 - 물가캠핑 ]",
-     "price": 70000,
-     "size": [
-      6.5,
-      9
-     ],
-     "floor": null,
-     "kind": "오토캠핑",
-     "parking": "주차장주차",
-     "people": "성인2인, 미성년 1인",
-     "pet": false,
-     "carCamp": false,
-     "checkIn": "13:00",
-     "checkOut": "12:00"
-    },
     {
      "name": "[B 구역- 숲속캠핑 ]",
      "price": 70000,
@@ -64965,6 +64933,22 @@
      "parking": "주차장주차",
      "people": "성인2인, 미성년 1인",
      "pet": true,
+     "carCamp": false,
+     "checkIn": "13:00",
+     "checkOut": "12:00"
+    },
+    {
+     "name": "[A 구역 - 물가캠핑 ]",
+     "price": 70000,
+     "size": [
+      6.5,
+      9
+     ],
+     "floor": null,
+     "kind": "오토캠핑",
+     "parking": "주차장주차",
+     "people": "성인2인, 미성년 1인",
+     "pet": false,
      "carCamp": false,
      "checkIn": "13:00",
      "checkOut": "12:00"
@@ -64986,9 +64970,9 @@
   },
   "102014": {
    "cseq": 19418,
-   "checked_at": "2026-10-24T13:37:47.414Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19418&res_dt=20261024",
+   "checked_at": "2026-10-24T23:33:59.371Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19418&res_dt=20261031",
    "sites": [
     {
      "name": "베이직 네스트2",
@@ -65241,9 +65225,9 @@
   },
   "102015": {
    "cseq": 20017,
-   "checked_at": "2026-10-24T13:37:51.276Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20017&res_dt=20261024",
+   "checked_at": "2026-10-24T23:34:03.066Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20017&res_dt=20261031",
    "sites": [
     {
      "name": "잔디 스위트 1동",
@@ -65431,9 +65415,9 @@
   },
   "102016": {
    "cseq": 18517,
-   "checked_at": "2026-10-24T13:37:56.070Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18517&res_dt=20261024",
+   "checked_at": "2026-10-24T23:34:08.228Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18517&res_dt=20261031",
    "sites": [
     {
      "name": "파쇄석1",
@@ -65711,9 +65695,9 @@
   },
   "102036": {
    "cseq": 18430,
-   "checked_at": "2026-10-24T13:37:59.146Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18430&res_dt=20261024",
+   "checked_at": "2026-10-24T23:34:11.994Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18430&res_dt=20261031",
    "sites": [
     {
      "name": "파쇄석존 (일반)",
@@ -65767,9 +65751,9 @@
   },
   "102072": {
    "cseq": 20767,
-   "checked_at": "2026-10-24T13:38:03.241Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20767&res_dt=20261024",
+   "checked_at": "2026-10-24T23:34:16.241Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20767&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑사이트1(카라반아님)",
@@ -65851,7 +65835,7 @@
     },
     {
      "name": "프리미엄 카라반4호",
-     "price": 259000,
+     "price": 249000,
      "size": null,
      "floor": null,
      "kind": "카라반",
@@ -65892,9 +65876,9 @@
   },
   "102095": {
    "cseq": 19770,
-   "checked_at": "2026-10-24T13:38:06.890Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19770&res_dt=20261024",
+   "checked_at": "2026-10-24T23:34:19.606Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19770&res_dt=20261031",
    "sites": [
     {
      "name": "야영사이트",
@@ -65916,9 +65900,9 @@
   },
   "102128": {
    "cseq": 20768,
-   "checked_at": "2026-10-24T13:38:11.460Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20768&res_dt=20261024",
+   "checked_at": "2026-10-24T23:34:24.570Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20768&res_dt=20261031",
    "sites": [
     {
      "name": "프리미엄 103호",
@@ -65935,7 +65919,7 @@
     },
     {
      "name": "럭셔리 202호",
-     "price": 239000,
+     "price": 279000,
      "size": null,
      "floor": null,
      "kind": "카라반",
@@ -65961,7 +65945,7 @@
     },
     {
      "name": "프리미엄 102호",
-     "price": 289000,
+     "price": 319000,
      "size": null,
      "floor": null,
      "kind": "카라반",
@@ -66065,7 +66049,7 @@
     },
     {
      "name": "스탠다드 303호(계곡뷰)",
-     "price": 239000,
+     "price": 259000,
      "size": null,
      "floor": null,
      "kind": "카라반",
@@ -66078,7 +66062,7 @@
     },
     {
      "name": "스탠다드 304호(계곡뷰)",
-     "price": 239000,
+     "price": 259000,
      "size": null,
      "floor": null,
      "kind": "카라반",
@@ -66091,7 +66075,7 @@
     },
     {
      "name": "프리미엄 105호(계곡뷰)",
-     "price": 299000,
+     "price": 289000,
      "size": null,
      "floor": null,
      "kind": "카라반",
@@ -66104,7 +66088,7 @@
     },
     {
      "name": "프리미엄 104호(계곡뷰)",
-     "price": 299000,
+     "price": 319000,
      "size": null,
      "floor": null,
      "kind": "카라반",
@@ -66117,7 +66101,7 @@
     },
     {
      "name": "스탠다드 플러스 301호",
-     "price": 259000,
+     "price": 279000,
      "size": null,
      "floor": null,
      "kind": "카라반",
@@ -66145,9 +66129,9 @@
   },
   "102138": {
    "cseq": 19480,
-   "checked_at": "2026-10-24T13:38:15.584Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19480&res_dt=20261024",
+   "checked_at": "2026-10-24T23:34:28.657Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19480&res_dt=20261031",
    "sites": [
     {
      "name": "군북 (데크)",
@@ -66281,9 +66265,9 @@
   },
   "102159": {
    "cseq": 20665,
-   "checked_at": "2026-10-24T13:23:49.349Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20665&res_dt=20261024",
+   "checked_at": "2026-10-24T23:19:44.137Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20665&res_dt=20261031",
    "sites": [
     {
      "name": "4동 프리미엄돔",
@@ -66326,7 +66310,7 @@
     },
     {
      "name": "5동 프리미엄돔",
-     "price": 230000,
+     "price": 250000,
      "size": null,
      "floor": null,
      "kind": "펜션",
@@ -66367,9 +66351,9 @@
   },
   "102167": {
    "cseq": 1605,
-   "checked_at": "2026-10-24T13:38:18.955Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1605&res_dt=20261024",
+   "checked_at": "2026-10-24T23:34:31.707Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=1605&res_dt=20261031",
    "sites": [
     {
      "name": "파랑새 사이트",
@@ -66391,9 +66375,9 @@
   },
   "102177": {
    "cseq": 20129,
-   "checked_at": "2026-10-24T13:23:54.027Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20129&res_dt=20261024",
+   "checked_at": "2026-10-24T23:19:49.048Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20129&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑 A-7",
@@ -66789,7 +66773,7 @@
   },
   "102206": {
    "cseq": 20716,
-   "checked_at": "2026-10-24T13:23:57.502Z",
+   "checked_at": "2026-10-24T23:19:51.864Z",
    "date": "2026-10-24",
    "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20716&res_dt=20261024",
    "sites": [
@@ -66888,9 +66872,9 @@
   },
   "102235": {
    "cseq": 19481,
-   "checked_at": "2026-10-24T13:24:01.908Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19481&res_dt=20261024",
+   "checked_at": "2026-10-24T23:19:57.208Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19481&res_dt=20261031",
    "sites": [
     {
      "name": "A1 (방갈로+개별화장실)",
@@ -67040,9 +67024,9 @@
   },
   "102236": {
    "cseq": 20430,
-   "checked_at": "2026-10-24T13:38:23.632Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20430&res_dt=20261024",
+   "checked_at": "2026-10-24T23:34:36.856Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20430&res_dt=20261031",
    "sites": [
     {
      "name": "A사이트",
@@ -67194,14 +67178,27 @@
      "carCamp": false,
      "checkIn": "14:00",
      "checkOut": "12:00"
+    },
+    {
+     "name": "H 사이트",
+     "price": 70000,
+     "size": null,
+     "floor": null,
+     "kind": "오토캠핑",
+     "parking": "텐트옆주차",
+     "people": "성인2인, 미성년 2인",
+     "pet": false,
+     "carCamp": false,
+     "checkIn": "14:00",
+     "checkOut": "12:00"
     }
    ]
   },
   "102242": {
    "cseq": 20847,
-   "checked_at": "2026-10-24T13:24:06.214Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20847&res_dt=20261024",
+   "checked_at": "2026-10-24T23:20:01.725Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20847&res_dt=20261031",
    "sites": [
     {
      "name": "당일 피크닉 원룸형(입장10시30분/퇴실20시)",
@@ -67805,9 +67802,9 @@
   },
   "102331": {
    "cseq": 20913,
-   "checked_at": "2026-10-24T13:38:26.930Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20913&res_dt=20261024",
+   "checked_at": "2026-10-24T23:34:39.747Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20913&res_dt=20261031",
    "sites": [
     {
      "name": "파쇄석 사이트",
@@ -67829,9 +67826,9 @@
   },
   "osm-w513330739": {
    "cseq": 12923,
-   "checked_at": "2026-10-24T13:18:14.882Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=12923&res_dt=20261024",
+   "checked_at": "2026-10-24T23:13:51.425Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=12923&res_dt=20261031",
    "sites": [
     {
      "name": "도미토리 여성 1인(8인실)",
@@ -68058,9 +68055,9 @@
   },
   "osm-w858869210": {
    "cseq": 4785,
-   "checked_at": "2026-10-24T13:18:18.646Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4785&res_dt=20261024",
+   "checked_at": "2026-10-24T23:13:55.566Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4785&res_dt=20261031",
    "sites": [
     {
      "name": "메이플",
@@ -68170,9 +68167,9 @@
   },
   "park-48820-00001-n71qm": {
    "cseq": 16861,
-   "checked_at": "2026-10-24T13:18:22.246Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16861&res_dt=20261024",
+   "checked_at": "2026-10-24T23:13:58.791Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16861&res_dt=20261031",
    "sites": [
     {
      "name": "오토캠핑존-1번~11번(파쇄석)",
@@ -68194,9 +68191,9 @@
   },
   "park-46770-00014-qc3lb": {
    "cseq": 19772,
-   "checked_at": "2026-10-24T13:18:10.480Z",
-   "date": "2026-10-24",
-   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19772&res_dt=20261024",
+   "checked_at": "2026-10-24T23:13:47.104Z",
+   "date": "2026-10-31",
+   "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19772&res_dt=20261031",
    "sites": [
     {
      "name": "해변 캠핑장 1~37",
@@ -68249,5 +68246,5 @@
    ]
   }
  },
- "updated_at": "2026-10-24T13:40:09.138Z"
+ "updated_at": "2026-10-24T23:36:25.234Z"
 }
