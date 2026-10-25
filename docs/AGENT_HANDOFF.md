@@ -1,5 +1,10 @@
 # 인수인계
 
+## 📌 찜 메모 카드 댓글 모듈 (2026-10-26, Codex)
+- 찜한 캠핑장 카드의 평가 칩 아래에 댓글 열기·작성·삭제 모듈을 추가했다. 이름은 `mc-saved-comment-name`으로 기억하고 이름 기반 색상 팔레트를 고정해 다음 작성 때 미리 채운다.
+- 숫자 업장 ID는 기존 `campground_comment` API를 재사용하며 API가 없으면 업장별 로컬 보관함으로 대체한다. 원본은 `design/renewal/{app.js,style.css}`, 발행본은 `camping-atlas/public/{app.js,style.css}`에 반영했다.
+- 검증: 두 app.js `node --check`, `git diff --check` 통과. `npm --prefix camping-atlas run lint`는 로컬 eslint 미설치로 실행하지 못했다.
+
 ## 📌 공식 사진 파일 정리 금지 · media 가드가 파일 목록도 본다 (2026-10-24, Claude)
 
 - 사고: data-sync run 40045989901(tour-enrichment)의 `sync-images.mjs` 마지막 정리가 매니페스트에 없는 사진 파일 7,274장을 지웠다. 매니페스트는 10-21 이후 2,380장(시설당 1장)뿐이지만, 화면 데이터(`explore/data/camps/*.json` photos)는 누적 병합으로 옛 사진 경로를 계속 가리킨다. 그래서 Pages 배포의 `verify-official-media.mjs`가 “공식 사진 1,324개 없음”으로 막았다(사이트는 직전 버전 유지).
