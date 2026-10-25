@@ -1,5 +1,10 @@
 # 인수인계
 
+## 📌 찜 메모 카드 댓글 모듈 (2026-10-26, Codex)
+- 찜한 캠핑장 카드의 평가 칩 아래에 댓글 열기·작성·삭제 모듈을 추가했다. 이름을 처음 입력하면 `mc-saved-comment-name`으로 기억하고 이름을 기준으로 Let’s Camp 색상 팔레트를 고정해 다음 댓글 작성 때 미리 채운다.
+- 숫자 업장 ID는 기존 `campground_comment` 공개 API를 재사용한다. API가 없거나 일시 실패하면 업장별 `mc-saved-comments-{id}` 로컬 보관함으로 대체해 작성 내용을 잃지 않는다. 기존 상세 댓글과 충돌하지 않도록 `tag: saved`와 별도 data 속성을 사용했다.
+- 원본은 `design/renewal/app.js`, `design/renewal/style.css`; 발행본은 `camping-atlas/public`에 동기화했다. `node --check`와 `git diff --check` 통과. `npm --prefix camping-atlas run lint`는 로컬에 eslint가 설치되지 않아 실행하지 못했다.
+
 ## 📌 공용 찜 누락 원인·마이그레이션 경로 보정 (2026-10-23, Codex)
 - `/log/`의 `save_log`에는 `원주두리캠핑장(2472)`·`신림스테이캠프(101093)`의 `add`가 남았지만 `/saved`의 `shared_save`에는 없었다.
 - 원인은 `pipeline/scripts/migrate-postgres.mjs`가 루트 `db/`만 읽는데, 공용 찜·조회 로그 마이그레이션이 `camping-atlas/db/`에만 존재했던 경로 불일치다. 원격 `schema_migration`에도 016 이후 해당 파일들이 기록되지 않았다.
