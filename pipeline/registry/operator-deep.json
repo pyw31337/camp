@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-25T20:53:17.751Z",
+  "generated_at": "2026-10-25T23:22:20.307Z",
   "policy": "operator hosts only, robots respected, sentences and image urls",
   "campgrounds": {
     "146": {
@@ -1618,7 +1618,7 @@
       "status": "OK",
       "name": "화성에코팜테마파크 오토캠핑장",
       "url": "https://hsecofarm.hscity.go.kr/",
-      "checked_at": "2026-10-25T20:53:26.053Z",
+      "checked_at": "2026-10-25T23:22:28.022Z",
       "pages": [
         "https://hsecofarm.hscity.go.kr/",
         "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
@@ -1792,7 +1792,7 @@
           "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
         },
         {
-          "text": "머무는 방식에 맞춰 선택할 수 있도록 일반형 A-D, 확장형 E, 확장형 F 구역으로 나뉜 체류형 캠핑 공간입니다.",
+          "text": "머무는 방식에 맞춰 선택할 수 있도록 일반형 A-D, 확장형 E, F 구역으로 나뉜 체류형 캠핑 공간입니다.",
           "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
         },
         {

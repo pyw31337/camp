@@ -39147,7 +39147,7 @@
    "name": "원주두리캠핑장",
    "status": "OK",
    "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
-   "checked_at": "2026-10-25T20:49:17.440Z",
+   "checked_at": "2026-10-25T23:18:20.005Z",
    "discovered": true,
    "pages": [
     "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
@@ -39453,10 +39453,10 @@
      }
     },
     {
-     "text": "31 공지사항 동절기에는 수영장은 운영 안합니다 원주두리캠핑 2025-12-16 715",
+     "text": "31 공지사항 동절기에는 수영장은 운영 안합니다 원주두리캠핑 2025-12-16 716",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "31 공지사항 동절기에는 수영장은 운영 안합니다 원주두리캠핑 2025-12-16 715"
+      "text": "31 공지사항 동절기에는 수영장은 운영 안합니다 원주두리캠핑 2025-12-16 716"
      }
     },
     {
@@ -39495,10 +39495,10 @@
      }
     },
     {
-     "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1195",
+     "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1196",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1195"
+      "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1196"
      }
     },
     {
@@ -222985,7 +222985,7 @@
    "name": "WonderWood Glamping(원더우드 글램핑)",
    "status": "FETCH_FAILED",
    "url": "https://camping.hansangsoo.com/camp/102221.html",
-   "checked_at": "2026-10-25T20:49:17.439Z",
+   "checked_at": "2026-10-25T23:18:20.003Z",
    "error": "403"
   },
   "102222": {
@@ -223375,7 +223375,7 @@
     }
    ],
    "last_attempt": {
-    "at": "2026-10-25T20:49:17.438Z",
+    "at": "2026-10-25T23:18:20.002Z",
     "status": "NO_RELEVANT_TEXT",
     "error": null
    }
@@ -226569,7 +226569,7 @@
    "name": "평택캠핑성",
    "status": "FETCH_FAILED",
    "url": "https://platformdodam.com/children-play-facilities/3019",
-   "checked_at": "2026-10-25T20:49:17.407Z",
+   "checked_at": "2026-10-25T23:18:19.967Z",
    "error": "403"
   },
   "102378": {
@@ -246864,6 +246864,6 @@
    "snippets": []
   }
  },
- "generated_at": "2026-10-25T20:49:46.594Z",
+ "generated_at": "2026-10-25T23:20:03.748Z",
  "policy": "운영자 자체 홈페이지·예약 페이지만, robots.txt 준수, 봇 이름 공개, 문장(≤140자)·원문 URL·확인 시각만 저장. 플랫폼 페이지는 수집하지 않음."
 }
