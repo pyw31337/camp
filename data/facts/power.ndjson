@@ -811,6 +811,7 @@
 {"cid":"7492","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7494","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7496","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7499","attr":"POWER_MAX_A","value":30,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hkh51/224280821121","at":"2026-05-10","quote":"합천해피캠핑장 26.05.09 전기 30A 6600w 1.사이트주차안됨 2.그늘좋음 3.개수대작음 4.온수잘나옴 5.샤워장 비누 샴푸 바디워시 있음 6.닭있음 새볔에 안울었음.","text":30,"n":1}
 {"cid":"7502","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7528","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7536","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
