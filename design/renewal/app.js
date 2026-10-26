@@ -4409,6 +4409,70 @@ function commentsHtml(c) {
     <ul class="cmts" data-cmts><li class="muted">불러오는 중…</li></ul></section>`;
 }
 
+// 댓글 본문 안의 링크는 단순 문자열로 남기지 않고, 재생 가능한 영상과 외부 링크를
+// 구분해 보여준다. 원문 URL은 그대로 보존하고, 미리보기는 클릭할 때만 iframe을 붙인다.
+const COMMENT_URL_RE = /https?:\/\/[^\s<>"']+/gi;
+function commentUrlInfo(raw) {
+  let url = String(raw || "").trim();
+  let tail = "";
+  while (/[),.!?;:]$/.test(url)) { tail = url.slice(-1) + tail; url = url.slice(0, -1); }
+  let u;
+  try { u = new URL(url); } catch { return null; }
+  if (!/^https?:$/.test(u.protocol)) return null;
+  const host = u.hostname.toLowerCase().replace(/^www\./, "");
+  let provider = "기타 링크", embed = "", thumb = "", label = host;
+  const yt = host === "youtu.be" ? u.pathname.split("/").filter(Boolean)[0] : (host.endsWith("youtube.com") ? (u.searchParams.get("v") || u.pathname.match(/\/(?:shorts|embed)\/([^/?#]+)/i)?.[1]) : "");
+  if (yt) { provider = /\/shorts\//i.test(u.pathname) ? "YouTube Shorts" : "YouTube"; embed = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(yt)}`; thumb = `https://i.ytimg.com/vi/${encodeURIComponent(yt)}/hqdefault.jpg`; label = "youtube.com"; }
+  else {
+    const nv = host === "tv.naver.com" ? u.pathname.match(/\/(?:v|embed)\/(\d+)/i)?.[1] : "";
+    const kk = host === "tv.kakao.com" ? (u.pathname.match(/\/(?:v|cliplink)\/(\d+)/i)?.[1] || u.pathname.match(/cliplink\/(\d+)/i)?.[1]) : "";
+    if (nv) { provider = "네이버TV"; embed = `https://tv.naver.com/embed/${encodeURIComponent(nv)}`; label = "tv.naver.com"; }
+    else if (kk) { provider = "카카오TV"; embed = `https://tv.kakao.com/embed/player/cliplink/${encodeURIComponent(kk)}`; label = "tv.kakao.com"; }
+    else if (/instagram\.com$/.test(host)) { provider = "인스타그램 링크"; label = "instagram.com"; }
+    else if (/facebook\.com$|fb\.watch$/.test(host)) { provider = "페이스북 링크"; label = "facebook.com"; }
+    else if (/naver\.com$|naver\.me$/.test(host)) { provider = "네이버 링크"; label = host; }
+    else if (/kakao\.com$|daum\.net$/.test(host)) { provider = "카카오 링크"; label = host; }
+  }
+  return { url, tail, provider, embed, thumb, label };
+}
+function commentLinkCard(raw) {
+  const info = commentUrlInfo(raw);
+  if (!info) return esc(raw);
+  const title = esc(info.provider), domain = esc(info.label), href = esc(info.url);
+  if (info.embed) {
+    const visual = info.thumb ? `<img src="${esc(info.thumb)}" alt="${title} 미리보기" loading="lazy" referrerpolicy="no-referrer">` : `<span class="comment-video-placeholder">${esc(info.provider)}</span>`;
+    return `<span class="comment-link-card comment-video-card"><button type="button" class="comment-video-trigger" data-comment-video="${esc(info.embed)}" aria-label="${title} 재생">${visual}<span class="comment-video-play" aria-hidden="true">▶</span></button><span class="comment-link-meta"><b>${title}</b><small>${domain}</small></span></span>`;
+  }
+  return `<a class="comment-link-card comment-external-card" href="${href}" target="_blank" rel="noopener noreferrer"><span class="comment-link-icon">↗</span><span><b>${title}</b><small>${domain}</small></span><span class="comment-link-arrow">›</span></a>`;
+}
+function commentContentHtml(value) {
+  const text = String(value || "");
+  let out = "", last = 0, match;
+  COMMENT_URL_RE.lastIndex = 0;
+  while ((match = COMMENT_URL_RE.exec(text))) {
+    out += esc(text.slice(last, match.index)).replace(/\n/g, "<br>");
+    out += commentLinkCard(match[0]);
+    const info = commentUrlInfo(match[0]);
+    if (info?.tail) out += esc(info.tail);
+    last = COMMENT_URL_RE.lastIndex;
+  }
+  return out + esc(text.slice(last)).replace(/\n/g, "<br>");
+}
+function bindCommentVideo(root) {
+  root?.addEventListener("click", (e) => {
+    const b = e.target.closest?.("[data-comment-video]");
+    if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    const src = String(b.dataset.commentVideo || "");
+    if (!/^https:\/\//i.test(src)) return;
+    const frame = document.createElement("iframe");
+    frame.src = `${src}${src.includes("?") ? "&" : "?"}autoplay=1&playsinline=1`;
+    frame.title = "댓글 영상"; frame.allow = "autoplay; encrypted-media; picture-in-picture"; frame.allowFullscreen = true;
+    const card = b.closest(".comment-video-card");
+    if (card) { b.replaceWith(frame); card.classList.add("is-playing"); }
+  });
+}
+
 // 찜 메모 카드 댓글: 계정 없이 이름만 입력해도 남길 수 있도록 한다.
 // 서버 댓글 테이블을 재사용하고, 연결이 안 될 때는 해당 브라우저의 임시 보관함으로 안전하게 대체한다.
 const SAVED_COMMENT_NAME_KEY = "mc-saved-comment-name";
@@ -4432,7 +4496,7 @@ function savedCommentRow(x) {
   const color = savedCommentColor(x.nickname);
   return `<li class="saved-comment-row" data-saved-comment-row="${esc(x.id || "")}">
     <span class="saved-comment-avatar" style="--comment-color:${color}" aria-hidden="true">${esc(savedCommentInitial(x.nickname))}</span>
-    <div class="saved-comment-copy"><div class="saved-comment-meta"><b>${esc(x.nickname || "캠퍼")}</b><time>${esc(formatKoreanDate(x.created_at || x.createdAt || Date.now()))}</time>${mine ? `<button type="button" class="saved-comment-edit" data-saved-comment-del="${esc(x.id || "")}" aria-label="댓글 삭제">${ic("close")}</button>` : ""}</div><p>${esc(x.content || "")}</p></div>
+    <div class="saved-comment-copy"><div class="saved-comment-meta"><b>${esc(x.nickname || "캠퍼")}</b><time>${esc(formatKoreanDate(x.created_at || x.createdAt || Date.now()))}</time>${mine ? `<button type="button" class="saved-comment-edit" data-saved-comment-del="${esc(x.id || "")}" aria-label="댓글 삭제">${ic("close")}</button>` : ""}</div><p>${commentContentHtml(x.content || "")}</p></div>
   </li>`;
 }
 function savedCommentsHtml(c) {
@@ -4485,6 +4549,7 @@ function initSavedComments() {
     const toggle = $("[data-saved-comments-toggle]", root), panel = $("[data-saved-comments-panel]", root), form = $("[data-saved-comment-form]", root), input = form?.elements?.nickname;
     if (!toggle || !panel || !form || root.dataset.bound) return;
     root.dataset.bound = "1";
+    bindCommentVideo($('[data-saved-comments-list]', root));
     let loaded = false;
     toggle.addEventListener("click", () => {
       const open = panel.hidden;
@@ -4544,7 +4609,7 @@ async function loadComments(id) {
     const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,nickname,content,created_at&campground_id=eq.${encodeURIComponent(id)}&is_deleted=eq.false&order=created_at.desc&limit=30`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
     const list = r.ok ? await r.json() : [];
     const mine = store.get("mc-my-comments", []);
-    box.innerHTML = list.length ? list.map((x) => `<li><b>${esc(x.nickname)}</b><i>${esc(formatKoreanDate(x.created_at))}</i>${mine.includes(String(x.id)) ? `<button type="button" class="link" data-cmt-del="${esc(x.id)}">지우기</button>` : ""}<p>${esc(x.content)}</p></li>`).join("") : `<li class="muted">첫 한마디를 남겨 주세요.</li>`;
+    box.innerHTML = list.length ? list.map((x) => `<li><b>${esc(x.nickname)}</b><i>${esc(formatKoreanDate(x.created_at))}</i>${mine.includes(String(x.id)) ? `<button type="button" class="link" data-cmt-del="${esc(x.id)}">지우기</button>` : ""}<p>${commentContentHtml(x.content)}</p></li>`).join("") : `<li class="muted">첫 한마디를 남겨 주세요.</li>`;
   } catch { box.innerHTML = `<li class="muted">지금은 불러오지 못했어요.</li>`; }
 }
 // ── 주간 날씨 예보 & 일자별 상세 모달 (모여라 캘린더 동일 구조) ──────
@@ -5496,6 +5561,7 @@ function bindDetail() {
     }
   }
   if (id && $("[data-cmts]")) loadComments(id);
+  bindCommentVideo($("[data-cmts]"));
   const cmtForm = $("[data-cmt]");
   const cmtTa = cmtForm ? $("textarea[name='content']", cmtForm) : null;
   if (cmtTa) {

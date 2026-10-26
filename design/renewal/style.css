@@ -1350,6 +1350,28 @@ body.map-mode { overflow: hidden; height: 100dvh; }
 .cmts li .link { margin-left: auto; font-size: .8rem; }
 .cmts li p { flex-basis: 100%; color: var(--ink-2); line-height: 1.6; }
 .cmts .muted { color: var(--ink-3); }
+/* 댓글 링크 미리보기: 영상은 클릭 후에만 iframe을 만들어 모바일 성능과 데이터 사용량을 아낀다. */
+.comment-link-card { display: flex; align-items: center; gap: 9px; width: min(100%, 360px); margin-top: 8px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--paper); color: var(--ink); text-decoration: none; box-sizing: border-box; }
+.comment-video-card { display: block; }
+.comment-video-trigger { position: relative; display: block; width: 100%; min-height: 72px; border: 0; padding: 0; background: var(--soft); color: var(--ink); cursor: pointer; text-align: left; }
+.comment-video-trigger img { display: block; width: 100%; aspect-ratio: 16 / 8; object-fit: cover; }
+.comment-video-placeholder { display: grid; place-items: center; min-height: 72px; color: var(--ink-2); font-weight: 800; font-size: .82rem; }
+.comment-video-play { position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 38px; height: 38px; transform: translate(-50%, -50%); border-radius: 50%; background: rgba(0, 0, 0, .68); color: #fff; font-size: 1rem; }
+.comment-video-card.is-playing { display: block; }
+.comment-video-card.is-playing iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; background: #000; }
+.comment-link-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 7px 10px 8px; }
+.comment-link-meta b, .comment-external-card b { font-size: .78rem; font-weight: 850; }
+.comment-link-meta small, .comment-external-card small { color: var(--ink-3); font-size: .7rem; }
+.comment-external-card { padding: 9px 10px; }
+.comment-link-icon { display: grid; place-items: center; flex: none; width: 28px; height: 28px; border-radius: 8px; background: var(--accent-tint); color: var(--accent); font-size: 1.05rem; font-weight: 900; }
+.comment-external-card > span:nth-child(2) { display: grid; gap: 2px; min-width: 0; }
+.comment-link-arrow { margin-left: auto; color: var(--ink-3); font-size: 1.2rem; }
+.saved-comment-copy .comment-link-card { margin-top: 6px; }
+.saved-comment-copy .comment-video-trigger img { aspect-ratio: 16 / 8; }
+@media (max-width: 759px) {
+  .comment-link-card { width: 100%; max-width: none; }
+  .comment-video-trigger img { max-height: 170px; }
+}
 .saved-card-comments { position: relative; z-index: 2; margin-top: 2px; padding-top: 8px; border-top: 1px solid var(--line); }
 .saved-comments-toggle { display: inline-flex; align-items: center; gap: 6px; min-height: 30px; border: 0; padding: 3px 0; background: none; color: var(--ink-2); font: inherit; font-size: .82rem; font-weight: 800; cursor: pointer; }
 .saved-comments-toggle > .ic { width: 15px; height: 15px; color: var(--accent); }
