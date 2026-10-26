@@ -74,6 +74,14 @@
   .kpi-num { font-size: 1.75rem; font-weight: 850; letter-spacing: -.03em; line-height: 1.1; font-variant-numeric: tabular-nums; }
   .kpi-sub { font-size: .78rem; color: var(--ink-3); }
   .kpi-sub b { color: var(--ink-2); }
+  /* 전체 피드만 대시보드 요약을 보여주고, 유형별 메뉴는 해당 기록 목록에 집중한다. */
+  .layout[data-log-tab="filtered"] .kpis,
+  .layout[data-log-tab="filtered"] .grid-a,
+  .layout[data-log-tab="filtered"] .grid-b,
+  .layout[data-log-tab="filtered"] .side { display: none; }
+  .layout[data-log-tab="filtered"] .dash { grid-template-columns: minmax(0, 1fr); }
+  .log-filter-note { display: none; margin: -4px 0 14px; color: var(--ink-3); font-size: .84rem; }
+  .layout[data-log-tab="filtered"] .log-filter-note { display: block; }
   .t-add { background: var(--accent-tint); color: var(--accent); }
   .t-rm { background: var(--flame-tint); color: var(--flame); }
   .t-cmt { background: var(--cobalt-tint); color: var(--cobalt); }
@@ -419,7 +427,7 @@
   </div>
 </nav>
 
-<main class="layout">
+<main class="layout" data-log-tab="all">
   <div class="log-head">
     <div class="hero-ic"><svg><use href="#i-pulse"/></svg></div>
     <div><h1>운영 대시보드</h1><p>찜 · 캠퍼 한마디 · 상세 진입 — 사람이 남긴 기록만(자동 테스트·중복 제외)</p></div>
@@ -459,6 +467,8 @@
       <div class="panel-b donut-wrap"><svg class="donut" id="donut-dev" viewBox="0 0 120 120" role="img" aria-label="기기 비율"></svg><ul class="dlegend" id="donut-dev-legend"></ul></div>
     </section>
   </div>
+
+  <p class="log-filter-note" id="log-filter-note" aria-live="polite"></p>
 
   <div class="dash">
     <section class="panel feed-panel">
@@ -760,6 +770,19 @@
   const TAB_TYPE = { adds: "add", removes: "remove", comments: "comment", views: "view" };
   const COLOR = { add: "var(--accent)", remove: "var(--flame)", comment: "var(--cobalt)", view: "var(--violet)" };
   const LABEL = { add: "찜 추가", remove: "찜 해제", comment: "한마디", view: "상세 진입" };
+  const TAB_NOTE = {
+    adds: "찜 추가 기록만 보여줘요.",
+    removes: "찜 해제 기록만 보여줘요.",
+    comments: "댓글 작성·삭제 기록만 보여줘요.",
+    views: "목록에서 상세로 들어온 기록만 보여줘요.",
+  };
+  function setTabView(tab) {
+    const layout = $(".layout");
+    if (!layout) return;
+    layout.dataset.logTab = tab === "all" ? "all" : "filtered";
+    const note = $("#log-filter-note");
+    if (note) note.textContent = TAB_NOTE[tab] || "";
+  }
   // 사람이 남긴 기록만(중복 빼고, ‘테스트 기록 숨기기’면 자동 테스트도 빼고)
   const humanItems = () => state.feedItems.filter((x) => !x.dup && !(state.hideBot && x.device?.type === "bot"));
   const typeOf = (x) => (x.type === "deleted" ? "comment" : x.type);
@@ -963,7 +986,7 @@
     const b = e.target.closest("[data-tab]"); if (!b || b.getAttribute("aria-selected") === "true") return;
     $$(".utab", tabs).forEach((x) => x.setAttribute("aria-selected", String(x === b)));
     b.scrollIntoView({ behavior: MOTION ? "smooth" : "auto", inline: "center", block: "nearest" });
-    moveInk(); state.tab = b.dataset.tab; state.pageLimit = 30; $("#feed-title").textContent = b.querySelector("span").textContent; renderChart(); renderDonuts(); renderClock(); applyFilters();
+    moveInk(); state.tab = b.dataset.tab; setTabView(state.tab); state.pageLimit = 30; $("#feed-title").textContent = b.querySelector("span").textContent; renderChart(); renderDonuts(); renderClock(); applyFilters();
   });
   tabs.addEventListener("keydown", (e) => {
     if (!["ArrowLeft", "ArrowRight"].includes(e.key)) return;
@@ -974,6 +997,7 @@
   addEventListener("resize", () => { moveInk(false); clearTimeout(rz); rz = setTimeout(() => state.loaded && renderChart(), 200); });
   document.fonts?.ready.then(() => moveInk(false));
   moveInk(false);
+  setTabView(state.tab);
 
   // 드롭다운(직접 그림): 열기·닫기 움직임, 바깥 누르면 닫힘, 위·아래·Enter·Esc
   function closeAllDd(except) { $$(".dd[data-open]").forEach((d) => { if (d !== except) { d.removeAttribute("data-open"); $(".dd-btn", d).setAttribute("aria-expanded", "false"); } }); }

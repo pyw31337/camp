@@ -1,5 +1,10 @@
 # 인수인계
 
+## 📌 로그 메뉴별 대시보드 분리 (2026-10-26, Codex)
+- `/log/`는 전체 피드에서만 요약 카드·차트·순위 패널을 보여주고, 찜 추가·찜 해제·댓글·상세 진입 탭에서는 공통 대시보드를 숨겨 해당 기록 피드만 넓게 보여준다.
+- 메뉴를 바꾸면 안내 문구와 피드 제목도 선택한 기록 종류에 맞춰 갱신된다. 변경 파일은 `camping-atlas/public/log/index.html`이다.
+- 검증: `git diff --check` 및 HTML 내 스크립트 문법 확인 예정.
+
 ## 📌 찜 메모 카드 댓글 모듈 (2026-10-26, Codex)
 - 찜한 캠핑장 카드의 평가 칩 아래에 댓글 열기·작성·삭제 모듈을 추가했다. 이름은 `mc-saved-comment-name`으로 기억하고 이름 기반 색상 팔레트를 고정해 다음 작성 때 미리 채운다.
 - 숫자 업장 ID는 기존 `campground_comment` API를 재사용하며 API가 없으면 업장별 로컬 보관함으로 대체한다. 원본은 `design/renewal/{app.js,style.css}`, 발행본은 `camping-atlas/public/{app.js,style.css}`에 반영했다.
