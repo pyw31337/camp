@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-25T23:22:20.307Z",
+  "generated_at": "2026-10-26T04:47:15.293Z",
   "policy": "operator hosts only, robots respected, sentences and image urls",
   "campgrounds": {
     "146": {
@@ -764,6 +764,16 @@
       "pages": [],
       "snippets": [],
       "images": []
+    },
+    "100597": {
+      "status": "SKIPPED",
+      "reason": "not operator host",
+      "url": null
+    },
+    "100676": {
+      "status": "SKIPPED",
+      "reason": "not operator host",
+      "url": "https://www.instagram.com/_camp_darling/"
     },
     "101040": {
       "status": "OK",
@@ -1591,6 +1601,11 @@
         }
       ]
     },
+    "101608": {
+      "status": "SKIPPED",
+      "reason": "not operator host",
+      "url": "https://cafe.naver.com/sansaesoristory"
+    },
     "101934": {
       "status": "FETCH_FAILED",
       "name": "소나무 캠핑장",
@@ -1618,7 +1633,7 @@
       "status": "OK",
       "name": "화성에코팜테마파크 오토캠핑장",
       "url": "https://hsecofarm.hscity.go.kr/",
-      "checked_at": "2026-10-25T23:22:28.022Z",
+      "checked_at": "2026-10-26T04:47:22.852Z",
       "pages": [
         "https://hsecofarm.hscity.go.kr/",
         "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",

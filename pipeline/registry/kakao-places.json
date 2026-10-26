@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-10-25T23:14:53.635Z",
+ "generated_at": "2026-10-26T04:42:35.270Z",
  "source": {
   "label": "카카오 로컬 키워드 검색 · Daum 웹 검색(공식 REST API)",
   "docs": [
@@ -153,6 +153,7 @@
   "kimsangseo.com",
   "kjsilla.winbook.kr",
   "knn.co.kr",
+  "koggili.net",
   "kookje.co.kr",
   "korcham.net",
   "korea.kr",
@@ -17761,7 +17762,7 @@
    "homepage": null
   },
   "2472": {
-   "checked_at": "2026-10-25T23:14:52.977Z",
+   "checked_at": "2026-10-26T04:42:34.578Z",
    "place": {
     "id": "898560745",
     "name": "원주두리캠핑장",
@@ -59685,7 +59686,7 @@
    "homepage": null
   },
   "100597": {
-   "checked_at": "2026-10-16T05:37:25.313Z",
+   "checked_at": "2026-10-26T04:42:33.086Z",
    "place": {
     "id": "1537097954",
     "name": "노리터키즈캠핑장",
@@ -59713,6 +59714,54 @@
       {
        "title": "노리터 키즈 캠핑장 — 물놀이장, 바베큐 — 충북 청주시 낭성면 — 위치",
        "url": "https://opendatflow.com/camping-sites/3626"
+      }
+     ]
+    },
+    {
+     "host": "koggili.net",
+     "url": "https://koggili.net/products/64725530642706fed7b2c4ef",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "청주노리터 키즈 캠핑장",
+       "url": "https://koggili.net/products/64725530642706fed7b2c4ef"
+      }
+     ]
+    },
+    {
+     "host": "voiceofyouth.co.kr",
+     "url": "https://voiceofyouth.co.kr/cheongju/jKRYFpxS57t",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "노리터 키즈 캠핑장",
+       "url": "https://voiceofyouth.co.kr/cheongju/jKRYFpxS57t"
+      }
+     ]
+    },
+    {
+     "host": "mobistation.co.kr",
+     "url": "https://mobistation.co.kr/camping/detail/798e41bd4bf1af84bcf288f62e70d38605403ca8926b0b23f5fedd98a4458010",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "[캠핑장] 노리터 키즈 캠핑장 - 충청북도 청주시 상당구 위치 및 시설 정보 | 모비스테이션",
+       "url": "https://mobistation.co.kr/camping/detail/798e41bd4bf1af84bcf288f62e70d38605403ca8926b0b23f5fedd98a4458010"
+      }
+     ]
+    },
+    {
+     "host": "starscore.kr",
+     "url": "https://www.starscore.kr/places/chungbuk/5230",
+     "score": 4,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "수암골전망대 별보기 좋은 곳",
+       "url": "https://www.starscore.kr/places/chungbuk/5230"
       }
      ]
     }
@@ -62866,7 +62915,7 @@
    "homepage": null
   },
   "100676": {
-   "checked_at": "2026-10-16T05:37:47.898Z",
+   "checked_at": "2026-10-26T04:42:33.087Z",
    "place": null,
    "candidates": [
     {
@@ -62898,6 +62947,18 @@
      ]
     },
     {
+     "host": "enjoeat.com",
+     "url": "https://enjoeat.com/camping/100676",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "캠프달링 – 공주시 자동차야영장 예약·시설·날씨",
+       "url": "https://enjoeat.com/camping/100676"
+      }
+     ]
+    },
+    {
      "host": "campchu.com",
      "url": "https://campchu.com/camp/2944",
      "score": 10,
@@ -62906,6 +62967,18 @@
       {
        "title": "캠프달링 — 충남 공주시 자동차야영장,글램핑",
        "url": "https://campchu.com/camp/2944"
+      }
+     ]
+    },
+    {
+     "host": "camiut.com",
+     "url": "https://camiut.com/p/gc-100676/",
+     "score": 4,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "충남 공주시 야영장 정보",
+       "url": "https://camiut.com/p/gc-100676/"
       }
      ]
     }
@@ -76578,7 +76651,7 @@
    "homepage": null
   },
   "101093": {
-   "checked_at": "2026-10-25T23:14:53.159Z",
+   "checked_at": "2026-10-26T04:42:34.762Z",
    "place": null,
    "candidates": [
     {
@@ -94866,7 +94939,7 @@
    "homepage": null
   },
   "101608": {
-   "checked_at": "2026-10-16T05:35:18.427Z",
+   "checked_at": "2026-10-26T04:42:33.054Z",
    "place": {
     "id": "2026652673",
     "name": "원더 포레스트",
@@ -94886,14 +94959,14 @@
    },
    "candidates": [
     {
-     "host": "carcare.smarthow.net",
-     "url": "https://carcare.smarthow.net/camping/101608",
+     "host": "ojigo.kr",
+     "url": "https://ojigo.kr/camping/101608",
      "score": 10,
      "hits": 1,
      "evidence": [
       {
-       "title": "원더 포레스트 예약·주소·시설",
-       "url": "https://carcare.smarthow.net/camping/101608"
+       "title": "원더 포레스트",
+       "url": "https://ojigo.kr/camping/101608"
       }
      ]
     }
@@ -114184,7 +114257,7 @@
    "homepage": null
   },
   "102221": {
-   "checked_at": "2026-10-25T23:14:51.971Z",
+   "checked_at": "2026-10-26T04:42:34.471Z",
    "place": null,
    "candidates": [
     {
@@ -114345,7 +114418,7 @@
    "homepage": null
   },
   "102229": {
-   "checked_at": "2026-10-25T23:14:51.969Z",
+   "checked_at": "2026-10-26T04:42:34.310Z",
    "place": null,
    "candidates": [],
    "needs_homepage": false,
@@ -115162,7 +115235,7 @@
    "homepage": null
   },
   "102270": {
-   "checked_at": "2026-10-25T23:14:51.971Z",
+   "checked_at": "2026-10-26T04:42:34.320Z",
    "place": null,
    "candidates": [
     {
@@ -118157,7 +118230,7 @@
    "homepage": null
   },
   "102377": {
-   "checked_at": "2026-10-25T23:14:51.940Z",
+   "checked_at": "2026-10-26T04:42:33.088Z",
    "place": null,
    "candidates": [],
    "needs_homepage": true,
@@ -192215,17 +192288,7 @@
     }
    ],
    "needs_homepage": true,
-   "homepage": {
-    "url": "https://koggili.net/products/64aca7f54b84765a075009fb",
-    "host": "koggili.net",
-    "score": 10,
-    "evidence": [
-     {
-      "title": "갤럭시A51 블랙 128기가 정상해지 상태깨끗 핸드폰 중고폰",
-      "url": "https://koggili.net/products/64aca7f54b84765a075009fb"
-     }
-    ]
-   }
+   "homepage": null
   },
   "osm-w679620518": {
    "checked_at": "2026-10-24T21:16:39.621Z",
