@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-10-26T12:56:08.977Z",
+ "generated_at": "2026-10-26T20:28:27.079Z",
  "source": {
   "label": "카카오 로컬 키워드 검색 · Daum 웹 검색(공식 REST API)",
   "docs": [
@@ -17762,7 +17762,7 @@
    "homepage": null
   },
   "2472": {
-   "checked_at": "2026-10-26T12:56:08.251Z",
+   "checked_at": "2026-10-26T20:28:26.510Z",
    "place": {
     "id": "898560745",
     "name": "원주두리캠핑장",
@@ -46294,7 +46294,7 @@
    "homepage": null
   },
   "100122": {
-   "checked_at": "2026-10-26T12:56:06.280Z",
+   "checked_at": "2026-10-26T20:28:25.191Z",
    "place": {
     "id": "1579667394",
     "name": "라플란드",
@@ -59686,7 +59686,7 @@
    "homepage": null
   },
   "100597": {
-   "checked_at": "2026-10-26T12:56:06.282Z",
+   "checked_at": "2026-10-26T20:28:25.195Z",
    "place": {
     "id": "1537097954",
     "name": "노리터키즈캠핑장",
@@ -62915,7 +62915,7 @@
    "homepage": null
   },
   "100676": {
-   "checked_at": "2026-10-26T12:56:07.713Z",
+   "checked_at": "2026-10-26T20:28:26.114Z",
    "place": null,
    "candidates": [
     {
@@ -76651,7 +76651,7 @@
    "homepage": null
   },
   "101093": {
-   "checked_at": "2026-10-26T12:56:08.403Z",
+   "checked_at": "2026-10-26T20:28:26.628Z",
    "place": null,
    "candidates": [
     {
@@ -82905,7 +82905,7 @@
    "homepage": null
   },
   "101269": {
-   "checked_at": "2026-10-26T12:56:06.247Z",
+   "checked_at": "2026-10-26T20:28:25.157Z",
    "place": {
     "id": "826081055",
     "name": "골든쌔들캠핑장",
@@ -94963,7 +94963,7 @@
    "homepage": null
   },
   "101608": {
-   "checked_at": "2026-10-26T12:56:06.281Z",
+   "checked_at": "2026-10-26T20:28:25.193Z",
    "place": {
     "id": "2026652673",
     "name": "원더 포레스트",
@@ -114281,7 +114281,7 @@
    "homepage": null
   },
   "102221": {
-   "checked_at": "2026-10-26T12:56:08.229Z",
+   "checked_at": "2026-10-26T20:28:26.497Z",
    "place": null,
    "candidates": [
     {
@@ -114442,7 +114442,7 @@
    "homepage": null
   },
   "102229": {
-   "checked_at": "2026-10-26T12:56:07.883Z",
+   "checked_at": "2026-10-26T20:28:26.214Z",
    "place": null,
    "candidates": [],
    "needs_homepage": false,
@@ -115259,7 +115259,7 @@
    "homepage": null
   },
   "102270": {
-   "checked_at": "2026-10-26T12:56:08.182Z",
+   "checked_at": "2026-10-26T20:28:26.457Z",
    "place": null,
    "candidates": [
     {
@@ -118254,7 +118254,7 @@
    "homepage": null
   },
   "102377": {
-   "checked_at": "2026-10-26T12:56:07.877Z",
+   "checked_at": "2026-10-26T20:28:26.209Z",
    "place": null,
    "candidates": [],
    "needs_homepage": true,
