@@ -616,3 +616,9 @@
 - `최근 본 캠핑장`은 찜 목록과 같은 대형 카드 대신 사진·이름·지역·요금만 담은 작은 기록 카드로 분리해 시각적 우선순위를 낮췄다.
 - 주소 아래 사이트 타입 배지는 사진 위 배지와 같은 공통 `.bdg` 모듈의 색 아이콘 원·흰 캡슐 규칙을 유지하도록 크기·그림자·간격을 동기화했다.
 - 원본 `design/renewal/`과 발행본 `camping-atlas/public/`을 함께 갱신했다. `node --check`, `npm --prefix camping-atlas run lint`, `git diff --check` 통과. Playwright는 로컬 `playwright` 패키지가 없어 실행하지 못했으며 CI에서 회귀검사한다.
+## 📌 공용 댓글: 목록 미리보기·작성 시각·운영 로그 (2026-10-27, Codex)
+
+- 찜한 캠핑장 카드와 상세 `캠퍼 한마디`는 같은 `campground_comment` 원본을 읽고 쓴다. 찜 목록은 댓글이 있는 카드에 최신 3개를 바로 보이며, 4개부터는 `더 보기`로 최대 6개까지만 펼친다. 댓글이 6개보다 많으면 그 사실만 알리고 추가 무한 로드는 하지 않는다.
+- 댓글의 작성 시각은 한국 시간 기준 `YYYY.MM.DD (요일) HH:mm`로 통일했다. 찜 목록에서 남긴 댓글도 `pushSave("comment")`를 기록해 `/log/`의 댓글 탭에서 기기 정보와 함께 모으고, 작성 위치(상세/찜 목록)와 해당 상세의 `#cmt` 바로가기를 남긴다.
+- 댓글 작성자 이름은 이 브라우저에만 기억하며, 상세와 찜 목록 양식에 공통으로 미리 채운다. 찜 메모 카드의 `취소`·`저장`은 34px 높이의 가로 캡슐 버튼으로 맞춘다.
+- 원본/발행 동기화: `design/renewal/{app.js,style.css}` → `camping-atlas/public/{app.js,style.css}`. 검증은 `node --check`, `git diff --check`, Web quality를 실행한다.
