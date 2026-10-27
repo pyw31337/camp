@@ -444,6 +444,17 @@ img { color: transparent; }
 .card-group-types { gap: 4px; }
 .card-group-spec { gap: 2px; }
 .card-group-reviews { margin-top: 0; }
+/* 찜 목록만: 여섯 줄 스펙은 필요할 때 여는 '상세정보'로 묶는다.
+   링크로 덮인 카드에서도 이 버튼·패널은 독립적으로 조작할 수 있어야 한다. */
+.saved-card-spec { position: relative; z-index: 2; gap: 0; }
+.saved-card-spec-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 38px; margin: 0; padding: 7px 0; border: 0; border-top: 1px solid var(--line); background: transparent; color: var(--ink-2); font: inherit; font-size: .82rem; font-weight: 800; cursor: pointer; text-align: left; }
+.saved-card-spec-toggle > span { display: inline-flex; align-items: center; gap: 6px; }
+.saved-card-spec-toggle .ic { width: 15px; height: 15px; color: var(--ink-3); }
+.saved-card-spec-toggle .saved-card-spec-chevron { flex: none; transition: transform .18s ease; transform: rotate(180deg); }
+.saved-card-spec.is-open .saved-card-spec-chevron { transform: rotate(0); }
+.saved-card-spec-panel { min-width: 0; }
+.saved-card-spec.is-open .saved-card-spec-toggle { color: var(--ink); }
+.saved-card-spec.is-open .saved-card-spec-panel { padding-bottom: 2px; }
 /* 요금 줄과 후기 줄 사이(소유자 2026-10-23: 여백이 많다): 목록 아래 여백 16px → 2px */
 .card-group-spec:has(+ .card-group-reviews) .rows { margin-bottom: 2px; }
 .card-name { font-size: 1.12rem; font-weight: 850; letter-spacing: -0.03em; line-height: 1.28; height: auto; min-height: 0; max-height: 2.6em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin: 0; }
@@ -1373,13 +1384,18 @@ body.map-mode { overflow: hidden; height: 100dvh; }
   .comment-video-trigger img { max-height: 170px; }
 }
 .saved-card-comments { position: relative; z-index: 2; margin-top: 2px; padding-top: 8px; border-top: 1px solid var(--line); }
-.saved-comments-toggle { display: inline-flex; align-items: center; gap: 6px; min-height: 30px; border: 0; padding: 3px 0; background: none; color: var(--ink-2); font: inherit; font-size: .82rem; font-weight: 800; cursor: pointer; }
-.saved-comments-toggle > .ic { width: 15px; height: 15px; color: var(--accent); }
-.saved-comments-toggle b { min-width: 18px; padding: 1px 5px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: .72rem; text-align: center; }
-.saved-comments-chevron { display: inline-grid; place-items: center; width: 16px; height: 16px; color: var(--ink-3); transition: transform .2s ease; }
-.saved-comments-chevron .ic { width: 13px; height: 13px; }
-.saved-card-comments.is-open .saved-comments-chevron { transform: rotate(90deg); }
-.saved-comments-panel { margin-top: 5px; padding: 9px; border: 1px solid var(--line); border-radius: var(--r-s); background: color-mix(in srgb, var(--soft) 60%, var(--paper)); }
+.saved-comments-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 30px; }
+.saved-comments-label { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-2); font-size: .82rem; font-weight: 800; }
+.saved-comments-label > .ic { width: 15px; height: 15px; color: var(--accent); }
+.saved-comments-label b { min-width: 18px; padding: 1px 5px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: .72rem; text-align: center; }
+.saved-comments-compose-toggle, .saved-comments-more { border: 0; background: transparent; color: var(--accent); font: inherit; font-size: .74rem; font-weight: 800; cursor: pointer; }
+.saved-comments-compose-toggle { min-height: 28px; padding: 3px 0 3px 10px; white-space: nowrap; }
+.saved-comments-preview { margin-top: 4px; }
+.saved-comments-more { display: inline-flex; align-items: center; min-height: 28px; padding: 5px 2px 1px; }
+.saved-comments-more::after { content: "›"; margin-left: 3px; font-size: 1rem; transition: transform .18s ease; }
+.saved-comments-more[aria-expanded="true"]::after { transform: rotate(-90deg); }
+.saved-comments-cap { margin: 0; padding: 2px 0 0; color: var(--ink-3); font-size: .72rem; }
+.saved-comments-panel { margin-top: 7px; padding: 9px; border: 1px solid var(--line); border-radius: var(--r-s); background: color-mix(in srgb, var(--soft) 60%, var(--paper)); }
 .saved-comments-list { list-style: none; display: grid; gap: 0; margin: 0; padding: 0; }
 .saved-comments-empty { padding: 7px 2px; color: var(--ink-3); font-size: .78rem; line-height: 1.45; }
 .saved-comment-row { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 7px; padding: 7px 0; border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent); }
@@ -1398,7 +1414,7 @@ body.map-mode { overflow: hidden; height: 100dvh; }
 .saved-comment-author input { height: 32px; padding: 0 10px; border-radius: 999px; }
 .saved-comment-form textarea { min-height: 38px; padding: 8px 10px; border-radius: 11px; line-height: 1.4; resize: vertical; }
 .saved-comment-actions { display: flex; justify-content: flex-end; gap: 6px; }
-.saved-comment-actions .btn { min-height: 30px; padding: 0 12px; font-size: .76rem; }
+.saved-comment-actions .btn { min-width: 62px; height: 34px; min-height: 34px; padding: 0 14px; border-radius: 999px; font-size: .76rem; }
 @media (max-width: 759px) {
   .cmt-form { grid-template-columns: 1fr; }
   .stypes { grid-template-columns: repeat(2, minmax(0, 1fr)); }

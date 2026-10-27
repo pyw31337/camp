@@ -118,6 +118,25 @@ function formatKoreanDate(s) {
   }
   return str;
 }
+// 댓글은 날짜만으로는 같은 날 여러 기록을 구분하기 어려우므로, 서버가 준 시각은
+// 서비스 기준 시간(한국 시간)까지 함께 표기한다. 날짜만 있는 값은 기존 형식을 유지한다.
+function formatKoreanDateTime(s) {
+  const raw = String(s ?? "").trim();
+  if (!raw) return "";
+  if (!/[T\s]\d{1,2}:\d{2}/.test(raw)) return formatKoreanDate(raw);
+  const date = new Date(raw);
+  if (Number.isNaN(date.getTime())) return formatKoreanDate(raw);
+  try {
+    const parts = new Intl.DateTimeFormat("ko-KR", {
+      timeZone: "Asia/Seoul", year: "numeric", month: "2-digit", day: "2-digit", weekday: "short",
+      hour: "2-digit", minute: "2-digit", hourCycle: "h23",
+    }).formatToParts(date);
+    const value = (type) => parts.find((part) => part.type === type)?.value ?? "";
+    return `${value("year")}.${value("month")}.${value("day")} (${value("weekday")}) ${value("hour")}:${value("minute")}`;
+  } catch {
+    return `${formatKoreanDate(raw)} ${date.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", hour12: false })}`;
+  }
+}
 function formatRelativeDate(s, now = new Date()) {
   if (!s) return "";
   let d;
@@ -1072,6 +1091,19 @@ function cardLines(c) {
 }
 function rowsHtml(c) { return cardLines(c); }
 function rowsHtmlHorizontal(c) { return cardLines(c); }
+// 찜 목록은 여러 곳을 훑어보기 위한 화면이므로, 6개 스펙 행을 기본으로 접는다.
+// 일반 목록·테마 카드에는 같은 행을 그대로 유지해 비교 정보가 숨지 않게 한다.
+function savedDetailsHtml(c) {
+  const panelId = `saved-spec-${String(c.id).replace(/[^A-Za-z0-9_-]/g, "-")}`;
+  return `<div class="card-group card-group-spec saved-card-spec" data-saved-card-spec>
+    <button class="saved-card-spec-toggle" type="button" data-saved-card-spec-toggle aria-expanded="false" aria-controls="${esc(panelId)}">
+      <span>${ic("list")}상세정보</span>${ic("chevron-up", "saved-card-spec-chevron")}
+    </button>
+    <div class="saved-card-spec-panel" id="${esc(panelId)}" data-saved-card-spec-panel hidden>
+      ${rowsHtml(c)}
+    </div>
+  </div>`;
+}
 // 가는 길 장보기: 마트·편의점·정육점 중 5km 안에 있는 곳(LOCALDATA 인허가). 순서는 늘 마트 → 편의점 → 정육점(소유자 2026-10-20).
 function nearLine(c, sep = " · ") {
   const nl = c.nl ?? {};
@@ -1228,9 +1260,7 @@ function card(c, i = 0, opts) {
       <div class="card-group card-group-types">
         ${typeRow(c).html}
       </div>
-      <div class="card-group card-group-spec">
-        ${rowsHtml(c)}
-      </div>
+      ${savedMemo ? savedDetailsHtml(c) : `<div class="card-group card-group-spec">${rowsHtml(c)}</div>`}
       ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `
         <div class="card-group card-group-reviews">
           <div class="card-reviews">${cardReviewPills(c.rv, c)}</div>
@@ -4404,8 +4434,9 @@ function heroCounts() {
 function commentsHtml(c) {
   // campground_comment.campground_id는 INT — 공원·당일 장소(문자 id)는 저장이 안 돼 400이 났다(QA 2026-10-20). 숫자 id만 연다.
   if (!SB.url || !/^\d+$/.test(String(c.id))) return "";
+  const profile = savedCommentProfile();
   return `<section class="d-sec" id="cmt"><div class="sec-head">${iconTitle("chat-bubble", "캠퍼 한마디")}</div>
-    <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" placeholder="닉네임" required aria-label="닉네임"><textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁" required aria-label="내용"></textarea><button class="btn primary" type="submit">남기기</button></form>
+    <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" value="${esc(profile.nickname)}" placeholder="닉네임" required aria-label="닉네임" autocomplete="nickname"><textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁" required aria-label="내용"></textarea><button class="btn primary" type="submit">남기기</button></form>
     <ul class="cmts" data-cmts><li class="muted">불러오는 중…</li></ul></section>`;
 }
 
@@ -4496,16 +4527,23 @@ function savedCommentRow(x) {
   const color = savedCommentColor(x.nickname);
   return `<li class="saved-comment-row" data-saved-comment-row="${esc(x.id || "")}">
     <span class="saved-comment-avatar" style="--comment-color:${color}" aria-hidden="true">${esc(savedCommentInitial(x.nickname))}</span>
-    <div class="saved-comment-copy"><div class="saved-comment-meta"><b>${esc(x.nickname || "캠퍼")}</b><time>${esc(formatKoreanDate(x.created_at || x.createdAt || Date.now()))}</time>${mine ? `<button type="button" class="saved-comment-edit" data-saved-comment-del="${esc(x.id || "")}" aria-label="댓글 삭제">${ic("close")}</button>` : ""}</div><p>${commentContentHtml(x.content || "")}</p></div>
+    <div class="saved-comment-copy"><div class="saved-comment-meta"><b>${esc(x.nickname || "캠퍼")}</b><time>${esc(formatKoreanDateTime(x.created_at || x.createdAt || Date.now()))}</time>${mine ? `<button type="button" class="saved-comment-edit" data-saved-comment-del="${esc(x.id || "")}" aria-label="댓글 삭제">${ic("close")}</button>` : ""}</div><p>${commentContentHtml(x.content || "")}</p></div>
   </li>`;
 }
 function savedCommentsHtml(c) {
   if (!/^\d+$/.test(String(c.id))) return "";
   const p = savedCommentProfile();
   return `<div class="saved-card-comments" data-saved-comments data-saved-comment-id="${esc(c.id)}">
-    <button class="saved-comments-toggle" type="button" data-saved-comments-toggle aria-expanded="false">${ic("chat-bubble")}<span>댓글</span><b data-saved-comment-count hidden>0</b><span class="saved-comments-chevron" aria-hidden="true">${ic("right")}</span></button>
+    <div class="saved-comments-head">
+      <span class="saved-comments-label">${ic("chat-bubble")}<span>댓글</span><b data-saved-comment-count hidden>0</b></span>
+      <button class="saved-comments-compose-toggle" type="button" data-saved-comments-toggle aria-expanded="false">한마디 남기기</button>
+    </div>
+    <div class="saved-comments-preview" data-saved-comments-preview hidden>
+      <ul class="saved-comments-list" data-saved-comments-list></ul>
+      <button class="saved-comments-more" type="button" data-saved-comments-more hidden aria-expanded="false"></button>
+      <p class="saved-comments-cap" data-saved-comments-cap hidden>최근 6개 댓글만 보여요.</p>
+    </div>
     <div class="saved-comments-panel" data-saved-comments-panel hidden>
-      <ul class="saved-comments-list" data-saved-comments-list><li class="saved-comments-empty">현장 팁이나 메모를 남겨보세요.</li></ul>
       <form class="saved-comment-form" data-saved-comment-form>
         <div class="saved-comment-author"><span class="saved-comment-avatar" data-saved-comment-avatar style="--comment-color:${p.color}" aria-hidden="true">${esc(savedCommentInitial(p.nickname))}</span><input name="nickname" maxlength="20" value="${esc(p.nickname)}" placeholder="작성자 이름" required aria-label="작성자 이름" autocomplete="nickname"></div>
         <textarea name="content" maxlength="500" rows="1" placeholder="현장 팁이나 메모를 남겨보세요" required aria-label="댓글"></textarea>
@@ -4515,11 +4553,23 @@ function savedCommentsHtml(c) {
   </div>`;
 }
 function renderSavedCommentList(root, list) {
-  const box = $("[data-saved-comments-list]", root), count = $("[data-saved-comment-count]", root);
+  const box = $("[data-saved-comments-list]", root), count = $("[data-saved-comment-count]", root), preview = $("[data-saved-comments-preview]", root);
+  const more = $("[data-saved-comments-more]", root), cap = $("[data-saved-comments-cap]", root);
   if (!box) return;
-  box.innerHTML = list.length ? list.map(savedCommentRow).join("") : `<li class="saved-comments-empty">현장 팁이나 메모를 남겨보세요.</li>`;
-  if (count) { count.textContent = String(list.length); count.hidden = !list.length; }
-  root._savedComments = list;
+  const rows = Array.isArray(list) ? list : [];
+  const expanded = root.dataset.savedCommentsExpanded === "true";
+  const visible = rows.slice(0, expanded ? 6 : 3);
+  box.innerHTML = visible.map(savedCommentRow).join("");
+  if (preview) preview.hidden = !rows.length;
+  if (count) { count.textContent = String(rows.length); count.hidden = !rows.length; }
+  if (more) {
+    const canExpand = rows.length > 3;
+    more.hidden = !canExpand;
+    more.setAttribute("aria-expanded", String(expanded));
+    more.textContent = expanded ? "댓글 접기" : `댓글 ${Math.min(rows.length, 6) - 3}개 더 보기`;
+  }
+  if (cap) cap.hidden = !(expanded && rows.length > 6);
+  root._savedComments = rows;
 }
 async function fetchSavedComments(root) {
   const id = root?.dataset.savedCommentId;
@@ -4536,12 +4586,34 @@ async function fetchSavedComments(root) {
   }
   renderSavedCommentList(root, Array.isArray(list) ? list : []);
 }
+async function fetchSavedCardComments() {
+  const roots = $$('[data-saved-comments]');
+  const ids = [...new Set(roots.map((root) => String(root.dataset.savedCommentId || "")).filter((id) => /^\d+$/.test(id)))];
+  if (!roots.length || !ids.length) return;
+  const lists = new Map(ids.map((id) => [id, []]));
+  try {
+    if (!await ensureSupabaseConfig()) throw new Error("Supabase config unavailable");
+    // 찜 목록은 카드마다 따로 요청하지 않고 한 번에 가져온다. 카드에는 최신 6개만
+    // 쓰므로 넉넉히 600개까지만 받아 모바일에서도 목록을 가볍게 유지한다.
+    const limit = Math.min(600, Math.max(60, ids.length * 6));
+    const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,created_at&campground_id=in.(${ids.join(",")})&is_deleted=eq.false&order=created_at.desc&limit=${limit}`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
+    if (!r.ok) throw new Error("comment request failed");
+    for (const row of await r.json()) {
+      const id = String(row.campground_id);
+      if (lists.has(id)) lists.get(id).push(row);
+    }
+    for (const [id, rows] of lists) store.set(savedCommentLocalKey(id), rows);
+  } catch {
+    for (const id of ids) lists.set(id, store.get(savedCommentLocalKey(id), []));
+  }
+  roots.forEach((root) => renderSavedCommentList(root, lists.get(String(root.dataset.savedCommentId)) || []));
+}
 function syncSavedCommentProfile(root, nickname) {
   const name = String(nickname || "").trim();
   const color = savedCommentColor(name);
   store.set(SAVED_COMMENT_NAME_KEY, name);
   store.set(SAVED_COMMENT_COLOR_KEY, color);
-  $$('[data-saved-comment-form] input[name="nickname"]').forEach((input) => { if (input !== root) input.value = name; });
+  $$('[data-saved-comment-form] input[name="nickname"], [data-cmt] input[name="nickname"]').forEach((input) => { if (input !== root) input.value = name; });
   $$('[data-saved-comment-avatar]').forEach((avatar) => { avatar.textContent = savedCommentInitial(name); avatar.style.setProperty("--comment-color", color); });
 }
 function initSavedComments() {
@@ -4550,13 +4622,15 @@ function initSavedComments() {
     if (!toggle || !panel || !form || root.dataset.bound) return;
     root.dataset.bound = "1";
     bindCommentVideo($('[data-saved-comments-list]', root));
-    let loaded = false;
     toggle.addEventListener("click", () => {
       const open = panel.hidden;
       panel.hidden = !open;
       toggle.setAttribute("aria-expanded", String(open));
       root.classList.toggle("is-open", open);
-      if (open && !loaded) { loaded = true; fetchSavedComments(root); }
+    });
+    $("[data-saved-comments-more]", root)?.addEventListener("click", () => {
+      root.dataset.savedCommentsExpanded = root.dataset.savedCommentsExpanded === "true" ? "false" : "true";
+      renderSavedCommentList(root, root._savedComments || []);
     });
     input?.addEventListener("input", () => syncSavedCommentProfile(input, input.value));
     $("[data-saved-comment-cancel]", form)?.addEventListener("click", () => { panel.hidden = true; toggle.setAttribute("aria-expanded", "false"); root.classList.remove("is-open"); });
@@ -4573,7 +4647,7 @@ function initSavedComments() {
           const r = await fetch(`${SB.url}/rest/v1/campground_comment`, { method: "POST", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=representation" }, body: JSON.stringify({ campground_id: root.dataset.savedCommentId, nickname, content, tag: "saved", password_hash: crypto.randomUUID() }) });
           if (r.ok) {
             const row = (await r.json())[0];
-            if (row?.id) { store.set("mc-my-comments", [...new Set([...store.get("mc-my-comments", []), String(row.id)])]); saved = true; }
+            if (row?.id) { store.set("mc-my-comments", [...new Set([...store.get("mc-my-comments", []), String(row.id)])]); pushSave("comment", String(root.dataset.savedCommentId)); saved = true; }
           }
         }
       } catch { /* 로컬 보관으로 이어짐 */ }
@@ -4600,6 +4674,7 @@ function initSavedComments() {
       fetchSavedComments(root);
     });
   });
+  fetchSavedCardComments();
 }
 async function loadComments(id) {
   const box = $("[data-cmts]");
@@ -4609,7 +4684,7 @@ async function loadComments(id) {
     const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,nickname,content,created_at&campground_id=eq.${encodeURIComponent(id)}&is_deleted=eq.false&order=created_at.desc&limit=30`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
     const list = r.ok ? await r.json() : [];
     const mine = store.get("mc-my-comments", []);
-    box.innerHTML = list.length ? list.map((x) => `<li><b>${esc(x.nickname)}</b><i>${esc(formatKoreanDate(x.created_at))}</i>${mine.includes(String(x.id)) ? `<button type="button" class="link" data-cmt-del="${esc(x.id)}">지우기</button>` : ""}<p>${commentContentHtml(x.content)}</p></li>`).join("") : `<li class="muted">첫 한마디를 남겨 주세요.</li>`;
+    box.innerHTML = list.length ? list.map((x) => `<li><b>${esc(x.nickname)}</b><i>${esc(formatKoreanDateTime(x.created_at))}</i>${mine.includes(String(x.id)) ? `<button type="button" class="link" data-cmt-del="${esc(x.id)}">지우기</button>` : ""}<p>${commentContentHtml(x.content)}</p></li>`).join("") : `<li class="muted">첫 한마디를 남겨 주세요.</li>`;
   } catch { box.innerHTML = `<li class="muted">지금은 불러오지 못했어요.</li>`; }
 }
 // ── 주간 날씨 예보 & 일자별 상세 모달 (모여라 캘린더 동일 구조) ──────
@@ -5563,7 +5638,9 @@ function bindDetail() {
   if (id && $("[data-cmts]")) loadComments(id);
   bindCommentVideo($("[data-cmts]"));
   const cmtForm = $("[data-cmt]");
+  const cmtNick = cmtForm ? $("input[name='nickname']", cmtForm) : null;
   const cmtTa = cmtForm ? $("textarea[name='content']", cmtForm) : null;
+  cmtNick?.addEventListener("input", () => syncSavedCommentProfile(cmtNick, cmtNick.value));
   if (cmtTa) {
     const syncShape = () => {
       const hasNewline = cmtTa.value.includes("\n");
@@ -5598,6 +5675,8 @@ function bindDetail() {
     e.preventDefault();
     const f = e.target, btn = $("button", f);
     if (NO_REMOTE_WRITE) { toast("테스트 모드에서는 남기지 않아요"); return; }
+    if (!f.nickname.value.trim() || !f.content.value.trim()) return;
+    syncSavedCommentProfile(f.nickname, f.nickname.value);
     btn.disabled = true;
     try {
       const r = await fetch(`${SB.url}/rest/v1/campground_comment`, { method: "POST", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=representation" }, body: JSON.stringify({ campground_id: f.dataset.cmt, nickname: f.nickname.value.trim(), content: f.content.value.trim(), tag: "general", password_hash: crypto.randomUUID() }) });
@@ -5926,6 +6005,17 @@ async function savedView() {
 function bindSaved() {
   initCarousels($("#view"));
   initSavedComments();
+  $$('[data-saved-card-spec-toggle]', $("#view")).forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      const group = toggle.closest("[data-saved-card-spec]");
+      const panel = $("[data-saved-card-spec-panel]", group);
+      if (!panel) return;
+      const open = panel.hidden;
+      panel.hidden = !open;
+      toggle.setAttribute("aria-expanded", String(open));
+      group.classList.toggle("is-open", open);
+    });
+  });
   $("[data-saved-compare]")?.addEventListener("click", (e) => {
     if (S.saved.length < 2) { e.preventDefault(); toast("2곳 이상 찜하면 비교할 수 있어요"); }
   });
