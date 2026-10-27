@@ -447,7 +447,9 @@ img { color: transparent; }
 /* 찜 목록만: 여섯 줄 스펙은 필요할 때 여는 '상세정보'로 묶는다.
    링크로 덮인 카드에서도 이 버튼·패널은 독립적으로 조작할 수 있어야 한다. */
 .saved-card-spec { position: relative; z-index: 2; gap: 0; }
-.saved-card-spec-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 34px; margin: 0; padding: 6px 0 3px; border: 0; border-top: 1px solid var(--line); background: transparent; color: var(--ink-2); font: inherit; font-size: .82rem; font-weight: 800; cursor: pointer; text-align: left; }
+.saved-card-spec:not(.is-open) { margin-bottom: -10px; }
+.saved-card-spec:not(.is-open) + .card-group-cmts { margin-top: 0; }
+.saved-card-spec-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 0; margin: 0; padding: 7px 0 8px; border: 0; border-top: 1px solid var(--line); background: transparent; color: var(--ink-2); font: inherit; font-size: .82rem; font-weight: 800; cursor: pointer; text-align: left; }
 .saved-card-spec-toggle > span { display: inline-flex; align-items: center; gap: 6px; }
 .saved-card-spec-toggle .ic { width: 15px; height: 15px; color: var(--ink-3); }
 .saved-card-spec-toggle .saved-card-spec-chevron { flex: none; transition: transform .18s ease; transform: rotate(180deg); }
