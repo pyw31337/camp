@@ -11,3 +11,4 @@ site/
 camping-atlas/public/explore/data/campgrounds.lite.json
 camping-atlas/public/explore/data/catx/
 camping-atlas/public/place/
+.DS_Store

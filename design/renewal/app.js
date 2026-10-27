@@ -306,6 +306,7 @@ const noBadge = (k) => (NO_TAGS[k] ? `<span class="bdg bdg-no">${ic(NO_TAGS[k][1
 // 전기 W를 아는 곳은 사진 배지에도 ‘500W’(아래 정보 줄과 별개로 늘 보인다).
 const petAllowed = (c) => (c._pa ??= !noKeys(c).includes("NO_PET") && Boolean((pos(facts(c).pet) && facts(c).pet.ok) || c.pf?.t?.includes("PET_OK") || (/가능/.test(c.pets ?? "") && !/불가/.test(c.pets ?? ""))));
 const inviteOk = (c) => (c._io ??= !noKeys(c).includes("NO_VISITOR") && (INVITE_OK_SET.has(String(c.id)) || isVisitorCamp(c)));
+const isTidalCamp = (c) => Boolean(c.th?.includes("tidal") || /갯벌|해루질|조개/.test(JSON.stringify({ ...c, nearby_toilets: undefined })));
 // 사진 배지 두 줄(소유자 2026-10-22): 윗줄은 긍정 배지(초대가능·600W·장작·반려견 등, 섹션 배지가 맨 앞),
 // 아랫줄은 부정 배지(반려견 불가·장작 불가·화기 불가 등). 줄바꿈은 .bdg-br(폭 100%)로.
 function badges(c, max = 4, maxNo = 2, { rows = false, theme = null } = {}) {
@@ -321,7 +322,7 @@ function badges(c, max = 4, maxNo = 2, { rows = false, theme = null } = {}) {
     heat: c.heat?.length ? `<span class="bdg bdg-flame">${ic("hotwater")}난방</span>` : "",
     rf: c.rf ? `<span class="bdg bdg-teal">${ic("th:FOREST")}${esc(/^(국립|공립|사립)$/.test(c.rf) ? `${c.rf} 휴양림` : "휴양림")}</span>` : "",
     firstCome: (c.fc || /선착순/.test(c.resv ?? "") || /선착순/.test(c.name ?? "")) ? `<span class="bdg bdg-amber">${ic("clock")}선착순</span>` : "",
-    tidal: (c.th?.includes("tidal") || /갯벌|해루질|조개/.test(JSON.stringify(c))) ? `<span class="bdg bdg-teal">${ic("water")}갯벌·해루질</span>` : "",
+    tidal: isTidalCamp(c) ? `<span class="bdg bdg-teal">${ic("water")}갯벌·해루질</span>` : "",
     flex: (c.early || c.late || (c.ci && c.ci <= "12:00") || (c.co && c.co >= "12:00")) ? `<span class="bdg bdg-teal">${ic("clock")}입퇴실 여유</span>` : "",
     vr: c.vr ? `<span class="bdg bdg-vr" title="360° VR 현장 뷰어">${ic("vr")}360° VR</span>` : "",
     dump: c.dump ? `<span class="bdg bdg-dump" title="오폐수 처리 및 청수 공급 한국관광공사 공인 덤프스테이션">${ic("dump")}덤프</span>` : "",
@@ -546,7 +547,7 @@ const THEMES = [
   ["PICNIC", "캠크닉", isPicnicCamp],
   ["PARK", "공원", isParkCamp],
   ["WATER_PLAY", "물놀이터", isWaterPlayCamp],
-  ["TIDAL_FLAT", "갯벌·해루질", (c) => Boolean(c.th?.includes("tidal") || /갯벌|해루질|조개/.test(JSON.stringify(c)))],
+  ["TIDAL_FLAT", "갯벌·해루질", isTidalCamp],
   ["FLEX_TIME", "입퇴실 여유", (c) => Boolean(c.early || c.late || (c.ci && c.ci <= "12:00") || (c.co && c.co >= "12:00"))],
   ["FIRST_COME", "선착순", (c) => Boolean(c.fc || /선착순/.test(c.resv ?? "") || /선착순/.test(c.name ?? ""))],
   ["VR_TOUR", "360° VR 뷰", (c) => Boolean(c.vr)],
@@ -6534,7 +6535,7 @@ function bindMap() {
 
 
 async function savesLogView() {
-  if (!await ensureSupabaseConfig()) return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><p class="muted">서버 연결을 준비하지 못했어요.</p><p class="muted">별도 페이지: <a href="${APP_BASE}log/">/log</a></p></section>`;
+  if (!await ensureSupabaseConfig()) return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><p class="muted">서버 연결을 준비하지 못했어요.</p><p class="muted">별도 페이지: <a href="${APP_BASE}admin/">/admin</a></p></section>`;
   let rows = [];
   try {
     rows = await readSaveLog(200);
@@ -6547,7 +6548,7 @@ async function savesLogView() {
     const add = x.action === "add";
     return `<li><span class="slog-act ${add ? "add" : "rm"}">${add ? "찜" : "해제"}</span>${c ? `<a class="slog-name" href="${APP_BASE}place/${esc(c.id)}">${esc(name)}</a>` : `<span class="slog-name">${esc(name)}</span>`}<time class="slog-time" datetime="${esc(x.created_at)}">${esc(formatKoreanDate(x.created_at) || x.created_at)} ${esc(new Date(x.created_at).toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Seoul" }))}</time><span class="slog-env">${esc(x.platform || "기기 정보 없음")} ${esc(x.screen || "")}</span></li>`;
   }).join("")}</ul>` : `<p class="muted">아직 기록이 없습니다.</p>`;
-  return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><nav class="slog-links" aria-label="관련 화면"><a href="${APP_BASE}saved">찜 목록 보기</a><a href="${APP_BASE}log/">운영 대시보드(/log)</a></nav>${body}</section>`;
+  return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><nav class="slog-links" aria-label="관련 화면"><a href="${APP_BASE}saved">찜 목록 보기</a><a href="${APP_BASE}admin/">운영 대시보드(/admin)</a></nav>${body}</section>`;
 }
 
 // 모든 가로 스크롤 영역: 마우스로 끌어서 넘기기(터치는 원래 스와이프). .rail은 initDraggableRails가 따로 처리(영우 님 2026-10-21).
