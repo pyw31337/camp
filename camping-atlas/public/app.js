@@ -727,7 +727,7 @@ function reviewPickCard(c, i = 0) {
   const r = reviewMeta(c);
   return `<article class="card review-pick" data-id="${esc(c.id)}">
     <a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
-    <div class="card-media review-pick-media">${carousel(c, { eager: i < 3 })}<span class="review-total">${ic("file-text")}후기 ${fmt(r.total)}</span></div>
+    <div class="card-media review-pick-media">${carousel(c, { eager: i < 3 })}<span class="review-total">${ic("file-text")}후기 ${fmt(r.total)}</span>${wxAlert(c) ? `<span class="bdgs">${wxBadge(c)}</span>` : ""}</div>
     <div class="card-body review-pick-body"><p class="review-place">${esc(region(c))}</p><h3>${esc(nameOf(c).name)}</h3><div class="review-topics">${reviewTopics(r.rv.p, "good", "thumb-up")}${reviewTopics(r.rv.c, "watch", "alert")}</div></div>
   </article>`;
 }
