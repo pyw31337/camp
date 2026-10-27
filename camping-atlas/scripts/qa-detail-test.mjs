@@ -7,8 +7,8 @@ const url = (process.argv[2] || "http://127.0.0.1:8765/").replace(/\/?$/, "/");
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 const fails = [];
 const cases = [
-  { id: "osm-w25979109", no: [/2\.5만~4만원|25,000~40,000/, /입실\s*14:00/, /600W/, /캠퍼 한마디/] },
-  { id: "hangang-jamwon", no: [/입실\s*14:00/, /캠퍼 한마디/] },
+  { id: "osm-w25979109", no: [/2\.5만~4만원|25,000~40,000/, /입실\s*14:00/, /600W/, /캠퍼 한마디|댓글/] },
+  { id: "hangang-jamwon", no: [/입실\s*14:00/, /캠퍼 한마디|댓글/] },
   { id: "1066", no: [/185,000|18\.5만/] },
   { id: "483", no: [/숯만 가능/], has: [/금원산/] },
   // 2026-10-21: 표준 조례 일괄 입실·퇴실은 참고값으로 표시, 시·도 짧은 이름, 중복 합친 곳은 남은 곳으로 이동, 좌표 오류는 지도에 안 찍음

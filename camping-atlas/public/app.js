@@ -1119,16 +1119,22 @@ function cardLines(c) {
 }
 function rowsHtml(c) { return cardLines(c); }
 function rowsHtmlHorizontal(c) { return cardLines(c); }
-// 찜 목록은 여러 곳을 훑어보기 위한 화면이므로, 6개 스펙 행을 기본으로 접는다.
+// 찜 목록은 여러 곳을 훑어보기 위한 화면이므로, 이름·주소 아래의 모든 정보(유형·스펙·후기 뱃지)를 '상세정보'로 기본 접는다.
 // 일반 목록·테마 카드에는 같은 행을 그대로 유지해 비교 정보가 숨지 않게 한다.
 function savedDetailsHtml(c) {
   const panelId = `saved-spec-${String(c.id).replace(/[^A-Za-z0-9_-]/g, "-")}`;
+  const typesHtml = typeRow(c).html ? `<div class="card-group card-group-types">${typeRow(c).html}</div>` : "";
+  const reviewsHtml = c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0)
+    ? `<div class="card-group card-group-reviews"><div class="card-reviews">${cardReviewPills(c.rv, c)}</div></div>`
+    : "";
   return `<div class="card-group card-group-spec saved-card-spec" data-saved-card-spec>
     <button class="saved-card-spec-toggle" type="button" data-saved-card-spec-toggle aria-expanded="false" aria-controls="${esc(panelId)}">
-      <span>${ic("list")}상세정보</span>${ic("chevron-up", "saved-card-spec-chevron")}
+      <span>${ic("list")}상세정보</span>${ic("right", "saved-card-spec-chevron")}
     </button>
     <div class="saved-card-spec-panel" id="${esc(panelId)}" data-saved-card-spec-panel hidden>
+      ${typesHtml}
       ${rowsHtml(c)}
+      ${reviewsHtml}
     </div>
   </div>`;
 }
@@ -1287,15 +1293,17 @@ function card(c, i = 0, opts) {
           </div>
         </div>
       </div>
-      <div class="card-group card-group-types">
-        ${typeRow(c).html}
-      </div>
-      ${savedMemo ? savedDetailsHtml(c) : `<div class="card-group card-group-spec">${rowsHtml(c)}</div>`}
-      ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `
-        <div class="card-group card-group-reviews">
-          <div class="card-reviews">${cardReviewPills(c.rv, c)}</div>
+      ${savedMemo ? savedDetailsHtml(c) : `
+        <div class="card-group card-group-types">
+          ${typeRow(c).html}
         </div>
-      ` : ""}
+        <div class="card-group card-group-spec">${rowsHtml(c)}</div>
+        ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `
+          <div class="card-group card-group-reviews">
+            <div class="card-reviews">${cardReviewPills(c.rv, c)}</div>
+          </div>
+        ` : ""}
+      `}
       ${commentsCardHtml(c)}
     </div>
   </article>`;
@@ -4509,6 +4517,7 @@ const CMT_FETCHED_SET = new Set();   // campground_ids queried
 const CMT_OPEN_SET = new Set();      // user explicitly opened
 const CMT_CLOSED_SET = new Set();    // user explicitly closed
 const CMT_EXPANDED_SET = new Set();  // user expanded to view up to 6 comments
+const CMT_WRITE_OPEN_SET = new Set(); // user opened inline comment write form
 
 function formatCommentContent(content) {
   if (!content) return "";
@@ -4537,6 +4546,7 @@ function renderCardCmtInner(id, cmts = [], isOpen = false) {
   const myNick = store.get("mc-cmt-nick", "");
   const myInitial = esc((myNick || "캠").trim().charAt(0) || "캠");
   const isExpanded = Boolean(CMT_EXPANDED_SET.has(String(id)));
+  const isWriteOpen = Boolean(CMT_WRITE_OPEN_SET.has(String(id)));
 
   // 3개까지 바로 노출, 4개 이상부터 더보기 토글, 펼쳐도 최대 6개까지만 노출
   const visibleList = isExpanded ? cmts.slice(0, 6) : cmts.slice(0, 3);
@@ -4572,10 +4582,10 @@ function renderCardCmtInner(id, cmts = [], isOpen = false) {
     }
   }
 
-  // 6개 초과 시 상세페이지 캠퍼 한마디(#cmt) 앵커 링크 제공
+  // 6개 초과 시 상세페이지 댓글(#cmt) 앵커 링크 제공
   let anchorHtml = "";
   if (count > 6) {
-    anchorHtml = `<a class="c-cmt-anchor-link" href="${APP_BASE}place/${encodeURIComponent(id)}#cmt">캠퍼 한마디에서 전체 ${count}개 모두 보기 ➔</a>`;
+    anchorHtml = `<a class="c-cmt-anchor-link" href="${APP_BASE}place/${encodeURIComponent(id)}#cmt">댓글 전체 ${count}개 모두 보기 ➔</a>`;
   }
 
   return `
@@ -4585,13 +4595,16 @@ function renderCardCmtInner(id, cmts = [], isOpen = false) {
         <span class="c-cmt-bar-title">댓글</span>
         ${count > 0 ? `<b class="c-cmt-count">${count}</b>` : ""}
       </div>
-      <span class="c-cmt-bar-arrow">${ic(isOpen ? "down" : "right")}</span>
+      <div class="c-cmt-bar-right">
+        <button type="button" class="c-cmt-write-btn" data-cmt-write-toggle="${esc(id)}" aria-expanded="${isWriteOpen ? "true" : "false"}">댓글 남기기</button>
+        <span class="c-cmt-bar-arrow">${ic("right")}</span>
+      </div>
     </div>
     <div class="card-cmt-box" data-cmt-box="${esc(id)}"${isOpen ? "" : ' style="display:none;"'}>
       ${count > 0 ? `<ul class="c-cmt-list">${cmtsHtml}</ul>` : ""}
       ${moreBtnHtml}
       ${anchorHtml}
-      <form class="c-cmt-form" data-card-cmt-form="${esc(id)}">
+      <form class="c-cmt-form" data-card-cmt-form="${esc(id)}"${isWriteOpen ? "" : ' style="display:none;"'}>
         <div class="c-cmt-nick-row">
           <div class="c-cmt-avatar" data-cmt-form-avatar="${esc(id)}">${myInitial}</div>
           <input type="text" name="nickname" class="c-cmt-nick-input" placeholder="닉네임" maxlength="20" value="${esc(myNick)}" required aria-label="닉네임">
@@ -4705,6 +4718,29 @@ function bindCardCommentEvents() {
   cardCommentEventsBound = true;
 
   document.addEventListener("click", async (e) => {
+    const writeBtn = e.target.closest("[data-cmt-write-toggle]");
+    if (writeBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      const id = String(writeBtn.dataset.cmtWriteToggle);
+      CMT_CLOSED_SET.delete(id);
+      CMT_OPEN_SET.add(id);
+      if (CMT_WRITE_OPEN_SET.has(id)) {
+        CMT_WRITE_OPEN_SET.delete(id);
+      } else {
+        CMT_WRITE_OPEN_SET.add(id);
+      }
+      updateSingleCardCommentDom(id);
+      if (CMT_WRITE_OPEN_SET.has(id)) {
+        const box = $(`[data-card-cmt="${id}"]`);
+        if (box) {
+          const ta = box.querySelector("textarea[name='content']");
+          if (ta) ta.focus();
+        }
+      }
+      return;
+    }
+
     const toggleBtn = e.target.closest("[data-cmt-toggle]");
     if (toggleBtn) {
       e.preventDefault();
@@ -4769,6 +4805,7 @@ function bindCardCommentEvents() {
       e.preventDefault();
       e.stopPropagation();
       const id = String(cancelBtn.dataset.cmtCancel);
+      CMT_WRITE_OPEN_SET.delete(id);
       const form = cancelBtn.closest("form");
       if (form) {
         const ta = form.querySelector("textarea[name='content']");
@@ -4777,8 +4814,8 @@ function bindCardCommentEvents() {
       const cmts = CMT_CACHE.get(id) || [];
       if (!cmts.length) {
         CMT_OPEN_SET.delete(id);
-        updateSingleCardCommentDom(id);
       }
+      updateSingleCardCommentDom(id);
       return;
     }
   });
@@ -4813,6 +4850,7 @@ function bindCardCommentEvents() {
         CMT_CACHE.set(id, [row, ...cur.filter((x) => x.id !== row.id)]);
         CMT_CLOSED_SET.delete(id);
         CMT_OPEN_SET.add(id);
+        CMT_WRITE_OPEN_SET.delete(id);
         updateSingleCardCommentDom(id);
         if ($("[data-cmts]")) loadComments(id);
         toast("남겼어요");
@@ -4848,7 +4886,7 @@ function commentsHtml(c) {
   // campground_comment.campground_id는 INT — 공원·당일 장소(문자 id)는 저장이 안 돼 400이 났다(QA 2026-10-20). 숫자 id만 연다.
   if (!SB.url || !/^\d+$/.test(String(c.id))) return "";
   const profile = typeof savedCommentProfile === "function" ? savedCommentProfile() : { nickname: store.get("mc-cmt-nick", "") };
-  return `<section class="d-sec" id="cmt"><div class="sec-head">${iconTitle("chat-bubble", "캠퍼 한마디")}</div>
+  return `<section class="d-sec" id="cmt"><div class="sec-head">${iconTitle("chat-bubble", "댓글")}</div>
     <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" value="${esc(profile.nickname || store.get("mc-cmt-nick", ""))}" placeholder="닉네임" required aria-label="닉네임" autocomplete="nickname"><textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁" required aria-label="내용"></textarea><button class="btn primary" type="submit">남기기</button></form>
     <ul class="cmts" data-cmts><li class="muted">불러오는 중…</li></ul></section>`;
 }
