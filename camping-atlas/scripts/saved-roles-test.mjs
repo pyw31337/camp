@@ -34,6 +34,20 @@ for (const [w, h] of [[320, 740], [390, 844], [1366, 900]]) {
   if (!r.inHead) fails.push(`${tag} 찜: ‘비교하기’가 맨 위에 없음`);
   if (r.picks) fails.push(`${tag} 찜: 비교 고르기 UI ${r.picks}개가 남음(비교 화면 역할)`);
   if (r.hearts < ids.length) fails.push(`${tag} 찜: 카드 하트(빼기) 부족 ${r.hearts}`);
+  // 찜 목록은 훑어보기 전용: 6개 스펙을 '상세정보'로 기본 접고, 카드별로만 열어 본다.
+  const specs = await page.evaluate(() => [...document.querySelectorAll(".saved-grid .saved-memo-card")].map((card) => {
+    const button = card.querySelector("[data-saved-card-spec-toggle]");
+    const panel = card.querySelector("[data-saved-card-spec-panel]");
+    return { button: Boolean(button), expanded: button?.getAttribute("aria-expanded"), hidden: panel?.hidden, rows: panel?.querySelectorAll(".rows-6 > li").length ?? 0 };
+  }));
+  if (specs.length !== ids.length || specs.some((x) => !x.button || x.expanded !== "false" || !x.hidden || x.rows !== 6)) fails.push(`${tag} 찜: 상세정보 기본 접기 상태가 아님 ${JSON.stringify(specs.slice(0, 2))}`);
+  await page.click(".saved-grid .saved-memo-card [data-saved-card-spec-toggle]");
+  const opened = await page.$eval(".saved-grid .saved-memo-card", (card) => {
+    const button = card.querySelector("[data-saved-card-spec-toggle]");
+    const panel = card.querySelector("[data-saved-card-spec-panel]");
+    return button?.getAttribute("aria-expanded") === "true" && panel?.hidden === false;
+  });
+  if (!opened) fails.push(`${tag} 찜: 상세정보를 눌러도 6개 스펙이 열리지 않음`);
   const ov = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth);
   if (ov > 0) fails.push(`${tag} 찜: 가로 넘침 ${ov}px`);
   // 하트로 빼기
