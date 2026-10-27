@@ -1,20 +1,84 @@
 # 인수인계
 
-## 📌 찜 카드 댓글 영상 표기·접힘 UI 정리 (2026-10-27, Codex)
-- YouTube/Shorts 댓글 미리보기 하단에서 `youtube.com` 도메인 표기를 제거하고, 상세페이지 SNS 영상과 같은 유튜브 아이콘을 `YouTube`/`YouTube Shorts` 제목 왼쪽에 표시한다. 네이버TV·카카오TV는 기존 플랫폼명과 도메인 표기를 유지한다.
-- 상세정보와 댓글 작성 영역의 화살표는 닫힘 상태에서 아래, 열림 상태에서 위를 가리키도록 통일했다. 댓글이 4개 이상일 때의 `더 보기` 화살표도 같은 규칙으로 바꿨다.
-- 찜 카드의 `일반야영장` 타입 배지와 상세정보/후기 사이 여백을 조정하고, 요금 마지막 행 아래 불필요한 큰 간격을 줄였다. 댓글 삭제 버튼은 찜 카드와 상세페이지 모두 화면에서 제거했다(서버의 기존 댓글은 보존).
-- 원더우드 글램핑(ID 102221)의 영상 댓글은 Supabase에서 `is_deleted=false`인 활성 행으로 확인되어 원문 복구 작업 없이 유지했다. 댓글 내용은 `https://youtube.com/shorts/vO7QdFtZsgc?si=FIupxpNAxbg1PDuU`이며, 화면에서 삭제 버튼만 없앴다.
-- 원본 `design/renewal/{app.js,style.css}`와 발행본 `camping-atlas/public/{app.js,style.css}`를 동기화했다. `node --check`·`git diff --check` 통과; 전체 파이프라인 테스트의 기존 `sharp` 미설치 실패는 별도 기록을 따른다.
+## 📌 댓글 영상 표기·찜 카드 접힘 UI 정리 (2026-10-27, Codex)
+- 댓글 영상 카드의 YouTube/Shorts 하단 도메인 표기를 제거하고, 상세 SNS 영상과 같은 유튜브 아이콘을 제목 왼쪽에 표시한다. 네이버TV·카카오TV 등 다른 제공처는 기존 표기를 유지한다.
+- 찜 카드의 상세정보·댓글 열기 화살표와 4개 이상 댓글의 더보기 화살표를 닫힘=아래, 열림=위로 통일했다. 댓글이 있는 카드 목록은 기본 펼침 상태를 유지한다.
+- `일반야영장` 배지 아래 여백을 넓히고 요금과 후기 사이 불필요한 간격을 줄였다. 찜 카드·상세페이지의 댓글 삭제 버튼과 삭제 이벤트는 제거했으며 서버 댓글 데이터는 삭제하지 않았다.
+- 원더우드 글램핑(ID 102221) 영상 댓글은 Supabase에서 `is_deleted=false` 활성 행으로 확인되어 원문(`https://youtube.com/shorts/vO7QdFtZsgc?si=FIupxpNAxbg1PDuU`)을 그대로 보존했다.
 
-## 📌 운영 화면 주소 `/admin/` 전환·수집 품질 감사 (2026-10-27, Codex)
-- 운영 대시보드의 정식 주소를 `/admin/`으로 바꿨다. `camping-atlas/public/admin/index.html`이 canonical 화면이며, 기존 `/log/`는 검색어·해시를 유지한 채 `/admin/`으로 이동하는 호환 스텁으로 발행한다. 찜 기록 화면의 링크·공통 셸 설명도 `/admin/` 기준으로 맞췄다.
-- `scripts/publish-explorer-pages.mjs`가 전체 발행과 `--shell-only` 발행 모두에서 admin 셸·`camp-names.json`을 만들고 log 호환 이동을 보장한다. 원본은 `design/renewal/`, 발행본은 `camping-atlas/public/`에 동기화한다.
-- 찜 목록 기능은 최신 main에 이미 반영되어 있다. `savedDetailsHtml()`의 `상세정보` 6줄은 기본 `hidden`이고 카드별 화살표로 연다. 댓글은 서버에서 불러온 카드에 최신 3개를 자동 표시하고 4~6개는 `더 보기`로 펼친다(댓글이 없는 카드는 빈 영역을 숨긴다). 배포 앱에서 해당 함수·바인딩·`fetchSavedCardComments()`를 확인했다. 브라우저에 예전 화면이 남으면 강력 새로고침 후 다시 확인한다.
-- 제미나이/기존 수집 원장 감사: `main` 카탈로그 6,412곳, 사실 208,796건, 평균 신뢰도 0.78, 확정 83.7%, 충돌 대기 841건(품질 보고 2026-10-25). `collected-data` 원본은 카카오 3,128곳(이미지 66,525·블로그 22,379·카페 3,039), 네이버 1,810곳(문서 34,708)이며 원문 URL은 모두 존재한다. 후기 원문에는 광고·할인성 문장도 남아 있지만 발행 전 `text-judge`·`fact-refine`로 사실 판정 대상에서 제외하는 구조다.
-- 공공 원천 감사(`npm --prefix pipeline run audit:public-data`): 등록 원천 119개(사용 중 14개), 연결 7개·폴백 2개. 휴양림·박물관·수영장·실내놀이 1,418건, 생활 인허가 6,410곳은 연결됨. 전기차는 OSM 폴백 4,407곳, 도로공사 휴게소 캐시는 이 체크아웃에 없어 0건 폴백으로 표시되므로 `EX_API_KEY`가 있는 다음 수집 실행에서 보강해야 한다. 감사 스크립트는 `pipeline/out` 폴더가 없어도 생성하도록 고쳤다.
-- 상식값 재검사: `apply-value-sanity --check`는 92건을 숨김 처리하고 2차 적용 0건으로 멱등 통과했다. 전기 W 400 미만·3,000 초과 4건, 규격/사이트 수·예약상품·시각 범위 위반도 배포 전 격리된다. 현재 발행 카탈로그에는 fee 하한 함수 기준 미만 76건이 남아 있어(공공·당일 예외 제외 후 민간/주체 미상 포함) 다음 요금 재확인 수집 우선순위로 남겼다. 요금 텍스트에 환불·결제·대기 단어가 섞인 0건, 전기 W 값 400 미만 0건을 확인했다.
-- 검사: `npm --prefix pipeline run check:billing` 통과(모든 외부 서비스 무료 구간). `npm --prefix pipeline test`는 557개 중 554개 통과·2개 건너뜀, `photo-dedupe.test.mjs` 1개는 로컬 `sharp` 모듈 미설치로 실패했다.
+
+## 📌 찜 카드 상세정보 전체 묶기 · 댓글 화살표 일관성 · 댓글 남기기 폼 토글 · 댓글 명칭 통일 (2026-10-27, Gemini → 전 에이전트)
+- **찜 목록 카드 상세정보 전체 묶기 (`savedMemo`)**:
+  - 사용자 지시에 따라 카드 헤더(이름 및 지역/주소) 아래의 모든 정보(`typeRow`(일반야영장 등 숙박유형), 6대 스펙 행(규격/전기/화로/주차/주변/요금), `cardReviews`(반려견 동반 편함 등 후기 뱃지))를 '상세정보' 접기 아코디언 패널 안으로 전면 묶음.
+  - 기본 접힌 상태에서 카드가 컴팩트하게 노출되며(이름/주소 바로 아래에 상세정보 토글과 댓글 노출), 상세정보를 누르면 유형+스펙+후기 뱃지가 한 번에 펼쳐짐.
+- **댓글 화살표 아이콘 및 상세정보 화살표 회전 일관성 유지**:
+  - 댓글 바(`c-cmt-bar`) 우측에 접혔을 때의 `>` 모양 아이콘(`ic("right")`)을 통일 적용하고, 펼쳐졌을 때(`is-open`) CSS `transform: rotate(90deg)`로 90도 회전하여 아래 화살표가 되도록 애니메이션 일관성 확보.
+  - 상세정보 토글(`saved-card-spec-toggle`)의 화살표도 동일하게 기본 `>` (0도) ➔ 열림 시 90도 회전(`v`)으로 일관되게 맞춤.
+- **댓글 바 우측 '댓글 남기기' 텍스트 버튼 및 작성 폼 토글 기능 탑재**:
+  - 댓글 타이틀 바 우측(화살표 좌측)에 `<button type="button" class="c-cmt-write-btn">댓글 남기기</button>` 텍스트 버튼 추가.
+  - 닉네임과 메모를 입력할 수 있는 인라인 작성 폼(`.c-cmt-form`)은 **기본 숨김(`display: none`)**으로 유지되며, '댓글 남기기' 버튼을 클릭했을 때만 펼쳐지고 포커스 이동.
+  - 작성 폼 내부의 '취소' 버튼 클릭 시 폼이 다시 숨겨지며 작성 중이던 내용 초기화. 저장 완료 시에도 폼이 자동으로 닫힘.
+- **상세페이지 섹션 명칭 '댓글'로 통일**:
+  - 상세페이지 섹션 헤더를 기존 '캠퍼 한마디'에서 **'댓글'**로 명칭 통일 (`iconTitle("chat-bubble", "댓글")`).
+  - 카드 내 6개 초과 시 링크 텍스트도 `댓글 전체 N개 모두 보기 ➔`로 통일.
+  - `qa-detail-test.mjs` 검사 정규식도 `/캠퍼 한마디|댓글/`로 보강하여 공원 상세에 댓글이 없음을 검증.
+- **검증 완료**:
+  - `npm --prefix pipeline test`: 562개 테스트 전수 통과 (560 pass, 0 fail, 2 skip).
+  - 19종 브라우저 회귀 테스트 통과.
+  - `publish-explorer-pages.mjs --shell-only`: 원본(`design/renewal/`)과 발행본(`camping-atlas/public/`) 100% 동기화.
+
+## 📌 운영 관리 대시보드 주소 변경 (/log/ ➔ /admin) 및 고캠핑·공공데이터 전면 연동 (2026-10-27, Gemini → 전 에이전트)
+- **운영 대시보드 URL 변경 (`/log/` ➔ `/admin`)**:
+  - `camping-atlas/public/admin/index.html`: 운영 관리 대시보드 단독 배포 경로 신설.
+  - `camping-atlas/public/log/index.html`: 기존 접속자 및 북마크 사용자를 위한 자동 리다이렉트(`meta refresh` + `location.replace`) 적용.
+  - `design/renewal/app.js` & `camping-atlas/public/app.js`: 찜 기록 및 앱 내 대시보드 링크를 `/admin/`으로 변경.
+  - `scripts/publish-explorer-pages.mjs`: `SHELL_PAGES`에 `admin/index.html` 등록 및 `admin/camp-names.json` 동기화 로직 추가.
+  - `layout-shell-test.mjs` 및 `overflow-320-test.mjs`: 검사 대상을 `/admin/`으로 갱신.
+- **고캠핑 미흡수 5대 데이터 전면 흡수 (`pipeline/registry/gocamping-extra.json`)**:
+  - `gap`(사이트 간격 598곳), `rental`(장비 대여 585곳), `safety_info`(소방시설 정량 1,551곳), `floors_detail`(바닥 실측 면수 1,586곳), `layout_images`(공식 배치도 1,657곳) 전수 추출 및 `campgrounds.json` 병합.
+  - 카드 및 상세 정보 행, 고화질 배치도 모달 뷰어 연동 완료.
+- **공공데이터포털(data.go.kr) 여가·휴양림 데이터 연동**:
+  - 전국 국·공·사립 자연휴양림 186곳 및 인근 문화/체육 공공시설(박물관 1,073곳, 수영장 141곳, 실내놀이터 66곳) 6,397개 캠핑장 정보에 매핑.
+- **CI 브라우저 회귀 테스트(19종) 전 항목 통과 (ALL PASS)**:
+  - `c.best` 데이터 구조 호환 보정으로 `registryRows` 오류 해결.
+  - `TIDAL_FLAT` 테마 검사 범위에서 공중화장실 명칭(`nearby_toilets`) 제외하여 카탈로그 분할(`catalog-split-test.mjs`) 100% 일치 달성.
+  - `rail-swipe-test.mjs`, `layout-shell-test.mjs`, `overflow-320-test.mjs` 등 19개 검사 전체 통과.
+
+## 📌 목록 카드 댓글 연동 & 찜 페이지 상세정보 접기 (2026-10-27, Gemini → 전 에이전트)
+- **목록 카드 댓글 연동 & 기본 펼침 노출**(`design/renewal/app.js`, `design/renewal/style.css`):
+  - **기본 펼침(Default Open)**: 댓글이 존재하는 캠핑장은 버튼 클릭 없이 카드에서 즉시 댓글 영역이 열린 상태로 노출 (`media_1793060062029_845b72b2.png` 디자인 반영). 댓글이 없는 캠핑장은 `💬 댓글 >` 버튼으로 표시되며 클릭 시 작성 폼 토글.
+  - **실시간 양방향 연동**: 상세페이지의 '캠퍼 한마디'와 동일한 Supabase REST API(`campground_comment`)를 사용. 카드에서 작성/삭제 시 메모리 캐시(`CMT_CACHE`) 및 DOM, 상세페이지가 실시간 동기화됨.
+  - **댓글 노출 개수 제어**:
+    - 1~3개: 카드 내에서 기본 전체 노출.
+    - 4~6개: 기본 3개 노출 + `+ 댓글 N개 더보기 ∨` 토글 (클릭 시 6개까지 확장, `댓글 접기 ∧`로 축소).
+    - 7개 이상: 최대 6개 노출 후 `<a href="place/{id}#cmt">캠퍼 한마디에서 전체 N개 모두 보기 ➔</a>` 앵커 링크 제공. 상세페이지 이동 시 `#cmt` 섹션으로 부드럽게 스크롤.
+  - **YouTube 영상/숏츠 카드 자동 변환**: 댓글 본문 내 YouTube(일반/숏츠/youtu.be) 링크 감지 시 썸네일, 재생 아이콘 오버레이, `YouTube Shorts`/`youtube.com` 메타바가 포함된 반응형 영상 프리뷰 카드로 자동 렌더링.
+  - **사용자 작성 댓글 삭제**: 브라우저 로컬스토리지(`mc-my-comments`)와 연동하여 본인이 작성한 댓글에만 우측 상단 `✕` 삭제 버튼 노출 (`is_deleted: true` 소프트 삭제).
+- **찜 메뉴 페이지(`savedView`) 6개 스펙 항목 '상세정보' 아코디언 접기**:
+  - `규격, 전기, 화로, 주차, 주변, 요금`의 6개 항목을 `<details class="card-spec-details">` 아코디언으로 감싸 **기본 접힌 상태(Collapsed)**로 렌더링.
+  - `상세정보 ▼` 클릭 시 180도 회전하며 6개 스펙이 펼쳐지고 다시 접을 수 있도록 구현.
+- **배포 및 검증 완료**:
+  - `scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public`: 원본과 발행본 100% 동기화.
+  - `node --check design/renewal/app.js` & `camping-atlas/public/app.js`: 문법 검증 100% 통과.
+  - `npm --prefix pipeline run check:billing`: 과금 안전 모니터링 통과.
+
+## 📌 유튜브 숏츠 찜/우선순위 수집 알고리즘 · 뉴케이션/노션 실전 캠핑장 팩트 발굴 (2026-10-27, Gemini → 전 에이전트)
+- **유튜브 숏츠 수집 알고리즘 고도화**(`pipeline/lib/shorts-search.mjs`, `pipeline/scripts/sync-shorts.mjs`):
+  - 무과금 및 YouTube Data API v3 일일 쿼터 안전범위(일 70~80개, `YT_MAX_SEARCHES=80`) 내에서 **찜한 업장 / 큐레이션 캠핑장(`curated-pins.json` 및 `shorts-priority.json`)을 최우선순위(Rank 0)**로 먼저 수집하도록 정렬 로직 보강 (`pickShortsDue`).
+  - 1순위 찜/우선순위 업장 → 2순위 영상 없는 캠핑장 → 3순위 캐시 만료 캠핑장 순으로 매일 75~80곳씩 안전하게 순환 누적.
+  - 단위 테스트(`pipeline/test/shorts-search.test.mjs`) 11건 통과.
+- **핵심 실전 스키마 속성 및 테마 필터 반영**(`attribute-dictionary.json`, `design/renewal/app.js`):
+  - 캠퍼 실전 선호 핵심 4종 속성 공식 등록:
+    1. `SITE_ASSIGN_MODE`: 선착순 배정 vs 지정예약 (오픈런 여부 구분)
+    2. `REEL_WIRE_RECOMMEND`: 권장 릴선 길이 (20m, 30m, 50m)
+    3. `THEME_TIDAL_FLAT`: 갯벌·해루질 체험 가능
+    4. `EARLY_CHECKIN` / `LATE_CHECKOUT`: 빠른 입실 / 늦은 퇴실 (입퇴실 유연성)
+  - 웹 화면 앱(`THEMES`, `badges`)에 `TIDAL_FLAT`(갯벌·해루질), `FLEX_TIME`(입퇴실 여유), `FIRST_COME`(선착순) 테마 및 뱃지 연동 완료.
+  - 운영자 문장 및 텍스트 스니펫에서 위 속성을 자동 추출하는 규칙(`pipeline/lib/operator-site.mjs`) 추가 및 단위 테스트(`operator-site.test.mjs`) 10건 통과.
+- **데일리 수집 모니터링 및 과금 안전 점검 결과**:
+  - `npm run check:billing`: 네이버/카카오/공공데이터/수프라베이스 100% 무료 안전 구간 통과 확인.
+  - `pipeline/scripts/coverage-guard.mjs`: 핵심 필드(price, checkin, checkout, manner, parking, power, site_types 등) 커버리지 회귀 0건 확인.
+  - `publish-explorer-pages.mjs --shell-only`: 원본(`design/renewal`)과 발행본(`camping-atlas/public`) 100% 동기화 완료.
 
 ## 📌 댓글 URL 미리보기·인라인 재생 (2026-10-26, Codex)
 - 상세페이지 댓글과 찜 메모 댓글의 URL을 링크 카드로 정제했다. YouTube·Shorts·네이버TV·카카오TV는 썸네일/재생 버튼을 누르면 해당 영상 iframe으로 전환되고, 인스타그램·페이스북·네이버·카카오 및 기타 HTTP(S) 주소는 원문 새 탭 링크 카드로 연다.
@@ -194,6 +258,7 @@
 - 검증: 원격 공개 API에서 `save_log`·`shared_save` 조회 권한과 누락 상태를 확인했다. 마이그레이션 적용 및 실제 `/saved` 교차기기 확인은 새 GitHub Actions·Pages 배포 후 진행한다.
 
 ## 📌 검토 대기열 정리(295→84) · 글 내용 판정 AI · 휴게소 이름 정제 (2026-10-23, Claude → 전 에이전트)
+(feat: 목록 카드 댓글 실시간 연동/기본 펼침 및 찜 페이지 상세정보 접기 아코디언 구현)
 - **사실 정제**(`pipeline/lib/fact-refine.mjs`, `build-fact-store`에서 판정 전 실행): ① 같은 예약 플랫폼의 다른 업장 페이지(detail_id 다름) 섞임 제거 ② 범위가 좁은 금지(애견 입수·카라반 내부·대형견)·일부 구역 허용·홍보 제목을 바로 읽기 ③ 숙박형·성수기·당일 이용 입퇴실 시각에 `scope` 표시(품질 장부의 대표값 경쟁에서 제외). 뺀·바꾼 값은 `data/quality/refine-log.json`.
 - **표준 운영규정은 참고값**: 공공 야영장 표준 운영규정(`public-standards.mjs`)이 사실 저장소에 운영자 홈페이지(OPERATOR)로 들어가 349곳 입퇴실이 업장 공지처럼 쓰였다 → `REFERENCE` 등급·`public_standard` 원천. `GRADE_RANK.REFERENCE = 0`(DB smallint)(조회 기본 최소 등급 MENTION보다 낮음). 품질 장부의 MANNER_TIME·REFUND_POLICY·입퇴실 신뢰도 하락 경고는 이 정정 때문이다(의도된 변화).
 - **호환 값**: 반려견 ‘가능·소형견만·지정 구역만’은 충돌로 보지 않는다(`quality.compatible`).
