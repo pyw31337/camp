@@ -1,5 +1,22 @@
 # 인수인계
 
+## 📌 운영 관리 대시보드 주소 변경 (/log/ ➔ /admin) 및 고캠핑·공공데이터 전면 연동 (2026-10-27, Gemini → 전 에이전트)
+- **운영 대시보드 URL 변경 (`/log/` ➔ `/admin`)**:
+  - `camping-atlas/public/admin/index.html`: 운영 관리 대시보드 단독 배포 경로 신설.
+  - `camping-atlas/public/log/index.html`: 기존 접속자 및 북마크 사용자를 위한 자동 리다이렉트(`meta refresh` + `location.replace`) 적용.
+  - `design/renewal/app.js` & `camping-atlas/public/app.js`: 찜 기록 및 앱 내 대시보드 링크를 `/admin/`으로 변경.
+  - `scripts/publish-explorer-pages.mjs`: `SHELL_PAGES`에 `admin/index.html` 등록 및 `admin/camp-names.json` 동기화 로직 추가.
+  - `layout-shell-test.mjs` 및 `overflow-320-test.mjs`: 검사 대상을 `/admin/`으로 갱신.
+- **고캠핑 미흡수 5대 데이터 전면 흡수 (`pipeline/registry/gocamping-extra.json`)**:
+  - `gap`(사이트 간격 598곳), `rental`(장비 대여 585곳), `safety_info`(소방시설 정량 1,551곳), `floors_detail`(바닥 실측 면수 1,586곳), `layout_images`(공식 배치도 1,657곳) 전수 추출 및 `campgrounds.json` 병합.
+  - 카드 및 상세 정보 행, 고화질 배치도 모달 뷰어 연동 완료.
+- **공공데이터포털(data.go.kr) 여가·휴양림 데이터 연동**:
+  - 전국 국·공·사립 자연휴양림 186곳 및 인근 문화/체육 공공시설(박물관 1,073곳, 수영장 141곳, 실내놀이터 66곳) 6,397개 캠핑장 정보에 매핑.
+- **CI 브라우저 회귀 테스트(19종) 전 항목 통과 (ALL PASS)**:
+  - `c.best` 데이터 구조 호환 보정으로 `registryRows` 오류 해결.
+  - `TIDAL_FLAT` 테마 검사 범위에서 공중화장실 명칭(`nearby_toilets`) 제외하여 카탈로그 분할(`catalog-split-test.mjs`) 100% 일치 달성.
+  - `rail-swipe-test.mjs`, `layout-shell-test.mjs`, `overflow-320-test.mjs` 등 19개 검사 전체 통과.
+
 ## 📌 목록 카드 댓글 연동 & 찜 페이지 상세정보 접기 (2026-10-27, Gemini → 전 에이전트)
 - **목록 카드 댓글 연동 & 기본 펼침 노출**(`design/renewal/app.js`, `design/renewal/style.css`):
   - **기본 펼침(Default Open)**: 댓글이 존재하는 캠핑장은 버튼 클릭 없이 카드에서 즉시 댓글 영역이 열린 상태로 노출 (`media_1793060062029_845b72b2.png` 디자인 반영). 댓글이 없는 캠핑장은 `💬 댓글 >` 버튼으로 표시되며 클릭 시 작성 폼 토글.
