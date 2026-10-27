@@ -450,9 +450,11 @@ img { color: transparent; }
 .saved-card-spec-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 38px; margin: 0; padding: 7px 0; border: 0; border-top: 1px solid var(--line); background: transparent; color: var(--ink-2); font: inherit; font-size: .82rem; font-weight: 800; cursor: pointer; text-align: left; }
 .saved-card-spec-toggle > span { display: inline-flex; align-items: center; gap: 6px; }
 .saved-card-spec-toggle .ic { width: 15px; height: 15px; color: var(--ink-3); }
-.saved-card-spec-toggle .saved-card-spec-chevron { flex: none; transition: transform .18s ease; transform: rotate(180deg); }
-.saved-card-spec.is-open .saved-card-spec-chevron { transform: rotate(0); }
+.saved-card-spec-toggle .saved-card-spec-chevron { flex: none; transition: transform .18s ease; transform: rotate(0deg); }
+.saved-card-spec.is-open .saved-card-spec-chevron { transform: rotate(90deg); }
 .saved-card-spec-panel { min-width: 0; }
+.saved-card-spec-panel .card-group-types { margin-top: 6px; }
+.saved-card-spec-panel .card-group-reviews { margin-top: 6px; }
 .saved-card-spec.is-open .saved-card-spec-toggle { color: var(--ink); }
 .saved-card-spec.is-open .saved-card-spec-panel { padding-bottom: 2px; }
 /* 요금 줄과 후기 줄 사이(소유자 2026-10-23: 여백이 많다): 목록 아래 여백 16px → 2px */
@@ -519,8 +521,29 @@ img { color: transparent; }
 .c-cmt-bubble-ic { width: 15px; height: 15px; color: var(--accent); }
 .c-cmt-bar-title { color: var(--ink); font-weight: 700; }
 .c-cmt-count { color: var(--accent); font-weight: 800; margin-left: 2px; }
-.c-cmt-bar-arrow { display: inline-flex; align-items: center; justify-content: center; color: var(--ink-3); }
+.c-cmt-bar-right { display: inline-flex; align-items: center; gap: 8px; }
+.c-cmt-write-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 3px 8px; border: 1px solid var(--line); background: var(--paper);
+  color: var(--ink-2); font-size: .78rem; font-weight: 700;
+  cursor: pointer; border-radius: var(--r-s, 6px); line-height: 1.2;
+  transition: all .15s ease;
+}
+.c-cmt-write-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--soft);
+}
+.c-cmt-bar-arrow {
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink-3); transition: transform .18s ease;
+  transform: rotate(0deg);
+}
 .c-cmt-bar-arrow .ic { width: 14px; height: 14px; }
+.c-cmt-bar.is-open .c-cmt-bar-arrow {
+  transform: rotate(90deg);
+  color: var(--ink);
+}
 
 .card-cmt-box {
   margin-top: 6px; background: var(--soft); border: 1px solid var(--line);
