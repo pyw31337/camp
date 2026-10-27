@@ -181,6 +181,30 @@ export function extractSiteFacts(lines) {
       else if (noFire && !woodYes) add("FIRE", "NO_FIRE", s);
       else if (woodYes) add("FIRE", "FIREWOOD_OK", s);
     }
+    // 권장 릴선 길이 (m)
+    if (/릴선|리드선|전선/.test(s)) {
+      const rm = s.match(/(?:릴선|리드선|전선)[^.]{0,15}?(\d{2,3})\s*m/i) || s.match(/(\d{2,3})\s*m[^.]{0,10}?(?:릴선|리드선)/i);
+      if (rm) {
+        const meters = Number(rm[1]);
+        if (meters >= 10 && meters <= 100) add("REEL_WIRE_RECOMMEND", meters, s);
+      }
+    }
+    // 사이트 배정 방식 (선착순 vs 지정예약)
+    if (/선착순|지정\s*예약|자리\s*지정/.test(s)) {
+      if (/선착순\s*(배정|입장|자리|입실|순)/.test(s) && !/지정\s*예약/.test(s)) add("SITE_ASSIGN_MODE", "선착순", s);
+      else if (/지정\s*(예약|배정|자리)/.test(s) && !/선착순/.test(s)) add("SITE_ASSIGN_MODE", "지정예약", s);
+    }
+    // 입퇴실 유연성 (얼리 입실 / 레이트 퇴실)
+    if (/얼리\s*(입실|체크인)|빠른\s*입실/.test(s) && !/불가|금지|없습니다/.test(s)) {
+      add("EARLY_CHECKIN", true, s);
+    }
+    if (/레이트\s*(퇴실|체크아웃)|늦은\s*퇴실/.test(s) && !/불가|금지|없습니다/.test(s)) {
+      add("LATE_CHECKOUT", true, s);
+    }
+    // 갯벌 / 해루질 체험
+    if (/갯벌|해루질|조개잡이|맛조개/.test(s) && !/금지|불가|위험/.test(s)) {
+      add("THEME_TIDAL_FLAT", true, s);
+    }
   }
   const out = {};
   for (const [code, f] of Object.entries(facts)) {

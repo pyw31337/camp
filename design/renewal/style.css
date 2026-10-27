@@ -486,6 +486,131 @@ img { color: transparent; }
 .c-rv-pill.pro { background: var(--accent-tint); color: var(--accent); }
 .c-rv-pill.con { background: var(--flame-soft); color: var(--on-flame-soft); }
 .c-rv-pill.neutral { background: var(--soft); color: var(--ink-3); }
+
+/* ── 찜 페이지 카드 상세정보 아코디언 (기본 접힘, 위아래 화살표) ── */
+.card-spec-details { position: relative; z-index: 3; margin: 4px 0 2px; }
+.card-spec-summary {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 7px 10px; background: var(--soft); border: 1px solid var(--line);
+  border-radius: var(--r-s); cursor: pointer; user-select: none;
+  font-size: .84rem; font-weight: 700; color: var(--ink-2); list-style: none;
+  transition: background .15s ease, border-color .15s ease;
+}
+.card-spec-summary:hover { background: var(--soft-2); }
+.card-spec-summary::-webkit-details-marker { display: none; }
+.spec-summary-arrow { display: inline-flex; align-items: center; justify-content: center; color: var(--ink-3); transition: transform .2s ease; }
+.spec-summary-arrow .ic { width: 14px; height: 14px; }
+.card-spec-details[open] .spec-summary-arrow { transform: rotate(180deg); }
+.card-spec-content { padding-top: 4px; }
+
+/* ── 카드 댓글(리스트 연동 & 캠퍼 한마디 동기화) ── */
+.card-group-cmts {
+  position: relative; z-index: 3; margin-top: 6px; padding-top: 6px;
+  border-top: 1px solid var(--line);
+}
+.c-cmt-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 6px 4px; cursor: pointer; user-select: none;
+  font-size: .86rem; font-weight: 600; color: var(--ink-2);
+  border-radius: var(--r-s); transition: background .15s ease;
+}
+.c-cmt-bar:hover { background: var(--soft); }
+.c-cmt-bar-left { display: flex; align-items: center; gap: 6px; }
+.c-cmt-bubble-ic { width: 15px; height: 15px; color: var(--accent); }
+.c-cmt-bar-title { color: var(--ink); font-weight: 700; }
+.c-cmt-count { color: var(--accent); font-weight: 800; margin-left: 2px; }
+.c-cmt-bar-arrow { display: inline-flex; align-items: center; justify-content: center; color: var(--ink-3); }
+.c-cmt-bar-arrow .ic { width: 14px; height: 14px; }
+
+.card-cmt-box {
+  margin-top: 6px; background: var(--soft); border: 1px solid var(--line);
+  border-radius: var(--r-s); padding: 12px;
+}
+.c-cmt-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.c-cmt-item { display: flex; align-items: flex-start; gap: 10px; }
+.c-cmt-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--accent); color: var(--on-accent, #fff);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .8rem; font-weight: 700; flex-shrink: 0;
+}
+.c-cmt-main { flex: 1; min-width: 0; }
+.c-cmt-meta { display: flex; align-items: center; justify-content: space-between; gap: 6px; line-height: 1.2; }
+.c-cmt-meta-left { display: flex; align-items: baseline; gap: 6px; min-width: 0; }
+.c-cmt-author { font-size: .84rem; font-weight: 700; color: var(--ink); }
+.c-cmt-date { font-size: .75rem; color: var(--ink-3); }
+.c-cmt-del { background: none; border: none; color: var(--ink-3); font-size: .84rem; padding: 0 4px; cursor: pointer; line-height: 1; }
+.c-cmt-del:hover { color: var(--no); }
+.c-cmt-body { margin-top: 4px; font-size: .84rem; color: var(--ink-2); line-height: 1.45; word-break: break-all; }
+.c-cmt-text { margin: 0 0 4px 0; line-height: 1.45; }
+
+/* YouTube 영상 미리보기 카드 */
+.c-yt-card {
+  display: block; text-decoration: none; border-radius: 10px; overflow: hidden;
+  border: 1px solid var(--line); background: var(--paper);
+  box-shadow: 0 1px 3px rgba(0,0,0,.06); margin-top: 6px;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.c-yt-card:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,.1); }
+.c-yt-thumb-box { position: relative; width: 100%; height: 150px; background: #000; overflow: hidden; }
+.c-yt-thumb-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.c-yt-play-btn {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 44px; height: 44px; border-radius: 50%; background: rgba(0, 0, 0, .68);
+  display: flex; align-items: center; justify-content: center; color: #fff;
+  transition: transform .15s ease, background .15s ease;
+}
+.c-yt-card:hover .c-yt-play-btn { background: rgba(255, 0, 0, .85); transform: translate(-50%, -50%) scale(1.1); }
+.c-yt-play-icon { width: 20px; height: 20px; margin-left: 2px; }
+.c-yt-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 12px; background: var(--paper); font-size: .78rem; line-height: 1.2;
+}
+.c-yt-badge { font-weight: 700; color: var(--ink); }
+.c-yt-host { color: var(--ink-3); }
+
+/* 댓글 더보기 / 접기 / 앵커 이동 */
+.c-cmt-more-btn {
+  display: block; width: 100%; padding: 8px 0 4px; background: none; border: none;
+  color: var(--accent); font-size: .8rem; font-weight: 700; cursor: pointer;
+  text-align: center; transition: opacity .15s ease;
+}
+.c-cmt-more-btn:hover { opacity: .8; }
+.c-cmt-anchor-link {
+  display: block; text-align: center; font-size: .78rem; color: var(--ink-3);
+  text-decoration: underline; padding: 4px 0 6px; transition: color .15s ease;
+}
+.c-cmt-anchor-link:hover { color: var(--accent); }
+
+/* 댓글 작성 폼 */
+.c-cmt-form {
+  margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.c-cmt-nick-row { display: flex; align-items: center; gap: 8px; }
+.c-cmt-nick-input {
+  flex: 1; height: 32px; padding: 0 12px; border: 1px solid var(--line);
+  border-radius: 999px; background: var(--paper); font-size: .84rem;
+  color: var(--ink); outline: none; box-sizing: border-box;
+}
+.c-cmt-nick-input:focus { border-color: var(--accent); }
+.c-cmt-textarea {
+  width: 100%; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line);
+  border-radius: 10px; background: var(--paper); font-size: .84rem;
+  color: var(--ink); line-height: 1.4; resize: vertical; outline: none; box-sizing: border-box;
+}
+.c-cmt-textarea:focus { border-color: var(--accent); }
+.c-cmt-form-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.c-cmt-btn {
+  height: 30px; padding: 0 14px; border-radius: 999px; font-size: .8rem;
+  font-weight: 700; cursor: pointer; border: none; display: inline-flex;
+  align-items: center; justify-content: center; transition: all .15s ease;
+}
+.c-cmt-btn-cancel { background: var(--soft-2); color: var(--ink-2); }
+.c-cmt-btn-cancel:hover { background: var(--line); }
+.c-cmt-btn-submit { background: var(--accent); color: var(--on-accent, #fff); }
+.c-cmt-btn-submit:hover { opacity: .9; }
+.c-cmt-btn-submit:disabled { opacity: .5; cursor: not-allowed; }
 .card-price { display: flex; align-items: baseline; gap: 6px; padding-top: 10px; border-top: 1px solid var(--line); font-size: .84rem; color: var(--ink-3); }
 .card-price b { font-size: 1rem; font-weight: 900; color: var(--ink); letter-spacing: -0.02em; }
 .card-price .gd { align-self: center; }
@@ -3703,3 +3828,175 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 }
 /* 프랜차이즈 브랜드 표식(사진 없는 편의점·마트·주유소, 소유자 2026-10-23): 사진 칸(64px)과 같은 크기의 브랜드 색 글자 */
 .nearby-hub .nb-logo { flex: 0 0 64px; width: 64px; height: 64px; display: inline-grid; place-items: center; border-radius: 12px; background: var(--lb); color: var(--lf); font: 900 .78rem/1 system-ui, sans-serif; letter-spacing: -.02em; text-align: center; padding: 4px; overflow: hidden; word-break: keep-all; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .06); }
+/* ── 360° VR, 덤프스테이션, 공인 우수야영장 배지 ── */
+.bdg-vr {
+  background: rgba(139, 92, 246, 0.16) !important;
+  color: #6d28d9 !important;
+  border: 1px solid rgba(139, 92, 246, 0.35) !important;
+  font-weight: 750 !important;
+}
+.bdg-dump {
+  background: rgba(14, 165, 233, 0.16) !important;
+  color: #0369a1 !important;
+  border: 1px solid rgba(14, 165, 233, 0.35) !important;
+  font-weight: 750 !important;
+}
+.bdg-best {
+  background: rgba(245, 158, 11, 0.16) !important;
+  color: #b45309 !important;
+  border: 1px solid rgba(245, 158, 11, 0.35) !important;
+  font-weight: 750 !important;
+}
+
+/* 카드 내 360° VR 액션 버튼 */
+.c-act-btn.c-act-vr {
+  color: #7c3aed;
+  background: rgba(139, 92, 246, 0.1);
+}
+.c-act-btn.c-act-vr:hover {
+  background: #7c3aed;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.vr-action-link {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: rgba(139, 92, 246, 0.12);
+  color: #7c3aed;
+  text-decoration: none;
+  transition: all .15s ease;
+}
+.vr-action-link:hover {
+  background: #7c3aed;
+  color: #fff;
+}
+.vr-action-link .ic { width: 14px; height: 14px; }
+
+/* ── 상세페이지 360° VR 파노라마 현장 둘러보기 배너 ── */
+.detail-vr-banner {
+  margin-bottom: 16px;
+  border-radius: var(--r-s, 14px);
+  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+  border: 1.5px solid #c4b5fd;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.08);
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.detail-vr-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.14);
+}
+.detail-vr-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  text-decoration: none;
+  color: #4c1d95;
+}
+.detail-vr-banner .vr-badge-icon {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: #7c3aed;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.35);
+}
+.detail-vr-banner .vr-badge-icon .ic {
+  width: 22px;
+  height: 22px;
+}
+.detail-vr-banner .vr-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.detail-vr-banner .vr-text-group strong {
+  font-size: 1rem;
+  font-weight: 850;
+  color: #3b0764;
+  letter-spacing: -.02em;
+}
+.detail-vr-banner .vr-text-group small {
+  font-size: 0.8rem;
+  color: #6d28d9;
+  font-weight: 550;
+  line-height: 1.35;
+}
+.detail-vr-banner .vr-arrow {
+  color: #7c3aed;
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(124, 58, 237, 0.1);
+  transition: transform .2s ease;
+}
+.detail-vr-banner:hover .vr-arrow {
+  transform: translateX(3px);
+  background: #7c3aed;
+  color: #fff;
+}
+
+/* ── 노지/차박 안심 클린캠핑 수칙 (LNT) ── */
+.clean-camp-notice {
+  margin: 16px 0;
+  padding: 14px 18px;
+  border-radius: var(--r-s, 14px);
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  color: #166534;
+}
+.clean-camp-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.94rem;
+  font-weight: 800;
+  color: #15803d;
+  margin-bottom: 8px;
+}
+.clean-camp-title .ic { width: 16px; height: 16px; color: #16a34a; }
+.clean-camp-rules {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #14532d;
+}
+.clean-camp-rules li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.clean-camp-rules li .ic {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  margin-top: 2px;
+  color: #22c55e;
+}
+
+/* ── 상세 정보 항목 내 덤프/우수 뱃지 표시 ── */
+.dump-badge-val, .best-badge-val {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 650;
+}
+.dump-badge-val .ic { color: #0284c7; width: 14px; height: 14px; }
+.best-badge-val .ic { color: #d97706; width: 14px; height: 14px; }
+

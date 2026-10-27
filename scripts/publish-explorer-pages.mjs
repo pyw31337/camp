@@ -89,7 +89,7 @@ const shellIcons = () => {
   const syms = ids.map((id) => renewalIndex.match(new RegExp(`<symbol id="${id}"[\\s\\S]*?</symbol>`))?.[0] ?? "").join("");
   return `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>${syms.replaceAll('id="', 'id="shell-')}</defs></svg>`;
 };
-const SHELL_PAGES = [["log/index.html", "../"]];
+const SHELL_PAGES = [["admin/index.html", "../"], ["log/index.html", "../"]];
 for (const [rel, up] of SHELL_PAGES) {
   const f = `${rootOut}${rel}`;
   if (!existsSync(f)) continue;
@@ -141,8 +141,8 @@ const copyBrandImages = async (destDir) => {
   if (existsSync(srcImages) && resolve(srcImages) !== resolve(imgDest.replace(/\/$/, ""))) {
     await cp(srcImages, imgDest, { recursive: true });
   }
-  for (const f of ["favicon.svg", "favicon.png", "manifest.webmanifest"]) {
-    const src = `${root}camping-atlas/public/${f}`;
+  for (const f of ["favicon.svg", "favicon.png", "manifest.webmanifest", "robots.txt"]) {
+    const src = existsSync(`${root}design/renewal/${f}`) ? `${root}design/renewal/${f}` : `${root}camping-atlas/public/${f}`;
     const dst = `${destDir}${f}`;
     if (existsSync(src) && resolve(src) !== resolve(dst)) await cp(src, dst);
   }
@@ -257,6 +257,8 @@ if (campJsonSource) {
     const rawCamps = JSON.parse(await readFile(campJsonSource, "utf8"));
     const campNames = Object.fromEntries(rawCamps.filter((c) => c.id && c.name).map((c) => [c.id, c.name]));
     const campNamesJson = JSON.stringify(campNames);
+    await mkdir(`${rootOut}admin`, { recursive: true });
+    await writeFile(`${rootOut}admin/camp-names.json`, campNamesJson);
     await mkdir(`${rootOut}log`, { recursive: true });
     await writeFile(`${rootOut}log/camp-names.json`, campNamesJson);
     await mkdir(`${out}data`, { recursive: true });
@@ -287,6 +289,8 @@ const camps = JSON.parse(await readFile(`${dataDir}/campgrounds.json`, "utf8"));
 // 운영 기록(/log/) 및 탐색 화면을 위한 경량 캠핑장 ID-이름 사전 생성 (28MB campgrounds.json 대체)
 const campNames = Object.fromEntries(camps.filter((c) => c.id && c.name).map((c) => [c.id, c.name]));
 const campNamesJson = JSON.stringify(campNames);
+await mkdir(`${rootOut}admin`, { recursive: true });
+await writeFile(`${rootOut}admin/camp-names.json`, campNamesJson);
 await mkdir(`${rootOut}log`, { recursive: true });
 await writeFile(`${rootOut}log/camp-names.json`, campNamesJson);
 await writeFile(`${out}data/camp-names.json`, campNamesJson);

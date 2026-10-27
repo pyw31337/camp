@@ -1,0 +1,453 @@
+{
+  "version": 1,
+  "updated_at": "2026-10-27",
+  "count": 64,
+  "tours": {
+    "76": {
+      "url": "http://campmap.co.kr/vr/supia",
+      "blog": "https://blog.naver.com/dosz/221886969009",
+      "tags": "#놀이 #아이들 #봄 #벚꽃 #공원 #공룡 #추천",
+      "source": "campmap",
+      "name": "가산수피아 캠핑장"
+    },
+    "267": {
+      "url": "http://campmap.co.kr/vr/sjacamping",
+      "blog": "https://blog.naver.com/dosz/223415539791",
+      "tags": "#바다뷰 #상족암",
+      "source": "campmap",
+      "name": "상족암오토캠핑장"
+    },
+    "549": {
+      "url": "http://campmap.co.kr/vr/riverside/",
+      "blog": "https://blog.naver.com/dosz/222659720448",
+      "tags": "#대구근교 #수상레저 #넓은사이트",
+      "source": "campmap",
+      "name": "강변오토캠핑장(구지)"
+    },
+    "648": {
+      "url": "http://campmap.co.kr/vr/blueschool",
+      "blog": "https://blog.naver.com/dosz/223018623127",
+      "tags": "#체험 #글램핑 #작은데크 #경산근교",
+      "source": "campmap",
+      "name": "늘푸른체험학교"
+    },
+    "698": {
+      "url": "http://campmap.co.kr/vr/binggisil/",
+      "blog": "https://blog.naver.com/dosz/222936781938",
+      "tags": "#깡통열차 #계곡",
+      "source": "campmap",
+      "name": "달빛고운병곡캠핑장(빙기실마을)"
+    },
+    "826": {
+      "url": "https://campmap.co.kr/vr/doraejae/",
+      "blog": "https://blog.naver.com/dosz/223860890441",
+      "tags": "#뷰맛집 #펜션",
+      "source": "campmap",
+      "name": "도래재별빛마을캠핑장"
+    },
+    "1141": {
+      "url": "http://campmap.co.kr/vr/mjdcamp",
+      "blog": "https://blog.naver.com/dosz/222706834441",
+      "tags": "#가격저렴 #장각폭포 #데크 #카라반",
+      "source": "campmap",
+      "name": "문장대오토캠핑장"
+    },
+    "1318": {
+      "url": "http://campmap.co.kr/vr/starcamp/",
+      "blog": "https://blog.naver.com/dosz/222302519057",
+      "tags": "#수영장 #카라반 #계곡 #놀이시설",
+      "source": "campmap",
+      "name": "별고을오토캠핑장"
+    },
+    "1534": {
+      "url": "http://campmap.co.kr/vr/zimakcamp/",
+      "blog": "https://blog.naver.com/dosz/222239447448",
+      "tags": "#비수기4만 / 성수기5만 / 연박할인",
+      "source": "campmap",
+      "name": "지막계곡캠핑장"
+    },
+    "1719": {
+      "url": "http://campmap.co.kr/vr/sobak",
+      "blog": "https://blog.naver.com/dosz/222113902353",
+      "tags": "#계곡 #방방이 #물놀이 #힐링 #주변관광 #데크",
+      "source": "campmap",
+      "name": "소백산 오토캠핑장"
+    },
+    "1875": {
+      "url": "http://campmap.co.kr/vr/forestjoa",
+      "blog": "https://blog.naver.com/dosz/223262424385",
+      "tags": "#방방이 #애견동반 #수영장 #계곡 #단풍",
+      "source": "campmap",
+      "name": "숲이조아캠핑장"
+    },
+    "1970": {
+      "url": "http://campmap.co.kr/vr/beautifulcamp",
+      "blog": "https://blog.naver.com/dosz/221994402205",
+      "tags": "#바다뷰 #펜션 #낚시",
+      "source": "campmap",
+      "name": "아름다운캠프"
+    },
+    "2119": {
+      "url": "http://campmap.co.kr/vr/icecamp",
+      "blog": "https://blog.naver.com/dosz/222995937785",
+      "tags": "#산뷰 #깔끔 #가족샤워실",
+      "source": "campmap",
+      "name": "얼음골캠핑장"
+    },
+    "2616": {
+      "url": "http://campmap.co.kr/vr/gocf/",
+      "blog": "https://blog.naver.com/dosz/223074034220",
+      "tags": "#캠핑박람회 #캠핑페어",
+      "source": "campmap",
+      "name": "자라섬 gocf"
+    },
+    "2700": {
+      "url": "http://campmap.co.kr/vr/jeongyang/",
+      "blog": "https://blog.naver.com/dosz/222888914748",
+      "tags": "#강뷰 #대형캠핑장 #놀이터",
+      "source": "campmap",
+      "name": "정양레포츠공원 오토캠핑장"
+    },
+    "2917": {
+      "url": "http://campmap.co.kr/vr/cheongsanri",
+      "blog": "https://blog.naver.com/dosz/221621505246",
+      "tags": "#갯벌 #바다 #데크 #체험",
+      "source": "campmap",
+      "name": "청산리오토캠핑장"
+    },
+    "3432": {
+      "url": "http://campmap.co.kr/vr/soop",
+      "blog": "https://blog.naver.com/dosz/222947330320",
+      "tags": "#물놀이장 #놀이터 #산속 #겨울캠핑",
+      "source": "campmap",
+      "name": "함양 숲속애캠핑장"
+    },
+    "3458": {
+      "url": "http://campmap.co.kr/vr/sunflower/",
+      "blog": "https://blog.naver.com/dosz/222911808153",
+      "tags": "#계곡 #펜션 #단풍",
+      "source": "campmap",
+      "name": "해바라기캠핑장"
+    },
+    "3487": {
+      "url": "http://campmap.co.kr/vr/hrimflower",
+      "blog": "https://blog.naver.com/dosz/222086181930",
+      "tags": "#숲속 #계곡 #여름 #펜션",
+      "source": "campmap",
+      "name": "향림오토캠핑장"
+    },
+    "6756": {
+      "url": "http://campmap.co.kr/vr/nolsite",
+      "blog": "https://blog.naver.com/dosz/221925364297",
+      "tags": "#매월 3일 오전10시부터 다음달 예약가능",
+      "source": "campmap",
+      "name": "놀터캠핑장"
+    },
+    "6765": {
+      "url": "http://campmap.co.kr/vr/dalseocamp",
+      "blog": "https://blog.naver.com/dosz/221272254987",
+      "tags": "#야경 #카라반 #데크",
+      "source": "campmap",
+      "name": "달서별빛캠프"
+    },
+    "6856": {
+      "url": "http://campmap.co.kr/vr/ctree",
+      "blog": "https://blog.naver.com/dosz/222318728064",
+      "tags": "#숲속그늘 #계곡 #물놀이 #방방이 #글램핑",
+      "source": "campmap",
+      "name": "참나무숲캠핑장"
+    },
+    "6946": {
+      "url": "http://campmap.co.kr/vr/chongbori",
+      "blog": "https://blog.naver.com/dosz/223136684088",
+      "tags": "#섬 #바다 #씨워킹 #낚시",
+      "source": "campmap",
+      "name": "욕지도 청보리 캠프"
+    },
+    "6977": {
+      "url": "http://campmap.co.kr/vr/camp_solbat",
+      "blog": "https://blog.naver.com/dosz/222557101070",
+      "tags": "#노지 #동산계곡 #평상",
+      "source": "campmap",
+      "name": "군위솔밭야영장"
+    },
+    "6987": {
+      "url": "http://campmap.co.kr/vr/arirangcamp",
+      "blog": "https://blog.naver.com/dosz/223201665279",
+      "tags": "#넓은사이트 #대형캠핑장",
+      "source": "campmap",
+      "name": "밀양 아리랑오토캠핑장"
+    },
+    "7069": {
+      "url": "http://campmap.co.kr/vr/andante",
+      "blog": "https://blog.naver.com/dosz/223085261529",
+      "tags": "#대형캠핑장 #수영장 #숯가마 #데크",
+      "source": "campmap",
+      "name": "캠프안단테"
+    },
+    "7499": {
+      "url": "http://campmap.co.kr/vr/happycamping",
+      "blog": "https://blog.naver.com/dosz/221862194069",
+      "tags": "#호수뷰 #리버뷰 #강 #낚시 #방방이",
+      "source": "campmap",
+      "name": "해피캠핑장"
+    },
+    "7599": {
+      "url": "https://www.campmap.co.kr/vr/tenzalnam/",
+      "blog": null,
+      "tags": "#방갈로 #신생캠핑장",
+      "source": "campmap",
+      "name": "텐잘남파크"
+    },
+    "7896": {
+      "url": "http://campmap.co.kr/vr/camp1004/",
+      "blog": "https://blog.naver.com/dosz/223128325373",
+      "tags": "#바다 #갯벌 #서해 #놀이방",
+      "source": "campmap",
+      "name": "천사섬 캠핑 글램핑"
+    },
+    "7901": {
+      "url": "https://www.campmap.co.kr/vr/campforet/",
+      "blog": "https://blog.naver.com/dosz/224422551424",
+      "tags": "#글램핑 #수영장 #계곡 #데크",
+      "source": "campmap",
+      "name": "캠프포레"
+    },
+    "7969": {
+      "url": "http://campmap.co.kr/vr/goun",
+      "blog": "https://blog.naver.com/dosz/223402910543",
+      "tags": "#저렴 #방갈로",
+      "source": "campmap",
+      "name": "고운마을캠핑장"
+    },
+    "8008": {
+      "url": "http://campmap.co.kr/vr/hosupark",
+      "blog": "https://blog.naver.com/dosz/223002674743",
+      "tags": "#호수뷰 #벚꽃",
+      "source": "campmap",
+      "name": "지리산호수공원 캠핑장"
+    },
+    "8041": {
+      "url": "http://campmap.co.kr/vr/icevalley/",
+      "blog": "https://blog.naver.com/dosz/223252276204",
+      "tags": "#저렴한가격 #넓은사이트 #데크 #카라반",
+      "source": "campmap",
+      "name": "빙계얼음골야영장"
+    },
+    "8202": {
+      "url": "https://www.campmap.co.kr/vr/beeryongcamp/",
+      "blog": "https://blog.naver.com/dosz/224343913872",
+      "tags": "#숲속 #빠른입실 #데크 #펜션",
+      "source": "campmap",
+      "name": "양평숲 비룡캠핑장"
+    },
+    "100210": {
+      "url": "http://campmap.co.kr/vr/gaewool/",
+      "blog": "https://blog.naver.com/dosz/222215561637",
+      "tags": "#계곡 #고양이",
+      "source": "campmap",
+      "name": "개울민박캠핑장"
+    },
+    "100223": {
+      "url": "http://campmap.co.kr/vr/80camp",
+      "blog": "https://blog.naver.com/dosz/223221739484",
+      "tags": "#대구근교 #팔공산",
+      "source": "campmap",
+      "name": "팔공마루오토캠핑앤캠프닉"
+    },
+    "100273": {
+      "url": "http://campmap.co.kr/vr/forest",
+      "blog": "https://blog.naver.com/dosz/222682624450",
+      "tags": "#산뷰 #개별샤워실 #계곡 #수영장",
+      "source": "campmap",
+      "name": "숲에안기다"
+    },
+    "100432": {
+      "url": "http://campmap.co.kr/vr/rainbow/2022",
+      "blog": "https://blog.naver.com/dosz/222845486799",
+      "tags": "#계곡 #수영장 #깡통열차",
+      "source": "campmap",
+      "name": "무지개 오토캠핑장"
+    },
+    "100455": {
+      "url": "http://campmap.co.kr/vr/j903",
+      "blog": "https://blog.naver.com/dosz/223113004081",
+      "tags": "#방방이 #깡통열차 #이벤트 #뷰",
+      "source": "campmap",
+      "name": "지리산가는길 903"
+    },
+    "100458": {
+      "url": "http://campmap.co.kr/vr/meabongcamp",
+      "blog": "https://blog.naver.com/dosz/223621795635",
+      "tags": "#숲속 #계곡 #타프존",
+      "source": "campmap",
+      "name": "매봉힐링캠핑장"
+    },
+    "100459": {
+      "url": "http://campmap.co.kr/vr/hawangsan",
+      "blog": "https://blog.naver.com/dosz/223219976117",
+      "tags": "#깔끔한캠핑장",
+      "source": "campmap",
+      "name": "화왕산오토캠핑장"
+    },
+    "100526": {
+      "url": "http://campmap.co.kr/vr/raonvalley",
+      "blog": "https://blog.naver.com/dosz/222770730250",
+      "tags": "#계곡 #신설 #물놀이",
+      "source": "campmap",
+      "name": "제천 라온밸리캠핑장"
+    },
+    "100538": {
+      "url": "http://campmap.co.kr/vr/namfores",
+      "blog": "https://blog.naver.com/dosz/223336170155",
+      "tags": "#방방이 #소규모",
+      "source": "campmap",
+      "name": "남해포레스 오토캠핑장"
+    },
+    "100692": {
+      "url": "http://campmap.co.kr/vr/aflower/",
+      "blog": "https://blog.naver.com/dosz/222985474591",
+      "tags": "#신설캠핑장 #깔끔 #펜션#반려동물",
+      "source": "campmap",
+      "name": "풀꽃이랑 캠핑장"
+    },
+    "100696": {
+      "url": "https://campmap.co.kr/vr/jackson/",
+      "blog": "https://blog.naver.com/dosz/223704820725",
+      "tags": "#글램핑장 #애경동반 #반려견 #풍경 #잔디운동장",
+      "source": "campmap",
+      "name": "잭슨글램핑"
+    },
+    "100826": {
+      "url": "https://www.campmap.co.kr/vr/again/",
+      "blog": "https://blog.naver.com/dosz/223877790369",
+      "tags": "#아이들놀거리 #계곡",
+      "source": "campmap",
+      "name": "어게인캠핑장"
+    },
+    "100909": {
+      "url": "http://campmap.co.kr/vr/healingoreum",
+      "blog": "https://blog.naver.com/dosz/222025318651",
+      "tags": "#수영장 #펜션 #데크",
+      "source": "campmap",
+      "name": "힐링오름캠핑장"
+    },
+    "101148": {
+      "url": "http://campmap.co.kr/vr/camping-land",
+      "blog": "https://blog.naver.com/dosz/223342718230",
+      "tags": "#노천탕 #수영장 #카라반글램핑",
+      "source": "campmap",
+      "name": "옥수온천 캠핑랜드"
+    },
+    "101247": {
+      "url": "https://campmap.co.kr/vr/jakgeum/",
+      "blog": "https://blog.naver.com/dosz/223915277435",
+      "tags": "#바다뷰 #데크 #소규모 #카페 #데크 #소규모 #카페",
+      "source": "campmap",
+      "name": "작금캠핑장"
+    },
+    "101283": {
+      "url": "http://campmap.co.kr/vr/sanandhoban/",
+      "blog": "https://blog.naver.com/dosz/222671917456",
+      "tags": "#2021신규 #합천호뷰",
+      "source": "campmap",
+      "name": "산앤호반캠핑장"
+    },
+    "101305": {
+      "url": "http://campmap.co.kr/vr/changbau/",
+      "blog": "https://blog.naver.com/dosz/223037007975",
+      "tags": "#바다 #바다뷰 #신설캠핑장",
+      "source": "campmap",
+      "name": "창바우마을 해송피크닉장"
+    },
+    "101311": {
+      "url": "https://campmap.co.kr/vr/sol",
+      "blog": "https://blog.naver.com/dosz/223899681587",
+      "tags": "#단체캠핑 #대관",
+      "source": "campmap",
+      "name": "sol 캠핑"
+    },
+    "101375": {
+      "url": "https://www.campmap.co.kr/vr/magpiecamping",
+      "blog": "https://blog.naver.com/dosz/224374882330",
+      "tags": "#계곡 #수영장 #소규모캠핑 #개별샤워실",
+      "source": "campmap",
+      "name": "아지트캠핑장"
+    },
+    "101383": {
+      "url": "http://campmap.co.kr/vr/reason/",
+      "blog": "https://blog.naver.com/dosz/223466249289",
+      "tags": "#신설캠핑장 #놀이방 #수영장 #산뷰",
+      "source": "campmap",
+      "name": "이유캠핑장"
+    },
+    "101423": {
+      "url": "http://campmap.co.kr/vr/camp_geoje/",
+      "blog": "https://blog.naver.com/dosz/222695848527",
+      "tags": "#스탤스차박 #취사금지 #야영금지 #화장실",
+      "source": "campmap",
+      "name": "[차박] 구조라해수욕장 수변공원"
+    },
+    "101849": {
+      "url": "http://campmap.co.kr/vr/mjcamp",
+      "blog": "https://blog.naver.com/dosz/222401905639",
+      "tags": "#물놀이 #술속",
+      "source": "campmap",
+      "name": "무주 수목원캠핑장"
+    },
+    "101962": {
+      "url": "https://campmap.co.kr/vr/namparang/",
+      "blog": "https://blog.naver.com/dosz/223714374977",
+      "tags": "#펜션 #바다뷰 #한적",
+      "source": "campmap",
+      "name": "남파랑캠핑장 스테이"
+    },
+    "102005": {
+      "url": "http://campmap.co.kr/vr/bonghwa",
+      "blog": "https://blog.naver.com/dosz/222156614059",
+      "tags": "#산 #놀이터 #깨끗한시설 #추천",
+      "source": "campmap",
+      "name": "청량산캠핑장"
+    },
+    "102072": {
+      "url": "http://campmap.co.kr/vr/camp_pohang_odohang",
+      "blog": "https://blog.naver.com/dosz/222426446495",
+      "tags": "#차박 #노지 #동해 #바다 #화장실",
+      "source": "campmap",
+      "name": "[차박] 포항 오도항"
+    },
+    "102119": {
+      "url": "http://campmap.co.kr/vr/aircamp",
+      "blog": "https://blog.naver.com/dosz/222348930022",
+      "tags": "#뷰좋은곳 #운무 #추천 #산정상 #해발600m",
+      "source": "campmap",
+      "name": "바람이좋은저녁"
+    },
+    "102234": {
+      "url": "http://campmap.co.kr/vr/egpark",
+      "blog": "https://blog.naver.com/dosz/223616903392",
+      "tags": "#놀이시설 #신설캠핑장 #펜션",
+      "source": "campmap",
+      "name": "이지파크 캠핑장"
+    },
+    "102348": {
+      "url": "http://campmap.co.kr/vr/sunvillage",
+      "blog": "https://blog.naver.com/dosz/222618459184",
+      "tags": "#바다뷰 #펜션",
+      "source": "campmap",
+      "name": "썬빌리지 오토캠핑장"
+    },
+    "102375": {
+      "url": "https://roundpic.io/#/vt/35a88ad196",
+      "source": "camp360v",
+      "name": "또올래캠핑장"
+    },
+    "park-47820-00002-q482e": {
+      "url": "http://campmap.co.kr/vr/cheongdorailbike",
+      "blog": "https://blog.naver.com/dosz/221770382113",
+      "tags": "#공원 #놀이 #레일바이크 #데크",
+      "source": "campmap",
+      "name": "청도군 자전거공원캠핑장"
+    }
+  }
+}

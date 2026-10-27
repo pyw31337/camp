@@ -1,0 +1,201 @@
+{
+  "version": 1,
+  "updated_at": "2026-10-27",
+  "source": "https://gocamping.or.kr/camp/dump/list.do",
+  "campgrounds": [
+    {
+      "id": "217",
+      "name": "별자리 캠핑랜드",
+      "address": "경상북도 경주시 반구대로 3501-34 (배동)",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=217"
+    },
+    {
+      "id": "434",
+      "name": "그린스톤오토캠핑장&펜션",
+      "address": "경상북도 문경시 완장길 103-63",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=434"
+    },
+    {
+      "id": "814",
+      "name": "무주눈꽃 덕유캠프",
+      "address": "전북특별자치도 무주군 설천면 구천동로 1262-4",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=814"
+    },
+    {
+      "id": "1042",
+      "name": "매봉힐링캠프",
+      "address": "강원특별자치도 원주시 신림면 창촌길 132",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=1042"
+    },
+    {
+      "id": "1065",
+      "name": "가평명지산카라반글램핑",
+      "address": "경기도 가평군 북면 가화로 2932-23",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=1065"
+    },
+    {
+      "id": "1112",
+      "name": "무주구천동캠핑장(제제캠프)",
+      "address": "전북특별자치도 무주군 설천면 원심곡1길 11",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=1112"
+    },
+    {
+      "id": "1668",
+      "name": "설악동자동차야영장",
+      "address": "강원특별자치도 속초시 청봉로 25 (설악동)",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=1668"
+    },
+    {
+      "id": "1698",
+      "name": "세종 합강캠핑장",
+      "address": "세종특별자치시 태산로 329 (세종동)",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=1698"
+    },
+    {
+      "id": "2833",
+      "name": "진안국제 캠핑장",
+      "address": "전북특별자치도 진안군 용담면 와룡길 165-6",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=2833"
+    },
+    {
+      "id": "6795",
+      "name": "목사골야영장",
+      "address": "전남 곡성군 목사동면 용봉길 91-109",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=6795"
+    },
+    {
+      "id": "6951",
+      "name": "캡틴 카라반 글램핑",
+      "address": "경기도 가평군 상면 청군로 776-22",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=6951"
+    },
+    {
+      "id": "7132",
+      "name": "담양금성산성 오토캠핑장",
+      "address": "전남 담양군 금성면 불로리길 135-88",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=7132"
+    },
+    {
+      "id": "7152",
+      "name": "좋은외박캠핑장",
+      "address": "전북특별자치도 부안군 변산면 격포로 453-10",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=7152"
+    },
+    {
+      "id": "7160",
+      "name": "산으로간 니모 캠핑장",
+      "address": "경기도 가평군 조종면 연인산로 670-321",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=7160"
+    },
+    {
+      "id": "7893",
+      "name": "세울터 오토캠핑장 & 펜션",
+      "address": "충청남도 홍성군 서부면 홍남서로362번길 46",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=7893"
+    },
+    {
+      "id": "7907",
+      "name": "해미읍성역사캠핑장",
+      "address": "충청남도 서산시 해미면 동문1길 40",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=7907"
+    },
+    {
+      "id": "100290",
+      "name": "큰돌 캠핑장",
+      "address": "경기도 포천시 관인면 뗏마루길 128-26",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=100290"
+    },
+    {
+      "id": "100545",
+      "name": "버드글램핑",
+      "address": "전북특별자치도 군산시 강변로 29 (금암동)",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=100545"
+    },
+    {
+      "id": "100879",
+      "name": "어은돌캠프캠프",
+      "address": "충청남도 태안군 소원면 모항파도로 398-84",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=100879"
+    },
+    {
+      "id": "101143",
+      "name": "캠프어게인",
+      "address": "경상북도 경주시 내남면 화계로 418-4",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=101143"
+    },
+    {
+      "id": "101248",
+      "name": "배나무꽃 캠핑장",
+      "address": "경기도 파주시 법원읍 술이홀로1333번길 128",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=101248"
+    },
+    {
+      "id": "101422",
+      "name": "유포리아 캠핑장",
+      "address": "강원특별자치도 평창군 봉평면 수림대길 343",
+      "url": "https://gocamping.or.kr/bsite/camp/info/read.do?c_no=101422"
+    }
+  ],
+  "gas_stations": [
+    {
+      "name": "희망등대(금광)",
+      "address": "전북 군산시 번영로 202 (조촌동)",
+      "desc": "군산시청과 월명종합경기장 중간에 있는 주유소",
+      "url": "https://gocamping.or.kr/camp/dump/read.do?ds_idx=11"
+    },
+    {
+      "name": "금성",
+      "address": "전남 담양군 금성면 담순로 43",
+      "desc": "메타프로방스에서 가까운 경관좋은 주유소",
+      "url": "https://gocamping.or.kr/camp/dump/read.do?ds_idx=10"
+    },
+    {
+      "name": "열린",
+      "address": "경북 포항시 남구 연일읍 연일로 168",
+      "desc": "형산강에서 가까운 여유로운 주유소",
+      "url": "https://gocamping.or.kr/camp/dump/read.do?ds_idx=9"
+    },
+    {
+      "name": "새화랑",
+      "address": "경북 경주시 초당길 103 (동천동)",
+      "desc": "보문단지 가는 길. 정비소가 함께 있는 주유소",
+      "url": "https://gocamping.or.kr/camp/dump/read.do?ds_idx=8"
+    },
+    {
+      "name": "대구현대",
+      "address": "대구 북구 유통단지로13길 38 (산격동)",
+      "desc": "EXCO에 인접한 유통단지내 주유소",
+      "url": "https://gocamping.or.kr/camp/dump/read.do?ds_idx=7"
+    },
+    {
+      "name": "제천ic주유소(조양)",
+      "address": "충북 제천시 내토로 333 (천남동)",
+      "desc": "제천시청 앞에 있는 넓은 공간의 주유소",
+      "url": "https://gocamping.or.kr/camp/dump/read.do?ds_idx=6"
+    },
+    {
+      "name": "봉담셀프",
+      "address": "경기 화성시 봉담읍 삼천병마로 862",
+      "desc": "남봉담 IC에 인접한 시설 좋은 주유소",
+      "url": "https://gocamping.or.kr/camp/dump/read.do?ds_idx=4"
+    },
+    {
+      "name": "샘터",
+      "address": "강원 강릉시 연곡면 동해대로 4357",
+      "desc": "영진해변 카페거리에 인접한 7번 국도변 주유소",
+      "url": "https://gocamping.or.kr/camp/dump/read.do?ds_idx=3"
+    },
+    {
+      "name": "인제현대",
+      "address": "강원 인제군 인제읍 설악로 2352",
+      "desc": "설악산 가는길. 인제 합강장공원에 인접한 주유소",
+      "url": "https://gocamping.or.kr/camp/dump/read.do?ds_idx=2"
+    },
+    {
+      "name": "동해(양양)",
+      "address": "강원 양양군 양양읍 동해대로 2853",
+      "desc": "낙산해변에서 양양ic 가는 길목 주유소",
+      "url": "https://gocamping.or.kr/camp/dump/read.do?ds_idx=1"
+    }
+  ]
+}

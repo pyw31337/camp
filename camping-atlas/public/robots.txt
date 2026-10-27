@@ -1,0 +1,30 @@
+# 렛츠캠핑 (모여라캠핑) 로봇 배제 표준 (robots.txt)
+# 본 서비스의 모든 콘텐츠와 데이터에 대한 자동화된 프로그램(봇, 크롤러, 스크래퍼)을 통한 무단 수집 및 AI 모델 학습을 엄격히 금지합니다.
+
+# 1. AI 크롤러 및 무단 데이터 수집 봇 차단 (Full Disallow)
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-Web
+User-agent: anthropic-ai
+User-agent: CCBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Meta-ExternalAgent
+User-agent: Bytespider
+User-agent: PerplexityBot
+User-agent: Amazonbot
+User-agent: PetalBot
+User-agent: Scrapy
+User-agent: Diffbot
+Disallow: /
+
+# 2. 일반 검색엔진 (페이지 탐색 허용, 원시 데이터셋 및 내부 경로 차단)
+User-agent: *
+Allow: /
+Disallow: /explore/data/
+Disallow: /data/
+Disallow: /media/
+Disallow: /saves-log/
+
+Sitemap: https://pyw31337.github.io/camp/sitemap.xml

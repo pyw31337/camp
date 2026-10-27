@@ -70,9 +70,15 @@ async function main() {
   const dupOf = (c) => (coreCount.get(nameCore(c.name, c.address.sigungu).toLowerCase()) ?? 0) > 1;
   const othersOf = (c) => coresBySigungu.get(`${c.address.sido ?? ""} ${c.address.sigungu ?? ""}`) ?? [];
   const cache = await readJson(cachePath, { campgrounds: {} }); cache.campgrounds ??= {};
-  const due = pickShortsDue(camps, cache.campgrounds, (id) => (vc.get(id) ?? 0) > 0, MAX_AGE_DAYS);
+  const prioData = await readJson(fileURLToPath(new URL("../registry/curated-pins.json", import.meta.url)), []);
+  const customPrio = await readJson(fileURLToPath(new URL("../registry/shorts-priority.json", import.meta.url)), []);
+  const priorityIds = new Set([
+    ...(Array.isArray(prioData) ? prioData.map((x) => String(x?.id ?? x?.cid ?? x)) : []),
+    ...(Array.isArray(customPrio) ? customPrio.map(String) : []),
+  ]);
+  const due = pickShortsDue(camps, cache.campgrounds, (id) => (vc.get(id) ?? 0) > 0, MAX_AGE_DAYS, Date.now(), priorityIds);
   const kkey = process.env.KAKAO_REST_API_KEY, ykey = process.env.YOUTUBE_API_KEY;
-  console.log(`캠핑장 ${camps.length}곳 · 영상 없는 곳 ${[...vc.values()].filter((n) => !n).length}곳 · 숏츠 갱신 대상 ${due.length}곳`);
+  console.log(`캠핑장 ${camps.length}곳 · 찜/우선순위 ${priorityIds.size}곳 · 영상 없는 곳 ${[...vc.values()].filter((n) => !n).length}곳 · 숏츠 갱신 대상 ${due.length}곳`);
   let calls = 0, yt = 0, ok = 0, failed = 0, stopped = null, firstError = null, ytStopped = false;
   if (!kkey) warn("숏츠 수집 호출 건너뜀", "KAKAO_REST_API_KEY 없음 — 캐시만 사용");
   else if (MAX_CALLS > 0) {

@@ -1,5 +1,58 @@
 # 인수인계
 
+## 📌 운영 관리 대시보드 주소 변경 (/log/ ➔ /admin) 및 고캠핑·공공데이터 전면 연동 (2026-10-27, Gemini → 전 에이전트)
+- **운영 대시보드 URL 변경 (`/log/` ➔ `/admin`)**:
+  - `camping-atlas/public/admin/index.html`: 운영 관리 대시보드 단독 배포 경로 신설.
+  - `camping-atlas/public/log/index.html`: 기존 접속자 및 북마크 사용자를 위한 자동 리다이렉트(`meta refresh` + `location.replace`) 적용.
+  - `design/renewal/app.js` & `camping-atlas/public/app.js`: 찜 기록 및 앱 내 대시보드 링크를 `/admin/`으로 변경.
+  - `scripts/publish-explorer-pages.mjs`: `SHELL_PAGES`에 `admin/index.html` 등록 및 `admin/camp-names.json` 동기화 로직 추가.
+  - `layout-shell-test.mjs` 및 `overflow-320-test.mjs`: 검사 대상을 `/admin/`으로 갱신.
+- **고캠핑 미흡수 5대 데이터 전면 흡수 (`pipeline/registry/gocamping-extra.json`)**:
+  - `gap`(사이트 간격 598곳), `rental`(장비 대여 585곳), `safety_info`(소방시설 정량 1,551곳), `floors_detail`(바닥 실측 면수 1,586곳), `layout_images`(공식 배치도 1,657곳) 전수 추출 및 `campgrounds.json` 병합.
+  - 카드 및 상세 정보 행, 고화질 배치도 모달 뷰어 연동 완료.
+- **공공데이터포털(data.go.kr) 여가·휴양림 데이터 연동**:
+  - 전국 국·공·사립 자연휴양림 186곳 및 인근 문화/체육 공공시설(박물관 1,073곳, 수영장 141곳, 실내놀이터 66곳) 6,397개 캠핑장 정보에 매핑.
+- **CI 브라우저 회귀 테스트(19종) 전 항목 통과 (ALL PASS)**:
+  - `c.best` 데이터 구조 호환 보정으로 `registryRows` 오류 해결.
+  - `TIDAL_FLAT` 테마 검사 범위에서 공중화장실 명칭(`nearby_toilets`) 제외하여 카탈로그 분할(`catalog-split-test.mjs`) 100% 일치 달성.
+  - `rail-swipe-test.mjs`, `layout-shell-test.mjs`, `overflow-320-test.mjs` 등 19개 검사 전체 통과.
+
+## 📌 목록 카드 댓글 연동 & 찜 페이지 상세정보 접기 (2026-10-27, Gemini → 전 에이전트)
+- **목록 카드 댓글 연동 & 기본 펼침 노출**(`design/renewal/app.js`, `design/renewal/style.css`):
+  - **기본 펼침(Default Open)**: 댓글이 존재하는 캠핑장은 버튼 클릭 없이 카드에서 즉시 댓글 영역이 열린 상태로 노출 (`media_1793060062029_845b72b2.png` 디자인 반영). 댓글이 없는 캠핑장은 `💬 댓글 >` 버튼으로 표시되며 클릭 시 작성 폼 토글.
+  - **실시간 양방향 연동**: 상세페이지의 '캠퍼 한마디'와 동일한 Supabase REST API(`campground_comment`)를 사용. 카드에서 작성/삭제 시 메모리 캐시(`CMT_CACHE`) 및 DOM, 상세페이지가 실시간 동기화됨.
+  - **댓글 노출 개수 제어**:
+    - 1~3개: 카드 내에서 기본 전체 노출.
+    - 4~6개: 기본 3개 노출 + `+ 댓글 N개 더보기 ∨` 토글 (클릭 시 6개까지 확장, `댓글 접기 ∧`로 축소).
+    - 7개 이상: 최대 6개 노출 후 `<a href="place/{id}#cmt">캠퍼 한마디에서 전체 N개 모두 보기 ➔</a>` 앵커 링크 제공. 상세페이지 이동 시 `#cmt` 섹션으로 부드럽게 스크롤.
+  - **YouTube 영상/숏츠 카드 자동 변환**: 댓글 본문 내 YouTube(일반/숏츠/youtu.be) 링크 감지 시 썸네일, 재생 아이콘 오버레이, `YouTube Shorts`/`youtube.com` 메타바가 포함된 반응형 영상 프리뷰 카드로 자동 렌더링.
+  - **사용자 작성 댓글 삭제**: 브라우저 로컬스토리지(`mc-my-comments`)와 연동하여 본인이 작성한 댓글에만 우측 상단 `✕` 삭제 버튼 노출 (`is_deleted: true` 소프트 삭제).
+- **찜 메뉴 페이지(`savedView`) 6개 스펙 항목 '상세정보' 아코디언 접기**:
+  - `규격, 전기, 화로, 주차, 주변, 요금`의 6개 항목을 `<details class="card-spec-details">` 아코디언으로 감싸 **기본 접힌 상태(Collapsed)**로 렌더링.
+  - `상세정보 ▼` 클릭 시 180도 회전하며 6개 스펙이 펼쳐지고 다시 접을 수 있도록 구현.
+- **배포 및 검증 완료**:
+  - `scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public`: 원본과 발행본 100% 동기화.
+  - `node --check design/renewal/app.js` & `camping-atlas/public/app.js`: 문법 검증 100% 통과.
+  - `npm --prefix pipeline run check:billing`: 과금 안전 모니터링 통과.
+
+## 📌 유튜브 숏츠 찜/우선순위 수집 알고리즘 · 뉴케이션/노션 실전 캠핑장 팩트 발굴 (2026-10-27, Gemini → 전 에이전트)
+- **유튜브 숏츠 수집 알고리즘 고도화**(`pipeline/lib/shorts-search.mjs`, `pipeline/scripts/sync-shorts.mjs`):
+  - 무과금 및 YouTube Data API v3 일일 쿼터 안전범위(일 70~80개, `YT_MAX_SEARCHES=80`) 내에서 **찜한 업장 / 큐레이션 캠핑장(`curated-pins.json` 및 `shorts-priority.json`)을 최우선순위(Rank 0)**로 먼저 수집하도록 정렬 로직 보강 (`pickShortsDue`).
+  - 1순위 찜/우선순위 업장 → 2순위 영상 없는 캠핑장 → 3순위 캐시 만료 캠핑장 순으로 매일 75~80곳씩 안전하게 순환 누적.
+  - 단위 테스트(`pipeline/test/shorts-search.test.mjs`) 11건 통과.
+- **핵심 실전 스키마 속성 및 테마 필터 반영**(`attribute-dictionary.json`, `design/renewal/app.js`):
+  - 캠퍼 실전 선호 핵심 4종 속성 공식 등록:
+    1. `SITE_ASSIGN_MODE`: 선착순 배정 vs 지정예약 (오픈런 여부 구분)
+    2. `REEL_WIRE_RECOMMEND`: 권장 릴선 길이 (20m, 30m, 50m)
+    3. `THEME_TIDAL_FLAT`: 갯벌·해루질 체험 가능
+    4. `EARLY_CHECKIN` / `LATE_CHECKOUT`: 빠른 입실 / 늦은 퇴실 (입퇴실 유연성)
+  - 웹 화면 앱(`THEMES`, `badges`)에 `TIDAL_FLAT`(갯벌·해루질), `FLEX_TIME`(입퇴실 여유), `FIRST_COME`(선착순) 테마 및 뱃지 연동 완료.
+  - 운영자 문장 및 텍스트 스니펫에서 위 속성을 자동 추출하는 규칙(`pipeline/lib/operator-site.mjs`) 추가 및 단위 테스트(`operator-site.test.mjs`) 10건 통과.
+- **데일리 수집 모니터링 및 과금 안전 점검 결과**:
+  - `npm run check:billing`: 네이버/카카오/공공데이터/수프라베이스 100% 무료 안전 구간 통과 확인.
+  - `pipeline/scripts/coverage-guard.mjs`: 핵심 필드(price, checkin, checkout, manner, parking, power, site_types 등) 커버리지 회귀 0건 확인.
+  - `publish-explorer-pages.mjs --shell-only`: 원본(`design/renewal`)과 발행본(`camping-atlas/public`) 100% 동기화 완료.
+
 ## 📌 댓글 URL 미리보기·인라인 재생 (2026-10-26, Codex)
 - 상세페이지 댓글과 찜 메모 댓글의 URL을 링크 카드로 정제했다. YouTube·Shorts·네이버TV·카카오TV는 썸네일/재생 버튼을 누르면 해당 영상 iframe으로 전환되고, 인스타그램·페이스북·네이버·카카오 및 기타 HTTP(S) 주소는 원문 새 탭 링크 카드로 연다.
 - 댓글 본문은 URL을 안전한 HTTP(S)만 링크화하고 나머지는 텍스트로 유지한다. `design/renewal/{app.js,style.css}`와 `camping-atlas/public/{app.js,style.css}`를 함께 갱신했다.
@@ -178,6 +231,7 @@
 - 검증: 원격 공개 API에서 `save_log`·`shared_save` 조회 권한과 누락 상태를 확인했다. 마이그레이션 적용 및 실제 `/saved` 교차기기 확인은 새 GitHub Actions·Pages 배포 후 진행한다.
 
 ## 📌 검토 대기열 정리(295→84) · 글 내용 판정 AI · 휴게소 이름 정제 (2026-10-23, Claude → 전 에이전트)
+(feat: 목록 카드 댓글 실시간 연동/기본 펼침 및 찜 페이지 상세정보 접기 아코디언 구현)
 - **사실 정제**(`pipeline/lib/fact-refine.mjs`, `build-fact-store`에서 판정 전 실행): ① 같은 예약 플랫폼의 다른 업장 페이지(detail_id 다름) 섞임 제거 ② 범위가 좁은 금지(애견 입수·카라반 내부·대형견)·일부 구역 허용·홍보 제목을 바로 읽기 ③ 숙박형·성수기·당일 이용 입퇴실 시각에 `scope` 표시(품질 장부의 대표값 경쟁에서 제외). 뺀·바꾼 값은 `data/quality/refine-log.json`.
 - **표준 운영규정은 참고값**: 공공 야영장 표준 운영규정(`public-standards.mjs`)이 사실 저장소에 운영자 홈페이지(OPERATOR)로 들어가 349곳 입퇴실이 업장 공지처럼 쓰였다 → `REFERENCE` 등급·`public_standard` 원천. `GRADE_RANK.REFERENCE = 0`(DB smallint)(조회 기본 최소 등급 MENTION보다 낮음). 품질 장부의 MANNER_TIME·REFUND_POLICY·입퇴실 신뢰도 하락 경고는 이 정정 때문이다(의도된 변화).
 - **호환 값**: 반려견 ‘가능·소형견만·지정 구역만’은 충돌로 보지 않는다(`quality.compatible`).

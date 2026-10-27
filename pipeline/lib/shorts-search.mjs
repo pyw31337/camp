@@ -116,10 +116,15 @@ export function fillShorts(videos = [], shorts = [], max = 12) {
   return { videos: [...(videos ?? []), ...add], added: add };
 }
 
-/** 대상 순서: 영상이 하나도 없는 곳 먼저, 그다음 숏츠가 없는 곳, 캐시가 오래된 순 */
-export function pickShortsDue(camps, cache, hasVideo, maxAgeDays = 30, now = Date.now()) {
+/** 대상 순서: ① 찜/우선순위 업장(priorityIds) 먼저, ② 영상이 하나도 없는 곳, ③ 그다음 숏츠가 없는 곳, ④ 캐시가 오래된 순 */
+export function pickShortsDue(camps, cache, hasVideo, maxAgeDays = 30, now = Date.now(), priorityIds = new Set()) {
   const age = (r) => (r?.fetched_at ? (now - Date.parse(r.fetched_at)) / 864e5 : Infinity);
+  const isPrio = (id) => priorityIds && (priorityIds.has?.(String(id)) || (Array.isArray(priorityIds) && priorityIds.includes(String(id))));
   return camps
     .filter((c) => !cache[c.id] || cache[c.id].v !== SHORTS_CACHE_VERSION || age(cache[c.id]) >= maxAgeDays)
-    .sort((a, b) => (hasVideo(a.id) ? 1 : 0) - (hasVideo(b.id) ? 1 : 0) || age(cache[b.id]) - age(cache[a.id]));
+    .sort((a, b) => {
+      const pDiff = (isPrio(b.id) ? 1 : 0) - (isPrio(a.id) ? 1 : 0);
+      if (pDiff !== 0) return pDiff;
+      return (hasVideo(a.id) ? 1 : 0) - (hasVideo(b.id) ? 1 : 0) || age(cache[b.id]) - age(cache[a.id]);
+    });
 }

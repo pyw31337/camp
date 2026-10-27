@@ -44,6 +44,12 @@ export function parseGocampingDetail(html, id) {
   const head = Object.fromEntries(dl(top).filter(([k]) => !/홈페이지|예약페이지/.test(k)));
   if (Object.keys(head).length) out.info = head;
   out.tagline = text(top.match(/<p[^>]*class="[^"]*(?:sub|summary|line)[^"]*"[^>]*>([\s\S]*?)<\/p>/)?.[1] ?? "") || undefined;
+  // 안전교육 이수 연도(최근 3년, 고캠핑 HTML span/sapn 태그)
+  const safetyYears = [...html.matchAll(/class="safety-year"[^>]*>(\d{4})/gi)].map((m) => Number(m[1]));
+  if (safetyYears.length) out.safety_years = [...new Set(safetyYears)].sort();
+  // 공식 성수기 기간
+  const peakMatch = html.match(/성수기\s*:\s*([^<\n\r]+)/i);
+  if (peakMatch) out.peak_season = text(peakMatch[1]);
   // 소개 전문 + 최종 수정일 + 소개 사진
   const intro = sect("캠핑장 소개</h2>", "캠핑장 시설정보");
   const introText = intro.match(/<p[^>]*>([\s\S]*?)<\/p>/g)?.map(text).filter((t) => t.length > 20 && !/최종 정보 수정일/.test(t)).join("\n");
@@ -52,7 +58,15 @@ export function parseGocampingDetail(html, id) {
   // 시설정보 표 전체
   const fac = sect("캠핑장 시설정보</h2>", "시설 사진");
   const facs = dl(fac).filter(([k, v]) => v && !/^주소$/.test(k) && !(k === "사이트 간격" && /^0\s*M$/i.test(v)));
-  if (facs.length) out.facilities = facs.map(([k, v]) => ({ k, v, items: /내부시설|주요시설|기타|부대시설|안전시설|대여|바닥형태/.test(k) ? list(v) : undefined }));
+  if (facs.length) {
+    out.facilities = facs.map(([k, v]) => ({ k, v, items: /내부시설|주요시설|기타|부대시설|안전시설|대여|바닥형태/.test(k) ? list(v) : undefined }));
+    const rent = facs.find(([k]) => k === "캠핑장비대여")?.[1];
+    if (rent && !/없음|불가/.test(rent)) out.rental_equipment = list(rent);
+    const gap = facs.find(([k]) => k === "사이트 간격")?.[1];
+    if (gap) out.site_gap_m = text(gap);
+    const safe = facs.find(([k]) => k === "안전시설현황")?.[1];
+    if (safe) out.safety_text = text(safe);
+  }
   // 시설 사진(원본 주소)
   const ph = sect("시설 사진</h2>", "이용안내");
   const photos = [...new Set([...ph.matchAll(/<img[^>]+src="([^"]*\/upload\/camp\/[^"]+)"/g)].map((m) => orig(m[1])))];

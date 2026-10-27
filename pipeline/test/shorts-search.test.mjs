@@ -45,6 +45,14 @@ test("대상 순서: 영상 없는 곳 먼저, 최근 캐시는 건너뜀", () =
   const cache = { c: { v: 1, fetched_at: "2026-10-20T00:00:00Z" } };
   assert.deepEqual(pickShortsDue(camps, cache, (id) => id === "a", 30, now).map((x) => x.id), ["b", "a"]);
 });
+test("대상 순서: 찜/우선순위(priorityIds) 업장이 영상 유무보다 최우선", () => {
+  const camps = [{ id: "a" }, { id: "b" }, { id: "c" }];
+  const now = Date.parse("2026-10-22T00:00:00Z");
+  const cache = {};
+  // 'a'는 영상이 있지만 찜(priorityIds)되어 있으면 영상 없는 'b'보다 먼저 수집되어야 함
+  const priority = new Set(["a"]);
+  assert.deepEqual(pickShortsDue(camps, cache, (id) => id === "a", 30, now, priority).map((x) => x.id), ["a", "b", "c"]);
+});
 test("merge-collected --shorts: 상세 영상 칸에 채우기만", async () => {
   const { mkdtempSync, mkdirSync, writeFileSync, readFileSync } = await import("node:fs");
   const { tmpdir } = await import("node:os");

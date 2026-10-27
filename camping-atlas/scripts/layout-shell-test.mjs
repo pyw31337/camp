@@ -7,7 +7,7 @@ const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath
 const png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=", "base64");
 const camps = await (await fetch(`${base}explore/data/campgrounds.json`)).json().catch(() => []);
 const id = String((Array.isArray(camps) ? camps : camps.camps ?? [])[0]?.id ?? "483");
-const ROUTES = ["", "list", "map", "themes", "theme/FOREST", "compare", "saved", "saves-log", `place/${id}`, "log/"];
+const ROUTES = ["", "list", "map", "themes", "theme/FOREST", "compare", "saved", "saves-log", `place/${id}`, "admin/"];
 const NO_HEAD = ["map", "themes", "compare", "saved"];
 const fails = [];
 for (const w of [320, 390, 1366]) {
