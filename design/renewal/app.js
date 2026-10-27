@@ -323,11 +323,14 @@ function badges(c, max = 4, maxNo = 2, { rows = false, theme = null } = {}) {
     firstCome: (c.fc || /선착순/.test(c.resv ?? "") || /선착순/.test(c.name ?? "")) ? `<span class="bdg bdg-amber">${ic("clock")}선착순</span>` : "",
     tidal: (c.th?.includes("tidal") || /갯벌|해루질|조개/.test(JSON.stringify(c))) ? `<span class="bdg bdg-teal">${ic("water")}갯벌·해루질</span>` : "",
     flex: (c.early || c.late || (c.ci && c.ci <= "12:00") || (c.co && c.co >= "12:00")) ? `<span class="bdg bdg-teal">${ic("clock")}입퇴실 여유</span>` : "",
+    vr: c.vr ? `<span class="bdg bdg-vr" title="360° VR 현장 뷰어">${ic("vr")}360° VR</span>` : "",
+    dump: c.dump ? `<span class="bdg bdg-dump" title="오폐수 처리 및 청수 공급 한국관광공사 공인 덤프스테이션">${ic("dump")}덤프</span>` : "",
+    best: c.best?.length ? `<span class="bdg bdg-best" title="문체부·한국관광공사 공인 우수야영장">${ic("award")}${esc(c.best[0].label || "우수야영장")}</span>` : "",
   };
   // 섹션 배지를 맨 앞에(잘리지 않게)
-  const lead = theme === "PET" ? "pet" : theme === "VISITOR" ? "invite" : theme === "WINTER" ? (wattsOf(c) >= 1100 && B.w ? "w" : B.heat ? "heat" : "w") : theme === "REC_FOREST" ? "rf" : theme === "TIDAL_FLAT" ? "tidal" : theme === "FIRST_COME" ? "firstCome" : theme === "FLEX_TIME" ? "flex" : null;
+  const lead = theme === "PET" ? "pet" : theme === "VISITOR" ? "invite" : theme === "WINTER" ? (wattsOf(c) >= 1100 && B.w ? "w" : B.heat ? "heat" : "w") : theme === "REC_FOREST" ? "rf" : theme === "TIDAL_FLAT" ? "tidal" : theme === "FIRST_COME" ? "firstCome" : theme === "FLEX_TIME" ? "flex" : theme === "VR_TOUR" ? "vr" : theme === "DUMP_STATION" ? "dump" : theme === "EXCELLENT" ? "best" : null;
   if (lead && B[lead]) out.push(B[lead]);
-  for (const k of ["rf", "tidal", "flex", "firstCome", "invite", "w", "fire", "pet", "park"]) if (k !== lead && B[k]) out.push(B[k]);
+  for (const k of ["vr", "dump", "best", "rf", "tidal", "flex", "firstCome", "invite", "w", "fire", "pet", "park"]) if (k !== lead && B[k]) out.push(B[k]);
   const no = noKeys(c).filter((k) => NO_CARD.includes(k) && !(k === "BIG_DOG" && pet)).slice(0, maxNo).map(noBadge);
   const top = out.slice(0, max);
   return `${top.join("")}${top.length && no.length ? '<i class="bdg-br" aria-hidden="true"></i>' : ""}${no.join("")}`;
@@ -471,6 +474,9 @@ const TH_SVG = {
   WINTER: ["0 0 50 50", '<path fill="currentColor" d="M23 47.689v-6.342l-3.357 1.992L18 42.305v-2.229l5-2.986v-4.168l-4 2.451v-4.416l-4 2.094v5.99l-1.653 1.23L12 39.160v-4.012L6.426 38.27L4 37.271v-2.529l5.685-3.17L6 29.75v-2.32l2.123-1.127l5.214 3.068l3.612-2.084l-.082-.065l-3.665-2.123l3.568-2.228l-3.577-2.083L7.98 23.84L6 22.871v-2.307l3.542-1.978L4 15.533v-2.529l2.321-1.114L12 15.087v-4.076l1.485-1.127l1.943 1.18l-.056 6.105l3.673 2.122l.033-4.311L23 17.079v-4.167l-5-2.988V7.71l1.643-1.05L23 8.652V2.324L24.994 1L27 2.324v6.328l3.906-2.031L33 7.84v1.992l-6 3.08v4.167l4-2.267v4.534l4-2.084v-6.524l1.455-.866l1.545.865v4.167l5.842-3.08L46 13.042v2.359l-5.495 3.17L44 20.525v2.254l-1.83.996l-5.327-3.158l-3.679 2.346l3.549 2.228l-3.659 2.122l3.772 1.992l5.389-2.986L44 27.535v2.15l-3.32 1.887l5.32 3.170v2.49l-2.522 1.037L38 35.281v3.955l-1.52 1.049L35 39.236v-6.002l-4-2.213v4.168l-4-2.268v4.168l5 2.986v2.359l-1.647.904L27 41.348v6.342L24.994 49zm-1.466-22.597L23.420 28h3.514l1.613-2.908L26.843 22h-3.514z" />'],
   WATER_PLAY: ["0 0 256 256", '<path fill="currentColor" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m83.44 76A196 196 0 0 0 165 91a196 196 0 0 0-9-46.440A88.43 88.43 0 0 1 211.44 100M85 51.24a188.3 188.3 0 0 1 67.3 39.21a196.3 196.3 0 0 0-112.22 34.06A88.07 88.07 0 0 1 85 51.24m46.48 164.68a196.3 196.3 0 0 0 34.06-112.23A188.3 188.3 0 0 1 204.76 171a88.07 88.07 0 0 1-73.27 44.92Z" />'],
   "T:CAR_CAMP": ["0 0 24 24", '<g fill="currentColor"><path d="M3 19.723V21a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.277A1.99 1.99 0 0 0 22 18v-3c0-.831-.507-1.542-1.228-1.845l-1.368-4.104A2.995 2.995 0 0 0 16.559 7H7.441a2.995 2.995 0 0 0-2.845 2.051l-1.368 4.104A2 2 0 0 0 2 15v3c0 .738.404 1.376 1 1.723M5.5 18a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 5.5 18m13 0a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 18.5 18M7.441 9h9.117a1 1 0 0 1 .949.684L18.613 13H5.387l1.105-3.316c.137-.409.519-.684.949-.684"/><path d="M22 7.388V5.279l-9.684-3.228a1 1 0 0 0-.658.009L2 5.572V7.7l10.015-3.642z"/></g>'],
+  VR_TOUR: ["0 0 24 24", '<path fill="currentColor" d="M20 7H4c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h4.5l1.5-2h4l1.5 2H20c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2M8.5 13.5c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2m7 0c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2"/>'],
+  DUMP_STATION: ["0 0 24 24", '<path fill="currentColor" d="M19 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m-7 3a2 2 0 1 1-2 2a2 2 0 0 1 2-2m0 10a5 5 0 0 1-4.9-4h9.8a5 5 0 0 1-4.9 4"/>'],
+  EXCELLENT: ["0 0 24 24", '<path fill="currentColor" d="M12 15.2a5.2 5.2 0 1 0 0-10.4 5.2 5.2 0 0 0 0 10.4zm3.8 1.4L18 22l-6-3.2L6 22l2.2-5.4A7.2 7.2 0 1 1 12 17.2a7.1 7.1 0 0 1 3.8-.6z"/>'],
 };
 TH_SVG.REC_FOREST = TH_SVG.FOREST;
 const thIc = (k) => (TH_SVG[k] ? `<svg class="th-ic" viewBox="${TH_SVG[k][0]}" aria-hidden="true">${TH_SVG[k][1]}</svg>` : "");
@@ -543,6 +549,9 @@ const THEMES = [
   ["TIDAL_FLAT", "갯벌·해루질", (c) => Boolean(c.th?.includes("tidal") || /갯벌|해루질|조개/.test(JSON.stringify(c)))],
   ["FLEX_TIME", "입퇴실 여유", (c) => Boolean(c.early || c.late || (c.ci && c.ci <= "12:00") || (c.co && c.co >= "12:00"))],
   ["FIRST_COME", "선착순", (c) => Boolean(c.fc || /선착순/.test(c.resv ?? "") || /선착순/.test(c.name ?? ""))],
+  ["VR_TOUR", "360° VR 뷰", (c) => Boolean(c.vr)],
+  ["DUMP_STATION", "덤프스테이션", (c) => Boolean(c.dump)],
+  ["EXCELLENT", "공인 우수야영장", (c) => Boolean(c.best?.length)],
 ];
 const THEME_FILES = {
   POPULAR: "popular.webp",
@@ -562,6 +571,9 @@ const THEME_FILES = {
   TIDAL_FLAT: "sea.webp",
   FLEX_TIME: "comfort.webp",
   FIRST_COME: "popular.webp",
+  VR_TOUR: "valley.webp",
+  DUMP_STATION: "auto.webp",
+  EXCELLENT: "kids.webp",
   PARK: "public.webp",
   WATER_PLAY: "summer.webp",
   ALL: "valley.webp",
@@ -570,6 +582,9 @@ const THEME_FILES = {
 };
 const themeImg = (k) => `${ASSETS_BASE}images/themes/${THEME_FILES[k] ?? "valley.webp"}`;
 const THEME_SUBS = {
+  VR_TOUR: "예약 전 사이트 시야각, 그늘, 편의시설 동선을 360° VR 실측 파노라마로 볼 수 있는 캠핑장",
+  DUMP_STATION: "카라반·캠핑카 오폐수 배출(블랙/그레이) 및 청수 공급이 가능한 한국관광공사 공인 덤프스테이션 설치 야영장",
+  EXCELLENT: "문화체육관광부·한국관광공사 선정 4대 분야(친환경·가족·반려동물·교통약자) 공인 우수야영장",
   WINTER: "겨울에도 운영하고 난방 글램핑·카라반이나 1,100W 이상 전기를 쓸 수 있는 캠핑장",
   POPULAR: "최근 7일간 캠퍼들 사이에서 가장 많이 언급되고 화제가 된 인기 캠핑장",
   VALLEY: "시원한 물소리와 맑은 물놀이를 즐길 수 있는 계곡 야영장",
@@ -1235,6 +1250,7 @@ function card(c, i = 0, opts) {
               <button type="button" class="c-act-btn" data-rv="${c.lat},${c.lng}" data-rv-name="${esc(nameOf(c).name)}" title="카카오 로드뷰 보기" aria-label="로드뷰">${ic("roadview")}</button>
               <a class="c-act-btn" href="${esc(mapLink(nameOf(c).name, c.lat, c.lng))}" target="_blank" rel="noopener" title="카카오 지도에서 보기" aria-label="지도">${ic("map")}</a>
             ` : ""}
+            ${c.vr ? `<a class="c-act-btn c-act-vr" href="${esc(c.vr)}" target="_blank" rel="noopener" title="360° VR 현장 둘러보기" aria-label="360° VR">${ic("vr")}</a>` : ""}
           </div>
         </div>
       </div>
@@ -1934,11 +1950,13 @@ const KIND = Object.fromEntries(KINDS.map(([k, l, t]) => [k, { label: l, test: t
 const W_OPTS = [[0, "상관없음"], [1, "전기 있음"], [600, "600W 이상"], [1100, "1,100W 이상"]];
 const SIZE_OPTS = [[0, "상관없음"], [6, "6m 이상"], [8, "8m 이상"], [10, "10m 이상"]];
 const R_OPTS = [10, 20, 30];
-const emptyCond = () => ({ sido: [], kind: [], pet: false, w: 0, size: 0, fire: false, park: false, win: false, dump: false, sun: false, leaf: false, spring: false, summer: false, near: "", r: 20 });
+const emptyCond = () => ({ sido: [], kind: [], pet: false, w: 0, size: 0, fire: false, park: false, win: false, dump: false, vr: false, best: false, sun: false, leaf: false, spring: false, summer: false, near: "", r: 20 });
 // t39 #41 계절·풍경·차박 조건(고캠핑 테마 th · 부대시설). 근거가 있으면 y, 테마 정보는 있는데 없으면 n, 정보 없으면 ?(아래 ‘확인 필요’).
 // 보험(영업배상책임)은 목록 카탈로그에 값이 없어(고캠핑 등록 0곳) 조건으로 두지 않는다 — 상세 ‘보험’ 줄에만.
 const COND_BOOL = {
-  dump: ["덤프스테이션", (c) => ((c.amenities ?? []).includes("덤프스테이션") ? "y" : "?")],
+  dump: ["덤프스테이션", (c) => (c.dump || (c.amenities ?? []).includes("덤프스테이션") ? "y" : "?")],
+  vr: ["360° VR 뷰", (c) => (c.vr ? "y" : "?")],
+  best: ["공인 우수야영장", (c) => (c.best?.length ? "y" : "?")],
   sun: ["일출 명소", (c) => (c.th?.includes("sunrise") ? "y" : c.th?.length ? "n" : "?")],
   leaf: ["단풍 명소", (c) => (c.th?.includes("autumn") ? "y" : c.th?.length ? "n" : "?")],
   spring: ["봄꽃", (c) => (c.th?.includes("spring") ? "y" : c.th?.length ? "n" : "?")],
@@ -1987,7 +2005,7 @@ function condTest(c, k = S.cond, skip = null, strict = S.condStrict) {
   const r = condEval(c, k, skip);
   return Boolean(r) && (!strict || r.unknown === 0);
 }
-const COND_LABEL = { dump: "덤프스테이션", sun: "일출 명소", leaf: "단풍 명소", spring: "봄꽃", summer: "여름 물놀이", win: "겨울 운영", kind: "상품", pet: "반려견", w: "전기", size: "사이트 크기", fire: "장작", park: "텐트 옆 주차" };
+const COND_LABEL = { dump: "덤프스테이션", vr: "360° VR 뷰", best: "공인 우수야영장", sun: "일출 명소", leaf: "단풍 명소", spring: "봄꽃", summer: "여름 물놀이", win: "겨울 운영", kind: "상품", pet: "반려견", w: "전기", size: "사이트 크기", fire: "장작", park: "텐트 옆 주차" };
 const condActive = (k = S.cond) => k.sido.length + k.kind.length + (k.pet ? 1 : 0) + (k.w ? 1 : 0) + (k.size ? 1 : 0) + (k.fire ? 1 : 0) + (k.park ? 1 : 0) + (k.win ? 1 : 0) + Object.keys(COND_BOOL).filter((b) => k[b]).length + (k.near ? 1 : 0);
 function condChips(k = S.cond) {
   const out = [];
@@ -2103,7 +2121,7 @@ function paintCondSheet() {
       <section><h3>전기</h3><div class="cond-chips">${W_OPTS.map(([v, l]) => chip("w", v, l, k.w === v, v ? tally("w", v) : null)).join("")}</div></section>
       <section><h3>사이트 크기</h3><div class="cond-chips">${SIZE_OPTS.map(([v, l]) => chip("size", v, l, k.size === v, v ? tally("size", v) : null)).join("")}</div></section>
       <section><h3>계절·풍경</h3><div class="cond-chips">${chip("win", 1, "겨울 운영", k.win, tally("win", true))}${["spring", "summer", "leaf", "sun"].map((b) => chip(b, 1, COND_BOOL[b][0], k[b], tally(b, true))).join("")}</div></section>
-      <section><h3>불멍·주차</h3><div class="cond-chips">${chip("fire", 1, "장작 가능", k.fire, tally("fire", true))}${chip("park", 1, "텐트 옆 주차", k.park, tally("park", true))}${chip("dump", 1, "덤프스테이션", k.dump, tally("dump", true))}</div></section>
+      <section><h3>시설·인프라</h3><div class="cond-chips">${chip("fire", 1, "장작 가능", k.fire, tally("fire", true))}${chip("park", 1, "텐트 옆 주차", k.park, tally("park", true))}${chip("dump", 1, "덤프스테이션", k.dump, tally("dump", true))}${chip("vr", 1, "360° VR 뷰", k.vr, tally("vr", true))}${chip("best", 1, "공인 우수야영장", k.best, tally("best", true))}</div></section>
       <section><h3>요금</h3><div class="cond-chips">${[["u3", "~3만원"], ["3to5", "3~5만원"], ["5to7", "5~7만원"], ["7to10", "7만원~10만원"], ["10to20", "10만원~20만원"], ["o20", "20만원+"]].map(([v, l]) => chip("fee", v, l, S.feeDraft === v, count("fee", (c) => feeOk(c, v)))).join("")}</div></section>
     </div>
     <p class="cond-legend"><button type="button" class="link" data-c="strict">${strict ? "정보 없는 곳도 함께 보기" : "확인된 곳만 보기"}</button></p>
@@ -4372,7 +4390,7 @@ function infoHtml(c) {
   const map = c.lat ? `https://map.kakao.com/link/map/${name},${c.lat},${c.lng}` : null;
   const to = c.lat ? `https://map.kakao.com/link/to/${name},${c.lat},${c.lng}` : null;
   const rv = c.lat ? `https://map.kakao.com/link/roadview/${c.lat},${c.lng}` : null;
-  const addressActions = map ? `<span class="addr-actions"><a href="${map}" target="_blank" rel="noopener" title="지도" aria-label="지도">${ic("map")}</a><a href="${to}" target="_blank" rel="noopener" title="길찾기" aria-label="길찾기">${ic("directions")}</a><a href="${rv}" target="_blank" rel="noopener" title="로드뷰" aria-label="로드뷰">${ic("roadview")}</a></span>` : "";
+  const addressActions = map ? `<span class="addr-actions"><a href="${map}" target="_blank" rel="noopener" title="지도" aria-label="지도">${ic("map")}</a><a href="${to}" target="_blank" rel="noopener" title="길찾기" aria-label="길찾기">${ic("directions")}</a><a href="${rv}" target="_blank" rel="noopener" title="로드뷰" aria-label="로드뷰">${ic("roadview")}</a>${c.vr ? `<a href="${esc(c.vr)}" target="_blank" rel="noopener" class="vr-action-link" title="360° VR 현장 둘러보기" aria-label="360° VR">${ic("vr")}</a>` : ""}</span>` : "";
   const gcSrc = (field, quote) => ({ g: "c", src: { label: "한국관광공사 고캠핑 등록 현황", url: c.gc_url, quote: quote ? String(quote) : null } });
   const rows = [
     ["주소", c.addr ? `<span class="address-value"><span class="address-text">${esc(c.addr)}</span>${addressActions}</span>` : null, gcSrc("주소", c.addr)],
@@ -4381,16 +4399,39 @@ function infoHtml(c) {
     // 운영 기간(계절)은 ‘이용 정보’에 있으므로 여기서는 운영 주체·요일만 둔다.
     ["운영", [OP[c.op], (c.days ?? [])[0]].filter(Boolean).map(esc).join(" · ") || null, gcSrc("운영 정보")],
     ...registryRows(c),
-  ].filter(([, v]) => v);
+    c.dump ? ["덤프스테이션", `<span class="dump-badge-val">${ic("dump")} 오폐수 배출(블랙/그레이) 및 청수 공급 가능 (한국관광공사 공인 덤프스테이션)</span>`, { g: "c", src: { label: "고캠핑 전국 덤프스테이션 지정 현황", url: "https://gocamping.or.kr/camp/dump/list.do" } }] : null,
+    c.best?.length ? ["공인 우수야영장", c.best.map((b) => `<span class="best-badge-val">${ic("award")} ${b.year}년 ${esc(b.label)} 우수야영장 선정${b.summary ? ` (${esc(b.summary)})` : ""}</span>`).join("<br>"), { g: "c", src: { label: "문체부·한국관광공사 공인 우수야영장", url: c.best[0].url || "https://gocamping.or.kr/camp/best/list.do" } }] : null,
+  ].filter(Boolean).filter(([, v]) => v);
   const savedMapH = Number(store.get("mc-detail-map-h", 280));
   const detailMapHeight = Number.isFinite(savedMapH) && savedMapH >= 160 && savedMapH <= 800 ? savedMapH : 280;
   return `<section class="d-sec info-sec" id="sec-info"><div class="sec-head">${iconTitle("store-pin", "업체 정보")}${c.gc_url ? `<a class="link" href="${esc(c.gc_url)}" target="_blank" rel="noopener">고캠핑 ${ic("right")}</a>` : ""}</div>
+    ${c.vr ? `
+    <div class="detail-vr-banner">
+      <a href="${esc(c.vr)}" target="_blank" rel="noopener" class="detail-vr-link">
+        <span class="vr-badge-icon">${ic("vr")}</span>
+        <div class="vr-text-group">
+          <strong>360° VR 파노라마 현장 둘러보기</strong>
+          <small>예약 전 사이트별 시야각, 나무 그늘, 편의시설과의 거리, 경사도를 실측 파노라마로 확인하세요</small>
+        </div>
+        <span class="vr-arrow">${ic("right")}</span>
+      </a>
+    </div>` : ""}
     ${c.lat && c.lng ? `
     <div class="detail-map-box" id="detail-map-box">
       <div class="detail-map" id="detail-map" style="height:${detailMapHeight}px;" data-lat="${c.lat}" data-lng="${c.lng}"></div>
       <div class="detail-map-handle" id="detail-map-handle" role="separator" aria-orientation="horizontal" aria-label="지도 크기 조절" tabindex="0" title="드래그하여 지도 높이 조절">
         <span class="handle-bar"></span>
       </div>
+    </div>` : ""}
+    ${(c.fee?.min === 0 || c.fee?.max === 0 || /노지|차박/.test(c.name)) ? `
+    <div class="clean-camp-notice">
+      <div class="clean-camp-title">${ic("leaf")} 안심 클린캠핑 수칙 (LNT - Leave No Trace)</div>
+      <ul class="clean-camp-rules">
+        <li>${ic("check")} <strong>화장실 안내</strong>: 현장 또는 500m 이내 공중화장실을 이용해 주세요.</li>
+        <li>${ic("check")} <strong>쓰레기 처리</strong>: 발생한 모든 쓰레기와 잔재물은 반드시 되가져가세요.</li>
+        <li>${ic("check")} <strong>화기 주의</strong>: 맨바닥 불멍 금지! 반드시 받침대가 있는 화로대를 사용하세요.</li>
+        <li>${ic("check")} <strong>진입로 확인</strong>: 일반 승용차 및 2WD 차량은 우천 시 지반 상태를 사전 확인하세요.</li>
+      </ul>
     </div>` : ""}
     <dl class="uses info">${rows.map(([l, v, src]) => `<div class="use"><dt>${l}</dt><dd><span class="use-val">${v}</span>${src ? `<span class="use-meta">${dot(src.g)}${srcTip(src, l)}</span>` : ""}</dd></div>`).join("")}</dl>
   </section>`;

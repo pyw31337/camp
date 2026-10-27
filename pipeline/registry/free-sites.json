@@ -43,6 +43,9 @@
     { "name": "화천 평화의댐 오토캠핑장", "region": "강원 화천", "claim": "커뮤니티 글에 ‘선착순 무료’. 화천군 직영, 화장실·개수대·샤워실 보유 보도", "found_in": "https://m.cafe.daum.net/beautiful5060/NNns/1182", "tier": "E", "next": "화천군 공지로 현재 요금 확인(보도는 유료 여부 미언급)" },
     { "name": "서귀포 돈내코야영장", "region": "제주 서귀포", "claim": "커뮤니티 글에 ‘이용료 무료, 화장실·개수대·샤워장’", "found_in": "https://m.cafe.daum.net/beautiful5060/NNns/1182", "tier": "E", "next": "서귀포시 공지로 현재 요금·취사 규정 확인" },
     { "name": "영덕 오보해변 캠핑장", "region": "경북 영덕", "claim": "비수기 무료(성수기 3만원/샤워 4천원), 노지 모래, 화장실 100m, 전기 없음, 화롯대 금지", "found_in": "https://newcation.imweb.me/16/?bmode=view&idx=175258089", "tier": "E", "next": "영덕군청 해양수산과 또는 영덕읍사무소 해수욕장 야영 관리 규정 확인" },
-    { "name": "울진 망양 황금대게 공원", "region": "경북 울진", "claim": "노지 무료, 스노클링 포인트, 현장 샤워장 없음", "found_in": "https://newcation.imweb.me/16/?bmode=view&idx=173048117", "tier": "E", "next": "울진군청 산림공원과 또는 기성면사무소 공원 취사·야영 가능 여부 확인" }
+    { "name": "울진 망양 황금대게 공원", "region": "경북 울진", "claim": "노지 무료, 스노클링 포인트, 현장 샤워장 없음", "found_in": "https://newcation.imweb.me/16/?bmode=view&idx=173048117", "tier": "E", "next": "울진군청 산림공원과 또는 기성면사무소 공원 취사·야영 가능 여부 확인" },
+    { "name": "울산 태화강 망성교 노지", "region": "울산 울주", "claim": "태화강변 노지 차박, 화장실 인근, 평일 퇴근박 명소, LNT 클린캠핑 수칙 필수", "found_in": "https://blog.naver.com/arkin1981/224216192388", "tier": "E", "next": "울주군청 하천관리과 태화강 야영·취사 금지구역 지정 여부 확인" },
+    { "name": "거제 외간항 노지", "region": "경남 거제", "claim": "항포구 바다 차박/낚시, 화장실 보유, 쓰레기 분리수거장", "found_in": "https://blog.naver.com/arkin1981/224216192388", "tier": "E", "next": "거제시 해양항만과 어항 내 야영 규정 확인" },
+    { "name": "울릉도 학포야영장", "region": "경북 울릉", "claim": "울릉도 공식 데크/노지 야영장, 화장실·샤워실·개수대 구비, 카페리 차량 선적 이용", "found_in": "https://drdre.co.kr/79", "tier": "B", "next": "울릉군청 관광문화체육실 야영장 운영 현황 대조" }
   ]
 }

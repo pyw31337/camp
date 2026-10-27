@@ -3812,3 +3812,175 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 }
 /* 프랜차이즈 브랜드 표식(사진 없는 편의점·마트·주유소, 소유자 2026-10-23): 사진 칸(64px)과 같은 크기의 브랜드 색 글자 */
 .nearby-hub .nb-logo { flex: 0 0 64px; width: 64px; height: 64px; display: inline-grid; place-items: center; border-radius: 12px; background: var(--lb); color: var(--lf); font: 900 .78rem/1 system-ui, sans-serif; letter-spacing: -.02em; text-align: center; padding: 4px; overflow: hidden; word-break: keep-all; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .06); }
+/* ── 360° VR, 덤프스테이션, 공인 우수야영장 배지 ── */
+.bdg-vr {
+  background: rgba(139, 92, 246, 0.16) !important;
+  color: #6d28d9 !important;
+  border: 1px solid rgba(139, 92, 246, 0.35) !important;
+  font-weight: 750 !important;
+}
+.bdg-dump {
+  background: rgba(14, 165, 233, 0.16) !important;
+  color: #0369a1 !important;
+  border: 1px solid rgba(14, 165, 233, 0.35) !important;
+  font-weight: 750 !important;
+}
+.bdg-best {
+  background: rgba(245, 158, 11, 0.16) !important;
+  color: #b45309 !important;
+  border: 1px solid rgba(245, 158, 11, 0.35) !important;
+  font-weight: 750 !important;
+}
+
+/* 카드 내 360° VR 액션 버튼 */
+.c-act-btn.c-act-vr {
+  color: #7c3aed;
+  background: rgba(139, 92, 246, 0.1);
+}
+.c-act-btn.c-act-vr:hover {
+  background: #7c3aed;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.vr-action-link {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: rgba(139, 92, 246, 0.12);
+  color: #7c3aed;
+  text-decoration: none;
+  transition: all .15s ease;
+}
+.vr-action-link:hover {
+  background: #7c3aed;
+  color: #fff;
+}
+.vr-action-link .ic { width: 14px; height: 14px; }
+
+/* ── 상세페이지 360° VR 파노라마 현장 둘러보기 배너 ── */
+.detail-vr-banner {
+  margin-bottom: 16px;
+  border-radius: var(--r-s, 14px);
+  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+  border: 1.5px solid #c4b5fd;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.08);
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.detail-vr-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.14);
+}
+.detail-vr-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  text-decoration: none;
+  color: #4c1d95;
+}
+.detail-vr-banner .vr-badge-icon {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: #7c3aed;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.35);
+}
+.detail-vr-banner .vr-badge-icon .ic {
+  width: 22px;
+  height: 22px;
+}
+.detail-vr-banner .vr-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.detail-vr-banner .vr-text-group strong {
+  font-size: 1rem;
+  font-weight: 850;
+  color: #3b0764;
+  letter-spacing: -.02em;
+}
+.detail-vr-banner .vr-text-group small {
+  font-size: 0.8rem;
+  color: #6d28d9;
+  font-weight: 550;
+  line-height: 1.35;
+}
+.detail-vr-banner .vr-arrow {
+  color: #7c3aed;
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(124, 58, 237, 0.1);
+  transition: transform .2s ease;
+}
+.detail-vr-banner:hover .vr-arrow {
+  transform: translateX(3px);
+  background: #7c3aed;
+  color: #fff;
+}
+
+/* ── 노지/차박 안심 클린캠핑 수칙 (LNT) ── */
+.clean-camp-notice {
+  margin: 16px 0;
+  padding: 14px 18px;
+  border-radius: var(--r-s, 14px);
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  color: #166534;
+}
+.clean-camp-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.94rem;
+  font-weight: 800;
+  color: #15803d;
+  margin-bottom: 8px;
+}
+.clean-camp-title .ic { width: 16px; height: 16px; color: #16a34a; }
+.clean-camp-rules {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #14532d;
+}
+.clean-camp-rules li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.clean-camp-rules li .ic {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  margin-top: 2px;
+  color: #22c55e;
+}
+
+/* ── 상세 정보 항목 내 덤프/우수 뱃지 표시 ── */
+.dump-badge-val, .best-badge-val {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 650;
+}
+.dump-badge-val .ic { color: #0284c7; width: 14px; height: 14px; }
+.best-badge-val .ic { color: #d97706; width: 14px; height: 14px; }
+
