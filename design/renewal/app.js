@@ -1231,11 +1231,8 @@ function publicParkCard(c) {
 function card(c, i = 0, opts) {
   const isWp = Boolean((opts && !Array.isArray(opts) && opts.isWaterPlay) || S.theme === "WATER_PLAY");
   const theme = (opts && !Array.isArray(opts) && opts.theme) || S.theme || null;
-<<<<<<< HEAD
   const savedMemo = Boolean(opts && !Array.isArray(opts) && opts.savedMemo);
-=======
   const collapseSpec = Boolean(opts && !Array.isArray(opts) && opts.collapseSpec);
->>>>>>> 89de0b6759 (feat: 목록 카드 댓글 실시간 연동/기본 펼침 및 찜 페이지 상세정보 접기 아코디언 구현)
   const { tag } = nameOf(c), o = openingOf(c);
   return `<article class="card${isWp ? " is-closed" : ""}${savedMemo ? " saved-memo-card" : ""}" data-id="${esc(c.id)}">
     <a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
@@ -1278,11 +1275,7 @@ function card(c, i = 0, opts) {
           <div class="card-reviews">${cardReviewPills(c.rv, c)}</div>
         </div>
       ` : ""}
-<<<<<<< HEAD
-      ${savedMemo ? savedCommentsHtml(c) : ""}
-=======
       ${commentsCardHtml(c)}
->>>>>>> 89de0b6759 (feat: 목록 카드 댓글 실시간 연동/기본 펼침 및 찜 페이지 상세정보 접기 아코디언 구현)
     </div>
   </article>`;
 }
