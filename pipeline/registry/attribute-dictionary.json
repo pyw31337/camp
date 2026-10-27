@@ -1555,6 +1555,35 @@
    "filter": "eq",
    "pref": "아이와 할 체험 프로그램이 있으면 좋겠나요?",
    "note": "고캠핑 exprnProgrmAt=Y일 때만 행"
+  },
+  {
+   "code": "SITE_ASSIGN_MODE",
+   "group": "booking",
+   "label": "사이트 배정 방식",
+   "type": "enum",
+   "enum": ["선착순", "지정예약", "구역내선착순", "혼합"],
+   "pref": "선착순 배정 사이트를 원하나요?",
+   "filter": "eq",
+   "note": "선착순(오픈런) 또는 구역 예약 후 현장 선착순 배정 방식"
+  },
+  {
+   "code": "REEL_WIRE_RECOMMEND",
+   "group": "power",
+   "label": "권장 릴선 길이",
+   "type": "count",
+   "unit": "m",
+   "pref": "분전함 거리에 맞는 릴선(m)을 준비해야 하나요?",
+   "filter": "min",
+   "note": "분전함과의 거리에 따른 권장 릴선 길이 (20m, 30m, 50m 등)"
+  },
+  {
+   "code": "THEME_TIDAL_FLAT",
+   "group": "theme",
+   "label": "갯벌·해루질 체험",
+   "type": "bool",
+   "pref": "갯벌·해루질 체험이 가능한 곳을 찾나요?",
+   "filter": "eq",
+   "note": "캠핑장 인근 갯벌 체험, 조개잡이, 야간 해루질이 가능한 곳"
   }
  ]
 }

@@ -106,3 +106,14 @@ test("주차·전력 문장 보강(2026-10-16): 앞/옆 개별 주차·사이트
   assert.equal(v(["캠핑장 전력은 1,100w까지이며, 에어컨, 전기차 충전기등 고전력기기의 사용은 금지되어 있습니다."]).POWER_W, 1100);
   assert.equal(v(["전기차 충전기 1,000W 설치"]).POWER_W, undefined);
 });
+
+test("실전 팩트 문장 추출: 릴선 길이·선착순 배정·얼리/레이트 입퇴실·갯벌 해루질", () => {
+  assert.equal(v(["분전함 거리가 있으니 릴선 30m 준비 권장합니다."]).REEL_WIRE_RECOMMEND, 30);
+  assert.equal(v(["리드선 20m 이상 필수"]).REEL_WIRE_RECOMMEND, 20);
+  assert.equal(v(["자리 배치는 당일 선착순 입장 순서대로 진행됩니다."]).SITE_ASSIGN_MODE, "선착순");
+  assert.equal(v(["예약 시 지정 예약 자리로 배정됩니다."]).SITE_ASSIGN_MODE, "지정예약");
+  assert.equal(v(["전날 빈 사이트가 있을 경우 빠른 입실(오전 9시) 가능합니다."]).EARLY_CHECKIN, true);
+  assert.equal(v(["다음날 예약이 없는 경우 늦은 퇴실(오후 2시) 가능합니다."]).LATE_CHECKOUT, true);
+  assert.equal(v(["바로 앞 해변에서 무료 갯벌 체험 및 야간 해루질이 가능합니다."]).THEME_TIDAL_FLAT, true);
+});
+

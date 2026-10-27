@@ -17,7 +17,7 @@ const toPath = (h) => APP_BASE + String(h ?? "").replace(/^#?\/?/, "");
 const legacyRoute = (r) => String(r ?? "").replace(/^\/+/, "").replace(/index\.html$/, "").replace(/^(explore|renewal)\/(?=.)/, "").replace(/^c\//, "place/").replace(/^camp\//, "place/").replace(/^openings\/?$/, "theme/OPEN").replace(/^(guide|vision|explore|renewal)\/?$/, "").replace(/^passport\/?$/, "compare").replace(/^collections\/?$/, "themes");
 function nav(h, { replace = false } = {}) {
   const u = toPath(h);
-  if (u !== location.pathname + location.search) history[replace ? "replaceState" : "pushState"](null, "", u);
+  if (u !== location.pathname + location.search + location.hash) history[replace ? "replaceState" : "pushState"](null, "", u);
   route();
 }
 // 정적 페이지(404.html·place/{id}/ 등)가 ?p=경로&q=쿼리 로 넘겨 주면 원래 주소로 되돌린다. 옛 해시 주소도 경로로 바꾼다.
@@ -320,11 +320,14 @@ function badges(c, max = 4, maxNo = 2, { rows = false, theme = null } = {}) {
     // 겨울 섹션 근거(전수 검수 2026-10-22): W를 모르는 난방 글램핑·카라반도 섹션 배지가 보이게 ‘난방’
     heat: c.heat?.length ? `<span class="bdg bdg-flame">${ic("hotwater")}난방</span>` : "",
     rf: c.rf ? `<span class="bdg bdg-teal">${ic("th:FOREST")}${esc(/^(국립|공립|사립)$/.test(c.rf) ? `${c.rf} 휴양림` : "휴양림")}</span>` : "",
+    firstCome: (c.fc || /선착순/.test(c.resv ?? "") || /선착순/.test(c.name ?? "")) ? `<span class="bdg bdg-amber">${ic("clock")}선착순</span>` : "",
+    tidal: (c.th?.includes("tidal") || /갯벌|해루질|조개/.test(JSON.stringify(c))) ? `<span class="bdg bdg-teal">${ic("water")}갯벌·해루질</span>` : "",
+    flex: (c.early || c.late || (c.ci && c.ci <= "12:00") || (c.co && c.co >= "12:00")) ? `<span class="bdg bdg-teal">${ic("clock")}입퇴실 여유</span>` : "",
   };
   // 섹션 배지를 맨 앞에(잘리지 않게)
-  const lead = theme === "PET" ? "pet" : theme === "VISITOR" ? "invite" : theme === "WINTER" ? (wattsOf(c) >= 1100 && B.w ? "w" : B.heat ? "heat" : "w") : theme === "REC_FOREST" ? "rf" : null;
+  const lead = theme === "PET" ? "pet" : theme === "VISITOR" ? "invite" : theme === "WINTER" ? (wattsOf(c) >= 1100 && B.w ? "w" : B.heat ? "heat" : "w") : theme === "REC_FOREST" ? "rf" : theme === "TIDAL_FLAT" ? "tidal" : theme === "FIRST_COME" ? "firstCome" : theme === "FLEX_TIME" ? "flex" : null;
   if (lead && B[lead]) out.push(B[lead]);
-  for (const k of ["rf", "invite", "w", "fire", "pet", "park"]) if (k !== lead && B[k]) out.push(B[k]);
+  for (const k of ["rf", "tidal", "flex", "firstCome", "invite", "w", "fire", "pet", "park"]) if (k !== lead && B[k]) out.push(B[k]);
   const no = noKeys(c).filter((k) => NO_CARD.includes(k) && !(k === "BIG_DOG" && pet)).slice(0, maxNo).map(noBadge);
   const top = out.slice(0, max);
   return `${top.join("")}${top.length && no.length ? '<i class="bdg-br" aria-hidden="true"></i>' : ""}${no.join("")}`;
@@ -537,6 +540,9 @@ const THEMES = [
   ["PICNIC", "캠크닉", isPicnicCamp],
   ["PARK", "공원", isParkCamp],
   ["WATER_PLAY", "물놀이터", isWaterPlayCamp],
+  ["TIDAL_FLAT", "갯벌·해루질", (c) => Boolean(c.th?.includes("tidal") || /갯벌|해루질|조개/.test(JSON.stringify(c)))],
+  ["FLEX_TIME", "입퇴실 여유", (c) => Boolean(c.early || c.late || (c.ci && c.ci <= "12:00") || (c.co && c.co >= "12:00"))],
+  ["FIRST_COME", "선착순", (c) => Boolean(c.fc || /선착순/.test(c.resv ?? "") || /선착순/.test(c.name ?? ""))],
 ];
 const THEME_FILES = {
   POPULAR: "popular.webp",
@@ -553,6 +559,9 @@ const THEME_FILES = {
   AUTO: "auto.webp",
   VISITOR: "comfort.webp",
   PICNIC: "sunrise.webp",
+  TIDAL_FLAT: "sea.webp",
+  FLEX_TIME: "comfort.webp",
+  FIRST_COME: "popular.webp",
   PARK: "public.webp",
   WATER_PLAY: "summer.webp",
   ALL: "valley.webp",
@@ -1204,7 +1213,11 @@ function publicParkCard(c) {
 function card(c, i = 0, opts) {
   const isWp = Boolean((opts && !Array.isArray(opts) && opts.isWaterPlay) || S.theme === "WATER_PLAY");
   const theme = (opts && !Array.isArray(opts) && opts.theme) || S.theme || null;
+<<<<<<< HEAD
   const savedMemo = Boolean(opts && !Array.isArray(opts) && opts.savedMemo);
+=======
+  const collapseSpec = Boolean(opts && !Array.isArray(opts) && opts.collapseSpec);
+>>>>>>> 89de0b6759 (feat: 목록 카드 댓글 실시간 연동/기본 펼침 및 찜 페이지 상세정보 접기 아코디언 구현)
   const { tag } = nameOf(c), o = openingOf(c);
   return `<article class="card${isWp ? " is-closed" : ""}${savedMemo ? " saved-memo-card" : ""}" data-id="${esc(c.id)}">
     <a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
@@ -1229,14 +1242,28 @@ function card(c, i = 0, opts) {
         ${typeRow(c).html}
       </div>
       <div class="card-group card-group-spec">
-        ${rowsHtml(c)}
+        ${collapseSpec ? `
+          <details class="card-spec-details">
+            <summary class="card-spec-summary">
+              <span class="spec-summary-label">상세정보</span>
+              <span class="spec-summary-arrow">${ic("down")}</span>
+            </summary>
+            <div class="card-spec-content">
+              ${rowsHtml(c)}
+            </div>
+          </details>
+        ` : rowsHtml(c)}
       </div>
       ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `
         <div class="card-group card-group-reviews">
           <div class="card-reviews">${cardReviewPills(c.rv, c)}</div>
         </div>
       ` : ""}
+<<<<<<< HEAD
       ${savedMemo ? savedCommentsHtml(c) : ""}
+=======
+      ${commentsCardHtml(c)}
+>>>>>>> 89de0b6759 (feat: 목록 카드 댓글 실시간 연동/기본 펼침 및 찜 페이지 상세정보 접기 아코디언 구현)
     </div>
   </article>`;
 }
@@ -1870,6 +1897,7 @@ function renderResults({ reset = true } = {}) {
   noph.innerHTML = !parkTheme && S.q && bare.length ? `<h4>사진 없는 곳 ${fmt(bare.length)}</h4><ul>${bare.slice(0, 30).map((c) => `<li><a href="${APP_BASE}place/${encodeURIComponent(c.id)}"><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></a>${heartBtn(c)}</li>`).join("")}</ul>` : "";
   initCarousels(grid);
   initDraggableRails(grid);
+  syncCardCommentsInDom();
 }
 function moreResults() {
   const parkTheme = S.theme === "PARK";
@@ -1879,6 +1907,7 @@ function moreResults() {
   $("[data-more]").hidden = list.length <= S.shown;
   initCarousels(grid);
   initDraggableRails(grid);
+  syncCardCommentsInDom();
 }
 // ── 조건 검색(히어로·목록 공통, 소유자 2026-10-19) ─────────────────
 // 키워드 대신 조건을 조합한다: 지역 여러 곳 · 시군 주변 반경 · 상품(글램핑·카라반 등, 하나라도) · 반려견 · 전기 W · 사이트 크기 · 장작 · 텐트 옆 주차 · 1박 요금.
@@ -4395,6 +4424,342 @@ async function ensureSupabaseConfig() {
   if (!ready) sbConfigPromise = null;
   return ready;
 }
+
+// ── 카드 및 상세 공통 댓글 캐시 & 상태 관리 ──────────────────────────
+const CMT_CACHE = new Map();         // campground_id -> Array of comments
+const CMT_FETCHED_SET = new Set();   // campground_ids queried
+const CMT_OPEN_SET = new Set();      // user explicitly opened
+const CMT_CLOSED_SET = new Set();    // user explicitly closed
+const CMT_EXPANDED_SET = new Set();  // user expanded to view up to 6 comments
+
+function formatCommentContent(content) {
+  if (!content) return "";
+  const ytMatch = String(content).match(/https?:\/\/(?:www\.)?(?:youtube\.com\/(?:shorts\/|watch\?v=)|youtu\.be\/)([\w-]{11})[^\s]*/i);
+  if (!ytMatch) return `<p class="c-cmt-text">${esc(content)}</p>`;
+  const ytUrl = ytMatch[0];
+  const ytId = ytMatch[1];
+  const isShorts = ytUrl.includes("/shorts/");
+  const textWithoutUrl = content.replace(ytUrl, "").trim();
+  const textHtml = textWithoutUrl ? `<p class="c-cmt-text">${esc(textWithoutUrl)}</p>` : "";
+  const ytCardHtml = `<a class="c-yt-card" href="${esc(ytUrl)}" target="_blank" rel="noopener" aria-label="YouTube 영상 보기">
+    <div class="c-yt-thumb-box">
+      <img src="https://i.ytimg.com/vi/${esc(ytId)}/hqdefault.jpg" alt="YouTube thumbnail" loading="lazy">
+      <div class="c-yt-play-btn"><svg viewBox="0 0 24 24" class="c-yt-play-icon" aria-hidden="true"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></div>
+    </div>
+    <div class="c-yt-meta">
+      <span class="c-yt-badge">${isShorts ? "YouTube Shorts" : "YouTube"}</span>
+      <span class="c-yt-host">youtube.com</span>
+    </div>
+  </a>`;
+  return textHtml ? `${textHtml}${ytCardHtml}` : ytCardHtml;
+}
+
+function renderCardCmtInner(id, cmts = [], isOpen = false) {
+  const count = cmts.length;
+  const myNick = store.get("mc-cmt-nick", "");
+  const myInitial = esc((myNick || "캠").trim().charAt(0) || "캠");
+  const isExpanded = Boolean(CMT_EXPANDED_SET.has(String(id)));
+
+  // 3개까지 바로 노출, 4개 이상부터 더보기 토글, 펼쳐도 최대 6개까지만 노출
+  const visibleList = isExpanded ? cmts.slice(0, 6) : cmts.slice(0, 3);
+  const mine = store.get("mc-my-comments", []);
+
+  const cmtsHtml = visibleList.map((x) => {
+    const isMine = mine.includes(String(x.id));
+    const initial = esc((x.nickname || "캠").trim().charAt(0) || "캠");
+    return `<li class="c-cmt-item" data-cmt-id="${esc(x.id)}">
+      <div class="c-cmt-avatar">${initial}</div>
+      <div class="c-cmt-main">
+        <div class="c-cmt-meta">
+          <div class="c-cmt-meta-left">
+            <strong class="c-cmt-author">${esc(x.nickname)}</strong>
+            <span class="c-cmt-date">${esc(formatKoreanDate(x.created_at))}</span>
+          </div>
+          ${isMine ? `<button type="button" class="c-cmt-del" data-card-cmt-del="${esc(x.id)}" data-card-id="${esc(id)}" aria-label="댓글 삭제">✕</button>` : ""}
+        </div>
+        <div class="c-cmt-body">
+          ${formatCommentContent(x.content)}
+        </div>
+      </div>
+    </li>`;
+  }).join("");
+
+  let moreBtnHtml = "";
+  if (count > 3) {
+    if (!isExpanded) {
+      const moreCount = Math.min(count, 6) - 3;
+      moreBtnHtml = `<button type="button" class="c-cmt-more-btn" data-cmt-more="${esc(id)}">+ 댓글 ${moreCount}개 더보기 ∨</button>`;
+    } else {
+      moreBtnHtml = `<button type="button" class="c-cmt-more-btn is-expanded" data-cmt-more="${esc(id)}">댓글 접기 ∧</button>`;
+    }
+  }
+
+  // 6개 초과 시 상세페이지 캠퍼 한마디(#cmt) 앵커 링크 제공
+  let anchorHtml = "";
+  if (count > 6) {
+    anchorHtml = `<a class="c-cmt-anchor-link" href="${APP_BASE}place/${encodeURIComponent(id)}#cmt">캠퍼 한마디에서 전체 ${count}개 모두 보기 ➔</a>`;
+  }
+
+  return `
+    <div class="c-cmt-bar${isOpen ? " is-open" : ""}" data-cmt-toggle="${esc(id)}" role="button" tabindex="0" aria-label="댓글 ${isOpen ? "접기" : "열기"}">
+      <div class="c-cmt-bar-left">
+        ${ic("chat-bubble", "c-cmt-bubble-ic")}
+        <span class="c-cmt-bar-title">댓글</span>
+        ${count > 0 ? `<b class="c-cmt-count">${count}</b>` : ""}
+      </div>
+      <span class="c-cmt-bar-arrow">${ic(isOpen ? "down" : "right")}</span>
+    </div>
+    <div class="card-cmt-box" data-cmt-box="${esc(id)}"${isOpen ? "" : ' style="display:none;"'}>
+      ${count > 0 ? `<ul class="c-cmt-list">${cmtsHtml}</ul>` : ""}
+      ${moreBtnHtml}
+      ${anchorHtml}
+      <form class="c-cmt-form" data-card-cmt-form="${esc(id)}">
+        <div class="c-cmt-nick-row">
+          <div class="c-cmt-avatar" data-cmt-form-avatar="${esc(id)}">${myInitial}</div>
+          <input type="text" name="nickname" class="c-cmt-nick-input" placeholder="닉네임" maxlength="20" value="${esc(myNick)}" required aria-label="닉네임">
+        </div>
+        <textarea name="content" class="c-cmt-textarea" placeholder="현장 팁이나 메모를 남겨보세요" maxlength="500" rows="1" required aria-label="댓글 내용"></textarea>
+        <div class="c-cmt-form-actions">
+          <button type="button" class="c-cmt-btn c-cmt-btn-cancel" data-cmt-cancel="${esc(id)}">취소</button>
+          <button type="submit" class="c-cmt-btn c-cmt-btn-submit">저장</button>
+        </div>
+      </form>
+    </div>
+  `;
+}
+
+function commentsCardHtml(c) {
+  if (!/^\d+$/.test(String(c.id))) return "";
+  const id = String(c.id);
+  const cmts = CMT_CACHE.get(id) || [];
+  const hasCmts = cmts.length > 0;
+  // 댓글이 있으면 기본 펼침(open), 없으면 기본 닫힘
+  const isOpen = hasCmts ? !CMT_CLOSED_SET.has(id) : CMT_OPEN_SET.has(id);
+  return `<div class="card-group card-group-cmts" data-card-cmt="${esc(id)}">
+    ${renderCardCmtInner(id, cmts, isOpen)}
+  </div>`;
+}
+
+function updateSingleCardCommentDom(id) {
+  const containers = $$(`[data-card-cmt="${id}"]`);
+  if (!containers.length) return;
+  const cmts = CMT_CACHE.get(String(id)) || [];
+  const hasCmts = cmts.length > 0;
+  const isOpen = hasCmts ? !CMT_CLOSED_SET.has(String(id)) : CMT_OPEN_SET.has(String(id));
+  for (const el of containers) {
+    el.innerHTML = renderCardCmtInner(id, cmts, isOpen);
+  }
+}
+
+let cmtSyncTimer = null;
+function syncCardCommentsInDom() {
+  clearTimeout(cmtSyncTimer);
+  cmtSyncTimer = setTimeout(async () => {
+    const els = $$("[data-card-cmt]");
+    if (!els.length) return;
+    const needFetch = [];
+    for (const el of els) {
+      const id = String(el.dataset.cardCmt);
+      if (CMT_CACHE.has(id)) {
+        const cmts = CMT_CACHE.get(id) || [];
+        const hasCmts = cmts.length > 0;
+        const isOpen = hasCmts ? !CMT_CLOSED_SET.has(id) : CMT_OPEN_SET.has(id);
+        if (!el.querySelector(".card-cmt-box") || (hasCmts && !el.querySelector(".c-cmt-list"))) {
+          el.innerHTML = renderCardCmtInner(id, cmts, isOpen);
+        }
+      } else if (!CMT_FETCHED_SET.has(id)) {
+        needFetch.push(id);
+      }
+    }
+    if (needFetch.length && await ensureSupabaseConfig()) {
+      const uniqueIds = [...new Set(needFetch)].slice(0, 50);
+      uniqueIds.forEach((id) => CMT_FETCHED_SET.add(id));
+      try {
+        const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,created_at&campground_id=in.(${uniqueIds.join(",")})&is_deleted=eq.false&order=created_at.desc`, {
+          headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` }
+        });
+        if (r.ok) {
+          const list = await r.json();
+          for (const uid of uniqueIds) {
+            if (!CMT_CACHE.has(uid)) CMT_CACHE.set(uid, []);
+          }
+          for (const item of list) {
+            const cid = String(item.campground_id);
+            if (!CMT_CACHE.has(cid)) CMT_CACHE.set(cid, []);
+            CMT_CACHE.get(cid).push(item);
+          }
+          for (const uid of uniqueIds) {
+            updateSingleCardCommentDom(uid);
+          }
+        }
+      } catch {}
+    }
+  }, 40);
+}
+
+async function initCommentsCache() {
+  if (!await ensureSupabaseConfig()) return;
+  try {
+    const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,created_at&is_deleted=eq.false&order=created_at.desc&limit=500`, {
+      headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` }
+    });
+    if (!r.ok) return;
+    const list = await r.json();
+    for (const cmt of list) {
+      const cid = String(cmt.campground_id);
+      if (!CMT_CACHE.has(cid)) CMT_CACHE.set(cid, []);
+      CMT_CACHE.get(cid).push(cmt);
+      CMT_FETCHED_SET.add(cid);
+    }
+    const els = $$("[data-card-cmt]");
+    for (const el of els) {
+      const id = String(el.dataset.cardCmt);
+      if (CMT_CACHE.has(id)) {
+        updateSingleCardCommentDom(id);
+      }
+    }
+  } catch {}
+}
+
+let cardCommentEventsBound = false;
+function bindCardCommentEvents() {
+  if (cardCommentEventsBound) return;
+  cardCommentEventsBound = true;
+
+  document.addEventListener("click", async (e) => {
+    const toggleBtn = e.target.closest("[data-cmt-toggle]");
+    if (toggleBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      const id = String(toggleBtn.dataset.cmtToggle);
+      const cmts = CMT_CACHE.get(id) || [];
+      const hasCmts = cmts.length > 0;
+      const currentlyOpen = hasCmts ? !CMT_CLOSED_SET.has(id) : CMT_OPEN_SET.has(id);
+      if (currentlyOpen) {
+        if (hasCmts) CMT_CLOSED_SET.add(id);
+        CMT_OPEN_SET.delete(id);
+      } else {
+        if (hasCmts) CMT_CLOSED_SET.delete(id);
+        CMT_OPEN_SET.add(id);
+      }
+      updateSingleCardCommentDom(id);
+      return;
+    }
+
+    const moreBtn = e.target.closest("[data-cmt-more]");
+    if (moreBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      const id = String(moreBtn.dataset.cmtMore);
+      if (CMT_EXPANDED_SET.has(id)) {
+        CMT_EXPANDED_SET.delete(id);
+      } else {
+        CMT_EXPANDED_SET.add(id);
+      }
+      updateSingleCardCommentDom(id);
+      return;
+    }
+
+    const delBtn = e.target.closest("[data-card-cmt-del]");
+    if (delBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (NO_REMOTE_WRITE) { toast("테스트 모드에서는 지울 수 없어요"); return; }
+      const cmtId = delBtn.dataset.cardCmtDel;
+      const id = String(delBtn.dataset.cardId);
+      delBtn.disabled = true;
+      try {
+        await fetch(`${SB.url}/rest/v1/campground_comment?id=eq.${encodeURIComponent(cmtId)}`, {
+          method: "PATCH",
+          headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json" },
+          body: JSON.stringify({ is_deleted: true })
+        });
+        const cur = CMT_CACHE.get(id) || [];
+        CMT_CACHE.set(id, cur.filter((x) => String(x.id) !== String(cmtId)));
+        updateSingleCardCommentDom(id);
+        if ($("[data-cmts]")) loadComments(id);
+        toast("지웠어요");
+      } catch {
+        toast("지금은 지우지 못했어요");
+        delBtn.disabled = false;
+      }
+      return;
+    }
+
+    const cancelBtn = e.target.closest("[data-cmt-cancel]");
+    if (cancelBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      const id = String(cancelBtn.dataset.cmtCancel);
+      const form = cancelBtn.closest("form");
+      if (form) {
+        const ta = form.querySelector("textarea[name='content']");
+        if (ta) ta.value = "";
+      }
+      const cmts = CMT_CACHE.get(id) || [];
+      if (!cmts.length) {
+        CMT_OPEN_SET.delete(id);
+        updateSingleCardCommentDom(id);
+      }
+      return;
+    }
+  });
+
+  document.addEventListener("submit", async (e) => {
+    const form = e.target.closest("[data-card-cmt-form]");
+    if (!form) return;
+    e.preventDefault();
+    e.stopPropagation();
+    if (NO_REMOTE_WRITE) { toast("테스트 모드에서는 남기지 않아요"); return; }
+    const id = String(form.dataset.cardCmtForm);
+    const nickInput = form.querySelector("input[name='nickname']");
+    const contentTa = form.querySelector("textarea[name='content']");
+    const submitBtn = form.querySelector(".c-cmt-btn-submit");
+    const nickname = nickInput ? nickInput.value.trim() : "";
+    const content = contentTa ? contentTa.value.trim() : "";
+    if (!nickname || !content) return;
+    if (submitBtn) submitBtn.disabled = true;
+    try {
+      if (!await ensureSupabaseConfig()) throw new Error("Config not ready");
+      const r = await fetch(`${SB.url}/rest/v1/campground_comment`, {
+        method: "POST",
+        headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=representation" },
+        body: JSON.stringify({ campground_id: Number(id), nickname, content, tag: "general", password_hash: crypto.randomUUID() })
+      });
+      const row = r.ok ? (await r.json())[0] : null;
+      if (row?.id) {
+        store.set("mc-my-comments", [...store.get("mc-my-comments", []), String(row.id)]);
+        store.set("mc-cmt-nick", nickname);
+        pushSave("comment", id);
+        const cur = CMT_CACHE.get(id) || [];
+        CMT_CACHE.set(id, [row, ...cur.filter((x) => x.id !== row.id)]);
+        CMT_CLOSED_SET.delete(id);
+        CMT_OPEN_SET.add(id);
+        updateSingleCardCommentDom(id);
+        if ($("[data-cmts]")) loadComments(id);
+        toast("남겼어요");
+      } else {
+        toast("지금은 남기지 못했어요");
+      }
+    } catch {
+      toast("지금은 남기지 못했어요");
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
+  });
+
+  document.addEventListener("input", (e) => {
+    const input = e.target.closest(".c-cmt-nick-input");
+    if (!input) return;
+    const form = input.closest("form");
+    if (!form) return;
+    const avatar = form.querySelector("[data-cmt-form-avatar]");
+    if (avatar) {
+      avatar.textContent = (input.value.trim().charAt(0) || "캠");
+    }
+  });
+}
+
 // 홈 히어로 개수 — 매 동기화 뒤 배포되는 목록 카탈로그(campgrounds.lite.json)에서 바로 센다. 숙박(캠핑장)=du 없음, 당일 나들이=du.
 // CI(hero-count-test)가 화면 숫자 == 카탈로그 개수를 검사한다.
 function heroCounts() {
@@ -4404,8 +4769,9 @@ function heroCounts() {
 function commentsHtml(c) {
   // campground_comment.campground_id는 INT — 공원·당일 장소(문자 id)는 저장이 안 돼 400이 났다(QA 2026-10-20). 숫자 id만 연다.
   if (!SB.url || !/^\d+$/.test(String(c.id))) return "";
+  const myNick = store.get("mc-cmt-nick", "");
   return `<section class="d-sec" id="cmt"><div class="sec-head">${iconTitle("chat-bubble", "캠퍼 한마디")}</div>
-    <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" placeholder="닉네임" required aria-label="닉네임"><textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁" required aria-label="내용"></textarea><button class="btn primary" type="submit">남기기</button></form>
+    <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" placeholder="닉네임" value="${esc(myNick)}" required aria-label="닉네임"><textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁" required aria-label="내용"></textarea><button class="btn primary" type="submit">남기기</button></form>
     <ul class="cmts" data-cmts><li class="muted">불러오는 중…</li></ul></section>`;
 }
 
@@ -4608,8 +4974,10 @@ async function loadComments(id) {
     if (!await ensureSupabaseConfig()) throw new Error("Supabase config unavailable");
     const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,nickname,content,created_at&campground_id=eq.${encodeURIComponent(id)}&is_deleted=eq.false&order=created_at.desc&limit=30`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
     const list = r.ok ? await r.json() : [];
+    CMT_CACHE.set(String(id), list);
+    updateSingleCardCommentDom(String(id));
     const mine = store.get("mc-my-comments", []);
-    box.innerHTML = list.length ? list.map((x) => `<li><b>${esc(x.nickname)}</b><i>${esc(formatKoreanDate(x.created_at))}</i>${mine.includes(String(x.id)) ? `<button type="button" class="link" data-cmt-del="${esc(x.id)}">지우기</button>` : ""}<p>${commentContentHtml(x.content)}</p></li>`).join("") : `<li class="muted">첫 한마디를 남겨 주세요.</li>`;
+    box.innerHTML = list.length ? list.map((x) => `<li><b>${esc(x.nickname)}</b><i>${esc(formatKoreanDate(x.created_at))}</i>${mine.includes(String(x.id)) ? `<button type="button" class="link" data-cmt-del="${esc(x.id)}">지우기</button>` : ""}<div class="cmt-content-body">${formatCommentContent(x.content)}</div></li>`).join("") : `<li class="muted">첫 한마디를 남겨 주세요.</li>`;
   } catch { box.innerHTML = `<li class="muted">지금은 불러오지 못했어요.</li>`; }
 }
 // ── 주간 날씨 예보 & 일자별 상세 모달 (모여라 캘린더 동일 구조) ──────
@@ -5602,13 +5970,21 @@ function bindDetail() {
     try {
       const r = await fetch(`${SB.url}/rest/v1/campground_comment`, { method: "POST", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=representation" }, body: JSON.stringify({ campground_id: f.dataset.cmt, nickname: f.nickname.value.trim(), content: f.content.value.trim(), tag: "general", password_hash: crypto.randomUUID() }) });
       const row = r.ok ? (await r.json())[0] : null;
-      if (row?.id) store.set("mc-my-comments", [...store.get("mc-my-comments", []), String(row.id)]);
+      if (row?.id) {
+        store.set("mc-my-comments", [...store.get("mc-my-comments", []), String(row.id)]);
+        store.set("mc-cmt-nick", f.nickname.value.trim());
+      }
       if (r.ok) pushSave("comment", String(f.dataset.cmt));
       f.content.value = "";
       delete f.content.dataset.resized;
       f.content.style.height = "";
       f.content.classList.remove("is-expanded");
       toast(r.ok ? "남겼어요" : "지금은 남기지 못했어요");
+      if (row) {
+        const cur = CMT_CACHE.get(String(f.dataset.cmt)) || [];
+        CMT_CACHE.set(String(f.dataset.cmt), [row, ...cur.filter((x) => x.id !== row.id)]);
+        updateSingleCardCommentDom(String(f.dataset.cmt));
+      }
     } catch { toast("지금은 남기지 못했어요"); }
     btn.disabled = false;
     loadComments(f.dataset.cmt);
@@ -5617,6 +5993,9 @@ function bindDetail() {
     const b = e.target.closest("[data-cmt-del]");
     if (!b || NO_REMOTE_WRITE) return;
     await fetch(`${SB.url}/rest/v1/campground_comment?id=eq.${encodeURIComponent(b.dataset.cmtDel)}`, { method: "PATCH", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json" }, body: JSON.stringify({ is_deleted: true }) }).catch(() => null);
+    const cur = CMT_CACHE.get(String(id)) || [];
+    CMT_CACHE.set(String(id), cur.filter((x) => String(x.id) !== String(b.dataset.cmtDel)));
+    updateSingleCardCommentDom(String(id));
     loadComments(id);
   });
 
@@ -5917,7 +6296,7 @@ async function savedView() {
       </div>
     </div>
     <div class="cards-grid saved-grid">
-      ${saved.map((c, i) => card(c, i, { savedMemo: true })).join("")}
+      ${saved.map((c, i) => card(c, i, { savedMemo: true, collapseSpec: true })).join("")}
     </div>
     ${recentHtml()}
   </section>`;
@@ -6217,8 +6596,15 @@ async function route() {
   lastRoute = name;
   S.cameFromApp = Boolean(prev);
   if (name === "home" && (prev === "detail" || prev === "theme" || prev === "themes")) scrollTo(0, S.homeScroll);
+  else if (location.hash === "#cmt" || location.hash.startsWith("#cmt")) {
+    setTimeout(() => {
+      const el = $("#cmt");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }, 150);
+  }
   else if (name !== prev || name === "detail" || name === "theme") scrollTo(0, 0);
   updateHeaderGlass();
+  syncCardCommentsInDom();
 }
 addEventListener("popstate", route);
 // 앱 안 링크(같은 APP_BASE의 화면 경로)는 새로고침 없이 pushState로 연다. 새 탭·수정 키·다른 페이지(/log/ 등)는 브라우저에 맡긴다.
@@ -6232,7 +6618,7 @@ document.addEventListener("click", (e) => {
   const rest = u.pathname.slice(APP_BASE.length) + u.search;
   if (!APP_ROUTE.test(rest)) return;
   e.preventDefault();
-  nav(`#/${rest}`);
+  nav(`#/${rest}${u.hash || ""}`);
 });
 // ── 바깥 링크를 기기에 맞는 화면으로(소유자 2026-10-20: 모바일에서 네이버 예약이 PC 화면으로 열려 잘림) ──────────
 // 같은 글·장소라도 PC·모바일 주소가 다른 플랫폼(네이버 검색·블로그·카페·예약·지도·플레이스, 다음 카페·검색, 카카오 장소)은
@@ -6477,6 +6863,8 @@ addEventListener("error", (e) => {
     for (const o of openings.items ?? []) { const id = String(o.id); if (better(o, S.openings.get(id))) S.openings.set(id, o); } }
   S.saved = S.saved.filter((id) => S.byId.has(id));
   await configReady;
+  initCommentsCache();
+  bindCardCommentEvents();
   // /saved가 로컬 찜으로 먼저 그려졌다가 서버 찜으로 뒤늦게 바뀌는 경합을 막는다.
   // 서버 목록을 먼저 확정하되 1.5초까지만 기다린다. 늦으면 이 기기 찜(+대기 동작)으로 먼저 그리고, 서버 목록이 오면 하트·찜 목록을 맞춘다.
   S.saved = withPendingOps(S.saved);
@@ -6487,6 +6875,19 @@ addEventListener("error", (e) => {
   // 이전 주소(#c=1554)도 새 상세 주소로 보정해 공유 링크를 깨지 않는다.
   syncCompare(); updateHeaderGlass();
   route();
+  // 카드가 새로 렌더링될 때 댓글을 감지해 동기화한다.
+  new MutationObserver((mutations) => {
+    let hasNewCards = false;
+    for (const m of mutations) {
+      for (const n of m.addedNodes) {
+        if (n.nodeType === 1 && (n.dataset?.cardCmt || n.querySelector?.("[data-card-cmt]"))) {
+          hasNewCards = true; break;
+        }
+      }
+      if (hasNewCards) break;
+    }
+    if (hasNewCards) syncCardCommentsInDom();
+  }).observe($("#view") || document.body, { childList: true, subtree: true });
   // 첫 화면을 그린 뒤 한가할 때(최대 2초 뒤) 보이는 카드 샤드 미리 받기를 켠다.
   onIdle(watchIdlePrefetch);
 })();

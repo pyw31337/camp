@@ -41,6 +41,8 @@
   "candidates": [
     { "name": "원주 법천소공원 노지캠핑장", "region": "강원 원주", "claim": "무료·취사·화장실·개수대, 2026-05-03 개방", "found_in": "https://www.youtube.com/watch?v=49f1zxBz_n4", "tier": "E", "next": "원주시청 공원녹지과 공지로 확인" },
     { "name": "화천 평화의댐 오토캠핑장", "region": "강원 화천", "claim": "커뮤니티 글에 ‘선착순 무료’. 화천군 직영, 화장실·개수대·샤워실 보유 보도", "found_in": "https://m.cafe.daum.net/beautiful5060/NNns/1182", "tier": "E", "next": "화천군 공지로 현재 요금 확인(보도는 유료 여부 미언급)" },
-    { "name": "서귀포 돈내코야영장", "region": "제주 서귀포", "claim": "커뮤니티 글에 ‘이용료 무료, 화장실·개수대·샤워장’", "found_in": "https://m.cafe.daum.net/beautiful5060/NNns/1182", "tier": "E", "next": "서귀포시 공지로 현재 요금·취사 규정 확인" }
+    { "name": "서귀포 돈내코야영장", "region": "제주 서귀포", "claim": "커뮤니티 글에 ‘이용료 무료, 화장실·개수대·샤워장’", "found_in": "https://m.cafe.daum.net/beautiful5060/NNns/1182", "tier": "E", "next": "서귀포시 공지로 현재 요금·취사 규정 확인" },
+    { "name": "영덕 오보해변 캠핑장", "region": "경북 영덕", "claim": "비수기 무료(성수기 3만원/샤워 4천원), 노지 모래, 화장실 100m, 전기 없음, 화롯대 금지", "found_in": "https://newcation.imweb.me/16/?bmode=view&idx=175258089", "tier": "E", "next": "영덕군청 해양수산과 또는 영덕읍사무소 해수욕장 야영 관리 규정 확인" },
+    { "name": "울진 망양 황금대게 공원", "region": "경북 울진", "claim": "노지 무료, 스노클링 포인트, 현장 샤워장 없음", "found_in": "https://newcation.imweb.me/16/?bmode=view&idx=173048117", "tier": "E", "next": "울진군청 산림공원과 또는 기성면사무소 공원 취사·야영 가능 여부 확인" }
   ]
 }

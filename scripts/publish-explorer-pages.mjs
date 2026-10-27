@@ -141,8 +141,8 @@ const copyBrandImages = async (destDir) => {
   if (existsSync(srcImages) && resolve(srcImages) !== resolve(imgDest.replace(/\/$/, ""))) {
     await cp(srcImages, imgDest, { recursive: true });
   }
-  for (const f of ["favicon.svg", "favicon.png", "manifest.webmanifest"]) {
-    const src = `${root}camping-atlas/public/${f}`;
+  for (const f of ["favicon.svg", "favicon.png", "manifest.webmanifest", "robots.txt"]) {
+    const src = existsSync(`${root}design/renewal/${f}`) ? `${root}design/renewal/${f}` : `${root}camping-atlas/public/${f}`;
     const dst = `${destDir}${f}`;
     if (existsSync(src) && resolve(src) !== resolve(dst)) await cp(src, dst);
   }
