@@ -4472,7 +4472,10 @@ function commentLinkCard(raw) {
   const title = esc(info.provider), domain = esc(info.label), href = esc(info.url);
   if (info.embed) {
     const visual = info.thumb ? `<img src="${esc(info.thumb)}" alt="${title} 미리보기" loading="lazy" referrerpolicy="no-referrer">` : `<span class="comment-video-placeholder">${esc(info.provider)}</span>`;
-    return `<span class="comment-link-card comment-video-card"><button type="button" class="comment-video-trigger" data-comment-video="${esc(info.embed)}" aria-label="${title} 재생">${visual}<span class="comment-video-play" aria-hidden="true">▶</span></button><span class="comment-link-meta"><b>${title}</b><small>${domain}</small></span></span>`;
+    const isYoutube = /^YouTube(?: Shorts)?$/.test(info.provider);
+    const titleHtml = isYoutube ? `${platIc("youtube")}<span>${title}</span>` : `<span>${title}</span>`;
+    const domainHtml = isYoutube ? "" : `<small>${domain}</small>`;
+    return `<span class="comment-link-card comment-video-card"><button type="button" class="comment-video-trigger" data-comment-video="${esc(info.embed)}" aria-label="${title} 재생">${visual}<span class="comment-video-play" aria-hidden="true">▶</span></button><span class="comment-link-meta"><b class="comment-video-title">${titleHtml}</b>${domainHtml}</span></span>`;
   }
   return `<a class="comment-link-card comment-external-card" href="${href}" target="_blank" rel="noopener noreferrer"><span class="comment-link-icon">↗</span><span><b>${title}</b><small>${domain}</small></span><span class="comment-link-arrow">›</span></a>`;
 }
@@ -4523,11 +4526,10 @@ function savedCommentColor(name) {
 function savedCommentLocalKey(id) { return `mc-saved-comments-${String(id)}`; }
 function savedCommentInitial(name) { return String(name || "?").trim().slice(0, 1).toUpperCase() || "?"; }
 function savedCommentRow(x) {
-  const mine = store.get("mc-my-comments", []).includes(String(x.id));
   const color = savedCommentColor(x.nickname);
   return `<li class="saved-comment-row" data-saved-comment-row="${esc(x.id || "")}">
     <span class="saved-comment-avatar" style="--comment-color:${color}" aria-hidden="true">${esc(savedCommentInitial(x.nickname))}</span>
-    <div class="saved-comment-copy"><div class="saved-comment-meta"><b>${esc(x.nickname || "캠퍼")}</b><time>${esc(formatKoreanDateTime(x.created_at || x.createdAt || Date.now()))}</time>${mine ? `<button type="button" class="saved-comment-edit" data-saved-comment-del="${esc(x.id || "")}" aria-label="댓글 삭제">${ic("close")}</button>` : ""}</div><p>${commentContentHtml(x.content || "")}</p></div>
+    <div class="saved-comment-copy"><div class="saved-comment-meta"><b>${esc(x.nickname || "캠퍼")}</b><time>${esc(formatKoreanDateTime(x.created_at || x.createdAt || Date.now()))}</time></div><p>${commentContentHtml(x.content || "")}</p></div>
   </li>`;
 }
 function savedCommentsHtml(c) {
@@ -4536,7 +4538,7 @@ function savedCommentsHtml(c) {
   return `<div class="saved-card-comments" data-saved-comments data-saved-comment-id="${esc(c.id)}">
     <div class="saved-comments-head">
       <span class="saved-comments-label">${ic("chat-bubble")}<span>댓글</span><b data-saved-comment-count hidden>0</b></span>
-      <button class="saved-comments-compose-toggle" type="button" data-saved-comments-toggle aria-expanded="false">한마디 남기기</button>
+      <button class="saved-comments-compose-toggle" type="button" data-saved-comments-toggle aria-expanded="false"><span>한마디 남기기</span>${ic("chevron-up", "saved-comments-chevron")}</button>
     </div>
     <div class="saved-comments-preview" data-saved-comments-preview hidden>
       <ul class="saved-comments-list" data-saved-comments-list></ul>
@@ -4661,18 +4663,6 @@ function initSavedComments() {
       toast(saved ? "댓글을 남겼어요" : "이 기기에 댓글을 저장했어요");
       btn.disabled = false;
     });
-    $("[data-saved-comments-list]", root)?.addEventListener("click", async (e) => {
-      const button = e.target.closest("[data-saved-comment-del]");
-      if (!button) return;
-      const commentId = String(button.dataset.savedCommentDel || "");
-      if (commentId.startsWith("local-")) {
-        const next = store.get(savedCommentLocalKey(root.dataset.savedCommentId), []).filter((x) => String(x.id) !== commentId);
-        store.set(savedCommentLocalKey(root.dataset.savedCommentId), next); renderSavedCommentList(root, next); return;
-      }
-      if (NO_REMOTE_WRITE || !await ensureSupabaseConfig()) return;
-      await fetch(`${SB.url}/rest/v1/campground_comment?id=eq.${encodeURIComponent(commentId)}`, { method: "PATCH", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json" }, body: JSON.stringify({ is_deleted: true }) }).catch(() => null);
-      fetchSavedComments(root);
-    });
   });
   fetchSavedCardComments();
 }
@@ -4683,8 +4673,7 @@ async function loadComments(id) {
     if (!await ensureSupabaseConfig()) throw new Error("Supabase config unavailable");
     const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,nickname,content,created_at&campground_id=eq.${encodeURIComponent(id)}&is_deleted=eq.false&order=created_at.desc&limit=30`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
     const list = r.ok ? await r.json() : [];
-    const mine = store.get("mc-my-comments", []);
-    box.innerHTML = list.length ? list.map((x) => `<li><b>${esc(x.nickname)}</b><i>${esc(formatKoreanDateTime(x.created_at))}</i>${mine.includes(String(x.id)) ? `<button type="button" class="link" data-cmt-del="${esc(x.id)}">지우기</button>` : ""}<p>${commentContentHtml(x.content)}</p></li>`).join("") : `<li class="muted">첫 한마디를 남겨 주세요.</li>`;
+    box.innerHTML = list.length ? list.map((x) => `<li><b>${esc(x.nickname)}</b><i>${esc(formatKoreanDateTime(x.created_at))}</i><p>${commentContentHtml(x.content)}</p></li>`).join("") : `<li class="muted">첫 한마디를 남겨 주세요.</li>`;
   } catch { box.innerHTML = `<li class="muted">지금은 불러오지 못했어요.</li>`; }
 }
 // ── 주간 날씨 예보 & 일자별 상세 모달 (모여라 캘린더 동일 구조) ──────
@@ -6188,7 +6177,7 @@ function bindMap() {
 
 
 async function savesLogView() {
-  if (!await ensureSupabaseConfig()) return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><p class="muted">서버 연결을 준비하지 못했어요.</p><p class="muted">별도 페이지: <a href="${APP_BASE}log/">/log</a></p></section>`;
+  if (!await ensureSupabaseConfig()) return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><p class="muted">서버 연결을 준비하지 못했어요.</p><p class="muted">별도 페이지: <a href="${APP_BASE}admin/">/admin</a></p></section>`;
   let rows = [];
   try {
     rows = await readSaveLog(200);
@@ -6201,7 +6190,7 @@ async function savesLogView() {
     const add = x.action === "add";
     return `<li><span class="slog-act ${add ? "add" : "rm"}">${add ? "찜" : "해제"}</span>${c ? `<a class="slog-name" href="${APP_BASE}place/${esc(c.id)}">${esc(name)}</a>` : `<span class="slog-name">${esc(name)}</span>`}<time class="slog-time" datetime="${esc(x.created_at)}">${esc(formatKoreanDate(x.created_at) || x.created_at)} ${esc(new Date(x.created_at).toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Seoul" }))}</time><span class="slog-env">${esc(x.platform || "기기 정보 없음")} ${esc(x.screen || "")}</span></li>`;
   }).join("")}</ul>` : `<p class="muted">아직 기록이 없습니다.</p>`;
-  return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><nav class="slog-links" aria-label="관련 화면"><a href="${APP_BASE}saved">찜 목록 보기</a><a href="${APP_BASE}log/">운영 대시보드(/log)</a></nav>${body}</section>`;
+  return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><nav class="slog-links" aria-label="관련 화면"><a href="${APP_BASE}saved">찜 목록 보기</a><a href="${APP_BASE}admin/">운영 대시보드(/admin)</a></nav>${body}</section>`;
 }
 
 // 모든 가로 스크롤 영역: 마우스로 끌어서 넘기기(터치는 원래 스와이프). .rail은 initDraggableRails가 따로 처리(영우 님 2026-10-21).
@@ -6311,7 +6300,7 @@ async function route() {
   updateHeaderGlass();
 }
 addEventListener("popstate", route);
-// 앱 안 링크(같은 APP_BASE의 화면 경로)는 새로고침 없이 pushState로 연다. 새 탭·수정 키·다른 페이지(/log/ 등)는 브라우저에 맡긴다.
+// 앱 안 링크(같은 APP_BASE의 화면 경로)는 새로고침 없이 pushState로 연다. 새 탭·수정 키·다른 페이지(/admin/ 등)는 브라우저에 맡긴다.
 const APP_ROUTE = /^(?:$|\?|list(?:[/?]|$)|map\/?$|themes\/?$|theme\/|region\/|compare\/?$|saved\/?$|saves-log\/?$|place\/)/;
 document.addEventListener("click", (e) => {
   if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;

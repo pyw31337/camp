@@ -78,7 +78,7 @@ await writeFile(`${rootOut}style.css`, rootCss);
 await writeFile(`${rootOut}shell.css`, shellCss);
 await writeFile(`${rootOut}app.js`, renewalApp);
 
-// 1-1. 공통 틀(헤더·푸터·하단 탭)을 앱 밖 쪽(/log/)에도 그대로 넣는다. 원본은 design/renewal/index.html의 shell:* 표시 사이 하나뿐.
+// 1-1. 공통 틀(헤더·푸터·하단 탭)을 운영 화면(/admin/)에도 그대로 넣는다. 원본은 design/renewal/index.html의 shell:* 표시 사이 하나뿐.
 const shellPart = (name) => {
   const m = renewalIndex.match(new RegExp(`<!-- ${name}[^>]*-->([\\s\\S]*?)<!-- /${name} -->`));
   if (!m) throw new Error(`design/renewal/index.html에 ${name} 표시가 없습니다`);
@@ -89,7 +89,10 @@ const shellIcons = () => {
   const syms = ids.map((id) => renewalIndex.match(new RegExp(`<symbol id="${id}"[\\s\\S]*?</symbol>`))?.[0] ?? "").join("");
   return `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>${syms.replaceAll('id="', 'id="shell-')}</defs></svg>`;
 };
-const SHELL_PAGES = [["log/index.html", "../"]];
+// 운영 화면은 /admin/을 정식 주소로 쓴다. /log/는 아래에서 /admin/으로 넘기는 호환 주소를 만든다.
+const SHELL_PAGES = [["admin/index.html", "../"]];
+// 예전 주소를 북마크한 이용자를 위해 /log/는 /admin/으로 보낸다. 검색어·해시는 유지한다.
+const legacyAdminRedirect = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>렛츠 캠핑 운영 화면</title><script>(function(){var p=location.pathname;var b=p.indexOf("/camp/")===0?"/camp/":"/";location.replace(b+"admin/"+location.search+location.hash);})();</script></head><body><p><a href="../admin/">운영 화면으로 이동</a></p></body></html>`;
 for (const [rel, up] of SHELL_PAGES) {
   const f = `${rootOut}${rel}`;
   if (!existsSync(f)) continue;
@@ -247,7 +250,7 @@ if (placeSource) {
   console.log(`지역 랜딩 페이지 region/ ${rn}개`);
 }
 
-// 운영 기록(/log/) 및 탐색 화면을 위한 경량 캠핑장 ID-이름 사전 생성 (28MB campgrounds.json 대체)
+// 운영 기록(/admin/) 및 탐색 화면을 위한 경량 캠핑장 ID-이름 사전 생성 (28MB campgrounds.json 대체)
 const campJsonSource = existsSync(`${dataDir}/campgrounds.json`) ? `${dataDir}/campgrounds.json`
   : existsSync(`${rootOut}explore/data/campgrounds.json`) ? `${rootOut}explore/data/campgrounds.json`
   : existsSync(`${out}data/campgrounds.json`) ? `${out}data/campgrounds.json` : null;
@@ -259,6 +262,8 @@ if (campJsonSource) {
     const campNamesJson = JSON.stringify(campNames);
     await mkdir(`${rootOut}log`, { recursive: true });
     await writeFile(`${rootOut}log/camp-names.json`, campNamesJson);
+    await mkdir(`${rootOut}admin`, { recursive: true });
+    await writeFile(`${rootOut}admin/camp-names.json`, campNamesJson);
     await mkdir(`${out}data`, { recursive: true });
     await writeFile(`${out}data/camp-names.json`, campNamesJson);
     console.log(`경량 캠핑장 사전(camp-names.json) 발행 완료 (${Object.keys(campNames).length}개 · ${Math.round(campNamesJson.length / 1024)}KB)`);
@@ -268,6 +273,9 @@ if (campJsonSource) {
 }
 
 if (rawTarget) {
+  // shell-only 배포에서도 이전 /log/ 북마크가 정식 /admin/ 화면으로 이동하도록 유지한다.
+  await mkdir(`${rootOut}log`, { recursive: true });
+  await writeFile(`${rootOut}log/index.html`, legacyAdminRedirect);
   console.log(`메인 화면 및 탐색 화면 갱신: ${rootOut}index.html & ${out}index.html${kakaoKey ? " · 지도 키 있음" : " · 지도 키 없음"}`);
   process.exit(0);
 }
@@ -284,12 +292,16 @@ if (existsSync(`${dataDir}/camps`)) await cp(`${dataDir}/camps`, `${out}data/cam
 const camps = JSON.parse(await readFile(`${dataDir}/campgrounds.json`, "utf8"));
 // (예전 c/{id}/ 공유 페이지는 place/{id}/ 로 바뀌었다 — 위 3번)
 
-// 운영 기록(/log/) 및 탐색 화면을 위한 경량 캠핑장 ID-이름 사전 생성 (28MB campgrounds.json 대체)
+// 운영 기록(/admin/) 및 탐색 화면을 위한 경량 캠핑장 ID-이름 사전 생성 (28MB campgrounds.json 대체)
 const campNames = Object.fromEntries(camps.filter((c) => c.id && c.name).map((c) => [c.id, c.name]));
 const campNamesJson = JSON.stringify(campNames);
 await mkdir(`${rootOut}log`, { recursive: true });
 await writeFile(`${rootOut}log/camp-names.json`, campNamesJson);
+await mkdir(`${rootOut}admin`, { recursive: true });
+await writeFile(`${rootOut}admin/camp-names.json`, campNamesJson);
 await writeFile(`${out}data/camp-names.json`, campNamesJson);
 console.log(`경량 캠핑장 사전(camp-names.json) 발행 완료 (${Object.keys(campNames).length}개 · ${Math.round(campNamesJson.length / 1024)}KB)`);
+
+await writeFile(`${rootOut}log/index.html`, legacyAdminRedirect);
 
 console.log(`camping-atlas 루트 및 explore 발행 준비 완료${kakaoKey ? " · 지도 키 있음" : " · 지도 키 없음"}`);

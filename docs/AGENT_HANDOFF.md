@@ -1,5 +1,21 @@
 # 인수인계
 
+## 📌 찜 카드 댓글 영상 표기·접힘 UI 정리 (2026-10-27, Codex)
+- YouTube/Shorts 댓글 미리보기 하단에서 `youtube.com` 도메인 표기를 제거하고, 상세페이지 SNS 영상과 같은 유튜브 아이콘을 `YouTube`/`YouTube Shorts` 제목 왼쪽에 표시한다. 네이버TV·카카오TV는 기존 플랫폼명과 도메인 표기를 유지한다.
+- 상세정보와 댓글 작성 영역의 화살표는 닫힘 상태에서 아래, 열림 상태에서 위를 가리키도록 통일했다. 댓글이 4개 이상일 때의 `더 보기` 화살표도 같은 규칙으로 바꿨다.
+- 찜 카드의 `일반야영장` 타입 배지와 상세정보/후기 사이 여백을 조정하고, 요금 마지막 행 아래 불필요한 큰 간격을 줄였다. 댓글 삭제 버튼은 찜 카드와 상세페이지 모두 화면에서 제거했다(서버의 기존 댓글은 보존).
+- 원더우드 글램핑(ID 102221)의 영상 댓글은 Supabase에서 `is_deleted=false`인 활성 행으로 확인되어 원문 복구 작업 없이 유지했다. 댓글 내용은 `https://youtube.com/shorts/vO7QdFtZsgc?si=FIupxpNAxbg1PDuU`이며, 화면에서 삭제 버튼만 없앴다.
+- 원본 `design/renewal/{app.js,style.css}`와 발행본 `camping-atlas/public/{app.js,style.css}`를 동기화했다. `node --check`·`git diff --check` 통과; 전체 파이프라인 테스트의 기존 `sharp` 미설치 실패는 별도 기록을 따른다.
+
+## 📌 운영 화면 주소 `/admin/` 전환·수집 품질 감사 (2026-10-27, Codex)
+- 운영 대시보드의 정식 주소를 `/admin/`으로 바꿨다. `camping-atlas/public/admin/index.html`이 canonical 화면이며, 기존 `/log/`는 검색어·해시를 유지한 채 `/admin/`으로 이동하는 호환 스텁으로 발행한다. 찜 기록 화면의 링크·공통 셸 설명도 `/admin/` 기준으로 맞췄다.
+- `scripts/publish-explorer-pages.mjs`가 전체 발행과 `--shell-only` 발행 모두에서 admin 셸·`camp-names.json`을 만들고 log 호환 이동을 보장한다. 원본은 `design/renewal/`, 발행본은 `camping-atlas/public/`에 동기화한다.
+- 찜 목록 기능은 최신 main에 이미 반영되어 있다. `savedDetailsHtml()`의 `상세정보` 6줄은 기본 `hidden`이고 카드별 화살표로 연다. 댓글은 서버에서 불러온 카드에 최신 3개를 자동 표시하고 4~6개는 `더 보기`로 펼친다(댓글이 없는 카드는 빈 영역을 숨긴다). 배포 앱에서 해당 함수·바인딩·`fetchSavedCardComments()`를 확인했다. 브라우저에 예전 화면이 남으면 강력 새로고침 후 다시 확인한다.
+- 제미나이/기존 수집 원장 감사: `main` 카탈로그 6,412곳, 사실 208,796건, 평균 신뢰도 0.78, 확정 83.7%, 충돌 대기 841건(품질 보고 2026-10-25). `collected-data` 원본은 카카오 3,128곳(이미지 66,525·블로그 22,379·카페 3,039), 네이버 1,810곳(문서 34,708)이며 원문 URL은 모두 존재한다. 후기 원문에는 광고·할인성 문장도 남아 있지만 발행 전 `text-judge`·`fact-refine`로 사실 판정 대상에서 제외하는 구조다.
+- 공공 원천 감사(`npm --prefix pipeline run audit:public-data`): 등록 원천 119개(사용 중 14개), 연결 7개·폴백 2개. 휴양림·박물관·수영장·실내놀이 1,418건, 생활 인허가 6,410곳은 연결됨. 전기차는 OSM 폴백 4,407곳, 도로공사 휴게소 캐시는 이 체크아웃에 없어 0건 폴백으로 표시되므로 `EX_API_KEY`가 있는 다음 수집 실행에서 보강해야 한다. 감사 스크립트는 `pipeline/out` 폴더가 없어도 생성하도록 고쳤다.
+- 상식값 재검사: `apply-value-sanity --check`는 92건을 숨김 처리하고 2차 적용 0건으로 멱등 통과했다. 전기 W 400 미만·3,000 초과 4건, 규격/사이트 수·예약상품·시각 범위 위반도 배포 전 격리된다. 현재 발행 카탈로그에는 fee 하한 함수 기준 미만 76건이 남아 있어(공공·당일 예외 제외 후 민간/주체 미상 포함) 다음 요금 재확인 수집 우선순위로 남겼다. 요금 텍스트에 환불·결제·대기 단어가 섞인 0건, 전기 W 값 400 미만 0건을 확인했다.
+- 검사: `npm --prefix pipeline run check:billing` 통과(모든 외부 서비스 무료 구간). `npm --prefix pipeline test`는 557개 중 554개 통과·2개 건너뜀, `photo-dedupe.test.mjs` 1개는 로컬 `sharp` 모듈 미설치로 실패했다.
+
 ## 📌 댓글 URL 미리보기·인라인 재생 (2026-10-26, Codex)
 - 상세페이지 댓글과 찜 메모 댓글의 URL을 링크 카드로 정제했다. YouTube·Shorts·네이버TV·카카오TV는 썸네일/재생 버튼을 누르면 해당 영상 iframe으로 전환되고, 인스타그램·페이스북·네이버·카카오 및 기타 HTTP(S) 주소는 원문 새 탭 링크 카드로 연다.
 - 댓글 본문은 URL을 안전한 HTTP(S)만 링크화하고 나머지는 텍스트로 유지한다. `design/renewal/{app.js,style.css}`와 `camping-atlas/public/{app.js,style.css}`를 함께 갱신했다.
