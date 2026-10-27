@@ -4353,7 +4353,11 @@ function registryRows(c) {
   const g = c.gx ?? {}, sf = g.sf ?? [];
   const safety = [["소화기", sf[0]], ["방화수", sf[1]], ["방화사", sf[2]], ["화재감지기", sf[3]]].filter(([, n]) => n > 0).map(([l, n]) => `${l} ${n}`);
   const manage = [g.staff ? `상주 ${g.staff}명` : null, g.org].filter(Boolean);
-  const best = (c.best ?? []).map(([y, f]) => `${y} ${BEST_LABEL[f] ?? f}`);
+  const best = (c.best ?? []).map((b) => {
+    if (Array.isArray(b)) return `${b[0]} ${BEST_LABEL[b[1]] ?? b[1]}`;
+    if (b && typeof b === "object") return `${b.year ?? ""} ${BEST_LABEL[b.label ?? b.field] ?? b.label ?? b.field ?? ""}`.trim();
+    return String(b);
+  }).filter(Boolean);
   return [
     ["우수야영장", best.length ? `${esc(best.join(" · "))} <span class="muted">공공 선정</span>` : null],
     ["안전시설", safety.length ? esc(safety.join(" · ")) : null],
