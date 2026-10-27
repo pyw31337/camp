@@ -346,7 +346,7 @@
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 1ms !important; animation-delay: 0ms !important; transition-duration: 1ms !important; } }
 </style>
 <!-- 공통 틀(헤더·푸터·하단 탭·본문 폭) — 앱과 같은 파일. 이 쪽 스타일보다 뒤에 둬서 틀은 항상 같다. -->
-<link rel="stylesheet" href="../shell.css?v=663a851d4ea0">
+<link rel="stylesheet" href="../shell.css?v=b97749168c6c">
 </head>
 <body>
 
@@ -685,7 +685,7 @@
         rpcOr("safe_save_log_feed", { row_limit: 400 }, "save_log?select=created_at,action,campground_id,language,timezone,screen,platform&order=created_at.desc&limit=400"),
         rpcOr("safe_view_log_feed", { row_limit: 800 }, "view_log?select=created_at,campground_id,entry_source,path,language,timezone,screen,platform&entry_source=eq.list&order=created_at.desc&limit=800").catch(() => []),
         rpcOr("safe_list_detail_counts", { row_limit: 3000 }).catch(() => []),
-        fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,created_at,is_deleted&order=created_at.desc&limit=200`, { headers }),
+        fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,tag,created_at,is_deleted&order=created_at.desc&limit=200`, { headers }),
       ]);
       state.shared = await fetch(`${SB.url}/rest/v1/shared_save?select=campground_id,created_at&order=created_at.desc`, { headers }).then((r) => (r.ok ? r.json() : [])).catch(() => []);
       const comments = cr.ok ? await cr.json() : [];
@@ -724,7 +724,7 @@
       last.set(id, type);
       items.push({ id: `s-${s.created_at}-${id}-${type}`, type, dup, campId: id, campName: nameOf(id), createdAt: s.created_at, timeMs: Date.parse(s.created_at) || 0, device: parseDevice("", s.platform, s.screen, s.timezone) });
     }
-    for (const c of state.comments) items.push({ id: `c-${c.id}`, type: c.is_deleted ? "deleted" : "comment", campId: String(c.campground_id), campName: nameOf(c.campground_id), nickname: c.nickname || "익명 캠퍼", content: c.content || "", createdAt: c.created_at, timeMs: Date.parse(c.created_at) || 0, device: c._dev ? parseDevice("", c._dev.platform, c._dev.screen, c._dev.timezone) : null });
+    for (const c of state.comments) items.push({ id: `c-${c.id}`, type: c.is_deleted ? "deleted" : "comment", campId: String(c.campground_id), campName: nameOf(c.campground_id), nickname: c.nickname || "익명 캠퍼", content: c.content || "", commentOrigin: c.tag === "saved" ? "찜 목록" : "상세", createdAt: c.created_at, timeMs: Date.parse(c.created_at) || 0, device: c._dev ? parseDevice("", c._dev.platform, c._dev.screen, c._dev.timezone) : null });
     for (const v of state.views) items.push({ id: `v-${v.created_at}-${v.campground_id}`, type: "view", campId: String(v.campground_id), campName: nameOf(v.campground_id), createdAt: v.created_at, timeMs: Date.parse(v.created_at) || 0, device: parseDevice("", v.platform, v.screen, v.timezone) });
     items.sort((a, b) => b.timeMs - a.timeMs);
     state.feedItems = items;
@@ -903,12 +903,12 @@
     deleted: ["trash", "t-dup", "삭제된 한마디"], view: ["enter", "t-view", "상세 진입"],
   };
   function rowHtml(it, cls, i) {
-    const [ic, tc, label] = TYPE[it.type], d = it.device, url = `../place/${encodeURIComponent(it.campId)}/`;
+    const [ic, tc, label] = TYPE[it.type], d = it.device, url = `../place/${encodeURIComponent(it.campId)}/${it.type === "comment" || it.type === "deleted" ? "#cmt" : ""}`;
     return `<div class="row ${cls}${it.dup ? " dup" : ""}" style="--i:${Math.min(i, 14)}" data-id="${esc(it.id)}">
       <span class="tchip ${tc}" title="${label}">${icon(ic, "")}</span>
       <div class="r-main">
         <div class="r-title"><a class="r-name" href="${url}" target="_blank" rel="noopener">${esc(it.campName)}</a><span class="tag ${tc}">${label}</span>${it.dup ? `<span class="tag t-dup" title="이미 같은 상태였는데 다시 기록됨(화면이 오래 열려 있었거나 재전송)">중복</span>` : ""}</div>
-        <div class="r-meta"><span title="${esc(it.createdAt)}">${icon("clock")}${rel(it.createdAt)} · ${clock(it.createdAt)}</span>${it.nickname ? `<span>${icon("user")}${esc(it.nickname)}</span>` : ""}${d ? `<span>${icon(d.ic)}${esc(d.label)}</span>` : ""}</div>
+        <div class="r-meta"><span title="${esc(it.createdAt)}">${icon("clock")}${rel(it.createdAt)} · ${clock(it.createdAt)}</span>${it.nickname ? `<span>${icon("user")}${esc(it.nickname)}</span>` : ""}${it.commentOrigin ? `<span>${icon("comment")}${esc(it.commentOrigin)} 댓글</span>` : ""}${d ? `<span>${icon(d.ic)}${esc(d.label)}</span>` : ""}</div>
         ${it.content ? `<div class="r-cmt${it.type === "deleted" ? " del" : ""}">${esc(it.content)}</div>` : ""}
       </div>
       <div class="r-act">

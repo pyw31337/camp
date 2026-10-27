@@ -1,7 +1,7 @@
 // 공공 원천 연결·커버리지 감사. 네트워크를 호출하지 않고 현재 발행 캐시를 점검한다.
 // 실제 수집은 sync:extras / sync:rest-stops / sync:public-leisure가 담당하며,
 // 키가 없는 환경에서도 “연결됨/캐시 없음/키 필요”를 구분해 보고한다.
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -37,6 +37,7 @@ const report = {
   ],
 };
 const out = resolve(root, "pipeline/out/public-data-audit.json");
+mkdirSync(resolve(root, "pipeline/out"), { recursive: true });
 writeFileSync(out, JSON.stringify(report, null, 2));
 for (const x of rows) console.log(`${x.label}: ${x.status} · ${x.count} · registry=${x.registry}`);
 console.log(`공공 데이터 감사: ${out}`);

@@ -1129,7 +1129,7 @@ function savedDetailsHtml(c) {
     : "";
   return `<div class="card-group card-group-spec saved-card-spec" data-saved-card-spec>
     <button class="saved-card-spec-toggle" type="button" data-saved-card-spec-toggle aria-expanded="false" aria-controls="${esc(panelId)}">
-      <span>${ic("list")}상세정보</span>${ic("right", "saved-card-spec-chevron")}
+      <span>${ic("list")}상세정보</span>${ic("chevron-up", "saved-card-spec-chevron")}
     </button>
     <div class="saved-card-spec-panel" id="${esc(panelId)}" data-saved-card-spec-panel hidden>
       ${typesHtml}
@@ -4533,10 +4533,7 @@ function formatCommentContent(content) {
       <img src="https://i.ytimg.com/vi/${esc(ytId)}/hqdefault.jpg" alt="YouTube thumbnail" loading="lazy">
       <div class="c-yt-play-btn"><svg viewBox="0 0 24 24" class="c-yt-play-icon" aria-hidden="true"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></div>
     </div>
-    <div class="c-yt-meta">
-      <span class="c-yt-badge">${isShorts ? "YouTube Shorts" : "YouTube"}</span>
-      <span class="c-yt-host">youtube.com</span>
-    </div>
+    <div class="c-yt-meta"><span class="c-yt-badge">${platIc("youtube")}<span>${isShorts ? "YouTube Shorts" : "YouTube"}</span></span></div>
   </a>`;
   return textHtml ? `${textHtml}${ytCardHtml}` : ytCardHtml;
 }
@@ -4550,10 +4547,7 @@ function renderCardCmtInner(id, cmts = [], isOpen = false) {
 
   // 3개까지 바로 노출, 4개 이상부터 더보기 토글, 펼쳐도 최대 6개까지만 노출
   const visibleList = isExpanded ? cmts.slice(0, 6) : cmts.slice(0, 3);
-  const mine = store.get("mc-my-comments", []);
-
   const cmtsHtml = visibleList.map((x) => {
-    const isMine = mine.includes(String(x.id));
     const initial = esc((x.nickname || "캠").trim().charAt(0) || "캠");
     return `<li class="c-cmt-item" data-cmt-id="${esc(x.id)}">
       <div class="c-cmt-avatar">${initial}</div>
@@ -4563,7 +4557,6 @@ function renderCardCmtInner(id, cmts = [], isOpen = false) {
             <strong class="c-cmt-author">${esc(x.nickname)}</strong>
             <span class="c-cmt-date">${esc(formatKoreanDate(x.created_at))}</span>
           </div>
-          ${isMine ? `<button type="button" class="c-cmt-del" data-card-cmt-del="${esc(x.id)}" data-card-id="${esc(id)}" aria-label="댓글 삭제">✕</button>` : ""}
         </div>
         <div class="c-cmt-body">
           ${formatCommentContent(x.content)}
@@ -4576,9 +4569,9 @@ function renderCardCmtInner(id, cmts = [], isOpen = false) {
   if (count > 3) {
     if (!isExpanded) {
       const moreCount = Math.min(count, 6) - 3;
-      moreBtnHtml = `<button type="button" class="c-cmt-more-btn" data-cmt-more="${esc(id)}">+ 댓글 ${moreCount}개 더보기 ∨</button>`;
+      moreBtnHtml = `<button type="button" class="c-cmt-more-btn" data-cmt-more="${esc(id)}">+ 댓글 ${moreCount}개 더보기 ${ic("chevron-up", "c-cmt-more-chevron")}</button>`;
     } else {
-      moreBtnHtml = `<button type="button" class="c-cmt-more-btn is-expanded" data-cmt-more="${esc(id)}">댓글 접기 ∧</button>`;
+      moreBtnHtml = `<button type="button" class="c-cmt-more-btn is-expanded" data-cmt-more="${esc(id)}">댓글 접기 ${ic("chevron-up", "c-cmt-more-chevron")}</button>`;
     }
   }
 
@@ -4597,7 +4590,7 @@ function renderCardCmtInner(id, cmts = [], isOpen = false) {
       </div>
       <div class="c-cmt-bar-right">
         <button type="button" class="c-cmt-write-btn" data-cmt-write-toggle="${esc(id)}" aria-expanded="${isWriteOpen ? "true" : "false"}">댓글 남기기</button>
-        <span class="c-cmt-bar-arrow">${ic("right")}</span>
+        <span class="c-cmt-bar-arrow">${ic("chevron-up")}</span>
       </div>
     </div>
     <div class="card-cmt-box" data-cmt-box="${esc(id)}"${isOpen ? "" : ' style="display:none;"'}>
@@ -4771,32 +4764,6 @@ function bindCardCommentEvents() {
         CMT_EXPANDED_SET.add(id);
       }
       updateSingleCardCommentDom(id);
-      return;
-    }
-
-    const delBtn = e.target.closest("[data-card-cmt-del]");
-    if (delBtn) {
-      e.preventDefault();
-      e.stopPropagation();
-      if (NO_REMOTE_WRITE) { toast("테스트 모드에서는 지울 수 없어요"); return; }
-      const cmtId = delBtn.dataset.cardCmtDel;
-      const id = String(delBtn.dataset.cardId);
-      delBtn.disabled = true;
-      try {
-        await fetch(`${SB.url}/rest/v1/campground_comment?id=eq.${encodeURIComponent(cmtId)}`, {
-          method: "PATCH",
-          headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ is_deleted: true })
-        });
-        const cur = CMT_CACHE.get(id) || [];
-        CMT_CACHE.set(id, cur.filter((x) => String(x.id) !== String(cmtId)));
-        updateSingleCardCommentDom(id);
-        if ($("[data-cmts]")) loadComments(id);
-        toast("지웠어요");
-      } catch {
-        toast("지금은 지우지 못했어요");
-        delBtn.disabled = false;
-      }
       return;
     }
 
@@ -4974,11 +4941,10 @@ function savedCommentColor(name) {
 function savedCommentLocalKey(id) { return `mc-saved-comments-${String(id)}`; }
 function savedCommentInitial(name) { return String(name || "?").trim().slice(0, 1).toUpperCase() || "?"; }
 function savedCommentRow(x) {
-  const mine = store.get("mc-my-comments", []).includes(String(x.id));
   const color = savedCommentColor(x.nickname);
   return `<li class="saved-comment-row" data-saved-comment-row="${esc(x.id || "")}">
     <span class="saved-comment-avatar" style="--comment-color:${color}" aria-hidden="true">${esc(savedCommentInitial(x.nickname))}</span>
-    <div class="saved-comment-copy"><div class="saved-comment-meta"><b>${esc(x.nickname || "캠퍼")}</b><time>${esc(formatKoreanDateTime(x.created_at || x.createdAt || Date.now()))}</time>${mine ? `<button type="button" class="saved-comment-edit" data-saved-comment-del="${esc(x.id || "")}" aria-label="댓글 삭제">${ic("close")}</button>` : ""}</div><p>${commentContentHtml(x.content || "")}</p></div>
+    <div class="saved-comment-copy"><div class="saved-comment-meta"><b>${esc(x.nickname || "캠퍼")}</b><time>${esc(formatKoreanDateTime(x.created_at || x.createdAt || Date.now()))}</time></div><p>${commentContentHtml(x.content || "")}</p></div>
   </li>`;
 }
 function savedCommentsHtml(c) {
@@ -4987,7 +4953,7 @@ function savedCommentsHtml(c) {
   return `<div class="saved-card-comments" data-saved-comments data-saved-comment-id="${esc(c.id)}">
     <div class="saved-comments-head">
       <span class="saved-comments-label">${ic("chat-bubble")}<span>댓글</span><b data-saved-comment-count hidden>0</b></span>
-      <button class="saved-comments-compose-toggle" type="button" data-saved-comments-toggle aria-expanded="false">한마디 남기기</button>
+      <button class="saved-comments-compose-toggle" type="button" data-saved-comments-toggle aria-expanded="false"><span>한마디 남기기</span>${ic("chevron-up", "saved-comments-chevron")}</button>
     </div>
     <div class="saved-comments-preview" data-saved-comments-preview hidden>
       <ul class="saved-comments-list" data-saved-comments-list></ul>
@@ -5112,18 +5078,6 @@ function initSavedComments() {
       toast(saved ? "댓글을 남겼어요" : "이 기기에 댓글을 저장했어요");
       btn.disabled = false;
     });
-    $("[data-saved-comments-list]", root)?.addEventListener("click", async (e) => {
-      const button = e.target.closest("[data-saved-comment-del]");
-      if (!button) return;
-      const commentId = String(button.dataset.savedCommentDel || "");
-      if (commentId.startsWith("local-")) {
-        const next = store.get(savedCommentLocalKey(root.dataset.savedCommentId), []).filter((x) => String(x.id) !== commentId);
-        store.set(savedCommentLocalKey(root.dataset.savedCommentId), next); renderSavedCommentList(root, next); return;
-      }
-      if (NO_REMOTE_WRITE || !await ensureSupabaseConfig()) return;
-      await fetch(`${SB.url}/rest/v1/campground_comment?id=eq.${encodeURIComponent(commentId)}`, { method: "PATCH", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json" }, body: JSON.stringify({ is_deleted: true }) }).catch(() => null);
-      fetchSavedComments(root);
-    });
   });
   fetchSavedCardComments();
 }
@@ -5136,10 +5090,9 @@ async function loadComments(id) {
     const list = r.ok ? await r.json() : [];
     CMT_CACHE.set(String(id), list);
     updateSingleCardCommentDom(String(id));
-    const mine = store.get("mc-my-comments", []);
     const formatFn = typeof formatKoreanDateTime === "function" ? formatKoreanDateTime : formatKoreanDate;
     const bodyFn = typeof commentContentHtml === "function" ? commentContentHtml : formatCommentContent;
-    box.innerHTML = list.length ? list.map((x) => `<li><b>${esc(x.nickname)}</b><i>${esc(formatFn(x.created_at))}</i>${mine.includes(String(x.id)) ? `<button type="button" class="link" data-cmt-del="${esc(x.id)}">지우기</button>` : ""}<div class="cmt-content-body">${bodyFn(x.content)}</div></li>`).join("") : `<li class="muted">첫 한마디를 남겨 주세요.</li>`;
+    box.innerHTML = list.length ? list.map((x) => `<li><b>${esc(x.nickname)}</b><i>${esc(formatFn(x.created_at))}</i><div class="cmt-content-body">${bodyFn(x.content)}</div></li>`).join("") : `<li class="muted">첫 한마디를 남겨 주세요.</li>`;
   } catch { box.innerHTML = `<li class="muted">지금은 불러오지 못했어요.</li>`; }
 }
 // ── 주간 날씨 예보 & 일자별 상세 모달 (모여라 캘린더 동일 구조) ──────
@@ -6155,16 +6108,6 @@ function bindDetail() {
     btn.disabled = false;
     loadComments(f.dataset.cmt);
   });
-  $("[data-cmts]")?.addEventListener("click", async (e) => {
-    const b = e.target.closest("[data-cmt-del]");
-    if (!b || NO_REMOTE_WRITE) return;
-    await fetch(`${SB.url}/rest/v1/campground_comment?id=eq.${encodeURIComponent(b.dataset.cmtDel)}`, { method: "PATCH", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json" }, body: JSON.stringify({ is_deleted: true }) }).catch(() => null);
-    const cur = CMT_CACHE.get(String(id)) || [];
-    CMT_CACHE.set(String(id), cur.filter((x) => String(x.id) !== String(b.dataset.cmtDel)));
-    updateSingleCardCommentDom(String(id));
-    loadComments(id);
-  });
-
   // ── 하단 고정바 (예약 드롭업 메뉴, 전화연결/클립보드, 공유) ──
   const isMobile = /iPhone|iPad|iPod|Android|webOS/i.test(navigator.userAgent) || (window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
   $$("[data-tel-action]").forEach((el) => {
