@@ -1077,8 +1077,11 @@ const mapLink = (name, lat, lng) => `https://map.kakao.com/link/map/${encodeURIC
 // 사진 배지와 겹치면 줄이 우선 — badges(..., { rows: true })가 전기·장작·주차·불가 배지를 뺀다. 규격 배지(bdg-size)도 목록 카드에서 뺐다.
 function siteSizeShort(c) {
   const gs = (c.field_conditions?.site_size?.groups ?? []).filter((g) => g.width_m && g.depth_m);
-  if (gs.length) { const big = gs.reduce((a, g) => (Math.max(g.width_m, g.depth_m) > Math.max(a.width_m, a.depth_m) ? g : a)); return `최대 ${big.width_m}×${big.depth_m}m`; }
-  return c.tq?.mx ? `최대 ${c.tq.mx[0]}×${c.tq.mx[1]}m` : "";
+  let base = "";
+  if (gs.length) { const big = gs.reduce((a, g) => (Math.max(g.width_m, g.depth_m) > Math.max(a.width_m, a.depth_m) ? g : a)); base = `최대 ${big.width_m}×${big.depth_m}m`; }
+  else if (c.tq?.mx) base = `최대 ${c.tq.mx[0]}×${c.tq.mx[1]}m`;
+  if (c.gap) return base ? `${base} (간격 ${c.gap})` : `간격 ${c.gap}`;
+  return base;
 }
 function cardLines(c) {
   const f = facts(c), fm = feeMain(c);
@@ -1955,8 +1958,6 @@ const emptyCond = () => ({ sido: [], kind: [], pet: false, w: 0, size: 0, fire: 
 // 보험(영업배상책임)은 목록 카탈로그에 값이 없어(고캠핑 등록 0곳) 조건으로 두지 않는다 — 상세 ‘보험’ 줄에만.
 const COND_BOOL = {
   dump: ["덤프스테이션", (c) => (c.dump || (c.amenities ?? []).includes("덤프스테이션") ? "y" : "?")],
-  vr: ["360° VR 뷰", (c) => (c.vr ? "y" : "?")],
-  best: ["공인 우수야영장", (c) => (c.best?.length ? "y" : "?")],
   sun: ["일출 명소", (c) => (c.th?.includes("sunrise") ? "y" : c.th?.length ? "n" : "?")],
   leaf: ["단풍 명소", (c) => (c.th?.includes("autumn") ? "y" : c.th?.length ? "n" : "?")],
   spring: ["봄꽃", (c) => (c.th?.includes("spring") ? "y" : c.th?.length ? "n" : "?")],
@@ -2797,6 +2798,11 @@ function extraTiles(c, d, f) {
   }
   const rv = [c.trailer === true && "개인 트레일러", c.caravan === true && "개인 카라반"].filter(Boolean);
   if (rv.length) add("caravan", "차량 진입", { v: `${rv.join(" · ")} 입장 가능`, ...gc(rv.map((x) => `${x} 입장 가능`)) });
+  if (c.gap) add("size", "사이트 간격", { v: `${c.gap} 여유`, ...gc([`사이트 간격: ${c.gap}`]) });
+  if (c.rental?.length) add("cart", "장비 대여", { v: c.rental.join(" · "), ...gc([`대여: ${c.rental.join(" · ")}`]) });
+  if (c.safety_info) add("check", "안전 시설", { v: c.safety_info, ...gc([`안전시설: ${c.safety_info}`]) });
+  if (c.floors_detail) add("layers", "바닥 구성", { v: c.floors_detail, ...gc([`바닥: ${c.floors_detail}`]) });
+  if (c.gc_url) add("award", "정식 등록", { v: "지자체 인허가 등록 야영장 (보험 가입)", ...gc(["관광진흥법 정식 등록"]) });
   return out.join("");
 }
 const km = (m) => (m < 1000 ? `${Math.round(m / 10) * 10}m` : `${(m / 1000).toFixed(1)}km`);
@@ -3936,9 +3942,17 @@ const snsImages = (d) => (d?.sns_images ?? []).filter((x) => snsOk(x) && x.url &
 const isOfficialLayout = (x) => Boolean(x && (x.official || /gocamping\.or\.kr|mgocamping/i.test(x.img || x.url || "") || x.src === "고캠핑" || x.src === "한국관광공사"));
 
 function layoutHtml(d, c) {
-  const allImages = (d?.layout?.images ?? [])
+  let allImages = (d?.layout?.images ?? [])
     .filter((x) => x && (x.img || x.thumb))
     .filter((x, i, arr) => arr.findIndex((y) => (y.img || y.thumb) === (x.img || x.thumb)) === i);
+
+  if (c?.layout_images?.length) {
+    for (const imgUrl of c.layout_images) {
+      if (!allImages.some((x) => (x.img || x.thumb) === imgUrl)) {
+        allImages.unshift({ img: imgUrl, thumb: imgUrl, official: true, src: "한국관광공사 고캠핑", title: "공식 시설 및 안전 배치도" });
+      }
+    }
+  }
 
   // 후보 카드 오른쪽 아래(단일 사진은 오른쪽 위) 원문 링크 아이콘: 누르면 그 사진이 실린 글로 이동(소유자 2026-10-20)
   const srcIcon = (x, pos = "") => (/^https?:/.test(x?.url ?? "") ? `<a class="cand-src${pos ? ` cand-src-${pos}` : ""}" href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="원문 보기" title="원문 보기">${ic("external", "line")}</a>` : "");
@@ -4399,6 +4413,11 @@ function infoHtml(c) {
     // 운영 기간(계절)은 ‘이용 정보’에 있으므로 여기서는 운영 주체·요일만 둔다.
     ["운영", [OP[c.op], (c.days ?? [])[0]].filter(Boolean).map(esc).join(" · ") || null, gcSrc("운영 정보")],
     ...registryRows(c),
+    c.gap ? ["사이트 간격", `${esc(c.gap)} 여유 간격 확보`, gcSrc("사이트 간격", c.gap)] : null,
+    c.rental?.length ? ["장비 대여", esc(c.rental.join(" · ")), gcSrc("대여 가능 장비", c.rental.join(" · "))] : null,
+    c.safety_info ? ["소방·안전시설", esc(c.safety_info), gcSrc("소방안전 시설 정량 현황", c.safety_info)] : null,
+    c.floors_detail ? ["바닥 구성", esc(c.floors_detail), gcSrc("바닥재별 실측 면수", c.floors_detail)] : null,
+    c.peak_season ? ["성수기 기간", esc(c.peak_season), gcSrc("공식 성수기 적용 기간", c.peak_season)] : null,
     c.dump ? ["덤프스테이션", `<span class="dump-badge-val">${ic("dump")} 오폐수 배출(블랙/그레이) 및 청수 공급 가능 (한국관광공사 공인 덤프스테이션)</span>`, { g: "c", src: { label: "고캠핑 전국 덤프스테이션 지정 현황", url: "https://gocamping.or.kr/camp/dump/list.do" } }] : null,
     c.best?.length ? ["공인 우수야영장", c.best.map((b) => `<span class="best-badge-val">${ic("award")} ${b.year}년 ${esc(b.label)} 우수야영장 선정${b.summary ? ` (${esc(b.summary)})` : ""}</span>`).join("<br>"), { g: "c", src: { label: "문체부·한국관광공사 공인 우수야영장", url: c.best[0].url || "https://gocamping.or.kr/camp/best/list.do" } }] : null,
   ].filter(Boolean).filter(([, v]) => v);
