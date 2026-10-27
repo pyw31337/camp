@@ -1091,6 +1091,19 @@ function cardLines(c) {
 }
 function rowsHtml(c) { return cardLines(c); }
 function rowsHtmlHorizontal(c) { return cardLines(c); }
+// 찜 목록은 여러 곳을 훑어보기 위한 화면이므로, 6개 스펙 행을 기본으로 접는다.
+// 일반 목록·테마 카드에는 같은 행을 그대로 유지해 비교 정보가 숨지 않게 한다.
+function savedDetailsHtml(c) {
+  const panelId = `saved-spec-${String(c.id).replace(/[^A-Za-z0-9_-]/g, "-")}`;
+  return `<div class="card-group card-group-spec saved-card-spec" data-saved-card-spec>
+    <button class="saved-card-spec-toggle" type="button" data-saved-card-spec-toggle aria-expanded="false" aria-controls="${esc(panelId)}">
+      <span>${ic("list")}상세정보</span>${ic("chevron-up", "saved-card-spec-chevron")}
+    </button>
+    <div class="saved-card-spec-panel" id="${esc(panelId)}" data-saved-card-spec-panel hidden>
+      ${rowsHtml(c)}
+    </div>
+  </div>`;
+}
 // 가는 길 장보기: 마트·편의점·정육점 중 5km 안에 있는 곳(LOCALDATA 인허가). 순서는 늘 마트 → 편의점 → 정육점(소유자 2026-10-20).
 function nearLine(c, sep = " · ") {
   const nl = c.nl ?? {};
@@ -1247,9 +1260,7 @@ function card(c, i = 0, opts) {
       <div class="card-group card-group-types">
         ${typeRow(c).html}
       </div>
-      <div class="card-group card-group-spec">
-        ${rowsHtml(c)}
-      </div>
+      ${savedMemo ? savedDetailsHtml(c) : `<div class="card-group card-group-spec">${rowsHtml(c)}</div>`}
       ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `
         <div class="card-group card-group-reviews">
           <div class="card-reviews">${cardReviewPills(c.rv, c)}</div>
@@ -5994,6 +6005,17 @@ async function savedView() {
 function bindSaved() {
   initCarousels($("#view"));
   initSavedComments();
+  $$('[data-saved-card-spec-toggle]', $("#view")).forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      const group = toggle.closest("[data-saved-card-spec]");
+      const panel = $("[data-saved-card-spec-panel]", group);
+      if (!panel) return;
+      const open = panel.hidden;
+      panel.hidden = !open;
+      toggle.setAttribute("aria-expanded", String(open));
+      group.classList.toggle("is-open", open);
+    });
+  });
   $("[data-saved-compare]")?.addEventListener("click", (e) => {
     if (S.saved.length < 2) { e.preventDefault(); toast("2곳 이상 찜하면 비교할 수 있어요"); }
   });
