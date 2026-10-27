@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-27T00:29:56.911Z",
+  "generated_at": "2026-10-27T09:15:16.019Z",
   "policy": "operator hosts only, robots respected, sentences and image urls",
   "campgrounds": {
     "146": {
@@ -1643,7 +1643,7 @@
       "status": "OK",
       "name": "화성에코팜테마파크 오토캠핑장",
       "url": "https://hsecofarm.hscity.go.kr/",
-      "checked_at": "2026-10-27T00:30:04.429Z",
+      "checked_at": "2026-10-27T09:15:23.441Z",
       "pages": [
         "https://hsecofarm.hscity.go.kr/",
         "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
@@ -1665,6 +1665,14 @@
           "url": "https://hsecofarm.hscity.go.kr/"
         },
         {
+          "text": "[공지] 화성에코팜테마파크 캠핑장 26년 12월 일정 및 예약 안내",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
+          "text": "[공지] 화성에코팜테마파크 캠핑장 26년 12월 개방 사이트 안내",
+          "url": "https://hsecofarm.hscity.go.kr/"
+        },
+        {
           "text": "[공지] 화성에코팜테마파크 캠핑장 예약 취소 오류 안내",
           "url": "https://hsecofarm.hscity.go.kr/"
         },
@@ -1674,14 +1682,6 @@
         },
         {
           "text": "[공지] 화성에코팜테마파크 캠핑장 26년 11월 일정 및 예약 안내",
-          "url": "https://hsecofarm.hscity.go.kr/"
-        },
-        {
-          "text": "[공지] 화성에코팜테마파크 캠핑장 26년 11월 개방 사이트 안내",
-          "url": "https://hsecofarm.hscity.go.kr/"
-        },
-        {
-          "text": "[필독] 화성에코팜테마파크 캠핑장 예약 유의사항",
           "url": "https://hsecofarm.hscity.go.kr/"
         },
         {
@@ -1817,7 +1817,7 @@
           "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
         },
         {
-          "text": "머무는 방식에 맞춰 선택할 수 있도록 일반형 A-D, 확장형 E, F 구역으로 나뉜 체류형 캠핑 공간입니다.",
+          "text": "머무는 방식에 맞춰 선택할 수 있도록 일반형 A-D, 확장형 E, 확장형 F 구역으로 나뉜 체류형 캠핑 공간입니다.",
           "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
         },
         {
@@ -1929,6 +1929,14 @@
           "url": "https://hsecofarm.hscity.go.kr/reservation/board/list.do"
         },
         {
+          "text": "[공지] 화성에코팜테마파크 캠핑장 26년 11월 개방 사이트 안내",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/board/list.do"
+        },
+        {
+          "text": "[필독] 화성에코팜테마파크 캠핑장 예약 유의사항",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/board/list.do"
+        },
+        {
           "text": "[공지] 화성에코팜테마파크 캠핑장 26년 10월 개방 사이트 안내",
           "url": "https://hsecofarm.hscity.go.kr/reservation/board/list.do"
         },
@@ -1949,9 +1957,9 @@
           "layout": false
         },
         {
-          "url": "https://hsecofarm.hscity.go.kr/reservation/common/getThumbImage.do?atchFileId=FILE_7b107a7b47804ea",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/common/getThumbImage.do?atchFileId=FILE_a4cc556dfc7e42a",
           "page": "https://hsecofarm.hscity.go.kr/reservation/",
-          "alt": "11월 예약 안내",
+          "alt": "26년 12월 예약 안내",
           "layout": true
         },
         {
