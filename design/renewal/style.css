@@ -586,11 +586,12 @@ img { color: transparent; }
 .c-yt-card:hover .c-yt-play-btn { background: rgba(255, 0, 0, .85); transform: translate(-50%, -50%) scale(1.1); }
 .c-yt-play-icon { width: 20px; height: 20px; margin-left: 2px; }
 .c-yt-meta {
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center;
   padding: 8px 12px; background: var(--paper); font-size: .78rem; line-height: 1.2;
 }
-.c-yt-badge { font-weight: 700; color: var(--ink); }
-.c-yt-host { color: var(--ink-3); }
+.c-yt-badge { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; color: var(--ink); }
+.c-yt-meta .plat-ic, .comment-link-meta .plat-ic { width: 18px; height: 18px; flex: none; }
+.c-yt-meta .plat-ic svg, .comment-link-meta .plat-ic svg { width: 10px; height: 10px; }
 
 /* 댓글 더보기 / 접기 / 앵커 이동 */
 .c-cmt-more-btn {
@@ -1518,7 +1519,7 @@ body.map-mode { overflow: hidden; height: 100dvh; }
 .comment-video-play { position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 38px; height: 38px; transform: translate(-50%, -50%); border-radius: 50%; background: rgba(0, 0, 0, .68); color: #fff; font-size: 1rem; }
 .comment-video-card.is-playing { display: block; }
 .comment-video-card.is-playing iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; background: #000; }
-.comment-link-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 7px 10px 8px; }
+.comment-link-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 7px 10px 8px; }
 .comment-link-meta b, .comment-external-card b { font-size: .78rem; font-weight: 850; }
 .comment-link-meta small, .comment-external-card small { color: var(--ink-3); font-size: .7rem; }
 .comment-external-card { padding: 9px 10px; }

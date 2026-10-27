@@ -4534,8 +4534,7 @@ function formatCommentContent(content) {
       <div class="c-yt-play-btn"><svg viewBox="0 0 24 24" class="c-yt-play-icon" aria-hidden="true"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></div>
     </div>
     <div class="c-yt-meta">
-      <span class="c-yt-badge">${isShorts ? "YouTube Shorts" : "YouTube"}</span>
-      <span class="c-yt-host">youtube.com</span>
+      <span class="c-yt-badge">${platIc("youtube")}<span>${isShorts ? "YouTube Shorts" : "YouTube"}</span></span>
     </div>
   </a>`;
   return textHtml ? `${textHtml}${ytCardHtml}` : ytCardHtml;
@@ -4922,8 +4921,12 @@ function commentLinkCard(raw) {
   if (!info) return esc(raw);
   const title = esc(info.provider), domain = esc(info.label), href = esc(info.url);
   if (info.embed) {
+    const isYt = info.provider.startsWith("YouTube");
     const visual = info.thumb ? `<img src="${esc(info.thumb)}" alt="${title} 미리보기" loading="lazy" referrerpolicy="no-referrer">` : `<span class="comment-video-placeholder">${esc(info.provider)}</span>`;
-    return `<span class="comment-link-card comment-video-card"><button type="button" class="comment-video-trigger" data-comment-video="${esc(info.embed)}" aria-label="${title} 재생">${visual}<span class="comment-video-play" aria-hidden="true">▶</span></button><span class="comment-link-meta"><b>${title}</b><small>${domain}</small></span></span>`;
+    const metaInner = isYt
+      ? `<b class="c-yt-badge">${platIc("youtube")}<span>${title}</span></b>`
+      : `<b>${title}</b><small>${domain}</small>`;
+    return `<span class="comment-link-card comment-video-card"><button type="button" class="comment-video-trigger" data-comment-video="${esc(info.embed)}" aria-label="${title} 재생">${visual}<span class="comment-video-play" aria-hidden="true">▶</span></button><span class="comment-link-meta">${metaInner}</span></span>`;
   }
   return `<a class="comment-link-card comment-external-card" href="${href}" target="_blank" rel="noopener noreferrer"><span class="comment-link-icon">↗</span><span><b>${title}</b><small>${domain}</small></span><span class="comment-link-arrow">›</span></a>`;
 }
