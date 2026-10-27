@@ -1338,6 +1338,7 @@
 {"cid":"102004","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102005","attr":"RENTAL_ITEM","value":"일산화탄소감지기","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102005","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102006","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102011","attr":"RENTAL_ITEM","value":"난방기구","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102011","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102011","attr":"RENTAL_ITEM","value":"일산화탄소감지기","grade":"CONFIRMED","src":"gocamping"}
@@ -1386,6 +1387,7 @@
 {"cid":"102132","attr":"RENTAL_ITEM","value":"일산화탄소감지기","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102132","attr":"RENTAL_ITEM","value":"텐트","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102132","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102143","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102146","attr":"RENTAL_ITEM","value":"난방기구","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102146","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102146","attr":"RENTAL_ITEM","value":"일산화탄소감지기","grade":"CONFIRMED","src":"gocamping"}

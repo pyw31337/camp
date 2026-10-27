@@ -1073,6 +1073,12 @@
 {"cid":"923","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"923","attr":"OPEN_WINTER","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"923","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"929","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"929","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"929","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"929","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"929","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"929","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"930","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"930","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"930","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -3777,7 +3783,6 @@
 {"cid":"6731","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6731","attr":"OPEN_WINTER","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6731","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"6731","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_discovered","url":"https://www.shsi.or.kr/main/mainPage.do","at":"2026-10-20T00:57:41.871Z","quote":"혹서기 7, 8월 휴장"}
 {"cid":"6732","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6732","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6732","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8765,6 +8770,12 @@
 {"cid":"100671","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100671","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100672","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100673","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100673","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100673","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100673","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100673","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100673","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100674","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100674","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100674","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -14919,7 +14930,11 @@
 {"cid":"102005","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102005","attr":"OPEN_WINTER","value":false,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102005","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102006","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102006","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102006","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102006","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102006","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102006","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102007","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102008","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -15169,6 +15184,11 @@
 {"cid":"102140","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102141","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102142","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102143","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102143","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102143","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102143","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102143","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102143","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102145","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102145","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
@@ -15523,6 +15543,8 @@
 {"cid":"102376","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102376","at":"2026-10-19T00:00:00+09:00"}
 {"cid":"102377","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102378","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102379","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102380","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"hangang-banpo","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-10-20"}
 {"cid":"hangang-gangseo","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-10-20"}
 {"cid":"hangang-gwangnaru","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-10-20"}
@@ -18472,6 +18494,7 @@
 {"cid":"park-50110-00192-mt2lp","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-20"}
 {"cid":"park-50110-00193-pyhdb","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-20"}
 {"cid":"park-50110-00194-1g4b7","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-20"}
+{"cid":"park-50110-00194-1g4b7","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_discovered","url":"https://psf.kr/community/notice.htm","at":"2026-10-24T23:00:15.165Z","quote":"휴장기간: 2026."}
 {"cid":"park-50110-00195-1i7le","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-20"}
 {"cid":"park-50110-00197-1ylr5","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-20"}
 {"cid":"park-50110-00201-1m5h4","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-20"}
@@ -18710,6 +18733,7 @@
 {"cid":"pdu-amazing-paju","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-10-20"}
 {"cid":"pdu-lagrills-yongin","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-10-20"}
 {"cid":"pdu-mysticcamp-yeongjong","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://mysticcamp.co.kr","at":"2026-10-20"}
+{"cid":"pdu-mysticcamp-yeongjong","attr":"YEAR_ROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://mysticcamp.co.kr/","at":"2026-10-24T22:45:28.367Z","quote":"음식·주류 반입 무료 공용 불멍 연중무휴"}
 {"cid":"pdu-rooftopthesim-goyang","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.rooftopthesim.com","at":"2026-10-20"}
 {"cid":"pilot-002-sureui","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032"}
 {"cid":"pilot-002-sureui","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032"}
@@ -18750,6 +18774,7 @@
 {"cid":"rf-1gch2ur","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2025-06-19"}
 {"cid":"rf-1h06gg8","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-04-22"}
 {"cid":"rf-1i3ht74","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-07-16"}
+{"cid":"rf-1i3ht74","attr":"SEASONAL_CLOSURE","value":"기간 휴장","grade":"OPERATOR","src":"operator_homepage","url":"http://www.fes-artvalley.com/notice.php","at":"2026-10-24T23:07:48.189Z","quote":"우천으로인하여 7월 29일 수요일 7월30일 목요일 휴장합니다."}
 {"cid":"rf-1i5joiz","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-05-12"}
 {"cid":"rf-1ii2c47","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2024-04-12"}
 {"cid":"rf-1j9pje3","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping","url":"https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%A0%84%EA%B5%AD%ED%9C%B4%EC%96%91%EB%A6%BC%ED%91%9C%EC%A4%80%EB%8D%B0%EC%9D%B4%ED%84%B0","at":"2026-07-13"}
