@@ -326,6 +326,14 @@ const noBadge = (k) => (NO_TAGS[k] ? `<span class="bdg bdg-no">${ic(NO_TAGS[k][1
 const petAllowed = (c) => (c._pa ??= !noKeys(c).includes("NO_PET") && Boolean((pos(facts(c).pet) && facts(c).pet.ok) || c.pf?.t?.includes("PET_OK") || (/가능/.test(c.pets ?? "") && !/불가/.test(c.pets ?? ""))));
 const inviteOk = (c) => (c._io ??= !noKeys(c).includes("NO_VISITOR") && (INVITE_OK_SET.has(String(c.id)) || isVisitorCamp(c)));
 const isTidalCamp = (c) => Boolean(c.th?.includes("tidal") || /갯벌|해루질|조개/.test(JSON.stringify({ ...c, nearby_toilets: undefined })));
+const DUMP_STATION_IDS = new Set(["217","434","814","1042","1065","1112","1668","1698","2833","6795","6951","7132","7152","7160","7893","7907","100290","100545","100879","101143","101248","101422"]);
+const isDumpCamp = (c) => Boolean(c.dump || (c.amenities ?? []).some((a) => /덤프/.test(a)) || DUMP_STATION_IDS.has(String(c.id)));
+const isFirstComeCamp = (c) => Boolean(c.fc || c.booking?.methods?.some((m) => /현장|선착순/.test(m)) || /선착순/.test(c.name ?? "") || /선착순/.test(c.line ?? "") || /선착순/.test(c.pf?.s ?? ""));
+const isFlexTimeCamp = (c) => {
+  const ci = c.ti?.i?.[0] || c.ci;
+  const co = c.ti?.o?.[0] || c.co;
+  return Boolean(c.early || c.late || (ci && ci <= "12:00") || (co && co >= "12:00"));
+};
 // 사진 배지 두 줄(소유자 2026-10-22): 윗줄은 긍정 배지(초대가능·600W·장작·반려견 등, 섹션 배지가 맨 앞),
 // 아랫줄은 부정 배지(반려견 불가·장작 불가·화기 불가 등). 줄바꿈은 .bdg-br(폭 100%)로.
 function badges(c, max = 4, maxNo = 2, { rows = false, theme = null } = {}) {
@@ -340,11 +348,11 @@ function badges(c, max = 4, maxNo = 2, { rows = false, theme = null } = {}) {
     // 겨울 섹션 근거(전수 검수 2026-10-22): W를 모르는 난방 글램핑·카라반도 섹션 배지가 보이게 ‘난방’
     heat: c.heat?.length ? `<span class="bdg bdg-flame">${ic("hotwater")}난방</span>` : "",
     rf: c.rf ? `<span class="bdg bdg-teal">${ic("th:FOREST")}${esc(/^(국립|공립|사립)$/.test(c.rf) ? `${c.rf} 휴양림` : "휴양림")}</span>` : "",
-    firstCome: (c.fc || /선착순/.test(c.resv ?? "") || /선착순/.test(c.name ?? "")) ? `<span class="bdg bdg-amber">${ic("clock")}선착순</span>` : "",
+    firstCome: isFirstComeCamp(c) ? `<span class="bdg bdg-amber">${ic("clock")}선착순</span>` : "",
     tidal: isTidalCamp(c) ? `<span class="bdg bdg-teal">${ic("water")}갯벌·해루질</span>` : "",
-    flex: (c.early || c.late || (c.ci && c.ci <= "12:00") || (c.co && c.co >= "12:00")) ? `<span class="bdg bdg-teal">${ic("clock")}입퇴실 여유</span>` : "",
+    flex: isFlexTimeCamp(c) ? `<span class="bdg bdg-teal">${ic("clock")}입퇴실 여유</span>` : "",
     vr: c.vr ? `<span class="bdg bdg-vr" title="360° VR 현장 뷰어">${ic("vr")}360° VR</span>` : "",
-    dump: c.dump ? `<span class="bdg bdg-dump" title="오폐수 처리 및 청수 공급 한국관광공사 공인 덤프스테이션">${ic("dump")}덤프</span>` : "",
+    dump: isDumpCamp(c) ? `<span class="bdg bdg-dump" title="오폐수 처리 및 청수 공급 한국관광공사 공인 덤프스테이션">${ic("dump")}덤프</span>` : "",
     best: c.best?.length ? `<span class="bdg bdg-best" title="문체부·한국관광공사 공인 우수야영장">${ic("award")}${esc(c.best[0].label || "우수야영장")}</span>` : "",
   };
   // 섹션 배지를 맨 앞에(잘리지 않게)
@@ -494,9 +502,12 @@ const TH_SVG = {
   WINTER: ["0 0 50 50", '<path fill="currentColor" d="M23 47.689v-6.342l-3.357 1.992L18 42.305v-2.229l5-2.986v-4.168l-4 2.451v-4.416l-4 2.094v5.99l-1.653 1.23L12 39.160v-4.012L6.426 38.27L4 37.271v-2.529l5.685-3.17L6 29.75v-2.32l2.123-1.127l5.214 3.068l3.612-2.084l-.082-.065l-3.665-2.123l3.568-2.228l-3.577-2.083L7.98 23.84L6 22.871v-2.307l3.542-1.978L4 15.533v-2.529l2.321-1.114L12 15.087v-4.076l1.485-1.127l1.943 1.18l-.056 6.105l3.673 2.122l.033-4.311L23 17.079v-4.167l-5-2.988V7.71l1.643-1.05L23 8.652V2.324L24.994 1L27 2.324v6.328l3.906-2.031L33 7.84v1.992l-6 3.08v4.167l4-2.267v4.534l4-2.084v-6.524l1.455-.866l1.545.865v4.167l5.842-3.08L46 13.042v2.359l-5.495 3.17L44 20.525v2.254l-1.83.996l-5.327-3.158l-3.679 2.346l3.549 2.228l-3.659 2.122l3.772 1.992l5.389-2.986L44 27.535v2.15l-3.32 1.887l5.32 3.170v2.49l-2.522 1.037L38 35.281v3.955l-1.52 1.049L35 39.236v-6.002l-4-2.213v4.168l-4-2.268v4.168l5 2.986v2.359l-1.647.904L27 41.348v6.342L24.994 49zm-1.466-22.597L23.420 28h3.514l1.613-2.908L26.843 22h-3.514z" />'],
   WATER_PLAY: ["0 0 256 256", '<path fill="currentColor" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m83.44 76A196 196 0 0 0 165 91a196 196 0 0 0-9-46.440A88.43 88.43 0 0 1 211.44 100M85 51.24a188.3 188.3 0 0 1 67.3 39.21a196.3 196.3 0 0 0-112.22 34.06A88.07 88.07 0 0 1 85 51.24m46.48 164.68a196.3 196.3 0 0 0 34.06-112.23A188.3 188.3 0 0 1 204.76 171a88.07 88.07 0 0 1-73.27 44.92Z" />'],
   "T:CAR_CAMP": ["0 0 24 24", '<g fill="currentColor"><path d="M3 19.723V21a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.277A1.99 1.99 0 0 0 22 18v-3c0-.831-.507-1.542-1.228-1.845l-1.368-4.104A2.995 2.995 0 0 0 16.559 7H7.441a2.995 2.995 0 0 0-2.845 2.051l-1.368 4.104A2 2 0 0 0 2 15v3c0 .738.404 1.376 1 1.723M5.5 18a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 5.5 18m13 0a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 18.5 18M7.441 9h9.117a1 1 0 0 1 .949.684L18.613 13H5.387l1.105-3.316c.137-.409.519-.684.949-.684"/><path d="M22 7.388V5.279l-9.684-3.228a1 1 0 0 0-.658.009L2 5.572V7.7l10.015-3.642z"/></g>'],
-  VR_TOUR: ["0 0 24 24", '<path fill="currentColor" d="M20 7H4c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h4.5l1.5-2h4l1.5 2H20c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2M8.5 13.5c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2m7 0c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2"/>'],
-  DUMP_STATION: ["0 0 24 24", '<path fill="currentColor" d="M19 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m-7 3a2 2 0 1 1-2 2a2 2 0 0 1 2-2m0 10a5 5 0 0 1-4.9-4h9.8a5 5 0 0 1-4.9 4"/>'],
-  EXCELLENT: ["0 0 24 24", '<path fill="currentColor" d="M12 15.2a5.2 5.2 0 1 0 0-10.4 5.2 5.2 0 0 0 0 10.4zm3.8 1.4L18 22l-6-3.2L6 22l2.2-5.4A7.2 7.2 0 1 1 12 17.2a7.1 7.1 0 0 1 3.8-.6z"/>'],
+  TIDAL_FLAT: ["0 0 24 24", '<path fill="currentColor" d="M16.231 3.349a2.9 2.9 0 0 0-1.717-.598c-1.032-.024-2.007.453-2.688.937c-1.324-.809-2.505-.842-3.456-.297c-.841.482-1.345 1.335-1.612 2.048c-1.32.13-2.192.733-2.644 1.622c-.42.824-.412 1.772-.282 2.524l-.06.063l-.111.082c-.43.27-.63.77-.731 1.13a5.3 5.3 0 0 0-.18 1.333c-.006.455.037.93.143 1.347c.096.373.287.875.707 1.162l5.24 3.573l.056.053c.032.04.052.092.056.146l-.008.083c-.091.375-.158.885-.014 1.367a1.6 1.6 0 0 0 .44.721c.229.214.514.35.832.415l.448.084c1.008.166 1.787.137 2.867-.084l.12-.029a1.66 1.66 0 0 0 .73-.4c.23-.22.362-.484.433-.742c.1-.367.082-.749.028-1.072l-.062-.3a.27.27 0 0 1 .085-.267l5.475-3.537l.026-.017l.023-.018c.419-.322.633-.828.743-1.27c.117-.465.152-.99.121-1.491a4.9 4.9 0 0 0-.306-1.468c-.168-.42-.45-.89-.92-1.146c.214-.566.27-1.11.177-1.62a2.84 2.84 0 0 0-.668-1.352c-.575-.662-1.389-1.076-2.053-1.3q-.482-1.11-1.238-1.682M11.25 13V8a.75.75 0 0 1 1.5 0v5a.75.75 0 0 1-1.5 0M7.677 9.294c.4-.107.81.13.918.53l.777 2.898l.016.075a.75.75 0 0 1-1.442.387l-.023-.074l-.777-2.897a.75.75 0 0 1 .53-.919m7.482 4.344a.75.75 0 0 1-.53-.918l.776-2.899a.75.75 0 0 1 1.45.389l-.778 2.897a.75.75 0 0 1-.918.53"/>'],
+  VR_TOUR: ["0 0 24 24", '<path fill="currentColor" d="M19 4a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3zm-3.5 4H14a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1l.117-.007A1 1 0 0 0 15 15v-1.196l1.168 1.75a1 1 0 0 0 1.387.278l.093-.07a1 1 0 0 0 .184-1.317l-1.159-1.738l.044-.023A2.5 2.5 0 0 0 15.5 8m-4.184.051a1 1 0 0 0-1.265.633L9 11.838L7.949 8.684a1 1 0 0 0-1.898.632l2 6c.304.912 1.594.912 1.898 0l2-6a1 1 0 0 0-.633-1.265M15.5 10a.5.5 0 1 1 0 1H15v-1z"/>'],
+  DUMP_STATION: ["0 0 15 15", '<path fill="currentColor" d="M6 8v2H3.5c-.28 0-.5.22-.5.5v4c0 .28.22.5.5.5h8c.28 0 .5-.22.5-.5v-4c0-.28-.22-.5-.5-.5H9V8h5.5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5H12c1.1 0 2-.9 2-2V2.29c0-.98-.7-1.8-1.65-1.97L12.2.3C10.27.1 8.54 0 7 0S3.73.1 1.8.3C.78.4 0 1.26 0 2.29V6c0 1.1.9 2 2 2zm3.5-4c-.28 0-.5-.22-.5-.5v-1c0-.28.22-.5.5-.5h2c.28 0 .5.22.5.5v1c0 .28-.22.5-.5.5zm-7 0c-.28 0-.5-.22-.5-.5v-1c0-.28.22-.5.5-.5h4c.28 0 .5.22.5.5v1c0 .28-.22.5-.5.5zM8 11h1.31a.248.248 0 0 1 .16.44l-1.81 1.52c-.09.08-.23.08-.32 0l-1.81-1.52a.24.24 0 0 1-.03-.35c.04-.06.11-.09.19-.09H7V6.5c0-.28.22-.5.5-.5s.5.22.5.5z"/>'],
+  EXCELLENT: ["0 0 32 32", '<path fill="currentColor" d="M5.25 4A3.25 3.25 0 0 0 2 7.25v7.92a7 7 0 0 1 11.5 7.938V25h13.25A3.25 3.25 0 0 0 30 21.75V7.25A3.25 3.25 0 0 0 26.75 4zM9 10h14a1 1 0 1 1 0 2H9a1 1 0 1 1 0-2m7 8a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2h-6a1 1 0 0 1-1-1m-3 1.5a5.5 5.5 0 1 1-11 0a5.5 5.5 0 0 1 11 0m-1 5.362A6.97 6.97 0 0 1 7.5 26.5A6.97 6.97 0 0 1 3 24.862V29a1 1 0 0 0 1.528.849l2.972-1.85l2.972 1.85a1 1 0 0 0 1.528-.85z"/>'],
+  FLEX_TIME: ["0 0 16 16", '<path fill="currentColor" fill-rule="evenodd" d="M3 2h1v4.207L5.793 8L4 9.793V14H3v1h10v-1h-1V9.793L10.207 8L12 6.207V2h1V1H3zm4 4h2V5H7zm-1 6h4v-1H6z" clip-rule="evenodd"/>'],
+  FIRST_COME: ["0 0 24 24", '<path fill="currentColor" d="M16.5 5.5a2 2 0 0 0 2-2a2 2 0 0 0-2-2a2 2 0 0 0 2 2m-3.6 13.9l1-4.4l2.1 2v6h2v-7.5l-2.1-2l.6-3A7.3 7.3 0 0 0 22 13v-2c-1.76.03-3.4-.89-4.3-2.4l-1-1.6c-.36-.6-1-1-1.7-1c-.3 0-.5.1-.8.1L9 8.3V13h2V9.6l1.8-.7l-1.6 8.1l-4.9-1l-.4 2zM4 9a1 1 0 0 1-1-1a1 1 0 0 1 1-1h3v2zm1-4a1 1 0 0 1-1-1a1 1 0 0 1 1-1h5v2zm-2 8a1 1 0 0 1-1-1a1 1 0 0 1 1-1h4v2z"/>'],
 };
 TH_SVG.REC_FOREST = TH_SVG.FOREST;
 const thIc = (k) => (TH_SVG[k] ? `<svg class="th-ic" viewBox="${TH_SVG[k][0]}" aria-hidden="true">${TH_SVG[k][1]}</svg>` : "");
@@ -567,10 +578,10 @@ const THEMES = [
   ["PARK", "공원", isParkCamp],
   ["WATER_PLAY", "물놀이터", isWaterPlayCamp],
   ["TIDAL_FLAT", "갯벌·해루질", isTidalCamp],
-  ["FLEX_TIME", "입퇴실 여유", (c) => Boolean(c.early || c.late || (c.ci && c.ci <= "12:00") || (c.co && c.co >= "12:00"))],
-  ["FIRST_COME", "선착순", (c) => Boolean(c.fc || /선착순/.test(c.resv ?? "") || /선착순/.test(c.name ?? ""))],
+  ["FLEX_TIME", "입퇴실 여유", isFlexTimeCamp],
+  ["FIRST_COME", "선착순", isFirstComeCamp],
   ["VR_TOUR", "360° VR 뷰", (c) => Boolean(c.vr)],
-  ["DUMP_STATION", "덤프스테이션", (c) => Boolean(c.dump)],
+  ["DUMP_STATION", "덤프스테이션", isDumpCamp],
   ["EXCELLENT", "공인 우수야영장", (c) => Boolean(c.best?.length)],
 ];
 const THEME_FILES = {
@@ -588,12 +599,12 @@ const THEME_FILES = {
   AUTO: "auto.webp",
   VISITOR: "comfort.webp",
   PICNIC: "sunrise.webp",
-  TIDAL_FLAT: "sea.webp",
-  FLEX_TIME: "comfort.webp",
-  FIRST_COME: "popular.webp",
-  VR_TOUR: "valley.webp",
-  DUMP_STATION: "auto.webp",
-  EXCELLENT: "kids.webp",
+  TIDAL_FLAT: "tidal.webp",
+  FLEX_TIME: "flextime.webp",
+  FIRST_COME: "firstcome.webp",
+  VR_TOUR: "vrtour.webp",
+  DUMP_STATION: "dumpstation.webp",
+  EXCELLENT: "excellent.webp",
   PARK: "public.webp",
   WATER_PLAY: "summer.webp",
   ALL: "valley.webp",
