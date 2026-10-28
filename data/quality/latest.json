@@ -1,14 +1,14 @@
 {
- "generated_at": "2026-10-28T01:10:00.730Z",
+ "generated_at": "2026-10-28T06:11:56.903Z",
  "date": "2026-10-28",
  "totals": {
   "campgrounds": 6416,
-  "facts": 236868,
-  "pairs": 188417,
-  "mean_confidence": 0.787,
-  "confirmed_pct": 85.2,
-  "corroborated": 3919,
-  "conflicts": 848,
+  "facts": 238014,
+  "pairs": 188910,
+  "mean_confidence": 0.786,
+  "confirmed_pct": 85,
+  "corroborated": 3942,
+  "conflicts": 849,
   "decisions": 69
  },
  "attrs": {
@@ -489,15 +489,15 @@
    }
   },
   "EXTRA_PERSON_FEE": {
-   "coverage": 409,
+   "coverage": 411,
    "coverage_pct": 6.4,
-   "mean_confidence": 0.577,
-   "confirmed_pct": 40.8,
+   "mean_confidence": 0.576,
+   "confirmed_pct": 40.6,
    "corroborated": 24,
    "conflicts": 0,
-   "weak": 235,
+   "weak": 237,
    "status": {
-    "WEAK": 235,
+    "WEAK": 237,
     "CONFIRMED": 166,
     "VERIFIED": 1,
     "SINGLE": 6,
@@ -505,16 +505,16 @@
    }
   },
   "VISITOR_POLICY": {
-   "coverage": 64,
+   "coverage": 65,
    "coverage_pct": 1,
-   "mean_confidence": 0.599,
-   "confirmed_pct": 46.9,
+   "mean_confidence": 0.592,
+   "confirmed_pct": 46.2,
    "corroborated": 1,
    "conflicts": 0,
-   "weak": 34,
+   "weak": 35,
    "status": {
     "CONFIRMED": 30,
-    "WEAK": 34
+    "WEAK": 35
    }
   },
   "EXTRA_CAR_FEE": {
@@ -532,15 +532,15 @@
    }
   },
   "DISCOUNT": {
-   "coverage": 67,
-   "coverage_pct": 1,
-   "mean_confidence": 0.426,
-   "confirmed_pct": 13.4,
+   "coverage": 69,
+   "coverage_pct": 1.1,
+   "mean_confidence": 0.423,
+   "confirmed_pct": 13,
    "corroborated": 1,
    "conflicts": 0,
-   "weak": 58,
+   "weak": 60,
    "status": {
-    "WEAK": 58,
+    "WEAK": 60,
     "CONFIRMED": 9
    }
   },
@@ -842,18 +842,18 @@
    }
   },
   "PET_POLICY": {
-   "coverage": 2830,
-   "coverage_pct": 44.1,
-   "mean_confidence": 0.843,
-   "confirmed_pct": 91.7,
+   "coverage": 2843,
+   "coverage_pct": 44.3,
+   "mean_confidence": 0.841,
+   "confirmed_pct": 91.3,
    "corroborated": 693,
    "conflicts": 52,
-   "weak": 162,
+   "weak": 175,
    "status": {
     "CONFLICT": 52,
     "CONFIRMED": 2324,
     "VERIFIED": 272,
-    "WEAK": 162,
+    "WEAK": 175,
     "SINGLE": 20
    }
   },
@@ -947,16 +947,16 @@
    }
   },
   "PRICE_MENTION": {
-   "coverage": 2527,
-   "coverage_pct": 39.4,
-   "mean_confidence": 0.368,
+   "coverage": 2699,
+   "coverage_pct": 42.1,
+   "mean_confidence": 0.367,
    "confirmed_pct": 0,
-   "corroborated": 348,
+   "corroborated": 368,
    "conflicts": 0,
-   "weak": 2179,
+   "weak": 2331,
    "status": {
-    "WEAK": 2179,
-    "CORROBORATED": 348
+    "WEAK": 2331,
+    "CORROBORATED": 368
    }
   },
   "RENTAL_ITEM": {
@@ -986,105 +986,105 @@
    }
   },
   "REVIEW_PRO_CLEAN_FACILITY": {
-   "coverage": 1584,
-   "coverage_pct": 24.7,
+   "coverage": 1602,
+   "coverage_pct": 25,
    "mean_confidence": 0.37,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 1500,
+   "weak": 1517,
    "status": {
-    "WEAK": 1500,
-    "SINGLE": 84
+    "WEAK": 1517,
+    "SINGLE": 85
    }
   },
   "REVIEW_PRO_PET_FRIENDLY": {
-   "coverage": 1145,
-   "coverage_pct": 17.8,
+   "coverage": 1160,
+   "coverage_pct": 18.1,
    "mean_confidence": 0.382,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 1037,
+   "weak": 1052,
    "status": {
-    "WEAK": 1037,
+    "WEAK": 1052,
     "SINGLE": 108
    }
   },
   "REVIEW_PRO_WIDE_SITE": {
-   "coverage": 1160,
-   "coverage_pct": 18.1,
-   "mean_confidence": 0.36,
+   "coverage": 1177,
+   "coverage_pct": 18.3,
+   "mean_confidence": 0.361,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 1142,
+   "weak": 1159,
    "status": {
-    "WEAK": 1142,
+    "WEAK": 1159,
     "SINGLE": 18
    }
   },
   "REVIEW_PRO_EASY_PARKING": {
-   "coverage": 466,
-   "coverage_pct": 7.3,
-   "mean_confidence": 0.345,
-   "confirmed_pct": 0,
-   "corroborated": 0,
-   "conflicts": 0,
-   "weak": 465,
-   "status": {
-    "WEAK": 465,
-    "SINGLE": 1
-   }
-  },
-  "REVIEW_PRO_FAMILY_HEALING": {
-   "coverage": 860,
-   "coverage_pct": 13.4,
-   "mean_confidence": 0.358,
-   "confirmed_pct": 0,
-   "corroborated": 0,
-   "conflicts": 0,
-   "weak": 852,
-   "status": {
-    "WEAK": 852,
-    "SINGLE": 8
-   }
-  },
-  "REVIEW_PRO_KIDS": {
-   "coverage": 536,
-   "coverage_pct": 8.4,
-   "mean_confidence": 0.352,
-   "confirmed_pct": 0,
-   "corroborated": 0,
-   "conflicts": 0,
-   "weak": 534,
-   "status": {
-    "WEAK": 534,
-    "SINGLE": 2
-   }
-  },
-  "REVIEW_PRO_VALUE_FOR_MONEY": {
-   "coverage": 151,
-   "coverage_pct": 2.4,
+   "coverage": 477,
+   "coverage_pct": 7.4,
    "mean_confidence": 0.346,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 151,
+   "weak": 476,
    "status": {
-    "WEAK": 151
+    "WEAK": 476,
+    "SINGLE": 1
+   }
+  },
+  "REVIEW_PRO_FAMILY_HEALING": {
+   "coverage": 862,
+   "coverage_pct": 13.4,
+   "mean_confidence": 0.359,
+   "confirmed_pct": 0,
+   "corroborated": 0,
+   "conflicts": 0,
+   "weak": 854,
+   "status": {
+    "WEAK": 854,
+    "SINGLE": 8
+   }
+  },
+  "REVIEW_PRO_KIDS": {
+   "coverage": 540,
+   "coverage_pct": 8.4,
+   "mean_confidence": 0.353,
+   "confirmed_pct": 0,
+   "corroborated": 0,
+   "conflicts": 0,
+   "weak": 538,
+   "status": {
+    "WEAK": 538,
+    "SINGLE": 2
+   }
+  },
+  "REVIEW_PRO_VALUE_FOR_MONEY": {
+   "coverage": 160,
+   "coverage_pct": 2.5,
+   "mean_confidence": 0.347,
+   "confirmed_pct": 0,
+   "corroborated": 0,
+   "conflicts": 0,
+   "weak": 160,
+   "status": {
+    "WEAK": 160
    }
   },
   "REVIEW_PRO_WATER": {
-   "coverage": 782,
-   "coverage_pct": 12.2,
+   "coverage": 787,
+   "coverage_pct": 12.3,
    "mean_confidence": 0.364,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 757,
+   "weak": 762,
    "status": {
-    "WEAK": 757,
+    "WEAK": 762,
     "SINGLE": 25
    }
   },
@@ -1101,67 +1101,67 @@
    }
   },
   "REVIEW_PRO_QUIET": {
-   "coverage": 1632,
-   "coverage_pct": 25.4,
+   "coverage": 1640,
+   "coverage_pct": 25.6,
    "mean_confidence": 0.379,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 1526,
+   "weak": 1534,
    "status": {
-    "WEAK": 1526,
+    "WEAK": 1534,
     "SINGLE": 106
    }
   },
   "REVIEW_PRO_VIEW": {
-   "coverage": 561,
-   "coverage_pct": 8.7,
-   "mean_confidence": 0.356,
+   "coverage": 564,
+   "coverage_pct": 8.8,
+   "mean_confidence": 0.355,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 555,
+   "weak": 558,
    "status": {
-    "WEAK": 555,
+    "WEAK": 558,
     "SINGLE": 6
    }
   },
   "REVIEW_PRO_HEALING_NATURE": {
-   "coverage": 704,
-   "coverage_pct": 11,
-   "mean_confidence": 0.356,
+   "coverage": 711,
+   "coverage_pct": 11.1,
+   "mean_confidence": 0.357,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 700,
+   "weak": 707,
    "status": {
-    "WEAK": 700,
+    "WEAK": 707,
     "SINGLE": 4
    }
   },
   "REVIEW_PRO_WALK": {
-   "coverage": 322,
+   "coverage": 324,
    "coverage_pct": 5,
    "mean_confidence": 0.35,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 321,
+   "weak": 323,
    "status": {
-    "WEAK": 321,
+    "WEAK": 323,
     "SINGLE": 1
    }
   },
   "REVIEW_PRO_ACCESSIBILITY": {
-   "coverage": 556,
+   "coverage": 560,
    "coverage_pct": 8.7,
    "mean_confidence": 0.35,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 554,
+   "weak": 558,
    "status": {
-    "WEAK": 554,
+    "WEAK": 558,
     "SINGLE": 2
    }
   },
@@ -1190,52 +1190,52 @@
    }
   },
   "REVIEW_CON_SLOPE": {
-   "coverage": 48,
-   "coverage_pct": 0.7,
-   "mean_confidence": 0.334,
+   "coverage": 52,
+   "coverage_pct": 0.8,
+   "mean_confidence": 0.335,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 48,
+   "weak": 52,
    "status": {
-    "WEAK": 48
+    "WEAK": 52
    }
   },
   "REVIEW_PRO_CLEAN_TOILET": {
-   "coverage": 231,
-   "coverage_pct": 3.6,
-   "mean_confidence": 0.35,
+   "coverage": 238,
+   "coverage_pct": 3.7,
+   "mean_confidence": 0.349,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 230,
+   "weak": 237,
    "status": {
-    "WEAK": 230,
+    "WEAK": 237,
     "SINGLE": 1
    }
   },
   "REVIEW_PRO_HOT_WATER": {
-   "coverage": 75,
+   "coverage": 76,
    "coverage_pct": 1.2,
    "mean_confidence": 0.347,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 75,
+   "weak": 76,
    "status": {
-    "WEAK": 75
+    "WEAK": 76
    }
   },
   "REVIEW_CON_HARD_BOOKING": {
-   "coverage": 106,
+   "coverage": 112,
    "coverage_pct": 1.7,
    "mean_confidence": 0.348,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 106,
+   "weak": 112,
    "status": {
-    "WEAK": 106
+    "WEAK": 112
    }
   },
   "REVIEW_CON_OLD_FACILITY": {
@@ -1251,15 +1251,15 @@
    }
   },
   "REVIEW_PRO_WELL_KEPT": {
-   "coverage": 145,
+   "coverage": 148,
    "coverage_pct": 2.3,
-   "mean_confidence": 0.345,
+   "mean_confidence": 0.344,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 145,
+   "weak": 148,
    "status": {
-    "WEAK": 145
+    "WEAK": 148
    }
   },
   "REVIEW_PRO_SHADE": {
@@ -1275,63 +1275,63 @@
    }
   },
   "REVIEW_CON_NOISE": {
-   "coverage": 245,
-   "coverage_pct": 3.8,
+   "coverage": 262,
+   "coverage_pct": 4.1,
    "mean_confidence": 0.349,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 245,
+   "weak": 262,
    "status": {
-    "WEAK": 245
+    "WEAK": 262
    }
   },
   "REVIEW_CON_WIND": {
-   "coverage": 20,
+   "coverage": 21,
    "coverage_pct": 0.3,
    "mean_confidence": 0.339,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 20,
+   "weak": 21,
    "status": {
-    "WEAK": 20
+    "WEAK": 21
    }
   },
   "REVIEW_PRO_STORE": {
-   "coverage": 46,
-   "coverage_pct": 0.7,
-   "mean_confidence": 0.344,
+   "coverage": 50,
+   "coverage_pct": 0.8,
+   "mean_confidence": 0.343,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 46,
+   "weak": 50,
    "status": {
-    "WEAK": 46
+    "WEAK": 50
    }
   },
   "REVIEW_CON_NARROW_SITE": {
-   "coverage": 44,
+   "coverage": 45,
    "coverage_pct": 0.7,
-   "mean_confidence": 0.344,
+   "mean_confidence": 0.345,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 44,
+   "weak": 45,
    "status": {
-    "WEAK": 44
+    "WEAK": 45
    }
   },
   "REVIEW_CON_ROUGH_ROAD": {
-   "coverage": 32,
+   "coverage": 33,
    "coverage_pct": 0.5,
    "mean_confidence": 0.336,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 32,
+   "weak": 33,
    "status": {
-    "WEAK": 32
+    "WEAK": 33
    }
   },
   "REVIEW_PRO_STARS": {
@@ -1347,15 +1347,15 @@
    }
   },
   "REVIEW_CON_PRICE": {
-   "coverage": 47,
+   "coverage": 48,
    "coverage_pct": 0.7,
    "mean_confidence": 0.331,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 47,
+   "weak": 48,
    "status": {
-    "WEAK": 47
+    "WEAK": 48
    }
   },
   "REVIEW_CON_BUGS": {
@@ -1639,17 +1639,17 @@
    }
   },
   "SITE_SIZE": {
-   "coverage": 1326,
+   "coverage": 1331,
    "coverage_pct": 20.7,
-   "mean_confidence": 0.829,
-   "confirmed_pct": 88.3,
+   "mean_confidence": 0.827,
+   "confirmed_pct": 88,
    "corroborated": 311,
    "conflicts": 0,
-   "weak": 118,
+   "weak": 123,
    "status": {
     "CONFIRMED": 986,
     "VERIFIED": 185,
-    "WEAK": 118,
+    "WEAK": 123,
     "CORROBORATED": 8,
     "SINGLE": 29
    }
@@ -1707,16 +1707,16 @@
    }
   },
   "SITE_TYPE": {
-   "coverage": 3374,
-   "coverage_pct": 52.6,
-   "mean_confidence": 0.75,
-   "confirmed_pct": 78.6,
+   "coverage": 3412,
+   "coverage_pct": 53.2,
+   "mean_confidence": 0.745,
+   "confirmed_pct": 77.7,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 715,
+   "weak": 753,
    "status": {
     "CONFIRMED": 2651,
-    "WEAK": 715,
+    "WEAK": 753,
     "SINGLE": 8
    }
   },
@@ -1925,92 +1925,92 @@
    }
   },
   "CHECKIN_TIME": {
-   "coverage": 2587,
-   "coverage_pct": 40.3,
-   "mean_confidence": 0.527,
-   "confirmed_pct": 19.8,
-   "corroborated": 569,
-   "conflicts": 39,
-   "weak": 1266,
+   "coverage": 2632,
+   "coverage_pct": 41,
+   "mean_confidence": 0.525,
+   "confirmed_pct": 19.5,
+   "corroborated": 567,
+   "conflicts": 40,
+   "weak": 1301,
    "status": {
     "VERIFIED": 194,
-    "WEAK": 1266,
-    "CONFIRMED": 319,
-    "SINGLE": 596,
-    "CORROBORATED": 173,
-    "CONFLICT": 39
+    "WEAK": 1301,
+    "CONFIRMED": 318,
+    "SINGLE": 608,
+    "CORROBORATED": 171,
+    "CONFLICT": 40
    }
   },
   "CHECKOUT_TIME": {
-   "coverage": 2595,
-   "coverage_pct": 40.4,
-   "mean_confidence": 0.527,
-   "confirmed_pct": 20.7,
-   "corroborated": 632,
+   "coverage": 2636,
+   "coverage_pct": 41.1,
+   "mean_confidence": 0.525,
+   "confirmed_pct": 20.4,
+   "corroborated": 636,
    "conflicts": 15,
-   "weak": 1276,
+   "weak": 1303,
    "status": {
-    "VERIFIED": 203,
-    "WEAK": 1276,
-    "CONFIRMED": 334,
-    "SINGLE": 557,
-    "CORROBORATED": 210,
+    "VERIFIED": 204,
+    "WEAK": 1303,
+    "CONFIRMED": 333,
+    "SINGLE": 567,
+    "CORROBORATED": 214,
     "CONFLICT": 15
    }
   },
   "MANNER_TIME": {
-   "coverage": 2058,
-   "coverage_pct": 32.1,
+   "coverage": 2075,
+   "coverage_pct": 32.3,
    "mean_confidence": 0.385,
    "confirmed_pct": 6.1,
    "corroborated": 116,
    "conflicts": 0,
-   "weak": 1636,
+   "weak": 1650,
    "status": {
-    "WEAK": 1636,
+    "WEAK": 1650,
     "CONFIRMED": 113,
-    "SINGLE": 250,
+    "SINGLE": 253,
     "CORROBORATED": 46,
     "VERIFIED": 13
    }
   },
   "EARLY_CHECKIN": {
-   "coverage": 186,
+   "coverage": 189,
    "coverage_pct": 2.9,
-   "mean_confidence": 0.46,
-   "confirmed_pct": 21,
-   "corroborated": 11,
+   "mean_confidence": 0.458,
+   "confirmed_pct": 20.6,
+   "corroborated": 12,
    "conflicts": 0,
-   "weak": 146,
+   "weak": 149,
    "status": {
-    "WEAK": 146,
+    "WEAK": 149,
     "CONFIRMED": 39,
     "CORROBORATED": 1
    }
   },
   "LATE_CHECKOUT": {
-   "coverage": 131,
-   "coverage_pct": 2,
-   "mean_confidence": 0.472,
-   "confirmed_pct": 22.9,
+   "coverage": 133,
+   "coverage_pct": 2.1,
+   "mean_confidence": 0.47,
+   "confirmed_pct": 22.6,
    "corroborated": 7,
    "conflicts": 0,
-   "weak": 101,
+   "weak": 103,
    "status": {
-    "WEAK": 101,
+    "WEAK": 103,
     "CONFIRMED": 30
    }
   },
   "MIN_STAY": {
-   "coverage": 108,
+   "coverage": 109,
    "coverage_pct": 1.7,
-   "mean_confidence": 0.454,
-   "confirmed_pct": 21.3,
+   "mean_confidence": 0.453,
+   "confirmed_pct": 21.1,
    "corroborated": 2,
    "conflicts": 0,
-   "weak": 84,
+   "weak": 85,
    "status": {
-    "WEAK": 84,
+    "WEAK": 85,
     "CONFIRMED": 23,
     "SINGLE": 1
    }
@@ -2070,13 +2070,13 @@
    "attr": "SITE_TYPE",
    "kind": "confidence",
    "from": 0.799,
-   "to": 0.75
+   "to": 0.745
   },
   {
    "attr": "MIN_STAY",
    "kind": "confidence",
    "from": 0.48,
-   "to": 0.454
+   "to": 0.453
   }
  ]
 }
