@@ -4530,6 +4530,10 @@ const CMT_CLOSED_SET = new Set();    // user explicitly closed
 const CMT_EXPANDED_SET = new Set();  // user expanded to view up to 6 comments
 const CMT_WRITE_OPEN_SET = new Set(); // user opened inline comment write form
 
+function ytBadgeIcon() {
+  return `<svg class="c-yt-badge-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="#FF0000" d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8z"/><polygon fill="#FFFFFF" points="10,9 15.2,12 10,15"/></svg>`;
+}
+
 function formatCommentContent(content) {
   if (!content) return "";
   const ytMatch = String(content).match(/https?:\/\/(?:www\.)?(?:youtube\.com\/(?:shorts\/|watch\?v=)|youtu\.be\/)([\w-]{11})[^\s]*/i);
@@ -4539,13 +4543,13 @@ function formatCommentContent(content) {
   const isShorts = ytUrl.includes("/shorts/");
   const textWithoutUrl = content.replace(ytUrl, "").trim();
   const textHtml = textWithoutUrl ? `<p class="c-cmt-text">${esc(textWithoutUrl)}</p>` : "";
-  const ytCardHtml = `<a class="c-yt-card" href="${esc(ytUrl)}" target="_blank" rel="noopener" aria-label="YouTube 영상 보기">
-    <div class="c-yt-thumb-box">
+  const ytCardHtml = `<div class="c-yt-card">
+    <div class="c-yt-thumb-box" data-yt-inline="${esc(ytId)}" role="button" tabindex="0" aria-label="${isShorts ? "YouTube Shorts" : "YouTube"} 영상 바로 재생">
       <img src="https://i.ytimg.com/vi/${esc(ytId)}/hqdefault.jpg" alt="YouTube thumbnail" loading="lazy">
       <div class="c-yt-play-btn"><svg viewBox="0 0 24 24" class="c-yt-play-icon" aria-hidden="true"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></div>
     </div>
-    <div class="c-yt-meta"><span class="c-yt-badge">${platIc("youtube")}<span>${isShorts ? "YouTube Shorts" : "YouTube"}</span></span></div>
-  </a>`;
+    <div class="c-yt-meta"><span class="c-yt-badge">${ytBadgeIcon()}<span>${isShorts ? "YouTube Shorts" : "YouTube"}</span></span></div>
+  </div>`;
   return textHtml ? `${textHtml}${ytCardHtml}` : ytCardHtml;
 }
 
@@ -4796,6 +4800,34 @@ function bindCardCommentEvents() {
       updateSingleCardCommentDom(id);
       return;
     }
+
+    const ytInline = e.target.closest("[data-yt-inline]");
+    if (ytInline) {
+      e.preventDefault();
+      e.stopPropagation();
+      const ytId = ytInline.dataset.ytInline;
+      if (!ytId) return;
+      const frame = document.createElement("iframe");
+      frame.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(ytId)}?autoplay=1&playsinline=1`;
+      frame.title = "YouTube 영상";
+      frame.allow = "autoplay; encrypted-media; picture-in-picture";
+      frame.allowFullscreen = true;
+      frame.className = "c-yt-frame";
+      const card = ytInline.closest(".c-yt-card");
+      ytInline.replaceWith(frame);
+      if (card) card.classList.add("is-playing");
+      return;
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      const ytInline = e.target.closest?.("[data-yt-inline]");
+      if (ytInline) {
+        e.preventDefault();
+        ytInline.click();
+      }
+    }
   });
 
   document.addEventListener("submit", async (e) => {
@@ -4899,9 +4931,10 @@ function commentLinkCard(raw) {
   const info = commentUrlInfo(raw);
   if (!info) return esc(raw);
   const title = esc(info.provider), domain = esc(info.label), href = esc(info.url);
+  const isYt = info.provider.startsWith("YouTube");
   if (info.embed) {
     const visual = info.thumb ? `<img src="${esc(info.thumb)}" alt="${title} 미리보기" loading="lazy" referrerpolicy="no-referrer">` : `<span class="comment-video-placeholder">${esc(info.provider)}</span>`;
-    return `<span class="comment-link-card comment-video-card"><button type="button" class="comment-video-trigger" data-comment-video="${esc(info.embed)}" aria-label="${title} 재생">${visual}<span class="comment-video-play" aria-hidden="true">▶</span></button><span class="comment-link-meta"><b>${title}</b><small>${domain}</small></span></span>`;
+    return `<span class="comment-link-card comment-video-card"><button type="button" class="comment-video-trigger" data-comment-video="${esc(info.embed)}" aria-label="${title} 재생">${visual}<span class="comment-video-play" aria-hidden="true">▶</span></button><span class="comment-link-meta"><span class="comment-video-title">${isYt ? ytBadgeIcon() : platIc(info.provider.includes("네이버") ? "naver" : "kakao")}<b>${title}</b></span>${isYt ? "" : `<small>${domain}</small>`}</span></span>`;
   }
   return `<a class="comment-link-card comment-external-card" href="${href}" target="_blank" rel="noopener noreferrer"><span class="comment-link-icon">↗</span><span><b>${title}</b><small>${domain}</small></span><span class="comment-link-arrow">›</span></a>`;
 }

@@ -449,10 +449,10 @@ img { color: transparent; }
 .saved-card-spec { position: relative; z-index: 2; gap: 0; }
 .saved-card-spec:not(.is-open) { margin-bottom: -10px; }
 .saved-card-spec:not(.is-open) + .card-group-cmts { margin-top: 0; }
-.saved-card-spec-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 0; margin: 0; padding: 7px 0 8px; border: 0; border-top: 1px solid var(--line); background: transparent; color: var(--ink-2); font: inherit; font-size: .82rem; font-weight: 800; cursor: pointer; text-align: left; }
+.saved-card-spec-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 0; margin: 0; padding: 11px 0 11px; border: 0; border-top: 1px solid var(--line); background: transparent; color: var(--ink-2); font: inherit; font-size: .82rem; font-weight: 800; cursor: pointer; text-align: left; }
 .saved-card-spec-toggle > span { display: inline-flex; align-items: center; gap: 6px; }
 .saved-card-spec-toggle .ic { width: 15px; height: 15px; color: var(--ink-3); }
-.saved-card-spec-toggle .saved-card-spec-chevron { flex: none; transition: transform .18s ease; transform: rotate(180deg); }
+.saved-card-spec-toggle .saved-card-spec-chevron { width: 16px; height: 16px; flex: none; display: inline-flex; align-items: center; justify-content: center; transition: transform .18s ease; transform: rotate(180deg); }
 .saved-card-spec.is-open .saved-card-spec-chevron { transform: rotate(0deg); }
 .saved-card-spec-panel { min-width: 0; }
 .saved-card-spec-panel .card-group-types { margin-top: 6px; margin-bottom: 6px; }
@@ -517,7 +517,7 @@ img { color: transparent; }
 }
 .c-cmt-bar {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 6px 4px; cursor: pointer; user-select: none;
+  padding: 6px 0; cursor: pointer; user-select: none;
   font-size: .86rem; font-weight: 600; color: var(--ink-2);
   border-radius: var(--r-s); transition: background .15s ease;
 }
@@ -541,10 +541,11 @@ img { color: transparent; }
 }
 .c-cmt-bar-arrow {
   display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px; flex: none;
   color: var(--ink-3); transition: transform .18s ease;
   transform: rotate(180deg);
 }
-.c-cmt-bar-arrow .ic { width: 14px; height: 14px; }
+.c-cmt-bar-arrow .ic { width: 16px; height: 16px; }
 .c-cmt-bar.is-open .c-cmt-bar-arrow {
   transform: rotate(0deg);
   color: var(--ink);
@@ -572,29 +573,30 @@ img { color: transparent; }
 
 /* YouTube 영상 미리보기 카드 */
 .c-yt-card {
-  display: block; text-decoration: none; border-radius: 10px; overflow: hidden;
+  display: block; border-radius: 10px; overflow: hidden;
   border: 1px solid var(--line); background: var(--paper);
   box-shadow: 0 1px 3px rgba(0,0,0,.06); margin-top: 6px;
   transition: transform .15s ease, box-shadow .15s ease;
 }
-.c-yt-card:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,.1); }
-.c-yt-thumb-box { position: relative; width: 100%; height: 150px; background: #000; overflow: hidden; }
+.c-yt-card:not(.is-playing):hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,0,0,.1); }
+.c-yt-thumb-box { position: relative; width: 100%; aspect-ratio: 16 / 9; min-height: 160px; max-height: 240px; background: #000; overflow: hidden; cursor: pointer; }
 .c-yt-thumb-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .c-yt-play-btn {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
   width: 44px; height: 44px; border-radius: 50%; background: rgba(0, 0, 0, .68);
   display: flex; align-items: center; justify-content: center; color: #fff;
   transition: transform .15s ease, background .15s ease;
+  pointer-events: none;
 }
-.c-yt-card:hover .c-yt-play-btn { background: rgba(255, 0, 0, .85); transform: translate(-50%, -50%) scale(1.1); }
+.c-yt-thumb-box:hover .c-yt-play-btn { background: rgba(255, 0, 0, .85); transform: translate(-50%, -50%) scale(1.1); }
 .c-yt-play-icon { width: 20px; height: 20px; margin-left: 2px; }
+.c-yt-frame { width: 100%; aspect-ratio: 16 / 9; min-height: 160px; max-height: 240px; border: 0; display: block; background: #000; }
 .c-yt-meta {
   display: flex; align-items: center; justify-content: flex-start;
   padding: 8px 12px; background: var(--paper); font-size: .78rem; line-height: 1.2;
 }
-.c-yt-badge { display: inline-flex; align-items: center; gap: 5px; font-weight: 700; color: var(--ink); }
-.c-yt-badge .plat-ic { width: 18px; height: 18px; }
-.c-yt-badge .plat-ic svg { width: 10px; height: 10px; }
+.c-yt-badge { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; color: var(--ink); }
+.c-yt-badge-icon { width: 18px; height: 18px; flex: none; display: inline-block; vertical-align: middle; }
 
 /* 댓글 더보기 / 접기 / 앵커 이동 */
 .c-cmt-more-btn {
