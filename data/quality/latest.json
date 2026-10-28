@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-28T13:25:37.595Z",
- "date": "2026-10-28",
+ "generated_at": "2026-10-28T16:38:50.153Z",
+ "date": "2026-10-29",
  "totals": {
   "campgrounds": 6416,
   "facts": 238039,
@@ -2065,18 +2065,5 @@
    }
   }
  },
- "regressions": [
-  {
-   "attr": "SITE_TYPE",
-   "kind": "confidence",
-   "from": 0.799,
-   "to": 0.745
-  },
-  {
-   "attr": "MIN_STAY",
-   "kind": "confidence",
-   "from": 0.48,
-   "to": 0.453
-  }
- ]
+ "regressions": []
 }
