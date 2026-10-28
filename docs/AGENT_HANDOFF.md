@@ -1,5 +1,11 @@
 # 인수인계
 
+## 📌 선착순·입퇴실 아이콘 보정 (2026-10-28, Codex)
+- 사용자가 제공한 사람 걷기 SVG를 `i-first-come`으로 등록하고, 예약 오픈 라벨에 `선착순`이 포함될 때 예약 카드·예약 상세·다음 오픈 정보에 해당 아이콘을 표시한다.
+- 입실·퇴실 시간의 `i-clock-in`·`i-clock-out`을 제공된 모래시계 SVG(`viewBox=0 0 384 512`, 폭 .75em)로 교체했다.
+- `design/renewal/`을 원본으로 수정했으며 발행 전 `publish-explorer-pages.mjs --shell-only camping-atlas/public`로 공개본을 동기화한다.
+- 검증: `node --check design/renewal/app.js`, `node --check camping-atlas/public/app.js`, `git diff --check` 통과. 작업 worktree에는 의존성이 없어 ESLint는 실행하지 못했으며 CI에서 확인한다.
+
 ## 📌 상세정보·댓글 화살표 x좌표 정렬 · 상세정보 상하단 여백 확대 · 유튜브 쇼츠 인라인 재생 · YouTube Shorts 아이콘 정규화 (2026-10-28, Gemini → 전 에이전트)
 - **상세정보와 댓글 우측 화살표 x좌표 정밀 일치**:
   - `saved-card-spec-toggle`과 `c-cmt-bar`의 가로 패딩을 `padding: 11px 0` 및 `padding: 6px 0`으로 맞추고, 두 화살표(`.saved-card-spec-chevron`, `.c-cmt-bar-arrow`) 크기를 16px × 16px로 동일화.

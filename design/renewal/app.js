@@ -92,7 +92,7 @@ const band = (n) => {
   return m < 1 ? `${Math.round(n / 1000)}천원` : `${m}만원`;
 };
 // "th:키"면 테마 아이콘(TH_SVG)을 같은 크기로 쓴다(스프라이트에 없는 휴양림 등).
-const ic = (id, cls = "") => (String(id).startsWith("th:") ? thIc(String(id).slice(3)).replace('class="th-ic"', `class="ic th-ic ${cls}"`) : `<svg class="ic ${cls}" aria-hidden="true"><use href="#i-${id}"/></svg>`);
+const ic = (id, cls = "") => (String(id).startsWith("th:") ? thIc(String(id).slice(3)).replace('class="th-ic"', `class="ic th-ic ${cls}"`) : `<svg class="ic${/^(clock-in|clock-out)$/.test(String(id)) ? ` ic-${id}` : ""} ${cls}" aria-hidden="true"><use href="#i-${id}"/></svg>`);
 const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
 function formatKoreanDate(s) {
   if (!s) return "";
@@ -3139,6 +3139,11 @@ function getAllBookingChannels(c) {
   }
   return list;
 }
+// 예약 오픈 방식은 시각 정보와 분리해 아이콘으로도 즉시 구분한다.
+// ‘선착순’이 포함된 원문만 사람 아이콘을 쓰고, 나머지 오픈 일정은 시계로 표시한다.
+function openingIcon(label = "") {
+  return ic(/선착순/.test(String(label)) ? "first-come" : "clock");
+}
 function bookingSource(channel, label = "대표 예약 채널") {
   const evidence = Array.isArray(channel?.evidence) ? channel.evidence.join(" · ") : "";
   return sourceFact({
@@ -3156,7 +3161,7 @@ function reserveCard(c) {
     : "";
   return `<div class="reserve">
     <div class="rs-top"><span>${esc(main ? bookingLabel(main) : "예약")}${main ? " · 1순위" : ""}</span>${o ? `<span class="rs-dd">${esc(o.txt ?? o.kind)}</span>` : ""}</div>
-    ${o ? `<p class="rs-open"><b>${esc(new Date(o.at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", weekday: "short", hour: "2-digit", minute: "2-digit" }))}</b><span>${esc(o.label ?? "")}</span></p>` : ""}
+    ${o ? `<p class="rs-open">${openingIcon(o.label)}<span><b>${esc(new Date(o.at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", weekday: "short", hour: "2-digit", minute: "2-digit" }))}</b><span>${esc(o.label ?? "")}</span></span></p>` : ""}
     <div class="rs-btns">
       ${main ? reserveSplit(c, { inline: true }) : ""}
       ${c.tel ? `<a class="btn ghost" href="tel:${esc(c.tel)}">${ic("phone")}전화</a>` : ""}
@@ -3926,9 +3931,9 @@ function bookingHtml(c, d) {
   ].filter(Boolean).filter(([, v]) => v && !/운영자 안내에 따름|홈페이지마다 다름|홈페이지\s*(공지|예약\s*안내)|일정을 따른다/.test(v));
   if (!main && !c.tel && !meta.length && !o) return "";
   return `<section class="d-sec" id="sec-booking"><div class="sec-head">${iconTitle("booking", "예약 방법")}${main ? `<span class="sec-note">${srcTip(bookingSource(main), "대표 예약 채널")}</span>` : ""}</div>
-    ${o ? `<div class="bo-highlight ${o.dd <= 0 ? "bo-today" : ""}"><span class="bo-badge">${ic("clock")}${esc(o.txt ?? "오픈 예정")}</span><div class="bo-detail"><b>다음 예약 오픈</b><span>${esc([openTimeStr, o.label].filter(Boolean).join(" · ") || o.txt)}</span></div><button type="button" class="btn ghost btn-sm bo-ics" data-open-ics="${esc(String(c.id))}">${ic("clock")}캘린더 알림</button></div>` : ""}
+    ${o ? `<div class="bo-highlight ${o.dd <= 0 ? "bo-today" : ""}"><span class="bo-badge">${openingIcon(o.label)}${esc(o.txt ?? "오픈 예정")}</span><div class="bo-detail"><b>다음 예약 오픈</b><span>${esc([openTimeStr, o.label].filter(Boolean).join(" · ") || o.txt)}</span></div><button type="button" class="btn ghost btn-sm bo-ics" data-open-ics="${esc(String(c.id))}">${ic("clock")}캘린더 알림</button></div>` : ""}
     ${main || c.tel ? `<div class="chans">${main ? `<a class="chan" href="${esc(main.url)}" target="_blank" rel="noopener">${ic(/네이버/.test(bookingLabel(main)) ? "naver" : "booking")}<b>${esc(bookingLabel(main))}</b><i>예약 페이지</i></a>` : ""}${c.tel ? `<a class="chan" href="tel:${esc(telText(c.tel).replace(/[^\d+]/g, ""))}">${ic("phone")}<b>전화 문의</b><i>${esc(telText(c.tel))}</i></a>` : ""}</div>` : ""}
-    ${meta.length ? `<dl class="uses">${meta.map(([l, v]) => `<div class="use"><dt>${l === "다음 오픈" ? ic("clock") : ""}${l}</dt><dd><span class="use-val${l === "다음 오픈" ? " hot" : ""}">${bookingValue(bookingLines(v, { dateLike: l === "다음 오픈" }))}</span><span class="use-meta">${srcTip({ g: "c", src: { label: l === "다음 오픈" ? "예약 오픈 정보" : "예약 안내", url: g?.source?.url, at: g?.source?.date, quote: v } }, l)}</span></dd></div>`).join("")}</dl>` : ""}
+    ${meta.length ? `<dl class="uses">${meta.map(([l, v]) => `<div class="use"><dt>${l === "다음 오픈" ? openingIcon(v) : ""}${l}</dt><dd><span class="use-val${l === "다음 오픈" ? " hot" : ""}">${bookingValue(bookingLines(v, { dateLike: l === "다음 오픈" }))}</span><span class="use-meta">${srcTip({ g: "c", src: { label: l === "다음 오픈" ? "예약 오픈 정보" : "예약 안내", url: g?.source?.url, at: g?.source?.date, quote: v } }, l)}</span></dd></div>`).join("")}</dl>` : ""}
   </section>`;
 }
 function programsHtml(d) {
