@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-27T23:02:03.677Z",
+ "generated_at": "2026-10-28T00:44:15.131Z",
  "rule": "pipeline/lib/fact-refine.mjs",
- "dropped": 217,
- "recoded": 141,
- "scoped": 523,
+ "dropped": 238,
+ "recoded": 145,
+ "scoped": 593,
  "items": [
   {
    "cid": "101498",
@@ -1389,6 +1389,17 @@
    "quote": "캠핑에 빠져든지 어느덧 7년차,, 정~~~말 오랜만에 애견동반캠핑 슝슝ㅎㅎ 이번엔 포천에 있는 애견동반캠핑 가능한 포애뜰캠핑장 으로 가보았어용 캠핑장만 보고 왔는데 카페랑 같이 운영하는 곳이었어요!...",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
+  },
+  {
+   "cid": "2373",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "SMALL_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/soso__vvv/224429298038",
+   "quote": "3월~10월) 용두숲속야영장은 애견동반 캠핑장으로 8kg미만소형견만 가능하고 이동시 목줄필수에요....",
+   "action": "recode",
+   "why": "크기 제한 있는 허용"
   },
   {
    "cid": "100340",
@@ -3714,6 +3725,249 @@
    "quote": "전기사용료 5천원 주차가능,매점없음 반려동물 동반 금지 앵봉산가족캠핑장(@angbong_camping)",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "park-52130-00001-pythb",
+   "attr": "SITE_TYPE",
+   "value": "AUTO",
+   "src": "operator_homepage",
+   "url": "https://campweek.co.kr/detail_info_1.php?detail_id=3100545",
+   "quote": "인근에 가볼만한 관광지는 월명호수, 월명공원 채만식문학비, 아리랜드가 있고, 주변에 다른 캠핑장으로 서천 국민여가 캠핑장, 스테리움 서천, 청암산오토캠핑장, 서천 금빛노을 서울캠핑장, 장항 솔바람마을 캠핑장이 있습니",
+   "action": "drop",
+   "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
+  },
+  {
+   "cid": "park-52130-00001-pythb",
+   "attr": "SITE_TYPE",
+   "value": "DECK",
+   "src": "operator_homepage",
+   "url": "https://campweek.co.kr/detail_info_1.php?detail_id=3100545",
+   "quote": "데크 사이트가 총 15개로 구성되어 있고, 전기, 온수, 장작판매, Wi-Fi, 장",
+   "action": "drop",
+   "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
+  },
+  {
+   "cid": "park-52130-00001-pythb",
+   "attr": "SITE_TYPE",
+   "value": "GLAMPING",
+   "src": "operator_homepage",
+   "url": "https://campweek.co.kr/detail_info_1.php?detail_id=3100545",
+   "quote": "버드글램핑 - 캠프위크",
+   "action": "drop",
+   "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
+  },
+  {
+   "cid": "park-52130-00001-pythb",
+   "attr": "SITE_TYPE",
+   "value": "CARAVAN",
+   "src": "operator_homepage",
+   "url": "https://campweek.co.kr/detail_info_1.php?detail_id=3100545",
+   "quote": "카라반 개수 13개",
+   "action": "drop",
+   "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
+  },
+  {
+   "cid": "park-52130-00001-pythb",
+   "attr": "SITE_TYPE",
+   "value": "HOUSE",
+   "src": "operator_homepage",
+   "url": "https://campweek.co.kr/detail_info_1.php?detail_id=3100545",
+   "quote": "카라반 팬션 방갈로 글램핑",
+   "action": "drop",
+   "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
+  },
+  {
+   "cid": "park-52130-00001-pythb",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "operator_homepage",
+   "url": "https://campweek.co.kr/detail_info_1.php?detail_id=3100545",
+   "quote": "반려동물 출입 불가능",
+   "action": "drop",
+   "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
+  },
+  {
+   "cid": "park-52130-00001-pythb",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "src": "operator_homepage",
+   "url": "https://campweek.co.kr/detail_info_1.php?detail_id=3001628&ptype=web",
+   "quote": "반려동물 출입 가능",
+   "action": "drop",
+   "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
+  },
+  {
+   "cid": "park-29200-00004-y6e3",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "SMALL_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/ihhihh/224435584425",
+   "quote": "존별 상이) 반려견 동반 가능 (10kg 미만 1마리) 주요 시설 샤워실, 매점, 트램폴린, 계곡 물놀이 체크인/아웃 캠핏에서 확인해 주세요 매너타임 23시~07시 (조용히) ✨ 칠봉송정캠핑장의 핵심 매력 3가지 반려견 동반 캠핑 원주를 찾다 보면 …",
+   "action": "recode",
+   "why": "크기 제한 있는 허용"
+  },
+  {
+   "cid": "park-41820-00003-1aik1",
+   "attr": "SITE_TYPE",
+   "value": "DECK",
+   "src": "operator_homepage",
+   "url": "https://campweek.co.kr/detail_info_1.php?detail_id=3100287",
+   "quote": "데크 사이트가 구성되어 있고, 전기, 온수, Wi-Fi 등의 편의시설을 이용할 수",
+   "action": "drop",
+   "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
+  },
+  {
+   "cid": "park-41820-00003-1aik1",
+   "attr": "SITE_TYPE",
+   "value": "GLAMPING",
+   "src": "operator_homepage",
+   "url": "https://campweek.co.kr/detail_info_1.php?detail_id=3100287",
+   "quote": "카라반 팬션 방갈로 글램핑",
+   "action": "drop",
+   "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
+  },
+  {
+   "cid": "park-41820-00003-1aik1",
+   "attr": "SITE_TYPE",
+   "value": "CARAVAN",
+   "src": "operator_homepage",
+   "url": "https://campweek.co.kr/detail_info_1.php?detail_id=3100287",
+   "quote": "카라반 팬션 방갈로 글램핑",
+   "action": "drop",
+   "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
+  },
+  {
+   "cid": "park-41820-00003-1aik1",
+   "attr": "SITE_TYPE",
+   "value": "HOUSE",
+   "src": "operator_homepage",
+   "url": "https://campweek.co.kr/detail_info_1.php?detail_id=3100287",
+   "quote": "카라반 팬션 방갈로 글램핑",
+   "action": "drop",
+   "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
+  },
+  {
+   "cid": "park-41820-00003-1aik1",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "operator_homepage",
+   "url": "https://campweek.co.kr/detail_info_1.php?detail_id=3100287",
+   "quote": "반려동물 출입 불가능",
+   "action": "drop",
+   "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
+  },
+  {
+   "cid": "park-41820-00003-1aik1",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "src": "operator_homepage",
+   "url": "https://campweek.co.kr/detail_info_1.php?detail_id=3002944&ptype=web",
+   "quote": "반려동물 출입 가능",
+   "action": "drop",
+   "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
+  },
+  {
+   "cid": "park-11290-00001-y1mf",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/hyunjinz/224012498617",
+   "quote": "바람9번 여름캠핑(카즈미 비바돔플러스) 성북동 숲속야영장 체크인 오후2시 체크아웃 낮12시 매너타임 오후9시-오전7시 매점 없음 화로대 사용 불가 반려견 동반 가능 카라반/캠핑카 이용 불가 소규모 모임(6인 이하) 캠크닉 이용시 물품 대여 가능 바람…",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
+  },
+  {
+   "cid": "osm-r7004603",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://neweveryinfo.com/124",
+   "quote": "필수 전기릴선(오토캠핑), 데크팩 등 장비 챙기기 반려동물 출입 불가, 매너타임(23:00~07:00) 엄수 매점 운영시간(9:00~22:00) 참고, 식재료·생필품 넉넉히...임진각 평화누리공원, 헤이리 예술마을 등 차량 20분 내외 파주 출판도시…",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "osm-w286555214",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "operator_homepage",
+   "url": "https://parks.seoul.go.kr/content.do?key=2604300015",
+   "quote": "놀이터 내 보호자나 반려견을 위한 음식물 및 음료수 반입 금지",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "osm-w435230360",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/happysmile122/224395270381",
+   "quote": "매점 관리실 옆 내부 매점 운영...반려동물 동반 입장 불가",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "osm-w435230360",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "SMALL_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/kej9543210/224332170169",
+   "quote": ") *매너타임 오후10시부터 오전8시까지 *반려견 동반가능 (9kg미만 소형견) 캠핏 | 부곡...울집에서 35분정도 걸림!",
+   "action": "recode",
+   "why": "크기 제한 있는 허용"
+  },
+  {
+   "cid": "osm-w1365121769",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/ihhihh/224321886584",
+   "quote": "시설 트램폴린, 샤워실, 매점, 놀이터 매너타임 23:00 ~ 07:00 체크인/아웃 캠핏에서 확인해주세요 반려동물 펫 불가 (전 사이트 기준) 주변 관광지 바다향기수목원, 갯벌체험, 구봉도 해루질체험, 유리섬박물관, 종이박물관 예약 캠핏 앱/웹 예…",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "osm-w610095375",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/hsansls/224038268196",
+   "quote": "애견 동반으로 내부 이용 시에는 방바닥을 꼭 닦은 후 퇴실하기 털갈이 또는 털 빠짐 심한 반려견은 입실 불가 아침 일찍 오시는 분들 카운터...옆에는 아이스크림도 판매 중이고요~ 화장실은 건물의 층마다 있어요.",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "rf-14xm2hg",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://all-infor.tistory.com/166",
+   "quote": "연계·남원 추어탕·반려견 불가·방문 전 체크리스트·FAQ inforpik.co.kr 전북특별자치도 남원시 신정동의 명산 요천 자락 요람에 자리 잡은 남원 자연휴양림은 푸른 소나무 군락지와 사계절 맑은 물이 흐르는 골짜기, 광한루원 및 지리산 둘레길 …",
+   "action": "drop",
+   "why": "홍보·목록 제목(규칙 아님)"
+  },
+  {
+   "cid": "rf-lz3ylf",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/hannamtower/224421594687",
+   "quote": "반려동물 동반 입실 불가, 미성년자 숙박 예약 불가, 실내 흡연과 모든 고기구이 금지예요.",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "rf-13vmkr6",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://all-infor.tistory.com/186",
+   "quote": "악양 슬로우시티 연계·반려견 동반 불가·방문 전 체크리스트·FAQ 포함.",
+   "action": "drop",
+   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "1491",
