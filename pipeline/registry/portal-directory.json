@@ -1,6 +1,6 @@
 {
  "note": "공용 예약 사이트의 업장별 주소(숲나들e 휴양림 페이지·국립공원 야영장 안내 페이지). scripts/sync-portal-directory.mjs가 갱신하고 scripts/build-portal-links.mjs가 예약 버튼을 메인 화면 대신 이 주소로 바꾼다.",
- "updated_at": "2026-10-23T21:06:50.175Z",
+ "updated_at": "2026-10-27T23:10:31.131Z",
  "foresttrip": [
   {
    "id": "0103",
@@ -1307,230 +1307,6 @@
  ],
  "knps": [
   {
-   "parkId": "B13",
-   "park": "가야산",
-   "deptId": "B131002",
-   "name": "백운동",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B13&deptId=B131002"
-  },
-  {
-   "parkId": "B13",
-   "park": "가야산",
-   "deptId": "B131001",
-   "name": "삼정",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B13&deptId=B131001"
-  },
-  {
-   "parkId": "B13",
-   "park": "가야산",
-   "deptId": "B131003",
-   "name": "치인",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B13&deptId=B131003"
-  },
-  {
-   "parkId": "B16",
-   "park": "계룡산",
-   "deptId": "B161004",
-   "name": "갑사",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B16&deptId=B161004"
-  },
-  {
-   "parkId": "B16",
-   "park": "계룡산",
-   "deptId": "B161001",
-   "name": "동학사",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B16&deptId=B161001"
-  },
-  {
-   "parkId": "B04",
-   "park": "내장산",
-   "deptId": "B041001",
-   "name": "가인",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B04&deptId=B041001"
-  },
-  {
-   "parkId": "B04",
-   "park": "내장산",
-   "deptId": "B042001",
-   "name": "내장",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B04&deptId=B042001"
-  },
-  {
-   "parkId": "B04",
-   "park": "내장산",
-   "deptId": "B042004",
-   "name": "내장호",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B04&deptId=B042004"
-  },
-  {
-   "parkId": "B09",
-   "park": "다도해해상",
-   "deptId": "B091004",
-   "name": "구계등",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B09&deptId=B091004"
-  },
-  {
-   "parkId": "B09",
-   "park": "다도해해상",
-   "deptId": "B092003",
-   "name": "시목",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B09&deptId=B092003"
-  },
-  {
-   "parkId": "B09",
-   "park": "다도해해상",
-   "deptId": "B091003",
-   "name": "염포",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B09&deptId=B091003"
-  },
-  {
-   "parkId": "B09",
-   "park": "다도해해상",
-   "deptId": "B091001",
-   "name": "팔영산",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B09&deptId=B091001"
-  },
-  {
-   "parkId": "B05",
-   "park": "덕유산",
-   "deptId": "B051002",
-   "name": "덕유대1",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B05&deptId=B051002"
-  },
-  {
-   "parkId": "B05",
-   "park": "덕유산",
-   "deptId": "B051007",
-   "name": "덕유대2",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B05&deptId=B051007"
-  },
-  {
-   "parkId": "B05",
-   "park": "덕유산",
-   "deptId": "B051006",
-   "name": "덕유대3",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B05&deptId=B051006"
-  },
-  {
-   "parkId": "B17",
-   "park": "무등산",
-   "deptId": "B172002",
-   "name": "도원",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B17&deptId=B172002"
-  },
-  {
-   "parkId": "B18",
-   "park": "변산반도",
-   "deptId": "B181002",
-   "name": "고사포1",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B18&deptId=B181002"
-  },
-  {
-   "parkId": "B18",
-   "park": "변산반도",
-   "deptId": "B181004",
-   "name": "고사포2",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B18&deptId=B181004"
-  },
-  {
-   "parkId": "B18",
-   "park": "변산반도",
-   "deptId": "B181005",
-   "name": "직소천",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B18&deptId=B181005"
-  },
-  {
-   "parkId": "B14",
-   "park": "북한산",
-   "deptId": "B141003",
-   "name": "사기막",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B14&deptId=B141003"
-  },
-  {
-   "parkId": "B03",
-   "park": "설악산",
-   "deptId": "B031005",
-   "name": "설악동",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B03&deptId=B031005"
-  },
-  {
-   "parkId": "B12",
-   "park": "소백산",
-   "deptId": "B122001",
-   "name": "남천",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B12&deptId=B122001"
-  },
-  {
-   "parkId": "B12",
-   "park": "소백산",
-   "deptId": "B121001",
-   "name": "삼가",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B12&deptId=B121001"
-  },
-  {
-   "parkId": "B06",
-   "park": "오대산",
-   "deptId": "B061001",
-   "name": "소금강산",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B06&deptId=B061001"
-  },
-  {
-   "parkId": "B11",
-   "park": "월악산",
-   "deptId": "B111003",
-   "name": "닷돈재1",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111003"
-  },
-  {
-   "parkId": "B11",
-   "park": "월악산",
-   "deptId": "B111001",
-   "name": "닷돈재2",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111001"
-  },
-  {
-   "parkId": "B11",
-   "park": "월악산",
-   "deptId": "B111007",
-   "name": "덕주",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111007"
-  },
-  {
-   "parkId": "B11",
-   "park": "월악산",
-   "deptId": "B111002",
-   "name": "송계",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111002"
-  },
-  {
-   "parkId": "B11",
-   "park": "월악산",
-   "deptId": "B111004",
-   "name": "용하",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111004"
-  },
-  {
-   "parkId": "B11",
-   "park": "월악산",
-   "deptId": "B111008",
-   "name": "하선암",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111008"
-  },
-  {
-   "parkId": "B20",
-   "park": "월출산",
-   "deptId": "B201001",
-   "name": "천황",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B20&deptId=B201001"
-  },
-  {
-   "parkId": "B07",
-   "park": "주왕산",
-   "deptId": "B071001",
-   "name": "상의",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B07&deptId=B071001"
-  },
-  {
    "parkId": "B01",
    "park": "지리산",
    "deptId": "B011005",
@@ -1580,25 +1356,81 @@
    "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B01&deptId=B012010"
   },
   {
-   "parkId": "B10",
-   "park": "치악산",
-   "deptId": "B101001",
-   "name": "구룡",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B10&deptId=B101001"
+   "parkId": "B02",
+   "park": "한려해상",
+   "deptId": "B022003",
+   "name": "덕신",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B02&deptId=B022003"
   },
   {
-   "parkId": "B10",
-   "park": "치악산",
-   "deptId": "B101002",
-   "name": "금대",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B10&deptId=B101002"
+   "parkId": "B02",
+   "park": "한려해상",
+   "deptId": "B021001",
+   "name": "학동",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B02&deptId=B021001"
   },
   {
-   "parkId": "B22",
-   "park": "태백산",
-   "deptId": "B221004",
-   "name": "소도",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B22&deptId=B221004"
+   "parkId": "B03",
+   "park": "설악산",
+   "deptId": "B031005",
+   "name": "설악동",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B03&deptId=B031005"
+  },
+  {
+   "parkId": "B04",
+   "park": "내장산",
+   "deptId": "B041001",
+   "name": "가인",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B04&deptId=B041001"
+  },
+  {
+   "parkId": "B04",
+   "park": "내장산",
+   "deptId": "B042001",
+   "name": "내장",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B04&deptId=B042001"
+  },
+  {
+   "parkId": "B04",
+   "park": "내장산",
+   "deptId": "B042004",
+   "name": "내장호",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B04&deptId=B042004"
+  },
+  {
+   "parkId": "B05",
+   "park": "덕유산",
+   "deptId": "B051002",
+   "name": "덕유대1",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B05&deptId=B051002"
+  },
+  {
+   "parkId": "B05",
+   "park": "덕유산",
+   "deptId": "B051007",
+   "name": "덕유대2",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B05&deptId=B051007"
+  },
+  {
+   "parkId": "B05",
+   "park": "덕유산",
+   "deptId": "B051006",
+   "name": "덕유대3",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B05&deptId=B051006"
+  },
+  {
+   "parkId": "B06",
+   "park": "오대산",
+   "deptId": "B061001",
+   "name": "소금강산",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B06&deptId=B061001"
+  },
+  {
+   "parkId": "B07",
+   "park": "주왕산",
+   "deptId": "B071001",
+   "name": "상의",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B07&deptId=B071001"
   },
   {
    "parkId": "B08",
@@ -1615,6 +1447,188 @@
    "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B08&deptId=B081001"
   },
   {
+   "parkId": "B09",
+   "park": "다도해해상",
+   "deptId": "B091004",
+   "name": "구계등",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B09&deptId=B091004"
+  },
+  {
+   "parkId": "B09",
+   "park": "다도해해상",
+   "deptId": "B092003",
+   "name": "시목",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B09&deptId=B092003"
+  },
+  {
+   "parkId": "B09",
+   "park": "다도해해상",
+   "deptId": "B091003",
+   "name": "염포",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B09&deptId=B091003"
+  },
+  {
+   "parkId": "B09",
+   "park": "다도해해상",
+   "deptId": "B091001",
+   "name": "팔영산",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B09&deptId=B091001"
+  },
+  {
+   "parkId": "B10",
+   "park": "치악산",
+   "deptId": "B101001",
+   "name": "구룡",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B10&deptId=B101001"
+  },
+  {
+   "parkId": "B10",
+   "park": "치악산",
+   "deptId": "B101002",
+   "name": "금대",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B10&deptId=B101002"
+  },
+  {
+   "parkId": "B11",
+   "park": "월악산",
+   "deptId": "B111003",
+   "name": "닷돈재1",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111003"
+  },
+  {
+   "parkId": "B11",
+   "park": "월악산",
+   "deptId": "B111001",
+   "name": "닷돈재2",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111001"
+  },
+  {
+   "parkId": "B11",
+   "park": "월악산",
+   "deptId": "B111007",
+   "name": "덕주",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111007"
+  },
+  {
+   "parkId": "B11",
+   "park": "월악산",
+   "deptId": "B111002",
+   "name": "송계",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111002"
+  },
+  {
+   "parkId": "B11",
+   "park": "월악산",
+   "deptId": "B111004",
+   "name": "용하",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111004"
+  },
+  {
+   "parkId": "B11",
+   "park": "월악산",
+   "deptId": "B111008",
+   "name": "하선암",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B11&deptId=B111008"
+  },
+  {
+   "parkId": "B12",
+   "park": "소백산",
+   "deptId": "B122001",
+   "name": "남천",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B12&deptId=B122001"
+  },
+  {
+   "parkId": "B12",
+   "park": "소백산",
+   "deptId": "B121001",
+   "name": "삼가",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B12&deptId=B121001"
+  },
+  {
+   "parkId": "B13",
+   "park": "가야산",
+   "deptId": "B131002",
+   "name": "백운동",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B13&deptId=B131002"
+  },
+  {
+   "parkId": "B13",
+   "park": "가야산",
+   "deptId": "B131001",
+   "name": "삼정",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B13&deptId=B131001"
+  },
+  {
+   "parkId": "B13",
+   "park": "가야산",
+   "deptId": "B131003",
+   "name": "치인",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B13&deptId=B131003"
+  },
+  {
+   "parkId": "B14",
+   "park": "북한산",
+   "deptId": "B141003",
+   "name": "사기막",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B14&deptId=B141003"
+  },
+  {
+   "parkId": "B16",
+   "park": "계룡산",
+   "deptId": "B161004",
+   "name": "갑사",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B16&deptId=B161004"
+  },
+  {
+   "parkId": "B16",
+   "park": "계룡산",
+   "deptId": "B161001",
+   "name": "동학사",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B16&deptId=B161001"
+  },
+  {
+   "parkId": "B17",
+   "park": "무등산",
+   "deptId": "B172002",
+   "name": "도원",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B17&deptId=B172002"
+  },
+  {
+   "parkId": "B18",
+   "park": "변산반도",
+   "deptId": "B181002",
+   "name": "고사포1",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B18&deptId=B181002"
+  },
+  {
+   "parkId": "B18",
+   "park": "변산반도",
+   "deptId": "B181004",
+   "name": "고사포2",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B18&deptId=B181004"
+  },
+  {
+   "parkId": "B18",
+   "park": "변산반도",
+   "deptId": "B181005",
+   "name": "직소천",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B18&deptId=B181005"
+  },
+  {
+   "parkId": "B20",
+   "park": "월출산",
+   "deptId": "B201001",
+   "name": "천황",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B20&deptId=B201001"
+  },
+  {
+   "parkId": "B22",
+   "park": "태백산",
+   "deptId": "B221004",
+   "name": "소도",
+   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B22&deptId=B221004"
+  },
+  {
    "parkId": "B25",
    "park": "팔공산",
    "deptId": "B252001",
@@ -1627,20 +1641,6 @@
    "deptId": "B251001",
    "name": "도학",
    "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B25&deptId=B251001"
-  },
-  {
-   "parkId": "B02",
-   "park": "한려해상",
-   "deptId": "B022003",
-   "name": "덕신",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B02&deptId=B022003"
-  },
-  {
-   "parkId": "B02",
-   "park": "한려해상",
-   "deptId": "B021001",
-   "name": "학동",
-   "page": "https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B02&deptId=B021001"
   }
  ]
 }
