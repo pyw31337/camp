@@ -714,9 +714,9 @@
     "with_no_tags": 2193,
     "with_notices": 164
   },
-  "updated_at": "2026-10-28T00:42:27.713Z",
+  "updated_at": "2026-10-28T01:08:08.639Z",
   "operator_site_facts": {
-    "generated_at": "2026-10-28T00:42:28.328Z",
+    "generated_at": "2026-10-28T01:08:09.151Z",
     "campgrounds": 196,
     "w": 56,
     "pk": 56,
@@ -729,7 +729,7 @@
     "sites_read": 888
   },
   "spec_sheet": {
-    "generated_at": "2026-10-28T00:42:28.609Z",
+    "generated_at": "2026-10-28T01:08:09.403Z",
     "campgrounds_with_spec": 3094,
     "roundup_reviews_skipped": 8267,
     "fields": {
@@ -808,20 +808,20 @@
     }
   },
   "review_digest": {
-    "generated_at": "2026-10-28T00:42:49.076Z",
+    "generated_at": "2026-10-28T01:08:26.996Z",
     "campgrounds": 3962,
     "with_pros": 3490,
-    "with_cons": 1011,
+    "with_cons": 1012,
     "reviews": 73354,
-    "sanity_dropped": 1119
+    "sanity_dropped": 1118
   },
   "nearby_licensed": {
-    "generated_at": "2026-10-28T00:42:53.413Z",
+    "generated_at": "2026-10-28T01:08:31.210Z",
     "campgrounds": 6410,
     "details": 6410
   },
   "profiles": {
-    "generated_at": "2026-10-28T00:42:58.843Z",
+    "generated_at": "2026-10-28T01:08:38.111Z",
     "total": 6416,
     "fields": {
       "TYPE": {
@@ -935,7 +935,7 @@
     }
   },
   "coverage": {
-    "measured_at": "2026-10-28T00:44:14.544Z",
+    "measured_at": "2026-10-28T01:09:45.158Z",
     "total": 6416,
     "goal": 2500,
     "fields": {
