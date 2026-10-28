@@ -866,7 +866,9 @@ img { color: transparent; }
 .reserve { display: grid; gap: 12px; padding: 20px; border-radius: var(--r); background: var(--rs-bg); border: 1px solid var(--rs-line); }
 .rs-top { display: flex; justify-content: space-between; gap: 8px; font-size: .84rem; font-weight: 800; color: var(--flame); }
 .rs-dd { color: var(--ink); }
-.rs-open { display: grid; gap: 2px; }
+.rs-open { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 8px; row-gap: 2px; align-items: center; }
+.rs-open > .ic { grid-row: 1 / span 2; width: 18px; height: 18px; color: var(--flame); }
+.ic-clock-in, .ic-clock-out { width: .75em; height: 1em; }
 .rs-open b { font-size: 1.5rem; font-weight: 900; line-height: 1.25; }
 .rs-open span { font-size: .86rem; color: var(--ink-2); }
 .rs-price { display: flex; align-items: center; gap: 2px; }
