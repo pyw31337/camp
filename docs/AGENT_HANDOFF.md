@@ -1,17 +1,37 @@
 # 인수인계
 
-## 📌 찜 카드 상세정보 상하단 가로구분선 간격 동일화 (2026-10-28, Gemini → 전 에이전트)
-- **'상세정보' 상하단 가로구분선 간격 동일화 (`saved-card-spec`)**:
-  - 사용자 지시에 따라 찜 카드 리스트에서 '상세정보' 상단 여백과 하단 여백의 불균형(기존 상단 ~8.8px vs 하단 ~20.8px)을 해소.
-  - `.saved-card-spec-toggle`: `min-height: 0`, `padding: 7px 0 8px` 적용으로 버튼 내부 텍스트 상하단 대칭 확보.
-  - `.saved-card-spec:not(.is-open)`: 접힌 상태에서 `.card-body`의 flex `gap: 10px`를 상쇄(`margin-bottom: -10px`)하고, 직후 오는 댓글 영역(`.card-group-cmts`)의 상단 여백을 제거(`margin-top: 0`).
-  - 측정 결과: 상단 구분선~상세정보 간격(8px)과 상세정보~하단 구분선 간격(8px)이 정확히 1:1로 일치.
+## 📌 테마 아이콘 6종 반영 · 썸네일 뱃지 배경색 흰색 복원 · 테마 전용 썸네일 이미지 연동 · 선착순/덤프/입퇴실 0곳 원인 해결 (2026-10-28, Gemini → 전 에이전트)
+- **테마 전용 아이콘 6종 SVG 전면 교체/등록 (`TH_SVG` & 스프라이트 `symbol`)**:
+  - 사용자 제공 SVG를 메인 화면 테마 레일, 테마 모음 페이지(`/themes`), 테마 상세 헤더, 카드 뱃지에 일괄 적용:
+    1. **갯벌·해루질 (`TIDAL_FLAT`)**: 조개 모양 SVG (viewBox `0 0 24 24`)
+    2. **360° VR 뷰 (`VR_TOUR`)**: VR 헤드셋 모양 SVG (viewBox `0 0 24 24`, `#i-vr`)
+    3. **공인 우수야영장 (`EXCELLENT`)**: 상장/메달 모양 SVG (viewBox `0 0 32 32`, `#i-award`)
+    4. **입퇴실 여유 (`FLEX_TIME`)**: 모래시계 모양 SVG (viewBox `0 0 16 16`)
+    5. **선착순 (`FIRST_COME`)**: 달리는 사람 모양 SVG (viewBox `0 0 24 24`)
+    6. **덤프스테이션 (`DUMP_STATION`)**: RV/카라반 배출 모양 SVG (viewBox `0 0 15 15`, `#i-dump`)
+- **카드 썸네일 위 뱃지 배경색 흰색 복원 (`.bdg-vr`, `.bdg-dump`, `.bdg-best`)**:
+  - `style.css`에서 `background: rgba(...) !important;` 반투명 배경을 제거하고, 다른 뱃지(초대가능, 전기, 장작, 반려견 등)와 동일하게 기본 `.bdg` 모듈의 흰색 알약 배경(`background: rgba(255, 255, 255, .95); color: var(--ink);`)을 상속하도록 수정.
+  - 아이콘 원형 배경만 `--c` 변수(`.bdg-vr { --c: #7c3aed; }`, `.bdg-dump { --c: #0284c7; }`, `.bdg-best { --c: #d97706; }`)로 스타일링하여 사진 위에서 글자가 또렷하고 선명하게 보이도록 가독성 해결.
+- **테마 모음 페이지(`/themes`) 6종 전용 고화질 WebP 썸네일 생성 및 연동 (`THEME_FILES`)**:
+  - 기존 다른 테마 fallback(sea, comfort, popular, auto, kids 등)을 걷어내고, 한국 자연 감성 포토그래피 스타일의 4:3 800x600 WebP 전용 이미지 6종 신규 생성 및 배치:
+    1. `tidal.webp`: 서해안 갯벌과 해변 캠핑 데크 및 텐트 풍경
+    2. `vrtour.webp`: 웅장한 호수와 산세가 360° 파노라마로 펼쳐지는 초광각 뷰
+    3. `excellent.webp`: 소나무 숲속 정돈된 잔디 및 목재 데크의 프리미엄 우수야영장
+    4. `flextime.webp`: 아침 햇살 속 핸드드립 커피와 릴랙스 체어가 있는 여유로운 캠핑
+    5. `firstcome.webp`: 상쾌한 아침 안개 속 캠핑장에 도착해 설레며 텐트를 피칭하는 활기찬 풍경
+    6. `dumpstation.webp`: 쾌적한 RV 사이트와 상하수도·전기·덤프스테이션 설비가 갖춰진 풍경
+  - `camping-atlas/public/images/themes/`, `camping-atlas/public/explore/images/themes/`, `design/renewal/images/themes/`에 전수 저장.
+- **'선착순', '덤프스테이션', '입퇴실 여유' 0곳 원인 규명 및 해결**:
+  - **선착순 (0곳 ➔ 246곳)**: `c.resv`라는 없는 필드를 참조하던 필터를 `isFirstComeCamp` 헬퍼 함수로 변경 (`c.booking?.methods`의 현장/선착순 249곳 및 명칭/라인 매핑 반영).
+  - **덤프스테이션 (0곳 ➔ 32곳)**: `c.dump`가 생성 시 누락되어 0곳이었던 문제를 `isDumpCamp` 헬퍼 함수로 변경 (`dump-stations.json` 공식 22곳 ID 집합 `DUMP_STATION_IDS` + 편의시설 '덤프스테이션' 30곳의 합집합 32곳 반영).
+  - **입퇴실 여유 (0곳 ➔ 949곳)**: `c.ci`/`c.co`만 검사하던 기존 코드를 실제 입퇴실 데이터 필드인 `c.ti`(`c.ti.i[0]`, `c.ti.o[0]`)를 검사하는 `isFlexTimeCamp`로 보강하여 949곳 정상 노출.
+  - 카드 썸네일 `badges()`의 `firstCome`, `dump`, `flex` 조건도 위 헬퍼 함수로 일치시켜 카드 썸네일 뱃지도 정확하게 노출.
 - **검증 완료**:
   - 19종 브라우저 회귀 테스트 (`run-browser-tests.sh`): ALL PASS (status 0).
-  - 카탈로그 분할 일치 검사 (`catalog-split-test.mjs`): ALL PASS.
   - 파이프라인 테스트 (`npm --prefix pipeline test`): 562개 테스트 전수 통과 (560 pass, 0 fail, 2 skip).
   - 외부 서비스 과금 점검 (`check:billing`): 100% 무료 티어 준수.
-  - 원본(`design/renewal/`)과 발행본(`camping-atlas/public/`) 100% 동기화.
+  - 원본(`design/renewal/`)과 발행본(`camping-atlas/public/`) 100% 일치.
+  - 실제 브라우저 스크린샷 렌더링 검증 완료.
 
 ## 📌 댓글 영상 표기·찜 카드 접힘 UI 정리 (2026-10-27, Codex)
 - 댓글 영상 카드의 YouTube/Shorts 하단 도메인 표기를 제거하고, 상세 SNS 영상과 같은 유튜브 아이콘을 제목 왼쪽에 표시한다. 네이버TV·카카오TV 등 다른 제공처는 기존 표기를 유지한다.
