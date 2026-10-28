@@ -714,9 +714,9 @@
     "with_no_tags": 2193,
     "with_notices": 164
   },
-  "updated_at": "2026-10-28T06:09:44.312Z",
+  "updated_at": "2026-10-28T13:23:26.557Z",
   "operator_site_facts": {
-    "generated_at": "2026-10-28T06:09:44.994Z",
+    "generated_at": "2026-10-28T13:23:27.221Z",
     "campgrounds": 196,
     "w": 56,
     "pk": 56,
@@ -729,17 +729,17 @@
     "sites_read": 888
   },
   "spec_sheet": {
-    "generated_at": "2026-10-28T06:09:45.319Z",
-    "campgrounds_with_spec": 3138,
-    "roundup_reviews_skipped": 8442,
+    "generated_at": "2026-10-28T13:23:27.546Z",
+    "campgrounds_with_spec": 3141,
+    "roundup_reviews_skipped": 8449,
     "fields": {
       "CHECKIN_TIME": {
         "official": 765,
-        "mention": 2564
+        "mention": 2566
       },
       "CHECKOUT_TIME": {
         "official": 754,
-        "mention": 2498
+        "mention": 2501
       },
       "EARLY_CHECKIN": {
         "official": 40,
@@ -751,7 +751,7 @@
       },
       "MANNER_TIME": {
         "official": 587,
-        "mention": 1752
+        "mention": 1754
       },
       "MIN_STAY": {
         "official": 23,
@@ -779,7 +779,7 @@
       },
       "POWER_W": {
         "official": 522,
-        "mention": 261
+        "mention": 262
       },
       "POWER_MAX_A": {
         "official": 2,
@@ -799,7 +799,7 @@
       },
       "DISCOUNT": {
         "official": 9,
-        "mention": 63
+        "mention": 64
       },
       "PROMOTION": {
         "official": 2,
@@ -808,20 +808,20 @@
     }
   },
   "review_digest": {
-    "generated_at": "2026-10-28T06:10:07.431Z",
-    "campgrounds": 4017,
-    "with_pros": 3540,
+    "generated_at": "2026-10-28T13:23:49.638Z",
+    "campgrounds": 4023,
+    "with_pros": 3544,
     "with_cons": 1036,
-    "reviews": 74408,
-    "sanity_dropped": 1137
+    "reviews": 74464,
+    "sanity_dropped": 1140
   },
   "nearby_licensed": {
-    "generated_at": "2026-10-28T06:10:12.106Z",
+    "generated_at": "2026-10-28T13:23:54.211Z",
     "campgrounds": 6410,
     "details": 6410
   },
   "profiles": {
-    "generated_at": "2026-10-28T06:10:18.072Z",
+    "generated_at": "2026-10-28T13:24:00.018Z",
     "total": 6416,
     "fields": {
       "TYPE": {
@@ -829,19 +829,19 @@
         "facts": 2293
       },
       "CHECKIN": {
-        "any": 2545,
+        "any": 2547,
         "facts": 576
       },
       "CHECKOUT": {
-        "any": 2489,
+        "any": 2492,
         "facts": 571
       },
       "MANNER": {
-        "any": 1841,
+        "any": 1843,
         "facts": 354
       },
       "PRICE": {
-        "any": 2673,
+        "any": 2678,
         "facts": 508
       },
       "EXTRA_FEE": {
@@ -849,7 +849,7 @@
         "facts": 215
       },
       "POWER": {
-        "any": 486,
+        "any": 487,
         "facts": 300
       },
       "PARKING": {
@@ -893,7 +893,7 @@
         "facts": 4508
       },
       "REVIEW": {
-        "any": 4017,
+        "any": 4023,
         "facts": 0
       }
     },
@@ -929,30 +929,30 @@
       "14-18": 119
     },
     "price": {
-      "published": 2636,
+      "published": 2641,
       "operator": 508,
-      "mention": 2128
+      "mention": 2133
     }
   },
   "coverage": {
-    "measured_at": "2026-10-28T06:11:38.618Z",
+    "measured_at": "2026-10-28T13:25:19.294Z",
     "total": 6416,
     "goal": 2500,
     "fields": {
       "price": {
-        "any": 2874,
+        "any": 2879,
         "confirmed": 629
       },
       "checkin": {
-        "any": 2760,
+        "any": 2762,
         "confirmed": 791
       },
       "checkout": {
-        "any": 2699,
+        "any": 2702,
         "confirmed": 781
       },
       "manner": {
-        "any": 2075,
+        "any": 2077,
         "confirmed": 587
       },
       "extra_fee": {
@@ -968,19 +968,19 @@
         "confirmed": 1778
       },
       "power_w": {
-        "any": 726,
+        "any": 727,
         "confirmed": 529
       },
       "site_types": {
-        "any": 3417,
+        "any": 3420,
         "confirmed": 2678
       },
       "reviews": {
-        "any": 4178,
+        "any": 4183,
         "confirmed": 0
       },
       "rich5": {
-        "any": 2234,
+        "any": 2235,
         "confirmed": 0
       }
     }
