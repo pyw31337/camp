@@ -5743,9 +5743,11 @@
 {"cid":"102368","attr":"SITE_GAP_M","value":1,"grade":"CONFIRMED","src":"gocamping","text":"1m"}
 {"cid":"osm-w256957046","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/256957046","at":"2026-10-28"}
 {"cid":"osm-w256957046","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/smurfshouse/224434528939","at":"2026-10-07","quote":"구미 낙동강 체육공원은 주말 나들이로 피크닉 즐기기에도 좋고, 예쁜 꽃구경도 하기 좋은 곳이며...내 야외물놀이장 옆) 시설: 오토캠핑 사이트 50면 사이트 크기: 10m × 10m 입실·퇴실: 오후 2시 ~ 다음 날 오전…","text":"10×10m","n":1}
+{"cid":"osm-w468666165","attr":"SITE_SIZE","value":"6×7m","grade":"MENTION","src":"review_search","url":"https://parksmiley.tistory.com/564","at":"2025-07-14","quote":"사이트 크기: 약 6x7m로, 대형 텐트나 타프 설치 시 공간 계획 필요","text":"6×7m","n":1}
 {"cid":"osm-w469937424","attr":"SITE_SIZE","value":"4×5m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/469937424","at":"2026-10-28"}
 {"cid":"osm-w472545129","attr":"SITE_SIZE","value":"10×12m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/472545129","at":"2026-10-28"}
 {"cid":"osm-w618430553","attr":"SITE_SIZE","value":"9×9m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/618430553","at":"2026-10-28"}
+{"cid":"osm-w721842605","attr":"SITE_SIZE","value":"5×8m","grade":"MENTION","src":"review_search","url":"https://o0m0a.tistory.com/50","at":"2024-11-25","quote":"테라스캠핑존: 25,000원 (5m x 8m) - 데크에서 편리하게 캠핑을 즐기고 싶다면?","text":"5×8m","n":1}
 {"cid":"osm-w736741880","attr":"SITE_SIZE","value":"4×5m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/736741880","at":"2026-10-28"}
 {"cid":"osm-w751220519","attr":"SITE_SIZE","value":"10×9m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/751220519","at":"2026-10-28"}
 {"cid":"osm-w751220519","attr":"SITE_SIZE","value":"10×9m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/juddy-_-/224434079754","at":"2026-10-07","quote":"비발디캠핑파크 설악오색점 강원특별자치도...사이트(10x9m), 카라반·대형 텐트 가능, 체크인 13:00","text":"10×9m","n":1}
@@ -5755,12 +5757,14 @@
 {"cid":"osm-w1188029707","attr":"SITE_SIZE","value":"3×4m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1188029707","at":"2026-10-28"}
 {"cid":"osm-w1378241447","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1378241447","at":"2026-10-28"}
 {"cid":"osm-w1378241447","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/smurfshouse/224434528939","at":"2026-10-07","quote":"구미 낙동강 체육공원은 주말 나들이로 피크닉 즐기기에도 좋고, 예쁜 꽃구경도 하기 좋은 곳이며...내 야외물놀이장 옆) 시설: 오토캠핑 사이트 50면 사이트 크기: 10m × 10m 입실·퇴실: 오후 2시 ~ 다음 날 오전…","text":"10×10m","n":1}
+{"cid":"park-30230-00082-55si2","attr":"SITE_SIZE","value":"5.6×5.7m","grade":"MENTION","src":"review_search","url":"https://leports.sailing-blog.click/2691","at":"2025-06-17","quote":"잔디 39면과 데크 1면으로 이뤄졌으며, 사이트 크기는 가로 5.6m 세로 5.7m다.","text":"5.6×5.7m","n":1}
 {"cid":"park-31170-00001-iqdsx","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-28"}
 {"cid":"park-31170-00001-iqdsx","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/wdw27/224402483348","at":"2026-09-07","quote":"입·퇴실 시간 입실 : 오후 2시 퇴실 : 다음 날 오후 1시 오토캠핑장 사이트 크기는 10m × 10m, 사이트당 차량은 1대까지 이용 가능하고 정원은 4명이에요.","text":"10×10m","n":1}
 {"cid":"park-41135-00002-pzbxp","attr":"SITE_SIZE","value":"10.5×8m","grade":"OPERATOR","src":"operator_discovered","url":"https://camping.isdc.co.kr/ydpc/price.do","at":"2026-10-24T22:47:31.908Z","quote":"10.5x8m 총 8면, 사이트간 이격거리 1.5m","text":"10.5×8m"}
 {"cid":"park-41135-00002-pzbxp","attr":"SITE_SIZE","value":"6×6m","grade":"OPERATOR","src":"operator_discovered","url":"https://camping.isdc.co.kr/ydpc/price.do","at":"2026-10-24T22:47:31.908Z","quote":"6x6m 총 10면, 사이트간 이격거리 1.5m","text":"6×6m"}
 {"cid":"park-41135-00002-pzbxp","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"operator_discovered","url":"https://camping.isdc.co.kr/ydpc/price.do","at":"2026-10-24T22:47:31.908Z","quote":"8x8m 총 44면, 사이트간 이격거리 1.5m","text":"8×8m"}
 {"cid":"park-41135-00002-pzbxp","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-28"}
+{"cid":"park-41210-00077-rbxi0","attr":"SITE_SIZE","value":"6×6m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/xoryd4/224449743042","at":"2026-10-22","quote":"대부분이 차를 옆에 대는 자동차 사이트이고, B구역 8면만 6×6m 일반 사이트입니다.","text":"6×6m","n":1}
 {"cid":"park-41220-00288-pes2l","attr":"SITE_SIZE","value":"7.5×5m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-28"}
 {"cid":"park-41285-00035-11naf","attr":"SITE_SIZE","value":"7.5×8m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-28"}
 {"cid":"park-41285-00036-11naf","attr":"SITE_SIZE","value":"7.5×8m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-28"}
@@ -5797,3 +5801,4 @@
 {"cid":"pilot-009-ninehills","attr":"SITE_SIZE","value":"8×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/redcase7878/224417949366","at":"2026-09-20","quote":"8m x 8m 잔디/파쇄석 주말 기준 1박 3만 원 600W 이하","text":"8×8m","n":1}
 {"cid":"pilot-009-ninehills","attr":"SITE_SURFACE","value":"DECK","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/ninehills","at":"2026-10-15T09:00:00+09:00"}
 {"cid":"pilot-009-ninehills","attr":"SITE_SURFACE","value":"GRAVEL","grade":"VERIFIED","src":"pilot_verified","url":"https://camfit.co.kr/camp/ninehills","at":"2026-10-15T09:00:00+09:00"}
+{"cid":"rf-1tnjahc","attr":"SITE_SIZE","value":"6×8m","grade":"MENTION","src":"review_search","url":"https://jjangga0801.com/927","at":"2025-11-21","quote":"오토캠핑장: 차량 진입 및 주차가 가능한 사이트로, 잔디 및 자갈로 구성된 다양한 크기의 면(가로 6m x 세로 8m 등)이 있습니다.","text":"6×8m","n":1}

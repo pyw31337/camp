@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-28T01:09:45.688Z",
+ "generated_at": "2026-10-28T06:11:39.283Z",
  "rule": "pipeline/lib/fact-refine.mjs",
- "dropped": 238,
+ "dropped": 240,
  "recoded": 145,
- "scoped": 593,
+ "scoped": 605,
  "items": [
   {
    "cid": "101498",
@@ -3958,6 +3958,26 @@
    "quote": "반려동물 동반 입실 불가, 미성년자 숙박 예약 불가, 실내 흡연과 모든 고기구이 금지예요.",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "rf-1r4889r",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://all-infor.tistory.com/148",
+   "quote": "짚코스터&middot;목재체험장&middot;반딧불&middot;별빛 관측&middot;반려견 동반 불가&middot;방문 전 체크리스트&middot;FAQ 포함.",
+   "action": "drop",
+   "why": "홍보·목록 제목(규칙 아님)"
+  },
+  {
+   "cid": "rf-2btyj6",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://koreatravel-guide.tistory.com/183",
+   "quote": "화요일 9시 오픈, 저수지 조망 독채 숙소, 산수유마을&middot;지리산&middot;화엄사 연계, 반려견 불가, 방문 전 체크리스트 포",
+   "action": "drop",
+   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "rf-13vmkr6",
