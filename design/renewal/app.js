@@ -4548,12 +4548,13 @@ function formatCommentContent(content) {
   const isShorts = ytUrl.includes("/shorts/");
   const textWithoutUrl = content.replace(ytUrl, "").trim();
   const textHtml = textWithoutUrl ? `<p class="c-cmt-text">${esc(textWithoutUrl)}</p>` : "";
+  const expandBtn = isShorts ? `<button type="button" class="c-yt-expand-btn" data-yt-expand="${esc(ytId)}" aria-label="YouTube Shorts 크게 보기" title="크게 보기"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></button>` : "";
   const ytCardHtml = `<div class="c-yt-card">
     <div class="c-yt-thumb-box" data-yt-inline="${esc(ytId)}" role="button" tabindex="0" aria-label="${isShorts ? "YouTube Shorts" : "YouTube"} 영상 바로 재생">
       <img src="https://i.ytimg.com/vi/${esc(ytId)}/hqdefault.jpg" alt="YouTube thumbnail" loading="lazy">
       <div class="c-yt-play-btn"><svg viewBox="0 0 24 24" class="c-yt-play-icon" aria-hidden="true"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg></div>
     </div>
-    <div class="c-yt-meta"><span class="c-yt-badge">${ytBadgeIcon()}<span>${isShorts ? "YouTube Shorts" : "YouTube"}</span></span></div>
+    <div class="c-yt-meta"><span class="c-yt-badge">${ytBadgeIcon()}<span>${isShorts ? "YouTube Shorts" : "YouTube"}</span></span>${expandBtn}</div>
   </div>`;
   return textHtml ? `${textHtml}${ytCardHtml}` : ytCardHtml;
 }
@@ -4622,10 +4623,22 @@ function renderCardCmtInner(id, cmts = [], isOpen = false) {
           <div class="c-cmt-avatar" data-cmt-form-avatar="${esc(id)}">${myInitial}</div>
           <input type="text" name="nickname" class="c-cmt-nick-input" placeholder="닉네임" maxlength="20" value="${esc(myNick)}" required aria-label="닉네임">
         </div>
-        <div class="comment-editor"><textarea name="content" class="c-cmt-textarea" placeholder="현장 팁이나 메모를 남겨보세요 (이미지는 Ctrl+V)" maxlength="500" rows="1" required aria-label="댓글 내용"></textarea><div class="comment-image-tools"><button type="button" class="comment-image-trigger" data-comment-image-trigger>사진 붙이기</button><input type="file" accept="image/*" data-comment-image-input hidden><span class="comment-image-hint">화면을 캡처한 뒤 Ctrl+V</span></div><div class="comment-image-preview" data-comment-image-preview hidden></div></div>
+        <div class="comment-editor">
+          <textarea name="content" class="c-cmt-textarea" placeholder="현장 팁이나 메모를 남겨보세요 (이미지 Ctrl+V, 등록 Ctrl+Enter)" maxlength="500" rows="1" required aria-label="댓글 내용"></textarea>
+          <div class="comment-image-preview" data-comment-image-preview hidden></div>
+        </div>
         <div class="c-cmt-form-actions">
-          <button type="button" class="c-cmt-btn c-cmt-btn-cancel" data-cmt-cancel="${esc(id)}">취소</button>
-          <button type="submit" class="c-cmt-btn c-cmt-btn-submit">저장</button>
+          <div class="c-cmt-attach-wrap">
+            <button type="button" class="c-cmt-attach-btn" data-comment-image-trigger aria-label="사진 첨부" title="사진 첨부">
+              <svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+              <span>사진</span>
+            </button>
+            <input type="file" accept="image/*" data-comment-image-input hidden>
+          </div>
+          <div class="c-cmt-form-btns">
+            <button type="button" class="c-cmt-btn c-cmt-btn-cancel" data-cmt-cancel="${esc(id)}">취소</button>
+            <button type="submit" class="c-cmt-btn c-cmt-btn-submit">저장</button>
+          </div>
         </div>
       </form>
     </div>
@@ -4907,7 +4920,23 @@ function commentsHtml(c) {
   if (!SB.url || !/^\d+$/.test(String(c.id))) return "";
   const profile = typeof savedCommentProfile === "function" ? savedCommentProfile() : { nickname: store.get("mc-cmt-nick", "") };
   return `<section class="d-sec" id="cmt"><div class="sec-head">${iconTitle("chat-bubble", "댓글")}</div>
-    <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" value="${esc(profile.nickname || store.get("mc-cmt-nick", ""))}" placeholder="닉네임" required aria-label="닉네임" autocomplete="nickname"><div class="comment-editor"><textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁 (이미지는 Ctrl+V)" required aria-label="내용"></textarea><div class="comment-image-tools"><button type="button" class="comment-image-trigger" data-comment-image-trigger>사진 붙이기</button><input type="file" accept="image/*" data-comment-image-input hidden><span class="comment-image-hint">화면을 캡처한 뒤 Ctrl+V</span></div><div class="comment-image-preview" data-comment-image-preview hidden></div></div><button class="btn primary" type="submit">남기기</button></form>
+    <form class="cmt-form" data-cmt="${esc(c.id)}">
+      <input name="nickname" maxlength="20" value="${esc(profile.nickname || store.get("mc-cmt-nick", ""))}" placeholder="닉네임" required aria-label="닉네임" autocomplete="nickname">
+      <div class="comment-editor">
+        <textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁 (이미지 Ctrl+V, 등록 Ctrl+Enter)" required aria-label="내용"></textarea>
+        <div class="comment-image-preview" data-comment-image-preview hidden></div>
+      </div>
+      <div class="cmt-form-actions">
+        <div class="cmt-attach-wrap">
+          <button type="button" class="c-cmt-attach-btn" data-comment-image-trigger aria-label="사진 첨부" title="사진 첨부">
+            <svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+            <span>사진</span>
+          </button>
+          <input type="file" accept="image/*" data-comment-image-input hidden>
+        </div>
+        <button class="btn primary" type="submit">등록</button>
+      </div>
+    </form>
     <ul class="cmts" data-cmts><li class="muted">불러오는 중…</li></ul></section>`;
 }
 
@@ -4944,7 +4973,11 @@ function commentLinkCard(raw) {
   const isYt = info.provider.startsWith("YouTube");
   if (info.embed) {
     const visual = info.thumb ? `<img src="${esc(info.thumb)}" alt="${title} 미리보기" loading="lazy" referrerpolicy="no-referrer">` : `<span class="comment-video-placeholder">${esc(info.provider)}</span>`;
-    return `<span class="comment-link-card comment-video-card"><button type="button" class="comment-video-trigger" data-comment-video="${esc(info.embed)}" aria-label="${title} 재생">${visual}<span class="comment-video-play" aria-hidden="true">▶</span></button><span class="comment-link-meta"><span class="comment-video-title">${isYt ? ytBadgeIcon() : platIc(info.provider.includes("네이버") ? "naver" : "kakao")}<b>${title}</b></span>${isYt ? "" : `<small>${domain}</small>`}</span></span>`;
+    const isShorts = info.provider.includes("Shorts");
+    const ytIdMatch = info.embed.match(/\/embed\/([\w-]{11})/i);
+    const ytId = ytIdMatch ? ytIdMatch[1] : "";
+    const expandBtn = isShorts ? `<button type="button" class="c-yt-expand-btn" data-yt-expand="${esc(ytId)}" data-yt-embed="${esc(info.embed)}" aria-label="YouTube Shorts 크게 보기" title="크게 보기"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></button>` : "";
+    return `<span class="comment-link-card comment-video-card"><button type="button" class="comment-video-trigger" data-comment-video="${esc(info.embed)}" aria-label="${title} 재생">${visual}<span class="comment-video-play" aria-hidden="true">▶</span></button><span class="comment-link-meta"><span class="comment-video-title">${isYt ? ytBadgeIcon() : platIc(info.provider.includes("네이버") ? "naver" : "kakao")}<b>${title}</b></span>${expandBtn}${isYt ? "" : `<small>${domain}</small>`}</span></span>`;
   }
   return `<a class="comment-link-card comment-external-card" href="${href}" target="_blank" rel="noopener noreferrer"><span class="comment-link-icon">↗</span><span><b>${title}</b><small>${domain}</small></span><span class="comment-link-arrow">›</span></a>`;
 }
@@ -5049,16 +5082,92 @@ async function uploadCommentImage(file, campgroundId) {
   if (!r.ok) throw new Error("image-upload-failed");
   return `${SB.url}/storage/v1/object/public/comment-media/${objectPath}`;
 }
+function openImageLightbox(url, alt = "댓글 첨부 사진") {
+  if (!url) return;
+  const existing = $("#image-lightbox-modal");
+  if (existing) existing.remove();
+  const overlay = document.createElement("div");
+  overlay.id = "image-lightbox-modal";
+  overlay.className = "image-lightbox-overlay";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-label", alt);
+  overlay.innerHTML = `
+    <div class="image-lightbox-dialog">
+      <button type="button" class="image-lightbox-close" aria-label="닫기">×</button>
+      <img src="${esc(url)}" alt="${esc(alt)}" class="image-lightbox-img">
+    </div>
+  `;
+  const close = () => {
+    overlay.classList.remove("is-active");
+    setTimeout(() => overlay.remove(), 200);
+    document.removeEventListener("keydown", onKey);
+    document.body.style.overflow = "";
+  };
+  const onKey = (e) => {
+    if (e.key === "Escape") { e.preventDefault(); close(); }
+  };
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay || e.target.closest(".image-lightbox-close")) {
+      e.preventDefault(); close();
+    }
+  });
+  document.addEventListener("keydown", onKey);
+  document.body.appendChild(overlay);
+  document.body.style.overflow = "hidden";
+  requestAnimationFrame(() => overlay.classList.add("is-active"));
+}
+
+function openShortsModal(ytId, embedUrl) {
+  if (!ytId && !embedUrl) return;
+  const src = embedUrl || `https://www.youtube-nocookie.com/embed/${encodeURIComponent(ytId)}?autoplay=1&playsinline=1`;
+  const existing = $("#shorts-lightbox-modal");
+  if (existing) existing.remove();
+  const overlay = document.createElement("div");
+  overlay.id = "shorts-lightbox-modal";
+  overlay.className = "shorts-modal-overlay";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-label", "YouTube Shorts 크게 보기");
+  overlay.innerHTML = `
+    <div class="shorts-modal-dialog">
+      <button type="button" class="shorts-modal-close" aria-label="닫기">×</button>
+      <div class="shorts-modal-player">
+        <iframe src="${esc(src)}" title="YouTube Shorts" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  `;
+  const close = () => {
+    overlay.classList.remove("is-active");
+    setTimeout(() => overlay.remove(), 200);
+    document.removeEventListener("keydown", onKey);
+    document.body.style.overflow = "";
+  };
+  const onKey = (e) => {
+    if (e.key === "Escape") { e.preventDefault(); close(); }
+  };
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay || e.target.closest(".shorts-modal-close")) {
+      e.preventDefault(); close();
+    }
+  });
+  document.addEventListener("keydown", onKey);
+  document.body.appendChild(overlay);
+  document.body.style.overflow = "hidden";
+  requestAnimationFrame(() => overlay.classList.add("is-active"));
+}
+
 function commentAttachmentHtml(row) {
   const url = String(row?.image_url || "").trim();
   if (!/^https:\/\//i.test(url)) return "";
-  return `<a class="comment-attached-image" href="${esc(url)}" target="_blank" rel="noopener noreferrer"><img src="${esc(url)}" alt="${esc(row?.image_alt || "댓글 첨부 사진")}" loading="lazy" decoding="async"></a>`;
+  const alt = esc(row?.image_alt || "댓글 첨부 사진");
+  return `<div class="comment-attached-image" data-lightbox-src="${esc(url)}" role="button" tabindex="0" aria-label="${alt} 크게 보기"><img src="${esc(url)}" alt="${alt}" loading="lazy" decoding="async"></div>`;
 }
 let commentImageEventsBound = false;
 function bindCommentImageEvents() {
   if (commentImageEventsBound) return;
   commentImageEventsBound = true;
   const formFor = (target) => target?.closest?.("form[data-cmt], form[data-saved-comment-form], form[data-card-cmt-form]");
+
+  // Ctrl+V (또는 Cmd+V) 이미지 붙여넣기
   document.addEventListener("paste", (e) => {
     const form = formFor(e.target);
     if (!form || e.target?.name !== "content") return;
@@ -5068,6 +5177,31 @@ function bindCommentImageEvents() {
     e.preventDefault();
     setCommentImage(form, file);
   });
+
+  // Ctrl+Enter (또는 Cmd+Enter) 단축키로 등록(저장)
+  document.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+      const form = formFor(e.target);
+      if (!form) return;
+      e.preventDefault();
+      const submitBtn = form.querySelector("button[type='submit'], .c-cmt-btn-submit");
+      if (submitBtn && !submitBtn.disabled) {
+        submitBtn.click();
+      } else {
+        form.requestSubmit?.();
+      }
+      return;
+    }
+    if (e.key === "Enter" || e.key === " ") {
+      const box = e.target.closest?.("[data-lightbox-src]");
+      if (box) {
+        e.preventDefault();
+        openImageLightbox(box.dataset.lightboxSrc, box.getAttribute("aria-label"));
+      }
+    }
+  });
+
+  // 클릭 이벤트 (사진 첨부 트리거, 삭제, 라이트박스, 쇼츠 확대)
   document.addEventListener("click", (e) => {
     const trigger = e.target.closest?.("[data-comment-image-trigger]");
     if (trigger) {
@@ -5077,8 +5211,26 @@ function bindCommentImageEvents() {
       return;
     }
     const remove = e.target.closest?.("[data-comment-image-remove]");
-    if (remove) { e.preventDefault(); clearCommentImage(formFor(remove)); }
+    if (remove) {
+      e.preventDefault();
+      clearCommentImage(formFor(remove));
+      return;
+    }
+    const lightboxTrigger = e.target.closest?.("[data-lightbox-src]");
+    if (lightboxTrigger) {
+      e.preventDefault();
+      openImageLightbox(lightboxTrigger.dataset.lightboxSrc, lightboxTrigger.getAttribute("aria-label"));
+      return;
+    }
+    const shortsExpand = e.target.closest?.("[data-yt-expand]");
+    if (shortsExpand) {
+      e.preventDefault();
+      e.stopPropagation();
+      openShortsModal(shortsExpand.dataset.ytExpand, shortsExpand.dataset.ytEmbed);
+      return;
+    }
   });
+
   document.addEventListener("change", (e) => {
     if (!e.target.matches?.("[data-comment-image-input]")) return;
     const form = formFor(e.target);
@@ -5141,8 +5293,23 @@ function savedCommentsHtml(c) {
     <div class="saved-comments-panel" data-saved-comments-panel hidden>
       <form class="saved-comment-form" data-saved-comment-form>
         <div class="saved-comment-author"><span class="saved-comment-avatar" data-saved-comment-avatar style="--comment-color:${p.color}" aria-hidden="true">${esc(savedCommentInitial(p.nickname))}</span><input name="nickname" maxlength="20" value="${esc(p.nickname)}" placeholder="작성자 이름" required aria-label="작성자 이름" autocomplete="nickname"></div>
-        <div class="comment-editor"><textarea name="content" maxlength="500" rows="1" placeholder="현장 팁이나 메모를 남겨보세요 (이미지는 Ctrl+V)" required aria-label="댓글"></textarea><div class="comment-image-tools"><button type="button" class="comment-image-trigger" data-comment-image-trigger>사진 붙이기</button><input type="file" accept="image/*" data-comment-image-input hidden><span class="comment-image-hint">화면을 캡처한 뒤 Ctrl+V</span></div><div class="comment-image-preview" data-comment-image-preview hidden></div></div>
-        <div class="saved-comment-actions"><button type="button" class="btn ghost btn-sm" data-saved-comment-cancel>취소</button><button type="submit" class="btn primary btn-sm">저장</button></div>
+        <div class="comment-editor">
+          <textarea name="content" maxlength="500" rows="1" placeholder="현장 팁이나 메모를 남겨보세요 (이미지 Ctrl+V, 등록 Ctrl+Enter)" required aria-label="댓글"></textarea>
+          <div class="comment-image-preview" data-comment-image-preview hidden></div>
+        </div>
+        <div class="saved-comment-actions">
+          <div class="saved-comment-attach-wrap">
+            <button type="button" class="c-cmt-attach-btn" data-comment-image-trigger aria-label="사진 첨부" title="사진 첨부">
+              <svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+              <span>사진</span>
+            </button>
+            <input type="file" accept="image/*" data-comment-image-input hidden>
+          </div>
+          <div class="saved-comment-btns">
+            <button type="button" class="btn ghost btn-sm" data-saved-comment-cancel>취소</button>
+            <button type="submit" class="btn primary btn-sm">저장</button>
+          </div>
+        </div>
       </form>
     </div>
   </div>`;
