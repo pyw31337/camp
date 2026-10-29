@@ -712,11 +712,11 @@
     "kids_play_features": 3438,
     "with_house_rules": 598,
     "with_no_tags": 2193,
-    "with_notices": 164
+    "with_notices": 163
   },
-  "updated_at": "2026-10-28T23:15:48.281Z",
+  "updated_at": "2026-10-29T01:27:02.800Z",
   "operator_site_facts": {
-    "generated_at": "2026-10-28T23:15:48.941Z",
+    "generated_at": "2026-10-29T01:27:03.493Z",
     "campgrounds": 196,
     "w": 56,
     "pk": 56,
@@ -729,9 +729,9 @@
     "sites_read": 888
   },
   "spec_sheet": {
-    "generated_at": "2026-10-28T23:15:49.271Z",
+    "generated_at": "2026-10-29T01:27:03.823Z",
     "campgrounds_with_spec": 3145,
-    "roundup_reviews_skipped": 8473,
+    "roundup_reviews_skipped": 8477,
     "fields": {
       "CHECKIN_TIME": {
         "official": 765,
@@ -808,20 +808,20 @@
     }
   },
   "review_digest": {
-    "generated_at": "2026-10-28T23:16:11.547Z",
-    "campgrounds": 4045,
-    "with_pros": 3555,
+    "generated_at": "2026-10-29T01:27:25.504Z",
+    "campgrounds": 4050,
+    "with_pros": 3558,
     "with_cons": 1037,
-    "reviews": 74573,
-    "sanity_dropped": 1142
+    "reviews": 74589,
+    "sanity_dropped": 1144
   },
   "nearby_licensed": {
-    "generated_at": "2026-10-28T23:16:16.208Z",
+    "generated_at": "2026-10-29T01:27:30.224Z",
     "campgrounds": 6410,
     "details": 6410
   },
   "profiles": {
-    "generated_at": "2026-10-28T23:16:22.049Z",
+    "generated_at": "2026-10-29T01:27:36.140Z",
     "total": 6416,
     "fields": {
       "TYPE": {
@@ -841,7 +841,7 @@
         "facts": 354
       },
       "PRICE": {
-        "any": 2682,
+        "any": 2684,
         "facts": 508
       },
       "EXTRA_FEE": {
@@ -893,7 +893,7 @@
         "facts": 4508
       },
       "REVIEW": {
-        "any": 4045,
+        "any": 4050,
         "facts": 0
       }
     },
@@ -935,12 +935,12 @@
     }
   },
   "coverage": {
-    "measured_at": "2026-10-28T23:17:41.353Z",
+    "measured_at": "2026-10-29T01:28:55.669Z",
     "total": 6416,
     "goal": 2500,
     "fields": {
       "price": {
-        "any": 2883,
+        "any": 2885,
         "confirmed": 629
       },
       "checkin": {
@@ -972,11 +972,11 @@
         "confirmed": 529
       },
       "site_types": {
-        "any": 3426,
+        "any": 3427,
         "confirmed": 2678
       },
       "reviews": {
-        "any": 4205,
+        "any": 4209,
         "confirmed": 0
       },
       "rich5": {
