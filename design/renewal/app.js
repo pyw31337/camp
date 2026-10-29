@@ -4579,7 +4579,7 @@ function renderCardCmtInner(id, cmts = [], isOpen = false) {
           </div>
         </div>
         <div class="c-cmt-body">
-          ${formatCommentContent(x.content)}
+          ${formatCommentContent(x.content)}${commentAttachmentHtml(x)}
         </div>
       </div>
     </li>`;
@@ -4622,7 +4622,7 @@ function renderCardCmtInner(id, cmts = [], isOpen = false) {
           <div class="c-cmt-avatar" data-cmt-form-avatar="${esc(id)}">${myInitial}</div>
           <input type="text" name="nickname" class="c-cmt-nick-input" placeholder="닉네임" maxlength="20" value="${esc(myNick)}" required aria-label="닉네임">
         </div>
-        <textarea name="content" class="c-cmt-textarea" placeholder="현장 팁이나 메모를 남겨보세요" maxlength="500" rows="1" required aria-label="댓글 내용"></textarea>
+        <div class="comment-editor"><textarea name="content" class="c-cmt-textarea" placeholder="현장 팁이나 메모를 남겨보세요 (이미지는 Ctrl+V)" maxlength="500" rows="1" required aria-label="댓글 내용"></textarea><div class="comment-image-tools"><button type="button" class="comment-image-trigger" data-comment-image-trigger>사진 붙이기</button><input type="file" accept="image/*" data-comment-image-input hidden><span class="comment-image-hint">화면을 캡처한 뒤 Ctrl+V</span></div><div class="comment-image-preview" data-comment-image-preview hidden></div></div>
         <div class="c-cmt-form-actions">
           <button type="button" class="c-cmt-btn c-cmt-btn-cancel" data-cmt-cancel="${esc(id)}">취소</button>
           <button type="submit" class="c-cmt-btn c-cmt-btn-submit">저장</button>
@@ -4679,7 +4679,7 @@ function syncCardCommentsInDom() {
       const uniqueIds = [...new Set(needFetch)].slice(0, 50);
       uniqueIds.forEach((id) => CMT_FETCHED_SET.add(id));
       try {
-        const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,created_at&campground_id=in.(${uniqueIds.join(",")})&is_deleted=eq.false&order=created_at.desc`, {
+        const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,image_url,image_alt,created_at&campground_id=in.(${uniqueIds.join(",")})&is_deleted=eq.false&order=created_at.desc`, {
           headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` }
         });
         if (r.ok) {
@@ -4704,7 +4704,7 @@ function syncCardCommentsInDom() {
 async function initCommentsCache() {
   if (!await ensureSupabaseConfig()) return;
   try {
-    const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,created_at&is_deleted=eq.false&order=created_at.desc&limit=500`, {
+    const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,image_url,image_alt,created_at&is_deleted=eq.false&order=created_at.desc&limit=500`, {
       headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` }
     });
     if (!r.ok) return;
@@ -4848,15 +4848,21 @@ function bindCardCommentEvents() {
     const nickname = nickInput ? nickInput.value.trim() : "";
     const content = contentTa ? contentTa.value.trim() : "";
     if (!nickname || !content) return;
+    const media = commentImageState(form);
+    if (media.busy) { toast("사진을 준비하고 있어요"); return; }
     if (submitBtn) submitBtn.disabled = true;
     try {
       if (!await ensureSupabaseConfig()) throw new Error("Config not ready");
+      const imageUrl = media.file ? await uploadCommentImage(media.file, id) : "";
+      const payload = { campground_id: Number(id), nickname, content, tag: "general", password_hash: crypto.randomUUID() };
+      if (imageUrl) { payload.image_url = imageUrl; payload.image_alt = "댓글 첨부 사진"; }
       const r = await fetch(`${SB.url}/rest/v1/campground_comment`, {
         method: "POST",
         headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=representation" },
-        body: JSON.stringify({ campground_id: Number(id), nickname, content, tag: "general", password_hash: crypto.randomUUID() })
+        body: JSON.stringify(payload)
       });
-      const row = r.ok ? (await r.json())[0] : null;
+      if (!r.ok) { toast(media.file ? "사진 저장 설정이 아직 준비되지 않았어요" : "지금은 남기지 못했어요"); return; }
+      const row = (await r.json())[0];
       if (row?.id) {
         store.set("mc-my-comments", [...store.get("mc-my-comments", []), String(row.id)]);
         store.set("mc-cmt-nick", nickname);
@@ -4866,11 +4872,10 @@ function bindCardCommentEvents() {
         CMT_CLOSED_SET.delete(id);
         CMT_OPEN_SET.add(id);
         CMT_WRITE_OPEN_SET.delete(id);
+        clearCommentImage(form);
         updateSingleCardCommentDom(id);
         if ($("[data-cmts]")) loadComments(id);
         toast("남겼어요");
-      } else {
-        toast("지금은 남기지 못했어요");
       }
     } catch {
       toast("지금은 남기지 못했어요");
@@ -4902,7 +4907,7 @@ function commentsHtml(c) {
   if (!SB.url || !/^\d+$/.test(String(c.id))) return "";
   const profile = typeof savedCommentProfile === "function" ? savedCommentProfile() : { nickname: store.get("mc-cmt-nick", "") };
   return `<section class="d-sec" id="cmt"><div class="sec-head">${iconTitle("chat-bubble", "댓글")}</div>
-    <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" value="${esc(profile.nickname || store.get("mc-cmt-nick", ""))}" placeholder="닉네임" required aria-label="닉네임" autocomplete="nickname"><textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁" required aria-label="내용"></textarea><button class="btn primary" type="submit">남기기</button></form>
+    <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" value="${esc(profile.nickname || store.get("mc-cmt-nick", ""))}" placeholder="닉네임" required aria-label="닉네임" autocomplete="nickname"><div class="comment-editor"><textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁 (이미지는 Ctrl+V)" required aria-label="내용"></textarea><div class="comment-image-tools"><button type="button" class="comment-image-trigger" data-comment-image-trigger>사진 붙이기</button><input type="file" accept="image/*" data-comment-image-input hidden><span class="comment-image-hint">화면을 캡처한 뒤 Ctrl+V</span></div><div class="comment-image-preview" data-comment-image-preview hidden></div></div><button class="btn primary" type="submit">남기기</button></form>
     <ul class="cmts" data-cmts><li class="muted">불러오는 중…</li></ul></section>`;
 }
 
@@ -4956,6 +4961,130 @@ function commentContentHtml(value) {
   }
   return out + esc(text.slice(last)).replace(/\n/g, "<br>");
 }
+const COMMENT_IMAGE_MAX_SOURCE_BYTES = 12 * 1024 * 1024;
+const COMMENT_IMAGE_MAX_BYTES = 2 * 1024 * 1024;
+const commentImageStates = new WeakMap();
+function commentImageState(form) {
+  let state = commentImageStates.get(form);
+  if (!state) { state = { file: null, objectUrl: "", busy: false }; commentImageStates.set(form, state); }
+  return state;
+}
+function commentImageBlob(canvas, type, quality) {
+  return new Promise((resolve) => canvas.toBlob(resolve, type, quality));
+}
+async function compressCommentImage(file) {
+  if (!file?.type?.startsWith("image/")) throw new Error("image-only");
+  if (file.size > COMMENT_IMAGE_MAX_SOURCE_BYTES) throw new Error("too-large");
+  const sourceUrl = URL.createObjectURL(file);
+  try {
+    const image = await new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error("image-read"));
+      img.src = sourceUrl;
+    });
+    const max = 1600;
+    const scale = Math.min(1, max / Math.max(image.naturalWidth || image.width, image.naturalHeight || image.height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.max(1, Math.round((image.naturalWidth || image.width) * scale));
+    canvas.height = Math.max(1, Math.round((image.naturalHeight || image.height) * scale));
+    canvas.getContext("2d", { alpha: false })?.drawImage(image, 0, 0, canvas.width, canvas.height);
+    let blob = await commentImageBlob(canvas, "image/webp", .82);
+    if (!blob || !blob.type.startsWith("image/")) blob = await commentImageBlob(canvas, "image/jpeg", .82);
+    for (const quality of [.72, .58]) {
+      if (!blob || blob.size <= COMMENT_IMAGE_MAX_BYTES) break;
+      blob = await commentImageBlob(canvas, blob.type === "image/webp" ? "image/webp" : "image/jpeg", quality);
+    }
+    if (!blob || blob.size > COMMENT_IMAGE_MAX_BYTES) throw new Error("compressed-too-large");
+    const ext = blob.type === "image/webp" ? "webp" : "jpg";
+    return new File([blob], `comment-${Date.now()}.${ext}`, { type: blob.type || "image/jpeg" });
+  } finally { URL.revokeObjectURL(sourceUrl); }
+}
+function renderCommentImagePreview(form) {
+  const preview = $(`[data-comment-image-preview]`, form);
+  if (!preview) return;
+  const state = commentImageState(form);
+  preview.replaceChildren();
+  preview.hidden = !state.objectUrl;
+  if (!state.objectUrl) return;
+  const img = document.createElement("img");
+  img.src = state.objectUrl; img.alt = "붙여넣은 사진 미리보기";
+  const remove = document.createElement("button");
+  remove.type = "button"; remove.className = "comment-image-remove"; remove.dataset.commentImageRemove = ""; remove.setAttribute("aria-label", "첨부 사진 삭제"); remove.textContent = "×";
+  preview.append(img, remove);
+}
+function clearCommentImage(form) {
+  const state = commentImageState(form);
+  if (state.objectUrl) URL.revokeObjectURL(state.objectUrl);
+  state.file = null; state.objectUrl = ""; state.busy = false;
+  renderCommentImagePreview(form);
+  const input = $(`[data-comment-image-input]`, form);
+  if (input) input.value = "";
+}
+async function setCommentImage(form, file) {
+  const state = commentImageState(form);
+  if (!file) return;
+  state.busy = true;
+  try {
+    const prepared = await compressCommentImage(file);
+    if (state.objectUrl) URL.revokeObjectURL(state.objectUrl);
+    state.file = prepared; state.objectUrl = URL.createObjectURL(prepared);
+    renderCommentImagePreview(form);
+  } catch (err) {
+    const message = err?.message === "too-large" || err?.message === "compressed-too-large" ? "사진은 2MB 이하로 줄여 주세요" : "이미지를 읽지 못했어요";
+    toast(message);
+  } finally { state.busy = false; }
+}
+async function uploadCommentImage(file, campgroundId) {
+  if (!file || !SB.url || !SB.key) return "";
+  const ext = file.type === "image/webp" ? "webp" : "jpg";
+  const uuid = crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  const path = `${String(campgroundId).replace(/[^0-9]/g, "") || "unknown"}/${uuid}.${ext}`;
+  const objectPath = path.split("/").map(encodeURIComponent).join("/");
+  const r = await fetch(`${SB.url}/storage/v1/object/comment-media/${objectPath}`, {
+    method: "POST",
+    headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": file.type, "cache-control": "31536000", "x-upsert": "false" },
+    body: file,
+  });
+  if (!r.ok) throw new Error("image-upload-failed");
+  return `${SB.url}/storage/v1/object/public/comment-media/${objectPath}`;
+}
+function commentAttachmentHtml(row) {
+  const url = String(row?.image_url || "").trim();
+  if (!/^https:\/\//i.test(url)) return "";
+  return `<a class="comment-attached-image" href="${esc(url)}" target="_blank" rel="noopener noreferrer"><img src="${esc(url)}" alt="${esc(row?.image_alt || "댓글 첨부 사진")}" loading="lazy" decoding="async"></a>`;
+}
+let commentImageEventsBound = false;
+function bindCommentImageEvents() {
+  if (commentImageEventsBound) return;
+  commentImageEventsBound = true;
+  const formFor = (target) => target?.closest?.("form[data-cmt], form[data-saved-comment-form], form[data-card-cmt-form]");
+  document.addEventListener("paste", (e) => {
+    const form = formFor(e.target);
+    if (!form || e.target?.name !== "content") return;
+    const item = [...(e.clipboardData?.items || [])].find((x) => x.type?.startsWith("image/"));
+    const file = item?.getAsFile?.() || [...(e.clipboardData?.files || [])].find((x) => x.type?.startsWith("image/"));
+    if (!file) return;
+    e.preventDefault();
+    setCommentImage(form, file);
+  });
+  document.addEventListener("click", (e) => {
+    const trigger = e.target.closest?.("[data-comment-image-trigger]");
+    if (trigger) {
+      e.preventDefault();
+      const form = formFor(trigger), input = $(`[data-comment-image-input]`, form);
+      input?.click();
+      return;
+    }
+    const remove = e.target.closest?.("[data-comment-image-remove]");
+    if (remove) { e.preventDefault(); clearCommentImage(formFor(remove)); }
+  });
+  document.addEventListener("change", (e) => {
+    if (!e.target.matches?.("[data-comment-image-input]")) return;
+    const form = formFor(e.target);
+    setCommentImage(form, e.target.files?.[0]);
+  });
+}
 function bindCommentVideo(root) {
   root?.addEventListener("click", (e) => {
     const b = e.target.closest?.("[data-comment-video]");
@@ -4993,7 +5122,7 @@ function savedCommentRow(x) {
   const color = savedCommentColor(x.nickname);
   return `<li class="saved-comment-row" data-saved-comment-row="${esc(x.id || "")}">
     <span class="saved-comment-avatar" style="--comment-color:${color}" aria-hidden="true">${esc(savedCommentInitial(x.nickname))}</span>
-    <div class="saved-comment-copy"><div class="saved-comment-meta"><b>${esc(x.nickname || "캠퍼")}</b><time>${esc(formatKoreanDateTime(x.created_at || x.createdAt || Date.now()))}</time></div><p>${commentContentHtml(x.content || "")}</p></div>
+    <div class="saved-comment-copy"><div class="saved-comment-meta"><b>${esc(x.nickname || "캠퍼")}</b><time>${esc(formatKoreanDateTime(x.created_at || x.createdAt || Date.now()))}</time></div><p>${commentContentHtml(x.content || "")}</p>${commentAttachmentHtml(x)}</div>
   </li>`;
 }
 function savedCommentsHtml(c) {
@@ -5012,7 +5141,7 @@ function savedCommentsHtml(c) {
     <div class="saved-comments-panel" data-saved-comments-panel hidden>
       <form class="saved-comment-form" data-saved-comment-form>
         <div class="saved-comment-author"><span class="saved-comment-avatar" data-saved-comment-avatar style="--comment-color:${p.color}" aria-hidden="true">${esc(savedCommentInitial(p.nickname))}</span><input name="nickname" maxlength="20" value="${esc(p.nickname)}" placeholder="작성자 이름" required aria-label="작성자 이름" autocomplete="nickname"></div>
-        <textarea name="content" maxlength="500" rows="1" placeholder="현장 팁이나 메모를 남겨보세요" required aria-label="댓글"></textarea>
+        <div class="comment-editor"><textarea name="content" maxlength="500" rows="1" placeholder="현장 팁이나 메모를 남겨보세요 (이미지는 Ctrl+V)" required aria-label="댓글"></textarea><div class="comment-image-tools"><button type="button" class="comment-image-trigger" data-comment-image-trigger>사진 붙이기</button><input type="file" accept="image/*" data-comment-image-input hidden><span class="comment-image-hint">화면을 캡처한 뒤 Ctrl+V</span></div><div class="comment-image-preview" data-comment-image-preview hidden></div></div>
         <div class="saved-comment-actions"><button type="button" class="btn ghost btn-sm" data-saved-comment-cancel>취소</button><button type="submit" class="btn primary btn-sm">저장</button></div>
       </form>
     </div>
@@ -5043,7 +5172,7 @@ async function fetchSavedComments(root) {
   let list = [];
   try {
     if (!await ensureSupabaseConfig()) throw new Error("Supabase config unavailable");
-    const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,nickname,content,created_at&campground_id=eq.${encodeURIComponent(id)}&is_deleted=eq.false&order=created_at.desc&limit=30`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
+    const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,nickname,content,image_url,image_alt,created_at&campground_id=eq.${encodeURIComponent(id)}&is_deleted=eq.false&order=created_at.desc&limit=30`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
     if (!r.ok) throw new Error("comment request failed");
     list = await r.json();
     store.set(savedCommentLocalKey(id), list);
@@ -5062,7 +5191,7 @@ async function fetchSavedCardComments() {
     // 찜 목록은 카드마다 따로 요청하지 않고 한 번에 가져온다. 카드에는 최신 6개만
     // 쓰므로 넉넉히 600개까지만 받아 모바일에서도 목록을 가볍게 유지한다.
     const limit = Math.min(600, Math.max(60, ids.length * 6));
-    const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,created_at&campground_id=in.(${ids.join(",")})&is_deleted=eq.false&order=created_at.desc&limit=${limit}`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
+    const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,campground_id,nickname,content,image_url,image_alt,created_at&campground_id=in.(${ids.join(",")})&is_deleted=eq.false&order=created_at.desc&limit=${limit}`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
     if (!r.ok) throw new Error("comment request failed");
     for (const row of await r.json()) {
       const id = String(row.campground_id);
@@ -5104,24 +5233,37 @@ function initSavedComments() {
       e.preventDefault();
       const nickname = String(input?.value || "").trim(), content = String(form.elements.content?.value || "").trim(), btn = $("button[type=submit]", form);
       if (!nickname || !content) return;
+      const media = commentImageState(form);
+      if (media.busy) { toast("사진을 준비하고 있어요"); return; }
       syncSavedCommentProfile(input, nickname);
       btn.disabled = true;
       const local = { id: `local-${Date.now()}`, nickname, content, created_at: new Date().toISOString() };
       let saved = false;
+      let mediaError = false;
       try {
         if (!NO_REMOTE_WRITE && await ensureSupabaseConfig()) {
-          const r = await fetch(`${SB.url}/rest/v1/campground_comment`, { method: "POST", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=representation" }, body: JSON.stringify({ campground_id: root.dataset.savedCommentId, nickname, content, tag: "saved", password_hash: crypto.randomUUID() }) });
+          const imageUrl = media.file ? await uploadCommentImage(media.file, root.dataset.savedCommentId) : "";
+          const payload = { campground_id: root.dataset.savedCommentId, nickname, content, tag: "saved", password_hash: crypto.randomUUID() };
+          if (imageUrl) { payload.image_url = imageUrl; payload.image_alt = "댓글 첨부 사진"; }
+          const r = await fetch(`${SB.url}/rest/v1/campground_comment`, { method: "POST", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=representation" }, body: JSON.stringify(payload) });
+          if (!r.ok && media.file) { mediaError = true; }
           if (r.ok) {
             const row = (await r.json())[0];
             if (row?.id) { store.set("mc-my-comments", [...new Set([...store.get("mc-my-comments", []), String(row.id)])]); pushSave("comment", String(root.dataset.savedCommentId)); saved = true; }
           }
         }
-      } catch { /* 로컬 보관으로 이어짐 */ }
+      } catch { mediaError = Boolean(media.file); /* 이미지가 있으면 첨부를 잃지 않도록 로컬 텍스트 보관도 하지 않는다. */ }
+      if (mediaError) {
+        toast("사진을 업로드하지 못했어요. 잠시 후 다시 시도해 주세요");
+        btn.disabled = false;
+        return;
+      }
       if (!saved) {
         const current = store.get(savedCommentLocalKey(root.dataset.savedCommentId), []);
         store.set(savedCommentLocalKey(root.dataset.savedCommentId), [local, ...current]);
       }
       form.elements.content.value = "";
+      if (saved) clearCommentImage(form);
       await fetchSavedComments(root);
       if (!saved) renderSavedCommentList(root, store.get(savedCommentLocalKey(root.dataset.savedCommentId), []));
       toast(saved ? "댓글을 남겼어요" : "이 기기에 댓글을 저장했어요");
@@ -5135,13 +5277,13 @@ async function loadComments(id) {
   if (!box) return;
   try {
     if (!await ensureSupabaseConfig()) throw new Error("Supabase config unavailable");
-    const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,nickname,content,created_at&campground_id=eq.${encodeURIComponent(id)}&is_deleted=eq.false&order=created_at.desc&limit=30`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
+    const r = await fetch(`${SB.url}/rest/v1/campground_comment?select=id,nickname,content,image_url,image_alt,created_at&campground_id=eq.${encodeURIComponent(id)}&is_deleted=eq.false&order=created_at.desc&limit=30`, { headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}` } });
     const list = r.ok ? await r.json() : [];
     CMT_CACHE.set(String(id), list);
     updateSingleCardCommentDom(String(id));
     const formatFn = typeof formatKoreanDateTime === "function" ? formatKoreanDateTime : formatKoreanDate;
     const bodyFn = typeof commentContentHtml === "function" ? commentContentHtml : formatCommentContent;
-    box.innerHTML = list.length ? list.map((x) => `<li><b>${esc(x.nickname)}</b><i>${esc(formatFn(x.created_at))}</i><div class="cmt-content-body">${bodyFn(x.content)}</div></li>`).join("") : `<li class="muted">첫 한마디를 남겨 주세요.</li>`;
+    box.innerHTML = list.length ? list.map((x) => `<li><b>${esc(x.nickname)}</b><i>${esc(formatFn(x.created_at))}</i><div class="cmt-content-body">${bodyFn(x.content)}${commentAttachmentHtml(x)}</div></li>`).join("") : `<li class="muted">첫 한마디를 남겨 주세요.</li>`;
   } catch { box.innerHTML = `<li class="muted">지금은 불러오지 못했어요.</li>`; }
 }
 // ── 주간 날씨 예보 & 일자별 상세 모달 (모여라 캘린더 동일 구조) ──────
@@ -6130,24 +6272,31 @@ function bindDetail() {
   }
   cmtForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const f = e.target, btn = $("button", f);
+    const f = e.target, btn = $("button[type='submit']", f);
     if (NO_REMOTE_WRITE) { toast("테스트 모드에서는 남기지 않아요"); return; }
     if (!f.nickname.value.trim() || !f.content.value.trim()) return;
+    const media = commentImageState(f);
+    if (media.busy) { toast("사진을 준비하고 있어요"); return; }
     syncSavedCommentProfile(f.nickname, f.nickname.value);
     btn.disabled = true;
     try {
-      const r = await fetch(`${SB.url}/rest/v1/campground_comment`, { method: "POST", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=representation" }, body: JSON.stringify({ campground_id: f.dataset.cmt, nickname: f.nickname.value.trim(), content: f.content.value.trim(), tag: "general", password_hash: crypto.randomUUID() }) });
-      const row = r.ok ? (await r.json())[0] : null;
+      const imageUrl = media.file ? await uploadCommentImage(media.file, f.dataset.cmt) : "";
+      const payload = { campground_id: f.dataset.cmt, nickname: f.nickname.value.trim(), content: f.content.value.trim(), tag: "general", password_hash: crypto.randomUUID() };
+      if (imageUrl) { payload.image_url = imageUrl; payload.image_alt = "댓글 첨부 사진"; }
+      const r = await fetch(`${SB.url}/rest/v1/campground_comment`, { method: "POST", headers: { apikey: SB.key, Authorization: `Bearer ${SB.key}`, "Content-Type": "application/json", Prefer: "return=representation" }, body: JSON.stringify(payload) });
+      if (!r.ok) { toast(media.file ? "사진 저장 설정이 아직 준비되지 않았어요" : "지금은 남기지 못했어요"); btn.disabled = false; return; }
+      const row = (await r.json())[0];
       if (row?.id) {
         store.set("mc-my-comments", [...store.get("mc-my-comments", []), String(row.id)]);
         store.set("mc-cmt-nick", f.nickname.value.trim());
       }
-      if (r.ok) pushSave("comment", String(f.dataset.cmt));
+      pushSave("comment", String(f.dataset.cmt));
       f.content.value = "";
       delete f.content.dataset.resized;
       f.content.style.height = "";
       f.content.classList.remove("is-expanded");
-      toast(r.ok ? "남겼어요" : "지금은 남기지 못했어요");
+      clearCommentImage(f);
+      toast("남겼어요");
       if (row) {
         const cur = CMT_CACHE.get(String(f.dataset.cmt)) || [];
         CMT_CACHE.set(String(f.dataset.cmt), [row, ...cur.filter((x) => x.id !== row.id)]);
@@ -7034,6 +7183,7 @@ addEventListener("error", (e) => {
   await configReady;
   initCommentsCache();
   bindCardCommentEvents();
+  bindCommentImageEvents();
   // /saved가 로컬 찜으로 먼저 그려졌다가 서버 찜으로 뒤늦게 바뀌는 경합을 막는다.
   // 서버 목록을 먼저 확정하되 1.5초까지만 기다린다. 늦으면 이 기기 찜(+대기 동작)으로 먼저 그리고, 서버 목록이 오면 하트·찜 목록을 맞춘다.
   S.saved = withPendingOps(S.saved);
