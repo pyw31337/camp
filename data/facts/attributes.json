@@ -178,10 +178,10 @@
    "filter": "in",
    "note": "count가 있으면 면·동 수. text는 세부 이름(방갈로·캐빈 등). 원천: 고캠핑 등록값·소개글, 카카오/네이버 분류, 운영자 홈페이지 문장(lib/site-types.mjs)",
    "coverage": {
-    "campgrounds": 3422,
+    "campgrounds": 3424,
     "by_grade": {
      "CONFIRMED": 5781,
-     "MENTION": 5028,
+     "MENTION": 5031,
      "OPERATOR": 1080
     }
    }
@@ -481,9 +481,9 @@
    "filter": "max",
    "note": "MENTION 전용. 확정값으로 쓰지 않는다",
    "coverage": {
-    "campgrounds": 2710,
+    "campgrounds": 2713,
     "by_grade": {
-     "MENTION": 13822
+     "MENTION": 13848
     }
    }
   },
@@ -494,10 +494,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 411,
+    "campgrounds": 412,
     "by_grade": {
      "OPERATOR": 186,
-     "MENTION": 297,
+     "MENTION": 298,
      "CONFIRMED": 3
     }
    }
@@ -541,7 +541,7 @@
    "coverage": {
     "campgrounds": 70,
     "by_grade": {
-     "MENTION": 75,
+     "MENTION": 77,
      "CONFIRMED": 1,
      "OPERATOR": 9
     }
@@ -569,9 +569,9 @@
    "pref": "일찍 들어가고 싶나요?",
    "filter": "max",
    "coverage": {
-    "campgrounds": 2765,
+    "campgrounds": 2767,
     "by_grade": {
-     "MENTION": 3503,
+     "MENTION": 3509,
      "REFERENCE": 452,
      "OPERATOR": 645,
      "CONFIRMED": 4
@@ -586,9 +586,9 @@
    "pref": "늦게 나오고 싶나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 2705,
+    "campgrounds": 2707,
     "by_grade": {
-     "MENTION": 3488,
+     "MENTION": 3493,
      "REFERENCE": 445,
      "OPERATOR": 612,
      "CONFIRMED": 2
@@ -631,9 +631,9 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 2077,
+    "campgrounds": 2079,
     "by_grade": {
-     "MENTION": 2515,
+     "MENTION": 2517,
      "REFERENCE": 463,
      "OPERATOR": 129,
      "CONFIRMED": 7
@@ -662,11 +662,11 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 843,
+    "campgrounds": 844,
     "by_grade": {
      "REFERENCE": 467,
      "OPERATOR": 703,
-     "MENTION": 49,
+     "MENTION": 50,
      "CONFIRMED": 1
     }
    }
@@ -767,7 +767,7 @@
     "campgrounds": 1331,
     "by_grade": {
      "CONFIRMED": 1796,
-     "MENTION": 410,
+     "MENTION": 412,
      "OPERATOR": 549,
      "VERIFIED": 39
     }
@@ -1824,9 +1824,9 @@
    "review_label": "조용·한적",
    "pref": "‘조용·한적’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 1640,
+    "campgrounds": 1641,
     "by_grade": {
-     "MENTION": 1640
+     "MENTION": 1641
     }
    }
   },
@@ -2655,5 +2655,5 @@
    }
   }
  ],
- "generated_at": "2026-10-29T01:28:56.330Z"
+ "generated_at": "2026-10-29T19:00:17.625Z"
 }
