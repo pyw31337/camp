@@ -10,8 +10,11 @@ const fails = [];
   const root = new URL("../../", import.meta.url);
   const html = readFileSync(new URL("design/renewal/index.html", root), "utf8");
   const css = readFileSync(new URL("design/renewal/style.css", root), "utf8");
+  const js = readFileSync(new URL("design/renewal/app.js", root), "utf8");
   if (/<path d="M0 0h\d+v\d+H0z" fill="none"\/>/.test(html)) fails.push("design/renewal/index.html: 아이콘에 투명 크기 사각형이 남아 있음");
   if (!css.includes('.ic path[d^="M0 0h"][fill="none"] { stroke: none; }')) fails.push("design/renewal/style.css: 아이콘 사각형 선 끄기 규칙 없음");
+  if (!js.includes("clipboardData") || !js.includes("data-comment-image-preview")) fails.push("design/renewal/app.js: 댓글 이미지 붙여넣기 처리 없음");
+  if (!js.includes("comment-media") || !js.includes("image_url")) fails.push("design/renewal/app.js: 댓글 이미지 업로드 연결 없음");
 }
 for (const [w, h, tag] of [[1366, 900, "1366"], [320, 800, "320"]]) {
   const page = await browser.newPage({ viewport: { width: w, height: h } });

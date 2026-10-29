@@ -40,6 +40,11 @@
 
 ## 6. Claude & Codex 에이전트 연계 확인 사항
 
+## 7. 댓글 첨부 사진 (2026-10-29)
+
+- `db/025_campground_comment_media.sql`은 기존 댓글을 보존한 채 `image_url`·`image_alt` 열과 Supabase Storage `comment-media` 버킷을 추가한다. 운영 DB는 다음 `npm run db:migrate`에서 적용하며, 로컬 검증 DB에 Storage 스키마가 없어도 댓글 열 검증은 계속된다.
+- 브라우저는 붙여넣은 이미지를 최대 1600px·2MB로 압축한 뒤 업로드하고, 댓글 본문과 별도로 안전한 HTTPS 이미지 URL만 렌더링한다.
+
 1. **로컬 SQLite 데이터베이스 (`db/moyeora_camping.db`) 즉시 활용**:
    - Claude 및 Codex가 분석 작업, 추천 모델 튜닝, 추가 필터링 쿼리를 수행할 때 외부 DB 서버 연결 없이 저장소 루트의 `db/moyeora_camping.db`를 즉시 쿼리할 수 있습니다 (`sqlite3 db/moyeora_camping.db "SELECT ..."`).
    - 데이터가 갱신된 경우 언제든 `npm --prefix pipeline run build:db`를 실행하면 1초 안에 최신 정적 데이터로부터 SQLite DB가 재생성됩니다.

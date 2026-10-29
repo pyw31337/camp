@@ -15,6 +15,12 @@
 - `design/renewal/`을 원본으로 수정했으며 발행 전 `publish-explorer-pages.mjs --shell-only camping-atlas/public`로 공개본을 동기화한다.
 - 검증: `node --check design/renewal/app.js`, `node --check camping-atlas/public/app.js`, `git diff --check` 통과. 작업 worktree에는 의존성이 없어 ESLint는 실행하지 못했으며 CI에서 확인한다.
 
+## 📌 댓글 이미지 붙여넣기 업로드 (2026-10-29, Codex)
+- 상세페이지 `댓글`(캠퍼 한마디) 입력창과 찜 카드·목록 댓글 입력창에서 클립보드의 이미지(`Ctrl+V`/`⌘V`)를 바로 붙여넣을 수 있다. 붙여넣은 이미지는 브라우저에서 최대 1600px·2MB 이하 WebP/JPEG로 압축하고 미리보기·삭제를 제공한다.
+- 저장할 때 Supabase Storage `comment-media` 버킷에 업로드하고 댓글의 `image_url`·`image_alt`로 연결한다. 기존 텍스트 댓글·데이터는 변경하지 않는다. 새 `db/025_campground_comment_media.sql`은 댓글 열과 버킷·anon 읽기/쓰기 정책을 추가하며, 다음 `db:migrate`에서 운영 DB에 적용된다.
+- 댓글 목록·찜 카드·상세 댓글에서 첨부 사진을 지연 로딩하고, 원본을 새 탭에서 열 수 있게 했다. 업로드 실패 시 기존 댓글을 임의로 지우지 않고 안내한다.
+- 검사: `node --check design/renewal/app.js`, `git diff --check`, DB 마이그레이션 구문은 CI `database-verify`에서 전체 순서·재적용을 확인한다.
+
 ## 📌 상세정보·댓글 화살표 x좌표 정렬 · 상세정보 상하단 여백 확대 · 유튜브 쇼츠 인라인 재생 · YouTube Shorts 아이콘 정규화 (2026-10-28, Gemini → 전 에이전트)
 - **상세정보와 댓글 우측 화살표 x좌표 정밀 일치**:
   - `saved-card-spec-toggle`과 `c-cmt-bar`의 가로 패딩을 `padding: 11px 0` 및 `padding: 6px 0`으로 맞추고, 두 화살표(`.saved-card-spec-chevron`, `.c-cmt-bar-arrow`) 크기를 16px × 16px로 동일화.
