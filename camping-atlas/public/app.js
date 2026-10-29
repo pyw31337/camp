@@ -1920,6 +1920,12 @@ const HERO_THEMES = [
 ];
 
 function getInitialHeroIndex() {
+  const p = new URLSearchParams(location.search);
+  const heroParam = p.get("hero");
+  if (heroParam) {
+    const idx = HERO_THEMES.findIndex((t) => t.id === heroParam || t.shortName === heroParam);
+    if (idx !== -1) return idx;
+  }
   const hour = new Date().getHours();
   if (hour >= 20 || hour < 5) return 0; // 밤하늘 별 & 반딧불이
   if (hour >= 17) return 7; // 서해안 노을
@@ -3508,6 +3514,27 @@ function bindList() {
 
 // ── 화면: 테마 모음 ───────────────────────────────────────────
 function themesView() {
+  const heroCards = HERO_THEMES.map((t) => {
+    return `<div class="hero-theme-card">
+      <a class="ht-media" href="${APP_BASE}?hero=${encodeURIComponent(t.id)}" title="${esc(t.shortName)} 메인화면으로 보기">
+        <img src="${ASSETS_BASE}images/hero/${t.image}" alt="${esc(t.shortName)}" loading="lazy" draggable="false">
+        <span class="ht-badge">${t.emoji} ${esc(t.badge)}</span>
+        <span class="ht-hover-cta">메인화면으로 적용 ↗</span>
+      </a>
+      <div class="ht-body">
+        <div class="ht-head">
+          <h3 class="ht-title"><a href="${APP_BASE}?hero=${encodeURIComponent(t.id)}">${t.emoji} ${esc(t.shortName)}</a></h3>
+          <span class="ht-fx-tag">${esc(t.moodDescription)}</span>
+        </div>
+        <p class="ht-desc">${esc(t.summary)}</p>
+        <div class="ht-foot">
+          <span class="ht-copy">${esc(t.titleA)} ${esc(t.titleB)}</span>
+          <a class="ht-btn" href="${APP_BASE}?hero=${encodeURIComponent(t.id)}">적용하기 →</a>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+
   const cards = THEMES.map(([key, label, test]) => {
     const closed = key === "WATER_PLAY";
     return `<a class="theme-card${closed ? " is-closed" : ""}" href="${APP_BASE}theme/${encodeURIComponent(key)}" draggable="false">
@@ -3516,10 +3543,22 @@ function themesView() {
       <span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span>
     </a>`;
   }).join("");
+
   return `<section class="themes-page">
+    <section class="hero-themes-collection shell" id="hero-themes">
+      <header class="hero-themes-head">
+        <div class="hth-lead">
+          <span class="hth-pill">✨ 감성 인터랙션 &amp; 무드 컬렉션</span>
+          <h2>메인화면 10대 감성 <em>히어로 테마</em></h2>
+          <p class="sec-sub">시간과 날씨에 따라 살아 숨쉬는 10가지 자연의 감성. 카드를 클릭하면 해당 테마의 인터랙티브 메인화면을 바로 감상하실 수 있습니다.</p>
+        </div>
+      </header>
+      <div class="hero-themes-grid">${heroCards}</div>
+    </section>
+
     <header class="themes-head shell">
-      <h1>테마로 <em>고르기</em></h1>
-      <p class="sec-sub">원하는 분위기부터 골라보세요.</p>
+      <h1>캠핑 테마별 <em>캠핑장 찾기</em></h1>
+      <p class="sec-sub">원하는 캠핑 스타일과 분위기부터 골라보세요.</p>
     </header>
     <div class="themes-grid shell">${cards}</div>
   </section>`;
