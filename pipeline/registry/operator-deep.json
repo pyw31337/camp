@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T00:59:05.778Z",
+  "generated_at": "2026-10-29T09:59:41.924Z",
   "policy": "operator hosts only, robots respected, sentences and image urls",
   "campgrounds": {
     "146": {
@@ -32,6 +32,11 @@
       "pages": [],
       "snippets": [],
       "images": []
+    },
+    "977": {
+      "status": "SKIPPED",
+      "reason": "not operator host",
+      "url": "https://cafe.naver.com/lohascamp"
     },
     "1903": {
       "status": "SKIPPED",
@@ -770,6 +775,11 @@
       "reason": "not operator host",
       "url": null
     },
+    "100289": {
+      "status": "SKIPPED",
+      "reason": "not operator host",
+      "url": "https://www.instagram.com/godwell_camping"
+    },
     "100597": {
       "status": "SKIPPED",
       "reason": "not operator host",
@@ -779,6 +789,11 @@
       "status": "SKIPPED",
       "reason": "not operator host",
       "url": "https://www.instagram.com/_camp_darling/"
+    },
+    "100721": {
+      "status": "SKIPPED",
+      "reason": "not operator host",
+      "url": "https://cafe.naver.com/campinggsung"
     },
     "101040": {
       "status": "OK",
@@ -1606,15 +1621,30 @@
         }
       ]
     },
+    "101214": {
+      "status": "SKIPPED",
+      "reason": "not operator host",
+      "url": "http://cafe.naver.com/campdaon"
+    },
     "101269": {
       "status": "SKIPPED",
       "reason": "not operator host",
       "url": null
     },
+    "101416": {
+      "status": "SKIPPED",
+      "reason": "not operator host",
+      "url": "http://naepocamping.modoo.at/"
+    },
     "101608": {
       "status": "SKIPPED",
       "reason": "not operator host",
       "url": "https://cafe.naver.com/sansaesoristory"
+    },
+    "101639": {
+      "status": "SKIPPED",
+      "reason": "not operator host",
+      "url": null
     },
     "101934": {
       "status": "FETCH_FAILED",
@@ -1643,7 +1673,7 @@
       "status": "OK",
       "name": "화성에코팜테마파크 오토캠핑장",
       "url": "https://hsecofarm.hscity.go.kr/",
-      "checked_at": "2026-10-29T00:59:14.299Z",
+      "checked_at": "2026-10-29T09:59:49.850Z",
       "pages": [
         "https://hsecofarm.hscity.go.kr/",
         "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
@@ -1817,7 +1847,7 @@
           "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
         },
         {
-          "text": "머무는 방식에 맞춰 선택할 수 있도록 일반형 A-D, 확장형 E, 확장형 F 구역으로 나뉜 체류형 캠핑 공간입니다.",
+          "text": "머무는 방식에 맞춰 선택할 수 있도록 일반형 A-D, 확장형 E, F 구역으로 나뉜 체류형 캠핑 공간입니다.",
           "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do"
         },
         {
@@ -1926,6 +1956,10 @@
         },
         {
           "text": "방문 전 꼭 확인해야 할 공지와 이용 정보를 빠르게 확인해 주세요.",
+          "url": "https://hsecofarm.hscity.go.kr/reservation/board/list.do"
+        },
+        {
+          "text": "[공지] [필독] 화성에코팜테마파크 캠핑장 이용 안내 및 수칙",
           "url": "https://hsecofarm.hscity.go.kr/reservation/board/list.do"
         },
         {
