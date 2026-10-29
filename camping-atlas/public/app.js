@@ -1795,6 +1795,1119 @@ function commonFinderForm({ formAttr = "data-search", isList = false } = {}) {
     <button class="finder-go" type="submit">${ic("search")}<span>찾기</span></button>
   </form>`;
 }
+// 10대 감성 캠핑 테마 메타데이터
+const HERO_THEMES = [
+  {
+    id: "night-sky",
+    emoji: "🌌",
+    shortName: "은하수 밤하늘",
+    badge: "오늘 밤 쏟아지는 별빛",
+    moodDescription: "평창 600마지기 은하수 & 반딧불이",
+    image: "hero-night-sky.webp",
+    titleA: "별빛 쏟아지는 밤하늘 아래,",
+    titleB: "600마지기 은하수 속으로.",
+    summary: "도심을 벗어나 쏟아지는 별빛과 춤추는 반딧불이를 마주하는 시간",
+    effect: "night-sky"
+  },
+  {
+    id: "autumn-maple",
+    emoji: "🍁",
+    shortName: "가을 단풍",
+    badge: "오색빛깔 가을 낭만",
+    moodDescription: "오색빛깔 가을 단풍 & 은행잎",
+    image: "hero-autumn-maple.webp",
+    titleA: "붉게 물든 숲속 오솔길,",
+    titleB: "오색 단풍 숲으로.",
+    summary: "살랑이는 가을 바람과 사각거리는 단풍잎 사이로 떠나는 힐링 여정",
+    effect: "autumn-maple"
+  },
+  {
+    id: "rainy-camp",
+    emoji: "🌧️",
+    shortName: "감성 우중",
+    badge: "토닥토닥 빗소리",
+    moodDescription: "운치 있는 숲속 낭만 우중 캠핑",
+    image: "hero-rainy-camp.webp",
+    titleA: "타프 위로 토닥이는 빗소리,",
+    titleB: "낭만 우중 캠핑.",
+    summary: "촉촉한 숲의 향기와 따스한 랜턴 불빛이 머무는 가장 아늑한 순간",
+    effect: "rainy-camp"
+  },
+  {
+    id: "snowy-winter",
+    emoji: "❄️",
+    shortName: "설경 윈터",
+    badge: "순백의 겨울 동화",
+    moodDescription: "인제 자작나무숲 설경 캠핑",
+    image: "hero-snowy-winter.webp",
+    titleA: "새하얀 설원 속 순백의 고요,",
+    titleB: "설경 윈터 캠핑.",
+    summary: "소복이 쌓이는 눈꽃과 모닥불의 따스함이 빚어내는 겨울 동화",
+    effect: "snowy-winter"
+  },
+  {
+    id: "lush-forest",
+    emoji: "🌲",
+    shortName: "편백 숲",
+    badge: "피톤치드 힐링",
+    moodDescription: "치유의 편백나무 숲 & 아침 햇살",
+    image: "hero-lush-forest.webp",
+    titleA: "피톤치드 가득한 아침 숲길,",
+    titleB: "치유의 편백숲으로.",
+    summary: "나무 사이로 쏟아지는 눈부신 햇살과 싱그러운 숲의 숨결",
+    effect: "lush-forest"
+  },
+  {
+    id: "riverside",
+    emoji: "🚣",
+    shortName: "호숫가 카약",
+    badge: "물안개 피는 호수",
+    moodDescription: "충주호 잔잔한 물결 & 카약 캠핑",
+    image: "hero-riverside.webp",
+    titleA: "물안개 피어오르는 아침 강가,",
+    titleB: "잔잔한 호숫가로.",
+    summary: "유리알처럼 투명한 수면과 황금빛 일출이 선사하는 평온함",
+    effect: "riverside"
+  },
+  {
+    id: "warm-bonfire",
+    emoji: "🔥",
+    shortName: "불멍 캠핑",
+    badge: "타닥타닥 힐링 불멍",
+    moodDescription: "따스한 모닥불과 솟구치는 불티",
+    image: "hero-warm-bonfire.webp",
+    titleA: "타닥타닥 타오르는 모닥불,",
+    titleB: "힐링 불멍 속으로.",
+    summary: "밤하늘로 솟아오르는 따스한 불티와 감성 알전구 불빛",
+    effect: "warm-bonfire"
+  },
+  {
+    id: "sunset-coast",
+    emoji: "🌅",
+    shortName: "서해안 노을",
+    badge: "붉은 석양의 감동",
+    moodDescription: "서해안 갯벌 일몰 & 노을 해변",
+    image: "hero-sunset-coast.webp",
+    titleA: "붉은 노을이 내려앉은 바다,",
+    titleB: "서해안 노을 해변으로.",
+    summary: "황금빛으로 물드는 갯벌 지평선과 철썩이는 파도 소리",
+    effect: "sunset-coast"
+  },
+  {
+    id: "cherry-blossom",
+    emoji: "🌸",
+    shortName: "봄날 벚꽃",
+    badge: "설레는 꽃비 샤워",
+    moodDescription: "만개한 벚꽃나무 아래 봄 캠핑",
+    image: "hero-cherry-blossom.webp",
+    titleA: "흩날리는 분홍빛 꽃비 아래,",
+    titleB: "설레는 벚꽃 캠핑.",
+    summary: "머리 위로 쏟아지는 꽃잎 샤워와 따스한 봄 햇살 속 캠크닉",
+    effect: "cherry-blossom"
+  },
+  {
+    id: "green-meadow",
+    emoji: "🌿",
+    shortName: "초원 글램핑",
+    badge: "탁 트인 푸른 초원",
+    moodDescription: "대관령 푸른 언덕 & 민들레 홀씨",
+    image: "hero-green-meadow.webp",
+    titleA: "끝없이 펼쳐진 초록빛 언덕,",
+    titleB: "푸른 초원 글램핑.",
+    summary: "탁 트인 푸른 하늘과 보드라운 잔디밭 위에서 누리는 자유",
+    effect: "green-meadow"
+  }
+];
+
+function getInitialHeroIndex() {
+  const hour = new Date().getHours();
+  if (hour >= 20 || hour < 5) return 0; // 밤하늘 별 & 반딧불이
+  if (hour >= 17) return 7; // 서해안 노을
+  if (hour >= 6 && hour < 10) return 4; // 편백 숲 햇살
+  return Math.floor(Math.random() * HERO_THEMES.length);
+}
+
+// Canvas 인터랙션 엔진
+class HeroCanvasController {
+  constructor(canvas, container) {
+    this.canvas = canvas;
+    this.container = container;
+    this.ctx = canvas.getContext("2d");
+    this.width = 0;
+    this.height = 0;
+    this.dpr = 1;
+    this.running = false;
+    this.rafId = null;
+
+    this.mouse = {
+      x: -1000,
+      y: -1000,
+      vx: 0,
+      vy: 0,
+      lastX: -1000,
+      lastY: -1000,
+      isDown: false,
+      active: false
+    };
+
+    this.particles = [];
+    this.ripples = [];
+    this.shootingStars = [];
+    this.currentThemeId = "night-sky";
+    this.time = 0;
+
+    this.onResize = this.resize.bind(this);
+    this.onPointerMove = this.handlePointerMove.bind(this);
+    this.onPointerDown = this.handlePointerDown.bind(this);
+    this.onPointerUp = this.handlePointerUp.bind(this);
+    this.onPointerLeave = this.handlePointerLeave.bind(this);
+    this.onVisibilityChange = this.handleVisibilityChange.bind(this);
+
+    this.initEvents();
+    this.resize();
+  }
+
+  initEvents() {
+    window.addEventListener("resize", this.onResize);
+    document.addEventListener("visibilitychange", this.onVisibilityChange);
+    this.container.addEventListener("pointermove", this.onPointerMove, { passive: true });
+    this.container.addEventListener("pointerdown", this.onPointerDown, { passive: true });
+    window.addEventListener("pointerup", this.onPointerUp, { passive: true });
+    this.container.addEventListener("pointerleave", this.onPointerLeave, { passive: true });
+  }
+
+  resize() {
+    const rect = this.container.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+    this.width = rect.width;
+    this.height = rect.height;
+    this.canvas.width = Math.floor(rect.width * this.dpr);
+    this.canvas.height = Math.floor(rect.height * this.dpr);
+    this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+  }
+
+  handlePointerMove(e) {
+    const rect = this.container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    if (this.mouse.lastX > -500) {
+      this.mouse.vx = (x - this.mouse.lastX) * 0.5;
+      this.mouse.vy = (y - this.mouse.lastY) * 0.5;
+    }
+    this.mouse.lastX = this.mouse.x;
+    this.mouse.lastY = this.mouse.y;
+    this.mouse.x = x;
+    this.mouse.y = y;
+    this.mouse.active = true;
+
+    if (this.currentThemeId === "riverside" && Math.random() < 0.25) {
+      this.ripples.push({ x, y, r: 2, maxR: 70 + Math.random() * 40, alpha: 0.7 });
+    } else if (this.currentThemeId === "rainy-camp" && Math.random() < 0.3) {
+      this.ripples.push({ x, y, r: 1, maxR: 35 + Math.random() * 20, alpha: 0.8 });
+    }
+  }
+
+  handlePointerDown(e) {
+    this.mouse.isDown = true;
+    const rect = this.container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    this.mouse.x = x;
+    this.mouse.y = y;
+
+    if (this.currentThemeId === "night-sky") {
+      this.shootingStars.push({
+        x: Math.max(50, x + 150),
+        y: Math.max(20, y - 100),
+        len: 120 + Math.random() * 60,
+        speed: 16 + Math.random() * 8,
+        angle: Math.PI / 4,
+        alpha: 1,
+        active: true
+      });
+    } else if (this.currentThemeId === "autumn-maple") {
+      for (const p of this.particles) {
+        const dx = p.x - x;
+        const dy = p.y - y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 180 && dist > 0) {
+          p.vx += (dx / dist) * 6;
+          p.vy -= Math.random() * 4 + 2;
+        }
+      }
+    } else if (this.currentThemeId === "warm-bonfire") {
+      for (let i = 0; i < 15; i++) {
+        this.particles.push({
+          x: x + (Math.random() - 0.5) * 40,
+          y: y + (Math.random() - 0.5) * 20,
+          vx: (Math.random() - 0.5) * 6,
+          vy: -Math.random() * 6 - 2,
+          size: Math.random() * 3 + 1.5,
+          life: 1,
+          decay: Math.random() * 0.02 + 0.015,
+          color: Math.random() < 0.6 ? "#ffb300" : "#ff5722"
+        });
+      }
+    } else if (this.currentThemeId === "rainy-camp" || this.currentThemeId === "riverside") {
+      for (let i = 0; i < 3; i++) {
+        this.ripples.push({ x, y, r: i * 8, maxR: 80 + i * 20, alpha: 0.8 });
+      }
+    }
+  }
+
+  handlePointerUp() {
+    this.mouse.isDown = false;
+  }
+
+  handlePointerLeave() {
+    this.mouse.active = false;
+    this.mouse.x = -1000;
+    this.mouse.y = -1000;
+    this.mouse.lastX = -1000;
+    this.mouse.lastY = -1000;
+  }
+
+  handleVisibilityChange() {
+    if (document.hidden) {
+      this.stop();
+    } else {
+      this.start();
+    }
+  }
+
+  setTheme(themeId) {
+    this.currentThemeId = themeId;
+    this.particles = [];
+    this.ripples = [];
+    this.shootingStars = [];
+    this.initParticlesForTheme(themeId);
+  }
+
+  initParticlesForTheme(themeId) {
+    const w = this.width || 800;
+    const h = this.height || 500;
+
+    switch (themeId) {
+      case "night-sky":
+        for (let i = 0; i < 32; i++) {
+          this.particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.6,
+            vy: (Math.random() - 0.5) * 0.6,
+            size: Math.random() * 2.5 + 1.5,
+            pulse: Math.random() * Math.PI * 2,
+            pulseSpeed: Math.random() * 0.04 + 0.02,
+            glow: Math.random() * 12 + 8
+          });
+        }
+        break;
+
+      case "autumn-maple":
+        for (let i = 0; i < 26; i++) {
+          this.particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.8,
+            vy: Math.random() * 1.4 + 0.8,
+            size: Math.random() * 12 + 10,
+            angle: Math.random() * Math.PI * 2,
+            vAngle: (Math.random() - 0.5) * 0.03,
+            flip: Math.random() * Math.PI * 2,
+            vFlip: Math.random() * 0.03 + 0.02,
+            isGinkgo: Math.random() < 0.35,
+            color: Math.random() < 0.4 ? "#e74c3c" : Math.random() < 0.7 ? "#e67e22" : "#f1c40f"
+          });
+        }
+        break;
+
+      case "rainy-camp":
+        for (let i = 0; i < 45; i++) {
+          this.particles.push({
+            x: Math.random() * (w + 100),
+            y: Math.random() * h,
+            speed: Math.random() * 10 + 16,
+            len: Math.random() * 14 + 12,
+            alpha: Math.random() * 0.4 + 0.4
+          });
+        }
+        break;
+
+      case "snowy-winter":
+        for (let i = 0; i < 38; i++) {
+          this.particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * 2.8 + 1.2,
+            vy: Math.random() * 1.2 + 0.6,
+            vx: (Math.random() - 0.5) * 0.4,
+            sway: Math.random() * Math.PI * 2,
+            swaySpeed: Math.random() * 0.03 + 0.01,
+            alpha: Math.random() * 0.4 + 0.5
+          });
+        }
+        break;
+
+      case "lush-forest":
+        for (let i = 0; i < 30; i++) {
+          this.particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * 2.5 + 1.5,
+            vy: -Math.random() * 0.4 - 0.1,
+            vx: (Math.random() - 0.5) * 0.3,
+            alpha: Math.random() * 0.5 + 0.3,
+            pulse: Math.random() * Math.PI * 2,
+            color: Math.random() < 0.5 ? "rgba(168, 255, 120," : "rgba(255, 245, 160,"
+          });
+        }
+        break;
+
+      case "riverside":
+        for (let i = 0; i < 32; i++) {
+          this.particles.push({
+            x: Math.random() * w,
+            y: h * 0.45 + Math.random() * (h * 0.55),
+            size: Math.random() * 2.5 + 1.2,
+            alpha: Math.random() * 0.6 + 0.2,
+            pulse: Math.random() * Math.PI * 2,
+            pulseSpeed: Math.random() * 0.05 + 0.03
+          });
+        }
+        break;
+
+      case "warm-bonfire":
+        for (let i = 0; i < 36; i++) {
+          this.particles.push(this.createEmbersParticle(w, h));
+        }
+        break;
+
+      case "sunset-coast":
+        for (let i = 0; i < 30; i++) {
+          this.particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: -Math.random() * 0.8 - 0.3,
+            vy: (Math.random() - 0.5) * 0.25,
+            size: Math.random() * 2.5 + 1.2,
+            alpha: Math.random() * 0.5 + 0.3,
+            color: Math.random() < 0.5 ? "rgba(255, 167, 38," : "rgba(255, 213, 79,"
+          });
+        }
+        break;
+
+      case "cherry-blossom":
+        for (let i = 0; i < 28; i++) {
+          this.particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.8 - 0.4,
+            vy: Math.random() * 1.2 + 0.6,
+            size: Math.random() * 9 + 7,
+            rot: Math.random() * Math.PI * 2,
+            vRot: (Math.random() - 0.5) * 0.03,
+            flip: Math.random() * Math.PI * 2,
+            vFlip: Math.random() * 0.04 + 0.02,
+            color: Math.random() < 0.5 ? "#ffc0cb" : "#ffb7b2"
+          });
+        }
+        break;
+
+      case "green-meadow":
+        for (let i = 0; i < 25; i++) {
+          this.particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: -Math.random() * 0.6 - 0.2,
+            vy: (Math.random() - 0.5) * 0.3,
+            size: Math.random() * 5 + 6,
+            sway: Math.random() * Math.PI * 2,
+            alpha: Math.random() * 0.4 + 0.5
+          });
+        }
+        break;
+    }
+  }
+
+  createEmbersParticle(w, h) {
+    const originX = w * 0.65 + (Math.random() - 0.5) * (w * 0.3);
+    return {
+      x: originX,
+      y: h - Math.random() * 50,
+      vx: (Math.random() - 0.5) * 1.2,
+      vy: -Math.random() * 2.8 - 1.4,
+      size: Math.random() * 3 + 1.2,
+      life: 1,
+      decay: Math.random() * 0.012 + 0.008,
+      color: Math.random() < 0.4 ? "#fff59d" : Math.random() < 0.75 ? "#ff9800" : "#f44336"
+    };
+  }
+
+  start() {
+    if (this.running) return;
+    this.running = true;
+    const loop = () => {
+      if (!this.running) return;
+      this.updateAndDraw();
+      this.rafId = requestAnimationFrame(loop);
+    };
+    this.rafId = requestAnimationFrame(loop);
+  }
+
+  stop() {
+    this.running = false;
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = null;
+    }
+  }
+
+  destroy() {
+    this.stop();
+    window.removeEventListener("resize", this.onResize);
+    document.removeEventListener("visibilitychange", this.onVisibilityChange);
+    this.container.removeEventListener("pointermove", this.onPointerMove);
+    this.container.removeEventListener("pointerdown", this.onPointerDown);
+    window.removeEventListener("pointerup", this.onPointerUp);
+    this.container.removeEventListener("pointerleave", this.onPointerLeave);
+  }
+
+  updateAndDraw() {
+    const { ctx, width: w, height: h } = this;
+    if (!w || !h) return;
+    ctx.clearRect(0, 0, w, h);
+    this.time += 0.02;
+
+    const mx = this.mouse.x;
+    const my = this.mouse.y;
+    const hasMouse = this.mouse.active && mx > -500;
+
+    switch (this.currentThemeId) {
+      case "night-sky":
+        this.renderNightSky(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "autumn-maple":
+        this.renderAutumnMaple(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "rainy-camp":
+        this.renderRainyCamp(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "snowy-winter":
+        this.renderSnowyWinter(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "lush-forest":
+        this.renderLushForest(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "riverside":
+        this.renderRiverside(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "warm-bonfire":
+        this.renderWarmBonfire(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "sunset-coast":
+        this.renderSunsetCoast(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "cherry-blossom":
+        this.renderCherryBlossom(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "green-meadow":
+        this.renderGreenMeadow(ctx, w, h, mx, my, hasMouse);
+        break;
+    }
+
+    this.mouse.vx *= 0.85;
+    this.mouse.vy *= 0.85;
+  }
+
+  renderNightSky(ctx, w, h, mx, my, hasMouse) {
+    if (Math.random() < 0.012 && this.shootingStars.length < 2) {
+      this.shootingStars.push({
+        x: Math.random() * w * 0.7 + w * 0.2,
+        y: Math.random() * (h * 0.3) + 20,
+        len: 110 + Math.random() * 70,
+        speed: 15 + Math.random() * 8,
+        angle: Math.PI / 4 + (Math.random() - 0.5) * 0.2,
+        alpha: 1,
+        active: true
+      });
+    }
+
+    for (let i = this.shootingStars.length - 1; i >= 0; i--) {
+      const s = this.shootingStars[i];
+      const dx = Math.cos(s.angle) * s.len;
+      const dy = Math.sin(s.angle) * s.len;
+      const grad = ctx.createLinearGradient(s.x, s.y, s.x - dx, s.y - dy);
+      grad.addColorStop(0, `rgba(255, 255, 255, ${s.alpha})`);
+      grad.addColorStop(0.3, `rgba(186, 255, 41, ${s.alpha * 0.6})`);
+      grad.addColorStop(1, "rgba(255, 255, 255, 0)");
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.8;
+      ctx.beginPath();
+      ctx.moveTo(s.x, s.y);
+      ctx.lineTo(s.x - dx, s.y - dy);
+      ctx.stroke();
+
+      s.x += Math.cos(s.angle) * s.speed;
+      s.y += Math.sin(s.angle) * s.speed;
+      s.alpha -= 0.035;
+      if (s.alpha <= 0) this.shootingStars.splice(i, 1);
+    }
+
+    for (const p of this.particles) {
+      p.pulse += p.pulseSpeed;
+      const glowAlpha = Math.max(0.15, (Math.sin(p.pulse) + 1) * 0.45);
+
+      if (hasMouse) {
+        const dx = p.x - mx;
+        const dy = p.y - my;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 120 && dist > 0) {
+          const force = (120 - dist) / 120;
+          if (this.mouse.isDown) {
+            p.vx -= (dx / dist) * force * 0.8;
+            p.vy -= (dy / dist) * force * 0.8;
+          } else {
+            p.vx += (dx / dist) * force * 0.6;
+            p.vy += (dy / dist) * force * 0.6;
+          }
+        }
+      }
+
+      p.x += p.vx + Math.sin(this.time + p.pulse) * 0.4;
+      p.y += p.vy + Math.cos(this.time + p.pulse) * 0.3;
+      p.vx *= 0.96;
+      p.vy *= 0.96;
+
+      if (p.x < -20) p.x = w + 20;
+      else if (p.x > w + 20) p.x = -20;
+      if (p.y < -20) p.y = h + 20;
+      else if (p.y > h + 20) p.y = -20;
+
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.glow);
+      g.addColorStop(0, `rgba(235, 255, 120, ${glowAlpha})`);
+      g.addColorStop(0.3, `rgba(186, 255, 41, ${glowAlpha * 0.5})`);
+      g.addColorStop(1, "rgba(186, 255, 41, 0)");
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.glow, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = `rgba(255, 255, 220, ${glowAlpha + 0.2})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * 0.6, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  renderAutumnMaple(ctx, w, h, mx, my, hasMouse) {
+    for (const p of this.particles) {
+      p.angle += p.vAngle;
+      p.flip += p.vFlip;
+
+      if (hasMouse) {
+        const dx = p.x - mx;
+        const dy = p.y - my;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 100 && dist > 0) {
+          p.vx += this.mouse.vx * 0.2 + (dx / dist) * 1.5;
+          p.vy += this.mouse.vy * 0.1 - 0.5;
+        }
+      }
+
+      p.x += p.vx + Math.sin(p.flip) * 1.2;
+      p.y += p.vy;
+      p.vx *= 0.97;
+
+      if (p.y > h + 30) {
+        p.y = -30;
+        p.x = Math.random() * w;
+        p.vy = Math.random() * 1.4 + 0.8;
+      }
+      if (p.x < -30) p.x = w + 30;
+      else if (p.x > w + 30) p.x = -30;
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.angle);
+      ctx.scale(Math.cos(p.flip), 1);
+      ctx.fillStyle = p.color;
+
+      if (p.isGinkgo) {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.size * 0.8, -Math.PI * 0.75, -Math.PI * 0.25, false);
+        ctx.lineTo(0, p.size * 0.6);
+        ctx.closePath();
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.moveTo(0, -p.size);
+        ctx.lineTo(p.size * 0.35, -p.size * 0.4);
+        ctx.lineTo(p.size * 0.85, -p.size * 0.5);
+        ctx.lineTo(p.size * 0.45, 0.1);
+        ctx.lineTo(p.size * 0.65, p.size * 0.6);
+        ctx.lineTo(0, p.size * 0.35);
+        ctx.lineTo(-p.size * 0.65, p.size * 0.6);
+        ctx.lineTo(-p.size * 0.45, 0.1);
+        ctx.lineTo(-p.size * 0.85, -p.size * 0.5);
+        ctx.lineTo(-p.size * 0.35, -p.size * 0.4);
+        ctx.closePath();
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
+
+  renderRainyCamp(ctx, w, h, mx, my, hasMouse) {
+    ctx.lineWidth = 1.4;
+    for (const p of this.particles) {
+      p.y += p.speed;
+      p.x -= 2;
+
+      if (hasMouse && Math.hypot(p.x - mx, p.y - my) < 30) {
+        this.ripples.push({ x: p.x, y: p.y, r: 1, maxR: 20, alpha: 0.8 });
+        p.y = -20;
+        p.x = Math.random() * (w + 100);
+      }
+
+      if (p.y > h - 10) {
+        if (Math.random() < 0.2) {
+          this.ripples.push({ x: p.x, y: h - 5, r: 1, maxR: 25 + Math.random() * 15, alpha: 0.6 });
+        }
+        p.y = -20;
+        p.x = Math.random() * (w + 100);
+      }
+
+      ctx.strokeStyle = `rgba(180, 220, 255, ${p.alpha})`;
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      ctx.lineTo(p.x - 3, p.y + p.len);
+      ctx.stroke();
+    }
+
+    for (let i = this.ripples.length - 1; i >= 0; i--) {
+      const r = this.ripples[i];
+      r.r += 1.4;
+      r.alpha -= 0.03;
+      if (r.alpha <= 0) {
+        this.ripples.splice(i, 1);
+        continue;
+      }
+      ctx.strokeStyle = `rgba(200, 235, 255, ${r.alpha * 0.5})`;
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.ellipse(r.x, r.y, r.r, r.r * 0.35, 0, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  }
+
+  renderSnowyWinter(ctx, w, h, mx, my, hasMouse) {
+    for (const p of this.particles) {
+      p.sway += p.swaySpeed;
+      if (hasMouse) {
+        const dx = p.x - mx;
+        const dy = p.y - my;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 120 && dist > 0) {
+          p.vx += this.mouse.vx * 0.3 + (dx / dist) * 1.2;
+        }
+      }
+
+      p.x += p.vx + Math.sin(p.sway) * 0.8;
+      p.y += p.vy;
+      p.vx *= 0.98;
+
+      if (p.y > h + 10) {
+        p.y = -10;
+        p.x = Math.random() * w;
+      }
+      if (p.x < -10) p.x = w + 10;
+      else if (p.x > w + 10) p.x = -10;
+
+      ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  renderLushForest(ctx, w, h, mx, my, hasMouse) {
+    for (const p of this.particles) {
+      p.pulse += 0.03;
+      const alpha = Math.max(0.1, p.alpha + Math.sin(p.pulse) * 0.2);
+
+      if (hasMouse) {
+        const dx = mx - p.x;
+        const dy = my - p.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 150 && dist > 0) {
+          p.vx += (dx / dist) * 0.15;
+          p.vy += (dy / dist) * 0.15;
+        }
+      }
+
+      p.x += p.vx + Math.sin(p.pulse) * 0.3;
+      p.y += p.vy;
+      p.vx *= 0.96;
+      p.vy *= 0.96;
+
+      if (p.y < -15) p.y = h + 15;
+      if (p.x < -15) p.x = w + 15;
+      else if (p.x > w + 15) p.x = -15;
+
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3.5);
+      g.addColorStop(0, `${p.color} ${alpha})`);
+      g.addColorStop(1, `${p.color} 0)`);
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 3.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  renderRiverside(ctx, w, h, mx, my, hasMouse) {
+    for (const p of this.particles) {
+      p.pulse += p.pulseSpeed;
+      const alpha = Math.max(0, (Math.sin(p.pulse) + 0.3) * p.alpha);
+      if (alpha > 0.05) {
+        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y - p.size * 2);
+        ctx.lineTo(p.x + p.size * 0.6, p.y);
+        ctx.lineTo(p.x, p.y + p.size * 2);
+        ctx.lineTo(p.x - p.size * 0.6, p.y);
+        ctx.closePath();
+        ctx.fill();
+      }
+    }
+
+    for (let i = this.ripples.length - 1; i >= 0; i--) {
+      const r = this.ripples[i];
+      r.r += 1.2;
+      r.alpha -= 0.015;
+      if (r.alpha <= 0) {
+        this.ripples.splice(i, 1);
+        continue;
+      }
+      ctx.strokeStyle = `rgba(255, 255, 255, ${r.alpha * 0.45})`;
+      ctx.lineWidth = 1.3;
+      ctx.beginPath();
+      ctx.ellipse(r.x, r.y, r.r, r.r * 0.3, 0, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  }
+
+  renderWarmBonfire(ctx, w, h, mx, my, hasMouse) {
+    for (let i = this.particles.length - 1; i >= 0; i--) {
+      const p = this.particles[i];
+      p.life -= p.decay;
+      if (p.life <= 0) {
+        this.particles[i] = this.createEmbersParticle(w, h);
+        continue;
+      }
+
+      if (hasMouse) {
+        const dx = p.x - mx;
+        const dy = p.y - my;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 100 && dist > 0) {
+          p.vx += this.mouse.vx * 0.2 + (dx / dist) * 1.5;
+          p.vy -= 1.2;
+        }
+      }
+
+      p.x += p.vx + Math.sin(this.time * 2 + i) * 0.6;
+      p.y += p.vy;
+      p.vx *= 0.98;
+
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.life;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  renderSunsetCoast(ctx, w, h, mx, my, hasMouse) {
+    for (const p of this.particles) {
+      if (hasMouse) {
+        const dx = p.x - mx;
+        const dy = p.y - my;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 110 && dist > 0) {
+          p.vx += (dx / dist) * 0.8;
+          p.vy += (dy / dist) * 0.8;
+        }
+      }
+
+      p.x += p.vx;
+      p.y += p.vy + Math.sin(this.time + p.x * 0.01) * 0.3;
+      p.vx *= 0.98;
+      p.vy *= 0.98;
+
+      if (p.x < -15) p.x = w + 15;
+      if (p.y < -15) p.y = h + 15;
+      else if (p.y > h + 15) p.y = -15;
+
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 2.5);
+      g.addColorStop(0, `${p.color} ${p.alpha})`);
+      g.addColorStop(1, `${p.color} 0)`);
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * 2.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  renderCherryBlossom(ctx, w, h, mx, my, hasMouse) {
+    for (const p of this.particles) {
+      p.rot += p.vRot;
+      p.flip += p.vFlip;
+
+      if (hasMouse) {
+        const dx = p.x - mx;
+        const dy = p.y - my;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 110 && dist > 0) {
+          p.vx += this.mouse.vx * 0.2 + (dx / dist) * 1.4;
+          p.vy -= 0.6;
+        }
+      }
+
+      p.x += p.vx + Math.sin(p.flip) * 1.1;
+      p.y += p.vy;
+      p.vx *= 0.97;
+
+      if (p.y > h + 20) {
+        p.y = -20;
+        p.x = Math.random() * w;
+      }
+      if (p.x < -20) p.x = w + 20;
+      else if (p.x > w + 20) p.x = -20;
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.scale(Math.cos(p.flip), 1);
+      ctx.fillStyle = p.color;
+
+      ctx.beginPath();
+      ctx.moveTo(0, -p.size);
+      ctx.bezierCurveTo(p.size * 0.6, -p.size * 0.6, p.size * 0.6, p.size * 0.6, 0, p.size);
+      ctx.bezierCurveTo(-p.size * 0.6, p.size * 0.6, -p.size * 0.6, -p.size * 0.6, 0, -p.size);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  renderGreenMeadow(ctx, w, h, mx, my, hasMouse) {
+    for (const p of this.particles) {
+      p.sway += 0.02;
+
+      if (hasMouse) {
+        const dx = p.x - mx;
+        const dy = p.y - my;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 140 && dist > 0) {
+          p.vx += this.mouse.vx * 0.35 + (dx / dist) * 2;
+          p.vy += this.mouse.vy * 0.2 - 0.8;
+        }
+      }
+
+      p.x += p.vx + Math.sin(p.sway) * 0.5;
+      p.y += p.vy;
+      p.vx *= 0.97;
+      p.vy *= 0.97;
+
+      if (p.x < -30) p.x = w + 30;
+      if (p.y < -30) p.y = h + 30;
+      else if (p.y > h + 30) p.y = -30;
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.strokeStyle = `rgba(255, 255, 255, ${p.alpha * 0.8})`;
+      ctx.fillStyle = `rgba(240, 225, 200, ${p.alpha})`;
+      ctx.lineWidth = 1;
+
+      ctx.beginPath();
+      ctx.arc(0, p.size * 0.5, 1.2, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.moveTo(0, p.size * 0.5);
+      ctx.lineTo(0, -p.size * 0.3);
+      ctx.stroke();
+
+      for (let a = -0.8; a <= 0.8; a += 0.4) {
+        ctx.beginPath();
+        ctx.moveTo(0, -p.size * 0.3);
+        ctx.lineTo(Math.sin(a) * p.size * 0.8, -p.size * 0.3 - Math.cos(a) * p.size * 0.6);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+  }
+}
+
+let heroCanvasInstance = null;
+let heroThemeIndex = 0;
+let heroAutoTimer = null;
+let heroIsAutoRolling = true;
+
+function initHeroDynamicEngine(v) {
+  const heroSec = v.querySelector("[data-hero-section]");
+  if (!heroSec) return;
+
+  const canvas = heroSec.querySelector("#hero-fx-canvas");
+  const layerA = heroSec.querySelector(".hero-bg-a");
+  const layerB = heroSec.querySelector(".hero-bg-b");
+  const badgeEl = heroSec.querySelector("[data-hero-badge]");
+  const titleAEl = heroSec.querySelector("[data-hero-title-a]");
+  const titleBEl = heroSec.querySelector("[data-hero-title-b]");
+  const summaryEl = heroSec.querySelector("[data-hero-summary]");
+  const autoBtn = heroSec.querySelector("[data-hero-auto-toggle]");
+  const chips = heroSec.querySelectorAll("[data-hero-theme]");
+
+  if (heroCanvasInstance) {
+    heroCanvasInstance.destroy();
+    heroCanvasInstance = null;
+  }
+  if (heroAutoTimer) {
+    clearInterval(heroAutoTimer);
+    heroAutoTimer = null;
+  }
+
+  if (canvas) {
+    heroCanvasInstance = new HeroCanvasController(canvas, heroSec);
+    heroCanvasInstance.start();
+  }
+
+  let activeLayer = "A";
+
+  function applyTheme(idx, animate = true) {
+    heroThemeIndex = (idx + HERO_THEMES.length) % HERO_THEMES.length;
+    const theme = HERO_THEMES[heroThemeIndex];
+    heroSec.dataset.heroCurrentTheme = theme.id;
+
+    const imgUrl = `${APP_BASE}images/hero/${theme.image}`;
+    const nextLayer = activeLayer === "A" ? layerB : layerA;
+    const curLayer = activeLayer === "A" ? layerA : layerB;
+
+    if (nextLayer && curLayer) {
+      nextLayer.style.backgroundImage = `url("${imgUrl}")`;
+      nextLayer.classList.add("active");
+      curLayer.classList.remove("active");
+      activeLayer = activeLayer === "A" ? "B" : "A";
+    }
+
+    if (heroCanvasInstance) {
+      heroCanvasInstance.setTheme(theme.id);
+    }
+
+    if (animate) {
+      [titleAEl, titleBEl, summaryEl, badgeEl].forEach((el) => el?.classList.add("hero-text-changing"));
+      setTimeout(() => {
+        updateText();
+        [titleAEl, titleBEl, summaryEl, badgeEl].forEach((el) => el?.classList.remove("hero-text-changing"));
+      }, 150);
+    } else {
+      updateText();
+    }
+
+    function updateText() {
+      if (badgeEl) {
+        badgeEl.innerHTML = `<span class="mood-dot" aria-hidden="true"></span><b>${theme.emoji} ${esc(theme.badge)}</b><span>·</span><span>${esc(theme.moodDescription)}</span>`;
+      }
+      if (titleAEl) titleAEl.textContent = theme.titleA;
+      if (titleBEl) {
+        titleBEl.innerHTML = `전국 <b class="hero-n" data-hero-total>${fmt(heroCounts().total)}</b>곳 <em>${esc(theme.titleB)}</em>`;
+      }
+      if (summaryEl) {
+        summaryEl.innerHTML = `캠핑장 <b data-hero-stay>${fmt(heroCounts().stay)}</b>곳 · 당일 나들이 <b data-hero-day>${fmt(heroCounts().day)}</b>곳, ${esc(theme.summary)}`;
+      }
+    }
+
+    chips.forEach((c) => {
+      const match = c.dataset.heroTheme === theme.id;
+      c.classList.toggle("active", match);
+      c.setAttribute("aria-pressed", String(match));
+      if (match) {
+        const parent = c.parentElement;
+        if (parent && parent.scrollTo) {
+          const chipLeft = c.offsetLeft - parent.offsetLeft;
+          parent.scrollTo({ left: Math.max(0, chipLeft - 20), behavior: "smooth" });
+        }
+      }
+    });
+  }
+
+  // Initial theme
+  const initialId = heroSec.dataset.heroCurrentTheme;
+  const initialIdx = Math.max(0, HERO_THEMES.findIndex((t) => t.id === initialId));
+  applyTheme(initialIdx, false);
+
+  function startAutoRolling() {
+    if (heroAutoTimer) clearInterval(heroAutoTimer);
+    heroAutoTimer = setInterval(() => {
+      if (!heroIsAutoRolling || document.hidden || !heroSec.isConnected) return;
+      const rect = heroSec.getBoundingClientRect();
+      if (rect.bottom < 50 || rect.top > window.innerHeight) return;
+      applyTheme(heroThemeIndex + 1, true);
+    }, 10000);
+  }
+  startAutoRolling();
+
+  // IntersectionObserver to pause canvas animation and auto rolling when hero is offscreen
+  let heroIo = null;
+  if ("IntersectionObserver" in window) {
+    heroIo = new IntersectionObserver((entries) => {
+      const isVis = entries[0].isIntersecting;
+      if (!isVis) {
+        if (heroCanvasInstance) heroCanvasInstance.stop();
+      } else {
+        if (heroCanvasInstance) heroCanvasInstance.start();
+      }
+    }, { threshold: 0.05 });
+    heroIo.observe(heroSec);
+  }
+
+  chips.forEach((c, idx) => {
+    c.addEventListener("click", () => {
+      applyTheme(idx, true);
+      startAutoRolling();
+    });
+  });
+
+  if (autoBtn) {
+    const pauseIcon = autoBtn.querySelector(".hero-pause-icon");
+    const playIcon = autoBtn.querySelector(".hero-play-icon");
+    autoBtn.addEventListener("click", () => {
+      heroIsAutoRolling = !heroIsAutoRolling;
+      autoBtn.setAttribute("aria-label", heroIsAutoRolling ? "자동 롤링 일시정지" : "자동 롤링 재생");
+      autoBtn.setAttribute("title", heroIsAutoRolling ? "자동 롤링 일시정지" : "자동 롤링 재생");
+      if (pauseIcon) pauseIcon.style.display = heroIsAutoRolling ? "block" : "none";
+      if (playIcon) playIcon.style.display = heroIsAutoRolling ? "none" : "block";
+      if (heroIsAutoRolling) startAutoRolling();
+    });
+  }
+
+  cleanup.push(() => {
+    if (heroIo) {
+      heroIo.disconnect();
+      heroIo = null;
+    }
+    if (heroCanvasInstance) {
+      heroCanvasInstance.destroy();
+      heroCanvasInstance = null;
+    }
+    if (heroAutoTimer) {
+      clearInterval(heroAutoTimer);
+      heroAutoTimer = null;
+    }
+  });
+}
+
 function homeView() {
   const openings = S.camps.map((c) => [c, openingOf(c)]).filter(([c, o]) => o && showcaseEligible(c)).sort((a, b) => a[1].dd - b[1].dd);
   const themeItems = THEMES.map(([key, label, test]) => {
@@ -1815,12 +2928,41 @@ function homeView() {
     <div class="sec-head"><h2 id="theme-t">테마로 <em>고르기</em></h2><div class="sec-side"><a class="link more-link" href="${APP_BASE}theme/ALL">더보기 ${ic("right")}</a></div></div>
     <div class="rail theme-catalog-rail">${themeItems}</div>
   </section>` : "";
+
+  const initialIdx = getInitialHeroIndex();
+  const initialTheme = HERO_THEMES[initialIdx];
+
   return `
-  <section class="hero" aria-labelledby="hero-t">
-    <div class="hero-bg" aria-hidden="true"></div>
+  <section class="hero" aria-labelledby="hero-t" data-hero-section data-hero-current-theme="${initialTheme.id}">
+    <div class="hero-bg-layer hero-bg-a active" style="background-image: url('${APP_BASE}images/hero/${initialTheme.image}');" aria-hidden="true"></div>
+    <div class="hero-bg-layer hero-bg-b" aria-hidden="true"></div>
+    <canvas id="hero-fx-canvas" class="hero-fx-canvas" aria-hidden="true"></canvas>
     <div class="hero-in">
-      <h1 id="hero-t"><span class="h1-a">취향대로 찾아 떠나는</span> <span class="h1-b">전국 <b class="hero-n" data-hero-total>${fmt(heroCounts().total)}</b>곳 <em>자연 속으로.</em></span></h1>
-      <p class="hero-summary">캠핑장 <b data-hero-stay>${fmt(heroCounts().stay)}</b>곳 · 당일 나들이 <b data-hero-day>${fmt(heroCounts().day)}</b>곳, 조건으로 골라 보세요</p>
+      <div class="hero-mood-bar" aria-label="감성 캠핑 테마">
+        <span class="hero-mood-badge" data-hero-badge>
+          <span class="mood-dot" aria-hidden="true"></span>
+          <b>${initialTheme.emoji} ${esc(initialTheme.badge)}</b><span>·</span><span>${esc(initialTheme.moodDescription)}</span>
+        </span>
+        <div class="hero-theme-nav" aria-label="테마 선택">
+          <div class="hero-chips rail">
+            ${HERO_THEMES.map((t, idx) => `
+              <button type="button" class="hero-theme-chip ${idx === initialIdx ? "active" : ""}" data-hero-theme="${t.id}" title="${esc(t.moodDescription)}" aria-pressed="${idx === initialIdx}">
+                <span class="hero-theme-icon">${t.emoji}</span>
+                <span class="hero-theme-label">${esc(t.shortName)}</span>
+              </button>
+            `).join("")}
+          </div>
+          <button type="button" class="hero-auto-toggle" data-hero-auto-toggle aria-label="자동 롤링 일시정지" title="자동 롤링 일시정지">
+            <svg class="hero-pause-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            <svg class="hero-play-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:none;"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+      </div>
+      <h1 id="hero-t">
+        <span class="h1-a" data-hero-title-a>${esc(initialTheme.titleA)}</span>
+        <span class="h1-b" data-hero-title-b>전국 <b class="hero-n" data-hero-total>${fmt(heroCounts().total)}</b>곳 <em>${esc(initialTheme.titleB)}</em></span>
+      </h1>
+      <p class="hero-summary" data-hero-summary>캠핑장 <b data-hero-stay>${fmt(heroCounts().stay)}</b>곳 · 당일 나들이 <b data-hero-day>${fmt(heroCounts().day)}</b>곳, ${esc(initialTheme.summary)}</p>
       <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div>${commonFinderForm({ formAttr: "data-search", isList: false })}</div>
     </div>
   </section>
@@ -2567,6 +3709,7 @@ function bindHome() {
   initCarousels(v);
   initDraggableRails(v);
   mountTrending();
+  initHeroDynamicEngine(v);
   cleanup.push(() => { io.disconnect(); v.removeEventListener("click", homeClicks); });
 }
 function homeClicks(e) {
