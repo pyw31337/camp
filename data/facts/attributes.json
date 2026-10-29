@@ -178,10 +178,10 @@
    "filter": "in",
    "note": "count가 있으면 면·동 수. text는 세부 이름(방갈로·캐빈 등). 원천: 고캠핑 등록값·소개글, 카카오/네이버 분류, 운영자 홈페이지 문장(lib/site-types.mjs)",
    "coverage": {
-    "campgrounds": 3421,
+    "campgrounds": 3422,
     "by_grade": {
      "CONFIRMED": 5781,
-     "MENTION": 5026,
+     "MENTION": 5028,
      "OPERATOR": 1080
     }
    }
@@ -481,9 +481,9 @@
    "filter": "max",
    "note": "MENTION 전용. 확정값으로 쓰지 않는다",
    "coverage": {
-    "campgrounds": 2708,
+    "campgrounds": 2710,
     "by_grade": {
-     "MENTION": 13818
+     "MENTION": 13822
     }
    }
   },
@@ -571,7 +571,7 @@
    "coverage": {
     "campgrounds": 2765,
     "by_grade": {
-     "MENTION": 3502,
+     "MENTION": 3503,
      "REFERENCE": 452,
      "OPERATOR": 645,
      "CONFIRMED": 4
@@ -588,7 +588,7 @@
    "coverage": {
     "campgrounds": 2705,
     "by_grade": {
-     "MENTION": 3487,
+     "MENTION": 3488,
      "REFERENCE": 445,
      "OPERATOR": 612,
      "CONFIRMED": 2
@@ -2655,5 +2655,5 @@
    }
   }
  ],
- "generated_at": "2026-10-28T23:17:42.026Z"
+ "generated_at": "2026-10-29T01:28:56.330Z"
 }

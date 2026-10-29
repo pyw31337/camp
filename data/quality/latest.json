@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-28T23:17:59.826Z",
+ "generated_at": "2026-10-29T01:29:13.849Z",
  "date": "2026-10-29",
  "totals": {
   "campgrounds": 6416,
-  "facts": 238085,
-  "pairs": 188947,
+  "facts": 238093,
+  "pairs": 188950,
   "mean_confidence": 0.786,
   "confirmed_pct": 85,
   "corroborated": 3944,
@@ -947,15 +947,15 @@
    }
   },
   "PRICE_MENTION": {
-   "coverage": 2708,
+   "coverage": 2710,
    "coverage_pct": 42.2,
    "mean_confidence": 0.367,
    "confirmed_pct": 0,
    "corroborated": 370,
    "conflicts": 0,
-   "weak": 2338,
+   "weak": 2340,
    "status": {
-    "WEAK": 2338,
+    "WEAK": 2340,
     "CORROBORATED": 370
    }
   },
@@ -1014,7 +1014,7 @@
   "REVIEW_PRO_WIDE_SITE": {
    "coverage": 1177,
    "coverage_pct": 18.3,
-   "mean_confidence": 0.361,
+   "mean_confidence": 0.36,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
@@ -1241,7 +1241,7 @@
   "REVIEW_CON_OLD_FACILITY": {
    "coverage": 28,
    "coverage_pct": 0.4,
-   "mean_confidence": 0.334,
+   "mean_confidence": 0.333,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
@@ -1707,16 +1707,16 @@
    }
   },
   "SITE_TYPE": {
-   "coverage": 3421,
+   "coverage": 3422,
    "coverage_pct": 53.3,
    "mean_confidence": 0.744,
    "confirmed_pct": 77.5,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 762,
+   "weak": 763,
    "status": {
     "CONFIRMED": 2651,
-    "WEAK": 762,
+    "WEAK": 763,
     "SINGLE": 8
    }
   },
