@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-10-29T00:53:55.593Z",
+ "generated_at": "2026-10-29T18:27:28.102Z",
  "source": {
   "label": "카카오 로컬 키워드 검색 · Daum 웹 검색(공식 REST API)",
   "docs": [
@@ -8488,7 +8488,7 @@
    "homepage": null
   },
   "977": {
-   "checked_at": "2026-10-16T05:35:57.354Z",
+   "checked_at": "2026-10-29T18:27:25.008Z",
    "place": null,
    "candidates": [
     {
@@ -8548,6 +8548,18 @@
       {
        "title": "로하스캠핑, 글램핑",
        "url": "https://camplink.co.kr:444/?cam=camp1177"
+      }
+     ]
+    },
+    {
+     "host": "mobistation.co.kr",
+     "url": "https://mobistation.co.kr/camping/detail/81cec4c86e9b813d1da3fd33f3cce1c1b7688846c4f32608c3019ce0c98bd70a",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "[캠핑장] 로하스캠핑 - 경기도 연천군 위치 및 시설 정보 | 모비스테이션",
+       "url": "https://mobistation.co.kr/camping/detail/81cec4c86e9b813d1da3fd33f3cce1c1b7688846c4f32608c3019ce0c98bd70a"
       }
      ]
     }
@@ -17762,7 +17774,7 @@
    "homepage": null
   },
   "2472": {
-   "checked_at": "2026-10-29T00:53:54.986Z",
+   "checked_at": "2026-10-29T18:27:27.413Z",
    "place": {
     "id": "898560745",
     "name": "원주두리캠핑장",
@@ -46294,7 +46306,7 @@
    "homepage": null
   },
   "100122": {
-   "checked_at": "2026-10-29T00:53:52.921Z",
+   "checked_at": "2026-10-29T18:27:26.640Z",
    "place": {
     "id": "1579667394",
     "name": "라플란드",
@@ -49580,7 +49592,7 @@
    "homepage": null
   },
   "100289": {
-   "checked_at": "2026-10-16T05:37:15.462Z",
+   "checked_at": "2026-10-29T18:27:26.201Z",
    "place": {
     "id": "828875441",
     "name": "가델캠핑장",
@@ -49616,6 +49628,18 @@
      ]
     },
     {
+     "host": "enjoeat.com",
+     "url": "https://enjoeat.com/camping/100289",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "가델관광농원 – 아산시 일반야영장 예약·시설·날씨",
+       "url": "https://enjoeat.com/camping/100289"
+      }
+     ]
+    },
+    {
      "host": "mobistation.co.kr",
      "url": "https://mobistation.co.kr/camping/detail/b9b95fa6b9fc460535796984e676f863434d58f810797a531f9889a0e18058d8",
      "score": 10,
@@ -49624,6 +49648,30 @@
       {
        "title": "[캠핑장] 가델관광농원 - 충청남도 아산시 위치 및 시설 정보 | 모비스테이션",
        "url": "https://mobistation.co.kr/camping/detail/b9b95fa6b9fc460535796984e676f863434d58f810797a531f9889a0e18058d8"
+      }
+     ]
+    },
+    {
+     "host": "campchu.com",
+     "url": "https://campchu.com/camp/2636",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "가델관광농원 — 충남 아산시 일반야영장",
+       "url": "https://campchu.com/camp/2636"
+      }
+     ]
+    },
+    {
+     "host": "campweek.co.kr",
+     "url": "https://campweek.co.kr/index.php?ptype=webpage=4page=4&page=179",
+     "score": 4,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "유수암 캠핑장",
+       "url": "https://campweek.co.kr/index.php?ptype=webpage=4page=4&page=179"
       }
      ]
     }
@@ -59686,7 +59734,7 @@
    "homepage": null
   },
   "100597": {
-   "checked_at": "2026-10-29T00:53:52.924Z",
+   "checked_at": "2026-10-29T18:27:26.796Z",
    "place": {
     "id": "1537097954",
     "name": "노리터키즈캠핑장",
@@ -59705,18 +59753,6 @@
     }
    },
    "candidates": [
-    {
-     "host": "opendatflow.com",
-     "url": "https://opendatflow.com/camping-sites/3626",
-     "score": 10,
-     "hits": 1,
-     "evidence": [
-      {
-       "title": "노리터 키즈 캠핑장 — 물놀이장, 바베큐 — 충북 청주시 낭성면 — 위치",
-       "url": "https://opendatflow.com/camping-sites/3626"
-      }
-     ]
-    },
     {
      "host": "koggili.net",
      "url": "https://koggili.net/products/64725530642706fed7b2c4ef",
@@ -59762,6 +59798,18 @@
       {
        "title": "수암골전망대 별보기 좋은 곳",
        "url": "https://www.starscore.kr/places/chungbuk/5230"
+      }
+     ]
+    },
+    {
+     "host": "zzims.kr",
+     "url": "http://www.zzims.kr/home/camp_info.html?znum=166",
+     "score": 4,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "캠핑장   청주키즈캠핑장 충청북도 (137) 청주시 (5) 상당구 (3)",
+       "url": "http://www.zzims.kr/home/camp_info.html?znum=166"
       }
      ]
     }
@@ -62915,7 +62963,7 @@
    "homepage": null
   },
   "100676": {
-   "checked_at": "2026-10-29T00:53:54.348Z",
+   "checked_at": "2026-10-29T18:27:26.817Z",
    "place": null,
    "candidates": [
     {
@@ -64512,7 +64560,7 @@
    "homepage": null
   },
   "100721": {
-   "checked_at": "2026-10-16T05:37:50.999Z",
+   "checked_at": "2026-10-29T18:27:26.329Z",
    "place": {
     "id": "1779251680",
     "name": "캠핑굄성",
@@ -64556,6 +64604,42 @@
       {
        "title": "캠핑 굄성",
        "url": "https://campweek.co.kr/index.php?ptype=webpage=4page=4&page=167"
+      }
+     ]
+    },
+    {
+     "host": "campingdogam.com",
+     "url": "https://campingdogam.com/camp/100721/",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "캠핑 굄성 — 충남 홍성군 캠핑장",
+       "url": "https://campingdogam.com/camp/100721/"
+      }
+     ]
+    },
+    {
+     "host": "enjoeat.com",
+     "url": "https://enjoeat.com/camping/100721",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "캠핑 굄성 – 홍성군 일반야영장 예약·시설·날씨",
+       "url": "https://enjoeat.com/camping/100721"
+      }
+     ]
+    },
+    {
+     "host": "campchu.com",
+     "url": "https://campchu.com/camp/2972",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "캠핑 굄성 — 충남 홍성군 일반야영장",
+       "url": "https://campchu.com/camp/2972"
       }
      ]
     }
@@ -76651,7 +76735,7 @@
    "homepage": null
   },
   "101093": {
-   "checked_at": "2026-10-29T00:53:55.056Z",
+   "checked_at": "2026-10-29T18:27:27.589Z",
    "place": null,
    "candidates": [
     {
@@ -76663,18 +76747,6 @@
       {
        "title": "[N숙소] 신림스테이캠프 ( 강원특별자치도 원주시 신림면 )",
        "url": "http://carmap.co.kr/web/mplus/nbiz/nview.php?nid=MA0101202307A0042087&NCODE=I10104&sigun=6420000&gugun=4190000"
-      }
-     ]
-    },
-    {
-     "host": "opendatflow.com",
-     "url": "https://opendatflow.com/camping-sites/4122",
-     "score": 10,
-     "hits": 1,
-     "evidence": [
-      {
-       "title": "신림스테이캠프 — 계곡, 물놀이장, 오토캠핑장 — 강원 원주시 신림면",
-       "url": "https://opendatflow.com/camping-sites/4122"
       }
      ]
     },
@@ -80962,7 +81034,7 @@
    "homepage": null
   },
   "101214": {
-   "checked_at": "2026-10-16T05:36:18.776Z",
+   "checked_at": "2026-10-29T18:27:25.036Z",
    "place": {
     "id": "661902238",
     "name": "캠프다온",
@@ -80994,6 +81066,18 @@
      ]
     },
     {
+     "host": "enjoeat.com",
+     "url": "https://enjoeat.com/camping/101214",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "캠프다온 – 포천시 일반야영장 예약·시설·날씨",
+       "url": "https://enjoeat.com/camping/101214"
+      }
+     ]
+    },
+    {
      "host": "campchu.com",
      "url": "https://campchu.com/camp/2101",
      "score": 10,
@@ -81018,6 +81102,18 @@
       {
        "title": "오지고",
        "url": "https://ojigo.kr/camping/view/100585"
+      }
+     ]
+    },
+    {
+     "host": "ndex.kr",
+     "url": "https://www.ndex.kr/data/kindm9",
+     "score": 4,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "오늘도 해 보았습니다",
+       "url": "https://www.ndex.kr/data/kindm9"
       }
      ]
     }
@@ -82905,7 +83001,7 @@
    "homepage": null
   },
   "101269": {
-   "checked_at": "2026-10-29T00:53:52.879Z",
+   "checked_at": "2026-10-29T18:27:26.338Z",
    "place": {
     "id": "826081055",
     "name": "골든쌔들캠핑장",
@@ -82931,7 +83027,7 @@
      "hits": 1,
      "evidence": [
       {
-       "title": "골든쌔들 캠핑장 — 바베큐 — 경기 양평군 용문면 — 전화번호, 위치",
+       "title": "골든쌔들 캠핑장 위치 (경기 양평군 용문면)",
        "url": "https://opendatflow.com/camping-sites/4298"
       }
      ]
@@ -88215,7 +88311,7 @@
    "homepage": null
   },
   "101416": {
-   "checked_at": "2026-10-16T05:37:04.604Z",
+   "checked_at": "2026-10-29T18:27:25.038Z",
    "place": {
     "id": "1931362185",
     "name": "내포캠핑스퀘어",
@@ -88247,18 +88343,6 @@
      ]
     },
     {
-     "host": "opendatflow.com",
-     "url": "https://opendatflow.com/camping-sites/4445",
-     "score": 10,
-     "hits": 1,
-     "evidence": [
-      {
-       "title": "내포캠핑스퀘어 — 계곡, 오토캠핑장, 바베큐 — 충남 홍성군 홍북읍",
-       "url": "https://opendatflow.com/camping-sites/4445"
-      }
-     ]
-    },
-    {
      "host": "campingdogam.com",
      "url": "https://campingdogam.com/camp/101709/",
      "score": 10,
@@ -88267,6 +88351,42 @@
       {
        "title": "내포캠핑스퀘어2 — 충남 홍성군 캠핑장",
        "url": "https://campingdogam.com/camp/101709/"
+      }
+     ]
+    },
+    {
+     "host": "dokdokplace.kr",
+     "url": "https://dokdokplace.kr/stores/i1/i101/i10104/chungcheongnam-do/hongseong-gun/",
+     "score": 4,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "충청남도 홍성군 캠핑 글램핑 상가 목록",
+       "url": "https://dokdokplace.kr/stores/i1/i101/i10104/chungcheongnam-do/hongseong-gun/"
+      }
+     ]
+    },
+    {
+     "host": "starscore.kr",
+     "url": "https://www.starscore.kr/places/chungnam/284",
+     "score": 4,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "홍성 용봉산 별보기 좋은 곳",
+       "url": "https://www.starscore.kr/places/chungnam/284"
+      }
+     ]
+    },
+    {
+     "host": "local.114-service.co.kr",
+     "url": "https://local.114-service.co.kr/map/detail/MA0101202406A0435636",
+     "score": 4,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "[내포캠핑스퀘어] 충청남도 홍성군 홍북읍 캠핑/글램핑 위치 · 업종 · 주소 정보 - 타운커넥트",
+       "url": "https://local.114-service.co.kr/map/detail/MA0101202406A0435636"
       }
      ]
     }
@@ -94963,7 +95083,7 @@
    "homepage": null
   },
   "101608": {
-   "checked_at": "2026-10-29T00:53:52.923Z",
+   "checked_at": "2026-10-29T18:27:26.669Z",
    "place": {
     "id": "2026652673",
     "name": "원더 포레스트",
@@ -95892,7 +96012,7 @@
    "homepage": null
   },
   "101639": {
-   "checked_at": "2026-10-16T05:36:45.505Z",
+   "checked_at": "2026-10-29T18:27:25.037Z",
    "place": {
     "id": "604025620",
     "name": "물멍 캠프",
@@ -114281,7 +114401,7 @@
    "homepage": null
   },
   "102221": {
-   "checked_at": "2026-10-29T00:53:54.857Z",
+   "checked_at": "2026-10-29T18:27:27.279Z",
    "place": null,
    "candidates": [
     {
@@ -114442,7 +114562,7 @@
    "homepage": null
   },
   "102229": {
-   "checked_at": "2026-10-29T00:53:54.567Z",
+   "checked_at": "2026-10-29T18:27:27.136Z",
    "place": null,
    "candidates": [],
    "needs_homepage": false,
@@ -115259,7 +115379,7 @@
    "homepage": null
   },
   "102270": {
-   "checked_at": "2026-10-29T00:53:54.839Z",
+   "checked_at": "2026-10-29T18:27:27.268Z",
    "place": null,
    "candidates": [
     {
@@ -118254,7 +118374,7 @@
    "homepage": null
   },
   "102377": {
-   "checked_at": "2026-10-29T00:53:54.563Z",
+   "checked_at": "2026-10-29T18:27:27.116Z",
    "place": null,
    "candidates": [],
    "needs_homepage": true,
