@@ -15287,7 +15287,10 @@
 {"cid":"park-41670-00017-y801m","attr":"REVIEW_PRO_EASY_PARKING","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/lu2u3u/224417112558","at":"2026-09-19","n":1,"text":"주차 편함·옆 주차"}
 {"cid":"park-41670-00017-y801m","attr":"REVIEW_PRO_WALK","value":1,"grade":"MENTION","src":"review_search","url":"https://doing-this-weekend.tistory.com/47","at":"2026-10-14","n":1,"text":"산책·둘레길 좋음"}
 {"cid":"park-41670-00017-y801m","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://cafe.daum.net/newx5/c8x5/401","at":"2026-09-04","n":1,"text":"사이트 넓음"}
+{"cid":"park-41800-00003-18ggn","attr":"REVIEW_CON_NOISE","value":1,"grade":"MENTION","src":"review_search","url":"https://best-shop.sailing-blog.click/104","at":"2025-03-21","n":1,"text":"소음·매너"}
 {"cid":"park-41800-00003-18ggn","attr":"REVIEW_COUNT","value":4,"grade":"MENTION","src":"review_search","n":4}
+{"cid":"park-41800-00003-18ggn","attr":"REVIEW_PRO_QUIET","value":1,"grade":"MENTION","src":"review_search","url":"https://best-shop.sailing-blog.click/104","at":"2025-03-21","n":1,"text":"조용·한적"}
+{"cid":"park-41800-00003-18ggn","attr":"REVIEW_PRO_WATER","value":1,"grade":"MENTION","src":"review_search","url":"https://best-shop.sailing-blog.click/104","at":"2025-03-21","n":1,"text":"계곡·물놀이 좋음"}
 {"cid":"park-41800-00005-16akw","attr":"REVIEW_COUNT","value":2,"grade":"MENTION","src":"review_search","n":2}
 {"cid":"park-41820-00001-irehs","attr":"REVIEW_COUNT","value":3,"grade":"MENTION","src":"review_search","n":3}
 {"cid":"park-41820-00001-irehs","attr":"REVIEW_PRO_VIEW","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/jrumming/224323953344","at":"2026-06-22","n":1,"text":"뷰·경치 좋음"}
@@ -15392,6 +15395,9 @@
 {"cid":"park-46130-00166-569wi","attr":"REVIEW_PRO_WALK","value":1,"grade":"MENTION","src":"review_search","url":"https://brightcw.tistory.com/763","at":"2025-12-22","n":1,"text":"산책·둘레길 좋음"}
 {"cid":"park-46130-00167-18n3l","attr":"REVIEW_COUNT","value":2,"grade":"MENTION","src":"review_search","n":2}
 {"cid":"park-46130-00170-op7lw","attr":"REVIEW_COUNT","value":1,"grade":"MENTION","src":"review_search","n":1}
+{"cid":"park-46130-00170-op7lw","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://enjoymytown.tistory.com/101","at":"2026-10-15","n":1,"text":"시설 깔끔·쾌적"}
+{"cid":"park-46130-00170-op7lw","attr":"REVIEW_PRO_WALK","value":1,"grade":"MENTION","src":"review_search","url":"https://enjoymytown.tistory.com/101","at":"2026-10-15","n":1,"text":"산책·둘레길 좋음"}
+{"cid":"park-46130-00170-op7lw","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://enjoymytown.tistory.com/101","at":"2026-10-15","n":1,"text":"사이트 넓음"}
 {"cid":"park-46150-00180-1es0l","attr":"REVIEW_COUNT","value":2,"grade":"MENTION","src":"review_search","n":2}
 {"cid":"park-46150-00180-1es0l","attr":"REVIEW_PRO_KIDS","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/kkiminchul1/224351576331","at":"2026-07-20","n":1,"text":"아이들 놀기 좋음"}
 {"cid":"park-46170-00001-ph0gp","attr":"REVIEW_COUNT","value":1,"grade":"MENTION","src":"review_search","n":1}

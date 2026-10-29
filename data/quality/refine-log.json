@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-29T19:00:17.625Z",
+ "generated_at": "2026-10-29T23:26:52.589Z",
  "rule": "pipeline/lib/fact-refine.mjs",
- "dropped": 240,
+ "dropped": 241,
  "recoded": 145,
- "scoped": 607,
+ "scoped": 610,
  "items": [
   {
    "cid": "101498",
@@ -3866,6 +3866,16 @@
    "quote": "반려동물 출입 가능",
    "action": "drop",
    "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
+  },
+  {
+   "cid": "park-41220-00067-101pu",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/sieun3535/224249854712",
+   "quote": "입실 14시, 퇴실 11시 캠핑용품 대여: 매점에서 가능 매점 031-657-0844 주차안내: 무료 반려동물: 입장 불가 주소: 경기 평택시 팽성읍 내리길...",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
    "cid": "park-11290-00001-y1mf",
