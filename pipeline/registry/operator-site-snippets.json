@@ -39147,7 +39147,7 @@
    "name": "원주두리캠핑장",
    "status": "OK",
    "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
-   "checked_at": "2026-10-29T00:55:00.459Z",
+   "checked_at": "2026-10-29T18:28:13.251Z",
    "discovered": true,
    "pages": [
     "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
@@ -39453,24 +39453,24 @@
      }
     },
     {
-     "text": "31 공지사항 동절기에는 수영장은 운영 안합니다 원주두리캠핑 2025-12-16 726",
+     "text": "31 공지사항 동절기에는 수영장은 운영 안합니다 원주두리캠핑 2025-12-16 732",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "31 공지사항 동절기에는 수영장은 운영 안합니다 원주두리캠핑 2025-12-16 726"
+      "text": "31 공지사항 동절기에는 수영장은 운영 안합니다 원주두리캠핑 2025-12-16 732"
      }
     },
     {
-     "text": "29 11월 얼리 체크인/체크아웃 행사/수영장운영 변경 안내 원주두리캠핑 2024-10-20 1754",
+     "text": "29 11월 얼리 체크인/체크아웃 행사/수영장운영 변경 안내 원주두리캠핑 2024-10-20 1759",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "29 11월 얼리 체크인/체크아웃 행사/수영장운영 변경 안내 원주두리캠핑 2024-10-20 1754"
+      "text": "29 11월 얼리 체크인/체크아웃 행사/수영장운영 변경 안내 원주두리캠핑 2024-10-20 1759"
      }
     },
     {
-     "text": "27 10월 2주차 체크인,체크아웃 행사안내 원주두리캠핑 2024-09-01 821",
+     "text": "27 10월 2주차 체크인,체크아웃 행사안내 원주두리캠핑 2024-09-01 822",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "27 10월 2주차 체크인,체크아웃 행사안내 원주두리캠핑 2024-09-01 821"
+      "text": "27 10월 2주차 체크인,체크아웃 행사안내 원주두리캠핑 2024-09-01 822"
      }
     },
     {
@@ -39488,10 +39488,10 @@
      }
     },
     {
-     "text": "24 동계 장박시즌 운영 및 모집안내 원주두리캠핑 2024-08-16 873",
+     "text": "24 동계 장박시즌 운영 및 모집안내 원주두리캠핑 2024-08-16 874",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "24 동계 장박시즌 운영 및 모집안내 원주두리캠핑 2024-08-16 873"
+      "text": "24 동계 장박시즌 운영 및 모집안내 원주두리캠핑 2024-08-16 874"
      }
     },
     {
@@ -39509,10 +39509,10 @@
      }
     },
     {
-     "text": "20 캠핑장 운영정책 및 이용수칙 원주두리캠핑 2024-05-18 1013",
+     "text": "20 캠핑장 운영정책 및 이용수칙 원주두리캠핑 2024-05-18 1014",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "20 캠핑장 운영정책 및 이용수칙 원주두리캠핑 2024-05-18 1013"
+      "text": "20 캠핑장 운영정책 및 이용수칙 원주두리캠핑 2024-05-18 1014"
      }
     },
     {
@@ -109778,7 +109778,7 @@
    "name": "라플란드",
    "status": "FETCH_FAILED",
    "url": "https://oneoneone.kr/content/d6a7b05a",
-   "checked_at": "2026-10-29T00:54:57.597Z",
+   "checked_at": "2026-10-29T18:28:11.379Z",
    "error": "404"
   },
   "100126": {
@@ -174543,7 +174543,7 @@
    "name": "골든쌔들 캠핑장",
    "status": "FETCH_FAILED",
    "url": "https://www.goldensaddlecamping.kr/",
-   "checked_at": "2026-10-29T00:55:05.446Z",
+   "checked_at": "2026-10-29T18:28:15.855Z",
    "error": "403"
   },
   "101270": {
@@ -196287,15 +196287,10 @@
   },
   "101639": {
    "name": "물멍 캠프",
-   "status": "DISCOVERED_NOT_OPERATOR",
-   "url": "https://banananx.com/place/7598",
-   "checked_at": "2026-10-24T22:30:13.204Z",
-   "discovered": true,
-   "check": {
-    "ok": false,
-    "named": true,
-    "rules": 2
-   }
+   "status": "FETCH_FAILED",
+   "url": "https://camping.hansangsoo.com/camp/101639.html",
+   "checked_at": "2026-10-29T18:28:15.869Z",
+   "error": "403"
   },
   "101640": {
    "name": "세이지힐 패밀리캠핑장",
@@ -222980,7 +222975,7 @@
    "name": "WonderWood Glamping(원더우드 글램핑)",
    "status": "FETCH_FAILED",
    "url": "https://camping.hansangsoo.com/camp/102221.html",
-   "checked_at": "2026-10-29T00:54:57.599Z",
+   "checked_at": "2026-10-29T18:28:11.382Z",
    "error": "403"
   },
   "102222": {
@@ -223370,7 +223365,7 @@
     }
    ],
    "last_attempt": {
-    "at": "2026-10-29T00:54:57.598Z",
+    "at": "2026-10-29T18:28:11.381Z",
     "status": "NO_RELEVANT_TEXT",
     "error": null
    }
@@ -226564,7 +226559,7 @@
    "name": "평택캠핑성",
    "status": "FETCH_FAILED",
    "url": "https://platformdodam.com/children-play-facilities/3019",
-   "checked_at": "2026-10-29T00:54:57.564Z",
+   "checked_at": "2026-10-29T18:28:11.357Z",
    "error": "403"
   },
   "102378": {
@@ -246859,6 +246854,6 @@
    "snippets": []
   }
  },
- "generated_at": "2026-10-29T00:56:35.472Z",
+ "generated_at": "2026-10-29T18:29:49.426Z",
  "policy": "운영자 자체 홈페이지·예약 페이지만, robots.txt 준수, 봇 이름 공개, 문장(≤140자)·원문 URL·확인 시각만 저장. 플랫폼 페이지는 수집하지 않음."
 }
