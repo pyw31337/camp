@@ -15296,7 +15296,8 @@
 {"cid":"park-41820-00003-1aik1","attr":"REVIEW_COUNT","value":1,"grade":"MENTION","src":"review_search","n":1}
 {"cid":"park-41820-00005-lqcj7","attr":"REVIEW_COUNT","value":4,"grade":"MENTION","src":"review_search","n":4}
 {"cid":"park-41820-00005-lqcj7","attr":"REVIEW_PRO_CLEAN_TOILET","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/dhdbswl0729/224431319686","at":"2026-10-04","n":1,"text":"화장실·샤워장 깨끗"}
-{"cid":"park-41820-00005-lqcj7","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/dhdbswl0729/224431319686","at":"2026-10-04","n":1,"text":"사이트 넓음"}
+{"cid":"park-41820-00005-lqcj7","attr":"REVIEW_PRO_QUIET","value":1,"grade":"MENTION","src":"review_search","url":"https://tourkongdak.tistory.com/869","at":"2026-10-22","n":1,"text":"조용·한적"}
+{"cid":"park-41820-00005-lqcj7","attr":"REVIEW_PRO_WIDE_SITE","value":2,"grade":"MENTION","src":"review_search","url":"https://tourkongdak.tistory.com/869","at":"2026-10-22","n":2,"text":"사이트 넓음"}
 {"cid":"park-41820-00007-1p65t","attr":"REVIEW_COUNT","value":2,"grade":"MENTION","src":"review_search","n":2}
 {"cid":"park-41830-00024-mm1q5","attr":"REVIEW_COUNT","value":2,"grade":"MENTION","src":"review_search","n":2}
 {"cid":"park-41830-00024-mm1q5","attr":"REVIEW_PRO_HEALING_NATURE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/minalswl0926/224243231832","at":"2026-04-06","n":1,"text":"힐링·자연 감성"}
