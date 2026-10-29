@@ -1,13 +1,13 @@
 {
- "generated_at": "2026-10-29T01:29:13.849Z",
- "date": "2026-10-29",
+ "generated_at": "2026-10-29T19:00:27.911Z",
+ "date": "2026-10-30",
  "totals": {
   "campgrounds": 6416,
-  "facts": 238093,
-  "pairs": 188950,
+  "facts": 238142,
+  "pairs": 188964,
   "mean_confidence": 0.786,
   "confirmed_pct": 85,
-  "corroborated": 3944,
+  "corroborated": 3947,
   "conflicts": 849,
   "decisions": 69
  },
@@ -489,15 +489,15 @@
    }
   },
   "EXTRA_PERSON_FEE": {
-   "coverage": 411,
+   "coverage": 412,
    "coverage_pct": 6.4,
    "mean_confidence": 0.576,
-   "confirmed_pct": 40.6,
+   "confirmed_pct": 40.5,
    "corroborated": 24,
    "conflicts": 0,
-   "weak": 237,
+   "weak": 238,
    "status": {
-    "WEAK": 237,
+    "WEAK": 238,
     "CONFIRMED": 166,
     "VERIFIED": 1,
     "SINGLE": 6,
@@ -870,16 +870,16 @@
    }
   },
   "REFUND_POLICY": {
-   "coverage": 843,
-   "coverage_pct": 13.1,
-   "mean_confidence": 0.5,
-   "confirmed_pct": 45.7,
+   "coverage": 844,
+   "coverage_pct": 13.2,
+   "mean_confidence": 0.499,
+   "confirmed_pct": 45.6,
    "corroborated": 2,
    "conflicts": 0,
-   "weak": 458,
+   "weak": 459,
    "status": {
     "CONFIRMED": 385,
-    "WEAK": 458
+    "WEAK": 459
    }
   },
   "POWER_AVAILABLE": {
@@ -947,15 +947,15 @@
    }
   },
   "PRICE_MENTION": {
-   "coverage": 2710,
-   "coverage_pct": 42.2,
+   "coverage": 2713,
+   "coverage_pct": 42.3,
    "mean_confidence": 0.367,
    "confirmed_pct": 0,
    "corroborated": 370,
    "conflicts": 0,
-   "weak": 2340,
+   "weak": 2343,
    "status": {
-    "WEAK": 2340,
+    "WEAK": 2343,
     "CORROBORATED": 370
    }
   },
@@ -1014,7 +1014,7 @@
   "REVIEW_PRO_WIDE_SITE": {
    "coverage": 1177,
    "coverage_pct": 18.3,
-   "mean_confidence": 0.36,
+   "mean_confidence": 0.361,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
@@ -1101,15 +1101,15 @@
    }
   },
   "REVIEW_PRO_QUIET": {
-   "coverage": 1640,
+   "coverage": 1641,
    "coverage_pct": 25.6,
    "mean_confidence": 0.379,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 1534,
+   "weak": 1535,
    "status": {
-    "WEAK": 1534,
+    "WEAK": 1535,
     "SINGLE": 106
    }
   },
@@ -1643,7 +1643,7 @@
    "coverage_pct": 20.7,
    "mean_confidence": 0.827,
    "confirmed_pct": 88,
-   "corroborated": 311,
+   "corroborated": 312,
    "conflicts": 0,
    "weak": 123,
    "status": {
@@ -1707,16 +1707,16 @@
    }
   },
   "SITE_TYPE": {
-   "coverage": 3422,
-   "coverage_pct": 53.3,
+   "coverage": 3424,
+   "coverage_pct": 53.4,
    "mean_confidence": 0.744,
-   "confirmed_pct": 77.5,
+   "confirmed_pct": 77.4,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 763,
+   "weak": 765,
    "status": {
     "CONFIRMED": 2651,
-    "WEAK": 763,
+    "WEAK": 765,
     "SINGLE": 8
    }
   },
@@ -1925,41 +1925,41 @@
    }
   },
   "CHECKIN_TIME": {
-   "coverage": 2640,
-   "coverage_pct": 41.1,
+   "coverage": 2642,
+   "coverage_pct": 41.2,
    "mean_confidence": 0.524,
    "confirmed_pct": 19.4,
-   "corroborated": 567,
+   "corroborated": 568,
    "conflicts": 40,
-   "weak": 1309,
+   "weak": 1311,
    "status": {
-    "VERIFIED": 194,
-    "WEAK": 1309,
-    "CONFIRMED": 318,
+    "VERIFIED": 195,
+    "WEAK": 1311,
+    "CONFIRMED": 317,
     "SINGLE": 608,
     "CORROBORATED": 171,
     "CONFLICT": 40
    }
   },
   "CHECKOUT_TIME": {
-   "coverage": 2643,
+   "coverage": 2645,
    "coverage_pct": 41.2,
    "mean_confidence": 0.525,
    "confirmed_pct": 20.3,
-   "corroborated": 636,
+   "corroborated": 637,
    "conflicts": 15,
-   "weak": 1310,
+   "weak": 1312,
    "status": {
-    "VERIFIED": 204,
-    "WEAK": 1310,
-    "CONFIRMED": 333,
+    "VERIFIED": 205,
+    "WEAK": 1312,
+    "CONFIRMED": 332,
     "SINGLE": 567,
     "CORROBORATED": 214,
     "CONFLICT": 15
    }
   },
   "MANNER_TIME": {
-   "coverage": 2077,
+   "coverage": 2079,
    "coverage_pct": 32.4,
    "mean_confidence": 0.385,
    "confirmed_pct": 6.1,
@@ -1969,7 +1969,7 @@
    "status": {
     "WEAK": 1652,
     "CONFIRMED": 113,
-    "SINGLE": 253,
+    "SINGLE": 255,
     "CORROBORATED": 46,
     "VERIFIED": 13
    }
