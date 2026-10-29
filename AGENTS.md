@@ -87,11 +87,13 @@
 - 헤더·푸터·하단 탭·폭·여백은 `shell.css`와 `index.html`의 `<!-- shell:* -->` 한 곳. `/log/`에도 발행 때 그대로 들어간다.
 - 주소는 `#` 없는 경로(`/camp/map`, `/camp/place/{id}`). 공유 미리보기 `place/{id}/`는 배포 때 생성(커밋하지 않음).
 
-## 검사 (2026-10-21)
+## 검사 (2026-10-29 소유자 지시 반영)
 
-- 필수 검사: `Web quality / Lint and build`, `Web quality / Rail swipe`(브라우저 회귀 전부가 이 잡 안에 있다).
-- 브라우저 회귀 전부를 로컬에서 CI와 같은 목록으로: `bash camping-atlas/scripts/run-browser-tests.sh [URL]` — 목록의 원본은 `.github/workflows/web-quality.yml` 하나다(새 테스트는 워크플로에만 추가).
-- 파이프라인: `npm --prefix pipeline test`.
+- **로컬 검사는 작업 범위에 맞는 최소 검사만 빠르게 수행한다 (2026-10-29 소유자 지시)**:
+  - 매 작업마다 19종 브라우저 회귀 테스트 전체(`run-browser-tests.sh`)를 로컬에서 돌리지 않는다. 작업 지연을 막기 위해 **하루에 한 번 또는 대규모 변경 등 꼭 필요할 때만 실행**한다.
+  - 일상 작업 시에는 수정한 컴포넌트/화면의 타겟 검증(해당 단위 테스트 또는 화면 확인)과 린트/빌드만 빠르게 확인하고 즉시 보고한다.
+- 필수 CI 검사: GitHub PR의 `Web quality / Lint and build`, `Web quality / Rail swipe`.
+- 파이프라인 변경 시: `npm --prefix pipeline test`.
 
 ## 홈 가로 레일 드래그/스와이프 가드 (필수)
 
