@@ -1,5 +1,7 @@
-// 캠핑장별 YouTube 숏츠 능동 수집 → out/campground-shorts.json (t39 #36 보강)
-// - 카카오(Daum) 동영상 검색(vclip) ‘이름 쇼츠’·‘이름 shorts’ 2회/곳. KAKAO_REST_API_KEY. 숏츠(/shorts/ 또는 ≤180초)이고 이름이 맞는 것만.
+// 캠핑장별 YouTube 영상·숏츠 능동 수집 → out/campground-shorts.json (t39 #36 보강, v2 2026-10-30 영상 전체로 확대)
+// - 소유자 2026-10-30: “유튜브에는 그 캠핑장 영상·쇼츠가 많은데 한두 개만 보인다” — 매일 수집(sync-social)의 동영상 검색은 1회·최대 10개라 모자랐다.
+// - 카카오(Daum) 동영상 검색(vclip) 3회/곳: ‘이름’ 1·2쪽(30개씩) + ‘이름(캠핑) 쇼츠’. KAKAO_REST_API_KEY. YouTube이고 제목에 이름이 있는 것만(lib videoMatch).
+//   일반 영상은 videos, 숏츠(/shorts/·60초 이하·3분 이하+#shorts)는 shorts로 나눠 쌓는다(캠핑장당 30개·20개).
 // - YOUTUBE_API_KEY가 있으면 YouTube Data API search.list(videoDuration=short, 100단위) + videos.list(길이, 1단위)도 쓴다(일 10,000단위의 절반 이하 → YT_MAX_SEARCHES 기본 45곳 ≈ 4,550단위, AGENTS.md 무과금 원칙).
 // - 영상이 하나도 없는 캠핑장부터. 캐시 registry/shorts-search.json(SHORTS_MAX_AGE_DAYS 기본 30일). 한도·인증 오류면 즉시 멈춤.
 // - 화면 데이터에는 build-explore-data가 ‘채우기만’ 한다(이미 있는 영상은 그대로, 없는 숏츠만 덧붙임).
@@ -9,7 +11,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
 import { kakaoSearch, nameCore, regionStem } from "../lib/social-search.mjs";
-import { SHORTS_CACHE_VERSION, isoDurationSec, pickShortsDue, refilterShorts, excludeMap, shortsFromVclip, shortsFromYoutube, shortsQueries } from "../lib/shorts-search.mjs";
+import { SHORTS_CACHE_VERSION, VIDEO_CAPS, isoDurationSec, pickShortsDue, recordVideos, excludeMap, shortsFromYoutube, shortsQueries, videoQueries, videosFromVclip } from "../lib/shorts-search.mjs";
 
 const out = fileURLToPath(new URL("../out/", import.meta.url));
 const cacheDir = fileURLToPath(new URL("../.cache/", import.meta.url));
@@ -22,7 +24,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const dumpCache = (c) => `{"campgrounds":{\n${Object.entries(c.campgrounds).map(([k, v]) => `${JSON.stringify(k)}:${JSON.stringify(v)}`).join(",\n")}\n}}\n`;
 const envNum = (k, d) => { const n = Number(process.env[k] ?? d); return Number.isFinite(n) ? n : d; };
 const MAX_AGE_DAYS = envNum("SHORTS_MAX_AGE_DAYS", 30);
-const MAX_CALLS = envNum("SHORTS_MAX_CALLS", 6000);
+const MAX_CALLS = envNum("SHORTS_MAX_CALLS", 9000);
 const YT_MAX = envNum("YT_MAX_SEARCHES", 45);
 const DELAY_MS = envNum("SHORTS_DELAY_MS", 120);
 const CONCURRENCY = Math.max(1, envNum("SHORTS_CONCURRENCY", 4));
@@ -51,7 +53,12 @@ async function videoCounts() {
 }
 async function ytJson(url) {
   const r = await fetch(url, { signal: AbortSignal.timeout(10000) });
-  if (r.status === 403 || r.status === 429) { const e = new Error(`YouTube ${r.status}`); e.code = r.status === 429 ? "RATE_LIMIT" : "AUTH"; throw e; }
+  if (r.status === 403 || r.status === 429) {
+    // 이유(reason)를 같이 남긴다: accessNotConfigured(API 사용 설정 안 됨)·keyInvalid·quotaExceeded·ipRefererBlocked 등 — 소유자가 고칠 곳이 다르다.
+    const j = await r.json().catch(() => null);
+    const why = j?.error?.errors?.[0]?.reason || j?.error?.status || "";
+    const e = new Error(`YouTube ${r.status}${why ? ` ${why}` : ""}${j?.error?.message ? `: ${String(j.error.message).slice(0, 160)}` : ""}`); e.code = r.status === 429 ? "RATE_LIMIT" : "AUTH"; throw e;
+  }
   if (!r.ok) throw new Error(`YouTube ${r.status}`);
   return r.json();
 }
@@ -82,17 +89,27 @@ async function main() {
   let calls = 0, yt = 0, ok = 0, failed = 0, stopped = null, firstError = null, ytStopped = false;
   if (!kkey) warn("숏츠 수집 호출 건너뜀", "KAKAO_REST_API_KEY 없음 — 캐시만 사용");
   else if (MAX_CALLS > 0) {
-    const batch = due.slice(0, Math.floor(MAX_CALLS / 2));
+    const batch = due.slice(0, Math.floor(MAX_CALLS / 3));
     let i = 0, since = 0;
     const worker = async () => {
       while (i < batch.length && !stopped) {
         const c = batch[i++];
         const qs = shortsQueries(c);
-        if (!qs.length) continue;
+        const vqs = videoQueries(c);
+        if (!vqs.length) continue;
         try {
           const docs = [];
-          for (const q of qs) { calls++; docs.push(...(await kakaoSearch("vclip", q, { sort: "accuracy", size: 30 }, { key: kkey }))); if (DELAY_MS) await sleep(DELAY_MS); }
-          let shorts = shortsFromVclip(c, docs, { others: othersOf(c), dup: dupOf(c), stems, exclude: excl[c.id] ?? [] });
+          let lastFull = true;
+          for (const { q, page, ifFull } of vqs) {
+            if (ifFull && !lastFull) continue; // 1쪽이 30개 미만이면 2쪽은 없다
+            calls++;
+            const got = await kakaoSearch("vclip", q, { sort: "accuracy", size: 30, page }, { key: kkey });
+            lastFull = got.length >= 30;
+            docs.push(...got);
+            if (DELAY_MS) await sleep(DELAY_MS);
+          }
+          const found = videosFromVclip(c, docs, { others: othersOf(c), dup: dupOf(c), stems, exclude: excl[c.id] ?? [] });
+          let shorts = found.shorts;
           if (ykey && !ytStopped && yt < YT_MAX) {
             try {
               yt++;
@@ -104,8 +121,9 @@ async function main() {
             } catch (e) { ytStopped = true; warn("YouTube API 중단", e.message); }
           }
           const seen = new Set();
-          shorts = shorts.filter((x) => !seen.has(x.yt) && seen.add(x.yt)).slice(0, 12);
-          cache.campgrounds[c.id] = shorts.length ? { v: SHORTS_CACHE_VERSION, fetched_at: fetchedAt, shorts } : { v: SHORTS_CACHE_VERSION, fetched_at: fetchedAt };
+          shorts = shorts.filter((x) => !seen.has(x.yt) && seen.add(x.yt)).slice(0, VIDEO_CAPS.shorts);
+          const videos = found.videos.filter((x) => !seen.has(x.yt) && seen.add(x.yt));
+          cache.campgrounds[c.id] = { v: SHORTS_CACHE_VERSION, fetched_at: fetchedAt, ...(shorts.length ? { shorts } : {}), ...(videos.length ? { videos } : {}) };
           ok++;
           if (++since >= 100) { since = 0; await writeFile(cachePath, dumpCache(cache)); }
         } catch (e) {
@@ -119,18 +137,21 @@ async function main() {
     if (stopped) warn("카카오 숏츠 검색 중단", stopped.message); else if (firstError) warn("일부 숏츠 검색 실패", `${failed}곳 · ${firstError}`);
   }
   const records = {};
-  let withShorts = 0, noVideoGained = 0, total = 0;
+  let withShorts = 0, withVideos = 0, noVideoGained = 0, total = 0, totalVideos = 0;
   for (const c of camps) {
     const r = cache.campgrounds[c.id];
-    // 캐시는 예전 기준으로 걸렀을 수 있다 → 내보낼 때마다 엄격 판정으로 다시 거른다.
-    const sh = refilterShorts(c, r?.shorts, { others: othersOf(c), dup: dupOf(c), stems, exclude: excl[c.id] ?? [] });
-    if (!sh.length) continue;
-    records[c.id] = { fetched_at: r.fetched_at, shorts: sh };
-    withShorts++; total += sh.length;
+    // 캐시는 예전 기준으로 걸렀을 수 있다 → 내보낼 때마다 판정으로 다시 거른다(v1 숏츠는 엄격 판정).
+    const all = recordVideos(c, r, { others: othersOf(c), dup: dupOf(c), stems, exclude: excl[c.id] ?? [] });
+    if (!all.length) continue;
+    const sh = all.filter((x) => x.kind === "short"), vids = all.filter((x) => x.kind !== "short");
+    records[c.id] = { v: r.v, fetched_at: r.fetched_at, ...(sh.length ? { shorts: sh } : {}), ...(vids.length ? { videos: vids } : {}) };
+    if (sh.length) withShorts++;
+    if (vids.length) withVideos++;
+    total += sh.length; totalVideos += vids.length;
     if (!(vc.get(c.id) ?? 0)) noVideoGained++;
   }
-  const stats = { camps: camps.length, searched_this_run: ok, kakao_calls: calls, youtube_searches: yt, with_shorts: withShorts, shorts_total: total, no_video_camps_with_shorts: noVideoGained };
+  const stats = { camps: camps.length, searched_this_run: ok, kakao_calls: calls, youtube_searches: yt, with_shorts: withShorts, shorts_total: total, with_videos: withVideos, videos_total: totalVideos, no_video_camps_gained: noVideoGained };
   await writeFile(`${out}campground-shorts.json`, JSON.stringify({ generated_at: fetchedAt, source: "Kakao Daum vclip search" + (ykey ? " + YouTube Data API v3" : ""), stats, campgrounds: records }));
   console.log(`숏츠: ${JSON.stringify(stats)}`);
-  if (process.env.GITHUB_STEP_SUMMARY) await writeFile(process.env.GITHUB_STEP_SUMMARY, `### YouTube 숏츠 수집\n\n${Object.entries(stats).map(([k, v]) => `- ${k}: ${v}`).join("\n")}\n`, { flag: "a" });
+  if (process.env.GITHUB_STEP_SUMMARY) await writeFile(process.env.GITHUB_STEP_SUMMARY, `### YouTube 영상·숏츠 수집\n\n${Object.entries(stats).map(([k, v]) => `- ${k}: ${v}`).join("\n")}\n`, { flag: "a" });
 }

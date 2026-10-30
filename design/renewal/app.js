@@ -5317,7 +5317,10 @@ const hiThumb = (u) => {
   return s;
 };
 const thumbImg = (u, alt = "") => { const hi = hiThumb(u); return `<img src="${esc(hi)}" alt="${esc(alt)}" loading="lazy" decoding="async" referrerpolicy="no-referrer"${hi !== u ? ` data-alt="${esc(u)}"` : ""} onerror="if(this.dataset.alt){this.src=this.dataset.alt;this.removeAttribute('data-alt')}else{this.closest('.media-card-photo')?.classList.add('is-empty');this.remove()}">`; };
-const apiThumb = (x) => (/^https:\/\/(?:search\d?\.kakaocdn\.net|postfiles\.pstatic\.net|blogthumb\.pstatic\.net)\//.test(String(x?.thumb ?? "")) ? x.thumb : null);
+// 후기 썸네일(소유자 2026-10-30 “비어 있는 게 너무 많다”): 검색 API 썸네일 + 글의 대표 이미지(og:image, fill-review-thumbs)를 쓴다.
+// 티스토리·브런치 등은 자기 이미지 서버(daumcdn·kakaocdn 등)를 쓰므로 호스트를 막지 않고, 기본·프로필·로고 그림만 뺀다.
+const BAD_THUMB = /blogpfthumb|profile|default|favicon|logo|ssl\.pstatic\.net\/static|og_image_default|noimage|blank\.gif/i;
+const apiThumb = (x) => { const t = String(x?.thumb ?? ""); return /^https:\/\//.test(t) && !BAD_THUMB.test(t) ? t : null; };
 function thumbLinks(list, label) {
   return `<div class="thumb-links">${list.map((x, i) => `<a href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="${label} ${i + 1} 원문 열기"><img src="${esc(apiThumb(x))}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer"><i>${esc(sourceName(x.src, hostOf(x.url) || "원문"))}</i></a>`).join("")}</div>`;
 }
@@ -5516,55 +5519,28 @@ function mediaHubHtml(d, c) {
     const yt = x.yt || (x.url && x.url.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([A-Za-z0-9_-]{11})/)?.[1]) || null;
     return { ...x, yt };
   }).filter((x) => !HIDDEN_VIDEOS[String(c.id)]?.includes(x.yt)); // 표시층에서만 숨김(데이터는 그대로)
-  const ytList = ytVideos
-    .filter((x) => x.yt || (x.url && /youtube\.com|youtu\.be/i.test(x.url)) || (!isHost(x.url, /naver\./) && !isHost(x.url, /daum\.|kakao\.|tistory\.|brunch\./)));
+  // SNS 영상 칸은 ‘이 페이지에서 바로 재생되는 영상’만(소유자 2026-10-30): 영상처럼 보이는데 네이버 블로그로 넘어가던 블로그 글·블로그 안 영상,
+  // 다음 뉴스 영상은 넣지 않는다(블로그 글은 아래 ‘후기’ 칸에 있다). YouTube(일반·숏츠) · 네이버TV만.
+  // 카카오TV는 서비스가 끝나 옛 클립이 “영상을 찾을 수 없습니다”로 나와 넣지 않는다(2026-10-30 확인).
+  const ytList = ytVideos.filter((x) => x.yt);
 
-  // 2. 전체 수집 글 (블로그·카페·웹) 및 사진 매핑
-  const seenPosts = new Set();
-  const posts = [...(d?.reviews ?? []), ...(d?.cafe ?? []), ...(d?.web ?? [])]
-    .filter((x) => snsOk(x) && x.url && x.title && !seenPosts.has(x.url) && seenPosts.add(x.url))
-    .sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
-
-  const photoByUrl = new Map((d?.sns_images ?? []).filter((p) => snsOk(p) && p.url && (p.thumb || p.img)).map((p) => [p.url, p.thumb || p.img]));
+  // 2. 영상 썸네일이 깨질 때 쓸 이 캠핑장 사진
   const bigByUrl = new Map((d?.sns_images ?? []).filter((p) => snsOk(p) && p.url && (p.img || p.thumb)).map((p) => [p.url, p.img || hiThumb(p.thumb)]));
   const thumbPool = [...new Set([...photosOf(c).slice(0, 6).map((u) => photoUrl(u)), ...(d?.sns_images ?? []).filter(snsOk).map((p) => p.img || hiThumb(p.thumb))].filter(Boolean))];
 
-  // 3. 네이버: 영상 및 썸네일 글 통합 (영상 우선, 썸네일 있는 글 우선, 최신순)
-  const seenNaver = new Set();
-  const naverVideos = (d?.videos ?? []).filter((x) => snsOk(x) && x.url && isHost(x.url, /naver\.com$|naver\.me$/));
-  const naverPosts = posts.filter((x) => isHost(x.url, /naver\.com$|naver\.me$/)).map((x) => ({
-    ...x,
-    thumb: bigByUrl.get(x.url) || x.thumb || null,
-  }));
-  const naverList = [...naverVideos, ...naverPosts]
-    .filter((x) => x.url && !seenNaver.has(x.url) && seenNaver.add(x.url))
-    .sort((a, b) => (b.thumb ? 1 : 0) - (a.thumb ? 1 : 0) || String(b.date ?? "").localeCompare(String(a.date ?? "")));
-
-  // 4. 다음/카카오: 영상 및 썸네일 글 통합 (영상 우선, 썸네일 있는 글 우선, 최신순)
-  const seenDaum = new Set();
-  const daumVideos = (d?.videos ?? []).filter((x) => snsOk(x) && x.url && isHost(x.url, /daum\.net$|kakao\.com$|tistory\.com$|brunch\.co\.kr$/));
-  const daumPosts = posts.filter((x) => isHost(x.url, /daum\.net$|kakao\.com$|tistory\.com$|brunch\.co\.kr$/)).map((x) => ({
-    ...x,
-    thumb: bigByUrl.get(x.url) || x.thumb || null,
-  }));
-  const daumList = [...daumVideos, ...daumPosts]
-    .filter((x) => x.url && !seenDaum.has(x.url) && seenDaum.add(x.url))
-    .sort((a, b) => (b.thumb ? 1 : 0) - (a.thumb ? 1 : 0) || String(b.date ?? "").localeCompare(String(a.date ?? "")));
-
-  // 공식 임베드 주소가 있는 네이버TV·카카오TV 영상만 페이지 안에서 재생한다.
-  // 네이버 블로그/카페와 일반 다음 글은 iframe 차단 경계가 있어 원문 링크로 유지한다.
+  // 공식 임베드 주소가 있는 네이버TV 영상만 페이지 안에서 재생한다.
   const videoEmbedUrl = (x, platformKey) => {
     const u = String(x?.url ?? "");
     if (platformKey === "naver") {
-      const id = u.match(/(?:tv\.naver\.com\/(?:v|embed)\/)([0-9]+)/i)?.[1];
+      const id = u.match(/tv\.naver\.com\/(?:v|embed)\/([0-9]+)/i)?.[1];
       return id ? `https://tv.naver.com/embed/${id}` : "";
-    }
-    if (platformKey === "daum") {
-      const id = u.match(/(?:cliplink\/|\/v\/)([0-9]+)/i)?.[1];
-      return id ? `https://tv.kakao.com/embed/player/cliplink/${id}` : "";
     }
     return "";
   };
+  const seenVid = new Set();
+  const embedList = (key) => (d?.videos ?? []).filter((x) => snsOk(x) && x.url && !x.yt && videoEmbedUrl(x, key) && !seenVid.has(x.url) && seenVid.add(x.url))
+    .sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
+  const naverList = embedList("naver");
 
   // 플랫폼별 동일한 카드 포맷 렌더러
   const renderMediaRail = (items, platformKey, platformLabel, searchUrl) => {
@@ -5607,7 +5583,7 @@ function mediaHubHtml(d, c) {
       if (embedUrl) {
         return `<article class="vid-wrap"><button type="button" class="vid" data-inline-video="${esc(embedUrl)}">${inner}</button>${srcTip(fact, `${platformLabel} 영상 ${i + 1}`)}</article>`;
       }
-      return `<article class="vid-wrap"><a class="vid" href="${esc(x.url)}" target="_blank" rel="noopener">${inner}</a>${srcTip(fact, `${platformLabel} 영상 ${i + 1}`)}</article>`;
+      return "";
     };
     const shorts = items.filter(isShort), longs = items.filter((x) => !isShort(x));
     const shortsUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(`${name} #shorts`)}`;
@@ -5628,15 +5604,15 @@ function mediaHubHtml(d, c) {
     `;
   };
 
-  // 내부 탭으로 목록을 전환하는 플랫폼: YouTube, 네이버, 다음 (동일 포맷 유지)
+  // 내부 탭으로 목록을 전환하는 플랫폼: YouTube, 네이버TV (동일 포맷 유지)
   const inSiteTabs = [
     { key: "youtube", label: "유튜브", n: ytList.length, panel: renderMediaRail(ytList, "youtube", "유튜브", `https://www.youtube.com/results?search_query=${videoQ}`), url: `https://www.youtube.com/results?search_query=${videoQ}` },
-    { key: "naver", label: "네이버", n: naverList.length, panel: renderMediaRail(naverList, "naver", "네이버", `https://search.naver.com/search.naver?query=${q}`), url: `https://search.naver.com/search.naver?query=${q}` },
-    { key: "daum", label: "다음", n: daumList.length, panel: renderMediaRail(daumList, "daum", "다음", `https://search.daum.net/search?q=${q}`), url: `https://search.daum.net/search?q=${q}` },
-  ];
+    { key: "naver", label: "네이버TV", n: naverList.length, panel: renderMediaRail(naverList, "naver", "네이버TV", `https://search.naver.com/search.naver?where=video&query=${q}`), url: `https://search.naver.com/search.naver?where=video&query=${q}` },
+  ].filter((t) => t.key === "youtube" || t.n > 0); // 재생할 영상이 있는 탭만(유튜브는 늘)
 
   // 외부 플랫폼 바로가기: Instagram, Facebook, TikTok (직접 수집 불가 플랫폼만 새창 이동)
   const extTabs = [
+    ...(naverList.length ? [] : [{ key: "naver", label: "네이버 영상", url: `https://search.naver.com/search.naver?where=video&query=${q}` }]),
     { key: "instagram", label: "인스타그램", url: `https://www.instagram.com/explore/search/keyword/?q=${q}` },
     { key: "facebook", label: "페이스북", url: `https://www.facebook.com/search/posts/?q=${q}` },
     { key: "tiktok", label: "틱톡", url: `https://www.tiktok.com/search?q=${q}` },
@@ -5718,7 +5694,9 @@ function reviewLinksHtml(d, c) {
       isPhoto: true,
     };
   });
-  const allItems = [...rawReviews, ...photoReviews].sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
+  // 사진이 있는 글을 먼저(같은 조건이면 최신순) — 빈 썸네일 카드가 앞줄을 차지하지 않게.
+  const hasPic = (x) => Boolean(x.isPhoto || photoByUrl.get(x.url) || apiThumb(x));
+  const allItems = [...rawReviews, ...photoReviews].sort((a, b) => Number(hasPic(b)) - Number(hasPic(a)) || String(b.date ?? "").localeCompare(String(a.date ?? "")));
 
   if (!allItems.length) {
     return `<section class="d-sec" id="sec-reviews"><div class="sec-head">${iconTitle("review-bubble", "후기")}</div>

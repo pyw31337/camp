@@ -7,7 +7,7 @@ import { themeCatalog } from "../lib/themes.mjs";
 import { buildBookingGuide } from "../lib/booking-intel.mjs";
 import { buildOpenings } from "../lib/openings.mjs";
 import { nameCore, refilterSocial } from "../lib/social-search.mjs";
-import { excludeMap, fillShorts, refilterShorts } from "../lib/shorts-search.mjs";
+import { excludeMap, fillShorts, recordVideos } from "../lib/shorts-search.mjs";
 import { nameCore as shortsNameCore, regionStem as shortsStem } from "../lib/social-search.mjs";
 import { allocateUnique, dhashFile, photoKey, uniqueBy, uniqueByHash } from "../lib/photo-dedupe.mjs";
 import { SEOUL_DATASET_URL, matchSeoulToCampgrounds } from "../lib/seoul-yeyak.mjs";
@@ -292,9 +292,10 @@ if (carried) console.log(`직전 발행본에서 이어 받은 글·사진(이�
   const shortsStems = [...new Set(records.map((x) => shortsStem(x.sigungu)).filter((x) => x && x.length >= 2))];
   for (const [id, r] of Object.entries(shortsOut?.campgrounds ?? {})) {
     const d = details[id], rec0 = recById.get(String(id));
-    if (!d || !rec0 || !r?.shorts?.length) continue;
+    if (!d || !rec0 || !(r?.shorts?.length || r?.videos?.length)) continue;
     const c = campOf(rec0);
-    const sh = refilterShorts(c, r.shorts, { dup: (coreN.get(shortsNameCore(c.name, c.address.sigungu).toLowerCase()) ?? 0) > 1, stems: shortsStems, exclude: shortsExcl[id] ?? [] });
+    // v2(2026-10-30): 숏츠 + 일반 영상(영상 확대 수집)을 함께 덧붙인다. 숏츠 먼저.
+    const sh = recordVideos(c, r, { dup: (coreN.get(shortsNameCore(c.name, c.address.sigungu).toLowerCase()) ?? 0) > 1, stems: shortsStems, exclude: shortsExcl[id] ?? [] });
     if (!sh.length) continue;
     const before = d.videos?.length ?? 0;
     const f = fillShorts(d.videos ?? [], sh);

@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
-import { fillShorts, isoDurationSec, pickShortsDue, shortsFromVclip, shortsFromYoutube, shortsQueries } from "../lib/shorts-search.mjs";
+import { SHORTS_CACHE_VERSION, fillShorts, isoDurationSec, pickShortsDue, shortsFromVclip, shortsFromYoutube, shortsQueries } from "../lib/shorts-search.mjs";
 
 const camp = { id: "1", name: "명학산캠핑장", address: { sido: "경기도", sigungu: "파주시" } };
 test("검색어: 이름 쇼츠·shorts", () => {
@@ -42,8 +42,10 @@ test("채우기만: 기존 영상 유지, 같은 id는 다시 안 붙임", () =>
 test("대상 순서: 영상 없는 곳 먼저, 최근 캐시는 건너뜀", () => {
   const camps = [{ id: "a" }, { id: "b" }, { id: "c" }];
   const now = Date.parse("2026-10-22T00:00:00Z");
-  const cache = { c: { v: 1, fetched_at: "2026-10-20T00:00:00Z" } };
+  const cache = { c: { v: SHORTS_CACHE_VERSION, fetched_at: "2026-10-20T00:00:00Z" } };
   assert.deepEqual(pickShortsDue(camps, cache, (id) => id === "a", 30, now).map((x) => x.id), ["b", "a"]);
+  // 이전 버전 캐시(v1 숏츠만)는 최근이어도 다시 찾는다(v2 영상 확대)
+  assert.deepEqual(pickShortsDue(camps, { c: { v: 1, fetched_at: "2026-10-20T00:00:00Z" } }, (id) => id === "a", 30, now).map((x) => x.id), ["b", "c", "a"]);
 });
 test("대상 순서: 찜/우선순위(priorityIds) 업장이 영상 유무보다 최우선", () => {
   const camps = [{ id: "a" }, { id: "b" }, { id: "c" }];
@@ -96,4 +98,32 @@ test("숏츠: 다른 시·군 이름이 핵심어 앞에 붙으면 제외, exclu
   const ex = excludeMap({ _note: "x", 100278: [{ yt: "MwVOrtKjy9M" }] });
   assert.deepEqual(ex, { 100278: ["MwVOrtKjy9M"] });
   assert.deepEqual(refilterShorts(camp, [{ yt: "MwVOrtKjy9M", title: "태안 더빌리지 캠핑장" }], { exclude: ex["100278"] }), []);
+});
+
+// v2 영상 확대 수집(소유자 2026-10-30: “유튜브엔 영상·쇼츠가 많은데 한두 개만 보인다”)
+test("v2 영상: 일반 영상·숏츠를 함께 모으고, YouTube이고 제목에 이름이 있는 것만", async () => {
+  const { videosFromVclip, isShortVideo, videoQueries } = await import("../lib/shorts-search.mjs");
+  const docs = [
+    { title: "명학산캠핑장 1박 브이로그", url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", play_time: 900, author: "a" },
+    { title: "명학산캠핑장 불멍 #shorts", url: "https://www.youtube.com/watch?v=abcdefghijk", play_time: 40 },
+    { title: "명학산 캠핑 우중캠핑 2편", url: "https://www.youtube.com/watch?v=BBBBBBBBBBB", play_time: 700 }, // 고유명 형태가 아니어도 받는다
+    { title: "명학산 등산 브이로그", url: "https://www.youtube.com/watch?v=CCCCCCCCCCC", play_time: 600 }, // 캠핑 맥락 없음
+    { title: "캠핑 브이로그 (명학산캠핑장 근처)", url: "https://tv.kakao.com/v/123", play_time: 300 }, // YouTube 아님
+    { title: "다른캠핑장 캠핑", url: "https://www.youtube.com/watch?v=DDDDDDDDDDD", play_time: 600, author: "명학산캠핑장" }, // 채널명에만 이름
+    { title: "명학산캠핑장 1박 브이로그", url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", play_time: 900 }, // 같은 id
+  ];
+  const r = videosFromVclip(camp, docs);
+  assert.deepEqual(r.videos.map((x) => x.yt), ["dQw4w9WgXcQ", "BBBBBBBBBBB"]);
+  assert.deepEqual(r.shorts.map((x) => x.yt), ["abcdefghijk"]);
+  assert.ok(isShortVideo({ url: "https://youtube.com/shorts/x", dur: 170 }));
+  assert.ok(isShortVideo({ url: "https://www.youtube.com/watch?v=x", dur: 150, title: "명학산 #shorts" }));
+  assert.ok(!isShortVideo({ url: "https://www.youtube.com/watch?v=x", dur: 150, title: "명학산 캠핑" }));
+  assert.deepEqual(videoQueries(camp).map((x) => [x.q, x.page]), [["명학산캠핑장", 1], ["명학산캠핑장", 2], ["명학산캠핑장 쇼츠", 1]]);
+});
+test("v2 기록: 숏츠 먼저, 그다음 일반 영상 · 제외 목록 반영 · 채우기는 기존 영상 뒤에", async () => {
+  const { recordVideos, fillShorts } = await import("../lib/shorts-search.mjs");
+  const r = { v: 2, shorts: [{ yt: "S1xxxxxxxxx", title: "명학산캠핑장 불멍 쇼츠", kind: "short" }], videos: [{ yt: "V1xxxxxxxxx", title: "명학산캠핑장 캠핑 브이로그", kind: "video" }, { yt: "V2xxxxxxxxx", title: "명학산캠핑장 캠핑 2", kind: "video" }] };
+  assert.deepEqual(recordVideos(camp, r, { exclude: ["V2xxxxxxxxx"] }).map((x) => x.yt), ["S1xxxxxxxxx", "V1xxxxxxxxx"]);
+  const f = fillShorts([{ yt: "V1xxxxxxxxx", title: "원래" }], recordVideos(camp, r));
+  assert.deepEqual(f.videos.map((x) => x.yt), ["V1xxxxxxxxx", "S1xxxxxxxxx", "V2xxxxxxxxx"]);
 });

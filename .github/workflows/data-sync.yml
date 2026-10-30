@@ -263,6 +263,15 @@ jobs:
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           REVIEW_THUMB_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '3000' }}
+      - name: Fill review thumbnails from post cover images (og:image, robots.txt respected)
+        # 소유자 2026-10-30 “후기 썸네일이 비어 있는 게 너무 많다”: 썸네일 없는 후기 글(네이버 블로그 등 약 3만 건)의 대표 이미지를 읽어
+        # 비어 있을 때만 채운다(registry/review-thumbs.json → apply-review-thumbs). robots.txt가 막은 곳·로그인 카페는 열지 않는다.
+        if: github.event_name != 'pull_request'
+        continue-on-error: true
+        timeout-minutes: 45
+        run: node scripts/fill-review-thumbs.mjs
+        env:
+          REVIEW_FILL_MAX: ${{ vars.REVIEW_FILL_MAX || '6000' }}
       - name: Sync web mentions (NAVER search blog·cafe·web·kin + robots-allowed blog text)
         # 네이버 검색 API(HUB, 한시 무료 월 775,000건) 요약과 robots가 허용한 블로그(티스토리 등) 본문의 사실 문장.
         # 캠핑장당 7회, 14일 순환. 한 실행 8,000회(일 한도 25,000의 절반 미만). naver-guard가 0원 확인·월 예산·402 즉시 중단.

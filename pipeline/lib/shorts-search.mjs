@@ -6,7 +6,10 @@
 import { cleanName, distinctiveTokens, isRelevant, normalizeVclip, regionStem, stripHtml, youtubeId } from "./social-search.mjs";
 
 export const SHORTS_MAX_SEC = 180; // YouTube 숏츠 최대 길이(2024-10부터 3분)
-export const SHORTS_CACHE_VERSION = 1;
+// v2(2026-10-30): 숏츠만이 아니라 이 캠핑장의 YouTube 영상 전체(일반 영상 + 숏츠)를 여러 검색어·여러 쪽으로 모은다 → 전부 다시 찾는다.
+export const SHORTS_CACHE_VERSION = 2;
+/** 캠핑장당 내보내는 최대 개수(화면 SNS 영상 칸) */
+export const VIDEO_CAPS = { shorts: 20, videos: 30 };
 
 /** 숏츠 검색어: ‘이름 쇼츠’, ‘이름 shorts’ (이름에 캠핑 관련어가 없으면 ‘캠핑’을 붙인다) */
 export function shortsQueries(camp) {
@@ -62,6 +65,60 @@ function matchOne(camp, title, { dup = false, others = [], stems: opt_stems = []
   if (others.some((o) => o && o.length >= 3 && o !== core && !core.includes(o) && !o.includes(core) && t.includes(o))) return false;
   return true;
 }
+/**
+ * 영상 판정(v2, 일반 영상·숏츠 공통): 카카오 vclip 기본 관련성(isRelevant: 이름 + 캠핑 맥락 + 다른 캠핑장 제외)에 더해
+ * 핵심어가 ‘제목’에 그대로 있어야 한다(채널명·설명만으로는 안 됨). 숏츠 엄격 판정(shortsMatch)의 ‘고유명 형태’ 조건은 빼서
+ * “OO캠핑장 브이로그”가 아닌 “OO 우중캠핑”, “OO에서 1박” 같은 제목도 받는다. 같은 이름 캠핑장이 전국에 둘 이상이거나
+ * 핵심어가 2자면 제목에 시군구명도 있어야 하고, 다른 시·군 이름이 핵심어 앞에 붙거나 제목이 다른 캠핑장 이름을 달면 뺀다.
+ */
+export function videoMatch(camp, title, opt = {}) {
+  const alts = String(camp?.name ?? "").split("/").map((x) => x.trim()).filter(Boolean);
+  if (alts.length > 1) return alts.some((n) => videoMatchOne({ ...camp, name: n }, title, opt));
+  return videoMatchOne(camp, title, opt);
+}
+function videoMatchOne(camp, title, { dup = false, others = [], stems = [], author = "" } = {}) {
+  const core = cmp(distinctiveTokens(camp?.name, camp?.address?.sigungu).join(""));
+  const t = cmp(title);
+  if (!core || core.length < 2 || !t.includes(core)) return false;
+  if (!isRelevant({ title, contents: "", src: author }, ctxOf(camp, others))) return false;
+  const stem = cmp(regionStem(camp?.address?.sigungu));
+  for (const m of t.matchAll(CAMP_NAME_RE)) { const pre = m[1]; if (pre !== core && pre !== stem + core && !(core.length >= 4 && pre.endsWith(core)) && !(pre.length < core.length && core.endsWith(pre)) && !pre.endsWith(core)) return false; }
+  if ((stems ?? []).some((st) => st && st !== stem && st.length >= 2 && t.includes(st + core))) return false;
+  if ((dup || core.length <= 2) && !(stem && t.includes(stem))) return false;
+  if (others.some((o) => o && o.length >= 3 && o !== core && !core.includes(o) && !o.includes(core) && t.includes(o))) return false;
+  return true;
+}
+/** YouTube 숏츠인가: /shorts/ 주소, 60초 이하, 또는 3분 이하이면서 제목에 #shorts·쇼츠 */
+export const isShortVideo = (v) => /\/shorts\//.test(v?.url ?? "") || (v?.dur != null && v.dur <= 60) || (v?.dur != null && v.dur <= SHORTS_MAX_SEC && /#?shorts|쇼츠|숏츠/i.test(v?.title ?? ""));
+/** 영상 검색어(v2): 이름 그대로(1·2쪽) + ‘이름(캠핑) 쇼츠’ */
+export function videoQueries(camp) {
+  const name = cleanName(camp?.name);
+  if (!name) return [];
+  const base = /(캠핑|야영|글램핑|카라반|캠프|오토|휴양림)/.test(name) ? name : `${name} 캠핑`;
+  return [{ q: name, page: 1 }, { q: name, page: 2, ifFull: true }, { q: `${base} 쇼츠`, page: 1 }];
+}
+/** 카카오 vclip 문서 → { shorts, videos } (YouTube이고 이 캠핑장을 가리키는 것만, 같은 id는 한 번) */
+export function videosFromVclip(camp, docs, opt = {}) {
+  const shorts = [], videos = [], seen = new Set(opt.exclude ?? []);
+  for (const d of docs ?? []) {
+    const v = normalizeVclip(d);
+    if (!v?.yt || seen.has(v.yt)) continue;
+    if (!videoMatch(camp, d?.title, { ...opt, author: d?.author })) continue;
+    seen.add(v.yt);
+    if (isShortVideo(v)) shorts.push({ ...v, kind: "short", via: "daum_vclip" });
+    else videos.push({ ...v, kind: "video", via: "daum_vclip" });
+  }
+  return { shorts: shorts.slice(0, VIDEO_CAPS.shorts), videos: videos.slice(0, VIDEO_CAPS.videos) };
+}
+/** 캐시된 영상(v2 일반 영상)을 판정으로 다시 거른다(재검색 없이). */
+export const refilterVideos = (camp, videos, opt = {}) => (videos ?? []).filter((s) => !(opt.exclude ?? []).includes(s?.yt) && videoMatch(camp, s?.title, { ...opt, author: s?.author }));
+/** 캐시 기록 → 화면에 덧붙일 영상(숏츠 먼저, 그다음 일반 영상). v1 숏츠는 엄격 판정, v2는 영상 판정. */
+export function recordVideos(camp, r, opt = {}) {
+  if (!r) return [];
+  const sh = r.v >= 2 || r.videos ? refilterVideos(camp, r.shorts, opt) : refilterShorts(camp, r.shorts, opt);
+  return [...sh, ...refilterVideos(camp, r.videos, opt)];
+}
+
 /** 캐시된 숏츠를 엄격 판정으로 다시 거른다(재검색 없이). */
 export const refilterShorts = (camp, shorts, opt = {}) => (shorts ?? []).filter((s) => !(opt.exclude ?? []).includes(s?.yt) && shortsMatch(camp, s?.title, opt));
 /** registry/shorts-exclude.json → { id: [yt…] } */
@@ -104,7 +161,7 @@ export function shortsFromYoutube(camp, items, durById = {}, { others = [], dup 
 }
 
 /** 채우기만(병합 정책 ①): 이미 있는 영상(같은 YouTube id·URL)은 건드리지 않고, 없는 숏츠만 뒤에 붙인다. */
-export function fillShorts(videos = [], shorts = [], max = 12) {
+export function fillShorts(videos = [], shorts = [], max = VIDEO_CAPS.shorts + VIDEO_CAPS.videos) {
   const have = new Set();
   for (const v of videos ?? []) { const id = v?.yt || youtubeId(v?.url); if (id) have.add(id); if (v?.url) have.add(v.url); }
   const add = [];
