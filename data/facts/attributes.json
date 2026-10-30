@@ -178,10 +178,10 @@
    "filter": "in",
    "note": "count가 있으면 면·동 수. text는 세부 이름(방갈로·캐빈 등). 원천: 고캠핑 등록값·소개글, 카카오/네이버 분류, 운영자 홈페이지 문장(lib/site-types.mjs)",
    "coverage": {
-    "campgrounds": 3437,
+    "campgrounds": 3439,
     "by_grade": {
      "CONFIRMED": 5781,
-     "MENTION": 5060,
+     "MENTION": 5063,
      "OPERATOR": 1080
     }
    }
@@ -481,9 +481,9 @@
    "filter": "max",
    "note": "MENTION 전용. 확정값으로 쓰지 않는다",
    "coverage": {
-    "campgrounds": 2729,
+    "campgrounds": 2731,
     "by_grade": {
-     "MENTION": 13893
+     "MENTION": 13896
     }
    }
   },
@@ -569,9 +569,9 @@
    "pref": "일찍 들어가고 싶나요?",
    "filter": "max",
    "coverage": {
-    "campgrounds": 2781,
+    "campgrounds": 2782,
     "by_grade": {
-     "MENTION": 3528,
+     "MENTION": 3529,
      "REFERENCE": 452,
      "OPERATOR": 646,
      "CONFIRMED": 4
@@ -586,9 +586,9 @@
    "pref": "늦게 나오고 싶나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 2720,
+    "campgrounds": 2721,
     "by_grade": {
-     "MENTION": 3508,
+     "MENTION": 3509,
      "REFERENCE": 445,
      "OPERATOR": 613,
      "CONFIRMED": 2
@@ -631,9 +631,9 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 2082,
+    "campgrounds": 2083,
     "by_grade": {
-     "MENTION": 2525,
+     "MENTION": 2526,
      "REFERENCE": 463,
      "OPERATOR": 129,
      "CONFIRMED": 7
@@ -1888,9 +1888,9 @@
    "review_label": "주차 편함·옆 주차",
    "pref": "‘주차 편함·옆 주차’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 478,
+    "campgrounds": 479,
     "by_grade": {
-     "MENTION": 478
+     "MENTION": 479
     }
    }
   },
@@ -2655,5 +2655,5 @@
    }
   }
  ],
- "generated_at": "2026-10-30T22:51:25.843Z"
+ "generated_at": "2026-10-30T23:55:46.373Z"
 }
