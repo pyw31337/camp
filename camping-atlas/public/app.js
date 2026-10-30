@@ -1804,8 +1804,8 @@ const HERO_THEMES = [
     badge: "오늘 밤 쏟아지는 별빛",
     moodDescription: "평창 600마지기 은하수 & 반딧불이",
     image: "hero-night-sky.webp",
-    titleA: "별빛 쏟아지는 밤하늘 아래,",
-    titleB: "600마지기 은하수 속으로.",
+    titleA: "쏟아지는 은하수와 별빛 아래,",
+    titleB: "평창 600마지기 밤하늘 캠핑.",
     summary: "도심을 벗어나 쏟아지는 별빛과 춤추는 반딧불이를 마주하는 시간",
     effect: "night-sky"
   },
@@ -1816,8 +1816,8 @@ const HERO_THEMES = [
     badge: "오색빛깔 가을 낭만",
     moodDescription: "오색빛깔 가을 단풍 & 은행잎",
     image: "hero-autumn-maple.webp",
-    titleA: "붉게 물든 숲속 오솔길,",
-    titleB: "오색 단풍 숲으로.",
+    titleA: "붉게 물든 숲길과 가을 향기,",
+    titleB: "낭만 가득한 오색 단풍 캠핑.",
     summary: "살랑이는 가을 바람과 사각거리는 단풍잎 사이로 떠나는 힐링 여정",
     effect: "autumn-maple"
   },
@@ -1829,7 +1829,7 @@ const HERO_THEMES = [
     moodDescription: "운치 있는 숲속 낭만 우중 캠핑",
     image: "hero-rainy-camp.webp",
     titleA: "타프 위로 토닥이는 빗소리,",
-    titleB: "낭만 우중 캠핑.",
+    titleB: "마음이 차분해지는 우중 캠핑.",
     summary: "촉촉한 숲의 향기와 따스한 랜턴 불빛이 머무는 가장 아늑한 순간",
     effect: "rainy-camp"
   },
@@ -1841,7 +1841,7 @@ const HERO_THEMES = [
     moodDescription: "인제 자작나무숲 설경 캠핑",
     image: "hero-snowy-winter.webp",
     titleA: "새하얀 설원 속 순백의 고요,",
-    titleB: "설경 윈터 캠핑.",
+    titleB: "포근하고 고요한 설경 캠핑.",
     summary: "소복이 쌓이는 눈꽃과 모닥불의 따스함이 빚어내는 겨울 동화",
     effect: "snowy-winter"
   },
@@ -1853,7 +1853,7 @@ const HERO_THEMES = [
     moodDescription: "치유의 편백나무 숲 & 아침 햇살",
     image: "hero-lush-forest.webp",
     titleA: "피톤치드 가득한 아침 숲길,",
-    titleB: "치유의 편백숲으로.",
+    titleB: "치유와 쉼이 있는 편백숲 캠핑.",
     summary: "나무 사이로 쏟아지는 눈부신 햇살과 싱그러운 숲의 숨결",
     effect: "lush-forest"
   },
@@ -1865,7 +1865,7 @@ const HERO_THEMES = [
     moodDescription: "충주호 잔잔한 물결 & 카약 캠핑",
     image: "hero-riverside.webp",
     titleA: "물안개 피어오르는 아침 강가,",
-    titleB: "잔잔한 호숫가로.",
+    titleB: "잔잔한 호숫가 카약 캠핑.",
     summary: "유리알처럼 투명한 수면과 황금빛 일출이 선사하는 평온함",
     effect: "riverside"
   },
@@ -1876,8 +1876,8 @@ const HERO_THEMES = [
     badge: "타닥타닥 힐링 불멍",
     moodDescription: "따스한 모닥불과 솟구치는 불티",
     image: "hero-warm-bonfire.webp",
-    titleA: "타닥타닥 타오르는 모닥불,",
-    titleB: "힐링 불멍 속으로.",
+    titleA: "타닥타닥 타오르는 모닥불 소리,",
+    titleB: "따스한 온기의 힐링 불멍 캠핑.",
     summary: "밤하늘로 솟아오르는 따스한 불티와 감성 알전구 불빛",
     effect: "warm-bonfire"
   },
@@ -1889,7 +1889,7 @@ const HERO_THEMES = [
     moodDescription: "서해안 갯벌 일몰 & 노을 해변",
     image: "hero-sunset-coast.webp",
     titleA: "붉은 노을이 내려앉은 바다,",
-    titleB: "서해안 노을 해변으로.",
+    titleB: "서해안 황금빛 노을 해변 캠핑.",
     summary: "황금빛으로 물드는 갯벌 지평선과 철썩이는 파도 소리",
     effect: "sunset-coast"
   },
@@ -1900,9 +1900,9 @@ const HERO_THEMES = [
     badge: "설레는 꽃비 샤워",
     moodDescription: "만개한 벚꽃나무 아래 봄 캠핑",
     image: "hero-cherry-blossom.webp",
-    titleA: "흩날리는 분홍빛 꽃비 아래,",
-    titleB: "설레는 벚꽃 캠핑.",
-    summary: "머리 위로 쏟아지는 꽃잎 샤워와 따스한 봄 햇살 속 캠크닉",
+    titleA: "머리 위로 쏟아지는 분홍빛 꽃비,",
+    titleB: "설레는 봄날의 벚꽃 캠핑.",
+    summary: "흩날리는 꽃잎 샤워와 따스한 봄 햇살 속 캠크닉",
     effect: "cherry-blossom"
   },
   {
@@ -1913,7 +1913,7 @@ const HERO_THEMES = [
     moodDescription: "대관령 푸른 언덕 & 민들레 홀씨",
     image: "hero-green-meadow.webp",
     titleA: "끝없이 펼쳐진 초록빛 언덕,",
-    titleB: "푸른 초원 글램핑.",
+    titleB: "대관령 푸른 초원 글램핑.",
     summary: "탁 트인 푸른 하늘과 보드라운 잔디밭 위에서 누리는 자유",
     effect: "green-meadow"
   }
@@ -2084,6 +2084,8 @@ class HeroCanvasController {
     this.particles = [];
     this.ripples = [];
     this.shootingStars = [];
+    this.seagulls = [];
+    this.duskParticles = [];
     this.initParticlesForTheme(themeId);
   }
 
@@ -2108,19 +2110,21 @@ class HeroCanvasController {
         break;
 
       case "autumn-maple":
-        for (let i = 0; i < 24; i++) {
+        for (let i = 0; i < 26; i++) {
           this.particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.3,
-            vy: Math.random() * 0.45 + 0.3,
-            size: Math.random() * 10 + 9,
+            vx: (Math.random() - 0.5) * 0.28,
+            vy: Math.random() * 0.42 + 0.28,
+            size: Math.random() * 10 + 11,
             angle: Math.random() * Math.PI * 2,
-            vAngle: (Math.random() - 0.5) * 0.012,
+            vAngle: (Math.random() - 0.5) * 0.014,
             flip: Math.random() * Math.PI * 2,
             vFlip: Math.random() * 0.016 + 0.008,
-            isGinkgo: Math.random() < 0.35,
-            color: Math.random() < 0.4 ? "#e74c3c" : Math.random() < 0.7 ? "#e67e22" : "#f1c40f"
+            roll: Math.random() * Math.PI * 2,
+            vRoll: Math.random() * 0.018 + 0.009,
+            isGinkgo: Math.random() < 0.38,
+            colorIdx: Math.floor(Math.random() * 4)
           });
         }
         break;
@@ -2138,13 +2142,13 @@ class HeroCanvasController {
         break;
 
       case "snowy-winter":
-        for (let i = 0; i < 36; i++) {
+        for (let i = 0; i < 38; i++) {
           this.particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
             r: Math.random() * 2.6 + 1.0,
-            vy: Math.random() * 0.4 + 0.25,
-            vx: (Math.random() - 0.5) * 0.15,
+            vy: Math.random() * 0.36 + 0.22,
+            vx: (Math.random() - 0.5) * 0.12,
             sway: Math.random() * Math.PI * 2,
             swaySpeed: Math.random() * 0.014 + 0.008,
             alpha: Math.random() * 0.4 + 0.45
@@ -2153,68 +2157,90 @@ class HeroCanvasController {
         break;
 
       case "lush-forest":
-        for (let i = 0; i < 16; i++) {
+        // 48개로 증량하여 햇살 가루와 숲의 정령 펄스 강화
+        for (let i = 0; i < 48; i++) {
           this.particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
-            r: Math.random() * 1.5 + 0.8,
-            vy: -Math.random() * 0.15 - 0.05,
-            vx: (Math.random() - 0.5) * 0.15,
-            alpha: Math.random() * 0.2 + 0.1,
+            r: Math.random() * 2.0 + 1.0,
+            vy: -Math.random() * 0.18 - 0.06,
+            vx: (Math.random() - 0.5) * 0.14,
+            alpha: Math.random() * 0.35 + 0.18,
             pulse: Math.random() * Math.PI * 2,
-            color: Math.random() < 0.6 ? "rgba(255, 255, 230," : "rgba(210, 255, 190,"
+            pulseSpeed: Math.random() * 0.024 + 0.012,
+            color: Math.random() < 0.6 ? "rgba(255, 252, 215," : "rgba(205, 255, 210,"
           });
         }
         break;
 
       case "riverside":
-        for (let i = 0; i < 34; i++) {
+        // 38개 다이아몬드 스파클 및 렌즈 플레어 윤슬
+        for (let i = 0; i < 38; i++) {
           this.particles.push({
             x: Math.random() * w,
-            y: h * 0.45 + Math.random() * (h * 0.55),
-            size: Math.random() * 2.8 + 1.2,
-            alpha: Math.random() * 0.65 + 0.25,
+            y: h * 0.42 + Math.random() * (h * 0.58),
+            size: Math.random() * 3.2 + 1.6,
+            flareLen: Math.random() * 16 + 10,
+            alpha: Math.random() * 0.7 + 0.3,
             pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.035 + 0.018
+            pulseSpeed: Math.random() * 0.038 + 0.018
           });
         }
         break;
 
       case "warm-bonfire":
-        for (let i = 0; i < 48; i++) {
+        // 52개 캡슐·스파크·미세 불티 다변화
+        for (let i = 0; i < 52; i++) {
           this.particles.push(this.createEmbersParticle(w, h, true));
         }
         break;
 
       case "sunset-coast":
-        for (let i = 0; i < 24; i++) {
+        // 42개 수평 반사광 + 20개 노을 대기 미립자 + 3마리 갈매기 실루엣
+        for (let i = 0; i < 42; i++) {
           this.particles.push({
             x: Math.random() * w,
-            y: h * 0.52 + Math.random() * (h * 0.48),
-            vx: -Math.random() * 0.2 - 0.05,
-            len: Math.random() * 26 + 12,
-            alpha: Math.random() * 0.35 + 0.2,
+            y: h * 0.50 + Math.random() * (h * 0.50),
+            vx: -Math.random() * 0.22 - 0.06,
+            len: Math.random() * 34 + 16,
+            alpha: Math.random() * 0.45 + 0.25,
             pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.02 + 0.012
+            pulseSpeed: Math.random() * 0.024 + 0.012
           });
         }
+        for (let i = 0; i < 20; i++) {
+          this.duskParticles.push({
+            x: Math.random() * w,
+            y: Math.random() * (h * 0.6),
+            vx: (Math.random() - 0.5) * 0.15,
+            vy: -Math.random() * 0.15 - 0.05,
+            r: Math.random() * 1.8 + 0.8,
+            pulse: Math.random() * Math.PI * 2,
+            alpha: Math.random() * 0.35 + 0.15
+          });
+        }
+        this.seagulls = [
+          { x: w * 0.18, y: h * 0.22, vx: 0.65, vy: -0.03, wingSpan: 14, wingPhase: 0, wingSpeed: 0.065 },
+          { x: w * 0.30, y: h * 0.18, vx: 0.75, vy: 0.02, wingSpan: 11, wingPhase: 1.6, wingSpeed: 0.075 },
+          { x: w * 0.10, y: h * 0.28, vx: 0.58, vy: 0.01, wingSpan: 9, wingPhase: 3.2, wingSpeed: 0.06 }
+        ];
         break;
 
       case "cherry-blossom":
-        for (let i = 0; i < 28; i++) {
+        // 65개 대량 벚꽃비 샤워
+        for (let i = 0; i < 65; i++) {
           this.particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
-            vx: -Math.random() * 0.25 - 0.1,
-            vy: Math.random() * 0.35 + 0.25,
+            vx: -Math.random() * 0.28 - 0.12,
+            vy: Math.random() * 0.36 + 0.26,
             size: Math.random() * 9 + 8,
             rot: Math.random() * Math.PI * 2,
-            vRot: (Math.random() - 0.5) * 0.014,
+            vRot: (Math.random() - 0.5) * 0.016,
             flip: Math.random() * Math.PI * 2,
-            vFlip: Math.random() * 0.016 + 0.008,
+            vFlip: Math.random() * 0.018 + 0.009,
             roll: Math.random() * Math.PI * 2,
-            vRoll: Math.random() * 0.018 + 0.009,
-            type: Math.floor(Math.random() * 3),
+            vRoll: Math.random() * 0.02 + 0.01,
             seed: Math.random() * 10,
             colorBase: Math.random() < 0.5 ? "255, 175, 195" : "255, 190, 205"
           });
@@ -2222,18 +2248,21 @@ class HeroCanvasController {
         break;
 
       case "green-meadow":
-        for (let i = 0; i < 18; i++) {
+        // 30개 3D 텀블링 민들레 홀씨
+        for (let i = 0; i < 30; i++) {
           this.particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
-            vx: -Math.random() * 0.3 - 0.15,
-            vy: (Math.random() - 0.5) * 0.12,
-            size: Math.random() * 6 + 12,
+            vx: -Math.random() * 0.26 - 0.12,
+            vy: (Math.random() - 0.5) * 0.1,
+            size: Math.random() * 6 + 13,
             sway: Math.random() * Math.PI * 2,
             swaySpeed: Math.random() * 0.012 + 0.008,
             alpha: Math.random() * 0.4 + 0.55,
             tilt: 0,
-            tiltTarget: 0
+            tiltTarget: 0,
+            roll: Math.random() * Math.PI * 2,
+            vRoll: (Math.random() - 0.5) * 0.018
           });
         }
         break;
@@ -2241,16 +2270,21 @@ class HeroCanvasController {
   }
 
   createEmbersParticle(w, h, initial = false) {
-    const originX = w * 0.55 + (Math.random() - 0.5) * (w * 0.45);
+    const originX = w * 0.54 + (Math.random() - 0.5) * (w * 0.46);
+    const typeRand = Math.random();
+    const type = typeRand < 0.45 ? "capsule" : typeRand < 0.75 ? "spark" : "speck";
     return {
+      type,
       x: originX,
-      y: initial ? Math.random() * h : h - Math.random() * 30,
-      vx: (Math.random() - 0.5) * 0.8,
-      vy: -Math.random() * 1.6 - 1.1,
-      size: Math.random() * 2.8 + 1.2,
-      life: initial ? Math.random() * 0.8 + 0.2 : 1,
-      decay: Math.random() * 0.004 + 0.0028,
-      color: Math.random() < 0.35 ? "#fff9c4" : Math.random() < 0.75 ? "#ffb74d" : "#ff5722",
+      y: initial ? Math.random() * h : h - Math.random() * 25,
+      vx: (Math.random() - 0.5) * (type === "spark" ? 1.3 : 0.75),
+      vy: type === "spark" ? -Math.random() * 2.6 - 1.6 : -Math.random() * 1.6 - 1.0,
+      size: type === "capsule" ? Math.random() * 2.2 + 1.4 : type === "spark" ? Math.random() * 1.4 + 0.9 : Math.random() * 1.8 + 1.1,
+      len: type === "spark" ? Math.random() * 8 + 5 : type === "capsule" ? Math.random() * 4 + 3 : 2,
+      angle: 0,
+      life: initial ? Math.random() * 0.85 + 0.15 : 1,
+      decay: type === "spark" ? Math.random() * 0.007 + 0.004 : Math.random() * 0.0035 + 0.0022,
+      color: Math.random() < 0.3 ? "#ffffff" : Math.random() < 0.65 ? "#ffe082" : Math.random() < 0.88 ? "#ff9800" : "#ff3d00",
       drift: Math.random() * Math.PI * 2
     };
   }
@@ -2417,10 +2451,18 @@ class HeroCanvasController {
   }
 
   renderAutumnMaple(ctx, w, h, mx, my, hasMouse) {
-    // 가을 단풍: 살랑살랑 천천히 흩날리는 낙하
+    // 가을 단풍: 정밀한 5갈래 단풍잎 & 부채꼴 은행잎 3D 텀블링 낙하
+    const MAPLE_COLORS = [
+      { base: "#d32f2f", dark: "#b71c1c", vein: "#ef9a9a" },
+      { base: "#e65100", dark: "#bf360c", vein: "#ffcc80" },
+      { base: "#f57c00", dark: "#e65100", vein: "#ffe0b2" },
+      { base: "#fbc02d", dark: "#f57f17", vein: "#fff9c4" }
+    ];
+
     for (const p of this.particles) {
       p.angle += p.vAngle;
       p.flip += p.vFlip;
+      p.roll += p.vRoll;
 
       if (hasMouse) {
         const dx = p.x - mx;
@@ -2436,40 +2478,90 @@ class HeroCanvasController {
       p.y += p.vy;
       p.vx *= 0.97;
 
-      if (p.y > h + 30) {
-        p.y = -30;
+      if (p.y > h + 35) {
+        p.y = -35;
         p.x = Math.random() * w;
-        p.vy = Math.random() * 0.45 + 0.3;
+        p.vy = Math.random() * 0.42 + 0.28;
       }
-      if (p.x < -30) p.x = w + 30;
-      else if (p.x > w + 30) p.x = -30;
+      if (p.x < -35) p.x = w + 35;
+      else if (p.x > w + 35) p.x = -35;
 
       ctx.save();
       ctx.translate(p.x, p.y);
       ctx.rotate(p.angle);
-      ctx.scale(Math.cos(p.flip), 1);
-      ctx.fillStyle = p.color;
+      const sx = Math.cos(p.flip);
+      const sy = Math.cos(p.roll) * 0.35 + 0.65;
+      ctx.scale(sx, sy);
+
+      const pal = MAPLE_COLORS[p.colorIdx % MAPLE_COLORS.length];
 
       if (p.isGinkgo) {
+        // 정밀 은행잎 (부채꼴 + 중심 V자 홈 + 부채살 결 + 줄기)
+        const s = p.size * 0.9;
+        ctx.fillStyle = "#f9a825";
         ctx.beginPath();
-        ctx.arc(0, 0, p.size * 0.75, -Math.PI * 0.75, -Math.PI * 0.25, false);
-        ctx.lineTo(0, p.size * 0.55);
+        ctx.moveTo(0, s * 0.6);
+        ctx.lineTo(-s * 0.08, s * 0.1);
+        ctx.bezierCurveTo(-s * 0.8, -s * 0.1, -s * 0.85, -s * 0.65, -s * 0.15, -s * 0.8);
+        ctx.lineTo(0, -s * 0.62);
+        ctx.lineTo(s * 0.15, -s * 0.8);
+        ctx.bezierCurveTo(s * 0.85, -s * 0.65, s * 0.8, -s * 0.1, s * 0.08, s * 0.1);
         ctx.closePath();
         ctx.fill();
+
+        ctx.strokeStyle = "rgba(255, 249, 196, 0.45)";
+        ctx.lineWidth = 0.7;
+        for (let a = -0.6; a <= 0.6; a += 0.3) {
+          ctx.beginPath();
+          ctx.moveTo(0, s * 0.1);
+          ctx.quadraticCurveTo(a * s * 0.4, -s * 0.3, a * s * 0.7, -s * 0.7);
+          ctx.stroke();
+        }
+
+        ctx.strokeStyle = "#c47f00";
+        ctx.lineWidth = 1.1;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(s * 0.08, s * 0.35, s * 0.05, s * 0.75);
+        ctx.stroke();
       } else {
+        // 정밀 5갈래 단풍잎 (부드러운 베지어 곡선 + 주맥과 측맥)
+        const s = p.size;
+        ctx.fillStyle = pal.base;
         ctx.beginPath();
-        ctx.moveTo(0, -p.size);
-        ctx.lineTo(p.size * 0.35, -p.size * 0.4);
-        ctx.lineTo(p.size * 0.85, -p.size * 0.5);
-        ctx.lineTo(p.size * 0.45, 0.1);
-        ctx.lineTo(p.size * 0.65, p.size * 0.6);
-        ctx.lineTo(0, p.size * 0.35);
-        ctx.lineTo(-p.size * 0.65, p.size * 0.6);
-        ctx.lineTo(-p.size * 0.45, 0.1);
-        ctx.lineTo(-p.size * 0.85, -p.size * 0.5);
-        ctx.lineTo(-p.size * 0.35, -p.size * 0.4);
+        ctx.moveTo(0, -s);
+        ctx.bezierCurveTo(s * 0.18, -s * 0.7, s * 0.32, -s * 0.65, s * 0.45, -s * 0.72);
+        ctx.bezierCurveTo(s * 0.35, -s * 0.45, s * 0.55, -s * 0.35, s * 0.8, -s * 0.32);
+        ctx.bezierCurveTo(s * 0.55, -s * 0.1, s * 0.6, 0.15, s * 0.45, 0.35);
+        ctx.bezierCurveTo(s * 0.25, 0.2, s * 0.1, 0.3, 0, s * 0.5);
+        ctx.bezierCurveTo(-s * 0.1, 0.3, -s * 0.25, 0.2, -s * 0.45, 0.35);
+        ctx.bezierCurveTo(-s * 0.6, 0.15, -s * 0.55, -s * 0.1, -s * 0.8, -s * 0.32);
+        ctx.bezierCurveTo(-s * 0.55, -s * 0.35, -s * 0.35, -s * 0.45, -s * 0.45, -s * 0.72);
+        ctx.bezierCurveTo(-s * 0.32, -s * 0.65, -s * 0.18, -s * 0.7, 0, -s);
         ctx.closePath();
         ctx.fill();
+
+        ctx.strokeStyle = pal.vein;
+        ctx.lineWidth = 0.8;
+        ctx.beginPath();
+        ctx.moveTo(0, s * 0.48);
+        ctx.lineTo(0, -s * 0.85);
+        ctx.moveTo(0, s * 0.15);
+        ctx.lineTo(s * 0.65, -s * 0.25);
+        ctx.moveTo(0, s * 0.15);
+        ctx.lineTo(-s * 0.65, -s * 0.25);
+        ctx.moveTo(0, s * -0.15);
+        ctx.lineTo(s * 0.35, -s * 0.58);
+        ctx.moveTo(0, s * -0.15);
+        ctx.lineTo(-s * 0.35, -s * 0.58);
+        ctx.stroke();
+
+        ctx.strokeStyle = pal.dark;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(0, s * 0.48);
+        ctx.lineTo(0, s * 0.78);
+        ctx.stroke();
       }
       ctx.restore();
     }
@@ -2519,28 +2611,30 @@ class HeroCanvasController {
   }
 
   renderSnowyWinter(ctx, w, h, mx, my, hasMouse) {
-    // 설경 윈터: 포근하게 사뿐사뿐 내리는 함박눈
+    // 설경 윈터: 포근하게 사뿐사뿐 내리는 함박눈 (부드러운 마우스 인터랙션)
     for (const p of this.particles) {
       p.sway += p.swaySpeed;
       if (hasMouse) {
         const dx = p.x - mx;
         const dy = p.y - my;
         const dist = Math.hypot(dx, dy);
-        if (dist < 110 && dist > 0) {
-          p.vx += this.mouse.vx * 0.15 + (dx / dist) * 0.7;
+        if (dist < 100 && dist > 0) {
+          const force = (100 - dist) / 100;
+          p.vx += (dx / dist) * force * 0.14;
+          p.vy += (dy / dist) * force * 0.08;
         }
       }
 
       p.x += p.vx + Math.sin(p.sway) * 0.32;
       p.y += p.vy;
-      p.vx *= 0.98;
+      p.vx *= 0.94;
 
-      if (p.y > h + 10) {
-        p.y = -10;
+      if (p.y > h + 12) {
+        p.y = -12;
         p.x = Math.random() * w;
       }
-      if (p.x < -10) p.x = w + 10;
-      else if (p.x > w + 10) p.x = -10;
+      if (p.x < -12) p.x = w + 12;
+      else if (p.x > w + 12) p.x = -12;
 
       ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
       ctx.beginPath();
@@ -2550,24 +2644,42 @@ class HeroCanvasController {
   }
 
   renderLushForest(ctx, w, h, mx, my, hasMouse) {
-    // 편백 숲: 과하지 않은 잔잔한 아침 햇살 미세 빛가루
+    // 편백 숲: 틴들 햇살 광선(Sunbeams)과 48개의 영롱한 피톤치드 숲의 정령 빛가루
     ctx.save();
     ctx.globalCompositeOperation = "screen";
+
+    const beamPhase = Math.sin(this.time * 0.4) * 0.02;
+    for (let b = 0; b < 3; b++) {
+      const bx = w * (0.35 + b * 0.25);
+      const bGrad = ctx.createLinearGradient(bx, 0, bx - h * 0.45, h);
+      bGrad.addColorStop(0, `rgba(255, 252, 220, ${0.06 + beamPhase + b * 0.01})`);
+      bGrad.addColorStop(0.6, `rgba(255, 250, 200, ${0.03 + beamPhase})`);
+      bGrad.addColorStop(1, "rgba(255, 250, 200, 0)");
+      ctx.fillStyle = bGrad;
+      ctx.beginPath();
+      ctx.moveTo(bx - 30, 0);
+      ctx.lineTo(bx + 70, 0);
+      ctx.lineTo(bx - h * 0.45 + 130, h);
+      ctx.lineTo(bx - h * 0.45 - 50, h);
+      ctx.closePath();
+      ctx.fill();
+    }
+
     for (const p of this.particles) {
-      p.pulse += 0.02;
-      const alpha = Math.max(0.06, p.alpha + Math.sin(p.pulse) * 0.1);
+      p.pulse += p.pulseSpeed;
+      const alpha = Math.max(0.08, p.alpha + Math.sin(p.pulse) * 0.14);
 
       if (hasMouse) {
         const dx = mx - p.x;
         const dy = my - p.y;
         const dist = Math.hypot(dx, dy);
-        if (dist < 130 && dist > 0) {
+        if (dist < 120 && dist > 0) {
           p.vx += (dx / dist) * 0.08;
           p.vy += (dy / dist) * 0.08;
         }
       }
 
-      p.x += p.vx + Math.sin(p.pulse) * 0.18;
+      p.x += p.vx + Math.sin(p.pulse) * 0.22;
       p.y += p.vy;
       p.vx *= 0.96;
       p.vy *= 0.96;
@@ -2576,19 +2688,20 @@ class HeroCanvasController {
       if (p.x < -15) p.x = w + 15;
       else if (p.x > w + 15) p.x = -15;
 
-      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.2);
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.8);
       g.addColorStop(0, `${p.color} ${alpha})`);
+      g.addColorStop(0.4, `${p.color} ${alpha * 0.5})`);
       g.addColorStop(1, `${p.color} 0)`);
       ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * 2.2, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, p.r * 2.8, 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.restore();
   }
 
   renderRiverside(ctx, w, h, mx, my, hasMouse) {
-    // 호숫가 카약: 글로우 블렌드(screen)로 보석처럼 아롱거리는 윤슬
+    // 호숫가 카약: 뾰족한 다이아몬드 스파클 & 수평 렌즈 플레어 물빛 반사
     ctx.save();
     ctx.globalCompositeOperation = "screen";
 
@@ -2596,15 +2709,23 @@ class HeroCanvasController {
       p.pulse += p.pulseSpeed;
       const alpha = Math.max(0, (Math.sin(p.pulse) + 0.35) * p.alpha);
       if (alpha > 0.04) {
-        const rad = p.size * 2.2;
-        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rad);
-        g.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.95})`);
-        g.addColorStop(0.35, `rgba(160, 235, 255, ${alpha * 0.5})`);
-        g.addColorStop(1, "rgba(160, 235, 255, 0)");
-        ctx.fillStyle = g;
+        const d = p.size * 2.4;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, rad, 0, Math.PI * 2);
+        ctx.moveTo(p.x, p.y - d);
+        ctx.quadraticCurveTo(p.x, p.y, p.x + d, p.y);
+        ctx.quadraticCurveTo(p.x, p.y, p.x, p.y + d);
+        ctx.quadraticCurveTo(p.x, p.y, p.x - d, p.y);
+        ctx.quadraticCurveTo(p.x, p.y, p.x, p.y - d);
+        ctx.closePath();
+        ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.95})`;
         ctx.fill();
+
+        const flareGrad = ctx.createLinearGradient(p.x - p.flareLen, p.y, p.x + p.flareLen, p.y);
+        flareGrad.addColorStop(0, "rgba(160, 235, 255, 0)");
+        flareGrad.addColorStop(0.5, `rgba(255, 255, 255, ${alpha * 0.85})`);
+        flareGrad.addColorStop(1, "rgba(160, 235, 255, 0)");
+        ctx.fillStyle = flareGrad;
+        ctx.fillRect(p.x - p.flareLen, p.y - 0.75, p.flareLen * 2, 1.5);
       }
     }
 
@@ -2626,14 +2747,14 @@ class HeroCanvasController {
   }
 
   renderWarmBonfire(ctx, w, h, mx, my, hasMouse) {
-    // 불멍 캠핑: 장작불에서 시작해 화면 상단까지 높고 풍성하게 피어오르는 불티
+    // 불멍 캠핑: 캡슐 불티, 가느다란 스파크 궤적, 미세 입자 다변화 드로잉
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
 
     for (let i = this.particles.length - 1; i >= 0; i--) {
       const p = this.particles[i];
       p.life -= p.decay;
-      if (p.life <= 0 || p.y < -20) {
+      if (p.life <= 0 || p.y < -25) {
         this.particles[i] = this.createEmbersParticle(w, h, false);
         continue;
       }
@@ -2653,40 +2774,64 @@ class HeroCanvasController {
       p.drift += 0.015;
       p.vx *= 0.985;
 
-      const currentSize = Math.max(1, p.size * (0.4 + p.life * 0.6));
-      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, currentSize * 2.5);
-      g.addColorStop(0, p.color);
-      g.addColorStop(0.4, p.color);
-      g.addColorStop(1, "rgba(255, 87, 34, 0)");
+      const alpha = Math.min(1, p.life * 1.4);
+      ctx.globalAlpha = alpha;
 
-      ctx.fillStyle = g;
-      ctx.globalAlpha = Math.min(1, p.life * 1.4);
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, currentSize * 2.5, 0, Math.PI * 2);
-      ctx.fill();
+      if (p.type === "spark") {
+        ctx.strokeStyle = p.color;
+        ctx.lineWidth = p.size;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.x - p.vx * 2, p.y - p.vy * 2.2);
+        ctx.stroke();
+      } else if (p.type === "capsule") {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        const heading = Math.atan2(p.vy, p.vx + Math.sin(this.time * 1.6 + p.drift) * 0.65);
+        ctx.rotate(heading);
+
+        const g = ctx.createLinearGradient(0, -p.len, 0, p.len);
+        g.addColorStop(0, p.color);
+        g.addColorStop(0.7, p.color);
+        g.addColorStop(1, "rgba(255, 87, 34, 0)");
+        ctx.fillStyle = g;
+
+        ctx.beginPath();
+        ctx.ellipse(0, 0, p.size * 0.9, p.len, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      } else {
+        const currentSize = Math.max(0.8, p.size * (0.4 + p.life * 0.6));
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, currentSize * 2.2);
+        g.addColorStop(0, p.color);
+        g.addColorStop(0.5, p.color);
+        g.addColorStop(1, "rgba(255, 87, 34, 0)");
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, currentSize * 2.2, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
     ctx.restore();
   }
 
   renderSunsetCoast(ctx, w, h, mx, my, hasMouse) {
-    // 서해안 노을: 쌩뚱맞은 원 제거 → 수평선 대기 노을 글로우 & 갯벌 석양 반사 윤슬
+    // 서해안 노을: 갯벌 황금빛 석양 물결 라인 + 노을 대기 미립자 + 멀리 날아가는 갈매기 실루엣
     ctx.save();
     ctx.globalCompositeOperation = "screen";
 
-    // 1. 수평선 부근 부드러운 노을빛 호흡
     const glowCycle = (Math.sin(this.time * 0.5) + 1) * 0.5;
-    const sunsetGrad = ctx.createRadialGradient(w * 0.5, h * 0.52, 20, w * 0.5, h * 0.52, w * 0.6);
-    sunsetGrad.addColorStop(0, `rgba(255, 138, 51, ${0.11 + glowCycle * 0.05})`);
-    sunsetGrad.addColorStop(0.55, `rgba(255, 87, 34, ${0.05 + glowCycle * 0.03})`);
+    const sunsetGrad = ctx.createRadialGradient(w * 0.5, h * 0.52, 20, w * 0.5, h * 0.52, w * 0.65);
+    sunsetGrad.addColorStop(0, `rgba(255, 140, 50, ${0.14 + glowCycle * 0.05})`);
+    sunsetGrad.addColorStop(0.5, `rgba(255, 90, 30, ${0.07 + glowCycle * 0.03})`);
     sunsetGrad.addColorStop(1, "rgba(255, 87, 34, 0)");
     ctx.fillStyle = sunsetGrad;
     ctx.fillRect(0, 0, w, h);
 
-    // 2. 갯벌 및 수면에 길게 드리워진 석양빛 반사 하이라이트
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
       p.x += p.vx;
-      if (p.x < -40) p.x = w + 40;
+      if (p.x < -50) p.x = w + 50;
 
       if (hasMouse && Math.hypot(p.x - mx, p.y - my) < 90) {
         p.pulse += 0.05;
@@ -2696,17 +2841,51 @@ class HeroCanvasController {
       if (alpha > 0.02) {
         const lineGrad = ctx.createLinearGradient(p.x - p.len, p.y, p.x + p.len, p.y);
         lineGrad.addColorStop(0, "rgba(255, 171, 64, 0)");
-        lineGrad.addColorStop(0.5, `rgba(255, 236, 179, ${alpha * 0.85})`);
+        lineGrad.addColorStop(0.5, `rgba(255, 240, 185, ${alpha * 0.95})`);
         lineGrad.addColorStop(1, "rgba(255, 171, 64, 0)");
         ctx.fillStyle = lineGrad;
-        ctx.fillRect(p.x - p.len, p.y - 1, p.len * 2, 2.2);
+        ctx.fillRect(p.x - p.len, p.y - 1.2, p.len * 2, 2.8);
       }
+    }
+
+    for (const d of this.duskParticles) {
+      d.pulse += 0.02;
+      d.x += d.vx;
+      d.y += d.vy;
+      if (d.y < -10) d.y = h * 0.6;
+      if (d.x < -10) d.x = w + 10;
+      else if (d.x > w + 10) d.x = -10;
+
+      const da = Math.max(0.05, d.alpha + Math.sin(d.pulse) * 0.1);
+      ctx.fillStyle = `rgba(255, 215, 170, ${da})`;
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+
+    ctx.save();
+    for (const g of this.seagulls) {
+      g.x += g.vx;
+      g.y += g.vy;
+      g.wingPhase += g.wingSpeed;
+      if (g.x > w + 50) g.x = -50;
+
+      const wingY = Math.sin(g.wingPhase) * (g.wingSpan * 0.42);
+      ctx.strokeStyle = "rgba(40, 24, 18, 0.65)";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(g.x, g.y);
+      ctx.quadraticCurveTo(g.x - g.wingSpan * 0.5, g.y + wingY - 2, g.x - g.wingSpan, g.y + wingY);
+      ctx.moveTo(g.x, g.y);
+      ctx.quadraticCurveTo(g.x + g.wingSpan * 0.5, g.y + wingY - 2, g.x + g.wingSpan, g.y + wingY);
+      ctx.stroke();
     }
     ctx.restore();
   }
 
   renderCherryBlossom(ctx, w, h, mx, my, hasMouse) {
-    // 봄날 벚꽃: 속도 감속, 벚꽃잎 V자 노치 실루엣, 3D 텀블링, 바람의 물결
+    // 봄날 벚꽃: 65개 대량 벚꽃잎 꽃비 샤워, V자 노치, 3D 텀블링
     for (const p of this.particles) {
       p.rot += p.vRot;
       p.flip += p.vFlip;
@@ -2730,7 +2909,7 @@ class HeroCanvasController {
       if (p.y > h + 25) {
         p.y = -25;
         p.x = Math.random() * w;
-        p.vy = Math.random() * 0.35 + 0.25;
+        p.vy = Math.random() * 0.36 + 0.26;
       }
       if (p.x < -25) p.x = w + 25;
       else if (p.x > w + 25) p.x = -25;
@@ -2740,14 +2919,12 @@ class HeroCanvasController {
       ctx.rotate(p.rot);
       ctx.scale(Math.cos(p.flip), Math.sin(p.roll) * 0.35 + 0.65);
 
-      // 벚꽃잎 그라데이션
       const grad = ctx.createLinearGradient(0, p.size * 0.7, 0, -p.size * 0.7);
       grad.addColorStop(0, `rgba(${p.colorBase}, 0.95)`);
       grad.addColorStop(0.6, `rgba(${p.colorBase}, 0.85)`);
-      grad.addColorStop(1, "rgba(255, 240, 245, 0.9)");
+      grad.addColorStop(1, "rgba(255, 240, 245, 0.92)");
       ctx.fillStyle = grad;
 
-      // 벚꽃잎 특유의 상단 V자 홈(Notch) 실루엣
       ctx.beginPath();
       ctx.moveTo(0, p.size * 0.7);
       ctx.bezierCurveTo(-p.size * 0.55, p.size * 0.3, -p.size * 0.65, -p.size * 0.4, -p.size * 0.25, -p.size * 0.7);
@@ -2761,9 +2938,10 @@ class HeroCanvasController {
   }
 
   renderGreenMeadow(ctx, w, h, mx, my, hasMouse) {
-    // 초원 글램핑: 고품질 민들레 홀씨 (Pappus 낙하산 솜털 + 꽃대 + 씨앗)
+    // 초원 글램핑: 3D 입체 투영 텀블링 민들레 홀씨 (Pappus Dome & 16가닥 우산살)
     for (const p of this.particles) {
       p.sway += p.swaySpeed;
+      p.roll += p.vRoll;
 
       if (hasMouse) {
         const dx = p.x - mx;
@@ -2791,15 +2969,15 @@ class HeroCanvasController {
       ctx.save();
       ctx.translate(p.x, p.y);
       ctx.rotate(p.tilt);
+      ctx.scale(Math.cos(p.roll) * 0.3 + 0.7, 1);
 
       const stemLen = p.size * 0.75;
       const umbrellaR = p.size * 0.7;
 
-      // 1. 방사형 갓털 (Pappus / 솜털 우산살 14가닥)
-      ctx.strokeStyle = `rgba(255, 255, 255, ${p.alpha * 0.75})`;
+      ctx.strokeStyle = `rgba(255, 255, 255, ${p.alpha * 0.78})`;
       ctx.lineWidth = 0.8;
-      for (let i = 0; i < 14; i++) {
-        const ang = -Math.PI * 0.85 + (i / 13) * (Math.PI * 0.7);
+      for (let i = 0; i < 16; i++) {
+        const ang = -Math.PI * 0.88 + (i / 15) * (Math.PI * 0.76);
         const fx = Math.cos(ang) * umbrellaR;
         const fy = Math.sin(ang) * umbrellaR * 0.75 - stemLen;
         ctx.beginPath();
@@ -2807,14 +2985,12 @@ class HeroCanvasController {
         ctx.lineTo(fx, fy);
         ctx.stroke();
 
-        // 솜털 끝 미세 입자
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha * 0.85})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha * 0.88})`;
         ctx.beginPath();
-        ctx.arc(fx, fy, 0.7, 0, Math.PI * 2);
+        ctx.arc(fx, fy, 0.75, 0, Math.PI * 2);
         ctx.fill();
       }
 
-      // 2. 중심 꽃대 (Stem)
       ctx.strokeStyle = `rgba(235, 230, 215, ${p.alpha * 0.9})`;
       ctx.lineWidth = 1;
       ctx.beginPath();
@@ -2822,10 +2998,9 @@ class HeroCanvasController {
       ctx.lineTo(0, -stemLen);
       ctx.stroke();
 
-      // 3. 씨앗 본체 (Achene)
       ctx.fillStyle = `rgba(180, 150, 110, ${p.alpha})`;
       ctx.beginPath();
-      ctx.ellipse(0, 2, 1.2, 3.2, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, 2, 1.3, 3.4, 0, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.restore();
@@ -2892,10 +3067,10 @@ function initHeroDynamicEngine(v) {
     function updateText() {
       if (titleAEl) titleAEl.textContent = theme.titleA;
       if (titleBEl) {
-        titleBEl.innerHTML = `전국 <b class="hero-n" data-hero-total>${fmt(heroCounts().total)}</b>곳 <em>${esc(theme.titleB)}</em>`;
+        titleBEl.innerHTML = `<em>${esc(theme.titleB)}</em>`;
       }
       if (summaryEl) {
-        summaryEl.innerHTML = `캠핑장 <b data-hero-stay>${fmt(heroCounts().stay)}</b>곳 · 당일 나들이 <b data-hero-day>${fmt(heroCounts().day)}</b>곳, ${esc(theme.summary)}`;
+        summaryEl.innerHTML = `전국 <b class="hero-n" data-hero-total>${fmt(heroCounts().total)}</b>곳 (캠핑장 <b data-hero-stay>${fmt(heroCounts().stay)}</b>곳 · 당일 나들이 <b data-hero-day>${fmt(heroCounts().day)}</b>곳), ${esc(theme.summary)}`;
       }
     }
   }
@@ -2963,9 +3138,9 @@ function homeView() {
     <div class="hero-in">
       <h1 id="hero-t">
         <span class="h1-a" data-hero-title-a>${esc(initialTheme.titleA)}</span>
-        <span class="h1-b" data-hero-title-b>전국 <b class="hero-n" data-hero-total>${fmt(heroCounts().total)}</b>곳 <em>${esc(initialTheme.titleB)}</em></span>
+        <span class="h1-b" data-hero-title-b><em>${esc(initialTheme.titleB)}</em></span>
       </h1>
-      <p class="hero-summary" data-hero-summary>캠핑장 <b data-hero-stay>${fmt(heroCounts().stay)}</b>곳 · 당일 나들이 <b data-hero-day>${fmt(heroCounts().day)}</b>곳, ${esc(initialTheme.summary)}</p>
+      <p class="hero-summary" data-hero-summary>전국 <b class="hero-n" data-hero-total>${fmt(heroCounts().total)}</b>곳 (캠핑장 <b data-hero-stay>${fmt(heroCounts().stay)}</b>곳 · 당일 나들이 <b data-hero-day>${fmt(heroCounts().day)}</b>곳), ${esc(initialTheme.summary)}</p>
       <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div>${commonFinderForm({ formAttr: "data-search", isList: false })}</div>
     </div>
   </section>
