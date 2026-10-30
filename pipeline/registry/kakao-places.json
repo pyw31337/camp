@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-10-30T09:57:13.501Z",
+ "generated_at": "2026-10-30T17:59:38.444Z",
  "source": {
   "label": "카카오 로컬 키워드 검색 · Daum 웹 검색(공식 REST API)",
   "docs": [
@@ -5388,7 +5388,7 @@
    "homepage": null
   },
   "640": {
-   "checked_at": "2026-10-30T09:57:09.903Z",
+   "checked_at": "2026-10-30T17:59:34.751Z",
    "place": {
     "id": "17591877",
     "name": "느티나무캠핑장",
@@ -8528,7 +8528,7 @@
    "homepage": null
   },
   "977": {
-   "checked_at": "2026-10-30T09:57:09.938Z",
+   "checked_at": "2026-10-30T17:59:34.793Z",
    "place": null,
    "candidates": [
     {
@@ -17814,7 +17814,7 @@
    "homepage": null
   },
   "2472": {
-   "checked_at": "2026-10-30T09:57:12.904Z",
+   "checked_at": "2026-10-30T17:59:37.837Z",
    "place": {
     "id": "898560745",
     "name": "원주두리캠핑장",
@@ -46346,7 +46346,7 @@
    "homepage": null
   },
   "100122": {
-   "checked_at": "2026-10-30T09:57:11.950Z",
+   "checked_at": "2026-10-30T17:59:36.830Z",
    "place": {
     "id": "1579667394",
     "name": "라플란드",
@@ -49632,7 +49632,7 @@
    "homepage": null
   },
   "100289": {
-   "checked_at": "2026-10-30T09:57:11.773Z",
+   "checked_at": "2026-10-30T17:59:36.436Z",
    "place": {
     "id": "828875441",
     "name": "가델캠핑장",
@@ -59774,7 +59774,7 @@
    "homepage": null
   },
   "100597": {
-   "checked_at": "2026-10-30T09:57:12.268Z",
+   "checked_at": "2026-10-30T17:59:36.956Z",
    "place": {
     "id": "1537097954",
     "name": "노리터키즈캠핑장",
@@ -63003,7 +63003,7 @@
    "homepage": null
   },
   "100676": {
-   "checked_at": "2026-10-30T09:57:12.403Z",
+   "checked_at": "2026-10-30T17:59:37.326Z",
    "place": null,
    "candidates": [
     {
@@ -64600,7 +64600,7 @@
    "homepage": null
   },
   "100721": {
-   "checked_at": "2026-10-30T09:57:11.799Z",
+   "checked_at": "2026-10-30T17:59:36.444Z",
    "place": {
     "id": "1779251680",
     "name": "캠핑굄성",
@@ -76775,7 +76775,7 @@
    "homepage": null
   },
   "101093": {
-   "checked_at": "2026-10-30T09:57:12.983Z",
+   "checked_at": "2026-10-30T17:59:37.870Z",
    "place": null,
    "candidates": [
     {
@@ -81074,7 +81074,7 @@
    "homepage": null
   },
   "101214": {
-   "checked_at": "2026-10-30T09:57:09.939Z",
+   "checked_at": "2026-10-30T17:59:34.794Z",
    "place": {
     "id": "661902238",
     "name": "캠프다온",
@@ -83041,7 +83041,7 @@
    "homepage": null
   },
   "101269": {
-   "checked_at": "2026-10-30T09:57:11.926Z",
+   "checked_at": "2026-10-30T17:59:36.801Z",
    "place": {
     "id": "826081055",
     "name": "골든쌔들캠핑장",
@@ -88351,7 +88351,7 @@
    "homepage": null
   },
   "101416": {
-   "checked_at": "2026-10-30T09:57:11.290Z",
+   "checked_at": "2026-10-30T17:59:36.307Z",
    "place": {
     "id": "1931362185",
     "name": "내포캠핑스퀘어",
@@ -95123,7 +95123,7 @@
    "homepage": null
   },
   "101608": {
-   "checked_at": "2026-10-30T09:57:12.231Z",
+   "checked_at": "2026-10-30T17:59:36.948Z",
    "place": {
     "id": "2026652673",
     "name": "원더 포레스트",
@@ -96052,7 +96052,7 @@
    "homepage": null
   },
   "101639": {
-   "checked_at": "2026-10-30T09:57:09.940Z",
+   "checked_at": "2026-10-30T17:59:34.795Z",
    "place": {
     "id": "604025620",
     "name": "물멍 캠프",
@@ -114441,7 +114441,7 @@
    "homepage": null
   },
   "102221": {
-   "checked_at": "2026-10-30T09:57:12.881Z",
+   "checked_at": "2026-10-30T17:59:37.768Z",
    "place": null,
    "candidates": [
     {
@@ -114602,7 +114602,7 @@
    "homepage": null
   },
   "102229": {
-   "checked_at": "2026-10-30T09:57:12.705Z",
+   "checked_at": "2026-10-30T17:59:37.464Z",
    "place": null,
    "candidates": [],
    "needs_homepage": false,
@@ -115419,7 +115419,7 @@
    "homepage": null
   },
   "102270": {
-   "checked_at": "2026-10-30T09:57:12.748Z",
+   "checked_at": "2026-10-30T17:59:37.477Z",
    "place": null,
    "candidates": [
     {
@@ -118414,7 +118414,7 @@
    "homepage": null
   },
   "102377": {
-   "checked_at": "2026-10-30T09:57:12.436Z",
+   "checked_at": "2026-10-30T17:59:37.343Z",
    "place": null,
    "candidates": [],
    "needs_homepage": true,
