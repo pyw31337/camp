@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-29T23:27:06.030Z",
+ "generated_at": "2026-10-30T01:36:25.155Z",
  "date": "2026-10-30",
  "totals": {
   "campgrounds": 6416,
-  "facts": 238195,
-  "pairs": 188993,
+  "facts": 238196,
+  "pairs": 188991,
   "mean_confidence": 0.786,
   "confirmed_pct": 85,
   "corroborated": 3947,
@@ -545,16 +545,16 @@
    }
   },
   "PROMOTION": {
-   "coverage": 10,
-   "coverage_pct": 0.2,
-   "mean_confidence": 0.46,
-   "confirmed_pct": 20,
+   "coverage": 9,
+   "coverage_pct": 0.1,
+   "mean_confidence": 0.411,
+   "confirmed_pct": 11.1,
    "corroborated": 0,
    "conflicts": 0,
    "weak": 8,
    "status": {
     "WEAK": 8,
-    "CONFIRMED": 2
+    "CONFIRMED": 1
    }
   },
   "CHARCOAL_ALLOWED": {
@@ -1639,17 +1639,17 @@
    }
   },
   "SITE_SIZE": {
-   "coverage": 1331,
+   "coverage": 1330,
    "coverage_pct": 20.7,
    "mean_confidence": 0.827,
    "confirmed_pct": 88,
    "corroborated": 312,
    "conflicts": 0,
-   "weak": 123,
+   "weak": 122,
    "status": {
     "CONFIRMED": 986,
     "VERIFIED": 185,
-    "WEAK": 123,
+    "WEAK": 122,
     "CORROBORATED": 8,
     "SINGLE": 29
    }
@@ -1927,15 +1927,15 @@
   "CHECKIN_TIME": {
    "coverage": 2648,
    "coverage_pct": 41.3,
-   "mean_confidence": 0.523,
-   "confirmed_pct": 19.3,
+   "mean_confidence": 0.524,
+   "confirmed_pct": 19.4,
    "corroborated": 568,
    "conflicts": 40,
-   "weak": 1317,
+   "weak": 1316,
    "status": {
     "VERIFIED": 195,
-    "WEAK": 1317,
-    "CONFIRMED": 317,
+    "WEAK": 1316,
+    "CONFIRMED": 318,
     "SINGLE": 608,
     "CORROBORATED": 171,
     "CONFLICT": 40
@@ -1948,12 +1948,12 @@
    "confirmed_pct": 20.3,
    "corroborated": 637,
    "conflicts": 15,
-   "weak": 1317,
+   "weak": 1318,
    "status": {
     "VERIFIED": 205,
-    "WEAK": 1317,
-    "CONFIRMED": 332,
-    "SINGLE": 568,
+    "WEAK": 1318,
+    "CONFIRMED": 333,
+    "SINGLE": 566,
     "CORROBORATED": 214,
     "CONFLICT": 15
    }
@@ -2065,5 +2065,12 @@
    }
   }
  },
- "regressions": []
+ "regressions": [
+  {
+   "attr": "PROMOTION",
+   "kind": "confidence",
+   "from": 0.46,
+   "to": 0.411
+  }
+ ]
 }

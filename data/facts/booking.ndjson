@@ -6796,10 +6796,10 @@
 {"cid":"102377","attr":"BOOKING_CHANNEL","value":"camfit","grade":"CONFIRMED","src":"gocamping","text":"캠핏","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874","at":"2026-10-21T09:28:00+09:00"}
 {"cid":"102377","attr":"BOOKING_CHANNEL","value":"phone","grade":"CONFIRMED","src":"gocamping","text":"전화 예약","url":"https://m.tripinfo.co.kr/info.html?content_type_id=28&content_id=3010874","at":"2026-10-21T09:28:00+09:00"}
 {"cid":"102377","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"pdu-amazing-gimpo","attr":"BOOKING_CHANNEL","value":"own","grade":"CONFIRMED","src":"dayuse_seed","url":"https://kpv.amazingticket.site","at":"2026-10-29","text":"어메이징티켓"}
-{"cid":"pdu-amazing-paju","attr":"BOOKING_CHANNEL","value":"own","grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-10-29","text":"어메이징티켓"}
-{"cid":"pdu-lagrills-yongin","attr":"BOOKING_CHANNEL","value":"naver","grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-10-29","text":"네이버 예약"}
-{"cid":"pdu-mysticcamp-yeongjong","attr":"BOOKING_CHANNEL","value":"naver","grade":"CONFIRMED","src":"dayuse_seed","url":"https://mysticcamp.co.kr","at":"2026-10-29","text":"네이버 예약"}
+{"cid":"pdu-amazing-gimpo","attr":"BOOKING_CHANNEL","value":"own","grade":"CONFIRMED","src":"dayuse_seed","url":"https://kpv.amazingticket.site","at":"2026-10-30","text":"어메이징티켓"}
+{"cid":"pdu-amazing-paju","attr":"BOOKING_CHANNEL","value":"own","grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-10-30","text":"어메이징티켓"}
+{"cid":"pdu-lagrills-yongin","attr":"BOOKING_CHANNEL","value":"naver","grade":"CONFIRMED","src":"dayuse_seed","url":"https://lagrills-bbq.blogspot.com","at":"2026-10-30","text":"네이버 예약"}
+{"cid":"pdu-mysticcamp-yeongjong","attr":"BOOKING_CHANNEL","value":"naver","grade":"CONFIRMED","src":"dayuse_seed","url":"https://mysticcamp.co.kr","at":"2026-10-30","text":"네이버 예약"}
 {"cid":"pilot-002-sureui","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"gocamping","text":"숲나들e","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032"}
 {"cid":"pilot-002-sureui","attr":"BOOKING_REALTIME","value":true,"grade":"CONFIRMED","src":"gocamping","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030032"}
 {"cid":"pilot-003-duruwell","attr":"BOOKING_CHANNEL","value":"foresttrip","grade":"CONFIRMED","src":"gocamping","text":"숲나들e","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030095"}

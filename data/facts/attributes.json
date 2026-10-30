@@ -467,7 +467,7 @@
    "coverage": {
     "campgrounds": 1547,
     "by_grade": {
-     "OPERATOR": 8742,
+     "OPERATOR": 8743,
      "CONFIRMED": 3
     }
    }
@@ -554,10 +554,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 10,
+    "campgrounds": 9,
     "by_grade": {
-     "OPERATOR": 2,
-     "MENTION": 8
+     "MENTION": 8,
+     "OPERATOR": 1
     }
    }
   },
@@ -573,7 +573,7 @@
     "by_grade": {
      "MENTION": 3518,
      "REFERENCE": 452,
-     "OPERATOR": 645,
+     "OPERATOR": 646,
      "CONFIRMED": 4
     }
    }
@@ -590,7 +590,7 @@
     "by_grade": {
      "MENTION": 3501,
      "REFERENCE": 445,
-     "OPERATOR": 612,
+     "OPERATOR": 613,
      "CONFIRMED": 2
     }
    }
@@ -764,10 +764,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 1331,
+    "campgrounds": 1330,
     "by_grade": {
      "CONFIRMED": 1796,
-     "MENTION": 412,
+     "MENTION": 411,
      "OPERATOR": 549,
      "VERIFIED": 39
     }
@@ -2655,5 +2655,5 @@
    }
   }
  ],
- "generated_at": "2026-10-29T23:26:52.589Z"
+ "generated_at": "2026-10-30T01:36:07.451Z"
 }
