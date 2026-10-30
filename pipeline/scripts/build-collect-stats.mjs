@@ -98,6 +98,43 @@ function backfill() {
   }
 }
 
+/** 날짜 목록 → { total, d1, d7, d30, byDay(전체 날짜) } — AI 분석·에이전트 작업량용 */
+function volume(dates, today) {
+  const t = Date.parse(today), byDay = {};
+  let d1 = 0, d7 = 0, d30 = 0, total = 0;
+  for (const s of dates) {
+    const d = day(s); if (!d) continue;
+    total++; byDay[d] = (byDay[d] ?? 0) + 1;
+    const age = (t - Date.parse(d)) / 864e5;
+    if (age <= 1) d1++; if (age <= 7) d7++; if (age <= 30) d30++;
+  }
+  return { total, d1, d7, d30, byDay: Object.fromEntries(Object.entries(byDay).sort()) };
+}
+/**
+ * 사람이 아닌 일꾼(로컬 맥미니·CI 자동 수집·Claude·Codex)이 main에 남긴 커밋을 날짜별로 센다.
+ * CI의 얕은 체크아웃이면 최근 35일만 더 받아 온다(실패하면 있는 만큼).
+ */
+function agentCommits(today) {
+  const since = new Date(Date.parse(today) - 35 * 864e5).toISOString().slice(0, 10);
+  try { if (execFileSync("git", ["rev-parse", "--is-shallow-repository"], { cwd: root, encoding: "utf8" }).trim() === "true") execFileSync("git", ["fetch", "-q", `--shallow-since=${since}`, "origin", "main"], { cwd: root, stdio: "ignore", timeout: 120000 }); } catch {}
+  let raw = "";
+  try { raw = execFileSync("git", ["log", "HEAD", `--since=${since}`, "--format=%x1e%cd%x1f%an%x1f%s%x1f%b", "--date=format-local:%Y-%m-%d"], { cwd: root, encoding: "utf8", maxBuffer: 1 << 28, env: { ...process.env, TZ: "Asia/Seoul" } }); } catch { return null; }
+  const who = (an, sub, body) => {
+    if (/macmini/i.test(sub)) return "macmini";
+    if (/claude\//i.test(sub) || /Claude-Session|Co-Authored-By: Claude/i.test(body) || /^Claude$/i.test(an)) return "claude";
+    if (/codex\//i.test(sub) || /^codex$/i.test(an) || /Co-Authored-By: Codex|codex@openai/i.test(body)) return "codex";
+    if (/bot|github-actions/i.test(an) || /^chore\(data\)|bot\/data-/i.test(sub)) return "ci";
+    return "human";
+  };
+  const out = { macmini: [], claude: [], codex: [], ci: [], human: [] };
+  for (const rec of raw.split("\x1e").filter(Boolean)) {
+    const [d, an, sub, body = ""] = rec.split("\x1f");
+    if (/^Merge (pull request|branch|remote)/.test(sub) && !/(claude|codex|macmini)/i.test(sub)) continue; // 병합 커밋은 실제 작업이 아님
+    out[who(an, sub, body)].push(d);
+  }
+  return Object.fromEntries(Object.entries(out).map(([k, v]) => [k, volume(v, today)]));
+}
+
 function freshness(dates, today) {
   // 마지막 수집일 분포: 최근 30일 일별 개수 + 7일 이내·30일 이내·그보다 오래·기록 없음
   const t = Date.parse(today);
@@ -309,6 +346,21 @@ function build() {
     }
   }
 
+  // ── AI 분석량(로컬 모델·CI) · 에이전트 작업량 ──
+  const decisions = (() => { try { return readFileSync(P("data/quality/decisions.ndjson"), "utf8").trim().split("\n").map((l) => JSON.parse(l)); } catch { return []; } })();
+  const board = (() => { try { return readFileSync(P("data/board/board.ndjson"), "utf8").trim().split("\n").map((l) => JSON.parse(l)); } catch { return []; } })();
+  const nearbyAll = Object.values(nphotos);
+  const ai = {
+    analyses: [
+      { id: "text-judge", name: "글 내용 판정", engine: `로컬·CI 언어 모델(${reg("text-judgments.json").model ?? "e5"})`, what: "후기·카페·웹문서 글이 이 캠핑장 이야기인지(식당·광고·무관 주제 숨김)", ...volume(Object.values(tj).map((x) => x?.at), today), hidden: tjHidden },
+      { id: "photo-judge", name: "사진 내용 판정", engine: `로컬·CI 비전 모델(${reg("photo-judgments.json").model ?? "CLIP"})`, what: "검색 사진이 캠핑장 사진인지(음식·인물·글 캡처 제외)", ...volume(Object.values(pj).map((x) => x?.at), today), hidden: pjHidden },
+      { id: "nearby-vision", name: "주변시설 사진 판독", engine: "로컬 맥미니(Apple Vision 간판 글자 + 비전 모델)", what: "주변 시설 사진이 그 가게·시설이 맞는지", ...volume(nearbyAll.map((x) => x?.at), today), found: nearbyAll.filter((x) => !x?.none).length },
+      { id: "quality-decide", name: "충돌 판정(원문 대조)", engine: "에이전트(Claude·Codex)", what: "원천끼리 엇갈린 값을 원문과 대조해 판정", ...volume(decisions.map((x) => x?.at), today) },
+    ],
+    agents: agentCommits(today),
+    board: Object.fromEntries(Object.entries(countBy(board, (x) => String(x.agent ?? "?").toLowerCase().replace(/^codex.*/, "codex"))).map(([k]) => [k, volume(board.filter((x) => String(x.agent ?? "?").toLowerCase().replace(/^codex.*/, "codex") === k).map((x) => x.at), today)])),
+  };
+
   const out = {
     generated_at: new Date().toISOString(),
     date: today,
@@ -322,6 +374,7 @@ function build() {
     quality: { totals: q.totals ?? null, attrs, ledger: ledger.map((l) => ({ date: l.date, ...l.totals })), review_queue: rqItems.length, review_queue_by_attr: countBy(rqItems, (x) => x.label ?? x.attr), review_queue_top: rqItems.slice(0, 20).map((x) => ({ id: x.cid, name: x.name ?? null, attr: x.label ?? x.attr ?? null, values: [x.top, x.rival].filter(Boolean).map((v) => ({ v: v.value, c: v.confidence, n: v.sources })) })) },
     info_score: { mean: metrics["quality.iq"].value, dist: dist(iqs, [[0, 19, "0~19"], [20, 39, "20~39"], [40, 59, "40~59"], [60, 79, "60~79"], [80, 100, "80~100"]]), next_priorities: (info.next_priorities ?? []).slice(0, 15) },
     regions,
+    ai,
     targets_updated_at: read(P("pipeline/registry/collect-targets.json"), {}).updated_at ?? null,
   };
   writeFileSync(OUT_STATS, `${JSON.stringify(out)}\n`);

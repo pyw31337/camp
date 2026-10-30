@@ -138,6 +138,14 @@
   .wf-dots { display: flex; gap: 3px; flex-wrap: wrap; max-width: 260px; }
   .wf-dots i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
   .wf-dots i.success { background: var(--good); } .wf-dots i.failure { background: var(--bad); } .wf-dots i.cancelled, .wf-dots i.skipped { background: #c8ccc6; } .wf-dots i.running { background: var(--info); }
+  .multi { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+  .mini { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-s); padding: 10px 12px; min-width: 0; }
+  .mini.bad { border-color: #f6c9bf; } .mini.warn { border-color: #f4dcae; }
+  .mini-h { display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; font-size: .78rem; font-weight: 800; }
+  .mini-h small { display: block; font-weight: 650; color: var(--ink-3); font-size: .7rem; }
+  .mini-v { font-size: 1.05rem; font-weight: 850; letter-spacing: -.02em; }
+  .mini-s { font-size: .7rem; color: var(--ink-3); }
+  .cat-h { margin: 14px 0 6px; font-size: .86rem; font-weight: 850; color: var(--ink-2); }
   details.def { margin-top: 10px; font-size: .8rem; color: var(--ink-2); }
   details.def summary { cursor: pointer; font-weight: 800; }
   .err { padding: 40px 16px; text-align: center; color: var(--ink-3); }
@@ -175,6 +183,8 @@
   <div class="subnav-in">
     <a class="jump back" href="../"><svg class="ic"><use href="#i-back"/></svg>&nbsp;운영 기록</a>
     <a class="jump" href="#s-diag">진단</a>
+    <a class="jump" href="#s-daily">일자별 추이</a>
+    <a class="jump" href="#s-ai">AI 분석량</a>
     <a class="jump" href="#s-goal">목표 대비</a>
     <a class="jump" href="#s-trend">추이·속도</a>
     <a class="jump" href="#s-src">수집처별</a>
@@ -428,6 +438,27 @@
     html.push(`<div class="sec" id="s-diag"><h2>자동 진단</h2><p>목표·신선도·감소·충돌·링크 상태를 규칙으로 훑은 결과 — 위에서부터 급한 순</p></div>
       <div class="alerts">${diag.map((a) => `<div class="alert ${a.kind}">${badge(a.kind, { bad: "문제", warn: "주의", info: "참고", good: "정상" }[a.kind])}<div><div class="t">${esc(a.title)}</div><div class="d">${esc(a.desc)}</div></div></div>`).join("")}</div>`);
 
+    // 일자별 추이(7일·30일) — 수집처별 처리량 · 카테고리별 지표
+    html.push(`<div class="sec" id="s-daily"><h2>일자별 추이 <small class="muted" style="font-size:.8rem;font-weight:650">7일 · 30일</small></h2><p>수집처마다 날마다 몇 건을 처리했는지, 카테고리별 핵심 지표가 날마다 어떻게 움직였는지 — 막대가 비거나 갑자기 줄면 그 수집이 멈춘 것</p></div>
+      <div class="panel"><div class="chips" id="period-chips"><button class="chip" data-period="7" aria-pressed="true">최근 7일</button><button class="chip" data-period="30" aria-pressed="false">최근 30일</button></div>
+      <h3>수집처별 일별 처리량 <small>마지막 수집일 기준 · 막대 하나 = 하루</small></h3><div class="multi" id="src-multi"></div>
+      <h3 style="margin-top:16px">카테고리별 일별 추이 <small>누적값(선) · 오른쪽 위 = 기간 변화</small></h3><div id="cat-multi"></div></div>`);
+
+    // AI 분석량 · 에이전트 작업량
+    const AI = S.ai ?? { analyses: [], agents: null, board: {} };
+    const AG = { macmini: ["로컬 맥미니(야간 작업)", "nightshift: 운영자 사이트·OCR·사진 판독"], claude: ["Claude(에이전트)", "코드·데이터 수정 커밋"], codex: ["Codex(에이전트)", "코드·데이터 수정 커밋"], ci: ["자동 수집(GitHub Actions)", "정기 수집·발행 커밋"], human: ["소유자 계정(사람·기타 에이전트)", "Antigravity 등 소유자 계정으로 올린 커밋"] };
+    const aiRows = [
+      ...AI.analyses.map((a) => ({ name: a.name, engine: a.engine, what: a.what, unit: "건", v: a, extra: a.hidden != null ? `숨김·제외 ${fmt(a.hidden)}` : a.found != null ? `사진 찾음 ${fmt(a.found)}` : "" })),
+      ...Object.entries(AI.agents ?? {}).map(([k, v]) => ({ name: AG[k]?.[0] ?? k, engine: "git 커밋(main)", what: AG[k]?.[1] ?? "", unit: "커밋", v, extra: "" })),
+      ...Object.entries(AI.board ?? {}).map(([k, v]) => ({ name: `${k} 게시판 글`, engine: "data/board", what: "에이전트 공지·선점·질문", unit: "건", v, extra: "" })),
+    ];
+    html.push(`<div class="sec" id="s-ai"><h2>AI 분석량 · 에이전트 작업량</h2><p>로컬 맥미니·CI의 AI 모델이 판정한 건수(기록의 판정일 기준)와 Claude·Codex·자동 수집이 main에 남긴 작업(커밋) · 위 ‘최근 7일/30일’ 선택을 따름</p></div>
+      <div class="panel"><div class="tbl-wrap"><table id="ai-tbl"><thead><tr><th data-sort>분석·작업</th><th data-sort>엔진</th><th class="r" data-sort>누적</th><th class="r" data-sort>오늘(24시간)</th><th class="r" data-sort>7일</th><th class="r" data-sort>30일</th><th class="r" data-sort>7일 하루 평균</th><th>비고</th></tr></thead><tbody>
+      ${aiRows.map((r) => `<tr><td data-v="${esc(r.name)}" data-tip="${esc(r.what)}"><b>${esc(r.name)}</b></td><td class="muted">${esc(r.engine)}</td><td class="r num" data-v="${r.v.total}">${fmt(r.v.total)}</td><td class="r num" data-v="${r.v.d1}">${fmt(r.v.d1)}</td><td class="r num" data-v="${r.v.d7}">${fmt(r.v.d7)}</td><td class="r num" data-v="${r.v.d30}">${fmt(r.v.d30)}</td><td class="r num" data-v="${r.v.d7 / 7}">${fmt(r.v.d7 / 7, 1)}</td><td class="muted">${esc(r.extra)}</td></tr>`).join("")}
+      </tbody></table></div>
+      <h3 style="margin-top:14px">일별 분석·작업량 <small>막대 하나 = 하루</small></h3><div class="multi" id="ai-multi"></div>
+      <p class="note">판정 기록은 같은 글·사진을 다시 판정하면 마지막 날짜로 바뀝니다(누적 = 지금까지 판정을 마친 서로 다른 글·사진 수). 커밋은 병합 커밋을 빼고 셉니다. 소유자 계정으로 올린 커밋은 사람과 다른 에이전트(Antigravity 등)를 나눌 수 없어 한 줄로 셉니다.</p></div>`);
+
     // 목표 대비
     const rows = Object.entries(m).filter(([id]) => M[id]);
     html.push(`<div class="sec" id="s-goal"><h2>목표 대비 · 속도</h2><p>캠핑장(숙박) ${fmt(S.universe.camps)}곳 기준 비율 · 7일 변화 · 하루 평균 증가 · 지금 속도로 목표까지 걸리는 날 · 목표는 pipeline/registry/collect-targets.json(${esc(S.targets_updated_at ?? "")})</p></div>
@@ -542,7 +573,7 @@
       <details class="def"><summary>지표 정의·수집처 전체 보기</summary><div class="tbl-wrap"><table><thead><tr><th>지표 id</th><th>카테고리</th><th>이름</th><th>단위</th><th>설명</th><th>수집처</th></tr></thead><tbody>${Object.entries(M).map(([id, x]) => `<tr><td class="muted">${id}</td><td>${esc(CATS.find(([c]) => c === x[0])?.[1])}</td><td>${esc(x[1])}</td><td>${esc(x[2])}</td><td class="wrap">${esc(x[3])}</td><td>${esc(x[4])}</td></tr>`).join("")}</tbody></table></div></details>`);
 
     $("#root").innerHTML = html.join("");
-    ["#goal-tbl", "#src-tbl", "#attr-tbl", "#rg-tbl"].forEach((s) => $(s) && sortable($(s)));
+    ["#goal-tbl", "#src-tbl", "#attr-tbl", "#rg-tbl", "#ai-tbl"].forEach((s) => $(s) && sortable($(s)));
 
     // 카테고리 칩
     $("#cat-chips").addEventListener("click", (e) => {
@@ -569,6 +600,47 @@
       const b = e.target.closest(".chip"); if (!b) return;
       $("#trend-chips").querySelectorAll(".chip").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
       drawTrend(b.dataset.trend);
+    });
+
+    // 일자별 추이 그리기
+    const lastN = (n) => Array.from({ length: n }, (_, i) => new Date(Date.parse(S.date) - (n - 1 - i) * 864e5).toISOString().slice(0, 10));
+    const CAT_KEYS = { base: ["catalog.camps", "field.booking", "field.fee", "field.checkin", "field.tel", "field.kinds"], photo: ["photo.official", "photo.any", "snsimg.items"], review: ["review.items", "review.camps", "review.posts", "review.thumb"], video: ["video.items", "video.camps", "video.playable", "video.short_camps"], fee: ["field.fee", "price.mentions", "booking.verified"], operator: ["operator.snippets", "operator.ok"], place: ["place.kakao", "place.naver"], nearby: ["nearby.camps"], quality: ["quality.facts", "quality.confidence", "quality.conflicts", "quality.iq"] };
+    const drawDaily = (n) => {
+      const ds = lastN(n);
+      // 수집처별: 날짜별 처리 건수 막대 + 기간 합계·하루 평균 + 마지막 날이 평균의 20% 미만이면 경고
+      $("#src-multi").innerHTML = S.sources.map((s) => {
+        const items = ds.map((d) => ({ l: d.slice(5), t: d, v: s.byDay?.[d] ?? 0 }));
+        const sum = items.reduce((a, x) => a + x.v, 0), avg = sum / n, last = items.at(-1).v, prev = items.at(-2)?.v ?? 0;
+        const active = items.filter((x) => x.v > 0).length;
+        const kind = sum === 0 ? "bad" : (last + prev) === 0 && avg > 0 ? "warn" : "";
+        return `<div class="mini ${kind}"><div class="mini-h"><div>${esc(s.name)}<small>${esc(s.how)}</small></div>${kind === "bad" ? badge("bad", "처리 없음") : kind === "warn" ? badge("warn", "최근 멈춤") : badge("good", `${active}/${n}일 수집`)}</div>
+          <div class="mini-v num">${fmt(sum)}<span class="mini-s"> 건 · 하루 평균 ${fmt(avg, 1)} · 오늘 ${fmt(last)}</span></div>${barChart(items, { w: 300, h: 110, unit: "건" })}</div>`;
+      }).join("");
+      // 카테고리별: 지표마다 누적 추이 선(한 차트 한 지표 — 축이 섞이지 않게)
+      $("#cat-multi").innerHTML = CATS.map(([c, cl]) => {
+        const keys = (CAT_KEYS[c] ?? []).filter((id) => M[id] && ds.some((d) => H.days[d]?.[id] != null));
+        if (!keys.length) return "";
+        return `<div class="cat-h">${esc(cl)}</div><div class="multi">${keys.map((id) => {
+          const pts = ds.map((d) => { const v = H.days[d]?.[id]; return { d, v: Array.isArray(v) ? v[0] : v ?? null }; }).filter((p) => p.v != null);
+          const first = pts[0]?.v, lastv = pts.at(-1)?.v, ch = first != null && lastv != null ? Math.round((lastv - first) * 1000) / 1000 : null;
+          const kind = ch == null ? "" : id === "quality.conflicts" ? (ch > 0 ? "warn" : "") : ch < 0 ? "bad" : "";
+          const t = m[id]?.target; const tv = t?.count ?? t?.value ?? (t?.pct != null && m[id]?.base ? (t.pct / 100) * m[id].base : null);
+          return `<div class="mini ${kind}" data-mini="${id}"><div class="mini-h"><div>${esc(M[id][1])}<small>${esc(M[id][4])}</small></div>${ch == null ? "" : `<span class="chg ${ch > 0 ? "up" : ch < 0 ? "down" : "flat"}">${n}일 ${sgn(ch, 2)}</span>`}</div>
+            <div class="mini-v num">${fmt(lastv, 3)}<span class="mini-s"> ${esc(M[id][2])}${m[id]?.pct != null ? ` · ${fmt(m[id].pct, 1)}%` : ""}</span></div>${lineChart(pts, { w: 300, h: 120, target: tv != null && tv <= Math.max(...pts.map((p) => p.v)) * 1.3 ? tv : null })}</div>`;
+        }).join("")}</div>`;
+      }).join("");
+      $("#ai-multi").innerHTML = aiRows.map((r) => {
+        const items = ds.map((d) => ({ l: d.slice(5), t: d, v: r.v.byDay?.[d] ?? 0 }));
+        const sum = items.reduce((a, x) => a + x.v, 0);
+        return `<div class="mini"><div class="mini-h"><div>${esc(r.name)}<small>${esc(r.engine)}</small></div><span class="mini-s num">누적 ${fmt(r.v.total)}</span></div><div class="mini-v num">${fmt(sum)}<span class="mini-s"> ${esc(r.unit)} · ${n}일 · 하루 평균 ${fmt(sum / n, 1)}</span></div>${barChart(items, { w: 300, h: 110, unit: r.unit, color: "var(--info)" })}</div>`;
+      }).join("");
+      $("#cat-multi").querySelectorAll("[data-mini]").forEach((el) => { const id = el.dataset.mini; const pts = ds.map((d) => { const v = H.days[d]?.[id]; return { d, v: Array.isArray(v) ? v[0] : v ?? null }; }).filter((p) => p.v != null); bindLine(el, pts, ` ${M[id][2]}`); });
+    };
+    drawDaily(7);
+    $("#period-chips").addEventListener("click", (e) => {
+      const b = e.target.closest(".chip"); if (!b) return;
+      $("#period-chips").querySelectorAll(".chip").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      drawDaily(Number(b.dataset.period));
     });
 
     // 품질 추이(장부)
