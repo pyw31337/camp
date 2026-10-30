@@ -10,6 +10,10 @@ const IS_SUBDIR = false;
 const ASSETS_BASE = APP_BASE;
 const DATA = `${APP_BASE}explore/data/`;
 const MEDIA = `${APP_BASE}media/`;
+// 사진 파일(webp)만 따로 둔 저장소(Cloudflare R2, 2026-10-30 소유자 결정 ⓒ)가 있으면 그 주소에서 받는다.
+// 배포가 index.html의 <meta name="media-base">에 공개 주소를 넣는다. 비어 있으면 지금처럼 Pages의 /media/.
+// 목록 파일(cards/index.json 등)은 늘 Pages에서 받는다(다른 출처 fetch에 CORS가 필요 없게).
+const MEDIA_FILES = (() => { try { const v = (document.querySelector('meta[name="media-base"]')?.content || "").trim(); return v ? (v.endsWith("/") ? v : `${v}/`) : MEDIA; } catch { return MEDIA; } })();
 // 화면 판단은 예전처럼 "#/경로?쿼리" 문자열로 한다(curHash). 주소창은 APP_BASE + 경로다(toPath).
 const curHash = () => { const p = location.pathname.startsWith(APP_BASE) ? location.pathname.slice(APP_BASE.length) : ""; return `#/${p.replace(/\/+$/, "")}${location.search}`; };
 const toPath = (h) => APP_BASE + String(h ?? "").replace(/^#?\/?/, "");
@@ -777,9 +781,9 @@ function results() {
 const photoUrl = (u) => {
   const value = String(u ?? "");
   if (!value) return "";
-  if (value.startsWith("media/")) return `${MEDIA}${value.slice(6)}`;
-  if (value.startsWith("./media/")) return `${MEDIA}${value.slice(8)}`;
-  if (value.startsWith("../media/")) return `${MEDIA}${value.slice(9)}`;
+  if (value.startsWith("media/")) return `${MEDIA_FILES}${value.slice(6)}`;
+  if (value.startsWith("./media/")) return `${MEDIA_FILES}${value.slice(8)}`;
+  if (value.startsWith("../media/")) return `${MEDIA_FILES}${value.slice(9)}`;
   return value;
 };
 // 목록은 480px 파생본을 우선 쓰되, 고밀도 화면에서는 같은 공식 원본의 1280px 파생본을 선택한다.

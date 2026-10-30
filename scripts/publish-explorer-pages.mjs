@@ -187,7 +187,8 @@ if (placeSource) {
     const full = p.find((u) => /^https?:\/\/gocamping\.or\.kr\/upload\/camp\/\d+\/[^/]+\.(jpe?g|png)$/i.test(u));
     if (full) return https(full);
     const media = p.find((u) => String(u).startsWith("media/")) ?? (c.ph ? `media/${c.ph}` : "");
-    if (media) return SITE + media.replace(/-t\.webp$/, "-l.webp");
+    // 사진 파일 저장소(R2, MEDIA_PUBLIC_BASE)가 있으면 그 주소로 — 없으면 Pages의 /media/
+    if (media) return (process.env.MEDIA_PUBLIC_BASE ? process.env.MEDIA_PUBLIC_BASE.replace(/\/?$/, "/") + media.slice(6) : SITE + media).replace(/-t\.webp$/, "-l.webp");
     return OG_IMAGE;
   };
   const typesOf = (c) => (Array.isArray(c.types) ? c.types : String(c.types ?? "").match(/[가-힣A-Za-z]+/g) ?? []).map((t) => t.replace(/야영장$/, "").replace(/^자동차$/, "오토").replace(/^카라반$/, "카라반").replace(/^글램핑$/, "글램핑")).filter(Boolean);

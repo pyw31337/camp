@@ -40,8 +40,16 @@ jobs:
           MEDIA_DIR="$RUNNER_TEMP/media"
           git fetch --depth=1 origin +media:refs/remotes/origin/media
           git worktree add -B media "$MEDIA_DIR" origin/media
+          # 사진 파일을 R2에 두는 설정이면 이미 구운 카드 사진을 R2에서 내려받는다(다시 굽지 않게).
+          bash .github/scripts/media-r2.sh pull "$MEDIA_DIR" cards
           echo "dir=$MEDIA_DIR" >> "$GITHUB_OUTPUT"
           du -sh --exclude=.git "$MEDIA_DIR"
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ vars.R2_BUCKET }}
+          R2_PUBLIC_BASE: ${{ vars.R2_PUBLIC_BASE }}
       - name: Bake card photos (webp 480px)
         run: node scripts/sync-card-photos.mjs
         env:
@@ -51,7 +59,13 @@ jobs:
         if: vars.GOCAMPING_IMAGES_PUBLISH != 'false'
         working-directory: ${{ steps.media.outputs.dir }}
         run: |
-          git add -A
+          R2=0; bash "$GITHUB_WORKSPACE/.github/scripts/media-r2.sh" on && R2=1
+          if [ "$R2" = 1 ]; then
+            bash "$GITHUB_WORKSPACE/.github/scripts/media-r2.sh" push .
+            bash "$GITHUB_WORKSPACE/.github/scripts/media-r2.sh" git-json-only .
+          else
+            git add -A
+          fi
           if git diff --cached --quiet; then echo "카드 사진 변경 없음."; echo "changed=false" >> "$GITHUB_ENV"; exit 0; fi
           # 공식 사진(camps/)이 사라지는 푸시는 막는다(data-sync와 같은 검사, 2026-10-24 7,274장 삭제).
           git show origin/media:manifest.json > "$RUNNER_TEMP/media-prev.json" 2>/dev/null || echo '{"camps":{}}' > "$RUNNER_TEMP/media-prev.json"
@@ -64,6 +78,12 @@ jobs:
           git push --force origin media
           du -sh --exclude=.git .
           echo "changed=true" >> "$GITHUB_ENV"
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ vars.R2_BUCKET }}
+          R2_PUBLIC_BASE: ${{ vars.R2_PUBLIC_BASE }}
       - name: Redeploy Pages with the new photos
         if: env.changed == 'true'
         working-directory: .
