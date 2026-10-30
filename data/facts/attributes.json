@@ -481,9 +481,9 @@
    "filter": "max",
    "note": "MENTION 전용. 확정값으로 쓰지 않는다",
    "coverage": {
-    "campgrounds": 2728,
+    "campgrounds": 2729,
     "by_grade": {
-     "MENTION": 13892
+     "MENTION": 13893
     }
    }
   },
@@ -586,9 +586,9 @@
    "pref": "늦게 나오고 싶나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 2721,
+    "campgrounds": 2720,
     "by_grade": {
-     "MENTION": 3509,
+     "MENTION": 3508,
      "REFERENCE": 445,
      "OPERATOR": 613,
      "CONFIRMED": 2
@@ -602,7 +602,7 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 190,
+    "campgrounds": 189,
     "by_grade": {
      "MENTION": 174,
      "OPERATOR": 44,
@@ -2655,5 +2655,5 @@
    }
   }
  ],
- "generated_at": "2026-10-30T16:29:30.207Z"
+ "generated_at": "2026-10-30T18:34:41.322Z"
 }
