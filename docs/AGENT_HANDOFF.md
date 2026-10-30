@@ -1,5 +1,30 @@
 # 인수인계
 
+## 📌 SNS 영상은 재생되는 영상만 · YouTube 영상 확대 수집(v2) · 후기 썸네일 매일 채우기 (2026-10-30, Claude)
+
+소유자 피드백: “네이버·다음 썸네일에 재생 버튼이 있는데 누르면 네이버 블로그로 넘어간다(후기와 중복)”, “유튜브엔 영상·쇼츠가 많은데 1~2개만”, “후기 썸네일이 너무 많이 비어 있다”.
+- **화면(`mediaHubHtml`)**: SNS 영상 칸은 이 페이지에서 재생되는 영상만 보여 준다.
+  - 보여 주는 것: YouTube(일반·숏츠), 네이버TV(tv.naver.com 임베드).
+  - 뺀 것: 블로그 글, 블로그 안 영상(vclip의 blog.naver.com 1,096개), 다음 뉴스 영상, 카카오TV(서비스 종료로 “영상을 찾을 수 없습니다”).
+  - 데이터는 그대로 두고 표시층에서만 거른다(병합 정책).
+  - 네이버TV 탭은 영상이 있을 때만 보인다. 없으면 바깥 링크 “네이버 영상”을 둔다.
+- **수집(`sync-shorts.mjs` + `lib/shorts-search.mjs` v2)**:
+  - 카카오 동영상 검색을 캠핑장당 3회 한다: ‘이름’ 1·2쪽(30개씩) + ‘이름(캠핑) 쇼츠’. 매일 수집(sync-social)의 동영상 검색은 1회·최대 10개였다.
+  - 판정은 `videoMatch`다: isRelevant에 더해 제목에 핵심어가 있어야 하고, 동명이면 시군구, 다른 시·군 접두어나 다른 캠핑장 이름이 있으면 뺀다.
+  - 숏츠 판정은 `isShortVideo`다: /shorts/, 60초 이하, 또는 3분 이하이면서 #shorts.
+  - 캐시 v2(`registry/shorts-search.json`)는 `{shorts, videos}`이고, 캠핑장당 20/30개까지 둔다.
+  - `SHORTS_CACHE_VERSION=2`라서 모든 캠핑장을 다시 찾는다. shorts-sync는 매일, 9,000회(약 3,000곳/일)로 돈다.
+  - build-explore-data와 merge-collected는 `recordVideos()`로 숏츠 먼저, 그다음 일반 영상을 ‘채우기만’ 한다(최대 50개).
+- **YouTube Data API 키(`YOUTUBE_API_KEY`)는 403**이다(10-28 shorts-sync 로그). 이제 로그에 이유(reason)를 남긴다. 소유자가 Google Cloud에서 “YouTube Data API v3” 사용 설정과 키 제한을 확인해야 한다.
+- **후기 썸네일(`fill-review-thumbs.mjs`)**:
+  - 원인: 10-21에 한 번만 돌고 정기 실행이 없어, 새 글 약 3.4만 건이 비어 있었다(전체 87,829건 중 썸네일 49,831건).
+  - 이제 data-sync가 매일 돈다(`REVIEW_FILL_MAX` 기본 6000).
+  - robots.txt를 호스트별로 지키고, 봇 이름을 밝히며, 호스트당 동시 2건·250ms 간격을 둔다.
+  - 네이버 블로그 외 티스토리 등도 og:image를 쓴다. 로그인 카페·지식iN은 열지 않는다. 못 찾은 글은 30일 뒤 다시 본다.
+  - 화면 `apiThumb`는 호스트 제한을 풀었다(티스토리 등의 자체 이미지 서버). 기본·프로필·로고 그림만 뺀다.
+  - 후기 카드는 사진 있는 글을 먼저 보인다.
+- 테스트: `test/shorts-search.test.mjs`(v2), `test/fill-review-thumbs.test.mjs`.
+
 ## 📌 히어로 새로고침 무작위 선택 · 댓글 퍼스널컬러 (2026-10-30, Codex)
 
 - 테마 모음 페이지(`/themes`)의 `#hero-themes`(메인화면 10대 감성 히어로 테마) 영역과 CSS를 지웠다. 히어로 테마는 기능일 뿐이다. `?hero=<id>` 직통 확인은 남겼다.

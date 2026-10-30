@@ -2,7 +2,7 @@
 // 새로 모은 웹 언급(out/campground-web.json)을 발행된 상세 데이터에 덧붙인다(지우지 않음).
 // 사용: node scripts/merge-collected.mjs [--web <campground-web.json>] [--shorts <campground-shorts.json>] [--social <campground-social.json>] [--data <explore data dir>]
 // 소셜(--social): 카카오 다음 검색의 영상·후기·카페·사진 중 상세에 없는 것만 덧붙인다(고캠핑 밖 휴양림·지자체·OSM 장소용, 2026-10-23).
-// 숏츠(--shorts): 영상(videos)에 같은 YouTube id가 없는 숏츠만 덧붙인다(채우기만, 기존 영상 그대로).
+// 숏츠(--shorts): 영상(videos)에 같은 YouTube id가 없는 숏츠·영상(v2 영상 확대 수집)만 덧붙인다(채우기만, 기존 영상 그대로).
 // 증분 발행(publish-incremental.sh)이 최신 main 작업 트리에서 부른다.
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
@@ -20,12 +20,14 @@ if (shortsPath && existsSync(shortsPath)) {
   const sh = JSON.parse(readFileSync(shortsPath, "utf8"));
   const t = { camps: 0, fromZero: 0, added: 0 };
   for (const [id, r] of Object.entries(sh.campgrounds ?? {})) {
-    if (!r?.shorts?.length) continue;
+    // v2: 영상 확대 수집(videos)도 함께 — 수집기가 이미 판정해 내보낸 목록이다.
+    const items = [...(r?.shorts ?? []), ...(r?.videos ?? [])];
+    if (!items.length) continue;
     const p = join(dataDir, "camps", `${id}.json`);
     if (!existsSync(p)) continue;
     const d = JSON.parse(readFileSync(p, "utf8"));
     const before = d.videos?.length ?? 0;
-    const f = fillShorts(d.videos ?? [], r.shorts);
+    const f = fillShorts(d.videos ?? [], items);
     if (!f.added.length) continue;
     d.videos = f.videos;
     writeFileSync(p, JSON.stringify(d));
