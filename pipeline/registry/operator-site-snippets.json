@@ -39147,7 +39147,7 @@
    "name": "원주두리캠핑장",
    "status": "OK",
    "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
-   "checked_at": "2026-10-30T18:00:31.145Z",
+   "checked_at": "2026-10-30T22:17:08.912Z",
    "discovered": true,
    "pages": [
     "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
@@ -39495,10 +39495,10 @@
      }
     },
     {
-     "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1202",
+     "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1203",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1202"
+      "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1203"
      }
     },
     {
@@ -109778,7 +109778,7 @@
    "name": "라플란드",
    "status": "FETCH_FAILED",
    "url": "https://oneoneone.kr/content/d6a7b05a",
-   "checked_at": "2026-10-30T18:00:28.000Z",
+   "checked_at": "2026-10-30T22:17:06.613Z",
    "error": "404"
   },
   "100126": {
@@ -174543,7 +174543,7 @@
    "name": "골든쌔들 캠핑장",
    "status": "FETCH_FAILED",
    "url": "https://www.goldensaddlecamping.kr/",
-   "checked_at": "2026-10-30T18:00:32.949Z",
+   "checked_at": "2026-10-30T22:17:11.225Z",
    "error": "403"
   },
   "101270": {
@@ -196289,7 +196289,7 @@
    "name": "물멍 캠프",
    "status": "FETCH_FAILED",
    "url": "https://camping.hansangsoo.com/camp/101639.html",
-   "checked_at": "2026-10-30T18:00:32.959Z",
+   "checked_at": "2026-10-30T22:17:11.240Z",
    "error": "403"
   },
   "101640": {
@@ -222975,7 +222975,7 @@
    "name": "WonderWood Glamping(원더우드 글램핑)",
    "status": "FETCH_FAILED",
    "url": "https://camping.hansangsoo.com/camp/102221.html",
-   "checked_at": "2026-10-30T18:00:28.002Z",
+   "checked_at": "2026-10-30T22:17:06.615Z",
    "error": "403"
   },
   "102222": {
@@ -223365,7 +223365,7 @@
     }
    ],
    "last_attempt": {
-    "at": "2026-10-30T18:00:28.001Z",
+    "at": "2026-10-30T22:17:06.614Z",
     "status": "NO_RELEVANT_TEXT",
     "error": null
    }
@@ -226559,7 +226559,7 @@
    "name": "평택캠핑성",
    "status": "FETCH_FAILED",
    "url": "https://platformdodam.com/children-play-facilities/3019",
-   "checked_at": "2026-10-30T18:00:27.965Z",
+   "checked_at": "2026-10-30T22:17:06.579Z",
    "error": "403"
   },
   "102378": {
@@ -246854,6 +246854,6 @@
    "snippets": []
   }
  },
- "generated_at": "2026-10-30T18:02:03.870Z",
+ "generated_at": "2026-10-30T22:18:31.099Z",
  "policy": "운영자 자체 홈페이지·예약 페이지만, robots.txt 준수, 봇 이름 공개, 문장(≤140자)·원문 URL·확인 시각만 저장. 플랫폼 페이지는 수집하지 않음."
 }
