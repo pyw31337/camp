@@ -158,7 +158,16 @@ jobs:
             git worktree add --detach "$MEDIA_DIR"
             git -C "$MEDIA_DIR" switch --orphan media
           fi
+          # 사진 파일을 R2에 두는 설정이면(.github/scripts/media-r2.sh) 이미 받은 사진을 R2에서 내려받아 다시 받지 않게 한다.
+          bash .github/scripts/media-r2.sh pull "$MEDIA_DIR"
+          if bash .github/scripts/media-r2.sh on; then echo "budget=20000" >> "$GITHUB_OUTPUT"; else echo "budget=900" >> "$GITHUB_OUTPUT"; fi
           echo "dir=$MEDIA_DIR" >> "$GITHUB_OUTPUT"
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ vars.R2_BUCKET }}
+          R2_PUBLIC_BASE: ${{ vars.R2_PUBLIC_BASE }}
       - name: Sync official campground images (webp)
         id: images
         if: steps.media.outcome == 'success'
@@ -172,6 +181,8 @@ jobs:
           IMAGE_MAX_DOWNLOADS: ${{ github.event_name == 'pull_request' && '20' || '1500' }}
           IMAGE_MAX_PER_CAMP: ${{ vars.IMAGE_MAX_PER_CAMP || '6' }}
           IMAGE_MAX_BYTES: '12000000'
+          # Pages 1GB 한도 때문의 900MB 상한 — 사진을 R2에 두면 20GB(R2 무료 10GB를 넘기 전에 현황판에서 확인)
+          IMAGE_BUDGET_MB: ${{ steps.media.outputs.budget || '900' }}
       - name: Restore geocode cache
         uses: actions/cache@v4
         with:
@@ -561,9 +572,18 @@ jobs:
           git fetch -q --depth=1 origin +media:refs/remotes/origin/media 2>/dev/null && git show origin/media:manifest.json > "$RUNNER_TEMP/media-prev.json" 2>/dev/null || echo '{"camps":{}}' > "$RUNNER_TEMP/media-prev.json"
           # 매니페스트 밖 사진 파일도 화면 데이터가 가리킬 수 있어 파일 목록도 비교한다(2026-10-24 7,274장 삭제).
           git ls-tree -r --name-only origin/media -- camps > "$RUNNER_TEMP/media-prev-files.txt" 2>/dev/null || : > "$RUNNER_TEMP/media-prev-files.txt"
+          R2=0; bash "$GITHUB_WORKSPACE/.github/scripts/media-r2.sh" on && R2=1
+          # R2에 사진을 두면 ‘직전 파일 목록’은 R2의 목록이다(브랜치에는 목록 파일만 남는다).
+          if [ "$R2" = 1 ]; then bash "$GITHUB_WORKSPACE/.github/scripts/media-r2.sh" keys "$RUNNER_TEMP/media-r2-keys.txt"; grep '^camps/' "$RUNNER_TEMP/media-r2-keys.txt" >> "$RUNNER_TEMP/media-prev-files.txt" || true; fi
           find camps -name '*.webp' > "$RUNNER_TEMP/media-next-files.txt" 2>/dev/null || : > "$RUNNER_TEMP/media-next-files.txt"
           node "$GITHUB_WORKSPACE/.github/scripts/media-guard.mjs" "$RUNNER_TEMP/media-prev.json" manifest.json "$RUNNER_TEMP/media-prev-files.txt" "$RUNNER_TEMP/media-next-files.txt"
-          git add -A
+          if [ "$R2" = 1 ]; then
+            # 사진 파일을 R2에 올리고(지우지 않음) 모두 올라간 것을 확인한 뒤에만 브랜치에서 사진을 뺀다.
+            bash "$GITHUB_WORKSPACE/.github/scripts/media-r2.sh" push .
+            bash "$GITHUB_WORKSPACE/.github/scripts/media-r2.sh" git-json-only .
+          else
+            git add -A
+          fi
           if git rev-parse -q --verify HEAD >/dev/null && git diff --cached --quiet; then echo "이미지 변경 없음."; exit 0; fi
           git config user.name "moyeora-camping-data-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -571,6 +591,12 @@ jobs:
           if git rev-parse -q --verify HEAD >/dev/null; then git commit -q --amend -m "$MSG"; else git commit -q -m "$MSG"; fi
           git push --force origin media
           du -sh --exclude=.git .
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ vars.R2_BUCKET }}
+          R2_PUBLIC_BASE: ${{ vars.R2_PUBLIC_BASE }}
       - name: Load the fact store into the throwaway PostgreSQL (twice)
         # data/facts(원자 사실)가 db/011 제약(확정 등급은 원천 URL 필수 등)을 지키는지 실데이터로 확인한다.
         if: always()

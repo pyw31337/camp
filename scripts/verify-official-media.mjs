@@ -52,6 +52,22 @@ for (const file of jsonFiles) {
   }
 }
 
+// 사진 파일을 Cloudflare R2에 두는 경우(MEDIA_REMOTE_BASE, 2026-10-30): Pages 산출물에는 webp가 없다.
+// 무작위 표본(최대 60장)을 공개 주소에서 HEAD로 확인하고, 10%를 넘게 없으면 배포를 멈춘다.
+const remote = (process.env.MEDIA_REMOTE_BASE || "").replace(/\/?$/, "/");
+if (remote !== "/") {
+  const all = [...photoPaths];
+  const sample = all.sort(() => Math.random() - 0.5).slice(0, 60);
+  const miss = [];
+  for (const path of sample) {
+    try { const r = await fetch(remote + path, { method: "HEAD", signal: AbortSignal.timeout(10000) }); if (!r.ok) miss.push(`${path} (${r.status})`); }
+    catch (e) { miss.push(`${path} (${e.cause?.code ?? e.message})`); }
+  }
+  console.log(`원격 사진 저장소 표본 확인: ${sample.length}장 중 없음 ${miss.length}장 (${remote})`);
+  if (miss.length > Math.max(3, sample.length * 0.1)) { console.error(miss.slice(0, 20).map((x) => `- ${x}`).join("\n")); process.exit(1); }
+  process.exit(0);
+}
+
 const missing = [];
 for (const path of photoPaths) {
   const target = resolve(mediaRoot, path);

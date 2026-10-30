@@ -64,11 +64,20 @@ jobs:
       - name: Add self-hosted official images from the media branch
         # data-sync가 media 브랜치(공식 사진 webp, 한 커밋)를 갱신한다. 있으면 /camp/media/ 로 함께 배포한다.
         working-directory: .
+        env:
+          MEDIA_REMOTE_BASE: ${{ vars.R2_PUBLIC_BASE }}
         run: |
           if git ls-remote --exit-code --heads origin media >/dev/null 2>&1; then
             git fetch --depth=1 origin +media:refs/remotes/origin/media
             mkdir -p camping-atlas/dist/client/media
-            git archive origin/media | tar -x -C camping-atlas/dist/client/media
+            if [ -n "$MEDIA_REMOTE_BASE" ]; then
+              # 사진 파일은 Cloudflare R2(저장소 변수 R2_PUBLIC_BASE)에서 보인다 — Pages(1GB 한도)에는 목록 파일(json)만 싣는다.
+              git archive origin/media | tar -x -C camping-atlas/dist/client/media --exclude='*.webp'
+              sed -i "s#<meta name=\"media-base\" content=\"\" />#<meta name=\"media-base\" content=\"${MEDIA_REMOTE_BASE}\" />#" camping-atlas/dist/client/index.html camping-atlas/dist/client/404.html 2>/dev/null || true
+              grep -q "media-base\" content=\"${MEDIA_REMOTE_BASE}" camping-atlas/dist/client/index.html || { echo "::error::index.html에 사진 저장소 주소를 넣지 못했습니다."; exit 1; }
+            else
+              git archive origin/media | tar -x -C camping-atlas/dist/client/media
+            fi
             du -sh camping-atlas/dist/client/media
             node scripts/dedupe-media-cards.mjs camping-atlas/dist/client/media
             node scripts/verify-official-media.mjs camping-atlas/dist/client

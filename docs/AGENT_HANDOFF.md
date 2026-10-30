@@ -1,5 +1,17 @@
 # 인수인계
 
+## 📌 공식 사진 저장소 → Cloudflare R2 (2026-10-30, Claude)
+
+- 소유자 결정 ⓒ(docs/STRATEGY_FILL_THUMBS_TEXT.md P1): Pages 1GB 한도 때문에 사진 저장이 900MB에서 멈춘 문제를 R2(무료 10GB)로 푼다. 설정 방법은 `docs/R2_MEDIA_SETUP.md`.
+- `.github/scripts/media-r2.sh`(on·pull·keys·push·git-json-only)를 data-sync·card-photos가 쓴다. R2 Secrets·Variables(`R2_ACCOUNT_ID`·`R2_ACCESS_KEY_ID`·`R2_SECRET_ACCESS_KEY`·`R2_BUCKET`·`R2_PUBLIC_BASE`)가 다 있을 때만 동작하고, 없으면 지금 방식 그대로다.
+- **안전장치**
+  - push 뒤 로컬 webp가 R2에 모두 있는지 비교한다. 하나라도 없으면 브랜치에서 사진을 빼지 않고 실패한다.
+  - media-guard의 직전 파일 목록에 R2 목록을 더한다.
+  - 배포에서는 R2 표본 60장을 HEAD로 확인한다(verify-official-media `MEDIA_REMOTE_BASE`).
+- **화면**
+  - app.js `MEDIA_FILES`(`<meta name="media-base">`)로 사진만 R2에서 받는다. 목록 json은 Pages에서 받아 CORS가 필요 없다.
+  - 공유 미리보기 og:image는 `MEDIA_PUBLIC_BASE` 환경변수를 따른다.
+
 ## 📌 수집 현황판 /admin/collect/ (2026-10-30, Claude)
 
 소유자 요청: 수집처·카테고리별 누적·일별 수집량, 속도, 목표 대비, 정합성·가치를 한 화면에서 판단할 수 있게.
