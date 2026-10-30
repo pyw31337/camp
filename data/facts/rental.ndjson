@@ -1,10 +1,7 @@
 {"cid":"21","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"28","attr":"RENTAL_ITEM","value":"난방기구","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"28","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"29","attr":"RENTAL_ITEM","value":"난방기구","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"29","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"29","attr":"RENTAL_ITEM","value":"식기","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"29","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"51","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"51","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"56","attr":"RENTAL_ITEM","value":"릴선(20m)","grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030018","at":"2026-10-15T09:00:00+09:00","num":5000}
@@ -494,6 +491,8 @@
 {"cid":"7071","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7079","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7096","attr":"RENTAL_ITEM","value":"일산화탄소감지기","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7097","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7097","attr":"RENTAL_ITEM","value":"화로대","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7110","attr":"RENTAL_ITEM","value":"릴선","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7110","attr":"RENTAL_ITEM","value":"침낭","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7110","attr":"RENTAL_ITEM","value":"텐트","grade":"CONFIRMED","src":"gocamping"}

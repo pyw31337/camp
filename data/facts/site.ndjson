@@ -20,7 +20,7 @@
 {"cid":"29","attr":"AREA_TOTAL_M2","value":9917,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"29","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
 {"cid":"29","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping","count":24}
-{"cid":"29","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=29","at":"2026-09-17T00:00:00+09:00","quote":"일반 야영장과 자동차 야영장은 모두 데크로 이뤄졌으며, 사이트 크기는 가로 4m 세로 6m다.","text":"4×6m"}
+{"cid":"29","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=29","at":"2026-10-29T00:00:00+09:00","quote":"일반 야영장과 자동차 야영장은 모두 데크로 이뤄졌으며, 사이트 크기는 가로 4m 세로 6m다.","text":"4×6m"}
 {"cid":"29","attr":"SITE_SIZE","value":"4×6m","grade":"MENTION","src":"review_search","url":"https://blogsailing.com/3156","at":"2026-09-21","quote":"일반 야영장과 자동차 야영장은 모두 데크로 이뤄졌으며, 사이트 크기는 가로 4m 세로 6m다.","text":"4×6m","n":1}
 {"cid":"29","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"31","attr":"AREA_TOTAL_M2","value":6600,"grade":"CONFIRMED","src":"gocamping"}
@@ -849,6 +849,10 @@
 {"cid":"1508","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"gocamping","count":12}
 {"cid":"1508","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"1508","attr":"SITE_SIZE","value":"9×10m","grade":"CONFIRMED","src":"gocamping","count":18}
+{"cid":"1511","attr":"AREA_TOTAL_M2","value":33000,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1511","attr":"SITE_SIZE","value":"4×8m","grade":"CONFIRMED","src":"gocamping","count":40}
+{"cid":"1511","attr":"SITE_SIZE","value":"5×8m","grade":"CONFIRMED","src":"gocamping","count":7}
+{"cid":"1511","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1528","attr":"AREA_TOTAL_M2","value":1500,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1528","attr":"SITE_SIZE","value":"3×3m","grade":"CONFIRMED","src":"gocamping","count":15}
 {"cid":"1528","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -1686,7 +1690,6 @@
 {"cid":"3205","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3206","attr":"SITE_SIZE","value":"3×4m","grade":"CONFIRMED","src":"gocamping","count":33}
 {"cid":"3206","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"3210","attr":"SITE_SIZE","value":"6×5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3210","attr":"SITE_SIZE","value":"6×5m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hamageddon/224433707262","at":"2026-10-07","quote":"화장실, 샤워장, 개수대, 전기, WIFI 다도해해상국립공원 팔영산야영장 전남광주통합특별시 고흥군 점암면 팔봉길 11-12 목재데크(6X5m)영지: A1~7, A10~12…","text":"6×5m","n":1}
 {"cid":"3210","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3222","attr":"AREA_TOTAL_M2","value":2114,"grade":"CONFIRMED","src":"gocamping"}
@@ -1873,7 +1876,7 @@
 {"cid":"3511","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3519","attr":"AREA_TOTAL_M2","value":1800,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3519","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"gocamping","count":10}
-{"cid":"3519","attr":"SITE_SIZE","value":"8×8.5m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/cutedahee100/224438824188","at":"2026-10-12","quote":"파주 마장호수 휴 캠핑장 날짜: 26.10/1-10/3 (2박3일) 가격: 1박 20,000원 (주말 25,000) 사이트: 10번 (8m x 8.5m) - 자동차 주차공간포함 파쇄석","text":"8×8.5m","n":2}
+{"cid":"3519","attr":"SITE_SIZE","value":"8×8.5m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/cutedahee100/224438824188","at":"2026-10-12","quote":"파주 마장호수 휴 캠핑장 날짜: 26.10/1-10/3 (2박3일) 가격: 1박 20,000원 (주말 25,000) 사이트: 10번 (8m x 8.5m) - 자동차 주차공간포함 파쇄석","text":"8×8.5m","n":1}
 {"cid":"3520","attr":"AREA_TOTAL_M2","value":6600,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3520","attr":"SITE_SIZE","value":"6×7m","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"3529","attr":"AREA_TOTAL_M2","value":29057,"grade":"CONFIRMED","src":"gocamping"}
@@ -2162,6 +2165,7 @@
 {"cid":"7096","attr":"SITE_SIZE","value":"12×12m","grade":"CONFIRMED","src":"gocamping","count":5}
 {"cid":"7096","attr":"SITE_SIZE","value":"8×10m","grade":"CONFIRMED","src":"gocamping","count":38}
 {"cid":"7096","attr":"SITE_SIZE","value":"8.5×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/zih_9/224408526439","at":"2026-09-11","quote":"및 1박 요금 A사이트 (8.5m × 10m) 평일: 화성시민 10,000원","text":"8.5×10m","n":1}
+{"cid":"7097","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7098","attr":"AREA_TOTAL_M2","value":3600,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7098","attr":"SITE_SIZE","value":"8×6m","grade":"CONFIRMED","src":"gocamping","count":26}
 {"cid":"7098","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -2437,7 +2441,7 @@
 {"cid":"7407","attr":"AREA_TOTAL_M2","value":16528,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7407","attr":"SITE_GAP_M","value":4,"grade":"CONFIRMED","src":"gocamping","text":"4m"}
 {"cid":"7407","attr":"SITE_SIZE","value":"10×8m","grade":"CONFIRMED","src":"gocamping","count":32}
-{"cid":"7407","attr":"SITE_SIZE","value":"6×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/xd_ox/224359877093","at":"2026-07-28","quote":"위치 : 충북 괴산군 칠성면 쌍곡로 322 ⏰ 체크인 : 입촌일 14시 ~ 체크아웃 : 퇴촌일 12시 ⛺️ 사이트 크기 : 6*8m 🤫 매너타임 : 21시 ~ 익일 08시 🎡 부대시설 : 쌍곡계곡, 매점, 개수대, 샤워실, 전자렌지, 물놀이 기구/캠…","text":"6×8m","n":2}
+{"cid":"7407","attr":"SITE_SIZE","value":"6×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/xd_ox/224359877093","at":"2026-07-28","quote":"위치 : 충북 괴산군 칠성면 쌍곡로 322 ⏰ 체크인 : 입촌일 14시 ~ 체크아웃 : 퇴촌일 12시 ⛺️ 사이트 크기 : 6*8m 🤫 매너타임 : 21시 ~ 익일 08시 🎡 부대시설 : 쌍곡계곡, 매점, 개수대, 샤워실, 전자렌지, 물놀이 기구/캠…","text":"6×8m","n":1}
 {"cid":"7414","attr":"AREA_TOTAL_M2","value":1800,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7424","attr":"AREA_TOTAL_M2","value":3376,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7430","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -3101,6 +3105,7 @@
 {"cid":"100183","attr":"AREA_TOTAL_M2","value":1874,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100183","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100191","attr":"SITE_GAP_M","value":2,"grade":"CONFIRMED","src":"gocamping","text":"2m"}
+{"cid":"100193","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
 {"cid":"100199","attr":"AREA_TOTAL_M2","value":168,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100204","attr":"AREA_TOTAL_M2","value":132232,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100204","attr":"SITE_GAP_M","value":5,"grade":"CONFIRMED","src":"gocamping","text":"5m"}
@@ -3481,7 +3486,7 @@
 {"cid":"100548","attr":"SITE_SIZE","value":"8×9m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/miri0329/224024267562","at":"2025-09-28","quote":"네이버 예약 가능 사이트 : 8m X 9m 바닥 : 파쇄석 (대형 텐트 설치 가능) 이용시간 : 입실14:00","text":"8×9m","n":1}
 {"cid":"100554","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
 {"cid":"100554","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":8}
-{"cid":"100554","attr":"SITE_SIZE","value":"6×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/nopqda/223938016972","at":"2025-07-18","quote":"논산 숩쏙캠핑장 까페 충청남도 논산시 벌곡면 벌곡로330번길 29-44 ***-****-**** 사이트크기 6m×10m 1박 40000원 (13시 입실, 12시퇴실) 주차장에서 수레로 짐 옮김 숩쏙캠핑장 충청남도 논산시 벌곡면 벌곡로330번길 29-…","text":"6×10m","n":3}
+{"cid":"100554","attr":"SITE_SIZE","value":"6×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/nopqda/223938016972","at":"2025-07-18","quote":"논산 숩쏙캠핑장 까페 충청남도 논산시 벌곡면 벌곡로330번길 29-44 ***-****-**** 사이트크기 6m×10m 1박 40000원 (13시 입실, 12시퇴실) 주차장에서 수레로 짐 옮김 숩쏙캠핑장 충청남도 논산시 벌곡면 벌곡로330번길 29-…","text":"6×10m","n":2}
 {"cid":"100555","attr":"SITE_SIZE","value":"7×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=17614&res_dt=20261031","at":"2026-10-30","text":"그늘막 존"}
 {"cid":"100555","attr":"SITE_SIZE","value":"7×8m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100555","attr":"SITE_SIZE","value":"7×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/eimsoob-/224431584121","at":"2026-10-05","quote":"스마일캠핑장 B-05 번 사이트 09/24(목)~09/26(토) 추석연휴 2박3일 사이트 크기: 파쇄석 7m x 8m 입실 14:00 퇴실 14:00 매너타임 …","text":"7×8m","n":1}
@@ -4156,7 +4161,6 @@
 {"cid":"101212","attr":"SITE_SIZE","value":"7×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261031","at":"2026-10-30","text":"12번 캠핑사이트"}
 {"cid":"101212","attr":"SITE_SIZE","value":"7×10m","grade":"CONFIRMED","src":"gocamping","count":6}
 {"cid":"101212","attr":"SITE_SURFACE","value":"GRAVEL","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261031","at":"2026-10-30","text":"7m x 9m / 파쇄석"}
-{"cid":"101214","attr":"SITE_SIZE","value":"3×3m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101214","attr":"SITE_SIZE","value":"3×3m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/chzhclq18/224427190755","at":"2026-09-30","quote":"저희는 약 3m×3m 크기의 어드벤처 8T/C를 설치하고, 앞에 테이블과 의자를 놓았어요.","text":"3×3m","n":1}
 {"cid":"101215","attr":"AREA_TOTAL_M2","value":2889,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101215","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -4423,7 +4427,7 @@
 {"cid":"101374","attr":"SITE_SIZE","value":"12×9m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=20980&res_dt=20261031","at":"2026-10-30","text":"B사이트"}
 {"cid":"101374","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=20980&res_dt=20261031","at":"2026-10-30","text":"A사이트"}
 {"cid":"101374","attr":"SITE_SIZE","value":"12×9m","grade":"CONFIRMED","src":"gocamping","count":10}
-{"cid":"101374","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101374","at":"2026-10-19T00:00:00+09:00","quote":"캠핑장 사이트 크기는A구역, C구역은8m×8m, B구역은12m×9m로 구성되었습니다.","text":"8×8m"}
+{"cid":"101374","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101374","at":"2026-10-28T00:00:00+09:00","quote":"캠핑장 사이트 크기는A구역, C구역은8m×8m, B구역은12m×9m로 구성되었습니다.","text":"8×8m"}
 {"cid":"101374","attr":"SITE_SIZE","value":"8×9m","grade":"CONFIRMED","src":"gocamping","count":12}
 {"cid":"101374","attr":"SITE_SIZE","value":"8×8m","grade":"MENTION","src":"review_search","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101374","quote":"캠핑장 사이트 크기는A구역, C구역은8m×8m, B구역은12m×9m로 구성되었습니다.","text":"8×8m","n":1}
 {"cid":"101374","attr":"SITE_SIZE","value":"8×9m","grade":"MENTION","src":"review_search","url":"https://campinghub.kr/camping/101374.html","quote":"사이트 크기 8×9m","text":"8×9m","n":1}
@@ -4688,7 +4692,6 @@
 {"cid":"101526","attr":"SITE_SIZE","value":"4×6m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/teddy3world/224221101909","at":"2026-03-18","quote":"화성 남양 : 경기도 수도권 '남양캠핑장' 4m x 6m 4번 사이트 후기.","text":"4×6m","n":2}
 {"cid":"101527","attr":"AREA_TOTAL_M2","value":3869,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101527","attr":"SITE_SIZE","value":"12×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16861&res_dt=20261031","at":"2026-10-30","text":"오토캠핑존-1번~11번(파쇄석)"}
-{"cid":"101527","attr":"SITE_SIZE","value":"10×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/wkyeon_/224159363455","at":"2026-01-25","quote":"45,000원 캠핑사이트, 기준 4인 (최대 8인) 설명파쇄석,10m x 8m,최소 2박 영업시간 입실 14:00, 퇴실 12:00 캠핑장 분위기 이름 그대로 ‘힐링’이라는 단어가 잘 어울리는 곳.","text":"10×8m","n":1}
 {"cid":"101534","attr":"AREA_TOTAL_M2","value":454,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101534","attr":"SITE_GAP_M","value":1,"grade":"CONFIRMED","src":"gocamping","text":"1m"}
 {"cid":"101534","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping","count":7}
@@ -4725,7 +4728,7 @@
 {"cid":"101569","attr":"AREA_TOTAL_M2","value":17731,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101570","attr":"AREA_TOTAL_M2","value":9500,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101570","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101570","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/dms2499/224141787646","at":"2026-01-10","quote":"12:00 캠핑사이트 파쇄석 10mx10m 전화문의 : 010-****-**** 네이버 예약 가능, 캠핏으로 예약 가능 캠핏...","text":"10×10m","n":3}
+{"cid":"101570","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/fastrabbit_/224035659560","at":"2025-10-09","quote":"60,000 오토캠핑 (사이트 내 주차) 10m x 10m 차박 가능 , 트레일러, 캠핑...","text":"10×10m","n":2}
 {"cid":"101574","attr":"AREA_TOTAL_M2","value":940,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101576","attr":"SITE_SIZE","value":"6×6m","grade":"OPERATOR","src":"operator_discovered","url":"https://chojeonseaforestglamping.kr/reservation.html","at":"2026-10-20T01:26:17.148Z","quote":"- 수영장 크기: 6m x 6m x 70cm","text":"6×6m"}
 {"cid":"101576","attr":"SITE_SIZE","value":"6×6m","grade":"CONFIRMED","src":"gocamping"}
@@ -5571,7 +5574,6 @@
 {"cid":"102138","attr":"SITE_SIZE","value":"13×6m","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"102138","attr":"SITE_SIZE","value":"6×8m","grade":"CONFIRMED","src":"gocamping","count":24}
 {"cid":"102138","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102142","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102143","attr":"SITE_SIZE","value":"6×7m","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"102145","attr":"AREA_TOTAL_M2","value":2470,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102145","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
@@ -5688,7 +5690,7 @@
 {"cid":"102285","attr":"SITE_SIZE","value":"10×7m","grade":"CONFIRMED","src":"gocamping","count":33}
 {"cid":"102292","attr":"SITE_SIZE","value":"7×7m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/yoonloveworld/224443393856","at":"2026-10-16","quote":"7m×7m 크기의 파쇄석 오토캠핑 사이트가 마련되어...","text":"7×7m","n":1}
 {"cid":"102293","attr":"SITE_SIZE","value":"7×7m","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102293","attr":"SITE_SIZE","value":"7×7m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/yoonloveworld/224443393856","at":"2026-10-16","quote":"7m×7m 크기의 파쇄석…","text":"7×7m","n":2}
+{"cid":"102293","attr":"SITE_SIZE","value":"7×7m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/yoonloveworld/224443393856","at":"2026-10-16","quote":"7m×7m 크기의 파쇄석…","text":"7×7m","n":1}
 {"cid":"102295","attr":"SITE_SIZE","value":"6×3.3m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/lucas74song/224410060456","at":"2026-09-13","quote":"장골캠핑장 개장 이후 허용된 구역 외의 장소에서 야영금지를 주민과 부녀회에서 계도 중.) 장골해수욕장 야영장은 데크당 4만원의 비용이 들기는 했지만 데크사이즈가 커서(6m*3.3m 추정.","text":"6×3.3m","n":1}
 {"cid":"102303","attr":"AREA_TOTAL_M2","value":5360,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102303","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
@@ -5698,7 +5700,6 @@
 {"cid":"102308","attr":"SITE_SIZE","value":"6×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/shatte_/224359558885","at":"2026-07-27","quote":"야영 사이트 : 총 16면 (6×8m 10면, 5×7m 6면) ⚠️ 바닥 파쇄석...","text":"6×8m","n":1}
 {"cid":"102310","attr":"SITE_SIZE","value":"4×5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102310","attr":"SITE_SIZE","value":"4×5m","grade":"MENTION","src":"review_search","url":"https://darumdeck.tistory.com/5","at":"2026-10-12","quote":"규모: 데크 4m x 5m, 전동 시스템파고라 3m x 4m","text":"4×5m","n":2}
-{"cid":"102315","attr":"SITE_SIZE","value":"8×8.5m","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102315","attr":"SITE_SIZE","value":"8×8.5m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/cutedahee100/224438824188","at":"2026-10-12","quote":"파주 마장호수 휴 캠핑장 날짜: 26.10/1-10/3 (2박3일) 가격: 1박 20,000원 (주말 25,000) 사이트: 10번 (8m x 8.5m) - 자동차 주차공간포함 파쇄석","text":"8×8.5m","n":1}
 {"cid":"102316","attr":"AREA_TOTAL_M2","value":6280,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102316","attr":"SITE_GAP_M","value":3,"grade":"CONFIRMED","src":"gocamping","text":"3m"}
@@ -5740,6 +5741,7 @@
 {"cid":"102365","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102368","attr":"AREA_TOTAL_M2","value":1732,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102368","attr":"SITE_GAP_M","value":1,"grade":"CONFIRMED","src":"gocamping","text":"1m"}
+{"cid":"osm-w32660867","attr":"SITE_SIZE","value":"8×10m","grade":"MENTION","src":"review_search","url":"https://leports.sailing-blog.click/4407","at":"2025-11-03","quote":"사이트 크기는 가로 8m 세로 10m로 대형 텐트를 설치하기에 무리가 없다.","text":"8×10m","n":1}
 {"cid":"osm-w256957046","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/256957046","at":"2026-10-30"}
 {"cid":"osm-w256957046","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/smurfshouse/224434528939","at":"2026-10-07","quote":"구미 낙동강 체육공원은 주말 나들이로 피크닉 즐기기에도 좋고, 예쁜 꽃구경도 하기 좋은 곳이며...내 야외물놀이장 옆) 시설: 오토캠핑 사이트 50면 사이트 크기: 10m × 10m 입실·퇴실: 오후 2시 ~ 다음 날 오전…","text":"10×10m","n":1}
 {"cid":"osm-w468666165","attr":"SITE_SIZE","value":"6×7m","grade":"MENTION","src":"review_search","url":"https://parksmiley.tistory.com/564","at":"2025-07-14","quote":"사이트 크기: 약 6x7m로, 대형 텐트나 타프 설치 시 공간 계획 필요","text":"6×7m","n":1}
@@ -5754,6 +5756,8 @@
 {"cid":"osm-w775718528","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/smurfshouse/224434528939","at":"2026-10-07","quote":"구미 낙동강 체육공원은 주말 나들이로 피크닉 즐기기에도 좋고, 예쁜 꽃구경도 하기 좋은 곳이며...내 야외물놀이장 옆) 시설: 오토캠핑 사이트 50면 사이트 크기: 10m × 10m 입실·퇴실: 오후 2시 ~ 다음 날 오전…","text":"10×10m","n":1}
 {"cid":"osm-w789142544","attr":"SITE_SIZE","value":"4×6m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/789142544","at":"2026-10-30"}
 {"cid":"osm-w1188029707","attr":"SITE_SIZE","value":"3×4m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1188029707","at":"2026-10-30"}
+{"cid":"osm-w1299163837","attr":"SITE_SIZE","value":"6×12m","grade":"MENTION","src":"review_search","url":"https://leports.sailing-blog.click/4624","at":"2026-09-29","quote":"캠핑장에는 파쇄석으로 이뤄진 오토캠핑 사이트 35면이 있으며, 크기는 가로 6m 세로 12m다.","text":"6×12m","n":1}
+{"cid":"osm-w1299163837","attr":"SITE_SIZE","value":"8×9m","grade":"MENTION","src":"review_search","url":"https://leports.sailing-blog.click/4624","at":"2026-09-29","quote":"파쇄석으로 조성된 오토캠핑 사이트 38면을 운영하며 사이트 크기는 가로 8m, 세로 9m 등으로 구성되어 있다.","text":"8×9m","n":1}
 {"cid":"osm-w1378241447","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1378241447","at":"2026-10-30"}
 {"cid":"osm-w1378241447","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/smurfshouse/224434528939","at":"2026-10-07","quote":"구미 낙동강 체육공원은 주말 나들이로 피크닉 즐기기에도 좋고, 예쁜 꽃구경도 하기 좋은 곳이며...내 야외물놀이장 옆) 시설: 오토캠핑 사이트 50면 사이트 크기: 10m × 10m 입실·퇴실: 오후 2시 ~ 다음 날 오전…","text":"10×10m","n":1}
 {"cid":"park-30230-00082-55si2","attr":"SITE_SIZE","value":"5.6×5.7m","grade":"MENTION","src":"review_search","url":"https://leports.sailing-blog.click/2691","at":"2025-06-17","quote":"잔디 39면과 데크 1면으로 이뤄졌으며, 사이트 크기는 가로 5.6m 세로 5.7m다.","text":"5.6×5.7m","n":1}
@@ -5763,7 +5767,6 @@
 {"cid":"park-41135-00002-pzbxp","attr":"SITE_SIZE","value":"6×6m","grade":"OPERATOR","src":"operator_discovered","url":"https://camping.isdc.co.kr/ydpc/price.do","at":"2026-10-24T22:47:31.908Z","quote":"6x6m 총 10면, 사이트간 이격거리 1.5m","text":"6×6m"}
 {"cid":"park-41135-00002-pzbxp","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"operator_discovered","url":"https://camping.isdc.co.kr/ydpc/price.do","at":"2026-10-24T22:47:31.908Z","quote":"8x8m 총 44면, 사이트간 이격거리 1.5m","text":"8×8m"}
 {"cid":"park-41135-00002-pzbxp","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-30"}
-{"cid":"park-41210-00077-rbxi0","attr":"SITE_SIZE","value":"6×6m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/xoryd4/224449743042","at":"2026-10-22","quote":"대부분이 차를 옆에 대는 자동차 사이트이고, B구역 8면만 6×6m 일반 사이트입니다.","text":"6×6m","n":1}
 {"cid":"park-41220-00288-pes2l","attr":"SITE_SIZE","value":"7.5×5m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-30"}
 {"cid":"park-41285-00035-11naf","attr":"SITE_SIZE","value":"7.5×8m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-30"}
 {"cid":"park-41285-00036-11naf","attr":"SITE_SIZE","value":"7.5×8m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-30"}
@@ -5771,8 +5774,6 @@
 {"cid":"park-46110-00030-vd3n","attr":"SITE_SIZE","value":"7×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/ziiloliiz/224440788968","at":"2026-10-13","quote":"7m x 8m, 파쇄석, 텐트 옆 주차 ⏰️ 입실오후 2:00, 퇴실오전 11:00 …","text":"7×8m","n":1}
 {"cid":"park-46770-00014-qc3lb","attr":"SITE_SIZE","value":"6×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=19772&res_dt=20261031","at":"2026-10-30","text":"해변 캠핑장 1~37"}
 {"cid":"park-46770-00014-qc3lb","attr":"SITE_SIZE","value":"8×12m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=19772&res_dt=20261031","at":"2026-10-30","text":"노을 캠핑장 1~20"}
-{"cid":"park-46770-00014-qc3lb","attr":"SITE_SIZE","value":"5×5m","grade":"MENTION","src":"review_search","url":"https://full-passion.tistory.com/117","at":"2025-10-14","quote":"런치/디너타임으로 나뉨, 잔디 (5x5m) 50,000","text":"5×5m","n":1}
-{"cid":"park-46770-00014-qc3lb","attr":"SITE_SIZE","value":"6×8m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/duri3576/224173055072","at":"2026-02-05","quote":"총 37개 사이트중 1번 부터 35번 사이트는 사이트 크기 6m * 8m이며 1박 이용요금이 35,000원 입니다....","text":"6×8m","n":3}
 {"cid":"park-47210-00035-ndg48","attr":"SITE_SIZE","value":"5×6m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-30"}
 {"cid":"park-47210-00035-ndg48","attr":"SITE_SIZE","value":"5×6m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/haeyada/224133332166","at":"2026-01-04","quote":"오토캠핑장 12번 사이트 번호 5x6m 데크202번 예약 맞은편 데크106번 교환 입실.퇴실 시간 14시 ~ 11시 사이트 이용기간 2박 3일 전자렌지 전자렌지 있음 정수기...있음 여름엔 깨끗한 계곡을 즐길 수 있을 듯함 화천 평화의댐 댐하류공원쪽…","text":"5×6m","n":1}
 {"cid":"park-48820-00001-n71qm","attr":"SITE_SIZE","value":"12×8m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=16861&res_dt=20261031","at":"2026-10-30","text":"오토캠핑존-1번~11번(파쇄석)"}

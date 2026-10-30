@@ -1667,6 +1667,12 @@
 {"cid":"1508","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1508","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1508","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1511","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1511","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1511","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1511","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1511","attr":"OPEN_WINTER","value":false,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1511","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1513","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1513","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1513","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -4210,7 +4216,11 @@
 {"cid":"7096","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7096","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7096","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7097","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7097","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7097","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7097","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7097","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7097","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7098","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7098","attr":"OPEN_DAYS","value":"WEEKEND","grade":"CONFIRMED","src":"gocamping"}
@@ -6708,6 +6718,12 @@
 {"cid":"100191","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100191","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100191","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100193","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100193","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100193","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100193","attr":"OPEN_SUMMER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100193","attr":"OPEN_WINTER","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100193","attr":"OPERATING_STATUS","value":"OPEN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100196","attr":"OPEN_AUTUMN","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100196","attr":"OPEN_DAYS","value":"ALL","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100196","attr":"OPEN_SPRING","value":true,"grade":"CONFIRMED","src":"gocamping"}
