@@ -4802,7 +4802,7 @@ async function detailView(id) {
 // 추천(주변 캠핑장)은 업장 정보가 어느 정도 있는 곳만(소유자 2026-10-22: 정보도 거의 없고 사진은 남의 음식 사진인 곳이 추천됨).
 // 전화·홈페이지·소개·요금·사이트 종류·편의시설·규격·후기 중 2가지 이상. 검색·지도 목록에서는 빼지 않는다.
 const infoRich = (x) => (x._ir ??= [x.tel, x.homepage, x.line, x.fee, x.st?.length, x.amenities?.length, x.sizes?.length, x.rv?.n].filter(Boolean).length >= 2);
-function similarNearby(c, n = 6) {
+function similarNearby(c, n = 3) {
   if (!Number.isFinite(c?.lat) || !Number.isFinite(c?.lng)) return [];
   const mine = new Set(stayKinds(c));
   return S.camps
