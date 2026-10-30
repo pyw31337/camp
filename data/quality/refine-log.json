@@ -1,8 +1,8 @@
 {
- "generated_at": "2026-10-29T23:26:52.589Z",
+ "generated_at": "2026-10-30T01:31:25.372Z",
  "rule": "pipeline/lib/fact-refine.mjs",
  "dropped": 241,
- "recoded": 145,
+ "recoded": 146,
  "scoped": 610,
  "items": [
   {
@@ -3876,6 +3876,17 @@
    "quote": "입실 14시, 퇴실 11시 캠핑용품 대여: 매점에서 가능 매점 031-657-0844 주차안내: 무료 반려동물: 입장 불가 주소: 경기 평택시 팽성읍 내리길...",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "park-47111-00027-15m52",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://triple.guide/hotels/e100fe76-7a30-457d-8342-fa9052ebe1e2?checkIn=2024-02-24&checkOut=2024-02-25&numberOfAdults=2&agesOfChildren&skipInitialCache=true&_triple_no_navbar=true",
+   "quote": "반려동물 입실 가능 펜션 외에 반려동물 동반 시 입실이 거부될 수 있으며, 해당 사유로 환불 받을 수 없습니다.",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
   },
   {
    "cid": "park-11290-00001-y1mf",
