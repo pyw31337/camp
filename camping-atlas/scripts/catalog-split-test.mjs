@@ -5,7 +5,7 @@ const { chromium } = await import(process.env.PW_MODULE || "playwright");
 const url = (process.argv[2] || "http://127.0.0.1:8765/").replace(/#.*$/, "");
 const PAGES = ["#/", "#/list", "#/list?kind=GLAMPING", "#/list?kind=HOUSE,RV", "#/list?win=1&pet=1", "#/list?fee=3to5&w=600", "#/list?q=가평", "#/list?q=숲속 전기", "#/list?sido=강원&fire=1&park=1", "#/theme/WINTER", "#/theme/FAMILY", "#/map"];
 const b = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
-const clean = (h) => h.replace(/ (data-(drag-?init|init|h)|style)="[^"]*"/g, "").replace(/<img[^>]*>/g, (m) => m.replace(/ (loading|fetchpriority)="[^"]*"/g, "").replace(/data-src=/g, "src="));
+const clean = (h) => h.replace(/<section class="hero"[\s\S]*?<\/section>/g, '<section class="hero"></section>').replace(/ (data-(drag-?init|init|h)|style)="[^"]*"/g, "").replace(/<img[^>]*>/g, (m) => m.replace(/ (loading|fetchpriority)="[^"]*"/g, "").replace(/data-src=/g, "src="));
 async function run(useLite, ids) {
   const ctx = await b.newContext({ viewport: { width: 1366, height: 900 } }); const p = await ctx.newPage(); p.setDefaultTimeout(30000);
   const errs = []; p.on("pageerror", (e) => { if (!/_leaflet_pos/.test(e.message)) errs.push(e.message); });

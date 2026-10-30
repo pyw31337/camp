@@ -1926,10 +1926,6 @@ function getInitialHeroIndex() {
     const idx = HERO_THEMES.findIndex((t) => t.id === heroParam || t.shortName === heroParam);
     if (idx !== -1) return idx;
   }
-  const hour = new Date().getHours();
-  if (hour >= 20 || hour < 5) return 0; // 밤하늘 별 & 반딧불이
-  if (hour >= 17) return 7; // 서해안 노을
-  if (hour >= 6 && hour < 10) return 4; // 편백 숲 햇살
   return Math.floor(Math.random() * HERO_THEMES.length);
 }
 
@@ -2839,8 +2835,6 @@ class HeroCanvasController {
 
 let heroCanvasInstance = null;
 let heroThemeIndex = 0;
-let heroAutoTimer = null;
-let heroIsAutoRolling = true;
 
 function initHeroDynamicEngine(v) {
   const heroSec = v.querySelector("[data-hero-section]");
@@ -2849,20 +2843,13 @@ function initHeroDynamicEngine(v) {
   const canvas = heroSec.querySelector("#hero-fx-canvas");
   const layerA = heroSec.querySelector(".hero-bg-a");
   const layerB = heroSec.querySelector(".hero-bg-b");
-  const badgeEl = heroSec.querySelector("[data-hero-badge]");
   const titleAEl = heroSec.querySelector("[data-hero-title-a]");
   const titleBEl = heroSec.querySelector("[data-hero-title-b]");
   const summaryEl = heroSec.querySelector("[data-hero-summary]");
-  const autoBtn = heroSec.querySelector("[data-hero-auto-toggle]");
-  const chips = heroSec.querySelectorAll("[data-hero-theme]");
 
   if (heroCanvasInstance) {
     heroCanvasInstance.destroy();
     heroCanvasInstance = null;
-  }
-  if (heroAutoTimer) {
-    clearInterval(heroAutoTimer);
-    heroAutoTimer = null;
   }
 
   if (canvas) {
@@ -2872,7 +2859,7 @@ function initHeroDynamicEngine(v) {
 
   let activeLayer = "A";
 
-  function applyTheme(idx, animate = true) {
+  function applyTheme(idx, animate = false) {
     heroThemeIndex = (idx + HERO_THEMES.length) % HERO_THEMES.length;
     const theme = HERO_THEMES[heroThemeIndex];
     heroSec.dataset.heroCurrentTheme = theme.id;
@@ -2893,19 +2880,16 @@ function initHeroDynamicEngine(v) {
     }
 
     if (animate) {
-      [titleAEl, titleBEl, summaryEl, badgeEl].forEach((el) => el?.classList.add("hero-text-changing"));
+      [titleAEl, titleBEl, summaryEl].forEach((el) => el?.classList.add("hero-text-changing"));
       setTimeout(() => {
         updateText();
-        [titleAEl, titleBEl, summaryEl, badgeEl].forEach((el) => el?.classList.remove("hero-text-changing"));
+        [titleAEl, titleBEl, summaryEl].forEach((el) => el?.classList.remove("hero-text-changing"));
       }, 150);
     } else {
       updateText();
     }
 
     function updateText() {
-      if (badgeEl) {
-        badgeEl.innerHTML = `<span class="mood-dot" aria-hidden="true"></span><b>${theme.emoji} ${esc(theme.badge)}</b><span>·</span><span>${esc(theme.moodDescription)}</span>`;
-      }
       if (titleAEl) titleAEl.textContent = theme.titleA;
       if (titleBEl) {
         titleBEl.innerHTML = `전국 <b class="hero-n" data-hero-total>${fmt(heroCounts().total)}</b>곳 <em>${esc(theme.titleB)}</em>`;
@@ -2914,19 +2898,6 @@ function initHeroDynamicEngine(v) {
         summaryEl.innerHTML = `캠핑장 <b data-hero-stay>${fmt(heroCounts().stay)}</b>곳 · 당일 나들이 <b data-hero-day>${fmt(heroCounts().day)}</b>곳, ${esc(theme.summary)}`;
       }
     }
-
-    chips.forEach((c) => {
-      const match = c.dataset.heroTheme === theme.id;
-      c.classList.toggle("active", match);
-      c.setAttribute("aria-pressed", String(match));
-      if (match) {
-        const parent = c.parentElement;
-        if (parent && parent.scrollTo) {
-          const chipLeft = c.offsetLeft - parent.offsetLeft;
-          parent.scrollTo({ left: Math.max(0, chipLeft - 20), behavior: "smooth" });
-        }
-      }
-    });
   }
 
   // Initial theme
@@ -2934,18 +2905,7 @@ function initHeroDynamicEngine(v) {
   const initialIdx = Math.max(0, HERO_THEMES.findIndex((t) => t.id === initialId));
   applyTheme(initialIdx, false);
 
-  function startAutoRolling() {
-    if (heroAutoTimer) clearInterval(heroAutoTimer);
-    heroAutoTimer = setInterval(() => {
-      if (!heroIsAutoRolling || document.hidden || !heroSec.isConnected) return;
-      const rect = heroSec.getBoundingClientRect();
-      if (rect.bottom < 50 || rect.top > window.innerHeight) return;
-      applyTheme(heroThemeIndex + 1, true);
-    }, 10000);
-  }
-  startAutoRolling();
-
-  // IntersectionObserver to pause canvas animation and auto rolling when hero is offscreen
+  // IntersectionObserver to pause canvas animation when hero is offscreen
   let heroIo = null;
   if ("IntersectionObserver" in window) {
     heroIo = new IntersectionObserver((entries) => {
@@ -2959,26 +2919,6 @@ function initHeroDynamicEngine(v) {
     heroIo.observe(heroSec);
   }
 
-  chips.forEach((c, idx) => {
-    c.addEventListener("click", () => {
-      applyTheme(idx, true);
-      startAutoRolling();
-    });
-  });
-
-  if (autoBtn) {
-    const pauseIcon = autoBtn.querySelector(".hero-pause-icon");
-    const playIcon = autoBtn.querySelector(".hero-play-icon");
-    autoBtn.addEventListener("click", () => {
-      heroIsAutoRolling = !heroIsAutoRolling;
-      autoBtn.setAttribute("aria-label", heroIsAutoRolling ? "자동 롤링 일시정지" : "자동 롤링 재생");
-      autoBtn.setAttribute("title", heroIsAutoRolling ? "자동 롤링 일시정지" : "자동 롤링 재생");
-      if (pauseIcon) pauseIcon.style.display = heroIsAutoRolling ? "block" : "none";
-      if (playIcon) playIcon.style.display = heroIsAutoRolling ? "none" : "block";
-      if (heroIsAutoRolling) startAutoRolling();
-    });
-  }
-
   cleanup.push(() => {
     if (heroIo) {
       heroIo.disconnect();
@@ -2987,10 +2927,6 @@ function initHeroDynamicEngine(v) {
     if (heroCanvasInstance) {
       heroCanvasInstance.destroy();
       heroCanvasInstance = null;
-    }
-    if (heroAutoTimer) {
-      clearInterval(heroAutoTimer);
-      heroAutoTimer = null;
     }
   });
 }
@@ -3025,26 +2961,6 @@ function homeView() {
     <div class="hero-bg-layer hero-bg-b" aria-hidden="true"></div>
     <canvas id="hero-fx-canvas" class="hero-fx-canvas" aria-hidden="true"></canvas>
     <div class="hero-in">
-      <div class="hero-mood-bar" aria-label="감성 캠핑 테마">
-        <span class="hero-mood-badge" data-hero-badge>
-          <span class="mood-dot" aria-hidden="true"></span>
-          <b>${initialTheme.emoji} ${esc(initialTheme.badge)}</b><span>·</span><span>${esc(initialTheme.moodDescription)}</span>
-        </span>
-        <div class="hero-theme-nav" aria-label="테마 선택">
-          <div class="hero-chips rail">
-            ${HERO_THEMES.map((t, idx) => `
-              <button type="button" class="hero-theme-chip ${idx === initialIdx ? "active" : ""}" data-hero-theme="${t.id}" title="${esc(t.moodDescription)}" aria-pressed="${idx === initialIdx}">
-                <span class="hero-theme-icon">${t.emoji}</span>
-                <span class="hero-theme-label">${esc(t.shortName)}</span>
-              </button>
-            `).join("")}
-          </div>
-          <button type="button" class="hero-auto-toggle" data-hero-auto-toggle aria-label="자동 롤링 일시정지" title="자동 롤링 일시정지">
-            <svg class="hero-pause-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-            <svg class="hero-play-icon" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:none;"><path d="M8 5v14l11-7z"/></svg>
-          </button>
-        </div>
-      </div>
       <h1 id="hero-t">
         <span class="h1-a" data-hero-title-a>${esc(initialTheme.titleA)}</span>
         <span class="h1-b" data-hero-title-b>전국 <b class="hero-n" data-hero-total>${fmt(heroCounts().total)}</b>곳 <em>${esc(initialTheme.titleB)}</em></span>
