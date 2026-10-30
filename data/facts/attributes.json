@@ -178,10 +178,10 @@
    "filter": "in",
    "note": "count가 있으면 면·동 수. text는 세부 이름(방갈로·캐빈 등). 원천: 고캠핑 등록값·소개글, 카카오/네이버 분류, 운영자 홈페이지 문장(lib/site-types.mjs)",
    "coverage": {
-    "campgrounds": 3429,
+    "campgrounds": 3432,
     "by_grade": {
      "CONFIRMED": 5781,
-     "MENTION": 5046,
+     "MENTION": 5050,
      "OPERATOR": 1080
     }
    }
@@ -481,9 +481,9 @@
    "filter": "max",
    "note": "MENTION 전용. 확정값으로 쓰지 않는다",
    "coverage": {
-    "campgrounds": 2719,
+    "campgrounds": 2721,
     "by_grade": {
-     "MENTION": 13872
+     "MENTION": 13877
     }
    }
   },
@@ -569,9 +569,9 @@
    "pref": "일찍 들어가고 싶나요?",
    "filter": "max",
    "coverage": {
-    "campgrounds": 2776,
+    "campgrounds": 2777,
     "by_grade": {
-     "MENTION": 3521,
+     "MENTION": 3522,
      "REFERENCE": 452,
      "OPERATOR": 646,
      "CONFIRMED": 4
@@ -602,9 +602,9 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 189,
+    "campgrounds": 190,
     "by_grade": {
-     "MENTION": 173,
+     "MENTION": 174,
      "OPERATOR": 44,
      "CONFIRMED": 1
     }
@@ -633,7 +633,7 @@
    "coverage": {
     "campgrounds": 2081,
     "by_grade": {
-     "MENTION": 2522,
+     "MENTION": 2523,
      "REFERENCE": 463,
      "OPERATOR": 129,
      "CONFIRMED": 7
@@ -1653,7 +1653,7 @@
    "coverage": {
     "campgrounds": 2960,
     "by_grade": {
-     "CONFIRMED": 4255,
+     "CONFIRMED": 4256,
      "MENTION": 181
     }
    }
@@ -1665,9 +1665,9 @@
    "type": "url",
    "note": "value=place_url, value_text=분류",
    "coverage": {
-    "campgrounds": 2145,
+    "campgrounds": 2146,
     "by_grade": {
-     "CONFIRMED": 2145
+     "CONFIRMED": 2146
     }
    }
   },
@@ -2208,9 +2208,9 @@
    "review_label": "반려견 동반 편함",
    "pref": "‘반려견 동반 편함’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 1160,
+    "campgrounds": 1161,
     "by_grade": {
-     "MENTION": 1160
+     "MENTION": 1161
     }
    }
   },
@@ -2655,5 +2655,5 @@
    }
   }
  ],
- "generated_at": "2026-10-30T09:28:41.609Z"
+ "generated_at": "2026-10-30T10:32:29.655Z"
 }
