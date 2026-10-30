@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-30T13:10:50.514Z",
- "date": "2026-10-30",
+ "generated_at": "2026-10-30T15:02:11.967Z",
+ "date": "2026-10-31",
  "totals": {
   "campgrounds": 6416,
-  "facts": 238265,
-  "pairs": 189032,
+  "facts": 238274,
+  "pairs": 189037,
   "mean_confidence": 0.786,
   "confirmed_pct": 85,
   "corroborated": 3948,
@@ -842,18 +842,18 @@
    }
   },
   "PET_POLICY": {
-   "coverage": 2846,
+   "coverage": 2848,
    "coverage_pct": 44.4,
    "mean_confidence": 0.84,
    "confirmed_pct": 91.2,
    "corroborated": 693,
    "conflicts": 52,
-   "weak": 177,
+   "weak": 179,
    "status": {
     "CONFLICT": 52,
     "CONFIRMED": 2324,
     "VERIFIED": 272,
-    "WEAK": 177,
+    "WEAK": 179,
     "SINGLE": 21
    }
   },
@@ -947,15 +947,15 @@
    }
   },
   "PRICE_MENTION": {
-   "coverage": 2727,
+   "coverage": 2728,
    "coverage_pct": 42.5,
    "mean_confidence": 0.367,
    "confirmed_pct": 0,
    "corroborated": 371,
    "conflicts": 0,
-   "weak": 2356,
+   "weak": 2357,
    "status": {
-    "WEAK": 2356,
+    "WEAK": 2357,
     "CORROBORATED": 371
    }
   },
@@ -1025,15 +1025,15 @@
    }
   },
   "REVIEW_PRO_EASY_PARKING": {
-   "coverage": 477,
-   "coverage_pct": 7.4,
+   "coverage": 478,
+   "coverage_pct": 7.5,
    "mean_confidence": 0.346,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 476,
+   "weak": 477,
    "status": {
-    "WEAK": 476,
+    "WEAK": 477,
     "SINGLE": 1
    }
   },
@@ -1707,16 +1707,16 @@
    }
   },
   "SITE_TYPE": {
-   "coverage": 3435,
-   "coverage_pct": 53.5,
+   "coverage": 3436,
+   "coverage_pct": 53.6,
    "mean_confidence": 0.742,
    "confirmed_pct": 77.2,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 776,
+   "weak": 777,
    "status": {
     "CONFIRMED": 2651,
-    "WEAK": 776,
+    "WEAK": 777,
     "SINGLE": 8
    }
   },
@@ -1931,12 +1931,12 @@
    "confirmed_pct": 19.3,
    "corroborated": 568,
    "conflicts": 40,
-   "weak": 1323,
+   "weak": 1322,
    "status": {
     "VERIFIED": 195,
-    "WEAK": 1323,
+    "WEAK": 1322,
     "CONFIRMED": 318,
-    "SINGLE": 608,
+    "SINGLE": 609,
     "CORROBORATED": 171,
     "CONFLICT": 40
    }
@@ -1948,12 +1948,12 @@
    "confirmed_pct": 20.2,
    "corroborated": 637,
    "conflicts": 15,
-   "weak": 1326,
+   "weak": 1325,
    "status": {
     "VERIFIED": 205,
-    "WEAK": 1326,
+    "WEAK": 1325,
     "CONFIRMED": 333,
-    "SINGLE": 565,
+    "SINGLE": 566,
     "CORROBORATED": 214,
     "CONFLICT": 15
    }
@@ -2065,12 +2065,5 @@
    }
   }
  },
- "regressions": [
-  {
-   "attr": "PROMOTION",
-   "kind": "confidence",
-   "from": 0.46,
-   "to": 0.411
-  }
- ]
+ "regressions": []
 }
