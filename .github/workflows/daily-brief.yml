@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: 22
       - name: Install mailer
-        run: mkdir -p /tmp/m && cd /tmp/m && npm init -y >/dev/null && npm i nodemailer@6.9.16 >/dev/null
+        run: mkdir -p /tmp/m && cd /tmp/m && npm init -y >/dev/null && npm i nodemailer@6.9.16 pg@8.13.1 >/dev/null
       - name: Build and send the brief
         env:
           NODE_PATH: /tmp/m/node_modules
@@ -39,6 +39,9 @@ jobs:
           NAVER_SMTP_ACCOUNT: ${{ vars.NAVER_SMTP_ACCOUNT }}
           NAVER_SMTP_APP_PASSWORD: ${{ secrets.NAVER_SMTP_APP_PASSWORD }}
           BRIEF_TO: ${{ vars.BRIEF_TO }}
+          # 사용 지표(event_log) 읽기 — 없으면 그 칸만 빠진다
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_SSL: ${{ vars.DATABASE_SSL }}
         run: |
           ln -s /tmp/m/node_modules pipeline/scripts/node_modules 2>/dev/null || true
           node pipeline/scripts/daily-brief.mjs --send --out "$RUNNER_TEMP/brief.html"

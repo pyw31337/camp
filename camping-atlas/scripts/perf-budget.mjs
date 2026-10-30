@@ -8,7 +8,8 @@ import { fileURLToPath } from "node:url";
 const root = fileURLToPath(new URL("../../", import.meta.url));
 const fails = [];
 const KB = (n) => Math.round(n / 1024);
-const BUDGET = { appJs: 560, css: 260, dataGz: 2600, nodes: 12000, cardsMs: 8000, origImgs: 0 };
+// 2026-10-31: 오늘의 캠핑장 덱·출발지 이동시간·예약 오픈 알림·익명 지표·내리기 요청(소유자 요청 7가지)으로 app.js·css 예산을 각각 +40KB·+20KB 올렸다.
+const BUDGET = { appJs: 600, css: 280, dataGz: 2600, nodes: 12000, cardsMs: 8000, origImgs: 0 };
 const app = statSync(`${root}design/renewal/app.js`).size, css = statSync(`${root}design/renewal/style.css`).size;
 import { existsSync } from "node:fs";
 const liteP = existsSync(`${root}camping-atlas/public/explore/data/campgrounds.lite.json`) ? "camping-atlas/public/explore/data/campgrounds.lite.json" : null;
@@ -38,6 +39,8 @@ if (url) {
   if (nodes > BUDGET.nodes) fails.push(`홈 DOM ${nodes} > ${BUDGET.nodes}`);
   if (cardsMs > BUDGET.cardsMs) fails.push(`홈 카드 표시 ${cardsMs}ms > ${BUDGET.cardsMs}ms`);
   if (orig.length > BUDGET.origImgs) fails.push(`첫 화면에서 고캠핑 원본 사진 ${orig.length}장(썸네일 대신): ${orig.slice(0, 2).join(", ")}`);
+  // 메인은 테마 줄 6개만 먼저 보이고 나머지는 ‘테마 더 보기’로 펼친다(2026-10-31). 펼친 뒤 모든 줄이 채워지는지 본다.
+  await p.click("[data-rows-more]", { timeout: 5000 }).catch(() => {});
   for (let y = 0; y < 40; y++) { await p.mouse.wheel(0, 1600); await p.waitForTimeout(120); }
   const empty = await p.$$eval(".trow", (s) => s.filter((x) => !x.querySelector(".card")).map((x) => x.getAttribute("aria-label")));
   if (empty.length) fails.push(`내려도 비어 있는 테마 줄: ${empty.join(", ")}`);

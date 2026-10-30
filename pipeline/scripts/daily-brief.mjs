@@ -64,6 +64,25 @@ if (process.env.GITHUB_TOKEN) {
   } catch (e) { console.error(`(참고) 워크플로 실행 기록을 읽지 못함: ${e.message}`); }
 }
 
+// 3-1) 사용 지표(db/026_event_log.sql) — DATABASE_URL이 있을 때만. 지난 24시간.
+let usage = null;
+if (process.env.DATABASE_URL) {
+  try {
+    const { default: pg } = await import("pg");
+    const db = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: process.env.DATABASE_SSL === "false" ? undefined : { rejectUnauthorized: false } });
+    await db.connect();
+    const q = async (sql) => (await db.query(sql)).rows;
+    const win = "created_at >= NOW() - INTERVAL '24 hours'";
+    const ev = Object.fromEntries((await q(`SELECT event, count(*)::int n, count(DISTINCT sid)::int u FROM event_log WHERE ${win} GROUP BY event`)).map((r) => [r.event, r]));
+    const topQ = await q(`SELECT q, count(*)::int n FROM event_log WHERE ${win} AND event='search' AND q IS NOT NULL GROUP BY q ORDER BY n DESC LIMIT 8`);
+    const zeroQ = await q(`SELECT q, count(*)::int n FROM event_log WHERE ${win} AND event='search_zero' AND q IS NOT NULL GROUP BY q ORDER BY n DESC LIMIT 8`);
+    const topD = await q(`SELECT campground_id id, count(*)::int n FROM event_log WHERE ${win} AND event='detail' GROUP BY campground_id ORDER BY n DESC LIMIT 8`);
+    await db.end();
+    usage = { ev, topQ, zeroQ, topD };
+  } catch (e) { console.error(`(참고) 사용 지표를 읽지 못함(event_log 표가 아직 없을 수 있음): ${String(e.message).slice(0, 120)}`); }
+}
+const nameById = new Map(liteNow.map((c) => [String(c.id), c.name]));
+
 // 4) 진단(현황판 규칙 일부)
 const M = stats.metrics ?? {};
 const LABEL = { "field.sizes": "사이트 크기", "field.floors": "바닥 재질", "field.booking": "예약 링크", "field.pets": "반려견 정보", "field.amenities": "편의시설", "video.per_camp": "캠핑장당 영상 수", "video.short_camps": "쇼츠 있는 캠핑장", "video.playable_camps": "영상 있는 캠핑장", "operator.ok": "운영자 홈페이지 수집 성공", "booking.verified": "예약 링크 업장 확인", "place.kakao": "카카오 플레이스 매칭", "place.naver": "네이버 플레이스 매칭", "quality.confirmed_pct": "확정 비율", "quality.iq": "평균 정보량", "quality.confidence": "평균 신뢰도", "catalog.camps": "캠핑장 수" };
@@ -76,12 +95,18 @@ for (const [k, x] of Object.entries(M)) {
 const stalled = srcRows.filter((s) => s.every === 1 && s.d7 > 0 && s.today === 0).map((s) => s.name);
 
 // 본문
-const subject = `[렛츠캠핑] ${today} 아침 브리핑 · 새 장소 ${fmt(added.length)}곳 · 실패 ${fmt(failed.length)}건`;
+const subject = `[렛츠 캠핑] ${today} 아침 브리핑 · 새 장소 ${fmt(added.length)}곳 · 실패 ${fmt(failed.length)}건`;
 const td = "padding:6px 10px;border-bottom:1px solid #eee;font-size:13px";
 const html = `<!doctype html><html><body style="margin:0;background:#f5f6f4;font-family:-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;color:#101414">
 <div style="max-width:640px;margin:0 auto;padding:20px">
-<h1 style="font-size:20px;margin:0 0 4px">렛츠캠핑 아침 브리핑</h1>
+<h1 style="font-size:20px;margin:0 0 4px">렛츠 캠핑 아침 브리핑</h1>
 <p style="margin:0 0 16px;color:#747c78;font-size:13px">${esc(today)} · 수집 현황 기준 ${esc(stats.date ?? "-")} · <a href="${SITE}admin/collect/">수집 현황판</a></p>
+${usage ? (() => { const n = (k, f = "n") => fmt(usage.ev[k]?.[f] ?? 0); const det = usage.ev.detail?.n ?? 0, bk = usage.ev.booking_click?.n ?? 0;
+  return `<h2 style="font-size:15px;margin:18px 0 8px">어제 이용 (24시간)</h2>
+<table style="width:100%;border-collapse:collapse;background:#fff"><tr><td style="${td}">방문(탭 기준)</td><td style="${td};text-align:right"><b>${n("visit", "u")}</b></td></tr><tr><td style="${td}">검색 / 결과 0건</td><td style="${td};text-align:right">${n("search")} / <span style="color:#d92d20">${n("search_zero")}</span></td></tr><tr><td style="${td}">상세 보기</td><td style="${td};text-align:right">${fmt(det)}</td></tr><tr><td style="${td}">예약 버튼 / 전화</td><td style="${td};text-align:right">${fmt(bk)} / ${n("call_click")} ${det ? `<small style="color:#747c78">(상세 대비 ${fmt((bk / det) * 100, 1)}%)</small>` : ""}</td></tr><tr><td style="${td}">찜 · 오늘의 캠핑장 넘김</td><td style="${td};text-align:right">${n("save")} · ${n("today_swipe", "u")}</td></tr></table>
+${usage.topQ.length ? `<p style="font-size:13px"><b>많이 찾은 말</b> ${usage.topQ.map((r) => `${esc(r.q)}(${r.n})`).join(", ")}</p>` : ""}
+${usage.zeroQ.length ? `<p style="font-size:13px;color:#d92d20"><b>결과 0건 검색</b> ${usage.zeroQ.map((r) => `${esc(r.q)}(${r.n})`).join(", ")}</p>` : ""}
+${usage.topD.length ? `<p style="font-size:13px"><b>많이 본 캠핑장</b> ${usage.topD.map((r) => `${esc(nameById.get(String(r.id)) ?? r.id)}(${r.n})`).join(", ")}</p>` : ""}`; })() : ""}
 <h2 style="font-size:15px;margin:18px 0 8px">새로 등록된 장소 ${fmt(added.length)}곳${prevN != null ? ` <small style="color:#747c78">(전체 ${fmt(prevN)} → ${fmt(liteNow.length)})</small>` : ""}</h2>
 ${added.length ? `<table style="width:100%;border-collapse:collapse;background:#fff">${added.slice(0, 30).map((c) => `<tr><td style="${td}"><a href="${SITE}place/${encodeURIComponent(c.id)}">${esc(c.name)}</a></td><td style="${td};color:#4b5350">${esc([c.sido, c.sigungu].filter(Boolean).join(" "))}</td><td style="${td};color:#4b5350">${esc(c.du ? "당일 나들이" : (c.types ?? [])[0] ?? "캠핑장")}</td></tr>`).join("")}</table>${added.length > 30 ? `<p style="font-size:12px;color:#747c78">외 ${fmt(added.length - 30)}곳</p>` : ""}` : `<p style="font-size:13px;color:#4b5350">어제 대비 새로 등록된 장소가 없습니다.</p>`}
 <h2 style="font-size:15px;margin:18px 0 8px">수집량 (${esc(dPrev ?? "-")} → ${esc(dLast ?? "-")})</h2>
@@ -104,5 +129,5 @@ const user = process.env.NAVER_SMTP_ACCOUNT, pass = process.env.NAVER_SMTP_APP_P
 if (!user || !pass) { console.log("::warning::NAVER_SMTP_ACCOUNT·NAVER_SMTP_APP_PASSWORD가 없어 메일을 보내지 않았습니다(본문은 위에 출력)."); process.exit(0); }
 const { default: nodemailer } = await import("nodemailer");
 const transport = nodemailer.createTransport({ host: "smtp.naver.com", port: 587, secure: false, requireTLS: true, auth: { user, pass }, connectionTimeout: 20_000, greetingTimeout: 20_000, socketTimeout: 60_000 });
-const info = await transport.sendMail({ from: `렛츠캠핑 브리핑 <${user}>`, to, subject, text, html });
+const info = await transport.sendMail({ from: `렛츠 캠핑 브리핑 <${user}>`, to, subject, text, html });
 console.log(`메일 보냄 → ${to} (${info.messageId})`);
