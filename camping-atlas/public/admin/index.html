@@ -48,6 +48,8 @@
   .btn:hover { background: var(--bg); color: var(--ink); }
   .btn:active { transform: scale(.96); }
   .btn-icon { width: 40px; padding: 0; }
+  .btn-collect { font-size: .82rem; font-weight: 800; color: var(--accent); border-color: var(--accent-tint); background: var(--accent-tint); }
+  .btn-collect:hover { background: var(--accent); color: #fff; }
   .btn .ic.spin { animation: spin .8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -418,6 +420,7 @@
       <span class="utabs-ink" aria-hidden="true"></span>
     </div>
     <div class="subnav-act">
+      <a class="btn btn-collect" href="./collect/" title="수집처별 데이터 수집 현황판"><svg class="ic"><use href="#i-chart"/></svg><span>수집 현황</span></a>
       <span class="live"><span class="live-dot" id="live-dot"></span><span id="last-updated-txt">불러오는 중</span></span>
       <label class="sw" title="30초마다 자동 갱신"><input type="checkbox" id="auto-refresh" role="switch" checked><span class="sw-track"><span class="sw-thumb"></span></span><span class="sw-label">자동</span></label>
       <button type="button" class="btn btn-icon" id="btn-pw" aria-label="비밀번호 바꾸기" title="비밀번호 바꾸기"><svg class="ic"><use href="#i-key"/></svg></button>
@@ -1074,7 +1077,10 @@
   function startDashboard() { if (started) return; started = true; setAuto(auto.checked); fetchLogs(); }
   function unlock() {
     try { sessionStorage.setItem(AUTH_KEY, String(Date.now() + AUTH_HOURS * 36e5)); } catch {}
-    root.classList.remove("log-locked"); hideGate(); startDashboard();
+    root.classList.remove("log-locked"); hideGate();
+    // 수집 현황판(./collect/)에서 비밀번호를 받으러 왔으면 확인 뒤 돌려보낸다.
+    if (new URLSearchParams(location.search).get("next") === "collect") { location.replace("./collect/"); return; }
+    startDashboard();
   }
   function showGate(mode) {
     gate.hidden = false; gate.dataset.mode = mode; loginCard.hidden = mode !== "login"; resetCard.hidden = mode !== "reset";

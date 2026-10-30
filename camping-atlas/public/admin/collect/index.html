@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>렛츠 캠핑 · 수집 현황판</title>
+<meta name="robots" content="noindex, nofollow">
+<script>/* 운영 대시보드와 같은 비밀번호(12시간 통과). 확인 전이면 운영 대시보드에서 비밀번호를 받고 돌아온다. */try{const t=Number(sessionStorage.getItem("mc-log-auth")||0);if(!(t>Date.now()))location.replace("../?next=collect")}catch{location.replace("../?next=collect")}</script>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  /* 수집 현황판(소유자 2026-10-30): 수집처·카테고리별 누적·일별 수집량, 속도, 목표 대비, 정합성·가치를 한 화면에.
+     데이터: ../../data/collect-stats.json · collect-history.json(pipeline/scripts/build-collect-stats.mjs, data-sync 매일)
+     실행 이력: GitHub Actions 공개 API(브라우저에서 바로, 10분 캐시). 목표치: pipeline/registry/collect-targets.json */
+  :root {
+    color-scheme: light;
+    --font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+    --ink: #101414; --ink-2: #4b5350; --ink-3: #747c78;
+    --bg: #f5f6f4; --paper: #fff; --line: #e3e7e2; --line-2: #edf0ec;
+    --accent: #00875a; --accent-2: #3fae7f; --accent-3: #9ad4b7; --accent-tint: #e6f6ee;
+    --good: #00875a; --good-tint: #e6f6ee;
+    --warn: #b26a00; --warn-tint: #fff4e0;
+    --bad: #d93a1f; --bad-tint: #fdeeea;
+    --info: #2563eb; --info-tint: #eff6ff;
+    --r: 16px; --r-s: 10px;
+    --shadow-s: 0 1px 3px rgba(16,20,20,.04), 0 4px 12px rgba(16,20,20,.03);
+    --ease: cubic-bezier(.2,.8,.2,1);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { overflow-x: hidden; }
+  body { margin: 0; font-family: var(--font); background: var(--bg); color: var(--ink); line-height: 1.5; letter-spacing: -.015em; -webkit-font-smoothing: antialiased; }
+  button { font: inherit; color: inherit; }
+  a { color: inherit; text-decoration: none; }
+  svg.ic { width: 16px; height: 16px; flex: none; fill: currentColor; }
+  .num { font-variant-numeric: tabular-nums; }
+  .layout { width: 100%; max-width: var(--content, 1280px); margin: 0 auto; padding: 20px var(--gut, 16px) var(--page-pad-bottom, 96px); }
+
+  .subnav { position: sticky; top: var(--head-h, 0px); z-index: 20; background: rgba(245,246,244,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .subnav-in { max-width: var(--content, 1280px); margin: 0 auto; padding: 8px var(--gut, 16px); display: flex; align-items: center; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+  .subnav-in::-webkit-scrollbar { display: none; }
+  .jump { flex: none; display: inline-flex; align-items: center; height: 34px; padding: 0 12px; border-radius: 999px; font-size: .8rem; font-weight: 750; color: var(--ink-2); border: 1px solid transparent; white-space: nowrap; }
+  .jump:hover { background: var(--paper); border-color: var(--line); color: var(--ink); }
+  .jump.back { color: var(--accent); background: var(--accent-tint); }
+
+  .head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+  .head h1 { margin: 0; font-size: 1.4rem; font-weight: 850; letter-spacing: -.03em; }
+  .head p { margin: 2px 0 0; color: var(--ink-3); font-size: .84rem; }
+  .head-act { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink-2); font-size: .8rem; font-weight: 750; cursor: pointer; }
+  .btn:hover { color: var(--ink); background: var(--bg); }
+
+  .sec { margin: 22px 0 10px; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; scroll-margin-top: 120px; }
+  .sec h2 { margin: 0; font-size: 1.08rem; font-weight: 850; letter-spacing: -.02em; }
+  .sec p { margin: 0; color: var(--ink-3); font-size: .8rem; }
+  .panel { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow-s); padding: 14px 16px; min-width: 0; }
+  .panel h3 { margin: 0 0 10px; font-size: .92rem; font-weight: 800; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .panel h3 small { font-weight: 650; color: var(--ink-3); font-size: .75rem; }
+  .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  @media (max-width: 980px) { .grid3 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 720px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* 요약 타일 */
+  .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  @media (max-width: 860px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .kpi { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; box-shadow: var(--shadow-s); display: grid; gap: 4px; min-width: 0; }
+  .kpi .k { font-size: .76rem; font-weight: 750; color: var(--ink-3); }
+  .kpi .v { font-size: 1.55rem; font-weight: 850; letter-spacing: -.03em; line-height: 1.15; }
+  .kpi .s { font-size: .74rem; color: var(--ink-3); }
+  .chg { display: inline-flex; align-items: center; gap: 2px; font-weight: 800; font-size: .74rem; }
+  .chg.up { color: var(--good); } .chg.down { color: var(--bad); } .chg.flat { color: var(--ink-3); }
+
+  /* 상태 표시(색 + 아이콘 + 글자) */
+  .st { display: inline-flex; align-items: center; gap: 4px; font-size: .72rem; font-weight: 800; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+  .st svg { width: 12px; height: 12px; fill: currentColor; }
+  .st.good { color: var(--good); background: var(--good-tint); }
+  .st.warn { color: var(--warn); background: var(--warn-tint); }
+  .st.bad { color: var(--bad); background: var(--bad-tint); }
+  .st.info { color: var(--info); background: var(--info-tint); }
+  .st.muted { color: var(--ink-3); background: var(--line-2); }
+
+  /* 진단(자동) */
+  .alerts { display: grid; gap: 8px; }
+  .alert { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; padding: 10px 12px; border-radius: var(--r-s); border: 1px solid var(--line); background: var(--paper); }
+  .alert .t { font-weight: 800; font-size: .86rem; }
+  .alert .d { font-size: .8rem; color: var(--ink-2); }
+  .alert.bad { border-color: #f6c9bf; background: #fffaf8; } .alert.warn { border-color: #f4dcae; background: #fffcf5; } .alert.good { border-color: #bfe6d2; background: #f8fdfa; }
+
+  /* 표 */
+  .tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -4px; }
+  table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+  th, td { padding: 7px 6px; text-align: left; border-bottom: 1px solid var(--line-2); vertical-align: middle; white-space: nowrap; }
+  th { color: var(--ink-3); font-weight: 750; font-size: .74rem; position: sticky; top: 0; background: var(--paper); cursor: pointer; user-select: none; }
+  th[data-sort]::after { content: ""; }
+  th.sorted-asc::after { content: " ▲"; } th.sorted-desc::after { content: " ▼"; }
+  td.r, th.r { text-align: right; }
+  td.wrap { white-space: normal; min-width: 180px; }
+  tr.cat-row td { background: var(--bg); font-weight: 850; font-size: .78rem; color: var(--ink-2); }
+  .bar { position: relative; height: 8px; border-radius: 4px; background: var(--line-2); min-width: 90px; overflow: hidden; }
+  .bar i { position: absolute; inset: 0 auto 0 0; border-radius: 4px; background: var(--accent); }
+  .bar.warn i { background: var(--warn); } .bar.bad i { background: var(--bad); }
+  .bar b { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--ink); opacity: .55; }
+  .muted { color: var(--ink-3); }
+
+  /* 칩 필터 */
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+  .chip { height: 32px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); font-size: .78rem; font-weight: 750; color: var(--ink-2); cursor: pointer; }
+  .chip[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  /* 차트 */
+  .chart { position: relative; width: 100%; }
+  .chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .chart .grid line { stroke: var(--line-2); stroke-width: 1; }
+  .chart .axis text { fill: var(--ink-3); font-size: 10px; }
+  .chart .lbl { fill: var(--ink-2); font-size: 10px; font-weight: 700; }
+  .tip { position: fixed; z-index: 50; pointer-events: none; background: var(--ink); color: #fff; font-size: .74rem; padding: 6px 9px; border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,.18); opacity: 0; transition: opacity .12s; max-width: 280px; }
+  .tip.on { opacity: 1; }
+  .tip b { font-weight: 850; }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: .74rem; color: var(--ink-2); margin-top: 6px; }
+  .legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+
+  /* 신선도 막대(누적 100%) */
+  .fresh { display: flex; height: 10px; border-radius: 5px; overflow: hidden; background: var(--line-2); min-width: 140px; gap: 2px; }
+  .fresh i { display: block; height: 100%; }
+  .f1 { background: #00875a; } .f7 { background: #3fae7f; } .f30 { background: #9ad4b7; } .fold { background: #e0a12e; } .fnever { background: #d93a1f; }
+  .spark { display: flex; align-items: flex-end; gap: 1px; height: 26px; min-width: 120px; }
+  .spark i { flex: 1; background: var(--accent-2); border-radius: 2px 2px 0 0; min-height: 1px; }
+  .spark i.z { background: var(--line); }
+
+  .hbar { display: grid; grid-template-columns: minmax(80px, 140px) 1fr auto; gap: 8px; align-items: center; font-size: .78rem; padding: 3px 0; }
+  .hbar .n { color: var(--ink-2); font-weight: 750; text-align: right; min-width: 70px; }
+  .hbar .bar { height: 10px; }
+
+  .heat td.h { text-align: right; font-weight: 750; }
+  .note { font-size: .76rem; color: var(--ink-3); margin-top: 8px; }
+  .wf-dots { display: flex; gap: 3px; flex-wrap: wrap; max-width: 260px; }
+  .wf-dots i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+  .wf-dots i.success { background: var(--good); } .wf-dots i.failure { background: var(--bad); } .wf-dots i.cancelled, .wf-dots i.skipped { background: #c8ccc6; } .wf-dots i.running { background: var(--info); }
+  .multi { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+  .mini { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-s); padding: 10px 12px; min-width: 0; }
+  .mini.bad { border-color: #f6c9bf; } .mini.warn { border-color: #f4dcae; }
+  .mini-h { display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; font-size: .78rem; font-weight: 800; }
+  .mini-h small { display: block; font-weight: 650; color: var(--ink-3); font-size: .7rem; }
+  .mini-v { font-size: 1.05rem; font-weight: 850; letter-spacing: -.02em; }
+  .mini-s { font-size: .7rem; color: var(--ink-3); }
+  .cat-h { margin: 14px 0 6px; font-size: .86rem; font-weight: 850; color: var(--ink-2); }
+  details.def { margin-top: 10px; font-size: .8rem; color: var(--ink-2); }
+  details.def summary { cursor: pointer; font-weight: 800; }
+  .err { padding: 40px 16px; text-align: center; color: var(--ink-3); }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+<link rel="stylesheet" href="../../shell.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><path d="M1 21h22L12 2zm12-3h-2v-2h2zm0-4h-2v-4h2z"/></symbol>
+  <symbol id="i-bad" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20m1 15h-2v-2h2zm0-4h-2V7h2z"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20m1 15h-2v-6h2zm0-8h-2V7h2z"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M17.65 6.35A8 8 0 1 0 19.73 14h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7zM5 18v2h14v-2z"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20z"/></symbol>
+</defs></svg>
+
+<!-- shell:header -->
+<header class="top">
+      <div class="top-in">
+        <a class="brand" href="../../" aria-label="렛츠 캠핑 처음으로"><span class="brand-mark"><svg><use href="#shell-i-tent"/></svg></span><span>렛츠 캠핑</span></a>
+        <nav class="top-nav" aria-label="주요 메뉴">
+          <a href="../../" data-nav="home">찾기</a>
+          <a href="../../map" data-nav="map">지도</a>
+          <a href="../../themes" data-nav="themes">테마</a>
+          <a href="../../compare" data-nav="compare">비교</a>
+          <a href="../../saved" data-nav="saved">찜 <b class="nav-count" data-saved-count hidden>0</b></a>
+        </nav>
+      </div>
+    </header>
+<!-- /shell:header -->
+
+<nav class="subnav" aria-label="수집 현황 바로가기">
+  <div class="subnav-in">
+    <a class="jump back" href="../"><svg class="ic"><use href="#i-back"/></svg>&nbsp;운영 기록</a>
+    <a class="jump" href="#s-kind">장소 종류별</a>
+    <a class="jump" href="#s-diag">진단</a>
+    <a class="jump" href="#s-daily">일자별 추이</a>
+    <a class="jump" href="#s-ai">AI 분석량</a>
+    <a class="jump" href="#s-goal">목표 대비</a>
+    <a class="jump" href="#s-trend">추이·속도</a>
+    <a class="jump" href="#s-src">수집처별</a>
+    <a class="jump" href="#s-rev">후기</a>
+    <a class="jump" href="#s-vid">영상</a>
+    <a class="jump" href="#s-link">예약·링크</a>
+    <a class="jump" href="#s-qual">정합성·품질</a>
+    <a class="jump" href="#s-value">가치(정보량)</a>
+    <a class="jump" href="#s-region">지역별</a>
+    <a class="jump" href="#s-wf">실행 이력</a>
+  </div>
+</nav>
+
+<main class="layout" id="app">
+  <div class="head">
+    <div><h1>수집 현황판</h1><p id="asof">불러오는 중…</p></div>
+    <div class="head-act">
+      <button class="btn" type="button" id="btn-reload"><svg class="ic"><use href="#i-refresh"/></svg>새로고침</button>
+      <a class="btn" href="../../data/collect-stats.json" download><svg class="ic"><use href="#i-download"/></svg>현황 JSON</a>
+      <a class="btn" href="../../data/collect-history.json" download><svg class="ic"><use href="#i-download"/></svg>이력 JSON</a>
+    </div>
+  </div>
+  <div id="root"><div class="err">수집 현황을 불러오는 중…</div></div>
+</main>
+<div class="tip" id="tip" role="tooltip"></div>
+
+<!-- shell:footer -->
+<!-- /shell:footer -->
+<!-- shell:tabbar -->
+<!-- /shell:tabbar -->
+<!-- shell:icons -->
+<!-- /shell:icons -->
+
+<script>
+(() => {
+  const BASE = "../../data/";
+  const REPO = "pyw31337/camp";
+  const $ = (s, el = document) => el.querySelector(s);
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const fmt = (n, d = 0) => (n == null || Number.isNaN(n) ? "–" : Number(n).toLocaleString("ko-KR", { maximumFractionDigits: d }));
+  const sgn = (n, d = 0) => (n == null ? "" : `${n > 0 ? "+" : ""}${fmt(n, d)}`);
+  const ic = (id) => `<svg><use href="#i-${id}"/></svg>`;
+  const badge = (kind, text) => `<span class="st ${kind}">${ic({ good: "ok", warn: "warn", bad: "bad", info: "info", muted: "info" }[kind])}${esc(text)}</span>`;
+
+  // 지표 사전: 카테고리 · 이름 · 단위 · 설명 · 수집처
+  const CATS = [["base", "기본 정보"], ["photo", "사진"], ["review", "후기·SNS"], ["video", "영상"], ["fee", "요금·예약"], ["operator", "운영자 사이트"], ["place", "플레이스 매칭"], ["nearby", "주변 정보"], ["quality", "정합성·품질"]];
+  const M = {
+    "catalog.all": ["base", "전체 장소(캠핑장+당일)", "곳", "목록 카탈로그 전체", "고캠핑·카카오·OSM·공공데이터"],
+    "catalog.camps": ["base", "캠핑장(숙박)", "곳", "당일 나들이 장소를 뺀 캠핑장 수 — 아래 비율의 기준", "고캠핑·카카오·OSM"],
+    "catalog.dayuse": ["base", "당일 나들이 장소", "곳", "공원·물놀이장 등", "공공데이터·OSM"],
+    "catalog.gocamping": ["base", "고캠핑 등록 캠핑장", "곳", "한국관광공사 고캠핑 공식 등록", "고캠핑 API"],
+    "catalog.discovered": ["base", "발굴 캠핑장(고캠핑 밖)", "곳", "카카오·OSM·지자체에서 찾은 곳", "카카오 로컬·OSM"],
+    "field.addr": ["base", "주소", "곳", "", "고캠핑·카카오"],
+    "field.geo": ["base", "좌표", "곳", "", "고캠핑·지오코딩"],
+    "field.tel": ["base", "전화번호", "곳", "", "고캠핑·카카오·네이버 플레이스"],
+    "field.homepage": ["base", "홈페이지", "곳", "", "고캠핑·네이버 웹 검색"],
+    "field.booking": ["fee", "예약 링크", "곳", "예약 주소 또는 예약 채널이 있는 곳", "고캠핑·플랫폼 매칭"],
+    "field.fee": ["fee", "요금 정보", "곳", "공식·후기 언급 요금", "TourAPI·후기·땡큐캠핑"],
+    "field.pets": ["base", "반려견 정책", "곳", "", "고캠핑·운영자 사이트"],
+    "field.amenities": ["base", "편의시설", "곳", "", "고캠핑"],
+    "field.kinds": ["base", "사이트 종류", "곳", "", "고캠핑·운영자·플랫폼"],
+    "field.sizes": ["base", "사이트 크기", "곳", "", "고캠핑"],
+    "field.floors": ["base", "바닥 재질", "곳", "", "고캠핑"],
+    "field.layout": ["base", "배치도", "곳", "", "고캠핑·검색 사진"],
+    "field.checkin": ["base", "입실 시각", "곳", "", "운영자·후기·플랫폼"],
+    "field.themes": ["base", "테마 분류", "곳", "", "자체 분류"],
+    "field.house_rules": ["base", "이용 규칙(금지·제한)", "곳", "", "운영자 사이트·후기"],
+    "photo.official": ["photo", "공식 사진", "곳", "고캠핑·운영자 공식 사진(자체 보관)", "고캠핑 이미지 API"],
+    "photo.any": ["photo", "사진 있음(검색 사진 포함)", "곳", "", "공식 + 카카오 검색 사진"],
+    "snsimg.camps": ["photo", "검색 사진이 있는 곳", "곳", "", "카카오 이미지 검색"],
+    "snsimg.items": ["photo", "검색 사진(목록 기준)", "장", "", "카카오 이미지 검색"],
+    "snsimg.detail": ["photo", "검색 사진(상세 기준)", "장", "", "카카오 이미지 검색"],
+    "review.camps": ["review", "후기가 있는 곳", "곳", "", "카카오·네이버 검색"],
+    "review.items": ["review", "후기·카페 글(목록 기준)", "건", "목록 카탈로그 soc[0] 합(이력 비교용)", "카카오 검색"],
+    "review.posts": ["review", "후기 글 전체(상세 기준)", "건", "블로그·카페·웹문서 — 상세 화면 ‘후기’ 칸", "카카오·네이버 검색"],
+    "review.per_camp": ["review", "캠핑장당 후기", "건", "", "카카오·네이버 검색"],
+    "review.thumb": ["review", "썸네일 있는 후기", "건", "후기 카드에 사진이 보이는 비율", "검색 썸네일 + 대표 이미지(og:image)"],
+    "review.digest": ["review", "후기 요약(장단점)", "곳", "", "후기 요약 생성"],
+    "video.camps": ["video", "영상이 있는 곳(목록 기준)", "곳", "블로그 안 영상 포함(이력 비교용)", "카카오 동영상 검색"],
+    "video.items": ["video", "영상(목록 기준)", "개", "블로그 안 영상 포함(이력 비교용)", "카카오 동영상 검색"],
+    "video.playable_camps": ["video", "재생 영상이 있는 곳", "곳", "이 페이지에서 바로 재생되는 YouTube·네이버TV", "카카오 동영상 검색 v2"],
+    "video.playable": ["video", "재생 영상", "개", "YouTube 일반 + 숏츠 + 네이버TV", "카카오 동영상 검색 v2"],
+    "video.per_camp": ["video", "캠핑장당 재생 영상", "개", "", "카카오 동영상 검색 v2"],
+    "video.shorts": ["video", "숏츠", "개", "", "카카오 동영상 검색 v2 · YouTube API"],
+    "video.short_camps": ["video", "숏츠가 있는 곳", "곳", "", "카카오 동영상 검색 v2 · YouTube API"],
+    "video.search_v2": ["video", "영상 확대 수집(v2) 진행", "곳", "v2 기준으로 한 번 이상 찾은 캠핑장", "shorts-sync"],
+    "price.mentions": ["fee", "후기 요금 언급이 있는 곳", "곳", "", "후기 검색"],
+    "price.items": ["fee", "후기 요금 언급", "건", "", "후기 검색"],
+    "booking.verified": ["fee", "예약 링크 업장 일치", "쌍", "자동 확인한 링크 중 이 업장 예약 페이지로 확인(MATCH·PORTAL·MOVED)", "예약 링크 정밀 검수"],
+    "booking.thankq": ["fee", "땡큐캠핑 연결", "곳", "", "땡큐캠핑"],
+    "booking.hidden_links": ["fee", "숨긴 예약 링크", "개", "다른 업장·종료·도메인 판매 등으로 화면에서 뺀 링크", "예약 링크 정밀 검수"],
+    "operator.ok": ["operator", "운영자 사이트 수집 성공", "곳", "운영자 홈페이지를 열어 문장을 얻은 곳(시도한 곳 대비)", "운영자 사이트 크롤"],
+    "operator.snippet_camps": ["operator", "운영자 문장이 있는 곳", "곳", "", "운영자 사이트 크롤"],
+    "operator.snippets": ["operator", "운영자 문장", "문장", "", "운영자 사이트 크롤"],
+    "place.kakao": ["place", "카카오 플레이스 매칭", "곳", "", "카카오 로컬"],
+    "place.naver": ["place", "네이버 플레이스 매칭", "곳", "", "네이버 지역 검색"],
+    "nearby.camps": ["nearby", "주변 생활시설", "곳", "편의점·마트·병원·약국 최근접", "공공데이터·OSM"],
+    "quality.facts": ["quality", "원자 사실", "건", "사실 저장소(data/facts) 행 수", "모든 수집처"],
+    "quality.confidence": ["quality", "평균 신뢰도", "", "0~1, 높을수록 믿을 만함", "사실 저장소"],
+    "quality.confirmed_pct": ["quality", "확정 비율", "%", "공식·운영자 등 확정 등급 비율", "사실 저장소"],
+    "quality.corroborated": ["quality", "독립 원천 2곳↑ 확증", "쌍", "", "사실 저장소"],
+    "quality.conflicts": ["quality", "충돌(검토 대기)", "건", "원천끼리 값이 엇갈린 (캠핑장×속성)", "사실 저장소"],
+    "quality.iq": ["quality", "평균 정보량 점수", "점", "c.iq 0~100(목록 기본 정렬 기준)", "info-score"],
+  };
+  const tip = $("#tip");
+  const showTip = (e, html) => { tip.innerHTML = html; tip.classList.add("on"); const x = Math.min(window.innerWidth - tip.offsetWidth - 8, e.clientX + 12), y = Math.max(8, e.clientY - tip.offsetHeight - 10); tip.style.left = `${x}px`; tip.style.top = `${y}px`; };
+  const hideTip = () => tip.classList.remove("on");
+  document.addEventListener("pointermove", (e) => { const t = e.target.closest?.("[data-tip]"); if (t) showTip(e, t.dataset.tip); else if (!e.target.closest?.("[data-chart]")) hideTip(); });
+
+  const kindOfProgress = (p) => (p == null ? "muted" : p >= 90 ? "good" : p >= 60 ? "warn" : "bad");
+  const progLabel = (p) => (p == null ? "목표 없음" : p >= 100 ? "달성" : p >= 90 ? "거의 달성" : p >= 60 ? "진행 중" : "부족");
+  const goalText = (t) => !t ? "–" : t.pct != null ? `${t.pct}%` : t.count != null ? `${fmt(t.count)}` : t.per_camp != null ? `${t.per_camp}/곳` : t.value != null ? `${t.value}` : t.max != null ? `≤ ${fmt(t.max)}` : "–";
+  const curText = (m) => (m.pct != null ? `${fmt(m.value)} <span class="muted">(${fmt(m.pct, 1)}%)</span>` : fmt(m.value, 3));
+
+  // ── 차트(직접 그림: 한 축, 얇은 선, 마우스 위치 표시) ──
+  function lineChart(points, { h = 180, unit = "", color = "var(--accent)", target = null, w = 640 } = {}) {
+    if (!points.length) return `<div class="muted">이력이 아직 없습니다.</div>`;
+    const W = w, H = h, pl = 46, pr = 12, pt = 10, pb = 22;
+    const vals = points.map((p) => p.v).filter((v) => v != null);
+    let lo = Math.min(...vals, target ?? Infinity), hi = Math.max(...vals, target ?? -Infinity);
+    if (lo === hi) { lo = lo * 0.9; hi = hi * 1.1 || 1; }
+    const pad = (hi - lo) * 0.08; lo = Math.max(0, lo - pad); hi += pad;
+    const x = (i) => pl + (points.length === 1 ? (W - pl - pr) / 2 : (i / (points.length - 1)) * (W - pl - pr));
+    const y = (v) => pt + (1 - (v - lo) / (hi - lo)) * (H - pt - pb);
+    const ticks = [0, 0.5, 1].map((f) => lo + (hi - lo) * f);
+    const path = points.map((p, i) => (p.v == null ? null : `${x(i)},${y(p.v)}`)).filter(Boolean).join(" L");
+    const id = `c${Math.random().toString(36).slice(2, 8)}`;
+    const step = Math.max(1, Math.ceil(points.length / 7));
+    return `<div class="chart" data-chart="${id}"><svg viewBox="0 0 ${W} ${H}" data-w="${W}" role="img" aria-label="추이 그래프">
+      <g class="grid">${ticks.map((t) => `<line x1="${pl}" x2="${W - pr}" y1="${y(t)}" y2="${y(t)}"/>`).join("")}</g>
+      <g class="axis">${ticks.map((t) => `<text x="${pl - 6}" y="${y(t) + 3}" text-anchor="end">${fmt(t, t < 10 ? 2 : 0)}</text>`).join("")}
+      ${points.map((p, i) => (i % step === 0 || i === points.length - 1 ? `<text x="${x(i)}" y="${H - 6}" text-anchor="middle">${p.d.slice(5)}</text>` : "")).join("")}</g>
+      ${target != null ? `<line x1="${pl}" x2="${W - pr}" y1="${y(target)}" y2="${y(target)}" stroke="var(--ink)" stroke-dasharray="4 4" stroke-width="1" opacity=".5"/><text class="lbl" x="${W - pr}" y="${y(target) - 4}" text-anchor="end">목표 ${fmt(target, 2)}</text>` : ""}
+      <path d="M${path}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      ${points.map((p, i) => (p.v == null ? "" : `<circle cx="${x(i)}" cy="${y(p.v)}" r="${points.length > 20 ? 2.5 : 4}" fill="${color}" stroke="#fff" stroke-width="2"/>`)).join("")}
+      <line class="xh" x1="0" x2="0" y1="${pt}" y2="${H - pb}" stroke="var(--ink-3)" stroke-width="1" opacity="0"/>
+      <rect x="${pl}" y="${pt}" width="${W - pl - pr}" height="${H - pt - pb}" fill="transparent" data-hit="${id}"/>
+    </svg></div>`;
+  }
+  function bindLine(el, points, unit) {
+    el.querySelectorAll("[data-hit]").forEach((r) => {
+      const svg = r.ownerSVGElement, xh = svg.querySelector(".xh");
+      const W = Number(svg.dataset.w) || 640, pl = 46, pr = 12;
+      r.addEventListener("pointermove", (e) => {
+        const b = svg.getBoundingClientRect();
+        const vx = ((e.clientX - b.left) / b.width) * W;
+        const i = Math.max(0, Math.min(points.length - 1, Math.round(((vx - pl) / (W - pl - pr)) * (points.length - 1))));
+        const xx = pl + (points.length === 1 ? (W - pl - pr) / 2 : (i / (points.length - 1)) * (W - pl - pr));
+        xh.setAttribute("x1", xx); xh.setAttribute("x2", xx); xh.setAttribute("opacity", ".6");
+        const p = points[i], prev = points[i - 1];
+        showTip(e, `<b>${p.d}</b><br>${fmt(p.v, 3)}${unit}${prev?.v != null && p.v != null ? `<br>전날 대비 ${sgn(Math.round((p.v - prev.v) * 1000) / 1000, 3)}` : ""}`);
+      });
+      r.addEventListener("pointerleave", () => { xh.setAttribute("opacity", "0"); hideTip(); });
+    });
+  }
+  function barChart(items, { h = 160, unit = "", color = "var(--accent)", w = 640 } = {}) {
+    if (!items.length) return `<div class="muted">자료 없음</div>`;
+    const W = w, H = h, pl = 46, pr = 8, pt = 8, pb = 22;
+    const vals = items.map((x) => x.v);
+    const hi = Math.max(1, ...vals), lo = Math.min(0, ...vals);
+    const bw = (W - pl - pr) / items.length;
+    const y = (v) => pt + (1 - (v - lo) / (hi - lo)) * (H - pt - pb);
+    const step = Math.max(1, Math.ceil(items.length / 8));
+    return `<div class="chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="막대 그래프">
+      <g class="grid">${[lo, (lo + hi) / 2, hi].map((t) => `<line x1="${pl}" x2="${W - pr}" y1="${y(t)}" y2="${y(t)}"/>`).join("")}</g>
+      <g class="axis">${[lo, (lo + hi) / 2, hi].map((t) => `<text x="${pl - 6}" y="${y(t) + 3}" text-anchor="end">${fmt(t)}</text>`).join("")}
+      ${items.map((x, i) => (i % step === 0 ? `<text x="${pl + bw * i + bw / 2}" y="${H - 6}" text-anchor="middle">${esc(x.l)}</text>` : "")).join("")}</g>
+      ${items.map((x, i) => { const y0 = y(Math.max(0, x.v)), y1 = y(Math.min(0, x.v)); return `<rect x="${pl + bw * i + 1}" y="${y0}" width="${Math.max(1, bw - 2)}" height="${Math.max(1, y1 - y0)}" rx="${Math.min(4, bw / 3)}" fill="${x.v < 0 ? "var(--bad)" : color}" data-tip="<b>${esc(x.t ?? x.l)}</b><br>${fmt(x.v)}${esc(unit)}"/>`; }).join("")}
+    </svg></div>`;
+  }
+  const hbars = (rows, { unit = "", total = null, kind = "", suffix = "" } = {}) => {
+    const max = Math.max(1, ...rows.map((r) => r.v));
+    return rows.map((r) => `<div class="hbar" data-tip="<b>${esc(r.l)}</b><br>${fmt(r.v)}${esc(unit)}${total ? ` (${fmt((r.v / total) * 100, 1)}%)` : ""}${r.t ? `<br>${esc(r.t)}` : ""}"><span>${esc(r.l)}</span><div class="bar ${r.k ?? kind}"><i style="width:${(r.v / max) * 100}%"></i></div><span class="n num">${fmt(r.v, suffix ? 1 : 0)}${suffix}${total ? ` <span class="muted">${fmt((r.v / total) * 100, 1)}%</span>` : ""}</span></div>`).join("");
+  };
+  const sortable = (table) => {
+    table.querySelectorAll("th[data-sort]").forEach((th, idx) => th.addEventListener("click", () => {
+      const tb = table.tBodies[0], col = [...th.parentNode.children].indexOf(th);
+      const asc = !th.classList.contains("sorted-asc");
+      table.querySelectorAll("th").forEach((x) => x.classList.remove("sorted-asc", "sorted-desc"));
+      th.classList.add(asc ? "sorted-asc" : "sorted-desc");
+      const rows = [...tb.rows].filter((r) => !r.classList.contains("cat-row"));
+      const val = (r) => { const c = r.cells[col]; const v = c?.dataset.v ?? c?.textContent ?? ""; const n = Number(v); return Number.isNaN(n) || v === "" ? v : n; };
+      rows.sort((a, b) => { const x = val(a), y = val(b); return (typeof x === "number" && typeof y === "number" ? x - y : String(x).localeCompare(String(y), "ko")) * (asc ? 1 : -1); });
+      tb.querySelectorAll(".cat-row").forEach((r) => r.remove());
+      rows.forEach((r) => tb.appendChild(r));
+    }));
+  };
+
+  // ── 진단: 지표·수집처·품질을 규칙으로 훑어 문제와 기회를 적는다 ──
+  function diagnose(S, H) {
+    const out = [];
+    const m = S.metrics;
+    const add = (kind, title, desc) => out.push({ kind, title, desc });
+    for (const s of S.sources) {
+      // 링크 점검·예약 검수의 ‘기록 없음’은 자동 확인을 막은 플랫폼(열지 않음)이라 신선도에서 뺀다.
+      const linkish = ["link-health", "booking-verify"].includes(s.id);
+      const stale = s.old + (linkish ? 0 : s.never), share = s.total ? stale / s.total : 0;
+      const daily = ["kakao-search", "naver-search", "youtube-v2"].includes(s.id);
+      if (daily && s.d1 === 0) add("bad", `${s.name}: 최근 하루 수집 0건`, `매일 도는 수집인데 어제·오늘 갱신된 곳이 없습니다. 워크플로 실행 이력(아래)·키 한도를 확인하세요.`);
+      if (share >= 0.3) add("warn", `${s.name}: 30일 넘게 갱신 안 됨 ${fmt(share * 100, 0)}%`, `오래됨 ${fmt(s.old)}${linkish ? "" : ` · 기록 없음 ${fmt(s.never)}`} / 전체 ${fmt(s.total)}. 순환 주기나 호출 상한을 늘려야 합니다.`);
+    }
+    for (const [k, x] of Object.entries(m)) {
+      const meta = M[k]; if (!meta) continue;
+      if (x.target && x.progress != null && x.progress < 60) add("bad", `${meta[1]}: 목표의 ${fmt(x.progress, 0)}%`, `현재 ${x.pct != null ? `${fmt(x.pct, 1)}%` : fmt(x.value, 2)} · 목표 ${goalText(x.target)}${x.rate > 0 && x.eta_days != null ? ` · 지금 속도(하루 +${fmt(x.rate, 1)})면 약 ${fmt(x.eta_days)}일` : x.rate != null && x.rate <= 0 ? " · 최근 7일 증가 없음" : ""}. 수집처: ${meta[4]}`);
+      else if (x.target && x.eta_days != null && x.eta_days > 90 && x.progress < 100) add("warn", `${meta[1]}: 지금 속도로 목표까지 ${fmt(x.eta_days)}일`, `하루 +${fmt(x.rate, 1)} · 목표 ${goalText(x.target)}. 수집 범위나 호출 상한을 늘려야 기간 안에 닿습니다.`);
+      if (x.d7 != null && x.d7 < 0 && !["quality.conflicts", "booking.hidden_links"].includes(k)) add("warn", `${meta[1]}: 7일 사이 ${fmt(x.d7)} 감소`, `줄어든 값은 병합 정책 위반일 수 있습니다(field-guard·coverage-guard 기록 확인).`);
+    }
+    const q = S.quality?.totals;
+    if (q) {
+      if (q.conflicts > (m["quality.conflicts"]?.target?.max ?? 200)) add("warn", `값 충돌 ${fmt(q.conflicts)}건이 검토를 기다림`, `data/quality/review-queue.json → 원문 대조 → quality-decide.mjs로 판정. 많은 속성: ${Object.entries(S.quality.review_queue_by_attr ?? {}).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([a, n]) => `${a} ${n}`).join(", ")}`);
+      const weak = (S.quality.attrs ?? []).filter((a) => a.coverage >= 50 && a.confidence < 0.5);
+      if (weak.length) add("warn", `신뢰도 0.5 미만 속성 ${weak.length}개`, `${weak.slice(0, 5).map((a) => `${a.label ?? a.code}(${fmt(a.confidence, 2)})`).join(", ")} — 공식·운영자 원천으로 확인이 필요합니다.`);
+    }
+    const lh = S.status?.link_health ?? {}, lhT = Object.values(lh).reduce((a, b) => a + b, 0);
+    if (lhT && (lh.DEAD ?? 0) / lhT > 0.08) add("warn", `죽은 링크 ${fmt(lh.DEAD)}개(${fmt(((lh.DEAD ?? 0) / lhT) * 100, 1)}%)`, `홈페이지·예약 링크 점검 결과. 새 주소 찾기(운영자 재탐색) 대상입니다.`);
+    const bv = S.status?.booking_verify ?? {}, bvT = Object.values(bv).reduce((a, b) => a + b, 0);
+    if (bvT && (bv.UNVERIFIED ?? 0) / bvT > 0.3) add("info", `예약 링크 ${fmt(((bv.UNVERIFIED ?? 0) / bvT) * 100, 0)}%는 자동 확인 불가`, `네이버·캠핏 등 자동 확인을 막은 플랫폼(${fmt(bv.UNVERIFIED)}쌍). 사람이 표본을 확인하거나 공식 제휴가 필요합니다.`);
+    const j = S.judgments; if (j?.photos && j.photos_hidden / j.photos > 0.1) add("info", `검색 사진 ${fmt((j.photos_hidden / j.photos) * 100, 0)}%를 내용 판정으로 뺐음`, `음식·인물·글 캡처 등. 사진 원천을 공식·운영자 쪽으로 넓히면 품질이 오릅니다.`);
+    if (!out.some((o) => o.kind === "bad")) add("good", "치명적인 수집 중단 없음", "매일 도는 주요 수집처가 최근 하루 안에 갱신됐습니다.");
+    const order = { bad: 0, warn: 1, info: 2, good: 3 };
+    return out.sort((a, b) => order[a.kind] - order[b.kind]);
+  }
+
+  async function load() {
+    const [S, H] = await Promise.all([
+      fetch(`${BASE}collect-stats.json`, { cache: "no-store" }).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch(`${BASE}collect-history.json`, { cache: "no-store" }).then((r) => (r.ok ? r.json() : { days: {} })).catch(() => ({ days: {} })),
+    ]);
+    render(S, H);
+    loadRuns();
+  }
+
+  function render(S, H) {
+    const m = S.metrics, days = Object.keys(H.days ?? {}).sort();
+    $("#asof").textContent = `기준 ${S.date} · 생성 ${new Date(S.generated_at).toLocaleString("ko-KR")} · 이력 ${days.length}일(${days[0] ?? "-"} ~ ${days.at(-1) ?? "-"}) · 캠핑장 ${fmt(S.universe.camps)}곳 기준`;
+    const k = (id, label, sub) => { const x = m[id] ?? {}; const ch = x.d7; return `<div class="kpi" data-tip="${esc(M[id]?.[3] || label)}"><span class="k">${esc(label)}</span><span class="v num">${x.pct != null ? `${fmt(x.pct, 1)}%` : fmt(x.value, id === "quality.confidence" ? 3 : 1)}</span><span class="s">${sub ?? ""}${ch != null ? ` <span class="chg ${ch > 0 ? "up" : ch < 0 ? "down" : "flat"}">7일 ${sgn(ch, id === "quality.confidence" ? 3 : 1)}</span>` : ""}</span></div>`; };
+    const diag = diagnose(S, H);
+    const html = [];
+    html.push(`<section class="kpis" aria-label="요약">
+      ${k("catalog.camps", "캠핑장", `전체 장소 ${fmt(m["catalog.all"]?.value)}곳`)}
+      ${k("review.posts", "후기 글(상세)", `캠핑장당 ${fmt(m["review.per_camp"]?.value, 1)}건`)}
+      ${k("video.playable", "재생 영상", `숏츠 ${fmt(m["video.shorts"]?.value)}개 · 있는 곳 ${fmt(m["video.playable_camps"]?.pct, 1)}%`)}
+      ${k("photo.official", "공식 사진 보유", `${fmt(m["photo.official"]?.value)}곳`)}
+      ${k("review.thumb", "후기 썸네일", `${fmt(m["review.thumb"]?.value)}건`)}
+      ${k("quality.facts", "원자 사실", `확증 ${fmt(m["quality.corroborated"]?.value)}쌍`)}
+      ${k("quality.confidence", "평균 신뢰도", `확정 ${fmt(m["quality.confirmed_pct"]?.value)}%`)}
+      ${k("quality.iq", "평균 정보량", `충돌 ${fmt(m["quality.conflicts"]?.value)}건`)}
+    </section>`);
+
+    // 장소 종류별 수집량(캠핑장·휴양림 수와 그 영상·쇼츠·블로그 후기)
+    const KD = Object.entries(S.kinds ?? {}).sort((a, b) => b[1].places - a[1].places);
+    const KT = KD.reduce((a, [, k]) => { for (const [x, v] of Object.entries(k)) if (x !== "iq") a[x] = (a[x] ?? 0) + v; return a; }, {});
+    const kcell = (n, base) => `<td class="r num" data-v="${n}">${fmt(n)}${base ? ` <span class="muted">${fmt((n / base) * 100, 0)}%</span>` : ""}</td>`;
+    html.push(`<div class="sec" id="s-kind"><h2>장소 종류별 수집 현황</h2><p>캠핑장·글램핑·카라반·자연휴양림·당일 나들이 장소마다 몇 곳이고, 유튜브 영상·쇼츠·블로그 후기가 얼마나 모였나 · 영상은 화면에서 바로 재생되는 것(YouTube·네이버TV)만</p></div>
+      <div class="panel"><div class="tbl-wrap"><table id="kind-tbl"><thead><tr><th data-sort>종류</th><th class="r" data-sort>장소 수</th><th class="r" data-sort>블로그 후기</th><th class="r" data-sort>카페 글</th><th class="r" data-sort>웹문서</th><th class="r" data-sort>후기 있는 곳</th><th class="r" data-sort>유튜브 영상(전체)</th><th class="r" data-sort>그중 쇼츠</th><th class="r" data-sort>영상 있는 곳</th><th class="r" data-sort>쇼츠 있는 곳</th><th class="r" data-sort>사진 있는 곳</th><th class="r" data-sort>평균 정보량</th></tr></thead><tbody>
+      ${KD.map(([name, k]) => `<tr><td data-v="${esc(name)}"><b>${esc(name)}</b></td><td class="r num" data-v="${k.places}"><b>${fmt(k.places)}</b></td><td class="r num" data-v="${k.blog}">${fmt(k.blog)}</td><td class="r num" data-v="${k.cafe}">${fmt(k.cafe)}</td><td class="r num" data-v="${k.web}">${fmt(k.web)}</td>${kcell(k.review_places, k.places)}<td class="r num" data-v="${k.videos}">${fmt(k.videos)}</td><td class="r num" data-v="${k.shorts}">${fmt(k.shorts)}</td>${kcell(k.video_places, k.places)}${kcell(k.short_places, k.places)}${kcell(k.photo_places, k.places)}<td class="r num" data-v="${k.iq}">${fmt(k.iq, 1)}</td></tr>`).join("")}
+      <tr class="cat-row"><td>합계</td><td class="r num">${fmt(KT.places)}</td><td class="r num">${fmt(KT.blog)}</td><td class="r num">${fmt(KT.cafe)}</td><td class="r num">${fmt(KT.web)}</td><td class="r num">${fmt(KT.review_places)}</td><td class="r num">${fmt(KT.videos)}</td><td class="r num">${fmt(KT.shorts)}</td><td class="r num">${fmt(KT.video_places)}</td><td class="r num">${fmt(KT.short_places)}</td><td class="r num">${fmt(KT.photo_places)}</td><td></td></tr>
+      </tbody></table></div><p class="note">‘장소 수’는 지도·목록에 나오는 곳 기준입니다. 비율(%)은 그 종류 장소 중 해당 자료가 있는 곳의 비율입니다.</p></div>`);
+
+    // 진단
+    html.push(`<div class="sec" id="s-diag"><h2>자동 진단</h2><p>목표·신선도·감소·충돌·링크 상태를 규칙으로 훑은 결과 — 위에서부터 급한 순</p></div>
+      <div class="alerts">${diag.map((a) => `<div class="alert ${a.kind}">${badge(a.kind, { bad: "문제", warn: "주의", info: "참고", good: "정상" }[a.kind])}<div><div class="t">${esc(a.title)}</div><div class="d">${esc(a.desc)}</div></div></div>`).join("")}</div>`);
+
+    // 일자별 추이(7일·30일) — 수집처별 처리량 · 카테고리별 지표
+    html.push(`<div class="sec" id="s-daily"><h2>일자별 추이 <small class="muted" style="font-size:.8rem;font-weight:650">7일 · 30일</small></h2><p>수집처마다 날마다 몇 건을 처리했는지, 카테고리별 핵심 지표가 날마다 어떻게 움직였는지 — 막대가 비거나 갑자기 줄면 그 수집이 멈춘 것</p></div>
+      <div class="panel"><div class="chips" id="period-chips"><button class="chip" data-period="7" aria-pressed="true">최근 7일</button><button class="chip" data-period="30" aria-pressed="false">최근 30일</button></div>
+      <h3>수집처별 일별 처리량 <small>마지막 수집일 기준 · 막대 하나 = 하루</small></h3><div class="multi" id="src-multi"></div>
+      <h3 style="margin-top:16px">카테고리별 일별 추이 <small>누적값(선) · 오른쪽 위 = 기간 변화</small></h3><div id="cat-multi"></div></div>`);
+
+    // AI 분석량 · 에이전트 작업량
+    const AI = S.ai ?? { analyses: [], agents: null, board: {} };
+    const AG = { macmini: ["로컬 맥미니(야간 작업)", "nightshift: 운영자 사이트·OCR·사진 판독"], claude: ["Claude(에이전트)", "코드·데이터 수정 커밋"], codex: ["Codex(에이전트)", "코드·데이터 수정 커밋"], ci: ["자동 수집(GitHub Actions)", "정기 수집·발행 커밋"], human: ["소유자 계정(사람·기타 에이전트)", "Antigravity 등 소유자 계정으로 올린 커밋"] };
+    const aiRows = [
+      ...AI.analyses.map((a) => ({ name: a.name, engine: a.engine, what: a.what, unit: "건", v: a, extra: a.hidden != null ? `숨김·제외 ${fmt(a.hidden)}` : a.found != null ? `사진 찾음 ${fmt(a.found)}` : "" })),
+      ...Object.entries(AI.agents ?? {}).map(([k, v]) => ({ name: AG[k]?.[0] ?? k, engine: "git 커밋(main)", what: AG[k]?.[1] ?? "", unit: "커밋", v, extra: "" })),
+      ...Object.entries(AI.board ?? {}).map(([k, v]) => ({ name: `${k} 게시판 글`, engine: "data/board", what: "에이전트 공지·선점·질문", unit: "건", v, extra: "" })),
+    ];
+    html.push(`<div class="sec" id="s-ai"><h2>AI 분석량 · 에이전트 작업량</h2><p>로컬 맥미니·CI의 AI 모델이 판정한 건수(기록의 판정일 기준)와 Claude·Codex·자동 수집이 main에 남긴 작업(커밋) · 위 ‘최근 7일/30일’ 선택을 따름</p></div>
+      <div class="panel"><div class="tbl-wrap"><table id="ai-tbl"><thead><tr><th data-sort>분석·작업</th><th data-sort>엔진</th><th class="r" data-sort>누적</th><th class="r" data-sort>오늘(24시간)</th><th class="r" data-sort>7일</th><th class="r" data-sort>30일</th><th class="r" data-sort>7일 하루 평균</th><th>비고</th></tr></thead><tbody>
+      ${aiRows.map((r) => `<tr><td data-v="${esc(r.name)}" data-tip="${esc(r.what)}"><b>${esc(r.name)}</b></td><td class="muted">${esc(r.engine)}</td><td class="r num" data-v="${r.v.total}">${fmt(r.v.total)}</td><td class="r num" data-v="${r.v.d1}">${fmt(r.v.d1)}</td><td class="r num" data-v="${r.v.d7}">${fmt(r.v.d7)}</td><td class="r num" data-v="${r.v.d30}">${fmt(r.v.d30)}</td><td class="r num" data-v="${r.v.d7 / 7}">${fmt(r.v.d7 / 7, 1)}</td><td class="muted">${esc(r.extra)}</td></tr>`).join("")}
+      </tbody></table></div>
+      <h3 style="margin-top:14px">일별 분석·작업량 <small>막대 하나 = 하루</small></h3><div class="multi" id="ai-multi"></div>
+      <p class="note">판정 기록은 같은 글·사진을 다시 판정하면 마지막 날짜로 바뀝니다(누적 = 지금까지 판정을 마친 서로 다른 글·사진 수). 커밋은 병합 커밋을 빼고 셉니다. 소유자 계정으로 올린 커밋은 사람과 다른 에이전트(Antigravity 등)를 나눌 수 없어 한 줄로 셉니다.</p></div>`);
+
+    // 목표 대비
+    const rows = Object.entries(m).filter(([id]) => M[id]);
+    html.push(`<div class="sec" id="s-goal"><h2>목표 대비 · 속도</h2><p>캠핑장(숙박) ${fmt(S.universe.camps)}곳 기준 비율 · 7일 변화 · 하루 평균 증가 · 지금 속도로 목표까지 걸리는 날 · 목표는 pipeline/registry/collect-targets.json(${esc(S.targets_updated_at ?? "")})</p></div>
+      <div class="panel"><div class="chips" id="cat-chips"><button class="chip" aria-pressed="true" data-cat="">전체</button>${CATS.map(([c, l]) => `<button class="chip" aria-pressed="false" data-cat="${c}">${l}</button>`).join("")}</div>
+      <div class="tbl-wrap"><table id="goal-tbl"><thead><tr><th data-sort>지표</th><th data-sort>수집처</th><th class="r" data-sort>현재</th><th class="r" data-sort>목표</th><th data-sort>진행</th><th class="r" data-sort>전날</th><th class="r" data-sort>7일</th><th class="r" data-sort>하루 속도</th><th class="r" data-sort>목표까지</th><th data-sort>상태</th></tr></thead><tbody>
+      ${CATS.map(([c, cl]) => { const rs = rows.filter(([id]) => M[id][0] === c); if (!rs.length) return ""; return `<tr class="cat-row" data-cat="${c}"><td colspan="10">${cl}</td></tr>` + rs.map(([id, x]) => {
+        const meta = M[id], p = x.progress, kind = kindOfProgress(p);
+        const markAt = x.target?.pct != null ? x.target.pct : null;
+        return `<tr data-cat="${c}"><td data-v="${esc(meta[1])}" data-tip="${esc(meta[3] || meta[1])}">${esc(meta[1])}</td><td class="muted">${esc(meta[4])}</td><td class="r num" data-v="${x.pct ?? x.value ?? ""}">${curText(x)}</td><td class="r num" data-v="${x.target ? (x.target.pct ?? x.target.count ?? x.target.per_camp ?? x.target.value ?? x.target.max) : ""}">${goalText(x.target)}</td>
+          <td data-v="${p ?? -1}">${x.pct != null ? `<div class="bar ${kind === "good" ? "" : kind}" data-tip="${fmt(x.pct, 1)}%${markAt != null ? ` / 목표 ${markAt}%` : ""}"><i style="width:${Math.min(100, x.pct)}%"></i>${markAt != null ? `<b style="left:${markAt}%"></b>` : ""}</div>` : p != null ? `<div class="bar ${kind === "good" ? "" : kind}"><i style="width:${p}%"></i></div>` : ""}</td>
+          <td class="r num" data-v="${x.d1 ?? ""}">${x.d1 == null ? "–" : `<span class="chg ${x.d1 > 0 ? "up" : x.d1 < 0 ? "down" : "flat"}">${sgn(x.d1, 1)}</span>`}</td>
+          <td class="r num" data-v="${x.d7 ?? ""}">${x.d7 == null ? "–" : `<span class="chg ${x.d7 > 0 ? "up" : x.d7 < 0 ? "down" : "flat"}">${sgn(x.d7, 1)}</span>`}${x.pct_d7 != null ? ` <span class="muted">(${sgn(x.pct_d7, 1)}%p)</span>` : ""}</td>
+          <td class="r num" data-v="${x.rate ?? ""}">${x.rate == null ? "–" : `${sgn(x.rate, 1)}/일`}</td>
+          <td class="r num" data-v="${x.eta_days ?? (p >= 100 ? 0 : 99999)}">${p >= 100 ? "달성" : x.eta_days != null ? `${fmt(x.eta_days)}일` : x.target && x.rate == null ? "이력 쌓는 중" : x.target ? "증가 없음" : "–"}</td>
+          <td data-v="${p ?? -1}">${badge(kind, progLabel(p))}</td></tr>`; }).join(""); }).join("")}
+      </tbody></table></div>
+      <details class="def"><summary>읽는 법</summary><p>현재: 값(캠핑장 대비 비율). 진행: 막대 = 현재 비율, 검은 세로선 = 목표. 전날·7일: 이력 기준 변화량(괄호는 비율 %p). 하루 속도: 최근 7일 평균 증가. 목표까지: (목표 − 현재) ÷ 하루 속도. ‘목록 기준’ 지표는 과거 이력과 비교하려고 목록 카탈로그 숫자를 쓰고, ‘상세 기준’ 지표는 상세 화면 데이터를 센 것입니다(2026-10-30부터 이력).</p></details></div>`);
+
+    // 추이·속도
+    const trendIds = Object.keys(M).filter((id) => days.some((d) => H.days[d]?.[id] != null));
+    html.push(`<div class="sec" id="s-trend"><h2>누적 추이 · 일별 증가</h2><p>지표를 고르면 날짜별 누적값(위)과 전날 대비 증가량(아래)을 봅니다 · 점선 = 목표</p></div>
+      <div class="panel"><div class="chips" id="trend-chips">${trendIds.map((id, i) => `<button class="chip" data-trend="${id}" aria-pressed="${i === 0 ? "true" : "false"}">${esc(M[id][1])}</button>`).join("")}</div>
+      <div class="grid2"><div><h3>누적 <small id="trend-unit"></small></h3><div id="trend-line"></div></div><div><h3>일별 증가 <small>전날 대비</small></h3><div id="trend-bar"></div></div></div>
+      <details class="def"><summary>표로 보기</summary><div class="tbl-wrap" id="trend-table"></div></details></div>`);
+
+    // 수집처별
+    const src = S.sources;
+    html.push(`<div class="sec" id="s-src"><h2>수집처별 신선도 · 일별 처리량</h2><p>각 기록의 ‘마지막 수집일’ 기준 · 막대 색: 진초록 1일 · 초록 7일 · 연초록 30일 · 주황 30일 초과 · 빨강 기록 없음 · 오른쪽 작은 막대 = 최근 30일 날짜별 처리 건수</p></div>
+      <div class="panel"><div class="tbl-wrap"><table id="src-tbl"><thead><tr><th data-sort>수집처</th><th data-sort>방식·주기</th><th class="r" data-sort>대상</th><th class="r" data-sort>1일</th><th class="r" data-sort>7일</th><th class="r" data-sort>30일</th><th class="r" data-sort>30일↑</th><th class="r" data-sort>없음</th><th>신선도</th><th>최근 30일 일별</th><th data-sort>상태</th></tr></thead><tbody>
+      ${src.map((s) => {
+        const T = s.total || 1, w = (n) => (n / T) * 100;
+        const last30 = Array.from({ length: 30 }, (_, i) => { const d = new Date(Date.parse(S.date) - (29 - i) * 864e5).toISOString().slice(0, 10); return [d, s.byDay?.[d] ?? 0]; });
+        const mx = Math.max(1, ...last30.map(([, n]) => n));
+        const stale = (s.old + s.never) / T, kind = s.d7 / T >= 0.3 || s.d1 > 0 ? (stale > 0.3 ? "warn" : "good") : stale > 0.3 ? "bad" : "warn";
+        return `<tr><td data-v="${esc(s.name)}"><b>${esc(s.name)}</b></td><td class="muted">${esc(s.how)}</td><td class="r num" data-v="${s.total}">${fmt(s.total)}</td><td class="r num" data-v="${s.d1}">${fmt(s.d1)}</td><td class="r num" data-v="${s.d7}">${fmt(s.d7)}</td><td class="r num" data-v="${s.d30}">${fmt(s.d30)}</td><td class="r num" data-v="${s.old}">${fmt(s.old)}</td><td class="r num" data-v="${s.never}">${fmt(s.never)}</td>
+          <td><div class="fresh" data-tip="1일 ${fmt(s.d1)} · 7일 이내 ${fmt(s.d7)} · 30일 이내 ${fmt(s.d30)} · 오래됨 ${fmt(s.old)} · 없음 ${fmt(s.never)}"><i class="f7" style="width:${w(s.d7)}%"></i><i class="f30" style="width:${w(s.d30)}%"></i><i class="fold" style="width:${w(s.old)}%"></i><i class="fnever" style="width:${w(s.never)}%"></i></div></td>
+          <td><div class="spark">${last30.map(([d, n]) => `<i class="${n ? "" : "z"}" style="height:${Math.max(4, (n / mx) * 100)}%" data-tip="<b>${d}</b><br>${fmt(n)}건 처리"></i>`).join("")}</div></td>
+          <td data-v="${kind}">${badge(kind, { good: "정상", warn: "느림", bad: "멈춤" }[kind])}</td></tr>`; }).join("")}
+      </tbody></table></div><p class="note">대상: 그 수집처가 다루는 캠핑장·링크·사진 수. ‘1일’은 최근 24시간 안에 다시 확인한 수, ‘7일’은 7일 안(1일 포함). 일별 막대는 마지막 수집일 기준이라 같은 곳을 다시 수집하면 옛 날짜에서 빠집니다.</p></div>`);
+
+    // 후기
+    const R = S.reviews, rTot = Object.values(R.by_source).reduce((a, b) => a + b, 0);
+    const years = (obj) => Object.entries(obj).filter(([y]) => y >= "2015").sort().map(([y, n]) => ({ l: y, v: n, t: `${y}년` }));
+    html.push(`<div class="sec" id="s-rev"><h2>후기·SNS</h2><p>상세 화면 ‘후기’ 칸에 보이는 글(블로그·카페·웹문서) · 썸네일은 검색 썸네일 + 글 대표 이미지(og:image, 매일 채움)</p></div>
+      <div class="grid3">
+        <div class="panel"><h3>출처별 글 <small>${fmt(rTot)}건</small></h3>${hbars(Object.entries(R.by_source).sort((a, b) => b[1] - a[1]).map(([l, v]) => ({ l, v })), { unit: "건", total: rTot })}</div>
+        <div class="panel"><h3>출처별 썸네일 비율 <small>목표 ${goalText(m["review.thumb"]?.target)}</small></h3>${hbars(Object.entries(R.by_source).sort((a, b) => b[1] - a[1]).map(([l, v]) => { const t = R.thumb_by_source[l] ?? 0, p = v ? (t / v) * 100 : 0; return { l, v: Math.round(p * 10) / 10, k: p >= 85 ? "" : p >= 60 ? "warn" : "bad", t: `${fmt(t)} / ${fmt(v)}건` }; }), { unit: "%", suffix: "%" })}<p class="note">대표 이미지 기록 ${fmt(R.thumbs_registry)}건 · 대표 이미지 없음 확인 ${fmt(R.thumbs_miss)}건</p></div>
+        <div class="panel"><h3>캠핑장당 후기 수 분포 <small>목표 ${goalText(m["review.per_camp"]?.target)}</small></h3>${hbars(R.per_camp.map((x) => ({ l: `${x.label}건`, v: x.n })), { unit: "곳", total: S.universe.camps })}</div>
+      </div>
+      <div class="panel" style="margin-top:12px"><h3>글 작성 연도 <small>최신성 — 오래된 글 비중이 크면 현재 상태와 다를 수 있음</small></h3>${barChart(years(R.by_year), { unit: "건", w: 900, h: 200 })}</div>`);
+
+    // 영상
+    const V = S.videos, vTot = Object.values(V.by_host).reduce((a, b) => a + b, 0);
+    html.push(`<div class="sec" id="s-vid"><h2>영상</h2><p>화면에는 바로 재생되는 YouTube·네이버TV만 보입니다(블로그 안 영상·카카오TV는 데이터에만 남음) · 영상 확대 수집 v2 진행 ${fmt(m["video.search_v2"]?.value)}/${fmt(S.universe.camps)}곳</p></div>
+      <div class="grid3">
+        <div class="panel"><h3>수집된 영상 출처 <small>${fmt(vTot)}개</small></h3>${hbars(Object.entries(V.by_host).sort((a, b) => b[1] - a[1]).map(([l, v]) => ({ l: l === "YouTube" ? "YouTube(재생)" : `${l}(화면 제외)`, v, k: l === "YouTube" ? "" : "warn" })), { unit: "개", total: vTot })}</div>
+        <div class="panel"><h3>재생 영상 종류</h3>${hbars([{ l: "일반 영상", v: V.kind.일반 }, { l: "숏츠", v: V.kind.숏츠 }], { unit: "개", total: V.kind.일반 + V.kind.숏츠 })}<p class="note">숏츠가 있는 곳 ${fmt(m["video.short_camps"]?.value)}곳(${fmt(m["video.short_camps"]?.pct, 1)}%) · 목표 ${goalText(m["video.short_camps"]?.target)}</p></div>
+        <div class="panel"><h3>캠핑장당 재생 영상 분포 <small>목표 ${goalText(m["video.per_camp"]?.target)}</small></h3>${hbars(V.per_camp.map((x) => ({ l: `${x.label}개`, v: x.n, k: x.label === "0" ? "bad" : "" })), { unit: "곳", total: S.universe.camps })}</div>
+      </div>
+      <div class="panel" style="margin-top:12px"><h3>영상 게시 연도</h3>${barChart(years(V.by_year), { unit: "개", w: 900, h: 200 })}</div>`);
+
+    // 예약·링크·운영자
+    const st = S.status;
+    const VL = { MATCH: "업장 일치", PORTAL: "공공 예약 창구", MOVED: "새 주소로 교체", UNVERIFIED: "자동 확인 불가(플랫폼 차단)", DEAD: "없는 주소(404·DNS)", ERROR: "열기 오류", CLOSED: "서비스 종료(modoo 등)", NO_SIGNAL: "업장 단서 없음", BLOCKED: "봇 차단 화면", THIN: "내용 거의 없음", PLATFORM_ROOT: "플랫폼 첫 화면", ERROR_PAGE: "오류 화면", GEO_BLOCK: "해외 차단", HIJACKED: "도박·광고로 바뀜", LEFT_SITE: "다른 사이트로 이동", STALE_DEEP: "첫 화면으로 튕김", PARKED: "도메인 판매", OK: "정상", FLAKY: "가끔 실패", FETCH_FAILED: "열기 실패", DISCOVERED_NOT_OPERATOR: "운영자 사이트 아님", NO_RELEVANT_TEXT: "쓸 문장 없음", REDIRECTED_TO_PLATFORM: "플랫폼으로 이동", PLATFORM_PAGE: "플랫폼 페이지", ROBOTS_DISALLOWED: "robots.txt 금지", QUARANTINED: "격리(오매칭 의심)", NO_OPERATOR_SITE: "사이트 없음" };
+    const GOOD = new Set(["MATCH", "PORTAL", "MOVED", "OK"]), BAD = new Set(["DEAD", "CLOSED", "HIJACKED", "PARKED", "ERROR_PAGE", "LEFT_SITE", "STALE_DEEP", "PLATFORM_ROOT", "FETCH_FAILED", "QUARANTINED"]);
+    const statusBars = (obj) => { const t = Object.values(obj).reduce((a, b) => a + b, 0); return hbars(Object.entries(obj).sort((a, b) => b[1] - a[1]).map(([k, v]) => ({ l: VL[k] ?? k, v, k: GOOD.has(k) ? "" : BAD.has(k) ? "bad" : "warn", t: k })), { total: t }); };
+    html.push(`<div class="sec" id="s-link"><h2>예약·링크·운영자 사이트</h2><p>링크 점검·예약 정밀 검수(주간)·운영자 사이트 크롤 결과 판정 분포 · 초록 = 쓸 수 있음, 주황 = 확인 필요, 빨강 = 화면에서 뺌·실패</p></div>
+      <div class="grid3">
+        <div class="panel"><h3>예약 링크 정밀 검수 <small>(캠핑장×주소) 쌍</small></h3>${statusBars(st.booking_verify)}</div>
+        <div class="panel"><h3>링크 점검(404·DNS) <small>주소</small></h3>${statusBars(st.link_health)}</div>
+        <div class="panel"><h3>운영자 사이트 크롤 <small>캠핑장</small></h3>${statusBars(st.operator_site)}</div>
+      </div>`);
+
+    // 품질
+    const Q = S.quality, L = Q.ledger ?? [];
+    html.push(`<div class="sec" id="s-qual"><h2>정합성·품질</h2><p>사실 저장소(data/facts) 기준 · 신뢰도 = 원천 등급·확증·최신성 · 충돌 = 원천끼리 값이 엇갈림 · 매일 data/quality/REPORT.md</p></div>
+      <div class="grid3">
+        <div class="panel"><h3>평균 신뢰도 추이 <small>목표 ${goalText(m["quality.confidence"]?.target)}</small></h3><div id="q-conf"></div></div>
+        <div class="panel"><h3>충돌(검토 대기) 추이 <small>상한 ${goalText(m["quality.conflicts"]?.target)}</small></h3><div id="q-conf2"></div></div>
+        <div class="panel"><h3>원자 사실 수 추이</h3><div id="q-facts"></div></div>
+      </div>
+      <div class="grid2" style="margin-top:12px">
+        <div class="panel"><h3>검토 대기 충돌 <small>대기열 ${fmt(Q.review_queue)}건(상위만 기록) / 전체 충돌 ${fmt(Q.totals?.conflicts)}건 · 속성별</small></h3>${hbars(Object.entries(Q.review_queue_by_attr ?? {}).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([l, v]) => ({ l, v, k: "warn" })), { unit: "건" })}
+          <div class="tbl-wrap" style="margin-top:10px"><table><thead><tr><th>캠핑장</th><th>속성</th><th>값 A(신뢰·원천)</th><th>값 B</th></tr></thead><tbody>${(Q.review_queue_top ?? []).map((x) => `<tr><td>${esc(x.name)}</td><td>${esc(x.attr)}</td>${[0, 1].map((i) => { const v = x.values?.[i]; return `<td>${v ? `${esc(v.v)} <span class="muted">(${fmt(v.c, 2)}·${fmt(v.n)}곳)</span>` : "–"}</td>`; }).join("")}</tr>`).join("")}</tbody></table></div></div>
+        <div class="panel"><h3>내용 판정(AI) <small>엉뚱한 글·사진 걸러냄</small></h3>${hbars([{ l: "글 판정", v: S.judgments.texts, t: `숨김 ${fmt(S.judgments.texts_hidden)}건` }, { l: "글 숨김", v: S.judgments.texts_hidden, k: "warn" }, { l: "사진 판정", v: S.judgments.photos, t: `제외 ${fmt(S.judgments.photos_hidden)}장` }, { l: "사진 제외", v: S.judgments.photos_hidden, k: "warn" }])}
+          <p class="note">글 숨김 ${fmt((S.judgments.texts_hidden / Math.max(1, S.judgments.texts)) * 100, 2)}% · 사진 제외 ${fmt((S.judgments.photos_hidden / Math.max(1, S.judgments.photos)) * 100, 1)}%</p></div>
+      </div>
+      <div class="panel" style="margin-top:12px"><h3>속성별 정합성 <small>${(Q.attrs ?? []).length}개 · 머리글을 누르면 정렬 · 신뢰도 낮은 순</small></h3>
+        <div class="tbl-wrap"><table id="attr-tbl"><thead><tr><th data-sort>속성</th><th class="r" data-sort>커버리지(곳)</th><th class="r" data-sort>비율</th><th class="r" data-sort>평균 신뢰도</th><th data-sort>신뢰도</th><th class="r" data-sort>확정 %</th><th class="r" data-sort>확증(2원천↑)</th><th class="r" data-sort>충돌</th><th class="r" data-sort>약한 값</th></tr></thead><tbody>
+        ${(Q.attrs ?? []).map((a) => { const kind = a.confidence >= 0.8 ? "" : a.confidence >= 0.6 ? "warn" : "bad"; return `<tr><td data-v="${esc(a.label ?? a.code)}">${esc(a.label ?? a.code)} <span class="muted">${esc(a.code)}</span></td><td class="r num" data-v="${a.coverage}">${fmt(a.coverage)}</td><td class="r num" data-v="${a.coverage_pct}">${fmt(a.coverage_pct, 1)}%</td><td class="r num" data-v="${a.confidence}">${fmt(a.confidence, 3)}</td><td data-v="${a.confidence}"><div class="bar ${kind}"><i style="width:${(a.confidence ?? 0) * 100}%"></i></div></td><td class="r num" data-v="${a.confirmed_pct}">${fmt(a.confirmed_pct, 1)}</td><td class="r num" data-v="${a.corroborated}">${fmt(a.corroborated)}</td><td class="r num" data-v="${a.conflicts}">${a.conflicts ? `<b style="color:var(--bad)">${fmt(a.conflicts)}</b>` : "0"}</td><td class="r num" data-v="${a.weak}">${fmt(a.weak)}</td></tr>`; }).join("")}
+        </tbody></table></div></div>`);
+
+    // 가치(정보량)
+    const I = S.info_score;
+    html.push(`<div class="sec" id="s-value"><h2>가치 · 정보량</h2><p>정보량 점수(c.iq 0~100) = 이 캠핑장에 대해 쓸 만한 사실이 얼마나 채워졌나 · 목록 기본 정렬 기준</p></div>
+      <div class="grid2">
+        <div class="panel"><h3>정보량 점수 분포 <small>평균 ${fmt(I.mean, 1)} · 목표 ${goalText(m["quality.iq"]?.target)}</small></h3>${hbars(I.dist.map((x) => ({ l: `${x.label}점`, v: x.n, k: x.label.startsWith("0") || x.label.startsWith("20") ? "warn" : "" })), { unit: "곳", total: S.universe.camps })}</div>
+        <div class="panel"><h3>다음 수집 우선순위 <small>채우면 점수가 가장 많이 오르는 속성</small></h3>${hbars((I.next_priorities ?? []).map((x) => ({ l: x.attr, v: x.camps, k: "warn" })), { unit: "곳" })}<p class="note">data/quality/info-score.json next_priorities — 수집기를 새로 만들거나 호출 상한을 정할 때 이 순서를 따릅니다.</p></div>
+      </div>`);
+
+    // 지역별
+    const RG = Object.entries(S.regions).sort((a, b) => b[1].camps - a[1].camps);
+    const cell = (n, d) => { const p = d ? (n / d) * 100 : 0; const a = 0.12 + (p / 100) * 0.75; return `<td class="h num" data-v="${p}" style="background:rgba(0,135,90,${a.toFixed(2)});color:${p > 60 ? "#fff" : "var(--ink)"}" data-tip="${fmt(n)} / ${fmt(d)}곳">${fmt(p, 0)}%</td>`; };
+    html.push(`<div class="sec" id="s-region"><h2>지역별 커버리지</h2><p>시·도별 캠핑장 중 그 정보가 있는 비율(진할수록 높음) · 수집이 덜 된 지역을 찾는 데 씁니다</p></div>
+      <div class="panel"><div class="tbl-wrap"><table id="rg-tbl" class="heat"><thead><tr><th data-sort>시·도</th><th class="r" data-sort>캠핑장</th><th class="r" data-sort>후기</th><th class="r" data-sort>영상</th><th class="r" data-sort>공식 사진</th><th class="r" data-sort>예약 링크</th><th class="r" data-sort>요금</th><th class="r" data-sort>평균 정보량</th></tr></thead><tbody>
+      ${RG.map(([k, r]) => `<tr><td data-v="${esc(k)}"><b>${esc(k)}</b></td><td class="r num" data-v="${r.camps}">${fmt(r.camps)}</td>${cell(r.review, r.camps)}${cell(r.video, r.camps)}${cell(r.photo, r.camps)}${cell(r.booking, r.camps)}${cell(r.fee, r.camps)}<td class="r num" data-v="${r.iq}">${fmt(r.iq, 1)}</td></tr>`).join("")}
+      </tbody></table></div></div>`);
+
+    // 실행 이력
+    html.push(`<div class="sec" id="s-wf"><h2>수집 워크플로 실행 이력</h2><p>GitHub Actions 최근 실행(브라우저에서 바로 불러옴, 10분 캐시) · 칸 하나 = 실행 1번(초록 성공 · 빨강 실패 · 파랑 진행 중 · 회색 취소)</p></div>
+      <div class="panel" id="wf"><div class="muted">실행 이력을 불러오는 중…</div></div>
+      <details class="def"><summary>지표 정의·수집처 전체 보기</summary><div class="tbl-wrap"><table><thead><tr><th>지표 id</th><th>카테고리</th><th>이름</th><th>단위</th><th>설명</th><th>수집처</th></tr></thead><tbody>${Object.entries(M).map(([id, x]) => `<tr><td class="muted">${id}</td><td>${esc(CATS.find(([c]) => c === x[0])?.[1])}</td><td>${esc(x[1])}</td><td>${esc(x[2])}</td><td class="wrap">${esc(x[3])}</td><td>${esc(x[4])}</td></tr>`).join("")}</tbody></table></div></details>`);
+
+    $("#root").innerHTML = html.join("");
+    ["#goal-tbl", "#src-tbl", "#attr-tbl", "#rg-tbl", "#ai-tbl", "#kind-tbl"].forEach((s) => $(s) && sortable($(s)));
+
+    // 카테고리 칩
+    $("#cat-chips").addEventListener("click", (e) => {
+      const b = e.target.closest(".chip"); if (!b) return;
+      $("#cat-chips").querySelectorAll(".chip").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      const c = b.dataset.cat;
+      $("#goal-tbl").querySelectorAll("tbody tr").forEach((tr) => { tr.hidden = !!c && tr.dataset.cat !== c; });
+    });
+
+    // 추이 차트
+    const drawTrend = (id) => {
+      const pts = days.map((d) => { const v = H.days[d]?.[id]; return { d, v: Array.isArray(v) ? v[0] : v ?? null }; }).filter((p) => p.v != null);
+      const unit = M[id][2] ? ` ${M[id][2]}` : "";
+      const t = m[id]?.target; const tv = t?.count ?? t?.value ?? (t?.pct != null && m[id]?.base ? (t.pct / 100) * m[id].base : null);
+      $("#trend-unit").textContent = `${M[id][1]}${unit ? ` (${M[id][2]})` : ""}`;
+      $("#trend-line").innerHTML = lineChart(pts, { unit, target: tv, w: 480, h: 220 });
+      bindLine($("#trend-line"), pts, unit);
+      const diffs = pts.slice(1).map((p, i) => ({ l: p.d.slice(5), t: p.d, v: Math.round((p.v - pts[i].v) * 1000) / 1000 }));
+      $("#trend-bar").innerHTML = diffs.length ? barChart(diffs, { unit, w: 480, h: 220 }) : `<div class="muted">이력이 2일 이상 쌓이면 보입니다.</div>`;
+      $("#trend-table").innerHTML = `<table><thead><tr><th>날짜</th><th class="r">값</th><th class="r">전날 대비</th></tr></thead><tbody>${pts.map((p, i) => `<tr><td>${p.d}</td><td class="r num">${fmt(p.v, 3)}</td><td class="r num">${i ? sgn(Math.round((p.v - pts[i - 1].v) * 1000) / 1000, 3) : "–"}</td></tr>`).join("")}</tbody></table>`;
+    };
+    if (trendIds.length) drawTrend(trendIds[0]);
+    $("#trend-chips")?.addEventListener("click", (e) => {
+      const b = e.target.closest(".chip"); if (!b) return;
+      $("#trend-chips").querySelectorAll(".chip").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      drawTrend(b.dataset.trend);
+    });
+
+    // 일자별 추이 그리기
+    const lastN = (n) => Array.from({ length: n }, (_, i) => new Date(Date.parse(S.date) - (n - 1 - i) * 864e5).toISOString().slice(0, 10));
+    const CAT_KEYS = { base: ["catalog.camps", "field.booking", "field.fee", "field.checkin", "field.tel", "field.kinds"], photo: ["photo.official", "photo.any", "snsimg.items"], review: ["review.items", "review.camps", "review.posts", "review.thumb"], video: ["video.items", "video.camps", "video.playable", "video.short_camps"], fee: ["field.fee", "price.mentions", "booking.verified"], operator: ["operator.snippets", "operator.ok"], place: ["place.kakao", "place.naver"], nearby: ["nearby.camps"], quality: ["quality.facts", "quality.confidence", "quality.conflicts", "quality.iq"] };
+    const drawDaily = (n) => {
+      const ds = lastN(n);
+      // 수집처별: 날짜별 처리 건수 막대 + 기간 합계·하루 평균 + 마지막 날이 평균의 20% 미만이면 경고
+      $("#src-multi").innerHTML = S.sources.map((s) => {
+        const items = ds.map((d) => ({ l: d.slice(5), t: d, v: s.byDay?.[d] ?? 0 }));
+        const sum = items.reduce((a, x) => a + x.v, 0), avg = sum / n, last = items.at(-1).v, prev = items.at(-2)?.v ?? 0;
+        const active = items.filter((x) => x.v > 0).length;
+        const kind = sum === 0 ? "bad" : (last + prev) === 0 && avg > 0 ? "warn" : "";
+        return `<div class="mini ${kind}"><div class="mini-h"><div>${esc(s.name)}<small>${esc(s.how)}</small></div>${kind === "bad" ? badge("bad", "처리 없음") : kind === "warn" ? badge("warn", "최근 멈춤") : badge("good", `${active}/${n}일 수집`)}</div>
+          <div class="mini-v num">${fmt(sum)}<span class="mini-s"> 건 · 하루 평균 ${fmt(avg, 1)} · 오늘 ${fmt(last)}</span></div>${barChart(items, { w: 300, h: 110, unit: "건" })}</div>`;
+      }).join("");
+      // 카테고리별: 지표마다 누적 추이 선(한 차트 한 지표 — 축이 섞이지 않게)
+      $("#cat-multi").innerHTML = CATS.map(([c, cl]) => {
+        const keys = (CAT_KEYS[c] ?? []).filter((id) => M[id] && ds.some((d) => H.days[d]?.[id] != null));
+        if (!keys.length) return "";
+        return `<div class="cat-h">${esc(cl)}</div><div class="multi">${keys.map((id) => {
+          const pts = ds.map((d) => { const v = H.days[d]?.[id]; return { d, v: Array.isArray(v) ? v[0] : v ?? null }; }).filter((p) => p.v != null);
+          const first = pts[0]?.v, lastv = pts.at(-1)?.v, ch = first != null && lastv != null ? Math.round((lastv - first) * 1000) / 1000 : null;
+          const kind = ch == null ? "" : id === "quality.conflicts" ? (ch > 0 ? "warn" : "") : ch < 0 ? "bad" : "";
+          const t = m[id]?.target; const tv = t?.count ?? t?.value ?? (t?.pct != null && m[id]?.base ? (t.pct / 100) * m[id].base : null);
+          return `<div class="mini ${kind}" data-mini="${id}"><div class="mini-h"><div>${esc(M[id][1])}<small>${esc(M[id][4])}</small></div>${ch == null ? "" : `<span class="chg ${ch > 0 ? "up" : ch < 0 ? "down" : "flat"}">${n}일 ${sgn(ch, 2)}</span>`}</div>
+            <div class="mini-v num">${fmt(lastv, 3)}<span class="mini-s"> ${esc(M[id][2])}${m[id]?.pct != null ? ` · ${fmt(m[id].pct, 1)}%` : ""}</span></div>${lineChart(pts, { w: 300, h: 120, target: tv != null && tv <= Math.max(...pts.map((p) => p.v)) * 1.3 ? tv : null })}</div>`;
+        }).join("")}</div>`;
+      }).join("");
+      $("#ai-multi").innerHTML = aiRows.map((r) => {
+        const items = ds.map((d) => ({ l: d.slice(5), t: d, v: r.v.byDay?.[d] ?? 0 }));
+        const sum = items.reduce((a, x) => a + x.v, 0);
+        return `<div class="mini"><div class="mini-h"><div>${esc(r.name)}<small>${esc(r.engine)}</small></div><span class="mini-s num">누적 ${fmt(r.v.total)}</span></div><div class="mini-v num">${fmt(sum)}<span class="mini-s"> ${esc(r.unit)} · ${n}일 · 하루 평균 ${fmt(sum / n, 1)}</span></div>${barChart(items, { w: 300, h: 110, unit: r.unit, color: "var(--info)" })}</div>`;
+      }).join("");
+      $("#cat-multi").querySelectorAll("[data-mini]").forEach((el) => { const id = el.dataset.mini; const pts = ds.map((d) => { const v = H.days[d]?.[id]; return { d, v: Array.isArray(v) ? v[0] : v ?? null }; }).filter((p) => p.v != null); bindLine(el, pts, ` ${M[id][2]}`); });
+    };
+    drawDaily(7);
+    $("#period-chips").addEventListener("click", (e) => {
+      const b = e.target.closest(".chip"); if (!b) return;
+      $("#period-chips").querySelectorAll(".chip").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      drawDaily(Number(b.dataset.period));
+    });
+
+    // 품질 추이(장부)
+    const lp = (key) => L.map((x) => ({ d: x.date, v: x[key] ?? null })).filter((p) => p.v != null);
+    const qc = lp("mean_confidence"), qx = lp("conflicts"), qf = lp("facts");
+    $("#q-conf").innerHTML = lineChart(qc, { w: 340, h: 190, target: m["quality.confidence"]?.target?.value ?? null }); bindLine($("#q-conf"), qc, "");
+    $("#q-conf2").innerHTML = lineChart(qx, { w: 340, h: 190, target: m["quality.conflicts"]?.target?.max ?? null, color: "var(--warn)" }); bindLine($("#q-conf2"), qx, "건");
+    $("#q-facts").innerHTML = lineChart(qf, { w: 340, h: 190 }); bindLine($("#q-facts"), qf, "건");
+  }
+
+  // ── GitHub Actions 실행 이력(공개 API, 비로그인 시간당 60회 → 10분 캐시) ──
+  const COLLECTORS = /Data sync|Shorts|Saved camps|Link check|Review|Card photos|Web quality|Content judge|Trending|Nearby|Operator|Thankq|ThankQ|Forecast|Culture|Availability|Naver|Kakao|Deploy GitHub Pages/i;
+  async function loadRuns() {
+    const box = $("#wf"); if (!box) return;
+    const key = "mc-collect-runs";
+    let runs = null;
+    try { const c = JSON.parse(sessionStorage.getItem(key) || "null"); if (c && Date.now() - c.t < 600000) runs = c.runs; } catch {}
+    if (!runs) {
+      try {
+        const pages = await Promise.all([1, 2].map((p) => fetch(`https://api.github.com/repos/${REPO}/actions/runs?per_page=100&page=${p}`).then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status))))));
+        runs = pages.flatMap((p) => p.workflow_runs ?? []).map((r) => ({ name: r.name, ev: r.event, st: r.status, c: r.conclusion, at: r.run_started_at || r.created_at, up: r.updated_at, url: r.html_url }));
+        try { sessionStorage.setItem(key, JSON.stringify({ t: Date.now(), runs })); } catch {}
+      } catch (e) { box.innerHTML = `<div class="muted">GitHub 실행 이력을 불러오지 못했습니다(${esc(e.message)}). 비로그인 API는 시간당 60회까지라 잠시 뒤 다시 해 보세요.</div>`; return; }
+    }
+    const byWf = new Map();
+    for (const r of runs) { if (!COLLECTORS.test(r.name) || r.ev === "pull_request") continue; (byWf.get(r.name) ?? byWf.set(r.name, []).get(r.name)).push(r); }
+    const rows = [...byWf].map(([name, rs]) => {
+      rs.sort((a, b) => b.at.localeCompare(a.at));
+      const done = rs.filter((r) => r.st === "completed" && r.c !== "cancelled" && r.c !== "skipped");
+      const ok = done.filter((r) => r.c === "success").length;
+      const durs = done.map((r) => (Date.parse(r.up) - Date.parse(r.at)) / 60000).filter((x) => x > 0);
+      const avg = durs.length ? durs.reduce((a, b) => a + b, 0) / durs.length : null;
+      const last = rs[0], lastOk = rs.find((r) => r.c === "success");
+      const rate = done.length ? (ok / done.length) * 100 : null;
+      return { name, rs, ok, n: done.length, rate, avg, last, lastOk };
+    }).sort((a, b) => (a.rate ?? 101) - (b.rate ?? 101));
+    const ago = (s) => { if (!s) return "–"; const h = (Date.now() - Date.parse(s)) / 36e5; return h < 1 ? `${Math.round(h * 60)}분 전` : h < 48 ? `${Math.round(h)}시간 전` : `${Math.round(h / 24)}일 전`; };
+    box.innerHTML = `<div class="tbl-wrap"><table id="wf-tbl"><thead><tr><th data-sort>워크플로</th><th class="r" data-sort>최근 실행</th><th class="r" data-sort>성공률</th><th class="r" data-sort>평균 소요</th><th data-sort>마지막</th><th class="r" data-sort>마지막 성공</th><th>최근 실행(왼쪽이 최신)</th></tr></thead><tbody>
+      ${rows.map((w) => { const k = w.rate == null ? "muted" : w.rate >= 90 ? "good" : w.rate >= 60 ? "warn" : "bad"; const lc = w.last.st !== "completed" ? "running" : w.last.c; return `<tr><td data-v="${esc(w.name)}"><b>${esc(w.name)}</b></td><td class="r num" data-v="${w.n}">${fmt(w.n)}회</td><td class="r" data-v="${w.rate ?? -1}">${badge(k, w.rate == null ? "–" : `${fmt(w.rate, 0)}%`)}</td><td class="r num" data-v="${w.avg ?? ""}">${w.avg ? `${fmt(w.avg, 0)}분` : "–"}</td><td data-v="${esc(lc)}"><a href="${esc(w.last.url)}" target="_blank" rel="noopener">${badge(lc === "success" ? "good" : lc === "failure" ? "bad" : lc === "running" ? "info" : "muted", { success: "성공", failure: "실패", running: "진행 중", cancelled: "취소", skipped: "건너뜀" }[lc] ?? lc ?? "–")}</a> <span class="muted">${ago(w.last.at)}</span></td><td class="r" data-v="${w.lastOk?.at ?? ""}">${ago(w.lastOk?.at)}</td>
+        <td><div class="wf-dots">${w.rs.slice(0, 30).map((r) => { const c = r.st !== "completed" ? "running" : r.c; return `<a href="${esc(r.url)}" target="_blank" rel="noopener"><i class="${esc(c)}" data-tip="<b>${esc(r.at.slice(0, 16).replace("T", " "))}</b><br>${esc({ success: "성공", failure: "실패", running: "진행 중", cancelled: "취소", skipped: "건너뜀" }[c] ?? c)} · ${esc(r.ev)}"></i></a>`; }).join("")}</div></td></tr>`; }).join("")}
+    </tbody></table></div><p class="note">최근 200번 실행(모든 워크플로) 중 수집·발행 관련만. 성공률 = 끝난 실행 중 성공 비율(취소 제외). 끊긴 수집은 ‘마지막 성공’이 오래된 줄로 찾습니다.</p>`;
+    sortable($("#wf-tbl"));
+  }
+
+  $("#btn-reload").addEventListener("click", () => { try { sessionStorage.removeItem("mc-collect-runs"); } catch {} load().catch(fail); });
+  const fail = (e) => { $("#root").innerHTML = `<div class="err">수집 현황을 불러오지 못했습니다(${esc(e.message)}). data-sync가 한 번 돈 뒤 다시 열어 주세요.</div>`; };
+  load().catch(fail);
+})();
+</script>
+</body>
+</html>

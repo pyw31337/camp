@@ -89,7 +89,7 @@ const shellIcons = () => {
   const syms = ids.map((id) => renewalIndex.match(new RegExp(`<symbol id="${id}"[\\s\\S]*?</symbol>`))?.[0] ?? "").join("");
   return `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>${syms.replaceAll('id="', 'id="shell-')}</defs></svg>`;
 };
-const SHELL_PAGES = [["admin/index.html", "../"], ["log/index.html", "../"]];
+const SHELL_PAGES = [["admin/index.html", "../"], ["admin/collect/index.html", "../../"], ["log/index.html", "../"]];
 for (const [rel, up] of SHELL_PAGES) {
   const f = `${rootOut}${rel}`;
   if (!existsSync(f)) continue;
@@ -99,7 +99,7 @@ for (const [rel, up] of SHELL_PAGES) {
     html = html.replace(new RegExp(`<!-- ${name} -->[\\s\\S]*?<!-- /${name} -->`), `<!-- ${name} -->\n${fix(shellPart(name))}\n<!-- /${name} -->`);
   }
   html = html.replace(/<!-- shell:icons -->[\s\S]*?<!-- \/shell:icons -->/, `<!-- shell:icons -->\n${shellIcons()}\n<!-- /shell:icons -->`);
-  html = html.replace(/href="\.\.\/shell\.css(\?v=[^"]*)?"/, `href="../shell.css?v=${shellVersion}"`);
+  html = html.replace(/href="((?:\.\.\/)+)shell\.css(\?v=[^"]*)?"/, (_, ups) => `href="${ups}shell.css?v=${shellVersion}"`);
   await writeFile(f, html);
 }
 

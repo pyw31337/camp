@@ -1,5 +1,27 @@
 # 인수인계
 
+## 📌 수집 현황판 /admin/collect/ (2026-10-30, Claude)
+
+소유자 요청: 수집처·카테고리별 누적·일별 수집량, 속도, 목표 대비, 정합성·가치를 한 화면에서 판단할 수 있게.
+- **데이터**: `pipeline/scripts/build-collect-stats.mjs`가 두 파일을 만든다. data-sync와 증분 발행(publish-incremental)에서 apply-info-score 다음에 돈다.
+  - `camping-atlas/public/data/collect-stats.json`: 오늘 스냅샷. 지표 56개, 수집처 13곳의 신선도(1/7/30일·오래됨·없음 + 최근 30일 일별 처리량), 후기·영상 출처 분포, 링크·예약 검수·운영자 크롤 판정 분포, 속성별 정합성, 검토 대기, 정보량 분포·다음 우선순위, 시도별 커버리지.
+  - `collect-history.json`: 한 줄에 하루.
+- **이력·목표**
+  - `--backfill`은 git 이력의 날짜별 마지막 카탈로그로 지난 날짜를 채운다(10-13부터). 품질 장부(ledger.ndjson)도 이력에 넣는다.
+  - ‘목록 기준’ 지표(review.items·video.items 등)는 카탈로그 soc 합이고 이력 비교용이다. ‘상세 기준’ 지표(review.posts·video.playable 등)는 10-30부터 쌓인다.
+  - 목표치는 `pipeline/registry/collect-targets.json`이다(pct·count·per_camp·value·max). 새 지표를 만들면 화면의 지표 사전(M)에도 넣는다(test/collect-stats.test.mjs가 검사).
+- **화면**: `camping-atlas/public/admin/collect/index.html`.
+  - 비밀번호는 운영 대시보드와 공유한다(`?next=collect`로 돌아옴). 운영 대시보드 상단에 ‘수집 현황’ 버튼이 있다.
+  - 구성: 자동 진단(규칙), 목표 대비·속도 표(카테고리 필터·정렬), 누적·일별 추이, 수집처별 신선도, 후기·영상·예약·품질·정보량·지역별 패널, GitHub Actions 실행 이력(공개 API, 10분 캐시).
+  - `scripts/publish-explorer-pages.mjs` SHELL_PAGES에 넣어 공통 헤더를 주입한다.
+- 소유자 추가 요청(같은 날)
+  - **일자별 추이(7일·30일 전환)**: 수집처별 일별 처리량(작은 막대 그래프, 처리 없음·최근 멈춤 표시), 카테고리별 핵심 지표 일별 선 그래프.
+  - **AI 분석량·에이전트 작업량**: 글 판정(e5)·사진 판정(CLIP)·주변시설 판독(Apple Vision)·충돌 판정의 판정일 기준 누적·오늘·7일·30일. Claude·Codex·로컬 맥미니·자동 수집·소유자 계정의 main 커밋(병합 제외, CI 얕은 체크아웃이면 35일 더 받음), 게시판 글.
+- 첫 진단에서 찾은 것: **data-sync가 10-28부터 coverage-guard(checkin·checkout·site_types 감소)로 발행이 멈춤**.
+  - 원인: 최종 빌드의 파생 계산(spec-sheet·profiles·site-types 등)이 build:explore 직후 고캠핑 기준 3,124곳에만 돌았다. 당일 장소·휴양림·OSM(446곳 등)은 그 뒤 apply-dayuse-seed·build-public-leisure·merge-collected로 붙어 파생 값이 비었다.
+  - 해결: merge-collected --social 뒤에 증분 발행과 같은 순서로 2차 계산(data-sync.yml).
+  - 확인: run 40968163062의 pipeline-out으로 재현했다. 1차만 하면 checkin 2,407·site_types 2,997이고, 2차를 넣고 heal까지 하면 2,742·3,381로 coverage-guard가 통과한다.
+
 ## 📌 SNS 영상은 재생되는 영상만 · YouTube 영상 확대 수집(v2) · 후기 썸네일 매일 채우기 (2026-10-30, Claude)
 
 소유자 피드백: “네이버·다음 썸네일에 재생 버튼이 있는데 누르면 네이버 블로그로 넘어간다(후기와 중복)”, “유튜브엔 영상·쇼츠가 많은데 1~2개만”, “후기 썸네일이 너무 많이 비어 있다”.

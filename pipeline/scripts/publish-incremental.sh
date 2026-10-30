@@ -65,12 +65,14 @@ node pipeline/scripts/report-coverage.mjs
 node pipeline/scripts/build-fact-store.mjs
 node pipeline/scripts/quality-ledger.mjs
 node pipeline/scripts/apply-info-score.mjs
+# 수집 현황판(/admin/collect/) 통계 — 실패해도 발행은 계속
+node pipeline/scripts/build-collect-stats.mjs || echo "::warning::수집 현황 통계 생성 실패"
 node "$SRC/scripts/coverage-guard.mjs" "$BASE" "$DATA/meta.json"
 
 if [ -n "${PUBLISH_DRY_RUN:-}" ]; then { git status --short | head -5 || true; }; echo "(시험 실행: 커밋하지 않음)"; exit 0; fi
 git config user.name "moyeora-camping-data-bot"
 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-git add camping-atlas/public/explore data/facts data/quality; git add pipeline/registry/merge-review.ndjson 2>/dev/null || true
+git add camping-atlas/public/explore data/facts data/quality; git add pipeline/registry/merge-review.ndjson camping-atlas/public/data/collect-stats.json camping-atlas/public/data/collect-history.json 2>/dev/null || true
 if git diff --cached --quiet; then echo "증분 발행: 변경 없음."; exit 0; fi
 git commit -q -m "chore(data): publish ${LABEL} now (incremental)"
 # main은 필수 검사 룰셋이 걸려 있어 직접 push하지 않고 PR로 착지시킨다(.github/scripts/land-on-main.sh).

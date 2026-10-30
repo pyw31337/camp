@@ -479,6 +479,12 @@ jobs:
           node pipeline/scripts/apply-public-nearby.mjs
           # 카카오 다음 소셜 검색(영상·후기·사진)을 고캠핑 밖 장소(휴양림·지자체·OSM)에도 채운다 — 상세 SNS 영상 칸(2026-10-23). 내용 판정보다 먼저.
           node pipeline/scripts/merge-collected.mjs --social pipeline/out/campground-social.json
+          # 파생 정보 2차 계산(2026-10-30): 위 1차 계산은 고캠핑 기준 3,124곳에만 돌고, 당일 장소·휴양림·OSM 등은 그 뒤에 붙어
+          # 입실·사이트 타입 같은 파생 값이 비었다 → coverage-guard가 10-28부터 발행을 막음(checkin 2775→2525, site_types 3433→3004).
+          # 장소를 모두 붙이고 소셜까지 채운 뒤 증분 발행(publish-incremental.sh)과 같은 순서로 한 번 더 계산한다.
+          for s in survey-all-campgrounds build-operator-facts build-spec-sheet build-review-digest build-nearby-facts build-nearby-photos build-thankq-facts build-campground-profiles build-site-pricing-facts build-site-types build-price-tiers build-house-rules build-gocamping-detail apply-dayuse-seed build-public-leisure apply-public-nearby; do
+            node "pipeline/scripts/$s.mjs" > /dev/null
+          done
           # 카카오 후기 썸네일(registry/review-thumbs.json)을 비어 있는 글에만 채운다
           node pipeline/scripts/apply-review-thumbs.mjs
           # 후기 사진 내용 판정(registry/photo-judgments.json) → 걸러진 사진에 ng 표시(화면 갤러리·대표에서 숨김)
@@ -510,6 +516,8 @@ jobs:
           node pipeline/scripts/quality-ledger.mjs
           # 업장 정보량 점수(lib/info-score.mjs, 0~100) → 카탈로그 c.iq. 목록·추천의 기본 순서(정보가 많은 업장 먼저).
           node pipeline/scripts/apply-info-score.mjs
+          # 수집 현황판(/admin/collect/): 수집처·카테고리별 누적·일별·신선도·목표 대비·품질 → camping-atlas/public/data/collect-*.json
+          node pipeline/scripts/build-collect-stats.mjs || echo "::warning::수집 현황 통계 생성 실패(발행은 계속)"
           # PR은 생성만 검사한다. main은 catalog·explorer를 원자적으로 갱신한다.
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             echo "PR에서는 공개 생성물을 커밋하지 않습니다."; exit 0
