@@ -1919,6 +1919,10 @@ const HERO_THEMES = [
   }
 ];
 
+// 히어로 테마는 접속(브라우저 탭 세션)마다 10개 중 1개를 무작위로 골라 그 접속 동안 고정한다(롤링 없음).
+// 다음 접속에는 직전 접속과 다른 테마를 고른다. ?hero=<id>는 테마 확인용으로 그대로 둔다.
+const HERO_VISIT_KEY = "mc-hero-visit", HERO_LAST_KEY = "mc-hero-last";
+let heroVisitIndex = null;
 function getInitialHeroIndex() {
   const p = new URLSearchParams(location.search);
   const heroParam = p.get("hero");
@@ -1926,7 +1930,19 @@ function getInitialHeroIndex() {
     const idx = HERO_THEMES.findIndex((t) => t.id === heroParam || t.shortName === heroParam);
     if (idx !== -1) return idx;
   }
-  return Math.floor(Math.random() * HERO_THEMES.length);
+  if (heroVisitIndex != null) return heroVisitIndex;
+  const byId = (id) => HERO_THEMES.findIndex((t) => t.id === id);
+  let idx = -1;
+  try { idx = byId(sessionStorage.getItem(HERO_VISIT_KEY)); } catch {}
+  if (idx === -1) {
+    let last = -1;
+    try { last = byId(localStorage.getItem(HERO_LAST_KEY)); } catch {}
+    idx = Math.floor(Math.random() * (HERO_THEMES.length - (last === -1 ? 0 : 1)));
+    if (last !== -1 && idx >= last) idx++;
+    try { sessionStorage.setItem(HERO_VISIT_KEY, HERO_THEMES[idx].id); localStorage.setItem(HERO_LAST_KEY, HERO_THEMES[idx].id); } catch {}
+  }
+  heroVisitIndex = idx;
+  return idx;
 }
 
 // Canvas 인터랙션 엔진
@@ -3686,27 +3702,6 @@ function bindList() {
 
 // ── 화면: 테마 모음 ───────────────────────────────────────────
 function themesView() {
-  const heroCards = HERO_THEMES.map((t) => {
-    return `<div class="hero-theme-card">
-      <a class="ht-media" href="${APP_BASE}?hero=${encodeURIComponent(t.id)}" title="${esc(t.shortName)} 메인화면으로 보기">
-        <img src="${ASSETS_BASE}images/hero/${t.image}" alt="${esc(t.shortName)}" loading="lazy" draggable="false">
-        <span class="ht-badge">${t.emoji} ${esc(t.badge)}</span>
-        <span class="ht-hover-cta">메인화면으로 적용 ↗</span>
-      </a>
-      <div class="ht-body">
-        <div class="ht-head">
-          <h3 class="ht-title"><a href="${APP_BASE}?hero=${encodeURIComponent(t.id)}">${t.emoji} ${esc(t.shortName)}</a></h3>
-          <span class="ht-fx-tag">${esc(t.moodDescription)}</span>
-        </div>
-        <p class="ht-desc">${esc(t.summary)}</p>
-        <div class="ht-foot">
-          <span class="ht-copy">${esc(t.titleA)} ${esc(t.titleB)}</span>
-          <a class="ht-btn" href="${APP_BASE}?hero=${encodeURIComponent(t.id)}">적용하기 →</a>
-        </div>
-      </div>
-    </div>`;
-  }).join("");
-
   const cards = THEMES.map(([key, label, test]) => {
     const closed = key === "WATER_PLAY";
     return `<a class="theme-card${closed ? " is-closed" : ""}" href="${APP_BASE}theme/${encodeURIComponent(key)}" draggable="false">
@@ -3717,17 +3712,6 @@ function themesView() {
   }).join("");
 
   return `<section class="themes-page">
-    <section class="hero-themes-collection shell" id="hero-themes">
-      <header class="hero-themes-head">
-        <div class="hth-lead">
-          <span class="hth-pill">✨ 감성 인터랙션 &amp; 무드 컬렉션</span>
-          <h2>메인화면 10대 감성 <em>히어로 테마</em></h2>
-          <p class="sec-sub">시간과 날씨에 따라 살아 숨쉬는 10가지 자연의 감성. 카드를 클릭하면 해당 테마의 인터랙티브 메인화면을 바로 감상하실 수 있습니다.</p>
-        </div>
-      </header>
-      <div class="hero-themes-grid">${heroCards}</div>
-    </section>
-
     <header class="themes-head shell">
       <h1>캠핑 테마별 <em>캠핑장 찾기</em></h1>
       <p class="sec-sub">원하는 캠핑 스타일과 분위기부터 골라보세요.</p>
@@ -5924,7 +5908,7 @@ function renderCardCmtInner(id, cmts = [], isOpen = false) {
   const cmtsHtml = visibleList.map((x) => {
     const initial = esc((x.nickname || "캠").trim().charAt(0) || "캠");
     return `<li class="c-cmt-item" data-cmt-id="${esc(x.id)}">
-      <div class="c-cmt-avatar">${initial}</div>
+      <div class="c-cmt-avatar" style="--comment-color:${savedCommentColor(x.nickname)}">${initial}</div>
       <div class="c-cmt-main">
         <div class="c-cmt-meta">
           <div class="c-cmt-meta-left">
@@ -5973,14 +5957,10 @@ function renderCardCmtInner(id, cmts = [], isOpen = false) {
       ${anchorHtml}
       <form class="c-cmt-form" data-card-cmt-form="${esc(id)}"${isWriteOpen ? "" : ' style="display:none;"'}>
         <div class="c-cmt-nick-row">
-          <div class="c-cmt-avatar" data-cmt-form-avatar="${esc(id)}">${myInitial}</div>
+          <div class="c-cmt-avatar" data-cmt-form-avatar="${esc(id)}" style="--comment-color:${savedCommentColor(myNick)}">${myInitial}</div>
           <input type="text" name="nickname" class="c-cmt-nick-input" placeholder="닉네임" maxlength="20" value="${esc(myNick)}" required aria-label="닉네임">
         </div>
-        <div class="comment-editor"><textarea name="content" class="c-cmt-textarea" placeholder="현장 팁이나 메모를 남겨보세요 (이미지는 Ctrl+V)" maxlength="500" rows="1" required aria-label="댓글 내용"></textarea><div class="comment-image-tools"><button type="button" class="comment-image-trigger" data-comment-image-trigger>사진 붙이기</button><input type="file" accept="image/*" data-comment-image-input hidden><span class="comment-image-hint">화면을 캡처한 뒤 Ctrl+V</span></div><div class="comment-image-preview" data-comment-image-preview hidden></div></div>
-        <div class="c-cmt-form-actions">
-          <button type="button" class="c-cmt-btn c-cmt-btn-cancel" data-cmt-cancel="${esc(id)}">취소</button>
-          <button type="submit" class="c-cmt-btn c-cmt-btn-submit">저장</button>
-        </div>
+        <div class="comment-editor"><textarea name="content" class="c-cmt-textarea" placeholder="현장 팁이나 메모를 남겨보세요" maxlength="500" rows="1" required aria-label="댓글 내용"></textarea><div class="comment-image-preview" data-comment-image-preview hidden></div><div class="comment-image-tools"><button type="button" class="comment-image-trigger" data-comment-image-trigger>사진 붙이기</button><input type="file" accept="image/*" data-comment-image-input hidden><div class="comment-actions c-cmt-form-actions"><button type="button" class="c-cmt-btn c-cmt-btn-cancel" data-cmt-cancel="${esc(id)}">취소</button><button type="submit" class="c-cmt-btn c-cmt-btn-submit">저장</button></div></div></div>
       </form>
     </div>
   `;
@@ -6246,6 +6226,7 @@ function bindCardCommentEvents() {
     const avatar = form.querySelector("[data-cmt-form-avatar]");
     if (avatar) {
       avatar.textContent = (input.value.trim().charAt(0) || "캠");
+      avatar.style.setProperty("--comment-color", savedCommentColor(input.value));
     }
   });
 }
@@ -6261,7 +6242,7 @@ function commentsHtml(c) {
   if (!SB.url || !/^\d+$/.test(String(c.id))) return "";
   const profile = typeof savedCommentProfile === "function" ? savedCommentProfile() : { nickname: store.get("mc-cmt-nick", "") };
   return `<section class="d-sec" id="cmt"><div class="sec-head">${iconTitle("chat-bubble", "댓글")}</div>
-    <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" value="${esc(profile.nickname || store.get("mc-cmt-nick", ""))}" placeholder="닉네임" required aria-label="닉네임" autocomplete="nickname"><div class="comment-editor"><textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁 (이미지는 Ctrl+V)" required aria-label="내용"></textarea><div class="comment-image-tools"><button type="button" class="comment-image-trigger" data-comment-image-trigger>사진 붙이기</button><input type="file" accept="image/*" data-comment-image-input hidden><span class="comment-image-hint">화면을 캡처한 뒤 Ctrl+V</span></div><div class="comment-image-preview" data-comment-image-preview hidden></div></div><button class="btn primary" type="submit">남기기</button></form>
+    <form class="cmt-form" data-cmt="${esc(c.id)}"><input name="nickname" maxlength="20" value="${esc(profile.nickname || store.get("mc-cmt-nick", ""))}" placeholder="닉네임" required aria-label="닉네임" autocomplete="nickname"><div class="comment-editor"><textarea name="content" maxlength="500" rows="1" placeholder="다녀온 소식, 현장 팁" required aria-label="내용"></textarea><div class="comment-image-preview" data-comment-image-preview hidden></div><div class="comment-image-tools"><button type="button" class="comment-image-trigger" data-comment-image-trigger>사진 붙이기</button><input type="file" accept="image/*" data-comment-image-input hidden><div class="comment-actions"><button class="btn primary" type="submit">남기기</button></div></div></div></form>
     <ul class="cmts" data-cmts><li class="muted">불러오는 중…</li></ul></section>`;
 }
 
@@ -6458,14 +6439,15 @@ function bindCommentVideo(root) {
 // 서버 댓글 테이블을 재사용하고, 연결이 안 될 때는 해당 브라우저의 임시 보관함으로 안전하게 대체한다.
 const SAVED_COMMENT_NAME_KEY = "mc-saved-comment-name";
 const SAVED_COMMENT_COLOR_KEY = "mc-saved-comment-color";
-const SAVED_COMMENT_COLORS = ["#008f68", "#5d5bd6", "#e05252", "#087fa8", "#b47719"];
+// 작성자 이름별 퍼스널컬러 — 이름으로 정해져 어느 화면(카드·찜·상세 댓글)에서나 같은 사람은 같은 색이다.
+const SAVED_COMMENT_COLORS = ["#008f68", "#5d5bd6", "#e05252", "#087fa8", "#b47719", "#c2185b", "#6d4c41", "#2e7d32", "#7b1fa2", "#00838f", "#d84315", "#3949ab"];
 function savedCommentProfile() {
   const nickname = String(store.get(SAVED_COMMENT_NAME_KEY, "") || "").trim();
   const color = String(store.get(SAVED_COMMENT_COLOR_KEY, "") || "");
   return { nickname, color: SAVED_COMMENT_COLORS.includes(color) ? color : SAVED_COMMENT_COLORS[0] };
 }
 function savedCommentColor(name) {
-  const text = String(name || "");
+  const text = String(name || "").trim();
   let hash = 0;
   for (const ch of text) hash = (hash * 31 + ch.codePointAt(0)) >>> 0;
   return SAVED_COMMENT_COLORS[hash % SAVED_COMMENT_COLORS.length];
@@ -6495,8 +6477,7 @@ function savedCommentsHtml(c) {
     <div class="saved-comments-panel" data-saved-comments-panel hidden>
       <form class="saved-comment-form" data-saved-comment-form>
         <div class="saved-comment-author"><span class="saved-comment-avatar" data-saved-comment-avatar style="--comment-color:${p.color}" aria-hidden="true">${esc(savedCommentInitial(p.nickname))}</span><input name="nickname" maxlength="20" value="${esc(p.nickname)}" placeholder="작성자 이름" required aria-label="작성자 이름" autocomplete="nickname"></div>
-        <div class="comment-editor"><textarea name="content" maxlength="500" rows="1" placeholder="현장 팁이나 메모를 남겨보세요 (이미지는 Ctrl+V)" required aria-label="댓글"></textarea><div class="comment-image-tools"><button type="button" class="comment-image-trigger" data-comment-image-trigger>사진 붙이기</button><input type="file" accept="image/*" data-comment-image-input hidden><span class="comment-image-hint">화면을 캡처한 뒤 Ctrl+V</span></div><div class="comment-image-preview" data-comment-image-preview hidden></div></div>
-        <div class="saved-comment-actions"><button type="button" class="btn ghost btn-sm" data-saved-comment-cancel>취소</button><button type="submit" class="btn primary btn-sm">저장</button></div>
+        <div class="comment-editor"><textarea name="content" maxlength="500" rows="1" placeholder="현장 팁이나 메모를 남겨보세요" required aria-label="댓글"></textarea><div class="comment-image-preview" data-comment-image-preview hidden></div><div class="comment-image-tools"><button type="button" class="comment-image-trigger" data-comment-image-trigger>사진 붙이기</button><input type="file" accept="image/*" data-comment-image-input hidden><div class="comment-actions saved-comment-actions"><button type="button" class="btn ghost btn-sm" data-saved-comment-cancel>취소</button><button type="submit" class="btn primary btn-sm">저장</button></div></div></div>
       </form>
     </div>
   </div>`;
@@ -6637,7 +6618,7 @@ async function loadComments(id) {
     updateSingleCardCommentDom(String(id));
     const formatFn = typeof formatKoreanDateTime === "function" ? formatKoreanDateTime : formatKoreanDate;
     const bodyFn = typeof commentContentHtml === "function" ? commentContentHtml : formatCommentContent;
-    box.innerHTML = list.length ? list.map((x) => `<li><b>${esc(x.nickname)}</b><i>${esc(formatFn(x.created_at))}</i><div class="cmt-content-body">${bodyFn(x.content)}${commentAttachmentHtml(x)}</div></li>`).join("") : `<li class="muted">첫 한마디를 남겨 주세요.</li>`;
+    box.innerHTML = list.length ? list.map((x) => `<li><b style="--comment-color:${savedCommentColor(x.nickname)}">${esc(x.nickname)}</b><i>${esc(formatFn(x.created_at))}</i><div class="cmt-content-body">${bodyFn(x.content)}${commentAttachmentHtml(x)}</div></li>`).join("") : `<li class="muted">첫 한마디를 남겨 주세요.</li>`;
   } catch { box.innerHTML = `<li class="muted">지금은 불러오지 못했어요.</li>`; }
 }
 // ── 주간 날씨 예보 & 일자별 상세 모달 (모여라 캘린더 동일 구조) ──────
