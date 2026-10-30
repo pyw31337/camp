@@ -1919,10 +1919,8 @@ const HERO_THEMES = [
   }
 ];
 
-// 히어로 테마는 접속(브라우저 탭 세션)마다 10개 중 1개를 무작위로 골라 그 접속 동안 고정한다(롤링 없음).
-// 다음 접속에는 직전 접속과 다른 테마를 고른다. ?hero=<id>는 테마 확인용으로 그대로 둔다.
-const HERO_VISIT_KEY = "mc-hero-visit", HERO_LAST_KEY = "mc-hero-last";
-let heroVisitIndex = null;
+// 히어로 테마는 홈을 새로 열거나 새로고침할 때마다 10개 중 1개를 다시 무작위로 고른다.
+// 브라우저 저장소에 선택값을 남기지 않아 한 테마가 고정되지 않는다. ?hero=<id>는 테스트용으로 유지한다.
 function getInitialHeroIndex() {
   const p = new URLSearchParams(location.search);
   const heroParam = p.get("hero");
@@ -1930,19 +1928,14 @@ function getInitialHeroIndex() {
     const idx = HERO_THEMES.findIndex((t) => t.id === heroParam || t.shortName === heroParam);
     if (idx !== -1) return idx;
   }
-  if (heroVisitIndex != null) return heroVisitIndex;
-  const byId = (id) => HERO_THEMES.findIndex((t) => t.id === id);
-  let idx = -1;
-  try { idx = byId(sessionStorage.getItem(HERO_VISIT_KEY)); } catch {}
-  if (idx === -1) {
-    let last = -1;
-    try { last = byId(localStorage.getItem(HERO_LAST_KEY)); } catch {}
-    idx = Math.floor(Math.random() * (HERO_THEMES.length - (last === -1 ? 0 : 1)));
-    if (last !== -1 && idx >= last) idx++;
-    try { sessionStorage.setItem(HERO_VISIT_KEY, HERO_THEMES[idx].id); localStorage.setItem(HERO_LAST_KEY, HERO_THEMES[idx].id); } catch {}
+  if (!HERO_THEMES.length) return 0;
+  try {
+    const seed = new Uint32Array(1);
+    crypto.getRandomValues(seed);
+    return seed[0] % HERO_THEMES.length;
+  } catch {
+    return Math.floor(Math.random() * HERO_THEMES.length);
   }
-  heroVisitIndex = idx;
-  return idx;
 }
 
 // Canvas 인터랙션 엔진
