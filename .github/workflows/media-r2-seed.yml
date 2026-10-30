@@ -1,0 +1,54 @@
+name: Media to R2
+
+# media 브랜치의 공식 사진(webp)을 Cloudflare R2로 올린다(2026-10-30 소유자 결정 ⓒ).
+# 배포는 R2_PUBLIC_BASE가 설정되면 사진을 R2에서 표본 확인하므로, R2가 비어 있으면 배포가 멈춘다.
+# 정기 수집(data-sync)이 실패해 사진 올리기 단계까지 못 가도 이 워크플로만으로 R2를 채우고 배포를 다시 돌린다.
+# 지우지 않는다(sync, --delete 없음). media 브랜치도 건드리지 않는다(사진 파일 빼기는 data-sync가 확인 뒤에 한다).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/media-r2-seed.yml"
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: media-r2-seed
+  cancel-in-progress: false
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      R2_BUCKET: ${{ vars.R2_BUCKET }}
+      R2_PUBLIC_BASE: ${{ vars.R2_PUBLIC_BASE }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check R2 settings
+        run: |
+          if ! bash .github/scripts/media-r2.sh on; then echo "::error::R2 설정(Secrets R2_ACCOUNT_ID·R2_ACCESS_KEY_ID·R2_SECRET_ACCESS_KEY, Variables R2_BUCKET·R2_PUBLIC_BASE)이 다 있지 않습니다."; exit 1; fi
+      - name: Check out the media branch
+        run: |
+          git fetch --depth=1 origin +media:refs/remotes/origin/media
+          git worktree add "$RUNNER_TEMP/media" origin/media
+          echo "로컬 사진 $(find "$RUNNER_TEMP/media" -name '*.webp' | wc -l)장"
+      - name: Upload photos to R2 (no delete) and verify every local photo is there
+        run: bash .github/scripts/media-r2.sh push "$RUNNER_TEMP/media"
+      - name: Sample public URLs
+        run: |
+          base="${R2_PUBLIC_BASE%/}"
+          fails=0
+          for f in $(cd "$RUNNER_TEMP/media" && find camps cards -name '*.webp' 2>/dev/null | shuf -n 10); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$base/$f"); echo "$code $f"; [ "$code" = 200 ] || fails=$((fails+1))
+          done
+          [ "$fails" -le 1 ] || { echo "::error::공개 주소에서 사진이 열리지 않습니다($fails/10). R2 버킷 Settings → Public access(r2.dev) 켜짐과 R2_PUBLIC_BASE 값을 확인하세요."; exit 1; }
+      - name: Redeploy the site
+        run: gh workflow run deploy-pages.yml --ref main
