@@ -714,9 +714,9 @@
     "with_no_tags": 2193,
     "with_notices": 163
   },
-  "updated_at": "2026-10-30T01:44:29.641Z",
+  "updated_at": "2026-10-30T09:26:47.720Z",
   "operator_site_facts": {
-    "generated_at": "2026-10-30T01:44:30.061Z",
+    "generated_at": "2026-10-30T09:26:48.378Z",
     "campgrounds": 196,
     "w": 56,
     "pk": 56,
@@ -729,9 +729,9 @@
     "sites_read": 888
   },
   "spec_sheet": {
-    "generated_at": "2026-10-30T01:44:30.342Z",
-    "campgrounds_with_spec": 3154,
-    "roundup_reviews_skipped": 8509,
+    "generated_at": "2026-10-30T09:26:48.701Z",
+    "campgrounds_with_spec": 3157,
+    "roundup_reviews_skipped": 8511,
     "fields": {
       "CHECKIN_TIME": {
         "official": 765,
@@ -808,20 +808,20 @@
     }
   },
   "review_digest": {
-    "generated_at": "2026-10-30T01:44:45.411Z",
-    "campgrounds": 4069,
-    "with_pros": 3569,
+    "generated_at": "2026-10-30T09:27:09.350Z",
+    "campgrounds": 4077,
+    "with_pros": 3574,
     "with_cons": 1041,
     "reviews": 74808,
     "sanity_dropped": 1149
   },
   "nearby_licensed": {
-    "generated_at": "2026-10-30T01:44:48.691Z",
+    "generated_at": "2026-10-30T09:27:13.804Z",
     "campgrounds": 6410,
     "details": 6410
   },
   "profiles": {
-    "generated_at": "2026-10-30T01:44:52.855Z",
+    "generated_at": "2026-10-30T09:27:20.238Z",
     "total": 6416,
     "fields": {
       "TYPE": {
@@ -841,7 +841,7 @@
         "facts": 354
       },
       "PRICE": {
-        "any": 2691,
+        "any": 2693,
         "facts": 508
       },
       "EXTRA_FEE": {
@@ -929,18 +929,18 @@
       "14-18": 119
     },
     "price": {
-      "published": 2652,
+      "published": 2654,
       "operator": 508,
-      "mention": 2144
+      "mention": 2146
     }
   },
   "coverage": {
-    "measured_at": "2026-10-30T01:45:42.134Z",
+    "measured_at": "2026-10-30T09:28:40.933Z",
     "total": 6416,
     "goal": 2500,
     "fields": {
       "price": {
-        "any": 2892,
+        "any": 2894,
         "confirmed": 629
       },
       "checkin": {
@@ -980,7 +980,7 @@
         "confirmed": 0
       },
       "rich5": {
-        "any": 2239,
+        "any": 2240,
         "confirmed": 0
       }
     }

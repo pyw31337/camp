@@ -181,7 +181,7 @@
     "campgrounds": 3429,
     "by_grade": {
      "CONFIRMED": 5781,
-     "MENTION": 5047,
+     "MENTION": 5046,
      "OPERATOR": 1080
     }
    }
@@ -2208,9 +2208,9 @@
    "review_label": "반려견 동반 편함",
    "pref": "‘반려견 동반 편함’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 1161,
+    "campgrounds": 1160,
     "by_grade": {
-     "MENTION": 1161
+     "MENTION": 1160
     }
    }
   },
@@ -2655,5 +2655,5 @@
    }
   }
  ],
- "generated_at": "2026-10-30T01:45:42.565Z"
+ "generated_at": "2026-10-30T09:28:41.609Z"
 }
