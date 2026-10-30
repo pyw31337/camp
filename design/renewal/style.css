@@ -4287,3 +4287,32 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
 }
 .tel-src { margin-left: 4px; padding: 1px 6px; border-radius: 6px; background: var(--soft); color: var(--ink-3); font-size: var(--fs-min); font-weight: 700; white-space: nowrap; }
+/* 썸네일 없는 원본 사진은 받지 않고 비운다(app.js error 캡처) — 깨진 그림 아이콘 대신 바탕색만 */
+img.img-gone { visibility: hidden; }
+/* 상세 보조 섹션 접기(app.js foldLongSections) */
+.d-sec.is-folded { max-height: 420px; overflow: hidden; position: relative; }
+.d-sec.is-folded::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 96px; background: linear-gradient(180deg, transparent, var(--bg)); pointer-events: none; }
+.d-sec .fold-more { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); z-index: 2; display: inline-flex; align-items: center; gap: 4px; min-height: var(--tap); padding: 0 18px; border: 0; border-radius: 999px; background: var(--ink); color: #fff; font: inherit; font-size: .85rem; font-weight: 800; cursor: pointer; box-shadow: 0 4px 14px rgba(16,20,20,.18); }
+.d-sec .fold-more .ic { width: 16px; height: 16px; }
+/* 출발지·이동 시간 칩 */
+.drive-chips .chip-sep { flex: none; width: 1px; height: 22px; align-self: center; margin: 0 4px; background: var(--line); }
+.drive-chips .chip:disabled { opacity: .4; }
+.drive-chips .chip .ic { width: 14px; height: 14px; }
+/* 찜한 곳 예약 오픈 알림 */
+.open-alerts { margin: 4px 0 20px; padding: 16px; border-radius: 18px; background: var(--paper); box-shadow: 0 0 0 1px var(--line); }
+.open-alerts h2 { display: flex; align-items: center; gap: 6px; margin: 0 0 10px; font-size: 1.05rem; font-weight: 900; }
+.open-alerts h2 .ic { width: 18px; height: 18px; color: var(--accent); }
+.open-alerts h2 i { font-style: normal; font-size: .8rem; padding: 1px 8px; border-radius: 999px; background: var(--accent-tint); color: var(--accent); }
+.open-alerts ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.open-alerts li { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; background: var(--soft); }
+.open-alerts li a { display: grid; gap: 2px; min-width: 0; color: inherit; text-decoration: none; }
+.open-alerts li b { font-weight: 800; overflow-wrap: anywhere; }
+.open-alerts li span { font-size: .78rem; color: var(--ink-2); overflow-wrap: anywhere; }
+.open-alerts li em { font-style: normal; font-weight: 900; font-size: .8rem; color: var(--ink-2); white-space: nowrap; }
+.open-alerts li em.soon { color: var(--no); }
+.open-alerts .oa-foot { margin-top: 10px; display: flex; justify-content: flex-end; }
+.open-alerts .oa-note { margin: 10px 0 0; font-size: .78rem; color: var(--ink-3); line-height: 1.5; }
+@media (max-width: 359px) { .open-alerts li { grid-template-columns: minmax(0, 1fr) auto; } .open-alerts li .chip { grid-column: 1 / -1; justify-self: start; } }
+/* 운영자 확인 배지(operator-verified.json) */
+.op-verified { display: inline-flex; align-items: center; gap: 3px; margin-top: 6px; padding: 3px 10px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-size: .75rem; font-weight: 800; }
+.op-verified .ic { width: 13px; height: 13px; }

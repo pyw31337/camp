@@ -1,5 +1,17 @@
 # 인수인계
 
+## 📌 서비스 분석 후속 7가지: 경량화·상세 재배치·메인 축소·출발지 이동시간·익명 지표·예약 오픈 알림·내리기 요청 (2026-10-31, Claude)
+
+- **사진 경량화**: `photosAll`은 우리 사본(media → R2 webp)을 먼저 쓴다. 고캠핑 썸네일이 404여도 **원본(최대 11MB)으로 바꾸지 않는다**. 그 사진은 DEAD에 넣고 칸만 비운다(`img-gone`).
+- **상세 순서**: 사이트 → 요금 → 예약 방법 → 이용 정보 → 편의·위생 → 규칙 → (후기·영상·주변…). 긴 보조 섹션은 `foldLongSections`로 420px까지만 보이고 ‘펼쳐 보기’로 연다.
+- **메인 테마 줄**: 6줄만 먼저 보인다. 나머지는 `[data-rows-more]`로 펼친다. perf-budget 테스트는 펼친 뒤 빈 줄을 검사한다. app.js·css 예산은 600KB·280KB로 올렸다.
+- **출발지 이동시간(내비 기준)**: 직선거리는 쓰지 않는다(소유자: 밀집 지역은 훨씬 오래 걸림). `sync-drive-times.mjs`(drive-times.yml, 매일 08:37 KST)가 카카오내비 자동차 길찾기(추천 경로)로 출발 도시 8곳 → 캠핑장 시간을 실행당 8,000건(무료 일 10,000건)씩 모은다. 처음 다 채우는 데 약 4일, 이후 30일마다 다시 묻는다. 결과는 `registry/drive-times.json`과 `explore/data/drive-times.json`(분 배열). 화면 `driveMin(c)`는 이 파일만 쓰고, 시간을 모르는 곳은 ‘N시간 안’에서 뺀다. 도시 순서는 스크립트 HUBS와 app.js ORIGINS를 같이 바꿀 것.
+- **익명 지표**: `db/026_event_log.sql`(쓰기만 공개)과 `logEvent()`. 기록하는 일: visit·search·search_zero·detail·booking_click·call_click·save·today_swipe. 아침 브리핑 메일이 DATABASE_URL로 24시간 집계를 넣는다.
+- **예약 오픈 알림**: 캠핏·네이버 빈자리는 제휴 없이 불가(로그인·약관). 대신 openings.json의 예약 오픈 일시를 쓴다. 찜 화면 `openAlertsHtml`, .ics 캘린더(10분·1시간 전 알림), 3일 안이면 홈에서 하루 한 번 안내한다.
+- **내리기 요청**: 상세 운영자 칸 `operator/form.js`의 `takedownHtml`. `operator_submission`에 kind TAKEDOWN으로 넣는다(db/027). 소유자가 APPROVED로 바꾸면 `export-operator-submissions.mjs`가 `explore/data/takedowns.json`을 만들고, 화면이 그 사진·글을 뺀다.
+- **운영자 확인 배지**: 승인된 운영자 등록이 있는 캠핑장은 `explore/data/operator-verified.json`에 들어가고, 상세 제목 아래에 ‘운영자 확인’을 보인다.
+- **브랜드 표기**: “렛츠 캠핑”(띄어쓰기)으로 통일한다.
+
 ## 📌 메인 ‘오늘의 캠핑장’ 덱 · 진열 일별 회전 · 히어로 320px · 찜 비교 20곳 · 아침 브리핑 메일 (2026-10-31, Claude)
 
 - **오늘의 캠핑장**(`todaySection`·`initTodayDeck`, app.js): 정보량 상위 100곳 중 날짜 씨앗으로 5곳을 고른다. 카드덱은 뉴스보드(pyw31337/news `assets/deck.js`)의 스프링 물리를 그대로 옮겼다. 클래스는 `td-*`.

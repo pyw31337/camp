@@ -7,6 +7,11 @@ import { publicItem } from "../lib/operator-form.mjs";
 
 const out = fileURLToPath(new URL("../registry/operator-submissions.json", import.meta.url));
 if (!process.env.DATABASE_URL) { console.log("DATABASE_URL 없음 — 건너뜀"); process.exit(0); }
+function writeIfChanged(path, body) {
+  const prev = existsSync(path) ? readFileSync(path, "utf8") : "";
+  const next = `${JSON.stringify(body)}\n`;
+  if (prev !== next) { writeFileSync(path, next); console.log(`갱신 → ${path}`); }
+}
 const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL, ssl: process.env.DATABASE_SSL === "true" ? { rejectUnauthorized: false } : undefined });
 try {
   const exists = await pool.query("SELECT to_regclass('public.operator_submission') AS t");
@@ -20,5 +25,13 @@ try {
     writeFileSync(out, `${JSON.stringify({ generated_at: new Date().toISOString(), note: "운영자 셀프 등록 중 소유자가 승인한 것(연락처 제외). export-operator-submissions.mjs가 만든다.", items }, null, 1)}\n`);
     console.log(`승인 ${items.length}건 → ${out}`);
   }
+  // 공개 파일 2개(화면이 읽는다, 연락처·이름 없음):
+  // - takedowns.json: 승인된 내리기 요청(kind TAKEDOWN)의 대상 주소 → 화면에서 그 사진·글을 뺀다(db/027).
+  // - operator-verified.json: 운영자가 직접 등록해 승인된 캠핑장 id → ‘운영자 확인’ 배지.
+  const pub = fileURLToPath(new URL("../../camping-atlas/public/explore/data/", import.meta.url));
+  const td = await pool.query("SELECT campground_id, fields->>'TARGET_URL' AS url, reviewed_at FROM public.operator_submission WHERE status = 'APPROVED' AND kind = 'TAKEDOWN' ORDER BY id");
+  const tdItems = td.rows.filter((r) => /^https?:\/\//.test(r.url ?? "")).map((r) => ({ cid: String(r.campground_id), url: r.url, at: new Date(r.reviewed_at ?? Date.now()).toISOString().slice(0, 10) }));
+  writeIfChanged(`${pub}takedowns.json`, { note: "권리자 요청으로 내린 사진·글 주소(소유자 승인분). export-operator-submissions.mjs", items: tdItems });
+  writeIfChanged(`${pub}operator-verified.json`, { note: "운영자가 직접 등록해 승인된 캠핑장. export-operator-submissions.mjs", cids: [...new Set(items.map((it) => it.cid))].sort() });
   console.log(`제출 현황: ${counts.rows.map((r) => `${r.status}/${r.kind} ${r.n}`).join(", ") || "없음"}`);
 } finally { await pool.end(); }
