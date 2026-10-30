@@ -1886,11 +1886,11 @@ const HERO_THEMES = [
     emoji: "🌅",
     shortName: "서해안 노을",
     badge: "붉은 석양의 감동",
-    moodDescription: "서해안 갯벌 일몰 & 노을 해변",
+    moodDescription: "서해안 태안 바다 일몰 & 노을 해변",
     image: "hero-sunset-coast.webp",
     titleA: "붉은 노을이 내려앉은 바다,",
     titleB: "서해안 황금빛 노을 해변 캠핑.",
-    summary: "황금빛으로 물드는 갯벌 지평선과 철썩이는 파도 소리",
+    summary: "황금빛으로 물드는 바다 수평선과 잔잔히 반짝이는 파도 소리",
     effect: "sunset-coast"
   },
   {
@@ -2212,14 +2212,14 @@ class HeroCanvasController {
         break;
 
       case "sunset-coast":
-        // 42개 수평 반사광 + 20개 노을 대기 미립자 + 3마리 갈매기 실루엣
+        // 42개 수평 반사광 (해수면 황금빛 윤슬) + 20개 노을 대기 미립자 + 4마리 선명한 갈매기 실루엣
         for (let i = 0; i < 42; i++) {
           this.particles.push({
-            x: Math.random() * w,
-            y: h * 0.50 + Math.random() * (h * 0.50),
+            x: w * 0.35 + Math.random() * (w * 0.65),
+            y: h * 0.46 + Math.random() * (h * 0.36),
             vx: -Math.random() * 0.22 - 0.06,
-            len: Math.random() * 34 + 16,
-            alpha: Math.random() * 0.45 + 0.25,
+            len: Math.random() * 32 + 16,
+            alpha: Math.random() * 0.5 + 0.3,
             pulse: Math.random() * Math.PI * 2,
             pulseSpeed: Math.random() * 0.024 + 0.012
           });
@@ -2227,7 +2227,7 @@ class HeroCanvasController {
         for (let i = 0; i < 20; i++) {
           this.duskParticles.push({
             x: Math.random() * w,
-            y: Math.random() * (h * 0.6),
+            y: Math.random() * (h * 0.55),
             vx: (Math.random() - 0.5) * 0.15,
             vy: -Math.random() * 0.15 - 0.05,
             r: Math.random() * 1.8 + 0.8,
@@ -2236,9 +2236,10 @@ class HeroCanvasController {
           });
         }
         this.seagulls = [
-          { x: w * 0.18, y: h * 0.22, vx: 0.65, vy: -0.03, wingSpan: 14, wingPhase: 0, wingSpeed: 0.065 },
-          { x: w * 0.30, y: h * 0.18, vx: 0.75, vy: 0.02, wingSpan: 11, wingPhase: 1.6, wingSpeed: 0.075 },
-          { x: w * 0.10, y: h * 0.28, vx: 0.58, vy: 0.01, wingSpan: 9, wingPhase: 3.2, wingSpeed: 0.06 }
+          { x: w * 0.15, y: h * 0.20, vx: 0.72, vy: -0.02, wingSpan: 28, wingPhase: 0, wingSpeed: 0.055 },
+          { x: w * 0.28, y: h * 0.15, vx: 0.80, vy: 0.015, wingSpan: 22, wingPhase: 1.4, wingSpeed: 0.065 },
+          { x: w * 0.08, y: h * 0.26, vx: 0.65, vy: 0.01, wingSpan: 18, wingPhase: 2.8, wingSpeed: 0.05 },
+          { x: w * 0.38, y: h * 0.22, vx: 0.75, vy: -0.01, wingSpan: 15, wingPhase: 4.2, wingSpeed: 0.07 }
         ];
         break;
 
@@ -2885,17 +2886,44 @@ class HeroCanvasController {
       g.x += g.vx;
       g.y += g.vy;
       g.wingPhase += g.wingSpeed;
-      if (g.x > w + 50) g.x = -50;
+      if (g.x > w + 60) g.x = -60;
 
-      const wingY = Math.sin(g.wingPhase) * (g.wingSpan * 0.42);
-      ctx.strokeStyle = "rgba(40, 24, 18, 0.65)";
-      ctx.lineWidth = 1.5;
+      const ws = g.wingSpan;
+      const wingY = Math.sin(g.wingPhase) * (ws * 0.48);
+      const tipY = wingY > 0 ? wingY * 1.15 : wingY * 0.85;
+
+      ctx.save();
+      ctx.translate(g.x, g.y);
+
+      // 1. 역광 따스한 림 라이트 (외곽선 강조)
+      ctx.strokeStyle = "rgba(255, 205, 120, 0.45)";
+      ctx.lineWidth = 3.6;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
       ctx.beginPath();
-      ctx.moveTo(g.x, g.y);
-      ctx.quadraticCurveTo(g.x - g.wingSpan * 0.5, g.y + wingY - 2, g.x - g.wingSpan, g.y + wingY);
-      ctx.moveTo(g.x, g.y);
-      ctx.quadraticCurveTo(g.x + g.wingSpan * 0.5, g.y + wingY - 2, g.x + g.wingSpan, g.y + wingY);
+      ctx.moveTo(0, 0);
+      ctx.quadraticCurveTo(-ws * 0.45, wingY - 3, -ws, tipY);
+      ctx.moveTo(0, 0);
+      ctx.quadraticCurveTo(ws * 0.45, wingY - 3, ws, tipY);
       ctx.stroke();
+
+      // 2. 선명한 짙은 실루엣 날개
+      ctx.strokeStyle = "rgba(20, 10, 6, 0.94)";
+      ctx.lineWidth = 2.4;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.quadraticCurveTo(-ws * 0.45, wingY - 3, -ws, tipY);
+      ctx.moveTo(0, 0);
+      ctx.quadraticCurveTo(ws * 0.45, wingY - 3, ws, tipY);
+      ctx.stroke();
+
+      // 3. 중앙 몸통 & 머리 실루엣
+      ctx.fillStyle = "rgba(20, 10, 6, 0.94)";
+      ctx.beginPath();
+      ctx.ellipse(0, 1, ws * 0.12, ws * 0.24, Math.PI / 10, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
     }
     ctx.restore();
   }
