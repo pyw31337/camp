@@ -269,17 +269,17 @@ function build() {
     { id: "kakao-search", name: "카카오 Daum 검색(후기·카페·사진·영상)", how: "data-sync 매일 · 캠핑장당 7회 · 14일 순환", dates: socialDates },
     { id: "naver-search", name: "네이버 검색 API(블로그·카페·웹·지식iN)", how: "data-sync 매일 · 캠핑장당 7회 · 14일 순환", dates: webDates },
     { id: "youtube-v2", name: "YouTube 영상·숏츠(카카오 동영상 검색 v2)", how: "shorts-sync 매일 · 캠핑장당 3회 · 30일 순환", dates: [...stayIds].map((id) => shorts[id]?.fetched_at ?? null) },
-    { id: "kakao-places", name: "카카오 로컬(플레이스 매칭)", how: "플레이스 매칭", dates: [...stayIds].map((id) => kp[id]?.checked_at ?? null) },
-    { id: "naver-places", name: "네이버 지역 검색(플레이스 매칭)", how: "플레이스 매칭", dates: [...stayIds].map((id) => np[id]?.checked_at ?? null) },
-    { id: "operator-site", name: "운영자 홈페이지 크롤(robots 준수)", how: "운영자 사이트 문장·사진", dates: [...stayIds].map((id) => ops[id]?.checked_at ?? null) },
-    { id: "link-health", name: "링크 점검(404·DNS)", how: "link-check 주간", dates: Object.values(lh).map((x) => x?.at ?? null) },
-    { id: "booking-verify", name: "예약 링크 정밀 검수(업장 일치)", how: "link-check 주간", dates: Object.values(bv).map((x) => x?.at ?? null) },
+    { id: "kakao-places", name: "카카오 로컬(플레이스 매칭)", how: "operator-sites 주간 · 30일 지난 곳만", every: 7, dates: [...stayIds].map((id) => kp[id]?.checked_at ?? null) },
+    { id: "naver-places", name: "네이버 지역 검색(플레이스 매칭)", how: "operator-sites 주간 · 30일 지난 곳만", every: 7, dates: [...stayIds].map((id) => np[id]?.checked_at ?? null) },
+    { id: "operator-site", name: "운영자 홈페이지 크롤(robots 준수)", how: "operator-sites 주간 · 운영자 사이트 문장·사진", every: 7, dates: [...stayIds].map((id) => ops[id]?.checked_at ?? null) },
+    { id: "link-health", name: "링크 점검(404·DNS)", how: "link-check 주간(수)", every: 7, dates: Object.values(lh).map((x) => x?.at ?? null) },
+    { id: "booking-verify", name: "예약 링크 정밀 검수(업장 일치)", how: "link-check 주간(수)", every: 7, dates: Object.values(bv).map((x) => x?.at ?? null) },
     { id: "thankq", name: "땡큐캠핑 사이트·요금", how: "thankq 동기화", dates: Object.values(tq.sites ?? {}).map((x) => x?.checked_at ?? null) },
-    { id: "text-judge", name: "글 내용 판정(AI)", how: "content-judge", dates: Object.values(tj).map((x) => x?.at ?? null) },
-    { id: "photo-judge", name: "사진 내용 판정(AI, CLIP)", how: "content-judge", dates: Object.values(pj).map((x) => x?.at ?? null) },
-    { id: "nearby-photos", name: "주변 시설 사진", how: "nearby-photos", dates: Object.values(nphotos).map((x) => x?.at ?? null) },
+    { id: "text-judge", name: "글 내용 판정(AI)", how: "content-judge 매일(10-30까지 주간)", every: 1, dates: Object.values(tj).map((x) => x?.at ?? null) },
+    { id: "photo-judge", name: "사진 내용 판정(AI, CLIP)", how: "content-judge 매일(10-30까지 주간)", every: 1, dates: Object.values(pj).map((x) => x?.at ?? null) },
+    { id: "nearby-photos", name: "주변 시설 사진", how: "nearby-photos 주간(금)", every: 7, dates: Object.values(nphotos).map((x) => x?.at ?? null) },
     { id: "trending", name: "트렌드 글(인기 캠핑 글)", how: "trending 수집", dates: Object.values(trending).map((x) => x?.seen ?? null) },
-  ].map((s) => ({ id: s.id, name: s.name, how: s.how, ...freshness(s.dates, today) }));
+  ].map((s) => ({ id: s.id, name: s.name, how: s.how, every: s.every ?? 1, ...freshness(s.dates, today) }));
 
   // ── 품질·정합성 ──
   const q = read(P("data/quality/latest.json"), {});

@@ -1,5 +1,12 @@
 # 인수인계
 
+## 📌 글·사진 내용 판정 매일 · 현황판 주기 인식 · YouTube 검색 90곳 (2026-10-30, Claude)
+
+- 글·사진 판정(`judge-texts`·`judge-review-photos`)은 주간 link-check에서 빠져 **매일 도는 `content-judge.yml`**(08:43 KST)로 옮겼다. link-check에는 카드 대체 사진용 CLIP 설치만 남았다.
+- `build-collect-stats.mjs`의 수집처에 `every`(주기, 일)를 넣었다. 현황판은 주간 수집처가 마지막 실행 뒤 8일 안이면 ‘최근 멈춤’으로 보지 않는다. 새 수집처를 만들면 주기를 같이 적을 것.
+- shorts-sync의 YouTube Data API 검색은 하루 90곳(≈9,100단위, 무료 한도 10,000 안). 이 키를 다른 워크플로에서 쓰려면 이 상한을 줄일 것.
+- 진단 대응표: `docs/STRATEGY_FILL_THUMBS_TEXT.md` 6장.
+
 ## 📌 공식 사진 저장소 → Cloudflare R2 (2026-10-30, Claude)
 
 - 소유자 결정 ⓒ(docs/STRATEGY_FILL_THUMBS_TEXT.md P1): Pages 1GB 한도 때문에 사진 저장이 900MB에서 멈춘 문제를 R2(무료 10GB)로 푼다. 설정 방법은 `docs/R2_MEDIA_SETUP.md`.

@@ -2,7 +2,7 @@
 // - 소유자 2026-10-30: “유튜브에는 그 캠핑장 영상·쇼츠가 많은데 한두 개만 보인다” — 매일 수집(sync-social)의 동영상 검색은 1회·최대 10개라 모자랐다.
 // - 카카오(Daum) 동영상 검색(vclip) 3회/곳: ‘이름’ 1·2쪽(30개씩) + ‘이름(캠핑) 쇼츠’. KAKAO_REST_API_KEY. YouTube이고 제목에 이름이 있는 것만(lib videoMatch).
 //   일반 영상은 videos, 숏츠(/shorts/·60초 이하·3분 이하+#shorts)는 shorts로 나눠 쌓는다(캠핑장당 30개·20개).
-// - YOUTUBE_API_KEY가 있으면 YouTube Data API search.list(videoDuration=short, 100단위) + videos.list(길이, 1단위)도 쓴다(일 10,000단위의 절반 이하 → YT_MAX_SEARCHES 기본 45곳 ≈ 4,550단위, AGENTS.md 무과금 원칙).
+// - YOUTUBE_API_KEY가 있으면 YouTube Data API search.list(videoDuration=short, 100단위) + videos.list(길이, 1단위)도 쓴다(일 10,000단위 무료 한도 안 → YT_MAX_SEARCHES 기본 45곳 ≈ 4,550단위, shorts-sync는 90곳 ≈ 9,100단위, AGENTS.md 무과금 원칙).
 // - 영상이 하나도 없는 캠핑장부터. 캐시 registry/shorts-search.json(SHORTS_MAX_AGE_DAYS 기본 30일). 한도·인증 오류면 즉시 멈춤.
 // - 화면 데이터에는 build-explore-data가 ‘채우기만’ 한다(이미 있는 영상은 그대로, 없는 숏츠만 덧붙임).
 // 키가 없거나 네트워크가 실패해도 캐시로 결과를 쓰고 exit 0.
