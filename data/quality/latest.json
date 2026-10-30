@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-30T15:02:11.967Z",
+ "generated_at": "2026-10-30T16:29:41.532Z",
  "date": "2026-10-31",
  "totals": {
   "campgrounds": 6416,
-  "facts": 238274,
+  "facts": 238276,
   "pairs": 189037,
   "mean_confidence": 0.786,
   "confirmed_pct": 85,
@@ -2065,5 +2065,12 @@
    }
   }
  },
- "regressions": []
+ "regressions": [
+  {
+   "attr": "PROMOTION",
+   "kind": "confidence",
+   "from": 0.46,
+   "to": 0.411
+  }
+ ]
 }
