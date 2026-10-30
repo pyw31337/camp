@@ -103,6 +103,8 @@ jobs:
           PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/rail-swipe-test.mjs http://127.0.0.1:8765/
       - name: 홈 히어로 개수 = 데이터 개수 회귀 테스트
         run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/hero-count-test.mjs http://127.0.0.1:8765/
+      - name: 홈 히어로 새로고침 무작위 테마 회귀 테스트
+        run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/hero-random-test.mjs http://127.0.0.1:8765/
       - name: 320px 가로 넘침 없음(모든 화면) 회귀 테스트
         run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/overflow-320-test.mjs http://127.0.0.1:8765/
       - name: 숙박 상품 배지·필터 회귀 테스트

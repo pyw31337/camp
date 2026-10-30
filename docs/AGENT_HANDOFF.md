@@ -1,9 +1,10 @@
 # 인수인계
 
-## 📌 히어로 테마 갤러리 제거 · 접속당 테마 1개 고정 · 댓글 퍼스널컬러 (2026-10-30, Claude)
+## 📌 히어로 새로고침 무작위 선택 · 댓글 퍼스널컬러 (2026-10-30, Codex)
 
 - 테마 모음 페이지(`/themes`)의 `#hero-themes`(메인화면 10대 감성 히어로 테마) 영역과 CSS를 지웠다. 히어로 테마는 기능일 뿐이다. `?hero=<id>` 직통 확인은 남겼다.
-- `getInitialHeroIndex()`: 접속(탭 세션, sessionStorage `mc-hero-visit`)마다 10개 중 1개를 골라, 그 접속 동안은 홈을 다시 열어도 같은 테마를 보여 준다. 다음 접속에는 직전 테마(localStorage `mc-hero-last`)를 빼고 고른다. 예전에는 홈으로 돌아올 때마다 바뀌었다.
+- `getInitialHeroIndex()`: 홈을 새로 열거나 새로고침할 때마다 10개 중 1개를 다시 무작위로 고른다. `sessionStorage`·`localStorage`에 테마를 저장하지 않아 우중캠핑 한 테마가 고정되지 않는다. `?hero=<id>` 직통 테스트는 그대로 유지한다.
+- `camping-atlas/scripts/hero-random-test.mjs`: 같은 탭에서 8회 새로고침해 두 개 이상의 테마가 선택되는지, `?hero=rainy-camp` 직통 지정이 유지되는지 검사한다. Web quality의 Rail swipe 잡에서 자동 실행한다.
 - 댓글 작성자 퍼스널컬러: `savedCommentColor(이름)`(12색, 이름 해시)를 카드 댓글 아바타·작성 폼 아바타·찜 댓글·상세 댓글 이름에 공통으로 쓴다. 같은 이름은 어디서나 같은 색이다.
 - 댓글 입력: "화면을 캡처한 뒤 Ctrl+V"와 "(이미지는 Ctrl+V)" 문구를 지웠다(붙여넣기 기능은 그대로). `사진 붙이기`는 검은 캡슐에 흰 글씨로 왼쪽 끝에 두고, 같은 줄 오른쪽 끝에 취소·저장(상세는 남기기)을 둔다(`.comment-image-tools .comment-actions`).
 
