@@ -3783,8 +3783,8 @@
 {"cid":"2464","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.littlejsb.com/103","at":"2025-04-21","text":"펜션","quote":"운영 형태 : 오토캠핑장, 펜션 병행 운영. 운영 기간 : 연중무휴. 입실/퇴실 시간 : 입실 13:0"}
 {"cid":"2464","attr":"STAY_GENERAL_SITES","value":50,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2472","attr":"SITE_TOTAL","value":70,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2472","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/%ec%98%88%ec%95%bd%ec%95%88%eb%82%b4/","at":"2026-10-30T18:00:31.145Z","quote":"캠핑카, 카라반, 텐트라반, 투폴딩 트레일러는 진입 불가 입니다."}
-{"cid":"2472","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/","at":"2026-10-30T18:00:31.145Z","text":"방갈로","quote":"방갈로전용"}
+{"cid":"2472","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/%ec%98%88%ec%95%bd%ec%95%88%eb%82%b4/","at":"2026-10-30T22:17:08.912Z","quote":"캠핑카, 카라반, 텐트라반, 투폴딩 트레일러는 진입 불가 입니다."}
+{"cid":"2472","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/","at":"2026-10-30T22:17:08.912Z","text":"방갈로","quote":"방갈로전용"}
 {"cid":"2472","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":70}
 {"cid":"2472","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/ichean.camp/VwG0/5","at":"2020-07-02","quote":"033-636-7700 - 화천/딴산유원지 : ***-****-****, 물놀이(계곡) - 원주/두리오토캠핑장 : 033-765-8569, 선착순(50%)/예약(50%), 펜션(예약"}
 {"cid":"2472","attr":"STAY_GENERAL_SITES","value":70,"grade":"CONFIRMED","src":"gocamping"}
@@ -23387,6 +23387,7 @@
 {"cid":"park-41271-00026-rxt7f","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://queen.totojho.com/16","at":"2025-04-08","quote":"카라반 : 6동 운영 중"}
 {"cid":"park-41271-00026-rxt7f","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://queen.totojho.com/16","at":"2025-04-08","quote":"글램핑 : 6동 운영 중. 준글램핑 : 4동 운영 중. 카라반 : 6동 운영"}
 {"cid":"park-41273-00008-mrts6","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/lee__zzz/224282889129","at":"2026-05-12","quote":"[ 수도권 가까운 ] 골드오션 글램핑 대부도 1박2일 개미허리 아치교 구봉공원, 카페, 맛집 코스 협찬 없음"}
+{"cid":"park-41273-00023-pv7sr","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/a-yum/224325445604","at":"2026-06-24","quote":"​ 안산호수공원 물놀이장부터 와동공원 물놀이장, 안산썰매장, 화랑오토캠핑장, 그리고 동네 곳곳의 물놀이형...선물 같은 코스죠. ​ 특히 오후 2"}
 {"cid":"park-41281-00004-rvt4g","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://emfls.github.io/kor/report/camp/goyang.html","at":"2026-10-24T22:51:53.113Z","quote":"카라반36대"}
 {"cid":"park-41281-00004-rvt4g","attr":"SITE_TYPE","value":"DECK","grade":"OPERATOR","src":"operator_homepage","url":"https://emfls.github.io/kor/report/camp/goyang.html","at":"2026-10-24T22:51:53.113Z","quote":"데크사이트"}
 {"cid":"park-41281-00004-rvt4g","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://emfls.github.io/kor/report/camp/goyang.html","at":"2026-10-24T22:51:53.113Z","text":"펜션","quote":"펜션연계"}
@@ -23408,6 +23409,7 @@
 {"cid":"park-41285-00064-pdncm","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/hjjw8239/223175228570","at":"2023-08-05","quote":"강원도 인제캠핑장 원대리751 글램핑 다녀온 후기. (조기 입실 불가, 자작나무 숲 관광하시는 분들은 짐 보"}
 {"cid":"park-41287-00038-s41g5","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/cyayze00/224446564206","at":"2026-10-19","quote":"합천 가볼만한곳 정양레포츠공원 오토캠핑장 후기 캠핑가서 뭐먹지?. 나무가 있어서 그늘 역할을 해줘서 너무 만족스"}
 {"cid":"park-41287-00058-mqotc","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/pureground_/224432832145","at":"2026-10-06","quote":"대구근교 오토캠핑장 추천 | 거창 양지생태마을캠핑장 아이랑 가을캠핑 밤줍기체험. 양지생태마"}
+{"cid":"park-41287-00058-mqotc","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/pureground_/224432832145","at":"2026-10-06","quote":"양지생태마을캠핑장 경상남도 거창군 마리면 진산길 157 📍 경남 거창군 마리면 진산길 157 ​ 🏕️ 입실 14:00 / 퇴실 12:00 ​ 👨‍👩‍👧‍👦 기준 인원 4인 성인 2명 + 자녀 2명(다자녀 "}
 {"cid":"park-41287-00058-mqotc","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/smartoktokyi/224448918381","at":"2026-10-21","text":"독채","quote":"com ​ 함양지리산 생태체험단지이고, 독채로 된 방갈로, 온돌 형태의 방들을 예약할 수 있어요. 가격은 일반 방들"}
 {"cid":"park-41310-00013-zq2h4","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/yang__camper/224123429005","at":"2025-12-26","quote":"동계캠핑 구리 토평 가족캠핑장 이지캠핑 오토캠핑장 명당 A구역 8번 사이트 후기. 광나루역 : 11번, 100번 버스 탑"}
 {"cid":"park-41360-00010-qakga","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://ulymuthis.tistory.com/1273","at":"2023-05-25","quote":"카라반 중앙공원과 야외 돔 수영장이 잘 조성된 포천 글램파크 글램핑 카라반 캠"}
