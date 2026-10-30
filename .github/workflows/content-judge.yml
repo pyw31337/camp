@@ -1,0 +1,86 @@
+name: Content judge
+
+# 후기 글·사진 내용 판정(AI)을 매일 돈다(2026-10-30 소유자: 수집 현황판에 ‘최근 멈춤’).
+# 예전에는 주간 link-check 안에 있어 새로 모인 후기 글·사진이 최대 7일 동안 판정 없이 화면에 나갔다.
+# 이미 판정한 글·사진(같은 규칙 판)은 다시 처리하지 않으므로, 매일 돌면 그날 새로 모인 것만 판정한다.
+# 무료·로컬 CPU 모델(transformers.js): 사진 CLIP(lib/photo-judge.mjs) · 글 e5(lib/text-judge.mjs). 외부 유료 호출 없음.
+on:
+  schedule:
+    # 매일 08:43 KST — data-sync(03:17 KST 시작)가 끝난 뒤
+    - cron: "43 23 * * *"
+  workflow_dispatch:
+    inputs:
+      photo_max:
+        description: "사진 판정 상한 (기본 3000)"
+        required: false
+        default: "3000"
+      text_max:
+        description: "글 판정 상한 (기본 20000)"
+        required: false
+        default: "20000"
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+env:
+  GH_TOKEN: ${{ github.token }}  # land-on-main.sh (gh)
+
+concurrency:
+  # link-check와 같은 판정 파일을 쓰지 않게 되었지만, 같은 레지스트리 착지 경로를 쓰므로 겹치지 않게 순서대로 돈다.
+  group: link-check-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  judge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    defaults:
+      run:
+        working-directory: pipeline
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: pipeline/package-lock.json
+      - run: npm ci
+      - name: Install judges (transformers.js)
+        run: npm i --no-save @huggingface/transformers@3.8.1
+      - uses: actions/cache@v4
+        with:
+          path: pipeline/.cache/hf
+          key: hf-clip-vit-base-patch32-v1
+      - name: Judge review photos (batch, resumable)
+        continue-on-error: true
+        timeout-minutes: 50
+        run: node scripts/judge-review-photos.mjs
+        env:
+          PHOTO_JUDGE_MAX: ${{ github.event.inputs.photo_max || '3000' }}
+      - uses: actions/cache@v4
+        with:
+          path: pipeline/.cache/hf-text
+          key: hf-multilingual-e5-small-v1
+      - name: Judge review texts (batch, resumable)
+        continue-on-error: true
+        timeout-minutes: 40
+        run: node scripts/judge-texts.mjs
+        env:
+          TEXT_JUDGE_MAX: ${{ github.event.inputs.text_max || '20000' }}
+          HF_CACHE: .cache/hf-text
+      - name: Commit registry
+        if: always()
+        run: |
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          [ -f registry/photo-judgments.json ] && git add registry/photo-judgments.json
+          [ -f registry/text-judgments.json ] && git add registry/text-judgments.json
+          if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
+          git commit -m "chore(data): refresh content judgments"
+          bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" content-judge
+      - name: Publish to the site now (incremental)
+        if: always() && github.event_name != 'pull_request'
+        continue-on-error: true
+        run: bash scripts/publish-incremental.sh "content judge"

@@ -49,6 +49,8 @@ jobs:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           SHORTS_MAX_CALLS: ${{ github.event.inputs.max_calls || '9000' }}
+          # YouTube Data API 검색(100단위) 하루 90곳 ≈ 9,100단위 — 무료 일일 한도 10,000 안. 이 키를 쓰는 곳은 이 워크플로뿐(2026-10-30 캠핑장당 영상 3.4개 → 목표 10개).
+          YT_MAX_SEARCHES: "90"
         run: npm run sync:shorts
       - uses: actions/upload-artifact@v4
         if: always()

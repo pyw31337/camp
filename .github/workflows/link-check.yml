@@ -63,7 +63,8 @@ jobs:
         continue-on-error: true
         timeout-minutes: 120
         run: node scripts/verify-booking-links.mjs --max-age-days "${{ github.event.inputs.verify_max_age_days || '14' }}"
-      # 후기 사진 내용 판정(CLIP, lib/photo-judge.mjs, 2026-10-22): 음식·인물·차 안·글 캡처는 대표·갤러리에서 뺀다. 무료·로컬 CPU 모델.
+      # 후기 글·사진 내용 판정(AI)은 2026-10-30부터 매일 도는 content-judge.yml로 옮겼다(새 후기가 7일 동안 판정 없이 나가지 않게).
+      # 카드 대체 사진 고르기(pick-card-fallback)는 여전히 CLIP을 쓴다.
       - name: Install photo judge (transformers.js)
         continue-on-error: true
         run: npm i --no-save @huggingface/transformers@3.8.1
@@ -71,24 +72,6 @@ jobs:
         with:
           path: pipeline/.cache/hf
           key: hf-clip-vit-base-patch32-v1
-      - name: Judge review photos (batch, resumable)
-        continue-on-error: true
-        timeout-minutes: 50
-        run: node scripts/judge-review-photos.mjs
-        env:
-          PHOTO_JUDGE_MAX: "3000"
-      # 텍스트 내용 판정(lib/text-judge.mjs, 2026-10-22): 후기·카페·웹문서·영상 제목 중 식당·광고·부동산·무관 주제 글을 숨김 표시. 무료·로컬 CPU 모델.
-      - uses: actions/cache@v4
-        with:
-          path: pipeline/.cache/hf-text
-          key: hf-multilingual-e5-small-v1
-      - name: Judge review texts (batch, resumable)
-        continue-on-error: true
-        timeout-minutes: 40
-        run: node scripts/judge-texts.mjs
-        env:
-          TEXT_JUDGE_MAX: "20000"
-          HF_CACHE: .cache/hf-text
       # 공식 사진이 없는 곳의 카드 사진: 상세의 검색 썸네일(130px)을 잠깐 받아 배치도·안내판·야간 사진과 음식·인물 사진을 거른다(저장 없음).
       - name: Pick card photos for places without official photos
         continue-on-error: true
@@ -104,7 +87,6 @@ jobs:
           [ -f registry/portal-directory.json ] && git add registry/portal-directory.json
           [ -f registry/card-fallback.json ] && git add registry/card-fallback.json
           [ -f registry/photo-judgments.json ] && git add registry/photo-judgments.json
-          [ -f registry/text-judgments.json ] && git add registry/text-judgments.json
           if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
           git commit -m "chore(data): refresh link health"
           bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" link-check

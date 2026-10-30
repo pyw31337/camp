@@ -623,7 +623,9 @@
         const items = ds.map((d) => ({ l: d.slice(5), t: d, v: s.byDay?.[d] ?? 0 }));
         const sum = items.reduce((a, x) => a + x.v, 0), avg = sum / n, last = items.at(-1).v, prev = items.at(-2)?.v ?? 0;
         const active = items.filter((x) => x.v > 0).length;
-        const kind = sum === 0 ? "bad" : (last + prev) === 0 && avg > 0 ? "warn" : "";
+        // 주간 수집처(every 7)는 마지막 실행 뒤 8일까지는 정상이다 — 매일 도는 것만 이틀 0건을 멈춤으로 본다.
+        const quiet = items.slice(-Math.min(n, (s.every ?? 1) + 1)).every((x) => x.v === 0);
+        const kind = sum === 0 ? "bad" : quiet && avg > 0 ? "warn" : "";
         return `<div class="mini ${kind}"><div class="mini-h"><div>${esc(s.name)}<small>${esc(s.how)}</small></div>${kind === "bad" ? badge("bad", "처리 없음") : kind === "warn" ? badge("warn", "최근 멈춤") : badge("good", `${active}/${n}일 수집`)}</div>
           <div class="mini-v num">${fmt(sum)}<span class="mini-s"> 건 · 하루 평균 ${fmt(avg, 1)} · 오늘 ${fmt(last)}</span></div>${barChart(items, { w: 300, h: 110, unit: "건" })}</div>`;
       }).join("");
