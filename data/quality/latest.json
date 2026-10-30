@@ -2065,5 +2065,12 @@
    }
   }
  },
- "regressions": []
+ "regressions": [
+  {
+   "attr": "PROMOTION",
+   "kind": "confidence",
+   "from": 0.46,
+   "to": 0.411
+  }
+ ]
 }
