@@ -346,6 +346,39 @@ function build() {
     }
   }
 
+  // ── 장소 종류별(캠핑장·글램핑·카라반·휴양림·캠크닉·공원·물놀이) 수집량 — 소유자 2026-10-30 “휴양림 수와 그 영상·쇼츠·블로그 후기 수” ──
+  const kindOf = (c) => {
+    const t = (c.types ?? [])[0] ?? "";
+    if (c.du === "park") return "공원(당일)";
+    if (c.du === "water") return "물놀이터(당일)";
+    if (c.du) return "캠크닉(당일)";
+    if (/휴양림/.test(t)) return "자연휴양림";
+    if (/글램핑/.test(t)) return "글램핑";
+    if (/카라반/.test(t)) return "카라반";
+    if (/캠크닉/.test(t)) return "캠크닉";
+    if (/자동차/.test(t)) return "자동차야영장";
+    return "일반야영장";
+  };
+  const kinds = {};
+  for (const c of cat) {
+    const k = (kinds[kindOf(c)] ??= { places: 0, review_places: 0, blog: 0, cafe: 0, web: 0, video_places: 0, videos: 0, shorts: 0, short_places: 0, photo_places: 0, iq: 0 });
+    k.places++; k.iq += Number(c.iq) || 0;
+    if (c.ph || c.img || c.sn || c.pt) k.photo_places++;
+    const d = read(join(DATA, "camps", `${c.id}.json`), null);
+    if (!d) continue;
+    let posts = 0;
+    // 글 주소로 나눈다: 카페 → cafe, 블로그(네이버·티스토리·브런치·다음 블로그 등) → blog, 나머지 → web
+    for (const key of ["reviews", "cafe", "web"]) for (const x of d[key] ?? []) { if (!x?.url) continue; posts++; const u = x.url; k[/cafe\.(naver|daum)\.(com|net)/.test(u) ? "cafe" : /blog\.naver\.com|tistory\.com|brunch\.co\.kr|blog\.daum\.net|blog\.me|egloos|blogspot/.test(u) ? "blog" : "web"]++; }
+    if (posts) k.review_places++;
+    let v = 0, sh = 0;
+    for (const x of d.videos ?? []) {
+      if (!(x.yt || /youtube\.com|youtu\.be|tv\.naver\.com\/(v|embed)\//.test(x.url ?? ""))) continue;
+      v++; if (x.kind === "short" || /\/shorts\//.test(x.url ?? "")) sh++;
+    }
+    k.videos += v; k.shorts += sh; if (v) k.video_places++; if (sh) k.short_places++;
+  }
+  for (const k of Object.values(kinds)) k.iq = Math.round((k.iq / Math.max(1, k.places)) * 10) / 10;
+
   // ── AI 분석량(로컬 모델·CI) · 에이전트 작업량 ──
   const decisions = (() => { try { return readFileSync(P("data/quality/decisions.ndjson"), "utf8").trim().split("\n").map((l) => JSON.parse(l)); } catch { return []; } })();
   const board = (() => { try { return readFileSync(P("data/board/board.ndjson"), "utf8").trim().split("\n").map((l) => JSON.parse(l)); } catch { return []; } })();
@@ -374,6 +407,7 @@ function build() {
     quality: { totals: q.totals ?? null, attrs, ledger: ledger.map((l) => ({ date: l.date, ...l.totals })), review_queue: rqItems.length, review_queue_by_attr: countBy(rqItems, (x) => x.label ?? x.attr), review_queue_top: rqItems.slice(0, 20).map((x) => ({ id: x.cid, name: x.name ?? null, attr: x.label ?? x.attr ?? null, values: [x.top, x.rival].filter(Boolean).map((v) => ({ v: v.value, c: v.confidence, n: v.sources })) })) },
     info_score: { mean: metrics["quality.iq"].value, dist: dist(iqs, [[0, 19, "0~19"], [20, 39, "20~39"], [40, 59, "40~59"], [60, 79, "60~79"], [80, 100, "80~100"]]), next_priorities: (info.next_priorities ?? []).slice(0, 15) },
     regions,
+    kinds,
     ai,
     targets_updated_at: read(P("pipeline/registry/collect-targets.json"), {}).updated_at ?? null,
   };

@@ -182,6 +182,7 @@
 <nav class="subnav" aria-label="수집 현황 바로가기">
   <div class="subnav-in">
     <a class="jump back" href="../"><svg class="ic"><use href="#i-back"/></svg>&nbsp;운영 기록</a>
+    <a class="jump" href="#s-kind">장소 종류별</a>
     <a class="jump" href="#s-diag">진단</a>
     <a class="jump" href="#s-daily">일자별 추이</a>
     <a class="jump" href="#s-ai">AI 분석량</a>
@@ -434,6 +435,16 @@
       ${k("quality.iq", "평균 정보량", `충돌 ${fmt(m["quality.conflicts"]?.value)}건`)}
     </section>`);
 
+    // 장소 종류별 수집량(캠핑장·휴양림 수와 그 영상·쇼츠·블로그 후기)
+    const KD = Object.entries(S.kinds ?? {}).sort((a, b) => b[1].places - a[1].places);
+    const KT = KD.reduce((a, [, k]) => { for (const [x, v] of Object.entries(k)) if (x !== "iq") a[x] = (a[x] ?? 0) + v; return a; }, {});
+    const kcell = (n, base) => `<td class="r num" data-v="${n}">${fmt(n)}${base ? ` <span class="muted">${fmt((n / base) * 100, 0)}%</span>` : ""}</td>`;
+    html.push(`<div class="sec" id="s-kind"><h2>장소 종류별 수집 현황</h2><p>캠핑장·글램핑·카라반·자연휴양림·당일 나들이 장소마다 몇 곳이고, 유튜브 영상·쇼츠·블로그 후기가 얼마나 모였나 · 영상은 화면에서 바로 재생되는 것(YouTube·네이버TV)만</p></div>
+      <div class="panel"><div class="tbl-wrap"><table id="kind-tbl"><thead><tr><th data-sort>종류</th><th class="r" data-sort>장소 수</th><th class="r" data-sort>블로그 후기</th><th class="r" data-sort>카페 글</th><th class="r" data-sort>웹문서</th><th class="r" data-sort>후기 있는 곳</th><th class="r" data-sort>유튜브 영상(전체)</th><th class="r" data-sort>그중 쇼츠</th><th class="r" data-sort>영상 있는 곳</th><th class="r" data-sort>쇼츠 있는 곳</th><th class="r" data-sort>사진 있는 곳</th><th class="r" data-sort>평균 정보량</th></tr></thead><tbody>
+      ${KD.map(([name, k]) => `<tr><td data-v="${esc(name)}"><b>${esc(name)}</b></td><td class="r num" data-v="${k.places}"><b>${fmt(k.places)}</b></td><td class="r num" data-v="${k.blog}">${fmt(k.blog)}</td><td class="r num" data-v="${k.cafe}">${fmt(k.cafe)}</td><td class="r num" data-v="${k.web}">${fmt(k.web)}</td>${kcell(k.review_places, k.places)}<td class="r num" data-v="${k.videos}">${fmt(k.videos)}</td><td class="r num" data-v="${k.shorts}">${fmt(k.shorts)}</td>${kcell(k.video_places, k.places)}${kcell(k.short_places, k.places)}${kcell(k.photo_places, k.places)}<td class="r num" data-v="${k.iq}">${fmt(k.iq, 1)}</td></tr>`).join("")}
+      <tr class="cat-row"><td>합계</td><td class="r num">${fmt(KT.places)}</td><td class="r num">${fmt(KT.blog)}</td><td class="r num">${fmt(KT.cafe)}</td><td class="r num">${fmt(KT.web)}</td><td class="r num">${fmt(KT.review_places)}</td><td class="r num">${fmt(KT.videos)}</td><td class="r num">${fmt(KT.shorts)}</td><td class="r num">${fmt(KT.video_places)}</td><td class="r num">${fmt(KT.short_places)}</td><td class="r num">${fmt(KT.photo_places)}</td><td></td></tr>
+      </tbody></table></div><p class="note">‘장소 수’는 지도·목록에 나오는 곳 기준입니다. 비율(%)은 그 종류 장소 중 해당 자료가 있는 곳의 비율입니다.</p></div>`);
+
     // 진단
     html.push(`<div class="sec" id="s-diag"><h2>자동 진단</h2><p>목표·신선도·감소·충돌·링크 상태를 규칙으로 훑은 결과 — 위에서부터 급한 순</p></div>
       <div class="alerts">${diag.map((a) => `<div class="alert ${a.kind}">${badge(a.kind, { bad: "문제", warn: "주의", info: "참고", good: "정상" }[a.kind])}<div><div class="t">${esc(a.title)}</div><div class="d">${esc(a.desc)}</div></div></div>`).join("")}</div>`);
@@ -573,7 +584,7 @@
       <details class="def"><summary>지표 정의·수집처 전체 보기</summary><div class="tbl-wrap"><table><thead><tr><th>지표 id</th><th>카테고리</th><th>이름</th><th>단위</th><th>설명</th><th>수집처</th></tr></thead><tbody>${Object.entries(M).map(([id, x]) => `<tr><td class="muted">${id}</td><td>${esc(CATS.find(([c]) => c === x[0])?.[1])}</td><td>${esc(x[1])}</td><td>${esc(x[2])}</td><td class="wrap">${esc(x[3])}</td><td>${esc(x[4])}</td></tr>`).join("")}</tbody></table></div></details>`);
 
     $("#root").innerHTML = html.join("");
-    ["#goal-tbl", "#src-tbl", "#attr-tbl", "#rg-tbl", "#ai-tbl"].forEach((s) => $(s) && sortable($(s)));
+    ["#goal-tbl", "#src-tbl", "#attr-tbl", "#rg-tbl", "#ai-tbl", "#kind-tbl"].forEach((s) => $(s) && sortable($(s)));
 
     // 카테고리 칩
     $("#cat-chips").addEventListener("click", (e) => {
