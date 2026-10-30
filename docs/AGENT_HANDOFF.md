@@ -1,5 +1,16 @@
 # 인수인계
 
+## 📌 메인 ‘오늘의 캠핑장’ 덱 · 진열 일별 회전 · 히어로 320px · 찜 비교 20곳 · 아침 브리핑 메일 (2026-10-31, Claude)
+
+- **오늘의 캠핑장**(`todaySection`·`initTodayDeck`, app.js): 정보량 상위 100곳 중 날짜 씨앗으로 5곳을 고른다. 카드덱은 뉴스보드(pyw31337/news `assets/deck.js`)의 스프링 물리를 그대로 옮겼다. 클래스는 `td-*`.
+- **진열 일별 회전**: `results()` 기본 정렬은 `dailyKey`다. 정보량(c.iq)을 5점 구간으로 묶고, 같은 구간 안에서만 날짜(KST)로 섞는다. 자체 점수는 새로 만들지 않았다.
+- **히어로**: 10개 테마의 강조 줄(titleB)을 7~8자로 줄였다. 320px에서 넘치면 낱말 단위로 줄바꿈한다. 세로폭: PC clamp(500px, 52vw, 740px), 모바일 680px.
+- **VR 링크**: c.vr은 `{ url, blog, … }` 객체다. 반드시 `vrUrl(c)`를 쓸 것(예전에는 `[object Object]` 주소로 갔다).
+- **주변 캠핑장**: 가까운 순으로 3곳. **찜 비교**는 최대 `CMP_MAX`=20곳. 하단 탭은 현재 화면을 초록 막대·알약으로 표시한다(shell.css). 댓글은 날짜와 시각을 함께 보인다.
+- **전화번호 X1**: `apply-platform-tel.mjs`가 빈 곳만 카카오맵 플레이스 번호(매칭 80점↑, 500m 안)로 채운다. `c.tel_src`가 있으면 화면에 “플랫폼 등록 번호”로 표기한다. data-sync와 증분 발행에 들어 있다.
+- **아침 브리핑 메일**: `daily-brief.yml`(07:23 KST) → `daily-brief.mjs`. 내용은 새 장소·수집량·실패한 작업·진단이다. 네이버 SMTP를 쓰며, 설정은 Secrets `NAVER_SMTP_APP_PASSWORD`, Variables `NAVER_SMTP_ACCOUNT`·`BRIEF_TO`.
+- **R2 첫 업로드**: `media-r2-seed.yml`(수동 실행 가능). 상세 편의시설 칸의 긴 낱말은 줄바꿈한다(place/29 넘침).
+
 ## 📌 글·사진 내용 판정 매일 · 현황판 주기 인식 · YouTube 검색 90곳 (2026-10-30, Claude)
 
 - 글·사진 판정(`judge-texts`·`judge-review-photos`)은 주간 link-check에서 빠져 **매일 도는 `content-judge.yml`**(08:43 KST)로 옮겼다. link-check에는 카드 대체 사진용 CLIP 설치만 남았다.
