@@ -65,6 +65,9 @@ body[data-view="detail"] .site-footer { padding-bottom: calc(clamp(28px, 3.5vw, 
   .tabbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 900; display: grid; grid-template-columns: repeat(5, 1fr); height: calc(var(--tabbar-h) + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom); background: color-mix(in srgb, var(--paper) 96%, transparent); backdrop-filter: blur(10px); box-shadow: 0 -1px 0 var(--line); }
   .tabbar a, .tabbar button { position: relative; display: grid; justify-items: center; align-content: center; gap: 2px; font-size: var(--fs-min, .75rem); font-weight: 700; color: var(--ink-3); }
   .tabbar svg { width: 24px; height: 24px; fill: currentColor; }
-  .tabbar [aria-current] { color: var(--ink); }
+  /* 현재 화면을 한눈에(소유자 2026-10-31): 위쪽 초록 막대 + 아이콘 뒤 연두 알약 + 굵은 초록 글자 */
+  .tabbar [aria-current] { color: var(--accent, #00875a); font-weight: 900; }
+  .tabbar [aria-current]::before { content: ""; position: absolute; top: 0; left: 50%; width: 32px; height: 3px; margin-left: -16px; border-radius: 0 0 3px 3px; background: var(--accent, #00875a); }
+  .tabbar [aria-current] svg { box-sizing: content-box; padding: 3px 14px; border-radius: 999px; background: var(--accent-tint, #e4f4ea); }
   .tabbar .nav-count { position: absolute; top: 6px; left: calc(50% + 6px); min-width: 18px; height: 18px; font-size: .66rem; }
 }

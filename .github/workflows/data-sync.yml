@@ -526,6 +526,8 @@ jobs:
           # 데이터 품질 장부(docs/DATA_QUALITY_PROCESS.md): 신뢰도·확증·충돌 대기열·어제 대비 회귀를 data/quality에 남긴다(회귀는 경고).
           node pipeline/scripts/quality-ledger.mjs
           # 업장 정보량 점수(lib/info-score.mjs, 0~100) → 카탈로그 c.iq. 목록·추천의 기본 순서(정보가 많은 업장 먼저).
+          # 전화번호가 빈 곳: 카카오맵 플레이스 등록 번호로 채움(소유자 2026-10-31 X1, 출처 c.tel_src · 화면 ‘플랫폼 등록 번호’)
+          node pipeline/scripts/apply-platform-tel.mjs
           node pipeline/scripts/apply-info-score.mjs
           # 수집 현황판(/admin/collect/): 수집처·카테고리별 누적·일별·신선도·목표 대비·품질 → camping-atlas/public/data/collect-*.json
           node pipeline/scripts/build-collect-stats.mjs || echo "::warning::수집 현황 통계 생성 실패(발행은 계속)"

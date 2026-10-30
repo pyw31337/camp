@@ -213,6 +213,9 @@ function updateHeaderGlass() {}
 const SIDO = [[/^서울/, "서울"], [/^부산/, "부산"], [/^대구/, "대구"], [/^인천/, "인천"], [/^광주/, "광주"], [/^대전/, "대전"], [/^울산/, "울산"], [/^세종/, "세종"], [/^경기/, "경기"], [/^강원/, "강원"], [/^충청북|^충북/, "충북"], [/^충청남|^충남/, "충남"], [/^전라북|^전북/, "전북"], [/^전라남|^전남/, "전남"], [/^경상북|^경북/, "경북"], [/^경상남|^경남/, "경남"], [/^제주/, "제주"]];
 const sidoShort = (s) => (SIDO.find(([r]) => r.test(s ?? "")) ?? [, s ?? ""])[1];
 const OP = { LOCAL_GOVERNMENT: "지자체", NATIONAL_PARK: "국립공원", NATURAL_RECREATION_FOREST: "휴양림", PUBLIC_LEISURE: "공공", PRIVATE: "민간" };
+// 360° VR 주소: 카탈로그 c.vr은 { url, blog, tags, source } 묶음이다. 예전처럼 문자열로 href에 넣으면 “[object Object]”가 되어
+// 엉뚱한 목록 화면으로 갔다(소유자 2026-10-31). 주소만 꺼낸다.
+const vrUrl = (c) => { const v = c?.vr; const u = typeof v === "string" ? v : v?.url; return /^https?:\/\//i.test(u ?? "") ? u : ""; };
 function nameOf(c) {
   let n = String(c.name ?? "").trim(), tag = null;
   const m = n.match(/^\[([^\]]+)\]\s*/);
@@ -710,6 +713,13 @@ function rich(c) {
   s += Math.min(Math.floor((Number(c.rv?.n) || 0) / 4), 5);
   return (c._rich = s);
 }
+// 메인 진열 일별 회전(소유자 2026-10-30: 매번 똑같은 진열은 지루하다). 기본 순서는 정보량(c.iq) 높은 순 그대로 두고,
+// 같은 점수대(5점 구간) 안에서만 오늘 날짜(한국 시각)로 섞는다 → 날마다 다른 업장이 앞줄에 오고, 하루 안에서는 순서가 같다.
+// 매일 수집으로 c.iq가 오르면 그 업장은 자연히 윗 구간으로 올라간다(자체 점수를 새로 만들지 않는다).
+const DAY_KEY = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+function dayHash(s) { let h = 2166136261; for (const ch of `${DAY_KEY}:${s}`) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return (h >>> 0) / 4294967296; }
+const IQ_BAND = 5;
+const dailyKey = (c) => (c._dk ??= Math.floor(rich(c) / IQ_BAND) * IQ_BAND + dayHash(c.id) * IQ_BAND * 0.999);
 // 홈의 추천 레일에는 고캠핑·운영자·발행 카탈로그의 실제 사진이 있는 곳만 쓴다.
 // 검색 결과용 후기/검색 썸네일(c.pt/c.sn)은 사진 공백을 줄이는 보조 수단으로만 쓰고,
 // 메인 진열의 대표 사진 근거로는 쓰지 않는다.
@@ -772,7 +782,7 @@ function results() {
   // 공원 테마 또는 이름으로 직접 찾았을 때만 읽게 한다.
   const list = S.camps.filter((c) => matches(c) && (coreBrowseEligible(c) || S.theme === "PARK"));
   if (S.sort === "name") list.sort((a, b) => nameOf(a).name.localeCompare(nameOf(b).name, "ko"));
-  else list.sort((a, b) => rich(b) - rich(a));
+  else list.sort((a, b) => dailyKey(b) - dailyKey(a));
   // 사진이 한 장도 없는 곳은 뒤로(이름으로 직접 찾은 곳은 제외)
   return list.sort((a, b) => photoLast(a) - photoLast(b));
 }
@@ -1304,7 +1314,7 @@ function card(c, i = 0, opts) {
               <button type="button" class="c-act-btn" data-rv="${c.lat},${c.lng}" data-rv-name="${esc(nameOf(c).name)}" title="카카오 로드뷰 보기" aria-label="로드뷰">${ic("roadview")}</button>
               <a class="c-act-btn" href="${esc(mapLink(nameOf(c).name, c.lat, c.lng))}" target="_blank" rel="noopener" title="카카오 지도에서 보기" aria-label="지도">${ic("map")}</a>
             ` : ""}
-            ${c.vr ? `<a class="c-act-btn c-act-vr" href="${esc(c.vr)}" target="_blank" rel="noopener" title="360° VR 현장 둘러보기" aria-label="360° VR">${ic("vr")}</a>` : ""}
+            ${vrUrl(c) ? `<a class="c-act-btn c-act-vr" href="${esc(vrUrl(c))}" target="_blank" rel="noopener" title="360° VR 현장 둘러보기" aria-label="360° VR">${ic("vr")}</a>` : ""}
           </div>
         </div>
       </div>
@@ -1732,6 +1742,189 @@ const TR_GLYPH = {
   facebook: ["Facebook", '<path d="M14 8h3V4h-3a5 5 0 0 0-5 5v2H7v4h2v7h4v-7h3l1-4h-4V9a1 1 0 0 1 1-1"/>'],
 };
 const trIcon = (k, n) => { const [label, path] = TR_GLYPH[k] ?? [k, ""]; return `<span class="tr-src" title="${esc(label)} ${n}건" aria-label="${esc(label)} ${n}건"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true">${path}</svg><i>${fmt(n)}</i></span>`; };
+// ── 오늘의 캠핑장(소유자 2026-10-30): 정보량 상위 100곳 중 날마다 5곳을 골라 편집 카드로 맨 위에 보인다.
+// 같은 날에는 누구에게나 같은 5곳(날짜 씨앗), 다음 날엔 바뀐다 → ‘매일 관리되는 사이트’ 느낌. 카드는 뉴스보드 카드덱(스프링 물리)과 같은 방식.
+const TODAY_N = 5;
+function todayPicks() {
+  const pool = S.camps.filter((c) => !c.du && showcaseEligible(c) && photosOf(c).length >= 2).sort((a, b) => rich(b) - rich(a)).slice(0, 100);
+  return pool.map((c, i) => [c, i + 1]).sort((a, b) => dayHash(`today:${a[0].id}`) - dayHash(`today:${b[0].id}`)).slice(0, TODAY_N);
+}
+function todayReasons(c, rank) {
+  const out = [];
+  const rv = c.rv ?? {};
+  const top = (rv.p ?? [])[0];
+  if (top) out.push(`후기에서 ‘${normTopic(top[0])}’ 이야기가 ${fmt(top[1])}번 나와요`);
+  const env = (c.env ?? []).slice(0, 2).join("·");
+  if (env) out.push(`${env} 곁에서 머무는 캠핑장`);
+  const fm = feeMain(c);
+  if (fm?.text) out.push(`${fm.label} ${fm.text}`);
+  if (c.pets && /가능/.test(String(c.pets)) && !/불가/.test(String(c.pets))) out.push("반려견과 함께 갈 수 있어요");
+  out.push(`정보량 상위 ${rank}위 · 확인된 정보가 많아요`);
+  return out.slice(0, 3);
+}
+function todayCard([c, rank], k, dateLabel) {
+  const ph = photosOf(c).slice(0, 4);
+  const nm = nameOf(c).name;
+  const lead = c.line || c.pf?.s || "";
+  const rv = c.rv ?? {};
+  const chips = [
+    rv.n ? `<span class="td-chip">${ic("file-text")}후기 <b>${fmt(rv.n)}</b></span>` : "",
+    c.fire && c.fire !== "불가" ? `<span class="td-chip">${ic("flame")}불멍</span>` : "",
+    (c.amenities ?? []).includes("전기") ? `<span class="td-chip">${ic("bolt")}전기</span>` : "",
+  ].join("");
+  return `<article class="td-card" data-i="${k}" data-id="${esc(c.id)}">
+    <a class="td-link" draggable="false" href="${APP_BASE}place/${encodeURIComponent(c.id)}" aria-label="오늘의 캠핑장 ${k + 1}번 ${esc(nm)} 자세히"></a>
+    <div class="td-media">
+      <div class="td-main">${imageTag(ph[0], "", { eager: k === 0, sizes: "(max-width: 759px) 92vw, 620px" })}</div>
+      ${ph.length > 1 ? `<div class="td-strip">${ph.slice(1, 4).map((u) => `<span>${imageTag(u, "", { sizes: "160px" })}</span>`).join("")}</div>` : ""}
+      <span class="td-no">${String(k + 1).padStart(2, "0")}</span>
+    </div>
+    <div class="td-body">
+      <p class="td-kicker"><b>오늘의 캠핑장</b><span>${esc(dateLabel)}</span></p>
+      <h3>${esc(nm)}</h3>
+      <p class="td-region">${ic("pin")}${esc(region(c))}</p>
+      ${lead ? `<p class="td-lead">“${esc(lead)}”</p>` : ""}
+      <ul class="td-why">${todayReasons(c, rank).map((r) => `<li>${esc(r)}</li>`).join("")}</ul>
+      <div class="td-chips">${chips}<span class="td-more">자세히 ${ic("right")}</span></div>
+    </div>
+  </article>`;
+}
+function todaySection() {
+  const picks = todayPicks();
+  if (picks.length < 2) return "";
+  const d = new Date(Date.now() + 9 * 3600e3);
+  const dateLabel = `${d.getUTCMonth() + 1}월 ${d.getUTCDate()}일`;
+  const n = picks.length;
+  return `<section class="today" aria-labelledby="today-t">
+    <div class="sec-head"><div><h2 id="today-t">오늘의 <em>캠핑장</em></h2><p class="sec-sub">정보가 가장 잘 모인 100곳 중 매일 ${n}곳을 새로 골라요 · ${esc(dateLabel)}</p></div></div>
+    <div class="td-wrap">
+      <div class="td-deck" tabindex="0" aria-roledescription="카드 덱" aria-label="오늘의 캠핑장 카드. 좌우로 넘겨 보세요">
+        <div class="td-stage">${picks.map((x, k) => todayCard(x, k, dateLabel)).join("")}</div>
+        <div class="td-ctl"><button type="button" class="td-btn" data-d="-1" aria-label="이전 캠핑장" disabled>${ic("left")}</button><span class="td-pos"><b>01</b> / ${String(n).padStart(2, "0")}</span><span class="td-bar"><i style="width:${100 / n}%"></i></span><span class="td-hint">옆으로 넘겨 보세요</span><button type="button" class="td-btn" data-d="1" aria-label="다음 캠핑장">${ic("right")}</button></div>
+      </div>
+      <ol class="td-list">${picks.map(([c], k) => `<li data-k="${k}"${k ? "" : ' class="on"'}><button type="button" data-td-go="${k}"><span>${String(k + 1).padStart(2, "0")}</span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></button></li>`).join("")}</ol>
+    </div>
+  </section>`;
+}
+// 카드 덱(뉴스보드 assets/deck.js의 스프링 물리를 그대로 옮김, 외부 라이브러리 없음).
+// 맨 위 카드를 왼쪽으로 던지면 다음 장, 오른쪽으로 끌면 이전 장이 되돌아온다. 세로로 움직이면 페이지 스크롤에 양보한다.
+function initTodayDeck(root) {
+  if (!root) return;
+  const RM = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const cards = [...root.querySelectorAll(".td-card")], N = cards.length;
+  if (!N) return;
+  let top = 0, drag = null, raf = 0, last = 0, W = root.clientWidth || 360;
+  const st = cards.map(() => ({ x: 0, y: 0, r: 0, ry: 0, s: 1, l: 0, o: 1, vx: 0, vy: 0, vr: 0, vry: 0, vs: 0, vl: 0, vo: 0 }));
+  const tilt = (k) => (k % 2 ? 1 : -1) * 1.1;
+  function target(i) {
+    const d = i - top;
+    if (d < 0) return { x: -W * 1.35, y: 40, r: -24, ry: 0, s: .96, l: 0, o: 0 };
+    if (d === 0) return { x: 0, y: 0, r: 0, ry: 0, s: 1, l: 0, o: 1 };
+    const dd = Math.min(d, 4);
+    return { x: dd * 2, y: dd * 11, r: tilt(i) * Math.min(d, 3), ry: 0, s: 1 - dd * .045, l: 0, o: d > 3 ? 0 : 1 - dd * .12 };
+  }
+  const K = { x: [170, 22], y: [200, 24], r: [260, 15], ry: [220, 18], s: [300, 26], l: [240, 22], o: [180, 26] };
+  function step(dt) {
+    let busy = false;
+    st.forEach((p, i) => {
+      const t = target(i);
+      if (drag && drag.i === i && drag.mode === "top") { busy = true; return; }
+      if (drag && drag.mode === "prev" && i === top - 1) { busy = true; return; }
+      for (const k in K) {
+        const v = `v${k}`, [kk, cc] = K[k]; const a = -kk * (p[k] - t[k]) - cc * p[v]; p[v] += a * dt; p[k] += p[v] * dt;
+        if (Math.abs(p[k] - t[k]) > .01 || Math.abs(p[v]) > .01) busy = true; else { p[k] = t[k]; p[v] = 0; }
+      }
+    });
+    if (drag) { const p = st[drag.i]; for (const k of ["r", "ry", "l", "s"]) { const v = `v${k}`, [kk, cc] = K[k]; const a = -kk * (p[k] - drag.t[k]) - cc * p[v]; p[v] += a * dt; p[k] += p[v] * dt; } }
+    return busy;
+  }
+  cards.forEach((c) => { const l = document.createElement("i"); l.className = "td-lift"; l.setAttribute("aria-hidden", "true"); c.prepend(l); c._lf = l; });
+  function paint() {
+    const rm = RM();
+    cards.forEach((c, i) => {
+      const p = rm ? Object.assign({}, target(i), drag && drag.i === i ? { x: st[i].x } : {}) : st[i]; const d = i - top;
+      const tr = `translate3d(${p.x.toFixed(1)}px,${(p.y - p.l * 8).toFixed(1)}px,0) rotate(${p.r.toFixed(2)}deg) rotateY(${(p.ry || 0).toFixed(2)}deg) scale(${(p.s + p.l * .035).toFixed(4)})`;
+      if (c._t !== tr) { c._t = tr; c.style.transform = tr; }
+      const op = clamp(p.o, 0, 1).toFixed(2); if (c._o !== op) { c._o = op; c.style.opacity = op; }
+      const lf = clamp(p.l, 0, 1).toFixed(2); if (c._l !== lf) { c._l = lf; c._lf.style.opacity = lf; }
+      const z = d < 0 || (drag && drag.mode === "prev" && i === top - 1) ? 200 + i : 100 - d, vis = p.o < .01 && d !== 0 ? "hidden" : "visible";
+      if (c._z !== z) { c._z = z; c.style.zIndex = z; } if (c._v !== vis) { c._v = vis; c.style.visibility = vis; }
+      const act = vis === "visible" && d >= -1 && d <= 2; if (c._a !== act) { c._a = act; c.classList.toggle("act", act); }
+      if (c._d !== d) { c._d = d; c.setAttribute("aria-hidden", d === 0 ? "false" : "true"); c.querySelectorAll("a").forEach((a) => (a.tabIndex = d === 0 ? 0 : -1)); }
+    });
+  }
+  function loop(ts) {
+    const dt0 = Math.min(.05, last ? (ts - last) / 1000 : .016); last = ts; let b = false;
+    const n = Math.ceil(dt0 / .004); for (let k = 0; k < n; k++) b = step(dt0 / n) || b; paint();
+    raf = b || drag ? requestAnimationFrame(loop) : 0; if (!raf) last = 0;
+  }
+  const kick = () => { if (!raf) { last = 0; raf = requestAnimationFrame(loop); } };
+  const sec = root.closest(".today");
+  function onTop(t) { sec?.querySelectorAll(".td-list li").forEach((li) => li.classList.toggle("on", +li.dataset.k === t)); }
+  function go(t, vx = 0, vr = 0) {
+    t = clamp(t, 0, N - 1); if (t === top) { kick(); return; }
+    const fwd = t > top;
+    if (fwd) { const p = st[top]; p.vx += vx; p.vr += vr; } else { const p = st[t]; if (!drag) { p.x = -W * 1.2; p.r = -20; p.o = 1; } p.vx += vx; }
+    top = t; onTop(top); kick();
+    root.querySelector(".td-pos b").textContent = String(top + 1).padStart(2, "0");
+    root.querySelector(".td-bar i").style.width = `${((top + 1) / N) * 100}%`;
+    root.querySelector('[data-d="-1"]').disabled = top === 0; root.querySelector('[data-d="1"]').disabled = top === N - 1;
+  }
+  root._go = go;
+  const stage = root.querySelector(".td-stage");
+  stage.addEventListener("pointerdown", (e) => {
+    if (e.button) return; const c = e.target.closest(".td-card"); if (!c || +c.dataset.i !== top) return;
+    W = root.clientWidth; const b = c.getBoundingClientRect();
+    drag = { id: e.pointerId, x0: e.clientX, y0: e.clientY, gy: (e.clientY - b.top) / b.height - .5, gx: (e.clientX - b.left) / b.width - .5, h: b.height, locked: false, dead: false, i: top, mode: "top", hist: [[e.timeStamp, e.clientX, e.clientY]], t: { r: 0, ry: 0, l: 1, s: 1 } };
+    kick();
+  });
+  stage.addEventListener("pointermove", (e) => {
+    if (!drag || e.pointerId !== drag.id || drag.dead) return;
+    const dx = e.clientX - drag.x0, dy = e.clientY - drag.y0;
+    if (!drag.locked) {
+      if (Math.hypot(dx, dy) < 7) return;
+      if (Math.abs(dy) > Math.abs(dx) * 1.1) { drag.dead = true; release(e, true); return; }
+      drag.locked = true; try { stage.setPointerCapture(e.pointerId); } catch {}
+      if (dx > 0 && top > 0) { drag.mode = "prev"; drag.i = top - 1; const p = st[top - 1]; p.x = -W * 1.2; p.o = 1; p.r = -14; }
+    }
+    drag.hist.push([e.timeStamp, e.clientX, e.clientY]); if (drag.hist.length > 6) drag.hist.shift();
+    const v = vel(); const p = st[drag.i];
+    if (drag.mode === "prev") { p.x = -W * 1.15 + dx * 1.15; p.y = dy * .12; drag.t.r = -14 + clamp(dx / W, 0, 1) * 14 + v.x * 1.5; drag.t.ry = 0; drag.t.l = 1; }
+    else {
+      let rx = dx; if ((dx > 0 && top === 0) || (dx < 0 && top === N - 1)) rx = (dx * .28) / (1 + Math.abs(dx) / W);
+      p.x = rx; p.y = dy * .18; const lever = drag.gy < 0 ? 1 : -1, arm = .45 + Math.min(.55, Math.abs(drag.gy) * 1.1);
+      drag.t.r = clamp((rx / W) * 16 * lever * arm + v.x * 2.2 * lever, -28, 28); drag.t.ry = clamp((-rx / W) * 10, -10, 10); drag.t.l = 1 + Math.min(.2, (Math.abs(rx) / W) * .3);
+    }
+    kick(); e.preventDefault();
+  }, { passive: false });
+  function vel() { const h = drag.hist, a = h[0], b = h[h.length - 1], dt = Math.max(8, b[0] - a[0]); return { x: (b[1] - a[1]) / dt, y: (b[2] - a[2]) / dt }; }
+  function release(e, cancel) {
+    if (!drag) return; const d = drag; drag = null;
+    if (!d.locked || cancel) { kick(); return; }
+    root._moved = true; setTimeout(() => (root._moved = false), 60);
+    const dx = e.clientX - d.x0;
+    const vx = (d.hist.at(-1)[1] - d.hist[0][1]) / Math.max(8, d.hist.at(-1)[0] - d.hist[0][0]);
+    const fast = Math.abs(vx) > .45, far = Math.abs(dx) > W * .32;
+    if (d.mode === "prev") { if ((fast && vx > 0) || (far && dx > 0 && !(fast && vx < 0))) go(top - 1, vx * 1000); else { st[d.i].vx = vx * 1000; kick(); } }
+    else if (dx < 0 && top < N - 1 && ((fast && vx < 0) || (far && !(fast && vx > 0)))) go(top + 1, vx * 1000 - 300, vx * 40);
+    else { st[d.i].vx = vx * 600; kick(); }
+  }
+  stage.addEventListener("dragstart", (e) => e.preventDefault());
+  stage.addEventListener("pointerup", (e) => { if (drag && e.pointerId === drag.id) release(e); });
+  stage.addEventListener("pointercancel", (e) => { if (drag && e.pointerId === drag.id) release(e, true); });
+  stage.addEventListener("click", (e) => {
+    if (root._moved) { e.preventDefault(); e.stopPropagation(); return; }
+    const c = e.target.closest(".td-card"); if (!c) return;
+    if (+c.dataset.i !== top) { e.preventDefault(); e.stopPropagation(); go(+c.dataset.i); }
+  }, true);
+  root.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") { e.preventDefault(); go(top + 1, -900, -30); } else if (e.key === "ArrowLeft") { e.preventDefault(); go(top - 1, 700); } });
+  root.querySelectorAll("[data-d]").forEach((b) => b.addEventListener("click", () => go(top + +b.dataset.d, +b.dataset.d > 0 ? -1100 : 800, +b.dataset.d > 0 ? -40 : 0)));
+  sec?.querySelectorAll("[data-td-go]").forEach((b) => b.addEventListener("click", () => { const t = +b.dataset.tdGo; go(t, t > top ? -1100 : 800, t > top ? -40 : 0); }));
+  const ro = new ResizeObserver(() => { W = root.clientWidth; kick(); }); ro.observe(root);
+  cleanup.push(() => { ro.disconnect(); if (raf) cancelAnimationFrame(raf); });
+  st.forEach((p, i) => Object.assign(p, target(i))); paint(); onTop(0);
+}
 function trendingShell() {
   return `<section class="trending" data-trending aria-labelledby="tr-t" aria-busy="true">
     <div class="sec-head">
@@ -1808,8 +2001,8 @@ const HERO_THEMES = [
     badge: "오늘 밤 쏟아지는 별빛",
     moodDescription: "평창 600마지기 은하수 & 반딧불이",
     image: "hero-night-sky.webp",
-    titleA: "쏟아지는 은하수와 별빛 아래,",
-    titleB: "평창 600마지기 밤하늘 캠핑.",
+    titleA: "쏟아지는 은하수 아래,",
+    titleB: "평창 밤하늘 캠핑.",
     summary: "도심을 벗어나 쏟아지는 별빛과 춤추는 반딧불이를 마주하는 시간",
     effect: "night-sky"
   },
@@ -1820,8 +2013,8 @@ const HERO_THEMES = [
     badge: "오색빛깔 가을 낭만",
     moodDescription: "오색빛깔 가을 단풍 & 은행잎",
     image: "hero-autumn-maple.webp",
-    titleA: "붉게 물든 숲길과 가을 향기,",
-    titleB: "낭만 가득한 오색 단풍 캠핑.",
+    titleA: "붉게 물든 가을 숲길,",
+    titleB: "오색 단풍 캠핑.",
     summary: "살랑이는 가을 바람과 사각거리는 단풍잎 사이로 떠나는 힐링 여정",
     effect: "autumn-maple"
   },
@@ -1832,8 +2025,8 @@ const HERO_THEMES = [
     badge: "토닥토닥 빗소리",
     moodDescription: "운치 있는 숲속 낭만 우중 캠핑",
     image: "hero-rainy-camp.webp",
-    titleA: "타프 위로 토닥이는 빗소리,",
-    titleB: "마음이 차분해지는 우중 캠핑.",
+    titleA: "타프 위 토닥이는 비,",
+    titleB: "아늑한 우중 캠핑.",
     summary: "촉촉한 숲의 향기와 따스한 랜턴 불빛이 머무는 가장 아늑한 순간",
     effect: "rainy-camp"
   },
@@ -1844,8 +2037,8 @@ const HERO_THEMES = [
     badge: "순백의 겨울 동화",
     moodDescription: "인제 자작나무숲 설경 캠핑",
     image: "hero-snowy-winter.webp",
-    titleA: "새하얀 설원 속 순백의 고요,",
-    titleB: "포근하고 고요한 설경 캠핑.",
+    titleA: "새하얀 설원의 고요,",
+    titleB: "고요한 설경 캠핑.",
     summary: "소복이 쌓이는 눈꽃과 모닥불의 따스함이 빚어내는 겨울 동화",
     effect: "snowy-winter"
   },
@@ -1856,8 +2049,8 @@ const HERO_THEMES = [
     badge: "피톤치드 힐링",
     moodDescription: "치유의 편백나무 숲 & 아침 햇살",
     image: "hero-lush-forest.webp",
-    titleA: "피톤치드 가득한 아침 숲길,",
-    titleB: "치유와 쉼이 있는 편백숲 캠핑.",
+    titleA: "피톤치드 가득한 숲길,",
+    titleB: "편백숲 힐링 캠핑.",
     summary: "나무 사이로 쏟아지는 눈부신 햇살과 싱그러운 숲의 숨결",
     effect: "lush-forest"
   },
@@ -1868,8 +2061,8 @@ const HERO_THEMES = [
     badge: "물안개 피는 호수",
     moodDescription: "충주호 잔잔한 물결 & 카약 캠핑",
     image: "hero-riverside.webp",
-    titleA: "물안개 피어오르는 아침 강가,",
-    titleB: "잔잔한 호숫가 카약 캠핑.",
+    titleA: "물안개 피는 아침 강가,",
+    titleB: "호숫가 카약 캠핑.",
     summary: "유리알처럼 투명한 수면과 황금빛 일출이 선사하는 평온함",
     effect: "riverside"
   },
@@ -1880,8 +2073,8 @@ const HERO_THEMES = [
     badge: "타닥타닥 힐링 불멍",
     moodDescription: "따스한 모닥불과 솟구치는 불티",
     image: "hero-warm-bonfire.webp",
-    titleA: "타닥타닥 타오르는 모닥불 소리,",
-    titleB: "따스한 온기의 힐링 불멍 캠핑.",
+    titleA: "타닥타닥 모닥불 소리,",
+    titleB: "따스한 불멍 캠핑.",
     summary: "밤하늘로 솟아오르는 따스한 불티와 감성 알전구 불빛",
     effect: "warm-bonfire"
   },
@@ -1892,8 +2085,8 @@ const HERO_THEMES = [
     badge: "붉은 석양의 감동",
     moodDescription: "서해안 태안 바다 일몰 & 노을 해변",
     image: "hero-sunset-coast.webp",
-    titleA: "붉은 노을이 내려앉은 바다,",
-    titleB: "서해안 황금빛 노을 해변 캠핑.",
+    titleA: "노을이 내려앉은 바다,",
+    titleB: "서해 노을 캠핑.",
     summary: "황금빛으로 물드는 바다 수평선과 잔잔히 반짝이는 파도 소리",
     effect: "sunset-coast"
   },
@@ -1904,8 +2097,8 @@ const HERO_THEMES = [
     badge: "설레는 꽃비 샤워",
     moodDescription: "만개한 벚꽃나무 아래 봄 캠핑",
     image: "hero-cherry-blossom.webp",
-    titleA: "머리 위로 쏟아지는 분홍빛 꽃비,",
-    titleB: "설레는 봄날의 벚꽃 캠핑.",
+    titleA: "흩날리는 분홍 꽃비,",
+    titleB: "봄날 벚꽃 캠핑.",
     summary: "흩날리는 꽃잎 샤워와 따스한 봄 햇살 속 캠크닉",
     effect: "cherry-blossom"
   },
@@ -1916,8 +2109,8 @@ const HERO_THEMES = [
     badge: "탁 트인 푸른 초원",
     moodDescription: "대관령 푸른 언덕 & 민들레 홀씨",
     image: "hero-green-meadow.webp",
-    titleA: "끝없이 펼쳐진 초록빛 언덕,",
-    titleB: "대관령 푸른 초원 글램핑.",
+    titleA: "끝없는 초록빛 언덕,",
+    titleB: "대관령 초원 캠핑.",
     summary: "탁 트인 푸른 하늘과 보드라운 잔디밭 위에서 누리는 자유",
     effect: "green-meadow"
   }
@@ -3186,6 +3379,7 @@ function homeView() {
     </div>
   </section>
 
+  ${todaySection()}
   ${openingSection}
   ${trendingShell()}
   ${reviewSection}
@@ -3929,6 +4123,7 @@ function bindHome() {
   initCarousels(v);
   initDraggableRails(v);
   mountTrending();
+  initTodayDeck($(".td-deck", v));
   initHeroDynamicEngine(v);
   cleanup.push(() => { io.disconnect(); v.removeEventListener("click", homeClicks); });
 }
@@ -4603,21 +4798,19 @@ async function detailView(id) {
 }
 
 // ── 벤치마크(t39 #37): 주변 비슷한 캠핑장 3곳 ─────────────────
-// 같은 숙박 형태(오토·글램핑·카라반…)를 하나라도 가진 곳 중 40km 안 가까운 10곳에서 정보량 점수 순. 사진 있는 곳만, 공원 원장 제외.
+// 같은 숙박 형태(오토·글램핑·카라반…)를 하나라도 가진 곳 중 40km 안에서 가까운 순. 사진 있는 곳만, 공원 원장 제외.
 // 추천(주변 캠핑장)은 업장 정보가 어느 정도 있는 곳만(소유자 2026-10-22: 정보도 거의 없고 사진은 남의 음식 사진인 곳이 추천됨).
 // 전화·홈페이지·소개·요금·사이트 종류·편의시설·규격·후기 중 2가지 이상. 검색·지도 목록에서는 빼지 않는다.
 const infoRich = (x) => (x._ir ??= [x.tel, x.homepage, x.line, x.fee, x.st?.length, x.amenities?.length, x.sizes?.length, x.rv?.n].filter(Boolean).length >= 2);
-function similarNearby(c, n = 3) {
+function similarNearby(c, n = 6) {
   if (!Number.isFinite(c?.lat) || !Number.isFinite(c?.lng)) return [];
   const mine = new Set(stayKinds(c));
   return S.camps
     .filter((x) => String(x.id) !== String(c.id) && Number.isFinite(x.lat) && Number.isFinite(x.lng) && !isPublicPark(x) && coreBrowseEligible(x) && x?.quality?.status !== "REJECTED" && hasPhoto(x) && infoRich(x))
     .map((x) => ({ x, km: km2(c, x), share: mine.size ? stayKinds(x).filter((k) => mine.has(k)).length : 1 }))
     .filter((r) => r.km <= 40 && r.share > 0)
-    .sort((a, b) => a.km - b.km)
-    .slice(0, Math.max(n, 10))
-    // 가까운 10곳 안에서는 정보량 점수가 높은 곳을 먼저(소유자 2026-10-23: 정보가 많은 업체를 배열 맨 앞에)
-    .sort((a, b) => rich(b.x) - rich(a.x) || a.km - b.km)
+    // 가장 가까운 곳부터(소유자 2026-10-31). 거리가 같으면 정보량이 많은 곳을 앞에.
+    .sort((a, b) => a.km - b.km || rich(b.x) - rich(a.x))
     .slice(0, n);
 }
 function similarHtml(c) {
@@ -5787,11 +5980,12 @@ function infoHtml(c) {
   const map = c.lat ? `https://map.kakao.com/link/map/${name},${c.lat},${c.lng}` : null;
   const to = c.lat ? `https://map.kakao.com/link/to/${name},${c.lat},${c.lng}` : null;
   const rv = c.lat ? `https://map.kakao.com/link/roadview/${c.lat},${c.lng}` : null;
-  const addressActions = map ? `<span class="addr-actions"><a href="${map}" target="_blank" rel="noopener" title="지도" aria-label="지도">${ic("map")}</a><a href="${to}" target="_blank" rel="noopener" title="길찾기" aria-label="길찾기">${ic("directions")}</a><a href="${rv}" target="_blank" rel="noopener" title="로드뷰" aria-label="로드뷰">${ic("roadview")}</a>${c.vr ? `<a href="${esc(c.vr)}" target="_blank" rel="noopener" class="vr-action-link" title="360° VR 현장 둘러보기" aria-label="360° VR">${ic("vr")}</a>` : ""}</span>` : "";
+  const addressActions = map ? `<span class="addr-actions"><a href="${map}" target="_blank" rel="noopener" title="지도" aria-label="지도">${ic("map")}</a><a href="${to}" target="_blank" rel="noopener" title="길찾기" aria-label="길찾기">${ic("directions")}</a><a href="${rv}" target="_blank" rel="noopener" title="로드뷰" aria-label="로드뷰">${ic("roadview")}</a>${vrUrl(c) ? `<a href="${esc(vrUrl(c))}" target="_blank" rel="noopener" class="vr-action-link" title="360° VR 현장 둘러보기" aria-label="360° VR">${ic("vr")}</a>` : ""}</span>` : "";
   const gcSrc = (field, quote) => ({ g: "c", src: { label: "한국관광공사 고캠핑 등록 현황", url: c.gc_url, quote: quote ? String(quote) : null } });
   const rows = [
     ["주소", c.addr ? `<span class="address-value"><span class="address-text">${esc(c.addr)}</span>${addressActions}</span>` : null, gcSrc("주소", c.addr)],
-    ["전화", telText(c.tel) ? `<a href="tel:${esc(telText(c.tel).replace(/[^\d+]/g, ""))}">${esc(telText(c.tel))}</a>` : null, gcSrc("전화", c.tel)],
+    // 고캠핑에 번호가 없어 카카오맵·네이버 플레이스 등록 번호로 채운 곳은 그렇다고 밝힌다(소유자 2026-10-31 X1, apply-platform-tel.mjs).
+    ["전화", telText(c.tel) ? `<a href="tel:${esc(telText(c.tel).replace(/[^\d+]/g, ""))}">${esc(telText(c.tel))}</a>${c.tel_src ? ` <small class="tel-src">플랫폼 등록 번호</small>` : ""}` : null, c.tel_src ? { g: "m", src: { label: `${c.tel_src.by === "naver" ? "네이버" : "카카오맵"} 플레이스 등록 번호(업장 확인 전)`, url: c.tel_src.url, at: c.tel_src.at, quote: c.tel } } : gcSrc("전화", c.tel)],
     ["홈페이지", c.homepage && !c.dl?.includes(c.homepage) ? `<a href="${esc(c.homepage)}" target="_blank" rel="noopener">${esc(hostOf(c.homepage) || c.homepage)}</a>` : null, { g: "c", src: { label: "공식 홈페이지", url: c.homepage } }],
     // 운영 기간(계절)은 ‘이용 정보’에 있으므로 여기서는 운영 주체·요일만 둔다.
     ["운영", [OP[c.op], (c.days ?? [])[0]].filter(Boolean).map(esc).join(" · ") || null, gcSrc("운영 정보")],
@@ -5807,9 +6001,9 @@ function infoHtml(c) {
   const savedMapH = Number(store.get("mc-detail-map-h", 280));
   const detailMapHeight = Number.isFinite(savedMapH) && savedMapH >= 160 && savedMapH <= 800 ? savedMapH : 280;
   return `<section class="d-sec info-sec" id="sec-info"><div class="sec-head">${iconTitle("store-pin", "업체 정보")}${c.gc_url ? `<a class="link" href="${esc(c.gc_url)}" target="_blank" rel="noopener">고캠핑 ${ic("right")}</a>` : ""}</div>
-    ${c.vr ? `
+    ${vrUrl(c) ? `
     <div class="detail-vr-banner">
-      <a href="${esc(c.vr)}" target="_blank" rel="noopener" class="detail-vr-link">
+      <a href="${esc(vrUrl(c))}" target="_blank" rel="noopener" class="detail-vr-link">
         <span class="vr-badge-icon">${ic("vr")}</span>
         <div class="vr-text-group">
           <strong>360° VR 파노라마 현장 둘러보기</strong>
@@ -5916,7 +6110,7 @@ function renderCardCmtInner(id, cmts = [], isOpen = false) {
         <div class="c-cmt-meta">
           <div class="c-cmt-meta-left">
             <strong class="c-cmt-author">${esc(x.nickname)}</strong>
-            <span class="c-cmt-date">${esc(formatKoreanDate(x.created_at))}</span>
+            <span class="c-cmt-date">${esc(formatKoreanDateTime(x.created_at))}</span>
           </div>
         </div>
         <div class="c-cmt-body">
@@ -7733,19 +7927,21 @@ function openLightboxUrls(urls, start = 0, caption = "사진") {
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
 }
 
-// ── 화면: 비교 (최대 5곳, 모바일 최적화) ───────────────────────────
+// ── 화면: 비교 (최대 20곳, 모바일 최적화) ───────────────────────────
+// 소유자 2026-10-31: 5곳 제한 → 20곳. 상세 자료(ensureFull)는 고른 곳만 받아 오므로 20곳이어도 부하가 크지 않다.
+const CMP_MAX = 20;
 let cmpMode = "table"; // "table" | "cards"
 
 async function compareView() {
   const selected = S.pick.filter((id) => S.saved.includes(id));
-  await ensureFull(selected.length ? selected : S.saved.slice(0, 5));
+  await ensureFull(selected.length ? selected.slice(0, CMP_MAX) : S.saved.slice(0, 5));
   const saved = S.saved.map((id) => S.byId.get(id)).filter(Boolean);
   const demo = !saved.length;
   const demoCamps = demo
     ? S.camps.filter((c) => photosOf(c).length && facts(c).power && facts(c).fire).sort((a, b) => rich(b) - rich(a)).slice(0, 2)
     : [];
   if (demo) await ensureFull(demoCamps.map((c) => String(c.id)));
-  if (!demo) S.pick = selected.length ? selected.slice(0, 5) : saved.slice(0, Math.min(saved.length, 5)).map((c) => String(c.id));
+  if (!demo) S.pick = selected.length ? selected.slice(0, CMP_MAX) : saved.slice(0, Math.min(saved.length, 5)).map((c) => String(c.id));
   const camps = demo ? demoCamps : S.pick.map((id) => S.byId.get(id)).filter(Boolean);
   const picker = demo ? `<div class="cmp-demo-note" data-cmp-empty>찜한 캠핑장이 없어 대표 정보가 있는 2곳을 예시로 보여드려요.<button type="button" class="btn ghost btn-sm" data-sample>대표 캠핑장으로 시작하기</button></div>` : `<div class="rail picks">${saved.map((c) => {
     const on = S.pick.includes(String(c.id));
@@ -7817,7 +8013,7 @@ async function compareView() {
     <div class="sec-head big">
       <div>
         <h1>찜한 캠핑장 <em>비교</em></h1>
-        <p class="sec-sub">찜 업체 최대 5곳을 비교할 수 있어요.</p>
+        <p class="sec-sub">찜 업체 최대 20곳을 비교할 수 있어요.</p>
       </div>
     </div>
     <p class="cmp-count"${demo ? "" : " hidden"} data-cmp-count>${demo ? "예시 비교 2곳" : `찜 ${saved.length}곳 중 ${camps.length}곳 비교 중`}</p>
@@ -7869,7 +8065,7 @@ function bindCompare() {
     const id = String(b.dataset.pick);
     if (S.pick.includes(id)) S.pick = S.pick.filter((x) => x !== id);
     else {
-      if (S.pick.length >= 5) { toast("최대 5곳까지 나란히 볼 수 있어요"); return; }
+      if (S.pick.length >= CMP_MAX) { toast(`최대 ${CMP_MAX}곳까지 나란히 볼 수 있어요`); return; }
       S.pick.push(id);
     }
     store.set("mc-pick", S.pick); route();

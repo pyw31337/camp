@@ -64,6 +64,8 @@ node pipeline/scripts/publish-sanity.mjs
 node pipeline/scripts/report-coverage.mjs
 node pipeline/scripts/build-fact-store.mjs
 node pipeline/scripts/quality-ledger.mjs
+# 전화번호가 빈 곳: 카카오맵 플레이스 등록 번호로 채움(소유자 2026-10-31 X1, 출처 c.tel_src · 화면 ‘플랫폼 등록 번호’)
+node pipeline/scripts/apply-platform-tel.mjs
 node pipeline/scripts/apply-info-score.mjs
 # 수집 현황판(/admin/collect/) 통계 — 실패해도 발행은 계속
 node pipeline/scripts/build-collect-stats.mjs || echo "::warning::수집 현황 통계 생성 실패"
