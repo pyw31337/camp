@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T01:02:39.527Z",
+  "generated_at": "2026-10-30T10:02:07.157Z",
   "policy": "operator hosts only, robots respected, sentences and image urls",
   "campgrounds": {
     "146": {
@@ -32,6 +32,11 @@
       "pages": [],
       "snippets": [],
       "images": []
+    },
+    "640": {
+      "status": "SKIPPED",
+      "reason": "not operator host",
+      "url": "https://naver.me/5tj47nQ3"
     },
     "977": {
       "status": "SKIPPED",
@@ -1673,7 +1678,7 @@
       "status": "OK",
       "name": "화성에코팜테마파크 오토캠핑장",
       "url": "https://hsecofarm.hscity.go.kr/",
-      "checked_at": "2026-10-30T01:02:47.710Z",
+      "checked_at": "2026-10-30T10:02:15.226Z",
       "pages": [
         "https://hsecofarm.hscity.go.kr/",
         "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
