@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-10-30T13:10:50.514Z",
+ "generated_at": "2026-10-30T13:31:48.082Z",
  "how_to_resolve": "원문을 대조해 data/quality/decisions.ndjson에 {cid, attr, value, url, why, by, at} 한 줄을 덧붙인다(docs/DATA_QUALITY_PROCESS.md 4단계).",
- "count": 849,
+ "count": 848,
  "items": [
   {
    "cid": "2179",
@@ -195,55 +195,6 @@
       "url": "https://blog.naver.com/gpfla88113/224425751472",
       "at": "2026-09-29",
       "quote": "위치: 전북 완주군 동상면 송광수만로 1079-15 캠프더쉼 예약: 캠핏 입실: 15시 (전타임사람이없으면 조율가능) 퇴실: 12시 1박이용금액: 80000원 들어가면 관리사무소에 들려서 쓰…"
-     }
-    ]
-   }
-  },
-  {
-   "cid": "29",
-   "name": "80 SS 오토캠핑장",
-   "attr": "PET_POLICY",
-   "label": "반려견 동반",
-   "ui": true,
-   "top": {
-    "value": "NOT_ALLOWED",
-    "confidence": 0.985,
-    "sources": 2,
-    "evidence": [
-     {
-      "grade": "OPERATOR",
-      "src": "operator_discovered",
-      "url": "https://sscamping80.com/about",
-      "at": "2026-10-16T06:49:05.551Z",
-      "quote": "※ 하늘창은 카라반 특수소재로 야간에는 잘 보이지 않을 수 있으며, 반려견 동반은 불가합니다."
-     },
-     {
-      "grade": "CONFIRMED",
-      "src": "gocamping",
-      "url": null,
-      "at": null,
-      "quote": "불가능"
-     }
-    ]
-   },
-   "rival": {
-    "value": "ALLOWED",
-    "confidence": 0.935,
-    "sources": 2,
-    "evidence": [
-     {
-      "grade": "OPERATOR",
-      "src": "operator_discovered",
-      "url": "https://sscamping80.com/info",
-      "at": "2026-10-16T06:49:05.551Z",
-      "quote": "반려동물 안내 (전 객실 동반 가능)"
-     },
-     {
-      "grade": "MENTION",
-      "src": "review_search",
-      "url": "https://blog.naver.com/jm_0513_/224273656212",
-      "at": "2026-05-03",
-      "quote": "✔️애견동반 가능한 사이트 있음"
      }
     ]
    }
@@ -734,6 +685,48 @@
       "url": "https://blog.naver.com/saladin324/223373233232",
       "at": "2024-03-05",
       "quote": "연천 옴니버스캠핑장 체크인 시간 : 13시 ~ 20시 사이 체크아웃 시간 : 익일 12시까지 에티켓타임 : 22시 ~ 07시 은근 캠핑 와서 에티켓타임 안..."
+     }
+    ]
+   }
+  },
+  {
+   "cid": "29",
+   "name": "80 SS 오토캠핑장",
+   "attr": "PET_POLICY",
+   "label": "반려견 동반",
+   "ui": true,
+   "top": {
+    "value": "ALLOWED",
+    "confidence": 0.99,
+    "sources": 3,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "operator_discovered",
+      "url": "https://sscamping80.com/info",
+      "at": "2026-10-16T06:49:05.551Z",
+      "quote": "반려동물 안내 (전 객실 동반 가능)"
+     },
+     {
+      "grade": "CONFIRMED",
+      "src": "gocamping",
+      "url": null,
+      "at": null,
+      "quote": "가능"
+     }
+    ]
+   },
+   "rival": {
+    "value": "NOT_ALLOWED",
+    "confidence": 0.9,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "operator_discovered",
+      "url": "https://sscamping80.com/about",
+      "at": "2026-10-16T06:49:05.551Z",
+      "quote": "※ 하늘창은 카라반 특수소재로 야간에는 잘 보이지 않을 수 있으며, 반려견 동반은 불가합니다."
      }
     ]
    }
@@ -2708,6 +2701,41 @@
       "url": "https://blog.naver.com/jihye7531/224294686270",
       "at": "2026-05-23",
       "quote": "가평수영장카라반 애견 키즈 모두 가능한 곳!."
+     }
+    ]
+   },
+   "rival": {
+    "value": "NOT_ALLOWED",
+    "confidence": 0.85,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "CONFIRMED",
+      "src": "gocamping",
+      "url": null,
+      "at": null,
+      "quote": "불가능"
+     }
+    ]
+   }
+  },
+  {
+   "cid": "100013",
+   "name": "약수동산",
+   "attr": "PET_POLICY",
+   "label": "반려견 동반",
+   "ui": true,
+   "top": {
+    "value": "ALLOWED",
+    "confidence": 0.85,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "CONFIRMED",
+      "src": "gocamping_intro",
+      "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100013",
+      "at": "2026-10-28T00:00:00+09:00",
+      "quote": "좌청룡 존 7개는 지대가 높아 시야가 트여 있으며, 노을 존 4개는 낮은 지대에 있고, 애견 동반이 가능하다."
      }
     ]
    },
@@ -18836,41 +18864,6 @@
   {
    "cid": "100561",
    "name": "서천 장항글램핑장",
-   "attr": "INNER_AMENITY",
-   "label": "글램핑·카라반 내부시설",
-   "ui": true,
-   "top": {
-    "value": "AIRCON",
-    "confidence": 0.85,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "CONFIRMED",
-      "src": "gocamping",
-      "url": null,
-      "at": null,
-      "quote": "침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"
-     }
-    ]
-   },
-   "rival": {
-    "value": "BED",
-    "confidence": 0.85,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "CONFIRMED",
-      "src": "gocamping",
-      "url": null,
-      "at": null,
-      "quote": "침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"
-     }
-    ]
-   }
-  },
-  {
-   "cid": "100566",
-   "name": "스테이 인터뷰 금산",
    "attr": "INNER_AMENITY",
    "label": "글램핑·카라반 내부시설",
    "ui": true,
