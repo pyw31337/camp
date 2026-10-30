@@ -9,10 +9,11 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
-// 출발 도시(시청 좌표). 순서가 화면용 배열의 순서다 — 바꾸면 화면(app.js DRIVE_HUBS)도 같이 바꾼다.
+// 출발 도시(시청 좌표). 화면의 ‘내 위치’는 가장 가까운 도시를 골라 그 시간을 쓴다. 순서가 화면용 배열의 순서다 — 화면은 키로 찾으므로 도시를 늘릴 때는 끝에 붙이고 app.js HUB_PTS·ORIGINS에도 넣는다.
 export const HUBS = [
   ["seoul", "서울", 37.5665, 126.978], ["goyang", "고양·일산", 37.6584, 126.832], ["incheon", "인천", 37.4563, 126.7052], ["suwon", "수원", 37.2636, 127.0286],
   ["daejeon", "대전", 36.3504, 127.3845], ["daegu", "대구", 35.8714, 128.6014], ["gwangju", "광주", 35.1595, 126.8526], ["busan", "부산", 35.1796, 129.0756],
+  ["paju", "파주", 37.7599, 126.78], // 2026-10-31 소유자: 파주 추가(배열 끝에 붙인다 — 기존 순서 유지)
 ];
 const REG = join(root, "pipeline/registry/drive-times.json");
 const PUB = join(root, "camping-atlas/public/explore/data/drive-times.json");

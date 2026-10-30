@@ -651,7 +651,9 @@ const SIDO_KW = new Set(["서울", "경기", "인천", "강원", "충북", "충�
 // 출발지에서 이동 시간(소유자 2026-10-31): 직선거리가 아니라 카카오내비 자동차 길찾기 시간(추천 경로).
 // pipeline/scripts/sync-drive-times.mjs가 출발 도시 8곳 → 캠핑장 시간을 매일 조금씩 모아 explore/data/drive-times.json으로 낸다.
 // 아직 안 모인 캠핑장은 시간을 모르므로 ‘N시간 안’ 결과에서 빠진다(추정으로 채우지 않는다).
-const ORIGINS = [["seoul", "서울"], ["goyang", "고양·일산"], ["incheon", "인천"], ["suwon", "수원"], ["daejeon", "대전"], ["daegu", "대구"], ["gwangju", "광주"], ["busan", "부산"]];
+// 출발 도시(시청 좌표 — sync-drive-times.mjs HUBS와 같은 순서). ‘내 위치’는 가장 가까운 도시를 골라 그 도시의 내비 시간을 쓴다(소유자 2026-10-31).
+const HUB_PTS = { seoul: [37.5665, 126.978], goyang: [37.6584, 126.832], incheon: [37.4563, 126.7052], suwon: [37.2636, 127.0286], daejeon: [36.3504, 127.3845], daegu: [35.8714, 128.6014], gwangju: [35.1595, 126.8526], busan: [35.1796, 129.0756], paju: [37.7599, 126.78] };
+const ORIGINS = [["here", "내 위치"], ["seoul", "서울"], ["goyang", "고양·일산"], ["paju", "파주"], ["incheon", "인천"], ["suwon", "수원"], ["daejeon", "대전"], ["daegu", "대구"], ["gwangju", "광주"], ["busan", "부산"]];
 const DRIVES = [[0, "전체"], [1, "1시간"], [2, "2시간"], [3, "3시간"]];
 let DRIVE_DATA = null, DRIVE_LOAD = null;
 function loadDriveTimes() {
@@ -664,8 +666,22 @@ function driveMin(c) {
   return Number.isFinite(v) ? v : null;
 }
 const driveText = (m) => (m == null ? "" : m < 60 ? `${Math.max(5, Math.round(m / 5) * 5)}분` : `${Math.floor(m / 60)}시간${m % 60 >= 5 ? ` ${Math.round((m % 60) / 5) * 5}분` : ""}`);
+const originPressed = (o) => (S.originHere ? o === "here" : o === S.origin);
+function nearestHub(lat, lng) {
+  let best = null, bd = Infinity;
+  for (const [k, [a, b]] of Object.entries(HUB_PTS)) { const d = km2({ lat, lng }, { lat: a, lng: b }); if (d < bd) { bd = d; best = k; } }
+  return best;
+}
 async function setOrigin(k) {
-  S.origin = S.origin === k ? "" : k; store.set("mc-origin", S.origin);
+  if (k === "here") {
+    if (S.originHere) { S.origin = ""; S.originHere = false; store.set("mc-origin", ""); return; }
+    const pos = await new Promise((res) => (navigator.geolocation ? navigator.geolocation.getCurrentPosition((p) => res(p.coords), () => res(null), { maximumAge: 600000, timeout: 8000 }) : res(null)));
+    if (!pos) { toast("위치 권한이 없어 가까운 출발 도시를 고를 수 없어요 — 도시를 직접 골라 주세요"); return; }
+    S.origin = nearestHub(pos.latitude, pos.longitude); S.originHere = true; store.set("mc-origin", S.origin);
+    toast(`내 위치에서 가장 가까운 ${ORIGINS.find(([o]) => o === S.origin)?.[1]} 출발 기준 내비 시간이에요`);
+  } else {
+    S.origin = S.origin === k && !S.originHere ? "" : k; S.originHere = false; store.set("mc-origin", S.origin);
+  }
   if (!S.origin) return;
   await loadDriveTimes();
   const i = DRIVE_DATA?.hubs?.findIndex(([h]) => h === S.origin) ?? -1;
@@ -673,7 +689,7 @@ async function setOrigin(k) {
   const have = i < 0 ? 0 : Object.values(DRIVE_DATA?.t ?? {}).filter((a) => Number.isFinite(a[i])).length;
   if (have / stays < 0.9) toast(`${ORIGINS.find(([o]) => o === S.origin)?.[1]} 출발 내비 시간을 모으는 중이에요(${Math.round((have / stays) * 100)}%) — 모은 곳만 보여요`);
 }
-if (S.origin && !ORIGINS.some(([o]) => o === S.origin)) { S.origin = ""; S.drive = 0; store.set("mc-origin", ""); store.set("mc-drive", 0); }
+if (S.origin && (S.origin === "here" || !ORIGINS.some(([o]) => o === S.origin))) { S.origin = ""; S.drive = 0; store.set("mc-origin", ""); store.set("mc-drive", 0); }
 if (S.origin) loadDriveTimes().then(() => { if (!S.origin) return; if ($("[data-list-more]")) renderList(); else if ($("[data-rows]")) renderResults(); });
 function matches(c, { useArea = true, quick = S.quick } = {}) {
   if (S.drive && S.origin) { const m = driveMin(c); if (m == null || m > S.drive * 60) return false; }
@@ -3768,7 +3784,7 @@ function paintCondSheet() {
     <div class="sheet-head"><h2 id="cond-title">조건으로 찾기</h2><button type="button" class="icon-btn sheet-close" data-c="close" aria-label="닫기">${ic("close")}</button></div>
     <div class="cond-body">
       <section><h3>지역</h3><div class="cond-chips">${SIDOS.map((x) => chip("sido", x, x, k.sido.includes(x), pSido.filter((c) => sidoShort(c.sido) === x).length)).join("")}</div></section>
-      <section><h3>출발지에서 내비 시간</h3><div class="cond-chips drive-chips">${ORIGINS.map(([o, l]) => `<button type="button" class="chip" data-origin="${o}" aria-pressed="${S.origin === o}">${l}</button>`).join("")}</div><div class="cond-chips drive-chips">${DRIVES.map(([h, l]) => `<button type="button" class="chip" data-drive="${h}" aria-pressed="${S.drive === h}"${!S.origin && h ? " disabled" : ""}>${h ? `${l} 안` : l}</button>`).join("")}</div></section>
+      <section><h3>출발지에서 내비 시간</h3><div class="cond-chips drive-chips">${ORIGINS.map(([o, l]) => `<button type="button" class="chip" data-origin="${o}" aria-pressed="${originPressed(o)}">${l}</button>`).join("")}</div><div class="cond-chips drive-chips">${DRIVES.map(([h, l]) => `<button type="button" class="chip" data-drive="${h}" aria-pressed="${S.drive === h}"${!S.origin && h ? " disabled" : ""}>${h ? `${l} 안` : l}</button>`).join("")}</div></section>
       <section><h3>주변으로</h3><div class="cond-near"><input type="search" data-near value="${esc(k.near)}" placeholder="예: 파주, 가평, 양평" aria-label="시·군 이름" autocomplete="off">${R_OPTS.map((r) => chip("r", r, `${r}km`, k.r === r)).join("")}</div>${k.near ? `<p class="cond-hint">${k._ctr ? `${esc(k._ctr.label)} 가운데에서 ${k.r}km 안` : "그 이름의 시·군을 찾지 못했어요"}</p>` : ""}</section>
       <section><h3>상품·이용</h3><div class="cond-chips">${KINDS.map(([x, l]) => chip("kind", x, l, k.kind.includes(x), tally("kind", [x]))).join("")}</div></section>
       <section><h3>반려견</h3><div class="cond-chips">${chip("pet", 1, "동반 가능", k.pet, tally("pet", true))}</div></section>
@@ -3898,7 +3914,7 @@ function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAt
   const fee = (k, l) => `<button type="button" class="chip fee-chip" ${feeAttr}="${k}" aria-pressed="${feePressed(k)}">${l}</button>`;
   return `<div class="filter-mod" aria-label="지역"><span class="fee-band-lbl">지역</span><div class="rail chips">${areaChips}</div></div>
     <div class="filter-mod" aria-label="사이트"><span class="fee-band-lbl">사이트</span><div class="rail chips"><button type="button" class="chip" ${stypeAttr}="" aria-pressed="${!S.stype}">전체</button>${typeChips}</div></div>
-    <div class="filter-mod" aria-label="출발지에서 이동 시간"><span class="fee-band-lbl">출발</span><div class="rail chips drive-chips">${ORIGINS.map(([k, l]) => `<button type="button" class="chip" data-origin="${k}" aria-pressed="${S.origin === k}">${l}</button>`).join("")}<span class="chip-sep" aria-hidden="true"></span>${DRIVES.map(([h, l]) => `<button type="button" class="chip" data-drive="${h}" aria-pressed="${S.drive === h}"${!S.origin && h ? " disabled" : ""}>${h ? `${l} 안` : l}</button>`).join("")}</div></div>
+    <div class="filter-mod" aria-label="출발지에서 이동 시간"><span class="fee-band-lbl">출발</span><div class="rail chips drive-chips">${ORIGINS.map(([k, l]) => `<button type="button" class="chip" data-origin="${k}" aria-pressed="${originPressed(k)}">${l}</button>`).join("")}<span class="chip-sep" aria-hidden="true"></span>${DRIVES.map(([h, l]) => `<button type="button" class="chip" data-drive="${h}" aria-pressed="${S.drive === h}"${!S.origin && h ? " disabled" : ""}>${h ? `${l} 안` : l}</button>`).join("")}</div></div>
     <div class="filter-mod" aria-label="요금"><span class="fee-band-lbl">요금</span><div class="rail chips fee-bands">${fee("", "전체")}${fee("u3", "~3만원")}${fee("3to5", "3~5만원")}${fee("5to7", "5~7만원")}${fee("7to10", "7만원~10만원")}${fee("10to20", "10만원~20만원")}${fee("o20", "20만원+")}</div></div>`;
 }
 
@@ -4202,7 +4218,7 @@ document.addEventListener("click", async (e) => {
   e.preventDefault(); e.stopPropagation();
   if (o) { await setOrigin(o.dataset.origin); if (!S.origin) { S.drive = 0; store.set("mc-drive", 0); } else if (!S.drive) { S.drive = 2; store.set("mc-drive", 2); } }
   if (d) { S.drive = Number(d.dataset.drive) || 0; store.set("mc-drive", S.drive); }
-  $$("[data-origin]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.origin === S.origin)));
+  $$("[data-origin]").forEach((x) => x.setAttribute("aria-pressed", String(S.originHere ? x.dataset.origin === "here" : x.dataset.origin === S.origin)));
   $$("[data-drive]").forEach((x) => { x.setAttribute("aria-pressed", String(Number(x.dataset.drive) === S.drive)); x.disabled = !S.origin && Number(x.dataset.drive) > 0; });
   if ($("[data-list-more]")) renderList(); else if ($("[data-rows]")) renderResults();
 }, true);
