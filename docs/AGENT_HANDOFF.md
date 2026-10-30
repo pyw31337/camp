@@ -17,7 +17,10 @@
 - 소유자 추가 요청(같은 날)
   - **일자별 추이(7일·30일 전환)**: 수집처별 일별 처리량(작은 막대 그래프, 처리 없음·최근 멈춤 표시), 카테고리별 핵심 지표 일별 선 그래프.
   - **AI 분석량·에이전트 작업량**: 글 판정(e5)·사진 판정(CLIP)·주변시설 판독(Apple Vision)·충돌 판정의 판정일 기준 누적·오늘·7일·30일. Claude·Codex·로컬 맥미니·자동 수집·소유자 계정의 main 커밋(병합 제외, CI 얕은 체크아웃이면 35일 더 받음), 게시판 글.
-- 첫 진단에서 찾은 것: **data-sync가 10-28부터 coverage-guard(checkin·checkout·site_types 감소)로 발행이 멈춤** → 후속 조사.
+- 첫 진단에서 찾은 것: **data-sync가 10-28부터 coverage-guard(checkin·checkout·site_types 감소)로 발행이 멈춤**.
+  - 원인: 최종 빌드의 파생 계산(spec-sheet·profiles·site-types 등)이 build:explore 직후 고캠핑 기준 3,124곳에만 돌았다. 당일 장소·휴양림·OSM(446곳 등)은 그 뒤 apply-dayuse-seed·build-public-leisure·merge-collected로 붙어 파생 값이 비었다.
+  - 해결: merge-collected --social 뒤에 증분 발행과 같은 순서로 2차 계산(data-sync.yml).
+  - 확인: run 40968163062의 pipeline-out으로 재현했다. 1차만 하면 checkin 2,407·site_types 2,997이고, 2차를 넣고 heal까지 하면 2,742·3,381로 coverage-guard가 통과한다.
 
 ## 📌 SNS 영상은 재생되는 영상만 · YouTube 영상 확대 수집(v2) · 후기 썸네일 매일 채우기 (2026-10-30, Claude)
 

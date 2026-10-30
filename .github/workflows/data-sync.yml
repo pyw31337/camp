@@ -479,6 +479,12 @@ jobs:
           node pipeline/scripts/apply-public-nearby.mjs
           # 카카오 다음 소셜 검색(영상·후기·사진)을 고캠핑 밖 장소(휴양림·지자체·OSM)에도 채운다 — 상세 SNS 영상 칸(2026-10-23). 내용 판정보다 먼저.
           node pipeline/scripts/merge-collected.mjs --social pipeline/out/campground-social.json
+          # 파생 정보 2차 계산(2026-10-30): 위 1차 계산은 고캠핑 기준 3,124곳에만 돌고, 당일 장소·휴양림·OSM 등은 그 뒤에 붙어
+          # 입실·사이트 타입 같은 파생 값이 비었다 → coverage-guard가 10-28부터 발행을 막음(checkin 2775→2525, site_types 3433→3004).
+          # 장소를 모두 붙이고 소셜까지 채운 뒤 증분 발행(publish-incremental.sh)과 같은 순서로 한 번 더 계산한다.
+          for s in survey-all-campgrounds build-operator-facts build-spec-sheet build-review-digest build-nearby-facts build-nearby-photos build-thankq-facts build-campground-profiles build-site-pricing-facts build-site-types build-price-tiers build-house-rules build-gocamping-detail apply-dayuse-seed build-public-leisure apply-public-nearby; do
+            node "pipeline/scripts/$s.mjs" > /dev/null
+          done
           # 카카오 후기 썸네일(registry/review-thumbs.json)을 비어 있는 글에만 채운다
           node pipeline/scripts/apply-review-thumbs.mjs
           # 후기 사진 내용 판정(registry/photo-judgments.json) → 걸러진 사진에 ng 표시(화면 갤러리·대표에서 숨김)
