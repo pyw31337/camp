@@ -178,11 +178,11 @@
    "filter": "in",
    "note": "count가 있으면 면·동 수. text는 세부 이름(방갈로·캐빈 등). 원천: 고캠핑 등록값·소개글, 카카오/네이버 분류, 운영자 홈페이지 문장(lib/site-types.mjs)",
    "coverage": {
-    "campgrounds": 3441,
+    "campgrounds": 3442,
     "by_grade": {
      "CONFIRMED": 5787,
      "OPERATOR": 1080,
-     "MENTION": 5067
+     "MENTION": 5068
     }
    }
   },
@@ -432,11 +432,11 @@
    "pref": "반려견과 함께 가나요? 크기는?",
    "filter": "in",
    "coverage": {
-    "campgrounds": 2850,
+    "campgrounds": 2851,
     "by_grade": {
      "CONFIRMED": 2754,
      "OPERATOR": 280,
-     "MENTION": 1386,
+     "MENTION": 1387,
      "VERIFIED": 64
     }
    }
@@ -481,9 +481,9 @@
    "filter": "max",
    "note": "MENTION 전용. 확정값으로 쓰지 않는다",
    "coverage": {
-    "campgrounds": 2734,
+    "campgrounds": 2735,
     "by_grade": {
-     "MENTION": 13903
+     "MENTION": 13904
     }
    }
   },
@@ -569,9 +569,9 @@
    "pref": "일찍 들어가고 싶나요?",
    "filter": "max",
    "coverage": {
-    "campgrounds": 2784,
+    "campgrounds": 2785,
     "by_grade": {
-     "MENTION": 3534,
+     "MENTION": 3536,
      "OPERATOR": 646,
      "CONFIRMED": 4,
      "REFERENCE": 452
@@ -586,9 +586,9 @@
    "pref": "늦게 나오고 싶나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 2724,
+    "campgrounds": 2725,
     "by_grade": {
-     "MENTION": 3513,
+     "MENTION": 3514,
      "OPERATOR": 613,
      "CONFIRMED": 2,
      "REFERENCE": 445
@@ -662,12 +662,12 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 844,
+    "campgrounds": 845,
     "by_grade": {
      "OPERATOR": 703,
      "CONFIRMED": 1,
      "REFERENCE": 467,
-     "MENTION": 50
+     "MENTION": 51
     }
    }
   },
@@ -2655,5 +2655,5 @@
    }
   }
  ],
- "generated_at": "2026-10-31T15:56:07.662Z"
+ "generated_at": "2026-10-31T19:50:38.217Z"
 }

@@ -3788,8 +3788,8 @@
 {"cid":"2464","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.littlejsb.com/103","at":"2025-04-21","text":"펜션","quote":"운영 형태 : 오토캠핑장, 펜션 병행 운영. 운영 기간 : 연중무휴. 입실/퇴실 시간 : 입실 13:0"}
 {"cid":"2464","attr":"STAY_GENERAL_SITES","value":50,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2472","attr":"SITE_TOTAL","value":70,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2472","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/%ec%98%88%ec%95%bd%ec%95%88%eb%82%b4/","at":"2026-10-31T12:22:35.301Z","quote":"캠핑카, 카라반, 텐트라반, 투폴딩 트레일러는 진입 불가 입니다."}
-{"cid":"2472","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/","at":"2026-10-31T12:22:35.301Z","text":"방갈로","quote":"방갈로전용"}
+{"cid":"2472","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/%ec%98%88%ec%95%bd%ec%95%88%eb%82%b4/","at":"2026-10-31T19:17:54.038Z","quote":"캠핑카, 카라반, 텐트라반, 투폴딩 트레일러는 진입 불가 입니다."}
+{"cid":"2472","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/","at":"2026-10-31T19:17:54.038Z","text":"방갈로","quote":"방갈로전용"}
 {"cid":"2472","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":70}
 {"cid":"2472","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/ichean.camp/VwG0/5","at":"2020-07-02","quote":"033-636-7700 - 화천/딴산유원지 : ***-****-****, 물놀이(계곡) - 원주/두리오토캠핑장 : 033-765-8569, 선착순(50%)/예약(50%), 펜션(예약"}
 {"cid":"2472","attr":"STAY_GENERAL_SITES","value":70,"grade":"CONFIRMED","src":"gocamping"}
@@ -23465,6 +23465,7 @@
 {"cid":"park-43114-00048-syac5","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/day_log80/224297107167","at":"2026-05-26","text":"오두막","quote":"토성마을 카페에 들어서자마자 눈에 띄었던 건 작은 오두막 형태의 공간이었다. ​ 오두막 내부 모습 ​ 캠핑 온 것 같은 분위기…"}
 {"cid":"park-43130-00003-1qem2","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/k1mm1nk_/224433199972","at":"2026-10-06","quote":"단점: 방음 잘 안됩니다 옆에 지나가는 사람 목소리 다 들리구요 아침엔 해가뜨면 눈이떠질정도로 밝아요 직원분들은 친절한편은 아님 화장실 문 안잠김 매너타임시간때문에 늦게까지 놀수없어요 월산근린공원야영장 전남광주통합특"}
 {"cid":"park-43130-00010-1qem2","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://memoriers.tistory.com/369","at":"2026-10-16","quote":"서울 글램핑 4곳｜공공 캠핑장 요금·예약 오픈일 비교. 매월 10일 14시, 글램핑"}
+{"cid":"park-43745-00021-1lq4v","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://www.airbnb.co.kr/rooms/1182921127774182636","text":"펜션","quote":"2026년 10월 31일 · 펜션 · 통창을 통해 보이는 계절마다 바뀌는 산의 풍경과 넓고 쾌적하고 편안"}
 {"cid":"park-43760-00025-14z6t","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ihhihh/224339572319","at":"2026-07-08","quote":"칠성면 각연길 136 캠핑 유형 글램핑, 오토캠핑 가격대 50,000원~120,000원 (사이트별) 주요 시설"}
 {"cid":"park-43760-00025-14z6t","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/hanpeni/224205129247","at":"2026-03-05","text":"펜션","quote":"충북 괴산펜션, 단체펜션 가족펜션 독채펜션 괴산쌍곡계곡 숙박. 충북 괴산군 칠성면 쌍"}
 {"cid":"park-43760-00026-1wne1","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/campingcaravan/223520209484","at":"2024-07-21","quote":"충청북도지역 캠핑장 중 개인카라반, 트레일러 입장 가능한 캠핑장 소개. 별빛공원의 자연특별감성을 자랑하는"}
