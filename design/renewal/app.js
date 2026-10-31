@@ -649,48 +649,57 @@ const THEME_SUBS = {
 };
 const SIDO_KW = new Set(["서울", "경기", "인천", "강원", "충북", "충남", "충청", "대전", "세종", "전북", "전남", "전라", "광주", "경북", "경남", "경상", "대구", "울산", "부산", "제주", "서울특별시", "경기도", "인천광역시", "강원특별자치도", "강원도", "충청북도", "충청남도", "대전광역시", "세종특별자치시", "전라북도", "전북특별자치도", "전라남도", "광주광역시", "경상북도", "경상남도", "대구광역시", "울산광역시", "부산광역시", "제주특별자치도", "제주도"]);
 // 출발지에서 이동 시간(소유자 2026-10-31): 직선거리가 아니라 카카오내비 자동차 길찾기 시간(추천 경로).
-// pipeline/scripts/sync-drive-times.mjs가 출발 도시 8곳 → 캠핑장 시간을 매일 조금씩 모아 explore/data/drive-times.json으로 낸다.
-// 아직 안 모인 캠핑장은 시간을 모르므로 ‘N시간 안’ 결과에서 빠진다(추정으로 채우지 않는다).
-// 출발 도시(시청 좌표 — sync-drive-times.mjs HUBS와 같은 순서). ‘내 위치’는 가장 가까운 도시를 골라 그 도시의 내비 시간을 쓴다(소유자 2026-10-31).
-const HUB_PTS = { seoul: [37.5665, 126.978], goyang: [37.6584, 126.832], incheon: [37.4563, 126.7052], suwon: [37.2636, 127.0286], daejeon: [36.3504, 127.3845], daegu: [35.8714, 128.6014], gwangju: [35.1595, 126.8526], busan: [35.1796, 129.0756], paju: [37.7599, 126.78] };
-const ORIGINS = [["here", "내 위치"], ["seoul", "서울"], ["goyang", "고양·일산"], ["paju", "파주"], ["incheon", "인천"], ["suwon", "수원"], ["daejeon", "대전"], ["daegu", "대구"], ["gwangju", "광주"], ["busan", "부산"]];
+// pipeline/scripts/sync-drive-times.mjs가 전국 출발 도시(lib/drive-hubs.mjs) → 캠핑장 시간을 매일 조금씩 모아
+// explore/data/drive/hubs.json(도시 목록·채움 비율)과 drive/{도시}.json(캠핑장 id → 분)으로 낸다. 고른 도시 파일만 받는다.
+// ‘내 위치’는 가장 가까운 출발 도시를 골라 그 도시의 내비 시간을 쓴다(위치는 도시를 고르는 데만).
+// 시간을 모르는 곳(아직 안 모였거나 직선 250km 밖 = 3시간 넘음)은 ‘N시간 안’에서 빠진다(추정으로 채우지 않는다).
 const DRIVES = [[0, "전체"], [1, "1시간"], [2, "2시간"], [3, "3시간"]];
-let DRIVE_DATA = null, DRIVE_LOAD = null;
-function loadDriveTimes() {
-  return (DRIVE_LOAD ??= fetch(`${DATA}drive-times.json`, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((j) => (DRIVE_DATA = j)));
+let DRIVE_HUBS = [], DRIVE_T = new Map(), DRIVE_HUBS_LOAD = null;
+const loadDriveHubs = () => (DRIVE_HUBS_LOAD ??= fetch(`${DATA}drive/hubs.json`, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((j) => (DRIVE_HUBS = j?.hubs ?? [])));
+async function loadDriveHub(k) {
+  if (!k || DRIVE_T.has(k)) return;
+  const j = await fetch(`${DATA}drive/${encodeURIComponent(k)}.json`, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  DRIVE_T.set(k, j?.t ?? {});
 }
+const hubName = (k) => DRIVE_HUBS.find(([h]) => h === k)?.[1] ?? k;
 function driveMin(c) {
-  if (!S.origin || !DRIVE_DATA) return null;
-  const i = DRIVE_DATA.hubs.findIndex(([k]) => k === S.origin);
-  const v = i < 0 ? null : DRIVE_DATA.t?.[String(c.id)]?.[i];
+  if (!S.origin) return null;
+  const v = DRIVE_T.get(S.origin)?.[String(c.id)];
   return Number.isFinite(v) ? v : null;
 }
 const driveText = (m) => (m == null ? "" : m < 60 ? `${Math.max(5, Math.round(m / 5) * 5)}분` : `${Math.floor(m / 60)}시간${m % 60 >= 5 ? ` ${Math.round((m % 60) / 5) * 5}분` : ""}`);
-const originPressed = (o) => (S.originHere ? o === "here" : o === S.origin);
 function nearestHub(lat, lng) {
   let best = null, bd = Infinity;
-  for (const [k, [a, b]] of Object.entries(HUB_PTS)) { const d = km2({ lat, lng }, { lat: a, lng: b }); if (d < bd) { bd = d; best = k; } }
+  for (const [k, , , a, b] of DRIVE_HUBS) { const d = km2({ lat, lng }, { lat: a, lng: b }); if (d < bd) { bd = d; best = k; } }
   return best;
 }
+// 출발 선택 UI: 내 위치 버튼 + 권역별 도시 선택 상자(도시가 40곳이 넘어 칩 대신)
+function originPicker(cls = "") {
+  const regions = [...new Set(DRIVE_HUBS.map((h) => h[2]))];
+  const opts = regions.map((r) => `<optgroup label="${esc(r)}">${DRIVE_HUBS.filter((h) => h[2] === r).map(([k, l]) => `<option value="${esc(k)}"${S.origin === k && !S.originHere ? " selected" : ""}>${esc(l)}</option>`).join("")}</optgroup>`).join("");
+  return `<span class="origin-pick ${cls}"><button type="button" class="chip" data-origin="here" aria-pressed="${Boolean(S.originHere)}">${ic("pin")}내 위치${S.originHere && S.origin ? ` · ${esc(hubName(S.origin))}` : ""}</button><select class="origin-select" data-origin-select aria-label="출발 도시"><option value="">출발 도시</option>${opts}</select></span>`;
+}
 async function setOrigin(k) {
+  await loadDriveHubs();
   if (k === "here") {
     if (S.originHere) { S.origin = ""; S.originHere = false; store.set("mc-origin", ""); return; }
     const pos = await new Promise((res) => (navigator.geolocation ? navigator.geolocation.getCurrentPosition((p) => res(p.coords), () => res(null), { maximumAge: 600000, timeout: 8000 }) : res(null)));
     if (!pos) { toast("위치 권한이 없어 가까운 출발 도시를 고를 수 없어요 — 도시를 직접 골라 주세요"); return; }
-    S.origin = nearestHub(pos.latitude, pos.longitude); S.originHere = true; store.set("mc-origin", S.origin);
-    toast(`내 위치에서 가장 가까운 ${ORIGINS.find(([o]) => o === S.origin)?.[1]} 출발 기준 내비 시간이에요`);
-  } else {
-    S.origin = S.origin === k && !S.originHere ? "" : k; S.originHere = false; store.set("mc-origin", S.origin);
-  }
+    S.origin = nearestHub(pos.latitude, pos.longitude) ?? ""; S.originHere = Boolean(S.origin); store.set("mc-origin", S.origin);
+    if (S.origin) toast(`내 위치에서 가장 가까운 ${hubName(S.origin)} 출발 기준 내비 시간이에요`);
+  } else { S.origin = k; S.originHere = false; store.set("mc-origin", S.origin); }
   if (!S.origin) return;
-  await loadDriveTimes();
-  const i = DRIVE_DATA?.hubs?.findIndex(([h]) => h === S.origin) ?? -1;
-  const stays = S.camps.filter((c) => !c.du).length || 1;
-  const have = i < 0 ? 0 : Object.values(DRIVE_DATA?.t ?? {}).filter((a) => Number.isFinite(a[i])).length;
-  if (have / stays < 0.9) toast(`${ORIGINS.find(([o]) => o === S.origin)?.[1]} 출발 내비 시간을 모으는 중이에요(${Math.round((have / stays) * 100)}%) — 모은 곳만 보여요`);
+  await loadDriveHub(S.origin);
+  const cover = DRIVE_HUBS.find(([h]) => h === S.origin)?.[5] ?? 0;
+  if (cover < 90) toast(`${hubName(S.origin)} 출발 내비 시간을 모으는 중이에요(${Math.round(cover)}%) — 모은 곳만 보여요`);
 }
-if (S.origin && (S.origin === "here" || !ORIGINS.some(([o]) => o === S.origin))) { S.origin = ""; S.drive = 0; store.set("mc-origin", ""); store.set("mc-drive", 0); }
-if (S.origin) loadDriveTimes().then(() => { if (!S.origin) return; if ($("[data-list-more]")) renderList(); else if ($("[data-rows]")) renderResults(); });
+loadDriveHubs().then(async () => {
+  if (S.origin && !DRIVE_HUBS.some(([h]) => h === S.origin)) { S.origin = ""; S.drive = 0; store.set("mc-origin", ""); store.set("mc-drive", 0); }
+  if (!S.origin) return;
+  await loadDriveHub(S.origin);
+  if ($("[data-list-more]")) renderList(); else if ($("[data-rows]")) renderResults();
+  $$(".origin-pick").forEach((el) => { el.outerHTML = originPicker(el.className.replace("origin-pick", "").trim()); });
+});
 function matches(c, { useArea = true, quick = S.quick } = {}) {
   if (S.drive && S.origin) { const m = driveMin(c); if (m == null || m > S.drive * 60) return false; }
   if (useArea && S.area !== "all" && AREA_OF[sidoShort(c.sido)] !== S.area) return false;
@@ -3784,7 +3793,7 @@ function paintCondSheet() {
     <div class="sheet-head"><h2 id="cond-title">조건으로 찾기</h2><button type="button" class="icon-btn sheet-close" data-c="close" aria-label="닫기">${ic("close")}</button></div>
     <div class="cond-body">
       <section><h3>지역</h3><div class="cond-chips">${SIDOS.map((x) => chip("sido", x, x, k.sido.includes(x), pSido.filter((c) => sidoShort(c.sido) === x).length)).join("")}</div></section>
-      <section><h3>출발지에서 내비 시간</h3><div class="cond-chips drive-chips">${ORIGINS.map(([o, l]) => `<button type="button" class="chip" data-origin="${o}" aria-pressed="${originPressed(o)}">${l}</button>`).join("")}</div><div class="cond-chips drive-chips">${DRIVES.map(([h, l]) => `<button type="button" class="chip" data-drive="${h}" aria-pressed="${S.drive === h}"${!S.origin && h ? " disabled" : ""}>${h ? `${l} 안` : l}</button>`).join("")}</div></section>
+      <section><h3>출발지에서 내비 시간</h3><div class="cond-chips drive-chips">${originPicker("in-sheet")}</div><div class="cond-chips drive-chips">${DRIVES.map(([h, l]) => `<button type="button" class="chip" data-drive="${h}" aria-pressed="${S.drive === h}"${!S.origin && h ? " disabled" : ""}>${h ? `${l} 안` : l}</button>`).join("")}</div></section>
       <section><h3>주변으로</h3><div class="cond-near"><input type="search" data-near value="${esc(k.near)}" placeholder="예: 파주, 가평, 양평" aria-label="시·군 이름" autocomplete="off">${R_OPTS.map((r) => chip("r", r, `${r}km`, k.r === r)).join("")}</div>${k.near ? `<p class="cond-hint">${k._ctr ? `${esc(k._ctr.label)} 가운데에서 ${k.r}km 안` : "그 이름의 시·군을 찾지 못했어요"}</p>` : ""}</section>
       <section><h3>상품·이용</h3><div class="cond-chips">${KINDS.map(([x, l]) => chip("kind", x, l, k.kind.includes(x), tally("kind", [x]))).join("")}</div></section>
       <section><h3>반려견</h3><div class="cond-chips">${chip("pet", 1, "동반 가능", k.pet, tally("pet", true))}</div></section>
@@ -3914,7 +3923,7 @@ function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAt
   const fee = (k, l) => `<button type="button" class="chip fee-chip" ${feeAttr}="${k}" aria-pressed="${feePressed(k)}">${l}</button>`;
   return `<div class="filter-mod" aria-label="지역"><span class="fee-band-lbl">지역</span><div class="rail chips">${areaChips}</div></div>
     <div class="filter-mod" aria-label="사이트"><span class="fee-band-lbl">사이트</span><div class="rail chips"><button type="button" class="chip" ${stypeAttr}="" aria-pressed="${!S.stype}">전체</button>${typeChips}</div></div>
-    <div class="filter-mod" aria-label="출발지에서 이동 시간"><span class="fee-band-lbl">출발</span><div class="rail chips drive-chips">${ORIGINS.map(([k, l]) => `<button type="button" class="chip" data-origin="${k}" aria-pressed="${originPressed(k)}">${l}</button>`).join("")}<span class="chip-sep" aria-hidden="true"></span>${DRIVES.map(([h, l]) => `<button type="button" class="chip" data-drive="${h}" aria-pressed="${S.drive === h}"${!S.origin && h ? " disabled" : ""}>${h ? `${l} 안` : l}</button>`).join("")}</div></div>
+    <div class="filter-mod" aria-label="출발지에서 이동 시간"><span class="fee-band-lbl">출발</span><div class="rail chips drive-chips">${originPicker()}<span class="chip-sep" aria-hidden="true"></span>${DRIVES.map(([h, l]) => `<button type="button" class="chip" data-drive="${h}" aria-pressed="${S.drive === h}"${!S.origin && h ? " disabled" : ""}>${h ? `${l} 안` : l}</button>`).join("")}</div></div>
     <div class="filter-mod" aria-label="요금"><span class="fee-band-lbl">요금</span><div class="rail chips fee-bands">${fee("", "전체")}${fee("u3", "~3만원")}${fee("3to5", "3~5만원")}${fee("5to7", "5~7만원")}${fee("7to10", "7만원~10만원")}${fee("10to20", "10만원~20만원")}${fee("o20", "20만원+")}</div></div>`;
 }
 
@@ -4212,13 +4221,22 @@ function bindHome() {
   cleanup.push(() => { io.disconnect(); v.removeEventListener("click", homeClicks); });
 }
 // 출발지·이동 시간 칩(홈·목록 공통): 고르면 같은 화면을 다시 그린다.
+document.addEventListener("change", async (e) => {
+  const sel = e.target.closest?.("[data-origin-select]"); if (!sel) return;
+  e.stopPropagation();
+  await setOrigin(sel.value);
+  if (!S.origin) { S.drive = 0; store.set("mc-drive", 0); } else if (!S.drive) { S.drive = 2; store.set("mc-drive", 2); }
+  $$(".origin-pick").forEach((el) => { el.outerHTML = originPicker(el.className.replace("origin-pick", "").trim()); });
+  $$("[data-drive]").forEach((x) => { x.setAttribute("aria-pressed", String(Number(x.dataset.drive) === S.drive)); x.disabled = !S.origin && Number(x.dataset.drive) > 0; });
+  if ($("[data-list-more]")) renderList(); else if ($("[data-rows]")) renderResults();
+}, true);
 document.addEventListener("click", async (e) => {
   const o = e.target.closest("[data-origin]"), d = e.target.closest("[data-drive]");
   if (!o && !d) return;
   e.preventDefault(); e.stopPropagation();
   if (o) { await setOrigin(o.dataset.origin); if (!S.origin) { S.drive = 0; store.set("mc-drive", 0); } else if (!S.drive) { S.drive = 2; store.set("mc-drive", 2); } }
   if (d) { S.drive = Number(d.dataset.drive) || 0; store.set("mc-drive", S.drive); }
-  $$("[data-origin]").forEach((x) => x.setAttribute("aria-pressed", String(S.originHere ? x.dataset.origin === "here" : x.dataset.origin === S.origin)));
+  $$(".origin-pick").forEach((el) => { el.outerHTML = originPicker(el.className.replace("origin-pick", "").trim()); });
   $$("[data-drive]").forEach((x) => { x.setAttribute("aria-pressed", String(Number(x.dataset.drive) === S.drive)); x.disabled = !S.origin && Number(x.dataset.drive) > 0; });
   if ($("[data-list-more]")) renderList(); else if ($("[data-rows]")) renderResults();
 }, true);

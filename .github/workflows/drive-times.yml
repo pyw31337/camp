@@ -1,7 +1,7 @@
 name: Drive times
 
-# 출발 도시 9곳 → 캠핑장 자동차 이동 시간(카카오내비 길찾기, 소유자 2026-10-31: 직선거리 대신 내비 시간).
-# 무료 일간 쿼터 10,000건 안에서 실행당 8,000건. 처음 전부 채우는 데 약 4일, 이후 30일마다 다시 묻는다.
+# 전국 출발 도시 43곳(lib/drive-hubs.mjs) → 캠핑장 자동차 이동 시간(카카오내비 길찾기, 소유자 2026-10-31: 직선거리 대신 내비 시간).
+# 무료 일간 쿼터 10,000건 안에서: 처음 채우는 동안 하루 8,000건(약 2주), 다 채운 뒤에는 45일 주기로 나눠 하루 약 2,400건(최대 5,000건).
 # 토요일 오전처럼 나들이 출발 시간대 교통이 반영되도록 매일 오전 8:37 KST에 돈다. 끝나면 deploy-pages가 workflow_run으로 다시 배포한다.
 on:
   schedule:
@@ -9,9 +9,9 @@ on:
   workflow_dispatch:
     inputs:
       max:
-        description: "이번 실행 호출 상한 (기본 8000, 무료 일간 쿼터 10000)"
+        description: "이번 실행 호출 상한 (비우면 자동: 채우는 중 8000 · 유지 45일 주기 ≤5000)"
         required: false
-        default: "8000"
+        default: ""
 
 permissions:
   contents: write
@@ -38,13 +38,13 @@ jobs:
         run: node pipeline/scripts/sync-drive-times.mjs
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
-          DRIVE_MAX: ${{ github.event.inputs.max || '8000' }}
+          DRIVE_MAX: ${{ github.event.inputs.max || '' }}
       - name: Commit
         if: always()
         run: |
           git config user.name "moyeora-camping-data-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add pipeline/registry/drive-times.json camping-atlas/public/explore/data/drive-times.json 2>/dev/null || true
+          git add pipeline/registry/drive-times.json camping-atlas/public/explore/data/drive 2>/dev/null || true
           if git diff --cached --quiet; then echo "변경 없음"; exit 0; fi
           git commit -q -m "chore(data): refresh drive times"
           bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" drive-times
