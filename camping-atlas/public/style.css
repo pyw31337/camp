@@ -1597,7 +1597,7 @@ body.map-mode { overflow: hidden; height: 100dvh; }
 .d-bar .d-share { margin-left: -4px; }
 .mi .heart { position: absolute; top: 6px; right: 6px; margin: 0; }
 .d-dock .heart { width: 48px; height: 48px; margin: 0; background: var(--soft); }
-.trows { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(28px, 3.5vw, 44px); min-width: 0; }
+.trows { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(36px, 4vw, 52px); min-width: 0; }
 .trow-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
 /* 가로 줄 진행 막대는 ‘모두’ 바로 왼쪽에(제목과 링크 사이 한가운데 뜨지 않게) */
 .trow-head .rail-progress { margin-left: auto; align-self: center; }
@@ -4289,11 +4289,11 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 .tel-src { margin-left: 4px; padding: 1px 6px; border-radius: 6px; background: var(--soft); color: var(--ink-3); font-size: var(--fs-min); font-weight: 700; white-space: nowrap; }
 /* 썸네일 없는 원본 사진은 받지 않고 비운다(app.js error 캡처) — 깨진 그림 아이콘 대신 바탕색만 */
 img.img-gone { visibility: hidden; }
-/* 상세 보조 섹션 접기(app.js foldLongSections) */
-.d-sec.is-folded { max-height: 420px; overflow: hidden; position: relative; }
-.d-sec.is-folded::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 96px; background: linear-gradient(180deg, transparent, var(--bg)); pointer-events: none; }
-.d-sec .fold-more { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); z-index: 2; display: inline-flex; align-items: center; gap: 4px; min-height: var(--tap); padding: 0 18px; border: 0; border-radius: 999px; background: var(--ink); color: #fff; font: inherit; font-size: .85rem; font-weight: 800; cursor: pointer; box-shadow: 0 4px 14px rgba(16,20,20,.18); }
-.d-sec .fold-more .ic { width: 16px; height: 16px; }
+/* 상세 보조 섹션 접기(app.js foldLongSections) — 아래로 갈수록 흐려지는 마스크(겹친 그라데이션 층 없이), 버튼은 섹션 바로 아래 */
+.d-sec.is-folded { max-height: 420px; overflow: hidden; -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent); mask-image: linear-gradient(180deg, #000 72%, transparent); }
+.fold-more-wrap { display: flex; justify-content: center; margin: -4px 0 12px; }
+.fold-more { display: inline-flex; align-items: center; gap: 4px; min-height: var(--tap); padding: 0 18px; border: 0; border-radius: 999px; background: var(--ink); color: #fff; font: inherit; font-size: .85rem; font-weight: 800; cursor: pointer; box-shadow: 0 4px 14px rgba(16,20,20,.18); }
+.fold-more .ic { width: 16px; height: 16px; }
 /* 출발지·이동 시간 칩 */
 .drive-chips .chip-sep { flex: none; width: 1px; height: 22px; align-self: center; margin: 0 4px; background: var(--line); }
 .drive-chips .chip:disabled { opacity: .4; }
@@ -4320,3 +4320,28 @@ img.img-gone { visibility: hidden; }
 .origin-pick { display: inline-flex; align-items: center; gap: 6px; flex: none; }
 .origin-select { height: 36px; max-width: 150px; padding: 0 28px 0 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink); font: inherit; font-size: .85rem; font-weight: 700; }
 .origin-pick .chip .ic { width: 14px; height: 14px; }
+
+/* ‘테마 더 보기’로 펼친 줄도 위쪽 줄과 같은 간격(소유자 2026-11-01: 펼친 섹션 간격이 너무 좁다) */
+.trows > .trow-extra:not([hidden]) { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(36px, 4vw, 52px); min-width: 0; }
+.trows > .trow-extra > .trow { content-visibility: auto; contain-intrinsic-size: auto 774px; }
+@media (max-width: 759px) { .trows > .trow-extra > .trow { contain-intrinsic-size: auto 979px; } }
+.trow-more-wrap { display: flex; justify-content: center; }
+
+/* 오늘의 캠핑장 카드: 글이 길어도 잘리지 않게(소유자 2026-11-01) — 글 칸은 제 높이를 다 쓰고, 사진 칸이 남는 높이만큼 줄어든다 */
+.td-media { flex: 1 1 auto; height: auto; min-height: 120px; }
+.td-main { position: absolute; inset: 0; }
+.td-body { flex: 0 0 auto; }
+.td-body > * { flex-shrink: 0; }
+.td-chips { margin-top: 6px; }
+@media (max-width: 759px) {
+  .td-body { padding: 14px 16px; gap: 4px; }
+  .td-body h3 { font-size: 1.2rem; -webkit-line-clamp: 2; }
+  .td-lead { font-size: .85rem; }
+  .td-why li { white-space: normal; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
+  .td-strip span { width: 48px; height: 48px; }
+}
+@media (max-width: 359px) {
+  .td-stage { height: 560px; }
+  .td-why li:nth-child(3) { display: none; }
+  .td-chips .td-chip:nth-child(3) { display: none; }
+}

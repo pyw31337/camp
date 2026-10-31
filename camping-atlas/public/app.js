@@ -4275,7 +4275,12 @@ function homeClicks(e) {
     if (k === "q") S.q = ""; else if (k === "area") S.area = "all"; else if (k === "theme") S.theme = null; else if (k === "stype") S.stype = "";
     else if (k === "feeBand") { S.feeBand = ""; store.set("mc-feeband", ""); $$("[data-fee-band]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.feeBand === ""))); }
     else if (k.startsWith("quick:")) S.quick.delete(k.slice(6));
-    else { S.q = ""; S.area = "all"; S.theme = null; S.stype = ""; S.quick.clear(); S.feeBand = ""; store.set("mc-feeband", ""); $$("[data-fee-band]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.feeBand === ""))); }
+    else {
+      // ‘조건 지우기’(결과 0건 화면): 칩 조건뿐 아니라 조건 시트(S.cond)·확인된 곳만·출발지 이동 시간까지 모두 지운다(소유자 2026-11-01: 버튼이 안 먹음 — 시트 조건이 남아 계속 0건).
+      S.q = ""; S.area = "all"; S.theme = null; S.stype = ""; S.quick.clear(); S.feeBand = ""; store.set("mc-feeband", "");
+      S.cond = emptyCond(); S.condStrict = false; S.drive = 0; store.set("mc-drive", 0);
+      $$("[data-fee-band]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.feeBand === "")));
+    }
     const keep = scrollY; render(); scrollTo(0, keep);
     return;
   }
@@ -7592,9 +7597,10 @@ function foldLongSections(root) {
   for (const sec of root.querySelectorAll(FOLD_SECS.join(","))) {
     if (sec.hidden || sec.dataset.fold || sec.scrollHeight <= FOLD_H + 120) continue;
     sec.dataset.fold = "1"; sec.classList.add("is-folded");
-    const b = document.createElement("button"); b.type = "button"; b.className = "fold-more"; b.innerHTML = `${ic("down")}펼쳐 보기`;
-    b.addEventListener("click", () => { sec.classList.remove("is-folded"); b.remove(); });
-    sec.append(b);
+    const wrap = document.createElement("div"); wrap.className = "fold-more-wrap";
+    wrap.innerHTML = `<button type="button" class="fold-more">${ic("down")}펼쳐 보기</button>`;
+    wrap.firstChild.addEventListener("click", () => { sec.classList.remove("is-folded"); wrap.remove(); });
+    sec.after(wrap);
   }
 }
 function bindDetail() {
