@@ -4316,3 +4316,7 @@ img.img-gone { visibility: hidden; }
 /* 운영자 확인 배지(operator-verified.json) */
 .op-verified { display: inline-flex; align-items: center; gap: 3px; margin-top: 6px; padding: 3px 10px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-size: .75rem; font-weight: 800; }
 .op-verified .ic { width: 13px; height: 13px; }
+/* 출발 도시 고르기(내 위치 + 권역별 선택 상자) */
+.origin-pick { display: inline-flex; align-items: center; gap: 6px; flex: none; }
+.origin-select { height: 36px; max-width: 150px; padding: 0 28px 0 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink); font: inherit; font-size: .85rem; font-weight: 700; }
+.origin-pick .chip .ic { width: 14px; height: 14px; }
