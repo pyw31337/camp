@@ -68,15 +68,18 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   console.log(`대상 ${totalPairs}쌍(도시 ${HUBS.length}곳 × 캠핑장 ${camps.length}곳, 직선 ${MAX_KM}km 안) · 처음 묻는 쌍 ${neverAsked} · 오늘 상한 ${MAX}건(${neverAsked ? "처음 채우는 중" : `유지 — ${STALE_DAYS}일 주기`})`);
   let calls = 0, ok = 0, noRoute = 0, stop = "";
   if (!KEY) stop = "KAKAO_REST_API_KEY 없음";
-  for (const d of due) {
-    if (stop || calls >= MAX) break;
+  // 카카오 응답이 건당 약 1.4초라 한 줄로 8,000건이면 3시간을 넘는다(2026-10-31 실행이 시간 초과로 취소·미저장).
+  // → 동시에 CONC건씩(초당 약 10건 이하) 묻고, 시간 예산(DRIVE_MINUTES)이 되면 멈춰 모은 값을 반드시 저장한다.
+  const CONC = Number(process.env.DRIVE_CONC ?? 6), DEADLINE = Date.now() + Number(process.env.DRIVE_MINUTES ?? 150) * 6e4;
+  let next = 0;
+  const ask = async (d) => {
     const url = `https://apis-navi.kakaomobility.com/v1/directions?origin=${d.hlng},${d.hlat}&destination=${+d.c.lng},${+d.c.lat}&priority=RECOMMEND&summary=true`;
     let r;
-    try { r = await fetch(url, { headers: { Authorization: `KakaoAK ${KEY}` }, signal: AbortSignal.timeout(15000) }); } catch (e) { stop = `네트워크 ${e.message}`; break; }
+    try { r = await fetch(url, { headers: { Authorization: `KakaoAK ${KEY}` }, signal: AbortSignal.timeout(15000) }); } catch (e) { return; }
     calls++;
-    if (r.status === 401 || r.status === 403) { stop = `권한 없음(${r.status}) — 카카오 개발자 콘솔에서 앱의 ‘카카오내비(길찾기)’ 사용 설정 필요: ${(await r.text()).slice(0, 160)}`; break; }
-    if (r.status === 429) { stop = "일간 쿼터 소진(429)"; break; }
-    if (!r.ok) continue;
+    if (r.status === 401 || r.status === 403) { stop = `권한 없음(${r.status}) — 카카오 개발자 콘솔에서 앱의 ‘카카오내비(길찾기)’ 사용 설정 필요: ${(await r.text()).slice(0, 160)}`; return; }
+    if (r.status === 429) { stop = "일간 쿼터 소진(429)"; return; }
+    if (!r.ok) return;
     const j = await r.json().catch(() => null);
     const route = j?.routes?.[0];
     const at = new Date().toISOString();
@@ -84,8 +87,16 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     if (route?.result_code === 0 && route.summary) { reg.t[d.c.id][d.k] = [Math.round(route.summary.duration / 60), Math.round(route.summary.distance / 100) / 10, at]; ok++; }
     else { noRoute++; if (!reg.t[d.c.id][d.k] || !Number.isFinite(reg.t[d.c.id][d.k][0])) reg.t[d.c.id][d.k] = [null, null, at, route?.result_code ?? -1]; else reg.t[d.c.id][d.k][2] = at; }
     if (calls % 500 === 0) { reg.updated_at = at; writeFileSync(REG, `${JSON.stringify(reg)}\n`); }
-    await new Promise((res) => setTimeout(res, 60)); // 초당 15건 이하
-  }
+  };
+  const worker = async () => {
+    while (!stop && next < due.length && next < MAX && Date.now() < DEADLINE) {
+      const d = due[next++];
+      await ask(d);
+      await new Promise((res) => setTimeout(res, 300)); // 일꾼당 쉬기 → 전체 초당 약 10건 이하
+    }
+  };
+  await Promise.all(Array.from({ length: CONC }, worker));
+  if (Date.now() >= DEADLINE && next < Math.min(due.length, MAX)) console.log(`시간 예산(${process.env.DRIVE_MINUTES ?? 150}분) 도달 — 여기까지 저장하고 다음 실행에서 이어 묻는다`);
   reg.updated_at = new Date().toISOString();
   writeFileSync(REG, `${JSON.stringify(reg)}\n`);
   const { files, hubs } = publicFiles(reg, camps);
