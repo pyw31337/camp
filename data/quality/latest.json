@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-10-30T22:51:39.415Z",
+ "generated_at": "2026-10-30T23:56:03.938Z",
  "date": "2026-10-31",
  "totals": {
   "campgrounds": 6416,
-  "facts": 238278,
-  "pairs": 189037,
-  "mean_confidence": 0.786,
-  "confirmed_pct": 85,
+  "facts": 238288,
+  "pairs": 189045,
+  "mean_confidence": 0.785,
+  "confirmed_pct": 84.9,
   "corroborated": 3948,
   "conflicts": 849,
   "decisions": 69
@@ -947,15 +947,15 @@
    }
   },
   "PRICE_MENTION": {
-   "coverage": 2729,
-   "coverage_pct": 42.5,
+   "coverage": 2731,
+   "coverage_pct": 42.6,
    "mean_confidence": 0.366,
    "confirmed_pct": 0,
    "corroborated": 371,
    "conflicts": 0,
-   "weak": 2358,
+   "weak": 2360,
    "status": {
-    "WEAK": 2358,
+    "WEAK": 2360,
     "CORROBORATED": 371
    }
   },
@@ -1025,15 +1025,15 @@
    }
   },
   "REVIEW_PRO_EASY_PARKING": {
-   "coverage": 478,
+   "coverage": 479,
    "coverage_pct": 7.5,
    "mean_confidence": 0.346,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 477,
+   "weak": 478,
    "status": {
-    "WEAK": 477,
+    "WEAK": 478,
     "SINGLE": 1
    }
   },
@@ -1707,16 +1707,16 @@
    }
   },
   "SITE_TYPE": {
-   "coverage": 3437,
+   "coverage": 3439,
    "coverage_pct": 53.6,
    "mean_confidence": 0.742,
    "confirmed_pct": 77.1,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 778,
+   "weak": 780,
    "status": {
     "CONFIRMED": 2651,
-    "WEAK": 778,
+    "WEAK": 780,
     "SINGLE": 8
    }
   },
@@ -1925,7 +1925,7 @@
    }
   },
   "CHECKIN_TIME": {
-   "coverage": 2655,
+   "coverage": 2656,
    "coverage_pct": 41.4,
    "mean_confidence": 0.523,
    "confirmed_pct": 19.3,
@@ -1936,13 +1936,13 @@
     "VERIFIED": 195,
     "WEAK": 1322,
     "CONFIRMED": 318,
-    "SINGLE": 609,
+    "SINGLE": 610,
     "CORROBORATED": 171,
     "CONFLICT": 40
    }
   },
   "CHECKOUT_TIME": {
-   "coverage": 2657,
+   "coverage": 2658,
    "coverage_pct": 41.4,
    "mean_confidence": 0.524,
    "confirmed_pct": 20.2,
@@ -1953,21 +1953,21 @@
     "VERIFIED": 205,
     "WEAK": 1324,
     "CONFIRMED": 333,
-    "SINGLE": 566,
+    "SINGLE": 567,
     "CORROBORATED": 214,
     "CONFLICT": 15
    }
   },
   "MANNER_TIME": {
-   "coverage": 2082,
+   "coverage": 2083,
    "coverage_pct": 32.5,
    "mean_confidence": 0.385,
-   "confirmed_pct": 6.1,
+   "confirmed_pct": 6,
    "corroborated": 116,
    "conflicts": 0,
-   "weak": 1653,
+   "weak": 1654,
    "status": {
-    "WEAK": 1653,
+    "WEAK": 1654,
     "CONFIRMED": 113,
     "SINGLE": 257,
     "CORROBORATED": 46,

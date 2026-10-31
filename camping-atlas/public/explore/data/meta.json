@@ -714,9 +714,9 @@
     "with_no_tags": 2193,
     "with_notices": 163
   },
-  "updated_at": "2026-10-30T22:49:50.380Z",
+  "updated_at": "2026-10-30T23:53:53.152Z",
   "operator_site_facts": {
-    "generated_at": "2026-10-30T22:49:50.958Z",
+    "generated_at": "2026-10-30T23:53:53.793Z",
     "campgrounds": 196,
     "w": 56,
     "pk": 56,
@@ -729,17 +729,17 @@
     "sites_read": 888
   },
   "spec_sheet": {
-    "generated_at": "2026-10-30T22:49:51.231Z",
-    "campgrounds_with_spec": 3164,
-    "roundup_reviews_skipped": 8535,
+    "generated_at": "2026-10-30T23:53:54.122Z",
+    "campgrounds_with_spec": 3166,
+    "roundup_reviews_skipped": 8539,
     "fields": {
       "CHECKIN_TIME": {
         "official": 765,
-        "mention": 2587
+        "mention": 2588
       },
       "CHECKOUT_TIME": {
         "official": 754,
-        "mention": 2521
+        "mention": 2522
       },
       "EARLY_CHECKIN": {
         "official": 40,
@@ -751,7 +751,7 @@
       },
       "MANNER_TIME": {
         "official": 587,
-        "mention": 1759
+        "mention": 1760
       },
       "MIN_STAY": {
         "official": 23,
@@ -808,20 +808,20 @@
     }
   },
   "review_digest": {
-    "generated_at": "2026-10-30T22:50:08.875Z",
-    "campgrounds": 4119,
-    "with_pros": 3593,
-    "with_cons": 1045,
-    "reviews": 75032,
+    "generated_at": "2026-10-30T23:54:15.364Z",
+    "campgrounds": 4127,
+    "with_pros": 3599,
+    "with_cons": 1046,
+    "reviews": 75059,
     "sanity_dropped": 1149
   },
   "nearby_licensed": {
-    "generated_at": "2026-10-30T22:50:13.601Z",
+    "generated_at": "2026-10-30T23:54:19.696Z",
     "campgrounds": 6410,
     "details": 6410
   },
   "profiles": {
-    "generated_at": "2026-10-30T22:50:19.137Z",
+    "generated_at": "2026-10-30T23:54:26.023Z",
     "total": 6416,
     "fields": {
       "TYPE": {
@@ -829,19 +829,19 @@
         "facts": 2293
       },
       "CHECKIN": {
-        "any": 2567,
+        "any": 2568,
         "facts": 575
       },
       "CHECKOUT": {
-        "any": 2511,
+        "any": 2512,
         "facts": 570
       },
       "MANNER": {
-        "any": 1848,
+        "any": 1849,
         "facts": 354
       },
       "PRICE": {
-        "any": 2703,
+        "any": 2705,
         "facts": 508
       },
       "EXTRA_FEE": {
@@ -889,11 +889,11 @@
         "facts": 638
       },
       "BOOKING": {
-        "any": 4508,
-        "facts": 4508
+        "any": 4640,
+        "facts": 4640
       },
       "REVIEW": {
-        "any": 4119,
+        "any": 4127,
         "facts": 0
       }
     },
@@ -923,36 +923,36 @@
       "HIGH_POWER": 38
     },
     "facts_distribution": {
-      "0-5": 4010,
-      "6-9": 1889,
-      "10-13": 398,
+      "0-5": 3997,
+      "6-9": 1895,
+      "10-13": 405,
       "14-18": 119
     },
     "price": {
-      "published": 2663,
+      "published": 2665,
       "operator": 508,
-      "mention": 2155
+      "mention": 2157
     }
   },
   "coverage": {
-    "measured_at": "2026-10-30T22:51:25.293Z",
+    "measured_at": "2026-10-30T23:55:45.704Z",
     "total": 6416,
     "goal": 2500,
     "fields": {
       "price": {
-        "any": 2904,
+        "any": 2906,
         "confirmed": 629
       },
       "checkin": {
-        "any": 2782,
+        "any": 2783,
         "confirmed": 790
       },
       "checkout": {
-        "any": 2721,
+        "any": 2722,
         "confirmed": 780
       },
       "manner": {
-        "any": 2082,
+        "any": 2083,
         "confirmed": 587
       },
       "extra_fee": {
@@ -972,15 +972,15 @@
         "confirmed": 529
       },
       "site_types": {
-        "any": 3442,
+        "any": 3444,
         "confirmed": 2678
       },
       "reviews": {
-        "any": 4284,
+        "any": 4292,
         "confirmed": 0
       },
       "rich5": {
-        "any": 2242,
+        "any": 2243,
         "confirmed": 0
       }
     }
