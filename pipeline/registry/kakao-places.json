@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-10-31T19:17:04.507Z",
+ "generated_at": "2026-10-31T21:50:53.017Z",
  "source": {
   "label": "카카오 로컬 키워드 검색 · Daum 웹 검색(공식 REST API)",
   "docs": [
@@ -8121,6 +8121,78 @@
    "needs_homepage": false,
    "homepage": null
   },
+  "929": {
+   "checked_at": "2026-10-31T21:50:51.711Z",
+   "place": null,
+   "candidates": [
+    {
+     "host": "carmap.co.kr",
+     "url": "http://carmap.co.kr/web/mplus/jumpo/mview.php?aid=929&ACODE=gocamping&sigun=6470000&gugun=5190000&boundplus=1",
+     "score": 20,
+     "hits": 2,
+     "evidence": [
+      {
+       "title": "[캠핑장] I go 오토캠핑장 ( 경상북도 청도군 매전면 )",
+       "url": "http://carmap.co.kr/web/mplus/jumpo/mview.php?aid=929&ACODE=gocamping&sigun=6470000&gugun=5190000&boundplus=1"
+      },
+      {
+       "title": "[레포츠] I go 오토캠핑장 ( 경상북도 청도군 매전면 )",
+       "url": "http://carmap.co.kr/web/mplus/jumpo/mview.php?aid=2792292&ACODE=tourkorea28&sigun=6470000&gugun=5190000"
+      }
+     ]
+    },
+    {
+     "host": "mobistation.co.kr",
+     "url": "https://mobistation.co.kr/camping/detail/f2ed35800da06ee180302b62a5c89ecc0510673999a2f0a3cb73a33d837a3740",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "[캠핑장] I go 오토캠핑장 - 경상북도 청도군 위치 및 시설 정보 | 모비스테이션",
+       "url": "https://mobistation.co.kr/camping/detail/f2ed35800da06ee180302b62a5c89ecc0510673999a2f0a3cb73a33d837a3740"
+      }
+     ]
+    },
+    {
+     "host": "opendatflow.com",
+     "url": "https://opendatflow.com/camping-sites/431",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "I go 오토캠핑장 위치 (경북 청도군 매전면)",
+       "url": "https://opendatflow.com/camping-sites/431"
+      }
+     ]
+    },
+    {
+     "host": "korearank.com",
+     "url": "https://www.korearank.com/tour/tour_detail.php?uid=55955",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "I go 오토캠핑장",
+       "url": "https://www.korearank.com/tour/tour_detail.php?uid=55955"
+      }
+     ]
+    },
+    {
+     "host": "enjoeat.com",
+     "url": "https://enjoeat.com/camping/929",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "I go 오토캠핑장 – 청도군 자동차야영장 예약·시설·날씨",
+       "url": "https://enjoeat.com/camping/929"
+      }
+     ]
+    }
+   ],
+   "needs_homepage": true,
+   "homepage": null
+  },
   "930": {
    "checked_at": "2026-10-16T05:33:01.139Z",
    "place": null,
@@ -11983,6 +12055,29 @@
     }
    ],
    "needs_homepage": true,
+   "homepage": null
+  },
+  "1511": {
+   "checked_at": "2026-10-31T21:50:51.666Z",
+   "place": {
+    "id": "21849524",
+    "name": "산으로캠핑장",
+    "category": "여행 > 숙박 > 야영,캠핑장",
+    "phone": "010-3436-7676",
+    "road_address": "강원특별자치도 홍천군 서면 모곡로 365-139",
+    "address": "강원특별자치도 홍천군 서면 마곡리 산 124-7",
+    "url": "http://place.map.kakao.com/21849524",
+    "x": 127.56879323636906,
+    "y": 37.713725529425474,
+    "match": {
+     "score": 95,
+     "name": 1,
+     "phone": false,
+     "distance_m": 126
+    }
+   },
+   "candidates": [],
+   "needs_homepage": false,
    "homepage": null
   },
   "1513": {
@@ -47355,6 +47450,36 @@
    "needs_homepage": true,
    "homepage": null
   },
+  "100193": {
+   "checked_at": "2026-10-31T21:50:51.709Z",
+   "place": null,
+   "candidates": [
+    {
+     "host": "mungclub.com",
+     "url": "https://mungclub.com/travel/957",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "선장포노을공원",
+       "url": "https://mungclub.com/travel/957"
+      }
+     ]
+    }
+   ],
+   "needs_homepage": true,
+   "homepage": {
+    "url": "https://mungclub.com/travel/957",
+    "host": "mungclub.com",
+    "score": 10,
+    "evidence": [
+     {
+      "title": "선장포노을공원",
+      "url": "https://mungclub.com/travel/957"
+     }
+    ]
+   }
+  },
   "100196": {
    "checked_at": "2026-10-16T05:33:30.386Z",
    "place": {
@@ -62928,6 +63053,38 @@
       {
        "title": "아이월관광농원 — 경기 포천시 창수면 — 캠핑장 — 전화번호, 위치",
        "url": "https://opendatflow.com/camping-sites/3701"
+      }
+     ]
+    }
+   ],
+   "needs_homepage": true,
+   "homepage": null
+  },
+  "100673": {
+   "checked_at": "2026-10-31T21:50:51.712Z",
+   "place": null,
+   "candidates": [
+    {
+     "host": "ojigo.kr",
+     "url": "https://ojigo.kr/camping/100673",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "필립스가든",
+       "url": "https://ojigo.kr/camping/100673"
+      }
+     ]
+    },
+    {
+     "host": "fclh.purpleo.co.kr",
+     "url": "https://fclh.purpleo.co.kr/view/50437",
+     "score": 4,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "청정가든 총199명이 열람하였으며, 좋아요 0개, 방문했어요 0회 및 0개의 리뷰가 있습니다. 좋아요 0...",
+       "url": "https://fclh.purpleo.co.kr/view/50437"
       }
      ]
     }
@@ -118452,6 +118609,74 @@
     }
    },
    "candidates": [],
+   "needs_homepage": true,
+   "homepage": null
+  },
+  "102379": {
+   "checked_at": "2026-10-31T21:50:52.359Z",
+   "place": null,
+   "candidates": [
+    {
+     "host": "campingdogam.com",
+     "url": "https://campingdogam.com/camp/102379/",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "보물섬 카라반 — 경기 안산시 캠핑장",
+       "url": "https://campingdogam.com/camp/102379/"
+      }
+     ]
+    }
+   ],
+   "needs_homepage": true,
+   "homepage": null
+  },
+  "102380": {
+   "checked_at": "2026-10-31T21:50:52.537Z",
+   "place": {
+    "id": "1238329969",
+    "name": "황매산잣나무숲야영장",
+    "category": "여행 > 숙박 > 야영,캠핑장",
+    "phone": null,
+    "road_address": null,
+    "address": "경남 합천군 대병면 하금리 산 111-3",
+    "url": "http://place.map.kakao.com/1238329969",
+    "x": 127.969595826679,
+    "y": 35.5157870998841,
+    "match": {
+     "score": 95,
+     "name": 1,
+     "phone": false,
+     "distance_m": 214
+    }
+   },
+   "candidates": [
+    {
+     "host": "campingdogam.com",
+     "url": "https://campingdogam.com/camp/102380/",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "황매산잣나무숲야영장 — 경남 합천군 캠핑장",
+       "url": "https://campingdogam.com/camp/102380/"
+      }
+     ]
+    },
+    {
+     "host": "sankun.com",
+     "url": "https://www.sankun.com/bid-info/JM0T7ovqn-lMSCPDaMDPl5ULXJWEyTo5RIERpP7Sw8M",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "황매산 잣나무숲야영장 소방공사",
+       "url": "https://www.sankun.com/bid-info/JM0T7ovqn-lMSCPDaMDPl5ULXJWEyTo5RIERpP7Sw8M"
+      }
+     ]
+    }
+   ],
    "needs_homepage": true,
    "homepage": null
   },
