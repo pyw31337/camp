@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-10-31T23:04:42.305Z",
+ "generated_at": "2026-10-31T23:47:19.018Z",
  "how_to_resolve": "원문을 대조해 data/quality/decisions.ndjson에 {cid, attr, value, url, why, by, at} 한 줄을 덧붙인다(docs/DATA_QUALITY_PROCESS.md 4단계).",
- "count": 850,
+ "count": 852,
  "items": [
   {
    "cid": "2179",
@@ -984,6 +984,41 @@
    }
   },
   {
+   "cid": "osm-w1092669350",
+   "name": "드림파크",
+   "attr": "PET_POLICY",
+   "label": "반려견 동반",
+   "ui": true,
+   "top": {
+    "value": "ALLOWED",
+    "confidence": 0.9,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "operator_homepage",
+      "url": "https://www.ktravelmate.com/ko/geomdan-gu/place/1325945",
+      "at": "2026-10-31T23:11:11.936Z",
+      "quote": "※ 반려동물 동반 가능"
+     }
+    ]
+   },
+   "rival": {
+    "value": "NOT_ALLOWED",
+    "confidence": 0.9,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "operator_homepage",
+      "url": "https://www.ktravelmate.com/ko/geomdan-gu/place/1325945",
+      "at": "2026-10-31T23:11:11.936Z",
+      "quote": "※ 반려동물 동반 불가"
+     }
+    ]
+   }
+  },
+  {
    "cid": "park-41135-00002-pzbxp",
    "name": "율동공원",
    "attr": "PET_POLICY",
@@ -1126,6 +1161,41 @@
       "url": "http://cheongjeongari.kr/reser1.htm",
       "at": "2026-10-20T01:20:16.890Z",
       "quote": "- 입실 : 당일 오후 15시부터입실이 가능하며 늦어질 경우 미리 말씀해주세요."
+     }
+    ]
+   }
+  },
+  {
+   "cid": "1511",
+   "name": "산으로 캠핑장",
+   "attr": "CHECKIN_TIME",
+   "label": "입실 시각",
+   "ui": true,
+   "top": {
+    "value": "10:00",
+    "confidence": 0.9,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "operator_homepage",
+      "url": "http://www.mtcampsite.co.kr/default/03/01.php",
+      "at": "2026-10-31T22:34:43.548Z",
+      "quote": "* 열리체크인은 10시부터 입실이 가능하며, 비용은 5천원이 추가됩니다"
+     }
+    ]
+   },
+   "rival": {
+    "value": "20:00",
+    "confidence": 0.9,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "operator_homepage",
+      "url": "http://www.mtcampsite.co.kr/default/03/02.php",
+      "at": "2026-10-31T22:34:43.548Z",
+      "quote": "캠핑하우스의 입실은 오후 8시까지 이면 이후는 입실이 제한될수 있으니 이점 참고 부탁드리겠습니다"
      }
     ]
    }
@@ -18794,76 +18864,6 @@
   {
    "cid": "100549",
    "name": "moon(문글램핑)",
-   "attr": "INNER_AMENITY",
-   "label": "글램핑·카라반 내부시설",
-   "ui": true,
-   "top": {
-    "value": "AIRCON",
-    "confidence": 0.85,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "CONFIRMED",
-      "src": "gocamping",
-      "url": null,
-      "at": null,
-      "quote": "침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"
-     }
-    ]
-   },
-   "rival": {
-    "value": "BED",
-    "confidence": 0.85,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "CONFIRMED",
-      "src": "gocamping",
-      "url": null,
-      "at": null,
-      "quote": "침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"
-     }
-    ]
-   }
-  },
-  {
-   "cid": "100560",
-   "name": "논논캠프",
-   "attr": "INNER_AMENITY",
-   "label": "글램핑·카라반 내부시설",
-   "ui": true,
-   "top": {
-    "value": "HEATER",
-    "confidence": 0.85,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "CONFIRMED",
-      "src": "gocamping",
-      "url": null,
-      "at": null,
-      "quote": "유무선인터넷,난방기구"
-     }
-    ]
-   },
-   "rival": {
-    "value": "INTERNET",
-    "confidence": 0.85,
-    "sources": 1,
-    "evidence": [
-     {
-      "grade": "CONFIRMED",
-      "src": "gocamping",
-      "url": null,
-      "at": null,
-      "quote": "유무선인터넷,난방기구"
-     }
-    ]
-   }
-  },
-  {
-   "cid": "100561",
-   "name": "서천 장항글램핑장",
    "attr": "INNER_AMENITY",
    "label": "글램핑·카라반 내부시설",
    "ui": true,

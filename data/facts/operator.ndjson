@@ -2116,7 +2116,7 @@
 {"cid":"1511","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/21849524","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/21849524","at":"2026-10-31T21:50:51.666Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"1511","attr":"LICENSE_DATE","value":"2015-07-29","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1511","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1511","attr":"PHONE","value":"010-3436-7676","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/21849524","at":"2026-10-31T21:50:51.666Z"}
+{"cid":"1511","attr":"PHONE","value":"010-3436-7676","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1511","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1511","attr":"TOURISM_BIZ_NO","value":"2015000024","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1513","attr":"HOMEPAGE","value":"http://www.huyang.go.kr/main.action","grade":"CONFIRMED","src":"naver_local","url":"http://www.huyang.go.kr/main.action","at":"2026-10-16T06:21:54.747Z","text":"숙박>캠핑,야영장"}
