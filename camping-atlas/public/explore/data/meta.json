@@ -706,9 +706,9 @@
     "with_no_tags": 2193,
     "with_notices": 163
   },
-  "updated_at": "2026-10-31T10:48:32.455Z",
+  "updated_at": "2026-10-31T12:54:54.809Z",
   "operator_site_facts": {
-    "generated_at": "2026-10-31T10:48:33.072Z",
+    "generated_at": "2026-10-31T12:54:55.468Z",
     "campgrounds": 196,
     "w": 56,
     "pk": 56,
@@ -721,9 +721,9 @@
     "sites_read": 888
   },
   "spec_sheet": {
-    "generated_at": "2026-10-31T10:48:33.351Z",
+    "generated_at": "2026-10-31T12:54:55.789Z",
     "campgrounds_with_spec": 3168,
-    "roundup_reviews_skipped": 8554,
+    "roundup_reviews_skipped": 8557,
     "fields": {
       "CHECKIN_TIME": {
         "official": 765,
@@ -800,20 +800,20 @@
     }
   },
   "review_digest": {
-    "generated_at": "2026-10-31T10:48:51.069Z",
-    "campgrounds": 4130,
-    "with_pros": 3601,
+    "generated_at": "2026-10-31T12:55:17.608Z",
+    "campgrounds": 4133,
+    "with_pros": 3602,
     "with_cons": 1045,
-    "reviews": 75141,
+    "reviews": 75161,
     "sanity_dropped": 1148
   },
   "nearby_licensed": {
-    "generated_at": "2026-10-31T10:48:55.146Z",
+    "generated_at": "2026-10-31T12:55:22.186Z",
     "campgrounds": 6410,
     "details": 6410
   },
   "profiles": {
-    "generated_at": "2026-10-31T10:49:03.228Z",
+    "generated_at": "2026-10-31T12:55:28.473Z",
     "total": 6418,
     "fields": {
       "TYPE": {
@@ -885,7 +885,7 @@
         "facts": 4642
       },
       "REVIEW": {
-        "any": 4130,
+        "any": 4133,
         "facts": 0
       }
     },
@@ -898,7 +898,7 @@
       "SITE_PARKING": 1238,
       "WATER_PLAY": 1413,
       "MOUNTAIN": 1241,
-      "REVIEW_QUIET": 1133,
+      "REVIEW_QUIET": 1134,
       "RIVER": 359,
       "PET_OK": 1285,
       "REVIEW_VIEW": 198,
@@ -927,7 +927,7 @@
     }
   },
   "coverage": {
-    "measured_at": "2026-10-31T10:50:07.516Z",
+    "measured_at": "2026-10-31T12:56:48.272Z",
     "total": 6418,
     "goal": 2500,
     "fields": {
@@ -968,7 +968,7 @@
         "confirmed": 2680
       },
       "reviews": {
-        "any": 4295,
+        "any": 4298,
         "confirmed": 0
       },
       "rich5": {

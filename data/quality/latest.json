@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-31T10:50:21.543Z",
+ "generated_at": "2026-10-31T12:57:06.629Z",
  "date": "2026-10-31",
  "totals": {
   "campgrounds": 6418,
@@ -1965,11 +1965,11 @@
    "confirmed_pct": 6,
    "corroborated": 116,
    "conflicts": 0,
-   "weak": 1656,
+   "weak": 1655,
    "status": {
-    "WEAK": 1656,
+    "WEAK": 1655,
     "CONFIRMED": 113,
-    "SINGLE": 257,
+    "SINGLE": 258,
     "CORROBORATED": 46,
     "VERIFIED": 13
    }
