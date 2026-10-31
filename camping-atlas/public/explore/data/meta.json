@@ -672,7 +672,7 @@
   "stats": {
     "with_booking_url": 1418,
     "online_realtime": 1700,
-    "with_fee_text": 2622,
+    "with_fee_text": 2738,
     "with_nearby_toilet": 951,
     "with_image": 2339,
     "with_intro": 1632,
@@ -682,108 +682,108 @@
     "with_social": 6434,
     "with_self_hosted_photo": 2367,
     "with_nearby": 3118,
-    "field_conditions": 6413,
-    "electricity_registered": 2414,
+    "field_conditions": 6418,
+    "electricity_registered": 2427,
     "shelter_setup_registered": 0,
-    "site_size_registered": 1057,
-    "ground_registered": 1586,
+    "site_size_registered": 1064,
+    "ground_registered": 1591,
     "naver_booking_channel": 411,
     "camfit_booking_channel": 212,
     "official_notice_camps": 0,
     "official_notice_items": 0,
     "verified_condition_facts": 21,
-    "surveyed_condition_facts": 2079,
-    "confirmed_condition_facts": 4313,
-    "parking_tent_side": 1229,
+    "surveyed_condition_facts": 2081,
+    "confirmed_condition_facts": 4316,
+    "parking_tent_side": 1230,
     "parking_cart_required": 117,
     "parking_shared": 19,
     "power_high_w": 41,
-    "firewood_allowed": 2545,
+    "firewood_allowed": 2553,
     "firewood_prohibited": 278,
-    "private_bathroom": 416,
-    "kids_play_features": 3427,
-    "with_house_rules": 597,
-    "with_no_tags": 2184,
+    "private_bathroom": 417,
+    "kids_play_features": 3440,
+    "with_house_rules": 598,
+    "with_no_tags": 2193,
     "with_notices": 163
   },
-  "updated_at": "2026-10-31T00:13:17.305Z",
+  "updated_at": "2026-10-31T01:22:15.932Z",
   "operator_site_facts": {
-    "generated_at": "2026-10-31T00:13:17.884Z",
-    "campgrounds": 195,
-    "w": 55,
+    "generated_at": "2026-10-31T01:22:16.587Z",
+    "campgrounds": 196,
+    "w": 56,
     "pk": 56,
     "fire": 55,
     "cc": 18,
     "conflicts": 2,
     "stale": 0,
-    "shared_host": 92,
+    "shared_host": 82,
     "undefined": null,
     "sites_read": 888
   },
   "spec_sheet": {
-    "generated_at": "2026-10-31T00:13:18.177Z",
-    "campgrounds_with_spec": 3100,
-    "roundup_reviews_skipped": 8147,
+    "generated_at": "2026-10-31T01:22:16.914Z",
+    "campgrounds_with_spec": 3159,
+    "roundup_reviews_skipped": 8543,
     "fields": {
       "CHECKIN_TIME": {
-        "official": 759,
-        "mention": 2529
+        "official": 765,
+        "mention": 2570
       },
       "CHECKOUT_TIME": {
-        "official": 748,
-        "mention": 2462
+        "official": 754,
+        "mention": 2512
       },
       "EARLY_CHECKIN": {
         "official": 40,
-        "mention": 158
+        "mention": 163
       },
       "LATE_CHECKOUT": {
         "official": 30,
-        "mention": 109
+        "mention": 111
       },
       "MANNER_TIME": {
-        "official": 583,
-        "mention": 1727
+        "official": 587,
+        "mention": 1760
       },
       "MIN_STAY": {
         "official": 23,
-        "mention": 86
+        "mention": 87
       },
       "EXTRA_PERSON_FEE": {
         "official": 169,
-        "mention": 269
+        "mention": 275
       },
       "EXTRA_CAR_FEE": {
         "official": 48,
-        "mention": 65
+        "mention": 66
       },
       "VISITOR_POLICY": {
         "official": 30,
-        "mention": 34
+        "mention": 36
       },
       "PET_POLICY": {
-        "official": 420,
-        "mention": 1387
+        "official": 424,
+        "mention": 1390
       },
       "PARKING": {
-        "official": 320,
-        "mention": 497
+        "official": 321,
+        "mention": 502
       },
       "POWER_W": {
-        "official": 518,
-        "mention": 251
+        "official": 522,
+        "mention": 263
       },
       "POWER_MAX_A": {
         "official": 2,
         "mention": 1
       },
       "SITE_SIZE": {
-        "official": 258,
-        "mention": 348
+        "official": 259,
+        "mention": 354
       },
       "REFUND_POLICY": {
-        "official": 590,
-        "mention": 39
+        "official": 594,
+        "mention": 40
       },
       "RENTAL": {
         "official": 7,
@@ -791,7 +791,7 @@
       },
       "DISCOUNT": {
         "official": 9,
-        "mention": 62
+        "mention": 64
       },
       "PROMOTION": {
         "official": 1,
@@ -800,171 +800,171 @@
     }
   },
   "review_digest": {
-    "generated_at": "2026-10-31T00:13:38.122Z",
-    "campgrounds": 3952,
-    "with_pros": 3478,
-    "with_cons": 1000,
-    "reviews": 71565,
-    "sanity_dropped": 1114
+    "generated_at": "2026-10-31T01:22:37.951Z",
+    "campgrounds": 4129,
+    "with_pros": 3595,
+    "with_cons": 1035,
+    "reviews": 75070,
+    "sanity_dropped": 1132
   },
   "nearby_licensed": {
-    "generated_at": "2026-10-31T00:13:42.186Z",
-    "campgrounds": 6398,
-    "details": 6393
+    "generated_at": "2026-10-31T01:22:43.577Z",
+    "campgrounds": 6410,
+    "details": 6410
   },
   "profiles": {
-    "generated_at": "2026-10-31T00:13:48.216Z",
-    "total": 6413,
+    "generated_at": "2026-10-31T01:22:49.836Z",
+    "total": 6418,
     "fields": {
       "TYPE": {
-        "any": 2286,
-        "facts": 2286
+        "any": 2295,
+        "facts": 2295
       },
       "CHECKIN": {
-        "any": 2513,
-        "facts": 572
+        "any": 2556,
+        "facts": 575
       },
       "CHECKOUT": {
-        "any": 2458,
-        "facts": 567
+        "any": 2505,
+        "facts": 570
       },
       "MANNER": {
-        "any": 1816,
-        "facts": 352
+        "any": 1849,
+        "facts": 354
       },
       "PRICE": {
-        "any": 2411,
-        "facts": 506
+        "any": 2707,
+        "facts": 508
       },
       "EXTRA_FEE": {
-        "any": 513,
+        "any": 520,
         "facts": 215
       },
       "POWER": {
-        "any": 477,
-        "facts": 299
+        "any": 487,
+        "facts": 300
       },
       "PARKING": {
-        "any": 1773,
-        "facts": 1328
+        "any": 1783,
+        "facts": 1330
       },
       "FIRE": {
-        "any": 2437,
-        "facts": 2437
+        "any": 2444,
+        "facts": 2444
       },
       "CAR_CAMPING": {
         "any": 18,
         "facts": 18
       },
       "PET": {
-        "any": 2861,
-        "facts": 2646
+        "any": 2867,
+        "facts": 2654
       },
       "SITE": {
-        "any": 1766,
-        "facts": 1766
+        "any": 1773,
+        "facts": 1773
       },
       "SANITARY": {
-        "any": 1781,
-        "facts": 1781
+        "any": 1790,
+        "facts": 1790
       },
       "AMENITIES": {
-        "any": 2445,
-        "facts": 2445
+        "any": 2455,
+        "facts": 2455
       },
       "SEASON": {
-        "any": 2482,
-        "facts": 2482
+        "any": 2489,
+        "facts": 2489
       },
       "REFUND": {
-        "any": 660,
-        "facts": 634
+        "any": 665,
+        "facts": 638
       },
       "BOOKING": {
-        "any": 4462,
-        "facts": 4462
+        "any": 4642,
+        "facts": 4642
       },
       "REVIEW": {
-        "any": 3952,
+        "any": 4129,
         "facts": 0
       }
     },
     "tags": {
       "FOREST": 1031,
-      "AUTO": 833,
-      "GLAMPING": 648,
-      "FAMILY": 1808,
-      "WINTER": 1880,
-      "SITE_PARKING": 1237,
-      "WATER_PLAY": 1409,
-      "MOUNTAIN": 1236,
+      "AUTO": 837,
+      "GLAMPING": 650,
+      "FAMILY": 1815,
+      "WINTER": 1886,
+      "SITE_PARKING": 1238,
+      "WATER_PLAY": 1413,
+      "MOUNTAIN": 1241,
       "RIVER": 359,
-      "PET_OK": 1278,
-      "REVIEW_QUIET": 1117,
-      "REVIEW_VIEW": 196,
+      "PET_OK": 1282,
+      "REVIEW_QUIET": 1128,
+      "REVIEW_VIEW": 198,
       "CAR_CAMPING": 10,
       "FIREWOOD": 26,
-      "VALLEY": 651,
-      "REVIEW_HOST": 20,
-      "CARAVAN": 475,
-      "BEACH": 376,
-      "CITY": 179,
-      "LAKE": 143,
+      "VALLEY": 657,
+      "REVIEW_HOST": 23,
+      "CARAVAN": 478,
+      "BEACH": 377,
+      "CITY": 180,
+      "LAKE": 144,
       "REVIEW_CLEAN": 27,
       "ISLAND": 85,
-      "HIGH_POWER": 37
+      "HIGH_POWER": 38
     },
     "facts_distribution": {
-      "0-5": 4024,
-      "6-9": 1878,
-      "10-13": 395,
-      "14-18": 116
+      "0-5": 3996,
+      "6-9": 1898,
+      "10-13": 405,
+      "14-18": 119
     },
     "price": {
-      "published": 2376,
-      "operator": 506,
-      "mention": 1870
+      "published": 2667,
+      "operator": 508,
+      "mention": 2159
     }
   },
   "coverage": {
-    "measured_at": "2026-10-31T00:15:29.478Z",
+    "measured_at": "2026-10-31T01:24:09.038Z",
     "total": 6418,
     "goal": 2500,
     "fields": {
       "price": {
         "any": 2908,
-        "confirmed": 672
+        "confirmed": 627
       },
       "checkin": {
-        "any": 2742,
-        "confirmed": 792
+        "any": 2771,
+        "confirmed": 790
       },
       "checkout": {
-        "any": 2681,
-        "confirmed": 782
+        "any": 2715,
+        "confirmed": 780
       },
       "manner": {
-        "any": 2064,
+        "any": 2083,
         "confirmed": 587
       },
       "extra_fee": {
-        "any": 515,
+        "any": 520,
         "confirmed": 215
       },
       "refund": {
-        "any": 859,
-        "confirmed": 833
+        "any": 861,
+        "confirmed": 834
       },
       "parking": {
-        "any": 1779,
-        "confirmed": 1773
+        "any": 1784,
+        "confirmed": 1783
       },
       "power_w": {
-        "any": 721,
+        "any": 727,
         "confirmed": 529
       },
       "site_types": {
-        "any": 3381,
+        "any": 3436,
         "confirmed": 2680
       },
       "reviews": {
@@ -972,7 +972,7 @@
         "confirmed": 0
       },
       "rich5": {
-        "any": 2230,
+        "any": 2240,
         "confirmed": 0
       }
     }

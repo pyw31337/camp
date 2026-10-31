@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-10-31T00:15:30.145Z",
+ "generated_at": "2026-10-31T01:24:09.702Z",
  "rule": "pipeline/lib/fact-refine.mjs",
- "dropped": 241,
+ "dropped": 239,
  "recoded": 146,
  "scoped": 603,
  "items": [
@@ -3868,6 +3868,27 @@
    "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
   },
   {
+   "cid": "park-41220-00067-101pu",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/sieun3535/224249854712",
+   "quote": "입실 14시, 퇴실 11시 캠핑용품 대여: 매점에서 가능 매점 031-657-0844 주차안내: 무료 반려동물: 입장 불가 주소: 경기 평택시 팽성읍 내리길...",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "park-47111-00027-15m52",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://triple.guide/hotels/e100fe76-7a30-457d-8342-fa9052ebe1e2?checkIn=2024-02-24&checkOut=2024-02-25&numberOfAdults=2&agesOfChildren&skipInitialCache=true&_triple_no_navbar=true",
+   "quote": "반려동물 입실 가능 펜션 외에 반려동물 동반 시 입실이 거부될 수 있으며, 해당 사유로 환불 받을 수 없습니다.",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
+  },
+  {
    "cid": "park-11290-00001-y1mf",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -3940,33 +3961,12 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
-   "cid": "osm-w32660867",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "to": "SMALL_ONLY",
-   "src": "review_search",
-   "url": "https://leports.sailing-blog.click/4407",
-   "quote": "반려동물은 대형견이나 소형견 구분 없이 동반 입장이 가능하지만 목줄 착용과 배변 봉투를 지참해야 하며, 대형견은 입마개가 필수다.",
-   "action": "recode",
-   "why": "크기 제한 있는 허용"
-  },
-  {
    "cid": "rf-14xm2hg",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
    "src": "review_search",
    "url": "https://all-infor.tistory.com/166",
    "quote": "연계·남원 추어탕·반려견 불가·방문 전 체크리스트·FAQ inforpik.co.kr 전북특별자치도 남원시 신정동의 명산 요천 자락 요람에 자리 잡은 남원 자연휴양림은 푸른 소나무 군락지와 사계절 맑은 물이 흐르는 골짜기, 광한루원 및 지리산 둘레길 …",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
-   "cid": "rf-xslvy9",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://koreatravel-guide.tistory.com/153",
-   "quote": "치유의 숲길&middot;빙계계곡 연계&middot;의성군민 감면&middot;반려견 동반 불가&middot;방문 전 체크리스트&middot;FAQ 포함.",
    "action": "drop",
    "why": "홍보·목록 제목(규칙 아님)"
   },
@@ -3979,26 +3979,6 @@
    "quote": "반려동물 동반 입실 불가, 미성년자 숙박 예약 불가, 실내 흡연과 모든 고기구이 금지예요.",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
-   "cid": "rf-1r4889r",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://all-infor.tistory.com/148",
-   "quote": "짚코스터&middot;목재체험장&middot;반딧불&middot;별빛 관측&middot;반려견 동반 불가&middot;방문 전 체크리스트&middot;FAQ 포함.",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
-   "cid": "rf-2btyj6",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://koreatravel-guide.tistory.com/183",
-   "quote": "화요일 9시 오픈, 저수지 조망 독채 숙소, 산수유마을&middot;지리산&middot;화엄사 연계, 반려견 불가, 방문 전 체크리스트 포",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "rf-13vmkr6",
