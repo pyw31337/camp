@@ -3789,8 +3789,8 @@
 {"cid":"2464","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.littlejsb.com/103","at":"2025-04-21","text":"펜션","quote":"운영 형태 : 오토캠핑장, 펜션 병행 운영. 운영 기간 : 연중무휴. 입실/퇴실 시간 : 입실 13:0"}
 {"cid":"2464","attr":"STAY_GENERAL_SITES","value":50,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2472","attr":"SITE_TOTAL","value":70,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2472","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/%ec%98%88%ec%95%bd%ec%95%88%eb%82%b4/","at":"2026-11-01T05:59:11.193Z","quote":"캠핑카, 카라반, 텐트라반, 투폴딩 트레일러는 진입 불가 입니다."}
-{"cid":"2472","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/","at":"2026-11-01T05:59:11.193Z","text":"방갈로","quote":"방갈로전용"}
+{"cid":"2472","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/%ec%98%88%ec%95%bd%ec%95%88%eb%82%b4/","at":"2026-11-01T13:18:03.023Z","quote":"캠핑카, 카라반, 텐트라반, 투폴딩 트레일러는 진입 불가 입니다."}
+{"cid":"2472","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/","at":"2026-11-01T13:18:03.023Z","text":"방갈로","quote":"방갈로전용"}
 {"cid":"2472","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":70}
 {"cid":"2472","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/ichean.camp/VwG0/5","at":"2020-07-02","quote":"033-636-7700 - 화천/딴산유원지 : ***-****-****, 물놀이(계곡) - 원주/두리오토캠핑장 : 033-765-8569, 선착순(50%)/예약(50%), 펜션(예약"}
 {"cid":"2472","attr":"STAY_GENERAL_SITES","value":70,"grade":"CONFIRMED","src":"gocamping"}
@@ -23594,6 +23594,7 @@
 {"cid":"park-52130-00014-n92hn","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/2bok/Fyj3/189","at":"2019-04-09","quote":"청암산 오토캠핑장에 대한 소회. 사업공모가 있어 군산시는 이를 유치하고자 내초도 공원 인"}
 {"cid":"park-52710-00038-s84ba","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ddodak2025/224444903223","at":"2026-10-17","quote":"​ 또닥건설 인테리어 전북특별자치도 완주군 삼례읍 과학로 621 104호 완주군청 전북특별자치도 완주군 용진읍 지암로 61 고산문화공원무궁화오토캠핑장 전북특별자치도 완주군 고산면 고산휴양림로 89 나날글씨공작소 전…"}
 {"cid":"park-52710-00038-s84ba","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/gongju7000/224392528974","at":"2026-08-27","quote":"완주, 고산무궁화오토캠핑장 카라반 6호 / 완주 무궁화축제. 침구와 식기 등은 개별 준비해야해요. * 카"}
+{"cid":"park-52710-00064-unk2","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/redcase7878/224447687974","at":"2026-10-20","quote":"할 사이트 검증 설악산 흔들바위 울산바위 산행과 캠핑을 연계할 때 인근 국립공원 야영장이나 오토캠핑장 …"}
 {"cid":"park-52740-00002-q2qrc","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ksh2125/224340379643","at":"2026-07-08","quote":"[정보조각]🏊‍♂️ 장수누리파크 물놀이장과 오토캠핑장 예약 방법 총정리!. 해요. 예약처: 자체 홈페이지가 아니라 땡큐캠핑"}
 {"cid":"park-52740-00002-q2qrc","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/flour429/223903528921","at":"2025-06-18","quote":"250614 방문)장수누리파크 코끼리 카라반 장단점과 준비물 꿀팁. 장수누리파크 방문날짜 25년 6월 14일 토요일"}
 {"cid":"park-52740-00002-q2qrc","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://www.airbnb.co.kr/rooms/686019109197320142","text":"펜션","quote":"쟈크앤느티나무 /황토방/장수군/촌캉스/바베큐 - 장수군의 펜션(한국)에서 살아..... 배산임수 양택 명당 자리로 앞쪽은 시내, 뒷쪽"}
