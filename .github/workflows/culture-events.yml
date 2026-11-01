@@ -1,7 +1,7 @@
 name: Culture events
 
 # 캠핑장 상세 ‘주변 축제·행사’ 포스터 카드: CultureFlow 공개 JSON + 관광공사 축제(extras.json)를 합쳐
-# camping-atlas/public/context/events.json을 만든다. 키 필요 없음. docs/CULTURE_EVENTS.md
+# camping-atlas/public/context/events.json을 만든다. 포스터 없는 행사는 장소의 관광공사 사진(DATA_GO_KR_SERVICE_KEY). docs/CULTURE_EVENTS.md
 on:
   schedule:
     - cron: "20 21 * * *" # 매일 06:20 KST (CultureFlow 03:00 KST 폴백 갱신 뒤)
@@ -13,6 +13,7 @@ on:
   pull_request:
     paths:
       - "pipeline/lib/culture-events.mjs"
+      - "pipeline/lib/event-venue-photo.mjs"
       - "pipeline/scripts/sync-culture-events.mjs"
       - "camping-atlas/public/context/events.*"
       - ".github/workflows/culture-events.yml"
@@ -43,6 +44,9 @@ jobs:
       - name: Build nearby events
         working-directory: pipeline
         run: node scripts/sync-culture-events.mjs
+        env:
+          # 포스터 없는 행사(국가유산청 등)에 장소의 관광공사 공식 사진 — 없으면 지난 기록만 쓴다
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
       - name: Check output
         run: node -e 'const x=JSON.parse(require("fs").readFileSync("camping-atlas/public/context/events.json"));const n=Object.keys(x.camps).length;console.log("camps",n,"events",Object.keys(x.ev).length);if(n<100){console.log("::error::주변 행사가 붙은 캠핑장이 너무 적습니다");process.exit(1)}'
       - name: Keep the dry-run output (PR)
@@ -57,7 +61,7 @@ jobs:
         run: |
           git config user.name "moyeora-camping-data-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add camping-atlas/public/context/events.json
+          git add camping-atlas/public/context/events.json pipeline/registry/event-venue-photos.json
           if git diff --cached --quiet; then echo "변경 없음"; exit 0; fi
           git commit -q -m "chore(data): refresh nearby culture events"
           bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" culture-events

@@ -957,3 +957,8 @@
 - 찜 목록의 카드 스펙 6줄(규격·전기·화로·주차·주변·요금)은 `상세정보` 접기 안에 둔다. 기본은 접힌 상태이며, 위·아래 화살표를 눌러 해당 카드 안에서만 연다. 일반 탐색·테마 목록은 비교를 위해 6줄을 계속 바로 보인다.
 - `camping-atlas/scripts/saved-roles-test.mjs`는 320·390·1366px에서 이 기본 접힘, 6개 행, 열기 동작까지 회귀 검사한다.
 - 원본/발행 동기화: `design/renewal/{app.js,style.css}` → `camping-atlas/public/{app.js,style.css}`. 검증은 `node --check`, `git diff --check`, Web quality를 실행한다.
+
+## 2026-11-01 · 국가유산 행사 썸네일(장소 공식 사진)
+- 원인: CultureFlow의 국가유산청 행사는 포스터가 없어 공통 대체 그림(`/images/fallbacks/tourism-template.svg`)만 온다 → 157건 모두 같은 산 그림.
+- 수정: `pipeline/lib/event-venue-photo.mjs` — 포스터 없는 행사의 장소 이름으로 TourAPI `searchKeyword2` 검색, 같은 이름(또는 ‘지역명+이름’)·3km 안일 때만 사진을 붙인다(`iv:1`, 화면에 ‘장소 사진 · 한국관광공사’). 행정구역만 있는 장소는 건너뜀.
+- 기록: `pipeline/registry/event-venue-photos.json`(장소별, 지우지 않음, 못 찾은 곳은 30일 뒤 재조회). culture-events.yml에 `DATA_GO_KR_SERVICE_KEY` 추가.
