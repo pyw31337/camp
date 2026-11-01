@@ -15471,8 +15471,9 @@
 {"cid":"park-47170-00037-1cy8v","attr":"REVIEW_COUNT","value":4,"grade":"MENTION","src":"review_search","n":4}
 {"cid":"park-47170-00037-1cy8v","attr":"REVIEW_PRO_PET_FRIENDLY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/qogksk7443/224252189697","at":"2026-04-14","n":1,"text":"반려견 동반 편함"}
 {"cid":"park-47170-00037-1cy8v","attr":"REVIEW_PRO_QUIET","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/qogksk7443/224252189697","at":"2026-04-14","n":1,"text":"조용·한적"}
-{"cid":"park-47170-00037-1cy8v","attr":"REVIEW_PRO_VIEW","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/qogksk7443/224252189697","at":"2026-04-14","n":1,"text":"뷰·경치 좋음"}
+{"cid":"park-47170-00037-1cy8v","attr":"REVIEW_PRO_VIEW","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/qogksk7443/224252189697","at":"2026-04-14","n":2,"text":"뷰·경치 좋음"}
 {"cid":"park-47170-00037-1cy8v","attr":"REVIEW_PRO_WALK","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/mama670/224448558313","at":"2026-10-21","n":2,"text":"산책·둘레길 좋음"}
+{"cid":"park-47170-00037-1cy8v","attr":"REVIEW_PRO_WATER","value":1,"grade":"MENTION","src":"review_search","url":"https://onedaylovehome.tistory.com/7077211","at":"2015-06-18","n":1,"text":"계곡·물놀이 좋음"}
 {"cid":"park-47190-00004-nqck2","attr":"REVIEW_COUNT","value":1,"grade":"MENTION","src":"review_search","n":1}
 {"cid":"park-47190-00007-qakga","attr":"REVIEW_COUNT","value":1,"grade":"MENTION","src":"review_search","n":1}
 {"cid":"park-47190-00017-nk6wn","attr":"REVIEW_COUNT","value":2,"grade":"MENTION","src":"review_search","n":2}

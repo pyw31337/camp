@@ -178,11 +178,11 @@
    "filter": "in",
    "note": "count가 있으면 면·동 수. text는 세부 이름(방갈로·캐빈 등). 원천: 고캠핑 등록값·소개글, 카카오/네이버 분류, 운영자 홈페이지 문장(lib/site-types.mjs)",
    "coverage": {
-    "campgrounds": 3449,
+    "campgrounds": 3450,
     "by_grade": {
      "CONFIRMED": 5784,
      "OPERATOR": 1101,
-     "MENTION": 5062
+     "MENTION": 5063
     }
    }
   },
@@ -481,9 +481,9 @@
    "filter": "max",
    "note": "MENTION 전용. 확정값으로 쓰지 않는다",
    "coverage": {
-    "campgrounds": 2740,
+    "campgrounds": 2741,
     "by_grade": {
-     "MENTION": 13915
+     "MENTION": 13916
     }
    }
   },
@@ -569,10 +569,10 @@
    "pref": "일찍 들어가고 싶나요?",
    "filter": "max",
    "coverage": {
-    "campgrounds": 2790,
+    "campgrounds": 2791,
     "by_grade": {
      "OPERATOR": 651,
-     "MENTION": 3542,
+     "MENTION": 3543,
      "CONFIRMED": 4,
      "REFERENCE": 452
     }
@@ -586,10 +586,10 @@
    "pref": "늦게 나오고 싶나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 2730,
+    "campgrounds": 2731,
     "by_grade": {
      "OPERATOR": 616,
-     "MENTION": 3519,
+     "MENTION": 3521,
      "CONFIRMED": 2,
      "REFERENCE": 445
     }
@@ -631,10 +631,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 2090,
+    "campgrounds": 2091,
     "by_grade": {
      "OPERATOR": 132,
-     "MENTION": 2531,
+     "MENTION": 2532,
      "CONFIRMED": 7,
      "REFERENCE": 463
     }
@@ -1840,9 +1840,9 @@
    "review_label": "계곡·물놀이 좋음",
    "pref": "‘계곡·물놀이 좋음’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 789,
+    "campgrounds": 790,
     "by_grade": {
-     "MENTION": 789
+     "MENTION": 790
     }
    }
   },
@@ -2655,5 +2655,5 @@
    }
   }
  ],
- "generated_at": "2026-11-01T11:30:19.505Z"
+ "generated_at": "2026-11-01T13:51:25.026Z"
 }
