@@ -569,10 +569,10 @@
    "pref": "일찍 들어가고 싶나요?",
    "filter": "max",
    "coverage": {
-    "campgrounds": 2791,
+    "campgrounds": 2792,
     "by_grade": {
      "OPERATOR": 651,
-     "MENTION": 3543,
+     "MENTION": 3545,
      "CONFIRMED": 4,
      "REFERENCE": 452
     }
@@ -586,10 +586,10 @@
    "pref": "늦게 나오고 싶나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 2731,
+    "campgrounds": 2732,
     "by_grade": {
      "OPERATOR": 616,
-     "MENTION": 3521,
+     "MENTION": 3523,
      "CONFIRMED": 2,
      "REFERENCE": 445
     }
@@ -2655,5 +2655,5 @@
    }
   }
  ],
- "generated_at": "2026-11-01T16:35:21.056Z"
+ "generated_at": "2026-11-01T20:13:05.733Z"
 }
