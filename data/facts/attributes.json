@@ -178,11 +178,11 @@
    "filter": "in",
    "note": "count가 있으면 면·동 수. text는 세부 이름(방갈로·캐빈 등). 원천: 고캠핑 등록값·소개글, 카카오/네이버 분류, 운영자 홈페이지 문장(lib/site-types.mjs)",
    "coverage": {
-    "campgrounds": 3444,
+    "campgrounds": 3446,
     "by_grade": {
-     "CONFIRMED": 5787,
-     "OPERATOR": 1080,
-     "MENTION": 5070
+     "CONFIRMED": 5784,
+     "OPERATOR": 1101,
+     "MENTION": 5059
     }
    }
   },
@@ -194,9 +194,9 @@
    "pref": "전기가 꼭 필요하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 2427,
+    "campgrounds": 2433,
     "by_grade": {
-     "CONFIRMED": 2406,
+     "CONFIRMED": 2412,
      "VERIFIED": 21
     }
    }
@@ -261,9 +261,9 @@
    "pref": "장작 불멍을 하고 싶나요?",
    "filter": "in",
    "coverage": {
-    "campgrounds": 55,
+    "campgrounds": 57,
     "by_grade": {
-     "OPERATOR": 45,
+     "OPERATOR": 47,
      "CONFIRMED": 10
     }
    }
@@ -275,9 +275,9 @@
    "type": "bool",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 2831,
+    "campgrounds": 2832,
     "by_grade": {
-     "CONFIRMED": 2810,
+     "CONFIRMED": 2811,
      "VERIFIED": 21
     }
    }
@@ -289,9 +289,9 @@
    "type": "bool",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 2831,
+    "campgrounds": 2832,
     "by_grade": {
-     "CONFIRMED": 2810,
+     "CONFIRMED": 2811,
      "VERIFIED": 21
     }
    }
@@ -369,9 +369,9 @@
    "pref": "차를 텐트 옆에 대야 하나요?",
    "filter": "in",
    "coverage": {
-    "campgrounds": 64,
+    "campgrounds": 65,
     "by_grade": {
-     "OPERATOR": 43,
+     "OPERATOR": 44,
      "VERIFIED": 21
     }
    }
@@ -432,10 +432,10 @@
    "pref": "반려견과 함께 가나요? 크기는?",
    "filter": "in",
    "coverage": {
-    "campgrounds": 2851,
+    "campgrounds": 2855,
     "by_grade": {
      "CONFIRMED": 2754,
-     "OPERATOR": 280,
+     "OPERATOR": 286,
      "MENTION": 1387,
      "VERIFIED": 64
     }
@@ -465,9 +465,9 @@
    "filter": "max",
    "note": "항목별 1행. 성수기·평일 구분은 period/label",
    "coverage": {
-    "campgrounds": 1547,
+    "campgrounds": 1548,
     "by_grade": {
-     "OPERATOR": 8736,
+     "OPERATOR": 8744,
      "CONFIRMED": 3
     }
    }
@@ -494,9 +494,9 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 413,
+    "campgrounds": 415,
     "by_grade": {
-     "OPERATOR": 186,
+     "OPERATOR": 188,
      "MENTION": 299,
      "CONFIRMED": 3
     }
@@ -571,8 +571,8 @@
    "coverage": {
     "campgrounds": 2786,
     "by_grade": {
+     "OPERATOR": 651,
      "MENTION": 3537,
-     "OPERATOR": 646,
      "CONFIRMED": 4,
      "REFERENCE": 452
     }
@@ -588,8 +588,8 @@
    "coverage": {
     "campgrounds": 2725,
     "by_grade": {
+     "OPERATOR": 616,
      "MENTION": 3514,
-     "OPERATOR": 613,
      "CONFIRMED": 2,
      "REFERENCE": 445
     }
@@ -602,10 +602,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 189,
+    "campgrounds": 190,
     "by_grade": {
      "MENTION": 174,
-     "OPERATOR": 44,
+     "OPERATOR": 45,
      "CONFIRMED": 1
     }
    }
@@ -631,10 +631,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 2087,
+    "campgrounds": 2089,
     "by_grade": {
+     "OPERATOR": 132,
      "MENTION": 2530,
-     "OPERATOR": 129,
      "CONFIRMED": 7,
      "REFERENCE": 463
     }
@@ -662,9 +662,9 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 845,
+    "campgrounds": 849,
     "by_grade": {
-     "OPERATOR": 703,
+     "OPERATOR": 709,
      "CONFIRMED": 1,
      "REFERENCE": 467,
      "MENTION": 51
@@ -712,7 +712,7 @@
     "campgrounds": 2192,
     "by_grade": {
      "CONFIRMED": 2171,
-     "OPERATOR": 131,
+     "OPERATOR": 132,
      "VERIFIED": 21
     }
    }
@@ -764,11 +764,11 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 1333,
+    "campgrounds": 1336,
     "by_grade": {
-     "CONFIRMED": 1798,
+     "CONFIRMED": 1801,
      "MENTION": 412,
-     "OPERATOR": 549,
+     "OPERATOR": 551,
      "VERIFIED": 39
     }
    }
@@ -782,10 +782,10 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 1553,
+    "campgrounds": 1554,
     "by_grade": {
      "CONFIRMED": 1524,
-     "OPERATOR": 98
+     "OPERATOR": 99
     }
    }
   },
@@ -800,8 +800,8 @@
    "coverage": {
     "campgrounds": 1026,
     "by_grade": {
-     "CONFIRMED": 900,
-     "OPERATOR": 190
+     "OPERATOR": 190,
+     "CONFIRMED": 900
     }
    }
   },
@@ -814,10 +814,10 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 1984,
+    "campgrounds": 1987,
     "by_grade": {
-     "CONFIRMED": 3199,
-     "OPERATOR": 256,
+     "CONFIRMED": 3202,
+     "OPERATOR": 258,
      "VERIFIED": 4
     }
    }
@@ -831,10 +831,10 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 1536,
+    "campgrounds": 1541,
     "by_grade": {
-     "CONFIRMED": 2403,
-     "OPERATOR": 73,
+     "CONFIRMED": 2408,
+     "OPERATOR": 77,
      "VERIFIED": 6
     }
    }
@@ -880,9 +880,9 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 1495,
+    "campgrounds": 1496,
     "by_grade": {
-     "CONFIRMED": 2226,
+     "CONFIRMED": 2227,
      "VERIFIED": 16
     }
    }
@@ -1001,9 +1001,9 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 186,
+    "campgrounds": 187,
     "by_grade": {
-     "OPERATOR": 154,
+     "OPERATOR": 155,
      "CONFIRMED": 36
     }
    }
@@ -2655,5 +2655,5 @@
    }
   }
  ],
- "generated_at": "2026-10-31T23:04:24.167Z"
+ "generated_at": "2026-10-31T23:47:00.708Z"
 }

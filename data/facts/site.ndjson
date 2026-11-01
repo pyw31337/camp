@@ -850,6 +850,7 @@
 {"cid":"1508","attr":"SITE_SIZE","value":"8×8m","grade":"CONFIRMED","src":"gocamping","count":20}
 {"cid":"1508","attr":"SITE_SIZE","value":"9×10m","grade":"CONFIRMED","src":"gocamping","count":18}
 {"cid":"1511","attr":"AREA_TOTAL_M2","value":33000,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1511","attr":"SITE_SIZE","value":"3×6m","grade":"OPERATOR","src":"operator_homepage","url":"http://www.mtcampsite.co.kr/default/05/01.php?com_board_basic=read_form&com_board_idx=47&&com_board_search_code=&com_board_search_value1=&com_board_search_value2=&com_board_page=&&com_board_id=1&&com_board_id=1","at":"2026-10-31T22:34:43.548Z","quote":"*데크사이즈 : 3m*6m( 평상형으로 주변 지반 없음 )","text":"3×6m"}
 {"cid":"1511","attr":"SITE_SIZE","value":"4×8m","grade":"CONFIRMED","src":"gocamping","count":40}
 {"cid":"1511","attr":"SITE_SIZE","value":"5×8m","grade":"CONFIRMED","src":"gocamping","count":7}
 {"cid":"1511","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
@@ -3451,8 +3452,8 @@
 {"cid":"100509","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100510","attr":"AREA_TOTAL_M2","value":4095,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100510","attr":"SITE_SIZE","value":"9×9m","grade":"CONFIRMED","src":"gocamping","count":16}
-{"cid":"100515","attr":"SITE_SIZE","value":"2.5×5m","grade":"OPERATOR","src":"operator_discovered","url":"http://xn--bj0b14h95deyla0072a.com/facility.html?menutree_idx=4578683&gubun=02","at":"2026-10-16T07:06:00.782Z","quote":"- 개별 온수 수영장 크기 : 약 깊이 1m 가로 2.5m* 세로5m","text":"2.5×5m"}
-{"cid":"100515","attr":"SITE_SIZE","value":"6×25m","grade":"OPERATOR","src":"operator_discovered","url":"http://xn--bj0b14h95deyla0072a.com/facility.html?menutree_idx=4578682&gubun=01","at":"2026-10-16T07:06:00.782Z","quote":"- 야외 수영장 크기 : 약 깊이 1m 10cm 가로6m* 세로25m","text":"6×25m"}
+{"cid":"100515","attr":"SITE_SIZE","value":"2.5×5m","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b14h95deyla0072a.com/facility.html?menutree_idx=4578683&gubun=02","at":"2026-10-31T22:50:45.516Z","quote":"- 개별 온수 수영장 크기 : 약 깊이 1m 가로 2.5m* 세로5m","text":"2.5×5m"}
+{"cid":"100515","attr":"SITE_SIZE","value":"6×25m","grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b14h95deyla0072a.com/facility.html?menutree_idx=4578682&gubun=01","at":"2026-10-31T22:50:45.516Z","quote":"- 야외 수영장 크기 : 약 깊이 1m 10cm 가로6m* 세로25m","text":"6×25m"}
 {"cid":"100522","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100525","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100526","attr":"SITE_SIZE","value":"3×6m","grade":"OPERATOR","src":"booking_engine","url":"https://m.thankqcamping.com/resv/view.hbb?cseq=3997&res_dt=20261107","at":"2026-10-31","text":"타프존"}
@@ -5762,9 +5763,13 @@
 {"cid":"osm-w1188029707","attr":"SITE_SIZE","value":"3×4m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1188029707","at":"2026-10-31"}
 {"cid":"osm-w1378241447","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1378241447","at":"2026-10-31"}
 {"cid":"osm-w1378241447","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/smurfshouse/224434528939","at":"2026-10-07","quote":"구미 낙동강 체육공원은 주말 나들이로 피크닉 즐기기에도 좋고, 예쁜 꽃구경도 하기 좋은 곳이며...내 야외물놀이장 옆) 시설: 오토캠핑 사이트 50면 사이트 크기: 10m × 10m 입실·퇴실: 오후 2시 ~ 다음 날 오전…","text":"10×10m","n":1}
+{"cid":"park-28110-00011-1of7j","attr":"SITE_SIZE","value":"8×4m","grade":"OPERATOR","src":"operator_discovered","url":"http://m.xn--hy1b07tnrd1yac7cpi07cn9xruo.com/customer/customer_0300.asp","at":"2026-10-31T22:51:18.961Z","quote":"영종씨사이드 캠핑장은 A구역(일반노지:22면), B구역(일반데크 8mx4m:14면), C구역(일반데크 4mx4m:24면) 총 60면으로 구성되어 있으며, 주변에는 염전체험장, 자전거도로, 레일바이크, 놀이터,족구장, 농구장 등 다양한 체험거리가 있습…","text":"8×4m"}
+{"cid":"park-28110-00011-1of7j","attr":"SITE_SIZE","value":"8×4m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-30230-00082-55si2","attr":"SITE_SIZE","value":"5.6×5.7m","grade":"MENTION","src":"review_search","url":"https://leports.sailing-blog.click/2691","at":"2025-06-17","quote":"잔디 39면과 데크 1면으로 이뤄졌으며, 사이트 크기는 가로 5.6m 세로 5.7m다.","text":"5.6×5.7m","n":1}
 {"cid":"park-31170-00001-iqdsx","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-31170-00001-iqdsx","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/wdw27/224402483348","at":"2026-09-07","quote":"입·퇴실 시간 입실 : 오후 2시 퇴실 : 다음 날 오후 1시 오토캠핑장 사이트 크기는 10m × 10m, 사이트당 차량은 1대까지 이용 가능하고 정원은 4명이에요.","text":"10×10m","n":1}
+{"cid":"park-41113-00007-1vpps","attr":"SITE_SIZE","value":"3×6m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
+{"cid":"park-41113-00043-ktyqv","attr":"SITE_SIZE","value":"3×6m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-41135-00002-pzbxp","attr":"SITE_SIZE","value":"10.5×8m","grade":"OPERATOR","src":"operator_discovered","url":"https://camping.isdc.co.kr/ydpc/price.do","at":"2026-10-24T22:47:31.908Z","quote":"10.5x8m 총 8면, 사이트간 이격거리 1.5m","text":"10.5×8m"}
 {"cid":"park-41135-00002-pzbxp","attr":"SITE_SIZE","value":"6×6m","grade":"OPERATOR","src":"operator_discovered","url":"https://camping.isdc.co.kr/ydpc/price.do","at":"2026-10-24T22:47:31.908Z","quote":"6x6m 총 10면, 사이트간 이격거리 1.5m","text":"6×6m"}
 {"cid":"park-41135-00002-pzbxp","attr":"SITE_SIZE","value":"8×8m","grade":"OPERATOR","src":"operator_discovered","url":"https://camping.isdc.co.kr/ydpc/price.do","at":"2026-10-24T22:47:31.908Z","quote":"8x8m 총 44면, 사이트간 이격거리 1.5m","text":"8×8m"}

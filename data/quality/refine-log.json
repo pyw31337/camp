@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-31T23:04:24.167Z",
+ "generated_at": "2026-10-31T23:47:00.708Z",
  "rule": "pipeline/lib/fact-refine.mjs",
- "dropped": 241,
+ "dropped": 242,
  "recoded": 146,
- "scoped": 610,
+ "scoped": 612,
  "items": [
   {
    "cid": "101498",
@@ -3874,6 +3874,16 @@
    "src": "review_search",
    "url": "https://blog.naver.com/sieun3535/224249854712",
    "quote": "입실 14시, 퇴실 11시 캠핑용품 대여: 매점에서 가능 매점 031-657-0844 주차안내: 무료 반려동물: 입장 불가 주소: 경기 평택시 팽성읍 내리길...",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "park-46130-00170-op7lw",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "operator_discovered",
+   "url": "https://www.mimint.co.kr/bbs/view/news/S1N17/4414072",
+   "quote": "또한 ▲만 13세 미만 어린이나 영유아 단독입장 불가 ▲출입명부 작성 ▲반려견 인식표 착용 ▲놀이터 내 음식물 반입 금지 등 운영 수칙을 준수해야 한다.",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },

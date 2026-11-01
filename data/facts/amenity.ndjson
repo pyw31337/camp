@@ -378,7 +378,9 @@
 {"cid":"373","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"373","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"373","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"379","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"379","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
+{"cid":"379","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"383","attr":"AMENITY_LIBRARY","value":true,"grade":"CONFIRMED","src":"gocamping","text":"도서관 반려견놀이터 산림욕장"}
 {"cid":"383","attr":"AMENITY_PET_RUN","value":true,"grade":"CONFIRMED","src":"gocamping","text":"도서관 반려견놀이터 산림욕장"}
 {"cid":"383","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
@@ -1165,10 +1167,8 @@
 {"cid":"977","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"978","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"978","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"978","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--2o2b21q82j1vg6a.kr/board/2","at":"2026-10-20T01:09:00.970Z","quote":"수영장개장 운영중"}
 {"cid":"978","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"978","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"978","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--2o2b21q82j1vg6a.kr/main","at":"2026-10-20T01:09:00.970Z","quote":"(제공하지 않으며 매점에서도 판매하지 않습니다.)"}
 {"cid":"978","attr":"PROGRAM_EXPERIENCE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"987","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"987","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
@@ -1292,6 +1292,7 @@
 {"cid":"1096","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"1100","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"1100","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1100","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1100","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
 {"cid":"1100","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"1107","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
@@ -1707,11 +1708,15 @@
 {"cid":"1508","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"1508","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"1508","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1511","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.mtcampsite.co.kr/default/01/01.php","at":"2026-10-31T22:34:43.548Z","quote":"개수대,샤워장화장실 모두 온수사용이 가능하며"}
+{"cid":"1511","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.mtcampsite.co.kr/default/03/01.php","at":"2026-10-31T22:34:43.548Z","quote":"-어린이 모래놀이터."}
 {"cid":"1511","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"1511","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1511","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.mtcampsite.co.kr/default/03/01.php","at":"2026-10-31T22:34:43.548Z","quote":"-수영장 개장은 6월 중순 경 개장하며 8월말 폐장합니다.(개폐장 AAS 변동될 수 있습니다.)"}
 {"cid":"1511","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"1511","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1511","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
+{"cid":"1511","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://www.mtcampsite.co.kr/default/05/01.php?com_board_basic=read_form&com_board_idx=33&&com_board_search_code=&com_board_search_value1=&com_board_search_value2=&com_board_page=&&com_board_id=1&&com_board_id=1","at":"2026-10-31T22:34:43.548Z","quote":"부재중일 경우에는 관리동 매점,실내놀이방은 이용이 불가합니다."}
 {"cid":"1511","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"1511","attr":"PROGRAM_EVENT","value":"수시이밴트","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1513","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2780,7 +2785,6 @@
 {"cid":"2700","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2700","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
 {"cid":"2700","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2703","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.jeongeup.go.kr/reserve/index.jeongeup?menuCd=DOM_000001207001002000","at":"2026-10-20T00:56:57.685Z","quote":"P 주차장 개수대 취사장 화장실 샤워실 관리동 실개천"}
 {"cid":"2703","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"2703","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2703","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동장"}
@@ -3967,8 +3971,11 @@
 {"cid":"6756","attr":"PROGRAM_EXPERIENCE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6764","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"6764","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"6765","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://dalseocamp.kr/html/main.php","at":"2026-10-31T22:37:22.712Z","quote":"개수대에서 물을 사용할 경우에는 최대한 절수하도록 바랍니다."}
+{"cid":"6765","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://dalseocamp.kr/html/introduce/path.php","at":"2026-10-31T22:37:22.712Z","quote":"- 그 외 추가차량은 숲속생태놀이터 주차장 이용"}
 {"cid":"6765","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"6765","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"6765","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://dalseocamp.kr/html/install/guidemap.php","at":"2026-10-31T22:37:22.712Z","quote":"물놀이장(클릭)"}
 {"cid":"6765","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"6765","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6765","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"산책로"}
@@ -7813,9 +7820,9 @@
 {"cid":"100512","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://illooglamping.com/reservation.html","at":"2026-10-20T01:32:02.903Z","quote":"- 객실별 와이파이 보유"}
 {"cid":"100512","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100514","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100515","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"http://xn--bj0b14h95deyla0072a.com/","at":"2026-10-16T07:06:00.782Z","quote":"야외수영장"}
+{"cid":"100515","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b14h95deyla0072a.com//","at":"2026-10-31T22:50:45.516Z","quote":"야외수영장"}
 {"cid":"100515","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100515","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"http://xn--bj0b14h95deyla0072a.com/","at":"2026-10-16T07:06:00.782Z","quote":"Wi-Fi"}
+{"cid":"100515","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--bj0b14h95deyla0072a.com//","at":"2026-10-31T22:50:45.516Z","quote":"Wi-Fi"}
 {"cid":"100516","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"100516","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100517","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
@@ -7965,7 +7972,7 @@
 {"cid":"100550","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://hbasecamp.com/page/caution.php","at":"2026-10-20T01:07:47.575Z","quote":"쓰레기는 분리수거장에 분리배출 해주시고 음식물은 개수대통에 별도 처리요망"}
 {"cid":"100550","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"100550","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100552","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://litt.ly/gangjuhakgyo_camp","at":"2026-10-24T22:41:04.585Z","quote":"놀이터 we"}
+{"cid":"100552","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://litt.ly/gangjuhakgyo_camp","at":"2026-10-31T22:46:31.301Z","quote":"놀이터 we"}
 {"cid":"100552","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100552","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"100552","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -8556,11 +8563,11 @@
 {"cid":"100687","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"100687","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://ssh01027173455.com/","at":"2026-10-20T01:05:43.105Z","quote":"샤워실과 매점부터 놀이시설까지"}
 {"cid":"100687","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"마트.편의점"}
-{"cid":"100688","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://www.gpthecamp.co.kr/","at":"2026-10-16T07:07:00.655Z","quote":"글램핑과 카라반 내 마련된 취사 공간 이외에 공용 또는 캠핑존 투숙객이 사용할 수 있는 개수대입니다."}
+{"cid":"100688","attr":"AMENITY_DISHWASH","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.gpthecamp.co.kr//","at":"2026-10-31T22:50:51.440Z","quote":"글램핑과 카라반 내 마련된 취사 공간 이외에 공용 또는 캠핑존 투숙객이 사용할 수 있는 개수대입니다."}
 {"cid":"100688","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"100688","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100688","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
-{"cid":"100688","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://www.gpthecamp.co.kr/","at":"2026-10-16T07:07:00.655Z","quote":"아이들을 위한 힐링 플레이스 '트램폴린'"}
+{"cid":"100688","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://www.gpthecamp.co.kr//","at":"2026-10-31T22:50:51.440Z","quote":"아이들을 위한 힐링 플레이스 '트램폴린'"}
 {"cid":"100688","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"트렘폴린"}
 {"cid":"100688","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100688","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
@@ -9188,9 +9195,11 @@
 {"cid":"100843","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100843","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100844","attr":"AMENITY_EV_CHARGER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"전기차 충전소"}
+{"cid":"100844","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"http://www.hthouse.co.kr/","at":"2026-10-31T22:34:48.141Z","quote":"외부수영장"}
 {"cid":"100844","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping","text":"물놀이장"}
 {"cid":"100844","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100844","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
+{"cid":"100844","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"http://www.hthouse.co.kr/bbs/board.php?bo_table=yp_pension01&wr_id=1","at":"2026-10-31T22:34:48.141Z","quote":" 개별바비큐 |  야외수영장 |  와이파이 |  계곡"}
 {"cid":"100845","attr":"AMENITY_SPORTS","value":true,"grade":"CONFIRMED","src":"gocamping","text":"운동시설"}
 {"cid":"100845","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"100846","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
@@ -13033,7 +13042,7 @@
 {"cid":"101932","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"놀이터"}
 {"cid":"101932","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101932","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101932","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--m01b77bd5fca25p510ashleka172c.com/","at":"2026-10-24T22:36:51.528Z","quote":"와이파이"}
+{"cid":"101932","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://xn--m01b77bd5fca25p510ashleka172c.com/","at":"2026-10-31T22:43:02.089Z","quote":"와이파이"}
 {"cid":"101932","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"gocamping","text":"무선인터넷"}
 {"cid":"101933","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101933","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -14112,6 +14121,8 @@
 {"cid":"park-26260-00002-ogup4","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-26290-00011-ojx4p","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-26350-00002-nkvpf","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
+{"cid":"park-26350-00008-q3fgf","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000318&menuCd=DOM_000000104005015012&dataSid=3073369","at":"2026-10-31T23:08:46.628Z","quote":"유기동물 입양센터 & 반려동물 놀이터"}
+{"cid":"park-26350-00008-q3fgf","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-26440-00036-pkxcn","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-26440-00036-pkxcn","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-26440-00065-py7gn","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
@@ -14125,6 +14136,7 @@
 {"cid":"park-27200-00029-pt372","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-27710-00044-d7cr7","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-28110-00001-1of7j","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
+{"cid":"park-28110-00011-1of7j","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"http://m.xn--hy1b07tnrd1yac7cpi07cn9xruo.com/customer/customer_0300.asp","at":"2026-10-31T22:51:18.961Z","quote":"영종씨사이드 캠핑장은 A구역(일반노지:22면), B구역(일반데크 8mx4m:14면), C구역(일반데크 4mx4m:24면) 총 60면으로 구성되어 있으며, 주변에는 염전체험장, 자전거도로, 레일바이크, 놀이터,족구장, 농구장 등 다양한 체험거리가 있습…"}
 {"cid":"park-28110-00011-1of7j","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-28110-00011-1of7j","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-28170-00023-qakga","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
@@ -14181,6 +14193,8 @@
 {"cid":"park-41220-00288-pes2l","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-41271-00026-rxt7f","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-41273-00023-pv7sr","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
+{"cid":"park-41273-00026-q2gvf","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
+{"cid":"park-41273-00026-q2gvf","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-41281-00004-rvt4g","attr":"AMENITY_STORE","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://emfls.github.io/kor/report/camp/goyang.html","at":"2026-10-24T22:51:53.113Z","quote":"편의점도보"}
 {"cid":"park-41281-00004-rvt4g","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-41281-00047-z2w2","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
@@ -14193,6 +14207,7 @@
 {"cid":"park-41287-00058-mqotc","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-41310-00005-1ym7t","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-41360-00010-qakga","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
+{"cid":"park-41360-00142-1kj87","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-41370-00048-15tm1","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-41370-00144-1pwmg","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-41370-00144-1pwmg","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
@@ -14240,7 +14255,6 @@
 {"cid":"park-44230-00049-qakga","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-44760-00018-p7vi0","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-44810-00004-h9g03","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
-{"cid":"park-46110-00004-1pebe","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://dog-park.smartkrinsurance.com/park/park-jn-3/","at":"2026-10-24T22:46:56.048Z","quote":"스마트 반려견 놀이터"}
 {"cid":"park-46110-00004-1pebe","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-46110-00029-yio9x","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-46110-00030-vd3n","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
@@ -14250,6 +14264,8 @@
 {"cid":"park-46130-00036-put13","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-46130-00036-put13","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-46130-00107-rtjvm","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
+{"cid":"park-46130-00170-op7lw","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://www.mimint.co.kr/bbs/view/news/S1N17/4414072","at":"2026-10-31T23:05:42.610Z","quote":"여수시, 미평공원 반려견 놀이터 운영 재개"}
+{"cid":"park-46130-00170-op7lw","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-46130-00170-op7lw","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-46170-00062-37lxy","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-46230-00042-y1qz","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
@@ -14287,6 +14303,7 @@
 {"cid":"park-48127-00001-qakga","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-48127-00001-qakga","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-48170-00075-10oql","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
+{"cid":"park-48250-00262-oggd1","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-48270-00019-wta2t","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-48310-00101-2fhe7","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"park-48310-00401-1k7e8","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
@@ -14329,7 +14346,7 @@
 {"cid":"park-59050-00034-i9ji9","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-10-31"}
 {"cid":"pdu-amazing-gimpo","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://kpv.amazingticket.site","at":"2026-10-31"}
 {"cid":"pdu-amazing-gimpo","attr":"AMENITY_STORE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://kpv.amazingticket.site","at":"2026-10-31","text":"매점"}
-{"cid":"pdu-amazing-gimpo","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://kpv.amazingticket.site/","at":"2026-10-24T22:45:31.836Z","quote":"무료와이파이"}
+{"cid":"pdu-amazing-gimpo","attr":"AMENITY_WIFI","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"https://kpv.amazingticket.site/","at":"2026-10-31T22:51:10.002Z","quote":"무료와이파이"}
 {"cid":"pdu-amazing-gimpo","attr":"AMENITY_WIFI","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://kpv.amazingticket.site","at":"2026-10-31","text":"무료와이파이"}
 {"cid":"pdu-amazing-paju","attr":"AMENITY_BBQ","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-10-31","text":"실내 바베큐장"}
 {"cid":"pdu-amazing-paju","attr":"AMENITY_CAFE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://pj.amazingticket.site","at":"2026-10-31","text":"키즈카페"}
