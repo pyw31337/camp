@@ -8,9 +8,9 @@
    "last_run_at": "2026-10-31T12:33:12.183Z"
   },
   "2026-11": {
-   "calls": 2346,
-   "runs": 5,
-   "last_run_at": "2026-11-01T00:22:06.512Z"
+   "calls": 2765,
+   "runs": 7,
+   "last_run_at": "2026-11-01T06:09:41.569Z"
   }
  },
  "last_free_check": {
@@ -19,7 +19,7 @@
   "quote": "검색 API 무료 0 ~ 775,000건 0원 일 최대 25,000건 호출 제한",
   "monthly_free": 775000,
   "daily_limit": 25000,
-  "checked_at": "2026-11-01T00:16:05.135Z",
+  "checked_at": "2026-11-01T06:03:45.478Z",
   "url": "https://www.ncloud.com/product/applicationService/naverApiHub",
   "guide_checked": false
  }
