@@ -706,9 +706,9 @@
     "with_no_tags": 2200,
     "with_notices": 168
   },
-  "updated_at": "2026-11-01T16:34:01.067Z",
+  "updated_at": "2026-11-01T20:11:14.150Z",
   "operator_site_facts": {
-    "generated_at": "2026-11-01T16:34:01.535Z",
+    "generated_at": "2026-11-01T20:11:14.805Z",
     "campgrounds": 202,
     "w": 59,
     "pk": 61,
@@ -721,17 +721,17 @@
     "sites_read": 911
   },
   "spec_sheet": {
-    "generated_at": "2026-11-01T16:34:01.757Z",
-    "campgrounds_with_spec": 3182,
-    "roundup_reviews_skipped": 8569,
+    "generated_at": "2026-11-01T20:11:15.124Z",
+    "campgrounds_with_spec": 3183,
+    "roundup_reviews_skipped": 8572,
     "fields": {
       "CHECKIN_TIME": {
         "official": 768,
-        "mention": 2597
+        "mention": 2598
       },
       "CHECKOUT_TIME": {
         "official": 757,
-        "mention": 2532
+        "mention": 2533
       },
       "EARLY_CHECKIN": {
         "official": 41,
@@ -800,20 +800,20 @@
     }
   },
   "review_digest": {
-    "generated_at": "2026-11-01T16:34:17.537Z",
+    "generated_at": "2026-11-01T20:11:36.531Z",
     "campgrounds": 4158,
-    "with_pros": 3618,
+    "with_pros": 3619,
     "with_cons": 1047,
-    "reviews": 75261,
+    "reviews": 75275,
     "sanity_dropped": 1148
   },
   "nearby_licensed": {
-    "generated_at": "2026-11-01T16:34:21.253Z",
+    "generated_at": "2026-11-01T20:11:40.984Z",
     "campgrounds": 6410,
     "details": 6410
   },
   "profiles": {
-    "generated_at": "2026-11-01T16:34:25.772Z",
+    "generated_at": "2026-11-01T20:11:47.116Z",
     "total": 6418,
     "fields": {
       "TYPE": {
@@ -821,11 +821,11 @@
         "facts": 2295
       },
       "CHECKIN": {
-        "any": 2577,
+        "any": 2578,
         "facts": 578
       },
       "CHECKOUT": {
-        "any": 2522,
+        "any": 2523,
         "facts": 573
       },
       "MANNER": {
@@ -927,7 +927,7 @@
     }
   },
   "coverage": {
-    "measured_at": "2026-11-01T16:35:20.592Z",
+    "measured_at": "2026-11-01T20:13:05.078Z",
     "total": 6418,
     "goal": 2500,
     "fields": {
@@ -936,11 +936,11 @@
         "confirmed": 630
       },
       "checkin": {
-        "any": 2792,
+        "any": 2793,
         "confirmed": 793
       },
       "checkout": {
-        "any": 2732,
+        "any": 2733,
         "confirmed": 783
       },
       "manner": {
