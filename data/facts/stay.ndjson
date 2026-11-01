@@ -3789,8 +3789,8 @@
 {"cid":"2464","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.littlejsb.com/103","at":"2025-04-21","text":"펜션","quote":"운영 형태 : 오토캠핑장, 펜션 병행 운영. 운영 기간 : 연중무휴. 입실/퇴실 시간 : 입실 13:0"}
 {"cid":"2464","attr":"STAY_GENERAL_SITES","value":50,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2472","attr":"SITE_TOTAL","value":70,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2472","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/%ec%98%88%ec%95%bd%ec%95%88%eb%82%b4/","at":"2026-10-31T19:17:54.038Z","quote":"캠핑카, 카라반, 텐트라반, 투폴딩 트레일러는 진입 불가 입니다."}
-{"cid":"2472","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/","at":"2026-10-31T19:17:54.038Z","text":"방갈로","quote":"방갈로전용"}
+{"cid":"2472","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/%ec%98%88%ec%95%bd%ec%95%88%eb%82%b4/","at":"2026-11-01T00:11:28.340Z","quote":"캠핑카, 카라반, 텐트라반, 투폴딩 트레일러는 진입 불가 입니다."}
+{"cid":"2472","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/","at":"2026-11-01T00:11:28.340Z","text":"방갈로","quote":"방갈로전용"}
 {"cid":"2472","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":70}
 {"cid":"2472","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/ichean.camp/VwG0/5","at":"2020-07-02","quote":"033-636-7700 - 화천/딴산유원지 : ***-****-****, 물놀이(계곡) - 원주/두리오토캠핑장 : 033-765-8569, 선착순(50%)/예약(50%), 펜션(예약"}
 {"cid":"2472","attr":"STAY_GENERAL_SITES","value":70,"grade":"CONFIRMED","src":"gocamping"}
@@ -13034,6 +13034,7 @@
 {"cid":"100592","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"OPERATOR","src":"operator_homepage","url":"http://provenceglamping.com/bbs/board.php?bo_table=w2_1&wr_id=1","at":"2026-10-20T00:56:26.922Z","quote":"개별화장실"}
 {"cid":"100592","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":10}
 {"cid":"100592","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":1}
+{"cid":"100592","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/cjdrldhk3025/224430517233","at":"2026-10-04","quote":"2026 가을 글램핑 추천! 난방 빵빵한 키즈 카라반 & 감성 숙소 BEST 4. 청도 프로방스 글램핑 (경북 청도) 영남권"}
 {"cid":"100592","attr":"STAY_GENERAL_SITES","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100592","attr":"STAY_GLAMPING_SITES","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100594","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"}
@@ -23531,6 +23532,7 @@
 {"cid":"park-48121-00003-n71qm","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/chamtomato/80180029702","at":"2013-01-29","quote":"카라반캠핑,경남고성남산공원오토캠핑장(2013.01.27~01.28). 카라반"}
 {"cid":"park-48121-00116-160l0","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/aja357/223672934950","at":"2024-11-26","text":"독채","quote":"​ ​ 산타 할아버지 같이가요~ㅎㅎㅎ ​ ​ 창원 공간대여 단감테마공원 근처 독채 창원 올라감 파티룸, …"}
 {"cid":"park-48123-00075-1afka","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/seheeoh/224443560868","at":"2026-10-16","text":"방갈로","quote":"서울근교캠핑장 계곡뷰 숲속뷰 오토캠핑 방갈로 차박 힐링별밤수목원캠핑장 힐링7 사이트 이용후기 및.... 사이트 ​"}
+{"cid":"park-48170-00173-1pgi4","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/since151009/224281800253","at":"2026-05-11","quote":"진주 아이랑 피카푸 피크닉앤글램핑 프라이빗웨건 스위트 BBQ 조식 ..... 564-6) 입실·퇴실 체크"}
 {"cid":"park-48220-00010-7z6lv","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/myungsakr1/221087260105","at":"2017-09-01","text":"펜션","quote":"[통영가족펜션] 디베랴펜션 예약안내. 달아공원, 수산과학관, 등산코스, 통영 케이블카"}
 {"cid":"park-48250-00084-1nx8s","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/hhvely2/224430654738","at":"2026-10-03","quote":"김해 경남주말나들이 애견동반 글램핑 : 도시별장. 으스스스스 무서워서 들어가기 힘들(?)었어요 ㅋㅋㅋ ​"}
 {"cid":"park-48250-00250-pdncm","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/somi245/224270032100","at":"2026-04-30","quote":"창원 북면 달천공원오토캠핑장 _ 아이와가기좋은곳 달천계곡 유아숲 캠핑장 당일치기. 본포수변공원을 갔"}
