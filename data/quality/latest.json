@@ -1,11 +1,11 @@
 {
- "generated_at": "2026-11-01T03:37:42.013Z",
+ "generated_at": "2026-11-01T06:33:46.031Z",
  "date": "2026-11-01",
  "totals": {
   "campgrounds": 6418,
-  "facts": 238520,
-  "pairs": 189220,
-  "mean_confidence": 0.786,
+  "facts": 238533,
+  "pairs": 189231,
+  "mean_confidence": 0.785,
   "confirmed_pct": 84.9,
   "corroborated": 3962,
   "conflicts": 852,
@@ -947,15 +947,15 @@
    }
   },
   "PRICE_MENTION": {
-   "coverage": 2737,
-   "coverage_pct": 42.6,
+   "coverage": 2740,
+   "coverage_pct": 42.7,
    "mean_confidence": 0.366,
    "confirmed_pct": 0,
    "corroborated": 372,
    "conflicts": 0,
-   "weak": 2365,
+   "weak": 2368,
    "status": {
-    "WEAK": 2365,
+    "WEAK": 2368,
     "CORROBORATED": 372
    }
   },
@@ -1707,16 +1707,16 @@
    }
   },
   "SITE_TYPE": {
-   "coverage": 3447,
+   "coverage": 3449,
    "coverage_pct": 53.7,
-   "mean_confidence": 0.743,
+   "mean_confidence": 0.742,
    "confirmed_pct": 77.2,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 777,
+   "weak": 779,
    "status": {
     "CONFIRMED": 2662,
-    "WEAK": 777,
+    "WEAK": 779,
     "SINGLE": 8
    }
   },
@@ -1925,16 +1925,16 @@
    }
   },
   "CHECKIN_TIME": {
-   "coverage": 2661,
+   "coverage": 2663,
    "coverage_pct": 41.5,
    "mean_confidence": 0.523,
-   "confirmed_pct": 19.4,
+   "confirmed_pct": 19.3,
    "corroborated": 569,
    "conflicts": 41,
-   "weak": 1321,
+   "weak": 1323,
    "status": {
     "VERIFIED": 195,
-    "WEAK": 1321,
+    "WEAK": 1323,
     "CONFIRMED": 320,
     "SINGLE": 613,
     "CORROBORATED": 171,
@@ -1942,16 +1942,16 @@
    }
   },
   "CHECKOUT_TIME": {
-   "coverage": 2663,
+   "coverage": 2666,
    "coverage_pct": 41.5,
    "mean_confidence": 0.524,
    "confirmed_pct": 20.3,
    "corroborated": 640,
    "conflicts": 15,
-   "weak": 1326,
+   "weak": 1329,
    "status": {
     "VERIFIED": 206,
-    "WEAK": 1326,
+    "WEAK": 1329,
     "CONFIRMED": 334,
     "SINGLE": 567,
     "CORROBORATED": 215,
@@ -1959,15 +1959,15 @@
    }
   },
   "MANNER_TIME": {
-   "coverage": 2089,
-   "coverage_pct": 32.5,
+   "coverage": 2090,
+   "coverage_pct": 32.6,
    "mean_confidence": 0.385,
    "confirmed_pct": 6.2,
    "corroborated": 117,
    "conflicts": 0,
-   "weak": 1655,
+   "weak": 1656,
    "status": {
-    "WEAK": 1655,
+    "WEAK": 1656,
     "CONFIRMED": 116,
     "SINGLE": 259,
     "CORROBORATED": 46,
