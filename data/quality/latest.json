@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-11-01T13:51:35.455Z",
- "date": "2026-11-01",
+ "generated_at": "2026-11-01T16:35:32.020Z",
+ "date": "2026-11-02",
  "totals": {
   "campgrounds": 6418,
   "facts": 238540,
@@ -1397,7 +1397,7 @@
   "REVIEW_CON_WEAK_HOT_WATER": {
    "coverage": 26,
    "coverage_pct": 0.4,
-   "mean_confidence": 0.34,
+   "mean_confidence": 0.339,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
