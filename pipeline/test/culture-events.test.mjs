@@ -162,3 +162,10 @@ test("event-venue-photo: 대체 그림·지역명·다시 묻기", () => {
   assert.ok(!venueDue({ img: "x", at: "2026-09-01T00:00:00Z" }, now));
   assert.equal(venueKey("정선 향교", { lat: 37.381, lng: 128.661 }), "정선향교@37.38,128.66");
 });
+
+test("국가유산청 첫 화면 링크는 행사 주소로 쓰지 않는다", async () => {
+  const { isSiteHome } = await import("../lib/culture-events.mjs");
+  assert.ok(isSiteHome("https://www.khs.go.kr/main.html") && isSiteHome("http://khs.go.kr/"));
+  assert.ok(!isSiteHome("http://www.sudeokmuseum.or.kr/bbs/board.php?bo_table=6010&wr_id=13"));
+  assert.ok(!isSiteHome("https://www.khs.go.kr/cha/some/detail.do?id=1"));
+});

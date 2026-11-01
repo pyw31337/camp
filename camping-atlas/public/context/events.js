@@ -97,17 +97,18 @@ function poster(x, i = 0) {
 }
 function card(x, today, i) {
   const e = x.e;
-  const href = e.cf || e.u || "";
+  // 원문 주소가 없으면(국가유산청 행사 일부 — API에 상세 주소가 없다) ‘행사명 + 장소’ 검색으로 연결한다.
+  const href = e.cf || (/^https?:\/\/(www\.)?(khs|cha)\.go\.kr\/?(main\.html?)?$/i.test(e.u || "") ? "" : e.u) || `https://search.naver.com/search.naver?query=${encodeURIComponent(`${e.t} ${e.v || ""}`.trim())}`;
   const badges = [x.state === "ongoing" ? `<b class="on">진행 중</b>` : `<b>예정 · D-${dday(today, e.s)}</b>`, x.weekend ? `<b class="wk">이번 주말</b>` : ""].join("");
   const period = e.e && e.e !== e.s ? `${md(e.s)} ~ ${md(e.e)}` : md(e.s);
   const place = e.v || (e.a ? e.a.split(/\s+/).slice(0, 3).join(" ") : "");
   // 카드 전체가 원문 링크(CultureFlow 우선, 없으면 원출처). ‘자세히 보기’ 버튼은 두지 않는다. 지도는 종류 줄 오른쪽 끝 아이콘.
   const map = e.a || e.v ? `<a class="ev-map" href="https://map.kakao.com/link/search/${encodeURIComponent(e.v || e.a)}" target="_blank" rel="noopener" aria-label="${esc(e.t)} 지도" title="지도">${MAP_SVG}</a>` : "";
   return `<article class="ev-card" data-state="${x.state}" data-kind="${esc(e.k)}">
-  ${href ? `<a class="ev-hit" href="${esc(href)}" target="_blank" rel="noopener" aria-label="${esc(e.t)} 원문 보기"></a>` : ""}
+  ${href ? `<a class="ev-hit" href="${esc(href)}" target="_blank" rel="noopener" aria-label="${esc(e.t)} ${/search\.naver\.com/.test(href) ? "검색해서 보기" : "원문 보기"}"></a>` : ""}
   <div class="ev-poster${e.img || e.img2 ? "" : " noimg"}">${poster(x, i)}<div class="ev-badges">${badges}</div><span class="ev-dist">${esc(km(x.km))}</span>${e.iv ? `<span class="ev-credit" title="포스터가 없어 행사 장소의 관광공사 사진을 보여 줍니다">장소 사진 · 한국관광공사</span>` : ""}</div>
   <div class="ev-body"><div class="ev-kindrow"><span class="ev-kind">${esc(e.k)}</span>${map}</div><h3>${esc(e.t)}</h3>
-  <span class="ev-meta">${esc(period)}${place ? `<br>${esc(place)}` : ""} · 캠핑장에서 ${esc(km(x.km))}${e.p ? ` · ${esc(e.p)}` : ""}</span>
+  <span class="ev-meta">${esc(period)}${place ? `<br>${esc(place)}` : ""} · 캠핑장에서 ${esc(km(x.km))}${e.p ? ` · ${esc(e.p)}` : ""}${e.tel ? `<br>문의 ${esc(e.tel)}` : ""}</span>
   ${e.d ? `<p class="ev-desc">${esc(e.d)}</p>` : ""}</div></article>`;
 }
 /** opt: { km, days } — 없으면 자료 전체(30km·45일) — 가장 가까운 거리(최단 거리) 오름차순 정렬 */

@@ -61,7 +61,7 @@ for (const c of catalog) {
 const ev = {};
 for (const [id, sid] of short) {
   const e = byId.get(id);
-  ev[sid] = Object.fromEntries(Object.entries({ t: e.title, s: e.s, e: e.e, k: e.kind, v: e.venue, a: e.addr, img: e.img, img2: e.img2, d: e.desc, p: e.price, u: e.url, cf: e.cf, src: e.src, also: e.also }).filter(([, v]) => v != null && v !== ""));
+  ev[sid] = Object.fromEntries(Object.entries({ t: e.title, s: e.s, e: e.e, k: e.kind, v: e.venue, a: e.addr, img: e.img, img2: e.img2, d: e.desc, p: e.price, u: e.url, tel: e.tel, cf: e.cf, src: e.src, also: e.also }).filter(([, v]) => v != null && v !== ""));
 }
 // 포스터 없는 행사 → 장소 공식 사진(관광공사). 기록에 없거나 오래된 장소만 묻는다(하루 VENUE_MAX_CALLS건).
 const vpPath = join(root, "pipeline/registry/event-venue-photos.json");
