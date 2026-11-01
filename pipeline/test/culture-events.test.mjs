@@ -137,3 +137,35 @@ test("같은 제목이라도 다른 지역 공연은 합치지 않는다(순회 
   const noAddr = tourEventsOf({ fest: { 1: { t: "페인터즈", s: "2026-10-01", e: "2026-12-31" } } }, T);
   assert.equal(mergeEvents([gwangju], noAddr.events).alias.size, 0);
 });
+
+// 포스터 없는 행사 → 장소 공식 사진(관광공사) 고르기
+import { isRegionOnly, isTemplateImg, pickVenuePhoto, venueDue, venueKey } from "../lib/event-venue-photo.mjs";
+test("event-venue-photo: 같은 장소의 사진만 고른다", () => {
+  const at = { lat: 35.62, lng: 127.93 };
+  const it = (title, lat, lng, img = "http://tong.visitkorea.or.kr/a.jpg") => ({ title, mapy: String(lat), mapx: String(lng), firstimage: img, contentid: "1" });
+  assert.equal(pickVenuePhoto([it("수승대 썰매장", 35.62, 127.93)], "수승대", at), null); // 다른 시설
+  assert.equal(pickVenuePhoto([it("예산향교", 36.68, 126.84)], "예산향교", at), null); // 3km 밖(같은 이름 다른 지역)
+  assert.equal(pickVenuePhoto([it("밀양향교", 35.62, 127.93, "")], "밀양향교", at), null); // 사진 없음
+  assert.deepEqual(pickVenuePhoto([it("포항 분옥정", 35.621, 127.931)], "분옥정", at), { img: "https://tong.visitkorea.or.kr/a.jpg", contentid: "1", title: "포항 분옥정" });
+  assert.equal(pickVenuePhoto([it("보석사(금산)", 35.62, 127.93)], "보석사", at)?.title, "보석사(금산)");
+  assert.equal(pickVenuePhoto([it("포항 분옥정", 35.621, 127.931), it("분옥정", 35.625, 127.935, "https://x/b.jpg")], "분옥정", at)?.img, "https://x/b.jpg"); // 같은 이름 우선
+});
+test("event-venue-photo: 대체 그림·지역명·다시 묻기", () => {
+  assert.ok(isTemplateImg("https://pyw31337.github.io/culture/images/fallbacks/tourism-template.svg"));
+  assert.ok(!isTemplateImg("https://tong.visitkorea.or.kr/a.jpg"));
+  assert.ok(isRegionOnly("충청북도 음성군"));
+  assert.ok(!isRegionOnly("신항서원") && !isRegionOnly("정선향교") && !isRegionOnly("경주최부자댁"));
+  const now = Date.parse("2026-11-01T00:00:00Z");
+  assert.ok(venueDue(undefined, now));
+  assert.ok(!venueDue({ none: true, at: "2026-10-20T00:00:00Z" }, now));
+  assert.ok(venueDue({ none: true, at: "2026-09-01T00:00:00Z" }, now));
+  assert.ok(!venueDue({ img: "x", at: "2026-09-01T00:00:00Z" }, now));
+  assert.equal(venueKey("정선 향교", { lat: 37.381, lng: 128.661 }), "정선향교@37.38,128.66");
+});
+
+test("국가유산청 첫 화면 링크는 행사 주소로 쓰지 않는다", async () => {
+  const { isSiteHome } = await import("../lib/culture-events.mjs");
+  assert.ok(isSiteHome("https://www.khs.go.kr/main.html") && isSiteHome("http://khs.go.kr/"));
+  assert.ok(!isSiteHome("http://www.sudeokmuseum.or.kr/bbs/board.php?bo_table=6010&wr_id=13"));
+  assert.ok(!isSiteHome("https://www.khs.go.kr/cha/some/detail.do?id=1"));
+});

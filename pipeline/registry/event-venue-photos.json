@@ -1,0 +1,5 @@
+{
+ "src": "한국관광공사 TourAPI searchKeyword2(장소 이름·3km)",
+ "rule": "lib/event-venue-photo.mjs",
+ "venues": {}
+}

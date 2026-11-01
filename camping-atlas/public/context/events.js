@@ -79,6 +79,7 @@ const STYLE = `.ev-sec .ev-tabs{display:flex;align-items:center;gap:16px;margin:
 .ev-map:hover{background:var(--ink,#111);color:var(--paper,#fff)}
 .ev-filters{display:inline-flex;gap:6px;align-items:center}
 .ev-filters select{height:32px;padding:0 28px 0 12px;border:1px solid var(--line,#e5e5e5);border-radius:999px;background:var(--paper,#fff) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23666' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 11px center;appearance:none;color:var(--ink,#111);font:inherit;font-size:.8rem;font-weight:800;cursor:pointer}
+.ev-credit{position:absolute;left:8px;bottom:8px;max-width:calc(100% - 78px);padding:3px 7px;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;font-size:.66rem;font-weight:700;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
 .ev-empty{margin:4px 0 0;padding:18px;border-radius:14px;background:var(--soft,#f2f2f2);color:var(--ink-3,#666);font-size:.84rem;text-align:center}
 @media (max-width:720px){.ev-rail{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0;padding:2px 2px 10px;scrollbar-width:none;overscroll-behavior-x:contain}
 .ev-rail::-webkit-scrollbar{display:none}.ev-card{flex:0 0 min(64vw,240px);scroll-snap-align:start}.ev-card:hover{transform:none}.ev-more{display:none}}`;
@@ -90,23 +91,24 @@ function poster(x, i = 0) {
   const onerr = `if(this.dataset.alt){this.src=this.dataset.alt;this.removeAttribute('data-alt')}else{const p=this.parentNode;p.classList.add('noimg');p.insertAdjacentHTML('afterbegin',this.dataset.fb);this.remove()}`;
   const src = e.img || e.img2;
   const img = src
-    ? `<img src="${esc(src)}" alt="${esc(e.t)} 포스터" loading="${i < 8 ? "eager" : "lazy"}" decoding="async" referrerpolicy="no-referrer"${e.img && e.img2 && e.img2 !== e.img ? ` data-alt="${esc(e.img2)}"` : ""} data-fb="${esc(fallback)}" onerror="${esc(onerr)}">`
+    ? `<img src="${esc(src)}" alt="${esc(e.iv ? `${e.v || e.t} 장소 사진` : `${e.t} 포스터`)}" loading="${i < 8 ? "eager" : "lazy"}" decoding="async" referrerpolicy="no-referrer"${e.img && e.img2 && e.img2 !== e.img ? ` data-alt="${esc(e.img2)}"` : ""} data-fb="${esc(fallback)}" onerror="${esc(onerr)}">`
     : fallback;
   return img;
 }
 function card(x, today, i) {
   const e = x.e;
-  const href = e.cf || e.u || "";
+  // 원문 주소가 없으면(국가유산청 행사 일부 — API에 상세 주소가 없다) ‘행사명 + 장소’ 검색으로 연결한다.
+  const href = e.cf || (/^https?:\/\/(www\.)?(khs|cha)\.go\.kr\/?(main\.html?)?$/i.test(e.u || "") ? "" : e.u) || `https://search.naver.com/search.naver?query=${encodeURIComponent(`${e.t} ${e.v || ""}`.trim())}`;
   const badges = [x.state === "ongoing" ? `<b class="on">진행 중</b>` : `<b>예정 · D-${dday(today, e.s)}</b>`, x.weekend ? `<b class="wk">이번 주말</b>` : ""].join("");
   const period = e.e && e.e !== e.s ? `${md(e.s)} ~ ${md(e.e)}` : md(e.s);
   const place = e.v || (e.a ? e.a.split(/\s+/).slice(0, 3).join(" ") : "");
   // 카드 전체가 원문 링크(CultureFlow 우선, 없으면 원출처). ‘자세히 보기’ 버튼은 두지 않는다. 지도는 종류 줄 오른쪽 끝 아이콘.
   const map = e.a || e.v ? `<a class="ev-map" href="https://map.kakao.com/link/search/${encodeURIComponent(e.v || e.a)}" target="_blank" rel="noopener" aria-label="${esc(e.t)} 지도" title="지도">${MAP_SVG}</a>` : "";
   return `<article class="ev-card" data-state="${x.state}" data-kind="${esc(e.k)}">
-  ${href ? `<a class="ev-hit" href="${esc(href)}" target="_blank" rel="noopener" aria-label="${esc(e.t)} 원문 보기"></a>` : ""}
-  <div class="ev-poster${e.img || e.img2 ? "" : " noimg"}">${poster(x, i)}<div class="ev-badges">${badges}</div><span class="ev-dist">${esc(km(x.km))}</span></div>
+  ${href ? `<a class="ev-hit" href="${esc(href)}" target="_blank" rel="noopener" aria-label="${esc(e.t)} ${/search\.naver\.com/.test(href) ? "검색해서 보기" : "원문 보기"}"></a>` : ""}
+  <div class="ev-poster${e.img || e.img2 ? "" : " noimg"}">${poster(x, i)}<div class="ev-badges">${badges}</div><span class="ev-dist">${esc(km(x.km))}</span>${e.iv ? `<span class="ev-credit" title="포스터가 없어 행사 장소의 관광공사 사진을 보여 줍니다">장소 사진 · 한국관광공사</span>` : ""}</div>
   <div class="ev-body"><div class="ev-kindrow"><span class="ev-kind">${esc(e.k)}</span>${map}</div><h3>${esc(e.t)}</h3>
-  <span class="ev-meta">${esc(period)}${place ? `<br>${esc(place)}` : ""} · 캠핑장에서 ${esc(km(x.km))}${e.p ? ` · ${esc(e.p)}` : ""}</span>
+  <span class="ev-meta">${esc(period)}${place ? `<br>${esc(place)}` : ""} · 캠핑장에서 ${esc(km(x.km))}${e.p ? ` · ${esc(e.p)}` : ""}${e.tel ? `<br>문의 ${esc(e.tel)}` : ""}</span>
   ${e.d ? `<p class="ev-desc">${esc(e.d)}</p>` : ""}</div></article>`;
 }
 /** opt: { km, days } — 없으면 자료 전체(30km·45일) — 가장 가까운 거리(최단 거리) 오름차순 정렬 */

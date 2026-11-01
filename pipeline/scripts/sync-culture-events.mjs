@@ -3,12 +3,16 @@
 //      ② 한국관광공사 TourAPI 축제(같은 폴더 extras.json — Trip extras가 모은 것)
 // 30km 안, 오늘~45일 사이에 걸치는 행사를 캠핑장마다 최대 8개. 같은 행사는 하나로 합친다.
 // 포스터는 저장하지 않고 원래 주소(CultureFlow Pages·관광공사·KOPIS)를 그대로 보여 준다(AGENTS.md 4).
-// 실패해도 exit 0 — 이전 결과를 그대로 둔다. 키 필요 없음.
+// ③ 포스터가 없는 행사(국가유산청 행사는 CultureFlow가 공통 대체 그림만 준다)에는 행사 장소의 관광공사 공식 사진을 붙인다
+//    (lib/event-venue-photo.mjs, 키 DATA_GO_KR_SERVICE_KEY — 없으면 지난 기록만 쓴다. 장소별 기록 registry/event-venue-photos.json).
+// 실패해도 exit 0 — 이전 결과를 그대로 둔다.
 // 로컬: CULTURE_DATA_FILE=…/performances.json CULTURE_SITEMAP_FILE=…/sitemap.xml node scripts/sync-culture-events.mjs
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { CF_BASE, EVENT_WINDOW_DAYS, GridIndex, cultureEventOf, eventsNear, mergeEvents, sitemapIds, tourEventsOf } from "../lib/culture-events.mjs";
+import { fetchDataGoKr } from "../lib/datagokr.mjs";
+import { isRegionOnly, isTemplateImg, pickVenuePhoto, venueDue, venueKey, venueSearchUrl } from "../lib/event-venue-photo.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const outDir = join(root, "camping-atlas/public/context");
@@ -57,13 +61,50 @@ for (const c of catalog) {
 const ev = {};
 for (const [id, sid] of short) {
   const e = byId.get(id);
-  ev[sid] = Object.fromEntries(Object.entries({ t: e.title, s: e.s, e: e.e, k: e.kind, v: e.venue, a: e.addr, img: e.img, img2: e.img2, d: e.desc, p: e.price, u: e.url, cf: e.cf, src: e.src, also: e.also }).filter(([, v]) => v != null && v !== ""));
+  ev[sid] = Object.fromEntries(Object.entries({ t: e.title, s: e.s, e: e.e, k: e.kind, v: e.venue, a: e.addr, img: e.img, img2: e.img2, d: e.desc, p: e.price, u: e.url, tel: e.tel, cf: e.cf, src: e.src, also: e.also }).filter(([, v]) => v != null && v !== ""));
 }
+// 포스터 없는 행사 → 장소 공식 사진(관광공사). 기록에 없거나 오래된 장소만 묻는다(하루 VENUE_MAX_CALLS건).
+const vpPath = join(root, "pipeline/registry/event-venue-photos.json");
+const vp = existsSync(vpPath) ? JSON.parse(readFileSync(vpPath, "utf8")) : { venues: {} };
+vp.venues ??= {};
+const tourKey = process.env.DATA_GO_KR_SERVICE_KEY;
+const VENUE_MAX_CALLS = Number(process.env.VENUE_MAX_CALLS ?? 400);
+let vCalls = 0, vHit = 0, vStop = tourKey ? "" : "DATA_GO_KR_SERVICE_KEY 없음 — 지난 기록만 사용";
+for (const [id, sid] of short) {
+  const e = byId.get(id), row = ev[sid];
+  if (!e?.venue || (row.img && !isTemplateImg(row.img)) || isRegionOnly(e.venue)) continue;
+  const at = Number.isFinite(e.lat) ? { lat: e.lat, lng: e.lng } : null;
+  const k = venueKey(e.venue, at);
+  if (!vStop && venueDue(vp.venues[k]) && vCalls < VENUE_MAX_CALLS) {
+    try {
+      const { res } = await fetchDataGoKr(venueSearchUrl(e.venue), tourKey, { timeoutMs: 20000 });
+      vCalls++;
+      const body = await res.text();
+      let j = null; try { j = JSON.parse(body); } catch { /* XML 오류 응답 */ }
+      const items = j?.response?.body?.items?.item;
+      if (!j?.response?.body) { if (/LIMITED|EXCEED|SERVICE_KEY|한도/i.test(body)) vStop = `TourAPI 중단: ${body.slice(0, 120).replace(/\s+/g, " ")}`; }
+      else {
+        const hit = pickVenuePhoto(Array.isArray(items) ? items : items ? [items] : [], e.venue, at);
+        // 지우지 않는다: 이번에 못 찾아도 예전에 찾은 사진은 그대로 둔다
+        vp.venues[k] = hit ? { ...hit, venue: e.venue, at: new Date().toISOString() } : { ...(vp.venues[k]?.img ? vp.venues[k] : { venue: e.venue }), at: new Date().toISOString(), ...(vp.venues[k]?.img ? {} : { none: true }) };
+      }
+    } catch (err) { vStop = `TourAPI 실패: ${String(err.message).slice(0, 100)}`; }
+  }
+  const p = vp.venues[k];
+  if (p?.img) {
+    if (row.img) row.img2 = row.img; // 사진이 깨지면 원래 대체 그림으로
+    row.img = p.img; row.iv = 1; vHit++; // iv: 포스터가 아니라 장소 사진(화면에 출처 표기)
+  }
+}
+if (vCalls || !existsSync(vpPath)) writeFileSync(vpPath, `${JSON.stringify({ src: "한국관광공사 TourAPI searchKeyword2(장소 이름·3km)", rule: "lib/event-venue-photo.mjs", venues: Object.fromEntries(Object.entries(vp.venues).sort()) }, null, 1)}\n`);
+status.venue_photo = `${vStop || "OK"} · 이번 ${vCalls}건 · 장소 사진 ${vHit}건`;
+
 const out = {
   generated_at: new Date(now).toISOString(), today, window_days: EVENT_WINDOW_DAYS, radius_km: 30, status,
   sources: {
     cf: { name: "CultureFlow", url: `${CF_BASE}/`, data_at: build?.generatedAt ?? null, note: "공연·전시·축제 일정 모음(포스터는 CultureFlow와 각 원출처 이미지)" },
     tour: { name: "한국관광공사 TourAPI 행사정보", url: "https://api.visitkorea.or.kr", grade: "PUBLIC_DATA" },
+    venue_photo: { name: "한국관광공사 TourAPI 관광지 사진(행사 장소)", url: "https://api.visitkorea.or.kr", grade: "PUBLIC_DATA", note: "포스터가 없는 행사에 장소 사진(iv=1)" },
   },
   ev, camps,
 };
