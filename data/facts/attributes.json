@@ -554,9 +554,9 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 8,
+    "campgrounds": 5,
     "by_grade": {
-     "MENTION": 7,
+     "MENTION": 4,
      "OPERATOR": 1
     }
    }
@@ -2655,5 +2655,5 @@
    }
   }
  ],
- "generated_at": "2026-11-01T23:34:06.794Z"
+ "generated_at": "2026-11-02T01:21:58.353Z"
 }
