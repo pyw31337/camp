@@ -1149,7 +1149,7 @@
 {"cid":"640","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":38}
 {"cid":"640","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/kkyo8110/224435544403","at":"2026-10-08","quote":"파주 오토캠핑장 학교안 풍경캠핑장 — 초보 캠퍼를 위한 완벽 정보. 구역은 느티나무 숲"}
 {"cid":"640","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/daramgeenews/224440522020","at":"2026-10-13","quote":"놀거리 군포 초막골생태공원 후기 🌿 생각보다 엄청 넓은 숨은 명소, 주차·캠핑장·글램핑 예약까지 총정리. 917-3 초막골생태공원 느티나무야영장 경기도 군포시"}
-{"cid":"640","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/zelkova0201/224442385893","at":"2026-10-15","quote":"영월 풀타프존 이지캠핑, 느티나무캠핑장 제공 장비와 준비물 안내. 느티나무캠핑장의 드"}
+{"cid":"640","attr":"SITE_TYPE","value":"TARP_ZONE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/zelkova0201/224442385893","at":"2026-10-15","quote":"영월 풀타프존 이지캠핑, 느티나무캠핑장 제공 장비와 준비물 안내. 풀타프존 안에는 가"}
 {"cid":"640","attr":"STAY_GENERAL_SITES","value":38,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"643","attr":"SITE_TOTAL","value":34,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"643","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":34}
@@ -3789,8 +3789,8 @@
 {"cid":"2464","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.littlejsb.com/103","at":"2025-04-21","text":"펜션","quote":"운영 형태 : 오토캠핑장, 펜션 병행 운영. 운영 기간 : 연중무휴. 입실/퇴실 시간 : 입실 13:0"}
 {"cid":"2464","attr":"STAY_GENERAL_SITES","value":50,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2472","attr":"SITE_TOTAL","value":70,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2472","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/%ec%98%88%ec%95%bd%ec%95%88%eb%82%b4/","at":"2026-11-02T00:42:09.594Z","quote":"캠핑카, 카라반, 텐트라반, 투폴딩 트레일러는 진입 불가 입니다."}
-{"cid":"2472","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/","at":"2026-11-02T00:42:09.594Z","text":"방갈로","quote":"방갈로전용"}
+{"cid":"2472","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/%ec%98%88%ec%95%bd%ec%95%88%eb%82%b4/","at":"2026-11-02T10:58:51.010Z","quote":"캠핑카, 카라반, 텐트라반, 투폴딩 트레일러는 진입 불가 입니다."}
+{"cid":"2472","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/","at":"2026-11-02T10:58:51.010Z","text":"방갈로","quote":"방갈로전용"}
 {"cid":"2472","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":70}
 {"cid":"2472","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/ichean.camp/VwG0/5","at":"2020-07-02","quote":"033-636-7700 - 화천/딴산유원지 : ***-****-****, 물놀이(계곡) - 원주/두리오토캠핑장 : 033-765-8569, 선착순(50%)/예약(50%), 펜션(예약"}
 {"cid":"2472","attr":"STAY_GENERAL_SITES","value":70,"grade":"CONFIRMED","src":"gocamping"}
@@ -22600,6 +22600,7 @@
 {"cid":"102229","attr":"SITE_TOTAL","value":106,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102229","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":106}
 {"cid":"102229","attr":"SITE_TYPE","value":"DECK","grade":"CONFIRMED","src":"gocamping","count":11}
+{"cid":"102229","attr":"SITE_TYPE","value":"RV","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/storyme5/224458478826","at":"2026-11-02","quote":"일반형 70면, 확장형 26면, 캠핑카 전용 10면으로..."}
 {"cid":"102229","attr":"STAY_AUTO_SITES","value":106,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102230","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ghkwjd703/224445497519","at":"2026-10-18","quote":"제주아이랑 캠핑 추천｜봉아름 캠핑장 개인 화장실·놀이터·카라반 후기 (가격, 오픈이벤트, 주변가볼.... 다니는 엄마 아빠라면 캠핑장"}
 {"cid":"102230","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ghkwjd703/224445497519","at":"2026-10-18","quote":"제주아이랑 캠핑 추천｜봉아름 캠핑장 개인 화장실·놀이터·카라반 후기 (가격, 오픈이벤트, 주변가볼.... 다니는 엄마"}
@@ -23417,6 +23418,7 @@
 {"cid":"park-41281-00004-rvt4g","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/matzip_evo/224295118378","at":"2026-05-24","quote":"원남지오토캠핑장: 음성군 원남면 조촌리 1388-1 (무료 / 화장실, 개수대, 낚시,"}
 {"cid":"park-41281-00004-rvt4g","attr":"SITE_TYPE","value":"CAR_CAMP","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/matzip_evo/224295118378","at":"2026-05-24","quote":"[차박캠핑Tip] 전국 차박지 리스트 정리. 경기 북부 & 동부 (고양, 파주,"}
 {"cid":"park-41281-00004-rvt4g","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/bbibbigarden/224432237835","at":"2026-10-05","quote":"(글램핑장) 🏕️ 글램313 - 서울 근교 글램핑장 내돈내산 후기, 위치, 운"}
+{"cid":"park-41281-00005-umt4","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/mingdong_2/224434231753","at":"2026-10-12","quote":"해당자라면 구비 서류는 필수 지참할 것! ​ ​ 킨텍스 캠핑장 종합안내도 카라반 존 오토캠핑존 시민 가족 캠핑존 ​ ​ 사이트마다 차량은 1대씩 주차 가능 그 외에는"}
 {"cid":"park-41281-00005-umt4","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/mingdong_2/224434231753","at":"2026-10-12","quote":"[고양] 일산 캠핑장 카라반 오토캠핑 10번사이트 후기 예약방법 킨텍스 캠핑장 내돈내산. 보니 고양"}
 {"cid":"park-41281-00006-ubq51","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/is5256/224435501168","at":"2026-10-08","quote":"함안 강나루오토캠핑장 예약방법 명당추천 사이트 후기ㅣ자전거대여 캠핑장🚴‍♀️. 사무소 입실"}
 {"cid":"park-41281-00076-y37k","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/sohot5015/224421044866","at":"2026-09-23","quote":"강릉 서정캠프카라반 사천해변 오션뷰 바비큐 불멍 감성 숙소. 개인 화기 및 캠핑용품 사용"}
