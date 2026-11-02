@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-02T12:52:31.768Z",
- "date": "2026-11-02",
+ "generated_at": "2026-11-02T20:08:19.840Z",
+ "date": "2026-11-03",
  "totals": {
   "campgrounds": 6418,
-  "facts": 238580,
+  "facts": 238581,
   "pairs": 189256,
   "mean_confidence": 0.785,
   "confirmed_pct": 84.9,
