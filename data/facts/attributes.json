@@ -178,11 +178,11 @@
    "filter": "in",
    "note": "count가 있으면 면·동 수. text는 세부 이름(방갈로·캐빈 등). 원천: 고캠핑 등록값·소개글, 카카오/네이버 분류, 운영자 홈페이지 문장(lib/site-types.mjs)",
    "coverage": {
-    "campgrounds": 3475,
+    "campgrounds": 3477,
     "by_grade": {
      "CONFIRMED": 5784,
      "OPERATOR": 1105,
-     "MENTION": 5118
+     "MENTION": 5122
     }
    }
   },
@@ -481,9 +481,9 @@
    "filter": "max",
    "note": "MENTION 전용. 확정값으로 쓰지 않는다",
    "coverage": {
-    "campgrounds": 2776,
+    "campgrounds": 2778,
     "by_grade": {
-     "MENTION": 14231
+     "MENTION": 14244
     }
    }
   },
@@ -569,10 +569,10 @@
    "pref": "일찍 들어가고 싶나요?",
    "filter": "max",
    "coverage": {
-    "campgrounds": 2818,
+    "campgrounds": 2821,
     "by_grade": {
      "OPERATOR": 651,
-     "MENTION": 3585,
+     "MENTION": 3589,
      "CONFIRMED": 4,
      "REFERENCE": 453
     }
@@ -586,10 +586,10 @@
    "pref": "늦게 나오고 싶나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 2760,
+    "campgrounds": 2763,
     "by_grade": {
      "OPERATOR": 616,
-     "MENTION": 3564,
+     "MENTION": 3568,
      "CONFIRMED": 2,
      "REFERENCE": 446
     }
@@ -631,10 +631,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 2106,
+    "campgrounds": 2107,
     "by_grade": {
      "OPERATOR": 132,
-     "MENTION": 2548,
+     "MENTION": 2549,
      "CONFIRMED": 7,
      "REFERENCE": 464
     }
@@ -1696,9 +1696,9 @@
    "review_label": "화장실·샤워장 깨끗",
    "pref": "‘화장실·샤워장 깨끗’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 240,
+    "campgrounds": 241,
     "by_grade": {
-     "MENTION": 240
+     "MENTION": 241
     }
    }
   },
@@ -1712,9 +1712,9 @@
    "review_label": "사이트 넓음",
    "pref": "‘사이트 넓음’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 1179,
+    "campgrounds": 1180,
     "by_grade": {
-     "MENTION": 1179
+     "MENTION": 1180
     }
    }
   },
@@ -1808,9 +1808,9 @@
    "review_label": "아이들 놀기 좋음",
    "pref": "‘아이들 놀기 좋음’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 538,
+    "campgrounds": 539,
     "by_grade": {
-     "MENTION": 538
+     "MENTION": 539
     }
    }
   },
@@ -1920,9 +1920,9 @@
    "review_label": "매점·편의 완비",
    "pref": "‘매점·편의 완비’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 50,
+    "campgrounds": 51,
     "by_grade": {
-     "MENTION": 50
+     "MENTION": 51
     }
    }
   },
@@ -2144,9 +2144,9 @@
    "review_label": "시설 깔끔·쾌적",
    "pref": "‘시설 깔끔·쾌적’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 1607,
+    "campgrounds": 1608,
     "by_grade": {
-     "MENTION": 1607
+     "MENTION": 1608
     }
    }
   },
@@ -2656,5 +2656,5 @@
    }
   }
  ],
- "generated_at": "2026-11-03T12:41:00.337Z"
+ "generated_at": "2026-11-03T17:40:16.844Z"
 }
