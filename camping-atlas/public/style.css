@@ -149,10 +149,20 @@ body[data-view="theme"] .top .top-nav a {
 }
 body[data-view="home"] .top .top-nav a[aria-current],
 body[data-view="theme"] .top .top-nav a[aria-current] {
-  color: #fff;
-  background: rgba(0,0,0,.25);
-  box-shadow: 0 1px 6px rgba(0,0,0,.4);
+  color: var(--volt, #baff29) !important;
+  background: rgba(5, 17, 31, .72);
+  border: 1px solid rgba(186, 255, 41, .9);
+  box-shadow: 0 0 0 1px rgba(186, 255, 41, .24), 0 4px 16px rgba(0, 0, 0, .42);
   backdrop-filter: blur(8px);
+  text-shadow: 0 0 10px rgba(186, 255, 41, .45);
+}
+body[data-view="home"] .top .top-nav a:focus-visible,
+body[data-view="theme"] .top .top-nav a:focus-visible {
+  color: var(--volt, #baff29) !important;
+  background: rgba(5, 17, 31, .84);
+  border-color: var(--volt, #baff29);
+  box-shadow: 0 0 0 3px rgba(186, 255, 41, .26), 0 0 18px rgba(186, 255, 41, .34);
+  outline: none;
 }
 body[data-view="home"] .top .brand-mark,
 body[data-view="theme"] .top .brand-mark { background: var(--volt); color: #101414; }
@@ -212,14 +222,18 @@ body[data-view="theme"] .top .gear-chip { background: rgba(8,18,30,.42); color: 
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1;
+  /* 딤 위에서 효과만 선명하게 합성하고, hero-in(텍스트) 아래에 둔다. */
+  z-index: 2;
+  mix-blend-mode: screen;
+  filter: saturate(1.28) brightness(1.2);
+  opacity: .98;
 }
-/* 딤처리: 효과(canvas) 위, 텍스트(hero-in) 아래에 배치하여 어두운 영역에서 효과가 튀지 않고 자연스럽게 스며듦 */
+/* 딤처리는 배경 아래, 효과(canvas)는 그 위, 텍스트(hero-in)는 최상단에 둬 효과와 글자 대비를 함께 지킨다. */
 .hero-dim {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 2;
+  z-index: 1;
   background:
     linear-gradient(90deg, rgba(5,17,31,.92) 0%, rgba(5,17,31,.70) 35%, rgba(5,17,31,.22) 65%, rgba(5,17,31,0) 85%, rgba(5,17,31,0) 100%),
     linear-gradient(180deg, rgba(5,17,31,.3) 0%, transparent 45%, rgba(5,17,31,.75) 100%);
