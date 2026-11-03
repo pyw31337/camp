@@ -178,11 +178,11 @@
    "filter": "in",
    "note": "count가 있으면 면·동 수. text는 세부 이름(방갈로·캐빈 등). 원천: 고캠핑 등록값·소개글, 카카오/네이버 분류, 운영자 홈페이지 문장(lib/site-types.mjs)",
    "coverage": {
-    "campgrounds": 3477,
+    "campgrounds": 3478,
     "by_grade": {
      "CONFIRMED": 5784,
      "OPERATOR": 1105,
-     "MENTION": 5122
+     "MENTION": 5128
     }
    }
   },
@@ -467,7 +467,7 @@
    "coverage": {
     "campgrounds": 1548,
     "by_grade": {
-     "OPERATOR": 8745,
+     "OPERATOR": 8746,
      "CONFIRMED": 3
     }
    }
@@ -481,9 +481,9 @@
    "filter": "max",
    "note": "MENTION 전용. 확정값으로 쓰지 않는다",
    "coverage": {
-    "campgrounds": 2778,
+    "campgrounds": 2780,
     "by_grade": {
-     "MENTION": 14244
+     "MENTION": 14249
     }
    }
   },
@@ -539,9 +539,9 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 71,
+    "campgrounds": 72,
     "by_grade": {
-     "MENTION": 79,
+     "MENTION": 80,
      "CONFIRMED": 1,
      "OPERATOR": 9
     }
@@ -569,10 +569,10 @@
    "pref": "일찍 들어가고 싶나요?",
    "filter": "max",
    "coverage": {
-    "campgrounds": 2821,
+    "campgrounds": 2825,
     "by_grade": {
      "OPERATOR": 651,
-     "MENTION": 3589,
+     "MENTION": 3595,
      "CONFIRMED": 4,
      "REFERENCE": 453
     }
@@ -586,10 +586,10 @@
    "pref": "늦게 나오고 싶나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 2763,
+    "campgrounds": 2767,
     "by_grade": {
      "OPERATOR": 616,
-     "MENTION": 3568,
+     "MENTION": 3572,
      "CONFIRMED": 2,
      "REFERENCE": 446
     }
@@ -631,10 +631,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 2107,
+    "campgrounds": 2110,
     "by_grade": {
      "OPERATOR": 132,
-     "MENTION": 2549,
+     "MENTION": 2552,
      "CONFIRMED": 7,
      "REFERENCE": 464
     }
@@ -1968,9 +1968,9 @@
    "review_label": "소음·매너",
    "pref": "‘소음·매너’은(는) 피하고 싶나요?",
    "coverage": {
-    "campgrounds": 264,
+    "campgrounds": 265,
     "by_grade": {
-     "MENTION": 264
+     "MENTION": 265
     }
    }
   },
@@ -2064,9 +2064,9 @@
    "review_label": "온수 약함",
    "pref": "‘온수 약함’은(는) 피하고 싶나요?",
    "coverage": {
-    "campgrounds": 26,
+    "campgrounds": 27,
     "by_grade": {
-     "MENTION": 26
+     "MENTION": 27
     }
    }
   },
@@ -2656,5 +2656,5 @@
    }
   }
  ],
- "generated_at": "2026-11-03T17:40:16.844Z"
+ "generated_at": "2026-11-03T23:56:53.880Z"
 }
