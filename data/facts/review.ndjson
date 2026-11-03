@@ -13488,6 +13488,11 @@
 {"cid":"osm-r8616724","attr":"REVIEW_PRO_QUIET","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/medijam/224394384503","at":"2026-08-29","n":2,"text":"조용·한적"}
 {"cid":"osm-r8616724","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/female50/224345452183","at":"2026-07-13","n":1,"text":"사이트 넓음"}
 {"cid":"osm-r9734480","attr":"REVIEW_COUNT","value":5,"grade":"MENTION","src":"review_search","n":5}
+{"cid":"osm-r9734480","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://o0m0a.tistory.com/130","at":"2024-12-06","n":1,"text":"시설 깔끔·쾌적"}
+{"cid":"osm-r9734480","attr":"REVIEW_PRO_CLEAN_TOILET","value":1,"grade":"MENTION","src":"review_search","url":"https://o0m0a.tistory.com/130","at":"2024-12-06","n":1,"text":"화장실·샤워장 깨끗"}
+{"cid":"osm-r9734480","attr":"REVIEW_PRO_KIDS","value":1,"grade":"MENTION","src":"review_search","url":"https://o0m0a.tistory.com/130","at":"2024-12-06","n":1,"text":"아이들 놀기 좋음"}
+{"cid":"osm-r9734480","attr":"REVIEW_PRO_STORE","value":1,"grade":"MENTION","src":"review_search","url":"https://o0m0a.tistory.com/130","at":"2024-12-06","n":1,"text":"매점·편의 완비"}
+{"cid":"osm-r9734480","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://o0m0a.tistory.com/130","at":"2024-12-06","n":1,"text":"사이트 넓음"}
 {"cid":"osm-r9775148","attr":"REVIEW_COUNT","value":1,"grade":"MENTION","src":"review_search","n":1}
 {"cid":"osm-r10832105","attr":"REVIEW_COUNT","value":1,"grade":"MENTION","src":"review_search","n":1}
 {"cid":"osm-r10832105","attr":"REVIEW_PRO_WALK","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/milaya-mila/224450085986","at":"2026-10-22","n":1,"text":"산책·둘레길 좋음"}
