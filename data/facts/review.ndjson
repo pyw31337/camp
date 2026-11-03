@@ -15894,6 +15894,11 @@
 {"cid":"rf-1xmqyui","attr":"REVIEW_PRO_QUIET","value":1,"grade":"MENTION","src":"review_search","url":"https://puco2009.tistory.com/421678","at":"2026-10-13","n":1,"text":"조용·한적"}
 {"cid":"rf-1xmqyui","attr":"REVIEW_PRO_VIEW","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hjs6034/224444642787","at":"2026-10-17","n":1,"text":"뷰·경치 좋음"}
 {"cid":"rf-1xmqyui","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://cafe.daum.net/jinel/oE1T/515","at":"2026-07-15","n":1,"text":"사이트 넓음"}
+{"cid":"rf-1yykj5u","attr":"REVIEW_COUNT","value":7,"grade":"MENTION","src":"review_search","n":7}
+{"cid":"rf-1yykj5u","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/blue3527/224427445195","at":"2026-09-30","n":1,"text":"시설 깔끔·쾌적"}
+{"cid":"rf-1yykj5u","attr":"REVIEW_PRO_FAMILY_HEALING","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/leedyko/224435980725","at":"2026-10-09","n":2,"text":"가족·모임 힐링"}
+{"cid":"rf-1yykj5u","attr":"REVIEW_PRO_HEALING_NATURE","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/leedyko/224435980725","at":"2026-10-09","n":2,"text":"힐링·자연 감성"}
+{"cid":"rf-1yykj5u","attr":"REVIEW_PRO_VIEW","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/leedyko/224435980725","at":"2026-10-09","n":1,"text":"뷰·경치 좋음"}
 {"cid":"rf-2btyj6","attr":"REVIEW_CON_OLD_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/kamidaily/224426474599","at":"2026-09-29","n":1,"text":"노후된 시설"}
 {"cid":"rf-2btyj6","attr":"REVIEW_COUNT","value":10,"grade":"MENTION","src":"review_search","n":10}
 {"cid":"rf-2btyj6","attr":"REVIEW_PRO_ACCESSIBILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/twinmin1512/224360835837","at":"2026-07-28","n":1,"text":"접근성 좋음"}
