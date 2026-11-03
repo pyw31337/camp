@@ -714,7 +714,7 @@ function matches(c, { useArea = true, quick = S.quick } = {}) {
   if (S.feeBand === "o7" && !(fMin && (fMin >= 70000 || (fMax && fMax >= 70000)))) return false;
   if (S.theme && S.theme !== "ALL") { const t = THEMES.find((x) => x[0] === S.theme); if (t && !t[2](c)) return false; }
   if (S.theme === "OPEN" && !openingOf(c)) return false;
-  if (S.stype && !(STAY_KEYS.has(S.stype) ? stayKinds(c).includes(S.stype) : hasType(c, S.stype))) return false;
+  if (S.stype && !(KIND[S.stype] ? KIND[S.stype].test(c) : (STAY_KEYS.has(S.stype) ? stayKinds(c).includes(S.stype) : hasType(c, S.stype)))) return false;
   if (S.q && !querySets(S.q).some((set) => set.every((w) => wordHit(c, w)))) return false;
   return true;
 }
@@ -1878,7 +1878,7 @@ function todaySection() {
   const dateLabel = `${d.getUTCMonth() + 1}월 ${d.getUTCDate()}일`;
   const n = picks.length;
   return `<section class="today" aria-labelledby="today-t">
-    <div class="sec-head"><div><h2 id="today-t">오늘의 <em>캠핑장</em></h2><p class="sec-sub">정보가 가장 잘 모인 100곳 중 매일 ${n}곳을 새로 골라요 · ${esc(dateLabel)}</p></div></div>
+    <div class="sec-head"><div><h2 id="today-t">오늘의 <em>캠핑장</em></h2></div></div>
     <div class="td-wrap">
       <div class="td-deck" tabindex="0" aria-roledescription="카드 덱" aria-label="오늘의 캠핑장 카드. 좌우로 넘겨 보세요">
         <div class="td-stage">${picks.map((x, k) => todayCard(x, k, dateLabel)).join("")}</div>
@@ -3617,16 +3617,25 @@ const dayUse = (c) => (Boolean(c.du) && !c.osm && !c.auto) || (c.types ?? []).so
 // 상품 조건은 등록·운영자 근거가 있는 타입만(후기 언급 m은 “있다”의 근거로 약하다).
 const hasFirmType = (c, k) => (c.st ?? []).some((t) => t[0] === k && t[2] !== "m");
 const KINDS = [
-  ["GLAMPING", "글램핑", (c) => stayKinds(c).includes("GLAMPING")],
-  ["CARAVAN", "카라반", (c) => stayKinds(c).includes("CARAVAN")],
-  ["AUTO", "오토캠핑", (c) => (c.types ?? []).includes("자동차야영장") || hasFirmType(c, "AUTO")],
-  ["GENERAL", "일반 사이트", (c) => (c.types ?? []).includes("일반야영장") || hasFirmType(c, "PITCH")],
-  ["HOUSE", "숙박동·방갈로", (c) => stayKinds(c).includes("HOUSE")],
-  ["RV", "캠핑카·트레일러", (c) => stayKinds(c).includes("RV")],
-  ["CAR_CAMP", "차박", (c) => hasFirmType(c, "CAR_CAMP")],
-  ["DAY", "당일 캠크닉", dayUse],
+  ["GLAMPING", "글램핑", (c) => stayKinds(c).includes("GLAMPING"), "glamping"],
+  ["CARAVAN", "카라반", (c) => stayKinds(c).includes("CARAVAN"), "caravan"],
+  ["HOUSE", "숙박동", (c) => stayKinds(c).includes("HOUSE"), "home"],
+  ["RV", "캠핑카·트레일러", (c) => stayKinds(c).includes("RV"), "caravan"],
+  ["DECK", "데크", (c) => hasType(c, "DECK"), "layers"],
+  ["DUPLEX_DECK", "복층 데크", (c) => hasType(c, "DUPLEX_DECK"), "layers"],
+  ["TARP_ZONE", "타프존", (c) => hasType(c, "TARP_ZONE"), "tent"],
+  ["AUTO", "오토캠핑", (c) => (c.types ?? []).includes("자동차야영장") || hasFirmType(c, "AUTO") || hasType(c, "AUTO"), "car"],
+  ["CAR_CAMP", "차박", (c) => hasFirmType(c, "CAR_CAMP") || hasType(c, "CAR_CAMP"), "car"],
+  ["PET_SITE", "반려견 전용", (c) => hasType(c, "PET_SITE"), "paw"],
+  ["SOLO", "솔로·백패킹", (c) => hasType(c, "SOLO"), "tent"],
+  ["EQUIPPED", "장비 포함", (c) => hasType(c, "EQUIPPED"), "tent"],
 ];
-const KIND = Object.fromEntries(KINDS.map(([k, l, t]) => [k, { label: l, test: t }]));
+const EXTRA_KINDS = [
+  ["GENERAL", "일반 사이트", (c) => (c.types ?? []).includes("일반야영장") || hasFirmType(c, "PITCH"), "tent"],
+  ["DAY", "당일 캠크닉", dayUse, "sun"],
+];
+const ALL_KINDS = [...KINDS, ...EXTRA_KINDS];
+const KIND = Object.fromEntries(ALL_KINDS.map(([k, l, t]) => [k, { label: l, test: t }]));
 const W_OPTS = [[0, "상관없음"], [1, "전기 있음"], [600, "600W 이상"], [1100, "1,100W 이상"]];
 const SIZE_OPTS = [[0, "상관없음"], [6, "6m 이상"], [8, "8m 이상"], [10, "10m 이상"]];
 const R_OPTS = [10, 20, 30];
@@ -3914,10 +3923,9 @@ function listRow({ c, ce }, i = 0) {
 /** 지역·사이트·요금 필터 모듈 (목록·메인 공통). prefix로 data-attr 구분. */
 function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAttr = "data-fee-band", areaPressed = (k) => S.area === k, stypePressed = (k) => S.stype === k, feePressed = (k) => (S.feeBand ?? "") === k } = {}) {
   const areaChips = AREAS.map(([k, l]) => `<button type="button" class="chip" ${areaAttr}="${k}" aria-pressed="${areaPressed(k)}">${l}</button>`).join("");
-  const typeChips = [...STYPES.filter(([k]) => STAY_KEYS.has(k)), ...STYPES.filter(([k]) => !STAY_KEYS.has(k))]
-    .filter(([k]) => k !== "PITCH" && k !== "PRIVATE_BATH")
-    .map(([k, l, i]) => {
-      const n = countOf((c) => (STAY_KEYS.has(k) ? stayKinds(c).includes(k) : hasType(c, k)));
+  const typeChips = KINDS
+    .map(([k, l, test, i]) => {
+      const n = countOf(test);
       return n ? `<button type="button" class="chip type-chip" ${stypeAttr}="${k}" aria-pressed="${stypePressed(k)}">${ic(i)}${l} <i>${fmt(n)}</i></button>` : "";
     }).join("");
   const fee = (k, l) => `<button type="button" class="chip fee-chip" ${feeAttr}="${k}" aria-pressed="${feePressed(k)}">${l}</button>`;
