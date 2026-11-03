@@ -275,9 +275,9 @@
    "type": "bool",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 2832,
+    "campgrounds": 2833,
     "by_grade": {
-     "CONFIRMED": 2811,
+     "CONFIRMED": 2812,
      "VERIFIED": 21
     }
    }
@@ -289,9 +289,9 @@
    "type": "bool",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 2832,
+    "campgrounds": 2833,
     "by_grade": {
-     "CONFIRMED": 2811,
+     "CONFIRMED": 2812,
      "VERIFIED": 21
     }
    }
@@ -569,12 +569,12 @@
    "pref": "일찍 들어가고 싶나요?",
    "filter": "max",
    "coverage": {
-    "campgrounds": 2811,
+    "campgrounds": 2812,
     "by_grade": {
      "OPERATOR": 651,
      "MENTION": 3574,
      "CONFIRMED": 4,
-     "REFERENCE": 452
+     "REFERENCE": 453
     }
    }
   },
@@ -586,12 +586,12 @@
    "pref": "늦게 나오고 싶나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 2752,
+    "campgrounds": 2753,
     "by_grade": {
      "OPERATOR": 616,
      "MENTION": 3556,
      "CONFIRMED": 2,
-     "REFERENCE": 445
+     "REFERENCE": 446
     }
    }
   },
@@ -631,12 +631,12 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 2103,
+    "campgrounds": 2104,
     "by_grade": {
      "OPERATOR": 132,
      "MENTION": 2546,
      "CONFIRMED": 7,
-     "REFERENCE": 463
+     "REFERENCE": 464
     }
    }
   },
@@ -662,11 +662,11 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 850,
+    "campgrounds": 851,
     "by_grade": {
      "OPERATOR": 709,
      "CONFIRMED": 1,
-     "REFERENCE": 467,
+     "REFERENCE": 468,
      "MENTION": 52
     }
    }
@@ -2655,5 +2655,5 @@
    }
   }
  ],
- "generated_at": "2026-11-03T02:49:15.618Z"
+ "generated_at": "2026-11-03T03:32:33.623Z"
 }
