@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-03T05:08:02.813Z",
+ "generated_at": "2026-11-03T07:18:54.029Z",
  "rule": "pipeline/lib/fact-refine.mjs",
  "dropped": 242,
  "recoded": 146,
- "scoped": 621,
+ "scoped": 622,
  "items": [
   {
    "cid": "101498",
