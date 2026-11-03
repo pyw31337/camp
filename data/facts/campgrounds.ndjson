@@ -6308,7 +6308,6 @@
 {"cid":"rf-1q3492f","name":"성주산자연휴양림","sido":"충남","sigungu":"보령시","lat":36.33257,"lng":126.66397,"kakao_place_id":"7958700"}
 {"cid":"rf-kfbqip","name":"금산산림문화타운","sido":"충남","sigungu":"금산군","lat":36.06776,"lng":127.36909,"kakao_place_id":"838619443"}
 {"cid":"rf-cpx1a2","name":"화원자연휴양림","sido":"대구","sigungu":"달성군","lat":35.77179,"lng":128.53674,"kakao_place_id":"12371311"}
-{"cid":"rf-ixkoe7","name":"두루웰자연휴양림","sido":"강원","sigungu":"철원군","lat":38.22794,"lng":127.3533,"kakao_place_id":"747336303"}
 {"cid":"rf-1j68bms","name":"주천강자연휴양림","sido":"강원","sigungu":"횡성군","lat":37.4606,"lng":128.20342,"kakao_place_id":"25050495"}
 {"cid":"rf-1ffgtai","name":"숲체원","sido":"강원","sigungu":"횡성군","lat":37.53722,"lng":128.28669,"kakao_place_id":"24505294"}
 {"cid":"rf-1gch2ur","name":"독용산성 자연휴양림","sido":"경북","sigungu":"성주군","lat":35.90637,"lng":128.13441,"kakao_place_id":"24942932"}
@@ -6416,3 +6415,5 @@
 {"cid":"101670","name":"가평 제이캠핑장","sido":"경기","sigungu":"가평군","lat":37.938424,"lng":127.540804,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101670","gc_at":"2024-12-16T00:00:00+09:00","kakao_place_id":"1335503371"}
 {"cid":"2833","name":"진안국제 캠핑장","sido":"전북","sigungu":"진안군","lat":35.965493,"lng":127.461119,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=2833","gc_at":"2024-03-11T00:00:00+09:00","kakao_place_id":"26911933"}
 {"cid":"8137","name":"더 빌리지","sido":"충북","sigungu":"진천군","lat":36.78508,"lng":127.423873,"gc_url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=8137","gc_at":"2023-10-23T00:00:00+09:00"}
+{"cid":"rf-1yykj5u","name":"두루웰숲속문화촌","sido":"강원","sigungu":"철원군","lat":38.22794,"lng":127.3533}
+{"cid":"rf-ixkoe7","name":"두루웰자연휴양림","sido":"강원","sigungu":"철원군","lat":38.22794,"lng":127.3533,"kakao_place_id":"747336303"}
