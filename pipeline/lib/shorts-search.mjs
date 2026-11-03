@@ -90,12 +90,15 @@ function videoMatchOne(camp, title, { dup = false, others = [], stems = [], auth
 }
 /** YouTube 숏츠인가: /shorts/ 주소, 60초 이하, 또는 3분 이하이면서 제목에 #shorts·쇼츠 */
 export const isShortVideo = (v) => /\/shorts\//.test(v?.url ?? "") || (v?.dur != null && v.dur <= 60) || (v?.dur != null && v.dur <= SHORTS_MAX_SEC && /#?shorts|쇼츠|숏츠/i.test(v?.title ?? ""));
-/** 영상 검색어(v2): 이름 그대로(1·2쪽) + ‘이름(캠핑) 쇼츠’ */
+/** 영상 검색어(v2): 이름 그대로(1·2쪽) + ‘이름(캠핑) 쇼츠’. 캠핑 키워드가 없는 이름은 검색어에 ‘캠핑’을 보강 */
 export function videoQueries(camp) {
   const name = cleanName(camp?.name);
   if (!name) return [];
-  const base = /(캠핑|야영|글램핑|카라반|캠프|오토|휴양림)/.test(name) ? name : `${name} 캠핑`;
-  return [{ q: name, page: 1 }, { q: name, page: 2, ifFull: true }, { q: `${base} 쇼츠`, page: 1 }];
+  const hasCamp = /(캠핑|야영|글램핑|카라반|캠프|오토|휴양림)/.test(name);
+  const base = hasCamp ? name : `${name} 캠핑`;
+  const stem = regionStem(camp?.address?.sigungu);
+  const p2Query = (!hasCamp || name.length <= 3) && stem ? `${stem} ${base}` : name;
+  return [{ q: name, page: 1 }, { q: p2Query, page: 2, ifFull: true }, { q: `${base} 쇼츠`, page: 1 }];
 }
 /** 카카오 vclip 문서 → { shorts, videos } (YouTube이고 이 캠핑장을 가리키는 것만, 같은 id는 한 번) */
 export function videosFromVclip(camp, docs, opt = {}) {
@@ -173,8 +176,8 @@ export function fillShorts(videos = [], shorts = [], max = VIDEO_CAPS.shorts + V
   return { videos: [...(videos ?? []), ...add], added: add };
 }
 
-/** 대상 순서: ① 찜/우선순위 업장(priorityIds) 먼저, ② 영상이 하나도 없는 곳, ③ 그다음 숏츠가 없는 곳, ④ 캐시가 오래된 순 */
-export function pickShortsDue(camps, cache, hasVideo, maxAgeDays = 30, now = Date.now(), priorityIds = new Set()) {
+/** 대상 순서: ① 찜/우선순위 업장(priorityIds) 먼저, ② 영상이 하나도 없는 곳, ③ 그다음 숏츠가 없는 곳, ④ 캐시가 오래된 순 (기본 3일 순환) */
+export function pickShortsDue(camps, cache, hasVideo, maxAgeDays = 3, now = Date.now(), priorityIds = new Set()) {
   const age = (r) => (r?.fetched_at ? (now - Date.parse(r.fetched_at)) / 864e5 : Infinity);
   const isPrio = (id) => priorityIds && (priorityIds.has?.(String(id)) || (Array.isArray(priorityIds) && priorityIds.includes(String(id))));
   return camps
@@ -182,6 +185,12 @@ export function pickShortsDue(camps, cache, hasVideo, maxAgeDays = 30, now = Dat
     .sort((a, b) => {
       const pDiff = (isPrio(b.id) ? 1 : 0) - (isPrio(a.id) ? 1 : 0);
       if (pDiff !== 0) return pDiff;
-      return (hasVideo(a.id) ? 1 : 0) - (hasVideo(b.id) ? 1 : 0) || age(cache[b.id]) - age(cache[a.id]);
+      const vDiff = (hasVideo(a.id) ? 1 : 0) - (hasVideo(b.id) ? 1 : 0);
+      if (vDiff !== 0) return vDiff;
+      const shDiff = (cache[a.id]?.shorts?.length ? 1 : 0) - (cache[b.id]?.shorts?.length ? 1 : 0);
+      if (shDiff !== 0) return shDiff;
+      const ageA = age(cache[a.id]), ageB = age(cache[b.id]);
+      if (ageA !== ageB) return (Number.isFinite(ageB) ? ageB : 99999) - (Number.isFinite(ageA) ? ageA : 99999);
+      return 0;
     });
 }

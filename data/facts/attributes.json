@@ -2558,6 +2558,7 @@
    "group": "stay",
    "label": "글램핑·카라반 내부시설",
    "type": "enum",
+   "multi": true,
    "enum": {
     "BED": "침대",
     "TV": "TV",

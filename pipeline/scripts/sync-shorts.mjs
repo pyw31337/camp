@@ -23,7 +23,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 // 한 줄에 한 곳(커밋 차이를 작게)
 const dumpCache = (c) => `{"campgrounds":{\n${Object.entries(c.campgrounds).map(([k, v]) => `${JSON.stringify(k)}:${JSON.stringify(v)}`).join(",\n")}\n}}\n`;
 const envNum = (k, d) => { const n = Number(process.env[k] ?? d); return Number.isFinite(n) ? n : d; };
-const MAX_AGE_DAYS = envNum("SHORTS_MAX_AGE_DAYS", 30);
+const MAX_AGE_DAYS = envNum("SHORTS_MAX_AGE_DAYS", 3);
 const MAX_CALLS = envNum("SHORTS_MAX_CALLS", 9000);
 const YT_MAX = envNum("YT_MAX_SEARCHES", 45);
 const DELAY_MS = envNum("SHORTS_DELAY_MS", 120);
@@ -83,7 +83,12 @@ async function main() {
     ...(Array.isArray(prioData) ? prioData.map((x) => String(x?.id ?? x?.cid ?? x)) : []),
     ...(Array.isArray(customPrio) ? customPrio.map(String) : []),
   ]);
-  const due = pickShortsDue(camps, cache.campgrounds, (id) => (vc.get(id) ?? 0) > 0, MAX_AGE_DAYS, Date.now(), priorityIds);
+  let due = pickShortsDue(camps, cache.campgrounds, (id) => (vc.get(id) ?? 0) > 0, MAX_AGE_DAYS, Date.now(), priorityIds);
+  if (!due.length && camps.length) {
+    // 3일 순환 중 하루 수집 0건 방지: 캐시가 가장 오래된 순으로 일일 배치 확보
+    const age = (id) => (cache.campgrounds[id]?.fetched_at ? (Date.now() - Date.parse(cache.campgrounds[id].fetched_at)) / 864e5 : Infinity);
+    due = [...camps].sort((a, b) => age(b.id) - age(a.id));
+  }
   const kkey = process.env.KAKAO_REST_API_KEY, ykey = process.env.YOUTUBE_API_KEY;
   console.log(`캠핑장 ${camps.length}곳 · 찜/우선순위 ${priorityIds.size}곳 · 영상 없는 곳 ${[...vc.values()].filter((n) => !n).length}곳 · 숏츠 갱신 대상 ${due.length}곳`);
   let calls = 0, yt = 0, ok = 0, failed = 0, stopped = null, firstError = null, ytStopped = false;

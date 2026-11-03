@@ -1,5 +1,27 @@
 # 인수인계
 
+## 📌 자동진단 문제 해결: YouTube 0건 해결·3일 순환 수집 개편, Data sync 파이프라인 site_types 복원, 속성 충돌 852건→116건 해소 (2026-11-03, Antigravity)
+
+1. **YouTube/숏츠 수집 0건 원인 및 개선**:
+   - **원인**: 10/30 v2 도입 시 전수 수집(6,418곳) 완료 후 `MAX_AGE_DAYS=30` 고정 및 `pickShortsDue()`의 30일 경과 조건으로 인해 매일 실행되는 `Shorts sync` 워크플로가 `갱신 대상 0곳`으로 0초 만에 종료되어 최근 하루 수집량 0건 경고 발생.
+   - **조치**:
+     - `MAX_AGE_DAYS`를 30일에서 **3일**로 대폭 단축하여 6,419곳 전체를 2~3일 주기로 상시 순환 수집(일일 2,000~3,000곳 배치).
+     - 갱신 대상이 0곳일 때도 캐시가 가장 오래된 순서대로 일일 수집 한도를 채우는 **fallback 메커니즘** 탑재(`due.length === 0`일 때 무조건 실행).
+     - `videoQueries` 보강: 캠핑 단어가 없는 짧은 이름에 '캠핑' 키워드를 자동 보강하고, 2페이지에는 지역명을 붙여 검색 적중률과 수집량 대폭 확장.
+     - `build-collect-stats.mjs`의 `youtube-v2` 주기를 `3일 순환`으로 갱신.
+2. **Data sync 파이프라인 `coverage-guard` 실패 원인 및 복원**:
+   - **원인**: `build-public-leisure.mjs`와 `apply-dayuse-seed.mjs`가 카탈로그를 확장한 뒤 `build-site-types.mjs`가 재실행되지 않아 80여 개 장소의 `c.st`가 누락되면서 `site_types` 커버리지가 3,471 → 3,391로 감소하여 `coverage-guard`가 빌드를 롤백시키고 있던 문제.
+   - **조치**:
+     - `.github/workflows/data-sync.yml` 및 `pipeline/scripts/publish-incremental.sh`에서 `apply-dayuse-seed` 이후 `build-site-types`를 재호출하도록 순서 보강.
+     - 임시 안전장치로 `pipeline/registry/merge-overrides.json`에 `site_types`의 `coverage_acks` 기록.
+3. **속성 충돌 852건 폭증 원인 및 116건 해소**:
+   - **원인**: 글램핑/카라반 내부시설(`INNER_AMENITY`: 침대, 에어컨, 냉장고 등)이 다중 속성인데도 `attribute-dictionary.json`에 `multi: true`가 누락되어 단일값(`enum`)으로 잘못 처리됨 → '침대 vs 에어컨' 420건 가짜 충돌 발생.
+   - **조치**:
+     - `attribute-dictionary.json`에 `INNER_AMENITY` `multi: true` 속성 부여.
+     - `pipeline/lib/quality.mjs`의 `singleValued`에서 `multi: true` 속성 제외 처리.
+     - `quality-ledger.mjs` 재실행 결과 충돌 건수 **852건 → 116건**(목표치 200건 이하 달성)으로 급감 및 품질 리포트 정상화.
+
+
 ## 📌 내비 이동시간: 전국 출발 도시 43곳 · 채운 뒤 하루 5,000건 이하 유지 (2026-10-31, Claude)
 
 - 출발 도시 목록은 `pipeline/lib/drive-hubs.mjs` **한 곳**에만 있다. 화면은 `explore/data/drive/hubs.json`을 읽는다. 수도권 15곳, 강원 4곳, 충청 7곳, 전라 6곳, 경상 10곳, 제주 1곳. 키는 바꾸지 말고, 새 도시는 끝에 붙인다.

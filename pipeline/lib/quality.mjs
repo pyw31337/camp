@@ -28,7 +28,7 @@ export const sourceKey = (f) => `${f.src ?? "?"}|${host(f.url)}`;
 /** 값이 하나여야 하는 속성인지(충돌 판정 대상). 여러 값이 정상인 속성(사이트 종류·바닥 등)은 제외. */
 export function singleValued(def) {
   if (!def) return false;
-  if (def.multi || def.code === "SITE_TYPE") return false;
+  if (def.multi || def.code === "SITE_TYPE" || def.code === "INNER_AMENITY") return false;
   return ["bool", "enum", "time", "int", "count", "code"].includes(def.type);
 }
 
