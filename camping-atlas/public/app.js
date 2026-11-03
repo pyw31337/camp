@@ -3541,6 +3541,7 @@ function homeView() {
     <div class="hero-bg-layer hero-bg-a active" style="background-image: url('${APP_BASE}images/hero/${initialTheme.image}');" aria-hidden="true"></div>
     <div class="hero-bg-layer hero-bg-b" aria-hidden="true"></div>
     <canvas id="hero-fx-canvas" class="hero-fx-canvas" aria-hidden="true"></canvas>
+    <div class="hero-dim" aria-hidden="true"></div>
     <div class="hero-in">
       <h1 id="hero-t">
         <span class="h1-a" data-hero-title-a>${esc(initialTheme.titleA)}</span>

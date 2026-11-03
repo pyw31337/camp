@@ -206,14 +206,6 @@ body[data-view="theme"] .top .gear-chip { background: rgba(8,18,30,.42); color: 
 .hero-bg-layer.active {
   opacity: 1;
 }
-.hero-bg-layer::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(5,17,31,.92) 0%, rgba(5,17,31,.70) 35%, rgba(5,17,31,.22) 65%, rgba(5,17,31,0) 85%, rgba(5,17,31,0) 100%),
-    linear-gradient(180deg, rgba(5,17,31,.3) 0%, transparent 45%, rgba(5,17,31,.75) 100%);
-}
 .hero-fx-canvas {
   position: absolute;
   inset: 0;
@@ -221,6 +213,16 @@ body[data-view="theme"] .top .gear-chip { background: rgba(8,18,30,.42); color: 
   height: 100%;
   pointer-events: none;
   z-index: 1;
+}
+/* 딤처리: 효과(canvas) 위, 텍스트(hero-in) 아래에 배치하여 어두운 영역에서 효과가 튀지 않고 자연스럽게 스며듦 */
+.hero-dim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background:
+    linear-gradient(90deg, rgba(5,17,31,.92) 0%, rgba(5,17,31,.70) 35%, rgba(5,17,31,.22) 65%, rgba(5,17,31,0) 85%, rgba(5,17,31,0) 100%),
+    linear-gradient(180deg, rgba(5,17,31,.3) 0%, transparent 45%, rgba(5,17,31,.75) 100%);
 }
 
 /* 감성 테마 무드 바 & 칩스 */
@@ -347,7 +349,7 @@ body[data-view="theme"] .top .gear-chip { background: rgba(8,18,30,.42); color: 
   position: relative; width: 100%; max-width: var(--content); margin: 0 auto; min-width: 0;
   display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px;
   padding-left: var(--gut); padding-right: var(--gut);
-  z-index: 2;
+  z-index: 3;
 }
 .hero h1 { margin-top: 14px; font-size: clamp(2.3rem, 1.2rem + 4.2vw, 5rem); line-height: 1.14; letter-spacing: -0.045em; }
 .h1-a { display: block; font-weight: 800; color: #fff; transition: opacity 0.3s ease, transform 0.3s ease; }
@@ -1796,7 +1798,7 @@ body.map-mode { overflow: hidden; height: 100dvh; }
   [data-v="a"] .hero-bg { background-image: url("./images/hero-campsite-m.webp"); background-position: 50% 30%; background-size: cover; background-color: #091a2f; }
   [data-v="a"] .hero-bg::after { background: linear-gradient(180deg, rgba(2,12,25,.18) 0, rgba(2,12,25,.22) 42%, rgba(2,12,25,.82) 100%); }
   .hero-bg-layer { background-position: 50% 30%; }
-  .hero-bg-layer::after {
+  .hero-dim {
     background:
       linear-gradient(180deg, rgba(5,17,31,.45) 0%, rgba(5,17,31,.15) 30%, rgba(5,17,31,.65) 65%, rgba(5,17,31,.92) 100%);
   }

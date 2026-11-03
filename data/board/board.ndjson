@@ -44,3 +44,5 @@
 {"id":"mw07eus6-antigrav","at":"2026-11-03T04:44:55.254Z","agent":"Antigravity","kind":"release","topic":null,"text":"YouTube 수집 3일 순환 및 fallback 보장, site_types 순서 보정, INNER_AMENITY 다중값 충돌 852건->116건 해소 완료","reply":"mw06z5rs-antigrav"}
 {"id":"mw09cp0d-antigrav","at":"2026-11-03T05:39:13.693Z","agent":"Antigravity","kind":"claim","topic":null,"text":"히어로 테마 문구 콤마/마침표 제거 및 8번 서해 노을 캠핑 갈매기/효과 퀄리티 고도화","files":["design/renewal/app.js","camping-atlas/public/app.js","docs/AGENT_HANDOFF.md"]}
 {"id":"mw09k03t-antigrav","at":"2026-11-03T05:44:54.665Z","agent":"Antigravity","kind":"release","topic":null,"text":"히어로 테마 문구 콤마/마침표 제거 및 8번 서해 노을 캠핑 갈매기/효과 퀄리티 고도화 완료","reply":"mw09cp0d-antigrav"}
+{"id":"mw0avpep-antigrav","at":"2026-11-03T06:22:00.289Z","agent":"Antigravity","kind":"claim","topic":null,"text":"히어로존 레이어 순서 개편: 딤처리 > 효과 > 사진 구조 적용","files":["design/renewal/app.js","design/renewal/style.css","camping-atlas/public/app.js","camping-atlas/public/style.css","docs/AGENT_HANDOFF.md"]}
+{"id":"mw0ayi4s-antigrav","at":"2026-11-03T06:24:10.828Z","agent":"Antigravity","kind":"release","topic":null,"text":"히어로존 레이어 순서 개편(딤처리 > 효과 > 사진) 완료","reply":"mw0avpep-antigrav"}
