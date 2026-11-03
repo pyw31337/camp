@@ -3023,14 +3023,14 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .tr-tr.down { color: #1c7ed6; }
 .tr-tr.new { color: #fff; background: var(--accent, #0a7c4a); }
 .tr-body { display: flex; flex-direction: column; flex: 1; padding: 2px 2px 0; }
-.tr-body b, .tr-card > b { margin-top: 10px; font-weight: 800; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tr-body > b, .tr-card > b { margin-top: 10px; font-weight: 800; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tr-body i, .tr-card > i { margin-top: 2px; font-style: normal; font-size: .82rem; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .tr-reasons { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; margin-bottom: 2px; }
 .tr-reason { display: flex; align-items: center; gap: 5px; font-size: .76rem; line-height: 1.35; color: var(--ink-2); }
 .tr-reason .ic { width: 12px; height: 12px; color: var(--accent, #0a7c4a); flex-shrink: 0; }
 .tr-meta { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-top: auto; padding-top: 8px; }
-.tr-count { font-size: .8rem; color: var(--ink-2); white-space: nowrap; }
-.tr-count b { font-weight: 900; color: var(--accent, #0a7c4a); }
+.tr-count { font-size: .8rem; color: var(--ink-2); white-space: nowrap; display: inline-flex; align-items: baseline; flex-shrink: 0; }
+.tr-count b { display: inline; margin: 0 1px; font-weight: 900; color: var(--accent, #0a7c4a); white-space: nowrap; }
 .tr-srcs { display: inline-flex; gap: 4px; flex-wrap: nowrap; overflow: hidden; }
 .tr-src { display: inline-flex; align-items: center; gap: 2px; height: 20px; padding: 0 5px 0 3px; border-radius: 6px; background: var(--soft); color: var(--ink-2); font-size: var(--fs-min); font-weight: 800; }
 .tr-src svg { flex: 0 0 14px; width: 14px; height: 14px; padding: 1px; border-radius: 4px; background: var(--ink); color: var(--paper, #fff); }
@@ -4282,7 +4282,7 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 @media (prefers-reduced-motion: reduce) { .td-bar i, .td-list button { transition: none; } }
 
 /* 좁은 화면 글자 잘림 줄이기(소유자 2026-10-31: 320px에서 글자가 가려지지 않게) — 이름은 한 줄 말줄임 대신 두 줄까지 보인다. */
-.tr-body b, .map-list .mi-b h3, .map-list .mi-b .card-meta, .nearby-places .nb-txt b, .vid i {
+.tr-body > b, .map-list .mi-b h3, .map-list .mi-b .card-meta, .nearby-places .nb-txt b, .vid i {
   white-space: normal; text-overflow: clip; overflow: hidden; overflow-wrap: anywhere; word-break: keep-all;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
 }
