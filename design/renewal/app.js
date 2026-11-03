@@ -183,7 +183,7 @@ const store = {
 
 const S = {
   stype: "", camps: [], byId: new Map(), photos: {}, cards: {}, openings: new Map(),
-  q: "", area: "all", quick: new Set(), theme: null, feeBand: store.get("mc-feeband", ""), sort: "rec", shown: 24, mode: "keyword",
+  q: "", area: "all", areas: [], quick: new Set(), theme: null, feeBand: store.get("mc-feeband", ""), sort: "rec", shown: 24, mode: "keyword",
   saved: store.get("mc-saved", store.get("mc-compare", [])), pick: store.get("mc-pick", []), compare: store.get("mc-compare", []),
   detailCache: new Map(), homeScroll: 0,
   origin: store.get("mc-origin", ""), drive: Number(store.get("mc-drive", 0)) || 0,
@@ -482,8 +482,42 @@ const typeRow = (c, extra = "") => {
 // 요금대 필터는 텐트 사이트 요금으로(글램핑·펜션 요금이 섞인 범위로 거르지 않게). 사이트 요금을 모르면 전체 범위.
 const campFeeMin = (c) => tierOf(c, "site")?.[1] ?? c.fee?.min ?? c.pf?.p?.min;
 const campFeeMax = (c) => tierOf(c, "site")?.[2] ?? c.fee?.max ?? c.pf?.p?.max ?? campFeeMin(c);
-const AREAS = [["all", "전국"], ["서울·경기", "서울·경기"], ["강원", "강원"], ["충청", "충청"], ["전라", "전라"], ["경상", "경상"], ["제주", "제주"]];
-const AREA_OF = { 서울: "서울·경기", 인천: "서울·경기", 경기: "서울·경기", 강원: "강원", 충북: "충청", 충남: "충청", 대전: "충청", 세종: "충청", 전북: "전라", 전남: "전라", 광주: "전라", 경북: "경상", 경남: "경상", 대구: "경상", 부산: "경상", 울산: "경상", 제주: "제주" };
+// 지역은 모든 화면에서 같은 8개 권역을 사용한다. 서울·경기·인천은
+// 서로 다른 선택지로 분리하고, 충청·전라·경상만 하위 시도를 묶는다.
+const REGION_GROUPS = [
+  ["서울", "서울", ["서울"]], ["경기", "경기", ["경기"]], ["인천", "인천", ["인천"]],
+  ["강원", "강원", ["강원"]], ["충청", "충청", ["충북", "충남", "대전", "세종"]],
+  ["전라", "전라", ["전북", "전남", "광주"]], ["경상", "경상", ["경북", "경남", "대구", "부산", "울산"]],
+  ["제주", "제주", ["제주"]],
+];
+const REGION_KEYS = new Set(REGION_GROUPS.map(([k]) => k));
+const REGION_OF = Object.fromEntries(REGION_GROUPS.flatMap(([k, , sidos]) => sidos.map((s) => [s, k])));
+const AREA_OF = REGION_OF;
+const AREAS = [["all", "전국"], ...REGION_GROUPS.map(([k, l]) => [k, l])];
+const LEGACY_AREA = { "서울·경기": ["서울", "경기"], 전국: [], all: [] };
+const normalizeAreaKeys = (value) => {
+  const raw = Array.isArray(value) ? value : String(value ?? "").split(",");
+  const out = [];
+  for (const item of raw) {
+    const v = String(item).trim();
+    const mapped = LEGACY_AREA[v] ?? (REGION_KEYS.has(v) ? [v] : REGION_OF[v] ? [REGION_OF[v]] : []);
+    for (const k of mapped) if (!out.includes(k)) out.push(k);
+  }
+  return out;
+};
+const regionKeys = () => (Array.isArray(S.areas) ? S.areas : normalizeAreaKeys(S.area));
+const setRegionKeys = (value) => {
+  const keys = normalizeAreaKeys(value);
+  S.areas = keys;
+  S.area = keys.length === 1 ? keys[0] : "all";
+  return keys;
+};
+const regionSelected = (key) => {
+  const keys = regionKeys();
+  return key === "all" ? keys.length === 0 : keys.includes(key);
+};
+const regionMatches = (c, keys = regionKeys()) => !keys.length || keys.includes(REGION_OF[sidoShort(c.sido)]);
+const toggleRegion = (key) => setRegionKeys(key === "all" ? [] : (regionKeys().includes(key) ? regionKeys().filter((x) => x !== key) : [...regionKeys(), key]));
 const QUICK = {
   power: { label: "전기", icon: "bolt", cls: "volt", test: (c) => pos(facts(c).power) && facts(c).power.ok },
   fire: { label: "장작", icon: "firewood", cls: "flame", test: (c) => pos(facts(c).fire) && facts(c).fire.kind === "FIREWOOD_OK" },
@@ -702,7 +736,7 @@ loadDriveHubs().then(async () => {
 });
 function matches(c, { useArea = true, quick = S.quick } = {}) {
   if (S.drive && S.origin) { const m = driveMin(c); if (m == null || m > S.drive * 60) return false; }
-  if (useArea && S.area !== "all" && AREA_OF[sidoShort(c.sido)] !== S.area) return false;
+  if (useArea && !regionMatches(c)) return false;
   for (const k of quick) if (!QUICK[k].test(c)) return false;
   const fMin = campFeeMin(c), fMax = campFeeMax(c);
   if (S.feeBand === "u3" && !(fMin && fMin <= 30000)) return false;
@@ -3548,7 +3582,7 @@ function homeView() {
         <span class="h1-b" data-hero-title-b><em>${esc(initialTheme.titleB)}</em></span>
       </h1>
       <p class="hero-summary" data-hero-summary>전국 <b class="hero-n" data-hero-total>${fmt(heroCounts().total)}</b>곳 (캠핑장 <b data-hero-stay>${fmt(heroCounts().stay)}</b>곳 · 당일 나들이 <b data-hero-day>${fmt(heroCounts().day)}</b>곳), ${esc(initialTheme.summary)}</p>
-      <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div>${commonFinderForm({ formAttr: "data-search", isList: false })}</div>
+      <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${regionSelected(k)}">${l}</button>`).join("")}</div>${commonFinderForm({ formAttr: "data-search", isList: false })}</div>
     </div>
   </section>
 
@@ -3622,7 +3656,8 @@ function renderResults({ reset = true } = {}) {
   if (reset) S.shown = 24;
   const act = [];
   if (S.q) act.push(`<button class="chip on" data-clear="q">“${esc(S.q)}” ${ic("close")}</button>`);
-  if (S.area !== "all") act.push(`<button class="chip on" data-clear="area">${esc(S.area)} ${ic("close")}</button>`);
+  const activeAreas = regionKeys();
+  if (activeAreas.length) act.push(`<button class="chip on" data-clear="area">${esc(activeAreas.join(" · "))} ${ic("close")}</button>`);
   if (S.theme) act.push(`<button class="chip on" data-clear="theme">${esc(themeName(S.theme))} ${ic("close")}</button>`);
   if (S.feeBand) {
     const fbLabel = {
@@ -3698,7 +3733,7 @@ function moreResults() {
 // ── 조건 검색(히어로·목록 공통, 소유자 2026-10-19) ─────────────────
 // 키워드 대신 조건을 조합한다: 지역 여러 곳 · 시군 주변 반경 · 상품(글램핑·카라반 등, 하나라도) · 반려견 · 전기 W · 사이트 크기 · 장작 · 텐트 옆 주차 · 1박 요금.
 // 값을 모르는 곳은 그 조건으로 걸러지지 않는다(“없음”으로 보지 않음) — 조건을 켜면 근거가 있는 곳만 남는다.
-const SIDOS = ["서울", "경기", "인천", "강원", "충북", "충남", "대전", "세종", "전북", "전남", "광주", "경북", "경남", "대구", "부산", "울산", "제주"];
+const SIDOS = REGION_GROUPS.map(([k]) => k);
 const maxSide = (c) => (c._ms ??= Math.max(0, ...(c.field_conditions?.site_size?.groups ?? []).map((g) => Math.max(Number(g.width_m) || 0, Number(g.depth_m) || 0)), ...(c.tq?.mx ?? [])));
 const wattsOf = (c) => (c._w ??= facts(c).power?.w ?? 0);
 const hasPower = (c) => (c._pw ??= Boolean(facts(c).power?.ok));
@@ -3757,7 +3792,7 @@ function nearCenter(name) {
 // 정보 없음(?)은 결과에서 빼지 않고 아래쪽에 ‘확인 필요’로 남긴다. 지역·반경만 위치 사실이라 바로 거른다.
 function condEval(c, k = S.cond, skip = null) {
   const st = {};
-  if (skip !== "sido" && k.sido.length && !k.sido.includes(sidoShort(c.sido))) return null;
+  if (skip !== "sido" && k.sido.length && !k.sido.includes(REGION_OF[sidoShort(c.sido)])) return null;
   if (skip !== "near" && k.near) { const ctr = k._ctr; if (!ctr || !c.lat || km2(ctr, c) > k.r) return null; }
   if (skip !== "kind" && k.kind.length) {
     const hasInfo = (c.types ?? []).length > 0 || (c.st ?? []).length > 0;
@@ -3828,7 +3863,7 @@ function condToParams(p, k = S.cond) {
 }
 function condFromParams(q) {
   const k = emptyCond(), list = (n) => (q.get(n) ?? "").split(",").filter(Boolean);
-  k.sido = list("sido").filter((x) => SIDOS.includes(x));
+  k.sido = normalizeAreaKeys(list("sido"));
   k.kind = list("kind").filter((x) => KIND[x]);
   k.pet = q.get("pet") === "1"; k.fire = q.get("fire") === "1"; k.park = q.get("park") === "1"; k.win = q.get("win") === "1"; k.vr = q.get("vr") === "1"; k.best = q.get("best") === "1";
   for (const b of Object.keys(COND_BOOL)) k[b] = q.get(b) === "1";
@@ -3900,7 +3935,7 @@ function paintCondSheet() {
   dlg.innerHTML = `<div class="sheet-in cond-in">
     <div class="sheet-head"><h2 id="cond-title">조건으로 찾기</h2><button type="button" class="icon-btn sheet-close" data-c="close" aria-label="닫기">${ic("close")}</button></div>
     <div class="cond-body">
-      <section><h3>지역</h3><div class="cond-chips">${SIDOS.map((x) => chip("sido", x, x, k.sido.includes(x), pSido.filter((c) => sidoShort(c.sido) === x).length)).join("")}</div></section>
+      <section><h3>지역</h3><div class="cond-chips">${REGION_GROUPS.map(([x, label]) => chip("sido", x, label, k.sido.includes(x), pSido.filter((c) => REGION_OF[sidoShort(c.sido)] === x).length)).join("")}</div></section>
       <section><h3>출발지에서 내비 시간</h3><div class="cond-chips drive-chips">${originPicker("in-sheet")}</div><div class="cond-chips drive-chips">${DRIVES.map(([h, l]) => `<button type="button" class="chip" data-drive="${h}" aria-pressed="${S.drive === h}"${!S.origin && h ? " disabled" : ""}>${h ? `${l} 안` : l}</button>`).join("")}</div></section>
       <section><h3>주변으로</h3><div class="cond-near"><input type="search" data-near value="${esc(k.near)}" placeholder="예: 파주, 가평, 양평" aria-label="시·군 이름" autocomplete="off">${R_OPTS.map((r) => chip("r", r, `${r}km`, k.r === r)).join("")}</div>${k.near ? `<p class="cond-hint">${k._ctr ? `${esc(k._ctr.label)} 가운데에서 ${k.r}km 안` : "그 이름의 시·군을 찾지 못했어요"}</p>` : ""}</section>
       <section><h3>상품·이용</h3><div class="cond-chips">${KINDS.map(([x, l]) => chip("kind", x, l, k.kind.includes(x), tally("kind", [x]))).join("")}</div></section>
@@ -3932,12 +3967,13 @@ const mdKst = (s) => new Date(s).toLocaleDateString("ko-KR", { month: "numeric",
 const THANKQ_VIEW = (cseq, d) => `https://m.thankqcamping.com/resv/view.hbb?cseq=${encodeURIComponent(cseq)}${d ? `&res_dt=${d.replaceAll("-", "")}` : ""}`;
 function listParams() {
   const q = new URLSearchParams(curHash().split("?")[1] ?? "");
-  const area = q.get("area");
-  return { area: area && AREAS.some(([k]) => k === area) ? area : "all", q: q.get("q") ?? "", cond: condFromParams(q), fee: q.get("fee") ?? "", stype: q.get("stype") ?? "" };
+  const areas = normalizeAreaKeys(q.get("area"));
+  return { area: areas.length === 1 ? areas[0] : "all", areas, q: q.get("q") ?? "", cond: condFromParams(q), fee: q.get("fee") ?? "", stype: q.get("stype") ?? "" };
 }
-function listHash({ area = S.area, q = S.q } = {}) {
+function listHash({ area = S.area, areas = regionKeys(), q = S.q } = {}) {
   const p = new URLSearchParams();
-  if (area && area !== "all") p.set("area", area);
+  const keys = normalizeAreaKeys(areas?.length ? areas : area);
+  if (keys.length) p.set("area", keys.join(","));
   if (q) p.set("q", q);
   condToParams(p);
   const s = p.toString();
@@ -4020,7 +4056,7 @@ function listRow({ c, ce }, i = 0) {
 }
 
 /** 지역·사이트·요금 필터 모듈 (목록·메인 공통). prefix로 data-attr 구분. */
-function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAttr = "data-fee-band", areaPressed = (k) => S.area === k, stypePressed = (k) => S.stype === k, feePressed = (k) => (S.feeBand ?? "") === k } = {}) {
+function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAttr = "data-fee-band", areaPressed = (k) => regionSelected(k), stypePressed = (k) => S.stype === k, feePressed = (k) => (S.feeBand ?? "") === k } = {}) {
   const areaChips = AREAS.map(([k, l]) => `<button type="button" class="chip" ${areaAttr}="${k}" aria-pressed="${areaPressed(k)}">${l}</button>`).join("");
   const typeChips = KINDS
     .map(([k, l, test, i]) => {
@@ -4038,8 +4074,8 @@ function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAt
 // 접힌 칩 줄에서 고른 값(지역 묶음·사이트 형태·요금)은 지울 수 있는 알약으로만 보인다(PC는 칩 줄에 이미 보이므로 숨김 = 중복 없음).
 function listMobilePills() {
   const out = [];
-  const area = AREAS.find(([k]) => k === S.area && k !== "all");
-  if (area && !S.cond.sido.length) out.push(`<button type="button" class="cond-pill m-only" data-list-area-k="all" aria-label="${esc(area[1])} 지우기">${esc(area[1])}<span aria-hidden="true">×</span></button>`);
+  const areas = regionKeys();
+  if (areas.length && !S.cond.sido.length) out.push(`<button type="button" class="cond-pill m-only" data-list-area-k="all" aria-label="${esc(areas.join(" · "))} 지우기">${esc(areas.join(" · "))}<span aria-hidden="true">×</span></button>`);
   const st = S.stype && STYPES.find(([k]) => k === S.stype);
   if (st) out.push(`<button type="button" class="cond-pill m-only" data-list-stype="" aria-label="${esc(st[1])} 지우기">${esc(st[1])}<span aria-hidden="true">×</span></button>`);
   const FEE_L = { u3: "~3만원", "3to5": "3~5만원", "5to7": "5~7만원", "7to10": "7만원~10만원", "10to20": "10만원~20만원", o20: "20만원+", o7: "7만원+" };
@@ -4048,7 +4084,7 @@ function listMobilePills() {
 }
 function listView() {
   const p = listParams();
-  S.area = p.cond.sido.length ? "all" : p.area; S.q = p.q;
+  setRegionKeys(p.cond.sido.length ? [] : p.areas); S.q = p.q;
   S.cond = p.cond; if (["u3", "3to5", "5to7", "7to10", "10to20", "o20", "o7", ""].includes(p.fee)) S.feeBand = p.fee;
   S.condStrict = new URLSearchParams(curHash().split("?")[1] ?? "").get("strict") === "1";
   // 목록 화면에 보이는 조건만 결과를 바꾼다.
@@ -4063,7 +4099,7 @@ function listView() {
           areaAttr: "data-list-area-k",
           stypeAttr: "data-list-stype",
           feeAttr: "data-fee-band",
-          areaPressed: (k) => S.area === k && !S.cond.sido.length,
+          areaPressed: (k) => regionSelected(k) && !S.cond.sido.length,
         })}
       </div>
       <div class="list-tools">
@@ -4100,7 +4136,7 @@ function bindList() {
   const onSubmit = (e) => { const f = e.target.closest("[data-list-search]"); if (!f) return; e.preventDefault(); S.q = f.q.value.trim(); go(); };
   const onClick = (e) => {
     const a = e.target.closest("[data-list-area-k]");
-    if (a) { S.area = a.dataset.listAreaK; S.cond.sido = []; go(); return; }
+    if (a) { setRegionKeys(a.dataset.listAreaK === "all" ? [] : toggleRegion(a.dataset.listAreaK)); S.cond.sido = []; go(); return; }
     const st = e.target.closest("[data-list-stype]");
     if (st) { S.stype = st.dataset.listStype || ""; go(); return; }
     const x = e.target.closest("[data-cond-x]");
@@ -4212,7 +4248,7 @@ function themeView(themeKey) {
       ${isWp ? `<div class="theme-closed-alert">${ic("info")}<div><strong>여름 시즌 물놀이터 운영 종료 안내</strong><p>전국 물놀이터·야영장 수영장 정보입니다. 현재는 하절기 운영이 종료된 상태입니다. 렛츠 캠핑에서 미리 시설 정보를 확인하시고 다음 시즌 피서 계획에 참고해 보세요!</p></div></div>` : ""}
       <div class="theme-tools-bar">
         <div class="rail chips theme-areas" aria-label="지역">
-          ${AREAS.map(([k, l]) => `<button type="button" class="chip" data-theme-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}
+          ${AREAS.map(([k, l]) => `<button type="button" class="chip" data-theme-area="${k}" aria-pressed="${regionSelected(k)}">${l}</button>`).join("")}
         </div>
         <div class="theme-subtools">
           <span class="theme-count" data-theme-count></span>
@@ -4230,9 +4266,7 @@ function bindTheme(themeKey) {
   let pageN = 24;
   const getThemeList = () => {
     let list = S.camps.filter(testFn);
-    if (S.area !== "all") {
-      list = list.filter((c) => AREA_OF[sidoShort(c.sido)] === S.area);
-    }
+    if (regionKeys().length) list = list.filter((c) => regionMatches(c));
     // 공원은 사진이 없는 공공 장소를 포함하는 별도 탐색 테마다. 이 경로에서는
     // 공원 전용 정보 카드로 보이므로 사진 유무로 제거하지 않는다.
     if (themeKey === "PARK") {
@@ -4274,15 +4308,15 @@ function bindTheme(themeKey) {
   const onClick = (e) => {
     const a = e.target.closest("[data-theme-area]");
     if (a) {
-      S.area = a.dataset.themeArea;
-      $$("[data-theme-area]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.themeArea === S.area)));
+      toggleRegion(a.dataset.themeArea);
+      $$("[data-theme-area]").forEach((x) => x.setAttribute("aria-pressed", String(regionSelected(x.dataset.themeArea))));
       pageN = 24;
       renderThemeGrid();
       return;
     }
     if (e.target.closest("[data-theme-clear-area]")) {
-      S.area = "all";
-      $$("[data-theme-area]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.themeArea === "all")));
+      setRegionKeys([]);
+      $$("[data-theme-area]").forEach((x) => x.setAttribute("aria-pressed", String(regionSelected(x.dataset.themeArea))));
       pageN = 24;
       renderThemeGrid();
       return;
@@ -4349,7 +4383,7 @@ document.addEventListener("click", async (e) => {
 }, true);
 function homeClicks(e) {
   const a = e.target.closest("[data-area]");
-  if (a) { S.area = a.dataset.area; $$("[data-area]").forEach((x) => x.setAttribute("aria-pressed", String(x === a))); renderResults(); return; }
+  if (a) { toggleRegion(a.dataset.area); $$("[data-area]").forEach((x) => x.setAttribute("aria-pressed", String(regionSelected(x.dataset.area)))); renderResults(); return; }
   const t = e.target.closest("[data-theme]");
   if (t) { S.theme = S.theme === t.dataset.theme ? null : t.dataset.theme; $$("[data-theme]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.theme === S.theme))); renderResults(); return; }
   const all = e.target.closest("[data-theme-all]");
@@ -4379,12 +4413,12 @@ function homeClicks(e) {
   const cl = e.target.closest("[data-clear]");
   if (cl) {
     const k = cl.dataset.clear;
-    if (k === "q") S.q = ""; else if (k === "area") S.area = "all"; else if (k === "theme") S.theme = null; else if (k === "stype") S.stype = "";
+    if (k === "q") S.q = ""; else if (k === "area") setRegionKeys([]); else if (k === "theme") S.theme = null; else if (k === "stype") S.stype = "";
     else if (k === "feeBand") { S.feeBand = ""; store.set("mc-feeband", ""); $$("[data-fee-band]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.feeBand === ""))); }
     else if (k.startsWith("quick:")) S.quick.delete(k.slice(6));
     else {
       // ‘조건 지우기’(결과 0건 화면): 칩 조건뿐 아니라 조건 시트(S.cond)·확인된 곳만·출발지 이동 시간까지 모두 지운다(소유자 2026-11-01: 버튼이 안 먹음 — 시트 조건이 남아 계속 0건).
-      S.q = ""; S.area = "all"; S.theme = null; S.stype = ""; S.quick.clear(); S.feeBand = ""; store.set("mc-feeband", "");
+      S.q = ""; setRegionKeys([]); S.theme = null; S.stype = ""; S.quick.clear(); S.feeBand = ""; store.set("mc-feeband", "");
       S.cond = emptyCond(); S.condStrict = false; S.drive = 0; store.set("mc-drive", 0);
       $$("[data-fee-band]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.feeBand === "")));
     }
@@ -8576,7 +8610,7 @@ function bindMap() {
   const start = (adapter) => {
     MAP = adapter;
     el.dataset.engine = adapter.kind;
-    if (S.area !== "all") { const pts = S.camps.filter((c) => AREA_OF[sidoShort(c.sido)] === S.area && c.lat).map((c) => [c.lat, c.lng]); if (pts.length) MAP.fit(pts); }
+    if (regionKeys().length) { const pts = S.camps.filter((c) => regionMatches(c) && c.lat).map((c) => [c.lat, c.lng]); if (pts.length) MAP.fit(pts); }
     MAP.onMove(drawMap);
     MAP.onClick(() => { selected = null; $("[data-peek]").hidden = true; drawMap(); });
     drawMap();
