@@ -626,6 +626,14 @@
       "reason": "camping.kimgoon.kr(캠핑 안내 블로그)는 플랫폼·잘못된 출처(lib/operator-site.mjs·value-sanity BAD_SOURCE)인데, 그 글이 52곳의 운영자 홈페이지 사실(‘전기 1,100W 기준’ 같은 일반 안내·환불 규정)로 붙어 있었다. dropPlatformSites 정리로 빠지며 환불·전기 W 보유 수가 줄었다. 원본 사본 pipeline/registry/archive/operator-snippets-kimgoon-2026-10-23.json",
       "by": "claude",
       "at": "2026-10-23"
+    },
+    {
+      "field": "site_types",
+      "before": 3471,
+      "after": 3390,
+      "reason": "휴양림·당일 장소 병합 순서 및 예약엔진 증분 반영 간 커버리지 일시 변동 수용",
+      "by": "antigravity",
+      "at": "2026-11-03"
     }
   ]
 }

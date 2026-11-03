@@ -1,14 +1,14 @@
 {
- "generated_at": "2026-11-03T03:32:50.952Z",
+ "generated_at": "2026-11-03T04:41:43.961Z",
  "date": "2026-11-03",
  "totals": {
   "campgrounds": 6419,
   "facts": 239011,
   "pairs": 189393,
   "mean_confidence": 0.785,
-  "confirmed_pct": 84.9,
+  "confirmed_pct": 85.3,
   "corroborated": 3999,
-  "conflicts": 852,
+  "conflicts": 116,
   "decisions": 69
  },
  "attrs": {
@@ -1683,13 +1683,12 @@
    "coverage": 744,
    "coverage_pct": 11.6,
    "mean_confidence": 0.85,
-   "confirmed_pct": 1.1,
+   "confirmed_pct": 100,
    "corroborated": 0,
-   "conflicts": 736,
+   "conflicts": 0,
    "weak": 0,
    "status": {
-    "CONFLICT": 736,
-    "CONFIRMED": 8
+    "CONFIRMED": 744
    }
   },
   "SITE_TOTAL": {

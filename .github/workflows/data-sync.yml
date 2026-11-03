@@ -493,7 +493,7 @@ jobs:
           # 파생 정보 2차 계산(2026-10-30): 위 1차 계산은 고캠핑 기준 3,124곳에만 돌고, 당일 장소·휴양림·OSM 등은 그 뒤에 붙어
           # 입실·사이트 타입 같은 파생 값이 비었다 → coverage-guard가 10-28부터 발행을 막음(checkin 2775→2525, site_types 3433→3004).
           # 장소를 모두 붙이고 소셜까지 채운 뒤 증분 발행(publish-incremental.sh)과 같은 순서로 한 번 더 계산한다.
-          for s in survey-all-campgrounds build-operator-facts build-spec-sheet build-review-digest build-nearby-facts build-nearby-photos build-thankq-facts build-campground-profiles build-site-pricing-facts build-site-types build-price-tiers build-house-rules build-gocamping-detail apply-dayuse-seed build-public-leisure apply-public-nearby; do
+          for s in survey-all-campgrounds build-operator-facts build-spec-sheet build-review-digest build-nearby-facts build-nearby-photos build-thankq-facts build-campground-profiles build-site-pricing-facts build-price-tiers build-house-rules build-gocamping-detail apply-dayuse-seed build-public-leisure apply-public-nearby build-site-types; do
             node "pipeline/scripts/$s.mjs" > /dev/null
           done
           # 카카오 후기 썸네일(registry/review-thumbs.json)을 비어 있는 글에만 채운다
