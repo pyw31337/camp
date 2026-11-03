@@ -1000,8 +1000,8 @@
 - `camping-atlas/scripts/saved-roles-test.mjs`는 320·390·1366px에서 이 기본 접힘, 6개 행, 열기 동작까지 회귀 검사한다.
 - 원본/발행 동기화: `design/renewal/{app.js,style.css}` → `camping-atlas/public/{app.js,style.css}`. 검증은 `node --check`, `git diff --check`, Web quality를 실행한다.
 
-## 📌 히어로존 테마 효과·탐색 메뉴 대비 보강 (2026-11-03, Codex)
+## 📌 조건 시트 VR·공인 우수야영장 수치 검증 (2026-11-03, Codex)
 
-- 히어로존 10개 테마의 캔버스 효과가 딤 레이어에 묻히지 않도록 효과 캔버스를 딤 위로 올리고 `screen` 블렌드, 채도·밝기 보정(`saturate(1.28) brightness(1.2)`)을 적용했다. 테마별 입자·빗줄기·물결·불꽃·꽃잎·반짝임의 개수와 불투명도·광원을 함께 높여 새로고침으로 어떤 테마가 선택되어도 효과가 인지되도록 했다.
-- 히어로 상단 `찾기·지도·테마·비교·찜`에서 선택(`aria-current`)·키보드 포커스 상태를 라임색 글자·테두리·은은한 글로우 캡슐로 통일해 어두운 배경에서도 식별되도록 했다.
-- 원본 `design/renewal/`과 발행본 `camping-atlas/public/`을 함께 갱신했다. `node --check` 2개, `git diff --check`, 10개 테마 직접 진입 Playwright 검사(테마 ID 일치·pageerror 0), 모바일 폭 검사 통과.
+- 조건 시트의 `360° VR 뷰`·`공인 우수야영장` 칩이 판정 로직 없이 `tally()`의 모든 업장을 성공으로 세던 오류를 수정했다. VR은 실제 유효한 외부 뷰어 URL(`c.vr.url`)이 있는 업장만, 우수야영장은 선정 근거 배열(`c.best`)이 있는 업장만 집계·필터링한다.
+- 현재 발행 카탈로그 6,419곳을 직접 대조한 결과 **360° VR 64곳(고유 URL 64개)**, **공인 우수야영장 54곳**이다. 기존 화면의 두 필터가 모두 6,419로 표시된 것은 전체 카탈로그를 잘못 세던 표시 오류였다.
+- `camping-atlas/scripts/filter-facts-test.mjs`를 추가해 VR URL 누락·전체 카탈로그와 동일한 집계 회귀를 막고, Web quality에 검사 단계를 등록했다. 조건 시트 Playwright 확인 결과 `360° VR 뷰 64`, `공인 우수야영장 54`, VR 선택 시 적용 버튼 `64곳 보기`로 확인했다.

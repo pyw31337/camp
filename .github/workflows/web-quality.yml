@@ -119,6 +119,8 @@ jobs:
         run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/perf-budget.mjs http://127.0.0.1:8765/
       - name: 카탈로그 나누기 동일성(목록·검색·필터·지도·상세·비교) 회귀 테스트
         run: PW_MODULE=/tmp/pw/node_modules/playwright/index.mjs bash .github/scripts/pw-retry.sh camping-atlas/scripts/catalog-split-test.mjs http://127.0.0.1:8765/
+      - name: 근거형 필터 수치(VR·공인 우수야영장) 검사
+        run: node camping-atlas/scripts/filter-facts-test.mjs
       - name: 발행 데이터 상식 검사(공원 요금·입퇴실, 광고 요금, 숯 문구, 좌표)
         run: node pipeline/scripts/publish-sanity.mjs --check
       - name: 상세 화면 상식 회귀 테스트

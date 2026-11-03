@@ -2384,22 +2384,22 @@ class HeroCanvasController {
 
     switch (themeId) {
       case "night-sky":
-        for (let i = 0; i < 44; i++) {
+        for (let i = 0; i < 30; i++) {
           this.particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
             vx: (Math.random() - 0.5) * 0.16,
             vy: (Math.random() - 0.5) * 0.16,
-            size: Math.random() * 2.6 + 1.4,
+            size: Math.random() * 2.2 + 1.2,
             pulse: Math.random() * Math.PI * 2,
             pulseSpeed: Math.random() * 0.015 + 0.008,
-            glow: Math.random() * 14 + 10
+            glow: Math.random() * 12 + 7
           });
         }
         break;
 
       case "autumn-maple":
-        for (let i = 0; i < 38; i++) {
+        for (let i = 0; i < 26; i++) {
           this.particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
@@ -2419,42 +2419,42 @@ class HeroCanvasController {
         break;
 
       case "rainy-camp":
-        for (let i = 0; i < 80; i++) {
+        for (let i = 0; i < 45; i++) {
           this.particles.push({
             x: Math.random() * (w + 100),
             y: Math.random() * h,
             speed: Math.random() * 8 + 14,
             len: Math.random() * 14 + 12,
-            alpha: Math.random() * 0.3 + 0.52
+            alpha: Math.random() * 0.35 + 0.35
           });
         }
         break;
 
       case "snowy-winter":
-        for (let i = 0; i < 64; i++) {
+        for (let i = 0; i < 38; i++) {
           this.particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
-            r: Math.random() * 3.0 + 1.35,
+            r: Math.random() * 2.6 + 1.0,
             vy: Math.random() * 0.36 + 0.22,
             vx: (Math.random() - 0.5) * 0.12,
             sway: Math.random() * Math.PI * 2,
             swaySpeed: Math.random() * 0.014 + 0.008,
-            alpha: Math.random() * 0.35 + 0.62
+            alpha: Math.random() * 0.4 + 0.45
           });
         }
         break;
 
       case "lush-forest":
-        // 72개로 증량하여 딤 위에서도 햇살 가루와 숲의 정령 펄스를 선명하게 유지
-        for (let i = 0; i < 72; i++) {
+        // 48개로 증량하여 햇살 가루와 숲의 정령 펄스 강화
+        for (let i = 0; i < 48; i++) {
           this.particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
-            r: Math.random() * 2.4 + 1.2,
+            r: Math.random() * 2.0 + 1.0,
             vy: -Math.random() * 0.18 - 0.06,
             vx: (Math.random() - 0.5) * 0.14,
-            alpha: Math.random() * 0.32 + 0.28,
+            alpha: Math.random() * 0.35 + 0.18,
             pulse: Math.random() * Math.PI * 2,
             pulseSpeed: Math.random() * 0.024 + 0.012,
             color: Math.random() < 0.6 ? "rgba(255, 252, 215," : "rgba(205, 255, 210,"
@@ -2463,14 +2463,14 @@ class HeroCanvasController {
         break;
 
       case "riverside":
-        // 64개 다이아몬드 스파클 및 렌즈 플레어 윤슬
-        for (let i = 0; i < 64; i++) {
+        // 38개 다이아몬드 스파클 및 렌즈 플레어 윤슬
+        for (let i = 0; i < 38; i++) {
           this.particles.push({
             x: Math.random() * w,
             y: h * 0.42 + Math.random() * (h * 0.58),
-            size: Math.random() * 3.6 + 1.8,
-            flareLen: Math.random() * 18 + 12,
-            alpha: Math.random() * 0.55 + 0.5,
+            size: Math.random() * 3.2 + 1.6,
+            flareLen: Math.random() * 16 + 10,
+            alpha: Math.random() * 0.7 + 0.3,
             pulse: Math.random() * Math.PI * 2,
             pulseSpeed: Math.random() * 0.038 + 0.018
           });
@@ -2478,15 +2478,15 @@ class HeroCanvasController {
         break;
 
       case "warm-bonfire":
-        // 76개 캡슐·스파크·미세 불티 다변화
-        for (let i = 0; i < 76; i++) {
+        // 52개 캡슐·스파크·미세 불티 다변화
+        for (let i = 0; i < 52; i++) {
           this.particles.push(this.createEmbersParticle(w, h, true));
         }
         break;
 
       case "sunset-coast":
-        // 80개 해수면 황금빛 윤슬 (water shimmer) + 36개 노을 대기 미립자 + 5마리 고품질 편대 비행 갈매기
-        for (let i = 0; i < 80; i++) {
+        // 50개 해수면 황금빛 윤슬 (water shimmer) + 24개 노을 대기 미립자 + 5마리 고품질 편대 비행 갈매기
+        for (let i = 0; i < 50; i++) {
           const depth = Math.random(); // 0(원경 수평선) ~ 1(근경 앞바다)
           this.particles.push({
             x: Math.random() * w,
@@ -2494,13 +2494,13 @@ class HeroCanvasController {
             vx: -0.12 - Math.random() * 0.22,
             len: (Math.random() * 26 + 14) * (0.65 + depth * 0.8),
             thick: (Math.random() * 1.6 + 1.2) * (0.7 + depth * 0.7),
-            alpha: Math.random() * 0.55 + 0.5,
+            alpha: Math.random() * 0.65 + 0.35,
             pulse: Math.random() * Math.PI * 2,
             pulseSpeed: Math.random() * 0.032 + 0.016,
             depth
           });
         }
-        for (let i = 0; i < 36; i++) {
+        for (let i = 0; i < 24; i++) {
           this.duskParticles.push({
             x: Math.random() * w,
             y: Math.random() * (h * 0.6),
@@ -2508,7 +2508,7 @@ class HeroCanvasController {
             vy: -Math.random() * 0.18 - 0.06,
             r: Math.random() * 2.2 + 0.8,
             pulse: Math.random() * Math.PI * 2,
-            alpha: Math.random() * 0.35 + 0.36
+            alpha: Math.random() * 0.4 + 0.2
           });
         }
         this.seagulls = [
@@ -2526,14 +2526,14 @@ class HeroCanvasController {
         break;
 
       case "cherry-blossom":
-        // 90개 대량 벚꽃비 샤워
-        for (let i = 0; i < 90; i++) {
+        // 65개 대량 벚꽃비 샤워
+        for (let i = 0; i < 65; i++) {
           this.particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
             vx: -Math.random() * 0.28 - 0.12,
             vy: Math.random() * 0.36 + 0.26,
-            size: Math.random() * 10 + 9,
+            size: Math.random() * 9 + 8,
             rot: Math.random() * Math.PI * 2,
             vRot: (Math.random() - 0.5) * 0.016,
             flip: Math.random() * Math.PI * 2,
@@ -2547,8 +2547,8 @@ class HeroCanvasController {
         break;
 
       case "green-meadow":
-        // 48개 3D 텀블링 민들레 홀씨
-        for (let i = 0; i < 48; i++) {
+        // 30개 3D 텀블링 민들레 홀씨
+        for (let i = 0; i < 30; i++) {
           this.particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
@@ -2557,7 +2557,7 @@ class HeroCanvasController {
             size: Math.random() * 6 + 13,
             sway: Math.random() * Math.PI * 2,
             swaySpeed: Math.random() * 0.012 + 0.008,
-            alpha: Math.random() * 0.3 + 0.68,
+            alpha: Math.random() * 0.4 + 0.55,
             tilt: 0,
             tiltTarget: 0,
             roll: Math.random() * Math.PI * 2,
@@ -2627,10 +2627,6 @@ class HeroCanvasController {
     const my = this.mouse.y;
     const hasMouse = this.mouse.active && mx > -500;
 
-    // 딤 레이어 위에서 테마 효과가 서로 겹칠 때 더 밝게 합성한다.
-    // 테마별 render 함수가 필요하면 screen/lighter를 자체적으로 덮어쓴다.
-    ctx.save();
-    ctx.globalCompositeOperation = "screen";
     switch (this.currentThemeId) {
       case "night-sky":
         this.renderNightSky(ctx, w, h, mx, my, hasMouse);
@@ -2663,7 +2659,6 @@ class HeroCanvasController {
         this.renderGreenMeadow(ctx, w, h, mx, my, hasMouse);
         break;
     }
-    ctx.restore();
 
     this.mouse.vx *= 0.85;
     this.mouse.vy *= 0.85;
@@ -2709,7 +2704,7 @@ class HeroCanvasController {
     ctx.globalCompositeOperation = "screen";
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
-      const glowAlpha = Math.min(0.98, Math.max(0.22, (Math.sin(p.pulse) + 1) * 0.5));
+      const glowAlpha = Math.max(0.12, (Math.sin(p.pulse) + 1) * 0.42);
 
       if (hasMouse) {
         const dx = p.x - mx;
@@ -2746,7 +2741,7 @@ class HeroCanvasController {
       ctx.arc(p.x, p.y, p.glow, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.fillStyle = `rgba(255, 255, 230, ${Math.min(1, glowAlpha + 0.3)})`;
+      ctx.fillStyle = `rgba(255, 255, 230, ${glowAlpha + 0.25})`;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size * 0.55, 0, Math.PI * 2);
       ctx.fill();
@@ -2872,7 +2867,7 @@ class HeroCanvasController {
   }
 
   renderRainyCamp(ctx, w, h, mx, my, hasMouse) {
-    ctx.lineWidth = 1.7;
+    ctx.lineWidth = 1.3;
     for (const p of this.particles) {
       p.y += p.speed;
       p.x -= 1.6;
@@ -2885,7 +2880,7 @@ class HeroCanvasController {
 
       if (p.y > h - 10) {
         if (Math.random() < 0.22) {
-          this.ripples.push({ x: p.x, y: h - 5, r: 1, maxR: 24 + Math.random() * 14, alpha: 0.72 });
+          this.ripples.push({ x: p.x, y: h - 5, r: 1, maxR: 24 + Math.random() * 14, alpha: 0.55 });
         }
         p.y = -20;
         p.x = Math.random() * (w + 100);
@@ -2906,8 +2901,8 @@ class HeroCanvasController {
         this.ripples.splice(i, 1);
         continue;
       }
-      ctx.strokeStyle = `rgba(200, 235, 255, ${r.alpha * 0.62})`;
-      ctx.lineWidth = 1.35;
+      ctx.strokeStyle = `rgba(200, 235, 255, ${r.alpha * 0.45})`;
+      ctx.lineWidth = 1.1;
       ctx.beginPath();
       ctx.ellipse(r.x, r.y, r.r, r.r * 0.35, 0, 0, Math.PI * 2);
       ctx.stroke();
@@ -2956,8 +2951,8 @@ class HeroCanvasController {
     for (let b = 0; b < 3; b++) {
       const bx = w * (0.35 + b * 0.25);
       const bGrad = ctx.createLinearGradient(bx, 0, bx - h * 0.45, h);
-      bGrad.addColorStop(0, `rgba(255, 252, 220, ${0.11 + beamPhase + b * 0.014})`);
-      bGrad.addColorStop(0.6, `rgba(255, 250, 200, ${0.06 + beamPhase})`);
+      bGrad.addColorStop(0, `rgba(255, 252, 220, ${0.06 + beamPhase + b * 0.01})`);
+      bGrad.addColorStop(0.6, `rgba(255, 250, 200, ${0.03 + beamPhase})`);
       bGrad.addColorStop(1, "rgba(255, 250, 200, 0)");
       ctx.fillStyle = bGrad;
       ctx.beginPath();
@@ -2971,7 +2966,7 @@ class HeroCanvasController {
 
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
-      const alpha = Math.min(0.95, Math.max(0.16, p.alpha + Math.sin(p.pulse) * 0.18));
+      const alpha = Math.max(0.08, p.alpha + Math.sin(p.pulse) * 0.14);
 
       if (hasMouse) {
         const dx = mx - p.x;
@@ -3011,7 +3006,7 @@ class HeroCanvasController {
 
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
-      const alpha = Math.min(1, Math.max(0, (Math.sin(p.pulse) + 0.5) * p.alpha));
+      const alpha = Math.max(0, (Math.sin(p.pulse) + 0.35) * p.alpha);
       if (alpha > 0.04) {
         const d = p.size * 2.4;
         ctx.beginPath();
@@ -3041,8 +3036,8 @@ class HeroCanvasController {
         this.ripples.splice(i, 1);
         continue;
       }
-      ctx.strokeStyle = `rgba(190, 240, 255, ${r.alpha * 0.7})`;
-      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = `rgba(190, 240, 255, ${r.alpha * 0.55})`;
+      ctx.lineWidth = 1.3;
       ctx.beginPath();
       ctx.ellipse(r.x, r.y, r.r, r.r * 0.28, 0, 0, Math.PI * 2);
       ctx.stroke();
@@ -3126,8 +3121,8 @@ class HeroCanvasController {
 
     const glowCycle = (Math.sin(this.time * 0.5) + 1) * 0.5;
     const sunsetGrad = ctx.createRadialGradient(w * 0.5, h * 0.50, 20, w * 0.5, h * 0.50, w * 0.70);
-    sunsetGrad.addColorStop(0, `rgba(255, 145, 55, ${0.24 + glowCycle * 0.08})`);
-    sunsetGrad.addColorStop(0.45, `rgba(255, 95, 35, ${0.13 + glowCycle * 0.05})`);
+    sunsetGrad.addColorStop(0, `rgba(255, 145, 55, ${0.16 + glowCycle * 0.06})`);
+    sunsetGrad.addColorStop(0.45, `rgba(255, 95, 35, ${0.08 + glowCycle * 0.03})`);
     sunsetGrad.addColorStop(1, "rgba(255, 87, 34, 0)");
     ctx.fillStyle = sunsetGrad;
     ctx.fillRect(0, 0, w, h);
@@ -3138,9 +3133,9 @@ class HeroCanvasController {
       const bandWave = Math.sin(this.time * 0.8 + b * 2) * 12;
       const bandGrad = ctx.createLinearGradient(0, bandY, w, bandY);
       bandGrad.addColorStop(0, "rgba(255, 160, 50, 0)");
-      bandGrad.addColorStop(0.35, `rgba(255, 200, 100, ${0.07 + glowCycle * 0.03})`);
-      bandGrad.addColorStop(0.55, `rgba(255, 230, 160, ${0.12 + glowCycle * 0.04})`);
-      bandGrad.addColorStop(0.75, `rgba(255, 180, 70, ${0.07 + glowCycle * 0.03})`);
+      bandGrad.addColorStop(0.35, `rgba(255, 200, 100, ${0.04 + glowCycle * 0.02})`);
+      bandGrad.addColorStop(0.55, `rgba(255, 230, 160, ${0.07 + glowCycle * 0.03})`);
+      bandGrad.addColorStop(0.75, `rgba(255, 180, 70, ${0.04 + glowCycle * 0.02})`);
       bandGrad.addColorStop(1, "rgba(255, 160, 50, 0)");
       ctx.fillStyle = bandGrad;
       ctx.fillRect(0, bandY + bandWave - 1.5, w, 3.2);
@@ -3161,7 +3156,7 @@ class HeroCanvasController {
         }
       }
 
-      const alpha = Math.min(1, Math.max(0, (Math.sin(p.pulse) * 0.5 + 0.58) * p.alpha) + extraGlow);
+      const alpha = Math.max(0, (Math.sin(p.pulse) * 0.5 + 0.5) * p.alpha) + extraGlow;
       if (alpha > 0.02) {
         const halfLen = p.len * 0.5;
         const shimmerGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, halfLen);
@@ -3331,9 +3326,9 @@ class HeroCanvasController {
       ctx.scale(Math.cos(p.flip), Math.sin(p.roll) * 0.35 + 0.65);
 
       const grad = ctx.createLinearGradient(0, p.size * 0.7, 0, -p.size * 0.7);
-      grad.addColorStop(0, `rgba(${p.colorBase}, 1)`);
-      grad.addColorStop(0.6, `rgba(${p.colorBase}, 0.94)`);
-      grad.addColorStop(1, "rgba(255, 240, 245, 1)");
+      grad.addColorStop(0, `rgba(${p.colorBase}, 0.95)`);
+      grad.addColorStop(0.6, `rgba(${p.colorBase}, 0.85)`);
+      grad.addColorStop(1, "rgba(255, 240, 245, 0.92)");
       ctx.fillStyle = grad;
 
       ctx.beginPath();
@@ -3385,8 +3380,8 @@ class HeroCanvasController {
       const stemLen = p.size * 0.75;
       const umbrellaR = p.size * 0.7;
 
-      ctx.strokeStyle = `rgba(255, 255, 255, ${Math.min(1, p.alpha * 0.96)})`;
-      ctx.lineWidth = 1.05;
+      ctx.strokeStyle = `rgba(255, 255, 255, ${p.alpha * 0.78})`;
+      ctx.lineWidth = 0.8;
       for (let i = 0; i < 16; i++) {
         const ang = -Math.PI * 0.88 + (i / 15) * (Math.PI * 0.76);
         const fx = Math.cos(ang) * umbrellaR;
@@ -3396,7 +3391,7 @@ class HeroCanvasController {
         ctx.lineTo(fx, fy);
         ctx.stroke();
 
-        ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, p.alpha)})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha * 0.88})`;
         ctx.beginPath();
         ctx.arc(fx, fy, 0.75, 0, Math.PI * 2);
         ctx.fill();
@@ -3735,6 +3730,9 @@ const W_OPTS = [[0, "상관없음"], [1, "전기 있음"], [600, "600W 이상"],
 const SIZE_OPTS = [[0, "상관없음"], [6, "6m 이상"], [8, "8m 이상"], [10, "10m 이상"]];
 const R_OPTS = [10, 20, 30];
 const emptyCond = () => ({ sido: [], kind: [], pet: false, w: 0, size: 0, fire: false, park: false, win: false, dump: false, vr: false, best: false, sun: false, leaf: false, spring: false, summer: false, near: "", r: 20 });
+// VR·우수야영장은 실제 근거가 있는 레코드만 조건에 포함한다.
+const hasVerifiedVr = (c) => Boolean(vrUrl(c));
+const hasExcellentBadge = (c) => Array.isArray(c.best) ? c.best.length > 0 : Boolean(c.best);
 // t39 #41 계절·풍경·차박 조건(고캠핑 테마 th · 부대시설). 근거가 있으면 y, 테마 정보는 있는데 없으면 n, 정보 없으면 ?(아래 ‘확인 필요’).
 // 보험(영업배상책임)은 목록 카탈로그에 값이 없어(고캠핑 등록 0곳) 조건으로 두지 않는다 — 상세 ‘보험’ 줄에만.
 const COND_BOOL = {
@@ -3776,6 +3774,8 @@ function condEval(c, k = S.cond, skip = null) {
   if (skip !== "size" && k.size) { const m = maxSide(c); st.size = m ? (m >= k.size ? "y" : "n") : "?"; }
   if (skip !== "fire" && k.fire) { const f = facts(c).fire?.kind; st.fire = f === "FIREWOOD_OK" ? "y" : f ? "n" : "?"; }
   if (skip !== "win" && k.win) st.win = c.win === 1 ? "y" : c.win === 0 || noKeys(c).includes("NO_WINTER") ? "n" : "?";
+  if (skip !== "vr" && k.vr) st.vr = hasVerifiedVr(c) ? "y" : "n";
+  if (skip !== "best" && k.best) st.best = hasExcellentBadge(c) ? "y" : "n";
   for (const [b, [, t]] of Object.entries(COND_BOOL)) if (skip !== b && k[b]) st[b] = t(c);
   if (skip !== "park" && k.park) { const o = facts(c).park?.ok; st.park = o === true ? "y" : o === false || o === "part" ? (o === "part" ? "?" : "n") : "?"; }
   const vals = Object.values(st);
@@ -3788,7 +3788,7 @@ function condTest(c, k = S.cond, skip = null, strict = S.condStrict) {
   return Boolean(r) && (!strict || r.unknown === 0);
 }
 const COND_LABEL = { dump: "덤프스테이션", vr: "360° VR 뷰", best: "공인 우수야영장", sun: "일출 명소", leaf: "단풍 명소", spring: "봄꽃", summer: "여름 물놀이", win: "겨울 운영", kind: "상품", pet: "반려견", w: "전기", size: "사이트 크기", fire: "장작", park: "텐트 옆 주차" };
-const condActive = (k = S.cond) => k.sido.length + k.kind.length + (k.pet ? 1 : 0) + (k.w ? 1 : 0) + (k.size ? 1 : 0) + (k.fire ? 1 : 0) + (k.park ? 1 : 0) + (k.win ? 1 : 0) + Object.keys(COND_BOOL).filter((b) => k[b]).length + (k.near ? 1 : 0);
+const condActive = (k = S.cond) => k.sido.length + k.kind.length + (k.pet ? 1 : 0) + (k.w ? 1 : 0) + (k.size ? 1 : 0) + (k.fire ? 1 : 0) + (k.park ? 1 : 0) + (k.win ? 1 : 0) + (k.vr ? 1 : 0) + (k.best ? 1 : 0) + Object.keys(COND_BOOL).filter((b) => k[b]).length + (k.near ? 1 : 0);
 function condChips(k = S.cond) {
   const out = [];
   if (k.near) out.push(["near", `${k._ctr?.label ?? k.near} ${k.r}km 안`]);
@@ -3800,6 +3800,8 @@ function condChips(k = S.cond) {
   if (k.fire) out.push(["fire", "장작 가능"]);
   if (k.park) out.push(["park", "텐트 옆 주차"]);
   if (k.win) out.push(["win", "겨울 운영"]);
+  if (k.vr) out.push(["vr", "360° VR 뷰"]);
+  if (k.best) out.push(["best", "공인 우수야영장"]);
   for (const [b, [l]] of Object.entries(COND_BOOL)) if (k[b]) out.push([b, l]);
   return out;
 }
@@ -3816,6 +3818,8 @@ function condToParams(p, k = S.cond) {
   if (k.fire) p.set("fire", "1");
   if (k.park) p.set("park", "1");
   if (k.win) p.set("win", "1");
+  if (k.vr) p.set("vr", "1");
+  if (k.best) p.set("best", "1");
   for (const b of Object.keys(COND_BOOL)) if (k[b]) p.set(b, "1");
   if (k.near) { p.set("near", k.near); p.set("r", String(k.r)); }
   if (S.feeBand) p.set("fee", S.feeBand);
@@ -3826,7 +3830,7 @@ function condFromParams(q) {
   const k = emptyCond(), list = (n) => (q.get(n) ?? "").split(",").filter(Boolean);
   k.sido = list("sido").filter((x) => SIDOS.includes(x));
   k.kind = list("kind").filter((x) => KIND[x]);
-  k.pet = q.get("pet") === "1"; k.fire = q.get("fire") === "1"; k.park = q.get("park") === "1"; k.win = q.get("win") === "1";
+  k.pet = q.get("pet") === "1"; k.fire = q.get("fire") === "1"; k.park = q.get("park") === "1"; k.win = q.get("win") === "1"; k.vr = q.get("vr") === "1"; k.best = q.get("best") === "1";
   for (const b of Object.keys(COND_BOOL)) k[b] = q.get(b) === "1";
   k.w = W_OPTS.some(([v]) => v === Number(q.get("w"))) ? Number(q.get("w")) : 0;
   k.size = SIZE_OPTS.some(([v]) => v === Number(q.get("size"))) ? Number(q.get("size")) : 0;
@@ -3847,7 +3851,7 @@ function condSheet() {
       if (!b) return;
       const [key, val] = b.dataset.c.split(":"), k = S.condDraft;
       if (key === "sido" || key === "kind") k[key] = k[key].includes(val) ? k[key].filter((x) => x !== val) : [...k[key], val];
-      else if (key === "pet" || key === "fire" || key === "park" || key === "win" || key in COND_BOOL) k[key] = !k[key];
+      else if (key === "pet" || key === "fire" || key === "park" || key === "win" || key === "vr" || key === "best" || key in COND_BOOL) k[key] = !k[key];
       else if (key === "w" || key === "size" || key === "r") k[key] = Number(val);
       else if (key === "fee") S.feeDraft = S.feeDraft === val ? "" : val;
       else if (key === "strict") S.strictDraft = !S.strictDraft;
