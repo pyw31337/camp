@@ -2084,8 +2084,8 @@ const HERO_THEMES = [
     badge: "오늘 밤 쏟아지는 별빛",
     moodDescription: "평창 600마지기 은하수 & 반딧불이",
     image: "hero-night-sky.webp",
-    titleA: "쏟아지는 은하수 아래,",
-    titleB: "평창 밤하늘 캠핑.",
+    titleA: "쏟아지는 은하수 아래",
+    titleB: "평창 밤하늘 캠핑",
     summary: "도심을 벗어나 쏟아지는 별빛과 춤추는 반딧불이를 마주하는 시간",
     effect: "night-sky"
   },
@@ -2096,8 +2096,8 @@ const HERO_THEMES = [
     badge: "오색빛깔 가을 낭만",
     moodDescription: "오색빛깔 가을 단풍 & 은행잎",
     image: "hero-autumn-maple.webp",
-    titleA: "붉게 물든 가을 숲길,",
-    titleB: "오색 단풍 캠핑.",
+    titleA: "붉게 물든 가을 숲길",
+    titleB: "오색 단풍 캠핑",
     summary: "살랑이는 가을 바람과 사각거리는 단풍잎 사이로 떠나는 힐링 여정",
     effect: "autumn-maple"
   },
@@ -2108,8 +2108,8 @@ const HERO_THEMES = [
     badge: "토닥토닥 빗소리",
     moodDescription: "운치 있는 숲속 낭만 우중 캠핑",
     image: "hero-rainy-camp.webp",
-    titleA: "타프 위 토닥이는 비,",
-    titleB: "아늑한 우중 캠핑.",
+    titleA: "타프 위 토닥이는 비",
+    titleB: "아늑한 우중 캠핑",
     summary: "촉촉한 숲의 향기와 따스한 랜턴 불빛이 머무는 가장 아늑한 순간",
     effect: "rainy-camp"
   },
@@ -2120,8 +2120,8 @@ const HERO_THEMES = [
     badge: "순백의 겨울 동화",
     moodDescription: "인제 자작나무숲 설경 캠핑",
     image: "hero-snowy-winter.webp",
-    titleA: "새하얀 설원의 고요,",
-    titleB: "고요한 설경 캠핑.",
+    titleA: "새하얀 설원의 고요",
+    titleB: "고요한 설경 캠핑",
     summary: "소복이 쌓이는 눈꽃과 모닥불의 따스함이 빚어내는 겨울 동화",
     effect: "snowy-winter"
   },
@@ -2132,8 +2132,8 @@ const HERO_THEMES = [
     badge: "피톤치드 힐링",
     moodDescription: "치유의 편백나무 숲 & 아침 햇살",
     image: "hero-lush-forest.webp",
-    titleA: "피톤치드 가득한 숲길,",
-    titleB: "편백숲 힐링 캠핑.",
+    titleA: "피톤치드 가득한 숲길",
+    titleB: "편백숲 힐링 캠핑",
     summary: "나무 사이로 쏟아지는 눈부신 햇살과 싱그러운 숲의 숨결",
     effect: "lush-forest"
   },
@@ -2144,8 +2144,8 @@ const HERO_THEMES = [
     badge: "물안개 피는 호수",
     moodDescription: "충주호 잔잔한 물결 & 카약 캠핑",
     image: "hero-riverside.webp",
-    titleA: "물안개 피는 아침 강가,",
-    titleB: "호숫가 카약 캠핑.",
+    titleA: "물안개 피는 아침 강가",
+    titleB: "호숫가 카약 캠핑",
     summary: "유리알처럼 투명한 수면과 황금빛 일출이 선사하는 평온함",
     effect: "riverside"
   },
@@ -2156,8 +2156,8 @@ const HERO_THEMES = [
     badge: "타닥타닥 힐링 불멍",
     moodDescription: "따스한 모닥불과 솟구치는 불티",
     image: "hero-warm-bonfire.webp",
-    titleA: "타닥타닥 모닥불 소리,",
-    titleB: "따스한 불멍 캠핑.",
+    titleA: "타닥타닥 모닥불 소리",
+    titleB: "따스한 불멍 캠핑",
     summary: "밤하늘로 솟아오르는 따스한 불티와 감성 알전구 불빛",
     effect: "warm-bonfire"
   },
@@ -2168,8 +2168,8 @@ const HERO_THEMES = [
     badge: "붉은 석양의 감동",
     moodDescription: "서해안 태안 바다 일몰 & 노을 해변",
     image: "hero-sunset-coast.webp",
-    titleA: "노을이 내려앉은 바다,",
-    titleB: "서해 노을 캠핑.",
+    titleA: "노을이 내려앉은 바다",
+    titleB: "서해 노을 캠핑",
     summary: "황금빛으로 물드는 바다 수평선과 잔잔히 반짝이는 파도 소리",
     effect: "sunset-coast"
   },
@@ -2180,8 +2180,8 @@ const HERO_THEMES = [
     badge: "설레는 꽃비 샤워",
     moodDescription: "만개한 벚꽃나무 아래 봄 캠핑",
     image: "hero-cherry-blossom.webp",
-    titleA: "흩날리는 분홍 꽃비,",
-    titleB: "봄날 벚꽃 캠핑.",
+    titleA: "흩날리는 분홍 꽃비",
+    titleB: "봄날 벚꽃 캠핑",
     summary: "흩날리는 꽃잎 샤워와 따스한 봄 햇살 속 캠크닉",
     effect: "cherry-blossom"
   },
@@ -2192,8 +2192,8 @@ const HERO_THEMES = [
     badge: "탁 트인 푸른 초원",
     moodDescription: "대관령 푸른 언덕 & 민들레 홀씨",
     image: "hero-green-meadow.webp",
-    titleA: "끝없는 초록빛 언덕,",
-    titleB: "대관령 초원 캠핑.",
+    titleA: "끝없는 초록빛 언덕",
+    titleB: "대관령 초원 캠핑",
     summary: "탁 트인 푸른 하늘과 보드라운 잔디밭 위에서 누리는 자유",
     effect: "green-meadow"
   }
@@ -2485,34 +2485,43 @@ class HeroCanvasController {
         break;
 
       case "sunset-coast":
-        // 42개 수평 반사광 (해수면 황금빛 윤슬) + 20개 노을 대기 미립자 + 4마리 선명한 갈매기 실루엣
-        for (let i = 0; i < 42; i++) {
+        // 50개 해수면 황금빛 윤슬 (water shimmer) + 24개 노을 대기 미립자 + 5마리 고품질 편대 비행 갈매기
+        for (let i = 0; i < 50; i++) {
+          const depth = Math.random(); // 0(원경 수평선) ~ 1(근경 앞바다)
           this.particles.push({
-            x: w * 0.35 + Math.random() * (w * 0.65),
-            y: h * 0.46 + Math.random() * (h * 0.36),
-            vx: -Math.random() * 0.22 - 0.06,
-            len: Math.random() * 32 + 16,
-            alpha: Math.random() * 0.5 + 0.3,
+            x: Math.random() * w,
+            y: h * 0.44 + depth * (h * 0.46),
+            vx: -0.12 - Math.random() * 0.22,
+            len: (Math.random() * 26 + 14) * (0.65 + depth * 0.8),
+            thick: (Math.random() * 1.6 + 1.2) * (0.7 + depth * 0.7),
+            alpha: Math.random() * 0.65 + 0.35,
             pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.024 + 0.012
+            pulseSpeed: Math.random() * 0.032 + 0.016,
+            depth
           });
         }
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 24; i++) {
           this.duskParticles.push({
             x: Math.random() * w,
-            y: Math.random() * (h * 0.55),
-            vx: (Math.random() - 0.5) * 0.15,
-            vy: -Math.random() * 0.15 - 0.05,
-            r: Math.random() * 1.8 + 0.8,
+            y: Math.random() * (h * 0.6),
+            vx: (Math.random() - 0.5) * 0.16 + 0.04,
+            vy: -Math.random() * 0.18 - 0.06,
+            r: Math.random() * 2.2 + 0.8,
             pulse: Math.random() * Math.PI * 2,
-            alpha: Math.random() * 0.35 + 0.15
+            alpha: Math.random() * 0.4 + 0.2
           });
         }
         this.seagulls = [
-          { x: w * 0.15, y: h * 0.20, vx: 0.72, vy: -0.02, wingSpan: 28, wingPhase: 0, wingSpeed: 0.055 },
-          { x: w * 0.28, y: h * 0.15, vx: 0.80, vy: 0.015, wingSpan: 22, wingPhase: 1.4, wingSpeed: 0.065 },
-          { x: w * 0.08, y: h * 0.26, vx: 0.65, vy: 0.01, wingSpan: 18, wingPhase: 2.8, wingSpeed: 0.05 },
-          { x: w * 0.38, y: h * 0.22, vx: 0.75, vy: -0.01, wingSpan: 15, wingPhase: 4.2, wingSpeed: 0.07 }
+          // 1. 선두 대장 갈매기 (근경, 뚜렷한 날갯짓과 섬세한 실루엣)
+          { x: w * 0.30, y: h * 0.18, vx: 0.82, vy: -0.012, wingSpan: 32, wingPhase: 0, wingSpeed: 0.052, bobPhase: 0, depth: 1.0 },
+          // 2. 우상단 편대 갈매기 (활공 위상)
+          { x: w * 0.46, y: h * 0.13, vx: 0.88, vy: 0.01, wingSpan: 25, wingPhase: 1.3, wingSpeed: 0.058, bobPhase: 1.2, depth: 0.88 },
+          // 3. 좌하단 뒤따르는 갈매기
+          { x: w * 0.16, y: h * 0.23, vx: 0.74, vy: 0.014, wingSpan: 21, wingPhase: 2.7, wingSpeed: 0.048, bobPhase: 2.4, depth: 0.78 },
+          // 4. 원경 아스라한 노을 속 갈매기
+          { x: w * 0.62, y: h * 0.20, vx: 0.68, vy: -0.008, wingSpan: 15, wingPhase: 4.1, wingSpeed: 0.065, bobPhase: 3.6, depth: 0.58 },
+          // 5. 높은 하늘 후미 갈매기
+          { x: w * 0.05, y: h * 0.10, vx: 0.76, vy: 0.006, wingSpan: 18, wingPhase: 5.3, wingSpeed: 0.055, bobPhase: 4.9, depth: 0.68 }
         ];
         break;
 
@@ -3106,94 +3115,174 @@ class HeroCanvasController {
   }
 
   renderSunsetCoast(ctx, w, h, mx, my, hasMouse) {
-    // 서해안 노을: 갯벌 황금빛 석양 물결 라인 + 노을 대기 미립자 + 멀리 날아가는 갈매기 실루엣
+    // 서해안 노을: 다채로운 해수면 황금빛 윤슬 + 파도 밴드 + 정교한 편대 비행 갈매기 실루엣
     ctx.save();
     ctx.globalCompositeOperation = "screen";
 
     const glowCycle = (Math.sin(this.time * 0.5) + 1) * 0.5;
-    const sunsetGrad = ctx.createRadialGradient(w * 0.5, h * 0.52, 20, w * 0.5, h * 0.52, w * 0.65);
-    sunsetGrad.addColorStop(0, `rgba(255, 140, 50, ${0.14 + glowCycle * 0.05})`);
-    sunsetGrad.addColorStop(0.5, `rgba(255, 90, 30, ${0.07 + glowCycle * 0.03})`);
+    const sunsetGrad = ctx.createRadialGradient(w * 0.5, h * 0.50, 20, w * 0.5, h * 0.50, w * 0.70);
+    sunsetGrad.addColorStop(0, `rgba(255, 145, 55, ${0.16 + glowCycle * 0.06})`);
+    sunsetGrad.addColorStop(0.45, `rgba(255, 95, 35, ${0.08 + glowCycle * 0.03})`);
     sunsetGrad.addColorStop(1, "rgba(255, 87, 34, 0)");
     ctx.fillStyle = sunsetGrad;
     ctx.fillRect(0, 0, w, h);
 
+    // 1. 수평선 부근 은은한 파도 윤슬 밴드
+    for (let b = 0; b < 2; b++) {
+      const bandY = h * (0.48 + b * 0.12);
+      const bandWave = Math.sin(this.time * 0.8 + b * 2) * 12;
+      const bandGrad = ctx.createLinearGradient(0, bandY, w, bandY);
+      bandGrad.addColorStop(0, "rgba(255, 160, 50, 0)");
+      bandGrad.addColorStop(0.35, `rgba(255, 200, 100, ${0.04 + glowCycle * 0.02})`);
+      bandGrad.addColorStop(0.55, `rgba(255, 230, 160, ${0.07 + glowCycle * 0.03})`);
+      bandGrad.addColorStop(0.75, `rgba(255, 180, 70, ${0.04 + glowCycle * 0.02})`);
+      bandGrad.addColorStop(1, "rgba(255, 160, 50, 0)");
+      ctx.fillStyle = bandGrad;
+      ctx.fillRect(0, bandY + bandWave - 1.5, w, 3.2);
+    }
+
+    // 2. 해수면 다채로운 렌즈형 황금 윤슬 (Water Shimmer)
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
       p.x += p.vx;
-      if (p.x < -50) p.x = w + 50;
+      if (p.x < -60) p.x = w + 60;
 
-      if (hasMouse && Math.hypot(p.x - mx, p.y - my) < 90) {
-        p.pulse += 0.05;
+      let extraGlow = 0;
+      if (hasMouse) {
+        const dist = Math.hypot(p.x - mx, p.y - my);
+        if (dist < 110) {
+          p.pulse += 0.04;
+          extraGlow = (1 - dist / 110) * 0.35;
+        }
       }
 
-      const alpha = Math.max(0, (Math.sin(p.pulse) + 0.35) * p.alpha);
+      const alpha = Math.max(0, (Math.sin(p.pulse) * 0.5 + 0.5) * p.alpha) + extraGlow;
       if (alpha > 0.02) {
-        const lineGrad = ctx.createLinearGradient(p.x - p.len, p.y, p.x + p.len, p.y);
-        lineGrad.addColorStop(0, "rgba(255, 171, 64, 0)");
-        lineGrad.addColorStop(0.5, `rgba(255, 240, 185, ${alpha * 0.95})`);
-        lineGrad.addColorStop(1, "rgba(255, 171, 64, 0)");
-        ctx.fillStyle = lineGrad;
-        ctx.fillRect(p.x - p.len, p.y - 1.2, p.len * 2, 2.8);
+        const halfLen = p.len * 0.5;
+        const shimmerGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, halfLen);
+        shimmerGrad.addColorStop(0, `rgba(255, 250, 225, ${Math.min(1, alpha * 0.95)})`);
+        shimmerGrad.addColorStop(0.4, `rgba(255, 195, 80, ${Math.min(1, alpha * 0.7)})`);
+        shimmerGrad.addColorStop(1, "rgba(255, 140, 40, 0)");
+
+        ctx.fillStyle = shimmerGrad;
+        ctx.beginPath();
+        ctx.ellipse(p.x, p.y, halfLen, p.thick, 0, 0, Math.PI * 2);
+        ctx.fill();
       }
     }
 
+    // 3. 노을 대기 미립자 (Golden Hour dust)
     for (const d of this.duskParticles) {
-      d.pulse += 0.02;
+      d.pulse += 0.022;
       d.x += d.vx;
       d.y += d.vy;
-      if (d.y < -10) d.y = h * 0.6;
-      if (d.x < -10) d.x = w + 10;
-      else if (d.x > w + 10) d.x = -10;
+      if (d.y < -15) d.y = h * 0.65;
+      if (d.x < -15) d.x = w + 15;
+      else if (d.x > w + 15) d.x = -15;
 
-      const da = Math.max(0.05, d.alpha + Math.sin(d.pulse) * 0.1);
-      ctx.fillStyle = `rgba(255, 215, 170, ${da})`;
+      const da = Math.max(0.05, d.alpha + Math.sin(d.pulse) * 0.12);
+      ctx.fillStyle = `rgba(255, 225, 180, ${da})`;
       ctx.beginPath();
       ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.restore();
 
+    // 4. 고품질 갈매기 무리 (편대 비행, 유선형 실루엣 & 골든 림 라이트)
     ctx.save();
     for (const g of this.seagulls) {
+      g.bobPhase = (g.bobPhase || 0) + 0.032;
       g.x += g.vx;
-      g.y += g.vy;
+      g.y += g.vy + Math.sin(g.bobPhase) * 0.18;
       g.wingPhase += g.wingSpeed;
-      if (g.x > w + 60) g.x = -60;
+
+      // 마우스 반응: 마우스가 가까이 오면 부드럽게 회피하며 날갯짓 가속
+      if (hasMouse) {
+        const mDist = Math.hypot(g.x - mx, g.y - my);
+        if (mDist < 120) {
+          g.y -= (1 - mDist / 120) * 0.45;
+          g.wingSpeed = Math.min(0.085, g.wingSpeed + 0.002);
+        } else if (g.wingSpeed > 0.055) {
+          g.wingSpeed *= 0.995;
+        }
+      }
+
+      if (g.x > w + 80) g.x = -80;
 
       const ws = g.wingSpan;
-      const wingY = Math.sin(g.wingPhase) * (ws * 0.48);
-      const tipY = wingY > 0 ? wingY * 1.15 : wingY * 0.85;
+      const depth = g.depth || 1.0;
+      // 날갯짓 역학: 다운스트로크와 업스트로크의 자연스러운 파형
+      const wingNorm = Math.sin(g.wingPhase) + 0.16 * Math.sin(g.wingPhase * 2);
+      const wingY = wingNorm * (ws * 0.45);
+      const tipY = wingY > 0 ? wingY * 1.22 : wingY * 0.88;
+
+      // 날개 관절 (어깨 -> 팔꿈치/손목 -> 날개깃 끝)
+      const elbowX = ws * 0.42;
+      const elbowY = wingY * 0.62 - 2;
 
       ctx.save();
       ctx.translate(g.x, g.y);
 
-      // 1. 역광 따스한 림 라이트 (외곽선 강조)
-      ctx.strokeStyle = "rgba(255, 205, 120, 0.45)";
-      ctx.lineWidth = 3.6;
+      // (1) 역광 석양 림 라이트 (외곽 골든 글로우)
+      ctx.strokeStyle = `rgba(255, 220, 140, ${0.55 * depth})`;
+      ctx.lineWidth = Math.max(1.8, 3.2 * depth);
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
       ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.quadraticCurveTo(-ws * 0.45, wingY - 3, -ws, tipY);
-      ctx.moveTo(0, 0);
-      ctx.quadraticCurveTo(ws * 0.45, wingY - 3, ws, tipY);
+      // 좌측 날개 윗선
+      ctx.moveTo(0, -1);
+      ctx.quadraticCurveTo(-elbowX, elbowY - 2, -ws, tipY);
+      // 우측 날개 윗선
+      ctx.moveTo(0, -1);
+      ctx.quadraticCurveTo(elbowX, elbowY - 2, ws, tipY);
+      // 머리/등 윗선
+      ctx.moveTo(-ws * 0.2, 0);
+      ctx.lineTo(ws * 0.35, -ws * 0.04);
       ctx.stroke();
 
-      // 2. 선명한 짙은 실루엣 날개
-      ctx.strokeStyle = "rgba(20, 10, 6, 0.94)";
-      ctx.lineWidth = 2.4;
+      // (2) 날개 실루엣 면 (유선형 블레이드)
+      ctx.fillStyle = `rgba(18, 9, 5, ${Math.min(0.96, 0.75 + depth * 0.22)})`;
+      ctx.strokeStyle = `rgba(18, 9, 5, ${Math.min(0.96, 0.75 + depth * 0.22)})`;
+      ctx.lineWidth = 1.2;
+
+      // 좌측 날개 패스 (어깨 -> 관절 -> 날개끝 -> 날개밑선 -> 몸통)
       ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.quadraticCurveTo(-ws * 0.45, wingY - 3, -ws, tipY);
-      ctx.moveTo(0, 0);
-      ctx.quadraticCurveTo(ws * 0.45, wingY - 3, ws, tipY);
+      ctx.moveTo(-ws * 0.05, -ws * 0.02);
+      ctx.quadraticCurveTo(-elbowX, elbowY - 2, -ws, tipY);
+      ctx.quadraticCurveTo(-elbowX * 0.9, elbowY + ws * 0.14, -ws * 0.12, ws * 0.04);
+      ctx.closePath();
+      ctx.fill();
       ctx.stroke();
 
-      // 3. 중앙 몸통 & 머리 실루엣
-      ctx.fillStyle = "rgba(20, 10, 6, 0.94)";
+      // 우측 날개 패스
       ctx.beginPath();
-      ctx.ellipse(0, 1, ws * 0.12, ws * 0.24, Math.PI / 10, 0, Math.PI * 2);
+      ctx.moveTo(ws * 0.05, -ws * 0.02);
+      ctx.quadraticCurveTo(elbowX, elbowY - 2, ws, tipY);
+      ctx.quadraticCurveTo(elbowX * 0.9, elbowY + ws * 0.14, ws * 0.12, ws * 0.04);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      // (3) 몸통 & 꼬리깃 실루엣
+      ctx.beginPath();
+      ctx.ellipse(0, 0, ws * 0.24, ws * 0.08, 0.06, 0, Math.PI * 2);
+      // 꼬리깃
+      ctx.moveTo(-ws * 0.15, 0);
+      ctx.lineTo(-ws * 0.36, -ws * 0.03);
+      ctx.lineTo(-ws * 0.34, ws * 0.04);
+      ctx.closePath();
+      ctx.fill();
+
+      // (4) 머리와 비행 방향 부리 (Beak) 실루엣
+      ctx.beginPath();
+      ctx.arc(ws * 0.22, -ws * 0.03, ws * 0.07, 0, Math.PI * 2);
+      ctx.fill();
+      // 날렵한 부리
+      ctx.beginPath();
+      ctx.moveTo(ws * 0.26, -ws * 0.04);
+      ctx.lineTo(ws * 0.40, -ws * 0.015);
+      ctx.lineTo(ws * 0.26, ws * 0.005);
+      ctx.closePath();
       ctx.fill();
 
       ctx.restore();
