@@ -140,8 +140,8 @@ const QUAL = [
   [/24 ?시간/, "24시간 이용", ["spa", "privbath", "kidscafe", "indoorplay"]],
   [/트랙|승마장|마장/, "전용 승마 트랙", ["horse"]],
   [/조랑말|포니/, "포니 승마", ["horse"]],
-  [/아이|어린이|초등|유아/, "아이도 탈 수 있음", ["horse"]],
-  [/아이|어린이|초등|유아/, "아이와 함께 즐기기", ["leisure"]],
+  [/(?:아이|어린이|초등|유아|키즈)[^.!?]{0,8}(?:탈 ?수|탑승|타(?:고|요|는|봤|볼)|체험 ?가능)/, "아이도 탈 수 있음", ["horse"]],
+  [/(?:아이|어린이|초등|유아|키즈)[^.!?]{0,8}(?:도 ?가능|이용 ?가능|탈 ?수|탑승|즐길 ?수|체험 ?가능)/, "아이도 이용 가능", ["leisure"]],
   [/교관|강사|코치|안전 ?요원/, "강사 동행", ["horse", "leisure"]],
   [/(?:캠핑장|단지|부지) ?(?:안|내)|도보|걸어서/, "캠핑장 안에서", ["leisure", "horse", "farm", "animal"]],
   [/(봄|여름|가을|겨울) ?(?:철|시즌|에만|한정)/, (m) => `${m[1]} 한정`, ["farm", "leisure"]],
@@ -237,17 +237,21 @@ export function uniqueCard(c, det, res) {
     const SENT_T = { valley: "계곡이 사이트 바로 옆을 흘러 물놀이하기 좋아요", treehouse: "나무 위 트리하우스에서 묵어볼 수 있어요", horse: "캠핑장 안에서 승마를 체험할 수 있어요", kidscafe: `${jn(x.n, "이", "가")} 있어 아이와 날씨 걱정 없이 놀 수 있어요`, indoorplay: `${jn(x.n, "이", "가")} 있어 아이들이 실내에서도 놀 수 있어요`, farm: `${jn(x.n, "을", "를")} 캠핑과 함께 즐길 수 있어요`, leisure: `${jn(x.n, "을", "를")} 캠핑장에서 바로 즐길 수 있어요`, stay: `${x.n}처럼 색다른 숙소에서 하룻밤을 보낼 수 있어요`, animal: `${jn(x.n, "으로", "로")} 아이와 동물을 가까이 만날 수 있어요`, pool: `${jn(x.n, "이", "가")} 있어 물놀이 캠핑하기 좋아요`, warmpool: `${jn(x.n, "이", "가")} 있어 선선한 날에도 물놀이할 수 있어요`, hotspring: `${x.n}에서 몸을 녹이며 쉴 수 있어요`, spa: `${x.n}에서 캠핑 피로를 풀 수 있어요` };
     t = SENT_T[x.k] ?? `${jn(x.n, "이", "가")} 있어요`;
   }
-  let ph = null;
-  const allRe = new RegExp(FEAT.filter((x) => ids.includes(x.k)).map((x) => x.re.source).join("|"));
-  if (core) for (const k of ["sns_images", "reviews"]) {
-    for (const r of det?.[k] ?? []) {
-      const th = r?.thumb, title = typeof r?.title === "string" ? r.title : "";
-      if (!th || !/^https:\/\//.test(th) || !title.replace(/\s/g, "").includes(core) || !hitsIn(title, allRe).length) continue;
-      ph = { th, u: typeof r.url === "string" ? r.url : "" }; break;
-    }
-    if (ph) break;
+  // t50: 증거 사진 후보 — 제목에 시설 이름이 있고, 지도·메뉴·후기 캡처 류 제목은 뺀다. 실제 표시 여부는
+  // 사진 판별 결과(photo-verdicts.json, CLIP 판별 + 표본 육안 확인)가 정한다. 판별 없으면 사진을 쓰지 않는다.
+  const pc = [];
+  const BAD_T = /지도|위치|오시는 ?길|가는 ?길|메뉴|가격표|요금표|예약 ?방법|후기 ?모음|맛집|식당|카페(?!.*키즈)|배치도|도면|공지/;
+  if (core) for (const k of ["sns_images", "reviews"]) for (const r of det?.[k] ?? []) {
+    const th = r?.thumb, title = typeof r?.title === "string" ? r.title : "";
+    if (!th || !/^https:\/\//.test(th) || !title.replace(/\s/g, "").includes(core) || BAD_T.test(title)) continue;
+    const it = items.find((x) => { const f = [...FEAT, ...EXTRA].find((y) => y.k === x.k); return f && f.re.test(title); });
+    if (it && !pc.some((x) => x.th === th)) pc.push({ th, u: typeof r.url === "string" ? r.url : "", k: it.k });
+    if (pc.length >= 4) break;
   }
-  return { c: (real[0] ?? items[0]).k, m: listMode ? "list" : "text", it: items.slice(0, 4).map(({ w, ...x }) => x), ...(t ? { t } : {}), s, ...(ph ? { p: ph } : {}) };
+  const verdict = (globalThis.__UQ_PHOTO_OK ?? {});
+  const okc = pc.find((x) => verdict[x.th] === x.k);
+  const ph = okc ? { th: okc.th, u: okc.u } : null;
+  return { c: (real[0] ?? items[0]).k, m: listMode ? "list" : "text", it: items.slice(0, 4).map(({ w, ...x }) => x), ...(t ? { t } : {}), s, ...(ph ? { p: ph } : {}), ...(pc.length ? { pc } : {}) };
 }
 const RARE_FIRST = ["hotspring", "spa", "warmpool", "horse", "animal", "treehouse", "stay", "leisure", "kidscafe", "indoorplay", "farm", "valley", "pool", "privbath"];
 const clean = (s) => String(s ?? "").replace(/[\u200b\u00a0]/g, " ").replace(/\s+/g, " ").trim();

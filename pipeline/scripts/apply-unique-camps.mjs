@@ -11,6 +11,10 @@ const dir = i > 0 ? process.argv[i + 1] : "camping-atlas/public/explore/data";
 const file = join(dir, "campgrounds.json");
 if (!existsSync(file)) { console.log(`::warning::${file} 없음 — 이색 분류 건너뜀`); process.exit(0); }
 const camps = JSON.parse(readFileSync(file, "utf8"));
+// t50: 증거 사진 판별표 { 사진주소: 시설키 } — 판별을 통과한 사진만 카드에 쓴다.
+const vf = new URL("../data/photo-verdicts.json", import.meta.url);
+globalThis.__UQ_PHOTO_OK = existsSync(vf) ? JSON.parse(readFileSync(vf, "utf8")) : {};
+const cand = [];
 const evidence = {};
 const cards = {}; // t47u: 카드용 ‘왜 특별한지’ 문장·사진(unique-cards.json)
 const counts = Object.fromEntries(UNIQUE_CATS.map((c) => [c.id, 0]));
@@ -25,12 +29,13 @@ for (const c of camps) {
   c.uq = ids;
   evidence[c.id] = r;
   const uc = uniqueCard(c, det, r);
-  if (uc) cards[c.id] = uc;
+  if (uc) { if (uc.pc) { for (const x of uc.pc) cand.push({ id: c.id, ...x }); delete uc.pc; } cards[c.id] = uc; }
   for (const id of ids) counts[id]++;
 }
 writeFileSync(file, JSON.stringify(camps));
 writeFileSync(join(dir, "unique-camps.json"), JSON.stringify({ generated_at: new Date().toISOString(), cats: UNIQUE_CATS.map(({ id, label }) => ({ id, label })), counts, total: Object.keys(evidence).length, evidence }));
 writeFileSync(join(dir, "unique-cards.json"), JSON.stringify(cards));
+if (process.argv.includes("--photo-candidates")) writeFileSync(process.argv[process.argv.indexOf("--photo-candidates") + 1], JSON.stringify(cand));
 const withT = Object.values(cards).filter((x) => x.m === "list").length, withP = Object.values(cards).filter((x) => x.p).length;
 console.log(`이색 카드 근거: 목록형 ${withT} · 문장형 ${Object.keys(cards).length - withT}/${Object.keys(cards).length} · 사진 ${withP}`);
 console.log(`이색 캠핑장 ${Object.keys(evidence).length}곳:`, UNIQUE_CATS.map((x) => `${x.label} ${counts[x.id]}`).join(" · "));
