@@ -5,7 +5,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildProfile, PROFILE_FIELDS, compactTimes, openMonthsOf } from "../lib/campground-profile.mjs";
+import { buildProfile, PROFILE_FIELDS, compactTimes, openMonthsOf, summaryOf, tagsOf } from "../lib/campground-profile.mjs";
 import { extractSiteDetails } from "../lib/operator-site.mjs";
 import { sentences } from "../lib/spec-extractor.mjs";
 
@@ -55,6 +55,17 @@ for (const c of camps) {
   const imageOf = (q) => site?.snippets?.find((s) => s.text === q)?.image ?? null;
   const intro = d?.intro ? extractSiteDetails(sentences(d.intro)) : null;
   const p = buildProfile(c, d, details, { detailDate: site?.checked_at ?? null, urlOf, imageOf, intro });
+  // 재계산기가 아직 이해하지 못하는 수기·운영자 확정값은 누적 정책대로 보존한다.
+  // registry/curated-pins.json의 apply-pins가 뒤에서 한 번 더 덧씌우지만, 여기서도
+  // 기존 pinned 필드를 잃지 않게 해야 PR field-guard와 증분 발행 사이에 공백이 생기지 않는다.
+  for (const [code, old] of Object.entries(d?.profile?.fields ?? {})) {
+    if (old?.pinned && !p.fields[code]) p.fields[code] = structuredClone(old);
+  }
+  p.tags = tagsOf(c, p.fields, details, intro);
+  p.summary = summaryOf(p.fields);
+  const known = PROFILE_FIELDS.filter(([code]) => p.fields[code]).length;
+  const facts = PROFILE_FIELDS.filter(([code]) => p.fields[code] && p.fields[code].grade !== "MENTION" && p.fields[code].grade !== "REFERENCE").length;
+  p.score = { known, facts, total: PROFILE_FIELDS.length };
   p.generated_at = now;
   const price = compactPrice(p.fields.PRICE, now);
   c.pf = { s: p.summary, t: p.tags.map((t) => t.code), k: p.score.facts, ...(price ? { p: price } : {}) };
