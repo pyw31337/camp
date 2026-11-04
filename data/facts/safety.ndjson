@@ -1833,6 +1833,7 @@
 {"cid":"7502","attr":"SAFETY_FIRE_SENSOR","value":18,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7502","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"7506","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
+{"cid":"7509","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"7528","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"7536","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"7539","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
@@ -5544,6 +5545,7 @@
 {"cid":"102032","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"102034","attr":"SAFETY_EXTINGUISHER","value":25,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102034","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
+{"cid":"102035","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"102038","attr":"SAFETY_EXTINGUISHER","value":10,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102038","attr":"SAFETY_FIRE_WATER","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102038","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
@@ -5895,3 +5897,4 @@
 {"cid":"102378","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"102379","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
 {"cid":"102380","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}
+{"cid":"102381","attr":"SAFETY_INSURANCE","value":true,"grade":"CONFIRMED","src":"gocamping","text":"영업배상책임보험 가입(고캠핑 등록)"}

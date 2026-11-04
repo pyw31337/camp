@@ -4692,11 +4692,11 @@
 {"cid":"3551","attr":"HOMEPAGE","value":"http://jsimc.or.kr/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3551","attr":"HOMEPAGE","value":"http://www.jsimc.or.kr/layout/basic/page/page1/page01.html","grade":"CONFIRMED","src":"naver_local","url":"http://www.jsimc.or.kr/layout/basic/page/page1/page01.html","at":"2026-10-16T06:30:40.416Z","text":"숙박>캠핑,야영장"}
 {"cid":"3551","attr":"LICENSE_DATE","value":"2015-07-30","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"3551","attr":"OPERATOR_ORG","value":"정선군시설관리공단","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"3551","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3551","attr":"OPERATOR_ORG","value":"전증표","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3551","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3551","attr":"PHONE","value":"033-560-3413","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3551","attr":"STAFF_ONSITE","value":4,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"3551","attr":"TOURISM_BIZ_NO","value":"2015-15","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"3551","attr":"TOURISM_BIZ_NO","value":"2015000014","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3556","attr":"HOMEPAGE","value":"http://www.hwawang.or.kr/main/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"3556","attr":"HOMEPAGE","value":"https://hwawang.foresttrip.go.kr","grade":"CONFIRMED","src":"naver_local","url":"https://hwawang.foresttrip.go.kr","at":"2026-10-16T06:40:39.087Z","text":"자연명소>휴양림,산림욕장"}
 {"cid":"3556","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/20271451","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/20271451","at":"2026-10-16T05:36:57.308Z","text":"여행 > 관광,명소 > 자연휴양림"}
@@ -5145,7 +5145,7 @@
 {"cid":"6975","attr":"HOMEPAGE","value":"http://www.jsimc.or.kr/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6975","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/21426512","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/21426512","at":"2026-10-16T05:32:43.959Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"6975","attr":"LICENSE_DATE","value":"2015-07-21","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"6975","attr":"OPERATOR_ORG","value":"정선시설관리공단","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"6975","attr":"OPERATOR_ORG","value":"전증표","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6975","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6975","attr":"PHONE","value":"033-560-3464","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"6975","attr":"TOURISM_BIZ_NO","value":"2015000019","grade":"CONFIRMED","src":"gocamping"}
@@ -6292,6 +6292,12 @@
 {"cid":"7506","attr":"LICENSE_DATE","value":"2018-12-28","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7506","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7506","attr":"PHONE","value":"1688-0872-","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7509","attr":"HOMEPAGE","value":"https://www.daonsup.com/","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7509","attr":"LICENSE_DATE","value":"2022-08-15","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7509","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7509","attr":"PHONE","value":"044-868-7323","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7509","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"7509","attr":"TOURISM_BIZ_NO","value":"2022000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7528","attr":"HOMEPAGE","value":"http://www.junopartners.co.kr/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"7528","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/243820532","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/243820532","at":"2026-10-16T05:33:54.170Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"7528","attr":"LICENSE_DATE","value":"2019-02-07","grade":"CONFIRMED","src":"gocamping"}
@@ -11538,6 +11544,7 @@
 {"cid":"100843","attr":"LICENSE_DATE","value":"2023-03-23","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100843","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100843","attr":"PHONE","value":"1522-3726-","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100843","attr":"TOURISM_BIZ_NO","value":"2023000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100844","attr":"HOMEPAGE","value":"http://www.hthouse.co.kr/","grade":"CONFIRMED","src":"naver_local","url":"http://www.hthouse.co.kr/","at":"2026-10-24T21:17:47.974Z","text":"숙박>펜션"}
 {"cid":"100844","attr":"HOMEPAGE","value":"https://htcamp.modoo.at/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100844","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/279375199","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/279375199","at":"2026-10-24T21:10:35.488Z","text":"여행 > 숙박 > 야영,캠핑장"}
@@ -17695,7 +17702,7 @@
 {"cid":"102005","attr":"STAFF_ONSITE","value":6,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102005","attr":"TOURISM_BIZ_NO","value":"2025000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102006","attr":"HOMEPAGE","value":"http://www.whitecamp.co.kr","grade":"CONFIRMED","src":"naver_local","url":"http://www.whitecamp.co.kr","at":"2026-10-16T06:20:40.254Z","text":"숙박>캠핑,야영장"}
-{"cid":"102006","attr":"HOMEPAGE","value":"http://www.whitecamp.co.kr/","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102006","attr":"HOMEPAGE","value":"https://www.instagram.com/2025whitecamp","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102006","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1337196359","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1337196359","at":"2026-10-16T05:34:21.707Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"102006","attr":"LICENSE_DATE","value":"2025-10-02","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102006","attr":"OPERATOR_ORG","value":"김욱현","grade":"CONFIRMED","src":"gocamping"}
@@ -17866,7 +17873,7 @@
 {"cid":"102034","attr":"TOURISM_BIZ_NO","value":"일반야영장 : 2025000001, 자동차야영장 : 2025000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102035","attr":"LICENSE_DATE","value":"2025-10-28","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102035","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102035","attr":"TOURISM_BIZ_NO","value":"2025-1","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102035","attr":"TOURISM_BIZ_NO","value":"2025000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102036","attr":"HOMEPAGE","value":"http://WWW.돌개마실캠핑장.com","grade":"CONFIRMED","src":"naver_local","url":"http://WWW.돌개마실캠핑장.com","at":"2026-10-16T06:26:25.813Z","text":"숙박>캠핑,야영장"}
 {"cid":"102036","attr":"LICENSE_DATE","value":"2025-10-01","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102036","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
@@ -19222,6 +19229,9 @@
 {"cid":"102380","attr":"LICENSE_DATE","value":"2026-10-22","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102380","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102380","attr":"TOURISM_BIZ_NO","value":"2026000001","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102381","attr":"LICENSE_DATE","value":"2026-10-29","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102381","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102381","attr":"TOURISM_BIZ_NO","value":"2026000001","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"hangang-banpo","attr":"HOMEPAGE","value":"http://hangang.seoul.go.kr/archives/46727","grade":"CONFIRMED","src":"naver_local","url":"http://hangang.seoul.go.kr/archives/46727","at":"2026-10-24T21:18:00.663Z","text":"여행,명소>시민공원"}
 {"cid":"hangang-banpo","attr":"HOMEPAGE","value":"https://hangang.seoul.go.kr/www/contents/646.do?mid=427","grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-11-04"}
 {"cid":"hangang-banpo","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-11-04"}
