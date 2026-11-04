@@ -76,6 +76,9 @@ jobs:
       - name: Pick card photos for places without official photos
         continue-on-error: true
         run: node scripts/pick-card-fallback.mjs
+      - name: Report thumbnail coverage and retry backlog
+        if: always()
+        run: node scripts/report-thumbnail-coverage.mjs
       - name: Commit registry
         if: always()
         run: |
@@ -86,6 +89,7 @@ jobs:
           [ -f registry/booking-verify.json ] && git add registry/booking-verify.json
           [ -f registry/portal-directory.json ] && git add registry/portal-directory.json
           [ -f registry/card-fallback.json ] && git add registry/card-fallback.json
+          [ -f registry/thumbnail-coverage.json ] && git add registry/thumbnail-coverage.json
           [ -f registry/photo-judgments.json ] && git add registry/photo-judgments.json
           if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
           git commit -m "chore(data): refresh link health"
