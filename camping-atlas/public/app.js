@@ -634,7 +634,7 @@ const THEMES = [
 ];
 const THEME_FILES = {
   POPULAR: "popular.webp",
-  UNIQUE: "unique.webp", // t45u: 글램핑과 같던 썸네일 → 이색 전용 이미지(AI 생성, 글자 없음)
+  UNIQUE: "unique-onsen.webp", // t47u: 돔·트리하우스가 있어 글램핑처럼 보이던 썸네일 → 노천탕 이미지(AI 생성, 글자 없음, 새 파일명으로 캐시 무효화)
   WINTER: "winter.webp",
   VALLEY: "valley.webp",
   FOREST: "forest.webp",
