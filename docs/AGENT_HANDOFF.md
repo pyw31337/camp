@@ -1069,6 +1069,14 @@
 - 조건으로 찾기 모달도 동일한 8개 그룹을 사용한다. 충북·충남 등 하위 시도는 충청으로 묶어 중복 기준을 없앴고, 기존 개별 시도 및 `서울·경기` URL은 새 그룹으로 정규화한다.
 - 선택 상태는 `S.areas`와 쉼표 구분 URL(`area=서울,경기`, `sido=서울,경기`)로 보존하며, 기존 단일 지역 화면과 지도 범위 맞춤도 함께 호환한다.
 
+## 📌 자동화 운영 구조 통합 (2026-11-05, Codex)
+
+- 데이터 writer workflow의 concurrency 그룹을 `letscamp-data-publish` 하나로 통합했다. 사진 브랜치는 `letscamp-media-publish`로 분리해 동시에 같은 브랜치를 쓰지 않는다.
+- `pipeline/scripts/check-automation-governance.mjs`가 새 writer workflow의 공유 큐 누락과 `cancel-in-progress: true`를 CI에서 차단한다.
+- `pipeline/scripts/release-gate.mjs`를 데이터 발행 직전에 추가했다. 중복 ID·이름 누락·좌표 범위·카탈로그 급감은 `RELEASE HOLD`로 격리하고, 수집 후보는 기존 review/enrichment queue에 남긴다.
+- 맥미니 `nightshift`는 자동 발견된 launchd/cron 예약 시각만으로 하루 전체를 막지 않고, 실제 프로세스·부하와 소유자가 직접 적은 `avoid.txt` 예약을 기준으로 양보한다. CultureFlow·Newsboard 등 타 서비스 작업은 건드리지 않는다.
+- 이번 변경은 데이터 병합 정책을 바꾸지 않으며, 기존 값을 삭제하거나 리셋하지 않는다.
+
 ## 📌 GitHub Actions 데이터 동기화 중단 방지 (2026-11-05, Codex)
 
 - `Data sync` 실행 41902701773이 미디어 브랜치 `git fetch`/R2 사진 동기화에서 하루 이상 응답하지 않아 취소했다. 데이터 동기화 전체가 외부 미디어 단계에 붙잡히는 구조가 반복 실패의 원인이었다.

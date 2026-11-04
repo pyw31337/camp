@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // 맥미니 야간·주말 데이터 품질 작업(소유자 2026-10-23). launchd가 15분마다 깨우고, 이 파일이 “지금 돌려도 되나”를 판단한다.
 //  - 시간: 평일 18:00~다음 날 08:00, 토·일·공휴일(holidays-kr.json + ~/.letscamp/holidays.txt)은 하루 종일
-//  - 맥에 원래 있던 작업(detect-existing.mjs가 찾은 launchd·cron 시각과 프로세스)과 겹치면 쉬고, 부하가 높아도 쉰다
+//  - 실제 실행 중인 작업·CPU 부하와 겹치면 쉬고, 사용자가 avoid.txt에 직접 적은 예약만 강제로 피한다.
+//    자동 발견 시각만으로 하루 전체를 막지 않아 외부 작업이 많은 맥에서도 실행된다.
 //  - 작업 중에도 1분마다 확인해 다른 작업이 시작되면 양보(중단·저장, 다음 차례에 이어서)
 //  - 결과는 데이터 봇과 같은 길로 올린다(.github/scripts/land-on-main.sh → 검사 통과 후 main 병합, field-guard로 값 보존)
 // 사용: node nightshift.mjs [--dry-run] [--force <작업id>]
@@ -81,7 +82,7 @@ const w = window(now, { holidays });
 const dayOff = isDayOff(kst(now).ymd, holidays);
 if (!FORCE) {
   if (!w.open) process.exit(0);
-  const clash = clashesWith(now, busy.schedule ?? []);
+  const clash = clashesWith(now, (busy.schedule ?? []).filter((s) => s.source !== "auto"));
   if (clash) { log(`쉼: 기존 작업 ${clash.label} 시간`); process.exit(0); }
   const st = idle({ load1: loadavg()[0], cpus: cpus().length, running: running() });
   if (!st.ok) { log(`쉼: ${st.why}`); process.exit(0); }
