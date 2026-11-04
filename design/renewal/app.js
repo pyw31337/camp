@@ -678,7 +678,7 @@ function uniqueWhyHtml(c) {
     : ev.m === "text" ? `<p class="uq-sent">${ic(UQ_ICON[ev.it[0]?.k] ?? "spark")}<span>${esc(ev.t)}</span></p>`
     : `<ul class="uq-list">${ev.it.map((x) => `<li>${ic(x.ic ?? UQ_ICON[x.k] ?? "spark")}<b>${esc(x.n)}</b>${x.d ? `<small>${esc(x.d)}</small>` : ""}</li>`).join("")}</ul>`;
   return `<div class="card-group uq-why${p ? " has-ph" : ""}">
-    <div class="uq-main">${body}${ev?.s ? `<small class="uq-src">${esc(ev.s)} 분석</small>` : ""}</div>
+    <div class="uq-main">${body}</div>
     ${p ? `<a class="uq-ev-ph" href="${esc(p.u || "#")}" target="_blank" rel="noopener" aria-label="후기 사진 원문 보기"><img src="${esc(p.th)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.uq-why').classList.remove('has-ph');this.parentElement.remove()"></a>` : ""}
   </div>`;
 }

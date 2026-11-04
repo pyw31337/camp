@@ -4411,10 +4411,11 @@ img.img-gone { visibility: hidden; }
 .uq-why.has-ph { grid-template-columns: 1fr 64px; }
 .uq-main { min-width: 0; display: grid; gap: 6px; }
 .uq-list { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; }
-.uq-list li { display: flex; flex-wrap: wrap; align-items: center; column-gap: 6px; row-gap: 0; min-width: 0; font-size: .86rem; line-height: 1.4; }
+.uq-list li { position: relative; display: block; min-width: 0; padding-left: 22px; font-size: .86rem; line-height: 1.45; word-break: keep-all; overflow-wrap: anywhere; }
+.uq-list li > .ic { position: absolute; left: 0; top: 2px; }
 .uq-list li .ic, .uq-sent .ic, .uq-tag .ic { width: 16px; height: 16px; flex: none; color: var(--accent); }
 .uq-list b { color: var(--ink); font-weight: 700; word-break: keep-all; }
-.uq-list small { color: var(--ink-3); font-size: .74rem; font-weight: 500; }
+.uq-list small { margin-left: 6px; color: var(--ink-3); font-size: .76rem; font-weight: 500; }
 .uq-sent { display: flex; gap: 6px; align-items: flex-start; margin: 0; color: var(--ink); font-size: .86rem; font-weight: 600; line-height: 1.45; word-break: keep-all; }
 .uq-sent .ic { margin-top: 2px; }
 .uq-src { color: var(--ink-3); font-size: .68rem; font-weight: 500; }

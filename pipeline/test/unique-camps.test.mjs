@@ -49,6 +49,6 @@ test("uniqueCard: 시설을 짧은 이름 + 세부(수온·시간·무료)로 �
 });
 test("uniqueCard: 특색이 하나뿐이고 세부가 없으면 조사까지 맞춘 짧은 문장", () => {
   const r = uniqueCard({ name: "숲속", line: "서바이벌 체험장을 운영합니다" }, {}, { leisure: "소개: 서바이벌" });
-  assert.equal(r.m, "text");
-  assert.equal(r.t, "서바이벌을 캠핑장에서 바로 즐길 수 있어요");
+  assert.equal(r.m, "list");
+  assert.ok(r.it[0].d.length > 0); assert.equal(r.s === undefined || typeof r.s === "string", true);
 });

@@ -111,6 +111,67 @@ function detailsOf(win, k) {
   if (/(?:어린이|아이|초등|키즈)\s*(?:전용|대상|만)/.test(win)) d.who = "어린이 대상";
   return d;
 }
+
+// t49u: 태그 오른쪽 설명 — 그 캠핑장 글·후기에서 시설 바로 곁(±25자)에 나온 특징을 표로 뽑아 투표한다.
+const ANIMALS = [["토끼", /토끼/], ["염소", /염소/], ["양", /양 ?떼|(?<![가-힣])양(?:들|이랑|에게|한테|과|와)/], ["알파카", /알파카/], ["오리", /(?<![가-힣])오리(?!지|엔|온|털)/], ["거위", /거위/], ["미니피그", /미니 ?피그/], ["사슴", /사슴/], ["당나귀", /당나귀/], ["공작", /공작(?:새)?(?![가-힣]*(?:소|실|체험))/], ["조랑말", /조랑말/], ["앵무새", /앵무/], ["닭", /(?<![가-힣])닭(?!갈비|강정|볶음|백숙)/]];
+const QUAL = [
+  [/(산|숲|계곡|바다|호수|강|노을|별|논밭|들판)\s*(?:뷰|전망|이 ?보이|이 ?한눈|을 ?바라|를 ?바라|풍경|을 ?보며|를 ?보며)/, (m) => `${m[1]} 전망`, ["hotspring", "spa", "warmpool", "pool", "treehouse", "stay"]],
+  [/사이트(?:마다|별)|객실(?:마다|별)|동(?:마다|별)|프라이빗|단독 ?(?:사용|이용)/, "사이트별 전용", ["hotspring", "spa", "warmpool", "pool"]],
+  [/히노끼|편백/, "편백 욕조", ["hotspring", "spa"]],
+  [/족욕/, "족욕 가능", ["hotspring"]],
+  [/천연 ?온천|온천수/, "천연 온천수", ["hotspring", "spa", "warmpool"]],
+  [/건식|습식/, "건·습식 사우나", ["spa"]],
+  [/(?<![가-힣])실내/, "실내", ["pool", "kidscafe", "indoorplay", "spa", "leisure"]],
+  [/야외|루프 ?탑|옥상/, "야외", ["warmpool", "spa", "kidscafe"]],
+  [/2층|복층|층 ?규모/, "2층 규모", ["kidscafe", "indoorplay", "treehouse"]],
+  [/넓|대형|규모가 ?크|큰 ?규모/, "넓은 규모", ["pool", "warmpool", "kidscafe", "indoorplay", "animal", "valley"]],
+  [/미온수|온수|따뜻|따듯/, "온수", ["pool"]],
+  [/사계절|4계절|연중|겨울에도/, "사계절 이용", ["warmpool", "pool", "kidscafe", "leisure", "hotspring"]],
+  [/유아 ?풀|어린이 ?풀|키즈 ?풀|유아용|얕은|수심이 ?얕/, "유아풀 따로", ["pool", "warmpool"]],
+  [/깊은|성인 ?풀|수심 ?1\.\d|수심이 ?깊/, "성인풀 따로", ["pool", "warmpool"]],
+  [/그늘|파라솔|선베드|썬베드|썬 ?베드/, "그늘막·선베드", ["pool", "warmpool"]],
+  [/깨끗|청결|수질|소독/, "깨끗한 수질 관리", ["pool", "warmpool", "hotspring", "spa"]],
+  [/트램펄린|방방|에어 ?바운스|트램폴린/, "트램펄린", ["kidscafe", "indoorplay"]],
+  [/편백 ?놀이|편백 ?풀|볼 ?풀/, "볼풀·편백놀이", ["kidscafe", "indoorplay"]],
+  [/보드 ?게임|책|도서/, "책·보드게임", ["kidscafe", "indoorplay"]],
+  [/(?:부모|어른|보호자)[^.]{0,8}(?:쉬|휴식|카페|커피)|커피/, "보호자 카페 공간", ["kidscafe"]],
+  [/예약제|사전 ?예약|대관/, "예약제", ["hotspring", "spa", "warmpool", "pool", "horse", "farm", "leisure"]],
+  [/시간제|(?:1|한) ?시간 ?(?:이용|씩)|타임제/, "시간제 이용", ["hotspring", "spa", "warmpool", "pool", "kidscafe"]],
+  [/24 ?시간/, "24시간 이용", ["spa", "privbath", "kidscafe", "indoorplay"]],
+  [/트랙|승마장|마장/, "전용 승마 트랙", ["horse"]],
+  [/조랑말|포니/, "포니 승마", ["horse"]],
+  [/아이|어린이|초등|유아/, "아이도 탈 수 있음", ["horse"]],
+  [/아이|어린이|초등|유아/, "아이와 함께 즐기기", ["leisure"]],
+  [/교관|강사|코치|안전 ?요원/, "강사 동행", ["horse", "leisure"]],
+  [/(?:캠핑장|단지|부지) ?(?:안|내)|도보|걸어서/, "캠핑장 안에서", ["leisure", "horse", "farm", "animal"]],
+  [/(봄|여름|가을|겨울) ?(?:철|시즌|에만|한정)/, (m) => `${m[1]} 한정`, ["farm", "leisure"]],
+  [/주말/, "주말 운영", ["farm", "animal", "horse", "kidscafe"]],
+  [/수확|직접 ?(?:따|캐|만들)/, "직접 수확·제작", ["farm"]],
+  [/가져|챙겨|포장/, "결과물 가져가기", ["farm"]],
+  [/냉난방|에어컨|난방|보일러/, "냉난방 완비", ["stay", "treehouse"]],
+  [/침대|침구|매트리스/, "침구 완비", ["stay", "treehouse"]],
+  [/숙박|1박|객실/, "숙박 가능", ["treehouse"]],
+  [/얕|수심/, "얕은 물놀이", ["valley"]],
+  [/맑|깨끗|1급수/, "맑은 물", ["valley"]],
+  [/물소리|계곡 ?소리/, "물소리 들리는 사이트", ["valley"]],
+  [/깨끗|청결|새 ?건물|신축/, "깨끗하게 관리", ["privbath"]],
+  [/온수|따뜻/, "온수 잘 나옴", ["privbath"]],
+];
+const GEN = { hotspring: "따뜻한 탕에서 쉬어가기", spa: "캠핑 피로 풀기 좋음", warmpool: "선선한 날에도 물놀이", pool: "캠핑장 안 물놀이", horse: "캠핑장에서 말 타기 체험", animal: "아이와 동물 교감", kidscafe: "날씨 상관없이 놀 수 있음", indoorplay: "비 와도 실내에서 놀기", treehouse: "나무 위 이색 공간", stay: "색다른 숙소에서 하룻밤", leisure: "캠핑장에서 바로 즐기는 액티비티", farm: "가족 체험 프로그램", valley: "사이트 옆 계곡 물놀이", privbath: "공용 대신 사이트별 사용" };
+function qualsOf(all, k, name) {
+  const v = new Map();
+  for (const { w, hit } of all) {
+    const ww = near(w, w.indexOf(hit), hit.length, 25), seen = new Set();
+    for (const [re, ph, ks] of QUAL) { if (!ks.includes(k)) continue; const m = re.exec(ww); if (!m) continue; const t = typeof ph === "function" ? ph(m) : ph; if (seen.has(t)) continue; seen.add(t); v.set(t, (v.get(t) ?? 0) + 1); }
+    if (k === "animal") for (const [a, are] of ANIMALS) if (are.test(ww) && !seen.has(a)) { seen.add(a); v.set(`@${a}`, (v.get(`@${a}`) ?? 0) + 1); }
+  }
+  const out = [], an = [...v].filter(([t]) => t[0] === "@").sort((a, b) => b[1] - a[1]).slice(0, 3).map(([t]) => t.slice(1));
+  if (an.length) out.push(`${an.join("·")} 만나기`);
+  const rest = [...v].filter(([t]) => t[0] !== "@").sort((a, b) => b[1] - a[1]).map(([t]) => t)
+    .filter((t) => !(t === "실내" && /실내/.test(name)) && !(t === "사이트별 전용" && /개별/.test(name)) && !(t === "넓은 규모" && /대형/.test(name)) && !(t === "온수" && /온수/.test(name)) && !(t === "사계절 이용" && /사계절/.test(name)) && !(t === "편백 욕조" && /히노끼/.test(name)) && !(t === "포니 승마" && /포니/.test(name)));
+  if (rest.includes("실내") && rest.includes("야외")) rest.splice(rest.indexOf("야외"), 1);
+  return [...out, ...rest].slice(0, 2);
+}
 export function uniqueCard(c, det, res) {
   const ids = RARE_FIRST.filter((id) => res[id]);
   if (!ids.length) return null;
@@ -151,7 +212,11 @@ export function uniqueCard(c, det, res) {
     const pick = (dk) => [...(vote[dk] ?? [])].sort((a, b) => b[1] - a[1])[0]?.[0];
     const dParts = [pick("temp"), pick("hour"), pick("price"), pick("paid") && !pick("free") ? "" : pick("free"), pick("season"), pick("who")].filter(Boolean);
     const extra = (f.extra ?? []).filter(([re]) => all.some(({ w }) => re.test(w))).map((x) => x[1]);
-    items.push({ k: f.k, n: name, d: [...extra, ...dParts].join(" · "), w: ow.length * 3 + nRv, ...(f.ic ? { ic: f.ic } : {}) });
+    const q = qualsOf(all, f.k, name).filter((x) => !extra.includes(x) && !(x === "온수" && dParts.some((p) => /℃/.test(p))));
+    let parts = [...extra, ...q, ...dParts].filter((x, i, a) => a.indexOf(x) === i).slice(0, 3);
+    const spec = parts.length > 0;
+    if (!spec) parts = [/개별/.test(name) ? "다른 손님과 섞이지 않는 프라이빗 이용" : (GEN[f.k] ?? "캠핑장 안에서 이용")];
+    items.push({ k: f.k, n: name, d: parts.join(" · "), ...(spec ? {} : { g: 1 }), w: ow.length * 3 + nRv, ...(f.ic ? { ic: f.ic } : {}) });
   }
   if (!items.length) return null;
   // 수영장은 온수풀이 있으면 합친다(같은 시설 중복 방지)
@@ -164,7 +229,7 @@ export function uniqueCard(c, det, res) {
   const nOwn = own.length ? 1 : 0;
   const s = [own.some((t) => FEAT.some((f) => ids.includes(f.k) && f.re.test(t))) ? "업장 소개" : "", rvU.length ? `후기 ${rvU.length}건` : ""].filter(Boolean).join(" · ");
   const real = items.filter((x) => x.k !== "privbath");
-  const listMode = items.length >= 2 || items.some((x) => x.d);
+  const listMode = true; // t49u: 모든 카드를 태그+설명 목록으로
   let t = "";
   if (!listMode) {
     const x = items[0];
