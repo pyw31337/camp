@@ -1076,3 +1076,8 @@
 - `pipeline/test/data-sync-safety.test.mjs`에 각 시간 제한과 환경 변수의 정적 회귀 검사를 추가했다.
 - 과거 오류 중 무료 공원 만료 제약은 PR #589, field-guard 오탐은 PR #595에서 이미 수정됐고, Pages 배포 timeout은 이후 재시도 배포가 성공한 일시 장애로 확인했다.
 - 검증: `node pipeline/scripts/check-dayuse-idempotent.mjs`, `pipeline/test/data-sync-safety.test.mjs`, Web quality/Registry CI를 PR에서 확인한다.
+
+## 📌 원격 브랜치 조회 타임아웃 보강 (2026-11-05, Codex)
+
+- 미디어 브랜치의 `git ls-remote`도 원격 장애 시 무기한 대기할 수 있어 5분 제한을 추가했다. 수집 캐시 브랜치 조회도 같은 제한을 적용했다.
+- 제한에 걸리면 해당 선택 단계만 건너뛰고 기존 `continue-on-error` 흐름으로 텍스트·공공데이터 동기화를 계속한다.
