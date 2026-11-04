@@ -155,7 +155,7 @@ jobs:
           # 이미 수집한 텍스트·공공데이터 발행은 계속한다.
           MEDIA_FETCH_TIMEOUT="${MEDIA_FETCH_TIMEOUT_SECONDS:-300}"
           MEDIA_DIR="$RUNNER_TEMP/media"
-          if git ls-remote --exit-code --heads origin media >/dev/null 2>&1; then
+          if timeout --foreground "$MEDIA_FETCH_TIMEOUT" git ls-remote --exit-code --heads origin media >/dev/null 2>&1; then
             timeout --foreground "$MEDIA_FETCH_TIMEOUT" git fetch --depth=1 origin +media:refs/remotes/origin/media
             timeout --foreground 120 git worktree add -B media "$MEDIA_DIR" origin/media
           else
@@ -252,7 +252,7 @@ jobs:
         # collected-data 브랜치(단일 커밋)가 원본이다. 다른 에이전트도 git fetch origin collected-data로 바로 읽는다.
         continue-on-error: true
         run: |
-          if git ls-remote --exit-code --heads origin collected-data >/dev/null 2>&1; then
+          if timeout --foreground 300 git ls-remote --exit-code --heads origin collected-data >/dev/null 2>&1; then
             git fetch -q --depth=1 origin +collected-data:refs/remotes/origin/collected-data
             for f in social-search web-mentions; do
               if git cat-file -e "origin/collected-data:cache/$f.json.gz" 2>/dev/null; then
@@ -310,7 +310,7 @@ jobs:
         continue-on-error: true
         run: |
           DIR="$RUNNER_TEMP/collected"
-          if git ls-remote --exit-code --heads origin collected-data >/dev/null 2>&1; then
+          if timeout --foreground 300 git ls-remote --exit-code --heads origin collected-data >/dev/null 2>&1; then
             git fetch -q --depth=1 origin +collected-data:refs/remotes/origin/collected-data
             git worktree add -q -B collected-data "$DIR" origin/collected-data
           else

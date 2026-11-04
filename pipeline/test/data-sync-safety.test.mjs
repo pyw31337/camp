@@ -54,6 +54,7 @@ test("media guard는 매니페스트 밖 사진 파일이 사라지는 것도 �
 test("media 브랜치가 멈춰도 전체 동기화를 붙잡지 않는다", () => {
   const wf = readFileSync(new URL("../../.github/workflows/data-sync.yml", import.meta.url), "utf8");
   assert.match(wf, /MEDIA_FETCH_TIMEOUT_SECONDS/);
+  assert.match(wf, /timeout --foreground "\$MEDIA_FETCH_TIMEOUT" git ls-remote/);
   assert.match(wf, /timeout --foreground "\$MEDIA_FETCH_TIMEOUT"/);
   assert.match(wf, /timeout --foreground 300 bash \.github\/scripts\/media-r2\.sh pull/);
 });
