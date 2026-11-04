@@ -2485,6 +2485,122 @@ function heroShaft(rgb) {
     try { g.filter = "none"; } catch {}
   });
 }
+// 뾰족한 4방향 별(반짝!)
+function heroStar4(rgb) {
+  return heroSprite("star4" + rgb, 64, (g, S) => {
+    const c = S / 2;
+    const gr = g.createRadialGradient(c, c, 0, c, c, c * 0.5);
+    gr.addColorStop(0, "rgba(255,255,255,0.9)"); gr.addColorStop(0.3, `rgba(${rgb},0.35)`); gr.addColorStop(1, `rgba(${rgb},0)`);
+    g.fillStyle = gr; g.fillRect(0, 0, S, S);
+    g.fillStyle = "#fff";
+    const L = c * 0.98, t = c * 0.07;
+    g.beginPath(); g.moveTo(c, c - L); g.quadraticCurveTo(c + t, c - t, c + L, c); g.quadraticCurveTo(c + t, c + t, c, c + L); g.quadraticCurveTo(c - t, c + t, c - L, c); g.quadraticCurveTo(c - t, c - t, c, c - L); g.fill();
+    g.globalAlpha = 0.55; const L2 = c * 0.42;
+    g.beginPath(); g.moveTo(c - L2, c - L2); g.lineTo(c + t * 0.6, c - t * 0.6); g.lineTo(c + L2, c + L2); g.lineTo(c - t * 0.6, c + t * 0.6); g.closePath(); g.fill();
+    g.beginPath(); g.moveTo(c + L2, c - L2); g.lineTo(c + t * 0.6, c + t * 0.6); g.lineTo(c - L2, c + L2); g.lineTo(c - t * 0.6, c - t * 0.6); g.closePath(); g.fill();
+  });
+}
+// 짧고 긴 불티 막대(머리는 희고 꼬리는 주황→투명)
+function heroStreak(rgb) {
+  return heroSpriteWH("streak" + rgb, 64, 12, (g, w, h) => {
+    const cy = h / 2;
+    const lg = g.createLinearGradient(0, 0, w, 0);
+    lg.addColorStop(0, `rgba(${rgb},0)`); lg.addColorStop(0.55, `rgba(${rgb},0.75)`); lg.addColorStop(0.9, "rgba(255,250,225,1)"); lg.addColorStop(1, "rgba(255,255,255,0.9)");
+    try { g.filter = "blur(1.2px)"; } catch {}
+    g.fillStyle = lg; g.beginPath(); g.moveTo(2, cy); g.lineTo(w * 0.6, cy - 2); g.lineTo(w - 3, cy - 1.6); g.arc(w - 3, cy, 1.6, -Math.PI / 2, Math.PI / 2); g.lineTo(w * 0.6, cy + 2); g.closePath(); g.fill();
+    try { g.filter = "none"; } catch {}
+    g.fillStyle = lg; g.fillRect(4, cy - 0.7, w - 6, 1.4);
+  });
+}
+// 선명한 물방울(채도 높은 테두리 + 하이라이트)
+function heroDrop() {
+  return heroSprite("drop", 32, (g, S) => {
+    const c = S / 2, r = S / 2 - 2;
+    const gr = g.createRadialGradient(c - r * 0.3, c - r * 0.3, 0, c, c, r);
+    gr.addColorStop(0, "rgba(255,255,255,1)"); gr.addColorStop(0.35, "rgba(150,225,255,0.95)"); gr.addColorStop(0.85, "rgba(20,150,235,0.95)"); gr.addColorStop(1, "rgba(10,110,210,0.6)");
+    g.fillStyle = gr; g.beginPath(); g.arc(c, c, r, 0, 6.28); g.fill();
+    g.fillStyle = "rgba(255,255,255,0.95)"; g.beginPath(); g.arc(c - r * 0.35, c - r * 0.35, r * 0.25, 0, 6.28); g.fill();
+  });
+}
+// 여름 초록 잎
+function heroGreenLeaf(i) {
+  const cols = [["#43a047", "#a5d6a7"], ["#7cb342", "#dcedc8"], ["#2e7d32", "#81c784"]];
+  return heroSprite("gleaf" + i, 48, (g, S) => {
+    g.translate(S / 2, S / 2); g.rotate(-0.5);
+    const L = S * 0.44, W = S * 0.2;
+    const gr = g.createLinearGradient(-W, 0, W, 0); gr.addColorStop(0, cols[i][0]); gr.addColorStop(1, cols[i][1]);
+    g.fillStyle = gr; g.beginPath(); g.moveTo(0, -L); g.bezierCurveTo(W * 1.3, -L * 0.4, W, L * 0.5, 0, L); g.bezierCurveTo(-W, L * 0.5, -W * 1.3, -L * 0.4, 0, -L); g.fill();
+    g.strokeStyle = "rgba(240,255,220,0.8)"; g.lineWidth = 1; g.beginPath(); g.moveTo(0, -L * 0.85); g.lineTo(0, L); g.stroke();
+  });
+}
+// 형태가 잡힌 구름(블러된 뭉게 원을 겹쳐 한 번만 그림)
+function heroCloud(i) {
+  return heroSpriteWH("cloud" + i, 320, 150, (g, w, h) => {
+    const rs = [[0.3, 0.62, 0.2], [0.48, 0.45, 0.27], [0.66, 0.55, 0.22], [0.8, 0.68, 0.15], [0.18, 0.72, 0.13], [0.55, 0.7, 0.2]];
+    try { g.filter = "blur(5px)"; } catch {}
+    for (const [x, y, r] of rs) {
+      const xx = x * w + (i - 1) * 8 * Math.sin(x * 9), rr = r * w * (0.9 + 0.1 * ((i * 7 + x * 10) % 3) / 3);
+      const gr = g.createRadialGradient(xx, y * h - rr * 0.35, rr * 0.1, xx, y * h, rr);
+      gr.addColorStop(0, "rgba(255,255,255,1)"); gr.addColorStop(0.7, "rgba(248,250,255,0.95)"); gr.addColorStop(1, "rgba(215,225,240,0)");
+      g.fillStyle = gr; g.beginPath(); g.arc(xx, y * h, rr, 0, 6.28); g.fill();
+    }
+    try { g.filter = "none"; } catch {}
+    g.globalCompositeOperation = "destination-out";
+    const fl = g.createLinearGradient(0, h * 0.78, 0, h); fl.addColorStop(0, "rgba(0,0,0,0)"); fl.addColorStop(1, "rgba(0,0,0,1)");
+    g.fillStyle = fl; g.fillRect(0, h * 0.78, w, h * 0.22);
+  });
+}
+// 오로라 세로 띠
+function heroAuroraStrip() {
+  return heroSpriteWH("aurora", 8, 256, (g, w, h) => {
+    const lg = g.createLinearGradient(0, 0, 0, h);
+    lg.addColorStop(0, "rgba(170,90,255,0)"); lg.addColorStop(0.3, "rgba(150,110,255,0.35)"); lg.addColorStop(0.62, "rgba(80,255,170,0.85)"); lg.addColorStop(0.8, "rgba(60,240,160,0.4)"); lg.addColorStop(1, "rgba(40,200,140,0)");
+    g.fillStyle = lg; g.fillRect(0, 0, w, h);
+  });
+}
+// 태양 방사형 광선(회전)
+function heroRays() {
+  return heroSprite("rays", 512, (g, S) => {
+    const c = S / 2;
+    try { g.filter = "blur(6px)"; } catch {}
+    for (let i = 0; i < 18; i++) {
+      const a = (i / 18) * Math.PI * 2 + (i % 3) * 0.05, wd = i % 2 ? 0.035 : 0.06, L = c * (i % 3 === 0 ? 0.98 : 0.75);
+      const gr = g.createRadialGradient(c, c, 0, c, c, L); gr.addColorStop(0, "rgba(255,245,210,0.9)"); gr.addColorStop(1, "rgba(255,230,170,0)");
+      g.fillStyle = gr; g.beginPath(); g.moveTo(c, c); g.arc(c, c, L, a - wd, a + wd); g.closePath(); g.fill();
+    }
+    try { g.filter = "none"; } catch {}
+  });
+}
+function heroBalloon(col) {
+  return heroSpriteWH("balloon" + col, 48, 96, (g, w, h) => {
+    const cx = w / 2, cy = h * 0.3, rx = w * 0.4, ry = h * 0.27;
+    const gr = g.createRadialGradient(cx - rx * 0.35, cy - ry * 0.4, 2, cx, cy, ry * 1.1);
+    gr.addColorStop(0, "rgba(255,255,255,0.95)"); gr.addColorStop(0.25, col); gr.addColorStop(1, col);
+    g.fillStyle = gr; g.beginPath(); g.ellipse(cx, cy, rx, ry, 0, 0, 6.28); g.fill();
+    g.fillStyle = col; g.beginPath(); g.moveTo(cx - 3, cy + ry - 1); g.lineTo(cx + 3, cy + ry - 1); g.lineTo(cx, cy + ry + 5); g.closePath(); g.fill();
+    g.strokeStyle = "rgba(255,255,255,0.7)"; g.lineWidth = 1; g.beginPath(); g.moveTo(cx, cy + ry + 5); g.bezierCurveTo(cx - 5, h * 0.72, cx + 5, h * 0.82, cx - 2, h - 2); g.stroke();
+  });
+}
+function heroShape(kind, col) {
+  return heroSprite("shape" + kind + col, 40, (g, S) => {
+    const c = S / 2, r = S * 0.38;
+    g.fillStyle = col; g.strokeStyle = col; g.lineCap = "round";
+    if (kind === 0) { g.beginPath(); g.arc(c, c, r * 0.7, 0, 6.28); g.fill(); }
+    else if (kind === 1) { g.beginPath(); g.moveTo(c, c - r); g.lineTo(c + r * 0.9, c + r * 0.7); g.lineTo(c - r * 0.9, c + r * 0.7); g.closePath(); g.fill(); }
+    else if (kind === 2) { g.beginPath(); for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + (i * Math.PI) / 5, rr = i % 2 ? r * 0.45 : r; g.lineTo(c + Math.cos(a) * rr, c + Math.sin(a) * rr); } g.closePath(); g.fill(); }
+    else if (kind === 3) { g.beginPath(); g.moveTo(c, c + r * 0.8); g.bezierCurveTo(c - r * 1.3, c - r * 0.1, c - r * 0.5, c - r * 1.1, c, c - r * 0.35); g.bezierCurveTo(c + r * 0.5, c - r * 1.1, c + r * 1.3, c - r * 0.1, c, c + r * 0.8); g.fill(); }
+    else { g.lineWidth = 3; g.beginPath(); g.moveTo(c - r, c); for (let x = -r; x <= r; x += 2) g.lineTo(c + x, c + Math.sin((x / r) * Math.PI * 2) * r * 0.35); g.stroke(); }
+  });
+}
+// 렌즈 플레어(태양 → 화면 중심 반대편으로 고스트)
+function heroDrawFlare(ctx, sx, sy, w, h, inten, dot) {
+  const cx = w / 2, cy = h / 2, dx = cx - sx, dy = cy - sy;
+  const ghosts = [[0.35, 26, "255,200,120"], [0.6, 14, "180,255,200"], [0.85, 46, "255,170,110"], [1.15, 20, "160,200,255"], [1.45, 70, "255,220,160"], [1.7, 10, "255,255,255"]];
+  for (const [t, r, c] of ghosts) { ctx.globalAlpha = Math.min(1, inten * 0.6); dot(heroGlow(c, 0.3), sx + dx * t, sy + dy * t, r * Math.max(0.6, w / 1280)); }
+  ctx.globalAlpha = inten * 0.5;
+  const sp = heroSparkleSprite(); ctx.drawImage(sp, sx - w * 0.28, sy - 6, w * 0.56, 12);
+}
+let HERO_RIDER_IMG = null;
 const HERO_IMG_SIZE = { "hero-sunset-coast.webp": [2560, 1430], "hero-leisure.webp": [1920, 1080], "hero-horse.webp": [1920, 1080], "hero-lush-forest.webp": [2560, 1430], "hero-treehouse.webp": [1920, 1080], "hero-farm.webp": [1920, 1080], "hero-hotspring.webp": [1920, 1080], "hero-warmpool.webp": [1920, 1080], "hero-pool.webp": [1920, 1080] };
 const hRnd = (a, b) => a + Math.random() * (b - a);
 // 원근감: 작은 값이 많이 나오도록(멀리 있는 입자가 많게)
@@ -2556,7 +2672,7 @@ class HeroCanvasController {
     if (m.lastX > -500) { m.vx = (x - m.lastX) * 0.5; m.vy = (y - m.lastY) * 0.5; }
     m.lastX = m.x; m.lastY = m.y; m.x = x; m.y = y; m.active = true;
     const id = this.currentThemeId;
-    if (id === "riverside" && Math.random() < 0.2) this.ripples.push({ x, y, r: 2, maxR: hRnd(60, 100), alpha: 0.6 });
+    if (id === "riverside" && Math.random() < 0.35 && this.ripples.length < 40) { this.ripples.push({ x, y, r: 2, maxR: hRnd(70, 120), alpha: 0.85 }); }
     else if (id === "rainy-camp" && Math.random() < 0.3) this.ripples.push({ x, y, r: 1, maxR: hRnd(30, 50), alpha: 0.8 });
   }
   handlePointerDown(e) {
@@ -2643,17 +2759,21 @@ class HeroCanvasController {
   initStars(w, top, count) {
     for (let i = 0; i < count; i++) {
       const d = depthRnd();
-      this.stars.push({ x: Math.random() * w, y: Math.random() * top, r: 0.5 + d * 1.3, a: 0.35 + d * 0.6, ph: Math.random() * 6.28, sp: hRnd(0.6, 2.4), glow: d > 0.7 });
+      this.stars.push({ x: Math.random() * w, y: Math.random() * top, r: 0.6 + d * 1.5, a: 0.5 + d * 0.5, ph: Math.random() * 6.28, sp: hRnd(0.6, 2.4), glow: d > 0.55, sharp: d > 0.62 && Math.random() < 0.55, flash: 0 });
     }
   }
   drawStars(ctx, rgb = "255,255,255") {
-    const spr = heroGlow(rgb, 1);
+    const spr = heroGlow(rgb, 1), star4 = heroStar4(rgb);
     ctx.fillStyle = `rgb(${rgb})`;
     for (const s of this.stars) {
       const tw = 0.5 + 0.5 * Math.sin(this.time * s.sp * 2 + s.ph);
       const a = s.a * (0.25 + 0.75 * tw * tw);
       ctx.globalAlpha = a;
-      if (s.glow) this.dot(spr, s.x, s.y, s.r * 4.5);
+      // 가끔 "반짝!" 하고 크게 빛남
+      if (s.flash > 0) s.flash -= 0.035 * (this.k || 1); else if (s.glow && Math.random() < 0.0015 * (this.k || 1)) s.flash = 1;
+      const fl = s.flash > 0 ? Math.sin(s.flash * Math.PI) : 0;
+      if (s.sharp) { ctx.globalAlpha = Math.min(1, a + fl); this.dot(star4, s.x, s.y, s.r * (4 + tw * 2.5 + fl * 9)); }
+      else if (s.glow) { ctx.globalAlpha = Math.min(1, a + fl); this.dot(spr, s.x, s.y, s.r * (3.2 + fl * 6)); ctx.fillRect(s.x - s.r * 0.6, s.y - s.r * 0.6, s.r * 1.2, s.r * 1.2); }
       else ctx.fillRect(s.x - s.r / 2, s.y - s.r / 2, s.r, s.r);
     }
     ctx.globalAlpha = 1;
@@ -2678,7 +2798,7 @@ class HeroCanvasController {
   }
   makeSteam(w, h, top, initial) {
     // top: 김이 시작되는 수면 높이(0~1)
-    return { x: hRnd(-0.05, 1.05) * w, y: initial ? hRnd(h * 0.2, h) : h * hRnd(top, 1.02), r: hRnd(28, 70), vy: -hRnd(0.18, 0.45), vx: hRnd(-0.1, 0.1), life: initial ? Math.random() : 1, ph: Math.random() * 6.28, dec: hRnd(0.0016, 0.003) };
+    return { x: hRnd(-0.05, 1.05) * w, y: initial ? hRnd(h * 0.2, h) : h * hRnd(top, 1.02), r: hRnd(34, 85), vy: -hRnd(0.18, 0.45), vx: hRnd(-0.1, 0.1), life: initial ? Math.random() : 1, ph: Math.random() * 6.28, dec: hRnd(0.0016, 0.003) };
   }
   drawSteam(ctx, w, h, k, top, mx, my, hasMouse, strength = 1) {
     const puff = heroPuff();
@@ -2690,7 +2810,7 @@ class HeroCanvasController {
       if (p.life <= 0) { this.particles[i] = this.makeSteam(w, h, top, false); continue; }
       // 생겨날 때 서서히 짙어지고 올라가며 옅어짐
       const fadeIn = Math.min(1, (1 - p.life) * 6);
-      ctx.globalAlpha = Math.min(1, p.life * 1.3) * fadeIn * 0.42 * strength;
+      ctx.globalAlpha = Math.min(1, Math.min(1, p.life * 1.3) * fadeIn * 0.42 * strength);
       ctx.drawImage(puff, p.x - p.r, p.y - p.r * 0.8, p.r * 2, p.r * 1.6);
     }
     ctx.globalAlpha = 1;
@@ -2719,9 +2839,9 @@ class HeroCanvasController {
     for (const s of shafts) {
       s.ph += s.sp * k;
       const breathe = 0.5 + 0.5 * Math.sin(s.ph);
-      ctx.globalAlpha = s.a * (0.25 + 0.75 * breathe * breathe);
+      const mn = s.min ?? 0.25; ctx.globalAlpha = Math.min(1, s.a * (mn + (1 - mn) * Math.pow(breathe, s.pow || 2)));
       const c = Math.cos(s.rot), sn = Math.sin(s.rot);
-      const sway = Math.sin(s.ph * 0.37) * 6;
+      const sway = Math.sin(this.time * 0.45 + s.ph * 0.2) * (s.sway || 6);
       ctx.setTransform(d * c, d * sn, -d * sn, d * c, d * (s.x + sway), d * s.y);
       ctx.drawImage(spr, -s.w / 2, 0, s.w, s.len);
     }
@@ -2735,7 +2855,7 @@ class HeroCanvasController {
   }
   makeEmber(x, y) {
     const d = depthRnd();
-    return { x, y, d, size: 0.6 + d * 2.0, vx: hRnd(-0.25, 0.25), vy: -(0.35 + d * 0.75 + Math.random() * 0.25), life: 1, decay: hRnd(0.002, 0.0045), ph: Math.random() * 6.28, wob: hRnd(0.4, 1.1), col: Math.random() < 0.3 ? "255,240,200" : Math.random() < 0.75 ? "255,170,70" : "255,90,30" };
+    return { x, y, d, len: hRnd(5, 10) + (Math.random() < 0.35 ? hRnd(10, 22) : 0) * (0.5 + d), size: 0.6 + d * 2.0, vx: hRnd(-0.25, 0.25), vy: -(0.35 + d * 0.75 + Math.random() * 0.25), life: 1, decay: hRnd(0.002, 0.0045), ph: Math.random() * 6.28, wob: hRnd(0.4, 1.1), col: Math.random() < 0.3 ? "255,240,200" : Math.random() < 0.75 ? "255,170,70" : "255,90,30" };
   }
   addFirework(x, y, big) {
     const cols = ["255,120,120", "255,214,90", "130,210,255", "170,240,150", "220,150,255", "255,180,120"];
@@ -2747,10 +2867,10 @@ class HeroCanvasController {
     }
   }
   addSplash(x, y) {
-    const n = Math.round(hRnd(9, 15));
+    const n = Math.round(hRnd(16, 26));
     for (let i = 0; i < n; i++) {
-      const a = -Math.PI / 2 + hRnd(-1.1, 1.1), sp = hRnd(1.4, 3.6);
-      this.splashes.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, r: hRnd(1.4, 3.8), alpha: hRnd(0.75, 1), y0: y });
+      const a = -Math.PI / 2 + hRnd(-0.9, 0.9), sp = hRnd(2, 5.2);
+      this.splashes.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, r: hRnd(1.6, 4.2), alpha: 1, y0: y });
     }
     this.ripples.push({ x, y, r: 2, maxR: hRnd(40, 70), alpha: 0.7 });
   }
@@ -2760,8 +2880,9 @@ class HeroCanvasController {
       const r = this.ripples[i];
       r.r += grow * k; r.alpha -= fade * k;
       if (r.alpha <= 0 || r.r > r.maxR * 1.6) { this.ripples.splice(i, 1); continue; }
-      ctx.strokeStyle = `rgba(${rgb},${r.alpha * 0.7})`;
+      ctx.strokeStyle = `rgba(${rgb},${Math.min(1, r.alpha * 0.85)})`;
       ctx.beginPath(); ctx.ellipse(r.x, r.y, r.r, r.r * flat, 0, 0, Math.PI * 2); ctx.stroke();
+      if (r.r > 10) { ctx.strokeStyle = `rgba(${rgb},${r.alpha * 0.35})`; ctx.beginPath(); ctx.ellipse(r.x, r.y, r.r * 0.62, r.r * 0.62 * flat, 0, 0, Math.PI * 2); ctx.stroke(); }
     }
   }
 }
@@ -2802,9 +2923,17 @@ function heroPetalSprite(rgb, notch, key) {
     const s = S * 0.42;
     const gr = g.createLinearGradient(0, s * 0.7, 0, -s * 0.7);
     gr.addColorStop(0, `rgba(${rgb},0.98)`); gr.addColorStop(0.6, `rgba(${rgb},0.9)`); gr.addColorStop(1, "rgba(255,248,250,0.96)");
-    g.fillStyle = gr; g.beginPath(); g.moveTo(0, s * 0.7);
+    const kind = notch === true ? 0 : notch === false ? 1 : notch;
+    g.fillStyle = gr;
+    if (kind === 3) {
+      for (let i = 0; i < 5; i++) { g.save(); g.rotate((i / 5) * Math.PI * 2); g.beginPath(); g.ellipse(0, -s * 0.42, s * 0.24, s * 0.38, 0, 0, 6.28); g.fill(); g.restore(); }
+      g.fillStyle = "rgba(255,200,60,1)"; g.beginPath(); g.arc(0, 0, s * 0.18, 0, 6.28); g.fill();
+      return;
+    }
+    if (kind === 2) { g.beginPath(); g.ellipse(0, 0, s * 0.22, s * 0.78, 0, 0, 6.28); g.fill(); g.strokeStyle = "rgba(255,255,255,0.5)"; g.lineWidth = 0.7; g.beginPath(); g.moveTo(0, s * 0.6); g.lineTo(0, -s * 0.6); g.stroke(); return; }
+    g.beginPath(); g.moveTo(0, s * 0.7);
     g.bezierCurveTo(-s * 0.6, s * 0.3, -s * 0.66, -s * 0.4, -s * 0.25, -s * 0.7);
-    if (notch) { g.lineTo(0, -s * 0.52); g.lineTo(s * 0.25, -s * 0.7); } else g.quadraticCurveTo(0, -s * 0.85, s * 0.25, -s * 0.7);
+    if (kind === 0) { g.lineTo(0, -s * 0.52); g.lineTo(s * 0.25, -s * 0.7); } else g.quadraticCurveTo(0, -s * 0.85, s * 0.25, -s * 0.7);
     g.bezierCurveTo(s * 0.66, -s * 0.4, s * 0.6, s * 0.3, 0, s * 0.7); g.closePath(); g.fill();
     g.strokeStyle = "rgba(255,255,255,0.6)"; g.lineWidth = 0.8; g.stroke();
   });
@@ -2833,9 +2962,10 @@ function heroGrassSprite(i) {
     g.fillStyle = gr; g.beginPath(); g.moveTo(-1.6, L); g.quadraticCurveTo(bend, 0, bend * 0.5, -L); g.quadraticCurveTo(bend + 1.8, 0, 1.6, L); g.closePath(); g.fill();
   });
 }
-function heroBubbleSprite() {
-  return heroSprite("bubble", 64, (g, S) => {
-    const r = S / 2 - 2, c = S / 2;
+function heroBubbleSprite(blur) {
+  return heroSprite("bubble" + (blur ? "b" : ""), 64, (g, S) => {
+    const r = S / 2 - 5, c = S / 2;
+    if (blur) { try { g.filter = "blur(2.5px)"; } catch {} }
     const gr = g.createRadialGradient(c, c, r * 0.6, c, c, r);
     gr.addColorStop(0, "rgba(200,240,255,0.06)"); gr.addColorStop(0.85, "rgba(220,245,255,0.22)"); gr.addColorStop(1, "rgba(255,255,255,0.7)");
     g.fillStyle = gr; g.beginPath(); g.arc(c, c, r, 0, 6.28); g.fill();
@@ -2912,9 +3042,9 @@ const HERO_FX = {
   // 02 가을 단풍: 잎을 미리 그린 스프라이트로(프레임마다 그림자·베지어 X)
   "autumn-maple": {
     init(w, h) {
-      for (let i = 0; i < this.n(36); i++) {
+      for (let i = 0; i < this.n(54); i++) {
         const d = depthRnd();
-        this.particles.push({ x: Math.random() * w, y: Math.random() * h, d, size: 18 + d * 20, vx: hRnd(-0.3, 0.3), vy: 0.3 + d * 0.5, angle: Math.random() * 6.28, vA: hRnd(-0.016, 0.016), flip: Math.random() * 6.28, vF: hRnd(0.009, 0.027), roll: Math.random() * 6.28, vR: hRnd(0.01, 0.03), spr: Math.random() < 0.35 ? 4 : Math.floor(Math.random() * 4) });
+        this.particles.push({ x: Math.random() * w, y: Math.random() * h, d, size: 22 + d * 24, vx: hRnd(-0.3, 0.3), vy: 0.3 + d * 0.5, angle: Math.random() * 6.28, vA: hRnd(-0.016, 0.016), flip: Math.random() * 6.28, vF: hRnd(0.009, 0.027), roll: Math.random() * 6.28, vR: hRnd(0.01, 0.03), spr: Math.random() < 0.35 ? 4 : Math.floor(Math.random() * 4) });
       }
     },
     draw(ctx, w, h, k, mx, my, hasMouse) {
@@ -2967,17 +3097,22 @@ const HERO_FX = {
   },
   // 04 설경: 동일한 느낌, 스프라이트로 최적화
   "snowy-winter": {
-    init(w, h) { for (let i = 0; i < this.n(80); i++) this.particles.push(this.makeFlake(w, h, true)); },
+    init(w, h) { for (let i = 0; i < this.n(150); i++) this.particles.push(this.makeFlake(w, h, true)); },
     draw(ctx, w, h, k, mx, my, hasMouse) { ctx.globalCompositeOperation = "screen"; this.drawFlakes(ctx, this.particles, w, h, k, mx, my, hasMouse); }
   },
   // 05 편백 숲: 블러 처리된 대각선 빛줄기가 짙어졌다 옅어짐 + 빛가루
   "lush-forest": {
     init(w, h) {
       const sun = this.imgPt(0.87, 0.2);
-      this.extra = this.makeShafts(5, sun.x - w * 0.18, -h * 0.1, 0.55, w * 0.1, h * 1.5, 90, 190, 0.95);
-      for (let i = 0; i < this.n(55); i++) { const d = depthRnd(); this.particles.push({ x: Math.random() * w, y: Math.random() * h, d, r: 2 + d * 4, a: 0.3 + d * 0.6, vx: hRnd(-0.08, 0.08), vy: -hRnd(0.05, 0.22), ph: Math.random() * 6.28, sp: hRnd(0.015, 0.04) }); }
+      this.sun = sun;
+      this.extra = this.makeShafts(6, sun.x - w * 0.18, -h * 0.1, 0.55, w * 0.09, h * 1.5, 90, 200, 1);
+      for (const s of this.extra) { s.min = 0.02; s.pow = 3; s.sway = 26; s.sp = hRnd(0.012, 0.02); }
+      for (let i = 0; i < this.n(120); i++) { const d = depthRnd(); this.particles.push({ x: Math.random() * w, y: Math.random() * h, d, r: 2 + d * 4, a: 0.3 + d * 0.6, vx: hRnd(-0.08, 0.08), vy: -hRnd(0.05, 0.22), ph: Math.random() * 6.28, sp: hRnd(0.015, 0.04) }); }
     },
     draw(ctx, w, h, k, mx, my, hasMouse) {
+      const pulse = 0.5 + 0.5 * Math.sin(this.time * 0.9);
+      ctx.globalCompositeOperation = "lighter"; ctx.globalAlpha = 0.15 + pulse * pulse * 0.75;
+      this.dot(heroGlow("255,240,190", 0.9), this.sun.x + Math.sin(this.time * 0.45) * 20, this.sun.y, Math.max(w, h) * (0.18 + pulse * 0.08));
       this.drawShafts(ctx, this.extra, "255,245,200", k);
       ctx.globalCompositeOperation = "lighter";
       const spr = heroGlow("240,255,160");
@@ -2994,7 +3129,7 @@ const HERO_FX = {
   // 06 호숫가: 윤슬 크기 축소 + 물안개
   riverside: {
     init(w, h) {
-      for (let i = 0; i < this.n(60); i++) { const d = Math.random(); this.particles.push({ x: Math.random() * w, y: h * (0.45 + d * 0.55), d, s: 0.35 + d * 0.55, a: hRnd(0.3, 1), ph: Math.random() * 6.28, sp: hRnd(0.02, 0.05) }); }
+      for (let i = 0; i < this.n(60); i++) { const d = Math.random(); this.particles.push({ x: Math.random() * w, y: h * (0.45 + d * 0.55), d, s: 0.7 + d * 1.0, a: hRnd(0.3, 1), ph: Math.random() * 6.28, sp: hRnd(0.02, 0.05) }); }
       for (let i = 0; i < this.n(9); i++) this.extra.push({ x: Math.random() * w, y: h * hRnd(0.36, 0.62), rw: hRnd(260, 520), rh: hRnd(50, 90), vx: hRnd(0.08, 0.22) * (Math.random() < 0.5 ? -1 : 1), a: hRnd(0.25, 0.5), ph: Math.random() * 6.28 });
     },
     draw(ctx, w, h, k, mx, my, hasMouse) {
@@ -3018,12 +3153,16 @@ const HERO_FX = {
         ctx.drawImage(spr, p.x - W / 2, p.y - H / 2, W, H);
       }
       ctx.globalCompositeOperation = "source-over";
-      this.drawRipples(ctx, k, 1.2, 0.012, 0.28, "160,240,255");
+      // 주기적으로 물위에 파동이 1~3개씩 생김
+      this.nextEvent -= k;
+      if (this.nextEvent <= 0) { const c = 1 + Math.floor(Math.random() * 3); for (let i = 0; i < c; i++) { const x = hRnd(0.05, 0.95) * w, y = h * hRnd(0.52, 0.96); for (let j = 0; j < 2; j++) this.ripples.push({ x, y, r: 1 + j * 9, maxR: hRnd(50, 95), alpha: 0.75 - j * 0.2 }); } this.nextEvent = hRnd(35, 90); }
+      ctx.lineWidth = 1.6;
+      this.drawRipples(ctx, k, 0.9, 0.009, 0.28, "200,248,255");
     }
   },
   // 07 불멍: 불티 작게, 천천히 유연하게, 크기 랜덤
   "warm-bonfire": {
-    init(w, h) { for (let i = 0; i < this.n(60); i++) { const p = this.makeEmber(w * 0.54 + hRnd(-0.26, 0.26) * w, Math.random() * h); p.life = hRnd(0.2, 1); this.particles.push(p); } },
+    init(w, h) { for (let i = 0; i < this.n(115); i++) { const p = this.makeEmber(w * 0.54 + hRnd(-0.26, 0.26) * w, Math.random() * h); p.life = hRnd(0.2, 1); this.particles.push(p); } },
     draw(ctx, w, h, k, mx, my, hasMouse) {
       ctx.globalCompositeOperation = "lighter";
       const gc = (Math.sin(this.time * 1.6) + 1) * 0.5;
@@ -3034,7 +3173,7 @@ const HERO_FX = {
         const p = this.particles[i];
         p.life -= p.decay * k;
         if (p.life <= 0 || p.y < -20) {
-          if (this.particles.length > this.n(60)) { this.particles.splice(i, 1); continue; }
+          if (this.particles.length > this.n(115)) { this.particles.splice(i, 1); continue; }
           this.particles[i] = this.makeEmber(w * 0.54 + hRnd(-0.26, 0.26) * w, h - Math.random() * 20); continue;
         }
         if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 120 && d > 0) { p.vx += this.mouse.vx * 0.05 + (dx / d) * 0.25; p.vy -= 0.12; } }
@@ -3042,8 +3181,14 @@ const HERO_FX = {
         p.x += (p.vx + Math.sin(p.ph) * p.wob * 0.5) * k; p.y += p.vy * k; p.vx *= 0.99;
         p.vy += (-(0.35 + p.d * 0.75) - p.vy) * 0.01;
         const fl = 0.7 + 0.3 * Math.sin(p.ph * 4);
-        ctx.globalAlpha = Math.min(1, p.life * 1.4) * fl;
-        this.dot(heroGlow(p.col, 1), p.x, p.y, p.size * 3);
+        ctx.globalAlpha = Math.min(1, p.life * 1.8) * fl;
+        // 진행 방향으로 늘어진 막대형 불티
+        const ang = Math.atan2(p.vy, p.vx + Math.sin(p.ph) * p.wob * 0.5), L = p.len, th = 1.4 + p.d * 2.2;
+        const c = Math.cos(ang), sn = Math.sin(ang), d0 = this.dpr;
+        ctx.setTransform(d0 * c, d0 * sn, -d0 * sn, d0 * c, d0 * p.x, d0 * p.y);
+        ctx.drawImage(heroStreak(p.col), -L, -th, L, th * 2);
+        ctx.setTransform(d0, 0, 0, d0, 0, 0);
+        if (p.d > 0.5) { ctx.globalAlpha *= 0.5; this.dot(heroGlow(p.col, 1), p.x, p.y, p.size * 2.6); }
       }
     }
   },
@@ -3053,9 +3198,9 @@ const HERO_FX = {
       const sun = this.imgPt(0.723, 0.373), bottom = this.imgPt(0.72, 0.86);
       this.sun = { x: sun.x, y: sun.y, bottom: Math.min(h, bottom.y), s: sun.s };
       const span = this.sun.bottom - sun.y;
-      for (let i = 0; i < this.n(110); i++) {
+      for (let i = 0; i < this.n(190); i++) {
         const t = Math.pow(Math.random(), 0.8); // 0=수평선, 1=앞바다
-        this.particles.push({ t, off: (Math.random() - 0.5) * (0.4 + Math.random() * 0.6), len: 6 + t * 30, th: 1 + t * 2.2, a: hRnd(0.4, 1), ph: Math.random() * 6.28, sp: hRnd(0.04, 0.1) });
+        this.particles.push({ t, off: (Math.random() - 0.5) * (0.4 + Math.random() * 0.6), len: 12 + t * 46, th: 1.6 + t * 3, a: hRnd(0.6, 1), ph: Math.random() * 6.28, sp: hRnd(0.04, 0.1) });
       }
       this.sun.span = span;
       this.seagulls = [
@@ -3074,20 +3219,21 @@ const HERO_FX = {
       // 수면 반사 기둥(블러 스프라이트를 세로로 늘려 좌우로 살짝 흔듦)
       const sway = Math.sin(this.time * 0.9) * 6;
       const col = heroShaft("255,205,120");
-      ctx.globalAlpha = 0.35 + gc * 0.25;
-      ctx.drawImage(col, S.x - 70 + sway, S.y + 4, 140, S.span);
-      const spr = heroGlow("255,215,130", 1);
+      ctx.globalAlpha = 0.55 + gc * 0.35;
+      ctx.drawImage(col, S.x - 80 + sway, S.y + 4, 160, S.span);
+      const spr = heroGlow("255,215,130", 1), sp4 = heroStar4("255,225,160");
       for (const p of this.particles) {
         p.ph += p.sp * k;
         const y = S.y + 6 + p.t * S.span;
         const spread = 10 + p.t * 120;
         const x = S.x + p.off * spread + Math.sin(this.time * 1.2 + p.t * 9) * (2 + p.t * 8);
         const tw = Math.max(0, Math.sin(p.ph));
-        let a = p.a * tw * (1 - Math.abs(p.off) * 0.9);
+        let a = p.a * tw * (1 - Math.abs(p.off) * 0.7);
         if (hasMouse && Math.hypot(x - mx, y - my) < 100) a += 0.3;
         if (a < 0.04) continue;
-        ctx.globalAlpha = Math.min(1, a);
+        ctx.globalAlpha = Math.min(1, a * 1.3);
         ctx.drawImage(spr, x - p.len / 2, y - p.th, p.len, p.th * 2);
+        if (a > 0.8) { const r = 4 + p.t * 9; ctx.drawImage(sp4, x - r, y - r, r * 2, r * 2); }
       }
       ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1;
       for (const g of this.seagulls) {
@@ -3104,19 +3250,19 @@ const HERO_FX = {
     }
   },
   // 09 벚꽃: 스프라이트로 최적화(그림자 제거), 개수 축소
-  "cherry-blossom": petalFx(["255,155,185", "255,180,205"], true, "255,200,225"),
+  "cherry-blossom": petalFx(["255,155,185", "255,180,205"], true, "255,200,225", { count: 95 }),
   // 10 초원: 민들레 홀씨 작게, 깊이별 크기·투명도, 한 방향 바람
   "green-meadow": windFx("dandelion"),
   // 11 노천탕: 피어오르는 김 + 작게 반짝이는 별
   "uq-hotspring": {
-    init(w, h) { this.initStars(w, h * 0.45, this.n(110)); for (let i = 0; i < this.n(30); i++) this.particles.push(this.makeSteam(w, h, 0.55, true)); },
-    draw(ctx, w, h, k, mx, my, hasMouse) { ctx.globalCompositeOperation = "lighter"; this.drawStars(ctx); ctx.globalCompositeOperation = "source-over"; this.drawSteam(ctx, w, h, k, 0.55, mx, my, hasMouse, 1.1); }
+    init(w, h) { this.initStars(w, h * 0.45, this.n(130)); for (let i = 0; i < this.n(48); i++) this.particles.push(this.makeSteam(w, h, 0.55, true)); },
+    draw(ctx, w, h, k, mx, my, hasMouse) { ctx.globalCompositeOperation = "lighter"; this.drawStars(ctx); ctx.globalCompositeOperation = "source-over"; this.drawSteam(ctx, w, h, k, 0.55, mx, my, hasMouse, 1.9); }
   },
   // 12 스파: 다양한 크기·투명도의 비누방울이 천천히 오르다 팡 터짐
   "uq-spa": {
-    init(w, h) { for (let i = 0; i < this.n(38); i++) this.particles.push(makeSoap(w, h, true)); },
+    init(w, h) { for (let i = 0; i < this.n(72); i++) this.particles.push(makeSoap(w, h, true)); },
     draw(ctx, w, h, k, mx, my, hasMouse) {
-      const spr = heroBubbleSprite();
+      const spr = heroBubbleSprite(), sprB = heroBubbleSprite(true);
       for (let i = 0; i < this.particles.length; i++) {
         const p = this.particles[i];
         p.ph += 0.02 * k; p.y += p.vy * k; p.x += (Math.sin(p.ph) * 0.3 + p.vx) * k;
@@ -3126,7 +3272,7 @@ const HERO_FX = {
           for (let s = 0; s < 6; s++) { const a = Math.random() * 6.28; this.splashes.push({ x: p.x + Math.cos(a) * p.r, y: p.y + Math.sin(a) * p.r, vx: Math.cos(a) * hRnd(0.6, 1.6), vy: Math.sin(a) * hRnd(0.6, 1.6), alpha: p.a, r: 1 }); }
           this.particles[i] = makeSoap(w, h, false); continue;
         }
-        ctx.globalAlpha = p.a; this.dot(spr, p.x, p.y, p.r);
+        ctx.globalAlpha = p.a; this.dot(p.blur ? sprB : spr, p.x, p.y, p.r);
       }
       ctx.lineWidth = 1.2;
       for (let i = this.ripples.length - 1; i >= 0; i--) { const r = this.ripples[i]; r.r += 1.2 * k; r.alpha -= 0.07 * k; if (r.alpha <= 0) { this.ripples.splice(i, 1); continue; } ctx.globalAlpha = r.alpha; ctx.strokeStyle = "#fff"; ctx.beginPath(); ctx.arc(r.x, r.y, r.r, 0, 6.28); ctx.stroke(); }
@@ -3136,32 +3282,37 @@ const HERO_FX = {
   },
   // 13 사계절 온수풀: 김 + 내리는 눈
   "uq-warmpool": {
-    init(w, h) { for (let i = 0; i < this.n(26); i++) this.particles.push(this.makeSteam(w, h, 0.6, true)); for (let i = 0; i < this.n(70); i++) this.extra.push(this.makeFlake(w, h, true)); },
-    draw(ctx, w, h, k, mx, my, hasMouse) { this.drawSteam(ctx, w, h, k, 0.6, mx, my, hasMouse, 1); ctx.globalCompositeOperation = "screen"; this.drawFlakes(ctx, this.extra, w, h, k, mx, my, hasMouse); }
+    init(w, h) { for (let i = 0; i < this.n(46); i++) this.particles.push(this.makeSteam(w, h, 0.6, true)); for (let i = 0; i < this.n(135); i++) this.extra.push(this.makeFlake(w, h, true)); },
+    draw(ctx, w, h, k, mx, my, hasMouse) { this.drawSteam(ctx, w, h, k, 0.6, mx, my, hasMouse, 1.8); ctx.globalCompositeOperation = "screen"; this.drawFlakes(ctx, this.extra, w, h, k, mx, my, hasMouse); }
   },
   // 14 수영장: 여기저기 튀는 물방울 + 물결 + 수면 반짝임(비누방울 제거)
   "uq-pool": {
-    init(w, h) { for (let i = 0; i < this.n(70); i++) { const d = Math.random(); this.particles.push({ x: Math.random() * w, y: h * (0.58 + d * 0.42), s: 0.8 + d * 0.9, a: hRnd(0.6, 1), ph: Math.random() * 6.28, sp: hRnd(0.03, 0.07) }); } this.nextEvent = 20; },
+    init(w, h) { for (let i = 0; i < this.n(90); i++) { const d = Math.random(); this.particles.push({ x: Math.random() * w, y: h * (0.58 + d * 0.42), s: 1.1 + d * 1.3, a: hRnd(0.75, 1), ph: Math.random() * 6.28, sp: hRnd(0.03, 0.07) }); } for (let i = 0; i < this.n(22); i++) { const d = depthRnd(); this.extra.push({ x: Math.random() * w, y: Math.random() * h * 0.85, d, size: 14 + d * 20, speed: 0.6 + d * 1.2, rot: Math.random() * 6.28, vr: hRnd(-0.04, 0.04), flip: Math.random() * 6.28, ph: Math.random() * 6.28, spr: Math.floor(Math.random() * 3) }); } this.nextEvent = 10; },
     draw(ctx, w, h, k, mx, my, hasMouse) {
       this.nextEvent -= k;
-      if (this.nextEvent <= 0) { this.addSplash(hRnd(0.05, 0.95) * w, h * hRnd(0.66, 0.97)); this.nextEvent = hRnd(18, 55); }
+      if (this.nextEvent <= 0) { this.addSplash(hRnd(0.05, 0.95) * w, h * hRnd(0.66, 0.97)); if (Math.random() < 0.4) this.addSplash(hRnd(0.05, 0.95) * w, h * hRnd(0.66, 0.97)); this.nextEvent = hRnd(12, 34); }
       ctx.globalCompositeOperation = "lighter";
       const sp = heroSparkleSprite();
-      for (const p of this.particles) { p.ph += p.sp * k; const a = Math.max(0, Math.sin(p.ph)) * p.a; if (a < 0.04) continue; ctx.globalAlpha = a; ctx.drawImage(sp, p.x - 17 * p.s, p.y - 4 * p.s, 34 * p.s, 8 * p.s); if (a > 0.55) ctx.drawImage(sp, p.x - 6 * p.s, p.y - 6 * p.s, 12 * p.s, 12 * p.s); }
+      const s4 = heroStar4("200,240,255");
+      for (const p of this.particles) { p.ph += p.sp * k; const a = Math.max(0, Math.sin(p.ph)) * p.a; if (a < 0.04) continue; ctx.globalAlpha = a; ctx.drawImage(sp, p.x - 17 * p.s, p.y - 4 * p.s, 34 * p.s, 8 * p.s); if (a > 0.5) { const r = 6 * p.s; ctx.drawImage(s4, p.x - r, p.y - r, r * 2, r * 2); } }
       ctx.globalCompositeOperation = "source-over";
+      ctx.lineWidth = 1.5;
       this.drawRipples(ctx, k, 0.9, 0.014, 0.3, "235,250,255");
-      const drop = heroGlow("200,240,255", 1);
+      const drop = heroDrop();
+      // 바람에 날리는 초록 잎
+      for (const l of this.extra) { l.ph += 0.02 * k; l.flip += 0.03 * k; l.rot += l.vr * k; l.x -= l.speed * (0.8 + 0.3 * Math.sin(this.time * 0.4)) * k; l.y += (Math.sin(l.ph) * 0.5 + 0.25) * k; if (l.x < -30) { l.x = w + 30; l.y = Math.random() * h * 0.7; } if (l.y > h + 30) l.y = -30; ctx.globalAlpha = 0.75 + l.d * 0.25; this.blit(heroGreenLeaf(l.spr), l.x, l.y, l.size, l.rot, Math.cos(l.flip), 1); }
+      ctx.globalAlpha = 1;
       for (let i = this.splashes.length - 1; i >= 0; i--) {
         const s = this.splashes[i]; s.x += s.vx * k; s.y += s.vy * k; s.vy += 0.12 * k;
         if (s.y > s.y0 + 6) { if (Math.random() < 0.3) this.ripples.push({ x: s.x, y: s.y, r: 1, maxR: 14, alpha: 0.5 }); this.splashes.splice(i, 1); continue; }
-        ctx.globalAlpha = s.alpha; this.dot(drop, s.x, s.y, s.r * 2.2);
+        ctx.globalAlpha = s.alpha; this.dot(drop, s.x, s.y, s.r * 1.3);
       }
     }
   },
   // 15 승마: 풀잎이 바람에 날리고 노을 중심으로 빛이 밝아졌다 어두워짐
   "uq-horse": windFx("grass", { sun: [0.94, 0.2] }),
   // 16 동물체험: 벚꽃 대신 여러 색 꽃잎
-  "uq-animal": petalFx(["255,214,90", "255,160,190", "255,255,255", "200,170,255", "255,180,120"], false, "255,240,200"),
+  "uq-animal": petalFx(["255,214,90", "255,160,190", "255,255,255", "200,170,255", "255,180,120", "255,120,140", "150,200,255"], false, "255,240,200", { count: 70, big: true, shapes: 4 }),
   // 17 키즈카페: 폭죽 + 탭하면 터짐 + 큰 색종이
   "uq-kidscafe": confettiFx(true),
   // 18 실내놀이: 색종이 크게·랜덤 크기
@@ -3170,10 +3321,15 @@ const HERO_FX = {
   "uq-treehouse": {
     init(w, h) {
       const o = this.imgPt(0.08, 0.02);
-      this.extra = this.makeShafts(6, o.x + w * 0.22, -h * 0.15, -0.62, w * 0.09, h * 1.6, 80, 170, 0.75);
-      for (let i = 0; i < this.n(36); i++) { const d = depthRnd(); this.particles.push({ x: Math.random() * w, y: Math.random() * h, d, r: 1.5 + d * 3, a: 0.25 + d * 0.5, vx: hRnd(0.02, 0.12), vy: hRnd(0.02, 0.12), ph: Math.random() * 6.28, sp: hRnd(0.015, 0.035) }); }
+      this.org = o;
+      this.extra = this.makeShafts(7, o.x + w * 0.22, -h * 0.15, -0.62, w * 0.09, h * 1.6, 100, 210, 1);
+      for (const s of this.extra) { s.min = 0.5; s.sway = 12; }
+      for (let i = 0; i < this.n(85); i++) { const d = depthRnd(); this.particles.push({ x: Math.random() * w, y: Math.random() * h, d, r: 2 + d * 4, a: 0.45 + d * 0.55, vx: hRnd(0.02, 0.12), vy: hRnd(0.02, 0.12), ph: Math.random() * 6.28, sp: hRnd(0.015, 0.035) }); }
     },
     draw(ctx, w, h, k) {
+      const gc = 0.5 + 0.5 * Math.sin(this.time * 0.6);
+      ctx.globalCompositeOperation = "lighter"; ctx.globalAlpha = 0.35 + gc * 0.35;
+      this.dot(heroGlow("255,235,190", 0.85), this.org.x + w * 0.1, 0, Math.max(w, h) * 0.38);
       this.drawShafts(ctx, this.extra, "255,240,205", k);
       ctx.globalCompositeOperation = "lighter";
       const spr = heroGlow("255,245,210");
@@ -3182,9 +3338,18 @@ const HERO_FX = {
   },
   // 20 이색숙소: 반딧불 제거, 하얀 별빛 반짝임 + 유성우
   "uq-stay": {
-    init(w, h) { this.initStars(w, h * 0.62, this.n(150)); this.nextEvent = 40; },
+    init(w, h) { this.initStars(w, h * 0.62, this.n(170)); this.nextEvent = 40; },
     draw(ctx, w, h, k) {
       ctx.globalCompositeOperation = "lighter";
+      // 오로라: 세로 띠를 사인파로 흔들어 커튼처럼
+      const strip = heroAuroraStrip(), N = 48, sw = w / N + 1, T = this.time;
+      for (let i = 0; i < N; i++) {
+        const u = i / N, x = u * w;
+        const y = h * (0.06 + 0.1 * Math.sin(u * 5 + T * 0.5) + 0.05 * Math.sin(u * 11 - T * 0.8));
+        const hh = h * (0.28 + 0.1 * Math.sin(u * 7 + T * 0.6));
+        ctx.globalAlpha = 0.42 * (0.55 + 0.45 * Math.sin(u * 9 + T * 0.9)) * Math.sin(Math.PI * Math.min(1, u * 1.15 + 0.02));
+        if (ctx.globalAlpha > 0.01) ctx.drawImage(strip, x, y, sw, hh);
+      }
       this.drawStars(ctx, "245,248,255");
       this.nextEvent -= k;
       if (this.nextEvent <= 0 && this.meteors.length < 3) { this.addMeteor(hRnd(0.15, 0.95) * w, hRnd(0, 0.25) * h, true); this.nextEvent = Math.random() < 0.3 ? hRnd(8, 20) : hRnd(60, 160); }
@@ -3195,7 +3360,9 @@ const HERO_FX = {
   "uq-leisure": {
     init(w, h) {
       this.wire = [this.imgPt(0.09, 0.0), this.imgPt(0.55, 0.175), this.imgPt(1.0, 0.39)];
-      this.nextEvent = hRnd(40, 120);
+      this.nextEvent = hRnd(20, 60);
+      if (!HERO_RIDER_IMG) { HERO_RIDER_IMG = new Image(); HERO_RIDER_IMG.src = `${APP_BASE}images/hero/zip-rider.webp`; }
+      for (let i = 0; i < 4; i++) this.extra.push({ x: hRnd(0.45, 1.05) * w, y: hRnd(0.02, 0.24) * h, s: hRnd(0.8, 1.4) * Math.max(0.6, w / 1280), v: hRnd(0.08, 0.18), spr: i % 3, a: hRnd(0.75, 0.95) });
       for (let i = 0; i < this.n(30); i++) { const p = this.imgPt(hRnd(0.2, 0.85), hRnd(0.72, 1)); this.particles.push({ x: p.x, y: p.y, s: hRnd(0.3, 0.6), a: hRnd(0.4, 0.9), ph: Math.random() * 6.28, sp: hRnd(0.03, 0.06) }); }
     },
     draw(ctx, w, h, k) {
@@ -3204,20 +3371,28 @@ const HERO_FX = {
       for (const p of this.particles) { p.ph += p.sp * k; const a = Math.max(0, Math.sin(p.ph)) * p.a; if (a < 0.04) continue; ctx.globalAlpha = a; ctx.drawImage(sp, p.x - 17 * p.s, p.y - 4 * p.s, 34 * p.s, 8 * p.s); if (a > 0.55) ctx.drawImage(sp, p.x - 6 * p.s, p.y - 6 * p.s, 12 * p.s, 12 * p.s); }
       ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1;
       this.nextEvent -= k;
-      if (this.nextEvent <= 0) { this.riders.push({ t: 0, v: hRnd(0.0022, 0.0034), ph: 0 }); this.nextEvent = hRnd(200, 480); }
-      const [a, b, c] = this.wire, spr = heroRiderSprite(), sc = Math.max(0.55, Math.min(1.2, a.s * 2.2));
+      // 우측 상단으로 흘러가는 구름
+      for (const cl of this.extra) { cl.x += cl.v * k; if (cl.x > w + 200 * cl.s) { cl.x = w * 0.35 - 200 * cl.s; cl.y = hRnd(0.02, 0.24) * h; } ctx.globalAlpha = cl.a; ctx.drawImage(heroCloud(cl.spr), cl.x - 160 * cl.s, cl.y - 75 * cl.s, 320 * cl.s, 150 * cl.s); }
+      ctx.globalAlpha = 1;
+      if (this.nextEvent <= 0) { this.riders.push({ t: -0.02, v: hRnd(0.0016, 0.0022), sw: 0, swv: 0 }); this.nextEvent = hRnd(260, 520); }
+      const [a, b, c] = this.wire, img = HERO_RIDER_IMG, ready = img && img.complete && img.naturalWidth;
+      if (!ready) return;
       for (let i = this.riders.length - 1; i >= 0; i--) {
         const r = this.riders[i];
-        r.v += 0.000012 * k; r.t += r.v * k; r.ph += 0.06 * k;
-        if (r.t > 1.05) { this.riders.splice(i, 1); continue; }
-        const t = r.t, u = 1 - t;
+        // 가속(중력)으로 속도가 붙고, 몸은 진자처럼 뒤로 젖혀졌다 흔들림
+        const acc = 0.000012 * k; r.v += acc; r.t += r.v * k;
+        if (r.t > 1.08) { this.riders.splice(i, 1); continue; }
+        const target = 0.06 + r.v * 30; // 가속할수록 몸이 뒤로 살짝 처짐
+        r.swv += ((target - r.sw) * 0.02 - r.swv * 0.04) * k; r.sw += r.swv * k;
+        const t = Math.max(0, r.t), u = 1 - t;
         const x = u * u * a.x + 2 * u * t * b.x + t * t * c.x, y = u * u * a.y + 2 * u * t * b.y + t * t * c.y;
-        const tx = 2 * u * (b.x - a.x) + 2 * t * (c.x - b.x), ty = 2 * u * (b.y - a.y) + 2 * t * (c.y - b.y);
-        const swing = Math.sin(r.ph) * 0.12 - Math.atan2(ty, tx) * 0.2;
-        const d = this.dpr, cs = Math.cos(swing), sn = Math.sin(swing);
-        ctx.setTransform(d * cs * sc, d * sn * sc, -d * sn * sc, d * cs * sc, d * x, d * y);
-        ctx.drawImage(spr, -24, -6, 48, 64);
-        ctx.setTransform(d, 0, 0, d, 0, 0);
+        const H = h * (0.5 - 0.3 * t), W = H * (img.naturalWidth / img.naturalHeight);
+        const ax = W * 0.34, sw = r.sw + Math.sin(r.t * 40) * 0.03;
+        const d = this.dpr, cs = Math.cos(sw), sn = Math.sin(sw);
+        ctx.globalAlpha = Math.min(1, (r.t + 0.02) * 15, (1.08 - r.t) * 15);
+        ctx.setTransform(d * cs, d * sn, -d * sn, d * cs, d * x, d * y);
+        ctx.drawImage(img, -ax, -H * 0.01, W, H);
+        ctx.setTransform(d, 0, 0, d, 0, 0); ctx.globalAlpha = 1;
       }
     }
   },
@@ -3226,14 +3401,22 @@ const HERO_FX = {
     init(w, h) {
       const sun = this.imgPt(0.95, 0.02);
       this.sun = sun;
-      this.extra = this.makeShafts(5, sun.x - w * 0.12, -h * 0.1, 0.62, w * 0.08, h * 1.4, 100, 200, 0.6);
-      for (let i = 0; i < this.n(30); i++) { const d = depthRnd(); this.particles.push({ x: Math.random() * w, y: Math.random() * h, r: 1.5 + d * 3, a: 0.2 + d * 0.5, vx: -hRnd(0.03, 0.12), vy: hRnd(0.02, 0.1), ph: Math.random() * 6.28, sp: hRnd(0.015, 0.035) }); }
+      this.extra = this.makeShafts(6, sun.x - w * 0.16, -h * 0.1, 0.62, w * 0.085, h * 1.4, 110, 220, 0.95);
+      for (const s of this.extra) { s.min = 0.1; s.sp = hRnd(0.02, 0.035); s.sway = 14; }
+      for (let i = 0; i < this.n(85); i++) { const d = depthRnd(); this.particles.push({ x: Math.random() * w, y: Math.random() * h, r: 1.8 + d * 3.5, a: 0.35 + d * 0.6, vx: -hRnd(0.03, 0.12), vy: hRnd(0.02, 0.1), ph: Math.random() * 6.28, sp: hRnd(0.015, 0.035) }); }
     },
     draw(ctx, w, h, k) {
-      const gc = 0.5 + 0.5 * Math.sin(this.time * 0.5);
+      const gc = 0.5 + 0.5 * Math.sin(this.time * 1.3);
       ctx.globalCompositeOperation = "lighter";
-      ctx.globalAlpha = 0.35 + gc * 0.25;
-      this.dot(heroGlow("255,225,150", 0.8), this.sun.x, this.sun.y, Math.max(w, h) * 0.35);
+      ctx.globalAlpha = 0.45 + gc * 0.45;
+      this.dot(heroGlow("255,225,150", 0.9), this.sun.x, this.sun.y, Math.max(w, h) * (0.35 + gc * 0.05));
+      // 회전하는 방사 광선
+      const R0 = Math.max(w, h) * 0.4, d0 = this.dpr, ang = this.time * 0.25;
+      ctx.globalAlpha = 0.35 + gc * 0.35;
+      ctx.setTransform(d0 * Math.cos(ang), d0 * Math.sin(ang), -d0 * Math.sin(ang), d0 * Math.cos(ang), d0 * this.sun.x, d0 * this.sun.y);
+      ctx.drawImage(heroRays(), -R0, -R0, R0 * 2, R0 * 2);
+      ctx.setTransform(d0, 0, 0, d0, 0, 0);
+      ctx.globalAlpha = 0.6 + gc * 0.4; this.dot(heroGlow("255,250,225", 1), this.sun.x, this.sun.y, 60 + gc * 30);
       this.drawShafts(ctx, this.extra, "255,236,190", k);
       ctx.globalCompositeOperation = "lighter";
       const spr = heroGlow("255,240,200");
@@ -3244,12 +3427,12 @@ const HERO_FX = {
 function makeSoap(w, h, initial) {
   const d = depthRnd(), r = 3 + d * 22 * Math.random() + d * 6;
   const y = initial ? hRnd(0.2, 1) * h : h + r;
-  return { x: Math.random() * w, y, r, a: 0.3 + d * 0.6, vy: -(0.15 + d * 0.35 + Math.random() * 0.1), vx: hRnd(-0.08, 0.08), ph: Math.random() * 6.28, popAt: Math.random() < 0.55 ? h * hRnd(0.12, 0.7) : -100 };
+  return { blur: Math.random() < 0.4, x: Math.random() * w, y, r, a: 0.35 + d * 0.6, vy: -(0.15 + d * 0.35 + Math.random() * 0.1), vx: hRnd(-0.08, 0.08), ph: Math.random() * 6.28, popAt: Math.random() < 0.55 ? h * hRnd(0.12, 0.7) : -100 };
 }
-function petalFx(colors, notch, pollenRgb) {
+function petalFx(colors, notch, pollenRgb, opt = {}) {
   return {
     init(w, h) {
-      for (let i = 0; i < this.n(55); i++) { const d = depthRnd(); this.particles.push({ x: Math.random() * w, y: Math.random() * h, d, size: 10 + d * 14, vx: -(0.15 + d * 0.3), vy: 0.25 + d * 0.4, rot: Math.random() * 6.28, vRot: hRnd(-0.018, 0.018), flip: Math.random() * 6.28, vF: hRnd(0.01, 0.03), roll: Math.random() * 6.28, vR: hRnd(0.011, 0.033), seed: Math.random() * 10, c: Math.floor(Math.random() * colors.length) }); }
+      for (let i = 0; i < this.n(opt.count || 55); i++) { const d = depthRnd(); this.particles.push({ shape: opt.shapes ? Math.floor(Math.random() * opt.shapes) : (notch ? 0 : 1), x: Math.random() * w, y: Math.random() * h, d, size: opt.big ? 15 + d * 22 : 10 + d * 14, vx: -(0.15 + d * 0.3), vy: 0.25 + d * 0.4, rot: Math.random() * 6.28, vRot: hRnd(-0.018, 0.018), flip: Math.random() * 6.28, vF: hRnd(0.01, 0.03), roll: Math.random() * 6.28, vR: hRnd(0.011, 0.033), seed: Math.random() * 10, c: Math.floor(Math.random() * colors.length) }); }
       for (let i = 0; i < this.n(20); i++) this.extra.push({ x: Math.random() * w, y: Math.random() * h, r: hRnd(2, 5), vx: -hRnd(0.08, 0.28), vy: hRnd(0.05, 0.2), a: hRnd(0.3, 0.8), ph: Math.random() * 6.28 });
     },
     draw(ctx, w, h, k, mx, my, hasMouse) {
@@ -3266,7 +3449,7 @@ function petalFx(colors, notch, pollenRgb) {
         if (p.y > h + 25) { p.y = -25; p.x = Math.random() * w; }
         if (p.x < -25) p.x = w + 25; else if (p.x > w + 25) p.x = -25;
         ctx.globalAlpha = 0.55 + p.d * 0.45;
-        this.blit(heroPetalSprite(colors[p.c], notch, colors[p.c] + notch), p.x, p.y, p.size, p.rot, Math.cos(p.flip), Math.sin(p.roll) * 0.35 + 0.65);
+        this.blit(heroPetalSprite(colors[p.c], p.shape, colors[p.c] + p.shape), p.x, p.y, p.size, p.rot, p.shape === 3 ? 1 : Math.cos(p.flip), Math.sin(p.roll) * 0.35 + 0.65);
       }
     }
   };
@@ -3275,8 +3458,8 @@ function petalFx(colors, notch, pollenRgb) {
 function windFx(kind, opt = {}) {
   return {
     init(w, h) {
-      const N = kind === "grass" ? 34 : 40;
-      for (let i = 0; i < this.n(N); i++) { const d = depthRnd(); this.particles.push({ x: Math.random() * w, y: Math.random() * h, d, size: kind === "grass" ? 12 + d * 22 : 9 + d * 15, a: 0.3 + d * 0.65, speed: 0.35 + d * 0.9, ph: Math.random() * 6.28, rot: Math.random() * 6.28, vRot: hRnd(0.01, 0.04) * (Math.random() < 0.5 ? -1 : 1), spr: Math.floor(Math.random() * 4), vx: 0, vy: 0 }); }
+      const N = kind === "grass" ? 60 : 78;
+      for (let i = 0; i < this.n(N); i++) { const d = depthRnd(); this.particles.push({ x: Math.random() * w, y: Math.random() * h, d, size: kind === "grass" ? 20 + d * 34 : 9 + d * 15, a: 0.3 + d * 0.65, speed: 0.35 + d * 0.9, ph: Math.random() * 6.28, rot: Math.random() * 6.28, vRot: hRnd(0.01, 0.04) * (Math.random() < 0.5 ? -1 : 1), spr: Math.floor(Math.random() * 4), vx: 0, vy: 0 }); }
       for (let i = 0; i < this.n(26); i++) this.extra.push({ x: Math.random() * w, y: Math.random() * h, r: hRnd(1.5, 4), a: hRnd(0.25, 0.7), ph: Math.random() * 6.28, sp: hRnd(0.015, 0.04), speed: hRnd(0.2, 0.6) });
       if (opt.sun) this.sun = this.imgPt(opt.sun[0], opt.sun[1]);
     },
@@ -3285,8 +3468,10 @@ function windFx(kind, opt = {}) {
       ctx.globalCompositeOperation = "lighter";
       if (this.sun) {
         const gc = 0.5 + 0.5 * Math.sin(this.time * 0.55);
-        ctx.globalAlpha = 0.25 + gc * 0.45;
+        ctx.globalAlpha = 0.3 + gc * 0.55;
         this.dot(heroGlow("255,190,110", 0.85), this.sun.x, this.sun.y, Math.max(w, h) * (0.32 + gc * 0.06));
+        ctx.globalAlpha = 0.5 + gc * 0.5; this.dot(heroGlow("255,240,210", 1), this.sun.x, this.sun.y, 40 + gc * 20);
+        heroDrawFlare(ctx, this.sun.x, this.sun.y, w, h, 0.45 + gc * 0.55, this.dot.bind(this));
       }
       const pg = heroGlow(kind === "grass" ? "255,225,150" : "235,255,190");
       for (const po of this.extra) { po.ph += po.sp * k; po.x -= po.speed * gust * k; po.y += Math.sin(po.ph) * 0.15 * k; if (po.x < -10) { po.x = w + 10; po.y = Math.random() * h; } ctx.globalAlpha = po.a * (0.5 + 0.5 * Math.sin(po.ph)); this.dot(pg, po.x, po.y, po.r * 2); }
@@ -3309,9 +3494,9 @@ function windFx(kind, opt = {}) {
 }
 function confettiFx(fireworks) {
   const colors = ["#ff8a80", "#ffd54f", "#81d4fa", "#a5d6a7", "#ce93d8", "#ffab91"];
-  const make = (w, h, initial) => { const d = depthRnd(); return { x: Math.random() * w, y: initial ? Math.random() * h : -16, d, w: 9 + d * 15 + Math.random() * 5, h: 5 + d * 8, vy: 0.3 + d * 0.6, vx: hRnd(-0.2, 0.2), rot: Math.random() * 3, vr: hRnd(-0.05, 0.05), color: colors[Math.floor(Math.random() * colors.length)], ph: Math.random() * 6.28 }; };
+  const make = (w, h, initial) => { const d = depthRnd(); return { shape: fireworks ? -1 : Math.floor(Math.random() * 5), x: Math.random() * w, y: initial ? Math.random() * h : -16, d, w: 9 + d * 15 + Math.random() * 5, h: 5 + d * 8, vy: 0.3 + d * 0.6, vx: hRnd(-0.2, 0.2), rot: Math.random() * 3, vr: hRnd(-0.05, 0.05), color: colors[Math.floor(Math.random() * colors.length)], ph: Math.random() * 6.28 }; };
   return {
-    init(w, h) { for (let i = 0; i < this.n(fireworks ? 34 : 46); i++) this.particles.push(make(w, h, true)); this.nextEvent = 30; },
+    init(w, h) { for (let i = 0; i < this.n(fireworks ? 75 : 55); i++) this.particles.push(make(w, h, true)); if (!fireworks) for (let i = 0; i < this.n(9); i++) this.extra.push(makeBalloon(w, h, true)); this.nextEvent = 30; },
     draw(ctx, w, h, k, mx, my, hasMouse) {
       if (fireworks) {
         this.nextEvent -= k;
@@ -3332,11 +3517,25 @@ function confettiFx(fireworks) {
         if (p.y > h + 16) { this.particles[i] = make(w, h, false); continue; }
         const c = Math.cos(p.rot), s = Math.sin(p.rot), sy = Math.abs(Math.cos(p.ph * 2)) * 0.7 + 0.3;
         ctx.setTransform(d0 * c, d0 * s, -d0 * s * sy, d0 * c * sy, d0 * p.x, d0 * p.y);
-        ctx.globalAlpha = 0.7 + p.d * 0.3; ctx.fillStyle = p.color; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.globalAlpha = 0.7 + p.d * 0.3;
+        if (p.shape >= 0) { const S = p.w * 1.3; ctx.drawImage(heroShape(p.shape, p.color), -S / 2, -S / 2, S, S); }
+        else { ctx.fillStyle = p.color; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); }
+      }
+      ctx.setTransform(d0, 0, 0, d0, 0, 0);
+      // 18: 천천히 떠오르는 풍선
+      for (let i = 0; i < this.extra.length; i++) {
+        const b = this.extra[i]; b.ph += 0.015 * k; b.y -= b.vy * k; b.x += Math.sin(b.ph) * 0.3 * k;
+        if (hasMouse) { const dx = b.x - mx, dy = b.y - my, d = Math.hypot(dx, dy); if (d < 90 && d > 0) b.x += (dx / d) * 1.5 * k; }
+        if (b.y < -b.s * 2) { this.extra[i] = makeBalloon(w, h, false); continue; }
+        ctx.globalAlpha = 0.85; this.blit(heroBalloon(b.col), b.x, b.y, b.s, Math.sin(b.ph) * 0.08, 0.5, 1);
       }
       ctx.setTransform(d0, 0, 0, d0, 0, 0);
     }
   };
+}
+function makeBalloon(w, h, initial) {
+  const cols = ["#ff6f61", "#ffd54f", "#4fc3f7", "#81c784", "#ba68c8", "#ff8a65"], d = depthRnd();
+  return { x: Math.random() * w, y: initial ? hRnd(0.2, 1.1) * h : h + 60, s: 40 + d * 50, vy: 0.25 + d * 0.45, ph: Math.random() * 6.28, col: cols[Math.floor(Math.random() * cols.length)] };
 }
 
 let heroCanvasInstance = null;
