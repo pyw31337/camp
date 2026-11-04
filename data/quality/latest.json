@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-04T12:53:12.798Z",
- "date": "2026-11-04",
+ "generated_at": "2026-11-04T17:55:21.759Z",
+ "date": "2026-11-05",
  "totals": {
   "campgrounds": 6421,
-  "facts": 243784,
+  "facts": 243781,
   "pairs": 192514,
   "mean_confidence": 0.78,
   "confirmed_pct": 84.1,
@@ -1291,7 +1291,7 @@
   "REVIEW_PRO_WELL_KEPT": {
    "coverage": 184,
    "coverage_pct": 2.9,
-   "mean_confidence": 0.345,
+   "mean_confidence": 0.344,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
@@ -2066,18 +2066,5 @@
    }
   }
  },
- "regressions": [
-  {
-   "attr": "VISITOR_POLICY",
-   "kind": "confidence",
-   "from": 0.592,
-   "to": 0.564
-  },
-  {
-   "attr": "EXTRA_CAR_FEE",
-   "kind": "confidence",
-   "from": 0.59,
-   "to": 0.565
-  }
- ]
+ "regressions": []
 }
