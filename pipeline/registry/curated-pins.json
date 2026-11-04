@@ -220,6 +220,38 @@
       "at": "2026-11-04",
       "src": "운영 기관 이용안내"
      }
+    ],
+    "layout.images": [
+     {
+      "thumb": "https://hsecofarm.hscity.go.kr/reservation/images/img/sight_v2.jpg",
+      "img": "https://hsecofarm.hscity.go.kr/reservation/images/img/sight_v2.jpg",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/",
+      "src": "운영 기관(화성에코팜테마파크) 조감도",
+      "w": 1400,
+      "h": 1542,
+      "date": "2026-11-04",
+      "sure": true
+     },
+     {
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/67tGAV7kkGK",
+      "img": "https://postfiles.pstatic.net/MjAyNjA4MjhfNDAg/MDAxNzg3OTAwOTEyOTE5.0adZcYAuatRg2UuuWDZbwlV52smyS1cvyamwHrY0hRwg.HlGUWdL7dmDrZZz3UphmlFLHJLaC0Y1C1d55sfsjzJIg.PNG/%EC%86%A1%EC%82%B0%ED%8F%AC%EB%8F%84%EC%B6%95%EC%A0%9C-%EC%A4%80%EB%B9%84%EB%AC%BC.png?type=w966",
+      "url": "https://blog.naver.com/offapron/224393305145",
+      "src": "네이버블로그",
+      "w": 966,
+      "h": 689,
+      "date": "2026-08-28",
+      "sure": false
+     },
+     {
+      "thumb": "https://search4.kakaocdn.net/argon/130x130_85_c/LlgrBqWYjV7",
+      "img": "https://simg.pstatic.net/static.map/v2/map/staticmap.bin?caller=smarteditor&markers=pos%3A126.6940867%2037.1197261%7CviewSizeRatio%3A0.7%7Ctype%3Ad%7Ccolor%3A0x11cc73%7Csize%3Amid&w=700&h=315&scale=2&dataversion=178.21",
+      "url": "https://blog.naver.com/rankora/224400874051",
+      "src": "네이버블로그",
+      "w": 1400,
+      "h": 630,
+      "date": "2026-09-04",
+      "sure": false
+     }
     ]
    }
   },
