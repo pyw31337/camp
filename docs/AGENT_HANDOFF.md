@@ -1068,3 +1068,11 @@
 - 히어로, 결과 목록, 테마·지도 필터의 지역 칩을 `전국` + `서울`·`경기`·`인천`·`강원`·`충청`·`전라`·`경상`·`제주` 공통 목록으로 통합했다. 기본 상태는 전국이며, 지역 칩을 여러 개 동시에 선택할 수 있다.
 - 조건으로 찾기 모달도 동일한 8개 그룹을 사용한다. 충북·충남 등 하위 시도는 충청으로 묶어 중복 기준을 없앴고, 기존 개별 시도 및 `서울·경기` URL은 새 그룹으로 정규화한다.
 - 선택 상태는 `S.areas`와 쉼표 구분 URL(`area=서울,경기`, `sido=서울,경기`)로 보존하며, 기존 단일 지역 화면과 지도 범위 맞춤도 함께 호환한다.
+
+## 📌 GitHub Actions 데이터 동기화 중단 방지 (2026-11-05, Codex)
+
+- `Data sync` 실행 41902701773이 미디어 브랜치 `git fetch`/R2 사진 동기화에서 하루 이상 응답하지 않아 취소했다. 데이터 동기화 전체가 외부 미디어 단계에 붙잡히는 구조가 반복 실패의 원인이었다.
+- `.github/workflows/data-sync.yml`의 미디어 단계에 fetch 5분, worktree 2분, R2 pull 5분, 미디어 활성화 30초 제한을 넣었다. 사진 단계가 멈추거나 실패해도 `continue-on-error`로 공공·텍스트 데이터 동기화는 계속 진행한다.
+- `pipeline/test/data-sync-safety.test.mjs`에 각 시간 제한과 환경 변수의 정적 회귀 검사를 추가했다.
+- 과거 오류 중 무료 공원 만료 제약은 PR #589, field-guard 오탐은 PR #595에서 이미 수정됐고, Pages 배포 timeout은 이후 재시도 배포가 성공한 일시 장애로 확인했다.
+- 검증: `node pipeline/scripts/check-dayuse-idempotent.mjs`, `pipeline/test/data-sync-safety.test.mjs`, Web quality/Registry CI를 PR에서 확인한다.
