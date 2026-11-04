@@ -31,6 +31,17 @@ const timestamp = (value) => {
   return new Date(value).toISOString();
 };
 
+// 만료일이 이미 지난 원천은 free_until에 남겨도 되지만,
+// DB의 expires_at은 관측 시각보다 과거일 수 없다. 과거 만료일은
+// free_until로 보존하고 expires_at은 null로 두어 PENDING_REVIEW로
+// 재검토할 수 있게 한다.
+const futureExpiry = (value, observedAt) => {
+  const day = dateOnly(value);
+  if (!day) return null;
+  const expiry = `${day}T23:59:59+09:00`;
+  return Date.parse(expiry) >= Date.parse(observedAt) ? expiry : null;
+};
+
 const json = (value) => JSON.stringify(value ?? {});
 const hash = (value) => createHash("sha256").update(JSON.stringify(value)).digest("hex");
 const chunks = (values, size = BATCH_SIZE) => Array.from({ length: Math.ceil(values.length / size) }, (_, index) => values.slice(index * size, (index + 1) * size));
@@ -241,7 +252,7 @@ async function upsertFreeRegistry(client, registry, sourceIds, observedAt) {
       [
         `free-site:${site.id}`, candidateId, sourceId, feeState, cookingState, toiletState, dateOnly(site?.fee?.free_from), dateOnly(site?.fee?.free_until),
         evidence[0]?.url ?? "https://github.com/pyw31337/camp/tree/main/pipeline/registry/free-sites.json", json({ site, criteria: registry?.criteria ?? {} }), tier,
-        observedAt, site?.fee?.free_until ? `${dateOnly(site.fee.free_until)}T23:59:59+09:00` : null,
+        observedAt, futureExpiry(site?.fee?.free_until, observedAt),
       ],
     );
     assessments += 1;
