@@ -3141,13 +3141,13 @@ const HERO_FX = {
   },
   // 14 수영장: 여기저기 튀는 물방울 + 물결 + 수면 반짝임(비누방울 제거)
   "uq-pool": {
-    init(w, h) { for (let i = 0; i < this.n(45); i++) { const d = Math.random(); this.particles.push({ x: Math.random() * w, y: h * (0.6 + d * 0.4), s: 0.55 + d * 0.7, a: hRnd(0.4, 1), ph: Math.random() * 6.28, sp: hRnd(0.03, 0.07) }); } this.nextEvent = 20; },
+    init(w, h) { for (let i = 0; i < this.n(70); i++) { const d = Math.random(); this.particles.push({ x: Math.random() * w, y: h * (0.58 + d * 0.42), s: 0.8 + d * 0.9, a: hRnd(0.6, 1), ph: Math.random() * 6.28, sp: hRnd(0.03, 0.07) }); } this.nextEvent = 20; },
     draw(ctx, w, h, k, mx, my, hasMouse) {
       this.nextEvent -= k;
       if (this.nextEvent <= 0) { this.addSplash(hRnd(0.05, 0.95) * w, h * hRnd(0.66, 0.97)); this.nextEvent = hRnd(18, 55); }
       ctx.globalCompositeOperation = "lighter";
       const sp = heroSparkleSprite();
-      for (const p of this.particles) { p.ph += p.sp * k; const a = Math.max(0, Math.sin(p.ph)) * p.a; if (a < 0.04) continue; ctx.globalAlpha = a; ctx.drawImage(sp, p.x - 17 * p.s, p.y - 4 * p.s, 34 * p.s, 8 * p.s); }
+      for (const p of this.particles) { p.ph += p.sp * k; const a = Math.max(0, Math.sin(p.ph)) * p.a; if (a < 0.04) continue; ctx.globalAlpha = a; ctx.drawImage(sp, p.x - 17 * p.s, p.y - 4 * p.s, 34 * p.s, 8 * p.s); if (a > 0.55) ctx.drawImage(sp, p.x - 6 * p.s, p.y - 6 * p.s, 12 * p.s, 12 * p.s); }
       ctx.globalCompositeOperation = "source-over";
       this.drawRipples(ctx, k, 0.9, 0.014, 0.3, "235,250,255");
       const drop = heroGlow("200,240,255", 1);
@@ -3201,7 +3201,7 @@ const HERO_FX = {
     draw(ctx, w, h, k) {
       ctx.globalCompositeOperation = "lighter";
       const sp = heroSparkleSprite();
-      for (const p of this.particles) { p.ph += p.sp * k; const a = Math.max(0, Math.sin(p.ph)) * p.a; if (a < 0.04) continue; ctx.globalAlpha = a; ctx.drawImage(sp, p.x - 17 * p.s, p.y - 4 * p.s, 34 * p.s, 8 * p.s); }
+      for (const p of this.particles) { p.ph += p.sp * k; const a = Math.max(0, Math.sin(p.ph)) * p.a; if (a < 0.04) continue; ctx.globalAlpha = a; ctx.drawImage(sp, p.x - 17 * p.s, p.y - 4 * p.s, 34 * p.s, 8 * p.s); if (a > 0.55) ctx.drawImage(sp, p.x - 6 * p.s, p.y - 6 * p.s, 12 * p.s, 12 * p.s); }
       ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1;
       this.nextEvent -= k;
       if (this.nextEvent <= 0) { this.riders.push({ t: 0, v: hRnd(0.0022, 0.0034), ph: 0 }); this.nextEvent = hRnd(200, 480); }
