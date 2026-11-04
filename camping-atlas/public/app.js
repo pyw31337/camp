@@ -529,6 +529,7 @@ const QUICK = {
 };
 // 테마 아이콘(소유자 2026-10-20 지정 SVG). 모두 currentColor, 글자 왼쪽 1.1em.
 const TH_SVG = {
+  UNIQUE: ["0 0 24 24", '<path fill="currentColor" d="M10 2.5l1.9 5.1 5.1 1.9-5.1 1.9L10 16.5l-1.9-5.1L3 9.5l5.1-1.9zM18 13l1 2.6 2.5.9-2.5 1-1 2.5-.9-2.5-2.6-1 2.6-.9z"/>'],
   POPULAR: ["0 0 24 24", '<path fill="currentColor" d="M12.6 2c.6 3.6 5.9 6 5.9 12a6.5 6.5 0 0 1-13 0c0-3 1.6-5 3.2-6.3-.1 2 .8 3.4 2.1 3.6-.4-3.3.2-6.6 1.8-9.3z"/>'],
   VALLEY: ["0 0 24 24", '<path fill="currentColor" d="M6.18 10.95l2.54 3.175l.084 .093a1 1 0 0 0 1.403 -.01l1.637 -1.638l1.324 1.985a1 1 0 0 0 1.457 .226l3.632 -2.906l3.647 7.697a1 1 0 0 1 -.904 1.428h-18a1 1 0 0 1 -.904 -1.428zm5.82 -7.878a3.3 3.3 0 0 1 2.983 1.888l2.394 5.057l-3.15 2.52l-1.395 -2.092l-.075 -.099a1 1 0 0 0 -1.464 -.053l-1.711 1.709l-1.301 -1.627l-1.151 -1.435l1.888 -3.98a3.3 3.3 0 0 1 2.982 -1.888"/>'],
   FOREST: ["0 0 24 24", '<path fill="currentColor" d="M14.14 12h-.06c.81 0 1.28-.91.82-1.57L9.82 3.17a1 1 0 0 0-1.64 0L3.1 10.43c-.46.66.01 1.57.82 1.57h-.06L.99 16.46c-.43.66.05 1.54.84 1.54H7v2c0 1.1.9 2 2 2s2-.9 2-2v-2h5.17c.79 0 1.27-.88.84-1.54z" /><path fill="currentColor" d="M23.01 16.46L20.14 12h-.06c.81 0 1.28-.91.82-1.57l-5.08-7.26a1 1 0 0 0-1.64 0l-1.57 2.24l3.11 4.44a2.004 2.004 0 0 1-.16 2.5l2.29 3.57c.4.62.42 1.4.07 2.04c-.01.02-.02.03-.03.04h4.28c.79 0 1.27-.88.84-1.54M13 20c0 1.1.9 2 2 2s2-.9 2-2v-1h-4z" />'],
@@ -605,6 +606,8 @@ function mapBrowseEligible(c) {
 const isWaterPlayCamp = (c) => c.du === "water" || (c.amenities ?? []).some((a) => /물놀이장|물놀이터|수영장|풀장|워터/.test(a));
 const THEMES = [
   ["POPULAR", "실시간 인기", (c) => Boolean(c.m7 || c.rv?.n > 5)],
+  // 이색 캠핑장(소유자 t44u 2026-11-04): 노천탕·온수풀·승마 등 하위 분류 c.uq(pipeline/lib/unique-camps.mjs, 배포 때 덧붙임). 상단 배치.
+  ["UNIQUE", "이색 캠핑장", (c) => Boolean(c.uq?.length)],
   // 겨울 캠핑: 겨울 운영 + (난방 글램핑·카라반 또는 W 공지 1,100W 이상)
   ["WINTER", "겨울 캠핑", (c) => winterOpen(c) && (Boolean(c.heat?.length) || wattsOf(c) >= 1100)],
   ["VALLEY", "계곡", (c) => c.pf?.t?.includes("VALLEY")],
@@ -631,6 +634,7 @@ const THEMES = [
 ];
 const THEME_FILES = {
   POPULAR: "popular.webp",
+  UNIQUE: "glamping.webp",
   WINTER: "winter.webp",
   VALLEY: "valley.webp",
   FOREST: "forest.webp",
@@ -657,7 +661,11 @@ const THEME_FILES = {
   REVIEWS: "forest.webp",
 };
 const themeImg = (k) => `${ASSETS_BASE}images/themes/${THEME_FILES[k] ?? "valley.webp"}`;
+// 이색 캠핑장 하위 분류(라벨은 pipeline/lib/unique-camps.mjs UNIQUE_CATS와 같은 순서·이름)
+const UNIQUE_SUBS = [["spa", "노천탕·스파"], ["warmpool", "사계절 온수풀"], ["pool", "수영장"], ["animal", "승마·동물 체험"], ["kidscafe", "키즈카페·실내놀이"], ["valley", "계곡 바로 옆"], ["stay", "트리하우스·이색 숙소"], ["leisure", "레포츠 체험"], ["farm", "농촌·만들기 체험"]];
+let uniqueSub = "";
 const THEME_SUBS = {
+  UNIQUE: "노천탕·온수풀·승마·키즈카페·트리하우스처럼 특별한 시설과 체험이 있는 캠핑장",
   VR_TOUR: "예약 전 사이트 시야각, 그늘, 편의시설 동선을 360° VR 실측 파노라마로 볼 수 있는 캠핑장",
   DUMP_STATION: "카라반·캠핑카 오폐수 배출(블랙/그레이) 및 청수 공급이 가능한 한국관광공사 공인 덤프스테이션 설치 야영장",
   EXCELLENT: "문화체육관광부·한국관광공사 선정 4대 분야(친환경·가족·반려동물·교통약자) 공인 우수야영장",
@@ -4512,22 +4520,27 @@ function themeView(themeKey) {
   const tSub = isParkTheme
     ? "공공 원천으로 확인한 공원·생활 시설입니다. 야영·취사는 관리기관에 확인하세요."
     : (THEME_SUBS[themeKey] ?? "자연과 함께하는 특별한 테마 캠핑장");
-  const headingNoun = isParkTheme ? "공원 정보" : "캠핑장";
+  const headingNoun = isParkTheme ? "공원 정보" : /캠핑장$/.test(tName) ? "" : "캠핑장";
   const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "REVIEWS" ? (c) => Boolean((c.rv?.p?.length ?? 0) >= 2 || (c.rv?.t ?? 0) >= 4) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
   const totalInTheme = S.camps.filter(testFn).length;
   const isWp = themeKey === "WATER_PLAY";
+  if (themeKey !== "UNIQUE") uniqueSub = "";
 
   return `<section class="theme-page" aria-labelledby="tp-title">
     <div class="theme-hero" style="background-image: url('${tImg}')">
       <div class="theme-hero-overlay"></div>
       <div class="theme-hero-content">
         <a class="link theme-back" href="${APP_BASE}">${ic("left")} 처음으로</a>
-        <h1 id="tp-title">${esc(tName)} <em>${headingNoun}</em></h1>
+        <h1 id="tp-title">${esc(tName)}${headingNoun ? ` <em>${headingNoun}</em>` : ""}</h1>
         <p class="theme-hero-sub">${esc(tSub)} · 전국 <b>${fmt(totalInTheme)}곳</b></p>
       </div>
     </div>
     <div class="theme-body">
       ${isWp ? `<div class="theme-closed-alert">${ic("info")}<div><strong>여름 시즌 물놀이터 운영 종료 안내</strong><p>전국 물놀이터·야영장 수영장 정보입니다. 현재는 하절기 운영이 종료된 상태입니다. 렛츠 캠핑에서 미리 시설 정보를 확인하시고 다음 시즌 피서 계획에 참고해 보세요!</p></div></div>` : ""}
+      ${themeKey === "UNIQUE" ? `<div class="rail chips theme-uq" aria-label="이색 분류">
+        <button type="button" class="chip" data-theme-uq="" aria-pressed="${!uniqueSub}">전체 ${fmt(totalInTheme)}</button>
+        ${UNIQUE_SUBS.map(([k, l]) => [k, l, S.camps.filter((c) => c.uq?.includes(k)).length]).filter((x) => x[2]).map(([k, l, n]) => `<button type="button" class="chip" data-theme-uq="${k}" aria-pressed="${uniqueSub === k}">${esc(l)} ${fmt(n)}</button>`).join("")}
+      </div>` : ""}
       <div class="theme-tools-bar">
         <div class="rail chips theme-areas" aria-label="지역">
           ${AREAS.map(([k, l]) => `<button type="button" class="chip" data-theme-area="${k}" aria-pressed="${regionSelected(k)}">${l}</button>`).join("")}
@@ -4548,6 +4561,7 @@ function bindTheme(themeKey) {
   let pageN = 24;
   const getThemeList = () => {
     let list = S.camps.filter(testFn);
+    if (themeKey === "UNIQUE" && uniqueSub) list = list.filter((c) => c.uq?.includes(uniqueSub));
     if (regionKeys().length) list = list.filter((c) => regionMatches(c));
     // 공원은 사진이 없는 공공 장소를 포함하는 별도 탐색 테마다. 이 경로에서는
     // 공원 전용 정보 카드로 보이므로 사진 유무로 제거하지 않는다.
@@ -4588,6 +4602,14 @@ function bindTheme(themeKey) {
 
   const v = $("#view");
   const onClick = (e) => {
+    const u = e.target.closest("[data-theme-uq]");
+    if (u) {
+      uniqueSub = u.dataset.themeUq;
+      $$("[data-theme-uq]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.themeUq === uniqueSub)));
+      pageN = 24;
+      renderThemeGrid();
+      return;
+    }
     const a = e.target.closest("[data-theme-area]");
     if (a) {
       toggleRegion(a.dataset.themeArea);
