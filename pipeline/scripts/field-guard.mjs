@@ -74,6 +74,7 @@ const PROTECT = (o) => o && typeof o === "object" && !Array.isArray(o) && (o.pin
 const valOf = (o) => String(o?.value ?? o?.text ?? "").trim();
 function lower(bv, nv) {
   if (!nv || typeof nv !== "object" || isEmpty(nv.value ?? nv.text ?? nv.min)) return true;
+  if (JSON.stringify(bv) === JSON.stringify(nv)) return false; // 그대로인 값은 하향이 아니다(후기 등급 pinned 값 오탐, 2026-11-04)
   if (bv.pinned && JSON.stringify(bv) !== JSON.stringify(nv)) return true;
   const rb = Math.max(trustRank(provOf(bv)), 3), rn = trustRank(provOf(nv));
   return rn < rb || (VAGUE.test(valOf(nv)) && !VAGUE.test(valOf(bv)));
