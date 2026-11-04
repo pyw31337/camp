@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-04T01:24:38.556Z",
+ "generated_at": "2026-11-04T02:01:52.383Z",
  "rule": "pipeline/lib/fact-refine.mjs",
- "dropped": 260,
- "recoded": 151,
- "scoped": 634,
+ "dropped": 257,
+ "recoded": 150,
+ "scoped": 646,
  "items": [
   {
    "cid": "100843",
@@ -689,6 +689,17 @@
    "why": "일부 객실·구역만 허용"
   },
   {
+   "cid": "100196",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/sso0013/224267912299",
+   "quote": "캠핑장' 을왕리 솔트 캠핑장 인천광역시 중구 용유서로423번길 38 솔트캠핑장 겨울에 다 못 쓴 등유난로랑 장작 태우러 급 예약했던 캠핑장 ㅋㅋ 급하게 찾느라 가까운 곳으로 검색했고 애견 동반 가능한 곳으로 찾음 애견 동반 가능한 사이트가 정해져 있…",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
+  },
+  {
    "cid": "100240",
    "attr": "SITE_TYPE",
    "value": "AUTO",
@@ -725,6 +736,16 @@
    "src": "review_search",
    "url": "https://blog.naver.com/grom789/223543869438",
    "quote": "22:00 매너타임- 23:00~다음날 07:00 애견 동반불가 양도,양수불가 안전하고 쾌적한 캠핑을 위해 이용수칙이 지켜지지 않을시...",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "100490",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/rim_cookie_/224038826612",
+   "quote": "AM 11:00 편의시설 및 서비스 독채, 개별바베큐, 글램핑, 키즈테마, 수영장, 놀이터, 와이파이, 주차 가능 O 주의 사항 개인 숯, 장작 반입 및 사용 금지 애견동반 불가 추가...",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
@@ -1207,17 +1228,6 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
-   "cid": "1356",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "to": "ZONE_ONLY",
-   "src": "review_search",
-   "url": "https://blog.naver.com/today_eat_jju/223951180773",
-   "quote": "경남 산청 애견동반가능 글램핑장 '비토애 럭셔리 글램핑 산청점' .....",
-   "action": "recode",
-   "why": "일부 객실·구역만 허용"
-  },
-  {
    "cid": "467",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -1338,17 +1348,6 @@
    "quote": "* 전객실 애견동반 불가능합니다.",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
-   "cid": "8181",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "to": "ZONE_ONLY",
-   "src": "review_search",
-   "url": "https://blog.naver.com/gogo_jcy/223551035178",
-   "quote": "애견동반 가능, 텃밭 무료!",
-   "action": "recode",
-   "why": "일부 객실·구역만 허용"
   },
   {
    "cid": "100209",
@@ -1750,6 +1749,16 @@
    "why": "일부 구역·객실만의 금지를 동반 불가로 읽음"
   },
   {
+   "cid": "2538",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://emespic.tistory.com/75",
+   "quote": "산책로, 숲속놀이터, 잔디광장, 강변 자전거도로도 기재돼 있고 반려동물은 출입 불가로 표시돼 있어요.",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
    "cid": "7063",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
@@ -1911,8 +1920,8 @@
    "value": "ALLOWED",
    "to": "SMALL_ONLY",
    "src": "review_search",
-   "url": "https://blog.naver.com/tnrdml63/224102065251",
-   "quote": "파쇄석캠핑은 애견동반이 가능하며 (10kg미만) 추가요금이 발생하니 미리 문의 부탁드립니다!",
+   "url": "https://blog.naver.com/romi0890/223723268218",
+   "quote": "파쇄석캠핑은 애견동반이 가능하며 (10kg미만) 추가요금이 발생하니…",
    "action": "recode",
    "why": "크기 제한 있는 허용"
   },
@@ -1977,16 +1986,6 @@
    "src": "operator_homepage",
    "url": "https://pureunsoop.co.kr/reservation.html",
    "quote": "※ 애견 입수 불가",
-   "action": "drop",
-   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
-   "cid": "101056",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://blog.naver.com/camwoori/224295748913",
-   "quote": "individualRoom), 매점, 수영장 체크인/체크아웃 캠핏에서 확인해주세요 매너타임 22:00 ~ 08:00 반려동물 불가 (H-1, H-2, S-2 모두 펫 불가) 주변 관광지...생각보다 훨씬 알차거든요.",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
@@ -2250,23 +2249,13 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
-   "cid": "3383",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://all-infor.tistory.com/98",
-   "quote": "매월 4일 오픈&middot;야생화단지&middot;내린천 래프팅 연계&middot;반려견 동반 불가&middot;방문 전 체크리스트&middot;FAQ 포함",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
    "cid": "101084",
    "attr": "PET_POLICY",
    "value": "ALLOWED",
    "to": "ZONE_ONLY",
    "src": "review_search",
    "url": "https://blog.naver.com/sayuboyoun/224425223938",
-   "quote": "휴캠핑장 오토캠핑장, 해루질 장비 무료 대여, 갯벌체험, 애견 동반 가능, 데크 청포대휴캠핑장 충청남도 태안군 남면 청포대길 63-6 휴캠핑장",
+   "quote": "청포대휴캠핑장 오토캠핑장, 해루질 장비 무료 대여, 갯벌체험, 애견 동반 가능, 데크 청포대휴캠핑장 충청남도 태안군 남면 청포대길 63-6 휴캠핑장",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
   },
@@ -2301,16 +2290,6 @@
    "quote": "반려견 B사이트만 동반 가능 (짖음...포함 총 3사이트를 예약했는데요👍 여기서 나름 꿀팁을 발견했어요!",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
-  },
-  {
-   "cid": "101925",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://koreatravel-guide.tistory.com/110",
-   "quote": "국내 최장 모노레일&middot;행성 카라반&middot;함양군민 우선예약&middot;반려견 불가&middot;방문 전 체크리스트&middot;FAQ",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "100866",
@@ -2425,17 +2404,6 @@
    "quote": "퇴실 12시] 입 퇴실시간 준수 (추가 요금이 부과 될 수 있음 ) - 사이트 옆 주차 1-7번 사이트는 캠핑장 바깥도로로 주차 하기 - 매너타임 23시-8시 - 반려동물 금지...",
    "action": "drop",
    "why": "일부 구역·객실만의 금지를 동반 불가로 읽음"
-  },
-  {
-   "cid": "101025",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "to": "ZONE_ONLY",
-   "src": "review_search",
-   "url": "https://blog.naver.com/w150404/224265679029",
-   "quote": "보은국민여가캠핑장 충청북도 보은군 보은읍 속리산로 30 매월 1일 09:00 다음달 예약 가능 1인 최대 3사이트 예약 가능 입실 시 예약자 신분증 확인 1사이트 1...반려동물 동반 F1~16 사이트만 가능 예약 후 24시간 이내 결제 매너 타임 …",
-   "action": "recode",
-   "why": "일부 객실·구역만 허용"
   },
   {
    "cid": "1264",
@@ -2579,6 +2547,17 @@
    "src": "gocamping_intro",
    "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=648",
    "quote": "오토캠핑장의 경우 반려견 동반이 가능하지만, 글램핑은 허용하지 않는다.",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
+  },
+  {
+   "cid": "101673",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/mingming5510/224389662971",
+   "quote": "지난주 주말에는 비가 많이 오는 날 다녀온 휘게캠피크 휘게캠피크 경기도 화성시 만세구 우정읍 궁평항로 81-70 #휘게캠피크 입실 14:00 퇴실 12:00 (다음...2시까지 이용 가능) 애견 동반 가능 사이트 넓은 편 기본 주차 1대 차박/캠핑카…",
    "action": "recode",
    "why": "일부 객실·구역만 허용"
   },
@@ -4103,6 +4082,16 @@
    "why": "다른 업장 페이지(같은 플랫폼의 다른 id)"
   },
   {
+   "cid": "park-41220-00067-101pu",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/sieun3535/224249854712",
+   "quote": "입실 14시, 퇴실 11시 캠핑용품 대여: 매점에서 가능 매점 031-657-0844 주차안내: 무료 반려동물: 입장 불가 주소: 경기 평택시 팽성읍 내리길...",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
    "cid": "park-46130-00170-op7lw",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
@@ -4111,6 +4100,17 @@
    "quote": "또한 ▲만 13세 미만 어린이나 영유아 단독입장 불가 ▲출입명부 작성 ▲반려견 인식표 착용 ▲놀이터 내 음식물 반입 금지 등 운영 수칙을 준수해야 한다.",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "park-47111-00027-15m52",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://triple.guide/hotels/e100fe76-7a30-457d-8342-fa9052ebe1e2?checkIn=2024-02-24&checkOut=2024-02-25&numberOfAdults=2&agesOfChildren&skipInitialCache=true&_triple_no_navbar=true",
+   "quote": "반려동물 입실 가능 펜션 외에 반려동물 동반 시 입실이 거부될 수 있으며, 해당 사유로 환불 받을 수 없습니다.",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
   },
   {
    "cid": "park-11290-00001-y1mf",
@@ -4185,33 +4185,12 @@
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
-   "cid": "osm-w32660867",
-   "attr": "PET_POLICY",
-   "value": "ALLOWED",
-   "to": "SMALL_ONLY",
-   "src": "review_search",
-   "url": "https://leports.sailing-blog.click/4407",
-   "quote": "반려동물은 대형견이나 소형견 구분 없이 동반 입장이 가능하지만 목줄 착용과 배변 봉투를 지참해야 하며, 대형견은 입마개가 필수다.",
-   "action": "recode",
-   "why": "크기 제한 있는 허용"
-  },
-  {
    "cid": "rf-14xm2hg",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
    "src": "review_search",
    "url": "https://all-infor.tistory.com/166",
    "quote": "연계·남원 추어탕·반려견 불가·방문 전 체크리스트·FAQ inforpik.co.kr 전북특별자치도 남원시 신정동의 명산 요천 자락 요람에 자리 잡은 남원 자연휴양림은 푸른 소나무 군락지와 사계절 맑은 물이 흐르는 골짜기, 광한루원 및 지리산 둘레길 …",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
-   "cid": "rf-xslvy9",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://koreatravel-guide.tistory.com/153",
-   "quote": "치유의 숲길&middot;빙계계곡 연계&middot;의성군민 감면&middot;반려견 동반 불가&middot;방문 전 체크리스트&middot;FAQ 포함.",
    "action": "drop",
    "why": "홍보·목록 제목(규칙 아님)"
   },
@@ -4224,26 +4203,6 @@
    "quote": "반려동물 동반 입실 불가, 미성년자 숙박 예약 불가, 실내 흡연과 모든 고기구이 금지예요.",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
-  },
-  {
-   "cid": "rf-1r4889r",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://all-infor.tistory.com/148",
-   "quote": "짚코스터&middot;목재체험장&middot;반딧불&middot;별빛 관측&middot;반려견 동반 불가&middot;방문 전 체크리스트&middot;FAQ 포함.",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
-  },
-  {
-   "cid": "rf-2btyj6",
-   "attr": "PET_POLICY",
-   "value": "NOT_ALLOWED",
-   "src": "review_search",
-   "url": "https://koreatravel-guide.tistory.com/183",
-   "quote": "화요일 9시 오픈, 저수지 조망 독채 숙소, 산수유마을&middot;지리산&middot;화엄사 연계, 반려견 불가, 방문 전 체크리스트 포",
-   "action": "drop",
-   "why": "홍보·목록 제목(규칙 아님)"
   },
   {
    "cid": "rf-13vmkr6",

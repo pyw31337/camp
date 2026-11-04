@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-11-04T01:24:52.394Z",
+ "generated_at": "2026-11-04T02:02:10.286Z",
  "how_to_resolve": "원문을 대조해 data/quality/decisions.ndjson에 {cid, attr, value, url, why, by, at} 한 줄을 덧붙인다(docs/DATA_QUALITY_PROCESS.md 4단계).",
- "count": 120,
+ "count": 122,
  "items": [
   {
    "cid": "2179",
@@ -25,14 +25,14 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=354&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      }
     ]
    },
    "rival": {
     "value": "14:00",
-    "confidence": 0.95,
+    "confidence": 0.955,
     "sources": 2,
     "evidence": [
      {
@@ -123,7 +123,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=545&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      }
     ]
@@ -333,7 +333,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=2878&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      },
      {
@@ -417,7 +417,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=545&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      }
     ]
@@ -480,7 +480,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=18431&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      },
      {
@@ -564,7 +564,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14682&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      }
     ]
@@ -627,7 +627,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=7373&res_dt=20261031",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      },
      {
@@ -676,7 +676,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      },
      {
@@ -1243,7 +1243,7 @@
    "ui": true,
    "top": {
     "value": "11:00",
-    "confidence": 0.945,
+    "confidence": 0.95,
     "sources": 2,
     "evidence": [
      {
@@ -1271,7 +1271,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=354&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      }
     ]
@@ -1292,7 +1292,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=10019&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      },
      {
@@ -1334,7 +1334,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17897&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      }
     ]
@@ -1390,7 +1390,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=20246&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      }
     ]
@@ -1873,7 +1873,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14347&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      }
     ]
@@ -2174,7 +2174,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=19348&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      }
     ]
@@ -2755,7 +2755,7 @@
    "ui": true,
    "top": {
     "value": "ALLOWED",
-    "confidence": 0.918,
+    "confidence": 0.925,
     "sources": 2,
     "evidence": [
      {
@@ -3686,6 +3686,41 @@
    }
   },
   {
+   "cid": "398",
+   "name": "국립천관산자연휴양림",
+   "attr": "PET_POLICY",
+   "label": "반려견 동반",
+   "ui": true,
+   "top": {
+    "value": "NOT_ALLOWED",
+    "confidence": 0.85,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "CONFIRMED",
+      "src": "gocamping",
+      "url": null,
+      "at": null,
+      "quote": "불가능"
+     }
+    ]
+   },
+   "rival": {
+    "value": "ALLOWED",
+    "confidence": 0.6,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/going_lab/224436186150",
+      "at": "2026-10-14",
+      "quote": "자연휴양림 반려견 동반 2026 가능한 곳·입장 기준·서류 정리."
+     }
+    ]
+   }
+  },
+  {
    "cid": "721",
    "name": "지리산 당근 오토캠핑장",
    "attr": "PET_POLICY",
@@ -4309,7 +4344,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=3820&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      }
     ]
@@ -4379,7 +4414,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14862&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      },
      {
@@ -4421,7 +4456,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=4084&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      }
     ]
@@ -4456,7 +4491,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=15505&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      }
     ]
@@ -4491,7 +4526,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17846&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      },
      {
@@ -4533,7 +4568,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=14857&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      },
      {
@@ -4617,7 +4652,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=5331&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      }
     ]
@@ -4736,7 +4771,7 @@
       "grade": "OPERATOR",
       "src": "booking_engine",
       "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=17290&res_dt=20261107",
-      "at": "2026-11-03",
+      "at": "2026-11-04",
       "quote": ""
      }
     ]
@@ -4752,6 +4787,41 @@
       "url": "https://blog.naver.com/naehaseugem/224440241468",
       "at": "2026-10-13",
       "quote": "및 퇴실 캠핑 사이트 입실: 오후 1시 카라반 및 펜션동 입실: 오후 2시 퇴실: 오전 11시 관리실: 캠핑장 입구 앞 본관 건물"
+     }
+    ]
+   }
+  },
+  {
+   "cid": "park-48820-00001-n71qm",
+   "name": "남산공원",
+   "attr": "CHECKIN_TIME",
+   "label": "입실 시각",
+   "ui": true,
+   "top": {
+    "value": "13:00",
+    "confidence": 0.9,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "OPERATOR",
+      "src": "booking_engine",
+      "url": "https://m.thankqcamping.com/resv/view.hbb?cseq=16861&res_dt=20261107",
+      "at": "2026-11-04",
+      "quote": ""
+     }
+    ]
+   },
+   "rival": {
+    "value": "14:00",
+    "confidence": 0.6,
+    "sources": 1,
+    "evidence": [
+     {
+      "grade": "MENTION",
+      "src": "review_search",
+      "url": "https://blog.naver.com/yukihiroxxx/224180450640",
+      "at": "2026-02-11",
+      "quote": "호의 퇴근이...힐링캠핑장 운영 시간 입실 시간: 14시 퇴실 시간: 12시 매너타임 23:00 ~ 07:00 공원 부지에 있는…"
      }
     ]
    }
