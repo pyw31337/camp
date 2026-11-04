@@ -297,7 +297,6 @@
 {"cid":"1605","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1606","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1610","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"1621","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1622","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1628","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1631","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1071,7 +1070,6 @@
 {"cid":"100040","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100042","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100046","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100048","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100056","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100057","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100063","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -1263,7 +1261,6 @@
 {"cid":"100401","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100403","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100405","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100406","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100407","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100410","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100411","attr":"POWER_AVAILABLE","value":true,"grade":"VERIFIED","src":"pilot_verified","url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030116","at":"2026-10-16T09:00:00+09:00"}
@@ -2249,6 +2246,7 @@
 {"cid":"101782","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101785","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101789","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"101790","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101791","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101796","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101804","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
