@@ -25,7 +25,7 @@ env:
   GH_TOKEN: ${{ github.token }}  # land-on-main.sh (gh)
 
 concurrency:
-  group: nearby-photos-${{ github.ref }}
+  group: letscamp-data-publish
   cancel-in-progress: false
 
 jobs:

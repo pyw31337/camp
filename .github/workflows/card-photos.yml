@@ -17,7 +17,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: data-sync-refs/heads/main
+  group: letscamp-media-publish
   cancel-in-progress: false
 
 jobs:

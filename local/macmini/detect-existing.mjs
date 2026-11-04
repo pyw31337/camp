@@ -20,7 +20,9 @@ const patternOf = (args = []) => {
   return p && p.length >= 4 ? p : null;
 };
 const DOW = { 일: 0, 월: 1, 화: 2, 수: 3, 목: 4, 금: 5, 토: 6, sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6 };
-const add = (label, dow, hm, minutes = 60) => schedule.push({ label, dow, hm, minutes });
+// 자동 발견 시각은 참고 기록으로만 남긴다. 실제 충돌은 실행 중인 프로세스와
+// CPU 부하로 확인하고, 사용자가 avoid.txt에 직접 적은 예약만 강제 차단한다.
+const add = (label, dow, hm, minutes = 60) => schedule.push({ label, dow, hm, minutes, source: "auto" });
 
 // ── launchd ────────────────────────────────────────────────
 const dirs = [join(homedir(), "Library/LaunchAgents"), "/Library/LaunchAgents", "/Library/LaunchDaemons"];

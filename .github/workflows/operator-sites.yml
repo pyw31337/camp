@@ -32,7 +32,7 @@ env:
   GH_TOKEN: ${{ github.token }}  # land-on-main.sh (gh)
 
 concurrency:
-  group: operator-sites-${{ github.ref }}
+  group: letscamp-data-publish
   cancel-in-progress: false
 
 jobs:

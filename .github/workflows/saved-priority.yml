@@ -19,7 +19,7 @@ env:
   GH_TOKEN: ${{ github.token }}
 
 concurrency:
-  group: saved-priority
+  group: letscamp-data-publish
   cancel-in-progress: false
 
 jobs:

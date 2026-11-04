@@ -34,6 +34,8 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run validate
+      - name: 자동화 작성자 큐·충돌 방지 검사
+        run: node scripts/check-automation-governance.mjs
       - name: 당일 장소 시드 멱등(다시 돌려도 발행 데이터 그대로)
         run: node scripts/check-dayuse-idempotent.mjs
       - run: npm run calendar -- 90

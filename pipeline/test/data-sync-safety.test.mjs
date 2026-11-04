@@ -59,6 +59,11 @@ test("media 브랜치가 멈춰도 전체 동기화를 붙잡지 않는다", () 
   assert.match(wf, /timeout --foreground 300 bash \.github\/scripts\/media-r2\.sh pull/);
 });
 
+test("발행 직전 release gate가 카탈로그 구조를 검사한다", () => {
+  const wf = readFileSync(new URL("../../.github/workflows/data-sync.yml", import.meta.url), "utf8");
+  assert.match(wf, /node pipeline\/scripts\/release-gate\.mjs/);
+});
+
 test("sync-images는 매니페스트 밖 사진 파일을 IMAGE_ALLOW_SHRINK 없이 지우지 않는다", () => {
   const src = readFileSync(new URL("../scripts/sync-images.mjs", import.meta.url), "utf8");
   assert.match(src, /if \(ALLOW_SHRINK\) for \(const f of orphans\)/);
