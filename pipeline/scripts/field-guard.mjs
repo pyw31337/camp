@@ -75,7 +75,9 @@ const valOf = (o) => String(o?.value ?? o?.text ?? "").trim();
 function lower(bv, nv) {
   if (!nv || typeof nv !== "object" || isEmpty(nv.value ?? nv.text ?? nv.min)) return true;
   if (bv.pinned && JSON.stringify(bv) !== JSON.stringify(nv)) return true;
-  const rb = Math.max(trustRank(provOf(bv)), 3), rn = trustRank(provOf(nv));
+  // pinned MENTION/REFERENCE 값도 같은 값이면 손실이 아니다. 기존에 기준 등급을
+  // 무조건 3으로 올리면 MENTION(2)이 그대로 유지돼도 삭제로 잘못 판정됐다.
+  const rb = trustRank(provOf(bv)), rn = trustRank(provOf(nv));
   return rn < rb || (VAGUE.test(valOf(nv)) && !VAGUE.test(valOf(bv)));
 }
 export function downgrades(b, n) {
