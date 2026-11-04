@@ -42,6 +42,8 @@ jobs:
         run: node --test ../pipeline/test/data-sync-safety.test.mjs
       - name: Data merge policy (merge-policy unit/property tests)
         run: node --test ../pipeline/test/merge-policy.test.mjs
+      - name: Theme chips & sort (t45u regression)
+        run: node --test ../pipeline/test/theme-uq-sort.test.mjs ../pipeline/test/unique-camps.test.mjs
       # 데이터 누적 정책(docs/DATA_MERGE_POLICY.md): 이 변경이 기존 값을 지우거나 줄이면 막는다(봇 PR 포함).
       # 의도한 정정은 pipeline/registry/merge-overrides.json에 이유를 적어야 통과한다.
       - name: No data deletion (field-guard)
