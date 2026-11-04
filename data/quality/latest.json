@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-11-04T12:53:12.798Z",
- "date": "2026-11-04",
+ "generated_at": "2026-11-04T17:52:39.399Z",
+ "date": "2026-11-05",
  "totals": {
   "campgrounds": 6421,
-  "facts": 243784,
-  "pairs": 192514,
+  "facts": 243859,
+  "pairs": 192548,
   "mean_confidence": 0.78,
   "confirmed_pct": 84.1,
   "corroborated": 4126,
@@ -518,16 +518,16 @@
    }
   },
   "EXTRA_CAR_FEE": {
-   "coverage": 121,
+   "coverage": 122,
    "coverage_pct": 1.9,
-   "mean_confidence": 0.565,
-   "confirmed_pct": 38.8,
+   "mean_confidence": 0.563,
+   "confirmed_pct": 38.5,
    "corroborated": 5,
    "conflicts": 0,
-   "weak": 72,
+   "weak": 73,
    "status": {
     "CONFIRMED": 47,
-    "WEAK": 72,
+    "WEAK": 73,
     "SINGLE": 2
    }
   },
@@ -842,18 +842,18 @@
    }
   },
   "PET_POLICY": {
-   "coverage": 2877,
-   "coverage_pct": 44.8,
+   "coverage": 2881,
+   "coverage_pct": 44.9,
    "mean_confidence": 0.837,
-   "confirmed_pct": 90.2,
+   "confirmed_pct": 90.1,
    "corroborated": 726,
    "conflicts": 59,
-   "weak": 197,
+   "weak": 201,
    "status": {
     "CONFLICT": 59,
     "CONFIRMED": 2323,
     "VERIFIED": 273,
-    "WEAK": 197,
+    "WEAK": 201,
     "SINGLE": 25
    }
   },
@@ -947,15 +947,15 @@
    }
   },
   "PRICE_MENTION": {
-   "coverage": 2859,
-   "coverage_pct": 44.5,
+   "coverage": 2868,
+   "coverage_pct": 44.7,
    "mean_confidence": 0.37,
    "confirmed_pct": 0,
    "corroborated": 437,
    "conflicts": 0,
-   "weak": 2422,
+   "weak": 2431,
    "status": {
-    "WEAK": 2422,
+    "WEAK": 2431,
     "CORROBORATED": 437
    }
   },
@@ -986,28 +986,28 @@
    }
   },
   "REVIEW_PRO_CLEAN_FACILITY": {
-   "coverage": 1825,
+   "coverage": 1826,
    "coverage_pct": 28.4,
    "mean_confidence": 0.373,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 1712,
+   "weak": 1713,
    "status": {
-    "WEAK": 1712,
+    "WEAK": 1713,
     "SINGLE": 113
    }
   },
   "REVIEW_PRO_PET_FRIENDLY": {
-   "coverage": 1371,
+   "coverage": 1372,
    "coverage_pct": 21.4,
    "mean_confidence": 0.385,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 1227,
+   "weak": 1228,
    "status": {
-    "WEAK": 1227,
+    "WEAK": 1228,
     "SINGLE": 144
    }
   },
@@ -1025,28 +1025,28 @@
    }
   },
   "REVIEW_PRO_EASY_PARKING": {
-   "coverage": 598,
+   "coverage": 600,
    "coverage_pct": 9.3,
    "mean_confidence": 0.348,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 597,
+   "weak": 599,
    "status": {
-    "WEAK": 597,
+    "WEAK": 599,
     "SINGLE": 1
    }
   },
   "REVIEW_PRO_FAMILY_HEALING": {
-   "coverage": 984,
+   "coverage": 985,
    "coverage_pct": 15.3,
    "mean_confidence": 0.36,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 971,
+   "weak": 972,
    "status": {
-    "WEAK": 971,
+    "WEAK": 972,
     "SINGLE": 13
    }
   },
@@ -1101,15 +1101,15 @@
    }
   },
   "REVIEW_PRO_QUIET": {
-   "coverage": 1858,
-   "coverage_pct": 28.9,
+   "coverage": 1860,
+   "coverage_pct": 29,
    "mean_confidence": 0.381,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 1727,
+   "weak": 1729,
    "status": {
-    "WEAK": 1727,
+    "WEAK": 1729,
     "SINGLE": 131
    }
   },
@@ -1291,7 +1291,7 @@
   "REVIEW_PRO_WELL_KEPT": {
    "coverage": 184,
    "coverage_pct": 2.9,
-   "mean_confidence": 0.345,
+   "mean_confidence": 0.344,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
@@ -1641,17 +1641,17 @@
    }
   },
   "SITE_SIZE": {
-   "coverage": 1355,
+   "coverage": 1356,
    "coverage_pct": 21.1,
    "mean_confidence": 0.827,
    "confirmed_pct": 88,
    "corroborated": 328,
    "conflicts": 0,
-   "weak": 125,
+   "weak": 126,
    "status": {
     "CONFIRMED": 1008,
     "VERIFIED": 185,
-    "WEAK": 125,
+    "WEAK": 126,
     "CORROBORATED": 8,
     "SINGLE": 29
    }
@@ -1708,16 +1708,16 @@
    }
   },
   "SITE_TYPE": {
-   "coverage": 3509,
-   "coverage_pct": 54.6,
+   "coverage": 3511,
+   "coverage_pct": 54.7,
    "mean_confidence": 0.737,
    "confirmed_pct": 76.2,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 827,
+   "weak": 829,
    "status": {
     "CONFIRMED": 2674,
-    "WEAK": 827,
+    "WEAK": 829,
     "SINGLE": 8
    }
   },
@@ -1926,49 +1926,49 @@
    }
   },
   "CHECKIN_TIME": {
-   "coverage": 2777,
-   "coverage_pct": 43.2,
+   "coverage": 2781,
+   "coverage_pct": 43.3,
    "mean_confidence": 0.527,
    "confirmed_pct": 18.5,
    "corroborated": 584,
    "conflicts": 42,
-   "weak": 1341,
+   "weak": 1344,
    "status": {
     "VERIFIED": 218,
-    "WEAK": 1341,
+    "WEAK": 1344,
     "CONFIRMED": 296,
     "CONFLICT": 42,
-    "SINGLE": 704,
+    "SINGLE": 705,
     "CORROBORATED": 176
    }
   },
   "CHECKOUT_TIME": {
-   "coverage": 2803,
+   "coverage": 2808,
    "coverage_pct": 43.7,
    "mean_confidence": 0.526,
-   "confirmed_pct": 19.3,
+   "confirmed_pct": 19.2,
    "corroborated": 664,
    "conflicts": 15,
-   "weak": 1374,
+   "weak": 1377,
    "status": {
     "VERIFIED": 232,
-    "WEAK": 1374,
+    "WEAK": 1377,
     "CONFIRMED": 308,
-    "SINGLE": 651,
+    "SINGLE": 653,
     "CORROBORATED": 223,
     "CONFLICT": 15
    }
   },
   "MANNER_TIME": {
-   "coverage": 2215,
+   "coverage": 2217,
    "coverage_pct": 34.5,
    "mean_confidence": 0.392,
    "confirmed_pct": 5.8,
    "corroborated": 122,
    "conflicts": 0,
-   "weak": 1727,
+   "weak": 1729,
    "status": {
-    "WEAK": 1727,
+    "WEAK": 1729,
     "CONFIRMED": 113,
     "SINGLE": 313,
     "CORROBORATED": 47,
@@ -1990,15 +1990,15 @@
    }
   },
   "MIN_STAY": {
-   "coverage": 115,
+   "coverage": 114,
    "coverage_pct": 1.8,
-   "mean_confidence": 0.447,
-   "confirmed_pct": 20,
+   "mean_confidence": 0.448,
+   "confirmed_pct": 20.2,
    "corroborated": 2,
    "conflicts": 0,
-   "weak": 91,
+   "weak": 90,
    "status": {
-    "WEAK": 91,
+    "WEAK": 90,
     "CONFIRMED": 23,
     "SINGLE": 1
    }
@@ -2066,18 +2066,5 @@
    }
   }
  },
- "regressions": [
-  {
-   "attr": "VISITOR_POLICY",
-   "kind": "confidence",
-   "from": 0.592,
-   "to": 0.564
-  },
-  {
-   "attr": "EXTRA_CAR_FEE",
-   "kind": "confidence",
-   "from": 0.59,
-   "to": 0.565
-  }
- ]
+ "regressions": []
 }
