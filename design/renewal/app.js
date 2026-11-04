@@ -663,7 +663,7 @@ const THEME_FILES = {
 const themeImg = (k) => `${ASSETS_BASE}images/themes/${THEME_FILES[k] ?? "valley.webp"}`;
 // 이색 캠핑장 하위 분류(라벨은 pipeline/lib/unique-camps.mjs UNIQUE_CATS와 같은 순서·이름)
 // t45u(2026-11-04): 9개 묶음 → 12개 낱개, 여러 개 골라 OR로 보기. ‘계곡 바로 옆’은 칩 없이 테마 포함만 유지.
-const UNIQUE_SUBS = [["hotspring", "노천탕"], ["spa", "스파"], ["warmpool", "사계절온수풀"], ["pool", "수영장"], ["horse", "승마"], ["animal", "동물체험"], ["kidscafe", "키즈카페"], ["indoorplay", "실내놀이"], ["treehouse", "트리하우스"], ["stay", "이색숙소"], ["leisure", "레포츠"], ["farm", "체험"]];
+const UNIQUE_SUBS = [["hotspring", "노천탕"], ["spa", "스파"], ["warmpool", "사계절온수풀"], ["pool", "수영장"], ["horse", "승마"], ["animal", "동물체험"], ["kidscafe", "키즈카페"], ["indoorplay", "실내놀이"], ["treehouse", "트리하우스"], ["stay", "이색숙소"], ["leisure", "레포츠"], ["farm", "체험"], ["valley", "계곡"]];
 const uniqueSubs = new Set();
 // 이색 테마 정렬(t45u): "" 추천순 · area 사이트 넓은순 · near 가까운순 · fee 저렴한순. 고른 값과 기준 위치는 기기에 남긴다.
 let uqSort = store.get("mc-uq-sort", "");
@@ -4836,17 +4836,17 @@ function themeView(themeKey) {
     </div>
     <div class="theme-body">
       ${isWp ? `<div class="theme-closed-alert">${ic("info")}<div><strong>여름 시즌 물놀이터 운영 종료 안내</strong><p>전국 물놀이터·야영장 수영장 정보입니다. 현재는 하절기 운영이 종료된 상태입니다. 렛츠 캠핑에서 미리 시설 정보를 확인하시고 다음 시즌 피서 계획에 참고해 보세요!</p></div></div>` : ""}
-      ${themeKey === "UNIQUE" ? `<div class="theme-uq-bar">
-        <div class="rail chips theme-uq" aria-label="이색 분류 (여러 개 선택)">
+      <div class="theme-uq-bar${themeKey === "UNIQUE" ? "" : " sort-only"}">
+        ${themeKey === "UNIQUE" ? `<div class="rail chips theme-uq" aria-label="이색 분류 (여러 개 선택)">
           <button type="button" class="chip" data-theme-uq="" aria-pressed="${!uniqueSubs.size}">전체 <i>${fmt(totalInTheme)}</i></button>
           ${UNIQUE_SUBS.map(([k, l]) => [k, l, S.camps.filter((c) => c.uq?.includes(k)).length]).filter((x) => x[2]).map(([k, l, n]) => `<button type="button" class="chip" data-theme-uq="${k}" aria-pressed="${uniqueSubs.has(k)}">${esc(l)} <i>${fmt(n)}</i></button>`).join("")}
-        </div>
+        </div>` : ""}
         <div class="theme-sort" role="group" aria-label="정렬">
           <button type="button" class="chip" data-uq-sort="area" aria-pressed="${uqSort === "area"}">${ic("size")}사이트 넓은순</button>
           <button type="button" class="chip" data-uq-sort="near" aria-pressed="${uqSort === "near"}">${ic("pin")}<span data-near-lbl>${uqSort === "near" && nearPt ? esc(nearPt.label) : "가까운순"}</span></button>
           <button type="button" class="chip" data-uq-sort="fee" aria-pressed="${uqSort === "fee"}">${ic("won")}저렴한순</button>
         </div>
-      </div>` : ""}
+      </div>
       <div class="theme-tools-bar">
         <div class="rail chips theme-areas" aria-label="지역">
           ${AREAS.map(([k, l]) => `<button type="button" class="chip" data-theme-area="${k}" aria-pressed="${regionSelected(k)}">${l}</button>`).join("")}
@@ -4869,7 +4869,7 @@ function bindTheme(themeKey) {
     let list = S.camps.filter(testFn);
     if (themeKey === "UNIQUE" && uniqueSubs.size) list = list.filter((c) => c.uq?.some((k) => uniqueSubs.has(k)));
     if (regionKeys().length) list = list.filter((c) => regionMatches(c));
-    if (themeKey === "UNIQUE" && uqSort) {
+    if (uqSort) {
       // 값이 없는 곳은 지우지 않고 맨 뒤(정보 많은 순)로 둔다.
       const key = uqSort === "area" ? (c) => { const a = siteArea(c); return a == null ? null : -a; }
         : uqSort === "fee" ? (c) => campFeeMin(c) ?? null

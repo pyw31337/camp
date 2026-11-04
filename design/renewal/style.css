@@ -4377,6 +4377,7 @@ img.img-gone { visibility: hidden; }
 /* t45u 이색 캠핑장: 분류 칩(여러 개 선택) + 오른쪽 정렬 · 가까운순 위치 시트 */
 .theme-page .theme-uq-bar { display: flex; align-items: center; gap: 12px; margin-bottom: var(--sec-gap-inner, 12px); min-width: 0; }
 .theme-page .theme-uq-bar .theme-uq { flex: 1 1 auto; min-width: 0; padding-bottom: 0; }
+.theme-page .theme-uq-bar.sort-only { justify-content: flex-end; }
 .theme-page .theme-sort { display: flex; gap: 6px; flex: none; padding-left: 12px; border-left: 1px solid var(--line, rgba(0,0,0,.08)); }
 .theme-page .theme-sort .chip { height: 34px; padding: 0 12px; font-size: .86rem; }
 .theme-page .theme-sort .chip .ic { width: 15px; height: 15px; }
