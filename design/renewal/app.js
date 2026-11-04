@@ -950,7 +950,12 @@ function photosAll(c) {
   let list = [];
   // 우리 사본(media → Cloudflare R2, 2026-10-31 전량 업로드·확인)을 먼저 쓴다: 작은 webp라 빠르고 원본 404가 없다.
   // 사본이 없을 때만 공식 원문(고캠핑 썸네일)을 쓴다.
-  if (generated.length) list = [...generated, ...remote];
+  if (generated.length) {
+    list = [...generated, ...remote];
+    // media 브랜치의 오래된 파일이 삭제되었거나 배포 시점이 어긋난 경우에도
+    // 고캠핑 대표 원문을 다음 슬라이드에 남겨 빈 카드가 되지 않게 한다.
+    if (c.img && !String(c.img).startsWith("media/")) list.push(c.img);
+  }
   else if (remote.length) list = remote;
   else if (c.img) list = [c.img];
   // 공식 사진이 없는 곳: 캠핑장 이름으로 찾은 블로그 사진 중 배치도·안내판·야간 사진을 거른 한 장(pick-card-fallback.mjs → c.pt).

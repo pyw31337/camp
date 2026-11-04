@@ -37,7 +37,18 @@ for (const p of seed.places ?? []) {
   if (rec.homepage && !/^https?:\/\/[^/\s]+\.[^/\s]+/i.test(rec.homepage)) { const u = normalizeUrl(rec.homepage); if (u) rec.homepage = u; else { rec.homepage_raw = rec.homepage; delete rec.homepage; } }
   // 빈 값으로 기존 값을 지우지 않는다(docs/DATA_MERGE_POLICY.md ①).
   // 요금 형태 나누기(build-price-tiers)가 붙인 tiers는 같은 범위면 그대로 둔다(멱등).
-  if (byId.has(rec.id)) { const o = cat[byId.get(rec.id)].fee; if (rec.fee && o?.tiers && o.min === rec.fee.min && o.max === rec.fee.max) rec.fee = { ...rec.fee, tiers: o.tiers }; }
+  if (byId.has(rec.id)) {
+    const old = cat[byId.get(rec.id)];
+    // 사이트 타입은 누적 병합한다. 시드가 갱신됐다고 기존에 확인된
+    // 글램핑·숙박동 같은 타입을 지우면 데이터 품질이 오히려 후퇴한다.
+    // 코드별로 한 번만 남겨 반복 실행에도 순서가 고정된다.
+    if (Array.isArray(old.st) && Array.isArray(rec.st)) {
+      const seen = new Set(old.st.map((x) => String(x?.[0] ?? "")));
+      rec.st = [...old.st, ...rec.st.filter((x) => !seen.has(String(x?.[0] ?? "")))];
+    }
+    const o = old.fee;
+    if (rec.fee && o?.tiers && o.min === rec.fee.min && o.max === rec.fee.max) rec.fee = { ...rec.fee, tiers: o.tiers };
+  }
   if (byId.has(rec.id)) { cat[byId.get(rec.id)] = assignNonEmpty({ ...cat[byId.get(rec.id)] }, rec); replaced++; } else { cat.push(rec); byId.set(rec.id, cat.length - 1); added++; }
   if (!rec.du && !rules?.length && !day) continue; // 1박 수기 보강분(manual-camps)은 카탈로그 행만
   const dp = join(dataDir, "camps", `${rec.id}.json`);
