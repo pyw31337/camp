@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-11-04T17:13:17.547Z",
+ "generated_at": "2026-11-04T23:38:50.461Z",
  "source": {
   "label": "카카오 로컬 키워드 검색 · Daum 웹 검색(공식 REST API)",
   "docs": [
@@ -5388,7 +5388,7 @@
    "homepage": null
   },
   "640": {
-   "checked_at": "2026-11-04T17:13:14.035Z",
+   "checked_at": "2026-11-04T23:38:47.346Z",
    "place": {
     "id": "17591877",
     "name": "느티나무캠핑장",
@@ -8600,7 +8600,7 @@
    "homepage": null
   },
   "977": {
-   "checked_at": "2026-11-04T17:13:14.066Z",
+   "checked_at": "2026-11-04T23:38:47.367Z",
    "place": null,
    "candidates": [
     {
@@ -17909,7 +17909,7 @@
    "homepage": null
   },
   "2472": {
-   "checked_at": "2026-11-04T17:13:16.952Z",
+   "checked_at": "2026-11-04T23:38:49.840Z",
    "place": {
     "id": "898560745",
     "name": "원주두리캠핑장",
@@ -17928,6 +17928,18 @@
     }
    },
    "candidates": [
+    {
+     "host": "carcare.smarthow.net",
+     "url": "https://carcare.smarthow.net/camping/2472",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "원주두리캠핑장 예약·주소·시설",
+       "url": "https://carcare.smarthow.net/camping/2472"
+      }
+     ]
+    },
     {
      "host": "ojigo.kr",
      "url": "https://ojigo.kr/camping/2472",
@@ -46441,7 +46453,7 @@
    "homepage": null
   },
   "100122": {
-   "checked_at": "2026-11-04T17:13:15.935Z",
+   "checked_at": "2026-11-04T23:38:49.013Z",
    "place": {
     "id": "1579667394",
     "name": "라플란드",
@@ -49757,7 +49769,7 @@
    "homepage": null
   },
   "100289": {
-   "checked_at": "2026-11-04T17:13:15.564Z",
+   "checked_at": "2026-11-04T23:38:48.565Z",
    "place": {
     "id": "828875441",
     "name": "가델캠핑장",
@@ -59899,7 +59911,7 @@
    "homepage": null
   },
   "100597": {
-   "checked_at": "2026-11-04T17:13:16.094Z",
+   "checked_at": "2026-11-04T23:38:49.027Z",
    "place": {
     "id": "1537097954",
     "name": "노리터키즈캠핑장",
@@ -63160,7 +63172,7 @@
    "homepage": null
   },
   "100676": {
-   "checked_at": "2026-11-04T17:13:16.449Z",
+   "checked_at": "2026-11-04T23:38:49.367Z",
    "place": null,
    "candidates": [
     {
@@ -64757,7 +64769,7 @@
    "homepage": null
   },
   "100721": {
-   "checked_at": "2026-11-04T17:13:15.578Z",
+   "checked_at": "2026-11-04T23:38:48.565Z",
    "place": {
     "id": "1779251680",
     "name": "캠핑굄성",
@@ -76932,7 +76944,7 @@
    "homepage": null
   },
   "101093": {
-   "checked_at": "2026-11-04T17:13:16.978Z",
+   "checked_at": "2026-11-04T23:38:49.954Z",
    "place": null,
    "candidates": [
     {
@@ -81243,7 +81255,7 @@
    "homepage": null
   },
   "101214": {
-   "checked_at": "2026-11-04T17:13:14.067Z",
+   "checked_at": "2026-11-04T23:38:47.367Z",
    "place": {
     "id": "661902238",
     "name": "캠프다온",
@@ -83210,7 +83222,7 @@
    "homepage": null
   },
   "101269": {
-   "checked_at": "2026-11-04T17:13:15.928Z",
+   "checked_at": "2026-11-04T23:38:48.889Z",
    "place": {
     "id": "826081055",
     "name": "골든쌔들캠핑장",
@@ -83238,6 +83250,18 @@
       {
        "title": "골든쌔들 캠핑장 위치 (경기 양평군 용문면)",
        "url": "https://opendatflow.com/camping-sites/4298"
+      }
+     ]
+    },
+    {
+     "host": "carcare.smarthow.net",
+     "url": "https://carcare.smarthow.net/camping/101269",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "골든쌔들 캠핑장 예약·주소·시설",
+       "url": "https://carcare.smarthow.net/camping/101269"
       }
      ]
     },
@@ -88520,7 +88544,7 @@
    "homepage": null
   },
   "101416": {
-   "checked_at": "2026-11-04T17:13:15.413Z",
+   "checked_at": "2026-11-04T23:38:48.412Z",
    "place": {
     "id": "1931362185",
     "name": "내포캠핑스퀘어",
@@ -95292,7 +95316,7 @@
    "homepage": null
   },
   "101608": {
-   "checked_at": "2026-11-04T17:13:16.072Z",
+   "checked_at": "2026-11-04T23:38:49.027Z",
    "place": {
     "id": "2026652673",
     "name": "원더 포레스트",
@@ -96221,7 +96245,7 @@
    "homepage": null
   },
   "101639": {
-   "checked_at": "2026-11-04T17:13:14.068Z",
+   "checked_at": "2026-11-04T23:38:47.368Z",
    "place": {
     "id": "604025620",
     "name": "물멍 캠프",
@@ -114610,7 +114634,7 @@
    "homepage": null
   },
   "102221": {
-   "checked_at": "2026-11-04T17:13:16.896Z",
+   "checked_at": "2026-11-04T23:38:49.775Z",
    "place": null,
    "candidates": [
     {
@@ -114771,7 +114795,7 @@
    "homepage": null
   },
   "102229": {
-   "checked_at": "2026-11-04T17:13:16.590Z",
+   "checked_at": "2026-11-04T23:38:49.497Z",
    "place": null,
    "candidates": [],
    "needs_homepage": false,
@@ -115588,7 +115612,7 @@
    "homepage": null
   },
   "102270": {
-   "checked_at": "2026-11-04T17:13:16.616Z",
+   "checked_at": "2026-11-04T23:38:49.497Z",
    "place": null,
    "candidates": [
     {
@@ -118583,7 +118607,7 @@
    "homepage": null
   },
   "102377": {
-   "checked_at": "2026-11-04T17:13:16.454Z",
+   "checked_at": "2026-11-04T23:38:49.494Z",
    "place": null,
    "candidates": [],
    "needs_homepage": true,
