@@ -25,7 +25,309 @@
       "quote": "취소 및 환불 규정: 이용일 5일 전 취소 시 100% 환불, 2일 전 80% 환불, 1일 전 60% 환불, 이용일 당일 30% 환불 (예약 당일 취소·시설 사용 불가 시 100%)"
      },
      "pinned": true
-    }
+    },
+    "profile.fields.MANNER": {
+     "value": "23:00~07:00",
+     "grade": "OPERATOR",
+     "source": {
+      "label": "화성에코팜테마파크 이용안내(운영 기관)",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do",
+      "date": "2026-11-04",
+      "quote": "매너타임 23:00~07:00 준수"
+     },
+     "pinned": true
+    },
+    "profile.fields.POWER": {
+     "value": "최대 600W (초과 시 자동 차단)",
+     "grade": "OPERATOR",
+     "source": {
+      "label": "화성에코팜테마파크 이용안내(운영 기관)",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do",
+      "date": "2026-11-04",
+      "quote": "전열기구 600W 초과 사용 제한 (최대 600W)"
+     },
+     "pinned": true
+    },
+    "profile.fields.FIRE": {
+     "value": "장작·숯·갈탄·펠렛·화목난로 금지",
+     "grade": "OPERATOR",
+     "source": {
+      "label": "화성에코팜테마파크 이용안내(운영 기관)",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do",
+      "date": "2026-11-04",
+      "quote": "장작·숯·갈탄·펠렛 사용 금지 화목난로 이용금지"
+     },
+     "pinned": true
+    },
+    "profile.fields.EXTRA_FEE": {
+     "value": "중학생 이상 초과 1인 5,000원 · 당일 이용 2만~3.5만원 · 화성시민 30%·다자녀 등 50% 감면, 비수기 연박 20~30% 감면",
+     "grade": "OPERATOR",
+     "source": {
+      "label": "화성에코팜테마파크 이용안내(운영 기관)",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/price.do",
+      "date": "2026-11-04",
+      "quote": "사용인원초과 중학생 이상 1명당 5,000원 추가 ... 당일 25,000원 20,000원 ... 비수기 장기 투숙 이용자 2일 연속 20% 3일 이상 30% 감면"
+     },
+     "pinned": true
+    },
+    "profile.fields.TYPE": {
+     "value": "오토 106 · 일반형 A-D(5×8m, 기준 5명/최대 7명, 차 1대) · 확장형 E·F(12×8m, 기준 8명/최대 12명, 차 2대) · 반려견동반(6×8m)",
+     "grade": "OPERATOR",
+     "source": {
+      "label": "화성에코팜테마파크 이용안내(운영 기관)",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/price.do",
+      "date": "2026-11-04",
+      "quote": "일반형 A-D (5m x 8m) 5명 (최대 7명) 1대 / 확장형 E, F (12m x 8m) 8명 (최대 12명) 2대 / 반려견동반 (6m x 8m)"
+     },
+     "pinned": true
+    },
+    "house_rules.rules": [
+     {
+      "cat": "ban",
+      "text": "국가비상사태, 정전, 천재지변 등 불가항력",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/",
+      "at": "2026-10-20T00:54:29.391Z",
+      "src": "운영자 홈페이지"
+     },
+     {
+      "cat": "ban",
+      "text": "단, 통제할 수 없는 사유는 사후공지로 대신합니다.",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/",
+      "at": "2026-10-20T00:54:29.391Z",
+      "src": "운영자 홈페이지"
+     },
+     {
+      "cat": "ban",
+      "text": "차내 음식물 반입 및 음주 행위 금지",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/",
+      "at": "2026-10-20T00:54:29.391Z",
+      "src": "운영자 홈페이지"
+     },
+     {
+      "cat": "ban",
+      "text": "반려동물 동승 불가(맹인안내견 제외)",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/",
+      "at": "2026-10-20T00:54:29.391Z",
+      "src": "운영자 홈페이지"
+     },
+     {
+      "cat": "ban",
+      "text": "티켓 분실 및 훼손 시 재발급이 불가",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/",
+      "at": "2026-10-20T00:54:29.391Z",
+      "src": "운영자 홈페이지"
+     },
+     {
+      "cat": "limit",
+      "text": "순환형 바다노선/인천레트로 노선은 하루 3회,순환형 통합권은 하루 5회의 탑승횟수 제한이 있습니다.",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/",
+      "at": "2026-10-20T00:54:29.391Z",
+      "src": "운영자 홈페이지"
+     },
+     {
+      "cat": "rule",
+      "text": "세부 일정은 공지사항과 예약 화면을 함께 확인해 주세요.",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/",
+      "at": "2026-10-20T00:54:29.391Z",
+      "src": "운영자 홈페이지"
+     },
+     {
+      "cat": "rule",
+      "text": "방문 전 꼭 확인해야 할 공지와 이용 정보를 빠르게 확인해 주세요.",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/board/list.do",
+      "at": "2026-10-20T00:54:29.391Z",
+      "src": "운영자 홈페이지"
+     },
+     {
+      "cat": "rule",
+      "text": "매너타임 23:00~07:00 (소음·고성방가·앰프 금지)",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do",
+      "at": "2026-11-04",
+      "src": "운영 기관 이용안내"
+     },
+     {
+      "cat": "ban",
+      "text": "장작·숯·갈탄·펠렛 및 화목난로 사용 금지",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do",
+      "at": "2026-11-04",
+      "src": "운영 기관 이용안내"
+     },
+     {
+      "cat": "ban",
+      "text": "액화석유가스(LPG) 반입 금지 · 폭죽·풍등·불꽃놀이 금지",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do",
+      "at": "2026-11-04",
+      "src": "운영 기관 이용안내"
+     },
+     {
+      "cat": "rule",
+      "text": "전열기구 최대 600W, 초과 시 자동 차단 · 라디에이터·온풍기·전기밥솥·냉장고 사용 금지",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do",
+      "at": "2026-11-04",
+      "src": "운영 기관 이용안내"
+     },
+     {
+      "cat": "rule",
+      "text": "텐트 내 가스/난방기구 사용 시 환기·경보기 필수 · 일산화탄소 감지기 무상 대여(관제센터)",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do",
+      "at": "2026-11-04",
+      "src": "운영 기관 이용안내"
+     },
+     {
+      "cat": "rule",
+      "text": "차량 20km 이하 서행·캠핑장 내 일방통행 · 나무데크 차량 진입 금지 · 오토바이·킥보드·자전거·전동장비 금지",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do",
+      "at": "2026-11-04",
+      "src": "운영 기관 이용안내"
+     },
+     {
+      "cat": "rule",
+      "text": "미성년자 보호자 동반 필수 · 신분증 확인 후 체크인 · 사이트 임의 변경 금지",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do",
+      "at": "2026-11-04",
+      "src": "운영 기관 이용안내"
+     },
+     {
+      "cat": "rule",
+      "text": "화장실·샤워장 내 설거지·빨래 금지",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do",
+      "at": "2026-11-04",
+      "src": "운영 기관 이용안내"
+     }
+    ],
+    "house_rules.ops": [
+     {
+      "text": "테마파크 내 시설 별 이용 시간은 상이할 수 있습니다.",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/",
+      "at": "2026-10-20T00:54:29.391Z",
+      "src": "운영자 홈페이지"
+     },
+     {
+      "text": "기상 상황과 시설 점검 일정에 따라 운영시간이 조정될 수 있습니다.",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/",
+      "at": "2026-10-20T00:54:29.391Z",
+      "src": "운영자 홈페이지"
+     },
+     {
+      "text": "테마파크 평일 09:00~18:00, 주말 09:00~20:00 · 캠프 입장마감 21:00 · 당일 이용 11:00~20:00",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do",
+      "at": "2026-11-04",
+      "src": "운영 기관 이용안내"
+     },
+     {
+      "text": "관리사무소 031-5180-7820",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do",
+      "at": "2026-11-04",
+      "src": "운영 기관 이용안내"
+     }
+    ]
+   }
+  },
+  "102377": {
+   "detail": {
+    "profile.fields.EXTRA_FEE": {
+     "value": "조기입실 1시간 5,000원 · 팬히터 대여 1박 2만/2박 3만(등유 별도) · 튜브 3,000원 · 석쇠 2,000원 · 안마의자 10분 1,000원(현금)",
+     "grade": "MENTION",
+     "source": {
+      "label": "방문 후기(네이버 블로그, 2026-05)",
+      "url": "https://m.blog.naver.com/greensteps_family/224273182550",
+      "date": "2026-05-03",
+      "quote": "조기입실 시간당 5,000원, 팬히터 대여 1박2일 2만원·2박3일 3만원, 튜브 3,000원, 석쇠 2,000원, 안마의자 10분 1,000원"
+     },
+     "pinned": true
+    },
+    "profile.fields.FIRE": {
+     "value": "화로대 개별 · 장작 현장 판매 1망 10,000원",
+     "grade": "MENTION",
+     "source": {
+      "label": "방문 후기(네이버 블로그, 2026-05)",
+      "url": "https://m.blog.naver.com/greensteps_family/224273182550",
+      "date": "2026-05-03",
+      "quote": "장작 1망 10,000원 (무인매점)"
+     },
+     "pinned": true
+    },
+    "profile.fields.CHECKIN": {
+     "value": "14:00부터",
+     "grade": "MENTION",
+     "source": {
+      "label": "여행정보 집계(TourAPI 기반)",
+      "url": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3010874",
+      "date": "2026-11-04",
+      "quote": "입실 14:00 / 퇴실 12:00"
+     },
+     "pinned": true
+    },
+    "profile.fields.CHECKOUT": {
+     "value": "12:00까지",
+     "grade": "MENTION",
+     "source": {
+      "label": "여행정보 집계(TourAPI 기반)",
+      "url": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3010874",
+      "date": "2026-11-04",
+      "quote": "입실 14:00 / 퇴실 12:00"
+     },
+     "pinned": true
+    },
+    "profile.fields.SANITARY": {
+     "value": "개별 샤워부스 여3·남2(24시간) · 탈수기·드라이기 · C존 화장실/개수대 없음",
+     "grade": "MENTION",
+     "source": {
+      "label": "방문 후기(네이버 블로그, 2026-05)",
+      "url": "https://m.blog.naver.com/greensteps_family/224273182550",
+      "date": "2026-05-03",
+      "quote": "샤워부스 여자 3개, 남자 2개 24시간, 탈수기·드라이기 비치. C존은 언덕 위로 화장실·샤워장·개수대 없음"
+     },
+     "pinned": true
+    },
+    "house_rules.rules": [
+     {
+      "cat": "rule",
+      "text": "1사이트 1가족 또는 성인 최대 2인, 인원 추가 불가 · 방문객 입장 불가",
+      "url": "https://ktriptips.com",
+      "at": "2026-11-04",
+      "src": "캠핑 정보 집계(블로그·여행정보)"
+     },
+     {
+      "cat": "rule",
+      "text": "매너타임 22:00~07:00",
+      "url": "https://ktriptips.com",
+      "at": "2026-11-04",
+      "src": "캠핑 정보 집계(블로그·여행정보)"
+     }
+    ],
+    "house_rules.ops": [
+     {
+      "text": "온수풀 12:00~19:00 (약 32℃, 캠핑객 무료, 겨울에도 온수 운영)",
+      "url": "https://m.blog.naver.com/greensteps_family/224273182550",
+      "at": "2026-05-03",
+      "src": "방문 후기"
+     },
+     {
+      "text": "키즈룸 09:00~20:00",
+      "url": "https://m.blog.naver.com/greensteps_family/224273182550",
+      "at": "2026-05-03",
+      "src": "방문 후기"
+     },
+     {
+      "text": "A존 15면(AT-8~12 타프존) · A6/A7 자연 그늘 · A19/A20 수영장·키즈룸 인접 · B존 협소·경사, B38~39 그늘 · C존 언덕 위(편의시설 없음)",
+      "url": "https://m.blog.naver.com/greensteps_family/224273182550",
+      "at": "2026-05-03",
+      "src": "방문 후기"
+     },
+     {
+      "text": "무인 매점(지역화폐 가능) · 와이파이 · 쓰레기봉투 제공",
+      "url": "https://m.blog.naver.com/greensteps_family/224273182550",
+      "at": "2026-05-03",
+      "src": "방문 후기"
+     },
+     {
+      "text": "요금: 비수기 평일 2만원대, 2025년 12월 이후 인상(타프존 주말 3만원 추가) · 항공기 소음·모기 유의",
+      "url": "https://m.blog.naver.com/greensteps_family/224273182550",
+      "at": "2026-05-03",
+      "src": "방문 후기"
+     }
+    ]
    }
   }
  }
