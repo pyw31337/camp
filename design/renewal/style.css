@@ -4373,3 +4373,34 @@ img.img-gone { visibility: hidden; }
 
 /* 이색 캠핑장 하위 분류 칩(t44u) — 지역 칩과 같은 칩 양식, 한 줄 가로 넘김 */
 .theme-page .theme-uq { gap: 8px; padding-bottom: var(--sec-gap-inner, 12px); }
+
+/* t45u 이색 캠핑장: 분류 칩(여러 개 선택) + 오른쪽 정렬 · 가까운순 위치 시트 */
+.theme-page .theme-uq-bar { display: flex; align-items: center; gap: 12px; margin-bottom: var(--sec-gap-inner, 12px); min-width: 0; }
+.theme-page .theme-uq-bar .theme-uq { flex: 1 1 auto; min-width: 0; padding-bottom: 0; }
+.theme-page .theme-sort { display: flex; gap: 6px; flex: none; padding-left: 12px; border-left: 1px solid var(--line, rgba(0,0,0,.08)); }
+.theme-page .theme-sort .chip { height: 34px; padding: 0 12px; font-size: .86rem; }
+.theme-page .theme-sort .chip .ic { width: 15px; height: 15px; }
+.theme-page .theme-sort [data-near-lbl] { max-width: 9em; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 760px) {
+  .theme-page .theme-uq-bar { flex-direction: column; align-items: stretch; gap: 8px; }
+  .theme-page .theme-sort { padding-left: 0; border-left: 0; overflow-x: auto; scrollbar-width: none; }
+  .theme-page .theme-sort::-webkit-scrollbar { display: none; }
+}
+.near-sheet .near-in { gap: 14px; }
+.near-sheet .near-here { width: 100%; justify-content: center; gap: 8px; height: 46px; font-weight: 800; }
+.near-sheet .near-q { display: flex; align-items: center; gap: 8px; height: 46px; padding: 0 14px; border-radius: 14px; background: var(--soft); }
+.near-sheet .near-q input { flex: 1; min-width: 0; border: 0; background: none; font: inherit; color: var(--ink); outline: none; }
+.near-sheet .near-list { display: grid; gap: 4px; max-height: 46vh; overflow: auto; }
+.near-sheet .near-list:empty { display: none; }
+.near-sheet .near-opt { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; text-align: left; background: none; color: var(--ink); }
+.near-sheet .near-opt:hover, .near-sheet .near-opt:focus-visible { background: var(--soft); }
+.near-sheet .near-opt span { display: grid; gap: 2px; min-width: 0; }
+.near-sheet .near-opt small { color: var(--ink-3, #888); font-size: .8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.near-sheet .near-cur { font-size: .85rem; color: var(--ink-3, #888); }
+.near-sheet { width: min(440px, calc(100vw - 24px)); box-sizing: border-box; }
+.near-sheet .near-in { min-width: 0; padding: 18px; }
+.near-sheet .sheet-head { gap: 10px; min-width: 0; }
+.near-sheet .sheet-head h2 { font-size: 1.12rem; min-width: 0; }
+.near-sheet .near-q, .near-sheet .near-here { box-sizing: border-box; width: 100%; min-width: 0; }
+.near-sheet .near-here { display: inline-flex; align-items: center; border-radius: 14px; background: var(--sel); color: var(--on-sel); }
+.near-sheet .near-here .ic, .near-sheet .near-opt .ic { width: 18px; height: 18px; flex: none; }

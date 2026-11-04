@@ -634,7 +634,7 @@ const THEMES = [
 ];
 const THEME_FILES = {
   POPULAR: "popular.webp",
-  UNIQUE: "glamping.webp",
+  UNIQUE: "unique.webp", // t45u: 글램핑과 같던 썸네일 → 이색 전용 이미지(AI 생성, 글자 없음)
   WINTER: "winter.webp",
   VALLEY: "valley.webp",
   FOREST: "forest.webp",
@@ -662,8 +662,13 @@ const THEME_FILES = {
 };
 const themeImg = (k) => `${ASSETS_BASE}images/themes/${THEME_FILES[k] ?? "valley.webp"}`;
 // 이색 캠핑장 하위 분류(라벨은 pipeline/lib/unique-camps.mjs UNIQUE_CATS와 같은 순서·이름)
-const UNIQUE_SUBS = [["spa", "노천탕·스파"], ["warmpool", "사계절 온수풀"], ["pool", "수영장"], ["animal", "승마·동물 체험"], ["kidscafe", "키즈카페·실내놀이"], ["valley", "계곡 바로 옆"], ["stay", "트리하우스·이색 숙소"], ["leisure", "레포츠 체험"], ["farm", "농촌·만들기 체험"]];
-let uniqueSub = "";
+// t45u(2026-11-04): 9개 묶음 → 12개 낱개, 여러 개 골라 OR로 보기. ‘계곡 바로 옆’은 칩 없이 테마 포함만 유지.
+const UNIQUE_SUBS = [["hotspring", "노천탕"], ["spa", "스파"], ["warmpool", "사계절온수풀"], ["pool", "수영장"], ["horse", "승마"], ["animal", "동물체험"], ["kidscafe", "키즈카페"], ["indoorplay", "실내놀이"], ["treehouse", "트리하우스"], ["stay", "이색숙소"], ["leisure", "레포츠"], ["farm", "체험"]];
+const uniqueSubs = new Set();
+// 이색 테마 정렬(t45u): "" 추천순 · area 사이트 넓은순 · near 가까운순 · fee 저렴한순. 고른 값과 기준 위치는 기기에 남긴다.
+let uqSort = store.get("mc-uq-sort", "");
+let nearPt = store.get("mc-near-pt", null);
+const siteArea = (c) => { let m = 0; for (const [w, d] of c.sizes ?? []) { const a = Number(w) * Number(d); if (a > m && a < 2000) m = a; } return m || null; };
 const THEME_SUBS = {
   UNIQUE: "노천탕·온수풀·승마·키즈카페·트리하우스처럼 특별한 시설과 체험이 있는 캠핑장",
   VR_TOUR: "예약 전 사이트 시야각, 그늘, 편의시설 동선을 360° VR 실측 파노라마로 볼 수 있는 캠핑장",
@@ -2123,7 +2128,7 @@ function commonFinderForm({ formAttr = "data-search", isList = false } = {}) {
     <button class="finder-go" type="submit">${ic("search")}<span>찾기</span></button>
   </form>`;
 }
-// 10대 감성 캠핑 테마 메타데이터
+// 감성 캠핑 테마 메타데이터(기존 10종 + 이색 12종)
 const HERO_THEMES = [
   {
     id: "night-sky",
@@ -2244,6 +2249,163 @@ const HERO_THEMES = [
     titleB: "대관령 초원 캠핑",
     summary: "탁 트인 푸른 하늘과 보드라운 잔디밭 위에서 누리는 자유",
     effect: "green-meadow"
+  },
+  // t45u(2026-11-04): 이색 캠핑장 12종 — 이미지(AI 생성·글자 없음) + 카피 + 효과(김·물방울·꽃가루 등)
+  {
+    id: "uq-hotspring",
+    emoji: "♨️",
+    shortName: "노천탕",
+    badge: "별빛 아래 노천탕",
+    moodDescription: "산자락 노천탕 & 피어오르는 김",
+    image: "hero-hotspring.webp",
+    titleA: "별 아래 따끈한 노천탕",
+    titleB: "노천탕 캠핑",
+    summary: "산바람에 김이 피어오르는 노천탕에 몸을 담그는 하룻밤",
+    effect: "steam",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-spa",
+    emoji: "🛁",
+    shortName: "스파",
+    badge: "보글보글 프라이빗 스파",
+    moodDescription: "자쿠지 & 히노끼 스파 글램핑",
+    image: "hero-spa.webp",
+    titleA: "캔들 불빛 아래 보글보글",
+    titleB: "프라이빗 스파 캠핑",
+    summary: "하루의 피로를 녹이는 따스한 물거품과 은은한 촛불",
+    effect: "bubbles",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-warmpool",
+    emoji: "🌡️",
+    shortName: "사계절온수풀",
+    badge: "겨울에도 따뜻한 물놀이",
+    moodDescription: "사계절 온수풀 & 설경 물안개",
+    image: "hero-warmpool.webp",
+    titleA: "눈 내리는 날에도 첨벙",
+    titleB: "사계절 온수풀 캠핑",
+    summary: "하얀 설경 속 김이 오르는 따뜻한 풀에서 즐기는 물놀이",
+    effect: "steam",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-pool",
+    emoji: "🏊",
+    shortName: "수영장",
+    badge: "햇살 가득 수영장",
+    moodDescription: "파란 수영장 & 여름 물놀이",
+    image: "hero-pool.webp",
+    titleA: "반짝이는 물빛 속으로",
+    titleB: "수영장 캠핑",
+    summary: "텐트 바로 앞 파란 수영장에서 하루 종일 첨벙첨벙",
+    effect: "bubbles",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-horse",
+    emoji: "🐎",
+    shortName: "승마",
+    badge: "초원 위 승마 체험",
+    moodDescription: "노을 지는 목장 & 승마 체험",
+    image: "hero-horse.webp",
+    titleA: "노을 진 초원을 달려",
+    titleB: "승마 체험 캠핑",
+    summary: "말과 교감하며 초원을 거니는 특별한 캠핑의 추억",
+    effect: "green-meadow",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-animal",
+    emoji: "🦙",
+    shortName: "동물체험",
+    badge: "보들보들 동물 친구",
+    moodDescription: "알파카·양·염소 먹이주기",
+    image: "hero-animal.webp",
+    titleA: "보들보들 동물 친구와",
+    titleB: "동물 체험 캠핑",
+    summary: "아이와 함께 먹이 주고 쓰다듬는 따뜻한 교감의 시간",
+    effect: "cherry-blossom",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-kidscafe",
+    emoji: "🧸",
+    shortName: "키즈카페",
+    badge: "아이가 먼저 웃는 곳",
+    moodDescription: "볼풀·미끄럼틀 키즈카페",
+    image: "hero-kidscafe.webp",
+    titleA: "아이들의 웃음이 가득",
+    titleB: "키즈카페 캠핑",
+    summary: "캠핑장 안 키즈카페에서 아이는 신나고 부모는 여유롭게",
+    effect: "confetti",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-indoorplay",
+    emoji: "🎲",
+    shortName: "실내놀이",
+    badge: "비 와도 걱정 없는",
+    moodDescription: "트램펄린·보드게임 실내놀이",
+    image: "hero-indoorplay.webp",
+    titleA: "비가 와도 신나는 하루",
+    titleB: "실내놀이 캠핑",
+    summary: "날씨와 상관없이 뛰놀 수 있는 넓은 실내 놀이 공간",
+    effect: "confetti",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-treehouse",
+    emoji: "🌳",
+    shortName: "트리하우스",
+    badge: "숲속 나무 위 하룻밤",
+    moodDescription: "소나무 숲 트리하우스",
+    image: "hero-treehouse.webp",
+    titleA: "나무 위 작은 오두막",
+    titleB: "트리하우스 캠핑",
+    summary: "출렁다리를 건너 숲 높이에서 맞이하는 아침 햇살",
+    effect: "lush-forest",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-stay",
+    emoji: "🫧",
+    shortName: "이색숙소",
+    badge: "별을 품은 버블돔",
+    moodDescription: "버블 텐트 & 돔 하우스",
+    image: "hero-uniquestay.webp",
+    titleA: "투명 돔 안에서 별 보기",
+    titleB: "이색 숙소 캠핑",
+    summary: "누워서 은하수를 올려다보는 버블돔과 이색 숙소",
+    effect: "night-sky",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-leisure",
+    emoji: "🪂",
+    shortName: "레포츠",
+    badge: "짜릿한 하루 레포츠",
+    moodDescription: "짚라인 & 카약 레포츠",
+    image: "hero-leisure.webp",
+    titleA: "강 위를 가르는 짜릿함",
+    titleB: "레포츠 캠핑",
+    summary: "짚라인과 카약으로 채우는 액티브한 캠핑 하루",
+    effect: "riverside",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-farm",
+    emoji: "🍓",
+    shortName: "체험",
+    badge: "손으로 만드는 추억",
+    moodDescription: "딸기 따기·감자 캐기·도예 체험",
+    image: "hero-farm.webp",
+    titleA: "직접 따고 만드는 하루",
+    titleB: "농촌 체험 캠핑",
+    summary: "수확하고 빚어 보는 손끝 체험으로 남기는 캠핑 추억",
+    effect: "green-meadow",
+    theme: "UNIQUE"
   }
 ];
 
@@ -2609,6 +2771,21 @@ class HeroCanvasController {
         }
         break;
 
+      case "steam":
+        // t45u 노천탕·온수풀: 아래에서 천천히 피어오르는 김(부드러운 원형 그라데이션)
+        for (let i = 0; i < 26; i++) this.particles.push(this.makeSteam(w, h, true));
+        break;
+
+      case "bubbles":
+        // t45u 수영장·스파: 반짝이며 떠오르는 물방울
+        for (let i = 0; i < 40; i++) this.particles.push(this.makeBubble(w, h, true));
+        break;
+
+      case "confetti":
+        // t45u 키즈카페·실내놀이: 알록달록 천천히 떨어지는 색종이
+        for (let i = 0; i < 46; i++) this.particles.push(this.makeConfetti(w, h, true));
+        break;
+
       case "green-meadow":
         // 45개 3D 텀블링 민들레 홀씨 + 32개 들판 황금 꽃가루
         for (let i = 0; i < 45; i++) {
@@ -2640,6 +2817,51 @@ class HeroCanvasController {
           });
         }
         break;
+    }
+  }
+
+  makeSteam(w, h, initial = false) {
+    return { x: Math.random() * w, y: initial ? h * (0.35 + Math.random() * 0.65) : h + 40, r: Math.random() * 60 + 50, vy: -(Math.random() * 0.35 + 0.18), vx: (Math.random() - 0.5) * 0.2, life: initial ? Math.random() : 1, sway: Math.random() * Math.PI * 2 };
+  }
+  makeBubble(w, h, initial = false) {
+    return { x: Math.random() * w, y: initial ? Math.random() * h : h + 10, r: Math.random() * 5 + 2, vy: -(Math.random() * 0.7 + 0.35), sway: Math.random() * Math.PI * 2, alpha: Math.random() * 0.4 + 0.45 };
+  }
+  makeConfetti(w, h, initial = false) {
+    const colors = ["#ff8a80", "#ffd54f", "#81d4fa", "#a5d6a7", "#ce93d8", "#ffab91"];
+    return { x: Math.random() * w, y: initial ? Math.random() * h : -12, w: Math.random() * 6 + 5, h: Math.random() * 4 + 3, vy: Math.random() * 0.6 + 0.35, vx: (Math.random() - 0.5) * 0.4, rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.06, color: colors[Math.floor(Math.random() * colors.length)], sway: Math.random() * Math.PI * 2 };
+  }
+  renderSteam(ctx, w, h, mx, my, hasMouse) {
+    for (let i = 0; i < this.particles.length; i++) {
+      const p = this.particles[i];
+      p.sway += 0.01; p.y += p.vy; p.x += p.vx + Math.sin(p.sway) * 0.25; p.r += 0.12; p.life -= 0.0018;
+      if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 140) { p.x += (dx / (d || 1)) * 1.2; p.y += (dy / (d || 1)) * 0.6; } }
+      if (p.life <= 0 || p.y + p.r < 0) { this.particles[i] = this.makeSteam(w, h); continue; }
+      const a = Math.min(1, p.life * 1.4) * 0.16;
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+      g.addColorStop(0, `rgba(255,255,255,${a})`); g.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+  renderBubbles(ctx, w, h, mx, my, hasMouse) {
+    for (let i = 0; i < this.particles.length; i++) {
+      const p = this.particles[i];
+      p.sway += 0.03; p.y += p.vy; p.x += Math.sin(p.sway) * 0.35;
+      if (hasMouse && Math.hypot(p.x - mx, p.y - my) < p.r + 26) { this.particles[i] = this.makeBubble(w, h); continue; }
+      if (p.y < -10) { this.particles[i] = this.makeBubble(w, h); continue; }
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(255,255,255,${p.alpha})`; ctx.lineWidth = 1.2; ctx.stroke();
+      ctx.fillStyle = `rgba(200,240,255,${p.alpha * 0.18})`; ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x - p.r * 0.35, p.y - p.r * 0.35, p.r * 0.25, 0, Math.PI * 2); ctx.fillStyle = `rgba(255,255,255,${p.alpha})`; ctx.fill();
+    }
+  }
+  renderConfetti(ctx, w, h, mx, my, hasMouse) {
+    for (let i = 0; i < this.particles.length; i++) {
+      const p = this.particles[i];
+      p.sway += 0.02; p.y += p.vy; p.x += p.vx + Math.sin(p.sway) * 0.5; p.rot += p.vr;
+      if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 110) { p.x += (dx / (d || 1)) * 2; p.vr += 0.004; } }
+      if (p.y > h + 12) { this.particles[i] = this.makeConfetti(w, h); continue; }
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.scale(1, Math.abs(Math.cos(p.sway * 2)) * 0.7 + 0.3);
+      ctx.globalAlpha = 0.85; ctx.fillStyle = p.color; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); ctx.restore();
     }
   }
 
@@ -2732,6 +2954,15 @@ class HeroCanvasController {
         break;
       case "green-meadow":
         this.renderGreenMeadow(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "steam":
+        this.renderSteam(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "bubbles":
+        this.renderBubbles(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "confetti":
+        this.renderConfetti(ctx, w, h, mx, my, hasMouse);
         break;
     }
 
@@ -3779,7 +4010,7 @@ function initHeroDynamicEngine(v) {
     }
 
     if (heroCanvasInstance) {
-      heroCanvasInstance.setTheme(theme.id);
+      heroCanvasInstance.setTheme(theme.effect || theme.id);
     }
 
     if (animate) {
@@ -4513,6 +4744,74 @@ function bindRegion(sido, sgg) {
   cleanup.push(() => { document.title = "렛츠 캠핑 · 취향대로 찾아 떠나는 전국 캠핑장"; });
 }
 
+// 가까운순 기준 위치 고르기(t45u): 내 위치(GPS) 또는 시·군·구/주소 검색(카카오 장소 검색, 안 되면 수집 데이터의 시·군 중심).
+function nearSheet(onPick) {
+  let dlg = $("#near-dialog");
+  if (!dlg) {
+    dlg = document.createElement("dialog");
+    dlg.className = "sheet near-sheet"; dlg.id = "near-dialog"; dlg.setAttribute("aria-labelledby", "near-title");
+    document.body.append(dlg);
+  }
+  const sggs = [...new Set(S.camps.map((c) => `${sidoShort(c.sido)} ${c.sigungu ?? ""}`.trim()).filter((x) => / /.test(x)))].sort((a, b) => a.localeCompare(b, "ko"));
+  const pick = (pt) => { nearPt = pt; store.set("mc-near-pt", pt); dlg.close(); toast(`${pt.label} 기준으로 가까운 순이에요`); onPick?.(); };
+  const paint = (q = "", found = []) => {
+    const loc = q ? sggs.filter((x) => x.replace(/\s/g, "").includes(q.replace(/\s/g, ""))).slice(0, 8) : [];
+    dlg.innerHTML = `<div class="sheet-in near-in">
+      <div class="sheet-head"><h2 id="near-title">어디서 가까운 순으로 볼까요</h2><button type="button" class="icon-btn sheet-close" data-n="close" aria-label="닫기">${ic("close")}</button></div>
+      <button type="button" class="btn near-here" data-n="here">${ic("pin")}내 위치 사용</button>
+      <label class="near-q">${ic("search")}<input type="search" data-near-q value="${esc(q)}" placeholder="시·군·구 또는 주소 (예: 수원, 가평)" autocomplete="off" enterkeyhint="search"></label>
+      <div class="near-list">
+        ${found.map((f, i) => `<button type="button" class="near-opt" data-n="k:${i}">${ic("pin")}<span><b>${esc(f.label)}</b><small>${esc(f.sub ?? "")}</small></span></button>`).join("")}
+        ${loc.map((x) => `<button type="button" class="near-opt" data-n="s:${esc(x)}">${ic("map")}<span><b>${esc(x)}</b></span></button>`).join("")}
+      </div>
+      ${nearPt ? `<p class="near-cur">지금 기준: <b>${esc(nearPt.label)}</b></p>` : ""}
+    </div>`;
+    dlg._found = found;
+    const inp = dlg.querySelector("[data-near-q]");
+    if (S._nearFocus) { inp.focus(); inp.setSelectionRange(q.length, q.length); }
+  };
+  if (!dlg._bound) {
+    dlg._bound = true;
+    dlg.addEventListener("click", async (e) => {
+      const b = e.target.closest("[data-n]"); if (!b) { if (e.target === dlg) dlg.close(); return; }
+      const v = b.dataset.n;
+      if (v === "close") { dlg.close(); return; }
+      if (v === "here") {
+        b.disabled = true;
+        const pos = await new Promise((res) => (navigator.geolocation ? navigator.geolocation.getCurrentPosition((p) => res(p.coords), () => res(null), { maximumAge: 600000, timeout: 8000 }) : res(null)));
+        b.disabled = false;
+        if (!pos) { toast("위치를 가져오지 못했어요. 지역을 검색해 주세요"); return; }
+        dlg._pick({ lat: pos.latitude, lng: pos.longitude, label: "내 위치", kind: "gps" });
+        return;
+      }
+      if (v.startsWith("k:")) { const f = dlg._found?.[Number(v.slice(2))]; if (f) dlg._pick({ lat: f.lat, lng: f.lng, label: f.label, kind: "kakao" }); return; }
+      if (v.startsWith("s:")) {
+        const [sd, ...rest] = v.slice(2).split(" "); const sg = rest.join(" ");
+        const pts = S.camps.filter((c) => c.lat && sidoShort(c.sido) === sd && c.sigungu === sg);
+        if (pts.length) dlg._pick({ lat: pts.reduce((a, c) => a + c.lat, 0) / pts.length, lng: pts.reduce((a, c) => a + c.lng, 0) / pts.length, label: `${sd} ${sg}`, kind: "region" });
+      }
+    });
+    dlg.addEventListener("input", (e) => {
+      if (!e.target.matches("[data-near-q]")) return;
+      const q = e.target.value.trim();
+      clearTimeout(dlg._t);
+      dlg._t = setTimeout(async () => {
+        let found = [];
+        if (q.length >= 2) {
+          try {
+            const kakao = await loadKakao();
+            if (kakao.maps.services) found = await new Promise((res) => new kakao.maps.services.Places().keywordSearch(q, (d, st) => res(st === "OK" ? d.slice(0, 5).map((x) => ({ label: x.place_name, sub: x.road_address_name || x.address_name, lat: Number(x.y), lng: Number(x.x) })) : [])));
+          } catch { found = []; }
+        }
+        S._nearFocus = true; paint(q, found); S._nearFocus = false;
+      }, 300);
+    });
+  }
+  dlg._pick = pick;
+  paint();
+  dlg.showModal();
+}
+
 function themeView(themeKey) {
   const tName = themeName(themeKey);
   const tImg = themeImg(themeKey);
@@ -4524,7 +4823,7 @@ function themeView(themeKey) {
   const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "REVIEWS" ? (c) => Boolean((c.rv?.p?.length ?? 0) >= 2 || (c.rv?.t ?? 0) >= 4) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
   const totalInTheme = S.camps.filter(testFn).length;
   const isWp = themeKey === "WATER_PLAY";
-  if (themeKey !== "UNIQUE") uniqueSub = "";
+  if (themeKey !== "UNIQUE") uniqueSubs.clear();
 
   return `<section class="theme-page" aria-labelledby="tp-title">
     <div class="theme-hero" style="background-image: url('${tImg}')">
@@ -4537,9 +4836,16 @@ function themeView(themeKey) {
     </div>
     <div class="theme-body">
       ${isWp ? `<div class="theme-closed-alert">${ic("info")}<div><strong>여름 시즌 물놀이터 운영 종료 안내</strong><p>전국 물놀이터·야영장 수영장 정보입니다. 현재는 하절기 운영이 종료된 상태입니다. 렛츠 캠핑에서 미리 시설 정보를 확인하시고 다음 시즌 피서 계획에 참고해 보세요!</p></div></div>` : ""}
-      ${themeKey === "UNIQUE" ? `<div class="rail chips theme-uq" aria-label="이색 분류">
-        <button type="button" class="chip" data-theme-uq="" aria-pressed="${!uniqueSub}">전체 ${fmt(totalInTheme)}</button>
-        ${UNIQUE_SUBS.map(([k, l]) => [k, l, S.camps.filter((c) => c.uq?.includes(k)).length]).filter((x) => x[2]).map(([k, l, n]) => `<button type="button" class="chip" data-theme-uq="${k}" aria-pressed="${uniqueSub === k}">${esc(l)} ${fmt(n)}</button>`).join("")}
+      ${themeKey === "UNIQUE" ? `<div class="theme-uq-bar">
+        <div class="rail chips theme-uq" aria-label="이색 분류 (여러 개 선택)">
+          <button type="button" class="chip" data-theme-uq="" aria-pressed="${!uniqueSubs.size}">전체 <i>${fmt(totalInTheme)}</i></button>
+          ${UNIQUE_SUBS.map(([k, l]) => [k, l, S.camps.filter((c) => c.uq?.includes(k)).length]).filter((x) => x[2]).map(([k, l, n]) => `<button type="button" class="chip" data-theme-uq="${k}" aria-pressed="${uniqueSubs.has(k)}">${esc(l)} <i>${fmt(n)}</i></button>`).join("")}
+        </div>
+        <div class="theme-sort" role="group" aria-label="정렬">
+          <button type="button" class="chip" data-uq-sort="area" aria-pressed="${uqSort === "area"}">${ic("size")}사이트 넓은순</button>
+          <button type="button" class="chip" data-uq-sort="near" aria-pressed="${uqSort === "near"}">${ic("pin")}<span data-near-lbl>${uqSort === "near" && nearPt ? esc(nearPt.label) : "가까운순"}</span></button>
+          <button type="button" class="chip" data-uq-sort="fee" aria-pressed="${uqSort === "fee"}">${ic("won")}저렴한순</button>
+        </div>
       </div>` : ""}
       <div class="theme-tools-bar">
         <div class="rail chips theme-areas" aria-label="지역">
@@ -4561,8 +4867,19 @@ function bindTheme(themeKey) {
   let pageN = 24;
   const getThemeList = () => {
     let list = S.camps.filter(testFn);
-    if (themeKey === "UNIQUE" && uniqueSub) list = list.filter((c) => c.uq?.includes(uniqueSub));
+    if (themeKey === "UNIQUE" && uniqueSubs.size) list = list.filter((c) => c.uq?.some((k) => uniqueSubs.has(k)));
     if (regionKeys().length) list = list.filter((c) => regionMatches(c));
+    if (themeKey === "UNIQUE" && uqSort) {
+      // 값이 없는 곳은 지우지 않고 맨 뒤(정보 많은 순)로 둔다.
+      const key = uqSort === "area" ? (c) => { const a = siteArea(c); return a == null ? null : -a; }
+        : uqSort === "fee" ? (c) => campFeeMin(c) ?? null
+        : (c) => (nearPt && c.lat ? km2(nearPt, c) : null);
+      const has = [], none = [];
+      for (const c of list) { const k = key(c); (k == null ? none : has).push([k, c]); }
+      has.sort((a, b) => a[0] - b[0] || rich(b[1]) - rich(a[1]));
+      none.sort((a, b) => rich(b[1]) - rich(a[1]));
+      return [...has, ...none].map((x) => x[1]);
+    }
     // 공원은 사진이 없는 공공 장소를 포함하는 별도 탐색 테마다. 이 경로에서는
     // 공원 전용 정보 카드로 보이므로 사진 유무로 제거하지 않는다.
     if (themeKey === "PARK") {
@@ -4604,10 +4921,24 @@ function bindTheme(themeKey) {
   const onClick = (e) => {
     const u = e.target.closest("[data-theme-uq]");
     if (u) {
-      uniqueSub = u.dataset.themeUq;
-      $$("[data-theme-uq]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.themeUq === uniqueSub)));
+      const k = u.dataset.themeUq;
+      if (!k) uniqueSubs.clear(); else if (uniqueSubs.has(k)) uniqueSubs.delete(k); else uniqueSubs.add(k);
+      $$("[data-theme-uq]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.themeUq ? uniqueSubs.has(x.dataset.themeUq) : !uniqueSubs.size)));
       pageN = 24;
       renderThemeGrid();
+      return;
+    }
+    const so = e.target.closest("[data-uq-sort]");
+    if (so) {
+      const k = so.dataset.uqSort;
+      const apply = (val) => {
+        uqSort = val; store.set("mc-uq-sort", uqSort);
+        $$("[data-uq-sort]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.uqSort === uqSort)));
+        const lbl = $("[data-near-lbl]"); if (lbl) lbl.textContent = uqSort === "near" && nearPt ? nearPt.label : "가까운순";
+        pageN = 24; renderThemeGrid();
+      };
+      if (k === "near") { nearSheet(() => apply("near")); return; }
+      apply(uqSort === k ? "" : k);
       return;
     }
     const a = e.target.closest("[data-theme-area]");
@@ -9177,7 +9508,7 @@ function loadKakao() {
     const fail = (why) => { clearTimeout(t); kakaoDead = true; console.warn("[map] 카카오 지도 실패 → OSM:", why); no(new Error(why)); };
     const t = setTimeout(() => fail("timeout"), 8000);
     const sc = document.createElement("script");
-    sc.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(key)}&autoload=false`;
+    sc.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(key)}&autoload=false&libraries=services`;
     sc.onload = () => window.kakao?.maps?.load ? window.kakao.maps.load(() => { clearTimeout(t); ok(window.kakao); }) : fail("sdk");
     sc.onerror = () => fail("sdk load error");
     document.head.append(sc);
