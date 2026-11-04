@@ -100,7 +100,7 @@ function detailsOf(win, k) {
   const d = {};
   if (["hotspring", "spa", "warmpool", "pool"].includes(k)) { const m = /(\d{2}(?:\.\d)?)\s*(?:도|℃|°)/.exec(win); if (m && +m[1] >= 25 && +m[1] <= 45) d.temp = `${+m[1]}℃`; }
   const h = /(\d{1,2})(?::(\d{2}))?\s*시?\s*[~\-–]\s*(\d{1,2})(?::(\d{2}))?\s*시/.exec(win);
-  if (h && +h[1] <= 24 && +h[3] <= 24 && +h[3] !== +h[1]) d.hour = `${+h[1]}~${+h[3]}시`;
+  if (h && ["hotspring", "spa", "warmpool", "pool", "kidscafe", "indoorplay"].includes(k) && !/매너|입실|퇴실|체크|조용|소등|정숙/.test(win) && +h[1] >= 5 && +h[1] <= 24 && +h[3] <= 24 && +h[3] > +h[1]) d.hour = `${+h[1]}~${+h[3]}시`;
   if (["horse", "animal", "farm", "leisure", "kidscafe", "spa"].includes(k)) {
     const pm = /(\d{1,2}(?:,\d{3})+|\d{1,3}(?:\.\d)?\s*만)\s*원/.exec(win);
     if (pm) { const v = /만/.test(pm[1]) ? parseFloat(pm[1]) * 10000 : +pm[1].replace(/,/g, ""); if (v >= 3000 && v <= 200000) d.price = `${v.toLocaleString("ko-KR")}원`; }
@@ -139,7 +139,7 @@ export function uniqueCard(c, det, res) {
     const all = [...ow, ...rw];
     // 이름: 구체 이름(자쿠지·짚라인…) 중 가장 많이 나온 것, 없으면 기본 이름 + 수식어
     let name = f.n;
-    if (f.names) { const cnt = new Map(); for (const { w } of all) for (const [re, nm] of f.names) { const m = re.exec(w); if (m) { const v = typeof nm === "function" ? nm(m) : nm; cnt.set(v, (cnt.get(v) ?? 0) + 1); break; } } const best = [...cnt].sort((a, b) => b[1] - a[1]); if (best.length) name = best.slice(0, 2).map((x) => x[0]).join("·"); }
+    if (f.names) { const cnt = new Map(); for (const { w } of all) for (const [re, nm] of f.names) { const m = re.exec(w); if (m) { const v = typeof nm === "function" ? nm(m) : nm; cnt.set(v, (cnt.get(v) ?? 0) + 1); break; } } let best = [...cnt].sort((a, b) => b[1] - a[1]).map((x) => x[0]); best = best.filter((v) => !best.some((o) => o !== v && o.length > v.length && o.endsWith(v.replace(/ 체험$/, "")))).filter((v, i, a) => !(/^(만들기 체험|동물 체험|농촌 체험)$/.test(v) && a.length > 1)); if (best.length) name = best.slice(0, 2).join("·"); }
     const priv = all.filter(({ w, hit }) => PRIV.test(near(w, w.indexOf(hit), hit.length, 6))).length;
     if (f.mods?.includes("개별") && priv >= Math.max(1, all.length * 0.3) && !/개별/.test(name)) name = `개별 ${name}`;
     if (f.mods?.includes("실내") && all.filter(({ w }) => /실내/.test(w)).length >= 2 && !/실내/.test(name)) name = `실내 ${name}`;
