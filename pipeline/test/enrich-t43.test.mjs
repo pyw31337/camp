@@ -1,8 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-const pins = JSON.parse(readFileSync("pipeline/registry/curated-pins.json", "utf8")).camps;
-const camp = (id) => JSON.parse(readFileSync(`camping-atlas/public/explore/data/camps/${id}.json`, "utf8"));
+import { fileURLToPath } from "node:url";
+const R = fileURLToPath(new URL("../../", import.meta.url));
+const pins = JSON.parse(readFileSync(R + "pipeline/registry/curated-pins.json", "utf8")).camps;
+const camp = (id) => JSON.parse(readFileSync(R + `camping-atlas/public/explore/data/camps/${id}.json`, "utf8"));
 test("102229 공식 이용안내 값이 핀·출력물에 반영", () => {
   const d = camp("102229");
   assert.equal(d.profile.fields.MANNER.value, "23:00~07:00");
