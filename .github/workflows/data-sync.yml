@@ -521,6 +521,8 @@ jobs:
           node pipeline/scripts/publish-sanity.mjs
           # 업장 정보 커버리지(요금·입퇴실·매너타임·주차·전기 W·사이트 타입 등, 목표 2,500곳)를 meta.json에 남긴다.
           node pipeline/scripts/report-coverage.mjs
+          # 공백이 큰 업장을 삭제하지 않고, 다음 수집에서 확인할 무료·허용 원천과 함께 우선순위 큐로 남긴다.
+          node pipeline/scripts/report-data-enrichment.mjs
           # 모든 원천을 (캠핑장·속성·값·등급·원천·근거) 원자 사실로 풀어 묶음별 NDJSON(data/facts)으로 쓴다. 여러 에이전트의 공유 원장.
           node pipeline/scripts/build-fact-store.mjs
           # 데이터 품질 장부(docs/DATA_QUALITY_PROCESS.md): 신뢰도·확증·충돌 대기열·어제 대비 회귀를 data/quality에 남긴다(회귀는 경고).
@@ -547,6 +549,7 @@ jobs:
           git checkout origin/main -- design/renewal scripts/publish-explorer-pages.mjs && node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public/explore
           node pipeline/scripts/coverage-guard.mjs "$RUNNER_TEMP/base-meta.json" camping-atlas/public/explore/data/meta.json
           git add camping-atlas/public/data camping-atlas/public/explore data/facts data/quality pipeline/registry/review-thumbs.json pipeline/registry/public-poi-photos.json pipeline/registry/naver-usage.json pipeline/registry/dayuse-osm.json pipeline/registry/urban-parks.json
+          git add pipeline/registry/data-enrichment-queue.json
           git add pipeline/registry/merge-review.ndjson 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "공개 데이터 변경 없음."; exit 0
