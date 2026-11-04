@@ -290,7 +290,7 @@ function facts(c) {
   if (sa.hot_water) out.hot = { v: sa.hot_water === "제공" ? "있음" : sa.hot_water, g: GR(sa.state) || "c", src: srcOf(fc) };
   if (sa.private_bathroom) out.bath = { v: "개별 욕실", g: "c" };
   // 반려동물(고캠핑 등록)
-  if (c.pets) out.pet = { v: /가능/.test(c.pets) && !/불가/.test(c.pets) ? "동반 가능" : /불가|금지/.test(c.pets) ? "불가" : c.pets, ok: /가능/.test(c.pets) && !/불가/.test(c.pets), g: "c", src: { label: "한국관광공사 고캠핑 등록값", url: c.gc_url } };
+  if (c.pets) out.pet = { v: /에서만/.test(c.pets) ? c.pets : /가능/.test(c.pets) && !/불가/.test(c.pets) ? "동반 가능" : /불가|금지/.test(c.pets) ? "불가" : c.pets, ok: /가능/.test(c.pets) && !/불가/.test(c.pets), g: "c", src: { label: "한국관광공사 고캠핑 등록값", url: c.gc_url } };
   return (c._f = out);
 }
 const filled = (f) => f && (f.g === "v" || f.g === "c");
@@ -4876,6 +4876,8 @@ function specTiles(c, d) {
       if (nk.includes("NO_PET")) { const t = d?.house_rules?.tags?.find((y) => y.k === "NO_PET"); x = { v: "불가", g: t?.g ?? "c", src: { label: t?.src ?? "업장 이용 규칙", url: t?.url, at: t?.at, quote: t?.quote } }; }
       else if (petAllowed(c) && x && /불가|금지/.test(detailValue(x))) x = f.pet?.ok ? f.pet : { v: nk.includes("BIG_DOG") ? "소형견 동반 가능" : "동반 가능", g: "c", src: { label: "고캠핑·업장 등록 분류(반려견 동반)", url: c.gc_url ?? c.homepage } };
       x = normNo(x);
+      // 일부 사이트만 동반 가능(운영 기관 확인, 영우 님 2026-11-04 승인)은 원문 그대로 보인다.
+      if (/에서만/.test(PF(d, "PET")?.value ?? "")) x = profFact(PF(d, "PET"));
     }
     if (k === "power" && f.power?.v === "있음" && mention.power?.v) x = mention.power;
     const isNo = Boolean(x && (x.ok === false || (k === "fire" && x.kind === "NO_FIRE") || /불가|금지|불가능/.test(detailValue(x))));
@@ -5337,6 +5339,7 @@ async function detailView(id) {
         ${priceHtml(c, d)}
         ${bookingHtml(c, d)}
         ${us.some(([, x]) => x) ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><dl class="uses">${us.filter(([, x]) => x).map(([l, x, icon]) => `<div class="use"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${factValueHtml({ ...x, v: wonText(detailValue(x)) })}${asOfMention(x)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span></dd></div>`).join("")}</dl></section>` : `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><p class="muted" style="padding: 18px 0; color: var(--ink-3); font-size: .88rem;">등록된 상세 이용 정보가 없습니다.</p></section>`}
+        ${extraFeeSection(d)}${sanitarySection(d)}
         ${amenityHtml(c, d)}
         ${houseRulesHtml(c, d)}
         <section class="d-sec" data-cond hidden></section>
@@ -5396,6 +5399,23 @@ function asOf(at) {
 }
 const asOfMention = (x) => (x?.g === "m" ? `<span class="badge-check">확인필요</span>${asOf(x.src?.at)}` : "");
 const SRC_LABEL = { gocamping: "한국관광공사 고캠핑 등록값", gocamping_intro: "고캠핑 소개글", kakao_local: "카카오 장소 분류", naver_local: "네이버 장소 분류", operator_homepage: "운영자 홈페이지", blog_mention: "블로그 후기 언급", cafe_mention: "카페 글 언급", kin: "지식iN 언급" };
+// 추가 요금·대여(EXTRA_FEE)와 샤워·위생(SANITARY) 프로필 값을 상세 섹션으로(영우 님 2026-11-04 승인). 값이 없으면 섹션을 만들지 않는다.
+const PIECE_IC = (t) => (/샤워|탈수|드라이|화장실|세면/.test(t) ? "bath" : /장작|화로|숯/.test(t) ? "flame" : /입실|퇴실|연장/.test(t) ? "clock-in" : /대여|렌탈/.test(t) ? "cart" : /개수대|설거지/.test(t) ? "fountain" : "won");
+function factPieces(v) {
+  return String(v ?? "").split(/\s+·\s+|\n+/).map((t) => t.trim()).filter(Boolean).map((t) => {
+    const w = t.split(/\s+/); const i = w.findIndex((x) => /\d/.test(x));
+    return i > 0 ? [w.slice(0, i).join(" "), w.slice(i).join(" ")] : ["", t];
+  });
+}
+function profileListSection(d, key, id, icon, title, other) {
+  const x = profFact(PF(d, key));
+  if (!x?.v || /^업장 미공지/.test(String(x.v))) return "";
+  const rows = factPieces(x.v);
+  if (!rows.length) return "";
+  return `<section class="d-sec" id="${id}"><div class="sec-head">${iconTitle(icon, title)}</div><dl class="uses">${rows.map(([l, v]) => `<div class="use"><dt>${ic(PIECE_IC(l + v))}${esc(l || other)}</dt><dd><span class="use-val">${esc(l ? wonText(v) : v)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, title)}</span></dd></div>`).join("")}</dl></section>`;
+}
+const extraFeeSection = (d) => profileListSection(d, "EXTRA_FEE", "sec-extra-fee", "won", "추가 요금·대여", "기타");
+const sanitarySection = (d) => profileListSection(d, "SANITARY", "sec-sanitary", "bath", "샤워·위생", "시설");
 function iconTitle(icon, label) { return `<div class="sec-title">${ic(icon, "line")}<h2>${esc(label)}</h2></div>`; }
 // 화면에서 쓰는 문장은 데이터 원문을 그대로 반복하지 않는다. 공통 규칙으로 공백·목록기호를
 // 정리하고 한 줄 길이만 남긴다. 원문과 출처는 항상 srcTip()의 작은 i에 보관한다.

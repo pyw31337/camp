@@ -20,12 +20,12 @@ const official = existsSync(join(dataDir, "photos.json")) ? JSON.parse(readFileS
 const order = [...camps.filter((c) => !c.img && !c.ph && !(official[c.id]?.length)), ...camps.filter((c) => c.img || c.ph || official[c.id]?.length)];
 const queue = [];
 // 1순위: 카드에 바로 쓰이는 첫 검색 썸네일(c.sn — 걸러 고른 사진이 없을 때 카드 대표)
-for (const c of order) if (c.sn && !c.pt && judg[c.sn]?.v !== RULE_VERSION) queue.push(c.sn);
+for (const c of order) if (c.sn && !c.pt && !judg[c.sn]?.manual && judg[c.sn]?.v !== RULE_VERSION) queue.push(c.sn);
 for (const c of order) {
   const p = join(dataDir, "camps", `${c.id}.json`);
   if (!existsSync(p)) continue;
   let d; try { d = JSON.parse(readFileSync(p, "utf8")); } catch { continue; }
-  for (const x of (d.sns_images ?? []).slice(0, PER_CAMP)) if (x.thumb && judg[x.thumb]?.v !== RULE_VERSION) queue.push(x.thumb);
+  for (const x of (d.sns_images ?? []).slice(0, PER_CAMP)) if (x.thumb && !judg[x.thumb]?.manual && judg[x.thumb]?.v !== RULE_VERSION) queue.push(x.thumb);
   if (queue.length >= MAX) break;
 }
 let done = 0, bad = 0;

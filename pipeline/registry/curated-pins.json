@@ -12,7 +12,8 @@
      "url": "https://hsecofarm.hscity.go.kr/reservation/info/price.do",
      "checked_at": "2026-10-21",
      "pinned": true
-    }
+    },
+    "pets": "반려견동반 사이트에서만 가능"
    },
    "detail": {
     "profile.fields.REFUND": {
@@ -219,8 +220,69 @@
       "url": "https://hsecofarm.hscity.go.kr/reservation/info/guide.do",
       "at": "2026-11-04",
       "src": "운영 기관 이용안내"
+     },
+     {
+      "text": "구역: 일반형 A·B·C·D, 확장형 E·F (총 106면) · 캠핑장 편의시설 5개동 · 편의동",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
+      "at": "2026-11-04",
+      "src": "운영 기관 시설 소개"
+     },
+     {
+      "text": "단지 내 무료 이용: 전망대(29.57m), 어린이체험관, 다목적관, 어린이놀이터 A·B·C, 잔디 중앙광장, 경관초화류단지, 천천히걷는길 · 식당(토종농가밥상)·서신노을카페·로컬푸드 직매장 · 주차 318대",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/intro.do",
+      "at": "2026-11-04",
+      "src": "운영 기관 시설 소개"
+     },
+     {
+      "text": "바닥: 파쇄석 90 · 데크 11 · 블록 5면 / 크기 5×8m 70면 · 12×8m 36면 · 저탄소 캠핑장(장작·숯·갈탄 제한)",
+      "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102229",
+      "at": "2026-09-04",
+      "src": "한국관광공사 고캠핑 운영자 등록값"
      }
-    ]
+    ],
+    "layout.images": [
+     {
+      "thumb": "https://hsecofarm.hscity.go.kr/reservation/images/img/sight_v2.jpg",
+      "img": "https://hsecofarm.hscity.go.kr/reservation/images/img/sight_v2.jpg",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/",
+      "src": "운영 기관(화성에코팜테마파크) 조감도",
+      "w": 1400,
+      "h": 1542,
+      "date": "2026-11-04",
+      "sure": true
+     },
+     {
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/67tGAV7kkGK",
+      "img": "https://postfiles.pstatic.net/MjAyNjA4MjhfNDAg/MDAxNzg3OTAwOTEyOTE5.0adZcYAuatRg2UuuWDZbwlV52smyS1cvyamwHrY0hRwg.HlGUWdL7dmDrZZz3UphmlFLHJLaC0Y1C1d55sfsjzJIg.PNG/%EC%86%A1%EC%82%B0%ED%8F%AC%EB%8F%84%EC%B6%95%EC%A0%9C-%EC%A4%80%EB%B9%84%EB%AC%BC.png?type=w966",
+      "url": "https://blog.naver.com/offapron/224393305145",
+      "src": "네이버블로그",
+      "w": 966,
+      "h": 689,
+      "date": "2026-08-28",
+      "sure": false
+     },
+     {
+      "thumb": "https://search4.kakaocdn.net/argon/130x130_85_c/LlgrBqWYjV7",
+      "img": "https://simg.pstatic.net/static.map/v2/map/staticmap.bin?caller=smarteditor&markers=pos%3A126.6940867%2037.1197261%7CviewSizeRatio%3A0.7%7Ctype%3Ad%7Ccolor%3A0x11cc73%7Csize%3Amid&w=700&h=315&scale=2&dataversion=178.21",
+      "url": "https://blog.naver.com/rankora/224400874051",
+      "src": "네이버블로그",
+      "w": 1400,
+      "h": 630,
+      "date": "2026-09-04",
+      "sure": false
+     }
+    ],
+    "profile.fields.PET": {
+     "value": "반려견동반 사이트에서만 가능",
+     "grade": "OPERATOR",
+     "source": {
+      "label": "화성에코팜테마파크 이용요금(운영 기관)",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/price.do",
+      "date": "2026-11-04",
+      "quote": "반려견동반 (6m x 8m) 1동 1박 50,000원 45,000원 5명 1대 (이용안내: 애완동물 출입 금지, 보조견 제외)"
+     },
+     "pinned": true
+    }
    }
   },
   "102377": {

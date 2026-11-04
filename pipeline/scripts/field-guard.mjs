@@ -74,6 +74,7 @@ const PROTECT = (o) => o && typeof o === "object" && !Array.isArray(o) && (o.pin
 const valOf = (o) => String(o?.value ?? o?.text ?? "").trim();
 function lower(bv, nv) {
   if (!nv || typeof nv !== "object" || isEmpty(nv.value ?? nv.text ?? nv.min)) return true;
+  if (JSON.stringify(bv) === JSON.stringify(nv)) return false; // 그대로인 값은 하향이 아니다(후기 등급 pinned 값 오탐, 2026-11-04)
   if (bv.pinned && JSON.stringify(bv) !== JSON.stringify(nv)) return true;
   // pinned MENTION/REFERENCE 값도 같은 값이면 손실이 아니다. 기존에 기준 등급을
   // 무조건 3으로 올리면 MENTION(2)이 그대로 유지돼도 삭제로 잘못 판정됐다.
