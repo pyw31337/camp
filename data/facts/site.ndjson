@@ -5824,6 +5824,8 @@
 {"cid":"osm-w469937424","attr":"SITE_SIZE","value":"4×5m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/469937424","at":"2026-11-04"}
 {"cid":"osm-w472545129","attr":"SITE_SIZE","value":"10×12m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/472545129","at":"2026-11-04"}
 {"cid":"osm-w618430553","attr":"SITE_SIZE","value":"9×9m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/618430553","at":"2026-11-04"}
+{"cid":"osm-w677365390","attr":"SITE_SIZE","value":"6×7m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/newmast21/223141067583","at":"2023-06-28","quote":"6x7m 두 종류 56개 사이트...","text":"6×7m","n":1}
+{"cid":"osm-w677365390","attr":"SITE_SIZE","value":"8×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/newmast21/223141067583","at":"2023-06-28","quote":"이용시간 : 입실 14:00 이후부터 익일 12:00 퇴실 일반캠핑사이트 : 8x10m","text":"8×10m","n":1}
 {"cid":"osm-w721842605","attr":"SITE_SIZE","value":"5×8m","grade":"MENTION","src":"review_search","url":"https://o0m0a.tistory.com/50","at":"2024-11-25","quote":"테라스캠핑존: 25,000원 (5m x 8m) - 데크에서 편리하게 캠핑을 즐기고 싶다면?","text":"5×8m","n":1}
 {"cid":"osm-w736741880","attr":"SITE_SIZE","value":"4×5m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/736741880","at":"2026-11-04"}
 {"cid":"osm-w751220519","attr":"SITE_SIZE","value":"10×9m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/751220519","at":"2026-11-04"}
