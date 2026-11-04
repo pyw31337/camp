@@ -1,16 +1,16 @@
 {
- "updated_at": "2026-10-27T23:17:00.111Z",
+ "updated_at": "2026-11-04T00:12:54.314Z",
  "policy": "robots.txt 준수·봇 이름 공개·호스트별 1초 간격. 자동 확인이 막힌 플랫폼은 열지 않음(UNVERIFIED). 판정: lib/booking-verify.mjs",
  "pairs": {
   "483|http://www.geumwonsan.or.kr/order/condition.html": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:08.104Z"
+   "at": "2026-11-04T00:01:05.550Z"
   },
   "483|http://www.geumwonsan.or.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:09.104Z"
+   "at": "2026-11-04T00:01:06.551Z"
   },
   "101956|https://naver.me/xMn4Y4iw": {
    "v": "UNVERIFIED",
@@ -80,12 +80,12 @@
   "2329|http://okhwacamping.netfuhosting.com/n_camp/": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-20T01:24:53.035Z"
+   "at": "2026-11-04T00:01:08.569Z"
   },
   "2329|http://okhwa.cbhuyang.go.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:11.792Z"
+   "at": "2026-11-04T00:01:07.694Z"
   },
   "101143|https://cafe.naver.com/campagain": {
    "v": "UNVERIFIED",
@@ -103,19 +103,20 @@
    "at": null
   },
   "1803|http://xn--911bu29b9fbp3j/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.043Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:44.198Z"
   },
   "101934|https://pinetreecamp.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:14.777Z"
+   "at": "2026-11-04T00:01:09.561Z"
   },
   "7763|http://2000farmpark.or.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:14.928Z"
+   "at": "2026-11-04T00:01:09.642Z"
   },
   "8127|https://map.naver.com/v5/entry/place/32548388?c=14254529.5915240,4458701.3264397,11,0,0,0,dh": {
    "v": "UNVERIFIED",
@@ -138,14 +139,15 @@
    "at": null
   },
   "101599|http://xn--950bt9s8xi/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.742Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:44.451Z"
   },
   "227|http://www.cwpension.net/camping": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:15.829Z"
+   "at": "2026-11-04T00:01:09.786Z"
   },
   "3450|http://cafe.naver.com/haedamcamping": {
    "v": "UNVERIFIED",
@@ -155,7 +157,7 @@
   "7910|http://xn--hy1b45clvm41ea69fd1fp2uruo5ne.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:16.953Z"
+   "at": "2026-11-04T00:01:11.029Z"
   },
   "1670|http://cafe.naver.com/seolhacamp": {
    "v": "UNVERIFIED",
@@ -175,12 +177,12 @@
   "29|http://80sscamping.com/04_reservation/sub_02_1.php": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:17.276Z"
+   "at": "2026-11-04T00:01:02.198Z"
   },
   "29|http://80sscamping.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:18.277Z"
+   "at": "2026-11-04T00:01:03.198Z"
   },
   "102324|https://map.naver.com/p/entry/place/2081035231?lng=127.2339426&lat=37.5312993&placePath=%2Fhome&searchType=place": {
    "v": "UNVERIFIED",
@@ -203,9 +205,10 @@
    "at": null
   },
   "101669|http://xn--xc7b85j/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:58.080Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:44.124Z"
   },
   "1648|https://blog.naver.com/dmzgallery": {
    "v": "UNVERIFIED",
@@ -235,22 +238,22 @@
   "2758|http://www.jumunjincamping.com/default/app/app_online.php?topmenu=3&submenu=2": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:28.913Z"
+   "at": "2026-11-04T00:01:17.924Z"
   },
   "2758|http://www.jumunjincamping.com/default/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:29.912Z"
+   "at": "2026-11-04T00:01:18.924Z"
   },
   "7606|http://sjrcamp.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:29.067Z"
+   "at": "2026-11-04T00:01:18.215Z"
   },
   "387|http://www.huyang.go.kr/main.action": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:30.481Z"
+   "at": "2026-11-04T00:01:19.356Z"
   },
   "908|https://cafe.naver.com/f-e/cafes/31756168/menus/0?viewType=L": {
    "v": "UNVERIFIED",
@@ -265,7 +268,7 @@
   "2110|http://me2.do/FhpNyW3i": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:01:32.398Z"
+   "at": "2026-11-04T00:01:20.713Z"
   },
   "101127|https://www.camfit.co.kr/camp/650d5fda4e302e001e104dbf": {
    "v": "UNVERIFIED",
@@ -273,9 +276,10 @@
    "at": null
   },
   "543|http://xn--950bt9s8xi34g9zg/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:25:12.822Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:52.806Z"
   },
   "1554|https://booking.naver.com/booking/3/bizes/650": {
    "v": "UNVERIFIED",
@@ -298,9 +302,10 @@
    "at": null
   },
   "101495|http://xn--950bt9s8xi/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.742Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:45.453Z"
   },
   "102156|https://map.naver.com/p/entry/place/1595819162?placePath=%2Froom%3Fentry%3Dpll%26from%3Dmap%26fromNxList%3Dtrue%26fromPanelNum%3D1%26additionalHeight%3D76%26timestamp%3D202608301102%26locale%3Dko%26svcName%3Dmap_pcv5%26businessCategory%3Dcamping&placeSearchOption=entry%3Dpll%26fromNxList%3Dtrue&searchType=place&c=15.00,0,0,0,dh": {
    "v": "UNVERIFIED",
@@ -330,7 +335,7 @@
   "1190|http://www.mjcamping.co.kr/": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:01:40.428Z"
+   "at": "2026-11-04T00:01:27.532Z"
   },
   "100293|https://cafe.naver.com/cnchidingplace": {
    "v": "UNVERIFIED",
@@ -345,12 +350,12 @@
   "356|http://lespia.net/?intro=OK": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:07.107Z"
+   "at": "2026-11-04T00:01:03.893Z"
   },
   "356|http://lespia.net/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:08.107Z"
+   "at": "2026-11-04T00:01:04.894Z"
   },
   "7157|https://booking.naver.com/booking/3/bizes/1634537": {
    "v": "UNVERIFIED",
@@ -360,7 +365,7 @@
   "7157|http://www.boricamp.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:40.757Z"
+   "at": "2026-11-04T00:01:28.568Z"
   },
   "100255|https://cafe.naver.com/wolmyeong612": {
    "v": "UNVERIFIED",
@@ -370,7 +375,7 @@
   "591|https://reservation.knps.or.kr/main.action": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:01:20.995Z"
+   "at": "2026-11-04T00:01:13.757Z"
   },
   "789|http://cafe.naver.com/thesoupcamp": {
    "v": "UNVERIFIED",
@@ -380,7 +385,7 @@
   "812|http://www.huyang.go.kr/main.action": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:30.481Z"
+   "at": "2026-11-04T00:01:19.356Z"
   },
   "101246|https://cafe.naver.com/dscampv": {
    "v": "UNVERIFIED",
@@ -410,7 +415,7 @@
   "492|http://xn--bb0b8x791burgjmjxnk.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:42.782Z"
+   "at": "2026-11-04T00:01:31.166Z"
   },
   "722|https://naver.me/57VWZcRK": {
    "v": "UNVERIFIED",
@@ -423,9 +428,10 @@
    "at": null
   },
   "102260|http://xn--950bt9s58g4pa00d/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:25:24.267Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:09:03.498Z"
   },
   "51|http://blog.naver.com/PostList.nhn?blogId=najost&from=postList&categoryNo=1": {
    "v": "UNVERIFIED",
@@ -435,22 +441,22 @@
   "129|http://galgisanpensioncamp.com/stdzn/page.do?request=goReservePage&bizCode=P201410001&strMenuId=TMP1100": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:01:45.592Z"
+   "at": "2026-11-04T00:01:35.321Z"
   },
   "129|http://galgisanpensioncamp.com/stdzn/page.do?request=goMainPage&bizCode=P201410001": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:01:47.347Z"
+   "at": "2026-11-04T00:01:36.629Z"
   },
   "154|http://www.xn--bb0bm7i2qgk4r.kr/reservation/reserve.jsp": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:44.583Z"
+   "at": "2026-11-04T00:01:34.750Z"
   },
   "154|http://www.xn--bb0bm7i2qgk4r.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:45.583Z"
+   "at": "2026-11-04T00:01:35.749Z"
   },
   "677|http://blog.naver.com/lamaryu": {
    "v": "UNVERIFIED",
@@ -458,9 +464,11 @@
    "at": null
   },
   "734|http://www.xn--2i0bk9gf3a3yl74jnldhz2b.com/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:25:27.241Z"
+   "v": "MATCH",
+   "why": "이름 “대둔산”",
+   "title": "대둔산그린시티",
+   "kind": "homepage",
+   "at": "2026-11-04T00:09:04.637Z"
   },
   "1065|https://m.place.naver.com/restaurant/21868859/home": {
    "v": "UNVERIFIED",
@@ -485,12 +493,12 @@
   "383|https://www.huyang.go.kr/main.action": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:31.634Z"
+   "at": "2026-11-04T00:01:20.359Z"
   },
   "7060|https://reservation.knps.or.kr/member/memberLogin.action": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:01:36.213Z"
+   "at": "2026-11-04T00:01:28.950Z"
   },
   "101797|https://naver.me/5V8nYZpU": {
    "v": "UNVERIFIED",
@@ -505,17 +513,17 @@
   "6803|https://reservation.knps.or.kr/main.action": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:01:20.995Z"
+   "at": "2026-11-04T00:01:13.757Z"
   },
   "100107|http://badadacamp.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:00.900Z"
+   "at": "2026-11-04T00:01:42.248Z"
   },
   "2394|http://www.yonginforest.net/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:02.674Z"
+   "at": "2026-11-04T00:01:43.007Z"
   },
   "2823|http://blog.naver.com/hl4hez": {
    "v": "UNVERIFIED",
@@ -535,12 +543,12 @@
   "2793|https://www.gc.go.kr/sudo/programs/campSite/campSiteReserve.do?mId=0304000000&csi_uid=14&r_period=1&initYear=2025&initMonth=11&initDay=": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:13.844Z"
+   "at": "2026-11-04T00:01:47.619Z"
   },
   "2793|https://www.gc.go.kr/sudo/main.do": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:17.063Z"
+   "at": "2026-11-04T00:01:49.350Z"
   },
   "2997|https://naver.me/GP2qhm3t": {
    "v": "UNVERIFIED",
@@ -550,7 +558,7 @@
   "2997|http://xn--m01bq5ku5a98z8ufqqbv4y.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:11.361Z"
+   "at": "2026-11-04T00:01:47.172Z"
   },
   "3352|https://cafe.naver.com/hahadongcamping/7": {
    "v": "UNVERIFIED",
@@ -565,7 +573,7 @@
   "7573|https://yeyak.seoul.go.kr/reservation/view.web?rsvsvcid=S201008183839720780": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:17.681Z"
+   "at": "2026-11-04T00:01:50.587Z"
   },
   "7573|https://blog.naver.com/seoul_camp/221494122059": {
    "v": "UNVERIFIED",
@@ -575,17 +583,17 @@
   "7693|https://www.yeongam.go.kr/home/ok/camping/info": {
    "v": "DEAD",
    "why": "없는 페이지 안내",
-   "at": "2026-10-27T23:02:18.224Z"
+   "at": "2026-11-04T00:01:51.013Z"
   },
   "100056|http://xn--bj0b46peqhb0eo2bp72b.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:15.050Z"
+   "at": "2026-11-04T00:01:50.348Z"
   },
   "100082|https://autocamping.bukgu.ulsan.kr/Pmreservation.do": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:08.689Z"
+   "at": "2026-11-04T00:01:06.134Z"
   },
   "100541|https://map.naver.com/p/search/%ED%95%98%EB%8A%98%EC%86%8C%EB%A6%AC%20%EC%BA%A0%ED%94%84/place/1109151137?c=15.00,0,0,0,dh&isCorrectAnswer=true": {
    "v": "UNVERIFIED",
@@ -600,12 +608,12 @@
   "2052|http://ygauto.kr/camping/reserve.html": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:18.665Z"
+   "at": "2026-11-04T00:01:52.715Z"
   },
   "2052|http://ygauto.kr/main/index.html": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:19.665Z"
+   "at": "2026-11-04T00:01:53.715Z"
   },
   "3287|http://blog.naver.com/seoul_camp": {
    "v": "UNVERIFIED",
@@ -640,7 +648,7 @@
   "2975|http://www.chuamautocamping.or.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:23.110Z"
+   "at": "2026-11-04T00:01:54.979Z"
   },
   "8150|https://map.naver.com/v5/search/%EA%B2%BD%EC%A3%BC%EB%B7%B0%EB%8D%B8%EC%B9%B4%EB%9D%BC%EB%B0%98/place/1290861402?c=14370331.9322351,4280858.4799505,10,0,0,0,dh&isCorrectAnswer=true": {
    "v": "UNVERIFIED",
@@ -695,17 +703,17 @@
   "1364|http://botopia.co.kr/h/d6661/home.php": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:29.443Z"
+   "at": "2026-11-04T00:01:57.575Z"
   },
   "399|http://www.huyang.go.kr/main.action": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:30.481Z"
+   "at": "2026-11-04T00:01:19.356Z"
   },
   "401|http://www.huyang.go.kr/main.action": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:30.481Z"
+   "at": "2026-11-04T00:01:19.356Z"
   },
   "3370|http://cafe.naver.com/dreamvillcampgp1": {
    "v": "UNVERIFIED",
@@ -713,9 +721,10 @@
    "at": null
   },
   "101543|http://xn--950bt9s8xi/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.742Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:46.455Z"
   },
   "101354|https://naver.me/IFItKV4H": {
    "v": "UNVERIFIED",
@@ -735,7 +744,7 @@
   "1255|http://www.yegreenasoop.net/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:34.890Z"
+   "at": "2026-11-04T00:02:05.420Z"
   },
   "444|https://m.booking.naver.com/booking/3/bizes/115592": {
    "v": "UNVERIFIED",
@@ -750,7 +759,7 @@
   "2735|http://www.xn--9d0bv6dl30adnbj4pxnksb.com/default/": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:37.506Z"
+   "at": "2026-11-04T00:02:06.143Z"
   },
   "100569|https://naver.me/IGmLd0V1": {
    "v": "UNVERIFIED",
@@ -760,7 +769,7 @@
   "508|http://kimpocamping.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:38.385Z"
+   "at": "2026-11-04T00:02:06.357Z"
   },
   "930|http://cafe.naver.com/deulsori": {
    "v": "UNVERIFIED",
@@ -770,7 +779,7 @@
   "2519|http://www.yoogarden.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:39.608Z"
+   "at": "2026-11-04T00:02:07.159Z"
   },
   "3055|http://cafe.naver.com/camppm4": {
    "v": "UNVERIFIED",
@@ -780,12 +789,12 @@
   "7226|http://www.pensionflower.net/sub5_1.php": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:40.009Z"
+   "at": "2026-11-04T00:02:07.578Z"
   },
   "7226|http://www.pensionflower.net/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:41.009Z"
+   "at": "2026-11-04T00:02:08.578Z"
   },
   "7706|https://blog.naver.com/0amglam": {
    "v": "UNVERIFIED",
@@ -795,12 +804,12 @@
   "8028|https://www.theharucamp.co.kr/22": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:40.647Z"
+   "at": "2026-11-04T00:02:08.204Z"
   },
   "8028|https://www.theharucamp.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:41.647Z"
+   "at": "2026-11-04T00:02:09.205Z"
   },
   "8045|https://cafe.naver.com/habacamping": {
    "v": "UNVERIFIED",
@@ -840,12 +849,12 @@
   "3252|http://www.caravanpark.kr/rv/view.php?guest_pop=guest_pop&fc_code=1230": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:46.411Z"
+   "at": "2026-11-04T00:02:15.082Z"
   },
   "140|http://camping.designtu.kr/": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:45.752Z"
+   "at": "2026-11-04T00:02:13.244Z"
   },
   "1181|http://blog.naver.com/jbk0309/": {
    "v": "UNVERIFIED",
@@ -880,12 +889,12 @@
   "7084|http://campinggo.kr/html/new_fcal.php?seq=171": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:26:05.724Z"
+   "at": "2026-11-04T00:02:13.763Z"
   },
   "7084|http://www.xn--989a5bu77k1uf.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:46.301Z"
+   "at": "2026-11-04T00:02:13.772Z"
   },
   "100572|https://blog.naver.com/wnstj1004--": {
    "v": "UNVERIFIED",
@@ -905,22 +914,22 @@
   "2990|http://www.ccforest.or.kr/sub/sub7_1.html": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:50.632Z"
+   "at": "2026-11-04T00:02:17.244Z"
   },
   "3454|http://www.xn--vk1b55o2miuzabxl02auifdvgtzb.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:49.980Z"
+   "at": "2026-11-04T00:02:16.562Z"
   },
   "7566|https://www.i815.or.kr/campsite/camp/site.do": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:57.897Z"
+   "at": "2026-11-04T00:02:18.975Z"
   },
   "7566|https://www.i815.or.kr/2018/tour/campsite.do": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:03:03.142Z"
+   "at": "2026-11-04T00:02:20.951Z"
   },
   "7903|https://naver.me/FKK35ZEO": {
    "v": "UNVERIFIED",
@@ -935,12 +944,12 @@
   "8042|http://www.gpyeonin.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:51.975Z"
+   "at": "2026-11-04T00:02:17.387Z"
   },
   "8102|http://tour.invil.com/front/tour/gds/data.do?contsNo=1711271&pdCd=GR00002333": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:53.161Z"
+   "at": "2026-11-04T00:02:17.619Z"
   },
   "102112|http://naver.me/G6RuVllM": {
    "v": "UNVERIFIED",
@@ -995,17 +1004,17 @@
   "936|http://autocamp.haenam.go.kr/bbs/board.php?bo_table=reserv": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:57.995Z"
+   "at": "2026-11-04T00:02:20.726Z"
   },
   "21|http://www.saltvillage.co.kr/main/index.asp": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:58.006Z"
+   "at": "2026-11-04T00:02:21.701Z"
   },
   "57|http://www.thestarauto.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:57.473Z"
+   "at": "2026-11-04T00:02:20.471Z"
   },
   "160|https://m.booking.naver.com/booking/3/bizes/364224": {
    "v": "UNVERIFIED",
@@ -1020,12 +1029,12 @@
   "333|http://greencity.gwangju.go.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:58.630Z"
+   "at": "2026-11-04T00:02:22.001Z"
   },
   "398|http://www.huyang.go.kr/main.action": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:30.481Z"
+   "at": "2026-11-04T00:01:19.356Z"
   },
   "527|https://camfit.co.kr/camp/61aef4d945347c001e9e987d?keyword=%EA%BF%88%EA%BE%B8%EB%8A%94+%EC%BA%A0%ED%95%91%EC%9E%A5&adultCnt=2&types=autoCamping": {
    "v": "UNVERIFIED",
@@ -1040,7 +1049,7 @@
   "628|http://www.xn--,com-fd0qg10bgjg0kixnlzs0b/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:01.922Z"
+   "at": "2026-11-04T00:02:23.112Z"
   },
   "635|http://cafe.naver.com/nooroongjicamping": {
    "v": "UNVERIFIED",
@@ -1050,27 +1059,27 @@
   "638|http://www.neuraengigol.com/gnu/camp/campCalendar.php": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:03:03.667Z"
+   "at": "2026-11-04T00:02:23.950Z"
   },
   "638|http://www.neuraengigol.com/main/main.php": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:03:04.814Z"
+   "at": "2026-11-04T00:02:25.109Z"
   },
   "731|http://daedeokhealing.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:02.847Z"
+   "at": "2026-11-04T00:02:23.327Z"
   },
   "829|http://dorimsacamping.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:03.022Z"
+   "at": "2026-11-04T00:02:24.165Z"
   },
   "860|http://xn--pq1by0hgta924f.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:03.229Z"
+   "at": "2026-11-04T00:02:24.223Z"
   },
   "887|http://cafe.naver.com/whitelotus1593": {
    "v": "UNVERIFIED",
@@ -1085,17 +1094,17 @@
   "953|http://www.laonglamping.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:04.005Z"
+   "at": "2026-11-04T00:02:24.493Z"
   },
   "964|http://www.lapdogvill.keunter.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:04.176Z"
+   "at": "2026-11-04T00:02:24.476Z"
   },
   "1032|http://campingstar.nowr1.net/member/?co_id=campingstar": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:04.271Z"
+   "at": "2026-11-04T00:02:25.118Z"
   },
   "1032|http://cafe.naver.com/manjungcamping": {
    "v": "UNVERIFIED",
@@ -1105,7 +1114,7 @@
   "1622|http://grandpark.seoul.go.kr/korea_grand/camping/reserv/reserv01.jsp?headerId=41263&menuid=41281&parentId=41282": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:03:06.715Z"
+   "at": "2026-11-04T00:02:26.727Z"
   },
   "1676|https://booking.naver.com/booking/3/bizes/81832": {
    "v": "UNVERIFIED",
@@ -1113,14 +1122,15 @@
    "at": null
   },
   "1681|http://xn--bv5bzjqy/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:26:17.172Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:09:35.071Z"
   },
   "1868|http://www.munberryfarm.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:06.734Z"
+   "at": "2026-11-04T00:02:27.440Z"
   },
   "1875|https://cafe.naver.com/woodsna": {
    "v": "UNVERIFIED",
@@ -1135,17 +1145,17 @@
   "2044|http://www.appleglamping.com/bbs/board.php?bo_table=glamping": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:06.977Z"
+   "at": "2026-11-04T00:02:27.526Z"
   },
   "2044|http://www.appleglamping.com/bbs/content.php?co_id=company": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:07.977Z"
+   "at": "2026-11-04T00:02:28.526Z"
   },
   "2166|http://www.badanoeul.co.kr/fhtml/": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:03:15.326Z"
+   "at": "2026-11-04T00:02:30.687Z"
   },
   "2272|http://cafe.naver.com/ysdcamp": {
    "v": "UNVERIFIED",
@@ -1155,52 +1165,52 @@
   "2314|http://www.o2story.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:08.640Z"
+   "at": "2026-11-04T00:02:28.583Z"
   },
   "2358|http://themacamping.com/netfu_rpension/res/realtime.html?design=2": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:03:09.925Z"
+   "at": "2026-11-04T00:02:29.986Z"
   },
   "2358|http://themacamping.com/goods_detail.php?goodsIdx=108": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:03:11.132Z"
+   "at": "2026-11-04T00:02:31.112Z"
   },
   "2377|http://www.ypforest.com/main.php?sp=reserv": {
    "v": "DEAD",
    "why": "없는 페이지 안내",
-   "at": "2026-10-27T23:03:09.571Z"
+   "at": "2026-11-04T00:02:30.206Z"
   },
   "2377|http://www.ypforest.com/": {
    "v": "DEAD",
    "why": "없는 페이지 안내",
-   "at": "2026-10-27T23:03:10.959Z"
+   "at": "2026-11-04T00:02:31.282Z"
   },
   "2459|http://www.ystour.kr/tourism/tour/tourMUserList.do?mode=detail&cur_page=1&m2=-1&searchWord=&m3=&others=04&trSeqId=702": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:03:10.941Z"
+   "at": "2026-11-04T00:02:30.607Z"
   },
   "2525|http://ukcamp.co.kr/03reservation/reservation.php": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:12.036Z"
+   "at": "2026-11-04T00:02:30.693Z"
   },
   "2525|http://ukcamp.co.kr/main.php": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:13.036Z"
+   "at": "2026-11-04T00:02:31.693Z"
   },
   "2622|http://xn--zb0b8a28vc21a.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:12.066Z"
+   "at": "2026-11-04T00:02:31.472Z"
   },
   "2813|http://www.hohodangzoo.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:14.014Z"
+   "at": "2026-11-04T00:02:34.626Z"
   },
   "2886|https://cafe.naver.com/dotoricamp": {
    "v": "UNVERIFIED",
@@ -1210,27 +1220,27 @@
   "3184|http://p-valley.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:17.521Z"
+   "at": "2026-11-04T00:02:37.550Z"
   },
   "3210|http://reservation.knps.or.kr/information/campInfo.action?seqId=B091001": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:03.290Z"
+   "at": "2026-11-04T00:01:49.247Z"
   },
   "3279|http://xn--bj0b94tskpvgck0ivna.com/contents/sub0701.php": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:03:22.739Z"
+   "at": "2026-11-04T00:02:38.706Z"
   },
   "3319|http://pvg.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:21.488Z"
+   "at": "2026-11-04T00:02:38.386Z"
   },
   "3329|http://www.guryecamp.com/pension/reserve_guide.html?pid=24": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:03:24.258Z"
+   "at": "2026-11-04T00:02:40.024Z"
   },
   "3345|http://cafe.naver.com/polarisleisure": {
    "v": "UNVERIFIED",
@@ -1250,7 +1260,7 @@
   "3496|http://www.hwgarden.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:22.126Z"
+   "at": "2026-11-04T00:02:39.302Z"
   },
   "6753|https://www.instagram.com/glampingus_cafeglam/": {
    "v": "UNVERIFIED",
@@ -1274,38 +1284,38 @@
   },
   "7143|http://www.metapark.co.kr/bbs/board.php?bo_table=caravan": {
    "v": "DEAD",
-   "why": "HTTP 404",
-   "at": "2026-10-27T23:03:27.922Z"
+   "why": "DNS 없음(도메인 없음)",
+   "at": "2026-11-04T00:02:41.868Z"
   },
   "7187|http://www.campwando.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:26.592Z"
+   "at": "2026-11-04T00:02:42.827Z"
   },
   "7196|http://yp-camping.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:27.336Z"
+   "at": "2026-11-04T00:02:44.950Z"
   },
   "7207|http://www.jeamsan.go.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:27.496Z"
+   "at": "2026-11-04T00:02:45.237Z"
   },
   "7208|http://www.xn--oy2bp0d6yf.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:28.954Z"
+   "at": "2026-11-04T00:02:45.502Z"
   },
   "7210|http://goldautocamp.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:29.302Z"
+   "at": "2026-11-04T00:02:45.535Z"
   },
   "7228|http://www.xn--eq4b84h6ue89bzxn.xn--3e0b707e/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:29.478Z"
+   "at": "2026-11-04T00:02:45.814Z"
   },
   "7716|http://blog.naver.com/comtuner": {
    "v": "UNVERIFIED",
@@ -1315,7 +1325,7 @@
   "7751|http://hw684.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:33.641Z"
+   "at": "2026-11-04T00:02:49.247Z"
   },
   "7824|https://www.camfit.co.kr/camp/61303f1a13b75b001efd2c7e": {
    "v": "UNVERIFIED",
@@ -1328,9 +1338,10 @@
    "at": null
   },
   "7896|http://xn--950bt9s8xi/%20%EC%B2%9C%EC%82%AC%EC%84%AC%EC%BA%A0%ED%95%91": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:55.743Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:47.457Z"
   },
   "7899|https://map.naver.com/v5/entry/place/1414632879?c=14200685.4781541,4135556.9389744,13,0,0,0,dh&placePath=%2Fbooking%3FbookingRedirectUrl=https:%2F%2Fm.booking.naver.com%2Fbooking%2F3%2Fbizes%2F426361%26entry=plt": {
    "v": "UNVERIFIED",
@@ -1340,22 +1351,22 @@
   "7909|http://xn--ok1b32kuxc92f9ugutb.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:37.648Z"
+   "at": "2026-11-04T00:02:52.616Z"
   },
   "8008|http://xn--950bt9s8xi.xn--ob0b34v7nffpbbwjq3aw5b95hdwnoqhb1k9uc/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:38.321Z"
+   "at": "2026-11-04T00:02:53.522Z"
   },
   "8019|https://juksanbocamp.kr/reservation": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:39.566Z"
+   "at": "2026-11-04T00:02:54.668Z"
   },
   "8019|https://juksanbocamp.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:40.567Z"
+   "at": "2026-11-04T00:02:55.668Z"
   },
   "8084|https://map.naver.com/p/entry/place/1601097628": {
    "v": "UNVERIFIED",
@@ -1390,7 +1401,7 @@
   "100114|http://cheonjiglamping.moddo.at/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:03:42.003Z"
+   "at": "2026-11-04T00:02:57.257Z"
   },
   "100117|https://www.camfit.co.kr/camp/6321e6e27c91db001eed88b9": {
    "v": "UNVERIFIED",
@@ -1418,9 +1429,10 @@
    "at": null
   },
   "100191|http://xn--950bt9s8xi/%20%ED%99%94%EC%88%9C%EB%8F%94%EC%95%84%EC%9D%BC%EB%9E%9C%EB%93%9C%20%EA%B2%80%EC%83%89": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:56.743Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:48.458Z"
   },
   "100251|https://map.naver.com/p/search/%EA%B1%B0%EA%B8%88%EB%8F%84%20%EC%B2%AD%EC%84%9D%20%EC%98%A4%ED%86%A0%EC%BA%A0%ED%95%91%EC%9E%A5/place/1513537347?c=15.00,0,0,0,dh&isCorrectAnswer=true": {
    "v": "UNVERIFIED",
@@ -1658,14 +1670,16 @@
    "at": null
   },
   "101602|http://xn--bj0b14h95d04n12w.com/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:27:04.338Z"
+   "v": "ERROR",
+   "why": "HTTP 403",
+   "kind": "homepage",
+   "at": "2026-11-04T00:10:21.290Z"
   },
   "101642|http://xn--950bt9s8xi/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.742Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:49.460Z"
   },
   "101663|https://www.instagram.com/mulia_korea": {
    "v": "UNVERIFIED",
@@ -1741,7 +1755,7 @@
    "v": "PLATFORM_ROOT",
    "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:31.626Z"
+   "at": "2026-11-04T00:08:42.049Z"
   },
   "102210|https://m.booking.naver.com/booking/3/bizes/1662458": {
    "v": "UNVERIFIED",
@@ -1751,7 +1765,7 @@
   "349|http://www.xn--2e0b64rusa724boyboww.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:09:05.184Z"
+   "at": "2026-11-04T00:07:44.155Z"
   },
   "102019|https://map.naver.com/p/search/%EC%95%84%EC%9B%83%EC%98%A4%ED%94%84%EA%B8%80%EB%9E%A8%ED%95%91": {
    "v": "UNVERIFIED",
@@ -1764,9 +1778,10 @@
    "at": null
   },
   "102234|http://xn--sk4bt5io2bh9k8odzya/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:27:10.111Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:10:24.400Z"
   },
   "102225|https://booking.naver.com/booking/3/bizes/1402399/items?area=bmp&map-search=1": {
    "v": "UNVERIFIED",
@@ -1811,7 +1826,7 @@
   "100681|http://solbat42.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:05.369Z"
+   "at": "2026-11-04T00:03:20.478Z"
   },
   "1057|https://cafe.naver.com/dotoricamp": {
    "v": "UNVERIFIED",
@@ -1867,7 +1882,7 @@
    "v": "PLATFORM_ROOT",
    "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:31.626Z"
+   "at": "2026-11-04T00:08:42.049Z"
   },
   "1508|https://blog.naver.com/sanullim_camp": {
    "v": "UNVERIFIED",
@@ -1902,7 +1917,7 @@
   "7528|http://www.junopartners.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:09.909Z"
+   "at": "2026-11-04T00:03:25.626Z"
   },
   "100177|https://naver.me/xSFTorgA": {
    "v": "UNVERIFIED",
@@ -1937,7 +1952,7 @@
   "100128|https://blog.never.com/sungminlee9": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:11.026Z"
+   "at": "2026-11-04T00:03:26.895Z"
   },
   "1043|https://cafe.naver.com/meil53": {
    "v": "UNVERIFIED",
@@ -1947,7 +1962,7 @@
   "2171|http://www.aincamp.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:11.586Z"
+   "at": "2026-11-04T00:03:27.236Z"
   },
   "7630|https://band.us/@beobheungli137": {
    "v": "UNVERIFIED",
@@ -1967,7 +1982,7 @@
   "6790|http://campinggo.kr/html/new_fcal.php?seq=126": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:26:06.724Z"
+   "at": "2026-11-04T00:02:14.763Z"
   },
   "6790|http://cafe.daum.net/maseal/": {
    "v": "UNVERIFIED",
@@ -1992,7 +2007,7 @@
   "1336|http://xn--hu1bo4emykn4s.com/sh_page/page13.php": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:12.378Z"
+   "at": "2026-11-04T00:03:27.904Z"
   },
   "2249|http://blog.naver.com/horseluv": {
    "v": "UNVERIFIED",
@@ -2005,14 +2020,15 @@
    "at": null
   },
   "101278|http://%EC%9D%B8%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8%20DM:%20@joypool/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:27:18.180Z"
+   "v": "ERROR",
+   "why": "Request cannot be constructed from a URL that includes crede",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:10:33.327Z"
   },
   "468|http://www.kumbanga.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:13.603Z"
+   "at": "2026-11-04T00:03:29.464Z"
   },
   "468|https://cafe.naver.com/kumbanga/3953": {
    "v": "UNVERIFIED",
@@ -2037,7 +2053,7 @@
   "2418|http://www.woony.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:17.224Z"
+   "at": "2026-11-04T00:03:31.052Z"
   },
   "100219|https://map.naver.com/v5/entry/place/1445571734?c=14087037.1836134,4433687.6868340,15,0,0,0,dh&entry=plt": {
    "v": "UNVERIFIED",
@@ -2047,7 +2063,7 @@
   "100219|http://glcamping.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:18.044Z"
+   "at": "2026-11-04T00:03:32.192Z"
   },
   "1641|https://map.naver.com/p/entry/place/1209467225?c=15.00,0,0,0,dh": {
    "v": "UNVERIFIED",
@@ -2072,12 +2088,13 @@
   "1503|http://www.sanyaiul.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:20.396Z"
+   "at": "2026-11-04T00:03:33.603Z"
   },
   "1503|http://xn--w80bz29awpb/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:27:23.095Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:10:34.332Z"
   },
   "6978|http://cafe.naver.com/doosancamp": {
    "v": "UNVERIFIED",
@@ -2092,7 +2109,7 @@
   "3519|http://xn--9p4bo5hfvg1nh66a.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:23.120Z"
+   "at": "2026-11-04T00:03:34.632Z"
   },
   "100556|https://camfit.co.kr/camp/632ad09a6c6133001e0bd1ee": {
    "v": "UNVERIFIED",
@@ -2117,7 +2134,7 @@
   "2185|https://camping.gtdc.or.kr/DZ_reservation/reserCamping_v3.php?xch=reservation&xid=camping_reservation": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:04:27.364Z"
+   "at": "2026-11-04T00:03:37.428Z"
   },
   "2363|https://cafe.naver.com/yogicamping": {
    "v": "UNVERIFIED",
@@ -2125,9 +2142,10 @@
    "at": null
   },
   "100179|http://xn--xc7b85j/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:58.080Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:43.122Z"
   },
   "102132|https://cafe.naver.com/tailstar114": {
    "v": "UNVERIFIED",
@@ -2152,7 +2170,7 @@
   "502|http://xn--739a4mzcp0ep60c3ojnjmt5m.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:25.890Z"
+   "at": "2026-11-04T00:03:37.426Z"
   },
   "643|https://naver.me/xevRCDuy": {
    "v": "UNVERIFIED",
@@ -2162,7 +2180,7 @@
   "1369|http://www.boboscot.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:26.087Z"
+   "at": "2026-11-04T00:03:37.518Z"
   },
   "3619|http://cafe.naver.com/camphealing": {
    "v": "UNVERIFIED",
@@ -2192,12 +2210,12 @@
   "6778|http://thegoodcamping.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:27.007Z"
+   "at": "2026-11-04T00:03:38.562Z"
   },
   "7786|http://www.xn--939ak0bwa745dloek2qgoddr5c.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:26.971Z"
+   "at": "2026-11-04T00:03:38.586Z"
   },
   "101402|https://cafe.naver.com/overthemountains": {
    "v": "UNVERIFIED",
@@ -2217,12 +2235,12 @@
   "102074|https://new.smartplace.never.com/bizes/booking/1602568": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:29.392Z"
+   "at": "2026-11-04T00:03:42.579Z"
   },
   "102074|https://xn--caf-dma.naver.com/thefarmisgood": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:29.544Z"
+   "at": "2026-11-04T00:03:42.726Z"
   },
   "777|https://cafe.daum.net/water-camping": {
    "v": "UNVERIFIED",
@@ -2230,14 +2248,15 @@
    "at": null
   },
   "7740|http://xn--950bt9s8xi34g9zg/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:25:12.822Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:53.812Z"
   },
   "100322|http://www.7block.net/page/sub0101": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:04:37.861Z"
+   "at": "2026-11-04T00:03:48.151Z"
   },
   "100365|http://naver.me/FErqwY17": {
    "v": "UNVERIFIED",
@@ -2282,7 +2301,7 @@
   "3264|http://forahn.com/r/rev_make.php?pen_code=a9443&s_group_num=0": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:39.209Z"
+   "at": "2026-11-04T00:03:49.191Z"
   },
   "7385|https://cafe.naver.com/pinegrovecamping": {
    "v": "UNVERIFIED",
@@ -2322,12 +2341,12 @@
   "813|http://real.pentour.com/index.php?pid=3165": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:40.284Z"
+   "at": "2026-11-04T00:03:49.682Z"
   },
   "813|http://www.mujuneverland.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:40.325Z"
+   "at": "2026-11-04T00:03:49.699Z"
   },
   "100764|https://cafe.daum.net/306ssb": {
    "v": "UNVERIFIED",
@@ -2338,7 +2357,7 @@
    "v": "PLATFORM_ROOT",
    "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:31.628Z"
+   "at": "2026-11-04T00:08:42.050Z"
   },
   "102107|https://camfit.co.kr/camp/6971bf8470bc97001dbdaf29?keyword=%EB%8D%94+%EC%BA%A0%ED%94%84+369&adultCnt=2&types=autoCamping": {
    "v": "UNVERIFIED",
@@ -2358,7 +2377,7 @@
   "101117|https://blog.naver..com/moktan88/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:44.201Z"
+   "at": "2026-11-04T00:03:51.650Z"
   },
   "100508|https://blog.naver.com/campbanana": {
    "v": "UNVERIFIED",
@@ -2378,12 +2397,12 @@
   "7640|http://www.junoglamping.co.kr/juno/room_list.php?juno_id=8": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:44.358Z"
+   "at": "2026-11-04T00:03:52.130Z"
   },
   "3482|http://hf.cj100.net/camping.asp": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:47.437Z"
+   "at": "2026-11-04T00:03:54.571Z"
   },
   "3428|http://cafe.naver.com/hanterfarm": {
    "v": "UNVERIFIED",
@@ -2497,8 +2516,8 @@
   },
   "1407|http://www.buyundong-skycabin-camp.com/": {
    "v": "DEAD",
-   "why": "없는 페이지 안내",
-   "at": "2026-10-27T23:04:53.858Z"
+   "why": "DNS 없음(도메인 없음)",
+   "at": "2026-11-04T00:04:00.981Z"
   },
   "1970|http://cafe.naver.com/beautifulcamp": {
    "v": "UNVERIFIED",
@@ -2506,14 +2525,15 @@
    "at": null
   },
   "1970|http://xn--950bt9s8xi/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.742Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:50.462Z"
   },
   "2506|http://www.xn--9n3bn67a.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:53.930Z"
+   "at": "2026-11-04T00:04:02.620Z"
   },
   "3092|http://cafe.naver.com/cphouse": {
    "v": "UNVERIFIED",
@@ -2521,9 +2541,10 @@
    "at": null
   },
   "3092|http://xn--950bt9s8xi/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.742Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:51.464Z"
   },
   "7046|https://cafe.naver.com/campingandgarden": {
    "v": "UNVERIFIED",
@@ -2531,14 +2552,16 @@
    "at": null
   },
   "7046|http://xn--950bt9s8xi/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.742Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:52.466Z"
   },
   "7167|http://xn--911bu29b9fbp3j/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.043Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:45.204Z"
   },
   "7755|https://cafe.naver.com/skycp2004": {
    "v": "UNVERIFIED",
@@ -2546,24 +2569,26 @@
    "at": null
   },
   "7755|http://xn--911bu29b9fbp3j/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.043Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:46.205Z"
   },
   "7808|http://www.gp-valley.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:55.792Z"
+   "at": "2026-11-04T00:04:05.015Z"
   },
   "8113|http://xn--xc7b85j/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:58.080Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:45.125Z"
   },
   "100022|http://www.toycamp.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:57.075Z"
+   "at": "2026-11-04T00:04:05.914Z"
   },
   "100200|http://naver.me/5xln5CdZ": {
    "v": "UNVERIFIED",
@@ -2571,19 +2596,21 @@
    "at": null
   },
   "101147|http://xn--xc7b85j/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:58.080Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:46.128Z"
   },
   "101297|http://xn--950bt9s8xi/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.742Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:53.468Z"
   },
   "101396|http://xn--,-bv7e2nf2m79jyvpxnb/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:58.774Z"
+   "at": "2026-11-04T00:04:08.859Z"
   },
   "101426|https://www.camfit.co.kr/camp/669233afc1394b001e0843e6": {
    "v": "UNVERIFIED",
@@ -2598,7 +2625,7 @@
   "101463|http://xn--,http-9q5tx13d85t//ulaanpak.staynt.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:01.202Z"
+   "at": "2026-11-04T00:04:10.093Z"
   },
   "101464|https://www.instagram.com/againschool_camping": {
    "v": "UNVERIFIED",
@@ -2606,9 +2633,10 @@
    "at": null
   },
   "101510|http://xn--950bt9s8xi/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.742Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:54.471Z"
   },
   "101625|https://map.naver.com/p/entry/place/1289359022?c=15.00,0,0,0,dh&placePath=/room?businessCategory=camping&from=map&fromPanelNum=1&additionalHeight=76&timestamp=202507231526&locale=ko&svcName=map_pcv5&fromPanelNum=1&additionalHeight=76&timestamp=202507231520&locale=ko&svcName=map_pcv5&businessCategory=camping": {
    "v": "UNVERIFIED",
@@ -2623,12 +2651,13 @@
   "101664|http://xn--hy1ba84v33vlljx6j.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:03.010Z"
+   "at": "2026-11-04T00:04:11.339Z"
   },
   "101767|http://xn--om2b15an0oca372dm0sh0d/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:27:59.222Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:10:57.106Z"
   },
   "101791|https://naver.me/x67bTo2E": {
    "v": "UNVERIFIED",
@@ -2638,22 +2667,22 @@
   "277|http://www.dhc34.com/pension/reserve_guide.html?pid=24": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:04.560Z"
+   "at": "2026-11-04T00:04:12.900Z"
   },
   "277|http://www.dhc34.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:05.560Z"
+   "at": "2026-11-04T00:04:13.900Z"
   },
   "395|http://www.huyang.go.kr/main.action": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:30.481Z"
+   "at": "2026-11-04T00:01:19.356Z"
   },
   "400|http://www.huyang.go.kr/main.action": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:30.481Z"
+   "at": "2026-11-04T00:01:19.356Z"
   },
   "434|http://cafe.naver.com/greenstoneautocamp/": {
    "v": "UNVERIFIED",
@@ -2668,12 +2697,12 @@
   "6721|http://xn--l89ap8kk9ebpn7nnda718b.kr/introduction/introduction01": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:06.585Z"
+   "at": "2026-11-04T00:04:15.028Z"
   },
   "6971|http://www.huyang.go.kr/main.action": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:30.481Z"
+   "at": "2026-11-04T00:01:19.356Z"
   },
   "7583|https://www.camfit.co.kr/camp/6861f88679c379001d1e6804": {
    "v": "UNVERIFIED",
@@ -2681,9 +2710,10 @@
    "at": null
   },
   "8018|http://xn--950bt9s8xi/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.742Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:55.474Z"
   },
   "8181|https://map.naver.com/v5/entry/place/1873088598?c=14250657.3319048,4234922.7827912,13,0,0,0,dh&placePath=%2Froom%3Foquery=%25EC%25BA%25A0%25ED%2594%2584%25EB%258D%2594%25ED%258F%25AC%25EB%25A0%2588%26sm=tab_hty.top%26tqi=hFGJfdp0J1ZssmSY46Gssssstfd-360662": {
    "v": "UNVERIFIED",
@@ -2696,9 +2726,10 @@
    "at": null
   },
   "8196|http://xn--950bt9s58g4pa00d/%20%ED%8F%89%EC%95%94189%20%EA%B2%80%EC%83%89": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:25:25.268Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:09:04.500Z"
   },
   "100357|https://www.camfit.co.kr/camp/6623bc7a76716a001e892007": {
    "v": "UNVERIFIED",
@@ -2706,9 +2737,10 @@
    "at": null
   },
   "100577|http://xn--911bu29b9fbp3j/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.043Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:47.207Z"
   },
   "100846|https://map.naver.com/p/entry/place/1268518680?c=15.00,0,0,0,dh": {
    "v": "UNVERIFIED",
@@ -2721,24 +2753,28 @@
    "at": null
   },
   "101317|http://xn--950bt9s8xi/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.742Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:56.476Z"
   },
   "101448|http://xn--xc7b85j/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:58.080Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:47.130Z"
   },
   "101514|http://xn--xc7b85j/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:58.080Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:48.132Z"
   },
   "101644|http://xn--950bt9s8xi/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.742Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:57.484Z"
   },
   "101646|https://map.naver.com/p/entry/place/1162550635?lng=127.3081183&lat=37.1189192&placePath=%2Froom%3F&entry=plt&searchType=place&c=15.00,0,0,0,dh": {
    "v": "UNVERIFIED",
@@ -2823,12 +2859,12 @@
   "1095|http://mscaravan.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:11.611Z"
+   "at": "2026-11-04T00:04:19.484Z"
   },
   "1770|http://sol-bat.com/wanee/index.php": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:11.651Z"
+   "at": "2026-11-04T00:04:19.633Z"
   },
   "6856|http://cafe.daum.net/ygcamping/aaj2": {
    "v": "UNVERIFIED",
@@ -2843,7 +2879,7 @@
   "7254|https://ggtour.or.kr/camping/main.web": {
    "v": "DEAD",
    "why": "없는 페이지 안내",
-   "at": "2026-10-27T23:05:13.541Z"
+   "at": "2026-11-04T00:04:20.789Z"
   },
   "100204|https://www.camfit.co.kr/camp/6267933d5b69c8001e38b842": {
    "v": "UNVERIFIED",
@@ -2983,12 +3019,12 @@
   "3160|http://www.huyang.go.kr/main.action": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:30.481Z"
+   "at": "2026-11-04T00:01:19.356Z"
   },
   "3160|http://www.huyang.go.kr/forest/contentCamp.action?dprtmId=0193": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:32.634Z"
+   "at": "2026-11-04T00:01:21.359Z"
   },
   "3339|http://cafe.naver.com/skywaycamping": {
    "v": "UNVERIFIED",
@@ -3033,7 +3069,7 @@
   "100914|http://www.seclub.kr/24": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:05:22.774Z"
+   "at": "2026-11-04T00:04:30.497Z"
   },
   "588|http://cafe.naver.com/gyeback": {
    "v": "UNVERIFIED",
@@ -3043,17 +3079,17 @@
   "7195|http://forsthealingcamp.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:21.654Z"
+   "at": "2026-11-04T00:04:29.935Z"
   },
   "7868|https://www.cheonggyeglamping.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:21.738Z"
+   "at": "2026-11-04T00:04:30.173Z"
   },
   "889|http://www.campingkorea.or.kr/reservation/06.htm": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:26.795Z"
+   "at": "2026-11-04T00:01:57.193Z"
   },
   "701|http://cafe.naver.com/dalsurp": {
    "v": "UNVERIFIED",
@@ -3081,9 +3117,10 @@
    "at": null
   },
   "101266|http://xn--950bs4kn3dizh6tgca274v/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:28:17.114Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:11:00.024Z"
   },
   "101313|https://map.naver.com/p/search/%EB%B3%84%EB%B9%9B%EA%B0%AF%EB%B2%8C%EC%BA%A0%ED%95%91%EC%9E%A5/place/1144705315?c=15.00,0,0,0,dh&placePath=%3Fentry%253Dpll": {
    "v": "UNVERIFIED",
@@ -3093,7 +3130,7 @@
   "101313|https://star-campnic.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:23.329Z"
+   "at": "2026-11-04T00:04:32.043Z"
   },
   "101314|https://map.naver.com/p/entry/place/37629291?placePath=/room?from=map&fromPanelNum=1&additionalHeight=76&timestamp=202512171708&locale=ko&svcName=map_pcv5&businessCategory=camping&fromPanelNum=1&additionalHeight=76&timestamp=202512171708&locale=ko&svcName=map_pcv5&businessCategory=camping&c=15.00,0,0,0,dh": {
    "v": "UNVERIFIED",
@@ -3111,9 +3148,10 @@
    "at": null
   },
   "101387|http://xn--xc7b85j/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:58.080Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:49.134Z"
   },
   "101468|https://naver.me/FOZsgAOp": {
    "v": "UNVERIFIED",
@@ -3143,7 +3181,7 @@
   "2288|http://www.ypcleancamp.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:23.871Z"
+   "at": "2026-11-04T00:04:33.215Z"
   },
   "101319|https://naver.me/5FmSwzzn": {
    "v": "UNVERIFIED",
@@ -3163,7 +3201,7 @@
   "101358|http://xn--bj0b23klocpb358u.com/": {
    "v": "DEAD",
    "why": "없는 페이지 안내",
-   "at": "2026-10-27T23:05:25.964Z"
+   "at": "2026-11-04T00:04:34.401Z"
   },
   "101364|https://naver.me/G4W56Ylf": {
    "v": "UNVERIFIED",
@@ -3198,7 +3236,7 @@
   "101550|https://joyforeglamping.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:26.550Z"
+   "at": "2026-11-04T00:04:34.885Z"
   },
   "101583|https://naver.me/5PVmIPB2": {
    "v": "UNVERIFIED",
@@ -3226,9 +3264,10 @@
    "at": null
   },
   "1324|http://xn--911bu29b9fbp3j/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.043Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:48.209Z"
   },
   "3205|https://naver.me/GgWlAJ7D": {
    "v": "UNVERIFIED",
@@ -3243,12 +3282,13 @@
   "3375|https://hilark.kr/index.html": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:27.445Z"
+   "at": "2026-11-04T00:04:36.281Z"
   },
   "6990|http://xn--xc7b85j/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:58.080Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:50.136Z"
   },
   "7930|https://naver.me/FkLrdatk": {
    "v": "UNVERIFIED",
@@ -3263,12 +3303,13 @@
   "101375|http://xn--,,-hs1i03o9pq6lmcwdelu5nuuoga286jlldl4gwa/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:27.980Z"
+   "at": "2026-11-04T00:04:36.964Z"
   },
   "101434|http://xn--950bt9s8xi/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.742Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:58.485Z"
   },
   "101455|https://camfit.co.kr/camp/66af466d0f1794001e019635": {
    "v": "UNVERIFIED",
@@ -3294,17 +3335,19 @@
    "v": "PLATFORM_ROOT",
    "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:31.630Z"
+   "at": "2026-11-04T00:08:42.051Z"
   },
   "100340|http://xn--950bt9s8xi/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.742Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:59.487Z"
   },
   "101261|http://xn--950bt9s8xi/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.742Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:09:00.489Z"
   },
   "101441|https://naver.me/G58H6dnA": {
    "v": "UNVERIFIED",
@@ -3317,9 +3360,10 @@
    "at": null
   },
   "101494|http://xn--950bt9s8xi/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.742Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:09:01.491Z"
   },
   "101532|https://naver.me/GubQt7L6": {
    "v": "UNVERIFIED",
@@ -3327,19 +3371,23 @@
    "at": null
   },
   "101635|http://xn--950bt9s8xi/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.742Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:09:02.494Z"
   },
   "1222|http://bandicamp.co.kr/03_01.htm": {
-   "v": "DEAD",
-   "why": "HTTP 404",
-   "at": "2026-10-20T01:28:25.364Z"
+   "v": "STALE_DEEP",
+   "why": "예약 주소가 사이트 첫 화면으로 이동(bandicamp.co.kr)",
+   "title": "서비스 운영 중단 안내 | bandicamp",
+   "final": "http://bandicamp.co.kr/",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:11:03.201Z"
   },
   "100805|http://xn--ok0bo7fm1e4tfnx1alojppa.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:31.276Z"
+   "at": "2026-11-04T00:04:39.081Z"
   },
   "101065|https://www.camfit.co.kr/camp/64d9cdd3e097d6001e1ca8f2": {
    "v": "UNVERIFIED",
@@ -3359,7 +3407,7 @@
   "480|http://camp.geumo.net/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:31.815Z"
+   "at": "2026-11-04T00:04:39.460Z"
   },
   "100554|https://www.camfit.co.kr/camp/652f9828345ec3001e61d3c3": {
    "v": "UNVERIFIED",
@@ -3379,7 +3427,7 @@
   "6953|http://kh-camp.com/sub/intro.html": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:31.862Z"
+   "at": "2026-11-04T00:04:39.469Z"
   },
   "100709|https://www.camfit.co.kr/camp/6556dfbd552409001efe4488": {
    "v": "UNVERIFIED",
@@ -3394,12 +3442,12 @@
   "6768|http://www.daegayacamp.com/booking/step_1.asp": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:05:36.507Z"
+   "at": "2026-11-04T00:04:41.726Z"
   },
   "6768|http://www.daegayacamp.com/index.asp": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:05:37.663Z"
+   "at": "2026-11-04T00:04:42.894Z"
   },
   "7401|https://naver.me/GlGNHP2m": {
    "v": "UNVERIFIED",
@@ -3409,7 +3457,7 @@
   "3100|http://www.naksanresort.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:37.418Z"
+   "at": "2026-11-04T00:04:43.487Z"
   },
   "8003|https://booking.naver.com/booking/3/bizes/433363": {
    "v": "UNVERIFIED",
@@ -3424,7 +3472,7 @@
   "2359|http://www.wangter.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:37.820Z"
+   "at": "2026-11-04T00:04:43.819Z"
   },
   "3263|http://cafe.naver.com/4seasonpark": {
    "v": "UNVERIFIED",
@@ -3434,12 +3482,12 @@
   "7025|http://www.jangsuhuyang.kr/Waryong/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:40.626Z"
+   "at": "2026-11-04T00:04:44.296Z"
   },
   "7026|http://www.jangsuhuyang.kr/Waryong/reserveF/list.asp?p_type=%EC%95%BC%EC%98%81%EB%8D%B0%ED%81%AC": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:41.626Z"
+   "at": "2026-11-04T00:04:45.296Z"
   },
   "100458|https://www.camfit.co.kr/camp/60dc872b9516e4001e68152f": {
    "v": "UNVERIFIED",
@@ -3459,7 +3507,7 @@
   "7063|http://www.magogcamp.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:40.677Z"
+   "at": "2026-11-04T00:04:44.513Z"
   },
   "101066|https://www.camfit.co.kr/camp/659cf90a0ea023001ea61cc5": {
    "v": "UNVERIFIED",
@@ -3504,17 +3552,18 @@
   "101475|https://blog.naver.comhttps//blog.naver.com/cyg0153/cyg0153": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:43.184Z"
+   "at": "2026-11-04T00:04:46.811Z"
   },
   "101475|https://nahttps//naver.me/FqWVrhg0ver.me/FHl8AaAb": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:28:31.979Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:11:04.205Z"
   },
   "1621|http://www.ydarakwon.or.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:43.650Z"
+   "at": "2026-11-04T00:04:47.442Z"
   },
   "1987|http://cafe.naver.com/papascamp": {
    "v": "UNVERIFIED",
@@ -3569,22 +3618,22 @@
   "268|https://www.gowellnice.com/Reservation": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:44.530Z"
+   "at": "2026-11-04T00:04:48.151Z"
   },
   "268|http://www.gowellnice.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:45.584Z"
+   "at": "2026-11-04T00:04:49.153Z"
   },
   "919|http://www.dungjigarden.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:44.578Z"
+   "at": "2026-11-04T00:04:48.204Z"
   },
   "1246|http://www.jangsuhuyang.kr/Banghwa2": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:42.626Z"
+   "at": "2026-11-04T00:04:46.298Z"
   },
   "2078|https://camfit.co.kr/search/result?keyword=%EC%96%91%EC%A3%BC%EC%82%B0%EB%A7%89%EA%B3%A8&adultCnt=2": {
    "v": "UNVERIFIED",
@@ -3594,12 +3643,12 @@
   "3024|http://www.canoeglamping.com/main/": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:05:44.988Z"
+   "at": "2026-11-04T00:04:48.545Z"
   },
   "3487|http://www.hrimflower.com/html/index.html": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:44.742Z"
+   "at": "2026-11-04T00:04:48.644Z"
   },
   "102002|http://instagram.com/______jackjack": {
    "v": "UNVERIFIED",
@@ -3609,12 +3658,12 @@
   "7235|http://www.xn--0q4bm8f3gv6g50r1ke.com/sub/menu4_1.php": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:45.010Z"
+   "at": "2026-11-04T00:04:49.037Z"
   },
   "7235|http://www.xn--0q4bm8f3gv6g50r1ke.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:46.010Z"
+   "at": "2026-11-04T00:04:50.037Z"
   },
   "61|https://naver.me/5L7Xnzi7": {
    "v": "UNVERIFIED",
@@ -3644,17 +3693,17 @@
   "1096|http://www.myosol.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:47.569Z"
+   "at": "2026-11-04T00:04:51.174Z"
   },
   "3005|http://chisan.yc.go.kr/": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:05:50.179Z"
+   "at": "2026-11-04T00:04:53.193Z"
   },
   "3175|http://www.paradisespa.co.kr/Information/camping.asp?MM=1&amp;SM=5#": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:05:51.372Z"
+   "at": "2026-11-04T00:04:53.771Z"
   },
   "6944|http://booking.naver.com/3/booking/svc/19384": {
    "v": "UNVERIFIED",
@@ -3669,7 +3718,7 @@
   "7216|http://www.totocamp.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:49.471Z"
+   "at": "2026-11-04T00:04:52.681Z"
   },
   "101974|https://m.place.naver.com/accommodation/2073887793/room?entry=pll&businessCategory=camping": {
    "v": "UNVERIFIED",
@@ -3684,7 +3733,7 @@
   "500|http://www.gilcamp.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:51.938Z"
+   "at": "2026-11-04T00:04:54.583Z"
   },
   "7402|https://booking.naver.com/booking/3/bizes/73130": {
    "v": "UNVERIFIED",
@@ -3709,7 +3758,7 @@
   "3025|http://xn--hy1b30gh2a.com/sub/sub04_01.php": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:51.990Z"
+   "at": "2026-11-04T00:04:54.415Z"
   },
   "3588|https://camfit.co.kr/camp/627b6e49dda17a001e42ed51": {
    "v": "UNVERIFIED",
@@ -3824,7 +3873,7 @@
   "1838|http://xn--xnoy2b17mowq-y19f.com/dnb/resource/main/index.php": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:05:55.866Z"
+   "at": "2026-11-04T00:04:58.127Z"
   },
   "100826|https://www.camfit.co.kr/camp/64085297977d29001ed4701e": {
    "v": "UNVERIFIED",
@@ -3904,7 +3953,7 @@
   "512|http://www.campingsearch.co.kr/campReserve/reserveTableStatus.asp?idx=795": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:06:01.642Z"
+   "at": "2026-11-04T00:05:01.537Z"
   },
   "7131|https://www.camfit.co.kr/camp/63f3274a0fbea5001de0aa37": {
    "v": "UNVERIFIED",
@@ -3924,27 +3973,27 @@
   "7139|http://lizvalley.com/bbs/board.php?bo_table=04_02": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:00.219Z"
+   "at": "2026-11-04T00:05:01.324Z"
   },
   "7139|http://lizvalley.com/sub/index.php": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:01.219Z"
+   "at": "2026-11-04T00:05:02.324Z"
   },
   "2051|http://ygcamping.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:00.857Z"
+   "at": "2026-11-04T00:05:02.132Z"
   },
   "100761|http://lespia.org/reservation.php": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:01.190Z"
+   "at": "2026-11-04T00:05:02.599Z"
   },
   "100761|http://lespia.co.kr/intro.html": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:06:02.661Z"
+   "at": "2026-11-04T00:05:05.389Z"
   },
   "1678|https://blog.naver.com/happyinki1/222234242192": {
    "v": "UNVERIFIED",
@@ -3959,7 +4008,7 @@
   "2445|http://www.huyang.go.kr/main.action": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:30.481Z"
+   "at": "2026-11-04T00:01:19.356Z"
   },
   "101867|https://booking.naver.com/my/bookings/1019239521": {
    "v": "UNVERIFIED",
@@ -3974,7 +4023,7 @@
   "7846|https://reservation.knps.or.kr/information/campInfo.action?seqId=B012010": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:28.638Z"
+   "at": "2026-11-04T00:02:10.012Z"
   },
   "131|http://cafe.naver.com/galchunauto": {
    "v": "UNVERIFIED",
@@ -4047,9 +4096,10 @@
    "at": null
   },
   "1776|http://xn--911bu29b9fbp3j/": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:24:54.043Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:49.210Z"
   },
   "3317|https://cafe.naver.com/yhprimecamping": {
    "v": "UNVERIFIED",
@@ -4104,12 +4154,12 @@
   "100804|http://daltoglamping.com/reservation.php": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:08.089Z"
+   "at": "2026-11-04T00:05:08.181Z"
   },
   "100804|http://daltoglamping.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:09.089Z"
+   "at": "2026-11-04T00:05:09.181Z"
   },
   "101350|https://naver.me/FzQgcn2d": {
    "v": "UNVERIFIED",
@@ -4134,12 +4184,12 @@
   "2147|http://www.xn--bj0b46p12lnmldme.kr/main/index.html": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:06:10.762Z"
+   "at": "2026-11-04T00:05:09.991Z"
   },
   "7963|https://autocamping.bukgu.ulsan.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:07.688Z"
+   "at": "2026-11-04T00:01:05.134Z"
   },
   "101891|https://map.naver.com/p/entry/place/35637335?lng=126.8403803&lat=37.8908807&placePath=/room?from=map&fromPanelNum=1&additionalHeight=76&timestamp=202507241717&locale=ko&svcName=map_pcv5&businessCategory=camping&from=map&fromPanelNum=1&additionalHeight=76&timestamp=202507241717&locale=ko&svcName=map_pcv5&searchType=place&c=15.00,0,0,0,dh": {
    "v": "UNVERIFIED",
@@ -4149,17 +4199,17 @@
   "1266|https://reservation.knps.or.kr/information/campInfo.action?seqId=B011007": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:31.514Z"
+   "at": "2026-11-04T00:02:12.862Z"
   },
   "1433|http://letsgobluewhale.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:10.288Z"
+   "at": "2026-11-04T00:05:09.387Z"
   },
   "3383|http://www.hachuhuyang.go.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:10.981Z"
+   "at": "2026-11-04T00:05:10.435Z"
   },
   "100539|https://map.naver.com/p/entry/place/1056025780?c=15.00,0,0,0,dh&isCorrectAnswer=true": {
    "v": "UNVERIFIED",
@@ -4187,9 +4237,11 @@
    "at": null
   },
   "100133|http://hanbyul0042.page24.app/": {
-   "v": "DEAD",
-   "why": "HTTP 404",
-   "at": "2026-10-20T01:29:01.274Z"
+   "v": "MATCH",
+   "why": "이름 “한별”",
+   "title": "경남/한별리멤버파크&도그파크",
+   "kind": "homepage",
+   "at": "2026-11-04T00:11:14.998Z"
   },
   "100594|https://naver.me/5qATOp6e": {
    "v": "UNVERIFIED",
@@ -4219,7 +4271,7 @@
   "704|https://camp.changwon.go.kr/sub/03_02.jsp": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:06:14.631Z"
+   "at": "2026-11-04T00:05:13.980Z"
   },
   "100866|https://naver.me/xzLJablo": {
    "v": "UNVERIFIED",
@@ -4239,7 +4291,7 @@
   "1501|http://www.campingsearch.co.kr/campReserve/reserveTableStatus.asp?idx=316": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:06:03.923Z"
+   "at": "2026-11-04T00:05:02.785Z"
   },
   "1610|http://cafe.daum.net/tjekd999/": {
    "v": "UNVERIFIED",
@@ -4259,7 +4311,7 @@
   "819|http://tour.invil.com/front/tour/gds/data.do?contsNo=1703403": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:02:54.161Z"
+   "at": "2026-11-04T00:02:18.619Z"
   },
   "1142|http://cafe.daum.net/munhwaautocamp": {
    "v": "UNVERIFIED",
@@ -4279,37 +4331,37 @@
   "1771|http://www.campingsearch.co.kr/campReserve/reserveTableStatus.asp?idx=365": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:06:06.203Z"
+   "at": "2026-11-04T00:05:04.464Z"
   },
   "1771|http://www.yhleisureland.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:14.200Z"
+   "at": "2026-11-04T00:05:13.643Z"
   },
   "2143|http://www.ephraimcamping.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:14.151Z"
+   "at": "2026-11-04T00:05:13.610Z"
   },
   "2370|http://www.huyang.go.kr/main.action": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:30.481Z"
+   "at": "2026-11-04T00:01:19.356Z"
   },
   "2370|http://www.huyang.go.kr/forest/contentIntro.action?dprtmId=0102": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:33.635Z"
+   "at": "2026-11-04T00:01:22.360Z"
   },
   "2579|http://xn--lu5b8c0ph9sz2i.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:14.191Z"
+   "at": "2026-11-04T00:05:13.861Z"
   },
   "2762|http://sinbukresort,co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:14.357Z"
+   "at": "2026-11-04T00:05:14.298Z"
   },
   "2966|http://cafe.naver.com/grasslandcamping": {
    "v": "UNVERIFIED",
@@ -4329,22 +4381,22 @@
   "3426|http://hpcamping.com/page/03_01.php": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:14.404Z"
+   "at": "2026-11-04T00:05:14.635Z"
   },
   "3426|http://www.hpcamping.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:14.684Z"
+   "at": "2026-11-04T00:05:14.669Z"
   },
   "3601|http://www.gaonglamoing.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:14.768Z"
+   "at": "2026-11-04T00:05:14.832Z"
   },
   "7175|http://www.ariumcamping.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:15.308Z"
+   "at": "2026-11-04T00:05:15.003Z"
   },
   "7988|https://cafe.naver.com/kdgfcamp": {
    "v": "UNVERIFIED",
@@ -4364,27 +4416,27 @@
   "763|http://dwhuyang.yssisul.or.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:17.877Z"
+   "at": "2026-11-04T00:05:16.769Z"
   },
   "763|http://www.yssisul.or.kr/dwhuyang/cmm/main/mainPage.do": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:06:31.280Z"
+   "at": "2026-11-04T00:05:20.706Z"
   },
   "797|http://theproudresort.co.kr/web/home.php?go=Bmenu_01": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:18.349Z"
+   "at": "2026-11-04T00:05:17.327Z"
   },
   "797|http://theproudresort.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:19.349Z"
+   "at": "2026-11-04T00:05:18.328Z"
   },
   "6808|http://reservation.knps.or.kr/information/campInfo.action?seqId=B181002": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:40.253Z"
+   "at": "2026-11-04T00:02:16.158Z"
   },
   "100069|https://blog.naver.com/qkrtns100": {
    "v": "UNVERIFIED",
@@ -4424,12 +4476,12 @@
   "3636|http://healpoint.co.kr/pension/reserve.html?pid=25": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:06:23.257Z"
+   "at": "2026-11-04T00:05:19.794Z"
   },
   "3636|http://www.healpoint.co.kr/main/index.html": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:19.461Z"
+   "at": "2026-11-04T00:05:18.419Z"
   },
   "6740|https://m.cafe.naver.com/skyblueoqt0j": {
    "v": "UNVERIFIED",
@@ -4459,7 +4511,7 @@
   "2810|http://xn--2q1bm3lxva24mp3fhta25gr7y1rfgqb.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:20.921Z"
+   "at": "2026-11-04T00:05:19.697Z"
   },
   "6771|https://booking.naver.com/booking/3/bizes/28051": {
    "v": "UNVERIFIED",
@@ -4484,7 +4536,7 @@
   "7971|http://www.swvillcamp.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:23.251Z"
+   "at": "2026-11-04T00:05:20.957Z"
   },
   "100260|https://map.naver.com/p/entry/place/1452564767?c=17.43,0,0,0,adh&isCorrectAnswer=true": {
    "v": "UNVERIFIED",
@@ -4499,7 +4551,7 @@
   "100406|http://galaxycamping.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:24.309Z"
+   "at": "2026-11-04T00:05:21.434Z"
   },
   "100969|https://naver.me/F6xYO8eb": {
    "v": "UNVERIFIED",
@@ -4520,12 +4572,12 @@
    "v": "PLATFORM_ROOT",
    "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:31.633Z"
+   "at": "2026-11-04T00:08:42.053Z"
   },
   "7359|https://www.xn--bj0b46pttby1nltfutbt9t06nmwd21c.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:31.001Z"
+   "at": "2026-11-04T00:05:25.340Z"
   },
   "101096|https://blog.naver.com/gapyeong-viewcamping": {
    "v": "UNVERIFIED",
@@ -4550,7 +4602,7 @@
   "100307|https://dotforesthealingcamp.dothome.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:34.447Z"
+   "at": "2026-11-04T00:05:29.264Z"
   },
   "100821|https://booking.naver.com/booking/3/bizes/871809": {
    "v": "UNVERIFIED",
@@ -4560,7 +4612,7 @@
   "100821|http://www.havefungreen.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:34.396Z"
+   "at": "2026-11-04T00:05:29.312Z"
   },
   "101182|https://www.instagram.com/zambori_camp?igsh=a29ydjk1MHZ3Y2Rk": {
    "v": "UNVERIFIED",
@@ -4570,12 +4622,12 @@
   "725|http://me2.do/FZeXh5mZ": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:01:33.687Z"
+   "at": "2026-11-04T00:01:22.024Z"
   },
   "1023|http://campinggo.kr/html/new_fcal.php?seq=108": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:26:07.725Z"
+   "at": "2026-11-04T00:02:15.764Z"
   },
   "1023|http://cafe.naver.com/heartpensioncamping": {
    "v": "UNVERIFIED",
@@ -4585,17 +4637,17 @@
   "504|http://sannaedeul.gc.go.kr/reservation.asp?location=002": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:35.238Z"
+   "at": "2026-11-04T00:05:32.072Z"
   },
   "504|https://www.gc.go.kr/sannaedeul/main.do": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:19.473Z"
+   "at": "2026-11-04T00:01:50.813Z"
   },
   "7129|http://www.camping1.co.kr/online2/ver1.php?cid=1549": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:35.388Z"
+   "at": "2026-11-04T00:05:32.330Z"
   },
   "7129|http://cafe.naver.com/evergreencamp": {
    "v": "UNVERIFIED",
@@ -4655,7 +4707,7 @@
   "7486|http://www.haegancamp.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:39.663Z"
+   "at": "2026-11-04T00:05:35.811Z"
   },
   "632|https://cafe.naver.com/hynongwolautocamping": {
    "v": "UNVERIFIED",
@@ -4665,12 +4717,12 @@
   "1796|http://www.songjeong.go.kr/program/forestcamp/reserve/lstReserveCalendar.asp": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:39.811Z"
+   "at": "2026-11-04T00:05:35.963Z"
   },
   "1796|http://www.songjeong.go.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:40.810Z"
+   "at": "2026-11-04T00:05:36.963Z"
   },
   "3254|https://naver.me/G4rLHR5L": {
    "v": "UNVERIFIED",
@@ -4690,17 +4742,17 @@
   "3412|http://www.campingnoutdoor.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:41.117Z"
+   "at": "2026-11-04T00:05:36.586Z"
   },
   "7814|http://www.pocheonhue.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:42.579Z"
+   "at": "2026-11-04T00:05:37.768Z"
   },
   "507|http://biog.daum.net/chally8": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:42.728Z"
+   "at": "2026-11-04T00:05:38.247Z"
   },
   "977|https://cafe.naver.com/lohascamp": {
    "v": "UNVERIFIED",
@@ -4720,7 +4772,7 @@
   "100361|https://petmilly.campingt.me/3593/home/index": {
    "v": "DEAD",
    "why": "없는 페이지 안내",
-   "at": "2026-10-27T23:06:46.054Z"
+   "at": "2026-11-04T00:05:39.768Z"
   },
   "1303|https://camfit.co.kr/camp/67f34e2daa6e4e001d71ad2e": {
    "v": "UNVERIFIED",
@@ -4751,7 +4803,7 @@
    "v": "PLATFORM_ROOT",
    "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:31.633Z"
+   "at": "2026-11-04T00:08:42.054Z"
   },
   "101423|https://naver.me/5LHNdNYg": {
    "v": "UNVERIFIED",
@@ -4771,7 +4823,7 @@
   "2015|http://adtcamping.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:44.817Z"
+   "at": "2026-11-04T00:05:39.240Z"
   },
   "101750|https://blog.naver.com/hanbitska": {
    "v": "UNVERIFIED",
@@ -4816,28 +4868,28 @@
   "448|http://www.xn--bj0b46pisbnwq9zs77e.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:44.844Z"
+   "at": "2026-11-04T00:05:39.256Z"
   },
   "2751|http://jwagu.jp.go.kr/reservation.do": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:47.877Z"
+   "at": "2026-11-04T00:05:41.638Z"
   },
   "2751|http://jwagu.jp.go.kr/html/jwagu/observatory/observatory_01.html": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:48.877Z"
+   "at": "2026-11-04T00:05:42.638Z"
   },
   "8198|http://www.camp-forest.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:46.820Z"
+   "at": "2026-11-04T00:05:44.271Z"
   },
   "101728|http://www.camfit.co.kr/": {
    "v": "PLATFORM_ROOT",
    "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:31.633Z"
+   "at": "2026-11-04T00:08:42.054Z"
   },
   "7628|https://m.place.naver.com/accommodation/1895133609/location?subtab=location": {
    "v": "UNVERIFIED",
@@ -4872,7 +4924,7 @@
   "2729|http://jejupinebeach.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:48.061Z"
+   "at": "2026-11-04T00:05:44.321Z"
   },
   "916|http://cafe.naver.com/jirisancamping": {
    "v": "UNVERIFIED",
@@ -4892,12 +4944,12 @@
   "8041|https://www.usc.go.kr/reserve/page/2604/1744.tc?mn=2604": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:06:50.127Z"
+   "at": "2026-11-04T00:05:49.515Z"
   },
   "8086|http://www.xn--q20bo4d78is4fp3bg9flgk2a71j19glzhd2qfle30l.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:49.319Z"
+   "at": "2026-11-04T00:05:46.863Z"
   },
   "100808|https://www.instagram.com/camptaegeuk": {
    "v": "UNVERIFIED",
@@ -4907,7 +4959,7 @@
   "100948|http://jhwesternglamping.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:50.084Z"
+   "at": "2026-11-04T00:05:47.300Z"
   },
   "101063|https://www.camfit.co.kr/camp/64d5839f3e73f7001e3b5414": {
    "v": "UNVERIFIED",
@@ -4917,17 +4969,17 @@
   "2928|http://www.chungsongcamping.co.kr/sub/main.asp": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:06:52.228Z"
+   "at": "2026-11-04T00:05:49.385Z"
   },
   "7314|http://djsc.huyang.co.kr/reservation.asp?location=002": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:50.977Z"
+   "at": "2026-11-04T00:05:49.012Z"
   },
   "7314|http://www.science.go.kr/link.bs?cd=00224": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:06:54.421Z"
+   "at": "2026-11-04T00:05:51.761Z"
   },
   "101673|https://www.camfit.co.kr/camp/6764ecc373197d001d1f6008/6764f61b34bca6001daba398": {
    "v": "UNVERIFIED",
@@ -4942,7 +4994,7 @@
   "8158|http://sunseau.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:51.605Z"
+   "at": "2026-11-04T00:05:49.096Z"
   },
   "100780|https://naver.me/FEdHmFAR": {
    "v": "UNVERIFIED",
@@ -4982,7 +5034,7 @@
   "100870|http://xn--bk1b21gba534c4ppca.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:53.421Z"
+   "at": "2026-11-04T00:05:51.097Z"
   },
   "100883|https://cafe.naver.com/starlightbb": {
    "v": "UNVERIFIED",
@@ -5012,7 +5064,7 @@
   "101046|http://xn--289ak30a69gcnjxnhx7a.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:54.441Z"
+   "at": "2026-11-04T00:05:52.245Z"
   },
   "101061|https://www.instagram.com/suimpyo_glamping/": {
    "v": "UNVERIFIED",
@@ -5167,12 +5219,12 @@
   "923|http://blog.daum.net/hogu2121": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:59.155Z"
+   "at": "2026-11-04T00:05:56.491Z"
   },
   "100766|http://tetttocamp.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:06:59.201Z"
+   "at": "2026-11-04T00:05:56.507Z"
   },
   "100868|https://cafe.naver.com/damoon188": {
    "v": "UNVERIFIED",
@@ -5197,7 +5249,7 @@
   "101020|http://ecoigloo.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:00.403Z"
+   "at": "2026-11-04T00:05:57.134Z"
   },
   "101110|https://www.camfit.co.kr/camp/64e83c9d46af94001e49b21d": {
    "v": "UNVERIFIED",
@@ -5227,7 +5279,7 @@
   "101090|http://www.nangmancp.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:01.964Z"
+   "at": "2026-11-04T00:05:59.100Z"
   },
   "101141|https://m.blog.naver.com/grumieocean": {
    "v": "UNVERIFIED",
@@ -5237,7 +5289,7 @@
   "101243|http://xn--hl1bnop6a.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:02.114Z"
+   "at": "2026-11-04T00:05:59.415Z"
   },
   "100945|https://camfit.co.kr/camp/64896a5dadcd25001ea1da10": {
    "v": "UNVERIFIED",
@@ -5272,7 +5324,7 @@
   "100779|https://xn--bk1bs0q58a1ytjxixnk.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:05.685Z"
+   "at": "2026-11-04T00:06:01.937Z"
   },
   "100919|https://naver.me/xw910uHG": {
    "v": "UNVERIFIED",
@@ -5322,7 +5374,7 @@
   "100918|http://sansu.yeongwol.org/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:05.831Z"
+   "at": "2026-11-04T00:06:02.043Z"
   },
   "100965|https://naver.me/FHuylO0m": {
    "v": "UNVERIFIED",
@@ -5358,7 +5410,7 @@
    "v": "PLATFORM_ROOT",
    "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:31.634Z"
+   "at": "2026-11-04T00:08:42.054Z"
   },
   "101093|https://cafe.naver.com/alice80": {
    "v": "UNVERIFIED",
@@ -5368,7 +5420,7 @@
   "101138|https://www.ok114.co.kr/ntnw/search/searchCompanyOfMainPh.crz?phone_number=01056976303": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:07:08.035Z"
+   "at": "2026-11-04T00:06:04.085Z"
   },
   "101139|http://cafe.naver.com/moonrivercamp": {
    "v": "UNVERIFIED",
@@ -5438,12 +5490,12 @@
   "1293|http://www.buddycamping.com/bbs/board.php?bo_table=notic&wr_id=6": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:06.474Z"
+   "at": "2026-11-04T00:06:03.376Z"
   },
   "1293|http://www.buddycamping.com/index.php": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:07.475Z"
+   "at": "2026-11-04T00:06:04.376Z"
   },
   "3373|https://map.naver.com/p/entry/place/1186928886?c=15.00,0,0,0,dh": {
    "v": "UNVERIFIED",
@@ -5523,7 +5575,7 @@
   "100876|https://www.gumicamp.com/": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:07:09.186Z"
+   "at": "2026-11-04T00:06:05.077Z"
   },
   "100877|https://www.camfit.co.kr/camp/64cbc4c4327a04001e196ac5": {
    "v": "UNVERIFIED",
@@ -5818,7 +5870,7 @@
   "101175|http://www.farmspringcamp.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:15.165Z"
+   "at": "2026-11-04T00:06:11.188Z"
   },
   "101180|https://map.naver.com/p/entry/place/1597121485?c=15.00,0,0,0,dh": {
    "v": "UNVERIFIED",
@@ -5868,7 +5920,7 @@
   "1463|http://www.iscd.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:16.495Z"
+   "at": "2026-11-04T00:06:13.434Z"
   },
   "2667|http://blog.naver.com/wips1000": {
    "v": "UNVERIFIED",
@@ -5879,7 +5931,7 @@
    "v": "PLATFORM_ROOT",
    "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:31.635Z"
+   "at": "2026-11-04T00:08:42.055Z"
   },
   "7653|https://naver.me/5eGZcszc": {
    "v": "UNVERIFIED",
@@ -5904,7 +5956,7 @@
   "100484|http://www.pet-glamping.kr/html/index.html?": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:07:18.631Z"
+   "at": "2026-11-04T00:06:15.550Z"
   },
   "100360|https://www.camfit.co.kr/camp/653faa685f7b3e001e9499d3": {
    "v": "UNVERIFIED",
@@ -5934,7 +5986,7 @@
   "7862|http://hanumigol.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:18.256Z"
+   "at": "2026-11-04T00:06:14.486Z"
   },
   "101613|https://www.instagram.com/sol_barbecue/": {
    "v": "UNVERIFIED",
@@ -5972,9 +6024,10 @@
    "at": null
   },
   "101386|http://ttps//blog.naver.com/haeranghae123/223584371966": {
-   "v": "DEAD",
-   "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-20T01:29:56.396Z"
+   "v": "ERROR",
+   "why": "EAI_AGAIN",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:11:50.870Z"
   },
   "101330|https://map.naver.com/v5/entry/place/1793842605": {
    "v": "UNVERIFIED",
@@ -6004,7 +6057,7 @@
   "684|http://dyptour.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:21.421Z"
+   "at": "2026-11-04T00:06:16.969Z"
   },
   "101582|https://naver.me/GalUde6p": {
    "v": "UNVERIFIED",
@@ -6014,7 +6067,7 @@
   "101582|http://soopurocaravan.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:21.751Z"
+   "at": "2026-11-04T00:06:16.760Z"
   },
   "101598|https://www.instagram.com/seogyang_gil/": {
    "v": "UNVERIFIED",
@@ -6054,7 +6107,7 @@
   "101487|http://jenniecamping.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:22.092Z"
+   "at": "2026-11-04T00:06:16.866Z"
   },
   "100036|https://blog.naver.com/gongjuwellness/221199673465": {
    "v": "UNVERIFIED",
@@ -6119,12 +6172,12 @@
   "101466|http://www.rambocamp.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:27.853Z"
+   "at": "2026-11-04T00:06:20.204Z"
   },
   "2610|http://imhaho.co.kr/sub.php?sb_table=res": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:30.647Z"
+   "at": "2026-11-04T00:06:20.346Z"
   },
   "100750|https://booking.naver.com/booking/3/bizes/833085": {
    "v": "UNVERIFIED",
@@ -6174,12 +6227,12 @@
   "1447|http://bitoresort.co.kr/2rooms/site.html": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:07:35.756Z"
+   "at": "2026-11-04T00:06:24.128Z"
   },
   "1999|http://www.ivcamp.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:33.374Z"
+   "at": "2026-11-04T00:06:23.264Z"
   },
   "3174|https://cafe.naver.com/ygdparadise": {
    "v": "UNVERIFIED",
@@ -6189,32 +6242,32 @@
   "3178|http://paraesops.ireweb.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:35.221Z"
+   "at": "2026-11-04T00:06:23.807Z"
   },
   "3556|http://www.hwawang.or.kr/main/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:35.824Z"
+   "at": "2026-11-04T00:06:24.008Z"
   },
   "6987|http://www.mirpiacamp.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:36.625Z"
+   "at": "2026-11-04T00:06:24.223Z"
   },
   "7287|http://01028209996.tshome.co.kr/": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:07:40.931Z"
+   "at": "2026-11-04T00:06:29.193Z"
   },
   "7726|http://www.xn--289a36e28lylglh140hfnb.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:37.997Z"
+   "at": "2026-11-04T00:06:27.368Z"
   },
   "8190|http://amountainangler.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:38.211Z"
+   "at": "2026-11-04T00:06:27.511Z"
   },
   "3262|https://naver.me/Fvn7E1Ja": {
    "v": "UNVERIFIED",
@@ -6249,12 +6302,12 @@
   "6841|http://xn--910b64rpsfg7k.com/html/reservation/step2.php?room_type=%ED%8E%9C%EC%85%98&rt=1": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:40.282Z"
+   "at": "2026-11-04T00:06:29.674Z"
   },
   "6841|http://xn--910b64rpsfg7k.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:41.281Z"
+   "at": "2026-11-04T00:06:30.674Z"
   },
   "7214|https://camfit.co.kr/camp/6200b4535ed420001e9d2ab8": {
    "v": "UNVERIFIED",
@@ -6269,7 +6322,7 @@
   "100879|https://me2.do/Fw7Z1xvH": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:01:35.532Z"
+   "at": "2026-11-04T00:01:23.664Z"
   },
   "100879|https://cafe.naver.com/eoeundolcamp": {
    "v": "UNVERIFIED",
@@ -6279,7 +6332,7 @@
   "2822|http://www.campingsearch.co.kr/campReserve/reserveTableStatus.asp?idx=8": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:06:09.775Z"
+   "at": "2026-11-04T00:05:06.028Z"
   },
   "7893|https://cafe.naver.com/seulteo/67": {
    "v": "UNVERIFIED",
@@ -6309,7 +6362,7 @@
   "7078|http://reserve.dothome.co.kr/schedule/?links_number=786": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:07:46.690Z"
+   "at": "2026-11-04T00:06:35.045Z"
   },
   "7078|http://www.pinenongwon.com/intro/intro.html": {
    "v": "DEAD",
@@ -6325,7 +6378,7 @@
    "v": "PLATFORM_ROOT",
    "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:31.635Z"
+   "at": "2026-11-04T00:08:42.055Z"
   },
   "101417|https://www.camfit.co.kr/camp/6646f274ed36b6001ec5665f": {
    "v": "UNVERIFIED",
@@ -6350,12 +6403,12 @@
   "101439|http://www.peridotvillage.co.kr/reservation/reservation01.html": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:44.968Z"
+   "at": "2026-11-04T00:06:34.729Z"
   },
   "101439|http://www.peridotvillage.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:45.968Z"
+   "at": "2026-11-04T00:06:35.730Z"
   },
   "101443|https://camfit.co.kr/camp/6631d460d87bdf001ecac97c": {
    "v": "UNVERIFIED",
@@ -6365,7 +6418,7 @@
   "7621|http://xn--bj0bs3jo1c5scba301rfnx.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:46.740Z"
+   "at": "2026-11-04T00:06:36.085Z"
   },
   "100138|http://blog.naver.com/rudckf1229": {
    "v": "UNVERIFIED",
@@ -6375,12 +6428,12 @@
   "2177|http://www.jartmember.co.kr/bookinglist.do?rvgetpid=CARABAN": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:47.553Z"
+   "at": "2026-11-04T00:06:37.153Z"
   },
   "2177|http://yeojucaravan.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:47.618Z"
+   "at": "2026-11-04T00:06:37.453Z"
   },
   "101406|https://www.instagram.com/f_star_3064": {
    "v": "UNVERIFIED",
@@ -6400,7 +6453,7 @@
   "1075|http://moraejaecamp.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:47.797Z"
+   "at": "2026-11-04T00:06:37.854Z"
   },
   "1741|http://blog.naver.com/ljp6708": {
    "v": "UNVERIFIED",
@@ -6415,7 +6468,7 @@
   "7218|http://www.pine4rest.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:48.334Z"
+   "at": "2026-11-04T00:06:38.909Z"
   },
   "101380|https://naver.me/xMEWfAHK": {
    "v": "UNVERIFIED",
@@ -6430,12 +6483,12 @@
   "1632|http://scgcamp.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:49.673Z"
+   "at": "2026-11-04T00:06:40.653Z"
   },
   "100538|http://xn--q20bx3l2qjt3r8xb.com//": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:49.861Z"
+   "at": "2026-11-04T00:06:40.700Z"
   },
   "7760|https://cafe.naver.com/nosan8": {
    "v": "UNVERIFIED",
@@ -6455,7 +6508,7 @@
   "1119|http://www.xn--hq1bn1xhsdd4qnoe.xn--mk1bu44c/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:50.091Z"
+   "at": "2026-11-04T00:06:41.163Z"
   },
   "101307|https://naver.me/FENqLpcs": {
    "v": "UNVERIFIED",
@@ -6495,12 +6548,12 @@
   "1042|http://maebongcamp.kr/reser2.php": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:51.347Z"
+   "at": "2026-11-04T00:06:42.494Z"
   },
   "1042|http://maebongcamp.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:52.347Z"
+   "at": "2026-11-04T00:06:43.494Z"
   },
   "1155|http://cafe.naver.com/mulmarucamping": {
    "v": "UNVERIFIED",
@@ -6515,12 +6568,12 @@
   "100252|http://www.diarogl.kr/default/reservation/02.php?top=5&sub=1": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:51.670Z"
+   "at": "2026-11-04T00:06:42.779Z"
   },
   "100252|http://www.diarogl.kr/default/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:52.670Z"
+   "at": "2026-11-04T00:06:43.779Z"
   },
   "100254|https://cafe.naver.com/blackjcqnq": {
    "v": "UNVERIFIED",
@@ -6640,12 +6693,12 @@
   "100334|http://xn--2r5b17u.kr/include/reservation.php?biz_code=P202203013&tab=1": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:53.867Z"
+   "at": "2026-11-04T00:06:44.772Z"
   },
   "100334|http://xn--2r5b17u.kr/?intro=OK": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:54.868Z"
+   "at": "2026-11-04T00:06:45.773Z"
   },
   "100335|https://cafe.naver.com/naturehumanbeing": {
    "v": "UNVERIFIED",
@@ -6655,12 +6708,12 @@
   "100339|https://www.gc.go.kr/bhpension/page/5018/5021.tc": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:22.082Z"
+   "at": "2026-11-04T00:01:52.224Z"
   },
   "100339|https://www.gc.go.kr/bhpension/main.tc": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:25.674Z"
+   "at": "2026-11-04T00:01:53.626Z"
   },
   "100343|https://map.naver.com/p/entry/place/1000231814?c=15.00,0,0,0,dh": {
    "v": "UNVERIFIED",
@@ -6745,7 +6798,7 @@
   "100385|http://www.sdcamp.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:07:55.732Z"
+   "at": "2026-11-04T00:06:46.526Z"
   },
   "100388|https://www.camfit.co.kr/camp/629f039161fbfc001fb5aa75": {
    "v": "UNVERIFIED",
@@ -6920,7 +6973,7 @@
   "100542|http://www.paravan.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:03.631Z"
+   "at": "2026-11-04T00:06:52.459Z"
   },
   "100545|https://map.naver.com/p/entry/place/1939122820?c=15.00,0,0,0,dh&isCorrectAnswer=true": {
    "v": "UNVERIFIED",
@@ -7005,22 +7058,22 @@
   "100600|https://boeun.go.kr/samgacamp/bbs/board.php?bo_table=reservation": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-20T01:30:34.260Z"
+   "at": "2026-11-04T00:07:01.474Z"
   },
   "100600|https://boeun.go.kr/samgacamp/main.php": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-20T01:30:35.486Z"
+   "at": "2026-11-04T00:07:03.967Z"
   },
   "100601|https://boeun.go.kr/bukamcamp/bbs/board.php?bo_table=reservation": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-20T01:30:36.714Z"
+   "at": "2026-11-04T00:07:05.246Z"
   },
   "100601|https://boeun.go.kr/bukamcamp/main.php": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-20T01:30:37.938Z"
+   "at": "2026-11-04T00:07:06.525Z"
   },
   "100606|https://booking.naver.com/booking/3/bizes/769485": {
    "v": "UNVERIFIED",
@@ -7055,22 +7108,22 @@
   "100645|https://boricamping.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:20.906Z"
+   "at": "2026-11-04T00:06:57.285Z"
   },
   "7200|http://www.ercamp.net/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:20.947Z"
+   "at": "2026-11-04T00:06:58.051Z"
   },
   "100489|http://egcamping.com/%EC%98%88%EC%95%BD%EC%9D%B4%EC%9A%A9%EC%95%88%EB%82%B4-2/": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:08:30.506Z"
+   "at": "2026-11-04T00:07:00.501Z"
   },
   "699|http://www.pcmoonglam.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:21.071Z"
+   "at": "2026-11-04T00:06:58.406Z"
   },
   "2420|https://cafe.naver.com/ourscamping": {
    "v": "UNVERIFIED",
@@ -7078,19 +7131,20 @@
    "at": null
   },
   "2734|http://www.jchclub.co.kr/jccamp/": {
-   "v": "DEAD",
-   "why": "HTTP 404",
-   "at": "2026-10-20T22:27:13.730Z"
+   "v": "UNVERIFIED",
+   "why": "robots.txt 차단",
+   "kind": "homepage",
+   "at": "2026-11-04T00:12:11.853Z"
   },
   "2933|http://kkaebivillage.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:27.571Z"
+   "at": "2026-11-04T00:06:59.986Z"
   },
   "7206|http://xn--6j1bz30a6kdxxargz69amnk4pb.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:28.754Z"
+   "at": "2026-11-04T00:07:00.207Z"
   },
   "7564|https://cafe.naver.com/samokhealing": {
    "v": "UNVERIFIED",
@@ -7105,7 +7159,7 @@
   "8210|http://toricamping.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:29.473Z"
+   "at": "2026-11-04T00:07:00.231Z"
   },
   "100013|https://www.instagram.com/yaksudongsan": {
    "v": "UNVERIFIED",
@@ -7115,7 +7169,7 @@
   "100149|http://www.rvcamppark.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:29.625Z"
+   "at": "2026-11-04T00:07:01.009Z"
   },
   "101338|https://naver.me/GKxJ7kyC": {
    "v": "UNVERIFIED",
@@ -7170,7 +7224,7 @@
   "7227|http://campflorence.com/": {
    "v": "DEAD",
    "why": "없는 페이지 안내",
-   "at": "2026-10-27T23:08:32.728Z"
+   "at": "2026-11-04T00:07:05.319Z"
   },
   "100822|https://camfit.co.kr/camp/628355c34fdbdb001f2e2851": {
    "v": "UNVERIFIED",
@@ -7200,7 +7254,7 @@
   "2266|http://newyewon.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:34.202Z"
+   "at": "2026-11-04T00:07:06.152Z"
   },
   "2833|http://cafe.naver.com/jinancamping": {
    "v": "UNVERIFIED",
@@ -7220,7 +7274,7 @@
   "101289|https://camp699.imweb.me/19": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:08:35.051Z"
+   "at": "2026-11-04T00:07:07.192Z"
   },
   "100827|https://booking.naver.com/booking/3/bizes/896756": {
    "v": "UNVERIFIED",
@@ -7250,12 +7304,12 @@
   "1585|https://csmautocamping.com:5021/csm/reserve_select.php?unsingcode1=1181636085&unsingcode2=1481913514": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:35.139Z"
+   "at": "2026-11-04T00:07:07.571Z"
   },
   "1585|http://csmautocamping.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:37.702Z"
+   "at": "2026-11-04T00:07:08.910Z"
   },
   "3361|http://cafe.naver.com/hamacamping": {
    "v": "UNVERIFIED",
@@ -7270,7 +7324,7 @@
   "8051|http://querenciacamping.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:37.074Z"
+   "at": "2026-11-04T00:07:08.908Z"
   },
   "101287|https://www.camfit.co.kr/camp/65c08775cb1324001ed2a5d3": {
    "v": "UNVERIFIED",
@@ -7300,7 +7354,7 @@
   "100291|http://xn--ov3b91hxrc.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:39.539Z"
+   "at": "2026-11-04T00:07:09.934Z"
   },
   "100299|https://www.instagram.com//uncle_dubu": {
    "v": "UNVERIFIED",
@@ -7310,7 +7364,7 @@
   "100302|http://naturebrand.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:39.632Z"
+   "at": "2026-11-04T00:07:10.055Z"
   },
   "100316|https://blog.naver.com/camp1382": {
    "v": "UNVERIFIED",
@@ -7415,12 +7469,12 @@
   "100672|http://xn--vv5bv4gixb68ic0b.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:43.198Z"
+   "at": "2026-11-04T00:07:14.817Z"
   },
   "100672|http://iwall.barunweb.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:45.961Z"
+   "at": "2026-11-04T00:07:15.587Z"
   },
   "100676|https://camfit.co.kr/camp/636b690657070f001e454d4e": {
    "v": "UNVERIFIED",
@@ -7435,7 +7489,7 @@
   "100677|https://xn--caf-dma.naver.com/campingjungdog": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:04:30.543Z"
+   "at": "2026-11-04T00:03:43.727Z"
   },
   "100677|https://cafe.naver.com/campingjungdog": {
    "v": "UNVERIFIED",
@@ -7460,7 +7514,7 @@
   "100680|https://www.osha-camping.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:44.353Z"
+   "at": "2026-11-04T00:07:15.687Z"
   },
   "100684|https://map.naver.com/p/search/%ED%83%9C%EC%95%88%EB%85%B8%EC%9D%84%EA%B3%BC%EB%B0%94%EB%8B%A4%EC%BA%A0%ED%95%91%EC%95%A4%EA%B8%80%EB%9E%A8%ED%95%91/place/1203562948?c=15.00,0,0,0,dh&isCorrectAnswer=true": {
    "v": "UNVERIFIED",
@@ -7480,7 +7534,7 @@
   "100689|https://domeisland304.com//": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:44.866Z"
+   "at": "2026-11-04T00:07:16.666Z"
   },
   "100694|https://map.naver.com/p/entry/place/1034284570?c=15.00,0,0,0,dh&isCorrectAnswer=true": {
    "v": "UNVERIFIED",
@@ -7510,7 +7564,7 @@
   "100701|http://campinthesoope.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:46.258Z"
+   "at": "2026-11-04T00:07:17.560Z"
   },
   "100717|https://www.camfit.co.kr/camp/63bfaa364cbe7c001ee422c1": {
    "v": "UNVERIFIED",
@@ -7521,7 +7575,7 @@
    "v": "PLATFORM_ROOT",
    "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
    "kind": "homepage",
-   "at": "2026-10-27T23:10:31.638Z"
+   "at": "2026-11-04T00:08:42.056Z"
   },
   "100719|https://camfit.co.kr/camp/65118dfa875975001e6f1631": {
    "v": "UNVERIFIED",
@@ -7596,7 +7650,7 @@
   "7194|http://yumyoungsan-valley.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:51.635Z"
+   "at": "2026-11-04T00:07:21.281Z"
   },
   "101273|https://naver.me/GgPjBZeb": {
    "v": "UNVERIFIED",
@@ -7626,12 +7680,12 @@
   "7154|https://www.yc.go.kr/toursub/starlight/main.do": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:08:55.900Z"
+   "at": "2026-11-04T00:07:24.463Z"
   },
   "100183|http://www.lifewithdog.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:54.881Z"
+   "at": "2026-11-04T00:07:23.767Z"
   },
   "100453|https://naver.me/F7xPqtlz": {
    "v": "UNVERIFIED",
@@ -7656,7 +7710,7 @@
   "2877|http://yeyak.seoul.go.kr/search/totalSearchView.web?sort=SSORT&sortOld=SSORT&searchField=ALL&submenu=0&areaname=25&checkpay=&svsStats=0&svsData=0&useInfo=0&areaNum=25&SortUD=1&sortOne=SSORT,1&viewCng=": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:02:25.985Z"
+   "at": "2026-11-04T00:01:57.588Z"
   },
   "2877|http://blog.naver.com/seoul_camp": {
    "v": "UNVERIFIED",
@@ -7686,7 +7740,7 @@
   "7735|http://www.xn--0q4b69d7vae1b.com/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:57.187Z"
+   "at": "2026-11-04T00:07:25.890Z"
   },
   "7028|https://map.naver.com/v5/entry/place/1183807687?c=14139918.4947074,4577650.3162217,13,0,0,0,dh&placePath=%2F&entry=plt": {
    "v": "UNVERIFIED",
@@ -7696,7 +7750,7 @@
   "7028|http://www.yolocamp..co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:08:57.309Z"
+   "at": "2026-11-04T00:07:26.162Z"
   },
   "418|https://www.camfit.co.kr/camp/62e50bbf65c952001f7f53b5?fbclid=PAAaZMpo3oo7ZlYh73faJOolvXUCd5wKcUOObn5KKzgjeLc2HJmHwpzFmH_U0": {
    "v": "UNVERIFIED",
@@ -7746,25 +7800,25 @@
   "101142|https://www.naver.com/ocamping": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:08:59.808Z"
+   "at": "2026-11-04T00:07:44.323Z"
   },
   "pilot-004-haengun|https://www.camfit.co.kr/": {
    "v": "PLATFORM_ROOT",
    "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
    "kind": "homepage",
-   "at": "2026-10-27T23:10:31.639Z"
+   "at": "2026-11-04T00:08:42.057Z"
   },
   "pilot-007-soeggol|https://booking.naver.com/": {
    "v": "PLATFORM_ROOT",
    "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
    "kind": "homepage",
-   "at": "2026-10-27T23:10:31.639Z"
+   "at": "2026-11-04T00:08:42.057Z"
   },
   "pilot-009-ninehills|https://www.camfit.co.kr/": {
    "v": "PLATFORM_ROOT",
    "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
    "kind": "homepage",
-   "at": "2026-10-27T23:10:31.639Z"
+   "at": "2026-11-04T00:08:42.057Z"
   },
   "102373|https://booking.naver.com/booking/12/bizes/1085778": {
    "v": "UNVERIFIED",
@@ -7774,42 +7828,42 @@
   "imjingak-peace-nuri|https://ggtour.or.kr/camping/": {
    "v": "DEAD",
    "why": "없는 페이지 안내",
-   "at": "2026-10-27T23:05:16.831Z"
+   "at": "2026-11-04T00:04:24.537Z"
   },
   "osm-w73533846|https://www.songpa.go.kr/user.kdf?a=songpa.culture.park.ParkApp&c=1002&seq=103&mode=View&pflag=2&cate_id=AC0102003000": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:09:03.183Z"
+   "at": "2026-11-04T00:07:31.597Z"
   },
   "osm-w513330739|http://juknokwon.go.kr/": {
    "v": "DEAD",
-   "why": "DNS 없음",
-   "at": "2026-10-23T20:44:31.315Z"
+   "why": "DNS 없음(도메인 없음)",
+   "at": "2026-11-04T00:07:30.684Z"
   },
   "osm-r5493161|https://royaltombs.cha.go.kr/html/HtmlPage.do?pg=/new/html/portal_01_08_01.jsp&mn=RT_01_08": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-23T20:44:14.902Z"
+   "at": "2026-11-04T00:07:30.773Z"
   },
   "osm-w346902903|https://royaltombs.cha.go.kr/html/HtmlPage.do?pg=/new/html/portal_01_09_01.jsp&mn=RT_01_09": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-23T20:44:15.902Z"
+   "at": "2026-11-04T00:07:31.773Z"
   },
   "osm-w229027411|https://parks.seoul.go.kr/template/sub/naksan.do": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:09:04.226Z"
+   "at": "2026-11-04T00:07:33.878Z"
   },
   "osm-r11069145|http://www.ddp.or.kr/main": {
    "v": "DEAD",
    "why": "HTTP 404",
-   "at": "2026-10-27T23:09:04.303Z"
+   "at": "2026-11-04T00:07:34.163Z"
   },
   "osm-n3784282405|http://www.jejuwaterworld.co.kr/": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:09:03.334Z"
+   "at": "2026-11-04T00:07:33.162Z"
   },
   "102377|https://camfit.co.kr/camp": {
    "v": "UNVERIFIED",
@@ -7820,7 +7874,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:32.543Z"
+   "at": "2026-11-04T00:08:42.538Z"
   },
   "2230|http://www.orcamping.co.kr/": {
    "v": "UNVERIFIED",
@@ -7950,7 +8004,7 @@
    "v": "ERROR",
    "why": "fetch failed",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:38.098Z"
+   "at": "2026-11-04T00:08:46.216Z"
   },
   "2179|https://m.thankqcamping.com/resv/view.hbb?cseq=354": {
    "v": "MATCH",
@@ -7963,7 +8017,7 @@
    "v": "ERROR",
    "why": "ECONNRESET",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:34.929Z"
+   "at": "2026-11-04T00:08:47.439Z"
   },
   "462|http://www.knps.or.kr/front/portal/visit/visitCourseMain.do?parkId=121300&amp;parkNavGb=park_facView&amp;vnewsId=172": {
    "v": "MATCH",
@@ -7991,7 +8045,7 @@
    "v": "ERROR",
    "why": "ECONNRESET",
    "kind": "homepage",
-   "at": "2026-10-27T23:10:36.261Z"
+   "at": "2026-11-04T00:08:49.075Z"
   },
   "101058|https://m.thankqcamping.com/resv/view.hbb?cseq=14346": {
    "v": "MATCH",
@@ -8023,7 +8077,7 @@
    "v": "ERROR",
    "why": "fetch failed",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:42.452Z"
+   "at": "2026-11-04T00:08:49.944Z"
   },
   "3389|https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B02&deptId=B021001": {
    "v": "MATCH",
@@ -8036,7 +8090,7 @@
    "v": "ERROR",
    "why": "ECONNRESET",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:37.611Z"
+   "at": "2026-11-04T00:08:50.715Z"
   },
   "1704|http://www.knps.or.kr/portal/main/contents.do?menuNo=7020043": {
    "v": "UNVERIFIED",
@@ -8070,7 +8124,7 @@
    "v": "ERROR",
    "why": "ECONNRESET",
    "kind": "homepage",
-   "at": "2026-10-27T23:10:39.251Z"
+   "at": "2026-11-04T00:08:52.350Z"
   },
   "8217|https://reservation.knps.or.kr/reservation/searchSimpleCampReservation.do": {
    "v": "MATCH",
@@ -8090,7 +8144,7 @@
    "v": "ERROR",
    "why": "ECONNRESET",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:41.154Z"
+   "at": "2026-11-04T00:08:54.726Z"
   },
   "8145|http://bitoseom.co.kr/?m=B&s=B": {
    "v": "UNVERIFIED",
@@ -8122,13 +8176,13 @@
    "v": "ERROR",
    "why": "fetch failed",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:46.780Z"
+   "at": "2026-11-04T00:08:53.697Z"
   },
   "3577|http://camping.junggu.ulsan.kr/": {
    "v": "ERROR",
    "why": "ECONNRESET",
    "kind": "homepage",
-   "at": "2026-10-27T23:10:42.511Z"
+   "at": "2026-11-04T00:08:56.356Z"
   },
   "7060|https://reservation.knps.or.kr/contents/C/serviceGuide.do?parkId=B20": {
    "v": "MATCH",
@@ -8148,13 +8202,13 @@
    "v": "PLATFORM_ROOT",
    "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:31.621Z"
+   "at": "2026-11-04T00:08:42.046Z"
   },
   "7043|http://camping.junggu.ulsan.kr/": {
    "v": "ERROR",
    "why": "ECONNRESET",
    "kind": "homepage",
-   "at": "2026-10-27T23:10:44.397Z"
+   "at": "2026-11-04T00:08:57.965Z"
   },
   "100319|https://reservation.knps.or.kr/#": {
    "v": "PORTAL",
@@ -8293,7 +8347,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:54.149Z"
+   "at": "2026-11-04T00:09:03.050Z"
   },
   "1718|http://www.knps.or.kr/": {
    "v": "UNVERIFIED",
@@ -8378,7 +8432,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:10:59.139Z"
+   "at": "2026-11-04T00:09:08.539Z"
   },
   "7008|https://m.thankqcamping.com/resv/view.hbb?cseq=17305": {
    "v": "MATCH",
@@ -8420,7 +8474,7 @@
    "v": "ERROR",
    "why": "fetch failed",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:51.088Z"
+   "at": "2026-11-04T00:08:57.595Z"
   },
   "2765|http://www.knps.or.kr/knpshp/visit/reservation/camp.jsp?menuid=P10610&depth=3": {
    "v": "UNVERIFIED",
@@ -8506,7 +8560,7 @@
    "v": "ERROR",
    "why": "fetch failed",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:55.394Z"
+   "at": "2026-11-04T00:09:01.360Z"
   },
   "101689|https://m.thankqcamping.com/resv/view.hbb?cseq=20902": {
    "v": "MATCH",
@@ -8519,7 +8573,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:05.627Z"
+   "at": "2026-11-04T00:09:14.529Z"
   },
   "2833|http://camplink.co.kr/?camp=jyd52": {
    "v": "MATCH",
@@ -8685,7 +8739,7 @@
    "v": "ERROR",
    "why": "ECONNREFUSED",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:42.362Z"
+   "at": "2026-11-04T00:08:51.802Z"
   },
   "100546|http://r.camperstory.com/resMain.hbb?reserve_path=RP&campseq=4021": {
    "v": "MATCH",
@@ -8774,7 +8828,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:10:57.143Z"
+   "at": "2026-11-04T00:09:08.040Z"
   },
   "3279|https://m.thankqcamping.com/resv/view.hbb?cseq=20246": {
    "v": "MATCH",
@@ -8808,7 +8862,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:10:59.140Z"
+   "at": "2026-11-04T00:09:11.036Z"
   },
   "7886|https://m.thankqcamping.com/resv/view.hbb?cseq=20786": {
    "v": "MATCH",
@@ -8895,7 +8949,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:10:46.070Z"
+   "at": "2026-11-04T00:08:55.225Z"
   },
   "101124|https://m.thankqcamping.com/resv/view.hbb?cseq=15128": {
    "v": "MATCH",
@@ -9092,10 +9146,11 @@
    "at": "2026-10-23T20:47:11.720Z"
   },
   "2940|http://www.hwayangdong.co.kr/": {
-   "v": "ERROR",
-   "why": "timeout",
+   "v": "NO_SIGNAL",
+   "why": "이 업장 이름·전화·주소가 페이지에 없음(제목: 자연이 살아숨쉬는 곳 화양동관광농원)",
+   "title": "자연이 살아숨쉬는 곳 화양동관광농원",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:02.821Z"
+   "at": "2026-11-04T00:08:57.213Z"
   },
   "101955|https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030070": {
    "v": "MATCH",
@@ -9169,10 +9224,12 @@
    "at": "2026-10-23T20:47:15.345Z"
   },
   "100293|https://camfit.onelink.me/y0My/ac9au0g2": {
-   "v": "ERROR",
-   "why": "HTTP 403",
+   "v": "THIN",
+   "why": "글이 거의 없음",
+   "title": "캠핏",
+   "final": "https://camfit.co.kr/camp/62e8ed0d2d325d001fe60c77?source=share&pid=share_camp&deep_link_value=%2Fcamp%2F62e8ed0d2d325d001fe60c77%3Fsource%3Dshare&shortlink=ac9au0g2&source_caller=api_v2&onelink_id=y0My&af_dp=kr.co.camfit.app%3A%2F%2Fcamp%2F62e8ed0d2d325d001fe60c77%3Fsource%3Dshare",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:57.155Z"
+   "at": "2026-11-04T00:08:59.621Z"
   },
   "100177|https://m.thankqcamping.com/resv/view.hbb?cseq=2285": {
    "v": "MATCH",
@@ -9185,7 +9242,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:59.007Z"
+   "at": "2026-11-04T00:08:59.758Z"
   },
   "7207|https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030090": {
    "v": "MATCH",
@@ -9210,12 +9267,10 @@
   },
   "100329|https://r.camperstory.com/resMain.hbb?reserve_path=RP&campseq=1773": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
+   "why": "글이 거의 없음",
    "title": "땡큐캠핑예약",
-   "final": "about:blank",
-   "rendered": true,
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:58.228Z"
+   "at": "2026-11-04T00:09:27.448Z"
   },
   "1043|https://m.thankqcamping.com/resv/view.hbb?cseq=17647": {
    "v": "MATCH",
@@ -9286,7 +9341,7 @@
    "v": "ERROR",
    "why": "HTTP 401",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:49.648Z"
+   "at": "2026-11-04T00:10:57.813Z"
   },
   "7405|https://m.thankqcamping.com/resv/view.hbb?cseq=14420": {
    "v": "MATCH",
@@ -9347,12 +9402,10 @@
   },
   "100148|http://r.camperstory.com/resMain.hbb?reserve_path=RP&campseq=3810": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
+   "why": "글이 거의 없음",
    "title": "땡큐캠핑예약",
-   "final": "about:blank",
-   "rendered": true,
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:05.630Z"
+   "at": "2026-11-04T00:09:28.668Z"
   },
   "6959|https://www.foresttrip.go.kr/": {
    "v": "PORTAL",
@@ -9450,10 +9503,9 @@
   },
   "100588|https://gpartsalon.imweb.me/": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "rendered": true,
+   "why": "글이 거의 없음",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:03.327Z"
+   "at": "2026-11-04T00:09:02.786Z"
   },
   "2573|https://m.thankqcamping.com/resv/view.hbb?cseq=2601": {
    "v": "MATCH",
@@ -9553,12 +9605,10 @@
   },
   "100349|https://r.camperstory.com/resMain.hbb?reserve_path=RP&campseq=3995": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
+   "why": "글이 거의 없음",
    "title": "땡큐캠핑예약",
-   "final": "about:blank",
-   "rendered": true,
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:13.543Z"
+   "at": "2026-11-04T00:09:29.891Z"
   },
   "1528|https://m.thankqcamping.com/resv/view.hbb?cseq=7385": {
    "v": "MATCH",
@@ -9571,7 +9621,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:01.651Z"
+   "at": "2026-11-04T00:09:06.226Z"
   },
   "6764|http://res.knps.or.kr/": {
    "v": "PORTAL",
@@ -9599,7 +9649,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:23.603Z"
+   "at": "2026-11-04T00:09:26.020Z"
   },
   "100878|https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030033": {
    "v": "MATCH",
@@ -9635,7 +9685,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:03.269Z"
+   "at": "2026-11-04T00:09:06.358Z"
   },
   "101629|https://m.thankqcamping.com/resv/view.hbb?cseq=16124": {
    "v": "MATCH",
@@ -9648,7 +9698,7 @@
    "v": "ERROR",
    "why": "HTTP 401",
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:29.808Z"
+   "at": "2026-11-04T00:10:59.911Z"
   },
   "7359|https://pension.onda.me/bp/135207/calendar": {
    "v": "MATCH",
@@ -9678,7 +9728,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:20.606Z"
+   "at": "2026-11-04T00:09:21.523Z"
   },
   "6967|http://ypcamp.modoo.at/": {
    "v": "CLOSED",
@@ -9734,7 +9784,7 @@
    "v": "ERROR",
    "why": "HTTP 401",
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:32.004Z"
+   "at": "2026-11-04T00:11:01.521Z"
   },
   "101370|https://m.thankqcamping.com/resv/view.hbb?cseq=14011": {
    "v": "MATCH",
@@ -9766,10 +9816,9 @@
    "at": "2026-10-23T20:47:50.931Z"
   },
   "76|http://gsglamping.com/content/03reservation/02_01.php": {
-   "v": "ERROR",
-   "why": "EAI_AGAIN",
-   "kind": "booking.url",
-   "at": "2026-10-27T23:11:10.554Z"
+   "v": "DEAD",
+   "why": "DNS 없음(도메인 없음)",
+   "at": "2026-11-04T00:01:40.110Z"
   },
   "101619|https://m.thankqcamping.com/resv/view.hbb?cseq=17327": {
    "v": "MATCH",
@@ -9843,10 +9892,9 @@
    "at": "2026-10-23T20:47:53.735Z"
   },
   "76|http://gsglamping.com/": {
-   "v": "ERROR",
-   "why": "EAI_AGAIN",
-   "kind": "homepage",
-   "at": "2026-10-27T23:11:13.940Z"
+   "v": "DEAD",
+   "why": "DNS 없음(도메인 없음)",
+   "at": "2026-11-04T00:01:41.111Z"
   },
   "7541|https://www.sjfmc.or.kr/camping/sub02_01.do": {
    "v": "UNVERIFIED",
@@ -9869,12 +9917,10 @@
   },
   "7564|http://r.camperstory.com/resMain.hbb?reserve_path=RP&campseq=1756": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
+   "why": "글이 거의 없음",
    "title": "땡큐캠핑예약",
-   "final": "about:blank",
-   "rendered": true,
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:22.127Z"
+   "at": "2026-11-04T00:09:31.111Z"
   },
   "1698|https://www.sjfmc.or.kr/camping.do": {
    "v": "UNVERIFIED",
@@ -9906,7 +9952,7 @@
    "v": "ERROR",
    "why": "HTTP 500",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:05.898Z"
+   "at": "2026-11-04T00:09:08.137Z"
   },
   "101797|http://www.nookglamping.co.kr/": {
    "v": "MATCH",
@@ -9926,7 +9972,7 @@
    "v": "ERROR",
    "why": "HTTP 500",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:07.042Z"
+   "at": "2026-11-04T00:09:09.265Z"
   },
   "rf-1x439ps|https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0187": {
    "v": "MATCH",
@@ -10090,7 +10136,7 @@
    "v": "ERROR",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:08.651Z"
+   "at": "2026-11-04T00:09:08.517Z"
   },
   "101384|https://m.thankqcamping.com/resv/view.hbb?cseq=15752": {
    "v": "MATCH",
@@ -10101,12 +10147,10 @@
   },
   "100680|http://r.camperstory.com/resMain.hbb?reserve_path=RP&campseq=4009": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
+   "why": "글이 거의 없음",
    "title": "땡큐캠핑예약",
-   "final": "about:blank",
-   "rendered": true,
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:31.763Z"
+   "at": "2026-11-04T00:09:34.069Z"
   },
   "rf-1kjtgns|https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030074": {
    "v": "MATCH",
@@ -10119,7 +10163,7 @@
    "v": "ERROR",
    "why": "ECONNRESET",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:11.422Z"
+   "at": "2026-11-04T00:09:10.088Z"
   },
   "2491|http://worak.knps.or.kr/front/portal/visit/visitCourseMain.do?parkId=121400&parkNavGb=park_facView&vnewsId=169": {
    "v": "MATCH",
@@ -10220,17 +10264,15 @@
   },
   "1357|http://www.auc.or.kr/": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "final": "https://www.auc.or.kr/template/cms/user/aysc/Mbuster_T.html",
-   "rendered": true,
+   "why": "글이 거의 없음",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:18.110Z"
+   "at": "2026-11-04T00:09:10.416Z"
   },
   "1601|https://strawberry.mainticket.co.kr/strawberry/strawberry.aspx?companycode=0047&shopcode=0001": {
    "v": "ERROR",
    "why": "EAI_AGAIN",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:32.444Z"
+   "at": "2026-11-04T00:09:29.564Z"
   },
   "101654|https://m.thankqcamping.com/resv/view.hbb?cseq=7193": {
    "v": "MATCH",
@@ -10366,7 +10408,7 @@
    "v": "ERROR",
    "why": "HTTP 405",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:21.771Z"
+   "at": "2026-11-04T00:09:14.215Z"
   },
   "rf-2c2987|https://www.foresttrip.go.kr": {
    "v": "PORTAL",
@@ -10387,7 +10429,7 @@
    "v": "ERROR",
    "why": "EAI_AGAIN",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:43.389Z"
+   "at": "2026-11-04T00:09:40.571Z"
   },
   "2563|https://mirihae.com/epoc/camping/Z65332353?gateToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJFTlRFUklOR19UT0tFTiIsImV4cCI6MTc3MDM1MTI3MywiVE9LRU5fSUQiOiIxYjNmNDU0MzY4NTI0NzNlOGNiNThmODg5ZDMzMzMyZiIsIkdST1VQX0lEIjoiNjZkYWNmYWM2OThlNmMxZGZjNjQ1NTY2In0.7bx4csADUWvbHtHm5JCvocjBRhZfX4s_z9whjmdQpmI": {
    "v": "MATCH",
@@ -10407,16 +10449,17 @@
    "at": "2026-10-23T20:48:32.142Z"
   },
   "100082|https://camping.ubimc.or.kr/main.do?bid=2": {
-   "v": "ERROR",
-   "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+   "v": "MATCH",
+   "why": "이름 “당사현대차오션”",
+   "title": "울산북구캠핑장",
    "kind": "homepage",
-   "at": "2026-10-27T23:10:35.483Z"
+   "at": "2026-11-04T00:08:46.356Z"
   },
   "1266|http://worak.knps.or.kr/front/portal/visit/visitCourseMain.do?parkId=120100&parkNavGb=park_facView&vnewsId=184": {
    "v": "ERROR",
-   "why": "ECONNRESET",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:50.359Z"
+   "at": "2026-11-04T00:11:22.891Z"
   },
   "7008|http://www.forestcamp1.co.kr/": {
    "v": "MATCH",
@@ -10442,10 +10485,11 @@
    "at": "2026-10-23T20:48:34.527Z"
   },
   "7963|https://camping.ubimc.or.kr/main.do?bid=1": {
-   "v": "ERROR",
-   "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+   "v": "MATCH",
+   "why": "이름 “강동”",
+   "title": "울산북구캠핑장",
    "kind": "homepage",
-   "at": "2026-10-27T23:10:33.755Z"
+   "at": "2026-11-04T00:08:44.392Z"
   },
   "rf-7o15ds|https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030019": {
    "v": "MATCH",
@@ -10493,7 +10537,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:37.583Z"
+   "at": "2026-11-04T00:09:31.016Z"
   },
   "101777|https://m.thankqcamping.com/resv/view.hbb?cseq=17651": {
    "v": "MATCH",
@@ -10709,7 +10753,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:23.171Z"
+   "at": "2026-11-04T00:09:17.771Z"
   },
   "3139|https://m.thankqcamping.com/resv/view.hbb?cseq=1537&go_main=Y&path=RP": {
    "v": "MATCH",
@@ -10736,7 +10780,7 @@
    "v": "ERROR",
    "why": "HTTP 400",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:24.416Z"
+   "at": "2026-11-04T00:09:20.571Z"
   },
   "1993|https://camping.asanfmc.or.kr/main/": {
    "v": "MATCH",
@@ -10779,13 +10823,13 @@
    "v": "ERROR",
    "why": "HTTP 400",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:26.361Z"
+   "at": "2026-11-04T00:09:24.738Z"
   },
   "101486|http://www.theariut.com/": {
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:25.288Z"
+   "at": "2026-11-04T00:09:18.454Z"
   },
   "101368|https://m.thankqcamping.com/resv/view.hbb?cseq=14933&go_main=Y&path=RP": {
    "v": "MATCH",
@@ -11336,7 +11380,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:26.594Z"
+   "at": "2026-11-04T00:09:19.148Z"
   },
   "101031|https://m.thankqcamping.com/resv/view.hbb?cseq=8279": {
    "v": "MATCH",
@@ -11358,7 +11402,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:28.037Z"
+   "at": "2026-11-04T00:09:20.215Z"
   },
   "hangang-yeouido|https://hangang.seoul.go.kr/www/contents/646.do?mid=427": {
    "v": "MATCH",
@@ -11393,7 +11437,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:29.143Z"
+   "at": "2026-11-04T00:09:21.251Z"
   },
   "2014|https://m.thankqcamping.com/resv/view.hbb?cseq=1771&path=RP": {
    "v": "MATCH",
@@ -11406,13 +11450,13 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:30.241Z"
+   "at": "2026-11-04T00:09:22.294Z"
   },
   "101419|http://eanhealingland.com/": {
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:28.927Z"
+   "at": "2026-11-04T00:09:20.338Z"
   },
   "rf-o51wj|https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030036": {
    "v": "MATCH",
@@ -11425,7 +11469,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:31.492Z"
+   "at": "2026-11-04T00:09:23.333Z"
   },
   "101249|https://www.backhugcamp.com/": {
    "v": "BLOCKED",
@@ -11447,7 +11491,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:32.569Z"
+   "at": "2026-11-04T00:09:24.372Z"
   },
   "721|https://m.thankqcamping.com/resv/view.hbb?cseq=17660&go_main=Y&path=RP": {
    "v": "MATCH",
@@ -11458,10 +11502,9 @@
   },
   "101216|https://campingyosaebulmeong.imweb.me/": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "rendered": true,
+   "why": "글이 거의 없음",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:33.190Z"
+   "at": "2026-11-04T00:09:21.941Z"
   },
   "102070|https://www.rockonglamping.co.kr/": {
    "v": "MATCH",
@@ -11489,7 +11532,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:33.665Z"
+   "at": "2026-11-04T00:09:25.415Z"
   },
   "2958|https://m.thankqcamping.com/resv/view.hbb?cseq=7513": {
    "v": "MATCH",
@@ -11516,7 +11559,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:34.865Z"
+   "at": "2026-11-04T00:09:26.455Z"
   },
   "904|http://duricamp.modoo.at/": {
    "v": "CLOSED",
@@ -11543,7 +11586,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:35.966Z"
+   "at": "2026-11-04T00:09:27.495Z"
   },
   "1152|http://newpension.logosweb.or.kr/reservation/reservation2.php?id=mulnaechigi": {
    "v": "UNVERIFIED",
@@ -11562,7 +11605,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:37.054Z"
+   "at": "2026-11-04T00:09:28.536Z"
   },
   "rf-1ku10vi|https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0189": {
    "v": "MATCH",
@@ -11575,7 +11618,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:38.134Z"
+   "at": "2026-11-04T00:09:30.130Z"
   },
   "526|https://m.thankqcamping.com/resv/view.hbb?cseq=9042": {
    "v": "MATCH",
@@ -11588,7 +11631,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:39.247Z"
+   "at": "2026-11-04T00:09:31.172Z"
   },
   "2987|http://anitowncamp.nowr.net/m_member/?co_id=anitowncamp": {
    "v": "MATCH",
@@ -11615,7 +11658,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:40.328Z"
+   "at": "2026-11-04T00:09:32.342Z"
   },
   "rf-1r4889r|https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030057": {
    "v": "MATCH",
@@ -11650,7 +11693,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:41.429Z"
+   "at": "2026-11-04T00:09:33.384Z"
   },
   "597|http://www.huiln.com/?r=home&m=camp&themacode=5&mode=view&campcode=12": {
    "v": "NO_SIGNAL",
@@ -11672,13 +11715,13 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:34.547Z"
+   "at": "2026-11-04T00:09:23.036Z"
   },
   "101012|https://booking.ddnayo.com/booking-calendar-status?accommodationId=100400": {
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:42.880Z"
+   "at": "2026-11-04T00:09:34.426Z"
   },
   "rf-1qroeie|https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030102": {
    "v": "MATCH",
@@ -11698,13 +11741,13 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:35.654Z"
+   "at": "2026-11-04T00:09:24.088Z"
   },
   "101085|https://booking.ddnayo.com/booking-calendar-status?accommodationId=100394": {
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:43.969Z"
+   "at": "2026-11-04T00:09:35.469Z"
   },
   "7132|https://www.gscamping.com/": {
    "v": "MATCH",
@@ -11717,13 +11760,13 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:36.705Z"
+   "at": "2026-11-04T00:09:25.116Z"
   },
   "7916|https://booking.ddnayo.com/booking-calendar-status?accommodationId=12770&groupId=": {
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:45.044Z"
+   "at": "2026-11-04T00:09:36.587Z"
   },
   "7928|https://m.thankqcamping.com/resv/view.hbb?cseq=7481": {
    "v": "MATCH",
@@ -11750,7 +11793,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:37.757Z"
+   "at": "2026-11-04T00:09:26.281Z"
   },
   "3459|https://m.thankqcamping.com/resv/view.hbb?cseq=11041": {
    "v": "MATCH",
@@ -11763,7 +11806,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:39.247Z"
+   "at": "2026-11-04T00:09:27.363Z"
   },
   "rf-1kcsvr8|https://www.foresttrip.go.kr/indvz/main.do?hmpgId=0104": {
    "v": "MATCH",
@@ -11797,7 +11840,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:40.341Z"
+   "at": "2026-11-04T00:09:28.409Z"
   },
   "rf-2btyj6|https://www.foresttrip.go.kr/": {
    "v": "PORTAL",
@@ -11857,9 +11900,9 @@
   },
   "100819|http://www.1894.or.kr/n_camp/reservation/": {
    "v": "ERROR",
-   "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "booking.url",
-   "at": "2026-10-27T23:11:41.216Z"
+   "at": "2026-11-04T00:09:46.497Z"
   },
   "7424|https://islandcamping.imweb.me/": {
    "v": "MATCH",
@@ -11908,9 +11951,9 @@
   },
   "100819|http://www.1894.or.kr/": {
    "v": "ERROR",
-   "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:43.832Z"
+   "at": "2026-11-04T00:09:57.991Z"
   },
   "4|https://healingpark.modoo.at/": {
    "v": "CLOSED",
@@ -11937,7 +11980,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:53.553Z"
+   "at": "2026-11-04T00:09:43.500Z"
   },
   "101424|https://m.thankqcamping.com/resv/view.hbb?cseq=14375": {
    "v": "MATCH",
@@ -12081,13 +12124,11 @@
    "at": "2026-10-23T20:50:09.687Z"
   },
   "301|https://www.gomsem.co.kr/blank": {
-   "v": "LEFT_SITE",
-   "why": "다른 사이트로 이동(dreamwas.com) · blank : 검색결과 | 드림워즈",
-   "title": "blank : 검색결과 | 드림워즈",
-   "final": "https://dreamwas.com/plugin/dw_search/search.php?stx=blank#gsc.tab=0&gsc.q=blank&gsc.page=1",
-   "rendered": true,
+   "v": "THIN",
+   "why": "글이 거의 없음",
+   "title": "blank",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:51.045Z"
+   "at": "2026-11-04T00:09:28.333Z"
   },
   "osm-r6033901|https://hangang.seoul.go.kr/www/contents/861.do?mid=854": {
    "v": "MATCH",
@@ -12291,10 +12332,12 @@
    "at": "2026-10-23T20:50:26.481Z"
   },
   "477|https://ok.yumcorp.or.kr/index.php#": {
-   "v": "ERROR",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "v": "MATCH",
+   "why": "이름 “금오도”",
+   "title": "여수시도시관리공단 통합예약시스템",
+   "final": "https://ok.yumcorp.or.kr/index.php",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:05.032Z"
+   "at": "2026-11-04T00:09:30.700Z"
   },
   "1096|http://r6.camperstory.com/?2066": {
    "v": "MOVED",
@@ -12331,7 +12374,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:05.532Z"
+   "at": "2026-11-04T00:09:49.994Z"
   },
   "rf-enl4wf|https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030013": {
    "v": "MATCH",
@@ -12351,7 +12394,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:06.531Z"
+   "at": "2026-11-04T00:09:52.491Z"
   },
   "1846|http://sjccglamping.co.kr/": {
    "v": "MATCH",
@@ -12372,7 +12415,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:07.529Z"
+   "at": "2026-11-04T00:09:52.990Z"
   },
   "2304|https://www.oceanoparapark.co.kr/camping_intro.php": {
    "v": "MATCH",
@@ -12477,7 +12520,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:18.013Z"
+   "at": "2026-11-04T00:10:03.985Z"
   },
   "101675|https://m.thankqcamping.com/resv/view.hbb?cseq=16445": {
    "v": "MATCH",
@@ -12490,7 +12533,7 @@
    "v": "ERROR",
    "why": "EAI_AGAIN",
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:11.412Z"
+   "at": "2026-11-04T00:09:57.609Z"
   },
   "2750|http://joeunsesang.co.kr/": {
    "v": "MATCH",
@@ -12510,7 +12553,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:19.012Z"
+   "at": "2026-11-04T00:10:04.485Z"
   },
   "7375|https://m.thankqcamping.com/resv/view.hbb?cseq=2878": {
    "v": "MATCH",
@@ -12551,7 +12594,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:08.717Z"
+   "at": "2026-11-04T00:09:45.261Z"
   },
   "6972|https://m.thankqcamping.com/resv/view.hbb?cseq=9524": {
    "v": "MATCH",
@@ -12564,7 +12607,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:09.861Z"
+   "at": "2026-11-04T00:09:46.428Z"
   },
   "3231|https://heal3001.modoo.at/": {
    "v": "CLOSED",
@@ -12584,7 +12627,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:12.523Z"
+   "at": "2026-11-04T00:09:56.990Z"
   },
   "3279|http://xn--bj0b94tskpvgck0ivna.com/": {
    "v": "MATCH",
@@ -12633,7 +12676,7 @@
    "v": "ERROR",
    "why": "EAI_AGAIN",
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:22.427Z"
+   "at": "2026-11-04T00:10:08.615Z"
   },
   "101008|https://m.thankqcamping.com/resv/view.hbb?cseq=13839": {
    "v": "MATCH",
@@ -12660,7 +12703,7 @@
    "v": "ERROR",
    "why": "EAI_AGAIN",
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:33.439Z"
+   "at": "2026-11-04T00:10:19.626Z"
   },
   "3602|http://www.hupark.com/": {
    "v": "MATCH",
@@ -12716,7 +12759,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:24.006Z"
+   "at": "2026-11-04T00:10:08.483Z"
   },
   "923|https://m.thankqcamping.com/resv/view.hbb?cseq=2156": {
    "v": "MATCH",
@@ -12769,19 +12812,15 @@
    "at": "2026-10-23T20:51:08.158Z"
   },
   "7143|http://www.metapark.co.kr/": {
-   "v": "MATCH",
-   "why": "이름 “메타파크”",
-   "title": "메타파크",
-   "final": "https://www.metapark.co.kr/main",
-   "rendered": true,
-   "kind": "homepage",
-   "at": "2026-10-23T20:51:08.593Z"
+   "v": "DEAD",
+   "why": "DNS 없음(도메인 없음)",
+   "at": "2026-11-04T00:02:42.868Z"
   },
   "2825|http://jindo.go.kr/sambyeolcho": {
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:31.993Z"
+   "at": "2026-11-04T00:10:06.985Z"
   },
   "101138|https://m.thankqcamping.com/resv/view.hbb?cseq=13579": {
    "v": "MATCH",
@@ -12792,9 +12831,9 @@
   },
   "3471|http://www.hcmcamping.com/": {
    "v": "ERROR",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "why": "EHOSTUNREACH",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:31.493Z"
+   "at": "2026-11-04T00:09:48.034Z"
   },
   "7593|http://camp-sigonggan.com/": {
    "v": "MATCH",
@@ -12848,10 +12887,9 @@
   },
   "7663|https://westcamp.imweb.me/index": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "rendered": true,
+   "why": "글이 거의 없음",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:35.661Z"
+   "at": "2026-11-04T00:10:05.425Z"
   },
   "7603|https://familylandcamping.com/index.html": {
    "v": "BLOCKED",
@@ -12928,7 +12966,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:39.983Z"
+   "at": "2026-11-04T00:10:09.982Z"
   },
   "7981|https://jhcamp.kr/": {
    "v": "MATCH",
@@ -12976,12 +13014,10 @@
    "at": "2026-10-23T20:51:23.879Z"
   },
   "8015|https://rev.yapen.co.kr/external?ypIdx=57817": {
-   "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "title": "NOL 숙박예약시스템",
-   "rendered": true,
+   "v": "ERROR",
+   "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:39.392Z"
+   "at": "2026-11-04T00:10:08.453Z"
   },
   "100137|https://m.thankqcamping.com/resv/view.hbb?cseq=3885": {
    "v": "MATCH",
@@ -13026,19 +13062,16 @@
    "at": "2026-10-23T20:51:28.144Z"
   },
   "699|http://rev.yapen.co.kr/external?ypIdx=33587": {
-   "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "title": "NOL 숙박예약시스템",
-   "final": "https://rev.yapen.co.kr/external?ypIdx=33587",
-   "rendered": true,
+   "v": "ERROR",
+   "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:44.206Z"
+   "at": "2026-11-04T00:10:09.527Z"
   },
   "7442|http://tour.muan.go.kr/lotus/camping": {
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:45.473Z"
+   "at": "2026-11-04T00:10:16.475Z"
   },
   "101607|https://m.thankqcamping.com/resv/view.hbb?cseq=19664": {
    "v": "MATCH",
@@ -13058,7 +13091,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:51.464Z"
+   "at": "2026-11-04T00:10:21.470Z"
   },
   "8213|http://www.xn--wk0bq5di5yhpam4czq.kr/default/reservation/02.php?top=5&sub=1": {
    "v": "MATCH",
@@ -13106,7 +13139,7 @@
    "v": "ERROR",
    "why": "timeout",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:55.006Z"
+   "at": "2026-11-04T00:10:28.991Z"
   },
   "101581|https://m.thankqcamping.com/resv/view.hbb?cseq=4962": {
    "v": "MATCH",
@@ -13220,7 +13253,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:56.961Z"
+   "at": "2026-11-04T00:10:27.961Z"
   },
   "373|https://m.thankqcamping.com/resv/view.hbb?cseq=2262": {
    "v": "MATCH",
@@ -13231,10 +13264,9 @@
   },
   "100392|https://bugsglamping.qrsvc.kr/": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "rendered": true,
+   "why": "글이 거의 없음",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:48.567Z"
+   "at": "2026-11-04T00:10:11.424Z"
   },
   "101320|https://site.onda.me/136772": {
    "v": "MATCH",
@@ -13284,7 +13316,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:58.459Z"
+   "at": "2026-11-04T00:10:31.457Z"
   },
   "100648|https://masilcamping.modoo.at/": {
    "v": "CLOSED",
@@ -13332,13 +13364,13 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:48.416Z"
+   "at": "2026-11-04T00:10:12.807Z"
   },
   "7896|http://www.1004cam.modoo.at/": {
    "v": "ERROR",
    "why": "timeout",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:02.763Z"
+   "at": "2026-11-04T00:10:35.486Z"
   },
   "6951|https://site.onda.me/21122": {
    "v": "STALE_DEEP",
@@ -13374,7 +13406,7 @@
    "v": "ERROR",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:51.301Z"
+   "at": "2026-11-04T00:10:15.044Z"
   },
   "100639|https://m.thankqcamping.com/resv/view.hbb?cseq=4023": {
    "v": "MATCH",
@@ -13426,10 +13458,9 @@
    "at": "2026-10-23T20:51:51.912Z"
   },
   "100881|https://caravanpark.kr/product/view?pension_id=elpark205": {
-   "v": "UNVERIFIED",
-   "why": "robots.txt 차단",
-   "kind": "homepage",
-   "at": "2026-10-23T20:51:52.074Z"
+   "v": "DEAD",
+   "why": "HTTP 404",
+   "at": "2026-11-04T00:03:07.494Z"
   },
   "100699|https://www.cample336.com/bbs/board.php?bo_table=yb_room01": {
    "v": "MATCH",
@@ -13468,10 +13499,9 @@
    "at": "2026-10-23T20:51:53.950Z"
   },
   "101537|https://caravanpark.kr/product/view?pension_id=elpark242": {
-   "v": "UNVERIFIED",
-   "why": "robots.txt 차단",
-   "kind": "homepage",
-   "at": "2026-10-23T20:51:54.073Z"
+   "v": "DEAD",
+   "why": "HTTP 404",
+   "at": "2026-11-04T00:03:09.674Z"
   },
   "101447|https://m.thankqcamping.com/resv/view.hbb?cseq=16355": {
    "v": "MATCH",
@@ -13557,7 +13587,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:01.956Z"
+   "at": "2026-11-04T00:10:34.952Z"
   },
   "101260|https://egcamp.campingt.me/": {
    "v": "MATCH",
@@ -13599,13 +13629,13 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:52.690Z"
+   "at": "2026-11-04T00:10:22.981Z"
   },
   "101737|http://www.narospacecamp.com/": {
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:53.526Z"
+   "at": "2026-11-04T00:10:23.397Z"
   },
   "1042|https://m.thankqcamping.com/resv/view.hbb?cseq=1925": {
    "v": "MATCH",
@@ -13632,7 +13662,7 @@
    "v": "PLATFORM_ROOT",
    "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
    "kind": "booking.url",
-   "at": "2026-10-27T23:10:31.636Z"
+   "at": "2026-11-04T00:08:42.055Z"
   },
   "100311|https://m.thankqcamping.com/resv/view.hbb?cseq=17604": {
    "v": "MATCH",
@@ -13667,7 +13697,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:10.452Z"
+   "at": "2026-11-04T00:10:36.950Z"
   },
   "101857|https://be4.wingsbooking.com/KYN1": {
    "v": "MATCH",
@@ -13829,7 +13859,7 @@
    "v": "ERROR",
    "why": "CERT_HAS_EXPIRED",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:57.843Z"
+   "at": "2026-11-04T00:10:26.218Z"
   },
   "100526|https://m.thankqcamping.com/resv/view.hbb?cseq=3997": {
    "v": "MATCH",
@@ -14057,7 +14087,7 @@
    "why": "글이 거의 없음",
    "final": "https://map.naver.com/p/entry/place/1683482854?lng=126.772609&lat=37.4568069&placePath=%2Froom%3FbookingRedirectUrl%3Dhttps%253A%252F%252Fm.booking.naver.com%252Fbooking%252F12%252Fbizes%252F1089520%253Ftheme%253Dplace%2526lang%253Dko&entry=plt&searchType=place&area=plt",
    "kind": "booking.url",
-   "at": "2026-10-27T23:13:02.742Z"
+   "at": "2026-11-04T00:10:32.323Z"
   },
   "7542|https://ezerpark.letsnowgo.com/main": {
    "v": "MATCH",
@@ -14091,7 +14121,7 @@
    "v": "ERROR",
    "why": "CERT_HAS_EXPIRED",
    "kind": "booking.url",
-   "at": "2026-10-27T23:12:59.796Z"
+   "at": "2026-11-04T00:10:32.513Z"
   },
   "3147|http://turningpoint.modoo.at/": {
    "v": "CLOSED",
@@ -14126,7 +14156,7 @@
    "v": "ERROR",
    "why": "CERT_HAS_EXPIRED",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:02.311Z"
+   "at": "2026-11-04T00:10:33.531Z"
   },
   "3348|https://m.thankqcamping.com/resv/view.hbb?cseq=2912&chk=sns": {
    "v": "MATCH",
@@ -14218,7 +14248,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "booking.url",
-   "at": "2026-10-27T23:13:15.952Z"
+   "at": "2026-11-04T00:10:45.943Z"
   },
   "2480|http://www.wildernessresort.co.kr/": {
    "v": "MATCH",
@@ -14252,7 +14282,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:16.950Z"
+   "at": "2026-11-04T00:10:47.942Z"
   },
   "100316|https://m.thankqcamping.com/resv/view.hbb?cseq=4030": {
    "v": "MATCH",
@@ -14265,7 +14295,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:18.450Z"
+   "at": "2026-11-04T00:10:49.441Z"
   },
   "8133|http://xn--739a74b423a.com/": {
    "v": "MATCH",
@@ -14391,7 +14421,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:27.445Z"
+   "at": "2026-11-04T00:10:57.432Z"
   },
   "100471|http://www.saesolcamping.co.kr/": {
    "v": "MATCH",
@@ -14427,13 +14457,13 @@
    "v": "ERROR",
    "why": "ERR_TLS_CERT_ALTNAME_INVALID",
    "kind": "booking.url",
-   "at": "2026-10-27T23:13:07.661Z"
+   "at": "2026-11-04T00:10:35.896Z"
   },
   "7607|http://www.satgatpension.com/": {
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:04.873Z"
+   "at": "2026-11-04T00:10:36.169Z"
   },
   "102170|http://www.swimozicamp.com/": {
    "v": "MATCH",
@@ -14460,7 +14490,7 @@
    "v": "ERROR",
    "why": "ERR_TLS_CERT_ALTNAME_INVALID",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:19.461Z"
+   "at": "2026-11-04T00:10:46.733Z"
   },
   "100267|https://www.gbe.kr/ydcamping/main.do": {
    "v": "MATCH",
@@ -14473,7 +14503,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:04.421Z"
+   "at": "2026-11-04T00:10:36.508Z"
   },
   "818|http://valley.invil.org/index.html": {
    "v": "NO_SIGNAL",
@@ -14576,7 +14606,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:10:33.075Z"
+   "at": "2026-11-04T00:08:43.447Z"
   },
   "100703|https://m.thankqcamping.com/resv/view.hbb?cseq=4223": {
    "v": "MATCH",
@@ -14787,10 +14817,9 @@
   },
   "101902|https://www.0311forest.com/": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "rendered": true,
+   "why": "글이 거의 없음",
    "kind": "booking.url",
-   "at": "2026-10-27T23:13:20.779Z"
+   "at": "2026-11-04T00:10:39.918Z"
   },
   "100938|https://arammal.modoo.at/": {
    "v": "CLOSED",
@@ -14808,9 +14837,9 @@
   },
   "2063|http://hanbyul.net/": {
    "v": "ERROR",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "why": "EAI_AGAIN",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:25.943Z"
+   "at": "2026-11-04T00:10:56.695Z"
   },
   "549|https://yeyak.dssiseol.or.kr/index.do?menu_id=00004985&servletPath=%2Findex.do": {
    "v": "MATCH",
@@ -14837,7 +14866,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:13:20.619Z"
+   "at": "2026-11-04T00:10:50.137Z"
   },
   "101370|http://jejudnk.com/": {
    "v": "MATCH",
@@ -14851,7 +14880,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:21.764Z"
+   "at": "2026-11-04T00:10:51.271Z"
   },
   "101325|http://www.hayata.co.kr/": {
    "v": "MATCH",
@@ -14865,7 +14894,7 @@
    "why": "글이 거의 없음",
    "final": "https://map.naver.com/p/search/%EC%82%B0%EC%9A%B0%EB%AC%BC%EC%BA%A0%ED%95%91%EC%9E%A5/place/31499158?lng=127.1958180&lat=37.0819874&placePath=/home?entry=pll&from=map&fromPanelNum=2&timestamp=202511071034&locale=ko&svcName=map_pcv5&searchText=%EC%82%B0%EC%9A%B0%EB%AC%BC%EC%BA%A0%ED%95%91%EC%9E%A5&businessCategory=camping&from=map&fromNxList=true&fromPanelNum=2&timestamp=202511071033&locale=ko&svcName=map_pcv5&searchText=%EC%82%B0%EC%9A%B0%EB%AC%BC%EC%BA%A0%ED%95%91%EC%9E%A5&businessCategory=camping&searchType=place&c=15.00,0,0,0,dh",
    "kind": "booking.url",
-   "at": "2026-10-27T23:13:20.862Z"
+   "at": "2026-11-04T00:10:50.209Z"
   },
   "6744|http://greenautocamp.co.kr/skin/ilc010/GreenYeyak/IlcYeyak.html": {
    "v": "NO_SIGNAL",
@@ -14880,7 +14909,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:20.285Z"
+   "at": "2026-11-04T00:10:49.855Z"
   },
   "101739|https://cms.seantour.com/GK001/reservation-of-accommodation.do?mode=view&articleNo=1101&article.offset=0&articleLimit=10": {
    "v": "MATCH",
@@ -14899,7 +14928,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:26.443Z"
+   "at": "2026-11-04T00:10:57.932Z"
   },
   "101102|https://www.glampingbom.kr/bbs/board.php?bo_table=reservation": {
    "v": "MATCH",
@@ -14926,7 +14955,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:13:22.760Z"
+   "at": "2026-11-04T00:10:51.311Z"
   },
   "101795|http://sagiri134.com/reserinfo.php": {
    "v": "BLOCKED",
@@ -15051,13 +15080,13 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:13:29.068Z"
+   "at": "2026-11-04T00:10:56.986Z"
   },
   "7908|http://www.aramirresort.com/": {
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:30.562Z"
+   "at": "2026-11-04T00:10:58.326Z"
   },
   "1876|https://www.swiripark.com/index.php": {
    "v": "MATCH",
@@ -15211,7 +15240,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:13:29.391Z"
+   "at": "2026-11-04T00:10:58.506Z"
   },
   "482|http://herbtown.alltheway.kr/?doc=sub_07": {
    "v": "MATCH",
@@ -15231,16 +15260,13 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:30.538Z"
+   "at": "2026-11-04T00:10:59.665Z"
   },
   "633|http://bjmul.kr/index.php": {
-   "v": "LEFT_SITE",
-   "why": "다른 사이트로 이동(html.dsso.kr) · 서비스 기간 만료안내",
-   "title": "서비스 기간 만료안내",
-   "final": "http://html.dsso.kr/servicestop.html",
-   "rendered": true,
+   "v": "THIN",
+   "why": "글이 거의 없음",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:32.832Z"
+   "at": "2026-11-04T00:10:57.496Z"
   },
   "646|https://evercom.campingt.me/3767/home/index": {
    "v": "MATCH",
@@ -15267,13 +15293,13 @@
    "v": "ERROR",
    "why": "ECONNREFUSED",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:29.955Z"
+   "at": "2026-11-04T00:10:58.687Z"
   },
   "100711|http://lucerneglamping.com/": {
    "v": "ERROR",
    "why": "EAI_AGAIN",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:40.218Z"
+   "at": "2026-11-04T00:11:11.396Z"
   },
   "7583|http://xn--9t4b21glrhh0c79f.com/": {
    "v": "MATCH",
@@ -15328,7 +15354,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:29.628Z"
+   "at": "2026-11-04T00:10:58.519Z"
   },
   "101384|http://xn--bj0b14h95dtwuvlp59a.com/": {
    "v": "MATCH",
@@ -15378,7 +15404,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:13:30.062Z"
+   "at": "2026-11-04T00:10:58.908Z"
   },
   "101804|https://www.oneulbamn.com/service/list_detail?p_id=jejuincara&startdate=20260114&enddate=20260115&ppnum=2": {
    "v": "MATCH",
@@ -15502,7 +15528,7 @@
    "v": "ERROR",
    "why": "ERR_SSL_WRONG_SIGNATURE_TYPE",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:34.263Z"
+   "at": "2026-11-04T00:11:01.156Z"
   },
   "101978|https://www.snowpeak.co.kr/campfield/camps": {
    "v": "MATCH",
@@ -15545,7 +15571,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:32.316Z"
+   "at": "2026-11-04T00:11:00.087Z"
   },
   "3056|http://camp-1.com/": {
    "v": "MATCH",
@@ -15693,13 +15719,14 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:32.751Z"
+   "at": "2026-11-04T00:11:00.422Z"
   },
   "101777|https://mountainandcompanioncamping.co.kr/pages/history": {
-   "v": "ERROR",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "v": "MATCH",
+   "why": "이름 “산과”",
+   "title": "산과 벗 캠핑장",
    "kind": "booking.url",
-   "at": "2026-10-27T23:13:51.417Z"
+   "at": "2026-11-04T00:11:00.836Z"
   },
   "3105|https://cocovivaldi.campingt.me/": {
    "v": "MATCH",
@@ -15850,7 +15877,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:32.470Z"
+   "at": "2026-11-04T00:11:01.270Z"
   },
   "101425|http://thestyle-glamping.co.kr/": {
    "v": "MATCH",
@@ -15869,10 +15896,11 @@
    "at": "2026-10-23T20:54:49.114Z"
   },
   "101777|https://mountainandcompanioncamping.co.kr/": {
-   "v": "ERROR",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "v": "MATCH",
+   "why": "이름 “산과”",
+   "title": "산과 벗 캠핑장",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:02.898Z"
+   "at": "2026-11-04T00:11:02.488Z"
   },
   "3205|https://palbongps.kr/": {
    "v": "MATCH",
@@ -15909,7 +15937,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:33.339Z"
+   "at": "2026-11-04T00:11:02.074Z"
   },
   "101491|https://songacaravan.imweb.me/": {
    "v": "MATCH",
@@ -16011,12 +16039,11 @@
   },
   "101559|https://www.makeus.net/66404": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
+   "why": "글이 거의 없음",
    "title": "서비스 기간만료 안내",
    "final": "https://www.makeus.net/view/notice/inactive/66404",
-   "rendered": true,
    "kind": "homepage",
-   "at": "2026-10-27T23:13:43.470Z"
+   "at": "2026-11-04T00:11:03.319Z"
   },
   "2263|http://camping.yesan.go.kr/main.do": {
    "v": "MATCH",
@@ -16053,7 +16080,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:39.158Z"
+   "at": "2026-11-04T00:11:02.691Z"
   },
   "716|https://www.gngsctf.or.kr/danghangpo/index.goseong": {
    "v": "MATCH",
@@ -16079,13 +16106,13 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:54.412Z"
+   "at": "2026-11-04T00:11:21.893Z"
   },
   "2538|https://www.elysian.co.kr/gangchon/restaurant/restaurant.asp?facility_id=FCT00000000000000201": {
    "v": "ERROR",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:40.434Z"
+   "at": "2026-11-04T00:11:04.515Z"
   },
   "100989|http://www.marucamp.kr/": {
    "v": "MATCH",
@@ -16147,13 +16174,13 @@
    "v": "ERROR",
    "why": "ERR_TLS_CERT_ALTNAME_INVALID",
    "kind": "booking.url",
-   "at": "2026-10-27T23:13:40.427Z"
+   "at": "2026-11-04T00:11:04.429Z"
   },
   "1491|http://www.xn--9i2br6olaa779ch8o.com/": {
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:34.191Z"
+   "at": "2026-11-04T00:12:40.956Z"
   },
   "102031|https://crs.uljusiseol.or.kr/index_main": {
    "v": "NO_SIGNAL",
@@ -16219,7 +16246,7 @@
    "v": "ERROR",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:43.536Z"
+   "at": "2026-11-04T00:11:07.284Z"
   },
   "1477|http://sancamping.com/": {
    "v": "MATCH",
@@ -16250,7 +16277,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:42.338Z"
+   "at": "2026-11-04T00:11:06.179Z"
   },
   "1473|https://www.geumsan.go.kr/cherrycamping/": {
    "v": "UNVERIFIED",
@@ -16263,7 +16290,7 @@
    "why": "글이 거의 없음",
    "title": "Loading...",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:03.717Z"
+   "at": "2026-11-04T00:11:03.437Z"
   },
   "6998|http://www.vicheollin.com/index.php": {
    "v": "BLOCKED",
@@ -16292,13 +16319,13 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:43.019Z"
+   "at": "2026-11-04T00:11:07.190Z"
   },
   "101372|http://xn--bj0bw3p2dq74gd1h.kr/": {
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:56.908Z"
+   "at": "2026-11-04T00:11:24.389Z"
   },
   "6942|http://milmo.co.kr/reserve/step01.php?loc=%EC%98%A4%ED%86%A0%EC%BA%A0%ED%95%91": {
    "v": "MATCH",
@@ -16435,7 +16462,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:44.411Z"
+   "at": "2026-11-04T00:11:07.357Z"
   },
   "1139|https://munam.cheongju.go.kr/index.jsp": {
    "v": "MATCH",
@@ -16578,7 +16605,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:03.898Z"
+   "at": "2026-11-04T00:11:26.385Z"
   },
   "320|https://forest.maketicket.co.kr/ticket/GD129": {
    "v": "MATCH",
@@ -16609,7 +16636,7 @@
    "v": "ERROR",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:50.000Z"
+   "at": "2026-11-04T00:11:10.452Z"
   },
   "3085|http://www.camkocaravan.com/": {
    "v": "MATCH",
@@ -16672,7 +16699,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:52.178Z"
+   "at": "2026-11-04T00:11:09.447Z"
   },
   "100414|https://ma539.com/": {
    "v": "MATCH",
@@ -16700,7 +16727,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:51.888Z"
+   "at": "2026-11-04T00:11:10.765Z"
   },
   "7878|https://bbalganjib.modoo.at/": {
    "v": "CLOSED",
@@ -16730,7 +16757,7 @@
    "v": "ERROR",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
    "kind": "booking.url",
-   "at": "2026-10-27T23:13:54.047Z"
+   "at": "2026-11-04T00:11:12.060Z"
   },
   "2733|http://xn--9y5bi6fiyb8vl.com/": {
    "v": "MATCH",
@@ -16743,7 +16770,7 @@
    "v": "ERROR",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:55.339Z"
+   "at": "2026-11-04T00:11:13.333Z"
   },
   "100644|https://garrijum.imweb.me/": {
    "v": "MATCH",
@@ -16763,7 +16790,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "booking.url",
-   "at": "2026-10-27T23:14:05.895Z"
+   "at": "2026-11-04T00:11:28.880Z"
   },
   "7789|https://hanghwachon.modoo.at/": {
    "v": "CLOSED",
@@ -16862,7 +16889,7 @@
    "v": "ERROR",
    "why": "HTTP 520",
    "kind": "booking.url",
-   "at": "2026-10-27T23:13:54.102Z"
+   "at": "2026-11-04T00:11:12.476Z"
   },
   "2147|http://www.xn--bj0b46p12lnmldme.kr/": {
    "v": "MATCH",
@@ -16875,7 +16902,7 @@
    "v": "ERROR",
    "why": "HTTP 520",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:55.457Z"
+   "at": "2026-11-04T00:11:13.884Z"
   },
   "1330|https://starrynight2016.modoo.at/": {
    "v": "CLOSED",
@@ -16895,7 +16922,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:57.284Z"
+   "at": "2026-11-04T00:11:14.856Z"
   },
   "2992|http://cbnuo.chungbuk.ac.kr/cbnuo/": {
    "v": "MATCH",
@@ -16906,11 +16933,9 @@
   },
   "2228|http://star-glamping.com/": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "final": "chrome-error://chromewebdata/",
-   "rendered": true,
+   "why": "글이 거의 없음",
    "kind": "homepage",
-   "at": "2026-10-27T23:13:58.704Z"
+   "at": "2026-11-04T00:11:13.000Z"
   },
   "100539|https://antcamp.modoo.at/": {
    "v": "CLOSED",
@@ -16965,7 +16990,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:17.384Z"
+   "at": "2026-11-04T00:11:40.369Z"
   },
   "101206|http://xn--bn1bu2ffze55bt2gquibh63ie2vwma012d.com/": {
    "v": "MATCH",
@@ -17030,7 +17055,7 @@
    "v": "ERROR",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:01.751Z"
+   "at": "2026-11-04T00:11:17.781Z"
   },
   "6771|https://www.campfarm.kr/": {
    "v": "MATCH",
@@ -17043,7 +17068,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "booking.url",
-   "at": "2026-10-27T23:14:28.865Z"
+   "at": "2026-11-04T00:11:51.864Z"
   },
   "7991|http://dotcampingcaravan.dothome.co.kr/": {
    "v": "MATCH",
@@ -17056,7 +17081,7 @@
    "v": "ERROR",
    "why": "EAI_AGAIN",
    "kind": "booking.url",
-   "at": "2026-10-27T23:14:13.966Z"
+   "at": "2026-11-04T00:11:34.898Z"
   },
   "100329|https://www.eoeundolhealing.com/": {
    "v": "BLOCKED",
@@ -17106,42 +17131,40 @@
   },
   "100260|https://www.illsangwhaglamp.com/": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
+   "why": "글이 거의 없음",
    "title": "Loading...",
-   "final": "http://ww547.illsangwhaglamp.com/?tkn=19vnMT3S",
-   "rendered": true,
    "kind": "homepage",
-   "at": "2026-10-27T23:14:05.735Z"
+   "at": "2026-11-04T00:11:23.972Z"
   },
   "100637|http://xn--vk1bv68awvau5dk8ix7k60b.kr/": {
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:18.880Z"
+   "at": "2026-11-04T00:11:36.372Z"
   },
   "100330|http://www.eoeundol.net/": {
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:40.347Z"
+   "at": "2026-11-04T00:12:03.355Z"
   },
   "101025|https://kukmincamp.boeun.go.kr/bbs/board.php?bo_table=reservation&mode=info": {
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:14:18.349Z"
+   "at": "2026-11-04T00:11:24.873Z"
   },
   "101025|https://kukmincamp.boeun.go.kr/main.php": {
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:19.493Z"
+   "at": "2026-11-04T00:11:26.007Z"
   },
   "7091|http://haegeumgang.co.kr/sub02_04.php": {
    "v": "ERROR",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "why": "EAI_AGAIN",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:25.368Z"
+   "at": "2026-11-04T00:11:45.910Z"
   },
   "101672|https://dalcam0421.modoo.at/": {
    "v": "CLOSED",
@@ -17167,9 +17190,9 @@
   },
   "3157|http://rest.gyeongju.go.kr/reservation/login.php": {
    "v": "ERROR",
-   "why": "ECONNREFUSED",
+   "why": "EHOSTUNREACH",
    "kind": "booking.url",
-   "at": "2026-10-27T23:14:01.919Z"
+   "at": "2026-11-04T00:11:28.019Z"
   },
   "100649|http://iolleinforest.com/": {
    "v": "MATCH",
@@ -17189,7 +17212,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:15.284Z"
+   "at": "2026-11-04T00:11:26.600Z"
   },
   "7670|http://tiger-camping2.com/?intro=ok": {
    "v": "MATCH",
@@ -17238,7 +17261,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:14.869Z"
+   "at": "2026-11-04T00:11:26.966Z"
   },
   "2232|http://www.xn--sk4b78fdsau01b.net/": {
    "v": "MATCH",
@@ -17325,9 +17348,9 @@
   },
   "3157|http://rest.gyeongju.go.kr/": {
    "v": "ERROR",
-   "why": "ECONNRESET",
+   "why": "EHOSTUNREACH",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:03.378Z"
+   "at": "2026-11-04T00:11:33.780Z"
   },
   "101284|http://www.laforet130.com/": {
    "v": "MATCH",
@@ -17371,7 +17394,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:21.441Z"
+   "at": "2026-11-04T00:11:27.976Z"
   },
   "873|http://xn--989a5bx9vuzab11ae0htwlp5nruo17c.kr/": {
    "v": "MATCH",
@@ -17382,10 +17405,9 @@
   },
   "2956|https://cheonghwasancamp.imweb.me/": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "rendered": true,
+   "why": "글이 거의 없음",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:17.626Z"
+   "at": "2026-11-04T00:11:27.979Z"
   },
   "6972|http://daecheonbeach.kr/": {
    "v": "MATCH",
@@ -17443,19 +17465,19 @@
    "v": "PLATFORM_ROOT",
    "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
    "kind": "homepage",
-   "at": "2026-10-27T23:10:31.633Z"
+   "at": "2026-11-04T00:08:42.054Z"
   },
   "100935|http://www.glamhi.co.kr/html/index.html": {
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:22.417Z"
+   "at": "2026-11-04T00:11:29.653Z"
   },
   "648|http://www.xn--9d0b43h4yg0qv71iwjbnza.com/plugin/_ypension101/status.index.php?mode=step1": {
    "v": "ERROR",
-   "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "booking.url",
-   "at": "2026-10-27T23:14:23.757Z"
+   "at": "2026-11-04T00:11:48.865Z"
   },
   "548|http://www.nabomresort.com/": {
    "v": "MATCH",
@@ -17489,9 +17511,9 @@
   },
   "648|http://www.xn--9d0b43h4yg0qv71iwjbnza.com/": {
    "v": "ERROR",
-   "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+   "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:28.929Z"
+   "at": "2026-11-04T00:12:00.359Z"
   },
   "100915|http://www.sunsetcoast.kr/": {
    "v": "MATCH",
@@ -17505,7 +17527,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:22.763Z"
+   "at": "2026-11-04T00:11:35.186Z"
   },
   "100960|http://www.gimjeju.co.kr/": {
    "v": "MATCH",
@@ -17526,13 +17548,13 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:23.718Z"
+   "at": "2026-11-04T00:11:36.543Z"
   },
   "1703|http://pension.x-y.net/prs/skins/skin-ex/index.html?mode=window&pensionId=sogeumgang&menuId=": {
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "booking.url",
-   "at": "2026-10-27T23:14:25.868Z"
+   "at": "2026-11-04T00:11:47.865Z"
   },
   "100977|https://seaseecamping.modoo.at/": {
    "v": "CLOSED",
@@ -17679,13 +17701,13 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:40.845Z"
+   "at": "2026-11-04T00:11:49.865Z"
   },
   "101223|http://eoeundol.net/": {
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:41.344Z"
+   "at": "2026-11-04T00:11:51.363Z"
   },
   "100468|http://ourforest.co.kr/": {
    "v": "MATCH",
@@ -17715,14 +17737,13 @@
    "v": "ERROR",
    "why": "EAI_AGAIN",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:41.525Z"
+   "at": "2026-11-04T00:11:57.387Z"
   },
   "101201|https://sumcamping.imweb.me/": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "rendered": true,
+   "why": "글이 거의 없음",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:31.590Z"
+   "at": "2026-11-04T00:11:47.329Z"
   },
   "616|http://www.xn--bj0bw9dz1gl4luwfumy.kr/": {
    "v": "MATCH",
@@ -17896,9 +17917,9 @@
   },
   "100755|http://xn--bj0bw3p2d313dx8niqc4wb.com/": {
    "v": "ERROR",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "why": "EHOSTUNREACH",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:45.339Z"
+   "at": "2026-11-04T00:11:46.513Z"
   },
   "101100|https://www.ok114.co.kr/ntnw/search/searchCompanyOfMainPh.crz;jsessionid=5F398340713BC38CEE034B8EE094B8AE?phone_number=01095749268": {
    "v": "MATCH",
@@ -17925,7 +17946,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:33.002Z"
+   "at": "2026-11-04T00:11:49.307Z"
   },
   "100264|https://www.ok114.co.kr/ntnw/search/searchCompanyOfMainPh.crz?phone_number=0418811662": {
    "v": "MATCH",
@@ -17959,12 +17980,11 @@
   },
   "101052|http://www.5th-season.co.kr/html/index.html": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
+   "why": "글이 거의 없음",
    "title": "다섯번째계절펜션과 오로라카라반",
    "final": "https://www.5th-season.co.kr/html/index.html",
-   "rendered": true,
    "kind": "homepage",
-   "at": "2026-10-27T23:14:35.535Z"
+   "at": "2026-11-04T00:11:48.807Z"
   },
   "101192|https://breezehill.co.kr/?param=index": {
    "v": "MATCH",
@@ -17992,13 +18012,13 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:36.792Z"
+   "at": "2026-11-04T00:11:49.884Z"
   },
   "1184|https://ioms.foresttrip.go.kr/": {
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:47.839Z"
+   "at": "2026-11-04T00:12:08.352Z"
   },
   "101230|https://thebomnal2791.modoo.at/": {
    "v": "CLOSED",
@@ -18018,7 +18038,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:38.990Z"
+   "at": "2026-11-04T00:11:57.691Z"
   },
   "101231|http://www.camp301.co.kr/index.html": {
    "v": "BLOCKED",
@@ -18256,7 +18276,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:40.275Z"
+   "at": "2026-11-04T00:11:57.888Z"
   },
   "1447|http://bitoresort.co.kr/": {
    "v": "MATCH",
@@ -18341,7 +18361,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:14:41.797Z"
+   "at": "2026-11-04T00:11:58.754Z"
   },
   "7499|http://wwww.happycamping.co.kr/": {
    "v": "MATCH",
@@ -18355,19 +18375,19 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:42.820Z"
+   "at": "2026-11-04T00:11:59.775Z"
   },
   "3627|http://dscamp.kr/": {
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:42.603Z"
+   "at": "2026-11-04T00:12:00.188Z"
   },
   "1723|https://camp.dytc.or.kr:452/": {
    "v": "ERROR",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
    "kind": "booking.url",
-   "at": "2026-10-27T23:14:43.419Z"
+   "at": "2026-11-04T00:12:01.182Z"
   },
   "101454|https://mwdpp.modoo.at/": {
    "v": "CLOSED",
@@ -18378,9 +18398,9 @@
   },
   "138|http://www.haman.go.kr/main/": {
    "v": "ERROR",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "why": "EAI_AGAIN",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:58.820Z"
+   "at": "2026-11-04T00:12:10.909Z"
   },
   "100248|https://www.sj-haelim.com/": {
    "v": "MATCH",
@@ -18547,11 +18567,9 @@
   },
   "1940|http://sunny-valley.co.kr/": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "final": "about:blank#blocked",
-   "rendered": true,
+   "why": "글이 거의 없음",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:46.336Z"
+   "at": "2026-11-04T00:12:01.801Z"
   },
   "217|http://www.starcampingland.com/": {
    "v": "MATCH",
@@ -18632,7 +18650,7 @@
    "v": "ERROR",
    "why": "HTTP 502",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:44.835Z"
+   "at": "2026-11-04T00:12:02.304Z"
   },
   "101307|https://www.xn--939ak03az9hh4gz2i.com/": {
    "v": "MATCH",
@@ -18661,7 +18679,7 @@
    "v": "ERROR",
    "why": "UNABLE_TO_GET_ISSUER_CERT_LOCALLY",
    "kind": "booking.url",
-   "at": "2026-10-27T23:14:44.023Z"
+   "at": "2026-11-04T00:12:02.022Z"
   },
   "7318|https://xn--om2bi2o9qdy7a48exzk3vf68fzzd.kr/": {
    "v": "MATCH",
@@ -18674,7 +18692,7 @@
    "v": "ERROR",
    "why": "UNABLE_TO_GET_ISSUER_CERT_LOCALLY",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:45.128Z"
+   "at": "2026-11-04T00:12:04.720Z"
   },
   "7760|http://cmng.camperstory.com/?1779": {
    "v": "MATCH",
@@ -18935,7 +18953,7 @@
    "v": "ERROR",
    "why": "HTTP 500",
    "kind": "homepage",
-   "at": "2026-10-27T23:14:52.783Z"
+   "at": "2026-11-04T00:12:06.729Z"
   },
   "100503|https://www.bookingplay.co.kr/partner/item/2818/calendar_main/": {
    "v": "UNVERIFIED",
@@ -19010,10 +19028,9 @@
   },
   "100504|http://esfishing.edenstore.co.kr/": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "rendered": true,
+   "why": "글이 거의 없음",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:01.201Z"
+   "at": "2026-11-04T00:12:11.178Z"
   },
   "100526|http://campmap.co.kr/vr/raonvalley/": {
    "v": "MATCH",
@@ -19034,25 +19051,25 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:14:56.933Z"
+   "at": "2026-11-04T00:12:11.174Z"
   },
   "100561|http://xn--bj0b46p1mnckn6d.com/prolog_2.php": {
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:02.851Z"
+   "at": "2026-11-04T00:12:12.490Z"
   },
   "100457|http://www.munduri.co.kr/home/reservePage.do": {
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "booking.url",
-   "at": "2026-10-27T23:15:05.308Z"
+   "at": "2026-11-04T00:12:22.343Z"
   },
   "100503|http://xn--bj0b46p1nc8ujd70a.com/main.html": {
    "v": "ERROR",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "why": "EAI_AGAIN",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:06.306Z"
+   "at": "2026-11-04T00:12:05.800Z"
   },
   "100586|https://doldam-camp.imweb.me/Reservation": {
    "v": "MATCH",
@@ -19115,7 +19132,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:16.787Z"
+   "at": "2026-11-04T00:12:33.835Z"
   },
   "100627|https://subokcamping.modoo.at/": {
    "v": "CLOSED",
@@ -19133,9 +19150,9 @@
   },
   "100568|http://naerincheon.co.kr/": {
    "v": "ERROR",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "why": "EAI_AGAIN",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:09.799Z"
+   "at": "2026-11-04T00:12:25.824Z"
   },
   "100643|https://seocheoncamping.modoo.at/": {
    "v": "CLOSED",
@@ -19205,14 +19222,13 @@
    "v": "ERROR",
    "why": "ERR_TLS_CERT_ALTNAME_INVALID",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:09.138Z"
+   "at": "2026-11-04T00:12:13.409Z"
   },
   "100776|https://fleurglamping.imweb.me/reservation": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "rendered": true,
+   "why": "글이 거의 없음",
    "kind": "booking.url",
-   "at": "2026-10-27T23:15:10.714Z"
+   "at": "2026-11-04T00:12:12.369Z"
   },
   "719|https://mall.goryeong.go.kr/Accommodation": {
    "v": "MATCH",
@@ -19225,7 +19241,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:09.461Z"
+   "at": "2026-11-04T00:12:13.454Z"
   },
   "719|https://mall.goryeong.go.kr/PlaceIntro": {
    "v": "MATCH",
@@ -19236,10 +19252,9 @@
   },
   "100776|https://fleurglamping.imweb.me/18": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "rendered": true,
+   "why": "글이 거의 없음",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:14.580Z"
+   "at": "2026-11-04T00:12:13.561Z"
   },
   "7567|https://www.wooripension.com/woori_inside/singly_reserve/all_calendar.asp?pension_code=w0104041": {
    "v": "MATCH",
@@ -19265,9 +19280,9 @@
   },
   "100635|http://www.poolbeachcaravan.com/": {
    "v": "ERROR",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "why": "EHOSTUNREACH",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:14.292Z"
+   "at": "2026-11-04T00:12:11.741Z"
   },
   "100998|http://chunwangbong.kr/": {
    "v": "MATCH",
@@ -19299,13 +19314,13 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "booking.url",
-   "at": "2026-10-27T23:15:20.783Z"
+   "at": "2026-11-04T00:12:28.340Z"
   },
   "101291|http://xn--9t4bi8e0skupa.kr/": {
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:11.065Z"
+   "at": "2026-11-04T00:12:13.838Z"
   },
   "101289|https://camp699inje.imweb.me/": {
    "v": "MATCH",
@@ -19327,7 +19342,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:15:14.452Z"
+   "at": "2026-11-04T00:12:15.405Z"
   },
   "101299|http://glamtamdao.co.kr/": {
    "v": "BLOCKED",
@@ -19340,10 +19355,9 @@
   },
   "3170|http://xn--vv5br1kvwdhxcbd.nasoft.kr/": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "rendered": true,
+   "why": "글이 거의 없음",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:16.978Z"
+   "at": "2026-11-04T00:12:15.917Z"
   },
   "7907|https://www.haemicamping.com/%ED%95%B4%EB%AF%B8%EC%9D%8D%EC%84%B1%EC%97%AD%EC%82%AC%EC%BA%A0%ED%95%91%EC%9E%A5-%EC%98%88%EC%95%BD": {
    "v": "MATCH",
@@ -19391,7 +19405,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:32.265Z"
+   "at": "2026-11-04T00:12:39.829Z"
   },
   "100415|https://theoneglamping.modoo.at//": {
    "v": "CLOSED",
@@ -19453,7 +19467,7 @@
    "v": "ERROR",
    "why": "timeout",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:40.140Z"
+   "at": "2026-11-04T00:12:42.854Z"
   },
   "1141|http://www.mjdcamp.kr/": {
    "v": "UNVERIFIED",
@@ -19555,7 +19569,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:36.258Z"
+   "at": "2026-11-04T00:12:35.334Z"
   },
   "100661|https://riverwith.co.kr/": {
    "v": "MATCH",
@@ -19645,7 +19659,7 @@
    "v": "ERROR",
    "why": "ERR_TLS_CERT_ALTNAME_INVALID",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:16.329Z"
+   "at": "2026-11-04T00:12:16.533Z"
   },
   "101256|http://miramarcamp.modoo.at/": {
    "v": "CLOSED",
@@ -19672,12 +19686,10 @@
   },
   "1258|http://www.xn--jk1b58ow4dk3hjmjxnk0wb.com/": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
+   "why": "글이 거의 없음",
    "title": "http://xn--o39aw5khsb87mbng8it24i9se.kr/",
-   "final": "chrome-error://chromewebdata/",
-   "rendered": true,
    "kind": "homepage",
-   "at": "2026-10-27T23:16:59.110Z"
+   "at": "2026-11-04T00:11:58.317Z"
   },
   "1807|http://songhotour.yd21.go.kr/": {
    "v": "UNVERIFIED",
@@ -19730,7 +19742,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "booking.url",
-   "at": "2026-10-27T23:15:18.113Z"
+   "at": "2026-11-04T00:12:17.691Z"
   },
   "3271|https://camp.pcfac.or.kr/": {
    "v": "MATCH",
@@ -19750,7 +19762,7 @@
    "v": "ERROR",
    "why": "HTTP 403",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:18.249Z"
+   "at": "2026-11-04T00:12:18.822Z"
   },
   "8206|https://www.clovercamp.co.kr/": {
    "v": "MATCH",
@@ -19763,7 +19775,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:36.259Z"
+   "at": "2026-11-04T00:12:35.334Z"
   },
   "8175|https://jindongri.zapza.me/": {
    "v": "UNVERIFIED",
@@ -19830,7 +19842,7 @@
    "v": "ERROR",
    "why": "ECONNRESET",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:19.990Z"
+   "at": "2026-11-04T00:12:26.911Z"
   },
   "100011|https://wavepark.co.kr/wave/caravanInfo": {
    "v": "MATCH",
@@ -19895,7 +19907,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:38.255Z"
+   "at": "2026-11-04T00:12:37.833Z"
   },
   "osm-r17862382|https://yongsanparkstory.kr/": {
    "v": "MATCH",
@@ -19908,10 +19920,9 @@
   },
   "osm-w1185185173|http://marinepark.cwsisul.or.kr/": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "rendered": true,
+   "why": "글이 거의 없음",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:27.559Z"
+   "at": "2026-11-04T00:12:35.388Z"
   },
   "osm-w486063098|https://www.hwadamsup.com": {
    "v": "MATCH",
@@ -19981,19 +19992,19 @@
    "v": "ERROR",
    "why": "ECONNREFUSED",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:30.024Z"
+   "at": "2026-11-04T00:12:37.024Z"
   },
   "osm-w1181262295|https://www.cwg.go.kr/dmz_tracking/index.do": {
    "v": "ERROR",
    "why": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:23.043Z"
+   "at": "2026-11-04T00:12:40.292Z"
   },
   "8137|https://www.the-village.co.kr/": {
    "v": "ERROR",
-   "why": "UND_ERR_CONNECT_TIMEOUT",
+   "why": "ERR_SSL_WRONG_VERSION_NUMBER",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:54.726Z"
+   "at": "2026-11-04T00:12:41.407Z"
   },
   "rf-cpx1a2|http://hwawon.dssiseol.or.kr/hwawon/html/main.html": {
    "v": "UNVERIFIED",
@@ -20002,10 +20013,10 @@
    "at": "2026-10-23T21:01:13.314Z"
   },
   "rf-s1vjrv|https://www.chungbuk.go.kr/forest/contents.do?key=2110": {
-   "v": "ERROR",
-   "why": "ECONNRESET",
+   "v": "UNVERIFIED",
+   "why": "robots.txt 차단",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:32.993Z"
+   "at": "2026-11-04T00:12:37.330Z"
   },
   "rf-1j68bms|http://jucheon.com/": {
    "v": "NO_SIGNAL",
@@ -20062,7 +20073,7 @@
    "v": "ERROR",
    "why": "UND_ERR_CONNECT_TIMEOUT",
    "kind": "homepage",
-   "at": "2026-10-27T23:15:46.242Z"
+   "at": "2026-11-04T00:12:53.315Z"
   },
   "pdu-rooftopthesim-goyang|https://www.rooftopthesim.com": {
    "v": "MATCH",
@@ -20151,7 +20162,7 @@
   "697|http://dalbitgoun.co.kr/index.html": {
    "v": "DEAD",
    "why": "DNS 없음(도메인 없음)",
-   "at": "2026-10-27T23:01:07.278Z"
+   "at": "2026-11-04T00:01:04.154Z"
   },
   "8142|https://map.naver.com/v5/search/%EC%88%98%EC%8A%B9%EB%8C%80%EC%B2%B4%ED%97%98%ED%9C%B4%EC%96%91%EB%A7%88%EC%9D%84/place/37684583?c=14230060.3541047,4266686.9861074,13,0,0,0,dh&isCorrectAnswer=true": {
    "v": "UNVERIFIED",
@@ -20460,11 +20471,10 @@
   },
   "930|http://r.camperstory.com/?1419": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "final": "about:blank",
-   "rendered": true,
+   "why": "글이 거의 없음",
+   "final": "https://m.thankqcamping.com/resv/view.hbb?cseq=1419&go_main=Y&path=RP",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:29.531Z"
+   "at": "2026-11-04T00:09:19.809Z"
   },
   "1715|https://reservation.knps.or.kr/contents/C/serviceGuide.do?prdDvcd=C&parkId=B01&deptId=B011006": {
    "v": "MATCH",
@@ -20499,27 +20509,24 @@
   },
   "913|http://r.camperstory.com/?1607": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "final": "about:blank",
-   "rendered": true,
+   "why": "글이 거의 없음",
+   "final": "https://m.thankqcamping.com/resv/view.hbb?cseq=1607&go_main=Y&path=RP",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:35.803Z"
+   "at": "2026-11-04T00:09:21.160Z"
   },
   "800|http://r.camperstory.com/?1908": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "final": "about:blank",
-   "rendered": true,
+   "why": "글이 거의 없음",
+   "final": "https://m.thankqcamping.com/resv/view.hbb?cseq=1908&go_main=Y&path=RP",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:39.916Z"
+   "at": "2026-11-04T00:09:22.512Z"
   },
   "2399|http://r.camperstory.com/?1865": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "final": "about:blank",
-   "rendered": true,
+   "why": "글이 거의 없음",
+   "final": "https://m.thankqcamping.com/resv/view.hbb?cseq=1865&go_main=Y&path=RP",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:44.025Z"
+   "at": "2026-11-04T00:09:23.863Z"
   },
   "101520|https://www.foresttrip.go.kr/0304": {
    "v": "MATCH",
@@ -20548,11 +20555,10 @@
   },
   "7216|http://r.camperstory.com/?1380": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "final": "about:blank",
-   "rendered": true,
+   "why": "글이 거의 없음",
+   "final": "https://m.thankqcamping.com/resv/view.hbb?cseq=1380&go_main=Y&path=RP",
    "kind": "homepage",
-   "at": "2026-10-27T23:11:50.072Z"
+   "at": "2026-11-04T00:09:25.214Z"
   },
   "131|http://r.camperstory.com/?185": {
    "v": "MATCH",
@@ -20654,11 +20660,10 @@
   },
   "2783|http://r.camperstory.com/?2045": {
    "v": "THIN",
-   "why": "그려도 글이 거의 없음",
-   "final": "about:blank",
-   "rendered": true,
+   "why": "글이 거의 없음",
+   "final": "https://m.thankqcamping.com/resv/view.hbb?cseq=2045&go_main=Y&path=RP",
    "kind": "homepage",
-   "at": "2026-10-27T23:12:26.844Z"
+   "at": "2026-11-04T00:09:32.832Z"
   },
   "1184|https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030107": {
    "v": "MATCH",
@@ -20688,6 +20693,162 @@
    "title": "그린&블루 캠핑장",
    "kind": "homepage",
    "at": "2026-10-27T23:13:31.438Z"
+  },
+  "1511|https://booking.naver.com/booking/3/bizes/438": {
+   "v": "UNVERIFIED",
+   "why": "자동 확인 차단 플랫폼",
+   "at": null
+  },
+  "100193|https://booking.naver.com/booking/3/bizes/629226": {
+   "v": "UNVERIFIED",
+   "why": "자동 확인 차단 플랫폼",
+   "at": null
+  },
+  "100193|https://blog.naver.com/seonjangnoel": {
+   "v": "UNVERIFIED",
+   "why": "자동 확인 차단 플랫폼",
+   "at": null
+  },
+  "102143|https://map.naver.com/p/entry/place/1958601010?c=15.00,0,0,1,dh": {
+   "v": "UNVERIFIED",
+   "why": "자동 확인 차단 플랫폼",
+   "at": null
+  },
+  "929|https://m.thankqcamping.com/main.hbb": {
+   "v": "PLATFORM_ROOT",
+   "why": "예약 플랫폼 첫 화면(업장 페이지 아님)",
+   "kind": "booking.url",
+   "at": "2026-11-04T00:08:42.046Z"
+  },
+  "929|https://cafe.naver.com/cheongdoigocamping": {
+   "v": "UNVERIFIED",
+   "why": "자동 확인 차단 플랫폼",
+   "at": null
+  },
+  "100673|https://naver.me/FfsMw7Qg": {
+   "v": "UNVERIFIED",
+   "why": "자동 확인 차단 플랫폼",
+   "at": null
+  },
+  "1511|http://www.mtcampsite.co.kr/default/": {
+   "v": "MATCH",
+   "why": "이름 “산으로”",
+   "title": "산으로캠핑장",
+   "kind": "homepage",
+   "at": "2026-11-04T00:08:43.195Z"
+  },
+  "rf-1i5joiz|http://www.foresttrip.go.kr/": {
+   "v": "PORTAL",
+   "why": "공공 통합 예약 창구(www.foresttrip.go.kr)",
+   "title": "숲나들e",
+   "final": "https://www.foresttrip.go.kr/",
+   "kind": "homepage",
+   "at": "2026-11-04T00:11:03.448Z"
+  },
+  "rf-14xm2hg|http://www.foresttrip.go.kr/": {
+   "v": "PORTAL",
+   "why": "공공 통합 예약 창구(www.foresttrip.go.kr)",
+   "title": "숲나들e",
+   "final": "https://www.foresttrip.go.kr/",
+   "kind": "homepage",
+   "at": "2026-11-04T00:11:04.802Z"
+  },
+  "rf-1m1v3jf|http://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030059": {
+   "v": "MATCH",
+   "why": "이름 “자연휴양림”",
+   "title": "거제자연휴양림",
+   "final": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030059",
+   "kind": "homepage",
+   "at": "2026-11-04T00:11:07.317Z"
+  },
+  "rf-1yykj5u|http://www.foresttrip.go.kr/": {
+   "v": "PORTAL",
+   "why": "공공 통합 예약 창구(www.foresttrip.go.kr)",
+   "title": "숲나들e",
+   "final": "https://www.foresttrip.go.kr/",
+   "kind": "homepage",
+   "at": "2026-11-04T00:11:08.676Z"
+  },
+  "rf-ixkoe7|http://www.foresttrip.go.kr/": {
+   "v": "PORTAL",
+   "why": "공공 통합 예약 창구(www.foresttrip.go.kr)",
+   "title": "숲나들e",
+   "final": "https://www.foresttrip.go.kr/",
+   "kind": "homepage",
+   "at": "2026-11-04T00:11:10.019Z"
+  },
+  "park-48820-00001-n71qm|https://m.thankqcamping.com/resv/view.hbb?cseq=16861": {
+   "v": "MATCH",
+   "why": "이름 “남산공원”",
+   "title": "땡큐캠핑 | 남산공원 힐링캠핑장 | 경남 | 오토캠핑",
+   "kind": "thankq",
+   "at": "2026-11-04T00:12:20.977Z"
+  },
+  "park-46770-00014-qc3lb|https://m.thankqcamping.com/resv/view.hbb?cseq=19772": {
+   "v": "MATCH",
+   "why": "이름 “수변노을공원”",
+   "title": "땡큐캠핑 | 고흥만수변노을공원 캠핑장 | 전남 | 오토캠핑",
+   "kind": "thankq",
+   "at": "2026-11-04T00:12:22.537Z"
+  },
+  "osm-w513330739|https://m.thankqcamping.com/resv/view.hbb?cseq=12923": {
+   "v": "MATCH",
+   "why": "이름 “죽녹원”",
+   "title": "땡큐캠핑 | 담양죽녹원게스트하우스 | 전남 | 펜션",
+   "kind": "thankq",
+   "at": "2026-11-04T00:12:23.911Z"
+  },
+  "osm-w858869210|https://m.thankqcamping.com/resv/view.hbb?cseq=4785": {
+   "v": "MATCH",
+   "why": "이름 “서운동산”",
+   "title": "땡큐캠핑 | 포천 서운동산 펜션 | 경기 | 펜션",
+   "kind": "thankq",
+   "at": "2026-11-04T00:12:25.257Z"
+  },
+  "rf-indei4|http://foresttrip.go.kr/": {
+   "v": "PORTAL",
+   "why": "공공 통합 예약 창구(foresttrip.go.kr)",
+   "title": "숲나들e",
+   "final": "https://foresttrip.go.kr/",
+   "kind": "homepage",
+   "at": "2026-11-04T00:12:38.993Z"
+  },
+  "rf-kg4m5r|http://www.kookmang.co.kr/": {
+   "v": "MATCH",
+   "why": "이름 “국망봉자연휴양림”",
+   "title": "국망봉자연휴양림",
+   "kind": "homepage",
+   "at": "2026-11-04T00:12:39.420Z"
+  },
+  "rf-12tr8dy|http://www.ijinsan.co.kr/": {
+   "v": "MATCH",
+   "why": "이름 “대둔산자연휴양림”",
+   "title": "대둔산자연휴양림",
+   "final": "http://www.ijinsan.co.kr/main/main.html",
+   "kind": "homepage",
+   "at": "2026-11-04T00:12:39.773Z"
+  },
+  "rf-1udhj6l|http://foresttrip.go.kr/": {
+   "v": "PORTAL",
+   "why": "공공 통합 예약 창구(foresttrip.go.kr)",
+   "title": "숲나들e",
+   "final": "https://foresttrip.go.kr/",
+   "kind": "homepage",
+   "at": "2026-11-04T00:12:40.330Z"
+  },
+  "rf-1ub41x7|https://www.eumseong.go.kr/forest/index.do": {
+   "v": "MATCH",
+   "why": "이름 “수레의산자연휴양림”",
+   "title": "음성군 자연휴양림",
+   "kind": "homepage",
+   "at": "2026-11-04T00:12:42.711Z"
+  },
+  "rf-1xmqyui|https://www.eumseong.go.kr/forest/index.do": {
+   "v": "MATCH",
+   "why": "이름 “백야자연휴양림”",
+   "title": "음성군 자연휴양림",
+   "kind": "homepage",
+   "at": "2026-11-04T00:12:44.603Z"
   }
  }
 }

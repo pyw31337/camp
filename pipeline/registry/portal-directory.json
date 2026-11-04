@@ -1,6 +1,6 @@
 {
  "note": "공용 예약 사이트의 업장별 주소(숲나들e 휴양림 페이지·국립공원 야영장 안내 페이지). scripts/sync-portal-directory.mjs가 갱신하고 scripts/build-portal-links.mjs가 예약 버튼을 메인 화면 대신 이 주소로 바꾼다.",
- "updated_at": "2026-10-27T23:10:31.131Z",
+ "updated_at": "2026-11-04T00:08:41.665Z",
  "foresttrip": [
   {
    "id": "0103",
