@@ -661,6 +661,30 @@ const THEME_FILES = {
   REVIEWS: "forest.webp",
 };
 const themeImg = (k) => `${ASSETS_BASE}images/themes/${THEME_FILES[k] ?? "valley.webp"}`;
+// t47u(소유자 2026-11-04): 이색 캠핑장 테마 카드 — 스펙은 찜 목록처럼 한 줄로 접고, 아래에 ‘왜 특별한지’(분류 뱃지 + 근거 문장 + 근거 사진)를 같은 틀로 보인다.
+// 근거는 배포 때 pipeline/lib/unique-camps.mjs uniqueCard()가 고른 unique-cards.json { id: { c: 대표분류, t: 문장, s: 출처, p?: {th,u,s} } }.
+const UQ_ICON = { hotspring: "onsen", spa: "bath", warmpool: "hotwater", pool: "swim", horse: "paw", animal: "paw", kidscafe: "kidscafe", indoorplay: "playground", treehouse: "forest", stay: "glamping", leisure: "leports", farm: "experience", valley: "drop" };
+let UQ_CARDS = null, uqCardsP = null;
+function loadUqCards() {
+  if (!uqCardsP) uqCardsP = fetch(`${DATA}unique-cards.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})).then((j) => (UQ_CARDS = j || {}));
+  return uqCardsP;
+}
+function uniqueWhyHtml(c) {
+  const ev = UQ_CARDS?.[String(c.id)];
+  const lbl = Object.fromEntries(UNIQUE_SUBS);
+  const keys = [...(c.uq ?? [])].sort((a, b) => (b === ev?.c) - (a === ev?.c));
+  const tags = keys.filter((k) => lbl[k]).map((k) => `<li class="uq-tag${k === ev?.c ? " is-main" : ""}">${ic(UQ_ICON[k] ?? "spark")}${esc(lbl[k])}</li>`).join("");
+  const p = ev?.p;
+  const srcTxt = [ev?.s, p?.s && p.s !== "." ? `사진 ${p.s}` : ""].filter(Boolean).join(" · ");
+  const txt = ev?.t ? (ev.s === "업장 부대시설" ? `부대시설: ${ev.t}` : ev.t) : "";
+  return `<div class="card-group uq-why">
+    <ul class="uq-tags" aria-label="이색 포인트">${tags}</ul>
+    ${txt ? `<div class="uq-ev${p ? " has-ph" : ""}">
+      ${p ? `<a class="uq-ev-ph" href="${esc(p.u || "#")}" target="_blank" rel="noopener" aria-label="근거 사진 원문 보기"><img src="${esc(p.th)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.uq-ev').classList.remove('has-ph');this.parentElement.remove()"></a>` : ""}
+      <div class="uq-ev-txt"><p>${esc(txt)}</p>${srcTxt ? `<small>${esc(srcTxt)}</small>` : ""}</div>
+    </div>` : ""}
+  </div>`;
+}
 // 이색 캠핑장 하위 분류(라벨은 pipeline/lib/unique-camps.mjs UNIQUE_CATS와 같은 순서·이름)
 // t45u(2026-11-04): 9개 묶음 → 12개 낱개, 여러 개 골라 OR로 보기. ‘계곡 바로 옆’은 칩 없이 테마 포함만 유지.
 const UNIQUE_SUBS = [["hotspring", "노천탕"], ["spa", "스파"], ["warmpool", "사계절온수풀"], ["pool", "수영장"], ["horse", "승마"], ["animal", "동물체험"], ["kidscafe", "키즈카페"], ["indoorplay", "실내놀이"], ["treehouse", "트리하우스"], ["stay", "이색숙소"], ["leisure", "레포츠"], ["farm", "체험"], ["valley", "계곡"]];
@@ -1431,7 +1455,7 @@ function card(c, i = 0, opts) {
           </div>
         </div>
       </div>
-      ${savedMemo ? savedDetailsHtml(c) : `
+      ${theme === "UNIQUE" && c.uq?.length ? `${savedDetailsHtml(c)}${uniqueWhyHtml(c)}` : savedMemo ? savedDetailsHtml(c) : `
         <div class="card-group card-group-types">
           ${typeRow(c).html}
         </div>
@@ -4915,10 +4939,17 @@ function bindTheme(themeKey) {
   };
 
   renderThemeGrid();
+  if (themeKey === "UNIQUE" && !UQ_CARDS) loadUqCards().then(() => { if ($("[data-theme-grid]")) renderThemeGrid(); });
   initDraggableRails($(".theme-body"));
 
   const v = $("#view");
   const onClick = (e) => {
+    const tg = e.target.closest("[data-theme-grid] [data-saved-card-spec-toggle]");
+    if (tg) {
+      const group = tg.closest("[data-saved-card-spec]"), panel = $("[data-saved-card-spec-panel]", group);
+      if (panel) { const open = panel.hidden; panel.hidden = !open; tg.setAttribute("aria-expanded", String(open)); group.classList.toggle("is-open", open); }
+      return;
+    }
     const u = e.target.closest("[data-theme-uq]");
     if (u) {
       const k = u.dataset.themeUq;

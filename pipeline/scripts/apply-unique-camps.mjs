@@ -4,7 +4,7 @@
 // 사용: node pipeline/scripts/apply-unique-camps.mjs --data camping-atlas/dist/client/explore/data
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { UNIQUE_CATS, classifyUnique } from "../lib/unique-camps.mjs";
+import { UNIQUE_CATS, classifyUnique, uniqueCard } from "../lib/unique-camps.mjs";
 
 const i = process.argv.indexOf("--data");
 const dir = i > 0 ? process.argv[i + 1] : "camping-atlas/public/explore/data";
@@ -12,6 +12,7 @@ const file = join(dir, "campgrounds.json");
 if (!existsSync(file)) { console.log(`::warning::${file} 없음 — 이색 분류 건너뜀`); process.exit(0); }
 const camps = JSON.parse(readFileSync(file, "utf8"));
 const evidence = {};
+const cards = {}; // t47u: 카드용 ‘왜 특별한지’ 문장·사진(unique-cards.json)
 const counts = Object.fromEntries(UNIQUE_CATS.map((c) => [c.id, 0]));
 for (const c of camps) {
   if (c.status === "폐업") continue;
@@ -23,8 +24,13 @@ for (const c of camps) {
   if (!ids.length) continue;
   c.uq = ids;
   evidence[c.id] = r;
+  const uc = uniqueCard(c, det, r);
+  if (uc) cards[c.id] = uc;
   for (const id of ids) counts[id]++;
 }
 writeFileSync(file, JSON.stringify(camps));
 writeFileSync(join(dir, "unique-camps.json"), JSON.stringify({ generated_at: new Date().toISOString(), cats: UNIQUE_CATS.map(({ id, label }) => ({ id, label })), counts, total: Object.keys(evidence).length, evidence }));
+writeFileSync(join(dir, "unique-cards.json"), JSON.stringify(cards));
+const withT = Object.values(cards).filter((x) => x.t).length, withP = Object.values(cards).filter((x) => x.p).length;
+console.log(`이색 카드 근거: 문장 ${withT}/${Object.keys(cards).length} · 사진 ${withP}`);
 console.log(`이색 캠핑장 ${Object.keys(evidence).length}곳:`, UNIQUE_CATS.map((x) => `${x.label} ${counts[x.id]}`).join(" · "));

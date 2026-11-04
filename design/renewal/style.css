@@ -4405,3 +4405,19 @@ img.img-gone { visibility: hidden; }
 .near-sheet .near-q, .near-sheet .near-here { box-sizing: border-box; width: 100%; min-width: 0; }
 .near-sheet .near-here { display: inline-flex; align-items: center; border-radius: 14px; background: var(--sel); color: var(--on-sel); }
 .near-sheet .near-here .ic, .near-sheet .near-opt .ic { width: 18px; height: 18px; flex: none; }
+
+/* t47u: 이색 캠핑장 테마 카드 — ‘왜 특별한지’ 블록(분류 뱃지 → 근거 문장 → 출처, 사진은 왼쪽 정사각). 스펙은 .saved-card-spec 한 줄로 접힘. */
+.uq-why { display: grid; gap: 8px; padding-top: 10px; border-top: 1px solid var(--line); }
+.uq-tags { display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.uq-tag { display: inline-flex; align-items: center; gap: 3px; height: 22px; padding: 0 8px 0 6px; border-radius: 999px; background: var(--accent-tint); color: var(--ink-2); font-size: .72rem; font-weight: 700; line-height: 1; white-space: nowrap; }
+.uq-tag .ic { width: 13px; height: 13px; color: var(--accent); }
+.uq-tag.is-main { background: var(--accent); color: var(--on-accent); }
+.uq-tag.is-main .ic { color: var(--on-accent); }
+.uq-ev { display: grid; grid-template-columns: 1fr; gap: 10px; align-items: start; }
+.uq-ev.has-ph { grid-template-columns: 56px 1fr; }
+.uq-ev-ph { position: relative; z-index: 2; display: block; width: 56px; height: 56px; border-radius: 10px; overflow: hidden; background: var(--line); }
+.uq-ev-ph img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.uq-ev-txt { min-width: 0; display: grid; gap: 3px; }
+.uq-ev-txt p { margin: 0; color: var(--ink); font-size: .84rem; font-weight: 500; line-height: 1.5; word-break: keep-all; overflow-wrap: anywhere; }
+.uq-ev-txt small { color: var(--ink-3); font-size: .7rem; font-weight: 500; line-height: 1.3; }
+.card .saved-card-spec + .uq-why { margin-top: 0; }

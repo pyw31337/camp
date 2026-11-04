@@ -71,3 +71,61 @@ export function classifyUnique(c, det) {
   }
   return res;
 }
+
+// t47u(2026-11-04): 이색 캠핑장 테마 카드 ‘왜 특별한지’ 블록용 근거. 분류(classifyUnique)는 그대로 두고 화면용 문장·사진만 고른다.
+// 문장은 자르지 않는다(…로 끊지 않음) — 온전한 한 문장만 쓰고, 너무 길면(160자 초과) 다음 후보로 넘어간다.
+// 우선순위: ① 업장 소개 문장 ② 이름이 맞는 방문 후기 본문 문장 ③ 후기 제목 ④ 업장 부대시설 목록에서 만든 문장.
+// 사진: 이름이 맞고 같은 시설 낱말이 제목에 있는 후기·SNS 사진 1장(원문 링크와 함께).
+const RARE_FIRST = ["hotspring", "spa", "warmpool", "horse", "animal", "treehouse", "stay", "leisure", "kidscafe", "indoorplay", "farm", "valley", "pool"];
+const SENT = /(?<=[.!?。])\s+|\n+|\s{2,}|(?<=다)\s+(?=[가-힣A-Z])/;
+const clean = (s) => String(s ?? "").replace(/[\u200b\u00a0]/g, " ").replace(/\s+/g, " ").trim();
+const okSentence = (s, re) => {
+  if (s.length < 12 || s.length > 160 || /…|\.{2,}|[ㄱ-ㅎ]{2,}/.test(s)) return false;
+  return hitsIn(s.replace(SPLIT, " "), re).length > 0 && hitsIn(s, re).length > 0;
+};
+export function uniqueCard(c, det, res) {
+  const ids = RARE_FIRST.filter((id) => res[id]);
+  if (!ids.length) return null;
+  const cats = Object.fromEntries(UNIQUE_CATS.map((x) => [x.id, x]));
+  const core = coreName(c.name);
+  const intros = [c.line, det?.intro, typeof det?.gcd?.intro === "string" ? det.gcd.intro : "", det?.profile?.fields?.EXPERIENCE?.value, det?.profile?.fields?.INTRO?.value].filter((x) => typeof x === "string").map(clean);
+  const revs = core ? (det?.reviews ?? []).filter((r) => typeof r?.title === "string" && r.title.replace(/\s/g, "").includes(core)) : [];
+  let t = "", src = "", cat = "";
+  for (const id of ids) {
+    const re = cats[id].re;
+    for (const txt of intros) { const s = txt.split(SENT).map(clean).find((x) => okSentence(x, re)); if (s) { t = s; src = "업장 소개"; break; } }
+    if (t) { cat = id; break; }
+  }
+  if (!t) for (const id of ids) {
+    if (id === "valley") continue;
+    const re = cats[id].re;
+    for (const r of revs) {
+      const parts = clean(r.snippet).split(SENT).map(clean);
+      if (/…$/.test(clean(r.snippet))) parts.pop(); // 잘린 끝 문장은 쓰지 않는다
+      const okR = (x) => okSentence(x, re) && x.length <= 110 && /(?:다|요|죠|네|음|[.!])$/.test(x) && !/\p{Extended_Pictographic}|\d{1,2}:\d{2}|[|｜#]/u.test(x);
+      const s = parts.slice(1).find(okR) ?? (/^[가-힣A-Za-z0-9]/.test(parts[0] ?? "") && okR(parts[0]) ? parts[0] : "");
+      if (s) { t = s; src = "방문 후기"; break; }
+    }
+    if (t) { cat = id; break; }
+  }
+  if (!t) for (const id of ids) {
+    const m = /^후기 (\d+)건: (.+)$/.exec(res[id]);
+    if (m && !/…|\.\.\.\.?$/.test(m[2]) && m[2].length < 70) { t = clean(m[2]); src = `후기 제목 ${m[1]}건`; cat = id; break; }
+  }
+  if (!t) {
+    const fac = [...new Set(ids.map((id) => /^부대시설: (.+)$/.exec(res[id])?.[1]).filter(Boolean))];
+    if (fac.length) { t = fac.join("·"); src = "업장 부대시설"; cat = ids.find((id) => /^부대시설/.test(res[id])); }
+  }
+  let ph = null;
+  const allRe = new RegExp(ids.map((id) => cats[id].re.source).join("|"));
+  if (core) for (const k of ["sns_images", "reviews"]) {
+    for (const r of det?.[k] ?? []) {
+      const th = r?.thumb, title = typeof r?.title === "string" ? r.title : "";
+      if (!th || !/^https:\/\//.test(th) || !title.replace(/\s/g, "").includes(core) || !hitsIn(title, allRe).length) continue;
+      ph = { th, u: typeof r.url === "string" ? r.url : "", s: clean(r.src ?? "") };
+      break;
+    }
+    if (ph) break;
+  }
+  return { c: cat || ids[0], t, s: src, ...(ph ? { p: ph } : {}) };
+}

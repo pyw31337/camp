@@ -29,3 +29,21 @@ test("t45u: 12개 낱개 분류 — 노천탕/스파, 승마/동물체험, 키�
   assert.ok(r.spa && r.animal && r.kidscafe && r.treehouse);
   assert.ok(!r.hotspring && !r.horse && !r.indoorplay && !r.stay);
 });
+
+// t47u: 이색 카드 근거 — 온전한 문장만(… 없음), 업장 소개 우선, 이름 맞는 후기 사진.
+import { uniqueCard } from "../lib/unique-camps.mjs";
+test("uniqueCard: 업장 소개 문장을 자르지 않고 고르고, 이름이 맞는 후기 사진을 붙인다", () => {
+  const c = { name: "골든쌔들 캠핑장", line: "" };
+  const det = { intro: "산속 조용한 캠핑장이다. 계곡 물소리를 들으며 노천탕에서 별을 볼 수 있다. 주차는 넓다.", sns_images: [{ thumb: "https://x/t.jpg", url: "https://blog/1", title: "골든쌔들 노천탕 후기", src: "블로그" }] };
+  const r = uniqueCard(c, det, { hotspring: "소개: 노천탕", pool: "부대시설: 수영장" });
+  assert.equal(r.c, "hotspring");
+  assert.equal(r.t, "계곡 물소리를 들으며 노천탕에서 별을 볼 수 있다.");
+  assert.equal(r.s, "업장 소개");
+  assert.equal(r.p.th, "https://x/t.jpg");
+});
+test("uniqueCard: 잘린 후기 문장(…)은 쓰지 않고 부대시설로 내려간다", () => {
+  const det = { reviews: [{ title: "골든쌔들 후기", snippet: "수영장이 정말 좋았어요 아이들이 하루종일 놀았…" }] };
+  const r = uniqueCard({ name: "골든쌔들" }, det, { pool: "부대시설: 수영장" });
+  assert.ok(!/…/.test(r.t));
+  assert.equal(r.s, "업장 부대시설");
+});
