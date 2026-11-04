@@ -202,7 +202,7 @@ if (placeSource) {
     const kinds = typesOf(c).join("·");
     const fee = feeOf(c);
     const title = `${c.name} · 렛츠 캠핑`;
-    const description = [`${where}${kinds ? ` ${kinds}` : ""}${c.du ? " 당일 나들이" : " 캠핑장"}`, fee ? `1박 ${fee}` : "", "사이트 규격·전기·화로·주차·주변 정보와 공식 예약처를 한눈에"].filter(Boolean).join(" · ").slice(0, 150);
+    const description = [`${where}${kinds ? ` ${kinds}` : ""}${c.du ? " 당일 나들이" : " 캠핑장"}`, fee ? (/^\s*(1박|당일|무료|\d+박)/.test(fee) ? fee : `1박 ${fee}`) : "", "사이트 규격·전기·화로·주차·주변 정보와 공식 예약처를 한눈에"].filter(Boolean).join(" · ").slice(0, 150);
     const url = `${SITE}place/${encodeURIComponent(id)}/`;
     const image = imageOf(c);
     const imageType = /\.png(?:\?|$)/i.test(image) ? "image/png" : /\.webp(?:\?|$)/i.test(image) ? "image/webp" : "image/jpeg";
