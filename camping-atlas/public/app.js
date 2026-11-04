@@ -2261,7 +2261,7 @@ const HERO_THEMES = [
     titleA: "별 아래 따끈한 노천탕",
     titleB: "노천탕 캠핑",
     summary: "산바람에 김이 피어오르는 노천탕에 몸을 담그는 하룻밤",
-    effect: "steam",
+    effect: "uq-hotspring",
     theme: "UNIQUE"
   },
   {
@@ -2274,7 +2274,7 @@ const HERO_THEMES = [
     titleA: "캔들 불빛 아래 보글보글",
     titleB: "프라이빗 스파 캠핑",
     summary: "하루의 피로를 녹이는 따스한 물거품과 은은한 촛불",
-    effect: "bubbles",
+    effect: "uq-spa",
     theme: "UNIQUE"
   },
   {
@@ -2287,7 +2287,7 @@ const HERO_THEMES = [
     titleA: "눈 내리는 날에도 첨벙",
     titleB: "사계절 온수풀 캠핑",
     summary: "하얀 설경 속 김이 오르는 따뜻한 풀에서 즐기는 물놀이",
-    effect: "steam",
+    effect: "uq-warmpool",
     theme: "UNIQUE"
   },
   {
@@ -2300,7 +2300,7 @@ const HERO_THEMES = [
     titleA: "반짝이는 물빛 속으로",
     titleB: "수영장 캠핑",
     summary: "텐트 바로 앞 파란 수영장에서 하루 종일 첨벙첨벙",
-    effect: "bubbles",
+    effect: "uq-pool",
     theme: "UNIQUE"
   },
   {
@@ -2313,7 +2313,7 @@ const HERO_THEMES = [
     titleA: "노을 진 초원을 달려",
     titleB: "승마 체험 캠핑",
     summary: "말과 교감하며 초원을 거니는 특별한 캠핑의 추억",
-    effect: "green-meadow",
+    effect: "uq-horse",
     theme: "UNIQUE"
   },
   {
@@ -2326,7 +2326,7 @@ const HERO_THEMES = [
     titleA: "보들보들 동물 친구와",
     titleB: "동물 체험 캠핑",
     summary: "아이와 함께 먹이 주고 쓰다듬는 따뜻한 교감의 시간",
-    effect: "cherry-blossom",
+    effect: "uq-animal",
     theme: "UNIQUE"
   },
   {
@@ -2339,7 +2339,7 @@ const HERO_THEMES = [
     titleA: "아이들의 웃음이 가득",
     titleB: "키즈카페 캠핑",
     summary: "캠핑장 안 키즈카페에서 아이는 신나고 부모는 여유롭게",
-    effect: "confetti",
+    effect: "uq-kidscafe",
     theme: "UNIQUE"
   },
   {
@@ -2352,7 +2352,7 @@ const HERO_THEMES = [
     titleA: "비가 와도 신나는 하루",
     titleB: "실내놀이 캠핑",
     summary: "날씨와 상관없이 뛰놀 수 있는 넓은 실내 놀이 공간",
-    effect: "confetti",
+    effect: "uq-indoorplay",
     theme: "UNIQUE"
   },
   {
@@ -2365,7 +2365,7 @@ const HERO_THEMES = [
     titleA: "나무 위 작은 오두막",
     titleB: "트리하우스 캠핑",
     summary: "출렁다리를 건너 숲 높이에서 맞이하는 아침 햇살",
-    effect: "lush-forest",
+    effect: "uq-treehouse",
     theme: "UNIQUE"
   },
   {
@@ -2378,7 +2378,7 @@ const HERO_THEMES = [
     titleA: "투명 돔 안에서 별 보기",
     titleB: "이색 숙소 캠핑",
     summary: "누워서 은하수를 올려다보는 버블돔과 이색 숙소",
-    effect: "night-sky",
+    effect: "uq-stay",
     theme: "UNIQUE"
   },
   {
@@ -2391,7 +2391,7 @@ const HERO_THEMES = [
     titleA: "강 위를 가르는 짜릿함",
     titleB: "레포츠 캠핑",
     summary: "짚라인과 카약으로 채우는 액티브한 캠핑 하루",
-    effect: "riverside",
+    effect: "uq-leisure",
     theme: "UNIQUE"
   },
   {
@@ -2404,7 +2404,7 @@ const HERO_THEMES = [
     titleA: "직접 따고 만드는 하루",
     titleB: "농촌 체험 캠핑",
     summary: "수확하고 빚어 보는 손끝 체험으로 남기는 캠핑 추억",
-    effect: "green-meadow",
+    effect: "uq-farm",
     theme: "UNIQUE"
   }
 ];
@@ -2428,482 +2428,184 @@ function getInitialHeroIndex() {
   }
 }
 
-// Canvas 인터랙션 엔진
+// Canvas 인터랙션 엔진 (t47u 2026-11-04 개편)
+// - 모든 발광/잎/꽃잎/빛줄기는 처음 한 번만 오프스크린 스프라이트로 그려 두고 매 프레임 drawImage만 한다
+//   (프레임마다 createRadialGradient·shadowBlur·filter를 쓰지 않음 → 01·02·09 버벅임 원인 제거)
+// - 시간 기반(dt) 움직임, DPR 1.5 상한, 화면 크기에 비례한 입자 수, 탭 숨김·화면 밖 일시정지, 동작 줄이기 설정 존중
+const HERO_SPRITES = new Map();
+function heroSprite(key, size, draw) {
+  let c = HERO_SPRITES.get(key);
+  if (c) return c;
+  c = document.createElement("canvas");
+  c.width = c.height = size;
+  draw(c.getContext("2d"), size);
+  HERO_SPRITES.set(key, c);
+  return c;
+}
+function heroSpriteWH(key, w, h, draw) {
+  let c = HERO_SPRITES.get(key);
+  if (c) return c;
+  c = document.createElement("canvas");
+  c.width = w; c.height = h;
+  draw(c.getContext("2d"), w, h);
+  HERO_SPRITES.set(key, c);
+  return c;
+}
+// 부드러운 발광 점: 중심 흰색 → 색 → 투명
+function heroGlow(rgb, core = 0.9) {
+  return heroSprite("glow" + rgb + core, 64, (g, s) => {
+    const r = s / 2, gr = g.createRadialGradient(r, r, 0, r, r, r);
+    gr.addColorStop(0, `rgba(255,255,255,${core})`);
+    gr.addColorStop(0.18, `rgba(${rgb},0.85)`);
+    gr.addColorStop(0.45, `rgba(${rgb},0.28)`);
+    gr.addColorStop(1, `rgba(${rgb},0)`);
+    g.fillStyle = gr; g.fillRect(0, 0, s, s);
+  });
+}
+// 김·물안개용 뭉게 덩어리
+function heroPuff() {
+  return heroSprite("puff", 128, (g, s) => {
+    const r = s / 2, gr = g.createRadialGradient(r, r, 0, r, r, r);
+    gr.addColorStop(0, "rgba(255,255,255,0.55)");
+    gr.addColorStop(0.5, "rgba(255,255,255,0.22)");
+    gr.addColorStop(1, "rgba(255,255,255,0)");
+    g.fillStyle = gr; g.fillRect(0, 0, s, s);
+  });
+}
+// 블러 처리된 빛줄기(한 번만 filter 사용)
+function heroShaft(rgb) {
+  return heroSpriteWH("shaft" + rgb, 160, 512, (g, w, h) => {
+    const lg = g.createLinearGradient(0, 0, 0, h);
+    lg.addColorStop(0, `rgba(${rgb},0.95)`);
+    lg.addColorStop(0.55, `rgba(${rgb},0.45)`);
+    lg.addColorStop(1, `rgba(${rgb},0)`);
+    try { g.filter = "blur(14px)"; } catch {}
+    g.fillStyle = lg;
+    g.beginPath(); g.moveTo(w * 0.42, 0); g.lineTo(w * 0.58, 0); g.lineTo(w * 0.8, h); g.lineTo(w * 0.2, h); g.closePath(); g.fill();
+    try { g.filter = "none"; } catch {}
+  });
+}
+const HERO_IMG_SIZE = { "hero-sunset-coast.webp": [2560, 1430], "hero-leisure.webp": [1920, 1080], "hero-horse.webp": [1920, 1080], "hero-lush-forest.webp": [2560, 1430], "hero-treehouse.webp": [1920, 1080], "hero-farm.webp": [1920, 1080], "hero-hotspring.webp": [1920, 1080], "hero-warmpool.webp": [1920, 1080], "hero-pool.webp": [1920, 1080] };
+const hRnd = (a, b) => a + Math.random() * (b - a);
+// 원근감: 작은 값이 많이 나오도록(멀리 있는 입자가 많게)
+const depthRnd = () => Math.pow(Math.random(), 1.6);
+
 class HeroCanvasController {
   constructor(canvas, container) {
     this.canvas = canvas;
     this.container = container;
     this.ctx = canvas.getContext("2d");
-    this.width = 0;
-    this.height = 0;
-    this.dpr = 1;
-    this.running = false;
-    this.rafId = null;
-
-    this.mouse = {
-      x: -1000,
-      y: -1000,
-      vx: 0,
-      vy: 0,
-      lastX: -1000,
-      lastY: -1000,
-      isDown: false,
-      active: false
-    };
-
-    this.particles = [];
-    this.ripples = [];
-    this.shootingStars = [];
+    this.width = 0; this.height = 0; this.dpr = 1;
+    this.running = false; this.rafId = null; this.last = 0;
+    this.mouse = { x: -1000, y: -1000, vx: 0, vy: 0, lastX: -1000, lastY: -1000, isDown: false, active: false };
     this.currentThemeId = "night-sky";
     this.time = 0;
-
+    this.reduced = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+    this.fpsSamples = [];
     this.onResize = this.resize.bind(this);
     this.onPointerMove = this.handlePointerMove.bind(this);
     this.onPointerDown = this.handlePointerDown.bind(this);
-    this.onPointerUp = this.handlePointerUp.bind(this);
+    this.onPointerUp = () => { this.mouse.isDown = false; };
     this.onPointerLeave = this.handlePointerLeave.bind(this);
-    this.onVisibilityChange = this.handleVisibilityChange.bind(this);
-
-    this.initEvents();
-    this.resize();
-  }
-
-  initEvents() {
+    this.onVisibilityChange = () => (document.hidden ? this.stop() : this.start());
     window.addEventListener("resize", this.onResize);
     document.addEventListener("visibilitychange", this.onVisibilityChange);
-    this.container.addEventListener("pointermove", this.onPointerMove, { passive: true });
-    this.container.addEventListener("pointerdown", this.onPointerDown, { passive: true });
+    container.addEventListener("pointermove", this.onPointerMove, { passive: true });
+    container.addEventListener("pointerdown", this.onPointerDown, { passive: true });
     window.addEventListener("pointerup", this.onPointerUp, { passive: true });
-    this.container.addEventListener("pointerleave", this.onPointerLeave, { passive: true });
+    container.addEventListener("pointerleave", this.onPointerLeave, { passive: true });
+    this.resize();
   }
 
   resize() {
     const rect = this.container.getBoundingClientRect();
     if (!rect.width || !rect.height) return;
-    this.dpr = Math.min(window.devicePixelRatio || 1, 2);
-    this.width = rect.width;
-    this.height = rect.height;
+    const changed = Math.abs(rect.width - this.width) > 40 || Math.abs(rect.height - this.height) > 40;
+    this.dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    this.width = rect.width; this.height = rect.height;
     this.canvas.width = Math.floor(rect.width * this.dpr);
     this.canvas.height = Math.floor(rect.height * this.dpr);
     this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    if (changed && this.theme) this.setTheme(this.currentThemeId);
+  }
+  // 화면 면적에 비례한 입자 수(320px 모바일은 약 45%)
+  n(base) {
+    const s = Math.max(0.42, Math.min(1, (this.width * this.height) / (1280 * 640)));
+    return Math.max(4, Math.round(base * s));
+  }
+  // 배경 이미지(background-size: cover) 좌표(0~1) → 캔버스 좌표
+  imgPt(u, v) {
+    const w = this.width, h = this.height;
+    const layer = this.container.querySelector(".hero-bg-layer.active");
+    const m = layer && /url\("?[^"]*\/([^/"?]+)"?\)/.exec(layer.style.backgroundImage || "");
+    const size = (m && HERO_IMG_SIZE[m[1]]) || [1920, 1080];
+    const sc = Math.max(w / size[0], h / size[1]);
+    const iw = size[0] * sc, ih = size[1] * sc;
+    let px = 0.5, py = 0.5;
+    if (layer) {
+      const bp = getComputedStyle(layer).backgroundPosition.split(" ");
+      if (bp[0] && bp[0].endsWith("%")) px = parseFloat(bp[0]) / 100;
+      if (bp[1] && bp[1].endsWith("%")) py = parseFloat(bp[1]) / 100;
+    }
+    return { x: (w - iw) * px + u * iw, y: (h - ih) * py + v * ih, s: sc };
   }
 
   handlePointerMove(e) {
     const rect = this.container.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    if (this.mouse.lastX > -500) {
-      this.mouse.vx = (x - this.mouse.lastX) * 0.5;
-      this.mouse.vy = (y - this.mouse.lastY) * 0.5;
-    }
-    this.mouse.lastX = this.mouse.x;
-    this.mouse.lastY = this.mouse.y;
-    this.mouse.x = x;
-    this.mouse.y = y;
-    this.mouse.active = true;
-
-    if (this.currentThemeId === "riverside" && Math.random() < 0.25) {
-      this.ripples.push({ x, y, r: 2, maxR: 70 + Math.random() * 40, alpha: 0.7 });
-    } else if (this.currentThemeId === "rainy-camp" && Math.random() < 0.3) {
-      this.ripples.push({ x, y, r: 1, maxR: 35 + Math.random() * 20, alpha: 0.8 });
-    }
+    const x = e.clientX - rect.left, y = e.clientY - rect.top, m = this.mouse;
+    if (m.lastX > -500) { m.vx = (x - m.lastX) * 0.5; m.vy = (y - m.lastY) * 0.5; }
+    m.lastX = m.x; m.lastY = m.y; m.x = x; m.y = y; m.active = true;
+    const id = this.currentThemeId;
+    if (id === "riverside" && Math.random() < 0.2) this.ripples.push({ x, y, r: 2, maxR: hRnd(60, 100), alpha: 0.6 });
+    else if (id === "rainy-camp" && Math.random() < 0.3) this.ripples.push({ x, y, r: 1, maxR: hRnd(30, 50), alpha: 0.8 });
   }
-
   handlePointerDown(e) {
-    this.mouse.isDown = true;
     const rect = this.container.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    this.mouse.x = x;
-    this.mouse.y = y;
-
-    if (this.currentThemeId === "night-sky") {
-      this.shootingStars.push({
-        x: Math.max(50, x + 120),
-        y: Math.max(20, y - 80),
-        len: 150 + Math.random() * 70,
-        speed: 7 + Math.random() * 3.5,
-        angle: Math.PI / 4.5,
-        alpha: 1,
-        active: true
-      });
-    } else if (this.currentThemeId === "autumn-maple") {
-      for (const p of this.particles) {
-        const dx = p.x - x;
-        const dy = p.y - y;
-        const dist = Math.hypot(dx, dy);
-        if (dist < 180 && dist > 0) {
-          p.vx += (dx / dist) * 2.5;
-          p.vy -= Math.random() * 1.5 + 0.8;
-        }
-      }
-    } else if (this.currentThemeId === "warm-bonfire") {
-      for (let i = 0; i < 16; i++) {
-        this.particles.push({
-          x: x + (Math.random() - 0.5) * 40,
-          y: y + (Math.random() - 0.5) * 20,
-          vx: (Math.random() - 0.5) * 1.5,
-          vy: -Math.random() * 2.8 - 1.4,
-          size: Math.random() * 2.8 + 1.2,
-          life: 1,
-          decay: Math.random() * 0.005 + 0.003,
-          color: Math.random() < 0.4 ? "#fff9c4" : Math.random() < 0.75 ? "#ffb74d" : "#ff5722",
-          drift: Math.random() * Math.PI * 2
-        });
-      }
-    } else if (this.currentThemeId === "rainy-camp" || this.currentThemeId === "riverside") {
-      for (let i = 0; i < 3; i++) {
-        this.ripples.push({ x, y, r: i * 8, maxR: 70 + i * 18, alpha: 0.75 });
-      }
-    }
+    const x = e.clientX - rect.left, y = e.clientY - rect.top;
+    this.mouse.isDown = true; this.mouse.x = x; this.mouse.y = y;
+    const id = this.currentThemeId;
+    if (id === "night-sky" || id === "uq-stay") this.addMeteor(x + 120, y - 80);
+    else if (id === "autumn-maple") {
+      for (const p of this.particles) { const dx = p.x - x, dy = p.y - y, d = Math.hypot(dx, dy); if (d < 180 && d > 0) { p.vx += (dx / d) * 2.2; p.vy -= hRnd(0.8, 2); } }
+    } else if (id === "warm-bonfire") {
+      for (let i = 0; i < 12; i++) this.particles.push(this.makeEmber(x + hRnd(-20, 20), y + hRnd(-10, 10)));
+    } else if (id === "rainy-camp" || id === "riverside") {
+      for (let i = 0; i < 3; i++) this.ripples.push({ x, y, r: i * 8, maxR: 70 + i * 18, alpha: 0.7 });
+    } else if (id === "uq-kidscafe") this.addFirework(x, y, true);
+    else if (id === "uq-pool") this.addSplash(x, y);
+    else if (id === "uq-spa") { for (const p of this.particles) if (Math.hypot(p.x - x, p.y - y) < 90) p.popAt = p.y + 1; }
   }
-
-  handlePointerUp() {
-    this.mouse.isDown = false;
-  }
-
   handlePointerLeave() {
-    this.mouse.active = false;
-    this.mouse.x = -1000;
-    this.mouse.y = -1000;
-    this.mouse.lastX = -1000;
-    this.mouse.lastY = -1000;
-  }
-
-  handleVisibilityChange() {
-    if (document.hidden) {
-      this.stop();
-    } else {
-      this.start();
-    }
+    Object.assign(this.mouse, { active: false, x: -1000, y: -1000, lastX: -1000, lastY: -1000 });
   }
 
   setTheme(themeId) {
     this.currentThemeId = themeId;
-    this.particles = [];
-    this.ripples = [];
-    this.shootingStars = [];
-    this.seagulls = [];
-    this.duskParticles = [];
-    this.splashes = [];
-    this.pollen = [];
-    this.initParticlesForTheme(themeId);
-  }
-
-  initParticlesForTheme(themeId) {
-    const w = this.width || 800;
-    const h = this.height || 500;
-
-    switch (themeId) {
-      case "night-sky":
-        // 48개 반딧불이 & 유성우 (고휘도 라임-골드 발광)
-        for (let i = 0; i < 48; i++) {
-          this.particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.18,
-            vy: (Math.random() - 0.5) * 0.18,
-            size: Math.random() * 2.6 + 1.4,
-            pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.018 + 0.009,
-            glow: Math.random() * 16 + 10
-          });
-        }
-        break;
-
-      case "autumn-maple":
-        // 42개 고채도 선명 단풍잎 & 부채꼴 은행잎 3D 텀블링
-        for (let i = 0; i < 42; i++) {
-          this.particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.32,
-            vy: Math.random() * 0.46 + 0.30,
-            size: Math.random() * 12 + 13,
-            angle: Math.random() * Math.PI * 2,
-            vAngle: (Math.random() - 0.5) * 0.016,
-            flip: Math.random() * Math.PI * 2,
-            vFlip: Math.random() * 0.018 + 0.009,
-            roll: Math.random() * Math.PI * 2,
-            vRoll: Math.random() * 0.02 + 0.01,
-            isGinkgo: Math.random() < 0.38,
-            colorIdx: Math.floor(Math.random() * 4)
-          });
-        }
-        break;
-
-      case "rainy-camp":
-        // 75개 고속 은빛 빗방울 샤워
-        for (let i = 0; i < 75; i++) {
-          this.particles.push({
-            x: Math.random() * (w + 140),
-            y: Math.random() * h,
-            speed: Math.random() * 9 + 16,
-            len: Math.random() * 16 + 14,
-            alpha: Math.random() * 0.4 + 0.45
-          });
-        }
-        break;
-
-      case "snowy-winter":
-        // 68개 포근한 함박눈 (결정체 육각 눈꽃 + 몽환 보케 함박눈)
-        for (let i = 0; i < 68; i++) {
-          const flakeType = Math.random() < 0.2 ? "crystal" : Math.random() < 0.55 ? "fluffy" : "dust";
-          this.particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            flakeType,
-            r: flakeType === "crystal" ? Math.random() * 4 + 7 : flakeType === "fluffy" ? Math.random() * 2.2 + 3.0 : Math.random() * 1.8 + 1.2,
-            vy: Math.random() * 0.42 + 0.24,
-            vx: (Math.random() - 0.5) * 0.16,
-            sway: Math.random() * Math.PI * 2,
-            swaySpeed: Math.random() * 0.016 + 0.008,
-            alpha: Math.random() * 0.35 + 0.60
-          });
-        }
-        break;
-
-      case "lush-forest":
-        // 65개 틴들 햇살 광선과 영롱한 피톤치드 요정 빛가루
-        for (let i = 0; i < 65; i++) {
-          this.particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            r: Math.random() * 2.4 + 1.2,
-            vy: -Math.random() * 0.20 - 0.07,
-            vx: (Math.random() - 0.5) * 0.16,
-            alpha: Math.random() * 0.42 + 0.25,
-            pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.026 + 0.014,
-            color: Math.random() < 0.5 ? "rgba(235, 255, 100," : Math.random() < 0.8 ? "rgba(255, 245, 180," : "rgba(130, 255, 190,"
-          });
-        }
-        break;
-
-      case "riverside":
-        // 58개 다이아몬드 크로스 스파클 및 수평 렌즈 플레어 물빛 윤슬
-        for (let i = 0; i < 58; i++) {
-          this.particles.push({
-            x: Math.random() * w,
-            y: h * 0.38 + Math.random() * (h * 0.62),
-            size: Math.random() * 3.8 + 2.0,
-            flareLen: Math.random() * 24 + 14,
-            alpha: Math.random() * 0.75 + 0.25,
-            pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.042 + 0.02
-          });
-        }
-        break;
-
-      case "warm-bonfire":
-        // 75개 고온 불티·스파크·캡슐 불꽃
-        for (let i = 0; i < 75; i++) {
-          this.particles.push(this.createEmbersParticle(w, h, true));
-        }
-        break;
-
-      case "sunset-coast":
-        // 75개 황금빛 해수면 윤슬 + 36개 노을 미립자 + 6마리 편대 갈매기
-        for (let i = 0; i < 75; i++) {
-          const depth = Math.random();
-          this.particles.push({
-            x: Math.random() * w,
-            y: h * 0.42 + depth * (h * 0.48),
-            vx: -0.15 - Math.random() * 0.26,
-            len: (Math.random() * 32 + 18) * (0.65 + depth * 0.85),
-            thick: (Math.random() * 2.0 + 1.4) * (0.7 + depth * 0.8),
-            alpha: Math.random() * 0.7 + 0.3,
-            pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.035 + 0.018,
-            depth
-          });
-        }
-        for (let i = 0; i < 36; i++) {
-          this.duskParticles.push({
-            x: Math.random() * w,
-            y: Math.random() * (h * 0.65),
-            vx: (Math.random() - 0.5) * 0.18 + 0.05,
-            vy: -Math.random() * 0.20 - 0.07,
-            r: Math.random() * 2.6 + 1.0,
-            pulse: Math.random() * Math.PI * 2,
-            alpha: Math.random() * 0.45 + 0.25
-          });
-        }
-        this.seagulls = [
-          { x: w * 0.32, y: h * 0.17, vx: 0.85, vy: -0.012, wingSpan: 34, wingPhase: 0, wingSpeed: 0.054, bobPhase: 0, depth: 1.0 },
-          { x: w * 0.48, y: h * 0.12, vx: 0.90, vy: 0.010, wingSpan: 27, wingPhase: 1.3, wingSpeed: 0.060, bobPhase: 1.2, depth: 0.88 },
-          { x: w * 0.18, y: h * 0.22, vx: 0.76, vy: 0.014, wingSpan: 23, wingPhase: 2.7, wingSpeed: 0.050, bobPhase: 2.4, depth: 0.80 },
-          { x: w * 0.65, y: h * 0.19, vx: 0.70, vy: -0.008, wingSpan: 16, wingPhase: 4.1, wingSpeed: 0.068, bobPhase: 3.6, depth: 0.60 },
-          { x: w * 0.06, y: h * 0.09, vx: 0.78, vy: 0.006, wingSpan: 20, wingPhase: 5.3, wingSpeed: 0.058, bobPhase: 4.9, depth: 0.72 },
-          { x: w * 0.55, y: h * 0.25, vx: 0.82, vy: 0.012, wingSpan: 22, wingPhase: 3.5, wingSpeed: 0.052, bobPhase: 1.8, depth: 0.75 }
-        ];
-        break;
-
-      case "cherry-blossom":
-        // 85개 벚꽃 샤워 꽃비 + 24개 봄빛 꽃가루
-        for (let i = 0; i < 85; i++) {
-          this.particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: -Math.random() * 0.32 - 0.14,
-            vy: Math.random() * 0.40 + 0.28,
-            size: Math.random() * 10 + 9,
-            rot: Math.random() * Math.PI * 2,
-            vRot: (Math.random() - 0.5) * 0.018,
-            flip: Math.random() * Math.PI * 2,
-            vFlip: Math.random() * 0.02 + 0.01,
-            roll: Math.random() * Math.PI * 2,
-            vRoll: Math.random() * 0.022 + 0.011,
-            seed: Math.random() * 10,
-            colorBase: Math.random() < 0.5 ? "255, 155, 185" : "255, 180, 205"
-          });
-        }
-        for (let i = 0; i < 24; i++) {
-          this.pollen.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            r: Math.random() * 1.8 + 0.8,
-            vx: -Math.random() * 0.20 - 0.08,
-            vy: Math.random() * 0.15 + 0.05,
-            alpha: Math.random() * 0.5 + 0.35,
-            pulse: Math.random() * Math.PI * 2
-          });
-        }
-        break;
-
-      case "steam":
-        // t45u 노천탕·온수풀: 아래에서 천천히 피어오르는 김(부드러운 원형 그라데이션)
-        for (let i = 0; i < 26; i++) this.particles.push(this.makeSteam(w, h, true));
-        break;
-
-      case "bubbles":
-        // t45u 수영장·스파: 반짝이며 떠오르는 물방울
-        for (let i = 0; i < 40; i++) this.particles.push(this.makeBubble(w, h, true));
-        break;
-
-      case "confetti":
-        // t45u 키즈카페·실내놀이: 알록달록 천천히 떨어지는 색종이
-        for (let i = 0; i < 46; i++) this.particles.push(this.makeConfetti(w, h, true));
-        break;
-
-      case "green-meadow":
-        // 45개 3D 텀블링 민들레 홀씨 + 32개 들판 황금 꽃가루
-        for (let i = 0; i < 45; i++) {
-          this.particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: -Math.random() * 0.28 - 0.14,
-            vy: (Math.random() - 0.5) * 0.12,
-            size: Math.random() * 7 + 14,
-            sway: Math.random() * Math.PI * 2,
-            swaySpeed: Math.random() * 0.014 + 0.009,
-            alpha: Math.random() * 0.35 + 0.65,
-            tilt: 0,
-            tiltTarget: 0,
-            roll: Math.random() * Math.PI * 2,
-            vRoll: (Math.random() - 0.5) * 0.02
-          });
-        }
-        for (let i = 0; i < 32; i++) {
-          this.pollen.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            r: Math.random() * 2.0 + 1.0,
-            vx: -Math.random() * 0.22 - 0.08,
-            vy: -Math.random() * 0.12 - 0.02,
-            alpha: Math.random() * 0.5 + 0.35,
-            pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.03 + 0.015
-          });
-        }
-        break;
-    }
-  }
-
-  makeSteam(w, h, initial = false) {
-    return { x: Math.random() * w, y: initial ? h * (0.35 + Math.random() * 0.65) : h + 40, r: Math.random() * 60 + 50, vy: -(Math.random() * 0.35 + 0.18), vx: (Math.random() - 0.5) * 0.2, life: initial ? Math.random() : 1, sway: Math.random() * Math.PI * 2 };
-  }
-  makeBubble(w, h, initial = false) {
-    return { x: Math.random() * w, y: initial ? Math.random() * h : h + 10, r: Math.random() * 5 + 2, vy: -(Math.random() * 0.7 + 0.35), sway: Math.random() * Math.PI * 2, alpha: Math.random() * 0.4 + 0.45 };
-  }
-  makeConfetti(w, h, initial = false) {
-    const colors = ["#ff8a80", "#ffd54f", "#81d4fa", "#a5d6a7", "#ce93d8", "#ffab91"];
-    return { x: Math.random() * w, y: initial ? Math.random() * h : -12, w: Math.random() * 6 + 5, h: Math.random() * 4 + 3, vy: Math.random() * 0.6 + 0.35, vx: (Math.random() - 0.5) * 0.4, rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.06, color: colors[Math.floor(Math.random() * colors.length)], sway: Math.random() * Math.PI * 2 };
-  }
-  renderSteam(ctx, w, h, mx, my, hasMouse) {
-    for (let i = 0; i < this.particles.length; i++) {
-      const p = this.particles[i];
-      p.sway += 0.01; p.y += p.vy; p.x += p.vx + Math.sin(p.sway) * 0.25; p.r += 0.12; p.life -= 0.0018;
-      if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 140) { p.x += (dx / (d || 1)) * 1.2; p.y += (dy / (d || 1)) * 0.6; } }
-      if (p.life <= 0 || p.y + p.r < 0) { this.particles[i] = this.makeSteam(w, h); continue; }
-      const a = Math.min(1, p.life * 1.4) * 0.16;
-      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
-      g.addColorStop(0, `rgba(255,255,255,${a})`); g.addColorStop(1, "rgba(255,255,255,0)");
-      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
-    }
-  }
-  renderBubbles(ctx, w, h, mx, my, hasMouse) {
-    for (let i = 0; i < this.particles.length; i++) {
-      const p = this.particles[i];
-      p.sway += 0.03; p.y += p.vy; p.x += Math.sin(p.sway) * 0.35;
-      if (hasMouse && Math.hypot(p.x - mx, p.y - my) < p.r + 26) { this.particles[i] = this.makeBubble(w, h); continue; }
-      if (p.y < -10) { this.particles[i] = this.makeBubble(w, h); continue; }
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(255,255,255,${p.alpha})`; ctx.lineWidth = 1.2; ctx.stroke();
-      ctx.fillStyle = `rgba(200,240,255,${p.alpha * 0.18})`; ctx.fill();
-      ctx.beginPath(); ctx.arc(p.x - p.r * 0.35, p.y - p.r * 0.35, p.r * 0.25, 0, Math.PI * 2); ctx.fillStyle = `rgba(255,255,255,${p.alpha})`; ctx.fill();
-    }
-  }
-  renderConfetti(ctx, w, h, mx, my, hasMouse) {
-    for (let i = 0; i < this.particles.length; i++) {
-      const p = this.particles[i];
-      p.sway += 0.02; p.y += p.vy; p.x += p.vx + Math.sin(p.sway) * 0.5; p.rot += p.vr;
-      if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 110) { p.x += (dx / (d || 1)) * 2; p.vr += 0.004; } }
-      if (p.y > h + 12) { this.particles[i] = this.makeConfetti(w, h); continue; }
-      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.scale(1, Math.abs(Math.cos(p.sway * 2)) * 0.7 + 0.3);
-      ctx.globalAlpha = 0.85; ctx.fillStyle = p.color; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); ctx.restore();
-    }
-  }
-
-  createEmbersParticle(w, h, initial = false) {
-    const originX = w * 0.54 + (Math.random() - 0.5) * (w * 0.52);
-    const typeRand = Math.random();
-    const type = typeRand < 0.45 ? "capsule" : typeRand < 0.75 ? "spark" : "speck";
-    return {
-      type,
-      x: originX,
-      y: initial ? Math.random() * h : h - Math.random() * 25,
-      vx: (Math.random() - 0.5) * (type === "spark" ? 1.6 : 0.85),
-      vy: type === "spark" ? -Math.random() * 2.8 - 1.8 : -Math.random() * 1.8 - 1.2,
-      size: type === "capsule" ? Math.random() * 2.6 + 1.6 : type === "spark" ? Math.random() * 1.8 + 1.1 : Math.random() * 2.2 + 1.3,
-      len: type === "spark" ? Math.random() * 12 + 6 : type === "capsule" ? Math.random() * 6 + 4 : 3,
-      angle: 0,
-      life: initial ? Math.random() * 0.85 + 0.15 : 1,
-      decay: type === "spark" ? Math.random() * 0.006 + 0.0035 : Math.random() * 0.0032 + 0.0018,
-      color: Math.random() < 0.35 ? "#ffffff" : Math.random() < 0.7 ? "#ffe082" : Math.random() < 0.9 ? "#ff9100" : "#ff3d00",
-      drift: Math.random() * Math.PI * 2
-    };
+    this.particles = []; this.ripples = []; this.meteors = []; this.splashes = []; this.extra = []; this.stars = []; this.fw = []; this.riders = [];
+    this.seagulls = []; this.nextEvent = 0;
+    const T = HERO_FX[themeId] || HERO_FX["night-sky"];
+    this.theme = T;
+    if (this.width) T.init.call(this, this.width, this.height);
+    if (this.reduced) { this.drawFrame(16); }
   }
 
   start() {
-    if (this.running) return;
-    this.running = true;
-    const loop = () => {
+    if (this.running || this.reduced) { if (this.reduced) this.drawFrame(16); return; }
+    this.running = true; this.last = 0;
+    const loop = (t) => {
       if (!this.running) return;
-      this.updateAndDraw();
+      const dt = this.last ? Math.min(t - this.last, 50) : 16.7;
+      this.last = t;
+      if (this.fpsSamples.length < 600) this.fpsSamples.push(dt);
+      this.drawFrame(dt);
       this.rafId = requestAnimationFrame(loop);
     };
     this.rafId = requestAnimationFrame(loop);
   }
-
   stop() {
     this.running = false;
-    if (this.rafId) {
-      cancelAnimationFrame(this.rafId);
-      this.rafId = null;
-    }
+    if (this.rafId) { cancelAnimationFrame(this.rafId); this.rafId = null; }
   }
-
   destroy() {
     this.stop();
     window.removeEventListener("resize", this.onResize);
@@ -2913,1058 +2615,728 @@ class HeroCanvasController {
     window.removeEventListener("pointerup", this.onPointerUp);
     this.container.removeEventListener("pointerleave", this.onPointerLeave);
   }
-
-  updateAndDraw() {
+  drawFrame(dt) {
     const { ctx, width: w, height: h } = this;
-    if (!w || !h) return;
+    if (!w || !h || !this.theme) return;
+    if (!this.particles.length && !this.extra.length && !this.stars.length && this.theme.init) this.theme.init.call(this, w, h);
+    const k = dt / 16.7; // 60fps 기준 배속
+    this.k = k;
+    this.time += 0.02 * k;
+    ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
     ctx.clearRect(0, 0, w, h);
-    this.time += 0.02;
-
-    const mx = this.mouse.x;
-    const my = this.mouse.y;
-    const hasMouse = this.mouse.active && mx > -500;
-
-    switch (this.currentThemeId) {
-      case "night-sky":
-        this.renderNightSky(ctx, w, h, mx, my, hasMouse);
-        break;
-      case "autumn-maple":
-        this.renderAutumnMaple(ctx, w, h, mx, my, hasMouse);
-        break;
-      case "rainy-camp":
-        this.renderRainyCamp(ctx, w, h, mx, my, hasMouse);
-        break;
-      case "snowy-winter":
-        this.renderSnowyWinter(ctx, w, h, mx, my, hasMouse);
-        break;
-      case "lush-forest":
-        this.renderLushForest(ctx, w, h, mx, my, hasMouse);
-        break;
-      case "riverside":
-        this.renderRiverside(ctx, w, h, mx, my, hasMouse);
-        break;
-      case "warm-bonfire":
-        this.renderWarmBonfire(ctx, w, h, mx, my, hasMouse);
-        break;
-      case "sunset-coast":
-        this.renderSunsetCoast(ctx, w, h, mx, my, hasMouse);
-        break;
-      case "cherry-blossom":
-        this.renderCherryBlossom(ctx, w, h, mx, my, hasMouse);
-        break;
-      case "green-meadow":
-        this.renderGreenMeadow(ctx, w, h, mx, my, hasMouse);
-        break;
-      case "steam":
-        this.renderSteam(ctx, w, h, mx, my, hasMouse);
-        break;
-      case "bubbles":
-        this.renderBubbles(ctx, w, h, mx, my, hasMouse);
-        break;
-      case "confetti":
-        this.renderConfetti(ctx, w, h, mx, my, hasMouse);
-        break;
-    }
-
-    this.mouse.vx *= 0.85;
-    this.mouse.vy *= 0.85;
+    const m = this.mouse;
+    this.theme.draw.call(this, ctx, w, h, k, m.x, m.y, m.active && m.x > -500);
+    ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
+    ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    m.vx *= 0.85; m.vy *= 0.85;
   }
-
-  renderNightSky(ctx, w, h, mx, my, hasMouse) {
-    // 유성우: 속도와 주기를 늘리고 화려한 2줄 트레일과 헤드 발광
-    if (Math.random() < 0.012 && this.shootingStars.length < 2) {
-      this.shootingStars.push({
-        x: Math.random() * (w * 0.75) + w * 0.1,
-        y: Math.random() * (h * 0.30) + 10,
-        len: 190 + Math.random() * 110,
-        speed: 8 + Math.random() * 4,
-        angle: Math.PI / 4.8 + (Math.random() - 0.5) * 0.15,
-        alpha: 1,
-        active: true
-      });
-    }
-
-    ctx.save();
-    ctx.globalCompositeOperation = "lighter"; // add 블렌드 모드로 발광 극대화
-
-    for (let i = this.shootingStars.length - 1; i >= 0; i--) {
-      const s = this.shootingStars[i];
-      const dx = Math.cos(s.angle) * s.len;
-      const dy = Math.sin(s.angle) * s.len;
-      const grad = ctx.createLinearGradient(s.x, s.y, s.x - dx, s.y - dy);
-      grad.addColorStop(0, `rgba(255, 255, 255, ${s.alpha})`);
-      grad.addColorStop(0.2, `rgba(200, 255, 0, ${s.alpha * 0.85})`);
-      grad.addColorStop(0.6, `rgba(140, 240, 255, ${s.alpha * 0.45})`);
-      grad.addColorStop(1, "rgba(255, 255, 255, 0)");
-      ctx.strokeStyle = grad;
-      ctx.lineWidth = 2.4;
-      ctx.beginPath();
-      ctx.moveTo(s.x, s.y);
-      ctx.lineTo(s.x - dx, s.y - dy);
-      ctx.stroke();
-
-      // 유성 머리 찬란한 발광 코어
-      const headG = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, 8);
-      headG.addColorStop(0, `rgba(255, 255, 255, ${s.alpha})`);
-      headG.addColorStop(0.5, `rgba(200, 255, 0, ${s.alpha * 0.7})`);
-      headG.addColorStop(1, "rgba(200, 255, 0, 0)");
-      ctx.fillStyle = headG;
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, 8, 0, Math.PI * 2);
-      ctx.fill();
-
-      s.x += Math.cos(s.angle) * s.speed;
-      s.y += Math.sin(s.angle) * s.speed;
-      s.alpha -= 0.016;
-      if (s.alpha <= 0) this.shootingStars.splice(i, 1);
-    }
-
-    // 반딧불이: add(lighter) 블렌드와 선명한 라임-골드 발광체
-    for (const p of this.particles) {
-      p.pulse += p.pulseSpeed;
-      const glowAlpha = Math.max(0.20, (Math.sin(p.pulse) + 1) * 0.5);
-
-      if (hasMouse) {
-        const dx = p.x - mx;
-        const dy = p.y - my;
-        const dist = Math.hypot(dx, dy);
-        if (dist < 130 && dist > 0) {
-          const force = (130 - dist) / 130;
-          if (this.mouse.isDown) {
-            p.vx -= (dx / dist) * force * 0.45;
-            p.vy -= (dy / dist) * force * 0.45;
-          } else {
-            p.vx += (dx / dist) * force * 0.32;
-            p.vy += (dy / dist) * force * 0.32;
-          }
-        }
-      }
-
-      p.x += p.vx + Math.sin(this.time * 0.35 + p.pulse) * 0.22;
-      p.y += p.vy + Math.cos(this.time * 0.28 + p.pulse) * 0.16;
-      p.vx *= 0.95;
-      p.vy *= 0.95;
-
-      if (p.x < -25) p.x = w + 25;
-      else if (p.x > w + 25) p.x = -25;
-      if (p.y < -25) p.y = h + 25;
-      else if (p.y > h + 25) p.y = -25;
-
-      // 큰 외부 광배 (Outer Halo)
-      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.glow * 1.3);
-      g.addColorStop(0, `rgba(240, 255, 140, ${glowAlpha * 0.9})`);
-      g.addColorStop(0.35, `rgba(200, 255, 0, ${glowAlpha * 0.55})`);
-      g.addColorStop(1, "rgba(200, 255, 0, 0)");
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.glow * 1.3, 0, Math.PI * 2);
-      ctx.fill();
-
-      // 선명하고 쨍한 중심 고밀도 핵
-      ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, glowAlpha + 0.35)})`;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size * 0.65, 0, Math.PI * 2);
-      ctx.fill();
-
-      // 최고 밝기일 때 미세 십자 반짝임 (Sparkle cross)
-      if (glowAlpha > 0.68) {
-        const sp = p.size * 1.8;
-        ctx.strokeStyle = `rgba(255, 255, 230, ${glowAlpha * 0.75})`;
-        ctx.lineWidth = 0.9;
-        ctx.beginPath();
-        ctx.moveTo(p.x - sp, p.y);
-        ctx.lineTo(p.x + sp, p.y);
-        ctx.moveTo(p.x, p.y - sp);
-        ctx.lineTo(p.x, p.y + sp);
-        ctx.stroke();
-      }
-    }
-    ctx.restore();
+  // 회전·스케일된 스프라이트 그리기(save/restore 없이 행렬 직접 지정)
+  blit(img, x, y, size, rot, sx = 1, sy = 1) {
+    const c = Math.cos(rot), s = Math.sin(rot), d = this.dpr;
+    this.ctx.setTransform(d * c * sx, d * s * sx, -d * s * sy, d * c * sy, d * x, d * y);
+    this.ctx.drawImage(img, -size / 2, -size / 2, size, size);
   }
+  dot(img, x, y, r) { this.ctx.drawImage(img, x - r, y - r, r * 2, r * 2); }
 
-  renderAutumnMaple(ctx, w, h, mx, my, hasMouse) {
-    // 가을 단풍: 42개 고채도 선명 단풍잎 & 부채꼴 은행잎 3D 텀블링 낙하
-    const MAPLE_COLORS = [
-      { base: "#ff1744", dark: "#c62828", vein: "#ffcdd2", rim: "#ff8a80" },
-      { base: "#ff6d00", dark: "#e65100", vein: "#ffe0b2", rim: "#ffd180" },
-      { base: "#ffab00", dark: "#ff8f00", vein: "#fff8e1", rim: "#ffe57f" },
-      { base: "#ffd600", dark: "#f57f17", vein: "#fffde7", rim: "#ffff8d" }
-    ];
-
-    for (const p of this.particles) {
-      p.angle += p.vAngle;
-      p.flip += p.vFlip;
-      p.roll += p.vRoll;
-
-      if (hasMouse) {
-        const dx = p.x - mx;
-        const dy = p.y - my;
-        const dist = Math.hypot(dx, dy);
-        if (dist < 110 && dist > 0) {
-          p.vx += this.mouse.vx * 0.15 + (dx / dist) * 0.9;
-          p.vy -= 0.35;
-        }
-      }
-
-      p.x += p.vx + Math.sin(p.flip) * 0.55;
-      p.y += p.vy;
-      p.vx *= 0.97;
-
-      if (p.y > h + 40) {
-        p.y = -40;
-        p.x = Math.random() * w;
-        p.vy = Math.random() * 0.46 + 0.30;
-      }
-      if (p.x < -40) p.x = w + 40;
-      else if (p.x > w + 40) p.x = -40;
-
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.angle);
-      const sx = Math.cos(p.flip);
-      const sy = Math.cos(p.roll) * 0.35 + 0.65;
-      ctx.scale(sx, sy);
-
-      // 입체 그림자 효과로 딤 처리 위에서도 형태가 또렷이 드러남
-      ctx.shadowColor = "rgba(0, 0, 0, 0.45)";
-      ctx.shadowBlur = 6;
-      ctx.shadowOffsetX = 2;
-      ctx.shadowOffsetY = 3;
-
-      const pal = MAPLE_COLORS[p.colorIdx % MAPLE_COLORS.length];
-
-      if (p.isGinkgo) {
-        // 정밀 은행잎 (부채꼴 + 중심 V자 홈 + 부채살 결 + 줄기)
-        const s = p.size * 0.95;
-        ctx.fillStyle = "#ffd600";
-        ctx.beginPath();
-        ctx.moveTo(0, s * 0.6);
-        ctx.lineTo(-s * 0.08, s * 0.1);
-        ctx.bezierCurveTo(-s * 0.8, -s * 0.1, -s * 0.85, -s * 0.65, -s * 0.15, -s * 0.8);
-        ctx.lineTo(0, -s * 0.62);
-        ctx.lineTo(s * 0.15, -s * 0.8);
-        ctx.bezierCurveTo(s * 0.85, -s * 0.65, s * 0.8, -s * 0.1, s * 0.08, s * 0.1);
-        ctx.closePath();
-        ctx.fill();
-
-        ctx.strokeStyle = "#fffde7";
-        ctx.lineWidth = 1.0;
-        ctx.stroke();
-
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.65)";
-        ctx.lineWidth = 0.8;
-        for (let a = -0.6; a <= 0.6; a += 0.3) {
-          ctx.beginPath();
-          ctx.moveTo(0, s * 0.1);
-          ctx.quadraticCurveTo(a * s * 0.4, -s * 0.3, a * s * 0.7, -s * 0.7);
-          ctx.stroke();
-        }
-
-        ctx.strokeStyle = "#e65100";
-        ctx.lineWidth = 1.4;
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.quadraticCurveTo(s * 0.08, s * 0.35, s * 0.05, s * 0.75);
-        ctx.stroke();
-      } else {
-        // 정밀 5갈래 단풍잎 (부드러운 베지어 곡선 + 주맥과 측맥)
-        const s = p.size;
-        ctx.fillStyle = pal.base;
-        ctx.beginPath();
-        ctx.moveTo(0, -s);
-        ctx.bezierCurveTo(s * 0.18, -s * 0.7, s * 0.32, -s * 0.65, s * 0.45, -s * 0.72);
-        ctx.bezierCurveTo(s * 0.35, -s * 0.45, s * 0.55, -s * 0.35, s * 0.8, -s * 0.32);
-        ctx.bezierCurveTo(s * 0.55, -s * 0.1, s * 0.6, 0.15, s * 0.45, 0.35);
-        ctx.bezierCurveTo(s * 0.25, 0.2, s * 0.1, 0.3, 0, s * 0.5);
-        ctx.bezierCurveTo(-s * 0.1, 0.3, -s * 0.25, 0.2, -s * 0.45, 0.35);
-        ctx.bezierCurveTo(-s * 0.6, 0.15, -s * 0.55, -s * 0.1, -s * 0.8, -s * 0.32);
-        ctx.bezierCurveTo(-s * 0.55, -s * 0.35, -s * 0.35, -s * 0.45, -s * 0.45, -s * 0.72);
-        ctx.bezierCurveTo(-s * 0.32, -s * 0.65, -s * 0.18, -s * 0.7, 0, -s);
-        ctx.closePath();
-        ctx.fill();
-
-        ctx.strokeStyle = pal.rim;
-        ctx.lineWidth = 1.2;
-        ctx.stroke();
-
-        ctx.strokeStyle = pal.vein;
-        ctx.lineWidth = 1.0;
-        ctx.beginPath();
-        ctx.moveTo(0, s * 0.48);
-        ctx.lineTo(0, -s * 0.85);
-        ctx.moveTo(0, s * 0.15);
-        ctx.lineTo(s * 0.65, -s * 0.25);
-        ctx.moveTo(0, s * 0.15);
-        ctx.lineTo(-s * 0.65, -s * 0.25);
-        ctx.moveTo(0, s * -0.15);
-        ctx.lineTo(s * 0.35, -s * 0.58);
-        ctx.moveTo(0, s * -0.15);
-        ctx.lineTo(-s * 0.35, -s * 0.58);
-        ctx.stroke();
-
-        ctx.strokeStyle = pal.dark;
-        ctx.lineWidth = 1.4;
-        ctx.beginPath();
-        ctx.moveTo(0, s * 0.48);
-        ctx.lineTo(0, s * 0.78);
-        ctx.stroke();
-      }
-      ctx.restore();
+  // ---------- 공용 부품 ----------
+  initStars(w, top, count) {
+    for (let i = 0; i < count; i++) {
+      const d = depthRnd();
+      this.stars.push({ x: Math.random() * w, y: Math.random() * top, r: 0.5 + d * 1.3, a: 0.35 + d * 0.6, ph: Math.random() * 6.28, sp: hRnd(0.6, 2.4), glow: d > 0.7 });
     }
   }
-
-  renderRainyCamp(ctx, w, h, mx, my, hasMouse) {
-    // 우중 캠핑: 75개 고속 은빛 빗방울, 바닥 물방울 스플래시 & 동심원 수면 파문
-    ctx.save();
-    ctx.globalCompositeOperation = "screen";
-
-    for (const p of this.particles) {
-      p.y += p.speed;
-      p.x -= 1.8;
-
-      if (hasMouse && Math.hypot(p.x - mx, p.y - my) < 32) {
-        this.ripples.push({ x: p.x, y: p.y, r: 1, maxR: 24, alpha: 0.85 });
-        for (let s = 0; s < 3; s++) {
-          this.splashes.push({ x: p.x, y: p.y, vx: (Math.random() - 0.5) * 3, vy: -Math.random() * 3 - 1.5, alpha: 0.9 });
-        }
-        p.y = -20;
-        p.x = Math.random() * (w + 140);
-      }
-
-      if (p.y > h - 10) {
-        if (Math.random() < 0.26) {
-          this.ripples.push({ x: p.x, y: h - 5, r: 1, maxR: 28 + Math.random() * 16, alpha: 0.65 });
-          for (let s = 0; s < 2; s++) {
-            this.splashes.push({ x: p.x, y: h - 5, vx: (Math.random() - 0.5) * 2.5, vy: -Math.random() * 2.8 - 1, alpha: 0.8 });
-          }
-        }
-        p.y = -20;
-        p.x = Math.random() * (w + 140);
-      }
-
-      const rGrad = ctx.createLinearGradient(p.x, p.y, p.x - 3, p.y + p.len);
-      rGrad.addColorStop(0, `rgba(255, 255, 255, ${Math.min(1, p.alpha * 1.3)})`);
-      rGrad.addColorStop(1, `rgba(160, 235, 255, ${p.alpha * 0.4})`);
-      ctx.strokeStyle = rGrad;
-      ctx.lineWidth = 1.8;
-      ctx.beginPath();
-      ctx.moveTo(p.x, p.y);
-      ctx.lineTo(p.x - 3, p.y + p.len);
-      ctx.stroke();
+  drawStars(ctx, rgb = "255,255,255") {
+    const spr = heroGlow(rgb, 1);
+    ctx.fillStyle = `rgb(${rgb})`;
+    for (const s of this.stars) {
+      const tw = 0.5 + 0.5 * Math.sin(this.time * s.sp * 2 + s.ph);
+      const a = s.a * (0.25 + 0.75 * tw * tw);
+      ctx.globalAlpha = a;
+      if (s.glow) this.dot(spr, s.x, s.y, s.r * 4.5);
+      else ctx.fillRect(s.x - s.r / 2, s.y - s.r / 2, s.r, s.r);
     }
-
-    // 빗방울 튐 스플래시
-    for (let i = this.splashes.length - 1; i >= 0; i--) {
-      const sp = this.splashes[i];
-      sp.x += sp.vx;
-      sp.y += sp.vy;
-      sp.vy += 0.18;
-      sp.alpha -= 0.04;
-      if (sp.alpha <= 0) {
-        this.splashes.splice(i, 1);
-        continue;
-      }
-      ctx.fillStyle = `rgba(215, 245, 255, ${sp.alpha})`;
-      ctx.beginPath();
-      ctx.arc(sp.x, sp.y, 1.2, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    // 수면 파문 (Ripples)
-    for (let i = this.ripples.length - 1; i >= 0; i--) {
-      const r = this.ripples[i];
-      r.r += 1.4;
-      r.alpha -= 0.024;
-      if (r.alpha <= 0) {
-        this.ripples.splice(i, 1);
-        continue;
-      }
-      ctx.strokeStyle = `rgba(210, 245, 255, ${r.alpha * 0.65})`;
-      ctx.lineWidth = 1.4;
-      ctx.beginPath();
-      ctx.ellipse(r.x, r.y, r.r, r.r * 0.35, 0, 0, Math.PI * 2);
-      ctx.stroke();
-
-      if (r.r > 6) {
-        ctx.strokeStyle = `rgba(170, 225, 255, ${r.alpha * 0.35})`;
-        ctx.beginPath();
-        ctx.ellipse(r.x, r.y, r.r * 0.65, r.r * 0.22, 0, 0, Math.PI * 2);
-        ctx.stroke();
-      }
-    }
-    ctx.restore();
+    ctx.globalAlpha = 1;
   }
-
-  renderSnowyWinter(ctx, w, h, mx, my, hasMouse) {
-    // 설경 윈터: 68개 포근한 함박눈 (정밀 6각 결정체 + 부드러운 보케 함박눈)
-    ctx.save();
-    ctx.globalCompositeOperation = "screen";
-
-    for (const p of this.particles) {
-      p.sway += p.swaySpeed;
-      if (hasMouse) {
-        const dx = p.x - mx;
-        const dy = p.y - my;
-        const dist = Math.hypot(dx, dy);
-        if (dist < 110 && dist > 0) {
-          const force = (110 - dist) / 110;
-          p.vx += (dx / dist) * force * 0.18;
-          p.vy += (dy / dist) * force * 0.10;
-        }
-      }
-
-      p.x += p.vx + Math.sin(p.sway) * 0.40;
-      p.y += p.vy;
-      p.vx *= 0.94;
-
-      if (p.y > h + 16) {
-        p.y = -16;
-        p.x = Math.random() * w;
-      }
-      if (p.x < -16) p.x = w + 16;
-      else if (p.x > w + 16) p.x = -16;
-
-      if (p.flakeType === "crystal") {
-        // 정밀 6각 결정체 눈꽃
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.sway * 0.5);
-        ctx.strokeStyle = `rgba(255, 255, 255, ${p.alpha * 0.95})`;
-        ctx.lineWidth = 1.2;
-        const cr = p.r;
-        for (let a = 0; a < 3; a++) {
-          ctx.beginPath();
-          ctx.moveTo(-cr, 0);
-          ctx.lineTo(cr, 0);
-          ctx.stroke();
-          // 가지치기
-          ctx.beginPath();
-          ctx.moveTo(cr * 0.6, -cr * 0.25);
-          ctx.lineTo(cr * 0.4, 0);
-          ctx.lineTo(cr * 0.6, cr * 0.25);
-          ctx.moveTo(-cr * 0.6, -cr * 0.25);
-          ctx.lineTo(-cr * 0.4, 0);
-          ctx.lineTo(-cr * 0.6, cr * 0.25);
-          ctx.stroke();
-          ctx.rotate(Math.PI / 3);
-        }
-        ctx.restore();
-      } else if (p.flakeType === "fluffy") {
-        // 부드러운 몽환 보케 함박눈
-        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.2);
-        g.addColorStop(0, `rgba(255, 255, 255, ${p.alpha})`);
-        g.addColorStop(0.45, `rgba(220, 245, 255, ${p.alpha * 0.6})`);
-        g.addColorStop(1, "rgba(200, 240, 255, 0)");
-        ctx.fillStyle = g;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r * 2.2, 0, Math.PI * 2);
-        ctx.fill();
-      } else {
-        // 미세 눈가루
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-    ctx.restore();
+  addMeteor(x, y, white) {
+    this.meteors.push({ x, y, len: hRnd(150, 280), speed: hRnd(8, 12), angle: Math.PI / 4.8 + hRnd(-0.08, 0.08), alpha: 1, white });
   }
-
-  renderLushForest(ctx, w, h, mx, my, hasMouse) {
-    // 편백 숲: 4줄 틴들 햇살 광선(Sunbeams)과 65개 피톤치드 숲의 정령 빛가루
-    ctx.save();
-    ctx.globalCompositeOperation = "lighter"; // add 블렌드 모드
-
-    const beamPhase = Math.sin(this.time * 0.4) * 0.03;
-    for (let b = 0; b < 4; b++) {
-      const bx = w * (0.22 + b * 0.24);
-      const bGrad = ctx.createLinearGradient(bx, 0, bx - h * 0.45, h);
-      bGrad.addColorStop(0, `rgba(255, 255, 215, ${0.14 + beamPhase + b * 0.02})`);
-      bGrad.addColorStop(0.55, `rgba(220, 255, 180, ${0.08 + beamPhase})`);
-      bGrad.addColorStop(1, "rgba(180, 255, 180, 0)");
-      ctx.fillStyle = bGrad;
-      ctx.beginPath();
-      ctx.moveTo(bx - 35, 0);
-      ctx.lineTo(bx + 85, 0);
-      ctx.lineTo(bx - h * 0.45 + 160, h);
-      ctx.lineTo(bx - h * 0.45 - 65, h);
-      ctx.closePath();
-      ctx.fill();
+  drawMeteors(ctx, k, head = "200,255,0") {
+    ctx.lineCap = "round";
+    for (let i = this.meteors.length - 1; i >= 0; i--) {
+      const s = this.meteors[i], dx = Math.cos(s.angle) * s.len, dy = Math.sin(s.angle) * s.len;
+      const g = ctx.createLinearGradient(s.x, s.y, s.x - dx, s.y - dy);
+      g.addColorStop(0, `rgba(255,255,255,${s.alpha})`);
+      g.addColorStop(0.25, `rgba(${head},${s.alpha * 0.6})`);
+      g.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.strokeStyle = g; ctx.lineWidth = 1.8;
+      ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(s.x - dx, s.y - dy); ctx.stroke();
+      ctx.globalAlpha = s.alpha; this.dot(heroGlow(head, 1), s.x, s.y, 7); ctx.globalAlpha = 1;
+      s.x += Math.cos(s.angle) * s.speed * k; s.y += Math.sin(s.angle) * s.speed * k; s.alpha -= 0.016 * k;
+      if (s.alpha <= 0) this.meteors.splice(i, 1);
     }
-
-    for (const p of this.particles) {
-      p.pulse += p.pulseSpeed;
-      const alpha = Math.max(0.12, p.alpha + Math.sin(p.pulse) * 0.20);
-
-      if (hasMouse) {
-        const dx = mx - p.x;
-        const dy = my - p.y;
-        const dist = Math.hypot(dx, dy);
-        if (dist < 130 && dist > 0) {
-          p.vx += (dx / dist) * 0.12;
-          p.vy += (dy / dist) * 0.12;
-        }
-      }
-
-      p.x += p.vx + Math.sin(p.pulse) * 0.28;
-      p.y += p.vy;
-      p.vx *= 0.96;
-      p.vy *= 0.96;
-
-      if (p.y < -20) p.y = h + 20;
-      if (p.x < -20) p.x = w + 20;
-      else if (p.x > w + 20) p.x = -20;
-
-      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3.5);
-      g.addColorStop(0, `${p.color} ${alpha})`);
-      g.addColorStop(0.35, `${p.color} ${alpha * 0.65})`);
-      g.addColorStop(1, `${p.color} 0)`);
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * 3.5, 0, Math.PI * 2);
-      ctx.fill();
-
-      // 밝고 영롱한 중심 코어
-      ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, alpha + 0.3)})`;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * 0.6, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.restore();
   }
-
-  renderRiverside(ctx, w, h, mx, my, hasMouse) {
-    // 호숫가 카약: 58개 다이아몬드 스파클 & 수평/수직 크로스 렌즈 플레어 물빛 반사
-    ctx.save();
-    ctx.globalCompositeOperation = "lighter"; // add 블렌드로 윤슬 발광 극대화
-
-    for (const p of this.particles) {
-      p.pulse += p.pulseSpeed;
-      let extraGlow = 0;
-      if (hasMouse) {
-        const dist = Math.hypot(p.x - mx, p.y - my);
-        if (dist < 130) {
-          extraGlow = (1 - dist / 130) * 0.45;
-        }
-      }
-
-      const alpha = Math.max(0, (Math.sin(p.pulse) * 0.5 + 0.5) * p.alpha) + extraGlow;
-      if (alpha > 0.03) {
-        const d = p.size * 2.8;
-
-        // 1. 다이아몬드 코어 발광체
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y - d);
-        ctx.quadraticCurveTo(p.x, p.y, p.x + d, p.y);
-        ctx.quadraticCurveTo(p.x, p.y, p.x, p.y + d);
-        ctx.quadraticCurveTo(p.x, p.y, p.x - d, p.y);
-        ctx.quadraticCurveTo(p.x, p.y, p.x, p.y - d);
-        ctx.closePath();
-        ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, alpha * 1.1)})`;
-        ctx.fill();
-
-        // 2. 수평 렌즈 플레어 (아쿠아마린-청록 물빛 그라데이션)
-        const fl = p.flareLen || 32;
-        const flareGradH = ctx.createLinearGradient(p.x - fl, p.y, p.x + fl, p.y);
-        flareGradH.addColorStop(0, "rgba(80, 220, 255, 0)");
-        flareGradH.addColorStop(0.3, `rgba(160, 245, 255, ${alpha * 0.75})`);
-        flareGradH.addColorStop(0.5, `rgba(255, 255, 255, ${Math.min(1, alpha * 0.95)})`);
-        flareGradH.addColorStop(0.7, `rgba(160, 245, 255, ${alpha * 0.75})`);
-        flareGradH.addColorStop(1, "rgba(80, 220, 255, 0)");
-        ctx.fillStyle = flareGradH;
-        ctx.fillRect(p.x - fl, p.y - 1.2, fl * 2, 2.4);
-
-        // 3. 수직 미세 렌즈 플레어
-        const vfl = fl * 0.35;
-        const flareGradV = ctx.createLinearGradient(p.x, p.y - vfl, p.x, p.y + vfl);
-        flareGradV.addColorStop(0, "rgba(80, 220, 255, 0)");
-        flareGradV.addColorStop(0.5, `rgba(255, 255, 255, ${alpha * 0.65})`);
-        flareGradV.addColorStop(1, "rgba(80, 220, 255, 0)");
-        ctx.fillStyle = flareGradV;
-        ctx.fillRect(p.x - 0.9, p.y - vfl, 1.8, vfl * 2);
-      }
-    }
-
-    // 4. 수면 동심원 리플 (잔잔한 물결 파문)
-    for (let i = this.ripples.length - 1; i >= 0; i--) {
-      const r = this.ripples[i];
-      r.r += 1.2;
-      r.alpha -= 0.012;
-      if (r.alpha <= 0) {
-        this.ripples.splice(i, 1);
-        continue;
-      }
-      ctx.strokeStyle = `rgba(160, 240, 255, ${r.alpha * 0.75})`;
-      ctx.lineWidth = 1.6;
-      ctx.beginPath();
-      ctx.ellipse(r.x, r.y, r.r, r.r * 0.28, 0, 0, Math.PI * 2);
-      ctx.stroke();
-
-      // 내부 은은한 보조 파문
-      if (r.r > 12) {
-        ctx.strokeStyle = `rgba(200, 250, 255, ${r.alpha * 0.45})`;
-        ctx.lineWidth = 0.9;
-        ctx.beginPath();
-        ctx.ellipse(r.x, r.y, r.r * 0.65, r.r * 0.65 * 0.28, 0, 0, Math.PI * 2);
-        ctx.stroke();
-      }
-    }
-    ctx.restore();
+  makeSteam(w, h, top, initial) {
+    // top: 김이 시작되는 수면 높이(0~1)
+    return { x: hRnd(-0.05, 1.05) * w, y: initial ? hRnd(h * 0.2, h) : h * hRnd(top, 1.02), r: hRnd(28, 70), vy: -hRnd(0.18, 0.45), vx: hRnd(-0.1, 0.1), life: initial ? Math.random() : 1, ph: Math.random() * 6.28, dec: hRnd(0.0016, 0.003) };
   }
-
-  renderWarmBonfire(ctx, w, h, mx, my, hasMouse) {
-    // 불멍 캠핑: 78개 불티, 하단 모닥불 발열 글로우(Hearth Glow), 고온 스파크 궤적
-    ctx.save();
-    ctx.globalCompositeOperation = "lighter"; // add 블렌드로 화염 발광
-
-    // 1. 하단 모닥불 발열 글로우 (Hearth Glow)
-    const glowCycle = (Math.sin(this.time * 2.2) + 1) * 0.5;
-    const hearthGrad = ctx.createRadialGradient(w * 0.54, h, 20, w * 0.54, h, w * 0.45);
-    hearthGrad.addColorStop(0, `rgba(255, 140, 30, ${0.22 + glowCycle * 0.08})`);
-    hearthGrad.addColorStop(0.35, `rgba(255, 75, 10, ${0.12 + glowCycle * 0.05})`);
-    hearthGrad.addColorStop(0.7, `rgba(220, 40, 0, ${0.05 + glowCycle * 0.02})`);
-    hearthGrad.addColorStop(1, "rgba(200, 20, 0, 0)");
-    ctx.fillStyle = hearthGrad;
-    ctx.fillRect(0, h * 0.35, w, h * 0.65);
-
-    // 2. 다변화 불티 입자 렌더링
-    for (let i = this.particles.length - 1; i >= 0; i--) {
+  drawSteam(ctx, w, h, k, top, mx, my, hasMouse, strength = 1) {
+    const puff = heroPuff();
+    for (let i = 0; i < this.particles.length; i++) {
       const p = this.particles[i];
-      p.life -= p.decay;
-      if (p.life <= 0 || p.y < -25) {
-        this.particles[i] = this.createEmbersParticle(w, h, false);
-        continue;
-      }
-
-      if (hasMouse) {
-        const dx = p.x - mx;
-        const dy = p.y - my;
-        const dist = Math.hypot(dx, dy);
-        if (dist < 120 && dist > 0) {
-          p.vx += this.mouse.vx * 0.16 + (dx / dist) * 1.4;
-          p.vy -= 0.9;
-        }
-      }
-
-      p.y += p.vy;
-      p.x += p.vx + Math.sin(this.time * 2.0 + p.drift) * 0.75;
-      p.drift += 0.018;
-      p.vx *= 0.985;
-
-      const alpha = Math.min(1, p.life * 1.5);
-      ctx.globalAlpha = alpha;
-
-      if (p.type === "spark") {
-        // 날렵한 네온 스파크 궤적 (외곽 글로우 + 코어 고온 라인)
-        ctx.strokeStyle = p.color;
-        ctx.lineWidth = p.size * 1.8;
-        ctx.lineCap = "round";
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p.x - p.vx * 2.2, p.y - p.vy * 2.5);
-        ctx.stroke();
-
-        ctx.strokeStyle = "#ffffff";
-        ctx.lineWidth = Math.max(1, p.size * 0.7);
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p.x - p.vx * 1.8, p.y - p.vy * 2.0);
-        ctx.stroke();
-      } else if (p.type === "capsule") {
-        // 3D 회전 열기 캡슐
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        const heading = Math.atan2(p.vy, p.vx + Math.sin(this.time * 2.0 + p.drift) * 0.75);
-        ctx.rotate(heading);
-
-        const g = ctx.createLinearGradient(0, -p.len, 0, p.len);
-        g.addColorStop(0, "#ffffff");
-        g.addColorStop(0.35, p.color);
-        g.addColorStop(0.8, p.color);
-        g.addColorStop(1, "rgba(255, 60, 0, 0)");
-        ctx.fillStyle = g;
-
-        ctx.beginPath();
-        ctx.ellipse(0, 0, p.size * 1.1, p.len, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      } else {
-        // 부드러운 고온 화염 구체
-        const currentSize = Math.max(1.0, p.size * (0.5 + p.life * 0.65));
-        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, currentSize * 2.5);
-        g.addColorStop(0, "#ffffff");
-        g.addColorStop(0.4, p.color);
-        g.addColorStop(1, "rgba(255, 60, 0, 0)");
-        ctx.fillStyle = g;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, currentSize * 2.5, 0, Math.PI * 2);
-        ctx.fill();
-      }
+      p.ph += 0.012 * k;
+      p.y += p.vy * k; p.x += (p.vx + Math.sin(p.ph) * 0.35) * k; p.r += 0.16 * k; p.life -= p.dec * k;
+      if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 140 && d > 0) { p.x += (dx / d) * 1.1 * k; p.y += (dy / d) * 0.5 * k; } }
+      if (p.life <= 0) { this.particles[i] = this.makeSteam(w, h, top, false); continue; }
+      // 생겨날 때 서서히 짙어지고 올라가며 옅어짐
+      const fadeIn = Math.min(1, (1 - p.life) * 6);
+      ctx.globalAlpha = Math.min(1, p.life * 1.3) * fadeIn * 0.42 * strength;
+      ctx.drawImage(puff, p.x - p.r, p.y - p.r * 0.8, p.r * 2, p.r * 1.6);
     }
-    ctx.restore();
+    ctx.globalAlpha = 1;
   }
-
-  renderSunsetCoast(ctx, w, h, mx, my, hasMouse) {
-    // 서해안 노을: 75개 황금빛 해수면 윤슬 + 3줄 노을 파도 밴드 + 36개 황혼 미립자 + 정밀 편대 갈매기
-    ctx.save();
-    ctx.globalCompositeOperation = "lighter"; // add 블렌드로 윤슬 및 노을빛 극대화
-
-    const glowCycle = (Math.sin(this.time * 0.5) + 1) * 0.5;
-    const sunsetGrad = ctx.createRadialGradient(w * 0.5, h * 0.50, 20, w * 0.5, h * 0.50, w * 0.70);
-    sunsetGrad.addColorStop(0, `rgba(255, 155, 55, ${0.20 + glowCycle * 0.08})`);
-    sunsetGrad.addColorStop(0.45, `rgba(255, 95, 30, ${0.10 + glowCycle * 0.04})`);
-    sunsetGrad.addColorStop(1, "rgba(255, 87, 34, 0)");
-    ctx.fillStyle = sunsetGrad;
-    ctx.fillRect(0, 0, w, h);
-
-    // 1. 수평선 부근 3줄 노을 파도 윤슬 밴드
-    for (let b = 0; b < 3; b++) {
-      const bandY = h * (0.45 + b * 0.10);
-      const bandWave = Math.sin(this.time * 0.75 + b * 2.1) * 10;
-      const bandGrad = ctx.createLinearGradient(0, bandY, w, bandY);
-      bandGrad.addColorStop(0, "rgba(255, 160, 50, 0)");
-      bandGrad.addColorStop(0.3, `rgba(255, 205, 90, ${0.05 + glowCycle * 0.03})`);
-      bandGrad.addColorStop(0.55, `rgba(255, 240, 160, ${0.10 + glowCycle * 0.04})`);
-      bandGrad.addColorStop(0.8, `rgba(255, 180, 60, ${0.05 + glowCycle * 0.03})`);
-      bandGrad.addColorStop(1, "rgba(255, 160, 50, 0)");
-      ctx.fillStyle = bandGrad;
-      ctx.fillRect(0, bandY + bandWave - 2.0, w, 4.0);
+  makeFlake(w, h, initial) {
+    const d = depthRnd();
+    return { x: Math.random() * w, y: initial ? Math.random() * h : -10, d, r: 0.8 + d * 3.2, vy: 0.25 + d * 0.75, vx: hRnd(-0.1, 0.1), ph: Math.random() * 6.28, sp: hRnd(0.008, 0.02), a: 0.45 + d * 0.5 };
+  }
+  drawFlakes(ctx, list, w, h, k, mx, my, hasMouse) {
+    const spr = heroGlow("230,245,255", 1);
+    for (let i = 0; i < list.length; i++) {
+      const p = list[i];
+      p.ph += p.sp * k;
+      if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 110 && d > 0) { p.vx += (dx / d) * (1 - d / 110) * 0.18; } }
+      p.x += (p.vx + Math.sin(p.ph) * 0.4) * k; p.y += p.vy * k; p.vx *= 0.95;
+      if (p.y > h + 10) list[i] = this.makeFlake(w, h, false);
+      if (p.x < -10) p.x = w + 10; else if (p.x > w + 10) p.x = -10;
+      ctx.globalAlpha = p.a; this.dot(spr, p.x, p.y, p.r * 2.4);
     }
+    ctx.globalAlpha = 1;
+  }
+  // 대각선 빛줄기: 스프라이트를 기울여 그리고 밝기를 천천히 숨쉬듯 바꿈
+  drawShafts(ctx, shafts, rgb, k) {
+    const spr = heroShaft(rgb), d = this.dpr;
+    ctx.globalCompositeOperation = "lighter";
+    for (const s of shafts) {
+      s.ph += s.sp * k;
+      const breathe = 0.5 + 0.5 * Math.sin(s.ph);
+      ctx.globalAlpha = s.a * (0.25 + 0.75 * breathe * breathe);
+      const c = Math.cos(s.rot), sn = Math.sin(s.rot);
+      const sway = Math.sin(s.ph * 0.37) * 6;
+      ctx.setTransform(d * c, d * sn, -d * sn, d * c, d * (s.x + sway), d * s.y);
+      ctx.drawImage(spr, -s.w / 2, 0, s.w, s.len);
+    }
+    ctx.setTransform(d, 0, 0, d, 0, 0);
+    ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
+  }
+  makeShafts(count, ox, oy, rot, spreadX, len, wMin, wMax, a) {
+    const out = [];
+    for (let i = 0; i < count; i++) out.push({ x: ox + (i - (count - 1) / 2) * spreadX + hRnd(-10, 10), y: oy, rot: rot + hRnd(-0.05, 0.05), len: len * hRnd(0.85, 1.15), w: hRnd(wMin, wMax), a: a * hRnd(0.7, 1), ph: Math.random() * 6.28, sp: hRnd(0.006, 0.014) });
+    return out;
+  }
+  makeEmber(x, y) {
+    const d = depthRnd();
+    return { x, y, d, size: 0.6 + d * 2.0, vx: hRnd(-0.25, 0.25), vy: -(0.35 + d * 0.75 + Math.random() * 0.25), life: 1, decay: hRnd(0.002, 0.0045), ph: Math.random() * 6.28, wob: hRnd(0.4, 1.1), col: Math.random() < 0.3 ? "255,240,200" : Math.random() < 0.75 ? "255,170,70" : "255,90,30" };
+  }
+  addFirework(x, y, big) {
+    const cols = ["255,120,120", "255,214,90", "130,210,255", "170,240,150", "220,150,255", "255,180,120"];
+    const col = cols[Math.floor(Math.random() * cols.length)];
+    const n = big ? 46 : 30;
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * Math.PI * 2 + hRnd(-0.08, 0.08), sp = hRnd(1.2, big ? 3.6 : 2.8);
+      this.fw.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 1, dec: hRnd(0.011, 0.018), col, r: hRnd(1.6, 3.2) });
+    }
+  }
+  addSplash(x, y) {
+    const n = Math.round(hRnd(9, 15));
+    for (let i = 0; i < n; i++) {
+      const a = -Math.PI / 2 + hRnd(-1.1, 1.1), sp = hRnd(1.4, 3.6);
+      this.splashes.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, r: hRnd(1.4, 3.8), alpha: hRnd(0.75, 1), y0: y });
+    }
+    this.ripples.push({ x, y, r: 2, maxR: hRnd(40, 70), alpha: 0.7 });
+  }
+  drawRipples(ctx, k, grow = 1.3, fade = 0.02, flat = 0.3, rgb = "200,240,255") {
+    ctx.lineWidth = 1.3;
+    for (let i = this.ripples.length - 1; i >= 0; i--) {
+      const r = this.ripples[i];
+      r.r += grow * k; r.alpha -= fade * k;
+      if (r.alpha <= 0 || r.r > r.maxR * 1.6) { this.ripples.splice(i, 1); continue; }
+      ctx.strokeStyle = `rgba(${rgb},${r.alpha * 0.7})`;
+      ctx.beginPath(); ctx.ellipse(r.x, r.y, r.r, r.r * flat, 0, 0, Math.PI * 2); ctx.stroke();
+    }
+  }
+}
 
-    // 2. 해수면 다채로운 렌즈형 황금 윤슬 (Water Shimmer)
-    for (const p of this.particles) {
-      p.pulse += p.pulseSpeed;
-      p.x += p.vx;
-      if (p.x < -60) p.x = w + 60;
+// ---------- 스프라이트 ----------
+function heroLeafSprite(idx) {
+  const PAL = [["#ff1744", "#ffcdd2", "#ff8a80"], ["#ff6d00", "#ffe0b2", "#ffd180"], ["#ffab00", "#fff8e1", "#ffe57f"], ["#ffd600", "#fffde7", "#ffff8d"]];
+  return heroSprite("leaf" + idx, 72, (g, S) => {
+    g.translate(S / 2, S / 2);
+    g.shadowColor = "rgba(0,0,0,0.4)"; g.shadowBlur = 4; g.shadowOffsetX = 1.5; g.shadowOffsetY = 2;
+    const s = S * 0.38;
+    if (idx === 4) {
+      g.fillStyle = "#ffd600";
+      g.beginPath(); g.moveTo(0, s * 0.6); g.lineTo(-s * 0.08, s * 0.1);
+      g.bezierCurveTo(-s * 0.8, -s * 0.1, -s * 0.85, -s * 0.65, -s * 0.15, -s * 0.8); g.lineTo(0, -s * 0.62); g.lineTo(s * 0.15, -s * 0.8);
+      g.bezierCurveTo(s * 0.85, -s * 0.65, s * 0.8, -s * 0.1, s * 0.08, s * 0.1); g.closePath(); g.fill();
+      g.shadowColor = "transparent"; g.strokeStyle = "rgba(255,255,255,0.6)"; g.lineWidth = 0.8;
+      for (let a = -0.6; a <= 0.6; a += 0.3) { g.beginPath(); g.moveTo(0, s * 0.1); g.quadraticCurveTo(a * s * 0.4, -s * 0.3, a * s * 0.7, -s * 0.7); g.stroke(); }
+      g.strokeStyle = "#e65100"; g.lineWidth = 1.4; g.beginPath(); g.moveTo(0, 0); g.quadraticCurveTo(s * 0.08, s * 0.35, s * 0.05, s * 0.75); g.stroke();
+      return;
+    }
+    const [base, vein, rim] = PAL[idx];
+    g.fillStyle = base; g.beginPath(); g.moveTo(0, -s);
+    g.bezierCurveTo(s * 0.18, -s * 0.7, s * 0.32, -s * 0.65, s * 0.45, -s * 0.72); g.bezierCurveTo(s * 0.35, -s * 0.45, s * 0.55, -s * 0.35, s * 0.8, -s * 0.32);
+    g.bezierCurveTo(s * 0.55, -s * 0.1, s * 0.6, 0.15, s * 0.45, 0.35); g.bezierCurveTo(s * 0.25, 0.2, s * 0.1, 0.3, 0, s * 0.5);
+    g.bezierCurveTo(-s * 0.1, 0.3, -s * 0.25, 0.2, -s * 0.45, 0.35); g.bezierCurveTo(-s * 0.6, 0.15, -s * 0.55, -s * 0.1, -s * 0.8, -s * 0.32);
+    g.bezierCurveTo(-s * 0.55, -s * 0.35, -s * 0.35, -s * 0.45, -s * 0.45, -s * 0.72); g.bezierCurveTo(-s * 0.32, -s * 0.65, -s * 0.18, -s * 0.7, 0, -s);
+    g.closePath(); g.fill();
+    g.shadowColor = "transparent"; g.strokeStyle = rim; g.lineWidth = 1.2; g.stroke();
+    g.strokeStyle = vein; g.lineWidth = 1; g.beginPath();
+    g.moveTo(0, s * 0.48); g.lineTo(0, -s * 0.85); g.moveTo(0, s * 0.15); g.lineTo(s * 0.65, -s * 0.25); g.moveTo(0, s * 0.15); g.lineTo(-s * 0.65, -s * 0.25);
+    g.stroke();
+  });
+}
+function heroPetalSprite(rgb, notch, key) {
+  return heroSprite("petal" + key, 48, (g, S) => {
+    g.translate(S / 2, S / 2);
+    const s = S * 0.42;
+    const gr = g.createLinearGradient(0, s * 0.7, 0, -s * 0.7);
+    gr.addColorStop(0, `rgba(${rgb},0.98)`); gr.addColorStop(0.6, `rgba(${rgb},0.9)`); gr.addColorStop(1, "rgba(255,248,250,0.96)");
+    g.fillStyle = gr; g.beginPath(); g.moveTo(0, s * 0.7);
+    g.bezierCurveTo(-s * 0.6, s * 0.3, -s * 0.66, -s * 0.4, -s * 0.25, -s * 0.7);
+    if (notch) { g.lineTo(0, -s * 0.52); g.lineTo(s * 0.25, -s * 0.7); } else g.quadraticCurveTo(0, -s * 0.85, s * 0.25, -s * 0.7);
+    g.bezierCurveTo(s * 0.66, -s * 0.4, s * 0.6, s * 0.3, 0, s * 0.7); g.closePath(); g.fill();
+    g.strokeStyle = "rgba(255,255,255,0.6)"; g.lineWidth = 0.8; g.stroke();
+  });
+}
+function heroDandelionSprite() {
+  return heroSprite("dandelion", 64, (g, S) => {
+    g.translate(S / 2, S * 0.72);
+    const stem = S * 0.32, R = S * 0.3;
+    g.strokeStyle = "rgba(255,255,255,0.85)"; g.lineWidth = 0.9; g.fillStyle = "rgba(255,255,255,0.95)";
+    for (let i = 0; i < 16; i++) {
+      const a = -Math.PI * 0.88 + (i / 15) * Math.PI * 0.76, fx = Math.cos(a) * R, fy = Math.sin(a) * R * 0.75 - stem;
+      g.beginPath(); g.moveTo(0, -stem); g.lineTo(fx, fy); g.stroke();
+      g.beginPath(); g.arc(fx, fy, 0.9, 0, 6.28); g.fill();
+    }
+    g.strokeStyle = "rgba(240,235,220,0.95)"; g.lineWidth = 1.1; g.beginPath(); g.moveTo(0, 0); g.lineTo(0, -stem); g.stroke();
+    g.fillStyle = "rgba(175,145,105,1)"; g.beginPath(); g.ellipse(0, 2, 1.4, 3.4, 0, 0, 6.28); g.fill();
+  });
+}
+function heroGrassSprite(i) {
+  const cols = ["120,190,70", "150,205,80", "185,200,90", "105,165,60"];
+  return heroSprite("grass" + i, 64, (g, S) => {
+    g.translate(S / 2, S / 2);
+    const L = S * 0.46, bend = (i % 2 ? 1 : -1) * S * 0.12;
+    const gr = g.createLinearGradient(0, L, 0, -L);
+    gr.addColorStop(0, `rgba(${cols[i]},1)`); gr.addColorStop(1, "rgba(235,240,170,0.95)");
+    g.fillStyle = gr; g.beginPath(); g.moveTo(-1.6, L); g.quadraticCurveTo(bend, 0, bend * 0.5, -L); g.quadraticCurveTo(bend + 1.8, 0, 1.6, L); g.closePath(); g.fill();
+  });
+}
+function heroBubbleSprite() {
+  return heroSprite("bubble", 64, (g, S) => {
+    const r = S / 2 - 2, c = S / 2;
+    const gr = g.createRadialGradient(c, c, r * 0.6, c, c, r);
+    gr.addColorStop(0, "rgba(200,240,255,0.06)"); gr.addColorStop(0.85, "rgba(220,245,255,0.22)"); gr.addColorStop(1, "rgba(255,255,255,0.7)");
+    g.fillStyle = gr; g.beginPath(); g.arc(c, c, r, 0, 6.28); g.fill();
+    g.strokeStyle = "rgba(255,255,255,0.75)"; g.lineWidth = 1.5; g.stroke();
+    g.strokeStyle = "rgba(255,190,240,0.35)"; g.lineWidth = 2; g.beginPath(); g.arc(c, c, r - 3, 2.2, 3.6); g.stroke();
+    g.fillStyle = "rgba(255,255,255,0.9)"; g.beginPath(); g.ellipse(c - r * 0.38, c - r * 0.4, r * 0.2, r * 0.12, -0.7, 0, 6.28); g.fill();
+  });
+}
+function heroSparkleSprite() {
+  // 물빛 윤슬: 작은 다이아몬드 + 짧은 가로 플레어
+  return heroSpriteWH("sparkle", 64, 16, (g, w, h) => {
+    const cy = h / 2, cx = w / 2;
+    const lg = g.createLinearGradient(0, cy, w, cy);
+    lg.addColorStop(0, "rgba(120,220,255,0)"); lg.addColorStop(0.35, "rgba(170,240,255,0.6)"); lg.addColorStop(0.5, "rgba(255,255,255,1)"); lg.addColorStop(0.65, "rgba(170,240,255,0.6)"); lg.addColorStop(1, "rgba(120,220,255,0)");
+    g.fillStyle = lg; g.fillRect(0, cy - 1, w, 2);
+    g.fillStyle = "#fff"; g.beginPath(); g.moveTo(cx, cy - 5); g.quadraticCurveTo(cx, cy, cx + 5, cy); g.quadraticCurveTo(cx, cy, cx, cy + 5); g.quadraticCurveTo(cx, cy, cx - 5, cy); g.quadraticCurveTo(cx, cy, cx, cy - 5); g.fill();
+  });
+}
+function heroRaySprite() {
+  // 위가 투명, 아래로 갈수록 짙은 빗줄기
+  return heroSpriteWH("rain", 4, 64, (g, w, h) => {
+    const lg = g.createLinearGradient(0, 0, 0, h);
+    lg.addColorStop(0, "rgba(170,230,255,0)"); lg.addColorStop(0.6, "rgba(210,240,255,0.55)"); lg.addColorStop(1, "rgba(255,255,255,1)");
+    g.fillStyle = lg; g.fillRect(1, 0, 2, h);
+  });
+}
+function heroRiderSprite() {
+  // 짚라인 탑승자 실루엣(도르래 + 줄 + 사람)
+  return heroSpriteWH("rider", 48, 64, (g, w, h) => {
+    g.translate(w / 2, 6);
+    g.fillStyle = "rgba(25,30,35,0.95)"; g.strokeStyle = "rgba(25,30,35,0.95)"; g.lineCap = "round";
+    g.beginPath(); g.arc(0, 0, 3.2, 0, 6.28); g.fill();
+    g.lineWidth = 1.3; g.beginPath(); g.moveTo(-1.5, 2); g.lineTo(-4, 16); g.moveTo(1.5, 2); g.lineTo(4, 16); g.stroke();
+    g.lineWidth = 2.6; g.beginPath(); g.moveTo(-4, 16); g.lineTo(-2, 22); g.moveTo(4, 16); g.lineTo(2, 22); g.stroke();
+    g.beginPath(); g.arc(0, 21, 3.4, 0, 6.28); g.fill();
+    g.fillStyle = "#e9453a"; g.beginPath(); g.ellipse(0, 31, 4.6, 7, 0, 0, 6.28); g.fill();
+    g.strokeStyle = "rgba(25,30,35,0.95)"; g.lineWidth = 3;
+    g.beginPath(); g.moveTo(-2, 37); g.lineTo(-6, 48); g.lineTo(-3, 55); g.moveTo(2, 37); g.lineTo(5, 48); g.lineTo(9, 53); g.stroke();
+  });
+}
 
-      let extraGlow = 0;
-      if (hasMouse) {
-        const dist = Math.hypot(p.x - mx, p.y - my);
-        if (dist < 120) {
-          p.pulse += 0.05;
-          extraGlow = (1 - dist / 120) * 0.45;
-        }
+// ---------- 테마별 효과 ----------
+function riseAndWrap(p, w, h, k) {
+  if (p.x < -30) p.x = w + 30; else if (p.x > w + 30) p.x = -30;
+  if (p.y < -30) p.y = h + 30; else if (p.y > h + 30) p.y = -30;
+}
+const HERO_FX = {
+  // 01 은하수: 반딧불 글로우를 05번 입자 크기로 줄이고, 깊이별 크기·밝기, 반짝임
+  "night-sky": {
+    init(w, h) {
+      for (let i = 0; i < this.n(40); i++) {
+        const d = depthRnd();
+        this.particles.push({ x: Math.random() * w, y: hRnd(0.25, 1) * h, d, r: 3 + d * 7, a: 0.35 + d * 0.6, vx: hRnd(-0.15, 0.15), vy: hRnd(-0.1, 0.1), ph: Math.random() * 6.28, sp: hRnd(0.02, 0.06) });
       }
-
-      const alpha = Math.max(0, (Math.sin(p.pulse) * 0.5 + 0.5) * p.alpha) + extraGlow;
-      if (alpha > 0.02) {
-        const halfLen = p.len * 0.55;
-        const shimmerGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, halfLen);
-        shimmerGrad.addColorStop(0, `rgba(255, 255, 235, ${Math.min(1, alpha * 1.1)})`);
-        shimmerGrad.addColorStop(0.35, `rgba(255, 215, 95, ${Math.min(1, alpha * 0.85)})`);
-        shimmerGrad.addColorStop(0.75, `rgba(255, 145, 40, ${Math.min(1, alpha * 0.45)})`);
-        shimmerGrad.addColorStop(1, "rgba(255, 120, 30, 0)");
-
-        ctx.fillStyle = shimmerGrad;
+    },
+    draw(ctx, w, h, k, mx, my, hasMouse) {
+      if (Math.random() < 0.006 * k && this.meteors.length < 2) this.addMeteor(hRnd(0.1, 0.85) * w, hRnd(0.02, 0.3) * h);
+      ctx.globalCompositeOperation = "lighter";
+      this.drawMeteors(ctx, k);
+      const spr = heroGlow("210,255,90");
+      for (const p of this.particles) {
+        p.ph += p.sp * k;
+        if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 130 && d > 0) { const f = ((130 - d) / 130) * (this.mouse.isDown ? -0.4 : 0.3); p.vx += (dx / d) * f; p.vy += (dy / d) * f; } }
+        p.x += (p.vx + Math.sin(this.time * 0.35 + p.ph * 0.1) * 0.2) * k;
+        p.y += (p.vy + Math.cos(this.time * 0.28 + p.ph * 0.1) * 0.14) * k;
+        p.vx *= 0.96; p.vy *= 0.96;
+        riseAndWrap(p, w, h, k);
+        const tw = 0.5 + 0.5 * Math.sin(p.ph);
+        ctx.globalAlpha = p.a * (0.15 + 0.85 * tw * tw);
+        this.dot(spr, p.x, p.y, p.r * (0.8 + tw * 0.3));
+      }
+    }
+  },
+  // 02 가을 단풍: 잎을 미리 그린 스프라이트로(프레임마다 그림자·베지어 X)
+  "autumn-maple": {
+    init(w, h) {
+      for (let i = 0; i < this.n(36); i++) {
+        const d = depthRnd();
+        this.particles.push({ x: Math.random() * w, y: Math.random() * h, d, size: 18 + d * 20, vx: hRnd(-0.3, 0.3), vy: 0.3 + d * 0.5, angle: Math.random() * 6.28, vA: hRnd(-0.016, 0.016), flip: Math.random() * 6.28, vF: hRnd(0.009, 0.027), roll: Math.random() * 6.28, vR: hRnd(0.01, 0.03), spr: Math.random() < 0.35 ? 4 : Math.floor(Math.random() * 4) });
+      }
+    },
+    draw(ctx, w, h, k, mx, my, hasMouse) {
+      for (const p of this.particles) {
+        p.angle += p.vA * k; p.flip += p.vF * k; p.roll += p.vR * k;
+        if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 110 && d > 0) { p.vx += this.mouse.vx * 0.15 + (dx / d) * 0.9; p.vy -= 0.3; } }
+        p.x += (p.vx + Math.sin(p.flip) * 0.55) * k; p.y += p.vy * k; p.vx *= 0.97; p.vy += (0.3 + p.d * 0.5 - p.vy) * 0.02;
+        if (p.y > h + 40) { p.y = -40; p.x = Math.random() * w; }
+        if (p.x < -40) p.x = w + 40; else if (p.x > w + 40) p.x = -40;
+        ctx.globalAlpha = 0.6 + p.d * 0.4;
+        this.blit(heroLeafSprite(p.spr), p.x, p.y, p.size, p.angle, Math.cos(p.flip), Math.cos(p.roll) * 0.35 + 0.65);
+      }
+    }
+  },
+  // 03 우중: 빗줄기 아래쪽이 짙고 위로 갈수록 옅게
+  "rainy-camp": {
+    init(w, h) {
+      for (let i = 0; i < this.n(80); i++) { const d = depthRnd(); this.particles.push({ x: Math.random() * (w + 140), y: Math.random() * h, d, speed: 12 + d * 12, len: 14 + d * 22, a: 0.35 + d * 0.55 }); }
+    },
+    draw(ctx, w, h, k, mx, my, hasMouse) {
+      const spr = heroRaySprite(), dpr = this.dpr, skew = -0.12;
+      ctx.globalCompositeOperation = "screen";
+      ctx.setTransform(dpr, 0, skew * dpr, dpr, 0, 0);
+      for (const p of this.particles) {
+        p.y += p.speed * k;
+        const sx = p.x - p.y * skew;
+        if ((hasMouse && Math.hypot(p.x - mx, p.y - my) < 30) || p.y > h - 8) {
+          if (hasMouse || Math.random() < 0.25) {
+            const gy = Math.min(p.y, h - 5);
+            this.ripples.push({ x: p.x, y: gy, r: 1, maxR: hRnd(24, 44), alpha: 0.65 });
+            for (let s = 0; s < 2; s++) this.splashes.push({ x: p.x, y: gy, vx: hRnd(-1.3, 1.3), vy: -hRnd(1, 3), alpha: 0.8 });
+          }
+          p.y = -p.len; p.x = Math.random() * (w + 140);
+          continue;
+        }
+        ctx.globalAlpha = p.a;
+        ctx.drawImage(spr, sx - 1, p.y - p.len, p.d > 0.6 ? 2.4 : 1.6, p.len);
+      }
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = "rgba(215,245,255,0.8)";
+      for (let i = this.splashes.length - 1; i >= 0; i--) {
+        const s = this.splashes[i]; s.x += s.vx * k; s.y += s.vy * k; s.vy += 0.18 * k; s.alpha -= 0.04 * k;
+        if (s.alpha <= 0) { this.splashes.splice(i, 1); continue; }
+        ctx.globalAlpha = s.alpha; ctx.fillRect(s.x - 1, s.y - 1, 2, 2);
+      }
+      ctx.globalAlpha = 1;
+      this.drawRipples(ctx, k, 1.4, 0.024, 0.35);
+    }
+  },
+  // 04 설경: 동일한 느낌, 스프라이트로 최적화
+  "snowy-winter": {
+    init(w, h) { for (let i = 0; i < this.n(80); i++) this.particles.push(this.makeFlake(w, h, true)); },
+    draw(ctx, w, h, k, mx, my, hasMouse) { ctx.globalCompositeOperation = "screen"; this.drawFlakes(ctx, this.particles, w, h, k, mx, my, hasMouse); }
+  },
+  // 05 편백 숲: 블러 처리된 대각선 빛줄기가 짙어졌다 옅어짐 + 빛가루
+  "lush-forest": {
+    init(w, h) {
+      const sun = this.imgPt(0.87, 0.2);
+      this.extra = this.makeShafts(5, sun.x - w * 0.18, -h * 0.1, 0.55, w * 0.1, h * 1.5, 90, 190, 0.95);
+      for (let i = 0; i < this.n(55); i++) { const d = depthRnd(); this.particles.push({ x: Math.random() * w, y: Math.random() * h, d, r: 2 + d * 4, a: 0.3 + d * 0.6, vx: hRnd(-0.08, 0.08), vy: -hRnd(0.05, 0.22), ph: Math.random() * 6.28, sp: hRnd(0.015, 0.04) }); }
+    },
+    draw(ctx, w, h, k, mx, my, hasMouse) {
+      this.drawShafts(ctx, this.extra, "255,245,200", k);
+      ctx.globalCompositeOperation = "lighter";
+      const spr = heroGlow("240,255,160");
+      for (const p of this.particles) {
+        p.ph += p.sp * k;
+        if (hasMouse) { const dx = mx - p.x, dy = my - p.y, d = Math.hypot(dx, dy); if (d < 130 && d > 0) { p.vx += (dx / d) * 0.05; p.vy += (dy / d) * 0.05; } }
+        p.x += (p.vx + Math.sin(p.ph) * 0.2) * k; p.y += p.vy * k; p.vx *= 0.98; p.vy += (-0.12 - p.vy) * 0.02;
+        riseAndWrap(p, w, h, k);
+        const tw = 0.5 + 0.5 * Math.sin(p.ph);
+        ctx.globalAlpha = p.a * (0.3 + 0.7 * tw); this.dot(spr, p.x, p.y, p.r);
+      }
+    }
+  },
+  // 06 호숫가: 윤슬 크기 축소 + 물안개
+  riverside: {
+    init(w, h) {
+      for (let i = 0; i < this.n(60); i++) { const d = Math.random(); this.particles.push({ x: Math.random() * w, y: h * (0.45 + d * 0.55), d, s: 0.35 + d * 0.55, a: hRnd(0.3, 1), ph: Math.random() * 6.28, sp: hRnd(0.02, 0.05) }); }
+      for (let i = 0; i < this.n(9); i++) this.extra.push({ x: Math.random() * w, y: h * hRnd(0.36, 0.62), rw: hRnd(260, 520), rh: hRnd(50, 90), vx: hRnd(0.08, 0.22) * (Math.random() < 0.5 ? -1 : 1), a: hRnd(0.25, 0.5), ph: Math.random() * 6.28 });
+    },
+    draw(ctx, w, h, k, mx, my, hasMouse) {
+      const puff = heroPuff();
+      for (const m of this.extra) {
+        m.x += m.vx * k; m.ph += 0.004 * k;
+        if (m.x < -m.rw) m.x = w + m.rw; else if (m.x > w + m.rw) m.x = -m.rw;
+        ctx.globalAlpha = m.a * (0.6 + 0.4 * Math.sin(m.ph));
+        ctx.drawImage(puff, m.x - m.rw / 2, m.y - m.rh / 2, m.rw, m.rh);
+      }
+      ctx.globalCompositeOperation = "lighter";
+      const spr = heroSparkleSprite();
+      for (const p of this.particles) {
+        p.ph += p.sp * k;
+        let extra = 0;
+        if (hasMouse) { const d = Math.hypot(p.x - mx, p.y - my); if (d < 130) extra = (1 - d / 130) * 0.4; }
+        const a = Math.max(0, Math.sin(p.ph)) * p.a + extra;
+        if (a < 0.03) continue;
+        ctx.globalAlpha = Math.min(1, a);
+        const W = 34 * p.s, H = 8.5 * p.s;
+        ctx.drawImage(spr, p.x - W / 2, p.y - H / 2, W, H);
+      }
+      ctx.globalCompositeOperation = "source-over";
+      this.drawRipples(ctx, k, 1.2, 0.012, 0.28, "160,240,255");
+    }
+  },
+  // 07 불멍: 불티 작게, 천천히 유연하게, 크기 랜덤
+  "warm-bonfire": {
+    init(w, h) { for (let i = 0; i < this.n(60); i++) { const p = this.makeEmber(w * 0.54 + hRnd(-0.26, 0.26) * w, Math.random() * h); p.life = hRnd(0.2, 1); this.particles.push(p); } },
+    draw(ctx, w, h, k, mx, my, hasMouse) {
+      ctx.globalCompositeOperation = "lighter";
+      const gc = (Math.sin(this.time * 1.6) + 1) * 0.5;
+      const hg = ctx.createRadialGradient(w * 0.54, h, 20, w * 0.54, h, w * 0.45);
+      hg.addColorStop(0, `rgba(255,140,30,${0.2 + gc * 0.07})`); hg.addColorStop(0.4, `rgba(255,75,10,${0.1 + gc * 0.04})`); hg.addColorStop(1, "rgba(200,20,0,0)");
+      ctx.fillStyle = hg; ctx.fillRect(0, h * 0.35, w, h * 0.65);
+      for (let i = this.particles.length - 1; i >= 0; i--) {
+        const p = this.particles[i];
+        p.life -= p.decay * k;
+        if (p.life <= 0 || p.y < -20) {
+          if (this.particles.length > this.n(60)) { this.particles.splice(i, 1); continue; }
+          this.particles[i] = this.makeEmber(w * 0.54 + hRnd(-0.26, 0.26) * w, h - Math.random() * 20); continue;
+        }
+        if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 120 && d > 0) { p.vx += this.mouse.vx * 0.05 + (dx / d) * 0.25; p.vy -= 0.12; } }
+        p.ph += 0.02 * k;
+        p.x += (p.vx + Math.sin(p.ph) * p.wob * 0.5) * k; p.y += p.vy * k; p.vx *= 0.99;
+        p.vy += (-(0.35 + p.d * 0.75) - p.vy) * 0.01;
+        const fl = 0.7 + 0.3 * Math.sin(p.ph * 4);
+        ctx.globalAlpha = Math.min(1, p.life * 1.4) * fl;
+        this.dot(heroGlow(p.col, 1), p.x, p.y, p.size * 3);
+      }
+    }
+  },
+  // 08 서해 노을: 해를 기준으로 세로로 늘어선 윤슬 기둥이 좌우로 살짝 흔들리며 반짝임
+  "sunset-coast": {
+    init(w, h) {
+      const sun = this.imgPt(0.723, 0.373), bottom = this.imgPt(0.72, 0.86);
+      this.sun = { x: sun.x, y: sun.y, bottom: Math.min(h, bottom.y), s: sun.s };
+      const span = this.sun.bottom - sun.y;
+      for (let i = 0; i < this.n(110); i++) {
+        const t = Math.pow(Math.random(), 0.8); // 0=수평선, 1=앞바다
+        this.particles.push({ t, off: (Math.random() - 0.5) * (0.4 + Math.random() * 0.6), len: 6 + t * 30, th: 1 + t * 2.2, a: hRnd(0.4, 1), ph: Math.random() * 6.28, sp: hRnd(0.04, 0.1) });
+      }
+      this.sun.span = span;
+      this.seagulls = [
+        { x: w * 0.32, y: h * 0.17, vx: 0.6, ws: 30, wp: 0, wsp: 0.05, bob: 0, d: 1 },
+        { x: w * 0.48, y: h * 0.12, vx: 0.65, ws: 24, wp: 1.3, wsp: 0.056, bob: 1.2, d: 0.85 },
+        { x: w * 0.18, y: h * 0.22, vx: 0.55, ws: 20, wp: 2.7, wsp: 0.048, bob: 2.4, d: 0.75 },
+        { x: w * 0.06, y: h * 0.09, vx: 0.58, ws: 16, wp: 5.3, wsp: 0.06, bob: 4.9, d: 0.65 }
+      ];
+    },
+    draw(ctx, w, h, k, mx, my, hasMouse) {
+      const S = this.sun, gc = 0.5 + 0.5 * Math.sin(this.time * 0.6);
+      ctx.globalCompositeOperation = "lighter";
+      ctx.globalAlpha = 0.35 + gc * 0.2;
+      const halo = heroGlow("255,170,70", 0.8), R = 90 + gc * 25;
+      this.dot(halo, S.x, S.y, R);
+      // 수면 반사 기둥(블러 스프라이트를 세로로 늘려 좌우로 살짝 흔듦)
+      const sway = Math.sin(this.time * 0.9) * 6;
+      const col = heroShaft("255,205,120");
+      ctx.globalAlpha = 0.35 + gc * 0.25;
+      ctx.drawImage(col, S.x - 70 + sway, S.y + 4, 140, S.span);
+      const spr = heroGlow("255,215,130", 1);
+      for (const p of this.particles) {
+        p.ph += p.sp * k;
+        const y = S.y + 6 + p.t * S.span;
+        const spread = 10 + p.t * 120;
+        const x = S.x + p.off * spread + Math.sin(this.time * 1.2 + p.t * 9) * (2 + p.t * 8);
+        const tw = Math.max(0, Math.sin(p.ph));
+        let a = p.a * tw * (1 - Math.abs(p.off) * 0.9);
+        if (hasMouse && Math.hypot(x - mx, y - my) < 100) a += 0.3;
+        if (a < 0.04) continue;
+        ctx.globalAlpha = Math.min(1, a);
+        ctx.drawImage(spr, x - p.len / 2, y - p.th, p.len, p.th * 2);
+      }
+      ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1;
+      for (const g of this.seagulls) {
+        g.bob += 0.03 * k; g.x += g.vx * k; g.y += Math.sin(g.bob) * 0.15 * k; g.wp += g.wsp * k;
+        if (g.x > w + 60) g.x = -60;
+        const ws = g.ws, wy = (Math.sin(g.wp) + 0.16 * Math.sin(g.wp * 2)) * ws * 0.45, tip = wy > 0 ? wy * 1.2 : wy * 0.9, ex = ws * 0.42, ey = wy * 0.62 - 2;
+        ctx.fillStyle = `rgba(20,10,5,${0.75 + g.d * 0.2})`;
         ctx.beginPath();
-        ctx.ellipse(p.x, p.y, halfLen, p.thick * 1.15, 0, 0, Math.PI * 2);
+        ctx.moveTo(-ws * 0.05 + g.x, g.y); ctx.quadraticCurveTo(g.x - ex, g.y + ey - 2, g.x - ws, g.y + tip); ctx.quadraticCurveTo(g.x - ex * 0.9, g.y + ey + ws * 0.14, g.x - ws * 0.12, g.y + ws * 0.05);
+        ctx.moveTo(ws * 0.05 + g.x, g.y); ctx.quadraticCurveTo(g.x + ex, g.y + ey - 2, g.x + ws, g.y + tip); ctx.quadraticCurveTo(g.x + ex * 0.9, g.y + ey + ws * 0.14, g.x + ws * 0.12, g.y + ws * 0.05);
         ctx.fill();
+        ctx.beginPath(); ctx.ellipse(g.x, g.y, ws * 0.22, ws * 0.08, 0, 0, 6.28); ctx.fill();
       }
     }
-
-    // 3. 노을 대기 미립자 (Golden Hour Dust)
-    for (const d of this.duskParticles) {
-      d.pulse += 0.024;
-      d.x += d.vx;
-      d.y += d.vy;
-      if (d.y < -15) d.y = h * 0.65;
-      if (d.x < -15) d.x = w + 15;
-      else if (d.x > w + 15) d.x = -15;
-
-      const da = Math.max(0.08, d.alpha + Math.sin(d.pulse) * 0.16);
-      ctx.fillStyle = `rgba(255, 235, 175, ${da})`;
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, d.r * 1.15, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.restore();
-
-    // 4. 고품질 갈매기 무리 (편대 비행, 유선형 실루엣 & 골든 림 라이트)
-    ctx.save();
-    for (const g of this.seagulls) {
-      g.bobPhase = (g.bobPhase || 0) + 0.032;
-      g.x += g.vx;
-      g.y += g.vy + Math.sin(g.bobPhase) * 0.18;
-      g.wingPhase += g.wingSpeed;
-
-      // 마우스 반응: 마우스가 가까이 오면 부드럽게 회피하며 날갯짓 가속
-      if (hasMouse) {
-        const mDist = Math.hypot(g.x - mx, g.y - my);
-        if (mDist < 120) {
-          g.y -= (1 - mDist / 120) * 0.45;
-          g.wingSpeed = Math.min(0.085, g.wingSpeed + 0.002);
-        } else if (g.wingSpeed > 0.055) {
-          g.wingSpeed *= 0.995;
+  },
+  // 09 벚꽃: 스프라이트로 최적화(그림자 제거), 개수 축소
+  "cherry-blossom": petalFx(["255,155,185", "255,180,205"], true, "255,200,225"),
+  // 10 초원: 민들레 홀씨 작게, 깊이별 크기·투명도, 한 방향 바람
+  "green-meadow": windFx("dandelion"),
+  // 11 노천탕: 피어오르는 김 + 작게 반짝이는 별
+  "uq-hotspring": {
+    init(w, h) { this.initStars(w, h * 0.45, this.n(110)); for (let i = 0; i < this.n(30); i++) this.particles.push(this.makeSteam(w, h, 0.55, true)); },
+    draw(ctx, w, h, k, mx, my, hasMouse) { ctx.globalCompositeOperation = "lighter"; this.drawStars(ctx); ctx.globalCompositeOperation = "source-over"; this.drawSteam(ctx, w, h, k, 0.55, mx, my, hasMouse, 1.1); }
+  },
+  // 12 스파: 다양한 크기·투명도의 비누방울이 천천히 오르다 팡 터짐
+  "uq-spa": {
+    init(w, h) { for (let i = 0; i < this.n(38); i++) this.particles.push(makeSoap(w, h, true)); },
+    draw(ctx, w, h, k, mx, my, hasMouse) {
+      const spr = heroBubbleSprite();
+      for (let i = 0; i < this.particles.length; i++) {
+        const p = this.particles[i];
+        p.ph += 0.02 * k; p.y += p.vy * k; p.x += (Math.sin(p.ph) * 0.3 + p.vx) * k;
+        if (hasMouse && Math.hypot(p.x - mx, p.y - my) < p.r + 18) p.popAt = p.y + 1;
+        if (p.y < p.popAt) {
+          this.ripples.push({ x: p.x, y: p.y, r: p.r, maxR: p.r * 2.2, alpha: p.a });
+          for (let s = 0; s < 6; s++) { const a = Math.random() * 6.28; this.splashes.push({ x: p.x + Math.cos(a) * p.r, y: p.y + Math.sin(a) * p.r, vx: Math.cos(a) * hRnd(0.6, 1.6), vy: Math.sin(a) * hRnd(0.6, 1.6), alpha: p.a, r: 1 }); }
+          this.particles[i] = makeSoap(w, h, false); continue;
         }
+        ctx.globalAlpha = p.a; this.dot(spr, p.x, p.y, p.r);
       }
-
-      if (g.x > w + 80) g.x = -80;
-
-      const ws = g.wingSpan;
-      const depth = g.depth || 1.0;
-      // 날갯짓 역학: 다운스트로크와 업스트로크의 자연스러운 파형
-      const wingNorm = Math.sin(g.wingPhase) + 0.16 * Math.sin(g.wingPhase * 2);
-      const wingY = wingNorm * (ws * 0.45);
-      const tipY = wingY > 0 ? wingY * 1.22 : wingY * 0.88;
-
-      // 날개 관절 (어깨 -> 팔꿈치/손목 -> 날개깃 끝)
-      const elbowX = ws * 0.42;
-      const elbowY = wingY * 0.62 - 2;
-
-      ctx.save();
-      ctx.translate(g.x, g.y);
-
-      // (1) 역광 석양 림 라이트 (외곽 골든 글로우)
-      ctx.strokeStyle = `rgba(255, 235, 160, ${0.80 * depth})`;
-      ctx.lineWidth = Math.max(2.0, 3.6 * depth);
-      ctx.lineCap = "round";
-      ctx.lineJoin = "round";
-      ctx.beginPath();
-      // 좌측 날개 윗선
-      ctx.moveTo(0, -1);
-      ctx.quadraticCurveTo(-elbowX, elbowY - 2, -ws, tipY);
-      // 우측 날개 윗선
-      ctx.moveTo(0, -1);
-      ctx.quadraticCurveTo(elbowX, elbowY - 2, ws, tipY);
-      // 머리/등 윗선
-      ctx.moveTo(-ws * 0.2, 0);
-      ctx.lineTo(ws * 0.35, -ws * 0.04);
-      ctx.stroke();
-
-      // (2) 날개 실루엣 면 (유선형 블레이드)
-      ctx.fillStyle = `rgba(16, 8, 4, ${Math.min(0.98, 0.82 + depth * 0.18)})`;
-      ctx.strokeStyle = `rgba(16, 8, 4, ${Math.min(0.98, 0.82 + depth * 0.18)})`;
       ctx.lineWidth = 1.2;
-
-      // 좌측 날개 패스 (어깨 -> 관절 -> 날개끝 -> 날개밑선 -> 몸통)
-      ctx.beginPath();
-      ctx.moveTo(-ws * 0.05, -ws * 0.02);
-      ctx.quadraticCurveTo(-elbowX, elbowY - 2, -ws, tipY);
-      ctx.quadraticCurveTo(-elbowX * 0.9, elbowY + ws * 0.14, -ws * 0.12, ws * 0.04);
-      ctx.closePath();
-      ctx.fill();
-      ctx.stroke();
-
-      // 우측 날개 패스
-      ctx.beginPath();
-      ctx.moveTo(ws * 0.05, -ws * 0.02);
-      ctx.quadraticCurveTo(elbowX, elbowY - 2, ws, tipY);
-      ctx.quadraticCurveTo(elbowX * 0.9, elbowY + ws * 0.14, ws * 0.12, ws * 0.04);
-      ctx.closePath();
-      ctx.fill();
-      ctx.stroke();
-
-      // (3) 몸통 & 꼬리깃 실루엣
-      ctx.beginPath();
-      ctx.ellipse(0, 0, ws * 0.24, ws * 0.08, 0.06, 0, Math.PI * 2);
-      // 꼬리깃
-      ctx.moveTo(-ws * 0.15, 0);
-      ctx.lineTo(-ws * 0.36, -ws * 0.03);
-      ctx.lineTo(-ws * 0.34, ws * 0.04);
-      ctx.closePath();
-      ctx.fill();
-
-      // (4) 머리와 비행 방향 부리 (Beak) 실루엣
-      ctx.beginPath();
-      ctx.arc(ws * 0.22, -ws * 0.03, ws * 0.07, 0, Math.PI * 2);
-      ctx.fill();
-      // 날렵한 부리
-      ctx.beginPath();
-      ctx.moveTo(ws * 0.26, -ws * 0.04);
-      ctx.lineTo(ws * 0.40, -ws * 0.015);
-      ctx.lineTo(ws * 0.26, ws * 0.005);
-      ctx.closePath();
-      ctx.fill();
-
-      ctx.restore();
+      for (let i = this.ripples.length - 1; i >= 0; i--) { const r = this.ripples[i]; r.r += 1.2 * k; r.alpha -= 0.07 * k; if (r.alpha <= 0) { this.ripples.splice(i, 1); continue; } ctx.globalAlpha = r.alpha; ctx.strokeStyle = "#fff"; ctx.beginPath(); ctx.arc(r.x, r.y, r.r, 0, 6.28); ctx.stroke(); }
+      ctx.fillStyle = "#fff";
+      for (let i = this.splashes.length - 1; i >= 0; i--) { const s = this.splashes[i]; s.x += s.vx * k; s.y += s.vy * k; s.vy += 0.05 * k; s.alpha -= 0.04 * k; if (s.alpha <= 0) { this.splashes.splice(i, 1); continue; } ctx.globalAlpha = s.alpha; ctx.fillRect(s.x - 0.8, s.y - 0.8, 1.6, 1.6); }
     }
-    ctx.restore();
+  },
+  // 13 사계절 온수풀: 김 + 내리는 눈
+  "uq-warmpool": {
+    init(w, h) { for (let i = 0; i < this.n(26); i++) this.particles.push(this.makeSteam(w, h, 0.6, true)); for (let i = 0; i < this.n(70); i++) this.extra.push(this.makeFlake(w, h, true)); },
+    draw(ctx, w, h, k, mx, my, hasMouse) { this.drawSteam(ctx, w, h, k, 0.6, mx, my, hasMouse, 1); ctx.globalCompositeOperation = "screen"; this.drawFlakes(ctx, this.extra, w, h, k, mx, my, hasMouse); }
+  },
+  // 14 수영장: 여기저기 튀는 물방울 + 물결 + 수면 반짝임(비누방울 제거)
+  "uq-pool": {
+    init(w, h) { for (let i = 0; i < this.n(45); i++) { const d = Math.random(); this.particles.push({ x: Math.random() * w, y: h * (0.6 + d * 0.4), s: 0.55 + d * 0.7, a: hRnd(0.4, 1), ph: Math.random() * 6.28, sp: hRnd(0.03, 0.07) }); } this.nextEvent = 20; },
+    draw(ctx, w, h, k, mx, my, hasMouse) {
+      this.nextEvent -= k;
+      if (this.nextEvent <= 0) { this.addSplash(hRnd(0.05, 0.95) * w, h * hRnd(0.66, 0.97)); this.nextEvent = hRnd(18, 55); }
+      ctx.globalCompositeOperation = "lighter";
+      const sp = heroSparkleSprite();
+      for (const p of this.particles) { p.ph += p.sp * k; const a = Math.max(0, Math.sin(p.ph)) * p.a; if (a < 0.04) continue; ctx.globalAlpha = a; ctx.drawImage(sp, p.x - 17 * p.s, p.y - 4 * p.s, 34 * p.s, 8 * p.s); }
+      ctx.globalCompositeOperation = "source-over";
+      this.drawRipples(ctx, k, 0.9, 0.014, 0.3, "235,250,255");
+      const drop = heroGlow("200,240,255", 1);
+      for (let i = this.splashes.length - 1; i >= 0; i--) {
+        const s = this.splashes[i]; s.x += s.vx * k; s.y += s.vy * k; s.vy += 0.12 * k;
+        if (s.y > s.y0 + 6) { if (Math.random() < 0.3) this.ripples.push({ x: s.x, y: s.y, r: 1, maxR: 14, alpha: 0.5 }); this.splashes.splice(i, 1); continue; }
+        ctx.globalAlpha = s.alpha; this.dot(drop, s.x, s.y, s.r * 2.2);
+      }
+    }
+  },
+  // 15 승마: 풀잎이 바람에 날리고 노을 중심으로 빛이 밝아졌다 어두워짐
+  "uq-horse": windFx("grass", { sun: [0.94, 0.2] }),
+  // 16 동물체험: 벚꽃 대신 여러 색 꽃잎
+  "uq-animal": petalFx(["255,214,90", "255,160,190", "255,255,255", "200,170,255", "255,180,120"], false, "255,240,200"),
+  // 17 키즈카페: 폭죽 + 탭하면 터짐 + 큰 색종이
+  "uq-kidscafe": confettiFx(true),
+  // 18 실내놀이: 색종이 크게·랜덤 크기
+  "uq-indoorplay": confettiFx(false),
+  // 19 트리하우스: 자연스러운 대각선 빛줄기(블러 + 숨쉬기)
+  "uq-treehouse": {
+    init(w, h) {
+      const o = this.imgPt(0.08, 0.02);
+      this.extra = this.makeShafts(6, o.x + w * 0.22, -h * 0.15, -0.62, w * 0.09, h * 1.6, 80, 170, 0.75);
+      for (let i = 0; i < this.n(36); i++) { const d = depthRnd(); this.particles.push({ x: Math.random() * w, y: Math.random() * h, d, r: 1.5 + d * 3, a: 0.25 + d * 0.5, vx: hRnd(0.02, 0.12), vy: hRnd(0.02, 0.12), ph: Math.random() * 6.28, sp: hRnd(0.015, 0.035) }); }
+    },
+    draw(ctx, w, h, k) {
+      this.drawShafts(ctx, this.extra, "255,240,205", k);
+      ctx.globalCompositeOperation = "lighter";
+      const spr = heroGlow("255,245,210");
+      for (const p of this.particles) { p.ph += p.sp * k; p.x += (p.vx + Math.sin(p.ph) * 0.12) * k; p.y += p.vy * k; riseAndWrap(p, w, h, k); ctx.globalAlpha = p.a * (0.4 + 0.6 * Math.sin(p.ph) ** 2); this.dot(spr, p.x, p.y, p.r); }
+    }
+  },
+  // 20 이색숙소: 반딧불 제거, 하얀 별빛 반짝임 + 유성우
+  "uq-stay": {
+    init(w, h) { this.initStars(w, h * 0.62, this.n(150)); this.nextEvent = 40; },
+    draw(ctx, w, h, k) {
+      ctx.globalCompositeOperation = "lighter";
+      this.drawStars(ctx, "245,248,255");
+      this.nextEvent -= k;
+      if (this.nextEvent <= 0 && this.meteors.length < 3) { this.addMeteor(hRnd(0.15, 0.95) * w, hRnd(0, 0.25) * h, true); this.nextEvent = Math.random() < 0.3 ? hRnd(8, 20) : hRnd(60, 160); }
+      this.drawMeteors(ctx, k, "220,230,255");
+    }
+  },
+  // 21 레포츠: 이미지 속 와이어를 따라 짚라인 탑승자가 가끔 지나감 + 윤슬
+  "uq-leisure": {
+    init(w, h) {
+      this.wire = [this.imgPt(0.09, 0.0), this.imgPt(0.55, 0.175), this.imgPt(1.0, 0.39)];
+      this.nextEvent = hRnd(40, 120);
+      for (let i = 0; i < this.n(30); i++) { const p = this.imgPt(hRnd(0.2, 0.85), hRnd(0.72, 1)); this.particles.push({ x: p.x, y: p.y, s: hRnd(0.3, 0.6), a: hRnd(0.4, 0.9), ph: Math.random() * 6.28, sp: hRnd(0.03, 0.06) }); }
+    },
+    draw(ctx, w, h, k) {
+      ctx.globalCompositeOperation = "lighter";
+      const sp = heroSparkleSprite();
+      for (const p of this.particles) { p.ph += p.sp * k; const a = Math.max(0, Math.sin(p.ph)) * p.a; if (a < 0.04) continue; ctx.globalAlpha = a; ctx.drawImage(sp, p.x - 17 * p.s, p.y - 4 * p.s, 34 * p.s, 8 * p.s); }
+      ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1;
+      this.nextEvent -= k;
+      if (this.nextEvent <= 0) { this.riders.push({ t: 0, v: hRnd(0.0022, 0.0034), ph: 0 }); this.nextEvent = hRnd(200, 480); }
+      const [a, b, c] = this.wire, spr = heroRiderSprite(), sc = Math.max(0.55, Math.min(1.2, a.s * 2.2));
+      for (let i = this.riders.length - 1; i >= 0; i--) {
+        const r = this.riders[i];
+        r.v += 0.000012 * k; r.t += r.v * k; r.ph += 0.06 * k;
+        if (r.t > 1.05) { this.riders.splice(i, 1); continue; }
+        const t = r.t, u = 1 - t;
+        const x = u * u * a.x + 2 * u * t * b.x + t * t * c.x, y = u * u * a.y + 2 * u * t * b.y + t * t * c.y;
+        const tx = 2 * u * (b.x - a.x) + 2 * t * (c.x - b.x), ty = 2 * u * (b.y - a.y) + 2 * t * (c.y - b.y);
+        const swing = Math.sin(r.ph) * 0.12 - Math.atan2(ty, tx) * 0.2;
+        const d = this.dpr, cs = Math.cos(swing), sn = Math.sin(swing);
+        ctx.setTransform(d * cs * sc, d * sn * sc, -d * sn * sc, d * cs * sc, d * x, d * y);
+        ctx.drawImage(spr, -24, -6, 48, 64);
+        ctx.setTransform(d, 0, 0, d, 0, 0);
+      }
+    }
+  },
+  // 22 체험: 민들레 제거, 햇살 글로우가 은은하게 내리쬠
+  "uq-farm": {
+    init(w, h) {
+      const sun = this.imgPt(0.95, 0.02);
+      this.sun = sun;
+      this.extra = this.makeShafts(5, sun.x - w * 0.12, -h * 0.1, 0.62, w * 0.08, h * 1.4, 100, 200, 0.6);
+      for (let i = 0; i < this.n(30); i++) { const d = depthRnd(); this.particles.push({ x: Math.random() * w, y: Math.random() * h, r: 1.5 + d * 3, a: 0.2 + d * 0.5, vx: -hRnd(0.03, 0.12), vy: hRnd(0.02, 0.1), ph: Math.random() * 6.28, sp: hRnd(0.015, 0.035) }); }
+    },
+    draw(ctx, w, h, k) {
+      const gc = 0.5 + 0.5 * Math.sin(this.time * 0.5);
+      ctx.globalCompositeOperation = "lighter";
+      ctx.globalAlpha = 0.35 + gc * 0.25;
+      this.dot(heroGlow("255,225,150", 0.8), this.sun.x, this.sun.y, Math.max(w, h) * 0.35);
+      this.drawShafts(ctx, this.extra, "255,236,190", k);
+      ctx.globalCompositeOperation = "lighter";
+      const spr = heroGlow("255,240,200");
+      for (const p of this.particles) { p.ph += p.sp * k; p.x += (p.vx + Math.sin(p.ph) * 0.1) * k; p.y += p.vy * k; riseAndWrap(p, w, h, k); ctx.globalAlpha = p.a * (0.4 + 0.6 * Math.sin(p.ph) ** 2); this.dot(spr, p.x, p.y, p.r); }
+    }
   }
-
-  renderCherryBlossom(ctx, w, h, mx, my, hasMouse) {
-    // 봄날 벚꽃: 85개 벚꽃잎 샤워 꽃비 + 24개 봄빛 꽃가루 미립자
-    // 1. 봄빛 바람 꽃가루 (Lighter 모드로 화사하게 반짝임)
-    ctx.save();
-    ctx.globalCompositeOperation = "lighter";
-    for (const po of this.pollen) {
-      po.pulse += 0.025;
-      po.x += po.vx;
-      po.y += po.vy;
-      if (po.x < -20) po.x = w + 20;
-      if (po.y > h + 20) po.y = -20;
-
-      const alpha = Math.max(0.12, po.alpha + Math.sin(po.pulse) * 0.22);
-      const g = ctx.createRadialGradient(po.x, po.y, 0, po.x, po.y, po.r * 2.8);
-      g.addColorStop(0, `rgba(255, 235, 245, ${alpha})`);
-      g.addColorStop(0.45, `rgba(255, 185, 215, ${alpha * 0.7})`);
-      g.addColorStop(1, "rgba(255, 160, 200, 0)");
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(po.x, po.y, po.r * 2.8, 0, Math.PI * 2);
-      ctx.fill();
+};
+function makeSoap(w, h, initial) {
+  const d = depthRnd(), r = 3 + d * 22 * Math.random() + d * 6;
+  const y = initial ? hRnd(0.2, 1) * h : h + r;
+  return { x: Math.random() * w, y, r, a: 0.3 + d * 0.6, vy: -(0.15 + d * 0.35 + Math.random() * 0.1), vx: hRnd(-0.08, 0.08), ph: Math.random() * 6.28, popAt: Math.random() < 0.55 ? h * hRnd(0.12, 0.7) : -100 };
+}
+function petalFx(colors, notch, pollenRgb) {
+  return {
+    init(w, h) {
+      for (let i = 0; i < this.n(55); i++) { const d = depthRnd(); this.particles.push({ x: Math.random() * w, y: Math.random() * h, d, size: 10 + d * 14, vx: -(0.15 + d * 0.3), vy: 0.25 + d * 0.4, rot: Math.random() * 6.28, vRot: hRnd(-0.018, 0.018), flip: Math.random() * 6.28, vF: hRnd(0.01, 0.03), roll: Math.random() * 6.28, vR: hRnd(0.011, 0.033), seed: Math.random() * 10, c: Math.floor(Math.random() * colors.length) }); }
+      for (let i = 0; i < this.n(20); i++) this.extra.push({ x: Math.random() * w, y: Math.random() * h, r: hRnd(2, 5), vx: -hRnd(0.08, 0.28), vy: hRnd(0.05, 0.2), a: hRnd(0.3, 0.8), ph: Math.random() * 6.28 });
+    },
+    draw(ctx, w, h, k, mx, my, hasMouse) {
+      ctx.globalCompositeOperation = "lighter";
+      const g = heroGlow(pollenRgb);
+      for (const po of this.extra) { po.ph += 0.025 * k; po.x += po.vx * k; po.y += po.vy * k; if (po.x < -20) po.x = w + 20; if (po.y > h + 20) po.y = -20; ctx.globalAlpha = Math.max(0.1, po.a + Math.sin(po.ph) * 0.2); this.dot(g, po.x, po.y, po.r * 2); }
+      ctx.globalCompositeOperation = "source-over";
+      for (const p of this.particles) {
+        p.rot += p.vRot * k; p.flip += p.vF * k; p.roll += p.vR * k;
+        if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 110 && d > 0) { p.vx += this.mouse.vx * 0.12 + (dx / d) * 0.8; p.vy -= 0.3; } }
+        const gust = Math.sin(this.time * 0.4 + p.seed) * 0.45;
+        p.x += (p.vx + Math.sin(p.flip) * 0.6 + gust) * k; p.y += p.vy * k;
+        p.vx += (-(0.15 + p.d * 0.3) - p.vx) * 0.02; p.vy += (0.25 + p.d * 0.4 - p.vy) * 0.02;
+        if (p.y > h + 25) { p.y = -25; p.x = Math.random() * w; }
+        if (p.x < -25) p.x = w + 25; else if (p.x > w + 25) p.x = -25;
+        ctx.globalAlpha = 0.55 + p.d * 0.45;
+        this.blit(heroPetalSprite(colors[p.c], notch, colors[p.c] + notch), p.x, p.y, p.size, p.rot, Math.cos(p.flip), Math.sin(p.roll) * 0.35 + 0.65);
+      }
     }
-    ctx.restore();
-
-    // 2. 85개 벚꽃잎 꽃비 (3D 텀블링, V자 노치, 림 하이라이트)
-    for (const p of this.particles) {
-      p.rot += p.vRot;
-      p.flip += p.vFlip;
-      p.roll += p.vRoll;
-
-      if (hasMouse) {
-        const dx = p.x - mx;
-        const dy = p.y - my;
-        const dist = Math.hypot(dx, dy);
-        if (dist < 110 && dist > 0) {
-          p.vx += this.mouse.vx * 0.14 + (dx / dist) * 0.9;
-          p.vy -= 0.40;
+  };
+}
+// 한 방향으로 살랑 부는 바람(민들레 홀씨·풀잎)
+function windFx(kind, opt = {}) {
+  return {
+    init(w, h) {
+      const N = kind === "grass" ? 34 : 40;
+      for (let i = 0; i < this.n(N); i++) { const d = depthRnd(); this.particles.push({ x: Math.random() * w, y: Math.random() * h, d, size: kind === "grass" ? 12 + d * 22 : 9 + d * 15, a: 0.3 + d * 0.65, speed: 0.35 + d * 0.9, ph: Math.random() * 6.28, rot: Math.random() * 6.28, vRot: hRnd(0.01, 0.04) * (Math.random() < 0.5 ? -1 : 1), spr: Math.floor(Math.random() * 4), vx: 0, vy: 0 }); }
+      for (let i = 0; i < this.n(26); i++) this.extra.push({ x: Math.random() * w, y: Math.random() * h, r: hRnd(1.5, 4), a: hRnd(0.25, 0.7), ph: Math.random() * 6.28, sp: hRnd(0.015, 0.04), speed: hRnd(0.2, 0.6) });
+      if (opt.sun) this.sun = this.imgPt(opt.sun[0], opt.sun[1]);
+    },
+    draw(ctx, w, h, k, mx, my, hasMouse) {
+      const gust = 0.75 + 0.35 * Math.sin(this.time * 0.35) + 0.15 * Math.sin(this.time * 1.1);
+      ctx.globalCompositeOperation = "lighter";
+      if (this.sun) {
+        const gc = 0.5 + 0.5 * Math.sin(this.time * 0.55);
+        ctx.globalAlpha = 0.25 + gc * 0.45;
+        this.dot(heroGlow("255,190,110", 0.85), this.sun.x, this.sun.y, Math.max(w, h) * (0.32 + gc * 0.06));
+      }
+      const pg = heroGlow(kind === "grass" ? "255,225,150" : "235,255,190");
+      for (const po of this.extra) { po.ph += po.sp * k; po.x -= po.speed * gust * k; po.y += Math.sin(po.ph) * 0.15 * k; if (po.x < -10) { po.x = w + 10; po.y = Math.random() * h; } ctx.globalAlpha = po.a * (0.5 + 0.5 * Math.sin(po.ph)); this.dot(pg, po.x, po.y, po.r * 2); }
+      ctx.globalCompositeOperation = "source-over";
+      for (const p of this.particles) {
+        p.ph += 0.02 * k;
+        if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 120 && d > 0) { p.vx += (dx / d) * 0.6; p.vy += (dy / d) * 0.4; } }
+        p.vx *= 0.95; p.vy *= 0.95;
+        // 오른쪽→왼쪽으로 일관되게, 살짝 떠오르며
+        p.x += (-p.speed * gust + p.vx) * k;
+        p.y += (Math.sin(p.ph) * 0.25 - 0.06 * p.speed + p.vy) * k;
+        if (p.x < -30) { p.x = w + 30; p.y = Math.random() * h; }
+        if (p.y < -30) p.y = h + 30; else if (p.y > h + 30) p.y = -30;
+        ctx.globalAlpha = p.a;
+        if (kind === "grass") { p.rot += p.vRot * gust * k; this.blit(heroGrassSprite(p.spr), p.x, p.y, p.size, p.rot, Math.cos(p.ph * 1.5) * 0.4 + 0.6, 1); }
+        else this.blit(heroDandelionSprite(), p.x, p.y, p.size, -0.35 * gust + Math.sin(p.ph) * 0.15, 1, 1);
+      }
+    }
+  };
+}
+function confettiFx(fireworks) {
+  const colors = ["#ff8a80", "#ffd54f", "#81d4fa", "#a5d6a7", "#ce93d8", "#ffab91"];
+  const make = (w, h, initial) => { const d = depthRnd(); return { x: Math.random() * w, y: initial ? Math.random() * h : -16, d, w: 9 + d * 15 + Math.random() * 5, h: 5 + d * 8, vy: 0.3 + d * 0.6, vx: hRnd(-0.2, 0.2), rot: Math.random() * 3, vr: hRnd(-0.05, 0.05), color: colors[Math.floor(Math.random() * colors.length)], ph: Math.random() * 6.28 }; };
+  return {
+    init(w, h) { for (let i = 0; i < this.n(fireworks ? 34 : 46); i++) this.particles.push(make(w, h, true)); this.nextEvent = 30; },
+    draw(ctx, w, h, k, mx, my, hasMouse) {
+      if (fireworks) {
+        this.nextEvent -= k;
+        if (this.nextEvent <= 0) { this.addFirework(hRnd(0.15, 0.85) * w, hRnd(0.12, 0.45) * h, false); this.nextEvent = hRnd(50, 110); }
+        ctx.globalCompositeOperation = "lighter";
+        for (let i = this.fw.length - 1; i >= 0; i--) {
+          const f = this.fw[i]; f.x += f.vx * k; f.y += f.vy * k; f.vx *= 0.975; f.vy = f.vy * 0.975 + 0.035 * k; f.life -= f.dec * k;
+          if (f.life <= 0) { this.fw.splice(i, 1); continue; }
+          ctx.globalAlpha = f.life; this.dot(heroGlow(f.col, 1), f.x, f.y, f.r * 3.5);
         }
+        ctx.globalCompositeOperation = "source-over";
       }
-
-      const gust = Math.sin(this.time * 0.4 + p.seed) * 0.48;
-      p.x += p.vx + Math.sin(p.flip) * 0.65 + gust;
-      p.y += p.vy;
-      p.vx *= 0.98;
-
-      if (p.y > h + 25) {
-        p.y = -25;
-        p.x = Math.random() * w;
-        p.vy = Math.random() * 0.38 + 0.28;
+      const d0 = this.dpr;
+      for (let i = 0; i < this.particles.length; i++) {
+        const p = this.particles[i];
+        p.ph += 0.02 * k; p.y += p.vy * k; p.x += (p.vx + Math.sin(p.ph) * 0.5) * k; p.rot += p.vr * k;
+        if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 110 && d > 0) { p.x += (dx / d) * 2; p.vr += 0.003; } }
+        if (p.y > h + 16) { this.particles[i] = make(w, h, false); continue; }
+        const c = Math.cos(p.rot), s = Math.sin(p.rot), sy = Math.abs(Math.cos(p.ph * 2)) * 0.7 + 0.3;
+        ctx.setTransform(d0 * c, d0 * s, -d0 * s * sy, d0 * c * sy, d0 * p.x, d0 * p.y);
+        ctx.globalAlpha = 0.7 + p.d * 0.3; ctx.fillStyle = p.color; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
       }
-      if (p.x < -25) p.x = w + 25;
-      else if (p.x > w + 25) p.x = -25;
-
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.rot);
-      ctx.scale(Math.cos(p.flip), Math.sin(p.roll) * 0.35 + 0.65);
-
-      // 은은한 핑크 글로우 드롭 섀도우
-      ctx.shadowColor = "rgba(255, 150, 190, 0.55)";
-      ctx.shadowBlur = 8;
-      ctx.shadowOffsetX = 1;
-      ctx.shadowOffsetY = 2;
-
-      const grad = ctx.createLinearGradient(0, p.size * 0.7, 0, -p.size * 0.7);
-      grad.addColorStop(0, `rgba(${p.colorBase}, 0.98)`);
-      grad.addColorStop(0.55, `rgba(${p.colorBase}, 0.90)`);
-      grad.addColorStop(1, "rgba(255, 245, 250, 0.96)");
-      ctx.fillStyle = grad;
-
-      ctx.beginPath();
-      ctx.moveTo(0, p.size * 0.7);
-      ctx.bezierCurveTo(-p.size * 0.55, p.size * 0.3, -p.size * 0.65, -p.size * 0.4, -p.size * 0.25, -p.size * 0.7);
-      ctx.lineTo(0, -p.size * 0.52);
-      ctx.lineTo(p.size * 0.25, -p.size * 0.7);
-      ctx.bezierCurveTo(p.size * 0.65, -p.size * 0.4, p.size * 0.55, p.size * 0.3, 0, p.size * 0.7);
-      ctx.closePath();
-      ctx.fill();
-
-      // 밝은 림 하이라이트 테두리
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.75)";
-      ctx.lineWidth = 0.8;
-      ctx.stroke();
-
-      ctx.restore();
+      ctx.setTransform(d0, 0, 0, d0, 0, 0);
     }
-  }
-
-  renderGreenMeadow(ctx, w, h, mx, my, hasMouse) {
-    // 초원 글램핑: 45개 3D 텀블링 민들레 홀씨 + 32개 들판 황금 꽃가루/스포어
-    // 1. 들판 황금 꽃가루/스포어 (Lighter 모드로 몽환적 반짝임)
-    ctx.save();
-    ctx.globalCompositeOperation = "lighter";
-    for (const po of this.pollen) {
-      po.pulse += po.pulseSpeed || 0.02;
-      po.x += po.vx;
-      po.y += po.vy;
-      if (po.x < -20) po.x = w + 20;
-      if (po.y < -20) po.y = h + 20;
-
-      const alpha = Math.max(0.14, po.alpha + Math.sin(po.pulse) * 0.22);
-      const g = ctx.createRadialGradient(po.x, po.y, 0, po.x, po.y, po.r * 2.8);
-      g.addColorStop(0, `rgba(245, 255, 200, ${alpha})`);
-      g.addColorStop(0.45, `rgba(200, 255, 120, ${alpha * 0.75})`);
-      g.addColorStop(1, "rgba(160, 230, 80, 0)");
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(po.x, po.y, po.r * 2.8, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.restore();
-
-    // 2. 45개 3D 텀블링 민들레 홀씨 (Pappus Dome & 18가닥 우산살)
-    for (const p of this.particles) {
-      p.sway += p.swaySpeed;
-      p.roll += p.vRoll;
-
-      if (hasMouse) {
-        const dx = p.x - mx;
-        const dy = p.y - my;
-        const dist = Math.hypot(dx, dy);
-        if (dist < 130 && dist > 0) {
-          p.vx += this.mouse.vx * 0.2 + (dx / dist) * 1.5;
-          p.vy += this.mouse.vy * 0.1 - 0.45;
-          p.tiltTarget = (dx / dist) * 0.55;
-        }
-      }
-
-      p.tiltTarget = Math.sin(p.sway) * 0.24 + p.vx * 0.65;
-      p.tilt += (p.tiltTarget - p.tilt) * 0.055;
-
-      p.x += p.vx + Math.sin(p.sway) * 0.38;
-      p.y += p.vy;
-      p.vx *= 0.98;
-      p.vy *= 0.98;
-
-      if (p.x < -40) p.x = w + 40;
-      if (p.y < -40) p.y = h + 40;
-      else if (p.y > h + 40) p.y = -40;
-
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.tilt);
-      ctx.scale(Math.cos(p.roll) * 0.3 + 0.7, 1);
-
-      const stemLen = p.size * 0.8;
-      const umbrellaR = p.size * 0.75;
-
-      // 우산살 18가닥
-      ctx.strokeStyle = `rgba(255, 255, 255, ${p.alpha * 0.85})`;
-      ctx.lineWidth = 0.9;
-      for (let i = 0; i < 18; i++) {
-        const ang = -Math.PI * 0.88 + (i / 17) * (Math.PI * 0.76);
-        const fx = Math.cos(ang) * umbrellaR;
-        const fy = Math.sin(ang) * umbrellaR * 0.75 - stemLen;
-        ctx.beginPath();
-        ctx.moveTo(0, -stemLen);
-        ctx.lineTo(fx, fy);
-        ctx.stroke();
-
-        // 우산살 끝 발광 솜털 팁
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha * 0.95})`;
-        ctx.beginPath();
-        ctx.arc(fx, fy, 0.9, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      // 우산대 줄기
-      ctx.strokeStyle = `rgba(240, 235, 220, ${p.alpha * 0.95})`;
-      ctx.lineWidth = 1.1;
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(0, -stemLen);
-      ctx.stroke();
-
-      // 씨앗 (Achene)
-      ctx.fillStyle = `rgba(175, 145, 105, ${p.alpha})`;
-      ctx.beginPath();
-      ctx.ellipse(0, 2, 1.4, 3.6, 0, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.restore();
-    }
-  }
+  };
 }
 
 let heroCanvasInstance = null;
