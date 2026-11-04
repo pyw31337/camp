@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-03T23:57:07.355Z",
+ "generated_at": "2026-11-04T00:31:38.921Z",
  "date": "2026-11-04",
  "totals": {
   "campgrounds": 6419,
@@ -1932,9 +1932,9 @@
    "conflicts": 41,
    "weak": 1350,
    "status": {
-    "VERIFIED": 195,
+    "VERIFIED": 194,
     "WEAK": 1350,
-    "CONFIRMED": 320,
+    "CONFIRMED": 321,
     "SINGLE": 618,
     "CORROBORATED": 171,
     "CONFLICT": 41
