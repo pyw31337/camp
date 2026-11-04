@@ -177,19 +177,19 @@ export function uniqueCard(c, det, res) {
   if (!ids.length) return null;
   const core = coreName(c.name);
   const own = [c.line, det?.intro, typeof det?.gcd?.intro === "string" ? det.gcd.intro : "", det?.profile?.fields?.EXPERIENCE?.value, det?.profile?.fields?.INTRO?.value, ...(c.amenities ?? [])].filter((x) => typeof x === "string").map(clean);
-  const rv = [];
+  const rv = []; const URL_OF = new Map(); // t51u: 후기 글 → 원문 주소
   if (core) for (const k of ["reviews", "web", "sns_images", "videos"]) for (const r of det?.[k] ?? []) {
     const ti = typeof r?.title === "string" ? r.title : "";
     if (!ti.replace(/\s/g, "").includes(core)) continue;
-    rv.push(clean(`${ti} ${typeof r.snippet === "string" ? r.snippet : ""}`));
+    const tx = clean(`${ti} ${typeof r.snippet === "string" ? r.snippet : ""}`); rv.push(tx); if (typeof r.url === "string" && /^https:\/\//.test(r.url) && !URL_OF.has(tx)) URL_OF.set(tx, r.url);
   }
-  for (const f of Object.values(det?.profile?.fields ?? {})) { const q = f?.source?.quote; if (typeof q === "string" && q.length > 6) rv.push(clean(q)); }
+  for (const f of Object.values(det?.profile?.fields ?? {})) { const q = f?.source?.quote; if (typeof q === "string" && q.length > 6) { const tx = clean(q); rv.push(tx); const su = f?.source?.url; if (typeof su === "string" && /^https:\/\//.test(su) && !URL_OF.has(tx)) URL_OF.set(tx, su); } }
   for (const t of [det?.facilities, det?.spec?.note].flat()) if (typeof t === "string") own.push(clean(t));
   const rvU = [...new Set(rv)];
   const items = [];
   const scan = (f, texts) => {
     const wins = [];
-    for (const t of texts) { const g = new RegExp(f.re.source, "g"); let m; while ((m = g.exec(t))) { const w12 = near(t, m.index, m[0].length, 12); if (NEG.test(w12.replace(f.re, ""))) continue; wins.push({ w: near(t, m.index, m[0].length), hit: m[0] }); } }
+    for (const t of texts) { const g = new RegExp(f.re.source, "g"); let m; while ((m = g.exec(t))) { const w12 = near(t, m.index, m[0].length, 12); if (NEG.test(w12.replace(f.re, ""))) continue; wins.push({ w: near(t, m.index, m[0].length), hit: m[0], t }); } }
     return wins;
   };
   for (const f of [...FEAT.filter((x) => ids.includes(x.k)), ...EXTRA]) {
@@ -216,7 +216,12 @@ export function uniqueCard(c, det, res) {
     let parts = [...extra, ...q, ...dParts].filter((x, i, a) => a.indexOf(x) === i).slice(0, 3);
     const spec = parts.length > 0;
     if (!spec) parts = [/개별/.test(name) ? "다른 손님과 섞이지 않는 프라이빗 이용" : (GEN[f.k] ?? "캠핑장 안에서 이용")];
-    items.push({ k: f.k, n: name, d: parts.join(" · "), ...(spec ? {} : { g: 1 }), w: ow.length * 3 + nRv, ...(f.ic ? { ic: f.ic } : {}) });
+    // 링크: 설명 문구가 실제로 나온 후기 글 우선 → 시설이 나온 후기 글 → 업장 글이면 고캠핑 공식 페이지(앱은 없으면 상세로)
+    const qre = q.length ? QUAL.filter(([, ph, ks]) => ks.includes(f.k)).map(([re]) => re) : [];
+    const rwU = rw.filter((x) => URL_OF.has(x.t));
+    const best = rwU.find((x) => qre.some((re) => re.test(near(x.w, x.w.indexOf(x.hit), x.hit.length, 25)))) ?? rwU[0];
+    const href = best ? URL_OF.get(best.t) : (ow.length && typeof c.gc_url === "string" ? c.gc_url : "");
+    items.push({ k: f.k, n: name, d: parts.join(" · "), ...(href ? { u: href, us: best ? "r" : "o" } : {}), ...(spec ? {} : { g: 1 }), w: ow.length * 3 + nRv, ...(f.ic ? { ic: f.ic } : {}) });
   }
   if (!items.length) return null;
   // 수영장은 온수풀이 있으면 합친다(같은 시설 중복 방지)

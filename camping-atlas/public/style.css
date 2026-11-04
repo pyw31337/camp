@@ -928,7 +928,6 @@ img { color: transparent; }
 .car-track img { flex: 0 0 100%; width: 100%; height: 100%; object-fit: cover; scroll-snap-align: start; user-select: none; background: var(--soft-2); }
 .car::after { content: ""; position: absolute; inset: 55% 0 0 0; z-index: 2; background: linear-gradient(transparent, rgba(0, 0, 0, .28)); pointer-events: none; }
 .car-dots { position: absolute; left: 50%; bottom: 12px; z-index: 4; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; gap: 5px; pointer-events: none; }
-.card:has(.bdgs:not(:empty)) .car-dots { bottom: 44px; }
 .car-dots i { width: 6px; height: 6px; border-radius: 999px; background: rgba(255, 255, 255, .6); transition: width .2s; }
 .car-dots i.on { width: 16px; background: #fff; }
 .car-nav {
@@ -2407,7 +2406,6 @@ a.near { color: inherit; text-decoration: none; }
 .card-horizontal .card-media .car-dots {
   z-index: 3;
 }
-.card-horizontal:has(.bdgs:not(:empty)) .car-dots { bottom: 44px; }
 
 .card-horizontal .card-body {
   display: flex;
@@ -3975,7 +3973,6 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 
 /* 사진 배지 두 줄: 윗줄 긍정·아랫줄 부정(소유자 2026-10-22). .bdg-br가 줄을 끊는다 */
 .bdgs .bdg-br { flex-basis: 100%; height: 0; margin: 0; padding: 0; }
-.card:has(.bdgs .bdg-br) .car-dots { bottom: 92px; }
 
 /* 지도 카드 슬림(소유자 2026-10-23: 선택 카드가 지도를 절반 가까이 가림) — 사진 정사각 88px, 한 줄씩: 지역·이름·타입·배지·스펙.
    넘치는 배지·스펙은 가로로 넘겨 본다. 높이 약 110px. */
@@ -4423,3 +4420,17 @@ img.img-gone { visibility: hidden; }
 .uq-tag { display: inline-flex; align-items: center; gap: 3px; height: 22px; padding: 0 8px 0 6px; border-radius: 999px; background: var(--accent-tint); color: var(--ink-2); font-size: .72rem; font-weight: 700; }
 .uq-ev-ph { position: relative; z-index: 2; display: block; width: 64px; height: 64px; border-radius: 10px; overflow: hidden; background: var(--line); }
 .uq-ev-ph img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* t51u: 사진 넘김 점은 카드마다 하나, 같은 자리(사진 오른쪽 위)에 둔다. 배지는 아래쪽·여는 날 배지는 왼쪽 위라 겹치지 않는다.
+   예전엔 배지 줄 수에 따라 bottom 44/92px로 옮겨 다녀 카드마다 높이가 달랐고 배지와 겹쳤다. */
+.card .car-dots, .card-horizontal .card-media .car-dots { top: 10px; right: 10px; bottom: auto; left: auto; transform: none; height: 20px; padding: 0 7px; border-radius: 999px; background: rgba(0, 0, 0, .32); }
+.card .car-dots i { width: 5px; height: 5px; }
+.card .car-dots i.on { width: 12px; }
+/* t51u: 특색 태그 → 근거 글 링크 */
+.uq-list a.uq-a { color: inherit; text-decoration: none; }
+.uq-list a.uq-a b { text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+.uq-list a.uq-a .uq-go { display: inline-block; width: 10px; height: 10px; margin-left: 4px; vertical-align: 0; color: var(--accent); }
+.uq-list a.uq-a:hover b, .uq-list a.uq-a:focus-visible b { color: var(--accent); }
+.uq-list li:has(> a.uq-a) { padding-left: 0; }
+.uq-list a.uq-a { position: relative; z-index: 3; display: block; padding-left: 22px; }
+.uq-list a.uq-a > .ic { position: absolute; left: 0; top: 2px; }

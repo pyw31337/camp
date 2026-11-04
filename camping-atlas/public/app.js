@@ -676,7 +676,13 @@ function uniqueWhyHtml(c) {
   const p = ev?.p;
   const body = !ev ? `<ul class="uq-tags">${(c.uq ?? []).filter((k) => lbl[k]).map((k) => `<li class="uq-tag">${ic(UQ_ICON[k] ?? "spark")}${esc(lbl[k])}</li>`).join("")}</ul>`
     : ev.m === "text" ? `<p class="uq-sent">${ic(UQ_ICON[ev.it[0]?.k] ?? "spark")}<span>${esc(ev.t)}</span></p>`
-    : `<ul class="uq-list">${ev.it.map((x) => `<li>${ic(x.ic ?? UQ_ICON[x.k] ?? "spark")}<b>${esc(x.n)}</b>${x.d ? `<small>${esc(x.d)}</small>` : ""}</li>`).join("")}</ul>`;
+    : `<ul class="uq-list">${ev.it.map((x) => {
+      // t51u: 태그를 누르면 그 시설이 언급된 후기 글(없으면 고캠핑 공식 페이지, 그것도 없으면 이 캠핑장 상세)로 간다.
+      const ext = /^https:\/\//.test(x.u ?? "");
+      const href = ext ? x.u : `${APP_BASE}place/${encodeURIComponent(c.id)}`;
+      const ttl = ext ? (x.us === "o" ? "고캠핑 공식 소개에서 보기" : "이 시설이 나온 후기 글 보기") : "캠핑장 상세 보기";
+      return `<li><a class="uq-a" href="${esc(href)}"${ext ? ' target="_blank" rel="noopener"' : ""} title="${ttl}">${ic(x.ic ?? UQ_ICON[x.k] ?? "spark")}<b>${esc(x.n)}</b><svg class="uq-go" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1h7v7L6.4 5.4 2.4 9.4.6 7.6l4-4z" fill="currentColor"/></svg>${x.d ? `<small>${esc(x.d)}</small>` : ""}</a></li>`;
+    }).join("")}</ul>`;
   return `<div class="card-group uq-why${p ? " has-ph" : ""}">
     <div class="uq-main">${body}</div>
     ${p ? `<a class="uq-ev-ph" href="${esc(p.u || "#")}" target="_blank" rel="noopener" aria-label="후기 사진 원문 보기"><img src="${esc(p.th)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.uq-why').classList.remove('has-ph');this.parentElement.remove()"></a>` : ""}
