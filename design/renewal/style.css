@@ -4370,3 +4370,6 @@ img.img-gone { visibility: hidden; }
   .td-why li:nth-child(3) { display: none; }
   .td-chips .td-chip:nth-child(3) { display: none; }
 }
+
+/* 이색 캠핑장 하위 분류 칩(t44u) — 지역 칩과 같은 칩 양식, 한 줄 가로 넘김 */
+.theme-page .theme-uq { gap: 8px; padding-bottom: var(--sec-gap-inner, 12px); }
