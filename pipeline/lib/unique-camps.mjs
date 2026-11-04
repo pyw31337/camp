@@ -72,60 +72,117 @@ export function classifyUnique(c, det) {
   return res;
 }
 
-// t47u(2026-11-04): 이색 캠핑장 테마 카드 ‘왜 특별한지’ 블록용 근거. 분류(classifyUnique)는 그대로 두고 화면용 문장·사진만 고른다.
-// 문장은 자르지 않는다(…로 끊지 않음) — 온전한 한 문장만 쓰고, 너무 길면(160자 초과) 다음 후보로 넘어간다.
-// 우선순위: ① 업장 소개 문장 ② 이름이 맞는 방문 후기 본문 문장 ③ 후기 제목 ④ 업장 부대시설 목록에서 만든 문장.
-// 사진: 이름이 맞고 같은 시설 낱말이 제목에 있는 후기·SNS 사진 1장(원문 링크와 함께).
-const RARE_FIRST = ["hotspring", "spa", "warmpool", "horse", "animal", "treehouse", "stay", "leisure", "kidscafe", "indoorplay", "farm", "valley", "pool"];
-const SENT = /(?<=[.!?。])\s+|\n+|\s{2,}|(?<=다)\s+(?=[가-힣A-Z])/;
-const clean = (s) => String(s ?? "").replace(/[\u200b\u00a0]/g, " ").replace(/\s+/g, " ").trim();
-const okSentence = (s, re) => {
-  if (s.length < 12 || s.length > 160 || /…|\.{2,}|[ㄱ-ㅎ]{2,}/.test(s)) return false;
-  return hitsIn(s.replace(SPLIT, " "), re).length > 0 && hitsIn(s, re).length > 0;
-};
+// t47u-2(2026-11-04, 소유자 피드백): 후기 문장을 그대로 오려 붙이지 않는다.
+// 업장 글·후기 제목/본문·부대시설을 캠핑장마다 모두 훑어 ‘진짜 특색 시설·체험’을 뽑고, 같은 시설은 하나로 합쳐
+// 짧은 이름(수식어: 개별·온수·실내·대형…) + 세부(수온·운영시간·요금·무료·대상·계절)로 정리한다.
+// 세부 값은 같은 시설 낱말 앞뒤 40자 안에서만, 상식 범위(수온 25~45℃, 요금 3천~20만원, 시간 0~24시)만 쓴다.
+// 화면 방식: 세부가 있거나 특색이 2개 이상이면 목록(m:"list"), 하나뿐이고 세부가 없으면 다시 쓴 짧은 문장(m:"text").
+const FEAT = [
+  { k: "hotspring", n: "노천탕", re: /노천 ?탕|노천 ?욕조|노천 ?온천|히노끼 ?(?:탕|욕조)|야외 ?욕조|온천탕|족욕/, mods: ["개별", "히노끼"] },
+  { k: "spa", n: "스파", re: /자쿠지|월풀|온천수|사우나|찜질방|(?<![가-힣])스파(?!게티|클)/, names: [[/자쿠지|월풀/, "자쿠지"], [/온천수/, "온천수"], [/사우나/, "사우나"], [/찜질방/, "찜질방"]], mods: ["개별"] },
+  { k: "warmpool", n: "온수풀", re: /온수 ?풀|온수 ?수영장|미온수|사계절 ?(?:수영장|풀)|4계절 ?(?:수영장|풀)|실내 ?수영장/, mods: ["개별", "실내", "사계절"] },
+  { k: "pool", n: "수영장", re: /수영장|풀장|인피니티 ?풀|개별 ?풀|전용 ?풀/, mods: ["개별", "대형", "인피니티"], extra: [[/워터 ?슬라이드|미끄럼틀/, "워터슬라이드"]] },
+  { k: "horse", n: "승마 체험", re: /승마|말타기|포니/ },
+  { k: "animal", n: "동물 체험", re: /동물 ?농장|동물 ?체험|먹이 ?주기|양떼|알파카|미니 ?동물원|토끼 ?먹이|염소 ?먹이/, names: [[/미니 ?동물원/, "미니동물원"], [/알파카/, "알파카 체험"], [/양떼/, "양떼 체험"], [/먹이 ?주기|토끼 ?먹이|염소 ?먹이/, "동물 먹이주기"]] },
+  { k: "kidscafe", n: "키즈카페", re: /키즈 ?카페/, mods: ["대형", "실내"] },
+  { k: "indoorplay", n: "실내 놀이터", re: /키즈 ?룸|실내 ?놀이터|실내 ?놀이방|플레이 ?룸|볼풀|(?<!노 ?)키즈 ?존/, names: [[/키즈 ?룸/, "키즈룸"], [/볼풀/, "볼풀장"], [/플레이 ?룸/, "플레이룸"]] },
+  { k: "treehouse", n: "트리하우스", re: /트리 ?하우스/ },
+  { k: "stay", n: "이색 숙소", re: /이글루|버블 ?텐트|호빗|(?<![가-힣])티피(?![가-힣])|인디언 ?텐트|기차 ?(?:캠핑|객실|펜션|숙소)|열차 ?(?:캠핑|객실)|캡슐 ?(?:하우스|호텔)|우주선|선박 ?(?:캠핑|객실)|버스 ?캠핑|돔 ?하우스|지오데식/, names: [[/이글루/, "이글루 숙소"], [/버블 ?텐트/, "버블텐트"], [/호빗/, "호빗하우스"], [/티피|인디언 ?텐트/, "인디언 티피"], [/기차|열차/, "기차 객실"], [/캡슐/, "캡슐하우스"], [/우주선/, "우주선 숙소"], [/선박/, "선박 객실"], [/버스/, "버스 캠핑"], [/돔 ?하우스|지오데식/, "돔하우스"]] },
+  { k: "leisure", n: "레포츠", re: /짚 ?라인|집 ?라인|서바이벌|ATV|사륜 ?바이크|카트(?:장| ?체험)|카약|카누|패들 ?보드|SUP|레일 ?바이크|패러 ?글라이딩|눈 ?썰매|썰매장|수상 ?스키|웨이크|암벽/, names: [[/짚 ?라인|집 ?라인/, "짚라인"], [/서바이벌/, "서바이벌"], [/ATV|사륜 ?바이크/, "ATV"], [/카트/, "카트"], [/카약|카누/, "카약·카누"], [/패들 ?보드|SUP/, "패들보드"], [/레일 ?바이크/, "레일바이크"], [/패러/, "패러글라이딩"], [/썰매/, "눈썰매장"], [/수상 ?스키|웨이크/, "수상레저"], [/암벽/, "암벽등반"]] },
+  { k: "farm", n: "체험 프로그램", re: /(?:딸기|블루베리|감자|고구마|옥수수|사과|밤) ?(?:따기|캐기|줍기|수확)|체험 ?농장|농촌 ?체험|목공 ?체험|도예 ?체험|천연 ?염색|만들기 ?체험|천체 ?관측|별 ?관측 ?(?:체험|프로그램)|천체 ?망원경/, names: [[/(딸기|블루베리|감자|고구마|옥수수|사과|밤) ?(따기|캐기|줍기|수확)/, (m) => `${m[1]} ${m[2]} 체험`], [/목공/, "목공 체험"], [/도예/, "도예 체험"], [/염색/, "천연염색 체험"], [/피자 ?만들기/, "피자 만들기"], [/만들기/, "만들기 체험"], [/천체|별 ?관측/, "별 관측"], [/체험 ?농장|농촌/, "농촌 체험"]] },
+  { k: "valley", n: "계곡 바로 옆", ownOnly: true, re: /계곡 ?(?:바로|앞|옆|과 ?접|을 ?끼|이 ?흐르|물이 ?흐르)|계곡형|계곡 ?뷰/ },
+];
+// 흔한 시설은 빼되, 캠핑장에서 드문 ‘개별 화장실·샤워실’은 특색으로 본다.
+const EXTRA = [{ k: "privbath", n: "개별 화장실·샤워실", ic: "toilet", re: /개별 ?(?:화장실|샤워실|욕실)|전용 ?(?:화장실|욕실)|단독 ?화장실/ }];
+const PRIV = /개별|단독|전용|프라이빗|사이트마다|사이트별/;
+const near = (t, i, len, r = 40) => t.slice(Math.max(0, i - r), i + len + r);
+function detailsOf(win, k) {
+  const d = {};
+  if (["hotspring", "spa", "warmpool", "pool"].includes(k)) { const m = /(\d{2}(?:\.\d)?)\s*(?:도|℃|°)/.exec(win); if (m && +m[1] >= 25 && +m[1] <= 45) d.temp = `${+m[1]}℃`; }
+  const h = /(\d{1,2})(?::(\d{2}))?\s*시?\s*[~\-–]\s*(\d{1,2})(?::(\d{2}))?\s*시/.exec(win);
+  if (h && +h[1] <= 24 && +h[3] <= 24 && +h[3] !== +h[1]) d.hour = `${+h[1]}~${+h[3]}시`;
+  if (["horse", "animal", "farm", "leisure", "kidscafe", "spa"].includes(k)) {
+    const pm = /(\d{1,2}(?:,\d{3})+|\d{1,3}(?:\.\d)?\s*만)\s*원/.exec(win);
+    if (pm) { const v = /만/.test(pm[1]) ? parseFloat(pm[1]) * 10000 : +pm[1].replace(/,/g, ""); if (v >= 3000 && v <= 200000) d.price = `${v.toLocaleString("ko-KR")}원`; }
+  }
+  if (/무료|무제한/.test(win) && !/유료/.test(win)) d.free = "무료";
+  if (/유료/.test(win)) d.paid = "유료";
+  if (k === "pool" || k === "valley") { if (/여름|하절기|7\s*~\s*8월/.test(win)) d.season = "여름 운영"; }
+  if (/(?:어린이|아이|초등|키즈)\s*(?:전용|대상|만)/.test(win)) d.who = "어린이 대상";
+  return d;
+}
 export function uniqueCard(c, det, res) {
   const ids = RARE_FIRST.filter((id) => res[id]);
   if (!ids.length) return null;
-  const cats = Object.fromEntries(UNIQUE_CATS.map((x) => [x.id, x]));
   const core = coreName(c.name);
-  const intros = [c.line, det?.intro, typeof det?.gcd?.intro === "string" ? det.gcd.intro : "", det?.profile?.fields?.EXPERIENCE?.value, det?.profile?.fields?.INTRO?.value].filter((x) => typeof x === "string").map(clean);
-  const revs = core ? (det?.reviews ?? []).filter((r) => typeof r?.title === "string" && r.title.replace(/\s/g, "").includes(core)) : [];
-  let t = "", src = "", cat = "";
-  for (const id of ids) {
-    const re = cats[id].re;
-    for (const txt of intros) { const s = txt.split(SENT).map(clean).find((x) => okSentence(x, re)); if (s) { t = s; src = "업장 소개"; break; } }
-    if (t) { cat = id; break; }
+  const own = [c.line, det?.intro, typeof det?.gcd?.intro === "string" ? det.gcd.intro : "", det?.profile?.fields?.EXPERIENCE?.value, det?.profile?.fields?.INTRO?.value, ...(c.amenities ?? [])].filter((x) => typeof x === "string").map(clean);
+  const rv = [];
+  if (core) for (const k of ["reviews", "web", "sns_images", "videos"]) for (const r of det?.[k] ?? []) {
+    const ti = typeof r?.title === "string" ? r.title : "";
+    if (!ti.replace(/\s/g, "").includes(core)) continue;
+    rv.push(clean(`${ti} ${typeof r.snippet === "string" ? r.snippet : ""}`));
   }
-  if (!t) for (const id of ids) {
-    if (id === "valley") continue;
-    const re = cats[id].re;
-    for (const r of revs) {
-      const parts = clean(r.snippet).split(SENT).map(clean);
-      if (/…$/.test(clean(r.snippet))) parts.pop(); // 잘린 끝 문장은 쓰지 않는다
-      const okR = (x) => okSentence(x, re) && x.length <= 110 && /(?:다|요|죠|네|음|[.!])$/.test(x) && !/\p{Extended_Pictographic}|\d{1,2}:\d{2}|[|｜#]/u.test(x);
-      const s = parts.slice(1).find(okR) ?? (/^[가-힣A-Za-z0-9]/.test(parts[0] ?? "") && okR(parts[0]) ? parts[0] : "");
-      if (s) { t = s; src = "방문 후기"; break; }
-    }
-    if (t) { cat = id; break; }
+  for (const f of Object.values(det?.profile?.fields ?? {})) { const q = f?.source?.quote; if (typeof q === "string" && q.length > 6) rv.push(clean(q)); }
+  for (const t of [det?.facilities, det?.spec?.note].flat()) if (typeof t === "string") own.push(clean(t));
+  const rvU = [...new Set(rv)];
+  const items = [];
+  const scan = (f, texts) => {
+    const wins = [];
+    for (const t of texts) { const g = new RegExp(f.re.source, "g"); let m; while ((m = g.exec(t))) { const w12 = near(t, m.index, m[0].length, 12); if (NEG.test(w12.replace(f.re, ""))) continue; wins.push({ w: near(t, m.index, m[0].length), hit: m[0] }); } }
+    return wins;
+  };
+  for (const f of [...FEAT.filter((x) => ids.includes(x.k)), ...EXTRA]) {
+    const ow = scan(f, own), rw = f.ownOnly ? [] : scan(f, rvU);
+    const nRv = new Set(rw.map((x) => x.w)).size;
+    if (!ow.length && !(f.k in res) && nRv < 2) continue; // EXTRA: 업장 글 또는 후기 2건 이상
+    if (!ow.length && !rw.length) continue;
+    const all = [...ow, ...rw];
+    // 이름: 구체 이름(자쿠지·짚라인…) 중 가장 많이 나온 것, 없으면 기본 이름 + 수식어
+    let name = f.n;
+    if (f.names) { const cnt = new Map(); for (const { w } of all) for (const [re, nm] of f.names) { const m = re.exec(w); if (m) { const v = typeof nm === "function" ? nm(m) : nm; cnt.set(v, (cnt.get(v) ?? 0) + 1); break; } } const best = [...cnt].sort((a, b) => b[1] - a[1]); if (best.length) name = best.slice(0, 2).map((x) => x[0]).join("·"); }
+    const priv = all.filter(({ w, hit }) => PRIV.test(near(w, w.indexOf(hit), hit.length, 6))).length;
+    if (f.mods?.includes("개별") && priv >= Math.max(1, all.length * 0.3) && !/개별/.test(name)) name = `개별 ${name}`;
+    if (f.mods?.includes("실내") && all.filter(({ w }) => /실내/.test(w)).length >= 2 && !/실내/.test(name)) name = `실내 ${name}`;
+    if (f.mods?.includes("대형") && all.some(({ w }) => /대형/.test(w)) && !/개별/.test(name)) name = `대형 ${name}`;
+    if (f.mods?.includes("인피니티") && all.some(({ hit }) => /인피니티/.test(hit))) name = "인피니티풀";
+    // 세부: 값별 최다
+    const vote = {};
+    for (const { w } of all) for (const [dk, dv] of Object.entries(detailsOf(w, f.k))) (vote[dk] ??= new Map()).set(dv, ((vote[dk].get(dv)) ?? 0) + 1);
+    const pick = (dk) => [...(vote[dk] ?? [])].sort((a, b) => b[1] - a[1])[0]?.[0];
+    const dParts = [pick("temp"), pick("hour"), pick("price"), pick("paid") && !pick("free") ? "" : pick("free"), pick("season"), pick("who")].filter(Boolean);
+    const extra = (f.extra ?? []).filter(([re]) => all.some(({ w }) => re.test(w))).map((x) => x[1]);
+    items.push({ k: f.k, n: name, d: [...extra, ...dParts].join(" · "), w: ow.length * 3 + nRv, ...(f.ic ? { ic: f.ic } : {}) });
   }
-  if (!t) for (const id of ids) {
-    const m = /^후기 (\d+)건: (.+)$/.exec(res[id]);
-    if (m && !/…|\.\.\.\.?$/.test(m[2]) && m[2].length < 70) { t = clean(m[2]); src = `후기 제목 ${m[1]}건`; cat = id; break; }
-  }
-  if (!t) {
-    const fac = [...new Set(ids.map((id) => /^부대시설: (.+)$/.exec(res[id])?.[1]).filter(Boolean))];
-    if (fac.length) { t = fac.join("·"); src = "업장 부대시설"; cat = ids.find((id) => /^부대시설/.test(res[id])); }
+  if (!items.length) return null;
+  // 수영장은 온수풀이 있으면 합친다(같은 시설 중복 방지)
+  const wp = items.find((x) => x.k === "warmpool"), pl = items.find((x) => x.k === "pool");
+  if (wp && pl) items.splice(items.indexOf(pl), 1);
+  const kc = items.find((x) => x.k === "kidscafe"), ip = items.find((x) => x.k === "indoorplay");
+  if (kc && ip) items.splice(items.indexOf(ip), 1);
+  for (const x of items) if (["kidscafe", "indoorplay", "farm"].includes(x.k)) x.d = x.d.replace(/ · 어린이 대상|^어린이 대상( · )?/, "");
+  items.sort((a, b) => RARE_FIRST.indexOf(a.k) - RARE_FIRST.indexOf(b.k) || b.w - a.w);
+  const nOwn = own.length ? 1 : 0;
+  const s = [own.some((t) => FEAT.some((f) => ids.includes(f.k) && f.re.test(t))) ? "업장 소개" : "", rvU.length ? `후기 ${rvU.length}건` : ""].filter(Boolean).join(" · ");
+  const real = items.filter((x) => x.k !== "privbath");
+  const listMode = items.length >= 2 || items.some((x) => x.d);
+  let t = "";
+  if (!listMode) {
+    const x = items[0];
+    const jn = (w, a, b) => { const ch = w.charCodeAt(w.length - 1); return w + ((ch >= 0xac00 && ch <= 0xd7a3 && (ch - 0xac00) % 28) ? a : b); };
+    const SENT_T = { valley: "계곡이 사이트 바로 옆을 흘러 물놀이하기 좋아요", treehouse: "나무 위 트리하우스에서 묵어볼 수 있어요", horse: "캠핑장 안에서 승마를 체험할 수 있어요", kidscafe: `${jn(x.n, "이", "가")} 있어 아이와 날씨 걱정 없이 놀 수 있어요`, indoorplay: `${jn(x.n, "이", "가")} 있어 아이들이 실내에서도 놀 수 있어요`, farm: `${jn(x.n, "을", "를")} 캠핑과 함께 즐길 수 있어요`, leisure: `${jn(x.n, "을", "를")} 캠핑장에서 바로 즐길 수 있어요`, stay: `${x.n}처럼 색다른 숙소에서 하룻밤을 보낼 수 있어요`, animal: `${jn(x.n, "으로", "로")} 아이와 동물을 가까이 만날 수 있어요`, pool: `${jn(x.n, "이", "가")} 있어 물놀이 캠핑하기 좋아요`, warmpool: `${jn(x.n, "이", "가")} 있어 선선한 날에도 물놀이할 수 있어요`, hotspring: `${x.n}에서 몸을 녹이며 쉴 수 있어요`, spa: `${x.n}에서 캠핑 피로를 풀 수 있어요` };
+    t = SENT_T[x.k] ?? `${jn(x.n, "이", "가")} 있어요`;
   }
   let ph = null;
-  const allRe = new RegExp(ids.map((id) => cats[id].re.source).join("|"));
+  const allRe = new RegExp(FEAT.filter((x) => ids.includes(x.k)).map((x) => x.re.source).join("|"));
   if (core) for (const k of ["sns_images", "reviews"]) {
     for (const r of det?.[k] ?? []) {
       const th = r?.thumb, title = typeof r?.title === "string" ? r.title : "";
       if (!th || !/^https:\/\//.test(th) || !title.replace(/\s/g, "").includes(core) || !hitsIn(title, allRe).length) continue;
-      ph = { th, u: typeof r.url === "string" ? r.url : "", s: clean(r.src ?? "") };
-      break;
+      ph = { th, u: typeof r.url === "string" ? r.url : "" }; break;
     }
     if (ph) break;
   }
-  return { c: cat || ids[0], t, s: src, ...(ph ? { p: ph } : {}) };
+  return { c: (real[0] ?? items[0]).k, m: listMode ? "list" : "text", it: items.slice(0, 4).map(({ w, ...x }) => x), ...(t ? { t } : {}), s, ...(ph ? { p: ph } : {}) };
 }
+const RARE_FIRST = ["hotspring", "spa", "warmpool", "horse", "animal", "treehouse", "stay", "leisure", "kidscafe", "indoorplay", "farm", "valley", "pool", "privbath"];
+const clean = (s) => String(s ?? "").replace(/[\u200b\u00a0]/g, " ").replace(/\s+/g, " ").trim();

@@ -31,6 +31,6 @@ for (const c of camps) {
 writeFileSync(file, JSON.stringify(camps));
 writeFileSync(join(dir, "unique-camps.json"), JSON.stringify({ generated_at: new Date().toISOString(), cats: UNIQUE_CATS.map(({ id, label }) => ({ id, label })), counts, total: Object.keys(evidence).length, evidence }));
 writeFileSync(join(dir, "unique-cards.json"), JSON.stringify(cards));
-const withT = Object.values(cards).filter((x) => x.t).length, withP = Object.values(cards).filter((x) => x.p).length;
-console.log(`이색 카드 근거: 문장 ${withT}/${Object.keys(cards).length} · 사진 ${withP}`);
+const withT = Object.values(cards).filter((x) => x.m === "list").length, withP = Object.values(cards).filter((x) => x.p).length;
+console.log(`이색 카드 근거: 목록형 ${withT} · 문장형 ${Object.keys(cards).length - withT}/${Object.keys(cards).length} · 사진 ${withP}`);
 console.log(`이색 캠핑장 ${Object.keys(evidence).length}곳:`, UNIQUE_CATS.map((x) => `${x.label} ${counts[x.id]}`).join(" · "));

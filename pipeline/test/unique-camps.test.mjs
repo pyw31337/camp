@@ -30,20 +30,25 @@ test("t45u: 12개 낱개 분류 — 노천탕/스파, 승마/동물체험, 키�
   assert.ok(!r.hotspring && !r.horse && !r.indoorplay && !r.stay);
 });
 
-// t47u: 이색 카드 근거 — 온전한 문장만(… 없음), 업장 소개 우선, 이름 맞는 후기 사진.
+// t47u-2: 이색 카드 — 문장 복사가 아니라 시설 이름·세부로 정리, 중복 합치기, 한 개뿐이면 다시 쓴 문장.
 import { uniqueCard } from "../lib/unique-camps.mjs";
-test("uniqueCard: 업장 소개 문장을 자르지 않고 고르고, 이름이 맞는 후기 사진을 붙인다", () => {
-  const c = { name: "골든쌔들 캠핑장", line: "" };
-  const det = { intro: "산속 조용한 캠핑장이다. 계곡 물소리를 들으며 노천탕에서 별을 볼 수 있다. 주차는 넓다.", sns_images: [{ thumb: "https://x/t.jpg", url: "https://blog/1", title: "골든쌔들 노천탕 후기", src: "블로그" }] };
-  const r = uniqueCard(c, det, { hotspring: "소개: 노천탕", pool: "부대시설: 수영장" });
-  assert.equal(r.c, "hotspring");
-  assert.equal(r.t, "계곡 물소리를 들으며 노천탕에서 별을 볼 수 있다.");
-  assert.equal(r.s, "업장 소개");
-  assert.equal(r.p.th, "https://x/t.jpg");
+test("uniqueCard: 시설을 짧은 이름 + 세부(수온·시간·무료)로 정리하고 온수풀/수영장 중복을 합친다", () => {
+  const c = { name: "골든쌔들 캠핑장", line: "개별 노천탕과 개별 수영장이 있는 캠핑장" };
+  const det = { reviews: [
+    { title: "골든쌔들 온수풀 후기", snippet: "온수풀은 32도로 따뜻했고 12시~19시 운영, 무료였어요." },
+    { title: "골든쌔들 승마 체험", snippet: "승마 체험은 1회 30,000원이었어요." },
+  ] };
+  const r = uniqueCard(c, det, { hotspring: "소개: 노천탕", warmpool: "후기", pool: "소개: 수영장", horse: "후기" });
+  assert.equal(r.m, "list");
+  const by = Object.fromEntries(r.it.map((x) => [x.k, x]));
+  assert.equal(by.hotspring.n, "개별 노천탕");
+  assert.match(by.warmpool.d, /32℃/); assert.match(by.warmpool.d, /12~19시/); assert.match(by.warmpool.d, /무료/);
+  assert.match(by.horse.d, /30,000원/);
+  assert.ok(!by.pool, "온수풀이 있으면 수영장은 합친다");
+  assert.ok(r.it.every((x) => !/…/.test(x.n + x.d)));
 });
-test("uniqueCard: 잘린 후기 문장(…)은 쓰지 않고 부대시설로 내려간다", () => {
-  const det = { reviews: [{ title: "골든쌔들 후기", snippet: "수영장이 정말 좋았어요 아이들이 하루종일 놀았…" }] };
-  const r = uniqueCard({ name: "골든쌔들" }, det, { pool: "부대시설: 수영장" });
-  assert.ok(!/…/.test(r.t));
-  assert.equal(r.s, "업장 부대시설");
+test("uniqueCard: 특색이 하나뿐이고 세부가 없으면 조사까지 맞춘 짧은 문장", () => {
+  const r = uniqueCard({ name: "숲속", line: "서바이벌 체험장을 운영합니다" }, {}, { leisure: "소개: 서바이벌" });
+  assert.equal(r.m, "text");
+  assert.equal(r.t, "서바이벌을 캠핑장에서 바로 즐길 수 있어요");
 });

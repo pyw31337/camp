@@ -670,19 +670,16 @@ function loadUqCards() {
   return uqCardsP;
 }
 function uniqueWhyHtml(c) {
+  // t47u-2: 후기 문장을 붙이지 않고 정리된 특색(이름 + 세부)을 보인다. 여러 개·세부 있음 → 목록, 하나뿐 → 다시 쓴 문장.
   const ev = UQ_CARDS?.[String(c.id)];
   const lbl = Object.fromEntries(UNIQUE_SUBS);
-  const keys = [...(c.uq ?? [])].sort((a, b) => (b === ev?.c) - (a === ev?.c));
-  const tags = keys.filter((k) => lbl[k]).map((k) => `<li class="uq-tag${k === ev?.c ? " is-main" : ""}">${ic(UQ_ICON[k] ?? "spark")}${esc(lbl[k])}</li>`).join("");
   const p = ev?.p;
-  const srcTxt = [ev?.s, p?.s && p.s !== "." ? `사진 ${p.s}` : ""].filter(Boolean).join(" · ");
-  const txt = ev?.t ? (ev.s === "업장 부대시설" ? `부대시설: ${ev.t}` : ev.t) : "";
-  return `<div class="card-group uq-why">
-    <ul class="uq-tags" aria-label="이색 포인트">${tags}</ul>
-    ${txt ? `<div class="uq-ev${p ? " has-ph" : ""}">
-      ${p ? `<a class="uq-ev-ph" href="${esc(p.u || "#")}" target="_blank" rel="noopener" aria-label="근거 사진 원문 보기"><img src="${esc(p.th)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.uq-ev').classList.remove('has-ph');this.parentElement.remove()"></a>` : ""}
-      <div class="uq-ev-txt"><p>${esc(txt)}</p>${srcTxt ? `<small>${esc(srcTxt)}</small>` : ""}</div>
-    </div>` : ""}
+  const body = !ev ? `<ul class="uq-tags">${(c.uq ?? []).filter((k) => lbl[k]).map((k) => `<li class="uq-tag">${ic(UQ_ICON[k] ?? "spark")}${esc(lbl[k])}</li>`).join("")}</ul>`
+    : ev.m === "text" ? `<p class="uq-sent">${ic(UQ_ICON[ev.it[0]?.k] ?? "spark")}<span>${esc(ev.t)}</span></p>`
+    : `<ul class="uq-list">${ev.it.map((x) => `<li>${ic(x.ic ?? UQ_ICON[x.k] ?? "spark")}<b>${esc(x.n)}</b>${x.d ? `<small>${esc(x.d)}</small>` : ""}</li>`).join("")}</ul>`;
+  return `<div class="card-group uq-why${p ? " has-ph" : ""}">
+    <div class="uq-main">${body}${ev?.s ? `<small class="uq-src">${esc(ev.s)} 분석</small>` : ""}</div>
+    ${p ? `<a class="uq-ev-ph" href="${esc(p.u || "#")}" target="_blank" rel="noopener" aria-label="후기 사진 원문 보기"><img src="${esc(p.th)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('.uq-why').classList.remove('has-ph');this.parentElement.remove()"></a>` : ""}
   </div>`;
 }
 // 이색 캠핑장 하위 분류(라벨은 pipeline/lib/unique-camps.mjs UNIQUE_CATS와 같은 순서·이름)
