@@ -882,10 +882,11 @@ function results() {
 const photoUrl = (u) => {
   const value = String(u ?? "");
   if (!value) return "";
-  if (value.startsWith("media/")) return `${MEDIA_FILES}${value.slice(6)}`;
-  if (value.startsWith("./media/")) return `${MEDIA_FILES}${value.slice(8)}`;
-  if (value.startsWith("../media/")) return `${MEDIA_FILES}${value.slice(9)}`;
-  return value;
+  const rest = value.startsWith("media/") ? value.slice(6) : value.startsWith("./media/") ? value.slice(8) : value.startsWith("../media/") ? value.slice(9) : null;
+  if (rest == null) return value;
+  // t43: R2(media-base)에는 media 브랜치의 .webp만 올라간다. 저장소에 직접 넣은 jpg·png(예: 평택캠핑성 camps/102377/img*.jpg)는
+  // Pages의 /media/에만 있으므로, webp가 아니면 항상 Pages 주소를 쓴다(R2로 보내면 404 → 대표 사진이 비어 보였음).
+  return /\.webp(?=[?#]|$)/i.test(rest) ? `${MEDIA_FILES}${rest}` : `${MEDIA}${rest}`;
 };
 // 목록은 480px 파생본을 우선 쓰되, 고밀도 화면에서는 같은 공식 원본의 1280px 파생본을 선택한다.
 // 외부 원문 URL은 변형하지 않아 원천의 표시 조건과 주소를 유지한다.
