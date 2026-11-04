@@ -23,10 +23,11 @@ test("정렬 바는 모든 테마에, 정렬은 테마 무관 적용", () => {
   assert.ok(js.includes("mc-near-pt") && js.includes("mc-uq-sort"), "선택 저장");
 });
 test("이색 썸네일·히어로 12종", () => {
-  assert.ok(/UNIQUE: "unique\.webp"/.test(js));
+  assert.ok(/UNIQUE: "unique-onsen\.webp"/.test(js), "이색 썸네일은 노천탕 전용 이미지(t47u)");
+  assert.ok(!/UNIQUE: "glamping\.webp"/.test(js), "글램핑과 같은 썸네일 금지");
   const ids = [...js.matchAll(/id: "(uq-[a-z]+)"/g)].map((m) => m[1]);
   assert.equal(new Set(ids).size, 12);
   for (const d of ["design/renewal", "camping-atlas/public"]) {
-    assert.ok(existsSync(p(`${d}/images/themes/unique.webp`)));
+    assert.ok(existsSync(p(`${d}/images/themes/unique-onsen.webp`)));
   }
 });
