@@ -9,7 +9,11 @@ test("#41 조건 시트에 계절·풍경·덤프 조건이 있고 URL로 오간
     const m = s.match(/const COND_BOOL = \{([\s\S]*?)\n\};/);
     assert.ok(m, "COND_BOOL");
     const B = new Function(`return {${m[1]}}`)();
-    assert.deepEqual(Object.keys(B), ["dump", "sun", "leaf", "spring", "summer"]);
+    assert.deepEqual(Object.keys(B), ["dump", "vr", "best", "sun", "leaf", "spring", "summer"]);
+    assert.equal(B.vr[1]({ vr: { url: "https://example.com" } }), "y");
+    assert.equal(B.vr[1]({}), "n");
+    assert.equal(B.best[1]({ best: [{ label: "우수야영장" }] }), "y");
+    assert.equal(B.best[1]({}), "n");
     assert.equal(B.sun[1]({ th: ["sunrise"] }), "y");
     assert.equal(B.sun[1]({ th: ["kids"] }), "n");
     assert.equal(B.leaf[1]({}), "?"); // 정보 없으면 빼지 않는다
