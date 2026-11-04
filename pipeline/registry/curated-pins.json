@@ -12,7 +12,8 @@
      "url": "https://hsecofarm.hscity.go.kr/reservation/info/price.do",
      "checked_at": "2026-10-21",
      "pinned": true
-    }
+    },
+    "pets": "반려견동반 사이트에서만 가능"
    },
    "detail": {
     "profile.fields.REFUND": {
@@ -270,7 +271,18 @@
       "date": "2026-09-04",
       "sure": false
      }
-    ]
+    ],
+    "profile.fields.PET": {
+     "value": "반려견동반 사이트에서만 가능",
+     "grade": "OPERATOR",
+     "source": {
+      "label": "화성에코팜테마파크 이용요금(운영 기관)",
+      "url": "https://hsecofarm.hscity.go.kr/reservation/info/price.do",
+      "date": "2026-11-04",
+      "quote": "반려견동반 (6m x 8m) 1동 1박 50,000원 45,000원 5명 1대 (이용안내: 애완동물 출입 금지, 보조견 제외)"
+     },
+     "pinned": true
+    }
    }
   },
   "102377": {
