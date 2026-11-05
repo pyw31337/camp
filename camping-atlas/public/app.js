@@ -1879,7 +1879,7 @@ const TR_GLYPH = {
 const trIcon = (k, n) => { const [label, path] = TR_GLYPH[k] ?? [k, ""]; return `<span class="tr-src" title="${esc(label)} ${n}건" aria-label="${esc(label)} ${n}건"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true">${path}</svg><i>${fmt(n)}</i></span>`; };
 // ── 오늘의 캠핑장(소유자 2026-10-30): 정보량 상위 100곳 중 날마다 5곳을 골라 편집 카드로 맨 위에 보인다.
 // 같은 날에는 누구에게나 같은 5곳(날짜 씨앗), 다음 날엔 바뀐다 → ‘매일 관리되는 사이트’ 느낌. 카드는 뉴스보드 카드덱(스프링 물리)과 같은 방식.
-const TODAY_N = 5;
+const TODAY_N = 7;
 function todayPicks() {
   const pool = S.camps.filter((c) => !c.du && showcaseEligible(c) && photosOf(c).length >= 2).sort((a, b) => rich(b) - rich(a)).slice(0, 100);
   return pool.map((c, i) => [c, i + 1]).sort((a, b) => dayHash(`today:${a[0].id}`) - dayHash(`today:${b[0].id}`)).slice(0, TODAY_N);
@@ -1911,7 +1911,7 @@ function todayCard([c, rank], k, dateLabel) {
     <a class="td-link" draggable="false" href="${APP_BASE}place/${encodeURIComponent(c.id)}" aria-label="오늘의 캠핑장 ${k + 1}번 ${esc(nm)} 자세히"></a>
     <div class="td-media">
       <div class="td-main">${imageTag(ph[0], "", { eager: k === 0, sizes: "(max-width: 759px) 92vw, 620px" })}</div>
-      ${ph.length > 1 ? `<div class="td-strip">${ph.slice(1, 4).map((u) => `<span>${imageTag(u, "", { sizes: "160px" })}</span>`).join("")}</div>` : ""}
+      ${ph.length > 1 ? `<div class="td-strip" aria-label="캠핑장 사진 선택">${ph.slice(1, 4).map((u, i) => `<button type="button" class="td-thumb" data-photo-index="${i + 1}" aria-label="사진 ${i + 2} 보기">${imageTag(u, "", { sizes: "160px" })}</button>`).join("")}</div>` : ""}
       <span class="td-no">${String(k + 1).padStart(2, "0")}</span>
     </div>
     <div class="td-body">
@@ -2050,6 +2050,19 @@ function initTodayDeck(root) {
   stage.addEventListener("pointerup", (e) => { if (drag && e.pointerId === drag.id) release(e); });
   stage.addEventListener("pointercancel", (e) => { if (drag && e.pointerId === drag.id) release(e, true); });
   stage.addEventListener("click", (e) => {
+    const thumb = e.target.closest("[data-photo-index]");
+    if (thumb) {
+      e.preventDefault(); e.stopPropagation();
+      const card = thumb.closest(".td-card");
+      const main = card?.querySelector(".td-main img");
+      const image = thumb.querySelector("img");
+      if (main && image?.src) {
+        main.src = image.currentSrc || image.src;
+        main.srcset = image.srcset || "";
+        card.querySelectorAll(".td-thumb").forEach((b) => b.classList.toggle("is-active", b === thumb));
+      }
+      return;
+    }
     if (root._moved) { e.preventDefault(); e.stopPropagation(); return; }
     const c = e.target.closest(".td-card"); if (!c) return;
     if (+c.dataset.i !== top) { e.preventDefault(); e.stopPropagation(); go(+c.dataset.i); }
@@ -5674,13 +5687,13 @@ async function detailView(id) {
         ${amenityHtml(c, d)}
         ${houseRulesHtml(c, d)}
         <section class="d-sec" data-cond hidden></section>
-        ${reviewHtml(d, c)}
         ${operatorHtml(d, c)}
         ${programsHtml(d)}
         ${layoutHtml(d, c)}
         <section class="d-sec site-picks-sec" id="sec-site-picks" data-site-picks hidden></section>
         ${operatorMediaHtml(d)}
         ${mediaHubHtml(d, c)}
+        ${reviewHtml(d, c)}
         ${nearbyHubHtml(c, d)}
         ${similarHtml(c)}
         <section class="d-sec ev-sec" id="sec-events" data-events><div class="sec-head">${iconTitle("fest", "행사")}</div><div data-events-body></div></section>

@@ -1008,6 +1008,8 @@ img { color: transparent; }
 .legend { display: inline-flex; align-items: center; gap: 4px; }
 .legend .gd { margin: 0 2px 0 6px; }
 .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr)); gap: 10px; }
+.detail #sec-spec .tiles { padding: 8px; border-radius: var(--r); background: #eef2ee; }
+.detail #sec-spec .tile { box-shadow: none; border: 0; background: rgba(255,255,255,.42); }
 .tile { position: relative; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 12px; align-items: start; align-content: start; padding: 14px; border-radius: var(--r-s); background: var(--paper); box-shadow: var(--shadow); }
 [data-v="b"] .tile { box-shadow: none; background: transparent; border-top: 1px solid var(--line); border-radius: 0; padding: 14px 0; }
 [data-v="c"] .tile { box-shadow: none; border: 1px solid var(--line); }
@@ -1070,6 +1072,7 @@ img { color: transparent; }
 .rs-open { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 8px; row-gap: 2px; align-items: center; }
 .rs-open > .ic { grid-row: 1 / span 2; width: 18px; height: 18px; color: var(--flame); }
 .ic-clock-in, .ic-clock-out { width: round(.75em, 1px); height: round(1em, 1px); }
+.ic-clock-out { transform: rotate(180deg); }
 .rs-open b { font-size: 1.5rem; font-weight: 900; line-height: 1.25; }
 .rs-open span { font-size: .86rem; color: var(--ink-2); }
 .rs-price { display: flex; align-items: center; gap: 2px; }
@@ -4260,9 +4263,10 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
 .td-media { position: relative; flex: 0 0 auto; height: 52%; min-height: 0; background: var(--soft-2); }
 .td-main, .td-main img { width: 100%; height: 100%; }
 .td-main img { object-fit: cover; display: block; }
-.td-strip { position: absolute; right: 12px; bottom: -22px; display: flex; gap: 6px; z-index: 2; }
-.td-strip span { width: 62px; height: 62px; border-radius: 12px; overflow: hidden; border: 3px solid var(--paper); box-shadow: 0 4px 12px rgba(16,20,20,.18); background: var(--soft-2); }
-.td-strip img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.td-strip { position: absolute; right: 12px; bottom: -22px; display: flex; gap: 6px; z-index: 5; }
+.td-thumb { width: 62px; height: 62px; padding: 0; border-radius: 12px; overflow: hidden; border: 3px solid var(--paper); box-shadow: 0 4px 12px rgba(16,20,20,.18); background: var(--soft-2); cursor: pointer; }
+.td-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.td-thumb.is-active { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
 .td-no { position: absolute; left: 14px; top: 12px; font: 900 2.4rem/1 var(--font); letter-spacing: -.04em; color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,.45); }
 .td-body { position: relative; flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 6px; padding: 16px 18px 16px; }
 .td-kicker { display: flex; align-items: center; gap: 8px; margin: 0; font-size: .75rem; font-weight: 800; color: var(--ink-3); letter-spacing: .02em; }
@@ -4302,8 +4306,8 @@ body[data-view="detail"] .d-main { gap: clamp(48px, 5vw, 64px); }
   .td-list li.on button { background: var(--ink); color: #fff; box-shadow: none; }
   .td-list li.on span { color: var(--volt); } .td-list li.on i { color: rgba(255,255,255,.7); }
 }
-@media (max-width: 759px) { .td-stage { height: 540px; } .td-body h3 { padding-right: 0; } .td-strip { bottom: 10px; } .td-strip span { width: 52px; height: 52px; } }
-@media (max-width: 359px) { .td-stage { height: 520px; } .td-hint { display: none; } .td-strip span:nth-child(3) { display: none; } }
+@media (max-width: 759px) { .td-stage { height: 540px; } .td-body h3 { padding-right: 0; } .td-strip { bottom: 10px; } .td-thumb { width: 52px; height: 52px; } }
+@media (max-width: 359px) { .td-stage { height: 520px; } .td-hint { display: none; } .td-thumb:nth-child(3) { display: none; } }
 @media (prefers-reduced-motion: reduce) { .td-bar i, .td-list button { transition: none; } }
 
 /* 좁은 화면 글자 잘림 줄이기(소유자 2026-10-31: 320px에서 글자가 가려지지 않게) — 이름은 한 줄 말줄임 대신 두 줄까지 보인다. */

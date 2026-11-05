@@ -88,6 +88,7 @@ const STYLE = `.fc-strip{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;
 @keyframes w-bolt-flash{0%,72%,100%{opacity:0.95;transform:scale(1);filter:none}76%{opacity:0.15;transform:scale(0.92)}82%{opacity:1;transform:scale(1.15);filter:drop-shadow(0 0 5px #f59e0b)}88%{opacity:0.3}92%{opacity:1}}
 @keyframes w-mist-drift{from{transform:translateX(-2px)}to{transform:translateX(2px)}}
 .fc-wind{font-weight:800}.fc-wind-high,.fc-wind-severe{color:#c0392b}
+.fc-extra{margin-top:8px;border-top:1px solid var(--line,#e5e7eb);padding-top:8px}.fc-extra>summary{display:flex;justify-content:space-between;align-items:center;min-height:40px;cursor:pointer;font-weight:800;color:var(--ink-2,#374151);list-style:none}.fc-extra>summary::-webkit-details-marker{display:none}.fc-extra>summary span{font-size:18px;transition:transform .2s}.fc-extra[open]>summary span{transform:rotate(180deg)}
 @media (prefers-reduced-motion:reduce){.w-icon *{animation:none!important}}`;
 function injectStyle() { if (typeof document === "undefined" || document.getElementById("fc-style")) return; const s = document.createElement("style"); s.id = "fc-style"; s.textContent = STYLE; document.head.appendChild(s); }
 
@@ -170,6 +171,10 @@ export async function mount(el, camp) {
   if (row?.[4]) extra.push(["기상특보", '이 지역에 특보가 발효 중이에요. <a href="https://www.weather.go.kr/" target="_blank" rel="noopener">기상청 확인</a>']);
   el.innerHTML = `<div class="sec-head"><div class="sec-title"><svg class="ic line"><use href="#i-weather"/></svg><h2>주간 날씨</h2></div></div>
     ${strip ? `<div class="fc-strip" role="list">${strip}</div>` : ""}
-    <dl class="uses info">${extra.map(([l, v]) => `<div class="use"><dt>${l}</dt><dd>${v}</dd></div>`).join("")}</dl>`;
+    <details class="fc-extra"><summary>날짜 상세 정보 <span aria-hidden="true">⌄</span></summary><dl class="uses info">${extra.map(([l, v]) => `<div class="use"><dt>${l}</dt><dd>${v}</dd></div>`).join("")}</dl></details>`;
+  el.querySelectorAll("[data-fc-date]").forEach((day) => day.addEventListener("click", () => {
+    const details = el.querySelector(".fc-extra");
+    if (details) details.open = true;
+  }));
   el.hidden = false;
 }
