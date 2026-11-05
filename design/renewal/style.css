@@ -652,6 +652,23 @@ img { color: transparent; }
 .saved-card-spec-panel .rows { margin-bottom: 2px; }
 .saved-memo-card .card-group-types { margin-bottom: 4px; }
 .saved-memo-card .card-group-reviews { margin-top: -2px; }
+/* 이색 캠핑장 전용 카드: 기본은 상세정보를 접고, 특별한 시설·체험을 별도 강조한다. */
+.unique-card-details { position: relative; z-index: 3; margin: 2px 0 0; border-top: 1px solid var(--line); }
+.unique-card-summary { display: flex; align-items: center; justify-content: space-between; min-height: 36px; padding: 8px 0; color: var(--ink-2); font-size: .82rem; font-weight: 800; cursor: pointer; list-style: none; user-select: none; }
+.unique-card-summary::-webkit-details-marker { display: none; }
+.unique-card-summary > span { display: inline-flex; align-items: center; gap: 6px; }
+.unique-card-summary .ic { width: 15px; height: 15px; color: var(--ink-3); }
+.unique-card-chevron { width: 16px; height: 16px; flex: none; transition: transform .18s ease; transform: rotate(180deg); }
+.unique-card-details[open] .unique-card-chevron { transform: rotate(0deg); }
+.unique-card-details[open] .unique-card-summary { color: var(--ink); }
+.unique-card-panel { min-width: 0; padding-bottom: 2px; }
+.unique-card-panel .rows { margin-bottom: 0; }
+.unique-feature-block { position: relative; z-index: 2; display: grid; gap: 6px; padding: 8px 0 2px; border-top: 1px dashed var(--line); }
+.unique-feature-head { display: inline-flex; align-items: center; gap: 5px; color: var(--accent); font-size: .78rem; font-weight: 850; }
+.unique-feature-head .ic { width: 14px; height: 14px; }
+.unique-feature-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.unique-feature-chip { display: inline-flex; align-items: center; gap: 4px; min-height: 24px; padding: 3px 8px; border-radius: 999px; background: var(--accent-tint); color: var(--accent); font-size: var(--fs-min); font-weight: 800; white-space: nowrap; }
+.unique-feature-chip .ic { width: 12px; height: 12px; flex: none; }
 /* 요금 줄과 후기 줄 사이(소유자 2026-10-23: 여백이 많다): 목록 아래 여백 16px → 2px */
 .card-group-spec:has(+ .card-group-reviews) .rows { margin-bottom: 2px; }
 .card-name { font-size: 1.12rem; font-weight: 850; letter-spacing: -0.03em; line-height: 1.28; height: auto; min-height: 0; max-height: 2.6em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin: 0; }
