@@ -178,10 +178,10 @@
    "filter": "in",
    "note": "count가 있으면 면·동 수. text는 세부 이름(방갈로·캐빈 등). 원천: 고캠핑 등록값·소개글, 카카오/네이버 분류, 운영자 홈페이지 문장(lib/site-types.mjs)",
    "coverage": {
-    "campgrounds": 3511,
+    "campgrounds": 3517,
     "by_grade": {
      "CONFIRMED": 5837,
-     "MENTION": 5374,
+     "MENTION": 5388,
      "OPERATOR": 1105
     }
    }
@@ -432,10 +432,10 @@
    "pref": "반려견과 함께 가나요? 크기는?",
    "filter": "in",
    "coverage": {
-    "campgrounds": 2881,
+    "campgrounds": 2882,
     "by_grade": {
      "CONFIRMED": 2755,
-     "MENTION": 1503,
+     "MENTION": 1504,
      "OPERATOR": 284,
      "VERIFIED": 64
     }
@@ -467,7 +467,7 @@
    "coverage": {
     "campgrounds": 1548,
     "by_grade": {
-     "OPERATOR": 8746,
+     "OPERATOR": 8743,
      "CONFIRMED": 3
     }
    }
@@ -481,9 +481,9 @@
    "filter": "max",
    "note": "MENTION 전용. 확정값으로 쓰지 않는다",
    "coverage": {
-    "campgrounds": 2868,
+    "campgrounds": 2876,
     "by_grade": {
-     "MENTION": 15087
+     "MENTION": 15116
     }
    }
   },
@@ -569,10 +569,10 @@
    "pref": "일찍 들어가고 싶나요?",
    "filter": "max",
    "coverage": {
-    "campgrounds": 2919,
+    "campgrounds": 2927,
     "by_grade": {
      "REFERENCE": 453,
-     "MENTION": 3855,
+     "MENTION": 3866,
      "OPERATOR": 651,
      "CONFIRMED": 4
     }
@@ -586,10 +586,10 @@
    "pref": "늦게 나오고 싶나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 2871,
+    "campgrounds": 2883,
     "by_grade": {
      "REFERENCE": 446,
-     "MENTION": 3850,
+     "MENTION": 3864,
      "OPERATOR": 616,
      "CONFIRMED": 2
     }
@@ -602,9 +602,9 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 217,
+    "campgrounds": 218,
     "by_grade": {
-     "MENTION": 203,
+     "MENTION": 204,
      "OPERATOR": 45,
      "CONFIRMED": 1
     }
@@ -631,10 +631,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 2217,
+    "campgrounds": 2222,
     "by_grade": {
      "REFERENCE": 464,
-     "MENTION": 2810,
+     "MENTION": 2815,
      "OPERATOR": 131,
      "CONFIRMED": 7
     }
@@ -764,10 +764,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 1356,
+    "campgrounds": 1357,
     "by_grade": {
      "CONFIRMED": 1821,
-     "MENTION": 464,
+     "MENTION": 466,
      "OPERATOR": 552,
      "VERIFIED": 39
     }
@@ -1712,9 +1712,9 @@
    "review_label": "사이트 넓음",
    "pref": "‘사이트 넓음’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 1362,
+    "campgrounds": 1363,
     "by_grade": {
-     "MENTION": 1362
+     "MENTION": 1363
     }
    }
   },
@@ -1760,9 +1760,9 @@
    "review_label": "가족·모임 힐링",
    "pref": "‘가족·모임 힐링’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 985,
+    "campgrounds": 986,
     "by_grade": {
-     "MENTION": 985
+     "MENTION": 986
     }
    }
   },
@@ -1808,9 +1808,9 @@
    "review_label": "아이들 놀기 좋음",
    "pref": "‘아이들 놀기 좋음’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 630,
+    "campgrounds": 631,
     "by_grade": {
-     "MENTION": 630
+     "MENTION": 631
     }
    }
   },
@@ -1824,9 +1824,9 @@
    "review_label": "조용·한적",
    "pref": "‘조용·한적’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 1860,
+    "campgrounds": 1862,
     "by_grade": {
-     "MENTION": 1860
+     "MENTION": 1862
     }
    }
   },
@@ -1888,9 +1888,9 @@
    "review_label": "주차 편함·옆 주차",
    "pref": "‘주차 편함·옆 주차’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 600,
+    "campgrounds": 601,
     "by_grade": {
-     "MENTION": 600
+     "MENTION": 601
     }
    }
   },
@@ -1968,9 +1968,9 @@
    "review_label": "소음·매너",
    "pref": "‘소음·매너’은(는) 피하고 싶나요?",
    "coverage": {
-    "campgrounds": 349,
+    "campgrounds": 350,
     "by_grade": {
-     "MENTION": 349
+     "MENTION": 350
     }
    }
   },
@@ -2208,9 +2208,9 @@
    "review_label": "반려견 동반 편함",
    "pref": "‘반려견 동반 편함’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 1372,
+    "campgrounds": 1373,
     "by_grade": {
-     "MENTION": 1372
+     "MENTION": 1373
     }
    }
   },
@@ -2656,5 +2656,5 @@
    }
   }
  ],
- "generated_at": "2026-11-04T17:52:21.669Z"
+ "generated_at": "2026-11-05T00:13:35.935Z"
 }
