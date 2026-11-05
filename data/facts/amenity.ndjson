@@ -13849,6 +13849,7 @@
 {"cid":"102373","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102373","at":"2026-10-19T00:00:00+09:00","text":"물놀이장"}
 {"cid":"102373","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102373","at":"2026-10-19T00:00:00+09:00"}
 {"cid":"102373","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102373","at":"2026-10-19T00:00:00+09:00","text":"에어바운스"}
+{"cid":"102375","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102375","at":"2026-10-19T00:00:00+09:00"}
 {"cid":"102377","attr":"AMENITY_DISHWASH","value":true,"grade":"CONFIRMED","src":"gocamping","text":"개수대"}
 {"cid":"102377","attr":"AMENITY_KIDS_ROOM","value":true,"grade":"CONFIRMED","src":"gocamping","text":"실내놀이터"}
 {"cid":"102377","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"gocamping","text":"실내놀이터"}
