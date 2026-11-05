@@ -1257,6 +1257,31 @@ function cardLines(c) {
 }
 function rowsHtml(c) { return cardLines(c); }
 function rowsHtmlHorizontal(c) { return cardLines(c); }
+// 이색 캠핑장 전용 카드: 일반 카드와 달리 비교용 기본 행은 접고,
+// 분류 근거가 있는 특별한 시설·체험을 먼저 읽히게 한다.
+const UNIQUE_FEATURE_ICONS = {
+  hotspring: "onsen", spa: "onsen", warmpool: "hotwater", pool: "swim",
+  horse: "experience", animal: "paw", kidscafe: "kidscafe", indoorplay: "playground",
+  treehouse: "forest", stay: "tent", leisure: "leports", farm: "experience", valley: "drop"
+};
+function uniqueFeatureHtml(c) {
+  const labels = (c.uq ?? []).map((k) => {
+    const row = UNIQUE_SUBS.find(([id]) => id === k);
+    return row ? [k, row[1]] : null;
+  }).filter(Boolean);
+  if (!labels.length) return "";
+  return `<div class="unique-feature-block">
+    <div class="unique-feature-head">${ic("spark")}<span>특색 시설·요소</span></div>
+    <div class="unique-feature-chips">${labels.map(([k, label]) => `<span class="unique-feature-chip">${ic(UNIQUE_FEATURE_ICONS[k] || "spark")}${esc(label)}</span>`).join("")}</div>
+  </div>`;
+}
+function uniqueDetailsHtml(c) {
+  const id = `unique-spec-${String(c.id).replace(/[^A-Za-z0-9_-]/g, "-")}`;
+  return `<details class="unique-card-details">
+    <summary class="unique-card-summary"><span>${ic("list")}상세정보</span>${ic("chevron-up", "unique-card-chevron")}</summary>
+    <div class="unique-card-panel" id="${esc(id)}">${rowsHtml(c)}</div>
+  </details>`;
+}
 // 찜 목록은 여러 곳을 훑어보기 위한 화면이므로, 이름·주소 아래의 모든 정보(유형·스펙·후기 뱃지)를 '상세정보'로 기본 접는다.
 // 일반 목록·테마 카드에는 같은 행을 그대로 유지해 비교 정보가 숨지 않게 한다.
 function savedDetailsHtml(c) {
@@ -1410,6 +1435,7 @@ function card(c, i = 0, opts) {
   const theme = (opts && !Array.isArray(opts) && opts.theme) || S.theme || null;
   const savedMemo = Boolean(opts && !Array.isArray(opts) && opts.savedMemo);
   const collapseSpec = Boolean(opts && !Array.isArray(opts) && opts.collapseSpec);
+  const uniqueTheme = theme === "UNIQUE" && !savedMemo;
   const { tag } = nameOf(c), o = openingOf(c);
   return `<article class="card${isWp ? " is-closed" : ""}${savedMemo ? " saved-memo-card" : ""}" data-id="${esc(c.id)}">
     <a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
@@ -1435,7 +1461,8 @@ function card(c, i = 0, opts) {
         <div class="card-group card-group-types">
           ${typeRow(c).html}
         </div>
-        <div class="card-group card-group-spec">${rowsHtml(c)}</div>
+        ${uniqueTheme ? uniqueDetailsHtml(c) : `<div class="card-group card-group-spec">${rowsHtml(c)}</div>`}
+        ${uniqueTheme ? uniqueFeatureHtml(c) : ""}
         ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `
           <div class="card-group card-group-reviews">
             <div class="card-reviews">${cardReviewPills(c.rv, c)}</div>
