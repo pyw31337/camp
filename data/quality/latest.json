@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-05T07:16:40.100Z",
+ "generated_at": "2026-11-05T12:59:56.641Z",
  "date": "2026-11-05",
  "totals": {
   "campgrounds": 6421,
@@ -1962,7 +1962,7 @@
   "MANNER_TIME": {
    "coverage": 2232,
    "coverage_pct": 34.8,
-   "mean_confidence": 0.392,
+   "mean_confidence": 0.391,
    "confirmed_pct": 5.7,
    "corroborated": 122,
    "conflicts": 0,
