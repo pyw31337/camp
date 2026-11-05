@@ -178,10 +178,10 @@
    "filter": "in",
    "note": "count가 있으면 면·동 수. text는 세부 이름(방갈로·캐빈 등). 원천: 고캠핑 등록값·소개글, 카카오/네이버 분류, 운영자 홈페이지 문장(lib/site-types.mjs)",
    "coverage": {
-    "campgrounds": 3517,
+    "campgrounds": 3530,
     "by_grade": {
      "CONFIRMED": 5837,
-     "MENTION": 5388,
+     "MENTION": 5429,
      "OPERATOR": 1105
     }
    }
@@ -432,10 +432,10 @@
    "pref": "반려견과 함께 가나요? 크기는?",
    "filter": "in",
    "coverage": {
-    "campgrounds": 2882,
+    "campgrounds": 2885,
     "by_grade": {
      "CONFIRMED": 2755,
-     "MENTION": 1504,
+     "MENTION": 1507,
      "OPERATOR": 284,
      "VERIFIED": 64
     }
@@ -481,9 +481,9 @@
    "filter": "max",
    "note": "MENTION 전용. 확정값으로 쓰지 않는다",
    "coverage": {
-    "campgrounds": 2876,
+    "campgrounds": 2903,
     "by_grade": {
-     "MENTION": 15116
+     "MENTION": 15236
     }
    }
   },
@@ -494,10 +494,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 427,
+    "campgrounds": 428,
     "by_grade": {
      "OPERATOR": 188,
-     "MENTION": 317,
+     "MENTION": 318,
      "CONFIRMED": 3
     }
    }
@@ -569,10 +569,10 @@
    "pref": "일찍 들어가고 싶나요?",
    "filter": "max",
    "coverage": {
-    "campgrounds": 2927,
+    "campgrounds": 2938,
     "by_grade": {
      "REFERENCE": 453,
-     "MENTION": 3866,
+     "MENTION": 3888,
      "OPERATOR": 651,
      "CONFIRMED": 4
     }
@@ -586,10 +586,10 @@
    "pref": "늦게 나오고 싶나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 2883,
+    "campgrounds": 2894,
     "by_grade": {
      "REFERENCE": 446,
-     "MENTION": 3864,
+     "MENTION": 3886,
      "OPERATOR": 616,
      "CONFIRMED": 2
     }
@@ -602,9 +602,9 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 218,
+    "campgrounds": 219,
     "by_grade": {
-     "MENTION": 204,
+     "MENTION": 205,
      "OPERATOR": 45,
      "CONFIRMED": 1
     }
@@ -617,9 +617,9 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 146,
+    "campgrounds": 148,
     "by_grade": {
-     "MENTION": 138,
+     "MENTION": 140,
      "OPERATOR": 33
     }
    }
@@ -631,10 +631,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 2222,
+    "campgrounds": 2230,
     "by_grade": {
      "REFERENCE": 464,
-     "MENTION": 2815,
+     "MENTION": 2829,
      "OPERATOR": 131,
      "CONFIRMED": 7
     }
@@ -647,10 +647,10 @@
    "type": "text",
    "filter": "has",
    "coverage": {
-    "campgrounds": 114,
+    "campgrounds": 115,
     "by_grade": {
      "OPERATOR": 23,
-     "MENTION": 94,
+     "MENTION": 95,
      "CONFIRMED": 1
     }
    }
@@ -880,9 +880,9 @@
    "filter": "eq",
    "period": true,
    "coverage": {
-    "campgrounds": 1516,
+    "campgrounds": 1517,
     "by_grade": {
-     "CONFIRMED": 2247,
+     "CONFIRMED": 2248,
      "VERIFIED": 16
     }
    }
@@ -2656,5 +2656,5 @@
    }
   }
  ],
- "generated_at": "2026-11-05T00:13:35.935Z"
+ "generated_at": "2026-11-05T01:11:20.770Z"
 }
