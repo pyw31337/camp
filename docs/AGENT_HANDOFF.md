@@ -1108,6 +1108,12 @@
 - 주간 날씨는 날짜 상세 토글만 사용하고 별도 날짜 모달 호출을 제거했다. 토글 화살표는 문자 대신 `#i-chevron-down` SVG를 사용한다.
 - 후기 링크 섹션도 SNS 영상 바로 뒤로 이동했다. `design/renewal`과 `camping-atlas/public`을 동기화했다.
 - 검증: `node --check`(원본·발행본), `git diff --check`, `node --test pipeline/test/conditions.test.mjs`(10 통과).
+
+## 📌 이색 캠핑장 카드 렌더러 통일 (2026-11-05, Codex)
+
+- 홈 결과의 `이색 캠핑장` 레일과 `/theme/UNIQUE`가 서로 다른 조합을 거치지 않도록 `themeCampCard()` 공통 렌더러를 사용한다.
+- 두 화면에서 사진·테마 배지·상품 유형·6개 정보 행·후기·댓글의 순서와 표시 규칙이 동일하게 유지된다. 공원 전용 카드는 기존 공원 규칙을 유지한다.
+
 ## 📌 이색 캠핑장 카드 전용 양식 복구 (2026-11-06, Codex)
 
 - 과거 이색 테마의 분류 데이터(`c.uq`, `pipeline/lib/unique-camps.mjs`)를 기준으로 카드에 `특색 시설·요소` 블록을 복원했다.
