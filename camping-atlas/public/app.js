@@ -1881,7 +1881,9 @@ const trIcon = (k, n) => { const [label, path] = TR_GLYPH[k] ?? [k, ""]; return 
 // 같은 날에는 누구에게나 같은 5곳(날짜 씨앗), 다음 날엔 바뀐다 → ‘매일 관리되는 사이트’ 느낌. 카드는 뉴스보드 카드덱(스프링 물리)과 같은 방식.
 const TODAY_N = 7;
 function todayPicks() {
-  const pool = S.camps.filter((c) => !c.du && showcaseEligible(c) && photosOf(c).length >= 2).sort((a, b) => rich(b) - rich(a)).slice(0, 100);
+  // 오늘의 추천은 현재 동계 휴장으로 판정된 곳(c.win=0)을 제외한다.
+  // 일반 검색·상세에서는 계절 정보로 숨기지 않지만, ‘오늘’ 추천에는 운영하지 않는 곳을 올리지 않는다.
+  const pool = S.camps.filter((c) => !c.du && c.win !== 0 && showcaseEligible(c) && photosOf(c).length >= 2).sort((a, b) => rich(b) - rich(a)).slice(0, 100);
   return pool.map((c, i) => [c, i + 1]).sort((a, b) => dayHash(`today:${a[0].id}`) - dayHash(`today:${b[0].id}`)).slice(0, TODAY_N);
 }
 function todayReasons(c, rank) {
@@ -6409,9 +6411,10 @@ function bookingHtml(c, d) {
   const pf = g?.platform ?? {};
   const o = openingOf(c) ?? (S.openings.get(String(c.id)) ?? null);
   const openTimeStr = o?.at ? new Date(o.at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", weekday: "short", hour: "2-digit", minute: "2-digit" }) : "";
+  const cycleText = typeof pf.opening === "string" ? pf.opening.trim() : "";
   const meta = [
     o ? ["다음 오픈", [o.txt, openTimeStr, o.label].filter(Boolean).join(" · ")] : null,
-    ["오픈 주기", pf.opening]
+    cycleText ? ["오픈 주기", cycleText] : null
   ].filter(Boolean).filter(([, v]) => v && !/운영자 안내에 따름|홈페이지마다 다름|홈페이지\s*(공지|예약\s*안내)|일정을 따른다/.test(v));
   if (!main && !c.tel && !meta.length && !o) return "";
   return `<section class="d-sec" id="sec-booking"><div class="sec-head">${iconTitle("booking", "예약 방법")}${main ? `<span class="sec-note">${srcTip(bookingSource(main), "대표 예약 채널")}</span>` : ""}</div>
@@ -9060,7 +9063,7 @@ function savedOpenings(saved) { return saved.map((c) => [c, S.openings.get(Strin
 function openAlertsHtml(saved) {
   const list = savedOpenings(saved);
   const note = `<p class="oa-note">캠핏·네이버예약의 빈자리는 공식 제휴가 없어 알려 드릴 수 없어요. 대신 공개된 <b>예약 오픈 일시</b>를 휴대폰 캘린더에 넣어 10분 전·1시간 전에 알림을 받으세요.</p>`;
-  if (!list.length) return `<section class="open-alerts empty-oa"><h2>${ic("calendar")}예약 오픈 알림</h2><p class="oa-note">찜한 곳 중 예약 오픈 일정이 알려진 곳이 아직 없어요. 오픈 일정이 공개되면 여기에 보여요.</p></section>`;
+  if (!list.length) return "";
   const fmtAt = (iso) => { const d = new Date(Date.parse(iso) + 9 * 3600e3); return `${d.getUTCMonth() + 1}월 ${d.getUTCDate()}일 ${String(d.getUTCHours()).padStart(2, "0")}:${String(d.getUTCMinutes()).padStart(2, "0")}`; };
   return `<section class="open-alerts"><h2>${ic("calendar")}예약 오픈 알림 <i>${fmt(list.length)}</i></h2>
     <ul>${list.map(([c, o]) => { const dd = Math.ceil((Date.parse(o.at) - Date.now()) / 864e5); return `<li><a href="${APP_BASE}place/${encodeURIComponent(c.id)}"><b>${esc(nameOf(c).name)}</b><span>${esc(fmtAt(o.at))} · ${esc(o.platform ?? o.kind ?? "")}${o.stay ? ` · ${esc(o.stay)}` : ""}</span></a><em class="${dd <= 3 ? "soon" : ""}">${dd <= 0 ? "오늘" : `D-${dd}`}</em><button type="button" class="chip" data-ics="${esc(c.id)}">${ic("calendar")}캘린더</button></li>`; }).join("")}</ul>
