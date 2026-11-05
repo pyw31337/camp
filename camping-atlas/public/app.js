@@ -1447,6 +1447,14 @@ function card(c, i = 0, opts) {
   </article>`;
 }
 
+// 홈의 테마 레일과 `/theme/:id`는 같은 카드 모듈을 사용한다. 예전에는
+// 이색 캠핑장만 별도 조합을 거쳐 일부 정보가 빠지는 회귀가 있었으므로,
+// 두 화면 모두 이 헬퍼를 통해 사진·배지·상품·6개 정보행·후기·댓글을
+// 동일한 순서로 렌더링한다.
+function themeCampCard(c, i, themeKey) {
+  return card(c, i, { isWaterPlay: themeKey === "WATER_PLAY", theme: themeKey });
+}
+
 // ── 공통 UI: 토스트·(i) 말풍선 ───────────────────────────────
 let toastT;
 // 되돌리기 토스트: 찜 해제처럼 되돌릴 수 있는 일에만(4초).
@@ -4156,7 +4164,7 @@ function fillLazyRow(sec) {
   if (!r) return;
   LAZY_ROWS.delete(sec.dataset.lazyRow);
   const rail = $(".trow-rail", sec);
-  rail.innerHTML = r.items.map((c) => card(c, 9, { isWaterPlay: r.k === "WATER_PLAY", theme: r.k })).join("");
+  rail.innerHTML = r.items.map((c) => themeCampCard(c, 9, r.k)).join("");
   rail.style.minHeight = "";
   sec.removeAttribute("data-lazy-row");
   initCarousels(sec);
@@ -4179,7 +4187,7 @@ function themeRow([k, label, test], list, first, used, idx = 0) {
   items.forEach((c) => used.add(c.id));
   return `<section class="trow" aria-label="${esc(label)}">
     <div class="trow-head"><h3>${thIc(k)}${esc(label)} <i>${fmt(all.length)}</i></h3><button type="button" class="link more-link" data-theme-all="${k}">더보기 ${ic("right")}</button></div>
-    <div class="rail trow-rail">${idx >= LAZY_FROM ? "" : items.map((c, i) => card(c, first && i < 4 ? i : 9, { isWaterPlay: k === "WATER_PLAY", theme: k })).join("")}</div>
+    <div class="rail trow-rail">${idx >= LAZY_FROM ? "" : items.map((c, i) => themeCampCard(c, first && i < 4 ? i : 9, k)).join("")}</div>
   </section>`.replace('<section class="trow"', idx >= LAZY_FROM ? `<section class="trow" data-lazy-row="${(LAZY_ROWS.set(`r${idx}`, { items, k }), `r${idx}`)}"` : '<section class="trow"');
 }
 const themeName = (k) => (k === "ALL" ? "전체 테마" : k === "OPEN" ? "곧 오픈" : k === "REVIEWS" ? "긍정 후기 추천" : THEMES.find((t) => t[0] === k)?.[1] ?? k);
@@ -4922,7 +4930,7 @@ function bindTheme(themeKey) {
     const shown = list.slice(0, pageN);
     $("[data-theme-count]").innerHTML = `총 <b>${fmt(list.length)}</b>곳`;
     grid.innerHTML = shown.length
-      ? shown.map((c, i) => isPublicPark(c) ? publicParkCard(c) : card(c, i, { isWaterPlay: themeKey === "WATER_PLAY", theme: themeKey })).join("")
+      ? shown.map((c, i) => isPublicPark(c) ? publicParkCard(c) : themeCampCard(c, i, themeKey)).join("")
       : `<div class="empty">${ic("search")}<b>이 지역에는 맞는 캠핑장이 없어요</b><button class="btn ghost" type="button" data-theme-clear-area>전국 보기</button></div>`;
     $("[data-theme-more]").hidden = pageN >= list.length;
     initCarousels(grid);
