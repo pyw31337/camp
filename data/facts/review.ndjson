@@ -15764,9 +15764,12 @@
 {"cid":"osm-w366054787","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/1128syr/224432174243","at":"2026-10-05","n":1,"text":"시설 깔끔·쾌적"}
 {"cid":"osm-w366966600","attr":"REVIEW_CON_HARD_BOOKING","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/harutips/224440567798","at":"2026-10-13","n":1,"text":"예약 치열"}
 {"cid":"osm-w366966600","attr":"REVIEW_COUNT","value":8,"grade":"MENTION","src":"review_search","n":8}
+{"cid":"osm-w366966600","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://jay-korea.tistory.com/64","at":"2026-09-29","n":1,"text":"시설 깔끔·쾌적"}
+{"cid":"osm-w366966600","attr":"REVIEW_PRO_CLEAN_TOILET","value":1,"grade":"MENTION","src":"review_search","url":"https://jay-korea.tistory.com/64","at":"2026-09-29","n":1,"text":"화장실·샤워장 깨끗"}
 {"cid":"osm-w366966600","attr":"REVIEW_PRO_FAMILY_HEALING","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/love7128a/224405745445","at":"2026-09-09","n":1,"text":"가족·모임 힐링"}
 {"cid":"osm-w366966600","attr":"REVIEW_PRO_HEALING_NATURE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/llkissll3/224198172570","at":"2026-02-27","n":1,"text":"힐링·자연 감성"}
 {"cid":"osm-w366966600","attr":"REVIEW_PRO_KIDS","value":1,"grade":"MENTION","src":"review_search","url":"https://jay-korea.tistory.com/64","at":"2026-09-29","n":1,"text":"아이들 놀기 좋음"}
+{"cid":"osm-w366966600","attr":"REVIEW_PRO_KIND_HOST","value":1,"grade":"MENTION","src":"review_search","url":"https://jay-korea.tistory.com/64","at":"2026-09-29","n":1,"text":"사장님 친절"}
 {"cid":"osm-w366966600","attr":"REVIEW_PRO_PET_FRIENDLY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/oksan5058/224446926922","at":"2026-10-19","n":1,"text":"반려견 동반 편함"}
 {"cid":"osm-w366966600","attr":"REVIEW_PRO_VIEW","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/jackpot357/224411859049","at":"2026-09-17","n":1,"text":"뷰·경치 좋음"}
 {"cid":"osm-w366966600","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/jackpot357/224411859049","at":"2026-09-17","n":1,"text":"사이트 넓음"}

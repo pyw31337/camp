@@ -706,9 +706,9 @@
     "with_no_tags": 2202,
     "with_notices": 168
   },
-  "updated_at": "2026-11-05T05:15:38.179Z",
+  "updated_at": "2026-11-05T07:14:17.148Z",
   "operator_site_facts": {
-    "generated_at": "2026-11-05T05:15:38.619Z",
+    "generated_at": "2026-11-05T07:14:17.808Z",
     "campgrounds": 201,
     "w": 58,
     "pk": 61,
@@ -721,17 +721,17 @@
     "sites_read": 912
   },
   "spec_sheet": {
-    "generated_at": "2026-11-05T05:15:38.830Z",
-    "campgrounds_with_spec": 3311,
-    "roundup_reviews_skipped": 9708,
+    "generated_at": "2026-11-05T07:14:18.134Z",
+    "campgrounds_with_spec": 3313,
+    "roundup_reviews_skipped": 9729,
     "fields": {
       "CHECKIN_TIME": {
         "official": 769,
-        "mention": 2765
+        "mention": 2768
       },
       "CHECKOUT_TIME": {
         "official": 758,
-        "mention": 2712
+        "mention": 2714
       },
       "EARLY_CHECKIN": {
         "official": 41,
@@ -743,11 +743,11 @@
       },
       "MANNER_TIME": {
         "official": 590,
-        "mention": 1924
+        "mention": 1926
       },
       "MIN_STAY": {
         "official": 23,
-        "mention": 92
+        "mention": 93
       },
       "EXTRA_PERSON_FEE": {
         "official": 171,
@@ -763,7 +763,7 @@
       },
       "PET_POLICY": {
         "official": 429,
-        "mention": 1496
+        "mention": 1497
       },
       "PARKING": {
         "official": 327,
@@ -800,20 +800,20 @@
     }
   },
   "review_digest": {
-    "generated_at": "2026-11-05T05:15:54.540Z",
-    "campgrounds": 4246,
-    "with_pros": 3702,
-    "with_cons": 1161,
-    "reviews": 82213,
-    "sanity_dropped": 1258
+    "generated_at": "2026-11-05T07:14:42.013Z",
+    "campgrounds": 4249,
+    "with_pros": 3705,
+    "with_cons": 1162,
+    "reviews": 82293,
+    "sanity_dropped": 1259
   },
   "nearby_licensed": {
-    "generated_at": "2026-11-05T05:15:58.374Z",
+    "generated_at": "2026-11-05T07:14:46.766Z",
     "campgrounds": 6416,
     "details": 6416
   },
   "profiles": {
-    "generated_at": "2026-11-05T05:16:04.895Z",
+    "generated_at": "2026-11-05T07:14:53.253Z",
     "total": 6421,
     "fields": {
       "TYPE": {
@@ -821,19 +821,19 @@
         "facts": 2296
       },
       "CHECKIN": {
-        "any": 2723,
+        "any": 2726,
         "facts": 571
       },
       "CHECKOUT": {
-        "any": 2686,
+        "any": 2688,
         "facts": 568
       },
       "MANNER": {
-        "any": 1996,
+        "any": 1998,
         "facts": 357
       },
       "PRICE": {
-        "any": 2866,
+        "any": 2871,
         "facts": 515
       },
       "EXTRA_FEE": {
@@ -857,7 +857,7 @@
         "facts": 17
       },
       "PET": {
-        "any": 2912,
+        "any": 2913,
         "facts": 2660
       },
       "SITE": {
@@ -885,7 +885,7 @@
         "facts": 4644
       },
       "REVIEW": {
-        "any": 4246,
+        "any": 4249,
         "facts": 0
       }
     },
@@ -921,30 +921,30 @@
       "14-18": 120
     },
     "price": {
-      "published": 2828,
+      "published": 2833,
       "operator": 515,
-      "mention": 2313
+      "mention": 2318
     }
   },
   "coverage": {
-    "measured_at": "2026-11-05T05:17:04.853Z",
+    "measured_at": "2026-11-05T07:16:21.427Z",
     "total": 6421,
     "goal": 2500,
     "fields": {
       "price": {
-        "any": 3072,
+        "any": 3077,
         "confirmed": 629
       },
       "checkin": {
-        "any": 2940,
+        "any": 2943,
         "confirmed": 786
       },
       "checkout": {
-        "any": 2896,
+        "any": 2898,
         "confirmed": 778
       },
       "manner": {
-        "any": 2230,
+        "any": 2232,
         "confirmed": 590
       },
       "extra_fee": {
@@ -964,15 +964,15 @@
         "confirmed": 532
       },
       "site_types": {
-        "any": 3535,
+        "any": 3538,
         "confirmed": 2700
       },
       "reviews": {
-        "any": 4406,
+        "any": 4408,
         "confirmed": 0
       },
       "rich5": {
-        "any": 2386,
+        "any": 2387,
         "confirmed": 0
       }
     }
