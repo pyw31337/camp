@@ -81,7 +81,9 @@ jobs:
 
   rail-swipe:
     name: Rail swipe
-    runs-on: ubuntu-latest
+    # ubuntu-latest가 26.04로 이동하면 Playwright 1.56.1의 브라우저 의존성
+    # 설치가 거부된다. 검증된 CI 환경을 고정해 OS 이미지 변경으로 깨지지 않게 한다.
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
