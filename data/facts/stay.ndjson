@@ -22204,7 +22204,7 @@
 {"cid":"102021","attr":"INNER_AMENITY","value":"TV","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실,내부샤워실"}
 {"cid":"102021","attr":"SITE_TOTAL","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102021","attr":"SITE_TYPE","value":"CARAVAN","grade":"CONFIRMED","src":"gocamping","count":3}
-{"cid":"102021","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102021","at":"2026-09-15T00:00:00+09:00","quote":"&quot;* 충북 음성, 미국식 에어스트림에서 즐기는 5성급 프라이빗 글램핑 * 푸른 잔디밭에서 내 아이(댕댕이)와 함께 타는 클래식 에어스트림 감"}
+{"cid":"102021","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping_intro","url":"https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=102021","at":"2026-09-15T00:00:00+09:00","quote":"\"* 충북 음성, 미국식 에어스트림에서 즐기는 5성급 프라이빗 글램핑 * 푸른 잔디밭에서 내 아이(댕댕이)와 함께 타는 클래식 에어스트림 감"}
 {"cid":"102021","attr":"SITE_TYPE","value":"PRIVATE_BATH","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102021","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/hummingy/224452233441","at":"2026-10-24","quote":"[캠핑][충북] 충주호가 보이는! 별이 쏟아지는! 더 쉼 오토캠핑장 - 더 쉼 7번 자리. 충주호 더쉼 오토캠핑장 주소 : 충북 충주시 동"}
 {"cid":"102021","attr":"STAY_CARAVAN_SITES","value":3,"grade":"CONFIRMED","src":"gocamping"}
