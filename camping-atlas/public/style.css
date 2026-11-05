@@ -1008,8 +1008,8 @@ img { color: transparent; }
 .legend { display: inline-flex; align-items: center; gap: 4px; }
 .legend .gd { margin: 0 2px 0 6px; }
 .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr)); gap: 10px; }
-.detail #sec-spec .tiles { padding: 8px; border-radius: var(--r); background: #eef2ee; }
-.detail #sec-spec .tile { box-shadow: none; border: 0; background: rgba(255,255,255,.42); }
+.detail #sec-spec .tiles { padding: 0; background: transparent; }
+.detail #sec-spec .tile { box-shadow: none; border: 0; background: #eef2ee; }
 .tile { position: relative; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 12px; align-items: start; align-content: start; padding: 14px; border-radius: var(--r-s); background: var(--paper); box-shadow: var(--shadow); }
 [data-v="b"] .tile { box-shadow: none; background: transparent; border-top: 1px solid var(--line); border-radius: 0; padding: 14px 0; }
 [data-v="c"] .tile { box-shadow: none; border: 1px solid var(--line); }
@@ -1179,6 +1179,13 @@ img { color: transparent; }
 }
 .dock-reserve-main:hover {
   background: #242928;
+}
+.dock-reserve-group.rsv-closed .dock-reserve-main,
+.dock-reserve-group.rsv-closed .dock-reserve-main:hover {
+  background: var(--soft-2, #eef2ee);
+  color: var(--ink-3, #6b7280);
+  border-color: var(--line, #d9dedb);
+  cursor: not-allowed;
 }
 .dock-reserve-label {
   white-space: nowrap;
