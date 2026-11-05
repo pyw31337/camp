@@ -172,7 +172,7 @@ export async function mount(el, camp) {
   el.innerHTML = `<div class="sec-head"><div class="sec-title"><svg class="ic line"><use href="#i-weather"/></svg><h2>주간 날씨</h2></div></div>
     ${strip ? `<div class="fc-strip" role="list">${strip}</div>` : ""}
     <details class="fc-extra"><summary>날짜 상세 정보 <span aria-hidden="true">⌄</span></summary><dl class="uses info">${extra.map(([l, v]) => `<div class="use"><dt>${l}</dt><dd>${v}</dd></div>`).join("")}</dl></details>`;
-  el.querySelectorAll("[data-fc-date]").forEach((day) => day.addEventListener("click", () => {
+  (el.querySelectorAll?.("[data-fc-date]") ?? []).forEach((day) => day.addEventListener("click", () => {
     const details = el.querySelector(".fc-extra");
     if (details) details.open = true;
   }));
