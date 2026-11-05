@@ -4,11 +4,10 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 const R = fileURLToPath(new URL("../../", import.meta.url));
 const src = readFileSync(R + "design/renewal/app.js", "utf8");
-test("EXTRA_FEE·SANITARY 상세 섹션이 있고 공개본과 같다", () => {
-  assert.match(src, /id="\$\{id\}"/);
-  assert.match(src, /"EXTRA_FEE", "sec-extra-fee"/);
-  assert.match(src, /"SANITARY", "sec-sanitary"/);
-  assert.match(src, /\$\{extraFeeSection\(d\)\}\$\{sanitarySection\(d\)\}/);
+// #620(소유자 2026-11-05): 추가 요금·대여는 ‘이용 정보’ 안 줄로 합치고, 샤워·위생은 편의시설과 수량이 겹쳐 따로 섹션을 만들지 않는다.
+test("EXTRA_FEE는 이용 정보 줄로, SANITARY 별도 섹션 없음, 공개본과 같다", () => {
+  assert.match(src, /profileUsageRows\(d, "EXTRA_FEE"/);
+  assert.doesNotMatch(src, /"SANITARY", "sec-sanitary"/);
   assert.equal(src, readFileSync(R + "camping-atlas/public/app.js", "utf8"));
 });
 test("factPieces: 항목·값 분리, 숫자 없는 항목은 값으로", () => {
