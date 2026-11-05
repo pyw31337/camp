@@ -97,7 +97,12 @@ for (const [id, sid] of short) {
   }
 }
 if (vCalls || !existsSync(vpPath)) writeFileSync(vpPath, `${JSON.stringify({ src: "한국관광공사 TourAPI searchKeyword2(장소 이름·3km)", rule: "lib/event-venue-photo.mjs", venues: Object.fromEntries(Object.entries(vp.venues).sort()) }, null, 1)}\n`);
-status.venue_photo = `${vStop || "OK"} · 이번 ${vCalls}건 · 장소 사진 ${vHit}건`;
+// 소유자 2026-11-05: 국가유산 행사 중 사진(장소 사진 포함)도 없고 바로 가는 링크도 없는 것은 보여 주지 않는다
+// (대체 그림 + 검색 링크뿐인 카드는 쓸모가 적다). 원천 기록은 그대로 두고 화면용 파일에서만 뺀다 — 매일 다시 판정.
+const thin = new Set(Object.entries(ev).filter(([, r]) => r.k === "국가유산 행사" && (!r.img || isTemplateImg(r.img)) && !r.u && !r.cf).map(([sid]) => sid));
+for (const sid of thin) delete ev[sid];
+for (const [cid, rows] of Object.entries(camps)) { const keep = rows.filter(([sid]) => !thin.has(sid)); if (keep.length) camps[cid] = keep; else delete camps[cid]; }
+status.venue_photo = `${vStop || "OK"} · 이번 ${vCalls}건 · 장소 사진 ${vHit}건 · 사진·링크 없는 국가유산 행사 ${thin.size}건 숨김`;
 
 const out = {
   generated_at: new Date(now).toISOString(), today, window_days: EVENT_WINDOW_DAYS, radius_km: 30, status,

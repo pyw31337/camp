@@ -1125,3 +1125,4 @@
 - 수정: `pipeline/lib/event-venue-photo.mjs` — 포스터 없는 행사의 장소 이름으로 TourAPI `searchKeyword2` 검색, 같은 이름(또는 ‘지역명+이름’)·3km 안일 때만 사진을 붙인다(`iv:1`, 화면에 ‘장소 사진 · 한국관광공사’). 행정구역만 있는 장소는 건너뜀.
 - 기록: `pipeline/registry/event-venue-photos.json`(장소별, 지우지 않음, 못 찾은 곳은 30일 뒤 재조회). culture-events.yml에 `DATA_GO_KR_SERVICE_KEY` 추가.
 - 링크: 국가유산청 API에는 행사 상세 주소가 없다(관련 링크 `subPath`만, 44%는 비어 CultureFlow가 khs.go.kr/main.html을 넣음). `isSiteHome`으로 첫 화면 링크를 버리고, 화면은 원문 주소가 없으면 ‘행사명+장소’ 네이버 검색으로 연결. 문의 전화(`tel`)를 카드에 표시.
+- 노출(소유자 2026-11-05): 국가유산 행사 중 실제 사진(장소 사진 포함)도 바로가기 링크(`u`·`cf`)도 없는 것은 events.json(화면용)에서 뺀다 — 매일 다시 판정, 원천 기록은 그대로. 화면 정렬은 대체 그림을 ‘사진 없음’으로 쳐서 포스터 있는 행사를 앞에.
