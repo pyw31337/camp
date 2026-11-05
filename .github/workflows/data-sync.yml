@@ -48,7 +48,7 @@ env:
 concurrency:
   # PR 검증의 장시간 보조 수집이 main의 실제 기준 카탈로그 발행을 막지 않게
   # ref별로 대기열을 분리한다. 같은 ref 안에서는 순차 실행되어 원본 파일 충돌을 막는다.
-  group: data-sync-${{ github.ref }}
+  group: letscamp-data-publish
   cancel-in-progress: false
 
 jobs:
@@ -150,19 +150,24 @@ jobs:
         continue-on-error: true
         working-directory: .
         run: |
+          # media 브랜치가 일시적으로 잠기거나 GitHub API가 응답하지 않으면 전체
+          # 데이터 동기화가 하루 이상 붙잡히지 않게 한다. 사진 단계만 건너뛰고
+          # 이미 수집한 텍스트·공공데이터 발행은 계속한다.
+          MEDIA_FETCH_TIMEOUT="${MEDIA_FETCH_TIMEOUT_SECONDS:-300}"
           MEDIA_DIR="$RUNNER_TEMP/media"
-          if git ls-remote --exit-code --heads origin media >/dev/null 2>&1; then
-            git fetch --depth=1 origin +media:refs/remotes/origin/media
-            git worktree add -B media "$MEDIA_DIR" origin/media
+          if timeout --foreground "$MEDIA_FETCH_TIMEOUT" git ls-remote --exit-code --heads origin media >/dev/null 2>&1; then
+            timeout --foreground "$MEDIA_FETCH_TIMEOUT" git fetch --depth=1 origin +media:refs/remotes/origin/media
+            timeout --foreground 120 git worktree add -B media "$MEDIA_DIR" origin/media
           else
-            git worktree add --detach "$MEDIA_DIR"
-            git -C "$MEDIA_DIR" switch --orphan media
+            timeout --foreground 120 git worktree add --detach "$MEDIA_DIR"
+            timeout --foreground 120 git -C "$MEDIA_DIR" switch --orphan media
           fi
           # 사진 파일을 R2에 두는 설정이면(.github/scripts/media-r2.sh) 이미 받은 사진을 R2에서 내려받아 다시 받지 않게 한다.
-          bash .github/scripts/media-r2.sh pull "$MEDIA_DIR"
-          if bash .github/scripts/media-r2.sh on; then echo "budget=20000" >> "$GITHUB_OUTPUT"; else echo "budget=900" >> "$GITHUB_OUTPUT"; fi
+          timeout --foreground 300 bash .github/scripts/media-r2.sh pull "$MEDIA_DIR"
+          if timeout --foreground 30 bash .github/scripts/media-r2.sh on; then echo "budget=20000" >> "$GITHUB_OUTPUT"; else echo "budget=900" >> "$GITHUB_OUTPUT"; fi
           echo "dir=$MEDIA_DIR" >> "$GITHUB_OUTPUT"
         env:
+          MEDIA_FETCH_TIMEOUT_SECONDS: '300'
           R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
@@ -247,7 +252,7 @@ jobs:
         # collected-data 브랜치(단일 커밋)가 원본이다. 다른 에이전트도 git fetch origin collected-data로 바로 읽는다.
         continue-on-error: true
         run: |
-          if git ls-remote --exit-code --heads origin collected-data >/dev/null 2>&1; then
+          if timeout --foreground 300 git ls-remote --exit-code --heads origin collected-data >/dev/null 2>&1; then
             git fetch -q --depth=1 origin +collected-data:refs/remotes/origin/collected-data
             for f in social-search web-mentions; do
               if git cat-file -e "origin/collected-data:cache/$f.json.gz" 2>/dev/null; then
@@ -305,7 +310,7 @@ jobs:
         continue-on-error: true
         run: |
           DIR="$RUNNER_TEMP/collected"
-          if git ls-remote --exit-code --heads origin collected-data >/dev/null 2>&1; then
+          if timeout --foreground 300 git ls-remote --exit-code --heads origin collected-data >/dev/null 2>&1; then
             git fetch -q --depth=1 origin +collected-data:refs/remotes/origin/collected-data
             git worktree add -q -B collected-data "$DIR" origin/collected-data
           else
@@ -493,7 +498,7 @@ jobs:
           # 파생 정보 2차 계산(2026-10-30): 위 1차 계산은 고캠핑 기준 3,124곳에만 돌고, 당일 장소·휴양림·OSM 등은 그 뒤에 붙어
           # 입실·사이트 타입 같은 파생 값이 비었다 → coverage-guard가 10-28부터 발행을 막음(checkin 2775→2525, site_types 3433→3004).
           # 장소를 모두 붙이고 소셜까지 채운 뒤 증분 발행(publish-incremental.sh)과 같은 순서로 한 번 더 계산한다.
-          for s in survey-all-campgrounds build-operator-facts build-spec-sheet build-review-digest build-nearby-facts build-nearby-photos build-thankq-facts build-campground-profiles build-site-pricing-facts build-site-types build-price-tiers build-house-rules build-gocamping-detail apply-dayuse-seed build-public-leisure apply-public-nearby; do
+          for s in survey-all-campgrounds build-operator-facts build-spec-sheet build-review-digest build-nearby-facts build-nearby-photos build-thankq-facts build-campground-profiles build-site-pricing-facts build-price-tiers build-house-rules build-gocamping-detail apply-dayuse-seed build-public-leisure apply-public-nearby build-site-types; do
             node "pipeline/scripts/$s.mjs" > /dev/null
           done
           # 카카오 후기 썸네일(registry/review-thumbs.json)을 비어 있는 글에만 채운다
@@ -506,6 +511,7 @@ jobs:
           # t41u: 수기·공식 확정 값을 재계산 위에 다시 얹는다(registry/curated-pins.json)
           node pipeline/scripts/apply-pins.mjs
           node pipeline/scripts/publish-sanity.mjs
+          node pipeline/scripts/sanitize-quote-entities.mjs --apply
           # 열어 보니 없는 예약·홈페이지 링크(registry/link-health.json)를 c.dl로 표시해 화면 버튼에서 뺀다.
           node pipeline/scripts/build-portal-links.mjs
           node pipeline/scripts/build-link-health.mjs
@@ -521,6 +527,8 @@ jobs:
           node pipeline/scripts/publish-sanity.mjs
           # 업장 정보 커버리지(요금·입퇴실·매너타임·주차·전기 W·사이트 타입 등, 목표 2,500곳)를 meta.json에 남긴다.
           node pipeline/scripts/report-coverage.mjs
+          # 공백이 큰 업장을 삭제하지 않고, 다음 수집에서 확인할 무료·허용 원천과 함께 우선순위 큐로 남긴다.
+          node pipeline/scripts/report-data-enrichment.mjs
           # 모든 원천을 (캠핑장·속성·값·등급·원천·근거) 원자 사실로 풀어 묶음별 NDJSON(data/facts)으로 쓴다. 여러 에이전트의 공유 원장.
           node pipeline/scripts/build-fact-store.mjs
           # 데이터 품질 장부(docs/DATA_QUALITY_PROCESS.md): 신뢰도·확증·충돌 대기열·어제 대비 회귀를 data/quality에 남긴다(회귀는 경고).
@@ -546,7 +554,9 @@ jobs:
           # 화면 원본(design/renewal)은 실행 시작 시점이 아니라 최신 main 것으로 발행본을 다시 쓴다(긴 실행 중 머지된 화면 변경을 되돌리지 않게).
           git checkout origin/main -- design/renewal scripts/publish-explorer-pages.mjs && node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public/explore
           node pipeline/scripts/coverage-guard.mjs "$RUNNER_TEMP/base-meta.json" camping-atlas/public/explore/data/meta.json
+          node pipeline/scripts/release-gate.mjs
           git add camping-atlas/public/data camping-atlas/public/explore data/facts data/quality pipeline/registry/review-thumbs.json pipeline/registry/public-poi-photos.json pipeline/registry/naver-usage.json pipeline/registry/dayuse-osm.json pipeline/registry/urban-parks.json
+          git add pipeline/registry/data-enrichment-queue.json
           git add pipeline/registry/merge-review.ndjson 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "공개 데이터 변경 없음."; exit 0

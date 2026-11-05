@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-11-01T00:06:39.558Z",
+ "generated_at": "2026-11-05T06:40:59.055Z",
  "source": {
   "label": "카카오 로컬 키워드 검색 · Daum 웹 검색(공식 REST API)",
   "docs": [
@@ -5388,7 +5388,7 @@
    "homepage": null
   },
   "640": {
-   "checked_at": "2026-11-01T00:06:35.772Z",
+   "checked_at": "2026-11-05T06:40:55.313Z",
    "place": {
     "id": "17591877",
     "name": "느티나무캠핑장",
@@ -8600,7 +8600,7 @@
    "homepage": null
   },
   "977": {
-   "checked_at": "2026-11-01T00:06:35.804Z",
+   "checked_at": "2026-11-05T06:40:55.349Z",
    "place": null,
    "candidates": [
     {
@@ -17909,7 +17909,7 @@
    "homepage": null
   },
   "2472": {
-   "checked_at": "2026-11-01T00:06:38.902Z",
+   "checked_at": "2026-11-05T06:40:58.348Z",
    "place": {
     "id": "898560745",
     "name": "원주두리캠핑장",
@@ -17928,6 +17928,18 @@
     }
    },
    "candidates": [
+    {
+     "host": "carcare.smarthow.net",
+     "url": "https://carcare.smarthow.net/camping/2472",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "원주두리캠핑장 예약·주소·시설",
+       "url": "https://carcare.smarthow.net/camping/2472"
+      }
+     ]
+    },
     {
      "host": "ojigo.kr",
      "url": "https://ojigo.kr/camping/2472",
@@ -46441,7 +46453,7 @@
    "homepage": null
   },
   "100122": {
-   "checked_at": "2026-11-01T00:06:37.918Z",
+   "checked_at": "2026-11-05T06:40:57.436Z",
    "place": {
     "id": "1579667394",
     "name": "라플란드",
@@ -46460,18 +46472,6 @@
     }
    },
    "candidates": [
-    {
-     "host": "diningcode.com",
-     "url": "https://www.diningcode.com/profile.php?rid=bHUIEL2OHGPD",
-     "score": 10,
-     "hits": 1,
-     "evidence": [
-      {
-       "title": "라플란드 - 파주 샤브샤브, 월남쌈 맛집 - 다이닝코드",
-       "url": "https://www.diningcode.com/profile.php?rid=bHUIEL2OHGPD"
-      }
-     ]
-    },
     {
      "host": "oneoneone.kr",
      "url": "https://oneoneone.kr/content/d6a7b05a",
@@ -46509,6 +46509,18 @@
       {
        "title": "온더락캠핑장",
        "url": "https://ojigo.kr/camping/2331"
+      }
+     ]
+    },
+    {
+     "host": "diningcode.com",
+     "url": "https://www.diningcode.com/profile.php?rid=JoUlQAdCH7rP",
+     "score": 4,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "식당가 천등산휴게소 - 충주 한식, 된장찌개 맛집 - 다이닝코드",
+       "url": "https://www.diningcode.com/profile.php?rid=JoUlQAdCH7rP"
       }
      ]
     },
@@ -49757,7 +49769,7 @@
    "homepage": null
   },
   "100289": {
-   "checked_at": "2026-11-01T00:06:37.399Z",
+   "checked_at": "2026-11-05T06:40:56.948Z",
    "place": {
     "id": "828875441",
     "name": "가델캠핑장",
@@ -59899,7 +59911,7 @@
    "homepage": null
   },
   "100597": {
-   "checked_at": "2026-11-01T00:06:37.967Z",
+   "checked_at": "2026-11-05T06:40:57.493Z",
    "place": {
     "id": "1537097954",
     "name": "노리터키즈캠핑장",
@@ -63160,7 +63172,7 @@
    "homepage": null
   },
   "100676": {
-   "checked_at": "2026-11-01T00:06:38.356Z",
+   "checked_at": "2026-11-05T06:40:57.833Z",
    "place": null,
    "candidates": [
     {
@@ -64757,7 +64769,7 @@
    "homepage": null
   },
   "100721": {
-   "checked_at": "2026-11-01T00:06:37.403Z",
+   "checked_at": "2026-11-05T06:40:56.949Z",
    "place": {
     "id": "1779251680",
     "name": "캠핑굄성",
@@ -76932,7 +76944,7 @@
    "homepage": null
   },
   "101093": {
-   "checked_at": "2026-11-01T00:06:38.977Z",
+   "checked_at": "2026-11-05T06:40:58.487Z",
    "place": null,
    "candidates": [
     {
@@ -81243,7 +81255,7 @@
    "homepage": null
   },
   "101214": {
-   "checked_at": "2026-11-01T00:06:35.805Z",
+   "checked_at": "2026-11-05T06:40:55.350Z",
    "place": {
     "id": "661902238",
     "name": "캠프다온",
@@ -83210,7 +83222,7 @@
    "homepage": null
   },
   "101269": {
-   "checked_at": "2026-11-01T00:06:37.808Z",
+   "checked_at": "2026-11-05T06:40:57.302Z",
    "place": {
     "id": "826081055",
     "name": "골든쌔들캠핑장",
@@ -83238,6 +83250,18 @@
       {
        "title": "골든쌔들 캠핑장 위치 (경기 양평군 용문면)",
        "url": "https://opendatflow.com/camping-sites/4298"
+      }
+     ]
+    },
+    {
+     "host": "carcare.smarthow.net",
+     "url": "https://carcare.smarthow.net/camping/101269",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "골든쌔들 캠핑장 예약·주소·시설",
+       "url": "https://carcare.smarthow.net/camping/101269"
       }
      ]
     },
@@ -88520,7 +88544,7 @@
    "homepage": null
   },
   "101416": {
-   "checked_at": "2026-11-01T00:06:37.256Z",
+   "checked_at": "2026-11-05T06:40:56.779Z",
    "place": {
     "id": "1931362185",
     "name": "내포캠핑스퀘어",
@@ -95292,7 +95316,7 @@
    "homepage": null
   },
   "101608": {
-   "checked_at": "2026-11-01T00:06:37.922Z",
+   "checked_at": "2026-11-05T06:40:57.469Z",
    "place": {
     "id": "2026652673",
     "name": "원더 포레스트",
@@ -96221,7 +96245,7 @@
    "homepage": null
   },
   "101639": {
-   "checked_at": "2026-11-01T00:06:35.806Z",
+   "checked_at": "2026-11-05T06:40:55.351Z",
    "place": {
     "id": "604025620",
     "name": "물멍 캠프",
@@ -114610,7 +114634,7 @@
    "homepage": null
   },
   "102221": {
-   "checked_at": "2026-11-01T00:06:38.753Z",
+   "checked_at": "2026-11-05T06:40:58.293Z",
    "place": null,
    "candidates": [
     {
@@ -114771,7 +114795,7 @@
    "homepage": null
   },
   "102229": {
-   "checked_at": "2026-11-01T00:06:38.451Z",
+   "checked_at": "2026-11-05T06:40:57.987Z",
    "place": null,
    "candidates": [],
    "needs_homepage": false,
@@ -115588,7 +115612,7 @@
    "homepage": null
   },
   "102270": {
-   "checked_at": "2026-11-01T00:06:38.494Z",
+   "checked_at": "2026-11-05T06:40:58.020Z",
    "place": null,
    "candidates": [
     {
@@ -118583,7 +118607,7 @@
    "homepage": null
   },
   "102377": {
-   "checked_at": "2026-11-01T00:06:38.445Z",
+   "checked_at": "2026-11-05T06:40:57.962Z",
    "place": null,
    "candidates": [],
    "needs_homepage": true,

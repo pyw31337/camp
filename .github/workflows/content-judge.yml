@@ -29,7 +29,7 @@ env:
 
 concurrency:
   # link-check와 같은 판정 파일을 쓰지 않게 되었지만, 같은 레지스트리 착지 경로를 쓰므로 겹치지 않게 순서대로 돈다.
-  group: link-check-${{ github.ref }}
+  group: letscamp-data-publish
   cancel-in-progress: false
 
 jobs:

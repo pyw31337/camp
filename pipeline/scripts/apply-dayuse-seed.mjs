@@ -8,7 +8,7 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { normalizeUrl } from "../lib/booking-intel.mjs";
 import { assignNonEmpty, logReview } from "../lib/merge-policy.mjs";
-import { sidoStd } from "../lib/geo-sanity.mjs";
+import { badCoord, sidoStd } from "../lib/geo-sanity.mjs";
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const dataDir = process.env.EXPLORE_DIR || join(root, "camping-atlas/public/explore/data");
 const seed = JSON.parse(readFileSync(join(root, "pipeline/registry/dayuse-seed.json"), "utf8"));
@@ -27,6 +27,7 @@ const byId = new Map(cat.map((c, i) => [String(c.id), i]));
 let added = 0, replaced = 0;
 for (const p of seed.places ?? []) {
   const { rules, day, src, ...rec } = p;
+  if (badCoord(rec)) { delete rec.lat; delete rec.lng; }
   if (src?.url) { rec.src_url = src.url; rec.src_at = src.checked_at; }
   rec.types = [...new Set((rec.types ?? []).map(unify))];
   // publish-sanity의 광역시·도 표기 규칙을 여기서도 먼저 적용한다.
@@ -37,11 +38,29 @@ for (const p of seed.places ?? []) {
   if (rec.homepage && !/^https?:\/\/[^/\s]+\.[^/\s]+/i.test(rec.homepage)) { const u = normalizeUrl(rec.homepage); if (u) rec.homepage = u; else { rec.homepage_raw = rec.homepage; delete rec.homepage; } }
   // 빈 값으로 기존 값을 지우지 않는다(docs/DATA_MERGE_POLICY.md ①).
   // 요금 형태 나누기(build-price-tiers)가 붙인 tiers는 같은 범위면 그대로 둔다(멱등).
-  if (byId.has(rec.id)) { const o = cat[byId.get(rec.id)].fee; if (rec.fee && o?.tiers && o.min === rec.fee.min && o.max === rec.fee.max) rec.fee = { ...rec.fee, tiers: o.tiers }; }
+  if (byId.has(rec.id)) {
+    const old = cat[byId.get(rec.id)];
+    // 좌표가 국내 범위 밖이면 지도에 잘못 찍지 않도록 격리한다.
+    // 원문 값은 registry 원천에 남고, 발행 카탈로그에서는 좌표 없는 공원으로 보인다.
+    if (badCoord(old)) {
+      delete old.lat; delete old.lng;
+      logReview({ action: "quarantined", file: "campgrounds.json", id: String(rec.id), field: "lat,lng", reason: "국내 좌표 범위 밖 값은 지도 표시에서 격리" });
+    }
+    // 사이트 타입은 누적 병합한다. 시드가 갱신됐다고 기존에 확인된
+    // 글램핑·숙박동 같은 타입을 지우면 데이터 품질이 오히려 후퇴한다.
+    // 코드별로 한 번만 남겨 반복 실행에도 순서가 고정된다.
+    if (Array.isArray(old.st) && Array.isArray(rec.st)) {
+      const seen = new Set(old.st.map((x) => String(x?.[0] ?? "")));
+      rec.st = [...old.st, ...rec.st.filter((x) => !seen.has(String(x?.[0] ?? "")))];
+    }
+    const o = old.fee;
+    if (rec.fee && o?.tiers && o.min === rec.fee.min && o.max === rec.fee.max) rec.fee = { ...rec.fee, tiers: o.tiers };
+  }
   if (byId.has(rec.id)) { cat[byId.get(rec.id)] = assignNonEmpty({ ...cat[byId.get(rec.id)] }, rec); replaced++; } else { cat.push(rec); byId.set(rec.id, cat.length - 1); added++; }
   if (!rec.du && !rules?.length && !day) continue; // 1박 수기 보강분(manual-camps)은 카탈로그 행만
   const dp = join(dataDir, "camps", `${rec.id}.json`);
-  const d = existsSync(dp) ? JSON.parse(readFileSync(dp, "utf8")) : {};
+  const rawDetail = existsSync(dp) ? readFileSync(dp, "utf8").trim() : "";
+  const d = rawDetail ? JSON.parse(rawDetail) : {};
   if (rules?.length) d.house_rules = { ...(d.house_rules ?? {}), rules, at: src?.checked_at };
   if (day) d.day = day;
   if (src) d.du_src = src;

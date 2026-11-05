@@ -183,7 +183,7 @@ const store = {
 
 const S = {
   stype: "", camps: [], byId: new Map(), photos: {}, cards: {}, openings: new Map(),
-  q: "", area: "all", quick: new Set(), theme: null, feeBand: store.get("mc-feeband", ""), sort: "rec", shown: 24, mode: "keyword",
+  q: "", area: "all", areas: [], quick: new Set(), theme: null, feeBand: store.get("mc-feeband", ""), sort: "rec", shown: 24, mode: "keyword",
   saved: store.get("mc-saved", store.get("mc-compare", [])), pick: store.get("mc-pick", []), compare: store.get("mc-compare", []),
   detailCache: new Map(), homeScroll: 0,
   origin: store.get("mc-origin", ""), drive: Number(store.get("mc-drive", 0)) || 0,
@@ -290,7 +290,7 @@ function facts(c) {
   if (sa.hot_water) out.hot = { v: sa.hot_water === "제공" ? "있음" : sa.hot_water, g: GR(sa.state) || "c", src: srcOf(fc) };
   if (sa.private_bathroom) out.bath = { v: "개별 욕실", g: "c" };
   // 반려동물(고캠핑 등록)
-  if (c.pets) out.pet = { v: /가능/.test(c.pets) && !/불가/.test(c.pets) ? "동반 가능" : /불가|금지/.test(c.pets) ? "불가" : c.pets, ok: /가능/.test(c.pets) && !/불가/.test(c.pets), g: "c", src: { label: "한국관광공사 고캠핑 등록값", url: c.gc_url } };
+  if (c.pets) out.pet = { v: /에서만/.test(c.pets) ? c.pets : /가능/.test(c.pets) && !/불가/.test(c.pets) ? "동반 가능" : /불가|금지/.test(c.pets) ? "불가" : c.pets, ok: /가능/.test(c.pets) && !/불가/.test(c.pets), g: "c", src: { label: "한국관광공사 고캠핑 등록값", url: c.gc_url } };
   return (c._f = out);
 }
 const filled = (f) => f && (f.g === "v" || f.g === "c");
@@ -482,8 +482,42 @@ const typeRow = (c, extra = "") => {
 // 요금대 필터는 텐트 사이트 요금으로(글램핑·펜션 요금이 섞인 범위로 거르지 않게). 사이트 요금을 모르면 전체 범위.
 const campFeeMin = (c) => tierOf(c, "site")?.[1] ?? c.fee?.min ?? c.pf?.p?.min;
 const campFeeMax = (c) => tierOf(c, "site")?.[2] ?? c.fee?.max ?? c.pf?.p?.max ?? campFeeMin(c);
-const AREAS = [["all", "전국"], ["서울·경기", "서울·경기"], ["강원", "강원"], ["충청", "충청"], ["전라", "전라"], ["경상", "경상"], ["제주", "제주"]];
-const AREA_OF = { 서울: "서울·경기", 인천: "서울·경기", 경기: "서울·경기", 강원: "강원", 충북: "충청", 충남: "충청", 대전: "충청", 세종: "충청", 전북: "전라", 전남: "전라", 광주: "전라", 경북: "경상", 경남: "경상", 대구: "경상", 부산: "경상", 울산: "경상", 제주: "제주" };
+// 지역은 모든 화면에서 같은 8개 권역을 사용한다. 서울·경기·인천은
+// 서로 다른 선택지로 분리하고, 충청·전라·경상만 하위 시도를 묶는다.
+const REGION_GROUPS = [
+  ["서울", "서울", ["서울"]], ["경기", "경기", ["경기"]], ["인천", "인천", ["인천"]],
+  ["강원", "강원", ["강원"]], ["충청", "충청", ["충북", "충남", "대전", "세종"]],
+  ["전라", "전라", ["전북", "전남", "광주"]], ["경상", "경상", ["경북", "경남", "대구", "부산", "울산"]],
+  ["제주", "제주", ["제주"]],
+];
+const REGION_KEYS = new Set(REGION_GROUPS.map(([k]) => k));
+const REGION_OF = Object.fromEntries(REGION_GROUPS.flatMap(([k, , sidos]) => sidos.map((s) => [s, k])));
+const AREA_OF = REGION_OF;
+const AREAS = [["all", "전국"], ...REGION_GROUPS.map(([k, l]) => [k, l])];
+const LEGACY_AREA = { "서울·경기": ["서울", "경기"], 전국: [], all: [] };
+const normalizeAreaKeys = (value) => {
+  const raw = Array.isArray(value) ? value : String(value ?? "").split(",");
+  const out = [];
+  for (const item of raw) {
+    const v = String(item).trim();
+    const mapped = LEGACY_AREA[v] ?? (REGION_KEYS.has(v) ? [v] : REGION_OF[v] ? [REGION_OF[v]] : []);
+    for (const k of mapped) if (!out.includes(k)) out.push(k);
+  }
+  return out;
+};
+const regionKeys = () => (Array.isArray(S.areas) ? S.areas : normalizeAreaKeys(S.area));
+const setRegionKeys = (value) => {
+  const keys = normalizeAreaKeys(value);
+  S.areas = keys;
+  S.area = keys.length === 1 ? keys[0] : "all";
+  return keys;
+};
+const regionSelected = (key) => {
+  const keys = regionKeys();
+  return key === "all" ? keys.length === 0 : keys.includes(key);
+};
+const regionMatches = (c, keys = regionKeys()) => !keys.length || keys.includes(REGION_OF[sidoShort(c.sido)]);
+const toggleRegion = (key) => setRegionKeys(key === "all" ? [] : (regionKeys().includes(key) ? regionKeys().filter((x) => x !== key) : [...regionKeys(), key]));
 const QUICK = {
   power: { label: "전기", icon: "bolt", cls: "volt", test: (c) => pos(facts(c).power) && facts(c).power.ok },
   fire: { label: "장작", icon: "firewood", cls: "flame", test: (c) => pos(facts(c).fire) && facts(c).fire.kind === "FIREWOOD_OK" },
@@ -495,6 +529,7 @@ const QUICK = {
 };
 // 테마 아이콘(소유자 2026-10-20 지정 SVG). 모두 currentColor, 글자 왼쪽 1.1em.
 const TH_SVG = {
+  UNIQUE: ["0 0 24 24", '<path fill="currentColor" d="M10 2.5l1.9 5.1 5.1 1.9-5.1 1.9L10 16.5l-1.9-5.1L3 9.5l5.1-1.9zM18 13l1 2.6 2.5.9-2.5 1-1 2.5-.9-2.5-2.6-1 2.6-.9z"/>'],
   POPULAR: ["0 0 24 24", '<path fill="currentColor" d="M12.6 2c.6 3.6 5.9 6 5.9 12a6.5 6.5 0 0 1-13 0c0-3 1.6-5 3.2-6.3-.1 2 .8 3.4 2.1 3.6-.4-3.3.2-6.6 1.8-9.3z"/>'],
   VALLEY: ["0 0 24 24", '<path fill="currentColor" d="M6.18 10.95l2.54 3.175l.084 .093a1 1 0 0 0 1.403 -.01l1.637 -1.638l1.324 1.985a1 1 0 0 0 1.457 .226l3.632 -2.906l3.647 7.697a1 1 0 0 1 -.904 1.428h-18a1 1 0 0 1 -.904 -1.428zm5.82 -7.878a3.3 3.3 0 0 1 2.983 1.888l2.394 5.057l-3.15 2.52l-1.395 -2.092l-.075 -.099a1 1 0 0 0 -1.464 -.053l-1.711 1.709l-1.301 -1.627l-1.151 -1.435l1.888 -3.98a3.3 3.3 0 0 1 2.982 -1.888"/>'],
   FOREST: ["0 0 24 24", '<path fill="currentColor" d="M14.14 12h-.06c.81 0 1.28-.91.82-1.57L9.82 3.17a1 1 0 0 0-1.64 0L3.1 10.43c-.46.66.01 1.57.82 1.57h-.06L.99 16.46c-.43.66.05 1.54.84 1.54H7v2c0 1.1.9 2 2 2s2-.9 2-2v-2h5.17c.79 0 1.27-.88.84-1.54z" /><path fill="currentColor" d="M23.01 16.46L20.14 12h-.06c.81 0 1.28-.91.82-1.57l-5.08-7.26a1 1 0 0 0-1.64 0l-1.57 2.24l3.11 4.44a2.004 2.004 0 0 1-.16 2.5l2.29 3.57c.4.62.42 1.4.07 2.04c-.01.02-.02.03-.03.04h4.28c.79 0 1.27-.88.84-1.54M13 20c0 1.1.9 2 2 2s2-.9 2-2v-1h-4z" />'],
@@ -571,6 +606,8 @@ function mapBrowseEligible(c) {
 const isWaterPlayCamp = (c) => c.du === "water" || (c.amenities ?? []).some((a) => /물놀이장|물놀이터|수영장|풀장|워터/.test(a));
 const THEMES = [
   ["POPULAR", "실시간 인기", (c) => Boolean(c.m7 || c.rv?.n > 5)],
+  // 이색 캠핑장(소유자 t44u 2026-11-04): 노천탕·온수풀·승마 등 하위 분류 c.uq(pipeline/lib/unique-camps.mjs, 배포 때 덧붙임). 상단 배치.
+  ["UNIQUE", "이색 캠핑장", (c) => Boolean(c.uq?.length)],
   // 겨울 캠핑: 겨울 운영 + (난방 글램핑·카라반 또는 W 공지 1,100W 이상)
   ["WINTER", "겨울 캠핑", (c) => winterOpen(c) && (Boolean(c.heat?.length) || wattsOf(c) >= 1100)],
   ["VALLEY", "계곡", (c) => c.pf?.t?.includes("VALLEY")],
@@ -597,6 +634,7 @@ const THEMES = [
 ];
 const THEME_FILES = {
   POPULAR: "popular.webp",
+  UNIQUE: "unique-onsen.webp", // t47u: 돔·트리하우스가 있어 글램핑처럼 보이던 썸네일 → 노천탕 이미지(AI 생성, 글자 없음, 새 파일명으로 캐시 무효화)
   WINTER: "winter.webp",
   VALLEY: "valley.webp",
   FOREST: "forest.webp",
@@ -623,7 +661,16 @@ const THEME_FILES = {
   REVIEWS: "forest.webp",
 };
 const themeImg = (k) => `${ASSETS_BASE}images/themes/${THEME_FILES[k] ?? "valley.webp"}`;
+// 이색 캠핑장 하위 분류(라벨은 pipeline/lib/unique-camps.mjs UNIQUE_CATS와 같은 순서·이름)
+// t45u(2026-11-04): 9개 묶음 → 12개 낱개, 여러 개 골라 OR로 보기. ‘계곡 바로 옆’은 칩 없이 테마 포함만 유지.
+const UNIQUE_SUBS = [["hotspring", "노천탕"], ["spa", "스파"], ["warmpool", "사계절온수풀"], ["pool", "수영장"], ["horse", "승마"], ["animal", "동물체험"], ["kidscafe", "키즈카페"], ["indoorplay", "실내놀이"], ["treehouse", "트리하우스"], ["stay", "이색숙소"], ["leisure", "레포츠"], ["farm", "체험"], ["valley", "계곡"]];
+const uniqueSubs = new Set();
+// 이색 테마 정렬(t45u): "" 추천순 · area 사이트 넓은순 · near 가까운순 · fee 저렴한순. 고른 값과 기준 위치는 기기에 남긴다.
+let uqSort = store.get("mc-uq-sort", "");
+let nearPt = store.get("mc-near-pt", null);
+const siteArea = (c) => { let m = 0; for (const [w, d] of c.sizes ?? []) { const a = Number(w) * Number(d); if (a > m && a < 2000) m = a; } return m || null; };
 const THEME_SUBS = {
+  UNIQUE: "노천탕·온수풀·승마·키즈카페·트리하우스처럼 특별한 시설과 체험이 있는 캠핑장",
   VR_TOUR: "예약 전 사이트 시야각, 그늘, 편의시설 동선을 360° VR 실측 파노라마로 볼 수 있는 캠핑장",
   DUMP_STATION: "카라반·캠핑카 오폐수 배출(블랙/그레이) 및 청수 공급이 가능한 한국관광공사 공인 덤프스테이션 설치 야영장",
   EXCELLENT: "문화체육관광부·한국관광공사 선정 4대 분야(친환경·가족·반려동물·교통약자) 공인 우수야영장",
@@ -702,7 +749,7 @@ loadDriveHubs().then(async () => {
 });
 function matches(c, { useArea = true, quick = S.quick } = {}) {
   if (S.drive && S.origin) { const m = driveMin(c); if (m == null || m > S.drive * 60) return false; }
-  if (useArea && S.area !== "all" && AREA_OF[sidoShort(c.sido)] !== S.area) return false;
+  if (useArea && !regionMatches(c)) return false;
   for (const k of quick) if (!QUICK[k].test(c)) return false;
   const fMin = campFeeMin(c), fMax = campFeeMax(c);
   if (S.feeBand === "u3" && !(fMin && fMin <= 30000)) return false;
@@ -714,7 +761,7 @@ function matches(c, { useArea = true, quick = S.quick } = {}) {
   if (S.feeBand === "o7" && !(fMin && (fMin >= 70000 || (fMax && fMax >= 70000)))) return false;
   if (S.theme && S.theme !== "ALL") { const t = THEMES.find((x) => x[0] === S.theme); if (t && !t[2](c)) return false; }
   if (S.theme === "OPEN" && !openingOf(c)) return false;
-  if (S.stype && !(STAY_KEYS.has(S.stype) ? stayKinds(c).includes(S.stype) : hasType(c, S.stype))) return false;
+  if (S.stype && !(KIND[S.stype] ? KIND[S.stype].test(c) : (STAY_KEYS.has(S.stype) ? stayKinds(c).includes(S.stype) : hasType(c, S.stype)))) return false;
   if (S.q && !querySets(S.q).some((set) => set.every((w) => wordHit(c, w)))) return false;
   return true;
 }
@@ -848,10 +895,11 @@ function results() {
 const photoUrl = (u) => {
   const value = String(u ?? "");
   if (!value) return "";
-  if (value.startsWith("media/")) return `${MEDIA_FILES}${value.slice(6)}`;
-  if (value.startsWith("./media/")) return `${MEDIA_FILES}${value.slice(8)}`;
-  if (value.startsWith("../media/")) return `${MEDIA_FILES}${value.slice(9)}`;
-  return value;
+  const rest = value.startsWith("media/") ? value.slice(6) : value.startsWith("./media/") ? value.slice(8) : value.startsWith("../media/") ? value.slice(9) : null;
+  if (rest == null) return value;
+  // t43: R2(media-base)에는 media 브랜치의 .webp만 올라간다. 저장소에 직접 넣은 jpg·png(예: 평택캠핑성 camps/102377/img*.jpg)는
+  // Pages의 /media/에만 있으므로, webp가 아니면 항상 Pages 주소를 쓴다(R2로 보내면 404 → 대표 사진이 비어 보였음).
+  return /\.webp(?=[?#]|$)/i.test(rest) ? `${MEDIA_FILES}${rest}` : `${MEDIA}${rest}`;
 };
 // 목록은 480px 파생본을 우선 쓰되, 고밀도 화면에서는 같은 공식 원본의 1280px 파생본을 선택한다.
 // 외부 원문 URL은 변형하지 않아 원천의 표시 조건과 주소를 유지한다.
@@ -916,7 +964,12 @@ function photosAll(c) {
   let list = [];
   // 우리 사본(media → Cloudflare R2, 2026-10-31 전량 업로드·확인)을 먼저 쓴다: 작은 webp라 빠르고 원본 404가 없다.
   // 사본이 없을 때만 공식 원문(고캠핑 썸네일)을 쓴다.
-  if (generated.length) list = [...generated, ...remote];
+  if (generated.length) {
+    list = [...generated, ...remote];
+    // media 브랜치의 오래된 파일이 삭제되었거나 배포 시점이 어긋난 경우에도
+    // 고캠핑 대표 원문을 다음 슬라이드에 남겨 빈 카드가 되지 않게 한다.
+    if (c.img && !String(c.img).startsWith("media/")) list.push(c.img);
+  }
   else if (remote.length) list = remote;
   else if (c.img) list = [c.img];
   // 공식 사진이 없는 곳: 캠핑장 이름으로 찾은 블로그 사진 중 배치도·안내판·야간 사진을 거른 한 장(pick-card-fallback.mjs → c.pt).
@@ -1204,6 +1257,31 @@ function cardLines(c) {
 }
 function rowsHtml(c) { return cardLines(c); }
 function rowsHtmlHorizontal(c) { return cardLines(c); }
+// 이색 캠핑장 전용 카드: 일반 카드와 달리 비교용 기본 행은 접고,
+// 분류 근거가 있는 특별한 시설·체험을 먼저 읽히게 한다.
+const UNIQUE_FEATURE_ICONS = {
+  hotspring: "onsen", spa: "onsen", warmpool: "hotwater", pool: "swim",
+  horse: "experience", animal: "paw", kidscafe: "kidscafe", indoorplay: "playground",
+  treehouse: "forest", stay: "tent", leisure: "leports", farm: "experience", valley: "drop"
+};
+function uniqueFeatureHtml(c) {
+  const labels = (c.uq ?? []).map((k) => {
+    const row = UNIQUE_SUBS.find(([id]) => id === k);
+    return row ? [k, row[1]] : null;
+  }).filter(Boolean);
+  if (!labels.length) return "";
+  return `<div class="unique-feature-block">
+    <div class="unique-feature-head">${ic("spark")}<span>특색 시설·요소</span></div>
+    <div class="unique-feature-chips">${labels.map(([k, label]) => `<span class="unique-feature-chip">${ic(UNIQUE_FEATURE_ICONS[k] || "spark")}${esc(label)}</span>`).join("")}</div>
+  </div>`;
+}
+function uniqueDetailsHtml(c) {
+  const id = `unique-spec-${String(c.id).replace(/[^A-Za-z0-9_-]/g, "-")}`;
+  return `<details class="unique-card-details">
+    <summary class="unique-card-summary"><span>${ic("list")}상세정보</span>${ic("chevron-up", "unique-card-chevron")}</summary>
+    <div class="unique-card-panel" id="${esc(id)}">${rowsHtml(c)}</div>
+  </details>`;
+}
 // 찜 목록은 여러 곳을 훑어보기 위한 화면이므로, 이름·주소 아래의 모든 정보(유형·스펙·후기 뱃지)를 '상세정보'로 기본 접는다.
 // 일반 목록·테마 카드에는 같은 행을 그대로 유지해 비교 정보가 숨지 않게 한다.
 function savedDetailsHtml(c) {
@@ -1357,6 +1435,7 @@ function card(c, i = 0, opts) {
   const theme = (opts && !Array.isArray(opts) && opts.theme) || S.theme || null;
   const savedMemo = Boolean(opts && !Array.isArray(opts) && opts.savedMemo);
   const collapseSpec = Boolean(opts && !Array.isArray(opts) && opts.collapseSpec);
+  const uniqueTheme = theme === "UNIQUE" && !savedMemo;
   const { tag } = nameOf(c), o = openingOf(c);
   return `<article class="card${isWp ? " is-closed" : ""}${savedMemo ? " saved-memo-card" : ""}" data-id="${esc(c.id)}">
     <a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
@@ -1382,7 +1461,8 @@ function card(c, i = 0, opts) {
         <div class="card-group card-group-types">
           ${typeRow(c).html}
         </div>
-        <div class="card-group card-group-spec">${rowsHtml(c)}</div>
+        ${uniqueTheme ? uniqueDetailsHtml(c) : `<div class="card-group card-group-spec">${rowsHtml(c)}</div>`}
+        ${uniqueTheme ? uniqueFeatureHtml(c) : ""}
         ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `
           <div class="card-group card-group-reviews">
             <div class="card-reviews">${cardReviewPills(c.rv, c)}</div>
@@ -1392,6 +1472,14 @@ function card(c, i = 0, opts) {
       ${commentsCardHtml(c)}
     </div>
   </article>`;
+}
+
+// 홈의 테마 레일과 `/theme/:id`는 같은 카드 모듈을 사용한다. 예전에는
+// 이색 캠핑장만 별도 조합을 거쳐 일부 정보가 빠지는 회귀가 있었으므로,
+// 두 화면 모두 이 헬퍼를 통해 사진·배지·상품·6개 정보행·후기·댓글을
+// 동일한 순서로 렌더링한다.
+function themeCampCard(c, i, themeKey) {
+  return card(c, i, { isWaterPlay: themeKey === "WATER_PLAY", theme: themeKey });
 }
 
 // ── 공통 UI: 토스트·(i) 말풍선 ───────────────────────────────
@@ -1826,9 +1914,11 @@ const TR_GLYPH = {
 const trIcon = (k, n) => { const [label, path] = TR_GLYPH[k] ?? [k, ""]; return `<span class="tr-src" title="${esc(label)} ${n}건" aria-label="${esc(label)} ${n}건"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true">${path}</svg><i>${fmt(n)}</i></span>`; };
 // ── 오늘의 캠핑장(소유자 2026-10-30): 정보량 상위 100곳 중 날마다 5곳을 골라 편집 카드로 맨 위에 보인다.
 // 같은 날에는 누구에게나 같은 5곳(날짜 씨앗), 다음 날엔 바뀐다 → ‘매일 관리되는 사이트’ 느낌. 카드는 뉴스보드 카드덱(스프링 물리)과 같은 방식.
-const TODAY_N = 5;
+const TODAY_N = 7;
 function todayPicks() {
-  const pool = S.camps.filter((c) => !c.du && showcaseEligible(c) && photosOf(c).length >= 2).sort((a, b) => rich(b) - rich(a)).slice(0, 100);
+  // 오늘의 추천은 현재 동계 휴장으로 판정된 곳(c.win=0)을 제외한다.
+  // 일반 검색·상세에서는 계절 정보로 숨기지 않지만, ‘오늘’ 추천에는 운영하지 않는 곳을 올리지 않는다.
+  const pool = S.camps.filter((c) => !c.du && c.win !== 0 && showcaseEligible(c) && photosOf(c).length >= 2).sort((a, b) => rich(b) - rich(a)).slice(0, 100);
   return pool.map((c, i) => [c, i + 1]).sort((a, b) => dayHash(`today:${a[0].id}`) - dayHash(`today:${b[0].id}`)).slice(0, TODAY_N);
 }
 function todayReasons(c, rank) {
@@ -1858,7 +1948,7 @@ function todayCard([c, rank], k, dateLabel) {
     <a class="td-link" draggable="false" href="${APP_BASE}place/${encodeURIComponent(c.id)}" aria-label="오늘의 캠핑장 ${k + 1}번 ${esc(nm)} 자세히"></a>
     <div class="td-media">
       <div class="td-main">${imageTag(ph[0], "", { eager: k === 0, sizes: "(max-width: 759px) 92vw, 620px" })}</div>
-      ${ph.length > 1 ? `<div class="td-strip">${ph.slice(1, 4).map((u) => `<span>${imageTag(u, "", { sizes: "160px" })}</span>`).join("")}</div>` : ""}
+      ${ph.length > 1 ? `<div class="td-strip" aria-label="캠핑장 사진 선택">${ph.slice(1, 4).map((u, i) => `<button type="button" class="td-thumb" data-photo-index="${i + 1}" aria-label="사진 ${i + 2} 보기">${imageTag(u, "", { sizes: "160px" })}</button>`).join("")}</div>` : ""}
       <span class="td-no">${String(k + 1).padStart(2, "0")}</span>
     </div>
     <div class="td-body">
@@ -1878,7 +1968,7 @@ function todaySection() {
   const dateLabel = `${d.getUTCMonth() + 1}월 ${d.getUTCDate()}일`;
   const n = picks.length;
   return `<section class="today" aria-labelledby="today-t">
-    <div class="sec-head"><div><h2 id="today-t">오늘의 <em>캠핑장</em></h2><p class="sec-sub">정보가 가장 잘 모인 100곳 중 매일 ${n}곳을 새로 골라요 · ${esc(dateLabel)}</p></div></div>
+    <div class="sec-head"><div><h2 id="today-t">오늘의 <em>캠핑장</em></h2></div></div>
     <div class="td-wrap">
       <div class="td-deck" tabindex="0" aria-roledescription="카드 덱" aria-label="오늘의 캠핑장 카드. 좌우로 넘겨 보세요">
         <div class="td-stage">${picks.map((x, k) => todayCard(x, k, dateLabel)).join("")}</div>
@@ -1997,6 +2087,19 @@ function initTodayDeck(root) {
   stage.addEventListener("pointerup", (e) => { if (drag && e.pointerId === drag.id) release(e); });
   stage.addEventListener("pointercancel", (e) => { if (drag && e.pointerId === drag.id) release(e, true); });
   stage.addEventListener("click", (e) => {
+    const thumb = e.target.closest("[data-photo-index]");
+    if (thumb) {
+      e.preventDefault(); e.stopPropagation();
+      const card = thumb.closest(".td-card");
+      const main = card?.querySelector(".td-main img");
+      const image = thumb.querySelector("img");
+      if (main && image?.src) {
+        main.src = image.currentSrc || image.src;
+        main.srcset = image.srcset || "";
+        card.querySelectorAll(".td-thumb").forEach((b) => b.classList.toggle("is-active", b === thumb));
+      }
+      return;
+    }
     if (root._moved) { e.preventDefault(); e.stopPropagation(); return; }
     const c = e.target.closest(".td-card"); if (!c) return;
     if (+c.dataset.i !== top) { e.preventDefault(); e.stopPropagation(); go(+c.dataset.i); }
@@ -2075,7 +2178,7 @@ function commonFinderForm({ formAttr = "data-search", isList = false } = {}) {
     <button class="finder-go" type="submit">${ic("search")}<span>찾기</span></button>
   </form>`;
 }
-// 10대 감성 캠핑 테마 메타데이터
+// 감성 캠핑 테마 메타데이터(기존 10종 + 이색 12종)
 const HERO_THEMES = [
   {
     id: "night-sky",
@@ -2084,8 +2187,8 @@ const HERO_THEMES = [
     badge: "오늘 밤 쏟아지는 별빛",
     moodDescription: "평창 600마지기 은하수 & 반딧불이",
     image: "hero-night-sky.webp",
-    titleA: "쏟아지는 은하수 아래,",
-    titleB: "평창 밤하늘 캠핑.",
+    titleA: "쏟아지는 은하수 아래",
+    titleB: "평창 밤하늘 캠핑",
     summary: "도심을 벗어나 쏟아지는 별빛과 춤추는 반딧불이를 마주하는 시간",
     effect: "night-sky"
   },
@@ -2096,8 +2199,8 @@ const HERO_THEMES = [
     badge: "오색빛깔 가을 낭만",
     moodDescription: "오색빛깔 가을 단풍 & 은행잎",
     image: "hero-autumn-maple.webp",
-    titleA: "붉게 물든 가을 숲길,",
-    titleB: "오색 단풍 캠핑.",
+    titleA: "붉게 물든 가을 숲길",
+    titleB: "오색 단풍 캠핑",
     summary: "살랑이는 가을 바람과 사각거리는 단풍잎 사이로 떠나는 힐링 여정",
     effect: "autumn-maple"
   },
@@ -2108,8 +2211,8 @@ const HERO_THEMES = [
     badge: "토닥토닥 빗소리",
     moodDescription: "운치 있는 숲속 낭만 우중 캠핑",
     image: "hero-rainy-camp.webp",
-    titleA: "타프 위 토닥이는 비,",
-    titleB: "아늑한 우중 캠핑.",
+    titleA: "타프 위 토닥이는 비",
+    titleB: "아늑한 우중 캠핑",
     summary: "촉촉한 숲의 향기와 따스한 랜턴 불빛이 머무는 가장 아늑한 순간",
     effect: "rainy-camp"
   },
@@ -2120,8 +2223,8 @@ const HERO_THEMES = [
     badge: "순백의 겨울 동화",
     moodDescription: "인제 자작나무숲 설경 캠핑",
     image: "hero-snowy-winter.webp",
-    titleA: "새하얀 설원의 고요,",
-    titleB: "고요한 설경 캠핑.",
+    titleA: "새하얀 설원의 고요",
+    titleB: "고요한 설경 캠핑",
     summary: "소복이 쌓이는 눈꽃과 모닥불의 따스함이 빚어내는 겨울 동화",
     effect: "snowy-winter"
   },
@@ -2132,8 +2235,8 @@ const HERO_THEMES = [
     badge: "피톤치드 힐링",
     moodDescription: "치유의 편백나무 숲 & 아침 햇살",
     image: "hero-lush-forest.webp",
-    titleA: "피톤치드 가득한 숲길,",
-    titleB: "편백숲 힐링 캠핑.",
+    titleA: "피톤치드 가득한 숲길",
+    titleB: "편백숲 힐링 캠핑",
     summary: "나무 사이로 쏟아지는 눈부신 햇살과 싱그러운 숲의 숨결",
     effect: "lush-forest"
   },
@@ -2144,8 +2247,8 @@ const HERO_THEMES = [
     badge: "물안개 피는 호수",
     moodDescription: "충주호 잔잔한 물결 & 카약 캠핑",
     image: "hero-riverside.webp",
-    titleA: "물안개 피는 아침 강가,",
-    titleB: "호숫가 카약 캠핑.",
+    titleA: "물안개 피는 아침 강가",
+    titleB: "호숫가 카약 캠핑",
     summary: "유리알처럼 투명한 수면과 황금빛 일출이 선사하는 평온함",
     effect: "riverside"
   },
@@ -2156,8 +2259,8 @@ const HERO_THEMES = [
     badge: "타닥타닥 힐링 불멍",
     moodDescription: "따스한 모닥불과 솟구치는 불티",
     image: "hero-warm-bonfire.webp",
-    titleA: "타닥타닥 모닥불 소리,",
-    titleB: "따스한 불멍 캠핑.",
+    titleA: "타닥타닥 모닥불 소리",
+    titleB: "따스한 불멍 캠핑",
     summary: "밤하늘로 솟아오르는 따스한 불티와 감성 알전구 불빛",
     effect: "warm-bonfire"
   },
@@ -2168,8 +2271,8 @@ const HERO_THEMES = [
     badge: "붉은 석양의 감동",
     moodDescription: "서해안 태안 바다 일몰 & 노을 해변",
     image: "hero-sunset-coast.webp",
-    titleA: "노을이 내려앉은 바다,",
-    titleB: "서해 노을 캠핑.",
+    titleA: "노을이 내려앉은 바다",
+    titleB: "서해 노을 캠핑",
     summary: "황금빛으로 물드는 바다 수평선과 잔잔히 반짝이는 파도 소리",
     effect: "sunset-coast"
   },
@@ -2180,8 +2283,8 @@ const HERO_THEMES = [
     badge: "설레는 꽃비 샤워",
     moodDescription: "만개한 벚꽃나무 아래 봄 캠핑",
     image: "hero-cherry-blossom.webp",
-    titleA: "흩날리는 분홍 꽃비,",
-    titleB: "봄날 벚꽃 캠핑.",
+    titleA: "흩날리는 분홍 꽃비",
+    titleB: "봄날 벚꽃 캠핑",
     summary: "흩날리는 꽃잎 샤워와 따스한 봄 햇살 속 캠크닉",
     effect: "cherry-blossom"
   },
@@ -2192,10 +2295,167 @@ const HERO_THEMES = [
     badge: "탁 트인 푸른 초원",
     moodDescription: "대관령 푸른 언덕 & 민들레 홀씨",
     image: "hero-green-meadow.webp",
-    titleA: "끝없는 초록빛 언덕,",
-    titleB: "대관령 초원 캠핑.",
+    titleA: "끝없는 초록빛 언덕",
+    titleB: "대관령 초원 캠핑",
     summary: "탁 트인 푸른 하늘과 보드라운 잔디밭 위에서 누리는 자유",
     effect: "green-meadow"
+  },
+  // t45u(2026-11-04): 이색 캠핑장 12종 — 이미지(AI 생성·글자 없음) + 카피 + 효과(김·물방울·꽃가루 등)
+  {
+    id: "uq-hotspring",
+    emoji: "♨️",
+    shortName: "노천탕",
+    badge: "별빛 아래 노천탕",
+    moodDescription: "산자락 노천탕 & 피어오르는 김",
+    image: "hero-hotspring.webp",
+    titleA: "별 아래 따끈한 노천탕",
+    titleB: "노천탕 캠핑",
+    summary: "산바람에 김이 피어오르는 노천탕에 몸을 담그는 하룻밤",
+    effect: "steam",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-spa",
+    emoji: "🛁",
+    shortName: "스파",
+    badge: "보글보글 프라이빗 스파",
+    moodDescription: "자쿠지 & 히노끼 스파 글램핑",
+    image: "hero-spa.webp",
+    titleA: "캔들 불빛 아래 보글보글",
+    titleB: "프라이빗 스파 캠핑",
+    summary: "하루의 피로를 녹이는 따스한 물거품과 은은한 촛불",
+    effect: "bubbles",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-warmpool",
+    emoji: "🌡️",
+    shortName: "사계절온수풀",
+    badge: "겨울에도 따뜻한 물놀이",
+    moodDescription: "사계절 온수풀 & 설경 물안개",
+    image: "hero-warmpool.webp",
+    titleA: "눈 내리는 날에도 첨벙",
+    titleB: "사계절 온수풀 캠핑",
+    summary: "하얀 설경 속 김이 오르는 따뜻한 풀에서 즐기는 물놀이",
+    effect: "steam",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-pool",
+    emoji: "🏊",
+    shortName: "수영장",
+    badge: "햇살 가득 수영장",
+    moodDescription: "파란 수영장 & 여름 물놀이",
+    image: "hero-pool.webp",
+    titleA: "반짝이는 물빛 속으로",
+    titleB: "수영장 캠핑",
+    summary: "텐트 바로 앞 파란 수영장에서 하루 종일 첨벙첨벙",
+    effect: "bubbles",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-horse",
+    emoji: "🐎",
+    shortName: "승마",
+    badge: "초원 위 승마 체험",
+    moodDescription: "노을 지는 목장 & 승마 체험",
+    image: "hero-horse.webp",
+    titleA: "노을 진 초원을 달려",
+    titleB: "승마 체험 캠핑",
+    summary: "말과 교감하며 초원을 거니는 특별한 캠핑의 추억",
+    effect: "green-meadow",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-animal",
+    emoji: "🦙",
+    shortName: "동물체험",
+    badge: "보들보들 동물 친구",
+    moodDescription: "알파카·양·염소 먹이주기",
+    image: "hero-animal.webp",
+    titleA: "보들보들 동물 친구와",
+    titleB: "동물 체험 캠핑",
+    summary: "아이와 함께 먹이 주고 쓰다듬는 따뜻한 교감의 시간",
+    effect: "cherry-blossom",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-kidscafe",
+    emoji: "🧸",
+    shortName: "키즈카페",
+    badge: "아이가 먼저 웃는 곳",
+    moodDescription: "볼풀·미끄럼틀 키즈카페",
+    image: "hero-kidscafe.webp",
+    titleA: "아이들의 웃음이 가득",
+    titleB: "키즈카페 캠핑",
+    summary: "캠핑장 안 키즈카페에서 아이는 신나고 부모는 여유롭게",
+    effect: "confetti",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-indoorplay",
+    emoji: "🎲",
+    shortName: "실내놀이",
+    badge: "비 와도 걱정 없는",
+    moodDescription: "트램펄린·보드게임 실내놀이",
+    image: "hero-indoorplay.webp",
+    titleA: "비가 와도 신나는 하루",
+    titleB: "실내놀이 캠핑",
+    summary: "날씨와 상관없이 뛰놀 수 있는 넓은 실내 놀이 공간",
+    effect: "confetti",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-treehouse",
+    emoji: "🌳",
+    shortName: "트리하우스",
+    badge: "숲속 나무 위 하룻밤",
+    moodDescription: "소나무 숲 트리하우스",
+    image: "hero-treehouse.webp",
+    titleA: "나무 위 작은 오두막",
+    titleB: "트리하우스 캠핑",
+    summary: "출렁다리를 건너 숲 높이에서 맞이하는 아침 햇살",
+    effect: "lush-forest",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-stay",
+    emoji: "🫧",
+    shortName: "이색숙소",
+    badge: "별을 품은 버블돔",
+    moodDescription: "버블 텐트 & 돔 하우스",
+    image: "hero-uniquestay.webp",
+    titleA: "투명 돔 안에서 별 보기",
+    titleB: "이색 숙소 캠핑",
+    summary: "누워서 은하수를 올려다보는 버블돔과 이색 숙소",
+    effect: "night-sky",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-leisure",
+    emoji: "🪂",
+    shortName: "레포츠",
+    badge: "짜릿한 하루 레포츠",
+    moodDescription: "짚라인 & 카약 레포츠",
+    image: "hero-leisure.webp",
+    titleA: "강 위를 가르는 짜릿함",
+    titleB: "레포츠 캠핑",
+    summary: "짚라인과 카약으로 채우는 액티브한 캠핑 하루",
+    effect: "riverside",
+    theme: "UNIQUE"
+  },
+  {
+    id: "uq-farm",
+    emoji: "🍓",
+    shortName: "체험",
+    badge: "손으로 만드는 추억",
+    moodDescription: "딸기 따기·감자 캐기·도예 체험",
+    image: "hero-farm.webp",
+    titleA: "직접 따고 만드는 하루",
+    titleB: "농촌 체험 캠핑",
+    summary: "수확하고 빚어 보는 손끝 체험으로 남기는 캠핑 추억",
+    effect: "green-meadow",
+    theme: "UNIQUE"
   }
 ];
 
@@ -2375,6 +2635,8 @@ class HeroCanvasController {
     this.shootingStars = [];
     this.seagulls = [];
     this.duskParticles = [];
+    this.splashes = [];
+    this.pollen = [];
     this.initParticlesForTheme(themeId);
   }
 
@@ -2384,34 +2646,36 @@ class HeroCanvasController {
 
     switch (themeId) {
       case "night-sky":
-        for (let i = 0; i < 30; i++) {
+        // 48개 반딧불이 & 유성우 (고휘도 라임-골드 발광)
+        for (let i = 0; i < 48; i++) {
           this.particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.16,
-            vy: (Math.random() - 0.5) * 0.16,
-            size: Math.random() * 2.2 + 1.2,
+            vx: (Math.random() - 0.5) * 0.18,
+            vy: (Math.random() - 0.5) * 0.18,
+            size: Math.random() * 2.6 + 1.4,
             pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.015 + 0.008,
-            glow: Math.random() * 12 + 7
+            pulseSpeed: Math.random() * 0.018 + 0.009,
+            glow: Math.random() * 16 + 10
           });
         }
         break;
 
       case "autumn-maple":
-        for (let i = 0; i < 26; i++) {
+        // 42개 고채도 선명 단풍잎 & 부채꼴 은행잎 3D 텀블링
+        for (let i = 0; i < 42; i++) {
           this.particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.28,
-            vy: Math.random() * 0.42 + 0.28,
-            size: Math.random() * 10 + 11,
+            vx: (Math.random() - 0.5) * 0.32,
+            vy: Math.random() * 0.46 + 0.30,
+            size: Math.random() * 12 + 13,
             angle: Math.random() * Math.PI * 2,
-            vAngle: (Math.random() - 0.5) * 0.014,
+            vAngle: (Math.random() - 0.5) * 0.016,
             flip: Math.random() * Math.PI * 2,
-            vFlip: Math.random() * 0.016 + 0.008,
+            vFlip: Math.random() * 0.018 + 0.009,
             roll: Math.random() * Math.PI * 2,
-            vRoll: Math.random() * 0.018 + 0.009,
+            vRoll: Math.random() * 0.02 + 0.01,
             isGinkgo: Math.random() < 0.38,
             colorIdx: Math.floor(Math.random() * 4)
           });
@@ -2419,162 +2683,254 @@ class HeroCanvasController {
         break;
 
       case "rainy-camp":
-        for (let i = 0; i < 45; i++) {
+        // 75개 고속 은빛 빗방울 샤워
+        for (let i = 0; i < 75; i++) {
           this.particles.push({
-            x: Math.random() * (w + 100),
+            x: Math.random() * (w + 140),
             y: Math.random() * h,
-            speed: Math.random() * 8 + 14,
-            len: Math.random() * 14 + 12,
-            alpha: Math.random() * 0.35 + 0.35
-          });
-        }
-        break;
-
-      case "snowy-winter":
-        for (let i = 0; i < 38; i++) {
-          this.particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            r: Math.random() * 2.6 + 1.0,
-            vy: Math.random() * 0.36 + 0.22,
-            vx: (Math.random() - 0.5) * 0.12,
-            sway: Math.random() * Math.PI * 2,
-            swaySpeed: Math.random() * 0.014 + 0.008,
+            speed: Math.random() * 9 + 16,
+            len: Math.random() * 16 + 14,
             alpha: Math.random() * 0.4 + 0.45
           });
         }
         break;
 
-      case "lush-forest":
-        // 48개로 증량하여 햇살 가루와 숲의 정령 펄스 강화
-        for (let i = 0; i < 48; i++) {
+      case "snowy-winter":
+        // 68개 포근한 함박눈 (결정체 육각 눈꽃 + 몽환 보케 함박눈)
+        for (let i = 0; i < 68; i++) {
+          const flakeType = Math.random() < 0.2 ? "crystal" : Math.random() < 0.55 ? "fluffy" : "dust";
           this.particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
-            r: Math.random() * 2.0 + 1.0,
-            vy: -Math.random() * 0.18 - 0.06,
-            vx: (Math.random() - 0.5) * 0.14,
-            alpha: Math.random() * 0.35 + 0.18,
+            flakeType,
+            r: flakeType === "crystal" ? Math.random() * 4 + 7 : flakeType === "fluffy" ? Math.random() * 2.2 + 3.0 : Math.random() * 1.8 + 1.2,
+            vy: Math.random() * 0.42 + 0.24,
+            vx: (Math.random() - 0.5) * 0.16,
+            sway: Math.random() * Math.PI * 2,
+            swaySpeed: Math.random() * 0.016 + 0.008,
+            alpha: Math.random() * 0.35 + 0.60
+          });
+        }
+        break;
+
+      case "lush-forest":
+        // 65개 틴들 햇살 광선과 영롱한 피톤치드 요정 빛가루
+        for (let i = 0; i < 65; i++) {
+          this.particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * 2.4 + 1.2,
+            vy: -Math.random() * 0.20 - 0.07,
+            vx: (Math.random() - 0.5) * 0.16,
+            alpha: Math.random() * 0.42 + 0.25,
             pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.024 + 0.012,
-            color: Math.random() < 0.6 ? "rgba(255, 252, 215," : "rgba(205, 255, 210,"
+            pulseSpeed: Math.random() * 0.026 + 0.014,
+            color: Math.random() < 0.5 ? "rgba(235, 255, 100," : Math.random() < 0.8 ? "rgba(255, 245, 180," : "rgba(130, 255, 190,"
           });
         }
         break;
 
       case "riverside":
-        // 38개 다이아몬드 스파클 및 렌즈 플레어 윤슬
-        for (let i = 0; i < 38; i++) {
+        // 58개 다이아몬드 크로스 스파클 및 수평 렌즈 플레어 물빛 윤슬
+        for (let i = 0; i < 58; i++) {
           this.particles.push({
             x: Math.random() * w,
-            y: h * 0.42 + Math.random() * (h * 0.58),
-            size: Math.random() * 3.2 + 1.6,
-            flareLen: Math.random() * 16 + 10,
-            alpha: Math.random() * 0.7 + 0.3,
+            y: h * 0.38 + Math.random() * (h * 0.62),
+            size: Math.random() * 3.8 + 2.0,
+            flareLen: Math.random() * 24 + 14,
+            alpha: Math.random() * 0.75 + 0.25,
             pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.038 + 0.018
+            pulseSpeed: Math.random() * 0.042 + 0.02
           });
         }
         break;
 
       case "warm-bonfire":
-        // 52개 캡슐·스파크·미세 불티 다변화
-        for (let i = 0; i < 52; i++) {
+        // 75개 고온 불티·스파크·캡슐 불꽃
+        for (let i = 0; i < 75; i++) {
           this.particles.push(this.createEmbersParticle(w, h, true));
         }
         break;
 
       case "sunset-coast":
-        // 42개 수평 반사광 (해수면 황금빛 윤슬) + 20개 노을 대기 미립자 + 4마리 선명한 갈매기 실루엣
-        for (let i = 0; i < 42; i++) {
+        // 75개 황금빛 해수면 윤슬 + 36개 노을 미립자 + 6마리 편대 갈매기
+        for (let i = 0; i < 75; i++) {
+          const depth = Math.random();
           this.particles.push({
-            x: w * 0.35 + Math.random() * (w * 0.65),
-            y: h * 0.46 + Math.random() * (h * 0.36),
-            vx: -Math.random() * 0.22 - 0.06,
-            len: Math.random() * 32 + 16,
-            alpha: Math.random() * 0.5 + 0.3,
+            x: Math.random() * w,
+            y: h * 0.42 + depth * (h * 0.48),
+            vx: -0.15 - Math.random() * 0.26,
+            len: (Math.random() * 32 + 18) * (0.65 + depth * 0.85),
+            thick: (Math.random() * 2.0 + 1.4) * (0.7 + depth * 0.8),
+            alpha: Math.random() * 0.7 + 0.3,
             pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.024 + 0.012
+            pulseSpeed: Math.random() * 0.035 + 0.018,
+            depth
           });
         }
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 36; i++) {
           this.duskParticles.push({
             x: Math.random() * w,
-            y: Math.random() * (h * 0.55),
-            vx: (Math.random() - 0.5) * 0.15,
-            vy: -Math.random() * 0.15 - 0.05,
-            r: Math.random() * 1.8 + 0.8,
+            y: Math.random() * (h * 0.65),
+            vx: (Math.random() - 0.5) * 0.18 + 0.05,
+            vy: -Math.random() * 0.20 - 0.07,
+            r: Math.random() * 2.6 + 1.0,
             pulse: Math.random() * Math.PI * 2,
-            alpha: Math.random() * 0.35 + 0.15
+            alpha: Math.random() * 0.45 + 0.25
           });
         }
         this.seagulls = [
-          { x: w * 0.15, y: h * 0.20, vx: 0.72, vy: -0.02, wingSpan: 28, wingPhase: 0, wingSpeed: 0.055 },
-          { x: w * 0.28, y: h * 0.15, vx: 0.80, vy: 0.015, wingSpan: 22, wingPhase: 1.4, wingSpeed: 0.065 },
-          { x: w * 0.08, y: h * 0.26, vx: 0.65, vy: 0.01, wingSpan: 18, wingPhase: 2.8, wingSpeed: 0.05 },
-          { x: w * 0.38, y: h * 0.22, vx: 0.75, vy: -0.01, wingSpan: 15, wingPhase: 4.2, wingSpeed: 0.07 }
+          { x: w * 0.32, y: h * 0.17, vx: 0.85, vy: -0.012, wingSpan: 34, wingPhase: 0, wingSpeed: 0.054, bobPhase: 0, depth: 1.0 },
+          { x: w * 0.48, y: h * 0.12, vx: 0.90, vy: 0.010, wingSpan: 27, wingPhase: 1.3, wingSpeed: 0.060, bobPhase: 1.2, depth: 0.88 },
+          { x: w * 0.18, y: h * 0.22, vx: 0.76, vy: 0.014, wingSpan: 23, wingPhase: 2.7, wingSpeed: 0.050, bobPhase: 2.4, depth: 0.80 },
+          { x: w * 0.65, y: h * 0.19, vx: 0.70, vy: -0.008, wingSpan: 16, wingPhase: 4.1, wingSpeed: 0.068, bobPhase: 3.6, depth: 0.60 },
+          { x: w * 0.06, y: h * 0.09, vx: 0.78, vy: 0.006, wingSpan: 20, wingPhase: 5.3, wingSpeed: 0.058, bobPhase: 4.9, depth: 0.72 },
+          { x: w * 0.55, y: h * 0.25, vx: 0.82, vy: 0.012, wingSpan: 22, wingPhase: 3.5, wingSpeed: 0.052, bobPhase: 1.8, depth: 0.75 }
         ];
         break;
 
       case "cherry-blossom":
-        // 65개 대량 벚꽃비 샤워
-        for (let i = 0; i < 65; i++) {
+        // 85개 벚꽃 샤워 꽃비 + 24개 봄빛 꽃가루
+        for (let i = 0; i < 85; i++) {
           this.particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
-            vx: -Math.random() * 0.28 - 0.12,
-            vy: Math.random() * 0.36 + 0.26,
-            size: Math.random() * 9 + 8,
+            vx: -Math.random() * 0.32 - 0.14,
+            vy: Math.random() * 0.40 + 0.28,
+            size: Math.random() * 10 + 9,
             rot: Math.random() * Math.PI * 2,
-            vRot: (Math.random() - 0.5) * 0.016,
+            vRot: (Math.random() - 0.5) * 0.018,
             flip: Math.random() * Math.PI * 2,
-            vFlip: Math.random() * 0.018 + 0.009,
+            vFlip: Math.random() * 0.02 + 0.01,
             roll: Math.random() * Math.PI * 2,
-            vRoll: Math.random() * 0.02 + 0.01,
+            vRoll: Math.random() * 0.022 + 0.011,
             seed: Math.random() * 10,
-            colorBase: Math.random() < 0.5 ? "255, 175, 195" : "255, 190, 205"
+            colorBase: Math.random() < 0.5 ? "255, 155, 185" : "255, 180, 205"
+          });
+        }
+        for (let i = 0; i < 24; i++) {
+          this.pollen.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * 1.8 + 0.8,
+            vx: -Math.random() * 0.20 - 0.08,
+            vy: Math.random() * 0.15 + 0.05,
+            alpha: Math.random() * 0.5 + 0.35,
+            pulse: Math.random() * Math.PI * 2
           });
         }
         break;
 
+      case "steam":
+        // t45u 노천탕·온수풀: 아래에서 천천히 피어오르는 김(부드러운 원형 그라데이션)
+        for (let i = 0; i < 26; i++) this.particles.push(this.makeSteam(w, h, true));
+        break;
+
+      case "bubbles":
+        // t45u 수영장·스파: 반짝이며 떠오르는 물방울
+        for (let i = 0; i < 40; i++) this.particles.push(this.makeBubble(w, h, true));
+        break;
+
+      case "confetti":
+        // t45u 키즈카페·실내놀이: 알록달록 천천히 떨어지는 색종이
+        for (let i = 0; i < 46; i++) this.particles.push(this.makeConfetti(w, h, true));
+        break;
+
       case "green-meadow":
-        // 30개 3D 텀블링 민들레 홀씨
-        for (let i = 0; i < 30; i++) {
+        // 45개 3D 텀블링 민들레 홀씨 + 32개 들판 황금 꽃가루
+        for (let i = 0; i < 45; i++) {
           this.particles.push({
             x: Math.random() * w,
             y: Math.random() * h,
-            vx: -Math.random() * 0.26 - 0.12,
-            vy: (Math.random() - 0.5) * 0.1,
-            size: Math.random() * 6 + 13,
+            vx: -Math.random() * 0.28 - 0.14,
+            vy: (Math.random() - 0.5) * 0.12,
+            size: Math.random() * 7 + 14,
             sway: Math.random() * Math.PI * 2,
-            swaySpeed: Math.random() * 0.012 + 0.008,
-            alpha: Math.random() * 0.4 + 0.55,
+            swaySpeed: Math.random() * 0.014 + 0.009,
+            alpha: Math.random() * 0.35 + 0.65,
             tilt: 0,
             tiltTarget: 0,
             roll: Math.random() * Math.PI * 2,
-            vRoll: (Math.random() - 0.5) * 0.018
+            vRoll: (Math.random() - 0.5) * 0.02
+          });
+        }
+        for (let i = 0; i < 32; i++) {
+          this.pollen.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * 2.0 + 1.0,
+            vx: -Math.random() * 0.22 - 0.08,
+            vy: -Math.random() * 0.12 - 0.02,
+            alpha: Math.random() * 0.5 + 0.35,
+            pulse: Math.random() * Math.PI * 2,
+            pulseSpeed: Math.random() * 0.03 + 0.015
           });
         }
         break;
     }
   }
 
+  makeSteam(w, h, initial = false) {
+    return { x: Math.random() * w, y: initial ? h * (0.35 + Math.random() * 0.65) : h + 40, r: Math.random() * 60 + 50, vy: -(Math.random() * 0.35 + 0.18), vx: (Math.random() - 0.5) * 0.2, life: initial ? Math.random() : 1, sway: Math.random() * Math.PI * 2 };
+  }
+  makeBubble(w, h, initial = false) {
+    return { x: Math.random() * w, y: initial ? Math.random() * h : h + 10, r: Math.random() * 5 + 2, vy: -(Math.random() * 0.7 + 0.35), sway: Math.random() * Math.PI * 2, alpha: Math.random() * 0.4 + 0.45 };
+  }
+  makeConfetti(w, h, initial = false) {
+    const colors = ["#ff8a80", "#ffd54f", "#81d4fa", "#a5d6a7", "#ce93d8", "#ffab91"];
+    return { x: Math.random() * w, y: initial ? Math.random() * h : -12, w: Math.random() * 6 + 5, h: Math.random() * 4 + 3, vy: Math.random() * 0.6 + 0.35, vx: (Math.random() - 0.5) * 0.4, rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.06, color: colors[Math.floor(Math.random() * colors.length)], sway: Math.random() * Math.PI * 2 };
+  }
+  renderSteam(ctx, w, h, mx, my, hasMouse) {
+    for (let i = 0; i < this.particles.length; i++) {
+      const p = this.particles[i];
+      p.sway += 0.01; p.y += p.vy; p.x += p.vx + Math.sin(p.sway) * 0.25; p.r += 0.12; p.life -= 0.0018;
+      if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 140) { p.x += (dx / (d || 1)) * 1.2; p.y += (dy / (d || 1)) * 0.6; } }
+      if (p.life <= 0 || p.y + p.r < 0) { this.particles[i] = this.makeSteam(w, h); continue; }
+      const a = Math.min(1, p.life * 1.4) * 0.16;
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+      g.addColorStop(0, `rgba(255,255,255,${a})`); g.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+  renderBubbles(ctx, w, h, mx, my, hasMouse) {
+    for (let i = 0; i < this.particles.length; i++) {
+      const p = this.particles[i];
+      p.sway += 0.03; p.y += p.vy; p.x += Math.sin(p.sway) * 0.35;
+      if (hasMouse && Math.hypot(p.x - mx, p.y - my) < p.r + 26) { this.particles[i] = this.makeBubble(w, h); continue; }
+      if (p.y < -10) { this.particles[i] = this.makeBubble(w, h); continue; }
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(255,255,255,${p.alpha})`; ctx.lineWidth = 1.2; ctx.stroke();
+      ctx.fillStyle = `rgba(200,240,255,${p.alpha * 0.18})`; ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x - p.r * 0.35, p.y - p.r * 0.35, p.r * 0.25, 0, Math.PI * 2); ctx.fillStyle = `rgba(255,255,255,${p.alpha})`; ctx.fill();
+    }
+  }
+  renderConfetti(ctx, w, h, mx, my, hasMouse) {
+    for (let i = 0; i < this.particles.length; i++) {
+      const p = this.particles[i];
+      p.sway += 0.02; p.y += p.vy; p.x += p.vx + Math.sin(p.sway) * 0.5; p.rot += p.vr;
+      if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 110) { p.x += (dx / (d || 1)) * 2; p.vr += 0.004; } }
+      if (p.y > h + 12) { this.particles[i] = this.makeConfetti(w, h); continue; }
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.scale(1, Math.abs(Math.cos(p.sway * 2)) * 0.7 + 0.3);
+      ctx.globalAlpha = 0.85; ctx.fillStyle = p.color; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); ctx.restore();
+    }
+  }
+
   createEmbersParticle(w, h, initial = false) {
-    const originX = w * 0.54 + (Math.random() - 0.5) * (w * 0.46);
+    const originX = w * 0.54 + (Math.random() - 0.5) * (w * 0.52);
     const typeRand = Math.random();
     const type = typeRand < 0.45 ? "capsule" : typeRand < 0.75 ? "spark" : "speck";
     return {
       type,
       x: originX,
       y: initial ? Math.random() * h : h - Math.random() * 25,
-      vx: (Math.random() - 0.5) * (type === "spark" ? 1.3 : 0.75),
-      vy: type === "spark" ? -Math.random() * 2.6 - 1.6 : -Math.random() * 1.6 - 1.0,
-      size: type === "capsule" ? Math.random() * 2.2 + 1.4 : type === "spark" ? Math.random() * 1.4 + 0.9 : Math.random() * 1.8 + 1.1,
-      len: type === "spark" ? Math.random() * 8 + 5 : type === "capsule" ? Math.random() * 4 + 3 : 2,
+      vx: (Math.random() - 0.5) * (type === "spark" ? 1.6 : 0.85),
+      vy: type === "spark" ? -Math.random() * 2.8 - 1.8 : -Math.random() * 1.8 - 1.2,
+      size: type === "capsule" ? Math.random() * 2.6 + 1.6 : type === "spark" ? Math.random() * 1.8 + 1.1 : Math.random() * 2.2 + 1.3,
+      len: type === "spark" ? Math.random() * 12 + 6 : type === "capsule" ? Math.random() * 6 + 4 : 3,
       angle: 0,
       life: initial ? Math.random() * 0.85 + 0.15 : 1,
-      decay: type === "spark" ? Math.random() * 0.007 + 0.004 : Math.random() * 0.0035 + 0.0022,
-      color: Math.random() < 0.3 ? "#ffffff" : Math.random() < 0.65 ? "#ffe082" : Math.random() < 0.88 ? "#ff9800" : "#ff3d00",
+      decay: type === "spark" ? Math.random() * 0.006 + 0.0035 : Math.random() * 0.0032 + 0.0018,
+      color: Math.random() < 0.35 ? "#ffffff" : Math.random() < 0.7 ? "#ffe082" : Math.random() < 0.9 ? "#ff9100" : "#ff3d00",
       drift: Math.random() * Math.PI * 2
     };
   }
@@ -2649,6 +3005,15 @@ class HeroCanvasController {
       case "green-meadow":
         this.renderGreenMeadow(ctx, w, h, mx, my, hasMouse);
         break;
+      case "steam":
+        this.renderSteam(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "bubbles":
+        this.renderBubbles(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "confetti":
+        this.renderConfetti(ctx, w, h, mx, my, hasMouse);
+        break;
     }
 
     this.mouse.vx *= 0.85;
@@ -2656,97 +3021,124 @@ class HeroCanvasController {
   }
 
   renderNightSky(ctx, w, h, mx, my, hasMouse) {
-    // 유성우: 속도를 낮추고 잔상을 길고 우아하게 페이드아웃
-    if (Math.random() < 0.005 && this.shootingStars.length < 1) {
+    // 유성우: 속도와 주기를 늘리고 화려한 2줄 트레일과 헤드 발광
+    if (Math.random() < 0.012 && this.shootingStars.length < 2) {
       this.shootingStars.push({
-        x: Math.random() * (w * 0.6) + w * 0.2,
-        y: Math.random() * (h * 0.25) + 10,
-        len: 160 + Math.random() * 80,
-        speed: 7 + Math.random() * 3.5,
-        angle: Math.PI / 4.8 + (Math.random() - 0.5) * 0.12,
+        x: Math.random() * (w * 0.75) + w * 0.1,
+        y: Math.random() * (h * 0.30) + 10,
+        len: 190 + Math.random() * 110,
+        speed: 8 + Math.random() * 4,
+        angle: Math.PI / 4.8 + (Math.random() - 0.5) * 0.15,
         alpha: 1,
         active: true
       });
     }
+
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter"; // add 블렌드 모드로 발광 극대화
 
     for (let i = this.shootingStars.length - 1; i >= 0; i--) {
       const s = this.shootingStars[i];
       const dx = Math.cos(s.angle) * s.len;
       const dy = Math.sin(s.angle) * s.len;
       const grad = ctx.createLinearGradient(s.x, s.y, s.x - dx, s.y - dy);
-      grad.addColorStop(0, `rgba(255, 255, 255, ${s.alpha * 0.95})`);
-      grad.addColorStop(0.25, `rgba(210, 255, 120, ${s.alpha * 0.6})`);
+      grad.addColorStop(0, `rgba(255, 255, 255, ${s.alpha})`);
+      grad.addColorStop(0.2, `rgba(200, 255, 0, ${s.alpha * 0.85})`);
+      grad.addColorStop(0.6, `rgba(140, 240, 255, ${s.alpha * 0.45})`);
       grad.addColorStop(1, "rgba(255, 255, 255, 0)");
       ctx.strokeStyle = grad;
-      ctx.lineWidth = 1.6;
+      ctx.lineWidth = 2.4;
       ctx.beginPath();
       ctx.moveTo(s.x, s.y);
       ctx.lineTo(s.x - dx, s.y - dy);
       ctx.stroke();
 
+      // 유성 머리 찬란한 발광 코어
+      const headG = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, 8);
+      headG.addColorStop(0, `rgba(255, 255, 255, ${s.alpha})`);
+      headG.addColorStop(0.5, `rgba(200, 255, 0, ${s.alpha * 0.7})`);
+      headG.addColorStop(1, "rgba(200, 255, 0, 0)");
+      ctx.fillStyle = headG;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, 8, 0, Math.PI * 2);
+      ctx.fill();
+
       s.x += Math.cos(s.angle) * s.speed;
       s.y += Math.sin(s.angle) * s.speed;
-      s.alpha -= 0.014;
+      s.alpha -= 0.016;
       if (s.alpha <= 0) this.shootingStars.splice(i, 1);
     }
 
-    // 반딧불이: 조용하고 유영하듯 느린 부유
-    ctx.save();
-    ctx.globalCompositeOperation = "screen";
+    // 반딧불이: add(lighter) 블렌드와 선명한 라임-골드 발광체
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
-      const glowAlpha = Math.max(0.12, (Math.sin(p.pulse) + 1) * 0.42);
+      const glowAlpha = Math.max(0.20, (Math.sin(p.pulse) + 1) * 0.5);
 
       if (hasMouse) {
         const dx = p.x - mx;
         const dy = p.y - my;
         const dist = Math.hypot(dx, dy);
-        if (dist < 120 && dist > 0) {
-          const force = (120 - dist) / 120;
+        if (dist < 130 && dist > 0) {
+          const force = (130 - dist) / 130;
           if (this.mouse.isDown) {
-            p.vx -= (dx / dist) * force * 0.35;
-            p.vy -= (dy / dist) * force * 0.35;
+            p.vx -= (dx / dist) * force * 0.45;
+            p.vy -= (dy / dist) * force * 0.45;
           } else {
-            p.vx += (dx / dist) * force * 0.25;
-            p.vy += (dy / dist) * force * 0.25;
+            p.vx += (dx / dist) * force * 0.32;
+            p.vy += (dy / dist) * force * 0.32;
           }
         }
       }
 
-      p.x += p.vx + Math.sin(this.time * 0.35 + p.pulse) * 0.16;
-      p.y += p.vy + Math.cos(this.time * 0.28 + p.pulse) * 0.12;
+      p.x += p.vx + Math.sin(this.time * 0.35 + p.pulse) * 0.22;
+      p.y += p.vy + Math.cos(this.time * 0.28 + p.pulse) * 0.16;
       p.vx *= 0.95;
       p.vy *= 0.95;
 
-      if (p.x < -20) p.x = w + 20;
-      else if (p.x > w + 20) p.x = -20;
-      if (p.y < -20) p.y = h + 20;
-      else if (p.y > h + 20) p.y = -20;
+      if (p.x < -25) p.x = w + 25;
+      else if (p.x > w + 25) p.x = -25;
+      if (p.y < -25) p.y = h + 25;
+      else if (p.y > h + 25) p.y = -25;
 
-      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.glow);
-      g.addColorStop(0, `rgba(235, 255, 120, ${glowAlpha})`);
-      g.addColorStop(0.35, `rgba(186, 255, 41, ${glowAlpha * 0.45})`);
-      g.addColorStop(1, "rgba(186, 255, 41, 0)");
+      // 큰 외부 광배 (Outer Halo)
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.glow * 1.3);
+      g.addColorStop(0, `rgba(240, 255, 140, ${glowAlpha * 0.9})`);
+      g.addColorStop(0.35, `rgba(200, 255, 0, ${glowAlpha * 0.55})`);
+      g.addColorStop(1, "rgba(200, 255, 0, 0)");
       ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.glow, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, p.glow * 1.3, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.fillStyle = `rgba(255, 255, 230, ${glowAlpha + 0.25})`;
+      // 선명하고 쨍한 중심 고밀도 핵
+      ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, glowAlpha + 0.35)})`;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size * 0.55, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, p.size * 0.65, 0, Math.PI * 2);
       ctx.fill();
+
+      // 최고 밝기일 때 미세 십자 반짝임 (Sparkle cross)
+      if (glowAlpha > 0.68) {
+        const sp = p.size * 1.8;
+        ctx.strokeStyle = `rgba(255, 255, 230, ${glowAlpha * 0.75})`;
+        ctx.lineWidth = 0.9;
+        ctx.beginPath();
+        ctx.moveTo(p.x - sp, p.y);
+        ctx.lineTo(p.x + sp, p.y);
+        ctx.moveTo(p.x, p.y - sp);
+        ctx.lineTo(p.x, p.y + sp);
+        ctx.stroke();
+      }
     }
     ctx.restore();
   }
 
   renderAutumnMaple(ctx, w, h, mx, my, hasMouse) {
-    // 가을 단풍: 정밀한 5갈래 단풍잎 & 부채꼴 은행잎 3D 텀블링 낙하
+    // 가을 단풍: 42개 고채도 선명 단풍잎 & 부채꼴 은행잎 3D 텀블링 낙하
     const MAPLE_COLORS = [
-      { base: "#d32f2f", dark: "#b71c1c", vein: "#ef9a9a" },
-      { base: "#e65100", dark: "#bf360c", vein: "#ffcc80" },
-      { base: "#f57c00", dark: "#e65100", vein: "#ffe0b2" },
-      { base: "#fbc02d", dark: "#f57f17", vein: "#fff9c4" }
+      { base: "#ff1744", dark: "#c62828", vein: "#ffcdd2", rim: "#ff8a80" },
+      { base: "#ff6d00", dark: "#e65100", vein: "#ffe0b2", rim: "#ffd180" },
+      { base: "#ffab00", dark: "#ff8f00", vein: "#fff8e1", rim: "#ffe57f" },
+      { base: "#ffd600", dark: "#f57f17", vein: "#fffde7", rim: "#ffff8d" }
     ];
 
     for (const p of this.particles) {
@@ -2758,23 +3150,23 @@ class HeroCanvasController {
         const dx = p.x - mx;
         const dy = p.y - my;
         const dist = Math.hypot(dx, dy);
-        if (dist < 100 && dist > 0) {
-          p.vx += this.mouse.vx * 0.12 + (dx / dist) * 0.8;
-          p.vy -= 0.3;
+        if (dist < 110 && dist > 0) {
+          p.vx += this.mouse.vx * 0.15 + (dx / dist) * 0.9;
+          p.vy -= 0.35;
         }
       }
 
-      p.x += p.vx + Math.sin(p.flip) * 0.45;
+      p.x += p.vx + Math.sin(p.flip) * 0.55;
       p.y += p.vy;
       p.vx *= 0.97;
 
-      if (p.y > h + 35) {
-        p.y = -35;
+      if (p.y > h + 40) {
+        p.y = -40;
         p.x = Math.random() * w;
-        p.vy = Math.random() * 0.42 + 0.28;
+        p.vy = Math.random() * 0.46 + 0.30;
       }
-      if (p.x < -35) p.x = w + 35;
-      else if (p.x > w + 35) p.x = -35;
+      if (p.x < -40) p.x = w + 40;
+      else if (p.x > w + 40) p.x = -40;
 
       ctx.save();
       ctx.translate(p.x, p.y);
@@ -2783,12 +3175,18 @@ class HeroCanvasController {
       const sy = Math.cos(p.roll) * 0.35 + 0.65;
       ctx.scale(sx, sy);
 
+      // 입체 그림자 효과로 딤 처리 위에서도 형태가 또렷이 드러남
+      ctx.shadowColor = "rgba(0, 0, 0, 0.45)";
+      ctx.shadowBlur = 6;
+      ctx.shadowOffsetX = 2;
+      ctx.shadowOffsetY = 3;
+
       const pal = MAPLE_COLORS[p.colorIdx % MAPLE_COLORS.length];
 
       if (p.isGinkgo) {
         // 정밀 은행잎 (부채꼴 + 중심 V자 홈 + 부채살 결 + 줄기)
-        const s = p.size * 0.9;
-        ctx.fillStyle = "#f9a825";
+        const s = p.size * 0.95;
+        ctx.fillStyle = "#ffd600";
         ctx.beginPath();
         ctx.moveTo(0, s * 0.6);
         ctx.lineTo(-s * 0.08, s * 0.1);
@@ -2799,8 +3197,12 @@ class HeroCanvasController {
         ctx.closePath();
         ctx.fill();
 
-        ctx.strokeStyle = "rgba(255, 249, 196, 0.45)";
-        ctx.lineWidth = 0.7;
+        ctx.strokeStyle = "#fffde7";
+        ctx.lineWidth = 1.0;
+        ctx.stroke();
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.65)";
+        ctx.lineWidth = 0.8;
         for (let a = -0.6; a <= 0.6; a += 0.3) {
           ctx.beginPath();
           ctx.moveTo(0, s * 0.1);
@@ -2808,8 +3210,8 @@ class HeroCanvasController {
           ctx.stroke();
         }
 
-        ctx.strokeStyle = "#c47f00";
-        ctx.lineWidth = 1.1;
+        ctx.strokeStyle = "#e65100";
+        ctx.lineWidth = 1.4;
         ctx.beginPath();
         ctx.moveTo(0, 0);
         ctx.quadraticCurveTo(s * 0.08, s * 0.35, s * 0.05, s * 0.75);
@@ -2831,8 +3233,12 @@ class HeroCanvasController {
         ctx.closePath();
         ctx.fill();
 
+        ctx.strokeStyle = pal.rim;
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
         ctx.strokeStyle = pal.vein;
-        ctx.lineWidth = 0.8;
+        ctx.lineWidth = 1.0;
         ctx.beginPath();
         ctx.moveTo(0, s * 0.48);
         ctx.lineTo(0, -s * 0.85);
@@ -2847,7 +3253,7 @@ class HeroCanvasController {
         ctx.stroke();
 
         ctx.strokeStyle = pal.dark;
-        ctx.lineWidth = 1.2;
+        ctx.lineWidth = 1.4;
         ctx.beginPath();
         ctx.moveTo(0, s * 0.48);
         ctx.lineTo(0, s * 0.78);
@@ -2858,148 +3264,245 @@ class HeroCanvasController {
   }
 
   renderRainyCamp(ctx, w, h, mx, my, hasMouse) {
-    ctx.lineWidth = 1.3;
+    // 우중 캠핑: 75개 고속 은빛 빗방울, 바닥 물방울 스플래시 & 동심원 수면 파문
+    ctx.save();
+    ctx.globalCompositeOperation = "screen";
+
     for (const p of this.particles) {
       p.y += p.speed;
-      p.x -= 1.6;
+      p.x -= 1.8;
 
-      if (hasMouse && Math.hypot(p.x - mx, p.y - my) < 28) {
-        this.ripples.push({ x: p.x, y: p.y, r: 1, maxR: 18, alpha: 0.75 });
+      if (hasMouse && Math.hypot(p.x - mx, p.y - my) < 32) {
+        this.ripples.push({ x: p.x, y: p.y, r: 1, maxR: 24, alpha: 0.85 });
+        for (let s = 0; s < 3; s++) {
+          this.splashes.push({ x: p.x, y: p.y, vx: (Math.random() - 0.5) * 3, vy: -Math.random() * 3 - 1.5, alpha: 0.9 });
+        }
         p.y = -20;
-        p.x = Math.random() * (w + 100);
+        p.x = Math.random() * (w + 140);
       }
 
       if (p.y > h - 10) {
-        if (Math.random() < 0.22) {
-          this.ripples.push({ x: p.x, y: h - 5, r: 1, maxR: 24 + Math.random() * 14, alpha: 0.55 });
+        if (Math.random() < 0.26) {
+          this.ripples.push({ x: p.x, y: h - 5, r: 1, maxR: 28 + Math.random() * 16, alpha: 0.65 });
+          for (let s = 0; s < 2; s++) {
+            this.splashes.push({ x: p.x, y: h - 5, vx: (Math.random() - 0.5) * 2.5, vy: -Math.random() * 2.8 - 1, alpha: 0.8 });
+          }
         }
         p.y = -20;
-        p.x = Math.random() * (w + 100);
+        p.x = Math.random() * (w + 140);
       }
 
-      ctx.strokeStyle = `rgba(185, 225, 255, ${p.alpha})`;
+      const rGrad = ctx.createLinearGradient(p.x, p.y, p.x - 3, p.y + p.len);
+      rGrad.addColorStop(0, `rgba(255, 255, 255, ${Math.min(1, p.alpha * 1.3)})`);
+      rGrad.addColorStop(1, `rgba(160, 235, 255, ${p.alpha * 0.4})`);
+      ctx.strokeStyle = rGrad;
+      ctx.lineWidth = 1.8;
       ctx.beginPath();
       ctx.moveTo(p.x, p.y);
-      ctx.lineTo(p.x - 2.5, p.y + p.len);
+      ctx.lineTo(p.x - 3, p.y + p.len);
       ctx.stroke();
     }
 
+    // 빗방울 튐 스플래시
+    for (let i = this.splashes.length - 1; i >= 0; i--) {
+      const sp = this.splashes[i];
+      sp.x += sp.vx;
+      sp.y += sp.vy;
+      sp.vy += 0.18;
+      sp.alpha -= 0.04;
+      if (sp.alpha <= 0) {
+        this.splashes.splice(i, 1);
+        continue;
+      }
+      ctx.fillStyle = `rgba(215, 245, 255, ${sp.alpha})`;
+      ctx.beginPath();
+      ctx.arc(sp.x, sp.y, 1.2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // 수면 파문 (Ripples)
     for (let i = this.ripples.length - 1; i >= 0; i--) {
       const r = this.ripples[i];
-      r.r += 1.2;
-      r.alpha -= 0.025;
+      r.r += 1.4;
+      r.alpha -= 0.024;
       if (r.alpha <= 0) {
         this.ripples.splice(i, 1);
         continue;
       }
-      ctx.strokeStyle = `rgba(200, 235, 255, ${r.alpha * 0.45})`;
-      ctx.lineWidth = 1.1;
+      ctx.strokeStyle = `rgba(210, 245, 255, ${r.alpha * 0.65})`;
+      ctx.lineWidth = 1.4;
       ctx.beginPath();
       ctx.ellipse(r.x, r.y, r.r, r.r * 0.35, 0, 0, Math.PI * 2);
       ctx.stroke();
+
+      if (r.r > 6) {
+        ctx.strokeStyle = `rgba(170, 225, 255, ${r.alpha * 0.35})`;
+        ctx.beginPath();
+        ctx.ellipse(r.x, r.y, r.r * 0.65, r.r * 0.22, 0, 0, Math.PI * 2);
+        ctx.stroke();
+      }
     }
+    ctx.restore();
   }
 
   renderSnowyWinter(ctx, w, h, mx, my, hasMouse) {
-    // 설경 윈터: 포근하게 사뿐사뿐 내리는 함박눈 (부드러운 마우스 인터랙션)
+    // 설경 윈터: 68개 포근한 함박눈 (정밀 6각 결정체 + 부드러운 보케 함박눈)
+    ctx.save();
+    ctx.globalCompositeOperation = "screen";
+
     for (const p of this.particles) {
       p.sway += p.swaySpeed;
       if (hasMouse) {
         const dx = p.x - mx;
         const dy = p.y - my;
         const dist = Math.hypot(dx, dy);
-        if (dist < 100 && dist > 0) {
-          const force = (100 - dist) / 100;
-          p.vx += (dx / dist) * force * 0.14;
-          p.vy += (dy / dist) * force * 0.08;
+        if (dist < 110 && dist > 0) {
+          const force = (110 - dist) / 110;
+          p.vx += (dx / dist) * force * 0.18;
+          p.vy += (dy / dist) * force * 0.10;
         }
       }
 
-      p.x += p.vx + Math.sin(p.sway) * 0.32;
+      p.x += p.vx + Math.sin(p.sway) * 0.40;
       p.y += p.vy;
       p.vx *= 0.94;
 
-      if (p.y > h + 12) {
-        p.y = -12;
+      if (p.y > h + 16) {
+        p.y = -16;
         p.x = Math.random() * w;
       }
-      if (p.x < -12) p.x = w + 12;
-      else if (p.x > w + 12) p.x = -12;
+      if (p.x < -16) p.x = w + 16;
+      else if (p.x > w + 16) p.x = -16;
 
-      ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fill();
+      if (p.flakeType === "crystal") {
+        // 정밀 6각 결정체 눈꽃
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.sway * 0.5);
+        ctx.strokeStyle = `rgba(255, 255, 255, ${p.alpha * 0.95})`;
+        ctx.lineWidth = 1.2;
+        const cr = p.r;
+        for (let a = 0; a < 3; a++) {
+          ctx.beginPath();
+          ctx.moveTo(-cr, 0);
+          ctx.lineTo(cr, 0);
+          ctx.stroke();
+          // 가지치기
+          ctx.beginPath();
+          ctx.moveTo(cr * 0.6, -cr * 0.25);
+          ctx.lineTo(cr * 0.4, 0);
+          ctx.lineTo(cr * 0.6, cr * 0.25);
+          ctx.moveTo(-cr * 0.6, -cr * 0.25);
+          ctx.lineTo(-cr * 0.4, 0);
+          ctx.lineTo(-cr * 0.6, cr * 0.25);
+          ctx.stroke();
+          ctx.rotate(Math.PI / 3);
+        }
+        ctx.restore();
+      } else if (p.flakeType === "fluffy") {
+        // 부드러운 몽환 보케 함박눈
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.2);
+        g.addColorStop(0, `rgba(255, 255, 255, ${p.alpha})`);
+        g.addColorStop(0.45, `rgba(220, 245, 255, ${p.alpha * 0.6})`);
+        g.addColorStop(1, "rgba(200, 240, 255, 0)");
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 2.2, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        // 미세 눈가루
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
+    ctx.restore();
   }
 
   renderLushForest(ctx, w, h, mx, my, hasMouse) {
-    // 편백 숲: 틴들 햇살 광선(Sunbeams)과 48개의 영롱한 피톤치드 숲의 정령 빛가루
+    // 편백 숲: 4줄 틴들 햇살 광선(Sunbeams)과 65개 피톤치드 숲의 정령 빛가루
     ctx.save();
-    ctx.globalCompositeOperation = "screen";
+    ctx.globalCompositeOperation = "lighter"; // add 블렌드 모드
 
-    const beamPhase = Math.sin(this.time * 0.4) * 0.02;
-    for (let b = 0; b < 3; b++) {
-      const bx = w * (0.35 + b * 0.25);
+    const beamPhase = Math.sin(this.time * 0.4) * 0.03;
+    for (let b = 0; b < 4; b++) {
+      const bx = w * (0.22 + b * 0.24);
       const bGrad = ctx.createLinearGradient(bx, 0, bx - h * 0.45, h);
-      bGrad.addColorStop(0, `rgba(255, 252, 220, ${0.06 + beamPhase + b * 0.01})`);
-      bGrad.addColorStop(0.6, `rgba(255, 250, 200, ${0.03 + beamPhase})`);
-      bGrad.addColorStop(1, "rgba(255, 250, 200, 0)");
+      bGrad.addColorStop(0, `rgba(255, 255, 215, ${0.14 + beamPhase + b * 0.02})`);
+      bGrad.addColorStop(0.55, `rgba(220, 255, 180, ${0.08 + beamPhase})`);
+      bGrad.addColorStop(1, "rgba(180, 255, 180, 0)");
       ctx.fillStyle = bGrad;
       ctx.beginPath();
-      ctx.moveTo(bx - 30, 0);
-      ctx.lineTo(bx + 70, 0);
-      ctx.lineTo(bx - h * 0.45 + 130, h);
-      ctx.lineTo(bx - h * 0.45 - 50, h);
+      ctx.moveTo(bx - 35, 0);
+      ctx.lineTo(bx + 85, 0);
+      ctx.lineTo(bx - h * 0.45 + 160, h);
+      ctx.lineTo(bx - h * 0.45 - 65, h);
       ctx.closePath();
       ctx.fill();
     }
 
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
-      const alpha = Math.max(0.08, p.alpha + Math.sin(p.pulse) * 0.14);
+      const alpha = Math.max(0.12, p.alpha + Math.sin(p.pulse) * 0.20);
 
       if (hasMouse) {
         const dx = mx - p.x;
         const dy = my - p.y;
         const dist = Math.hypot(dx, dy);
-        if (dist < 120 && dist > 0) {
-          p.vx += (dx / dist) * 0.08;
-          p.vy += (dy / dist) * 0.08;
+        if (dist < 130 && dist > 0) {
+          p.vx += (dx / dist) * 0.12;
+          p.vy += (dy / dist) * 0.12;
         }
       }
 
-      p.x += p.vx + Math.sin(p.pulse) * 0.22;
+      p.x += p.vx + Math.sin(p.pulse) * 0.28;
       p.y += p.vy;
       p.vx *= 0.96;
       p.vy *= 0.96;
 
-      if (p.y < -15) p.y = h + 15;
-      if (p.x < -15) p.x = w + 15;
-      else if (p.x > w + 15) p.x = -15;
+      if (p.y < -20) p.y = h + 20;
+      if (p.x < -20) p.x = w + 20;
+      else if (p.x > w + 20) p.x = -20;
 
-      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.8);
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3.5);
       g.addColorStop(0, `${p.color} ${alpha})`);
-      g.addColorStop(0.4, `${p.color} ${alpha * 0.5})`);
+      g.addColorStop(0.35, `${p.color} ${alpha * 0.65})`);
       g.addColorStop(1, `${p.color} 0)`);
       ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * 2.8, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, p.r * 3.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 밝고 영롱한 중심 코어
+      ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, alpha + 0.3)})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 0.6, 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.restore();
   }
 
   renderRiverside(ctx, w, h, mx, my, hasMouse) {
-    // 호숫가 카약: 뾰족한 다이아몬드 스파클 & 수평 렌즈 플레어 물빛 반사
+    // 호숫가 카약: 58개 다이아몬드 스파클 & 수평/수직 크로스 렌즈 플레어 물빛 반사
     ctx.save();
-    ctx.globalCompositeOperation = "screen";
+    ctx.globalCompositeOperation = "lighter"; // add 블렌드로 윤슬 발광 극대화
 
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
-      const alpha = Math.max(0, (Math.sin(p.pulse) + 0.35) * p.alpha);
-      if (alpha > 0.04) {
-        const d = p.size * 2.4;
+      let extraGlow = 0;
+      if (hasMouse) {
+        const dist = Math.hypot(p.x - mx, p.y - my);
+        if (dist < 130) {
+          extraGlow = (1 - dist / 130) * 0.45;
+        }
+      }
+
+      const alpha = Math.max(0, (Math.sin(p.pulse) * 0.5 + 0.5) * p.alpha) + extraGlow;
+      if (alpha > 0.03) {
+        const d = p.size * 2.8;
+
+        // 1. 다이아몬드 코어 발광체
         ctx.beginPath();
         ctx.moveTo(p.x, p.y - d);
         ctx.quadraticCurveTo(p.x, p.y, p.x + d, p.y);
@@ -3007,40 +3510,74 @@ class HeroCanvasController {
         ctx.quadraticCurveTo(p.x, p.y, p.x - d, p.y);
         ctx.quadraticCurveTo(p.x, p.y, p.x, p.y - d);
         ctx.closePath();
-        ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.95})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, alpha * 1.1)})`;
         ctx.fill();
 
-        const flareGrad = ctx.createLinearGradient(p.x - p.flareLen, p.y, p.x + p.flareLen, p.y);
-        flareGrad.addColorStop(0, "rgba(160, 235, 255, 0)");
-        flareGrad.addColorStop(0.5, `rgba(255, 255, 255, ${alpha * 0.85})`);
-        flareGrad.addColorStop(1, "rgba(160, 235, 255, 0)");
-        ctx.fillStyle = flareGrad;
-        ctx.fillRect(p.x - p.flareLen, p.y - 0.75, p.flareLen * 2, 1.5);
+        // 2. 수평 렌즈 플레어 (아쿠아마린-청록 물빛 그라데이션)
+        const fl = p.flareLen || 32;
+        const flareGradH = ctx.createLinearGradient(p.x - fl, p.y, p.x + fl, p.y);
+        flareGradH.addColorStop(0, "rgba(80, 220, 255, 0)");
+        flareGradH.addColorStop(0.3, `rgba(160, 245, 255, ${alpha * 0.75})`);
+        flareGradH.addColorStop(0.5, `rgba(255, 255, 255, ${Math.min(1, alpha * 0.95)})`);
+        flareGradH.addColorStop(0.7, `rgba(160, 245, 255, ${alpha * 0.75})`);
+        flareGradH.addColorStop(1, "rgba(80, 220, 255, 0)");
+        ctx.fillStyle = flareGradH;
+        ctx.fillRect(p.x - fl, p.y - 1.2, fl * 2, 2.4);
+
+        // 3. 수직 미세 렌즈 플레어
+        const vfl = fl * 0.35;
+        const flareGradV = ctx.createLinearGradient(p.x, p.y - vfl, p.x, p.y + vfl);
+        flareGradV.addColorStop(0, "rgba(80, 220, 255, 0)");
+        flareGradV.addColorStop(0.5, `rgba(255, 255, 255, ${alpha * 0.65})`);
+        flareGradV.addColorStop(1, "rgba(80, 220, 255, 0)");
+        ctx.fillStyle = flareGradV;
+        ctx.fillRect(p.x - 0.9, p.y - vfl, 1.8, vfl * 2);
       }
     }
 
+    // 4. 수면 동심원 리플 (잔잔한 물결 파문)
     for (let i = this.ripples.length - 1; i >= 0; i--) {
       const r = this.ripples[i];
-      r.r += 1.1;
+      r.r += 1.2;
       r.alpha -= 0.012;
       if (r.alpha <= 0) {
         this.ripples.splice(i, 1);
         continue;
       }
-      ctx.strokeStyle = `rgba(190, 240, 255, ${r.alpha * 0.55})`;
-      ctx.lineWidth = 1.3;
+      ctx.strokeStyle = `rgba(160, 240, 255, ${r.alpha * 0.75})`;
+      ctx.lineWidth = 1.6;
       ctx.beginPath();
       ctx.ellipse(r.x, r.y, r.r, r.r * 0.28, 0, 0, Math.PI * 2);
       ctx.stroke();
+
+      // 내부 은은한 보조 파문
+      if (r.r > 12) {
+        ctx.strokeStyle = `rgba(200, 250, 255, ${r.alpha * 0.45})`;
+        ctx.lineWidth = 0.9;
+        ctx.beginPath();
+        ctx.ellipse(r.x, r.y, r.r * 0.65, r.r * 0.65 * 0.28, 0, 0, Math.PI * 2);
+        ctx.stroke();
+      }
     }
     ctx.restore();
   }
 
   renderWarmBonfire(ctx, w, h, mx, my, hasMouse) {
-    // 불멍 캠핑: 캡슐 불티, 가느다란 스파크 궤적, 미세 입자 다변화 드로잉
+    // 불멍 캠핑: 78개 불티, 하단 모닥불 발열 글로우(Hearth Glow), 고온 스파크 궤적
     ctx.save();
-    ctx.globalCompositeOperation = "lighter";
+    ctx.globalCompositeOperation = "lighter"; // add 블렌드로 화염 발광
 
+    // 1. 하단 모닥불 발열 글로우 (Hearth Glow)
+    const glowCycle = (Math.sin(this.time * 2.2) + 1) * 0.5;
+    const hearthGrad = ctx.createRadialGradient(w * 0.54, h, 20, w * 0.54, h, w * 0.45);
+    hearthGrad.addColorStop(0, `rgba(255, 140, 30, ${0.22 + glowCycle * 0.08})`);
+    hearthGrad.addColorStop(0.35, `rgba(255, 75, 10, ${0.12 + glowCycle * 0.05})`);
+    hearthGrad.addColorStop(0.7, `rgba(220, 40, 0, ${0.05 + glowCycle * 0.02})`);
+    hearthGrad.addColorStop(1, "rgba(200, 20, 0, 0)");
+    ctx.fillStyle = hearthGrad;
+    ctx.fillRect(0, h * 0.35, w, h * 0.65);
+
+    // 2. 다변화 불티 입자 렌더링
     for (let i = this.particles.length - 1; i >= 0; i--) {
       const p = this.particles[i];
       p.life -= p.decay;
@@ -3053,52 +3590,64 @@ class HeroCanvasController {
         const dx = p.x - mx;
         const dy = p.y - my;
         const dist = Math.hypot(dx, dy);
-        if (dist < 110 && dist > 0) {
-          p.vx += this.mouse.vx * 0.15 + (dx / dist) * 1.2;
-          p.vy -= 0.8;
+        if (dist < 120 && dist > 0) {
+          p.vx += this.mouse.vx * 0.16 + (dx / dist) * 1.4;
+          p.vy -= 0.9;
         }
       }
 
       p.y += p.vy;
-      p.x += p.vx + Math.sin(this.time * 1.6 + p.drift) * 0.65;
-      p.drift += 0.015;
+      p.x += p.vx + Math.sin(this.time * 2.0 + p.drift) * 0.75;
+      p.drift += 0.018;
       p.vx *= 0.985;
 
-      const alpha = Math.min(1, p.life * 1.4);
+      const alpha = Math.min(1, p.life * 1.5);
       ctx.globalAlpha = alpha;
 
       if (p.type === "spark") {
+        // 날렵한 네온 스파크 궤적 (외곽 글로우 + 코어 고온 라인)
         ctx.strokeStyle = p.color;
-        ctx.lineWidth = p.size;
+        ctx.lineWidth = p.size * 1.8;
+        ctx.lineCap = "round";
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p.x - p.vx * 2, p.y - p.vy * 2.2);
+        ctx.lineTo(p.x - p.vx * 2.2, p.y - p.vy * 2.5);
+        ctx.stroke();
+
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = Math.max(1, p.size * 0.7);
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.x - p.vx * 1.8, p.y - p.vy * 2.0);
         ctx.stroke();
       } else if (p.type === "capsule") {
+        // 3D 회전 열기 캡슐
         ctx.save();
         ctx.translate(p.x, p.y);
-        const heading = Math.atan2(p.vy, p.vx + Math.sin(this.time * 1.6 + p.drift) * 0.65);
+        const heading = Math.atan2(p.vy, p.vx + Math.sin(this.time * 2.0 + p.drift) * 0.75);
         ctx.rotate(heading);
 
         const g = ctx.createLinearGradient(0, -p.len, 0, p.len);
-        g.addColorStop(0, p.color);
-        g.addColorStop(0.7, p.color);
-        g.addColorStop(1, "rgba(255, 87, 34, 0)");
+        g.addColorStop(0, "#ffffff");
+        g.addColorStop(0.35, p.color);
+        g.addColorStop(0.8, p.color);
+        g.addColorStop(1, "rgba(255, 60, 0, 0)");
         ctx.fillStyle = g;
 
         ctx.beginPath();
-        ctx.ellipse(0, 0, p.size * 0.9, p.len, 0, 0, Math.PI * 2);
+        ctx.ellipse(0, 0, p.size * 1.1, p.len, 0, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       } else {
-        const currentSize = Math.max(0.8, p.size * (0.4 + p.life * 0.6));
-        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, currentSize * 2.2);
-        g.addColorStop(0, p.color);
-        g.addColorStop(0.5, p.color);
-        g.addColorStop(1, "rgba(255, 87, 34, 0)");
+        // 부드러운 고온 화염 구체
+        const currentSize = Math.max(1.0, p.size * (0.5 + p.life * 0.65));
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, currentSize * 2.5);
+        g.addColorStop(0, "#ffffff");
+        g.addColorStop(0.4, p.color);
+        g.addColorStop(1, "rgba(255, 60, 0, 0)");
         ctx.fillStyle = g;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, currentSize * 2.2, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, currentSize * 2.5, 0, Math.PI * 2);
         ctx.fill();
       }
     }
@@ -3106,94 +3655,175 @@ class HeroCanvasController {
   }
 
   renderSunsetCoast(ctx, w, h, mx, my, hasMouse) {
-    // 서해안 노을: 갯벌 황금빛 석양 물결 라인 + 노을 대기 미립자 + 멀리 날아가는 갈매기 실루엣
+    // 서해안 노을: 75개 황금빛 해수면 윤슬 + 3줄 노을 파도 밴드 + 36개 황혼 미립자 + 정밀 편대 갈매기
     ctx.save();
-    ctx.globalCompositeOperation = "screen";
+    ctx.globalCompositeOperation = "lighter"; // add 블렌드로 윤슬 및 노을빛 극대화
 
     const glowCycle = (Math.sin(this.time * 0.5) + 1) * 0.5;
-    const sunsetGrad = ctx.createRadialGradient(w * 0.5, h * 0.52, 20, w * 0.5, h * 0.52, w * 0.65);
-    sunsetGrad.addColorStop(0, `rgba(255, 140, 50, ${0.14 + glowCycle * 0.05})`);
-    sunsetGrad.addColorStop(0.5, `rgba(255, 90, 30, ${0.07 + glowCycle * 0.03})`);
+    const sunsetGrad = ctx.createRadialGradient(w * 0.5, h * 0.50, 20, w * 0.5, h * 0.50, w * 0.70);
+    sunsetGrad.addColorStop(0, `rgba(255, 155, 55, ${0.20 + glowCycle * 0.08})`);
+    sunsetGrad.addColorStop(0.45, `rgba(255, 95, 30, ${0.10 + glowCycle * 0.04})`);
     sunsetGrad.addColorStop(1, "rgba(255, 87, 34, 0)");
     ctx.fillStyle = sunsetGrad;
     ctx.fillRect(0, 0, w, h);
 
+    // 1. 수평선 부근 3줄 노을 파도 윤슬 밴드
+    for (let b = 0; b < 3; b++) {
+      const bandY = h * (0.45 + b * 0.10);
+      const bandWave = Math.sin(this.time * 0.75 + b * 2.1) * 10;
+      const bandGrad = ctx.createLinearGradient(0, bandY, w, bandY);
+      bandGrad.addColorStop(0, "rgba(255, 160, 50, 0)");
+      bandGrad.addColorStop(0.3, `rgba(255, 205, 90, ${0.05 + glowCycle * 0.03})`);
+      bandGrad.addColorStop(0.55, `rgba(255, 240, 160, ${0.10 + glowCycle * 0.04})`);
+      bandGrad.addColorStop(0.8, `rgba(255, 180, 60, ${0.05 + glowCycle * 0.03})`);
+      bandGrad.addColorStop(1, "rgba(255, 160, 50, 0)");
+      ctx.fillStyle = bandGrad;
+      ctx.fillRect(0, bandY + bandWave - 2.0, w, 4.0);
+    }
+
+    // 2. 해수면 다채로운 렌즈형 황금 윤슬 (Water Shimmer)
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
       p.x += p.vx;
-      if (p.x < -50) p.x = w + 50;
+      if (p.x < -60) p.x = w + 60;
 
-      if (hasMouse && Math.hypot(p.x - mx, p.y - my) < 90) {
-        p.pulse += 0.05;
+      let extraGlow = 0;
+      if (hasMouse) {
+        const dist = Math.hypot(p.x - mx, p.y - my);
+        if (dist < 120) {
+          p.pulse += 0.05;
+          extraGlow = (1 - dist / 120) * 0.45;
+        }
       }
 
-      const alpha = Math.max(0, (Math.sin(p.pulse) + 0.35) * p.alpha);
+      const alpha = Math.max(0, (Math.sin(p.pulse) * 0.5 + 0.5) * p.alpha) + extraGlow;
       if (alpha > 0.02) {
-        const lineGrad = ctx.createLinearGradient(p.x - p.len, p.y, p.x + p.len, p.y);
-        lineGrad.addColorStop(0, "rgba(255, 171, 64, 0)");
-        lineGrad.addColorStop(0.5, `rgba(255, 240, 185, ${alpha * 0.95})`);
-        lineGrad.addColorStop(1, "rgba(255, 171, 64, 0)");
-        ctx.fillStyle = lineGrad;
-        ctx.fillRect(p.x - p.len, p.y - 1.2, p.len * 2, 2.8);
+        const halfLen = p.len * 0.55;
+        const shimmerGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, halfLen);
+        shimmerGrad.addColorStop(0, `rgba(255, 255, 235, ${Math.min(1, alpha * 1.1)})`);
+        shimmerGrad.addColorStop(0.35, `rgba(255, 215, 95, ${Math.min(1, alpha * 0.85)})`);
+        shimmerGrad.addColorStop(0.75, `rgba(255, 145, 40, ${Math.min(1, alpha * 0.45)})`);
+        shimmerGrad.addColorStop(1, "rgba(255, 120, 30, 0)");
+
+        ctx.fillStyle = shimmerGrad;
+        ctx.beginPath();
+        ctx.ellipse(p.x, p.y, halfLen, p.thick * 1.15, 0, 0, Math.PI * 2);
+        ctx.fill();
       }
     }
 
+    // 3. 노을 대기 미립자 (Golden Hour Dust)
     for (const d of this.duskParticles) {
-      d.pulse += 0.02;
+      d.pulse += 0.024;
       d.x += d.vx;
       d.y += d.vy;
-      if (d.y < -10) d.y = h * 0.6;
-      if (d.x < -10) d.x = w + 10;
-      else if (d.x > w + 10) d.x = -10;
+      if (d.y < -15) d.y = h * 0.65;
+      if (d.x < -15) d.x = w + 15;
+      else if (d.x > w + 15) d.x = -15;
 
-      const da = Math.max(0.05, d.alpha + Math.sin(d.pulse) * 0.1);
-      ctx.fillStyle = `rgba(255, 215, 170, ${da})`;
+      const da = Math.max(0.08, d.alpha + Math.sin(d.pulse) * 0.16);
+      ctx.fillStyle = `rgba(255, 235, 175, ${da})`;
       ctx.beginPath();
-      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+      ctx.arc(d.x, d.y, d.r * 1.15, 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.restore();
 
+    // 4. 고품질 갈매기 무리 (편대 비행, 유선형 실루엣 & 골든 림 라이트)
     ctx.save();
     for (const g of this.seagulls) {
+      g.bobPhase = (g.bobPhase || 0) + 0.032;
       g.x += g.vx;
-      g.y += g.vy;
+      g.y += g.vy + Math.sin(g.bobPhase) * 0.18;
       g.wingPhase += g.wingSpeed;
-      if (g.x > w + 60) g.x = -60;
+
+      // 마우스 반응: 마우스가 가까이 오면 부드럽게 회피하며 날갯짓 가속
+      if (hasMouse) {
+        const mDist = Math.hypot(g.x - mx, g.y - my);
+        if (mDist < 120) {
+          g.y -= (1 - mDist / 120) * 0.45;
+          g.wingSpeed = Math.min(0.085, g.wingSpeed + 0.002);
+        } else if (g.wingSpeed > 0.055) {
+          g.wingSpeed *= 0.995;
+        }
+      }
+
+      if (g.x > w + 80) g.x = -80;
 
       const ws = g.wingSpan;
-      const wingY = Math.sin(g.wingPhase) * (ws * 0.48);
-      const tipY = wingY > 0 ? wingY * 1.15 : wingY * 0.85;
+      const depth = g.depth || 1.0;
+      // 날갯짓 역학: 다운스트로크와 업스트로크의 자연스러운 파형
+      const wingNorm = Math.sin(g.wingPhase) + 0.16 * Math.sin(g.wingPhase * 2);
+      const wingY = wingNorm * (ws * 0.45);
+      const tipY = wingY > 0 ? wingY * 1.22 : wingY * 0.88;
+
+      // 날개 관절 (어깨 -> 팔꿈치/손목 -> 날개깃 끝)
+      const elbowX = ws * 0.42;
+      const elbowY = wingY * 0.62 - 2;
 
       ctx.save();
       ctx.translate(g.x, g.y);
 
-      // 1. 역광 따스한 림 라이트 (외곽선 강조)
-      ctx.strokeStyle = "rgba(255, 205, 120, 0.45)";
-      ctx.lineWidth = 3.6;
+      // (1) 역광 석양 림 라이트 (외곽 골든 글로우)
+      ctx.strokeStyle = `rgba(255, 235, 160, ${0.80 * depth})`;
+      ctx.lineWidth = Math.max(2.0, 3.6 * depth);
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
       ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.quadraticCurveTo(-ws * 0.45, wingY - 3, -ws, tipY);
-      ctx.moveTo(0, 0);
-      ctx.quadraticCurveTo(ws * 0.45, wingY - 3, ws, tipY);
+      // 좌측 날개 윗선
+      ctx.moveTo(0, -1);
+      ctx.quadraticCurveTo(-elbowX, elbowY - 2, -ws, tipY);
+      // 우측 날개 윗선
+      ctx.moveTo(0, -1);
+      ctx.quadraticCurveTo(elbowX, elbowY - 2, ws, tipY);
+      // 머리/등 윗선
+      ctx.moveTo(-ws * 0.2, 0);
+      ctx.lineTo(ws * 0.35, -ws * 0.04);
       ctx.stroke();
 
-      // 2. 선명한 짙은 실루엣 날개
-      ctx.strokeStyle = "rgba(20, 10, 6, 0.94)";
-      ctx.lineWidth = 2.4;
+      // (2) 날개 실루엣 면 (유선형 블레이드)
+      ctx.fillStyle = `rgba(16, 8, 4, ${Math.min(0.98, 0.82 + depth * 0.18)})`;
+      ctx.strokeStyle = `rgba(16, 8, 4, ${Math.min(0.98, 0.82 + depth * 0.18)})`;
+      ctx.lineWidth = 1.2;
+
+      // 좌측 날개 패스 (어깨 -> 관절 -> 날개끝 -> 날개밑선 -> 몸통)
       ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.quadraticCurveTo(-ws * 0.45, wingY - 3, -ws, tipY);
-      ctx.moveTo(0, 0);
-      ctx.quadraticCurveTo(ws * 0.45, wingY - 3, ws, tipY);
+      ctx.moveTo(-ws * 0.05, -ws * 0.02);
+      ctx.quadraticCurveTo(-elbowX, elbowY - 2, -ws, tipY);
+      ctx.quadraticCurveTo(-elbowX * 0.9, elbowY + ws * 0.14, -ws * 0.12, ws * 0.04);
+      ctx.closePath();
+      ctx.fill();
       ctx.stroke();
 
-      // 3. 중앙 몸통 & 머리 실루엣
-      ctx.fillStyle = "rgba(20, 10, 6, 0.94)";
+      // 우측 날개 패스
       ctx.beginPath();
-      ctx.ellipse(0, 1, ws * 0.12, ws * 0.24, Math.PI / 10, 0, Math.PI * 2);
+      ctx.moveTo(ws * 0.05, -ws * 0.02);
+      ctx.quadraticCurveTo(elbowX, elbowY - 2, ws, tipY);
+      ctx.quadraticCurveTo(elbowX * 0.9, elbowY + ws * 0.14, ws * 0.12, ws * 0.04);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      // (3) 몸통 & 꼬리깃 실루엣
+      ctx.beginPath();
+      ctx.ellipse(0, 0, ws * 0.24, ws * 0.08, 0.06, 0, Math.PI * 2);
+      // 꼬리깃
+      ctx.moveTo(-ws * 0.15, 0);
+      ctx.lineTo(-ws * 0.36, -ws * 0.03);
+      ctx.lineTo(-ws * 0.34, ws * 0.04);
+      ctx.closePath();
+      ctx.fill();
+
+      // (4) 머리와 비행 방향 부리 (Beak) 실루엣
+      ctx.beginPath();
+      ctx.arc(ws * 0.22, -ws * 0.03, ws * 0.07, 0, Math.PI * 2);
+      ctx.fill();
+      // 날렵한 부리
+      ctx.beginPath();
+      ctx.moveTo(ws * 0.26, -ws * 0.04);
+      ctx.lineTo(ws * 0.40, -ws * 0.015);
+      ctx.lineTo(ws * 0.26, ws * 0.005);
+      ctx.closePath();
       ctx.fill();
 
       ctx.restore();
@@ -3202,7 +3832,30 @@ class HeroCanvasController {
   }
 
   renderCherryBlossom(ctx, w, h, mx, my, hasMouse) {
-    // 봄날 벚꽃: 65개 대량 벚꽃잎 꽃비 샤워, V자 노치, 3D 텀블링
+    // 봄날 벚꽃: 85개 벚꽃잎 샤워 꽃비 + 24개 봄빛 꽃가루 미립자
+    // 1. 봄빛 바람 꽃가루 (Lighter 모드로 화사하게 반짝임)
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter";
+    for (const po of this.pollen) {
+      po.pulse += 0.025;
+      po.x += po.vx;
+      po.y += po.vy;
+      if (po.x < -20) po.x = w + 20;
+      if (po.y > h + 20) po.y = -20;
+
+      const alpha = Math.max(0.12, po.alpha + Math.sin(po.pulse) * 0.22);
+      const g = ctx.createRadialGradient(po.x, po.y, 0, po.x, po.y, po.r * 2.8);
+      g.addColorStop(0, `rgba(255, 235, 245, ${alpha})`);
+      g.addColorStop(0.45, `rgba(255, 185, 215, ${alpha * 0.7})`);
+      g.addColorStop(1, "rgba(255, 160, 200, 0)");
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(po.x, po.y, po.r * 2.8, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+
+    // 2. 85개 벚꽃잎 꽃비 (3D 텀블링, V자 노치, 림 하이라이트)
     for (const p of this.particles) {
       p.rot += p.vRot;
       p.flip += p.vFlip;
@@ -3212,21 +3865,21 @@ class HeroCanvasController {
         const dx = p.x - mx;
         const dy = p.y - my;
         const dist = Math.hypot(dx, dy);
-        if (dist < 100 && dist > 0) {
-          p.vx += this.mouse.vx * 0.12 + (dx / dist) * 0.8;
-          p.vy -= 0.35;
+        if (dist < 110 && dist > 0) {
+          p.vx += this.mouse.vx * 0.14 + (dx / dist) * 0.9;
+          p.vy -= 0.40;
         }
       }
 
-      const gust = Math.sin(this.time * 0.4 + p.seed) * 0.45;
-      p.x += p.vx + Math.sin(p.flip) * 0.6 + gust;
+      const gust = Math.sin(this.time * 0.4 + p.seed) * 0.48;
+      p.x += p.vx + Math.sin(p.flip) * 0.65 + gust;
       p.y += p.vy;
       p.vx *= 0.98;
 
       if (p.y > h + 25) {
         p.y = -25;
         p.x = Math.random() * w;
-        p.vy = Math.random() * 0.36 + 0.26;
+        p.vy = Math.random() * 0.38 + 0.28;
       }
       if (p.x < -25) p.x = w + 25;
       else if (p.x > w + 25) p.x = -25;
@@ -3236,10 +3889,16 @@ class HeroCanvasController {
       ctx.rotate(p.rot);
       ctx.scale(Math.cos(p.flip), Math.sin(p.roll) * 0.35 + 0.65);
 
+      // 은은한 핑크 글로우 드롭 섀도우
+      ctx.shadowColor = "rgba(255, 150, 190, 0.55)";
+      ctx.shadowBlur = 8;
+      ctx.shadowOffsetX = 1;
+      ctx.shadowOffsetY = 2;
+
       const grad = ctx.createLinearGradient(0, p.size * 0.7, 0, -p.size * 0.7);
-      grad.addColorStop(0, `rgba(${p.colorBase}, 0.95)`);
-      grad.addColorStop(0.6, `rgba(${p.colorBase}, 0.85)`);
-      grad.addColorStop(1, "rgba(255, 240, 245, 0.92)");
+      grad.addColorStop(0, `rgba(${p.colorBase}, 0.98)`);
+      grad.addColorStop(0.55, `rgba(${p.colorBase}, 0.90)`);
+      grad.addColorStop(1, "rgba(255, 245, 250, 0.96)");
       ctx.fillStyle = grad;
 
       ctx.beginPath();
@@ -3250,12 +3909,41 @@ class HeroCanvasController {
       ctx.bezierCurveTo(p.size * 0.65, -p.size * 0.4, p.size * 0.55, p.size * 0.3, 0, p.size * 0.7);
       ctx.closePath();
       ctx.fill();
+
+      // 밝은 림 하이라이트 테두리
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.75)";
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+
       ctx.restore();
     }
   }
 
   renderGreenMeadow(ctx, w, h, mx, my, hasMouse) {
-    // 초원 글램핑: 3D 입체 투영 텀블링 민들레 홀씨 (Pappus Dome & 16가닥 우산살)
+    // 초원 글램핑: 45개 3D 텀블링 민들레 홀씨 + 32개 들판 황금 꽃가루/스포어
+    // 1. 들판 황금 꽃가루/스포어 (Lighter 모드로 몽환적 반짝임)
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter";
+    for (const po of this.pollen) {
+      po.pulse += po.pulseSpeed || 0.02;
+      po.x += po.vx;
+      po.y += po.vy;
+      if (po.x < -20) po.x = w + 20;
+      if (po.y < -20) po.y = h + 20;
+
+      const alpha = Math.max(0.14, po.alpha + Math.sin(po.pulse) * 0.22);
+      const g = ctx.createRadialGradient(po.x, po.y, 0, po.x, po.y, po.r * 2.8);
+      g.addColorStop(0, `rgba(245, 255, 200, ${alpha})`);
+      g.addColorStop(0.45, `rgba(200, 255, 120, ${alpha * 0.75})`);
+      g.addColorStop(1, "rgba(160, 230, 80, 0)");
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(po.x, po.y, po.r * 2.8, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+
+    // 2. 45개 3D 텀블링 민들레 홀씨 (Pappus Dome & 18가닥 우산살)
     for (const p of this.particles) {
       p.sway += p.swaySpeed;
       p.roll += p.vRoll;
@@ -3265,16 +3953,16 @@ class HeroCanvasController {
         const dy = p.y - my;
         const dist = Math.hypot(dx, dy);
         if (dist < 130 && dist > 0) {
-          p.vx += this.mouse.vx * 0.2 + (dx / dist) * 1.4;
-          p.vy += this.mouse.vy * 0.1 - 0.4;
-          p.tiltTarget = (dx / dist) * 0.5;
+          p.vx += this.mouse.vx * 0.2 + (dx / dist) * 1.5;
+          p.vy += this.mouse.vy * 0.1 - 0.45;
+          p.tiltTarget = (dx / dist) * 0.55;
         }
       }
 
-      p.tiltTarget = Math.sin(p.sway) * 0.22 + p.vx * 0.6;
-      p.tilt += (p.tiltTarget - p.tilt) * 0.05;
+      p.tiltTarget = Math.sin(p.sway) * 0.24 + p.vx * 0.65;
+      p.tilt += (p.tiltTarget - p.tilt) * 0.055;
 
-      p.x += p.vx + Math.sin(p.sway) * 0.35;
+      p.x += p.vx + Math.sin(p.sway) * 0.38;
       p.y += p.vy;
       p.vx *= 0.98;
       p.vy *= 0.98;
@@ -3288,13 +3976,14 @@ class HeroCanvasController {
       ctx.rotate(p.tilt);
       ctx.scale(Math.cos(p.roll) * 0.3 + 0.7, 1);
 
-      const stemLen = p.size * 0.75;
-      const umbrellaR = p.size * 0.7;
+      const stemLen = p.size * 0.8;
+      const umbrellaR = p.size * 0.75;
 
-      ctx.strokeStyle = `rgba(255, 255, 255, ${p.alpha * 0.78})`;
-      ctx.lineWidth = 0.8;
-      for (let i = 0; i < 16; i++) {
-        const ang = -Math.PI * 0.88 + (i / 15) * (Math.PI * 0.76);
+      // 우산살 18가닥
+      ctx.strokeStyle = `rgba(255, 255, 255, ${p.alpha * 0.85})`;
+      ctx.lineWidth = 0.9;
+      for (let i = 0; i < 18; i++) {
+        const ang = -Math.PI * 0.88 + (i / 17) * (Math.PI * 0.76);
         const fx = Math.cos(ang) * umbrellaR;
         const fy = Math.sin(ang) * umbrellaR * 0.75 - stemLen;
         ctx.beginPath();
@@ -3302,22 +3991,25 @@ class HeroCanvasController {
         ctx.lineTo(fx, fy);
         ctx.stroke();
 
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha * 0.88})`;
+        // 우산살 끝 발광 솜털 팁
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha * 0.95})`;
         ctx.beginPath();
-        ctx.arc(fx, fy, 0.75, 0, Math.PI * 2);
+        ctx.arc(fx, fy, 0.9, 0, Math.PI * 2);
         ctx.fill();
       }
 
-      ctx.strokeStyle = `rgba(235, 230, 215, ${p.alpha * 0.9})`;
-      ctx.lineWidth = 1;
+      // 우산대 줄기
+      ctx.strokeStyle = `rgba(240, 235, 220, ${p.alpha * 0.95})`;
+      ctx.lineWidth = 1.1;
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.lineTo(0, -stemLen);
       ctx.stroke();
 
-      ctx.fillStyle = `rgba(180, 150, 110, ${p.alpha})`;
+      // 씨앗 (Achene)
+      ctx.fillStyle = `rgba(175, 145, 105, ${p.alpha})`;
       ctx.beginPath();
-      ctx.ellipse(0, 2, 1.3, 3.4, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, 2, 1.4, 3.6, 0, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.restore();
@@ -3368,7 +4060,7 @@ function initHeroDynamicEngine(v) {
     }
 
     if (heroCanvasInstance) {
-      heroCanvasInstance.setTheme(theme.id);
+      heroCanvasInstance.setTheme(theme.effect || theme.id);
     }
 
     if (animate) {
@@ -3452,13 +4144,14 @@ function homeView() {
     <div class="hero-bg-layer hero-bg-a active" style="background-image: url('${APP_BASE}images/hero/${initialTheme.image}');" aria-hidden="true"></div>
     <div class="hero-bg-layer hero-bg-b" aria-hidden="true"></div>
     <canvas id="hero-fx-canvas" class="hero-fx-canvas" aria-hidden="true"></canvas>
+    <div class="hero-dim" aria-hidden="true"></div>
     <div class="hero-in">
       <h1 id="hero-t">
         <span class="h1-a" data-hero-title-a>${esc(initialTheme.titleA)}</span>
         <span class="h1-b" data-hero-title-b><em>${esc(initialTheme.titleB)}</em></span>
       </h1>
       <p class="hero-summary" data-hero-summary>전국 <b class="hero-n" data-hero-total>${fmt(heroCounts().total)}</b>곳 (캠핑장 <b data-hero-stay>${fmt(heroCounts().stay)}</b>곳 · 당일 나들이 <b data-hero-day>${fmt(heroCounts().day)}</b>곳), ${esc(initialTheme.summary)}</p>
-      <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}</div>${commonFinderForm({ formAttr: "data-search", isList: false })}</div>
+      <div class="finder"><div class="rail chips finder-regions" aria-label="지역">${AREAS.map(([k, l]) => `<button type="button" class="chip" data-area="${k}" aria-pressed="${regionSelected(k)}">${l}</button>`).join("")}</div>${commonFinderForm({ formAttr: "data-search", isList: false })}</div>
     </div>
   </section>
 
@@ -3498,7 +4191,7 @@ function fillLazyRow(sec) {
   if (!r) return;
   LAZY_ROWS.delete(sec.dataset.lazyRow);
   const rail = $(".trow-rail", sec);
-  rail.innerHTML = r.items.map((c) => card(c, 9, { isWaterPlay: r.k === "WATER_PLAY", theme: r.k })).join("");
+  rail.innerHTML = r.items.map((c) => themeCampCard(c, 9, r.k)).join("");
   rail.style.minHeight = "";
   sec.removeAttribute("data-lazy-row");
   initCarousels(sec);
@@ -3521,7 +4214,7 @@ function themeRow([k, label, test], list, first, used, idx = 0) {
   items.forEach((c) => used.add(c.id));
   return `<section class="trow" aria-label="${esc(label)}">
     <div class="trow-head"><h3>${thIc(k)}${esc(label)} <i>${fmt(all.length)}</i></h3><button type="button" class="link more-link" data-theme-all="${k}">더보기 ${ic("right")}</button></div>
-    <div class="rail trow-rail">${idx >= LAZY_FROM ? "" : items.map((c, i) => card(c, first && i < 4 ? i : 9, { isWaterPlay: k === "WATER_PLAY", theme: k })).join("")}</div>
+    <div class="rail trow-rail">${idx >= LAZY_FROM ? "" : items.map((c, i) => themeCampCard(c, first && i < 4 ? i : 9, k)).join("")}</div>
   </section>`.replace('<section class="trow"', idx >= LAZY_FROM ? `<section class="trow" data-lazy-row="${(LAZY_ROWS.set(`r${idx}`, { items, k }), `r${idx}`)}"` : '<section class="trow"');
 }
 const themeName = (k) => (k === "ALL" ? "전체 테마" : k === "OPEN" ? "곧 오픈" : k === "REVIEWS" ? "긍정 후기 추천" : THEMES.find((t) => t[0] === k)?.[1] ?? k);
@@ -3532,7 +4225,8 @@ function renderResults({ reset = true } = {}) {
   if (reset) S.shown = 24;
   const act = [];
   if (S.q) act.push(`<button class="chip on" data-clear="q">“${esc(S.q)}” ${ic("close")}</button>`);
-  if (S.area !== "all") act.push(`<button class="chip on" data-clear="area">${esc(S.area)} ${ic("close")}</button>`);
+  const activeAreas = regionKeys();
+  if (activeAreas.length) act.push(`<button class="chip on" data-clear="area">${esc(activeAreas.join(" · "))} ${ic("close")}</button>`);
   if (S.theme) act.push(`<button class="chip on" data-clear="theme">${esc(themeName(S.theme))} ${ic("close")}</button>`);
   if (S.feeBand) {
     const fbLabel = {
@@ -3608,7 +4302,7 @@ function moreResults() {
 // ── 조건 검색(히어로·목록 공통, 소유자 2026-10-19) ─────────────────
 // 키워드 대신 조건을 조합한다: 지역 여러 곳 · 시군 주변 반경 · 상품(글램핑·카라반 등, 하나라도) · 반려견 · 전기 W · 사이트 크기 · 장작 · 텐트 옆 주차 · 1박 요금.
 // 값을 모르는 곳은 그 조건으로 걸러지지 않는다(“없음”으로 보지 않음) — 조건을 켜면 근거가 있는 곳만 남는다.
-const SIDOS = ["서울", "경기", "인천", "강원", "충북", "충남", "대전", "세종", "전북", "전남", "광주", "경북", "경남", "대구", "부산", "울산", "제주"];
+const SIDOS = REGION_GROUPS.map(([k]) => k);
 const maxSide = (c) => (c._ms ??= Math.max(0, ...(c.field_conditions?.site_size?.groups ?? []).map((g) => Math.max(Number(g.width_m) || 0, Number(g.depth_m) || 0)), ...(c.tq?.mx ?? [])));
 const wattsOf = (c) => (c._w ??= facts(c).power?.w ?? 0);
 const hasPower = (c) => (c._pw ??= Boolean(facts(c).power?.ok));
@@ -3617,24 +4311,38 @@ const dayUse = (c) => (Boolean(c.du) && !c.osm && !c.auto) || (c.types ?? []).so
 // 상품 조건은 등록·운영자 근거가 있는 타입만(후기 언급 m은 “있다”의 근거로 약하다).
 const hasFirmType = (c, k) => (c.st ?? []).some((t) => t[0] === k && t[2] !== "m");
 const KINDS = [
-  ["GLAMPING", "글램핑", (c) => stayKinds(c).includes("GLAMPING")],
-  ["CARAVAN", "카라반", (c) => stayKinds(c).includes("CARAVAN")],
-  ["AUTO", "오토캠핑", (c) => (c.types ?? []).includes("자동차야영장") || hasFirmType(c, "AUTO")],
-  ["GENERAL", "일반 사이트", (c) => (c.types ?? []).includes("일반야영장") || hasFirmType(c, "PITCH")],
-  ["HOUSE", "숙박동·방갈로", (c) => stayKinds(c).includes("HOUSE")],
-  ["RV", "캠핑카·트레일러", (c) => stayKinds(c).includes("RV")],
-  ["CAR_CAMP", "차박", (c) => hasFirmType(c, "CAR_CAMP")],
-  ["DAY", "당일 캠크닉", dayUse],
+  ["GLAMPING", "글램핑", (c) => stayKinds(c).includes("GLAMPING"), "glamping"],
+  ["CARAVAN", "카라반", (c) => stayKinds(c).includes("CARAVAN"), "caravan"],
+  ["HOUSE", "숙박동", (c) => stayKinds(c).includes("HOUSE"), "home"],
+  ["RV", "캠핑카·트레일러", (c) => stayKinds(c).includes("RV"), "caravan"],
+  ["DECK", "데크", (c) => hasType(c, "DECK"), "layers"],
+  ["DUPLEX_DECK", "복층 데크", (c) => hasType(c, "DUPLEX_DECK"), "layers"],
+  ["TARP_ZONE", "타프존", (c) => hasType(c, "TARP_ZONE"), "tent"],
+  ["AUTO", "오토캠핑", (c) => (c.types ?? []).includes("자동차야영장") || hasFirmType(c, "AUTO") || hasType(c, "AUTO"), "car"],
+  ["CAR_CAMP", "차박", (c) => hasFirmType(c, "CAR_CAMP") || hasType(c, "CAR_CAMP"), "car"],
+  ["PET_SITE", "반려견 전용", (c) => hasType(c, "PET_SITE"), "paw"],
+  ["SOLO", "솔로·백패킹", (c) => hasType(c, "SOLO"), "tent"],
+  ["EQUIPPED", "장비 포함", (c) => hasType(c, "EQUIPPED"), "tent"],
 ];
-const KIND = Object.fromEntries(KINDS.map(([k, l, t]) => [k, { label: l, test: t }]));
+const EXTRA_KINDS = [
+  ["GENERAL", "일반 사이트", (c) => (c.types ?? []).includes("일반야영장") || hasFirmType(c, "PITCH"), "tent"],
+  ["DAY", "당일 캠크닉", dayUse, "sun"],
+];
+const ALL_KINDS = [...KINDS, ...EXTRA_KINDS];
+const KIND = Object.fromEntries(ALL_KINDS.map(([k, l, t]) => [k, { label: l, test: t }]));
 const W_OPTS = [[0, "상관없음"], [1, "전기 있음"], [600, "600W 이상"], [1100, "1,100W 이상"]];
 const SIZE_OPTS = [[0, "상관없음"], [6, "6m 이상"], [8, "8m 이상"], [10, "10m 이상"]];
 const R_OPTS = [10, 20, 30];
 const emptyCond = () => ({ sido: [], kind: [], pet: false, w: 0, size: 0, fire: false, park: false, win: false, dump: false, vr: false, best: false, sun: false, leaf: false, spring: false, summer: false, near: "", r: 20 });
+// VR·우수야영장은 실제 근거가 있는 레코드만 조건에 포함한다.
+const hasVerifiedVr = (c) => Boolean(vrUrl(c));
+const hasExcellentBadge = (c) => Array.isArray(c.best) ? c.best.length > 0 : Boolean(c.best);
 // t39 #41 계절·풍경·차박 조건(고캠핑 테마 th · 부대시설). 근거가 있으면 y, 테마 정보는 있는데 없으면 n, 정보 없으면 ?(아래 ‘확인 필요’).
 // 보험(영업배상책임)은 목록 카탈로그에 값이 없어(고캠핑 등록 0곳) 조건으로 두지 않는다 — 상세 ‘보험’ 줄에만.
 const COND_BOOL = {
   dump: ["덤프스테이션", (c) => (c.dump || (c.amenities ?? []).includes("덤프스테이션") ? "y" : "?")],
+  vr: ["360° VR 뷰", (c) => (c.vr ? "y" : "n")],
+  best: ["공인 우수야영장", (c) => (c.best?.length ? "y" : "n")],
   sun: ["일출 명소", (c) => (c.th?.includes("sunrise") ? "y" : c.th?.length ? "n" : "?")],
   leaf: ["단풍 명소", (c) => (c.th?.includes("autumn") ? "y" : c.th?.length ? "n" : "?")],
   spring: ["봄꽃", (c) => (c.th?.includes("spring") ? "y" : c.th?.length ? "n" : "?")],
@@ -3655,7 +4363,7 @@ function nearCenter(name) {
 // 정보 없음(?)은 결과에서 빼지 않고 아래쪽에 ‘확인 필요’로 남긴다. 지역·반경만 위치 사실이라 바로 거른다.
 function condEval(c, k = S.cond, skip = null) {
   const st = {};
-  if (skip !== "sido" && k.sido.length && !k.sido.includes(sidoShort(c.sido))) return null;
+  if (skip !== "sido" && k.sido.length && !k.sido.includes(REGION_OF[sidoShort(c.sido)])) return null;
   if (skip !== "near" && k.near) { const ctr = k._ctr; if (!ctr || !c.lat || km2(ctr, c) > k.r) return null; }
   if (skip !== "kind" && k.kind.length) {
     const hasInfo = (c.types ?? []).length > 0 || (c.st ?? []).length > 0;
@@ -3672,6 +4380,8 @@ function condEval(c, k = S.cond, skip = null) {
   if (skip !== "size" && k.size) { const m = maxSide(c); st.size = m ? (m >= k.size ? "y" : "n") : "?"; }
   if (skip !== "fire" && k.fire) { const f = facts(c).fire?.kind; st.fire = f === "FIREWOOD_OK" ? "y" : f ? "n" : "?"; }
   if (skip !== "win" && k.win) st.win = c.win === 1 ? "y" : c.win === 0 || noKeys(c).includes("NO_WINTER") ? "n" : "?";
+  if (skip !== "vr" && k.vr) st.vr = hasVerifiedVr(c) ? "y" : "n";
+  if (skip !== "best" && k.best) st.best = hasExcellentBadge(c) ? "y" : "n";
   for (const [b, [, t]] of Object.entries(COND_BOOL)) if (skip !== b && k[b]) st[b] = t(c);
   if (skip !== "park" && k.park) { const o = facts(c).park?.ok; st.park = o === true ? "y" : o === false || o === "part" ? (o === "part" ? "?" : "n") : "?"; }
   const vals = Object.values(st);
@@ -3684,7 +4394,7 @@ function condTest(c, k = S.cond, skip = null, strict = S.condStrict) {
   return Boolean(r) && (!strict || r.unknown === 0);
 }
 const COND_LABEL = { dump: "덤프스테이션", vr: "360° VR 뷰", best: "공인 우수야영장", sun: "일출 명소", leaf: "단풍 명소", spring: "봄꽃", summer: "여름 물놀이", win: "겨울 운영", kind: "상품", pet: "반려견", w: "전기", size: "사이트 크기", fire: "장작", park: "텐트 옆 주차" };
-const condActive = (k = S.cond) => k.sido.length + k.kind.length + (k.pet ? 1 : 0) + (k.w ? 1 : 0) + (k.size ? 1 : 0) + (k.fire ? 1 : 0) + (k.park ? 1 : 0) + (k.win ? 1 : 0) + Object.keys(COND_BOOL).filter((b) => k[b]).length + (k.near ? 1 : 0);
+const condActive = (k = S.cond) => k.sido.length + k.kind.length + (k.pet ? 1 : 0) + (k.w ? 1 : 0) + (k.size ? 1 : 0) + (k.fire ? 1 : 0) + (k.park ? 1 : 0) + (k.win ? 1 : 0) + (k.vr ? 1 : 0) + (k.best ? 1 : 0) + Object.keys(COND_BOOL).filter((b) => k[b]).length + (k.near ? 1 : 0);
 function condChips(k = S.cond) {
   const out = [];
   if (k.near) out.push(["near", `${k._ctr?.label ?? k.near} ${k.r}km 안`]);
@@ -3696,6 +4406,8 @@ function condChips(k = S.cond) {
   if (k.fire) out.push(["fire", "장작 가능"]);
   if (k.park) out.push(["park", "텐트 옆 주차"]);
   if (k.win) out.push(["win", "겨울 운영"]);
+  if (k.vr) out.push(["vr", "360° VR 뷰"]);
+  if (k.best) out.push(["best", "공인 우수야영장"]);
   for (const [b, [l]] of Object.entries(COND_BOOL)) if (k[b]) out.push([b, l]);
   return out;
 }
@@ -3712,6 +4424,8 @@ function condToParams(p, k = S.cond) {
   if (k.fire) p.set("fire", "1");
   if (k.park) p.set("park", "1");
   if (k.win) p.set("win", "1");
+  if (k.vr) p.set("vr", "1");
+  if (k.best) p.set("best", "1");
   for (const b of Object.keys(COND_BOOL)) if (k[b]) p.set(b, "1");
   if (k.near) { p.set("near", k.near); p.set("r", String(k.r)); }
   if (S.feeBand) p.set("fee", S.feeBand);
@@ -3720,9 +4434,9 @@ function condToParams(p, k = S.cond) {
 }
 function condFromParams(q) {
   const k = emptyCond(), list = (n) => (q.get(n) ?? "").split(",").filter(Boolean);
-  k.sido = list("sido").filter((x) => SIDOS.includes(x));
+  k.sido = normalizeAreaKeys(list("sido"));
   k.kind = list("kind").filter((x) => KIND[x]);
-  k.pet = q.get("pet") === "1"; k.fire = q.get("fire") === "1"; k.park = q.get("park") === "1"; k.win = q.get("win") === "1";
+  k.pet = q.get("pet") === "1"; k.fire = q.get("fire") === "1"; k.park = q.get("park") === "1"; k.win = q.get("win") === "1"; k.vr = q.get("vr") === "1"; k.best = q.get("best") === "1";
   for (const b of Object.keys(COND_BOOL)) k[b] = q.get(b) === "1";
   k.w = W_OPTS.some(([v]) => v === Number(q.get("w"))) ? Number(q.get("w")) : 0;
   k.size = SIZE_OPTS.some(([v]) => v === Number(q.get("size"))) ? Number(q.get("size")) : 0;
@@ -3743,7 +4457,7 @@ function condSheet() {
       if (!b) return;
       const [key, val] = b.dataset.c.split(":"), k = S.condDraft;
       if (key === "sido" || key === "kind") k[key] = k[key].includes(val) ? k[key].filter((x) => x !== val) : [...k[key], val];
-      else if (key === "pet" || key === "fire" || key === "park" || key === "win" || key in COND_BOOL) k[key] = !k[key];
+      else if (key === "pet" || key === "fire" || key === "park" || key === "win" || key === "vr" || key === "best" || key in COND_BOOL) k[key] = !k[key];
       else if (key === "w" || key === "size" || key === "r") k[key] = Number(val);
       else if (key === "fee") S.feeDraft = S.feeDraft === val ? "" : val;
       else if (key === "strict") S.strictDraft = !S.strictDraft;
@@ -3792,7 +4506,7 @@ function paintCondSheet() {
   dlg.innerHTML = `<div class="sheet-in cond-in">
     <div class="sheet-head"><h2 id="cond-title">조건으로 찾기</h2><button type="button" class="icon-btn sheet-close" data-c="close" aria-label="닫기">${ic("close")}</button></div>
     <div class="cond-body">
-      <section><h3>지역</h3><div class="cond-chips">${SIDOS.map((x) => chip("sido", x, x, k.sido.includes(x), pSido.filter((c) => sidoShort(c.sido) === x).length)).join("")}</div></section>
+      <section><h3>지역</h3><div class="cond-chips">${REGION_GROUPS.map(([x, label]) => chip("sido", x, label, k.sido.includes(x), pSido.filter((c) => REGION_OF[sidoShort(c.sido)] === x).length)).join("")}</div></section>
       <section><h3>출발지에서 내비 시간</h3><div class="cond-chips drive-chips">${originPicker("in-sheet")}</div><div class="cond-chips drive-chips">${DRIVES.map(([h, l]) => `<button type="button" class="chip" data-drive="${h}" aria-pressed="${S.drive === h}"${!S.origin && h ? " disabled" : ""}>${h ? `${l} 안` : l}</button>`).join("")}</div></section>
       <section><h3>주변으로</h3><div class="cond-near"><input type="search" data-near value="${esc(k.near)}" placeholder="예: 파주, 가평, 양평" aria-label="시·군 이름" autocomplete="off">${R_OPTS.map((r) => chip("r", r, `${r}km`, k.r === r)).join("")}</div>${k.near ? `<p class="cond-hint">${k._ctr ? `${esc(k._ctr.label)} 가운데에서 ${k.r}km 안` : "그 이름의 시·군을 찾지 못했어요"}</p>` : ""}</section>
       <section><h3>상품·이용</h3><div class="cond-chips">${KINDS.map(([x, l]) => chip("kind", x, l, k.kind.includes(x), tally("kind", [x]))).join("")}</div></section>
@@ -3824,12 +4538,13 @@ const mdKst = (s) => new Date(s).toLocaleDateString("ko-KR", { month: "numeric",
 const THANKQ_VIEW = (cseq, d) => `https://m.thankqcamping.com/resv/view.hbb?cseq=${encodeURIComponent(cseq)}${d ? `&res_dt=${d.replaceAll("-", "")}` : ""}`;
 function listParams() {
   const q = new URLSearchParams(curHash().split("?")[1] ?? "");
-  const area = q.get("area");
-  return { area: area && AREAS.some(([k]) => k === area) ? area : "all", q: q.get("q") ?? "", cond: condFromParams(q), fee: q.get("fee") ?? "", stype: q.get("stype") ?? "" };
+  const areas = normalizeAreaKeys(q.get("area"));
+  return { area: areas.length === 1 ? areas[0] : "all", areas, q: q.get("q") ?? "", cond: condFromParams(q), fee: q.get("fee") ?? "", stype: q.get("stype") ?? "" };
 }
-function listHash({ area = S.area, q = S.q } = {}) {
+function listHash({ area = S.area, areas = regionKeys(), q = S.q } = {}) {
   const p = new URLSearchParams();
-  if (area && area !== "all") p.set("area", area);
+  const keys = normalizeAreaKeys(areas?.length ? areas : area);
+  if (keys.length) p.set("area", keys.join(","));
   if (q) p.set("q", q);
   condToParams(p);
   const s = p.toString();
@@ -3912,12 +4627,11 @@ function listRow({ c, ce }, i = 0) {
 }
 
 /** 지역·사이트·요금 필터 모듈 (목록·메인 공통). prefix로 data-attr 구분. */
-function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAttr = "data-fee-band", areaPressed = (k) => S.area === k, stypePressed = (k) => S.stype === k, feePressed = (k) => (S.feeBand ?? "") === k } = {}) {
+function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAttr = "data-fee-band", areaPressed = (k) => regionSelected(k), stypePressed = (k) => S.stype === k, feePressed = (k) => (S.feeBand ?? "") === k } = {}) {
   const areaChips = AREAS.map(([k, l]) => `<button type="button" class="chip" ${areaAttr}="${k}" aria-pressed="${areaPressed(k)}">${l}</button>`).join("");
-  const typeChips = [...STYPES.filter(([k]) => STAY_KEYS.has(k)), ...STYPES.filter(([k]) => !STAY_KEYS.has(k))]
-    .filter(([k]) => k !== "PITCH" && k !== "PRIVATE_BATH")
-    .map(([k, l, i]) => {
-      const n = countOf((c) => (STAY_KEYS.has(k) ? stayKinds(c).includes(k) : hasType(c, k)));
+  const typeChips = KINDS
+    .map(([k, l, test, i]) => {
+      const n = countOf(test);
       return n ? `<button type="button" class="chip type-chip" ${stypeAttr}="${k}" aria-pressed="${stypePressed(k)}">${ic(i)}${l} <i>${fmt(n)}</i></button>` : "";
     }).join("");
   const fee = (k, l) => `<button type="button" class="chip fee-chip" ${feeAttr}="${k}" aria-pressed="${feePressed(k)}">${l}</button>`;
@@ -3931,8 +4645,8 @@ function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAt
 // 접힌 칩 줄에서 고른 값(지역 묶음·사이트 형태·요금)은 지울 수 있는 알약으로만 보인다(PC는 칩 줄에 이미 보이므로 숨김 = 중복 없음).
 function listMobilePills() {
   const out = [];
-  const area = AREAS.find(([k]) => k === S.area && k !== "all");
-  if (area && !S.cond.sido.length) out.push(`<button type="button" class="cond-pill m-only" data-list-area-k="all" aria-label="${esc(area[1])} 지우기">${esc(area[1])}<span aria-hidden="true">×</span></button>`);
+  const areas = regionKeys();
+  if (areas.length && !S.cond.sido.length) out.push(`<button type="button" class="cond-pill m-only" data-list-area-k="all" aria-label="${esc(areas.join(" · "))} 지우기">${esc(areas.join(" · "))}<span aria-hidden="true">×</span></button>`);
   const st = S.stype && STYPES.find(([k]) => k === S.stype);
   if (st) out.push(`<button type="button" class="cond-pill m-only" data-list-stype="" aria-label="${esc(st[1])} 지우기">${esc(st[1])}<span aria-hidden="true">×</span></button>`);
   const FEE_L = { u3: "~3만원", "3to5": "3~5만원", "5to7": "5~7만원", "7to10": "7만원~10만원", "10to20": "10만원~20만원", o20: "20만원+", o7: "7만원+" };
@@ -3941,7 +4655,7 @@ function listMobilePills() {
 }
 function listView() {
   const p = listParams();
-  S.area = p.cond.sido.length ? "all" : p.area; S.q = p.q;
+  setRegionKeys(p.cond.sido.length ? [] : p.areas); S.q = p.q;
   S.cond = p.cond; if (["u3", "3to5", "5to7", "7to10", "10to20", "o20", "o7", ""].includes(p.fee)) S.feeBand = p.fee;
   S.condStrict = new URLSearchParams(curHash().split("?")[1] ?? "").get("strict") === "1";
   // 목록 화면에 보이는 조건만 결과를 바꾼다.
@@ -3956,7 +4670,7 @@ function listView() {
           areaAttr: "data-list-area-k",
           stypeAttr: "data-list-stype",
           feeAttr: "data-fee-band",
-          areaPressed: (k) => S.area === k && !S.cond.sido.length,
+          areaPressed: (k) => regionSelected(k) && !S.cond.sido.length,
         })}
       </div>
       <div class="list-tools">
@@ -3993,7 +4707,7 @@ function bindList() {
   const onSubmit = (e) => { const f = e.target.closest("[data-list-search]"); if (!f) return; e.preventDefault(); S.q = f.q.value.trim(); go(); };
   const onClick = (e) => {
     const a = e.target.closest("[data-list-area-k]");
-    if (a) { S.area = a.dataset.listAreaK; S.cond.sido = []; go(); return; }
+    if (a) { setRegionKeys(a.dataset.listAreaK === "all" ? [] : toggleRegion(a.dataset.listAreaK)); S.cond.sido = []; go(); return; }
     const st = e.target.closest("[data-list-stype]");
     if (st) { S.stype = st.dataset.listStype || ""; go(); return; }
     const x = e.target.closest("[data-cond-x]");
@@ -4080,6 +4794,74 @@ function bindRegion(sido, sgg) {
   cleanup.push(() => { document.title = "렛츠 캠핑 · 취향대로 찾아 떠나는 전국 캠핑장"; });
 }
 
+// 가까운순 기준 위치 고르기(t45u): 내 위치(GPS) 또는 시·군·구/주소 검색(카카오 장소 검색, 안 되면 수집 데이터의 시·군 중심).
+function nearSheet(onPick) {
+  let dlg = $("#near-dialog");
+  if (!dlg) {
+    dlg = document.createElement("dialog");
+    dlg.className = "sheet near-sheet"; dlg.id = "near-dialog"; dlg.setAttribute("aria-labelledby", "near-title");
+    document.body.append(dlg);
+  }
+  const sggs = [...new Set(S.camps.map((c) => `${sidoShort(c.sido)} ${c.sigungu ?? ""}`.trim()).filter((x) => / /.test(x)))].sort((a, b) => a.localeCompare(b, "ko"));
+  const pick = (pt) => { nearPt = pt; store.set("mc-near-pt", pt); dlg.close(); toast(`${pt.label} 기준으로 가까운 순이에요`); onPick?.(); };
+  const paint = (q = "", found = []) => {
+    const loc = q ? sggs.filter((x) => x.replace(/\s/g, "").includes(q.replace(/\s/g, ""))).slice(0, 8) : [];
+    dlg.innerHTML = `<div class="sheet-in near-in">
+      <div class="sheet-head"><h2 id="near-title">어디서 가까운 순으로 볼까요</h2><button type="button" class="icon-btn sheet-close" data-n="close" aria-label="닫기">${ic("close")}</button></div>
+      <button type="button" class="btn near-here" data-n="here">${ic("pin")}내 위치 사용</button>
+      <label class="near-q">${ic("search")}<input type="search" data-near-q value="${esc(q)}" placeholder="시·군·구 또는 주소 (예: 수원, 가평)" autocomplete="off" enterkeyhint="search"></label>
+      <div class="near-list">
+        ${found.map((f, i) => `<button type="button" class="near-opt" data-n="k:${i}">${ic("pin")}<span><b>${esc(f.label)}</b><small>${esc(f.sub ?? "")}</small></span></button>`).join("")}
+        ${loc.map((x) => `<button type="button" class="near-opt" data-n="s:${esc(x)}">${ic("map")}<span><b>${esc(x)}</b></span></button>`).join("")}
+      </div>
+      ${nearPt ? `<p class="near-cur">지금 기준: <b>${esc(nearPt.label)}</b></p>` : ""}
+    </div>`;
+    dlg._found = found;
+    const inp = dlg.querySelector("[data-near-q]");
+    if (S._nearFocus) { inp.focus(); inp.setSelectionRange(q.length, q.length); }
+  };
+  if (!dlg._bound) {
+    dlg._bound = true;
+    dlg.addEventListener("click", async (e) => {
+      const b = e.target.closest("[data-n]"); if (!b) { if (e.target === dlg) dlg.close(); return; }
+      const v = b.dataset.n;
+      if (v === "close") { dlg.close(); return; }
+      if (v === "here") {
+        b.disabled = true;
+        const pos = await new Promise((res) => (navigator.geolocation ? navigator.geolocation.getCurrentPosition((p) => res(p.coords), () => res(null), { maximumAge: 600000, timeout: 8000 }) : res(null)));
+        b.disabled = false;
+        if (!pos) { toast("위치를 가져오지 못했어요. 지역을 검색해 주세요"); return; }
+        dlg._pick({ lat: pos.latitude, lng: pos.longitude, label: "내 위치", kind: "gps" });
+        return;
+      }
+      if (v.startsWith("k:")) { const f = dlg._found?.[Number(v.slice(2))]; if (f) dlg._pick({ lat: f.lat, lng: f.lng, label: f.label, kind: "kakao" }); return; }
+      if (v.startsWith("s:")) {
+        const [sd, ...rest] = v.slice(2).split(" "); const sg = rest.join(" ");
+        const pts = S.camps.filter((c) => c.lat && sidoShort(c.sido) === sd && c.sigungu === sg);
+        if (pts.length) dlg._pick({ lat: pts.reduce((a, c) => a + c.lat, 0) / pts.length, lng: pts.reduce((a, c) => a + c.lng, 0) / pts.length, label: `${sd} ${sg}`, kind: "region" });
+      }
+    });
+    dlg.addEventListener("input", (e) => {
+      if (!e.target.matches("[data-near-q]")) return;
+      const q = e.target.value.trim();
+      clearTimeout(dlg._t);
+      dlg._t = setTimeout(async () => {
+        let found = [];
+        if (q.length >= 2) {
+          try {
+            const kakao = await loadKakao();
+            if (kakao.maps.services) found = await new Promise((res) => new kakao.maps.services.Places().keywordSearch(q, (d, st) => res(st === "OK" ? d.slice(0, 5).map((x) => ({ label: x.place_name, sub: x.road_address_name || x.address_name, lat: Number(x.y), lng: Number(x.x) })) : [])));
+          } catch { found = []; }
+        }
+        S._nearFocus = true; paint(q, found); S._nearFocus = false;
+      }, 300);
+    });
+  }
+  dlg._pick = pick;
+  paint();
+  dlg.showModal();
+}
+
 function themeView(themeKey) {
   const tName = themeName(themeKey);
   const tImg = themeImg(themeKey);
@@ -4087,25 +4869,37 @@ function themeView(themeKey) {
   const tSub = isParkTheme
     ? "공공 원천으로 확인한 공원·생활 시설입니다. 야영·취사는 관리기관에 확인하세요."
     : (THEME_SUBS[themeKey] ?? "자연과 함께하는 특별한 테마 캠핑장");
-  const headingNoun = isParkTheme ? "공원 정보" : "캠핑장";
+  const headingNoun = isParkTheme ? "공원 정보" : /캠핑장$/.test(tName) ? "" : "캠핑장";
   const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "REVIEWS" ? (c) => Boolean((c.rv?.p?.length ?? 0) >= 2 || (c.rv?.t ?? 0) >= 4) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
   const totalInTheme = S.camps.filter(testFn).length;
   const isWp = themeKey === "WATER_PLAY";
+  if (themeKey !== "UNIQUE") uniqueSubs.clear();
 
   return `<section class="theme-page" aria-labelledby="tp-title">
     <div class="theme-hero" style="background-image: url('${tImg}')">
       <div class="theme-hero-overlay"></div>
       <div class="theme-hero-content">
         <a class="link theme-back" href="${APP_BASE}">${ic("left")} 처음으로</a>
-        <h1 id="tp-title">${esc(tName)} <em>${headingNoun}</em></h1>
+        <h1 id="tp-title">${esc(tName)}${headingNoun ? ` <em>${headingNoun}</em>` : ""}</h1>
         <p class="theme-hero-sub">${esc(tSub)} · 전국 <b>${fmt(totalInTheme)}곳</b></p>
       </div>
     </div>
     <div class="theme-body">
       ${isWp ? `<div class="theme-closed-alert">${ic("info")}<div><strong>여름 시즌 물놀이터 운영 종료 안내</strong><p>전국 물놀이터·야영장 수영장 정보입니다. 현재는 하절기 운영이 종료된 상태입니다. 렛츠 캠핑에서 미리 시설 정보를 확인하시고 다음 시즌 피서 계획에 참고해 보세요!</p></div></div>` : ""}
+      <div class="theme-uq-bar${themeKey === "UNIQUE" ? "" : " sort-only"}">
+        ${themeKey === "UNIQUE" ? `<div class="rail chips theme-uq" aria-label="이색 분류 (여러 개 선택)">
+          <button type="button" class="chip" data-theme-uq="" aria-pressed="${!uniqueSubs.size}">전체 <i>${fmt(totalInTheme)}</i></button>
+          ${UNIQUE_SUBS.map(([k, l]) => [k, l, S.camps.filter((c) => c.uq?.includes(k)).length]).filter((x) => x[2]).map(([k, l, n]) => `<button type="button" class="chip" data-theme-uq="${k}" aria-pressed="${uniqueSubs.has(k)}">${esc(l)} <i>${fmt(n)}</i></button>`).join("")}
+        </div>` : ""}
+        <div class="theme-sort" role="group" aria-label="정렬">
+          <button type="button" class="chip" data-uq-sort="area" aria-pressed="${uqSort === "area"}">${ic("size")}사이트 넓은순</button>
+          <button type="button" class="chip" data-uq-sort="near" aria-pressed="${uqSort === "near"}">${ic("pin")}<span data-near-lbl>${uqSort === "near" && nearPt ? esc(nearPt.label) : "가까운순"}</span></button>
+          <button type="button" class="chip" data-uq-sort="fee" aria-pressed="${uqSort === "fee"}">${ic("won")}저렴한순</button>
+        </div>
+      </div>
       <div class="theme-tools-bar">
         <div class="rail chips theme-areas" aria-label="지역">
-          ${AREAS.map(([k, l]) => `<button type="button" class="chip" data-theme-area="${k}" aria-pressed="${S.area === k}">${l}</button>`).join("")}
+          ${AREAS.map(([k, l]) => `<button type="button" class="chip" data-theme-area="${k}" aria-pressed="${regionSelected(k)}">${l}</button>`).join("")}
         </div>
         <div class="theme-subtools">
           <span class="theme-count" data-theme-count></span>
@@ -4123,8 +4917,18 @@ function bindTheme(themeKey) {
   let pageN = 24;
   const getThemeList = () => {
     let list = S.camps.filter(testFn);
-    if (S.area !== "all") {
-      list = list.filter((c) => AREA_OF[sidoShort(c.sido)] === S.area);
+    if (themeKey === "UNIQUE" && uniqueSubs.size) list = list.filter((c) => c.uq?.some((k) => uniqueSubs.has(k)));
+    if (regionKeys().length) list = list.filter((c) => regionMatches(c));
+    if (uqSort) {
+      // 값이 없는 곳은 지우지 않고 맨 뒤(정보 많은 순)로 둔다.
+      const key = uqSort === "area" ? (c) => { const a = siteArea(c); return a == null ? null : -a; }
+        : uqSort === "fee" ? (c) => campFeeMin(c) ?? null
+        : (c) => (nearPt && c.lat ? km2(nearPt, c) : null);
+      const has = [], none = [];
+      for (const c of list) { const k = key(c); (k == null ? none : has).push([k, c]); }
+      has.sort((a, b) => a[0] - b[0] || rich(b[1]) - rich(a[1]));
+      none.sort((a, b) => rich(b[1]) - rich(a[1]));
+      return [...has, ...none].map((x) => x[1]);
     }
     // 공원은 사진이 없는 공공 장소를 포함하는 별도 탐색 테마다. 이 경로에서는
     // 공원 전용 정보 카드로 보이므로 사진 유무로 제거하지 않는다.
@@ -4153,7 +4957,7 @@ function bindTheme(themeKey) {
     const shown = list.slice(0, pageN);
     $("[data-theme-count]").innerHTML = `총 <b>${fmt(list.length)}</b>곳`;
     grid.innerHTML = shown.length
-      ? shown.map((c, i) => isPublicPark(c) ? publicParkCard(c) : card(c, i, { isWaterPlay: themeKey === "WATER_PLAY", theme: themeKey })).join("")
+      ? shown.map((c, i) => isPublicPark(c) ? publicParkCard(c) : themeCampCard(c, i, themeKey)).join("")
       : `<div class="empty">${ic("search")}<b>이 지역에는 맞는 캠핑장이 없어요</b><button class="btn ghost" type="button" data-theme-clear-area>전국 보기</button></div>`;
     $("[data-theme-more]").hidden = pageN >= list.length;
     initCarousels(grid);
@@ -4165,17 +4969,39 @@ function bindTheme(themeKey) {
 
   const v = $("#view");
   const onClick = (e) => {
+    const u = e.target.closest("[data-theme-uq]");
+    if (u) {
+      const k = u.dataset.themeUq;
+      if (!k) uniqueSubs.clear(); else if (uniqueSubs.has(k)) uniqueSubs.delete(k); else uniqueSubs.add(k);
+      $$("[data-theme-uq]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.themeUq ? uniqueSubs.has(x.dataset.themeUq) : !uniqueSubs.size)));
+      pageN = 24;
+      renderThemeGrid();
+      return;
+    }
+    const so = e.target.closest("[data-uq-sort]");
+    if (so) {
+      const k = so.dataset.uqSort;
+      const apply = (val) => {
+        uqSort = val; store.set("mc-uq-sort", uqSort);
+        $$("[data-uq-sort]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.uqSort === uqSort)));
+        const lbl = $("[data-near-lbl]"); if (lbl) lbl.textContent = uqSort === "near" && nearPt ? nearPt.label : "가까운순";
+        pageN = 24; renderThemeGrid();
+      };
+      if (k === "near") { nearSheet(() => apply("near")); return; }
+      apply(uqSort === k ? "" : k);
+      return;
+    }
     const a = e.target.closest("[data-theme-area]");
     if (a) {
-      S.area = a.dataset.themeArea;
-      $$("[data-theme-area]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.themeArea === S.area)));
+      toggleRegion(a.dataset.themeArea);
+      $$("[data-theme-area]").forEach((x) => x.setAttribute("aria-pressed", String(regionSelected(x.dataset.themeArea))));
       pageN = 24;
       renderThemeGrid();
       return;
     }
     if (e.target.closest("[data-theme-clear-area]")) {
-      S.area = "all";
-      $$("[data-theme-area]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.themeArea === "all")));
+      setRegionKeys([]);
+      $$("[data-theme-area]").forEach((x) => x.setAttribute("aria-pressed", String(regionSelected(x.dataset.themeArea))));
       pageN = 24;
       renderThemeGrid();
       return;
@@ -4242,7 +5068,7 @@ document.addEventListener("click", async (e) => {
 }, true);
 function homeClicks(e) {
   const a = e.target.closest("[data-area]");
-  if (a) { S.area = a.dataset.area; $$("[data-area]").forEach((x) => x.setAttribute("aria-pressed", String(x === a))); renderResults(); return; }
+  if (a) { toggleRegion(a.dataset.area); $$("[data-area]").forEach((x) => x.setAttribute("aria-pressed", String(regionSelected(x.dataset.area)))); renderResults(); return; }
   const t = e.target.closest("[data-theme]");
   if (t) { S.theme = S.theme === t.dataset.theme ? null : t.dataset.theme; $$("[data-theme]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.theme === S.theme))); renderResults(); return; }
   const all = e.target.closest("[data-theme-all]");
@@ -4272,12 +5098,12 @@ function homeClicks(e) {
   const cl = e.target.closest("[data-clear]");
   if (cl) {
     const k = cl.dataset.clear;
-    if (k === "q") S.q = ""; else if (k === "area") S.area = "all"; else if (k === "theme") S.theme = null; else if (k === "stype") S.stype = "";
+    if (k === "q") S.q = ""; else if (k === "area") setRegionKeys([]); else if (k === "theme") S.theme = null; else if (k === "stype") S.stype = "";
     else if (k === "feeBand") { S.feeBand = ""; store.set("mc-feeband", ""); $$("[data-fee-band]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.feeBand === ""))); }
     else if (k.startsWith("quick:")) S.quick.delete(k.slice(6));
     else {
       // ‘조건 지우기’(결과 0건 화면): 칩 조건뿐 아니라 조건 시트(S.cond)·확인된 곳만·출발지 이동 시간까지 모두 지운다(소유자 2026-11-01: 버튼이 안 먹음 — 시트 조건이 남아 계속 0건).
-      S.q = ""; S.area = "all"; S.theme = null; S.stype = ""; S.quick.clear(); S.feeBand = ""; store.set("mc-feeband", "");
+      S.q = ""; setRegionKeys([]); S.theme = null; S.stype = ""; S.quick.clear(); S.feeBand = ""; store.set("mc-feeband", "");
       S.cond = emptyCond(); S.condStrict = false; S.drive = 0; store.set("mc-drive", 0);
       $$("[data-fee-band]").forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.feeBand === "")));
     }
@@ -4431,6 +5257,8 @@ function specTiles(c, d) {
       if (nk.includes("NO_PET")) { const t = d?.house_rules?.tags?.find((y) => y.k === "NO_PET"); x = { v: "불가", g: t?.g ?? "c", src: { label: t?.src ?? "업장 이용 규칙", url: t?.url, at: t?.at, quote: t?.quote } }; }
       else if (petAllowed(c) && x && /불가|금지/.test(detailValue(x))) x = f.pet?.ok ? f.pet : { v: nk.includes("BIG_DOG") ? "소형견 동반 가능" : "동반 가능", g: "c", src: { label: "고캠핑·업장 등록 분류(반려견 동반)", url: c.gc_url ?? c.homepage } };
       x = normNo(x);
+      // 일부 사이트만 동반 가능(운영 기관 확인, 영우 님 2026-11-04 승인)은 원문 그대로 보인다.
+      if (/에서만/.test(PF(d, "PET")?.value ?? "")) x = profFact(PF(d, "PET"));
     }
     if (k === "power" && f.power?.v === "있음" && mention.power?.v) x = mention.power;
     const isNo = Boolean(x && (x.ok === false || (k === "fire" && x.kind === "NO_FIRE") || /불가|금지|불가능/.test(detailValue(x))));
@@ -4872,6 +5700,11 @@ async function detailView(id) {
   const known = spec.filter((k) => f[k]).length;
   const o = openingOf(c);
   const us = usage(c, d);
+  const extraUsageRows = profileUsageRows(d, "EXTRA_FEE", "기타");
+  const usageRows = us.filter(([, x]) => x).map(([l, x, icon]) => `<div class="use"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${factValueHtml({ ...x, v: wonText(detailValue(x)) })}${asOfMention(x)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span></dd></div>`).join("");
+  const usageBlock = usageRows || extraUsageRows
+    ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><dl class="uses">${usageRows}${extraUsageRows}</dl></section>`
+    : `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><p class="muted" style="padding: 18px 0; color: var(--ink-3); font-size: .88rem;">등록된 상세 이용 정보가 없습니다.</p></section>`;
   return `<article class="detail" data-id="${esc(c.id)}">
     <div class="d-bar"><a class="icon-btn" href="${APP_BASE}" data-back aria-label="뒤로">${ic("left")}</a><span class="d-bar-acts">${heartBtn(c, { label: true })}<button class="d-share" type="button" data-share-place="${esc(c.id)}" aria-label="링크 공유">${ic("share")}<span>공유</span></button></span></div>
     <header class="d-head">
@@ -4884,28 +5717,28 @@ async function detailView(id) {
       <aside class="d-side">${reserveCard(c, d)}</aside>
     </header>
     ${galleryHtml(c)}
-    <nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${[["sec-price", "요금"], ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-nearby", "주변"], ["sec-events", "행사"], ["sec-reviews", "후기"], ["sec-info", "업체"]].map(([id, l], i) => `<a href="#${id}" data-jump="${id}"${i === 0 ? " aria-current" : ""}>${l}</a>`).join("")}</div></nav>
+    <nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${[["sec-price", "요금"], ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-reviews", "후기"], ["sec-nearby", "주변"], ["sec-events", "행사"], ["sec-info", "업체"]].map(([id, l], i) => `<a href="#${id}" data-jump="${id}"${i === 0 ? " aria-current" : ""}>${l}</a>`).join("")}</div></nav>
     <div class="d-body">
       <div class="d-main">
         ${siteTypesHtml(c, d)}
         ${specSection(c, d)}
         ${priceHtml(c, d)}
         ${bookingHtml(c, d)}
-        ${us.some(([, x]) => x) ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><dl class="uses">${us.filter(([, x]) => x).map(([l, x, icon]) => `<div class="use"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${factValueHtml({ ...x, v: wonText(detailValue(x)) })}${asOfMention(x)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span></dd></div>`).join("")}</dl></section>` : `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><p class="muted" style="padding: 18px 0; color: var(--ink-3); font-size: .88rem;">등록된 상세 이용 정보가 없습니다.</p></section>`}
+        ${usageBlock}
         ${amenityHtml(c, d)}
         ${houseRulesHtml(c, d)}
         <section class="d-sec" data-cond hidden></section>
-        ${reviewHtml(d, c)}
         ${operatorHtml(d, c)}
         ${programsHtml(d)}
         ${layoutHtml(d, c)}
         <section class="d-sec site-picks-sec" id="sec-site-picks" data-site-picks hidden></section>
         ${operatorMediaHtml(d)}
         ${mediaHubHtml(d, c)}
+        ${reviewHtml(d, c)}
+        ${reviewLinksHtml(d, c)}
         ${nearbyHubHtml(c, d)}
         ${similarHtml(c)}
         <section class="d-sec ev-sec" id="sec-events" data-events><div class="sec-head">${iconTitle("fest", "행사")}</div><div data-events-body></div></section>
-        ${reviewLinksHtml(d, c)}
         ${infoHtml(c)}
         ${introHtml(d)}
         ${commentsHtml(c)}
@@ -4951,6 +5784,39 @@ function asOf(at) {
 }
 const asOfMention = (x) => (x?.g === "m" ? `<span class="badge-check">확인필요</span>${asOf(x.src?.at)}` : "");
 const SRC_LABEL = { gocamping: "한국관광공사 고캠핑 등록값", gocamping_intro: "고캠핑 소개글", kakao_local: "카카오 장소 분류", naver_local: "네이버 장소 분류", operator_homepage: "운영자 홈페이지", blog_mention: "블로그 후기 언급", cafe_mention: "카페 글 언급", kin: "지식iN 언급" };
+// 추가 요금·대여(EXTRA_FEE)와 샤워·위생(SANITARY) 프로필 값을 상세 섹션으로(영우 님 2026-11-04 승인). 값이 없으면 섹션을 만들지 않는다.
+const PIECE_IC = (t) => (/샤워|탈수|드라이|화장실|세면/.test(t) ? "bath" : /장작|화로|숯/.test(t) ? "flame" : /입실|퇴실|연장/.test(t) ? "clock-in" : /대여|렌탈/.test(t) ? "cart" : /개수대|설거지/.test(t) ? "fountain" : "won");
+function factPieces(v) {
+  return String(v ?? "").split(/\s+·\s+|\n+/).map((t) => t.trim()).filter(Boolean).map((t) => {
+    const w = t.split(/\s+/); const i = w.findIndex((x) => /\d/.test(x));
+    return i > 0 ? [w.slice(0, i).join(" "), w.slice(i).join(" ")] : ["", t];
+  });
+}
+function profileListSection(d, key, id, icon, title, other) {
+  const x = profFact(PF(d, key));
+  if (!x?.v || /^업장 미공지/.test(String(x.v))) return "";
+  const rows = factPieces(x.v);
+  if (!rows.length) return "";
+  return `<section class="d-sec" id="${id}"><div class="sec-head">${iconTitle(icon, title)}</div><dl class="uses">${rows.map(([l, v]) => `<div class="use"><dt>${ic(PIECE_IC(l + v))}${esc(l || other)}</dt><dd><span class="use-val">${esc(l ? wonText(v) : v)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, title)}</span></dd></div>`).join("")}</dl></section>`;
+}
+// 추가 요금·대여는 이용 정보 안에 합쳐 표시한다. 샤워·위생은 편의시설과
+// 같은 수량을 반복하므로 별도 섹션으로 렌더링하지 않는다.
+function profileUsageRows(d, key, other = "기타") {
+  const x = profFact(PF(d, key));
+  if (!x?.v || /^업장 미공지/.test(String(x.v))) return "";
+  return factPieces(x.v).map(([l, v]) => {
+    const label = /인원/.test(`${l} ${v}`) ? "추가 인원" : (l || other);
+    return `<div class="use"><dt>${ic(PIECE_IC(l + v))}${esc(label)}</dt><dd><span class="use-val">${esc(l ? wonText(v) : v)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, "추가 요금·대여")}</span></dd></div>`;
+  }).join("");
+}
+const extraFeeSection = () => "";
+const sanitarySection = () => "";
+
+function detailedOpeningCycle(value) {
+  const s = String(value ?? "").replace(/\s+/g, " ").trim();
+  if (!s || /통신판매|중개자|예약.?이용 책임|오픈 일정은 캠핑장이 정한다|운영자 안내|홈페이지마다|홈페이지\s*(?:공지|예약\s*안내)|일정을 따른다/.test(s)) return "";
+  return /(?:매월|매주|매일|첫째|둘째|셋째|넷째|마지막|요일|\d{1,2}\s*일|(?:월|화|수|목|금|토|일)요일)/.test(s) ? s : "";
+}
 function iconTitle(icon, label) { return `<div class="sec-title">${ic(icon, "line")}<h2>${esc(label)}</h2></div>`; }
 // 화면에서 쓰는 문장은 데이터 원문을 그대로 반복하지 않는다. 공통 규칙으로 공백·목록기호를
 // 정리하고 한 줄 길이만 남긴다. 원문과 출처는 항상 srcTip()의 작은 i에 보관한다.
@@ -5428,7 +6294,7 @@ const OPERATOR_CATEGORIES = [
   ["이용 규칙", /쓰레기|분리수거|외부인|준수|강제퇴장|입장/], ["사이트 이용", /일반.?사이트|오토.?캠핑|캠핑카|카라반|텐트/],
 ];
 function compactOperatorText(value) {
-  return String(value ?? "").replace(/^\s*[a-z]+(?:_[a-z]+)*\s+(?=[가-힣])/, "").replace(/^[*\-·\s√✓✔※▶►▷■□●○◆◇★☆>]+/, "").replace(/\s+/g, " ").replace(/\s*([,.:])\s*(?!\d)/g, "$1 ").trim();
+  return String(value ?? "").replace(/^\s*[a-z]+(?:_[a-z]+)*\s+(?=[가-힣])/, "").replace(/(^|\n)\s*\+\s*/g, "$1").replace(/^[*\-·\s√✓✔※▶►▷■□●○◆◇★☆>]+/, "").replace(/\s+/g, " ").replace(/\s*([,.:])\s*(?!\d)/g, "$1 ").trim();
 }
 function operatorSummary(label, texts) {
   const text = texts.join(" · ");
@@ -5600,9 +6466,10 @@ function bookingHtml(c, d) {
   const pf = g?.platform ?? {};
   const o = openingOf(c) ?? (S.openings.get(String(c.id)) ?? null);
   const openTimeStr = o?.at ? new Date(o.at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", weekday: "short", hour: "2-digit", minute: "2-digit" }) : "";
+  const cycleText = detailedOpeningCycle(pf.opening);
   const meta = [
     o ? ["다음 오픈", [o.txt, openTimeStr, o.label].filter(Boolean).join(" · ")] : null,
-    ["오픈 주기", pf.opening]
+    cycleText ? ["오픈 주기", cycleText] : null
   ].filter(Boolean).filter(([, v]) => v && !/운영자 안내에 따름|홈페이지마다 다름|홈페이지\s*(공지|예약\s*안내)|일정을 따른다/.test(v));
   if (!main && !c.tel && !meta.length && !o) return "";
   return `<section class="d-sec" id="sec-booking"><div class="sec-head">${iconTitle("booking", "예약 방법")}${main ? `<span class="sec-note">${srcTip(bookingSource(main), "대표 예약 채널")}</span>` : ""}</div>
@@ -7211,11 +8078,7 @@ async function initCampWeather(c) {
     </button>`;
   }).join("");
 
-  container.addEventListener("click", (e) => {
-    const btn = e.target.closest("[data-wdate]");
-    if (!btn) return;
-    openWeatherModal(c, btn.dataset.wdate, data);
-  });
+  // 날짜 상세는 페이지의 주간 날씨 카드에서 바로 펼친다. 별도 모달은 사용하지 않는다.
 }
 
 function renderHourlyTimeline(hourlyList, tab, isToday, nowHour) {
@@ -7472,6 +8335,13 @@ function reserveMenuItems(options) {
 }
 // lazy: 목록 카드는 가벼운 카탈로그(고캠핑·홈페이지 주소 없음)로도 같은 화면이어야 하므로, 목록은 열 때 원본을 받아 채운다.
 function reserveSplit(c, { inline = false, lazy = false } = {}) {
+  // 운영 달이 겨울 제외로 확정된 업장은 겨울철(11~3월) 예약 버튼을
+  // 오인 클릭시키지 않고 휴업 상태로 명확히 표시한다. 운영 중인 곳(win=1)은
+  // 정상 예약 흐름을 유지한다.
+  const month = new Date().getMonth();
+  if (c?.win === 0 && [10, 11, 0, 1, 2].includes(month)) {
+    return `<div class="dock-reserve-group rsv-closed${inline ? " rsv-inline" : ""}"><button type="button" class="btn dock-reserve-main" disabled aria-disabled="true"><span class="dock-reserve-label">동계기간 휴업</span></button></div>`;
+  }
   const options = lazy ? [] : getAllBookingChannels(c);
   const lb = lazy ? bookingChannels(c)[0] : null;
   const main = lazy ? (lb ? { url: lb.url, kind: "online" } : null) : options[0] ?? (c.gc_url ? { url: c.gc_url, title: "고캠핑에서 예약하기", name: "고캠핑", kind: "online" } : null);
@@ -7647,15 +8517,6 @@ function bindDetail() {
       <div class="sp-list">${picks.map((x) => `<a class="sp-item" href="${esc(x.src[0].url)}" target="_blank" rel="noopener" title="${esc(x.src[0].title)}"><b>${esc(/^\d+$/.test(x.site) ? `${x.site}번` : x.site)}</b><span>${esc(x.tags.join(" · ") || "추천")}</span><i>후기 ${x.posts}곳 ${ic("external", "line")}</i></a>`).join("")}</div>`;
     spEl.hidden = false;
   }).catch(() => {});
-  if (currentCamp?.lat && currentCamp?.lng) {
-    const cond = $("[data-cond]");
-    cond?.addEventListener("click", async (ev) => {
-      const day = ev.target.closest("[data-fc-date]");
-      if (!day) return;
-      const data = await fetchCampWeather(currentCamp.lat, currentCamp.lng);
-      if (data) openWeatherModal(currentCamp, day.dataset.fcDate, data);
-    });
-  }
   // 이번 주말 컨디션(날씨·일출일몰·달·미세먼지·산불·물때): /conditions/card.js가 있을 때만 붙인다. 실패하면 칸을 숨긴 채 둔다.
   const condEl = $("[data-cond]"), condCamp = S.byId.get(id);
   // 모듈 카드의 제목에도 다른 섹션과 같은 선 아이콘을 붙인다.
@@ -8251,7 +9112,7 @@ function savedOpenings(saved) { return saved.map((c) => [c, S.openings.get(Strin
 function openAlertsHtml(saved) {
   const list = savedOpenings(saved);
   const note = `<p class="oa-note">캠핏·네이버예약의 빈자리는 공식 제휴가 없어 알려 드릴 수 없어요. 대신 공개된 <b>예약 오픈 일시</b>를 휴대폰 캘린더에 넣어 10분 전·1시간 전에 알림을 받으세요.</p>`;
-  if (!list.length) return `<section class="open-alerts empty-oa"><h2>${ic("calendar")}예약 오픈 알림</h2><p class="oa-note">찜한 곳 중 예약 오픈 일정이 알려진 곳이 아직 없어요. 오픈 일정이 공개되면 여기에 보여요.</p></section>`;
+  if (!list.length) return "";
   const fmtAt = (iso) => { const d = new Date(Date.parse(iso) + 9 * 3600e3); return `${d.getUTCMonth() + 1}월 ${d.getUTCDate()}일 ${String(d.getUTCHours()).padStart(2, "0")}:${String(d.getUTCMinutes()).padStart(2, "0")}`; };
   return `<section class="open-alerts"><h2>${ic("calendar")}예약 오픈 알림 <i>${fmt(list.length)}</i></h2>
     <ul>${list.map(([c, o]) => { const dd = Math.ceil((Date.parse(o.at) - Date.now()) / 864e5); return `<li><a href="${APP_BASE}place/${encodeURIComponent(c.id)}"><b>${esc(nameOf(c).name)}</b><span>${esc(fmtAt(o.at))} · ${esc(o.platform ?? o.kind ?? "")}${o.stay ? ` · ${esc(o.stay)}` : ""}</span></a><em class="${dd <= 3 ? "soon" : ""}">${dd <= 0 ? "오늘" : `D-${dd}`}</em><button type="button" class="chip" data-ics="${esc(c.id)}">${ic("calendar")}캘린더</button></li>`; }).join("")}</ul>
@@ -8469,7 +9330,7 @@ function bindMap() {
   const start = (adapter) => {
     MAP = adapter;
     el.dataset.engine = adapter.kind;
-    if (S.area !== "all") { const pts = S.camps.filter((c) => AREA_OF[sidoShort(c.sido)] === S.area && c.lat).map((c) => [c.lat, c.lng]); if (pts.length) MAP.fit(pts); }
+    if (regionKeys().length) { const pts = S.camps.filter((c) => regionMatches(c) && c.lat).map((c) => [c.lat, c.lng]); if (pts.length) MAP.fit(pts); }
     MAP.onMove(drawMap);
     MAP.onClick(() => { selected = null; $("[data-peek]").hidden = true; drawMap(); });
     drawMap();
@@ -8712,7 +9573,7 @@ function loadKakao() {
     const fail = (why) => { clearTimeout(t); kakaoDead = true; console.warn("[map] 카카오 지도 실패 → OSM:", why); no(new Error(why)); };
     const t = setTimeout(() => fail("timeout"), 8000);
     const sc = document.createElement("script");
-    sc.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(key)}&autoload=false`;
+    sc.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(key)}&autoload=false&libraries=services`;
     sc.onload = () => window.kakao?.maps?.load ? window.kakao.maps.load(() => { clearTimeout(t); ok(window.kakao); }) : fail("sdk");
     sc.onerror = () => fail("sdk load error");
     document.head.append(sc);

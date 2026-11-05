@@ -15,7 +15,7 @@ test("화성에코팜(102229) 보강: 운영 기관 공식 요금·휴무·반�
   assert.equal(c.fee.grade, "OFFICIAL");
   assert.equal(c.fee.min, 35000);
   assert.equal(c.closed, "매주 월요일");
-  assert.match(c.pets, /불가능/);
+  assert.match(c.pets, /반려견동반 사이트에서만 가능/); // 영우 님 2026-11-04 승인: 반려견동반 사이트(공식 요금표)만 가능
 });
 test("공식 요금이 후기 기반 요약보다 먼저 보인다", () => {
   const app = readFileSync(new URL("../../camping-atlas/public/app.js", import.meta.url), "utf8");

@@ -268,7 +268,7 @@ function build() {
   const sources = [
     { id: "kakao-search", name: "카카오 Daum 검색(후기·카페·사진·영상)", how: "data-sync 매일 · 캠핑장당 7회 · 14일 순환", dates: socialDates },
     { id: "naver-search", name: "네이버 검색 API(블로그·카페·웹·지식iN)", how: "data-sync 매일 · 캠핑장당 7회 · 14일 순환", dates: webDates },
-    { id: "youtube-v2", name: "YouTube 영상·숏츠(카카오 동영상 검색 v2)", how: "shorts-sync 매일 · 캠핑장당 3회 · 30일 순환", dates: [...stayIds].map((id) => shorts[id]?.fetched_at ?? null) },
+    { id: "youtube-v2", name: "YouTube 영상·숏츠(카카오 동영상 검색 v2)", how: "shorts-sync 매일 · 캠핑장당 3회 · 3일 순환", dates: [...stayIds].map((id) => shorts[id]?.fetched_at ?? null) },
     { id: "kakao-places", name: "카카오 로컬(플레이스 매칭)", how: "operator-sites 주간 · 30일 지난 곳만", every: 7, dates: [...stayIds].map((id) => kp[id]?.checked_at ?? null) },
     { id: "naver-places", name: "네이버 지역 검색(플레이스 매칭)", how: "operator-sites 주간 · 30일 지난 곳만", every: 7, dates: [...stayIds].map((id) => np[id]?.checked_at ?? null) },
     { id: "operator-site", name: "운영자 홈페이지 크롤(robots 준수)", how: "operator-sites 주간 · 운영자 사이트 문장·사진", every: 7, dates: [...stayIds].map((id) => ops[id]?.checked_at ?? null) },

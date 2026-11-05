@@ -28,7 +28,7 @@
 
 - launchd가 15분마다 깨우면, 아래를 모두 만족할 때만 작업 하나를 시작한다.
   - 평일 18:00~다음 날 08:00, 또는 토·일·공휴일(`holidays-kr.json` + `~/.letscamp/holidays.txt`).
-  - 맥에 원래 있던 정기 작업(launchd·cron, `detect-existing.mjs`가 매일 다시 찾음)의 시작 10분 전부터 예상 시간 동안은 쉰다.
+  - 실행 중인 기존 프로세스와 CPU 부하가 있으면 쉰다. `detect-existing.mjs`가 찾은 launchd·cron 시각은 참고 기록으로 남기되, 그 시각만으로 전체 시간을 막지 않는다. `~/.letscamp/avoid.txt`에 직접 적은 작업은 시작 10분 전부터 예상 시간 동안 강제로 피한다.
   - 그 작업의 프로세스가 돌고 있거나, 1분 평균 부하가 코어당 0.5 이상이면 쉰다.
 - 끝낼 시각 = min(창 끝-10분, 작업 최대 시간, 같은 파일을 쓰는 CI 시각). 평일 아침 07:50 전에 반드시 멈춘다.
 - 작업 중에도 1분마다 확인한다. 기존 작업이 시작되면 **양보**(중단). 판독은 중간 저장하므로 다음 차례에 이어서 한다.
@@ -61,7 +61,7 @@ proc codex
 proc /Users/me/scripts/sync.py
 ```
 
-적은 뒤 `node ~/.letscamp/camp/local/macmini/detect-existing.mjs`로 바로 반영된다. 하루에 한 번은 자동으로 다시 읽는다.
+적은 뒤 `node ~/.letscamp/camp/local/macmini/detect-existing.mjs`로 바로 반영된다. 자동 발견 작업은 `source: auto`로 기록되고 실제 프로세스가 실행 중일 때만 nightshift가 양보한다. 하루에 한 번은 자동으로 다시 읽는다.
 
 ## 확인·끄기
 

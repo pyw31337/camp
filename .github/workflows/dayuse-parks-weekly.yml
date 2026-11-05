@@ -6,7 +6,7 @@ on:
 permissions: { contents: write, pull-requests: write, actions: write }
 env:
   GH_TOKEN: ${{ github.token }}
-concurrency: { group: dayuse-parks, cancel-in-progress: false }
+concurrency: { group: letscamp-data-publish, cancel-in-progress: false }
 jobs:
   parks:
     runs-on: ubuntu-latest

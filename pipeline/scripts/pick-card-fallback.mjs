@@ -36,12 +36,22 @@ async function contentOk(url) {
   catch { return true; } // 받지 못한 사진은 판정하지 않는다(픽셀 단계에서 이미 걸러짐)
 }
 async function stats(url) {
+  if (!url) return null;
   const ctl = AbortSignal.timeout(10000);
   const r = await fetch(url, { signal: ctl, headers: { "user-agent": "MoyeoraCampBot/1.0 (+https://github.com/pyw31337/camp)" } });
   if (!r.ok) return null;
   const b = Buffer.from(await r.arrayBuffer());
   const { data } = await sharp(b).resize(64, 64, { fit: "fill" }).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   return pixelStats(data);
+}
+async function statsCandidate(x) {
+  // 카카오 130px 썸네일은 만료·차단되는 경우가 있어, 같은 글의 원문 이미지도
+  // 판정 후보로 시도한다. 원문은 저장하지 않고 내용 판정에만 잠깐 사용한다.
+  for (const url of [x.img, x.thumb]) {
+    const st = await stats(url).catch(() => null);
+    if (st) return st;
+  }
+  return null;
 }
 const need = camps.filter((c) => !c.img && !c.ph && !(official[c.id]?.length));
 const out = {};
@@ -66,11 +76,12 @@ async function worker() {
       .filter((x) => !rejected.has(x.thumb) && !rejected.has(x.img)).slice(0, MAX_TRY + 4);
     // 지난번에 고른 사진이 아직 후보에 있으면 그대로(다시 받지 않음)
     const old = prev[c.id];
-    if (old && cands.some((x) => x.thumb === old.t) && (await contentOk(old.t))) { out[c.id] = old; kept++; continue; }
+    if (old && cands.some((x) => x.thumb === old.t) && (await contentOk(old.i || old.t))) { out[c.id] = old; kept++; continue; }
     let hit = null;
     for (const x of cands) {
-      const st = await stats(x.thumb).catch(() => null);
-      if (looksLikePlace(st) && (await contentOk(x.thumb))) { hit = x; break; }
+      const st = await statsCandidate(x);
+      const judgeUrl = x.img || x.thumb;
+      if (looksLikePlace(st) && (await contentOk(judgeUrl))) { hit = x; break; }
     }
     if (hit) { out[c.id] = { i: hit.img ?? null, t: hit.thumb, u: hit.url, s: hit.src ?? null, d: hit.date ?? null, quality: "context_verified", at: new Date().toISOString() }; picked++; }
     else none++;
