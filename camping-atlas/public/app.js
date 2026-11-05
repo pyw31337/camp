@@ -5665,6 +5665,11 @@ async function detailView(id) {
   const known = spec.filter((k) => f[k]).length;
   const o = openingOf(c);
   const us = usage(c, d);
+  const extraUsageRows = profileUsageRows(d, "EXTRA_FEE", "기타");
+  const usageRows = us.filter(([, x]) => x).map(([l, x, icon]) => `<div class="use"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${factValueHtml({ ...x, v: wonText(detailValue(x)) })}${asOfMention(x)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span></dd></div>`).join("");
+  const usageBlock = usageRows || extraUsageRows
+    ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><dl class="uses">${usageRows}${extraUsageRows}</dl></section>`
+    : `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><p class="muted" style="padding: 18px 0; color: var(--ink-3); font-size: .88rem;">등록된 상세 이용 정보가 없습니다.</p></section>`;
   return `<article class="detail" data-id="${esc(c.id)}">
     <div class="d-bar"><a class="icon-btn" href="${APP_BASE}" data-back aria-label="뒤로">${ic("left")}</a><span class="d-bar-acts">${heartBtn(c, { label: true })}<button class="d-share" type="button" data-share-place="${esc(c.id)}" aria-label="링크 공유">${ic("share")}<span>공유</span></button></span></div>
     <header class="d-head">
@@ -5684,8 +5689,7 @@ async function detailView(id) {
         ${specSection(c, d)}
         ${priceHtml(c, d)}
         ${bookingHtml(c, d)}
-        ${us.some(([, x]) => x) ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><dl class="uses">${us.filter(([, x]) => x).map(([l, x, icon]) => `<div class="use"><dt>${icon ? ic(icon) : ""}${l}</dt><dd><span class="use-val">${factValueHtml({ ...x, v: wonText(detailValue(x)) })}${asOfMention(x)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, l)}</span></dd></div>`).join("")}</dl></section>` : `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><p class="muted" style="padding: 18px 0; color: var(--ink-3); font-size: .88rem;">등록된 상세 이용 정보가 없습니다.</p></section>`}
-        ${extraFeeSection(d)}${sanitarySection(d)}
+        ${usageBlock}
         ${amenityHtml(c, d)}
         ${houseRulesHtml(c, d)}
         <section class="d-sec" data-cond hidden></section>
@@ -5696,10 +5700,10 @@ async function detailView(id) {
         ${operatorMediaHtml(d)}
         ${mediaHubHtml(d, c)}
         ${reviewHtml(d, c)}
+        ${reviewLinksHtml(d, c)}
         ${nearbyHubHtml(c, d)}
         ${similarHtml(c)}
         <section class="d-sec ev-sec" id="sec-events" data-events><div class="sec-head">${iconTitle("fest", "행사")}</div><div data-events-body></div></section>
-        ${reviewLinksHtml(d, c)}
         ${infoHtml(c)}
         ${introHtml(d)}
         ${commentsHtml(c)}
@@ -5760,8 +5764,24 @@ function profileListSection(d, key, id, icon, title, other) {
   if (!rows.length) return "";
   return `<section class="d-sec" id="${id}"><div class="sec-head">${iconTitle(icon, title)}</div><dl class="uses">${rows.map(([l, v]) => `<div class="use"><dt>${ic(PIECE_IC(l + v))}${esc(l || other)}</dt><dd><span class="use-val">${esc(l ? wonText(v) : v)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, title)}</span></dd></div>`).join("")}</dl></section>`;
 }
-const extraFeeSection = (d) => profileListSection(d, "EXTRA_FEE", "sec-extra-fee", "won", "추가 요금·대여", "기타");
-const sanitarySection = (d) => profileListSection(d, "SANITARY", "sec-sanitary", "bath", "샤워·위생", "시설");
+// 추가 요금·대여는 이용 정보 안에 합쳐 표시한다. 샤워·위생은 편의시설과
+// 같은 수량을 반복하므로 별도 섹션으로 렌더링하지 않는다.
+function profileUsageRows(d, key, other = "기타") {
+  const x = profFact(PF(d, key));
+  if (!x?.v || /^업장 미공지/.test(String(x.v))) return "";
+  return factPieces(x.v).map(([l, v]) => {
+    const label = /인원/.test(`${l} ${v}`) ? "추가 인원" : (l || other);
+    return `<div class="use"><dt>${ic(PIECE_IC(l + v))}${esc(label)}</dt><dd><span class="use-val">${esc(l ? wonText(v) : v)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, "추가 요금·대여")}</span></dd></div>`;
+  }).join("");
+}
+const extraFeeSection = () => "";
+const sanitarySection = () => "";
+
+function detailedOpeningCycle(value) {
+  const s = String(value ?? "").replace(/\s+/g, " ").trim();
+  if (!s || /통신판매|중개자|예약.?이용 책임|오픈 일정은 캠핑장이 정한다|운영자 안내|홈페이지마다|홈페이지\s*(?:공지|예약\s*안내)|일정을 따른다/.test(s)) return "";
+  return /(?:매월|매주|매일|첫째|둘째|셋째|넷째|마지막|요일|\d{1,2}\s*일|(?:월|화|수|목|금|토|일)요일)/.test(s) ? s : "";
+}
 function iconTitle(icon, label) { return `<div class="sec-title">${ic(icon, "line")}<h2>${esc(label)}</h2></div>`; }
 // 화면에서 쓰는 문장은 데이터 원문을 그대로 반복하지 않는다. 공통 규칙으로 공백·목록기호를
 // 정리하고 한 줄 길이만 남긴다. 원문과 출처는 항상 srcTip()의 작은 i에 보관한다.
@@ -6239,7 +6259,7 @@ const OPERATOR_CATEGORIES = [
   ["이용 규칙", /쓰레기|분리수거|외부인|준수|강제퇴장|입장/], ["사이트 이용", /일반.?사이트|오토.?캠핑|캠핑카|카라반|텐트/],
 ];
 function compactOperatorText(value) {
-  return String(value ?? "").replace(/^\s*[a-z]+(?:_[a-z]+)*\s+(?=[가-힣])/, "").replace(/^[*\-·\s√✓✔※▶►▷■□●○◆◇★☆>]+/, "").replace(/\s+/g, " ").replace(/\s*([,.:])\s*(?!\d)/g, "$1 ").trim();
+  return String(value ?? "").replace(/^\s*[a-z]+(?:_[a-z]+)*\s+(?=[가-힣])/, "").replace(/(^|\n)\s*\+\s*/g, "$1").replace(/^[*\-·\s√✓✔※▶►▷■□●○◆◇★☆>]+/, "").replace(/\s+/g, " ").replace(/\s*([,.:])\s*(?!\d)/g, "$1 ").trim();
 }
 function operatorSummary(label, texts) {
   const text = texts.join(" · ");
@@ -6411,7 +6431,7 @@ function bookingHtml(c, d) {
   const pf = g?.platform ?? {};
   const o = openingOf(c) ?? (S.openings.get(String(c.id)) ?? null);
   const openTimeStr = o?.at ? new Date(o.at).toLocaleString("ko-KR", { month: "numeric", day: "numeric", weekday: "short", hour: "2-digit", minute: "2-digit" }) : "";
-  const cycleText = typeof pf.opening === "string" ? pf.opening.trim() : "";
+  const cycleText = detailedOpeningCycle(pf.opening);
   const meta = [
     o ? ["다음 오픈", [o.txt, openTimeStr, o.label].filter(Boolean).join(" · ")] : null,
     cycleText ? ["오픈 주기", cycleText] : null
@@ -8023,11 +8043,7 @@ async function initCampWeather(c) {
     </button>`;
   }).join("");
 
-  container.addEventListener("click", (e) => {
-    const btn = e.target.closest("[data-wdate]");
-    if (!btn) return;
-    openWeatherModal(c, btn.dataset.wdate, data);
-  });
+  // 날짜 상세는 페이지의 주간 날씨 카드에서 바로 펼친다. 별도 모달은 사용하지 않는다.
 }
 
 function renderHourlyTimeline(hourlyList, tab, isToday, nowHour) {
@@ -8284,6 +8300,13 @@ function reserveMenuItems(options) {
 }
 // lazy: 목록 카드는 가벼운 카탈로그(고캠핑·홈페이지 주소 없음)로도 같은 화면이어야 하므로, 목록은 열 때 원본을 받아 채운다.
 function reserveSplit(c, { inline = false, lazy = false } = {}) {
+  // 운영 달이 겨울 제외로 확정된 업장은 겨울철(11~3월) 예약 버튼을
+  // 오인 클릭시키지 않고 휴업 상태로 명확히 표시한다. 운영 중인 곳(win=1)은
+  // 정상 예약 흐름을 유지한다.
+  const month = new Date().getMonth();
+  if (c?.win === 0 && [10, 11, 0, 1, 2].includes(month)) {
+    return `<div class="dock-reserve-group rsv-closed${inline ? " rsv-inline" : ""}"><button type="button" class="btn dock-reserve-main" disabled aria-disabled="true"><span class="dock-reserve-label">동계기간 휴업</span></button></div>`;
+  }
   const options = lazy ? [] : getAllBookingChannels(c);
   const lb = lazy ? bookingChannels(c)[0] : null;
   const main = lazy ? (lb ? { url: lb.url, kind: "online" } : null) : options[0] ?? (c.gc_url ? { url: c.gc_url, title: "고캠핑에서 예약하기", name: "고캠핑", kind: "online" } : null);
@@ -8459,15 +8482,6 @@ function bindDetail() {
       <div class="sp-list">${picks.map((x) => `<a class="sp-item" href="${esc(x.src[0].url)}" target="_blank" rel="noopener" title="${esc(x.src[0].title)}"><b>${esc(/^\d+$/.test(x.site) ? `${x.site}번` : x.site)}</b><span>${esc(x.tags.join(" · ") || "추천")}</span><i>후기 ${x.posts}곳 ${ic("external", "line")}</i></a>`).join("")}</div>`;
     spEl.hidden = false;
   }).catch(() => {});
-  if (currentCamp?.lat && currentCamp?.lng) {
-    const cond = $("[data-cond]");
-    cond?.addEventListener("click", async (ev) => {
-      const day = ev.target.closest("[data-fc-date]");
-      if (!day) return;
-      const data = await fetchCampWeather(currentCamp.lat, currentCamp.lng);
-      if (data) openWeatherModal(currentCamp, day.dataset.fcDate, data);
-    });
-  }
   // 이번 주말 컨디션(날씨·일출일몰·달·미세먼지·산불·물때): /conditions/card.js가 있을 때만 붙인다. 실패하면 칸을 숨긴 채 둔다.
   const condEl = $("[data-cond]"), condCamp = S.byId.get(id);
   // 모듈 카드의 제목에도 다른 섹션과 같은 선 아이콘을 붙인다.
