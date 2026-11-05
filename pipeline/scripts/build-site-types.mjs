@@ -15,6 +15,22 @@ const snippets = reg("operator-site-snippets.json");
 const kakao = reg("kakao-places.json");
 const naver = reg("naver-places.json");
 
+// 수기 시드(manual-camps·dayuse-seed)의 사이트 타입은 apply-dayuse-seed와 같은 규칙(코드별 한 번, 뒤에 붙이기)으로 남긴다.
+// 이 단계가 시드 뒤에 다시 돌면서 시드 값을 지워, 동기화마다 값이 오락가락했다(check-dayuse-idempotent, 102377 AUTO 44면 2026-11-05).
+const seedSt = new Map();
+for (const f of ["dayuse-seed.json", "manual-camps.json"]) {
+  const p = join(root, "pipeline/registry", f);
+  if (!existsSync(p)) continue;
+  for (const pl of JSON.parse(readFileSync(p, "utf8")).places ?? []) if (Array.isArray(pl?.st) && pl.st.length) seedSt.set(String(pl.id), pl.st);
+}
+const withSeed = (st, id) => {
+  const seed = seedSt.get(id);
+  if (!seed) return st ?? [];
+  const base = Array.isArray(st) ? st : [];
+  const seen = new Set(base.map((x) => String(x?.[0] ?? "")));
+  return [...base, ...seed.filter((x) => !seen.has(String(x?.[0] ?? "")))];
+};
+
 const catalogPath = join(dataDir, "campgrounds.json");
 const camps = JSON.parse(readFileSync(catalogPath, "utf8"));
 const detailFiles = new Set(readdirSync(join(dataDir, "camps")));
@@ -34,7 +50,8 @@ for (const c of camps) {
     naver: n?.place ? { ...n.place, checked_at: n.checked_at } : null,
     posts: d ? [...(d.reviews ?? []), ...(d.cafe ?? []), ...(d.web ?? [])] : [],
   });
-  if (list.length) { c.st = compactTypes(list); withTypes++; } else delete c.st;
+  const st = withSeed(list.length ? compactTypes(list) : null, id);
+  if (st.length) { c.st = st; withTypes++; } else delete c.st;
   if (list.some((t) => t.code !== "PITCH" && t.code !== "AUTO")) beyondPitch++;
   for (const t of list) tally[t.code] = (tally[t.code] ?? 0) + 1;
   if (d) {
