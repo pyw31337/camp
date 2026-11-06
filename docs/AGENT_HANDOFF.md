@@ -1134,3 +1134,10 @@
 - 기록: `pipeline/registry/event-venue-photos.json`(장소별, 지우지 않음, 못 찾은 곳은 30일 뒤 재조회). culture-events.yml에 `DATA_GO_KR_SERVICE_KEY` 추가.
 - 링크: 국가유산청 API에는 행사 상세 주소가 없다(관련 링크 `subPath`만, 44%는 비어 CultureFlow가 khs.go.kr/main.html을 넣음). `isSiteHome`으로 첫 화면 링크를 버리고, 화면은 원문 주소가 없으면 ‘행사명+장소’ 네이버 검색으로 연결. 문의 전화(`tel`)를 카드에 표시.
 - 노출(소유자 2026-11-05): 국가유산 행사 중 실제 사진(장소 사진 포함)도 바로가기 링크(`u`·`cf`)도 없는 것은 events.json(화면용)에서 뺀다 — 매일 다시 판정, 원천 기록은 그대로. 화면 정렬은 대체 그림을 ‘사진 없음’으로 쳐서 포스터 있는 행사를 앞에.
+
+## 📌 이색 카드 특색 후기·휴양림 사진 보강 (2026-11-06, Codex)
+
+- 이색 카드의 `상세정보` 영역은 위·아래 모두 같은 1px 실선과 균등한 내부 여백을 사용한다.
+- `승마` 분류가 붙은 카드에는 분류 판정에 사용된 관련 후기 제목을 최대 1건 표시하고, 누르면 후기 원문을 새 창으로 연다. 후기 원문이 없을 때는 임의 링크를 만들지 않는다. 배포 단계 `apply-unique-camps.mjs`가 `c.uq_reviews` 파생 필드를 추가한다.
+- 고캠핑 공식·자체 저장 사진이 없는 휴양림은 관광공사 TourAPI 공식 사진을 우선하고, 없을 때만 내용 판정을 통과한 후기 원문 이미지(가로 600px 이상)를 고화질 썸네일 후보로 사용한다. 기존 사진은 덮어쓰지 않는다.
+- 원본(`design/renewal`)과 발행본(`camping-atlas/public`)을 동기화했다. 검증: `node --test pipeline/test/unique-camps.test.mjs pipeline/test/theme-uq-sort.test.mjs`, `node --test pipeline/test/data-sync-safety.test.mjs`, `node --check`, `git diff --check`.
