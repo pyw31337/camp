@@ -7169,7 +7169,7 @@ function commentsCardHtml(c) {
   const cmts = CMT_CACHE.get(id) || [];
   const hasCmts = cmts.length > 0;
   // 댓글이 있으면 기본 펼침(open), 없으면 기본 닫힘
-  const isOpen = hasCmts ? !CMT_CLOSED_SET.has(id) : false;
+  const isOpen = hasCmts ? !CMT_CLOSED_SET.has(id) : CMT_WRITE_OPEN_SET.has(id);
   return `<div class="card-group card-group-cmts" data-card-cmt="${esc(id)}">
     ${renderCardCmtInner(id, cmts, isOpen)}
   </div>`;
@@ -7180,7 +7180,7 @@ function updateSingleCardCommentDom(id) {
   if (!containers.length) return;
   const cmts = CMT_CACHE.get(String(id)) || [];
   const hasCmts = cmts.length > 0;
-  const isOpen = hasCmts ? !CMT_CLOSED_SET.has(String(id)) : false;
+  const isOpen = hasCmts ? !CMT_CLOSED_SET.has(String(id)) : CMT_WRITE_OPEN_SET.has(String(id));
   for (const el of containers) {
     el.innerHTML = renderCardCmtInner(id, cmts, isOpen);
   }
@@ -7198,7 +7198,7 @@ function syncCardCommentsInDom() {
       if (CMT_CACHE.has(id)) {
         const cmts = CMT_CACHE.get(id) || [];
         const hasCmts = cmts.length > 0;
-        const isOpen = hasCmts ? !CMT_CLOSED_SET.has(id) : CMT_OPEN_SET.has(id);
+        const isOpen = hasCmts ? !CMT_CLOSED_SET.has(id) : CMT_WRITE_OPEN_SET.has(id);
         if (!el.querySelector(".card-cmt-box") || (hasCmts && !el.querySelector(".c-cmt-list"))) {
           el.innerHTML = renderCardCmtInner(id, cmts, isOpen);
         }
