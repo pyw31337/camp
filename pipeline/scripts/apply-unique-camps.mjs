@@ -44,6 +44,9 @@ for (const c of camps) {
   const ids = UNIQUE_CATS.map((x) => x.id).filter((id) => r[id]);
   if (!ids.length) continue;
   c.uq = ids;
+  // 분류를 뒷받침한 업장 소개·후기 근거를 카드 정렬에서도 사용할 수 있게 보존한다.
+  // 기존 값은 삭제하지 않고 파생 필드만 추가한다.
+  c.uq_evidence = Object.fromEntries(ids.map((id) => [id, r[id]]));
   // 카드의 특색 배지 옆에 해당 체험이 실제로 언급된 후기 원문을 연결한다.
   // 후기 원문이 없으면 배지만 표시하고 임의의 글을 링크하지 않는다.
   const uqReviews = {};
