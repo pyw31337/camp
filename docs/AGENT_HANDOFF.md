@@ -1120,6 +1120,14 @@
 - `/theme/UNIQUE`와 홈의 이색 캠핑장 레일은 공통 `themeCampCard()`를 통해 동일하게 렌더링하며, `규격·전기·화로·주차·주변·요금`은 기본 접힌 `상세정보` 아코디언 안에 넣는다.
 - 원본은 `design/renewal/`에서 수정하고 `camping-atlas/public/` 발행본을 동기화한다. 검증: `node --check`, `git diff --check`.
 
+## 📌 CI 반복 실패 원인 분리·고정 (2026-11-06, Codex)
+
+- `Web quality / Rail swipe`는 `playwright@1` 부동 태그가 아직 배포되지 않은 `playwright-core`를 선택해 npm `ETARGET`로 실패했다. Playwright `1.56.1`을 명시적으로 고정하고 설치 스크립트에 `--no-save --ignore-scripts`를 사용했다.
+- GitHub Actions의 `ubuntu-latest`가 Ubuntu 26.04로 이동하면서 고정한 Playwright가 지원하지 않는 OS가 되어 다시 실패했다. Rail swipe 작업의 실행 이미지를 `ubuntu-24.04`로 고정해 OS 이미지 변경을 차단했다.
+- Pages 배포는 여러 실행이 동시에 대기하면서 GitHub Pages가 `updating_pages` 상태로 10분 timeout에 걸렸다. `github-pages` 동시성 그룹은 최신 실행만 남기도록 `cancel-in-progress: true`로 바꿨다.
+- 사용자 요청으로 제거된 `EXTRA_FEE`·`SANITARY` 독립 섹션을 오래된 테스트가 계속 요구해 Registry 검사가 실패했다. 테스트를 현재 정책(추가요금은 이용정보에 합치고 샤워·위생은 편의시설에 통합)에 맞춰 갱신했다.
+- 검증: `node --test pipeline/test/extra-fee-sanitary-sections.test.mjs`, `node --test pipeline/test/data-sync-safety.test.mjs`, `git diff --check`.
+
 ## 2026-11-01 · 국가유산 행사 썸네일(장소 공식 사진)
 - 원인: CultureFlow의 국가유산청 행사는 포스터가 없어 공통 대체 그림(`/images/fallbacks/tourism-template.svg`)만 온다 → 157건 모두 같은 산 그림.
 - 수정: `pipeline/lib/event-venue-photo.mjs` — 포스터 없는 행사의 장소 이름으로 TourAPI `searchKeyword2` 검색, 같은 이름(또는 ‘지역명+이름’)·3km 안일 때만 사진을 붙인다(`iv:1`, 화면에 ‘장소 사진 · 한국관광공사’). 행정구역만 있는 장소는 건너뜀.

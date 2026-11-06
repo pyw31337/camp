@@ -68,3 +68,15 @@ test("sync-images는 매니페스트 밖 사진 파일을 IMAGE_ALLOW_SHRINK 없
   const src = readFileSync(new URL("../scripts/sync-images.mjs", import.meta.url), "utf8");
   assert.match(src, /if \(ALLOW_SHRINK\) for \(const f of orphans\)/);
 });
+
+test("브라우저 CI는 Playwright 부동 버전을 설치하지 않는다", () => {
+  const y = readFileSync(new URL("../../.github/workflows/web-quality.yml", import.meta.url), "utf8");
+  assert.match(y, /npm i --no-save --ignore-scripts playwright@1\.56\.1/);
+  assert.doesNotMatch(y, /npm i playwright@1(?![.\d])/);
+});
+
+test("Pages 배포는 오래된 대기 작업을 취소해 updating_pages 교착을 피한다", () => {
+  const y = readFileSync(new URL("../../.github/workflows/deploy-pages.yml", import.meta.url), "utf8");
+  assert.match(y, /group: github-pages/);
+  assert.match(y, /cancel-in-progress:\s*true/);
+});
