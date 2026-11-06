@@ -1264,6 +1264,16 @@ const UNIQUE_FEATURE_ICONS = {
   horse: "experience", animal: "paw", kidscafe: "kidscafe", indoorplay: "playground",
   treehouse: "forest", stay: "tent", leisure: "leports", farm: "experience", valley: "drop"
 };
+function uniqueReviewSummary(text, category) {
+  const s = String(text ?? "").replace(/\s+/g, " ").trim();
+  if (category === "horse") {
+    if (/(아이|어린이|키즈|가족|아이랑)/i.test(s)) return "아이들 승마체험 가능";
+    if (/무료/i.test(s)) return "무료 승마체험 가능";
+    if (/(체험|승마장|이용)/i.test(s)) return "승마체험 가능";
+    return "승마 관련 후기 확인";
+  }
+  return s.length > 42 ? `${s.slice(0, 41).trim()}…` : s;
+}
 function uniqueFeatureHtml(c) {
   const labels = (c.uq ?? []).map((k) => {
     const row = UNIQUE_SUBS.find(([id]) => id === k);
@@ -1275,7 +1285,7 @@ function uniqueFeatureHtml(c) {
     <div class="unique-feature-chips">${labels.map(([k, label]) => {
       const review = k === "horse" ? (c.uq_reviews?.[k] ?? [])[0] : null;
       const chip = `<span class="unique-feature-chip">${ic(UNIQUE_FEATURE_ICONS[k] || "spark")}${esc(label)}</span>`;
-      return `<span class="unique-feature-item">${chip}${review?.url ? `<a class="unique-feature-review" href="${esc(review.url)}" target="_blank" rel="noopener" title="승마가 언급된 후기 원문 열기">${ic("file-text")}${esc(review.text)}</a>` : ""}</span>`;
+      return `<span class="unique-feature-item">${chip}${review?.url ? `<a class="unique-feature-review" href="${esc(review.url)}" target="_blank" rel="noopener" title="승마가 언급된 후기 원문 열기">${ic("file-text")}${esc(uniqueReviewSummary(review.text, k))}</a>` : ""}</span>`;
     }).join("")}</div>
   </div>`;
 }
@@ -7159,7 +7169,7 @@ function commentsCardHtml(c) {
   const cmts = CMT_CACHE.get(id) || [];
   const hasCmts = cmts.length > 0;
   // 댓글이 있으면 기본 펼침(open), 없으면 기본 닫힘
-  const isOpen = hasCmts ? !CMT_CLOSED_SET.has(id) : CMT_OPEN_SET.has(id);
+  const isOpen = hasCmts ? !CMT_CLOSED_SET.has(id) : false;
   return `<div class="card-group card-group-cmts" data-card-cmt="${esc(id)}">
     ${renderCardCmtInner(id, cmts, isOpen)}
   </div>`;
@@ -7170,7 +7180,7 @@ function updateSingleCardCommentDom(id) {
   if (!containers.length) return;
   const cmts = CMT_CACHE.get(String(id)) || [];
   const hasCmts = cmts.length > 0;
-  const isOpen = hasCmts ? !CMT_CLOSED_SET.has(String(id)) : CMT_OPEN_SET.has(String(id));
+  const isOpen = hasCmts ? !CMT_CLOSED_SET.has(String(id)) : false;
   for (const el of containers) {
     el.innerHTML = renderCardCmtInner(id, cmts, isOpen);
   }

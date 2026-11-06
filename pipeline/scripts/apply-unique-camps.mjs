@@ -24,7 +24,12 @@ const reviewRows = (det, c, cat) => {
       if (!title || !/^https?:\/\//i.test(url)) continue;
       if (!title.replace(/\s/g, "").includes(core) || !cat.re.test(title)) continue;
       if (rows.some((x) => x.url === url)) continue;
-      rows.push({ text: title.slice(0, 72), url });
+      const text = cat.id === "horse"
+        ? (/(아이|어린이|키즈|가족|아이랑)/i.test(title) ? "아이들 승마체험 가능"
+          : /무료/i.test(title) ? "무료 승마체험 가능"
+          : /(체험|승마장|이용)/i.test(title) ? "승마체험 가능" : "승마 관련 후기 확인")
+        : title.slice(0, 72);
+      rows.push({ text, url });
       if (rows.length >= 2) return rows;
     }
   }
