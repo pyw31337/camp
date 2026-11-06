@@ -1272,7 +1272,11 @@ function uniqueFeatureHtml(c) {
   if (!labels.length) return "";
   return `<div class="unique-feature-block">
     <div class="unique-feature-head">${ic("spark")}<span>특색 시설·요소</span></div>
-    <div class="unique-feature-chips">${labels.map(([k, label]) => `<span class="unique-feature-chip">${ic(UNIQUE_FEATURE_ICONS[k] || "spark")}${esc(label)}</span>`).join("")}</div>
+    <div class="unique-feature-chips">${labels.map(([k, label]) => {
+      const review = k === "horse" ? (c.uq_reviews?.[k] ?? [])[0] : null;
+      const chip = `<span class="unique-feature-chip">${ic(UNIQUE_FEATURE_ICONS[k] || "spark")}${esc(label)}</span>`;
+      return `<span class="unique-feature-item">${chip}${review?.url ? `<a class="unique-feature-review" href="${esc(review.url)}" target="_blank" rel="noopener" title="승마가 언급된 후기 원문 열기">${ic("file-text")}${esc(review.text)}</a>` : ""}</span>`;
+    }).join("")}</div>
   </div>`;
 }
 function uniqueDetailsHtml(c) {

@@ -241,6 +241,23 @@ for (const [id, d] of Object.entries(details)) {
     if (rec && !rec.ph && !rec.img && snap) rec.sn = snap.thumb;
   }
 }
+// 휴양림은 고캠핑 대표사진이 없거나 130px 검색 썸네지만 남는 경우가 많다.
+// 관광공사 공식 사진을 우선하고, 없으면 음식·인물 등 판정에서 제외되지 않은
+// 후기 원문 이미지 중 충분한 해상도(가로 600px 이상)를 사용한다. 기존 공식·자체
+// 저장 사진은 절대 덮어쓰지 않는다.
+let forestPhotoFallbacks = 0;
+for (const [id, d] of Object.entries(details)) {
+  const rec = recById.get(id);
+  if (!rec || (rec.op !== "NATURAL_RECREATION_FOREST" && !rec.rf) || rec.ph || rec.img) continue;
+  const official = (d.tour_photos ?? []).find((u) => /^https?:\/\//i.test(String(u)));
+  const review = (d.sns_images ?? []).find((x) => /^https?:\/\//i.test(String(x?.img)) && !x.ng && Number(x.w ?? 0) >= 600);
+  const picked = official || review?.img;
+  if (!picked) continue;
+  rec.sn = picked;
+  rec.photo_source = official ? "한국관광공사 TourAPI 공식 사진" : "후기 원문 고해상도 사진(내용 판정 통과)";
+  forestPhotoFallbacks++;
+}
+if (forestPhotoFallbacks) console.log(`휴양림 고화질 사진 보강: ${forestPhotoFallbacks}곳`);
 // 웹 언급: 카카오 후기와 겹치지 않는 네이버 블로그·카페·웹문서·지식iN 글(요약 + 허용 본문 문장)과 요금 언급
 for (const [id, d] of Object.entries(details)) {
   const w = web?.campgrounds?.[id];

@@ -1127,3 +1127,10 @@
 - Pages 배포는 여러 실행이 동시에 대기하면서 GitHub Pages가 `updating_pages` 상태로 10분 timeout에 걸렸다. `github-pages` 동시성 그룹은 최신 실행만 남기도록 `cancel-in-progress: true`로 바꿨다.
 - 사용자 요청으로 제거된 `EXTRA_FEE`·`SANITARY` 독립 섹션을 오래된 테스트가 계속 요구해 Registry 검사가 실패했다. 테스트를 현재 정책(추가요금은 이용정보에 합치고 샤워·위생은 편의시설에 통합)에 맞춰 갱신했다.
 - 검증: `node --test pipeline/test/extra-fee-sanitary-sections.test.mjs`, `node --test pipeline/test/data-sync-safety.test.mjs`, `git diff --check`.
+
+## 📌 이색 카드 특색 후기·휴양림 사진 보강 (2026-11-06, Codex)
+
+- 이색 카드의 `상세정보` 영역은 위·아래 모두 같은 1px 실선과 균등한 내부 여백을 사용한다.
+- `승마` 분류가 붙은 카드에는 분류 판정에 사용된 관련 후기 제목을 최대 1건 표시하고, 누르면 후기 원문을 새 창으로 연다. 후기 원문이 없을 때는 임의 링크를 만들지 않는다. 배포 단계 `apply-unique-camps.mjs`가 `c.uq_reviews` 파생 필드를 추가한다.
+- 고캠핑 공식·자체 저장 사진이 없는 휴양림은 관광공사 TourAPI 공식 사진을 우선하고, 없을 때만 내용 판정을 통과한 후기 원문 이미지(가로 600px 이상)를 고화질 썸네일 후보로 사용한다. 기존 사진은 덮어쓰지 않는다.
+- 원본(`design/renewal`)과 발행본(`camping-atlas/public`)을 동기화했다. 검증: `node --test pipeline/test/unique-camps.test.mjs pipeline/test/theme-uq-sort.test.mjs`, `node --test pipeline/test/data-sync-safety.test.mjs`, `node --check`, `git diff --check`.
