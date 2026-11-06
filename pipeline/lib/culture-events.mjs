@@ -58,6 +58,8 @@ export function cfImage(p) {
   if (!v.startsWith("/")) return null;
   return `${CF_BASE}${encodeURI(decodeURI(v))}`;
 }
+/** 행사 페이지가 아닌 기관 첫 화면(국가유산청 main.html 등) */
+export const isSiteHome = (u) => /^https?:\/\/(www\.)?(khs|cha)\.go\.kr\/?(main\.html?|index\.(do|html?))?\/?$/i.test(String(u ?? "").trim());
 const https = (u) => (u && /^https?:\/\//.test(u) ? String(u).replace(/^http:\/\/(tong\.visitkorea\.or\.kr|www\.kopis\.or\.kr)/, "https://$1") : null);
 
 /**
@@ -84,7 +86,10 @@ export function cultureEventOf(it, today, { windowDays = EVENT_WINDOW_DAYS, page
     venue, addr: String(it.address ?? "").trim() || null,
     img: cfImage(it.posterUrl || it.poster || it.image), img2: https(cfImage(it.backupPoster)) ?? null,
     desc: shortDesc(it.description), price: price && price.length <= 40 ? price : null,
-    url: https(it.link) || it.website || null,
+    // 국가유산청 API는 행사 상세 주소를 주지 않는다. 관련 링크가 비면 CultureFlow가 국가유산청 첫 화면을 넣는데,
+    // 그건 행사 페이지가 아니므로 버린다(화면이 ‘행사명+장소’ 검색으로 대신 연결). 문의 전화는 그대로 보여 준다.
+    url: (isSiteHome(it.link) ? null : https(it.link)) || (isSiteHome(it.website) ? null : it.website) || null,
+    tel: String(it.contact ?? "").trim().slice(0, 40) || null,
     cf: pages.has(it.id) ? `${CF_BASE}/p/${encodeURIComponent(it.id)}/` : null,
     src: SOURCE_NAME[it.source] ?? it.source, origin: "cf",
   };
@@ -159,7 +164,7 @@ export function mergeEvents(cfEvents, tourEvents) {
     if (dup) {
       alias.set(e.id, dup.id);
       if ((KIND_RANK[e.kind] ?? 4) < (KIND_RANK[dup.kind] ?? 4)) dup.kind = e.kind;
-      for (const f of ["img", "img2", "desc", "venue", "addr", "price", "url", "cf"]) if (!dup[f] && e[f]) dup[f] = e[f];
+      for (const f of ["img", "img2", "desc", "venue", "addr", "price", "url", "tel", "cf"]) if (!dup[f] && e[f]) dup[f] = e[f];
       if (e.src && e.src !== dup.src) dup.also = [...new Set([...(dup.also ?? []), e.src])];
       return;
     }
