@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-06T18:09:19.303Z",
+ "generated_at": "2026-11-06T23:42:11.979Z",
  "rule": "pipeline/lib/fact-refine.mjs",
  "dropped": 259,
- "recoded": 151,
- "scoped": 661,
+ "recoded": 152,
+ "scoped": 662,
  "items": [
   {
    "cid": "7509",
@@ -4194,6 +4194,17 @@
    "quote": "애견 동반으로 내부 이용 시에는 방바닥을 꼭 닦은 후 퇴실하기 털갈이 또는 털 빠짐 심한 반려견은 입실 불가 아침 일찍 오시는 분들 카운터...옆에는 아이스크림도 판매 중이고요~ 화장실은 건물의 층마다 있어요.",
    "action": "drop",
    "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
+  },
+  {
+   "cid": "osm-w32660867",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "SMALL_ONLY",
+   "src": "review_search",
+   "url": "https://leports.sailing-blog.click/4407",
+   "quote": "반려동물은 대형견이나 소형견 구분 없이 동반 입장이 가능하지만 목줄 착용과 배변 봉투를 지참해야 하며, 대형견은 입마개가 필수다.",
+   "action": "recode",
+   "why": "크기 제한 있는 허용"
   },
   {
    "cid": "rf-14xm2hg",
