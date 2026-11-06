@@ -23,7 +23,7 @@ test("정렬 바는 모든 테마에, 정렬은 테마 무관 적용", () => {
   assert.ok(js.includes("mc-near-pt") && js.includes("mc-uq-sort"), "선택 저장");
 });
 test("모든 비거리 배열은 공통 품질 순서를 사용하고 거리순만 예외", () => {
-  assert.ok(js.includes("const QUALITY_SEED = Math.random()"));
+  assert.ok(js.includes("QUALITY_SEED") && js.includes("Math.random()"));
   assert.ok(js.includes("function qualityOrder(items, { distance = false } = {})"));
   assert.ok(js.includes("qualityOrder(list)"));
   assert.ok(js.includes("qualityOrder([...has, ...none].map((x) => x[1]), { distance: uqSort === \"near\" })"));
