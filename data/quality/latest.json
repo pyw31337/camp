@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-06T07:19:38.815Z",
+ "generated_at": "2026-11-06T12:51:09.782Z",
  "date": "2026-11-06",
  "totals": {
   "campgrounds": 6421,
@@ -1945,7 +1945,7 @@
   "CHECKOUT_TIME": {
    "coverage": 2843,
    "coverage_pct": 44.3,
-   "mean_confidence": 0.524,
+   "mean_confidence": 0.523,
    "confirmed_pct": 19,
    "corroborated": 664,
    "conflicts": 15,
