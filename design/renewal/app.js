@@ -4230,7 +4230,7 @@ function watchLazyRows(root) {
   secs.forEach((sec) => lazyIO.observe(sec));
 }
 function themeRow([k, label, test], list, first, used, idx = 0) {
-  const all = list.filter(test);
+  const all = qualityOrder(list.filter(test));
   // 같은 캠핑장이 여러 줄 맨 앞에 반복되지 않게, 앞줄에 나온 곳은 뺀다.
   const items = all.filter((c) => hasPhoto(c) && !used.has(c.id)).slice(0, 16);
   if (items.length < 3) return "";
@@ -4583,9 +4583,9 @@ function listResults(p) {
     const openBonus = (c) => openingOf(c) ? 10 : 0;
     shown.sort((a, b) => (a.ce?.unknown ?? 0) - (b.ce?.unknown ?? 0) || (a.ce?.ref ?? 0) - (b.ce?.ref ?? 0) || (rich(b.c) + openBonus(b.c)) - (rich(a.c) + openBonus(a.c)));
   }
-  // 사진이 한 장도 없는 곳은 어떤 정렬이든 뒤로(같은 무리 안의 순서는 그대로, 이름으로 직접 찾은 곳은 제외)
-  shown.sort((a, b) => photoLast(a.c) - photoLast(b.c));
-  return { shown };
+  // 거리순을 제외한 모든 목록은 공통 품질 순서를 적용한다.
+  const byCamp = new Map(shown.map((x) => [x.c, x]));
+  return { shown: qualityOrder(shown.map((x) => x.c), { distance: S.listSort === "near" }).map((c) => byCamp.get(c)) };
 }
 // 등록 규격 중 가장 큰 사이트(가로×세로). 조건 검색의 ‘사이트 크기’와 같은 값.
 function siteSizeText(c) {
@@ -4802,7 +4802,7 @@ function regionView(sido, sgg) {
 }
 function bindRegion(sido, sgg) {
   sido = sidoShort(sido);
-  const list = regionPool(sido, sgg).sort((a, b) => rich(b) - rich(a)).sort((a, b) => photoLast(a) - photoLast(b));
+  const list = qualityOrder(regionPool(sido, sgg).sort((a, b) => rich(b) - rich(a)));
   let n = 24;
   const grid = $("[data-region-grid]"), more = $("[data-region-more]");
   if (!grid) return;
@@ -4954,6 +4954,31 @@ function compareUniqueQuality(a, b) {
   return nameOf(a).name.localeCompare(nameOf(b).name, "ko");
 }
 
+// 모든 비거리 배열의 공통 품질 순서. 새로고침마다 최고 그룹만 섞어
+// 같은 테마에서도 새로운 업장이 먼저 보이게 하되, 정보 부족 업장이
+// 일반 캠핑장보다 앞으로 오는 일은 없게 한다.
+const QUALITY_SEED = globalThis.__LETS_CAMP_QUALITY_SEED ?? Math.random();
+const qualityPoor = (c) => Number(c.iq ?? rich(c)) < 20 || (!c.pf?.s && !c.fee?.text && !(c.st?.length));
+function qualityBucket(c) {
+  if (uniqueIsForest(c) || qualityPoor(c)) return 2;
+  const featureCount = (c.uq ?? []).length;
+  const explained = !featureCount || uniqueEvidenceCount(c) >= featureCount;
+  return explained && hasPhoto(c) ? 0 : 1;
+}
+function qualityShuffleKey(c) {
+  let h = 2166136261;
+  for (const ch of `${QUALITY_SEED}:${c.id}`) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+function qualityOrder(items, { distance = false } = {}) {
+  if (distance) return items;
+  return items.map((c, i) => [c, i, qualityBucket(c)]).sort((a, b) => {
+    if (a[2] !== b[2]) return a[2] - b[2];
+    if (a[2] === 0) return qualityShuffleKey(a[0]) - qualityShuffleKey(b[0]);
+    return a[1] - b[1];
+  }).map(([c]) => c);
+}
+
 function bindTheme(themeKey) {
   const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
 
@@ -4971,19 +4996,18 @@ function bindTheme(themeKey) {
       for (const c of list) { const k = key(c); (k == null ? none : has).push([k, c]); }
       has.sort((a, b) => a[0] - b[0] || rich(b[1]) - rich(a[1]));
       none.sort((a, b) => rich(b[1]) - rich(a[1]));
-      return [...has, ...none].map((x) => x[1]);
+      return qualityOrder([...has, ...none].map((x) => x[1]), { distance: uqSort === "near" });
     }
     // 공원은 사진이 없는 공공 장소를 포함하는 별도 탐색 테마다. 이 경로에서는
     // 공원 전용 정보 카드로 보이므로 사진 유무로 제거하지 않는다.
     if (themeKey === "PARK") {
       if (S.sort === "name") list.sort((a, b) => nameOf(a).name.localeCompare(nameOf(b).name, "ko"));
       else list.sort((a, b) => rich(b) - rich(a));
-      return list;
+      return qualityOrder(list);
     }
     if (themeKey === "UNIQUE") {
-      // 이색 테마는 설명 근거·사진·운영 주체를 우선한다. 값이 없는 곳을 삭제하지 않고 뒤로 보낸다.
-      list.sort(compareUniqueQuality);
-      return list;
+      // 이색 테마도 전체 공통 품질 순서를 따른다. 값이 없는 곳은 삭제하지 않고 뒤로 보낸다.
+      return qualityOrder(list);
     }
     const withPhoto = list.filter(hasPhoto);
     const noPhoto = list.filter((c) => !hasPhoto(c));
@@ -4995,7 +5019,7 @@ function bindTheme(themeKey) {
       withPhoto.sort((a, b) => rich(b) - rich(a));
     }
     noPhoto.sort((a, b) => rich(b) - rich(a));
-    return [...withPhoto, ...noPhoto];
+    return qualityOrder([...withPhoto, ...noPhoto]);
   };
 
   const renderThemeGrid = () => {

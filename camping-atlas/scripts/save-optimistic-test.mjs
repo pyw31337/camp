@@ -11,6 +11,9 @@ const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath
 const fails = [];
 const server = { shared: new Set(), logs: [], down: true, other: [] };
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+// 품질 그룹의 새로고침 셔플은 제품 동작이다. 이 회귀 테스트만 고정 시드를 사용해
+// 새로고침 뒤에도 처음 선택한 카드가 같은 위치에서 검증되도록 한다.
+await ctx.addInitScript(() => { globalThis.__LETS_CAMP_QUALITY_SEED = "save-optimistic"; });
 await ctx.addInitScript(() => { Object.defineProperty(Navigator.prototype, "webdriver", { get: () => false }); });
 await ctx.route(/supabase\.co\//, async (r) => {
   const req = r.request(), url = new URL(req.url()), m = req.method(), path = url.pathname;
