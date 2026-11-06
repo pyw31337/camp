@@ -663,6 +663,8 @@ img { color: transparent; }
 .unique-card-details[open] .unique-card-summary { color: var(--ink); }
 .unique-card-panel { min-width: 0; padding-bottom: 2px; }
 .unique-card-panel .rows { margin-bottom: 0; }
+.unique-card-fallback { display: grid; gap: 6px; padding: 2px 0 4px; color: var(--ink-2); font-size: var(--fs-min); line-height: 1.45; }
+.unique-card-fallback p { margin: 0; }
 .unique-feature-block { position: relative; z-index: 2; display: grid; gap: 6px; padding: 8px 0 2px; }
 .unique-feature-head { display: inline-flex; align-items: center; gap: 5px; color: var(--accent); font-size: .78rem; font-weight: 850; }
 .unique-feature-head .ic { width: 14px; height: 14px; }

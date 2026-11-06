@@ -1291,9 +1291,18 @@ function uniqueFeatureHtml(c) {
 }
 function uniqueDetailsHtml(c) {
   const id = `unique-spec-${String(c.id).replace(/[^A-Za-z0-9_-]/g, "-")}`;
+  const f = facts(c);
+  const fallback = [
+    c.pf?.s,
+    Array.isArray(c.amenities) && c.amenities.length ? `시설 ${c.amenities.slice(0, 5).join(" · ")}` : "",
+    feeMain(c)?.text ? `요금 ${feeMain(c).text}` : "",
+  ].filter(Boolean).slice(0, 3);
+  const rows = fallback.length && !siteSizeShort(c) && !f.power?.v && !f.fire?.v && !f.park?.v && !nearLine(c, " · ")
+    ? `<div class="unique-card-fallback">${fallback.map((x) => `<p>${esc(String(x))}</p>`).join("")}</div>`
+    : rowsHtml(c);
   return `<details class="unique-card-details">
     <summary class="unique-card-summary"><span>${ic("list")}상세정보</span>${ic("chevron-up", "unique-card-chevron")}</summary>
-    <div class="unique-card-panel" id="${esc(id)}">${rowsHtml(c)}</div>
+    <div class="unique-card-panel" id="${esc(id)}">${rows}</div>
   </details>`;
 }
 // 찜 목록은 여러 곳을 훑어보기 위한 화면이므로, 이름·주소 아래의 모든 정보(유형·스펙·후기 뱃지)를 '상세정보'로 기본 접는다.
@@ -4925,6 +4934,26 @@ function themeView(themeKey) {
   </section>`;
 }
 
+function uniqueIsForest(c) {
+  return c.op === "NATURAL_RECREATION_FOREST" || Boolean(c.rf) || /휴양림/.test(String(c.name ?? ""));
+}
+function uniqueEvidenceCount(c) {
+  return Object.values(c.uq_evidence ?? {}).filter((x) => typeof x === "string" && x.trim()).length;
+}
+function uniqueQualityKey(c) {
+  const featureCount = (c.uq ?? []).length;
+  const evidenceCount = uniqueEvidenceCount(c);
+  const explained = featureCount > 0 && evidenceCount >= featureCount ? 0 : 1;
+  const photo = hasPhoto(c) ? 0 : 1;
+  const forest = uniqueIsForest(c) ? 1 : 0;
+  return [explained, photo, forest, -rich(c)];
+}
+function compareUniqueQuality(a, b) {
+  const ka = uniqueQualityKey(a), kb = uniqueQualityKey(b);
+  for (let i = 0; i < ka.length; i++) if (ka[i] !== kb[i]) return ka[i] - kb[i];
+  return nameOf(a).name.localeCompare(nameOf(b).name, "ko");
+}
+
 function bindTheme(themeKey) {
   const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
 
@@ -4949,6 +4978,11 @@ function bindTheme(themeKey) {
     if (themeKey === "PARK") {
       if (S.sort === "name") list.sort((a, b) => nameOf(a).name.localeCompare(nameOf(b).name, "ko"));
       else list.sort((a, b) => rich(b) - rich(a));
+      return list;
+    }
+    if (themeKey === "UNIQUE") {
+      // 이색 테마는 설명 근거·사진·운영 주체를 우선한다. 값이 없는 곳을 삭제하지 않고 뒤로 보낸다.
+      list.sort(compareUniqueQuality);
       return list;
     }
     const withPhoto = list.filter(hasPhoto);
