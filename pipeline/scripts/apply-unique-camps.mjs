@@ -13,6 +13,23 @@ if (!existsSync(file)) { console.log(`::warning::${file} 없음 — 이색 분�
 const camps = JSON.parse(readFileSync(file, "utf8"));
 const evidence = {};
 const counts = Object.fromEntries(UNIQUE_CATS.map((c) => [c.id, 0]));
+const reviewRows = (det, c, cat) => {
+  const core = String(c.name ?? "").replace(/\s|캠핑장|오토|글램핑|야영장|카라반/g, "").slice(0, 4);
+  if (!core) return [];
+  const rows = [];
+  for (const key of ["reviews", "web", "cafe", "videos", "sns_images"]) {
+    for (const item of det?.[key] ?? []) {
+      const title = String(item?.title ?? item?.text ?? item?.snippet ?? "").trim();
+      const url = String(item?.url ?? "").trim();
+      if (!title || !/^https?:\/\//i.test(url)) continue;
+      if (!title.replace(/\s/g, "").includes(core) || !cat.re.test(title)) continue;
+      if (rows.some((x) => x.url === url)) continue;
+      rows.push({ text: title.slice(0, 72), url });
+      if (rows.length >= 2) return rows;
+    }
+  }
+  return rows;
+};
 for (const c of camps) {
   if (c.status === "폐업") continue;
   const f = join(dir, "camps", `${encodeURIComponent(c.id)}.json`);
@@ -22,6 +39,14 @@ for (const c of camps) {
   const ids = UNIQUE_CATS.map((x) => x.id).filter((id) => r[id]);
   if (!ids.length) continue;
   c.uq = ids;
+  // 카드의 특색 배지 옆에 해당 체험이 실제로 언급된 후기 원문을 연결한다.
+  // 후기 원문이 없으면 배지만 표시하고 임의의 글을 링크하지 않는다.
+  const uqReviews = {};
+  for (const cat of UNIQUE_CATS.filter((x) => ids.includes(x.id))) {
+    const rows = reviewRows(det, c, cat);
+    if (rows.length) uqReviews[cat.id] = rows;
+  }
+  if (Object.keys(uqReviews).length) c.uq_reviews = uqReviews;
   evidence[c.id] = r;
   for (const id of ids) counts[id]++;
 }
