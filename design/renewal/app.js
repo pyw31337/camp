@@ -4584,7 +4584,8 @@ function listResults(p) {
     shown.sort((a, b) => (a.ce?.unknown ?? 0) - (b.ce?.unknown ?? 0) || (a.ce?.ref ?? 0) - (b.ce?.ref ?? 0) || (rich(b.c) + openBonus(b.c)) - (rich(a.c) + openBonus(a.c)));
   }
   // 거리순을 제외한 모든 목록은 공통 품질 순서를 적용한다.
-  return { shown: qualityOrder(shown.map((x) => x.c), { distance: S.listSort === "near" }).map((c) => shown.find((x) => x.c === c)) };
+  const byCamp = new Map(shown.map((x) => [x.c, x]));
+  return { shown: qualityOrder(shown.map((x) => x.c), { distance: S.listSort === "near" }).map((c) => byCamp.get(c)) };
 }
 // 등록 규격 중 가장 큰 사이트(가로×세로). 조건 검색의 ‘사이트 크기’와 같은 값.
 function siteSizeText(c) {
