@@ -1,5 +1,242 @@
 {
  "src": "한국관광공사 TourAPI searchKeyword2(장소 이름·3km)",
  "rule": "lib/event-venue-photo.mjs",
- "venues": {}
+ "venues": {
+  "경주최부자댁@35.83,129.22": {
+   "venue": "경주최부자댁",
+   "at": "2026-11-06T00:56:22.010Z",
+   "none": true
+  },
+  "고성오광대전수교육관@34.97,128.33": {
+   "venue": "고성오광대전수교육관",
+   "at": "2026-11-06T00:56:26.169Z",
+   "none": true
+  },
+  "구강서원@35.56,129.34": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/12/3049512_image2_1.jpg",
+   "contentid": "1624480",
+   "title": "구강서원",
+   "venue": "구강서원",
+   "at": "2026-11-06T00:56:30.681Z"
+  },
+  "구암서원@35.90,128.60": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/01/3496701_image2_1.jpg",
+   "contentid": "1612435",
+   "title": "구암서원",
+   "venue": "구암서원",
+   "at": "2026-11-06T00:56:22.745Z"
+  },
+  "금산향교@36.11,127.49": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/69/3338769_image2_1.jpg",
+   "contentid": "126868",
+   "title": "금산향교",
+   "venue": "금산향교",
+   "at": "2026-11-06T00:56:29.209Z"
+  },
+  "단양조덕수고택@37.00,128.38": {
+   "venue": "단양조덕수고택",
+   "at": "2026-11-06T00:56:24.625Z",
+   "none": true
+  },
+  "당진필경사@36.95,126.77": {
+   "venue": "당진필경사",
+   "at": "2026-11-06T00:56:23.874Z",
+   "none": true
+  },
+  "동락서원@36.11,128.40": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/91/3545391_image2_1.jpg",
+   "contentid": "1958224",
+   "title": "동락서원",
+   "venue": "동락서원",
+   "at": "2026-11-06T00:56:22.369Z"
+  },
+  "만휴정@36.41,128.91": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/80/3095780_image2_1.jpg",
+   "contentid": "126998",
+   "title": "만휴정",
+   "venue": "만휴정",
+   "at": "2026-11-06T00:56:33.990Z"
+  },
+  "목면시배유지@35.29,127.96": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/47/4090547_image2_1.jpg",
+   "contentid": "130432",
+   "title": "목면시배유지",
+   "venue": "목면시배유지",
+   "at": "2026-11-06T00:56:26.925Z"
+  },
+  "묵계서원@36.42,128.92": {
+   "venue": "묵계서원",
+   "at": "2026-11-06T00:56:34.758Z",
+   "none": true
+  },
+  "밀양향교@35.51,128.75": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/20/4089720_image2_1.jpg",
+   "contentid": "1955408",
+   "title": "밀양향교",
+   "venue": "밀양향교",
+   "at": "2026-11-06T00:56:25.403Z"
+  },
+  "벽진서원@35.12,126.87": {
+   "venue": "벽진서원",
+   "at": "2026-11-06T00:56:33.246Z",
+   "none": true
+  },
+  "보령향교@36.41,126.60": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/40/3334140_image2_1.JPG",
+   "contentid": "1627243",
+   "title": "보령향교",
+   "venue": "보령향교",
+   "at": "2026-11-06T00:56:32.873Z"
+  },
+  "보석사@36.05,127.48": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/65/3559665_image2_1.jpg",
+   "contentid": "125888",
+   "title": "보석사(금산)",
+   "venue": "보석사",
+   "at": "2026-11-06T00:56:28.474Z"
+  },
+  "봉화기헌고택@36.91,128.88": {
+   "venue": "봉화기헌고택",
+   "at": "2026-11-06T00:56:24.252Z",
+   "none": true
+  },
+  "분옥정@36.07,129.17": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/08/3586608_image2_1.jpg",
+   "contentid": "127246",
+   "title": "포항 분옥정",
+   "venue": "분옥정",
+   "at": "2026-11-06T00:56:31.417Z"
+  },
+  "불회사@34.91,126.82": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/24/3529424_image2_1.jpg",
+   "contentid": "126362",
+   "title": "불회사(나주)",
+   "venue": "불회사",
+   "at": "2026-11-06T00:56:30.320Z"
+  },
+  "사천향교@35.09,128.10": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/35/3374335_image2_1.JPG",
+   "contentid": "1955415",
+   "title": "사천향교",
+   "venue": "사천향교",
+   "at": "2026-11-06T00:56:25.795Z"
+  },
+  "상주향교@36.41,128.16": {
+   "venue": "상주향교",
+   "at": "2026-11-06T00:56:32.125Z",
+   "none": true
+  },
+  "송곡서원@36.73,126.41": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/28/3337928_image2_1.jpg",
+   "contentid": "1956356",
+   "title": "송곡서원(서산)",
+   "venue": "송곡서원",
+   "at": "2026-11-06T00:56:29.943Z"
+  },
+  "수덕사근역성보관@36.66,126.62": {
+   "venue": "수덕사근역성보관",
+   "at": "2026-11-06T00:56:23.124Z",
+   "none": true
+  },
+  "수승대@35.76,127.83": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/47/4094947_image2_1.JPG",
+   "contentid": "127696",
+   "title": "거창 수승대",
+   "venue": "수승대",
+   "at": "2026-11-06T00:56:27.326Z"
+  },
+  "신항서원@36.64,127.53": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/85/3357685_image2_1.jpg",
+   "contentid": "125910",
+   "title": "신항서원",
+   "venue": "신항서원",
+   "at": "2026-11-06T00:56:21.262Z"
+  },
+  "양천향교@37.57,126.84": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/46/3570346_image2_1.jpg",
+   "contentid": "127215",
+   "title": "양천향교",
+   "venue": "양천향교",
+   "at": "2026-11-06T00:56:27.706Z"
+  },
+  "언양향교@35.56,129.11": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/64/3049064_image2_1.JPG",
+   "contentid": "1954051",
+   "title": "언양향교",
+   "venue": "언양향교",
+   "at": "2026-11-06T00:56:25.012Z"
+  },
+  "영광매간당고택@35.24,126.47": {
+   "venue": "영광매간당고택",
+   "at": "2026-11-06T00:56:34.375Z",
+   "none": true
+  },
+  "영평사삼명선원@36.47,127.23": {
+   "venue": "영평사삼명선원",
+   "at": "2026-11-06T00:56:21.637Z",
+   "none": true
+  },
+  "예산향교@36.68,126.85": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/07/3340407_image2_1.jpg",
+   "contentid": "1626794",
+   "title": "예산향교",
+   "venue": "예산향교",
+   "at": "2026-11-06T00:56:23.503Z"
+  },
+  "용담향교@35.84,127.58": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/50/3365850_image2_1.JPG",
+   "contentid": "1182630",
+   "title": "용담향교",
+   "venue": "용담향교",
+   "at": "2026-11-06T00:56:28.087Z"
+  },
+  "월봉서원@35.24,126.75": {
+   "venue": "월봉서원",
+   "at": "2026-11-06T00:56:33.622Z",
+   "none": true
+  },
+  "유림회관@35.22,128.59": {
+   "venue": "유림회관",
+   "at": "2026-11-06T00:56:26.543Z",
+   "none": true
+  },
+  "장흥향교@34.67,126.89": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/08/1374408_image2_1.jpg",
+   "contentid": "1391098",
+   "title": "장흥향교",
+   "venue": "장흥향교",
+   "at": "2026-11-06T00:56:32.501Z"
+  },
+  "전주향교@35.81,127.16": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/14/3533014_image2_1.jpg",
+   "contentid": "147684",
+   "title": "전주향교",
+   "venue": "전주향교",
+   "at": "2026-11-06T00:56:28.846Z"
+  },
+  "정선향교@37.38,128.67": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/40/3506540_image2_1.jpg",
+   "contentid": "128110",
+   "title": "정선향교",
+   "venue": "정선향교",
+   "at": "2026-11-06T00:56:20.887Z"
+  },
+  "추사유배지@33.25,126.28": {
+   "venue": "추사유배지",
+   "at": "2026-11-06T00:56:31.047Z",
+   "none": true
+  },
+  "충주향교@36.97,127.94": {
+   "img": "https://tong.visitkorea.or.kr/cms/resource/92/3349692_image2_1.JPG",
+   "contentid": "1627220",
+   "title": "충주향교",
+   "venue": "충주향교",
+   "at": "2026-11-06T00:56:31.774Z"
+  },
+  "한용운선생생가지@36.56,126.55": {
+   "venue": "한용운선생생가지",
+   "at": "2026-11-06T00:56:29.581Z",
+   "none": true
+  }
+ }
 }
