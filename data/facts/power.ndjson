@@ -2441,6 +2441,7 @@
 {"cid":"102365","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102368","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102377","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"hangang-gangseo","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-11-06"}
 {"cid":"hangang-nanji","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://hangang.seoul.go.kr/www/bbsPost/17/632/detail.do?mid=604","at":"2026-11-06"}
 {"cid":"imjingak-peace-nuri","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://ggtour.or.kr/camping/","at":"2026-11-06"}
 {"cid":"osm-n7165750885","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/7165750885","at":"2026-11-06"}
