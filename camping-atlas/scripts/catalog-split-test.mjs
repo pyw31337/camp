@@ -8,6 +8,8 @@ const b = await chromium.launch(process.env.CHROME_PATH ? { executablePath: proc
 const clean = (h) => h.replace(/<section class="hero"[\s\S]*?<\/section>/g, '<section class="hero"></section>').replace(/ (data-(drag-?init|init|h)|style)="[^"]*"/g, "").replace(/<img[^>]*>/g, (m) => m.replace(/ (loading|fetchpriority)="[^"]*"/g, "").replace(/data-src=/g, "src="));
 async function run(useLite, ids) {
   const ctx = await b.newContext({ viewport: { width: 1366, height: 900 } }); const p = await ctx.newPage(); p.setDefaultTimeout(30000);
+  // 원본/가벼운 판 비교에서는 같은 품질 셔플 시드를 써서 데이터 판만 비교한다.
+  await ctx.addInitScript(() => { globalThis.__LETS_CAMP_QUALITY_SEED = "catalog-split"; });
   const errs = []; p.on("pageerror", (e) => { if (!/_leaflet_pos/.test(e.message)) errs.push(e.message); });
   let liteHits = 0, shardHits = 0;
   await p.route(/campgrounds\.lite\.json/, (r) => (useLite ? (liteHits++, r.continue()) : r.fulfill({ status: 404, body: "" })));

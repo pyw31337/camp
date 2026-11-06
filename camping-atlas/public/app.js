@@ -4956,7 +4956,7 @@ function compareUniqueQuality(a, b) {
 // 모든 비거리 배열의 공통 품질 순서. 새로고침마다 최고 그룹만 섞어
 // 같은 테마에서도 새로운 업장이 먼저 보이게 하되, 정보 부족 업장이
 // 일반 캠핑장보다 앞으로 오는 일은 없게 한다.
-const QUALITY_SEED = Math.random();
+const QUALITY_SEED = globalThis.__LETS_CAMP_QUALITY_SEED ?? Math.random();
 const qualityPoor = (c) => Number(c.iq ?? rich(c)) < 20 || (!c.pf?.s && !c.fee?.text && !(c.st?.length));
 function qualityBucket(c) {
   if (uniqueIsForest(c) || qualityPoor(c)) return 2;
