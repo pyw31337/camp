@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-06T00:12:56.826Z",
+ "generated_at": "2026-11-06T02:11:57.001Z",
  "date": "2026-11-06",
  "totals": {
   "campgrounds": 6421,
-  "facts": 244266,
+  "facts": 244268,
   "pairs": 192728,
   "mean_confidence": 0.78,
   "confirmed_pct": 84,
@@ -1949,12 +1949,12 @@
    "confirmed_pct": 19,
    "corroborated": 664,
    "conflicts": 15,
-   "weak": 1404,
+   "weak": 1405,
    "status": {
     "VERIFIED": 231,
-    "WEAK": 1404,
+    "WEAK": 1405,
     "CONFIRMED": 309,
-    "SINGLE": 657,
+    "SINGLE": 656,
     "CORROBORATED": 223,
     "CONFLICT": 15
    }
