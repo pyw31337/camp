@@ -39598,7 +39598,7 @@
    "name": "원주두리캠핑장",
    "status": "OK",
    "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
-   "checked_at": "2026-11-05T23:38:33.900Z",
+   "checked_at": "2026-11-06T06:37:42.321Z",
    "discovered": true,
    "pages": [
     "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
@@ -39904,17 +39904,17 @@
      }
     },
     {
-     "text": "31 공지사항 동절기에는 수영장은 운영 안합니다 원주두리캠핑 2025-12-16 758",
+     "text": "31 공지사항 동절기에는 수영장은 운영 안합니다 원주두리캠핑 2025-12-16 763",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "31 공지사항 동절기에는 수영장은 운영 안합니다 원주두리캠핑 2025-12-16 758"
+      "text": "31 공지사항 동절기에는 수영장은 운영 안합니다 원주두리캠핑 2025-12-16 763"
      }
     },
     {
-     "text": "29 11월 얼리 체크인/체크아웃 행사/수영장운영 변경 안내 원주두리캠핑 2024-10-20 1780",
+     "text": "29 11월 얼리 체크인/체크아웃 행사/수영장운영 변경 안내 원주두리캠핑 2024-10-20 1783",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "29 11월 얼리 체크인/체크아웃 행사/수영장운영 변경 안내 원주두리캠핑 2024-10-20 1780"
+      "text": "29 11월 얼리 체크인/체크아웃 행사/수영장운영 변경 안내 원주두리캠핑 2024-10-20 1783"
      }
     },
     {
@@ -39925,10 +39925,10 @@
      }
     },
     {
-     "text": "26 실내,실외 수영장 온수 운영안내 원주두리캠핑 2024-08-24 1679",
+     "text": "26 실내,실외 수영장 온수 운영안내 원주두리캠핑 2024-08-24 1680",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "26 실내,실외 수영장 온수 운영안내 원주두리캠핑 2024-08-24 1679"
+      "text": "26 실내,실외 수영장 온수 운영안내 원주두리캠핑 2024-08-24 1680"
      }
     },
     {
@@ -39960,10 +39960,10 @@
      }
     },
     {
-     "text": "20 캠핑장 운영정책 및 이용수칙 원주두리캠핑 2024-05-18 1016",
+     "text": "20 캠핑장 운영정책 및 이용수칙 원주두리캠핑 2024-05-18 1020",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "20 캠핑장 운영정책 및 이용수칙 원주두리캠핑 2024-05-18 1016"
+      "text": "20 캠핑장 운영정책 및 이용수칙 원주두리캠핑 2024-05-18 1020"
      }
     },
     {
@@ -110846,7 +110846,7 @@
    "name": "라플란드",
    "status": "FETCH_FAILED",
    "url": "https://oneoneone.kr/content/d6a7b05a",
-   "checked_at": "2026-11-05T23:38:32.228Z",
+   "checked_at": "2026-11-06T06:37:40.631Z",
    "error": "404"
   },
   "100126": {
@@ -176985,7 +176985,7 @@
    "name": "골든쌔들 캠핑장",
    "status": "FETCH_FAILED",
    "url": "https://www.goldensaddlecamping.kr/",
-   "checked_at": "2026-11-05T23:38:34.088Z",
+   "checked_at": "2026-11-06T06:37:42.622Z",
    "error": "403"
   },
   "101270": {
@@ -225557,7 +225557,7 @@
    "name": "WonderWood Glamping(원더우드 글램핑)",
    "status": "DISCOVERED_NOT_OPERATOR",
    "url": "https://campingfriend.co.kr/listing-camp-detail/9414",
-   "checked_at": "2026-11-05T23:38:32.230Z",
+   "checked_at": "2026-11-06T06:37:40.633Z",
    "discovered": true,
    "check": {
     "ok": false,
@@ -225952,7 +225952,7 @@
     }
    ],
    "last_attempt": {
-    "at": "2026-11-05T23:38:32.229Z",
+    "at": "2026-11-06T06:37:40.632Z",
     "status": "NO_RELEVANT_TEXT",
     "error": null
    }
@@ -229140,7 +229140,7 @@
    "name": "평택캠핑성",
    "status": "FETCH_FAILED",
    "url": "https://platformdodam.com/children-play-facilities/3019",
-   "checked_at": "2026-11-05T23:38:32.203Z",
+   "checked_at": "2026-11-06T06:37:40.609Z",
    "error": "403"
   },
   "102378": {
@@ -263067,6 +263067,6 @@
    }
   }
  },
- "generated_at": "2026-11-05T23:38:47.679Z",
+ "generated_at": "2026-11-06T06:37:55.606Z",
  "policy": "운영자 자체 홈페이지·예약 페이지만, robots.txt 준수, 봇 이름 공개, 문장(≤140자)·원문 URL·확인 시각만 저장. 플랫폼 페이지는 수집하지 않음."
 }
