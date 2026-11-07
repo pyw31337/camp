@@ -467,7 +467,7 @@
    "coverage": {
     "campgrounds": 1548,
     "by_grade": {
-     "OPERATOR": 8736,
+     "OPERATOR": 8731,
      "CONFIRMED": 3
     }
    }
@@ -2656,5 +2656,5 @@
    }
   }
  ],
- "generated_at": "2026-11-07T13:32:30.583Z"
+ "generated_at": "2026-11-07T16:22:01.549Z"
 }
