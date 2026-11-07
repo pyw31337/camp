@@ -5818,6 +5818,7 @@
 {"cid":"102365","attr":"SITE_SURFACE","value":"DECK","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102368","attr":"AREA_TOTAL_M2","value":1732,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102368","attr":"SITE_GAP_M","value":1,"grade":"CONFIRMED","src":"gocamping","text":"1m"}
+{"cid":"osm-w32660867","attr":"SITE_SIZE","value":"8×10m","grade":"MENTION","src":"review_search","url":"https://leports.sailing-blog.click/4407","at":"2025-11-03","quote":"사이트 크기는 가로 8m 세로 10m로 대형 텐트를 설치하기에 무리가 없다.","text":"8×10m","n":1}
 {"cid":"osm-w256957046","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/256957046","at":"2026-11-06"}
 {"cid":"osm-w256957046","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/smurfshouse/224434528939","at":"2026-10-07","quote":"구미 낙동강 체육공원은 주말 나들이로 피크닉 즐기기에도 좋고, 예쁜 꽃구경도 하기 좋은 곳이며...내 야외물놀이장 옆) 시설: 오토캠핑 사이트 50면 사이트 크기: 10m × 10m 입실·퇴실: 오후 2시 ~ 다음 날 오전…","text":"10×10m","n":1}
 {"cid":"osm-w468666165","attr":"SITE_SIZE","value":"6×7m","grade":"MENTION","src":"review_search","url":"https://parksmiley.tistory.com/564","at":"2025-07-14","quote":"사이트 크기: 약 6x7m로, 대형 텐트나 타프 설치 시 공간 계획 필요","text":"6×7m","n":1}
@@ -5836,6 +5837,7 @@
 {"cid":"osm-w1188029707","attr":"SITE_SIZE","value":"3×4m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1188029707","at":"2026-11-06"}
 {"cid":"osm-w1299163837","attr":"SITE_SIZE","value":"6×12m","grade":"MENTION","src":"review_search","url":"https://leports.sailing-blog.click/4624","at":"2026-09-29","quote":"캠핑장에는 파쇄석으로 이뤄진 오토캠핑 사이트 35면이 있으며, 크기는 가로 6m 세로 12m다.","text":"6×12m","n":1}
 {"cid":"osm-w1299163837","attr":"SITE_SIZE","value":"8×9m","grade":"MENTION","src":"review_search","url":"https://leports.sailing-blog.click/4624","at":"2026-09-29","quote":"파쇄석으로 조성된 오토캠핑 사이트 38면을 운영하며 사이트 크기는 가로 8m, 세로 9m 등으로 구성되어 있다.","text":"8×9m","n":1}
+{"cid":"osm-w1364621790","attr":"SITE_SIZE","value":"5×3.5m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/gomtn/223514179274","at":"2024-07-16","quote":"텐트사이트는 주차장 옆에 있는 야자매트 깔린 5m * 3.5m 규모의 공간을...","text":"5×3.5m","n":1}
 {"cid":"osm-w1378241447","attr":"SITE_SIZE","value":"10×10m","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1378241447","at":"2026-11-06"}
 {"cid":"osm-w1378241447","attr":"SITE_SIZE","value":"10×10m","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/smurfshouse/224434528939","at":"2026-10-07","quote":"구미 낙동강 체육공원은 주말 나들이로 피크닉 즐기기에도 좋고, 예쁜 꽃구경도 하기 좋은 곳이며...내 야외물놀이장 옆) 시설: 오토캠핑 사이트 50면 사이트 크기: 10m × 10m 입실·퇴실: 오후 2시 ~ 다음 날 오전…","text":"10×10m","n":1}
 {"cid":"park-28110-00011-1of7j","attr":"SITE_SIZE","value":"8×4m","grade":"OPERATOR","src":"operator_discovered","url":"http://m.xn--hy1b07tnrd1yac7cpi07cn9xruo.com/customer/customer_0300.asp","at":"2026-10-31T22:51:18.961Z","quote":"영종씨사이드 캠핑장은 A구역(일반노지:22면), B구역(일반데크 8mx4m:14면), C구역(일반데크 4mx4m:24면) 총 60면으로 구성되어 있으며, 주변에는 염전체험장, 자전거도로, 레일바이크, 놀이터,족구장, 농구장 등 다양한 체험거리가 있습…","text":"8×4m"}
