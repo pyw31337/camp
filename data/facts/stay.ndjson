@@ -3835,8 +3835,8 @@
 {"cid":"2464","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.littlejsb.com/103","at":"2025-04-21","text":"펜션","quote":"운영 형태 : 오토캠핑장, 펜션 병행 운영. 운영 기간 : 연중무휴. 입실/퇴실 시간 : 입실 13:0"}
 {"cid":"2464","attr":"STAY_GENERAL_SITES","value":50,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2472","attr":"SITE_TOTAL","value":70,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2472","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/%ec%98%88%ec%95%bd%ec%95%88%eb%82%b4/","at":"2026-11-07T12:56:49.025Z","quote":"캠핑카, 카라반, 텐트라반, 투폴딩 트레일러는 진입 불가 입니다."}
-{"cid":"2472","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/","at":"2026-11-07T12:56:49.025Z","text":"방갈로","quote":"방갈로전용"}
+{"cid":"2472","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/%ec%98%88%ec%95%bd%ec%95%88%eb%82%b4/","at":"2026-11-07T19:25:42.767Z","quote":"캠핑카, 카라반, 텐트라반, 투폴딩 트레일러는 진입 불가 입니다."}
+{"cid":"2472","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/","at":"2026-11-07T19:25:42.767Z","text":"방갈로","quote":"방갈로전용"}
 {"cid":"2472","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":70}
 {"cid":"2472","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/ichean.camp/VwG0/5","at":"2020-07-02","quote":"033-636-7700 - 화천/딴산유원지 : ***-****-****, 물놀이(계곡) - 원주/두리오토캠핑장 : 033-765-8569, 선착순(50%)/예약(50%), 펜션(예약"}
 {"cid":"2472","attr":"STAY_GENERAL_SITES","value":70,"grade":"CONFIRMED","src":"gocamping"}
@@ -23621,6 +23621,7 @@
 {"cid":"osm-w1035367369","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/ssseol_a91/224437710288","at":"2026-10-11","quote":"청주 이티성 글램핑장 가격 불멍 바베큐 아기랑 겨울 글램핑 추천 ..... ❤️여기어때 국"}
 {"cid":"osm-w1035367369","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/camfit/222792354523","at":"2022-06-29","text":"방갈로","quote":"초정216 캠핑장, 청주 카라반 방갈로 파고라(애견동반 카페). 있도록 캠핑이 함께하고 있습니다. 초정216"}
 {"cid":"osm-w1035879428","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://mimisolsol.tistory.com/81","at":"2023-12-02","quote":"해해해캠핑장은 경남 고성에 위치한 신생 오토 캠핑장입니다.. 샤워장, 화장실, 개수대 모두 깔끔한 시설로 경남 캠핑장을 찾"}
+{"cid":"osm-w1038767377","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/kkkjyw/224121457586","at":"2025-12-24","quote":"인천의 노을 맛집부터 파도 소리 들리는 감성 글램핑 명소 베스트 10..... 2️⃣ 관람시간: 입실 15:00 / 퇴실"}
 {"cid":"osm-w1038767377","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/junseoit/224368116977","at":"2026-08-10","text":"펜션","quote":"대부도 펜션 추천 및 예약 가이드: 인원별 가격대와 이동 동선 정리. 꽤 넓기 때문"}
 {"cid":"osm-w1058034064","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/acthyou1010/222863213384","at":"2022-08-31","quote":"서울근교 글램핑장과 춘천 여행 코스 목록. 입실 시간 : 오후 3시 퇴실 시간 : 오전"}
 {"cid":"osm-w1059323632","attr":"SITE_TYPE","value":"HOUSE","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/26610572","at":"2026-10-24T21:15:38.193Z","text":"펜션","quote":"여행 > 숙박 > 펜션"}

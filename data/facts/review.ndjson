@@ -16000,8 +16000,10 @@
 {"cid":"osm-w471823464","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/luckypersimmon/223107510976","at":"2023-05-21","n":1,"text":"시설 깔끔·쾌적"}
 {"cid":"osm-w472292322","attr":"REVIEW_CON_BUGS","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/masissu_/224424111977","at":"2026-09-27","n":1,"text":"벌레 많음"}
 {"cid":"osm-w472292322","attr":"REVIEW_CON_NOISE","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/masissu_/224424111977","at":"2026-09-27","n":2,"text":"소음·매너"}
+{"cid":"osm-w472292322","attr":"REVIEW_CON_PRICE","value":1,"grade":"MENTION","src":"review_search","url":"https://todays-trip.tistory.com/45","at":"2026-11-07","n":1,"text":"가격 부담"}
 {"cid":"osm-w472292322","attr":"REVIEW_COUNT","value":15,"grade":"MENTION","src":"review_search","n":15}
 {"cid":"osm-w472292322","attr":"REVIEW_PRO_CLEAN_FACILITY","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/gongonelife/224427836135","at":"2026-10-01","n":2,"text":"시설 깔끔·쾌적"}
+{"cid":"osm-w472292322","attr":"REVIEW_PRO_EASY_PARKING","value":1,"grade":"MENTION","src":"review_search","url":"https://todays-trip.tistory.com/45","at":"2026-11-07","n":1,"text":"주차 편함·옆 주차"}
 {"cid":"osm-w472292322","attr":"REVIEW_PRO_FAMILY_HEALING","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/fabrelee12/224446289847","at":"2026-10-19","n":2,"text":"가족·모임 힐링"}
 {"cid":"osm-w472292322","attr":"REVIEW_PRO_KIDS","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/dlqmsdl10045/224370835357","at":"2026-08-07","n":1,"text":"아이들 놀기 좋음"}
 {"cid":"osm-w472292322","attr":"REVIEW_PRO_QUIET","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/gongonelife/224427836135","at":"2026-10-01","n":1,"text":"조용·한적"}
@@ -16211,7 +16213,9 @@
 {"cid":"osm-w555901772","attr":"REVIEW_PRO_KIDS","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/jabis_tory/224441742008","at":"2026-10-15","n":2,"text":"아이들 놀기 좋음"}
 {"cid":"osm-w555901772","attr":"REVIEW_PRO_QUIET","value":1,"grade":"MENTION","src":"review_search","url":"https://kesamo.co.kr/1177","at":"2026-10-13","n":1,"text":"조용·한적"}
 {"cid":"osm-w555901772","attr":"REVIEW_PRO_WIDE_SITE","value":1,"grade":"MENTION","src":"review_search","url":"https://kesamo.co.kr/1177","at":"2026-10-13","n":1,"text":"사이트 넓음"}
-{"cid":"osm-w556372332","attr":"REVIEW_COUNT","value":2,"grade":"MENTION","src":"review_search","n":2}
+{"cid":"osm-w556372332","attr":"REVIEW_COUNT","value":4,"grade":"MENTION","src":"review_search","n":4}
+{"cid":"osm-w556372332","attr":"REVIEW_PRO_CLEAN_FACILITY","value":1,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/sigint/224465255183","at":"2026-11-04","n":1,"text":"시설 깔끔·쾌적"}
+{"cid":"osm-w556372332","attr":"REVIEW_PRO_WALK","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/sigint/224465255183","at":"2026-11-04","n":2,"text":"산책·둘레길 좋음"}
 {"cid":"osm-w556481259","attr":"REVIEW_COUNT","value":1,"grade":"MENTION","src":"review_search","n":1}
 {"cid":"osm-w558646580","attr":"REVIEW_COUNT","value":8,"grade":"MENTION","src":"review_search","n":8}
 {"cid":"osm-w558646580","attr":"REVIEW_PRO_ACCESSIBILITY","value":2,"grade":"MENTION","src":"review_search","url":"https://blog.naver.com/bitdoduk90/224296167409","at":"2026-05-25","n":2,"text":"접근성 좋음"}

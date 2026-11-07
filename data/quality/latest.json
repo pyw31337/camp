@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-11-07T16:22:19.353Z",
+ "generated_at": "2026-11-07T20:05:55.912Z",
  "date": "2026-11-08",
  "totals": {
   "campgrounds": 6421,
-  "facts": 244786,
-  "pairs": 193096,
+  "facts": 244808,
+  "pairs": 193110,
   "mean_confidence": 0.779,
   "confirmed_pct": 83.9,
   "corroborated": 4144,
@@ -842,18 +842,18 @@
    }
   },
   "PET_POLICY": {
-   "coverage": 2900,
+   "coverage": 2901,
    "coverage_pct": 45.2,
    "mean_confidence": 0.833,
    "confirmed_pct": 89.5,
    "corroborated": 727,
    "conflicts": 59,
-   "weak": 220,
+   "weak": 221,
    "status": {
     "CONFLICT": 59,
     "CONFIRMED": 2323,
     "VERIFIED": 273,
-    "WEAK": 220,
+    "WEAK": 221,
     "SINGLE": 25
    }
   },
@@ -947,15 +947,15 @@
    }
   },
   "PRICE_MENTION": {
-   "coverage": 2948,
-   "coverage_pct": 45.9,
+   "coverage": 2951,
+   "coverage_pct": 46,
    "mean_confidence": 0.369,
    "confirmed_pct": 0,
    "corroborated": 452,
    "conflicts": 0,
-   "weak": 2496,
+   "weak": 2499,
    "status": {
-    "WEAK": 2496,
+    "WEAK": 2499,
     "CORROBORATED": 452
    }
   },
@@ -979,22 +979,22 @@
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 969,
+   "weak": 968,
    "status": {
-    "SINGLE": 2925,
-    "WEAK": 969
+    "SINGLE": 2926,
+    "WEAK": 968
    }
   },
   "REVIEW_PRO_CLEAN_FACILITY": {
-   "coverage": 1840,
+   "coverage": 1841,
    "coverage_pct": 28.7,
    "mean_confidence": 0.374,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 1727,
+   "weak": 1728,
    "status": {
-    "WEAK": 1727,
+    "WEAK": 1728,
     "SINGLE": 113
    }
   },
@@ -1025,15 +1025,15 @@
    }
   },
   "REVIEW_PRO_EASY_PARKING": {
-   "coverage": 611,
+   "coverage": 612,
    "coverage_pct": 9.5,
    "mean_confidence": 0.348,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 610,
+   "weak": 611,
    "status": {
-    "WEAK": 610,
+    "WEAK": 611,
     "SINGLE": 1
    }
   },
@@ -1127,15 +1127,15 @@
    }
   },
   "REVIEW_PRO_WALK": {
-   "coverage": 360,
+   "coverage": 361,
    "coverage_pct": 5.6,
-   "mean_confidence": 0.349,
+   "mean_confidence": 0.35,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 359,
+   "weak": 360,
    "status": {
-    "WEAK": 359,
+    "WEAK": 360,
     "SINGLE": 1
    }
   },
@@ -1349,15 +1349,15 @@
    }
   },
   "REVIEW_CON_PRICE": {
-   "coverage": 63,
+   "coverage": 64,
    "coverage_pct": 1,
-   "mean_confidence": 0.335,
+   "mean_confidence": 0.336,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 63,
+   "weak": 64,
    "status": {
-    "WEAK": 63
+    "WEAK": 64
    }
   },
   "REVIEW_CON_BUGS": {
@@ -1641,17 +1641,17 @@
    }
   },
   "SITE_SIZE": {
-   "coverage": 1360,
+   "coverage": 1361,
    "coverage_pct": 21.2,
-   "mean_confidence": 0.826,
-   "confirmed_pct": 87.8,
+   "mean_confidence": 0.825,
+   "confirmed_pct": 87.7,
    "corroborated": 329,
    "conflicts": 0,
-   "weak": 129,
+   "weak": 130,
    "status": {
     "CONFIRMED": 1010,
     "VERIFIED": 184,
-    "WEAK": 129,
+    "WEAK": 130,
     "CORROBORATED": 8,
     "SINGLE": 29
    }
@@ -1926,16 +1926,16 @@
    }
   },
   "CHECKIN_TIME": {
-   "coverage": 2825,
+   "coverage": 2827,
    "coverage_pct": 44,
    "mean_confidence": 0.524,
    "confirmed_pct": 18.2,
    "corroborated": 584,
    "conflicts": 42,
-   "weak": 1381,
+   "weak": 1383,
    "status": {
     "VERIFIED": 218,
-    "WEAK": 1381,
+    "WEAK": 1383,
     "CONFIRMED": 296,
     "CONFLICT": 42,
     "SINGLE": 712,
@@ -1943,16 +1943,16 @@
    }
   },
   "CHECKOUT_TIME": {
-   "coverage": 2859,
-   "coverage_pct": 44.5,
+   "coverage": 2861,
+   "coverage_pct": 44.6,
    "mean_confidence": 0.523,
    "confirmed_pct": 18.9,
    "corroborated": 664,
    "conflicts": 15,
-   "weak": 1419,
+   "weak": 1421,
    "status": {
     "VERIFIED": 231,
-    "WEAK": 1419,
+    "WEAK": 1421,
     "CONFIRMED": 309,
     "SINGLE": 662,
     "CORROBORATED": 223,
@@ -1960,7 +1960,7 @@
    }
   },
   "MANNER_TIME": {
-   "coverage": 2246,
+   "coverage": 2247,
    "coverage_pct": 35,
    "mean_confidence": 0.391,
    "confirmed_pct": 5.7,
@@ -1970,7 +1970,7 @@
    "status": {
     "WEAK": 1754,
     "CONFIRMED": 113,
-    "SINGLE": 317,
+    "SINGLE": 318,
     "CORROBORATED": 47,
     "VERIFIED": 15
    }
