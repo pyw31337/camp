@@ -2494,6 +2494,7 @@
 {"cid":"osm-w1428441822","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1428441822","at":"2026-11-07"}
 {"cid":"osm-w1513061476","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1513061476","at":"2026-11-07"}
 {"cid":"osm-w1548007521","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1548007521","at":"2026-11-07"}
+{"cid":"park-11290-00052-sx2ge","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-11320-00001-v47ih","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-11380-00038-xcsu","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-11500-00020-2wr9f","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
@@ -2523,6 +2524,7 @@
 {"cid":"park-41550-00046-pdncm","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41820-00003-1aik1","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-43113-00149-x2lf","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-43114-00048-syac5","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-44710-00006-n71qm","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-46130-00107-rtjvm","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-46770-00014-qc3lb","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
@@ -2530,6 +2532,7 @@
 {"cid":"park-46880-00002-q3i43","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-48820-00001-n71qm","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-48840-00001-n71qm","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-50130-00029-q400g","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-51110-00126-vtsx3","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-51130-00001-16vkn","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-51790-00006-1id3h","attr":"POWER_AVAILABLE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}

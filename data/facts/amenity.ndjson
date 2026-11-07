@@ -14009,6 +14009,8 @@
 {"cid":"osm-w469664946","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/469664946","at":"2026-11-07"}
 {"cid":"osm-w469664946","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://hcmoviethemepark.com/about03.html","at":"2026-10-24T23:04:23.319Z","quote":"구분 사용기준 모노레일 트램(전기차) 비고"}
 {"cid":"osm-w469664946","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/469664946","at":"2026-11-07"}
+{"cid":"osm-w469937424","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/469937424","at":"2026-11-07"}
+{"cid":"osm-w469937424","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/469937424","at":"2026-11-07"}
 {"cid":"osm-w470005739","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/470005739","at":"2026-11-07"}
 {"cid":"osm-w470895444","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/470895444","at":"2026-11-07"}
 {"cid":"osm-w471345995","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/471345995","at":"2026-11-07"}
@@ -14148,6 +14150,7 @@
 {"cid":"osm-w892201616","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/892201616","at":"2026-11-07"}
 {"cid":"osm-w892201616","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/892201616","at":"2026-11-07","text":"물놀이장"}
 {"cid":"osm-w892201616","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/892201616","at":"2026-11-07"}
+{"cid":"osm-w892201616","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/892201616","at":"2026-11-07"}
 {"cid":"osm-w892201616","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/892201616","at":"2026-11-07"}
 {"cid":"osm-w893893154","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/893893154","at":"2026-11-07"}
 {"cid":"osm-w894062894","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/894062894","at":"2026-11-07"}
@@ -14304,6 +14307,7 @@
 {"cid":"osm-w1562524233","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1562524233","at":"2026-11-07"}
 {"cid":"osm-w1562524233","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1562524233","at":"2026-11-07","text":"물놀이장"}
 {"cid":"osm-w1562524233","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1562524233","at":"2026-11-07"}
+{"cid":"osm-w1562524233","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1562524233","at":"2026-11-07"}
 {"cid":"osm-w1562524233","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1562524233","at":"2026-11-07"}
 {"cid":"osm-w1565416037","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1565416037","at":"2026-11-07"}
 {"cid":"osm-w1565416037","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/way/1565416037","at":"2026-11-07"}
@@ -14344,6 +14348,7 @@
 {"cid":"park-26440-00074-r9z12","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-27140-00047-1y0hk","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-27140-00052-1vw6f","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-27140-00066-t8syz","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-27200-00029-pt372","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-27200-00029-pt372","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-27710-00044-d7cr7","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
@@ -14370,6 +14375,7 @@
 {"cid":"park-28260-00019-nbp8l","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-29170-00088-1rig1","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-29200-00001-pd74b","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-29200-00002-xcsu","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-29200-00004-y6e3","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-29200-00013-11ehj","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-29200-00013-11ehj","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
@@ -14384,6 +14390,7 @@
 {"cid":"park-30230-00082-55si2","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-31110-10005-1mmdn","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-31140-00091-i3ljd","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-31140-00110-n71qm","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-31710-00003-1n6kb","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41135-00002-pzbxp","attr":"AMENITY_PLAYGROUND","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://camping.isdc.co.kr/","at":"2026-10-24T22:47:31.908Z","quote":"부설주차장 70면, 어린이 놀이터, 숲 체험 공간, 숲 놀이터 등"}
 {"cid":"park-41135-00002-pzbxp","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
@@ -14391,6 +14398,7 @@
 {"cid":"park-41150-00001-1v57i","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41150-00001-1v57i","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41150-00079-s05u7","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-41190-00089-p6gdy","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41210-00065-qclt1","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41210-00076-mbip0","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41210-00076-mbip0","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
@@ -14435,10 +14443,12 @@
 {"cid":"park-41410-00018-qakga","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41410-00142-h9oxf","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41410-00142-h9oxf","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-41430-00002-jbiuc","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41430-00012-1uj25","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41450-00034-om6f4","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41461-00002-oflav","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41461-00031-np4h0","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-41480-00166-u00e0","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41500-00001-p9d1y","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41500-00002-pyf1i","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41550-00046-pdncm","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
@@ -14448,7 +14458,9 @@
 {"cid":"park-41590-00112-115k9","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41590-00177-1w6yr","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41590-00348-ayrlz","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-41590-00354-ftuku","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41670-00001-15z6x","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-41670-00017-y801m","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41670-00017-y801m","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41800-00003-18ggn","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-41820-00003-1aik1","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
@@ -14461,6 +14473,7 @@
 {"cid":"park-43730-00010-1yz86","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-43750-00017-pd3vw","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-43760-00018-1tho0","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-43760-00025-14z6t","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-43760-00026-1wne1","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-43760-00026-1wne1","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-43770-00109-olek6","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
@@ -14516,11 +14529,15 @@
 {"cid":"park-47290-00059-n61we","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-47830-00032-1ftpv","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-48121-00003-n71qm","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-48123-00075-1afka","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-48123-00075-1afka","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-48127-00001-qakga","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-48127-00001-qakga","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-48129-00002-w8xml","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-48170-00075-10oql","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-48250-00262-oggd1","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-48270-00019-wta2t","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-48270-00024-1fnkk","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-48310-00101-2fhe7","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-48310-00401-1k7e8","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-48720-00001-n71qm","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
@@ -14530,10 +14547,13 @@
 {"cid":"park-48820-00001-n71qm","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-48840-00001-n71qm","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-48850-00001-pb3gq","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-48850-00001-pb3gq","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-48890-00004-qcrdk","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-50110-00194-1g4b7","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://psf.kr/community/notice.htm","at":"2026-10-24T23:00:15.165Z","quote":"서귀포서귀포국민체육센터수영장(0)"}
 {"cid":"park-50110-00194-1g4b7","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-50130-00029-q400g","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-51110-00021-om6f4","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-51110-00126-vtsx3","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-51130-00004-1jcoz","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-51130-00010-1g8kb","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-51130-00013-1jbhn","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
@@ -14544,6 +14564,7 @@
 {"cid":"park-51210-00038-qakga","attr":"AMENITY_TRAMPOLINE","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-51210-00041-9tgqo","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-51790-00005-1majq","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
+{"cid":"park-51790-00005-1majq","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-51790-00006-1id3h","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-51790-00006-1id3h","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
 {"cid":"park-52111-00048-s6njs","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-07"}
