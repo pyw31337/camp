@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-07T20:05:38.929Z",
+ "generated_at": "2026-11-07T23:24:00.788Z",
  "rule": "pipeline/lib/fact-refine.mjs",
- "dropped": 259,
- "recoded": 152,
- "scoped": 669,
+ "dropped": 260,
+ "recoded": 154,
+ "scoped": 678,
  "items": [
   {
    "cid": "7509",
@@ -4207,12 +4207,44 @@
    "why": "크기 제한 있는 허용"
   },
   {
+   "cid": "osm-w800017934",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "SMALL_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/yongtanglee/223707814377",
+   "quote": "입실 :오후 1시부터 퇴실: 다음날 오전 11시까지 10kg 이하 애견 동반 가능 매너 타임: 오후 10시 30 ~오전 06...",
+   "action": "recode",
+   "why": "크기 제한 있는 허용"
+  },
+  {
    "cid": "rf-14xm2hg",
    "attr": "PET_POLICY",
    "value": "NOT_ALLOWED",
    "src": "review_search",
    "url": "https://all-infor.tistory.com/166",
    "quote": "연계·남원 추어탕·반려견 불가·방문 전 체크리스트·FAQ inforpik.co.kr 전북특별자치도 남원시 신정동의 명산 요천 자락 요람에 자리 잡은 남원 자연휴양림은 푸른 소나무 군락지와 사계절 맑은 물이 흐르는 골짜기, 광한루원 및 지리산 둘레길 …",
+   "action": "drop",
+   "why": "홍보·목록 제목(규칙 아님)"
+  },
+  {
+   "cid": "rf-xuijdf",
+   "attr": "PET_POLICY",
+   "value": "ALLOWED",
+   "to": "ZONE_ONLY",
+   "src": "review_search",
+   "url": "https://blog.naver.com/whgpdms1774/224361067268",
+   "quote": "경남 하동 구재봉 자연휴양림에는 숲속의집/휴양관/트리하우스/캠핑하우스/데크 등 다양한 숙박 형태가 있는데 그 중에서 우리는 숲속의 집, 소나무 1호(애견 동반 가능) 에 묵었다.",
+   "action": "recode",
+   "why": "일부 객실·구역만 허용"
+  },
+  {
+   "cid": "rf-xslvy9",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://koreatravel-guide.tistory.com/153",
+   "quote": "치유의 숲길&middot;빙계계곡 연계&middot;의성군민 감면&middot;반려견 동반 불가&middot;방문 전 체크리스트&middot;FAQ 포함.",
    "action": "drop",
    "why": "홍보·목록 제목(규칙 아님)"
   },
