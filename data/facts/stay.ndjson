@@ -3835,8 +3835,8 @@
 {"cid":"2464","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.littlejsb.com/103","at":"2025-04-21","text":"펜션","quote":"운영 형태 : 오토캠핑장, 펜션 병행 운영. 운영 기간 : 연중무휴. 입실/퇴실 시간 : 입실 13:0"}
 {"cid":"2464","attr":"STAY_GENERAL_SITES","value":50,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2472","attr":"SITE_TOTAL","value":70,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2472","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/%ec%98%88%ec%95%bd%ec%95%88%eb%82%b4/","at":"2026-11-07T05:55:06.079Z","quote":"캠핑카, 카라반, 텐트라반, 투폴딩 트레일러는 진입 불가 입니다."}
-{"cid":"2472","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/","at":"2026-11-07T05:55:06.079Z","text":"방갈로","quote":"방갈로전용"}
+{"cid":"2472","attr":"SITE_TYPE","value":"CARAVAN","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/%ec%98%88%ec%95%bd%ec%95%88%eb%82%b4/","at":"2026-11-07T12:56:49.025Z","quote":"캠핑카, 카라반, 텐트라반, 투폴딩 트레일러는 진입 불가 입니다."}
+{"cid":"2472","attr":"SITE_TYPE","value":"HOUSE","grade":"OPERATOR","src":"operator_homepage","url":"https://xn--hu1br5hkpnoya62cvwpv8l.com/","at":"2026-11-07T12:56:49.025Z","text":"방갈로","quote":"방갈로전용"}
 {"cid":"2472","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":70}
 {"cid":"2472","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"cafe_mention","url":"https://cafe.daum.net/ichean.camp/VwG0/5","at":"2020-07-02","quote":"033-636-7700 - 화천/딴산유원지 : ***-****-****, 물놀이(계곡) - 원주/두리오토캠핑장 : 033-765-8569, 선착순(50%)/예약(50%), 펜션(예약"}
 {"cid":"2472","attr":"STAY_GENERAL_SITES","value":70,"grade":"CONFIRMED","src":"gocamping"}
@@ -23513,6 +23513,7 @@
 {"cid":"osm-w727506688","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/kanseul_/224164175938","at":"2026-01-29","text":"펜션","quote":"창원 마산 펜션 오션뷰 오토캠핑장 감성 카라반 추천 더숨포레스트 ..... 숙소정보 및"}
 {"cid":"osm-w731744163","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/dsyhome/224174146100","at":"2026-02-06","quote":"실내테니스장&김천오토캠핑장 국립김천숲속야영장 김천맑은계곡 오토캠핑장 산내들오토캠핑장 은하수 관광농"}
 {"cid":"osm-w731744163","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/xxzczxx/223006426310","at":"2023-02-06","quote":"경북 김천 모디이캠핑장 자가카라반전용사이트 1박2일 후기 내돈내산. 광장 산내들광장이라는 건물 2층이 실"}
+{"cid":"osm-w731744163","attr":"SITE_TYPE","value":"GLAMPING","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/officedepot_blog/223852703780","at":"2025-05-01","quote":"대여, 샤워시설 및 전기 등 편의시설도 잘 갖춰져 있어 초보 캠퍼도 이용할 수 있는 캠핑& 글램핑장 🏕 ​ 산책로를 따라 들꽃과 나무, 계곡물소리를 들으며 자연을..."}
 {"cid":"osm-w731744186","attr":"SITE_TYPE","value":"AUTO","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/sksmsgurdl/224424539482","at":"2026-09-28","quote":"김천 산내들 오토 캠핑장!가을 캠핑 지금이 최적기. 14:00 입실 / 익일 12:00 퇴실]"}
 {"cid":"osm-w734439882","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1267309061","at":"2026-10-24T21:15:27.059Z","quote":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"osm-w734439882","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/xoryd4/224449923295","at":"2026-10-22","quote":"안성맞춤 캠핑장 카라반 요금과 안성맞춤캠핑장 매점, 글램핑·데크 안내. 목록에 분명히 올라 있"}

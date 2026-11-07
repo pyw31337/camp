@@ -181,7 +181,7 @@
     "campgrounds": 3556,
     "by_grade": {
      "CONFIRMED": 5837,
-     "MENTION": 5527,
+     "MENTION": 5528,
      "OPERATOR": 1105
     }
    }
@@ -194,9 +194,9 @@
    "pref": "전기가 꼭 필요하나요?",
    "filter": "eq",
    "coverage": {
-    "campgrounds": 2480,
+    "campgrounds": 2481,
     "by_grade": {
-     "CONFIRMED": 2459,
+     "CONFIRMED": 2460,
      "VERIFIED": 21
     }
    }
@@ -481,9 +481,9 @@
    "filter": "max",
    "note": "MENTION 전용. 확정값으로 쓰지 않는다",
    "coverage": {
-    "campgrounds": 2945,
+    "campgrounds": 2948,
     "by_grade": {
-     "MENTION": 15371
+     "MENTION": 15377
     }
    }
   },
@@ -569,10 +569,10 @@
    "pref": "일찍 들어가고 싶나요?",
    "filter": "max",
    "coverage": {
-    "campgrounds": 2965,
+    "campgrounds": 2967,
     "by_grade": {
      "REFERENCE": 453,
-     "MENTION": 3936,
+     "MENTION": 3938,
      "OPERATOR": 651,
      "CONFIRMED": 4
     }
@@ -586,10 +586,10 @@
    "pref": "늦게 나오고 싶나요?",
    "filter": "min",
    "coverage": {
-    "campgrounds": 2922,
+    "campgrounds": 2925,
     "by_grade": {
      "REFERENCE": 446,
-     "MENTION": 3930,
+     "MENTION": 3934,
      "OPERATOR": 616,
      "CONFIRMED": 2
     }
@@ -634,7 +634,7 @@
     "campgrounds": 2246,
     "by_grade": {
      "REFERENCE": 464,
-     "MENTION": 2852,
+     "MENTION": 2853,
      "OPERATOR": 131,
      "CONFIRMED": 7
     }
@@ -1888,9 +1888,9 @@
    "review_label": "주차 편함·옆 주차",
    "pref": "‘주차 편함·옆 주차’ 평이 중요한가요?",
    "coverage": {
-    "campgrounds": 610,
+    "campgrounds": 611,
     "by_grade": {
-     "MENTION": 610
+     "MENTION": 611
     }
    }
   },
@@ -2032,9 +2032,9 @@
    "review_label": "가격 부담",
    "pref": "‘가격 부담’은(는) 피하고 싶나요?",
    "coverage": {
-    "campgrounds": 62,
+    "campgrounds": 63,
     "by_grade": {
-     "MENTION": 62
+     "MENTION": 63
     }
    }
   },
@@ -2254,9 +2254,9 @@
    "unit": "건",
    "filter": "min",
    "coverage": {
-    "campgrounds": 3893,
+    "campgrounds": 3894,
     "by_grade": {
-     "MENTION": 3893
+     "MENTION": 3894
     }
    }
   },
@@ -2656,5 +2656,5 @@
    }
   }
  ],
- "generated_at": "2026-11-07T11:42:46.288Z"
+ "generated_at": "2026-11-07T13:32:30.583Z"
 }
