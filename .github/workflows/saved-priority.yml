@@ -7,7 +7,9 @@ name: Saved camps priority collection
 #  - 매일 수집(data-sync)도 같은 목록(data/priority/saved-camps.json)을 맨 앞에 두고 하루 주기로 다시 본다(lib/priority.mjs).
 on:
   schedule:
-    - cron: "11 */3 * * *"
+    # 평일은 20:11·23:11·02:11·05:11 KST만 실행, 주말은 3시간마다 실행
+    - cron: "11 11,14,17,20 * * 1-5"
+    - cron: "11 */3 * * 0,6"
   workflow_dispatch:
 
 permissions:

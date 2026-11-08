@@ -7,8 +7,10 @@ import { decideNearbyMac, nameTokens, signMatches } from "../lib/mac-vision.mjs"
 const at = (s) => new Date(`${s}+09:00`); // 한국 시간으로 적는다
 const HOL = ["2026-10-09"]; // 한글날(금)
 
-test("평일 낮은 닫힘, 18시부터 다음 날 08시까지 열림", () => {
-  assert.equal(window(at("2026-10-21T12:00:00"), { holidays: HOL }).open, false); // 수
+test("평일 08~12·13~18시는 닫히고, 점심·야간은 열림", () => {
+  assert.equal(window(at("2026-10-21T11:59:00"), { holidays: HOL }).open, false); // 수
+  assert.equal(window(at("2026-10-21T12:00:00"), { holidays: HOL }).open, true); // 점심 슬롯
+  assert.equal(window(at("2026-10-21T13:00:00"), { holidays: HOL }).open, false);
   const w = window(at("2026-10-21T19:00:00"), { holidays: HOL });
   assert.equal(w.open, true);
   assert.equal(w.minutesLeft, 13 * 60); // 목 08:00까지

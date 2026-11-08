@@ -6,8 +6,8 @@ name: Content judge
 # 무료·로컬 CPU 모델(transformers.js): 사진 CLIP(lib/photo-judge.mjs) · 글 e5(lib/text-judge.mjs). 외부 유료 호출 없음.
 on:
   schedule:
-    # 매일 08:43 KST — data-sync(03:17 KST 시작)가 끝난 뒤
-    - cron: "43 23 * * *"
+    # 매일 06:43 KST — 평일 업무시간 전
+    - cron: "43 21 * * *"
   workflow_dispatch:
     inputs:
       photo_max:

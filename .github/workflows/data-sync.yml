@@ -2,8 +2,9 @@ name: Data sync
 
 on:
   schedule:
-    # 매일 03:17 KST (18:17 UTC)
+    # 매일 03:17 KST (18:17 UTC). 주말은 15:17 KST에도 추가 실행한다.
     - cron: "17 18 * * *"
+    - cron: "17 6 * * 0,6"
   workflow_dispatch:
     inputs:
       full_db_import:

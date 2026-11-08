@@ -6,7 +6,7 @@ name: Weekly forecast
 on:
   schedule:
     - cron: "40 20 * * *" # 05:40 KST (05시 단기예보 발표 뒤)
-    - cron: "40 8 * * *"  # 17:40 KST (17시 단기예보 발표 뒤)
+    - cron: "40 9 * * *"  # 18:40 KST (17시 단기예보 발표 뒤, 업무시간 종료 후)
   workflow_dispatch:
     inputs:
       rebuild_mapping:

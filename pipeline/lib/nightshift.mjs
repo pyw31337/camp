@@ -1,4 +1,4 @@
-// 맥미니 야간·주말 작업(소유자 2026-10-23: “평일 18시~익일 08시, 토·일·공휴일엔 컴퓨터가 켜진 채 쉬고 있으니 잘 활용해줘”).
+// 맥미니 야간·주말 작업: 평일 08~12시·13~18시는 쉬고, 12~13시 점심 시간과 야간·주말을 활용한다.
 // 순수 함수만 둔다(시간대·바쁨 판단·다음 작업 고르기). 실행은 local/macmini/nightshift.mjs.
 // 시각은 모두 한국 시간(Asia/Seoul) 기준으로 계산한다(맥 시간대 설정과 무관).
 
@@ -18,14 +18,19 @@ export function isDayOff(ymd, holidays = []) {
 /**
  * 지금 맥미니를 써도 되는 시간인가, 언제까지 쓸 수 있나.
  * - 쉬는 날: 하루 종일
- * - 일하는 날: 18:00 이후, 그리고 00:00~08:00(전날이 무슨 요일이든)
+ * - 일하는 날: 00:00~08:00, 12:00~13:00, 18:00~24:00
  * 끝 시각은 ‘다음 일하는 날 08:00’. 반환: { open, endsAt(Date|null), minutesLeft }
  */
 export function window(now = new Date(), { holidays = [], start = 18 * 60, end = 8 * 60 } = {}) {
   const { ymd, hm } = kst(now);
   const off = isDayOff(ymd, holidays);
-  const open = off || hm >= start || hm < end;
+  const lunch = hm >= 12 * 60 && hm < 13 * 60;
+  const open = off || hm >= start || hm < end || lunch;
   if (!open) return { open: false, endsAt: null, minutesLeft: 0 };
+  if (!off && lunch) {
+    const endsAt = new Date(Date.parse(`${ymd}T00:00:00Z`) - 9 * 3600e3 + 13 * 60e3);
+    return { open: true, endsAt, minutesLeft: Math.max(0, Math.floor((endsAt - now) / 60e3)) };
+  }
   // 끝: 오늘 08시가 아직 안 지났고 오늘이 일하는 날이면 오늘 08시, 아니면 다음 일하는 날 08시
   let day = !off && hm < end ? ymd : addDays(ymd, 1);
   for (let i = 0; i < 30 && isDayOff(day, holidays); i++) day = addDays(day, 1);

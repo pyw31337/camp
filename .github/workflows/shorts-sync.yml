@@ -12,8 +12,8 @@ on:
         required: false
         default: "9000"
   schedule:
-    # 매일 13:40 KST (04:40 UTC) — data-sync(03:17 KST)와 겹치지 않게. 영상 확대 수집(v2) 첫 한 바퀴를 빨리 돌고, 이후 30일 주기 갱신.
-    - cron: "40 4 * * *"
+    # 매일 04:40 KST (19:40 UTC 전날) — 평일 업무시간(08~12·13~18 KST)을 피한다.
+    - cron: "40 19 * * *"
 
 permissions:
   contents: write
