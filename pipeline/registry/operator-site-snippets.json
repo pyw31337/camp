@@ -39598,7 +39598,7 @@
    "name": "원주두리캠핑장",
    "status": "OK",
    "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
-   "checked_at": "2026-11-08T10:16:06.747Z",
+   "checked_at": "2026-11-08T17:55:41.296Z",
    "discovered": true,
    "pages": [
     "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
@@ -39939,17 +39939,17 @@
      }
     },
     {
-     "text": "24 동계 장박시즌 운영 및 모집안내 원주두리캠핑 2024-08-16 876",
+     "text": "24 동계 장박시즌 운영 및 모집안내 원주두리캠핑 2024-08-16 877",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "24 동계 장박시즌 운영 및 모집안내 원주두리캠핑 2024-08-16 876"
+      "text": "24 동계 장박시즌 운영 및 모집안내 원주두리캠핑 2024-08-16 877"
      }
     },
     {
-     "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1212",
+     "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1213",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1212"
+      "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1213"
      }
     },
     {
@@ -110846,7 +110846,7 @@
    "name": "라플란드",
    "status": "FETCH_FAILED",
    "url": "https://oneoneone.kr/content/d6a7b05a",
-   "checked_at": "2026-11-08T10:16:04.951Z",
+   "checked_at": "2026-11-08T17:55:41.261Z",
    "error": "404"
   },
   "100126": {
@@ -176985,7 +176985,7 @@
    "name": "골든쌔들 캠핑장",
    "status": "FETCH_FAILED",
    "url": "https://www.goldensaddlecamping.kr/",
-   "checked_at": "2026-11-08T10:16:07.259Z",
+   "checked_at": "2026-11-08T17:55:43.410Z",
    "error": "403"
   },
   "101270": {
@@ -225557,7 +225557,7 @@
    "name": "WonderWood Glamping(원더우드 글램핑)",
    "status": "DISCOVERED_NOT_OPERATOR",
    "url": "https://campingfriend.co.kr/listing-camp-detail/9414",
-   "checked_at": "2026-11-08T10:16:04.953Z",
+   "checked_at": "2026-11-08T17:55:41.294Z",
    "discovered": true,
    "check": {
     "ok": false,
@@ -225952,7 +225952,7 @@
     }
    ],
    "last_attempt": {
-    "at": "2026-11-08T10:16:04.952Z",
+    "at": "2026-11-08T17:55:41.293Z",
     "status": "NO_RELEVANT_TEXT",
     "error": null
    }
@@ -263067,6 +263067,6 @@
    }
   }
  },
- "generated_at": "2026-11-08T10:16:19.565Z",
+ "generated_at": "2026-11-08T17:55:55.993Z",
  "policy": "운영자 자체 홈페이지·예약 페이지만, robots.txt 준수, 봇 이름 공개, 문장(≤140자)·원문 URL·확인 시각만 저장. 플랫폼 페이지는 수집하지 않음."
 }
