@@ -939,6 +939,53 @@ img { color: transparent; }
 .bdg-danger { --c: #e53935; --on: #fff; color: #d32f2f; }
 .bdg-danger .ic { background: #e53935; color: #fff; }
 
+/* 오토캠핑 중 짐 내린 후 공용 주차장 이동하는 업장: 빨간색 뱃지 표기 */
+.bdg-park-move,
+.bdg.bdg-park-move {
+  background: #d32f2f !important;
+  border-color: #d32f2f !important;
+  color: #fff !important;
+  box-shadow: 0 1px 6px rgba(211, 47, 47, .38);
+  font-weight: 700;
+}
+.bdg-park-move .ic,
+.bdg.bdg-park-move .ic {
+  background: #fff !important;
+  color: #d32f2f !important;
+}
+
+/* 칩과 (i) 인포 버튼 결합 */
+.chip-with-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  vertical-align: middle;
+}
+.chip-with-info .ib {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--border-2, rgba(255, 255, 255, 0.2));
+  background: var(--surface-2, rgba(255, 255, 255, 0.08));
+  color: var(--text-2, #bbb);
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.chip-with-info .ib:hover,
+.chip-with-info .ib:focus-visible {
+  color: var(--volt, #c8ff00);
+  border-color: var(--volt, #c8ff00);
+  background: rgba(200, 255, 0, 0.18);
+  transform: scale(1.12);
+}
+.chip-with-info .ib .ic {
+  width: 13px;
+  height: 13px;
+}
+
 /* ── 사진 레일(카드) ─────────────────────────────── */
 .car { position: relative; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; background: var(--soft-2); }
 .car-single { display: block; }
