@@ -246,16 +246,74 @@ const kw = (w) => `${fmt(w)}W`; // 소유자: ‘600W’처럼 W로 통일
 const GROUND = { CRUSHED_STONE: "파쇄석", MIXED: "혼합", GRAVEL: "자갈", DECK: "데크", GRASS: "잔디", SAND: "모래", SOIL: "흙", CONCRETE: "콘크리트" };
 const srcOf = (fc, extra) => ({ label: fc?.source?.label || "한국관광공사 고캠핑 등록 현황", url: fc?.source?.url || "https://www.gocamping.or.kr/", at: fc?.source?.checked_at, ...extra });
 
+// 오토캠핑 개념 정의: 차량을 텐트(사이트) 바로 옆에 주차하고, 전기 시설 등을 편리하게 이용할 수 있는 캠핑 형태
+const AUTOCAMP_INFO_HTML = `<strong>오토캠핑(Auto Camping)</strong><br>차량을 텐트(사이트) 바로 옆에 주차하고, 전기 시설 등을 편리하게 이용하며 야영할 수 있는 대표적인 캠핑 형태입니다. (관광진흥법상 자동차야영장)<br><small style="color:var(--text-3);display:block;margin-top:6px;">※ 일부 야영장의 경우 잔디 보호나 안전을 위해 짐을 내린 후 차량을 공용 주차장으로 옮겨야 하는 <b>이동주차</b>로 운영될 수 있습니다.</small>`;
+
+// 오토캠핑 판별: 관광진흥법상 자동차야영장 또는 사이트 타입 AUTO
+const isAutoCamp = (c) => (c.types ?? []).includes("자동차야영장") || (c.st ?? []).some((t) => t[0] === "AUTO");
+
+// 오토캠핑 중 짐을 내린 후 공용/외부 주차장으로 이동해야 하는 업장 (이동주차)
+function isMoveParking(c) {
+  if (!isAutoCamp(c)) return false;
+  if (c.of?.pk && c.of.pk.v === "EXTERNAL") return true;
+  const mode = c.field_conditions?.parking?.mode;
+  if (mode === "CART_REQUIRED" || mode === "SHARED_NEARBY") return true;
+  const f = c._f;
+  if (f?.park && f.park.ok === false) return true;
+  return false;
+}
+
+// 오토캠핑 중 일부 사이트만 텐트 옆 주차 가능하고 나머지는 이동주차인 혼합형
+function isPartMoveParking(c) {
+  if (!isAutoCamp(c) || isMoveParking(c)) return false;
+  const p = c.field_conditions?.parking;
+  const z = p?.tent_side_zones;
+  if (p?.mode === "SITE_ADJACENT" && z && z.adjacent < z.total) return true;
+  const f = c._f;
+  return f?.park?.ok === "part";
+}
+
 function facts(c) {
   if (c._f) return c._f;
   const fc = c.field_conditions ?? {}, of = c.of ?? {}, out = {};
   // 주차
-  if (of.pk) out.park = { v: of.pk.v === "SITE_SIDE" ? "텐트 옆" : "외부 주차장", short: of.pk.v === "SITE_SIDE" ? "텐트 옆" : "외부 주차", g: "c", ok: of.pk.v === "SITE_SIDE", src: { label: "운영자 홈페이지", url: of.pk.u, at: of.pk.t, quote: of.pk.q } };
-  else if (fc.parking && fc.parking.mode && fc.parking.mode !== "UNKNOWN") {
+  const isAuto = isAutoCamp(c);
+  if (of.pk) {
+    const isSide = of.pk.v === "SITE_SIDE";
+    out.park = {
+      v: isSide ? "텐트 옆" : (isAuto ? "이동주차 (짐 내린 후 이동)" : "외부 주차장"),
+      short: isSide ? "텐트 옆" : (isAuto ? "이동주차" : "외부 주차"),
+      g: "c",
+      ok: isSide,
+      isAutoMove: isAuto && !isSide,
+      src: { label: "운영자 홈페이지", url: of.pk.u, at: of.pk.t, quote: of.pk.q }
+    };
+  } else if (fc.parking && fc.parking.mode && fc.parking.mode !== "UNKNOWN") {
     const p = fc.parking, g = GR(p.state), z = p.tent_side_zones;
-    if (p.mode === "SITE_ADJACENT") out.park = { v: z && z.adjacent < z.total ? `${z.total}구역 중 ${z.adjacent}곳 텐트 옆` : "텐트 옆", short: z && z.adjacent < z.total ? "일부 텐트 옆" : "텐트 옆", g, ok: z && z.adjacent < z.total ? "part" : true };
-    else if (p.mode === "CART_REQUIRED") out.park = { v: "짐수레 이동", short: "짐수레", g, ok: false };
-    else if (p.mode === "SHARED_NEARBY") out.park = { v: "공용 주차장", short: "공용 주차", g, ok: false };
+    if (p.mode === "SITE_ADJACENT") {
+      out.park = {
+        v: z && z.adjacent < z.total ? `${z.total}구역 중 ${z.adjacent}곳 텐트 옆` : "텐트 옆",
+        short: z && z.adjacent < z.total ? "일부 텐트 옆" : "텐트 옆",
+        g,
+        ok: z && z.adjacent < z.total ? "part" : true
+      };
+    } else if (p.mode === "CART_REQUIRED") {
+      out.park = {
+        v: isAuto ? "이동주차 (짐수레 이동)" : "짐수레 이동",
+        short: isAuto ? "이동주차" : "짐수레",
+        g,
+        ok: false,
+        isAutoMove: isAuto
+      };
+    } else if (p.mode === "SHARED_NEARBY") {
+      out.park = {
+        v: isAuto ? "이동주차 (공용 주차장)" : "공용 주차장",
+        short: isAuto ? "이동주차" : "공용 주차",
+        g,
+        ok: false,
+        isAutoMove: isAuto
+      };
+    }
     if (out.park) out.park.src = srcOf(fc);
   }
   // 전기
@@ -349,13 +407,19 @@ const isFlexTimeCamp = (c) => {
 // 아랫줄은 부정 배지(반려견 불가·장작 불가·화기 불가 등). 줄바꿈은 .bdg-br(폭 100%)로.
 function badges(c, max = 4, maxNo = 2, { rows = false, theme = null } = {}) {
   const f = facts(c), out = [], pet = petAllowed(c), smallDog = pet && (c.nr ?? []).includes("BIG_DOG");
+  const isMove = isMoveParking(c), isPart = isPartMoveParking(c);
   const B = {
     invite: inviteOk(c) ? `<span class="bdg bdg-teal">${ic("users")}초대가능</span>` : "",
     // 법령 기본값(r: 업장이 공지하지 않은 600W 참고값)은 배지로 올리지 않는다
     w: pos(f.power) && f.power.g !== "r" && f.power.ok && f.power.w ? `<span class="bdg bdg-volt">${ic("bolt")}${esc(f.power.short)}</span>` : "",
     fire: pos(f.fire) && f.fire.kind === "FIREWOOD_OK" ? `<span class="bdg bdg-flame">${ic("firewood")}장작</span>` : "",
     pet: pet ? `<span class="bdg bdg-ink">${ic("paw")}반려견${smallDog ? "(소형)" : ""}</span>` : "",
-    park: !rows && pos(f.park) && f.park.ok === true ? `<span class="bdg bdg-cobalt">${ic("car")}텐트 옆</span>` : "",
+    movePark: !rows && isMove
+      ? `<span class="bdg bdg-park-move" title="오토캠핑 구역이지만 짐을 내린 후 차량은 공용 주차장으로 이동해야 합니다">${ic("car")}이동주차</span>`
+      : (!rows && isPart
+        ? `<span class="bdg bdg-park-move" title="일부 사이트만 텐트 옆 주차가 가능하며, 나머지 구역은 이동주차입니다">${ic("car")}일부 이동주차</span>`
+        : ""),
+    park: !rows && !isMove && !isPart && pos(f.park) && f.park.ok === true ? `<span class="bdg bdg-cobalt">${ic("car")}텐트 옆</span>` : "",
     // 겨울 섹션 근거(전수 검수 2026-10-22): W를 모르는 난방 글램핑·카라반도 섹션 배지가 보이게 ‘난방’
     heat: c.heat?.length ? `<span class="bdg bdg-flame">${ic("hotwater")}난방</span>` : "",
     rf: c.rf ? `<span class="bdg bdg-teal">${ic("th:FOREST")}${esc(/^(국립|공립|사립)$/.test(c.rf) ? `${c.rf} 휴양림` : "휴양림")}</span>` : "",
@@ -369,7 +433,7 @@ function badges(c, max = 4, maxNo = 2, { rows = false, theme = null } = {}) {
   // 섹션 배지를 맨 앞에(잘리지 않게)
   const lead = theme === "PET" ? "pet" : theme === "VISITOR" ? "invite" : theme === "WINTER" ? (wattsOf(c) >= 1100 && B.w ? "w" : B.heat ? "heat" : "w") : theme === "REC_FOREST" ? "rf" : theme === "TIDAL_FLAT" ? "tidal" : theme === "FIRST_COME" ? "firstCome" : theme === "FLEX_TIME" ? "flex" : theme === "VR_TOUR" ? "vr" : theme === "DUMP_STATION" ? "dump" : theme === "EXCELLENT" ? "best" : null;
   if (lead && B[lead]) out.push(B[lead]);
-  for (const k of ["w", "vr", "dump", "best", "rf", "tidal", "flex", "firstCome", "invite", "fire", "pet", "park"]) if (k !== lead && B[k]) out.push(B[k]);
+  for (const k of ["movePark", "w", "vr", "dump", "best", "rf", "tidal", "flex", "firstCome", "invite", "fire", "pet", "park"]) if (k !== lead && B[k]) out.push(B[k]);
   const no = noKeys(c).filter((k) => NO_CARD.includes(k) && !(k === "BIG_DOG" && pet)).slice(0, maxNo).map(noBadge);
   const top = out.slice(0, max);
   return `${top.join("")}${top.length && no.length ? '<i class="bdg-br" aria-hidden="true"></i>' : ""}${no.join("")}`;
@@ -457,6 +521,9 @@ function siteBadges(c, max = 5) {
     const label = `${k === "HOUSE" && sub ? sub : info.label}${n ? ` ${fmt(n)}` : ""}`;
     const cls = k === "AUTO" ? "bdg-auto" : (k === "DECK" || k === "DUPLEX_DECK") ? "bdg-deck" : k === "TARP_ZONE" ? "bdg-tarp" : k === "CAR_CAMP" ? "bdg-car" : "bdg-site";
     list.push({ k, cls, icon: info.icon || "tent", label });
+    if (k === "AUTO" && isMoveParking(c)) {
+      list.push({ k: "AUTO_MOVE", cls: "bdg-park-move bdg-stay", icon: "car", label: "이동주차" });
+    }
   }
 
   // 3. 둘 다 없으면 typeLine fallback
@@ -4093,7 +4160,14 @@ function condEval(c, k = S.cond, skip = null) {
   if (skip !== "vr" && k.vr) st.vr = hasVerifiedVr(c) ? "y" : "n";
   if (skip !== "best" && k.best) st.best = hasExcellentBadge(c) ? "y" : "n";
   for (const [b, [, t]] of Object.entries(COND_BOOL)) if (skip !== b && k[b]) st[b] = t(c);
-  if (skip !== "park" && k.park) { const o = facts(c).park?.ok; st.park = o === true ? "y" : o === false || o === "part" ? (o === "part" ? "?" : "n") : "?"; }
+  if (skip !== "park" && k.park) {
+    const o = facts(c).park?.ok;
+    if (o === true) st.park = "y";
+    else if (o === false || isMoveParking(c)) st.park = "n";
+    else if (o === "part" || isPartMoveParking(c)) st.park = "?";
+    else if (isAutoCamp(c)) st.park = "ref";
+    else st.park = "?";
+  }
   const vals = Object.values(st);
   if (vals.includes("n")) return null;
   return { st, unknown: vals.filter((v) => v === "?").length, ref: vals.filter((v) => v === "ref").length };
@@ -4219,7 +4293,11 @@ function paintCondSheet() {
       <section><h3>지역</h3><div class="cond-chips">${REGION_GROUPS.map(([x, label]) => chip("sido", x, label, k.sido.includes(x), pSido.filter((c) => REGION_OF[sidoShort(c.sido)] === x).length)).join("")}</div></section>
       <section><h3>출발지에서 내비 시간</h3><div class="cond-chips drive-chips">${originPicker("in-sheet")}</div><div class="cond-chips drive-chips">${DRIVES.map(([h, l]) => `<button type="button" class="chip" data-drive="${h}" aria-pressed="${S.drive === h}"${!S.origin && h ? " disabled" : ""}>${h ? `${l} 안` : l}</button>`).join("")}</div></section>
       <section><h3>주변으로</h3><div class="cond-near"><input type="search" data-near value="${esc(k.near)}" placeholder="예: 파주, 가평, 양평" aria-label="시·군 이름" autocomplete="off">${R_OPTS.map((r) => chip("r", r, `${r}km`, k.r === r)).join("")}</div>${k.near ? `<p class="cond-hint">${k._ctr ? `${esc(k._ctr.label)} 가운데에서 ${k.r}km 안` : "그 이름의 시·군을 찾지 못했어요"}</p>` : ""}</section>
-      <section><h3>상품·이용</h3><div class="cond-chips">${KINDS.map(([x, l]) => chip("kind", x, l, k.kind.includes(x), tally("kind", [x]))).join("")}</div></section>
+      <section><h3>상품·이용</h3><div class="cond-chips">${KINDS.map(([x, l]) => {
+        const ch = chip("kind", x, l, k.kind.includes(x), tally("kind", [x]));
+        if (x === "AUTO") return `<span class="chip-with-info">${ch}${tip(AUTOCAMP_INFO_HTML, "오토캠핑이란?")}</span>`;
+        return ch;
+      }).join("")}</div></section>
       <section><h3>반려견</h3><div class="cond-chips">${chip("pet", 1, "동반 가능", k.pet, tally("pet", true))}</div></section>
       <section><h3>전기</h3><div class="cond-chips">${W_OPTS.map(([v, l]) => chip("w", v, l, k.w === v, v ? tally("w", v) : null)).join("")}</div></section>
       <section><h3>사이트 크기</h3><div class="cond-chips">${SIZE_OPTS.map(([v, l]) => chip("size", v, l, k.size === v, v ? tally("size", v) : null)).join("")}</div></section>
@@ -4342,7 +4420,10 @@ function filterModules({ areaAttr = "data-area", stypeAttr = "data-stype", feeAt
   const typeChips = KINDS
     .map(([k, l, test, i]) => {
       const n = countOf(test);
-      return n ? `<button type="button" class="chip type-chip" ${stypeAttr}="${k}" aria-pressed="${stypePressed(k)}">${ic(i)}${l} <i>${fmt(n)}</i></button>` : "";
+      if (!n) return "";
+      const btn = `<button type="button" class="chip type-chip" ${stypeAttr}="${k}" aria-pressed="${stypePressed(k)}">${ic(i)}${l} <i>${fmt(n)}</i></button>`;
+      if (k === "AUTO") return `<span class="chip-with-info">${btn}${tip(AUTOCAMP_INFO_HTML, "오토캠핑이란?")}</span>`;
+      return btn;
     }).join("");
   const fee = (k, l) => `<button type="button" class="chip fee-chip" ${feeAttr}="${k}" aria-pressed="${feePressed(k)}">${l}</button>`;
   return `<div class="filter-mod" aria-label="지역"><span class="fee-band-lbl">지역</span><div class="rail chips">${areaChips}</div></div>
@@ -4844,8 +4925,14 @@ function specTiles(c, d) {
   mention.shower = cnt(sa.showers_count ?? c.showers);
   mention.sink = cnt(c.sinks);
   const T = [["size", "size", "설치 공간", ""], ["park", "car", "텐트 옆 주차", "cobalt"], ["power", "bolt", "전기", "volt"], ["fire", "flame", "장작·숯", "flame"], ["ground", "layers", "바닥", ""], ["shelter", "tent", "텐트·타프", ""], ["toilet", "toilet", "화장실", ""], ["shower", "bath", "샤워실", ""], ["sink", "fountain", "개수대", ""], ["hot", "drop", "온수", ""], ["pet", "paw", "반려견", ""]];
+  const isMove = isMoveParking(c);
   return T.map(([k, i, l, cls]) => {
     let x = f[k] ?? mention[k] ?? null;
+    let label = l;
+    if (k === "park" && isMove) {
+      x = { v: "이동주차 (짐 내린 후 이동)", short: "이동주차", g: f.park?.g || "c", ok: false, src: f.park?.src || srcOf(c.field_conditions) };
+      label = "주차 (이동주차)";
+    }
     // 반려견 칸은 카드 배지·반려견 섹션과 같은 판정(전수 검수 2026-10-22): 업장 규칙 ‘반려견 불가’가 있으면 불가,
     // 카드가 ‘반려견’이면(공식 가능) 후기·다른 페이지의 ‘불가’ 언급으로 뒤집지 않는다.
     if (k === "pet") {
@@ -4857,7 +4944,7 @@ function specTiles(c, d) {
     if (k === "power" && f.power?.v === "있음" && mention.power?.v) x = mention.power;
     const isNo = Boolean(x && (x.ok === false || (k === "fire" && x.kind === "NO_FIRE") || /불가|금지|불가능/.test(detailValue(x))));
     const on = x && cls && !isNo;
-    return `<div class="tile${x ? "" : " unk"}${isNo ? " tile-no" : on ? ` t-${cls}` : ""}"><span class="tile-ic">${ic(i)}</span><span class="tile-l">${l}</span><b class="tile-v">${x ? `${factValueHtml(x)}${asOfMention(x)}` : "확인필요"}</b>${x ? `<span class="tile-g">${dot(x.g)}${srcTip(x, l)}</span>` : ""}</div>`;
+    return `<div class="tile${x ? "" : " unk"}${isNo ? " tile-no" : on ? ` t-${cls}` : ""}"><span class="tile-ic">${ic(i)}</span><span class="tile-l">${label}</span><b class="tile-v">${x ? `${factValueHtml(x)}${asOfMention(x)}` : "확인필요"}</b>${x ? `<span class="tile-g">${dot(x.g)}${srcTip(x, label)}</span>` : ""}</div>`;
   }).join("") + extraTiles(c, d, f);
 }
 // 자료가 있을 때만 보이는 요약 카드(없으면 칸을 만들지 않는다 · 지어내지 않는다).
@@ -5443,6 +5530,7 @@ function factValueHtml(x, fallback = "확인필요") {
 function siteTypesHtml(c, d) {
   const list = d?.site_types ?? (c.st ?? []).map(([code, count, g, sub]) => ({ code, count, sub, grade: g === "o" ? "OPERATOR" : "CONFIRMED" }));
   if (!list.length) return "";
+  const isMove = isMoveParking(c);
   const tiles = list.map((t) => {
     const meta = ST[t.code] ?? { label: t.code, icon: "tent" };
     const unit = t.code === "GLAMPING" || t.code === "CARAVAN" || t.code === "HOUSE" ? "동" : "면";
@@ -5450,7 +5538,9 @@ function siteTypesHtml(c, d) {
     // 320px의 2열 카드도 낱글자씩 쪼개지지 않게 한다. 복합 명칭은 가운데점에서만
     // 줄바꿈 기회를 주므로 “오토캠핑”은 한 단어로, “숙박·특별휴양”은 읽기 좋게 나뉜다.
     const label = esc(t.code === "HOUSE" && t.sub ? `${meta.label} · ${t.sub}` : meta.label).replace(/·/g, "·<wbr>");
-    return `<div class="stype"><span class="stype-ic">${ic(meta.icon)}</span><span class="stype-b"><b>${label}</b><i>${t.count ? `${fmt(t.count)}${unit}` : t.grade === "OPERATOR" ? "운영자 안내" : t.grade === "MENTION" ? "후기 언급" : "있음"}${t.grade === "MENTION" ? asOf(t.at) : ""}</i></span><span class="tile-g">${dot(x.g)}${srcTip(x, meta.label)}</span></div>`;
+    const autoTip = t.code === "AUTO" ? tip(AUTOCAMP_INFO_HTML, "오토캠핑이란?") : "";
+    const moveBdg = t.code === "AUTO" && isMove ? ` <span class="bdg bdg-park-move" style="font-size:11px;padding:2px 7px;margin-left:5px;vertical-align:middle;">${ic("car")}이동주차</span>` : "";
+    return `<div class="stype"><span class="stype-ic">${ic(meta.icon)}</span><span class="stype-b"><b>${label}${autoTip}${moveBdg}</b><i>${t.count ? `${fmt(t.count)}${unit}` : t.grade === "OPERATOR" ? "운영자 안내" : t.grade === "MENTION" ? "후기 언급" : "있음"}${t.grade === "MENTION" ? asOf(t.at) : ""}</i></span><span class="tile-g">${dot(x.g)}${srcTip(x, meta.label)}</span></div>`;
   }).join("");
   return `<section class="d-sec"><div class="sec-head">${iconTitle("sitetype", "사이트 타입")}</div><div class="stypes">${tiles}</div></section>`;
 }
@@ -8793,7 +8883,11 @@ function mapLabelValue(c, k) {
   if (k === "power") return x.ok ? [x.w ? kw(x.w) : "전기", "pin-volt"] : ["전기 불가", "pin-no"];
   if (k === "fire") return x.kind === "FIREWOOD_OK" ? ["장작", "pin-flame"] : x.kind === "CHARCOAL_ONLY" ? ["숯만", "pin-flame"] : x.kind === "NO_FIRE" ? ["화기 불가", "pin-no"] : null;
   if (k === "pet") return x.ok ? [petAllowed(c) && (c.nr ?? []).includes("BIG_DOG") ? "반려견(소형)" : "반려견", "pin-ink"] : ["반려견 불가", "pin-no"];
-  if (k === "park") return x.ok === true ? ["텐트 옆 주차", "pin-cobalt"] : x.ok === "part" ? ["일부 텐트 옆", "pin-cobalt"] : [x.short ?? "외부 주차", "pin-part"];
+  if (k === "park") {
+    if (isMoveParking(c)) return ["이동주차", "pin-no"];
+    if (isPartMoveParking(c)) return ["일부 이동주차", "pin-part"];
+    return x.ok === true ? ["텐트 옆 주차", "pin-cobalt"] : x.ok === "part" ? ["일부 텐트 옆", "pin-cobalt"] : [x.short ?? "외부 주차", "pin-part"];
+  }
   return null;
 }
 const mapLabelKey = () => (MAP_LABEL_KEYS.includes(S.mapLabel) && S.quick.has(S.mapLabel) ? S.mapLabel : [...S.quick].reverse().find((k) => MAP_LABEL_KEYS.includes(k)) ?? null);
