@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-11-08T17:55:08.279Z",
+ "generated_at": "2026-11-08T22:00:05.700Z",
  "source": {
   "label": "카카오 로컬 키워드 검색 · Daum 웹 검색(공식 REST API)",
   "docs": [
@@ -5388,7 +5388,7 @@
    "homepage": null
   },
   "640": {
-   "checked_at": "2026-11-08T17:55:04.703Z",
+   "checked_at": "2026-11-08T22:00:02.510Z",
    "place": {
     "id": "17591877",
     "name": "느티나무캠핑장",
@@ -8600,7 +8600,7 @@
    "homepage": null
   },
   "977": {
-   "checked_at": "2026-11-08T17:55:04.733Z",
+   "checked_at": "2026-11-08T22:00:02.539Z",
    "place": null,
    "candidates": [
     {
@@ -17909,7 +17909,7 @@
    "homepage": null
   },
   "2472": {
-   "checked_at": "2026-11-08T17:55:07.718Z",
+   "checked_at": "2026-11-08T22:00:05.170Z",
    "place": {
     "id": "898560745",
     "name": "원주두리캠핑장",
@@ -46453,7 +46453,7 @@
    "homepage": null
   },
   "100122": {
-   "checked_at": "2026-11-08T17:55:06.718Z",
+   "checked_at": "2026-11-08T22:00:04.369Z",
    "place": {
     "id": "1579667394",
     "name": "라플란드",
@@ -49769,7 +49769,7 @@
    "homepage": null
   },
   "100289": {
-   "checked_at": "2026-11-08T17:55:06.371Z",
+   "checked_at": "2026-11-08T22:00:03.981Z",
    "place": {
     "id": "828875441",
     "name": "가델캠핑장",
@@ -59911,7 +59911,7 @@
    "homepage": null
   },
   "100597": {
-   "checked_at": "2026-11-08T17:55:06.871Z",
+   "checked_at": "2026-11-08T22:00:04.404Z",
    "place": {
     "id": "1537097954",
     "name": "노리터키즈캠핑장",
@@ -63172,7 +63172,7 @@
    "homepage": null
   },
   "100676": {
-   "checked_at": "2026-11-08T17:55:07.217Z",
+   "checked_at": "2026-11-08T22:00:04.751Z",
    "place": null,
    "candidates": [
     {
@@ -64769,7 +64769,7 @@
    "homepage": null
   },
   "100721": {
-   "checked_at": "2026-11-08T17:55:06.371Z",
+   "checked_at": "2026-11-08T22:00:03.987Z",
    "place": {
     "id": "1779251680",
     "name": "캠핑굄성",
@@ -76944,7 +76944,7 @@
    "homepage": null
   },
   "101093": {
-   "checked_at": "2026-11-08T17:55:07.730Z",
+   "checked_at": "2026-11-08T22:00:05.228Z",
    "place": null,
    "candidates": [
     {
@@ -81255,7 +81255,7 @@
    "homepage": null
   },
   "101214": {
-   "checked_at": "2026-11-08T17:55:04.735Z",
+   "checked_at": "2026-11-08T22:00:02.540Z",
    "place": {
     "id": "661902238",
     "name": "캠프다온",
@@ -81327,14 +81327,14 @@
      ]
     },
     {
-     "host": "ndex.kr",
-     "url": "https://www.ndex.kr/data/kindm9",
+     "host": "diningcode.com",
+     "url": "https://www.diningcode.com/profile.php?rid=4EFrZ5qBCLsK",
      "score": 4,
      "hits": 1,
      "evidence": [
       {
-       "title": "오늘도 해 보았습니다",
-       "url": "https://www.ndex.kr/data/kindm9"
+       "title": "지장산봉평막국수코다리 - 포천 막국수, 코다리찜 맛집 - 다이닝코드",
+       "url": "https://www.diningcode.com/profile.php?rid=4EFrZ5qBCLsK"
       }
      ]
     }
@@ -83222,7 +83222,7 @@
    "homepage": null
   },
   "101269": {
-   "checked_at": "2026-11-08T17:55:06.714Z",
+   "checked_at": "2026-11-08T22:00:04.322Z",
    "place": {
     "id": "826081055",
     "name": "골든쌔들캠핑장",
@@ -88556,7 +88556,7 @@
    "homepage": null
   },
   "101416": {
-   "checked_at": "2026-11-08T17:55:06.213Z",
+   "checked_at": "2026-11-08T22:00:03.888Z",
    "place": {
     "id": "1931362185",
     "name": "내포캠핑스퀘어",
@@ -95328,7 +95328,7 @@
    "homepage": null
   },
   "101608": {
-   "checked_at": "2026-11-08T17:55:06.868Z",
+   "checked_at": "2026-11-08T22:00:04.389Z",
    "place": {
     "id": "2026652673",
     "name": "원더 포레스트",
@@ -96257,7 +96257,7 @@
    "homepage": null
   },
   "101639": {
-   "checked_at": "2026-11-08T17:55:04.735Z",
+   "checked_at": "2026-11-08T22:00:02.541Z",
    "place": {
     "id": "604025620",
     "name": "물멍 캠프",
@@ -114646,7 +114646,7 @@
    "homepage": null
   },
   "102221": {
-   "checked_at": "2026-11-08T17:55:07.648Z",
+   "checked_at": "2026-11-08T22:00:05.062Z",
    "place": null,
    "candidates": [
     {
@@ -114807,7 +114807,7 @@
    "homepage": null
   },
   "102229": {
-   "checked_at": "2026-11-08T17:55:07.361Z",
+   "checked_at": "2026-11-08T22:00:04.812Z",
    "place": null,
    "candidates": [],
    "needs_homepage": false,
@@ -115624,7 +115624,7 @@
    "homepage": null
   },
   "102270": {
-   "checked_at": "2026-11-08T17:55:07.381Z",
+   "checked_at": "2026-11-08T22:00:04.826Z",
    "place": null,
    "candidates": [
     {
@@ -118619,7 +118619,7 @@
    "homepage": null
   },
   "102377": {
-   "checked_at": "2026-11-08T17:55:07.227Z",
+   "checked_at": "2026-11-08T22:00:04.795Z",
    "place": null,
    "candidates": [],
    "needs_homepage": true,
