@@ -4,10 +4,11 @@
 // - 실행당 호출 상한 SOCIAL_MAX_CALLS(기본 4000, 0이면 호출 없이 캐시만으로 출력). 한도·인증 오류면 즉시 멈추고 오류는 캐시하지 않는다.
 // - 메타데이터·URL만 저장하고 이미지는 내려받지 않는다(AGENTS.md 4번, docs/SOCIAL_SEARCH.md).
 // 키가 없거나 네트워크가 실패해도 캐시로 결과를 쓰고 exit 0.
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
+import { prioritizeEnrichment } from "../lib/enrichment-priority.mjs";
 import { isDueWithPriority, priorityIds } from "../lib/priority.mjs";
 import {
   EXTRA_SEARCHES, SOCIAL_CACHE_VERSION, buildLayout, buildVideoQuery, extractPriceMentions, normalizeDoc, isRelevant, distinctiveTokens, regionStem,
@@ -28,6 +29,10 @@ const MAX_CALLS = envNum("SOCIAL_MAX_CALLS", 4000);
 const CONCURRENCY = Math.max(1, envNum("SOCIAL_CONCURRENCY", 4));
 const DELAY_MS = envNum("SOCIAL_DELAY_MS", 120);
 const CALLS_PER_CAMP = SEARCH_TYPES.length + EXTRA_SEARCHES.length;
+const statusPath = fileURLToPath(new URL("../registry/collection-status.json", import.meta.url));
+const readStatus = () => { try { return JSON.parse(readFileSync(statusPath, "utf8")); } catch { return { version: 1, sources: {} }; } };
+const collectionStatus = readStatus();
+collectionStatus.sources ??= {};
 
 try {
   await mkdir(out, { recursive: true });
@@ -79,6 +84,12 @@ async function main() {
   const prio = priorityIds();
   const prioDue = camps.filter((c) => prio.has(String(c.id)) && ((cache.campgrounds[c.id]?.v ?? 1) < SOCIAL_CACHE_VERSION || isDueWithPriority(c.id, cache.campgrounds[c.id]?.fetched_at, MAX_AGE_DAYS, prio)));
   const due = [...prioDue, ...pickDue(camps, cache.campgrounds, MAX_AGE_DAYS).filter((c) => !prio.has(String(c.id)))];
+  // 전체 업장을 같은 순서로 돌지 않고, 사진·후기·예약·요금이 비어 있거나
+  // 최근 확인일이 오래된 업장을 먼저 보강한다. 기존 캐시 값은 삭제하지 않는다.
+  const detailDir = fileURLToPath(new URL("../../camping-atlas/public/explore/data/camps/", import.meta.url));
+  const detailOf = (c) => { try { return JSON.parse(readFileSync(`${detailDir}${c.id}.json`, "utf8")); } catch { return {}; } };
+  const nonPriority = due.filter((c) => !prio.has(String(c.id)));
+  const prioritized = [...prioDue, ...prioritizeEnrichment(nonPriority, detailOf)];
   if (prioDue.length) console.log(`찜한 업장 우선 ${prioDue.length}곳`);
   console.log(`캠핑장 ${camps.length}곳 · 갱신 대상 ${due.length}곳(캐시 ${Object.keys(cache.campgrounds).length}곳, 기준 ${MAX_AGE_DAYS}일)`);
 
@@ -87,7 +98,7 @@ async function main() {
   else if (MAX_CALLS <= 0) console.log("SOCIAL_MAX_CALLS=0 — 호출 없이 캐시만 사용");
   else {
     const budgetCamps = Math.floor(MAX_CALLS / CALLS_PER_CAMP);
-    const batch = due.slice(0, budgetCamps);
+    const batch = prioritized.slice(0, budgetCamps);
     let i = 0, sinceSave = 0;
     const search = (type, q) => kakaoSearch(type, q, REQUEST_PLAN[type], { key });
     const worker = async () => {
@@ -120,12 +131,18 @@ async function main() {
           const priceDocs = (raw.price_blog ?? []).filter((d) => isRelevant({ title: d?.title, contents: d?.contents, src: d?.blogname }, ctx)).map((d) => normalizeDoc(d, "blog")).filter(Boolean);
           const prices = extractPriceMentions([...priceDocs, ...rec.blog, ...rec.cafe]);
           cache.campgrounds[c.id] = { v: SOCIAL_CACHE_VERSION, fetched_at: fetchedAt, query, ...rec, layout, prices };
+          const prevStatus = collectionStatus.sources.social?.campgrounds?.[c.id] ?? {};
+          collectionStatus.sources.social ??= { campgrounds: {} };
+          collectionStatus.sources.social.campgrounds[c.id] = { ...prevStatus, last_success_at: fetchedAt, next_due_at: new Date(Date.parse(fetchedAt) + MAX_AGE_DAYS * 864e5).toISOString(), last_error: null };
           ok++; streak = 0;
           if (++sinceSave >= 100) { sinceSave = 0; await writeFile(cachePath, JSON.stringify(cache)); }
         } catch (e) {
           // 4종을 다 받지 못한 캠핑장은 캐시하지 않는다(다음 실행에서 다시).
           if (e === stopped) break;
           failed++; streak++; firstError ??= e.message;
+          collectionStatus.sources.social ??= { campgrounds: {} };
+          const prevStatus = collectionStatus.sources.social.campgrounds?.[c.id] ?? {};
+          collectionStatus.sources.social.campgrounds[c.id] = { ...prevStatus, last_error_at: fetchedAt, last_error: String(e?.message ?? e).slice(0, 240), retry_after_at: new Date(Date.parse(fetchedAt) + 864e5).toISOString() };
           if (e.code === "RATE_LIMIT" || e.code === "AUTH" || streak >= 10) stopped = e;
         }
       }
@@ -136,6 +153,9 @@ async function main() {
     else if (firstError) warn("일부 캠핑장 검색 실패", `${failed}곳 · 첫 오류: ${firstError}`);
     if (due.length > batch.length) console.log(`호출 상한(SOCIAL_MAX_CALLS=${MAX_CALLS})으로 ${due.length - batch.length}곳은 다음 실행에서`);
   }
+  collectionStatus.updated_at = fetchedAt;
+  collectionStatus.sources.social = { ...(collectionStatus.sources.social ?? {}), last_run_at: fetchedAt, searched: ok, failed, calls, max_calls: MAX_CALLS, ttl_days: MAX_AGE_DAYS };
+  writeFileSync(statusPath, `${JSON.stringify(collectionStatus)}\n`);
   console.log(`카카오 검색 호출 ${calls}건 · 갱신 ${ok}곳 · 실패 ${failed}곳`);
 
   // 출력: 현재 캠핑장 목록에 있고 DROP_AGE_DAYS 안에 갱신된 항목만
