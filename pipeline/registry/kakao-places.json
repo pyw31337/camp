@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-11-07T19:25:08.960Z",
+ "generated_at": "2026-11-08T10:15:25.909Z",
  "source": {
   "label": "카카오 로컬 키워드 검색 · Daum 웹 검색(공식 REST API)",
   "docs": [
@@ -5388,7 +5388,7 @@
    "homepage": null
   },
   "640": {
-   "checked_at": "2026-11-07T19:25:05.626Z",
+   "checked_at": "2026-11-08T10:15:22.439Z",
    "place": {
     "id": "17591877",
     "name": "느티나무캠핑장",
@@ -8600,7 +8600,7 @@
    "homepage": null
   },
   "977": {
-   "checked_at": "2026-11-07T19:25:05.655Z",
+   "checked_at": "2026-11-08T10:15:22.469Z",
    "place": null,
    "candidates": [
     {
@@ -17909,7 +17909,7 @@
    "homepage": null
   },
   "2472": {
-   "checked_at": "2026-11-07T19:25:08.240Z",
+   "checked_at": "2026-11-08T10:15:25.280Z",
    "place": {
     "id": "898560745",
     "name": "원주두리캠핑장",
@@ -46453,7 +46453,7 @@
    "homepage": null
   },
   "100122": {
-   "checked_at": "2026-11-07T19:25:07.311Z",
+   "checked_at": "2026-11-08T10:15:24.395Z",
    "place": {
     "id": "1579667394",
     "name": "라플란드",
@@ -49769,7 +49769,7 @@
    "homepage": null
   },
   "100289": {
-   "checked_at": "2026-11-07T19:25:07.288Z",
+   "checked_at": "2026-11-08T10:15:23.917Z",
    "place": {
     "id": "828875441",
     "name": "가델캠핑장",
@@ -59911,7 +59911,7 @@
    "homepage": null
   },
   "100597": {
-   "checked_at": "2026-11-07T19:25:07.733Z",
+   "checked_at": "2026-11-08T10:15:24.415Z",
    "place": {
     "id": "1537097954",
     "name": "노리터키즈캠핑장",
@@ -63172,7 +63172,7 @@
    "homepage": null
   },
   "100676": {
-   "checked_at": "2026-11-07T19:25:07.756Z",
+   "checked_at": "2026-11-08T10:15:24.783Z",
    "place": null,
    "candidates": [
     {
@@ -64769,7 +64769,7 @@
    "homepage": null
   },
   "100721": {
-   "checked_at": "2026-11-07T19:25:07.289Z",
+   "checked_at": "2026-11-08T10:15:23.919Z",
    "place": {
     "id": "1779251680",
     "name": "캠핑굄성",
@@ -76944,7 +76944,7 @@
    "homepage": null
   },
   "101093": {
-   "checked_at": "2026-11-07T19:25:08.465Z",
+   "checked_at": "2026-11-08T10:15:25.383Z",
    "place": null,
    "candidates": [
     {
@@ -81255,7 +81255,7 @@
    "homepage": null
   },
   "101214": {
-   "checked_at": "2026-11-07T19:25:05.656Z",
+   "checked_at": "2026-11-08T10:15:22.470Z",
    "place": {
     "id": "661902238",
     "name": "캠프다온",
@@ -83222,7 +83222,7 @@
    "homepage": null
   },
   "101269": {
-   "checked_at": "2026-11-07T19:25:07.310Z",
+   "checked_at": "2026-11-08T10:15:24.263Z",
    "place": {
     "id": "826081055",
     "name": "골든쌔들캠핑장",
@@ -88556,7 +88556,7 @@
    "homepage": null
   },
   "101416": {
-   "checked_at": "2026-11-07T19:25:06.867Z",
+   "checked_at": "2026-11-08T10:15:23.760Z",
    "place": {
     "id": "1931362185",
     "name": "내포캠핑스퀘어",
@@ -88600,6 +88600,18 @@
      ]
     },
     {
+     "host": "diningcode.com",
+     "url": "https://www.diningcode.com/profile.php?rid=1MxlOUvOXnt7",
+     "score": 4,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "또또꼬마김밥 홍성내포점 - 홍성 김밥, 꼬마김밥 맛집 - 다이닝코드",
+       "url": "https://www.diningcode.com/profile.php?rid=1MxlOUvOXnt7"
+      }
+     ]
+    },
+    {
      "host": "dokdokplace.kr",
      "url": "https://dokdokplace.kr/stores/i1/i101/i10104/chungcheongnam-do/hongseong-gun/",
      "score": 4,
@@ -88620,18 +88632,6 @@
       {
        "title": "홍성 용봉산 별보기 좋은 곳",
        "url": "https://www.starscore.kr/places/chungnam/284"
-      }
-     ]
-    },
-    {
-     "host": "local.114-service.co.kr",
-     "url": "https://local.114-service.co.kr/map/detail/MA0101202406A0435636",
-     "score": 4,
-     "hits": 1,
-     "evidence": [
-      {
-       "title": "[내포캠핑스퀘어] 충청남도 홍성군 홍북읍 캠핑/글램핑 위치 · 업종 · 주소 정보 - 타운커넥트",
-       "url": "https://local.114-service.co.kr/map/detail/MA0101202406A0435636"
       }
      ]
     }
@@ -95328,7 +95328,7 @@
    "homepage": null
   },
   "101608": {
-   "checked_at": "2026-11-07T19:25:07.732Z",
+   "checked_at": "2026-11-08T10:15:24.400Z",
    "place": {
     "id": "2026652673",
     "name": "원더 포레스트",
@@ -96257,7 +96257,7 @@
    "homepage": null
   },
   "101639": {
-   "checked_at": "2026-11-07T19:25:05.657Z",
+   "checked_at": "2026-11-08T10:15:22.471Z",
    "place": {
     "id": "604025620",
     "name": "물멍 캠프",
@@ -114646,7 +114646,7 @@
    "homepage": null
   },
   "102221": {
-   "checked_at": "2026-11-07T19:25:08.239Z",
+   "checked_at": "2026-11-08T10:15:25.182Z",
    "place": null,
    "candidates": [
     {
@@ -114807,7 +114807,7 @@
    "homepage": null
   },
   "102229": {
-   "checked_at": "2026-11-07T19:25:08.209Z",
+   "checked_at": "2026-11-08T10:15:24.891Z",
    "place": null,
    "candidates": [],
    "needs_homepage": false,
@@ -115624,7 +115624,7 @@
    "homepage": null
   },
   "102270": {
-   "checked_at": "2026-11-07T19:25:08.238Z",
+   "checked_at": "2026-11-08T10:15:24.910Z",
    "place": null,
    "candidates": [
     {
@@ -118619,7 +118619,7 @@
    "homepage": null
   },
   "102377": {
-   "checked_at": "2026-11-07T19:25:07.762Z",
+   "checked_at": "2026-11-08T10:15:24.885Z",
    "place": null,
    "candidates": [],
    "needs_homepage": true,
