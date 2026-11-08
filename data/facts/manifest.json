@@ -1,8 +1,8 @@
 {
  "version": 1,
- "generated_at": "2026-11-08T11:54:27.043Z",
+ "generated_at": "2026-11-08T16:44:54.505Z",
  "campgrounds": 6421,
- "facts": 246446,
+ "facts": 246447,
  "row": "{cid, attr, value, grade, src, url?, at?, quote?, text?, n?, period?, label?, num?, count?} — src=gocamping에서 url·at이 없으면 campgrounds.ndjson의 gc_url·gc_at",
  "files": {
   "campgrounds.ndjson": 6421,
@@ -16,7 +16,7 @@
   "time.ndjson": 14236,
   "policy.ndjson": 1237,
   "sanitary.ndjson": 6218,
-  "site.ndjson": 5897,
+  "site.ndjson": 5898,
   "amenity.ndjson": 14714,
   "env.ndjson": 4075,
   "theme.ndjson": 5108,
@@ -41,7 +41,7 @@
   "operator_discovered": 1387,
   "gocamping_intro": 788,
   "kakao_web": 182,
-  "booking_engine": 2004,
+  "booking_engine": 2005,
   "cafe_mention": 140,
   "dayuse_seed": 9514,
   "gocamping_best": 58,
@@ -53,7 +53,7 @@
   "CONFIRMED": 175322,
   "MENTION": 54419,
   "REFERENCE": 1831,
-  "OPERATOR": 14525,
+  "OPERATOR": 14526,
   "VERIFIED": 349
  },
  "sources": {
