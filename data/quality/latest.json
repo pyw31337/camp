@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-11-07T23:24:18.383Z",
+ "generated_at": "2026-11-08T04:20:10.762Z",
  "date": "2026-11-08",
  "totals": {
   "campgrounds": 6421,
-  "facts": 245629,
-  "pairs": 193392,
+  "facts": 245628,
+  "pairs": 193391,
   "mean_confidence": 0.779,
   "confirmed_pct": 83.8,
   "corroborated": 4200,
@@ -545,16 +545,16 @@
    }
   },
   "PROMOTION": {
-   "coverage": 5,
+   "coverage": 4,
    "coverage_pct": 0.1,
-   "mean_confidence": 0.46,
-   "confirmed_pct": 20,
+   "mean_confidence": 0.488,
+   "confirmed_pct": 25,
    "corroborated": 0,
    "conflicts": 0,
-   "weak": 4,
+   "weak": 3,
    "status": {
     "CONFIRMED": 1,
-    "WEAK": 4
+    "WEAK": 3
    }
   },
   "CHARCOAL_ALLOWED": {
@@ -1932,13 +1932,13 @@
    "confirmed_pct": 18.1,
    "corroborated": 591,
    "conflicts": 42,
-   "weak": 1372,
+   "weak": 1373,
    "status": {
     "VERIFIED": 218,
-    "WEAK": 1372,
+    "WEAK": 1373,
     "CONFIRMED": 296,
     "CONFLICT": 42,
-    "SINGLE": 724,
+    "SINGLE": 723,
     "CORROBORATED": 183
    }
   },
@@ -1951,9 +1951,9 @@
    "conflicts": 15,
    "weak": 1397,
    "status": {
-    "VERIFIED": 231,
+    "VERIFIED": 230,
     "WEAK": 1397,
-    "CONFIRMED": 309,
+    "CONFIRMED": 310,
     "SINGLE": 666,
     "CORROBORATED": 253,
     "CONFLICT": 15
