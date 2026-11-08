@@ -14549,6 +14549,8 @@
 {"cid":"park-48850-00001-pb3gq","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-08"}
 {"cid":"park-48850-00001-pb3gq","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-08"}
 {"cid":"park-48890-00004-qcrdk","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-08"}
+{"cid":"park-50110-00041-rsonh","attr":"AMENITY_PLAYGROUND","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-08"}
+{"cid":"park-50110-00041-rsonh","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-08"}
 {"cid":"park-50110-00194-1g4b7","attr":"AMENITY_POOL","value":true,"grade":"OPERATOR","src":"operator_discovered","url":"https://psf.kr/community/notice.htm","at":"2026-10-24T23:00:15.165Z","quote":"서귀포서귀포국민체육센터수영장(0)"}
 {"cid":"park-50110-00194-1g4b7","attr":"AMENITY_POOL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-08"}
 {"cid":"park-50130-00029-q400g","attr":"AMENITY_TRAIL","value":true,"grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.data.go.kr/data/15012890/standard.do","at":"2026-11-08"}

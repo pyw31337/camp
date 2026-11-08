@@ -1215,6 +1215,7 @@
 {"cid":"7063","attr":"PET_POLICY","value":"ZONE_ONLY","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/a0824youngg/224406145300","at":"2026-09-09","quote":"애견 동반 가능, 간이매점, 주류 판매하지 않음 공주계곡이레캠핑장은 네비 카카오 맵으로 찍고 갔을 때는 다른 곳을 안내하더라고요🥹 마곡사 가기…","text":"동반 가능","n":3}
 {"cid":"7067","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7069","attr":"PET_POLICY","value":"SMALL_ONLY","grade":"CONFIRMED","src":"gocamping","text":"가능(소형견)"}
+{"cid":"7069","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/nadabmj/223256594655","at":"2023-11-06","quote":"입실&퇴실 14:00/12:00 1박에 40,000~50,000원 매너 타임 22:00-08:00 애견 동반 가능(문의) 파쇄석사이트는 전화로만 예약 가능!!","text":"동반 가능","n":1}
 {"cid":"7071","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"7071","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/alsdud4358/224258653230","at":"2026-04-20","quote":"경기도 남양주시...애견동반 가능 (상주견 포메2마리 있어요!)","text":"동반 가능 (2마리까지)","n":4}
 {"cid":"7072","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"https://goldensunset.co.kr/r_reserinfo.php","at":"2026-10-20T01:04:05.390Z","quote":"반려동물 출입은 불가합니다.","text":"동반 불가"}
@@ -4515,6 +4516,7 @@
 {"cid":"102365","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"102365","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/justshell/224440449692","at":"2026-10-13","quote":"[태안] 두물별관광농원 캠핑장 애견동반 가능한 신생 캠핑장 2박 내.....","text":"동반 가능","n":1}
 {"cid":"102368","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
+{"cid":"102368","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://cheotcamp.com/campgrounds/gocamping-102368","quote":"반려동물 동반 불가 안내","text":"동반 불가","n":1}
 {"cid":"102376","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/epsl1144/224412573981","at":"2026-09-15","quote":"반려동물 동반 가능","text":"동반 가능","n":1}
 {"cid":"102377","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"osm-r7004603","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"https://tour.paju.go.kr/user/board/BD_board.view.do?seq=20251002160602183&bbsCd=2001&pageType=&showSummaryYn=N&delDesc=&q_ctgCd=1003&q_parentCtgCd=&q_searchKeyType=&q_searchVal=&q_currPage=2&q_sortName=&q_sortOrder=&q_rowPerPage=8&q_chooseCnt=","at":"2026-10-31T23:06:19.666Z","quote":"- 반려동물 출입금지며, 지정된 테이블 외 취사가 불가능합니다.","text":"동반 불가"}
