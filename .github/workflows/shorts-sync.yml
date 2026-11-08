@@ -66,7 +66,7 @@ jobs:
           git config user.name "moyeora-camping-data-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           [ -f registry/shorts-search.json ] || exit 0
-          git add registry/shorts-search.json
+          git add registry/shorts-search.json registry/collection-status.json 2>/dev/null || git add registry/shorts-search.json
           if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
           git commit -m "chore(data): refresh YouTube shorts search"
           bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" shorts-sync

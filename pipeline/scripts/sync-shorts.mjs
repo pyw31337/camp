@@ -3,13 +3,14 @@
 // - 카카오(Daum) 동영상 검색(vclip) 3회/곳: ‘이름’ 1·2쪽(30개씩) + ‘이름(캠핑) 쇼츠’. KAKAO_REST_API_KEY. YouTube이고 제목에 이름이 있는 것만(lib videoMatch).
 //   일반 영상은 videos, 숏츠(/shorts/·60초 이하·3분 이하+#shorts)는 shorts로 나눠 쌓는다(캠핑장당 30개·20개).
 // - YOUTUBE_API_KEY가 있으면 YouTube Data API search.list(videoDuration=short, 100단위) + videos.list(길이, 1단위)도 쓴다(일 10,000단위 무료 한도 안 → YT_MAX_SEARCHES 기본 45곳 ≈ 4,550단위, shorts-sync는 90곳 ≈ 9,100단위, AGENTS.md 무과금 원칙).
-// - 영상이 하나도 없는 캠핑장부터. 캐시 registry/shorts-search.json(SHORTS_MAX_AGE_DAYS 기본 30일). 한도·인증 오류면 즉시 멈춤.
+// - 영상이 하나도 없는 캠핑장부터. 캐시 registry/shorts-search.json(SHORTS_MAX_AGE_DAYS 기본 3일). 한도·인증 오류면 즉시 멈춤.
 // - 화면 데이터에는 build-explore-data가 ‘채우기만’ 한다(이미 있는 영상은 그대로, 없는 숏츠만 덧붙임).
 // 키가 없거나 네트워크가 실패해도 캐시로 결과를 쓰고 exit 0.
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { nowInKst, toKstIso } from "../lib/kst.mjs";
+import { prioritizeEnrichment } from "../lib/enrichment-priority.mjs";
 import { kakaoSearch, nameCore, regionStem } from "../lib/social-search.mjs";
 import { SHORTS_CACHE_VERSION, VIDEO_CAPS, isoDurationSec, pickShortsDue, recordVideos, excludeMap, shortsFromYoutube, shortsQueries, videoQueries, videosFromVclip } from "../lib/shorts-search.mjs";
 
@@ -28,6 +29,9 @@ const MAX_CALLS = envNum("SHORTS_MAX_CALLS", 9000);
 const YT_MAX = envNum("YT_MAX_SEARCHES", 45);
 const DELAY_MS = envNum("SHORTS_DELAY_MS", 120);
 const CONCURRENCY = Math.max(1, envNum("SHORTS_CONCURRENCY", 4));
+const statusPath = fileURLToPath(new URL("../registry/collection-status.json", import.meta.url));
+const readStatus = () => { try { return JSON.parse(readFileSync(statusPath, "utf8")); } catch { return { version: 1, sources: {} }; } };
+const collectionStatus = readStatus(); collectionStatus.sources ??= {};
 
 try { await mkdir(out, { recursive: true }); await mkdir(cacheDir, { recursive: true }); await main(); }
 catch (e) { warn("숏츠 수집 실패", e?.stack ?? String(e)); }
@@ -89,6 +93,11 @@ async function main() {
     const age = (id) => (cache.campgrounds[id]?.fetched_at ? (Date.now() - Date.parse(cache.campgrounds[id].fetched_at)) / 864e5 : Infinity);
     due = [...camps].sort((a, b) => age(b.id) - age(a.id));
   }
+  const detailDir = fileURLToPath(new URL("../../camping-atlas/public/explore/data/camps/", import.meta.url));
+  const detailOf = (c) => { try { return JSON.parse(readFileSync(`${detailDir}${c.id}.json`, "utf8")); } catch { return {}; } };
+  const priorityDue = due.filter((c) => priorityIds.has(String(c.id)));
+  const nonPriorityDue = due.filter((c) => !priorityIds.has(String(c.id)));
+  due = [...priorityDue, ...prioritizeEnrichment(nonPriorityDue, detailOf)];
   const kkey = process.env.KAKAO_REST_API_KEY, ykey = process.env.YOUTUBE_API_KEY;
   console.log(`캠핑장 ${camps.length}곳 · 찜/우선순위 ${priorityIds.size}곳 · 영상 없는 곳 ${[...vc.values()].filter((n) => !n).length}곳 · 숏츠 갱신 대상 ${due.length}곳`);
   let calls = 0, yt = 0, ok = 0, failed = 0, stopped = null, firstError = null, ytStopped = false;
@@ -129,10 +138,16 @@ async function main() {
           shorts = shorts.filter((x) => !seen.has(x.yt) && seen.add(x.yt)).slice(0, VIDEO_CAPS.shorts);
           const videos = found.videos.filter((x) => !seen.has(x.yt) && seen.add(x.yt));
           cache.campgrounds[c.id] = { v: SHORTS_CACHE_VERSION, fetched_at: fetchedAt, ...(shorts.length ? { shorts } : {}), ...(videos.length ? { videos } : {}) };
+          collectionStatus.sources.youtube ??= { campgrounds: {} };
+          const prevStatus = collectionStatus.sources.youtube.campgrounds?.[c.id] ?? {};
+          collectionStatus.sources.youtube.campgrounds[c.id] = { ...prevStatus, last_success_at: fetchedAt, next_due_at: new Date(Date.parse(fetchedAt) + MAX_AGE_DAYS * 864e5).toISOString(), last_error: null, result_count: shorts.length + videos.length };
           ok++;
           if (++since >= 100) { since = 0; await writeFile(cachePath, dumpCache(cache)); }
         } catch (e) {
           failed++; firstError ??= e.message;
+          collectionStatus.sources.youtube ??= { campgrounds: {} };
+          const prevStatus = collectionStatus.sources.youtube.campgrounds?.[c.id] ?? {};
+          collectionStatus.sources.youtube.campgrounds[c.id] = { ...prevStatus, last_error_at: fetchedAt, last_error: String(e?.message ?? e).slice(0, 240), retry_after_at: new Date(Date.parse(fetchedAt) + 864e5).toISOString() };
           if (e.code === "RATE_LIMIT" || e.code === "AUTH" || failed >= 20) stopped = e;
         }
       }
@@ -141,6 +156,9 @@ async function main() {
     await writeFile(cachePath, dumpCache(cache));
     if (stopped) warn("카카오 숏츠 검색 중단", stopped.message); else if (firstError) warn("일부 숏츠 검색 실패", `${failed}곳 · ${firstError}`);
   }
+  collectionStatus.updated_at = fetchedAt;
+  collectionStatus.sources.youtube = { ...(collectionStatus.sources.youtube ?? {}), last_run_at: fetchedAt, searched: ok, failed, kakao_calls: calls, youtube_searches: yt, max_calls: MAX_CALLS, ttl_days: MAX_AGE_DAYS };
+  writeFileSync(statusPath, `${JSON.stringify(collectionStatus)}\n`);
   const records = {};
   let withShorts = 0, withVideos = 0, noVideoGained = 0, total = 0, totalVideos = 0;
   for (const c of camps) {

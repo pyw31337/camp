@@ -255,6 +255,8 @@ function build() {
   const bvChecked = Object.values(bv).filter((x) => x?.v && x.v !== "UNVERIFIED").length;
   metrics["booking.verified"] = { value: bvOk, base: bvChecked, pct: pct(bvOk, bvChecked) };
   const shorts = reg("shorts-search.json").campgrounds ?? {};
+  const collectionStatus = reg("collection-status.json");
+  const enrichmentQueue = reg("data-enrichment-queue.json");
   const shortsV2 = Object.entries(shorts).filter(([id, x]) => stayIds.has(id) && (x?.v ?? 1) >= 2);
   metrics["video.search_v2"] = { value: shortsV2.length, base: nStay, pct: pct(shortsV2.length, nStay) };
   const rt = reg("review-thumbs.json");
@@ -403,6 +405,8 @@ function build() {
     videos: { kind: videoKind, by_host: videoHost, by_year: videoYear, per_camp: dist(videoPerCamp, [[0, 0, "0"], [1, 2, "1~2"], [3, 5, "3~5"], [6, 9, "6~9"], [10, 19, "10~19"], [20, 1e9, "20+"]]) },
     sources,
     status: { operator_site: opsStatus, link_health: lhStatus, booking_verify: bvStatus },
+    collection_status: collectionStatus.sources ?? {},
+    enrichment: { summary: enrichmentQueue.summary ?? null, top: (enrichmentQueue.queue ?? []).slice(0, 100).map((x) => ({ id: x.id, name: x.name, priority: x.priority, gaps: x.gaps, collection: x.collection ?? null })) },
     judgments: { texts: Object.keys(tj).length, texts_hidden: tjHidden, photos: Object.keys(pj).length, photos_hidden: pjHidden },
     quality: { totals: q.totals ?? null, attrs, ledger: ledger.map((l) => ({ date: l.date, ...l.totals })), review_queue: rqItems.length, review_queue_by_attr: countBy(rqItems, (x) => x.label ?? x.attr), review_queue_top: rqItems.slice(0, 20).map((x) => ({ id: x.cid, name: x.name ?? null, attr: x.label ?? x.attr ?? null, values: [x.top, x.rival].filter(Boolean).map((v) => ({ v: v.value, c: v.confidence, n: v.sources })) })) },
     info_score: { mean: metrics["quality.iq"].value, dist: dist(iqs, [[0, 19, "0~19"], [20, 39, "20~39"], [40, 59, "40~59"], [60, 79, "60~79"], [80, 100, "80~100"]]), next_priorities: (info.next_priorities ?? []).slice(0, 15) },

@@ -5,6 +5,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { enrichmentGapScore } from "../lib/enrichment-priority.mjs";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 const dataDir = join(root, "camping-atlas/public/explore/data");
@@ -19,7 +20,8 @@ const readDetail = (id) => {
 const hasText = (v) => typeof v === "string" ? v.trim().length > 0 : Boolean(v);
 const hasBooking = (c, d) => Boolean(c.booking?.url || c.booking?.channels?.length || c.dl?.length || d.booking?.channels?.length);
 const hasPhoto = (c, d) => Boolean(c.ph || c.img || c.pt?.t || c.sn || d.photos?.length || d.photos_remote?.length);
-const isDayUse = (c) => Boolean(c.du === "park" || c.du === "water" || c.types?.includes("공원") || c.types?.includes("물놀이터"));
+const hasCardPhoto = (c) => Boolean(c.ph || c.img || c.pt?.t || c.sn);
+const isDayUse = (c) => Boolean(c.du || c.types?.some((x) => /공원|물놀이터|캠크닉|관광농원/.test(String(x))));
 const isCampLike = (c) => !isDayUse(c) && (c.types ?? []).some((x) => /야영|캠핑|글램핑|카라반|휴양림|캠프닉/.test(String(x)));
 
 const sourceCatalog = {
@@ -37,7 +39,8 @@ for (const c of catalog) {
   const d = readDetail(id);
   const gaps = [];
   const kinds = [];
-  if (!hasPhoto(c, d)) { gaps.push("photo"); kinds.push("대표 사진"); }
+  if (!hasCardPhoto(c)) { gaps.push("thumbnail"); kinds.push("카드 대표 썸네일"); }
+  else if (!hasPhoto(c, d)) { gaps.push("photo"); kinds.push("상세 사진"); }
   if (!c.fee && !d.prices?.length && !d.profile?.fields?.PRICE) { gaps.push("price"); kinds.push("1박 요금"); }
   if (!c.ti?.i && !d.profile?.fields?.CHECKIN && !d.spec?.fields?.CHECKIN_TIME) { gaps.push("checkin"); kinds.push("입실"); }
   if (!c.ti?.o && !d.profile?.fields?.CHECKOUT && !d.spec?.fields?.CHECKOUT_TIME) { gaps.push("checkout"); kinds.push("퇴실"); }
@@ -53,13 +56,20 @@ for (const c of catalog) {
   const base = campLike ? 100 : isDayUse(c) ? 35 : 60;
   const score = Math.max(1, base + gaps.length * 7 + (c.iq != null && c.iq < 20 ? 15 : 0) + (c.sido ? 0 : 8));
   const recommended = new Set();
-  for (const g of gaps) for (const s of g === "photo" ? sourceCatalog.photo : g === "nearby" ? sourceCatalog.nearby : g === "operator" ? sourceCatalog.operator : sourceCatalog.core) recommended.add(s);
+  for (const g of gaps) for (const s of (g === "photo" || g === "thumbnail") ? sourceCatalog.photo : g === "nearby" ? sourceCatalog.nearby : g === "operator" ? sourceCatalog.operator : sourceCatalog.core) recommended.add(s);
   for (const g of gaps) addGap(g);
   queue.push({
     id, name: c.name, sido: c.sido ?? null, sigungu: c.sigungu ?? null,
     kind: campLike ? "campground" : isDayUse(c) ? "day-use" : "other",
     priority: score, gaps, missing: kinds, sources: [...recommended],
-    current: { iq: c.iq ?? null, has_photo: hasPhoto(c, d), has_booking: hasBooking(c, d), has_homepage: hasText(c.homepage) || hasText(d.homepage) },
+    current: { iq: c.iq ?? null, has_photo: hasPhoto(c, d), has_card_photo: hasCardPhoto(c), has_booking: hasBooking(c, d), has_homepage: hasText(c.homepage) || hasText(d.homepage) },
+    collection: {
+      last_social_at: d.social_checked_at ?? null,
+      last_web_at: d.web_checked_at ?? null,
+      next_social_due: d.social_checked_at ? new Date(Date.parse(d.social_checked_at) + 14 * 864e5).toISOString() : null,
+      next_web_due: d.web_checked_at ? new Date(Date.parse(d.web_checked_at) + 14 * 864e5).toISOString() : null,
+      priority_score: enrichmentGapScore(c, d).score,
+    },
   });
 }
 queue.sort((a, b) => b.priority - a.priority || a.name.localeCompare(b.name, "ko"));
@@ -77,6 +87,9 @@ const summary = {
     "LOCALDATA·공공시설 표준데이터: 편의점·약국·정육점·주유소·휴양림·수영장·실내놀이",
     "이용자 제보: 원문 URL과 확인 시각을 받은 뒤 검토 큐로 편입",
   ],
+  policy: "빈칸·오래된 업장 우선. 카드 사진·상세 SNS 사진은 별도 상태로 관리하며, 실패한 원천은 다음 배치에 재시도한다.",
 };
-writeFileSync(outPath, JSON.stringify({ generated_at: new Date().toISOString(), summary, queue: queue.slice(0, 1000) }, null, 2) + "\n");
+// 전체 대상을 보관한다. 화면·자동화는 앞부분을 쓰되, 뒤쪽 업장도 다음 배치에서
+// 누락되지 않도록 1,000곳에서 잘라내지 않는다.
+writeFileSync(outPath, JSON.stringify({ generated_at: new Date().toISOString(), summary, queue }, null, 2) + "\n");
 console.log(`데이터 보강 큐: 전체 ${summary.total} · 대상 ${summary.queued} · 캠핑장 ${summary.campground} · 당일시설 ${summary.day_use} · 공백 ${Object.entries(byGap).map(([k, v]) => `${k}=${v}`).join(", ")}`);

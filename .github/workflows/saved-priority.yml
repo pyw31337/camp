@@ -127,7 +127,7 @@ jobs:
         run: |
           git config user.name "moyeora-camping-data-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for f in registry/kakao-places.json registry/naver-places.json registry/naver-usage.json registry/operator-site-snippets.json registry/operator-deep.json ../data/priority/saved-camps.json; do [ -f "$f" ] && git add "$f"; done
+          for f in registry/kakao-places.json registry/naver-places.json registry/naver-usage.json registry/operator-site-snippets.json registry/operator-deep.json registry/collection-status.json ../data/priority/saved-camps.json; do [ -f "$f" ] && git add "$f"; done
           if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
           git commit -m "chore(data): saved camps priority refresh"
           bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" saved-priority
