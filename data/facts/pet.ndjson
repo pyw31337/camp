@@ -1821,6 +1821,7 @@
 {"cid":"8137","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"VERIFIED","src":"agent_review","url":"https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=78&tourNo=3306&pageUnit=12&pageIndex=1&searchCnd=all&searchMainSe=STAY","at":"2026-10-22T15:07:15.845Z","quote":"업장 원문 “애견불가”이 gocamping 값(\"ALLOWED\")보다 1차 원천","label":"Claude(원문 대조·규칙)"}
 {"cid":"8137","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"https://tour.chungbuk.go.kr/www/selectTourCntnts.do?key=78&tourNo=3306&pageUnit=12&pageIndex=1&searchCnd=all&searchMainSe=STAY","at":"2026-10-19T09:45:29.064Z","quote":"애견불가","text":"동반 불가"}
 {"cid":"8137","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
+{"cid":"8137","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/bimobubu/224282757500","at":"2026-05-12","quote":"애견 동반 가능해서 친구 강쥐도 같이~!","text":"동반 가능","n":2}
 {"cid":"8138","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"8142","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"8145","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
@@ -3634,7 +3635,6 @@
 {"cid":"101361","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
 {"cid":"101361","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/luffy050593/224128068131","at":"2025-12-30","quote":"[서천 힐링 캠핑장] 쭈꾸미낚시 못하고 2박3일 10월 가을캠핑 애견동반 가능한 5인 두사이트.","text":"동반 가능","n":1}
 {"cid":"101362","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
-{"cid":"101362","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/iamj__/224251868126","at":"2026-04-14","quote":"단체 및 반려동물 동반 불가 전기 : 600w 이하...","text":"동반 불가","n":1}
 {"cid":"101363","attr":"PET_POLICY","value":"ALLOWED","grade":"VERIFIED","src":"agent_review","url":"http://prcamp.webbit.kr/reser.html?id=4","at":"2026-10-22T15:07:15.845Z","quote":"업장 원문 “+ 반려동물 출입은 가능하되 1마리이내이며, 이상시 추가부담(패드지참 필수).”이 gocamping 값(\"NOT_ALLOWED\")보다 1차 원천","label":"Claude(원문 대조·규칙)"}
 {"cid":"101363","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_discovered","url":"http://prcamp.webbit.kr/reser.html?id=4","at":"2026-10-20T01:28:56.085Z","quote":"+ 반려동물 출입은 가능하되 1마리이내이며, 이상시 추가부담(패드지참 필수).","text":"동반 가능 (1마리까지)"}
 {"cid":"101363","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
@@ -4513,6 +4513,7 @@
 {"cid":"102359","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/mykim0403/224449830567","at":"2026-10-22","quote":"가평글램핑 리버위드 애견동반가능한 서울근교 힐링캠프.","text":"동반 가능","n":4}
 {"cid":"102361","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/a97666586/224275514521","at":"2026-05-05","quote":"반려견동반 이천캠핑장 낚시 당일캠핑가능한 어름박골캠핑장.","text":"동반 가능","n":6}
 {"cid":"102365","attr":"PET_POLICY","value":"ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"가능"}
+{"cid":"102365","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/justshell/224440449692","at":"2026-10-13","quote":"[태안] 두물별관광농원 캠핑장 애견동반 가능한 신생 캠핑장 2박 내.....","text":"동반 가능","n":1}
 {"cid":"102368","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
 {"cid":"102376","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/epsl1144/224412573981","at":"2026-09-15","quote":"반려동물 동반 가능","text":"동반 가능","n":1}
 {"cid":"102377","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"CONFIRMED","src":"gocamping","text":"불가능"}
@@ -4619,7 +4620,7 @@
 {"cid":"park-46110-00004-1pebe","attr":"PET_POLICY","value":"ALLOWED","grade":"OPERATOR","src":"operator_homepage","url":"https://dog-park.smartkrinsurance.com/park/park-jn-3/","at":"2026-10-24T22:46:56.048Z","quote":"목포 갓바위 반려견 놀이터 이용 중 발생 가능한 사고와 보험 대비","text":"동반 가능"}
 {"cid":"park-46110-00030-vd3n","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/camfit/224444849780","at":"2026-10-18","quote":"1박 40,000원~60,000원대 가격으로 샤워실, 바베큐, 매점, 반려견 동반이 가능하며, 매너타임(22:00~07:00)이 잘 지켜지는 조용한 캠핑 환경을 제공합니다.","text":"동반 가능","n":1}
 {"cid":"park-46230-00042-y1qz","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hellobbikko/224350488121","at":"2026-07-18","quote":"️ 반려견동반가능","text":"동반 가능","n":1}
-{"cid":"park-46720-00017-qyk2p","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/ghdtjd400/223874429000","at":"2025-05-23","quote":"전남오토캠핑장 추천 , 애견동반가능하고 자연속에서 힐링 찾고 싶으시다면 캠핑 인 곡성.","text":"동반 가능","n":1}
+{"cid":"park-46720-00017-qyk2p","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/ghdtjd400/223874429000","at":"2025-05-23","quote":"전남오토캠핑장 추천 , 애견동반가능하고 자연속에서 힐링 찾고 싶으시다면 캠핑 인 곡성.","text":"동반 가능","n":2}
 {"cid":"park-47111-00027-15m52","attr":"PET_POLICY","value":"ZONE_ONLY","grade":"MENTION","src":"review_search","url":"https://triple.guide/hotels/e100fe76-7a30-457d-8342-fa9052ebe1e2?checkIn=2024-02-24&checkOut=2024-02-25&numberOfAdults=2&agesOfChildren&skipInitialCache=true&_triple_no_navbar=true","quote":"반려동물 입실 가능 펜션 외에 반려동물 동반 시 입실이 거부될 수 있으며, 해당 사유로 환불 받을 수 없습니다.","text":"동반 가능","n":1}
 {"cid":"park-48250-00250-pdncm","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://hanoelpapa3.hanoelswould.com/929","at":"2025-05-14","quote":"애견 동반 가능해요.","text":"동반 가능","n":2}
 {"cid":"park-48820-00001-n71qm","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://outguide88.tistory.com/21","at":"2025-04-04","quote":"반려동물 동반 가능","text":"동반 가능","n":1}
@@ -4645,7 +4646,7 @@
 {"cid":"rf-144vpey","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/k7482811/224426807249","at":"2026-10-04","quote":"월드컵주방입니다^^ 이번 명절에는 가족들과 함께 근처로 여행을 다녀왔는데요~ 반려견 호두도 동반이 가능하여 더욱 만족스러웠던 \"함양 산삼 자연 휴양림\"입니다.","text":"동반 가능","n":5}
 {"cid":"rf-144vpey","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hh9563/224431033690","at":"2026-10-04","quote":"️애견동반 불가","text":"동반 불가","n":2}
 {"cid":"rf-cpx1a2","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://all-infor.tistory.com/154","at":"2026-07-24","quote":"대구 도심 근교&middot;남평문씨본리세거지 인접&middot;유아숲체험원&middot;화요일 휴관&middot;반려견 동반 불가&middot;방문","text":"동반 불가","n":1}
-{"cid":"rf-jp2ov6","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/k7482811/224426807249","at":"2026-10-04","quote":"월드컵주방입니다^^ 이번 명절에는 가족들과 함께 근처로 여행을 다녀왔는데요~ 반려견 호두도 동반이 가능하여 더욱 만족스러웠던 \"함양 산삼 자연 휴양림\"입니다.","text":"동반 가능","n":3}
+{"cid":"rf-jp2ov6","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/k7482811/224426807249","at":"2026-10-04","quote":"월드컵주방입니다^^ 이번 명절에는 가족들과 함께 근처로 여행을 다녀왔는데요~ 반려견 호두도 동반이 가능하여 더욱 만족스러웠던 \"함양 산삼 자연 휴양림\"입니다.","text":"동반 가능","n":5}
 {"cid":"rf-jp2ov6","attr":"PET_POLICY","value":"NOT_ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/hh9563/224431033690","at":"2026-10-04","quote":"️애견동반 불가","text":"동반 불가","n":2}
 {"cid":"rf-kg4m5r","attr":"PET_POLICY","value":"ALLOWED","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/happyeteday/223652285107","at":"2024-11-08","quote":"포천 국망봉 자연 휴양림 캠핑장 D구역 애견동반 가능한 가을 동계 .....","text":"동반 가능","n":3}
 {"cid":"rf-xuijdf","attr":"PET_POLICY","value":"ZONE_ONLY","grade":"MENTION","src":"review_search","url":"https://blog.naver.com/whgpdms1774/224361067268","at":"2026-07-29","quote":"경남 하동 구재봉 자연휴양림에는 숲속의집/휴양관/트리하우스/캠핑하우스/데크 등 다양한 숙박 형태가 있는데 그 중에서 우리는 숲속의 집, 소나무 1호(애견 동반 가능) 에 묵었다.","text":"동반 가능","n":1}
