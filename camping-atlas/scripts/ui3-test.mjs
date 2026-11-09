@@ -47,15 +47,21 @@ for (const [w, h] of [[320, 740], [390, 844], [1366, 900]]) {
   if (await page.$("[data-sort], [data-list-sort], [data-theme-sort]")) fails.push(`${tag} 홈: 정렬 선택 남음`);
   await countCheck(page, ".c-rv-pill > i", "후기 알약", tag);
   // 카드 6줄
-  const cards = await page.$$eval(".card[data-id]", (cs) => cs.slice(0, 30).map((c) => {
-    const lis = [...c.querySelectorAll(".rows-6 > li")];
-    const hs = lis.map((li) => Math.round(li.getBoundingClientRect().height));
-    const cut = [...c.querySelectorAll(".card-body *")].filter((e) => { const s = getComputedStyle(e); return s.textOverflow === "ellipsis" && e.scrollWidth > e.clientWidth + 1 && e.getBoundingClientRect().width > 0; }).map((e) => e.className || e.tagName);
-    const bd = [...c.querySelectorAll(".bdgs .bdg")].map((b) => b.className + ":" + b.textContent.trim());
-    return { id: c.dataset.id, labels: lis.map((li) => li.querySelector(".rl")?.textContent.trim()), hs, cut, vis: lis.length && lis[0].getBoundingClientRect().width > 0,
-      // 2026-10-22 소유자: 사진 배지는 윗줄 긍정(초대가능·600W·장작 등)·아랫줄 부정(불가). 정보 줄과 겹쳐도 된다(10-21 중복 금지 규칙 대체).
-      order: bd.findIndex((x) => /bdg-no/.test(x)) >= 0 && bd.slice(bd.findIndex((x) => /bdg-no/.test(x))).some((x) => !/bdg-no|bdg-wx|w-alert/.test(x)) ? bd : [] };
-  }));
+  const cards = await page.$$eval(".card[data-id]", (cs) => {
+    cs.slice(0, 30).forEach((c) => {
+      const d = c.querySelector(".unique-card-details, .card-spec-details");
+      if (d && !d.open) d.open = true;
+    });
+    return cs.slice(0, 30).map((c) => {
+      const lis = [...c.querySelectorAll(".rows-6 > li")];
+      const hs = lis.map((li) => Math.round(li.getBoundingClientRect().height));
+      const cut = [...c.querySelectorAll(".card-body *")].filter((e) => { const s = getComputedStyle(e); return s.textOverflow === "ellipsis" && e.scrollWidth > e.clientWidth + 1 && e.getBoundingClientRect().width > 0; }).map((e) => e.className || e.tagName);
+      const bd = [...c.querySelectorAll(".bdgs .bdg")].map((b) => b.className + ":" + b.textContent.trim());
+      return { id: c.dataset.id, labels: lis.map((li) => li.querySelector(".rl")?.textContent.trim()), hs, cut, vis: lis.length && lis[0].getBoundingClientRect().width > 0,
+        // 2026-10-22 소유자: 사진 배지는 윗줄 긍정(초대가능·600W·장작 등)·아랫줄 부정(불가). 정보 줄과 겹쳐도 된다(10-21 중복 금지 규칙 대체).
+        order: bd.findIndex((x) => /bdg-no/.test(x)) >= 0 && bd.slice(bd.findIndex((x) => /bdg-no/.test(x))).some((x) => !/bdg-no|bdg-wx|w-alert/.test(x)) ? bd : [] };
+    });
+  });
   for (const c of cards.filter((x) => x.vis)) {
     if (c.labels.join() !== ROWS.join()) fails.push(`${tag} 카드 #${c.id}: 줄 ${c.labels.join("·")} (기대 ${ROWS.join("·")})`);
     if (Math.max(...c.hs) - Math.min(...c.hs) > 1) fails.push(`${tag} 카드 #${c.id}: 줄 높이 다름 ${c.hs.join("/")}`);

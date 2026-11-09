@@ -1347,7 +1347,7 @@ function uniqueFeatureHtml(c) {
   </div>`;
 }
 function uniqueDetailsHtml(c) {
-  const id = `unique-spec-${String(c.id).replace(/[^A-Za-z0-9_-]/g, "-")}`;
+  const id = `spec-${String(c.id).replace(/[^A-Za-z0-9_-]/g, "-")}`;
   const f = facts(c);
   const fallback = [
     c.pf?.s,
@@ -1357,9 +1357,9 @@ function uniqueDetailsHtml(c) {
   const rows = fallback.length && !siteSizeShort(c) && !f.power?.v && !f.fire?.v && !f.park?.v && !nearLine(c, " · ")
     ? `<div class="unique-card-fallback">${fallback.map((x) => `<p>${esc(String(x))}</p>`).join("")}</div>`
     : rowsHtml(c);
-  return `<details class="unique-card-details">
-    <summary class="unique-card-summary"><span>${ic("list")}상세정보</span>${ic("chevron-up", "unique-card-chevron")}</summary>
-    <div class="unique-card-panel" id="${esc(id)}">${rows}</div>
+  return `<details class="unique-card-details card-spec-details">
+    <summary class="unique-card-summary card-spec-summary"><span>${ic("list")}상세정보</span>${ic("chevron-up", "unique-card-chevron")}</summary>
+    <div class="unique-card-panel card-spec-panel" id="${esc(id)}">${rows}</div>
   </details>`;
 }
 // 찜 목록은 여러 곳을 훑어보기 위한 화면이므로, 이름·주소 아래의 모든 정보(유형·스펙·후기 뱃지)를 '상세정보'로 기본 접는다.
@@ -1541,8 +1541,8 @@ function card(c, i = 0, opts) {
         <div class="card-group card-group-types">
           ${typeRow(c).html}
         </div>
-        ${uniqueTheme ? uniqueDetailsHtml(c) : `<div class="card-group card-group-spec">${rowsHtml(c)}</div>`}
-        ${uniqueTheme ? uniqueFeatureHtml(c) : ""}
+        ${uniqueDetailsHtml(c)}
+        ${c.uq?.length ? uniqueFeatureHtml(c) : ""}
         ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `
           <div class="card-group card-group-reviews">
             <div class="card-reviews">${cardReviewPills(c.rv, c)}</div>
@@ -1632,6 +1632,18 @@ document.addEventListener("click", (e) => {
 });
 addEventListener("scroll", () => { $("#pop").hidden = true; }, { passive: true });
 addEventListener("keydown", (e) => { if (e.key === "Escape") $("#pop").hidden = true; });
+// 카드 상세정보 토글 시 같은 테마 레일 내 카드들 상세정보 동시 토글 (소유자 2026-11-09)
+document.addEventListener("click", (e) => {
+  const s = e.target.closest(".unique-card-summary, .card-spec-summary");
+  if (!s) return;
+  const d = s.closest("details");
+  const rail = d?.closest(".rail, .trow, .my-taste-rail, [data-grid], .nearby-places") || d?.closest("section");
+  if (!rail) return;
+  setTimeout(() => {
+    const st = d.open;
+    rail.querySelectorAll(".unique-card-details, .card-spec-details").forEach((x) => { if (x !== d && x.open !== st) x.open = st; });
+  }, 0);
+});
 // ‘불가·금지’ 값은 사이트 어디서나 빨간 글씨(소유자 2026-10-22 전수 적용). 그린 뒤 글자 노드를 훑어 감싼다.
 // 짧은 값(24자 이하)은 통째로, 긴 문장은 그 낱말 묶음만. 빨간 배지·제목·입력칸은 건드리지 않는다.
 const NO_RE = /(불가능|불가|금지)(?!피|사의|결|분)/;
@@ -4195,6 +4207,121 @@ function initHeroDynamicEngine(v) {
   });
 }
 
+// ── 내 취향 맞춤 섹션 및 장비 설정 (소유자 2026-11-09) ──────────────────────────────────
+const DEFAULT_MY_TASTE = { types: ["AUTO"], minSize: 0, fire: false, power: false, pet: false };
+const getMyTaste = () => { try { const r = localStorage.getItem("camp_my_taste"); if (r) return { ...DEFAULT_MY_TASTE, ...JSON.parse(r) }; } catch {} return { ...DEFAULT_MY_TASTE }; };
+const saveMyTaste = (t) => { try { localStorage.setItem("camp_my_taste", JSON.stringify(t)); } catch {} };
+
+function matchMyTaste(c, taste = getMyTaste()) {
+  if (taste.types?.length && !taste.types.some((k) => hasType(c, k) || (k === "AUTO" && c.auto) || (k === "GLAMPING" && (c.glamp || c.types?.includes("글램핑"))) || (k === "CARAVAN" && (c.caravan || c.types?.includes("카라반"))))) return false;
+  if (taste.minSize > 0 && maxSide(c) < taste.minSize) return false;
+  if (taste.fire) { const v = facts(c).fire?.v ?? ""; if (!(c.fp === 1 || /가능|개별|화로/i.test(v)) || /불가|금지/i.test(v)) return false; }
+  if (taste.power) { const v = facts(c).power?.v ?? ""; if (!c.pwr && !/\d\s*k?W|가능/.test(v)) return false; }
+  if (taste.pet && !(c.pets?.includes("가능") || facts(c).pet?.ok)) return false;
+  return true;
+}
+
+function getMyTastePicks() {
+  const taste = getMyTaste();
+  let pool = S.camps.filter((c) => showcaseEligible(c) && hasPhoto(c) && matchMyTaste(c, taste));
+  if (pool.length < 7 && taste.types?.length) pool = S.camps.filter((c) => showcaseEligible(c) && hasPhoto(c) && taste.types.some((k) => hasType(c, k)));
+  if (pool.length < 7) pool = S.camps.filter((c) => showcaseEligible(c) && hasPhoto(c));
+  const sorted = qualityOrder(pool);
+  const now = new Date(Date.now() + 9 * 3600e3);
+  const dStr = `${now.getUTCFullYear()}-${now.getUTCMonth() + 1}-${now.getUTCDate()}`;
+  let seed = 0; for (let i = 0; i < dStr.length; i++) seed = (seed * 31 + dStr.charCodeAt(i)) >>> 0;
+  const cands = sorted.slice(0, Math.min(sorted.length, 42));
+  const off = cands.length ? (seed * 7) % cands.length : 0;
+  const picked = [];
+  for (let i = 0; i < 7 && i < cands.length; i++) picked.push(cands[(off + i) % cands.length]);
+  return picked.sort((a, b) => rich(b) - rich(a));
+}
+
+function myTasteSetupCard(taste) {
+  const lbl = (taste.types ?? []).map((t) => ST[t]?.label || t).join(" · ") || "전체";
+  const b = [];
+  if (taste.types?.length) b.push(`<span class="taste-badge">${ic("tent")}${esc(lbl)}</span>`);
+  if (taste.minSize > 0) b.push(`<span class="taste-badge">${ic("size")}${taste.minSize}m+</span>`);
+  if (taste.fire) b.push(`<span class="taste-badge">${ic("flame")}불멍 필수</span>`);
+  if (taste.power) b.push(`<span class="taste-badge">${ic("bolt")}600W+</span>`);
+  if (taste.pet) b.push(`<span class="taste-badge">${ic("paw")}반려견 동반</span>`);
+  return `<article class="card my-taste-setup-card" data-open-my-taste tabindex="0" role="button" aria-label="내 취향 설정 열기">
+    <div class="taste-setup-media"><div class="taste-setup-icon-wrap">${ic("tent")}</div><span class="taste-setup-badge">내 취향 맞춤</span></div>
+    <div class="taste-setup-body">
+      <h3 class="taste-setup-title">내 캠핑 취향 · 장비</h3>
+      <p class="taste-setup-desc">내 텐트와 스타일에 맞는 곳을 매일 새로 골라드려요.</p>
+      <div class="taste-setup-chips">${b.join("")}</div>
+      <button type="button" class="taste-setup-btn" data-open-my-taste>${ic("spark")}취향 설정하기 ${ic("right")}</button>
+    </div>
+  </article>`;
+}
+
+function myTasteSection() {
+  const taste = getMyTaste(), picks = getMyTastePicks();
+  return `<section class="my-taste-section" aria-labelledby="my-taste-t">
+    <div class="sec-head"><div><h2 id="my-taste-t">내 <em>취향</em></h2></div><div class="sec-side"><a class="link more-link" href="${APP_BASE}theme/MY_TASTE">더보기 ${ic("right")}</a></div></div>
+    <div class="rail my-taste-rail">${myTasteSetupCard(taste)}${picks.map((c, i) => themeCampCard(c, i, "MY_TASTE")).join("")}</div>
+  </section>`;
+}
+
+function openMyTasteDialog() {
+  let dlg = $("#my-taste-dialog");
+  if (!dlg) {
+    dlg = document.createElement("dialog");
+    dlg.className = "sheet my-taste-sheet"; dlg.id = "my-taste-dialog"; dlg.setAttribute("aria-labelledby", "my-taste-title");
+    document.body.append(dlg);
+    dlg.addEventListener("click", (e) => {
+      if (e.target === dlg) { dlg.close(); return; }
+      const b = e.target.closest("[data-taste-act]"); if (!b) return;
+      const act = b.dataset.tasteAct;
+      if (act === "close") { dlg.close(); return; }
+      if (act === "reset") { S._tasteDraft = { ...DEFAULT_MY_TASTE }; paintMyTasteDialog(); return; }
+      if (act === "save") {
+        saveMyTaste(S._tasteDraft); dlg.close(); toast("내 취향이 저장되었습니다");
+        const sec = $(".my-taste-section");
+        if (sec) {
+          const div = document.createElement("div"); div.innerHTML = myTasteSection();
+          const t = div.firstElementChild;
+          if (t) { sec.replaceWith(t); initCarousels(t); initDraggableRails(t); }
+        }
+        return;
+      }
+      const [type, val] = act.split(":");
+      if (type === "type") { const cur = S._tasteDraft.types ?? []; S._tasteDraft.types = cur.includes(val) ? cur.filter((x) => x !== val) : [...cur, val]; }
+      else if (type === "size") S._tasteDraft.minSize = Number(val);
+      else if (type === "toggle") S._tasteDraft[val] = !S._tasteDraft[val];
+      paintMyTasteDialog();
+    });
+  }
+  S._tasteDraft = { ...getMyTaste(), types: [...(getMyTaste().types ?? [])] };
+  paintMyTasteDialog();
+  dlg.showModal();
+}
+
+function paintMyTasteDialog() {
+  const dlg = $("#my-taste-dialog"); if (!dlg) return;
+  const t = S._tasteDraft;
+  const TYPES = [["AUTO", "오토캠핑", "car"], ["GLAMPING", "글램핑", "glamping"], ["CARAVAN", "카라반", "caravan"], ["HOUSE", "펜션·방갈로", "home"], ["CAR_CAMP", "차박", "car"], ["DECK", "데크", "layers"], ["SOLO", "백패킹", "tent"]];
+  const SIZES = [[0, "상관없음"], [6, "6m+ (중형)"], [8, "8m+ (대형)"], [10, "10m+ (초대형)"]];
+  dlg.innerHTML = `<div class="sheet-in my-taste-in">
+    <div class="sheet-head"><h2 id="my-taste-title">내 취향 & 장비 설정</h2><button type="button" class="icon-btn sheet-close" data-taste-act="close" aria-label="닫기">${ic("close")}</button></div>
+    <div class="sheet-body my-taste-body">
+      <section class="taste-group"><h3>캠핑 타입 (복수 선택)</h3><div class="cond-chips">${TYPES.map(([k, l, i]) => `<button type="button" class="chip" data-taste-act="type:${k}" aria-pressed="${(t.types ?? []).includes(k)}">${ic(i)}${esc(l)}</button>`).join("")}</div></section>
+      <section class="taste-group"><h3>사이트 규격 (내 텐트 크기)</h3><div class="cond-chips">${SIZES.map(([v, l]) => `<button type="button" class="chip" data-taste-act="size:${v}" aria-pressed="${t.minSize === v}">${esc(l)}</button>`).join("")}</div></section>
+      <section class="taste-group"><h3>필수 선호 옵션</h3><div class="cond-chips">
+        <button type="button" class="chip" data-taste-act="toggle:fire" aria-pressed="${Boolean(t.fire)}">${ic("flame")}장작·불멍 가능</button>
+        <button type="button" class="chip" data-taste-act="toggle:power" aria-pressed="${Boolean(t.power)}">${ic("bolt")}600W+ 전기</button>
+        <button type="button" class="chip" data-taste-act="toggle:pet" aria-pressed="${Boolean(t.pet)}">${ic("paw")}반려견 동반</button>
+      </div></section>
+    </div>
+    <div class="sheet-foot my-taste-foot"><button type="button" class="btn ghost" data-taste-act="reset">초기화</button><button type="button" class="btn primary" data-taste-act="save">취향 저장</button></div>
+  </div>`;
+}
+
+document.addEventListener("click", (e) => {
+  if (e.target.closest("[data-open-my-taste]")) { e.preventDefault(); openMyTasteDialog(); }
+});
+
 function homeView() {
   const openings = S.camps.map((c) => [c, openingOf(c)]).filter(([c, o]) => o && showcaseEligible(c)).sort((a, b) => a[1].dd - b[1].dd);
   const themeItems = THEMES.map(([key, label, test]) => {
@@ -4205,11 +4332,6 @@ function homeView() {
   const openingSection = openings.length ? `<section class="opens" aria-labelledby="op-t">
     <div class="sec-head"><h2 id="op-t">곧 <em>오픈</em></h2><div class="sec-side"><a class="link more-link" href="${APP_BASE}theme/OPEN">더보기 ${ic("right")}</a></div></div>
     <div class="rail opens-rail">${openings.map(([c, o]) => `<a class="open-card" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false">${imageTag(photosOf(c)[0] ?? "", "", { sizes: "250px" })}<span class="open-dd">${esc(o.txt)}</span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))} · ${esc(o.platform ?? "")}</i></a>`).join("")}</div>
-  </section>` : "";
-  const picks = reviewPicks();
-  const reviewSection = picks.length ? `<section class="review-picks" aria-labelledby="review-picks-t">
-    <div class="sec-head"><div><h2 id="review-picks-t">긍정 <em>후기</em></h2></div><div class="sec-side"><a class="link more-link" href="${APP_BASE}theme/REVIEWS">더보기 ${ic("right")}</a></div></div>
-    <div class="rail review-picks-rail">${picks.map(reviewPickCard).join("")}</div>
   </section>` : "";
   const themeSection = themeItems ? `<section class="themes-catalog" aria-labelledby="theme-t">
     <div class="sec-head"><h2 id="theme-t">테마로 <em>고르기</em></h2><div class="sec-side"><a class="link more-link" href="${APP_BASE}theme/ALL">더보기 ${ic("right")}</a></div></div>
@@ -4238,7 +4360,7 @@ function homeView() {
   ${todaySection()}
   ${openingSection}
   ${trendingShell()}
-  ${reviewSection}
+  ${myTasteSection()}
   ${themeSection}
   <section class="results" id="results">
     <div class="filter-zone" aria-label="캠핑장 조건 필터">
@@ -4288,8 +4410,8 @@ function watchLazyRows(root) {
 }
 function themeRow([k, label, test], list, first, used, idx = 0) {
   const all = qualityOrder(list.filter(test));
-  // 같은 캠핑장이 여러 줄 맨 앞에 반복되지 않게, 앞줄에 나온 곳은 뺀다.
-  const items = all.filter((c) => hasPhoto(c) && !used.has(c.id)).slice(0, 16);
+  // 같은 캠핑장이 여러 줄 맨 앞에 반복되지 않게, 앞줄에 나온 곳은 뺀다 (테마별 8개로 경량화).
+  const items = all.filter((c) => hasPhoto(c) && !used.has(c.id)).slice(0, 8);
   if (items.length < 3) return "";
   items.forEach((c) => used.add(c.id));
   return `<section class="trow" aria-label="${esc(label)}">
@@ -4297,7 +4419,7 @@ function themeRow([k, label, test], list, first, used, idx = 0) {
     <div class="rail trow-rail">${idx >= LAZY_FROM ? "" : items.map((c, i) => themeCampCard(c, first && i < 4 ? i : 9, k)).join("")}</div>
   </section>`.replace('<section class="trow"', idx >= LAZY_FROM ? `<section class="trow" data-lazy-row="${(LAZY_ROWS.set(`r${idx}`, { items, k }), `r${idx}`)}"` : '<section class="trow"');
 }
-const themeName = (k) => (k === "ALL" ? "전체 테마" : k === "OPEN" ? "곧 오픈" : k === "REVIEWS" ? "긍정 후기 추천" : THEMES.find((t) => t[0] === k)?.[1] ?? k);
+const themeName = (k) => (k === "ALL" ? "전체 테마" : k === "OPEN" ? "곧 오픈" : k === "MY_TASTE" ? "내 취향 추천" : k === "REVIEWS" ? "긍정 후기 추천" : THEMES.find((t) => t[0] === k)?.[1] ?? k);
 function renderResults({ reset = true } = {}) {
   const grid = $("[data-grid]");
   if (!grid) return;
@@ -4963,9 +5085,11 @@ function themeView(themeKey) {
   const isParkTheme = themeKey === "PARK";
   const tSub = isParkTheme
     ? "공공 원천으로 확인한 공원·생활 시설입니다. 야영·취사는 관리기관에 확인하세요."
+    : themeKey === "MY_TASTE"
+    ? "내 캠핑 장비와 취향에 딱 맞춘 추천 캠핑장"
     : (THEME_SUBS[themeKey] ?? "자연과 함께하는 특별한 테마 캠핑장");
   const headingNoun = isParkTheme ? "공원 정보" : /캠핑장$/.test(tName) ? "" : "캠핑장";
-  const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "REVIEWS" ? (c) => Boolean((c.rv?.p?.length ?? 0) >= 2 || (c.rv?.t ?? 0) >= 4) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
+  const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "MY_TASTE" ? (c) => matchMyTaste(c, getMyTaste()) : themeKey === "REVIEWS" ? (c) => Boolean((c.rv?.p?.length ?? 0) >= 2 || (c.rv?.t ?? 0) >= 4) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
   const totalInTheme = S.camps.filter(testFn).length;
   const isWp = themeKey === "WATER_PLAY";
   if (themeKey !== "UNIQUE") uniqueSubs.clear();
