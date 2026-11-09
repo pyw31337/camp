@@ -3,7 +3,7 @@
 #   curl -fsSL https://raw.githubusercontent.com/pyw31337/camp/main/local/macmini/install.sh | bash
 #   (또는 저장소를 받은 뒤 bash local/macmini/install.sh) — 다시 실행해도 안전(업데이트).
 # 하는 일: 전용 클론(~/.letscamp/camp) · Apple Vision 판독기 컴파일 · 판독 모델 준비 · 기존 정기 작업 찾기 · launchd 등록(15분마다 깨움).
-# 실제로 일하는 시간은 nightshift.mjs가 정한다(평일 18~08시, 주말·공휴일 종일, 기존 작업·바쁠 때는 쉼).
+# 실제로 일하는 시간은 nightshift.mjs가 정한다(평일 00~08·12~13·18~24시, 주말·공휴일 종일, 기존 작업·바쁠 때는 쉼).
 set -euo pipefail
 LC="$HOME/.letscamp"; CLONE="$LC/camp"; BIN="$LC/bin"; LABEL="com.letscamp.nightshift"
 PLIST="$HOME/Library/LaunchAgents/$LABEL.plist"

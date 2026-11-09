@@ -6,8 +6,8 @@ name: Naver API free-tier watch
 # - 완전히 끄려면 저장소 Settings → Variables에 NAVER_API_ENABLED=false.
 on:
   schedule:
-    # 매일 08:53 KST
-    - cron: "53 23 * * *"
+    # 매일 06:53 KST — 평일 업무시간 전
+    - cron: "53 21 * * *"
   workflow_dispatch:
   push:
     paths:

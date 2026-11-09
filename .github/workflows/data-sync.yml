@@ -2,8 +2,9 @@ name: Data sync
 
 on:
   schedule:
-    # 매일 03:17 KST (18:17 UTC)
+    # 매일 03:17 KST (18:17 UTC). 주말은 15:17 KST에도 추가 실행한다.
     - cron: "17 18 * * *"
+    - cron: "17 6 * * 0,6"
   workflow_dispatch:
     inputs:
       full_db_import:
@@ -557,6 +558,7 @@ jobs:
           node pipeline/scripts/release-gate.mjs
           git add camping-atlas/public/data camping-atlas/public/explore data/facts data/quality pipeline/registry/review-thumbs.json pipeline/registry/public-poi-photos.json pipeline/registry/naver-usage.json pipeline/registry/dayuse-osm.json pipeline/registry/urban-parks.json
           git add pipeline/registry/data-enrichment-queue.json
+          git add pipeline/registry/collection-status.json 2>/dev/null || true
           git add pipeline/registry/merge-review.ndjson 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "공개 데이터 변경 없음."; exit 0

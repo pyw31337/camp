@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // 맥미니 야간·주말 데이터 품질 작업(소유자 2026-10-23). launchd가 15분마다 깨우고, 이 파일이 “지금 돌려도 되나”를 판단한다.
-//  - 시간: 평일 18:00~다음 날 08:00, 토·일·공휴일(holidays-kr.json + ~/.letscamp/holidays.txt)은 하루 종일
+//  - 시간: 평일 00~08·12~13·18~24시(08~12·13~18시는 제외), 토·일·공휴일(holidays-kr.json + ~/.letscamp/holidays.txt)은 하루 종일
 //  - 실제 실행 중인 작업·CPU 부하와 겹치면 쉬고, 사용자가 avoid.txt에 직접 적은 예약만 강제로 피한다.
 //    자동 발견 시각만으로 하루 전체를 막지 않아 외부 작업이 많은 맥에서도 실행된다.
 //  - 작업 중에도 1분마다 확인해 다른 작업이 시작되면 양보(중단·저장, 다음 차례에 이어서)
@@ -55,6 +55,19 @@ const JOBS = [
   { id: "gocamping-detail", title: "고캠핑 상세 다시 읽기(겨울 운영·난방·시설, 30일 캐시)", everyHours: 24 * 6, dayOffOnly: true, minMinutes: 90, maxMinutes: 300,
     cmd: ["node", "scripts/crawl-gocamping-detail.mjs"], files: ["data/gocamping-detail.ndjson"] },
 ];
+
+// GitHub Actions 수집·검증과 같은 파일을 쓰지 않도록 KST 기준 공통 회피 슬롯을 둔다.
+// 주중 낮 시간대는 애초에 맥 작업 창이 닫혀 있고, 주말 추가 data-sync도 여기서 피한다.
+const CI_AVOIDS = [
+  { hm: H(3, 17), minutes: 180 },  // data-sync daily
+  { hm: H(4, 40), minutes: 120 },  // shorts-sync daily
+  { hm: H(15, 17), minutes: 180 }, // data-sync weekend extra
+  { hm: H(20, 11), minutes: 120 }, // saved-priority weekday
+  { hm: H(23, 11), minutes: 120 }, // saved-priority weekday
+  { hm: H(2, 11), minutes: 120 },  // saved-priority weekday
+  { hm: H(5, 11), minutes: 120 },  // saved-priority weekday
+];
+for (const job of JOBS) job.avoid = [...(job.avoid ?? []), ...CI_AVOIDS];
 
 // ── 지금 돌려도 되나 ───────────────────────────────────────────
 const holidays = [

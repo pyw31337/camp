@@ -5,7 +5,7 @@ name: Drive times
 # 토요일 오전처럼 나들이 출발 시간대 교통이 반영되도록 매일 오전 8:37 KST에 돈다. 끝나면 deploy-pages가 workflow_run으로 다시 배포한다.
 on:
   schedule:
-    - cron: "37 23 * * *"
+    - cron: "37 21 * * *" # 06:37 KST
   workflow_dispatch:
     inputs:
       max:
