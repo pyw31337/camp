@@ -1,13 +1,13 @@
 {
- "generated_at": "2026-11-08T18:31:57.796Z",
- "date": "2026-11-09",
+ "generated_at": "2026-11-09T20:24:14.905Z",
+ "date": "2026-11-10",
  "totals": {
   "campgrounds": 6421,
-  "facts": 245799,
+  "facts": 245796,
   "pairs": 193445,
   "mean_confidence": 0.779,
   "confirmed_pct": 83.8,
-  "corroborated": 4210,
+  "corroborated": 4211,
   "conflicts": 123,
   "decisions": 69
  },
@@ -851,8 +851,8 @@
    "weak": 225,
    "status": {
     "CONFLICT": 59,
-    "CONFIRMED": 2323,
-    "VERIFIED": 273,
+    "CONFIRMED": 2324,
+    "VERIFIED": 272,
     "WEAK": 225,
     "SINGLE": 27
    }
@@ -936,14 +936,14 @@
   "PRICE_NIGHT": {
    "coverage": 1548,
    "coverage_pct": 24.1,
-   "mean_confidence": 0.907,
+   "mean_confidence": 0.906,
    "confirmed_pct": 100,
-   "corroborated": 113,
+   "corroborated": 112,
    "conflicts": 0,
    "weak": 0,
    "status": {
-    "CONFIRMED": 1435,
-    "VERIFIED": 113
+    "CONFIRMED": 1436,
+    "VERIFIED": 112
    }
   },
   "PRICE_MENTION": {
@@ -988,7 +988,7 @@
   "REVIEW_PRO_CLEAN_FACILITY": {
    "coverage": 1851,
    "coverage_pct": 28.8,
-   "mean_confidence": 0.374,
+   "mean_confidence": 0.373,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
@@ -1291,7 +1291,7 @@
   "REVIEW_PRO_WELL_KEPT": {
    "coverage": 185,
    "coverage_pct": 2.9,
-   "mean_confidence": 0.344,
+   "mean_confidence": 0.343,
    "confirmed_pct": 0,
    "corroborated": 0,
    "conflicts": 0,
@@ -1649,8 +1649,8 @@
    "conflicts": 0,
    "weak": 130,
    "status": {
-    "CONFIRMED": 1009,
-    "VERIFIED": 185,
+    "CONFIRMED": 1010,
+    "VERIFIED": 184,
     "WEAK": 130,
     "CORROBORATED": 8,
     "SINGLE": 29
@@ -1929,16 +1929,16 @@
    "coverage": 2835,
    "coverage_pct": 44.2,
    "mean_confidence": 0.528,
-   "confirmed_pct": 18.1,
-   "corroborated": 592,
+   "confirmed_pct": 18.2,
+   "corroborated": 593,
    "conflicts": 42,
-   "weak": 1371,
+   "weak": 1372,
    "status": {
-    "VERIFIED": 218,
-    "WEAK": 1371,
+    "VERIFIED": 219,
+    "WEAK": 1372,
     "CONFIRMED": 296,
     "CONFLICT": 42,
-    "SINGLE": 725,
+    "SINGLE": 723,
     "CORROBORATED": 183
    }
   },
@@ -1947,14 +1947,14 @@
    "coverage_pct": 44.8,
    "mean_confidence": 0.527,
    "confirmed_pct": 18.8,
-   "corroborated": 701,
+   "corroborated": 702,
    "conflicts": 16,
    "weak": 1393,
    "status": {
-    "VERIFIED": 230,
+    "VERIFIED": 232,
     "WEAK": 1393,
-    "CONFIRMED": 309,
-    "SINGLE": 667,
+    "CONFIRMED": 308,
+    "SINGLE": 666,
     "CORROBORATED": 259,
     "CONFLICT": 16
    }
