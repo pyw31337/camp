@@ -1371,11 +1371,15 @@ function cardFeatures(c) {
   // 1. 전기 W (고용량 디테일 표현)
   const w = wattsOf(c) || (pos(f.power) && f.power.w ? f.power.w : 0);
   if (w >= 1400 || /1[4-9][0-9]{2}\s*w|2[0-9]{3}\s*w/i.test(txt)) {
-    list.push({ icon: "bolt", text: "1400W 초고용량" });
+    list.push({ icon: "bolt", text: "1400W 초고용량", volt: true });
   } else if (w >= 1000 || /1[0-9]{3}\s*w|1kw|1\.1kw/i.test(txt)) {
-    list.push({ icon: "bolt", text: "1000W 고용량" });
+    list.push({ icon: "bolt", text: "1000W 고용량", volt: true });
   } else if (w >= 600 || (pos(f.power) && f.power.ok && f.power.g !== "r") || /600\s*w/i.test(txt)) {
-    list.push({ icon: "bolt", text: "600W 전기" });
+    list.push({ icon: "bolt", text: "600W 전기", volt: true });
+  } else if (w > 0) {
+    list.push({ icon: "bolt", text: `${w}W 전기`, volt: true });
+  } else if (pos(f.power) && f.power.ok && f.power.short) {
+    list.push({ icon: "bolt", text: f.power.short, volt: true });
   }
 
   // 2. 장작 / 불멍
@@ -1479,7 +1483,7 @@ function uniqueFeatureHtml(c) {
   return `<div class="unique-feature-block">
     <div class="unique-feature-head">${ic("spark")}<span>특색 시설·요소</span></div>
     <div class="unique-feature-chips">${feats.map((feat) => {
-      const chip = `<span class="unique-feature-chip">${ic(feat.icon || "spark")}${esc(feat.text)}</span>`;
+      const chip = `<span class="unique-feature-chip${feat.volt ? " bdg-volt" : ""}"${feat.volt ? ' data-volt="true"' : ""}>${ic(feat.icon || "spark")}${esc(feat.text)}</span>`;
       return `<span class="unique-feature-item">${chip}${feat.review?.url ? `<a class="unique-feature-review" href="${esc(feat.review.url)}" target="_blank" rel="noopener" title="후기 원문 열기">${ic("file-text")}${esc(uniqueReviewSummary(feat.review.text, "horse"))}</a>` : ""}</span>`;
     }).join("")}</div>
   </div>`;
