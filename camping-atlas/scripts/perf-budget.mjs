@@ -10,8 +10,8 @@ const fails = [];
 const KB = (n) => Math.round(n / 1024);
 // 2026-10-31: 오늘의 캠핑장 덱·출발지 이동시간·예약 오픈 알림·익명 지표·내리기 요청(소유자 요청 7가지)으로 app.js·css 예산을 각각 +40KB·+20KB 올렸다.
 // 2026-11-04 t45u: 이색 12분류 다중선택·가까운순 위치 시트·히어로 12종(효과 3종)으로 app.js 예산 +20KB.
-// 2026-11-09: 내 취향 맞춤 섹션 & 장비·세부 옵션(전기 고용량 세분화·냉장고·렌탈·풀·환경 등 17종) 추가로 app.js 예산 +20KB (640KB).
-const BUDGET = { appJs: 640, css: 280, dataGz: 2600, nodes: 12000, cardsMs: 8000, origImgs: 0 };
+// 2026-11-09: 내 취향 맞춤 섹션 & 장비·세부 옵션(17종) 및 특색 시설 긍정 배지 이동, 동계휴장 정렬로 app.js 예산 +10KB (650KB).
+const BUDGET = { appJs: 650, css: 280, dataGz: 2600, nodes: 12000, cardsMs: 8000, origImgs: 0 };
 const app = statSync(`${root}design/renewal/app.js`).size, css = statSync(`${root}design/renewal/style.css`).size;
 import { existsSync } from "node:fs";
 const liteP = existsSync(`${root}camping-atlas/public/explore/data/campgrounds.lite.json`) ? "camping-atlas/public/explore/data/campgrounds.lite.json" : null;
