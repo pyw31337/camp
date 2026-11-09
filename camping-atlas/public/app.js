@@ -70,10 +70,11 @@ const rangeWon = (lo, hi) => `${manWon(lo)}${hi > lo ? `~${manWon(hi)}` : ""}원
 function preferredStayTier() {
   try {
     const ts = (typeof getMyTaste === "function" ? getMyTaste()?.types : null) ?? [];
-    if (ts.includes("caravan")) return "caravan";
-    if (ts.includes("glamping")) return "glamp";
-    if (ts.includes("pension")) return "lodge";
-    if (ts.some((k) => ["auto", "deck", "chabak", "backpacking"].includes(k))) return "site";
+    const lowerTs = ts.map((x) => String(x).toLowerCase());
+    if (lowerTs.includes("caravan")) return "caravan";
+    if (lowerTs.includes("glamping")) return "glamp";
+    if (lowerTs.some((x) => ["house", "pension", "lodge"].includes(x))) return "lodge";
+    if (lowerTs.some((k) => ["auto", "deck", "car_camp", "solo", "pitch"].includes(k))) return "site";
   } catch {}
   if (typeof S !== "undefined") {
     if (S.stype === "CARAVAN" || S.stype === "RV") return "caravan";
@@ -81,21 +82,25 @@ function preferredStayTier() {
     if (S.stype === "HOUSE") return "lodge";
     if (["AUTO", "DECK", "PITCH", "CAR_CAMP", "SOLO"].includes(S.stype)) return "site";
   }
-  return null;
+  return "site";
 }
 function feeMain(c, pref = preferredStayTier()) {
   if (!c.fee) return null;
   const t = visibleTiers(c);
-  if (!t.length) return { label: "요금", text: feeLabel(c.fee), tierKey: null };
-  let main = (pref && (tierOf(c, pref) || ((pref === "glamp" || pref === "caravan") && tierOf(c, "gc")))) || tierOf(c, "site") || t[0];
-  return { label: `${TIER_LABEL[main[0]] || "사이트"} 요금`, text: `${rangeWon(main[1], main[2])}${/대\s*$/.test(c.fee.text ?? "") ? "대" : ""}`, tierKey: main[0] };
+  if (!t.length) return { label: "오토캠핑 요금", text: feeLabel(c.fee), tierKey: null };
+  let main = (pref && pref !== "site" && (tierOf(c, pref) || ((pref === "glamp" || pref === "caravan") && tierOf(c, "gc"))))
+    || tierOf(c, "site")
+    || (c.fee?.tiers?.find((x) => x[0] === "site") ? c.fee.tiers.find((x) => x[0] === "site") : null)
+    || t[0];
+  const label = main[0] === "site" ? "오토캠핑 요금" : `${TIER_LABEL[main[0]] || "사이트"} 요금`;
+  return { label, text: `${rangeWon(main[1], main[2])}${/대\s*$/.test(c.fee.text ?? "") ? "대" : ""}`, tierKey: main[0] };
 }
 function feeTiersLine(c, pref = preferredStayTier()) {
   const t = visibleTiers(c);
   if (!t.length) return "";
   const fm = feeMain(c, pref);
   const mainKey = fm?.tierKey ?? (tierOf(c, "site") ?? t[0])[0];
-  return t.filter((x) => x[0] !== mainKey).map(([k, lo, hi]) => `<span class="ft ft-${k}">${TIER_LABEL[k]} <b>${rangeWon(lo, hi)}</b></span>`).join("");
+  return t.filter((x) => x[0] !== mainKey).map(([k, lo, hi]) => `<span class="ft ft-${k}">${k === "site" ? "오토캠핑" : TIER_LABEL[k]} <b>${rangeWon(lo, hi)}</b></span>`).join("");
 }
 // 상세 화면 금액 표기: 18.9만~42만원 → 189,000~420,000원, 2만5천원 → 25,000원, 130000원 → 130,000원, 2만~4만원대 → 20,000~40,000원대.
 function wonText(v) {
@@ -1471,7 +1476,11 @@ function cardFeatures(c) {
   if (c.uq && c.uq.includes("treehouse")) list.push({ icon: "forest", text: "트리하우스" });
   if (c.uq && c.uq.includes("stay")) list.push({ icon: "tent", text: "이색 숙소" });
   if ((c.uq && c.uq.includes("leisure")) || /수상레저|카약|보트|패들보드/i.test(txt)) list.push({ icon: "leports", text: "수상레저·카약" });
-  if ((c.uq && c.uq.includes("farm")) || /수확\s*체험|농촌\s*체험|영농\s*체험|과수원/i.test(txt)) list.push({ icon: "experience", text: "체험 농장" });
+  if ((c.field_conditions?.features && (c.field_conditions.features.includes("CRAFT") || c.field_conditions.features.includes("WOOD_CRAFT"))) || /공예|목공|도자기|만들기\s*체험/i.test(txt)) list.push({ icon: "spark", text: "공예 만들기" });
+  if ((c.field_conditions?.features?.includes("FOREST_TRAIL")) || /숲\s*체험|생태\s*탐방|숲\s*해설|숲체험/i.test(txt)) list.push({ icon: "forest", text: "숲체험·탐방" });
+  if (/송어\s*잡기|미꾸라지\s*잡기|다슬기\s*잡기|물고기\s*잡기/i.test(txt)) list.push({ icon: "water", text: "물고기 잡기" });
+  if ((c.uq && c.uq.includes("farm")) || /수확\s*체험|농촌\s*체험|과수원|사과\s*따기|딸기\s*따기|감자\s*캐기/i.test(txt)) list.push({ icon: "experience", text: "수확 체험" });
+  if (/스마트팜|영농\s*체험|작물\s*재배|원예\s*체험/i.test(txt)) list.push({ icon: "experience", text: "작물 재배" });
   if (c.th?.includes("fishing") || /낚시터|낚시\s*가능|바지선.*낚시/i.test(txt)) list.push({ icon: "fish", text: "낚시 체험" });
   if ((c.field_conditions?.features?.includes("TUBE_SLED")) || /썰매장|눈썰매|사계절썰매|물썰매/i.test(txt)) list.push({ icon: "spark", text: "썰매장" });
 
@@ -3160,14 +3169,10 @@ class HeroCanvasController {
 
   createBubblePop(x, y, r, alpha = 0.8) {
     this.bubblePops.push({ kind: "ring", x, y, r: Math.max(2, r * 0.85), maxR: r * 1.9 + 5, alpha: Math.min(1, alpha * 1.6), lw: Math.max(1, r * 0.18) });
-    const count = Math.min(8, Math.max(4, Math.floor(r * 0.7) + 3));
+    const count = Math.min(6, Math.max(3, Math.floor(r * 0.6) + 2));
     for (let k = 0; k < count; k++) {
-      const a = Math.random() * Math.PI * 2, sp = Math.random() * 2.8 + 1.2;
-      this.bubblePops.push({ kind: "drop", x: x + Math.cos(a) * (r * 0.5), y: y + Math.sin(a) * (r * 0.5), vx: Math.cos(a) * sp + (this.mouse.vx ? this.mouse.vx * 0.15 : 0), vy: Math.sin(a) * sp - 0.7, size: Math.random() * 1.5 + 0.8, alpha: Math.min(1, alpha * 1.4), life: 1.0, decay: Math.random() * 0.045 + 0.035 });
-    }
-    for (let s = 0; s < 3; s++) {
-      const a = Math.random() * Math.PI * 2;
-      this.bubblePops.push({ kind: "spark", x: x + Math.cos(a) * (r * 0.5), y: y + Math.sin(a) * (r * 0.5), vx: (Math.random() - 0.5) * 0.6, vy: -Math.random() * 0.7 - 0.3, size: Math.random() * 1.2 + 0.5, life: 1.0, decay: 0.08 });
+      const a = Math.random() * Math.PI * 2, sp = Math.random() * 2.5 + 1;
+      this.bubblePops.push({ kind: "drop", x: x + Math.cos(a) * (r * 0.5), y: y + Math.sin(a) * (r * 0.5), vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 0.7, size: Math.random() * 1.5 + 0.8, alpha: Math.min(1, alpha * 1.4), life: 1.0, decay: Math.random() * 0.05 + 0.04 });
     }
   }
 
@@ -3210,18 +3215,11 @@ class HeroCanvasController {
         ctx.beginPath(); ctx.arc(bp.x, bp.y, bp.r, 0, Math.PI * 2);
         ctx.strokeStyle = `rgba(255, 255, 255, ${bp.alpha})`; ctx.lineWidth = bp.lw; ctx.stroke();
       } else if (bp.kind === "drop") {
-        bp.x += bp.vx; bp.y += bp.vy; bp.vy += 0.11; bp.vx *= 0.97; bp.vy *= 0.97; bp.life -= bp.decay;
+        bp.x += bp.vx; bp.y += bp.vy; bp.vy += 0.12; bp.vx *= 0.96; bp.vy *= 0.96; bp.life -= bp.decay;
         if (bp.life <= 0) { this.bubblePops.splice(i, 1); continue; }
         const ca = bp.alpha * bp.life;
         ctx.beginPath(); ctx.arc(bp.x, bp.y, bp.size * (0.6 + bp.life * 0.4), 0, Math.PI * 2);
         ctx.fillStyle = `rgba(215, 245, 255, ${ca})`; ctx.fill();
-        ctx.beginPath(); ctx.arc(bp.x - bp.size * 0.25, bp.y - bp.size * 0.25, Math.max(0.4, bp.size * 0.3), 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${ca * 1.2})`; ctx.fill();
-      } else if (bp.kind === "spark") {
-        bp.x += bp.vx; bp.y += bp.vy; bp.life -= bp.decay;
-        if (bp.life <= 0) { this.bubblePops.splice(i, 1); continue; }
-        ctx.beginPath(); ctx.arc(bp.x, bp.y, bp.size * bp.life, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${bp.life})`; ctx.fill();
       }
     }
   }
@@ -4454,13 +4452,17 @@ const DEFAULT_MY_TASTE = {
   valley: false,
   river: false,
   beach: false,
+  horse: false,
+  animal: false,
+  craft: false,
+  leisure: false,
+  sled: false,
   tidal: false,
   fishing: false,
-  leisure: false,
-  animal: false,
-  sled: false,
-  farm: false,
-  horse: false,
+  forestTrail: false,
+  catch: false,
+  harvest: false,
+  grow: false,
 };
 
 const getMyTaste = () => {
@@ -4469,6 +4471,7 @@ const getMyTaste = () => {
     if (r) {
       const parsed = JSON.parse(r);
       if (parsed.power && !parsed.minWatts) parsed.minWatts = 600;
+      if (parsed.farm && !parsed.harvest) parsed.harvest = true;
       return { ...DEFAULT_MY_TASTE, ...parsed };
     }
   } catch {}
@@ -4483,66 +4486,38 @@ const saveMyTaste = (t) => {
 
 function matchMyTaste(c, taste = getMyTaste()) {
   const txt = campSearchText(c);
-  // 1. 캠핑 타입
   if (taste.types?.length && !taste.types.some((k) => hasType(c, k) || (k === "AUTO" && c.auto) || (k === "GLAMPING" && (c.glamp || c.types?.includes("글램핑"))) || (k === "CARAVAN" && (c.caravan || c.types?.includes("카라반"))))) return false;
-  // 2. 사이트 규격
   if (taste.minSize > 0 && maxSide(c) < taste.minSize) return false;
-  // 3. 전기 허용 용량
   if (taste.minWatts > 0) {
-    const opW = c.of?.w ? Number(c.of.w.v) : null;
-    const fcW = c.field_conditions?.power?.limit_w || null;
-    const w = opW || fcW || (c.pwr || c.field_conditions?.power?.available ? 600 : 0);
+    const w = (c.of?.w ? Number(c.of.w.v) : null) || c.field_conditions?.power?.limit_w || (c.pwr || c.field_conditions?.power?.available ? 600 : 0);
     if (taste.minWatts === 600 && !(w >= 600 || /600\s*w|전기/i.test(txt))) return false;
     if (taste.minWatts === 1000 && !(w >= 1000 || /1[0-9]{3}\s*w|1kw|1\.0kw|1\.1kw/i.test(txt))) return false;
     if (taste.minWatts === 1400 && !(w >= 1400 || /1[4-9][0-9]{2}\s*w|2[0-9]{3}\s*w|3[0-9]{3}\s*w|1\.[4-9]kw|2kw/i.test(txt))) return false;
   }
-  // 4. 장작·불멍
-  if (taste.fire) {
-    const v = facts(c).fire?.v ?? "";
-    if (!(c.fp === 1 || /가능|개별|화로/i.test(v)) || /불가|금지/i.test(v)) return false;
-  }
-  // 5. 타프존 / 타프 설치
-  if (taste.tarp) {
-    const sh = c.field_conditions?.shelter_setup;
-    if (!((sh && (sh.max_tarps > 0 || sh.canopy_allowed)) || /타프|타프존|타프설치|타프대여/i.test(txt))) return false;
-  }
-  // 6. 개별 냉장고
+  if (taste.fire) { const v = facts(c).fire?.v ?? ""; if (!(c.fp === 1 || /가능|개별|화로/i.test(v)) || /불가|금지/i.test(v)) return false; }
+  if (taste.tarp) { const sh = c.field_conditions?.shelter_setup; if (!((sh && (sh.max_tarps > 0 || sh.canopy_allowed)) || /타프|타프존|타프설치|타프대여/i.test(txt))) return false; }
   if (taste.privateFridge && !(/개별\s*냉장고|전용\s*냉장고|룸내\s*냉장고|객실\s*냉장고/i.test(txt) || (c.glamp && /냉장고/.test(JSON.stringify(c.glamp))))) return false;
-  // 7. 공용 냉장고
   if (taste.sharedFridge && !(/공용\s*냉장고|공동\s*냉장고|공용냉장고/i.test(txt) || (c.amenities && c.amenities.some((a) => /공용.*냉장고|공동.*냉장고/.test(a))))) return false;
-  // 8. 팬히터 / 난로 대여
   if (taste.heaterRental && !(/팬히터|난로\s*대여|난로\s*렌탈|히터\s*대여|히터\s*렌탈|등유\s*난로|난방기구\s*대여/i.test(txt) || (c.heat && c.heat.some((h) => /대여|렌탈/.test(h))))) return false;
-  // 9. 캠핑장비 대여
   if (taste.rental && !(/장비\s*대여|장비\s*렌탈|텐트\s*대여|텐트\s*렌탈|캠핑용품\s*대여/i.test(txt) || (c.amenities && c.amenities.some((a) => /대여|렌탈/.test(a))))) return false;
-  // 10. 반려견 동반
   if (taste.pet && !(c.pets?.includes("가능") || facts(c).pet?.ok)) return false;
-  // 11. 사계절 온수풀
   if (taste.warmPool && !((c.uq && c.uq.includes("warmpool")) || /온수\s*풀|온수\s*수영장|미온수|사계절\s*온수|사계절\s*수영장|실내\s*수영장/i.test(txt))) return false;
-  // 12. 키즈풀 / 유아풀
   if (taste.kidsPool && !((c.uq && (c.uq.includes("kidscafe") || c.uq.includes("indoorplay"))) || /키즈\s*풀|유아\s*풀|어린이\s*수영장|유아\s*물놀이|키즈\s*물놀이/i.test(txt))) return false;
-  // 13. 야외 수영장 / 물놀이
   if (taste.pool && !(c.du === "water" || (c.amenities ?? []).some((a) => /물놀이장|물놀이터|수영장|풀장|워터/.test(a)) || /수영장|물놀이장|야외풀|인피니티풀/i.test(txt))) return false;
-  // 14. 계곡
   if (taste.valley && !(c.pf?.t?.includes("VALLEY") || (c.uq && c.uq.includes("valley")) || /계곡/i.test(txt))) return false;
-  // 15. 강 / 호수 / 천
   if (taste.river && !(c.pf?.t?.includes("LAKE") || c.pf?.t?.includes("RIVER") || /강변|강가|호수|저수지|하천|천변/i.test(txt))) return false;
-  // 16. 바다 / 해변
   if (taste.beach && !(c.pf?.t?.includes("BEACH") || c.th?.includes("sea") || /바다|해변|해수욕장|백사장/i.test(txt))) return false;
-  // 17. 갯벌·해루질
-  if (taste.tidal && !(isTidalCamp(c) || /갯벌|해루질|조개잡이|바지락/i.test(txt))) return false;
-  // 18. 낚시 체험
-  if (taste.fishing && !(c.th?.includes("fishing") || /낚시터|낚시\s*가능|바지선.*낚시|민물낚시|바다낚시/i.test(txt))) return false;
-  // 19. 수상레저 & 카약
-  if (taste.leisure && !((c.uq && c.uq.includes("leisure")) || /수상레저|카약|보트|패들보드|카누|래프팅/i.test(txt))) return false;
-  // 20. 동물 먹이주기 체험
-  if (taste.animal && !((c.uq && c.uq.includes("animal")) || /동물\s*체험|동물\s*먹이주기|알파카|양떼|토끼/i.test(txt))) return false;
-  // 21. 썰매장
-  if (taste.sled && !((c.field_conditions?.features?.includes("TUBE_SLED")) || /썰매장|눈썰매|사계절썰매|물썰매/i.test(txt))) return false;
-  // 22. 농촌·수확 체험
-  if (taste.farm && !((c.uq && c.uq.includes("farm")) || /수확\s*체험|농촌\s*체험|영농\s*체험|과수원|스마트팜/i.test(txt))) return false;
-  // 23. 승마 체험
   if (taste.horse && !((c.uq && c.uq.includes("horse")) || /승마|말타기|포니체험/i.test(txt))) return false;
-
+  if (taste.animal && !((c.uq && c.uq.includes("animal")) || /동물\s*체험|동물\s*먹이주기|알파카|양떼|토끼/i.test(txt))) return false;
+  if (taste.craft && !((c.field_conditions?.features && (c.field_conditions.features.includes("CRAFT") || c.field_conditions.features.includes("WOOD_CRAFT"))) || /공예|목공|도자기|만들기\s*체험/i.test(txt))) return false;
+  if (taste.leisure && !((c.uq && c.uq.includes("leisure")) || /수상레저|카약|보트|패들보드|카누|래프팅/i.test(txt))) return false;
+  if (taste.sled && !((c.field_conditions?.features?.includes("TUBE_SLED")) || /썰매장|눈썰매|사계절썰매|물썰매/i.test(txt))) return false;
+  if (taste.tidal && !(isTidalCamp(c) || /갯벌|해루질|조개잡이|바지락/i.test(txt))) return false;
+  if (taste.fishing && !(c.th?.includes("fishing") || /낚시터|낚시\s*가능|바지선.*낚시|민물낚시|바다낚시/i.test(txt))) return false;
+  if (taste.forestTrail && !((c.field_conditions?.features?.includes("FOREST_TRAIL")) || /숲\s*체험|생태\s*탐방|숲\s*해설|숲체험/i.test(txt))) return false;
+  if (taste.catch && !/송어\s*잡기|미꾸라지\s*잡기|다슬기\s*잡기|물고기\s*잡기|물고기잡이|송어축제/i.test(txt)) return false;
+  if (taste.harvest && !((c.uq && c.uq.includes("farm")) || /수확\s*체험|농촌\s*체험|과수원|사과\s*따기|딸기\s*따기|감자\s*캐기|고구마\s*캐기|과일\s*따기/i.test(txt))) return false;
+  if (taste.grow && !/스마트팜|영농\s*체험|작물\s*재배|원예\s*체험|모종\s*심기|채소\s*재배/i.test(txt)) return false;
   return true;
 }
 
@@ -4577,10 +4552,12 @@ function myTasteSummaryChips(taste = getMyTaste()) {
     ["fire", "flame", "불멍 필수"], ["tarp", "tent", "타프존"], ["privateFridge", "check", "개별냉장고"],
     ["sharedFridge", "amenity", "공용냉장고"], ["heaterRental", "flame", "팬히터 대여"], ["rental", "cart", "장비 대여"],
     ["pet", "paw", "반려견 동반"], ["warmPool", "hotwater", "온수풀"], ["kidsPool", "playground", "키즈풀"],
-    ["pool", "swim", "수영장"], ["valley", "th:VALLEY", "계곡"], ["river", "th:LAKE", "강·호수"],
-    ["beach", "th:BEACH", "바다"], ["tidal", "water", "갯벌·해루질"], ["fishing", "fish", "낚시체험"],
-    ["leisure", "leports", "수상레저·카약"], ["animal", "paw", "동물체험"], ["sled", "spark", "썰매장"],
-    ["farm", "experience", "농촌·수확체험"], ["horse", "spark", "승마체험"]
+    ["pool", "swim", "수영장"],
+    ["valley", "th:VALLEY", "계곡"], ["river", "th:LAKE", "강·호수·천"], ["beach", "th:BEACH", "바다·해변"],
+    ["horse", "spark", "승마"], ["animal", "paw", "동물"], ["craft", "spark", "공예"],
+    ["leisure", "leports", "수상레저"], ["sled", "spark", "썰매"], ["tidal", "water", "갯벌"],
+    ["fishing", "fish", "낚시"], ["forestTrail", "forest", "숲체험"], ["catch", "water", "잡기"],
+    ["harvest", "experience", "수확"], ["grow", "experience", "재배"]
   ];
   for (const [k, i, l] of bools) if (taste[k]) b.push(`<span class="taste-badge">${ic(i)}${l}</span>`);
   return b;
@@ -4667,7 +4644,13 @@ function paintMyTasteDialog() {
   const WATTS = [[0, "상관없음"], [600, "600W+ (기본 전열)"], [1000, "1,000W+ (고용량)"], [1400, "1,400W+ (초고용량)"]];
   const FACS = [["fire","flame","장작·불멍 가능"],["tarp","tent","타프존 / 타프 설치"],["privateFridge","check","개별 냉장고"],["sharedFridge","amenity","공용 냉장고"],["heaterRental","flame","팬히터·난로 대여"],["rental","cart","캠핑장비 대여"],["pet","paw","반려견 동반"]];
   const POOLS = [["warmPool","hotwater","사계절 온수풀"],["kidsPool","playground","키즈풀·유아풀"],["pool","swim","야외 수영장"]];
-  const ACTS = [["valley","th:VALLEY","계곡"],["river","th:LAKE","강·호수·천"],["beach","th:BEACH","바다·해변"],["tidal","water","갯벌·해루질"],["fishing","fish","낚시 체험"],["leisure","leports","수상레저·카약"],["animal","paw","동물 먹이주기"],["sled","spark","썰매장"],["farm","experience","농촌·수확 체험"],["horse","spark","승마 체험"]];
+  const ENVS = [["valley","th:VALLEY","계곡"],["river","th:LAKE","강·호수·천"],["beach","th:BEACH","바다·해변"]];
+  const EXPS = [
+    ["horse","spark","승마"],["animal","paw","동물"],["craft","spark","공예"],
+    ["leisure","leports","수상레저"],["sled","spark","썰매"],["tidal","water","갯벌"],
+    ["fishing","fish","낚시"],["forestTrail","forest","숲체험"],["catch","water","잡기"],
+    ["harvest","experience","수확"],["grow","experience","재배"]
+  ];
   const chipBtns = (arr) => arr.map(([k, i, l]) => `<button type="button" class="chip" data-taste-act="toggle:${k}" aria-pressed="${Boolean(t[k])}">${ic(i)}${l}</button>`).join("");
 
   dlg.innerHTML = `<div class="sheet-in my-taste-in">
@@ -4678,7 +4661,8 @@ function paintMyTasteDialog() {
       <section class="taste-group"><h3>전기 허용 용량 (W)</h3><div class="cond-chips">${WATTS.map(([v, l]) => `<button type="button" class="chip" data-taste-act="watts:${v}" aria-pressed="${(t.minWatts ?? 0) === v}">${ic("bolt")}${esc(l)}</button>`).join("")}</div></section>
       <section class="taste-group"><h3>장비 & 편의 시설</h3><div class="cond-chips">${chipBtns(FACS)}</div></section>
       <section class="taste-group"><h3>물놀이 & 수영장</h3><div class="cond-chips">${chipBtns(POOLS)}</div></section>
-      <section class="taste-group"><h3>자연 환경 & 체험 액티비티</h3><div class="cond-chips">${chipBtns(ACTS)}</div></section>
+      <section class="taste-group"><h3>자연 환경</h3><div class="cond-chips">${chipBtns(ENVS)}</div></section>
+      <section class="taste-group"><h3>체험</h3><div class="cond-chips">${chipBtns(EXPS)}</div></section>
     </div>
     <div class="sheet-foot my-taste-foot"><button type="button" class="btn ghost" data-taste-act="reset">초기화</button><button type="button" class="btn primary" data-taste-act="save">취향 저장</button></div>
   </div>`;
