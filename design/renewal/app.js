@@ -1476,13 +1476,13 @@ function cardFeatures(c) {
   if (c.uq && c.uq.includes("treehouse")) list.push({ icon: "forest", text: "트리하우스" });
   if (c.uq && c.uq.includes("stay")) list.push({ icon: "tent", text: "이색 숙소" });
   if ((c.uq && c.uq.includes("leisure")) || /수상레저|카약|보트|패들보드/i.test(txt)) list.push({ icon: "leports", text: "수상레저·카약" });
-  if ((c.field_conditions?.features && (c.field_conditions.features.includes("CRAFT") || c.field_conditions.features.includes("WOOD_CRAFT"))) || /공예|목공|도자기|만들기\s*체험/i.test(txt)) list.push({ icon: "spark", text: "공예 만들기" });
-  if ((c.field_conditions?.features?.includes("FOREST_TRAIL")) || /숲\s*체험|생태\s*탐방|숲\s*해설|숲체험/i.test(txt)) list.push({ icon: "forest", text: "숲체험·탐방" });
+  if (/공예|목공|도자기|만들기\s*체험/i.test(txt)) list.push({ icon: "spark", text: "공예 만들기" });
+  if (/숲\s*해설|생태\s*탐방|숲\s*체험관|자연\s*체험관/i.test(txt)) list.push({ icon: "forest", text: "숲체험·탐방" });
   if (/송어\s*잡기|미꾸라지\s*잡기|다슬기\s*잡기|물고기\s*잡기/i.test(txt)) list.push({ icon: "water", text: "물고기 잡기" });
   if ((c.uq && c.uq.includes("farm")) || /수확\s*체험|농촌\s*체험|과수원|사과\s*따기|딸기\s*따기|감자\s*캐기/i.test(txt)) list.push({ icon: "experience", text: "수확 체험" });
   if (/스마트팜|영농\s*체험|작물\s*재배|원예\s*체험/i.test(txt)) list.push({ icon: "experience", text: "작물 재배" });
   if (c.th?.includes("fishing") || /낚시터|낚시\s*가능|바지선.*낚시/i.test(txt)) list.push({ icon: "fish", text: "낚시 체험" });
-  if ((c.field_conditions?.features?.includes("TUBE_SLED")) || /썰매장|눈썰매|사계절썰매|물썰매/i.test(txt)) list.push({ icon: "spark", text: "썰매장" });
+  if (/썰매장|눈썰매|사계절썰매|물썰매/i.test(txt)) list.push({ icon: "spark", text: "썰매장" });
 
   // 11. 편의 / 주차
   const isMove = isMoveParking(c), isPart = isPartMoveParking(c);
@@ -4509,12 +4509,12 @@ function matchMyTaste(c, taste = getMyTaste()) {
   if (taste.beach && !(c.pf?.t?.includes("BEACH") || c.th?.includes("sea") || /바다|해변|해수욕장|백사장/i.test(txt))) return false;
   if (taste.horse && !((c.uq && c.uq.includes("horse")) || /승마|말타기|포니체험/i.test(txt))) return false;
   if (taste.animal && !((c.uq && c.uq.includes("animal")) || /동물\s*체험|동물\s*먹이주기|알파카|양떼|토끼/i.test(txt))) return false;
-  if (taste.craft && !((c.field_conditions?.features && (c.field_conditions.features.includes("CRAFT") || c.field_conditions.features.includes("WOOD_CRAFT"))) || /공예|목공|도자기|만들기\s*체험/i.test(txt))) return false;
+  if (taste.craft && !/공예|목공|도자기|만들기\s*체험/i.test(txt)) return false;
   if (taste.leisure && !((c.uq && c.uq.includes("leisure")) || /수상레저|카약|보트|패들보드|카누|래프팅/i.test(txt))) return false;
-  if (taste.sled && !((c.field_conditions?.features?.includes("TUBE_SLED")) || /썰매장|눈썰매|사계절썰매|물썰매/i.test(txt))) return false;
+  if (taste.sled && !/썰매장|눈썰매|사계절썰매|물썰매/i.test(txt)) return false;
   if (taste.tidal && !(isTidalCamp(c) || /갯벌|해루질|조개잡이|바지락/i.test(txt))) return false;
   if (taste.fishing && !(c.th?.includes("fishing") || /낚시터|낚시\s*가능|바지선.*낚시|민물낚시|바다낚시/i.test(txt))) return false;
-  if (taste.forestTrail && !((c.field_conditions?.features?.includes("FOREST_TRAIL")) || /숲\s*체험|생태\s*탐방|숲\s*해설|숲체험/i.test(txt))) return false;
+  if (taste.forestTrail && !/숲\s*해설|생태\s*탐방|숲\s*체험관|자연\s*체험관/i.test(txt)) return false;
   if (taste.catch && !/송어\s*잡기|미꾸라지\s*잡기|다슬기\s*잡기|물고기\s*잡기|물고기잡이|송어축제/i.test(txt)) return false;
   if (taste.harvest && !((c.uq && c.uq.includes("farm")) || /수확\s*체험|농촌\s*체험|과수원|사과\s*따기|딸기\s*따기|감자\s*캐기|고구마\s*캐기|과일\s*따기/i.test(txt))) return false;
   if (taste.grow && !/스마트팜|영농\s*체험|작물\s*재배|원예\s*체험|모종\s*심기|채소\s*재배/i.test(txt)) return false;
