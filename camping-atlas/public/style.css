@@ -4485,3 +4485,144 @@ img.img-gone { visibility: hidden; }
 .near-sheet .near-q, .near-sheet .near-here { box-sizing: border-box; width: 100%; min-width: 0; }
 .near-sheet .near-here { display: inline-flex; align-items: center; border-radius: 14px; background: var(--sel); color: var(--on-sel); }
 .near-sheet .near-here .ic, .near-sheet .near-opt .ic { width: 18px; height: 18px; flex: none; }
+
+/* ── 내 취향 맞춤 섹션 및 설정 카드 (소유자 2026-11-09) ─────────────────── */
+.my-taste-section { margin-bottom: var(--sec-gap, 48px); }
+.my-taste-rail { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 2px 14px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.my-taste-rail::-webkit-scrollbar { display: none; }
+.my-taste-rail > .card { flex: 0 0 clamp(270px, 22vw, 330px); scroll-snap-align: start; }
+@media (max-width: 759px) {
+  .my-taste-rail > .card { flex-basis: 80vw; }
+}
+
+.my-taste-setup-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  user-select: none;
+}
+.my-taste-setup-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+.my-taste-setup-card .taste-setup-media {
+  position: relative;
+  height: 140px;
+  background: linear-gradient(135deg, rgba(0, 135, 90, 0.12) 0%, rgba(0, 135, 90, 0.04) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.my-taste-setup-card .taste-setup-icon-wrap {
+  display: inline-grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--accent);
+  box-shadow: var(--shadow);
+}
+.my-taste-setup-card .taste-setup-icon-wrap .ic {
+  width: 28px;
+  height: 28px;
+}
+.my-taste-setup-card .taste-setup-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: var(--fs-min);
+  font-weight: 800;
+}
+.my-taste-setup-card .taste-setup-body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 8px;
+}
+.my-taste-setup-card .taste-setup-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 850;
+  color: var(--ink);
+}
+.my-taste-setup-card .taste-setup-desc {
+  margin: 0;
+  font-size: .8rem;
+  color: var(--ink-3);
+  line-height: 1.4;
+}
+.my-taste-setup-card .taste-setup-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 4px;
+  margin-bottom: auto;
+}
+.my-taste-setup-card .taste-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 26px;
+  padding: 0 8px;
+  border-radius: 6px;
+  background: var(--soft);
+  color: var(--ink-2);
+  font-size: .75rem;
+  font-weight: 750;
+}
+.my-taste-setup-card .taste-badge .ic {
+  width: 12px;
+  height: 12px;
+  color: var(--accent);
+}
+.my-taste-setup-card .taste-setup-btn {
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 10px;
+  background: var(--accent-tint, rgba(0, 135, 90, 0.08));
+  color: var(--accent, #00875a);
+  border: 1px solid rgba(0, 135, 90, 0.2);
+  font-size: .84rem;
+  font-weight: 850;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.my-taste-setup-card .taste-setup-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+.my-taste-setup-card .taste-setup-btn .ic {
+  width: 14px;
+  height: 14px;
+}
+
+.my-taste-sheet { width: min(640px, calc(100vw - 32px)); max-height: min(88dvh, 860px); overflow: hidden; border: 0; border-radius: var(--r); padding: 0; background: var(--paper); box-shadow: var(--shadow-2); margin: auto; }
+.my-taste-sheet[open] { display: flex; }
+.my-taste-sheet::backdrop { background: rgba(16, 20, 20, .55); backdrop-filter: blur(4px); }
+.my-taste-in { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 14px; width: 100%; max-height: inherit; padding: 20px; box-sizing: border-box; }
+.my-taste-body { display: grid; gap: 18px; overflow: auto; overscroll-behavior: contain; padding-right: 2px; }
+.my-taste-body .taste-group { display: grid; gap: 8px; }
+.my-taste-body h3 { margin: 0; font-size: .95rem; font-weight: 850; }
+.my-taste-foot { display: flex; justify-content: flex-end; gap: 8px; padding-top: 14px; border-top: 1px solid var(--line); }
+@media (max-width: 759px) {
+  .my-taste-sheet { width: 100vw; max-height: 92dvh; border-radius: var(--r) var(--r) 0 0; margin-bottom: 0; }
+}
