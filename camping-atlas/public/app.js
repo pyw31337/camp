@@ -2738,6 +2738,7 @@ class HeroCanvasController {
     this.particles = [];
     this.ripples = [];
     this.shootingStars = [];
+    this.bubblePops = [];
     this.currentThemeId = "night-sky";
     this.time = 0;
 
@@ -2839,6 +2840,8 @@ class HeroCanvasController {
       for (let i = 0; i < 3; i++) {
         this.ripples.push({ x, y, r: i * 8, maxR: 70 + i * 18, alpha: 0.75 });
       }
+    } else if (this.currentThemeId === "bubbles" || this.currentThemeId === "uq-spa" || this.currentThemeId === "uq-pool") {
+      this.popBubblesNear(x, y, 48);
     }
   }
 
@@ -2871,6 +2874,7 @@ class HeroCanvasController {
     this.duskParticles = [];
     this.splashes = [];
     this.pollen = [];
+    this.bubblePops = [];
     this.initParticlesForTheme(themeId);
   }
 
@@ -3107,9 +3111,6 @@ class HeroCanvasController {
   makeSteam(w, h, initial = false) {
     return { x: Math.random() * w, y: initial ? h * (0.35 + Math.random() * 0.65) : h + 40, r: Math.random() * 60 + 50, vy: -(Math.random() * 0.35 + 0.18), vx: (Math.random() - 0.5) * 0.2, life: initial ? Math.random() : 1, sway: Math.random() * Math.PI * 2 };
   }
-  makeBubble(w, h, initial = false) {
-    return { x: Math.random() * w, y: initial ? Math.random() * h : h + 10, r: Math.random() * 5 + 2, vy: -(Math.random() * 0.7 + 0.35), sway: Math.random() * Math.PI * 2, alpha: Math.random() * 0.4 + 0.45 };
-  }
   makeConfetti(w, h, initial = false) {
     const colors = ["#ff8a80", "#ffd54f", "#81d4fa", "#a5d6a7", "#ce93d8", "#ffab91"];
     return { x: Math.random() * w, y: initial ? Math.random() * h : -12, w: Math.random() * 6 + 5, h: Math.random() * 4 + 3, vy: Math.random() * 0.6 + 0.35, vx: (Math.random() - 0.5) * 0.4, rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.06, color: colors[Math.floor(Math.random() * colors.length)], sway: Math.random() * Math.PI * 2 };
@@ -3126,16 +3127,174 @@ class HeroCanvasController {
       ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
     }
   }
-  renderBubbles(ctx, w, h, mx, my, hasMouse) {
+  makeBubble(w, h, initial = false) {
+    const isLarge = Math.random() < 0.2;
+    const r = isLarge ? Math.random() * 7 + 8 : Math.random() * 4.5 + 2.5;
+    return {
+      x: Math.random() * w,
+      y: initial ? Math.random() * h : h + 15,
+      r,
+      vy: -(Math.random() * 0.75 + 0.35) * (isLarge ? 0.78 : 1),
+      sway: Math.random() * Math.PI * 2,
+      swaySpeed: Math.random() * 0.03 + 0.02,
+      alpha: Math.random() * 0.35 + 0.45
+    };
+  }
+
+  // 버블 팝(터짐) + 사방으로 튀는 물방울 스플래시 디테일 파티클 생성
+  createBubblePop(x, y, r, alpha = 0.8) {
+    // 1. 순간 팽창하며 터지는 원형 충격파 링
+    this.bubblePops.push({
+      kind: "ring",
+      x,
+      y,
+      r: Math.max(2, r * 0.85),
+      maxR: r * 1.9 + 5,
+      alpha: Math.min(1, alpha * 1.6),
+      lw: Math.max(1, r * 0.18)
+    });
+
+    // 2. 사방으로 튀는 미세 물방울 파편들 (5~9개)
+    const count = Math.min(9, Math.max(5, Math.floor(r * 0.8) + 4));
+    for (let k = 0; k < count; k++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 2.8 + 1.2;
+      this.bubblePops.push({
+        kind: "drop",
+        x: x + Math.cos(angle) * (r * 0.5),
+        y: y + Math.sin(angle) * (r * 0.5),
+        vx: Math.cos(angle) * speed + (this.mouse.vx ? this.mouse.vx * 0.15 : 0),
+        vy: Math.sin(angle) * speed - 0.7,
+        size: Math.random() * 1.5 + 0.8,
+        alpha: Math.min(1, alpha * 1.4),
+        life: 1.0,
+        decay: Math.random() * 0.045 + 0.035
+      });
+    }
+
+    // 3. 톡 터지는 빛 반짝임 스파클 (2~3개)
+    for (let s = 0; s < 3; s++) {
+      const angle = Math.random() * Math.PI * 2;
+      const dist = Math.random() * (r * 0.6) + 1;
+      this.bubblePops.push({
+        kind: "spark",
+        x: x + Math.cos(angle) * dist,
+        y: y + Math.sin(angle) * dist,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: -Math.random() * 0.7 - 0.3,
+        size: Math.random() * 1.2 + 0.5,
+        alpha: 1,
+        life: 1.0,
+        decay: 0.08
+      });
+    }
+  }
+
+  popBubblesNear(x, y, radius = 48) {
+    const w = this.width || 800;
+    const h = this.height || 500;
     for (let i = 0; i < this.particles.length; i++) {
       const p = this.particles[i];
-      p.sway += 0.03; p.y += p.vy; p.x += Math.sin(p.sway) * 0.35;
-      if (hasMouse && Math.hypot(p.x - mx, p.y - my) < p.r + 26) { this.particles[i] = this.makeBubble(w, h); continue; }
-      if (p.y < -10) { this.particles[i] = this.makeBubble(w, h); continue; }
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(255,255,255,${p.alpha})`; ctx.lineWidth = 1.2; ctx.stroke();
-      ctx.fillStyle = `rgba(200,240,255,${p.alpha * 0.18})`; ctx.fill();
-      ctx.beginPath(); ctx.arc(p.x - p.r * 0.35, p.y - p.r * 0.35, p.r * 0.25, 0, Math.PI * 2); ctx.fillStyle = `rgba(255,255,255,${p.alpha})`; ctx.fill();
+      if (Math.hypot(p.x - x, p.y - y) < p.r + radius) {
+        this.createBubblePop(p.x, p.y, p.r, p.alpha);
+        this.particles[i] = this.makeBubble(w, h);
+      }
+    }
+  }
+
+  renderBubbles(ctx, w, h, mx, my, hasMouse) {
+    // 1. 떠오르는 버블
+    for (let i = 0; i < this.particles.length; i++) {
+      const p = this.particles[i];
+      p.sway += p.swaySpeed || 0.03;
+      p.y += p.vy;
+      p.x += Math.sin(p.sway) * 0.38;
+
+      // 마우스나 터치로 건드리면 펑 터지며 사방으로 물방울이 튐
+      if (hasMouse && Math.hypot(p.x - mx, p.y - my) < p.r + 28) {
+        this.createBubblePop(p.x, p.y, p.r, p.alpha);
+        this.particles[i] = this.makeBubble(w, h);
+        continue;
+      }
+      if (p.y < -15) {
+        this.particles[i] = this.makeBubble(w, h);
+        continue;
+      }
+
+      // 버블 본체 (투명 구형 입체감)
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(255, 255, 255, ${p.alpha * 0.95})`;
+      ctx.lineWidth = Math.max(1, p.r * 0.12);
+      ctx.stroke();
+      ctx.fillStyle = `rgba(195, 240, 255, ${p.alpha * 0.22})`;
+      ctx.fill();
+
+      // 상단 초승달 하이라이트 빛반사
+      ctx.beginPath();
+      ctx.arc(p.x - p.r * 0.35, p.y - p.r * 0.35, Math.max(1, p.r * 0.28), 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, p.alpha * 1.3)})`;
+      ctx.fill();
+
+      // 하단 미세 반사광 (입체감 보강)
+      if (p.r > 6) {
+        ctx.beginPath();
+        ctx.arc(p.x + p.r * 0.28, p.y + p.r * 0.28, p.r * 0.16, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha * 0.5})`;
+        ctx.fill();
+      }
+    }
+
+    // 2. 터진 버블 애니메이션 (확산 링 + 튀는 물방울 스플래시)
+    for (let i = this.bubblePops.length - 1; i >= 0; i--) {
+      const bp = this.bubblePops[i];
+      if (bp.kind === "ring") {
+        bp.r += (bp.maxR - bp.r) * 0.42;
+        bp.alpha -= 0.10;
+        bp.lw *= 0.86;
+        if (bp.alpha <= 0.02 || bp.lw < 0.3) {
+          this.bubblePops.splice(i, 1);
+          continue;
+        }
+        ctx.beginPath();
+        ctx.arc(bp.x, bp.y, bp.r, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(255, 255, 255, ${bp.alpha})`;
+        ctx.lineWidth = bp.lw;
+        ctx.stroke();
+      } else if (bp.kind === "drop") {
+        bp.x += bp.vx;
+        bp.y += bp.vy;
+        bp.vy += 0.11; // 중력
+        bp.vx *= 0.97;
+        bp.vy *= 0.97;
+        bp.life -= bp.decay;
+        if (bp.life <= 0) {
+          this.bubblePops.splice(i, 1);
+          continue;
+        }
+        const curA = bp.alpha * bp.life;
+        ctx.beginPath();
+        ctx.arc(bp.x, bp.y, bp.size * (0.6 + bp.life * 0.4), 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(215, 245, 255, ${curA})`;
+        ctx.fill();
+        // 물방울 반짝임
+        ctx.beginPath();
+        ctx.arc(bp.x - bp.size * 0.25, bp.y - bp.size * 0.25, Math.max(0.4, bp.size * 0.3), 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${curA * 1.2})`;
+        ctx.fill();
+      } else if (bp.kind === "spark") {
+        bp.x += bp.vx;
+        bp.y += bp.vy;
+        bp.life -= bp.decay;
+        if (bp.life <= 0) {
+          this.bubblePops.splice(i, 1);
+          continue;
+        }
+        ctx.beginPath();
+        ctx.arc(bp.x, bp.y, bp.size * bp.life, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${bp.life})`;
+        ctx.fill();
+      }
     }
   }
   renderConfetti(ctx, w, h, mx, my, hasMouse) {
@@ -4443,9 +4602,7 @@ function matchMyTaste(c, taste = getMyTaste()) {
 
 function getMyTastePicks() {
   const taste = getMyTaste();
-  let pool = S.camps.filter((c) => showcaseEligible(c) && hasPhoto(c) && matchMyTaste(c, taste));
-  if (pool.length < 7 && taste.types?.length) pool = S.camps.filter((c) => showcaseEligible(c) && hasPhoto(c) && taste.types.some((k) => hasType(c, k)));
-  if (pool.length < 7) pool = S.camps.filter((c) => showcaseEligible(c) && hasPhoto(c));
+  const pool = S.camps.filter((c) => showcaseEligible(c) && hasPhoto(c) && matchMyTaste(c, taste));
   const sorted = qualityOrder(pool);
   const now = new Date(Date.now() + 9 * 3600e3);
   const dStr = `${now.getUTCFullYear()}-${now.getUTCMonth() + 1}-${now.getUTCDate()}`;
@@ -4453,7 +4610,7 @@ function getMyTastePicks() {
   const cands = sorted.slice(0, Math.min(sorted.length, 42));
   const off = cands.length ? (seed * 7) % cands.length : 0;
   const picked = [];
-  for (let i = 0; i < 7 && i < cands.length; i++) picked.push(cands[(off + i) % cands.length]);
+  for (let i = 0; i < Math.min(7, cands.length); i++) picked.push(cands[(off + i) % cands.length]);
   return picked.sort((a, b) => {
     const wa = isWinterClosedCamp(a) ? 1 : 0, wb = isWinterClosedCamp(b) ? 1 : 0;
     if (wa !== wb) return wa - wb;
@@ -4461,10 +4618,14 @@ function getMyTastePicks() {
   });
 }
 
-function myTasteSetupCard(taste) {
-  const lbl = (taste.types ?? []).map((t) => ST[t]?.label || t).join(" · ") || "전체";
+function myTasteSummaryChips(taste = getMyTaste()) {
   const b = [];
-  if (taste.types?.length) b.push(`<span class="taste-badge">${ic("tent")}${esc(lbl)}</span>`);
+  if (taste.types?.length) {
+    for (const t of taste.types) {
+      const label = ST[t]?.label || (KINDS.find((k) => k[0] === t)?.[1]) || t;
+      b.push(`<span class="taste-badge">${ic("tent")}${esc(label)}</span>`);
+    }
+  }
   if (taste.minSize > 0) b.push(`<span class="taste-badge">${ic("size")}${taste.minSize}m+</span>`);
   if (taste.minWatts >= 1400) b.push(`<span class="taste-badge">${ic("bolt")}1400W+ 초고용량</span>`);
   else if (taste.minWatts >= 1000) b.push(`<span class="taste-badge">${ic("bolt")}1000W+ 고용량</span>`);
@@ -4483,7 +4644,25 @@ function myTasteSetupCard(taste) {
   if (taste.river) b.push(`<span class="taste-badge">${ic("th:LAKE")}강·호수</span>`);
   if (taste.beach) b.push(`<span class="taste-badge">${ic("th:BEACH")}바다</span>`);
   if (taste.horse) b.push(`<span class="taste-badge">${ic("spark")}승마체험</span>`);
+  return b;
+}
 
+function myTasteBoxHtml(taste = getMyTaste()) {
+  const b = myTasteSummaryChips(taste);
+  return `<div class="theme-my-taste-box">
+    <div class="theme-my-taste-head">
+      <div class="theme-my-taste-title-wrap">
+        <span class="taste-box-badge">${ic("tent")}<b>내 취향 맞춤 장비 · 옵션</b></span>
+        <span class="taste-box-count">적용된 조건 <b>${b.length}개</b></span>
+      </div>
+      <button type="button" class="taste-box-change-btn" data-open-my-taste>${ic("spark")}취향 설정 변경 ${ic("right")}</button>
+    </div>
+    <div class="theme-my-taste-chips">${b.length ? b.join("") : `<span class="taste-badge none">선택된 조건 없음 (전체 보기)</span>`}</div>
+  </div>`;
+}
+
+function myTasteSetupCard(taste) {
+  const b = myTasteSummaryChips(taste);
   return `<article class="card my-taste-setup-card" data-open-my-taste tabindex="0" role="button" aria-label="내 취향 설정 열기">
     <div class="taste-setup-media"><div class="taste-setup-icon-wrap">${ic("tent")}</div><span class="taste-setup-badge">내 취향 맞춤</span></div>
     <div class="taste-setup-body">
@@ -4522,6 +4701,9 @@ function openMyTasteDialog() {
           const div = document.createElement("div"); div.innerHTML = myTasteSection();
           const t = div.firstElementChild;
           if (t) { sec.replaceWith(t); initCarousels(t); initDraggableRails(t); }
+        }
+        if (typeof window.__refreshMyTasteTheme === "function") {
+          window.__refreshMyTasteTheme();
         }
         return;
       }
@@ -5370,6 +5552,7 @@ function themeView(themeKey) {
     </div>
     <div class="theme-body">
       ${isWp ? `<div class="theme-closed-alert">${ic("info")}<div><strong>여름 시즌 물놀이터 운영 종료 안내</strong><p>전국 물놀이터·야영장 수영장 정보입니다. 현재는 하절기 운영이 종료된 상태입니다. 렛츠 캠핑에서 미리 시설 정보를 확인하시고 다음 시즌 피서 계획에 참고해 보세요!</p></div></div>` : ""}
+      ${themeKey === "MY_TASTE" ? myTasteBoxHtml() : ""}
       <div class="theme-uq-bar${themeKey === "UNIQUE" ? "" : " sort-only"}">
         ${themeKey === "UNIQUE" ? `<div class="rail chips theme-uq" aria-label="이색 분류 (여러 개 선택)">
           <button type="button" class="chip" data-theme-uq="" aria-pressed="${!uniqueSubs.size}">전체 <i>${fmt(totalInTheme)}</i></button>
@@ -5448,7 +5631,7 @@ function qualityOrder(items, { distance = false } = {}) {
 }
 
 function bindTheme(themeKey) {
-  const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
+  const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "MY_TASTE" ? (c) => matchMyTaste(c, getMyTaste()) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
 
   let pageN = 24;
   const getThemeList = () => {
@@ -5506,6 +5689,20 @@ function bindTheme(themeKey) {
 
   renderThemeGrid();
   initDraggableRails($(".theme-body"));
+
+  if (themeKey === "MY_TASTE") {
+    window.__refreshMyTasteTheme = () => {
+      pageN = 24;
+      renderThemeGrid();
+      const heroSub = $(".theme-hero-sub b");
+      if (heroSub) heroSub.textContent = `${fmt(S.camps.filter(testFn).length)}곳`;
+      const box = $(".theme-my-taste-box");
+      if (box) {
+        const div = document.createElement("div"); div.innerHTML = myTasteBoxHtml();
+        if (div.firstElementChild) box.replaceWith(div.firstElementChild);
+      }
+    };
+  }
 
   const v = $("#view");
   const onClick = (e) => {

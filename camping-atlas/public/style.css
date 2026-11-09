@@ -4632,3 +4632,19 @@ img.img-gone { visibility: hidden; }
 @media (max-width: 759px) {
   .my-taste-sheet { width: 100vw; max-height: 92dvh; border-radius: var(--r) var(--r) 0 0; margin-bottom: 0; }
 }
+
+/* 내 취향 테마 상세 페이지 상단 설정 박스 */
+.theme-my-taste-box { margin: 10px 0 16px; padding: 14px 16px; background: var(--surface-1, #fff); border: 1px solid var(--line); border-radius: var(--radius-md, 12px); display: grid; gap: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.theme-my-taste-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.theme-my-taste-title-wrap { display: inline-flex; align-items: center; gap: 8px; }
+.taste-box-badge { display: inline-flex; align-items: center; gap: 4px; font-size: .88rem; font-weight: 800; color: var(--accent); }
+.taste-box-badge .ic { width: 16px; height: 16px; }
+.taste-box-count { font-size: var(--fs-min); color: var(--ink-2); font-weight: 600; }
+.taste-box-count b { color: var(--accent); }
+.taste-box-change-btn { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 999px; background: var(--accent); color: #fff; border: 0; font-size: .8rem; font-weight: 750; cursor: pointer; transition: opacity .15s ease; }
+.taste-box-change-btn:hover { opacity: .9; }
+.taste-box-change-btn .ic { width: 13px; height: 13px; }
+.theme-my-taste-chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.theme-my-taste-chips .taste-badge { display: inline-flex; align-items: center; gap: 3px; padding: 4px 9px; border-radius: 999px; background: rgba(0, 168, 107, 0.08); color: var(--accent); font-size: var(--fs-min); font-weight: 700; border: 1px solid rgba(0, 168, 107, 0.18); }
+.theme-my-taste-chips .taste-badge .ic { width: 12px; height: 12px; }
+.theme-my-taste-chips .taste-badge.none { background: var(--surface-2, #f3f4f6); color: var(--ink-3); border: 1px solid var(--line); }
