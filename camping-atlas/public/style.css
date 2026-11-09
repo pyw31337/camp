@@ -892,6 +892,7 @@ img { color: transparent; }
    여백·테두리·그림자·배경은 바꾸지 않는다(사진 위 카드 배지가 기준). */
 .bdg-volt { --c: var(--volt); --on: var(--on-volt); }
 .bdg-flame { --c: var(--flame); }
+.bdg-heater { --c: #ea580c; --on: #fff; }
 .bdg-flame-soft { --c: var(--flame-soft); --on: var(--on-flame-soft); }
 .bdg-cobalt { --c: var(--cobalt); }
 .bdg-ink { --c: var(--ink); }

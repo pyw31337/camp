@@ -247,31 +247,11 @@ const GROUND = { CRUSHED_STONE: "파쇄석", MIXED: "혼합", GRAVEL: "자갈", 
 const srcOf = (fc, extra) => ({ label: fc?.source?.label || "한국관광공사 고캠핑 등록 현황", url: fc?.source?.url || "https://www.gocamping.or.kr/", at: fc?.source?.checked_at, ...extra });
 
 // 오토캠핑 개념 정의: 차량을 텐트(사이트) 바로 옆에 주차하고, 전기 시설 등을 편리하게 이용할 수 있는 캠핑 형태
-const AUTOCAMP_INFO_HTML = `<strong>오토캠핑(Auto Camping)</strong><br>차량을 텐트(사이트) 바로 옆에 주차하고, 전기 시설 등을 편리하게 이용하며 야영할 수 있는 대표적인 캠핑 형태입니다. (관광진흥법상 자동차야영장)<br><small style="color:var(--text-3);display:block;margin-top:6px;">※ 일부 야영장의 경우 잔디 보호나 안전을 위해 짐을 내린 후 차량을 공용 주차장으로 옮겨야 하는 <b>이동주차</b>로 운영될 수 있습니다.</small>`;
+const AUTOCAMP_INFO_HTML = `<strong>오토캠핑</strong><br>텐트 옆에 주차하고 전기를 편리하게 이용하는 캠핑장입니다 (자동차야영장).<br><small style="color:var(--text-3);display:block;margin-top:4px;">※ 일부는 짐을 내린 후 공용주차장으로 이동해야 합니다(이동주차 뱃지).</small>`;
 
-// 오토캠핑 판별: 관광진흥법상 자동차야영장 또는 사이트 타입 AUTO
 const isAutoCamp = (c) => (c.types ?? []).includes("자동차야영장") || (c.st ?? []).some((t) => t[0] === "AUTO");
-
-// 오토캠핑 중 짐을 내린 후 공용/외부 주차장으로 이동해야 하는 업장 (이동주차)
-function isMoveParking(c) {
-  if (!isAutoCamp(c)) return false;
-  if (c.of?.pk && c.of.pk.v === "EXTERNAL") return true;
-  const mode = c.field_conditions?.parking?.mode;
-  if (mode === "CART_REQUIRED" || mode === "SHARED_NEARBY") return true;
-  const f = c._f;
-  if (f?.park && f.park.ok === false) return true;
-  return false;
-}
-
-// 오토캠핑 중 일부 사이트만 텐트 옆 주차 가능하고 나머지는 이동주차인 혼합형
-function isPartMoveParking(c) {
-  if (!isAutoCamp(c) || isMoveParking(c)) return false;
-  const p = c.field_conditions?.parking;
-  const z = p?.tent_side_zones;
-  if (p?.mode === "SITE_ADJACENT" && z && z.adjacent < z.total) return true;
-  const f = c._f;
-  return f?.park?.ok === "part";
-}
+const isMoveParking = (c) => isAutoCamp(c) && (c.of?.pk?.v === "EXTERNAL" || ["CART_REQUIRED", "SHARED_NEARBY"].includes(c.field_conditions?.parking?.mode) || c._f?.park?.ok === false);
+const isPartMoveParking = (c) => isAutoCamp(c) && !isMoveParking(c) && ((c.field_conditions?.parking?.mode === "SITE_ADJACENT" && c.field_conditions?.parking?.tent_side_zones?.adjacent < c.field_conditions?.parking?.tent_side_zones?.total) || c._f?.park?.ok === "part");
 
 function facts(c) {
   if (c._f) return c._f;
@@ -403,15 +383,25 @@ const isFlexTimeCamp = (c) => {
   const co = c.ti?.o?.[0] || c.co;
   return Boolean(c.early || c.late || (ci && ci <= "12:00") || (co && co >= "12:00"));
 };
+function heaterRentalInfo(c) {
+  if (!c) return null;
+  const match = (re) => (c.rental ?? []).some((x) => re.test(x)) || (c.field_conditions?.rental_offers ?? []).some((x) => re.test(x.item)) || (c.notes ?? []).some((x) => re.test(x)) || (c.of && Object.values(c.of).some((v) => v?.q && re.test(v.q)));
+  if (match(/팬히터/i)) return { kind: "FAN_HEATER", label: "팬히터 대여", full: "겨울철 팬히터 현장 대여 가능" };
+  if (match(/(등유)?난로/i)) return { kind: "STOVE", label: "난로 대여", full: "겨울철 난로 현장 대여 가능" };
+  if (match(/난방기구|난방기|온풍기|히터/i)) return { kind: "HEATER", label: "팬히터·난로", full: "겨울철 난방기기(팬히터·난로) 현장 대여 가능" };
+  return null;
+}
 // 사진 배지 두 줄(소유자 2026-10-22): 윗줄은 긍정 배지(초대가능·600W·장작·반려견 등, 섹션 배지가 맨 앞),
 // 아랫줄은 부정 배지(반려견 불가·장작 불가·화기 불가 등). 줄바꿈은 .bdg-br(폭 100%)로.
 function badges(c, max = 4, maxNo = 2, { rows = false, theme = null } = {}) {
   const f = facts(c), out = [], pet = petAllowed(c), smallDog = pet && (c.nr ?? []).includes("BIG_DOG");
   const isMove = isMoveParking(c), isPart = isPartMoveParking(c);
+  const hInfo = heaterRentalInfo(c);
   const B = {
     invite: inviteOk(c) ? `<span class="bdg bdg-teal">${ic("users")}초대가능</span>` : "",
     // 법령 기본값(r: 업장이 공지하지 않은 600W 참고값)은 배지로 올리지 않는다
     w: pos(f.power) && f.power.g !== "r" && f.power.ok && f.power.w ? `<span class="bdg bdg-volt">${ic("bolt")}${esc(f.power.short)}</span>` : "",
+    heater: hInfo ? `<span class="bdg bdg-heater" title="${esc(hInfo.full)}">${ic("flame")}${esc(hInfo.label)}</span>` : "",
     fire: pos(f.fire) && f.fire.kind === "FIREWOOD_OK" ? `<span class="bdg bdg-flame">${ic("firewood")}장작</span>` : "",
     pet: pet ? `<span class="bdg bdg-ink">${ic("paw")}반려견${smallDog ? "(소형)" : ""}</span>` : "",
     movePark: !rows && isMove
@@ -431,9 +421,9 @@ function badges(c, max = 4, maxNo = 2, { rows = false, theme = null } = {}) {
     best: c.best?.length ? `<span class="bdg bdg-best" title="문체부·한국관광공사 공인 우수야영장">${ic("award")}${esc(c.best[0].label || "우수야영장")}</span>` : "",
   };
   // 섹션 배지를 맨 앞에(잘리지 않게)
-  const lead = theme === "PET" ? "pet" : theme === "VISITOR" ? "invite" : theme === "WINTER" ? (wattsOf(c) >= 1100 && B.w ? "w" : B.heat ? "heat" : "w") : theme === "REC_FOREST" ? "rf" : theme === "TIDAL_FLAT" ? "tidal" : theme === "FIRST_COME" ? "firstCome" : theme === "FLEX_TIME" ? "flex" : theme === "VR_TOUR" ? "vr" : theme === "DUMP_STATION" ? "dump" : theme === "EXCELLENT" ? "best" : null;
+  const lead = theme === "PET" ? "pet" : theme === "VISITOR" ? "invite" : theme === "WINTER" ? (B.heater ? "heater" : wattsOf(c) >= 1100 && B.w ? "w" : B.heat ? "heat" : "w") : theme === "REC_FOREST" ? "rf" : theme === "TIDAL_FLAT" ? "tidal" : theme === "FIRST_COME" ? "firstCome" : theme === "FLEX_TIME" ? "flex" : theme === "VR_TOUR" ? "vr" : theme === "DUMP_STATION" ? "dump" : theme === "EXCELLENT" ? "best" : null;
   if (lead && B[lead]) out.push(B[lead]);
-  for (const k of ["movePark", "w", "vr", "dump", "best", "rf", "tidal", "flex", "firstCome", "invite", "fire", "pet", "park"]) if (k !== lead && B[k]) out.push(B[k]);
+  for (const k of ["movePark", "heater", "w", "heat", "vr", "dump", "best", "rf", "tidal", "flex", "firstCome", "invite", "fire", "pet", "park"]) if (k !== lead && B[k]) out.push(B[k]);
   const no = noKeys(c).filter((k) => NO_CARD.includes(k) && !(k === "BIG_DOG" && pet)).slice(0, maxNo).map(noBadge);
   const top = out.slice(0, max);
   return `${top.join("")}${top.length && no.length ? '<i class="bdg-br" aria-hidden="true"></i>' : ""}${no.join("")}`;
@@ -4423,7 +4413,7 @@ const KIND = Object.fromEntries(ALL_KINDS.map(([k, l, t]) => [k, { label: l, tes
 const W_OPTS = [[0, "상관없음"], [1, "전기 있음"], [600, "600W 이상"], [1100, "1,100W 이상"]];
 const SIZE_OPTS = [[0, "상관없음"], [6, "6m 이상"], [8, "8m 이상"], [10, "10m 이상"]];
 const R_OPTS = [10, 20, 30];
-const emptyCond = () => ({ sido: [], kind: [], pet: false, w: 0, size: 0, fire: false, park: false, win: false, dump: false, vr: false, best: false, sun: false, leaf: false, spring: false, summer: false, near: "", r: 20 });
+const emptyCond = () => ({ sido: [], kind: [], pet: false, w: 0, size: 0, fire: false, park: false, win: false, heater: false, dump: false, vr: false, best: false, sun: false, leaf: false, spring: false, summer: false, near: "", r: 20 });
 // VR·우수야영장은 실제 근거가 있는 레코드만 조건에 포함한다.
 const hasVerifiedVr = (c) => Boolean(vrUrl(c));
 const hasExcellentBadge = (c) => Array.isArray(c.best) ? c.best.length > 0 : Boolean(c.best);
@@ -4437,6 +4427,7 @@ const COND_BOOL = {
   leaf: ["단풍 명소", (c) => (c.th?.includes("autumn") ? "y" : c.th?.length ? "n" : "?")],
   spring: ["봄꽃", (c) => (c.th?.includes("spring") ? "y" : c.th?.length ? "n" : "?")],
   summer: ["여름 물놀이", (c) => (c.th?.includes("summer") ? "y" : c.th?.length ? "n" : "?")],
+  heater: ["팬히터·난로 대여", (c) => (heaterRentalInfo(c) ? "y" : "n")],
 };
 S.cond = emptyCond();
 const km2 = (a, b) => { const R = 6371, dLa = ((b.lat - a.lat) * Math.PI) / 180, dLo = ((b.lng - a.lng) * Math.PI) / 180; const x = Math.sin(dLa / 2) ** 2 + Math.cos((a.lat * Math.PI) / 180) * Math.cos((b.lat * Math.PI) / 180) * Math.sin(dLo / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(x)); };
@@ -4490,7 +4481,7 @@ function condTest(c, k = S.cond, skip = null, strict = S.condStrict) {
   const r = condEval(c, k, skip);
   return Boolean(r) && (!strict || r.unknown === 0);
 }
-const COND_LABEL = { dump: "덤프스테이션", vr: "360° VR 뷰", best: "공인 우수야영장", sun: "일출 명소", leaf: "단풍 명소", spring: "봄꽃", summer: "여름 물놀이", win: "겨울 운영", kind: "상품", pet: "반려견", w: "전기", size: "사이트 크기", fire: "장작", park: "텐트 옆 주차" };
+const COND_LABEL = { heater: "팬히터·난로 대여", dump: "덤프스테이션", vr: "360° VR 뷰", best: "공인 우수야영장", sun: "일출 명소", leaf: "단풍 명소", spring: "봄꽃", summer: "여름 물놀이", win: "겨울 운영", kind: "상품", pet: "반려견", w: "전기", size: "사이트 크기", fire: "장작", park: "텐트 옆 주차" };
 const condActive = (k = S.cond) => k.sido.length + k.kind.length + (k.pet ? 1 : 0) + (k.w ? 1 : 0) + (k.size ? 1 : 0) + (k.fire ? 1 : 0) + (k.park ? 1 : 0) + (k.win ? 1 : 0) + (k.vr ? 1 : 0) + (k.best ? 1 : 0) + Object.keys(COND_BOOL).filter((b) => k[b]).length + (k.near ? 1 : 0);
 function condChips(k = S.cond) {
   const out = [];
@@ -4614,7 +4605,7 @@ function paintCondSheet() {
       <section><h3>반려견</h3><div class="cond-chips">${chip("pet", 1, "동반 가능", k.pet, tally("pet", true))}</div></section>
       <section><h3>전기</h3><div class="cond-chips">${W_OPTS.map(([v, l]) => chip("w", v, l, k.w === v, v ? tally("w", v) : null)).join("")}</div></section>
       <section><h3>사이트 크기</h3><div class="cond-chips">${SIZE_OPTS.map(([v, l]) => chip("size", v, l, k.size === v, v ? tally("size", v) : null)).join("")}</div></section>
-      <section><h3>계절·풍경</h3><div class="cond-chips">${chip("win", 1, "겨울 운영", k.win, tally("win", true))}${["spring", "summer", "leaf", "sun"].map((b) => chip(b, 1, COND_BOOL[b][0], k[b], tally(b, true))).join("")}</div></section>
+      <section><h3>계절·풍경</h3><div class="cond-chips">${chip("win", 1, "겨울 운영", k.win, tally("win", true))}${chip("heater", 1, "팬히터·난로 대여", k.heater, tally("heater", true))}${["spring", "summer", "leaf", "sun"].map((b) => chip(b, 1, COND_BOOL[b][0], k[b], tally(b, true))).join("")}</div></section>
       <section><h3>시설·인프라</h3><div class="cond-chips">${chip("fire", 1, "장작 가능", k.fire, tally("fire", true))}${chip("park", 1, "텐트 옆 주차", k.park, tally("park", true))}${chip("dump", 1, "덤프스테이션", k.dump, tally("dump", true))}${chip("vr", 1, "360° VR 뷰", k.vr, tally("vr", true))}${chip("best", 1, "공인 우수야영장", k.best, tally("best", true))}</div></section>
       <section><h3>요금</h3><div class="cond-chips">${[["u3", "~3만원"], ["3to5", "3~5만원"], ["5to7", "5~7만원"], ["7to10", "7만원~10만원"], ["10to20", "10만원~20만원"], ["o20", "20만원+"]].map(([v, l]) => chip("fee", v, l, S.feeDraft === v, count("fee", (c) => feeOk(c, v)))).join("")}</div></section>
     </div>
@@ -5496,6 +5487,8 @@ function extraTiles(c, d, f) {
   if (rv.length) add("caravan", "차량 진입", { v: `${rv.join(" · ")} 입장 가능`, ...gc(rv.map((x) => `${x} 입장 가능`)) });
   if (c.gap) add("size", "사이트 간격", { v: `${c.gap} 여유`, ...gc([`사이트 간격: ${c.gap}`]) });
   if (c.rental?.length) add("cart", "장비 대여", { v: c.rental.join(" · "), ...gc([`대여: ${c.rental.join(" · ")}`]) });
+  const hInfo = heaterRentalInfo(c);
+  if (hInfo) add("flame", "난방 대여", { v: `${hInfo.label} 가능`, g: "c", src: { label: "고캠핑 장비대여 공식 등록 및 운영자 안내", url: c.gc_url ?? c.homepage } });
   if (c.safety_info) add("check", "안전 시설", { v: c.safety_info, ...gc([`안전시설: ${c.safety_info}`]) });
   if (c.floors_detail) add("layers", "바닥 구성", { v: c.floors_detail, ...gc([`바닥: ${c.floors_detail}`]) });
   if (c.gc_url) add("award", "정식 등록", { v: "지자체 인허가 등록 야영장 (보험 가입)", ...gc(["관광진흥법 정식 등록"]) });

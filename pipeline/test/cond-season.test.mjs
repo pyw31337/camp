@@ -9,7 +9,7 @@ test("#41 조건 시트에 계절·풍경·덤프 조건이 있고 URL로 오간
     const m = s.match(/const COND_BOOL = \{([\s\S]*?)\n\};/);
     assert.ok(m, "COND_BOOL");
     const B = new Function(`return {${m[1]}}`)();
-    assert.deepEqual(Object.keys(B), ["dump", "vr", "best", "sun", "leaf", "spring", "summer"]);
+    assert.deepEqual(Object.keys(B), ["dump", "vr", "best", "sun", "leaf", "spring", "summer", "heater"]);
     assert.equal(B.vr[1]({ vr: { url: "https://example.com" } }), "y");
     assert.equal(B.vr[1]({}), "n");
     assert.equal(B.best[1]({ best: [{ label: "우수야영장" }] }), "y");
@@ -19,6 +19,9 @@ test("#41 조건 시트에 계절·풍경·덤프 조건이 있고 URL로 오간
     assert.equal(B.leaf[1]({}), "?"); // 정보 없으면 빼지 않는다
     assert.equal(B.dump[1]({ amenities: ["덤프스테이션"] }), "y");
     assert.equal(B.dump[1]({ amenities: ["전기"] }), "?");
+    const heaterFn = new Function("heaterRentalInfo", `return {${m[1]}}`)(c => c.rental?.includes("난방기구"));
+    assert.equal(heaterFn.heater[1]({ rental: ["난방기구"] }), "y");
+    assert.equal(heaterFn.heater[1]({}), "n");
     assert.match(s, /<h3>계절·풍경<\/h3>/);
     assert.match(s, /for \(const b of Object\.keys\(COND_BOOL\)\) k\[b\] = q\.get\(b\) === "1";/);
   }
