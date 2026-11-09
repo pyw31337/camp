@@ -3,6 +3,30 @@
   "overrides": [
     {
       "file": "campgrounds.json",
+      "id": "101898",
+      "field": "fee",
+      "reason": "풀빌라 단일 요금(60만원) 대신 본체 오토캠핑 기준 요금(10만원, 평일 주말) 및 사이트·카라반·풀빌라 형태별 요금 정정",
+      "by": "Antigravity",
+      "at": "2026-11-09"
+    },
+    {
+      "file": "campgrounds.json",
+      "id": "101898",
+      "field": "pf.p",
+      "reason": "풀빌라 단일 요금(60만원) 대신 본체 오토캠핑 기준 요금(10만원, 평일 주말) 정정",
+      "by": "Antigravity",
+      "at": "2026-11-09"
+    },
+    {
+      "file": "101898.json",
+      "id": "101898",
+      "field": "profile.fields.PRICE",
+      "reason": "풀빌라 단일 요금(60만원) 대신 본체 오토캠핑 기준 요금(10만원, 평일 주말) 정정",
+      "by": "Antigravity",
+      "at": "2026-11-09"
+    },
+    {
+      "file": "campgrounds.json",
       "id": "102273",
       "field": "fee.tiers",
       "reason": "플랫폼 광고가·공원 조례 요금을 걷어낸 뒤 요금 범위가 바뀌어 형태 나누기를 다시 계산(QA R1·R2)",
