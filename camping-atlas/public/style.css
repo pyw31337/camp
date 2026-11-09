@@ -2983,11 +2983,9 @@ dialog.weather-modal::backdrop { background: rgba(16, 20, 20, .55); backdrop-fil
 .nearby-hub .nearby-places { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 6px; }
 .nearby-hub .nb-row { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 12px; border-radius: 12px; background: var(--soft); color: inherit; text-decoration: none; }
 .nearby-hub a.nb-row:hover { background: var(--line); }
-.nearby-hub .nb-ic { display: inline-grid; place-items: center; flex: 0 0 32px; width: 32px; height: 32px; border-radius: 9px; background: transparent; color: var(--ink-2); }
-.nearby-hub .nb-ic .ic { width: 16px; height: 16px; }
-.nearby-hub .nb-thumb { flex: 0 0 32px; width: 32px; height: 32px; border-radius: 9px; object-fit: cover; }
-/* 실제 모습 사진(2026-10-19 소유자: 주변시설 실제 사진): 64px 정사각, 누르면 원문 */
-.nearby-hub .nb-thumb { flex-basis: 64px; width: 64px; height: 64px; border-radius: 12px; }
+.nearby-hub .nb-ic { display: inline-grid; place-items: center; flex: 0 0 64px; width: 64px; height: 64px; border-radius: 12px; background: transparent; color: var(--ink-2); }
+.nearby-hub .nb-ic .ic { width: 20px; height: 20px; }
+.nearby-hub .nb-thumb { flex: 0 0 64px; width: 64px; height: 64px; border-radius: 12px; object-fit: cover; }
 .nearby-hub .nb-thumb.nb-photo { cursor: zoom-in; }
 .nearby-hub .nb-credit { display: block; margin-top: 1px; font-size: var(--fs-min); font-weight: 700; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .nearby-hub .nb-txt { display: grid; min-width: 0; flex: 1; }
