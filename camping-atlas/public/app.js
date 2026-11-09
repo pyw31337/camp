@@ -5066,7 +5066,7 @@ function listRow({ c, ce }, i = 0) {
     <a class="card-hit" href="${href}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="card-media">${carousel(c, { eager: i < 3 })}
       ${isClosed ? `<span class="sig closed">${ic("clock")}운영종료</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : ""}
-      <span class="bdgs">${cardPhotoBadges(c)}</span>
+      <span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3, 2, { rows: true, theme: S.theme })}</span>
     </div>
     <div class="card-body">
       <div class="card-group card-group-head">
