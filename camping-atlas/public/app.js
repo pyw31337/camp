@@ -247,31 +247,11 @@ const GROUND = { CRUSHED_STONE: "파쇄석", MIXED: "혼합", GRAVEL: "자갈", 
 const srcOf = (fc, extra) => ({ label: fc?.source?.label || "한국관광공사 고캠핑 등록 현황", url: fc?.source?.url || "https://www.gocamping.or.kr/", at: fc?.source?.checked_at, ...extra });
 
 // 오토캠핑 개념 정의: 차량을 텐트(사이트) 바로 옆에 주차하고, 전기 시설 등을 편리하게 이용할 수 있는 캠핑 형태
-const AUTOCAMP_INFO_HTML = `<strong>오토캠핑(Auto Camping)</strong><br>차량을 텐트(사이트) 바로 옆에 주차하고, 전기 시설 등을 편리하게 이용하며 야영할 수 있는 대표적인 캠핑 형태입니다. (관광진흥법상 자동차야영장)<br><small style="color:var(--text-3);display:block;margin-top:6px;">※ 일부 야영장의 경우 잔디 보호나 안전을 위해 짐을 내린 후 차량을 공용 주차장으로 옮겨야 하는 <b>이동주차</b>로 운영될 수 있습니다.</small>`;
+const AUTOCAMP_INFO_HTML = `<strong>오토캠핑</strong><br>텐트 옆에 주차하고 전기를 편리하게 이용하는 캠핑장입니다 (자동차야영장).<br><small style="color:var(--text-3);display:block;margin-top:4px;">※ 일부는 짐을 내린 후 공용주차장으로 이동해야 합니다(이동주차 뱃지).</small>`;
 
-// 오토캠핑 판별: 관광진흥법상 자동차야영장 또는 사이트 타입 AUTO
 const isAutoCamp = (c) => (c.types ?? []).includes("자동차야영장") || (c.st ?? []).some((t) => t[0] === "AUTO");
-
-// 오토캠핑 중 짐을 내린 후 공용/외부 주차장으로 이동해야 하는 업장 (이동주차)
-function isMoveParking(c) {
-  if (!isAutoCamp(c)) return false;
-  if (c.of?.pk && c.of.pk.v === "EXTERNAL") return true;
-  const mode = c.field_conditions?.parking?.mode;
-  if (mode === "CART_REQUIRED" || mode === "SHARED_NEARBY") return true;
-  const f = c._f;
-  if (f?.park && f.park.ok === false) return true;
-  return false;
-}
-
-// 오토캠핑 중 일부 사이트만 텐트 옆 주차 가능하고 나머지는 이동주차인 혼합형
-function isPartMoveParking(c) {
-  if (!isAutoCamp(c) || isMoveParking(c)) return false;
-  const p = c.field_conditions?.parking;
-  const z = p?.tent_side_zones;
-  if (p?.mode === "SITE_ADJACENT" && z && z.adjacent < z.total) return true;
-  const f = c._f;
-  return f?.park?.ok === "part";
-}
+const isMoveParking = (c) => isAutoCamp(c) && (c.of?.pk?.v === "EXTERNAL" || ["CART_REQUIRED", "SHARED_NEARBY"].includes(c.field_conditions?.parking?.mode) || c._f?.park?.ok === false);
+const isPartMoveParking = (c) => isAutoCamp(c) && !isMoveParking(c) && ((c.field_conditions?.parking?.mode === "SITE_ADJACENT" && c.field_conditions?.parking?.tent_side_zones?.adjacent < c.field_conditions?.parking?.tent_side_zones?.total) || c._f?.park?.ok === "part");
 
 function facts(c) {
   if (c._f) return c._f;
@@ -405,22 +385,10 @@ const isFlexTimeCamp = (c) => {
 };
 function heaterRentalInfo(c) {
   if (!c) return null;
-  const isFan = (c.rental ?? []).some((x) => /팬히터/i.test(x)) ||
-    (c.field_conditions?.rental_offers ?? []).some((x) => /팬히터/i.test(x.item)) ||
-    (c.notes ?? []).some((x) => /팬히터\s*(?:대여|렌탈|빌려|구비)/i.test(x)) ||
-    (c.of && Object.values(c.of).some((v) => v && typeof v.q === "string" && /팬히터\s*(?:대여|렌탈)/i.test(v.q)));
-  if (isFan) return { kind: "FAN_HEATER", label: "팬히터 대여", full: "겨울철 팬히터 현장 대여 가능" };
-
-  const isStove = (c.rental ?? []).some((x) => /(등유)?난로/i.test(x)) ||
-    (c.field_conditions?.rental_offers ?? []).some((x) => /(등유)?난로/i.test(x.item)) ||
-    (c.notes ?? []).some((x) => /(?:등유\s*)?난로\s*(?:대여|렌탈|빌려)/i.test(x));
-  if (isStove) return { kind: "STOVE", label: "난로 대여", full: "겨울철 난로 현장 대여 가능" };
-
-  const isHeater = (c.rental ?? []).some((x) => /난방기구|난방기|온풍기|히터/i.test(x)) ||
-    (c.field_conditions?.rental_offers ?? []).some((x) => /난방기구|난방기|온풍기|히터/i.test(x.item)) ||
-    (c.notes ?? []).some((x) => /(?:난방기구|난방기|온풍기|히터)\s*(?:대여|렌탈|빌려)/i.test(x));
-  if (isHeater) return { kind: "HEATER", label: "팬히터·난로", full: "겨울철 난방기기(팬히터·난로) 현장 대여 가능" };
-
+  const match = (re) => (c.rental ?? []).some((x) => re.test(x)) || (c.field_conditions?.rental_offers ?? []).some((x) => re.test(x.item)) || (c.notes ?? []).some((x) => re.test(x)) || (c.of && Object.values(c.of).some((v) => v?.q && re.test(v.q)));
+  if (match(/팬히터/i)) return { kind: "FAN_HEATER", label: "팬히터 대여", full: "겨울철 팬히터 현장 대여 가능" };
+  if (match(/(등유)?난로/i)) return { kind: "STOVE", label: "난로 대여", full: "겨울철 난로 현장 대여 가능" };
+  if (match(/난방기구|난방기|온풍기|히터/i)) return { kind: "HEATER", label: "팬히터·난로", full: "겨울철 난방기기(팬히터·난로) 현장 대여 가능" };
   return null;
 }
 // 사진 배지 두 줄(소유자 2026-10-22): 윗줄은 긍정 배지(초대가능·600W·장작·반려견 등, 섹션 배지가 맨 앞),
