@@ -51,10 +51,10 @@ async function points(rail) {
     const rb = r.getBoundingClientRect();
     const vis = (el) => { const b = el.getBoundingClientRect(); return b.width > 10 && b.left >= rb.left - 2 && b.left < rb.right - 40; };
     const items = [...r.children].filter(vis);
-    const it = items[0] || r.children[0];
+    const it = items.find((el) => el.querySelector(".card-hit, a[href]")) || items[0] || r.children[0];
     if (!it) return null;
     const ib = it.getBoundingClientRect();
-    const body = it.querySelector(".card-body, .tr-body, .rp-body, .mi-body") || null;
+    const body = it.querySelector(".card-body, .taste-setup-body, .tr-body, .rp-body, .mi-body") || null;
     const bb = body ? body.getBoundingClientRect() : null;
     const multi = it.querySelector(".car-multi .car-track");
     const thumb = multi || it.querySelector(".car, .tr-ph, img");

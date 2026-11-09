@@ -654,7 +654,7 @@ img { color: transparent; }
 .saved-memo-card .card-group-types { margin-bottom: 4px; }
 .saved-memo-card .card-group-reviews { margin-top: -2px; }
 /* 이색 캠핑장 전용 카드: 기본은 상세정보를 접고, 특별한 시설·체험을 별도 강조한다. */
-.unique-card-details { position: relative; z-index: 3; margin: 2px 0 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.unique-card-details { position: relative; z-index: 3; margin: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .unique-card-summary { display: flex; align-items: center; justify-content: space-between; min-height: 38px; padding: 10px 0; color: var(--ink-2); font-size: .82rem; font-weight: 800; cursor: pointer; list-style: none; user-select: none; box-sizing: border-box; }
 .unique-card-summary::-webkit-details-marker { display: none; }
 .unique-card-summary > span { display: inline-flex; align-items: center; gap: 6px; }
@@ -666,7 +666,7 @@ img { color: transparent; }
 .unique-card-panel .rows { margin-bottom: 0; }
 .unique-card-fallback { display: grid; gap: 6px; padding: 2px 0 4px; color: var(--ink-2); font-size: var(--fs-min); line-height: 1.45; }
 .unique-card-fallback p { margin: 0; }
-.unique-feature-block { position: relative; z-index: 2; display: grid; gap: 6px; padding: 8px 0 2px; }
+.unique-feature-block { position: relative; z-index: 2; display: grid; gap: 6px; padding: 10px 0; border-bottom: 1px solid var(--line); }
 .unique-feature-head { display: inline-flex; align-items: center; gap: 5px; color: var(--accent); font-size: .78rem; font-weight: 850; }
 .unique-feature-head .ic { width: 14px; height: 14px; }
 .unique-feature-chips { display: flex; flex-wrap: wrap; gap: 5px; }
@@ -700,7 +700,8 @@ img { color: transparent; }
 .rv .rv-amp { font-weight: 400; color: var(--ink-3); }
 .rows .r-near .rv { font-weight: 700; font-size: .84rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 35px; padding: 0; }
 .rv.none { color: var(--ink-3); opacity: .4; font-weight: 400; }
-.card-reviews { display: flex; align-items: center; flex-wrap: nowrap; gap: 4px; height: 26px; min-height: 26px; max-height: 26px; padding-top: 6px; border-top: 1px dashed var(--line); margin-top: 2px; overflow: hidden; box-sizing: border-box; }
+.card-group-reviews { margin-top: 0; }
+.card-reviews { display: flex; align-items: center; flex-wrap: nowrap; gap: 4px; height: auto; min-height: 32px; padding: 6px 0; border-top: 0; margin-top: 0; overflow: hidden; box-sizing: border-box; }
 .c-rv-pill { display: inline-flex; align-items: center; gap: 3px; max-width: 100%; padding: 2px 7px; border-radius: 999px; font-size: var(--fs-min); font-weight: 750; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .c-rv-pill .ic { width: 11px; height: 11px; flex-shrink: 0; }
 .c-rv-pill i { font-style: normal; font-size: var(--fs-min); opacity: .75; margin-left: 1px; }

@@ -383,6 +383,27 @@ const isFlexTimeCamp = (c) => {
   const co = c.ti?.o?.[0] || c.co;
   return Boolean(c.early || c.late || (ci && ci <= "12:00") || (co && co >= "12:00"));
 };
+function campSearchText(c) {
+  if (c._st) return c._st;
+  const parts = [
+    c.name || c.n || "",
+    c.line || "",
+    c.intro || "",
+    ...(c.amenities || []),
+    ...(c.themes || []),
+    ...(c.heat || []),
+    ...(c.uq || []),
+    c.pets || "",
+    JSON.stringify(c.pf || ""),
+    JSON.stringify(c.of || ""),
+    JSON.stringify(c.gcd || ""),
+    JSON.stringify(c.field_conditions || "")
+  ];
+  return (c._st = parts.join(" "));
+}
+// 동계 휴장 여부 (소유자 2026-11-09): c.win === 0 또는 불가 목록에 NO_WINTER가 있는 경우
+const isWinterClosedCamp = (c) => Boolean(c.win === 0 || noKeys(c).includes("NO_WINTER"));
+
 function heaterRentalInfo(c) {
   if (!c) return null;
   const match = (re) => (c.rental ?? []).some((x) => re.test(x)) || (c.field_conditions?.rental_offers ?? []).some((x) => re.test(x.item)) || (c.notes ?? []).some((x) => re.test(x)) || (c.of && Object.values(c.of).some((v) => v?.q && re.test(v.q)));
@@ -390,6 +411,15 @@ function heaterRentalInfo(c) {
   if (match(/(등유)?난로/i)) return { kind: "STOVE", label: "난로 대여", full: "겨울철 난로 현장 대여 가능" };
   if (match(/난방기구|난방기|온풍기|히터/i)) return { kind: "HEATER", label: "팬히터·난로", full: "겨울철 난방기기(팬히터·난로) 현장 대여 가능" };
   return null;
+}
+// 카드 썸네일 전용 배지 (소유자 2026-11-09): 긍정 요소들은 '특색 시설·요소'로 모두 이동하고, 썸네일에는 기상 예보([data-wx])와 빨간색 불가·제한 뱃지만 남긴다.
+function cardPhotoBadges(c, maxNo = 2) {
+  const wx = wxBadge(c);
+  const pet = petAllowed(c);
+  const no = noKeys(c).filter((k) => NO_CARD.includes(k) && !(k === "BIG_DOG" && pet)).slice(0, maxNo).map(noBadge);
+  const hasWx = Boolean(wx);
+  const hasNo = no.length > 0;
+  return `${wx || ""}${hasWx && hasNo ? '<i class="bdg-br" aria-hidden="true"></i>' : ""}${no.join("")}`;
 }
 // 사진 배지 두 줄(소유자 2026-10-22): 윗줄은 긍정 배지(초대가능·600W·장작·반려견 등, 섹션 배지가 맨 앞),
 // 아랫줄은 부정 배지(반려견 불가·장작 불가·화기 불가 등). 줄바꿈은 .bdg-br(폭 100%)로.
@@ -1331,18 +1361,130 @@ function uniqueReviewSummary(text, category) {
   }
   return s.length > 42 ? `${s.slice(0, 41).trim()}…` : s;
 }
+
+// 특색 시설·요소 뱃지 수집 (소유자 2026-11-09): 썸네일에 있던 긍정 요소와 고유 특색을 모두 모아 디테일하게 표현한다.
+function cardFeatures(c) {
+  const list = [];
+  const txt = campSearchText(c);
+  const f = facts(c);
+
+  // 1. 전기 W (고용량 디테일 표현)
+  const w = wattsOf(c) || (pos(f.power) && f.power.w ? f.power.w : 0);
+  if (w >= 1400 || /1[4-9][0-9]{2}\s*w|2[0-9]{3}\s*w/i.test(txt)) {
+    list.push({ icon: "bolt", text: "1400W 초고용량", volt: true });
+  } else if (w >= 1000 || /1[0-9]{3}\s*w|1kw|1\.1kw/i.test(txt)) {
+    list.push({ icon: "bolt", text: "1000W 고용량", volt: true });
+  } else if (w >= 600 || (pos(f.power) && f.power.ok && f.power.g !== "r") || /600\s*w/i.test(txt)) {
+    list.push({ icon: "bolt", text: "600W 전기", volt: true });
+  } else if (w > 0) {
+    list.push({ icon: "bolt", text: `${w}W 전기`, volt: true });
+  } else if (pos(f.power) && f.power.ok && f.power.short) {
+    list.push({ icon: "bolt", text: f.power.short, volt: true });
+  }
+
+  // 2. 장작 / 불멍
+  if (pos(f.fire) && f.fire.kind === "FIREWOOD_OK") {
+    list.push({ icon: "flame", text: "장작 가능" });
+  }
+
+  // 3. 입퇴실 여유
+  if (isFlexTimeCamp(c)) {
+    list.push({ icon: "clock", text: "입퇴실 여유" });
+  }
+
+  // 4. 지인초대 가능
+  if (inviteOk(c)) {
+    list.push({ icon: "users", text: "지인초대 가능" });
+  }
+
+  // 5. 팬히터 / 난로 대여
+  const hInfo = heaterRentalInfo(c);
+  if (hInfo) {
+    list.push({ icon: "flame", text: hInfo.label || "팬히터 대여" });
+  } else if (/팬히터/i.test(txt)) {
+    list.push({ icon: "flame", text: "팬히터 대여" });
+  }
+
+  // 6. 타프존
+  const sh = c.field_conditions?.shelter_setup;
+  if ((sh && (sh.max_tarps > 0 || sh.canopy_allowed)) || /타프존/i.test(txt)) {
+    list.push({ icon: "tent", text: "타프존" });
+  }
+
+  // 7. 냉장고
+  if (/개별\s*냉장고|전용\s*냉장고/i.test(txt) || (c.glamp && /냉장고/.test(JSON.stringify(c.glamp)))) {
+    list.push({ icon: "check", text: "개별 냉장고" });
+  } else if (/공용\s*냉장고|공동\s*냉장고/i.test(txt) || (c.amenities && c.amenities.some((a) => /공용.*냉장고/.test(a)))) {
+    list.push({ icon: "amenity", text: "공용 냉장고" });
+  }
+
+  // 8. 수영장 / 온수풀
+  if ((c.uq && c.uq.includes("warmpool")) || /온수\s*풀|온수\s*수영장|미온수|사계절\s*온수|사계절\s*수영장/i.test(txt)) {
+    list.push({ icon: "hotwater", text: "사계절 온수풀" });
+  } else if ((c.uq && c.uq.includes("pool")) || c.du === "water" || (c.amenities ?? []).some((a) => /물놀이장|물놀이터|수영장|풀장|워터/.test(a))) {
+    list.push({ icon: "swim", text: "수영장" });
+  }
+  if ((c.uq && c.uq.includes("kidscafe")) || /키즈\s*풀|유아\s*풀/i.test(txt)) {
+    list.push({ icon: "playground", text: "키즈풀" });
+  }
+
+  // 9. 자연 환경 & 위치
+  if (c.pf?.t?.includes("VALLEY") || (c.uq && c.uq.includes("valley")) || /계곡/.test(txt)) {
+    list.push({ icon: "th:VALLEY", text: "계곡 주변" });
+  }
+  if (c.pf?.t?.includes("BEACH") || c.th?.includes("sea") || /바다|해변|해수욕장/.test(txt)) {
+    list.push({ icon: "th:BEACH", text: "바다 주변" });
+  }
+  if (isTidalCamp(c)) {
+    list.push({ icon: "water", text: "갯벌·해루질" });
+  }
+  if (c.pf?.t?.includes("LAKE") || c.pf?.t?.includes("RIVER")) {
+    list.push({ icon: "th:LAKE", text: "강·호수 주변" });
+  }
+  if (c.rf) {
+    list.push({ icon: "th:FOREST", text: /^(국립|공립|사립)$/.test(c.rf) ? `${c.rf} 휴양림` : "휴양림" });
+  }
+
+  // 10. 이색 체험 (c.uq)
+  if ((c.uq && c.uq.includes("horse")) || /승마|말타기/.test(txt)) {
+    list.push({ icon: "spark", text: "승마 체험", review: (c.uq_reviews?.horse ?? [])[0] });
+  }
+  if (c.uq && c.uq.includes("hotspring")) list.push({ icon: "onsen", text: "노천탕" });
+  if (c.uq && c.uq.includes("spa")) list.push({ icon: "onsen", text: "스파·자쿠지" });
+  if (c.uq && c.uq.includes("animal")) list.push({ icon: "paw", text: "동물 체험" });
+  if (c.uq && c.uq.includes("indoorplay")) list.push({ icon: "playground", text: "실내 놀이" });
+  if (c.uq && c.uq.includes("treehouse")) list.push({ icon: "forest", text: "트리하우스" });
+  if (c.uq && c.uq.includes("stay")) list.push({ icon: "tent", text: "이색 숙소" });
+  if (c.uq && c.uq.includes("leisure")) list.push({ icon: "leports", text: "레포츠" });
+  if (c.uq && c.uq.includes("farm")) list.push({ icon: "experience", text: "체험 농장" });
+
+  // 11. 편의 / 주차
+  const isMove = isMoveParking(c), isPart = isPartMoveParking(c);
+  if (isMove) {
+    list.push({ icon: "car", text: "이동주차" });
+  } else if (!isPart && pos(f.park) && f.park.ok === true) {
+    list.push({ icon: "car", text: "텐트 옆 주차" });
+  }
+  if (c.vr) list.push({ icon: "vr", text: "360° VR" });
+  if (isDumpCamp(c)) list.push({ icon: "dump", text: "덤프스테이션" });
+  if (c.best?.length) list.push({ icon: "award", text: c.best[0].label || "우수야영장" });
+
+  const seen = new Set();
+  return list.filter((item) => {
+    if (seen.has(item.text)) return false;
+    seen.add(item.text);
+    return true;
+  });
+}
+
 function uniqueFeatureHtml(c) {
-  const labels = (c.uq ?? []).map((k) => {
-    const row = UNIQUE_SUBS.find(([id]) => id === k);
-    return row ? [k, row[1]] : null;
-  }).filter(Boolean);
-  if (!labels.length) return "";
+  const feats = cardFeatures(c);
+  if (!feats.length) return "";
   return `<div class="unique-feature-block">
     <div class="unique-feature-head">${ic("spark")}<span>특색 시설·요소</span></div>
-    <div class="unique-feature-chips">${labels.map(([k, label]) => {
-      const review = k === "horse" ? (c.uq_reviews?.[k] ?? [])[0] : null;
-      const chip = `<span class="unique-feature-chip">${ic(UNIQUE_FEATURE_ICONS[k] || "spark")}${esc(label)}</span>`;
-      return `<span class="unique-feature-item">${chip}${review?.url ? `<a class="unique-feature-review" href="${esc(review.url)}" target="_blank" rel="noopener" title="승마가 언급된 후기 원문 열기">${ic("file-text")}${esc(uniqueReviewSummary(review.text, k))}</a>` : ""}</span>`;
+    <div class="unique-feature-chips">${feats.map((feat) => {
+      const chip = `<span class="unique-feature-chip${feat.volt ? " bdg-volt" : ""}"${feat.volt ? ' data-volt="true"' : ""}>${ic(feat.icon || "spark")}${esc(feat.text)}</span>`;
+      return `<span class="unique-feature-item">${chip}${feat.review?.url ? `<a class="unique-feature-review" href="${esc(feat.review.url)}" target="_blank" rel="noopener" title="후기 원문 열기">${ic("file-text")}${esc(uniqueReviewSummary(feat.review.text, "horse"))}</a>` : ""}</span>`;
     }).join("")}</div>
   </div>`;
 }
@@ -1511,17 +1653,17 @@ function publicParkCard(c) {
   </article>`;
 }
 function card(c, i = 0, opts) {
+  const isWinterClosed = isWinterClosedCamp(c);
   const isWp = Boolean((opts && !Array.isArray(opts) && opts.isWaterPlay) || S.theme === "WATER_PLAY");
+  const isClosed = isWp || isWinterClosed;
   const theme = (opts && !Array.isArray(opts) && opts.theme) || S.theme || null;
   const savedMemo = Boolean(opts && !Array.isArray(opts) && opts.savedMemo);
-  const collapseSpec = Boolean(opts && !Array.isArray(opts) && opts.collapseSpec);
-  const uniqueTheme = theme === "UNIQUE" && !savedMemo;
   const { tag } = nameOf(c), o = openingOf(c);
-  return `<article class="card${isWp ? " is-closed" : ""}${savedMemo ? " saved-memo-card" : ""}" data-id="${esc(c.id)}">
+  return `<article class="card${isClosed ? " is-closed" : ""}${savedMemo ? " saved-memo-card" : ""}" data-id="${esc(c.id)}">
     <a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="card-media">${carousel(c, { eager: i < 4 })}
-      ${isWp ? `<span class="sig closed">${ic("clock")}운영종료</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : ""}
-      <span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3, 2, { rows: true, theme })}</span>
+      ${isClosed ? `<span class="sig closed">${ic("clock")}운영종료</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : ""}
+      <span class="bdgs">${cardPhotoBadges(c)}</span>
     </div>
     <div class="card-body">
       <div class="card-group card-group-head">
@@ -1542,7 +1684,7 @@ function card(c, i = 0, opts) {
           ${typeRow(c).html}
         </div>
         ${uniqueDetailsHtml(c)}
-        ${c.uq?.length ? uniqueFeatureHtml(c) : ""}
+        ${uniqueFeatureHtml(c)}
         ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `
           <div class="card-group card-group-reviews">
             <div class="card-reviews">${cardReviewPills(c.rv, c)}</div>
@@ -4246,25 +4388,6 @@ const saveMyTaste = (t) => {
   } catch {}
 };
 
-function campSearchText(c) {
-  if (c._st) return c._st;
-  const parts = [
-    c.name || c.n || "",
-    c.line || "",
-    c.intro || "",
-    ...(c.amenities || []),
-    ...(c.themes || []),
-    ...(c.heat || []),
-    ...(c.uq || []),
-    c.pets || "",
-    JSON.stringify(c.pf || ""),
-    JSON.stringify(c.of || ""),
-    JSON.stringify(c.gcd || ""),
-    JSON.stringify(c.field_conditions || "")
-  ];
-  return (c._st = parts.join(" "));
-}
-
 function matchMyTaste(c, taste = getMyTaste()) {
   const txt = campSearchText(c);
   // 1. 캠핑 타입
@@ -4331,7 +4454,11 @@ function getMyTastePicks() {
   const off = cands.length ? (seed * 7) % cands.length : 0;
   const picked = [];
   for (let i = 0; i < 7 && i < cands.length; i++) picked.push(cands[(off + i) % cands.length]);
-  return picked.sort((a, b) => rich(b) - rich(a));
+  return picked.sort((a, b) => {
+    const wa = isWinterClosedCamp(a) ? 1 : 0, wb = isWinterClosedCamp(b) ? 1 : 0;
+    if (wa !== wb) return wa - wb;
+    return rich(b) - rich(a);
+  });
 }
 
 function myTasteSetupCard(taste) {
@@ -4931,12 +5058,14 @@ function condLine(c, ce) {
   return `<p class="lrow-cond">${Object.entries(st).map(([k, v]) => `<span class="cs cs-${v === "?" ? "unk" : v}">${v === "y" ? ic("check") : ""}${esc(txt[k]())}${v === "ref" ? " · 법정 기준 600W" : v === "?" ? " · 확인 필요" : ""}</span>`).join("")}</p>`;
 }
 function listRow({ c, ce }, i = 0) {
+  const isWinterClosed = isWinterClosedCamp(c);
+  const isClosed = isWinterClosed;
   const { tag } = nameOf(c), o = openingOf(c), main = bookingChannels(c)[0];
   const href = `${APP_BASE}place/${encodeURIComponent(c.id)}`;
-  return `<article class="card card-horizontal lrow" data-id="${esc(c.id)}">
+  return `<article class="card card-horizontal lrow${isClosed ? " is-closed" : ""}" data-id="${esc(c.id)}">
     <a class="card-hit" href="${href}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
     <div class="card-media">${carousel(c, { eager: i < 3 })}
-      ${o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : ""}
+      ${isClosed ? `<span class="sig closed">${ic("clock")}운영종료</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : ""}
       <span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3, 2, { rows: true, theme: S.theme })}</span>
     </div>
     <div class="card-body">
@@ -5292,6 +5421,8 @@ function compareUniqueQuality(a, b) {
 const QUALITY_SEED = globalThis.__LETS_CAMP_QUALITY_SEED ?? Math.random();
 const qualityPoor = (c) => Number(c.iq ?? rich(c)) < 20 || (!c.pf?.s && !c.fee?.text && !(c.st?.length));
 function qualityBucket(c) {
+  // 동계 휴장/운영종료 업장은 메인 화면이든 테마 페이지든 가장 후순위(버킷 3)로 배치 (소유자 2026-11-09)
+  if (isWinterClosedCamp(c)) return 3;
   if (uniqueIsForest(c) || qualityPoor(c)) return 2;
   const featureCount = (c.uq ?? []).length;
   const explained = !featureCount || uniqueEvidenceCount(c) >= featureCount;
@@ -5303,7 +5434,12 @@ function qualityShuffleKey(c) {
   return h >>> 0;
 }
 function qualityOrder(items, { distance = false } = {}) {
-  if (distance) return items;
+  if (distance) {
+    return items.slice().sort((a, b) => {
+      const wa = isWinterClosedCamp(a) ? 1 : 0, wb = isWinterClosedCamp(b) ? 1 : 0;
+      return wa - wb;
+    });
+  }
   return items.map((c, i) => [c, i, qualityBucket(c)]).sort((a, b) => {
     if (a[2] !== b[2]) return a[2] - b[2];
     if (a[2] === 0) return qualityShuffleKey(a[0]) - qualityShuffleKey(b[0]);
