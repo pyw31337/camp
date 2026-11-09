@@ -1357,9 +1357,9 @@ function uniqueDetailsHtml(c) {
   const rows = fallback.length && !siteSizeShort(c) && !f.power?.v && !f.fire?.v && !f.park?.v && !nearLine(c, " · ")
     ? `<div class="unique-card-fallback">${fallback.map((x) => `<p>${esc(String(x))}</p>`).join("")}</div>`
     : rowsHtml(c);
-  return `<details class="unique-card-details card-spec-details">
-    <summary class="unique-card-summary card-spec-summary"><span>${ic("list")}상세정보</span>${ic("chevron-up", "unique-card-chevron")}</summary>
-    <div class="unique-card-panel card-spec-panel" id="${esc(id)}">${rows}</div>
+  return `<details class="unique-card-details">
+    <summary class="unique-card-summary"><span>${ic("list")}상세정보</span>${ic("chevron-up", "unique-card-chevron")}</summary>
+    <div class="unique-card-panel" id="${esc(id)}">${rows}</div>
   </details>`;
 }
 // 찜 목록은 여러 곳을 훑어보기 위한 화면이므로, 이름·주소 아래의 모든 정보(유형·스펙·후기 뱃지)를 '상세정보'로 기본 접는다.

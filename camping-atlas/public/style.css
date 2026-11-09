@@ -534,11 +534,12 @@ img { color: transparent; }
 .rail-progress { display: none !important; }
 [data-v="b"] .sec-head { border-bottom: 2px solid var(--ink); padding-bottom: 8px; }
 
-/* ── 홈 메인 주요 섹션 규격화 (곧 오픈, 긍정 후기, 테마로 고르기) ────────── */
+/* ── 홈 메인 주요 섹션 규격화 (곧 오픈, 긍정 후기, 내 취향, 테마로 고르기) ────────── */
 .today,
 .opens,
 .trending,
 .review-picks,
+.my-taste-section,
 .themes-catalog {
   width: 100%;
   max-width: var(--content);
@@ -711,12 +712,12 @@ img { color: transparent; }
 .card-spec-details { position: relative; z-index: 3; margin: 4px 0 2px; }
 .card-spec-summary {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 7px 10px; background: var(--soft); border: 1px solid var(--line);
-  border-radius: var(--r-s); cursor: pointer; user-select: none;
+  padding: 10px 0; background: transparent; border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  border-radius: 0; cursor: pointer; user-select: none;
   font-size: .84rem; font-weight: 700; color: var(--ink-2); list-style: none;
-  transition: background .15s ease, border-color .15s ease;
+  transition: color .15s ease;
 }
-.card-spec-summary:hover { background: var(--soft-2); }
+.card-spec-summary:hover { background: transparent; color: var(--ink); }
 .card-spec-summary::-webkit-details-marker { display: none; }
 .spec-summary-arrow { display: inline-flex; align-items: center; justify-content: center; color: var(--ink-3); transition: transform .2s ease; }
 .spec-summary-arrow .ic { width: 14px; height: 14px; }
@@ -4487,9 +4488,13 @@ img.img-gone { visibility: hidden; }
 .near-sheet .near-here .ic, .near-sheet .near-opt .ic { width: 18px; height: 18px; flex: none; }
 
 /* ── 내 취향 맞춤 섹션 및 설정 카드 (소유자 2026-11-09) ─────────────────── */
-.my-taste-section { margin-bottom: var(--sec-gap, 48px); }
-.my-taste-rail { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 2px 14px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-.my-taste-rail::-webkit-scrollbar { display: none; }
+.my-taste-rail {
+  gap: clamp(12px, 1.4vw, 20px);
+  padding: 10px 0 20px;
+  margin: -8px 0 -12px;
+  scroll-snap-type: x proximity;
+  scroll-padding: 0;
+}
 .my-taste-rail > .card { flex: 0 0 clamp(270px, 22vw, 330px); scroll-snap-align: start; }
 @media (max-width: 759px) {
   .my-taste-rail > .card { flex-basis: 80vw; }
