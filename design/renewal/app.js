@@ -4208,16 +4208,113 @@ function initHeroDynamicEngine(v) {
 }
 
 // ── 내 취향 맞춤 섹션 및 장비 설정 (소유자 2026-11-09) ──────────────────────────────────
-const DEFAULT_MY_TASTE = { types: ["AUTO"], minSize: 0, fire: false, power: false, pet: false };
-const getMyTaste = () => { try { const r = localStorage.getItem("camp_my_taste"); if (r) return { ...DEFAULT_MY_TASTE, ...JSON.parse(r) }; } catch {} return { ...DEFAULT_MY_TASTE }; };
-const saveMyTaste = (t) => { try { localStorage.setItem("camp_my_taste", JSON.stringify(t)); } catch {} };
+const DEFAULT_MY_TASTE = {
+  types: ["AUTO"],
+  minSize: 0,
+  minWatts: 0,
+  fire: false,
+  tarp: false,
+  privateFridge: false,
+  sharedFridge: false,
+  heaterRental: false,
+  rental: false,
+  pet: false,
+  warmPool: false,
+  kidsPool: false,
+  pool: false,
+  valley: false,
+  river: false,
+  beach: false,
+  horse: false,
+};
+
+const getMyTaste = () => {
+  try {
+    const r = localStorage.getItem("camp_my_taste");
+    if (r) {
+      const parsed = JSON.parse(r);
+      if (parsed.power && !parsed.minWatts) parsed.minWatts = 600;
+      return { ...DEFAULT_MY_TASTE, ...parsed };
+    }
+  } catch {}
+  return { ...DEFAULT_MY_TASTE };
+};
+
+const saveMyTaste = (t) => {
+  try {
+    localStorage.setItem("camp_my_taste", JSON.stringify(t));
+  } catch {}
+};
+
+function campSearchText(c) {
+  if (c._st) return c._st;
+  const parts = [
+    c.name || c.n || "",
+    c.line || "",
+    c.intro || "",
+    ...(c.amenities || []),
+    ...(c.themes || []),
+    ...(c.heat || []),
+    ...(c.uq || []),
+    c.pets || "",
+    JSON.stringify(c.pf || ""),
+    JSON.stringify(c.of || ""),
+    JSON.stringify(c.gcd || ""),
+    JSON.stringify(c.field_conditions || "")
+  ];
+  return (c._st = parts.join(" "));
+}
 
 function matchMyTaste(c, taste = getMyTaste()) {
+  const txt = campSearchText(c);
+  // 1. 캠핑 타입
   if (taste.types?.length && !taste.types.some((k) => hasType(c, k) || (k === "AUTO" && c.auto) || (k === "GLAMPING" && (c.glamp || c.types?.includes("글램핑"))) || (k === "CARAVAN" && (c.caravan || c.types?.includes("카라반"))))) return false;
+  // 2. 사이트 규격
   if (taste.minSize > 0 && maxSide(c) < taste.minSize) return false;
-  if (taste.fire) { const v = facts(c).fire?.v ?? ""; if (!(c.fp === 1 || /가능|개별|화로/i.test(v)) || /불가|금지/i.test(v)) return false; }
-  if (taste.power) { const v = facts(c).power?.v ?? ""; if (!c.pwr && !/\d\s*k?W|가능/.test(v)) return false; }
+  // 3. 전기 허용 용량
+  if (taste.minWatts > 0) {
+    const opW = c.of?.w ? Number(c.of.w.v) : null;
+    const fcW = c.field_conditions?.power?.limit_w || null;
+    const w = opW || fcW || (c.pwr || c.field_conditions?.power?.available ? 600 : 0);
+    if (taste.minWatts === 600 && !(w >= 600 || /600\s*w|전기/i.test(txt))) return false;
+    if (taste.minWatts === 1000 && !(w >= 1000 || /1[0-9]{3}\s*w|1kw|1\.0kw|1\.1kw/i.test(txt))) return false;
+    if (taste.minWatts === 1400 && !(w >= 1400 || /1[4-9][0-9]{2}\s*w|2[0-9]{3}\s*w|3[0-9]{3}\s*w|1\.[4-9]kw|2kw/i.test(txt))) return false;
+  }
+  // 4. 장작·불멍
+  if (taste.fire) {
+    const v = facts(c).fire?.v ?? "";
+    if (!(c.fp === 1 || /가능|개별|화로/i.test(v)) || /불가|금지/i.test(v)) return false;
+  }
+  // 5. 타프존 / 타프 설치
+  if (taste.tarp) {
+    const sh = c.field_conditions?.shelter_setup;
+    if (!((sh && (sh.max_tarps > 0 || sh.canopy_allowed)) || /타프|타프존|타프설치|타프대여/i.test(txt))) return false;
+  }
+  // 6. 개별 냉장고
+  if (taste.privateFridge && !(/개별\s*냉장고|전용\s*냉장고|룸내\s*냉장고|객실\s*냉장고/i.test(txt) || (c.glamp && /냉장고/.test(JSON.stringify(c.glamp))))) return false;
+  // 7. 공용 냉장고
+  if (taste.sharedFridge && !(/공용\s*냉장고|공동\s*냉장고|공용냉장고/i.test(txt) || (c.amenities && c.amenities.some((a) => /공용.*냉장고|공동.*냉장고/.test(a))))) return false;
+  // 8. 팬히터 / 난로 대여
+  if (taste.heaterRental && !(/팬히터|난로\s*대여|난로\s*렌탈|히터\s*대여|히터\s*렌탈|등유\s*난로|난방기구\s*대여/i.test(txt) || (c.heat && c.heat.some((h) => /대여|렌탈/.test(h))))) return false;
+  // 9. 캠핑장비 대여
+  if (taste.rental && !(/장비\s*대여|장비\s*렌탈|텐트\s*대여|텐트\s*렌탈|캠핑용품\s*대여/i.test(txt) || (c.amenities && c.amenities.some((a) => /대여|렌탈/.test(a))))) return false;
+  // 10. 반려견 동반
   if (taste.pet && !(c.pets?.includes("가능") || facts(c).pet?.ok)) return false;
+  // 11. 사계절 온수풀
+  if (taste.warmPool && !((c.uq && c.uq.includes("warmpool")) || /온수\s*풀|온수\s*수영장|미온수|사계절\s*온수|사계절\s*수영장|실내\s*수영장/i.test(txt))) return false;
+  // 12. 키즈풀 / 유아풀
+  if (taste.kidsPool && !((c.uq && (c.uq.includes("kidscafe") || c.uq.includes("indoorplay"))) || /키즈\s*풀|유아\s*풀|어린이\s*수영장|유아\s*물놀이|키즈\s*물놀이/i.test(txt))) return false;
+  // 13. 야외 수영장 / 물놀이
+  if (taste.pool && !(c.du === "water" || (c.amenities ?? []).some((a) => /물놀이장|물놀이터|수영장|풀장|워터/.test(a)) || /수영장|물놀이장|야외풀|인피니티풀/i.test(txt))) return false;
+  // 14. 계곡
+  if (taste.valley && !(c.pf?.t?.includes("VALLEY") || (c.uq && c.uq.includes("valley")) || /계곡/i.test(txt))) return false;
+  // 15. 강 / 호수 / 천
+  if (taste.river && !(c.pf?.t?.includes("LAKE") || c.pf?.t?.includes("RIVER") || /강변|강가|호수|저수지|하천|천변/i.test(txt))) return false;
+  // 16. 바다 / 해변
+  if (taste.beach && !(c.pf?.t?.includes("BEACH") || c.th?.includes("sea") || /바다|해변|해수욕장|백사장/i.test(txt))) return false;
+  // 17. 승마 체험
+  if (taste.horse && !((c.uq && c.uq.includes("horse")) || /승마|말타기|포니체험/i.test(txt))) return false;
+
   return true;
 }
 
@@ -4242,16 +4339,31 @@ function myTasteSetupCard(taste) {
   const b = [];
   if (taste.types?.length) b.push(`<span class="taste-badge">${ic("tent")}${esc(lbl)}</span>`);
   if (taste.minSize > 0) b.push(`<span class="taste-badge">${ic("size")}${taste.minSize}m+</span>`);
+  if (taste.minWatts >= 1400) b.push(`<span class="taste-badge">${ic("bolt")}1400W+ 초고용량</span>`);
+  else if (taste.minWatts >= 1000) b.push(`<span class="taste-badge">${ic("bolt")}1000W+ 고용량</span>`);
+  else if (taste.minWatts >= 600) b.push(`<span class="taste-badge">${ic("bolt")}600W+ 전기</span>`);
   if (taste.fire) b.push(`<span class="taste-badge">${ic("flame")}불멍 필수</span>`);
-  if (taste.power) b.push(`<span class="taste-badge">${ic("bolt")}600W+</span>`);
+  if (taste.tarp) b.push(`<span class="taste-badge">${ic("tent")}타프존</span>`);
+  if (taste.privateFridge) b.push(`<span class="taste-badge">${ic("check")}개별냉장고</span>`);
+  if (taste.sharedFridge) b.push(`<span class="taste-badge">${ic("amenity")}공용냉장고</span>`);
+  if (taste.heaterRental) b.push(`<span class="taste-badge">${ic("flame")}팬히터 대여</span>`);
+  if (taste.rental) b.push(`<span class="taste-badge">${ic("cart")}장비 대여</span>`);
   if (taste.pet) b.push(`<span class="taste-badge">${ic("paw")}반려견 동반</span>`);
+  if (taste.warmPool) b.push(`<span class="taste-badge">${ic("hotwater")}온수풀</span>`);
+  if (taste.kidsPool) b.push(`<span class="taste-badge">${ic("playground")}키즈풀</span>`);
+  if (taste.pool) b.push(`<span class="taste-badge">${ic("swim")}수영장</span>`);
+  if (taste.valley) b.push(`<span class="taste-badge">${ic("th:VALLEY")}계곡</span>`);
+  if (taste.river) b.push(`<span class="taste-badge">${ic("th:LAKE")}강·호수</span>`);
+  if (taste.beach) b.push(`<span class="taste-badge">${ic("th:BEACH")}바다</span>`);
+  if (taste.horse) b.push(`<span class="taste-badge">${ic("spark")}승마체험</span>`);
+
   return `<article class="card my-taste-setup-card" data-open-my-taste tabindex="0" role="button" aria-label="내 취향 설정 열기">
     <div class="taste-setup-media"><div class="taste-setup-icon-wrap">${ic("tent")}</div><span class="taste-setup-badge">내 취향 맞춤</span></div>
     <div class="taste-setup-body">
       <h3 class="taste-setup-title">내 캠핑 취향 · 장비</h3>
       <p class="taste-setup-desc">내 텐트와 스타일에 맞는 곳을 매일 새로 골라드려요.</p>
-      <div class="taste-setup-chips">${b.join("")}</div>
-      <button type="button" class="taste-setup-btn" data-open-my-taste>${ic("spark")}취향 설정하기 ${ic("right")}</button>
+      <div class="taste-setup-chips">${b.slice(0, 6).join("")}${b.length > 6 ? `<span class="taste-badge">+${b.length - 6}</span>` : ""}</div>
+      <button type="button" class="taste-setup-btn" data-open-my-taste>${ic("spark")}취향 설정하기 (${b.length}개) ${ic("right")}</button>
     </div>
   </article>`;
 }
@@ -4289,6 +4401,7 @@ function openMyTasteDialog() {
       const [type, val] = act.split(":");
       if (type === "type") { const cur = S._tasteDraft.types ?? []; S._tasteDraft.types = cur.includes(val) ? cur.filter((x) => x !== val) : [...cur, val]; }
       else if (type === "size") S._tasteDraft.minSize = Number(val);
+      else if (type === "watts") S._tasteDraft.minWatts = Number(val);
       else if (type === "toggle") S._tasteDraft[val] = !S._tasteDraft[val];
       paintMyTasteDialog();
     });
@@ -4303,15 +4416,38 @@ function paintMyTasteDialog() {
   const t = S._tasteDraft;
   const TYPES = [["AUTO", "오토캠핑", "car"], ["GLAMPING", "글램핑", "glamping"], ["CARAVAN", "카라반", "caravan"], ["HOUSE", "펜션·방갈로", "home"], ["CAR_CAMP", "차박", "car"], ["DECK", "데크", "layers"], ["SOLO", "백패킹", "tent"]];
   const SIZES = [[0, "상관없음"], [6, "6m+ (중형)"], [8, "8m+ (대형)"], [10, "10m+ (초대형)"]];
+  const WATTS = [[0, "상관없음"], [600, "600W+ (기본 전열)"], [1000, "1,000W+ (고용량)"], [1400, "1,400W+ (초고용량)"]];
+
   dlg.innerHTML = `<div class="sheet-in my-taste-in">
     <div class="sheet-head"><h2 id="my-taste-title">내 취향 & 장비 설정</h2><button type="button" class="icon-btn sheet-close" data-taste-act="close" aria-label="닫기">${ic("close")}</button></div>
     <div class="sheet-body my-taste-body">
       <section class="taste-group"><h3>캠핑 타입 (복수 선택)</h3><div class="cond-chips">${TYPES.map(([k, l, i]) => `<button type="button" class="chip" data-taste-act="type:${k}" aria-pressed="${(t.types ?? []).includes(k)}">${ic(i)}${esc(l)}</button>`).join("")}</div></section>
+      
       <section class="taste-group"><h3>사이트 규격 (내 텐트 크기)</h3><div class="cond-chips">${SIZES.map(([v, l]) => `<button type="button" class="chip" data-taste-act="size:${v}" aria-pressed="${t.minSize === v}">${esc(l)}</button>`).join("")}</div></section>
-      <section class="taste-group"><h3>필수 선호 옵션</h3><div class="cond-chips">
+      
+      <section class="taste-group"><h3>전기 허용 용량 (W)</h3><div class="cond-chips">${WATTS.map(([v, l]) => `<button type="button" class="chip" data-taste-act="watts:${v}" aria-pressed="${(t.minWatts ?? 0) === v}">${ic("bolt")}${esc(l)}</button>`).join("")}</div></section>
+      
+      <section class="taste-group"><h3>장비 & 편의 시설</h3><div class="cond-chips">
         <button type="button" class="chip" data-taste-act="toggle:fire" aria-pressed="${Boolean(t.fire)}">${ic("flame")}장작·불멍 가능</button>
-        <button type="button" class="chip" data-taste-act="toggle:power" aria-pressed="${Boolean(t.power)}">${ic("bolt")}600W+ 전기</button>
+        <button type="button" class="chip" data-taste-act="toggle:tarp" aria-pressed="${Boolean(t.tarp)}">${ic("tent")}타프존 / 타프 설치</button>
+        <button type="button" class="chip" data-taste-act="toggle:privateFridge" aria-pressed="${Boolean(t.privateFridge)}">${ic("check")}개별 냉장고</button>
+        <button type="button" class="chip" data-taste-act="toggle:sharedFridge" aria-pressed="${Boolean(t.sharedFridge)}">${ic("amenity")}공용 냉장고</button>
+        <button type="button" class="chip" data-taste-act="toggle:heaterRental" aria-pressed="${Boolean(t.heaterRental)}">${ic("flame")}팬히터·난로 대여</button>
+        <button type="button" class="chip" data-taste-act="toggle:rental" aria-pressed="${Boolean(t.rental)}">${ic("cart")}캠핑장비 대여</button>
         <button type="button" class="chip" data-taste-act="toggle:pet" aria-pressed="${Boolean(t.pet)}">${ic("paw")}반려견 동반</button>
+      </div></section>
+
+      <section class="taste-group"><h3>물놀이 & 수영장</h3><div class="cond-chips">
+        <button type="button" class="chip" data-taste-act="toggle:warmPool" aria-pressed="${Boolean(t.warmPool)}">${ic("hotwater")}사계절 온수풀</button>
+        <button type="button" class="chip" data-taste-act="toggle:kidsPool" aria-pressed="${Boolean(t.kidsPool)}">${ic("playground")}키즈풀·유아풀</button>
+        <button type="button" class="chip" data-taste-act="toggle:pool" aria-pressed="${Boolean(t.pool)}">${ic("swim")}야외 수영장</button>
+      </div></section>
+
+      <section class="taste-group"><h3>자연 환경 & 체험 액티비티</h3><div class="cond-chips">
+        <button type="button" class="chip" data-taste-act="toggle:valley" aria-pressed="${Boolean(t.valley)}">${ic("th:VALLEY")}계곡</button>
+        <button type="button" class="chip" data-taste-act="toggle:river" aria-pressed="${Boolean(t.river)}">${ic("th:LAKE")}강·호수·천</button>
+        <button type="button" class="chip" data-taste-act="toggle:beach" aria-pressed="${Boolean(t.beach)}">${ic("th:BEACH")}바다·해변</button>
+        <button type="button" class="chip" data-taste-act="toggle:horse" aria-pressed="${Boolean(t.horse)}">${ic("spark")}승마 체험</button>
       </div></section>
     </div>
     <div class="sheet-foot my-taste-foot"><button type="button" class="btn ghost" data-taste-act="reset">초기화</button><button type="button" class="btn primary" data-taste-act="save">취향 저장</button></div>
