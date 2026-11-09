@@ -4602,9 +4602,7 @@ function matchMyTaste(c, taste = getMyTaste()) {
 
 function getMyTastePicks() {
   const taste = getMyTaste();
-  let pool = S.camps.filter((c) => showcaseEligible(c) && hasPhoto(c) && matchMyTaste(c, taste));
-  if (pool.length < 7 && taste.types?.length) pool = S.camps.filter((c) => showcaseEligible(c) && hasPhoto(c) && taste.types.some((k) => hasType(c, k)));
-  if (pool.length < 7) pool = S.camps.filter((c) => showcaseEligible(c) && hasPhoto(c));
+  const pool = S.camps.filter((c) => showcaseEligible(c) && hasPhoto(c) && matchMyTaste(c, taste));
   const sorted = qualityOrder(pool);
   const now = new Date(Date.now() + 9 * 3600e3);
   const dStr = `${now.getUTCFullYear()}-${now.getUTCMonth() + 1}-${now.getUTCDate()}`;
@@ -4612,7 +4610,7 @@ function getMyTastePicks() {
   const cands = sorted.slice(0, Math.min(sorted.length, 42));
   const off = cands.length ? (seed * 7) % cands.length : 0;
   const picked = [];
-  for (let i = 0; i < 7 && i < cands.length; i++) picked.push(cands[(off + i) % cands.length]);
+  for (let i = 0; i < Math.min(7, cands.length); i++) picked.push(cands[(off + i) % cands.length]);
   return picked.sort((a, b) => {
     const wa = isWinterClosedCamp(a) ? 1 : 0, wb = isWinterClosedCamp(b) ? 1 : 0;
     if (wa !== wb) return wa - wb;
@@ -4620,10 +4618,14 @@ function getMyTastePicks() {
   });
 }
 
-function myTasteSetupCard(taste) {
-  const lbl = (taste.types ?? []).map((t) => ST[t]?.label || t).join(" · ") || "전체";
+function myTasteSummaryChips(taste = getMyTaste()) {
   const b = [];
-  if (taste.types?.length) b.push(`<span class="taste-badge">${ic("tent")}${esc(lbl)}</span>`);
+  if (taste.types?.length) {
+    for (const t of taste.types) {
+      const label = ST[t]?.label || (KINDS.find((k) => k[0] === t)?.[1]) || t;
+      b.push(`<span class="taste-badge">${ic("tent")}${esc(label)}</span>`);
+    }
+  }
   if (taste.minSize > 0) b.push(`<span class="taste-badge">${ic("size")}${taste.minSize}m+</span>`);
   if (taste.minWatts >= 1400) b.push(`<span class="taste-badge">${ic("bolt")}1400W+ 초고용량</span>`);
   else if (taste.minWatts >= 1000) b.push(`<span class="taste-badge">${ic("bolt")}1000W+ 고용량</span>`);
@@ -4642,7 +4644,25 @@ function myTasteSetupCard(taste) {
   if (taste.river) b.push(`<span class="taste-badge">${ic("th:LAKE")}강·호수</span>`);
   if (taste.beach) b.push(`<span class="taste-badge">${ic("th:BEACH")}바다</span>`);
   if (taste.horse) b.push(`<span class="taste-badge">${ic("spark")}승마체험</span>`);
+  return b;
+}
 
+function myTasteBoxHtml(taste = getMyTaste()) {
+  const b = myTasteSummaryChips(taste);
+  return `<div class="theme-my-taste-box">
+    <div class="theme-my-taste-head">
+      <div class="theme-my-taste-title-wrap">
+        <span class="taste-box-badge">${ic("tent")}<b>내 취향 맞춤 장비 · 옵션</b></span>
+        <span class="taste-box-count">적용된 조건 <b>${b.length}개</b></span>
+      </div>
+      <button type="button" class="taste-box-change-btn" data-open-my-taste>${ic("spark")}취향 설정 변경 ${ic("right")}</button>
+    </div>
+    <div class="theme-my-taste-chips">${b.length ? b.join("") : `<span class="taste-badge none">선택된 조건 없음 (전체 보기)</span>`}</div>
+  </div>`;
+}
+
+function myTasteSetupCard(taste) {
+  const b = myTasteSummaryChips(taste);
   return `<article class="card my-taste-setup-card" data-open-my-taste tabindex="0" role="button" aria-label="내 취향 설정 열기">
     <div class="taste-setup-media"><div class="taste-setup-icon-wrap">${ic("tent")}</div><span class="taste-setup-badge">내 취향 맞춤</span></div>
     <div class="taste-setup-body">
@@ -4681,6 +4701,9 @@ function openMyTasteDialog() {
           const div = document.createElement("div"); div.innerHTML = myTasteSection();
           const t = div.firstElementChild;
           if (t) { sec.replaceWith(t); initCarousels(t); initDraggableRails(t); }
+        }
+        if (typeof window.__refreshMyTasteTheme === "function") {
+          window.__refreshMyTasteTheme();
         }
         return;
       }
@@ -5529,6 +5552,7 @@ function themeView(themeKey) {
     </div>
     <div class="theme-body">
       ${isWp ? `<div class="theme-closed-alert">${ic("info")}<div><strong>여름 시즌 물놀이터 운영 종료 안내</strong><p>전국 물놀이터·야영장 수영장 정보입니다. 현재는 하절기 운영이 종료된 상태입니다. 렛츠 캠핑에서 미리 시설 정보를 확인하시고 다음 시즌 피서 계획에 참고해 보세요!</p></div></div>` : ""}
+      ${themeKey === "MY_TASTE" ? myTasteBoxHtml() : ""}
       <div class="theme-uq-bar${themeKey === "UNIQUE" ? "" : " sort-only"}">
         ${themeKey === "UNIQUE" ? `<div class="rail chips theme-uq" aria-label="이색 분류 (여러 개 선택)">
           <button type="button" class="chip" data-theme-uq="" aria-pressed="${!uniqueSubs.size}">전체 <i>${fmt(totalInTheme)}</i></button>
@@ -5607,7 +5631,7 @@ function qualityOrder(items, { distance = false } = {}) {
 }
 
 function bindTheme(themeKey) {
-  const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
+  const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "MY_TASTE" ? (c) => matchMyTaste(c, getMyTaste()) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
 
   let pageN = 24;
   const getThemeList = () => {
@@ -5665,6 +5689,20 @@ function bindTheme(themeKey) {
 
   renderThemeGrid();
   initDraggableRails($(".theme-body"));
+
+  if (themeKey === "MY_TASTE") {
+    window.__refreshMyTasteTheme = () => {
+      pageN = 24;
+      renderThemeGrid();
+      const heroSub = $(".theme-hero-sub b");
+      if (heroSub) heroSub.textContent = `${fmt(S.camps.filter(testFn).length)}곳`;
+      const box = $(".theme-my-taste-box");
+      if (box) {
+        const div = document.createElement("div"); div.innerHTML = myTasteBoxHtml();
+        if (div.firstElementChild) box.replaceWith(div.firstElementChild);
+      }
+    };
+  }
 
   const v = $("#view");
   const onClick = (e) => {
