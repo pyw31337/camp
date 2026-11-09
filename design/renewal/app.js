@@ -412,11 +412,14 @@ function heaterRentalInfo(c) {
   if (match(/난방기구|난방기|온풍기|히터/i)) return { kind: "HEATER", label: "팬히터·난로", full: "겨울철 난방기기(팬히터·난로) 현장 대여 가능" };
   return null;
 }
-// 카드 썸네일 전용 배지 (소유자 2026-11-09): 긍정 요소들은 '특색 시설·요소'로 모두 이동하고, 썸네일에는 빨간색 불가·제한 뱃지만 남긴다.
+// 카드 썸네일 전용 배지 (소유자 2026-11-09): 긍정 요소들은 '특색 시설·요소'로 모두 이동하고, 썸네일에는 기상 예보([data-wx])와 빨간색 불가·제한 뱃지만 남긴다.
 function cardPhotoBadges(c, maxNo = 2) {
+  const wx = wxBadge(c);
   const pet = petAllowed(c);
   const no = noKeys(c).filter((k) => NO_CARD.includes(k) && !(k === "BIG_DOG" && pet)).slice(0, maxNo).map(noBadge);
-  return no.join("");
+  const hasWx = Boolean(wx);
+  const hasNo = no.length > 0;
+  return `${wx || ""}${hasWx && hasNo ? '<i class="bdg-br" aria-hidden="true"></i>' : ""}${no.join("")}`;
 }
 // 사진 배지 두 줄(소유자 2026-10-22): 윗줄은 긍정 배지(초대가능·600W·장작·반려견 등, 섹션 배지가 맨 앞),
 // 아랫줄은 부정 배지(반려견 불가·장작 불가·화기 불가 등). 줄바꿈은 .bdg-br(폭 100%)로.
