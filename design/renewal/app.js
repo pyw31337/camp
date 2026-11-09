@@ -67,20 +67,35 @@ const TIER_LABEL = { site: "사이트", glamp: "글램핑", caravan: "카라반"
 const visibleTiers = (c) => (c.fee?.tiers ?? []).filter((x) => !x[3]);
 const tierOf = (c, t) => visibleTiers(c).find((x) => x[0] === t) ?? null;
 const rangeWon = (lo, hi) => `${manWon(lo)}${hi > lo ? `~${manWon(hi)}` : ""}원`;
-/** 카드·목록의 대표 1박 요금: 확인된 사이트 형태가 없으면 형태를 붙이지 않는다. */
-function feeMain(c) {
+function preferredStayTier() {
+  try {
+    const ts = (typeof getMyTaste === "function" ? getMyTaste()?.types : null) ?? [];
+    if (ts.includes("caravan")) return "caravan";
+    if (ts.includes("glamping")) return "glamp";
+    if (ts.includes("pension")) return "lodge";
+    if (ts.some((k) => ["auto", "deck", "chabak", "backpacking"].includes(k))) return "site";
+  } catch {}
+  if (typeof S !== "undefined") {
+    if (S.stype === "CARAVAN" || S.stype === "RV") return "caravan";
+    if (S.stype === "GLAMPING") return "glamp";
+    if (S.stype === "HOUSE") return "lodge";
+    if (["AUTO", "DECK", "PITCH", "CAR_CAMP", "SOLO"].includes(S.stype)) return "site";
+  }
+  return null;
+}
+function feeMain(c, pref = preferredStayTier()) {
   if (!c.fee) return null;
   const t = visibleTiers(c);
-  if (!t.length) return { label: "요금", text: feeLabel(c.fee) };
-  const main = tierOf(c, "site") ?? t[0];
-  return { label: `${TIER_LABEL[main[0]]} 요금`, text: `${rangeWon(main[1], main[2])}${/대\s*$/.test(c.fee.text ?? "") ? "대" : ""}` };
+  if (!t.length) return { label: "요금", text: feeLabel(c.fee), tierKey: null };
+  let main = (pref && (tierOf(c, pref) || ((pref === "glamp" || pref === "caravan") && tierOf(c, "gc")))) || tierOf(c, "site") || t[0];
+  return { label: `${TIER_LABEL[main[0]] || "사이트"} 요금`, text: `${rangeWon(main[1], main[2])}${/대\s*$/.test(c.fee.text ?? "") ? "대" : ""}`, tierKey: main[0] };
 }
-/** 대표 요금 외에 원문에 형태가 확인된 요금만 추가로 보인다. */
-function feeTiersLine(c) {
+function feeTiersLine(c, pref = preferredStayTier()) {
   const t = visibleTiers(c);
   if (!t.length) return "";
-  const main = tierOf(c, "site") ?? t[0];
-  return t.filter((x) => x !== main).map(([k, lo, hi]) => `<span class="ft ft-${k}">${TIER_LABEL[k]} <b>${rangeWon(lo, hi)}</b></span>`).join("");
+  const fm = feeMain(c, pref);
+  const mainKey = fm?.tierKey ?? (tierOf(c, "site") ?? t[0])[0];
+  return t.filter((x) => x[0] !== mainKey).map(([k, lo, hi]) => `<span class="ft ft-${k}">${TIER_LABEL[k]} <b>${rangeWon(lo, hi)}</b></span>`).join("");
 }
 // 상세 화면 금액 표기: 18.9만~42만원 → 189,000~420,000원, 2만5천원 → 25,000원, 130000원 → 130,000원, 2만~4만원대 → 20,000~40,000원대.
 function wonText(v) {
@@ -1445,18 +1460,20 @@ function cardFeatures(c) {
     list.push({ icon: "th:FOREST", text: /^(국립|공립|사립)$/.test(c.rf) ? `${c.rf} 휴양림` : "휴양림" });
   }
 
-  // 10. 이색 체험 (c.uq)
+  // 10. 이색 체험 & 액티비티 (c.uq 및 주요 시설)
   if ((c.uq && c.uq.includes("horse")) || /승마|말타기/.test(txt)) {
     list.push({ icon: "spark", text: "승마 체험", review: (c.uq_reviews?.horse ?? [])[0] });
   }
   if (c.uq && c.uq.includes("hotspring")) list.push({ icon: "onsen", text: "노천탕" });
   if (c.uq && c.uq.includes("spa")) list.push({ icon: "onsen", text: "스파·자쿠지" });
-  if (c.uq && c.uq.includes("animal")) list.push({ icon: "paw", text: "동물 체험" });
+  if ((c.uq && c.uq.includes("animal")) || /동물\s*체험|동물\s*먹이주기|알파카|양떼/i.test(txt)) list.push({ icon: "paw", text: "동물 체험" });
   if (c.uq && c.uq.includes("indoorplay")) list.push({ icon: "playground", text: "실내 놀이" });
   if (c.uq && c.uq.includes("treehouse")) list.push({ icon: "forest", text: "트리하우스" });
   if (c.uq && c.uq.includes("stay")) list.push({ icon: "tent", text: "이색 숙소" });
-  if (c.uq && c.uq.includes("leisure")) list.push({ icon: "leports", text: "레포츠" });
-  if (c.uq && c.uq.includes("farm")) list.push({ icon: "experience", text: "체험 농장" });
+  if ((c.uq && c.uq.includes("leisure")) || /수상레저|카약|보트|패들보드/i.test(txt)) list.push({ icon: "leports", text: "수상레저·카약" });
+  if ((c.uq && c.uq.includes("farm")) || /수확\s*체험|농촌\s*체험|영농\s*체험|과수원/i.test(txt)) list.push({ icon: "experience", text: "체험 농장" });
+  if (c.th?.includes("fishing") || /낚시터|낚시\s*가능|바지선.*낚시/i.test(txt)) list.push({ icon: "fish", text: "낚시 체험" });
+  if ((c.field_conditions?.features?.includes("TUBE_SLED")) || /썰매장|눈썰매|사계절썰매|물썰매/i.test(txt)) list.push({ icon: "spark", text: "썰매장" });
 
   // 11. 편의 / 주차
   const isMove = isMoveParking(c), isPart = isPartMoveParking(c);
@@ -3141,58 +3158,21 @@ class HeroCanvasController {
     };
   }
 
-  // 버블 팝(터짐) + 사방으로 튀는 물방울 스플래시 디테일 파티클 생성
   createBubblePop(x, y, r, alpha = 0.8) {
-    // 1. 순간 팽창하며 터지는 원형 충격파 링
-    this.bubblePops.push({
-      kind: "ring",
-      x,
-      y,
-      r: Math.max(2, r * 0.85),
-      maxR: r * 1.9 + 5,
-      alpha: Math.min(1, alpha * 1.6),
-      lw: Math.max(1, r * 0.18)
-    });
-
-    // 2. 사방으로 튀는 미세 물방울 파편들 (5~9개)
-    const count = Math.min(9, Math.max(5, Math.floor(r * 0.8) + 4));
+    this.bubblePops.push({ kind: "ring", x, y, r: Math.max(2, r * 0.85), maxR: r * 1.9 + 5, alpha: Math.min(1, alpha * 1.6), lw: Math.max(1, r * 0.18) });
+    const count = Math.min(8, Math.max(4, Math.floor(r * 0.7) + 3));
     for (let k = 0; k < count; k++) {
-      const angle = Math.random() * Math.PI * 2;
-      const speed = Math.random() * 2.8 + 1.2;
-      this.bubblePops.push({
-        kind: "drop",
-        x: x + Math.cos(angle) * (r * 0.5),
-        y: y + Math.sin(angle) * (r * 0.5),
-        vx: Math.cos(angle) * speed + (this.mouse.vx ? this.mouse.vx * 0.15 : 0),
-        vy: Math.sin(angle) * speed - 0.7,
-        size: Math.random() * 1.5 + 0.8,
-        alpha: Math.min(1, alpha * 1.4),
-        life: 1.0,
-        decay: Math.random() * 0.045 + 0.035
-      });
+      const a = Math.random() * Math.PI * 2, sp = Math.random() * 2.8 + 1.2;
+      this.bubblePops.push({ kind: "drop", x: x + Math.cos(a) * (r * 0.5), y: y + Math.sin(a) * (r * 0.5), vx: Math.cos(a) * sp + (this.mouse.vx ? this.mouse.vx * 0.15 : 0), vy: Math.sin(a) * sp - 0.7, size: Math.random() * 1.5 + 0.8, alpha: Math.min(1, alpha * 1.4), life: 1.0, decay: Math.random() * 0.045 + 0.035 });
     }
-
-    // 3. 톡 터지는 빛 반짝임 스파클 (2~3개)
     for (let s = 0; s < 3; s++) {
-      const angle = Math.random() * Math.PI * 2;
-      const dist = Math.random() * (r * 0.6) + 1;
-      this.bubblePops.push({
-        kind: "spark",
-        x: x + Math.cos(angle) * dist,
-        y: y + Math.sin(angle) * dist,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: -Math.random() * 0.7 - 0.3,
-        size: Math.random() * 1.2 + 0.5,
-        alpha: 1,
-        life: 1.0,
-        decay: 0.08
-      });
+      const a = Math.random() * Math.PI * 2;
+      this.bubblePops.push({ kind: "spark", x: x + Math.cos(a) * (r * 0.5), y: y + Math.sin(a) * (r * 0.5), vx: (Math.random() - 0.5) * 0.6, vy: -Math.random() * 0.7 - 0.3, size: Math.random() * 1.2 + 0.5, life: 1.0, decay: 0.08 });
     }
   }
 
   popBubblesNear(x, y, radius = 48) {
-    const w = this.width || 800;
-    const h = this.height || 500;
+    const w = this.width || 800, h = this.height || 500;
     for (let i = 0; i < this.particles.length; i++) {
       const p = this.particles[i];
       if (Math.hypot(p.x - x, p.y - y) < p.r + radius) {
@@ -3203,97 +3183,45 @@ class HeroCanvasController {
   }
 
   renderBubbles(ctx, w, h, mx, my, hasMouse) {
-    // 1. 떠오르는 버블
     for (let i = 0; i < this.particles.length; i++) {
       const p = this.particles[i];
-      p.sway += p.swaySpeed || 0.03;
-      p.y += p.vy;
-      p.x += Math.sin(p.sway) * 0.38;
-
-      // 마우스나 터치로 건드리면 펑 터지며 사방으로 물방울이 튐
+      p.sway += p.swaySpeed || 0.03; p.y += p.vy; p.x += Math.sin(p.sway) * 0.38;
       if (hasMouse && Math.hypot(p.x - mx, p.y - my) < p.r + 28) {
         this.createBubblePop(p.x, p.y, p.r, p.alpha);
         this.particles[i] = this.makeBubble(w, h);
         continue;
       }
-      if (p.y < -15) {
-        this.particles[i] = this.makeBubble(w, h);
-        continue;
-      }
-
-      // 버블 본체 (투명 구형 입체감)
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(255, 255, 255, ${p.alpha * 0.95})`;
-      ctx.lineWidth = Math.max(1, p.r * 0.12);
-      ctx.stroke();
-      ctx.fillStyle = `rgba(195, 240, 255, ${p.alpha * 0.22})`;
-      ctx.fill();
-
-      // 상단 초승달 하이라이트 빛반사
-      ctx.beginPath();
-      ctx.arc(p.x - p.r * 0.35, p.y - p.r * 0.35, Math.max(1, p.r * 0.28), 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, p.alpha * 1.3)})`;
-      ctx.fill();
-
-      // 하단 미세 반사광 (입체감 보강)
+      if (p.y < -15) { this.particles[i] = this.makeBubble(w, h); continue; }
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(255, 255, 255, ${p.alpha * 0.95})`; ctx.lineWidth = Math.max(1, p.r * 0.12); ctx.stroke();
+      ctx.fillStyle = `rgba(195, 240, 255, ${p.alpha * 0.22})`; ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x - p.r * 0.35, p.y - p.r * 0.35, Math.max(1, p.r * 0.28), 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, p.alpha * 1.3)})`; ctx.fill();
       if (p.r > 6) {
-        ctx.beginPath();
-        ctx.arc(p.x + p.r * 0.28, p.y + p.r * 0.28, p.r * 0.16, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha * 0.5})`;
-        ctx.fill();
+        ctx.beginPath(); ctx.arc(p.x + p.r * 0.28, p.y + p.r * 0.28, p.r * 0.16, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha * 0.5})`; ctx.fill();
       }
     }
-
-    // 2. 터진 버블 애니메이션 (확산 링 + 튀는 물방울 스플래시)
     for (let i = this.bubblePops.length - 1; i >= 0; i--) {
       const bp = this.bubblePops[i];
       if (bp.kind === "ring") {
-        bp.r += (bp.maxR - bp.r) * 0.42;
-        bp.alpha -= 0.10;
-        bp.lw *= 0.86;
-        if (bp.alpha <= 0.02 || bp.lw < 0.3) {
-          this.bubblePops.splice(i, 1);
-          continue;
-        }
-        ctx.beginPath();
-        ctx.arc(bp.x, bp.y, bp.r, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(255, 255, 255, ${bp.alpha})`;
-        ctx.lineWidth = bp.lw;
-        ctx.stroke();
+        bp.r += (bp.maxR - bp.r) * 0.42; bp.alpha -= 0.10; bp.lw *= 0.86;
+        if (bp.alpha <= 0.02 || bp.lw < 0.3) { this.bubblePops.splice(i, 1); continue; }
+        ctx.beginPath(); ctx.arc(bp.x, bp.y, bp.r, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(255, 255, 255, ${bp.alpha})`; ctx.lineWidth = bp.lw; ctx.stroke();
       } else if (bp.kind === "drop") {
-        bp.x += bp.vx;
-        bp.y += bp.vy;
-        bp.vy += 0.11; // 중력
-        bp.vx *= 0.97;
-        bp.vy *= 0.97;
-        bp.life -= bp.decay;
-        if (bp.life <= 0) {
-          this.bubblePops.splice(i, 1);
-          continue;
-        }
-        const curA = bp.alpha * bp.life;
-        ctx.beginPath();
-        ctx.arc(bp.x, bp.y, bp.size * (0.6 + bp.life * 0.4), 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(215, 245, 255, ${curA})`;
-        ctx.fill();
-        // 물방울 반짝임
-        ctx.beginPath();
-        ctx.arc(bp.x - bp.size * 0.25, bp.y - bp.size * 0.25, Math.max(0.4, bp.size * 0.3), 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${curA * 1.2})`;
-        ctx.fill();
+        bp.x += bp.vx; bp.y += bp.vy; bp.vy += 0.11; bp.vx *= 0.97; bp.vy *= 0.97; bp.life -= bp.decay;
+        if (bp.life <= 0) { this.bubblePops.splice(i, 1); continue; }
+        const ca = bp.alpha * bp.life;
+        ctx.beginPath(); ctx.arc(bp.x, bp.y, bp.size * (0.6 + bp.life * 0.4), 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(215, 245, 255, ${ca})`; ctx.fill();
+        ctx.beginPath(); ctx.arc(bp.x - bp.size * 0.25, bp.y - bp.size * 0.25, Math.max(0.4, bp.size * 0.3), 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${ca * 1.2})`; ctx.fill();
       } else if (bp.kind === "spark") {
-        bp.x += bp.vx;
-        bp.y += bp.vy;
-        bp.life -= bp.decay;
-        if (bp.life <= 0) {
-          this.bubblePops.splice(i, 1);
-          continue;
-        }
-        ctx.beginPath();
-        ctx.arc(bp.x, bp.y, bp.size * bp.life, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${bp.life})`;
-        ctx.fill();
+        bp.x += bp.vx; bp.y += bp.vy; bp.life -= bp.decay;
+        if (bp.life <= 0) { this.bubblePops.splice(i, 1); continue; }
+        ctx.beginPath(); ctx.arc(bp.x, bp.y, bp.size * bp.life, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${bp.life})`; ctx.fill();
       }
     }
   }
@@ -4526,6 +4454,12 @@ const DEFAULT_MY_TASTE = {
   valley: false,
   river: false,
   beach: false,
+  tidal: false,
+  fishing: false,
+  leisure: false,
+  animal: false,
+  sled: false,
+  farm: false,
   horse: false,
 };
 
@@ -4594,7 +4528,19 @@ function matchMyTaste(c, taste = getMyTaste()) {
   if (taste.river && !(c.pf?.t?.includes("LAKE") || c.pf?.t?.includes("RIVER") || /강변|강가|호수|저수지|하천|천변/i.test(txt))) return false;
   // 16. 바다 / 해변
   if (taste.beach && !(c.pf?.t?.includes("BEACH") || c.th?.includes("sea") || /바다|해변|해수욕장|백사장/i.test(txt))) return false;
-  // 17. 승마 체험
+  // 17. 갯벌·해루질
+  if (taste.tidal && !(isTidalCamp(c) || /갯벌|해루질|조개잡이|바지락/i.test(txt))) return false;
+  // 18. 낚시 체험
+  if (taste.fishing && !(c.th?.includes("fishing") || /낚시터|낚시\s*가능|바지선.*낚시|민물낚시|바다낚시/i.test(txt))) return false;
+  // 19. 수상레저 & 카약
+  if (taste.leisure && !((c.uq && c.uq.includes("leisure")) || /수상레저|카약|보트|패들보드|카누|래프팅/i.test(txt))) return false;
+  // 20. 동물 먹이주기 체험
+  if (taste.animal && !((c.uq && c.uq.includes("animal")) || /동물\s*체험|동물\s*먹이주기|알파카|양떼|토끼/i.test(txt))) return false;
+  // 21. 썰매장
+  if (taste.sled && !((c.field_conditions?.features?.includes("TUBE_SLED")) || /썰매장|눈썰매|사계절썰매|물썰매/i.test(txt))) return false;
+  // 22. 농촌·수확 체험
+  if (taste.farm && !((c.uq && c.uq.includes("farm")) || /수확\s*체험|농촌\s*체험|영농\s*체험|과수원|스마트팜/i.test(txt))) return false;
+  // 23. 승마 체험
   if (taste.horse && !((c.uq && c.uq.includes("horse")) || /승마|말타기|포니체험/i.test(txt))) return false;
 
   return true;
@@ -4621,29 +4567,22 @@ function getMyTastePicks() {
 function myTasteSummaryChips(taste = getMyTaste()) {
   const b = [];
   if (taste.types?.length) {
-    for (const t of taste.types) {
-      const label = ST[t]?.label || (KINDS.find((k) => k[0] === t)?.[1]) || t;
-      b.push(`<span class="taste-badge">${ic("tent")}${esc(label)}</span>`);
-    }
+    for (const t of taste.types) b.push(`<span class="taste-badge">${ic("tent")}${esc(ST[t]?.label || (KINDS.find((k) => k[0] === t)?.[1]) || t)}</span>`);
   }
   if (taste.minSize > 0) b.push(`<span class="taste-badge">${ic("size")}${taste.minSize}m+</span>`);
   if (taste.minWatts >= 1400) b.push(`<span class="taste-badge">${ic("bolt")}1400W+ 초고용량</span>`);
   else if (taste.minWatts >= 1000) b.push(`<span class="taste-badge">${ic("bolt")}1000W+ 고용량</span>`);
   else if (taste.minWatts >= 600) b.push(`<span class="taste-badge">${ic("bolt")}600W+ 전기</span>`);
-  if (taste.fire) b.push(`<span class="taste-badge">${ic("flame")}불멍 필수</span>`);
-  if (taste.tarp) b.push(`<span class="taste-badge">${ic("tent")}타프존</span>`);
-  if (taste.privateFridge) b.push(`<span class="taste-badge">${ic("check")}개별냉장고</span>`);
-  if (taste.sharedFridge) b.push(`<span class="taste-badge">${ic("amenity")}공용냉장고</span>`);
-  if (taste.heaterRental) b.push(`<span class="taste-badge">${ic("flame")}팬히터 대여</span>`);
-  if (taste.rental) b.push(`<span class="taste-badge">${ic("cart")}장비 대여</span>`);
-  if (taste.pet) b.push(`<span class="taste-badge">${ic("paw")}반려견 동반</span>`);
-  if (taste.warmPool) b.push(`<span class="taste-badge">${ic("hotwater")}온수풀</span>`);
-  if (taste.kidsPool) b.push(`<span class="taste-badge">${ic("playground")}키즈풀</span>`);
-  if (taste.pool) b.push(`<span class="taste-badge">${ic("swim")}수영장</span>`);
-  if (taste.valley) b.push(`<span class="taste-badge">${ic("th:VALLEY")}계곡</span>`);
-  if (taste.river) b.push(`<span class="taste-badge">${ic("th:LAKE")}강·호수</span>`);
-  if (taste.beach) b.push(`<span class="taste-badge">${ic("th:BEACH")}바다</span>`);
-  if (taste.horse) b.push(`<span class="taste-badge">${ic("spark")}승마체험</span>`);
+  const bools = [
+    ["fire", "flame", "불멍 필수"], ["tarp", "tent", "타프존"], ["privateFridge", "check", "개별냉장고"],
+    ["sharedFridge", "amenity", "공용냉장고"], ["heaterRental", "flame", "팬히터 대여"], ["rental", "cart", "장비 대여"],
+    ["pet", "paw", "반려견 동반"], ["warmPool", "hotwater", "온수풀"], ["kidsPool", "playground", "키즈풀"],
+    ["pool", "swim", "수영장"], ["valley", "th:VALLEY", "계곡"], ["river", "th:LAKE", "강·호수"],
+    ["beach", "th:BEACH", "바다"], ["tidal", "water", "갯벌·해루질"], ["fishing", "fish", "낚시체험"],
+    ["leisure", "leports", "수상레저·카약"], ["animal", "paw", "동물체험"], ["sled", "spark", "썰매장"],
+    ["farm", "experience", "농촌·수확체험"], ["horse", "spark", "승마체험"]
+  ];
+  for (const [k, i, l] of bools) if (taste[k]) b.push(`<span class="taste-badge">${ic(i)}${l}</span>`);
   return b;
 }
 
@@ -4726,38 +4665,20 @@ function paintMyTasteDialog() {
   const TYPES = [["AUTO", "오토캠핑", "car"], ["GLAMPING", "글램핑", "glamping"], ["CARAVAN", "카라반", "caravan"], ["HOUSE", "펜션·방갈로", "home"], ["CAR_CAMP", "차박", "car"], ["DECK", "데크", "layers"], ["SOLO", "백패킹", "tent"]];
   const SIZES = [[0, "상관없음"], [6, "6m+ (중형)"], [8, "8m+ (대형)"], [10, "10m+ (초대형)"]];
   const WATTS = [[0, "상관없음"], [600, "600W+ (기본 전열)"], [1000, "1,000W+ (고용량)"], [1400, "1,400W+ (초고용량)"]];
+  const FACS = [["fire","flame","장작·불멍 가능"],["tarp","tent","타프존 / 타프 설치"],["privateFridge","check","개별 냉장고"],["sharedFridge","amenity","공용 냉장고"],["heaterRental","flame","팬히터·난로 대여"],["rental","cart","캠핑장비 대여"],["pet","paw","반려견 동반"]];
+  const POOLS = [["warmPool","hotwater","사계절 온수풀"],["kidsPool","playground","키즈풀·유아풀"],["pool","swim","야외 수영장"]];
+  const ACTS = [["valley","th:VALLEY","계곡"],["river","th:LAKE","강·호수·천"],["beach","th:BEACH","바다·해변"],["tidal","water","갯벌·해루질"],["fishing","fish","낚시 체험"],["leisure","leports","수상레저·카약"],["animal","paw","동물 먹이주기"],["sled","spark","썰매장"],["farm","experience","농촌·수확 체험"],["horse","spark","승마 체험"]];
+  const chipBtns = (arr) => arr.map(([k, i, l]) => `<button type="button" class="chip" data-taste-act="toggle:${k}" aria-pressed="${Boolean(t[k])}">${ic(i)}${l}</button>`).join("");
 
   dlg.innerHTML = `<div class="sheet-in my-taste-in">
     <div class="sheet-head"><h2 id="my-taste-title">내 취향 & 장비 설정</h2><button type="button" class="icon-btn sheet-close" data-taste-act="close" aria-label="닫기">${ic("close")}</button></div>
     <div class="sheet-body my-taste-body">
       <section class="taste-group"><h3>캠핑 타입 (복수 선택)</h3><div class="cond-chips">${TYPES.map(([k, l, i]) => `<button type="button" class="chip" data-taste-act="type:${k}" aria-pressed="${(t.types ?? []).includes(k)}">${ic(i)}${esc(l)}</button>`).join("")}</div></section>
-      
       <section class="taste-group"><h3>사이트 규격 (내 텐트 크기)</h3><div class="cond-chips">${SIZES.map(([v, l]) => `<button type="button" class="chip" data-taste-act="size:${v}" aria-pressed="${t.minSize === v}">${esc(l)}</button>`).join("")}</div></section>
-      
       <section class="taste-group"><h3>전기 허용 용량 (W)</h3><div class="cond-chips">${WATTS.map(([v, l]) => `<button type="button" class="chip" data-taste-act="watts:${v}" aria-pressed="${(t.minWatts ?? 0) === v}">${ic("bolt")}${esc(l)}</button>`).join("")}</div></section>
-      
-      <section class="taste-group"><h3>장비 & 편의 시설</h3><div class="cond-chips">
-        <button type="button" class="chip" data-taste-act="toggle:fire" aria-pressed="${Boolean(t.fire)}">${ic("flame")}장작·불멍 가능</button>
-        <button type="button" class="chip" data-taste-act="toggle:tarp" aria-pressed="${Boolean(t.tarp)}">${ic("tent")}타프존 / 타프 설치</button>
-        <button type="button" class="chip" data-taste-act="toggle:privateFridge" aria-pressed="${Boolean(t.privateFridge)}">${ic("check")}개별 냉장고</button>
-        <button type="button" class="chip" data-taste-act="toggle:sharedFridge" aria-pressed="${Boolean(t.sharedFridge)}">${ic("amenity")}공용 냉장고</button>
-        <button type="button" class="chip" data-taste-act="toggle:heaterRental" aria-pressed="${Boolean(t.heaterRental)}">${ic("flame")}팬히터·난로 대여</button>
-        <button type="button" class="chip" data-taste-act="toggle:rental" aria-pressed="${Boolean(t.rental)}">${ic("cart")}캠핑장비 대여</button>
-        <button type="button" class="chip" data-taste-act="toggle:pet" aria-pressed="${Boolean(t.pet)}">${ic("paw")}반려견 동반</button>
-      </div></section>
-
-      <section class="taste-group"><h3>물놀이 & 수영장</h3><div class="cond-chips">
-        <button type="button" class="chip" data-taste-act="toggle:warmPool" aria-pressed="${Boolean(t.warmPool)}">${ic("hotwater")}사계절 온수풀</button>
-        <button type="button" class="chip" data-taste-act="toggle:kidsPool" aria-pressed="${Boolean(t.kidsPool)}">${ic("playground")}키즈풀·유아풀</button>
-        <button type="button" class="chip" data-taste-act="toggle:pool" aria-pressed="${Boolean(t.pool)}">${ic("swim")}야외 수영장</button>
-      </div></section>
-
-      <section class="taste-group"><h3>자연 환경 & 체험 액티비티</h3><div class="cond-chips">
-        <button type="button" class="chip" data-taste-act="toggle:valley" aria-pressed="${Boolean(t.valley)}">${ic("th:VALLEY")}계곡</button>
-        <button type="button" class="chip" data-taste-act="toggle:river" aria-pressed="${Boolean(t.river)}">${ic("th:LAKE")}강·호수·천</button>
-        <button type="button" class="chip" data-taste-act="toggle:beach" aria-pressed="${Boolean(t.beach)}">${ic("th:BEACH")}바다·해변</button>
-        <button type="button" class="chip" data-taste-act="toggle:horse" aria-pressed="${Boolean(t.horse)}">${ic("spark")}승마 체험</button>
-      </div></section>
+      <section class="taste-group"><h3>장비 & 편의 시설</h3><div class="cond-chips">${chipBtns(FACS)}</div></section>
+      <section class="taste-group"><h3>물놀이 & 수영장</h3><div class="cond-chips">${chipBtns(POOLS)}</div></section>
+      <section class="taste-group"><h3>자연 환경 & 체험 액티비티</h3><div class="cond-chips">${chipBtns(ACTS)}</div></section>
     </div>
     <div class="sheet-foot my-taste-foot"><button type="button" class="btn ghost" data-taste-act="reset">초기화</button><button type="button" class="btn primary" data-taste-act="save">취향 저장</button></div>
   </div>`;
@@ -6946,6 +6867,24 @@ function priceRows(c, d) {
       addExtra(item.won, item.label, item.kind, item.fact, "", item.text || "");
     }
   }
+
+  // 숙박 형태 우선순위에 맞춰 stayRows 정렬 (선택 타입 최우선, 디폴트는 오토캠핑/사이트 우선)
+  const pref = preferredStayTier();
+  stayRows.sort((a, b) => {
+    const score = (r) => {
+      const l = String(r.label || "");
+      if (pref === "caravan" && /카라반/.test(l)) return 0;
+      if (pref === "glamp" && /글램핑/.test(l)) return 0;
+      if (pref === "lodge" && /풀빌라|펜션|방갈로|숙박동/.test(l)) return 0;
+      if (pref === "site" && /오토|야영|데크|파쇄석|잔디|사이트/.test(l) && !/풀빌라|펜션|카라반|글램핑/.test(l)) return 0;
+      if (/오토|야영|데크|파쇄석|잔디|사이트/.test(l) && !/풀빌라|펜션|카라반|글램핑/.test(l)) return 1;
+      if (/카라반/.test(l)) return 2;
+      if (/글램핑/.test(l)) return 3;
+      if (/풀빌라|펜션|방갈로|숙박동/.test(l)) return 4;
+      return 5;
+    };
+    return score(a) - score(b);
+  });
 
   const rows = [...stayRows, ...extraRows];
   return { stayRows, extraRows, rows, bs };
