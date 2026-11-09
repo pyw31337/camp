@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-09T20:24:03.219Z",
+ "generated_at": "2026-11-09T22:02:03.406Z",
  "rule": "pipeline/lib/fact-refine.mjs",
- "dropped": 262,
+ "dropped": 263,
  "recoded": 154,
- "scoped": 679,
+ "scoped": 680,
  "items": [
   {
    "cid": "7509",
@@ -206,6 +206,16 @@
    "quote": "소형 반려견 (5kg 이하) 은 동반 가능하나, 펜션 및 황토방 등 실내 출입은 불가합니다.",
    "action": "recode",
    "why": "크기 제한 있는 허용"
+  },
+  {
+   "cid": "102353",
+   "attr": "PET_POLICY",
+   "value": "NOT_ALLOWED",
+   "src": "review_search",
+   "url": "https://blog.naver.com/stargazer881002/224463253847",
+   "quote": "영지캠프 경북 경주시 외동읍 영지안길 53 입실14시 퇴실12시 반려견 캐빈 입실 불가 1팀독채 기준12인 최대15인 화장실2샤워실2 여러분 오늘은 경주 불국사 근처 멋진 캠핑장에서 가족들과 캠핑을 하고 왔어요...",
+   "action": "drop",
+   "why": "범위가 좁은 금지(수영장·실내·특정 동물 등)를 동반 불가로 읽음"
   },
   {
    "cid": "8157",
