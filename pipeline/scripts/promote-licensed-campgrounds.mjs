@@ -101,7 +101,7 @@ for (const r of toPromote) {
     tel: r.phone || null,
     status: "영업",
     types: [r.kind === "AUTO" ? "오토캠핑" : "일반야영"],
-    kinds: [kind],
+    kinds: [[r.kind === "AUTO" ? "AUTO_PITCH" : "GENERAL", null]],
     floors: ["파쇄석"],
     amenities: ["전기", "화장실", "샤워실", "개수대"],
     env: ["숲", "산"],
