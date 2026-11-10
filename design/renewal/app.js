@@ -682,25 +682,14 @@ function publicParkEvidence(c) {
     Boolean(c.fee?.min || c.fee?.max),
   ].filter(Boolean).length;
 }
-function publicParkInformationComplete(c) {
-  if (publicParkCoreFloor == null) {
-    const scores = S.camps.filter((x) => !isPublicPark(x)).map(rich).sort((a, b) => a - b);
-    const median = scores[Math.floor((scores.length - 1) / 2)] ?? 0;
-    // 일반 캠핑장 정보량 중앙값의 절반 + 공원 고유 근거 5개를 모두 만족해야
-    // 기본 목록과 지도에 다시 편입한다.
-    publicParkCoreFloor = Math.max(1, Math.ceil(median * .5));
-  }
-  return hasPhoto(c) && rich(c) >= publicParkCoreFloor && publicParkEvidence(c) >= 5;
-}
+const DOC_RE = /배치도|도면|layout|cert|등록증|신고서|사업자|허가증|안내도|4157qtog|7769KMjKnSuN5G6umGgImjui|3916WQ8qu2YUoU0aTu5OiSyI|5326uedfrszollnn8MKJxnRw|21ffa8f8|389ad86c|848669b7|ae803104|50ddaa3e/i;
+const isDocImg = (u, c) => !u || DOC_RE.test(photoUrl(u)) || c?.layout_images?.some((x) => x && photoUrl(u).toLowerCase().includes(x.toLowerCase()));
 function coreBrowseEligible(c) {
-  // 직접 이름으로 찾으면 정보가 덜 찬 공원도 발견은 가능하게 하되, 일반 탐색에서는 제외한다.
   const rejectedEntity = c?.quality?.status === "REJECTED";
-  return (!rejectedEntity || namedByQuery(c)) && (!isPublicPark(c) || namedByQuery(c) || publicParkInformationComplete(c));
+  return (!rejectedEntity || namedByQuery(c)) && (!isPublicPark(c) || namedByQuery(c));
 }
 function mapBrowseEligible(c) {
-  // 지도는 현재 화면에 보이는 후보를 비교하는 곳이므로, 이름 검색 예외 없이
-  // 정보·사진을 충분히 갖춘 공원만 핀으로 보인다.
-  return !isPublicPark(c) || publicParkInformationComplete(c);
+  return !isPublicPark(c) || S.theme === "PARK";
 }
 // 물놀이터: 등록 편의시설에 물놀이장·수영장·풀장이 있는 곳과 공공 물놀이터(c.du=water)만. 계곡 '물놀이' 언급·추정 태그는 빼고(2026-10-20 P0).
 const isWaterPlayCamp = (c) => c.du === "water" || (c.amenities ?? []).some((a) => /물놀이장|물놀이터|수영장|풀장|워터/.test(a));
@@ -1058,6 +1047,10 @@ function photosAll(c) {
   }
   // 걸러 고른 사진(c.pt)이 없을 때만 첫 검색 썸네일(c.sn, build-explore-data)
   else if (c.sn && !list.length && c.quality?.photo_status !== "REVIEW" && c.quality?.photo_status !== "REJECTED") list = [c.sn];
+
+  const realList = [], docList = [];
+  for (const u of list) (isDocImg(u, c) ? docList : realList).push(u);
+  list = [...realList, ...docList];
 
   const seen = new Set();
   const deduped = [];
@@ -5754,8 +5747,11 @@ function reserveCard(c) {
   </div>`;
 }
 function galleryHtml(c) {
-  const ph = photosOf(c);
-  if (!ph.length) return "";
+  let ph = photosOf(c);
+  if (!ph.length) {
+    const fallback = themeImg(c.th?.[0] ? c.th[0].toUpperCase() : "AUTO");
+    return `<div class="gallery"><div class="gal-grid n1"><div class="gal-cell">${imageTag(fallback, esc(nameOf(c).name), { eager: true, sizes: "100vw" })}</div></div></div>`;
+  }
   const alt = esc(nameOf(c).name);
   const have = new Set(ph.map(photoName));
   const more = (S.detailCache.get(c.id)?.gcd?.photos ?? []).filter((u) => !have.has(photoName(u))).length;
@@ -6292,7 +6288,7 @@ function feeRowLabel(label) {
   for (const p of parts) if (!out.some((q) => q.replace(/\s+/g, "").includes(p.replace(/\s+/g, "")))) out.push(p);
   return out.join(" · ");
 }
-const isDocOrLayout = (u, c, d) => !u || /배치도|도면|layout|cert|등록증|신고서|4157qtog/i.test(u) || c?.layout_images?.some((x) => x && u.toLowerCase().includes(x.toLowerCase())) || d?.layout?.some?.((x) => x && u.toLowerCase().includes(x.toLowerCase()));
+const isDocOrLayout = (u, c, d) => !u || DOC_RE.test(u) || c?.layout_images?.some((x) => x && u.toLowerCase().includes(x.toLowerCase())) || d?.layout?.some?.((x) => x && u.toLowerCase().includes(x.toLowerCase()));
 function feeRowProduct(r, c, d) {
   const lbl = `${r.label ?? ""} ${r.kind ?? ""}`;
   const prod = d?.site_products?.find((x) => x.name && (lbl.includes(x.name) || x.name.includes(r.label))) || null;

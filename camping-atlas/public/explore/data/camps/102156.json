@@ -746,12 +746,6 @@
   "img_dup": 1,
   "photos": [
     {
-      "t": "camps/102156/848669b7-t.webp",
-      "l": "camps/102156/848669b7-l.webp",
-      "w": 720,
-      "h": 1020
-    },
-    {
       "t": "camps/102156/6af87eb0-t.webp",
       "l": "camps/102156/6af87eb0-l.webp",
       "w": 1000,
@@ -762,6 +756,12 @@
       "l": "camps/102156/ce689797-l.webp",
       "w": 1000,
       "h": 462
+    },
+    {
+      "t": "camps/102156/848669b7-t.webp",
+      "l": "camps/102156/848669b7-l.webp",
+      "w": 720,
+      "h": 1020
     }
   ],
   "field_conditions": {

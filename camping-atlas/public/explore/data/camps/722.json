@@ -1534,12 +1534,6 @@
   "img_dup": 1,
   "photos": [
     {
-      "t": "camps/722/45909fa3-t.webp",
-      "l": "camps/722/45909fa3-l.webp",
-      "w": 720,
-      "h": 1080
-    },
-    {
       "t": "camps/722/0788ba39-t.webp",
       "l": "camps/722/0788ba39-l.webp",
       "w": 1280,
@@ -1550,6 +1544,12 @@
       "l": "camps/722/83ac1e6c-l.webp",
       "w": 1280,
       "h": 853
+    },
+    {
+      "t": "camps/722/45909fa3-t.webp",
+      "l": "camps/722/45909fa3-l.webp",
+      "w": 720,
+      "h": 1080
     }
   ],
   "field_conditions": {

@@ -1818,16 +1818,16 @@
   "img_dup": 1,
   "photos": [
     {
-      "t": "camps/344/6fba06b7-t.webp",
-      "l": "camps/344/6fba06b7-l.webp",
-      "w": 720,
-      "h": 1080
-    },
-    {
       "t": "camps/344/02bd3852-t.webp",
       "l": "camps/344/02bd3852-l.webp",
       "w": 1000,
       "h": 666
+    },
+    {
+      "t": "camps/344/6fba06b7-t.webp",
+      "l": "camps/344/6fba06b7-l.webp",
+      "w": 720,
+      "h": 1080
     }
   ],
   "field_conditions": {

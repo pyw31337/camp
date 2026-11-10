@@ -1479,16 +1479,16 @@
   ],
   "photos": [
     {
-      "t": "camps/3519/36f50f9e-t.webp",
-      "l": "camps/3519/36f50f9e-l.webp",
-      "w": 1280,
-      "h": 1920
-    },
-    {
       "t": "camps/3519/338b05f2-t.webp",
       "l": "camps/3519/338b05f2-l.webp",
       "w": 1000,
       "h": 666
+    },
+    {
+      "t": "camps/3519/36f50f9e-t.webp",
+      "l": "camps/3519/36f50f9e-l.webp",
+      "w": 1280,
+      "h": 1920
     }
   ],
   "field_conditions": {
