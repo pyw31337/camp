@@ -1517,7 +1517,7 @@ function savedDetailsHtml(c) {
   const o = Boolean(S.savedSpecOpen), id = `saved-spec-${String(c.id).replace(/[^A-Za-z0-9_-]/g, "-")}`;
   const t = typeRow(c).html ? `<div class="card-group card-group-types">${typeRow(c).html}</div>` : "";
   const r = c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-group card-group-reviews"><div class="card-reviews">${cardReviewPills(c.rv, c)}</div></div>` : "";
-  return `<div class="card-group card-group-spec saved-card-spec${o ? " is-open" : ""}" data-saved-card-spec><button class="saved-card-spec-toggle" type="button" data-saved-card-spec-toggle aria-expanded="${o ? "true" : "false"}" aria-controls="${esc(id)}"><span>${ic("list")}상세정보</span>${ic("chevron-up", "saved-card-spec-chevron")}</button><div class="saved-card-spec-panel" id="${esc(id)}" data-saved-card-spec-panel${o ? "" : " hidden"}>${t}${rowsHtml(c)}${r}</div></div>`;
+  return `<div class="card-group card-group-spec saved-card-spec${o ? " is-open" : ""}" data-saved-card-spec><button class="saved-card-spec-toggle" type="button" data-saved-card-spec-toggle aria-expanded="${o ? "true" : "false"}" aria-controls="${esc(id)}"><span>${ic("list")}상세정보</span>${ic("chevron-up", "saved-card-spec-chevron")}</button><div class="saved-card-spec-panel" id="${esc(id)}" data-saved-card-spec-panel${o ? "" : " hidden"}>${t}${rowsHtml(c)}${uniqueFeatureHtml(c)}${r}</div></div>`;
 }
 // 가는 길 장보기: 마트·편의점·정육점 중 5km 안에 있는 곳(LOCALDATA 인허가). 순서는 늘 마트 → 편의점 → 정육점(소유자 2026-10-20).
 function nearLine(c, sep = " · ") {
@@ -4264,16 +4264,16 @@ function getMyTastePicks() {
   });
 }
 
-const TASTE_TYPES = [["AUTO", "오토캠핑", "car"], ["GLAMPING", "글램핑", "glamping"], ["CARAVAN", "카라반", "caravan"], ["BUNGALOW", "방갈로", "tent"], ["PENSION", "펜션", "home"], ["CAR_CAMP", "차박", "car"], ["DECK", "데크", "layers"], ["SOLO", "백패킹", "tent"]];
+const TASTE_TYPES = [["AUTO", "car", "오토캠핑"], ["GLAMPING", "glamping", "글램핑"], ["CARAVAN", "caravan", "카라반"], ["BUNGALOW", "tent", "방갈로"], ["PENSION", "home", "펜션"], ["CAR_CAMP", "car", "차박"], ["DECK", "layers", "데크"], ["SOLO", "tent", "백패킹"]];
 const TASTE_SIZES = [[0,"규격 무관"],[6,"6m+"],[8,"8m+"],[10,"10m+"]];
 const TASTE_WATTS = [[0,"전기 무관"],[600,"600W+ (기본)"],[1000,"1000W+ (고용량)"],[1400,"1400W+ (초고용량)"]];
 const TASTE_ENVS = [["valley","th:VALLEY","계곡"],["river","th:LAKE","강·호수·천"],["beach","th:BEACH","바다·해변"]];
-const TASTE_EXPS = [["horse","spark","승마"],["animal","paw","동물"],["craft","spark","공예"],["leisure","leports","수상레저"],["sled","spark","썰매"],["tidal","water","갯벌"],["fishing","fish","낚시"],["forestTrail","forest","숲체험"],["catch","water","잡기"],["harvest","experience","수확"],["grow","experience","재배"]];
-const TASTE_FACS = [["fire","flame","장작·불멍"],["tarp","tent","타프존"],["privateFridge","check","개별냉장고"],["sharedFridge","amenity","공용냉장고"],["heaterRental","flame","팬히터 대여"],["rental","cart","장비 대여"],["pet","paw","반려견"],["warmPool","hotwater","온수풀"],["kidsPool","playground","키즈풀"],["pool","swim","수영장"]];
+const TASTE_EXPS = [["horse","horse","승마"],["animal","paw","동물"],["craft","craft","공예"],["leisure","waterleisure","수상레저"],["sled","sled","썰매"],["tidal","tidal","갯벌"],["fishing","fish","낚시"],["forestTrail","forest","숲체험"],["catch","water","잡기"],["harvest","experience","수확"],["grow","experience","재배"]];
+const TASTE_FACS = [["fire","flame","장작·불멍"],["tarp","tent","타프존"],["privateFridge","fridge","개별냉장고"],["sharedFridge","amenity","공용냉장고"],["heaterRental","flame","팬히터 대여"],["rental","cart","장비 대여"],["pet","paw","반려견"],["warmPool","hotwater","온수풀"],["kidsPool","playground","키즈풀"],["pool","swim","수영장"]];
 
 function myTasteSummaryChips(taste = getMyTaste()) {
   const b = [];
-  if (taste.types?.length) for (const t of taste.types) b.push(`<span class="taste-badge">${ic("tent")}${esc(ST[t]?.label || (KINDS.find((k) => k[0] === t)?.[1]) || t)}</span>`);
+  if (taste.types?.length) for (const t of taste.types) b.push(`<span class="taste-badge">${ic(ST[t]?.icon || (TASTE_TYPES.find((x) => x[0] === t)?.[1]) || "tent")}${esc(ST[t]?.label || (TASTE_TYPES.find((x) => x[0] === t)?.[2]) || (KINDS.find((k) => k[0] === t)?.[1]) || t)}</span>`);
   if (taste.minSize > 0) b.push(`<span class="taste-badge">${ic("size")}${taste.minSize}m+</span>`);
   if (taste.minWatts >= 1400) b.push(`<span class="taste-badge">${ic("bolt")}1400W+ 초고용량</span>`);
   else if (taste.minWatts >= 1000) b.push(`<span class="taste-badge">${ic("bolt")}1000W+ 고용량</span>`);
@@ -4853,13 +4853,6 @@ function listResults(p) {
   // 거리순을 제외한 모든 목록은 공통 품질 순서를 적용한다.
   const byCamp = new Map(shown.map((x) => [x.c, x]));
   return { shown: qualityOrder(shown.map((x) => x.c), { distance: S.listSort === "near" }).map((c) => byCamp.get(c)) };
-}
-// 등록 규격 중 가장 큰 사이트(가로×세로). 조건 검색의 ‘사이트 크기’와 같은 값.
-function siteSizeText(c) {
-  const gs = (c.field_conditions?.site_size?.groups ?? []).filter((g) => g.width_m && g.depth_m);
-  if (!gs.length) return c.tq?.mx ? `사이트 최대 ${c.tq.mx[0]}×${c.tq.mx[1]}m${c.tq.n ? ` · 예약 화면 ${c.tq.n}개 사이트` : ""}` : "";
-  const big = gs.reduce((a, g) => (Math.max(g.width_m, g.depth_m) > Math.max(a.width_m, a.depth_m) ? g : a));
-  return `사이트 최대 ${big.width_m}×${big.depth_m}m`;
 }
 // 켜진 조건이 이 캠핑장에서 어떻게 맞는지: ✓ 근거 · 법정 기준 · 확인 필요
 function condLine(c, ce) {
@@ -6157,13 +6150,6 @@ function factPieces(v) {
     const w = t.split(/\s+/); const i = w.findIndex((x) => /\d/.test(x));
     return i > 0 ? [w.slice(0, i).join(" "), w.slice(i).join(" ")] : ["", t];
   });
-}
-function profileListSection(d, key, id, icon, title, other) {
-  const x = profFact(PF(d, key));
-  if (!x?.v || /^업장 미공지/.test(String(x.v))) return "";
-  const rows = factPieces(x.v);
-  if (!rows.length) return "";
-  return `<section class="d-sec" id="${id}"><div class="sec-head">${iconTitle(icon, title)}</div><dl class="uses">${rows.map(([l, v]) => `<div class="use"><dt>${ic(PIECE_IC(l + v))}${esc(l || other)}</dt><dd><span class="use-val">${esc(l ? wonText(v) : v)}</span><span class="use-meta">${dot(x.g)}${srcTip(x, title)}</span></dd></div>`).join("")}</dl></section>`;
 }
 // 추가 요금·대여는 이용 정보 안에 합쳐 표시한다. 샤워·위생은 편의시설과
 // 같은 수량을 반복하므로 별도 섹션으로 렌더링하지 않는다.
