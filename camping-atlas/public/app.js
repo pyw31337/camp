@@ -4264,16 +4264,16 @@ function getMyTastePicks() {
   });
 }
 
-const TASTE_TYPES = [["AUTO", "오토캠핑", "car"], ["GLAMPING", "글램핑", "glamping"], ["CARAVAN", "카라반", "caravan"], ["BUNGALOW", "방갈로", "tent"], ["PENSION", "펜션", "home"], ["CAR_CAMP", "차박", "car"], ["DECK", "데크", "layers"], ["SOLO", "백패킹", "tent"]];
+const TASTE_TYPES = [["AUTO", "car", "오토캠핑"], ["GLAMPING", "glamping", "글램핑"], ["CARAVAN", "caravan", "카라반"], ["BUNGALOW", "tent", "방갈로"], ["PENSION", "home", "펜션"], ["CAR_CAMP", "car", "차박"], ["DECK", "layers", "데크"], ["SOLO", "tent", "백패킹"]];
 const TASTE_SIZES = [[0,"규격 무관"],[6,"6m+"],[8,"8m+"],[10,"10m+"]];
 const TASTE_WATTS = [[0,"전기 무관"],[600,"600W+ (기본)"],[1000,"1000W+ (고용량)"],[1400,"1400W+ (초고용량)"]];
 const TASTE_ENVS = [["valley","th:VALLEY","계곡"],["river","th:LAKE","강·호수·천"],["beach","th:BEACH","바다·해변"]];
-const TASTE_EXPS = [["horse","spark","승마"],["animal","paw","동물"],["craft","spark","공예"],["leisure","leports","수상레저"],["sled","spark","썰매"],["tidal","water","갯벌"],["fishing","fish","낚시"],["forestTrail","forest","숲체험"],["catch","water","잡기"],["harvest","experience","수확"],["grow","experience","재배"]];
-const TASTE_FACS = [["fire","flame","장작·불멍"],["tarp","tent","타프존"],["privateFridge","check","개별냉장고"],["sharedFridge","amenity","공용냉장고"],["heaterRental","flame","팬히터 대여"],["rental","cart","장비 대여"],["pet","paw","반려견"],["warmPool","hotwater","온수풀"],["kidsPool","playground","키즈풀"],["pool","swim","수영장"]];
+const TASTE_EXPS = [["horse","horse","승마"],["animal","paw","동물"],["craft","craft","공예"],["leisure","waterleisure","수상레저"],["sled","sled","썰매"],["tidal","tidal","갯벌"],["fishing","fish","낚시"],["forestTrail","forest","숲체험"],["catch","water","잡기"],["harvest","experience","수확"],["grow","experience","재배"]];
+const TASTE_FACS = [["fire","flame","장작·불멍"],["tarp","tent","타프존"],["privateFridge","fridge","개별냉장고"],["sharedFridge","amenity","공용냉장고"],["heaterRental","flame","팬히터 대여"],["rental","cart","장비 대여"],["pet","paw","반려견"],["warmPool","hotwater","온수풀"],["kidsPool","playground","키즈풀"],["pool","swim","수영장"]];
 
 function myTasteSummaryChips(taste = getMyTaste()) {
   const b = [];
-  if (taste.types?.length) for (const t of taste.types) b.push(`<span class="taste-badge">${ic("tent")}${esc(ST[t]?.label || (KINDS.find((k) => k[0] === t)?.[1]) || t)}</span>`);
+  if (taste.types?.length) for (const t of taste.types) b.push(`<span class="taste-badge">${ic(ST[t]?.icon || (TASTE_TYPES.find((x) => x[0] === t)?.[1]) || "tent")}${esc(ST[t]?.label || (TASTE_TYPES.find((x) => x[0] === t)?.[2]) || (KINDS.find((k) => k[0] === t)?.[1]) || t)}</span>`);
   if (taste.minSize > 0) b.push(`<span class="taste-badge">${ic("size")}${taste.minSize}m+</span>`);
   if (taste.minWatts >= 1400) b.push(`<span class="taste-badge">${ic("bolt")}1400W+ 초고용량</span>`);
   else if (taste.minWatts >= 1000) b.push(`<span class="taste-badge">${ic("bolt")}1000W+ 고용량</span>`);
