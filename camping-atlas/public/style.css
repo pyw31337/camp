@@ -875,6 +875,8 @@ align-items: center; justify-content: center; transition: all .15s ease;
 /* 숙박 상품 배지(글램핑·카라반·방갈로·트레일러·오토캠핑·데크 등) — 같은 캡슐, 색 아이콘 원 */
 .bdg-glamp { --c: #c2410c; }
 .bdg-caravan { --c: #1d4ed8; }
+.bdg-bungalow { --c: #d97706; }
+.bdg-pension { --c: #7c3aed; }
 .bdg-house { --c: #7c3aed; }
 .bdg-rv { --c: #475569; }
 .bdg-auto { --c: #059669; }
@@ -892,6 +894,8 @@ align-items: center; justify-content: center; transition: all .15s ease;
 .stay-bdgs .bdg .ic { width: 20px; height: 20px; padding: 3px; border-radius: 999px; color: #fff; }
 .qc-glamp[aria-pressed="true"] { background: #c2410c; color: #fff; border-color: #c2410c; }
 .qc-caravan[aria-pressed="true"] { background: #1d4ed8; color: #fff; border-color: #1d4ed8; }
+.qc-bungalow[aria-pressed="true"] { background: #d97706; color: #fff; border-color: #d97706; }
+.qc-pension[aria-pressed="true"] { background: #7c3aed; color: #fff; border-color: #7c3aed; }
 .qc-house[aria-pressed="true"] { background: #7c3aed; color: #fff; border-color: #7c3aed; }
 /* 불가사항: 빨간색 캡슐 배경, 좌측 흰색 배경에 빨간색 아이콘, 우측 흰색 텍스트로 차별화(소유자 요청) */
 .bdg-no {

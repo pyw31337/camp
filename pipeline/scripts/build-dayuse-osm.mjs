@@ -73,7 +73,7 @@ const PO = official.sort((a, b) => b.a - a.a).map((p) => { const r = rec(p, "par
     [/화장실/, "화장실"], [/주차/, "주차장"], [/매점|편의점/, "매점·편의점"], [/산책|둘레길/, "산책로"],
     [/놀이터|놀이대/, "놀이터"], [/수영|물놀이|분수/, "물놀이 시설"], [/운동|체육|축구|농구|테니스/, "운동시설"],
   ].filter(([re]) => re.test(facilityText)).map(([, label]) => label);
-  return { ...r, id: `park-${u.no}-${[...u.name].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) >>> 0, 7).toString(36).slice(0, 5)}`, sido: sd || r.sido, sigungu: sg || r.sigungu, rg: "addr", addr: u.addr, tel: u.tel || "", osm: undefined, auto: 1, op: "LOCAL_GOVERNMENT",
+  return { ...r, id: `park-${u.no}-${[...u.name].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) >>> 0, 7).toString(36).slice(0, 5)}`, sido: sd || r.sido, sigungu: sg || r.sigungu, rg: "addr", addr: u.addr, tel: u.tel || "", osm: undefined, auto: undefined, op: "LOCAL_GOVERNMENT",
     amenities: [...new Set(amenities)],
     park_info: { category: u.se || "공원", area_m2: u.area || null, operator: u.inst || "", facilities: groups, facility_text: facilityText.slice(0, 320) },
     pf: { s: `${u.se} · 면적 약 ${Math.round(u.area / 1000) / 10}만㎡${facilityText ? ` · 시설 ${facilityText.slice(0, 60)}` : ""} · 취사·그늘막 규정은 관리기관(${u.inst})에 확인`, t: ["PARK"] },
