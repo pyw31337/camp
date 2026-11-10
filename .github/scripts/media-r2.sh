@@ -42,8 +42,10 @@ case "$cmd" in
     # t43: 없는 폴더(예: cards만 받아 온 카드 사진 작업의 camps/)에서 find가 1로 끝나면 pipefail+set -e로
     # 메시지 없이 실패했다(2026-10-31부터 매일). 있는 폴더만 센다.
     (cd "$dir" && for d in camps cards; do [ -d "$d" ] && find "$d" -name '*.webp'; done; true) | sort -u > "$tmp.local"
-    missing="$(comm -23 "$tmp.local" "$tmp" | wc -l)"
-    echo "R2 올림 확인: 로컬 $(wc -l < "$tmp.local")장 · R2 $(wc -l < "$tmp")장 · R2에 없는 로컬 사진 ${missing}장"
+    missing="$(comm -23 "$tmp.local" "$tmp" | wc -l | tr -d ' ')"
+    local_count="$(wc -l < "$tmp.local" | tr -d ' ')"
+    r2_count="$(wc -l < "$tmp" | tr -d ' ')"
+    echo "R2 올림 확인: 로컬 ${local_count}장 · R2 ${r2_count}장 · R2에 없는 로컬 사진 ${missing}장"
     if [ "$missing" != "0" ]; then echo "::error::R2에 올라가지 않은 사진 ${missing}장 — media 브랜치에서 사진을 빼지 않습니다."; comm -23 "$tmp.local" "$tmp" | head -5; exit 1; fi
     ;;
   git-json-only)

@@ -2867,6 +2867,40 @@ background: var(--line);
 .price-sec .plist li.pl-extra {
 background: var(--soft);
 }
+/* 요금 그리드 상품별 썸네일 노출 */
+.price-sec .plist li.has-thumb {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+.pl-thumb-wrap {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface-2, #f3f4f6);
+}
+.pl-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.pl-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pl-info b { min-width: 0; }
+.pl-lbl {
+  font-size: 13px;
+  color: var(--ink-2, #4b5563);
+  font-weight: 700;
+}
 .price-sec .st-foot { margin: 10px 2px 0; }
 /* 더 보기: 플랫폼 아이콘을 같은 크기·모양으로(둥근 네모 26px, 글리프 15px, 단색) */
 
