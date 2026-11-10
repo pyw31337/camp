@@ -668,20 +668,6 @@ const isParkCamp = (c) => c.du === "park" || (/공원|유원지/.test(c.name) &&
 // 도시공원 표준데이터는 나들이 후보를 넓게 찾는 원장이다. 숙박 상품의
 // 상세 스펙이 아닌 시설·주소 중심 값이 많으므로 일반 캠핑장과 같은 밀도로
 // 지도·기본 목록에 섞으면 비교 결과가 왜곡된다. (isPublicPark 함수는 상단 정의)
-let publicParkCoreFloor = null;
-function publicParkEvidence(c) {
-  const day = c.day ?? {}, profile = c.park_info ?? c.park ?? {};
-  const facilities = profile.facilities ?? profile.facility_groups ?? c.park_facilities ?? "";
-  return [
-    Boolean(c.tel), Boolean(c.homepage), Boolean(c.src?.url), Boolean(c.pf?.s),
-    Array.isArray(c.amenities) && c.amenities.length > 0,
-    Array.isArray(facilities) ? facilities.length > 0 : Boolean(facilities),
-    Number.isFinite(c.nearby_toilets?.within_500m),
-    day.cooking?.v && day.cooking.v !== "UNKNOWN",
-    day.shade?.v && day.shade.v !== "UNKNOWN",
-    Boolean(c.fee?.min || c.fee?.max),
-  ].filter(Boolean).length;
-}
 const DOC_RE = /배치도|도면|layout|cert|등록증|신고서|사업자|허가증|안내도|4157qtog|7769KMjKnSuN5G6umGgImjui|3916WQ8qu2YUoU0aTu5OiSyI|5326uedfrszollnn8MKJxnRw|21ffa8f8|389ad86c|848669b7|ae803104|50ddaa3e/i;
 const isDocImg = (u, c) => !u || DOC_RE.test(photoUrl(u)) || c?.layout_images?.some((x) => x && photoUrl(u).toLowerCase().includes(x.toLowerCase()));
 function coreBrowseEligible(c) {
