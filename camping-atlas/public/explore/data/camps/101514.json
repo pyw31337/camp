@@ -2152,19 +2152,55 @@
     "겨울"
   ],
   "booking": {
-    "primary": {
-      "channel": "camfit",
-      "label": "캠핏",
-      "url": "https://camfit.co.kr/camp/627a05fcde20bb001f3f9829",
-      "real_time": true
-    },
+    "methods": [
+      "온라인실시간예약"
+    ],
+    "url": "https://camfit.co.kr/camp/627a05fcde20bb001f3f9829",
     "channels": [
       {
+        "platform_id": "camfit",
+        "platform_name": "캠핏",
+        "url": "https://camfit.co.kr/camp/627a05fcde20bb001f3f9829",
+        "kind": "online",
+        "confidence": 0.95,
+        "evidence": [
+          "operator_booking_channel",
+          "camfit_confirmed"
+        ],
         "channel": "camfit",
         "label": "캠핏",
-        "url": "https://camfit.co.kr/camp/627a05fcde20bb001f3f9829",
         "real_time": true
+      },
+      {
+        "platform_id": "phone",
+        "platform_name": "전화 예약",
+        "url": "tel:01050376605",
+        "kind": "phone",
+        "confidence": 0.5,
+        "evidence": [
+          "contact.tel(문의)"
+        ]
       }
-    ]
+    ],
+    "primary": {
+      "platform_id": "camfit",
+      "platform_name": "캠핏",
+      "url": "https://camfit.co.kr/camp/627a05fcde20bb001f3f9829",
+      "kind": "online",
+      "confidence": 0.95,
+      "evidence": [
+        "operator_booking_channel",
+        "camfit_confirmed"
+      ],
+      "channel": "camfit",
+      "label": "캠핏",
+      "real_time": true
+    },
+    "source": {
+      "label": "고캠핑 운영자 등록 예약 정보",
+      "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=101514",
+      "checked_at": "2026-11-04T08:24:00+09:00",
+      "tier": "C"
+    }
   }
 }

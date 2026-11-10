@@ -1940,20 +1940,56 @@
     "checked_at": "2026-10-20T06:14:36.253Z"
   },
   "booking": {
-    "primary": {
-      "channel": "camfit",
-      "label": "캠핏",
-      "url": "https://camfit.co.kr/camp/61e0f0653d9e4a001fb17300",
-      "real_time": true
-    },
     "channels": [
       {
+        "platform_id": "camfit",
+        "platform_name": "캠핏",
+        "url": "https://camfit.co.kr/camp/61e0f0653d9e4a001fb17300",
+        "kind": "online",
+        "confidence": 0.95,
+        "evidence": [
+          "operator_booking_channel",
+          "camfit_confirmed"
+        ],
         "channel": "camfit",
         "label": "캠핏",
-        "url": "https://camfit.co.kr/camp/61e0f0653d9e4a001fb17300",
         "real_time": true
+      },
+      {
+        "platform_id": "phone",
+        "platform_name": "전화 예약",
+        "url": "tel:0315369070",
+        "kind": "phone",
+        "confidence": 0.5,
+        "evidence": [
+          "contact.tel(문의)"
+        ]
       }
-    ]
+    ],
+    "primary": {
+      "platform_id": "camfit",
+      "platform_name": "캠핏",
+      "url": "https://camfit.co.kr/camp/61e0f0653d9e4a001fb17300",
+      "kind": "online",
+      "confidence": 0.95,
+      "evidence": [
+        "operator_booking_channel",
+        "camfit_confirmed"
+      ],
+      "channel": "camfit",
+      "label": "캠핏",
+      "real_time": true
+    },
+    "source": {
+      "label": "고캠핑 운영자 등록 예약 정보",
+      "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100372",
+      "checked_at": "2026-11-04T08:24:00+09:00",
+      "tier": "C"
+    },
+    "methods": [
+      "온라인실시간예약"
+    ],
+    "url": "https://camfit.co.kr/camp/61e0f0653d9e4a001fb17300"
   },
   "seasons": [
     "봄",

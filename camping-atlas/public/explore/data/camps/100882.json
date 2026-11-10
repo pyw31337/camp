@@ -2073,20 +2073,57 @@
     "checked_at": "2026-10-20T04:23:09.384Z"
   },
   "booking": {
-    "primary": {
-      "channel": "camfit",
-      "label": "캠핏",
-      "url": "https://camfit.co.kr/camp/62d8ea2e078028001fb54dc8",
-      "real_time": true
-    },
+    "methods": [
+      "온라인실시간예약"
+    ],
     "channels": [
       {
+        "platform_id": "camfit",
+        "platform_name": "캠핏",
+        "url": "https://camfit.co.kr/camp/62d8ea2e078028001fb54dc8",
+        "kind": "online",
+        "confidence": 0.95,
+        "evidence": [
+          "operator_booking_channel",
+          "camfit_confirmed"
+        ],
         "channel": "camfit",
         "label": "캠핏",
-        "url": "https://camfit.co.kr/camp/62d8ea2e078028001fb54dc8",
         "real_time": true
+      },
+      {
+        "platform_id": "naver-cafe",
+        "platform_name": "네이버 카페(운영자 카페 예약)",
+        "url": "https://cafe.naver.com/camparound",
+        "kind": "online",
+        "confidence": 0.81,
+        "evidence": [
+          "contact.homepage",
+          "methods:온라인실시간예약"
+        ]
       }
-    ]
+    ],
+    "primary": {
+      "platform_id": "camfit",
+      "platform_name": "캠핏",
+      "url": "https://camfit.co.kr/camp/62d8ea2e078028001fb54dc8",
+      "kind": "online",
+      "confidence": 0.95,
+      "evidence": [
+        "operator_booking_channel",
+        "camfit_confirmed"
+      ],
+      "channel": "camfit",
+      "label": "캠핏",
+      "real_time": true
+    },
+    "source": {
+      "label": "고캠핑 운영자 등록 예약 정보",
+      "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100882",
+      "checked_at": "2026-11-04T08:24:00+09:00",
+      "tier": "C"
+    },
+    "url": "https://camfit.co.kr/camp/62d8ea2e078028001fb54dc8"
   },
   "seasons": [
     "봄",
