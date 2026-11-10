@@ -421,8 +421,8 @@ function campSearchText(c) {
   ];
   return (c._st = parts.join(" "));
 }
-// 동계 휴장 여부 (소유자 2026-11-09): c.win === 0 또는 불가 목록에 NO_WINTER가 있는 경우
-const isWinterClosedCamp = (c) => Boolean(c.win === 0 || noKeys(c).includes("NO_WINTER"));
+// 동계 휴장 여부 (소유자 2026-11-09): c.win === 0 또는 불가 목록에 NO_WINTER가 있는 경우 (단, 난방기구 현장 대여 등 동계 시설이 확인된 곳은 제외)
+const isWinterClosedCamp = (c) => Boolean(!heaterRentalInfo(c) && (c.win === 0 || noKeys(c).includes("NO_WINTER")));
 
 function heaterRentalInfo(c) {
   if (!c) return null;

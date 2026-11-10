@@ -1,0 +1,191 @@
+{
+  "intro": "강원특별자치도 홍천군 서면에 위치한 비발디캠핑파크 본점입니다. 홍천강 지류 맑은 계곡과 산자락에 위치하여 사계절 오토캠핑 및 캠핑하우스 휴식을 즐기실 수 있습니다. 넓은 70면 규모의 사이트(잔디, 파쇄석, 테크)와 트레일러 진입이 가능하며 계곡 물놀이와 카약 체험 등 가족 단위 힐링 캠핑에 최적화되어 있습니다.",
+  "nearby": {
+    "tour": [],
+    "food": [],
+    "mart": []
+  },
+  "guide": [
+    {
+      "title": "일반캠핑",
+      "table": {
+        "cols": [
+          "평상시 주중",
+          "평상시 주말",
+          "성수기 주중",
+          "성수기 주말"
+        ],
+        "rows": [
+          {
+            "label": "일반",
+            "values": [
+              "35,000",
+              "35,000",
+              "45,000",
+              "50,000"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "photos": [
+    "https://tong.visitkorea.or.kr/cms/resource/49/4079449_image3_1.jpg"
+  ],
+  "seasons": [
+    "봄",
+    "여름",
+    "가을",
+    "겨울"
+  ],
+  "booking": {
+    "primary": {
+      "channel": "homepage",
+      "label": "공식 홈페이지",
+      "url": "https://vivaldicamping.com",
+      "real_time": true
+    },
+    "channels": [
+      {
+        "channel": "homepage",
+        "label": "공식 홈페이지",
+        "url": "https://vivaldicamping.com",
+        "real_time": true
+      }
+    ]
+  },
+  "gcd": {
+    "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=1436",
+    "info": {
+      "주소": "강원특별자치도 홍천군 서면 한서로 1031-11",
+      "문의처": "010-5203-3593",
+      "캠핑장 유형": "자동차야영장",
+      "운영기간": "봄, 여름, 가을, 겨울",
+      "운영일": "평일+주말",
+      "예약방법": "온라인실시간예약",
+      "주변이용가능시설": "계곡 물놀이, 낚시",
+      "안전교육 이수 연도 (최근 3년)": "2024 2025"
+    },
+    "facilities": [
+      {
+        "k": "주요시설",
+        "v": "자동차야영장사이트(70면)",
+        "items": [
+          "자동차야영장사이트(70면)"
+        ]
+      },
+      {
+        "k": "기타 정보",
+        "v": "개인 트레일러 입장가능",
+        "items": [
+          "개인 트레일러 입장가능"
+        ]
+      },
+      {
+        "k": "바닥형태 (단위:면)",
+        "v": "잔디 (15) · 파쇄석 (36) · 테크 (19)",
+        "items": [
+          "잔디 (15)",
+          "파쇄석 (36)",
+          "테크 (19)"
+        ]
+      },
+      {
+        "k": "사이트 크기",
+        "v": "7 X 9 : 30개 · 8 X 10 : 40개"
+      },
+      {
+        "k": "캠핑장비대여",
+        "v": "릴선 · 화로대",
+        "items": [
+          "릴선",
+          "화로대"
+        ]
+      },
+      {
+        "k": "반려동물 출입",
+        "v": "불가능"
+      },
+      {
+        "k": "화로대",
+        "v": "개별"
+      },
+      {
+        "k": "안전시설현황",
+        "v": "소화기 (67)",
+        "items": [
+          "소화기 (67)"
+        ]
+      }
+    ],
+    "updated": "2026-01-01"
+  },
+  "profile": {
+    "fields": {
+      "TYPE": {
+        "value": "오토 70",
+        "grade": "CONFIRMED",
+        "total": 70,
+        "source": {
+          "label": "고캠핑",
+          "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=1436",
+          "date": "2026-01-01"
+        }
+      },
+      "SEASON": {
+        "value": "봄·여름·가을·겨울 운영 (사계절)",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "고캠핑 및 공식홈페이지",
+          "url": "https://vivaldicamping.com",
+          "date": "2026-11-10"
+        }
+      },
+      "PARKING": {
+        "value": "사이트 옆 주차",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "고캠핑",
+          "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=1436",
+          "date": "2026-01-01"
+        }
+      },
+      "POWER": {
+        "value": "전기 이용 가능 (사이트별)",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "고캠핑",
+          "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=1436",
+          "date": "2026-01-01"
+        }
+      },
+      "AMENITIES": {
+        "value": "전기 · 온수 · 매점 · 화장실 · 샤워실 · 개수대",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "고캠핑",
+          "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=1436",
+          "date": "2026-01-01"
+        }
+      },
+      "PET": {
+        "value": "반려동물 불가",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "고캠핑",
+          "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=1436",
+          "date": "2026-01-01"
+        }
+      },
+      "FIRE": {
+        "value": "화로대 사용 가능 (개별)",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "고캠핑",
+          "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=1436",
+          "date": "2026-01-01"
+        }
+      }
+    }
+  }
+}

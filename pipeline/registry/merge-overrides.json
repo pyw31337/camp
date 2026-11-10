@@ -3,6 +3,46 @@
   "overrides": [
     {
       "file": "campgrounds.json",
+      "id": "100882",
+      "field": "win",
+      "reason": "캠핏(camfit) 실시간 예약 및 동계 정상 운영 확인, 사계절 캠핑장으로 정정",
+      "by": "Antigravity",
+      "at": "2026-11-10"
+    },
+    {
+      "file": "100882.json",
+      "id": "100882",
+      "field": "profile.fields.SEASON",
+      "reason": "캠핏 실시간 예약 및 동계 정상 운영 확인(사계절 운영)",
+      "by": "Antigravity",
+      "at": "2026-11-10"
+    },
+    {
+      "file": "100372.json",
+      "id": "100372",
+      "field": "profile.fields.POWER",
+      "reason": "옛 블로그 600W 언급 대신 캠핏 운영자 공식 공지 1100W 고용량 전기 지원으로 정정",
+      "by": "Antigravity",
+      "at": "2026-11-10"
+    },
+    {
+      "file": "campgrounds.json",
+      "id": "101514",
+      "field": "win",
+      "reason": "캠핏(camfit) 실시간 예약 및 12월/동계 정상 운영 확인, 난방기구 현장 대여 갖춘 사계절 캠핑장",
+      "by": "Antigravity",
+      "at": "2026-11-10"
+    },
+    {
+      "file": "101514.json",
+      "id": "101514",
+      "field": "profile.fields.SEASON",
+      "reason": "캠핏 실시간 예약 및 동계 정상 운영 확인(사계절 운영)",
+      "by": "Antigravity",
+      "at": "2026-11-10"
+    },
+    {
+      "file": "campgrounds.json",
       "id": "101898",
       "field": "fee",
       "reason": "풀빌라 단일 요금(60만원) 대신 본체 오토캠핑 기준 요금(10만원, 평일 주말) 및 사이트·카라반·풀빌라 형태별 요금 정정",
