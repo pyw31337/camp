@@ -1772,6 +1772,24 @@ document.addEventListener("click", (e) => {
     rail.querySelectorAll(".unique-card-details, .card-spec-details").forEach((x) => { if (x !== d && x.open !== st) x.open = st; });
   }, 0);
 });
+// 찜 목록 카드 상세정보 토글 시 화면 내 모든 찜한 카드 상세정보 동시 토글 (소유자 2026-11-10)
+document.addEventListener("click", (e) => {
+  const toggle = e.target.closest("[data-saved-card-spec-toggle]");
+  if (!toggle) return;
+  e.preventDefault();
+  const group = toggle.closest("[data-saved-card-spec]");
+  const panel = group?.querySelector("[data-saved-card-spec-panel]");
+  if (!panel) return;
+  const open = panel.hidden;
+  const root = toggle.closest(".saved-page, .saved-grid, #view") || document;
+  root.querySelectorAll("[data-saved-card-spec]").forEach((g) => {
+    const p = g.querySelector("[data-saved-card-spec-panel]");
+    const t = g.querySelector("[data-saved-card-spec-toggle]");
+    if (p) p.hidden = !open;
+    if (t) t.setAttribute("aria-expanded", String(open));
+    g.classList.toggle("is-open", open);
+  });
+});
 // ‘불가·금지’ 값은 사이트 어디서나 빨간 글씨(소유자 2026-10-22 전수 적용). 그린 뒤 글자 노드를 훑어 감싼다.
 // 짧은 값(24자 이하)은 통째로, 긴 문장은 그 낱말 묶음만. 빨간 배지·제목·입력칸은 건드리지 않는다.
 const NO_RE = /(불가능|불가|금지)(?!피|사의|결|분)/;
@@ -9610,22 +9628,6 @@ async function savedView() {
 function bindSaved() {
   initCarousels($("#view"));
   initSavedComments();
-  $$('[data-saved-card-spec-toggle]', $("#view")).forEach((toggle) => {
-    toggle.addEventListener("click", () => {
-      const group = toggle.closest("[data-saved-card-spec]");
-      const panel = $("[data-saved-card-spec-panel]", group);
-      if (!panel) return;
-      const open = panel.hidden;
-      // 찜 목록 전체의 모든 상세정보 동시 토글 (소유자 2026-11-10)
-      $$('[data-saved-card-spec]', $("#view")).forEach((g) => {
-        const p = $("[data-saved-card-spec-panel]", g);
-        const t = $("[data-saved-card-spec-toggle]", g);
-        if (p) p.hidden = !open;
-        if (t) t.setAttribute("aria-expanded", String(open));
-        g.classList.toggle("is-open", open);
-      });
-    });
-  });
   $("[data-saved-compare]")?.addEventListener("click", (e) => {
     if (S.saved.length < 2) { e.preventDefault(); toast("2곳 이상 찜하면 비교할 수 있어요"); }
   });
