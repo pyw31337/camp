@@ -6519,25 +6519,19 @@ function factValueHtml(x, fallback = "확인필요") {
 }
 function openProductModal(prod) {
   if (!prod) return;
-  const existing = document.getElementById("sp-modal");
-  if (existing) existing.remove();
+  document.getElementById("sp-modal")?.remove();
   const photos = prod.photos || (prod.img ? [prod.img] : []);
   const gallery = photos.map((u) => `<img src="${esc(u)}" alt="${esc(prod.name)}" loading="lazy">`).join("");
-  const modalHtml = `<div class="sp-modal-backdrop" id="sp-modal">
+  document.body.insertAdjacentHTML("beforeend", `<div class="sp-modal-backdrop" id="sp-modal">
     <div class="sp-modal-content">
       <button type="button" class="sp-modal-close" data-sp-close aria-label="닫기">✕</button>
-      <h3 style="margin:0 0 8px;font-size:18px;font-weight:800;color:var(--ink);">${esc(prod.name)}</h3>
-      <div class="sp-badges" style="margin-bottom:12px;">
-        ${prod.floor ? `<span class="sp-badge">${esc(prod.floor)}</span>` : ""}
-        ${prod.size ? `<span class="sp-badge">${esc(prod.size)}</span>` : ""}
-        ${prod.power ? `<span class="sp-badge accent">${esc(prod.power)}</span>` : ""}
-      </div>
-      ${prod.price ? `<p style="font-size:16px;font-weight:850;color:var(--accent);margin:0 0 10px;">1박 ${fmt(prod.price)}원~</p>` : ""}
-      ${prod.desc ? `<p style="font-size:13px;color:var(--ink-2);line-height:1.6;margin:0 0 14px;">${esc(prod.desc)}</p>` : ""}
+      <h3 class="sp-modal-title">${esc(prod.name)}</h3>
+      <div class="sp-badges">${prod.floor ? `<span class="sp-badge">${esc(prod.floor)}</span>` : ""}${prod.size ? `<span class="sp-badge">${esc(prod.size)}</span>` : ""}${prod.power ? `<span class="sp-badge accent">${esc(prod.power)}</span>` : ""}</div>
+      ${prod.price ? `<p class="sp-price" style="font-size:16px;margin:8px 0 10px;">1박 ${fmt(prod.price)}원~</p>` : ""}
+      ${prod.desc ? `<p class="sp-desc" style="white-space:normal;margin-bottom:12px;">${esc(prod.desc)}</p>` : ""}
       ${photos.length ? `<div class="sp-modal-gallery">${gallery}</div>` : ""}
     </div>
-  </div>`;
-  document.body.insertAdjacentHTML("beforeend", modalHtml);
+  </div>`);
 }
 
 function siteProductsHtml(c, d) {
@@ -6547,28 +6541,16 @@ function siteProductsHtml(c, d) {
     const thumb = p.photos?.[0] || p.img || "";
     const cnt = p.photos?.length || 0;
     const priceStr = p.price ? `${fmt(p.price)}원~` : (p.fee_text || "");
-    return `<div class="sp-card" data-sp-idx="${idx}" role="button" tabindex="0" aria-label="${esc(p.name)} 상세 사진 보기">
-      <div class="sp-thumb-wrap">
-        ${thumb ? `<img class="sp-thumb" src="${esc(thumb)}" alt="${esc(p.name)}" loading="lazy">` : `<div class="sp-thumb" style="display:flex;align-items:center;justify-content:center;color:#98a2b3;">${ic("tent")}</div>`}
-        ${cnt > 1 ? `<span class="sp-photo-cnt">${cnt}장</span>` : ""}
-      </div>
+    return `<div class="sp-card" data-sp-idx="${idx}" role="button" tabindex="0" aria-label="${esc(p.name)} 사진">
+      <div class="sp-thumb-wrap">${thumb ? `<img class="sp-thumb" src="${esc(thumb)}" alt="${esc(p.name)}" loading="lazy">` : `<div class="sp-thumb" style="display:flex;align-items:center;justify-content:center;color:#98a2b3;">${ic("tent")}</div>`}${cnt > 1 ? `<span class="sp-photo-cnt">${cnt}장</span>` : ""}</div>
       <div class="sp-body">
         <h4 class="sp-title">${esc(p.name)}</h4>
-        <div class="sp-badges">
-          ${p.floor ? `<span class="sp-badge">${esc(p.floor)}</span>` : ""}
-          ${p.size ? `<span class="sp-badge">${esc(p.size)}</span>` : ""}
-          ${p.power ? `<span class="sp-badge accent">${esc(p.power)}</span>` : ""}
-        </div>
-        ${priceStr ? `<p class="sp-price">${esc(priceStr)}</p>` : ""}
-        ${p.desc ? `<p class="sp-desc">${esc(p.desc)}</p>` : ""}
+        <div class="sp-badges">${p.floor ? `<span class="sp-badge">${esc(p.floor)}</span>` : ""}${p.size ? `<span class="sp-badge">${esc(p.size)}</span>` : ""}${p.power ? `<span class="sp-badge accent">${esc(p.power)}</span>` : ""}</div>
+        ${priceStr ? `<p class="sp-price">${esc(priceStr)}</p>` : ""}${p.desc ? `<p class="sp-desc">${esc(p.desc)}</p>` : ""}
       </div>
     </div>`;
   }).join("");
-
-  return `<section class="d-sec sp-sec">
-    <div class="sec-head">${iconTitle("tent", "구역·객실별 실물 사진 & 세부 규격")}<span class="sec-side" style="font-size:12px;color:var(--ink-3);font-weight:700;">${prods.length}개 구역</span></div>
-    <div class="sp-rail rail">${cards}</div>
-  </section>`;
+  return `<section class="d-sec sp-sec"><div class="sec-head">${iconTitle("tent", "구역·객실별 실물 사진 & 세부 규격")}<span class="sec-side" style="font-size:12px;color:var(--ink-3);font-weight:700;">${prods.length}개 구역</span></div><div class="sp-rail rail">${cards}</div></section>`;
 }
 function siteTypesHtml(c, d) {
   const list = d?.site_types ?? (c.st ?? []).map(([code, count, g, sub]) => ({ code, count, sub, grade: g === "o" ? "OPERATOR" : "CONFIRMED" }));
@@ -9898,9 +9880,14 @@ function bindSaved() {
       const panel = $("[data-saved-card-spec-panel]", group);
       if (!panel) return;
       const open = panel.hidden;
-      panel.hidden = !open;
-      toggle.setAttribute("aria-expanded", String(open));
-      group.classList.toggle("is-open", open);
+      // 찜 목록 전체의 모든 상세정보 동시 토글 (소유자 2026-11-10)
+      $$('[data-saved-card-spec]', $("#view")).forEach((g) => {
+        const p = $("[data-saved-card-spec-panel]", g);
+        const t = $("[data-saved-card-spec-toggle]", g);
+        if (p) p.hidden = !open;
+        if (t) t.setAttribute("aria-expanded", String(open));
+        g.classList.toggle("is-open", open);
+      });
     });
   });
   $("[data-saved-compare]")?.addEventListener("click", (e) => {
