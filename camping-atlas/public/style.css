@@ -2835,50 +2835,81 @@ outline: none;
 .rs-alts a { display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border-radius: 999px; background: var(--paper); border: 1px solid var(--line); color: var(--ink-2); font-size: .76rem; font-weight: 800; text-decoration: none; }
 .rs-alts a:hover { border-color: var(--ink-3); color: var(--ink); }
 /* 1박 요금(하나로 합친 칸, 2026-10-19) */
-.price-sec .plist li { flex-wrap: wrap; }
-.price-sec .plist li b { min-width: 6.5em; font-variant-numeric: tabular-nums; }
-.price-sec .plist li span { flex: 1 1 10em; min-width: 0; }
+.price-sec .plist {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+@media (max-width: 480px) {
+  .price-sec .plist {
+    gap: 8px;
+  }
+}
+.price-sec .plist li { position: relative; }
+.price-sec .plist li b { min-width: 0; font-variant-numeric: tabular-nums; }
+.price-sec .plist li span { min-width: 0; }
 .price-sec .pl-kind { font-style: normal; font-size: var(--fs-min); font-weight: 800; color: var(--ink-3); background: var(--card, #fff); border-radius: 999px; padding: 2px 8px; }
 .price-sec .pl-m b { color: var(--ink-2); }
 .price-sec .plist .pl-divider {
-grid-column: 1 / -1;
-display: flex;
-align-items: center;
-gap: 10px;
-background: transparent !important;
-box-shadow: none !important;
-padding: 12px 2px 4px !important;
-border-radius: 0 !important;
-margin: 4px 0 0 !important;
-}
-.price-sec .plist .pl-divider span {
-font-size: .8rem;
-font-weight: 800;
-color: var(--ink-3);
-letter-spacing: -0.01em;
-white-space: nowrap;
-}
-.price-sec .plist .pl-divider::after {
-content: "";
-flex: 1;
-height: 1px;
-background: var(--line);
-}
-.price-sec .plist li.pl-extra {
-background: var(--soft);
-}
-/* 요금 그리드 상품별 썸네일 노출 */
-.price-sec .plist li.has-thumb {
+  grid-column: 1 / -1;
   display: flex;
   align-items: center;
-  gap: 12px;
-  flex-wrap: nowrap;
+  gap: 10px;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 12px 2px 4px !important;
+  border-radius: 0 !important;
+  margin: 4px 0 0 !important;
+}
+.price-sec .plist .pl-divider span {
+  font-size: .8rem;
+  font-weight: 800;
+  color: var(--ink-3);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.price-sec .plist .pl-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.price-sec .plist li.pl-extra {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--soft);
+}
+/* 요금 상하단 수직 카드(상단 썸네일, 하단 가격·상품명) */
+.price-sec .plist li.has-thumb {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--soft);
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.price-sec .plist li.has-thumb:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.price-sec .plist li.has-thumb:active {
+  transform: translateY(0);
 }
 .pl-thumb-wrap {
-  flex-shrink: 0;
-  width: 52px;
-  height: 52px;
-  border-radius: 8px;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  min-height: 105px;
+  max-height: 135px;
   overflow: hidden;
   background: var(--surface-2, #f3f4f6);
 }
@@ -2888,18 +2919,54 @@ background: var(--soft);
   object-fit: cover;
   display: block;
 }
+.pl-photo-badge {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  background: rgba(0, 0, 0, 0.68);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  line-height: 1.2;
+}
 .pl-info {
-  flex: 1;
-  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
+  padding: 10px 12px 12px;
 }
-.pl-info b { min-width: 0; }
+.pl-info b {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--ink);
+  line-height: 1.25;
+}
 .pl-lbl {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--ink-2, #4b5563);
   font-weight: 700;
+  line-height: 1.35;
+}
+.price-sec .plist li.has-thumb .pl-kind {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+.price-sec .plist li.has-thumb .ib {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 2;
 }
 .price-sec .st-foot { margin: 10px 2px 0; }
 /* 더 보기: 플랫폼 아이콘을 같은 크기·모양으로(둥근 네모 26px, 글리프 15px, 단색) */

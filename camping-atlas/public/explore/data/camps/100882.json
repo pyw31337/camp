@@ -2130,5 +2130,28 @@
     "여름",
     "가을",
     "겨울"
+  ],
+  "site_products": [
+    {
+      "id": "sp-100882-1",
+      "name": "오토캠핑",
+      "type": "AUTO",
+      "floor": [
+        "CRUSHED_STONE",
+        23
+      ],
+      "size": null,
+      "power": "전기 제공",
+      "price": 45000,
+      "photos": [
+        "https://www.gocamping.or.kr/upload/camp/100882/0330EuwPQtRo2NkoSXB2xeAk.jpg",
+        "https://www.gocamping.or.kr/upload/camp/100882/2245ANGyUGkUOXU77fVbHFoF.jpg",
+        "https://www.gocamping.or.kr/upload/camp/100882/2286toovqm5v4Km63TRE8DkV.jpg",
+        "https://www.gocamping.or.kr/upload/camp/100882/0802usGy2dWKhiVI3DPWHo3d.jpg",
+        "https://www.gocamping.or.kr/upload/camp/100882/937478SwpShqfaGfUQrVjLcp.jpg",
+        "https://www.gocamping.or.kr/upload/camp/100882/5576aiDeYID5WK5vShKD1wet.jpg"
+      ],
+      "desc": "시설 안내: 자동차야영장사이트(23면)"
+    }
   ]
 }

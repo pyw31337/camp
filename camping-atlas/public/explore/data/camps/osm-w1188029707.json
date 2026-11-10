@@ -1,1 +1,1166 @@
-{"day":{"cooking":{"v":"UNKNOWN","at":"2026-10-20"},"shade":{"v":"UNKNOWN","at":"2026-10-20"}},"du_src":{"url":"https://www.openstreetmap.org/way/1188029707","label":"© OpenStreetMap 기여자 (ODbL)","checked_at":"2026-10-20"},"nearby":{"public":{"pool":[{"name":"덕업관어린이수영장 수영장","kind":"pool","distance_m":4946,"lat":36.00563,"lng":129.35703,"source":"전국공공시설개방정보표준데이터(공공데이터포털)","source_id":"pool:%EB%8D%95%EC%97%85%EA%B4%80%EC%96%B4%EB%A6%B0%EC%9D%B4%EC%88%98%EC%98%81%EC%9E%A5%20%EC%88%98%EC%98%81%EC%9E%A5:36.0056","addr":"경상북도 포항시 남구 뱃머리길39번길 26","facts":{"유형":"기타","전화":"054-280-9580"},"url":"http://www.phsisul.org/home/59"},{"name":"포항수영장 수영장","kind":"pool","distance_m":5551,"lat":36.0084,"lng":129.36289,"source":"전국공공시설개방정보표준데이터(공공데이터포털)","source_id":"pool:%ED%8F%AC%ED%95%AD%EC%88%98%EC%98%81%EC%9E%A5%20%EC%88%98%EC%98%81%EC%9E%A5:36.0084","addr":"경상북도 포항시 남구 희망대로 810","facts":{"유형":"기타","전화":"054-280-9530"},"url":"https://www.phsisul.org/sisul_15/main.do"},{"name":"여성문화관수영장 수영장","kind":"pool","distance_m":9731,"lat":36.05639,"lng":129.36225,"source":"전국공공시설개방정보표준데이터(공공데이터포털)","source_id":"pool:%EC%97%AC%EC%84%B1%EB%AC%B8%ED%99%94%EA%B4%80%EC%88%98%EC%98%81%EC%9E%A5%20%EC%88%98%EC%98%81%EC%9E%A5:36.0564","addr":"경상북도 포항시 북구 새천년대로933번길 20","facts":{"유형":"기타","전화":"054-280-9550"},"url":"https://www.phsisul.org/sisul_17/main.do"}],"indoorplay":[{"name":"어린이교통랜드 체험관","kind":"indoorplay","distance_m":4946,"lat":36.00597,"lng":129.35669,"source":"전국공공시설개방정보표준데이터(공공데이터포털)","source_id":"indoorplay:%EC%96%B4%EB%A6%B0%EC%9D%B4%EA%B5%90%ED%86%B5%EB%9E%9C%EB%93%9C%20%EC%B2%B4%ED%97%98%EA%B4%80:36.0060","addr":"경상북도 포항시 남구 뱃머리길39번길 21","facts":{"유형":"기타","입장료":"무료","전화":"054-280-9490"},"url":"https://www.phsisul.org/sisul_21/main.do"}],"museum":[{"name":"포항시립미술관","kind":"museum","distance_m":12015,"lat":36.06628,"lng":129.39109,"source":"전국박물관미술관정보표준데이터(공공데이터포털)","source_id":"museum:%ED%8F%AC%ED%95%AD%EC%8B%9C%EB%A6%BD%EB%AF%B8%EC%88%A0%EA%B4%80:36.0663","addr":"경상북도 포항시 북구 환호공원길 10","facts":{"유형":"공립 미술관","전화":"054-270-4631"},"url":"http://poma.pohang.go.kr","img":"https://tong.visitkorea.or.kr/cms/resource/87/4078987_image3_1.jpg","img_u":"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2406280","img_s":"한국관광공사"},{"name":"경주바니베어박물관","kind":"museum","distance_m":14501,"lat":35.85189,"lng":129.27346,"source":"전국박물관미술관정보표준데이터(공공데이터포털)","source_id":"museum:%EA%B2%BD%EC%A3%BC%EB%B0%94%EB%8B%88%EB%B2%A0%EC%96%B4%EB%B0%95%EB%AC%BC%EA%B4%80:35.8519","addr":"경상북도 경주시 보문로 280-34","facts":{"유형":"사립 박물관","전화":"054-746-1991"},"url":"https://cafe.naver.com/bbmuseum"},{"name":"경주세계자동차박물관","kind":"museum","distance_m":14595,"lat":35.85211,"lng":129.26855,"source":"전국박물관미술관정보표준데이터(공공데이터포털)","source_id":"museum:%EA%B2%BD%EC%A3%BC%EC%84%B8%EA%B3%84%EC%9E%90%EB%8F%99%EC%B0%A8%EB%B0%95%EB%AC%BC%EA%B4%80:35.8521","addr":"경상북도 경주시 보문로 132-22","facts":{"유형":"사립 박물관","전화":"054-742-8900"},"url":"http://carmuseum.co.kr/","img":"https://tong.visitkorea.or.kr/cms/resource/92/4055892_image3_1.jpg","img_u":"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2899295","img_s":"한국관광공사"}],"forest":[{"name":"비학산자연휴양림","kind":"forest","distance_m":20926,"lat":36.14703,"lng":129.21111,"source":"전국휴양림표준데이터(공공데이터포털)","source_id":"rf-1np5juf","addr":"경상북도 포항시 북구 기북면 비학산길 302","facts":{"구분":"공립 휴양림","입장료":"숙박 : 7만원 + 11만원+ 14만원","숙박":"가능","주요 시설":"산림휴양관+숲속의 집+테라스하우스+카라반+야외데크+생태숲 등","전화":"054-252-3275"},"url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030052","img":"https://tong.visitkorea.or.kr/cms/resource/25/2753225_image3_1.jpg","img_u":"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2752702","img_s":"한국관광공사"},{"name":"토함산자연휴양림","kind":"forest","distance_m":24885,"lat":35.75855,"lng":129.36712,"source":"전국휴양림표준데이터(공공데이터포털)","source_id":"rf-1ye0nq9","addr":"경상북도 경주시 문무대왕면 불국로 1208-45","facts":{"구분":"공립 휴양림","입장료":"무료","숙박":"가능","주요 시설":"숲속의집+화랑관(어린이물놀이장)+야영장+국학관(세미나실) 등","전화":"054-750-8700"},"url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030027"},{"name":"운주산승마자연휴양림","kind":"forest","distance_m":29216,"lat":36.0351,"lng":128.99673,"source":"전국휴양림표준데이터(공공데이터포털)","source_id":"rf-16hq2oh","addr":"경상북도 영천시 임고면 승마휴양림길 105","facts":{"구분":"공립 휴양림","입장료":"무료","숙박":"가능","주요 시설":"숲속의집+야영데크+다목적구장+세미나실","전화":"054-330-2770"},"url":"https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030081","img":"https://tong.visitkorea.or.kr/cms/resource/78/3502678_image3_1.jpg","img_u":"https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1839066","img_s":"한국관광공사"}]},"conv":[{"n":"이마트24 경주강동로드점","m":2301,"a":"경상북도 경주시 강동면 천강로 1012, 1층","lat":35.97217,"lng":129.28933,"k":"편의점","ty":"인허가 등록"}],"mart":[{"n":"택전슈퍼","m":2007,"a":"경상북도 포항시 남구 연일읍 원서길117번길 1","lat":35.98768,"lng":129.33275,"k":"마트","ty":"인허가 등록"},{"n":"매일우유 이동대리점","m":1940,"a":"경상북도 포항시 남구 연일읍 원서길 124","lat":35.98763,"lng":129.3319,"k":"정육점·바베큐","ty":"축산물판매업 인허가"}],"fuel":[{"n":"(주)효문에너지 효문주유소","m":3084,"a":"경상북도 포항시 남구 새천년대로 206 (효자동)","lat":36.00462,"lng":129.324,"k":"주유소","ty":"석유판매업 인허가"}],"medical":[{"n":"럭키약국","m":2950,"a":"경상북도 포항시 남구 연일읍 유강길17번길 9","lat":36.00442,"lng":129.31832,"k":"약국","ty":"약국 인허가"},{"n":"GS25시 포항유강중앙점","m":2940,"a":"경상북도 포항시 남구 연일읍 유강길17번길 16","lat":36.00443,"lng":129.31733,"k":"안전상비의약품 판매점","ty":"인허가 등록"}],"vet":[{"n":"관문동물병원","m":3663,"a":"경상북도 포항시 남구 형산강북로 99 (효자동)","lat":36.00484,"lng":129.33766,"k":"동물병원","ty":"수의업 인허가"}]},"reviews":[{"t":"blog","title":"산과 바다의 매력이 동시에 퐝퐝! 포항 가을 캠핑 명소","snippet":"가능 ✅연인/가족 추천 ✅ 산책로 탐방 포항의 대표 생태 명소인 ‘중명자연생태공원’에 자리 잡고 있어 청정한 생태 환경을 두 눈으로 직접 만나 볼 수 있습니다...둔 가족 단위 캠퍼들에게 큰 사랑을 받고 있습니다. ​ 특히 15번 데크는 포항국민여가캠핑장의 인기 데크로 ​ 다른 데크보…","url":"https://blog.naver.com/inpohang/224451357597","src":"2026년도 포항과 함께! 퐝퐝!","thumb":null,"date":"2026-10-23"},{"t":"blog","title":"포항ㅣ포항국민여가캠핑장ㅣ15번 이용후기 데크추천 포항캠핑장추천 내돈내산","snippet":"포항 💦 시에서 운영하는 포항국민여가캠핑장 다녀왔어요 ! 포항시에서 운영하는 공공 캠핑장이라 부담 없는 가격으로 이용할 수 있고 중명자연생태공원 근처에 자리하고 있어 자연 속에서 조용하게 쉬어가기 좋은 곳이에요✔ ​ ✔ 예약방법 포항국민여가캠핑장 홈페이지 온라인 예약 포항국민여가캠핑…","url":"https://blog.naver.com/mornuna119/224390474870","src":"몰맛탱 ࿉∥","thumb":null,"date":"2026-08-26"},{"t":"blog","title":"2026 5월 하반기 일기","snippet":"자연탐험하기. 어디서 탐험을 하면 좋을까~~~ 하다가 근처에 있는 중명자연생태공원에 갔다. 원래 여기 작은 개울이 흐르는것 같아보여서 애들 발도 담그고...일요일은 평일요금이라 25000원인데 나는 다자녀 할인 30%받음. ​ 듣기로는 포항 시내 가까이 위치해있어서 우리처럼 잠 안자고…","url":"https://blog.naver.com/rebontobon/224329555628","src":"재미없는블로그","thumb":"https://search4.kakaocdn.net/argon/130x130_85_c/4oh45AnJZQG","date":"2026-06-28"},{"t":"blog","title":"포항국민여가캠핑장 추천 명당자리 예약방법 편의시설 WIFI 등 총정리","snippet":"점심시간 12~13) 정기휴장일: 없음 (별도 공지 시 휴장 가능) 입실 시간: 14:00부터 퇴실 시간: 다음날 11:00까지 입장 가능 인원: 사이트별 최대 6인 캠핑장...유무: ❌ WIFI: 사용가능 샤워실 운영시간: 06:00 ~ 23:00 주차: 중명자연생태공원 주차장 이용…","url":"https://serendipity93.com/83","src":"serendipity93 님의 블로그","thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/AgHqVrTftHY","date":"2025-04-28"},{"t":"blog","title":"[정보 공유] 겨울에도 즐기는 캠핑의 즐거움! 포항시 캠핑장 모음! / 포항시","snippet":"14:00 / 퇴실 11:00 ✅ 반려동물 동반 가능 <주요 시설> 캠핑사이트(3X4m 30면 데크) 분리수거장, 급수대, 전기시설 등 편의시설 주차장(중명자연생태공원 주차장 이용 가능) ​ ※포항국민여가캠핑장은 2025. 1. 1.~2. 28. 동절기간 휴장합니다 ​ 포항국민여가캠핑…","url":"https://blog.naver.com/pohang_budongsan/223683115538","src":"포항을 읽는 부동산 이야기","thumb":null,"date":"2024-12-05"},{"t":"blog","title":"[포항] 연일 중명자연생태공원 / 포항 국민여가캠핑장","snippet":"16 ​ 입실 14:00 부터 퇴실 다음날 11:00 까지 ​ Previous image Next image ​ 이건 캠핑장 배치도와 이용안내 ✔️ 포항 사람은 20% 할인이라고 하셨다 다자녀는 더 할인된다고 하심 ! 안그래도 저렴한데 할인까지 받으면 너무나 저렴한 가격으로 이용할 수…","url":"https://blog.naver.com/dkdlfjtm4806/222379950277","src":"Welcome to 져미월드","thumb":"https://search3.kakaocdn.net/argon/130x130_85_c/4xUuEvywqwj","date":"2021-06-02"}],"sns_images":[{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/ANeSSy2ymXo","img":"https://blog.kakaocdn.net/dn/YWjz6/btqM2GUgn8s/KrUkUqKnUWMsS2UkUvJG61/img.jpg","url":"https://full012.tistory.com/9292","src":"티스토리","w":699,"h":466,"date":"2020-11-08"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/G23X8c5czqT","img":"https://t1.daumcdn.net/cfile/blog/14405C3A5048BA7512","url":"https://ayam3390.tistory.com/8880174","src":"티스토리","w":945,"h":709,"date":"2012-09-08"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/Co5MrvMAjQc","img":"https://postfiles.pstatic.net/MjAxOTA5MDFfNTcg/MDAxNTY3MzI2OTk5NjQ3.vDy4Ld7ujhGqkzdO-Pf89pUt6NjauxIzi9bl3_3xiygg.JbmSHxS3oLQStM9F0OO_4jTuoTl_6fi7fym5LQUOo1Mg.JPEG.enxpddl/Screenshot_20190901-163504_TRANGGLE.jpg?type=w773","url":"https://blog.naver.com/enxpddl/221635403558","src":"네이버블로그","w":773,"h":1632,"date":"2019-09-01","ng":"글·화면 캡처"},{"thumb":"https://search4.kakaocdn.net/argon/130x130_85_c/E5IlSbxxcWH","img":"https://postfiles.pstatic.net/MjAyMTA0MjVfMTQg/MDAxNjE5MzE0NjEwNzM3.URINhC2md5RfaC8t7J3Xe7myurOESuE_GJ_RSITx_XAg.8e4s4kf_QHQ1edw2Q34JZ3RNOiHxhptWads0HeKzW70g.JPEG.ijoataiji/IMG_6827.JPG?type=w966","url":"https://blog.naver.com/ijoataiji/222322250084","src":"네이버블로그","w":966,"h":645,"date":"2021-04-25","ng":"글·화면 캡처"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/EuHxqxBeHDU","img":"https://egbn.kr/data/newsData/1381718557&&.JPG","url":"https://cp.news.search.daum.net/p/20394593","src":"GBN 경북방송","w":762,"h":490,"date":"2013-10-14"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/Gthix2PYeAz","img":"https://t1.daumcdn.net/cafeattach/17l2n/8294efa5e2ec851f6b87b8afa5929278e9e5ae7a","url":"https://cafe.daum.net/gjmhs/R2V6/559","src":"Daum카페","w":1240,"h":698,"date":"2021-10-31"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/704Dm2oeppz","img":"https://t1.daumcdn.net/cafeattach/17l2n/13a801d75d86c6eb0a5c205c4944aca7e768e605","url":"https://cafe.daum.net/gjmha/4Mon/714","src":"Daum카페","w":1240,"h":780,"date":"2021-10-31"},{"thumb":"https://search3.kakaocdn.net/argon/130x130_85_c/9WdTdgzCknI","img":"https://t1.daumcdn.net/cafeattach/17l2n/5a4511f4284872121a5a52e11987e09ead89b799","url":"https://cafe.daum.net/gjmhs/R2V6/559","src":"Daum카페","w":912,"h":1240,"date":"2021-10-31"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/4ERPPvFm3dC","img":"https://t1.daumcdn.net/cafeattach/17l2n/66ee18b594192705758af469398b486ce42dbc1b","url":"https://cafe.daum.net/gjmha/4Mon/714","src":"Daum카페","w":1240,"h":719,"date":"2021-10-31"},{"thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/DmiN3Al7y4q","img":"https://t1.daumcdn.net/cafeattach/17l2n/a69aff397426041c760be6c428ea81b55d5f79d6","url":"https://cafe.daum.net/gjmha/4Mon/714","src":"Daum카페","w":1240,"h":724,"date":"2021-10-31"},{"thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/DL5JkcXJdJy","img":"https://cfile246.uf.daum.net/image/26202F3751D10515337C87","url":"https://cafe.daum.net/umwwc/OvlE/110","src":"Daum카페","w":740,"h":591,"date":"2013-07-01"},{"thumb":"https://search3.kakaocdn.net/argon/130x130_85_c/AIt4B43alEk","img":"https://cfile260.uf.daum.net/image/2401D33B51D1050D0E6A3C","url":"https://cafe.daum.net/umwwc/OvlE/110","src":"Daum카페","w":740,"h":591,"date":"2013-07-01"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/DovpF5iNnPV","img":"https://cfile286.uf.daum.net/image/0146623351D104F4294498","url":"https://cafe.daum.net/umwwc/OvlE/110","src":"Daum카페","w":740,"h":591,"date":"2013-07-01"},{"thumb":"https://search4.kakaocdn.net/argon/130x130_85_c/5a6DpW7Emhf","img":"https://t1.daumcdn.net/cfile/cafe/2659513B51D1050B2A","url":"https://kkm57.tistory.com/1118","src":"티스토리","w":740,"h":591,"date":"2013-07-01"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/1FIkPsq1tTB","img":"https://t1.daumcdn.net/cfile/cafe/2540053751D105151E","url":"https://kkm57.tistory.com/1118","src":"티스토리","w":740,"h":591,"date":"2013-07-01"},{"thumb":"https://search3.kakaocdn.net/argon/130x130_85_c/IogEYsy3BvY","img":"https://t1.daumcdn.net/cfile/cafe/2576893B51D1050C16","url":"https://kkm57.tistory.com/1118","src":"티스토리","w":740,"h":591,"date":"2013-07-01"},{"thumb":"https://search3.kakaocdn.net/argon/130x130_85_c/EfCTXTLUsYP","img":"https://cfile299.uf.daum.net/image/152F97194AB60CFDA3FCC9","url":"https://cafe.daum.net/cm35/Cyic/48","src":"Daum카페","w":640,"h":426,"date":"2010-07-01"},{"thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/2U9hwtevLew","img":"https://cfile284.uf.daum.net/image/192F97194AB60CFAA0EAAF","url":"https://cafe.daum.net/cm35/Cyic/48","src":"Daum카페","w":640,"h":426,"date":"2010-07-01"},{"thumb":"https://search1.kakaocdn.net/argon/130x130_85_c/JuSLuamYW9T","img":"https://cfile244.uf.daum.net/image/162F97194AB60CF498BC70","url":"https://cafe.daum.net/aquayhj/V18b/548","src":"Daum카페","w":640,"h":426,"date":"2010-10-13"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/FsOGvqC6JWS","img":"https://cfile241.uf.daum.net/image/192F97194AB60CFFA57FFE","url":"https://cafe.daum.net/aquayhj/V18b/548","src":"Daum카페","w":640,"h":427,"date":"2010-10-13"},{"thumb":"https://search2.kakaocdn.net/argon/130x130_85_c/6kr4E7XEvVX","img":"https://cfile285.uf.daum.net/image/172F97194AB60CFEA4D2A2","url":"https://cafe.daum.net/cm35/Cyic/48","src":"Daum카페","w":640,"h":427,"date":"2010-07-01"},{"thumb":"https://search3.kakaocdn.net/argon/130x130_85_c/AKCp7zVRusT","img":"https://tong.visitkorea.or.kr/cms/resource/86/2369186_image2_1.jpg","url":"https://sailing-blog.click/3765","src":"티스토리","w":699,"h":466,"date":"2024-02-27"},{"thumb":"https://search3.kakaocdn.net/argon/130x130_85_c/4TSEmHCrsaU","img":"https://postfiles.pstatic.net/MjAyMTAzMzBfMTUx/MDAxNjE3MDgzMDkzMjA4.BRRN4XkCxafeMU-DVPkD3mn7cocarXC89N1-bj0yGlEg._835pEv1RAc1kLNKI9ESFI6ew4MKYlHbDnvFDRmgrBUg.JPEG.inpohang/17.jpg?type=w966","url":"https://blog.naver.com/inpohang/222292762441","src":"네이버블로그","w":900,"h":900,"date":"2021-03-30"},{"thumb":"https://search3.kakaocdn.net/argon/130x130_85_c/6SbhsPZmpdg","img":"https://postfiles.pstatic.net/MjAyMTAzMzBfMjk4/MDAxNjE3MDgyNjkzNzgz.swPc3qeu85wzm-Yf1oW8cQBqYIo_2xdNfNPN2ETEU2kg._0VPBsdrNId8vNJWgNZ3-WLhxoCrgdXduSAFTwwtVNgg.JPEG.inpohang/4.jpg?type=w966","url":"https://blog.naver.com/inpohang/222292762441","src":"네이버블로그","w":900,"h":900,"date":"2021-03-30"}],"social_checked_at":"2026-11-07T09:09:00+09:00","social_merged":true,"field_conditions":{"version":2,"status":"SURVEYED","parking":{"state":"UNKNOWN","mode":"UNKNOWN","tent_side":null,"cart_required":null,"shared_nearby":null,"drop_off_external":null,"auto_camping_sites":null},"shelter_setup":{"state":"UNKNOWN","max_tents":null,"max_tarps":null,"canopy_allowed":null,"note":null},"power":{"state":"CONFIRMED","available":true,"limit_w":null,"regulatory_reference_w":600,"breaker_capacity":null,"statutory_standard":true,"high_power_mention":null},"ground":{"state":"UNKNOWN","types":[]},"charcoal":{"state":"UNKNOWN","allowed":null},"firewood":{"state":"UNKNOWN","allowed":null,"sold":null},"fire_pit":{"state":"UNKNOWN","arrangement":null},"site_size":{"state":"SURVEYED","groups":[{"width_m":3,"depth_m":4,"count":null}]},"sanitary":{"state":"UNKNOWN","toilets_count":null,"showers_count":null,"sinks_count":null,"private_bathroom":false,"private_bathroom_state":"UNKNOWN","hot_water":null,"note":null},"features":["FOREST_TRAIL"],"rental_offers":[],"source":{"label":"한국관광공사 고캠핑 운영자 등록 및 공식 소개 전수조사","url":null,"checked_at":"2026-11-09","tier":"A"}},"rv":{"n":19,"p":[["힐링·자연 감성",3],["조용·한적",2],["사이트 넓음",1],["산책·둘레길 좋음",1]],"c":[["가격 부담",1]],"details":{"pros":[{"topic":"힐링·자연 감성","count":3,"samples":[{"title":"포항 캠핑_국민여가캠핑장, 중명자연생태공원","url":"https://blog.naver.com/gayoungnet2/222513358198","date":"2021-09-22"},{"title":"포항시, 포항국민여가캠핑장 6월 1일부터 본격 개장","url":"https://blog.naver.com/parkty22/221986096211","date":"2020-06-01"}]},{"topic":"조용·한적","count":2,"samples":[{"title":"포항ㅣ포항국민여가캠핑장ㅣ15번 이용후기 데크추천 포항캠핑장추천 내돈내산","url":"https://blog.naver.com/mornuna119/224390474870","date":"2026-08-26"},{"title":"포항 가볼만한곳 초여름 숲길, 연일 중명자연생태공원","url":"https://blog.naver.com/anyman60/224315033067","date":"2026-06-14"}]},{"topic":"사이트 넓음","count":1,"samples":[{"title":"산과 바다의 매력이 동시에 퐝퐝! 포항 가을 캠핑 명소","url":"https://blog.naver.com/inpohang/224451357597","date":"2026-10-23"}]},{"topic":"산책·둘레길 좋음","count":1,"samples":[{"title":"기대이상 자연속의 뷰맛집 캠핑장 (포항 국민여가캠핑장)","url":"https://blog.naver.com/glorynoh16/223160010442","date":"2023-07-19"}]}],"cons":[{"topic":"가격 부담","count":1,"samples":[{"title":"포항ㅣ포항국민여가캠핑장ㅣ15번 이용후기 데크추천 포항캠핑장추천 내돈내산","url":"https://blog.naver.com/mornuna119/224390474870","date":"2026-08-26"}]}],"issues":[{"issue":"공사·시설 정비 중","count":1}]}},"nearby_licensed":{"CONVENIENCE":{"m":2301,"name":"이마트24 경주강동로드점","addr":"경상북도 경주시 강동면 천강로 1012, 1층","lat":35.97217,"lng":129.28933,"n5":76},"OTC_MEDICINE":{"m":2940,"name":"GS25시 포항유강중앙점","addr":"경상북도 포항시 남구 연일읍 유강길17번길 16","lat":36.00443,"lng":129.31733,"n5":52},"MART":{"m":2007,"name":"택전슈퍼","addr":"경상북도 포항시 남구 연일읍 원서길117번길 1","lat":35.98768,"lng":129.33275,"n5":52},"BUTCHER":{"m":1940,"name":"매일우유 이동대리점","addr":"경상북도 포항시 남구 연일읍 원서길 124","lat":35.98763,"lng":129.3319,"n5":73},"FUEL":{"m":3084,"name":"(주)효문에너지 효문주유소","addr":"경상북도 포항시 남구 새천년대로 206 (효자동)","lat":36.00462,"lng":129.324,"n5":20},"PHARMACY":{"m":2950,"name":"럭키약국","addr":"경상북도 포항시 남구 연일읍 유강길17번길 9","lat":36.00442,"lng":129.31832,"n5":19},"VET":{"m":3663,"name":"관문동물병원","addr":"경상북도 포항시 남구 형산강북로 99 (효자동)","lat":36.00484,"lng":129.33766,"n5":5}},"profile":{"version":1,"fields":{"CHECKIN":{"value":"14:00부터","grade":"MENTION","source":{"label":"후기 2건","url":"https://blog.naver.com/djsslsnstjq/224276601553","date":"2026-05-06","quote":"35000원 포항시민 20프로 할인되니 2만원대로 이용할수 있어서 좋아요 입실시간 2시 퇴실 11시 입니다."}},"CHECKOUT":{"value":"11:00까지","grade":"MENTION","source":{"label":"후기 2건","url":"https://blog.naver.com/djsslsnstjq/224276601553","date":"2026-05-06","quote":"35000원 포항시민 20프로 할인되니 2만원대로 이용할수 있어서 좋아요 입실시간 2시 퇴실 11시 입니다."}},"MANNER":{"value":"22:00부터","grade":"MENTION","source":{"label":"LOVELY DAYS","url":"https://blog.naver.com/hellocherri/223082373260","date":"2023-04-22","quote":"딱이었다 (매너타임이 10시라 10시되면 딱 꺼짐) 알탕에 숙주추가해서..."}},"PRICE":{"value":"3.5만~4만원대","grade":"MENTION","source":{"label":"후기 언급","url":"https://blog.naver.com/djsslsnstjq/224276601553","date":"2026-05-06","quote":"포항국민여가캠핑장 19사이트팁 중명생태공원산책 · 35000원 포항시민 20프로 할"},"count":2,"min":35000,"max":40000},"POWER":{"value":"업장 미공지 · 법정 상한 600W","grade":"REFERENCE","source":{"label":"관광진흥법 야영장 안전위생기준(사이트당 600W 이하)","url":"https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=247854"},"watts":600,"statutory":true},"SITE":{"value":"3×4m","grade":"CONFIRMED","source":{"label":"한국관광공사 고캠핑 등록값","url":null,"date":null}},"REVIEW":{"value":"힐링·자연 감성, 조용·한적 / 아쉬움: 가격 부담","grade":"MENTION","source":{"label":"후기 요약 19건","url":null,"date":null},"count":19}},"tags":[{"code":"REVIEW_QUIET","label":"후기: 조용","why":"후기 2건"}],"summary":"","score":{"known":7,"facts":1,"total":18},"generated_at":"2026-11-09T20:22:58.229Z"},"web":[{"t":"nblog","title":"낮에는 단풍뷰, 밤에는 별빛 캠핑 포항 가을명소 모음","snippet":"자연/캠핑/체험을 한자리에! 가을 빛이 물든 포항의 가을명소 모음 안녕하세요... 180 중명자연생태공원은 포항의 대표적인 도심 근교 생태 휴식 공간입니다. 가을이 오면 공원 입구부터 산책로를 따라 활엽수와...","url":"https://blog.naver.com/inpohang/224441675591","src":"2026년도 포항과 함께! 퐝퐝!","date":"2026-10-14"},{"t":"nblog","title":"포항 글램핑 추천 및 예약 방법 총정리 (호미곶 오션뷰·가격·국민....","snippet":"숙소별 요금표는 상세 안내 페이지에 정리해 두었습니다. 포항 글램핑 예약 전 꼭 알아야 할 주의사항 및 꿀팁 4가지 1. 예약 오픈일을 미리... 포항국민여가캠핑장 #중명자연생태공원 #포항캠핑 #경북글램핑...","url":"https://blog.naver.com/njibgt/224435681797","src":"두마리","date":"2026-10-09"},{"t":"nblog","title":"포항 가볼만한곳 초여름 숲길, 연일 중명자연생태공원","snippet":"마무리 중명자연생태공원은 화려한 관광 명소라기보다 조용히 숲을 걸으며 쉬어가기 좋은 자연공원이... 포항숲길 #연일가볼만한곳 #중명자연생태공원 #포항국민여가캠핑장 #포항생태공원 #숲길산책 #국내여행","url":"https://blog.naver.com/anyman60/224315033067","src":"경주사람의 일상N여행","date":"2026-06-14"},{"t":"nblog","title":"포항국민여가캠핑장 19사이트팁 중명생태공원산책","snippet":"35000원 포항시민 20프로 할인되니 2만원대로 이용할수 있어서 좋아요 입실시간 2시 퇴실 11시 입니다. 중명생태공원은 산책삼아 가기도... 중명자연생태공원 산책 국민여가캠핑장은 생태공원 산책을 할수...","url":"https://blog.naver.com/djsslsnstjq/224276601553","src":"행복만들기","date":"2026-05-06"},{"t":"nblog","title":"겨울에도 즐기는 캠핑의 즐거움! 포항시 캠핑장 모음!","snippet":"다양한 생태학습 체험시험시설과 전망대, 휴게소 등 편의시설을 제공하는 중명자연생태공원을 마주하고 있어 최적의 휴양 조건을 제공합니다. 캠핑장 정보 확인하기 보경사힐링캠핑장 포항시 북구...","url":"https://blog.naver.com/inpohang/223682536164","src":"2026년도 포항과 함께! 퐝퐝!","date":"2024-12-04"},{"t":"nblog","title":"240407(일) ~ 0408(월) 캠핑 - 포항국민여가캠핑장, 중명자연생태공원","snippet":"거의 내셔널 느낌남ㅋㅋㅋ 그냥 산책로인 줄 알았더니 중명자연생태공원... 본 1박2일 보면서ㅋㅋㅋ 아 tv 넘나 좋은디ㅋㅋㅋ 이런데와선 얘기하고 자연을 느끼고(?) 그래야되는데 동생 tv 산 거 보고 진짜 살림...","url":"https://blog.naver.com/ksuny549/223561856981","src":"깔수니의 깔깔fun이야기","date":"2024-08-26"},{"t":"nblog","title":"[경북 포항 캠핑장] 포항국민여가캠핑장 :: 6세 아이와 방문했어요.","snippet":"그림참조 ✔️이용요금 캠핑장 배치도 & 이용안내 입구로 들어오면... 불편했어요 중명자연생태공원 캠핑장에서 조금만 걸어올라가면 생태공원이 있어요. 캠핑장 이용을 하지않아도 많은 포항시민분들이...","url":"https://blog.naver.com/tjsdud4945/223228389062","src":"나의 하루 :: 일상 여행 육아","date":"2023-10-05"},{"t":"nblog","title":"기대이상 자연속의 뷰맛집 캠핑장 (포항 국민여가캠핑장)","snippet":"이용시간: 입실 당일 14시, 퇴실 다음날 11시 이용요금: 25,000 ~ 35,000(성수기,비수기) 위치는 포항 자명리 중명자연생태공원으로 포항/경주... 근처에 생태공원과 계곡이 있어서 산책하면서 언제든 힐링이...","url":"https://blog.naver.com/glorynoh16/223160010442","src":"This is Life, This is Me","date":"2023-07-19"},{"t":"nblog","title":"포항 국민여가캠핑장ㅣ첫 캠핑 도전!!! (+가격, 추천 스팟, 장단점 정....","snippet":"첫 사진처럼 공원 일부가 공사중이라 이른 아침부터 해질때까지... 딱이었다 (매너타임이 10시라 10시되면 딱 꺼짐) 알탕에 숙주추가해서... 포항중명생태공원캠핑장 #포항캠핑장추천 #중명자연생태공원...","url":"https://blog.naver.com/hellocherri/223082373260","src":"LOVELY DAYS","date":"2023-04-22"},{"t":"nblog","title":"(오토캠핑) 포항 국민여가캠핑장, 에르젠_아마존쉘터","snippet":"있으며 중명자연생태공원을 마주하고 있어 도심 속의 자연을 맛볼 수 있는 캠핑장입니다. ✔️캠 핑 장 정 보 주소 : 경북 포항시 남구... 매너타임 정도는 지켜주셨으면 좋겠습니다. 다음날 지인 부부를...","url":"https://blog.naver.com/gamsang816/223024721082","src":"나는야 최오리","date":"2023-02-23"},{"t":"nblog","title":"[캠핑일기#3]포항국민여가캠핑장","snippet":"ㅎㅎ 그래도 밤 늦은 시간에는 매너타임이 잘 지켜져서 저희는... 있는 \"중명생태공원\"을 지나 \"옥녀봉\"에 가기로 했어요... com/glinii21 떨어진 꽃잎도 손에 담아보구요~ \"중명자연생태공원\"은...","url":"https://blog.naver.com/glinii21/222905513535","src":"나는자몽인이다","date":"2022-10-20"},{"t":"nblog","title":"포항 캠핑_국민여가캠핑장, 중명자연생태공원","snippet":"좋아했어요 자연속 아이들이 좋아하는 동물들 쏙쏙 알밤을 물고가는 진짜 다람쥐를 보았습니다 귀욤 잔디공원위 마다카스카라동물과... 포항캠핑 #포항중명자연생태공원 #포항배드민턴치는곳 #포항캠핑장...","url":"https://blog.naver.com/gayoungnet2/222513358198","src":"BETTER DBD","date":"2021-09-22"},{"t":"nblog","title":"포항 연일 중명자연생태공원 캠핑장 & 등산 정보","snippet":"그냥 중명 캠핑장 해. 길어서 못외우잖니. 간판 오른쪽으로는 공용화장실~ 아직 물은 덜 들었지만 공원은 엄청 잘 꾸며놓은 듯 하다. 캠핑장 이용안내. 14시부터 입실, 다음날 11시 퇴실! 차박이 안되는게 되게...","url":"https://blog.naver.com/bellehaka/222138677860","src":"❤몽몽글의 진심노트❤","date":"2020-11-08"},{"t":"nblog","title":"포항국민여가캠핑장 후기","snippet":"포항국민여가캠핑장(2박3일) 오랫만에 캠핑장 후기를 남기네요... 왼쪽길이 캠핑장으로 들어가는 길이고, 오른쪽은 중명자연생태공원으... ,ㅋ 캠핑장과 생태공원 중간에 위치한 사방댐입니다. 캠핑장에서 2곳...","url":"https://blog.naver.com/xambo/222010891548","src":"하늘연못","date":"2020-06-24"},{"t":"nblog","title":"자연과 함께 힐링하는 ‘포항국민여가캠핑장’운영","snippet":"자연과 함께 힐링하는 ‘포항국민여가캠핑장’운영포항시... 중명리 중명자연생태공원 입구에 조성한 포항국민여가캠핑장을 6월... 이용요금은 7월과 8월 성수기 주말(금요일~토요일/공휴일 전날 1박 기준)은...","url":"https://blog.naver.com/dsb1009/221986936715","src":"다경뉴스","date":"2020-06-02"},{"t":"nblog","title":"포항시, 포항국민여가캠핑장 6월 1일부터 본격 개장","snippet":"중명리 중명자연생태공원 입구에 조성한 포항국민여가캠핑장을... 이용요금은 7월과 8월 성수기 주말(금요일~토요일/공휴일 전날 1박... 포항시 조현율 국제협력관광과장은 “자연과 함께 힐링하고 휴식할...","url":"https://blog.naver.com/parkty22/221986096211","src":"경북방송","date":"2020-06-01"},{"t":"nblog","title":"‘ 포항국민여가캠핑장’ 본격 개장… 안전캠핑문화 조성","snippet":"중명리 중명자연생태공원 입구에 조성한 포항국민여가캠핑장을... 이용요금은 7월과 8월 성수기 주말(금요일~토요일/공휴일 전날 1박... 포항시 조현율 국제협력관광과장은 “자연과 함께 힐링하고 휴식할...","url":"https://blog.naver.com/yneconomic/221985991983","src":"내일을 여는 가치, YNE 영남이코노믹","date":"2020-06-01"},{"t":"nblog","title":"중명자연생태공원에 신설된 포항국민여가캠핑장 그러나 2% 부족함","snippet":"그런데 전에 없었던 #포항국민여가캠핑장 이라는 커다란 간판이 생태공원... 1박 이용요금 3~4만원에 예약제로 운영되고 있다고 한다. 중명자연생태공원을 처음 방문한 관광객들의 반응은 어떨지 모르지만 포항...","url":"https://blog.naver.com/imyoursea/221652257831","src":"BladeRunner의 블로그","date":"2019-09-18"}],"prices":[{"won":35000,"label":"사이트","season":null,"day":null,"quote":"포항국민여가캠핑장 19사이트팁 중명생태공원산책 · 35000원 포항시민 20프로 할","url":"https://blog.naver.com/djsslsnstjq/224276601553","src":"행복만들기","date":"2026-05-06"},{"won":40000,"label":null,"season":null,"day":null,"quote":"는 커다란 간판이 생태공원... 1박 이용요금 3~4만원에 예약제로 운영되고","url":"https://blog.naver.com/imyoursea/221652257831","src":"BladeRunner의 블로그","date":"2019-09-18"}],"web_checked_at":"2026-11-04T23:46:48.283Z","spec":{"version":1,"generated_at":"2026-11-09T20:22:33.103Z","fields":{"CHECKIN_TIME":{"grade":"MENTION","values":[],"mentions":[{"value":"14:00부터","count":2,"latest":"2026-05-06","samples":[{"quote":"35000원 포항시민 20프로 할인되니 2만원대로 이용할수 있어서 좋아요 입실시간 2시 퇴실 11시 입니다.","url":"https://blog.naver.com/djsslsnstjq/224276601553","label":"행복만들기","date":"2026-05-06"},{"quote":"이용시간: 입실 당일 14시, 퇴실 다음날 11시 이용요금: 25,000 ~ 35,000(성수기,비수기) 위치는 포항 자명리 중명자연생태공원으로 포항/경주...","url":"https://blog.naver.com/glorynoh16/223160010442","label":"This is Life, This is Me","date":"2023-07-19"}]}],"conflict":false},"CHECKOUT_TIME":{"grade":"MENTION","values":[],"mentions":[{"value":"11:00까지","count":2,"latest":"2026-05-06","samples":[{"quote":"35000원 포항시민 20프로 할인되니 2만원대로 이용할수 있어서 좋아요 입실시간 2시 퇴실 11시 입니다.","url":"https://blog.naver.com/djsslsnstjq/224276601553","label":"행복만들기","date":"2026-05-06"},{"quote":"이용시간: 입실 당일 14시, 퇴실 다음날 11시 이용요금: 25,000 ~ 35,000(성수기,비수기) 위치는 포항 자명리 중명자연생태공원으로 포항/경주...","url":"https://blog.naver.com/glorynoh16/223160010442","label":"This is Life, This is Me","date":"2023-07-19"}]}],"conflict":false},"MANNER_TIME":{"grade":"MENTION","values":[],"mentions":[{"value":"22:00부터","count":1,"latest":"2023-04-22","samples":[{"quote":"딱이었다 (매너타임이 10시라 10시되면 딱 꺼짐) 알탕에 숙주추가해서...","url":"https://blog.naver.com/hellocherri/223082373260","label":"LOVELY DAYS","date":"2023-04-22"}]}],"conflict":false}},"stats":{"facts":5,"reviews_used":3,"roundups_skipped":5}},"site_types":[{"code":"GLAMPING","label":"글램핑","count":null,"sub":null,"grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/njibgt/224435681797","at":"2026-10-09","quote":"포항 글램핑 추천 및 예약 방법 총정리 (호미곶 오션뷰·가격·국민..... 숙소별"}]}
+{
+  "day": {
+    "cooking": {
+      "v": "UNKNOWN",
+      "at": "2026-10-20"
+    },
+    "shade": {
+      "v": "UNKNOWN",
+      "at": "2026-10-20"
+    }
+  },
+  "du_src": {
+    "url": "https://www.openstreetmap.org/way/1188029707",
+    "label": "© OpenStreetMap 기여자 (ODbL)",
+    "checked_at": "2026-10-20"
+  },
+  "nearby": {
+    "public": {
+      "pool": [
+        {
+          "name": "덕업관어린이수영장 수영장",
+          "kind": "pool",
+          "distance_m": 4946,
+          "lat": 36.00563,
+          "lng": 129.35703,
+          "source": "전국공공시설개방정보표준데이터(공공데이터포털)",
+          "source_id": "pool:%EB%8D%95%EC%97%85%EA%B4%80%EC%96%B4%EB%A6%B0%EC%9D%B4%EC%88%98%EC%98%81%EC%9E%A5%20%EC%88%98%EC%98%81%EC%9E%A5:36.0056",
+          "addr": "경상북도 포항시 남구 뱃머리길39번길 26",
+          "facts": {
+            "유형": "기타",
+            "전화": "054-280-9580"
+          },
+          "url": "http://www.phsisul.org/home/59"
+        },
+        {
+          "name": "포항수영장 수영장",
+          "kind": "pool",
+          "distance_m": 5551,
+          "lat": 36.0084,
+          "lng": 129.36289,
+          "source": "전국공공시설개방정보표준데이터(공공데이터포털)",
+          "source_id": "pool:%ED%8F%AC%ED%95%AD%EC%88%98%EC%98%81%EC%9E%A5%20%EC%88%98%EC%98%81%EC%9E%A5:36.0084",
+          "addr": "경상북도 포항시 남구 희망대로 810",
+          "facts": {
+            "유형": "기타",
+            "전화": "054-280-9530"
+          },
+          "url": "https://www.phsisul.org/sisul_15/main.do"
+        },
+        {
+          "name": "여성문화관수영장 수영장",
+          "kind": "pool",
+          "distance_m": 9731,
+          "lat": 36.05639,
+          "lng": 129.36225,
+          "source": "전국공공시설개방정보표준데이터(공공데이터포털)",
+          "source_id": "pool:%EC%97%AC%EC%84%B1%EB%AC%B8%ED%99%94%EA%B4%80%EC%88%98%EC%98%81%EC%9E%A5%20%EC%88%98%EC%98%81%EC%9E%A5:36.0564",
+          "addr": "경상북도 포항시 북구 새천년대로933번길 20",
+          "facts": {
+            "유형": "기타",
+            "전화": "054-280-9550"
+          },
+          "url": "https://www.phsisul.org/sisul_17/main.do"
+        }
+      ],
+      "indoorplay": [
+        {
+          "name": "어린이교통랜드 체험관",
+          "kind": "indoorplay",
+          "distance_m": 4946,
+          "lat": 36.00597,
+          "lng": 129.35669,
+          "source": "전국공공시설개방정보표준데이터(공공데이터포털)",
+          "source_id": "indoorplay:%EC%96%B4%EB%A6%B0%EC%9D%B4%EA%B5%90%ED%86%B5%EB%9E%9C%EB%93%9C%20%EC%B2%B4%ED%97%98%EA%B4%80:36.0060",
+          "addr": "경상북도 포항시 남구 뱃머리길39번길 21",
+          "facts": {
+            "유형": "기타",
+            "입장료": "무료",
+            "전화": "054-280-9490"
+          },
+          "url": "https://www.phsisul.org/sisul_21/main.do"
+        }
+      ],
+      "museum": [
+        {
+          "name": "포항시립미술관",
+          "kind": "museum",
+          "distance_m": 12015,
+          "lat": 36.06628,
+          "lng": 129.39109,
+          "source": "전국박물관미술관정보표준데이터(공공데이터포털)",
+          "source_id": "museum:%ED%8F%AC%ED%95%AD%EC%8B%9C%EB%A6%BD%EB%AF%B8%EC%88%A0%EA%B4%80:36.0663",
+          "addr": "경상북도 포항시 북구 환호공원길 10",
+          "facts": {
+            "유형": "공립 미술관",
+            "전화": "054-270-4631"
+          },
+          "url": "http://poma.pohang.go.kr",
+          "img": "https://tong.visitkorea.or.kr/cms/resource/87/4078987_image3_1.jpg",
+          "img_u": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2406280",
+          "img_s": "한국관광공사"
+        },
+        {
+          "name": "경주바니베어박물관",
+          "kind": "museum",
+          "distance_m": 14501,
+          "lat": 35.85189,
+          "lng": 129.27346,
+          "source": "전국박물관미술관정보표준데이터(공공데이터포털)",
+          "source_id": "museum:%EA%B2%BD%EC%A3%BC%EB%B0%94%EB%8B%88%EB%B2%A0%EC%96%B4%EB%B0%95%EB%AC%BC%EA%B4%80:35.8519",
+          "addr": "경상북도 경주시 보문로 280-34",
+          "facts": {
+            "유형": "사립 박물관",
+            "전화": "054-746-1991"
+          },
+          "url": "https://cafe.naver.com/bbmuseum"
+        },
+        {
+          "name": "경주세계자동차박물관",
+          "kind": "museum",
+          "distance_m": 14595,
+          "lat": 35.85211,
+          "lng": 129.26855,
+          "source": "전국박물관미술관정보표준데이터(공공데이터포털)",
+          "source_id": "museum:%EA%B2%BD%EC%A3%BC%EC%84%B8%EA%B3%84%EC%9E%90%EB%8F%99%EC%B0%A8%EB%B0%95%EB%AC%BC%EA%B4%80:35.8521",
+          "addr": "경상북도 경주시 보문로 132-22",
+          "facts": {
+            "유형": "사립 박물관",
+            "전화": "054-742-8900"
+          },
+          "url": "http://carmuseum.co.kr/",
+          "img": "https://tong.visitkorea.or.kr/cms/resource/92/4055892_image3_1.jpg",
+          "img_u": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2899295",
+          "img_s": "한국관광공사"
+        }
+      ],
+      "forest": [
+        {
+          "name": "비학산자연휴양림",
+          "kind": "forest",
+          "distance_m": 20926,
+          "lat": 36.14703,
+          "lng": 129.21111,
+          "source": "전국휴양림표준데이터(공공데이터포털)",
+          "source_id": "rf-1np5juf",
+          "addr": "경상북도 포항시 북구 기북면 비학산길 302",
+          "facts": {
+            "구분": "공립 휴양림",
+            "입장료": "숙박 : 7만원 + 11만원+ 14만원",
+            "숙박": "가능",
+            "주요 시설": "산림휴양관+숲속의 집+테라스하우스+카라반+야외데크+생태숲 등",
+            "전화": "054-252-3275"
+          },
+          "url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030052",
+          "img": "https://tong.visitkorea.or.kr/cms/resource/25/2753225_image3_1.jpg",
+          "img_u": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2752702",
+          "img_s": "한국관광공사"
+        },
+        {
+          "name": "토함산자연휴양림",
+          "kind": "forest",
+          "distance_m": 24885,
+          "lat": 35.75855,
+          "lng": 129.36712,
+          "source": "전국휴양림표준데이터(공공데이터포털)",
+          "source_id": "rf-1ye0nq9",
+          "addr": "경상북도 경주시 문무대왕면 불국로 1208-45",
+          "facts": {
+            "구분": "공립 휴양림",
+            "입장료": "무료",
+            "숙박": "가능",
+            "주요 시설": "숲속의집+화랑관(어린이물놀이장)+야영장+국학관(세미나실) 등",
+            "전화": "054-750-8700"
+          },
+          "url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030027"
+        },
+        {
+          "name": "운주산승마자연휴양림",
+          "kind": "forest",
+          "distance_m": 29216,
+          "lat": 36.0351,
+          "lng": 128.99673,
+          "source": "전국휴양림표준데이터(공공데이터포털)",
+          "source_id": "rf-16hq2oh",
+          "addr": "경상북도 영천시 임고면 승마휴양림길 105",
+          "facts": {
+            "구분": "공립 휴양림",
+            "입장료": "무료",
+            "숙박": "가능",
+            "주요 시설": "숲속의집+야영데크+다목적구장+세미나실",
+            "전화": "054-330-2770"
+          },
+          "url": "https://www.foresttrip.go.kr/indvz/main.do?hmpgId=ID02030081",
+          "img": "https://tong.visitkorea.or.kr/cms/resource/78/3502678_image3_1.jpg",
+          "img_u": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1839066",
+          "img_s": "한국관광공사"
+        }
+      ]
+    },
+    "conv": [
+      {
+        "n": "이마트24 경주강동로드점",
+        "m": 2301,
+        "a": "경상북도 경주시 강동면 천강로 1012, 1층",
+        "lat": 35.97217,
+        "lng": 129.28933,
+        "k": "편의점",
+        "ty": "인허가 등록"
+      }
+    ],
+    "mart": [
+      {
+        "n": "택전슈퍼",
+        "m": 2007,
+        "a": "경상북도 포항시 남구 연일읍 원서길117번길 1",
+        "lat": 35.98768,
+        "lng": 129.33275,
+        "k": "마트",
+        "ty": "인허가 등록"
+      },
+      {
+        "n": "매일우유 이동대리점",
+        "m": 1940,
+        "a": "경상북도 포항시 남구 연일읍 원서길 124",
+        "lat": 35.98763,
+        "lng": 129.3319,
+        "k": "정육점·바베큐",
+        "ty": "축산물판매업 인허가"
+      }
+    ],
+    "fuel": [
+      {
+        "n": "(주)효문에너지 효문주유소",
+        "m": 3084,
+        "a": "경상북도 포항시 남구 새천년대로 206 (효자동)",
+        "lat": 36.00462,
+        "lng": 129.324,
+        "k": "주유소",
+        "ty": "석유판매업 인허가"
+      }
+    ],
+    "medical": [
+      {
+        "n": "럭키약국",
+        "m": 2950,
+        "a": "경상북도 포항시 남구 연일읍 유강길17번길 9",
+        "lat": 36.00442,
+        "lng": 129.31832,
+        "k": "약국",
+        "ty": "약국 인허가"
+      },
+      {
+        "n": "GS25시 포항유강중앙점",
+        "m": 2940,
+        "a": "경상북도 포항시 남구 연일읍 유강길17번길 16",
+        "lat": 36.00443,
+        "lng": 129.31733,
+        "k": "안전상비의약품 판매점",
+        "ty": "인허가 등록"
+      }
+    ],
+    "vet": [
+      {
+        "n": "관문동물병원",
+        "m": 3663,
+        "a": "경상북도 포항시 남구 형산강북로 99 (효자동)",
+        "lat": 36.00484,
+        "lng": 129.33766,
+        "k": "동물병원",
+        "ty": "수의업 인허가"
+      }
+    ]
+  },
+  "reviews": [
+    {
+      "t": "blog",
+      "title": "산과 바다의 매력이 동시에 퐝퐝! 포항 가을 캠핑 명소",
+      "snippet": "가능 ✅연인/가족 추천 ✅ 산책로 탐방 포항의 대표 생태 명소인 ‘중명자연생태공원’에 자리 잡고 있어 청정한 생태 환경을 두 눈으로 직접 만나 볼 수 있습니다...둔 가족 단위 캠퍼들에게 큰 사랑을 받고 있습니다. ​ 특히 15번 데크는 포항국민여가캠핑장의 인기 데크로 ​ 다른 데크보…",
+      "url": "https://blog.naver.com/inpohang/224451357597",
+      "src": "2026년도 포항과 함께! 퐝퐝!",
+      "thumb": null,
+      "date": "2026-10-23"
+    },
+    {
+      "t": "blog",
+      "title": "포항ㅣ포항국민여가캠핑장ㅣ15번 이용후기 데크추천 포항캠핑장추천 내돈내산",
+      "snippet": "포항 💦 시에서 운영하는 포항국민여가캠핑장 다녀왔어요 ! 포항시에서 운영하는 공공 캠핑장이라 부담 없는 가격으로 이용할 수 있고 중명자연생태공원 근처에 자리하고 있어 자연 속에서 조용하게 쉬어가기 좋은 곳이에요✔ ​ ✔ 예약방법 포항국민여가캠핑장 홈페이지 온라인 예약 포항국민여가캠핑…",
+      "url": "https://blog.naver.com/mornuna119/224390474870",
+      "src": "몰맛탱 ࿉∥",
+      "thumb": null,
+      "date": "2026-08-26"
+    },
+    {
+      "t": "blog",
+      "title": "2026 5월 하반기 일기",
+      "snippet": "자연탐험하기. 어디서 탐험을 하면 좋을까~~~ 하다가 근처에 있는 중명자연생태공원에 갔다. 원래 여기 작은 개울이 흐르는것 같아보여서 애들 발도 담그고...일요일은 평일요금이라 25000원인데 나는 다자녀 할인 30%받음. ​ 듣기로는 포항 시내 가까이 위치해있어서 우리처럼 잠 안자고…",
+      "url": "https://blog.naver.com/rebontobon/224329555628",
+      "src": "재미없는블로그",
+      "thumb": "https://search4.kakaocdn.net/argon/130x130_85_c/4oh45AnJZQG",
+      "date": "2026-06-28"
+    },
+    {
+      "t": "blog",
+      "title": "포항국민여가캠핑장 추천 명당자리 예약방법 편의시설 WIFI 등 총정리",
+      "snippet": "점심시간 12~13) 정기휴장일: 없음 (별도 공지 시 휴장 가능) 입실 시간: 14:00부터 퇴실 시간: 다음날 11:00까지 입장 가능 인원: 사이트별 최대 6인 캠핑장...유무: ❌ WIFI: 사용가능 샤워실 운영시간: 06:00 ~ 23:00 주차: 중명자연생태공원 주차장 이용…",
+      "url": "https://serendipity93.com/83",
+      "src": "serendipity93 님의 블로그",
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/AgHqVrTftHY",
+      "date": "2025-04-28"
+    },
+    {
+      "t": "blog",
+      "title": "[정보 공유] 겨울에도 즐기는 캠핑의 즐거움! 포항시 캠핑장 모음! / 포항시",
+      "snippet": "14:00 / 퇴실 11:00 ✅ 반려동물 동반 가능 <주요 시설> 캠핑사이트(3X4m 30면 데크) 분리수거장, 급수대, 전기시설 등 편의시설 주차장(중명자연생태공원 주차장 이용 가능) ​ ※포항국민여가캠핑장은 2025. 1. 1.~2. 28. 동절기간 휴장합니다 ​ 포항국민여가캠핑…",
+      "url": "https://blog.naver.com/pohang_budongsan/223683115538",
+      "src": "포항을 읽는 부동산 이야기",
+      "thumb": null,
+      "date": "2024-12-05"
+    },
+    {
+      "t": "blog",
+      "title": "[포항] 연일 중명자연생태공원 / 포항 국민여가캠핑장",
+      "snippet": "16 ​ 입실 14:00 부터 퇴실 다음날 11:00 까지 ​ Previous image Next image ​ 이건 캠핑장 배치도와 이용안내 ✔️ 포항 사람은 20% 할인이라고 하셨다 다자녀는 더 할인된다고 하심 ! 안그래도 저렴한데 할인까지 받으면 너무나 저렴한 가격으로 이용할 수…",
+      "url": "https://blog.naver.com/dkdlfjtm4806/222379950277",
+      "src": "Welcome to 져미월드",
+      "thumb": "https://search3.kakaocdn.net/argon/130x130_85_c/4xUuEvywqwj",
+      "date": "2021-06-02"
+    }
+  ],
+  "sns_images": [
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/ANeSSy2ymXo",
+      "img": "https://blog.kakaocdn.net/dn/YWjz6/btqM2GUgn8s/KrUkUqKnUWMsS2UkUvJG61/img.jpg",
+      "url": "https://full012.tistory.com/9292",
+      "src": "티스토리",
+      "w": 699,
+      "h": 466,
+      "date": "2020-11-08"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/G23X8c5czqT",
+      "img": "https://t1.daumcdn.net/cfile/blog/14405C3A5048BA7512",
+      "url": "https://ayam3390.tistory.com/8880174",
+      "src": "티스토리",
+      "w": 945,
+      "h": 709,
+      "date": "2012-09-08"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/Co5MrvMAjQc",
+      "img": "https://postfiles.pstatic.net/MjAxOTA5MDFfNTcg/MDAxNTY3MzI2OTk5NjQ3.vDy4Ld7ujhGqkzdO-Pf89pUt6NjauxIzi9bl3_3xiygg.JbmSHxS3oLQStM9F0OO_4jTuoTl_6fi7fym5LQUOo1Mg.JPEG.enxpddl/Screenshot_20190901-163504_TRANGGLE.jpg?type=w773",
+      "url": "https://blog.naver.com/enxpddl/221635403558",
+      "src": "네이버블로그",
+      "w": 773,
+      "h": 1632,
+      "date": "2019-09-01",
+      "ng": "글·화면 캡처"
+    },
+    {
+      "thumb": "https://search4.kakaocdn.net/argon/130x130_85_c/E5IlSbxxcWH",
+      "img": "https://postfiles.pstatic.net/MjAyMTA0MjVfMTQg/MDAxNjE5MzE0NjEwNzM3.URINhC2md5RfaC8t7J3Xe7myurOESuE_GJ_RSITx_XAg.8e4s4kf_QHQ1edw2Q34JZ3RNOiHxhptWads0HeKzW70g.JPEG.ijoataiji/IMG_6827.JPG?type=w966",
+      "url": "https://blog.naver.com/ijoataiji/222322250084",
+      "src": "네이버블로그",
+      "w": 966,
+      "h": 645,
+      "date": "2021-04-25",
+      "ng": "글·화면 캡처"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/EuHxqxBeHDU",
+      "img": "https://egbn.kr/data/newsData/1381718557&&.JPG",
+      "url": "https://cp.news.search.daum.net/p/20394593",
+      "src": "GBN 경북방송",
+      "w": 762,
+      "h": 490,
+      "date": "2013-10-14"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/Gthix2PYeAz",
+      "img": "https://t1.daumcdn.net/cafeattach/17l2n/8294efa5e2ec851f6b87b8afa5929278e9e5ae7a",
+      "url": "https://cafe.daum.net/gjmhs/R2V6/559",
+      "src": "Daum카페",
+      "w": 1240,
+      "h": 698,
+      "date": "2021-10-31"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/704Dm2oeppz",
+      "img": "https://t1.daumcdn.net/cafeattach/17l2n/13a801d75d86c6eb0a5c205c4944aca7e768e605",
+      "url": "https://cafe.daum.net/gjmha/4Mon/714",
+      "src": "Daum카페",
+      "w": 1240,
+      "h": 780,
+      "date": "2021-10-31"
+    },
+    {
+      "thumb": "https://search3.kakaocdn.net/argon/130x130_85_c/9WdTdgzCknI",
+      "img": "https://t1.daumcdn.net/cafeattach/17l2n/5a4511f4284872121a5a52e11987e09ead89b799",
+      "url": "https://cafe.daum.net/gjmhs/R2V6/559",
+      "src": "Daum카페",
+      "w": 912,
+      "h": 1240,
+      "date": "2021-10-31"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/4ERPPvFm3dC",
+      "img": "https://t1.daumcdn.net/cafeattach/17l2n/66ee18b594192705758af469398b486ce42dbc1b",
+      "url": "https://cafe.daum.net/gjmha/4Mon/714",
+      "src": "Daum카페",
+      "w": 1240,
+      "h": 719,
+      "date": "2021-10-31"
+    },
+    {
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/DmiN3Al7y4q",
+      "img": "https://t1.daumcdn.net/cafeattach/17l2n/a69aff397426041c760be6c428ea81b55d5f79d6",
+      "url": "https://cafe.daum.net/gjmha/4Mon/714",
+      "src": "Daum카페",
+      "w": 1240,
+      "h": 724,
+      "date": "2021-10-31"
+    },
+    {
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/DL5JkcXJdJy",
+      "img": "https://cfile246.uf.daum.net/image/26202F3751D10515337C87",
+      "url": "https://cafe.daum.net/umwwc/OvlE/110",
+      "src": "Daum카페",
+      "w": 740,
+      "h": 591,
+      "date": "2013-07-01"
+    },
+    {
+      "thumb": "https://search3.kakaocdn.net/argon/130x130_85_c/AIt4B43alEk",
+      "img": "https://cfile260.uf.daum.net/image/2401D33B51D1050D0E6A3C",
+      "url": "https://cafe.daum.net/umwwc/OvlE/110",
+      "src": "Daum카페",
+      "w": 740,
+      "h": 591,
+      "date": "2013-07-01"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/DovpF5iNnPV",
+      "img": "https://cfile286.uf.daum.net/image/0146623351D104F4294498",
+      "url": "https://cafe.daum.net/umwwc/OvlE/110",
+      "src": "Daum카페",
+      "w": 740,
+      "h": 591,
+      "date": "2013-07-01"
+    },
+    {
+      "thumb": "https://search4.kakaocdn.net/argon/130x130_85_c/5a6DpW7Emhf",
+      "img": "https://t1.daumcdn.net/cfile/cafe/2659513B51D1050B2A",
+      "url": "https://kkm57.tistory.com/1118",
+      "src": "티스토리",
+      "w": 740,
+      "h": 591,
+      "date": "2013-07-01"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/1FIkPsq1tTB",
+      "img": "https://t1.daumcdn.net/cfile/cafe/2540053751D105151E",
+      "url": "https://kkm57.tistory.com/1118",
+      "src": "티스토리",
+      "w": 740,
+      "h": 591,
+      "date": "2013-07-01"
+    },
+    {
+      "thumb": "https://search3.kakaocdn.net/argon/130x130_85_c/IogEYsy3BvY",
+      "img": "https://t1.daumcdn.net/cfile/cafe/2576893B51D1050C16",
+      "url": "https://kkm57.tistory.com/1118",
+      "src": "티스토리",
+      "w": 740,
+      "h": 591,
+      "date": "2013-07-01"
+    },
+    {
+      "thumb": "https://search3.kakaocdn.net/argon/130x130_85_c/EfCTXTLUsYP",
+      "img": "https://cfile299.uf.daum.net/image/152F97194AB60CFDA3FCC9",
+      "url": "https://cafe.daum.net/cm35/Cyic/48",
+      "src": "Daum카페",
+      "w": 640,
+      "h": 426,
+      "date": "2010-07-01"
+    },
+    {
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/2U9hwtevLew",
+      "img": "https://cfile284.uf.daum.net/image/192F97194AB60CFAA0EAAF",
+      "url": "https://cafe.daum.net/cm35/Cyic/48",
+      "src": "Daum카페",
+      "w": 640,
+      "h": 426,
+      "date": "2010-07-01"
+    },
+    {
+      "thumb": "https://search1.kakaocdn.net/argon/130x130_85_c/JuSLuamYW9T",
+      "img": "https://cfile244.uf.daum.net/image/162F97194AB60CF498BC70",
+      "url": "https://cafe.daum.net/aquayhj/V18b/548",
+      "src": "Daum카페",
+      "w": 640,
+      "h": 426,
+      "date": "2010-10-13"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/FsOGvqC6JWS",
+      "img": "https://cfile241.uf.daum.net/image/192F97194AB60CFFA57FFE",
+      "url": "https://cafe.daum.net/aquayhj/V18b/548",
+      "src": "Daum카페",
+      "w": 640,
+      "h": 427,
+      "date": "2010-10-13"
+    },
+    {
+      "thumb": "https://search2.kakaocdn.net/argon/130x130_85_c/6kr4E7XEvVX",
+      "img": "https://cfile285.uf.daum.net/image/172F97194AB60CFEA4D2A2",
+      "url": "https://cafe.daum.net/cm35/Cyic/48",
+      "src": "Daum카페",
+      "w": 640,
+      "h": 427,
+      "date": "2010-07-01"
+    },
+    {
+      "thumb": "https://search3.kakaocdn.net/argon/130x130_85_c/AKCp7zVRusT",
+      "img": "https://tong.visitkorea.or.kr/cms/resource/86/2369186_image2_1.jpg",
+      "url": "https://sailing-blog.click/3765",
+      "src": "티스토리",
+      "w": 699,
+      "h": 466,
+      "date": "2024-02-27"
+    },
+    {
+      "thumb": "https://search3.kakaocdn.net/argon/130x130_85_c/4TSEmHCrsaU",
+      "img": "https://postfiles.pstatic.net/MjAyMTAzMzBfMTUx/MDAxNjE3MDgzMDkzMjA4.BRRN4XkCxafeMU-DVPkD3mn7cocarXC89N1-bj0yGlEg._835pEv1RAc1kLNKI9ESFI6ew4MKYlHbDnvFDRmgrBUg.JPEG.inpohang/17.jpg?type=w966",
+      "url": "https://blog.naver.com/inpohang/222292762441",
+      "src": "네이버블로그",
+      "w": 900,
+      "h": 900,
+      "date": "2021-03-30"
+    },
+    {
+      "thumb": "https://search3.kakaocdn.net/argon/130x130_85_c/6SbhsPZmpdg",
+      "img": "https://postfiles.pstatic.net/MjAyMTAzMzBfMjk4/MDAxNjE3MDgyNjkzNzgz.swPc3qeu85wzm-Yf1oW8cQBqYIo_2xdNfNPN2ETEU2kg._0VPBsdrNId8vNJWgNZ3-WLhxoCrgdXduSAFTwwtVNgg.JPEG.inpohang/4.jpg?type=w966",
+      "url": "https://blog.naver.com/inpohang/222292762441",
+      "src": "네이버블로그",
+      "w": 900,
+      "h": 900,
+      "date": "2021-03-30"
+    }
+  ],
+  "social_checked_at": "2026-11-07T09:09:00+09:00",
+  "social_merged": true,
+  "field_conditions": {
+    "version": 2,
+    "status": "SURVEYED",
+    "parking": {
+      "state": "UNKNOWN",
+      "mode": "UNKNOWN",
+      "tent_side": null,
+      "cart_required": null,
+      "shared_nearby": null,
+      "drop_off_external": null,
+      "auto_camping_sites": null
+    },
+    "shelter_setup": {
+      "state": "UNKNOWN",
+      "max_tents": null,
+      "max_tarps": null,
+      "canopy_allowed": null,
+      "note": null
+    },
+    "power": {
+      "state": "CONFIRMED",
+      "available": true,
+      "limit_w": null,
+      "regulatory_reference_w": 600,
+      "breaker_capacity": null,
+      "statutory_standard": true,
+      "high_power_mention": null
+    },
+    "ground": {
+      "state": "UNKNOWN",
+      "types": []
+    },
+    "charcoal": {
+      "state": "UNKNOWN",
+      "allowed": null
+    },
+    "firewood": {
+      "state": "UNKNOWN",
+      "allowed": null,
+      "sold": null
+    },
+    "fire_pit": {
+      "state": "UNKNOWN",
+      "arrangement": null
+    },
+    "site_size": {
+      "state": "SURVEYED",
+      "groups": [
+        {
+          "width_m": 3,
+          "depth_m": 4,
+          "count": null
+        }
+      ]
+    },
+    "sanitary": {
+      "state": "UNKNOWN",
+      "toilets_count": null,
+      "showers_count": null,
+      "sinks_count": null,
+      "private_bathroom": false,
+      "private_bathroom_state": "UNKNOWN",
+      "hot_water": null,
+      "note": null
+    },
+    "features": [
+      "FOREST_TRAIL"
+    ],
+    "rental_offers": [],
+    "source": {
+      "label": "한국관광공사 고캠핑 운영자 등록 및 공식 소개 전수조사",
+      "url": null,
+      "checked_at": "2026-11-09",
+      "tier": "A"
+    }
+  },
+  "rv": {
+    "n": 19,
+    "p": [
+      [
+        "힐링·자연 감성",
+        3
+      ],
+      [
+        "조용·한적",
+        2
+      ],
+      [
+        "사이트 넓음",
+        1
+      ],
+      [
+        "산책·둘레길 좋음",
+        1
+      ]
+    ],
+    "c": [
+      [
+        "가격 부담",
+        1
+      ]
+    ],
+    "details": {
+      "pros": [
+        {
+          "topic": "힐링·자연 감성",
+          "count": 3,
+          "samples": [
+            {
+              "title": "포항 캠핑_국민여가캠핑장, 중명자연생태공원",
+              "url": "https://blog.naver.com/gayoungnet2/222513358198",
+              "date": "2021-09-22"
+            },
+            {
+              "title": "포항시, 포항국민여가캠핑장 6월 1일부터 본격 개장",
+              "url": "https://blog.naver.com/parkty22/221986096211",
+              "date": "2020-06-01"
+            }
+          ]
+        },
+        {
+          "topic": "조용·한적",
+          "count": 2,
+          "samples": [
+            {
+              "title": "포항ㅣ포항국민여가캠핑장ㅣ15번 이용후기 데크추천 포항캠핑장추천 내돈내산",
+              "url": "https://blog.naver.com/mornuna119/224390474870",
+              "date": "2026-08-26"
+            },
+            {
+              "title": "포항 가볼만한곳 초여름 숲길, 연일 중명자연생태공원",
+              "url": "https://blog.naver.com/anyman60/224315033067",
+              "date": "2026-06-14"
+            }
+          ]
+        },
+        {
+          "topic": "사이트 넓음",
+          "count": 1,
+          "samples": [
+            {
+              "title": "산과 바다의 매력이 동시에 퐝퐝! 포항 가을 캠핑 명소",
+              "url": "https://blog.naver.com/inpohang/224451357597",
+              "date": "2026-10-23"
+            }
+          ]
+        },
+        {
+          "topic": "산책·둘레길 좋음",
+          "count": 1,
+          "samples": [
+            {
+              "title": "기대이상 자연속의 뷰맛집 캠핑장 (포항 국민여가캠핑장)",
+              "url": "https://blog.naver.com/glorynoh16/223160010442",
+              "date": "2023-07-19"
+            }
+          ]
+        }
+      ],
+      "cons": [
+        {
+          "topic": "가격 부담",
+          "count": 1,
+          "samples": [
+            {
+              "title": "포항ㅣ포항국민여가캠핑장ㅣ15번 이용후기 데크추천 포항캠핑장추천 내돈내산",
+              "url": "https://blog.naver.com/mornuna119/224390474870",
+              "date": "2026-08-26"
+            }
+          ]
+        }
+      ],
+      "issues": [
+        {
+          "issue": "공사·시설 정비 중",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "nearby_licensed": {
+    "CONVENIENCE": {
+      "m": 2301,
+      "name": "이마트24 경주강동로드점",
+      "addr": "경상북도 경주시 강동면 천강로 1012, 1층",
+      "lat": 35.97217,
+      "lng": 129.28933,
+      "n5": 76
+    },
+    "OTC_MEDICINE": {
+      "m": 2940,
+      "name": "GS25시 포항유강중앙점",
+      "addr": "경상북도 포항시 남구 연일읍 유강길17번길 16",
+      "lat": 36.00443,
+      "lng": 129.31733,
+      "n5": 52
+    },
+    "MART": {
+      "m": 2007,
+      "name": "택전슈퍼",
+      "addr": "경상북도 포항시 남구 연일읍 원서길117번길 1",
+      "lat": 35.98768,
+      "lng": 129.33275,
+      "n5": 52
+    },
+    "BUTCHER": {
+      "m": 1940,
+      "name": "매일우유 이동대리점",
+      "addr": "경상북도 포항시 남구 연일읍 원서길 124",
+      "lat": 35.98763,
+      "lng": 129.3319,
+      "n5": 73
+    },
+    "FUEL": {
+      "m": 3084,
+      "name": "(주)효문에너지 효문주유소",
+      "addr": "경상북도 포항시 남구 새천년대로 206 (효자동)",
+      "lat": 36.00462,
+      "lng": 129.324,
+      "n5": 20
+    },
+    "PHARMACY": {
+      "m": 2950,
+      "name": "럭키약국",
+      "addr": "경상북도 포항시 남구 연일읍 유강길17번길 9",
+      "lat": 36.00442,
+      "lng": 129.31832,
+      "n5": 19
+    },
+    "VET": {
+      "m": 3663,
+      "name": "관문동물병원",
+      "addr": "경상북도 포항시 남구 형산강북로 99 (효자동)",
+      "lat": 36.00484,
+      "lng": 129.33766,
+      "n5": 5
+    }
+  },
+  "profile": {
+    "version": 1,
+    "fields": {
+      "CHECKIN": {
+        "value": "14:00부터",
+        "grade": "MENTION",
+        "source": {
+          "label": "후기 2건",
+          "url": "https://blog.naver.com/djsslsnstjq/224276601553",
+          "date": "2026-05-06",
+          "quote": "35000원 포항시민 20프로 할인되니 2만원대로 이용할수 있어서 좋아요 입실시간 2시 퇴실 11시 입니다."
+        }
+      },
+      "CHECKOUT": {
+        "value": "11:00까지",
+        "grade": "MENTION",
+        "source": {
+          "label": "후기 2건",
+          "url": "https://blog.naver.com/djsslsnstjq/224276601553",
+          "date": "2026-05-06",
+          "quote": "35000원 포항시민 20프로 할인되니 2만원대로 이용할수 있어서 좋아요 입실시간 2시 퇴실 11시 입니다."
+        }
+      },
+      "MANNER": {
+        "value": "22:00부터",
+        "grade": "MENTION",
+        "source": {
+          "label": "LOVELY DAYS",
+          "url": "https://blog.naver.com/hellocherri/223082373260",
+          "date": "2023-04-22",
+          "quote": "딱이었다 (매너타임이 10시라 10시되면 딱 꺼짐) 알탕에 숙주추가해서..."
+        }
+      },
+      "PRICE": {
+        "value": "3.5만~4만원대",
+        "grade": "MENTION",
+        "source": {
+          "label": "후기 언급",
+          "url": "https://blog.naver.com/djsslsnstjq/224276601553",
+          "date": "2026-05-06",
+          "quote": "포항국민여가캠핑장 19사이트팁 중명생태공원산책 · 35000원 포항시민 20프로 할"
+        },
+        "count": 2,
+        "min": 35000,
+        "max": 40000
+      },
+      "POWER": {
+        "value": "업장 미공지 · 법정 상한 600W",
+        "grade": "REFERENCE",
+        "source": {
+          "label": "관광진흥법 야영장 안전위생기준(사이트당 600W 이하)",
+          "url": "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=247854"
+        },
+        "watts": 600,
+        "statutory": true
+      },
+      "SITE": {
+        "value": "3×4m",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "한국관광공사 고캠핑 등록값",
+          "url": null,
+          "date": null
+        }
+      },
+      "REVIEW": {
+        "value": "힐링·자연 감성, 조용·한적 / 아쉬움: 가격 부담",
+        "grade": "MENTION",
+        "source": {
+          "label": "후기 요약 19건",
+          "url": null,
+          "date": null
+        },
+        "count": 19
+      }
+    },
+    "tags": [
+      {
+        "code": "REVIEW_QUIET",
+        "label": "후기: 조용",
+        "why": "후기 2건"
+      }
+    ],
+    "summary": "",
+    "score": {
+      "known": 7,
+      "facts": 1,
+      "total": 18
+    },
+    "generated_at": "2026-11-09T20:22:58.229Z"
+  },
+  "web": [
+    {
+      "t": "nblog",
+      "title": "낮에는 단풍뷰, 밤에는 별빛 캠핑 포항 가을명소 모음",
+      "snippet": "자연/캠핑/체험을 한자리에! 가을 빛이 물든 포항의 가을명소 모음 안녕하세요... 180 중명자연생태공원은 포항의 대표적인 도심 근교 생태 휴식 공간입니다. 가을이 오면 공원 입구부터 산책로를 따라 활엽수와...",
+      "url": "https://blog.naver.com/inpohang/224441675591",
+      "src": "2026년도 포항과 함께! 퐝퐝!",
+      "date": "2026-10-14"
+    },
+    {
+      "t": "nblog",
+      "title": "포항 글램핑 추천 및 예약 방법 총정리 (호미곶 오션뷰·가격·국민....",
+      "snippet": "숙소별 요금표는 상세 안내 페이지에 정리해 두었습니다. 포항 글램핑 예약 전 꼭 알아야 할 주의사항 및 꿀팁 4가지 1. 예약 오픈일을 미리... 포항국민여가캠핑장 #중명자연생태공원 #포항캠핑 #경북글램핑...",
+      "url": "https://blog.naver.com/njibgt/224435681797",
+      "src": "두마리",
+      "date": "2026-10-09"
+    },
+    {
+      "t": "nblog",
+      "title": "포항 가볼만한곳 초여름 숲길, 연일 중명자연생태공원",
+      "snippet": "마무리 중명자연생태공원은 화려한 관광 명소라기보다 조용히 숲을 걸으며 쉬어가기 좋은 자연공원이... 포항숲길 #연일가볼만한곳 #중명자연생태공원 #포항국민여가캠핑장 #포항생태공원 #숲길산책 #국내여행",
+      "url": "https://blog.naver.com/anyman60/224315033067",
+      "src": "경주사람의 일상N여행",
+      "date": "2026-06-14"
+    },
+    {
+      "t": "nblog",
+      "title": "포항국민여가캠핑장 19사이트팁 중명생태공원산책",
+      "snippet": "35000원 포항시민 20프로 할인되니 2만원대로 이용할수 있어서 좋아요 입실시간 2시 퇴실 11시 입니다. 중명생태공원은 산책삼아 가기도... 중명자연생태공원 산책 국민여가캠핑장은 생태공원 산책을 할수...",
+      "url": "https://blog.naver.com/djsslsnstjq/224276601553",
+      "src": "행복만들기",
+      "date": "2026-05-06"
+    },
+    {
+      "t": "nblog",
+      "title": "겨울에도 즐기는 캠핑의 즐거움! 포항시 캠핑장 모음!",
+      "snippet": "다양한 생태학습 체험시험시설과 전망대, 휴게소 등 편의시설을 제공하는 중명자연생태공원을 마주하고 있어 최적의 휴양 조건을 제공합니다. 캠핑장 정보 확인하기 보경사힐링캠핑장 포항시 북구...",
+      "url": "https://blog.naver.com/inpohang/223682536164",
+      "src": "2026년도 포항과 함께! 퐝퐝!",
+      "date": "2024-12-04"
+    },
+    {
+      "t": "nblog",
+      "title": "240407(일) ~ 0408(월) 캠핑 - 포항국민여가캠핑장, 중명자연생태공원",
+      "snippet": "거의 내셔널 느낌남ㅋㅋㅋ 그냥 산책로인 줄 알았더니 중명자연생태공원... 본 1박2일 보면서ㅋㅋㅋ 아 tv 넘나 좋은디ㅋㅋㅋ 이런데와선 얘기하고 자연을 느끼고(?) 그래야되는데 동생 tv 산 거 보고 진짜 살림...",
+      "url": "https://blog.naver.com/ksuny549/223561856981",
+      "src": "깔수니의 깔깔fun이야기",
+      "date": "2024-08-26"
+    },
+    {
+      "t": "nblog",
+      "title": "[경북 포항 캠핑장] 포항국민여가캠핑장 :: 6세 아이와 방문했어요.",
+      "snippet": "그림참조 ✔️이용요금 캠핑장 배치도 & 이용안내 입구로 들어오면... 불편했어요 중명자연생태공원 캠핑장에서 조금만 걸어올라가면 생태공원이 있어요. 캠핑장 이용을 하지않아도 많은 포항시민분들이...",
+      "url": "https://blog.naver.com/tjsdud4945/223228389062",
+      "src": "나의 하루 :: 일상 여행 육아",
+      "date": "2023-10-05"
+    },
+    {
+      "t": "nblog",
+      "title": "기대이상 자연속의 뷰맛집 캠핑장 (포항 국민여가캠핑장)",
+      "snippet": "이용시간: 입실 당일 14시, 퇴실 다음날 11시 이용요금: 25,000 ~ 35,000(성수기,비수기) 위치는 포항 자명리 중명자연생태공원으로 포항/경주... 근처에 생태공원과 계곡이 있어서 산책하면서 언제든 힐링이...",
+      "url": "https://blog.naver.com/glorynoh16/223160010442",
+      "src": "This is Life, This is Me",
+      "date": "2023-07-19"
+    },
+    {
+      "t": "nblog",
+      "title": "포항 국민여가캠핑장ㅣ첫 캠핑 도전!!! (+가격, 추천 스팟, 장단점 정....",
+      "snippet": "첫 사진처럼 공원 일부가 공사중이라 이른 아침부터 해질때까지... 딱이었다 (매너타임이 10시라 10시되면 딱 꺼짐) 알탕에 숙주추가해서... 포항중명생태공원캠핑장 #포항캠핑장추천 #중명자연생태공원...",
+      "url": "https://blog.naver.com/hellocherri/223082373260",
+      "src": "LOVELY DAYS",
+      "date": "2023-04-22"
+    },
+    {
+      "t": "nblog",
+      "title": "(오토캠핑) 포항 국민여가캠핑장, 에르젠_아마존쉘터",
+      "snippet": "있으며 중명자연생태공원을 마주하고 있어 도심 속의 자연을 맛볼 수 있는 캠핑장입니다. ✔️캠 핑 장 정 보 주소 : 경북 포항시 남구... 매너타임 정도는 지켜주셨으면 좋겠습니다. 다음날 지인 부부를...",
+      "url": "https://blog.naver.com/gamsang816/223024721082",
+      "src": "나는야 최오리",
+      "date": "2023-02-23"
+    },
+    {
+      "t": "nblog",
+      "title": "[캠핑일기#3]포항국민여가캠핑장",
+      "snippet": "ㅎㅎ 그래도 밤 늦은 시간에는 매너타임이 잘 지켜져서 저희는... 있는 \"중명생태공원\"을 지나 \"옥녀봉\"에 가기로 했어요... com/glinii21 떨어진 꽃잎도 손에 담아보구요~ \"중명자연생태공원\"은...",
+      "url": "https://blog.naver.com/glinii21/222905513535",
+      "src": "나는자몽인이다",
+      "date": "2022-10-20"
+    },
+    {
+      "t": "nblog",
+      "title": "포항 캠핑_국민여가캠핑장, 중명자연생태공원",
+      "snippet": "좋아했어요 자연속 아이들이 좋아하는 동물들 쏙쏙 알밤을 물고가는 진짜 다람쥐를 보았습니다 귀욤 잔디공원위 마다카스카라동물과... 포항캠핑 #포항중명자연생태공원 #포항배드민턴치는곳 #포항캠핑장...",
+      "url": "https://blog.naver.com/gayoungnet2/222513358198",
+      "src": "BETTER DBD",
+      "date": "2021-09-22"
+    },
+    {
+      "t": "nblog",
+      "title": "포항 연일 중명자연생태공원 캠핑장 & 등산 정보",
+      "snippet": "그냥 중명 캠핑장 해. 길어서 못외우잖니. 간판 오른쪽으로는 공용화장실~ 아직 물은 덜 들었지만 공원은 엄청 잘 꾸며놓은 듯 하다. 캠핑장 이용안내. 14시부터 입실, 다음날 11시 퇴실! 차박이 안되는게 되게...",
+      "url": "https://blog.naver.com/bellehaka/222138677860",
+      "src": "❤몽몽글의 진심노트❤",
+      "date": "2020-11-08"
+    },
+    {
+      "t": "nblog",
+      "title": "포항국민여가캠핑장 후기",
+      "snippet": "포항국민여가캠핑장(2박3일) 오랫만에 캠핑장 후기를 남기네요... 왼쪽길이 캠핑장으로 들어가는 길이고, 오른쪽은 중명자연생태공원으... ,ㅋ 캠핑장과 생태공원 중간에 위치한 사방댐입니다. 캠핑장에서 2곳...",
+      "url": "https://blog.naver.com/xambo/222010891548",
+      "src": "하늘연못",
+      "date": "2020-06-24"
+    },
+    {
+      "t": "nblog",
+      "title": "자연과 함께 힐링하는 ‘포항국민여가캠핑장’운영",
+      "snippet": "자연과 함께 힐링하는 ‘포항국민여가캠핑장’운영포항시... 중명리 중명자연생태공원 입구에 조성한 포항국민여가캠핑장을 6월... 이용요금은 7월과 8월 성수기 주말(금요일~토요일/공휴일 전날 1박 기준)은...",
+      "url": "https://blog.naver.com/dsb1009/221986936715",
+      "src": "다경뉴스",
+      "date": "2020-06-02"
+    },
+    {
+      "t": "nblog",
+      "title": "포항시, 포항국민여가캠핑장 6월 1일부터 본격 개장",
+      "snippet": "중명리 중명자연생태공원 입구에 조성한 포항국민여가캠핑장을... 이용요금은 7월과 8월 성수기 주말(금요일~토요일/공휴일 전날 1박... 포항시 조현율 국제협력관광과장은 “자연과 함께 힐링하고 휴식할...",
+      "url": "https://blog.naver.com/parkty22/221986096211",
+      "src": "경북방송",
+      "date": "2020-06-01"
+    },
+    {
+      "t": "nblog",
+      "title": "‘ 포항국민여가캠핑장’ 본격 개장… 안전캠핑문화 조성",
+      "snippet": "중명리 중명자연생태공원 입구에 조성한 포항국민여가캠핑장을... 이용요금은 7월과 8월 성수기 주말(금요일~토요일/공휴일 전날 1박... 포항시 조현율 국제협력관광과장은 “자연과 함께 힐링하고 휴식할...",
+      "url": "https://blog.naver.com/yneconomic/221985991983",
+      "src": "내일을 여는 가치, YNE 영남이코노믹",
+      "date": "2020-06-01"
+    },
+    {
+      "t": "nblog",
+      "title": "중명자연생태공원에 신설된 포항국민여가캠핑장 그러나 2% 부족함",
+      "snippet": "그런데 전에 없었던 #포항국민여가캠핑장 이라는 커다란 간판이 생태공원... 1박 이용요금 3~4만원에 예약제로 운영되고 있다고 한다. 중명자연생태공원을 처음 방문한 관광객들의 반응은 어떨지 모르지만 포항...",
+      "url": "https://blog.naver.com/imyoursea/221652257831",
+      "src": "BladeRunner의 블로그",
+      "date": "2019-09-18"
+    }
+  ],
+  "prices": [
+    {
+      "won": 35000,
+      "label": "사이트",
+      "season": null,
+      "day": null,
+      "quote": "포항국민여가캠핑장 19사이트팁 중명생태공원산책 · 35000원 포항시민 20프로 할",
+      "url": "https://blog.naver.com/djsslsnstjq/224276601553",
+      "src": "행복만들기",
+      "date": "2026-05-06"
+    },
+    {
+      "won": 40000,
+      "label": null,
+      "season": null,
+      "day": null,
+      "quote": "는 커다란 간판이 생태공원... 1박 이용요금 3~4만원에 예약제로 운영되고",
+      "url": "https://blog.naver.com/imyoursea/221652257831",
+      "src": "BladeRunner의 블로그",
+      "date": "2019-09-18"
+    }
+  ],
+  "web_checked_at": "2026-11-04T23:46:48.283Z",
+  "spec": {
+    "version": 1,
+    "generated_at": "2026-11-09T20:22:33.103Z",
+    "fields": {
+      "CHECKIN_TIME": {
+        "grade": "MENTION",
+        "values": [],
+        "mentions": [
+          {
+            "value": "14:00부터",
+            "count": 2,
+            "latest": "2026-05-06",
+            "samples": [
+              {
+                "quote": "35000원 포항시민 20프로 할인되니 2만원대로 이용할수 있어서 좋아요 입실시간 2시 퇴실 11시 입니다.",
+                "url": "https://blog.naver.com/djsslsnstjq/224276601553",
+                "label": "행복만들기",
+                "date": "2026-05-06"
+              },
+              {
+                "quote": "이용시간: 입실 당일 14시, 퇴실 다음날 11시 이용요금: 25,000 ~ 35,000(성수기,비수기) 위치는 포항 자명리 중명자연생태공원으로 포항/경주...",
+                "url": "https://blog.naver.com/glorynoh16/223160010442",
+                "label": "This is Life, This is Me",
+                "date": "2023-07-19"
+              }
+            ]
+          }
+        ],
+        "conflict": false
+      },
+      "CHECKOUT_TIME": {
+        "grade": "MENTION",
+        "values": [],
+        "mentions": [
+          {
+            "value": "11:00까지",
+            "count": 2,
+            "latest": "2026-05-06",
+            "samples": [
+              {
+                "quote": "35000원 포항시민 20프로 할인되니 2만원대로 이용할수 있어서 좋아요 입실시간 2시 퇴실 11시 입니다.",
+                "url": "https://blog.naver.com/djsslsnstjq/224276601553",
+                "label": "행복만들기",
+                "date": "2026-05-06"
+              },
+              {
+                "quote": "이용시간: 입실 당일 14시, 퇴실 다음날 11시 이용요금: 25,000 ~ 35,000(성수기,비수기) 위치는 포항 자명리 중명자연생태공원으로 포항/경주...",
+                "url": "https://blog.naver.com/glorynoh16/223160010442",
+                "label": "This is Life, This is Me",
+                "date": "2023-07-19"
+              }
+            ]
+          }
+        ],
+        "conflict": false
+      },
+      "MANNER_TIME": {
+        "grade": "MENTION",
+        "values": [],
+        "mentions": [
+          {
+            "value": "22:00부터",
+            "count": 1,
+            "latest": "2023-04-22",
+            "samples": [
+              {
+                "quote": "딱이었다 (매너타임이 10시라 10시되면 딱 꺼짐) 알탕에 숙주추가해서...",
+                "url": "https://blog.naver.com/hellocherri/223082373260",
+                "label": "LOVELY DAYS",
+                "date": "2023-04-22"
+              }
+            ]
+          }
+        ],
+        "conflict": false
+      }
+    },
+    "stats": {
+      "facts": 5,
+      "reviews_used": 3,
+      "roundups_skipped": 5
+    }
+  },
+  "site_types": [
+    {
+      "code": "GLAMPING",
+      "label": "글램핑",
+      "count": null,
+      "sub": null,
+      "grade": "MENTION",
+      "src": "blog_mention",
+      "url": "https://blog.naver.com/njibgt/224435681797",
+      "at": "2026-10-09",
+      "quote": "포항 글램핑 추천 및 예약 방법 총정리 (호미곶 오션뷰·가격·국민..... 숙소별"
+    }
+  ],
+  "site_products": [
+    {
+      "id": "sp-osm-w1188029707-1",
+      "name": "글램핑",
+      "type": "GLAMPING",
+      "floor": "데크",
+      "size": null,
+      "power": "전기 이용 가능",
+      "price": null,
+      "photos": [
+        "https://blog.kakaocdn.net/dn/YWjz6/btqM2GUgn8s/KrUkUqKnUWMsS2UkUvJG61/img.jpg",
+        "https://t1.daumcdn.net/cfile/blog/14405C3A5048BA7512",
+        "https://postfiles.pstatic.net/MjAxOTA5MDFfNTcg/MDAxNTY3MzI2OTk5NjQ3.vDy4Ld7ujhGqkzdO-Pf89pUt6NjauxIzi9bl3_3xiygg.JbmSHxS3oLQStM9F0OO_4jTuoTl_6fi7fym5LQUOo1Mg.JPEG.enxpddl/Screenshot_20190901-163504_TRANGGLE.jpg?type=w773",
+        "https://postfiles.pstatic.net/MjAyMTA0MjVfMTQg/MDAxNjE5MzE0NjEwNzM3.URINhC2md5RfaC8t7J3Xe7myurOESuE_GJ_RSITx_XAg.8e4s4kf_QHQ1edw2Q34JZ3RNOiHxhptWads0HeKzW70g.JPEG.ijoataiji/IMG_6827.JPG?type=w966",
+        "https://egbn.kr/data/newsData/1381718557&&.JPG",
+        "https://t1.daumcdn.net/cafeattach/17l2n/8294efa5e2ec851f6b87b8afa5929278e9e5ae7a"
+      ],
+      "desc": "중명자연생태공원 글램핑 구역입니다."
+    }
+  ]
+}

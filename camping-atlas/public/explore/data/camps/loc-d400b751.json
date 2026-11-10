@@ -52,5 +52,18 @@
         }
       }
     }
-  }
+  },
+  "site_products": [
+    {
+      "id": "sp-loc-d400b751-1",
+      "name": "오토캠핑 사이트",
+      "type": "AUTO",
+      "floor": "파쇄석",
+      "size": null,
+      "power": "전기 이용 가능",
+      "price": null,
+      "photos": [],
+      "desc": "합천휴테마파크 펜션카라반 캠핑장 대표 사이트입니다."
+    }
+  ]
 }

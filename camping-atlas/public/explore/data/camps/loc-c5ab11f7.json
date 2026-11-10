@@ -52,5 +52,18 @@
         }
       }
     }
-  }
+  },
+  "site_products": [
+    {
+      "id": "sp-loc-c5ab11f7-1",
+      "name": "오토캠핑 사이트",
+      "type": "AUTO",
+      "floor": "파쇄석",
+      "size": null,
+      "power": "전기 이용 가능",
+      "price": null,
+      "photos": [],
+      "desc": "에뜨유명산캠핑장 대표 사이트입니다."
+    }
+  ]
 }
