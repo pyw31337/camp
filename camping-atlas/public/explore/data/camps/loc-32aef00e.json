@@ -1,0 +1,71 @@
+{
+  "intro": "충청북도 옥천군 이원면 장찬길 159-73에 위치한 지자체 정식 인허가 등록 야영장인 '마로니에숲 캠핑장'입니다.",
+  "nearby": {
+    "tour": [],
+    "food": [],
+    "mart": []
+  },
+  "photos": [],
+  "seasons": [
+    "봄",
+    "여름",
+    "가을",
+    "겨울"
+  ],
+  "booking": {
+    "primary": {
+      "platform_id": "phone",
+      "platform_name": "전화 예약",
+      "url": "tel:0437321910",
+      "kind": "phone"
+    },
+    "channels": [
+      {
+        "platform_id": "phone",
+        "platform_name": "전화 예약",
+        "url": "tel:0437321910",
+        "kind": "phone"
+      }
+    ]
+  },
+  "profile": {
+    "fields": {
+      "TYPE": {
+        "value": "일반야영장",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "지방행정인허가",
+          "url": "https://www.localdata.go.kr",
+          "date": "2019-05-02"
+        }
+      },
+      "SEASON": {
+        "value": "봄·여름·가을·겨울 운영 (사계절)",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "지방행정인허가",
+          "url": "https://www.localdata.go.kr",
+          "date": "2026-11-10"
+        }
+      },
+      "PARKING": {
+        "value": "업장 내 주차",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "지방행정인허가",
+          "url": "https://www.localdata.go.kr",
+          "date": "2026-01-01"
+        }
+      },
+      "POWER": {
+        "value": "전기 이용 가능",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "지방행정인허가",
+          "url": "https://www.localdata.go.kr",
+          "date": "2026-01-01"
+        }
+      }
+    }
+  }
+}

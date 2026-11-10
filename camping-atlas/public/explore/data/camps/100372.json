@@ -1996,5 +1996,33 @@
     "여름",
     "가을",
     "겨울"
+  ],
+  "site_products": [
+    {
+      "id": "sp-100372-1",
+      "name": "버드나무존 (강자갈·파쇄석 8×8m)",
+      "type": "AUTO",
+      "floor": "강자갈·파쇄석",
+      "size": "8×8m",
+      "power": "1100W 고용량",
+      "price": 60000,
+      "photos": [
+        "https://tong.visitkorea.or.kr/cms/resource/41/3392241_image3_1.jpg"
+      ],
+      "desc": "배수가 우수한 강자갈 및 파쇄석 바닥으로 1100W 고용량 전기를 지원하여 팬히터·전열기구 사용이 편리합니다."
+    },
+    {
+      "id": "sp-100372-2",
+      "name": "잣나무 힐링존 (숲속 대형 9×7m)",
+      "type": "AUTO",
+      "floor": "파쇄석",
+      "size": "9×7m",
+      "power": "1100W 고용량",
+      "price": 65000,
+      "photos": [
+        "https://tong.visitkorea.or.kr/cms/resource/42/4112742_image3_1.jpg"
+      ],
+      "desc": "울창한 잣나무 피톤치드 그늘 아래 위치한 독립적이고 조용한 프라이빗 대형 사이트입니다."
+    }
   ]
 }

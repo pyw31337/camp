@@ -1,0 +1,56 @@
+{
+  "intro": "경기도 양평군 개군면 추읍로 268-37에 위치한 지자체 정식 인허가 등록 야영장인 '클라인캠프빌리지'입니다.",
+  "nearby": {
+    "tour": [],
+    "food": [],
+    "mart": []
+  },
+  "photos": [],
+  "seasons": [
+    "봄",
+    "여름",
+    "가을",
+    "겨울"
+  ],
+  "booking": null,
+  "profile": {
+    "fields": {
+      "TYPE": {
+        "value": "일반야영장",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "지방행정인허가",
+          "url": "https://www.localdata.go.kr",
+          "date": "2019-11-27"
+        }
+      },
+      "SEASON": {
+        "value": "봄·여름·가을·겨울 운영 (사계절)",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "지방행정인허가",
+          "url": "https://www.localdata.go.kr",
+          "date": "2026-11-10"
+        }
+      },
+      "PARKING": {
+        "value": "업장 내 주차",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "지방행정인허가",
+          "url": "https://www.localdata.go.kr",
+          "date": "2026-01-01"
+        }
+      },
+      "POWER": {
+        "value": "전기 이용 가능",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "지방행정인허가",
+          "url": "https://www.localdata.go.kr",
+          "date": "2026-01-01"
+        }
+      }
+    }
+  }
+}

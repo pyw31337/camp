@@ -1,0 +1,71 @@
+{
+  "intro": "서울특별시 구로구 구로중앙로 216-1, 해피피플 3층 (구로동)에 위치한 지자체 정식 인허가 등록 야영장인 '사단법인 해피피플'입니다.",
+  "nearby": {
+    "tour": [],
+    "food": [],
+    "mart": []
+  },
+  "photos": [],
+  "seasons": [
+    "봄",
+    "여름",
+    "가을",
+    "겨울"
+  ],
+  "booking": {
+    "primary": {
+      "platform_id": "phone",
+      "platform_name": "전화 예약",
+      "url": "tel:0260802017",
+      "kind": "phone"
+    },
+    "channels": [
+      {
+        "platform_id": "phone",
+        "platform_name": "전화 예약",
+        "url": "tel:0260802017",
+        "kind": "phone"
+      }
+    ]
+  },
+  "profile": {
+    "fields": {
+      "TYPE": {
+        "value": "자동차야영장",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "지방행정인허가",
+          "url": "https://www.localdata.go.kr",
+          "date": "2025-09-10"
+        }
+      },
+      "SEASON": {
+        "value": "봄·여름·가을·겨울 운영 (사계절)",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "지방행정인허가",
+          "url": "https://www.localdata.go.kr",
+          "date": "2026-11-10"
+        }
+      },
+      "PARKING": {
+        "value": "업장 내 주차",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "지방행정인허가",
+          "url": "https://www.localdata.go.kr",
+          "date": "2026-01-01"
+        }
+      },
+      "POWER": {
+        "value": "전기 이용 가능",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "지방행정인허가",
+          "url": "https://www.localdata.go.kr",
+          "date": "2026-01-01"
+        }
+      }
+    }
+  }
+}
