@@ -6,7 +6,6 @@
 // APP_BASE = 앱 루트 경로(/camp/ · 로컬 미리보기는 /). 데이터·사진·링크는 모두 이 절대 경로를 쓴다(깊은 주소에서도 깨지지 않게).
 const MOD_ROOT = /\/(explore|renewal)\/[^/]*$/.test(new URL(import.meta.url).pathname) ? "../" : "./";
 const APP_BASE = new URL(MOD_ROOT, import.meta.url).pathname;
-const IS_SUBDIR = false;
 const ASSETS_BASE = APP_BASE;
 const DATA = `${APP_BASE}explore/data/`;
 const MEDIA = `${APP_BASE}media/`;
@@ -489,20 +488,35 @@ function openingOf(c) {
 }
 
 // ── 사이트·상품 타입(build-site-types.mjs → c.st = [[code, count, g, sub]]) ─────
+function isPublicPark(c) {
+  return c.du === "park" || (c.types ?? []).includes("공원");
+}
+const BUNGALOW_RE = /방갈로|원두막|오두막|캐빈|통나무|캠핑하우스|이글루|돔하우스|코티지/;
+const PENSION_RE = /펜션|객실|독채|빌라|스테이|룸|민박/;
+const isBungalow = (c) => (c.st ?? []).some((t) => (t[0] === "BUNGALOW" || t[0] === "HOUSE") && BUNGALOW_RE.test(t[3] ?? "")) || /방갈로|원두막/.test(c.name ?? "");
+const isPension = (c) => (c.st ?? []).some((t) => (t[0] === "PENSION" || t[0] === "HOUSE") && PENSION_RE.test(t[3] ?? "")) || /펜션|풀빌라/.test(c.name ?? "");
+const firmStBungalow = (c) => (c.st ?? []).find((t) => (t[0] === "BUNGALOW" || t[0] === "HOUSE") && t[2] !== "m" && BUNGALOW_RE.test(t[3] ?? ""));
+const firmStPension = (c) => (c.st ?? []).find((t) => (t[0] === "PENSION" || t[0] === "HOUSE") && t[2] !== "m" && PENSION_RE.test(t[3] ?? ""));
 const STYPES = [
   ["DECK", "데크", "layers"], ["DUPLEX_DECK", "복층 데크", "layers"], ["TARP_ZONE", "타프존", "tent"], ["GLAMPING", "글램핑", "glamping"],
-  ["CARAVAN", "카라반", "caravan"], ["HOUSE", "숙박동", "home"], ["AUTO", "오토캠핑", "car"], ["RV", "캠핑카·트레일러", "caravan"],
+  ["CARAVAN", "카라반", "caravan"], ["BUNGALOW", "방갈로", "tent"], ["PENSION", "펜션", "home"], ["HOUSE", "숙박동", "home"], ["AUTO", "오토캠핑", "car"], ["RV", "캠핑카·트레일러", "caravan"],
   ["CAR_CAMP", "차박", "car"], ["PET_SITE", "반려견 전용", "paw"], ["SOLO", "솔로·백패킹", "tent"], ["EQUIPPED", "장비 포함", "tent"],
   ["PRIVATE_BATH", "개별 화장실", "toilet"], ["PITCH", "일반 사이트", "tent"],
 ];
 const ST = Object.fromEntries(STYPES.map(([k, l, i]) => [k, { label: l, icon: i }]));
-const hasType = (c, k) => (c.st ?? []).some((t) => t[0] === k);
+const hasType = (c, k) => {
+  if (k === "BUNGALOW") return isBungalow(c);
+  if (k === "PENSION") return isPension(c);
+  if (k === "HOUSE") return isBungalow(c) || isPension(c);
+  if (k === "AUTO") return !isPublicPark(c) && ((c.types ?? []).includes("자동차야영장") || (c.st ?? []).some((t) => t[0] === "AUTO") || (c.auto && !c.du));
+  return (c.st ?? []).some((t) => t[0] === k);
+};
 // 카드 한 줄: 일반 사이트 말고 다른 타입이 있으면 그것을 먼저(최대 4개).
 function typeLine2(c) {
   const st = (c.st ?? []).filter((t) => t[0] !== "PRIVATE_BATH");
   const other = st.filter((t) => t[0] !== "PITCH");
   const list = (other.length ? other : st).slice(0, 4);
-  return list.filter(([k]) => ST[k]).map(([k, n, , sub]) => `${k === "HOUSE" && sub ? sub : ST[k].label}${n ? ` ${fmt(n)}` : ""}`).join(" · ");
+  return list.filter(([k]) => ST[k]).map(([k, n, , sub]) => `${(k === "HOUSE" || k === "BUNGALOW" || k === "PENSION") && sub ? sub : ST[k].label}${n ? ` ${fmt(n)}` : ""}`).join(" · ");
 }
 // ── 숙박 상품 배지(소유자 2026-10-21: 겨울엔 글램핑·카라반·방갈로 유무가 중요) ─────
 // 근거: 고캠핑 업종(c.types) 또는 등록·운영자 근거 사이트 타입(c.st, 후기 언급 m 제외) · 트레일러는 고캠핑 c.trailer.
@@ -512,7 +526,9 @@ const HOUSE_SUB = /^(방갈로|캐빈|오두막|통나무집|코티지|트리하
 const STAYS = [
   ["GLAMPING", "glamp", "glamping", (c) => (c.types ?? []).includes("글램핑") || Boolean(firmSt(c, "GLAMPING")), (c) => (heated(c, "g") ? "난방 글램핑" : "글램핑")],
   ["CARAVAN", "caravan", "caravan", (c) => (c.types ?? []).includes("카라반") || Boolean(firmSt(c, "CARAVAN")), (c) => (heated(c, "c") ? "난방 카라반" : "카라반")],
-  ["HOUSE", "house", "home", (c) => Boolean(firmSt(c, "HOUSE")), (c) => { const sub = firmSt(c, "HOUSE")?.[3]; return HOUSE_SUB.test(sub ?? "") ? sub : "방갈로·숙박동"; }],
+  ["BUNGALOW", "bungalow", "tent", (c) => Boolean(firmStBungalow(c)), (c) => firmStBungalow(c)?.[3] || "방갈로"],
+  ["PENSION", "pension", "home", (c) => Boolean(firmStPension(c)), (c) => firmStPension(c)?.[3] || "펜션"],
+  ["HOUSE", "house", "home", (c) => Boolean(firmSt(c, "HOUSE")) && !firmStBungalow(c) && !firmStPension(c), (c) => { const sub = firmSt(c, "HOUSE")?.[3]; return HOUSE_SUB.test(sub ?? "") ? sub : "숙박동"; }],
   ["RV", "rv", "caravan", (c) => c.trailer === true || c.caravan === true || Boolean(firmSt(c, "RV")), () => "트레일러 입장"],
 ];
 const STAY_KEYS = new Set(STAYS.map(([k]) => k));
@@ -631,7 +647,9 @@ const QUICK = {
   pet: { label: "반려견", icon: "paw", cls: "ink", test: (c) => pos(facts(c).pet) && facts(c).pet.ok },
   glamp: { label: "글램핑", icon: "glamping", cls: "glamp", test: (c) => stayKinds(c).includes("GLAMPING") },
   caravan: { label: "카라반", icon: "caravan", cls: "caravan", test: (c) => stayKinds(c).includes("CARAVAN") },
-  house: { label: "방갈로·숙박동", icon: "home", cls: "house", test: (c) => stayKinds(c).includes("HOUSE") },
+  bungalow: { label: "방갈로", icon: "tent", cls: "bungalow", test: (c) => isBungalow(c) },
+  pension: { label: "펜션", icon: "home", cls: "pension", test: (c) => isPension(c) },
+  house: { label: "방갈로·숙박동", icon: "home", cls: "house", test: (c) => hasType(c, "HOUSE") },
 };
 // 테마 아이콘(소유자 2026-10-20 지정 SVG). 모두 currentColor, 글자 왼쪽 1.1em.
 const TH_SVG = {
@@ -640,6 +658,8 @@ const TH_SVG = {
   VALLEY: ["0 0 24 24", '<path fill="currentColor" d="M6.18 10.95l2.54 3.175l.084 .093a1 1 0 0 0 1.403 -.01l1.637 -1.638l1.324 1.985a1 1 0 0 0 1.457 .226l3.632 -2.906l3.647 7.697a1 1 0 0 1 -.904 1.428h-18a1 1 0 0 1 -.904 -1.428zm5.82 -7.878a3.3 3.3 0 0 1 2.983 1.888l2.394 5.057l-3.15 2.52l-1.395 -2.092l-.075 -.099a1 1 0 0 0 -1.464 -.053l-1.711 1.709l-1.301 -1.627l-1.151 -1.435l1.888 -3.98a3.3 3.3 0 0 1 2.982 -1.888"/>'],
   FOREST: ["0 0 24 24", '<path fill="currentColor" d="M14.14 12h-.06c.81 0 1.28-.91.82-1.57L9.82 3.17a1 1 0 0 0-1.64 0L3.1 10.43c-.46.66.01 1.57.82 1.57h-.06L.99 16.46c-.43.66.05 1.54.84 1.54H7v2c0 1.1.9 2 2 2s2-.9 2-2v-2h5.17c.79 0 1.27-.88.84-1.54z" /><path fill="currentColor" d="M23.01 16.46L20.14 12h-.06c.81 0 1.28-.91.82-1.57l-5.08-7.26a1 1 0 0 0-1.64 0l-1.57 2.24l3.11 4.44a2.004 2.004 0 0 1-.16 2.5l2.29 3.57c.4.62.42 1.4.07 2.04c-.01.02-.02.03-.03.04h4.28c.79 0 1.27-.88.84-1.54M13 20c0 1.1.9 2 2 2s2-.9 2-2v-1h-4z" />'],
   BEACH: ["0 0 16 16", '<path fill="currentColor" d="M11.914 1.556a4.18 4.18 0 0 0-5.694 1.52l-.152.263a.5.5 0 0 0 .183.684l2.648 1.522L7.27 8.392c-1.45.189-2.680 1.13-3.46 2.394q.13-.03.269-.035a1.5 1.5 0 0 1 1.484 1.027a.55.55 0 0 0 .192.29a.4.4 0 0 0 .235.075a.4.4 0 0 0 .228-.067a.46.46 0 0 0 .171-.247a1.5 1.5 0 0 1 2.837 0c.05.143.118.211.171.247c.062.042.14.067.229.066a.4.4 0 0 0 .234-.074a.55.55 0 0 0 .192-.29a1.5 1.5 0 0 1 1.753-.992c-.766-1.244-1.969-2.174-3.389-2.384l1.349-2.36l2.840 1.632a.5.5 0 0 0 .681-.182l.153-.264a4.14 4.14 0 0 0-1.526-5.672m-7.3 10.537a.5.5 0 0 0-.96.038c-.125.512-.358.78-.613.935c-.273.165-.628.233-1.041.233a.5.5 0 1 0 0 1c.504 0 1.066-.08 1.558-.377c.244-.148.459-.341.636-.585c.961 1.08 2.68 1.074 3.615-.019c.951 1.113 2.716 1.1 3.666-.04a2.8 2.8 0 0 0 2.142 1.021a.5.5 0 0 0 0-1c-.716 0-1.429-.468-1.664-1.201a.5.5 0 0 0-.95-.005c-.465 1.401-2.27 1.377-2.722.06a.5.5 0 0 0-.945 0c-.453 1.317-2.257 1.341-2.721-.06" />'],
+  "T:BUNGALOW": ["0 0 24 24", '<path fill="currentColor" fill-rule="evenodd" d="M11 2.5h2l-.4.7L22 20h-20l9.4-16.8zM12 9.5 8 18h8z"/>'],
+  "T:PENSION": ["0 0 24 24", '<path fill="currentColor" d="M12.707 2.293l9 9c.63 .63 .184 1.707 -.707 1.707h-1v6a3 3 0 0 1 -3 3h-10a3 3 0 0 1 -3 -3v-6h-1c-.89 0 -1.337 -1.077 -.707 -1.707l9 -9a1 1 0 0 1 1.414 0m.793 8.707h-3a1.5 1.5 0 0 0 -1.5 1.5v3a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5 -1.5v-3a1.5 1.5 0 0 0 -1.5 -1.5"/>'],
   "T:HOUSE": ["0 0 24 24", '<path fill="currentColor" d="M12.707 2.293l9 9c.63 .63 .184 1.707 -.707 1.707h-1v6a3 3 0 0 1 -3 3h-10a3 3 0 0 1 -3 -3v-6h-1c-.89 0 -1.337 -1.077 -.707 -1.707l9 -9a1 1 0 0 1 1.414 0m.793 8.707h-3a1.5 1.5 0 0 0 -1.5 1.5v3a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5 -1.5v-3a1.5 1.5 0 0 0 -1.5 -1.5"/>'],
   LAKE: ["0 0 24 24", '<path fill="currentColor" d="M2 22c0-.55.45-1 1-1c.87 0 1.73-.24 2.53-.7c.29-.16.65-.17.94 0c1.59.9 3.48.9 5.06 0a.98.98 0 0 1 .94 0c1.59.9 3.48.9 5.06 0a.98.98 0 0 1 .94 0c.8.46 1.66.7 2.53.7c.55 0 1 .45 1 1s-.45 1-1 1c-1.03 0-2.06-.25-3-.75a6.36 6.36 0 0 1-6.09-.05c-1.79.87-3.92.98-5.58-.14C5.3 22.69 4.15 23 3 23c-.55 0-1-.45-1-1M12 5.5c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m9.47 12.95c-.42.14-.9.28-1.41.42c-.53-.15-1.03-.43-1.45-.77a.98.98 0 0 0-1.23 0c-.66.53-1.48.9-2.38.9s-1.72-.37-2.39-.91a.99.99 0 0 0-1.22 0c-.67.54-1.49.91-2.39.91s-1.72-.37-2.39-.91c-.35-.29-.87-.28-1.23 0c-.43.35-.92.62-1.45.77c-.51-.14-.98-.28-1.4-.42c-.92-.3-.92-1.6 0-1.9c1.21-.39 2.79-.82 4.6-1.13l1.35-4.17c.31-.95 1.32-1.47 2.27-1.16c.09.03.19.07.27.11l2.47 1.3l2.84-1.5l1.65-3.71l-.36-.93c-.1-.25-.09-.52.02-.76l.74-1.68a1 1 0 0 1 1.32-.51l1.37.61a1 1 0 0 1 .5 1.32l-.75 1.68c-.11.24-.31.43-.56.53l-.9.36l-3.72 8.34c2.33.3 4.35.84 5.82 1.31c.93.3.94 1.6.01 1.9m-6.45-5.49l-.59.31c-.58.31-1.28.31-1.86 0l-.81-.43l-.71 2.17c.31 0 .63-.01.95-.01c.71 0 1.4.03 2.07.08z"/>'],
   FAMILY: ["0 0 24 24", '<path fill="currentColor" d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 7.046 -9.232a3 3 0 0 0 2.949 3.556a1 1 0 0 0 0 -2l-.117 -.007a1 1 0 0 1 .117 -1.993c1.726 0 3.453 .447 5 1.34zm-1.8 10.946a1 1 0 0 0 -1.414 .014a2.5 2.5 0 0 1 -3.572 0a1 1 0 0 0 -1.428 1.4a4.5 4.5 0 0 0 6.428 0a1 1 0 0 0 -.014 -1.414zm-6.19 -5.286l-.127 .007a1 1 0 0 0 .117 1.993l.127 -.007a1 1 0 0 0 -.117 -1.993zm6 0l-.127 .007a1 1 0 0 0 .117 1.993l.127 -.007a1 1 0 0 0 -.117 -1.993z"/>'],
@@ -672,8 +692,7 @@ const isPicnicCamp = (c) => PICNIC_IDS.has(String(c.id)) || (Boolean(c.du) && !c
 const isParkCamp = (c) => c.du === "park" || (/공원|유원지/.test(c.name) && !/휴양림/.test(c.name));
 // 도시공원 표준데이터는 나들이 후보를 넓게 찾는 원장이다. 숙박 상품의
 // 상세 스펙이 아닌 시설·주소 중심 값이 많으므로 일반 캠핑장과 같은 밀도로
-// 지도·기본 목록에 섞으면 비교 결과가 왜곡된다.
-const isPublicPark = (c) => c.du === "park";
+// 지도·기본 목록에 섞으면 비교 결과가 왜곡된다. (isPublicPark 함수는 상단 정의)
 let publicParkCoreFloor = null;
 function publicParkEvidence(c) {
   const day = c.day ?? {}, profile = c.park_info ?? c.park ?? {};
@@ -1495,21 +1514,10 @@ function uniqueDetailsHtml(c) {
 // 찜 목록은 여러 곳을 훑어보기 위한 화면이므로, 이름·주소 아래의 모든 정보(유형·스펙·후기 뱃지)를 '상세정보'로 기본 접는다.
 // 일반 목록·테마 카드에는 같은 행을 그대로 유지해 비교 정보가 숨지 않게 한다.
 function savedDetailsHtml(c) {
-  const panelId = `saved-spec-${String(c.id).replace(/[^A-Za-z0-9_-]/g, "-")}`;
-  const typesHtml = typeRow(c).html ? `<div class="card-group card-group-types">${typeRow(c).html}</div>` : "";
-  const reviewsHtml = c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0)
-    ? `<div class="card-group card-group-reviews"><div class="card-reviews">${cardReviewPills(c.rv, c)}</div></div>`
-    : "";
-  return `<div class="card-group card-group-spec saved-card-spec" data-saved-card-spec>
-    <button class="saved-card-spec-toggle" type="button" data-saved-card-spec-toggle aria-expanded="false" aria-controls="${esc(panelId)}">
-      <span>${ic("list")}상세정보</span>${ic("chevron-up", "saved-card-spec-chevron")}
-    </button>
-    <div class="saved-card-spec-panel" id="${esc(panelId)}" data-saved-card-spec-panel hidden>
-      ${typesHtml}
-      ${rowsHtml(c)}
-      ${reviewsHtml}
-    </div>
-  </div>`;
+  const o = Boolean(S.savedSpecOpen), id = `saved-spec-${String(c.id).replace(/[^A-Za-z0-9_-]/g, "-")}`;
+  const t = typeRow(c).html ? `<div class="card-group card-group-types">${typeRow(c).html}</div>` : "";
+  const r = c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-group card-group-reviews"><div class="card-reviews">${cardReviewPills(c.rv, c)}</div></div>` : "";
+  return `<div class="card-group card-group-spec saved-card-spec${o ? " is-open" : ""}" data-saved-card-spec><button class="saved-card-spec-toggle" type="button" data-saved-card-spec-toggle aria-expanded="${o ? "true" : "false"}" aria-controls="${esc(id)}"><span>${ic("list")}상세정보</span>${ic("chevron-up", "saved-card-spec-chevron")}</button><div class="saved-card-spec-panel" id="${esc(id)}" data-saved-card-spec-panel${o ? "" : " hidden"}>${t}${rowsHtml(c)}${r}</div></div>`;
 }
 // 가는 길 장보기: 마트·편의점·정육점 중 5km 안에 있는 곳(LOCALDATA 인허가). 순서는 늘 마트 → 편의점 → 정육점(소유자 2026-10-20).
 function nearLine(c, sep = " · ") {
@@ -1760,35 +1768,27 @@ document.addEventListener("click", (e) => {
 });
 addEventListener("scroll", () => { $("#pop").hidden = true; }, { passive: true });
 addEventListener("keydown", (e) => { if (e.key === "Escape") $("#pop").hidden = true; });
-// 카드 상세정보 토글 시 같은 테마 레일 내 카드들 상세정보 동시 토글 (소유자 2026-11-09)
+// 카드 상세정보 토글 시 같은 테마 레일 내 카드들 동시 토글 / 찜 카드 상세 동시 토글 (소유자 2026-11-09·10)
 document.addEventListener("click", (e) => {
   const s = e.target.closest(".unique-card-summary, .card-spec-summary");
-  if (!s) return;
-  const d = s.closest("details");
-  const rail = d?.closest(".rail, .trow, .my-taste-rail, [data-grid], .nearby-places") || d?.closest("section");
-  if (!rail) return;
-  setTimeout(() => {
-    const st = d.open;
-    rail.querySelectorAll(".unique-card-details, .card-spec-details").forEach((x) => { if (x !== d && x.open !== st) x.open = st; });
-  }, 0);
-});
-// 찜 목록 카드 상세정보 토글 시 화면 내 모든 찜한 카드 상세정보 동시 토글 (소유자 2026-11-10)
-document.addEventListener("click", (e) => {
+  if (s) {
+    const d = s.closest("details"), rail = d?.closest(".rail, .trow, .my-taste-rail, [data-grid], .nearby-places") || d?.closest("section");
+    if (rail) setTimeout(() => { const st = d.open; rail.querySelectorAll(".unique-card-details, .card-spec-details").forEach((x) => { if (x !== d && x.open !== st) x.open = st; }); }, 0);
+  }
   const toggle = e.target.closest("[data-saved-card-spec-toggle]");
-  if (!toggle) return;
-  e.preventDefault();
-  const group = toggle.closest("[data-saved-card-spec]");
-  const panel = group?.querySelector("[data-saved-card-spec-panel]");
-  if (!panel) return;
-  const open = panel.hidden;
-  const root = toggle.closest(".saved-page, .saved-grid, #view") || document;
-  root.querySelectorAll("[data-saved-card-spec]").forEach((g) => {
-    const p = g.querySelector("[data-saved-card-spec-panel]");
-    const t = g.querySelector("[data-saved-card-spec-toggle]");
-    if (p) p.hidden = !open;
-    if (t) t.setAttribute("aria-expanded", String(open));
-    g.classList.toggle("is-open", open);
-  });
+  if (toggle) {
+    e.preventDefault();
+    const panel = toggle.closest("[data-saved-card-spec]")?.querySelector("[data-saved-card-spec-panel]");
+    if (!panel) return;
+    const open = panel.hidden, root = toggle.closest(".saved-page, .saved-grid, #view") || document;
+    S.savedSpecOpen = open;
+    root.querySelectorAll("[data-saved-card-spec]").forEach((g) => {
+      const p = g.querySelector("[data-saved-card-spec-panel]"), t = g.querySelector("[data-saved-card-spec-toggle]");
+      if (p) p.hidden = !open;
+      if (t) t.setAttribute("aria-expanded", String(open));
+      g.classList.toggle("is-open", open);
+    });
+  }
 });
 // ‘불가·금지’ 값은 사이트 어디서나 빨간 글씨(소유자 2026-10-22 전수 적용). 그린 뒤 글자 노드를 훑어 감싼다.
 // 짧은 값(24자 이하)은 통째로, 긴 문장은 그 낱말 묶음만. 빨간 배지·제목·입력칸은 건드리지 않는다.
@@ -2084,6 +2084,10 @@ function saveCommit(id) {
   store.set("mc-saved", S.saved); store.set("mc-pick", S.pick);
   syncCompare();
   $$(`[data-save="${CSS.escape(id)}"]`).forEach((x) => { const on = isSaved(id); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); x.setAttribute("aria-label", on ? "찜 해제" : "찜하기"); x.querySelector("use").setAttribute("href", `#i-${on ? "heart" : "heart-o"}`); });
+  if (curHash().startsWith("#/saved")) {
+    const hasOpen = Boolean(document.querySelector("[data-saved-card-spec].is-open, [data-saved-card-spec-panel]:not([hidden])"));
+    if (hasOpen) S.savedSpecOpen = true;
+  }
   if (curHash().startsWith("#/compare") || curHash().startsWith("#/saved") || curHash().startsWith("#/saves-log")) route();
 }
 function syncCompare() {
@@ -2139,7 +2143,6 @@ document.addEventListener("click", (e) => {
 function countOf(test) { return S.camps.reduce((n, c) => n + (test(c) ? 1 : 0), 0); }
 // ── 실시간 인기(소유자 2026-10-19): 최근 7일 블로그·카페·뉴스·동영상 글의 캠핑장 언급 순위. /context/trending.json(Trending mentions)
 // 다음(Daum) 공식 아이콘(위키미디어 공용 Daum_icon_(2025–2026).svg)을 로컬 파일로 쓴다(소유자 2026-10-20).
-const DAUM_LOGO = new URL("images/daum.svg", import.meta.url).href;
 const TR_GLYPH = {
   naver: ["네이버", '<path d="M15.6 12.8 8.1 2H2v20h6.4V11.2L15.9 22H22V2h-6.4z" transform="translate(3 3) scale(.75)"/>'],
   daum: ["Daum", '<path d="m 36,20.36 c 3.1152,0 5.6352,2.712 5.5152,5.8536 -0.1128,2.988 -2.6616,5.4264 -5.652,5.4264 h -3.9456 c -0.264,0 -0.48,-0.216 -0.48,-0.48 V 20.84 c 0,-0.264 0.216,-0.48 0.48,-0.48 h 4.08 M 36,14 h -9.6 c -0.7944,0 -1.44,0.6456 -1.44,1.44 v 21.12 c 0,0.7944 0.6456,1.44 1.44,1.44 H 36 C 42.6264,38 48,32.6264 48,26 48,19.3736 42.6264,14 36,14 Z" transform="translate(12 12) scale(.75) translate(-36.5 -26)"/>'],
@@ -4206,44 +4209,39 @@ const saveMyTaste = (t) => {
 };
 
 function matchMyTaste(c, taste = getMyTaste()) {
-  const txt = campSearchText(c);
-  if (taste.types?.length && !taste.types.some((k) => hasType(c, k) || (k === "AUTO" && c.auto) || (k === "GLAMPING" && (c.glamp || c.types?.includes("글램핑"))) || (k === "CARAVAN" && (c.caravan || c.types?.includes("카라반"))))) return false;
+  if (isPublicPark(c)) return false;
+  const txt = campSearchText(c), uq = c.uq ?? [], am = c.amenities ?? [];
+  const hit = (re) => re.test(txt);
+  if (taste.types?.length && !taste.types.some((k) => hasType(c, k) || (k === "AUTO" && !isPublicPark(c) && (c.auto || hasType(c, "AUTO"))) || (k === "GLAMPING" && (c.glamp || c.types?.includes("글램핑"))) || (k === "CARAVAN" && (c.caravan || c.types?.includes("카라반"))))) return false;
   if (taste.minSize > 0 && maxSide(c) < taste.minSize) return false;
   if (taste.minWatts > 0) {
     const w = c.watts || (c.of?.w ? Number(c.of.w.v) : null) || c.field_conditions?.power?.limit_w || wattsOf(c) || (pos(facts(c).power) && facts(c).power.w ? facts(c).power.w : 0);
-    if (w > 0) {
-      if (w < taste.minWatts) return false;
-    } else {
-      const hasAvailable = c.pwr || c.field_conditions?.power?.available;
-      if (taste.minWatts === 600 && !(hasAvailable || /600\s*w|전기/i.test(txt))) return false;
-      if (taste.minWatts === 1000 && !/1[0-9]{3}\s*w|1kw|1\.0kw|1\.1kw/i.test(txt)) return false;
-      if (taste.minWatts === 1400 && !/1[4-9][0-9]{2}\s*w|2[0-9]{3}\s*w|3[0-9]{3}\s*w|1\.[4-9]kw|2kw/i.test(txt)) return false;
-    }
+    if (w > 0 ? w < taste.minWatts : !((c.pwr || c.field_conditions?.power?.available) && taste.minWatts === 600 || hit(new RegExp(`${taste.minWatts >= 1400 ? '1[4-9]\\d{2}|[23]\\d{3}' : taste.minWatts >= 1000 ? '1\\d{3}|1kw' : '600\\s*w|전기'}\\s*w?`, 'i')))) return false;
   }
   if (taste.fire) { const v = facts(c).fire?.v ?? ""; if (!(c.fp === 1 || /가능|개별|화로/i.test(v)) || /불가|금지/i.test(v)) return false; }
-  if (taste.tarp) { const sh = c.field_conditions?.shelter_setup; if (!((sh && (sh.max_tarps > 0 || sh.canopy_allowed)) || /타프|타프존|타프설치|타프대여/i.test(txt))) return false; }
-  if (taste.privateFridge && !(/개별\s*냉장고|전용\s*냉장고|룸내\s*냉장고|객실\s*냉장고/i.test(txt) || (c.glamp && /냉장고/.test(JSON.stringify(c.glamp))))) return false;
-  if (taste.sharedFridge && !(/공용\s*냉장고|공동\s*냉장고|공용냉장고/i.test(txt) || (c.amenities && c.amenities.some((a) => /공용.*냉장고|공동.*냉장고/.test(a))))) return false;
-  if (taste.heaterRental && !(/팬히터|난로\s*대여|난로\s*렌탈|히터\s*대여|히터\s*렌탈|등유\s*난로|난방기구\s*대여/i.test(txt) || (c.heat && c.heat.some((h) => /대여|렌탈/.test(h))))) return false;
-  if (taste.rental && !(/장비\s*대여|장비\s*렌탈|텐트\s*대여|텐트\s*렌탈|캠핑용품\s*대여/i.test(txt) || (c.amenities && c.amenities.some((a) => /대여|렌탈/.test(a))))) return false;
+  if (taste.tarp && !((c.field_conditions?.shelter_setup?.max_tarps > 0 || c.field_conditions?.shelter_setup?.canopy_allowed) || hit(/타프/i))) return false;
+  if (taste.privateFridge && !(hit(/개별.*냉장고|전용.*냉장고|객실.*냉장고/i) || (c.glamp && /냉장고/.test(JSON.stringify(c.glamp))))) return false;
+  if (taste.sharedFridge && !(hit(/공[용동].*냉장고/i) || am.some((a) => /공[용동].*냉장고/.test(a)))) return false;
+  if (taste.heaterRental && !heaterRentalInfo(c)) return false;
+  if (taste.rental && !(hit(/장비.*(대여|렌탈)|텐트.*(대여|렌탈)|캠핑용품.*대여/i) || am.some((a) => /대여|렌탈/.test(a)))) return false;
   if (taste.pet && !(c.pets?.includes("가능") || facts(c).pet?.ok)) return false;
-  if (taste.warmPool && !((c.uq && c.uq.includes("warmpool")) || /온수\s*풀|온수\s*수영장|미온수|사계절\s*온수|사계절\s*수영장|실내\s*수영장/i.test(txt))) return false;
-  if (taste.kidsPool && !((c.uq && (c.uq.includes("kidscafe") || c.uq.includes("indoorplay"))) || /키즈\s*풀|유아\s*풀|어린이\s*수영장|유아\s*물놀이|키즈\s*물놀이/i.test(txt))) return false;
-  if (taste.pool && !(c.du === "water" || (c.amenities ?? []).some((a) => /물놀이장|물놀이터|수영장|풀장|워터/.test(a)) || /수영장|물놀이장|야외풀|인피니티풀/i.test(txt))) return false;
-  if (taste.valley && !(c.pf?.t?.includes("VALLEY") || (c.uq && c.uq.includes("valley")) || /계곡/i.test(txt))) return false;
-  if (taste.river && !(c.pf?.t?.includes("LAKE") || c.pf?.t?.includes("RIVER") || /강변|강가|호수|저수지|하천|천변/i.test(txt))) return false;
-  if (taste.beach && !(c.pf?.t?.includes("BEACH") || c.th?.includes("sea") || /바다|해변|해수욕장|백사장/i.test(txt))) return false;
-  if (taste.horse && !((c.uq && c.uq.includes("horse")) || /승마|말타기|포니체험/i.test(txt))) return false;
-  if (taste.animal && !((c.uq && c.uq.includes("animal")) || /동물\s*체험|동물\s*먹이주기|알파카|양떼|토끼/i.test(txt))) return false;
-  if (taste.craft && !/공예|목공|도자기|만들기\s*체험/i.test(txt)) return false;
-  if (taste.leisure && !((c.uq && c.uq.includes("leisure")) || /수상레저|카약|보트|패들보드|카누|래프팅/i.test(txt))) return false;
-  if (taste.sled && !/썰매장|눈썰매|사계절썰매|물썰매/i.test(txt)) return false;
-  if (taste.tidal && !(isTidalCamp(c) || /갯벌|해루질|조개잡이|바지락/i.test(txt))) return false;
-  if (taste.fishing && !(c.th?.includes("fishing") || /낚시터|낚시\s*가능|바지선.*낚시|민물낚시|바다낚시/i.test(txt))) return false;
-  if (taste.forestTrail && !/숲\s*해설|생태\s*탐방|숲\s*체험관|자연\s*체험관/i.test(txt)) return false;
-  if (taste.catch && !/송어\s*잡기|미꾸라지\s*잡기|다슬기\s*잡기|물고기\s*잡기|물고기잡이|송어축제/i.test(txt)) return false;
-  if (taste.harvest && !((c.uq && c.uq.includes("farm")) || /수확\s*체험|농촌\s*체험|과수원|사과\s*따기|딸기\s*따기|감자\s*캐기|고구마\s*캐기|과일\s*따기/i.test(txt))) return false;
-  if (taste.grow && !/스마트팜|영농\s*체험|작물\s*재배|원예\s*체험|모종\s*심기|채소\s*재배/i.test(txt)) return false;
+  if (taste.warmPool && !(uq.includes("warmpool") || hit(/온수\s*풀|온수\s*수영장|미온수|사계절\s*(온수|수영장)|실내\s*수영장/i))) return false;
+  if (taste.kidsPool && !(uq.includes("kidscafe") || uq.includes("indoorplay") || hit(/키즈\s*풀|유아\s*풀|어린이\s*수영장|물놀이/i))) return false;
+  if (taste.pool && !(c.du === "water" || am.some((a) => /물놀이장|물놀이터|수영장|풀장|워터/.test(a)) || hit(/수영장|물놀이장|야외풀|인피니티풀/i))) return false;
+  if (taste.valley && !(c.pf?.t?.includes("VALLEY") || uq.includes("valley") || hit(/계곡/))) return false;
+  if (taste.river && !(c.pf?.t?.includes("LAKE") || c.pf?.t?.includes("RIVER") || hit(/강변|강가|호수|저수지|하천|천변/))) return false;
+  if (taste.beach && !(c.pf?.t?.includes("BEACH") || c.th?.includes("sea") || hit(/바다|해변|해수욕장|백사장/))) return false;
+  if (taste.horse && !(uq.includes("horse") || hit(/승마|말타기|포니체험/))) return false;
+  if (taste.animal && !(uq.includes("animal") || hit(/동물\s*(체험|먹이주기)|알파카|양떼|토끼/))) return false;
+  if (taste.craft && !hit(/공예|목공|도자기|만들기\s*체험/)) return false;
+  if (taste.leisure && !(uq.includes("leisure") || hit(/수상레저|카약|보트|패들보드|카누|래프팅/))) return false;
+  if (taste.sled && !hit(/썰매장|눈썰매|사계절썰매|물썰매/)) return false;
+  if (taste.tidal && !(isTidalCamp(c) || hit(/갯벌|해루질|조개잡이|바지락/))) return false;
+  if (taste.fishing && !(c.th?.includes("fishing") || hit(/낚시터|낚시\s*가능|낚시/))) return false;
+  if (taste.forestTrail && !hit(/숲\s*해설|생태\s*탐방|숲\s*체험관|자연\s*체험관/)) return false;
+  if (taste.catch && !hit(/송어\s*잡기|미꾸라지\s*잡기|다슬기\s*잡기|물고기\s*잡기|송어축제/)) return false;
+  if (taste.harvest && !(uq.includes("farm") || hit(/수확\s*체험|농촌\s*체험|과수원|사과\s*따기|딸기\s*따기|감자\s*캐기|고구마\s*캐기|과일\s*따기/))) return false;
+  if (taste.grow && !hit(/스마트팜|영농\s*체험|작물\s*재배|원예\s*체험|모종\s*심기|채소\s*재배/)) return false;
   return true;
 }
 
@@ -4266,40 +4264,29 @@ function getMyTastePicks() {
   });
 }
 
-const TASTE_TYPES = [["AUTO", "오토캠핑", "car"], ["GLAMPING", "글램핑", "glamping"], ["CARAVAN", "카라반", "caravan"], ["HOUSE", "펜션·방갈로", "home"], ["CAR_CAMP", "차박", "car"], ["DECK", "데크", "layers"], ["SOLO", "백패킹", "tent"]];
+const TASTE_TYPES = [["AUTO", "오토캠핑", "car"], ["GLAMPING", "글램핑", "glamping"], ["CARAVAN", "카라반", "caravan"], ["BUNGALOW", "방갈로", "tent"], ["PENSION", "펜션", "home"], ["CAR_CAMP", "차박", "car"], ["DECK", "데크", "layers"], ["SOLO", "백패킹", "tent"]];
 const TASTE_SIZES = [[0,"규격 무관"],[6,"6m+"],[8,"8m+"],[10,"10m+"]];
 const TASTE_WATTS = [[0,"전기 무관"],[600,"600W+ (기본)"],[1000,"1000W+ (고용량)"],[1400,"1400W+ (초고용량)"]];
 const TASTE_ENVS = [["valley","th:VALLEY","계곡"],["river","th:LAKE","강·호수·천"],["beach","th:BEACH","바다·해변"]];
-const TASTE_EXPS = [
-  ["horse","spark","승마"],["animal","paw","동물"],["craft","spark","공예"],
-  ["leisure","leports","수상레저"],["sled","spark","썰매"],["tidal","water","갯벌"],
-  ["fishing","fish","낚시"],["forestTrail","forest","숲체험"],["catch","water","잡기"],
-  ["harvest","experience","수확"],["grow","experience","재배"]
-];
-const TASTE_FACS = [
-  ["fire","flame","장작·불멍"],["tarp","tent","타프존"],["privateFridge","check","개별냉장고"],
-  ["sharedFridge","amenity","공용냉장고"],["heaterRental","flame","팬히터 대여"],["rental","cart","장비 대여"],
-  ["pet","paw","반려견"],["warmPool","hotwater","온수풀"],["kidsPool","playground","키즈풀"],["pool","swim","수영장"]
-];
+const TASTE_EXPS = [["horse","spark","승마"],["animal","paw","동물"],["craft","spark","공예"],["leisure","leports","수상레저"],["sled","spark","썰매"],["tidal","water","갯벌"],["fishing","fish","낚시"],["forestTrail","forest","숲체험"],["catch","water","잡기"],["harvest","experience","수확"],["grow","experience","재배"]];
+const TASTE_FACS = [["fire","flame","장작·불멍"],["tarp","tent","타프존"],["privateFridge","check","개별냉장고"],["sharedFridge","amenity","공용냉장고"],["heaterRental","flame","팬히터 대여"],["rental","cart","장비 대여"],["pet","paw","반려견"],["warmPool","hotwater","온수풀"],["kidsPool","playground","키즈풀"],["pool","swim","수영장"]];
 
 function myTasteSummaryChips(taste = getMyTaste()) {
   const b = [];
-  if (taste.types?.length) {
-    for (const t of taste.types) b.push(`<span class="taste-badge">${ic("tent")}${esc(ST[t]?.label || (KINDS.find((k) => k[0] === t)?.[1]) || t)}</span>`);
-  }
+  if (taste.types?.length) for (const t of taste.types) b.push(`<span class="taste-badge">${ic("tent")}${esc(ST[t]?.label || (KINDS.find((k) => k[0] === t)?.[1]) || t)}</span>`);
   if (taste.minSize > 0) b.push(`<span class="taste-badge">${ic("size")}${taste.minSize}m+</span>`);
   if (taste.minWatts >= 1400) b.push(`<span class="taste-badge">${ic("bolt")}1400W+ 초고용량</span>`);
   else if (taste.minWatts >= 1000) b.push(`<span class="taste-badge">${ic("bolt")}1000W+ 고용량</span>`);
   else if (taste.minWatts >= 600) b.push(`<span class="taste-badge">${ic("bolt")}600W+ 전기</span>`);
-  const bools = [...TASTE_ENVS, ...TASTE_EXPS, ...TASTE_FACS];
-  for (const [k, i, l] of bools) if (taste[k]) b.push(`<span class="taste-badge">${ic(i)}${l}</span>`);
+  for (const [k, i, l] of [...TASTE_ENVS, ...TASTE_EXPS, ...TASTE_FACS]) if (taste[k]) b.push(`<span class="taste-badge">${ic(i)}${l}</span>`);
   return b;
 }
 
 function myTasteThemeTopBar(taste = getMyTaste()) {
-const b = myTasteSummaryChips(taste);
-const topChip = (a, p, i, t) => `<button type="button" class="chip top-taste-chip" data-top-taste="${a}" aria-pressed="${p}">${i ? ic(i) : ""}${esc(t)}</button>`;
-return `<div class="theme-my-taste-box"><div class="theme-my-taste-head"><div class="theme-my-taste-title-wrap"><span class="taste-box-badge">${ic("tent")}<b>내 취향 맞춤 필터 옵션</b></span><span class="taste-box-count">적용된 조건 <b>${b.length}개</b></span></div><div class="theme-my-taste-actions"><button type="button" class="btn ghost btn-sm" data-top-taste="reset">${ic("refresh")}취향 초기화</button><button type="button" class="taste-box-change-btn" data-open-my-taste>${ic("spark")}상세 설정 시트 ${ic("right")}</button></div></div><div class="theme-my-taste-chips">${b.length ? b.join("") : `<span class="taste-badge none">선택된 조건 없음 (전체 캠핑장 표시 중)</span>`}</div><div class="theme-my-taste-panel"><div class="top-taste-group"><span class="top-taste-lbl">캠핑 타입</span><div class="rail chips top-taste-chips">${TASTE_TYPES.map(([k, l, i]) => topChip(`type:${k}`, (taste.types ?? []).includes(k), i, l)).join("")}</div></div><div class="top-taste-group"><span class="top-taste-lbl">전기 허용</span><div class="rail chips top-taste-chips">${TASTE_WATTS.map(([v, l]) => topChip(`watts:${v}`, (taste.minWatts ?? 0) === v, "bolt", l)).join("")}</div></div><div class="top-taste-group"><span class="top-taste-lbl">사이트 규격</span><div class="rail chips top-taste-chips">${TASTE_SIZES.map(([v, l]) => topChip(`size:${v}`, (taste.minSize ?? 0) === v, "size", l)).join("")}</div></div><div class="top-taste-group"><span class="top-taste-lbl">자연 환경</span><div class="rail chips top-taste-chips">${TASTE_ENVS.map(([k, i, l]) => topChip(`toggle:${k}`, Boolean(taste[k]), i, l)).join("")}</div></div><div class="top-taste-group"><span class="top-taste-lbl">체험 활동</span><div class="rail chips top-taste-chips">${TASTE_EXPS.map(([k, i, l]) => topChip(`toggle:${k}`, Boolean(taste[k]), i, l)).join("")}</div></div><div class="top-taste-group"><span class="top-taste-lbl">장비 & 편의</span><div class="rail chips top-taste-chips">${TASTE_FACS.map(([k, i, l]) => topChip(`toggle:${k}`, Boolean(taste[k]), i, l)).join("")}</div></div></div></div>`;
+  const b = myTasteSummaryChips(taste);
+  const tc = (a, p, i, t) => `<button type="button" class="chip top-taste-chip" data-top-taste="${a}" aria-pressed="${p}">${i ? ic(i) : ""}${esc(t)}</button>`;
+  const grp = (lbl, arr, aFn, pFn) => `<div class="top-taste-group"><span class="top-taste-lbl">${lbl}</span><div class="rail chips top-taste-chips">${arr.map(([k, i, l]) => tc(aFn(k), pFn(k), l ? i : "", l || i)).join("")}</div></div>`;
+  return `<div class="theme-my-taste-box"><div class="theme-my-taste-head"><div class="theme-my-taste-title-wrap"><span class="taste-box-badge">${ic("tent")}<b>내 취향 맞춤 필터 옵션</b></span><span class="taste-box-count">적용된 조건 <b>${b.length}개</b></span></div><div class="theme-my-taste-actions"><button type="button" class="btn ghost btn-sm" data-top-taste="reset">${ic("refresh")}취향 초기화</button><button type="button" class="taste-box-change-btn" data-open-my-taste>${ic("spark")}상세 설정 시트 ${ic("right")}</button></div></div><div class="theme-my-taste-chips">${b.length ? b.join("") : '<span class="taste-badge none">선택된 조건 없음 (전체 캠핑장 표시 중)</span>'}</div><div class="theme-my-taste-panel">${grp("캠핑 타입", TASTE_TYPES, (k) => `type:${k}`, (k) => (taste.types ?? []).includes(k))}${grp("전기 허용", TASTE_WATTS, (v) => `watts:${v}`, (v) => (taste.minWatts ?? 0) === v)}${grp("사이트 규격", TASTE_SIZES, (v) => `size:${v}`, (v) => (taste.minSize ?? 0) === v)}${grp("자연 환경", TASTE_ENVS, (k) => `toggle:${k}`, (k) => Boolean(taste[k]))}${grp("체험 활동", TASTE_EXPS, (k) => `toggle:${k}`, (k) => Boolean(taste[k]))}${grp("장비 & 편의", TASTE_FACS, (k) => `toggle:${k}`, (k) => Boolean(taste[k]))}</div></div>`;
 }
 function myTasteBoxHtml(taste = getMyTaste()) {
   return myTasteThemeTopBar(taste);
@@ -4329,6 +4316,16 @@ function myTasteSection() {
   </section>`;
 }
 
+function refreshMyTasteUi() {
+  const sec = $(".my-taste-section");
+  if (sec) {
+    const div = document.createElement("div"); div.innerHTML = myTasteSection();
+    const f = div.firstElementChild;
+    if (f) { sec.replaceWith(f); initCarousels(f); initDraggableRails(f); }
+  }
+  if (typeof window.__refreshMyTasteTheme === "function") window.__refreshMyTasteTheme();
+}
+
 function openMyTasteDialog() {
   let dlg = $("#my-taste-dialog");
   if (!dlg) {
@@ -4343,15 +4340,7 @@ function openMyTasteDialog() {
       if (act === "reset") { S._tasteDraft = { ...DEFAULT_MY_TASTE }; paintMyTasteDialog(); return; }
       if (act === "save") {
         saveMyTaste(S._tasteDraft); dlg.close(); toast("내 취향이 저장되었습니다");
-        const sec = $(".my-taste-section");
-        if (sec) {
-          const div = document.createElement("div"); div.innerHTML = myTasteSection();
-          const t = div.firstElementChild;
-          if (t) { sec.replaceWith(t); initCarousels(t); initDraggableRails(t); }
-        }
-        if (typeof window.__refreshMyTasteTheme === "function") {
-          window.__refreshMyTasteTheme();
-        }
+        refreshMyTasteUi();
         return;
       }
       const [type, val] = act.split(":");
@@ -4368,10 +4357,11 @@ function openMyTasteDialog() {
 }
 
 function paintMyTasteDialog() {
-const dlg = $("#my-taste-dialog"); if (!dlg) return;
-const t = S._tasteDraft;
-const chipBtns = (arr) => arr.map(([k, i, l]) => `<button type="button" class="chip" data-taste-act="toggle:${k}" aria-pressed="${Boolean(t[k])}">${ic(i)}${l}</button>`).join("");
-dlg.innerHTML = `<div class="sheet-in my-taste-in"><div class="sheet-head"><h2 id="my-taste-title">내 취향 & 장비 설정</h2><button type="button" class="icon-btn sheet-close" data-taste-act="close" aria-label="닫기">${ic("close")}</button></div><div class="sheet-body my-taste-body"><section class="taste-group"><h3>캠핑 타입 (복수 선택)</h3><div class="cond-chips">${TASTE_TYPES.map(([k, l, i]) => `<button type="button" class="chip" data-taste-act="type:${k}" aria-pressed="${(t.types ?? []).includes(k)}">${ic(i)}${esc(l)}</button>`).join("")}</div></section><section class="taste-group"><h3>사이트 규격 (내 텐트 크기)</h3><div class="cond-chips">${TASTE_SIZES.map(([v, l]) => `<button type="button" class="chip" data-taste-act="size:${v}" aria-pressed="${t.minSize === v}">${esc(l)}</button>`).join("")}</div></section><section class="taste-group"><h3>전기 허용 용량 (W)</h3><div class="cond-chips">${TASTE_WATTS.map(([v, l]) => `<button type="button" class="chip" data-taste-act="watts:${v}" aria-pressed="${(t.minWatts ?? 0) === v}">${ic("bolt")}${esc(l)}</button>`).join("")}</div></section><section class="taste-group"><h3>장비 & 편의 시설</h3><div class="cond-chips">${chipBtns(TASTE_FACS)}</div></section><section class="taste-group"><h3>자연 환경</h3><div class="cond-chips">${chipBtns(TASTE_ENVS)}</div></section><section class="taste-group"><h3>체험</h3><div class="cond-chips">${chipBtns(TASTE_EXPS)}</div></section></div><div class="sheet-foot my-taste-foot"><button type="button" class="btn ghost" data-taste-act="reset">초기화</button><button type="button" class="btn primary" data-taste-act="save">취향 저장</button></div></div>`;
+  const dlg = $("#my-taste-dialog"); if (!dlg) return;
+  const t = S._tasteDraft;
+  const btns = (arr, aFn, pFn) => arr.map(([k, i, l]) => `<button type="button" class="chip" data-taste-act="${aFn(k)}" aria-pressed="${pFn(k)}">${l ? ic(i) : ""}${esc(l || i)}</button>`).join("");
+  const sec = (title, content) => `<section class="taste-group"><h3>${title}</h3><div class="cond-chips">${content}</div></section>`;
+  dlg.innerHTML = `<div class="sheet-in my-taste-in"><div class="sheet-head"><h2 id="my-taste-title">내 취향 & 장비 설정</h2><button type="button" class="icon-btn sheet-close" data-taste-act="close" aria-label="닫기">${ic("close")}</button></div><div class="sheet-body my-taste-body">${sec("캠핑 타입 (복수 선택)", btns(TASTE_TYPES, (k) => `type:${k}`, (k) => (t.types ?? []).includes(k)))}${sec("사이트 규격 (내 텐트 크기)", btns(TASTE_SIZES, (v) => `size:${v}`, (v) => t.minSize === v))}${sec("전기 허용 용량 (W)", btns(TASTE_WATTS, (v) => `watts:${v}`, (v) => (t.minWatts ?? 0) === v))}${sec("장비 & 편의 시설", btns(TASTE_FACS, (k) => `toggle:${k}`, (k) => Boolean(t[k])))}${sec("자연 환경", btns(TASTE_ENVS, (k) => `toggle:${k}`, (k) => Boolean(t[k])))}${sec("체험", btns(TASTE_EXPS, (k) => `toggle:${k}`, (k) => Boolean(t[k])))}</div><div class="sheet-foot my-taste-foot"><button type="button" class="btn ghost" data-taste-act="reset">초기화</button><button type="button" class="btn primary" data-taste-act="save">취향 저장</button></div></div>`;
 }
 document.addEventListener("click", (e) => {
   const topTasteBtn = e.target.closest("[data-top-taste]");
@@ -4383,27 +4373,13 @@ document.addEventListener("click", (e) => {
       saveMyTaste({ ...DEFAULT_MY_TASTE });
     } else {
       const [type, val] = act.split(":");
-      if (type === "type") {
-        const cur = t.types ?? [];
-        t.types = cur.includes(val) ? cur.filter((x) => x !== val) : [...cur, val];
-      } else if (type === "size") {
-        t.minSize = t.minSize === Number(val) ? 0 : Number(val);
-      } else if (type === "watts") {
-        t.minWatts = t.minWatts === Number(val) ? 0 : Number(val);
-      } else if (type === "toggle") {
-        t[val] = !t[val];
-      }
+      if (type === "type") { const cur = t.types ?? []; t.types = cur.includes(val) ? cur.filter((x) => x !== val) : [...cur, val]; }
+      else if (type === "size") t.minSize = t.minSize === Number(val) ? 0 : Number(val);
+      else if (type === "watts") t.minWatts = t.minWatts === Number(val) ? 0 : Number(val);
+      else if (type === "toggle") t[val] = !t[val];
       saveMyTaste(t);
     }
-    if (typeof window.__refreshMyTasteTheme === "function") {
-      window.__refreshMyTasteTheme();
-    }
-    const sec = $(".my-taste-section");
-    if (sec) {
-      const div = document.createElement("div"); div.innerHTML = myTasteSection();
-      const first = div.firstElementChild;
-      if (first) { sec.replaceWith(first); initCarousels(first); initDraggableRails(first); }
-    }
+    refreshMyTasteUi();
     return;
   }
   if (e.target.closest("[data-open-my-taste]")) { e.preventDefault(); openMyTasteDialog(); }
@@ -4552,7 +4528,8 @@ function renderResults({ reset = true } = {}) {
     const themeList = THEMES.filter(([k]) => k !== "POPULAR");
     const defs = [
       ...themeList.slice(0, 3),
-      ["T:HOUSE", "캐빈·방갈로", (c) => hasType(c, "HOUSE")],
+      ["T:BUNGALOW", "방갈로", (c) => isBungalow(c)],
+      ["T:PENSION", "펜션", (c) => isPension(c)],
       ...themeList.slice(3, 7),
       ["T:DECK", "데크", (c) => hasType(c, "DECK")],
       ...themeList.slice(7, 10),
@@ -4578,7 +4555,7 @@ function renderResults({ reset = true } = {}) {
   }
   rows.innerHTML = "";
   const parkTheme = S.theme === "PARK";
-  const shown = list.filter(hasPhoto), bare = list.filter((c) => !hasPhoto(c));
+  const shown = list.filter((c) => hasPhoto(c) && (!isPublicPark(c) || namedByQuery(c))), bare = list.filter((c) => !hasPhoto(c) && (!isPublicPark(c) || namedByQuery(c)));
   // 공원 테마는 사진이 없어도 공공 원장 카드로 읽힌다. 일반 목록은 사진 없는
   // 업장을 포스터처럼 진열하지 않는 기존 원칙을 유지한다.
   const renderable = parkTheme ? list : shown;
@@ -4592,7 +4569,7 @@ function renderResults({ reset = true } = {}) {
 }
 function moreResults() {
   const parkTheme = S.theme === "PARK";
-  const list = parkTheme ? results() : results().filter(hasPhoto), grid = $("[data-grid]");
+  const list = parkTheme ? results() : results().filter((c) => hasPhoto(c) && (!isPublicPark(c) || namedByQuery(c))), grid = $("[data-grid]");
   const from = S.shown; S.shown += 24;
   grid.insertAdjacentHTML("beforeend", list.slice(from, S.shown).map((c, i) => isPublicPark(c) ? publicParkCard(c) : card(c, from + i)).join(""));
   $("[data-more]").hidden = list.length <= S.shown;
@@ -4613,7 +4590,8 @@ const hasFirmType = (c, k) => (c.st ?? []).some((t) => t[0] === k && t[2] !== "m
 const KINDS = [
   ["GLAMPING", "글램핑", (c) => stayKinds(c).includes("GLAMPING"), "glamping"],
   ["CARAVAN", "카라반", (c) => stayKinds(c).includes("CARAVAN"), "caravan"],
-  ["HOUSE", "숙박동", (c) => stayKinds(c).includes("HOUSE"), "home"],
+  ["BUNGALOW", "방갈로", (c) => isBungalow(c), "tent"],
+  ["PENSION", "펜션", (c) => isPension(c), "home"],
   ["RV", "캠핑카·트레일러", (c) => stayKinds(c).includes("RV"), "caravan"],
   ["DECK", "데크", (c) => hasType(c, "DECK"), "layers"],
   ["DUPLEX_DECK", "복층 데크", (c) => hasType(c, "DUPLEX_DECK"), "layers"],
@@ -5190,7 +5168,7 @@ function themeView(themeKey) {
     : (THEME_SUBS[themeKey] ?? "자연과 함께하는 특별한 테마 캠핑장");
   const headingNoun = isParkTheme ? "공원 정보" : /캠핑장$/.test(tName) ? "" : "캠핑장";
   const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "MY_TASTE" ? (c) => matchMyTaste(c, getMyTaste()) : themeKey === "REVIEWS" ? (c) => Boolean((c.rv?.p?.length ?? 0) >= 2 || (c.rv?.t ?? 0) >= 4) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
-  const totalInTheme = S.camps.filter(testFn).length;
+  const totalInTheme = (isParkTheme ? S.camps : S.camps.filter((c) => !isPublicPark(c))).filter(testFn).length;
   const isWp = themeKey === "WATER_PLAY";
   if (themeKey !== "UNIQUE") uniqueSubs.clear();
 
@@ -5237,19 +5215,6 @@ function uniqueIsForest(c) {
 function uniqueEvidenceCount(c) {
   return Object.values(c.uq_evidence ?? {}).filter((x) => typeof x === "string" && x.trim()).length;
 }
-function uniqueQualityKey(c) {
-  const featureCount = (c.uq ?? []).length;
-  const evidenceCount = uniqueEvidenceCount(c);
-  const explained = featureCount > 0 && evidenceCount >= featureCount ? 0 : 1;
-  const photo = hasPhoto(c) ? 0 : 1;
-  const forest = uniqueIsForest(c) ? 1 : 0;
-  return [explained, photo, forest, -rich(c)];
-}
-function compareUniqueQuality(a, b) {
-  const ka = uniqueQualityKey(a), kb = uniqueQualityKey(b);
-  for (let i = 0; i < ka.length; i++) if (ka[i] !== kb[i]) return ka[i] - kb[i];
-  return nameOf(a).name.localeCompare(nameOf(b).name, "ko");
-}
 
 // 모든 비거리 배열의 공통 품질 순서. 새로고침마다 최고 그룹만 섞어
 // 같은 테마에서도 새로운 업장이 먼저 보이게 하되, 정보 부족 업장이
@@ -5289,6 +5254,7 @@ function bindTheme(themeKey) {
   let pageN = 24;
   const getThemeList = () => {
     let list = S.camps.filter(testFn);
+    if (!isParkTheme) list = list.filter((c) => !isPublicPark(c));
     if (themeKey === "UNIQUE" && uniqueSubs.size) list = list.filter((c) => c.uq?.some((k) => uniqueSubs.has(k)));
     if (regionKeys().length) list = list.filter((c) => regionMatches(c));
     if (uqSort) {
