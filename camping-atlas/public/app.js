@@ -6,7 +6,6 @@
 // APP_BASE = 앱 루트 경로(/camp/ · 로컬 미리보기는 /). 데이터·사진·링크는 모두 이 절대 경로를 쓴다(깊은 주소에서도 깨지지 않게).
 const MOD_ROOT = /\/(explore|renewal)\/[^/]*$/.test(new URL(import.meta.url).pathname) ? "../" : "./";
 const APP_BASE = new URL(MOD_ROOT, import.meta.url).pathname;
-const IS_SUBDIR = false;
 const ASSETS_BASE = APP_BASE;
 const DATA = `${APP_BASE}explore/data/`;
 const MEDIA = `${APP_BASE}media/`;
@@ -1515,21 +1514,10 @@ function uniqueDetailsHtml(c) {
 // 찜 목록은 여러 곳을 훑어보기 위한 화면이므로, 이름·주소 아래의 모든 정보(유형·스펙·후기 뱃지)를 '상세정보'로 기본 접는다.
 // 일반 목록·테마 카드에는 같은 행을 그대로 유지해 비교 정보가 숨지 않게 한다.
 function savedDetailsHtml(c) {
-  const panelId = `saved-spec-${String(c.id).replace(/[^A-Za-z0-9_-]/g, "-")}`;
-  const typesHtml = typeRow(c).html ? `<div class="card-group card-group-types">${typeRow(c).html}</div>` : "";
-  const reviewsHtml = c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0)
-    ? `<div class="card-group card-group-reviews"><div class="card-reviews">${cardReviewPills(c.rv, c)}</div></div>`
-    : "";
-  return `<div class="card-group card-group-spec saved-card-spec" data-saved-card-spec>
-    <button class="saved-card-spec-toggle" type="button" data-saved-card-spec-toggle aria-expanded="false" aria-controls="${esc(panelId)}">
-      <span>${ic("list")}상세정보</span>${ic("chevron-up", "saved-card-spec-chevron")}
-    </button>
-    <div class="saved-card-spec-panel" id="${esc(panelId)}" data-saved-card-spec-panel hidden>
-      ${typesHtml}
-      ${rowsHtml(c)}
-      ${reviewsHtml}
-    </div>
-  </div>`;
+  const o = Boolean(S.savedSpecOpen), id = `saved-spec-${String(c.id).replace(/[^A-Za-z0-9_-]/g, "-")}`;
+  const t = typeRow(c).html ? `<div class="card-group card-group-types">${typeRow(c).html}</div>` : "";
+  const r = c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-group card-group-reviews"><div class="card-reviews">${cardReviewPills(c.rv, c)}</div></div>` : "";
+  return `<div class="card-group card-group-spec saved-card-spec${o ? " is-open" : ""}" data-saved-card-spec><button class="saved-card-spec-toggle" type="button" data-saved-card-spec-toggle aria-expanded="${o ? "true" : "false"}" aria-controls="${esc(id)}"><span>${ic("list")}상세정보</span>${ic("chevron-up", "saved-card-spec-chevron")}</button><div class="saved-card-spec-panel" id="${esc(id)}" data-saved-card-spec-panel${o ? "" : " hidden"}>${t}${rowsHtml(c)}${r}</div></div>`;
 }
 // 가는 길 장보기: 마트·편의점·정육점 중 5km 안에 있는 곳(LOCALDATA 인허가). 순서는 늘 마트 → 편의점 → 정육점(소유자 2026-10-20).
 function nearLine(c, sep = " · ") {
@@ -1793,6 +1781,7 @@ document.addEventListener("click", (e) => {
     const panel = toggle.closest("[data-saved-card-spec]")?.querySelector("[data-saved-card-spec-panel]");
     if (!panel) return;
     const open = panel.hidden, root = toggle.closest(".saved-page, .saved-grid, #view") || document;
+    S.savedSpecOpen = open;
     root.querySelectorAll("[data-saved-card-spec]").forEach((g) => {
       const p = g.querySelector("[data-saved-card-spec-panel]"), t = g.querySelector("[data-saved-card-spec-toggle]");
       if (p) p.hidden = !open;
@@ -2095,6 +2084,10 @@ function saveCommit(id) {
   store.set("mc-saved", S.saved); store.set("mc-pick", S.pick);
   syncCompare();
   $$(`[data-save="${CSS.escape(id)}"]`).forEach((x) => { const on = isSaved(id); x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); x.setAttribute("aria-label", on ? "찜 해제" : "찜하기"); x.querySelector("use").setAttribute("href", `#i-${on ? "heart" : "heart-o"}`); });
+  if (curHash().startsWith("#/saved")) {
+    const hasOpen = Boolean(document.querySelector("[data-saved-card-spec].is-open, [data-saved-card-spec-panel]:not([hidden])"));
+    if (hasOpen) S.savedSpecOpen = true;
+  }
   if (curHash().startsWith("#/compare") || curHash().startsWith("#/saved") || curHash().startsWith("#/saves-log")) route();
 }
 function syncCompare() {
@@ -2150,7 +2143,6 @@ document.addEventListener("click", (e) => {
 function countOf(test) { return S.camps.reduce((n, c) => n + (test(c) ? 1 : 0), 0); }
 // ── 실시간 인기(소유자 2026-10-19): 최근 7일 블로그·카페·뉴스·동영상 글의 캠핑장 언급 순위. /context/trending.json(Trending mentions)
 // 다음(Daum) 공식 아이콘(위키미디어 공용 Daum_icon_(2025–2026).svg)을 로컬 파일로 쓴다(소유자 2026-10-20).
-const DAUM_LOGO = new URL("images/daum.svg", import.meta.url).href;
 const TR_GLYPH = {
   naver: ["네이버", '<path d="M15.6 12.8 8.1 2H2v20h6.4V11.2L15.9 22H22V2h-6.4z" transform="translate(3 3) scale(.75)"/>'],
   daum: ["Daum", '<path d="m 36,20.36 c 3.1152,0 5.6352,2.712 5.5152,5.8536 -0.1128,2.988 -2.6616,5.4264 -5.652,5.4264 h -3.9456 c -0.264,0 -0.48,-0.216 -0.48,-0.48 V 20.84 c 0,-0.264 0.216,-0.48 0.48,-0.48 h 4.08 M 36,14 h -9.6 c -0.7944,0 -1.44,0.6456 -1.44,1.44 v 21.12 c 0,0.7944 0.6456,1.44 1.44,1.44 H 36 C 42.6264,38 48,32.6264 48,26 48,19.3736 42.6264,14 36,14 Z" transform="translate(12 12) scale(.75) translate(-36.5 -26)"/>'],
@@ -5222,19 +5214,6 @@ function uniqueIsForest(c) {
 }
 function uniqueEvidenceCount(c) {
   return Object.values(c.uq_evidence ?? {}).filter((x) => typeof x === "string" && x.trim()).length;
-}
-function uniqueQualityKey(c) {
-  const featureCount = (c.uq ?? []).length;
-  const evidenceCount = uniqueEvidenceCount(c);
-  const explained = featureCount > 0 && evidenceCount >= featureCount ? 0 : 1;
-  const photo = hasPhoto(c) ? 0 : 1;
-  const forest = uniqueIsForest(c) ? 1 : 0;
-  return [explained, photo, forest, -rich(c)];
-}
-function compareUniqueQuality(a, b) {
-  const ka = uniqueQualityKey(a), kb = uniqueQualityKey(b);
-  for (let i = 0; i < ka.length; i++) if (ka[i] !== kb[i]) return ka[i] - kb[i];
-  return nameOf(a).name.localeCompare(nameOf(b).name, "ko");
 }
 
 // 모든 비거리 배열의 공통 품질 순서. 새로고침마다 최고 그룹만 섞어
