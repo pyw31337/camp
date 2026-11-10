@@ -1,0 +1,170 @@
+{
+  "intro": "라라캠핑장은 경북 경주시 양남면 신대리에 자리 잡았다. 경주시청을 기점으로 40km가량 떨어졌다. 자동차를 타고 신대로와 서왕길을 번갈아 달리면 닿는다. 도착까지 걸리는 시간은 60분 안팎이다. 캠핑장은 산속 숲에 위치한 덕분에 더없이 자연친화적인 느낌이다. 인근에 계곡이 있어 물놀이로 한여름 무더위를 날리기 좋다. 캠핑장에는 파쇄석으로 이뤄진 오토캠핑 사이트 23면이 마련돼 있다. 사이트 크기는 가로 9m 세로 8m 등 여러가지다. 주변에 관성솔밭해변과 하서항이 있어 연계 관광이 용이하다",
+  "nearby": {
+    "tour": [],
+    "food": [],
+    "mart": []
+  },
+  "photos": [
+    "https://www.gocamping.or.kr/upload/camp/100100/8111CyQL1sVdYw0Vs1ZqUJsH.jpg",
+    "https://www.gocamping.or.kr/upload/camp/100100/9650UlzU11uxOyYUu9OCou7I.jpg",
+    "https://www.gocamping.or.kr/upload/camp/100100/7440otPh3hhvm7mPiJQWvvIA.jpg",
+    "https://www.gocamping.or.kr/upload/camp/100100/7077r9X4UaYSaVDJZ7JOBuwU.jpg",
+    "https://www.gocamping.or.kr/upload/camp/100100/2052HLw2Z5kMGyMo1xDKFBc2.jpg",
+    "https://www.gocamping.or.kr/upload/camp/100100/8456yDPUTRKzKMoWSCdbPoDK.jpg",
+    "https://www.gocamping.or.kr/upload/camp/100100/3811b01BdGChcmz70Uy05XIP.jpg",
+    "https://www.gocamping.or.kr/upload/camp/100100/6971PrJhs4p60ztefZAHFJWK.jpg",
+    "https://www.gocamping.or.kr/upload/camp/100100/7334pAEOahIdMx5NEEbpJQ4m.jpg",
+    "https://www.gocamping.or.kr/upload/camp/100100/9655avKiYe9Y46uk80SK6POd.jpg",
+    "https://www.gocamping.or.kr/upload/camp/100100/0835gfTT9J8Gh61u83xZD1SA.jpg",
+    "https://www.gocamping.or.kr/upload/camp/100100/07646PdJAKl1kvmSVw5rsEG6.jpg"
+  ],
+  "seasons": [
+    "봄",
+    "여름",
+    "가을",
+    "겨울"
+  ],
+  "booking": {
+    "primary": {
+      "channel": "camfit",
+      "label": "캠핏",
+      "url": "https://camfit.co.kr/camp/양남라라캠핑장",
+      "real_time": true
+    },
+    "channels": [
+      {
+        "channel": "camfit",
+        "label": "캠핏",
+        "url": "https://camfit.co.kr/camp/양남라라캠핑장",
+        "real_time": true
+      }
+    ]
+  },
+  "gcd": {
+    "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100100",
+    "info": {
+      "주소": "경상북도 경주시 양남면 서왕길 381-14",
+      "문의처": "010-5045-1512 , 010-4124-3999",
+      "캠핑장 유형": "일반야영장",
+      "운영기간": "봄, 여름, 가을, 겨울",
+      "운영일": "평일+주말",
+      "예약방법": "온라인실시간예약",
+      "주변이용가능시설": "계곡 물놀이, 산책로, 해수욕",
+      "안전교육 이수 연도 (최근 3년)": ""
+    },
+    "facilities": [
+      {
+        "k": "주요시설",
+        "v": "자동차야영장사이트(23면)",
+        "items": [
+          "자동차야영장사이트(23면)"
+        ]
+      },
+      {
+        "k": "기타 부대시설",
+        "v": "정자, 연못",
+        "items": [
+          "정자, 연못"
+        ]
+      },
+      {
+        "k": "사이트 간격",
+        "v": "3M"
+      },
+      {
+        "k": "바닥형태 (단위:면)",
+        "v": "파쇄석 (23)",
+        "items": [
+          "파쇄석 (23)"
+        ]
+      },
+      {
+        "k": "사이트 크기",
+        "v": "9 X 8 : 7개 · 10 X 8 : 2개 · 7 X 10 : 2개"
+      },
+      {
+        "k": "캠핑장비대여",
+        "v": "캠핑장 문의",
+        "items": [
+          "캠핑장 문의"
+        ]
+      },
+      {
+        "k": "반려동물 출입",
+        "v": "불가능"
+      },
+      {
+        "k": "화로대",
+        "v": "개별"
+      },
+      {
+        "k": "안전시설현황",
+        "v": "소화기 (20)",
+        "items": [
+          "소화기 (20)"
+        ]
+      }
+    ],
+    "updated": "2023-05-16"
+  },
+  "profile": {
+    "fields": {
+      "TYPE": {
+        "value": "오토 23",
+        "grade": "CONFIRMED",
+        "total": 23,
+        "source": {
+          "label": "고캠핑",
+          "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100100",
+          "date": "2023-05-16"
+        }
+      },
+      "SEASON": {
+        "value": "봄·여름·가을·겨울 운영 (사계절)",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "고캠핑 및 캠핏",
+          "url": "https://camfit.co.kr",
+          "date": "2026-11-10"
+        }
+      },
+      "PARKING": {
+        "value": "사이트 옆 주차",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "고캠핑",
+          "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100100",
+          "date": "2023-05-16"
+        }
+      },
+      "POWER": {
+        "value": "전기 이용 가능 (사이트별)",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "고캠핑",
+          "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100100",
+          "date": "2023-05-16"
+        }
+      },
+      "SITE": {
+        "value": "파쇄석 23면",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "고캠핑",
+          "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100100",
+          "date": "2023-05-16"
+        }
+      },
+      "AMENITIES": {
+        "value": "전기 · 온수 · 화장실 · 샤워실 · 개수대 · 매점",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "고캠핑",
+          "url": "https://www.gocamping.or.kr/bsite/camp/info/read.do?c_no=100100",
+          "date": "2023-05-16"
+        }
+      }
+    }
+  }
+}
