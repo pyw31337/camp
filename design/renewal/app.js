@@ -5249,6 +5249,7 @@ function qualityOrder(items, { distance = false } = {}) {
 }
 
 function bindTheme(themeKey) {
+  const isParkTheme = themeKey === "PARK";
   const testFn = themeKey === "ALL" ? () => true : themeKey === "OPEN" ? (c) => Boolean(openingOf(c)) : themeKey === "MY_TASTE" ? (c) => matchMyTaste(c, getMyTaste()) : THEMES.find((t) => t[0] === themeKey)?.[2] ?? (() => true);
 
   let pageN = 24;
