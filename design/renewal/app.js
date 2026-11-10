@@ -108,17 +108,12 @@ function feeTiersLine(c, pref = preferredStayTier()) {
 }
 // 상세 화면 금액 표기: 18.9만~42만원 → 189,000~420,000원, 2만5천원 → 25,000원, 130000원 → 130,000원, 2만~4만원대 → 20,000~40,000원대.
 function wonText(v) {
-  const n = (m, c, t) => fmt(Math.round(parseFloat(m) * 10000 + (c ? parseFloat(c) * 1000 : 0)));
+  const n = (m, c) => fmt(Math.round(parseFloat(m) * 10000 + (c ? parseFloat(c) * 1000 : 0)));
   return String(v ?? "")
     .replace(/(\d+(?:\.\d+)?)\s*만(?:\s*(\d)\s*천)?\s*(?=~|-|원)/g, (_, m, c) => n(m, c))
     .replace(/(?<![\d,.])(\d{4,7})\s*원/g, (_, x) => `${fmt(Number(x))}원`)
     .replace(/(\d+)\s*천\s*원/g, (_, x) => `${fmt(Number(x) * 1000)}원`);
 }
-const band = (n) => {
-  if (n == null) return "-";
-  const m = Math.floor(n / 10000);
-  return m < 1 ? `${Math.round(n / 1000)}천원` : `${m}만원`;
-};
 // "th:키"면 테마 아이콘(TH_SVG)을 같은 크기로 쓴다(스프라이트에 없는 휴양림 등).
 const ic = (id, cls = "") => (String(id).startsWith("th:") ? thIc(String(id).slice(3)).replace('class="th-ic"', `class="ic th-ic ${cls}"`) : `<svg class="ic${/^(clock-in|clock-out)$/.test(String(id)) ? ` ic-${id}` : ""} ${cls}" aria-hidden="true"><use href="#i-${id}"/></svg>`);
 const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
@@ -964,12 +959,6 @@ function namedByQuery(c) {
 }
 const photoLast = (c) => (hasPhoto(c) || namedByQuery(c) ? 0 : 1);
 // 원문을 복제하지 않고 후기에서 집계한 언급 주제와 건수만 사용한다.
-function reviewMeta(c) {
-  const rv = c.rv ?? {};
-  const sum = (rows) => (rows ?? []).reduce((n, [, count]) => n + (Number(count) || 0), 0);
-  const positive = sum(rv.p), caution = sum(rv.c), total = Number(rv.n) || 0;
-  return { rv, positive, caution, total, score: total * 7 + positive * 3 - caution * 2 };
-}
 const normTopic = (t) => String(t ?? "")
   .replace("가격 부담", "요금 부담")
   .replace("화장실·샤워장 깨끗", "화장실·샤워실 깨끗")
@@ -1038,7 +1027,6 @@ const photoKey = (u) => {
   return base.replace(/^thumb_\d+_/, "");
 };
 const PT_FB = new Map();
-const isPt = (c, u) => Boolean(c.pt && (u === c.pt.i || u === c.pt.t));
 // ‘후기 사진’ 출처 배지는 붙이지 않는다(소유자 2026-10-22). 출처는 상세 사진 원문 링크에 남는다.
 // 성능(t39 #34): 화면 전환마다 같은 캠핑장 사진 목록을 수천 번 다시 만들지 않게 기억한다.
 // 사진 자료(S.photos·S.cards)가 바뀌거나 깨진 사진(DEAD)이 늘면 통째로 비운다. 결과는 그대로(복사본을 돌려준다).
@@ -1632,7 +1620,6 @@ function publicParkCard(c) {
   const facility = Array.isArray(p.facilities) ? p.facilities.join(" · ") : (p.facilities ?? p.facility_groups ?? "");
   const summary = String(c.pf?.s ?? "").split("·").map((x) => x.trim()).filter(Boolean).slice(0, 3).join(" · ");
   const toilets = c.nearby_toilets?.within_500m;
-  const operator = p.operator ?? p.management ?? c.src?.label?.match(/\(([^,()]+)(?:,|\))/)?.[1] ?? "관리기관";
   const source = c.src?.url ? tip(`<b>공원 정보 원천</b><span>${esc(c.src?.label ?? "공공데이터")}${c.src?.checked_at ? ` · ${esc(formatKoreanDate(c.src.checked_at))}` : ""}</span><a href="${esc(c.src.url)}" target="_blank" rel="noopener">원문 보기</a>`, "공원 정보 원천") : "";
   const facts = [
     summary || String(c.types?.[0] ?? "공원"),
@@ -1656,7 +1643,6 @@ function card(c, i = 0, opts) {
   const isWinterClosed = isWinterClosedCamp(c);
   const isWp = Boolean((opts && !Array.isArray(opts) && opts.isWaterPlay) || S.theme === "WATER_PLAY");
   const isClosed = isWp || isWinterClosed;
-  const theme = (opts && !Array.isArray(opts) && opts.theme) || S.theme || null;
   const savedMemo = Boolean(opts && !Array.isArray(opts) && opts.savedMemo);
   const { tag } = nameOf(c), o = openingOf(c);
   return `<article class="card${isClosed ? " is-closed" : ""}${savedMemo ? " saved-memo-card" : ""}" data-id="${esc(c.id)}">
@@ -2136,7 +2122,6 @@ function countOf(test) { return S.camps.reduce((n, c) => n + (test(c) ? 1 : 0), 
 // ── 실시간 인기(소유자 2026-10-19): 최근 7일 블로그·카페·뉴스·동영상 글의 캠핑장 언급 순위. /context/trending.json(Trending mentions)
 // 다음(Daum) 공식 아이콘(위키미디어 공용 Daum_icon_(2025–2026).svg)을 로컬 파일로 쓴다(소유자 2026-10-20).
 const DAUM_LOGO = new URL("images/daum.svg", import.meta.url).href;
-const daumImg = (px) => `<img class="daum-logo" src="${DAUM_LOGO}" width="${px}" height="${px}" alt="" aria-hidden="true">`;
 const TR_GLYPH = {
   naver: ["네이버", '<path d="M15.6 12.8 8.1 2H2v20h6.4V11.2L15.9 22H22V2h-6.4z" transform="translate(3 3) scale(.75)"/>'],
   daum: ["Daum", '<path d="m 36,20.36 c 3.1152,0 5.6352,2.712 5.5152,5.8536 -0.1128,2.988 -2.6616,5.4264 -5.652,5.4264 h -3.9456 c -0.264,0 -0.48,-0.216 -0.48,-0.48 V 20.84 c 0,-0.264 0.216,-0.48 0.48,-0.48 h 4.08 M 36,14 h -9.6 c -0.7944,0 -1.44,0.6456 -1.44,1.44 v 21.12 c 0,0.7944 0.6456,1.44 1.44,1.44 H 36 C 42.6264,38 48,32.6264 48,26 48,19.3736 42.6264,14 36,14 Z" transform="translate(12 12) scale(.75) translate(-36.5 -26)"/>'],
@@ -2360,7 +2345,6 @@ function trendingCard(x) {
   const c = S.byId.get(String(x.id));
   if (!c || !showcaseEligible(c)) return "";
   // 순위·순위 변동 배지는 썸네일에서 뺐다(소유자 2026-10-21). 순서는 그대로 순위순.
-  const arrow = false && x.trend === "up" ? `<span class="tr-tr up" aria-label="어제 ${x.prev}위에서 올라옴">${ic("up")}${x.prev - x.rank}</span>` : x.trend === "down" ? `<span class="tr-tr down" aria-label="어제 ${x.prev}위에서 내려감">${ic("down")}${x.rank - x.prev}</span>` : x.trend === "new" ? `<span class="tr-tr new" aria-label="새로 들어옴">NEW</span>` : "";
   const count = x.today ? `오늘 언급 <b>${fmt(x.today)}</b>건` : `7일 언급 <b>${fmt(x.week)}</b>건`;
   const srcs = Object.entries(x.by ?? {}).sort((a, b) => b[1] - a[1]).map(([k, n]) => trIcon(k, n)).join("");
   const reasons = (c.rv?.p ?? []).slice(0, 3).map(([t]) => t);
@@ -2413,7 +2397,30 @@ function commonFinderForm({ formAttr = "data-search", isList = false } = {}) {
   </form>`;
 }
 // 감성 캠핑 테마 메타데이터(기존 10종 + 이색 12종)
-const HERO_THEMES = [["night-sky","🌌","은하수 밤하늘","오늘 밤 쏟아지는 별빛","평창 600마지기 은하수 & 반딧불이","hero-night-sky.webp","쏟아지는 은하수 아래","평창 밤하늘 캠핑","도심을 벗어나 쏟아지는 별빛과 춤추는 반딧불이를 마주하는 시간","night-sky"],["autumn-maple","🍁","가을 단풍","오색빛깔 가을 낭만","오색빛깔 가을 단풍 & 은행잎","hero-autumn-maple.webp","붉게 물든 가을 숲길","오색 단풍 캠핑","살랑이는 가을 바람과 사각거리는 단풍잎 사이로 떠나는 힐링 여정","autumn-maple"],["rainy-camp","🌧️","감성 우중","토닥토닥 빗소리","운치 있는 숲속 낭만 우중 캠핑","hero-rainy-camp.webp","타프 위 토닥이는 비","아늑한 우중 캠핑","촉촉한 숲의 향기와 따스한 랜턴 불빛이 머무는 가장 아늑한 순간","rainy-camp"],["snowy-winter","❄️","설경 윈터","순백의 겨울 동화","인제 자작나무숲 설경 캠핑","hero-snowy-winter.webp","새하얀 설원의 고요","고요한 설경 캠핑","소복이 쌓이는 눈꽃과 모닥불의 따스함이 빚어내는 겨울 동화","snowy-winter"],["lush-forest","🌲","편백 숲","피톤치드 힐링","치유의 편백나무 숲 & 아침 햇살","hero-lush-forest.webp","피톤치드 가득한 숲길","편백숲 힐링 캠핑","나무 사이로 쏟아지는 눈부신 햇살과 싱그러운 숲의 숨결","lush-forest"],["riverside","🚣","호숫가 카약","물안개 피는 호수","충주호 잔잔한 물결 & 카약 캠핑","hero-riverside.webp","물안개 피는 아침 강가","호숫가 카약 캠핑","유리알처럼 투명한 수면과 황금빛 일출이 선사하는 평온함","riverside"],["warm-bonfire","🔥","불멍 캠핑","타닥타닥 힐링 불멍","따스한 모닥불과 솟구치는 불티","hero-warm-bonfire.webp","타닥타닥 모닥불 소리","따스한 불멍 캠핑","밤하늘로 솟아오르는 따스한 불티와 감성 알전구 불빛","warm-bonfire"],["sunset-coast","🌅","서해안 노을","붉은 석양의 감동","서해안 태안 바다 일몰 & 노을 해변","hero-sunset-coast.webp","노을이 내려앉은 바다","서해 노을 캠핑","황금빛으로 물드는 바다 수평선과 잔잔히 반짝이는 파도 소리","sunset-coast"],["cherry-blossom","🌸","봄날 벚꽃","설레는 꽃비 샤워","만개한 벚꽃나무 아래 봄 캠핑","hero-cherry-blossom.webp","흩날리는 분홍 꽃비","봄날 벚꽃 캠핑","흩날리는 꽃잎 샤워와 따스한 봄 햇살 속 캠크닉","cherry-blossom"],["green-meadow","🌿","초원 글램핑","탁 트인 푸른 초원","대관령 푸른 언덕 & 민들레 홀씨","hero-green-meadow.webp","끝없는 초록빛 언덕","대관령 초원 캠핑","탁 트인 푸른 하늘과 보드라운 잔디밭 위에서 누리는 자유","green-meadow"],["uq-hotspring","♨️","노천탕","별빛 아래 노천탕","산자락 노천탕 & 피어오르는 김","hero-hotspring.webp","별 아래 따끈한 노천탕","노천탕 캠핑","산바람에 김이 피어오르는 노천탕에 몸을 담그는 하룻밤","steam"],["uq-spa","🛁","스파","보글보글 프라이빗 스파","자쿠지 & 히노끼 스파 글램핑","hero-spa.webp","캔들 불빛 아래 보글보글","프라이빗 스파 캠핑","하루의 피로를 녹이는 따스한 물거품과 은은한 촛불","bubbles"],["uq-warmpool","🌡️","사계절온수풀","겨울에도 따뜻한 물놀이","사계절 온수풀 & 설경 물안개","hero-warmpool.webp","눈 내리는 날에도 첨벙","사계절 온수풀 캠핑","하얀 설경 속 김이 오르는 따뜻한 풀에서 즐기는 물놀이","steam"],["uq-pool","🏊","수영장","햇살 가득 수영장","파란 수영장 & 여름 물놀이","hero-pool.webp","반짝이는 물빛 속으로","수영장 캠핑","텐트 바로 앞 파란 수영장에서 하루 종일 첨벙첨벙","bubbles"],["uq-horse","🐎","승마","초원 위 승마 체험","노을 지는 목장 & 승마 체험","hero-horse.webp","노을 진 초원을 달려","승마 체험 캠핑","말과 교감하며 초원을 거니는 특별한 캠핑의 추억","green-meadow"],["uq-animal","🦙","동물체험","보들보들 동물 친구","알파카·양·염소 먹이주기","hero-animal.webp","보들보들 동물 친구와","동물 체험 캠핑","아이와 함께 먹이 주고 쓰다듬는 따뜻한 교감의 시간","cherry-blossom"],["uq-kidscafe","🧸","키즈카페","아이가 먼저 웃는 곳","볼풀·미끄럼틀 키즈카페","hero-kidscafe.webp","아이들의 웃음이 가득","키즈카페 캠핑","캠핑장 안 키즈카페에서 아이는 신나고 부모는 여유롭게","confetti"],["uq-indoorplay","🎲","실내놀이","비 와도 걱정 없는","트램펄린·보드게임 실내놀이","hero-indoorplay.webp","비가 와도 신나는 하루","실내놀이 캠핑","날씨와 상관없이 뛰놀 수 있는 넓은 실내 놀이 공간","confetti"],["uq-treehouse","🌳","트리하우스","숲속 나무 위 하룻밤","소나무 숲 트리하우스","hero-treehouse.webp","나무 위 작은 오두막","트리하우스 캠핑","출렁다리를 건너 숲 높이에서 맞이하는 아침 햇살","lush-forest"],["uq-stay","🫧","이색숙소","별을 품은 버블돔","버블 텐트 & 돔 하우스","hero-uniquestay.webp","투명 돔 안에서 별 보기","이색 숙소 캠핑","누워서 은하수를 올려다보는 버블돔과 이색 숙소","night-sky"],["uq-leisure","🪂","레포츠","짜릿한 하루 레포츠","짚라인 & 카약 레포츠","hero-leisure.webp","강 위를 가르는 짜릿함","레포츠 캠핑","짚라인과 카약으로 채우는 액티브한 캠핑 하루","riverside"],["uq-farm","🍓","체험","손으로 만드는 추억","딸기 따기·감자 캐기·도예 체험","hero-farm.webp","직접 따고 만드는 하루","농촌 체험 캠핑","수확하고 빚어 보는 손끝 체험으로 남기는 캠핑 추억","green-meadow"]].map(([id, emoji, shortName, badge, moodDescription, image, titleA, titleB, summary, effect]) => ({ id, emoji, shortName, badge, moodDescription, image, titleA, titleB, summary, effect }));
+const HERO_THEMES = [
+  { id: "night-sky", emoji: "🌌", shortName: "은하수 밤하늘", badge: "오늘 밤 쏟아지는 별빛", moodDescription: "평창 600마지기 은하수 & 반딧불이", image: "hero-night-sky.webp", titleA: "쏟아지는 은하수 아래", titleB: "평창 밤하늘 캠핑", summary: "도심을 벗어나 쏟아지는 별빛과 춤추는 반딧불이를 마주하는 시간", effect: "night-sky" },
+  { id: "autumn-maple", emoji: "🍁", shortName: "가을 단풍", badge: "오색빛깔 가을 낭만", moodDescription: "오색빛깔 가을 단풍 & 은행잎", image: "hero-autumn-maple.webp", titleA: "붉게 물든 가을 숲길", titleB: "오색 단풍 캠핑", summary: "살랑이는 가을 바람과 사각거리는 단풍잎 사이로 떠나는 힐링 여정", effect: "autumn-maple" },
+  { id: "rainy-camp", emoji: "🌧️", shortName: "감성 우중", badge: "토닥토닥 빗소리", moodDescription: "운치 있는 숲속 낭만 우중 캠핑", image: "hero-rainy-camp.webp", titleA: "타프 위 토닥이는 비", titleB: "아늑한 우중 캠핑", summary: "촉촉한 숲의 향기와 따스한 랜턴 불빛이 머무는 가장 아늑한 순간", effect: "rainy-camp" },
+  { id: "snowy-winter", emoji: "❄️", shortName: "설경 윈터", badge: "순백의 겨울 동화", moodDescription: "인제 자작나무숲 설경 캠핑", image: "hero-snowy-winter.webp", titleA: "새하얀 설원의 고요", titleB: "고요한 설경 캠핑", summary: "소복이 쌓이는 눈꽃과 모닥불의 따스함이 빚어내는 겨울 동화", effect: "snowy-winter" },
+  { id: "lush-forest", emoji: "🌲", shortName: "편백 숲", badge: "피톤치드 힐링", moodDescription: "치유의 편백나무 숲 & 아침 햇살", image: "hero-lush-forest.webp", titleA: "피톤치드 가득한 숲길", titleB: "편백숲 힐링 캠핑", summary: "나무 사이로 쏟아지는 눈부신 햇살과 싱그러운 숲의 숨결", effect: "lush-forest" },
+  { id: "riverside", emoji: "🚣", shortName: "호숫가 카약", badge: "물안개 피는 호수", moodDescription: "충주호 잔잔한 물결 & 카약 캠핑", image: "hero-riverside.webp", titleA: "물안개 피는 아침 강가", titleB: "호숫가 카약 캠핑", summary: "유리알처럼 투명한 수면과 황금빛 일출이 선사하는 평온함", effect: "riverside" },
+  { id: "warm-bonfire", emoji: "🔥", shortName: "불멍 캠핑", badge: "타닥타닥 힐링 불멍", moodDescription: "따스한 모닥불과 솟구치는 불티", image: "hero-warm-bonfire.webp", titleA: "타닥타닥 모닥불 소리", titleB: "따스한 불멍 캠핑", summary: "밤하늘로 솟아오르는 따스한 불티와 감성 알전구 불빛", effect: "warm-bonfire" },
+  { id: "sunset-coast", emoji: "🌅", shortName: "서해안 노을", badge: "붉은 석양의 감동", moodDescription: "서해안 태안 바다 일몰 & 노을 해변", image: "hero-sunset-coast.webp", titleA: "노을이 내려앉은 바다", titleB: "서해 노을 캠핑", summary: "황금빛으로 물드는 바다 수평선과 잔잔히 반짝이는 파도 소리", effect: "sunset-coast" },
+  { id: "cherry-blossom", emoji: "🌸", shortName: "봄날 벚꽃", badge: "설레는 꽃비 샤워", moodDescription: "만개한 벚꽃나무 아래 봄 캠핑", image: "hero-cherry-blossom.webp", titleA: "흩날리는 분홍 꽃비", titleB: "봄날 벚꽃 캠핑", summary: "흩날리는 꽃잎 샤워와 따스한 봄 햇살 속 캠크닉", effect: "cherry-blossom" },
+  { id: "green-meadow", emoji: "🌿", shortName: "초원 글램핑", badge: "탁 트인 푸른 초원", moodDescription: "대관령 푸른 언덕 & 민들레 홀씨", image: "hero-green-meadow.webp", titleA: "끝없는 초록빛 언덕", titleB: "대관령 초원 캠핑", summary: "탁 트인 푸른 하늘과 보드라운 잔디밭 위에서 누리는 자유", effect: "green-meadow" },
+  { id: "uq-hotspring", emoji: "♨️", shortName: "노천탕", badge: "별빛 아래 노천탕", moodDescription: "산자락 노천탕 & 피어오르는 김", image: "hero-hotspring.webp", titleA: "별 아래 따끈한 노천탕", titleB: "노천탕 캠핑", summary: "산바람에 김이 피어오르는 노천탕에 몸을 담그는 하룻밤", effect: "steam" },
+  { id: "uq-spa", emoji: "🛁", shortName: "스파", badge: "보글보글 프라이빗 스파", moodDescription: "자쿠지 & 히노끼 스파 글램핑", image: "hero-spa.webp", titleA: "캔들 불빛 아래 보글보글", titleB: "프라이빗 스파 캠핑", summary: "하루의 피로를 녹이는 따스한 물거품과 은은한 촛불", effect: "bubbles" },
+  { id: "uq-warmpool", emoji: "🌡️", shortName: "사계절온수풀", badge: "겨울에도 따뜻한 물놀이", moodDescription: "사계절 온수풀 & 설경 물안개", image: "hero-warmpool.webp", titleA: "눈 내리는 날에도 첨벙", titleB: "사계절 온수풀 캠핑", summary: "하얀 설경 속 김이 오르는 따뜻한 풀에서 즐기는 물놀이", effect: "steam" },
+  { id: "uq-pool", emoji: "🏊", shortName: "수영장", badge: "햇살 가득 수영장", moodDescription: "파란 수영장 & 여름 물놀이", image: "hero-pool.webp", titleA: "반짝이는 물빛 속으로", titleB: "수영장 캠핑", summary: "텐트 바로 앞 파란 수영장에서 하루 종일 첨벙첨벙", effect: "bubbles" },
+  { id: "uq-horse", emoji: "🐎", shortName: "승마", badge: "초원 위 승마 체험", moodDescription: "노을 지는 목장 & 승마 체험", image: "hero-horse.webp", titleA: "노을 진 초원을 달려", titleB: "승마 체험 캠핑", summary: "말과 교감하며 초원을 거니는 특별한 캠핑의 추억", effect: "green-meadow" },
+  { id: "uq-animal", emoji: "🦙", shortName: "동물체험", badge: "보들보들 동물 친구", moodDescription: "알파카·양·염소 먹이주기", image: "hero-animal.webp", titleA: "보들보들 동물 친구와", titleB: "동물 체험 캠핑", summary: "아이와 함께 먹이 주고 쓰다듬는 따뜻한 교감의 시간", effect: "cherry-blossom" },
+  { id: "uq-kidscafe", emoji: "🧸", shortName: "키즈카페", badge: "아이가 먼저 웃는 곳", moodDescription: "볼풀·미끄럼틀 키즈카페", image: "hero-kidscafe.webp", titleA: "아이들의 웃음이 가득", titleB: "키즈카페 캠핑", summary: "캠핑장 안 키즈카페에서 아이는 신나고 부모는 여유롭게", effect: "confetti" },
+  { id: "uq-indoorplay", emoji: "🎲", shortName: "실내놀이", badge: "비 와도 걱정 없는", moodDescription: "트램펄린·보드게임 실내놀이", image: "hero-indoorplay.webp", titleA: "비가 와도 신나는 하루", titleB: "실내놀이 캠핑", summary: "날씨와 상관없이 뛰놀 수 있는 넓은 실내 놀이 공간", effect: "confetti" },
+  { id: "uq-treehouse", emoji: "🌳", shortName: "트리하우스", badge: "숲속 나무 위 하룻밤", moodDescription: "소나무 숲 트리하우스", image: "hero-treehouse.webp", titleA: "나무 위 작은 오두막", titleB: "트리하우스 캠핑", summary: "출렁다리를 건너 숲 높이에서 맞이하는 아침 햇살", effect: "lush-forest" },
+  { id: "uq-stay", emoji: "🫧", shortName: "이색숙소", badge: "별을 품은 버블돔", moodDescription: "버블 텐트 & 돔 하우스", image: "hero-uniquestay.webp", titleA: "투명 돔 안에서 별 보기", titleB: "이색 숙소 캠핑", summary: "누워서 은하수를 올려다보는 버블돔과 이색 숙소", effect: "night-sky" },
+  { id: "uq-leisure", emoji: "🪂", shortName: "레포츠", badge: "짜릿한 하루 레포츠", moodDescription: "짚라인 & 카약 레포츠", image: "hero-leisure.webp", titleA: "강 위를 가르는 짜릿함", titleB: "레포츠 캠핑", summary: "짚라인과 카약으로 채우는 액티브한 캠핑 하루", effect: "riverside" },
+  { id: "uq-farm", emoji: "🍓", shortName: "체험", badge: "손으로 만드는 추억", moodDescription: "딸기 따기·감자 캐기·도예 체험", image: "hero-farm.webp", titleA: "직접 따고 만드는 하루", titleB: "농촌 체험 캠핑", summary: "수확하고 빚어 보는 손끝 체험으로 남기는 캠핑 추억", effect: "green-meadow" }
+];
 
 // 히어로 테마는 홈을 새로 열거나 새로고침할 때마다 10개 중 1개를 다시 무작위로 고른다.
 // 브라우저 저장소에 선택값을 남기지 않아 한 테마가 고정되지 않는다. ?hero=<id>는 테스트용으로 유지한다.
@@ -4242,8 +4249,8 @@ function getMyTastePicks() {
 }
 
 const TASTE_TYPES = [["AUTO", "오토캠핑", "car"], ["GLAMPING", "글램핑", "glamping"], ["CARAVAN", "카라반", "caravan"], ["HOUSE", "펜션·방갈로", "home"], ["CAR_CAMP", "차박", "car"], ["DECK", "데크", "layers"], ["SOLO", "백패킹", "tent"]];
-const TASTE_SIZES = [[0, "규격 무관"], [6, "6m+"], [8, "8m+"], [10, "10m+"]];
-const TASTE_WATTS = [[0, "전기 무관"], [600, "600W+ (기본)"], [1000, "1000W+ (고용량)"], [1400, "1400W+ (초고용량)"]];
+const TASTE_SIZES = [[0,"규격 무관"],[6,"6m+"],[8,"8m+"],[10,"10m+"]];
+const TASTE_WATTS = [[0,"전기 무관"],[600,"600W+ (기본)"],[1000,"1000W+ (고용량)"],[1400,"1400W+ (초고용량)"]];
 const TASTE_ENVS = [["valley","th:VALLEY","계곡"],["river","th:LAKE","강·호수·천"],["beach","th:BEACH","바다·해변"]];
 const TASTE_EXPS = [
   ["horse","spark","승마"],["animal","paw","동물"],["craft","spark","공예"],
@@ -4272,51 +4279,10 @@ function myTasteSummaryChips(taste = getMyTaste()) {
 }
 
 function myTasteThemeTopBar(taste = getMyTaste()) {
-  const b = myTasteSummaryChips(taste);
-  const topChip = (act, pressed, icon, text) =>
-    `<button type="button" class="chip top-taste-chip" data-top-taste="${act}" aria-pressed="${pressed}">${icon ? ic(icon) : ""}${esc(text)}</button>`;
-
-  return `<div class="theme-my-taste-box">
-    <div class="theme-my-taste-head">
-      <div class="theme-my-taste-title-wrap">
-        <span class="taste-box-badge">${ic("tent")}<b>내 취향 맞춤 필터 옵션</b></span>
-        <span class="taste-box-count">적용된 조건 <b>${b.length}개</b></span>
-      </div>
-      <div class="theme-my-taste-actions">
-        <button type="button" class="btn ghost btn-sm" data-top-taste="reset">${ic("refresh")}취향 초기화</button>
-        <button type="button" class="taste-box-change-btn" data-open-my-taste>${ic("spark")}상세 설정 시트 ${ic("right")}</button>
-      </div>
-    </div>
-    <div class="theme-my-taste-chips">${b.length ? b.join("") : `<span class="taste-badge none">선택된 조건 없음 (전체 캠핑장 표시 중)</span>`}</div>
-    <div class="theme-my-taste-panel">
-      <div class="top-taste-group">
-        <span class="top-taste-lbl">캠핑 타입</span>
-        <div class="rail chips top-taste-chips">${TASTE_TYPES.map(([k, l, i]) => topChip(`type:${k}`, (taste.types ?? []).includes(k), i, l)).join("")}</div>
-      </div>
-      <div class="top-taste-group">
-        <span class="top-taste-lbl">전기 허용</span>
-        <div class="rail chips top-taste-chips">${TASTE_WATTS.map(([v, l]) => topChip(`watts:${v}`, (taste.minWatts ?? 0) === v, "bolt", l)).join("")}</div>
-      </div>
-      <div class="top-taste-group">
-        <span class="top-taste-lbl">사이트 규격</span>
-        <div class="rail chips top-taste-chips">${TASTE_SIZES.map(([v, l]) => topChip(`size:${v}`, (taste.minSize ?? 0) === v, "size", l)).join("")}</div>
-      </div>
-      <div class="top-taste-group">
-        <span class="top-taste-lbl">자연 환경</span>
-        <div class="rail chips top-taste-chips">${TASTE_ENVS.map(([k, i, l]) => topChip(`toggle:${k}`, Boolean(taste[k]), i, l)).join("")}</div>
-      </div>
-      <div class="top-taste-group">
-        <span class="top-taste-lbl">체험 활동</span>
-        <div class="rail chips top-taste-chips">${TASTE_EXPS.map(([k, i, l]) => topChip(`toggle:${k}`, Boolean(taste[k]), i, l)).join("")}</div>
-      </div>
-      <div class="top-taste-group">
-        <span class="top-taste-lbl">장비 & 편의</span>
-        <div class="rail chips top-taste-chips">${TASTE_FACS.map(([k, i, l]) => topChip(`toggle:${k}`, Boolean(taste[k]), i, l)).join("")}</div>
-      </div>
-    </div>
-  </div>`;
+const b = myTasteSummaryChips(taste);
+const topChip = (a, p, i, t) => `<button type="button" class="chip top-taste-chip" data-top-taste="${a}" aria-pressed="${p}">${i ? ic(i) : ""}${esc(t)}</button>`;
+return `<div class="theme-my-taste-box"><div class="theme-my-taste-head"><div class="theme-my-taste-title-wrap"><span class="taste-box-badge">${ic("tent")}<b>내 취향 맞춤 필터 옵션</b></span><span class="taste-box-count">적용된 조건 <b>${b.length}개</b></span></div><div class="theme-my-taste-actions"><button type="button" class="btn ghost btn-sm" data-top-taste="reset">${ic("refresh")}취향 초기화</button><button type="button" class="taste-box-change-btn" data-open-my-taste>${ic("spark")}상세 설정 시트 ${ic("right")}</button></div></div><div class="theme-my-taste-chips">${b.length ? b.join("") : `<span class="taste-badge none">선택된 조건 없음 (전체 캠핑장 표시 중)</span>`}</div><div class="theme-my-taste-panel"><div class="top-taste-group"><span class="top-taste-lbl">캠핑 타입</span><div class="rail chips top-taste-chips">${TASTE_TYPES.map(([k, l, i]) => topChip(`type:${k}`, (taste.types ?? []).includes(k), i, l)).join("")}</div></div><div class="top-taste-group"><span class="top-taste-lbl">전기 허용</span><div class="rail chips top-taste-chips">${TASTE_WATTS.map(([v, l]) => topChip(`watts:${v}`, (taste.minWatts ?? 0) === v, "bolt", l)).join("")}</div></div><div class="top-taste-group"><span class="top-taste-lbl">사이트 규격</span><div class="rail chips top-taste-chips">${TASTE_SIZES.map(([v, l]) => topChip(`size:${v}`, (taste.minSize ?? 0) === v, "size", l)).join("")}</div></div><div class="top-taste-group"><span class="top-taste-lbl">자연 환경</span><div class="rail chips top-taste-chips">${TASTE_ENVS.map(([k, i, l]) => topChip(`toggle:${k}`, Boolean(taste[k]), i, l)).join("")}</div></div><div class="top-taste-group"><span class="top-taste-lbl">체험 활동</span><div class="rail chips top-taste-chips">${TASTE_EXPS.map(([k, i, l]) => topChip(`toggle:${k}`, Boolean(taste[k]), i, l)).join("")}</div></div><div class="top-taste-group"><span class="top-taste-lbl">장비 & 편의</span><div class="rail chips top-taste-chips">${TASTE_FACS.map(([k, i, l]) => topChip(`toggle:${k}`, Boolean(taste[k]), i, l)).join("")}</div></div></div></div>`;
 }
-
 function myTasteBoxHtml(taste = getMyTaste()) {
   return myTasteThemeTopBar(taste);
 }
@@ -4384,24 +4350,11 @@ function openMyTasteDialog() {
 }
 
 function paintMyTasteDialog() {
-  const dlg = $("#my-taste-dialog"); if (!dlg) return;
-  const t = S._tasteDraft;
-  const chipBtns = (arr) => arr.map(([k, i, l]) => `<button type="button" class="chip" data-taste-act="toggle:${k}" aria-pressed="${Boolean(t[k])}">${ic(i)}${l}</button>`).join("");
-
-  dlg.innerHTML = `<div class="sheet-in my-taste-in">
-    <div class="sheet-head"><h2 id="my-taste-title">내 취향 & 장비 설정</h2><button type="button" class="icon-btn sheet-close" data-taste-act="close" aria-label="닫기">${ic("close")}</button></div>
-    <div class="sheet-body my-taste-body">
-      <section class="taste-group"><h3>캠핑 타입 (복수 선택)</h3><div class="cond-chips">${TASTE_TYPES.map(([k, l, i]) => `<button type="button" class="chip" data-taste-act="type:${k}" aria-pressed="${(t.types ?? []).includes(k)}">${ic(i)}${esc(l)}</button>`).join("")}</div></section>
-      <section class="taste-group"><h3>사이트 규격 (내 텐트 크기)</h3><div class="cond-chips">${TASTE_SIZES.map(([v, l]) => `<button type="button" class="chip" data-taste-act="size:${v}" aria-pressed="${t.minSize === v}">${esc(l)}</button>`).join("")}</div></section>
-      <section class="taste-group"><h3>전기 허용 용량 (W)</h3><div class="cond-chips">${TASTE_WATTS.map(([v, l]) => `<button type="button" class="chip" data-taste-act="watts:${v}" aria-pressed="${(t.minWatts ?? 0) === v}">${ic("bolt")}${esc(l)}</button>`).join("")}</div></section>
-      <section class="taste-group"><h3>장비 & 편의 시설</h3><div class="cond-chips">${chipBtns(TASTE_FACS)}</div></section>
-      <section class="taste-group"><h3>자연 환경</h3><div class="cond-chips">${chipBtns(TASTE_ENVS)}</div></section>
-      <section class="taste-group"><h3>체험</h3><div class="cond-chips">${chipBtns(TASTE_EXPS)}</div></section>
-    </div>
-    <div class="sheet-foot my-taste-foot"><button type="button" class="btn ghost" data-taste-act="reset">초기화</button><button type="button" class="btn primary" data-taste-act="save">취향 저장</button></div>
-  </div>`;
+const dlg = $("#my-taste-dialog"); if (!dlg) return;
+const t = S._tasteDraft;
+const chipBtns = (arr) => arr.map(([k, i, l]) => `<button type="button" class="chip" data-taste-act="toggle:${k}" aria-pressed="${Boolean(t[k])}">${ic(i)}${l}</button>`).join("");
+dlg.innerHTML = `<div class="sheet-in my-taste-in"><div class="sheet-head"><h2 id="my-taste-title">내 취향 & 장비 설정</h2><button type="button" class="icon-btn sheet-close" data-taste-act="close" aria-label="닫기">${ic("close")}</button></div><div class="sheet-body my-taste-body"><section class="taste-group"><h3>캠핑 타입 (복수 선택)</h3><div class="cond-chips">${TASTE_TYPES.map(([k, l, i]) => `<button type="button" class="chip" data-taste-act="type:${k}" aria-pressed="${(t.types ?? []).includes(k)}">${ic(i)}${esc(l)}</button>`).join("")}</div></section><section class="taste-group"><h3>사이트 규격 (내 텐트 크기)</h3><div class="cond-chips">${TASTE_SIZES.map(([v, l]) => `<button type="button" class="chip" data-taste-act="size:${v}" aria-pressed="${t.minSize === v}">${esc(l)}</button>`).join("")}</div></section><section class="taste-group"><h3>전기 허용 용량 (W)</h3><div class="cond-chips">${TASTE_WATTS.map(([v, l]) => `<button type="button" class="chip" data-taste-act="watts:${v}" aria-pressed="${(t.minWatts ?? 0) === v}">${ic("bolt")}${esc(l)}</button>`).join("")}</div></section><section class="taste-group"><h3>장비 & 편의 시설</h3><div class="cond-chips">${chipBtns(TASTE_FACS)}</div></section><section class="taste-group"><h3>자연 환경</h3><div class="cond-chips">${chipBtns(TASTE_ENVS)}</div></section><section class="taste-group"><h3>체험</h3><div class="cond-chips">${chipBtns(TASTE_EXPS)}</div></section></div><div class="sheet-foot my-taste-foot"><button type="button" class="btn ghost" data-taste-act="reset">초기화</button><button type="button" class="btn primary" data-taste-act="save">취향 저장</button></div></div>`;
 }
-
 document.addEventListener("click", (e) => {
   const topTasteBtn = e.target.closest("[data-top-taste]");
   if (topTasteBtn) {
@@ -4632,7 +4585,6 @@ function moreResults() {
 // ── 조건 검색(히어로·목록 공통, 소유자 2026-10-19) ─────────────────
 // 키워드 대신 조건을 조합한다: 지역 여러 곳 · 시군 주변 반경 · 상품(글램핑·카라반 등, 하나라도) · 반려견 · 전기 W · 사이트 크기 · 장작 · 텐트 옆 주차 · 1박 요금.
 // 값을 모르는 곳은 그 조건으로 걸러지지 않는다(“없음”으로 보지 않음) — 조건을 켜면 근거가 있는 곳만 남는다.
-const SIDOS = REGION_GROUPS.map(([k]) => k);
 const maxSide = (c) => (c._ms ??= Math.max(0, ...(c.field_conditions?.site_size?.groups ?? []).map((g) => Math.max(Number(g.width_m) || 0, Number(g.depth_m) || 0)), ...(c.tq?.mx ?? [])));
 const wattsOf = (c) => (c._w ??= facts(c).power?.w ?? 0);
 const hasPower = (c) => (c._pw ??= Boolean(facts(c).power?.ok));
@@ -6314,39 +6266,28 @@ function factValueHtml(x, fallback = "확인필요") {
   return `${esc(value)}${noteParts.length ? `<span class="fact-note">${esc(noteParts.join(" · "))}</span>` : ""}`;
 }
 function openProductModal(prod) {
-  if (!prod) return;
-  document.getElementById("sp-modal")?.remove();
-  const photos = prod.photos || (prod.img ? [prod.img] : []);
-  const gallery = photos.map((u) => `<img src="${esc(u)}" alt="${esc(prod.name)}" loading="lazy">`).join("");
-  document.body.insertAdjacentHTML("beforeend", `<div class="sp-modal-backdrop" id="sp-modal">
-    <div class="sp-modal-content">
-      <button type="button" class="sp-modal-close" data-sp-close aria-label="닫기">✕</button>
-      <h3 class="sp-modal-title">${esc(prod.name)}</h3>
-      <div class="sp-badges">${prod.floor ? `<span class="sp-badge">${esc(prod.floor)}</span>` : ""}${prod.size ? `<span class="sp-badge">${esc(prod.size)}</span>` : ""}${prod.power ? `<span class="sp-badge accent">${esc(prod.power)}</span>` : ""}</div>
-      ${prod.price ? `<p class="sp-price" style="font-size:16px;margin:8px 0 10px;">1박 ${fmt(prod.price)}원~</p>` : ""}
-      ${prod.desc ? `<p class="sp-desc" style="white-space:normal;margin-bottom:12px;">${esc(prod.desc)}</p>` : ""}
-      ${photos.length ? `<div class="sp-modal-gallery">${gallery}</div>` : ""}
-    </div>
-  </div>`);
+if (!prod) return;
+document.getElementById("sp-modal")?.remove();
+const photos = prod.photos || (prod.img ? [prod.img] : []);
+const gallery = photos.map((u) => `<img src="${esc(u)}" alt="${esc(prod.name)}" loading="lazy">`).join("");
+document.body.insertAdjacentHTML("beforeend", `<div class="sp-modal-backdrop" id="sp-modal"><div class="sp-modal-content"><button type="button" class="sp-modal-close" data-sp-close aria-label="닫기">✕</button><h3 class="sp-modal-title">${esc(prod.name)}</h3><div class="sp-badges">${prod.floor ? `<span class="sp-badge">${esc(prod.floor)}</span>` : ""}${prod.size ? `<span class="sp-badge">${esc(prod.size)}</span>` : ""}${prod.power ? `<span class="sp-badge accent">${esc(prod.power)}</span>` : ""}</div>
+${prod.price ? `<p class="sp-price" style="font-size:16px;margin:8px 0 10px;">1박 ${fmt(prod.price)}원~</p>` : ""}
+${prod.desc ? `<p class="sp-desc" style="white-space:normal;margin-bottom:12px;">${esc(prod.desc)}</p>` : ""}
+${photos.length ? `<div class="sp-modal-gallery">${gallery}</div>` : ""}
+</div></div>`);
 }
-
 function siteProductsHtml(c, d) {
-  const prods = d?.site_products || [];
-  if (!prods.length) return "";
-  const cards = prods.map((p, idx) => {
-    const thumb = p.photos?.[0] || p.img || "";
-    const cnt = p.photos?.length || 0;
-    const priceStr = p.price ? `${fmt(p.price)}원~` : (p.fee_text || "");
-    return `<div class="sp-card" data-sp-idx="${idx}" role="button" tabindex="0" aria-label="${esc(p.name)} 사진">
-      <div class="sp-thumb-wrap">${thumb ? `<img class="sp-thumb" src="${esc(thumb)}" alt="${esc(p.name)}" loading="lazy">` : `<div class="sp-thumb" style="display:flex;align-items:center;justify-content:center;color:#98a2b3;">${ic("tent")}</div>`}${cnt > 1 ? `<span class="sp-photo-cnt">${cnt}장</span>` : ""}</div>
-      <div class="sp-body">
-        <h4 class="sp-title">${esc(p.name)}</h4>
-        <div class="sp-badges">${p.floor ? `<span class="sp-badge">${esc(p.floor)}</span>` : ""}${p.size ? `<span class="sp-badge">${esc(p.size)}</span>` : ""}${p.power ? `<span class="sp-badge accent">${esc(p.power)}</span>` : ""}</div>
-        ${priceStr ? `<p class="sp-price">${esc(priceStr)}</p>` : ""}${p.desc ? `<p class="sp-desc">${esc(p.desc)}</p>` : ""}
-      </div>
-    </div>`;
-  }).join("");
-  return `<section class="d-sec sp-sec"><div class="sec-head">${iconTitle("tent", "구역·객실별 실물 사진 & 세부 규격")}<span class="sec-side" style="font-size:12px;color:var(--ink-3);font-weight:700;">${prods.length}개 구역</span></div><div class="sp-rail rail">${cards}</div></section>`;
+const prods = d?.site_products || [];
+if (!prods.length) return "";
+const cards = prods.map((p, idx) => {
+const thumb = p.photos?.[0] || p.img || "";
+const cnt = p.photos?.length || 0;
+const priceStr = p.price ? `${fmt(p.price)}원~` : (p.fee_text || "");
+return `<div class="sp-card" data-sp-idx="${idx}" role="button" tabindex="0" aria-label="${esc(p.name)} 사진"><div class="sp-thumb-wrap">${thumb ? `<img class="sp-thumb" src="${esc(thumb)}" alt="${esc(p.name)}" loading="lazy">` : `<div class="sp-thumb" style="display:flex;align-items:center;justify-content:center;color:#98a2b3;">${ic("tent")}</div>`}${cnt > 1 ? `<span class="sp-photo-cnt">${cnt}장</span>` : ""}</div><div class="sp-body"><h4 class="sp-title">${esc(p.name)}</h4><div class="sp-badges">${p.floor ? `<span class="sp-badge">${esc(p.floor)}</span>` : ""}${p.size ? `<span class="sp-badge">${esc(p.size)}</span>` : ""}${p.power ? `<span class="sp-badge accent">${esc(p.power)}</span>` : ""}</div>
+${priceStr ? `<p class="sp-price">${esc(priceStr)}</p>` : ""}${p.desc ? `<p class="sp-desc">${esc(p.desc)}</p>` : ""}
+</div></div>`;
+}).join("");
+return `<section class="d-sec sp-sec"><div class="sec-head">${iconTitle("tent", "구역·객실별 실물 사진 & 세부 규격")}<span class="sec-side" style="font-size:12px;color:var(--ink-3);font-weight:700;">${prods.length}개 구역</span></div><div class="sp-rail rail">${cards}</div></section>`;
 }
 function siteTypesHtml(c, d) {
   const list = d?.site_types ?? (c.st ?? []).map(([code, count, g, sub]) => ({ code, count, sub, grade: g === "o" ? "OPERATOR" : "CONFIRMED" }));
@@ -9324,7 +9265,6 @@ function bindDetail() {
     el.textContent = isMobile ? "전화 걸기" : "번호 복사";
   });
 
-
   const closeReserveMenu = () => closeReserveMenus();
 
   // 예약 버튼 열기·닫기는 문서 전체 위임(reserveSplit 공통 처리)으로 옮겼다.
@@ -9859,7 +9799,6 @@ function bindMap() {
   v.addEventListener("submit", onSubmit); v.addEventListener("click", onClick); v.addEventListener("keydown", onKey);
   cleanup.push(() => { v.removeEventListener("submit", onSubmit); v.removeEventListener("click", onClick); v.removeEventListener("keydown", onKey); });
 }
-
 
 async function savesLogView() {
   if (!await ensureSupabaseConfig()) return `<section class="cmp-page"><div class="sec-head big"><h1>찜 <em>기록</em></h1></div><p class="muted">서버 연결을 준비하지 못했어요.</p><p class="muted">별도 페이지: <a href="${APP_BASE}admin/">/admin</a></p></section>`;
