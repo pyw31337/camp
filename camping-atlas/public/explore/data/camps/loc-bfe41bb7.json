@@ -52,5 +52,18 @@
         }
       }
     }
-  }
+  },
+  "site_products": [
+    {
+      "id": "sp-loc-bfe41bb7-1",
+      "name": "오토캠핑 사이트",
+      "type": "AUTO",
+      "floor": "파쇄석",
+      "size": null,
+      "power": "전기 이용 가능",
+      "price": null,
+      "photos": [],
+      "desc": "충주 비내캠프 체험학습장 대표 사이트입니다."
+    }
+  ]
 }

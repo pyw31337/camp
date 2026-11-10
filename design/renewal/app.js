@@ -265,7 +265,7 @@ const GROUND = { CRUSHED_STONE: "파쇄석", MIXED: "혼합", GRAVEL: "자갈", 
 const srcOf = (fc, extra) => ({ label: fc?.source?.label || "한국관광공사 고캠핑 등록 현황", url: fc?.source?.url || "https://www.gocamping.or.kr/", at: fc?.source?.checked_at, ...extra });
 
 // 오토캠핑 개념 정의: 차량을 텐트(사이트) 바로 옆에 주차하고, 전기 시설 등을 편리하게 이용할 수 있는 캠핑 형태
-const AUTOCAMP_INFO_HTML = `<strong>오토캠핑</strong><br>텐트 옆에 주차하고 전기를 편리하게 이용하는 캠핑장입니다 (자동차야영장).<br><small style="color:var(--text-3);display:block;margin-top:4px;">※ 일부는 짐을 내린 후 공용주차장으로 이동해야 합니다(이동주차 뱃지).</small>`;
+const AUTOCAMP_INFO_HTML = `<strong>오토캠핑</strong><br>텐트 옆 주차 및 전기를 이용하는 캠핑장입니다.<br><small style="color:var(--text-3);display:block;margin-top:2px;">※ 일부는 짐 내린 후 공용주차장 이동(이동주차 배지).</small>`;
 
 const isAutoCamp = (c) => (c.types ?? []).includes("자동차야영장") || (c.st ?? []).some((t) => t[0] === "AUTO");
 const isMoveParking = (c) => isAutoCamp(c) && (c.of?.pk?.v === "EXTERNAL" || ["CART_REQUIRED", "SHARED_NEARBY"].includes(c.field_conditions?.parking?.mode) || c._f?.park?.ok === false);
@@ -278,40 +278,12 @@ function facts(c) {
   const isAuto = isAutoCamp(c);
   if (of.pk) {
     const isSide = of.pk.v === "SITE_SIDE";
-    out.park = {
-      v: isSide ? "텐트 옆" : (isAuto ? "이동주차 (짐 내린 후 이동)" : "외부 주차장"),
-      short: isSide ? "텐트 옆" : (isAuto ? "이동주차" : "외부 주차"),
-      g: "c",
-      ok: isSide,
-      isAutoMove: isAuto && !isSide,
-      src: { label: "운영자 홈페이지", url: of.pk.u, at: of.pk.t, quote: of.pk.q }
-    };
+    out.park = { v: isSide ? "텐트 옆" : (isAuto ? "이동주차 (짐 내린 후 이동)" : "외부 주차장"), short: isSide ? "텐트 옆" : (isAuto ? "이동주차" : "외부 주차"), g: "c", ok: isSide, isAutoMove: isAuto && !isSide, src: { label: "운영자 홈페이지", url: of.pk.u, at: of.pk.t, quote: of.pk.q } };
   } else if (fc.parking && fc.parking.mode && fc.parking.mode !== "UNKNOWN") {
     const p = fc.parking, g = GR(p.state), z = p.tent_side_zones;
-    if (p.mode === "SITE_ADJACENT") {
-      out.park = {
-        v: z && z.adjacent < z.total ? `${z.total}구역 중 ${z.adjacent}곳 텐트 옆` : "텐트 옆",
-        short: z && z.adjacent < z.total ? "일부 텐트 옆" : "텐트 옆",
-        g,
-        ok: z && z.adjacent < z.total ? "part" : true
-      };
-    } else if (p.mode === "CART_REQUIRED") {
-      out.park = {
-        v: isAuto ? "이동주차 (짐수레 이동)" : "짐수레 이동",
-        short: isAuto ? "이동주차" : "짐수레",
-        g,
-        ok: false,
-        isAutoMove: isAuto
-      };
-    } else if (p.mode === "SHARED_NEARBY") {
-      out.park = {
-        v: isAuto ? "이동주차 (공용 주차장)" : "공용 주차장",
-        short: isAuto ? "이동주차" : "공용 주차",
-        g,
-        ok: false,
-        isAutoMove: isAuto
-      };
-    }
+    if (p.mode === "SITE_ADJACENT") out.park = { v: z && z.adjacent < z.total ? `${z.total}구역 중 ${z.adjacent}곳 텐트 옆` : "텐트 옆", short: z && z.adjacent < z.total ? "일부 텐트 옆" : "텐트 옆", g, ok: z && z.adjacent < z.total ? "part" : true };
+    else if (p.mode === "CART_REQUIRED") out.park = { v: isAuto ? "이동주차 (짐수레 이동)" : "짐수레 이동", short: isAuto ? "이동주차" : "짐수레", g, ok: false, isAutoMove: isAuto };
+    else if (p.mode === "SHARED_NEARBY") out.park = { v: isAuto ? "이동주차 (공용 주차장)" : "공용 주차장", short: isAuto ? "이동주차" : "공용 주차", g, ok: false, isAutoMove: isAuto };
     if (out.park) out.park.src = srcOf(fc);
   }
   // 전기
@@ -5813,40 +5785,7 @@ async function detailView(id) {
   const usageBlock = usageRows || extraUsageRows
     ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><dl class="uses">${usageRows}${extraUsageRows}</dl></section>`
     : `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><p class="muted" style="padding: 18px 0; color: var(--ink-3); font-size: .88rem;">등록된 상세 이용 정보가 없습니다.</p></section>`;
-  return `<article class="detail" data-id="${esc(c.id)}">
-    <div class="d-bar"><a class="icon-btn" href="${APP_BASE}" data-back aria-label="뒤로">${ic("left")}</a><span class="d-bar-acts">${heartBtn(c, { label: true })}<button class="d-share" type="button" data-share-place="${esc(c.id)}" aria-label="링크 공유">${ic("share")}<span>공유</span></button></span></div>
-    <header class="d-head">
-      <div class="d-head-main">
-      <p class="d-eyebrow">${c.sido && c.sigungu ? `<a class="d-region-link" href="${regionHref(sidoShort(c.sido), c.sigungu)}">${esc(region(c))}</a>` : esc(region(c))}${c.op && OP[c.op] ? ` · ${OP[c.op]}` : tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p>
-      <h1 class="d-title">${titleHtml(c)}</h1>${opBadge(c)}
-      ${c.line ? `<p class="d-line">${esc(serviceText(c.line, 400))}${c.gc_url ? srcTip({ g: "c", src: { label: "고캠핑 소개", url: c.gc_url, quote: c.line } }, "한 줄 소개") : ""}</p>` : ""}
-      <div class="d-bdgs">${wxBadge(c)}${stayBadges(c)}${badges(c, 14, 10)}</div>
-      </div>
-      <aside class="d-side">${reserveCard(c, d)}</aside>
-    </header>
-    ${galleryHtml(c)}
-    <nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${[["sec-price", "요금"], ...(c.layout_images?.length || d?.layout?.images?.length ? [["sec-layout", "배치도"]] : []), ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-reviews", "후기"], ["sec-nearby", "주변"], ["sec-events", "행사"], ["sec-info", "업체"]].map(([id, l], i) => `<a href="#${id}" data-jump="${id}"${i === 0 ? " aria-current" : ""}>${l}</a>`).join("")}</div></nav>
-    <div class="d-body">
-      <div class="d-main">
-        ${winterClosedConflict(c) ? `<div class="theme-closed-alert warning" style="margin-bottom:14px;border-left:4px solid #f59e0b;background:#fffbeb;padding:12px 14px;border-radius:10px;display:flex;gap:10px;font-size:13px;line-height:1.5;">${ic("info")}<div><strong>동계 운영 사전 확인 권장</strong><p style="margin:2px 0 0;color:var(--ink-2);">공식 등록상 동계 미운영(봄~가을)으로 표기되어 있으나, 최근 운영자 예약 및 이용 사실이 확인되었습니다. 늦가을·동계 방문 시에는 업장(${esc(c.tel || "전화")})으로 실제 운영 여부를 확인하세요.</p></div></div>` : ""}
-        ${siteTypesHtml(c, d)}
-        ${siteProductsHtml(c, d)}
-        ${specSection(c, d)}
-        ${priceHtml(c, d)}
-        ${bookingHtml(c, d)}
-        ${usageBlock}
-        ${amenityHtml(c, d)}
-        ${houseRulesHtml(c, d)}
-        <section class="d-sec" data-cond hidden></section>
-        ${operatorHtml(d, c)}
-        ${programsHtml(d)}
-        ${layoutHtml(d, c)}
-        <section class="d-sec site-picks-sec" id="sec-site-picks" data-site-picks hidden></section>
-        ${operatorMediaHtml(d)}
-        ${mediaHubHtml(d, c)}
-        ${reviewHtml(d, c)}
-        ${reviewLinksHtml(d, c)}
-        ${nearbyHubHtml(c, d)}
+  return `<article class="detail" data-id="${esc(c.id)}"><div class="d-bar"><a class="icon-btn" href="${APP_BASE}" data-back aria-label="뒤로">${ic("left")}</a><span class="d-bar-acts">${heartBtn(c, { label: true })}<button class="d-share" type="button" data-share-place="${esc(c.id)}" aria-label="링크 공유">${ic("share")}<span>공유</span></button></span></div><header class="d-head"><div class="d-head-main"><p class="d-eyebrow">${c.sido && c.sigungu ? `<a class="d-region-link" href="${regionHref(sidoShort(c.sido), c.sigungu)}">${esc(region(c))}</a>` : esc(region(c))}${c.op && OP[c.op] ? ` · ${OP[c.op]}` : tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p><h1 class="d-title">${titleHtml(c)}</h1>${opBadge(c)}${c.line ? `<p class="d-line">${esc(serviceText(c.line, 400))}${c.gc_url ? srcTip({ g: "c", src: { label: "고캠핑 소개", url: c.gc_url, quote: c.line } }, "한 줄 소개") : ""}</p>` : ""}<div class="d-bdgs">${wxBadge(c)}${stayBadges(c)}${badges(c, 14, 10)}</div></div><aside class="d-side">${reserveCard(c, d)}</aside></header>${galleryHtml(c)}<nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${[["sec-price", "요금"], ...(c.layout_images?.length || d?.layout?.images?.length ? [["sec-layout", "배치도"]] : []), ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-reviews", "후기"], ["sec-nearby", "주변"], ["sec-events", "행사"], ["sec-info", "업체"]].map(([id, l], i) => `<a href="#${id}" data-jump="${id}"${i === 0 ? " aria-current" : ""}>${l}</a>`).join("")}</div></nav><div class="d-body"><div class="d-main">${winterClosedConflict(c) ? `<div class="theme-closed-alert warning" style="margin-bottom:14px;border-left:4px solid #f59e0b;background:#fffbeb;padding:12px 14px;border-radius:10px;display:flex;gap:10px;font-size:13px;line-height:1.5;">${ic("info")}<div><strong>동계 운영 사전 확인 권장</strong><p style="margin:2px 0 0;color:var(--ink-2);">공식 등록상 동계 미운영(봄~가을)으로 표기되어 있으나, 최근 운영자 예약 및 이용 사실이 확인되었습니다. 늦가을·동계 방문 시에는 업장(${esc(c.tel || "전화")})으로 실제 운영 여부를 확인하세요.</p></div></div>` : ""}${siteTypesHtml(c, d)}${siteProductsHtml(c, d)}${specSection(c, d)}${priceHtml(c, d)}${bookingHtml(c, d)}${usageBlock}${amenityHtml(c, d)}${houseRulesHtml(c, d)}<section class="d-sec" data-cond hidden></section>${operatorHtml(d, c)}${programsHtml(d)}${layoutHtml(d, c)}<section class="d-sec site-picks-sec" id="sec-site-picks" data-site-picks hidden></section>${operatorMediaHtml(d)}${mediaHubHtml(d, c)}${reviewHtml(d, c)}${reviewLinksHtml(d, c)}${nearbyHubHtml(c, d)}
         ${similarHtml(c)}
         <section class="d-sec ev-sec" id="sec-events" data-events><div class="sec-head">${iconTitle("fest", "행사")}</div><div data-events-body></div></section>
         ${infoHtml(c)}
@@ -5988,28 +5927,22 @@ function factValueHtml(x, fallback = "확인필요") {
   return `${esc(value)}${noteParts.length ? `<span class="fact-note">${esc(noteParts.join(" · "))}</span>` : ""}`;
 }
 function openProductModal(prod) {
-if (!prod) return;
-document.getElementById("sp-modal")?.remove();
-const photos = prod.photos || (prod.img ? [prod.img] : []);
-const gallery = photos.map((u) => `<img src="${esc(u)}" alt="${esc(prod.name)}" loading="lazy">`).join("");
-document.body.insertAdjacentHTML("beforeend", `<div class="sp-modal-backdrop" id="sp-modal"><div class="sp-modal-content"><button type="button" class="sp-modal-close" data-sp-close aria-label="닫기">✕</button><h3 class="sp-modal-title">${esc(prod.name)}</h3><div class="sp-badges">${prod.floor ? `<span class="sp-badge">${esc(prod.floor)}</span>` : ""}${prod.size ? `<span class="sp-badge">${esc(prod.size)}</span>` : ""}${prod.power ? `<span class="sp-badge accent">${esc(prod.power)}</span>` : ""}</div>
-${prod.price ? `<p class="sp-price" style="font-size:16px;margin:8px 0 10px;">1박 ${fmt(prod.price)}원~</p>` : ""}
-${prod.desc ? `<p class="sp-desc" style="white-space:normal;margin-bottom:12px;">${esc(prod.desc)}</p>` : ""}
-${photos.length ? `<div class="sp-modal-gallery">${gallery}</div>` : ""}
-</div></div>`);
+  if (!prod) return;
+  document.getElementById("sp-modal")?.remove();
+  const photos = prod.photos || (prod.img ? [prod.img] : []);
+  const gallery = photos.map((u) => `<img src="${esc(u)}" alt="${esc(prod.name)}" loading="lazy">`).join("");
+  document.body.insertAdjacentHTML("beforeend", `<div class="sp-modal-backdrop" id="sp-modal"><div class="sp-modal-content"><button type="button" class="sp-modal-close" data-sp-close aria-label="닫기">✕</button><h3 class="sp-modal-title">${esc(prod.name)}</h3><div class="sp-badges">${prod.floor ? `<span class="sp-badge">${esc(prod.floor)}</span>` : ""}${prod.size ? `<span class="sp-badge">${esc(prod.size)}</span>` : ""}${prod.power ? `<span class="sp-badge accent">${esc(prod.power)}</span>` : ""}</div>${prod.price ? `<p class="sp-price" style="font-size:16px;margin:8px 0 10px;">1박 ${fmt(prod.price)}원~</p>` : ""}${prod.desc ? `<p class="sp-desc" style="white-space:normal;margin-bottom:12px;">${esc(prod.desc)}</p>` : ""}${photos.length ? `<div class="sp-modal-gallery">${gallery}</div>` : ""}</div></div>`);
 }
 function siteProductsHtml(c, d) {
-const prods = d?.site_products || [];
-if (!prods.length) return "";
-const cards = prods.map((p, idx) => {
-const thumb = p.photos?.[0] || p.img || "";
-const cnt = p.photos?.length || 0;
-const priceStr = p.price ? `${fmt(p.price)}원~` : (p.fee_text || "");
-return `<div class="sp-card" data-sp-idx="${idx}" role="button" tabindex="0" aria-label="${esc(p.name)} 사진"><div class="sp-thumb-wrap">${thumb ? `<img class="sp-thumb" src="${esc(thumb)}" alt="${esc(p.name)}" loading="lazy">` : `<div class="sp-thumb" style="display:flex;align-items:center;justify-content:center;color:#98a2b3;">${ic("tent")}</div>`}${cnt > 1 ? `<span class="sp-photo-cnt">${cnt}장</span>` : ""}</div><div class="sp-body"><h4 class="sp-title">${esc(p.name)}</h4><div class="sp-badges">${p.floor ? `<span class="sp-badge">${esc(p.floor)}</span>` : ""}${p.size ? `<span class="sp-badge">${esc(p.size)}</span>` : ""}${p.power ? `<span class="sp-badge accent">${esc(p.power)}</span>` : ""}</div>
-${priceStr ? `<p class="sp-price">${esc(priceStr)}</p>` : ""}${p.desc ? `<p class="sp-desc">${esc(p.desc)}</p>` : ""}
-</div></div>`;
-}).join("");
-return `<section class="d-sec sp-sec"><div class="sec-head">${iconTitle("tent", "구역·객실별 실물 사진 & 세부 규격")}<span class="sec-side" style="font-size:12px;color:var(--ink-3);font-weight:700;">${prods.length}개 구역</span></div><div class="sp-rail rail">${cards}</div></section>`;
+  const prods = d?.site_products || [];
+  if (!prods.length) return "";
+  const cards = prods.map((p, idx) => {
+    const thumb = p.photos?.[0] || p.img || "";
+    const cnt = p.photos?.length || 0;
+    const priceStr = p.price ? `${fmt(p.price)}원~` : (p.fee_text || "");
+    return `<div class="sp-card" data-sp-idx="${idx}" role="button" tabindex="0" aria-label="${esc(p.name)} 사진"><div class="sp-thumb-wrap">${thumb ? `<img class="sp-thumb" src="${esc(thumb)}" alt="${esc(p.name)}" loading="lazy">` : `<div class="sp-thumb" style="display:flex;align-items:center;justify-content:center;color:#98a2b3;">${ic("tent")}</div>`}${cnt > 1 ? `<span class="sp-photo-cnt">${cnt}장</span>` : ""}</div><div class="sp-body"><h4 class="sp-title">${esc(p.name)}</h4><div class="sp-badges">${p.floor ? `<span class="sp-badge">${esc(p.floor)}</span>` : ""}${p.size ? `<span class="sp-badge">${esc(p.size)}</span>` : ""}${p.power ? `<span class="sp-badge accent">${esc(p.power)}</span>` : ""}</div>${priceStr ? `<p class="sp-price">${esc(priceStr)}</p>` : ""}${p.desc ? `<p class="sp-desc">${esc(p.desc)}</p>` : ""}</div></div>`;
+  }).join("");
+  return `<section class="d-sec sp-sec"><div class="sec-head">${iconTitle("tent", "구역·객실별 실물 사진 & 세부 규격")}<span class="sec-side" style="font-size:12px;color:var(--ink-3);font-weight:700;">${prods.length}개 구역</span></div><div class="sp-rail rail">${cards}</div></section>`;
 }
 function siteTypesHtml(c, d) {
   const list = d?.site_types ?? (c.st ?? []).map(([code, count, g, sub]) => ({ code, count, sub, grade: g === "o" ? "OPERATOR" : "CONFIRMED" }));
@@ -6359,44 +6292,34 @@ function feeRowLabel(label) {
   for (const p of parts) if (!out.some((q) => q.replace(/\s+/g, "").includes(p.replace(/\s+/g, "")))) out.push(p);
   return out.join(" · ");
 }
-function feeRowThumb(r, c, d) {
+const isDocOrLayout = (u, c, d) => !u || /배치도|도면|layout|cert|등록증|신고서|4157qtog/i.test(u) || c?.layout_images?.some((x) => x && u.toLowerCase().includes(x.toLowerCase())) || d?.layout?.some?.((x) => x && u.toLowerCase().includes(x.toLowerCase()));
+function feeRowProduct(r, c, d) {
   const lbl = `${r.label ?? ""} ${r.kind ?? ""}`;
-  if (d?.site_products?.length) {
-    const p = d.site_products.find((x) => x.name && lbl.includes(x.name));
-    if (p?.photos?.[0] || p?.img) return photoUrl(p.photos?.[0] || p.img);
+  const prod = d?.site_products?.find((x) => x.name && (lbl.includes(x.name) || x.name.includes(r.label))) || null;
+  const photos = prod?.photos ? [...prod.photos] : [];
+  let thumb = photos[0] || prod?.img || null;
+  if (!thumb) {
+    thumb = /글램핑|glamp/i.test(lbl) ? themeImg("GLAMPING") : /카라반|caravan/i.test(lbl) ? themeImg("CARAVAN") : /트레일러|캠핑카|차박|모터홈/i.test(lbl) ? `${ASSETS_BASE}images/themes/trailer.webp` : /펜션|풀빌라|독채|객실|숙박동|민박|스테이/i.test(lbl) ? `${ASSETS_BASE}images/themes/comfort.webp` : /방갈로|방가로|원두막|오두막|캐빈/i.test(lbl) ? `${ASSETS_BASE}images/hero/hero-treehouse.webp` : ((ph) => { const cp = ph.find((p) => !isDocOrLayout(photoUrl(p), c, d)); return cp ? photoUrl(cp) : (ph.length ? photoUrl(ph[0]) : themeImg("AUTO")); })(photosOf(c));
   }
-  if (/글램핑|glamp/i.test(lbl)) return themeImg("GLAMPING");
-  if (/카라반|caravan/i.test(lbl)) return themeImg("CARAVAN");
-  if (/트레일러|캠핑카|차박|모터홈/i.test(lbl)) return `${ASSETS_BASE}images/themes/trailer.webp`;
-  if (/펜션|풀빌라|독채|객실|숙박동|민박|스테이/i.test(lbl)) return `${ASSETS_BASE}images/themes/comfort.webp`;
-  if (/방갈로|방가로|원두막|오두막|캐빈/i.test(lbl)) return `${ASSETS_BASE}images/hero/hero-treehouse.webp`;
-  const ph = photosOf(c);
-  return ph.length ? photoUrl(ph[0]) : themeImg("AUTO");
+  return { thumb, photos, prod };
 }
 
 function priceHtml(c, d) {
   const { stayRows, extraRows, rows, bs } = priceRows(c, d);
   if (!rows.length) return "";
-
-  // 요금표 꼬리표(업장 등록·추가 요금·대표 요금)는 두지 않는다(소유자 2026-10-22). 후기 언급만 ‘확인필요’를 남긴다(확정값처럼 보이지 않게).
   const renderLi = (r, i) => {
-    const isMention = r.kind === "후기 언급";
-    const valText = String(r.text || "예약처 확인").replace(/(방문객)\s+\1/g, "$1");
-    const isNo = !r.won && /불가|금지/.test(valText);
-    const wonDisplay = r.won ? `${fmt(r.won)}원` : esc(valText);
-    const thumb = !r.isExtra ? feeRowThumb(r, c, d) : null;
-    const thumbHtml = thumb ? `<div class="pl-thumb-wrap"><img class="pl-thumb" src="${esc(thumb)}" alt="" loading="lazy" decoding="async"></div>` : "";
-    return `<li class="pl-${isMention ? "m" : "c"}${r.isExtra ? " pl-extra" : ""}${thumb ? " has-thumb" : ""}">${thumbHtml}<div class="pl-info"><b${isNo ? ' class="is-no"' : ""}>${wonDisplay}</b><span class="pl-lbl">${esc(feeRowLabel(r.label))}</span></div>${isMention ? '<i class="pl-kind">확인필요</i>' : ""}${r.extra && isMention ? r.extra : ""}${r.fact ? srcTip(r.fact, `요금 정보 ${i + 1}`) : ""}</li>`;
+    const isM = r.kind === "후기 언급", val = String(r.text || "예약처 확인").replace(/(방문객)\s+\1/g, "$1"), isNo = !r.won && /불가|금지/.test(val);
+    const { thumb, photos, prod } = !r.isExtra ? feeRowProduct(r, c, d) : { thumb: null, photos: [], prod: null };
+    const pCnt = photos.length, bHtml = pCnt > 1 ? `<span class="pl-photo-badge">${ic("photo")}${pCnt}장</span>` : "";
+    const tHtml = thumb ? `<div class="pl-thumb-wrap"><img class="pl-thumb" src="${esc(thumb)}" alt="" loading="lazy" decoding="async">${bHtml}</div>` : "";
+    const pIdx = prod && d?.site_products ? d.site_products.indexOf(prod) : -1;
+    return `<li class="pl-${isM ? "m" : "c"}${r.isExtra ? " pl-extra" : ""}${thumb ? " has-thumb" : ""}"${pIdx >= 0 ? ` data-sp-idx="${pIdx}"` : ""}>${tHtml}<div class="pl-info"><b${isNo ? ' class="is-no"' : ""}>${r.won ? `${fmt(r.won)}원` : esc(val)}</b><span class="pl-lbl">${esc(feeRowLabel(r.label))}</span></div>${isM ? '<i class="pl-kind">확인필요</i>' : ""}${r.extra && isM ? r.extra : ""}${r.fact ? srcTip(r.fact, `요금 정보 ${i + 1}`) : ""}</li>`;
   };
-
   const stayItems = stayRows.map((r, i) => renderLi({ ...r, isExtra: false }, i)).join("");
   const extraDivider = extraRows.length && stayRows.length ? `<li class="pl-divider"><span>추가 옵션 요금 (지인 방문 · 추가 차량 등)</span></li>` : "";
   const extraItems = extraRows.map((r, i) => renderLi({ ...r, isExtra: true }, stayRows.length + i)).join("");
-
-  const allItemsHtml = `${stayItems}${extraDivider}${extraItems}`;
   const foot = bs?.url ? `<p class="st-foot">요금은 날짜마다 달라요. <a href="${esc(bs.url)}" target="_blank" rel="noopener">날짜별 예약 화면 열기</a></p>` : "";
-
-  return `<section class="d-sec price-sec" id="sec-price"><div class="sec-head">${iconTitle("won", "요금")}</div>${allItemsHtml ? `<ul class="plist">${allItemsHtml}</ul>` : ""}${foot}</section>`;
+  return `<section class="d-sec price-sec" id="sec-price"><div class="sec-head">${iconTitle("won", "요금")}</div><ul class="plist">${stayItems}${extraDivider}${extraItems}</ul>${foot}</section>`;
 }
 // 이용 규칙 · 공지(2026-10-19 소유자: 금지사항·이용수칙·이용제한은 업장 이용에 매우 중요 — 수집해서 노출, 공지는 눌러 바로 원문으로).
 // build-house-rules.mjs → d.house_rules { tags, rules[{cat,text,url,at}], ops, notices[{title,date,url}] }. 업장 공개 문장만(후기 제외).
@@ -6433,11 +6356,7 @@ function houseRulesHtml(c, d) {
 }
 // 운영자 홈페이지에서 긁힌 글 중 캠핑과 상관없는 것(사이트 약관·결제 화면 문구·아이콘 이름·다른 사업 안내)은 화면에서 뺀다. 원본 데이터는 그대로 둔다(영우 님 2026-10-21).
 const OPERATOR_NOISE = [
-  /(?<!표준)약관|회원(?:은|이|가|의)|전기통신|기간통신|불가항력|국가비상사태|천재지변|전자우편|개인정보|서비스\s*(?:이용\s*시간|중단|중지)|사전\s*공지나\s*예고|사후\s*공지|운영정책|제\d+조|전항|본\s*사이트/,
-  /취소일\s*[:：]|결제일\s*[:：]|예약일\s*[:：]|^\s*\d{4}-\d{2}-\d{2}(?:\s+\d{1,2}:\d{2})?\s*$|취소된\s*예약|^\s*결제완료|할인\s*대상자가|할인이\s*적용되었|다시\s*결제|\((?:취소|결제완료|예약)\)\s*$/,
-  /(?:^|\s)[a-z]+_[a-z_]+(?:\s|$)/,
-  /탑승|노선|승차권|차내\s|티켓\s*분실|맹인안내견|순환형/,
-  /빠르게\s*확인해\s*주세요|함께\s*확인해\s*주세요|시설\s*별\s*이용\s*시간은\s*상이/,
+  /(?<!표준)약관|회원(?:은|이|가|의)|전기통신|기간통신|불가항력|국가비상사태|천재지변|전자우편|개인정보|서비스\s*(?:이용\s*시간|중단|중지)|사전\s*공지나\s*예고|사후\s*공지|운영정책|제\d+조|전항|본\s*사이트|취소일\s*[:：]|결제일\s*[:：]|예약일\s*[:：]|^\s*\d{4}-\d{2}-\d{2}(?:\s+\d{1,2}:\d{2})?\s*$|취소된\s*예약|^\s*결제완료|할인\s*대상자가|할인이\s*적용되었|다시\s*결제|\((?:취소|결제완료|예약)\)\s*$|(?:^|\s)[a-z]+_[a-z_]+(?:\s|$)|탑승|노선|승차권|차내\s|티켓\s*분실|맹인안내견|순환형|빠르게\s*확인해\s*주세요|함께\s*확인해\s*주세요|시설\s*별\s*이용\s*시간은\s*상이/,
 ];
 const OPERATOR_KEEP = /환불|입실|퇴실|퇴소|매너.?타임|반려|화로|장작|텐트|사이트당|전기\s*(?:사용|용량)|\d+\s*W\b|주차장(?:에|으로|은)|예약할인/;
 const OPERATOR_LEGAL = /법(?:\s|$|령|률|에|의)|법\s*제|제\d+조|약관|회원(?:은|이|가|의)|개인정보|기간통신|^\s*결제완료|\((?:취소|결제완료)\)\s*$|_[a-z]/;
@@ -9113,9 +9032,9 @@ async function compareView() {
   // 행 제목은 짧게(소유자 2026-10-22: 현장·장작·규격·동물·면수·정보·매너·주변·편의·후기) — 모바일에서 제목 칸을 좁혀 업체 칸을 넓힌다.
   const rowsDef = [
     ["현장", [["주차", (c) => facts(c).park, "car"], ["전기", (c) => facts(c).power, "bolt"], ["장작", (c) => facts(c).fire, "flame"], ["규격", (c) => facts(c).size, "size"], ["바닥", (c) => facts(c).ground, "layers"], ["위생", (c) => facts(c).sanitary, "bath"], ["동물", (c) => normNo(facts(c).pet), "paw"]]],
-    ["사이트", [["타입", (c) => (c.st?.length ? { v: typeLine2(c), g: "c", src: { label: "한국관광공사 고캠핑 등록 현황", url: c.gc_url } } : null), "tent"], ["면수", (c, d) => profFact(PF(d, "TYPE")), "layers"]]],
+    ["사이트", [["타입", (c) => (c.st?.length ? { v: typeLine2(c), g: "c", src: { label: "고캠핑 등록 현황", url: c.gc_url } } : null), "tent"], ["면수", (c, d) => profFact(PF(d, "TYPE")), "layers"]]],
     ["정보", [["입실", (c, d) => usage(c, d)[0][1], "clock-in"], ["퇴실", (c, d) => usage(c, d)[1][1], "clock-out"], ["매너", (c, d) => usage(c, d)[2][1], "bed"], ["요금", (c) => { const fm = feeMain(c); return fm?.text ? { v: fm.text, g: GR(c.fee?.grade) || "c", src: { label: c.fee?.basis || "요금 근거", url: c.fee?.url, at: c.fee?.checked_at, quote: c.fee?.quote ?? c.fee?.text } } : null; }, "won"], ["환불", (c, d) => usage(c, d)[3][1], "calc"]]],
-    ["주변", [["시설", (c) => ((c.amenities ?? []).length ? { v: c.amenities.slice(0, 6).join(" · "), g: "c", src: { label: "고캠핑 등록 편의시설", url: c.gc_url } } : null), "drop"], ["대여", (c) => ((c.rental ?? []).length ? { v: c.rental.join(" · "), g: "c", src: { label: "고캠핑 등록 대여품목", url: c.gc_url } } : null), "cart"], ["편의", (c) => (c.nl?.c ? { v: km(c.nl.c), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+편의점` : null } } : null), "store"], ["마트", (c) => (c.nl?.m ? { v: km(c.nl.m), g: "c", src: { label: "카카오맵 주변 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+마트` : null } } : null), "cart"], ["후기", (c) => (c.rv?.p?.length ? { v: c.rv.p.slice(0, 2).map(([t]) => normTopic(t)).join(" · "), g: "m", src: { label: "방문자 후기 분석", url: c.gc_url } } : null), "thumb-up"]]],
+    ["주변", [["시설", (c) => ((c.amenities ?? []).length ? { v: c.amenities.slice(0, 6).join(" · "), g: "c", src: { label: "고캠핑 편의시설", url: c.gc_url } } : null), "drop"], ["대여", (c) => ((c.rental ?? []).length ? { v: c.rental.join(" · "), g: "c", src: { label: "고캠핑 대여품목", url: c.gc_url } } : null), "cart"], ["편의", (c) => (c.nl?.c ? { v: km(c.nl.c), g: "c", src: { label: "카카오맵 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+편의점` : null } } : null), "store"], ["마트", (c) => (c.nl?.m ? { v: km(c.nl.m), g: "c", src: { label: "카카오맵 검색", url: c.lat ? `https://map.kakao.com/link/search/${encodeURIComponent(nameOf(c).name)}+마트` : null } } : null), "cart"], ["후기", (c) => (c.rv?.p?.length ? { v: c.rv.p.slice(0, 2).map(([t]) => normTopic(t)).join(" · "), g: "m", src: { label: "방문자 후기 분석", url: c.gc_url } } : null), "thumb-up"]]],
   ];
 
   const head = camps.map((c, i) => `<th scope="col" data-col-idx="${i}"><a class="ch" href="${APP_BASE}place/${encodeURIComponent(c.id)}">${campThumb(c, { sizes: "64px" })}<span><b>${esc(nameOf(c).name)}</b><i>${esc(region(c))}</i></span></a><span class="ch-acts"><button class="icon-btn ch-x" type="button" data-pick="${esc(c.id)}" aria-label="비교에서 빼기" title="비교에서 빼기(찜은 그대로)">${ic("close")}</button></span></th>`).join("");
