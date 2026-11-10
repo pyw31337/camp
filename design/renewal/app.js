@@ -419,8 +419,11 @@ function campSearchText(c) {
   ];
   return (c._st = parts.join(" "));
 }
-// 동계 휴장 여부 (소유자 2026-11-09): c.win === 0 또는 불가 목록에 NO_WINTER가 있는 경우 (단, 난방기구 현장 대여 등 동계 시설이 확인된 곳은 제외)
-const isWinterClosedCamp = (c) => Boolean(!heaterRentalInfo(c) && (c.win === 0 || noKeys(c).includes("NO_WINTER")));
+// 동계 휴장 여부 (소유자 2026-11-09): c.win === 0 또는 불가 목록에 NO_WINTER가 있는 경우 (단, 난방기구 현장 대여 및 최근 가을·겨울 영업 흔적이 확인된 곳은 제외)
+function winterClosedConflict(c) {
+  return (c.win === 0 || noKeys(c).includes("NO_WINTER")) && Boolean(heaterRentalInfo(c) || (c.pf?.p?.a && String(c.pf.p.a) >= "2026-09" && c.pf.p.g === "OPERATOR") || (c.days?.includes("평일+주말") && (c.booking?.channels?.length || c.homepage)));
+}
+const isWinterClosedCamp = (c) => Boolean(!heaterRentalInfo(c) && !winterClosedConflict(c) && (c.win === 0 || noKeys(c).includes("NO_WINTER")));
 
 function heaterRentalInfo(c) {
   if (!c) return null;
@@ -1597,29 +1600,19 @@ function cardReviewPills(rv, c) {
   if (!rv) return "";
   const pros = (rv.p ?? []).slice(0, 2).map(([t, n]) => `<span class="c-rv-pill pro">${ic("thumb-up")}${esc(t)}<i>${n}</i></span>`);
   const cons = (rv.c ?? []).slice(0, 1).map(([t, n]) => `<span class="c-rv-pill con">${ic("alert")}${esc(t)}<i>${n}</i></span>`);
-  if (!pros.length && !cons.length) {
-    if (c) {
-      const fb = [];
-      const tags = new Set(c.pf?.t ?? []);
-      if (tags.has("REVIEW_QUIET")) fb.push("조용·한적");
-      if (tags.has("FAMILY")) fb.push("가족 추천");
-      if (tags.has("FOREST") || tags.has("MOUNTAIN")) fb.push("숲속·자연 힐링");
-      if (tags.has("HEALING")) fb.push("힐링·자연 감성");
-      if (tags.has("WATER_PLAY")) fb.push("계곡·물놀이 좋음");
-      if (tags.has("PET_OK")) fb.push("반려견 동반 편함");
-      if (c.of?.pk?.v === "SITE_SIDE") fb.push("주차 편함·옆 주차");
-      if (c.of?.fire?.v === "FIREWOOD_OK") fb.push("바비큐·불멍 힐링");
-      if (c.env?.includes("숲") || c.env?.includes("산")) fb.push("피톤치드 숲속");
-      if (c.env?.includes("계곡") || c.env?.includes("강")) fb.push("시원한 계곡·물");
-      const chosen = [...new Set(fb)].slice(0, 2);
-      if (chosen.length) {
-        return chosen.map((t) => `<span class="c-rv-pill pro">${ic("thumb-up")}${esc(t)}${rv.n > 0 ? `<i>${rv.n}</i>` : ""}</span>`).join("");
-      }
-    }
-    if (rv.n > 0) return `<span class="c-rv-pill pro">${ic("thumb-up")}방문자 추천<i>${fmt(rv.n)}</i></span>`;
-    return "";
+  if (pros.length || cons.length) return [...pros, ...cons].join("");
+  if (c) {
+    const tags = new Set(c.pf?.t ?? []);
+    const M = [["REVIEW_QUIET","조용·한적"],["FAMILY","가족 추천"],["FOREST","숲속·자연 힐링"],["MOUNTAIN","숲속·자연 힐링"],["HEALING","힐링·자연 감성"],["WATER_PLAY","계곡·물놀이 좋음"],["PET_OK","반려견 동반 편함"]];
+    const fb = M.filter(([k]) => tags.has(k)).map(([, l]) => l);
+    if (c.of?.pk?.v === "SITE_SIDE") fb.push("주차 편함·옆 주차");
+    if (c.of?.fire?.v === "FIREWOOD_OK") fb.push("바비큐·불멍 힐링");
+    if (/[숲산]/.test(c.env ?? "")) fb.push("피톤치드 숲속");
+    if (/[계곡강]/.test(c.env ?? "")) fb.push("시원한 계곡·물");
+    const chosen = [...new Set(fb)].slice(0, 2);
+    if (chosen.length) return chosen.map((t) => `<span class="c-rv-pill pro">${ic("thumb-up")}${esc(t)}${rv.n > 0 ? `<i>${rv.n}</i>` : ""}</span>`).join("");
   }
-  return [...pros, ...cons].join("");
+  return rv.n > 0 ? `<span class="c-rv-pill pro">${ic("thumb-up")}방문자 추천<i>${fmt(rv.n)}</i></span>` : "";
 }
 // 사진·예약 상품이 없는 도시공원은 캠핑장 포스터를 흉내 내지 않는다.
 // 공원 테마 안에서만 공공 원장으로 확인한 관리·시설·화장실 정보를 짧게 읽힌다.
@@ -1653,41 +1646,10 @@ function card(c, i = 0, opts) {
   const isClosed = isWp || isWinterClosed;
   const savedMemo = Boolean(opts && !Array.isArray(opts) && opts.savedMemo);
   const { tag } = nameOf(c), o = openingOf(c);
-  return `<article class="card${isClosed ? " is-closed" : ""}${savedMemo ? " saved-memo-card" : ""}" data-id="${esc(c.id)}">
-    <a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
-    <div class="card-media">${carousel(c, { eager: i < 4 })}
-      ${isClosed ? `<span class="sig closed">${ic("clock")}운영종료</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : ""}
-      <span class="bdgs">${cardPhotoBadges(c)}</span>
-    </div>
-    <div class="card-body">
-      <div class="card-group card-group-head">
-        <div class="name-row"><h3 class="card-name">${esc(nameOf(c).name)}</h3>${heartBtn(c)}</div>
-        <div class="card-meta-row">
-          <p class="card-meta">${ic("pin")}<span class="card-meta-txt">${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${driveMin(c) != null ? ` · 내비 ${driveText(driveMin(c))}` : ""}</span></p>
-          <div class="card-meta-actions">
-            ${c.lat && c.lng ? `
-              <button type="button" class="c-act-btn" data-rv="${c.lat},${c.lng}" data-rv-name="${esc(nameOf(c).name)}" title="카카오 로드뷰 보기" aria-label="로드뷰">${ic("roadview")}</button>
-              <a class="c-act-btn" href="${esc(mapLink(nameOf(c).name, c.lat, c.lng))}" target="_blank" rel="noopener" title="카카오 지도에서 보기" aria-label="지도">${ic("map")}</a>
-            ` : ""}
-            ${vrUrl(c) ? `<a class="c-act-btn c-act-vr" href="${esc(vrUrl(c))}" target="_blank" rel="noopener" title="360° VR 현장 둘러보기" aria-label="360° VR">${ic("vr")}</a>` : ""}
-          </div>
-        </div>
-      </div>
-      ${savedMemo ? savedDetailsHtml(c) : `
-        <div class="card-group card-group-types">
-          ${typeRow(c).html}
-        </div>
-        ${uniqueDetailsHtml(c)}
-        ${uniqueFeatureHtml(c)}
-        ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `
-          <div class="card-group card-group-reviews">
-            <div class="card-reviews">${cardReviewPills(c.rv, c)}</div>
-          </div>
-        ` : ""}
-      `}
-      ${commentsCardHtml(c)}
-    </div>
-  </article>`;
+  const actMaps = c.lat && c.lng ? `<button type="button" class="c-act-btn" data-rv="${c.lat},${c.lng}" data-rv-name="${esc(nameOf(c).name)}" title="카카오 로드뷰 보기" aria-label="로드뷰">${ic("roadview")}</button><a class="c-act-btn" href="${esc(mapLink(nameOf(c).name, c.lat, c.lng))}" target="_blank" rel="noopener" title="카카오 지도에서 보기" aria-label="지도">${ic("map")}</a>` : "";
+  const actVr = vrUrl(c) ? `<a class="c-act-btn c-act-vr" href="${esc(vrUrl(c))}" target="_blank" rel="noopener" title="360° VR 현장 둘러보기" aria-label="360° VR">${ic("vr")}</a>` : "";
+  const bodyDetails = savedMemo ? savedDetailsHtml(c) : `<div class="card-group card-group-types">${typeRow(c).html}</div>${uniqueDetailsHtml(c)}${uniqueFeatureHtml(c)}${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-group card-group-reviews"><div class="card-reviews">${cardReviewPills(c.rv, c)}</div></div>` : ""}`;
+  return `<article class="card${isClosed ? " is-closed" : ""}${savedMemo ? " saved-memo-card" : ""}" data-id="${esc(c.id)}"><a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a><div class="card-media">${carousel(c, { eager: i < 4 })}${isClosed ? `<span class="sig closed">${ic("clock")}운영종료</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : ""}<span class="bdgs">${cardPhotoBadges(c)}</span></div><div class="card-body"><div class="card-group card-group-head"><div class="name-row"><h3 class="card-name">${esc(nameOf(c).name)}</h3>${heartBtn(c)}</div><div class="card-meta-row"><p class="card-meta">${ic("pin")}<span class="card-meta-txt">${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${driveMin(c) != null ? ` · 내비 ${driveText(driveMin(c))}` : ""}</span></p><div class="card-meta-actions">${actMaps}${actVr}</div></div></div>${bodyDetails}${commentsCardHtml(c)}</div></article>`;
 }
 
 // 홈의 테마 레일과 `/theme/:id`는 같은 카드 모듈을 사용한다. 예전에는
@@ -2553,15 +2515,7 @@ class HeroCanvasController {
     this.mouse.y = y;
 
     if (this.currentThemeId === "night-sky") {
-      this.shootingStars.push({
-        x: Math.max(50, x + 120),
-        y: Math.max(20, y - 80),
-        len: 150 + Math.random() * 70,
-        speed: 7 + Math.random() * 3.5,
-        angle: Math.PI / 4.5,
-        alpha: 1,
-        active: true
-      });
+      this.shootingStars.push({ x: Math.max(50, x + 120), y: Math.max(20, y - 80), len: 150 + Math.random() * 70, speed: 7 + Math.random() * 3.5, angle: Math.PI / 4.5, alpha: 1, active: true });
     } else if (this.currentThemeId === "autumn-maple") {
       for (const p of this.particles) {
         const dx = p.x - x;
@@ -2573,19 +2527,7 @@ class HeroCanvasController {
         }
       }
     } else if (this.currentThemeId === "warm-bonfire") {
-      for (let i = 0; i < 16; i++) {
-        this.particles.push({
-          x: x + (Math.random() - 0.5) * 40,
-          y: y + (Math.random() - 0.5) * 20,
-          vx: (Math.random() - 0.5) * 1.5,
-          vy: -Math.random() * 2.8 - 1.4,
-          size: Math.random() * 2.8 + 1.2,
-          life: 1,
-          decay: Math.random() * 0.005 + 0.003,
-          color: Math.random() < 0.4 ? "#fff9c4" : Math.random() < 0.75 ? "#ffb74d" : "#ff5722",
-          drift: Math.random() * Math.PI * 2
-        });
-      }
+      for (let i = 0; i < 16; i++) this.particles.push({ x: x + (Math.random() - 0.5) * 40, y: y + (Math.random() - 0.5) * 20, vx: (Math.random() - 0.5) * 1.5, vy: -Math.random() * 2.8 - 1.4, size: Math.random() * 2.8 + 1.2, life: 1, decay: Math.random() * 0.005 + 0.003, color: Math.random() < 0.4 ? "#fff9c4" : Math.random() < 0.75 ? "#ffb74d" : "#ff5722", drift: Math.random() * Math.PI * 2 });
     } else if (this.currentThemeId === "rainy-camp" || this.currentThemeId === "riverside") {
       for (let i = 0; i < 3; i++) {
         this.ripples.push({ x, y, r: i * 8, maxR: 70 + i * 18, alpha: 0.75 });
@@ -2636,50 +2578,21 @@ class HeroCanvasController {
       case "night-sky":
         // 48개 반딧불이 & 유성우 (고휘도 라임-골드 발광)
         for (let i = 0; i < 48; i++) {
-          this.particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.18,
-            vy: (Math.random() - 0.5) * 0.18,
-            size: Math.random() * 2.6 + 1.4,
-            pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.018 + 0.009,
-            glow: Math.random() * 16 + 10
-          });
+          this.particles.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.18, vy: (Math.random() - 0.5) * 0.18, size: Math.random() * 2.6 + 1.4, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.018 + 0.009, glow: Math.random() * 16 + 10 });
         }
         break;
 
       case "autumn-maple":
         // 42개 고채도 선명 단풍잎 & 부채꼴 은행잎 3D 텀블링
         for (let i = 0; i < 42; i++) {
-          this.particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.32,
-            vy: Math.random() * 0.46 + 0.30,
-            size: Math.random() * 12 + 13,
-            angle: Math.random() * Math.PI * 2,
-            vAngle: (Math.random() - 0.5) * 0.016,
-            flip: Math.random() * Math.PI * 2,
-            vFlip: Math.random() * 0.018 + 0.009,
-            roll: Math.random() * Math.PI * 2,
-            vRoll: Math.random() * 0.02 + 0.01,
-            isGinkgo: Math.random() < 0.38,
-            colorIdx: Math.floor(Math.random() * 4)
-          });
+          this.particles.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.32, vy: Math.random() * 0.46 + 0.30, size: Math.random() * 12 + 13, angle: Math.random() * Math.PI * 2, vAngle: (Math.random() - 0.5) * 0.016, flip: Math.random() * Math.PI * 2, vFlip: Math.random() * 0.018 + 0.009, roll: Math.random() * Math.PI * 2, vRoll: Math.random() * 0.02 + 0.01, isGinkgo: Math.random() < 0.38, colorIdx: Math.floor(Math.random() * 4) });
         }
         break;
 
       case "rainy-camp":
         // 75개 고속 은빛 빗방울 샤워
         for (let i = 0; i < 75; i++) {
-          this.particles.push({
-            x: Math.random() * (w + 140),
-            y: Math.random() * h,
-            speed: Math.random() * 9 + 16,
-            len: Math.random() * 16 + 14,
-            alpha: Math.random() * 0.4 + 0.45
-          });
+          this.particles.push({ x: Math.random() * (w + 140), y: Math.random() * h, speed: Math.random() * 9 + 16, len: Math.random() * 16 + 14, alpha: Math.random() * 0.4 + 0.45 });
         }
         break;
 
@@ -2687,49 +2600,21 @@ class HeroCanvasController {
         // 68개 포근한 함박눈 (결정체 육각 눈꽃 + 몽환 보케 함박눈)
         for (let i = 0; i < 68; i++) {
           const flakeType = Math.random() < 0.2 ? "crystal" : Math.random() < 0.55 ? "fluffy" : "dust";
-          this.particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            flakeType,
-            r: flakeType === "crystal" ? Math.random() * 4 + 7 : flakeType === "fluffy" ? Math.random() * 2.2 + 3.0 : Math.random() * 1.8 + 1.2,
-            vy: Math.random() * 0.42 + 0.24,
-            vx: (Math.random() - 0.5) * 0.16,
-            sway: Math.random() * Math.PI * 2,
-            swaySpeed: Math.random() * 0.016 + 0.008,
-            alpha: Math.random() * 0.35 + 0.60
-          });
+          this.particles.push({ x: Math.random() * w, y: Math.random() * h, flakeType, r: flakeType === "crystal" ? Math.random() * 4 + 7 : flakeType === "fluffy" ? Math.random() * 2.2 + 3.0 : Math.random() * 1.8 + 1.2, vy: Math.random() * 0.42 + 0.24, vx: (Math.random() - 0.5) * 0.16, sway: Math.random() * Math.PI * 2, swaySpeed: Math.random() * 0.016 + 0.008, alpha: Math.random() * 0.35 + 0.60 });
         }
         break;
 
       case "lush-forest":
         // 65개 틴들 햇살 광선과 영롱한 피톤치드 요정 빛가루
         for (let i = 0; i < 65; i++) {
-          this.particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            r: Math.random() * 2.4 + 1.2,
-            vy: -Math.random() * 0.20 - 0.07,
-            vx: (Math.random() - 0.5) * 0.16,
-            alpha: Math.random() * 0.42 + 0.25,
-            pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.026 + 0.014,
-            color: Math.random() < 0.5 ? "rgba(235, 255, 100," : Math.random() < 0.8 ? "rgba(255, 245, 180," : "rgba(130, 255, 190,"
-          });
+          this.particles.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 2.4 + 1.2, vy: -Math.random() * 0.20 - 0.07, vx: (Math.random() - 0.5) * 0.16, alpha: Math.random() * 0.42 + 0.25, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.026 + 0.014, color: Math.random() < 0.5 ? "rgba(235, 255, 100," : Math.random() < 0.8 ? "rgba(255, 245, 180," : "rgba(130, 255, 190," });
         }
         break;
 
       case "riverside":
         // 58개 다이아몬드 크로스 스파클 및 수평 렌즈 플레어 물빛 윤슬
         for (let i = 0; i < 58; i++) {
-          this.particles.push({
-            x: Math.random() * w,
-            y: h * 0.38 + Math.random() * (h * 0.62),
-            size: Math.random() * 3.8 + 2.0,
-            flareLen: Math.random() * 24 + 14,
-            alpha: Math.random() * 0.75 + 0.25,
-            pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.042 + 0.02
-          });
+          this.particles.push({ x: Math.random() * w, y: h * 0.38 + Math.random() * (h * 0.62), size: Math.random() * 3.8 + 2.0, flareLen: Math.random() * 24 + 14, alpha: Math.random() * 0.75 + 0.25, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.042 + 0.02 });
         }
         break;
 
@@ -2744,68 +2629,21 @@ class HeroCanvasController {
         // 75개 황금빛 해수면 윤슬 + 36개 노을 미립자 + 6마리 편대 갈매기
         for (let i = 0; i < 75; i++) {
           const depth = Math.random();
-          this.particles.push({
-            x: Math.random() * w,
-            y: h * 0.42 + depth * (h * 0.48),
-            vx: -0.15 - Math.random() * 0.26,
-            len: (Math.random() * 32 + 18) * (0.65 + depth * 0.85),
-            thick: (Math.random() * 2.0 + 1.4) * (0.7 + depth * 0.8),
-            alpha: Math.random() * 0.7 + 0.3,
-            pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.035 + 0.018,
-            depth
-          });
+          this.particles.push({ x: Math.random() * w, y: h * 0.42 + depth * (h * 0.48), vx: -0.15 - Math.random() * 0.26, len: (Math.random() * 32 + 18) * (0.65 + depth * 0.85), thick: (Math.random() * 2.0 + 1.4) * (0.7 + depth * 0.8), alpha: Math.random() * 0.7 + 0.3, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.035 + 0.018, depth });
         }
         for (let i = 0; i < 36; i++) {
-          this.duskParticles.push({
-            x: Math.random() * w,
-            y: Math.random() * (h * 0.65),
-            vx: (Math.random() - 0.5) * 0.18 + 0.05,
-            vy: -Math.random() * 0.20 - 0.07,
-            r: Math.random() * 2.6 + 1.0,
-            pulse: Math.random() * Math.PI * 2,
-            alpha: Math.random() * 0.45 + 0.25
-          });
+          this.duskParticles.push({ x: Math.random() * w, y: Math.random() * (h * 0.65), vx: (Math.random() - 0.5) * 0.18 + 0.05, vy: -Math.random() * 0.20 - 0.07, r: Math.random() * 2.6 + 1.0, pulse: Math.random() * Math.PI * 2, alpha: Math.random() * 0.45 + 0.25 });
         }
-        this.seagulls = [
-          { x: w * 0.32, y: h * 0.17, vx: 0.85, vy: -0.012, wingSpan: 34, wingPhase: 0, wingSpeed: 0.054, bobPhase: 0, depth: 1.0 },
-          { x: w * 0.48, y: h * 0.12, vx: 0.90, vy: 0.010, wingSpan: 27, wingPhase: 1.3, wingSpeed: 0.060, bobPhase: 1.2, depth: 0.88 },
-          { x: w * 0.18, y: h * 0.22, vx: 0.76, vy: 0.014, wingSpan: 23, wingPhase: 2.7, wingSpeed: 0.050, bobPhase: 2.4, depth: 0.80 },
-          { x: w * 0.65, y: h * 0.19, vx: 0.70, vy: -0.008, wingSpan: 16, wingPhase: 4.1, wingSpeed: 0.068, bobPhase: 3.6, depth: 0.60 },
-          { x: w * 0.06, y: h * 0.09, vx: 0.78, vy: 0.006, wingSpan: 20, wingPhase: 5.3, wingSpeed: 0.058, bobPhase: 4.9, depth: 0.72 },
-          { x: w * 0.55, y: h * 0.25, vx: 0.82, vy: 0.012, wingSpan: 22, wingPhase: 3.5, wingSpeed: 0.052, bobPhase: 1.8, depth: 0.75 }
-        ];
+        this.seagulls = [[0.32, 0.17, 0.85, -0.012, 34, 0, 0.054, 0, 1.0], [0.48, 0.12, 0.90, 0.010, 27, 1.3, 0.060, 1.2, 0.88], [0.18, 0.22, 0.76, 0.014, 23, 2.7, 0.050, 2.4, 0.80], [0.65, 0.19, 0.70, -0.008, 16, 4.1, 0.068, 3.6, 0.60], [0.06, 0.09, 0.78, 0.006, 20, 5.3, 0.058, 4.9, 0.72], [0.55, 0.25, 0.82, 0.012, 22, 3.5, 0.052, 1.8, 0.75]].map(([rx, ry, vx, vy, wingSpan, wingPhase, wingSpeed, bobPhase, depth]) => ({ x: w * rx, y: h * ry, vx, vy, wingSpan, wingPhase, wingSpeed, bobPhase, depth }));
         break;
 
       case "cherry-blossom":
         // 85개 벚꽃 샤워 꽃비 + 24개 봄빛 꽃가루
         for (let i = 0; i < 85; i++) {
-          this.particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: -Math.random() * 0.32 - 0.14,
-            vy: Math.random() * 0.40 + 0.28,
-            size: Math.random() * 10 + 9,
-            rot: Math.random() * Math.PI * 2,
-            vRot: (Math.random() - 0.5) * 0.018,
-            flip: Math.random() * Math.PI * 2,
-            vFlip: Math.random() * 0.02 + 0.01,
-            roll: Math.random() * Math.PI * 2,
-            vRoll: Math.random() * 0.022 + 0.011,
-            seed: Math.random() * 10,
-            colorBase: Math.random() < 0.5 ? "255, 155, 185" : "255, 180, 205"
-          });
+          this.particles.push({ x: Math.random() * w, y: Math.random() * h, vx: -Math.random() * 0.32 - 0.14, vy: Math.random() * 0.40 + 0.28, size: Math.random() * 10 + 9, rot: Math.random() * Math.PI * 2, vRot: (Math.random() - 0.5) * 0.018, flip: Math.random() * Math.PI * 2, vFlip: Math.random() * 0.02 + 0.01, roll: Math.random() * Math.PI * 2, vRoll: Math.random() * 0.022 + 0.011, seed: Math.random() * 10, colorBase: Math.random() < 0.5 ? "255, 155, 185" : "255, 180, 205" });
         }
         for (let i = 0; i < 24; i++) {
-          this.pollen.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            r: Math.random() * 1.8 + 0.8,
-            vx: -Math.random() * 0.20 - 0.08,
-            vy: Math.random() * 0.15 + 0.05,
-            alpha: Math.random() * 0.5 + 0.35,
-            pulse: Math.random() * Math.PI * 2
-          });
+          this.pollen.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.8 + 0.8, vx: -Math.random() * 0.20 - 0.08, vy: Math.random() * 0.15 + 0.05, alpha: Math.random() * 0.5 + 0.35, pulse: Math.random() * Math.PI * 2 });
         }
         break;
 
@@ -2827,32 +2665,10 @@ class HeroCanvasController {
       case "green-meadow":
         // 45개 3D 텀블링 민들레 홀씨 + 32개 들판 황금 꽃가루
         for (let i = 0; i < 45; i++) {
-          this.particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: -Math.random() * 0.28 - 0.14,
-            vy: (Math.random() - 0.5) * 0.12,
-            size: Math.random() * 7 + 14,
-            sway: Math.random() * Math.PI * 2,
-            swaySpeed: Math.random() * 0.014 + 0.009,
-            alpha: Math.random() * 0.35 + 0.65,
-            tilt: 0,
-            tiltTarget: 0,
-            roll: Math.random() * Math.PI * 2,
-            vRoll: (Math.random() - 0.5) * 0.02
-          });
+          this.particles.push({ x: Math.random() * w, y: Math.random() * h, vx: -Math.random() * 0.28 - 0.14, vy: (Math.random() - 0.5) * 0.12, size: Math.random() * 7 + 14, sway: Math.random() * Math.PI * 2, swaySpeed: Math.random() * 0.014 + 0.009, alpha: Math.random() * 0.35 + 0.65, tilt: 0, tiltTarget: 0, roll: Math.random() * Math.PI * 2, vRoll: (Math.random() - 0.5) * 0.02 });
         }
         for (let i = 0; i < 32; i++) {
-          this.pollen.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            r: Math.random() * 2.0 + 1.0,
-            vx: -Math.random() * 0.22 - 0.08,
-            vy: -Math.random() * 0.12 - 0.02,
-            alpha: Math.random() * 0.5 + 0.35,
-            pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.03 + 0.015
-          });
+          this.pollen.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 2.0 + 1.0, vx: -Math.random() * 0.22 - 0.08, vy: -Math.random() * 0.12 - 0.02, alpha: Math.random() * 0.5 + 0.35, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.03 + 0.015 });
         }
         break;
     }
@@ -2878,17 +2694,8 @@ class HeroCanvasController {
     }
   }
   makeBubble(w, h, initial = false) {
-    const isLarge = Math.random() < 0.2;
-    const r = isLarge ? Math.random() * 7 + 8 : Math.random() * 4.5 + 2.5;
-    return {
-      x: Math.random() * w,
-      y: initial ? Math.random() * h : h + 15,
-      r,
-      vy: -(Math.random() * 0.75 + 0.35) * (isLarge ? 0.78 : 1),
-      sway: Math.random() * Math.PI * 2,
-      swaySpeed: Math.random() * 0.03 + 0.02,
-      alpha: Math.random() * 0.35 + 0.45
-    };
+    const isLarge = Math.random() < 0.2, r = isLarge ? Math.random() * 7 + 8 : Math.random() * 4.5 + 2.5;
+    return { x: Math.random() * w, y: initial ? Math.random() * h : h + 15, r, vy: -(Math.random() * 0.75 + 0.35) * (isLarge ? 0.78 : 1), sway: Math.random() * Math.PI * 2, swaySpeed: Math.random() * 0.03 + 0.02, alpha: Math.random() * 0.35 + 0.45 };
   }
 
   createBubblePop(x, y, r, alpha = 0.8) {
@@ -2959,23 +2766,9 @@ class HeroCanvasController {
   }
 
   createEmbersParticle(w, h, initial = false) {
-    const originX = w * 0.54 + (Math.random() - 0.5) * (w * 0.52);
-    const typeRand = Math.random();
+    const originX = w * 0.54 + (Math.random() - 0.5) * (w * 0.52), typeRand = Math.random();
     const type = typeRand < 0.45 ? "capsule" : typeRand < 0.75 ? "spark" : "speck";
-    return {
-      type,
-      x: originX,
-      y: initial ? Math.random() * h : h - Math.random() * 25,
-      vx: (Math.random() - 0.5) * (type === "spark" ? 1.6 : 0.85),
-      vy: type === "spark" ? -Math.random() * 2.8 - 1.8 : -Math.random() * 1.8 - 1.2,
-      size: type === "capsule" ? Math.random() * 2.6 + 1.6 : type === "spark" ? Math.random() * 1.8 + 1.1 : Math.random() * 2.2 + 1.3,
-      len: type === "spark" ? Math.random() * 12 + 6 : type === "capsule" ? Math.random() * 6 + 4 : 3,
-      angle: 0,
-      life: initial ? Math.random() * 0.85 + 0.15 : 1,
-      decay: type === "spark" ? Math.random() * 0.006 + 0.0035 : Math.random() * 0.0032 + 0.0018,
-      color: Math.random() < 0.35 ? "#ffffff" : Math.random() < 0.7 ? "#ffe082" : Math.random() < 0.9 ? "#ff9100" : "#ff3d00",
-      drift: Math.random() * Math.PI * 2
-    };
+    return { type, x: originX, y: initial ? Math.random() * h : h - Math.random() * 25, vx: (Math.random() - 0.5) * (type === "spark" ? 1.6 : 0.85), vy: type === "spark" ? -Math.random() * 2.8 - 1.8 : -Math.random() * 1.8 - 1.2, size: type === "capsule" ? Math.random() * 2.6 + 1.6 : type === "spark" ? Math.random() * 1.8 + 1.1 : Math.random() * 2.2 + 1.3, len: type === "spark" ? Math.random() * 12 + 6 : type === "capsule" ? Math.random() * 6 + 4 : 3, angle: 0, life: initial ? Math.random() * 0.85 + 0.15 : 1, decay: type === "spark" ? Math.random() * 0.006 + 0.0035 : Math.random() * 0.0032 + 0.0018, color: Math.random() < 0.35 ? "#ffffff" : Math.random() < 0.7 ? "#ffe082" : Math.random() < 0.9 ? "#ff9100" : "#ff3d00", drift: Math.random() * Math.PI * 2 };
   }
 
   start() {
@@ -4223,6 +4016,10 @@ function matchMyTaste(c, taste = getMyTaste()) {
   if (taste.privateFridge && !(hit(/개별.*냉장고|전용.*냉장고|객실.*냉장고/i) || (c.glamp && /냉장고/.test(JSON.stringify(c.glamp))))) return false;
   if (taste.sharedFridge && !(hit(/공[용동].*냉장고/i) || am.some((a) => /공[용동].*냉장고/.test(a)))) return false;
   if (taste.heaterRental && !heaterRentalInfo(c)) return false;
+  if (taste.sidePark && (isMoveParking(c) || facts(c).park?.ok === false)) return false;
+  if (taste.crushedStone && !((c.floors ?? []).some((f) => ["CRUSHED_STONE", "GRAVEL", "파"].includes(f[0])) || hit(/파쇄석/))) return false;
+  if (taste.deckFloor && !((c.floors ?? []).some((f) => ["DECK", "데"].includes(f[0])) || hit(/데크/))) return false;
+  if (taste.grassFloor && !((c.floors ?? []).some((f) => ["GRASS", "잔"].includes(f[0])) || hit(/잔디/))) return false;
   if (taste.rental && !(hit(/장비.*(대여|렌탈)|텐트.*(대여|렌탈)|캠핑용품.*대여/i) || am.some((a) => /대여|렌탈/.test(a)))) return false;
   if (taste.pet && !(c.pets?.includes("가능") || facts(c).pet?.ok)) return false;
   if (taste.warmPool && !(uq.includes("warmpool") || hit(/온수\s*풀|온수\s*수영장|미온수|사계절\s*(온수|수영장)|실내\s*수영장/i))) return false;
@@ -4269,7 +4066,7 @@ const TASTE_SIZES = [[0,"규격 무관"],[6,"6m+"],[8,"8m+"],[10,"10m+"]];
 const TASTE_WATTS = [[0,"전기 무관"],[600,"600W+ (기본)"],[1000,"1000W+ (고용량)"],[1400,"1400W+ (초고용량)"]];
 const TASTE_ENVS = [["valley","th:VALLEY","계곡"],["river","th:LAKE","강·호수·천"],["beach","th:BEACH","바다·해변"]];
 const TASTE_EXPS = [["horse","horse","승마"],["animal","paw","동물"],["craft","craft","공예"],["leisure","waterleisure","수상레저"],["sled","sled","썰매"],["tidal","tidal","갯벌"],["fishing","fish","낚시"],["forestTrail","forest","숲체험"],["catch","water","잡기"],["harvest","experience","수확"],["grow","experience","재배"]];
-const TASTE_FACS = [["fire","flame","장작·불멍"],["tarp","tent","타프존"],["privateFridge","fridge","개별냉장고"],["sharedFridge","amenity","공용냉장고"],["heaterRental","flame","팬히터 대여"],["rental","cart","장비 대여"],["pet","paw","반려견"],["warmPool","hotwater","온수풀"],["kidsPool","playground","키즈풀"],["pool","swim","수영장"]];
+const TASTE_FACS = [["fire","flame","장작·불멍"],["tarp","tent","타프존"],["privateFridge","fridge","개별냉장고"],["sharedFridge","amenity","공용냉장고"],["heaterRental","flame","팬히터 대여"],["sidePark","car","텐트 옆 주차"],["crushedStone","layers","파쇄석"],["deckFloor","layers","데크"],["grassFloor","forest","잔디"],["rental","cart","장비 대여"],["pet","paw","반려견"],["warmPool","hotwater","온수풀"],["kidsPool","playground","키즈풀"],["pool","swim","수영장"]];
 
 function myTasteSummaryChips(taste = getMyTaste()) {
   const b = [];
@@ -4587,21 +4384,7 @@ const petOk = (c) => petAllowed(c); // 반려견 조건 필터도 섹션·배지
 const dayUse = (c) => (Boolean(c.du) && !c.osm && !c.auto) || (c.types ?? []).some((t) => t === "캠크닉" || t === "캠프닉") || /캠프닉|캠크닉|데이\s*캠핑|당일\s*(캠핑|이용)/.test(`${c.name} ${(c.amenities ?? []).join(" ")} ${c.pf?.s ?? ""}`);
 // 상품 조건은 등록·운영자 근거가 있는 타입만(후기 언급 m은 “있다”의 근거로 약하다).
 const hasFirmType = (c, k) => (c.st ?? []).some((t) => t[0] === k && t[2] !== "m");
-const KINDS = [
-  ["GLAMPING", "글램핑", (c) => stayKinds(c).includes("GLAMPING"), "glamping"],
-  ["CARAVAN", "카라반", (c) => stayKinds(c).includes("CARAVAN"), "caravan"],
-  ["BUNGALOW", "방갈로", (c) => isBungalow(c), "tent"],
-  ["PENSION", "펜션", (c) => isPension(c), "home"],
-  ["RV", "캠핑카·트레일러", (c) => stayKinds(c).includes("RV"), "caravan"],
-  ["DECK", "데크", (c) => hasType(c, "DECK"), "layers"],
-  ["DUPLEX_DECK", "복층 데크", (c) => hasType(c, "DUPLEX_DECK"), "layers"],
-  ["TARP_ZONE", "타프존", (c) => hasType(c, "TARP_ZONE"), "tent"],
-  ["AUTO", "오토캠핑", (c) => (c.types ?? []).includes("자동차야영장") || hasFirmType(c, "AUTO") || hasType(c, "AUTO"), "car"],
-  ["CAR_CAMP", "차박", (c) => hasFirmType(c, "CAR_CAMP") || hasType(c, "CAR_CAMP"), "car"],
-  ["PET_SITE", "반려견 전용", (c) => hasType(c, "PET_SITE"), "paw"],
-  ["SOLO", "솔로·백패킹", (c) => hasType(c, "SOLO"), "tent"],
-  ["EQUIPPED", "장비 포함", (c) => hasType(c, "EQUIPPED"), "tent"],
-];
+const KINDS = [["GLAMPING","글램핑",(c)=>stayKinds(c).includes("GLAMPING"),"glamping"],["CARAVAN","카라반",(c)=>stayKinds(c).includes("CARAVAN"),"caravan"],["BUNGALOW","방갈로",(c)=>isBungalow(c),"tent"],["PENSION","펜션",(c)=>isPension(c),"home"],["RV","캠핑카·트레일러",(c)=>stayKinds(c).includes("RV"),"caravan"],["DECK","데크",(c)=>hasType(c,"DECK"),"layers"],["DUPLEX_DECK","복층 데크",(c)=>hasType(c,"DUPLEX_DECK"),"layers"],["TARP_ZONE","타프존",(c)=>hasType(c,"TARP_ZONE"),"tent"],["AUTO","오토캠핑",(c)=>(c.types??[]).includes("자동차야영장")||hasFirmType(c,"AUTO")||hasType(c,"AUTO"),"car"],["CAR_CAMP","차박",(c)=>hasFirmType(c,"CAR_CAMP")||hasType(c,"CAR_CAMP"),"car"],["PET_SITE","반려견 전용",(c)=>hasType(c,"PET_SITE"),"paw"],["SOLO","솔로·백패킹",(c)=>hasType(c,"SOLO"),"tent"],["EQUIPPED","장비 포함",(c)=>hasType(c,"EQUIPPED"),"tent"]];
 const EXTRA_KINDS = [
   ["GENERAL", "일반 사이트", (c) => (c.types ?? []).includes("일반야영장") || hasFirmType(c, "PITCH"), "tent"],
   ["DAY", "당일 캠크닉", dayUse, "sun"],
@@ -4611,7 +4394,7 @@ const KIND = Object.fromEntries(ALL_KINDS.map(([k, l, t]) => [k, { label: l, tes
 const W_OPTS = [[0, "상관없음"], [1, "전기 있음"], [600, "600W 이상"], [1100, "1,100W 이상"]];
 const SIZE_OPTS = [[0, "상관없음"], [6, "6m 이상"], [8, "8m 이상"], [10, "10m 이상"]];
 const R_OPTS = [10, 20, 30];
-const emptyCond = () => ({ sido: [], kind: [], pet: false, w: 0, size: 0, fire: false, park: false, win: false, heater: false, dump: false, vr: false, best: false, sun: false, leaf: false, spring: false, summer: false, near: "", r: 20 });
+const emptyCond = () => ({ sido: [], kind: [], pet: false, w: 0, size: 0, fire: false, park: false, win: false, heater: false, dump: false, vr: false, best: false, sun: false, leaf: false, spring: false, summer: false, movePark: false, floorStone: false, floorDeck: false, floorGrass: false, near: "", r: 20 });
 // VR·우수야영장은 실제 근거가 있는 레코드만 조건에 포함한다.
 const hasVerifiedVr = (c) => Boolean(vrUrl(c));
 const hasExcellentBadge = (c) => Array.isArray(c.best) ? c.best.length > 0 : Boolean(c.best);
@@ -4661,6 +4444,10 @@ function condEval(c, k = S.cond, skip = null) {
   if (skip !== "win" && k.win) st.win = c.win === 1 ? "y" : c.win === 0 || noKeys(c).includes("NO_WINTER") ? "n" : "?";
   if (skip !== "vr" && k.vr) st.vr = hasVerifiedVr(c) ? "y" : "n";
   if (skip !== "best" && k.best) st.best = hasExcellentBadge(c) ? "y" : "n";
+  if (skip !== "movePark" && k.movePark) st.movePark = isMoveParking(c) ? "y" : "n";
+  if (skip !== "floorStone" && k.floorStone) st.floorStone = (c.floors ?? []).some((f) => ["CRUSHED_STONE", "GRAVEL", "파"].includes(f[0])) ? "y" : "n";
+  if (skip !== "floorDeck" && k.floorDeck) st.floorDeck = (c.floors ?? []).some((f) => ["DECK", "데"].includes(f[0])) ? "y" : "n";
+  if (skip !== "floorGrass" && k.floorGrass) st.floorGrass = (c.floors ?? []).some((f) => ["GRASS", "잔"].includes(f[0])) ? "y" : "n";
   for (const [b, [, t]] of Object.entries(COND_BOOL)) if (skip !== b && k[b]) st[b] = t(c);
   if (skip !== "park" && k.park) {
     const o = facts(c).park?.ok;
@@ -4679,8 +4466,8 @@ function condTest(c, k = S.cond, skip = null, strict = S.condStrict) {
   const r = condEval(c, k, skip);
   return Boolean(r) && (!strict || r.unknown === 0);
 }
-const COND_LABEL = { heater: "팬히터·난로 대여", dump: "덤프스테이션", vr: "360° VR 뷰", best: "공인 우수야영장", sun: "일출 명소", leaf: "단풍 명소", spring: "봄꽃", summer: "여름 물놀이", win: "겨울 운영", kind: "상품", pet: "반려견", w: "전기", size: "사이트 크기", fire: "장작", park: "텐트 옆 주차" };
-const condActive = (k = S.cond) => k.sido.length + k.kind.length + (k.pet ? 1 : 0) + (k.w ? 1 : 0) + (k.size ? 1 : 0) + (k.fire ? 1 : 0) + (k.park ? 1 : 0) + (k.win ? 1 : 0) + (k.vr ? 1 : 0) + (k.best ? 1 : 0) + Object.keys(COND_BOOL).filter((b) => k[b]).length + (k.near ? 1 : 0);
+const COND_LABEL = { heater: "팬히터·난로 대여", dump: "덤프스테이션", vr: "360° VR 뷰", best: "공인 우수야영장", sun: "일출 명소", leaf: "단풍 명소", spring: "봄꽃", summer: "여름 물놀이", win: "겨울 운영", kind: "상품", pet: "반려견", w: "전기", size: "사이트 크기", fire: "장작", park: "텐트 옆 주차", movePark: "이동주차", floorStone: "파쇄석", floorDeck: "데크", floorGrass: "잔디" };
+const condActive = (k = S.cond) => k.sido.length + k.kind.length + (k.pet ? 1 : 0) + (k.w ? 1 : 0) + (k.size ? 1 : 0) + (k.fire ? 1 : 0) + (k.park ? 1 : 0) + (k.movePark ? 1 : 0) + (k.floorStone ? 1 : 0) + (k.floorDeck ? 1 : 0) + (k.floorGrass ? 1 : 0) + (k.win ? 1 : 0) + (k.vr ? 1 : 0) + (k.best ? 1 : 0) + Object.keys(COND_BOOL).filter((b) => k[b]).length + (k.near ? 1 : 0);
 function condChips(k = S.cond) {
   const out = [];
   if (k.near) out.push(["near", `${k._ctr?.label ?? k.near} ${k.r}km 안`]);
@@ -4691,6 +4478,10 @@ function condChips(k = S.cond) {
   if (k.size) out.push(["size", `사이트 ${k.size}m 이상`]);
   if (k.fire) out.push(["fire", "장작 가능"]);
   if (k.park) out.push(["park", "텐트 옆 주차"]);
+  if (k.movePark) out.push(["movePark", "이동주차"]);
+  if (k.floorStone) out.push(["floorStone", "파쇄석"]);
+  if (k.floorDeck) out.push(["floorDeck", "데크"]);
+  if (k.floorGrass) out.push(["floorGrass", "잔디"]);
   if (k.win) out.push(["win", "겨울 운영"]);
   if (k.vr) out.push(["vr", "360° VR 뷰"]);
   if (k.best) out.push(["best", "공인 우수야영장"]);
@@ -4709,6 +4500,10 @@ function condToParams(p, k = S.cond) {
   if (k.size) p.set("size", String(k.size));
   if (k.fire) p.set("fire", "1");
   if (k.park) p.set("park", "1");
+  if (k.movePark) p.set("movePark", "1");
+  if (k.floorStone) p.set("floorStone", "1");
+  if (k.floorDeck) p.set("floorDeck", "1");
+  if (k.floorGrass) p.set("floorGrass", "1");
   if (k.win) p.set("win", "1");
   if (k.vr) p.set("vr", "1");
   if (k.best) p.set("best", "1");
@@ -4723,6 +4518,7 @@ function condFromParams(q) {
   k.sido = normalizeAreaKeys(list("sido"));
   k.kind = list("kind").filter((x) => KIND[x]);
   k.pet = q.get("pet") === "1"; k.fire = q.get("fire") === "1"; k.park = q.get("park") === "1"; k.win = q.get("win") === "1"; k.vr = q.get("vr") === "1"; k.best = q.get("best") === "1";
+  k.movePark = q.get("movePark") === "1"; k.floorStone = q.get("floorStone") === "1"; k.floorDeck = q.get("floorDeck") === "1"; k.floorGrass = q.get("floorGrass") === "1";
   for (const b of Object.keys(COND_BOOL)) k[b] = q.get(b) === "1";
   k.w = W_OPTS.some(([v]) => v === Number(q.get("w"))) ? Number(q.get("w")) : 0;
   k.size = SIZE_OPTS.some(([v]) => v === Number(q.get("size"))) ? Number(q.get("size")) : 0;
@@ -4804,7 +4600,8 @@ function paintCondSheet() {
       <section><h3>전기</h3><div class="cond-chips">${W_OPTS.map(([v, l]) => chip("w", v, l, k.w === v, v ? tally("w", v) : null)).join("")}</div></section>
       <section><h3>사이트 크기</h3><div class="cond-chips">${SIZE_OPTS.map(([v, l]) => chip("size", v, l, k.size === v, v ? tally("size", v) : null)).join("")}</div></section>
       <section><h3>계절·풍경</h3><div class="cond-chips">${chip("win", 1, "겨울 운영", k.win, tally("win", true))}${chip("heater", 1, "팬히터·난로 대여", k.heater, tally("heater", true))}${["spring", "summer", "leaf", "sun"].map((b) => chip(b, 1, COND_BOOL[b][0], k[b], tally(b, true))).join("")}</div></section>
-      <section><h3>시설·인프라</h3><div class="cond-chips">${chip("fire", 1, "장작 가능", k.fire, tally("fire", true))}${chip("park", 1, "텐트 옆 주차", k.park, tally("park", true))}${chip("dump", 1, "덤프스테이션", k.dump, tally("dump", true))}${chip("vr", 1, "360° VR 뷰", k.vr, tally("vr", true))}${chip("best", 1, "공인 우수야영장", k.best, tally("best", true))}</div></section>
+      <section><h3>시설·인프라</h3><div class="cond-chips">${chip("fire", 1, "장작 가능", k.fire, tally("fire", true))}${chip("park", 1, "텐트 옆 주차", k.park, tally("park", true))}${chip("movePark", 1, "이동주차", k.movePark, tally("movePark", true))}${chip("dump", 1, "덤프스테이션", k.dump, tally("dump", true))}${chip("vr", 1, "360° VR 뷰", k.vr, tally("vr", true))}${chip("best", 1, "공인 우수야영장", k.best, tally("best", true))}</div></section>
+      <section><h3>바닥 재질</h3><div class="cond-chips">${chip("floorStone", 1, "파쇄석", k.floorStone, tally("floorStone", true))}${chip("floorDeck", 1, "데크", k.floorDeck, tally("floorDeck", true))}${chip("floorGrass", 1, "잔디", k.floorGrass, tally("floorGrass", true))}</div></section>
       <section><h3>요금</h3><div class="cond-chips">${[["u3", "~3만원"], ["3to5", "3~5만원"], ["5to7", "5~7만원"], ["7to10", "7만원~10만원"], ["10to20", "10만원~20만원"], ["o20", "20만원+"]].map(([v, l]) => chip("fee", v, l, S.feeDraft === v, count("fee", (c) => feeOk(c, v)))).join("")}</div></section>
     </div>
     <p class="cond-legend"><button type="button" class="link" data-c="strict">${strict ? "정보 없는 곳도 함께 보기" : "확인된 곳만 보기"}</button></p>
@@ -4868,47 +4665,10 @@ function listRow({ c, ce }, i = 0) {
   const isClosed = isWinterClosed;
   const { tag } = nameOf(c), o = openingOf(c), main = bookingChannels(c)[0];
   const href = `${APP_BASE}place/${encodeURIComponent(c.id)}`;
-  return `<article class="card card-horizontal lrow${isClosed ? " is-closed" : ""}" data-id="${esc(c.id)}">
-    <a class="card-hit" href="${href}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
-    <div class="card-media">${carousel(c, { eager: i < 3 })}
-      ${isClosed ? `<span class="sig closed">${ic("clock")}운영종료</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : ""}
-      <span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3, 2, { rows: true, theme: S.theme })}</span>
-    </div>
-    <div class="card-body">
-      <div class="card-group card-group-head">
-        <div class="name-row">
-          <h3 class="card-name">${esc(nameOf(c).name)}</h3>
-          ${heartBtn(c)}
-        </div>
-        <div class="card-meta-row">
-          <p class="card-meta">${ic("pin")}<span class="card-meta-txt">${esc(region(c))}${driveMin(c) != null ? ` · 내비 ${driveText(driveMin(c))}` : ""}${tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</span></p>
-          <div class="card-meta-actions">
-            ${c.lat && c.lng ? `
-              <button type="button" class="c-act-btn" data-rv="${c.lat},${c.lng}" data-rv-name="${esc(nameOf(c).name)}" title="카카오 로드뷰 보기" aria-label="로드뷰">${ic("roadview")}</button>
-              <a class="c-act-btn" href="${esc(mapLink(nameOf(c).name, c.lat, c.lng))}" target="_blank" rel="noopener" title="카카오 지도에서 보기" aria-label="지도">${ic("map")}</a>
-            ` : ""}
-          </div>
-        </div>
-      </div>
-      ${condLine(c, ce)}
-      <div class="card-group card-group-types">
-        ${typeRow(c).html}
-      </div>
-      <div class="card-group card-group-spec">
-        ${rowsHtmlHorizontal(c)}
-      </div>
-      ${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `
-        <div class="card-group card-group-reviews">
-          <div class="card-reviews">${cardReviewPills(c.rv, c)}</div>
-        </div>
-      ` : ""}
-      ${main || c.tel ? `
-        <div class="card-cta">
-          ${main ? reserveSplit(c, { inline: true, lazy: true }) : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""}
-        </div>
-      ` : ""}
-    </div>
-  </article>`;
+  const actMaps = c.lat && c.lng ? `<button type="button" class="c-act-btn" data-rv="${c.lat},${c.lng}" data-rv-name="${esc(nameOf(c).name)}" title="카카오 로드뷰 보기" aria-label="로드뷰">${ic("roadview")}</button><a class="c-act-btn" href="${esc(mapLink(nameOf(c).name, c.lat, c.lng))}" target="_blank" rel="noopener" title="카카오 지도에서 보기" aria-label="지도">${ic("map")}</a>` : "";
+  const cta = main ? reserveSplit(c, { inline: true, lazy: true }) : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : "";
+  const rvs = c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-group card-group-reviews"><div class="card-reviews">${cardReviewPills(c.rv, c)}</div></div>` : "";
+  return `<article class="card card-horizontal lrow${isClosed ? " is-closed" : ""}" data-id="${esc(c.id)}"><a class="card-hit" href="${href}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a><div class="card-media">${carousel(c, { eager: i < 3 })}${isClosed ? `<span class="sig closed">${ic("clock")}운영종료</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : ""}<span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3, 2, { rows: true, theme: S.theme })}</span></div><div class="card-body"><div class="card-group card-group-head"><div class="name-row"><h3 class="card-name">${esc(nameOf(c).name)}</h3>${heartBtn(c)}</div><div class="card-meta-row"><p class="card-meta">${ic("pin")}<span class="card-meta-txt">${esc(region(c))}${driveMin(c) != null ? ` · 내비 ${driveText(driveMin(c))}` : ""}${tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</span></p><div class="card-meta-actions">${actMaps}</div></div></div>${condLine(c, ce)}<div class="card-group card-group-types">${typeRow(c).html}</div><div class="card-group card-group-spec">${rowsHtmlHorizontal(c)}</div>${rvs}${cta ? `<div class="card-cta">${cta}</div>` : ""}</div></article>`;
 }
 
 /** 지역·사이트·요금 필터 모듈 (목록·메인 공통). prefix로 data-attr 구분. */
@@ -5017,20 +4777,10 @@ function bindList() {
 function themesView() {
   const cards = THEMES.map(([key, label, test]) => {
     const closed = key === "WATER_PLAY";
-    return `<a class="theme-card${closed ? " is-closed" : ""}" href="${APP_BASE}theme/${encodeURIComponent(key)}" draggable="false">
-      <img src="${themeImg(key)}" alt="${esc(label)}" loading="lazy" draggable="false">
-      ${closed ? `<span class="theme-closed-badge">운영종료</span>` : ""}
-      <span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span>
-    </a>`;
+    return `<a class="theme-card${closed ? " is-closed" : ""}" href="${APP_BASE}theme/${encodeURIComponent(key)}" draggable="false"><img src="${themeImg(key)}" alt="${esc(label)}" loading="lazy" draggable="false">${closed ? '<span class="theme-closed-badge">운영종료</span>' : ""}<span><b>${thIc(key)}${esc(label)}</b><i>${fmt(countOf(test))}곳</i></span></a>`;
   }).join("");
 
-  return `<section class="themes-page">
-    <header class="themes-head shell">
-      <h1>캠핑 테마별 <em>캠핑장 찾기</em></h1>
-      <p class="sec-sub">원하는 캠핑 스타일과 분위기부터 골라보세요.</p>
-    </header>
-    <div class="themes-grid shell">${cards}</div>
-  </section>`;
+  return `<section class="themes-page"><header class="themes-head shell"><h1>캠핑 테마별 <em>캠핑장 찾기</em></h1><p class="sec-sub">원하는 캠핑 스타일과 분위기부터 골라보세요.</p></header><div class="theme-grid shell">${cards}</div></section>`;
 }
 
 // ── 화면: 시·도 / 시·군·구 랜딩(t39 #40) ─────────────────────────
@@ -6075,9 +5825,10 @@ async function detailView(id) {
       <aside class="d-side">${reserveCard(c, d)}</aside>
     </header>
     ${galleryHtml(c)}
-    <nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${[["sec-price", "요금"], ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-reviews", "후기"], ["sec-nearby", "주변"], ["sec-events", "행사"], ["sec-info", "업체"]].map(([id, l], i) => `<a href="#${id}" data-jump="${id}"${i === 0 ? " aria-current" : ""}>${l}</a>`).join("")}</div></nav>
+    <nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${[["sec-price", "요금"], ...(c.layout_images?.length || d?.layout?.images?.length ? [["sec-layout", "배치도"]] : []), ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-reviews", "후기"], ["sec-nearby", "주변"], ["sec-events", "행사"], ["sec-info", "업체"]].map(([id, l], i) => `<a href="#${id}" data-jump="${id}"${i === 0 ? " aria-current" : ""}>${l}</a>`).join("")}</div></nav>
     <div class="d-body">
       <div class="d-main">
+        ${winterClosedConflict(c) ? `<div class="theme-closed-alert warning" style="margin-bottom:14px;border-left:4px solid #f59e0b;background:#fffbeb;padding:12px 14px;border-radius:10px;display:flex;gap:10px;font-size:13px;line-height:1.5;">${ic("info")}<div><strong>동계 운영 사전 확인 권장</strong><p style="margin:2px 0 0;color:var(--ink-2);">공식 등록상 동계 미운영(봄~가을)으로 표기되어 있으나, 최근 운영자 예약 및 이용 사실이 확인되었습니다. 늦가을·동계 방문 시에는 업장(${esc(c.tel || "전화")})으로 실제 운영 여부를 확인하세요.</p></div></div>` : ""}
         ${siteTypesHtml(c, d)}
         ${siteProductsHtml(c, d)}
         ${specSection(c, d)}
@@ -6275,7 +6026,9 @@ function siteTypesHtml(c, d) {
     const moveBdg = t.code === "AUTO" && isMove ? ` <span class="bdg bdg-park-move" style="font-size:11px;padding:2px 7px;margin-left:5px;vertical-align:middle;">${ic("car")}이동주차</span>` : "";
     return `<div class="stype"><span class="stype-ic">${ic(meta.icon)}</span><span class="stype-b"><b>${label}${autoTip}${moveBdg}</b><i>${t.count ? `${fmt(t.count)}${unit}` : t.grade === "OPERATOR" ? "운영자 안내" : t.grade === "MENTION" ? "후기 언급" : "있음"}${t.grade === "MENTION" ? asOf(t.at) : ""}</i></span><span class="tile-g">${dot(x.g)}${srcTip(x, meta.label)}</span></div>`;
   }).join("");
-  return `<section class="d-sec"><div class="sec-head">${iconTitle("sitetype", "사이트 타입")}</div><div class="stypes">${tiles}</div></section>`;
+  const hasLayout = Boolean(c.layout_images?.length || d?.layout?.images?.length);
+  const layoutBtn = hasLayout ? `<button type="button" class="btn ghost btn-sm d-btn-layout" data-layout-open="0" style="margin-left:auto;font-size:12px;padding:3px 9px;border-radius:999px;">${ic("map")}배치도 크게 보기</button>` : "";
+  return `<section class="d-sec"><div class="sec-head">${iconTitle("sitetype", "사이트 타입")}${layoutBtn}</div><div class="stypes">${tiles}</div></section>`;
 }
 const hostOf = (u) => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch { return ""; } };
 function introHtml(d) {
@@ -6606,6 +6359,21 @@ function feeRowLabel(label) {
   for (const p of parts) if (!out.some((q) => q.replace(/\s+/g, "").includes(p.replace(/\s+/g, "")))) out.push(p);
   return out.join(" · ");
 }
+function feeRowThumb(r, c, d) {
+  const lbl = `${r.label ?? ""} ${r.kind ?? ""}`;
+  if (d?.site_products?.length) {
+    const p = d.site_products.find((x) => x.name && lbl.includes(x.name));
+    if (p?.photos?.[0] || p?.img) return photoUrl(p.photos?.[0] || p.img);
+  }
+  if (/글램핑|glamp/i.test(lbl)) return themeImg("GLAMPING");
+  if (/카라반|caravan/i.test(lbl)) return themeImg("CARAVAN");
+  if (/트레일러|캠핑카|차박|모터홈/i.test(lbl)) return `${ASSETS_BASE}images/themes/trailer.webp`;
+  if (/펜션|풀빌라|독채|객실|숙박동|민박|스테이/i.test(lbl)) return `${ASSETS_BASE}images/themes/comfort.webp`;
+  if (/방갈로|방가로|원두막|오두막|캐빈/i.test(lbl)) return `${ASSETS_BASE}images/hero/hero-treehouse.webp`;
+  const ph = photosOf(c);
+  return ph.length ? photoUrl(ph[0]) : themeImg("AUTO");
+}
+
 function priceHtml(c, d) {
   const { stayRows, extraRows, rows, bs } = priceRows(c, d);
   if (!rows.length) return "";
@@ -6616,7 +6384,9 @@ function priceHtml(c, d) {
     const valText = String(r.text || "예약처 확인").replace(/(방문객)\s+\1/g, "$1");
     const isNo = !r.won && /불가|금지/.test(valText);
     const wonDisplay = r.won ? `${fmt(r.won)}원` : esc(valText);
-    return `<li class="pl-${isMention ? "m" : "c"}${r.isExtra ? " pl-extra" : ""}"><b${isNo ? ' class="is-no"' : ""}>${wonDisplay}</b><span>${esc(feeRowLabel(r.label))}</span>${isMention ? '<i class="pl-kind">확인필요</i>' : ""}${r.extra && isMention ? r.extra : ""}${r.fact ? srcTip(r.fact, `요금 정보 ${i + 1}`) : ""}</li>`;
+    const thumb = !r.isExtra ? feeRowThumb(r, c, d) : null;
+    const thumbHtml = thumb ? `<div class="pl-thumb-wrap"><img class="pl-thumb" src="${esc(thumb)}" alt="" loading="lazy" decoding="async"></div>` : "";
+    return `<li class="pl-${isMention ? "m" : "c"}${r.isExtra ? " pl-extra" : ""}${thumb ? " has-thumb" : ""}">${thumbHtml}<div class="pl-info"><b${isNo ? ' class="is-no"' : ""}>${wonDisplay}</b><span class="pl-lbl">${esc(feeRowLabel(r.label))}</span></div>${isMention ? '<i class="pl-kind">확인필요</i>' : ""}${r.extra && isMention ? r.extra : ""}${r.fact ? srcTip(r.fact, `요금 정보 ${i + 1}`) : ""}</li>`;
   };
 
   const stayItems = stayRows.map((r, i) => renderLi({ ...r, isExtra: false }, i)).join("");
@@ -6962,7 +6732,7 @@ function layoutHtml(d, c) {
   if (hasOfficial) {
     const candidates = allImages.filter((x) => x !== officialImg).slice(0, 4);
     const mainImgUrl = officialImg.img || officialImg.thumb;
-    return `<section class="d-sec layout-sec">
+    return `<section class="d-sec layout-sec" id="sec-layout">
       <div class="sec-head">
         ${iconTitle("sitemap", "시설 배치도")}
         
@@ -7002,7 +6772,7 @@ function layoutHtml(d, c) {
   if (candidates.length === 1) {
     const single = candidates[0];
     const imgUrl = single.img || single.thumb;
-    return `<section class="d-sec layout-sec">
+    return `<section class="d-sec layout-sec" id="sec-layout">
       <div class="sec-head">
         ${iconTitle("sitemap", "시설 배치도")}
         
@@ -7019,7 +6789,7 @@ function layoutHtml(d, c) {
   }
 
   if (candidates.length > 1) {
-    return `<section class="d-sec layout-sec">
+    return `<section class="d-sec layout-sec" id="sec-layout">
       <div class="sec-head">
         ${iconTitle("sitemap", "시설 배치도")}
         
@@ -9361,72 +9131,16 @@ async function compareView() {
   const acts = camps.map((c) => { const ch = primaryBooking(c); return `<td>${ch ? reserveSplit(c, { inline: true }) : `<a class="btn ghost wide" href="${APP_BASE}place/${encodeURIComponent(c.id)}">자세히</a>`}</td>`; }).join("");
 
   // 모바일 특화: 세로 스펙별 모아보기 카드 뷰
-  const cardsViewHtml = `<div class="cmp-cards-view diff-on${cmpMode === "cards" ? " is-active" : ""}">
-    ${rowsDef.map(([g, rows]) => `
-      <div class="cmp-spec-card">
-        <div class="cmp-spec-card-head">${g}</div>
-        ${rows.map(([l, get, rIc]) => {
-          const vals = camps.map((c, i) => get(c, ds[i]));
-          const keys = vals.map((v) => v?.v ?? "");
-          const diff = new Set(keys).size > 1;
-          return `<div class="cmp-spec-row${diff ? " is-diff" : " is-same"}">
-            <div class="cmp-spec-row-head">
-              <span class="cmp-spec-label">${rIc ? ic(rIc) : ""}${l}</span>
-              ${diff ? `<span class="cmp-diff-tag">다름</span>` : ""}
-            </div>
-            <div class="cmp-card-items">
-              ${camps.map((c, i) => {
-                const v = vals[i];
-                return `<div class="cmp-card-item${diff ? " is-diff" : ""}">
-                  <span class="cmp-card-camp-name"><b>${i + 1}</b> ${esc(nameOf(c).name)}</span>
-                  <span class="cmp-card-val">${v ? `${esc(v.v)}${dot(v.g)}` : '<span class="none">–</span>'}</span>
-                </div>`;
-              }).join("")}
-            </div>
-          </div>`;
-        }).join("")}
-      </div>
-    `).join("")}
-  </div>`;
+  const cardsViewHtml = `<div class="cmp-cards-view diff-on${cmpMode === "cards" ? " is-active" : ""}">${rowsDef.map(([g, rows]) => `<div class="cmp-spec-card"><div class="cmp-spec-card-head">${g}</div>${rows.map(([l, get, rIc]) => {
+    const vals = camps.map((c, i) => get(c, ds[i])), keys = vals.map((v) => v?.v ?? ""), diff = new Set(keys).size > 1;
+    return `<div class="cmp-spec-row${diff ? " is-diff" : " is-same"}"><div class="cmp-spec-row-head"><span class="cmp-spec-label">${rIc ? ic(rIc) : ""}${l}</span>${diff ? '<span class="cmp-diff-tag">다름</span>' : ""}</div><div class="cmp-card-items">${camps.map((c, i) => `<div class="cmp-card-item${diff ? " is-diff" : ""}"><span class="cmp-card-camp-name"><b>${i + 1}</b> ${esc(nameOf(c).name)}</span><span class="cmp-card-val">${vals[i] ? `${esc(vals[i].v)}${dot(vals[i].g)}` : '<span class="none">–</span>'}</span></div>`).join("")}</div></div>`;
+  }).join("")}</div>`).join("")}</div>`;
 
   // 모바일 가로 테이블 점프 칩
-  const jumpChips = camps.length > 2 ? `<div class="cmp-jump-rail rail" aria-label="캠핑장 열로 바로가기">
-    <span class="cmp-jump-label">열 바로가기:</span>
-    ${camps.map((c, i) => `<button type="button" class="cmp-jump-chip" data-jump-col="${i}"><b>${i + 1}</b> ${esc(nameOf(c).name)}</button>`).join("")}
-  </div>` : "";
+  const jumpChips = camps.length > 2 ? `<div class="cmp-jump-rail rail" aria-label="캠핑장 열로 바로가기"><span class="cmp-jump-label">열 바로가기:</span>${camps.map((c, i) => `<button type="button" class="cmp-jump-chip" data-jump-col="${i}"><b>${i + 1}</b> ${esc(nameOf(c).name)}</button>`).join("")}</div>` : "";
+  const noticeLess2 = camps.length < 2 ? `<div class="cmp-guide-banner">${ic("compare")}<span>비교하려면 2곳 이상 선택해 주세요 (현재 <b>${camps.length}</b>곳 선택됨). 위 칩에서 추가할 캠핑장을 눌러주세요.</span></div>` : "";
 
-  const noticeLess2 = camps.length < 2 ? `<div class="cmp-guide-banner">
-    ${ic("compare")}
-    <span>비교하려면 2곳 이상 선택해 주세요 (현재 <b>${camps.length}</b>곳 선택됨). 위 칩에서 추가할 캠핑장을 눌러주세요.</span>
-  </div>` : "";
-
-  return `<section class="cmp-page">
-    <div class="sec-head big">
-      <div>
-        <h1>찜한 캠핑장 <em>비교</em></h1>
-        <p class="sec-sub">찜 업체 최대 20곳을 비교할 수 있어요.</p>
-      </div>
-    </div>
-    <p class="cmp-count"${demo ? "" : " hidden"} data-cmp-count>${demo ? "예시 비교 2곳" : `찜 ${saved.length}곳 중 ${camps.length}곳 비교 중`}</p>
-    ${picker}
-    ${demo ? "" : noticeLess2}
-
-    <div class="cmp-view-switcher" role="tablist" aria-label="비교 보기 방식">
-      <button type="button" class="cmp-tab${cmpMode === "table" ? " active" : ""}" data-cmp-mode="table" role="tab" aria-selected="${cmpMode === "table"}">표로 비교</button>
-      <button type="button" class="cmp-tab${cmpMode === "cards" ? " active" : ""}" data-cmp-mode="cards" role="tab" aria-selected="${cmpMode === "cards"}">스펙 비교</button>
-    </div>
-
-    ${jumpChips}
-
-    <div class="cmp-scroll${cmpMode === "table" ? " is-active" : ""}">
-      <table class="cmp-table diff-on">
-        <thead><tr><th class="corner" scope="col"></th>${head}</tr></thead>
-        <tbody><tr class="hotrow"><th scope="row">예약</th>${opens}</tr>${body}<tr class="acts"><th></th>${acts}</tr></tbody>
-      </table>
-    </div>
-
-    ${cardsViewHtml}
-  </section>`;
+  return `<section class="cmp-page"><div class="sec-head big"><div><h1>찜한 캠핑장 <em>비교</em></h1><p class="sec-sub">찜 업체 최대 20곳을 비교할 수 있어요.</p></div></div><p class="cmp-count"${demo ? "" : " hidden"} data-cmp-count>${demo ? "예시 비교 2곳" : `찜 ${saved.length}곳 중 ${camps.length}곳 비교 중`}</p>${picker}${demo ? "" : noticeLess2}<div class="cmp-view-switcher" role="tablist" aria-label="비교 보기 방식"><button type="button" class="cmp-tab${cmpMode === "table" ? " active" : ""}" data-cmp-mode="table" role="tab" aria-selected="${cmpMode === "table"}">표로 비교</button><button type="button" class="cmp-tab${cmpMode === "cards" ? " active" : ""}" data-cmp-mode="cards" role="tab" aria-selected="${cmpMode === "cards"}">스펙 비교</button></div>${jumpChips}<div class="cmp-scroll${cmpMode === "table" ? " is-active" : ""}"><table class="cmp-table diff-on"><thead><tr><th class="corner" scope="col"></th>${head}</tr></thead><tbody><tr class="hotrow"><th scope="row">예약</th>${opens}</tr>${body}<tr class="acts"><th></th>${acts}</tr></tbody></table></div>${cardsViewHtml}</section>`;
 }
 
 function bindCompare() {
