@@ -2202,5 +2202,49 @@
       "checked_at": "2026-11-04T08:24:00+09:00",
       "tier": "C"
     }
-  }
+  },
+  "site_products": [
+    {
+      "id": "sp-101514-1",
+      "name": "타프존 A (파쇄석 8×8m)",
+      "type": "AUTO",
+      "floor": "파쇄석",
+      "size": "8×8m",
+      "power": "전기 완비",
+      "price": 55000,
+      "photos": [
+        "https://www.gocamping.or.kr/upload/camp/101514/05352ZyvvysS0saGZqQQV5x9.jpg",
+        "https://www.gocamping.or.kr/upload/camp/101514/85583gSQ7kaWRAQhYxezOQQJ.jpg"
+      ],
+      "desc": "대형 타프가 기본 설치되어 우천·강풍에도 쾌적한 전천후 오토캠핑 사이트입니다. 사이트 옆 주차 가능."
+    },
+    {
+      "id": "sp-101514-2",
+      "name": "데크존 B (나무데크 6×7m)",
+      "type": "DECK",
+      "floor": "데크",
+      "size": "6×7m",
+      "power": "전기 완비",
+      "price": 65000,
+      "photos": [
+        "https://www.gocamping.or.kr/upload/camp/101514/1023cNucvrIA27RfRuoTr12k.jpg",
+        "https://www.gocamping.or.kr/upload/camp/101514/9130V1tthAPInoggLE0RR1Eh.jpg"
+      ],
+      "desc": "평평하고 깔끔한 친환경 목재 데크 사이트로 쾌적한 피칭이 가능합니다."
+    },
+    {
+      "id": "sp-101514-3",
+      "name": "이지캠핑 감성존",
+      "type": "GLAMPING",
+      "floor": "잔디·데크",
+      "size": "대형 구역",
+      "power": "전기·난방 완비",
+      "price": 120000,
+      "photos": [
+        "https://www.gocamping.or.kr/upload/camp/101514/3565pXlIbeTTKQlzEvWUthTp.jpg",
+        "https://www.gocamping.or.kr/upload/camp/101514/884417uMSJnh85bXoEnqBqf2.jpg"
+      ],
+      "desc": "텐트와 캠핑 장비가 세팅되어 있어 가볍게 몸만 와서 감성 캠핑을 즐기실 수 있습니다."
+    }
+  ]
 }

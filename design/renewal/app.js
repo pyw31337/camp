@@ -966,27 +966,10 @@ function reviewMeta(c) {
   const positive = sum(rv.p), caution = sum(rv.c), total = Number(rv.n) || 0;
   return { rv, positive, caution, total, score: total * 7 + positive * 3 - caution * 2 };
 }
-function reviewPicks() {
-  return S.camps.filter((c) => {
-    const r = reviewMeta(c);
-    return showcaseEligible(c) && r.total >= 4 && r.positive > r.caution;
-  }).sort((a, b) => reviewMeta(b).score - reviewMeta(a).score || rich(b) - rich(a)).slice(0, 10);
-}
 const normTopic = (t) => String(t ?? "")
   .replace("가격 부담", "요금 부담")
   .replace("화장실·샤워장 깨끗", "화장실·샤워실 깨끗")
   .replace("바베큐·불멍 힐링", "바비큐·불멍 힐링");
-function reviewTopics(rows, cls, icon) {
-  return (rows ?? []).slice(0, 2).map(([topic, count]) => `<span class="review-topic ${cls}">${ic(icon)}${esc(normTopic(topic))} <i>${count}</i></span>`).join("");
-}
-function reviewPickCard(c, i = 0) {
-  const r = reviewMeta(c);
-  return `<article class="card review-pick" data-id="${esc(c.id)}">
-    <a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a>
-    <div class="card-media review-pick-media">${carousel(c, { eager: i < 3 })}<span class="review-total">${ic("file-text")}후기 ${fmt(r.total)}</span>${wxAlert(c) ? `<span class="bdgs">${wxBadge(c)}</span>` : ""}</div>
-    <div class="card-body review-pick-body"><p class="review-place">${esc(region(c))}</p><h3>${esc(nameOf(c).name)}</h3><div class="review-topics">${reviewTopics(r.rv.p, "good", "thumb-up")}${reviewTopics(r.rv.c, "watch", "alert")}</div></div>
-  </article>`;
-}
 function results() {
   // 도시공원 원장은 당일 나들이 맥락을 위한 별도 데이터다. 캠핑장처럼
   // 사이트·요금·규칙·사진이 충분하지 않은 공원은 기본 탐색에 섞지 않고,
@@ -1330,12 +1313,6 @@ function formatRowVal(label, v) {
   return s;
 }
 
-function cardRow(label, icon, x) {
-  const isNo = Boolean(x && /불가|금지/.test(x.v));
-  const valHtml = x ? formatRowVal(label, x.v) : "–";
-  return `<li><span class="rl">${ic(icon)}${label}</span><span class="rv${x ? "" : " none"}${isNo ? " is-no" : ""}">${valHtml}</span>${x ? dot(x.g) : ""}</li>`;
-}
-
 const mapLink = (name, lat, lng) => `https://map.kakao.com/link/map/${encodeURIComponent(name)},${lat},${lng}`;
 
 // 카드 정보 6줄(소유자 2026-10-21 2차): 규격 · 전기 · 화로 · 주차 · 주변 · 요금(1박). 줄 높이는 모두 같고(grid 1fr) ‘…’로 자르지 않는다.
@@ -1364,13 +1341,6 @@ function cardLines(c) {
 }
 function rowsHtml(c) { return cardLines(c); }
 function rowsHtmlHorizontal(c) { return cardLines(c); }
-// 이색 캠핑장 전용 카드: 일반 카드와 달리 비교용 기본 행은 접고,
-// 분류 근거가 있는 특별한 시설·체험을 먼저 읽히게 한다.
-const UNIQUE_FEATURE_ICONS = {
-  hotspring: "onsen", spa: "onsen", warmpool: "hotwater", pool: "swim",
-  horse: "experience", animal: "paw", kidscafe: "kidscafe", indoorplay: "playground",
-  treehouse: "forest", stay: "tent", leisure: "leports", farm: "experience", valley: "drop"
-};
 function uniqueReviewSummary(text, category) {
   const s = String(text ?? "").replace(/\s+/g, " ").trim();
   if (category === "horse") {
@@ -4670,6 +4640,18 @@ function paintMyTasteDialog() {
 
 document.addEventListener("click", (e) => {
   if (e.target.closest("[data-open-my-taste]")) { e.preventDefault(); openMyTasteDialog(); }
+  const spCard = e.target.closest("[data-sp-idx]");
+  if (spCard) {
+    e.preventDefault();
+    const idx = Number(spCard.getAttribute("data-sp-idx"));
+    const cid = spCard.closest(".detail")?.getAttribute("data-id");
+    const d = S.detailCache?.get(cid) || S.activeDetail;
+    const prod = d?.site_products?.[idx];
+    if (prod) openProductModal(prod);
+  }
+  if (e.target.closest("[data-sp-close]") || e.target.classList.contains("sp-modal-backdrop")) {
+    document.getElementById("sp-modal")?.remove();
+  }
 });
 
 function homeView() {
@@ -6371,6 +6353,7 @@ async function detailView(id) {
     <div class="d-body">
       <div class="d-main">
         ${siteTypesHtml(c, d)}
+        ${siteProductsHtml(c, d)}
         ${specSection(c, d)}
         ${priceHtml(c, d)}
         ${bookingHtml(c, d)}
@@ -6533,6 +6516,59 @@ function factValueHtml(x, fallback = "확인필요") {
   const value = valueParts.map((p) => clockText(p) ?? p).join(" · ");
   const noteParts = parts.filter((p) => !valueParts.includes(p) && /업장\s*미공지|법정|조례|기준\s*참고|참고값/.test(p));
   return `${esc(value)}${noteParts.length ? `<span class="fact-note">${esc(noteParts.join(" · "))}</span>` : ""}`;
+}
+function openProductModal(prod) {
+  if (!prod) return;
+  const existing = document.getElementById("sp-modal");
+  if (existing) existing.remove();
+  const photos = prod.photos || (prod.img ? [prod.img] : []);
+  const gallery = photos.map((u) => `<img src="${esc(u)}" alt="${esc(prod.name)}" loading="lazy">`).join("");
+  const modalHtml = `<div class="sp-modal-backdrop" id="sp-modal">
+    <div class="sp-modal-content">
+      <button type="button" class="sp-modal-close" data-sp-close aria-label="닫기">✕</button>
+      <h3 style="margin:0 0 8px;font-size:18px;font-weight:800;color:var(--ink);">${esc(prod.name)}</h3>
+      <div class="sp-badges" style="margin-bottom:12px;">
+        ${prod.floor ? `<span class="sp-badge">${esc(prod.floor)}</span>` : ""}
+        ${prod.size ? `<span class="sp-badge">${esc(prod.size)}</span>` : ""}
+        ${prod.power ? `<span class="sp-badge accent">${esc(prod.power)}</span>` : ""}
+      </div>
+      ${prod.price ? `<p style="font-size:16px;font-weight:850;color:var(--accent);margin:0 0 10px;">1박 ${fmt(prod.price)}원~</p>` : ""}
+      ${prod.desc ? `<p style="font-size:13px;color:var(--ink-2);line-height:1.6;margin:0 0 14px;">${esc(prod.desc)}</p>` : ""}
+      ${photos.length ? `<div class="sp-modal-gallery">${gallery}</div>` : ""}
+    </div>
+  </div>`;
+  document.body.insertAdjacentHTML("beforeend", modalHtml);
+}
+
+function siteProductsHtml(c, d) {
+  const prods = d?.site_products || [];
+  if (!prods.length) return "";
+  const cards = prods.map((p, idx) => {
+    const thumb = p.photos?.[0] || p.img || "";
+    const cnt = p.photos?.length || 0;
+    const priceStr = p.price ? `${fmt(p.price)}원~` : (p.fee_text || "");
+    return `<div class="sp-card" data-sp-idx="${idx}" role="button" tabindex="0" aria-label="${esc(p.name)} 상세 사진 보기">
+      <div class="sp-thumb-wrap">
+        ${thumb ? `<img class="sp-thumb" src="${esc(thumb)}" alt="${esc(p.name)}" loading="lazy">` : `<div class="sp-thumb" style="display:flex;align-items:center;justify-content:center;color:#98a2b3;">${ic("tent")}</div>`}
+        ${cnt > 1 ? `<span class="sp-photo-cnt">${cnt}장</span>` : ""}
+      </div>
+      <div class="sp-body">
+        <h4 class="sp-title">${esc(p.name)}</h4>
+        <div class="sp-badges">
+          ${p.floor ? `<span class="sp-badge">${esc(p.floor)}</span>` : ""}
+          ${p.size ? `<span class="sp-badge">${esc(p.size)}</span>` : ""}
+          ${p.power ? `<span class="sp-badge accent">${esc(p.power)}</span>` : ""}
+        </div>
+        ${priceStr ? `<p class="sp-price">${esc(priceStr)}</p>` : ""}
+        ${p.desc ? `<p class="sp-desc">${esc(p.desc)}</p>` : ""}
+      </div>
+    </div>`;
+  }).join("");
+
+  return `<section class="d-sec sp-sec">
+    <div class="sec-head">${iconTitle("tent", "구역·객실별 실물 사진 & 세부 규격")}<span class="sec-side" style="font-size:12px;color:var(--ink-3);font-weight:700;">${prods.length}개 구역</span></div>
+    <div class="sp-rail rail">${cards}</div>
+  </section>`;
 }
 function siteTypesHtml(c, d) {
   const list = d?.site_types ?? (c.st ?? []).map(([code, count, g, sub]) => ({ code, count, sub, grade: g === "o" ? "OPERATOR" : "CONFIRMED" }));

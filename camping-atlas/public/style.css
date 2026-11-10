@@ -1757,6 +1757,31 @@ body.map-mode { overflow: hidden; height: 100dvh; }
 .stype-b { display: grid; min-width: 0; padding-right: 34px; }
 .stype-b b { font-weight: 850; line-height: 1.3; }
 .stype-b i { font-style: normal; font-size: .84rem; color: var(--ink-3); font-weight: 600; }
+
+/* ── 구역·객실별 실물 사진 & 세부 스펙 (소유자 2026-11-10) ── */
+.sp-sec { margin-top: 20px; }
+.sp-rail { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 10px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.sp-card { flex: 0 0 240px; scroll-snap-align: start; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-s, 12px); overflow: hidden; cursor: pointer; transition: transform .15s ease, box-shadow .15s ease; text-align: left; box-shadow: var(--shadow); }
+.sp-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); }
+.sp-thumb-wrap { position: relative; width: 100%; height: 140px; background: var(--paper-2, #f2f4f7); overflow: hidden; }
+.sp-thumb { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s ease; }
+.sp-card:hover .sp-thumb { transform: scale(1.03); }
+.sp-photo-cnt { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,0.65); color: #fff; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 999px; backdrop-filter: blur(2px); }
+.sp-body { padding: 12px 14px; }
+.sp-title { font-size: 14px; font-weight: 800; color: var(--ink); margin: 0 0 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.3; }
+.sp-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+.sp-badge { font-size: 11px; padding: 2px 6px; border-radius: 4px; background: var(--paper-2, #f2f4f7); color: var(--ink-2); font-weight: 600; }
+.sp-badge.accent { background: var(--accent-tint); color: var(--accent); font-weight: 700; }
+.sp-price { font-size: 13px; font-weight: 850; color: var(--accent); margin: 0; }
+.sp-desc { font-size: 11px; color: var(--ink-3); margin-top: 4px; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* 상품 상세 모달 */
+.sp-modal-backdrop { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.6); display: grid; place-items: center; padding: 16px; backdrop-filter: blur(3px); }
+.sp-modal-content { background: var(--paper); border-radius: var(--r-m, 16px); max-width: 600px; width: 100%; max-height: 85vh; overflow-y: auto; box-shadow: var(--shadow-3, 0 12px 36px rgba(0,0,0,0.2)); padding: 20px; position: relative; }
+.sp-modal-close { position: absolute; top: 14px; right: 14px; background: var(--paper-2); border: none; border-radius: 999px; width: 32px; height: 32px; font-size: 16px; cursor: pointer; display: grid; place-items: center; }
+.sp-modal-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; margin: 14px 0; }
+.sp-modal-gallery img { width: 100%; height: 110px; object-fit: cover; border-radius: 8px; }
+
 .intro summary { list-style: none; cursor: pointer; }
 .intro summary::-webkit-details-marker { display: none; }
 .intro p { color: var(--ink-2); line-height: 1.75; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }

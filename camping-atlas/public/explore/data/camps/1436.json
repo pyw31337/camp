@@ -187,5 +187,46 @@
         }
       }
     }
-  }
+  },
+  "site_products": [
+    {
+      "id": "sp-1436-1",
+      "name": "홍천강 계곡존 파쇄석 (8×10m)",
+      "type": "AUTO",
+      "floor": "파쇄석",
+      "size": "8×10m",
+      "power": "전기 완비",
+      "price": 50000,
+      "photos": [
+        "https://tong.visitkorea.or.kr/cms/resource/49/4079449_image3_1.jpg"
+      ],
+      "desc": "8×10m 초대형 규격으로 대형 거실형 텐트 피칭 및 차량 진입이 가능하며 계곡 물놀이 접근성이 뛰어납니다."
+    },
+    {
+      "id": "sp-1436-2",
+      "name": "전망 데크존 (7×9m)",
+      "type": "DECK",
+      "floor": "데크",
+      "size": "7×9m",
+      "power": "전기 완비",
+      "price": 55000,
+      "photos": [
+        "https://tong.visitkorea.or.kr/cms/resource/76/4097176_image3_1.jpg"
+      ],
+      "desc": "탁 트인 마운틴 뷰와 강변 전망을 자랑하는 프리미엄 목재 데크 사이트입니다."
+    },
+    {
+      "id": "sp-1436-3",
+      "name": "캠핑하우스 방갈로 1호",
+      "type": "HOUSE",
+      "floor": "실내 온돌",
+      "size": "기준 4인",
+      "power": "전기·난방 완비",
+      "price": 130000,
+      "photos": [
+        "https://tong.visitkorea.or.kr/cms/resource/87/3014787_image3_1.JPG"
+      ],
+      "desc": "텐트 없이 편안하게 숙박할 수 있는 온돌 난방 방갈로와 개별 바베큐 테라스가 완비되어 있습니다."
+    }
+  ]
 }

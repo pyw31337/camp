@@ -1,0 +1,56 @@
+{
+  "intro": "충청북도 충주시 수안보면 미륵리사지길 29에 위치한 지자체 정식 인허가 등록 야영장인 '소나무숲아래'입니다.",
+  "nearby": {
+    "tour": [],
+    "food": [],
+    "mart": []
+  },
+  "photos": [],
+  "seasons": [
+    "봄",
+    "여름",
+    "가을",
+    "겨울"
+  ],
+  "booking": null,
+  "profile": {
+    "fields": {
+      "TYPE": {
+        "value": "일반야영장",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "지방행정인허가",
+          "url": "https://www.localdata.go.kr",
+          "date": "2016-04-04"
+        }
+      },
+      "SEASON": {
+        "value": "봄·여름·가을·겨울 운영 (사계절)",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "지방행정인허가",
+          "url": "https://www.localdata.go.kr",
+          "date": "2026-11-10"
+        }
+      },
+      "PARKING": {
+        "value": "업장 내 주차",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "지방행정인허가",
+          "url": "https://www.localdata.go.kr",
+          "date": "2026-01-01"
+        }
+      },
+      "POWER": {
+        "value": "전기 이용 가능",
+        "grade": "CONFIRMED",
+        "source": {
+          "label": "지방행정인허가",
+          "url": "https://www.localdata.go.kr",
+          "date": "2026-01-01"
+        }
+      }
+    }
+  }
+}
