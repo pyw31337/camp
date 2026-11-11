@@ -1470,28 +1470,147 @@ function uniqueFeatureHtml(c) {
   </div>`;
 }
 function uniqueDetailsHtml(c) {
-  const id = `spec-${String(c.id).replace(/[^A-Za-z0-9_-]/g, "-")}`;
-  const f = facts(c);
-  const fallback = [
-    c.pf?.s,
-    Array.isArray(c.amenities) && c.amenities.length ? `시설 ${c.amenities.slice(0, 5).join(" · ")}` : "",
-    feeMain(c)?.text ? `요금 ${feeMain(c).text}` : "",
-  ].filter(Boolean).slice(0, 3);
-  const rows = fallback.length && !siteSizeShort(c) && !f.power?.v && !f.fire?.v && !f.park?.v && !nearLine(c, " · ")
-    ? `<div class="unique-card-fallback">${fallback.map((x) => `<p>${esc(String(x))}</p>`).join("")}</div>`
-    : rowsHtml(c);
-  return `<details class="unique-card-details">
-    <summary class="unique-card-summary"><span>${ic("list")}상세정보</span>${ic("chevron-up", "unique-card-chevron")}</summary>
-    <div class="unique-card-panel" id="${esc(id)}">${rows}</div>
-  </details>`;
+  // t54u: 접히는 상세정보 대신 항상 보이는 비교용 스펙 줄(+더보기).
+  return specStripHtml(c);
 }
+
+// t54u: 목록·테마 카드용 사이트 미니 레일 + 비교용 스펙 줄. 남은 자리 같은 재고는 쓰지 않는다.
+const RAIL_TIER = { AUTO: "site", PITCH: "site", DECK: "site", TARP_ZONE: "site", CAR_CAMP: "site", PET_SITE: "site", SOLO: "site", RV: "site", EQUIPPED: "site", DUPLEX_DECK: "site", GLAMPING: "glamp", CARAVAN: "caravan", HOUSE: "lodge", BUNGALOW: "lodge", PENSION: "lodge" };
+const TENT_TYPES = new Set(["AUTO", "PITCH", "DECK", "TARP_ZONE", "CAR_CAMP", "PET_SITE", "SOLO", "RV", "EQUIPPED", "DUPLEX_DECK"]);
+function sizeGroupsOf(c) {
+  const gs = (c.field_conditions?.site_size?.groups ?? []).filter((g) => g.width_m && g.depth_m);
+  if (gs.length) return gs.map((g) => ({ w: Number(g.width_m), d: Number(g.depth_m), n: g.count, name: g.name || "", floor: g.floor || g.ground || "" }));
+  return (c.sizes ?? []).filter((x) => x[0] && x[1]).map(([w, d, n]) => ({ w: Number(w), d: Number(d), n, name: "", floor: "" }));
+}
+function sizeLabel(g) { return g ? `${g.w}×${g.d}m` : ""; }
+function floorLabelOf(c, code, hint = "") {
+  const t = `${hint} ${code}`;
+  if (/데크|DECK/i.test(t)) return "데크";
+  if (/잔디|GRASS/i.test(t)) return "잔디";
+  if (/파쇄|CRUSHED|GRAVEL|자갈/i.test(t)) return "파쇄석";
+  if (/모래|SAND/i.test(t)) return "모래";
+  if (/흙|SOIL/i.test(t)) return "흙";
+  if (/콘크리트|CONCRETE/i.test(t)) return "콘크리트";
+  const f = facts(c).ground?.v;
+  if (f && !/ · /.test(f)) return f;
+  if (code === "DECK" || code === "DUPLEX_DECK") return "데크";
+  if (f) return f.split(" · ")[0];
+  return "";
+}
+function tilePriceOf(c, code) {
+  const key = RAIL_TIER[code] || "site";
+  let t = tierOf(c, key);
+  if (!t && (key === "glamp" || key === "caravan")) t = tierOf(c, "gc");
+  if (!t && key !== "site") t = null;
+  const lo = t ? Number(t[1]) : Number(c.fee?.min) || 0;
+  const hi = t ? Number(t[2] ?? t[1]) : Number(c.fee?.max ?? c.fee?.min) || 0;
+  if (!(lo > 0)) return { text: "", chip: "", range: false, lo: 0, hi: 0 };
+  const weekend = /주말|주말 기준/.test(`${c.fee?.text ?? ""} ${c.fee?.basis ?? ""}`);
+  if (hi > lo) {
+    const chip = weekend ? `주말 기준 ${fmt(lo)}~${fmt(hi)}원` : `1박 기준 ${fmt(lo)}~${fmt(hi)}원`;
+    return { text: `${fmt(lo)}~${fmt(hi)}원`, chip, range: true, lo, hi };
+  }
+  return { text: `${fmt(lo)}원`, chip: weekend ? `주말 기준 ${fmt(lo)}원` : `1박 ${fmt(lo)}원`, range: false, lo, hi: lo };
+}
+function fitOf(size, minSize) {
+  if (!(minSize > 0) || !size) return "";
+  return Math.min(size.w, size.d) >= minSize ? "ok" : "tight";
+}
+function siteRailItems(c) {
+  if (c._sr) return c._sr;
+  const items = [];
+  const seen = new Set();
+  const groups = sizeGroupsOf(c);
+  const named = groups.filter((g) => g.name);
+  const tentSize = groups.length === 1 ? groups[0] : (groups.filter((g) => !g.name).sort((a, b) => Math.max(b.w, b.d) - Math.max(a.w, a.d))[0] || null);
+  const typelist = (c.st ?? []).filter((t) => t[0] !== "PRIVATE_BATH" && ST[t[0]]);
+  // 이름이 있는 구역은 구역 타일로, 일반 타입과 겹치면 타입 타일 대신 쓴다.
+  for (const g of named) {
+    const code = /글램핑/.test(g.name) ? "GLAMPING" : /카라반/.test(g.name) ? "CARAVAN" : /데크/.test(g.name) ? "DECK" : /차박/.test(g.name) ? "CAR_CAMP" : /반려/.test(g.name) ? "PET_SITE" : (typelist.find((t) => TENT_TYPES.has(t[0]))?.[0] || "PITCH");
+    const pr = tilePriceOf(c, code);
+    items.push({ k: code, name: g.name, size: sizeLabel(g), sz: g, floor: g.floor || floorLabelOf(c, code, g.name), count: g.n || 0, price: pr.text, chip: pr.chip, range: pr.range, photo: "" });
+    seen.add(code);
+  }
+  for (const [code, n, , sub] of typelist) {
+    if (seen.has(code)) continue;
+    const meta = ST[code];
+    const sz = TENT_TYPES.has(code) ? tentSize : null;
+    const pr = tilePriceOf(c, code);
+    const name = (code === "HOUSE" || code === "BUNGALOW" || code === "PENSION") && sub ? sub : meta.label;
+    items.push({ k: code, name, size: sizeLabel(sz), sz, floor: floorLabelOf(c, code, name), count: n || 0, price: pr.text, chip: pr.chip, range: pr.range, photo: "" });
+    seen.add(code);
+  }
+  // 사이트 타입·구역 데이터가 없으면 레일을 그리지 않는다(빈 타일로 자리를 채우지 않음). 타입 배지는 typeRow가 맡는다.
+  return (c._sr = items.slice(0, 8));
+}
+function siteRailHtml(c) {
+  const items = siteRailItems(c);
+  if (!items.length) return "";
+  const minSize = Number(getMyTaste()?.minSize) || 0;
+  const fits = items.map((it) => fitOf(it.sz, minSize));
+  const okN = fits.filter((x) => x === "ok").length, tightN = fits.filter((x) => x === "tight").length;
+  const sum = minSize > 0 && (okN || tightN) ? `<p class="sr-sum">${ic("size")}<b>내 텐트 ${minSize}m+</b><span>${okN ? `<i class="sr-ok">${ic("check")}여유 ${okN}</i>` : ""}${tightN ? `<i class="sr-tight">${ic("alert")}협소 ${tightN}</i>` : ""}</span></p>` : "";
+  const tiles = items.map((it, i) => {
+    const fit = fits[i];
+    const meta = ST[it.k] || { icon: "tent" };
+    const fitB = fit === "ok" ? `<span class="sr-fit sr-fit-ok">${ic("check")}여유</span>` : fit === "tight" ? `<span class="sr-fit sr-fit-tight">${ic("alert")}협소</span>` : "";
+    const media = it.photo ? `<img class="sr-ph" src="${esc(it.photo)}" alt="" loading="lazy">` : `<span class="sr-ic">${ic(meta.icon)}</span>`;
+    const price = it.chip || it.price;
+    return `<button type="button" class="sr-tile" data-site-tile="${i}" aria-label="${esc(it.name)} 상세">${media}${fitB}<b class="sr-name">${esc(it.name)}</b>${it.size ? `<span class="sr-size">${esc(it.size)}</span>` : `<span class="sr-size is-miss">규격 정보없음</span>`}${it.floor ? `<span class="sr-floor">${esc(it.floor)}</span>` : ""}${price ? `<span class="sr-price">${it.range ? `<i>${esc(price)}</i>` : esc(price)}</span>` : ""}</button>`;
+  }).join("");
+  return `<div class="card-group card-group-rail">${sum}<div class="rail site-rail" data-site-rail>${tiles}</div></div>`;
+}
+function specStripHtml(c) {
+  const f = facts(c), fm = feeMain(c);
+  const size = siteSizeShort(c);
+  const volt = f.power?.w ? voltLimitText(f.power.w) : "";
+  const powerTxt = f.power?.v || "";
+  const powerVal = powerTxt
+    ? (volt ? `<button type="button" class="spec-volt has-volt-tip" data-volt-spec="${esc(volt)}" ${voltTip(f.power.short || powerTxt, volt)}>${esc(f.power.short || powerTxt)}</button>` : esc(powerTxt))
+    : "";
+  const cells = [
+    ["규격", "size", size && esc(size)],
+    ["전기W", "bolt", powerVal],
+    ["바닥", "layers", f.ground?.v ? esc(f.ground.v) : ""],
+    ["화로", "flame", f.fire?.v ? esc(f.fire.v) : ""],
+    ["주차", "car", f.park?.v ? esc(f.park.v) : ""],
+    ["매너타임", "bed", c.ti?.m?.[0] ? esc(c.ti.m[0]) : ""],
+    ["반려견", "paw", f.pet?.v ? esc(f.pet.v) : ""],
+    ["요금", "won", fm?.text ? `${esc(fm.text)}${fm.est ? " 추정" : ""}` : ""],
+  ];
+  const strip = `<ul class="spec-strip" aria-label="사이트 스펙">${cells.map(([l, i, h]) => `<li class="spec-cell${/불가|금지|없음/.test(String(h).replace(/<[^>]+>/g, "")) ? " is-no" : ""}"><span class="sl">${ic(i)}${l}</span><span class="sv${h ? "" : " is-miss"}">${h || "정보없음"}</span></li>`).join("")}</ul>`;
+  const ci = c.ti?.i?.[0], co = c.ti?.o?.[0];
+  const extra = [
+    ["주변", nearLine(c, " · ")],
+    ["입·퇴실", [ci && `입실 ${ci}`, co && `퇴실 ${co}`].filter(Boolean).join(" · ")],
+    ["유형별 요금", (fm?.text && feeTiersLine(c) ? feeTiersLine(c).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim() : "")],
+    ["위생", f.sanitary?.v || ""],
+    ["텐트·타프", f.shelter?.v || ""],
+    ["간격", c.gap || ""],
+  ];
+  const more = `<details class="spec-more"><summary>${ic("list")}더보기<span class="spec-more-hint">주변·입퇴실·유형별 요금</span>${ic("chevron-up", "spec-more-chev")}</summary><ul class="spec-extra">${extra.map(([l, v]) => `<li><span class="sl">${esc(l)}</span><span class="sv${v ? "" : " is-miss"}">${v ? (/유형별/.test(l) && fm?.text && feeTiersLine(c) ? feeTiersLine(c) : esc(v)) : "정보없음"}</span></li>`).join("")}</ul></details>`;
+  return `<div class="card-group card-group-spec">${strip}${more}</div>`;
+}
+function openSiteTileModal(c, tile) {
+  if (!c || !tile) return;
+  document.getElementById("sp-modal")?.remove();
+  const minSize = Number(getMyTaste()?.minSize) || 0;
+  const fit = fitOf(tile.sz, minSize);
+  const fitB = fit === "ok" ? `<span class="sr-fit sr-fit-ok">${ic("check")}여유 ${esc(tile.size)}</span>` : fit === "tight" ? `<span class="sr-fit sr-fit-tight">${ic("alert")}협소 ${esc(tile.size || "")}</span>` : "";
+  const book = c.booking?.url;
+  const go = `${APP_BASE}place/${encodeURIComponent(c.id)}`;
+  const price = tile.chip || (tile.price ? `1박 ${tile.price}` : "");
+  const body = `<div class="sp-modal-content sr-modal"><button type="button" class="sp-modal-close" data-sp-close aria-label="닫기">${ic("close")}</button><h3 class="sp-modal-title">${esc(tile.name)}</h3>${fitB}<ul class="sr-modal-facts"><li><span>규격</span><b>${esc(tile.size || "정보없음")}</b></li><li><span>바닥</span><b>${esc(tile.floor || "정보없음")}</b></li><li><span>요금</span><b>${esc(price || "정보없음")}</b></li>${tile.count ? `<li><span>면수</span><b>${fmt(tile.count)}${/GLAMPING|CARAVAN|HOUSE|BUNGALOW|PENSION/.test(tile.k) ? "동" : "면"}</b></li>` : ""}</ul><p class="sr-modal-note">실시간 잔여석은 이 화면에서 확인하지 않아요. 예약처에서 자리를 확인해 주세요.</p><div class="sr-modal-acts"><a class="btn ghost" href="${esc(go)}">캠핑장 상세 보기</a>${book ? `<a class="btn primary" href="${esc(book)}" target="_blank" rel="noopener">예약처에서 자리 확인 ${ic("external")}</a>` : (c.homepage ? `<a class="btn primary" href="${esc(c.homepage)}" target="_blank" rel="noopener">홈페이지에서 확인 ${ic("external")}</a>` : (c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : ""))}</div></div>`;
+  document.body.insertAdjacentHTML("beforeend", `<div class="sp-modal-backdrop" id="sp-modal">${body}</div>`);
+}
+
 // 찜 목록은 여러 곳을 훑어보기 위한 화면이므로, 이름·주소 아래의 모든 정보(유형·스펙·후기 뱃지)를 '상세정보'로 기본 접는다.
 // 일반 목록·테마 카드에는 같은 행을 그대로 유지해 비교 정보가 숨지 않게 한다.
 function savedDetailsHtml(c) {
-  const o = Boolean(S.savedSpecOpen), id = `saved-spec-${String(c.id).replace(/[^A-Za-z0-9_-]/g, "-")}`;
-  const t = typeRow(c).html ? `<div class="card-group card-group-types">${typeRow(c).html}</div>` : "";
+  const rail = siteRailHtml(c);
+  const t = rail ? "" : (typeRow(c).html ? `<div class="card-group card-group-types">${typeRow(c).html}</div>` : "");
   const r = c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-group card-group-reviews"><div class="card-reviews">${cardReviewPills(c.rv, c)}</div></div>` : "";
-  return `<div class="card-group card-group-spec saved-card-spec${o ? " is-open" : ""}" data-saved-card-spec><button class="saved-card-spec-toggle" type="button" data-saved-card-spec-toggle aria-expanded="${o ? "true" : "false"}" aria-controls="${esc(id)}"><span>${ic("list")}상세정보</span>${ic("chevron-up", "saved-card-spec-chevron")}</button><div class="saved-card-spec-panel" id="${esc(id)}" data-saved-card-spec-panel${o ? "" : " hidden"}>${t}${rowsHtml(c)}${uniqueFeatureHtml(c)}${r}</div></div>`;
+  return `${rail}${t}${specStripHtml(c)}${uniqueFeatureHtml(c)}${r}`;
 }
 // 가는 길 장보기: 마트·편의점·정육점 중 5km 안에 있는 곳(LOCALDATA 인허가). 순서는 늘 마트 → 편의점 → 정육점(소유자 2026-10-20).
 function nearLine(c, sep = " · ") {
@@ -1619,7 +1738,9 @@ function card(c, i = 0, opts) {
   const { tag } = nameOf(c), o = openingOf(c);
   const actMaps = c.lat && c.lng ? `<button type="button" class="c-act-btn" data-rv="${c.lat},${c.lng}" data-rv-name="${esc(nameOf(c).name)}" title="카카오 로드뷰 보기" aria-label="로드뷰">${ic("roadview")}</button><a class="c-act-btn" href="${esc(mapLink(nameOf(c).name, c.lat, c.lng))}" target="_blank" rel="noopener" title="카카오 지도에서 보기" aria-label="지도">${ic("map")}</a>` : "";
   const actVr = vrUrl(c) ? `<a class="c-act-btn c-act-vr" href="${esc(vrUrl(c))}" target="_blank" rel="noopener" title="360° VR 현장 둘러보기" aria-label="360° VR">${ic("vr")}</a>` : "";
-  const bodyDetails = savedMemo ? savedDetailsHtml(c) : `<div class="card-group card-group-types">${typeRow(c).html}</div>${uniqueDetailsHtml(c)}${uniqueFeatureHtml(c)}${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-group card-group-reviews"><div class="card-reviews">${cardReviewPills(c.rv, c)}</div></div>` : ""}`;
+  const rail = siteRailHtml(c);
+  const types = rail ? "" : `<div class="card-group card-group-types">${typeRow(c).html}</div>`;
+  const bodyDetails = savedMemo ? savedDetailsHtml(c) : `${rail}${types}${specStripHtml(c)}${uniqueFeatureHtml(c)}${c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-group card-group-reviews"><div class="card-reviews">${cardReviewPills(c.rv, c)}</div></div>` : ""}`;
   return `<article class="card${isClosed ? " is-closed" : ""}${savedMemo ? " saved-memo-card" : ""}" data-id="${esc(c.id)}"><a class="card-hit" href="${APP_BASE}place/${encodeURIComponent(c.id)}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a><div class="card-media">${carousel(c, { eager: i < 4 })}${isClosed ? `<span class="sig closed">${ic("clock")}운영종료</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : ""}<span class="bdgs">${cardPhotoBadges(c)}</span></div><div class="card-body"><div class="card-group card-group-head"><div class="name-row"><h3 class="card-name">${esc(nameOf(c).name)}</h3>${heartBtn(c)}</div><div class="card-meta-row"><p class="card-meta">${ic("pin")}<span class="card-meta-txt">${esc(region(c))}${tag ? ` · ${esc(tag)}` : ""}${driveMin(c) != null ? ` · 내비 ${driveText(driveMin(c))}` : ""}</span></p><div class="card-meta-actions">${actMaps}${actVr}</div></div></div>${bodyDetails}${commentsCardHtml(c)}</div></article>`;
 }
 
@@ -4147,6 +4268,7 @@ function refreshMyTasteUi() {
     if (f) { sec.replaceWith(f); initCarousels(f); initDraggableRails(f); }
   }
   if (typeof window.__refreshMyTasteTheme === "function") window.__refreshMyTasteTheme();
+  if ($("[data-lrows]")) renderList();
 }
 
 function openMyTasteDialog() {
@@ -4206,6 +4328,16 @@ document.addEventListener("click", (e) => {
     return;
   }
   if (e.target.closest("[data-open-my-taste]")) { e.preventDefault(); openMyTasteDialog(); }
+  const siteTile = e.target.closest("[data-site-tile]");
+  if (siteTile) {
+    e.preventDefault();
+    e.stopPropagation();
+    const cardEl = siteTile.closest("[data-id]");
+    const c = S.byId?.get(String(cardEl?.dataset.id ?? ""));
+    const it = c ? siteRailItems(c)[Number(siteTile.dataset.siteTile)] : null;
+    if (it) openSiteTileModal(c, it);
+    return;
+  }
   const spCard = e.target.closest("[data-sp-idx]");
   if (spCard) {
     e.preventDefault();
@@ -4694,7 +4826,7 @@ function listRow({ c, ce }, i = 0) {
   const actMaps = c.lat && c.lng ? `<button type="button" class="c-act-btn" data-rv="${c.lat},${c.lng}" data-rv-name="${esc(nameOf(c).name)}" title="카카오 로드뷰 보기" aria-label="로드뷰">${ic("roadview")}</button><a class="c-act-btn" href="${esc(mapLink(nameOf(c).name, c.lat, c.lng))}" target="_blank" rel="noopener" title="카카오 지도에서 보기" aria-label="지도">${ic("map")}</a>` : "";
   const cta = main ? reserveSplit(c, { inline: true, lazy: true }) : c.tel ? `<a class="btn primary" href="tel:${esc(c.tel)}">${ic("phone")}전화 문의</a>` : "";
   const rvs = c.rv && (c.rv.p?.length || c.rv.c?.length || c.rv.n > 0) ? `<div class="card-group card-group-reviews"><div class="card-reviews">${cardReviewPills(c.rv, c)}</div></div>` : "";
-  return `<article class="card card-horizontal lrow${isClosed ? " is-closed" : ""}" data-id="${esc(c.id)}"><a class="card-hit" href="${href}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a><div class="card-media">${carousel(c, { eager: i < 3 })}${isClosed ? `<span class="sig closed">${ic("clock")}운영종료</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : ""}<span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3, 2, { rows: true, theme: S.theme })}</span></div><div class="card-body"><div class="card-group card-group-head"><div class="name-row"><h3 class="card-name">${esc(nameOf(c).name)}</h3>${heartBtn(c)}</div><div class="card-meta-row"><p class="card-meta">${ic("pin")}<span class="card-meta-txt">${esc(region(c))}${driveMin(c) != null ? ` · 내비 ${driveText(driveMin(c))}` : ""}${tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</span></p><div class="card-meta-actions">${actMaps}</div></div></div>${condLine(c, ce)}<div class="card-group card-group-types">${typeRow(c).html}</div><div class="card-group card-group-spec">${rowsHtmlHorizontal(c)}</div>${rvs}${cta ? `<div class="card-cta">${cta}</div>` : ""}</div></article>`;
+  return `<article class="card card-horizontal lrow${isClosed ? " is-closed" : ""}" data-id="${esc(c.id)}"><a class="card-hit" href="${href}" draggable="false" aria-label="${esc(nameOf(c).name)} 자세히"></a><div class="card-media">${carousel(c, { eager: i < 3 })}${isClosed ? `<span class="sig closed">${ic("clock")}운영종료</span>` : o ? `<span class="sig">${ic("clock")}${esc(o.txt)}</span>` : ""}<span class="bdgs">${wxBadge(c)}${badges(c, wxAlert(c) ? 2 : 3, 2, { rows: true, theme: S.theme })}</span></div><div class="card-body"><div class="card-group card-group-head"><div class="name-row"><h3 class="card-name">${esc(nameOf(c).name)}</h3>${heartBtn(c)}</div><div class="card-meta-row"><p class="card-meta">${ic("pin")}<span class="card-meta-txt">${esc(region(c))}${driveMin(c) != null ? ` · 내비 ${driveText(driveMin(c))}` : ""}${tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</span></p><div class="card-meta-actions">${actMaps}</div></div></div>${condLine(c, ce)}${siteRailHtml(c)}${siteRailItems(c).length ? "" : `<div class="card-group card-group-types">${typeRow(c).html}</div>`}${specStripHtml(c)}${rvs}${cta ? `<div class="card-cta">${cta}</div>` : ""}</div></article>`;
 }
 
 /** 지역·사이트·요금 필터 모듈 (목록·메인 공통). prefix로 data-attr 구분. */
@@ -4772,6 +4904,7 @@ function renderList({ reset = true } = {}) {
   $$("[data-cond-label]").forEach((x) => (x.textContent = condSummary()));
   $("[data-list-more]").hidden = to >= shown.length;
   initCarousels(box);
+  initDraggableRails(box);
 }
 function bindList() {
   renderList();
