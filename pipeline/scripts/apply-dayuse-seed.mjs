@@ -64,7 +64,8 @@ for (const p of seed.places ?? []) {
   if (rules?.length) d.house_rules = { ...(d.house_rules ?? {}), rules, at: src?.checked_at };
   if (day) d.day = day;
   if (src) d.du_src = src;
-  writeFileSync(dp, JSON.stringify(d));
+  const ind = /^\{\n( +)"/.exec(rawDetail)?.[1]?.length;
+  writeFileSync(dp, ind ? `${JSON.stringify(d, null, ind)}\n` : JSON.stringify(d));
 }
 writeFileSync(catPath, JSON.stringify(cat));
 console.log(`dayuse seed → 추가 ${added} · 갱신 ${replaced} · 캠크닉 ${cat.filter((c) => c.types?.includes("캠크닉")).length}곳`);
