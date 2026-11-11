@@ -2,10 +2,12 @@
 // 히어로 기능이 포함된 발행 소스에서 배경과 Canvas 효과를 같은 테마 키로 묶는지 검사한다.
 // 현재 main처럼 히어로 기능이 아직 병합되지 않은 소스는 경고만 남기고 통과한다.
 import { readFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { validateHeroThemes } from "../lib/hero-theme-guard.mjs";
 
-const file = resolve(process.argv[2] || "design/renewal/app.js");
+const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
+const file = resolve(root, process.argv[2] || "design/renewal/app.js");
 const source = await readFile(file, "utf8");
 if (!source.includes("HERO_THEMES")) {
   console.warn(`::warning::${file}에 HERO_THEMES가 없어 동적 히어로 검사를 건너뜁니다(배포 기준 브랜치 확인 필요)`);
