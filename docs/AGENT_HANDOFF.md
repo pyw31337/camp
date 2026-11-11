@@ -1376,3 +1376,5 @@
 - GitHub Actions 주요 수집을 허용 시간으로 이동했다: `data-sync` 매일 03:17 + 주말 15:17, `shorts-sync` 매일 04:40, `saved-priority` 평일 20:11·23:11·02:11·05:11 및 주말 3시간 간격. 기존에 평일 낮에 실행되던 content-judge·conditions-sync·naver-free-tier-watch·drive-times도 야간 슬롯으로 옮겼다.
 - 맥미니 `nightshift.mjs`는 같은 기준을 사용하며, data-sync·shorts-sync·saved-priority의 KST 실행 슬롯을 공통 회피 목록에 등록해 CI와 파일을 동시에 쓰지 않는다. 작업 중 실제 프로세스가 발견되면 기존처럼 중단·재개한다.
 - 시간표 변경은 수집량을 즉시 70점으로 만드는 변경이 아니라, 무료 한도 안에서 빈약 업장 우선 큐가 안정적으로 실행될 수 있게 하는 기반 변경이다. 품질 점수는 각 배치의 성공·실패와 검증 결과를 누적해 별도 보고한다.
+- **히어로/카드 매칭 방어 (2026-11-12)**: `candidateIdentity`로 업장 고유명 근거 없는 후기 사진을 대표 사진으로 승격하지 않게 했고, 공식·파생 사진 URL의 업장 ID 교차 검증을 화면에도 추가했다. `hero-theme-guard`와 `check:hero`로 22테마 소스가 병합될 때 `theme.effect`를 사용하도록 검사한다. 현재 main에는 HERO_THEMES가 없어 검사 경고가 발생하며, 라이브 히어로와 배포 소스의 기준 브랜치 정리가 필요하다. 관련 회귀 5건 통과.
+- 추가로 `uq-horse`의 잘못된 `sunset-coast`(갈매기) 참조를 `green-meadow`로 복구하고 원본·발행본을 동기화했다. 7,696개 카드의 공식 이미지 URL을 전수 점검한 결과 중복 URL 0건·업장 ID 경로 불일치 0건이었다.
