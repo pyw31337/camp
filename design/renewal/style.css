@@ -4673,10 +4673,48 @@ height: 14px;
 .sr-modal-acts { display: flex; flex-wrap: wrap; gap: 8px; }
 .sr-modal .sr-fit { position: static; margin: 6px 0 0; }
 
-@media (max-width: 759px) {
-  .spec-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .sr-tile { flex-basis: 124px; }
-}
+/* t55u: 칸 수는 뷰포트가 아니라 카드 너비로. 4→3→2→1, 값은 줄바꿈하고 높이가 늘어난다. */
+.card-body, .card-horizontal .card-body, .sr-modal { container-type: inline-size; container-name: card; min-width: 0; }
+.card, .card-body, .card-group, .card-media, .spec-strip, .spec-cell, .sr-tile, .unique-feature-block, .unique-feature-chips { min-width: 0; max-width: 100%; }
+.spec-strip { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@container card (max-width: 639px) { .spec-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@container card (max-width: 479px) { .spec-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@container card (max-width: 299px) { .spec-strip { grid-template-columns: minmax(0, 1fr); } }
+@container card (max-width: 299px) { .spec-extra li { grid-template-columns: minmax(0, 1fr); } }
+
 .card-horizontal .site-rail { padding-bottom: 6px; }
-.card-horizontal .sr-tile { flex-basis: 118px; padding: 6px; }
+.card-horizontal .sr-tile { width: min(124px, 100%); padding: 6px; }
 .card-horizontal .spec-strip { gap: 6px 8px; }
+
+/* t55u: 카드 안 글자는 상자를 넘기지 않는다. 자르지 않고 상자 안에서 줄바꿈·높이 증가. */
+.sr-tile { flex: 0 0 auto; width: min(132px, 100%); box-sizing: border-box; overflow-x: clip; overflow-y: visible; }
+.sr-name, .sr-size, .sr-floor, .sr-price, .sr-price i { white-space: normal; overflow-wrap: anywhere; word-break: break-word; max-width: 100%; }
+.sr-sum { flex-wrap: wrap; justify-content: flex-start; gap: 6px 10px; }
+.sr-sum > .ic { flex: none; }
+.sr-sum span { flex-wrap: wrap; }
+.spec-cell .sv, .spec-extra .sv, .spec-volt { white-space: normal; overflow-wrap: anywhere; word-break: break-word; max-width: 100%; }
+.spec-more summary { flex-wrap: wrap; }
+.spec-more-hint { min-width: 0; overflow-wrap: anywhere; }
+.card-name { overflow-wrap: anywhere; max-width: 100%; }
+.card-meta-row, .card-meta, .name-row { min-width: 0; max-width: 100%; }
+.name-row .heart { margin-right: 0; }
+.spec-more, .spec-more summary, .card-group-spec, .spec-extra { min-width: 0; max-width: 100%; box-sizing: border-box; }
+.spec-more-chev { flex: none; }
+@container card (max-width: 359px) {
+  .sr-modal-facts li { flex-direction: column; align-items: flex-start; gap: 2px 0; }
+}
+
+.card-meta-txt { white-space: normal; overflow: visible; text-overflow: unset; overflow-wrap: anywhere; }
+.unique-feature-chip, .unique-feature-item { white-space: normal; height: auto; max-width: 100%; overflow-wrap: anywhere; }
+.unique-feature-review { white-space: normal; overflow: visible; text-overflow: unset; max-width: 100%; overflow-wrap: anywhere; }
+.card-reviews { flex-wrap: wrap; overflow: visible; max-width: 100%; }
+.c-rv-pill { white-space: normal; overflow: visible; text-overflow: unset; height: auto; overflow-wrap: anywhere; }
+.bdgs { max-width: 100%; }
+.bdg, .sig { max-width: 100%; box-sizing: border-box; white-space: normal; height: auto; min-height: 2.19em; line-height: 1.25; overflow-wrap: anywhere; }
+.sr-modal-facts li { flex-wrap: wrap; align-items: flex-start; gap: 6px 12px; }
+.sr-modal-facts span, .sr-modal-facts b { min-width: 0; overflow-wrap: anywhere; }
+.sr-modal-acts { max-width: 100%; }
+.sr-modal-acts .btn { white-space: normal; height: auto; min-height: 44px; max-width: 100%; }
+.sp-modal-content, .sr-modal { max-width: min(600px, calc(100vw - 24px)); box-sizing: border-box; overflow-wrap: anywhere; }
+.sp-modal-content.sr-modal, .sr-modal { max-width: min(480px, calc(100vw - 24px)); }
+.sp-modal-title { padding-right: 36px; overflow-wrap: anywhere; }

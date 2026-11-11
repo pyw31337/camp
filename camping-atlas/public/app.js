@@ -4,6 +4,7 @@
 
 // 주소(2026-10-21): 해시(#/) 없이 경로로 — /camp/, /camp/map, /camp/place/{id} … (History API).
 // APP_BASE = 앱 루트 경로(/camp/ · 로컬 미리보기는 /). 데이터·사진·링크는 모두 이 절대 경로를 쓴다(깊은 주소에서도 깨지지 않게).
+import { bestShortSide, siteFitsTent } from "./site-fit.mjs";
 const MOD_ROOT = /\/(explore|renewal)\/[^/]*$/.test(new URL(import.meta.url).pathname) ? "../" : "./";
 const APP_BASE = new URL(MOD_ROOT, import.meta.url).pathname;
 const ASSETS_BASE = APP_BASE;
@@ -1513,8 +1514,7 @@ function tilePriceOf(c, code) {
   return { text: `${fmt(lo)}원`, chip: weekend ? `주말 기준 ${fmt(lo)}원` : `1박 ${fmt(lo)}원`, range: false, lo, hi: lo };
 }
 function fitOf(size, minSize) {
-  if (!(minSize > 0) || !size) return "";
-  return Math.min(size.w, size.d) >= minSize ? "ok" : "tight";
+  return siteFitsTent(size, minSize);
 }
 function siteRailItems(c) {
   if (c._sr) return c._sr;
@@ -4155,7 +4155,7 @@ function matchMyTaste(c, taste = getMyTaste()) {
   const txt = campSearchText(c), uq = c.uq ?? [], am = c.amenities ?? [];
   const hit = (re) => re.test(txt);
   if (taste.types?.length && !taste.types.some((k) => hasType(c, k) || (k === "AUTO" && !isPublicPark(c) && (c.auto || hasType(c, "AUTO"))) || (k === "GLAMPING" && (c.glamp || c.types?.includes("글램핑"))) || (k === "CARAVAN" && (c.caravan || c.types?.includes("카라반"))))) return false;
-  if (taste.minSize > 0 && maxSide(c) < taste.minSize) return false;
+  if (taste.minSize > 0 && bestShortSide(c) < taste.minSize) return false; // t55u: Fit과 같이 짧은 쪽
   if (taste.minWatts > 0) {
     const w = c.watts || (c.of?.w ? Number(c.of.w.v) : null) || c.field_conditions?.power?.limit_w || wattsOf(c) || (pos(facts(c).power) && facts(c).power.w ? facts(c).power.w : 0);
     if (w > 0 ? w < taste.minWatts : (taste.minWatts >= 1400 ? !/(?:1[4-9]\d{2}|[23]\d{3})\s*w|1\.[4-9]\s*kw|[23](\.\d+)?\s*kw|초고용량\s*전기/i.test(txt) : taste.minWatts >= 1000 ? !/(?:1\d{3}|[23]\d{3})\s*w|1(\.\d+)?\s*kw|고용량\s*전기/i.test(txt) : !(c.pwr || c.field_conditions?.power?.available || facts(c).power?.ok || /600\s*w|전기/i.test(txt)))) return false;
@@ -4598,7 +4598,7 @@ function condEval(c, k = S.cond, skip = null) {
     else if (p?.ok) st.w = k.w <= 600 ? "ref" : "?";
     else st.w = p && p.ok === false ? "n" : "?";
   }
-  if (skip !== "size" && k.size) { const m = maxSide(c); st.size = m ? (m >= k.size ? "y" : "n") : "?"; }
+  if (skip !== "size" && k.size) { const m = bestShortSide(c); st.size = m ? (m >= k.size ? "y" : "n") : "?"; }
   if (skip !== "fire" && k.fire) { const f = facts(c).fire?.kind; st.fire = f === "FIREWOOD_OK" ? "y" : f ? "n" : "?"; }
   if (skip !== "win" && k.win) st.win = c.win === 1 ? "y" : c.win === 0 || noKeys(c).includes("NO_WINTER") ? "n" : "?";
   if (skip !== "vr" && k.vr) st.vr = hasVerifiedVr(c) ? "y" : "n";
