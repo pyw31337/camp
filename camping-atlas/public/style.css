@@ -3908,7 +3908,7 @@ body:is([data-view="map"], [data-view="themes"], [data-view="compare"], [data-vi
 body[data-view="detail"] .d-bar { padding-top: calc(10px + env(safe-area-inset-top)); }
 }
 /* ‘캠핑장 운영자이신가요? 정보 바로잡기’ 아래 여백 확대(영우 님 2026-10-21, t39 #19) */
-.d-sec[data-opform-sec] { margin-bottom: clamp(36px, 6vw, 64px); }
+.d-sec[data-opform-sec] { margin-bottom: clamp(36px, 6vw, 64px); min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
 /* 지도 검색칸 오른쪽 아이콘형 조건 버튼(영우 님 2026-10-21, t39 #22) */
 .search.sm:has(.msearch-cond) { padding-right: 4px; }
 .msearch-cond { position: relative; flex: none; display: grid; place-items: center; width: 40px; height: 40px; margin-left: auto; border: 0; border-radius: 999px; background: var(--soft); color: var(--ink-2); cursor: pointer; }

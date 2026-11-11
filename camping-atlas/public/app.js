@@ -8678,7 +8678,7 @@ function bindDetail() {
   if (evSec && condCamp) import(new URL(`${MOD_ROOT}context/events.js`, import.meta.url).href).then((m) => m.mount(evSec, condCamp)).catch(() => {});
   // 운영자 정보 바로잡기(로그인 없이, Supabase operator_submission에 넣기만): /operator/form.js
   const opEl = $("[data-opform-sec]");
-  if (opEl && condCamp && SB.url && SB.key) import(new URL(`${MOD_ROOT}operator/form.js`, import.meta.url).href).then((m) => m.mount(opEl, condCamp, SB)).catch(() => {});
+  if (opEl && condCamp) import(new URL(`${MOD_ROOT}operator/form.js`, import.meta.url).href).then((m) => m.mount(opEl, condCamp, SB)).catch(() => {});
   // ── 시설배치도 라이트박스 열기 (단일/후보 다중) ──
   $$("[data-layout-open]").forEach((b) => b.addEventListener("click", async () => {
     const d = await detailOf(id);

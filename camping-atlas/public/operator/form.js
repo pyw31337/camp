@@ -1,6 +1,8 @@
 // 상세 화면 ‘운영자 정보 바로잡기’ — GitHub 계정 없이 Supabase(public.operator_submission)에 넣기만 한다.
 // 공개 키는 INSERT만 가능(db/015). 소유자가 검토·승인한 값만 사이트에 ‘운영자 직접 등록’으로 반영된다.
 import { FORM_FIELDS, normalizeFields } from "./rules.js";
+import { mountPhotos } from "./photos.js";
+import { isPreviewHost } from "./verify.js";
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const LAST = "mc-opform-last";
@@ -81,11 +83,17 @@ export function rowFrom(fd) {
 }
 
 export function mount(el, camp, sb) {
-  if (!el || !camp || !sb?.url || !sb?.key) return;
+  if (!el || !camp) return;
+  const canCorrect = Boolean(sb?.url && sb?.key);
+  const canPhotos = isPreviewHost(); // 실제 사이트에는 아직 사진 올리기를 열지 않는다.
+  if (!canCorrect && !canPhotos) return;
   if (!document.getElementById("opf-style")) { const s = document.createElement("style"); s.id = "opf-style"; s.textContent = STYLE; document.head.append(s); }
-  el.innerHTML = formHtml(camp) + takedownHtml(camp);
-  bindTakedown(el, sb);
+  el.innerHTML = (canCorrect ? formHtml(camp) + takedownHtml(camp) : "") + `<div data-opp-host></div>`;
   el.hidden = false;
+  const photoHost = el.querySelector("[data-opp-host]");
+  if (canPhotos && photoHost) mountPhotos(photoHost, camp);
+  if (!canCorrect) return;
+  bindTakedown(el, sb);
   const form = el.querySelector("[data-opform]"), msg = el.querySelector("[data-opform-msg]");
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
