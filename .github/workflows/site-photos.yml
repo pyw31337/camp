@@ -1,0 +1,137 @@
+name: Site photos
+
+# 캠핑장 상품(사이트 유형·구역)별 사진 수집·판정·굽기(2026-11-11 소유자 t55: “업장별 상품들의 사진도 충분히 수집 — 수집범위를 최대로”).
+# 1) 운영자 홈페이지 상품 사진 후보(주 1회 다시 확인) 2) 공식 사진 판정(CLIP 두 모델, 이미 판정한 사진은 건너뜀, 시간 상한)
+# 3) 선정된 사진을 webp로 media 브랜치 sites/ → R2에 올림(지우지 않음) 4) 판정·선정·색인 레지스트리를 main에 착지 5) 사이트 다시 배포.
+# 외부 유료 호출 없음(무료·로컬 CPU 모델). 호스트별 1.1초 간격.
+on:
+  schedule:
+    # 매일 11:17 KST
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+    inputs:
+      judge_minutes:
+        description: "판정 시간 상한(분, 기본 200)"
+        required: false
+        default: "200"
+      bake_max:
+        description: "굽기 다운로드 상한(기본 6000)"
+        required: false
+        default: "6000"
+      operator_crawl:
+        description: "운영자 홈페이지 다시 확인(true/false, 기본: 일요일만)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+env:
+  GH_TOKEN: ${{ github.token }}
+
+concurrency:
+  # media 브랜치 강제 푸시가 Card photos·Data sync와 겹치지 않게 같은 대기열을 쓴다.
+  group: letscamp-media-publish
+  cancel-in-progress: false
+
+jobs:
+  sites:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    defaults:
+      run:
+        working-directory: pipeline
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: pipeline/package-lock.json
+      - run: npm ci
+      - name: Install judges (transformers.js)
+        run: npm i --no-save @huggingface/transformers@3.8.1
+      - uses: actions/cache@v4
+        with:
+          path: pipeline/.cache/hf
+          key: hf-clip-base-large-v1
+      - name: Operator homepage product photos (Sunday or on request)
+        continue-on-error: true
+        timeout-minutes: 90
+        run: |
+          if [ "${{ github.event.inputs.operator_crawl }}" = "true" ] || { [ "${{ github.event_name }}" = "schedule" ] && [ "$(date -u +%u)" = "7" ]; }; then
+            node scripts/collect-operator-site-photos.mjs --concurrency 16 --max-age-days 7
+          else echo "운영자 홈페이지는 일요일(또는 operator_crawl=true)에만 다시 확인"; fi
+      - name: Media manifest (R2 copies of official photos)
+        working-directory: .
+        run: |
+          git fetch --depth=1 origin +media:refs/remotes/origin/media
+          git show origin/media:manifest.json > "$RUNNER_TEMP/media-manifest.json" || echo '{"camps":{}}' > "$RUNNER_TEMP/media-manifest.json"
+      - name: Judge and select site-type photos (resumable)
+        continue-on-error: true
+        timeout-minutes: 230
+        run: node scripts/collect-site-photos.mjs
+        env:
+          MEDIA_MANIFEST: ${{ runner.temp }}/media-manifest.json
+          SITE_PHOTO_TIME_BUDGET_MIN: ${{ github.event.inputs.judge_minutes || '200' }}
+          R2_PUBLIC_BASE: ${{ vars.R2_PUBLIC_BASE }}
+      - name: Check out the media branch
+        id: media
+        working-directory: .
+        run: |
+          MEDIA_DIR="$RUNNER_TEMP/media"
+          git worktree add -B media "$MEDIA_DIR" origin/media
+          bash .github/scripts/media-r2.sh pull "$MEDIA_DIR" sites
+          echo "dir=$MEDIA_DIR" >> "$GITHUB_OUTPUT"
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ vars.R2_BUCKET }}
+          R2_PUBLIC_BASE: ${{ vars.R2_PUBLIC_BASE }}
+      - name: Bake site photos (webp 720px) and build the index
+        run: node scripts/bake-site-photos.mjs
+        env:
+          MEDIA_DIR: ${{ steps.media.outputs.dir }}
+          SITE_BAKE_MAX: ${{ github.event.inputs.bake_max || '6000' }}
+      - name: Publish the media branch (R2, no delete)
+        if: vars.GOCAMPING_IMAGES_PUBLISH != 'false'
+        working-directory: ${{ steps.media.outputs.dir }}
+        run: |
+          R2=0; bash "$GITHUB_WORKSPACE/.github/scripts/media-r2.sh" on && R2=1
+          if [ "$R2" != 1 ]; then echo "::warning::R2 설정이 없어 상품 사진을 올리지 않습니다(사진 파일은 R2에만 둔다)."; exit 0; fi
+          bash "$GITHUB_WORKSPACE/.github/scripts/media-r2.sh" push .
+          bash "$GITHUB_WORKSPACE/.github/scripts/media-r2.sh" git-json-only .
+          if git diff --cached --quiet; then echo "media 목록 변경 없음."; exit 0; fi
+          # 공식 사진(camps/)이 사라지는 푸시는 막는다(data-sync·card-photos와 같은 검사).
+          git show origin/media:manifest.json > "$RUNNER_TEMP/media-prev.json" 2>/dev/null || echo '{"camps":{}}' > "$RUNNER_TEMP/media-prev.json"
+          git ls-tree -r --name-only origin/media -- camps > "$RUNNER_TEMP/media-prev-files.txt" 2>/dev/null || : > "$RUNNER_TEMP/media-prev-files.txt"
+          bash "$GITHUB_WORKSPACE/.github/scripts/media-r2.sh" keys "$RUNNER_TEMP/media-r2-keys.txt"; grep '^camps/' "$RUNNER_TEMP/media-r2-keys.txt" >> "$RUNNER_TEMP/media-prev-files.txt" || true
+          find camps -name '*.webp' > "$RUNNER_TEMP/media-next-files.txt" 2>/dev/null || : > "$RUNNER_TEMP/media-next-files.txt"
+          grep '^camps/' "$RUNNER_TEMP/media-r2-keys.txt" >> "$RUNNER_TEMP/media-next-files.txt" || true
+          node "$GITHUB_WORKSPACE/.github/scripts/media-guard.mjs" "$RUNNER_TEMP/media-prev.json" manifest.json "$RUNNER_TEMP/media-prev-files.txt" "$RUNNER_TEMP/media-next-files.txt"
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q --amend -m "chore(media): official campground images $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push --force origin media
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ vars.R2_BUCKET }}
+          R2_PUBLIC_BASE: ${{ vars.R2_PUBLIC_BASE }}
+      - name: Commit registry
+        if: always()
+        run: |
+          git config user.name "moyeora-camping-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for f in registry/site-photo-judgments.json registry/site-photos.json registry/site-photos-index.json registry/operator-site-photos.json; do [ -f "$f" ] && git add "$f"; done
+          if git diff --cached --quiet; then echo "변경 없음."; exit 0; fi
+          git commit -m "chore(data): refresh site-type photos"
+          bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" site-photos
+      - name: Redeploy Pages with the new index
+        if: success()
+        working-directory: .
+        run: gh workflow run deploy-pages.yml --ref main
