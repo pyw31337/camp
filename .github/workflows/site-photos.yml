@@ -32,8 +32,9 @@ env:
   GH_TOKEN: ${{ github.token }}
 
 concurrency:
-  # media 브랜치 강제 푸시가 Card photos·Data sync와 겹치지 않게 같은 대기열을 쓴다.
-  group: letscamp-media-publish
+  # 레지스트리를 land-on-main으로 main에 착지하므로 data 발행 큐를 쓴다.
+  # (자동화 검사: card-photos.yml만 media 큐, 나머지는 letscamp-data-publish)
+  group: letscamp-data-publish
   cancel-in-progress: false
 
 jobs:
