@@ -67,3 +67,71 @@ export function pageImages(html, pageUrl, { linkText = "" } = {}) {
   for (const m of s.matchAll(/background(?:-image)?\s*:\s*url\(\s*['"]?([^'")]+)['"]?\s*\)/gi)) push(m[1], m.index);
   return out;
 }
+
+// ---------- t58: 주소 변형·JS 호스트·렌더 결과 합치기 ----------
+/** https를 먼저 시도한다. 이 환경의 HTTP 프록시(Pingora)는 일반 http를 빈 500으로 거절하는 경우가 많다. */
+export function urlVariants(u) {
+  let x;
+  try { x = new URL(/^[a-z]+:\/\//i.test(u) ? u : `http://${u}`); } catch { return []; }
+  const bare = x.hostname.replace(/^www\./, "");
+  const hosts = [x.hostname];
+  if (x.hostname.startsWith("www.")) hosts.push(bare); else if (bare) hosts.push(`www.${bare}`);
+  const path = `${x.pathname}${x.search}` || "/";
+  const out = new Set();
+  for (const proto of ["https:", "http:"]) for (const h of hosts) {
+    out.add(`${proto}//${h}${path}`);
+    if (path !== "/") out.add(`${proto}//${h}/`);
+  }
+  return [...out];
+}
+
+/** imweb·wix·cafe24 등, 첫 HTML만으로는 사진이 거의 없는 사이트 */
+export const JS_BUILDER_HOST = /(?:^|\.)(imweb\.me|imweb\.kr|wixsite\.com|wix\.com|cafe24\.com|sixshop\.com|makeshop\.co\.kr|shopby\.co\.kr|alltheway\.kr|sites\.google\.com|squarespace\.com|weebly\.com|tilda\.cc|creatorlink\.net)$/i;
+export function isJsBuilderUrl(u) {
+  try { return JS_BUILDER_HOST.test(new URL(/^[a-z]+:\/\//i.test(u) ? u : `http://${u}`).hostname); } catch { return false; }
+}
+export function htmlLooksJsHeavy(html) {
+  const s = String(html ?? "");
+  if (!/imweb|wix-warmup|wixstatic|cafe24|sixshop|data-lazy-src|ng-app|__NEXT_DATA__|data-srcset/i.test(s)) return false;
+  const imgs = (s.match(/<img\b/gi) || []).length;
+  return imgs < 3;
+}
+
+/** 새 수집 결과를 기존 레지스트리에 합친다. 이미 있던 사진·쪽은 지우지 않고 추가만 한다. 이번이 실패면 이전 OK 결과를 지킨다. */
+export function mergePhotoCrawl(old, neu) {
+  if (!old) return { ...neu, added: neu.images?.length ?? 0 };
+  if (neu.status !== "OK" && (old.images?.length ?? 0) > 0) {
+    return { ...old, last_attempt: { at: neu.checked_at ?? null, status: neu.status, error: neu.error ?? null } };
+  }
+  const seen = new Set((old.images ?? []).map((i) => i.url));
+  const images = [...(old.images ?? [])];
+  let added = 0;
+  for (const im of neu.images ?? []) {
+    if (!im?.url || seen.has(im.url)) continue;
+    seen.add(im.url);
+    images.push(im);
+    added++;
+  }
+  const pages = [...new Set([...(old.pages ?? []), ...(neu.pages ?? [])])];
+  return { ...old, ...neu, pages, images, added, status: images.length ? "OK" : neu.status };
+}
+
+/** Playwright 등이 모은 {src, alt, w, h, near} → pageImages와 같은 후보 모양 */
+export function imagesFromRendered(list, pageUrl, { linkText = "", title = "" } = {}) {
+  const out = [], seen = new Set();
+  const cap = [linkText, title].filter(Boolean).join(" | ").slice(0, 100);
+  for (const im of list ?? []) {
+    const raw = im.src || im.url;
+    if (!raw || /^data:/i.test(raw)) continue;
+    let u; try { u = new URL(String(raw).replace(/&amp;/g, "&"), pageUrl).toString(); } catch { continue; }
+    if (!/^https?:/i.test(u) || (!/\.(jpe?g|png|webp)(\?|$)/i.test(u) && !/\/(image|img|upload|file|data|storage|photo)\//i.test(u))) continue;
+    const file = u.split(/[?#]/)[0].split("/").pop();
+    if (JUNK_IMG.test(file) || seen.has(u)) continue;
+    const w = Number(im.w || im.width) || 0, h = Number(im.h || im.height) || 0;
+    if ((w && w < 300) || (h && h < 200)) continue;
+    seen.add(u);
+    out.push({ url: u, alt: String(im.alt ?? "").slice(0, 80), near: String(im.near ?? "").slice(0, 80), cap });
+  }
+  return out;
+}
+
