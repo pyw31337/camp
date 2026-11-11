@@ -4718,3 +4718,83 @@ height: 14px;
 .sp-modal-content, .sr-modal { max-width: min(600px, calc(100vw - 24px)); box-sizing: border-box; overflow-wrap: anywhere; }
 .sp-modal-content.sr-modal, .sr-modal { max-width: min(480px, calc(100vw - 24px)); }
 .sp-modal-title { padding-right: 36px; overflow-wrap: anywhere; }
+
+/* t56u: 카드 정보 구역을 연한 패널과 간격으로 나눈다. 아이콘 뒤에 회색 바탕은 쓰지 않는다.
+   컨테이너 쿼리 칸 수(4→3→2→1)와 줄바꿈·넘침 규칙은 그대로 둔다. */
+.card-body { gap: 16px; }
+.card-horizontal .card-body { gap: 16px; }
+@media (max-width: 759px) { .card-horizontal .card-body { gap: 12px; } }
+
+.card-group-head { gap: 6px; padding: 0 0 2px; }
+
+.card-group-rail,
+.card-group-spec,
+.card-group-types,
+.card-group-reviews,
+.unique-feature-block {
+  margin: 0;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--line) 88%, transparent);
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.card-group-rail {
+  background: color-mix(in srgb, var(--accent-tint) 50%, var(--paper));
+  border-color: color-mix(in srgb, var(--accent) 12%, var(--line));
+  padding: 12px 12px 10px;
+}
+.card-group-rail .sr-sum { margin: 0 0 8px; }
+.card-group-spec {
+  background: color-mix(in srgb, var(--soft) 65%, var(--paper));
+  gap: 8px;
+}
+.card-group-types {
+  background: color-mix(in srgb, var(--soft) 50%, var(--paper));
+  padding: 10px 12px;
+}
+.unique-feature-block {
+  background: color-mix(in srgb, var(--accent-tint) 72%, var(--paper));
+  border-color: color-mix(in srgb, var(--accent) 14%, var(--line));
+  border-bottom-color: color-mix(in srgb, var(--accent) 14%, var(--line));
+  gap: 8px;
+}
+.card-group-reviews {
+  background: color-mix(in srgb, var(--soft) 45%, var(--paper));
+  padding: 10px 12px;
+}
+.card-group-reviews .card-reviews { padding: 0; margin: 0; border-top: 0; }
+
+.spec-strip { margin: 0; padding: 0 0 2px; border-top: 0; }
+.spec-more { margin: 4px 0 0; padding-top: 8px; border-top: 1px solid color-mix(in srgb, var(--line) 90%, transparent); }
+
+.card-group-cmts { margin-top: 2px; padding-top: 10px; border-top: 1px solid var(--line); }
+.lrow-cond { margin: 0; }
+.card-horizontal .card-cta { margin-top: 2px; padding-top: 2px; }
+
+.card-horizontal .card-group-rail,
+.card-horizontal .card-group-spec,
+.card-horizontal .card-group-types,
+.card-horizontal .card-group-reviews,
+.card-horizontal .unique-feature-block { padding: 10px 12px; border-radius: 12px; }
+
+/* 레일 타일은 패널 위에서 흰 카드로 구분. 아이콘 칸은 회색이 아니라 연한 액센트. */
+.sr-tile { background: var(--paper); }
+.sr-ic { background: color-mix(in srgb, var(--accent-tint) 70%, var(--paper)); }
+
+/* 사이트 타일 모달: 제목 / 스펙 / 안내 / 버튼 구역 간격 */
+.sr-modal { display: flex; flex-direction: column; gap: 4px; }
+.sr-modal .sr-fit { margin: 8px 0 2px; align-self: flex-start; width: auto; height: auto; }
+.unique-feature-block .unique-feature-chip { background: var(--paper); }
+.sr-modal-facts {
+  background: color-mix(in srgb, var(--soft) 70%, var(--paper));
+  border: 1px solid color-mix(in srgb, var(--line) 88%, transparent);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin: 12px 0 10px;
+  gap: 10px;
+}
+.sr-modal-note { margin: 0 0 14px; }
+.sr-modal-acts { margin-top: 2px; }
