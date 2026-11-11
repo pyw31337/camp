@@ -2374,7 +2374,7 @@ const HERO_THEMES = [
   { id: "uq-treehouse", emoji: "🌳", shortName: "트리하우스", badge: "숲속 나무 위 하룻밤", moodDescription: "소나무 숲 트리하우스", image: "hero-treehouse.webp", titleA: "나무 위 작은 오두막", titleB: "트리하우스 캠핑", summary: "출렁다리를 건너 숲 높이에서 맞이하는 아침 햇살", effect: "lush-forest" },
   { id: "uq-stay", emoji: "🫧", shortName: "이색숙소", badge: "별을 품은 버블돔", moodDescription: "버블 텐트 & 돔 하우스", image: "hero-uniquestay.webp", titleA: "투명 돔 안에서 별 보기", titleB: "이색 숙소 캠핑", summary: "누워서 은하수를 올려다보는 버블돔과 이색 숙소", effect: "night-sky" },
   { id: "uq-leisure", emoji: "🪂", shortName: "레포츠", badge: "짜릿한 하루 레포츠", moodDescription: "짚라인 & 카약 레포츠", image: "hero-leisure.webp", titleA: "강 위를 가르는 짜릿함", titleB: "레포츠 캠핑", summary: "짚라인과 카약으로 채우는 액티브한 캠핑 하루", effect: "riverside" },
-  { id: "uq-farm", emoji: "🍓", shortName: "체험", badge: "손으로 만드는 추억", moodDescription: "딸기 따기·감자 캐기·도예 체험", image: "hero-farm.webp", titleA: "직접 따고 만드는 하루", titleB: "농촌 체험 캠핑", summary: "수확하고 빚어 보는 손끝 체험으로 남기는 캠핑 추억", effect: "green-meadow" }
+  { id: "uq-farm", emoji: "🍓", shortName: "체험", badge: "손으로 만드는 추억", moodDescription: "딸기 따기·감자 캐기·도예 체험", image: "hero-farm.webp", titleA: "직접 따고 만드는 하루", titleB: "농촌 체험 캠핑", summary: "수확하고 빚어 보는 손끝 체험으로 남기는 캠핑 추억", effect: "lush-forest" }
 ];
 
 // 히어로 테마는 홈을 새로 열거나 새로고침할 때마다 10개 중 1개를 다시 무작위로 고른다.
