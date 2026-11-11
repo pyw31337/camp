@@ -650,7 +650,9 @@ border-top: 1px solid var(--line);
 .unique-feature-head .ic { width: 14px; height: 14px; }
 .unique-feature-chips { display: flex; flex-wrap: wrap; gap: 5px; }
 .unique-feature-item { display: inline-flex; align-items: center; gap: 5px; min-width: 0; max-width: 100%; }
-.unique-feature-chip { display: inline-flex; align-items: center; gap: 4px; min-height: 24px; padding: 3px 8px; border-radius: 999px; background: var(--accent-tint); color: var(--accent); font-size: var(--fs-min); font-weight: 800; white-space: nowrap; }
+.unique-feature-chip { display: inline-flex; align-items: center; gap: 4px; min-height: 24px; padding: 3px 8px; border-radius: 999px; background: var(--accent-tint); color: var(--accent); font-size: var(--fs-min); font-weight: 800; white-space: nowrap; position: relative; cursor: default; }
+.unique-feature-chip[title]:after { content: attr(title); position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: rgba(0,0,0,.82); color: #fff; font-size: 11px; font-weight: 600; padding: 4px 8px; border-radius: 6px; white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 99; }
+.unique-feature-chip[title]:hover:after,.unique-feature-chip[title].is-tip-open:after { opacity: 1; }
 .unique-feature-chip .ic { width: 12px; height: 12px; flex: none; }
 .unique-feature-review { display: inline-flex; align-items: center; gap: 3px; max-width: min(280px, 58vw); color: var(--ink-2); font-size: var(--fs-min); line-height: 1.35; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .unique-feature-review:hover { color: var(--accent); text-decoration: underline; }
