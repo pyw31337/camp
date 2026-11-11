@@ -6,7 +6,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
-import { looksLikePlace, orderCandidates, pixelStats } from "../lib/card-fallback.mjs";
+import { candidateIdentity, looksLikePlace, orderCandidates, pixelStats } from "../lib/card-fallback.mjs";
 import { RULE_VERSION, photoJudge } from "../lib/photo-judge.mjs";
 import { photoContextScore } from "../lib/place-quality.mjs";
 
@@ -60,9 +60,15 @@ async function worker() {
     const pin = pins[c.id];
     if (pin?.pin) { out[c.id] = { ...pin.pin, at: pin.at ?? null, pinned: true }; kept++; continue; }
     const rejected = new Set(pin?.reject ?? []);
-    const contextual = [...(d.sns_images ?? []), ...posts].map((x) => ({ ...x, ...photoContextScore({ title: x.title, snippet: x.snippet, source: x.src, campName: c.name }) }));
+    const contextual = [...(d.sns_images ?? []), ...posts].map((x) => {
+      const identity = candidateIdentity({ campName: c.name, title: x.title, snippet: x.snippet, source: x.src });
+      const context = photoContextScore({ title: x.title, snippet: x.snippet, source: x.src, campName: c.name });
+      return { ...x, identity, ...context };
+    });
     // 텍스트 근거가 없는 검색 이미지는 대표 카드로 승격하지 않는다. 원문 후기의 캠핑장 맥락이 있는 사진만 사용한다.
-    const cands = orderCandidates(contextual.filter((x) => x.status === "ACCEPTED"))
+    // 다른 업장명이 제목·본문에 들어간 후보는 픽셀상 캠핑장 사진이어도 제외한다.
+    // 이중 안전망으로 identity와 기존 문맥 점수를 모두 통과해야 한다.
+    const cands = orderCandidates(contextual.filter((x) => x.status === "ACCEPTED" && x.identity?.ok))
       .filter((x) => !rejected.has(x.thumb) && !rejected.has(x.img)).slice(0, MAX_TRY + 4);
     // 지난번에 고른 사진이 아직 후보에 있으면 그대로(다시 받지 않음)
     const old = prev[c.id];

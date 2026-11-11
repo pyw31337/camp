@@ -452,3 +452,10 @@
 - 주소 아래 사이트 타입 배지는 사진 위 배지와 같은 공통 `.bdg` 모듈의 색 아이콘 원·흰 캡슐 규칙을 유지하도록 크기·그림자·간격을 동기화했다.
 - 원본 `design/renewal/`과 발행본 `camping-atlas/public/`을 함께 갱신했다. `node --check`, `npm --prefix camping-atlas run lint`, `git diff --check` 통과. Playwright는 로컬 `playwright` 패키지가 없어 실행하지 못했으며 CI에서 회귀검사한다.
 
+## 📌 히어로 효과·카드 사진 교차 매칭 방지 (2026-11-12, Codex)
+- 현재 `main`의 화면 소스에는 22개 Canvas 히어로(`HERO_THEMES`)가 포함되어 있지 않고, 해당 기능은 아직 병합되지 않은 `codex/automation-governance` 계열에만 남아 있음을 확인했다. 따라서 라이브에서 보이는 히어로는 배포 대상과 소스가 어긋난 상태이며, 효과 버그를 숨긴 채 데이터만 바꾸지 않도록 먼저 배포 기준 브랜치를 정리해야 한다.
+- 후보 사진 수집은 업장 고유명 토큰 근거가 없는 검색 결과를 대표 사진으로 승격하지 않도록 `candidateIdentity` 게이트를 추가했다. `황정민 글램핑` 후보에 `인오 캠핑장`이 섞이는 회귀 테스트를 추가했다.
+- 화면 사진 목록은 공식 URL·파생 media 경로의 업장 ID가 카드 ID와 다르면 제외한다. 카드 색인 교차 ID가 섞여도 다른 업장 썸네일이 노출되지 않는다.
+- `pipeline/lib/hero-theme-guard.mjs`와 회귀 테스트를 추가해 테마별 `id/image/effect` 고유성 및 허용 효과 키를 검사하고, 렌더러가 배열 순서로 효과를 추론하지 않도록 기준을 고정했다.
+- 검사: `node --test pipeline/test/card-fallback.test.mjs pipeline/test/hero-theme-guard.test.mjs` 통과. 전체 파이프라인 테스트는 기존 worktree의 `sharp` 의존성 미설치로 `photo-dedupe.test.mjs`만 실행 실패했다.
+

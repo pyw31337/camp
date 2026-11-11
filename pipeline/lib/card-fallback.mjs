@@ -44,3 +44,27 @@ export function orderCandidates(list) {
     .sort((a, b) => a.land - b.land || a.i - b.i)
     .map((o) => o.x);
 }
+
+// 검색 결과가 다른 업장의 사진으로 섞이지 않았는지 텍스트 근거를 확인한다.
+// 짧은 일반명(캠프·글램핑 등)은 근거로 세지 않고, 업장 고유 토큰이 제목/본문에
+// 있어야 대표 사진 후보로 승격한다. 이 검사는 픽셀 판정 전에 적용한다.
+const GENERIC_NAME_TOKENS = new Set([
+  "캠핑", "캠핑장", "야영", "야영장", "오토캠핑", "글램핑", "카라반", "캠프", "펜션", "리조트", "체험", "농원",
+]);
+const normName = (v) => String(v ?? "").toLowerCase().replace(/[^0-9a-z가-힣]+/gi, "");
+const nameTokens = (v) => String(v ?? "").toLowerCase().split(/[^0-9a-z가-힣]+/i).map((x) => x.trim()).filter((x) => x.length >= 2 && !GENERIC_NAME_TOKENS.has(x));
+
+/**
+ * @returns {{ok:boolean, score:number, reason:string}}
+ */
+export function candidateIdentity({ campName = "", title = "", snippet = "", source = "" } = {}) {
+  const context = normName(`${title} ${snippet} ${source}`);
+  const tokens = nameTokens(campName);
+  if (!tokens.length) return { ok: false, score: 0, reason: "no_distinctive_name_token" };
+  const matched = tokens.filter((t) => context.includes(normName(t)));
+  // 고유 토큰이 하나라도 확인되면 통과. 두 토큰 이상인 이름은 한 토큰만으로도
+  // 접두·약칭이 쓰이는 경우가 있어 허용하되, 완전한 이름 근거는 더 높은 점수를 준다.
+  if (matched.length >= 2) return { ok: true, score: 3, reason: "multiple_name_tokens" };
+  if (matched.length === 1) return { ok: true, score: 2, reason: "distinctive_name_token" };
+  return { ok: false, score: 0, reason: "different_place_name" };
+}

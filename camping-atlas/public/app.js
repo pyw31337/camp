@@ -767,6 +767,16 @@ const photoKey = (u) => {
   base = base.toLowerCase();
   return base.replace(/^thumb_\d+_/, "");
 };
+function imageBelongsToCamp(c, u) {
+  const raw = String(u ?? "");
+  const id = String(c?.id ?? "");
+  if (!raw || !id) return false;
+  const official = raw.match(/(?:\/upload\/camp\/|\/camp\/)(\d{2,})\//i);
+  if (official && official[1] !== id) return false;
+  const derived = raw.match(/(?:^|\/)media\/(?:cards|camps)\/(\d+)\//i);
+  if (derived && derived[1] !== id) return false;
+  return true;
+}
 const PT_FB = new Map();
 const isPt = (c, u) => Boolean(c.pt && (u === c.pt.i || u === c.pt.t));
 // ‘후기 사진’ 출처 배지는 붙이지 않는다(소유자 2026-10-22). 출처는 상세 사진 원문 링크에 남는다.
@@ -780,7 +790,7 @@ function photosOf(c) {
   return r.v.slice();
 }
 function photosAll(c) {
-  const p = S.photos[c.id] ?? [];
+  const p = (S.photos[c.id] ?? []).filter((u) => imageBelongsToCamp(c, u));
   const own = S.cards[c.id];
   const remote = p.filter((x) => !String(x).startsWith("media/"));
   const local = p.filter((x) => String(x).startsWith("media/"));
@@ -806,6 +816,7 @@ function photosAll(c) {
   const deduped = [];
   for (const u of list) {
     if (!u) continue;
+    if (!imageBelongsToCamp(c, u)) continue;
     const k = photoKey(u);
     if (seen.has(k) || seen.has(u)) continue;
     seen.add(k);
