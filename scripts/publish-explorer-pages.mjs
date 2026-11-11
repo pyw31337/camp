@@ -133,6 +133,16 @@ if (existsSync(dedupedCards)) {
   }
 }
 
+// 상품(사이트 유형)별 사진 색인(pipeline/scripts/bake-site-photos.mjs) — 카드 미니 레일·사이트 칸이 media/sites/index.json으로 읽는다.
+const siteIndex = `${root}pipeline/registry/site-photos-index.json`;
+if (existsSync(siteIndex)) {
+  for (const dir of [rootOut, out]) {
+    const dst = `${dir}media/sites/index.json`;
+    await mkdir(dirname(dst), { recursive: true });
+    await cp(siteIndex, dst);
+  }
+}
+
 // 브랜드 자산(파비콘, PWA 아이콘, 오픈그래프 배너 이미지, 테마/히어로 사진)을 대상 디렉토리에 동기화
 const copyBrandImages = async (destDir) => {
   const imgDest = `${destDir}images/`;

@@ -1,5 +1,13 @@
 # 인수인계
 
+## 📌 상품(사이트 유형·구역)별 사진 수집 파이프라인 (2026-11-11, Grok Bot t55)
+
+- **요청**: “업장별 상품들의 사진도 충분히 수집 — 수집범위를 최대로.” 상세는 `docs/SITE_PHOTOS.md`(원천별 사용/제외 이유·판정 규칙).
+- **구현**: `collect-operator-site-photos.mjs`(운영자 홈페이지 상품 사진 후보) → `collect-site-photos.mjs`(고캠핑·TourAPI·운영자 사진을 CLIP base+large로 판정, 캠핑장에 있는 유형에만 선정, 판정 캐시 이어 하기) → `bake-site-photos.mjs`(sites/ webp → R2, 색인 `registry/site-photos-index.json` → 발행 `media/sites/index.json`). 매일 `.github/workflows/site-photos.yml`.
+- **발견(#720)**: `site_products[].photos`는 캠핑장 사진 풀을 유형 구분 없이 앞에서 6장 붙인 값이라 상품 사진이 아니다(예: 글램핑 칸에 매점·화장실 사진). 지우지 않고 두며, 화면은 유형별로 확인된 이 색인을 먼저 쓴다.
+- **화면**: 미니 레일 사진 연결은 미리보기 브랜치 `t54-cards`에만(정식 화면 변경 없음).
+- **검사**: `node --test pipeline/test/site-photos.test.mjs`, `npm --prefix pipeline test`.
+
 ## 📌 관광사업등록증 등 서류 이미지 판별/제거 및 고해상도 실물 사진 교체, 신규 캠핑장 발굴 파이프라인 및 잔여 쿼터 집중 수집 가동 (2026-11-11, Antigravity)
 
 - **배경 및 요청 사항**:
