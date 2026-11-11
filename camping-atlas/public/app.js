@@ -261,6 +261,7 @@ const typeLine = (c) => (c.pf?.s ?? "").split(" · ")[0] || (c.types ?? [])[0] |
 const GR = (s) => (s === "VERIFIED" ? "v" : s === "CONFIRMED" || s === "OPERATOR" ? "c" : s === "SURVEYED" || s === "MENTION" ? "m" : s === "REFERENCE" ? "r" : null);
 const GRADE_TXT = { v: "원문 대조", c: "공식 등록", m: "소개·후기 언급", r: "법정·조례 기준 참고(업장 미공지)" };
 const kw = (w) => `${fmt(w)}W`; // 소유자: ‘600W’처럼 W로 통일
+const voltLimitText = (w) => (Number(w) > 0 ? `${kw(Number(w))} 제한` : "");
 const GROUND = { CRUSHED_STONE: "파쇄석", MIXED: "혼합", GRAVEL: "자갈", DECK: "데크", GRASS: "잔디", SAND: "모래", SOIL: "흙", CONCRETE: "콘크리트" };
 const srcOf = (fc, extra) => ({ label: fc?.source?.label || "한국관광공사 고캠핑 등록 현황", url: fc?.source?.url || "https://www.gocamping.or.kr/", at: fc?.source?.checked_at, ...extra });
 
@@ -423,7 +424,7 @@ function badges(c, max = 4, maxNo = 2, { rows = false, theme = null } = {}) {
   const B = {
     invite: inviteOk(c) ? `<span class="bdg bdg-teal">${ic("users")}초대가능</span>` : "",
     // 법령 기본값(r: 업장이 공지하지 않은 600W 참고값)은 배지로 올리지 않는다
-    w: pos(f.power) && f.power.g !== "r" && f.power.ok && f.power.w ? `<span class="bdg bdg-volt">${ic("bolt")}${esc(f.power.short)}</span>` : "",
+    w: pos(f.power) && f.power.g !== "r" && f.power.ok && f.power.w ? `<button type="button" class="bdg bdg-volt has-volt-tip" data-volt-spec="${esc(voltLimitText(f.power.w))}" ${voltTip(f.power.short, voltLimitText(f.power.w))}>${ic("bolt")}${esc(f.power.short)}</button>` : "",
     heater: hInfo ? `<span class="bdg bdg-heater" title="${esc(hInfo.full)}">${ic("flame")}${esc(hInfo.label)}</span>` : "",
     fire: pos(f.fire) && f.fire.kind === "FIREWOOD_OK" ? `<span class="bdg bdg-flame">${ic("firewood")}장작</span>` : "",
     pet: pet ? `<span class="bdg bdg-ink">${ic("paw")}반려견${smallDog ? "(소형)" : ""}</span>` : "",
@@ -437,7 +438,7 @@ function badges(c, max = 4, maxNo = 2, { rows = false, theme = null } = {}) {
     heat: c.heat?.length ? `<span class="bdg bdg-flame">${ic("hotwater")}난방</span>` : "",
     rf: c.rf ? `<span class="bdg bdg-teal">${ic("th:FOREST")}${esc(/^(국립|공립|사립)$/.test(c.rf) ? `${c.rf} 휴양림` : "휴양림")}</span>` : "",
     firstCome: isFirstComeCamp(c) ? `<span class="bdg bdg-amber">${ic("clock")}선착순</span>` : "",
-    tidal: isTidalCamp(c) ? `<span class="bdg bdg-teal">${ic("water")}갯벌·해루질</span>` : "",
+    tidal: isTidalCamp(c) ? `<span class="bdg bdg-teal">${ic("tidal")}갯벌·해루질</span>` : "",
     flex: isFlexTimeCamp(c) ? `<span class="bdg bdg-teal">${ic("clock")}입퇴실 여유</span>` : "",
     vr: c.vr ? `<span class="bdg bdg-vr" title="360° VR 현장 뷰어">${ic("vr")}360° VR</span>` : "",
     dump: isDumpCamp(c) ? `<span class="bdg bdg-dump" title="오폐수 처리 및 청수 공급 한국관광공사 공인 덤프스테이션">${ic("dump")}덤프</span>` : "",
@@ -540,6 +541,9 @@ function siteBadges(c, max = 5) {
     if (test(c)) list.push({ k, cls: `bdg-${cls}`, icon, label: label(c) });
   }
   const shownStays = new Set(list.map((x) => x.k));
+  const bungSrc = firmStBungalow(c)?.[0], penSrc = firmStPension(c)?.[0];
+  if (bungSrc) shownStays.add(bungSrc);
+  if (penSrc) shownStays.add(penSrc);
 
   // 2. c.st의 나머지 사이트 타입 (오토캠핑, 데크, 타프존, 차박 등)
   const st = (c.st ?? []).filter((t) => t[0] !== "PRIVATE_BATH" && !shownStays.has(t[0]) && !(STAY_KEYS.has(t[0]) && t[2] === "m"));
@@ -568,7 +572,19 @@ function siteBadges(c, max = 5) {
     }
   }
 
-  return list.slice(0, max).map((b) => `<span class="bdg bdg-stay ${b.cls}" data-stay="${b.k}">${ic(b.icon)}${esc(b.label)}</span>`).join("");
+  return dedupeStayBadgeList(list).slice(0, max).map((b) => `<span class="bdg bdg-stay ${b.cls}" data-stay="${b.k}">${ic(b.icon)}${esc(b.label)}</span>`).join("");
+}
+function stayBadgeKey(label) {
+  return String(label ?? "").replace(/\s[\d,]+$/, "").trim();
+}
+function dedupeStayBadgeList(list) {
+  const seen = new Set();
+  return list.filter((b) => {
+    const k = stayBadgeKey(b.label);
+    if (!k || seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
 }
 const typeRow = (c, extra = "") => {
   const b = siteBadges(c) + (extra ? `<span class="bdg bdg-stay bdg-size">${ic("size")}${esc(extra)}</span>` : "");
@@ -1325,16 +1341,17 @@ function cardFeatures(c) {
 
   // 1. 전기 W (고용량 디테일 표현)
   const w = c.watts || (c.of?.w ? Number(c.of.w.v) : null) || c.field_conditions?.power?.limit_w || wattsOf(c) || (pos(f.power) && f.power.w ? f.power.w : 0);
+  const voltSpec = voltLimitText(w);
   if (w >= 1400 || (!w && /1[4-9][0-9]{2}\s*w|2[0-9]{3}\s*w/i.test(txt))) {
-    list.push({ icon: "bolt", text: "1400W 초고용량", volt: true });
+    list.push({ icon: "bolt", text: "1400W 초고용량", volt: true, spec: voltSpec });
   } else if (w >= 1000 || (!w && /1[0-9]{3}\s*w|1kw|1\.1kw/i.test(txt))) {
-    list.push({ icon: "bolt", text: "1000W 고용량", volt: true });
+    list.push({ icon: "bolt", text: "1000W 고용량", volt: true, spec: voltSpec });
   } else if (w >= 600 || (!w && ((pos(f.power) && f.power.ok && f.power.g !== "r") || /600\s*w/i.test(txt)))) {
-    list.push({ icon: "bolt", text: "600W 전기", volt: true });
+    list.push({ icon: "bolt", text: "600W 전기", volt: true, spec: voltSpec });
   } else if (w > 0) {
-    list.push({ icon: "bolt", text: `${w}W 전기`, volt: true });
+    list.push({ icon: "bolt", text: `${w}W 전기`, volt: true, spec: voltSpec });
   } else if (pos(f.power) && f.power.ok && f.power.short) {
-    list.push({ icon: "bolt", text: f.power.short, volt: true });
+    list.push({ icon: "bolt", text: f.power.short, volt: true, spec: voltLimitText(f.power.w) });
   }
 
   // 2. 장작 / 불멍
@@ -1413,7 +1430,7 @@ function cardFeatures(c) {
   if ((c.uq && c.uq.includes("leisure")) || /수상레저|카약|보트|패들보드/i.test(txt)) list.push({ icon: "leports", text: "수상레저·카약" });
   if (/공예|목공|도자기|만들기\s*체험/i.test(txt)) list.push({ icon: "spark", text: "공예 만들기" });
   if (/숲\s*해설|생태\s*탐방|숲\s*체험관|자연\s*체험관/i.test(txt)) list.push({ icon: "forest", text: "숲체험·탐방" });
-  if (/송어\s*잡기|미꾸라지\s*잡기|다슬기\s*잡기|물고기\s*잡기/i.test(txt)) list.push({ icon: "water", text: "물고기 잡기" });
+  if (/송어\s*잡기|미꾸라지\s*잡기|다슬기\s*잡기|물고기\s*잡기/i.test(txt)) list.push({ icon: "fish", text: "물고기 잡기" });
   if ((c.uq && c.uq.includes("farm")) || /수확\s*체험|농촌\s*체험|과수원|사과\s*따기|딸기\s*따기|감자\s*캐기/i.test(txt)) list.push({ icon: "experience", text: "수확 체험" });
   if (/스마트팜|영농\s*체험|작물\s*재배|원예\s*체험/i.test(txt)) list.push({ icon: "experience", text: "작물 재배" });
   if (c.th?.includes("fishing") || /낚시터|낚시\s*가능|바지선.*낚시/i.test(txt)) list.push({ icon: "fish", text: "낚시 체험" });
@@ -1444,7 +1461,10 @@ function uniqueFeatureHtml(c) {
   return `<div class="unique-feature-block">
     <div class="unique-feature-head">${ic("spark")}<span>특색 시설·요소</span></div>
     <div class="unique-feature-chips">${feats.map((feat) => {
-      const chip = `<span class="unique-feature-chip${feat.volt ? " bdg-volt" : ""}"${feat.volt ? ' data-volt="true"' : ""}>${ic(feat.icon || "spark")}${esc(feat.text)}</span>`;
+      const tip = feat.spec ? voltTip(feat.text, feat.spec) : "";
+      const tag = feat.spec ? "button" : "span";
+      const typ = feat.spec ? ' type="button"' : "";
+      const chip = `<${tag}${typ} class="unique-feature-chip${feat.volt ? " bdg-volt" : ""}${feat.spec ? " has-volt-tip" : ""}"${feat.volt ? ' data-volt="true"' : ""}${tip ? ` data-volt-spec="${esc(feat.spec)}" ${tip}` : ""}>${ic(feat.icon || "spark")}${esc(feat.text)}</${tag}>`;
       return `<span class="unique-feature-item">${chip}${feat.review?.url ? `<a class="unique-feature-review" href="${esc(feat.review.url)}" target="_blank" rel="noopener" title="후기 원문 열기">${ic("file-text")}${esc(uniqueReviewSummary(feat.review.text, "horse"))}</a>` : ""}</span>`;
     }).join("")}</div>
   </div>`;
@@ -1623,6 +1643,24 @@ function toast(msg) { const t = $("#toast"); t.classList.remove("has-act"); t.te
 const TIPS = new Map();
 let tipN = 0;
 function tip(html, label = "자세한 정보") { const k = `t${++tipN}`; TIPS.set(k, html); return `<button class="ib" type="button" data-tip="${k}" aria-label="${esc(label)}">${ic("info")}</button>`; }
+function voltTip(label, spec) {
+  if (!spec) return "";
+  const k = `t${++tipN}`;
+  TIPS.set(k, `<b>${esc(label)}</b><span>${esc(spec)}</span>`);
+  return `data-tip="${k}" aria-label="${esc(`${label} · ${spec}`)}"`;
+}
+function showTipPop(b) {
+  const pop = $("#pop");
+  if (!b || !pop) return;
+  pop._src = b;
+  pop.innerHTML = `<button type="button" class="pop-x" data-pop-close aria-label="닫기">${ic("close")}</button>${TIPS.get(b.dataset.tip) ?? ""}`;
+  pop.hidden = false;
+  const r = b.getBoundingClientRect(), pw = Math.min(300, innerWidth - 24);
+  pop.style.width = `${pw}px`;
+  pop.style.left = `${Math.max(12, Math.min(innerWidth - pw - 12, r.left + r.width / 2 - pw / 2))}px`;
+  const below = r.bottom + 8 + pop.offsetHeight < innerHeight;
+  pop.style.top = `${below ? r.bottom + 8 : r.top - 8 - pop.offsetHeight}px`;
+}
 // 앵커가 있으면 그대로, 아니면 Chrome/Safari Text Fragment로 근거 문장부터 연다.
 // 원문 사이트가 Text Fragment를 지원하지 않아도 같은 페이지를 열며, (i)의 인용문은 남는다.
 function sourceLocationUrl(source = {}) {
@@ -1670,14 +1708,24 @@ document.addEventListener("click", (e) => {
   e.preventDefault(); e.stopPropagation();
   // 같은 카드·버튼을 다시 누르면 닫힌다(토글, 소유자 2026-10-22)
   if (!pop.hidden && pop._src === b) { pop.hidden = true; pop._src = null; return; }
-  pop._src = b;
-  pop.innerHTML = `<button type="button" class="pop-x" data-pop-close aria-label="닫기">${ic("close")}</button>${TIPS.get(b.dataset.tip) ?? ""}`;
-  pop.hidden = false;
-  const r = b.getBoundingClientRect(), pw = Math.min(300, innerWidth - 24);
-  pop.style.width = `${pw}px`;
-  pop.style.left = `${Math.max(12, Math.min(innerWidth - pw - 12, r.left + r.width / 2 - pw / 2))}px`;
-  const below = r.bottom + 8 + pop.offsetHeight < innerHeight;
-  pop.style.top = `${below ? r.bottom + 8 : r.top - 8 - pop.offsetHeight}px`;
+  showTipPop(b);
+});
+const fineHover = () => window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+document.addEventListener("pointerover", (e) => {
+  const b = e.target.closest?.(".has-volt-tip[data-tip]");
+  if (!b || !fineHover()) return;
+  showTipPop(b);
+});
+document.addEventListener("pointerout", (e) => {
+  if (!fineHover()) return;
+  const pop = $("#pop");
+  const b = e.target.closest?.(".has-volt-tip[data-tip]");
+  const fromPop = e.target.closest?.("#pop");
+  if (!b && !fromPop) return;
+  const next = e.relatedTarget;
+  const src = pop?._src;
+  if (next && (src?.contains?.(next) || pop?.contains(next))) return;
+  if (src?.classList.contains("has-volt-tip")) { pop.hidden = true; pop._src = null; }
 });
 addEventListener("scroll", () => { $("#pop").hidden = true; }, { passive: true });
 addEventListener("keydown", (e) => { if (e.key === "Escape") $("#pop").hidden = true; });
@@ -3962,6 +4010,8 @@ const getMyTaste = () => {
       const parsed = JSON.parse(r);
       if (parsed.power && !parsed.minWatts) parsed.minWatts = 600;
       if (parsed.farm && !parsed.harvest) parsed.harvest = true;
+      // 잡기(물고기 잡기)는 낚시와 같은 개념. 예전 저장값 catch를 fishing으로 이어 준다(원본 키는 그대로 둔다).
+      if (parsed.catch) parsed.fishing = true;
       return { ...DEFAULT_MY_TASTE, ...parsed };
     }
   } catch {}
@@ -3973,6 +4023,10 @@ const saveMyTaste = (t) => {
     localStorage.setItem("camp_my_taste", JSON.stringify(t));
   } catch {}
 };
+
+function isFishingTasteCamp(c, txt = campSearchText(c)) {
+  return Boolean(c.th?.includes("fishing") || /낚시터|낚시\s*가능|낚시/.test(txt) || /송어\s*잡기|미꾸라지\s*잡기|다슬기\s*잡기|물고기\s*잡기|송어축제/.test(txt));
+}
 
 function matchMyTaste(c, taste = getMyTaste()) {
   if (isPublicPark(c)) return false;
@@ -4007,9 +4061,8 @@ function matchMyTaste(c, taste = getMyTaste()) {
   if (taste.leisure && !(uq.includes("leisure") || hit(/수상레저|카약|보트|패들보드|카누|래프팅/))) return false;
   if (taste.sled && !hit(/썰매장|눈썰매|사계절썰매|물썰매/)) return false;
   if (taste.tidal && !(isTidalCamp(c) || hit(/갯벌|해루질|조개잡이|바지락/))) return false;
-  if (taste.fishing && !(c.th?.includes("fishing") || hit(/낚시터|낚시\s*가능|낚시/))) return false;
+  if ((taste.fishing || taste.catch) && !isFishingTasteCamp(c, txt)) return false;
   if (taste.forestTrail && !hit(/숲\s*해설|생태\s*탐방|숲\s*체험관|자연\s*체험관/)) return false;
-  if (taste.catch && !hit(/송어\s*잡기|미꾸라지\s*잡기|다슬기\s*잡기|물고기\s*잡기|송어축제/)) return false;
   if (taste.harvest && !(uq.includes("farm") || hit(/수확\s*체험|농촌\s*체험|과수원|사과\s*따기|딸기\s*따기|감자\s*캐기|고구마\s*캐기|과일\s*따기/))) return false;
   if (taste.grow && !hit(/스마트팜|영농\s*체험|작물\s*재배|원예\s*체험|모종\s*심기|채소\s*재배/)) return false;
   return true;
@@ -4038,7 +4091,7 @@ const TASTE_TYPES = [["AUTO", "car", "오토캠핑"], ["GLAMPING", "glamping", "
 const TASTE_SIZES = [[0,"규격 무관"],[6,"6m+"],[8,"8m+"],[10,"10m+"]];
 const TASTE_WATTS = [[0,"전기 무관"],[600,"600W+ (기본)"],[1000,"1000W+ (고용량)"],[1400,"1400W+ (초고용량)"]];
 const TASTE_ENVS = [["valley","th:VALLEY","계곡"],["river","th:LAKE","강·호수·천"],["beach","th:BEACH","바다·해변"]];
-const TASTE_EXPS = [["horse","horse","승마"],["animal","paw","동물"],["craft","craft","공예"],["leisure","waterleisure","수상레저"],["sled","sled","썰매"],["tidal","tidal","갯벌"],["fishing","fish","낚시"],["forestTrail","forest","숲체험"],["catch","water","잡기"],["harvest","experience","수확"],["grow","experience","재배"]];
+const TASTE_EXPS = [["horse","horse","승마"],["animal","paw","동물"],["craft","craft","공예"],["leisure","waterleisure","수상레저"],["sled","sled","썰매"],["tidal","tidal","갯벌"],["fishing","fish","낚시"],["forestTrail","forest","숲체험"],["harvest","experience","수확"],["grow","experience","재배"]];
 const TASTE_FACS = [["fire","flame","장작·불멍"],["tarp","tent","타프존"],["privateFridge","fridge","개별냉장고"],["sharedFridge","amenity","공용냉장고"],["heaterRental","flame","팬히터 대여"],["sidePark","car","텐트 옆 주차"],["crushedStone","layers","파쇄석"],["deckFloor","layers","데크"],["grassFloor","forest","잔디"],["rental","cart","장비 대여"],["pet","paw","반려견"],["warmPool","hotwater","온수풀"],["kidsPool","playground","키즈풀"],["pool","swim","수영장"]];
 
 function myTasteSummaryChips(taste = getMyTaste()) {
