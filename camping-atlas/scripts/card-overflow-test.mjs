@@ -63,7 +63,7 @@ for (const w of widths) {
     // 더보기·타일 모달도 한 번씩
     const more = page.locator("article.card .spec-more summary").first();
     if (await more.count()) { await more.click().catch(() => {}); await page.waitForTimeout(200); }
-    const r = await page.evaluate(CHECK);
+    const r = await page.evaluate(CHECK, "article.card");
     pages++;
     const tag = `${w} ${route} cards=${r.cards}`;
     if (r.hits.length) fails.push(`${tag}: ${r.hits.length}건 넘침\n  - ${r.hits.slice(0, 12).join("\n  - ")}`);
@@ -74,7 +74,7 @@ for (const w of widths) {
   if (await tile.count()) {
     await tile.click().catch(() => {});
     await page.waitForTimeout(400);
-    const r = await page.evaluate(CHECK);
+    const r = await page.evaluate(CHECK, "#sp-modal .sr-modal, #sp-modal .sp-modal-content");
     pages++;
     if (r.hits.length) fails.push(`${w} modal: ${r.hits.length}건 넘침\n  - ${r.hits.slice(0, 12).join("\n  - ")}`);
     else console.log(`OK ${w} modal`);
