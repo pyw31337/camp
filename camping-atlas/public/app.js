@@ -3981,7 +3981,7 @@ function matchMyTaste(c, taste = getMyTaste()) {
   if (taste.minSize > 0 && maxSide(c) < taste.minSize) return false;
   if (taste.minWatts > 0) {
     const w = c.watts || (c.of?.w ? Number(c.of.w.v) : null) || c.field_conditions?.power?.limit_w || wattsOf(c) || (pos(facts(c).power) && facts(c).power.w ? facts(c).power.w : 0);
-    if (w > 0 ? w < taste.minWatts : !((c.pwr || c.field_conditions?.power?.available) && taste.minWatts === 600 || hit(new RegExp(`${taste.minWatts >= 1400 ? '1[4-9]\\d{2}|[23]\\d{3}' : taste.minWatts >= 1000 ? '1\\d{3}|1kw' : '600\\s*w|전기'}\\s*w?`, 'i')))) return false;
+    if (w > 0 ? w < taste.minWatts : (taste.minWatts >= 1400 ? !/(?:1[4-9]\d{2}|[23]\d{3})\s*w|1\.[4-9]\s*kw|[23](\.\d+)?\s*kw|초고용량\s*전기/i.test(txt) : taste.minWatts >= 1000 ? !/(?:1\d{3}|[23]\d{3})\s*w|1(\.\d+)?\s*kw|고용량\s*전기/i.test(txt) : !(c.pwr || c.field_conditions?.power?.available || facts(c).power?.ok || /600\s*w|전기/i.test(txt)))) return false;
   }
   if (taste.fire) { const v = facts(c).fire?.v ?? ""; if (!(c.fp === 1 || /가능|개별|화로/i.test(v)) || /불가|금지/i.test(v)) return false; }
   if (taste.tarp && !((c.field_conditions?.shelter_setup?.max_tarps > 0 || c.field_conditions?.shelter_setup?.canopy_allowed) || hit(/타프/i))) return false;
