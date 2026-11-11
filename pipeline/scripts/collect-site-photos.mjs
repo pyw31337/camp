@@ -11,7 +11,7 @@
 // 2) 판정: CLIP 두 모델(base·large)이 같은 상품 부류(글램핑·카라반·객실/방갈로·노지 사이트)로 볼 때만 쓴다(lib/site-photo-classify.mjs).
 //    글 단서(블록 제목·alt)가 유형을 말하면 그 유형을 먼저, 글이 지도·요금표·매점 등을 말하면 버린다. 저해상도·배너 비율은 버린다.
 //    판정은 registry/site-photo-judgments.json에 쌓여 다시 받지 않는다(같은 RULE_VERSION).
-// 3) 선정: 캠핑장에 실제로 있는 유형(c.st·site_types)에만, 유형당 최대 6장, 같은 사진(dHash ≤ 6)은 한 번만, 여러 캠핑장(3곳↑)에
+// 3) 선정: 캠핑장에 실제로 있는 유형(c.st·site_types)에만, 규칙에 맞는 사진은 모두 남기고, 같은 사진(dHash ≤ 6)은 한 번만, 여러 캠핑장(3곳↑)에
 //    똑같이 붙은 사진은 뺀다 → registry/site-photos.json (원본 주소·출처·쪽 주소·판정 점수). 파일 굽기는 bake-site-photos.mjs.
 //
 // 사용: node scripts/collect-site-photos.mjs [--only id,id] [--limit-camps N] [--max-judge N] [--select-only]
@@ -41,7 +41,6 @@ const regDir = join(root, "pipeline/registry");
 const judgPath = join(regDir, "site-photo-judgments.json");
 const outPath = join(regDir, "site-photos.json");
 const UA = "MoyeoraCampBot/1.0 (+https://github.com/[REDACTED]/camp; operator-published facts only)";
-const PER_TYPE = 6;
 const t0 = Date.now();
 
 export const CREDIT = { gocamping: "한국관광공사 고캠핑", tourapi: "한국관광공사 TourAPI", operator: "캠핑장 공식 홈페이지", official_blog: "캠핑장 공식 블로그" };
@@ -216,7 +215,6 @@ function select(all) {
     for (const p of picked) {
       if (hashes.some((h) => hamming(h, p.ent.d) <= 6)) { why.dup = (why.dup ?? 0) + 1; continue; }
       const list = (byType[p.v.type] ??= []);
-      if (list.length >= PER_TYPE) continue;
       hashes.push(p.ent.d);
       list.push({
         u: p.x.u, k: urlHash(p.x.u), src: p.x.src, ...(p.x.r2 ? { r2: p.x.r2 } : {}), ...(p.x.page ? { page: p.x.page } : {}),

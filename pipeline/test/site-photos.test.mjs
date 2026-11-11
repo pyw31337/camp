@@ -1,7 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { decideSite, summarize, typesFromText, nonProductText, floorFromText, verdictFor, LABELS, SITE, OTHER } from "../lib/site-photo-classify.mjs";
-import { pageImages, siteLinks } from "../lib/operator-photos.mjs";
+import { decideSite, summarize, typesFromText, nonProductText, nonProductContext, floorFromText, verdictFor, LABELS, SITE, OTHER, FAMILY, TYPE_FAMILY } from "../lib/site-photo-classify.mjs";
+import { pageImages, siteLinks, urlVariants, isJsBuilderUrl, mergePhotoCrawl, imagesFromRendered } from "../lib/operator-photos.mjs";
+import { readFileSync } from "node:fs";
+import { resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const sum = (pairs, site) => ({ t: pairs, site });
 
@@ -76,4 +79,73 @@ test("operator-photos: 상품 링크와 사진 후보", () => {
   assert.equal(imgs[0].alt, "A구역");
   assert.match(imgs[0].near, /A구역 파쇄석/);
   assert.match(imgs[0].cap, /사이트 안내/);
+});
+
+
+test("urlVariants: http는 https를 먼저 시도한다", () => {
+  const v = urlVariants("http://www.yangchoncamp.co.kr/");
+  assert.equal(v[0], "https://www.yangchoncamp.co.kr/");
+  assert.ok(v.includes("https://yangchoncamp.co.kr/"));
+  assert.ok(v.includes("http://www.yangchoncamp.co.kr/"));
+});
+
+test("isJsBuilderUrl: imweb·wix", () => {
+  assert.equal(isJsBuilderUrl("https://daegwolcamp.imweb.me/"), true);
+  assert.equal(isJsBuilderUrl("https://sscamping80.com/"), false);
+});
+
+test("mergePhotoCrawl: 기존 사진을 지우지 않고 추가만 한다", () => {
+  const old = { status: "OK", images: [{ url: "https://a.example/a.jpg" }], pages: ["https://a.example/"] };
+  const failed = mergePhotoCrawl(old, { status: "FETCH_FAILED", checked_at: "2026-11-11", error: "500", images: [] });
+  assert.equal(failed.status, "OK");
+  assert.equal(failed.images.length, 1);
+  assert.equal(failed.last_attempt.status, "FETCH_FAILED");
+  const neu = mergePhotoCrawl(old, { status: "OK", images: [{ url: "https://a.example/a.jpg" }, { url: "https://a.example/b.jpg" }], pages: ["https://a.example/rooms"] });
+  assert.equal(neu.images.length, 2);
+  assert.equal(neu.added, 1);
+  assert.ok(neu.pages.includes("https://a.example/rooms"));
+});
+
+test("imagesFromRendered: 작은 그림·로고는 빼고 설명은 남긴다", () => {
+  const imgs = imagesFromRendered([
+    { src: "/upload/glamping.jpg", alt: "글램핑 A", w: 800, h: 600, near: "A동 글램핑" },
+    { src: "/img/logo.png", alt: "로고", w: 800, h: 600 },
+    { src: "/upload/tiny.jpg", alt: "작음", w: 64, h: 64 },
+  ], "https://camp.example.kr/rooms", { linkText: "객실 안내", title: "OO캠핑장" });
+  assert.equal(imgs.length, 1);
+  assert.equal(imgs[0].alt, "글램핑 A");
+  assert.match(imgs[0].cap, /객실 안내/);
+  assert.equal(imgs[0].near, "A동 글램핑");
+});
+
+test("선정 스크립트는 유형당 장 수 상한을 두지 않는다", () => {
+  const src = readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../scripts/collect-site-photos.mjs"), "utf8");
+  assert.equal(/PER_TYPE/.test(src), false);
+  assert.equal(/list\.length >= /.test(src), false);
+});
+
+
+test("RV는 카라반과 같은 갈래이고 오토 사이트로는 붙지 않는다", () => {
+  assert.equal(FAMILY.rv, "C");
+  assert.equal(TYPE_FAMILY.RV, "C");
+  const v = verdictFor({ src: "gocamping" }, both("rv", 0.8), ["AUTO", "CARAVAN"]);
+  assert.equal(v.type, "CARAVAN");
+});
+
+test("쪽 글의 요금만으로는 상품 사진을 버리지 않는다", () => {
+  assert.equal(nonProductContext("주말 요금 50,000원"), false);
+  assert.equal(nonProductContext("캠핑장 배치도"), true);
+  assert.equal(nonProductText("주말 요금 50,000원"), true);
+  const v = verdictFor({ src: "operator", ctx: "주말 요금 50,000원" }, both("caravan", 0.8), ["CARAVAN"]);
+  assert.equal(v.type, "CARAVAN");
+});
+
+test("잔디로 봤지만 글램핑 점수가 높으면 글램핑으로 돌린다", () => {
+  const ent = {
+    b: sum([["lawn", 0.7], ["glamping", 0.25], ["landscape", 0.05]], 0.95),
+    l: sum([["lawn", 0.55], ["glamping", 0.4], ["landscape", 0.05]], 0.95),
+    w: 1000, h: 666, d: "0",
+  };
+  assert.equal(verdictFor({ src: "gocamping" }, ent, ["AUTO", "GLAMPING"]).type, "GLAMPING");
+  assert.equal(verdictFor({ src: "gocamping" }, ent, ["AUTO"]).type, "AUTO");
 });

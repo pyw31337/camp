@@ -50,7 +50,7 @@ export const CLASS_TYPES = {
   deck: ["DECK", "DUPLEX_DECK", "TARP_ZONE", "PITCH", "AUTO"],
   gravel: ["AUTO", "PITCH", "RV", "CAR_CAMP", "PET_SITE", "TARP_ZONE", "SOLO"],
   lawn: ["PITCH", "AUTO", "PET_SITE", "TARP_ZONE", "SOLO", "RV"],
-  rv: ["RV", "AUTO"],
+  rv: ["RV", "CARAVAN"],
   carcamp: ["CAR_CAMP", "AUTO"],
 };
 /** 바닥 부류(미니 레일 타일의 바닥 표기와 맞춰 고를 때) */
@@ -82,6 +82,10 @@ export function floorFromText(text) {
 /** 글이 상품이 아닌 사진(지도·요금표·매점·화장실 등)을 말하면 true */
 export function nonProductText(text) {
   return /배치도|안내도|지도|약도|오시는\s*길|요금|가격|매점|편의점|화장실|샤워|개수대|관리동|주차장|수영장|놀이터|체험|이벤트|공지|로고|logo|banner|배너|icon|아이콘|btn|button|등록증|허가|보험/i.test(String(text ?? ""));
+}
+/** 쪽·블록 글(ctx)용. 요금·가격·공지는 상품 사진과 같은 쪽에 자주 있어 이것만으로 버리지는 않는다(t58 표본). */
+export function nonProductContext(text) {
+  return /배치도|안내도|지도|약도|오시는\s*길|매점|편의점|화장실|샤워|개수대|관리동|주차장|수영장|놀이터|로고|logo|banner|배너|icon|아이콘|btn|button|등록증|허가|보험/i.test(String(text ?? ""));
 }
 
 /** CLIP 결과([{label, score}]) → 부류별 확률 합 상위 6개 [[부류, 확률]]와 사이트 부류 합(판정 캐시에 남기는 모양) */
@@ -136,13 +140,13 @@ export async function siteJudge({ cacheDir } = {}) {
 }
 
 // ---------- 선정 규칙(판정 캐시 → 쓸지 말지). 규칙만 바꿀 때는 다시 판정하지 않아도 된다. ----------
-export const FAMILY = { glamping: "G", glamping_in: "G", caravan: "C", caravan_in: "C", cabin: "H", pension: "H", room: "H", deck: "P", gravel: "P", lawn: "P", rv: "P", carcamp: "P" };
+export const FAMILY = { glamping: "G", glamping_in: "G", caravan: "C", caravan_in: "C", rv: "C", cabin: "H", pension: "H", room: "H", deck: "P", gravel: "P", lawn: "P", carcamp: "P" };
 export const INTERIOR = new Set(["glamping_in", "caravan_in", "room"]);
-export const TYPE_FAMILY = { GLAMPING: "G", CARAVAN: "C", HOUSE: "H", BUNGALOW: "H", PENSION: "H", DECK: "P", AUTO: "P", PITCH: "P", RV: "P", CAR_CAMP: "P", PET_SITE: "P", TARP_ZONE: "P", SOLO: "P", DUPLEX_DECK: "P" };
+export const TYPE_FAMILY = { GLAMPING: "G", CARAVAN: "C", RV: "C", HOUSE: "H", BUNGALOW: "H", PENSION: "H", DECK: "P", AUTO: "P", PITCH: "P", CAR_CAMP: "P", PET_SITE: "P", TARP_ZONE: "P", SOLO: "P", DUPLEX_DECK: "P" };
 
 /**
  * 후보 사진 하나({src, cap, ctx}) + 판정 캐시 항목({b, l, skip, lskip, err}) + 캠핑장 유형 목록 → 붙일 유형 또는 {no: 이유}.
- * 2026-11-11 표본 대조(77장 → 60장 → 60장): 두 모델이 같은 부류일 때만, 건물·실내·데크·운영자 사진은 더 높은 문턱.
+ * 2026-11-11 표본 대조(77장 → 60장 → 60장) 뒤 t58 검증 표본 297장으로 문턱을 다시 맞췄다(갈래 정밀도 ≥ 90%). 두 모델이 같은 갈래일 때만, 건물·실내·데크·운영자 사진은 더 높은 문턱.
  */
 export function verdictFor(cand, ent, types) {
   if (!ent || ent.err) return { no: "unjudged" };
@@ -154,7 +158,7 @@ export function verdictFor(cand, ent, types) {
   // 글 단서: 사진 바로 곁의 글(블록 제목·객실 이름·alt·바로 앞 글)만 유형 근거로 쓴다. 쪽 제목·메뉴 이름은 사이트 전체에 같아 근거가 약하다.
   const capTypes = typesFromText(cand.cap).filter((t) => types.includes(t));
   if (cand.cap && nonProductText(cand.cap) && !capTypes.length) return { no: "caption-nonproduct" };
-  if (cand.ctx && nonProductText(cand.ctx) && !capTypes.length && !typesFromText(cand.ctx).length) return { no: "caption-nonproduct" };
+  if (cand.ctx && nonProductContext(cand.ctx) && !capTypes.length && !typesFromText(cand.ctx).length) return { no: "caption-nonproduct" };
   const both = fb && fb === fl;
   // 어느 모델이든 ‘상품 아님’(관리동·간판·운동 시설·풍경 등) 확률이 꽤 높으면 쓰지 않는다.
   const otherMax = Math.max(B.os, L.os);
@@ -163,14 +167,20 @@ export function verdictFor(cand, ent, types) {
   if (both) {
     const fam = fb;
     const interior = INTERIOR.has(B.cls) || INTERIOR.has(L.cls);
-    // 그림만으로 쓸 때의 문턱. 건물(객실·방갈로)·실내는 관리동·화장실·매점과, 데크는 놀이·운동 시설과 자주 헷갈렸다(2026-11-11 표본 77장).
+    // 문턱은 t58 검증 표본 297장에서 갈래(글램핑·카라반·객실·노지) 정밀도 90% 이상이 되게 맞췄다. RULE_VERSION은 그대로(캐시된 b/l 점수를 다시 쓴다).
     if (otherMax >= 0.25) cls = null;
     else if (interior) { if (strong(B, 0.6) && strong(L, 0.6)) cls = L.cls; }
-    else if (fam === "H") { if (otherMax < 0.15 && strong(B, 0.55) && strong(L, 0.55) && (B.cls === "cabin" || L.cls === "cabin")) cls = L.cls; }
+    else if (fam === "H") { if (otherMax < 0.15 && strong(B, 0.62) && strong(L, 0.62) && (B.cls === "cabin" || L.cls === "cabin")) cls = L.cls; }
     else if (L.cls === "deck" || B.cls === "deck") { if (strong(B, 0.45) && strong(L, 0.45)) cls = L.cls; }
-    else if ((B.ok || L.ok) && Math.max(B.s, L.s) >= 0.5 && Math.min(B.s, L.s) >= 0.3) cls = L.ok ? L.cls : B.cls;
+    else if ((B.ok || L.ok) && Math.max(B.s, L.s) >= 0.5 && Math.min(B.s, L.s) >= 0.36) cls = L.ok ? L.cls : B.cls;
     // 운영자 홈페이지 사진은 수영장·조경·조감도 그림이 많아 두 모델 모두 뚜렷할 때만 그림만으로 쓴다.
-    if (cls && cand.src === "operator" && !(B.ok && L.ok && Math.min(B.s, L.s) >= 0.5 && otherMax < 0.2)) cls = null;
+    if (cls && cand.src === "operator" && !(B.ok && L.ok && Math.min(B.s, L.s) >= 0.5 && otherMax < 0.16)) cls = null;
+    // 잔디·파쇄석·차박으로 봤지만 글램핑 점수가 뚜렷하면(벨텐트·티피가 잔디 위에 있는 경우) 글램핑으로 돌린다.
+    if (cls && (cls === "lawn" || cls === "gravel" || cls === "carcamp")) {
+      const gB = (ent.b.t ?? []).find((x) => String(x[0]).startsWith("glamping"))?.[1] ?? 0;
+      const gL = (ent.l.t ?? []).find((x) => String(x[0]).startsWith("glamping"))?.[1] ?? 0;
+      if (Math.max(gB, gL) >= 0.2 && types.includes("GLAMPING")) cls = "glamping";
+    }
   }
   if (capTypes.length) {
     const fam = new Set(capTypes.map((t) => TYPE_FAMILY[t]));
