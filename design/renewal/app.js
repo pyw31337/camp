@@ -1563,10 +1563,11 @@ function siteRailHtml(c) {
 function specStripHtml(c) {
   const f = facts(c), fm = feeMain(c);
   const size = siteSizeShort(c);
-  const volt = f.power?.w ? voltLimitText(f.power.w) : "";
-  const powerTxt = f.power?.v || "";
+  const w = Number(f.power?.w) || (typeof wattsOf === "function" ? wattsOf(c) : 0) || 0;
+  const volt = w ? voltLimitText(w) : "";
+  const powerTxt = w ? (f.power?.short || (typeof kw === "function" ? kw(w) : `${w}W`)) : (f.power?.v || "");
   const powerVal = powerTxt
-    ? (volt ? `<button type="button" class="spec-volt has-volt-tip" data-volt-spec="${esc(volt)}" ${voltTip(f.power.short || powerTxt, volt)}>${esc(f.power.short || powerTxt)}</button>` : esc(powerTxt))
+    ? (volt ? `<button type="button" class="spec-volt has-volt-tip" data-volt-spec="${esc(volt)}" ${voltTip(powerTxt, volt)}>${esc(powerTxt)}</button>` : esc(powerTxt))
     : "";
   const cells = [
     ["규격", "size", size && esc(size)],
