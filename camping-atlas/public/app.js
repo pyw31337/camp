@@ -1011,6 +1011,18 @@ const photoKey = (u) => {
   base = base.toLowerCase();
   return base.replace(/^thumb_\d+_/, "");
 };
+// 사진 색인·수집기가 다른 업장 파일을 섞어도 카드에서 노출하지 않는다.
+// 공식 고캠핑 URL과 파생 media 경로의 업장 ID가 현재 카드 ID와 다르면 즉시 제외한다.
+function imageBelongsToCamp(c, u) {
+  const raw = String(u ?? "");
+  const id = String(c?.id ?? "");
+  if (!raw || !id) return false;
+  const official = raw.match(/(?:\/upload\/camp\/|\/camp\/)(\d{2,})\//i);
+  if (official && official[1] !== id) return false;
+  const derived = raw.match(/(?:^|\/)media\/(?:cards|camps)\/(\d+)\//i);
+  if (derived && derived[1] !== id) return false;
+  return true;
+}
 const PT_FB = new Map();
 // ‘후기 사진’ 출처 배지는 붙이지 않는다(소유자 2026-10-22). 출처는 상세 사진 원문 링크에 남는다.
 // 성능(t39 #34): 화면 전환마다 같은 캠핑장 사진 목록을 수천 번 다시 만들지 않게 기억한다.
@@ -1023,7 +1035,7 @@ function photosOf(c) {
   return r.v.slice();
 }
 function photosAll(c) {
-  const p = S.photos[c.id] ?? [];
+  const p = (S.photos[c.id] ?? []).filter((u) => imageBelongsToCamp(c, u));
   const own = S.cards[c.id];
   const remote = p.filter((x) => !String(x).startsWith("media/"));
   const local = p.filter((x) => String(x).startsWith("media/"));
@@ -1058,6 +1070,7 @@ function photosAll(c) {
   const deduped = [];
   for (const u of list) {
     if (!u) continue;
+    if (!imageBelongsToCamp(c, u)) continue;
     const k = photoKey(u);
     if (seen.has(k) || seen.has(u)) continue;
     seen.add(k);
@@ -2394,7 +2407,7 @@ const HERO_THEMES = [
   { id: "uq-spa", emoji: "🛁", shortName: "스파", badge: "보글보글 프라이빗 스파", moodDescription: "자쿠지 & 히노끼 스파 글램핑", image: "hero-spa.webp", titleA: "캔들 불빛 아래 보글보글", titleB: "프라이빗 스파 캠핑", summary: "하루의 피로를 녹이는 따스한 물거품과 은은한 촛불", effect: "bubbles" },
   { id: "uq-warmpool", emoji: "🌡️", shortName: "사계절온수풀", badge: "겨울에도 따뜻한 물놀이", moodDescription: "사계절 온수풀 & 설경 물안개", image: "hero-warmpool.webp", titleA: "눈 내리는 날에도 첨벙", titleB: "사계절 온수풀 캠핑", summary: "하얀 설경 속 김이 오르는 따뜻한 풀에서 즐기는 물놀이", effect: "steam" },
   { id: "uq-pool", emoji: "🏊", shortName: "수영장", badge: "햇살 가득 수영장", moodDescription: "파란 수영장 & 여름 물놀이", image: "hero-pool.webp", titleA: "반짝이는 물빛 속으로", titleB: "수영장 캠핑", summary: "텐트 바로 앞 파란 수영장에서 하루 종일 첨벙첨벙", effect: "bubbles" },
-  { id: "uq-horse", emoji: "🐎", shortName: "승마", badge: "초원 위 승마 체험", moodDescription: "노을 지는 목장 & 승마 체험", image: "hero-horse.webp", titleA: "노을 진 초원을 달려", titleB: "승마 체험 캠핑", summary: "말과 교감하며 초원을 거니는 특별한 캠핑의 추억", effect: "sunset-coast" },
+  { id: "uq-horse", emoji: "🐎", shortName: "승마", badge: "초원 위 승마 체험", moodDescription: "노을 지는 목장 & 승마 체험", image: "hero-horse.webp", titleA: "노을 진 초원을 달려", titleB: "승마 체험 캠핑", summary: "말과 교감하며 초원을 거니는 특별한 캠핑의 추억", effect: "green-meadow" },
   { id: "uq-animal", emoji: "🦙", shortName: "동물체험", badge: "보들보들 동물 친구", moodDescription: "알파카·양·염소 먹이주기", image: "hero-animal.webp", titleA: "보들보들 동물 친구와", titleB: "동물 체험 캠핑", summary: "아이와 함께 먹이 주고 쓰다듬는 따뜻한 교감의 시간", effect: "lush-forest" },
   { id: "uq-kidscafe", emoji: "🧸", shortName: "키즈카페", badge: "아이가 먼저 웃는 곳", moodDescription: "볼풀·미끄럼틀 키즈카페", image: "hero-kidscafe.webp", titleA: "아이들의 웃음이 가득", titleB: "키즈카페 캠핑", summary: "캠핑장 안 키즈카페에서 아이는 신나고 부모는 여유롭게", effect: "confetti" },
   { id: "uq-indoorplay", emoji: "🎲", shortName: "실내놀이", badge: "비 와도 걱정 없는", moodDescription: "트램펄린·보드게임 실내놀이", image: "hero-indoorplay.webp", titleA: "비가 와도 신나는 하루", titleB: "실내놀이 캠핑", summary: "날씨와 상관없이 뛰놀 수 있는 넓은 실내 놀이 공간", effect: "confetti" },
