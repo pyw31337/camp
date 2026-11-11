@@ -207,7 +207,7 @@ const S = {
   origin: store.get("mc-origin", ""), drive: Number(store.get("mc-drive", 0)) || 0,
 };
 
-// ── 시안 전환 ────────────────────────────────────────────────
+// ── 시안 전환 ────
 const VARIANTS = { a: "A 포스터", b: "B 필드북", c: "C 인덱스" };
 function setVariant(v) {
   if (!VARIANTS[v]) v = "a";
@@ -228,7 +228,7 @@ setVariant("a");
 
 function updateHeaderGlass() {}
 
-// ── 이름·지역 ────────────────────────────────────────────────
+// ── 이름·지역 ────
 const SIDO = [[/^서울/, "서울"], [/^부산/, "부산"], [/^대구/, "대구"], [/^인천/, "인천"], [/^광주/, "광주"], [/^대전/, "대전"], [/^울산/, "울산"], [/^세종/, "세종"], [/^경기/, "경기"], [/^강원/, "강원"], [/^충청북|^충북/, "충북"], [/^충청남|^충남/, "충남"], [/^전라북|^전북/, "전북"], [/^전라남|^전남/, "전남"], [/^경상북|^경북/, "경북"], [/^경상남|^경남/, "경남"], [/^제주/, "제주"]];
 const sidoShort = (s) => (SIDO.find(([r]) => r.test(s ?? "")) ?? [, s ?? ""])[1];
 const OP = { LOCAL_GOVERNMENT: "지자체", NATIONAL_PARK: "국립공원", NATURAL_RECREATION_FOREST: "휴양림", PUBLIC_LEISURE: "공공", PRIVATE: "민간" };
@@ -255,7 +255,7 @@ function titleHtml(c) {
 const region = (c) => `${sidoShort(c.sido)} ${c.sigungu || (String(c.addr ?? "").trim().match(/^\S+\s+(\S+?(?:시|군|구))(?:\s|$)/)?.[1] ?? "")}`.trim();
 const typeLine = (c) => (c.pf?.s ?? "").split(" · ")[0] || (c.types ?? [])[0] || "";
 
-// ── 사실 해석(카드·상세·비교·지도 공통) ─────────────────────
+// ── 사실 해석(카드·상세·비교·지도 공통) ────
 // 등급: v=원문 대조(VERIFIED) · c=공식 등록·운영자 공개 · m=소개·후기 언급. 배지는 v·c만.
 // r = 법령·고시 기본값(업장이 공지하지 않음). 그 업장의 규정이 아니라 참고값이다(2026-10-19).
 const GR = (s) => (s === "VERIFIED" ? "v" : s === "CONFIRMED" || s === "OPERATOR" ? "c" : s === "SURVEYED" || s === "MENTION" ? "m" : s === "REFERENCE" ? "r" : null);
@@ -453,7 +453,7 @@ function badges(c, max = 4, maxNo = 2, { rows = false, theme = null } = {}) {
 }
 const dot = () => "";
 
-// ── 오픈 신호 ────────────────────────────────────────────────
+// ── 오픈 신호 ────
 function openingOf(c) {
   const o = S.openings.get(String(c.id));
   if (!o || o.kind === "접수 마감") return null;
@@ -509,7 +509,7 @@ const STAYS = [
 const STAY_KEYS = new Set(STAYS.map(([k]) => k));
 const stayKinds = (c) => (c._stay ??= STAYS.filter(([, , , t]) => t(c)).map(([k]) => k));
 const stayBadges = (c, max = 4) => STAYS.filter(([k]) => stayKinds(c).includes(k)).slice(0, max).map(([k, cls, icon, , label]) => `<span class="bdg bdg-stay bdg-${cls}" data-stay="${k}">${ic(icon)}${esc(label(c))}</span>`).join("");
-// ── 겨울(소유자 2026-10-21) ─────────────────────────────────
+// ── 겨울(소유자 2026-10-21) ────
 // c.win(1 겨울 운영·0 겨울 휴장, 고캠핑 운영기간) · c.heat(["g","c"] 글램핑·카라반 내부시설 난방) — build-gocamping-detail.mjs
 // 눈·영하 예보: conditions/forecast.json(기상청 단기·중기, 하루 2회) 앞으로 7일. 영하는 최저 0°C 미만, 눈은 강수형태·하늘에 ‘눈’.
 const SNOW_IC = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 2v20M4 7l16 10M20 7 4 17M9 3.5l3 2 3-2M9 20.5l3-2 3 2"/></svg>';
@@ -575,7 +575,7 @@ const typeRow = (c, extra = "") => {
   return { b: true, rest: "", html: `<div class="card-types has-stay"><div class="stay-bdgs">${b}</div></div>` };
 };
 
-// ── 필터 ─────────────────────────────────────────────────────
+// ── 필터 ────
 // 요금대 필터는 텐트 사이트 요금으로(글램핑·펜션 요금이 섞인 범위로 거르지 않게). 사이트 요금을 모르면 전체 범위.
 const campFeeMin = (c) => tierOf(c, "site")?.[1] ?? c.fee?.min ?? c.pf?.p?.min;
 const campFeeMax = (c) => tierOf(c, "site")?.[2] ?? c.fee?.max ?? c.pf?.p?.max ?? campFeeMin(c);
@@ -943,7 +943,7 @@ function results() {
   return list.sort((a, b) => photoLast(a) - photoLast(b));
 }
 
-// ── 사진 ─────────────────────────────────────────────────────
+// ── 사진 ────
 const photoUrl = (u) => {
   const value = String(u ?? "");
   if (!value) return "";
@@ -1267,8 +1267,8 @@ function initDraggableRails(root = document) {
   }
 }
 
-// ── 카드 ─────────────────────────────────────────────────────
-// ── 카드 ─────────────────────────────────────────────────────
+// ── 카드 ────
+// ── 카드 ────
 function formatRowVal(label, v) {
   if (!v) return "–";
   let s = esc(v);
@@ -1479,7 +1479,7 @@ function nearLine(c, sep = " · ") {
   return [["m", "마트"], ["c", "편의점"], ["b", "정육점"]].filter(([k]) => nl[k] && nl[k] <= 5000).map(([k, l]) => `${l} ${km(nl[k])}`).join(sep);
 }
 // 찜(하트): 카드 이름 오른쪽 회색 선 하트 → 누르면 채운 하트. 찜한 곳은 ‘찜’ 화면에서 3곳씩 나란히 비교한다.
-// ── 카탈로그 원본 행(상세·비교용) ────────────────────────────
+// ── 카탈로그 원본 행(상세·비교용) ────
 // 목록은 가벼운 판을 쓰고, 상세·비교를 열 때 같은 캠핑장의 원본 행(catx/{샤드}.json)을 받아 덮어쓴다 → 화면 내용은 원본과 같다.
 // 계산 캐시(c._f 등 _로 시작하는 값)는 지워 다시 계산한다. 샤드 번호는 scripts/split-catalog.mjs shardOf와 같아야 한다.
 const CATX = { v: "", n: 0, got: new Map() };
@@ -1611,7 +1611,7 @@ function themeCampCard(c, i, themeKey) {
   return card(c, i, { isWaterPlay: themeKey === "WATER_PLAY", theme: themeKey });
 }
 
-// ── 공통 UI: 토스트·(i) 말풍선 ───────────────────────────────
+// ── 공통 UI: 토스트·(i) 말풍선 ────
 let toastT;
 // 되돌리기 토스트: 찜 해제처럼 되돌릴 수 있는 일에만(4초).
 function toastUndo(msg, undo) {
@@ -1833,7 +1833,7 @@ function flushPendingSaveLogs() {
     } finally { flushingSaveLogs = null; }
   })());
 }
-// ── 찜: 낙관적 UI + 이 기기 보관(소유자 2026-10-23) ─────────────────────
+// ── 찜: 낙관적 UI + 이 기기 보관(소유자 2026-10-23) ────
 // 누르면 하트·찜 목록이 바로 바뀌고(이 기기 mc-saved), 서버(공용 찜 — 모든 사용자가 같은 목록)에는 뒤에서 보낸다.
 // 서버에 아직 닿지 않은 동작은 mc-save-ops에 남겨 두었다가 다시 보낸다(첫 화면·연결 복구·탭 복귀).
 // 서버 목록을 읽을 때 이 대기 동작을 덧입혀, 서버 저장이 늦거나 실패해도 방금 한 찜이 사라져 보이지 않게 한다
@@ -2052,7 +2052,7 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// ── 화면: 찾기(메인) ─────────────────────────────────────────
+// ── 화면: 찾기(메인) ────
 function countOf(test) { return S.camps.reduce((n, c) => n + (test(c) ? 1 : 0), 0); }
 // ── 실시간 인기(소유자 2026-10-19): 최근 7일 블로그·카페·뉴스·동영상 글의 캠핑장 언급 순위. /context/trending.json(Trending mentions)
 // 다음(Daum) 공식 아이콘(위키미디어 공용 Daum_icon_(2025–2026).svg)을 로컬 파일로 쓴다(소유자 2026-10-20).
@@ -2346,14 +2346,14 @@ const HERO_THEMES = [
   { id: "uq-spa", emoji: "🛁", shortName: "스파", badge: "보글보글 프라이빗 스파", moodDescription: "자쿠지 & 히노끼 스파 글램핑", image: "hero-spa.webp", titleA: "캔들 불빛 아래 보글보글", titleB: "프라이빗 스파 캠핑", summary: "하루의 피로를 녹이는 따스한 물거품과 은은한 촛불", effect: "bubbles" },
   { id: "uq-warmpool", emoji: "🌡️", shortName: "사계절온수풀", badge: "겨울에도 따뜻한 물놀이", moodDescription: "사계절 온수풀 & 설경 물안개", image: "hero-warmpool.webp", titleA: "눈 내리는 날에도 첨벙", titleB: "사계절 온수풀 캠핑", summary: "하얀 설경 속 김이 오르는 따뜻한 풀에서 즐기는 물놀이", effect: "steam" },
   { id: "uq-pool", emoji: "🏊", shortName: "수영장", badge: "햇살 가득 수영장", moodDescription: "파란 수영장 & 여름 물놀이", image: "hero-pool.webp", titleA: "반짝이는 물빛 속으로", titleB: "수영장 캠핑", summary: "텐트 바로 앞 파란 수영장에서 하루 종일 첨벙첨벙", effect: "bubbles" },
-  { id: "uq-horse", emoji: "🐎", shortName: "승마", badge: "초원 위 승마 체험", moodDescription: "노을 지는 목장 & 승마 체험", image: "hero-horse.webp", titleA: "노을 진 초원을 달려", titleB: "승마 체험 캠핑", summary: "말과 교감하며 초원을 거니는 특별한 캠핑의 추억", effect: "green-meadow" },
-  { id: "uq-animal", emoji: "🦙", shortName: "동물체험", badge: "보들보들 동물 친구", moodDescription: "알파카·양·염소 먹이주기", image: "hero-animal.webp", titleA: "보들보들 동물 친구와", titleB: "동물 체험 캠핑", summary: "아이와 함께 먹이 주고 쓰다듬는 따뜻한 교감의 시간", effect: "cherry-blossom" },
+  { id: "uq-horse", emoji: "🐎", shortName: "승마", badge: "초원 위 승마 체험", moodDescription: "노을 지는 목장 & 승마 체험", image: "hero-horse.webp", titleA: "노을 진 초원을 달려", titleB: "승마 체험 캠핑", summary: "말과 교감하며 초원을 거니는 특별한 캠핑의 추억", effect: "sunset-coast" },
+  { id: "uq-animal", emoji: "🦙", shortName: "동물체험", badge: "보들보들 동물 친구", moodDescription: "알파카·양·염소 먹이주기", image: "hero-animal.webp", titleA: "보들보들 동물 친구와", titleB: "동물 체험 캠핑", summary: "아이와 함께 먹이 주고 쓰다듬는 따뜻한 교감의 시간", effect: "lush-forest" },
   { id: "uq-kidscafe", emoji: "🧸", shortName: "키즈카페", badge: "아이가 먼저 웃는 곳", moodDescription: "볼풀·미끄럼틀 키즈카페", image: "hero-kidscafe.webp", titleA: "아이들의 웃음이 가득", titleB: "키즈카페 캠핑", summary: "캠핑장 안 키즈카페에서 아이는 신나고 부모는 여유롭게", effect: "confetti" },
   { id: "uq-indoorplay", emoji: "🎲", shortName: "실내놀이", badge: "비 와도 걱정 없는", moodDescription: "트램펄린·보드게임 실내놀이", image: "hero-indoorplay.webp", titleA: "비가 와도 신나는 하루", titleB: "실내놀이 캠핑", summary: "날씨와 상관없이 뛰놀 수 있는 넓은 실내 놀이 공간", effect: "confetti" },
   { id: "uq-treehouse", emoji: "🌳", shortName: "트리하우스", badge: "숲속 나무 위 하룻밤", moodDescription: "소나무 숲 트리하우스", image: "hero-treehouse.webp", titleA: "나무 위 작은 오두막", titleB: "트리하우스 캠핑", summary: "출렁다리를 건너 숲 높이에서 맞이하는 아침 햇살", effect: "lush-forest" },
   { id: "uq-stay", emoji: "🫧", shortName: "이색숙소", badge: "별을 품은 버블돔", moodDescription: "버블 텐트 & 돔 하우스", image: "hero-uniquestay.webp", titleA: "투명 돔 안에서 별 보기", titleB: "이색 숙소 캠핑", summary: "누워서 은하수를 올려다보는 버블돔과 이색 숙소", effect: "night-sky" },
   { id: "uq-leisure", emoji: "🪂", shortName: "레포츠", badge: "짜릿한 하루 레포츠", moodDescription: "짚라인 & 카약 레포츠", image: "hero-leisure.webp", titleA: "강 위를 가르는 짜릿함", titleB: "레포츠 캠핑", summary: "짚라인과 카약으로 채우는 액티브한 캠핑 하루", effect: "riverside" },
-  { id: "uq-farm", emoji: "🍓", shortName: "체험", badge: "손으로 만드는 추억", moodDescription: "딸기 따기·감자 캐기·도예 체험", image: "hero-farm.webp", titleA: "직접 따고 만드는 하루", titleB: "농촌 체험 캠핑", summary: "수확하고 빚어 보는 손끝 체험으로 남기는 캠핑 추억", effect: "green-meadow" }
+  { id: "uq-farm", emoji: "🍓", shortName: "체험", badge: "손으로 만드는 추억", moodDescription: "딸기 따기·감자 캐기·도예 체험", image: "hero-farm.webp", titleA: "직접 따고 만드는 하루", titleB: "농촌 체험 캠핑", summary: "수확하고 빚어 보는 손끝 체험으로 남기는 캠핑 추억", effect: "lush-forest" }
 ];
 
 // 히어로 테마는 홈을 새로 열거나 새로고침할 때마다 10개 중 1개를 다시 무작위로 고른다.
@@ -2599,8 +2599,11 @@ class HeroCanvasController {
         break;
 
       case "steam":
-        // t45u 노천탕·온수풀: 아래에서 천천히 피어오르는 김(부드러운 원형 그라데이션)
-        for (let i = 0; i < 26; i++) this.particles.push(this.makeSteam(w, h, true));
+        // 노천탕·온수풀: 몽환적으로 피어오르는 온천 김 + 밤하늘 영롱한 별빛 반짝임
+        for (let i = 0; i < 30; i++) this.particles.push(this.makeSteam(w, h, true));
+        for (let i = 0; i < 42; i++) {
+          this.duskParticles.push({ x: Math.random() * w, y: Math.random() * (h * 0.52), r: Math.random() * 1.8 + 0.8, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.032 + 0.014, alpha: Math.random() * 0.6 + 0.35, isCross: Math.random() < 0.25 });
+        }
         break;
 
       case "bubbles":
@@ -2626,21 +2629,40 @@ class HeroCanvasController {
   }
 
   makeSteam(w, h, initial = false) {
-    return { x: Math.random() * w, y: initial ? h * (0.35 + Math.random() * 0.65) : h + 40, r: Math.random() * 60 + 50, vy: -(Math.random() * 0.35 + 0.18), vx: (Math.random() - 0.5) * 0.2, life: initial ? Math.random() : 1, sway: Math.random() * Math.PI * 2 };
+    return { x: Math.random() * w, y: initial ? h * (0.45 + Math.random() * 0.55) : h + 25, r: Math.random() * 50 + 40, vy: -(Math.random() * 0.42 + 0.22), vx: (Math.random() - 0.5) * 0.3, life: initial ? Math.random() : 1, sway: Math.random() * Math.PI * 2 };
   }
   makeConfetti(w, h, initial = false) {
     const colors = ["#ff8a80", "#ffd54f", "#81d4fa", "#a5d6a7", "#ce93d8", "#ffab91"];
     return { x: Math.random() * w, y: initial ? Math.random() * h : -12, w: Math.random() * 6 + 5, h: Math.random() * 4 + 3, vy: Math.random() * 0.6 + 0.35, vx: (Math.random() - 0.5) * 0.4, rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.06, color: colors[Math.floor(Math.random() * colors.length)], sway: Math.random() * Math.PI * 2 };
   }
   renderSteam(ctx, w, h, mx, my, hasMouse) {
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter";
+    for (const s of this.duskParticles) {
+      s.pulse += s.pulseSpeed;
+      const alpha = Math.max(0.15, s.alpha + Math.sin(s.pulse) * 0.35);
+      ctx.fillStyle = `rgba(235, 245, 255, ${alpha})`;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+      if (s.isCross && alpha > 0.6) {
+        ctx.strokeStyle = `rgba(215, 235, 255, ${alpha * 0.75})`;
+        ctx.lineWidth = 1;
+        const fl = s.r * 3.5;
+        ctx.beginPath();
+        ctx.moveTo(s.x - fl, s.y); ctx.lineTo(s.x + fl, s.y);
+        ctx.moveTo(s.x, s.y - fl); ctx.lineTo(s.x, s.y + fl);
+        ctx.stroke();
+      }
+    }
+    ctx.restore();
     for (let i = 0; i < this.particles.length; i++) {
       const p = this.particles[i];
-      p.sway += 0.01; p.y += p.vy; p.x += p.vx + Math.sin(p.sway) * 0.25; p.r += 0.12; p.life -= 0.0018;
-      if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 140) { p.x += (dx / (d || 1)) * 1.2; p.y += (dy / (d || 1)) * 0.6; } }
+      p.sway += 0.012; p.y += p.vy; p.x += p.vx + Math.sin(p.sway) * 0.3; p.r += 0.14; p.life -= 0.0020;
+      if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 140) { p.x += (dx / (d || 1)) * 1.4; p.y += (dy / (d || 1)) * 0.7; } }
       if (p.life <= 0 || p.y + p.r < 0) { this.particles[i] = this.makeSteam(w, h); continue; }
-      const a = Math.min(1, p.life * 1.4) * 0.16;
-      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
-      g.addColorStop(0, `rgba(255,255,255,${a})`); g.addColorStop(1, "rgba(255,255,255,0)");
+      const a = Math.min(1, p.life * 1.5) * 0.28, g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+      g.addColorStop(0, `rgba(255, 255, 255, ${a})`); g.addColorStop(0.5, `rgba(240, 245, 255, ${a * 0.45})`); g.addColorStop(1, "rgba(255, 255, 255, 0)");
       ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
     }
   }
@@ -3902,7 +3924,7 @@ function initHeroDynamicEngine(v) {
   });
 }
 
-// ── 내 취향 맞춤 섹션 및 장비 설정 (소유자 2026-11-09) ──────────────────────────────────
+// ── 내 취향 맞춤 섹션 및 장비 설정 (소유자 2026-11-09) ────
 const DEFAULT_MY_TASTE = {
   types: ["AUTO"],
   minSize: 0,
@@ -3960,7 +3982,7 @@ function matchMyTaste(c, taste = getMyTaste()) {
   if (taste.minSize > 0 && maxSide(c) < taste.minSize) return false;
   if (taste.minWatts > 0) {
     const w = c.watts || (c.of?.w ? Number(c.of.w.v) : null) || c.field_conditions?.power?.limit_w || wattsOf(c) || (pos(facts(c).power) && facts(c).power.w ? facts(c).power.w : 0);
-    if (w > 0 ? w < taste.minWatts : !((c.pwr || c.field_conditions?.power?.available) && taste.minWatts === 600 || hit(new RegExp(`${taste.minWatts >= 1400 ? '1[4-9]\\d{2}|[23]\\d{3}' : taste.minWatts >= 1000 ? '1\\d{3}|1kw' : '600\\s*w|전기'}\\s*w?`, 'i')))) return false;
+    if (w > 0 ? w < taste.minWatts : (taste.minWatts >= 1400 ? !/(?:1[4-9]\d{2}|[23]\d{3})\s*w|1\.[4-9]\s*kw|[23](\.\d+)?\s*kw|초고용량\s*전기/i.test(txt) : taste.minWatts >= 1000 ? !/(?:1\d{3}|[23]\d{3})\s*w|1(\.\d+)?\s*kw|고용량\s*전기/i.test(txt) : !(c.pwr || c.field_conditions?.power?.available || facts(c).power?.ok || /600\s*w|전기/i.test(txt)))) return false;
   }
   if (taste.fire) { const v = facts(c).fire?.v ?? ""; if (!(c.fp === 1 || /가능|개별|화로/i.test(v)) || /불가|금지/i.test(v)) return false; }
   if (taste.tarp && !((c.field_conditions?.shelter_setup?.max_tarps > 0 || c.field_conditions?.shelter_setup?.canopy_allowed) || hit(/타프/i))) return false;
@@ -4567,7 +4589,7 @@ const PRESETS = [
   ["글램핑·카라반", { kind: ["GLAMPING", "CARAVAN"] }], ["당일 캠크닉", { kind: ["DAY"] }], ["장작 불멍", { fire: true }],
 ];
 
-// ── 화면: 목록(히어로 검색 결과) ─────────────────────────────
+// ── 화면: 목록(히어로 검색 결과) ────
 // 주소: #/list?area=강원&q=가평&d=2026-10-25. 히어로의 ‘찾기’가 이 화면으로 옮겨 온다(소유자 2026-10-19).
 // 한 줄 가로 행: 왼쪽 썸네일, 오른쪽 요금·입퇴실·매너타임·전기·주차·장작·반려견·사이트·주변·후기·날짜 상태.
 const LIST_PAGE = 30;
@@ -4724,7 +4746,7 @@ function bindList() {
   cleanup.push(() => { io.disconnect(); v.removeEventListener("submit", onSubmit); v.removeEventListener("click", onClick); v.removeEventListener("change", onChange); });
 }
 
-// ── 화면: 테마 모음 ───────────────────────────────────────────
+// ── 화면: 테마 모음 ────
 function themesView() {
   const cards = THEMES.map(([key, label, test]) => {
     const closed = key === "WATER_PLAY";
@@ -4734,7 +4756,7 @@ function themesView() {
   return `<section class="themes-page"><header class="themes-head shell"><h1>캠핑 테마별 <em>캠핑장 찾기</em></h1><p class="sec-sub">원하는 캠핑 스타일과 분위기부터 골라보세요.</p></header><div class="theme-grid shell">${cards}</div></section>`;
 }
 
-// ── 화면: 시·도 / 시·군·구 랜딩(t39 #40) ─────────────────────────
+// ── 화면: 시·도 / 시·군·구 랜딩(t39 #40) ────
 // /region/경기도, /region/경기도/가평군 — 그 지역 캠핑장 목록(카드 양식은 테마 화면과 같음) + 아래 시·군·구 바로가기.
 // 검색·공유용 정적 미리보기 페이지는 scripts/publish-explorer-pages.mjs가 같은 주소에 만든다.
 const regionHref = (sido, sgg) => `${APP_BASE}region/${encodeURIComponent(sido)}/${sgg ? `${encodeURIComponent(sgg)}/` : ""}`; // 끝 ‘/’: 정적 페이지로 바로(301 없이)
@@ -5164,7 +5186,7 @@ function homeClicks(e) {
   if (e.target.closest("[data-more]")) moreResults();
 }
 
-// ── 화면: 상세 ───────────────────────────────────────────────
+// ── 화면: 상세 ────
 let extrasCache = null;
 async function loadExtras() {
   return (extrasCache ??= fetch(new URL(`${MOD_ROOT}context/extras.json`, import.meta.url)).then((r) => (r.ok ? r.json() : null)).catch(() => null));
@@ -7116,7 +7138,7 @@ async function ensureSupabaseConfig() {
   return ready;
 }
 
-// ── 카드 및 상세 공통 댓글 캐시 & 상태 관리 ──────────────────────────
+// ── 카드 및 상세 공통 댓글 캐시 & 상태 관리 ────
 const CMT_CACHE = new Map();         // campground_id -> Array of comments
 const CMT_FETCHED_SET = new Set();   // campground_ids queried
 const CMT_OPEN_SET = new Set();      // user explicitly opened
@@ -8989,7 +9011,7 @@ function openLightboxUrls(urls, start = 0, caption = "사진") {
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
 }
 
-// ── 화면: 비교 (최대 20곳, 모바일 최적화) ───────────────────────────
+// ── 화면: 비교 (최대 20곳, 모바일 최적화) ────
 // 소유자 2026-10-31: 5곳 제한 → 20곳. 상세 자료(ensureFull)는 고른 곳만 받아 오므로 20곳이어도 부하가 크지 않다.
 const CMP_MAX = 20;
 let cmpMode = "table"; // "table" | "cards"
@@ -9078,7 +9100,7 @@ function bindCompare() {
   }));
 }
 
-// ── 화면: 찜한 캠핑장 목록 (갯수 제한 없음) ───────────────────────────
+// ── 화면: 찜한 캠핑장 목록 (갯수 제한 없음) ────
 // t39 #42 최근 본 캠핑장(이 기기에만, 12곳) + 오프라인 보관(sw.js: 네트워크 먼저, 끊기면 마지막 사본).
 const RECENT_KEY = "mc-recent", RECENT_MAX = 12;
 function pushRecent(id) { const r = store.get(RECENT_KEY, []).filter((x) => x !== String(id)); r.unshift(String(id)); store.set(RECENT_KEY, r.slice(0, RECENT_MAX)); }
@@ -9201,7 +9223,7 @@ function bindSaved() {
   });
 }
 
-// ── 화면: 지도 ───────────────────────────────────────────────
+// ── 화면: 지도 ────
 let MAP = null, selected = null;
 function mapView() {
   return `<section class="map-page">
@@ -9451,7 +9473,7 @@ addEventListener("touchend", (e) => { const t = e.changedTouches[0]; swipeEnd(t.
 // 다른 핸들러가 전파를 멈춰도 받도록 캡처 단계에서 듣는다.
 addEventListener("pointerdown", (e) => { if (e.pointerType === "mouse" && e.button === 0) swipeBegin(e.target, e.clientX, e.clientY); }, true);
 addEventListener("pointerup", (e) => { if (e.pointerType === "mouse") swipeEnd(e.clientX, e.clientY); }, true);
-// ── 라우터 ───────────────────────────────────────────────────
+// ── 라우터 ────
 const cleanup = [];
 let lastRoute = "";
 async function render() {
@@ -9696,7 +9718,7 @@ addEventListener("keydown", (e) => {
   e.preventDefault(); b.click();
 }, true);
 
-// ── 시작 ─────────────────────────────────────────────────────
+// ── 시작 ────
 // 상세 사진 묶음에서 깨진 사진: 그 칸을 빼고 남은 칸으로 격자를 다시 짠다(빈 회색 칸 금지).
 addEventListener("error", (e) => {
   const im = e.target;
