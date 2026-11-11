@@ -6,7 +6,8 @@
 //    - 운영자 홈페이지(registry/operator-site-photos.json, alt·바로 앞 글·쪽 이름 포함)
 //    - 고캠핑 이용요금 블록 사진(gcd.guide[].images, 블록 제목 포함) · 고캠핑 사진 갤러리(gcd.photos) · 고캠핑 imageList(photos_remote)
 //    - TourAPI 객실 사진(products[].photos, 객실 이름 포함) · TourAPI 상세 사진(tour_photos)
-//    네이버·카카오 장소 사진, 캠핏, 땡큐캠핑 상품 사진, 인스타그램은 약관·robots 때문에 쓰지 않는다(docs/SITE_PHOTOS.md).
+//    네이버·카카오 장소 사진, 캠핏, 땡큐캠핑 상품 사진, 인스타그램 프로필 수집은 약관·robots 때문에 쓰지 않는다.
+//    공식 블로그 RSS(official_blog)는 robots 가 허용되고 registry/official-blog-photos.json 이 있을 때만 후보에 넣고, R2 에 다시 올리지 않는다(핫링크+출처, docs/SITE_PHOTOS.md).
 // 2) 판정: CLIP 두 모델(base·large)이 같은 상품 부류(글램핑·카라반·객실/방갈로·노지 사이트)로 볼 때만 쓴다(lib/site-photo-classify.mjs).
 //    글 단서(블록 제목·alt)가 유형을 말하면 그 유형을 먼저, 글이 지도·요금표·매점 등을 말하면 버린다. 저해상도·배너 비율은 버린다.
 //    판정은 registry/site-photo-judgments.json에 쌓여 다시 받지 않는다(같은 RULE_VERSION).
@@ -43,7 +44,7 @@ const UA = "MoyeoraCampBot/1.0 (+https://github.com/[REDACTED]/camp; operator-pu
 const PER_TYPE = 6;
 const t0 = Date.now();
 
-export const CREDIT = { gocamping: "한국관광공사 고캠핑", tourapi: "한국관광공사 TourAPI", operator: "캠핑장 공식 홈페이지" };
+export const CREDIT = { gocamping: "한국관광공사 고캠핑", tourapi: "한국관광공사 TourAPI", operator: "캠핑장 공식 홈페이지", official_blog: "캠핑장 공식 블로그" };
 const urlHash = (u) => createHash("sha256").update(String(u)).digest("hex").slice(0, 10);
 
 // ---------- 입력 ----------
@@ -51,6 +52,8 @@ const catalog = JSON.parse(readFileSync(join(dataDir, "campgrounds.json"), "utf8
 const byId = new Map(catalog.map((c) => [String(c.id), c]));
 const opPath = join(regDir, "operator-site-photos.json");
 const operator = existsSync(opPath) ? JSON.parse(readFileSync(opPath, "utf8")).campgrounds ?? {} : {};
+const blogPath = join(regDir, "official-blog-photos.json");
+const officialBlog = existsSync(blogPath) ? JSON.parse(readFileSync(blogPath, "utf8")).campgrounds ?? {} : {};
 const cardsPath = join(regDir, "cards-deduped.json");
 const cards = existsSync(cardsPath) ? JSON.parse(readFileSync(cardsPath, "utf8")).camps ?? {} : {};
 const manifestPath = process.env.MEDIA_MANIFEST;
@@ -87,6 +90,8 @@ function candidatesOf(id, c, d) {
   };
   const op = operator[id];
   for (const im of op?.images ?? []) add(im.url, "operator", { cap: im.alt, ctx: [im.near, im.cap].filter(Boolean).join(" | "), page: im.page });
+  // 공식 블로그 RSS 후보(robots 가 허용되어 모인 경우만). 파일은 받지 않고 주소·글 제목·글 주소만. 화면은 핫링크+출처.
+  for (const im of officialBlog[id]?.images ?? []) add(im.url, "official_blog", { cap: im.cap, page: im.page, hotlink: true });
   // 고캠핑 이용요금 블록 사진은 블록 제목(예: ‘오토캠핑’)과 다른 매점·개수대 사진도 섞여 있어 제목을 약한 단서(ctx)로만 쓴다.
   for (const g of d.gcd?.guide ?? []) for (const im of g.images ?? []) add(im, "gocamping", { ctx: g.title, page: d.gcd?.url });
   for (const p of d.products ?? []) for (const im of p.photos ?? []) add(im, "tourapi", { cap: p.name });

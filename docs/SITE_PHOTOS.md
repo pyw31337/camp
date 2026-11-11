@@ -9,6 +9,8 @@
 
 | 단계 | 스크립트 | 결과 |
 |---|---|---|
+| 0. 공식 채널 식별·소유 확인 | `pipeline/scripts/discover-official-channels.mjs` | `pipeline/registry/official-channels.json`(쌓기만) · `official-channels-public.json`(확인된 링크만, 화면용) |
+| 0b. 공식 블로그 RSS 사진 후보 | `pipeline/scripts/collect-official-blog-photos.mjs` | robots 가 막혀 있으면 비어 있는 `official-blog-photos.json`만 남김. 허용될 때만 글 제목·주소·사진 주소 |
 | 1. 운영자 홈페이지 상품 사진 후보 | `pipeline/scripts/collect-operator-site-photos.mjs` | `pipeline/registry/operator-site-photos.json` (사진 주소·alt·바로 앞 글·쪽 이름·쪽 주소만, 파일은 받지 않음) |
 | 2. 후보 모으기·판정·선정 | `pipeline/scripts/collect-site-photos.mjs` + `pipeline/lib/site-photo-classify.mjs` | `registry/site-photo-judgments.json`(판정 캐시) · `registry/site-photos.json`(선정·출처·쪽 주소·점수) |
 | 3. 굽기·색인 | `pipeline/scripts/bake-site-photos.mjs` | media `sites/{id}/{해시}.webp`(720px·q62, EXIF 제거) → R2 · `registry/site-photos-index.json` |
@@ -26,8 +28,10 @@
 | 땡큐캠핑 상품 사진 | 안 씀 | 이용약관이 정보 복제·제3자 제공을 금지. 링크만. |
 | 네이버·카카오 장소 사진 | 안 씀 | 약관상 사진 수집 금지(카카오맵 장소 쪽·네이버 지도는 자동 수집 경로도 아님). |
 | 캠핏 | 안 씀 | robots.txt가 AI 크롤러를 이름으로 막음. |
-| 인스타그램 | 안 씀 | 로그인 벽·약관상 자동 수집 금지. |
-| 블로그·카페 사진(`sns_images`) | 이번에는 안 씀(결정 필요) | 블로거 저작물이라 R2에 다시 올리지 않는다(AGENTS.md 4). 후기 쪽처럼 원문 링크를 단 핫링크 썸네일로 레일에 쓸지는 소유자 결정 필요. |
+| 인스타그램 프로필(고캠핑에 등록된 공식 계정) | **링크만** | robots.txt 가 자동 수집을 금지하고 로그인 벽이 있다. 상세 화면에는 소유 확인된 프로필 배지만 보여 준다. 게시물 사진을 쓰려면 Instagram oEmbed(공개 게시물 주소가 있을 때, 2026-06-15부터 토큰 없이 `graph.facebook.com/v25.0/instagram_oembed`) 또는 업장이 Graph API 권한을 주는 연동이 필요하다. 프로필 전체를 나열하는 API는 아니다. |
+| 공식 네이버 블로그(고캠핑 홈페이지로 등록된 채널) | **링크만**(RSS 수집은 robots 로 보류) | 공개 RSS(`rss.blog.naver.com/<id>.xml`)를 쓰려 했으나 2026-11-11 확인 때 robots.txt 가 `User-agent: * Disallow: /` 이다. 허용으로 바뀌면 `collect-official-blog-photos.mjs` 가 글 제목·주소를 캡션·출처로 남기고, 사진은 R2에 올리지 않고 원문 핫링크로만 판정 큐(`official_blog`)에 넣는다. 네이버 약관은 게시물 무단 복제를 금지한다. |
+| 공식 카페(네이버·다음) | **링크만** | `cafe.naver.com` robots 가 `User-agent: * Disallow: /`. 로그인 없이 글을 읽지 않고, 고캠핑에 등록된 카페 주소만 배지로 보여 준다. `cafe.daum.net` 은 일부 공개 경로를 허용하지만 2026-11-11 표본은 빈 응답(HTTP 500)이라 사진을 모으지 않는다. |
+| 후기 블로그·카페 사진(`sns_images`) | 안 씀 | 방문객 저작물이라 R2에 다시 올리지 않는다(AGENTS.md 4). 공식 채널과 섞지 않는다. |
 | 유튜브 썸네일 | 안 씀 | oEmbed 썸네일은 영상과 함께(링크) 보일 때만 쓸 수 있고, 글씨가 얹힌 장면이 많아 사이트 유형 사진으로 맞지 않는다. 영상 칸에서 그대로 쓴다. |
 
 ## 판정 규칙 (`lib/site-photo-classify.mjs`, RULE_VERSION 3)
@@ -48,3 +52,12 @@
 ## 지우지 않기
 
 판정 캐시는 쌓기만 한다(RULE_VERSION을 올릴 때만 다시 판정). `sites/` 파일은 선정에서 빠져도 지우지 않는다. 기존 `site_products[].photos`(#720, 캠핑장 사진 풀을 유형 구분 없이 붙인 값)는 그대로 두고, 화면이 유형별로 확인된 사진을 쓰려면 이 색인을 먼저 본다.
+
+## 공식 채널(홈페이지·블로그·카페·SNS) (2026-11-11 소유자 t60)
+
+많은 업장이 자체 홈페이지 대신 공식 네이버 블로그·카페·인스타그램을 고캠핑 홈페이지 칸에 올려 둔다. `lib/official-channels.mjs` 가 카탈로그 URL(홈페이지·예약 경로 등)만 모으고, 후기·요금 근거 글·VR 업체 글은 제외한다.
+
+소유 확인: (1) 고캠핑·카탈로그 홈페이지로 업장이 직접 등록한 채널 뿌리 주소, 또는 (2) 채널 이름·소개에 시설명·전화·주소가 맞음. 같은 채널 아이디를 서로 다른 캠핑장 4곳 이상이 쓰면 공유 채널로 빼고, 제목에 ‘후기’가 있으면 뺀다.
+
+사진 수집은 위 원천 표와 같다. 상세 화면의 플랫폼 배지·업체 정보 목록은 미리보기에서 먼저 보여 주고, 실제 사이트 반영은 소유자 확인 뒤에 한다.
+

@@ -49,6 +49,8 @@ if (MEDIA_DIR) {
   const jobs = [];
   for (const [id, types] of Object.entries(sel.camps ?? {})) for (const list of Object.values(types)) for (const p of list) {
     if (p.r2) continue;
+    // 공식 블로그 사진은 약관·robots 상 R2 에 다시 올리지 않는다. 화면은 원문 핫링크+출처.
+    if (p.src === "official_blog" || p.hotlink) continue;
     const rel = relOf(id, p);
     if (!existsSync(join(MEDIA_DIR, rel))) jobs.push({ id, p, rel });
   }

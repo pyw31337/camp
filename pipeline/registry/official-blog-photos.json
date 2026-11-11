@@ -1,0 +1,14 @@
+{
+  "note": "공식 네이버 블로그 RSS 사진 후보(주소·글 제목·글 주소만). robots 가 막으면 비어 있다.",
+  "generated_at": "2026-11-11T07:17:36.423Z",
+  "legal": {
+    "use": "link_only",
+    "robots": "rss.blog.naver.com robots.txt 가 User-agent: * Disallow: / 이다. 공개 RSS 주소를 알아도 로봇으로는 받지 않는다. blog.naver.com 은 글 목록·정보 API 경로를 막고, 약관은 게시물 무단 복제를 금지한다.",
+    "display": "소유 확인된 공식 블로그는 원문 링크와 출처만 보여 준다. 사진은 R2에 다시 올리지 않고, 로봇 수집도 하지 않는다. RSS가 허용되면 그때 글 제목·주소를 캡션·출처로 단 핫링크만 검토한다."
+  },
+  "robots_allowed": false,
+  "robots_excerpt": "# Block everything for every crawler\nUser-agent: *\nDisallow: /\n\n# Explicit blocks (kept for clarity/auditing)\n\nUser-agent: GPTBot\nDisallow: /",
+  "verified_blogs": 102,
+  "campgrounds": {},
+  "skipped": "rss.blog.naver.com robots.txt User-agent: * Disallow: / — RSS를 받지 않음."
+}
