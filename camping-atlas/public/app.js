@@ -7910,7 +7910,7 @@ function initSavedComments() {
           if (!r.ok && media.file) { mediaError = true; }
           if (r.ok) {
             const row = (await r.json())[0];
-            if (row?.id) { store.set("mc-my-comments", [...new Set([...store.get("mc-my-comments", []), String(row.id)])]); pushSave("comment", String(root.dataset.savedCommentId)); saved = true; fetch("https://ntfy.sh/camp-alert-pyw31337",{method:"POST",headers:{Title:"댓글"},body:nickname+":"+content.slice(0,40)}).catch(()=>{}); }
+            if (row?.id) { store.set("mc-my-comments", [...new Set([...store.get("mc-my-comments", []), String(row.id)])]); pushSave("comment", String(root.dataset.savedCommentId)); saved = true; fetch("https://ntfy.sh/camp-alert-pyw31337",{method:"POST"}); }
           }
         }
       } catch { mediaError = Boolean(media.file); /* 이미지가 있으면 첨부를 잃지 않도록 로컬 텍스트 보관도 하지 않는다. */ }
@@ -8959,6 +8959,7 @@ function bindDetail() {
       if (row?.id) {
         store.set("mc-my-comments", [...store.get("mc-my-comments", []), String(row.id)]);
         store.set("mc-cmt-nick", f.nickname.value.trim());
+        fetch("https://ntfy.sh/camp-alert-pyw31337",{method:"POST"});
       }
       pushSave("comment", String(f.dataset.cmt));
       f.content.value = "";
