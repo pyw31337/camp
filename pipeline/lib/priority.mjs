@@ -7,13 +7,23 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(import.meta.url), "../../..");
 export const SAVED_PRIORITY_PATH = join(root, "data/priority/saved-camps.json");
+export const LEAN_QUEUE_PATH = join(root, "pipeline/registry/lean-camps-queue.json");
 export const PRIORITY_MAX_AGE_DAYS = Number(process.env.PRIORITY_MAX_AGE_DAYS ?? 1);
 
-/** 우선 업장 id 집합(문자열) */
+/** 우선 업장 id 집합(문자열): 찜한 업장 + 사진/요금 결측 정보 빈약 업장 */
 export function priorityIds() {
   const ids = new Set(String(process.env.PRIORITY_IDS ?? "").split(",").map((x) => x.trim()).filter(Boolean));
   if (process.env.PRIORITY_IGNORE_SAVED !== "1" && existsSync(SAVED_PRIORITY_PATH)) {
     try { for (const x of JSON.parse(readFileSync(SAVED_PRIORITY_PATH, "utf8")).ids ?? []) ids.add(String(x)); } catch {}
+  }
+  // 사진·요금 등 데이터 결측치가 심한 업장(결측점수 4점 이상)을 수집 1순위로 병합
+  if (existsSync(LEAN_QUEUE_PATH)) {
+    try {
+      const q = JSON.parse(readFileSync(LEAN_QUEUE_PATH, "utf8"));
+      for (const item of q.queue ?? []) {
+        if (item.missingScore >= 4) ids.add(String(item.id));
+      }
+    } catch {}
   }
   return ids;
 }

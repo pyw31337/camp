@@ -267,19 +267,27 @@ jobs:
             echo "collected-data 브랜치가 아직 없습니다(첫 저장 때 만들어짐)."
           fi
       - name: Sync campground social search (Kakao Daum blog/cafe/image/video)
-        # 사람들의 후기·사진·영상(링크와 썸네일 주소만 저장, 이미지 재호스팅 안 함). 다음 검색 한도 일 5만·종류별 3만. 캠핑장당 7회(후기·카페·사진·영상 + 배치도 글·배치도 사진·요금 후기)로 하루 약 1,300곳.
+        # 사람들의 후기·사진·영상(링크와 썸네일 주소만 저장, 이미지 재호스팅 안 함). 다음 검색 한도 일 5만·종류별 3만. 소유자 2026-11-11 잔여 쿼터 집중 소진 지시(일 18,200회로 상향).
         continue-on-error: true
         run: npm run sync:social
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
-          SOCIAL_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '9100' }}
+          SOCIAL_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '18200' }}
       - name: Find thumbnails for Kakao reviews (Daum image search, same post only)
         # 카카오 후기 글 중 썸네일이 없는 글(약 40%)의 사진을 다음 이미지 검색에서 찾는다(원문 주소가 같은 결과만). registry/review-thumbs.json
         continue-on-error: true
         run: node scripts/sync-review-thumbs.mjs
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
-          REVIEW_THUMB_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '3000' }}
+          REVIEW_THUMB_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || '6000' }}
+      - name: Discover new opened campgrounds across 250 districts (Camfit/Naver/Kakao discovery)
+        # 전국 250개 시·군·구 단위로 캠핏·네이버예약에만 존재하는 신규 오픈 캠핑장 자동 발굴
+        if: github.event_name != 'pull_request'
+        continue-on-error: true
+        run: node scripts/discover-new-camps.mjs
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          DISCOVERY_MAX_CALLS: '2000'
       - name: Fill review thumbnails from post cover images (og:image, robots.txt respected)
         # 소유자 2026-10-30 “후기 썸네일이 비어 있는 게 너무 많다”: 썸네일 없는 후기 글(네이버 블로그 등 약 3만 건)의 대표 이미지를 읽어
         # 비어 있을 때만 채운다(registry/review-thumbs.json → apply-review-thumbs). robots.txt가 막은 곳·로그인 카페는 열지 않는다.
@@ -291,8 +299,7 @@ jobs:
           REVIEW_FILL_MAX: ${{ vars.REVIEW_FILL_MAX || '6000' }}
       - name: Sync web mentions (NAVER search blog·cafe·web·kin + robots-allowed blog text)
         # 네이버 검색 API(HUB, 한시 무료 월 775,000건) 요약과 robots가 허용한 블로그(티스토리 등) 본문의 사실 문장.
-        # 캠핑장당 7회, 14일 순환. 한 실행 8,000회(일 한도 25,000의 절반 미만). naver-guard가 0원 확인·월 예산·402 즉시 중단.
-        # 네이버 블로그·카페·예약처럼 robots가 AI 수집기를 막은 곳은 본문을 읽지 않는다(API 요약만).
+        # 소유자 2026-11-11 잔여 쿼터 최대 소진 지시: 일 22,000건(일 한도 25,000의 안전 구간 88%)으로 대폭 상향.
         continue-on-error: true
         timeout-minutes: 50
         run: node scripts/sync-web-mentions.mjs
@@ -301,7 +308,7 @@ jobs:
           NAVER_API_HUB_CLIENT_SECRET: ${{ secrets.NAVER_API_HUB_CLIENT_SECRET }}
           NAVER_API_ENABLED: ${{ vars.NAVER_API_ENABLED }}
           NAVER_MONTHLY_CAP: ${{ vars.NAVER_MONTHLY_CAP }}
-          NAVER_MENTION_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || (github.event_name == 'workflow_dispatch' && inputs.naver_mention_max_calls) || '8000' }}
+          NAVER_MENTION_MAX_CALLS: ${{ github.event_name == 'pull_request' && '0' || (github.event_name == 'workflow_dispatch' && inputs.naver_mention_max_calls) || '22000' }}
           # 검색 15분 + 본문 25분 < 단계 제한 50분: 끝까지 가서 out/campground-web.json을 써야 증분 발행·공유 브랜치에 실린다.
           SEARCH_MINUTES: "15"
           BODY_MINUTES: ${{ github.event_name == 'pull_request' && '0' || '25' }}

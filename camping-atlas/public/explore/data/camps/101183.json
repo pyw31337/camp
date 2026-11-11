@@ -1187,16 +1187,16 @@
   "img_dup": 1,
   "photos": [
     {
-      "t": "camps/101183/21ffa8f8-t.webp",
-      "l": "camps/101183/21ffa8f8-l.webp",
-      "w": 720,
-      "h": 1019
-    },
-    {
       "t": "camps/101183/8b0c9111-t.webp",
       "l": "camps/101183/8b0c9111-l.webp",
       "w": 1000,
       "h": 797
+    },
+    {
+      "t": "camps/101183/21ffa8f8-t.webp",
+      "l": "camps/101183/21ffa8f8-l.webp",
+      "w": 720,
+      "h": 1019
     }
   ],
   "field_conditions": {
