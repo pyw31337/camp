@@ -4,7 +4,7 @@
 
 // 주소(2026-10-21): 해시(#/) 없이 경로로 — /camp/, /camp/map, /camp/place/{id} … (History API).
 // APP_BASE = 앱 루트 경로(/camp/ · 로컬 미리보기는 /). 데이터·사진·링크는 모두 이 절대 경로를 쓴다(깊은 주소에서도 깨지지 않게).
-import { bestShortSide, siteFitsTent } from "./site-fit.mjs";
+import { bestShortSide, siteFitsTent, sizeGroupsOf, pickTentSize, visibleSizeGroups, shortSideOf, pairsEqual } from "./site-fit.mjs";
 const MOD_ROOT = /\/(explore|renewal)\/[^/]*$/.test(new URL(import.meta.url).pathname) ? "../" : "./";
 const APP_BASE = new URL(MOD_ROOT, import.meta.url).pathname;
 const ASSETS_BASE = APP_BASE;
@@ -1300,10 +1300,16 @@ const mapLink = (name, lat, lng) => `https://map.kakao.com/link/map/${encodeURIC
 // 카드 정보 6줄(소유자 2026-10-21 2차): 규격 · 전기 · 화로 · 주차 · 주변 · 요금(1박). 줄 높이는 모두 같고(grid 1fr) ‘…’로 자르지 않는다.
 // 사진 배지와 겹치면 줄이 우선 — badges(..., { rows: true })가 전기·장작·주차·불가 배지를 뺀다. 규격 배지(bdg-size)도 목록 카드에서 뺐다.
 function siteSizeShort(c) {
-  const gs = (c.field_conditions?.site_size?.groups ?? []).filter((g) => g.width_m && g.depth_m);
+  const vis = visibleSizeGroups(c).visible;
   let base = "";
-  if (gs.length) { const big = gs.reduce((a, g) => (Math.max(g.width_m, g.depth_m) > Math.max(a.width_m, a.depth_m) ? g : a)); base = `최대 ${big.width_m}×${big.depth_m}m`; }
-  else if (c.tq?.mx) base = `최대 ${c.tq.mx[0]}×${c.tq.mx[1]}m`;
+  if (vis.length) {
+    const big = vis.reduce((a, g) => {
+      const as = shortSideOf(a.w, a.d), gs = shortSideOf(g.w, g.d);
+      if (gs !== as) return gs > as ? g : a;
+      return Math.max(g.w, g.d) > Math.max(a.w, a.d) ? g : a;
+    });
+    base = `최대 ${big.w}×${big.d}m`;
+  }
   if (c.gap) return base ? `${base} (간격 ${c.gap})` : `간격 ${c.gap}`;
   return base;
 }
@@ -1478,11 +1484,6 @@ function uniqueDetailsHtml(c) {
 // t54u: 목록·테마 카드용 사이트 미니 레일 + 비교용 스펙 줄. 남은 자리 같은 재고는 쓰지 않는다.
 const RAIL_TIER = { AUTO: "site", PITCH: "site", DECK: "site", TARP_ZONE: "site", CAR_CAMP: "site", PET_SITE: "site", SOLO: "site", RV: "site", EQUIPPED: "site", DUPLEX_DECK: "site", GLAMPING: "glamp", CARAVAN: "caravan", HOUSE: "lodge", BUNGALOW: "lodge", PENSION: "lodge" };
 const TENT_TYPES = new Set(["AUTO", "PITCH", "DECK", "TARP_ZONE", "CAR_CAMP", "PET_SITE", "SOLO", "RV", "EQUIPPED", "DUPLEX_DECK"]);
-function sizeGroupsOf(c) {
-  const gs = (c.field_conditions?.site_size?.groups ?? []).filter((g) => g.width_m && g.depth_m);
-  if (gs.length) return gs.map((g) => ({ w: Number(g.width_m), d: Number(g.depth_m), n: g.count, name: g.name || "", floor: g.floor || g.ground || "" }));
-  return (c.sizes ?? []).filter((x) => x[0] && x[1]).map(([w, d, n]) => ({ w: Number(w), d: Number(d), n, name: "", floor: "" }));
-}
 function sizeLabel(g) { return g ? `${g.w}×${g.d}m` : ""; }
 function floorLabelOf(c, code, hint = "") {
   const t = `${hint} ${code}`;
@@ -1520,9 +1521,9 @@ function siteRailItems(c) {
   if (c._sr) return c._sr;
   const items = [];
   const seen = new Set();
-  const groups = sizeGroupsOf(c);
-  const named = groups.filter((g) => g.name);
-  const tentSize = groups.length === 1 ? groups[0] : (groups.filter((g) => !g.name).sort((a, b) => Math.max(b.w, b.d) - Math.max(a.w, a.d))[0] || null);
+  const { named, tent, extras } = visibleSizeGroups(c);
+  // 카탈로그 구역이 없고 땡큐 최대 규격만 있으면 그 값을 타입 타일 규격으로 쓴다.
+  const tentSize = tent || (!sizeGroupsOf(c).length && extras[0] ? extras[0] : null);
   const typelist = (c.st ?? []).filter((t) => t[0] !== "PRIVATE_BATH" && ST[t[0]]);
   // 이름이 있는 구역은 구역 타일로, 일반 타입과 겹치면 타입 타일 대신 쓴다.
   for (const g of named) {
@@ -1540,6 +1541,16 @@ function siteRailItems(c) {
     items.push({ k: code, name, size: sizeLabel(sz), sz, floor: floorLabelOf(c, code, name), count: n || 0, price: pr.text, chip: pr.chip, range: pr.range, photo: "" });
     seen.add(code);
   }
+  // t55u: 필터에 쓰는 더 여유한 규격(tq.mx·숨은 구역)은 레일 맨 앞에 ‘최대 사이트’로 보여 Fit과 같은 출처가 되게 한다.
+  const extraTiles = [];
+  for (const g of extras) {
+    if (tentSize && pairsEqual(g, tentSize)) continue;
+    if (items.some((it) => it.sz && pairsEqual(it.sz, g))) continue;
+    const code = typelist.find((t) => TENT_TYPES.has(t[0]))?.[0] || "PITCH";
+    const pr = tilePriceOf(c, code);
+    extraTiles.push({ k: code, name: "최대 사이트", size: sizeLabel(g), sz: g, floor: g.floor || floorLabelOf(c, code, "최대 사이트"), count: g.n || 0, price: pr.text, chip: pr.chip, range: pr.range, photo: "" });
+  }
+  items.unshift(...extraTiles);
   // 사이트 타입·구역 데이터가 없으면 레일을 그리지 않는다(빈 타일로 자리를 채우지 않음). 타입 배지는 typeRow가 맡는다.
   return (c._sr = items.slice(0, 8));
 }
