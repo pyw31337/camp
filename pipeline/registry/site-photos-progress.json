@@ -1,0 +1,110 @@
+{
+  "note": "t55 상품(사이트 유형) 사진 수집 진행 상황. 이어서 하려면 같은 판정 캐시(site-photo-judgments.json)를 두고 pipeline/scripts/collect-site-photos.mjs를 다시 실행한다. 이미 판정한 사진은 건너뛴다. 동시에 두 수집기를 돌리지 말 것.",
+  "updated_at": "2026-11-11T15:25:00+09:00",
+  "branch": "feat/t55-site-photos",
+  "worktree": "/workspace/t55p",
+  "status": "judging",
+  "collector": {
+    "pid": 146286,
+    "cwd": "/workspace/t55p/pipeline",
+    "started_at_kst": "2026-11-11 14:22 KST",
+    "command": "node scripts/collect-site-photos.mjs",
+    "env": {
+      "HF_CACHE": "/workspace/t55w/hf",
+      "MEDIA_MANIFEST": "/workspace/t55w/media-manifest.json"
+    },
+    "log": "/workspace/t55w/collect.log",
+    "last_log": "판정 10200/54235 · 실패 641 · 64.1분"
+  },
+  "universe": {
+    "catalog_camps": 7696,
+    "camps_with_site_types": 3599,
+    "camps_with_types_and_allowed_candidates": 2431,
+    "candidate_photos": 57260,
+    "candidates_with_r2_copy": 8368,
+    "to_judge_at_run_start": 54235
+  },
+  "before": {
+    "note": "유형이 확인된 상품 사진 파이프라인은 이번이 처음이다. 기존 site_products[].photos(#720)는 캠핑장 사진 풀을 유형 구분 없이 붙인 값이라 여기 집계에 넣지 않는다.",
+    "camps_with_typed_photos": 0,
+    "site_types_with_photos": 0,
+    "typed_photos": 0
+  },
+  "operator_crawl": {
+    "generated_at": "2026-11-11T04:59:15.717Z",
+    "campgrounds_checked": 940,
+    "with_images": 291,
+    "images": 11648,
+    "status": {
+      "OK": 291,
+      "NO_IMAGES": 73,
+      "FETCH_FAILED": 571,
+      "ROBOTS_DISALLOWED": 5
+    },
+    "done": true
+  },
+  "judgments": {
+    "file": "pipeline/registry/site-photo-judgments.json",
+    "generated_at": "2026-11-11T06:24:54.310Z",
+    "rule": 3,
+    "items": 12415,
+    "this_run_judged_log": 10200,
+    "this_run_failed_log": 641
+  },
+  "selection_partial": {
+    "note": "2026-11-11 14:42 KST에 그때까지 판정된 사진만으로 선정한 중간값. 현재 수집기가 끝나면 site-photos.json을 다시 쓴다.",
+    "generated_at": "2026-11-11T05:42:52.823Z",
+    "camps": 366,
+    "site_type_pairs": 384,
+    "photos": 474,
+    "photos_with_r2": 351,
+    "by_type": {
+      "GLAMPING": 189,
+      "CARAVAN": 126,
+      "AUTO": 87,
+      "DECK": 34,
+      "PITCH": 21,
+      "HOUSE": 14,
+      "CAR_CAMP": 1,
+      "RV": 1,
+      "PET_SITE": 1
+    },
+    "by_src": {
+      "gocamping": 379,
+      "tourapi": 82,
+      "operator": 13
+    }
+  },
+  "bake_partial": {
+    "index_generated_at": "2026-11-11T05:16:05.119Z",
+    "camps_in_index": 58
+  },
+  "sources_used": [
+    {"id": "gocamping", "credit": "한국관광공사 고캠핑", "why": "공공데이터 고캠핑 API·이미지. 갤러리, imageList, 이용요금 블록 사진."},
+    {"id": "tourapi", "credit": "한국관광공사 TourAPI", "why": "공식 API. 객실 사진·상세 사진."},
+    {"id": "operator", "credit": "캠핑장 공식 홈페이지", "why": "운영자 소유로 확인된 홈페이지만. robots.txt 준수, 호스트별 1.1초."}
+  ],
+  "sources_skipped": [
+    {"id": "thankq", "why": "땡큐캠핑 이용약관이 정보 복제·제3자 제공을 금지."},
+    {"id": "camfit", "why": "robots.txt가 AI 크롤러를 이름으로 막음."},
+    {"id": "naver", "why": "약관상 사진 수집 금지."},
+    {"id": "kakao", "why": "약관상 사진 수집 금지."},
+    {"id": "instagram", "why": "로그인 벽·약관상 자동 수집 금지."},
+    {"id": "blog_cafe_sns_images", "why": "블로거 저작물이라 R2에 다시 올리지 않음. 핫링크 여부는 소유자 결정 필요."},
+    {"id": "youtube_thumbs", "why": "oEmbed 썸네일은 영상과 함께 보일 때만 쓸 수 있고, 글씨가 얹힌 장면이 많아 사이트 유형 사진으로 맞지 않음."},
+    {"id": "foresttrip_knps_reservation", "why": "예약 시스템이라 읽지 않음. knps.or.kr은 캠핑장별 안내 쪽 대응표가 없어 이번엔 보류."}
+  ],
+  "left_to_do": [
+    "현재 수집기(또는 재개)가 남은 약 4만 장 판정을 끝낸 뒤 site-photos.json을 다시 선정한다.",
+    "bake-site-photos.mjs로 sites/ webp를 굽고 R2·site-photos-index.json을 갱신한다.",
+    "운영자 홈페이지 FETCH_FAILED 571곳은 나중에 다시 확인한다.",
+    "파이프라인 PR CI 통과 후 main에 병합한다. 레일 UI는 t54-cards 미리보기에만 두고 정식 배포에 넣지 않는다.",
+    "선정·굽기가 끝나면 연락 시트를 최신 선정으로 다시 만든다."
+  ],
+  "resume": {
+    "if_collector_still_running": "pid를 확인하고 두 번째 수집기를 시작하지 않는다. 판정 캐시는 2분마다 원자적으로 저장된다.",
+    "if_collector_stopped": "cd /workspace/t55p/pipeline && HF_CACHE=/workspace/t55w/hf MEDIA_MANIFEST=/workspace/t55w/media-manifest.json node scripts/collect-site-photos.mjs",
+    "after_judging": "node scripts/bake-site-photos.mjs",
+    "commit_after_each_batch": "registry/site-photo-judgments.json, site-photos.json, site-photos-index.json, 이 진행 파일을 커밋·푸시한다. 기존 데이터를 지우거나 리셋하지 않는다."
+  }
+}
