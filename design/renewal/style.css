@@ -1026,6 +1026,20 @@ transform: scale(1.08);
 [data-v="b"] .d-title { font-size: clamp(2.6rem, 1.2rem + 5.6vw, 6.4rem); line-height: 1.06; }
 [data-v="b"] .d-title span { display: block; }
 .d-bdgs { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* 공식 채널 배지(t61): 제목 옆·업체 정보. 칸 밖으로 넘치지 않게 줄바꿈. */
+.d-official, .info-official { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; max-width: 100%; }
+.d-official { margin-top: 2px; }
+.d-official-badge { display: inline-flex; align-items: center; gap: 6px; min-width: 0; max-width: 100%; box-sizing: border-box; padding: 5px 10px 5px 5px; border-radius: 999px; border: 1px solid var(--line); background: var(--soft, #f4f5f3); color: var(--ink); text-decoration: none; font-size: .82rem; font-weight: 700; line-height: 1.2; }
+.d-official-ic { display: inline-grid; place-items: center; flex: none; }
+.d-official-ic .plat-ic { width: 20px; height: 20px; }
+.d-official-ic .plat-ic svg { width: 12px; height: 12px; }
+.d-official-ic .ic { width: 20px; height: 20px; padding: 3px; box-sizing: border-box; border-radius: 999px; background: #111; color: #fff; }
+.d-official-lab { min-width: 0; overflow-wrap: anywhere; word-break: keep-all; }
+@media (max-width: 374px) {
+  .d-official-badge { font-size: .78rem; padding: 4px 8px 4px 4px; }
+}
+
 .d-bdgs .bdg { font-size: .88rem; }
 .d-bdgs .bdg-danger { background: #ffebee; border-color: #ffcdd2; color: #d32f2f; }
 .d-bdgs .bdg.bdg-no, .hr-tags .bdg.bdg-no, .bdg.bdg-no {

@@ -5842,7 +5842,7 @@ async function detailView(id) {
   const usageBlock = usageRows || extraUsageRows
     ? `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><dl class="uses">${usageRows}${extraUsageRows}</dl></section>`
     : `<section class="d-sec" id="sec-usage"><div class="sec-head">${iconTitle("usage-info", "이용 정보")}</div><p class="muted" style="padding: 18px 0; color: var(--ink-3); font-size: .88rem;">등록된 상세 이용 정보가 없습니다.</p></section>`;
-  return `<article class="detail" data-id="${esc(c.id)}"><div class="d-bar"><a class="icon-btn" href="${APP_BASE}" data-back aria-label="뒤로">${ic("left")}</a><span class="d-bar-acts">${heartBtn(c, { label: true })}<button class="d-share" type="button" data-share-place="${esc(c.id)}" aria-label="링크 공유">${ic("share")}<span>공유</span></button></span></div><header class="d-head"><div class="d-head-main"><p class="d-eyebrow">${c.sido && c.sigungu ? `<a class="d-region-link" href="${regionHref(sidoShort(c.sido), c.sigungu)}">${esc(region(c))}</a>` : esc(region(c))}${c.op && OP[c.op] ? ` · ${OP[c.op]}` : tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p><h1 class="d-title">${titleHtml(c)}</h1>${opBadge(c)}${c.line ? `<p class="d-line">${esc(serviceText(c.line, 400))}${c.gc_url ? srcTip({ g: "c", src: { label: "고캠핑 소개", url: c.gc_url, quote: c.line } }, "한 줄 소개") : ""}</p>` : ""}<div class="d-bdgs">${wxBadge(c)}${stayBadges(c)}${badges(c, 14, 10)}</div></div><aside class="d-side">${reserveCard(c, d)}</aside></header>${galleryHtml(c)}<nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${[["sec-price", "요금"], ...(c.layout_images?.length || d?.layout?.images?.length ? [["sec-layout", "배치도"]] : []), ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-reviews", "후기"], ["sec-nearby", "주변"], ["sec-events", "행사"], ["sec-info", "업체"]].map(([id, l], i) => `<a href="#${id}" data-jump="${id}"${i === 0 ? " aria-current" : ""}>${l}</a>`).join("")}</div></nav><div class="d-body"><div class="d-main">${winterClosedConflict(c) ? `<div class="theme-closed-alert warning" style="margin-bottom:14px;border-left:4px solid #f59e0b;background:#fffbeb;padding:12px 14px;border-radius:10px;display:flex;gap:10px;font-size:13px;line-height:1.5;">${ic("info")}<div><strong>동계 운영 사전 확인 권장</strong><p style="margin:2px 0 0;color:var(--ink-2);">공식 등록상 동계 미운영(봄~가을)으로 표기되어 있으나, 최근 운영자 예약 및 이용 사실이 확인되었습니다. 늦가을·동계 방문 시에는 업장(${esc(c.tel || "전화")})으로 실제 운영 여부를 확인하세요.</p></div></div>` : ""}${siteTypesHtml(c, d)}${siteProductsHtml(c, d)}${specSection(c, d)}${priceHtml(c, d)}${bookingHtml(c, d)}${usageBlock}${amenityHtml(c, d)}${houseRulesHtml(c, d)}<section class="d-sec" data-cond hidden></section>${operatorHtml(d, c)}${programsHtml(d)}${layoutHtml(d, c)}<section class="d-sec site-picks-sec" id="sec-site-picks" data-site-picks hidden></section>${operatorMediaHtml(d)}${mediaHubHtml(d, c)}${reviewHtml(d, c)}${reviewLinksHtml(d, c)}${nearbyHubHtml(c, d)}
+  return `<article class="detail" data-id="${esc(c.id)}"><div class="d-bar"><a class="icon-btn" href="${APP_BASE}" data-back aria-label="뒤로">${ic("left")}</a><span class="d-bar-acts">${heartBtn(c, { label: true })}<button class="d-share" type="button" data-share-place="${esc(c.id)}" aria-label="링크 공유">${ic("share")}<span>공유</span></button></span></div><header class="d-head"><div class="d-head-main"><p class="d-eyebrow">${c.sido && c.sigungu ? `<a class="d-region-link" href="${regionHref(sidoShort(c.sido), c.sigungu)}">${esc(region(c))}</a>` : esc(region(c))}${c.op && OP[c.op] ? ` · ${OP[c.op]}` : tag ? ` · ${esc(tag)}` : ""}${!c.st?.length && typeLine(c) ? ` · ${esc(typeLine(c))}` : ""}</p><h1 class="d-title">${titleHtml(c)}</h1>${opBadge(c)}${officialBadgesHtml(c)}${c.line ? `<p class="d-line">${esc(serviceText(c.line, 400))}${c.gc_url ? srcTip({ g: "c", src: { label: "고캠핑 소개", url: c.gc_url, quote: c.line } }, "한 줄 소개") : ""}</p>` : ""}<div class="d-bdgs">${wxBadge(c)}${stayBadges(c)}${badges(c, 14, 10)}</div></div><aside class="d-side">${reserveCard(c, d)}</aside></header>${galleryHtml(c)}<nav class="d-jump-bar" aria-label="상세 카테고리"><div class="d-jump-in">${[["sec-price", "요금"], ...(c.layout_images?.length || d?.layout?.images?.length ? [["sec-layout", "배치도"]] : []), ["sec-usage", "정보"], ["sec-rules", "규칙"], ["sec-reviews", "후기"], ["sec-nearby", "주변"], ["sec-events", "행사"], ["sec-info", "업체"]].map(([id, l], i) => `<a href="#${id}" data-jump="${id}"${i === 0 ? " aria-current" : ""}>${l}</a>`).join("")}</div></nav><div class="d-body"><div class="d-main">${winterClosedConflict(c) ? `<div class="theme-closed-alert warning" style="margin-bottom:14px;border-left:4px solid #f59e0b;background:#fffbeb;padding:12px 14px;border-radius:10px;display:flex;gap:10px;font-size:13px;line-height:1.5;">${ic("info")}<div><strong>동계 운영 사전 확인 권장</strong><p style="margin:2px 0 0;color:var(--ink-2);">공식 등록상 동계 미운영(봄~가을)으로 표기되어 있으나, 최근 운영자 예약 및 이용 사실이 확인되었습니다. 늦가을·동계 방문 시에는 업장(${esc(c.tel || "전화")})으로 실제 운영 여부를 확인하세요.</p></div></div>` : ""}${siteTypesHtml(c, d)}${siteProductsHtml(c, d)}${specSection(c, d)}${priceHtml(c, d)}${bookingHtml(c, d)}${usageBlock}${amenityHtml(c, d)}${houseRulesHtml(c, d)}<section class="d-sec" data-cond hidden></section>${operatorHtml(d, c)}${programsHtml(d)}${layoutHtml(d, c)}<section class="d-sec site-picks-sec" id="sec-site-picks" data-site-picks hidden></section>${operatorMediaHtml(d)}${mediaHubHtml(d, c)}${reviewHtml(d, c)}${reviewLinksHtml(d, c)}${nearbyHubHtml(c, d)}
         ${similarHtml(c)}
         <section class="d-sec ev-sec" id="sec-events" data-events><div class="sec-head">${iconTitle("fest", "행사")}</div><div data-events-body></div></section>
         ${infoHtml(c)}
@@ -6810,6 +6810,19 @@ const PLAT_SVG = {
   gocamping: '<path d="M12 2 2 19h7l3-5.2L15 19h7L12 2zm0 6 3 5.2H9L12 8z"/>',
 };
 const platIc = (k) => `<span class="plat-ic"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${PLAT_SVG[k] || PLAT_SVG.naver}</svg></span>`;
+// 소유 확인된 공식 채널(홈페이지·블로그·카페·SNS). registry/official-channels-public.json.
+let OFFICIAL = {};
+const officialList = (c) => OFFICIAL[String(c?.id)] ?? [];
+function officialBadge(ch) {
+  const icon = ch.p === "home" ? ic("home") : platIc(ch.p || "naver");
+  return `<a class="d-official-badge is-${esc(ch.p || "home")}" href="${esc(ch.u)}" target="_blank" rel="noopener" title="${esc(ch.l)}"><span class="d-official-ic">${icon}</span><span class="d-official-lab">${esc(ch.l)}</span></a>`;
+}
+function officialBadgesHtml(c) {
+  const list = officialList(c);
+  if (!list.length) return "";
+  return `<div class="d-official" aria-label="공식 채널">${list.map(officialBadge).join("")}</div>`;
+}
+
 function sourcePlatformKey(x) {
   const u = String(x?.url ?? "").toLowerCase();
   const s = String(x?.src ?? "").toLowerCase();
@@ -7115,7 +7128,8 @@ function infoHtml(c) {
     ["주소", c.addr ? `<span class="address-value"><span class="address-text">${esc(c.addr)}</span>${addressActions}</span>` : null, gcSrc("주소", c.addr)],
     // 고캠핑에 번호가 없어 카카오맵·네이버 플레이스 등록 번호로 채운 곳은 그렇다고 밝힌다(소유자 2026-10-31 X1, apply-platform-tel.mjs).
     ["전화", telText(c.tel) ? `<a href="tel:${esc(telText(c.tel).replace(/[^\d+]/g, ""))}">${esc(telText(c.tel))}</a>${c.tel_src ? ` <small class="tel-src">플랫폼 등록 번호</small>` : ""}` : null, c.tel_src ? { g: "m", src: { label: `${c.tel_src.by === "naver" ? "네이버" : "카카오맵"} 플레이스 등록 번호(업장 확인 전)`, url: c.tel_src.url, at: c.tel_src.at, quote: c.tel } } : gcSrc("전화", c.tel)],
-    ["홈페이지", c.homepage && !c.dl?.includes(c.homepage) ? `<a href="${esc(c.homepage)}" target="_blank" rel="noopener">${esc(hostOf(c.homepage) || c.homepage)}</a>` : null, { g: "c", src: { label: "공식 홈페이지", url: c.homepage } }],
+    ["홈페이지", c.homepage && !c.dl?.includes(c.homepage) && !officialList(c).some((ch) => ch.k === "homepage" && ch.u.replace(/\/$/, "") === String(c.homepage).replace(/\/$/, "")) ? `<a href="${esc(c.homepage)}" target="_blank" rel="noopener">${esc(hostOf(c.homepage) || c.homepage)}</a>` : null, { g: "c", src: { label: "공식 홈페이지", url: c.homepage } }],
+    officialList(c).length ? ["공식 채널", `<div class="info-official">${officialList(c).map(officialBadge).join("")}</div>`, { g: "c", src: { label: "업장이 고캠핑·공식 경로에 등록한 채널", url: officialList(c)[0].u } }] : null,
     // 운영 기간(계절)은 ‘이용 정보’에 있으므로 여기서는 운영 주체·요일만 둔다.
     ["운영", [OP[c.op], (c.days ?? [])[0]].filter(Boolean).map(esc).join(" · ") || null, gcSrc("운영 정보")],
     ...registryRows(c),
@@ -9803,7 +9817,7 @@ addEventListener("error", (e) => {
 (async function boot() {
   $("#view").innerHTML = `<div class="loading"></div>`;
   const configReady = ensureSupabaseConfig();
-  const [camps, photos, openings, cards, fcast, entityQuality] = await Promise.all([
+  const [camps, photos, openings, cards, fcast, entityQuality, officialJson] = await Promise.all([
     // 가벼운 판(campgrounds.lite.json, scripts/split-catalog.mjs)이 있으면 그것을, 없으면 원본을 받는다.
     fetch(`${DATA}campgrounds.lite.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((j) => (j?.camps ? (CATX.v = j.v, CATX.n = j.n, j.camps) : fetch(`${DATA}campgrounds.json`).then((r) => r.json()))),
     fetch(`${DATA}photos.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
@@ -9811,10 +9825,13 @@ addEventListener("error", (e) => {
     fetch(`${MEDIA}cards/index.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
     fetch(new URL(`${MOD_ROOT}conditions/forecast.json`, import.meta.url).href, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
     fetch(`${DATA}entity-quality.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})),
+    fetch(`${APP_BASE}official-channels.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)
+      .then((j) => j || fetch(`${DATA}official-channels.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)),
   ]);
   // 권리자 요청으로 내린 사진·글(takedowns.json)과 운영자 확인 캠핑장(operator-verified.json) — export-operator-submissions.mjs. 늦게 와도 된다.
   fetch(`${DATA}takedowns.json`).then((r) => (r.ok ? r.json() : null)).then((j) => { for (const it of j?.items ?? []) { TAKEN.add(it.url); DEAD.add(photoUrl(it.url)); } }).catch(() => {});
   fetch(`${DATA}operator-verified.json`).then((r) => (r.ok ? r.json() : null)).then((j) => { for (const id of j?.cids ?? []) OP_VERIFIED.add(String(id)); }).catch(() => {});
+  OFFICIAL = officialJson?.camps ?? officialJson ?? {};
   S.camps = camps.filter((c) => c.status !== "폐업");
   for (const c of S.camps) if (entityQuality?.[String(c.id)]) c.quality = { ...(c.quality ?? {}), ...entityQuality[String(c.id)] };
   for (const c of S.camps) { cleanCampTel(c); cleanCampFee(c); } // 표시층 정리(원본 파일은 그대로)
