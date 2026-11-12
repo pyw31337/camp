@@ -2405,14 +2405,14 @@ const HERO_THEMES = [
   { id: "green-meadow", emoji: "🌿", shortName: "초원 글램핑", badge: "탁 트인 푸른 초원", moodDescription: "대관령 푸른 언덕 & 민들레 홀씨", image: "hero-green-meadow.webp", titleA: "끝없는 초록빛 언덕", titleB: "대관령 초원 캠핑", summary: "탁 트인 푸른 하늘과 보드라운 잔디밭 위에서 누리는 자유", effect: "green-meadow" },
   { id: "uq-hotspring", emoji: "♨️", shortName: "노천탕", badge: "별빛 아래 노천탕", moodDescription: "산자락 노천탕 & 피어오르는 김", image: "hero-hotspring.webp", titleA: "별 아래 따끈한 노천탕", titleB: "노천탕 캠핑", summary: "산바람에 김이 피어오르는 노천탕에 몸을 담그는 하룻밤", effect: "steam" },
   { id: "uq-spa", emoji: "🛁", shortName: "스파", badge: "보글보글 프라이빗 스파", moodDescription: "자쿠지 & 히노끼 스파 글램핑", image: "hero-spa.webp", titleA: "캔들 불빛 아래 보글보글", titleB: "프라이빗 스파 캠핑", summary: "하루의 피로를 녹이는 따스한 물거품과 은은한 촛불", effect: "bubbles" },
-  { id: "uq-warmpool", emoji: "🌡️", shortName: "사계절온수풀", badge: "겨울에도 따뜻한 물놀이", moodDescription: "사계절 온수풀 & 설경 물안개", image: "hero-warmpool.webp", titleA: "눈 내리는 날에도 첨벙", titleB: "사계절 온수풀 캠핑", summary: "하얀 설경 속 김이 오르는 따뜻한 풀에서 즐기는 물놀이", effect: "steam" },
+  { id: "uq-warmpool", emoji: "🌡️", shortName: "사계절온수풀", badge: "겨울에도 따뜻한 물놀이", moodDescription: "사계절 온수풀 & 설경 물안개", image: "hero-warmpool.webp", titleA: "눈 내리는 날에도 첨벙", titleB: "사계절 온수풀 캠핑", summary: "하얀 설경 속 김이 오르는 따뜻한 풀에서 즐기는 물놀이", effect: "warm-pool-snow" },
   { id: "uq-pool", emoji: "🏊", shortName: "수영장", badge: "햇살 가득 수영장", moodDescription: "파란 수영장 & 여름 물놀이", image: "hero-pool.webp", titleA: "반짝이는 물빛 속으로", titleB: "수영장 캠핑", summary: "텐트 바로 앞 파란 수영장에서 하루 종일 첨벙첨벙", effect: "bubbles" },
   { id: "uq-horse", emoji: "🐎", shortName: "승마", badge: "초원 위 승마 체험", moodDescription: "노을 지는 목장 & 승마 체험", image: "hero-horse.webp", titleA: "노을 진 초원을 달려", titleB: "승마 체험 캠핑", summary: "말과 교감하며 초원을 거니는 특별한 캠핑의 추억", effect: "green-meadow" },
   { id: "uq-animal", emoji: "🦙", shortName: "동물체험", badge: "보들보들 동물 친구", moodDescription: "알파카·양·염소 먹이주기", image: "hero-animal.webp", titleA: "보들보들 동물 친구와", titleB: "동물 체험 캠핑", summary: "아이와 함께 먹이 주고 쓰다듬는 따뜻한 교감의 시간", effect: "lush-forest" },
   { id: "uq-kidscafe", emoji: "🧸", shortName: "키즈카페", badge: "아이가 먼저 웃는 곳", moodDescription: "볼풀·미끄럼틀 키즈카페", image: "hero-kidscafe.webp", titleA: "아이들의 웃음이 가득", titleB: "키즈카페 캠핑", summary: "캠핑장 안 키즈카페에서 아이는 신나고 부모는 여유롭게", effect: "confetti" },
   { id: "uq-indoorplay", emoji: "🎲", shortName: "실내놀이", badge: "비 와도 걱정 없는", moodDescription: "트램펄린·보드게임 실내놀이", image: "hero-indoorplay.webp", titleA: "비가 와도 신나는 하루", titleB: "실내놀이 캠핑", summary: "날씨와 상관없이 뛰놀 수 있는 넓은 실내 놀이 공간", effect: "confetti" },
   { id: "uq-treehouse", emoji: "🌳", shortName: "트리하우스", badge: "숲속 나무 위 하룻밤", moodDescription: "소나무 숲 트리하우스", image: "hero-treehouse.webp", titleA: "나무 위 작은 오두막", titleB: "트리하우스 캠핑", summary: "출렁다리를 건너 숲 높이에서 맞이하는 아침 햇살", effect: "lush-forest" },
-  { id: "uq-stay", emoji: "🫧", shortName: "이색숙소", badge: "별을 품은 버블돔", moodDescription: "버블 텐트 & 돔 하우스", image: "hero-uniquestay.webp", titleA: "투명 돔 안에서 별 보기", titleB: "이색 숙소 캠핑", summary: "누워서 은하수를 올려다보는 버블돔과 이색 숙소", effect: "night-sky" },
+  { id: "uq-stay", emoji: "🫧", shortName: "이색숙소", badge: "별을 품은 버블돔", moodDescription: "버블 텐트 & 돔 하우스", image: "hero-uniquestay.webp", titleA: "투명 돔 안에서 별 보기", titleB: "이색 숙소 캠핑", summary: "누워서 은하수를 올려다보는 버블돔과 이색 숙소", effect: "starry-dome" },
   { id: "uq-leisure", emoji: "🪂", shortName: "레포츠", badge: "짜릿한 하루 레포츠", moodDescription: "짚라인 & 카약 레포츠", image: "hero-leisure.webp", titleA: "강 위를 가르는 짜릿함", titleB: "레포츠 캠핑", summary: "짚라인과 카약으로 채우는 액티브한 캠핑 하루", effect: "riverside" },
   { id: "uq-farm", emoji: "🍓", shortName: "체험", badge: "손으로 만드는 추억", moodDescription: "딸기 따기·감자 캐기·도예 체험", image: "hero-farm.webp", titleA: "직접 따고 만드는 하루", titleB: "농촌 체험 캠핑", summary: "수확하고 빚어 보는 손끝 체험으로 남기는 캠핑 추억", effect: "lush-forest" }
 ];
@@ -2460,6 +2460,7 @@ class HeroCanvasController {
     };
 
     this.particles = [];
+    this.steamParticles = [];
     this.ripples = [];
     this.shootingStars = [];
     this.bubblePops = [];
@@ -2572,6 +2573,7 @@ class HeroCanvasController {
   setTheme(themeId) {
     this.currentThemeId = themeId;
     this.particles = [];
+    this.steamParticles = [];
     this.ripples = [];
     this.shootingStars = [];
     this.seagulls = [];
@@ -2594,9 +2596,17 @@ class HeroCanvasController {
         }
         break;
 
+      case "starry-dome":
+        // 돔 숙소는 반딧불 없이 정적인 별빛과 유성우만 사용한다.
+        for (let i = 0; i < 34; i++) {
+          this.particles.push({ x: Math.random() * w, y: Math.random() * h * 0.72, vx: 0, vy: 0, size: Math.random() * 1.8 + 0.8, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.022 + 0.008, glow: Math.random() * 7 + 4 });
+        }
+        break;
+
       case "autumn-maple":
         // 42개 고채도 선명 단풍잎 & 부채꼴 은행잎 3D 텀블링
-        for (let i = 0; i < 42; i++) {
+        const mapleCount = w < 700 ? 20 : 30;
+        for (let i = 0; i < mapleCount; i++) {
           this.particles.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.32, vy: Math.random() * 0.46 + 0.30, size: Math.random() * 12 + 13, angle: Math.random() * Math.PI * 2, vAngle: (Math.random() - 0.5) * 0.016, flip: Math.random() * Math.PI * 2, vFlip: Math.random() * 0.018 + 0.009, roll: Math.random() * Math.PI * 2, vRoll: Math.random() * 0.02 + 0.01, isGinkgo: Math.random() < 0.38, colorIdx: Math.floor(Math.random() * 4) });
         }
         break;
@@ -2667,9 +2677,22 @@ class HeroCanvasController {
         }
         break;
 
+      case "warm-pool-snow":
+        // 사계절 온수풀: 눈발과 온수풀 김을 동시에 표시한다.
+        for (let i = 0; i < 68; i++) {
+          const flakeType = Math.random() < 0.2 ? "crystal" : Math.random() < 0.55 ? "fluffy" : "dust";
+          this.particles.push({ x: Math.random() * w, y: Math.random() * h, flakeType, r: flakeType === "crystal" ? Math.random() * 4 + 7 : flakeType === "fluffy" ? Math.random() * 2.2 + 3.0 : Math.random() * 1.8 + 1.2, vy: Math.random() * 0.42 + 0.24, vx: (Math.random() - 0.5) * 0.16, sway: Math.random() * Math.PI * 2, swaySpeed: Math.random() * 0.016 + 0.008, alpha: Math.random() * 0.35 + 0.60 });
+        }
+        for (let i = 0; i < 30; i++) this.steamParticles.push(this.makeSteam(w, h, true));
+        for (let i = 0; i < 42; i++) this.duskParticles.push({ x: Math.random() * w, y: Math.random() * (h * 0.52), r: Math.random() * 1.8 + 0.8, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.032 + 0.014, alpha: Math.random() * 0.6 + 0.35, isCross: Math.random() < 0.25 });
+        break;
+
       case "bubbles":
-        // t45u 수영장·스파: 반짝이며 떠오르는 물방울
+        // 수영장·스파: 반짝이며 떠오르는 물방울. 스파는 뜨거운 김을 함께 올린다.
         for (let i = 0; i < 40; i++) this.particles.push(this.makeBubble(w, h, true));
+        if (themeId === "uq-spa") {
+          for (let i = 0; i < 26; i++) this.steamParticles.push(this.makeSteam(w, h, true));
+        }
         break;
 
       case "confetti":
@@ -2717,11 +2740,12 @@ class HeroCanvasController {
       }
     }
     ctx.restore();
-    for (let i = 0; i < this.particles.length; i++) {
-      const p = this.particles[i];
+    const steamParticles = this.steamParticles.length ? this.steamParticles : this.particles;
+    for (let i = 0; i < steamParticles.length; i++) {
+      const p = steamParticles[i];
       p.sway += 0.012; p.y += p.vy; p.x += p.vx + Math.sin(p.sway) * 0.3; p.r += 0.14; p.life -= 0.0020;
       if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 140) { p.x += (dx / (d || 1)) * 1.4; p.y += (dy / (d || 1)) * 0.7; } }
-      if (p.life <= 0 || p.y + p.r < 0) { this.particles[i] = this.makeSteam(w, h); continue; }
+      if (p.life <= 0 || p.y + p.r < 0) { steamParticles[i] = this.makeSteam(w, h); continue; }
       const a = Math.min(1, p.life * 1.5) * 0.28, g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
       g.addColorStop(0, `rgba(255, 255, 255, ${a})`); g.addColorStop(0.5, `rgba(240, 245, 255, ${a * 0.45})`); g.addColorStop(1, "rgba(255, 255, 255, 0)");
       ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
@@ -2753,6 +2777,20 @@ class HeroCanvasController {
   }
 
   renderBubbles(ctx, w, h, mx, my, hasMouse) {
+    // 프라이빗 스파는 물방울과 함께 뜨거운 김이 올라오도록 한다.
+    if (this.currentThemeId === "uq-spa" && this.steamParticles.length) {
+      this.renderSteam(ctx, w, h, mx, my, hasMouse);
+    }
+
+    // 수영장 테마는 마우스 상호작용에만 의존하지 않고 물결·물튀김을 주기적으로 만든다.
+    if (this.currentThemeId === "uq-pool" && Math.random() < 0.018) {
+      const x = w * (0.18 + Math.random() * 0.64), y = h * (0.58 + Math.random() * 0.18);
+      this.ripples.push({ x, y, r: 2, maxR: 30 + Math.random() * 20, alpha: 0.78 });
+      for (let k = 0; k < 5; k++) {
+        this.splashes.push({ x, y, vx: (Math.random() - 0.5) * 3.2, vy: -Math.random() * 3.4 - 1.4, alpha: 0.9 });
+      }
+    }
+
     for (let i = 0; i < this.particles.length; i++) {
       const p = this.particles[i];
       p.sway += p.swaySpeed || 0.03; p.y += p.vy; p.x += Math.sin(p.sway) * 0.38;
@@ -2787,6 +2825,28 @@ class HeroCanvasController {
         ctx.fillStyle = `rgba(215, 245, 255, ${ca})`; ctx.fill();
       }
     }
+
+    if (this.currentThemeId === "uq-pool") {
+      for (let i = this.splashes.length - 1; i >= 0; i--) {
+        const sp = this.splashes[i];
+        sp.x += sp.vx; sp.y += sp.vy; sp.vy += 0.16; sp.vx *= 0.97; sp.alpha -= 0.035;
+        if (sp.alpha <= 0) { this.splashes.splice(i, 1); continue; }
+        ctx.fillStyle = `rgba(220, 250, 255, ${sp.alpha})`;
+        ctx.beginPath();
+        ctx.arc(sp.x, sp.y, 1.3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      for (let i = this.ripples.length - 1; i >= 0; i--) {
+        const r = this.ripples[i];
+        r.r += 1.2; r.alpha -= 0.018;
+        if (r.alpha <= 0) { this.ripples.splice(i, 1); continue; }
+        ctx.strokeStyle = `rgba(180, 245, 255, ${r.alpha * 0.75})`;
+        ctx.lineWidth = 1.4;
+        ctx.beginPath();
+        ctx.ellipse(r.x, r.y, r.r, r.r * 0.32, 0, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    }
   }
   renderConfetti(ctx, w, h, mx, my, hasMouse) {
     for (let i = 0; i < this.particles.length; i++) {
@@ -2803,6 +2863,31 @@ class HeroCanvasController {
     const originX = w * 0.54 + (Math.random() - 0.5) * (w * 0.52), typeRand = Math.random();
     const type = typeRand < 0.45 ? "capsule" : typeRand < 0.75 ? "spark" : "speck";
     return { type, x: originX, y: initial ? Math.random() * h : h - Math.random() * 25, vx: (Math.random() - 0.5) * (type === "spark" ? 1.6 : 0.85), vy: type === "spark" ? -Math.random() * 2.8 - 1.8 : -Math.random() * 1.8 - 1.2, size: type === "capsule" ? Math.random() * 2.6 + 1.6 : type === "spark" ? Math.random() * 1.8 + 1.1 : Math.random() * 2.2 + 1.3, len: type === "spark" ? Math.random() * 12 + 6 : type === "capsule" ? Math.random() * 6 + 4 : 3, angle: 0, life: initial ? Math.random() * 0.85 + 0.15 : 1, decay: type === "spark" ? Math.random() * 0.006 + 0.0035 : Math.random() * 0.0032 + 0.0018, color: Math.random() < 0.35 ? "#ffffff" : Math.random() < 0.7 ? "#ffe082" : Math.random() < 0.9 ? "#ff9100" : "#ff3d00", drift: Math.random() * Math.PI * 2 };
+  }
+
+  splitEmberParticle(parent) {
+    // 마우스가 불씨에 닿으면 폭발하듯 튀지 않고, 작은 불씨로 분해되어 계속 위로 오른다.
+    if (this.particles.length >= 118) return;
+    const count = 3;
+    for (let i = 0; i < count && this.particles.length < 118; i++) {
+      const angle = -Math.PI / 2 + (Math.random() - 0.5) * 1.35;
+      const speed = Math.random() * 1.15 + 0.7;
+      this.particles.push({
+        type: "speck",
+        x: parent.x + (Math.random() - 0.5) * 6,
+        y: parent.y + (Math.random() - 0.5) * 6,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 0.45,
+        size: Math.max(0.8, parent.size * (Math.random() * 0.28 + 0.28)),
+        len: 2,
+        angle: 0,
+        life: Math.random() * 0.28 + 0.42,
+        decay: Math.random() * 0.009 + 0.007,
+        color: parent.color,
+        drift: Math.random() * Math.PI * 2,
+        splitCooldown: 16
+      });
+    }
   }
 
   start() {
@@ -2848,6 +2933,9 @@ class HeroCanvasController {
       case "night-sky":
         this.renderNightSky(ctx, w, h, mx, my, hasMouse);
         break;
+      case "starry-dome":
+        this.renderNightSky(ctx, w, h, mx, my, hasMouse);
+        break;
       case "autumn-maple":
         this.renderAutumnMaple(ctx, w, h, mx, my, hasMouse);
         break;
@@ -2856,6 +2944,10 @@ class HeroCanvasController {
         break;
       case "snowy-winter":
         this.renderSnowyWinter(ctx, w, h, mx, my, hasMouse);
+        break;
+      case "warm-pool-snow":
+        this.renderSnowyWinter(ctx, w, h, mx, my, hasMouse);
+        this.renderSteam(ctx, w, h, mx, my, hasMouse);
         break;
       case "lush-forest":
         this.renderLushForest(ctx, w, h, mx, my, hasMouse);
@@ -2943,6 +3035,24 @@ class HeroCanvasController {
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
       const glowAlpha = Math.max(0.20, (Math.sin(p.pulse) + 1) * 0.5);
+
+      if (this.currentThemeId === "starry-dome") {
+        const starAlpha = 0.28 + glowAlpha * 0.72;
+        ctx.fillStyle = `rgba(220, 240, 255, ${starAlpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        if (glowAlpha > 0.76) {
+          const sp = p.size * 2.8;
+          ctx.strokeStyle = `rgba(255, 255, 255, ${starAlpha * 0.9})`;
+          ctx.lineWidth = 0.7;
+          ctx.beginPath();
+          ctx.moveTo(p.x - sp, p.y); ctx.lineTo(p.x + sp, p.y);
+          ctx.moveTo(p.x, p.y - sp); ctx.lineTo(p.x, p.y + sp);
+          ctx.stroke();
+        }
+        continue;
+      }
 
       if (hasMouse) {
         const dx = p.x - mx;
@@ -3045,11 +3155,10 @@ class HeroCanvasController {
       const sy = Math.cos(p.roll) * 0.35 + 0.65;
       ctx.scale(sx, sy);
 
-      // 입체 그림자 효과로 딤 처리 위에서도 형태가 또렷이 드러남
-      ctx.shadowColor = "rgba(0, 0, 0, 0.45)";
-      ctx.shadowBlur = 6;
-      ctx.shadowOffsetX = 2;
-      ctx.shadowOffsetY = 3;
+      // 오브젝트마다 그림자를 만들면 매 프레임 블러가 다시 계산되어 모바일 부하가 커진다.
+      // 캔버스 전체의 CSS 광원과 잎 테두리로 입체감을 유지한다.
+      ctx.shadowColor = "transparent";
+      ctx.shadowBlur = 0;
 
       const pal = MAPLE_COLORS[p.colorIdx % MAPLE_COLORS.length];
 
@@ -3073,7 +3182,7 @@ class HeroCanvasController {
 
         ctx.strokeStyle = "rgba(255, 255, 255, 0.65)";
         ctx.lineWidth = 0.8;
-        for (let a = -0.6; a <= 0.6; a += 0.3) {
+        for (let a = -0.5; a <= 0.5; a += 0.5) {
           ctx.beginPath();
           ctx.moveTo(0, s * 0.1);
           ctx.quadraticCurveTo(a * s * 0.4, -s * 0.3, a * s * 0.7, -s * 0.7);
@@ -3116,10 +3225,6 @@ class HeroCanvasController {
         ctx.lineTo(s * 0.65, -s * 0.25);
         ctx.moveTo(0, s * 0.15);
         ctx.lineTo(-s * 0.65, -s * 0.25);
-        ctx.moveTo(0, s * -0.15);
-        ctx.lineTo(s * 0.35, -s * 0.58);
-        ctx.moveTo(0, s * -0.15);
-        ctx.lineTo(-s * 0.35, -s * 0.58);
         ctx.stroke();
 
         ctx.strokeStyle = pal.dark;
@@ -3450,6 +3555,7 @@ class HeroCanvasController {
     // 2. 다변화 불티 입자 렌더링
     for (let i = this.particles.length - 1; i >= 0; i--) {
       const p = this.particles[i];
+      if (p.splitCooldown > 0) p.splitCooldown -= 1;
       p.life -= p.decay;
       if (p.life <= 0 || p.y < -25) {
         this.particles[i] = this.createEmbersParticle(w, h, false);
@@ -3461,8 +3567,14 @@ class HeroCanvasController {
         const dy = p.y - my;
         const dist = Math.hypot(dx, dy);
         if (dist < 120 && dist > 0) {
-          p.vx += this.mouse.vx * 0.16 + (dx / dist) * 1.4;
-          p.vy -= 0.9;
+          if (!p.splitCooldown) {
+            this.splitEmberParticle(p);
+            p.splitCooldown = 24;
+            p.life *= 0.58;
+            p.size *= 0.78;
+          }
+          p.vx += this.mouse.vx * 0.08 + (dx / dist) * 0.45;
+          p.vy -= 0.34;
         }
       }
 

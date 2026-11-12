@@ -1389,3 +1389,8 @@
 - `/camp/admin/hero-themes/` 점검 페이지를 추가했다. `scripts/publish-hero-theme-audit.mjs`가 화면 원본의 `HERO_THEMES` 22개를 직접 읽어 배경 파일·효과·문구를 한 화면에 카드로 보여 주며, 배포 스크립트가 매번 재생성한다. 관리자 대시보드에서 바로 열 수 있다.
 - `1000W 고용량` 특색 칩은 일반 초록 칩과 구분되는 라임 아이콘 원·강한 테두리·굵은 글자로 보이도록 원본/발행 CSS를 함께 갱신했다.
 - 검증: `npm --prefix pipeline test` 실행 필요, `node pipeline/scripts/check-hero-theme-source.mjs` 및 `npm --prefix pipeline run ...` 결과를 PR에 기록한다. PR 검사가 통과하기 전에는 main에 직접 반영하지 않는다.
+### 히어로 효과 보강(2026-11-13)
+
+- `warm-bonfire`: 마우스 충돌 시 불씨를 폭발시키지 않고 작은 불씨 3개로 분해해 연속 상승하도록 보강했다.
+- `uq-pool`: 자동 물튀김·수면 파문을 복원했고, `uq-spa`는 물방울과 뜨거운 김을 함께 렌더링한다.
+
