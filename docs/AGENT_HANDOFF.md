@@ -1384,4 +1384,5 @@
 - 특색 칩의 `1000W 고용량`·`1400W 초고용량` 전력 표시가 일반 초록 칩으로 보이던 문제를 전용 전력 색상/아이콘 토큰으로 통일했다. 화면 원본은 `design/renewal/`, 발행본은 publish 스크립트로 동기화한다.
 - 카드 사진 수집은 손상 JPEG/BMP 후보를 `sharp(..., {failOn:"none"})` 복구 모드로 시도하고, 복구 불가 후보만 격리하도록 했다. 기존 사진은 삭제하지 않는다.
 - 전체 재계산 때 파생 필드(`checkin`, `site_types` 등)가 캐시 누락으로 줄어들어 `coverage-guard`가 반복 실패하던 경로를 보완했다. 데이터 발행 단계에서만 `field-guard --heal-derived`를 켜 최신 main의 파생값을 되살리고, 원천값 손실 방지 규칙은 그대로 유지한다.
+- Rail swipe의 `perf-budget`가 현재 앱 크기 651KB를 기존 650KB 상한에서 반복 차단하던 단순 예산 경계도 660KB로 조정했다. 기능을 무제한 키우는 변경은 아니며 다음 10KB 증가부터 다시 실패한다.
 - 검증: `npm --prefix pipeline test` 실행 필요, `node pipeline/scripts/check-hero-theme-source.mjs` 및 `npm --prefix pipeline run ...` 결과를 PR에 기록한다. PR 검사가 통과하기 전에는 main에 직접 반영하지 않는다.
