@@ -651,6 +651,8 @@ border-top: 1px solid var(--line);
 .unique-feature-chips { display: flex; flex-wrap: wrap; gap: 5px; }
 .unique-feature-item { display: inline-flex; align-items: center; gap: 5px; min-width: 0; max-width: 100%; }
 .unique-feature-chip { display: inline-flex; align-items: center; gap: 4px; min-height: 24px; padding: 3px 8px; border-radius: 999px; background: var(--accent-tint); color: var(--accent); font-size: var(--fs-min); font-weight: 800; white-space: nowrap; }
+.unique-feature-chip.bdg-volt { --feature-volt-tint: #f1ffc6; --feature-volt-ink: #4a6000; background: var(--feature-volt-tint); color: var(--feature-volt-ink); border: 1px solid color-mix(in srgb, var(--volt) 38%, transparent); }
+.unique-feature-chip.bdg-volt .ic { color: var(--feature-volt-ink); }
 .unique-feature-chip .ic { width: 12px; height: 12px; flex: none; }
 button.unique-feature-chip, button.bdg.has-volt-tip { appearance: none; margin: 0; border: 0; font: inherit; color: inherit; cursor: help; pointer-events: auto; }
 .bdgs .has-volt-tip { pointer-events: auto; position: relative; z-index: 4; }

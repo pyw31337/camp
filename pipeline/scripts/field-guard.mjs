@@ -14,6 +14,10 @@ const opt = (k) => (argv.includes(k) ? argv[argv.indexOf(k) + 1] : null);
 const pos = argv.filter((a, i) => !a.startsWith("--") && argv[i - 1] !== "--report");
 const [baseRoot, nextRoot] = pos;
 const HEAL = argv.includes("--heal");
+// 전체 재계산에서 캐시가 일부만 복원돼 파생 읽기 모델이 줄어드는 경우에도
+// 최신 main 값을 되살린다. 의도적인 규칙 변경은 원천값/merge-overrides로
+// 검토하고, 이 옵션은 데이터 발행 워크플로에서만 명시적으로 켠다.
+const HEAL_DERIVED = argv.includes("--heal-derived") || process.env.FIELD_GUARD_HEAL_DERIVED === "1";
 const warnOnly = argv.includes("--warn-only") || process.env.FIELD_GUARD_WARN_ONLY === "1";
 const reportPath = opt("--report");
 const DATA = "camping-atlas/public/explore/data";
@@ -61,7 +65,7 @@ function isSupersede(b, n, field) {
 let cur = { b: null, n: null };
 const note = (l) => {
   if (overridden(l.file, l.id, l.field)) return;
-  if (DERIVED.test(l.field)) return warned.push(l);
+  if (DERIVED.test(l.field)) return HEAL_DERIVED ? strict.push(l) : warned.push(l);
   if (isSupersede(cur.b, cur.n, l.field)) return superseded.push({ ...l, previous: cur.b?.[l.field.split(".")[0]] });
   strict.push(l);
 };
