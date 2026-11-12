@@ -160,6 +160,12 @@ const copyBrandImages = async (destDir) => {
 await copyBrandImages(rootOut);
 await copyBrandImages(out);
 
+// 히어로 22개 테마의 배경·효과 매핑을 운영자가 한 화면에서 검수할 수 있는 페이지.
+// design/renewal/app.js의 HERO_THEMES를 직접 읽어 생성하므로 수동 복사본이 생기지 않는다.
+// shell-only 대상이 dist/client여도 점검 페이지가 같은 발행 루트에 생성되도록 전달한다.
+process.env.HERO_AUDIT_DIR = `${rootOut}admin/hero-themes`;
+await import(new URL("./publish-hero-theme-audit.mjs", import.meta.url));
+
 // 화면 경로(새로고침·북마크용)와 옛 보조 주소(guide·openings·vision·passport·collections·renewal)는 모두 같은 넘김 페이지.
 // 넘김 뒤 앱이 옛 주소를 새 화면으로 보정한다(openings → theme/OPEN 등). 404.html도 같은 페이지라 모르는 경로·옛 공유 링크(/explore/c/1)도 살아난다.
 const themesBlock = renewalApp.slice(renewalApp.indexOf("const THEMES = ["), renewalApp.indexOf("];", renewalApp.indexOf("const THEMES = [")));

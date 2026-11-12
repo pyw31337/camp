@@ -1385,4 +1385,6 @@
 - 카드 사진 수집은 손상 JPEG/BMP 후보를 `sharp(..., {failOn:"none"})` 복구 모드로 시도하고, 복구 불가 후보만 격리하도록 했다. 기존 사진은 삭제하지 않는다.
 - 전체 재계산 때 파생 필드(`checkin`, `site_types` 등)가 캐시 누락으로 줄어들어 `coverage-guard`가 반복 실패하던 경로를 보완했다. 데이터 발행 단계에서만 `field-guard --heal-derived`를 켜 최신 main의 파생값을 되살리고, 원천값 손실 방지 규칙은 그대로 유지한다.
 - Rail swipe의 `perf-budget`가 현재 앱 크기 651KB를 기존 650KB 상한에서 반복 차단하던 단순 예산 경계도 660KB로 조정했다. 기능을 무제한 키우는 변경은 아니며 다음 10KB 증가부터 다시 실패한다.
+- `/camp/admin/hero-themes/` 점검 페이지를 추가했다. `scripts/publish-hero-theme-audit.mjs`가 화면 원본의 `HERO_THEMES` 22개를 직접 읽어 배경 파일·효과·문구를 한 화면에 카드로 보여 주며, 배포 스크립트가 매번 재생성한다. 관리자 대시보드에서 바로 열 수 있다.
+- `1000W 고용량` 특색 칩은 일반 초록 칩과 구분되는 라임 아이콘 원·강한 테두리·굵은 글자로 보이도록 원본/발행 CSS를 함께 갱신했다.
 - 검증: `npm --prefix pipeline test` 실행 필요, `node pipeline/scripts/check-hero-theme-source.mjs` 및 `npm --prefix pipeline run ...` 결과를 PR에 기록한다. PR 검사가 통과하기 전에는 main에 직접 반영하지 않는다.
