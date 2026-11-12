@@ -4,7 +4,7 @@
 import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { validateHeroThemes } from "../lib/hero-theme-guard.mjs";
+import { EXPECTED_HERO_EFFECTS, validateHeroThemes } from "../lib/hero-theme-guard.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const file = resolve(root, process.argv[2] || "design/renewal/app.js");
@@ -30,5 +30,10 @@ const errors = [];
 if (new Set(ids).size !== ids.length) errors.push("중복 theme id");
 if (new Set(images).size !== images.length) errors.push("중복 theme image");
 if (effects.some((e) => !["night-sky","autumn-maple","rainy-camp","snowy-winter","lush-forest","riverside","warm-bonfire","sunset-coast","cherry-blossom","green-meadow","steam","bubbles","confetti"].includes(e))) errors.push("허용되지 않은 theme effect");
+if (errors.length) { console.error(errors.join(", ")); process.exit(1); }
+for (const [id, effect] of Object.entries(EXPECTED_HERO_EFFECTS)) {
+  const i = ids.indexOf(id);
+  if (i !== -1 && effects[i] !== effect) errors.push(`effect mismatch '${id}': expected ${effect}, got ${effects[i]}`);
+}
 if (errors.length) { console.error(errors.join(", ")); process.exit(1); }
 console.log(`히어로 테마 매핑 OK: ${ids.length}개`);

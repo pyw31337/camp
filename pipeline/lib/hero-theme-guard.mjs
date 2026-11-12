@@ -5,6 +5,17 @@ export const HERO_EFFECTS = new Set([
   "warm-bonfire", "sunset-coast", "cherry-blossom", "green-meadow", "steam", "bubbles", "confetti",
 ]);
 
+// 22개 기획 테마의 의미와 Canvas 효과를 고정 계약으로 검증한다.
+export const EXPECTED_HERO_EFFECTS = Object.freeze({
+  "night-sky": "night-sky", "autumn-maple": "autumn-maple", "rainy-camp": "rainy-camp",
+  "snowy-winter": "snowy-winter", "lush-forest": "lush-forest", riverside: "riverside",
+  "warm-bonfire": "warm-bonfire", "sunset-coast": "sunset-coast", "cherry-blossom": "cherry-blossom",
+  "green-meadow": "green-meadow", "uq-hotspring": "steam", "uq-spa": "bubbles",
+  "uq-warmpool": "steam", "uq-pool": "bubbles", "uq-horse": "green-meadow",
+  "uq-animal": "lush-forest", "uq-kidscafe": "confetti", "uq-indoorplay": "confetti",
+  "uq-treehouse": "lush-forest", "uq-stay": "night-sky", "uq-leisure": "riverside", "uq-farm": "lush-forest",
+});
+
 export function validateHeroThemes(themes = []) {
   const errors = [];
   const ids = new Set();
@@ -16,6 +27,9 @@ export function validateHeroThemes(themes = []) {
     if (!theme.image || images.has(theme.image)) errors.push(`duplicate/missing image at ${theme.id || i}`);
     if (theme.image) images.add(theme.image);
     if (!HERO_EFFECTS.has(theme.effect)) errors.push(`unknown effect '${theme.effect}' at ${theme.id || i}`);
+    if (EXPECTED_HERO_EFFECTS[theme.id] && EXPECTED_HERO_EFFECTS[theme.id] !== theme.effect) {
+      errors.push(`effect mismatch '${theme.id}': expected ${EXPECTED_HERO_EFFECTS[theme.id]}, got ${theme.effect}`);
+    }
   }
   return errors;
 }
