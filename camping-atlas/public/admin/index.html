@@ -175,6 +175,11 @@
   .r-cmt { margin-top: 4px; padding: 8px 12px; background: var(--bg); border-left: 3px solid var(--cobalt); border-radius: 4px 10px 10px 4px; font-size: .88rem; color: var(--ink); white-space: pre-wrap; word-break: break-word; }
   .r-cmt.del { opacity: .6; text-decoration: line-through; border-left-color: var(--ink-3); }
   .r-act { display: flex; align-items: center; gap: 4px; }
+  .mini.edit { color: var(--cobalt); border-color: #c8d9ff; }
+  .mini.danger { color: #c83232; border-color: #ffd0d0; }
+  .mini.save-on { color: var(--flame); border-color: #ffd2c8; }
+  .mini.save-off { color: var(--accent); border-color: #bde7d4; }
+  .admin-edit-note { margin: 0 0 12px; color: var(--muted); font-size: .78rem; }
   .mini { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-width: 32px; height: 32px; padding: 0 8px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--ink-2); font-size: .76rem; font-weight: 750; cursor: pointer; transition: background .15s, color .15s, transform .15s var(--ease); }
   .mini:hover { background: var(--bg); color: var(--ink); }
   .mini:active { transform: scale(.94); }
@@ -359,6 +364,7 @@
   <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z"/></symbol>
   <symbol id="i-heart-off" viewBox="0 0 24 24"><path d="M2.8 2.8 1.4 4.2l2.3 2.3A5.4 5.4 0 0 0 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32c.9-.82 1.75-1.6 2.53-2.35l3.8 3.8 1.42-1.42zM16.5 3c-1.74 0-3.41.81-4.5 2.09A6 6 0 0 0 8.9 3.3l11.6 11.6C21.4 13.4 22 11.97 22 10.5 22 6.4 19.6 3 16.5 3"/></symbol>
   <symbol id="i-comment" viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2M6 9h12v2H6zm8 5H6v-2h8zm4-6H6V6h12z"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="m4 17.25 8.9-8.9 2.75 2.75-8.9 8.9L4 20zm10.3-10.3 1.7-1.7a1.5 1.5 0 0 1 2.12 0l.63.63a1.5 1.5 0 0 1 0 2.12l-1.7 1.7zM3 22h18v-2H3z"/></symbol>
   <symbol id="i-trash" viewBox="0 0 24 24"><path d="M9 3v1H4v2h1v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1V4h-5V3zm-2 3h10v13H7zm2 2v9h2V8zm4 0v9h2V8z"/></symbol>
   <symbol id="i-enter" viewBox="0 0 24 24"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3zm5 16H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2z"/></symbol>
   <symbol id="i-dup" viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m0 16H8V7h11z"/></symbol>
@@ -506,6 +512,7 @@
       <div class="sum"><span id="filtered-count-txt">불러오는 중…</span>
         <span class="cks"><label class="ck"><input type="checkbox" id="hide-bot" checked><span class="ck-box"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg></span><span>테스트 기록 숨기기</span></label>
         <label class="ck"><input type="checkbox" id="hide-dup" checked><span class="ck-box"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg></span><span>중복 기록 숨기기</span></label></span></div>
+      <p class="admin-edit-note">편집 버튼은 운영 비밀번호를 다시 확인한 뒤 서버에 반영합니다. 비밀번호는 이 브라우저에 저장하지 않아요.</p>
       <div class="feed" id="feed-container" aria-live="polite"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
       <div class="more"><button type="button" class="btn" id="btn-load-more" hidden>30개 더 보기</button></div>
     </section>
@@ -730,7 +737,7 @@
       last.set(id, type);
       items.push({ id: `s-${s.created_at}-${id}-${type}`, type, dup, campId: id, campName: nameOf(id), createdAt: s.created_at, timeMs: Date.parse(s.created_at) || 0, device: parseDevice("", s.platform, s.screen, s.timezone) });
     }
-    for (const c of state.comments) items.push({ id: `c-${c.id}`, type: c.is_deleted ? "deleted" : "comment", campId: String(c.campground_id), campName: nameOf(c.campground_id), nickname: c.nickname || "익명 캠퍼", content: c.content || "", commentOrigin: c.tag === "saved" ? "찜 목록" : "상세", createdAt: c.created_at, timeMs: Date.parse(c.created_at) || 0, device: c._dev ? parseDevice("", c._dev.platform, c._dev.screen, c._dev.timezone) : null });
+    for (const c of state.comments) items.push({ id: `c-${c.id}`, commentId: c.id, type: c.is_deleted ? "deleted" : "comment", campId: String(c.campground_id), campName: nameOf(c.campground_id), nickname: c.nickname || "익명 캠퍼", content: c.content || "", commentOrigin: c.tag === "saved" ? "찜 목록" : "상세", createdAt: c.created_at, timeMs: Date.parse(c.created_at) || 0, device: c._dev ? parseDevice("", c._dev.platform, c._dev.screen, c._dev.timezone) : null });
     for (const v of state.views) items.push({ id: `v-${v.created_at}-${v.campground_id}`, type: "view", campId: String(v.campground_id), campName: nameOf(v.campground_id), createdAt: v.created_at, timeMs: Date.parse(v.created_at) || 0, device: parseDevice("", v.platform, v.screen, v.timezone) });
     items.sort((a, b) => b.timeMs - a.timeMs);
     state.feedItems = items;
@@ -910,6 +917,8 @@
   };
   function rowHtml(it, cls, i) {
     const [ic, tc, label] = TYPE[it.type], d = it.device, url = `../place/${encodeURIComponent(it.campId)}/${it.type === "comment" || it.type === "deleted" ? "#cmt" : ""}`;
+    const saved = state.shared.some((x) => String(x.campground_id) === String(it.campId));
+    const adminButtons = it.type === "comment" && it.commentId ? `<button type="button" class="mini edit" data-admin-comment-edit="${esc(it.commentId)}" title="댓글 수정">${icon("edit")}수정</button><button type="button" class="mini danger" data-admin-comment-delete="${esc(it.commentId)}" title="댓글 삭제">${icon("trash")}삭제</button>` : (it.type === "add" || it.type === "remove") ? `<button type="button" class="mini ${saved ? "save-on" : "save-off"}" data-admin-save-toggle="${esc(it.campId)}" data-admin-save-next="${saved ? "false" : "true"}" title="공용 찜 ${saved ? "해제" : "추가"}">${icon(saved ? "heart-off" : "heart")}${saved ? "찜 해제" : "찜 추가"}</button>` : "";
     return `<div class="row ${cls}${it.dup ? " dup" : ""}" style="--i:${Math.min(i, 14)}" data-id="${esc(it.id)}">
       <span class="tchip ${tc}" title="${label}">${icon(ic, "")}</span>
       <div class="r-main">
@@ -918,6 +927,7 @@
         ${it.content ? `<div class="r-cmt${it.type === "deleted" ? " del" : ""}">${esc(it.content)}</div>` : ""}
       </div>
       <div class="r-act">
+        ${adminButtons}
         <a class="mini" href="${url}" target="_blank" rel="noopener" aria-label="상세 열기">${icon("enter")}</a>
         <button type="button" class="mini" data-copy-id="${esc(it.campId)}" title="ID 복사">${icon("hash")}${esc(it.campId)}</button>
         ${d ? `<button type="button" class="mini" data-device-info="${esc(JSON.stringify(d))}" aria-label="기기 정보">${icon("info")}</button>` : ""}
@@ -949,6 +959,58 @@
 
   // ── 동작 연결(한 번만, 이벤트 위임) ──
   $("#feed-container").addEventListener("click", (e) => {
+    const saveBtn = e.target.closest("[data-admin-save-toggle]");
+    if (saveBtn) {
+      e.preventDefault(); e.stopPropagation();
+      const id = saveBtn.dataset.adminSaveToggle, next = saveBtn.dataset.adminSaveNext === "true";
+      (async () => {
+        const pw = await requireAdminPassword(); if (!pw) return;
+        saveBtn.disabled = true;
+        try {
+          const ok = await adminRpc("admin_save_set", { pw, p_campground_id: id, p_saved: next });
+          if (ok !== true) throw new Error("찜 상태를 바꾸지 못했어요");
+          showToast(next ? "공용 찜에 추가했어요" : "공용 찜에서 해제했어요");
+          await fetchLogs();
+        } catch (err) { showToast(err.message || "편집에 실패했어요"); }
+        finally { saveBtn.disabled = false; }
+      })();
+      return;
+    }
+    const editBtn = e.target.closest("[data-admin-comment-edit]");
+    if (editBtn) {
+      e.preventDefault(); e.stopPropagation();
+      const comment = state.comments.find((c) => String(c.id) === String(editBtn.dataset.adminCommentEdit));
+      if (!comment) return showToast("댓글을 찾지 못했어요");
+      const content = window.prompt("댓글 내용을 수정하세요.", comment.content || "");
+      if (content === null || !content.trim()) return;
+      (async () => {
+        const pw = await requireAdminPassword(); if (!pw) return;
+        editBtn.disabled = true;
+        try {
+          const ok = await adminRpc("admin_comment_update", { pw, p_comment_id: Number(comment.id), p_content: content.trim() });
+          if (ok !== true) throw new Error("댓글을 수정하지 못했어요");
+          showToast("댓글을 수정했어요"); await fetchLogs();
+        } catch (err) { showToast(err.message || "댓글 수정에 실패했어요"); }
+        finally { editBtn.disabled = false; }
+      })();
+      return;
+    }
+    const deleteBtn = e.target.closest("[data-admin-comment-delete]");
+    if (deleteBtn) {
+      e.preventDefault(); e.stopPropagation();
+      if (!window.confirm("이 댓글을 삭제할까요? 삭제 후 화면에서 숨겨집니다.")) return;
+      (async () => {
+        const pw = await requireAdminPassword(); if (!pw) return;
+        deleteBtn.disabled = true;
+        try {
+          const ok = await adminRpc("admin_comment_delete", { pw, p_comment_id: Number(deleteBtn.dataset.adminCommentDelete) });
+          if (ok !== true) throw new Error("댓글을 삭제하지 못했어요");
+          showToast("댓글을 삭제했어요"); await fetchLogs();
+        } catch (err) { showToast(err.message || "댓글 삭제에 실패했어요"); }
+        finally { deleteBtn.disabled = false; }
+      })();
+      return;
+    }
     const cp = e.target.closest("[data-copy-id]");
     if (cp) { navigator.clipboard?.writeText(cp.dataset.copyId).then(() => showToast(`#${cp.dataset.copyId} 복사했어요`)); return; }
     const di = e.target.closest("[data-device-info]");
@@ -1057,7 +1119,7 @@
   const FALLBACK_SHA256 = "32625be384ed05129315617a65f0b070e7b35a4257bdd11e0d98185c6f0cecfe";
   const AUTH_KEY = "mc-log-auth", AUTH_HOURS = 12;
   const root = document.documentElement, gate = $("#gate"), loginCard = $("#gate-login"), resetCard = $("#gate-reset");
-  let started = false, serverAuth = null; // null=모름, true=서버 함수 있음, false=없음
+  let started = false, serverAuth = null, adminPassword = ""; // 비밀번호는 현재 탭 메모리에만 둔다
   const sha256 = async (t) => [...new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)))].map((b) => b.toString(16).padStart(2, "0")).join("");
   async function rpc(name, body) {
     if (!await ensureConfig()) return { error: "config" };
@@ -1073,6 +1135,20 @@
     if (r.missing || r.error === "config") { serverAuth = r.missing ? false : serverAuth; return (await sha256(pw)) === FALLBACK_SHA256; }
     if (r.error) throw new Error("서버에 연결하지 못했어요. 잠시 뒤 다시 해 주세요.");
     serverAuth = true; return r.value === true;
+  }
+  async function adminRpc(name, body) {
+    if (!await ensureConfig()) throw new Error("서버 설정을 찾지 못했어요");
+    const r = await fetch(`${SB.url}/rest/v1/rpc/${name}`, { method: "POST", headers: { ...headers, "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    if (r.status === 404) throw new Error("서버 편집 기능(db/028_admin_mutations.sql)이 아직 적용되지 않았어요");
+    if (!r.ok) throw new Error(`서버 편집 요청 실패(${r.status})`);
+    return r.json();
+  }
+  async function requireAdminPassword() {
+    if (adminPassword) return adminPassword;
+    const pw = window.prompt("운영 비밀번호를 입력하세요. 비밀번호는 저장하지 않습니다.");
+    if (!pw) return null;
+    if (!await checkPw(pw)) { showToast("비밀번호가 맞지 않아요"); return null; }
+    adminPassword = pw; return pw;
   }
   const busy = (form, on) => { const b = $(".btn-go", form); b.disabled = on; b.classList.toggle("busy", on); };
   const shake = (card) => { card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake"); };
@@ -1098,7 +1174,7 @@
     e.preventDefault(); const form = e.currentTarget, msg = $("#login-msg"), input = $("#pw-in");
     msg.className = "msg"; msg.textContent = ""; busy(form, true);
     try {
-      if (await checkPw(input.value)) { msg.className = "msg ok"; msg.textContent = "확인했어요"; input.value = ""; unlock(); }
+      if (await checkPw(input.value)) { adminPassword = input.value; msg.className = "msg ok"; msg.textContent = "확인했어요"; input.value = ""; unlock(); }
       else { msg.textContent = "비밀번호가 맞지 않아요(10번 틀리면 10분 동안 잠겨요)"; shake(loginCard); input.select(); }
     } catch (err) { msg.textContent = err.message; }
     busy(form, false);
@@ -1127,6 +1203,7 @@
     if (r.missing) { serverAuth = false; $("#reset-note").hidden = false; msg.textContent = "서버 설정이 아직 적용되지 않았어요"; return; }
     if (r.error) { msg.textContent = "서버에 연결하지 못했어요. 잠시 뒤 다시 해 주세요."; return; }
     if (r.value !== true) { msg.textContent = "지금 비밀번호가 맞지 않아요(10번 틀리면 10분 동안 잠겨요)"; return shake(resetCard); }
+    adminPassword = a;
     msg.className = "msg ok"; msg.textContent = "바꿨어요";
     setTimeout(() => { closeReset(); showToast("비밀번호를 바꿨어요. 다음 입장부터 새 비밀번호를 써요"); }, 500);
   });
