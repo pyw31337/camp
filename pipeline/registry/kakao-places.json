@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-11-12T18:55:25.732Z",
+ "generated_at": "2026-11-13T18:33:54.627Z",
  "source": {
   "label": "카카오 로컬 키워드 검색 · Daum 웹 검색(공식 REST API)",
   "docs": [
@@ -5388,7 +5388,7 @@
    "homepage": null
   },
   "640": {
-   "checked_at": "2026-11-12T18:55:22.024Z",
+   "checked_at": "2026-11-13T18:33:51.246Z",
    "place": {
     "id": "17591877",
     "name": "느티나무캠핑장",
@@ -8600,7 +8600,7 @@
    "homepage": null
   },
   "977": {
-   "checked_at": "2026-11-12T18:55:22.089Z",
+   "checked_at": "2026-11-13T18:33:51.296Z",
    "place": null,
    "candidates": [
     {
@@ -17909,7 +17909,7 @@
    "homepage": null
   },
   "2472": {
-   "checked_at": "2026-11-12T18:55:25.014Z",
+   "checked_at": "2026-11-13T18:33:54.128Z",
    "place": {
     "id": "898560745",
     "name": "원주두리캠핑장",
@@ -46453,7 +46453,7 @@
    "homepage": null
   },
   "100122": {
-   "checked_at": "2026-11-12T18:55:24.171Z",
+   "checked_at": "2026-11-13T18:33:53.222Z",
    "place": {
     "id": "1579667394",
     "name": "라플란드",
@@ -46472,6 +46472,18 @@
     }
    },
    "candidates": [
+    {
+     "host": "diningcode.com",
+     "url": "https://www.diningcode.com/profile.php?rid=bHUIEL2OHGPD",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "라플란드 - 파주 샤브샤브, 월남쌈 맛집 - 다이닝코드",
+       "url": "https://www.diningcode.com/profile.php?rid=bHUIEL2OHGPD"
+      }
+     ]
+    },
     {
      "host": "oneoneone.kr",
      "url": "https://oneoneone.kr/content/d6a7b05a",
@@ -46509,18 +46521,6 @@
       {
        "title": "온더락캠핑장",
        "url": "https://ojigo.kr/camping/2331"
-      }
-     ]
-    },
-    {
-     "host": "diningcode.com",
-     "url": "https://www.diningcode.com/profile.php?rid=JoUlQAdCH7rP",
-     "score": 4,
-     "hits": 1,
-     "evidence": [
-      {
-       "title": "식당가 천등산휴게소 - 충주 한식, 된장찌개 맛집 - 다이닝코드",
-       "url": "https://www.diningcode.com/profile.php?rid=JoUlQAdCH7rP"
       }
      ]
     },
@@ -49769,7 +49769,7 @@
    "homepage": null
   },
   "100289": {
-   "checked_at": "2026-11-12T18:55:23.678Z",
+   "checked_at": "2026-11-13T18:33:52.958Z",
    "place": {
     "id": "828875441",
     "name": "가델캠핑장",
@@ -59911,7 +59911,7 @@
    "homepage": null
   },
   "100597": {
-   "checked_at": "2026-11-12T18:55:24.195Z",
+   "checked_at": "2026-11-13T18:33:53.413Z",
    "place": {
     "id": "1537097954",
     "name": "노리터키즈캠핑장",
@@ -63172,7 +63172,7 @@
    "homepage": null
   },
   "100676": {
-   "checked_at": "2026-11-12T18:55:24.514Z",
+   "checked_at": "2026-11-13T18:33:53.671Z",
    "place": null,
    "candidates": [
     {
@@ -64769,7 +64769,7 @@
    "homepage": null
   },
   "100721": {
-   "checked_at": "2026-11-12T18:55:23.684Z",
+   "checked_at": "2026-11-13T18:33:52.960Z",
    "place": {
     "id": "1779251680",
     "name": "캠핑굄성",
@@ -76944,7 +76944,7 @@
    "homepage": null
   },
   "101093": {
-   "checked_at": "2026-11-12T18:55:25.188Z",
+   "checked_at": "2026-11-13T18:33:54.133Z",
    "place": null,
    "candidates": [
     {
@@ -81255,7 +81255,7 @@
    "homepage": null
   },
   "101214": {
-   "checked_at": "2026-11-12T18:55:22.091Z",
+   "checked_at": "2026-11-13T18:33:51.297Z",
    "place": {
     "id": "661902238",
     "name": "캠프다온",
@@ -83222,7 +83222,7 @@
    "homepage": null
   },
   "101269": {
-   "checked_at": "2026-11-12T18:55:24.004Z",
+   "checked_at": "2026-11-13T18:33:53.216Z",
    "place": {
     "id": "826081055",
     "name": "골든쌔들캠핑장",
@@ -88556,7 +88556,7 @@
    "homepage": null
   },
   "101416": {
-   "checked_at": "2026-11-12T18:55:23.498Z",
+   "checked_at": "2026-11-13T18:33:52.754Z",
    "place": {
     "id": "1931362185",
     "name": "내포캠핑스퀘어",
@@ -95328,7 +95328,7 @@
    "homepage": null
   },
   "101608": {
-   "checked_at": "2026-11-12T18:55:24.182Z",
+   "checked_at": "2026-11-13T18:33:53.400Z",
    "place": {
     "id": "2026652673",
     "name": "원더 포레스트",
@@ -96257,7 +96257,7 @@
    "homepage": null
   },
   "101639": {
-   "checked_at": "2026-11-12T18:55:22.092Z",
+   "checked_at": "2026-11-13T18:33:51.298Z",
    "place": {
     "id": "604025620",
     "name": "물멍 캠프",
@@ -114646,7 +114646,7 @@
    "homepage": null
   },
   "102221": {
-   "checked_at": "2026-11-12T18:55:24.979Z",
+   "checked_at": "2026-11-13T18:33:54.110Z",
    "place": null,
    "candidates": [
     {
@@ -114795,7 +114795,7 @@
    "homepage": null
   },
   "102229": {
-   "checked_at": "2026-11-12T18:55:24.679Z",
+   "checked_at": "2026-11-13T18:33:53.846Z",
    "place": null,
    "candidates": [],
    "needs_homepage": false,
@@ -115612,7 +115612,7 @@
    "homepage": null
   },
   "102270": {
-   "checked_at": "2026-11-12T18:55:24.702Z",
+   "checked_at": "2026-11-13T18:33:53.869Z",
    "place": null,
    "candidates": [
     {
@@ -118607,7 +118607,7 @@
    "homepage": null
   },
   "102377": {
-   "checked_at": "2026-11-12T18:55:24.678Z",
+   "checked_at": "2026-11-13T18:33:53.674Z",
    "place": null,
    "candidates": [],
    "needs_homepage": true,
