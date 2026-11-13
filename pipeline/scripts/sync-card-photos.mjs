@@ -77,7 +77,10 @@ await mapLimit(jobs.slice(0, MAX_DL), CONC, async (j) => {
     const abs = join(MEDIA_DIR, j.rel);
     await mkdir(dirname(abs), { recursive: true });
     // 비율 유지 축소만(자르기·보정 없음). 메타데이터(EXIF·GPS)는 기본으로 제거된다.
-    const info = await sharp(buf).rotate().resize({ width: 480, withoutEnlargement: true }).webp({ quality: 55, effort: 5 }).toFile(`${abs}.tmp`);
+    // 일부 고캠핑 imageList가 JPEG 헤더 오류·부분 BMP로 내려와도 한 장 때문에
+    // 전체 사진 보강이 멈추지 않도록 libvips의 복구 모드를 사용한다. 복구가
+    // 불가능한 바이트만 해당 후보로 격리하고 다음 후보를 계속 시도한다.
+    const info = await sharp(buf, { failOn: "none", limitInputPixels: false }).rotate().resize({ width: 480, withoutEnlargement: true }).webp({ quality: 55, effort: 5 }).toFile(`${abs}.tmp`);
     await rename(`${abs}.tmp`, abs);
     used += info.size;
     ok++;

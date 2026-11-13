@@ -529,7 +529,7 @@ jobs:
           # 더 최신·더 믿을 만한 출처로 바뀐 것은 그대로 두고 옛 값을 기록한다. 기록: pipeline/registry/merge-review.ndjson
           if [ "${{ github.event_name }}" != "pull_request" ]; then
             git fetch -q origin main && FG_BASE="$(mktemp -d)" && git archive origin/main camping-atlas/public/explore/data pipeline/registry | tar -x -C "$FG_BASE"
-            node pipeline/scripts/field-guard.mjs "$FG_BASE" . --heal
+            FIELD_GUARD_HEAL_DERIVED=1 node pipeline/scripts/field-guard.mjs "$FG_BASE" . --heal --heal-derived
           fi
           # t41u: 되살린 값에도 발행 전 상식 정리를 다시 적용(정리 규칙이 되살림보다 우선)
           node pipeline/scripts/publish-sanity.mjs

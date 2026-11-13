@@ -233,6 +233,7 @@
   .subnav .utab .ic { width: 16px; height: 16px; opacity: .7; transition: opacity .2s, transform .3s var(--spring); }
   .subnav .utab[aria-selected="true"] .ic { opacity: 1; transform: scale(1.12); }
   .subnav-act { display: flex; align-items: center; gap: 8px; flex: none; }
+  .hero-audit-link { flex: none; }
   .live { display: inline-flex; align-items: center; gap: 6px; font-size: .76rem; font-weight: 700; color: var(--ink-3); white-space: nowrap; }
   .log-head { justify-content: flex-start; gap: 14px; margin: 4px 0 18px; }
   .hero-ic { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: linear-gradient(135deg, var(--ink), #2b3532); color: var(--volt); box-shadow: 0 6px 18px rgba(16,20,20,.18); flex: none; }
@@ -289,6 +290,7 @@
     .subnav-in { padding: 0 0 0 4px; }
     .subnav .utab span { font-size: .84rem; }
     .live { display: none; }
+    .subnav-act .btn-collect, .subnav-act .hero-audit-link { display: none; }
     .hero-ic { width: 40px; height: 40px; }
     .donut-wrap { grid-template-columns: 104px minmax(0, 1fr); }
     .donut { width: 104px; height: 104px; }
@@ -421,6 +423,7 @@
     </div>
     <div class="subnav-act">
       <a class="btn btn-collect" href="./collect/" title="수집처별 데이터 수집 현황판"><svg class="ic"><use href="#i-chart"/></svg><span>수집 현황</span></a>
+      <a class="btn hero-audit-link" href="./hero-themes/" title="히어로 22개 테마 배경·효과 점검" aria-label="히어로 테마 점검">히어로 테마 점검</a>
       <span class="live"><span class="live-dot" id="live-dot"></span><span id="last-updated-txt">불러오는 중</span></span>
       <label class="sw" title="30초마다 자동 갱신"><input type="checkbox" id="auto-refresh" role="switch" checked><span class="sw-track"><span class="sw-thumb"></span></span><span class="sw-label">자동</span></label>
       <button type="button" class="btn btn-icon" id="btn-pw" aria-label="비밀번호 바꾸기" title="비밀번호 바꾸기"><svg class="ic"><use href="#i-key"/></svg></button>
