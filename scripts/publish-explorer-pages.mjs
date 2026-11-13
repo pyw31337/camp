@@ -165,6 +165,15 @@ await copyBrandImages(out);
 // shell-only 대상이 dist/client여도 점검 페이지가 같은 발행 루트에 생성되도록 전달한다.
 process.env.HERO_AUDIT_DIR = `${rootOut}admin/hero-themes`;
 await import(new URL("./publish-hero-theme-audit.mjs", import.meta.url));
+// 운영 경로를 모르는 이용자도 바로 열 수 있도록 /hero-themes/ 공개 별칭을 함께 발행한다.
+// 관리 점검판의 상대 경로를 공개 별칭 위치에 맞춰 조정하되, 테마 데이터는 같은 생성 결과를 쓴다.
+const heroAuditAdmin = `${rootOut}admin/hero-themes/index.html`;
+const heroAuditPublic = `${rootOut}hero-themes/index.html`;
+if (existsSync(heroAuditAdmin)) {
+  await mkdir(`${rootOut}hero-themes`, { recursive: true });
+  const auditHtml = await readFile(heroAuditAdmin, "utf8");
+  await writeFile(heroAuditPublic, auditHtml.replaceAll("../../images/hero/", "../images/hero/").replaceAll("../../../?hero=", "../?hero="));
+}
 
 // 화면 경로(새로고침·북마크용)와 옛 보조 주소(guide·openings·vision·passport·collections·renewal)는 모두 같은 넘김 페이지.
 // 넘김 뒤 앱이 옛 주소를 새 화면으로 보정한다(openings → theme/OPEN 등). 404.html도 같은 페이지라 모르는 경로·옛 공유 링크(/explore/c/1)도 살아난다.
