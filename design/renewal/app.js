@@ -2512,10 +2512,10 @@ class HeroCanvasController {
     this.mouse.y = y;
     this.mouse.active = true;
 
-    if (this.currentThemeId === "riverside" && Math.random() < 0.25) {
-      this.ripples.push({ x, y, r: 2, maxR: 70 + Math.random() * 40, alpha: 0.7 });
+    if (this.currentThemeId === "riverside" && Math.random() < 0.10) {
+      this.spawnRipple(x, y, { maxR: 140 + Math.random() * 90, alpha: 0.72, fade: 0.0035, speed: 0.58 });
     } else if (this.currentThemeId === "rainy-camp" && Math.random() < 0.3) {
-      this.ripples.push({ x, y, r: 1, maxR: 35 + Math.random() * 20, alpha: 0.8 });
+      this.spawnRipple(x, y, { maxR: 70 + Math.random() * 45, alpha: 0.72, fade: 0.005, speed: 0.48, yScale: 0.34 });
     }
   }
 
@@ -2543,7 +2543,7 @@ class HeroCanvasController {
       for (let i = 0; i < 16; i++) this.particles.push({ x: x + (Math.random() - 0.5) * 40, y: y + (Math.random() - 0.5) * 20, vx: (Math.random() - 0.5) * 1.5, vy: -Math.random() * 2.8 - 1.4, size: Math.random() * 2.8 + 1.2, life: 1, decay: Math.random() * 0.005 + 0.003, color: Math.random() < 0.4 ? "#fff9c4" : Math.random() < 0.75 ? "#ffb74d" : "#ff5722", drift: Math.random() * Math.PI * 2 });
     } else if (this.currentThemeId === "rainy-camp" || this.currentThemeId === "riverside") {
       for (let i = 0; i < 3; i++) {
-        this.ripples.push({ x, y, r: i * 8, maxR: 70 + i * 18, alpha: 0.75 });
+        this.spawnRipple(x, y, { startR: i * 10, maxR: 150 + i * 24, alpha: 0.7 - i * 0.08, fade: 0.0035, speed: 0.58 });
       }
     } else if (this.currentThemeId === "bubbles" || this.currentThemeId === "uq-spa" || this.currentThemeId === "uq-pool") {
       this.popBubblesNear(x, y, 48);
@@ -2582,6 +2582,11 @@ class HeroCanvasController {
     this.pollen = [];
     this.bubblePops = [];
     this.initParticlesForTheme(themeId);
+  }
+
+  // 모든 물 테마가 공유하는 느리고 넓은 파문 생성기.
+  spawnRipple(x, y, { maxR = 150, alpha = 0.7, startR = 2, yScale = 0.28, fade = 0.004, speed = 0.55 } = {}) {
+    this.ripples.push({ x, y, r: startR, maxR, alpha, yScale, fade, speed, age: 0 });
   }
 
   initParticlesForTheme(themeId) {
@@ -2785,7 +2790,7 @@ class HeroCanvasController {
     // 수영장 테마는 마우스 상호작용에만 의존하지 않고 물결·물튀김을 주기적으로 만든다.
     if (this.currentThemeId === "uq-pool" && Math.random() < 0.018) {
       const x = w * (0.18 + Math.random() * 0.64), y = h * (0.58 + Math.random() * 0.18);
-      this.ripples.push({ x, y, r: 2, maxR: 30 + Math.random() * 20, alpha: 0.78 });
+      this.spawnRipple(x, y, { maxR: 90 + Math.random() * 50, alpha: 0.78, fade: 0.0045, speed: 0.62, yScale: 0.32 });
       for (let k = 0; k < 5; k++) {
         this.splashes.push({ x, y, vx: (Math.random() - 0.5) * 3.2, vy: -Math.random() * 3.4 - 1.4, alpha: 0.9 });
       }
@@ -2838,12 +2843,12 @@ class HeroCanvasController {
       }
       for (let i = this.ripples.length - 1; i >= 0; i--) {
         const r = this.ripples[i];
-        r.r += 1.2; r.alpha -= 0.018;
+        r.r = Math.min(r.maxR || 999, r.r + (r.speed || 0.55)); r.alpha -= r.fade || 0.004;
         if (r.alpha <= 0) { this.ripples.splice(i, 1); continue; }
         ctx.strokeStyle = `rgba(180, 245, 255, ${r.alpha * 0.75})`;
         ctx.lineWidth = 1.4;
         ctx.beginPath();
-        ctx.ellipse(r.x, r.y, r.r, r.r * 0.32, 0, 0, Math.PI * 2);
+        ctx.ellipse(r.x, r.y, r.r, r.r * (r.yScale || 0.32), 0, 0, Math.PI * 2);
         ctx.stroke();
       }
     }
@@ -3248,7 +3253,7 @@ class HeroCanvasController {
       p.x -= 1.8;
 
       if (hasMouse && Math.hypot(p.x - mx, p.y - my) < 32) {
-        this.ripples.push({ x: p.x, y: p.y, r: 1, maxR: 24, alpha: 0.85 });
+        this.spawnRipple(p.x, p.y, { maxR: 70, alpha: 0.78, fade: 0.006, speed: 0.46, yScale: 0.34 });
         for (let s = 0; s < 3; s++) {
           this.splashes.push({ x: p.x, y: p.y, vx: (Math.random() - 0.5) * 3, vy: -Math.random() * 3 - 1.5, alpha: 0.9 });
         }
@@ -3258,7 +3263,7 @@ class HeroCanvasController {
 
       if (p.y > h - 10) {
         if (Math.random() < 0.26) {
-          this.ripples.push({ x: p.x, y: h - 5, r: 1, maxR: 28 + Math.random() * 16, alpha: 0.65 });
+          this.spawnRipple(p.x, h - 5, { maxR: 80 + Math.random() * 45, alpha: 0.64, fade: 0.0055, speed: 0.46, yScale: 0.34 });
           for (let s = 0; s < 2; s++) {
             this.splashes.push({ x: p.x, y: h - 5, vx: (Math.random() - 0.5) * 2.5, vy: -Math.random() * 2.8 - 1, alpha: 0.8 });
           }
@@ -3298,8 +3303,8 @@ class HeroCanvasController {
     // 수면 파문 (Ripples)
     for (let i = this.ripples.length - 1; i >= 0; i--) {
       const r = this.ripples[i];
-      r.r += 1.4;
-      r.alpha -= 0.024;
+      r.r = Math.min(r.maxR || 999, r.r + (r.speed || 0.55));
+      r.alpha -= r.fade || 0.004;
       if (r.alpha <= 0) {
         this.ripples.splice(i, 1);
         continue;
@@ -3307,13 +3312,13 @@ class HeroCanvasController {
       ctx.strokeStyle = `rgba(210, 245, 255, ${r.alpha * 0.65})`;
       ctx.lineWidth = 1.4;
       ctx.beginPath();
-      ctx.ellipse(r.x, r.y, r.r, r.r * 0.35, 0, 0, Math.PI * 2);
+      ctx.ellipse(r.x, r.y, r.r, r.r * (r.yScale || 0.35), 0, 0, Math.PI * 2);
       ctx.stroke();
 
       if (r.r > 6) {
         ctx.strokeStyle = `rgba(170, 225, 255, ${r.alpha * 0.35})`;
         ctx.beginPath();
-        ctx.ellipse(r.x, r.y, r.r * 0.65, r.r * 0.22, 0, 0, Math.PI * 2);
+        ctx.ellipse(r.x, r.y, r.r * 0.65, r.r * (r.yScale || 0.35) * 0.63, 0, 0, Math.PI * 2);
         ctx.stroke();
       }
     }
@@ -3513,8 +3518,8 @@ class HeroCanvasController {
     // 4. 수면 동심원 리플 (잔잔한 물결 파문)
     for (let i = this.ripples.length - 1; i >= 0; i--) {
       const r = this.ripples[i];
-      r.r += 1.2;
-      r.alpha -= 0.012;
+      r.r = Math.min(r.maxR || 999, r.r + (r.speed || 0.55));
+      r.alpha -= r.fade || 0.004;
       if (r.alpha <= 0) {
         this.ripples.splice(i, 1);
         continue;
@@ -3522,7 +3527,7 @@ class HeroCanvasController {
       ctx.strokeStyle = `rgba(160, 240, 255, ${r.alpha * 0.75})`;
       ctx.lineWidth = 1.6;
       ctx.beginPath();
-      ctx.ellipse(r.x, r.y, r.r, r.r * 0.28, 0, 0, Math.PI * 2);
+      ctx.ellipse(r.x, r.y, r.r, r.r * (r.yScale || 0.28), 0, 0, Math.PI * 2);
       ctx.stroke();
 
       // 내부 은은한 보조 파문
@@ -3530,7 +3535,7 @@ class HeroCanvasController {
         ctx.strokeStyle = `rgba(200, 250, 255, ${r.alpha * 0.45})`;
         ctx.lineWidth = 0.9;
         ctx.beginPath();
-        ctx.ellipse(r.x, r.y, r.r * 0.65, r.r * 0.65 * 0.28, 0, 0, Math.PI * 2);
+        ctx.ellipse(r.x, r.y, r.r * 0.65, r.r * 0.65 * (r.yScale || 0.28), 0, 0, Math.PI * 2);
         ctx.stroke();
       }
     }
