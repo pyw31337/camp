@@ -651,8 +651,8 @@ border-top: 1px solid var(--line);
 .unique-feature-chips { display: flex; flex-wrap: wrap; gap: 5px; }
 .unique-feature-item { display: inline-flex; align-items: center; gap: 5px; min-width: 0; max-width: 100%; }
 .unique-feature-chip { display: inline-flex; align-items: center; gap: 4px; min-height: 24px; padding: 3px 8px; border-radius: 999px; background: var(--accent-tint); color: var(--accent); font-size: var(--fs-min); font-weight: 800; white-space: nowrap; }
-.unique-feature-chip.bdg-volt { --feature-volt-tint: #f1ffc6; --feature-volt-ink: #334500; background: var(--feature-volt-tint); color: var(--feature-volt-ink); border: 1px solid color-mix(in srgb, var(--volt) 55%, #8aa500); box-shadow: inset 0 0 0 1px rgba(200,255,0,.22); font-weight: 900; }
-.unique-feature-chip.bdg-volt .ic { width: 16px; height: 16px; padding: 2px; border-radius: 50%; background: var(--volt); color: var(--feature-volt-ink); }
+.unique-feature-chip.bdg-volt { background: var(--accent-tint); color: var(--accent); }
+.unique-feature-chip.bdg-volt .ic { width: 12px; height: 12px; padding: 0; border-radius: 0; background: transparent; color: currentColor; }
 .unique-feature-chip .ic { width: 12px; height: 12px; flex: none; }
 button.unique-feature-chip, button.bdg.has-volt-tip { appearance: none; margin: 0; border: 0; font: inherit; color: inherit; cursor: help; pointer-events: auto; }
 .bdgs .has-volt-tip { pointer-events: auto; position: relative; z-index: 4; }
