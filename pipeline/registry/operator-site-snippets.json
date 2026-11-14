@@ -10780,7 +10780,7 @@
    "name": "느티나무 캠핑장",
    "status": "NO_RELEVANT_TEXT",
    "url": "https://www.campblox.co.kr/home",
-   "checked_at": "2026-11-13T18:34:25.979Z",
+   "checked_at": "2026-11-14T06:13:54.732Z",
    "discovered": true,
    "pages": [
     "https://www.campblox.co.kr/home"
@@ -39609,7 +39609,7 @@
    "name": "원주두리캠핑장",
    "status": "OK",
    "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
-   "checked_at": "2026-11-13T18:34:27.584Z",
+   "checked_at": "2026-11-14T06:13:56.389Z",
    "discovered": true,
    "pages": [
     "https://xn--hu1br5hkpnoya62cvwpv8l.com/",
@@ -39922,10 +39922,10 @@
      }
     },
     {
-     "text": "29 11월 얼리 체크인/체크아웃 행사/수영장운영 변경 안내 원주두리캠핑 2024-10-20 1804",
+     "text": "29 11월 얼리 체크인/체크아웃 행사/수영장운영 변경 안내 원주두리캠핑 2024-10-20 1805",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "29 11월 얼리 체크인/체크아웃 행사/수영장운영 변경 안내 원주두리캠핑 2024-10-20 1804"
+      "text": "29 11월 얼리 체크인/체크아웃 행사/수영장운영 변경 안내 원주두리캠핑 2024-10-20 1805"
      }
     },
     {
@@ -39957,10 +39957,10 @@
      }
     },
     {
-     "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1217",
+     "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1218",
      "url": "https://xn--hu1br5hkpnoya62cvwpv8l.com/%ea%b3%b5%ec%a7%80%ec%82%ac%ed%95%ad/",
      "locator": {
-      "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1217"
+      "text": "22 [공지] 캠핏 6월 캠핑장 예약 할인 쿠폰 프로모션 혜택 안내 원주두리캠핑 2024-05-25 1218"
      }
     },
     {
@@ -110857,7 +110857,7 @@
    "name": "라플란드",
    "status": "FETCH_FAILED",
    "url": "https://oneoneone.kr/content/d6a7b05a",
-   "checked_at": "2026-11-13T18:34:26.000Z",
+   "checked_at": "2026-11-14T06:13:54.755Z",
    "error": "404"
   },
   "100126": {
@@ -176996,7 +176996,7 @@
    "name": "골든쌔들 캠핑장",
    "status": "FETCH_FAILED",
    "url": "https://www.goldensaddlecamping.kr/",
-   "checked_at": "2026-11-13T18:34:28.364Z",
+   "checked_at": "2026-11-14T06:13:56.529Z",
    "error": "403"
   },
   "101270": {
@@ -225566,15 +225566,10 @@
   },
   "102221": {
    "name": "WonderWood Glamping(원더우드 글램핑)",
-   "status": "DISCOVERED_NOT_OPERATOR",
-   "url": "https://campingfriend.co.kr/listing-camp-detail/9414",
-   "checked_at": "2026-11-13T18:34:26.002Z",
-   "discovered": true,
-   "check": {
-    "ok": false,
-    "named": true,
-    "rules": 2
-   }
+   "status": "FETCH_FAILED",
+   "url": "https://camping.hansangsoo.com/camp/102221.html",
+   "checked_at": "2026-11-14T06:13:54.757Z",
+   "error": "403"
   },
   "102222": {
    "name": "머무름 캠핑",
@@ -225963,7 +225958,7 @@
     }
    ],
    "last_attempt": {
-    "at": "2026-11-13T18:34:26.001Z",
+    "at": "2026-11-14T06:13:54.756Z",
     "status": "NO_RELEVANT_TEXT",
     "error": null
    }
@@ -263078,6 +263073,6 @@
    }
   }
  },
- "generated_at": "2026-11-13T18:34:41.020Z",
+ "generated_at": "2026-11-14T06:14:09.375Z",
  "policy": "운영자 자체 홈페이지·예약 페이지만, robots.txt 준수, 봇 이름 공개, 문장(≤140자)·원문 URL·확인 시각만 저장. 플랫폼 페이지는 수집하지 않음."
 }
