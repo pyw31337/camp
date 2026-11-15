@@ -2,17 +2,17 @@
   "day": {
     "cooking": {
       "v": "UNKNOWN",
-      "at": "2026-10-20"
+      "at": "2026-11-15"
     },
     "shade": {
       "v": "UNKNOWN",
-      "at": "2026-10-20"
+      "at": "2026-11-15"
     }
   },
   "du_src": {
     "url": "https://www.data.go.kr/data/15012890/standard.do",
-    "label": "전국도시공원정보표준데이터(서울특별시 중구청, 기준일 2025-06-09)",
-    "checked_at": "2026-10-20"
+    "label": "전국도시공원정보표준데이터(서울특별시 중구청, 기준일 2026-09-27)",
+    "checked_at": "2026-11-15"
   },
   "nearby": {
     "public": {
