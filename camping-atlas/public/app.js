@@ -1477,7 +1477,9 @@ function uniqueFeatureHtml(c) {
       const tip = feat.spec ? voltTip(feat.text, feat.spec) : "";
       const tag = feat.spec ? "button" : "span";
       const typ = feat.spec ? ' type="button"' : "";
-      const chip = `<${tag}${typ} class="unique-feature-chip${feat.volt ? " bdg-volt" : ""}${feat.spec ? " has-volt-tip" : ""}"${feat.volt ? ' data-volt="true"' : ""}${tip ? ` data-volt-spec="${esc(feat.spec)}" ${tip}` : ""}>${ic(feat.icon || "spark")}${esc(feat.text)}</${tag}>`;
+      // 전력 용량도 다른 특색 배지와 같은 공통 캡슐을 사용한다.
+      // data-volt는 UX 검사와 툴팁 식별용으로만 남기고, 별도 시각 클래스는 붙이지 않는다.
+      const chip = `<${tag}${typ} class="unique-feature-chip${feat.spec ? " has-volt-tip" : ""}"${feat.volt ? ' data-volt="true"' : ""}${tip ? ` data-volt-spec="${esc(feat.spec)}" ${tip}` : ""}>${ic(feat.icon || "spark")}${esc(feat.text)}</${tag}>`;
       return `<span class="unique-feature-item">${chip}${feat.review?.url ? `<a class="unique-feature-review" href="${esc(feat.review.url)}" target="_blank" rel="noopener" title="후기 원문 열기">${ic("file-text")}${esc(uniqueReviewSummary(feat.review.text, "horse"))}</a>` : ""}</span>`;
     }).join("")}</div>
   </div>`;

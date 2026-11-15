@@ -867,6 +867,11 @@
 - 생성기 `scripts/publish-hero-theme-audit.mjs`를 `../../?hero=…`로 수정하고 발행본 `camping-atlas/public/admin/hero-themes/index.html`을 재생성했다. 이제 `/camp/?hero=night-sky`로 열린다.
 - 검증: 생성기 실행 성공(22개), 생성 HTML에 `../../?hero=` 포함 확인.
 
+## 📌 특색 전력 배지 공통 스타일 통일 (2026-11-16, Codex)
+- `1000W 고용량` 등 전력 특색 배지가 다른 특색 칩과 달리 라임 전용 캡슐로 보이던 원인은 `bdg-volt` 시각 클래스를 특색 칩에 함께 붙였기 때문이다.
+- `data-volt`와 툴팁은 유지하고, 시각 클래스는 제거해 `unique-feature-chip` 공통 캡슐 스타일을 사용하도록 원본·발행본을 맞췄다.
+- 검증: `node --check design/renewal/app.js`, `node --check camping-atlas/public/app.js`, `git diff --check`.
+
 ## 📌 행사 포스터·비교 뱃지·네이버TV/카카오TV 재생 (2026-10-22, Codex)
 - 행사 카드 정렬을 포스터 보유 행사 우선으로 보정했다. 8149 데이터에서는 한국관광공사 포스터가 있는 괴산 행사 카드가 먼저 보이며, 포스터 없는 국가유산 행사는 정보 보존을 위해 뒤에 남는다.
 - `/log/` 공통 헤더의 비교 숫자 뱃지를 제거했다. 비교 선택 수는 비교 화면 내부에서만 표시하며 찜 숫자만 헤더에 남긴다. 관련 회귀 테스트도 새 계약으로 갱신했다.
