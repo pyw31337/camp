@@ -108,3 +108,7 @@
 
 ## 새 PC·로컬 정리
 - 백지 PC에서 시작: `docs/SETUP_NEW_PC.md`. 로컬 정리·깃 백업: `node scripts/local-maintenance.mjs report|backup|clean` (기본 미리 보기, `--apply`로 실행).
+
+## GitHub workflow handoff
+
+Before changing `.github/workflows/`, schedules, deployments, or secret names, read `WORKFLOW_HANDOFF.md` and the canonical private handoff inventory at https://github.com/pyw31337/macmini-workflow-handoff. Update both records in the same PR and never commit secret values.
