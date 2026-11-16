@@ -2644,24 +2644,27 @@ class HeroCanvasController {
         break;
 
       case "riverside":
-        // 호숫가 카약: 풍성한 48개 다층 아침 물안개 + 섬세한 36개 물빛 윤슬 스파클
-        for (let i = 0; i < 36; i++) {
-          this.particles.push({ x: Math.random() * w, y: h * 0.40 + Math.random() * (h * 0.58), size: Math.random() * 1.4 + 0.7, flareLen: Math.random() * 10 + 5, alpha: Math.random() * 0.7 + 0.25, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.045 + 0.02 });
+        // 호숫가 카약: 호수와 산 경계 세로 중앙에 넓게 펼쳐져 좌우로 살짝씩 일렁이는 아침 물안개 띠 + 섬세한 윤슬 스파클
+        for (let i = 0; i < 32; i++) {
+          this.particles.push({ x: Math.random() * w, y: h * 0.44 + Math.random() * (h * 0.54), size: Math.random() * 1.4 + 0.7, flareLen: Math.random() * 10 + 5, alpha: Math.random() * 0.7 + 0.25, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.045 + 0.02 });
         }
-        for (let i = 0; i < 48; i++) {
-          const tier = i < 20 ? 0 : i < 36 ? 1 : 2;
-          const y = tier === 0 ? h * (0.60 + Math.random() * 0.34) : tier === 1 ? h * (0.45 + Math.random() * 0.28) : h * (0.35 + Math.random() * 0.22);
-          const rx = tier === 0 ? Math.random() * 70 + 70 : tier === 1 ? Math.random() * 90 + 90 : Math.random() * 110 + 130;
-          const ry = tier === 0 ? Math.random() * 14 + 14 : tier === 1 ? Math.random() * 18 + 18 : Math.random() * 24 + 26;
+        for (let i = 0; i < 26; i++) {
+          const rx = w * (0.22 + Math.random() * 0.32);
+          const ry = h * (0.045 + Math.random() * 0.055);
+          const baseX = Math.random() * (w + rx * 2) - rx;
           this.mistParticles.push({
-            x: Math.random() * (w + rx * 2) - rx,
-            y,
+            baseX,
+            x: baseX,
+            y: h * (0.44 + Math.random() * 0.13), // 호수와 산 경계 세로 중앙(44%~57%)에 가로로 넓게 집중
             rx,
             ry,
-            vx: Math.random() * 0.18 + 0.06,
-            alpha: Math.random() * 0.14 + (tier === 0 ? 0.12 : 0.08),
+            swayAmp: Math.random() * 26 + 14,
+            swaySpeed: Math.random() * 0.008 + 0.004,
+            swayPhase: Math.random() * Math.PI * 2,
+            alpha: Math.random() * 0.16 + 0.22, // 뽀얗고 몽환적인 물안개 농도
             pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.014 + 0.006
+            pulseSpeed: Math.random() * 0.012 + 0.006,
+            col: Math.random() < 0.65 ? "rgba(242, 248, 255," : "rgba(228, 242, 252,"
           });
         }
         break;
@@ -2773,8 +2776,16 @@ class HeroCanvasController {
         break;
 
       case "zipline":
-        // 레포츠: 이미지 내 강철 짚라인 와이어를 따라 사람이 슬라이딩 활강하는 궤적 애니메이션
-        this.zipline = { t: 0, speed: 0.0034, state: "gliding", pauseTimer: 0, trail: [] };
+        // 레포츠: 이미지 내 강철 짚라인 와이어를 따라 사람이 슬라이딩 활강하는 궤적 애니메이션 (남/여/아이 랜덤 탑승자)
+        const charTypes = ["man", "woman", "child"];
+        this.zipline = {
+          t: 0,
+          speed: 0.0034,
+          state: "gliding",
+          pauseTimer: 0,
+          trail: [],
+          character: charTypes[Math.floor(Math.random() * charTypes.length)]
+        };
         break;
 
       case "golden-shine":
@@ -3512,26 +3523,53 @@ class HeroCanvasController {
     ctx.translate(ox, oy);
     ctx.rotate(angle);
 
-    const layers = [
-      { spread: spreadAngle * 0.35, a: baseAlpha * 0.40 },
-      { spread: spreadAngle * 0.65, a: baseAlpha * 0.28 },
-      { spread: spreadAngle * 1.00, a: baseAlpha * 0.18 },
-      { spread: spreadAngle * 1.45, a: baseAlpha * 0.08 }
-    ];
+    const steps = 8;
+    const dy = length / steps;
+    const maxHalfW = Math.tan(spreadAngle) * length;
 
-    for (const l of layers) {
-      const halfW = Math.tan(l.spread) * length;
-      const grad = ctx.createLinearGradient(0, 0, 0, length);
-      grad.addColorStop(0, `${colorRgb}, ${Math.min(1, l.a * 1.45)})`);
-      grad.addColorStop(0.25, `${colorRgb}, ${l.a})`);
-      grad.addColorStop(0.65, `${colorRgb}, ${l.a * 0.40})`);
-      grad.addColorStop(1, `${colorRgb}, 0)`);
-      ctx.fillStyle = grad;
+    // 1. 외곽 소프트 앰비언트 글로우 (경계를 은은하게 감싸는 페더 레이어)
+    const haloW = maxHalfW * 1.45;
+    const haloGrad = ctx.createLinearGradient(0, 0, 0, length);
+    haloGrad.addColorStop(0, `${colorRgb}, ${baseAlpha * 0.50})`);
+    haloGrad.addColorStop(0.3, `${colorRgb}, ${baseAlpha * 0.28})`);
+    haloGrad.addColorStop(0.7, `${colorRgb}, ${baseAlpha * 0.10})`);
+    haloGrad.addColorStop(1, `${colorRgb}, 0)`);
+    ctx.fillStyle = haloGrad;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(haloW, length);
+    ctx.lineTo(-haloW, length);
+    ctx.closePath();
+    ctx.fill();
 
+    // 2. 가로 횡단면 가우시안 소프트 블러 & 루미너스 코어 (사다리꼴 슬라이스로 모서리 클리핑 없는 볼류메트릭 콘)
+    for (let i = 0; i < steps; i++) {
+      const y0 = i * dy;
+      const y1 = (i + 1) * dy;
+      const t0 = i / steps;
+      const w0 = Math.max(4, Math.tan(spreadAngle) * y0);
+      const w1 = Math.max(8, Math.tan(spreadAngle) * y1);
+      const maxW = Math.max(w0, w1);
+
+      // 종단면(거리별) 감쇄
+      const segAlpha = baseAlpha * (1 - t0 * 0.68) * (t0 === 0 ? 1.4 : 1.0);
+
+      // 횡단면(가로축) 가우시안 소프트 감쇄 그라데이션 - 양 끝(-maxW, maxW)은 0으로 완벽 수렴하여 칼 같은 모서리 원천 차단
+      const hGrad = ctx.createLinearGradient(-maxW, 0, maxW, 0);
+      hGrad.addColorStop(0, `${colorRgb}, 0)`);
+      hGrad.addColorStop(0.20, `${colorRgb}, ${segAlpha * 0.35})`);
+      hGrad.addColorStop(0.38, `${colorRgb}, ${segAlpha * 0.82})`);
+      hGrad.addColorStop(0.50, `rgba(255, 255, 255, ${Math.min(1, segAlpha * 1.25)})`); // 중심 눈부신 스포트라이트 코어
+      hGrad.addColorStop(0.62, `${colorRgb}, ${segAlpha * 0.82})`);
+      hGrad.addColorStop(0.80, `${colorRgb}, ${segAlpha * 0.35})`);
+      hGrad.addColorStop(1, `${colorRgb}, 0)`);
+
+      ctx.fillStyle = hGrad;
       ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(halfW, length);
-      ctx.lineTo(-halfW, length);
+      ctx.moveTo(-w0, y0);
+      ctx.lineTo(w0, y0);
+      ctx.lineTo(w1, y1);
+      ctx.lineTo(-w1, y1);
       ctx.closePath();
       ctx.fill();
     }
@@ -3594,26 +3632,27 @@ class HeroCanvasController {
   }
 
   renderRiverside(ctx, w, h, mx, my, hasMouse) {
-    // 호숫가 카약: 수면 위로 은은하게 피어오르는 경계가 부드러운 아침 물안개 + 소프트 글로우 물빛 윤슬
+    // 호숫가 카약: 호수와 산 경계 세로 중앙에 넓게 드리워져 좌우로 살짝씩 일렁이는 아침 물안개 띠 + 섬세한 윤슬 스파클
     ctx.save();
-    ctx.globalCompositeOperation = "lighter"; // add 블렌드로 윤슬 발광 극대화
 
-    // 1. 수면 아침 물안개 (타원 비율 스케일링 방사형 그라데이션 - 인위적 경계 완전 배제)
+    // 1. 호수와 산 경계(세로 중앙 h * 0.44 ~ 0.57) 가로 물안개 띠 (source-over 모드로 뽀얗고 몽환적인 안개 형태 구현)
+    ctx.globalCompositeOperation = "source-over";
     for (const m of this.mistParticles) {
       m.pulse += m.pulseSpeed;
-      m.x += m.vx;
-      if (m.x - m.rx > w) m.x = -m.rx;
-      const alpha = Math.max(0.04, m.alpha + Math.sin(m.pulse) * 0.08);
+      // 좌우로 살짝씩 부드럽게 일렁이는 수평 파동
+      const sway = Math.sin(this.time * m.swaySpeed + m.swayPhase) * m.swayAmp;
+      const curX = m.baseX + sway;
+      const alpha = Math.max(0.06, m.alpha + Math.sin(m.pulse) * 0.05);
 
       ctx.save();
-      ctx.translate(m.x, m.y);
+      ctx.translate(curX, m.y);
       ctx.scale(1, m.ry / m.rx);
       const g = ctx.createRadialGradient(0, 0, 0, 0, 0, m.rx);
-      g.addColorStop(0, `rgba(235, 248, 255, ${alpha})`);
-      g.addColorStop(0.22, `rgba(225, 242, 252, ${alpha * 0.75})`);
-      g.addColorStop(0.50, `rgba(215, 238, 250, ${alpha * 0.38})`);
-      g.addColorStop(0.78, `rgba(205, 232, 248, ${alpha * 0.12})`);
-      g.addColorStop(1, "rgba(195, 225, 245, 0)");
+      g.addColorStop(0, `${m.col} ${alpha})`);
+      g.addColorStop(0.24, `${m.col} ${alpha * 0.82})`);
+      g.addColorStop(0.52, `${m.col} ${alpha * 0.44})`);
+      g.addColorStop(0.78, `${m.col} ${alpha * 0.15})`);
+      g.addColorStop(1, `${m.col} 0)`);
       ctx.fillStyle = g;
       ctx.beginPath();
       ctx.arc(0, 0, m.rx, 0, Math.PI * 2);
@@ -3621,7 +3660,8 @@ class HeroCanvasController {
       ctx.restore();
     }
 
-    // 2. 섬세하고 부드러운 물빛 윤슬 스파클 (소프트 글로우 코어 + 페더 플레어)
+    // 2. 섬세하고 부드러운 물빛 윤슬 스파클 (lighter 모드로 맑은 물빛 발광 극대화)
+    ctx.globalCompositeOperation = "lighter";
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
       let extraGlow = 0;
@@ -4035,41 +4075,54 @@ class HeroCanvasController {
   }
 
   renderRainbow(ctx, w, h, mx, my, hasMouse) {
-    // 수영장: 청량한 여름 햇살 물보라 속에 선명하게 쏟아지는 프리즘 볼류메트릭 광선 & 수면 무지개 아치
+    // 수영장: 청량한 여름 햇살 아래 우측으로 부드럽게 휘어지는(Curvy & Blury) 7색 프리즘 무지개 & 펄스 밝기 애니메이션
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
 
-    const ox = w * 0.20, oy = -h * 0.12;
-    const shimmer = Math.sin(this.time * 0.5) * 0.04;
+    // 밝기 변화 애니메이션 (자연스럽게 서서히 차오르고 은은해지는 호흡 펄스)
+    const breathe = Math.sin(this.time * 0.75) * 0.18 + Math.cos(this.time * 0.38) * 0.08;
+    const baseAlpha = 0.42 + breathe;
 
-    // 1. 태양에서 쏟아지는 선명한 7색 프리즘 볼류메트릭 광선 (Volumetric Prism Rays)
     const spectralColors = [
-      { angle: 0.30, col: "rgba(255, 60, 60", a: 0.35 },
-      { angle: 0.35, col: "rgba(255, 140, 30", a: 0.38 },
-      { angle: 0.40, col: "rgba(255, 230, 40", a: 0.42 },
-      { angle: 0.45, col: "rgba(50, 230, 100", a: 0.38 },
-      { angle: 0.50, col: "rgba(40, 225, 255", a: 0.40 },
-      { angle: 0.55, col: "rgba(65, 125, 255", a: 0.36 },
-      { angle: 0.60, col: "rgba(185, 75, 255", a: 0.32 }
+      { col: "rgba(255, 60, 60", a: 0.38 },
+      { col: "rgba(255, 140, 30", a: 0.42 },
+      { col: "rgba(255, 230, 40", a: 0.46 },
+      { col: "rgba(50, 230, 100", a: 0.42 },
+      { col: "rgba(40, 225, 255", a: 0.44 },
+      { col: "rgba(65, 125, 255", a: 0.40 },
+      { col: "rgba(185, 75, 255", a: 0.36 }
     ];
-    for (const s of spectralColors) {
-      this.renderVolumetricBeam(ctx, ox, oy, s.angle, h * 1.35, 0.055, s.col, s.a + shimmer);
-    }
 
-    // 2. 수면 물보라 위에 드리워지는 은은하고 선명한 무지개 아치 (Rainbow Mist Arc)
-    const cx = w * 0.50, cy = h * 0.95;
-    const baseR = Math.min(w, h) * 0.64;
-    const bandW = Math.max(5, Math.min(w, h) * 0.024);
+    // 우측 영역에서 완만하게 휘어지며 수면으로 흐르는 Curvy & Blury 무지개 스펙트럼 밴드
+    const bandW = Math.max(12, Math.min(w, h) * 0.034);
     for (let i = 0; i < spectralColors.length; i++) {
-      const r = baseR + i * bandW;
-      ctx.strokeStyle = `${spectralColors[i].col}, ${0.36 + shimmer})`;
-      ctx.lineWidth = bandW * 1.15;
+      const s = spectralColors[i];
+      const curA = Math.max(0.12, (s.a / 0.42) * baseAlpha);
+      const offset = (i - 3) * (bandW * 0.88);
+
+      const sx = w * 0.88 + offset * 0.8, sy = -h * 0.06;
+      const cx = w * 0.78 + offset * 0.9, cy = h * 0.42;
+      const ex = w * 0.52 + offset * 1.1, ey = h * 0.82;
+
+      // 1. 외곽 소프트 블러 페더 레이어 (경계가 부드럽게 스며드는 효과)
+      ctx.strokeStyle = `${s.col}, ${curA * 0.40})`;
+      ctx.lineWidth = bandW * 2.2;
+      ctx.lineCap = "round";
       ctx.beginPath();
-      ctx.arc(cx, cy, r, Math.PI * 1.10, Math.PI * 1.90);
+      ctx.moveTo(sx, sy);
+      ctx.quadraticCurveTo(cx, cy, ex, ey);
+      ctx.stroke();
+
+      // 2. 중심 루미너스 코어 밴드
+      ctx.strokeStyle = `${s.col}, ${curA * 0.85})`;
+      ctx.lineWidth = bandW * 1.1;
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.quadraticCurveTo(cx, cy, ex, ey);
       ctx.stroke();
     }
 
-    // 3. 수면 맑은 물빛 스파클 & 프리즘 물방울
+    // 2. 수면 맑은 물빛 스파클 & 프리즘 물방울
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
       const alpha = Math.max(0.1, (Math.sin(p.pulse) * 0.5 + 0.5) * p.alpha);
@@ -4201,8 +4254,9 @@ class HeroCanvasController {
     }
     ctx.stroke();
 
-    if (!this.zipline) this.zipline = { t: 0, speed: 0.0034, state: "gliding", pauseTimer: 0, trail: [] };
+    if (!this.zipline) this.zipline = { t: 0, speed: 0.0034, state: "gliding", pauseTimer: 0, trail: [], character: "man" };
     const zl = this.zipline;
+    if (!zl.character) zl.character = "man";
 
     if (zl.state === "gliding") {
       // 물리 가속: 출발 직후 서서히 시작하여 경사 급변 구간에서 최고속도 도달
@@ -4228,6 +4282,8 @@ class HeroCanvasController {
       if (zl.pauseTimer <= 0) {
         zl.t = -0.04;
         zl.state = "gliding";
+        const charTypes = ["man", "woman", "child"];
+        zl.character = charTypes[Math.floor(Math.random() * charTypes.length)];
       }
     }
 
@@ -4246,10 +4302,14 @@ class HeroCanvasController {
       ctx.stroke();
     }
 
-    // 짚라인 라이더 (물리적 진자 운동, 다리 흔들림, 바람 펄럭임 탑재)
+    // 짚라인 라이더 (대폭 확대된 크기·남/여/아이 랜덤 탑승자·밝은 아시안/백인 스킨톤·정교한 장비)
     if (zl.t >= -0.02 && zl.t <= 1.02) {
       const pos = getPos(zl.t);
-      const scale = Math.max(0.9, 1.85 - zl.t * 0.85);
+      const isChild = zl.character === "child";
+      const isWoman = zl.character === "woman";
+      const baseScale = isChild ? 2.1 : 2.7;
+      const minScale = isChild ? 1.05 : 1.35;
+      const scale = Math.max(minScale, baseScale - zl.t * (isChild ? 0.95 : 1.25));
 
       // 와이어 기울기 각도 계산
       const t1 = Math.max(0, zl.t - 0.01), t2 = Math.min(1, zl.t + 0.01);
@@ -4300,8 +4360,18 @@ class HeroCanvasController {
       const bodyTilt = 0.22 + accel * 0.07 + pendulumSway;
       ctx.rotate(bodyTilt);
 
+      // 캐릭터별 스타일 설정 (남: 코발트블루, 여: 민트&포니테일, 아이: 오렌지&옐로우)
+      const helmetCol = isChild ? "#eab308" : isWoman ? "#f43f5e" : "#1d4ed8";
+      const helmetVisor = isChild ? "#ca8a04" : isWoman ? "#e11d48" : "#1e40af";
+      const ribbonCol = isChild ? "#f59e0b" : isWoman ? "#fda4af" : "#84cc16";
+      const jacketCol = isChild ? "#f97316" : isWoman ? "#06b6d4" : "#2563eb";
+      const harnessCol = isChild ? "#fde047" : isWoman ? "#84cc16" : "#ea580c";
+      const pantsCol = isChild ? "#3b82f6" : isWoman ? "#0f172a" : "#1e293b";
+      const shoesCol = isChild ? "#eab308" : isWoman ? "#f43f5e" : "#ea580c";
+      const skinTone = isChild ? "#ffedd5" : isWoman ? "#ffedd5" : "#fed7aa"; // 밝고 맑은 피부톤
+
       // 펄럭이는 헬멧 윈드 리본 (바람 반동)
-      ctx.strokeStyle = "#ea580c";
+      ctx.strokeStyle = ribbonCol;
       ctx.lineWidth = 1.3;
       ctx.beginPath();
       const r1 = Math.sin(this.time * 22) * 3.5;
@@ -4310,34 +4380,51 @@ class HeroCanvasController {
       ctx.moveTo(0, 18); ctx.quadraticCurveTo(-7, 19 + r2, -15, 20 + r2 * 1.5);
       ctx.stroke();
 
-      // 안전 헬멧 (오렌지 컬러 & 바이저 & 턱끈)
+      // 여자 라이더일 때 바람에 흩날리는 긴 포니테일 머리
+      if (isWoman) {
+        ctx.strokeStyle = "#78350f";
+        ctx.lineWidth = 3.2;
+        ctx.beginPath();
+        const hr1 = Math.sin(this.time * 16) * 3.5;
+        ctx.moveTo(-1, 17);
+        ctx.quadraticCurveTo(-8, 16 + hr1, -18, 19 + hr1 * 1.6);
+        ctx.stroke();
+      }
+
+      // 안전 헬멧
       ctx.beginPath();
-      ctx.arc(2, 16, 6, 0, Math.PI * 2);
-      ctx.fillStyle = "#f97316";
+      ctx.arc(2, 16, isChild ? 5.4 : 6, 0, Math.PI * 2);
+      ctx.fillStyle = helmetCol;
       ctx.fill();
       // 헬멧 바이저 챙
-      ctx.fillStyle = "#ea580c";
-      ctx.fillRect(4, 15, 5, 2.5);
+      ctx.fillStyle = helmetVisor;
+      ctx.fillRect(4, 15, isChild ? 4.5 : 5, 2.5);
       // 고글 광채
       ctx.fillStyle = "#ffffff";
       ctx.fillRect(4, 17, 3, 1.5);
 
-      // 상체 몸통 (윈드재킷 + 세이프티 하네스)
-      ctx.fillStyle = "#0f172a";
+      // 밝은 피부톤의 턱과 목 (인도인 느낌 배제한 화사한 스킨)
+      ctx.fillStyle = skinTone;
       ctx.beginPath();
-      ctx.roundRect(-4, 21, 10, 16, 2.5);
+      ctx.arc(2, 20.5, isChild ? 2.8 : 3.2, 0, Math.PI);
       ctx.fill();
 
-      // 하네스 세이프티 스트랩 (네온 라임 & 오렌지)
-      ctx.strokeStyle = "#22c55e";
+      // 상체 몸통 (윈드재킷 + 세이프티 하네스)
+      ctx.fillStyle = jacketCol;
+      ctx.beginPath();
+      ctx.roundRect(-4, 21, isChild ? 8.5 : 10, isChild ? 13 : 16, 2.5);
+      ctx.fill();
+
+      // 하네스 세이프티 스트랩
+      ctx.strokeStyle = harnessCol;
       ctx.lineWidth = 1.5;
       ctx.beginPath();
-      ctx.moveTo(-3, 22); ctx.lineTo(5, 34);
-      ctx.moveTo(5, 22); ctx.lineTo(-3, 34);
+      ctx.moveTo(-3, 22); ctx.lineTo(isChild ? 4 : 5, isChild ? 31 : 34);
+      ctx.moveTo(isChild ? 4 : 5, 22); ctx.lineTo(-3, isChild ? 31 : 34);
       ctx.stroke();
 
       // 양팔 (핸들 바를 단단히 쥐고 있는 팔)
-      ctx.strokeStyle = "#1e293b";
+      ctx.strokeStyle = jacketCol;
       ctx.lineWidth = 3.2;
       ctx.lineCap = "round";
       ctx.beginPath();
@@ -4346,29 +4433,31 @@ class HeroCanvasController {
       ctx.stroke();
 
       // 양다리 (물리적 다리 흔들림 & 발차기 애니메이션)
-      const legSway1 = Math.sin(this.time * 6.2) * 0.16;
-      const legSway2 = Math.sin(this.time * 6.2 + 1.3) * 0.14;
+      const swaySpeedMul = isChild ? 1.35 : 1.0;
+      const legSway1 = Math.sin(this.time * (6.2 * swaySpeedMul)) * (isChild ? 0.24 : 0.16);
+      const legSway2 = Math.sin(this.time * (6.2 * swaySpeedMul) + 1.3) * (isChild ? 0.22 : 0.14);
 
-      ctx.strokeStyle = "#0f172a";
-      ctx.lineWidth = 3.5;
+      ctx.strokeStyle = pantsCol;
+      ctx.lineWidth = isChild ? 3.0 : 3.5;
       ctx.beginPath();
       // 앞다리
-      const kx1 = 12 + Math.cos(legSway1) * 2, ky1 = 41 + Math.sin(legSway1) * 3;
-      const fx1 = kx1 + 9 + Math.cos(legSway1) * 1.5, fy1 = ky1 - 2 + Math.sin(legSway1) * 2;
-      ctx.moveTo(1, 35);
+      const hipY = isChild ? 32 : 35;
+      const kx1 = 12 + Math.cos(legSway1) * 2, ky1 = (isChild ? 37 : 41) + Math.sin(legSway1) * 3;
+      const fx1 = kx1 + (isChild ? 7 : 9) + Math.cos(legSway1) * 1.5, fy1 = ky1 - 2 + Math.sin(legSway1) * 2;
+      ctx.moveTo(1, hipY);
       ctx.lineTo(kx1, ky1);
       ctx.lineTo(fx1, fy1);
 
       // 뒷다리
-      const kx2 = 9 + Math.cos(legSway2) * 2, ky2 = 45 + Math.sin(legSway2) * 3;
-      const fx2 = kx2 + 8 + Math.cos(legSway2) * 1.5, fy2 = ky2 + 1 + Math.sin(legSway2) * 2;
-      ctx.moveTo(-1, 35);
+      const kx2 = 9 + Math.cos(legSway2) * 2, ky2 = (isChild ? 40 : 45) + Math.sin(legSway2) * 3;
+      const fx2 = kx2 + (isChild ? 6 : 8) + Math.cos(legSway2) * 1.5, fy2 = ky2 + 1 + Math.sin(legSway2) * 2;
+      ctx.moveTo(-1, hipY);
       ctx.lineTo(kx2, ky2);
       ctx.lineTo(fx2, fy2);
       ctx.stroke();
 
       // 신발 (스포티 아웃솔)
-      ctx.fillStyle = "#ea580c";
+      ctx.fillStyle = shoesCol;
       ctx.fillRect(fx1 - 1, fy1 - 2, 4, 3);
       ctx.fillRect(fx2 - 1, fy2 - 2, 4, 3);
 
@@ -4379,29 +4468,31 @@ class HeroCanvasController {
   }
 
   renderGoldenShine(ctx, w, h, mx, my, hasMouse) {
-    // 농촌체험: 하늘에서 부드럽게 쏟아져 내리는 황금빛 볼류메트릭 라이트(Volumetric Light) & 부유 스펙 먼지
+    // 농촌체험: 하늘에서 부드럽게 쏟아져 내리는 스포트라이트 볼류메트릭 라이트(Volumetric Spotlight) & 부유 스펙 먼지
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
 
-    const ox = w * 0.12, oy = -h * 0.10;
-    const beamPhase = Math.sin(this.time * 0.35) * 0.04;
+    const ox = w * 0.14, oy = -h * 0.08;
+    const beamPhase = Math.sin(this.time * 0.35) * 0.045;
 
-    // 1. 태양 볼류메트릭 아우라
-    const sunGlow = ctx.createRadialGradient(ox, oy, 10, ox, oy, Math.min(w, h) * 0.55);
-    sunGlow.addColorStop(0, "rgba(255, 245, 195, 0.32)");
-    sunGlow.addColorStop(0.35, "rgba(255, 215, 125, 0.14)");
+    // 1. 태양 볼류메트릭 아우라 (눈부신 황금빛 발광)
+    const sunR = Math.min(w, h) * 0.58;
+    const sunGlow = ctx.createRadialGradient(ox, oy, 15, ox, oy, sunR);
+    sunGlow.addColorStop(0, "rgba(255, 250, 215, 0.42)");
+    sunGlow.addColorStop(0.30, "rgba(255, 225, 135, 0.22)");
+    sunGlow.addColorStop(0.65, "rgba(255, 195, 80, 0.08)");
     sunGlow.addColorStop(1, "rgba(255, 180, 70, 0)");
     ctx.fillStyle = sunGlow;
     ctx.beginPath();
-    ctx.arc(ox, oy, Math.min(w, h) * 0.55, 0, Math.PI * 2);
+    ctx.arc(ox, oy, sunR, 0, Math.PI * 2);
     ctx.fill();
 
-    // 2. 5줄기 볼류메트릭 틴들 광선
-    const angles = [0.26, 0.36, 0.46, 0.56, 0.66];
+    // 2. 5줄기 볼류메트릭 스포트라이트 광선 (경계가 부드럽고 루미너스한 빛 기둥 형체)
+    const angles = [0.24, 0.35, 0.46, 0.57, 0.68];
     for (let b = 0; b < 5; b++) {
-      const alpha = 0.22 + beamPhase + (b % 2) * 0.04;
-      const col = b % 2 === 0 ? "rgba(255, 235, 145" : "rgba(255, 210, 95";
-      this.renderVolumetricBeam(ctx, ox, oy, angles[b], h * 1.30, 0.078, col, alpha);
+      const alpha = 0.28 + beamPhase + (b % 2) * 0.05;
+      const col = b % 2 === 0 ? "rgba(255, 240, 155" : "rgba(255, 215, 105";
+      this.renderVolumetricBeam(ctx, ox, oy, angles[b], h * 1.35, 0.096, col, alpha);
     }
 
     // 3. 부유 먼지 입자 (광선 안을 지나갈 때 발광 증폭)
