@@ -7872,7 +7872,7 @@ function mediaHubHtml(d, c) {
     return "";
   };
   const seenVid = new Set();
-  const embedList = (key) => (d?.videos ?? []).filter((x) => snsOk(x) && x.url && !x.yt && videoEmbedUrl(x, key) && !seenVid.has(x.url) && seenVid.add(x.url))
+  const embedList = (key) => (d?.videos ?? []).filter((x) => snsOk(x) && x.url && !x.yt && (key === "naver" ? /tv\.naver\.com|naver\.com|clip\.naver\.com/i.test(x.url) : true) && !seenVid.has(x.url) && seenVid.add(x.url))
     .sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
   const naverList = embedList("naver");
 
@@ -7917,7 +7917,7 @@ function mediaHubHtml(d, c) {
       if (embedUrl) {
         return `<article class="vid-wrap"><button type="button" class="vid" data-inline-video="${esc(embedUrl)}">${inner}</button>${srcTip(fact, `${platformLabel} 영상 ${i + 1}`)}</article>`;
       }
-      return "";
+      return `<article class="vid-wrap"><a class="vid" href="${esc(x.url)}" target="_blank" rel="noopener">${inner}</a>${srcTip(fact, `${platformLabel} 영상 ${i + 1}`)}</article>`;
     };
     const shorts = items.filter(isShort), longs = items.filter((x) => !isShort(x));
     const shortsUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(`${name} #shorts`)}`;

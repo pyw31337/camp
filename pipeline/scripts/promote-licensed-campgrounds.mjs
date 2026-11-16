@@ -120,6 +120,7 @@ for (const r of toPromote) {
     iq: 50,
     win: 1,
     source_type: "LOCALDATA_LICENSED",
+    src_url: "https://www.localdata.go.kr",
     txt: `${r.name} ${sido} ${sigungu} ${addr} ${kind} 인허가등록야영장`
   };
 

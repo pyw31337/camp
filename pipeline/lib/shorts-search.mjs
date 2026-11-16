@@ -99,21 +99,30 @@ export function videoQueries(camp) {
   if (!name) return [];
   return [{ q: name, page: 1 }, { q: name, page: 2, ifFull: true }, { q: `${name} 쇼츠`, page: 1 }];
 }
-/** 카카오 vclip 문서 → { shorts, videos } (YouTube이고 이 캠핑장을 가리키는 것만, 같은 id는 한 번) */
+/** 카카오 vclip 문서 → { shorts, videos } (기본은 YouTube 중심, includeAll: true 시 네이버·카카오 등 전체 영상 포함) */
 export function videosFromVclip(camp, docs, opt = {}) {
   const shorts = [], videos = [], seen = new Set(opt.exclude ?? []);
+  const includeAll = Boolean(opt.includeAllPlatforms);
   for (const d of docs ?? []) {
     const v = normalizeVclip(d);
-    if (!v?.yt || seen.has(v.yt)) continue;
+    if (!v?.url) continue;
+    if (!includeAll && !v?.yt) continue;
+    const vidKey = v.yt ? `yt:${v.yt}` : v.url;
+    if (seen.has(vidKey) || (v.yt && seen.has(v.yt)) || seen.has(v.url)) continue;
     if (!videoMatch(camp, d?.title, { ...opt, author: d?.author })) continue;
-    seen.add(v.yt);
+    seen.add(vidKey);
+    if (v.yt) seen.add(v.yt);
+    seen.add(v.url);
     if (isShortVideo(v)) shorts.push({ ...v, kind: "short", via: "daum_vclip" });
     else videos.push({ ...v, kind: "video", via: "daum_vclip" });
   }
   return { shorts: shorts.slice(0, VIDEO_CAPS.shorts), videos: videos.slice(0, VIDEO_CAPS.videos) };
 }
 /** 캐시된 영상(v2 일반 영상)을 판정으로 다시 거른다(재검색 없이). */
-export const refilterVideos = (camp, videos, opt = {}) => (videos ?? []).filter((s) => !(opt.exclude ?? []).includes(s?.yt) && videoMatch(camp, s?.title, { ...opt, author: s?.author }));
+export const refilterVideos = (camp, videos, opt = {}) => (videos ?? []).filter((s) => {
+  const k = s?.yt || s?.url;
+  return !(opt.exclude ?? []).includes(k) && !(opt.exclude ?? []).includes(s?.yt) && !(opt.exclude ?? []).includes(s?.url) && videoMatch(camp, s?.title, { ...opt, author: s?.author });
+});
 /** 캐시 기록 → 화면에 덧붙일 영상(숏츠 먼저, 그다음 일반 영상). v1 숏츠는 엄격 판정, v2는 영상 판정. */
 export function recordVideos(camp, r, opt = {}) {
   if (!r) return [];
@@ -122,9 +131,12 @@ export function recordVideos(camp, r, opt = {}) {
 }
 
 /** 캐시된 숏츠를 엄격 판정으로 다시 거른다(재검색 없이). */
-export const refilterShorts = (camp, shorts, opt = {}) => (shorts ?? []).filter((s) => !(opt.exclude ?? []).includes(s?.yt) && shortsMatch(camp, s?.title, opt));
+export const refilterShorts = (camp, shorts, opt = {}) => (shorts ?? []).filter((s) => {
+  const k = s?.yt || s?.url;
+  return !(opt.exclude ?? []).includes(k) && !(opt.exclude ?? []).includes(s?.yt) && !(opt.exclude ?? []).includes(s?.url) && shortsMatch(camp, s?.title, opt);
+});
 /** registry/shorts-exclude.json → { id: [yt…] } */
-export const excludeMap = (j) => Object.fromEntries(Object.entries(j ?? {}).filter(([k]) => !k.startsWith("_")).map(([k, v]) => [k, (v ?? []).map((x) => x?.yt ?? x)]));
+export const excludeMap = (j) => Object.fromEntries(Object.entries(j ?? {}).filter(([k]) => !k.startsWith("_")).map(([k, v]) => [k, (v ?? []).map((x) => x?.yt ?? x?.url ?? x)]));
 
 const ctxOf = (camp, others = []) => ({ tokens: distinctiveTokens(camp?.name, camp?.address?.sigungu), stem: regionStem(camp?.address?.sigungu), others });
 
@@ -155,22 +167,37 @@ export function shortsFromYoutube(camp, items, durById = {}, { others = [], dup 
     if (!(dur > 0 && dur <= SHORTS_MAX_SEC)) continue;
     if (!isRelevant({ title: sn.title, contents: sn.description, src: sn.channelTitle }, ctx) || !shortsMatch(camp, sn.title, { dup, others })) continue;
     out.push({
-      title: stripHtml(sn.title).slice(0, 120), url: `https://www.youtube.com/shorts/${id}`, thumb: sn.thumbnails?.high?.url ?? sn.thumbnails?.medium?.url ?? null,
-      dur, author: stripHtml(sn.channelTitle) || null, date: String(sn.publishedAt ?? "").slice(0, 10) || null, yt: id, kind: "short", via: "youtube_api",
+      title: stripHtml(sn.title).slice(0, 120),
+      url: `https://www.youtube.com/shorts/${id}`,
+      thumb: sn.thumbnails?.high?.url ?? sn.thumbnails?.medium?.url ?? null,
+      dur,
+      author: stripHtml(sn.channelTitle) || null,
+      date: String(sn.publishedAt ?? "").slice(0, 10) || null,
+      yt: id,
+      kind: "short",
+      via: "youtube_api",
     });
   }
   return out;
 }
 
-/** 채우기만(병합 정책 ①): 이미 있는 영상(같은 YouTube id·URL)은 건드리지 않고, 없는 숏츠만 뒤에 붙인다. */
+/** 채우기만(병합 정책 ①): 이미 있는 영상(같은 YouTube id·URL)은 건드리지 않고, 없는 숏츠/영상을 뒤에 붙인다. */
 export function fillShorts(videos = [], shorts = [], max = VIDEO_CAPS.shorts + VIDEO_CAPS.videos) {
   const have = new Set();
-  for (const v of videos ?? []) { const id = v?.yt || youtubeId(v?.url); if (id) have.add(id); if (v?.url) have.add(v.url); }
+  for (const v of videos ?? []) {
+    const id = v?.yt || youtubeId(v?.url);
+    if (id) have.add(id);
+    if (v?.url) have.add(v.url);
+  }
   const add = [];
   for (const s of shorts ?? []) {
     if (add.length >= max) break;
-    if (!s?.yt || have.has(s.yt) || have.has(s.url)) continue;
-    have.add(s.yt); add.push(s);
+    const key = s?.yt || s?.url;
+    if (!key) continue;
+    if ((s.yt && have.has(s.yt)) || (s.url && have.has(s.url)) || have.has(key)) continue;
+    if (s.yt) have.add(s.yt);
+    if (s.url) have.add(s.url);
+    add.push(s);
   }
   return { videos: [...(videos ?? []), ...add], added: add };
 }

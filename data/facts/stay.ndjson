@@ -9026,12 +9026,11 @@
 {"cid":"8008","attr":"INNER_AMENITY","value":"INTERNET","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"}
 {"cid":"8008","attr":"INNER_AMENITY","value":"PRIVATE_TOILET","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"}
 {"cid":"8008","attr":"INNER_AMENITY","value":"TV","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실"}
-{"cid":"8008","attr":"SITE_TOTAL","value":2227,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"8008","attr":"SITE_TOTAL","value":16,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8008","attr":"SITE_TYPE","value":"AUTO","grade":"CONFIRMED","src":"gocamping","count":2211}
 {"cid":"8008","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":16}
 {"cid":"8008","attr":"SITE_TYPE","value":"RV","grade":"CONFIRMED","src":"gocamping","quote":"트레일러 입장 가능 · 개인 카라반 입장 가능"}
 {"cid":"8008","attr":"SITE_TYPE","value":"CARAVAN","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/h_yemani/224281121910","at":"2026-05-10","quote":"11:00 지리산호수공원오토캠핑장은 구례치즈랜드 옆에 위치한 곳으로 글램핑과 캠핑,카라반 모두가 구비되어있는 매우 큰 캠핑장인데요!... 언젠가 캠핑할수있는 날"}
-{"cid":"8008","attr":"STAY_AUTO_SITES","value":2211,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8008","attr":"STAY_GLAMPING_SITES","value":16,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8012","attr":"SITE_TOTAL","value":41,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"8012","attr":"SITE_TYPE","value":"AUTO","grade":"OPERATOR","src":"operator_homepage","url":"https://dc.hwasun.go.kr/index.do?S=S01","at":"2026-10-15T23:27:55.122Z","quote":"화순고인돌 오토캠핑장"}
@@ -22470,11 +22469,10 @@
 {"cid":"102126","attr":"INNER_AMENITY","value":"FRIDGE","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"냉장고,난방기구,취사도구,내부화장실"}
 {"cid":"102126","attr":"INNER_AMENITY","value":"HEATER","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"냉장고,난방기구,취사도구,내부화장실"}
 {"cid":"102126","attr":"INNER_AMENITY","value":"PRIVATE_TOILET","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"냉장고,난방기구,취사도구,내부화장실"}
-{"cid":"102126","attr":"SITE_TOTAL","value":1292,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"102126","attr":"SITE_TOTAL","value":9,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102126","attr":"SITE_TYPE","value":"GLAMPING","grade":"CONFIRMED","src":"gocamping","count":9}
 {"cid":"102126","attr":"SITE_TYPE","value":"PITCH","grade":"CONFIRMED","src":"gocamping","count":1283}
 {"cid":"102126","attr":"SITE_TYPE","value":"HOUSE","grade":"MENTION","src":"blog_mention","url":"https://blog.naver.com/susie9501/224453813325","at":"2026-10-26","text":"독채","quote":"com 천안 아산 바베큐장 추천 스테이그린 독채 캐빈 아이와 갈만한곳 천안 아산 바베큐장 추천 스테이그린 관광농원 바베"}
-{"cid":"102126","attr":"STAY_GENERAL_SITES","value":1283,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102126","attr":"STAY_GLAMPING_SITES","value":9,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102127","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"GLAMPING","text":"침대,에어컨,냉장고,유무선인터넷,난방기구,내부화장실,내부샤워실"}
 {"cid":"102127","attr":"INNER_AMENITY","value":"AIRCON","grade":"CONFIRMED","src":"gocamping","label":"CARAVAN","text":"침대,TV,에어컨,냉장고,유무선인터넷,난방기구,내부화장실,내부샤워실"}
