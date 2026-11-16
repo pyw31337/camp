@@ -1,5 +1,32 @@
 # 인수인계
 
+## 📌 실사 수증기(Steam Puff) 스프라이트 텍스처·1시-7시 부드러운 골든샤인 광선·무지개 두께 2배 확대 (2026-11-16, Antigravity)
+
+- **배경 및 요청 사항**:
+  1. `uq-pool` (수영장): 무지개 아치가 얇아 시인성이 부족했던 점을 개선하여, 두께를 2배 이상 두껍게(88px~0.24) 확대하여 풍성하고 뚜렷한 연속 스펙트럼 광원 아치 구현.
+  2. `uq-farm` (농촌체험 볼륨 광선):
+     - 광선 각도를 우측 상공 1시 방향(`ox = w * 0.85, oy = -h * 0.05`)에서 좌하단 7시 방향(`angles = [0.38, 0.45, 0.52, 0.59, 0.66]`)으로 쏟아지도록 변경.
+     - 다각형/사다리꼴 모서리가 남지 않도록 경계가 완전히 안개처럼 흐려지는 가우시안 횡단면 소프트 빔 렌더러(`renderSoftVolumetricBeam`) 구축.
+     - 눈부시게 타오르던 광선 강도를 대폭 완화(알파 `0.16`, 태양 아우라 `0.24`)하여 아늑하고 은은한 골든샤인 광선으로 개선.
+  3. `riverside` (호숫가 카약 물안개) 및 수증기 테마:
+     - 캔버스 수학 도형(8각형)의 인위적 회전 느낌을 완전히 제거하고, 제공해주신 512×512 고해상도 실사 수증기 텍스처(`steam-puff.png`)를 기반으로 개편.
+     - 원경·중경·근경 3단계 22개 다층 퍼프가 각기 다른 크기(140~280px)와 불투명도(0.12~0.28)로 천천히 회전하고 좌우로 일렁이며 호수와 산 경계를 가로지르는 극강의 포토리얼 물안개 시뮬레이션 구현.
+     - `HeroCanvasController` 공용 스프라이트 프리로드 시스템을 구축하여, 향후 스파(`uq-spa`), 온천, 온수풀 등 수증기 파티클에서도 즉시 재사용할 수 있도록 `renderSteam`까지 연동 완료.
+- **주요 구현 내역**:
+  - `design/renewal/images/hero/steam-puff.png` 및 `camping-atlas/public/images/hero/steam-puff.png`:
+    - 512×512 무손실 최적화 PNG 스프라이트 배치 (141KB).
+  - `design/renewal/app.js` 및 `camping-atlas/public/app.js`:
+    - `HeroCanvasController` 생성자: `this.steamPuffImg` 사전 로드 및 `this.steamPuffLoaded` 상태 관리.
+    - `initParticlesForTheme("riverside")`: 3단계 깊이(원경/중경/근경) 22개 다층 수증기 김 퍼프 시스템 초기화.
+    - `renderRiverside`: `ctx.drawImage(this.steamPuffImg, ...)` 기반 다층 회전/좌우 일렁임 렌더러 탑재 (이미지 로딩 전 방사형 그라데이션 폴백 지원).
+    - `renderSteam`: 스파/온천 테마의 상승 수증기 파티클에도 `this.steamPuffImg` 실사 텍스처 연동.
+    - `renderRainbow`: `archW`를 `Math.max(90, Math.min(w, h) * 0.24)`로 대폭 확대.
+    - `renderSoftVolumetricBeam` & `renderGoldenShine`: 1시→7시 각도, 소프트 페더링 가우시안 블러, 부드러운 밝기 적용.
+- **검증 결과**:
+  - `node --test pipeline/test/hero-theme-guard.test.mjs`: 3/3 통과.
+  - `node camping-atlas/scripts/perf-budget.mjs`: `app.js 689KB · style.css 281KB · OK perf budget` 통과.
+  - `node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public` 발행본 동기화 완료.
+
 ## 📌 광원 무지개 300°~135°·짚라인 3인 3색 캐릭터(남/여/아이 완전 차별화)·우측 대형 볼륨광선·터뷸런트 수증기 김 덩어리 반영 (2026-11-16, Antigravity)
 
 - **배경 및 요청 사항**:
