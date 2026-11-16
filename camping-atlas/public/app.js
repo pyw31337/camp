@@ -2469,6 +2469,12 @@ class HeroCanvasController {
     this.currentThemeId = "night-sky";
     this.time = 0;
 
+    // 수증기·물안개 실사 텍스처 스프라이트 프리로드
+    this.steamPuffImg = new Image();
+    this.steamPuffImg.src = `${APP_BASE}images/hero/steam-puff.png`;
+    this.steamPuffLoaded = false;
+    this.steamPuffImg.onload = () => { this.steamPuffLoaded = true; };
+
     this.onResize = this.resize.bind(this);
     this.onPointerMove = this.handlePointerMove.bind(this);
     this.onPointerDown = this.handlePointerDown.bind(this);
@@ -2644,7 +2650,7 @@ class HeroCanvasController {
         break;
 
       case "riverside":
-        // 호숫가 카약: 호수와 산 경계 세로 중앙에 피어오르는 노이지·터뷸런트 수증기 김 덩어리들 + 섬세한 윤슬 스파클
+        // 호숫가 카약: 산과 호수 경계 세로 중앙에 은은히 피어오르는 다층 수증기 김(Steam Puff) + 섬세한 윤슬 스파클
         for (let i = 0; i < 30; i++) {
           this.particles.push({
             x: Math.random() * w,
@@ -2656,36 +2662,27 @@ class HeroCanvasController {
             pulseSpeed: Math.random() * 0.045 + 0.02
           });
         }
-        // 14개 터뷸런트 수증기 김 덩어리 (Clumps) - 각각 7개의 노이지 서브 퍼프 보유
-        for (let c = 0; c < 14; c++) {
-          const clumpScale = Math.random() * 0.45 + 0.85;
-          const puffs = [];
-          for (let p = 0; p < 7; p++) {
-            puffs.push({
-              ox: (Math.random() - 0.5) * 90 * clumpScale,
-              oy: (Math.random() - 0.5) * 28 * clumpScale,
-              r: (Math.random() * 26 + 24) * clumpScale,
-              spin: (Math.random() - 0.5) * 0.018,
-              angle: Math.random() * Math.PI * 2,
-              orbitR: Math.random() * 30 * clumpScale,
-              orbitSpeed: (Math.random() - 0.5) * 0.022,
-              noiseSeed: Math.random() * 100,
-              alphaMul: Math.random() * 0.35 + 0.75
-            });
-          }
+        // 22개 다층 실사 수증기 김 텍스처 퍼프 (원경·중경·근경 다층 레이어 구성)
+        const mistCount = 22;
+        for (let i = 0; i < mistCount; i++) {
+          const layer = i % 3; // 0: 원경 베이스, 1: 중경 호숫가, 2: 근경 가벼운 김
+          const scaleBase = layer === 0 ? 0.38 : layer === 1 ? 0.32 : 0.24;
+          const pw = Math.max(140, Math.min(w, h) * (scaleBase + Math.random() * 0.12));
+          const ph = pw * (Math.random() * 0.25 + 0.85);
           this.mistParticles.push({
-            baseX: (w / 14) * (c + 0.5) + (Math.random() - 0.5) * (w * 0.08),
-            baseY: h * (0.44 + Math.random() * 0.12),
-            clumpScale,
-            swayAmp: Math.random() * 32 + 18,
-            swaySpeed: Math.random() * 0.009 + 0.005,
+            baseX: (w / mistCount) * (i + 0.5) + (Math.random() - 0.5) * (w * 0.12),
+            baseY: h * (0.44 + Math.random() * 0.13),
+            w: pw,
+            h: ph,
+            rot: Math.random() * Math.PI * 2,
+            rotSpeed: (Math.random() - 0.5) * 0.005,
+            swayAmp: Math.random() * 26 + 16,
+            swaySpeed: Math.random() * 0.007 + 0.003,
             swayPhase: Math.random() * Math.PI * 2,
-            driftVx: (Math.random() - 0.5) * 0.10,
-            puffs,
-            alpha: Math.random() * 0.18 + 0.28,
+            driftVx: (Math.random() - 0.5) * 0.08,
+            alpha: layer === 0 ? (Math.random() * 0.08 + 0.16) : layer === 1 ? (Math.random() * 0.10 + 0.20) : (Math.random() * 0.08 + 0.14),
             pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.015 + 0.008,
-            col: c % 3 === 0 ? "rgba(250, 252, 255," : c % 3 === 1 ? "rgba(236, 246, 255," : "rgba(226, 240, 252,"
+            pulseSpeed: Math.random() * 0.012 + 0.006
           });
         }
         break;
@@ -2873,14 +2870,25 @@ class HeroCanvasController {
     }
     ctx.restore();
     const steamParticles = this.steamParticles.length ? this.steamParticles : this.particles;
+    const puffReady = this.steamPuffLoaded || (this.steamPuffImg && this.steamPuffImg.complete && this.steamPuffImg.naturalWidth > 0);
     for (let i = 0; i < steamParticles.length; i++) {
       const p = steamParticles[i];
       p.sway += 0.012; p.y += p.vy; p.x += p.vx + Math.sin(p.sway) * 0.3; p.r += 0.14; p.life -= 0.0020;
       if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 140) { p.x += (dx / (d || 1)) * 1.4; p.y += (dy / (d || 1)) * 0.7; } }
       if (p.life <= 0 || p.y + p.r < 0) { steamParticles[i] = this.makeSteam(w, h); continue; }
-      const a = Math.min(1, p.life * 1.5) * 0.28, g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
-      g.addColorStop(0, `rgba(255, 255, 255, ${a})`); g.addColorStop(0.5, `rgba(240, 245, 255, ${a * 0.45})`); g.addColorStop(1, "rgba(255, 255, 255, 0)");
-      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+      const a = Math.min(1, p.life * 1.5) * 0.28;
+      if (puffReady) {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.sway);
+        ctx.globalAlpha = a * 0.85;
+        ctx.drawImage(this.steamPuffImg, -p.r, -p.r, p.r * 2, p.r * 2);
+        ctx.restore();
+      } else {
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+        g.addColorStop(0, `rgba(255, 255, 255, ${a})`); g.addColorStop(0.5, `rgba(240, 245, 255, ${a * 0.45})`); g.addColorStop(1, "rgba(255, 255, 255, 0)");
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+      }
     }
   }
   makeBubble(w, h, initial = false) {
@@ -3653,47 +3661,43 @@ class HeroCanvasController {
   }
 
   renderRiverside(ctx, w, h, mx, my, hasMouse) {
-    // 호숫가 카약: 호수와 산 경계에 피어오르는 노이지·터뷸런트 수증기 김 덩어리들 + 섬세한 윤슬 스파클
+    // 호숫가 카약: 호수와 산 경계 세로 중앙에 은은히 피어오르는 다층 수증기 김 텍스처(Steam Puff) 애니메이션 + 섬세한 윤슬 스파클
     ctx.save();
 
-    // 1. 호수와 산 경계 세로 중앙(h * 0.44 ~ 0.57) 터뷸런트 수증기 김 덩어리 (Clumps & Wispy Puffs)
+    // 1. 호수와 산 경계(h * 0.44 ~ 0.58) 실사 수증기 김 텍스처 레이어 (여러 겹 회전 & 좌우 일렁임)
     ctx.globalCompositeOperation = "source-over";
+    const puffReady = this.steamPuffLoaded || (this.steamPuffImg && this.steamPuffImg.complete && this.steamPuffImg.naturalWidth > 0);
+
     for (const m of this.mistParticles) {
       m.pulse += m.pulseSpeed;
+      m.rot += m.rotSpeed;
+      m.baseX += m.driftVx;
+
+      // 화면 좌우 완만한 순환
+      if (m.baseX < -m.w * 0.6) m.baseX = w + m.w * 0.6;
+      else if (m.baseX > w + m.w * 0.6) m.baseX = -m.w * 0.6;
+
       const sway = Math.sin(this.time * m.swaySpeed + m.swayPhase) * m.swayAmp;
       const curX = m.baseX + sway;
-      const clumpAlpha = Math.max(0.08, m.alpha + Math.sin(m.pulse) * 0.06);
+      const curY = m.baseY + Math.cos(this.time * (m.swaySpeed * 0.7) + m.swayPhase) * (m.swayAmp * 0.16);
+      const alpha = Math.max(0.04, m.alpha + Math.sin(m.pulse) * 0.05);
 
       ctx.save();
-      ctx.translate(curX, m.baseY);
+      ctx.translate(curX, curY);
+      ctx.rotate(m.rot);
+      ctx.globalAlpha = alpha;
 
-      // 개별 Clump 내부의 7개 유기적 수증기 서브 퍼프 (궤도 회전 + 노이지 프랙탈 텍스처)
-      for (const p of m.puffs) {
-        p.angle += p.orbitSpeed;
-        const px = p.ox + Math.cos(p.angle) * p.orbitR;
-        const py = p.oy + Math.sin(p.angle) * (p.orbitR * 0.42);
-        const pAlpha = clumpAlpha * p.alphaMul;
-
-        // 노이지하고 유기적인 수증기 김 외곽선 (8각형 부드러운 프랙탈 텍스처)
-        ctx.beginPath();
-        const numPts = 8;
-        for (let i = 0; i <= numPts; i++) {
-          const a = (i / numPts) * Math.PI * 2;
-          const noise = Math.sin(a * 3 + p.noiseSeed + this.time * 1.8) * 0.22 + Math.cos(a * 2 + this.time * 1.2) * 0.12;
-          const pr = p.r * (1 + noise);
-          const vx = px + Math.cos(a) * pr;
-          const vy = py + Math.sin(a) * (pr * 0.65);
-          if (i === 0) ctx.moveTo(vx, vy);
-          else ctx.lineTo(vx, vy);
-        }
-        ctx.closePath();
-
-        const g = ctx.createRadialGradient(px, py, 0, px, py, p.r * 1.15);
-        g.addColorStop(0, `${m.col} ${pAlpha})`);
-        g.addColorStop(0.35, `${m.col} ${pAlpha * 0.72})`);
-        g.addColorStop(0.70, `${m.col} ${pAlpha * 0.28})`);
-        g.addColorStop(1, `${m.col} 0)`);
+      if (puffReady) {
+        ctx.drawImage(this.steamPuffImg, -m.w / 2, -m.h / 2, m.w, m.h);
+      } else {
+        // 이미지 로딩 전 부드러운 타원 방사형 그라데이션 폴백
+        const g = ctx.createRadialGradient(0, 0, 0, 0, 0, m.w / 2);
+        g.addColorStop(0, "rgba(245, 250, 255, 0.7)");
+        g.addColorStop(0.4, "rgba(235, 245, 255, 0.3)");
+        g.addColorStop(1, "rgba(235, 245, 255, 0)");
         ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, m.w / 2, m.h / 2, 0, 0, Math.PI * 2);
         ctx.fill();
       }
       ctx.restore();
@@ -4125,9 +4129,9 @@ class HeroCanvasController {
     const cx = w * 0.46;
     const cy = h * 0.96;
     const baseR = Math.min(w, h) * 0.88;
-    const archW = Math.max(38, Math.min(w, h) * 0.11);
-    const rIn = baseR - archW * 0.55;
-    const rOut = baseR + archW * 0.55;
+    const archW = Math.max(90, Math.min(w, h) * 0.24);
+    const rIn = baseR - archW * 0.52;
+    const rOut = baseR + archW * 0.52;
 
     // 1. 방사형 연속 스펙트럼 그라데이션 (선/스트로크가 아닌 픽셀 단위 완전 블러 광원)
     const specGrad = ctx.createRadialGradient(cx, cy, rOut, cx, cy, rIn);
@@ -4623,34 +4627,64 @@ class HeroCanvasController {
     ctx.restore();
   }
 
+  renderSoftVolumetricBeam(ctx, ox, oy, angle, length, spreadAngle, colorRgb, baseAlpha) {
+    ctx.save();
+    ctx.translate(ox, oy);
+    ctx.rotate(angle);
+
+    const maxHalfW = Math.tan(spreadAngle) * length;
+    const clipW = maxHalfW * 1.45;
+
+    // 가로 횡단면 완만하고 몽환적인 가우시안 소프트 그라데이션 (경계가 100% 안개처럼 블러링)
+    const hGrad = ctx.createLinearGradient(-clipW, 0, clipW, 0);
+    hGrad.addColorStop(0.00, `${colorRgb}, 0)`);
+    hGrad.addColorStop(0.18, `${colorRgb}, ${baseAlpha * 0.14})`);
+    hGrad.addColorStop(0.36, `${colorRgb}, ${baseAlpha * 0.45})`);
+    hGrad.addColorStop(0.50, `${colorRgb}, ${baseAlpha * 0.70})`);
+    hGrad.addColorStop(0.64, `${colorRgb}, ${baseAlpha * 0.45})`);
+    hGrad.addColorStop(0.82, `${colorRgb}, ${baseAlpha * 0.14})`);
+    hGrad.addColorStop(1.00, `${colorRgb}, 0)`);
+
+    // 부채꼴 콘 외곽선 채우기 - 클리핑 모서리는 알파 0 바깥에 위치하므로 경계선이 전혀 보이지 않음
+    ctx.fillStyle = hGrad;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(clipW, length);
+    ctx.lineTo(-clipW, length);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.restore();
+  }
+
   renderGoldenShine(ctx, w, h, mx, my, hasMouse) {
-    // 농촌체험: 우측 상공에서 웅장하게 쏟아져 내리는 거대한 스포트라이트 볼류메트릭 라이트(Volumetric Spotlight) & 부유 스펙 먼지
+    // 농촌체험: 우측 상공 1시 방향에서 7시 방향으로 부드럽게 쏟아져 내리는 은은한 볼류메트릭 햇살 & 부유 스펙 먼지
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
 
-    // 1. 우측 상공 광원 원점 (더 크게 확대되어 우측에서 좌하단으로 쏟아짐)
-    const ox = w * 0.82, oy = -h * 0.08;
-    const beamPhase = Math.sin(this.time * 0.35) * 0.045;
+    // 1. 우측 상공 1시 방향 광원 원점
+    const ox = w * 0.85, oy = -h * 0.05;
+    const beamPhase = Math.sin(this.time * 0.35) * 0.025;
 
-    // 2. 태양 볼류메트릭 아우라 (우측 상공 황금빛 발광)
-    const sunR = Math.min(w, h) * 0.65;
-    const sunGlow = ctx.createRadialGradient(ox, oy, 20, ox, oy, sunR);
-    sunGlow.addColorStop(0, "rgba(255, 250, 215, 0.45)");
-    sunGlow.addColorStop(0.32, "rgba(255, 225, 135, 0.24)");
-    sunGlow.addColorStop(0.68, "rgba(255, 195, 80, 0.09)");
+    // 2. 태양 볼류메트릭 아우라 (빛 강도를 줄이고 부드럽게 감쇄)
+    const sunR = Math.min(w, h) * 0.55;
+    const sunGlow = ctx.createRadialGradient(ox, oy, 15, ox, oy, sunR);
+    sunGlow.addColorStop(0, "rgba(255, 245, 205, 0.24)");
+    sunGlow.addColorStop(0.35, "rgba(255, 220, 130, 0.11)");
+    sunGlow.addColorStop(0.70, "rgba(255, 190, 75, 0.03)");
     sunGlow.addColorStop(1, "rgba(255, 180, 70, 0)");
     ctx.fillStyle = sunGlow;
     ctx.beginPath();
     ctx.arc(ox, oy, sunR, 0, Math.PI * 2);
     ctx.fill();
 
-    // 3. 5줄기 웅장한 볼류메트릭 스포트라이트 광선 (우측에서 좌하단으로 쏟아지는 거대한 볼륨 기둥)
-    const angles = [-0.28, -0.40, -0.52, -0.64, -0.76];
-    const beamLen = Math.max(w, h) * 1.55;
+    // 3. 1시에서 7시 방향(각도 +0.52rad 전후)으로 쏟아지는 5줄기 은은하고 블러리한 광선 (빛 강도 대폭 완화)
+    const angles = [0.38, 0.45, 0.52, 0.59, 0.66];
+    const beamLen = Math.max(w, h) * 1.6;
     for (let b = 0; b < 5; b++) {
-      const alpha = 0.32 + beamPhase + (b % 2) * 0.05;
-      const col = b % 2 === 0 ? "rgba(255, 240, 155" : "rgba(255, 215, 105";
-      this.renderVolumetricBeam(ctx, ox, oy, angles[b], beamLen, 0.125, col, alpha);
+      const alpha = 0.16 + beamPhase + (b % 2) * 0.03;
+      const col = b % 2 === 0 ? "rgba(255, 235, 150" : "rgba(255, 215, 110";
+      this.renderSoftVolumetricBeam(ctx, ox, oy, angles[b], beamLen, 0.115, col, alpha);
     }
 
     // 3. 부유 먼지 입자 (광선 안을 지나갈 때 발광 증폭)
