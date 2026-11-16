@@ -1,5 +1,26 @@
 # 인수인계
 
+## 📌 히어로 테마 프리즘 광선·골든 샤인·짚라인 디테일 및 소프트 블러 개선 (2026-11-16, Antigravity)
+
+- **배경 및 요청 사항**:
+  1. `uq-pool` (수영장): 기존 동심원 무지개 아치 대신 자연스러운 빛줄기 프리즘 광선(Prismatic Ray) 효과로 개선.
+  2. `uq-horse` (승마): 잔디 파티클 크기와 갯수를 대폭 늘리고, 노을 지는 목장에 어울리는 골든 샤인 레이(Golden Shine Ray) 햇살 및 부유 골든 파티클 추가.
+  3. `uq-leisure` (레포츠): 짚라인 탑승자 크기를 1.8배 확대하고 듀얼 롤러 도르래, 카라비너, 손잡이 바, 오렌지 헬멧 바이저, 고글 광채, 윈드재킷, 안전 하네스, 스피드 라인 등 고화질 디테일 강화.
+  4. `uq-farm` 및 전 테마의 광선(Ray) 효과: 다각형/도형 느낌의 날카로운 경계를 완전히 배제하고, `renderSoftBeam` (스케일된 방사형 부드러운 그라데이션)을 통해 경계가 안개처럼 자연스러운 가우시안 볼류메트릭 틴들 광선으로 전면 개선.
+  5. `riverside` (호숫가 카약): 물안개(Mist)를 타원 비율 스케일링 방사형 그라데이션으로 변경하여 인위적 경계를 완전히 없애고, 물빛 스파클의 날카로운 다이아몬드/직사각형 쉐이프를 소프트 글로우 방사형 코어 및 페더 렌즈 플레어로 교체.
+- **주요 구현 내역**:
+  - `design/renewal/app.js` 및 `camping-atlas/public/app.js`:
+    - `renderSoftBeam`: 캔버스 단위 원 방사형 그라데이션(`createRadialGradient`)을 각도와 장/단축으로 스케일 변환하여 외곽 알파가 0으로 완벽히 수렴하는 무경계 볼류메트릭 빔 엔진 구축.
+    - `renderRainbow`: 4줄기의 은은한 프리즘 분산 광선(골드, 아쿠아, 라벤더, 로즈) 및 맑은 수면 스파클 렌더링.
+    - `renderWindGrass`: 잔디 풀잎 38개 -> 68개, 크기 18~42px로 확대, 잎맥 디테일 및 목장 골든 샤인 햇살 + 부유 골든 파티클 28개 탑재.
+    - `renderZipline`: 스케일 `Math.max(0.9, 1.85 - zl.t * 0.85)`로 확대, 정교한 도르래 장비와 인체 활강 포즈, 스피드 라인 구현.
+    - `renderRiverside`: 물안개 외곽 경계 무흔적 블러 처리 및 스파클 소프트 글로우 렌더링.
+    - `renderGoldenShine` & `renderLushForest`: 기존 직각 사다리꼴 폴리곤 드로잉 제거 후 `renderSoftBeam`으로 전면 교체.
+- **검증 결과**:
+  - `npm --prefix pipeline test`: 641개 테스트 100% 통과 (0 fail).
+  - `node --test pipeline/test/hero-theme-guard.test.mjs`: 통과.
+  - `node camping-atlas/scripts/perf-budget.mjs`: `app.js 674KB · style.css 281KB · OK perf budget` 통과.
+
 ## 📌 히어로존 테마 효과 7종 최적화 및 전용 애니메이션 구현 (2026-11-16, Antigravity)
 
 - **배경 및 요청 사항**:
