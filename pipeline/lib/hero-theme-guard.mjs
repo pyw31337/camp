@@ -3,6 +3,7 @@
 export const HERO_EFFECTS = new Set([
   "night-sky", "autumn-maple", "rainy-camp", "snowy-winter", "lush-forest", "riverside",
   "warm-bonfire", "sunset-coast", "cherry-blossom", "green-meadow", "steam", "warm-pool-snow", "starry-dome", "bubbles", "confetti",
+  "rainbow", "wind-grass", "zipline", "golden-shine",
 ]);
 
 // 22개 기획 테마의 의미와 Canvas 효과를 고정 계약으로 검증한다.
@@ -11,9 +12,9 @@ export const EXPECTED_HERO_EFFECTS = Object.freeze({
   "snowy-winter": "snowy-winter", "lush-forest": "lush-forest", riverside: "riverside",
   "warm-bonfire": "warm-bonfire", "sunset-coast": "sunset-coast", "cherry-blossom": "cherry-blossom",
   "green-meadow": "green-meadow", "uq-hotspring": "steam", "uq-spa": "bubbles",
-  "uq-warmpool": "warm-pool-snow", "uq-pool": "bubbles", "uq-horse": "green-meadow",
+  "uq-warmpool": "warm-pool-snow", "uq-pool": "rainbow", "uq-horse": "wind-grass",
   "uq-animal": "lush-forest", "uq-kidscafe": "confetti", "uq-indoorplay": "confetti",
-  "uq-treehouse": "lush-forest", "uq-stay": "starry-dome", "uq-leisure": "riverside", "uq-farm": "lush-forest",
+  "uq-treehouse": "lush-forest", "uq-stay": "starry-dome", "uq-leisure": "zipline", "uq-farm": "golden-shine",
 });
 
 export function validateHeroThemes(themes = []) {

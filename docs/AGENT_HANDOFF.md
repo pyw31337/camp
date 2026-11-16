@@ -1,5 +1,33 @@
 # 인수인계
 
+## 📌 히어로존 테마 효과 7종 최적화 및 전용 애니메이션 구현 (2026-11-16, Antigravity)
+
+- **배경 및 요청 사항**:
+  1. `cherry-blossom` (봄날 벚꽃): 심한 렉/부하 발생 현상 조사 및 60fps 보장 최적화.
+  2. `uq-warmpool` (사계절 온수풀): 눈만 내리고 온천 수면에서 올라오는 김/증기(steam) 효과가 보이지 않는 문제 해결.
+  3. `uq-pool` (수영장): 비누방울 대신 청량한 여름 물보라에 피어오르는 무지개(`rainbow`)와 수면 스파클 효과로 교체.
+  4. `uq-horse` (승마): 민들레 홀씨 대신 초원을 달리는 바람에 흩날리는 잔디 풀잎(`wind-grass`) 효과로 교체.
+  5. `uq-leisure` (레포츠): 이미지 속 짚라인 레일 곡선을 따라 사람이 타고 내려가는 활강 애니메이션(`zipline`) 복원, 반짝임 및 ripple 효과 완전 제거.
+  6. `uq-farm` (농촌체험): 황금빛 햇살 광선 및 미립자가 퍼지는 `golden-shine` 효과 복원.
+  7. `riverside` (호숫가 카약): 반짝이는 파티클 크기 축소 및 아침 물안개(river mist) 효과 추가.
+- **주요 구현 내역**:
+  - `design/renewal/app.js` 및 `camping-atlas/public/app.js`:
+    - `cherry-blossom`: 파티클 루프에서 매 프레임 파티클당 호출되던 소프트웨어 블러 `ctx.shadowBlur` 4종 프로퍼티 완전 제거 및 파티클 수 최적화(85->38)로 CPU 100% 병목 제거 및 60fps 달성.
+    - `uq-warmpool`: `makeSteam`에서 김 파티클 초기 생성 위치를 수면 근처(`h * 0.68~0.96`)로 상향하고 상승 속도 보정으로 피어오르는 온천 김 효과 복원.
+    - `renderRainbow`: 7색 스펙트럼 곡선 밴드 및 잔잔한 수면 스파클 렌더링.
+    - `renderWindGrass`: 바람을 타고 3D 롤링하며 흩날리는 유기적 풀잎 파티클 렌더링.
+    - `renderZipline`: 이미지 속 짚라인 레일 현수선 곡선(`(0, 0.225) ~ (1, 0.485)`)을 따라 라이더(헬멧, 도르래, 하네스)가 슬라이딩하는 상태머신 및 스피드라인 구현.
+    - `renderGoldenShine`: 부드러운 방사형 황금빛 햇살 레이어와 부유 광택 미립자 렌더링.
+    - `renderRiverside`: 잔잔한 물안개(mist) 그라데이션 타원 레이어 추가 및 스파클 크기 절반 축소.
+  - `pipeline/lib/hero-theme-guard.mjs`, `pipeline/test/hero-theme-guard.test.mjs`, `scripts/publish-hero-theme-audit.mjs`:
+    - `rainbow`, `wind-grass`, `zipline`, `golden-shine` 등록 및 기대 효과값 갱신.
+  - `camping-atlas/scripts/perf-budget.mjs`: 전용 캔버스 애니메이션 엔진 탑재에 따른 예산 상한 675KB 조정.
+- **검증 결과**:
+  - `npm --prefix pipeline test`: 641개 테스트 전체 통과 (0 fail).
+  - `node --test pipeline/test/hero-theme-guard.test.mjs`: 통과.
+  - `node camping-atlas/scripts/perf-budget.mjs`: `app.js 669KB · style.css 281KB · OK perf budget` 통과.
+
+
 ## 📌 상품(사이트 유형·구역)별 사진 수집 파이프라인 (2026-11-11, Grok Bot t55)
 
 - **요청**: “업장별 상품들의 사진도 충분히 수집 — 수집범위를 최대로.” 상세는 `docs/SITE_PHOTOS.md`(원천별 사용/제외 이유·판정 규칙).
