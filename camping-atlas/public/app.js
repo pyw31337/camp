@@ -2475,6 +2475,12 @@ class HeroCanvasController {
     this.steamPuffLoaded = false;
     this.steamPuffImg.onload = () => { this.steamPuffLoaded = true; };
 
+    // 황금빛 갓레이(Light Ray) 실사 광선 스프라이트 프리로드
+    this.sunRayImg = new Image();
+    this.sunRayImg.src = `${APP_BASE}images/hero/sun-ray.png`;
+    this.sunRayLoaded = false;
+    this.sunRayImg.onload = () => { this.sunRayLoaded = true; };
+
     this.onResize = this.resize.bind(this);
     this.onPointerMove = this.handlePointerMove.bind(this);
     this.onPointerDown = this.handlePointerDown.bind(this);
@@ -2662,25 +2668,25 @@ class HeroCanvasController {
             pulseSpeed: Math.random() * 0.045 + 0.02
           });
         }
-        // 22개 다층 실사 수증기 김 텍스처 퍼프 (원경·중경·근경 다층 레이어 구성)
-        const mistCount = 22;
+        // 38개 다층 실사 수증기 김 텍스처 퍼프 (원경·중경·근경 다층 레이어 구성 & 크기/갯수 대폭 확대)
+        const mistCount = 38;
         for (let i = 0; i < mistCount; i++) {
           const layer = i % 3; // 0: 원경 베이스, 1: 중경 호숫가, 2: 근경 가벼운 김
-          const scaleBase = layer === 0 ? 0.38 : layer === 1 ? 0.32 : 0.24;
-          const pw = Math.max(140, Math.min(w, h) * (scaleBase + Math.random() * 0.12));
+          const scaleBase = layer === 0 ? 0.48 : layer === 1 ? 0.38 : 0.28;
+          const pw = Math.max(180, Math.min(w, h) * (scaleBase + Math.random() * 0.16));
           const ph = pw * (Math.random() * 0.25 + 0.85);
           this.mistParticles.push({
-            baseX: (w / mistCount) * (i + 0.5) + (Math.random() - 0.5) * (w * 0.12),
-            baseY: h * (0.44 + Math.random() * 0.13),
+            baseX: (w / mistCount) * (i + 0.5) + (Math.random() - 0.5) * (w * 0.14),
+            baseY: h * (0.42 + Math.random() * 0.15),
             w: pw,
             h: ph,
             rot: Math.random() * Math.PI * 2,
             rotSpeed: (Math.random() - 0.5) * 0.005,
-            swayAmp: Math.random() * 26 + 16,
+            swayAmp: Math.random() * 32 + 20,
             swaySpeed: Math.random() * 0.007 + 0.003,
             swayPhase: Math.random() * Math.PI * 2,
             driftVx: (Math.random() - 0.5) * 0.08,
-            alpha: layer === 0 ? (Math.random() * 0.08 + 0.16) : layer === 1 ? (Math.random() * 0.10 + 0.20) : (Math.random() * 0.08 + 0.14),
+            alpha: layer === 0 ? (Math.random() * 0.08 + 0.20) : layer === 1 ? (Math.random() * 0.10 + 0.24) : (Math.random() * 0.08 + 0.16),
             pulse: Math.random() * Math.PI * 2,
             pulseSpeed: Math.random() * 0.012 + 0.006
           });
@@ -2717,8 +2723,8 @@ class HeroCanvasController {
         break;
 
       case "steam":
-        // 노천탕: 몽환적으로 피어오르는 온천 김 + 밤하늘 영롱한 별빛 반짝임
-        for (let i = 0; i < 30; i++) this.particles.push(this.makeSteam(w, h, true));
+        // 노천탕: 몽환적으로 피어오르는 온천 김(60개 다채로운 퍼프) + 밤하늘 영롱한 별빛 반짝임
+        for (let i = 0; i < 60; i++) this.particles.push(this.makeSteam(w, h, true));
         for (let i = 0; i < 42; i++) {
           this.duskParticles.push({ x: Math.random() * w, y: Math.random() * (h * 0.52), r: Math.random() * 1.8 + 0.8, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.032 + 0.014, alpha: Math.random() * 0.6 + 0.35, isCross: Math.random() < 0.25 });
         }
@@ -2730,16 +2736,14 @@ class HeroCanvasController {
           const flakeType = Math.random() < 0.2 ? "crystal" : Math.random() < 0.55 ? "fluffy" : "dust";
           this.particles.push({ x: Math.random() * w, y: Math.random() * h, flakeType, r: flakeType === "crystal" ? Math.random() * 4 + 7 : flakeType === "fluffy" ? Math.random() * 2.2 + 3.0 : Math.random() * 1.8 + 1.2, vy: Math.random() * 0.42 + 0.24, vx: (Math.random() - 0.5) * 0.16, sway: Math.random() * Math.PI * 2, swaySpeed: Math.random() * 0.016 + 0.008, alpha: Math.random() * 0.35 + 0.60 });
         }
-        for (let i = 0; i < 32; i++) this.steamParticles.push(this.makeSteam(w, h, true));
+        for (let i = 0; i < 40; i++) this.steamParticles.push(this.makeSteam(w, h, true));
         for (let i = 0; i < 32; i++) this.duskParticles.push({ x: Math.random() * w, y: Math.random() * (h * 0.52), r: Math.random() * 1.8 + 0.8, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.032 + 0.014, alpha: Math.random() * 0.6 + 0.35, isCross: Math.random() < 0.25 });
         break;
 
       case "bubbles":
-        // 스파: 반짝이며 떠오르는 물방울 + 뜨거운 김
+        // 스파: 반짝이며 떠오르는 물방울 + 자쿠지 온천 증기
         for (let i = 0; i < 36; i++) this.particles.push(this.makeBubble(w, h, true));
-        if (themeId === "uq-spa") {
-          for (let i = 0; i < 26; i++) this.steamParticles.push(this.makeSteam(w, h, true));
-        }
+        for (let i = 0; i < 40; i++) this.steamParticles.push(this.makeSteam(w, h, true));
         break;
 
       case "rainbow":
@@ -2842,7 +2846,23 @@ class HeroCanvasController {
 
   makeSteam(w, h, initial = false) {
     const startY = initial ? h * (0.50 + Math.random() * 0.45) : h * (0.68 + Math.random() * 0.28);
-    return { x: Math.random() * w, y: startY, r: Math.random() * 45 + 35, vy: -(Math.random() * 0.65 + 0.35), vx: (Math.random() - 0.5) * 0.35, life: initial ? Math.random() * 0.8 + 0.2 : 1, sway: Math.random() * Math.PI * 2 };
+    // 3단계 크기 분포: 소형 김줄기(22~40px), 중형 퍼프(45~77px), 대형 증기 구름(80~125px)
+    const sizeRoll = Math.random();
+    const r = sizeRoll < 0.35 ? (Math.random() * 18 + 22) : sizeRoll < 0.75 ? (Math.random() * 32 + 45) : (Math.random() * 45 + 80);
+    return {
+      x: Math.random() * w,
+      y: startY,
+      r,
+      rGrowth: Math.random() * 0.14 + 0.08,
+      vy: -(Math.random() * 0.65 + 0.30),
+      vx: (Math.random() - 0.5) * 0.35,
+      rot: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - 0.5) * 0.014,
+      alphaMul: Math.random() * 0.24 + 0.16,
+      life: initial ? Math.random() * 0.8 + 0.2 : 1,
+      sway: Math.random() * Math.PI * 2,
+      swaySpeed: Math.random() * 0.016 + 0.008
+    };
   }
   makeConfetti(w, h, initial = false) {
     const colors = ["#ff8a80", "#ffd54f", "#81d4fa", "#a5d6a7", "#ce93d8", "#ffab91"];
@@ -2873,21 +2893,40 @@ class HeroCanvasController {
     const puffReady = this.steamPuffLoaded || (this.steamPuffImg && this.steamPuffImg.complete && this.steamPuffImg.naturalWidth > 0);
     for (let i = 0; i < steamParticles.length; i++) {
       const p = steamParticles[i];
-      p.sway += 0.012; p.y += p.vy; p.x += p.vx + Math.sin(p.sway) * 0.3; p.r += 0.14; p.life -= 0.0020;
-      if (hasMouse) { const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy); if (d < 140) { p.x += (dx / (d || 1)) * 1.4; p.y += (dy / (d || 1)) * 0.7; } }
-      if (p.life <= 0 || p.y + p.r < 0) { steamParticles[i] = this.makeSteam(w, h); continue; }
-      const a = Math.min(1, p.life * 1.5) * 0.28;
+      p.sway += p.swaySpeed || 0.012;
+      p.rot = (p.rot || 0) + (p.rotSpeed || 0.005);
+      p.y += p.vy;
+      p.x += p.vx + Math.sin(p.sway) * 0.35;
+      p.r += p.rGrowth || 0.12;
+      p.life -= 0.0020;
+      if (hasMouse) {
+        const dx = p.x - mx, dy = p.y - my, d = Math.hypot(dx, dy);
+        if (d < 140) {
+          p.x += (dx / (d || 1)) * 1.4;
+          p.y += (dy / (d || 1)) * 0.7;
+        }
+      }
+      if (p.life <= 0 || p.y + p.r < 0) {
+        steamParticles[i] = this.makeSteam(w, h);
+        continue;
+      }
+      const a = Math.min(1, p.life * 1.5) * (p.alphaMul || 0.28);
       if (puffReady) {
         ctx.save();
         ctx.translate(p.x, p.y);
-        ctx.rotate(p.sway);
-        ctx.globalAlpha = a * 0.85;
+        ctx.rotate(p.rot);
+        ctx.globalAlpha = a * 0.9;
         ctx.drawImage(this.steamPuffImg, -p.r, -p.r, p.r * 2, p.r * 2);
         ctx.restore();
       } else {
         const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
-        g.addColorStop(0, `rgba(255, 255, 255, ${a})`); g.addColorStop(0.5, `rgba(240, 245, 255, ${a * 0.45})`); g.addColorStop(1, "rgba(255, 255, 255, 0)");
-        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+        g.addColorStop(0, `rgba(255, 255, 255, ${a})`);
+        g.addColorStop(0.5, `rgba(240, 245, 255, ${a * 0.45})`);
+        g.addColorStop(1, "rgba(255, 255, 255, 0)");
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
       }
     }
   }
@@ -2917,8 +2956,8 @@ class HeroCanvasController {
   }
 
   renderBubbles(ctx, w, h, mx, my, hasMouse) {
-    // 프라이빗 스파는 물방울과 함께 뜨거운 김이 올라오도록 한다.
-    if (this.currentThemeId === "uq-spa" && this.steamParticles.length) {
+    // 프라이빗 스파: 자쿠지 온천 증기와 함께 영롱한 물방울이 솟아오른다.
+    if (this.steamParticles.length) {
       this.renderSteam(ctx, w, h, mx, my, hasMouse);
     }
 
@@ -4658,36 +4697,55 @@ class HeroCanvasController {
   }
 
   renderGoldenShine(ctx, w, h, mx, my, hasMouse) {
-    // 농촌체험: 우측 상공 1시 방향에서 7시 방향으로 부드럽게 쏟아져 내리는 은은한 볼류메트릭 햇살 & 부유 스펙 먼지
+    // 농촌체험: 우측 상공 1시 방향에서 7시 방향으로 부드럽게 쏟아져 내리는 은은한 볼류메트릭 갓레이(Light Ray) & 부유 스펙 먼지
     ctx.save();
-    ctx.globalCompositeOperation = "lighter";
 
     // 1. 우측 상공 1시 방향 광원 원점
-    const ox = w * 0.85, oy = -h * 0.05;
-    const beamPhase = Math.sin(this.time * 0.35) * 0.025;
+    const ox = w * 0.88, oy = -h * 0.04;
+    const breathe = Math.sin(this.time * 0.4) * 0.04;
+    const sunRayReady = this.sunRayLoaded || (this.sunRayImg && this.sunRayImg.complete && this.sunRayImg.naturalWidth > 0);
 
-    // 2. 태양 볼류메트릭 아우라 (빛 강도를 줄이고 부드럽게 감쇄)
-    const sunR = Math.min(w, h) * 0.55;
-    const sunGlow = ctx.createRadialGradient(ox, oy, 15, ox, oy, sunR);
-    sunGlow.addColorStop(0, "rgba(255, 245, 205, 0.24)");
-    sunGlow.addColorStop(0.35, "rgba(255, 220, 130, 0.11)");
-    sunGlow.addColorStop(0.70, "rgba(255, 190, 75, 0.03)");
-    sunGlow.addColorStop(1, "rgba(255, 180, 70, 0)");
-    ctx.fillStyle = sunGlow;
-    ctx.beginPath();
-    ctx.arc(ox, oy, sunR, 0, Math.PI * 2);
-    ctx.fill();
+    if (sunRayReady) {
+      // 실사 갓레이 텍스처를 스크린 블렌드 모드로 부드럽고 자연스럽게 합성
+      ctx.globalCompositeOperation = "screen";
+      // sun-ray.png의 광원 중심점은 대략 (580/650, 50/604)
+      const imgApexX = 580 / 650;
+      const imgApexY = 50 / 604;
+      const targetW = Math.max(w * 1.35, h * 1.85);
+      const targetH = targetW * (604 / 650);
+      const drawX = ox - targetW * imgApexX;
+      const drawY = oy - targetH * imgApexY;
 
-    // 3. 1시에서 7시 방향(각도 +0.52rad 전후)으로 쏟아지는 5줄기 은은하고 블러리한 광선 (빛 강도 대폭 완화)
-    const angles = [0.38, 0.45, 0.52, 0.59, 0.66];
-    const beamLen = Math.max(w, h) * 1.6;
-    for (let b = 0; b < 5; b++) {
-      const alpha = 0.16 + beamPhase + (b % 2) * 0.03;
-      const col = b % 2 === 0 ? "rgba(255, 235, 150" : "rgba(255, 215, 110";
-      this.renderSoftVolumetricBeam(ctx, ox, oy, angles[b], beamLen, 0.115, col, alpha);
+      ctx.save();
+      ctx.globalAlpha = Math.max(0.18, 0.38 + breathe);
+      ctx.drawImage(this.sunRayImg, drawX, drawY, targetW, targetH);
+      ctx.restore();
+    } else {
+      ctx.globalCompositeOperation = "lighter";
+      // 태양 볼류메트릭 아우라 (빛 강도를 줄이고 부드럽게 감쇄)
+      const sunR = Math.min(w, h) * 0.55;
+      const sunGlow = ctx.createRadialGradient(ox, oy, 15, ox, oy, sunR);
+      sunGlow.addColorStop(0, "rgba(255, 245, 205, 0.24)");
+      sunGlow.addColorStop(0.35, "rgba(255, 220, 130, 0.11)");
+      sunGlow.addColorStop(0.70, "rgba(255, 190, 75, 0.03)");
+      sunGlow.addColorStop(1, "rgba(255, 180, 70, 0)");
+      ctx.fillStyle = sunGlow;
+      ctx.beginPath();
+      ctx.arc(ox, oy, sunR, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 1시에서 7시 방향(각도 +0.52rad 전후)으로 쏟아지는 5줄기 은은하고 블러리한 광선 (빛 강도 대폭 완화)
+      const angles = [0.38, 0.45, 0.52, 0.59, 0.66];
+      const beamLen = Math.max(w, h) * 1.6;
+      for (let b = 0; b < 5; b++) {
+        const alpha = 0.16 + breathe + (b % 2) * 0.03;
+        const col = b % 2 === 0 ? "rgba(255, 235, 150" : "rgba(255, 215, 110";
+        this.renderSoftVolumetricBeam(ctx, ox, oy, angles[b], beamLen, 0.115, col, alpha);
+      }
     }
 
-    // 3. 부유 먼지 입자 (광선 안을 지나갈 때 발광 증폭)
+    // 2. 부유 먼지 입자 (광선 안을 지나갈 때 발광 증폭)
+    ctx.globalCompositeOperation = "lighter";
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
       const alpha = Math.max(0.12, p.alpha + Math.sin(p.pulse) * 0.22);
