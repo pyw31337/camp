@@ -2644,27 +2644,48 @@ class HeroCanvasController {
         break;
 
       case "riverside":
-        // 호숫가 카약: 호수와 산 경계 세로 중앙에 넓게 펼쳐져 좌우로 살짝씩 일렁이는 아침 물안개 띠 + 섬세한 윤슬 스파클
-        for (let i = 0; i < 32; i++) {
-          this.particles.push({ x: Math.random() * w, y: h * 0.44 + Math.random() * (h * 0.54), size: Math.random() * 1.4 + 0.7, flareLen: Math.random() * 10 + 5, alpha: Math.random() * 0.7 + 0.25, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.045 + 0.02 });
-        }
-        for (let i = 0; i < 26; i++) {
-          const rx = w * (0.22 + Math.random() * 0.32);
-          const ry = h * (0.045 + Math.random() * 0.055);
-          const baseX = Math.random() * (w + rx * 2) - rx;
-          this.mistParticles.push({
-            baseX,
-            x: baseX,
-            y: h * (0.44 + Math.random() * 0.13), // 호수와 산 경계 세로 중앙(44%~57%)에 가로로 넓게 집중
-            rx,
-            ry,
-            swayAmp: Math.random() * 26 + 14,
-            swaySpeed: Math.random() * 0.008 + 0.004,
-            swayPhase: Math.random() * Math.PI * 2,
-            alpha: Math.random() * 0.16 + 0.22, // 뽀얗고 몽환적인 물안개 농도
+        // 호숫가 카약: 호수와 산 경계 세로 중앙에 피어오르는 노이지·터뷸런트 수증기 김 덩어리들 + 섬세한 윤슬 스파클
+        for (let i = 0; i < 30; i++) {
+          this.particles.push({
+            x: Math.random() * w,
+            y: h * 0.44 + Math.random() * (h * 0.54),
+            size: Math.random() * 1.4 + 0.7,
+            flareLen: Math.random() * 10 + 5,
+            alpha: Math.random() * 0.7 + 0.25,
             pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.012 + 0.006,
-            col: Math.random() < 0.65 ? "rgba(242, 248, 255," : "rgba(228, 242, 252,"
+            pulseSpeed: Math.random() * 0.045 + 0.02
+          });
+        }
+        // 14개 터뷸런트 수증기 김 덩어리 (Clumps) - 각각 7개의 노이지 서브 퍼프 보유
+        for (let c = 0; c < 14; c++) {
+          const clumpScale = Math.random() * 0.45 + 0.85;
+          const puffs = [];
+          for (let p = 0; p < 7; p++) {
+            puffs.push({
+              ox: (Math.random() - 0.5) * 90 * clumpScale,
+              oy: (Math.random() - 0.5) * 28 * clumpScale,
+              r: (Math.random() * 26 + 24) * clumpScale,
+              spin: (Math.random() - 0.5) * 0.018,
+              angle: Math.random() * Math.PI * 2,
+              orbitR: Math.random() * 30 * clumpScale,
+              orbitSpeed: (Math.random() - 0.5) * 0.022,
+              noiseSeed: Math.random() * 100,
+              alphaMul: Math.random() * 0.35 + 0.75
+            });
+          }
+          this.mistParticles.push({
+            baseX: (w / 14) * (c + 0.5) + (Math.random() - 0.5) * (w * 0.08),
+            baseY: h * (0.44 + Math.random() * 0.12),
+            clumpScale,
+            swayAmp: Math.random() * 32 + 18,
+            swaySpeed: Math.random() * 0.009 + 0.005,
+            swayPhase: Math.random() * Math.PI * 2,
+            driftVx: (Math.random() - 0.5) * 0.10,
+            puffs,
+            alpha: Math.random() * 0.18 + 0.28,
+            pulse: Math.random() * Math.PI * 2,
+            pulseSpeed: Math.random() * 0.015 + 0.008,
+            col: c % 3 === 0 ? "rgba(250, 252, 255," : c % 3 === 1 ? "rgba(236, 246, 255," : "rgba(226, 240, 252,"
           });
         }
         break;
@@ -3632,31 +3653,49 @@ class HeroCanvasController {
   }
 
   renderRiverside(ctx, w, h, mx, my, hasMouse) {
-    // 호숫가 카약: 호수와 산 경계 세로 중앙에 넓게 드리워져 좌우로 살짝씩 일렁이는 아침 물안개 띠 + 섬세한 윤슬 스파클
+    // 호숫가 카약: 호수와 산 경계에 피어오르는 노이지·터뷸런트 수증기 김 덩어리들 + 섬세한 윤슬 스파클
     ctx.save();
 
-    // 1. 호수와 산 경계(세로 중앙 h * 0.44 ~ 0.57) 가로 물안개 띠 (source-over 모드로 뽀얗고 몽환적인 안개 형태 구현)
+    // 1. 호수와 산 경계 세로 중앙(h * 0.44 ~ 0.57) 터뷸런트 수증기 김 덩어리 (Clumps & Wispy Puffs)
     ctx.globalCompositeOperation = "source-over";
     for (const m of this.mistParticles) {
       m.pulse += m.pulseSpeed;
-      // 좌우로 살짝씩 부드럽게 일렁이는 수평 파동
       const sway = Math.sin(this.time * m.swaySpeed + m.swayPhase) * m.swayAmp;
       const curX = m.baseX + sway;
-      const alpha = Math.max(0.06, m.alpha + Math.sin(m.pulse) * 0.05);
+      const clumpAlpha = Math.max(0.08, m.alpha + Math.sin(m.pulse) * 0.06);
 
       ctx.save();
-      ctx.translate(curX, m.y);
-      ctx.scale(1, m.ry / m.rx);
-      const g = ctx.createRadialGradient(0, 0, 0, 0, 0, m.rx);
-      g.addColorStop(0, `${m.col} ${alpha})`);
-      g.addColorStop(0.24, `${m.col} ${alpha * 0.82})`);
-      g.addColorStop(0.52, `${m.col} ${alpha * 0.44})`);
-      g.addColorStop(0.78, `${m.col} ${alpha * 0.15})`);
-      g.addColorStop(1, `${m.col} 0)`);
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(0, 0, m.rx, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.translate(curX, m.baseY);
+
+      // 개별 Clump 내부의 7개 유기적 수증기 서브 퍼프 (궤도 회전 + 노이지 프랙탈 텍스처)
+      for (const p of m.puffs) {
+        p.angle += p.orbitSpeed;
+        const px = p.ox + Math.cos(p.angle) * p.orbitR;
+        const py = p.oy + Math.sin(p.angle) * (p.orbitR * 0.42);
+        const pAlpha = clumpAlpha * p.alphaMul;
+
+        // 노이지하고 유기적인 수증기 김 외곽선 (8각형 부드러운 프랙탈 텍스처)
+        ctx.beginPath();
+        const numPts = 8;
+        for (let i = 0; i <= numPts; i++) {
+          const a = (i / numPts) * Math.PI * 2;
+          const noise = Math.sin(a * 3 + p.noiseSeed + this.time * 1.8) * 0.22 + Math.cos(a * 2 + this.time * 1.2) * 0.12;
+          const pr = p.r * (1 + noise);
+          const vx = px + Math.cos(a) * pr;
+          const vy = py + Math.sin(a) * (pr * 0.65);
+          if (i === 0) ctx.moveTo(vx, vy);
+          else ctx.lineTo(vx, vy);
+        }
+        ctx.closePath();
+
+        const g = ctx.createRadialGradient(px, py, 0, px, py, p.r * 1.15);
+        g.addColorStop(0, `${m.col} ${pAlpha})`);
+        g.addColorStop(0.35, `${m.col} ${pAlpha * 0.72})`);
+        g.addColorStop(0.70, `${m.col} ${pAlpha * 0.28})`);
+        g.addColorStop(1, `${m.col} 0)`);
+        ctx.fillStyle = g;
+        ctx.fill();
+      }
       ctx.restore();
     }
 
@@ -4075,54 +4114,62 @@ class HeroCanvasController {
   }
 
   renderRainbow(ctx, w, h, mx, my, hasMouse) {
-    // 수영장: 청량한 여름 햇살 아래 우측으로 부드럽게 휘어지는(Curvy & Blury) 7색 프리즘 무지개 & 펄스 밝기 애니메이션
+    // 수영장: 실제 광원처럼 경계가 완전히 블러링된 7색 연속 스펙트럼 무지개 (300도 ~ 135도 아치 & 호흡 밝기 애니메이션)
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
 
-    // 밝기 변화 애니메이션 (자연스럽게 서서히 차오르고 은은해지는 호흡 펄스)
-    const breathe = Math.sin(this.time * 0.75) * 0.18 + Math.cos(this.time * 0.38) * 0.08;
-    const baseAlpha = 0.42 + breathe;
+    // 밝기 호흡 애니메이션 (자연스럽게 서서히 차오르고 은은해지는 펄스)
+    const breathe = Math.sin(this.time * 0.7) * 0.16 + Math.cos(this.time * 0.35) * 0.08;
+    const baseAlpha = 0.44 + breathe;
 
-    const spectralColors = [
-      { col: "rgba(255, 60, 60", a: 0.38 },
-      { col: "rgba(255, 140, 30", a: 0.42 },
-      { col: "rgba(255, 230, 40", a: 0.46 },
-      { col: "rgba(50, 230, 100", a: 0.42 },
-      { col: "rgba(40, 225, 255", a: 0.44 },
-      { col: "rgba(65, 125, 255", a: 0.40 },
-      { col: "rgba(185, 75, 255", a: 0.36 }
-    ];
+    const cx = w * 0.46;
+    const cy = h * 0.96;
+    const baseR = Math.min(w, h) * 0.88;
+    const archW = Math.max(38, Math.min(w, h) * 0.11);
+    const rIn = baseR - archW * 0.55;
+    const rOut = baseR + archW * 0.55;
 
-    // 우측 영역에서 완만하게 휘어지며 수면으로 흐르는 Curvy & Blury 무지개 스펙트럼 밴드
-    const bandW = Math.max(12, Math.min(w, h) * 0.034);
-    for (let i = 0; i < spectralColors.length; i++) {
-      const s = spectralColors[i];
-      const curA = Math.max(0.12, (s.a / 0.42) * baseAlpha);
-      const offset = (i - 3) * (bandW * 0.88);
+    // 1. 방사형 연속 스펙트럼 그라데이션 (선/스트로크가 아닌 픽셀 단위 완전 블러 광원)
+    const specGrad = ctx.createRadialGradient(cx, cy, rOut, cx, cy, rIn);
+    specGrad.addColorStop(0.00, "rgba(255, 60, 60, 0)");
+    specGrad.addColorStop(0.12, `rgba(255, 60, 60, ${baseAlpha * 0.48})`);
+    specGrad.addColorStop(0.26, `rgba(255, 140, 30, ${baseAlpha * 0.55})`);
+    specGrad.addColorStop(0.40, `rgba(255, 230, 40, ${baseAlpha * 0.60})`);
+    specGrad.addColorStop(0.54, `rgba(50, 230, 100, ${baseAlpha * 0.52})`);
+    specGrad.addColorStop(0.68, `rgba(40, 225, 255, ${baseAlpha * 0.55})`);
+    specGrad.addColorStop(0.82, `rgba(65, 125, 255, ${baseAlpha * 0.48})`);
+    specGrad.addColorStop(0.92, `rgba(185, 75, 255, ${baseAlpha * 0.38})`);
+    specGrad.addColorStop(1.00, "rgba(185, 75, 255, 0)");
 
-      const sx = w * 0.88 + offset * 0.8, sy = -h * 0.06;
-      const cx = w * 0.78 + offset * 0.9, cy = h * 0.42;
-      const ex = w * 0.52 + offset * 1.1, ey = h * 0.82;
+    // 2. 300도(10시 방향, 캔버스 210도)에서 135도(4시 반 방향, 캔버스 45도)까지 시계방향 아치
+    // 시작과 끝 각도에서도 칼 같은 경계 없이 부드럽게 페이드인/아웃되도록 32개 각도 세그먼트 렌더링
+    const startAng = (210 / 180) * Math.PI; // 300도 시계방향
+    const totalSpan = ((360 - 210 + 45) / 180) * Math.PI; // 210도 -> 270도(12시) -> 360/0도(3시) -> 45도(4시 반)
+    const slices = 32;
+    const dAng = totalSpan / slices;
 
-      // 1. 외곽 소프트 블러 페더 레이어 (경계가 부드럽게 스며드는 효과)
-      ctx.strokeStyle = `${s.col}, ${curA * 0.40})`;
-      ctx.lineWidth = bandW * 2.2;
-      ctx.lineCap = "round";
+    for (let s = 0; s < slices; s++) {
+      const a0 = startAng + s * dAng;
+      const a1 = a0 + dAng + 0.006; // 미세 겹침으로 갭 방지
+      const t = s / slices;
+
+      // 각도 양 끝 소프트 페이드아웃 (0 ~ 1 ~ 0)
+      let edgeFade = 1.0;
+      if (t < 0.16) edgeFade = t / 0.16;
+      else if (t > 0.84) edgeFade = (1 - t) / 0.16;
+
+      ctx.save();
+      ctx.globalAlpha = edgeFade;
+      ctx.fillStyle = specGrad;
       ctx.beginPath();
-      ctx.moveTo(sx, sy);
-      ctx.quadraticCurveTo(cx, cy, ex, ey);
-      ctx.stroke();
-
-      // 2. 중심 루미너스 코어 밴드
-      ctx.strokeStyle = `${s.col}, ${curA * 0.85})`;
-      ctx.lineWidth = bandW * 1.1;
-      ctx.beginPath();
-      ctx.moveTo(sx, sy);
-      ctx.quadraticCurveTo(cx, cy, ex, ey);
-      ctx.stroke();
+      ctx.arc(cx, cy, rOut + archW * 0.15, a0, a1, false);
+      ctx.arc(cx, cy, rIn - archW * 0.15, a1, a0, true);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
     }
 
-    // 2. 수면 맑은 물빛 스파클 & 프리즘 물방울
+    // 3. 수면 맑은 물빛 스파클 & 프리즘 물방울
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
       const alpha = Math.max(0.1, (Math.sin(p.pulse) * 0.5 + 0.5) * p.alpha);
@@ -4353,113 +4400,222 @@ class HeroCanvasController {
       ctx.fillStyle = "#0f172a";
       ctx.fillRect(-11, 10, 22, 3.5);
 
-      // 3. 라이더 탑승자 본체 (물리 진자 운동: 가속도 쏠림 + 자연스러운 스윙)
+      // 3. 라이더 탑승자 본체 (3인 3색: 피부색·머리길이·의상·자세·모션 완전 차별화)
       ctx.save();
       const accel = Math.sin(Math.max(0, Math.min(1, zl.t)) * Math.PI);
-      const pendulumSway = Math.sin(this.time * 5.4) * 0.09 + Math.cos(this.time * 2.8) * 0.04;
-      const bodyTilt = 0.22 + accel * 0.07 + pendulumSway;
-      ctx.rotate(bodyTilt);
 
-      // 캐릭터별 스타일 설정 (남: 코발트블루, 여: 민트&포니테일, 아이: 오렌지&옐로우)
-      const helmetCol = isChild ? "#eab308" : isWoman ? "#f43f5e" : "#1d4ed8";
-      const helmetVisor = isChild ? "#ca8a04" : isWoman ? "#e11d48" : "#1e40af";
-      const ribbonCol = isChild ? "#f59e0b" : isWoman ? "#fda4af" : "#84cc16";
-      const jacketCol = isChild ? "#f97316" : isWoman ? "#06b6d4" : "#2563eb";
-      const harnessCol = isChild ? "#fde047" : isWoman ? "#84cc16" : "#ea580c";
-      const pantsCol = isChild ? "#3b82f6" : isWoman ? "#0f172a" : "#1e293b";
-      const shoesCol = isChild ? "#eab308" : isWoman ? "#f43f5e" : "#ea580c";
-      const skinTone = isChild ? "#ffedd5" : isWoman ? "#ffedd5" : "#fed7aa"; // 밝고 맑은 피부톤
+      if (zl.character === "woman") {
+        // [여성 라이더] 우아하고 유연한 플라잉 활강 (슬림 체형·긴 웨이브 포니테일·민트&코랄·한 손 펼침 자세)
+        const pendulumSway = Math.sin(this.time * 6.5) * 0.10 + Math.cos(this.time * 3.2) * 0.05;
+        ctx.rotate(0.18 + accel * 0.06 + pendulumSway);
 
-      // 펄럭이는 헬멧 윈드 리본 (바람 반동)
-      ctx.strokeStyle = ribbonCol;
-      ctx.lineWidth = 1.3;
-      ctx.beginPath();
-      const r1 = Math.sin(this.time * 22) * 3.5;
-      ctx.moveTo(0, 16); ctx.quadraticCurveTo(-6, 16 + r1, -14, 15 + r1 * 1.5);
-      const r2 = Math.sin(this.time * 22 + 1.2) * 3.5;
-      ctx.moveTo(0, 18); ctx.quadraticCurveTo(-7, 19 + r2, -15, 20 + r2 * 1.5);
-      ctx.stroke();
+        // 바람에 시원하게 휘날리는 긴 롱 웨이브 포니테일 머리 (이중 베지어 바람 시뮬레이션)
+        ctx.strokeStyle = "#92400e";
+        ctx.lineWidth = 3.6;
+        ctx.beginPath();
+        const hr1 = Math.sin(this.time * 16) * 4.5;
+        const hr2 = Math.cos(this.time * 14) * 4.0;
+        ctx.moveTo(-1, 16);
+        ctx.bezierCurveTo(-10, 15 + hr1, -20, 18 + hr2, -28, 20 + hr1 * 1.5);
+        ctx.stroke();
 
-      // 여자 라이더일 때 바람에 흩날리는 긴 포니테일 머리
-      if (isWoman) {
-        ctx.strokeStyle = "#78350f";
+        // 핑크 헬멧 & 화이트 바이저
+        ctx.beginPath();
+        ctx.arc(2, 16, 5.8, 0, Math.PI * 2);
+        ctx.fillStyle = "#f43f5e";
+        ctx.fill();
+        ctx.fillStyle = "#e11d48";
+        ctx.fillRect(4, 15, 5, 2.5);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(4, 17, 3, 1.5);
+
+        // 뽀얗고 맑은 라이트 피치 피부톤 (턱과 목선)
+        ctx.fillStyle = "#ffedd5";
+        ctx.beginPath();
+        ctx.arc(2, 20.5, 3.0, 0, Math.PI);
+        ctx.fill();
+
+        // 민트 터콰이즈 윈드재킷 & 라임 하네스
+        ctx.fillStyle = "#06b6d4";
+        ctx.beginPath();
+        ctx.roundRect(-4, 21, 9.5, 15, 2.5);
+        ctx.fill();
+        ctx.strokeStyle = "#84cc16";
+        ctx.lineWidth = 1.4;
+        ctx.beginPath();
+        ctx.moveTo(-3, 22); ctx.lineTo(4, 33);
+        ctx.moveTo(4, 22); ctx.lineTo(-3, 33);
+        ctx.stroke();
+
+        // 자세: 한 손은 손잡이 중앙을 잡고, 다른 한 손은 바람을 타듯 살짝 옆으로 펼침
+        ctx.strokeStyle = "#06b6d4";
+        ctx.lineWidth = 3.0;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(1, 23); ctx.lineTo(-2, 11); // 왼손 그립
+        ctx.moveTo(3, 23); ctx.lineTo(12, 18);  // 오른손 펼침
+        ctx.stroke();
+        ctx.fillStyle = "#ffedd5";
+        ctx.beginPath();
+        ctx.arc(13, 18, 1.8, 0, Math.PI * 2); // 오른손 끝
+        ctx.fill();
+
+        // 다리: 사뿐히 모아 살짝 구부린 우아한 자세 & 부드러운 스윙
+        const legSway = Math.sin(this.time * 6.8) * 0.12;
+        ctx.strokeStyle = "#0f172a";
         ctx.lineWidth = 3.2;
         ctx.beginPath();
-        const hr1 = Math.sin(this.time * 16) * 3.5;
-        ctx.moveTo(-1, 17);
-        ctx.quadraticCurveTo(-8, 16 + hr1, -18, 19 + hr1 * 1.6);
+        ctx.moveTo(0, 35);
+        ctx.lineTo(8 + Math.cos(legSway) * 2, 43 + Math.sin(legSway) * 2);
+        ctx.lineTo(16 + Math.cos(legSway) * 1.5, 41 + Math.sin(legSway) * 2);
+        ctx.moveTo(-2, 35);
+        ctx.lineTo(6 + Math.cos(legSway) * 2, 45 + Math.sin(legSway) * 2);
+        ctx.lineTo(14 + Math.cos(legSway) * 1.5, 43 + Math.sin(legSway) * 2);
         ctx.stroke();
+
+        ctx.fillStyle = "#f43f5e";
+        ctx.fillRect(15, 39, 4, 3);
+        ctx.fillRect(13, 41, 4, 3);
+
+      } else if (zl.character === "child") {
+        // [어린이 라이더] 신나는 꼬마 활강 (작은 체구·귀여운 앞머리·오렌지베스트·신나는 동동 발차기)
+        const pendulumSway = Math.sin(this.time * 8.2) * 0.13 + Math.cos(this.time * 4.0) * 0.06;
+        ctx.rotate(0.14 + accel * 0.05 + pendulumSway);
+
+        // 귀여운 레몬 헬멧 & 스마일
+        ctx.beginPath();
+        ctx.arc(2, 16, 5.2, 0, Math.PI * 2);
+        ctx.fillStyle = "#eab308";
+        ctx.fill();
+        ctx.fillStyle = "#ca8a04";
+        ctx.fillRect(4, 15, 4.2, 2.2);
+
+        // 헬멧 앞 삐져나온 귀여운 앞머리
+        ctx.fillStyle = "#b45309";
+        ctx.beginPath();
+        ctx.arc(3.5, 17.5, 1.6, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 발그레한 뽀얀 베이비 피치 피부톤
+        ctx.fillStyle = "#fee2e2";
+        ctx.beginPath();
+        ctx.arc(2, 20.2, 2.7, 0, Math.PI);
+        ctx.fill();
+
+        // 비비드 오렌지 패딩 베스트 & 옐로우 하네스
+        ctx.fillStyle = "#f97316";
+        ctx.beginPath();
+        ctx.roundRect(-4, 21, 8.5, 12.5, 2.2);
+        ctx.fill();
+        ctx.strokeStyle = "#fde047";
+        ctx.lineWidth = 1.4;
+        ctx.beginPath();
+        ctx.moveTo(-3, 22); ctx.lineTo(3, 31);
+        ctx.moveTo(3, 22); ctx.lineTo(-3, 31);
+        ctx.stroke();
+
+        // 자세: 바에 양손을 바짝 모아 찰싹 매달려 신나서 매달린 자세
+        ctx.strokeStyle = "#ea580c";
+        ctx.lineWidth = 2.8;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(0, 23); ctx.lineTo(-2, 11);
+        ctx.moveTo(2, 23); ctx.lineTo(1, 11);
+        ctx.stroke();
+
+        // 모션: 신나서 허공을 빠르게 파닥파닥 동동 차는(pedaling) 고주파 발차기
+        const kick1 = Math.sin(this.time * 12.0) * 0.28;
+        const kick2 = Math.sin(this.time * 12.0 + Math.PI) * 0.28;
+        ctx.strokeStyle = "#3b82f6";
+        ctx.lineWidth = 3.0;
+        ctx.beginPath();
+        // 왼쪽 발차기
+        const kx1 = 9 + Math.cos(kick1) * 3, ky1 = 36 + Math.sin(kick1) * 4;
+        const fx1 = kx1 + 6 + Math.cos(kick1) * 2, fy1 = ky1 + Math.sin(kick1) * 3;
+        ctx.moveTo(1, 31); ctx.lineTo(kx1, ky1); ctx.lineTo(fx1, fy1);
+        // 오른쪽 발차기
+        const kx2 = 7 + Math.cos(kick2) * 3, ky2 = 38 + Math.sin(kick2) * 4;
+        const fx2 = kx2 + 5 + Math.cos(kick2) * 2, fy2 = ky2 + Math.sin(kick2) * 3;
+        ctx.moveTo(-1, 31); ctx.lineTo(kx2, ky2); ctx.lineTo(fx2, fy2);
+        ctx.stroke();
+
+        ctx.fillStyle = "#eab308";
+        ctx.fillRect(fx1 - 1, fy1 - 2, 3.5, 2.5);
+        ctx.fillRect(fx2 - 1, fy2 - 2, 3.5, 2.5);
+
+      } else {
+        // [남성 라이더] 파워풀 스피드 활강 (탄탄한 체형·스포티 숏컷·로열블루·두 손 와이드 그립·앞으로 뻗은 다리)
+        const pendulumSway = Math.sin(this.time * 4.6) * 0.08 + Math.cos(this.time * 2.5) * 0.04;
+        ctx.rotate(0.26 + accel * 0.07 + pendulumSway);
+
+        // 헬멧 뒤 삐져나온 깔끔한 흑갈색 스포티 쇼트 헤어
+        ctx.fillStyle = "#1c1917";
+        ctx.beginPath();
+        ctx.arc(-1, 18, 3.0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 코발트 블루 레이싱 헬멧 & 바이저
+        ctx.beginPath();
+        ctx.arc(2, 16, 6.2, 0, Math.PI * 2);
+        ctx.fillStyle = "#1d4ed8";
+        ctx.fill();
+        ctx.fillStyle = "#1e40af";
+        ctx.fillRect(4, 15, 5.2, 2.5);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(4, 17, 3, 1.5);
+
+        // 펄럭이는 스포티 라임 윈드 리본
+        ctx.strokeStyle = "#84cc16";
+        ctx.lineWidth = 1.3;
+        ctx.beginPath();
+        const r1 = Math.sin(this.time * 22) * 3.5;
+        ctx.moveTo(0, 16); ctx.quadraticCurveTo(-6, 16 + r1, -14, 15 + r1 * 1.5);
+        ctx.stroke();
+
+        // 건강한 웜 탠 아시안/백인 스킨톤
+        ctx.fillStyle = "#fed7aa";
+        ctx.beginPath();
+        ctx.arc(2, 20.5, 3.2, 0, Math.PI);
+        ctx.fill();
+
+        // 로열 블루 아웃도어 쉘 & 오렌지 하네스
+        ctx.fillStyle = "#2563eb";
+        ctx.beginPath();
+        ctx.roundRect(-4, 21, 10.5, 16, 2.5);
+        ctx.fill();
+        ctx.strokeStyle = "#ea580c";
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        ctx.moveTo(-3, 22); ctx.lineTo(5, 34);
+        ctx.moveTo(5, 22); ctx.lineTo(-3, 34);
+        ctx.stroke();
+
+        // 자세: 두 손으로 손잡이를 넓게 꽉 잡고 파워풀하게 버티는 자세
+        ctx.strokeStyle = "#2563eb";
+        ctx.lineWidth = 3.4;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(1, 23); ctx.lineTo(-6, 11);
+        ctx.moveTo(4, 23); ctx.lineTo(6, 11);
+        ctx.stroke();
+
+        // 다리: 앞으로 힘차게 뻗어 스피드를 가르는 안정적인 활강 포즈
+        const legSway = Math.sin(this.time * 5.0) * 0.12;
+        ctx.strokeStyle = "#1e293b";
+        ctx.lineWidth = 3.6;
+        ctx.beginPath();
+        const kx1 = 14 + Math.cos(legSway) * 2, ky1 = 40 + Math.sin(legSway) * 3;
+        const fx1 = kx1 + 10 + Math.cos(legSway) * 1.5, fy1 = ky1 - 2 + Math.sin(legSway) * 2;
+        ctx.moveTo(1, 35); ctx.lineTo(kx1, ky1); ctx.lineTo(fx1, fy1);
+        const kx2 = 10 + Math.cos(legSway) * 2, ky2 = 44 + Math.sin(legSway) * 3;
+        const fx2 = kx2 + 9 + Math.cos(legSway) * 1.5, fy2 = ky2 + 1 + Math.sin(legSway) * 2;
+        ctx.moveTo(-1, 35); ctx.lineTo(kx2, ky2); ctx.lineTo(fx2, fy2);
+        ctx.stroke();
+
+        ctx.fillStyle = "#ea580c";
+        ctx.fillRect(fx1 - 1, fy1 - 2, 4.5, 3.2);
+        ctx.fillRect(fx2 - 1, fy2 - 2, 4.5, 3.2);
       }
-
-      // 안전 헬멧
-      ctx.beginPath();
-      ctx.arc(2, 16, isChild ? 5.4 : 6, 0, Math.PI * 2);
-      ctx.fillStyle = helmetCol;
-      ctx.fill();
-      // 헬멧 바이저 챙
-      ctx.fillStyle = helmetVisor;
-      ctx.fillRect(4, 15, isChild ? 4.5 : 5, 2.5);
-      // 고글 광채
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(4, 17, 3, 1.5);
-
-      // 밝은 피부톤의 턱과 목 (인도인 느낌 배제한 화사한 스킨)
-      ctx.fillStyle = skinTone;
-      ctx.beginPath();
-      ctx.arc(2, 20.5, isChild ? 2.8 : 3.2, 0, Math.PI);
-      ctx.fill();
-
-      // 상체 몸통 (윈드재킷 + 세이프티 하네스)
-      ctx.fillStyle = jacketCol;
-      ctx.beginPath();
-      ctx.roundRect(-4, 21, isChild ? 8.5 : 10, isChild ? 13 : 16, 2.5);
-      ctx.fill();
-
-      // 하네스 세이프티 스트랩
-      ctx.strokeStyle = harnessCol;
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.moveTo(-3, 22); ctx.lineTo(isChild ? 4 : 5, isChild ? 31 : 34);
-      ctx.moveTo(isChild ? 4 : 5, 22); ctx.lineTo(-3, isChild ? 31 : 34);
-      ctx.stroke();
-
-      // 양팔 (핸들 바를 단단히 쥐고 있는 팔)
-      ctx.strokeStyle = jacketCol;
-      ctx.lineWidth = 3.2;
-      ctx.lineCap = "round";
-      ctx.beginPath();
-      ctx.moveTo(1, 23); ctx.lineTo(-4, 11);
-      ctx.moveTo(3, 23); ctx.lineTo(4, 11);
-      ctx.stroke();
-
-      // 양다리 (물리적 다리 흔들림 & 발차기 애니메이션)
-      const swaySpeedMul = isChild ? 1.35 : 1.0;
-      const legSway1 = Math.sin(this.time * (6.2 * swaySpeedMul)) * (isChild ? 0.24 : 0.16);
-      const legSway2 = Math.sin(this.time * (6.2 * swaySpeedMul) + 1.3) * (isChild ? 0.22 : 0.14);
-
-      ctx.strokeStyle = pantsCol;
-      ctx.lineWidth = isChild ? 3.0 : 3.5;
-      ctx.beginPath();
-      // 앞다리
-      const hipY = isChild ? 32 : 35;
-      const kx1 = 12 + Math.cos(legSway1) * 2, ky1 = (isChild ? 37 : 41) + Math.sin(legSway1) * 3;
-      const fx1 = kx1 + (isChild ? 7 : 9) + Math.cos(legSway1) * 1.5, fy1 = ky1 - 2 + Math.sin(legSway1) * 2;
-      ctx.moveTo(1, hipY);
-      ctx.lineTo(kx1, ky1);
-      ctx.lineTo(fx1, fy1);
-
-      // 뒷다리
-      const kx2 = 9 + Math.cos(legSway2) * 2, ky2 = (isChild ? 40 : 45) + Math.sin(legSway2) * 3;
-      const fx2 = kx2 + (isChild ? 6 : 8) + Math.cos(legSway2) * 1.5, fy2 = ky2 + 1 + Math.sin(legSway2) * 2;
-      ctx.moveTo(-1, hipY);
-      ctx.lineTo(kx2, ky2);
-      ctx.lineTo(fx2, fy2);
-      ctx.stroke();
-
-      // 신발 (스포티 아웃솔)
-      ctx.fillStyle = shoesCol;
-      ctx.fillRect(fx1 - 1, fy1 - 2, 4, 3);
-      ctx.fillRect(fx2 - 1, fy2 - 2, 4, 3);
 
       ctx.restore();
       ctx.restore();
@@ -4468,31 +4624,33 @@ class HeroCanvasController {
   }
 
   renderGoldenShine(ctx, w, h, mx, my, hasMouse) {
-    // 농촌체험: 하늘에서 부드럽게 쏟아져 내리는 스포트라이트 볼류메트릭 라이트(Volumetric Spotlight) & 부유 스펙 먼지
+    // 농촌체험: 우측 상공에서 웅장하게 쏟아져 내리는 거대한 스포트라이트 볼류메트릭 라이트(Volumetric Spotlight) & 부유 스펙 먼지
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
 
-    const ox = w * 0.14, oy = -h * 0.08;
+    // 1. 우측 상공 광원 원점 (더 크게 확대되어 우측에서 좌하단으로 쏟아짐)
+    const ox = w * 0.82, oy = -h * 0.08;
     const beamPhase = Math.sin(this.time * 0.35) * 0.045;
 
-    // 1. 태양 볼류메트릭 아우라 (눈부신 황금빛 발광)
-    const sunR = Math.min(w, h) * 0.58;
-    const sunGlow = ctx.createRadialGradient(ox, oy, 15, ox, oy, sunR);
-    sunGlow.addColorStop(0, "rgba(255, 250, 215, 0.42)");
-    sunGlow.addColorStop(0.30, "rgba(255, 225, 135, 0.22)");
-    sunGlow.addColorStop(0.65, "rgba(255, 195, 80, 0.08)");
+    // 2. 태양 볼류메트릭 아우라 (우측 상공 황금빛 발광)
+    const sunR = Math.min(w, h) * 0.65;
+    const sunGlow = ctx.createRadialGradient(ox, oy, 20, ox, oy, sunR);
+    sunGlow.addColorStop(0, "rgba(255, 250, 215, 0.45)");
+    sunGlow.addColorStop(0.32, "rgba(255, 225, 135, 0.24)");
+    sunGlow.addColorStop(0.68, "rgba(255, 195, 80, 0.09)");
     sunGlow.addColorStop(1, "rgba(255, 180, 70, 0)");
     ctx.fillStyle = sunGlow;
     ctx.beginPath();
     ctx.arc(ox, oy, sunR, 0, Math.PI * 2);
     ctx.fill();
 
-    // 2. 5줄기 볼류메트릭 스포트라이트 광선 (경계가 부드럽고 루미너스한 빛 기둥 형체)
-    const angles = [0.24, 0.35, 0.46, 0.57, 0.68];
+    // 3. 5줄기 웅장한 볼류메트릭 스포트라이트 광선 (우측에서 좌하단으로 쏟아지는 거대한 볼륨 기둥)
+    const angles = [-0.28, -0.40, -0.52, -0.64, -0.76];
+    const beamLen = Math.max(w, h) * 1.55;
     for (let b = 0; b < 5; b++) {
-      const alpha = 0.28 + beamPhase + (b % 2) * 0.05;
+      const alpha = 0.32 + beamPhase + (b % 2) * 0.05;
       const col = b % 2 === 0 ? "rgba(255, 240, 155" : "rgba(255, 215, 105";
-      this.renderVolumetricBeam(ctx, ox, oy, angles[b], h * 1.35, 0.096, col, alpha);
+      this.renderVolumetricBeam(ctx, ox, oy, angles[b], beamLen, 0.125, col, alpha);
     }
 
     // 3. 부유 먼지 입자 (광선 안을 지나갈 때 발광 증폭)
