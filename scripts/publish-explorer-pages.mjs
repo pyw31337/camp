@@ -172,7 +172,7 @@ const heroAuditPublic = `${rootOut}hero-themes/index.html`;
 if (existsSync(heroAuditAdmin)) {
   await mkdir(`${rootOut}hero-themes`, { recursive: true });
   const auditHtml = await readFile(heroAuditAdmin, "utf8");
-  await writeFile(heroAuditPublic, auditHtml.replaceAll("../../images/hero/", "../images/hero/").replaceAll("../../../?hero=", "../?hero="));
+  await writeFile(heroAuditPublic, auditHtml.replaceAll("../../images/hero/", "../images/hero/").replaceAll("../../?hero=", "../?hero=").replaceAll("../../../?hero=", "../?hero="));
 }
 
 // 화면 경로(새로고침·북마크용)와 옛 보조 주소(guide·openings·vision·passport·collections·renewal)는 모두 같은 넘김 페이지.
