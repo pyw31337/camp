@@ -1,5 +1,26 @@
 # 인수인계
 
+## 📌 볼류메트릭 프리즘 광선·짚라인 물리 애니메이션·골든 라이트·물안개 48개 다층화 (2026-11-16, Antigravity)
+
+- **배경 및 요청 사항**:
+  1. `uq-pool` (수영장): 대낮 밝은 수면 사진에서 은은한 파스텔 광선이 묻혀 보이지 않던 문제 해결. 선명하고 영롱한 7색 프리즘 볼류메트릭 빔 + 수면 무지개 아치 + 프리즘 물방울 렌더링으로 쨍한 대낮에도 확실한 시인성 확보.
+  2. `uq-leisure` (레포츠): 짚라인 라이더가 고정된 자세로만 내려가던 부자연스러움 개선. 물리 가속도 곡선(경사 구간 가속), 케이블 경사각 실시간 도르래 틸트, 하네스 진자 스윙(Pendulum Sway), 다리 유기적 흔들림 및 발차기 애니메이션, 바람에 펄럭이는 헬멧 리본, 케이블 미세 진동 탑재.
+  3. `uq-farm` (농촌체험) 및 전체 테마: 모든 광선(Ray)을 볼류메트릭 라이트(Volumetric Light / God Ray) 형태로 전면 업그레이드. 태양 원점에서 방사 확장되는 4단계 중첩 가우시안 횡단면 + 거리별 감쇄 팬 렌더러(`renderVolumetricBeam`) 구축 및 태양 볼류메트릭 아우라 적용.
+  4. `riverside` (호숫가 카약): 물안개(Mist)를 기존 16개에서 48개로 3배 증량(저층 20개, 중층 16개, 원경 12개 3단계 다층 레이어 구성)하여 깊이감과 몽환적인 아침 호수 분위기 극대화.
+- **주요 구현 내역**:
+  - `design/renewal/app.js` 및 `camping-atlas/public/app.js`:
+    - `renderVolumetricBeam(ctx, ox, oy, angle, length, spreadAngle, colorRgb, baseAlpha)`: 원점 `(ox, oy)`에서 회전 방사하는 4중 중첩 부채꼴(`lighter` 블렌드 모드 + 가우시안 횡단 분산 + 종단 선형 감쇄)로 진정한 3D 볼류메트릭 라이트 샤프트 구현.
+    - `renderRainbow`: 7색 스펙트럼(Red~Violet) 볼류메트릭 빔과 수면 물보라 무지개 아치(Rainbow Mist Arc) 동시 렌더링 및 32개 스파클/프리즘 물방울 배치.
+    - `renderZipline`: 물리 가속도(`zl.t` 사인 파형), 도르래 와이어 접선 회전, 진자 스윙(`pendulumSway`), 펄럭이는 리본, 다리 관절 애니메이션(`legSway1`, `legSway2`, 무릎-발목 2관절 역기구학), 케이블 바운스 구현.
+    - `renderGoldenShine` & `renderWindGrass` & `renderLushForest`: `renderVolumetricBeam`을 적용하여 하늘과 캐노피 사이로 내리쬐는 입체적인 볼류메트릭 틴들 광선 구현.
+    - `renderRiverside`: 48개 다층 물안개 타원 클라우드 시스템 및 소프트 글로우 스파클.
+  - `camping-atlas/scripts/perf-budget.mjs`:
+    - 볼류메트릭 광선 및 물리 시뮬레이션 탑재에 따라 `appJs` 상한을 680KB로 현실화 (현재 677KB, 통과).
+- **검증 결과**:
+  - `npm --prefix pipeline test`: 641개 테스트 전체 통과 (0 fail).
+  - `node --test pipeline/test/hero-theme-guard.test.mjs`: 3/3 통과.
+  - `node camping-atlas/scripts/perf-budget.mjs`: `app.js 677KB · style.css 281KB · OK perf budget` 통과.
+
 ## 📌 히어로 테마 프리즘 광선·골든 샤인·짚라인 디테일 및 소프트 블러 개선 (2026-11-16, Antigravity)
 
 - **배경 및 요청 사항**:
