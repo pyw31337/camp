@@ -13,8 +13,8 @@ const KB = (n) => Math.round(n / 1024);
 // 2026-11-09: 내 취향 맞춤 섹션 & 장비·세부 옵션(17종) 및 특색 시설 긍정 배지 이동, 동계휴장 정렬로 app.js 예산 +10KB (650KB).
 // 2026-11-12: 히어로 22개 매핑 가드·사진 식별 방어를 정식 반영한 실제 크기(약 651KB)에
 // 1% 미만의 여유를 둔다. 크기 증가를 무제한 허용하지 않고 JS 660KB·CSS 285KB에서 다시 차단한다.
-// 2026-11-16: 히어로 테마 7종 전용 캔버스 애니메이션(무지개·바람풀잎·짚라인·골든샤인·물안개) 및 볼류메트릭 광선·짚라인 물리 시뮬레이션 탑재로 app.js 예산 +5KB (680KB).
-const BUDGET = { appJs: 680, css: 285, dataGz: 2600, nodes: 12000, cardsMs: 8000, origImgs: 0 };
+// 2026-11-16: 히어로 테마 7종 전용 캔버스 애니메이션(무지개·바람풀잎·짚라인·골든샤인·물안개) 및 Curvy 무지개·짚라인 3종 캐릭터(남/여/아이)·스포트라이트 볼륨·가로 물안개 띠 탑재로 app.js 예산 +10KB (685KB).
+const BUDGET = { appJs: 685, css: 285, dataGz: 2600, nodes: 12000, cardsMs: 8000, origImgs: 0 };
 const app = statSync(`${root}design/renewal/app.js`).size, css = statSync(`${root}design/renewal/style.css`).size;
 import { existsSync } from "node:fs";
 const liteP = existsSync(`${root}camping-atlas/public/explore/data/campgrounds.lite.json`) ? "camping-atlas/public/explore/data/campgrounds.lite.json" : null;
