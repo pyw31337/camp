@@ -122,21 +122,24 @@ async function main() {
             docs.push(...got);
             if (DELAY_MS) await sleep(DELAY_MS);
           }
-          const found = videosFromVclip(c, docs, { others: othersOf(c), dup: dupOf(c), stems, exclude: excl[c.id] ?? [] });
+          const found = videosFromVclip(c, docs, { others: othersOf(c), dup: dupOf(c), stems, exclude: excl[c.id] ?? [], includeAllPlatforms: true });
           let shorts = found.shorts;
           if (ykey && !ytStopped && yt < YT_MAX) {
             try {
               yt++;
-              const s = await ytJson(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoDuration=short&maxResults=15&regionCode=KR&relevanceLanguage=ko&q=${encodeURIComponent(qs[0].replace(/ 쇼츠$/, " #shorts"))}&key=${ykey}`);
+              const s = await ytJson(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=15&regionCode=KR&relevanceLanguage=ko&q=${encodeURIComponent(qs[0].replace(/ 쇼츠$/, ""))}&key=${ykey}`);
               const ids = (s.items ?? []).map((x) => x?.id?.videoId).filter(Boolean);
               const durs = {};
               if (ids.length) for (const v of (await ytJson(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${ids.join(",")}&key=${ykey}`)).items ?? []) durs[v.id] = isoDurationSec(v.contentDetails?.duration);
-              shorts = [...shorts, ...shortsFromYoutube(c, s.items, durs, { others: othersOf(c), dup: dupOf(c), stems, exclude: excl[c.id] ?? [] })];
+              const ytItems = shortsFromYoutube(c, s.items, durs, { others: othersOf(c), dup: dupOf(c), stems, exclude: excl[c.id] ?? [] });
+              shorts = [...shorts, ...ytItems.filter((x) => x.kind === "short")];
+              found.videos.push(...ytItems.filter((x) => x.kind !== "short"));
             } catch (e) { ytStopped = true; warn("YouTube API 중단", e.message); }
           }
           const seen = new Set();
-          shorts = shorts.filter((x) => !seen.has(x.yt) && seen.add(x.yt)).slice(0, VIDEO_CAPS.shorts);
-          const videos = found.videos.filter((x) => !seen.has(x.yt) && seen.add(x.yt));
+          const keyOf = (x) => x.yt || x.url;
+          shorts = shorts.filter((x) => !seen.has(keyOf(x)) && seen.add(keyOf(x))).slice(0, VIDEO_CAPS.shorts);
+          const videos = found.videos.filter((x) => !seen.has(keyOf(x)) && seen.add(keyOf(x))).slice(0, VIDEO_CAPS.videos);
           cache.campgrounds[c.id] = { v: SHORTS_CACHE_VERSION, fetched_at: fetchedAt, ...(shorts.length ? { shorts } : {}), ...(videos.length ? { videos } : {}) };
           collectionStatus.sources.youtube ??= { campgrounds: {} };
           const prevStatus = collectionStatus.sources.youtube.campgrounds?.[c.id] ?? {};

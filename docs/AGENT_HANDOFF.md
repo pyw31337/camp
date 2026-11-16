@@ -1,35 +1,47 @@
 # 인수인계
 
-## 📢 전체 에이전트 인수인계: 현재 작업 완료 내역 및 향후 진행 작업 로드맵 (2026-11-16 기준)
+## 📢 전체 에이전트 인수인계: 데이터 파이프라인 정상화·영상 수집 다각화 및 선순환 자동화 완료 (2026-11-17 기준)
 
 > **[모든 에이전트 필독]** 이 문서는 에이전트 간 작업 일관성을 보장하기 위한 공식 인수인계 문서입니다. 어느 에이전트가 작업을 이어받더라도 아래의 **완료 내역**, **향후 진행할 작업 백로그**, **작업 규칙 체크리스트**를 반드시 숙지하고 작업을 진행해야 합니다.
 
 ---
 
-### 1. 최근 작업 완료 내역 요약 (2026-11-16)
+### 1. 최근 작업 완료 내역 요약 (2026-11-17)
 
-1. **히어로 테마 캔버스 시각 효과 및 물리 애니메이션 전면 고도화**:
-   - **체험/농촌 (`uq-farm`)**: 사용자 제공 갓레이 이미지 기반 투명 골든 스프라이트(`sun-ray.png`, 6.7KB)를 제작하여 `HeroCanvasController`에 탑재. 스크린(`screen`) 블렌드 모드로 1시 상공(`ox = w * 0.88, oy = -h * 0.04`)에서 7시 방향으로 쏟아지는 부드러운 볼류메트릭 광선 빔 및 은은한 호흡 펄스 애니메이션 완성.
-   - **호숫가 카약 (`riverside`)**: 실사 수증기 텍스처(`steam-puff.png`) 기반 물안개 파티클을 22개에서 38개로 대폭 늘리고 스케일을 최대 380px 이상으로 확대하여, 호수 수면과 산 경계 전반에 걸쳐 몽환적인 실사 아침 물안개 연출.
-   - **노천탕 (`uq-hotspring`)**: 증기 파티클을 기존 30개에서 60개로 2배 증량하고, 소형 김줄기(22~40px)·중형 퍼프(45~77px)·대형 증기 구름(80~125px)의 3단계 크기 분포, 개별 회전각/회전속도, 다채로운 투명도(`alphaMul: 0.16~0.40`)를 적용하여 모락모락 피어오르는 자연스러운 온천 증기 구현.
-   - **프라이빗 스파 (`uq-spa`)**: `theme.effect === "bubbles"` 호출 시 증기 파티클이 누락되던 버그를 해결하여 40개 온천 증기 파티클 생성 및 `renderSteam` 연동 완료. 영롱한 물방울과 함께 따뜻한 김이 피어오름.
-   - **사계절 온수풀 (`uq-warmpool`)**: 눈꽃과 함께 수면에서 40개의 다채로운 회전 증기 구름이 함께 대류하도록 고도화.
-   - **수영장 (`uq-pool`)**: 아치형 무지개 선 제거 → 300도(10시)에서 135도(4시 반) 사이를 가로지르는 굵은 연속 스펙트럼(90px~24% 두께) 광원 무지개 및 호흡 밝기 펄스 애니메이션 구현.
-   - **레포츠 짚라인 (`uq-leisure`)**: 남·여·아이 3종 캐릭터 완전 차별화 (신체 스케일, 밝은 피부톤, 30px 롱 웨이브 포니테일 바람 시뮬레이션, 유연한 플라잉 스윙 모션, 12Hz 신나는 페달링 발차기, 고유 복장, 도르래/하네스 물리 모션 분기).
-   - **체험 옵션 '낚시' 통합 및 아이콘 연동**: '낚시'와 '잡기'를 '낚시' 단일 옵션으로 통합하고 사용자 제공 공식 낚시 SVG 아이콘(`<symbol id="i-fish">`) 등록 완료.
-   - **방갈로 뱃지 중복 방어**: `STAYS` 및 `siteBadges` 내 `firmStBungalow` / `firmSt(c, "HOUSE")` 정규화 및 `dedupeStayBadgeList`를 통해 '비발디캠핑파크 미루나무점' 등에서 주황색/회색 방갈로 뱃지가 중복 노출되던 문제 해결 완료.
+1. **고질적 11월 10일 이후 데이터 동기화(`data-sync`) 차단 버그 전면 해결**:
+   - **원인 분석**: 11월 10일 지방행정인허가(`LOCALDATA_LICENSED`) 미등록 업장 1,273곳(`loc-*****`)을 신규 승격 등록했으나, 고캠핑 고유 URL(`gc_url`) 및 인허가 원천 URL(`src_url`)이 비어 있어 `pipeline/lib/fact-store.mjs`의 `factsOf`에서 사실 생성 시 `url: null`이 주입됨. 이로 인해 `validateFacts`에서 14,541건의 사실 검증 에러(`loc-***** 원천 URL 없음`)가 발생하여 매일 GitHub Actions `data-sync.yml`이 중단되고 있었음.
+   - **조치 내용**:
+     - `pipeline/lib/fact-store.mjs`: `isLocalData` 판별 로직 추가, 인허가 업장의 사실 원천을 `localdata`로 매핑하고 기본 URL `https://www.localdata.go.kr` 자동 보장.
+     - `pipeline/scripts/promote-licensed-campgrounds.mjs`: 신규 승격 시 `src_url: "https://www.localdata.go.kr"` 기본 주입.
+     - `camping-atlas/public/explore/data/campgrounds.json`: 기존 1,273곳 `loc-` 레코드에 `src_url` 전수 주입 완료.
+     - `node pipeline/scripts/build-fact-store.mjs` 검증: 사실 261,047건 생성, 에러 0건으로 정상 빌드 통과.
 
-2. **성능 예산 및 품질 검증**:
-   - `camping-atlas/scripts/perf-budget.mjs` 상한 695KB 관리 (현재 `app.js` 691KB / `style.css` 281KB / 첫 데이터 gzip 2473KB로 안정적 통과).
-   - `node --test pipeline/test/hero-theme-guard.test.mjs` (3/3 통과), `npm --prefix pipeline test` (641개 테스트 전체 통과).
-   - GitHub Actions CI `Lint and build` 및 `Rail swipe` 브라우저 회귀 테스트 100% 통과 확인 완료.
+2. **영상 수집 다각화 (유튜브 일반 영상, 네이버 동영상/클립, 다음/카카오 영상 전면 연동)**:
+   - **파이프라인 확장**:
+     - `pipeline/lib/social-search.mjs`: `videoPlatform` 유틸리티 추가 (`youtube`, `naver`, `kakao`, `tiktok`, `instagram`, `web`), `normalizeVclip`에 `platform` 속성 확장.
+     - `pipeline/lib/shorts-search.mjs`: 카카오 Daum vclip 검색에서 YouTube뿐만 아니라 네이버(`tv.naver.com`, `clip.naver.com` 등), 카카오, 웹 동영상을 누락 없이 수집하도록 `videosFromVclip`에 `includeAllPlatforms` 옵션 도입.
+     - `pipeline/scripts/sync-shorts.mjs`: YouTube 일반 영상 검색(길이 제한 없음) 및 다채널 동영상 수집 파이프라인 연동.
+   - **프론트엔드 연동 (`design/renewal/app.js` & `camping-atlas/public/app.js`)**:
+     - 상세 페이지 미디어 허브에서 네이버TV 임베드뿐만 아니라 네이버 클립/동영상 및 웹 영상을 유실 없이 카드 렌더링하도록 개선.
+
+3. **소셜 트렌딩 증량 및 주기적 자동 재분석·점수 최신화 연동**:
+   - `.github/workflows/trending.yml`: 매일 22:47 KST 트렌딩 수집 직후 `apply-info-score.mjs`를 자동 실행하여 최신 소셜 언급량이 캠핑장 정보량 점수(`c.iq`)에 즉시 재분석 반영되도록 선순환 자동화 연동.
+   - `.github/workflows/data-sync.yml`: 매일 데이터 동기화 시 `enrich-lean-camps.mjs`를 정기 실행하여 사진/요금/후기 결측 빈약 업장 2,435곳의 큐(`lean-camps-queue.json`)를 자동 최신화하고, 소셜/웹 수집 시 최우선순위로 배치되도록 연결.
+   - 로컬 검증: `apply-info-score.mjs` 실행 결과 총 1,300곳의 정보량 점수 갱신 완료.
+
+4. **품질 및 무과금 검증**:
+   - `npm --prefix pipeline test`: 641개 테스트 전체 통과 (0 fail).
+   - `npm --prefix pipeline run check:billing`: 네이버/카카오/공공데이터 무료 티어 100% 안전 확인 완료.
+   - `node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public`: 발행본 동기화 완료.
 
 ---
 
 ### 2. 📌 향후 진행할 작업 백로그 (Next Up Tasks)
 
-현재 제기된 히어로 테마 시각 효과 튜닝 및 뱃지/아이콘 통합 과제 4종이 모두 성공적으로 반영되었습니다.
-차기 작업 진행 시에는 소유자(사용자)의 추가 피드백 및 신규 기능 요청에 따라 작업을 진행합니다.
+1. **소셜 후기 및 영상 수집 풀 모니터링**:
+   - `data-sync` 복구 후 첫 자동 실행에서 1,273개 인허가 캠핑장의 소셜 데이터 수집 현황 및 `data/quality/REPORT.md` 신뢰도 변화 추적.
+2. **주변 여행/문화 이벤트 연계 확장**:
+   - 지자체 공공 문화행사 및 계절별 테마 연동 지속 모니터링.
 
 ---
 
@@ -41,7 +53,6 @@
      ```bash
      node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public
      ```
-   - 임시 생성 파일 정리: `git clean -fd` 실행 시 추적 필요한 신규 에셋(`steam-puff.png` 등)이 지워지지 않도록 `git add` 후 정리할 것.
 2. **에이전트 게시판 선점 및 해제**:
    - 작업 시작 전: `node pipeline/scripts/agent-board.mjs list` 확인 후 `claim --agent <AgentName> --files "<files>" --text "<description>"`.
    - 작업 완료 후: `node pipeline/scripts/agent-board.mjs release --agent <AgentName> --reply "#<claim-id>" --text "<completion message>"`.
@@ -49,8 +60,8 @@
    - 기존 데이터를 절대 지우거나 빈 값으로 덮어쓰지 않습니다. `field-guard` 통과 필수.
 4. **로컬 필수 검증**:
    - `node camping-atlas/scripts/perf-budget.mjs`: `app.js` 예산 상한(현재 695KB) 초과 여부 확인.
-   - `node --test pipeline/test/hero-theme-guard.test.mjs`: 히어로 테마 무결성 검증.
    - `npm --prefix pipeline test`: 파이프라인 전체 단위 테스트 통과 확인.
+   - `npm --prefix pipeline run check:billing`: 무과금 안전성 점검.
 5. **Git PR 및 CI 확인**:
    - `main` 브랜치에 직접 푸시하지 않고, 작업 브랜치 생성 → 커밋 → PR 생성.
    - GitHub Actions CI(`Web quality / Lint and build`, `Web quality / Rail swipe`) 2종 통과 확인 후 squash merge.

@@ -103,15 +103,21 @@ const won = (n) => (n >= 10000 ? `${+(n / 10000).toFixed(1)}만원` : `${n.toLoc
 export function factsOf(c, d, { site = null, details = null, digest = null, kakao = null, nearby = null, naver = null } = {}) {
   const out = [];
   const cid = String(c.id);
+  const isLocalData = c.source_type === "LOCALDATA_LICENSED" || cid.startsWith("loc-");
   const push = (attr, value, grade, src, extra = {}) => {
     if (value === null || value === undefined || value === "" || Number.isNaN(value)) return;
-    // 당일 나들이 시드(registry/dayuse-seed.json) 장소는 고캠핑 등록값이 아니므로 원천을 바로잡는다.
-    out.push({ cid, attr, value, grade, src: c.du && src === "gocamping" ? "dayuse_seed" : src, url: null, at: null, ...extra });
+    // 당일 나들이 시드 및 인허가 등록 업장은 원천을 바로잡는다.
+    let resolvedSrc = src;
+    if (c.du && src === "gocamping") resolvedSrc = "dayuse_seed";
+    else if (isLocalData && src === "gocamping") resolvedSrc = "localdata";
+    out.push({ cid, attr, value, grade, src: resolvedSrc, url: null, at: null, ...extra });
   };
-  // ── 고캠핑 등록값(CONFIRMED)
+  // ── 고캠핑 등록값(CONFIRMED) 및 인허가 야영장 기본값
   const fc = c.field_conditions ?? {};
-  // 파일럿 캠핑장은 고캠핑 링크가 없어 파일럿 원문 출처를 쓴다.
-  const gc = { url: c.gc_url ?? fc.source?.url ?? c.src_url ?? null, at: c.modified_at ?? fc.source?.checked_at ?? c.src_at ?? null };
+  // 파일럿 캠핑장 및 인허가 캠핑장은 고캠핑 링크가 없어 원문 출처를 쓴다.
+  const defaultUrl = c.gc_url ?? fc.source?.url ?? c.src_url ?? (isLocalData ? "https://www.localdata.go.kr" : null);
+  const defaultAt = c.modified_at ?? fc.source?.checked_at ?? c.src_at ?? (isLocalData ? "2026-11-10T00:00:00Z" : null);
+  const gc = { url: defaultUrl, at: defaultAt };
   const fcAt = { url: fc.source?.url ?? gc.url, at: fc.source?.checked_at ?? gc.at };
   let total = 0;
   for (const [k, n] of c.kinds ?? []) if (KIND[k] && n > 0) { push(`STAY_${KIND[k]}_SITES`, n, "CONFIRMED", "gocamping", gc); total += n; }

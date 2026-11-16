@@ -221,12 +221,25 @@ export function youtubeId(url) {
   return null;
 }
 
+export function videoPlatform(url) {
+  if (!url) return null;
+  const u = String(url).toLowerCase();
+  if (/youtube\.com|youtu\.be/.test(u)) return "youtube";
+  if (/tv\.naver\.com|naver\.com\/v\/|clip\.naver\.com/.test(u)) return "naver";
+  if (/tv\.kakao\.com|kakaotv\.daum\.net|v\.daum\.net/.test(u)) return "kakao";
+  if (/tiktok\.com/.test(u)) return "tiktok";
+  if (/instagram\.com/.test(u)) return "instagram";
+  return "web";
+}
+
 export function normalizeVclip(d) {
   const url = httpUrl(d?.url);
   const title = stripHtml(d?.title);
   if (!url || !title) return null;
   const dur = Number(d?.play_time);
   const short = /\/shorts\//.test(url) || (Number.isFinite(dur) && dur > 0 && dur <= 60);
+  const yt = youtubeId(url);
+  const platform = videoPlatform(url);
   return {
     title: clip(title, 120),
     url,
@@ -234,7 +247,8 @@ export function normalizeVclip(d) {
     dur: Number.isFinite(dur) && dur > 0 ? dur : null,
     author: stripHtml(d?.author) || null,
     date: day(d?.datetime),
-    yt: youtubeId(url),
+    yt: yt || null,
+    platform,
     kind: short ? "short" : "video",
   };
 }

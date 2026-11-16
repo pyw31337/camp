@@ -45,12 +45,16 @@ jobs:
         run: node scripts/sync-trending.mjs
       - name: Check output
         run: node -e 'const x=JSON.parse(require("fs").readFileSync("camping-atlas/public/context/trending.json"));console.log("date",x.date,"top",x.top.length,"posts",x.totals.posts);if(!Array.isArray(x.top))process.exit(1)'
+      - name: Re-calculate info scores with refreshed trending
+        if: github.event_name != 'pull_request'
+        working-directory: pipeline
+        run: node scripts/apply-info-score.mjs
       - name: Commit (main only)
         if: github.event_name != 'pull_request'
         run: |
           git config user.name "moyeora-camping-data-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add camping-atlas/public/context/trending.json pipeline/registry/trending-posts.json pipeline/registry/trending-usage.json
+          git add camping-atlas/public/context/trending.json pipeline/registry/trending-posts.json pipeline/registry/trending-usage.json camping-atlas/public/explore/data/campgrounds.json data/quality/info-score.json
           if git diff --cached --quiet; then echo "변경 없음"; exit 0; fi
-          git commit -q -m "chore(data): refresh trending mentions"
+          git commit -q -m "chore(data): refresh trending mentions and update info scores"
           bash "$GITHUB_WORKSPACE/.github/scripts/land-on-main.sh" trending

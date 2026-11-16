@@ -688,6 +688,7 @@
 {"cid":"1418","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1418","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1433","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
+{"cid":"1436","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1438","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"1438","attr":"PRIVATE_BATHROOM","value":true,"grade":"OPERATOR","src":"operator_homepage","url":"http://bibiautocamp.com/contents/main.html","at":"2026-10-20T01:16:25.971Z","quote":"데크, 개별화장실"}
 {"cid":"1438","attr":"PRIVATE_BATHROOM","value":true,"grade":"CONFIRMED","src":"gocamping"}
@@ -2763,6 +2764,7 @@
 {"cid":"100098","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"제공"}
 {"cid":"100098","attr":"SHOWER_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100098","attr":"TOILET_COUNT","value":1,"grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100100","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100101","attr":"HOT_WATER","value":true,"grade":"CONFIRMED","src":"gocamping","text":"24시간"}
 {"cid":"100101","attr":"SHOWER_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100101","attr":"TOILET_COUNT","value":2,"grade":"CONFIRMED","src":"gocamping"}

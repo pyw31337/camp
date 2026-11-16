@@ -915,9 +915,9 @@
 {"cid":"638","attr":"PHONE","value":"1588-2704-","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"638","attr":"STAFF_ONSITE","value":4,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"638","attr":"TOURISM_BIZ_NO","value":"2016000001","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"640","attr":"HOMEPAGE","value":"https://cafe.naver.com/zelkova38/58775","grade":"CONFIRMED","src":"naver_local","url":"https://cafe.naver.com/zelkova38/58775","at":"2026-11-08T22:00:11.842Z","text":"숙박>캠핑,야영장"}
 {"cid":"640","attr":"HOMEPAGE","value":"https://naver.me/5tj47nQ3","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"640","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/17591877","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/17591877","at":"2026-11-08T22:00:02.510Z","text":"여행 > 숙박 > 야영,캠핑장"}
+{"cid":"640","attr":"HOMEPAGE","value":"https://www.campblox.co.kr/home","grade":"CONFIRMED","src":"naver_local","url":"https://www.campblox.co.kr/home","at":"2026-11-15T22:46:11.333Z","text":"숙박>캠핑,야영장"}
+{"cid":"640","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/17591877","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/17591877","at":"2026-11-15T22:46:03.199Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"640","attr":"LICENSE_DATE","value":"2015-05-29","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"640","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"640","attr":"PHONE","value":"070-8064-4853","grade":"CONFIRMED","src":"gocamping"}
@@ -1447,7 +1447,7 @@
 {"cid":"966","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"966","attr":"PHONE","value":"010-2732-8798","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"966","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
-{"cid":"977","attr":"HOMEPAGE","value":"http://cafe.naver.com/lohascamp","grade":"CONFIRMED","src":"naver_local","url":"http://cafe.naver.com/lohascamp","at":"2026-11-08T22:00:17.438Z","text":"숙박>캠핑,야영장"}
+{"cid":"977","attr":"HOMEPAGE","value":"http://cafe.naver.com/lohascamp","grade":"CONFIRMED","src":"naver_local","url":"http://cafe.naver.com/lohascamp","at":"2026-11-15T22:46:17.004Z","text":"숙박>캠핑,야영장"}
 {"cid":"977","attr":"HOMEPAGE","value":"https://cafe.naver.com/lohascamp","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"977","attr":"LICENSE_DATE","value":"2016-05-31","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"977","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
@@ -1993,6 +1993,7 @@
 {"cid":"1433","attr":"LICENSE_DATE","value":"2015-04-23","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1433","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1433","attr":"PHONE","value":"055-673-4994","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"1436","attr":"HOMEPAGE","value":"https://vivaldicamping.com","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1438","attr":"HOMEPAGE","value":"http://bibiautocamp.com","grade":"CONFIRMED","src":"naver_local","url":"http://bibiautocamp.com","at":"2026-10-16T06:24:57.742Z","text":"숙박>캠핑,야영장"}
 {"cid":"1438","attr":"HOMEPAGE","value":"http://bibiautocamp.com/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"1438","attr":"LICENSE_DATE","value":"2016-06-03","grade":"CONFIRMED","src":"gocamping"}
@@ -3171,8 +3172,8 @@
 {"cid":"2464","attr":"PHONE","value":"055-382-5839","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2464","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2472","attr":"HOMEPAGE","value":"http://cafe.naver.com/dooricamp8469","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"2472","attr":"HOMEPAGE","value":"https://원주두리캠핑장.com/","grade":"CONFIRMED","src":"naver_local","url":"https://원주두리캠핑장.com/","at":"2026-11-08T22:00:19.051Z","text":"숙박>캠핑,야영장"}
-{"cid":"2472","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/898560745","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/898560745","at":"2026-11-08T22:00:05.170Z","text":"여행 > 숙박 > 야영,캠핑장"}
+{"cid":"2472","attr":"HOMEPAGE","value":"https://원주두리캠핑장.com/","grade":"CONFIRMED","src":"naver_local","url":"https://원주두리캠핑장.com/","at":"2026-11-15T22:46:18.626Z","text":"숙박>캠핑,야영장"}
+{"cid":"2472","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/898560745","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/898560745","at":"2026-11-15T22:46:05.445Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"2472","attr":"LICENSE_DATE","value":"2015-07-30","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2472","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"2472","attr":"PHONE","value":"010-3806-8469","grade":"CONFIRMED","src":"gocamping"}
@@ -8154,6 +8155,7 @@
 {"cid":"100098","attr":"OPERATOR_TYPE","value":"NATURAL_RECREATION_FOREST","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100098","attr":"PHONE","value":"055-835-9524","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100098","attr":"TOURISM_BIZ_NO","value":"2021000004","grade":"CONFIRMED","src":"gocamping"}
+{"cid":"100100","attr":"HOMEPAGE","value":"https://camfit.co.kr","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100101","attr":"HOMEPAGE","value":"http://www.xn--289a78v7nfhza680e.com/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100101","attr":"HOMEPAGE","value":"http://www.속리산풍경.com","grade":"CONFIRMED","src":"naver_local","url":"http://www.속리산풍경.com","at":"2026-10-16T06:20:19.063Z","text":"숙박>펜션"}
 {"cid":"100101","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/31151617","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/31151617","at":"2026-10-16T05:34:19.135Z","text":"여행 > 숙박 > 펜션"}
@@ -8192,9 +8194,9 @@
 {"cid":"100117","attr":"PHONE","value":"061-337-5111","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100117","attr":"STAFF_ONSITE","value":2,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100117","attr":"TOURISM_BIZ_NO","value":"2021000001","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100122","attr":"HOMEPAGE","value":"https://pf.kakao.com/_rRqfn","grade":"CONFIRMED","src":"naver_local","url":"https://pf.kakao.com/_rRqfn","at":"2026-11-08T22:00:13.418Z","text":"숙박>캠핑,야영장"}
-{"cid":"100122","attr":"HOMEPAGE","value":"https://oneoneone.kr/content/d6a7b05a","grade":"MENTION","src":"kakao_web","url":"https://oneoneone.kr/content/d6a7b05a","at":"2026-11-08T22:00:04.369Z","quote":"내 텐트 안에 걸린 파란 하늘, 글램핑장 라플란드"}
-{"cid":"100122","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1579667394","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1579667394","at":"2026-11-08T22:00:04.369Z","text":"여행 > 숙박 > 야영,캠핑장"}
+{"cid":"100122","attr":"HOMEPAGE","value":"https://pf.kakao.com/_rRqfn","grade":"CONFIRMED","src":"naver_local","url":"https://pf.kakao.com/_rRqfn","at":"2026-11-15T22:46:12.952Z","text":"숙박>캠핑,야영장"}
+{"cid":"100122","attr":"HOMEPAGE","value":"https://oneoneone.kr/content/d6a7b05a","grade":"MENTION","src":"kakao_web","url":"https://oneoneone.kr/content/d6a7b05a","at":"2026-11-15T22:46:04.704Z","quote":"내 텐트 안에 걸린 파란 하늘, 글램핑장 라플란드"}
+{"cid":"100122","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1579667394","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1579667394","at":"2026-11-15T22:46:04.704Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"100122","attr":"LICENSE_DATE","value":"2021-09-17","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100122","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100122","attr":"TOURISM_BIZ_NO","value":"2021000004","grade":"CONFIRMED","src":"gocamping"}
@@ -8731,9 +8733,9 @@
 {"cid":"100288","attr":"LICENSE_DATE","value":"2022-02-09","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100288","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100288","attr":"PHONE","value":"032-937-6890","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100289","attr":"HOMEPAGE","value":"https://camfit.co.kr/camp/6232a3a6ebb46e001e72ee68","grade":"CONFIRMED","src":"naver_local","url":"https://camfit.co.kr/camp/6232a3a6ebb46e001e72ee68","at":"2026-11-08T22:00:22.285Z","text":"숙박>캠핑,야영장"}
+{"cid":"100289","attr":"HOMEPAGE","value":"https://camfit.co.kr/camp/6232a3a6ebb46e001e72ee68","grade":"CONFIRMED","src":"naver_local","url":"https://camfit.co.kr/camp/6232a3a6ebb46e001e72ee68","at":"2026-11-15T22:46:21.869Z","text":"숙박>캠핑,야영장"}
 {"cid":"100289","attr":"HOMEPAGE","value":"https://www.instagram.com/godwell_camping","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100289","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/828875441","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/828875441","at":"2026-11-08T22:00:03.981Z","text":"여행 > 숙박 > 야영,캠핑장"}
+{"cid":"100289","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/828875441","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/828875441","at":"2026-11-15T22:46:04.416Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"100289","attr":"LICENSE_DATE","value":"2022-02-09","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100289","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100289","attr":"PHONE","value":"041-533-5177","grade":"CONFIRMED","src":"gocamping"}
@@ -10283,8 +10285,8 @@
 {"cid":"100596","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100596","attr":"PHONE","value":"010-5389-5963","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100596","attr":"TOURISM_BIZ_NO","value":"2022000002","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100597","attr":"HOMEPAGE","value":"https://camfit.co.kr/camp/63158a808ee7aa001e3bd5f6","grade":"CONFIRMED","src":"naver_local","url":"https://camfit.co.kr/camp/63158a808ee7aa001e3bd5f6","at":"2026-11-08T22:00:23.102Z","text":"숙박>캠핑,야영장"}
-{"cid":"100597","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1537097954","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1537097954","at":"2026-11-08T22:00:04.404Z","text":"여행 > 숙박 > 야영,캠핑장"}
+{"cid":"100597","attr":"HOMEPAGE","value":"https://camfit.co.kr/camp/63158a808ee7aa001e3bd5f6","grade":"CONFIRMED","src":"naver_local","url":"https://camfit.co.kr/camp/63158a808ee7aa001e3bd5f6","at":"2026-11-15T22:46:22.698Z","text":"숙박>캠핑,야영장"}
+{"cid":"100597","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1537097954","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1537097954","at":"2026-11-15T22:46:04.834Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"100597","attr":"LICENSE_DATE","value":"2022-09-07","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100597","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100597","attr":"PHONE","value":"0507-1306-0604","grade":"CONFIRMED","src":"gocamping"}
@@ -10703,7 +10705,7 @@
 {"cid":"100675","attr":"OPERATOR_ORG","value":"이준영","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100675","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100675","attr":"TOURISM_BIZ_NO","value":"2022-7","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100676","attr":"HOMEPAGE","value":"https://booking.naver.com/booking/3/bizes/790710","grade":"CONFIRMED","src":"naver_local","url":"https://booking.naver.com/booking/3/bizes/790710","at":"2026-11-08T22:00:24.719Z","text":"숙박>캠핑,야영장"}
+{"cid":"100676","attr":"HOMEPAGE","value":"https://booking.naver.com/booking/3/bizes/790710","grade":"CONFIRMED","src":"naver_local","url":"https://booking.naver.com/booking/3/bizes/790710","at":"2026-11-15T22:46:24.308Z","text":"숙박>캠핑,야영장"}
 {"cid":"100676","attr":"HOMEPAGE","value":"https://www.instagram.com/_camp_darling/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100676","attr":"LICENSE_DATE","value":"2022-11-04","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100676","attr":"OPERATOR_ORG","value":"(주)다린물산 신상훈","grade":"CONFIRMED","src":"gocamping"}
@@ -10950,9 +10952,9 @@
 {"cid":"100720","attr":"PHONE","value":"042-822-6876","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100720","attr":"STAFF_ONSITE","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100720","attr":"TOURISM_BIZ_NO","value":"2022000001","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100721","attr":"HOMEPAGE","value":"http://www.camfit.co.kr/camp/636c59a252306e002032af00","grade":"CONFIRMED","src":"naver_local","url":"http://www.camfit.co.kr/camp/636c59a252306e002032af00","at":"2026-11-08T22:00:25.530Z","text":"숙박>캠핑,야영장"}
+{"cid":"100721","attr":"HOMEPAGE","value":"http://www.camfit.co.kr/camp/636c59a252306e002032af00","grade":"CONFIRMED","src":"naver_local","url":"http://www.camfit.co.kr/camp/636c59a252306e002032af00","at":"2026-11-15T22:46:25.105Z","text":"숙박>캠핑,야영장"}
 {"cid":"100721","attr":"HOMEPAGE","value":"https://cafe.naver.com/campinggsung","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"100721","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1779251680","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1779251680","at":"2026-11-08T22:00:03.987Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
+{"cid":"100721","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1779251680","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1779251680","at":"2026-11-15T22:46:04.427Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"100721","attr":"LICENSE_DATE","value":"2022-12-21","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100721","attr":"OPERATOR_ORG","value":"이진선","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"100721","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
@@ -12743,7 +12745,7 @@
 {"cid":"101092","attr":"PHONE","value":"0507-1313-5953","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101092","attr":"TOURISM_BIZ_NO","value":"2023000006","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101093","attr":"HOMEPAGE","value":"https://cafe.naver.com/alice80","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101093","attr":"HOMEPAGE","value":"https://www.camfit.co.kr/camp/64f571ec8942c8001eb8b421","grade":"CONFIRMED","src":"naver_local","url":"https://www.camfit.co.kr/camp/64f571ec8942c8001eb8b421","at":"2026-11-08T22:00:19.862Z","text":"숙박>캠핑,야영장"}
+{"cid":"101093","attr":"HOMEPAGE","value":"https://www.camfit.co.kr/camp/64f571ec8942c8001eb8b421","grade":"CONFIRMED","src":"naver_local","url":"https://www.camfit.co.kr/camp/64f571ec8942c8001eb8b421","at":"2026-11-15T22:46:19.448Z","text":"숙박>캠핑,야영장"}
 {"cid":"101093","attr":"LICENSE_DATE","value":"2023-01-25","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101093","attr":"OPERATOR_ORG","value":"한재환","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101093","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
@@ -13388,8 +13390,8 @@
 {"cid":"101212","attr":"PHONE","value":"010-4937-2080","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101212","attr":"STAFF_ONSITE","value":3,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101214","attr":"HOMEPAGE","value":"http://cafe.naver.com/campdaon","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101214","attr":"HOMEPAGE","value":"https://www.camfit.co.kr/camp/65000f57e23a8c001e02b1e4","grade":"CONFIRMED","src":"naver_local","url":"https://www.camfit.co.kr/camp/65000f57e23a8c001e02b1e4","at":"2026-11-08T22:00:18.244Z","text":"숙박>캠핑,야영장"}
-{"cid":"101214","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/661902238","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/661902238","at":"2026-11-08T22:00:02.540Z","text":"여행 > 숙박 > 야영,캠핑장"}
+{"cid":"101214","attr":"HOMEPAGE","value":"https://www.camfit.co.kr/camp/65000f57e23a8c001e02b1e4","grade":"CONFIRMED","src":"naver_local","url":"https://www.camfit.co.kr/camp/65000f57e23a8c001e02b1e4","at":"2026-11-15T22:46:17.793Z","text":"숙박>캠핑,야영장"}
+{"cid":"101214","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/661902238","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/661902238","at":"2026-11-15T22:46:03.220Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"101214","attr":"LICENSE_DATE","value":"2023-11-30","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101214","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101214","attr":"PHONE","value":"010-7490-5114","grade":"CONFIRMED","src":"gocamping"}
@@ -13726,8 +13728,8 @@
 {"cid":"101268","attr":"PHONE","value":"010-5043-6973","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101268","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101268","attr":"TOURISM_BIZ_NO","value":"2024000001","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101269","attr":"HOMEPAGE","value":"https://www.goldensaddlecamping.kr/","grade":"CONFIRMED","src":"naver_local","url":"https://www.goldensaddlecamping.kr/","at":"2026-11-08T22:00:23.898Z","text":"숙박>캠핑,야영장"}
-{"cid":"101269","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/826081055","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/826081055","at":"2026-11-08T22:00:04.322Z","text":"여행 > 숙박 > 야영,캠핑장"}
+{"cid":"101269","attr":"HOMEPAGE","value":"https://www.goldensaddlecamping.kr/","grade":"CONFIRMED","src":"naver_local","url":"https://www.goldensaddlecamping.kr/","at":"2026-11-15T22:46:23.484Z","text":"숙박>캠핑,야영장"}
+{"cid":"101269","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/826081055","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/826081055","at":"2026-11-15T22:46:04.634Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"101269","attr":"LICENSE_DATE","value":"2024-01-15","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101269","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101269","attr":"PHONE","value":"031-774-1566","grade":"CONFIRMED","src":"gocamping"}
@@ -14593,8 +14595,8 @@
 {"cid":"101415","attr":"PHONE","value":"010-9789-2664","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101415","attr":"TOURISM_BIZ_NO","value":"2024-15","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101416","attr":"HOMEPAGE","value":"http://naepocamping.modoo.at/","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101416","attr":"HOMEPAGE","value":"https://cafe.naver.com/nepocamping","grade":"CONFIRMED","src":"naver_local","url":"https://cafe.naver.com/nepocamping","at":"2026-11-08T22:00:21.484Z","text":"숙박>캠핑,야영장"}
-{"cid":"101416","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1931362185","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1931362185","at":"2026-11-08T22:00:03.888Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
+{"cid":"101416","attr":"HOMEPAGE","value":"https://cafe.naver.com/nepocamping","grade":"CONFIRMED","src":"naver_local","url":"https://cafe.naver.com/nepocamping","at":"2026-11-15T22:46:21.059Z","text":"숙박>캠핑,야영장"}
+{"cid":"101416","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1931362185","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1931362185","at":"2026-11-15T22:46:04.291Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"101416","attr":"LICENSE_DATE","value":"2024-06-26","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101416","attr":"OPERATOR_ORG","value":"장희재","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101416","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
@@ -15630,8 +15632,8 @@
 {"cid":"101607","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101607","attr":"TOURISM_BIZ_NO","value":"2024-1","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101608","attr":"HOMEPAGE","value":"https://cafe.naver.com/sansaesoristory","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101608","attr":"HOMEPAGE","value":"https://cafe.naver.com/sansaesoristory","grade":"CONFIRMED","src":"naver_local","url":"https://cafe.naver.com/sansaesoristory","at":"2026-11-08T22:00:16.620Z","text":"숙박>캠핑,야영장"}
-{"cid":"101608","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/2026652673","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/2026652673","at":"2026-11-08T22:00:04.389Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
+{"cid":"101608","attr":"HOMEPAGE","value":"https://cafe.naver.com/sansaesoristory","grade":"CONFIRMED","src":"naver_local","url":"https://cafe.naver.com/sansaesoristory","at":"2026-11-15T22:46:16.184Z","text":"숙박>캠핑,야영장"}
+{"cid":"101608","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/2026652673","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/2026652673","at":"2026-11-15T22:46:04.817Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"101608","attr":"LICENSE_DATE","value":"2024-04-02","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101608","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101608","attr":"PHONE","value":"010-9092-4963","grade":"CONFIRMED","src":"gocamping"}
@@ -15807,11 +15809,11 @@
 {"cid":"101637","attr":"TOURISM_BIZ_NO","value":"2024000004","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101638","attr":"LICENSE_DATE","value":"2024-10-31","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101638","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101639","attr":"HOMEPAGE","value":"https://cafe.naver.com/moolmungcamp","grade":"CONFIRMED","src":"naver_local","url":"https://cafe.naver.com/moolmungcamp","at":"2026-11-08T22:00:20.691Z","text":"숙박>캠핑,야영장"}
-{"cid":"101639","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/604025620","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/604025620","at":"2026-11-08T22:00:02.541Z","text":"여행 > 숙박 > 야영,캠핑장"}
+{"cid":"101639","attr":"HOMEPAGE","value":"https://cafe.naver.com/moolmungcamp","grade":"CONFIRMED","src":"naver_local","url":"https://cafe.naver.com/moolmungcamp","at":"2026-11-15T22:46:20.243Z","text":"숙박>캠핑,야영장"}
+{"cid":"101639","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/604025620","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/604025620","at":"2026-11-15T22:46:03.221Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"101639","attr":"LICENSE_DATE","value":"2024-10-31","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101639","attr":"OPERATOR_TYPE","value":"PRIVATE","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"101639","attr":"PHONE","value":"0503-7151-3841","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/604025620","at":"2026-11-08T22:00:02.541Z"}
+{"cid":"101639","attr":"PHONE","value":"0503-7151-3841","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/604025620","at":"2026-11-15T22:46:03.221Z"}
 {"cid":"101640","attr":"HOMEPAGE","value":"http://sagehill.co.kr/","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"101640","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/1579081171","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/1579081171","at":"2026-10-16T05:34:36.096Z","text":"여행 > 숙박 > 야영,캠핑장 > 오토캠핑장"}
 {"cid":"101640","attr":"LICENSE_DATE","value":"2024-02-21","grade":"CONFIRMED","src":"gocamping"}
@@ -18676,7 +18678,7 @@
 {"cid":"102228","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102228","attr":"TOURISM_BIZ_NO","value":"2026000002","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102229","attr":"HOMEPAGE","value":"https://hsecofarm.hscity.go.kr/","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102229","attr":"HOMEPAGE","value":"https://hsecofarm.hscity.go.kr/","grade":"CONFIRMED","src":"naver_local","url":"https://hsecofarm.hscity.go.kr/","at":"2026-11-08T22:00:14.231Z","text":"숙박>캠핑,야영장"}
+{"cid":"102229","attr":"HOMEPAGE","value":"https://hsecofarm.hscity.go.kr/","grade":"CONFIRMED","src":"naver_local","url":"https://hsecofarm.hscity.go.kr/","at":"2026-11-15T22:46:13.758Z","text":"숙박>캠핑,야영장"}
 {"cid":"102229","attr":"LICENSE_DATE","value":"2026-06-12","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102229","attr":"OPERATOR_ORG","value":"재단법인 화성푸드통합지원센터","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102229","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
@@ -18811,7 +18813,7 @@
 {"cid":"102269","attr":"STAFF_ONSITE","value":1,"grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102269","attr":"TOURISM_BIZ_NO","value":"2026000002","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102270","attr":"HOMEPAGE","value":"https://myeongrangstay.letsnowgo.com/","grade":"CONFIRMED","src":"gocamping"}
-{"cid":"102270","attr":"HOMEPAGE","value":"https://myeongrangstay.letsnowgo.com/","grade":"CONFIRMED","src":"naver_local","url":"https://myeongrangstay.letsnowgo.com/","at":"2026-11-08T22:00:15.037Z","text":"숙박>캠핑,야영장"}
+{"cid":"102270","attr":"HOMEPAGE","value":"https://myeongrangstay.letsnowgo.com/","grade":"CONFIRMED","src":"naver_local","url":"https://myeongrangstay.letsnowgo.com/","at":"2026-11-15T22:46:14.580Z","text":"숙박>캠핑,야영장"}
 {"cid":"102270","attr":"LICENSE_DATE","value":"2026-07-06","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102270","attr":"OPERATOR_ORG","value":"조제연","grade":"CONFIRMED","src":"gocamping"}
 {"cid":"102270","attr":"OPERATOR_TYPE","value":"UNKNOWN","grade":"CONFIRMED","src":"gocamping"}
@@ -19268,6 +19270,275 @@
 {"cid":"imjingak-peace-nuri","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/156156716","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/156156716","at":"2026-10-24T21:10:38.623Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"imjingak-peace-nuri","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"dayuse_seed","url":"https://ggtour.or.kr/camping/","at":"2026-11-09"}
 {"cid":"imjingak-peace-nuri","attr":"PHONE","value":"031-956-8350","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/156156716","at":"2026-10-24T21:10:38.623Z"}
+{"cid":"loc-0b21b76f","attr":"PHONE","value":"0552713562","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.959Z"}
+{"cid":"loc-0b128b73","attr":"PHONE","value":"0416420556","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.920Z"}
+{"cid":"loc-0dd8eb7c","attr":"PHONE","value":"0333305301","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.904Z"}
+{"cid":"loc-0e8ebf65","attr":"PHONE","value":"0635404196","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.927Z"}
+{"cid":"loc-0ecd4843","attr":"PHONE","value":"0334354355","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.894Z"}
+{"cid":"loc-0f8f5b8a","attr":"PHONE","value":"0334348971","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.895Z"}
+{"cid":"loc-00fa5a07","attr":"PHONE","value":"0544308805","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.936Z"}
+{"cid":"loc-1a20d6d5","attr":"PHONE","value":"0418415220","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.919Z"}
+{"cid":"loc-1ad0d969","attr":"PHONE","value":"0417330867","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.922Z"}
+{"cid":"loc-2a1e5a3c","attr":"PHONE","value":"0315425420","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.958Z"}
+{"cid":"loc-02a344dd","attr":"PHONE","value":"0413313312","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.923Z"}
+{"cid":"loc-2a9070d0","attr":"PHONE","value":"0548738678","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.973Z"}
+{"cid":"loc-2a9594b2","attr":"PHONE","value":"0546796114","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.975Z"}
+{"cid":"loc-2c1f826f","attr":"PHONE","value":"0260802017","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.960Z"}
+{"cid":"loc-2c83fe08","attr":"PHONE","value":"0559604520","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.977Z"}
+{"cid":"loc-2e0b05fd","attr":"PHONE","value":"0437303491","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.914Z"}
+{"cid":"loc-2e1f0ef8","attr":"PHONE","value":"0547906573","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.944Z"}
+{"cid":"loc-2f9d2707","attr":"PHONE","value":"0547817877","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.944Z"}
+{"cid":"loc-2f5943ed","attr":"PHONE","value":"0632615152","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.928Z"}
+{"cid":"loc-2f296717","attr":"PHONE","value":"0315811288","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.880Z"}
+{"cid":"loc-3a192db4","attr":"PHONE","value":"0415512220","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.919Z"}
+{"cid":"loc-3c000c38","attr":"PHONE","value":"0315354308","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.957Z"}
+{"cid":"loc-3d1609e5","attr":"PHONE","value":"0522542123","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.871Z"}
+{"cid":"loc-03e40fb9","attr":"PHONE","value":"05053257575","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.889Z"}
+{"cid":"loc-3e561dd8","attr":"PHONE","value":"0438826682","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.917Z"}
+{"cid":"loc-3f936e40","attr":"PHONE","value":"0544567900","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.936Z"}
+{"cid":"loc-4a1a0445","attr":"PHONE","value":"15997130","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.894Z"}
+{"cid":"loc-4b06404e","attr":"PHONE","value":"0334622040","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.907Z"}
+{"cid":"loc-4c1d5444","attr":"PHONE","value":"0316452000","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.876Z"}
+{"cid":"loc-4cbe7abb","attr":"PHONE","value":"0334415533","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.907Z"}
+{"cid":"loc-04da68fc","attr":"PHONE","value":"0329340110","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.869Z"}
+{"cid":"loc-4e3901bc","attr":"PHONE","value":"0428203133","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.969Z"}
+{"cid":"loc-5b1ccbc1","attr":"PHONE","value":"0315320014","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.957Z"}
+{"cid":"loc-5b696e24","attr":"PHONE","value":"0635404196","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.971Z"}
+{"cid":"loc-5bf1fe88","attr":"PHONE","value":"0335728658","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.894Z"}
+{"cid":"loc-5c255f39","attr":"PHONE","value":"0315326135","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.957Z"}
+{"cid":"loc-5d61f845","attr":"PHONE","value":"0536662806","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.960Z"}
+{"cid":"loc-5d2524f2","attr":"PHONE","value":"0317723054","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.889Z"}
+{"cid":"loc-5d86457b","attr":"PHONE","value":"0556727985","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.947Z"}
+{"cid":"loc-5df43dda","attr":"PHONE","value":"0317748500","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.887Z"}
+{"cid":"loc-5f0887a8","attr":"PHONE","value":"0315355720","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.954Z"}
+{"cid":"loc-6abfc166","attr":"PHONE","value":"0334361755","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.895Z"}
+{"cid":"loc-6b53e15e","attr":"PHONE","value":"0334349391","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.895Z"}
+{"cid":"loc-6f9c384d","attr":"PHONE","value":"0647668834","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.978Z"}
+{"cid":"loc-6ffe050f","attr":"PHONE","value":"0336614667","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.893Z"}
+{"cid":"loc-7abfa19d","attr":"PHONE","value":"0543346900","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.973Z"}
+{"cid":"loc-7b8421b6","attr":"PHONE","value":"0313560768","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.951Z"}
+{"cid":"loc-7c291fad","attr":"PHONE","value":"0559408530","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.977Z"}
+{"cid":"loc-7dbeef75","attr":"PHONE","value":"0418552008","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.919Z"}
+{"cid":"loc-7e0a5185","attr":"PHONE","value":"0334338529","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.896Z"}
+{"cid":"loc-7efe6d8e","attr":"PHONE","value":"0547307881","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.974Z"}
+{"cid":"loc-08ae0b13","attr":"PHONE","value":"0546372456","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.936Z"}
+{"cid":"loc-08b4937e","attr":"PHONE","value":"0318555081","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.952Z"}
+{"cid":"loc-8bd2e55a","attr":"PHONE","value":"0334302490","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.965Z"}
+{"cid":"loc-8d719807","attr":"PHONE","value":"0545550001","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.938Z"}
+{"cid":"loc-8dcc9929","attr":"PHONE","value":"0329370209","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.869Z"}
+{"cid":"loc-8e443ff2","attr":"PHONE","value":"0328884490","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.869Z"}
+{"cid":"loc-8e4018b2","attr":"PHONE","value":"0335760884","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.964Z"}
+{"cid":"loc-8f0b91fa","attr":"PHONE","value":"0334638590","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.908Z"}
+{"cid":"loc-9abed2e4","attr":"PHONE","value":"0432707388","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.978Z"}
+{"cid":"loc-9b5be366","attr":"PHONE","value":"0317744545","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.888Z"}
+{"cid":"loc-9bc57e92","attr":"PHONE","value":"0544812600","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.972Z"}
+{"cid":"loc-9bcd0c6f","attr":"PHONE","value":"0413639229","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.959Z"}
+{"cid":"loc-9c838e58","attr":"PHONE","value":"0332439261","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.890Z"}
+{"cid":"loc-9cb57bc8","attr":"PHONE","value":"0413398281","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.923Z"}
+{"cid":"loc-9e4f8e16","attr":"PHONE","value":"0546505805","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.974Z"}
+{"cid":"loc-9f624076","attr":"PHONE","value":"0313072537","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.875Z"}
+{"cid":"loc-9fb8953e","attr":"PHONE","value":"0334360732","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.896Z"}
+{"cid":"loc-12d3884c","attr":"PHONE","value":"0333758870","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.901Z"}
+{"cid":"loc-16eff58b","attr":"PHONE","value":"0436536692","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.913Z"}
+{"cid":"loc-20e68b60","attr":"PHONE","value":"0318289881","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.953Z"}
+{"cid":"loc-24ca16c7","attr":"PHONE","value":"0333723229","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.903Z"}
+{"cid":"loc-29c0ffec","attr":"PHONE","value":"0334355984","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.895Z"}
+{"cid":"loc-29f9042e","attr":"PHONE","value":"0334412419","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.906Z"}
+{"cid":"loc-31b8ee90","attr":"PHONE","value":"0315840118","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.881Z"}
+{"cid":"loc-32aef00e","attr":"PHONE","value":"0437321910","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.915Z"}
+{"cid":"loc-38f8ccb0","attr":"PHONE","value":"0334361001","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.896Z"}
+{"cid":"loc-44c791d5","attr":"PHONE","value":"0543322001","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.973Z"}
+{"cid":"loc-44ccd530","attr":"PHONE","value":"07070117274","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.979Z"}
+{"cid":"loc-47fffac8","attr":"PHONE","value":"0413639229","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.959Z"}
+{"cid":"loc-51c92695","attr":"PHONE","value":"0549719011","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.942Z"}
+{"cid":"loc-55e38b80","attr":"PHONE","value":"0315353315","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.957Z"}
+{"cid":"loc-64eb2ec1","attr":"PHONE","value":"0333787767","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.899Z"}
+{"cid":"loc-67b2454f","attr":"PHONE","value":"0334343798","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.895Z"}
+{"cid":"loc-68a8a0be","attr":"PHONE","value":"0334359720","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.895Z"}
+{"cid":"loc-70c38f42","attr":"PHONE","value":"0522093753","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.961Z"}
+{"cid":"loc-078bea23","attr":"PHONE","value":"0633239000","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.928Z"}
+{"cid":"loc-83a26b52","attr":"PHONE","value":"0328800450","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.870Z"}
+{"cid":"loc-83b80381","attr":"PHONE","value":"0635843659","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.931Z"}
+{"cid":"loc-89cd8ac6","attr":"PHONE","value":"07077271290","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.966Z"}
+{"cid":"loc-89dd94f0","attr":"PHONE","value":"0546740204","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.943Z"}
+{"cid":"loc-93cf0dbd","attr":"PHONE","value":"025007541","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.873Z"}
+{"cid":"loc-115e8df8","attr":"PHONE","value":"0548611414","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.973Z"}
+{"cid":"loc-170a02b9","attr":"PHONE","value":"0543718822","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.940Z"}
+{"cid":"loc-186c769a","attr":"PHONE","value":"0436539222","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.912Z"}
+{"cid":"loc-205b1e58","attr":"PHONE","value":"07082667781","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.967Z"}
+{"cid":"loc-223f7f77","attr":"PHONE","value":"0549551133","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.941Z"}
+{"cid":"loc-266b23df","attr":"PHONE","value":"0438713762","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.968Z"}
+{"cid":"loc-279f574f","attr":"PHONE","value":"0556425140","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.975Z"}
+{"cid":"loc-376c5ae6","attr":"PHONE","value":"0546743700","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.943Z"}
+{"cid":"loc-471defb3","attr":"PHONE","value":"0438782556","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.967Z"}
+{"cid":"loc-482dd451","attr":"PHONE","value":"0319589558","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.875Z"}
+{"cid":"loc-525f5deb","attr":"PHONE","value":"0418560030","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.919Z"}
+{"cid":"loc-643ad119","attr":"PHONE","value":"0517140838","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.865Z"}
+{"cid":"loc-668f7032","attr":"PHONE","value":"0632290011","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.927Z"}
+{"cid":"loc-692edcc2","attr":"PHONE","value":"0315895487","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.879Z"}
+{"cid":"loc-744eca03","attr":"PHONE","value":"029442941","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.857Z"}
+{"cid":"loc-748c324b","attr":"PHONE","value":"0549728032","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.974Z"}
+{"cid":"loc-770f3be3","attr":"PHONE","value":"0558628564","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.947Z"}
+{"cid":"loc-774c440f","attr":"PHONE","value":"0318451111","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.952Z"}
+{"cid":"loc-867a66ee","attr":"PHONE","value":"0636520352","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.930Z"}
+{"cid":"loc-869e1854","attr":"PHONE","value":"0545377114","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.937Z"}
+{"cid":"loc-920ec445","attr":"PHONE","value":"0558844577","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.948Z"}
+{"cid":"loc-926e31e4","attr":"PHONE","value":"0316782914","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.877Z"}
+{"cid":"loc-939c7921","attr":"PHONE","value":"023005576","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.864Z"}
+{"cid":"loc-958ecf9a","attr":"PHONE","value":"0314027732","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.873Z"}
+{"cid":"loc-967cd72c","attr":"PHONE","value":"0545727273","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.938Z"}
+{"cid":"loc-2305de67","attr":"PHONE","value":"0336803356","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.966Z"}
+{"cid":"loc-2930f7a4","attr":"PHONE","value":"0437445900","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.915Z"}
+{"cid":"loc-03527cc3","attr":"PHONE","value":"0537193300","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.960Z"}
+{"cid":"loc-3625c6f7","attr":"PHONE","value":"0334350303","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.896Z"}
+{"cid":"loc-3947c7dd","attr":"PHONE","value":"0556725588","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.976Z"}
+{"cid":"loc-4089f0cb","attr":"PHONE","value":"0318348383","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.878Z"}
+{"cid":"loc-4492b82c","attr":"PHONE","value":"0418408564","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.969Z"}
+{"cid":"loc-4630d44c","attr":"PHONE","value":"0418509235","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.922Z"}
+{"cid":"loc-4773a8b9","attr":"PHONE","value":"0549323379","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.942Z"}
+{"cid":"loc-4944cac9","attr":"PHONE","value":"0334505198","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.966Z"}
+{"cid":"loc-5451f197","attr":"PHONE","value":"0436516602","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.912Z"}
+{"cid":"loc-5454edfd","attr":"PHONE","value":"029540249","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.864Z"}
+{"cid":"loc-9347eb4c","attr":"PHONE","value":"0334358181","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.895Z"}
+{"cid":"loc-9477cf6b","attr":"PHONE","value":"0426116126","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.961Z"}
+{"cid":"loc-9752f82d","attr":"PHONE","value":"0415449254","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.921Z"}
+{"cid":"loc-19053e08","attr":"PHONE","value":"0316359500","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.877Z"}
+{"cid":"loc-20451f34","attr":"PHONE","value":"0549713125","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.974Z"}
+{"cid":"loc-25613e93","attr":"PHONE","value":"0416636690","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.921Z"}
+{"cid":"loc-27283beb","attr":"PHONE","value":"0315851716","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.881Z"}
+{"cid":"loc-30953e27","attr":"PHONE","value":"07041471021","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.866Z"}
+{"cid":"loc-36446e26","attr":"PHONE","value":"0318357394","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.962Z"}
+{"cid":"loc-44435dd3","attr":"PHONE","value":"0626072452","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.960Z"}
+{"cid":"loc-45992c29","attr":"PHONE","value":"0334818615","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.907Z"}
+{"cid":"loc-58180e84","attr":"PHONE","value":"0635803172","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.930Z"}
+{"cid":"loc-58291bf0","attr":"PHONE","value":"0549719860","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.942Z"}
+{"cid":"loc-208793d5","attr":"PHONE","value":"0333787464","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.901Z"}
+{"cid":"loc-608321bd","attr":"PHONE","value":"0336731806","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.966Z"}
+{"cid":"loc-0717483c","attr":"PHONE","value":"0333735060","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.901Z"}
+{"cid":"loc-772298d0","attr":"PHONE","value":"0335534135","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.964Z"}
+{"cid":"loc-903608cb","attr":"PHONE","value":"07044152203","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.952Z"}
+{"cid":"loc-909559df","attr":"PHONE","value":"0419329262","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.920Z"}
+{"cid":"loc-923884ff","attr":"PHONE","value":"0417415060","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.969Z"}
+{"cid":"loc-1112058f","attr":"PHONE","value":"0334347600","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.896Z"}
+{"cid":"loc-04404781","attr":"PHONE","value":"0547884490","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.943Z"}
+{"cid":"loc-5075163c","attr":"PHONE","value":"0319835095","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.877Z"}
+{"cid":"loc-8495518d","attr":"PHONE","value":"0315853330","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.880Z"}
+{"cid":"loc-09691086","attr":"PHONE","value":"0632902732","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.971Z"}
+{"cid":"loc-09766636","attr":"PHONE","value":"0222896865","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.960Z"}
+{"cid":"loc-12117136","attr":"PHONE","value":"0422734174","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.961Z"}
+{"cid":"loc-31268950","attr":"PHONE","value":"0549724465","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.943Z"}
+{"cid":"loc-64335451","attr":"PHONE","value":"0448632871","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.959Z"}
+{"cid":"loc-64685687","attr":"PHONE","value":"0417333700","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.922Z"}
+{"cid":"loc-69569105","attr":"PHONE","value":"0543731327","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.939Z"}
+{"cid":"loc-80397079","attr":"PHONE","value":"0547817797","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.943Z"}
+{"cid":"loc-a1a8220d","attr":"PHONE","value":"0436435794","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.913Z"}
+{"cid":"loc-a5e8c997","attr":"PHONE","value":"0647820110","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.960Z"}
+{"cid":"loc-a5ed0bbb","attr":"PHONE","value":"0328800700","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.870Z"}
+{"cid":"loc-a7b916a0","attr":"PHONE","value":"0333730995","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.902Z"}
+{"cid":"loc-a18fdd8e","attr":"PHONE","value":"0546327400","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.973Z"}
+{"cid":"loc-a32d90e0","attr":"PHONE","value":"0315320692","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.958Z"}
+{"cid":"loc-a47ba820","attr":"PHONE","value":"0335632283","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.906Z"}
+{"cid":"loc-a52a9201","attr":"PHONE","value":"0313321669","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.877Z"}
+{"cid":"loc-a62f7154","attr":"PHONE","value":"0315365565","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.957Z"}
+{"cid":"loc-a78d908f","attr":"PHONE","value":"0544345255","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.972Z"}
+{"cid":"loc-a509d9f1","attr":"PHONE","value":"0315441260","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.956Z"}
+{"cid":"loc-a680f3e9","attr":"PHONE","value":"0546548359","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.943Z"}
+{"cid":"loc-a57092a8","attr":"PHONE","value":"0334328829","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.896Z"}
+{"cid":"loc-ab396eec","attr":"PHONE","value":"0419304633","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.921Z"}
+{"cid":"loc-ac1e9a27","attr":"PHONE","value":"0316826075","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.871Z"}
+{"cid":"loc-ac51b3f4","attr":"PHONE","value":"0419428010","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.970Z"}
+{"cid":"loc-add1b963","attr":"PHONE","value":"0558633573","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.947Z"}
+{"cid":"loc-ae63f884","attr":"PHONE","value":"0546524733","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.943Z"}
+{"cid":"loc-af23ccc6","attr":"PHONE","value":"0636531306","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.930Z"}
+{"cid":"loc-b1a0985d","attr":"PHONE","value":"0314316660","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.874Z"}
+{"cid":"loc-b5c5fb94","attr":"PHONE","value":"0546360053","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.936Z"}
+{"cid":"loc-b9a849bf","attr":"PHONE","value":"0318719708","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.951Z"}
+{"cid":"loc-b18d4095","attr":"PHONE","value":"0335751765","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.894Z"}
+{"cid":"loc-b47d84da","attr":"PHONE","value":"0555704958","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.946Z"}
+{"cid":"loc-b9699f4c","attr":"PHONE","value":"0319422557","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.876Z"}
+{"cid":"loc-ba72ff17","attr":"PHONE","value":"0559638702","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.949Z"}
+{"cid":"loc-bc88f067","attr":"PHONE","value":"0522573626","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.870Z"}
+{"cid":"loc-bd087942","attr":"PHONE","value":"0333328829","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.965Z"}
+{"cid":"loc-be8ba5c6","attr":"PHONE","value":"0548737799","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.974Z"}
+{"cid":"loc-bf81d3c4","attr":"PHONE","value":"0333302466","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.903Z"}
+{"cid":"loc-bfa79eba","attr":"PHONE","value":"0333749142","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.901Z"}
+{"cid":"loc-c0ef79c4","attr":"PHONE","value":"0559458800","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.950Z"}
+{"cid":"loc-c3cd1da8","attr":"PHONE","value":"0417346980","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.922Z"}
+{"cid":"loc-c4e3a6d0","attr":"PHONE","value":"0438570911","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.967Z"}
+{"cid":"loc-c4f342d8","attr":"PHONE","value":"0536161868","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.866Z"}
+{"cid":"loc-c5dd86e0","attr":"PHONE","value":"0334420072","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.907Z"}
+{"cid":"loc-c7a53a71","attr":"PHONE","value":"0334321335","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.895Z"}
+{"cid":"loc-c39f9120","attr":"PHONE","value":"0635827808","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.971Z"}
+{"cid":"loc-c51e8c67","attr":"PHONE","value":"0546723191","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.943Z"}
+{"cid":"loc-c69ed3ea","attr":"PHONE","value":"0419601111","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.919Z"}
+{"cid":"loc-c546c865","attr":"PHONE","value":"0318713388","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.953Z"}
+{"cid":"loc-c784167a","attr":"PHONE","value":"0546739966","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.943Z"}
+{"cid":"loc-c5532046","attr":"PHONE","value":"0549329339","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.942Z"}
+{"cid":"loc-cab2420c","attr":"PHONE","value":"0332645778","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.892Z"}
+{"cid":"loc-cabd5783","attr":"PHONE","value":"0436457688","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.913Z"}
+{"cid":"loc-cc7be9a4","attr":"PHONE","value":"0336733322","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.966Z"}
+{"cid":"loc-cc9abd4e","attr":"PHONE","value":"0413563154","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.923Z"}
+{"cid":"loc-cdaae79b","attr":"PHONE","value":"0432014435","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.978Z"}
+{"cid":"loc-cdd72637","attr":"PHONE","value":"0547811002","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.944Z"}
+{"cid":"loc-ce87c00f","attr":"PHONE","value":"0559638133","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.949Z"}
+{"cid":"loc-cee57617","attr":"PHONE","value":"0435440007","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.914Z"}
+{"cid":"loc-cfaee185","attr":"PHONE","value":"0333403000","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.898Z"}
+{"cid":"loc-d0df2795","attr":"PHONE","value":"0543732426","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.940Z"}
+{"cid":"loc-d7b3d53c","attr":"PHONE","value":"0436511233","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.913Z"}
+{"cid":"loc-d7baf0e7","attr":"PHONE","value":"0549545555","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.941Z"}
+{"cid":"loc-d8dc09b9","attr":"PHONE","value":"0334358536","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.895Z"}
+{"cid":"loc-d25ac2bc","attr":"PHONE","value":"0334352321","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.895Z"}
+{"cid":"loc-d0247b81","attr":"PHONE","value":"0221333926","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.913Z"}
+{"cid":"loc-d2662e53","attr":"PHONE","value":"028290913","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.883Z"}
+{"cid":"loc-d05176d0","attr":"PHONE","value":"0558802493","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.976Z"}
+{"cid":"loc-d9137e84","attr":"PHONE","value":"0336810700","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.910Z"}
+{"cid":"loc-d77342d0","attr":"PHONE","value":"0432971122","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.959Z"}
+{"cid":"loc-d96779ad","attr":"PHONE","value":"0336335055","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.894Z"}
+{"cid":"loc-d9224805","attr":"PHONE","value":"0413332442","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.923Z"}
+{"cid":"loc-de0085fe","attr":"PHONE","value":"0316720121","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.877Z"}
+{"cid":"loc-dec6f879","attr":"PHONE","value":"0419039100","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.918Z"}
+{"cid":"loc-df03ae28","attr":"PHONE","value":"0552710702","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.959Z"}
+{"cid":"loc-df4ea587","attr":"PHONE","value":"0315318281","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.954Z"}
+{"cid":"loc-df84b619","attr":"PHONE","value":"0317713440","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.893Z"}
+{"cid":"loc-df3587b9","attr":"PHONE","value":"07087096285","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.870Z"}
+{"cid":"loc-dfa77424","attr":"PHONE","value":"0547508600","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.934Z"}
+{"cid":"loc-dfb5e77f","attr":"PHONE","value":"0544346677","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.936Z"}
+{"cid":"loc-dfd9a5f3","attr":"PHONE","value":"0438511185","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.911Z"}
+{"cid":"loc-e1daecfe","attr":"PHONE","value":"0334356034","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.895Z"}
+{"cid":"loc-e7ad8e7a","attr":"PHONE","value":"0546520114","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.943Z"}
+{"cid":"loc-e7b54599","attr":"PHONE","value":"0336803422","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.966Z"}
+{"cid":"loc-e8d42257","attr":"PHONE","value":"0522227825","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.870Z"}
+{"cid":"loc-e55c02dc","attr":"PHONE","value":"0315433600","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.955Z"}
+{"cid":"loc-e94cc58f","attr":"PHONE","value":"0333751112","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.901Z"}
+{"cid":"loc-e323ad40","attr":"PHONE","value":"0552229100","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.959Z"}
+{"cid":"loc-e460adc7","attr":"PHONE","value":"0413379613","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.924Z"}
+{"cid":"loc-e596b3ea","attr":"PHONE","value":"0337663491","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.963Z"}
+{"cid":"loc-e900bdab","attr":"PHONE","value":"0559626622","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.949Z"}
+{"cid":"loc-e6752c9c","attr":"PHONE","value":"0316748255","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.962Z"}
+{"cid":"loc-e0365797","attr":"PHONE","value":"0545377114","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.937Z"}
+{"cid":"loc-e1424792","attr":"PHONE","value":"0416641978","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.921Z"}
+{"cid":"loc-ebde1fbb","attr":"PHONE","value":"0334411237","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.906Z"}
+{"cid":"loc-ed056bf2","attr":"PHONE","value":"0314053346","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.874Z"}
+{"cid":"loc-ee488328","attr":"PHONE","value":"0617972656","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.978Z"}
+{"cid":"loc-eec90e7a","attr":"PHONE","value":"0638512009","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.971Z"}
+{"cid":"loc-f1cb36e2","attr":"PHONE","value":"07077600393","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.956Z"}
+{"cid":"loc-f03b75d1","attr":"PHONE","value":"0636534779","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.929Z"}
+{"cid":"loc-f4c03b8f","attr":"PHONE","value":"0556327577","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.945Z"}
+{"cid":"loc-f7eaa913","attr":"PHONE","value":"0545375625","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.937Z"}
+{"cid":"loc-f7ef62d4","attr":"PHONE","value":"0335629595","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.905Z"}
+{"cid":"loc-f8b3b931","attr":"PHONE","value":"0318571775","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.952Z"}
+{"cid":"loc-f35af9ac","attr":"PHONE","value":"0329322004","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.869Z"}
+{"cid":"loc-f66ad0d2","attr":"PHONE","value":"0543320027","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.973Z"}
+{"cid":"loc-f278aa12","attr":"PHONE","value":"0438576131","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.911Z"}
+{"cid":"loc-f00534d9","attr":"PHONE","value":"18995852","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.928Z"}
+{"cid":"loc-f4346e62","attr":"PHONE","value":"0435329960","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.916Z"}
+{"cid":"loc-f9794fa1","attr":"PHONE","value":"0333321260","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.904Z"}
+{"cid":"loc-fa852b19","attr":"PHONE","value":"0315359107","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.956Z"}
+{"cid":"loc-fd8e9f04","attr":"PHONE","value":"80086682","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.873Z"}
+{"cid":"loc-fda834f2","attr":"PHONE","value":"0316782914","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.962Z"}
+{"cid":"loc-fdf9dccf","attr":"PHONE","value":"0418418201","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.919Z"}
+{"cid":"loc-fee4e44e","attr":"PHONE","value":"0553812255","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.945Z"}
+{"cid":"loc-ff1abaca","attr":"PHONE","value":"0417503436","grade":"CONFIRMED","src":"localdata","url":"https://www.localdata.go.kr","at":"2026-11-10T00:41:54.922Z"}
 {"cid":"osm-n469713235","attr":"HOMEPAGE","value":"http://tour.samcheok.go.kr/02nice/02_07.jsp","grade":"CONFIRMED","src":"naver_local","url":"http://tour.samcheok.go.kr/02nice/02_07.jsp","at":"2026-10-24T22:02:28.738Z","text":"여행,명소>유원지"}
 {"cid":"osm-n469713235","attr":"KAKAO_PLACE","value":"http://place.map.kakao.com/24372632","grade":"CONFIRMED","src":"kakao_local","url":"http://place.map.kakao.com/24372632","at":"2026-10-24T21:17:22.200Z","text":"여행 > 숙박 > 야영,캠핑장"}
 {"cid":"osm-n469713235","attr":"OPERATOR_TYPE","value":"LOCAL_GOVERNMENT","grade":"CONFIRMED","src":"dayuse_seed","url":"https://www.openstreetmap.org/node/469713235","at":"2026-11-09"}
