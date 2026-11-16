@@ -1420,3 +1420,5 @@
 - `1000W 고용량`처럼 버튼으로 렌더링되는 전력 특색 칩이 일반 칩과 같은 초록 캡슐 배경을 가지면서도, 후순위 `button.unique-feature-chip` 규칙의 `color: inherit` 때문에 글자와 아이콘이 검정으로 보이는 회귀를 확인했다.
 - 원본(`design/renewal/style.css`)과 발행본(`camping-atlas/public/style.css`)의 버튼 규칙에 `color: var(--accent)`·`background: var(--accent-tint)`를 명시해 일반 특색 칩과 동일한 표준 스타일을 강제했다. 배포 후 실제 DOM 계산 스타일과 화면을 재검증한다.
 
+- 배포 후 재검수에서 색상·배경은 같지만 버튼의 기본 상속 폰트(16px/400)가 일반 칩(12px/800)과 달라 보이는 차이를 추가 확인했다. 버튼 규칙에 `font-size: var(--fs-min)`, `font-weight: 800`, `line-height: 1.55`를 명시해 크기·두께·행간까지 동일하게 맞춘다.
+
