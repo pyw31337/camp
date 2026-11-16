@@ -1415,3 +1415,8 @@
 - `/admin/` 피드에서 찜 기록은 공용 찜 추가·해제로 되돌릴 수 있고, 댓글은 수정·소프트 삭제할 수 있다.
 - 편집은 `db/028_admin_mutations.sql`의 비밀번호 확인 RPC를 통해서만 수행하며, 비밀번호는 브라우저 저장소에 기록하지 않는다.
 
+### 전력 특색 칩 표준색 회귀 수정(2026-11-16)
+
+- `1000W 고용량`처럼 버튼으로 렌더링되는 전력 특색 칩이 일반 칩과 같은 초록 캡슐 배경을 가지면서도, 후순위 `button.unique-feature-chip` 규칙의 `color: inherit` 때문에 글자와 아이콘이 검정으로 보이는 회귀를 확인했다.
+- 원본(`design/renewal/style.css`)과 발행본(`camping-atlas/public/style.css`)의 버튼 규칙에 `color: var(--accent)`·`background: var(--accent-tint)`를 명시해 일반 특색 칩과 동일한 표준 스타일을 강제했다. 배포 후 실제 DOM 계산 스타일과 화면을 재검증한다.
+
