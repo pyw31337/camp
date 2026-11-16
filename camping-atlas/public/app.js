@@ -2716,24 +2716,37 @@ class HeroCanvasController {
         break;
 
       case "wind-grass":
-        // 승마: 바람에 흩날리는 싱그러운 초록 잔디 풀잎 파티클
-        const grassColors = ["rgba(100, 195, 80,", "rgba(140, 215, 95,", "rgba(165, 230, 110,", "rgba(80, 175, 65,"];
-        for (let i = 0; i < 38; i++) {
+        // 승마: 바람에 흩날리는 싱그러운 잔디 풀잎 (크기·갯수 확대) + 따스한 골든 샤인 파티클
+        const grassColors = ["rgba(95, 195, 75,", "rgba(135, 215, 90,", "rgba(165, 230, 110,", "rgba(80, 175, 65,", "rgba(185, 225, 95,"];
+        for (let i = 0; i < 68; i++) {
           this.grassBlades.push({
-            x: Math.random() * (w + 60),
+            x: Math.random() * (w + 80),
             y: Math.random() * h,
-            vx: -Math.random() * 0.75 - 0.35,
-            vy: Math.random() * 0.25 - 0.05,
-            len: Math.random() * 14 + 10,
-            thick: Math.random() * 1.6 + 1.1,
-            curve: (Math.random() - 0.5) * 14,
+            vx: -Math.random() * 0.95 - 0.45,
+            vy: Math.random() * 0.35 - 0.1,
+            len: Math.random() * 24 + 18,
+            thick: Math.random() * 3.2 + 2.4,
+            curve: (Math.random() - 0.5) * 22,
             rot: Math.random() * Math.PI * 2,
-            vRot: (Math.random() - 0.5) * 0.035,
+            vRot: (Math.random() - 0.5) * 0.045,
             flip: Math.random() * Math.PI * 2,
-            vFlip: Math.random() * 0.03 + 0.015,
+            vFlip: Math.random() * 0.035 + 0.018,
             sway: Math.random() * Math.PI * 2,
             alpha: Math.random() * 0.4 + 0.55,
             color: grassColors[Math.floor(Math.random() * grassColors.length)]
+          });
+        }
+        for (let i = 0; i < 28; i++) {
+          this.particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * 2.2 + 1.0,
+            vy: -Math.random() * 0.16 - 0.05,
+            vx: -Math.random() * 0.22 - 0.08,
+            alpha: Math.random() * 0.45 + 0.3,
+            pulse: Math.random() * Math.PI * 2,
+            pulseSpeed: Math.random() * 0.03 + 0.015,
+            color: "rgba(255, 225, 120,"
           });
         }
         break;
@@ -3473,26 +3486,37 @@ class HeroCanvasController {
     ctx.restore();
   }
 
+  renderSoftBeam(ctx, cx, cy, angle, length, width, colorStops) {
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(angle);
+    ctx.scale(width, length);
+    const g = ctx.createRadialGradient(0, 0, 0, 0, 0, 1);
+    for (const [stop, col] of colorStops) g.addColorStop(stop, col);
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(0, 0, 1, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
   renderLushForest(ctx, w, h, mx, my, hasMouse) {
-    // 편백 숲: 4줄 틴들 햇살 광선(Sunbeams)과 65개 피톤치드 숲의 정령 빛가루
+    // 편백 숲: 경계가 부드러운 틴들 숲빛 광선(Sunbeams)과 65개 피톤치드 숲의 정령 빛가루
     ctx.save();
     ctx.globalCompositeOperation = "lighter"; // add 블렌드 모드
 
     const beamPhase = Math.sin(this.time * 0.4) * 0.03;
     for (let b = 0; b < 4; b++) {
-      const bx = w * (0.22 + b * 0.24);
-      const bGrad = ctx.createLinearGradient(bx, 0, bx - h * 0.45, h);
-      bGrad.addColorStop(0, `rgba(255, 255, 215, ${0.14 + beamPhase + b * 0.02})`);
-      bGrad.addColorStop(0.55, `rgba(220, 255, 180, ${0.08 + beamPhase})`);
-      bGrad.addColorStop(1, "rgba(180, 255, 180, 0)");
-      ctx.fillStyle = bGrad;
-      ctx.beginPath();
-      ctx.moveTo(bx - 35, 0);
-      ctx.lineTo(bx + 85, 0);
-      ctx.lineTo(bx - h * 0.45 + 160, h);
-      ctx.lineTo(bx - h * 0.45 - 65, h);
-      ctx.closePath();
-      ctx.fill();
+      const cx = w * (0.16 + b * 0.24);
+      const cy = h * 0.48;
+      const alpha = 0.13 + beamPhase + b * 0.02;
+      this.renderSoftBeam(ctx, cx, cy, -0.42, h * 0.82, w * 0.17, [
+        [0, `rgba(255, 255, 220, ${alpha * 1.15})`],
+        [0.26, `rgba(235, 255, 195, ${alpha * 0.75})`],
+        [0.58, `rgba(195, 255, 175, ${alpha * 0.30})`],
+        [0.85, `rgba(170, 245, 160, ${alpha * 0.08})`],
+        [1, "rgba(160, 245, 150, 0)"]
+      ]);
     }
 
     for (const p of this.particles) {
@@ -3537,27 +3561,34 @@ class HeroCanvasController {
   }
 
   renderRiverside(ctx, w, h, mx, my, hasMouse) {
-    // 호숫가 카약: 수면 위로 은은하게 피어오르는 아침 물안개 + 섬세하게 축소된 36개 물빛 윤슬 스파클
+    // 호숫가 카약: 수면 위로 은은하게 피어오르는 경계가 부드러운 아침 물안개 + 소프트 글로우 물빛 윤슬
     ctx.save();
     ctx.globalCompositeOperation = "lighter"; // add 블렌드로 윤슬 발광 극대화
 
-    // 1. 수면 아침 물안개 (Morning River Mist)
+    // 1. 수면 아침 물안개 (타원 비율 스케일링 방사형 그라데이션 - 인위적 경계 완전 배제)
     for (const m of this.mistParticles) {
       m.pulse += m.pulseSpeed;
       m.x += m.vx;
       if (m.x - m.rx > w) m.x = -m.rx;
       const alpha = Math.max(0.04, m.alpha + Math.sin(m.pulse) * 0.08);
-      const g = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.rx);
-      g.addColorStop(0, `rgba(235, 245, 255, ${alpha})`);
-      g.addColorStop(0.5, `rgba(215, 235, 248, ${alpha * 0.5})`);
-      g.addColorStop(1, "rgba(200, 230, 245, 0)");
+
+      ctx.save();
+      ctx.translate(m.x, m.y);
+      ctx.scale(1, m.ry / m.rx);
+      const g = ctx.createRadialGradient(0, 0, 0, 0, 0, m.rx);
+      g.addColorStop(0, `rgba(235, 248, 255, ${alpha})`);
+      g.addColorStop(0.22, `rgba(225, 242, 252, ${alpha * 0.75})`);
+      g.addColorStop(0.50, `rgba(215, 238, 250, ${alpha * 0.38})`);
+      g.addColorStop(0.78, `rgba(205, 232, 248, ${alpha * 0.12})`);
+      g.addColorStop(1, "rgba(195, 225, 245, 0)");
       ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.ellipse(m.x, m.y, m.rx, m.ry, 0, 0, Math.PI * 2);
+      ctx.arc(0, 0, m.rx, 0, Math.PI * 2);
       ctx.fill();
+      ctx.restore();
     }
 
-    // 2. 섬세하고 작은 물빛 윤슬 스파클
+    // 2. 섬세하고 부드러운 물빛 윤슬 스파클 (소프트 글로우 코어 + 페더 플레어)
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
       let extraGlow = 0;
@@ -3570,27 +3601,31 @@ class HeroCanvasController {
 
       const alpha = Math.max(0, (Math.sin(p.pulse) * 0.5 + 0.5) * p.alpha) + extraGlow;
       if (alpha > 0.03) {
-        const d = p.size * 1.5;
+        const r = p.size * 2.8;
 
-        // 다이아몬드 코어 발광체
+        // 소프트 글로우 코어 (경계가 없는 부드러운 빛 구름)
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r);
+        g.addColorStop(0, `rgba(255, 255, 255, ${Math.min(1, alpha * 1.15)})`);
+        g.addColorStop(0.25, `rgba(230, 250, 255, ${alpha * 0.75})`);
+        g.addColorStop(0.60, `rgba(160, 235, 255, ${alpha * 0.25})`);
+        g.addColorStop(1, "rgba(120, 220, 255, 0)");
+        ctx.fillStyle = g;
         ctx.beginPath();
-        ctx.moveTo(p.x, p.y - d);
-        ctx.quadraticCurveTo(p.x, p.y, p.x + d, p.y);
-        ctx.quadraticCurveTo(p.x, p.y, p.x, p.y + d);
-        ctx.quadraticCurveTo(p.x, p.y, p.x - d, p.y);
-        ctx.quadraticCurveTo(p.x, p.y, p.x, p.y - d);
-        ctx.closePath();
-        ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, alpha * 1.05)})`;
+        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
         ctx.fill();
 
-        // 수평 렌즈 플레어 (아담하고 섬세한 광채)
+        // 수평 소프트 렌즈 플레어
         const fl = p.flareLen || 12;
-        const flareGradH = ctx.createLinearGradient(p.x - fl, p.y, p.x + fl, p.y);
-        flareGradH.addColorStop(0, "rgba(80, 220, 255, 0)");
-        flareGradH.addColorStop(0.5, `rgba(255, 255, 255, ${Math.min(1, alpha * 0.9)})`);
-        flareGradH.addColorStop(1, "rgba(80, 220, 255, 0)");
-        ctx.fillStyle = flareGradH;
-        ctx.fillRect(p.x - fl, p.y - 0.8, fl * 2, 1.6);
+        const flareH = ctx.createLinearGradient(p.x - fl, p.y, p.x + fl, p.y);
+        flareH.addColorStop(0, "rgba(100, 230, 255, 0)");
+        flareH.addColorStop(0.3, `rgba(200, 245, 255, ${alpha * 0.5})`);
+        flareH.addColorStop(0.5, `rgba(255, 255, 255, ${Math.min(1, alpha * 0.9)})`);
+        flareH.addColorStop(0.7, `rgba(200, 245, 255, ${alpha * 0.5})`);
+        flareH.addColorStop(1, "rgba(100, 230, 255, 0)");
+        ctx.fillStyle = flareH;
+        ctx.beginPath();
+        ctx.ellipse(p.x, p.y, fl, 1.2, 0, 0, Math.PI * 2);
+        ctx.fill();
       }
     }
 
@@ -3967,49 +4002,42 @@ class HeroCanvasController {
   }
 
   renderRainbow(ctx, w, h, mx, my, hasMouse) {
-    // 수영장: 청량한 여름 햇살 물보라에 피어오르는 무지개 아치 & 잔잔한 물결 스파클
+    // 수영장: 청량한 여름 햇살 물보라 속에 자연스럽게 피어오르는 프리즘 광선(Prismatic Ray) & 맑은 수면 스파클
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
 
-    const rainbowColors = [
-      "rgba(255, 80, 80,",
-      "rgba(255, 150, 50,",
-      "rgba(255, 230, 65,",
-      "rgba(75, 225, 115,",
-      "rgba(65, 190, 255,",
-      "rgba(85, 110, 255,",
-      "rgba(195, 85, 255,"
+    const shimmer = Math.sin(this.time * 0.5) * 0.03;
+    const spectralBeams = [
+      { offset: 0.18, angle: 0.40, wRatio: 0.16, alpha: 0.12 + shimmer, stops: [[0, "rgba(255, 235, 175,"], [0.35, "rgba(255, 205, 120,"], [0.75, "rgba(255, 175, 90,"], [1, "rgba(255, 160, 80, 0)"]] },
+      { offset: 0.38, angle: 0.44, wRatio: 0.18, alpha: 0.14 + shimmer, stops: [[0, "rgba(160, 250, 240,"], [0.35, "rgba(90, 220, 255,"], [0.75, "rgba(65, 180, 255,"], [1, "rgba(60, 160, 255, 0)"]] },
+      { offset: 0.58, angle: 0.48, wRatio: 0.19, alpha: 0.13 + shimmer, stops: [[0, "rgba(215, 175, 255,"], [0.35, "rgba(175, 135, 255,"], [0.75, "rgba(145, 110, 255,"], [1, "rgba(130, 95, 255, 0)"]] },
+      { offset: 0.78, angle: 0.52, wRatio: 0.17, alpha: 0.11 + shimmer, stops: [[0, "rgba(255, 195, 175,"], [0.35, "rgba(255, 155, 185,"], [0.75, "rgba(225, 120, 200,"], [1, "rgba(210, 100, 190, 0)"]] }
     ];
 
-    const cx = w * 0.50;
-    const cy = h * 1.05;
-    const baseRadius = Math.min(w, h) * 0.68;
-    const bandWidth = Math.max(3.5, Math.min(w, h) * 0.018);
-    const shimmer = Math.sin(this.time * 0.75) * 0.035;
-
-    for (let i = 0; i < rainbowColors.length; i++) {
-      const r = baseRadius + i * bandWidth;
-      const alpha = Math.max(0.08, 0.24 - Math.abs(i - 3) * 0.026 + shimmer);
-      ctx.strokeStyle = `${rainbowColors[i]} ${alpha})`;
-      ctx.lineWidth = bandWidth * 1.05;
-      ctx.beginPath();
-      ctx.arc(cx, cy, r, Math.PI * 1.08, Math.PI * 1.92);
-      ctx.stroke();
+    for (const b of spectralBeams) {
+      const cx = w * b.offset;
+      const cy = h * 0.48;
+      const colorStops = b.stops.map(([s, c]) => [s, s === 1 ? c : `${c} ${s === 0 ? b.alpha * 1.15 : s === 0.35 ? b.alpha * 0.72 : b.alpha * 0.28})`]);
+      this.renderSoftBeam(ctx, cx, cy, b.angle, h * 0.82, w * b.wRatio, colorStops);
     }
 
     // 수면 맑은 물빛 스파클
     for (const p of this.particles) {
       p.pulse += p.pulseSpeed;
       const alpha = Math.max(0.08, (Math.sin(p.pulse) * 0.5 + 0.5) * p.alpha);
-      ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.8);
+      g.addColorStop(0, `rgba(255, 255, 255, ${alpha})`);
+      g.addColorStop(0.35, `rgba(190, 245, 255, ${alpha * 0.6})`);
+      g.addColorStop(1, "rgba(140, 220, 255, 0)");
+      ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, p.r * 2.8, 0, Math.PI * 2);
       ctx.fill();
 
-      if (alpha > 0.45) {
-        ctx.strokeStyle = `rgba(180, 240, 255, ${alpha * 0.65})`;
+      if (alpha > 0.4) {
+        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.8})`;
         ctx.lineWidth = 1;
-        const fl = p.r * 2.2;
+        const fl = p.r * 2.4;
         ctx.beginPath();
         ctx.moveTo(p.x - fl, p.y); ctx.lineTo(p.x + fl, p.y);
         ctx.moveTo(p.x, p.y - fl); ctx.lineTo(p.x, p.y + fl);
@@ -4020,28 +4048,66 @@ class HeroCanvasController {
   }
 
   renderWindGrass(ctx, w, h, mx, my, hasMouse) {
-    // 승마: 바람에 흩날리는 싱그러운 잔디 풀잎 파티클
+    // 승마: 노을 지는 목장 - 부드러운 골든 샤인 레이 광선 + 바람에 흩날리는 크고 싱그러운 잔디 풀잎 파티클
     ctx.save();
+
+    // 1. 목장 위로 쏟아지는 골든 샤인 햇살 (경계가 부드러운 황금빛 틴들 광선)
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter";
+    const beamPhase = Math.sin(this.time * 0.35) * 0.03;
+    for (let b = 0; b < 3; b++) {
+      const cx = w * (0.18 + b * 0.30);
+      const cy = h * 0.48;
+      const alpha = 0.13 + beamPhase + b * 0.02;
+      this.renderSoftBeam(ctx, cx, cy, 0.42, h * 0.80, w * 0.20, [
+        [0, `rgba(255, 240, 175, ${alpha * 1.15})`],
+        [0.28, `rgba(255, 215, 115, ${alpha * 0.72})`],
+        [0.62, `rgba(255, 185, 75, ${alpha * 0.28})`],
+        [0.85, `rgba(255, 160, 45, ${alpha * 0.07})`],
+        [1, "rgba(255, 140, 30, 0)"]
+      ]);
+    }
+
+    // 목장 부유 골든 스펙 먼지
+    for (const po of this.particles) {
+      po.pulse += po.pulseSpeed;
+      po.x += po.vx;
+      po.y += po.vy;
+      if (po.x < -20) po.x = w + 20;
+      if (po.y < -20) po.y = h + 20;
+      const alpha = Math.max(0.1, po.alpha + Math.sin(po.pulse) * 0.2);
+      const g = ctx.createRadialGradient(po.x, po.y, 0, po.x, po.y, po.r * 2.8);
+      g.addColorStop(0, `${po.color} ${alpha})`);
+      g.addColorStop(0.4, `${po.color} ${alpha * 0.6})`);
+      g.addColorStop(1, `${po.color} 0)`);
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(po.x, po.y, po.r * 2.8, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+
+    // 2. 바람에 흩날리는 풍성한 잔디 풀잎 (확대된 크기와 갯수)
     for (const p of this.grassBlades) {
       p.rot += p.vRot;
       p.flip += p.vFlip;
-      p.sway += 0.02;
+      p.sway += 0.022;
 
       if (hasMouse) {
         const dx = p.x - mx, dy = p.y - my, dist = Math.hypot(dx, dy);
-        if (dist < 120 && dist > 0) {
-          p.vx += (dx / dist) * 1.2;
-          p.vy += (dy / dist) * 0.8;
+        if (dist < 130 && dist > 0) {
+          p.vx += (dx / dist) * 1.5;
+          p.vy += (dy / dist) * 0.9;
         }
       }
 
-      p.x += p.vx + Math.sin(p.sway) * 0.35;
+      p.x += p.vx + Math.sin(p.sway) * 0.45;
       p.y += p.vy;
       p.vx *= 0.98;
 
-      if (p.x < -30) { p.x = w + 30; p.y = Math.random() * h; }
-      if (p.y > h + 30) { p.y = -30; p.x = Math.random() * w; }
-      else if (p.y < -30) p.y = h + 30;
+      if (p.x < -40) { p.x = w + 40; p.y = Math.random() * h; }
+      if (p.y > h + 40) { p.y = -40; p.x = Math.random() * w; }
+      else if (p.y < -40) p.y = h + 40;
 
       ctx.save();
       ctx.translate(p.x, p.y);
@@ -4056,11 +4122,12 @@ class HeroCanvasController {
       ctx.fillStyle = `${p.color} ${p.alpha})`;
       ctx.fill();
 
-      ctx.strokeStyle = `rgba(255, 255, 255, ${p.alpha * 0.35})`;
-      ctx.lineWidth = 0.6;
+      // 풀잎 잎맥 입체감
+      ctx.strokeStyle = `rgba(255, 255, 255, ${p.alpha * 0.4})`;
+      ctx.lineWidth = 0.8;
       ctx.beginPath();
-      ctx.moveTo(-p.len * 0.4, 0);
-      ctx.quadraticCurveTo(0, p.curve * 0.6, p.len * 0.35, -p.thick * 0.2);
+      ctx.moveTo(-p.len * 0.42, 0);
+      ctx.quadraticCurveTo(0, p.curve * 0.6, p.len * 0.38, -p.thick * 0.2);
       ctx.stroke();
 
       ctx.restore();
@@ -4069,7 +4136,7 @@ class HeroCanvasController {
   }
 
   renderZipline(ctx, w, h, mx, my, hasMouse) {
-    // 레포츠: 이미지 강철 짚라인 와이어를 따라 하강 활강하는 라이더 애니메이션 (반짝이/ripple 제거)
+    // 레포츠: 이미지 강철 짚라인 와이어를 따라 하강 활강하는 라이더 (확대된 크기와 정교한 장비 디테일)
     ctx.save();
 
     const y1 = h * 0.225;
@@ -4082,8 +4149,8 @@ class HeroCanvasController {
     };
 
     // 와이어 라인
-    ctx.strokeStyle = "rgba(220, 240, 255, 0.30)";
-    ctx.lineWidth = Math.max(1, w * 0.0012);
+    ctx.strokeStyle = "rgba(220, 240, 255, 0.35)";
+    ctx.lineWidth = Math.max(1.2, w * 0.0014);
     ctx.beginPath();
     for (let s = 0; s <= 20; s++) {
       const pt = getPos(s / 20);
@@ -4099,13 +4166,13 @@ class HeroCanvasController {
       let speed = zl.speed;
       if (hasMouse) {
         const cur = getPos(zl.t);
-        if (Math.hypot(cur.x - mx, cur.y - my) < 90) speed *= 1.35;
+        if (Math.hypot(cur.x - mx, cur.y - my) < 100) speed *= 1.35;
       }
       zl.t += speed;
 
-      if (Math.random() < 0.65) {
+      if (Math.random() < 0.75) {
         const cur = getPos(zl.t);
-        zl.trail.push({ x: cur.x, y: cur.y, alpha: 0.75, len: Math.random() * 26 + 14 });
+        zl.trail.push({ x: cur.x, y: cur.y, alpha: 0.8, len: Math.random() * 32 + 18 });
       }
 
       if (zl.t >= 1.04) {
@@ -4124,100 +4191,134 @@ class HeroCanvasController {
     for (let i = zl.trail.length - 1; i >= 0; i--) {
       const tr = zl.trail[i];
       tr.alpha -= 0.045;
-      tr.x -= 1.8;
-      tr.y -= 0.6;
+      tr.x -= 2.2;
+      tr.y -= 0.7;
       if (tr.alpha <= 0) { zl.trail.splice(i, 1); continue; }
-      ctx.strokeStyle = `rgba(255, 255, 255, ${tr.alpha * 0.6})`;
-      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = `rgba(255, 255, 255, ${tr.alpha * 0.65})`;
+      ctx.lineWidth = 1.4;
       ctx.beginPath();
       ctx.moveTo(tr.x, tr.y);
       ctx.lineTo(tr.x - tr.len, tr.y - tr.len * 0.28);
       ctx.stroke();
     }
 
-    // 짚라인 라이더
+    // 짚라인 라이더 (크기 1.8배 확대 & 고화질 장비 디테일 탑재)
     if (zl.t >= -0.02 && zl.t <= 1.02) {
       const pos = getPos(zl.t);
-      const scale = Math.max(0.45, 1.15 - zl.t * 0.65);
+      const scale = Math.max(0.9, 1.85 - zl.t * 0.85);
 
       ctx.save();
       ctx.translate(pos.x, pos.y);
       ctx.scale(scale, scale);
 
+      // 1. 강철 듀얼 도르래(Trolley) - 와이어 바로 위 롤러 & 베어링
       ctx.fillStyle = "#1e293b";
-      ctx.fillRect(-6, -8, 12, 6);
+      ctx.fillRect(-10, -11, 20, 8);
+      // 롤러 2개
       ctx.beginPath();
-      ctx.arc(-3, -5, 3.5, 0, Math.PI * 2);
-      ctx.arc(3, -5, 3.5, 0, Math.PI * 2);
-      ctx.fillStyle = "#64748b";
+      ctx.arc(-5, -7, 4.5, 0, Math.PI * 2);
+      ctx.arc(5, -7, 4.5, 0, Math.PI * 2);
+      ctx.fillStyle = "#94a3b8";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(-5, -7, 2, 0, Math.PI * 2);
+      ctx.arc(5, -7, 2, 0, Math.PI * 2);
+      ctx.fillStyle = "#1e293b";
       ctx.fill();
 
-      ctx.strokeStyle = "#334155";
-      ctx.lineWidth = 1.8;
-      ctx.beginPath();
-      ctx.moveTo(0, -2);
-      ctx.lineTo(0, 10);
-      ctx.stroke();
-
-      ctx.fillStyle = "#0f172a";
-      ctx.fillRect(-7, 9, 14, 2.5);
-
-      ctx.beginPath();
-      ctx.arc(1, 15, 4.5, 0, Math.PI * 2);
-      ctx.fillStyle = "#f97316";
-      ctx.fill();
-
-      ctx.save();
-      ctx.rotate(0.22);
-      ctx.fillStyle = "#0f172a";
-      ctx.beginPath();
-      ctx.roundRect(-3, 19, 7, 13, 2);
-      ctx.fill();
-
-      ctx.strokeStyle = "#0f172a";
-      ctx.lineWidth = 2.8;
-      ctx.lineCap = "round";
-      ctx.beginPath();
-      ctx.moveTo(1, 30);
-      ctx.lineTo(10, 36);
-      ctx.lineTo(16, 35);
-      ctx.moveTo(-1, 30);
-      ctx.lineTo(7, 39);
-      ctx.lineTo(13, 40);
-      ctx.stroke();
-
+      // 2. 카라비너 & 핸들 바
+      ctx.strokeStyle = "#475569";
       ctx.lineWidth = 2.2;
       ctx.beginPath();
-      ctx.moveTo(0, 21);
-      ctx.lineTo(2, 10);
+      ctx.moveTo(0, -3);
+      ctx.lineTo(0, 11);
       ctx.stroke();
-      ctx.restore();
 
+      // 손잡이 그립 바
+      ctx.fillStyle = "#0f172a";
+      ctx.fillRect(-11, 10, 22, 3.5);
+
+      // 3. 라이더 탑승자 본체
+      ctx.save();
+      ctx.rotate(0.24); // 활강 경사 각도에 맞춘 자연스러운 뒤로 기운 자세
+
+      // 안전 헬멧 (오렌지 컬러 & 바이저 & 턱끈)
+      ctx.beginPath();
+      ctx.arc(2, 16, 6, 0, Math.PI * 2);
+      ctx.fillStyle = "#f97316";
+      ctx.fill();
+      // 헬멧 바이저 챙
+      ctx.fillStyle = "#ea580c";
+      ctx.fillRect(4, 15, 5, 2.5);
+      // 고글 광채
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(4, 17, 3, 1.5);
+
+      // 상체 몸통 (윈드재킷 + 세이프티 하네스)
+      ctx.fillStyle = "#0f172a";
+      ctx.beginPath();
+      ctx.roundRect(-4, 21, 10, 16, 2.5);
+      ctx.fill();
+
+      // 하네스 세이프티 스트랩 (네온 라임 & 오렌지)
+      ctx.strokeStyle = "#22c55e";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(-3, 22); ctx.lineTo(5, 34);
+      ctx.moveTo(5, 22); ctx.lineTo(-3, 34);
+      ctx.stroke();
+
+      // 양팔 (핸들 바를 단단히 쥐고 있는 팔)
+      ctx.strokeStyle = "#1e293b";
+      ctx.lineWidth = 3.2;
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(1, 23); ctx.lineTo(-4, 11); // 왼팔
+      ctx.moveTo(3, 23); ctx.lineTo(4, 11);  // 오른팔
+      ctx.stroke();
+
+      // 양다리 (앞으로 시원하게 뻗은 무릎 굽힘 활강 자세)
+      ctx.strokeStyle = "#0f172a";
+      ctx.lineWidth = 3.5;
+      ctx.beginPath();
+      // 앞다리
+      ctx.moveTo(1, 35);
+      ctx.lineTo(12, 41);
+      ctx.lineTo(21, 39);
+      // 뒷다리
+      ctx.moveTo(-1, 35);
+      ctx.lineTo(9, 45);
+      ctx.lineTo(17, 46);
+      ctx.stroke();
+
+      // 신발 (스포티 아웃솔)
+      ctx.fillStyle = "#ea580c";
+      ctx.fillRect(20, 37, 4, 3);
+      ctx.fillRect(16, 44, 4, 3);
+
+      ctx.restore();
       ctx.restore();
     }
     ctx.restore();
   }
 
   renderGoldenShine(ctx, w, h, mx, my, hasMouse) {
-    // 농촌체험: 좌상단 태양에서 쏟아지는 4줄기 황금빛 틴들 광선 + 황금빛 부유 미립자
+    // 농촌체험: 햇살이 쏟아지는 아침 농원 - 경계가 부드러운 황금빛 틴들 광선 + 황금빛 부유 미립자
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
 
-    const beamPhase = Math.sin(this.time * 0.35) * 0.04;
+    const beamPhase = Math.sin(this.time * 0.35) * 0.035;
     for (let b = 0; b < 4; b++) {
-      const bx = w * (0.05 + b * 0.26);
-      const bGrad = ctx.createLinearGradient(bx, 0, bx + h * 0.55, h);
-      bGrad.addColorStop(0, `rgba(255, 240, 160, ${0.16 + beamPhase + b * 0.02})`);
-      bGrad.addColorStop(0.5, `rgba(255, 210, 110, ${0.09 + beamPhase})`);
-      bGrad.addColorStop(1, "rgba(255, 185, 70, 0)");
-      ctx.fillStyle = bGrad;
-      ctx.beginPath();
-      ctx.moveTo(bx - 40, 0);
-      ctx.lineTo(bx + 90, 0);
-      ctx.lineTo(bx + h * 0.55 + 180, h);
-      ctx.lineTo(bx + h * 0.55 - 70, h);
-      ctx.closePath();
-      ctx.fill();
+      const cx = w * (0.12 + b * 0.26);
+      const cy = h * 0.50;
+      const alpha = 0.14 + beamPhase + b * 0.02;
+      this.renderSoftBeam(ctx, cx, cy, 0.45, h * 0.82, w * 0.18, [
+        [0, `rgba(255, 245, 185, ${alpha * 1.15})`],
+        [0.25, `rgba(255, 225, 125, ${alpha * 0.78})`],
+        [0.58, `rgba(255, 195, 80, ${alpha * 0.32})`],
+        [0.85, `rgba(255, 170, 50, ${alpha * 0.08})`],
+        [1, "rgba(255, 150, 30, 0)"]
+      ]);
     }
 
     for (const p of this.particles) {
