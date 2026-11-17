@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-11-16T20:57:36.813Z",
+ "generated_at": "2026-11-17T19:47:51.019Z",
  "source": {
   "label": "카카오 로컬 키워드 검색 · Daum 웹 검색(공식 REST API)",
   "docs": [
@@ -3524,7 +3524,7 @@
    "homepage": null
   },
   "441": {
-   "checked_at": "2026-10-16T05:33:01.108Z",
+   "checked_at": "2026-11-17T19:47:47.354Z",
    "place": {
     "id": "24943507",
     "name": "글램비글램핑",
@@ -3542,21 +3542,8 @@
      "distance_m": 0
     }
    },
-   "candidates": [
-    {
-     "host": "5gcamp.com",
-     "url": "https://www.5gcamp.com/?c=glamping&m=camping&page=view&uid=190",
-     "score": 14,
-     "hits": 1,
-     "evidence": [
-      {
-       "title": "글램비 글램핑",
-       "url": "https://www.5gcamp.com/?c=glamping&m=camping&page=view&uid=190"
-      }
-     ]
-    }
-   ],
-   "needs_homepage": true,
+   "candidates": [],
+   "needs_homepage": false,
    "homepage": null
   },
   "444": {
@@ -5388,7 +5375,7 @@
    "homepage": null
   },
   "640": {
-   "checked_at": "2026-11-16T20:57:33.688Z",
+   "checked_at": "2026-11-17T19:47:47.390Z",
    "place": {
     "id": "17591877",
     "name": "느티나무캠핑장",
@@ -5406,61 +5393,8 @@
      "distance_m": 0
     }
    },
-   "candidates": [
-    {
-     "host": "ojigo.kr",
-     "url": "https://ojigo.kr/camping/640",
-     "score": 20,
-     "hits": 2,
-     "evidence": [
-      {
-       "title": "느티나무 캠핑장",
-       "url": "https://ojigo.kr/camping/640"
-      },
-      {
-       "title": "계곡과느티나무 캠핑장",
-       "url": "https://ojigo.kr/camping/7246"
-      }
-     ]
-    },
-    {
-     "host": "camplink.co.kr",
-     "url": "https://camplink.co.kr:444/?cam=camp1531",
-     "score": 14,
-     "hits": 1,
-     "evidence": [
-      {
-       "title": "느티나무쉼터",
-       "url": "https://camplink.co.kr:444/?cam=camp1531"
-      }
-     ]
-    },
-    {
-     "host": "mobistation.co.kr",
-     "url": "https://mobistation.co.kr/camping/detail/2c6342e32d6c705d642298e93e35e5086ef8380119842466cb1dc6797dd2883d",
-     "score": 10,
-     "hits": 1,
-     "evidence": [
-      {
-       "title": "[캠핑장] 느티나무 캠핑장 - 강원도 영월군 위치 및 시설 정보 | 모비스테이션",
-       "url": "https://mobistation.co.kr/camping/detail/2c6342e32d6c705d642298e93e35e5086ef8380119842466cb1dc6797dd2883d"
-      }
-     ]
-    },
-    {
-     "host": "fss.purpleo.co.kr",
-     "url": "https://fss.purpleo.co.kr/view/35934",
-     "score": 4,
-     "hits": 1,
-     "evidence": [
-      {
-       "title": "나무야 나무야 총65명이 열람하였으며, 좋아요 0개, 방문했어요 0회 및 0개의 리뷰가 있습니다. 좋아요...",
-       "url": "https://fss.purpleo.co.kr/view/35934"
-      }
-     ]
-    }
-   ],
-   "needs_homepage": true,
+   "candidates": [],
+   "needs_homepage": false,
    "homepage": null
   },
   "643": {
@@ -8600,7 +8534,7 @@
    "homepage": null
   },
   "977": {
-   "checked_at": "2026-11-16T20:57:33.729Z",
+   "checked_at": "2026-11-17T19:47:47.391Z",
    "place": null,
    "candidates": [
     {
@@ -17909,7 +17843,7 @@
    "homepage": null
   },
   "2472": {
-   "checked_at": "2026-11-16T20:57:36.268Z",
+   "checked_at": "2026-11-17T19:47:50.386Z",
    "place": {
     "id": "898560745",
     "name": "원주두리캠핑장",
@@ -46453,7 +46387,7 @@
    "homepage": null
   },
   "100122": {
-   "checked_at": "2026-11-16T20:57:35.420Z",
+   "checked_at": "2026-11-17T19:47:49.430Z",
    "place": {
     "id": "1579667394",
     "name": "라플란드",
@@ -46526,13 +46460,13 @@
     },
     {
      "host": "ndex.kr",
-     "url": "https://www.ndex.kr/data/umsun2004",
+     "url": "https://www.ndex.kr/data/jang00104",
      "score": 4,
      "hits": 1,
      "evidence": [
       {
-       "title": "선하로그 (Sunhalog)",
-       "url": "https://www.ndex.kr/data/umsun2004"
+       "title": "J2rry의 성장일기",
+       "url": "https://www.ndex.kr/data/jang00104"
       }
      ]
     }
@@ -49769,7 +49703,7 @@
    "homepage": null
   },
   "100289": {
-   "checked_at": "2026-11-16T20:57:35.111Z",
+   "checked_at": "2026-11-17T19:47:49.082Z",
    "place": {
     "id": "828875441",
     "name": "가델캠핑장",
@@ -59911,7 +59845,7 @@
    "homepage": null
   },
   "100597": {
-   "checked_at": "2026-11-16T20:57:35.561Z",
+   "checked_at": "2026-11-17T19:47:49.699Z",
    "place": {
     "id": "1537097954",
     "name": "노리터키즈캠핑장",
@@ -63172,7 +63106,7 @@
    "homepage": null
   },
   "100676": {
-   "checked_at": "2026-11-16T20:57:35.823Z",
+   "checked_at": "2026-11-17T19:47:49.742Z",
    "place": null,
    "candidates": [
     {
@@ -64769,7 +64703,7 @@
    "homepage": null
   },
   "100721": {
-   "checked_at": "2026-11-16T20:57:35.122Z",
+   "checked_at": "2026-11-17T19:47:49.201Z",
    "place": {
     "id": "1779251680",
     "name": "캠핑굄성",
@@ -76944,7 +76878,7 @@
    "homepage": null
   },
   "101093": {
-   "checked_at": "2026-11-16T20:57:36.311Z",
+   "checked_at": "2026-11-17T19:47:50.457Z",
    "place": null,
    "candidates": [
     {
@@ -81255,7 +81189,7 @@
    "homepage": null
   },
   "101214": {
-   "checked_at": "2026-11-16T20:57:33.730Z",
+   "checked_at": "2026-11-17T19:47:47.392Z",
    "place": {
     "id": "661902238",
     "name": "캠프다온",
@@ -83222,7 +83156,7 @@
    "homepage": null
   },
   "101269": {
-   "checked_at": "2026-11-16T20:57:35.371Z",
+   "checked_at": "2026-11-17T19:47:49.225Z",
    "place": {
     "id": "826081055",
     "name": "골든쌔들캠핑장",
@@ -88556,7 +88490,7 @@
    "homepage": null
   },
   "101416": {
-   "checked_at": "2026-11-16T20:57:34.964Z",
+   "checked_at": "2026-11-17T19:47:48.693Z",
    "place": {
     "id": "1931362185",
     "name": "내포캠핑스퀘어",
@@ -88600,6 +88534,18 @@
      ]
     },
     {
+     "host": "dinnerqueen.net",
+     "url": "https://dinnerqueen.net/taste/596254",
+     "score": 10,
+     "hits": 1,
+     "evidence": [
+      {
+       "title": "[충남 홍성][릴스] 내포캠핑스퀘어",
+       "url": "https://dinnerqueen.net/taste/596254"
+      }
+     ]
+    },
+    {
      "host": "diningcode.com",
      "url": "https://www.diningcode.com/profile.php?rid=1MxlOUvOXnt7",
      "score": 4,
@@ -88620,18 +88566,6 @@
       {
        "title": "충청남도 홍성군 캠핑 글램핑 상가 목록",
        "url": "https://dokdokplace.kr/stores/i1/i101/i10104/chungcheongnam-do/hongseong-gun/"
-      }
-     ]
-    },
-    {
-     "host": "starscore.kr",
-     "url": "https://www.starscore.kr/places/chungnam/284",
-     "score": 4,
-     "hits": 1,
-     "evidence": [
-      {
-       "title": "홍성 용봉산 별보기 좋은 곳",
-       "url": "https://www.starscore.kr/places/chungnam/284"
       }
      ]
     }
@@ -95328,7 +95262,7 @@
    "homepage": null
   },
   "101608": {
-   "checked_at": "2026-11-16T20:57:35.553Z",
+   "checked_at": "2026-11-17T19:47:49.587Z",
    "place": {
     "id": "2026652673",
     "name": "원더 포레스트",
@@ -96257,7 +96191,7 @@
    "homepage": null
   },
   "101639": {
-   "checked_at": "2026-11-16T20:57:33.731Z",
+   "checked_at": "2026-11-17T19:47:48.692Z",
    "place": {
     "id": "604025620",
     "name": "물멍 캠프",
@@ -114646,7 +114580,7 @@
    "homepage": null
   },
   "102221": {
-   "checked_at": "2026-11-16T20:57:36.263Z",
+   "checked_at": "2026-11-17T19:47:50.247Z",
    "place": null,
    "candidates": [
     {
@@ -114795,7 +114729,7 @@
    "homepage": null
   },
   "102229": {
-   "checked_at": "2026-11-16T20:57:36.000Z",
+   "checked_at": "2026-11-17T19:47:50.092Z",
    "place": null,
    "candidates": [],
    "needs_homepage": false,
@@ -115612,7 +115546,7 @@
    "homepage": null
   },
   "102270": {
-   "checked_at": "2026-11-16T20:57:36.020Z",
+   "checked_at": "2026-11-17T19:47:50.219Z",
    "place": null,
    "candidates": [
     {
@@ -118607,7 +118541,7 @@
    "homepage": null
   },
   "102377": {
-   "checked_at": "2026-11-16T20:57:35.863Z",
+   "checked_at": "2026-11-17T19:47:49.941Z",
    "place": null,
    "candidates": [],
    "needs_homepage": true,
