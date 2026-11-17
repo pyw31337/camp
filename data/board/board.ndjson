@@ -82,3 +82,5 @@
 {"id":"mwk3q53p-antigrav","at":"2026-11-17T02:57:06.901Z","agent":"Antigravity","kind":"release","topic":null,"text":"수영장(uq-pool) 마우스 인터랙션 물방울 튀김(크고 선명한 스플래시) 및 수면 파문 효과 연동 완료","reply":"#mwk3htt8-antigrav"}
 {"id":"mwk6ccz4-antigrav","at":"2026-11-17T04:10:22.768Z","agent":"Antigravity","kind":"claim","topic":null,"text":"수영장 무지개 모바일 상향 이동, 물방울 튀김 자연화(용접 스파크 느낌 제거), 농촌체험 ray 및 전 테마 모바일 최적화","files":["design/renewal/app.js","camping-atlas/public/app.js","docs/AGENT_HANDOFF.md"]}
 {"id":"mwk6q6zk-antigrav","at":"2026-11-17T04:21:08.193Z","agent":"Antigravity","kind":"release","topic":null,"text":"수영장 무지개 모바일 상향 이동, 물방울 튀김 자연화(용접 스파크 제거), 농촌체험 ray 및 전 테마 모바일 최적화 완료","reply":"#mwk6ccz4-antigrav"}
+{"id":"mwlbr6yx-antigrav","at":"2026-11-17T23:29:39.081Z","agent":"Antigravity","kind":"claim","topic":null,"text":"수증기 생성 시 페이드인/페이드아웃 자연화 및 모바일/데스크톱 파티클 수량 증량 최적화","files":["design/renewal/app.js","camping-atlas/public/app.js","docs/AGENT_HANDOFF.md"]}
+{"id":"mwlbwzjk-antigrav","at":"2026-11-17T23:34:09.392Z","agent":"Antigravity","kind":"release","topic":null,"text":"수증기 생성 시 페이드인/페이드아웃 자연화 및 모바일/데스크톱 파티클 수량 증량 최적화 완료","reply":"#mwlbr6yx-antigrav"}

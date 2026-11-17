@@ -2689,8 +2689,8 @@ class HeroCanvasController {
             pulseSpeed: Math.random() * 0.045 + 0.02
           });
         }
-        // 다층 실사 수증기 김 텍스처 퍼프 (모바일 45개 / 데스크톱 80개, 양방향 다채로운 회전)
-        const mistCount = isMob ? 45 : 80;
+        // 다층 실사 수증기 김 텍스처 퍼프 (모바일 65개 / 데스크톱 120개, 양방향 다채로운 회전)
+        const mistCount = isMob ? 65 : 120;
         for (let i = 0; i < mistCount; i++) {
           const layer = i % 3;
           const scaleBase = isMob ? (layer === 0 ? 0.35 : layer === 1 ? 0.28 : 0.20) : (layer === 0 ? 0.62 : layer === 1 ? 0.48 : 0.36);
@@ -2747,27 +2747,27 @@ class HeroCanvasController {
         break;
 
       case "steam":
-        // 노천탕: 몽환적으로 피어오르는 온천 김(모바일 75개 / 데스크톱 140개)
-        for (let i = 0; i < (isMob ? 75 : 140); i++) this.particles.push(this.makeSteam(w, h, true));
+        // 노천탕: 몽환적으로 피어오르는 온천 김(모바일 115개 / 데스크톱 220개)
+        for (let i = 0; i < (isMob ? 115 : 220); i++) this.particles.push(this.makeSteam(w, h, true));
         for (let i = 0; i < (isMob ? 24 : 42); i++) {
           this.duskParticles.push({ x: Math.random() * w, y: Math.random() * (h * 0.52), r: Math.random() * 1.8 + 0.8, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.032 + 0.014, alpha: Math.random() * 0.6 + 0.35, isCross: Math.random() < 0.25 });
         }
         break;
 
       case "warm-pool-snow":
-        // 사계절 온수풀: 눈발과 온수풀 증기 (모바일 55개 / 데스크톱 100개)
+        // 사계절 온수풀: 눈발과 온수풀 증기 (모바일 85개 / 데스크톱 160개)
         for (let i = 0; i < (isMob ? 32 : 54); i++) {
           const flakeType = Math.random() < 0.2 ? "crystal" : Math.random() < 0.55 ? "fluffy" : "dust";
           this.particles.push({ x: Math.random() * w, y: Math.random() * h, flakeType, r: flakeType === "crystal" ? Math.random() * 4 + 7 : flakeType === "fluffy" ? Math.random() * 2.2 + 3.0 : Math.random() * 1.8 + 1.2, vy: Math.random() * 0.42 + 0.24, vx: (Math.random() - 0.5) * 0.16, sway: Math.random() * Math.PI * 2, swaySpeed: Math.random() * 0.016 + 0.008, alpha: Math.random() * 0.35 + 0.60 });
         }
-        for (let i = 0; i < (isMob ? 55 : 100); i++) this.steamParticles.push(this.makeSteam(w, h, true));
+        for (let i = 0; i < (isMob ? 85 : 160); i++) this.steamParticles.push(this.makeSteam(w, h, true));
         for (let i = 0; i < (isMob ? 20 : 32); i++) this.duskParticles.push({ x: Math.random() * w, y: Math.random() * (h * 0.52), r: Math.random() * 1.8 + 0.8, pulse: Math.random() * Math.PI * 2, pulseSpeed: Math.random() * 0.032 + 0.014, alpha: Math.random() * 0.6 + 0.35, isCross: Math.random() < 0.25 });
         break;
 
       case "bubbles":
-        // 스파: 물방울 + 자쿠지 온천 증기 (모바일 55개 / 데스크톱 100개)
+        // 스파: 물방울 + 자쿠지 온천 증기 (모바일 85개 / 데스크톱 160개)
         for (let i = 0; i < (isMob ? 22 : 36); i++) this.particles.push(this.makeBubble(w, h, true));
-        for (let i = 0; i < (isMob ? 55 : 100); i++) this.steamParticles.push(this.makeSteam(w, h, true));
+        for (let i = 0; i < (isMob ? 85 : 160); i++) this.steamParticles.push(this.makeSteam(w, h, true));
         break;
 
       case "rainbow":
@@ -2900,7 +2900,7 @@ class HeroCanvasController {
       rot: Math.random() * Math.PI * 2,
       rotSpeed: rotDir * speedMag,
       alphaMul: (sizeRoll >= 0.86 ? (Math.random() * 0.08 + 0.10) : (Math.random() * 0.18 + 0.15)) * (isMob ? 0.85 : 1.0),
-      life: initial ? Math.random() * 0.8 + 0.2 : 1,
+      life: initial ? (Math.random() * 0.70 + 0.15) : 1,
       sway: Math.random() * Math.PI * 2,
       swaySpeed: Math.random() * 0.018 + 0.008
     };
@@ -2951,7 +2951,10 @@ class HeroCanvasController {
         steamParticles[i] = this.makeSteam(w, h);
         continue;
       }
-      const a = Math.min(1, p.life * 1.5) * (p.alphaMul || 0.28);
+      const fadeIn = Math.min(1, (1 - p.life) * 4.5);
+      const fadeOut = Math.min(1, p.life * 3.5);
+      const topFade = Math.min(1, Math.max(0, (p.y + p.r * 0.5) / (h * 0.20)));
+      const a = fadeIn * fadeOut * topFade * (p.alphaMul || 0.28);
       if (puffReady) {
         ctx.save();
         ctx.translate(p.x, p.y);
