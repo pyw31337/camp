@@ -1,6 +1,6 @@
 # 인수인계
 
-## 📢 전체 에이전트 인수인계: 데이터 파이프라인 정상화·영상 수집 다각화 및 선순환 자동화 완료 (2026-11-17 기준)
+## 📢 전체 에이전트 인수인계: 히어로존 수증기/물안개 효과 전 테마 파티클 증량 완료 (2026-11-17 기준)
 
 > **[모든 에이전트 필독]** 이 문서는 에이전트 간 작업 일관성을 보장하기 위한 공식 인수인계 문서입니다. 어느 에이전트가 작업을 이어받더라도 아래의 **완료 내역**, **향후 진행할 작업 백로그**, **작업 규칙 체크리스트**를 반드시 숙지하고 작업을 진행해야 합니다.
 
@@ -8,7 +8,18 @@
 
 ### 1. 최근 작업 완료 내역 요약 (2026-11-17)
 
-1. **고질적 11월 10일 이후 데이터 동기화(`data-sync`) 차단 버그 전면 해결**:
+1. **히어로존 수증기(Steam/Mist) 파티클 전 테마 풍성화 증량**:
+   - **대상 테마**:
+     - `uq-hotspring` (노천탕, `effect: "steam"`): 몽환적으로 피어오르는 온천 김 파티클을 60개 -> **95개**로 대폭 증량하여 산바람에 흩날리는 풍성한 온천 김 표현.
+     - `uq-warmpool` (사계절 온수풀, `effect: "warm-pool-snow"`): 눈발 사이로 피어오르는 수면 수증기를 40개 -> **70개**로 증량.
+     - `uq-spa` (프라이빗 스파, `effect: "bubbles"`): 자쿠지 버블과 어우러지는 온천 증기 파티클을 40개 -> **70개**로 증량.
+     - `riverside` (호숫가 카약, `effect: "riverside"`): 호수와 산자락 경계에 깔리는 다층 실사 수증기 물안개(Mist Puff) 파티클을 38개 -> **56개**로 증량 (원경·중경·근경 레이어 유지).
+   - **검증**:
+     - `node camping-atlas/scripts/perf-budget.mjs`: `app.js` 691KB (695KB 한도 내) 합격.
+     - `npm --prefix pipeline test`: 641개 테스트 전체 통과 (0 fail).
+     - `node scripts/publish-explorer-pages.mjs --shell-only camping-atlas/public`: 발행본 동기화 완료.
+
+2. **고질적 11월 10일 이후 데이터 동기화(`data-sync`) 차단 버그 전면 해결**:
    - **원인 분석**: 11월 10일 지방행정인허가(`LOCALDATA_LICENSED`) 미등록 업장 1,273곳(`loc-*****`)을 신규 승격 등록했으나, 고캠핑 고유 URL(`gc_url`) 및 인허가 원천 URL(`src_url`)이 비어 있어 `pipeline/lib/fact-store.mjs`의 `factsOf`에서 사실 생성 시 `url: null`이 주입됨. 이로 인해 `validateFacts`에서 14,541건의 사실 검증 에러(`loc-***** 원천 URL 없음`)가 발생하여 매일 GitHub Actions `data-sync.yml`이 중단되고 있었음.
    - **조치 내용**:
      - `pipeline/lib/fact-store.mjs`: `isLocalData` 판별 로직 추가, 인허가 업장의 사실 원천을 `localdata`로 매핑하고 기본 URL `https://www.localdata.go.kr` 자동 보장.
